@@ -14,9 +14,9 @@ fi
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
-aprgLocatorFile=""
-source "$aprgDirectory/AllCommonScripts/CommonRegex/AddingAprgLocatorFile.sh"
-searchCondition="*$aprgLocatorFile"
+cppIndicatorFilePath=""
+source "$aprgDirectory/AllCommonScripts/CommonRegex/IndicatorPaths.sh"
+searchCondition="*$cppIndicatorFilePath"
 
 # Create needed functions
 tempFile=$(mktemp)
@@ -42,7 +42,7 @@ formatCppFilesInDirectory() {
 # Find all files with the same name in the target folder
 scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles]..."
 while IFS= read -r aprgProjectLocatorPath; do
-    aprgProjectDirectory=$(echo "$aprgProjectLocatorPath" | sed -E "s|$aprgLocatorFile||")
+    aprgProjectDirectory=$(echo "$aprgProjectLocatorPath" | sed -E "s|$cppIndicatorFilePath||")
     scriptPrint "$scriptName" "$LINENO" "Searching in aprg project: [$aprgProjectDirectory]"
     formatCppFilesInDirectory "$aprgProjectDirectory"
 done < <(find "$aprgDirectory" -depth -type f -wholename "$searchCondition")

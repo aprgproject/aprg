@@ -11,18 +11,18 @@ findCppProjects() {
     
     # Source needed scripts
     source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
-    aprgLocatorFile=""
-    source "$aprgDirectory/AllCommonScripts/CommonRegex/AddingAprgLocatorFile.sh"
+    cppIndicatorFilePath=""
+    source "$aprgDirectory/AllCommonScripts/CommonRegex/IndicatorPaths.sh"
     
     searchCondition=""
     if [[ -z $userInput ]] || [ "$userInput" == "all" ]; then
         scriptPrint "$scriptName" "$LINENO" "The user input is [$userInput], setting a different condition."
-        searchCondition="*$aprgLocatorFile"
+        searchCondition="*$cppIndicatorFilePath"
     else
-        searchCondition="*$userInput*$aprgLocatorFile"
+        searchCondition="*$userInput*$cppIndicatorFilePath"
     fi
     scriptPrint "$scriptName" "$LINENO" "Searching directories for C/C++ projects using searchCondition: [$searchCondition]"
-    cppProjectsFound=$(find "$aprgDirectory" -depth -type f -wholename "$searchCondition" -exec sh -c 'echo "$1" | sed -E "s|^.*$2/(.*)$3.*$|\"\1\"|"' sh {} "$aprgDirectory" "$aprgLocatorFile" \;  | xargs -0 -n1 | paste -sd "," -)
+    cppProjectsFound=$(find "$aprgDirectory" -depth -type f -wholename "$searchCondition" -exec sh -c 'echo "$1" | sed -E "s|^.*$2/(.*)$3.*$|\"\1\"|"' sh {} "$aprgDirectory" "$cppIndicatorFilePath" \;  | xargs -0 -n1 | paste -sd "," -)
     
     scriptPrint "$scriptName" "$LINENO" "The cppProjectsFound are: [$cppProjectsFound]"
     export cppProjectsFound

@@ -13,8 +13,8 @@ detectGitChanges() {
     
     # Source needed scripts
     source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
-    aprgLocatorFile=""
-    source "$aprgDirectory/AllCommonScripts/CommonRegex/AddingAprgLocatorFile.sh"
+    cppIndicatorFilePath=""
+    source "$aprgDirectory/AllCommonScripts/CommonRegex/IndicatorPaths.sh"
     
     # Detect git changes
     scriptPrint "$scriptName" "$LINENO" "Calling Git Diff command ..."
@@ -28,7 +28,7 @@ detectGitChanges() {
         while [ "$searchingDirectory" != "/" ] && [ "$searchingDirectory" != "." ]; do
             if [ "$(basename "$searchingDirectory")" == "$aprgDirectoryName" ]; then
                 break
-            elif [[ -e "$searchingDirectory$aprgLocatorFile" ]]; then
+            elif [[ -e "$searchingDirectory$cppIndicatorFilePath" ]]; then
                 cppProject=$(echo "\"$searchingDirectory\"" | sed -E "s|$aprgDirectory/||")
                 scriptPrint "$scriptName" "$LINENO" "The cppProject is: [$cppProject]"
                 cppProjectsSet["$cppProject"]=1

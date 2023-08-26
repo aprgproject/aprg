@@ -15,9 +15,9 @@ fi
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
-aprgLocatorFile=""
-source "$aprgDirectory/AllCommonScripts/CommonRegex/AddingAprgLocatorFile.sh"
-searchCondition="*$aprgLocatorFile"
+cppIndicatorFilePath=""
+source "$aprgDirectory/AllCommonScripts/CommonRegex/IndicatorPaths.sh"
+searchCondition="*$cppIndicatorFilePath"
 
 # Create needed functions
 checkCMakeFilesInDirectory() {
@@ -50,7 +50,7 @@ lintStatus=$?
 # Find all cmake files in aprg directories
 scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles] ..."
 while IFS= read -r aprgProjectLocatorPath; do
-    aprgProjectDirectory=$(echo "$aprgProjectLocatorPath" | sed -E "s|$aprgLocatorFile||")
+    aprgProjectDirectory=$(echo "$aprgProjectLocatorPath" | sed -E "s|$cppIndicatorFilePath||")
     checkCMakeFilesInDirectory "$lintStatus" "$aprgProjectDirectory"
     lintStatus=$?
 
