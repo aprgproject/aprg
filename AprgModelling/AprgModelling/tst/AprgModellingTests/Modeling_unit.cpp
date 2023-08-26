@@ -1,4 +1,4 @@
-#include <AprgGsl/Modeling.hpp>
+#include <AprgModelling/Modeling.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <gtest/gtest.h>
@@ -6,13 +6,13 @@
 using namespace std;
 
 #define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_SIMPLE_DATA_SET \
-    APRG_DIR R"(\AprgGsl\FilesForTests\DataSets\SimpleDataSet.csv)"
+    APRG_DIR R"(\AprgModelling\FilesForTests\DataSets\SimpleDataSet.csv)"
 #define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_DATA1 \
-    APRG_DIR R"(\AprgGsl\FilesForTests\DataSets\FileFormat1_DataSet1.csv)"
+    APRG_DIR R"(\AprgModelling\FilesForTests\DataSets\FileFormat1_DataSet1.csv)"
 #define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_DATA2 \
-    APRG_DIR R"(\AprgGsl\FilesForTests\DataSets\FileFormat1_DataSet2.csv)"
+    APRG_DIR R"(\AprgModelling\FilesForTests\DataSets\FileFormat1_DataSet2.csv)"
 #define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT2_DATA1 \
-    APRG_DIR R"(\AprgGsl\FilesForTests\DataSets\FileFormat2_DataSet1.csv)"
+    APRG_DIR R"(\AprgModelling\FilesForTests\DataSets\FileFormat2_DataSet1.csv)"
 
 namespace alba {
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 projectsWithGsl='
-"AprgGsl/AprgGsl"
+"AprgModelling/AprgModelling"
 '
 
 projectsWithGsl=$(echo "$projectsWithGsl" | tr '\n' ' ')
