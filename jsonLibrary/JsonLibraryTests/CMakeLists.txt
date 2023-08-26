@@ -1,28 +1,27 @@
 cmake_minimum_required(VERSION 3.16)
 
 # Set project details
-project(AprgJson C CXX)
+project(JsonLibraryTests C CXX)
 set(OUTFILE ${PROJECT_NAME})
-set(APRG_JSON_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(JSON_LIBRARY_TESTS_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Locate APRG Directory first because its used on other cmakes
-include(${APRG_JSON_DIR}/cmake/LocateAprgDirectory.cmake)
+include(${JSON_LIBRARY_TESTS_DIR}/cmake/LocateAprgDirectory.cmake)
 
 # Assign macros, common flags, definitions and other common steps
 include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 
 # Include other projects
+include(${APRG_DIR}/jsonLibrary/AprgCMakeToInclude/JsonLibrary.cmake)
 include(${APRG_DIR}/gtest/AprgCMakeToInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCMakeToInclude/AprgCommon.cmake)
-include(${APRG_DIR}/AprgAlgorithm/AprgCMakeToInclude/AprgAlgorithm.cmake)
-include(${APRG_DIR}/jsonLibrary/AprgCMakeToInclude/JsonLibrary.cmake)
 
 # Assign files, directories, flags, definitions and other specific steps
-include(${APRG_JSON_DIR}/cmake/SpecificStepsAsExecutable.cmake)
+include(${JSON_LIBRARY_TESTS_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
-add_executable(${OUTFILE} ${APRG_JSON_SOURCES_AND_TESTS})
-include_directories(${APRG_JSON_INCLUDE_DIRECTORIES} ${APRG_JSON_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRECTORIES})
+add_executable(${OUTFILE} ${JSON_LIBRARY_TESTS_FILES})
+include_directories(${JSON_LIBRARY_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRECTORIES})
 target_link_libraries(${OUTFILE} ${JSON_LIBRARY_TO_LINK} APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
 add_test(${OUTFILE} ${OUTFILE})
 install(TARGETS ${OUTFILE} DESTINATION runDirectory)

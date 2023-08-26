@@ -9,7 +9,7 @@ using json = nlohmann::json;
 
 namespace alba {
 
-#define APRG_JSON_SAMPLE_FILE APRG_DIR R"(\AprgJSon\FilesForTests\JsonSampleFile.txt)"
+#define JSON_LIBRARY_TESTS_SAMPLE_FILE APRG_DIR R"(\jsonLibrary\FilesForTests\JsonSampleFile.txt)"
 
 // Based from: https://github.com/nlohmann/json#examples
 
@@ -117,11 +117,11 @@ TEST(SampleTest, SerializationDeserializationForFilesTest) {
         {"pi", 3.141},
     };
 
-    ofstream outputStream(APRG_JSON_SAMPLE_FILE);
+    ofstream outputStream(JSON_LIBRARY_TESTS_SAMPLE_FILE);
     outputStream << setw(4) << jsonObject << "\n";
     outputStream.close();
 
-    ifstream inputStream(APRG_JSON_SAMPLE_FILE);
+    ifstream inputStream(JSON_LIBRARY_TESTS_SAMPLE_FILE);
     json jsonObjectFromFile;
     inputStream >> jsonObjectFromFile;
 

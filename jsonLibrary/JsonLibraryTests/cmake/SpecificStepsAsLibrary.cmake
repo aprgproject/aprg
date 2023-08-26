@@ -1,3 +1,3 @@
 # Assign files, directories, flags, definitions and other specific steps
 
-include(${APRG_JSON_DIR}/cmake/FindFilesAndDirectories.cmake)
+include(${JSON_LIBRARY_TESTS_DIR}/cmake/FindFilesAndDirectories.cmake)
