@@ -19,9 +19,9 @@ add_definitions(-DAPRG_CRAWLER_TEST_TEMPORARY_FILE_PATH="${APRG_DIR}AprgWebCrawl
 add_definitions(-DAPRG_WEB_CRAWLER_FIX_BATCH_FILE="${APRG_DIR}AprgWebCrawler/fixDirectoryNames.bat")
 
 # Include other projects
-include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
-include(${APRG_DIR}/CurlCpp/AprgCmakeInclude/CurlCpp.cmake)
-include(${APRG_DIR}/AprgLocalUserAutomation/AprgCmakeInclude/AprgLocalUserAutomation.cmake)
+include(${APRG_DIR}/AprgCommon/AprgCMakeToInclude/AprgCommon.cmake)
+include(${APRG_DIR}/CurlCpp/AprgCMakeToInclude/CurlCpp.cmake)
+include(${APRG_DIR}/AprgLocalUserAutomation/AprgCMakeToInclude/AprgLocalUserAutomation.cmake)
 
 # Assign files, directories, flags, definitions and other specific steps
 include(${APRG_WEB_CRAWLER_DIR}/cmake/SpecificStepsAsExecutable.cmake)

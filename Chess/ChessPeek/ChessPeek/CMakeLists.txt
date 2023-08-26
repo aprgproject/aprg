@@ -12,12 +12,12 @@ include(${CHESS_PEEK_DIR}/cmake/LocateAprgDirectory.cmake)
 include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 
 # Include other projects
-include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
-include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
-include(${APRG_DIR}/AprgLocalScreenMonitoring/AprgCmakeInclude/AprgLocalScreenMonitoring.cmake)
-include(${APRG_DIR}/AprgBitmap/AprgCmakeInclude/AprgBitmap.cmake)
-include(${APRG_DIR}/AprgLocalUserAutomation/AprgCmakeInclude/AprgLocalUserAutomation.cmake)
-include(${APRG_DIR}/Chess/ChessUtilities/AprgCmakeInclude/ChessUtilities.cmake)
+include(${APRG_DIR}/gtest/AprgCMakeToInclude/gtest.cmake)
+include(${APRG_DIR}/AprgCommon/AprgCMakeToInclude/AprgCommon.cmake)
+include(${APRG_DIR}/AprgLocalScreenMonitoring/AprgCMakeToInclude/AprgLocalScreenMonitoring.cmake)
+include(${APRG_DIR}/AprgBitmap/AprgCMakeToInclude/AprgBitmap.cmake)
+include(${APRG_DIR}/AprgLocalUserAutomation/AprgCMakeToInclude/AprgLocalUserAutomation.cmake)
+include(${APRG_DIR}/Chess/ChessUtilities/AprgCMakeToInclude/ChessUtilities.cmake)
 
 # Assign files, directories, flags, definitions and other specific steps
 include(${CHESS_PEEK_DIR}/cmake/SpecificStepsAsExecutable.cmake)

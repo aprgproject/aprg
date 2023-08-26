@@ -17,8 +17,8 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 endif()
 
 # Include other projects
-include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
-include(${APRG_DIR}/ZZZ_OldProjects/curl/AprgCmakeInclude/Curl.cmake)
+include(${APRG_DIR}/AprgCommon/AprgCMakeToInclude/AprgCommon.cmake)
+include(${APRG_DIR}/ZZZ_OldProjects/curl/AprgCMakeToInclude/Curl.cmake)
 
 # Assign files, directories, flags, definitions and other specific steps
 include(${APRG_CURL_CPP_DIR}/cmake/SpecificStepsAsExecutable.cmake)

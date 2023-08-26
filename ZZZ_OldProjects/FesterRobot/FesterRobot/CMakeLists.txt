@@ -12,9 +12,9 @@ include(${FESTER_ROBOT_DIR}/cmake/LocateAprgDirectory.cmake)
 include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 
 # Include other projects
-include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
-include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
-include(${APRG_DIR}/AprgLocalUserAutomation/AprgCmakeInclude/AprgLocalUserAutomation.cmake)
+include(${APRG_DIR}/gtest/AprgCMakeToInclude/gtest.cmake)
+include(${APRG_DIR}/AprgCommon/AprgCMakeToInclude/AprgCommon.cmake)
+include(${APRG_DIR}/AprgLocalUserAutomation/AprgCMakeToInclude/AprgLocalUserAutomation.cmake)
 
 # Assign files, directories, flags, definitions and other specific steps
 include(${FESTER_ROBOT_DIR}/cmake/SpecificStepsAsExecutable.cmake)

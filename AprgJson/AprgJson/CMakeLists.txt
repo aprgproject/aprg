@@ -12,10 +12,10 @@ include(${APRG_JSON_DIR}/cmake/LocateAprgDirectory.cmake)
 include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 
 # Include other projects
-include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
-include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
-include(${APRG_DIR}/AprgAlgorithm/AprgCmakeInclude/AprgAlgorithm.cmake)
-include(${APRG_DIR}/jsonLibrary/AprgCmakeInclude/JsonLibrary.cmake)
+include(${APRG_DIR}/gtest/AprgCMakeToInclude/gtest.cmake)
+include(${APRG_DIR}/AprgCommon/AprgCMakeToInclude/AprgCommon.cmake)
+include(${APRG_DIR}/AprgAlgorithm/AprgCMakeToInclude/AprgAlgorithm.cmake)
+include(${APRG_DIR}/jsonLibrary/AprgCMakeToInclude/JsonLibrary.cmake)
 
 # Assign files, directories, flags, definitions and other specific steps
 include(${APRG_JSON_DIR}/cmake/SpecificStepsAsExecutable.cmake)

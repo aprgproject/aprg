@@ -12,8 +12,8 @@ include(${TEMPLATE_FOR_LIBRARIES_DIR}/cmake/LocateAprgDirectory.cmake)
 include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 
 # Include other projects
-include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
-include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
+include(${APRG_DIR}/gtest/AprgCMakeToInclude/gtest.cmake)
+include(${APRG_DIR}/AprgCommon/AprgCMakeToInclude/AprgCommon.cmake)
 
 # Assign files, directories, flags, definitions and other specific steps
 include(${TEMPLATE_FOR_LIBRARIES_DIR}/cmake/SpecificStepsAsExecutable.cmake)

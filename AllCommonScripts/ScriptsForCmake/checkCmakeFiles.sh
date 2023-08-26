@@ -54,7 +54,7 @@ while IFS= read -r aprgProjectLocatorPath; do
     checkCmakeFilesInDirectory "$lintStatus" "$aprgProjectDirectory"
     lintStatus=$?
 
-    aprgCmakeIncludeDirectory=$(realpath "$aprgProjectDirectory/../AprgCmakeInclude") 
+    aprgCmakeIncludeDirectory=$(realpath "$aprgProjectDirectory/../AprgCMakeToInclude") 
     if [ -d "$aprgCmakeIncludeDirectory" ]; then
         checkCmakeFilesInDirectory "$lintStatus" "$aprgCmakeIncludeDirectory"
         lintStatus=$?

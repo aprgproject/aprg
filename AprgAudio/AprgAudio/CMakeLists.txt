@@ -15,8 +15,8 @@ include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 add_definitions(-DAPRG_AUDIO_DIR="${APRG_AUDIO_DIR}")
 
 # Include other projects
-include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
-include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
+include(${APRG_DIR}/gtest/AprgCMakeToInclude/gtest.cmake)
+include(${APRG_DIR}/AprgCommon/AprgCMakeToInclude/AprgCommon.cmake)
 
 # Assign files, directories, flags, definitions and other specific steps
 include(${APRG_AUDIO_DIR}/cmake/SpecificStepsAsExecutable.cmake)

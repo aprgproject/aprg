@@ -1,4 +1,4 @@
-include(${APRG_DIR}/gtest/AprgCmakeInclude/CommonSteps.cmake)
+include(${APRG_DIR}/gtest/AprgCMakeToInclude/CommonSteps.cmake)
 
 set(GOOGLE_TEST_DIR ${GTEST_DIR}/googletest)
 

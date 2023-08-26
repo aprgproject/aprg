@@ -20,6 +20,6 @@ Instructions:
 5.2) Copy "libcurl-x64.dll"
 5.3) And paste it to "XXXXXX\aprg\curl\lib\CURL_VERSION\"
 6) Update cmake with the new CURL_VERSION
-6.1) Location: "XXXXXX\aprg\curl\AprgCmakeInclude\Curl.cmake
+6.1) Location: "XXXXXX\aprg\curl\AprgCMakeToInclude\Curl.cmake
 
 

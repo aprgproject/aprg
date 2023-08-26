@@ -18,8 +18,8 @@ add_definitions(-DCCS_BIG_ENDIAN)
 set(DesignDocumentCreatorDirectory ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Include other projects
-include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
-include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
+include(${APRG_DIR}/gtest/AprgCMakeToInclude/gtest.cmake)
+include(${APRG_DIR}/AprgCommon/AprgCMakeToInclude/AprgCommon.cmake)
 
 # Assign files, directories, flags, definitions and other specific steps
 include(${DD_CREATOR_DIR}/cmake/SpecificStepsAsExecutable.cmake)

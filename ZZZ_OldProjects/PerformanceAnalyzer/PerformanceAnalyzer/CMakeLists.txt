@@ -12,13 +12,13 @@ include(${PERFORMANCE_ANALYZER_DIR}/cmake/LocateAprgDirectory.cmake)
 include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 
 # Include other projects
-include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
-include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
-include(${APRG_DIR}/AprgAlgorithm/AprgCmakeInclude/AprgAlgorithm.cmake)
-include(${APRG_DIR}/AprgStatistics/AprgCmakeInclude/AprgStatistics.cmake)
-include(${APRG_DIR}/AprgFileExtractor/AprgCmakeInclude/AprgFileExtractor.cmake)
-include(${APRG_DIR}/WcdmaTools/AprgCmakeInclude/WcdmaToolsBackend.cmake)
-include(${APRG_DIR}/AprgGrepStringEvaluator/AprgCmakeInclude/AprgGrepStringEvaluator.cmake)
+include(${APRG_DIR}/gtest/AprgCMakeToInclude/gtest.cmake)
+include(${APRG_DIR}/AprgCommon/AprgCMakeToInclude/AprgCommon.cmake)
+include(${APRG_DIR}/AprgAlgorithm/AprgCMakeToInclude/AprgAlgorithm.cmake)
+include(${APRG_DIR}/AprgStatistics/AprgCMakeToInclude/AprgStatistics.cmake)
+include(${APRG_DIR}/AprgFileExtractor/AprgCMakeToInclude/AprgFileExtractor.cmake)
+include(${APRG_DIR}/WcdmaTools/AprgCMakeToInclude/WcdmaToolsBackend.cmake)
+include(${APRG_DIR}/AprgGrepStringEvaluator/AprgCMakeToInclude/AprgGrepStringEvaluator.cmake)
 
 # Assign files, directories, flags, definitions and other specific steps
 include(${PERFORMANCE_ANALYZER_DIR}/cmake/SpecificStepsAsExecutable.cmake)

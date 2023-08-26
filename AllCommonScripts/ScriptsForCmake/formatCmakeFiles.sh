@@ -49,9 +49,9 @@ while IFS= read -r aprgProjectLocatorPath; do
     aprgProjectDirectory=$(echo "$aprgProjectLocatorPath" | sed -E "s|$aprgLocatorFile||")
     scriptPrint "$scriptName" "$LINENO" "Searching in aprg project: [$aprgProjectDirectory]"
     formatCmakeFilesInDirectory "$aprgProjectDirectory"
-    aprgCmakeIncludeDirectory=$(realpath "$aprgProjectDirectory/../AprgCmakeInclude") 
+    aprgCmakeIncludeDirectory=$(realpath "$aprgProjectDirectory/../AprgCMakeToInclude") 
     if [ -d "$aprgCmakeIncludeDirectory" ]; then
-        scriptPrint "$scriptName" "$LINENO" "Searching in AprgCmakeInclude directory: [$aprgCmakeIncludeDirectory]"
+        scriptPrint "$scriptName" "$LINENO" "Searching in AprgCMakeToInclude directory: [$aprgCmakeIncludeDirectory]"
         formatCmakeFilesInDirectory "$aprgCmakeIncludeDirectory"
     fi
 done < <(find "$directoryToConvertAllFiles" -depth -type f -wholename "$searchCondition")

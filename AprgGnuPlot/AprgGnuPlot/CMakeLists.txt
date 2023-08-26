@@ -12,11 +12,11 @@ include(${APRG_GNU_PLOT_DIR}/cmake/LocateAprgDirectory.cmake)
 include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 
 # Include other projects
-include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
-include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
-include(${APRG_DIR}/Boost/AprgCmakeInclude/boost.cmake)
-include(${APRG_DIR}/AprgAlgebra/AprgCmakeInclude/AprgAlgebra.cmake)
-include(${APRG_DIR}/AprgGeometry/AprgCmakeInclude/AprgGeometry.cmake)
+include(${APRG_DIR}/gtest/AprgCMakeToInclude/gtest.cmake)
+include(${APRG_DIR}/AprgCommon/AprgCMakeToInclude/AprgCommon.cmake)
+include(${APRG_DIR}/Boost/AprgCMakeToInclude/boost.cmake)
+include(${APRG_DIR}/AprgAlgebra/AprgCMakeToInclude/AprgAlgebra.cmake)
+include(${APRG_DIR}/AprgGeometry/AprgCMakeToInclude/AprgGeometry.cmake)
 
 # Assign files, directories, flags, definitions and other specific steps
 include(${APRG_GNU_PLOT_DIR}/cmake/SpecificStepsAsExecutable.cmake)

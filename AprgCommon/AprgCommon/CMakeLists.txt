@@ -12,7 +12,7 @@ include(${APRG_COMMON_DIR}/cmake/LocateAprgDirectory.cmake)
 include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 
 # Include other projects
-include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
+include(${APRG_DIR}/gtest/AprgCMakeToInclude/gtest.cmake)
 
 # Assign files, directories, flags, definitions and other specific steps
 include(${APRG_COMMON_DIR}/cmake/SpecificStepsAsExecutable.cmake)
