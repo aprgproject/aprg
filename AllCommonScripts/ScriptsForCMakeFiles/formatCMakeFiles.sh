@@ -5,7 +5,7 @@ scriptPath=$(realpath "$0")
 scriptDirectory=$(dirname "$scriptPath")
 scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
-aprgCommonCmakeDirectory=$(realpath "$aprgDirectory/AllCommonCMakeFiles")
+allCommonCMakeFilesDirectory=$(realpath "$aprgDirectory/AllCommonCMakeFiles")
 directoryToConvertAllFiles="$1"
 
 # Use aprg directory if there are no arguments
@@ -20,50 +20,40 @@ source "$aprgDirectory/AllCommonScripts/CommonRegex/AddingAprgLocatorFile.sh"
 searchCondition="*$aprgLocatorFile"
 
 # Create needed functions
-checkCmakeFilesInDirectory() {
-    local localLintStatus
+tempFile=$(mktemp)
+formatCMakeFilesInDirectory() {
     local directoryPath
-    localLintStatus="$1"
-    directoryPath="$2"
+    directoryPath="$1"
 
     scriptPrint "$scriptName" "$LINENO" "Searching for cmake files in: [$directoryPath]"
 
     while IFS= read -r filePath; do
-        cmake-lint --suppress-decorations "$filePath"
-        currentStatus=$?
-        if [ "$currentStatus" -gt "$localLintStatus" ]; then
-            localLintStatus=$currentStatus
-        fi
-    done < <(find "$directoryPath" -depth -type f \( -name "CMakeLists.txt" -o -name "*.cmake" \))
+        # unix style line endings
+        dos2unix "$filePath"
 
-    return "$localLintStatus"
+        # convert tabs to 4 spaces
+        expand -t 4 "$filePath" > "$tempFile"
+        mv "$tempFile" "$filePath"
+
+        # use cmake format as final format
+        cmake-format -i "$filePath"
+    done < <(find "$directoryPath" -depth -type f \( -name "CMakeLists.txt" -o -name "*.cmake" \))
 }
 
-# Start linting
-lintStatus=0
-
 # Find all common cmake files
-scriptPrint "$scriptName" "$LINENO" "Searching for common cmake files in [$aprgCommonCmakeDirectory] ..."
-checkCmakeFilesInDirectory "$lintStatus" "$aprgCommonCmakeDirectory"
-lintStatus=$?
+formatCMakeFilesInDirectory "$allCommonCMakeFilesDirectory"
 
 # Find all cmake files in aprg directories
 scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles] ..."
 while IFS= read -r aprgProjectLocatorPath; do
     aprgProjectDirectory=$(echo "$aprgProjectLocatorPath" | sed -E "s|$aprgLocatorFile||")
-    checkCmakeFilesInDirectory "$lintStatus" "$aprgProjectDirectory"
-    lintStatus=$?
-
-    aprgCmakeIncludeDirectory=$(realpath "$aprgProjectDirectory/../AprgCMakeToInclude") 
-    if [ -d "$aprgCmakeIncludeDirectory" ]; then
-        checkCmakeFilesInDirectory "$lintStatus" "$aprgCmakeIncludeDirectory"
-        lintStatus=$?
+    scriptPrint "$scriptName" "$LINENO" "Searching in aprg project: [$aprgProjectDirectory]"
+    formatCMakeFilesInDirectory "$aprgProjectDirectory"
+    aprgCMakeIncludeDirectory=$(realpath "$aprgProjectDirectory/../AprgCMakeToInclude") 
+    if [ -d "$aprgCMakeIncludeDirectory" ]; then
+        scriptPrint "$scriptName" "$LINENO" "Searching in AprgCMakeToInclude directory: [$aprgCMakeIncludeDirectory]"
+        formatCMakeFilesInDirectory "$aprgCMakeIncludeDirectory"
     fi
 done < <(find "$directoryToConvertAllFiles" -depth -type f -wholename "$searchCondition")
 
 scriptPrint "$scriptName" "$LINENO" "All C/C++ in the directory are processed."
-
-scriptPrint "$scriptName" "$LINENO" "lintStatus: [$lintStatus]"
-exit "$lintStatus"
-
-
