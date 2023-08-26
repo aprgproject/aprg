@@ -5,7 +5,7 @@ scriptPath=$(realpath "$0")
 scriptDirectory=$(dirname "$scriptPath")
 scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
-aprgCommonCmakeDirectory=$(realpath "$aprgDirectory/AprgCMakeHelpers")
+aprgCommonCmakeDirectory=$(realpath "$aprgDirectory/AllCommonCMakeFiles")
 directoryToConvertAllFiles="$1"
 
 # Use aprg directory if there are no arguments

@@ -1,4 +1,4 @@
-include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
+include(${APRG_DIR}/AllCommonCMakeFiles/PrintMacros.cmake)
 
 print_variable(BOOST_DIR)
 # set boost flags

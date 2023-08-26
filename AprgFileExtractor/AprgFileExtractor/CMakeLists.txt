@@ -9,7 +9,7 @@ set(APRG_FILE_EXTRACTOR_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 include(${APRG_FILE_EXTRACTOR_DIR}/cmake/LocateAprgDirectory.cmake)
 
 # Assign macros, common flags, definitions and other common steps
-include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
+include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 
 # Include other projects
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
@@ -33,4 +33,4 @@ else()
     target_link_libraries(${OUTFILE} APRG_COMMON APRG_GREP_STRING_EVALUATOR)
 endif()
 install(TARGETS ${OUTFILE} DESTINATION runDirectory)
-include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
+include(${APRG_DIR}/AllCommonCMakeFiles/LastStep.cmake)

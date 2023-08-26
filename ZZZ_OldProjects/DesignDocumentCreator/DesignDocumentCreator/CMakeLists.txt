@@ -9,7 +9,7 @@ set(DD_CREATOR_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 include(${DD_CREATOR_DIR}/cmake/LocateAprgDirectory.cmake)
 
 # Assign macros, common flags, definitions and other common steps
-include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
+include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 
 # Assign specific definitions
 add_definitions(-DCCS_BIG_ENDIAN)
@@ -31,4 +31,4 @@ include_directories(${FEATURE_INCLUDE_DIRECTORIES} ${DD_CREATOR_INCLUDE_DIRECTOR
 target_link_libraries(${OUTFILE} APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
 add_test(${OUTFILE} ${OUTFILE})
 install(TARGETS ${OUTFILE} DESTINATION runDirectory)
-include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
+include(${APRG_DIR}/AllCommonCMakeFiles/LastStep.cmake)

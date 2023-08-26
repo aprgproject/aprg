@@ -9,7 +9,7 @@ set(DESIGN_PATTERNS_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 include(${DESIGN_PATTERNS_DIR}/cmake/LocateAprgDirectory.cmake)
 
 # Assign macros, common flags, definitions and other common steps
-include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
+include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 
 # Include other projects
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)

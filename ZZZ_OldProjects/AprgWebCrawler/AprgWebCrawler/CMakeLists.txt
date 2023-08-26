@@ -9,7 +9,7 @@ set(APRG_WEB_CRAWLER_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 include(${APRG_WEB_CRAWLER_DIR}/cmake/LocateAprgDirectory.cmake)
 
 # Assign macros, common flags, definitions and other common steps
-include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
+include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 
 #Assign specific definitions
 add_definitions(-DAPRG_WEB_CRAWLER_CONFIGURATION_FILE="${APRG_DIR}AprgWebCrawler/Configuration/configuration.txt")
@@ -31,4 +31,4 @@ add_executable(${OUTFILE} ${APRG_WEB_CRAWLER_SOURCES})
 include_directories(${APRG_WEB_CRAWLER_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRECTORIES})
 target_link_libraries(${OUTFILE} APRG_CURL_CPP APRG_LOCAL_USER_AUTOMATION APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
 install(TARGETS ${OUTFILE} DESTINATION runDirectory)
-include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
+include(${APRG_DIR}/AllCommonCMakeFiles/LastStep.cmake)

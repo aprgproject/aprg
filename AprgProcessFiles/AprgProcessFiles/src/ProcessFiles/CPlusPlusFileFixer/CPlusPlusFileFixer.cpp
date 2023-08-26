@@ -376,7 +376,7 @@ bool CPlusPlusFileFixer::isLineWithALoopEnd(string const& line) {
 
 bool CPlusPlusFileFixer::isPathIgnored(string const& path) {
     bool result(false);
-    if (isStringFoundCaseSensitive(path, "ACodeReview") || isStringFoundCaseSensitive(path, "AprgCMakeHelpers") ||
+    if (isStringFoundCaseSensitive(path, "ACodeReview") || isStringFoundCaseSensitive(path, "AllCommonCMakeFiles") ||
         isStringFoundCaseSensitive(path, "CImg") || isStringFoundCaseSensitive(path, "curl-7.38.0") ||
         isStringFoundCaseSensitive(path, "CurlCpp") || isStringFoundCaseSensitive(path, "gsl1.8") ||
         isStringFoundCaseSensitive(path, "gtest-1.7.0") || isStringFoundCaseSensitive(path, "plantumlqeditor") ||

@@ -9,7 +9,7 @@ set(APRG_AUDIO_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 include(${APRG_AUDIO_DIR}/cmake/LocateAprgDirectory.cmake)
 
 # Assign macros, common flags, definitions and other common steps
-include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
+include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 
 # Add Audio Directory as definition
 add_definitions(-DAPRG_AUDIO_DIR="${APRG_AUDIO_DIR}")
@@ -34,4 +34,4 @@ else()
     target_link_libraries(${OUTFILE} APRG_COMMON)
 endif()
 install(TARGETS ${OUTFILE} DESTINATION runDirectory)
-include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
+include(${APRG_DIR}/AllCommonCMakeFiles/LastStep.cmake)

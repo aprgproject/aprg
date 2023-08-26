@@ -9,7 +9,7 @@ set(APRG_CURL_CPP_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 include(${APRG_CURL_CPP_DIR}/cmake/LocateAprgDirectory.cmake)
 
 # Assign macros, common flags, definitions and other common steps
-include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
+include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 
 # Add MacPorts
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
@@ -29,4 +29,4 @@ include_directories(${APRG_CURL_CPP_INCLUDE_DIRECTORIES} ${APRG_CURL_CPP_TEST_IN
 target_link_libraries(${OUTFILE} ${CURL_LIBRARIES_TO_LINK} wsock32 ws2_32 APRG_COMMON)
 add_test(${OUTFILE} ${OUTFILE})
 install(TARGETS ${OUTFILE} DESTINATION runDirectory)
-include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
+include(${APRG_DIR}/AllCommonCMakeFiles/LastStep.cmake)
