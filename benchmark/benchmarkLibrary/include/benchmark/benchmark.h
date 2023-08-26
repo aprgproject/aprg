@@ -420,11 +420,11 @@ class Counter {
   OneK oneK;
 
   BENCHMARK_ALWAYS_INLINE
-  explicit Counter(double v = 0., Flags f = kDefaults, OneK k = kIs1000)
+  Counter(double v = 0., Flags f = kDefaults, OneK k = kIs1000)
       : value(v), flags(f), oneK(k) {}
 
-  BENCHMARK_ALWAYS_INLINE explicit operator double const &() const { return value; }
-  BENCHMARK_ALWAYS_INLINE explicit operator double&() { return value; }
+  BENCHMARK_ALWAYS_INLINE operator double const &() const { return value; }
+  BENCHMARK_ALWAYS_INLINE operator double&() { return value; }
 };
 
 // A helper for user code to create unforeseen combinations of Flags, without
@@ -581,7 +581,7 @@ class State {
   void SkipWithError(const char* msg);
 
   // Returns true if an error has been reported with 'SkipWithError(...)'.
-  [[nodiscard]] bool error_occurred() const { return error_occurred_; }
+  bool error_occurred() const { return error_occurred_; }
 
   // REQUIRES: called exactly once per iteration of the benchmarking loop.
   // Set the manually measured time for this benchmark iteration, which
@@ -603,11 +603,10 @@ class State {
         Counter(static_cast<double>(bytes), Counter::kIsRate, Counter::kIs1024);
   }
 
-  [[nodiscard]] BENCHMARK_ALWAYS_INLINE
+  BENCHMARK_ALWAYS_INLINE
   int64_t bytes_processed() const {
-    if (counters.find("bytes_per_second") != counters.end()) {
+    if (counters.find("bytes_per_second") != counters.end())
       return static_cast<int64_t>(counters.at("bytes_per_second"));
-}
     return 0;
   }
 
@@ -619,7 +618,7 @@ class State {
   BENCHMARK_ALWAYS_INLINE
   void SetComplexityN(int64_t complexity_n) { complexity_n_ = complexity_n; }
 
-  [[nodiscard]] BENCHMARK_ALWAYS_INLINE
+  BENCHMARK_ALWAYS_INLINE
   int64_t complexity_length_n() const { return complexity_n_; }
 
   // If this routine is called with items > 0, then an items/s
@@ -634,11 +633,10 @@ class State {
         Counter(static_cast<double>(items), benchmark::Counter::kIsRate);
   }
 
-  [[nodiscard]] BENCHMARK_ALWAYS_INLINE
+  BENCHMARK_ALWAYS_INLINE
   int64_t items_processed() const {
-    if (counters.find("items_per_second") != counters.end()) {
+    if (counters.find("items_per_second") != counters.end())
       return static_cast<int64_t>(counters.at("items_per_second"));
-}
     return 0;
   }
 
@@ -661,27 +659,27 @@ class State {
   }
 
   // Range arguments for this run. CHECKs if the argument has been set.
-  [[nodiscard]] BENCHMARK_ALWAYS_INLINE
+  BENCHMARK_ALWAYS_INLINE
   int64_t range(std::size_t pos = 0) const {
     assert(range_.size() > pos);
     return range_[pos];
   }
 
-  [[nodiscard]] BENCHMARK_DEPRECATED_MSG("use 'range(0)' instead")
+  BENCHMARK_DEPRECATED_MSG("use 'range(0)' instead")
   int64_t range_x() const { return range(0); }
 
-  [[nodiscard]] BENCHMARK_DEPRECATED_MSG("use 'range(1)' instead")
+  BENCHMARK_DEPRECATED_MSG("use 'range(1)' instead")
   int64_t range_y() const { return range(1); }
 
   // Number of threads concurrently executing the benchmark.
-  [[nodiscard]] BENCHMARK_ALWAYS_INLINE
+  BENCHMARK_ALWAYS_INLINE
   int threads() const { return threads_; }
 
   // Index of the executing thread. Values from [0, threads).
-  [[nodiscard]] BENCHMARK_ALWAYS_INLINE
+  BENCHMARK_ALWAYS_INLINE
   int thread_index() const { return thread_index_; }
 
-  [[nodiscard]] BENCHMARK_ALWAYS_INLINE
+  BENCHMARK_ALWAYS_INLINE
   IterationCount iterations() const {
     if (BENCHMARK_BUILTIN_EXPECT(!started_, false)) {
       return 0;
@@ -794,7 +792,7 @@ struct State::StateIterator {
 
  public:
   BENCHMARK_ALWAYS_INLINE
-  Value operator*() const { return {}; }
+  Value operator*() const { return Value(); }
 
   BENCHMARK_ALWAYS_INLINE
   StateIterator& operator++() {
@@ -805,8 +803,7 @@ struct State::StateIterator {
 
   BENCHMARK_ALWAYS_INLINE
   bool operator!=(StateIterator const&) const {
-    if (BENCHMARK_BUILTIN_EXPECT(cached_ != 0, true)) { return true;
-}
+    if (BENCHMARK_BUILTIN_EXPECT(cached_ != 0, true)) return true;
     parent_->FinishKeepRunning();
     return false;
   }
@@ -821,7 +818,7 @@ inline BENCHMARK_ALWAYS_INLINE State::StateIterator State::begin() {
 }
 inline BENCHMARK_ALWAYS_INLINE State::StateIterator State::end() {
   StartKeepRunning();
-  return {};
+  return StateIterator();
 }
 
 namespace internal {
@@ -1012,7 +1009,7 @@ class Benchmark {
   Benchmark(Benchmark const&);
   void SetName(const char* name);
 
-  [[nodiscard]] int ArgsCnt() const;
+  int ArgsCnt() const;
 
  private:
   friend class BenchmarkFamilies;
@@ -1400,7 +1397,7 @@ struct BenchmarkName {
 
   // Return the full name of the benchmark with each non-empty
   // field separated by a '/'
-  [[nodiscard]] std::string str() const;
+  std::string str() const;
 };
 
 // Interface for custom benchmark result printers.
@@ -1424,71 +1421,87 @@ class BenchmarkReporter {
     enum RunType { RT_Iteration, RT_Aggregate };
 
     Run()
-        
-          {}
+        : run_type(RT_Iteration),
+          aggregate_unit(kTime),
+          error_occurred(false),
+          iterations(1),
+          threads(1),
+          time_unit(kNanosecond),
+          real_accumulated_time(0),
+          cpu_accumulated_time(0),
+          max_heapbytes_used(0),
+          complexity(oNone),
+          complexity_lambda(),
+          complexity_n(0),
+          report_big_o(false),
+          report_rms(false),
+          counters(),
+          has_memory_result(false),
+          allocs_per_iter(0.0),
+          max_bytes_used(0) {}
 
-    [[nodiscard]] std::string benchmark_name() const;
+    std::string benchmark_name() const;
     BenchmarkName run_name;
     int64_t family_index;
     int64_t per_family_instance_index;
-    RunType run_type{RT_Iteration};
+    RunType run_type;
     std::string aggregate_name;
-    StatisticUnit aggregate_unit{kTime};
+    StatisticUnit aggregate_unit;
     std::string report_label;  // Empty if not set by benchmark.
-    bool error_occurred{false};
+    bool error_occurred;
     std::string error_message;
 
-    IterationCount iterations{1};
-    int64_t threads{1};
+    IterationCount iterations;
+    int64_t threads;
     int64_t repetition_index;
     int64_t repetitions;
-    TimeUnit time_unit{kNanosecond};
-    double real_accumulated_time{0};
-    double cpu_accumulated_time{0};
+    TimeUnit time_unit;
+    double real_accumulated_time;
+    double cpu_accumulated_time;
 
     // Return a value representing the real time per iteration in the unit
     // specified by 'time_unit'.
     // NOTE: If 'iterations' is zero the returned value represents the
     // accumulated time.
-    [[nodiscard]] double GetAdjustedRealTime() const;
+    double GetAdjustedRealTime() const;
 
     // Return a value representing the cpu time per iteration in the unit
     // specified by 'time_unit'.
     // NOTE: If 'iterations' is zero the returned value represents the
     // accumulated time.
-    [[nodiscard]] double GetAdjustedCPUTime() const;
+    double GetAdjustedCPUTime() const;
 
     // This is set to 0.0 if memory tracing is not enabled.
-    double max_heapbytes_used{0};
+    double max_heapbytes_used;
 
     // Keep track of arguments to compute asymptotic complexity
-    BigO complexity{oNone};
-    BigOFunc* complexity_lambda{};
-    int64_t complexity_n{0};
+    BigO complexity;
+    BigOFunc* complexity_lambda;
+    int64_t complexity_n;
 
     // what statistics to compute from the measurements
     const std::vector<internal::Statistics>* statistics;
 
     // Inform print function whether the current run is a complexity report
-    bool report_big_o{false};
-    bool report_rms{false};
+    bool report_big_o;
+    bool report_rms;
 
     UserCounters counters;
 
     // Memory metrics.
-    bool has_memory_result{false};
-    double allocs_per_iter{0.0};
-    int64_t max_bytes_used{0};
+    bool has_memory_result;
+    double allocs_per_iter;
+    int64_t max_bytes_used;
   };
 
   struct PerFamilyRunReports {
-    PerFamilyRunReports()  {}
+    PerFamilyRunReports() : num_runs_total(0), num_runs_done(0) {}
 
     // How many runs will all instances of this benchmark perform?
-    int num_runs_total{0};
+    int num_runs_total;
 
     // How many runs have happened already?
-    int num_runs_done{0};
+    int num_runs_done;
 
     // The reports about (non-errneous!) runs of this family.
     std::vector<BenchmarkReporter::Run> Runs;
@@ -1533,9 +1546,9 @@ class BenchmarkReporter {
     error_stream_ = err;
   }
 
-  [[nodiscard]] std::ostream& GetOutputStream() const { return *output_stream_; }
+  std::ostream& GetOutputStream() const { return *output_stream_; }
 
-  [[nodiscard]] std::ostream& GetErrorStream() const { return *error_stream_; }
+  std::ostream& GetErrorStream() const { return *error_stream_; }
 
   virtual ~BenchmarkReporter();
 
@@ -1561,8 +1574,10 @@ class ConsoleReporter : public BenchmarkReporter {
     OO_Defaults = OO_ColorTabular
   };
   explicit ConsoleReporter(OutputOptions opts_ = OO_Defaults)
-      : output_options_(opts_)
-        {}
+      : output_options_(opts_),
+        name_field_width_(0),
+        prev_counters_(),
+        printed_header_(false) {}
 
   virtual bool ReportContext(const Context& context) BENCHMARK_OVERRIDE;
   virtual void ReportRuns(const std::vector<Run>& reports) BENCHMARK_OVERRIDE;
@@ -1572,14 +1587,14 @@ class ConsoleReporter : public BenchmarkReporter {
   virtual void PrintHeader(const Run& report);
 
   OutputOptions output_options_;
-  size_t name_field_width_{0};
+  size_t name_field_width_;
   UserCounters prev_counters_;
-  bool printed_header_{false};
+  bool printed_header_;
 };
 
 class JSONReporter : public BenchmarkReporter {
  public:
-  JSONReporter()  {}
+  JSONReporter() : first_report_(true) {}
   virtual bool ReportContext(const Context& context) BENCHMARK_OVERRIDE;
   virtual void ReportRuns(const std::vector<Run>& reports) BENCHMARK_OVERRIDE;
   virtual void Finalize() BENCHMARK_OVERRIDE;
@@ -1587,21 +1602,21 @@ class JSONReporter : public BenchmarkReporter {
  private:
   void PrintRunData(const Run& report);
 
-  bool first_report_{true};
+  bool first_report_;
 };
 
 class BENCHMARK_DEPRECATED_MSG(
     "The CSV Reporter will be removed in a future release") CSVReporter
     : public BenchmarkReporter {
  public:
-  CSVReporter()  {}
+  CSVReporter() : printed_header_(false) {}
   virtual bool ReportContext(const Context& context) BENCHMARK_OVERRIDE;
   virtual void ReportRuns(const std::vector<Run>& reports) BENCHMARK_OVERRIDE;
 
  private:
   void PrintRunData(const Run& report);
 
-  bool printed_header_{false};
+  bool printed_header_;
   std::set<std::string> user_counter_names_;
 };
 
@@ -1610,13 +1625,13 @@ class BENCHMARK_DEPRECATED_MSG(
 class MemoryManager {
  public:
   struct Result {
-    Result()  {}
+    Result() : num_allocs(0), max_bytes_used(0) {}
 
     // The number of allocations made in total between Start and Stop.
-    int64_t num_allocs{0};
+    int64_t num_allocs;
 
     // The peak memory use between Start and Stop.
-    int64_t max_bytes_used{0};
+    int64_t max_bytes_used;
   };
 
   virtual ~MemoryManager() {}
