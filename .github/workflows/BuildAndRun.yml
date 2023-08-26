@@ -1,3 +1,5 @@
+name: Build And Run
+
 on:
   push:
     branches: [main]
