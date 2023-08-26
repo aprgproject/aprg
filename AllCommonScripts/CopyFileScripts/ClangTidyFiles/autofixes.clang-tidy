@@ -1,0 +1,37 @@
+ -> Checkers that should be auto fixed
+Checks: '
+  cppcoreguidelines-special-member-functions,
+  google-explicit-constructor,
+  google-readability-braces-around-statements,
+  google-readability-casting,
+  google-readability-namespace-comments,
+  hicpp-braces-around-statements,
+  hicpp-explicit-conversions,
+  hicpp-noexcept-move,
+  hicpp-special-member-function,
+  hicpp-use-auto,
+  hicpp-use-equals-default,
+  llvm-else-after-return,
+  readability-braces-around-statements,
+  readability-convert-member-functions-to-static,
+  readability-else-after-return,
+  readability-implicit-bool-conversion,
+  readability-redundant-member-init,
+  modernize-concat-nested-namespaces,
+  modernize-return-braced-init-list,
+  modernize-use-auto,
+  modernize-use-default-member-init,
+  modernize-use-equals-default,
+  modernize-use-nodiscard,
+  performance-noexcept-move-constructor
+'
+
+# -> Configure specific checkers
+CheckOptions:
+  - key: readability-magic-numbers.IgnoredIntegerValues
+    value: 0;1;2;3;4;5;6;7;8;9;10;100;1000;16;32;64;128;255;512;1024;2048;4096;8192;16384;32768;32768;180;360
+  - key: readability-magic-numbers.IgnorePowersOf2IntegerValues
+    value: true
+  - key: readability-magic-numbers.IgnoredFloatingPointValues
+    value: 0.25;0.5;0.75;1.0;2.0;3.0;10.0;100.0;1000.0;0.1;0.001;0.0001;;-1.0;-2.0;-3.0;
+

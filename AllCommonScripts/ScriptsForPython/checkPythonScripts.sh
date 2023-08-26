@@ -14,9 +14,9 @@ fi
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
-pythonProjectsPathRegex=""
+pythonIncludePathRegex=""
 source "$aprgDirectory/AllCommonScripts/CommonRegex/CommonRegexForPaths.sh"
-pathRegex="$pythonProjectsPathRegex"
+pathRegex="$pythonIncludePathRegex"
 
 # Create needed functions
 checkPythonScriptsInDirectory() {

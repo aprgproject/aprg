@@ -14,9 +14,9 @@ fi
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
-aprgShellScriptsPathSkipRegex=""
+shellScriptsSkipPathRegex=""
 source "$aprgDirectory/AllCommonScripts/CommonRegex/CommonRegexForPaths.sh"
-skipPathRegex="$aprgShellScriptsPathSkipRegex"
+skipPathRegex="$shellScriptsSkipPathRegex"
 
 # Create needed functions
 tempFile=$(mktemp)

@@ -10,13 +10,13 @@ deleteDirectory="$1"
 deleteAllDirectoriesWithName() {
     local nameForDeletion
     nameForDeletion="$1"
-    find "$deleteDirectory" -type d -name "$nameForDeletion" -exec rm -rfv {} \;
+    find "$deleteDirectory" -type d -name "$nameForDeletion" -delete
 }
 
 deleteAllFilesWithName() {
     local nameForDeletion
     nameForDeletion="$1"
-    find "$deleteDirectory" -type f -name "$nameForDeletion" -exec rm -rfv {} \;
+    find "$deleteDirectory" -type f -name "$nameForDeletion" -delete
 }
 
 # Source needed scripts
