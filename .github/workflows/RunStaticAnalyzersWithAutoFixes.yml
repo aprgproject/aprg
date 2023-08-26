@@ -9,7 +9,7 @@ on:
         default: 'all'
 
 jobs:
-  commit:
+  RunAutoFixesThenCommitPush:
     runs-on: ubuntu-latest
     
     steps:
@@ -29,6 +29,7 @@ jobs:
         run: |
           git add delete_this.txt
           git commit -m "Auto-commit: Update automated_file.txt"
+          git remote set-url --push origin https://aprgproject:$PAT_TOKEN@github.com/aprgproject/aprg
           git push origin main
         env:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
