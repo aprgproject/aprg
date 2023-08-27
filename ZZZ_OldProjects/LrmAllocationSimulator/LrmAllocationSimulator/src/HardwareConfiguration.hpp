@@ -39,8 +39,8 @@ public:
     void changeConfigurationToSixFspThreeLcgEvenDistribution();
     void changeConfigurationToSixFspFourLcgEvenDistribution();
     void changeConfigurationToSharedLcgWithOneDspInMsm();
-    [[nodiscard]] unsigned int getTcomFspAddress() const;
-    [[nodiscard]] unsigned int getSharedLcgId() const;
+    unsigned int getTcomFspAddress() const;
+    unsigned int getSharedLcgId() const;
     void printDspAllocations(unsigned int const printFlags = 0);
 
 private:
