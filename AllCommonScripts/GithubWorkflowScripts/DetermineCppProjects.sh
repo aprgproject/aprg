@@ -20,20 +20,23 @@ source "$scriptDirectory/ProjectsWithGsl.sh"
 projectsWith7Zip=""
 source "$scriptDirectory/ProjectsWith7Zip.sh"
 
+scriptPrint "$scriptName" "$LINENO" "The scriptOption is: [$scriptOption]"
+
 # Get C/C++ projects by git changes or by user input.
-if [[ "$scriptOption" == "checkGitAndUserInput" || "$scriptOption" == "checkGit" ]]; then
-    scriptPrint "$scriptName" "$LINENO" "The userInput is empty so getting C/C++ projects from Git changes."
+if [[ "$scriptOption" == "checkGit" ]]; then
+    scriptPrint "$scriptName" "$LINENO" "Searching C/C++ projects from Git changes..."
     cppProjectsFromGit=""
     source "$scriptDirectory/DetectGitChanges.sh"
     detectGitChanges
     cppProjects="$cppProjects $cppProjectsFromGit"
-fi
-if [[ -z $userInput && ("$scriptOption" == "checkGitAndUserInput" || "$scriptOption" == "checkUserInput") ]]; then
-    scriptPrint "$scriptName" "$LINENO" "The userInput is [$userInput], proceeding to search C/C++ projects."
+    scriptPrint "$scriptName" "$LINENO" "The C/C++ projects based from git changes: [$cppProjects]"
+elif [[ "$scriptOption" == "checkUserInput" ]]; then
+    scriptPrint "$scriptName" "$LINENO" "Searching C/C++ projects based from user input: [$userInput]..."
     cppProjectsFound=""
     source "$scriptDirectory/FindCppProjects.sh"
     findCppProjects "$userInput"
     cppProjects="$cppProjects $cppProjectsFound"
+    scriptPrint "$scriptName" "$LINENO" "The C/C++ projects based from user input: [$cppProjects]"
 fi
 
 # Put AprgCommon if empty
@@ -42,27 +45,23 @@ if [[ -z $cppProjects ]]; then
     cppProjects='"AprgCommon/AprgCommon"'
 fi
 
-# Save C/C++ Projects in Github Workflow
+# Save environment variables in Github Workflow
 scriptPrint "$scriptName" "$LINENO" "The cppProjects are: [$cppProjects]"
 # shellcheck disable=SC2154
 echo "APRG_CPP_DIRECTORIES=[$cppProjects]" >> "$GITHUB_OUTPUT"
 
-# Save Excluded Configurations in Github Workflow
 scriptPrint "$scriptName" "$LINENO" "The excludedConfigurations are: [$excludedConfigurations]"
 # shellcheck disable=SC2154
 echo "APRG_EXCLUDED_CONFIGURATIONS=[$excludedConfigurations]" >> "$GITHUB_OUTPUT"
 
-# Save Excluded Configurations in Github Workflow
 scriptPrint "$scriptName" "$LINENO" "The projectsWithBoost are: [$projectsWithBoost]"
 # shellcheck disable=SC2154
 echo "APRG_PROJECTS_WITH_BOOST=[$projectsWithBoost]" >> "$GITHUB_OUTPUT"
 
-# Save Excluded Configurations in Github Workflow
 scriptPrint "$scriptName" "$LINENO" "The projectsWithGsl are: [$projectsWithGsl]"
 # shellcheck disable=SC2154
 echo "APRG_PROJECTS_WITH_GSL=[$projectsWithGsl]" >> "$GITHUB_OUTPUT"
 
-# Save Excluded Configurations in Github Workflow
 scriptPrint "$scriptName" "$LINENO" "The projectsWith7Zip are: [$projectsWith7Zip]"
 # shellcheck disable=SC2154
 echo "APRG_PROJECTS_WITH_7ZIP=[$projectsWith7Zip]" >> "$GITHUB_OUTPUT"

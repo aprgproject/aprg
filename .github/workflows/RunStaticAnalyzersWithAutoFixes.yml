@@ -7,27 +7,17 @@ on:
         description: 'C/C++ CMake Project (use "all" for all projects)'
         required: true
         default: 'all'
+env:
+  staticAnalysisScriptRelativePath: "AllCommonScripts/GithubWorkflowScripts/RunStaticAnalysisWithAutoFixes.sh"
+
 
 jobs:
-
-  initialSetup:
-    name: Perform initial setup
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        
         
   determineCppProjects:
     name: Determine CPP Projects
     runs-on: ubuntu-latest
-    needs: initialSetup
     outputs:
       projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_CPP_DIRECTORIES }}
-      excludedConfigurations: ${{ steps.idOfGetCppProjectStep.outputs.APRG_EXCLUDED_CONFIGURATIONS }}
-      projectsWithBoost: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_BOOST }}
-      projectsWithGsl: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_GSL }}
-      projectsWith7Zip: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_7ZIP }}
     steps:
       - name: Checkout code for changes checking
         id: idOfCheckout
@@ -48,65 +38,13 @@ jobs:
     name: Auto fix ${{ matrix.project }} using Static Analyzers 
     needs: determineCppProjects
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
     steps:
           
       - name: Print Job Details
         run: |
-          echo matrix.project: ${{ matrix.project }}
           echo github.event.action: ${{ github.event.action }}
           echo github.event_name: ${{ github.event_name }}
-
-      - name: Install dependencies on Ubuntu/Clang
-        run: |
-          sudo apt-get install ninja-build cmake
-          echo "cmake version: [$(cmake --version)]"
-          echo "ninja version: [$(ninja --version)]"
-          echo "clang version: [$(clang --version)]"
-
-      - name: Install Boost on Ubuntu
-        if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWithBoost), matrix.project)
-        run: |
-          sudo apt-get install libboost-all-dev
-          echo "libboost-all-dev version (dpkg): [$(dpkg -l | grep libboost-all-dev)]"
-
-      - name: Install GSL on Ubuntu
-        if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWithGsl), matrix.project)
-        run: |
-          sudo apt-get install libgsl-dev
-          echo "libgsl-dev version (dpkg): [$(dpkg -l | grep libgsl-dev)]"
-
-      - name: Install 7zip
-        if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWith7Zip), matrix.project)
-        run: |
-          sudo apt-get install p7zip-full
-          echo "p7zip-full version (dpkg): [$(dpkg -l | grep p7zip-full)]"
-            
-      - name: Build and Run with Static Analyzers
-        shell: bash
-        working-directory: ${{ matrix.project }}
-        run: |
-          sudo apt-get install clang-tidy cppcheck clazy
-          echo "clang-tidy version: [$(clang-tidy --version)]"
-          echo "cppcheck version: [$(cppcheck --version)]"
-          echo "clazy version: [$(clazy --version)]"
-          currentDirectory="$(pwd)"
-          "$buildAndRunScriptPath" cleanAndConfigureWithStaticAnalyzersWithAutoFix "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
-          echo "Running Static Analysis..."
-          echo "Showing grepped output:"
-          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }} | grep -P "^.*$unquotedProject.* (style|warning|error): .*$" || true
-
- 
-  commitAndPushChanges:
-    runs-on: ubuntu-latest
-    needs: runStaticAnalyzersOnCppProjects
-    permissions:
-      contents: write
-    
-    steps:
+          
       - name: Checkout code
         uses: actions/checkout@v3
         
@@ -121,6 +59,43 @@ jobs:
           # git remote -v
         env:
           WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install ninja-build cmake
+          echo "cmake version: [$(cmake --version)]"
+          echo "ninja version: [$(ninja --version)]"
+          echo "clang version: [$(clang --version)]"
+          sudo apt-get install libboost-all-dev
+          echo "libboost-all-dev version (dpkg): [$(dpkg -l | grep libboost-all-dev)]"
+          sudo apt-get install libgsl-dev
+          echo "libgsl-dev version (dpkg): [$(dpkg -l | grep libgsl-dev)]"
+          sudo apt-get install p7zip-full
+          echo "p7zip-full version (dpkg): [$(dpkg -l | grep p7zip-full)]"
+          sudo apt-get install clang-tidy cppcheck clazy
+          echo "clang-tidy version: [$(clang-tidy --version)]"
+          echo "cppcheck version: [$(cppcheck --version)]"
+          echo "clazy version: [$(clazy --version)]"
+            
+      - name: Build and Run with Static Analyzers
+        shell: bash
+        run: |
+          staticAnalysisScriptPath=$(realpath "$(pwd)/${{ env.staticAnalysisScriptRelativePath }}")
+          echo "pwd: [$(pwd)]"
+          echo "staticAnalysisScriptPath: [$(staticAnalysisScriptPath)]"
+          "$staticAnalysisScriptPath"  "${{ needs.determineCppProjects.outputs.projectsToBuild }}"
+
+ 
+  commitAndPushChanges:
+    runs-on: ubuntu-latest
+    needs: runStaticAnalyzersOnCppProjects
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
         
       - name: Make Changes
         run: |

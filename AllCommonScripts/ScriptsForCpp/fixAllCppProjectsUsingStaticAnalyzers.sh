@@ -5,8 +5,8 @@ scriptPath=$(realpath "$0")
 scriptDirectory=$(dirname "$scriptPath")
 scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
-directoryToConvertAllFiles="$1"
 buildAndRunScriptPath="$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
+directoryToConvertAllFiles="$1"
 
 # Use aprg directory if there are no arguments
 if [ -z "$directoryToConvertAllFiles" ]; then
@@ -24,7 +24,7 @@ runStaticAnalyzersInDirectory() {
     local directoryPath
     directoryPath="$1"
 
-    scriptPrint "$scriptName" "$LINENO" "Searching for C/C++ files in: [$directoryPath]"
+    scriptPrint "$scriptName" "$LINENO" "Running Static Analysis in: [$directoryPath]"
 
     cd "$directoryPath" || exit 1
     "$buildAndRunScriptPath" cleanAndConfigureWithStaticAnalyzersWithAutoFix "StaticAnalyzersBuild" "Debug" "Ninja"
