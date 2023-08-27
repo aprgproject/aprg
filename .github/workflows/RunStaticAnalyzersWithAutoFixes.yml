@@ -88,14 +88,11 @@ jobs:
           chmod +x "$staticAnalysisScriptPath"
           "$staticAnalysisScriptPath"  "${{ needs.determineCppProjects.outputs.projectsToBuild }}"
         
-      - name: Add Changes
-        run: |
-          git add -u
-          git diff --cached | head -n 100
-        
       - name: Commit and Push Changes
         run: |
+          git add -u
+          echo "Showing changes for 100 lines:"
+          git diff --cached | head -n 100
           git commit -m "APRGPROJECT: Automatic commit for Static Analyzers with Auto Fixes"
           git pull --no-edit
-          echo "last step is push"
-          #git push
+          git push
