@@ -26,10 +26,11 @@ public:
         typeHelper::isIntegralType<ValueType>(), std::uniform_int_distribution<ValueType>,
         std::uniform_real_distribution<ValueType>>;
 
-    AlbaUniformNonDeterministicRandomizer() :  m_randomEngine(), m_randomNumberDistribution() {}
+    // NOLINTNEXTLINE(cert-msc32-c,cert-msc51-cpp)
+    AlbaUniformNonDeterministicRandomizer() : m_randomEngine(), m_randomNumberDistribution() {}
 
     explicit AlbaUniformNonDeterministicRandomizer(ValueType const minimum, ValueType const maximum)
-        :  m_randomEngine(m_entropySeedSource()), m_randomNumberDistribution(minimum, maximum) {}
+        : m_randomEngine(m_entropySeedSource()), m_randomNumberDistribution(minimum, maximum) {}
 
     ValueType getRandomValue() { return m_randomNumberDistribution(m_randomEngine); }
 

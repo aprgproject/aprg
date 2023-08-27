@@ -19,6 +19,7 @@ public:
         typeHelper::isIntegralType<ValueType>(), std::uniform_int_distribution<ValueType>,
         std::uniform_real_distribution<ValueType>>;
 
+    // NOLINTNEXTLINE(cert-msc32-c,cert-msc51-cpp)
     AlbaUniformDeterministicRandomizer() : m_randomEngine(), m_randomNumberDistribution() {}
 
     explicit AlbaUniformDeterministicRandomizer(
