@@ -88,7 +88,7 @@ jobs:
           chmod +x "$staticAnalysisScriptPath"
           "$staticAnalysisScriptPath"  "${{ needs.determineCppProjects.outputs.projectsToBuild }}"
         
-      - name: Make Changes
+      - name: Add Changes
         run: |
           git add -u
           git diff --cached | head -n 100

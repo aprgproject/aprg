@@ -31,7 +31,7 @@ runStaticAnalyzersInDirectory() {
 
     cd "$directoryPath" || exit 1
     "$buildAndRunScriptPath" cleanAndConfigureWithStaticAnalyzersWithAutoFix "StaticAnalyzersBuild" "Debug" "Ninja"
-    "$buildAndRunScriptPath" build "StaticAnalyzersBuild" "Debug"
+    "$buildAndRunScriptPath" buildOnOneCore "StaticAnalyzersBuild" "Debug"
 }
 
 
