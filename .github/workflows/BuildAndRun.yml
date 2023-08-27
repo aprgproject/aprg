@@ -8,11 +8,11 @@ on:
   workflow_dispatch:
     inputs:
       cppCMakeProjects:
-        description: 'C/C++ CMake Project (use "all" for all projects)'
+        description: 'C/C++ Project ("all" for all projects)'
         required: true
         default: 'all'
       cppCMakeBuildType:
-        description: 'Build Type to use for C/C++ CMake Project'
+        description: 'Build Type to use for C/C++ Project'
         required: true
         default: 'Debug'
         type: choice
@@ -220,19 +220,19 @@ jobs:
         if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWithBoost), matrix.project)
         run: |
           sudo apt install libboost-all-dev
-          echo "libboost-all-dev version (dpkg): [$(dpkg -l | grep libboost-all-dev)]"
+          echo "libboost-all-dev version (dpkg): [$(dpkg -l | grep libboost-all-dev | tr -s ' ')]"
 
       - name: Install GSL on Ubuntu
         if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWithGsl), matrix.project)
         run: |
           sudo apt install libgsl-dev
-          echo "libgsl-dev version (dpkg): [$(dpkg -l | grep libgsl-dev)]"
+          echo "libgsl-dev version (dpkg): [$(dpkg -l | grep libgsl-dev | tr -s ' ')]"
 
       - name: Install 7zip
         if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWith7Zip), matrix.project)
         run: |
           sudo apt install p7zip-full
-          echo "p7zip-full version (dpkg): [$(dpkg -l | grep p7zip-full)]"
+          echo "p7zip-full version (dpkg): [$(dpkg -l | grep p7zip-full | tr -s ' ')]"
           
       - name: Prepare aprg directories and scripts
         shell: bash

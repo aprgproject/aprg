@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       cppCMakeProjects:
-        description: 'C/C++ CMake Project (use "all" for all projects)'
+        description: 'C/C++ Project ("all" for all projects)'
         required: true
         default: 'all'
 env:
@@ -75,17 +75,19 @@ jobs:
           echo "ninja version: [$(ninja --version)]"
           echo "clang version: [$(clang --version)]"
           sudo apt install libboost-all-dev
-          echo "libboost-all-dev version (dpkg): [$(dpkg -l | grep libboost-all-dev)]"
+          echo "libboost-all-dev version (dpkg): [$(dpkg -l | grep libboost-all-dev | tr -s ' ')]"
           sudo apt install libgsl-dev
-          echo "libgsl-dev version (dpkg): [$(dpkg -l | grep libgsl-dev)]"
+          echo "libgsl-dev version (dpkg): [$(dpkg -l | grep libgsl-dev | tr -s ' ')]"
           sudo apt install p7zip-full
-          echo "p7zip-full version (dpkg): [$(dpkg -l | grep p7zip-full)]"
+          echo "p7zip-full version (dpkg): [$(dpkg -l | grep p7zip-full | tr -s ' ')]"
           sudo apt install clang-tidy cppcheck clazy
           echo "clang-tidy version: [$(clang-tidy --version)]"
           echo "cppcheck version: [$(cppcheck --version)]"
           echo "clazy version: [$(clazy --version)]"
           sudo apt install clang-format
-          echo "clang-format version: [$(clang-format)]"
+          echo "clang-format version: [$(clang-format --version)]"
+          sudo apt-get install dos2unix
+          echo "dos2unix version: [$(dos2unix --version)]"
             
       - name: Build and Run with Static Analyzers
         shell: bash

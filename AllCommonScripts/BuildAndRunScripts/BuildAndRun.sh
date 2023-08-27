@@ -66,10 +66,10 @@ getClangAndClazyCompiler() {
 
 printConfigureParameters() {
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType] and cmakeGenerator is [$cmakeGenerator]."
-    if ! [[ -z $cCompilerLocation ]]; then
+    if [[ -n $cCompilerLocation ]]; then
         scriptPrint "$scriptName" "$LINENO" "The cCompilerLocation is [$cCompilerLocation]."
     fi
-    if ! [[ -z $cppCompilerLocation ]]; then
+    if [[ -n $cppCompilerLocation ]]; then
         scriptPrint "$scriptName" "$LINENO" "The cppCompilerLocation is [$cppCompilerLocation]."
     fi
     scriptPrint "$scriptName" "$LINENO" "The build path is [$(pwd)] and the output of [$lsCommand]:"
