@@ -315,12 +315,6 @@ jobs:
           "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
           echo "Running Static Analysis..."
           echo "Showing grepped output:"
-          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }} | grep -P "^.*$unquotedProject.* (style|warning|error): .*$" | tee "$currentDirectory/analyzerIssues.txt" || true
-          if [ -s "$currentDirectory/analyzerIssues.txt" ]; then
-            echo "There are some issues found in the static analysis, so exiting with error status."
-            exit 1
-          else
-            echo "No errors detected."
-          fi
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}

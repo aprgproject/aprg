@@ -31,7 +31,7 @@ runStaticAnalyzersInDirectory() {
     cd "$directoryPath" || exit 1
     "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "StaticAnalyzersBuild" "Debug" "Ninja"
     set +e
-    "$buildAndRunScriptPath" build "StaticAnalyzersBuild" "Debug"  | grep -P "^.*$directoryPath.* (style|warning|error): .*$" | tee -a "$analyzerOutputFile"
+    "$buildAndRunScriptPath" build "StaticAnalyzersBuild" "Debug" | grep -P "^.*$directoryPath.* (style|warning|error): .*$" | tee -a "$analyzerOutputFile"
     set -e
 }
 

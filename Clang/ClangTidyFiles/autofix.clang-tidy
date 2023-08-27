@@ -16,19 +16,20 @@ Checks: '
   hicpp-use-equals-default,
   llvm-else-after-return,
   llvm-namespace-comment,
-  readability-braces-around-statements,
-  readability-convert-member-functions-to-static,
-  readability-else-after-return,
-  readability-implicit-bool-conversion,
-  readability-redundant-member-init,
-  readability-static-accessed-through-instance,
   modernize-concat-nested-namespaces,
   modernize-return-braced-init-list,
   modernize-use-auto,
   modernize-use-default-member-init,
   modernize-use-equals-default,
   modernize-use-nodiscard,
-  performance-noexcept-move-constructor
+  modernize-use-transparent-functors,
+  performance-noexcept-move-constructor,
+  readability-braces-around-statements,
+  readability-convert-member-functions-to-static,
+  readability-else-after-return,
+  readability-implicit-bool-conversion,
+  readability-redundant-member-init,
+  readability-static-accessed-through-instance
 '
 
 # -> Configure specific checkers
