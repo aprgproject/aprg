@@ -14,7 +14,7 @@ using namespace std;
 
 namespace alba::algebra {
 
-MultiplicationAndDivisionOfRadicals::MultiplicationAndDivisionOfRadicals() {}
+MultiplicationAndDivisionOfRadicals::MultiplicationAndDivisionOfRadicals() = default;
 
 MultiplicationAndDivisionOfRadicals::MultiplicationAndDivisionOfRadicals(TermsWithDetails const& termsWithDetails)
     : m_termsWithDetails(termsWithDetails) {}

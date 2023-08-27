@@ -78,7 +78,7 @@ void SignMutator::mutateExpression(Expression& expression) {
         }
     } else {
         mutateTerm(simplifiedTerm);
-        expression = Expression(createOrCopyExpressionFromATerm(simplifiedTerm));
+        expression = (createOrCopyExpressionFromATerm(simplifiedTerm));
     }
     expression.simplify();
 }

@@ -2,7 +2,7 @@
 
 namespace alba::algebra {
 
-NumberOfTermsRetriever::NumberOfTermsRetriever() {}
+NumberOfTermsRetriever::NumberOfTermsRetriever() = default;
 
 int NumberOfTermsRetriever::getNumberOfTerms() const { return m_numberOfTerms; }
 

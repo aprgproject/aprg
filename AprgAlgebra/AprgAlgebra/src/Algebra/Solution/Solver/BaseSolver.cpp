@@ -2,7 +2,7 @@
 
 namespace alba::algebra {
 
-BaseSolver::BaseSolver() {}
+BaseSolver::BaseSolver() = default;
 
 bool BaseSolver::isSolved() const { return m_isSolved; }
 

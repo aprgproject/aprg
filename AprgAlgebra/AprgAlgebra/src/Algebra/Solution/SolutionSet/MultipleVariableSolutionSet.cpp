@@ -7,7 +7,7 @@ using namespace std;
 
 namespace alba::algebra {
 
-MultipleVariableSolutionSet::MultipleVariableSolutionSet() {}
+MultipleVariableSolutionSet::MultipleVariableSolutionSet() = default;
 
 bool MultipleVariableSolutionSet::isValueAcceptedForVariable(
     string const& variableName, AlbaNumber const& value) const {

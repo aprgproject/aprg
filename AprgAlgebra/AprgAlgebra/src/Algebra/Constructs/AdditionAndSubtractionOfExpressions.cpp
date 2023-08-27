@@ -28,7 +28,7 @@ ConditionFunctionForTermsWithDetails isMergePart = [](TermWithDetails const& ter
 
 }  // namespace
 
-AdditionAndSubtractionOfExpressions::AdditionAndSubtractionOfExpressions() {}
+AdditionAndSubtractionOfExpressions::AdditionAndSubtractionOfExpressions() = default;
 
 AdditionAndSubtractionOfExpressions::AdditionAndSubtractionOfExpressions(TermsWithDetails const& termsWithDetails) {
     putTermsWithDetails(termsWithDetails);

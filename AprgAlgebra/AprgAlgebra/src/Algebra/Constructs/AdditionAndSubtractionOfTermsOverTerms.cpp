@@ -10,7 +10,7 @@
 
 namespace alba::algebra {
 
-AdditionAndSubtractionOfTermsOverTerms::AdditionAndSubtractionOfTermsOverTerms() {}
+AdditionAndSubtractionOfTermsOverTerms::AdditionAndSubtractionOfTermsOverTerms() = default;
 
 VectorOfTermsOverTerms const& AdditionAndSubtractionOfTermsOverTerms::getItems() const { return m_items; }
 

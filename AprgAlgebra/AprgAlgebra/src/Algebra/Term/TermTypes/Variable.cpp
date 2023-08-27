@@ -6,7 +6,7 @@ using namespace std;
 
 namespace alba::algebra {
 
-Variable::Variable() {}
+Variable::Variable() = default;
 
 Variable::Variable(string const& variableName) : m_variableName(variableName) {}
 

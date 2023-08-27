@@ -13,7 +13,7 @@ namespace alba {
 
 namespace algebra::Simplification {
 
-SimplificationOfFunctionToTerm::SimplificationOfFunctionToTerm() {}
+SimplificationOfFunctionToTerm::SimplificationOfFunctionToTerm() = default;
 
 bool SimplificationOfFunctionToTerm::shouldSimplifyTrigonometricFunctionsToSinAndCos() {
     return Configuration::getInstance().getConfigurationDetails().shouldSimplifyTrigonometricFunctionsToSinAndCos;

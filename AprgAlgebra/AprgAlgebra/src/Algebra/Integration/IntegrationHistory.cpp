@@ -8,7 +8,7 @@ using namespace std;
 
 namespace alba::algebra {
 
-IntegrationHistory::IntegrationHistory() {}
+IntegrationHistory::IntegrationHistory() = default;
 
 bool IntegrationHistory::didThisIntegrationPurposeAlreadyHappened(IntegrationPurpose const purpose) const {
     return find(m_recordOfIntegrationPurposes.cbegin(), m_recordOfIntegrationPurposes.cend(), purpose) !=

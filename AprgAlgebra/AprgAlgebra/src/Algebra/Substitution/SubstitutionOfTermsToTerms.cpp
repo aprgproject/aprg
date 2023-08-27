@@ -7,7 +7,7 @@ using namespace std;
 
 namespace alba::algebra {
 
-SubstitutionOfTermsToTerms::SubstitutionOfTermsToTerms() {}
+SubstitutionOfTermsToTerms::SubstitutionOfTermsToTerms() = default;
 
 SubstitutionOfTermsToTerms::SubstitutionOfTermsToTerms(initializer_list<TermTermPair> const& variablesWithValues) {
     putTermsToTermsMapping(variablesWithValues);

@@ -6,7 +6,7 @@ using namespace std;
 
 namespace alba::algebra {
 
-Constant::Constant() {}
+Constant::Constant() = default;
 
 Constant::Constant(AlbaNumber const& constantValue) : m_constantValue(constantValue) {}
 

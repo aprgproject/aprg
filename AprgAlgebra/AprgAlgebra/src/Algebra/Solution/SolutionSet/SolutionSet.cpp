@@ -15,7 +15,7 @@ using namespace std;
 
 namespace alba::algebra {
 
-SolutionSet::SolutionSet() {}
+SolutionSet::SolutionSet() = default;
 
 bool SolutionSet::isEmpty() const {
     return m_acceptedValues.empty() && m_rejectedValues.empty() && m_acceptedIntervals.empty();

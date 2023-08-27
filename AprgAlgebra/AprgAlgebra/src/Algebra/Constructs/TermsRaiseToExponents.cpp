@@ -43,7 +43,7 @@ bool TermsRaiseToExponents<Term, TermRaiseToTerms>::isNegative(Term const& expon
 }
 
 template <typename ExponentType, typename BaseRaiseToExponentType>
-TermsRaiseToExponents<ExponentType, BaseRaiseToExponentType>::TermsRaiseToExponents() {}
+TermsRaiseToExponents<ExponentType, BaseRaiseToExponentType>::TermsRaiseToExponents() = default;
 template TermsRaiseToExponents<AlbaNumber, TermRaiseToANumber>::TermsRaiseToExponents();
 template TermsRaiseToExponents<Term, TermRaiseToTerms>::TermsRaiseToExponents();
 

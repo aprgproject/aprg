@@ -8,7 +8,7 @@ using namespace std;
 
 namespace alba::algebra {
 
-SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms() {}
+SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms() = default;
 
 SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms(
     initializer_list<VariableTermPair> const& variablesWithTerms) {

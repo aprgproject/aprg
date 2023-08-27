@@ -2,7 +2,7 @@
 
 namespace alba::algebra {
 
-SubTermsRetriever::SubTermsRetriever() {}
+SubTermsRetriever::SubTermsRetriever() = default;
 
 TermSet const& SubTermsRetriever::getSubTerms() const { return m_subTerms; }
 

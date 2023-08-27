@@ -2,7 +2,7 @@
 
 namespace alba::algebra {
 
-TermsRaiseToTerms::TermsRaiseToTerms() {}
+TermsRaiseToTerms::TermsRaiseToTerms() = default;
 
 TermsRaiseToTerms::TermsRaiseToTerms(BaseToExponentMap const& baseToExponentMap)
     : TermsRaiseToTermsBase(baseToExponentMap) {}

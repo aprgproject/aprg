@@ -106,7 +106,7 @@ Term Integration::integrateMonomial(Monomial const& monomial) {
     Term result;
     AlbaNumber exponentForVariable = monomial.getExponentForVariable(getCurrentVariableToIntegrate());
     if (exponentForVariable == -1) {
-        result = Term(integrateMonomialWhenExponentIsNegativeOne(monomial));
+        result = (integrateMonomialWhenExponentIsNegativeOne(monomial));
     } else {
         result = Term(integrateMonomialWhenExponentIsNotNegativeOne(monomial));
     }

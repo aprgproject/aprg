@@ -256,7 +256,7 @@ void calculateTermAndLimitUsingLhopitalsRule(
     while (continueToDifferentiateForLhopitalsRule(numerator, denominator, numeratorValue, denominatorValue)) {
         numerator = differentiation.differentiate(numerator);
         denominator = differentiation.differentiate(denominator);
-        newTerm = Term(numerator / denominator);
+        newTerm = (numerator / denominator);
         simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(newTerm);
         TermsOverTerms newTermsOverTerms(createTermsOverTermsFromTerm(newTerm));
         numerator = newTermsOverTerms.getCombinedNumerator();

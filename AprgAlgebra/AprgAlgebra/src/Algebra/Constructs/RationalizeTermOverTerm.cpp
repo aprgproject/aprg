@@ -14,7 +14,7 @@ using namespace alba::mathHelper;
 
 namespace alba::algebra {
 
-RationalizeTermOverTerm::RationalizeTermOverTerm() {}
+RationalizeTermOverTerm::RationalizeTermOverTerm() = default;
 
 RationalizeTermOverTerm::RationalizeTermOverTerm(Term const& numerator, Term const& denominator)
     : m_numerator(numerator), m_denominator(denominator) {}

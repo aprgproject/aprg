@@ -52,7 +52,7 @@ void LinearDiophantineEquationCoefficientSolver::solve(
             m_solutionStatus = SolutionStatus::NoSolution;
         } else {
             // A Diophantine equation can be solved if c is divisible by gcd(a,b), and otherwise it cannot be solved.
-            Integer x, y;
+            Integer x = 0, y = 0;
             m_gcfOfAAndB = getGreatestCommonFactorWithLastValues(m_a, m_b, x, y);
 
             if (isDivisible(m_c, m_gcfOfAAndB)) {

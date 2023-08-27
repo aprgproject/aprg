@@ -5,7 +5,7 @@ using namespace std;
 namespace alba {
 DspDetails::DspDetails()
 
-= default;
+    = default;
 
 Dsp::Dsp() = default;
 
