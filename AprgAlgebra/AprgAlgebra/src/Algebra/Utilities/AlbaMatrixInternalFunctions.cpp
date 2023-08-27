@@ -7,4 +7,4 @@ bool isEqualForMathMatrixDataType(AlbaNumber const& value1, AlbaNumber const& va
     return value1 == value2;
 }
 
-}  // namespace alba
+}  // namespace alba::matrix

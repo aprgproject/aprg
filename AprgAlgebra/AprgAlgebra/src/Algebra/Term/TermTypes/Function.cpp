@@ -8,8 +8,7 @@ using namespace std;
 
 namespace alba::algebra {
 
-Function::Function()
-    :  m_inputTermPointer(make_unique<Term>()),  m_isSimplified(false) {}
+Function::Function() : m_inputTermPointer(make_unique<Term>()), m_isSimplified(false) {}
 
 Function::Function(string const& functionName, BaseTerm const& baseTerm, EvaluationFunction const& evaluationFunction)
     : m_functionName(functionName),

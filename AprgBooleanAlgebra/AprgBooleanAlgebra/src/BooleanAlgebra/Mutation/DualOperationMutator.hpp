@@ -10,4 +10,4 @@ public:
     void mutateExpression(Expression& expression) override;
 };
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

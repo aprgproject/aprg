@@ -22,9 +22,13 @@ public:
         return points;
     }
 
-    [[nodiscard]] double calculateXfromY(double const y) const { return PolynomialInYEqualsXParent::calculateOutputFromInput(y); }
+    [[nodiscard]] double calculateXfromY(double const y) const {
+        return PolynomialInYEqualsXParent::calculateOutputFromInput(y);
+    }
 
-    [[nodiscard]] double getSlopeAt(double const y) const { return 1 / PolynomialInYEqualsXParent::getValueOfFirstDerivative(y); }
+    [[nodiscard]] double getSlopeAt(double const y) const {
+        return 1 / PolynomialInYEqualsXParent::getValueOfFirstDerivative(y);
+    }
 };
 
 }  // namespace alba::TwoDimensions

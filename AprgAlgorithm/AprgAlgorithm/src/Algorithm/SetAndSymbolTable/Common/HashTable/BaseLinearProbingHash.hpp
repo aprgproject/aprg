@@ -20,9 +20,7 @@ public:
     using EntryUniquePointer = std::unique_ptr<Entry>;
     using EntryPointers = EntryUniquePointer*;
 
-    BaseLinearProbingHash() :  m_entryPointers(nullptr) {
-        initialize(INITIAL_HASH_TABLE_SIZE);
-    }
+    BaseLinearProbingHash() : m_entryPointers(nullptr) { initialize(INITIAL_HASH_TABLE_SIZE); }
 
     virtual ~BaseLinearProbingHash()  // virtual destructor because of virtual functions (vtable exists)
     {
@@ -103,7 +101,7 @@ public:
         int i(getHash(key));
         for (; m_entryPointers[i] && m_entryPointers[i]->key != key; incrementHashTableIndexWithWrapAround(i)) {
             ;
-}
+        }
         if (m_entryPointers[i] && m_entryPointers[i]->key == key) {
             deleteEntryOnIndex(i);
             incrementHashTableIndexWithWrapAround(i);

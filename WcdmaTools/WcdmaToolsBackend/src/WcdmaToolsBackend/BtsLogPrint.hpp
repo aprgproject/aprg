@@ -27,8 +27,8 @@ enum class State {
 
 struct TransactionData {
     TransactionData()
-        
-          {}
+
+    {}
     bool isPcTimeSaved{false};
     bool isHardwareAddressSaved{false};
     bool isBtsTimeSaved{false};

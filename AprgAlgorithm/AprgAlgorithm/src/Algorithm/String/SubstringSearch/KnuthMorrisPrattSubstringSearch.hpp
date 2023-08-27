@@ -13,7 +13,8 @@ public:
     using Dfa = AlbaDfaUsingMatrix<Index, RadixType>;
     static constexpr RadixType RADIX = 256;
 
-    explicit KnuthMorrisPrattSubstringSearch(std::string const& query) : m_query(query), m_nextIndexDfa(query.length(), RADIX) {
+    explicit KnuthMorrisPrattSubstringSearch(std::string const& query)
+        : m_query(query), m_nextIndexDfa(query.length(), RADIX) {
         // In m_nextIndexDfa, x coordinate is character and y coordinate is the next state (which is index)
         initialize();
     }

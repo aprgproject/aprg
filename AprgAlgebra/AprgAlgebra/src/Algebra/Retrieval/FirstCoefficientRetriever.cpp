@@ -2,7 +2,7 @@
 
 namespace alba::algebra {
 
-FirstCoefficientRetriever::FirstCoefficientRetriever()  {}
+FirstCoefficientRetriever::FirstCoefficientRetriever() {}
 
 AlbaNumber const& FirstCoefficientRetriever::getFirstCoefficient() const { return m_firstCoefficient; }
 

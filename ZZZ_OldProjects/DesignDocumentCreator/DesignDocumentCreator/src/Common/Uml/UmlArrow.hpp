@@ -10,4 +10,4 @@ std::string getDarkerGreenArrow();
 std::string getBlackArrow();
 std::string getLostMessageArrow();
 std::string getArrowBaseFromMessageName(std::string const& messageName);
-}  // namespace DesignDocumentCreator
+}  // namespace DesignDocumentCreator::UmlArrow

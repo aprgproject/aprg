@@ -61,9 +61,9 @@ public:
         auto it = m_keyToSharedValueMap.find(key);
         if (it != m_keyToSharedValueMap.end()) {
             return std::make_unique<SharedConcreteFlyweight>(it->second);
-        }             auto iteratorAndFlagPair = m_keyToSharedValueMap.emplace(key, key);  // use key as value
-            return std::make_unique<SharedConcreteFlyweight>(iteratorAndFlagPair.first->second);
-       
+        }
+        auto iteratorAndFlagPair = m_keyToSharedValueMap.emplace(key, key);  // use key as value
+        return std::make_unique<SharedConcreteFlyweight>(iteratorAndFlagPair.first->second);
     }
     static std::unique_ptr<Flyweight> getUnsharedFlyweight(int const value) {
         return std::make_unique<UnsharedConcreteFlyweight>(value);

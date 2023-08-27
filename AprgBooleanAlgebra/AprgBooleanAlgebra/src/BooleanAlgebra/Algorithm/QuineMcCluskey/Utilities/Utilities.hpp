@@ -6,4 +6,4 @@ namespace alba::booleanAlgebra {
 
 LogicalValue getLogicalValue(bool const value);
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

@@ -62,7 +62,8 @@ private:
         return result;
     }
 
-    [[nodiscard]] Index getIndexUsingIntervalsInsideTarget(Index const startIndex, Index const endIndex, Value const& target) const {
+    [[nodiscard]] Index getIndexUsingIntervalsInsideTarget(
+        Index const startIndex, Index const endIndex, Value const& target) const {
         // Some end cases analysis:
         // -> If interval is one element[a], loop ends, we check either low or high target
         // -> If interval is two elements[a,b], loop ends, we check either low or high target

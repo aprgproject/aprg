@@ -114,7 +114,7 @@ bool SOOSA::Status::isStatusNoError() const { return m_errors.empty(); }
 SOOSA::SOOSA(SoosaConfiguration const& soosaConfiguration, InputConfiguration const& inputConfiguration)
     : m_soosaConfiguration(soosaConfiguration),
       m_inputConfiguration(inputConfiguration),
-      
+
       m_frequencyDatabase(m_inputConfiguration.getNumberOfQuestions(), m_soosaConfiguration.getNumberOfChoices()) {}
 
 int SOOSA::getNumberOfAnswers() const { return m_questionToAnswersMap.size(); }

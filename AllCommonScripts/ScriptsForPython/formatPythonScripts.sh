@@ -36,6 +36,10 @@ formatPythonScriptsInDirectory() {
             expand -t 4 "$filePath" > "$tempFile"
             mv "$tempFile" "$filePath"
 
+            # be sure to make it an executable
+            chmod +x "$filePath"
+
+            # use autopep8 to format
             autopep8 --in-place "$filePath"
         fi
     done < <(find "$directoryPath" -type f -name "*.py")

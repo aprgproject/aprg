@@ -8,4 +8,4 @@ public:
     virtual ~BaseTermData() = default;  // virtual destructor because of virtual functions (vtable exists)
 };
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

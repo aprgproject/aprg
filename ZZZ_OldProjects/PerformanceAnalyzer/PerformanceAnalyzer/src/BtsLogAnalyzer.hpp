@@ -25,8 +25,8 @@ public:
     };
     struct DspData {
         DspData()
-            
-              {}
+
+        {}
         unsigned int boardId{0};
         unsigned int cpuId{0};
         unsigned int lcgId{0};
@@ -88,9 +88,9 @@ private:
     void saveRlhDeletionTime(std::string const& lineInLogs, LogTimePairs& rlDeletionLogTimePairs);
     void saveAdditionalPrintsRlSetup(std::string const& lineInLogs, LogTimePairs& rlSetupLogTimePairs);
     static void setFirstLogTimeInPair(
-        std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) ;
+        std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs);
     static void setSecondLogTimeInPair(
-        std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) ;
+        std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs);
     void computeRlSetupLatencyAndUpdateIfLogTimePairIsValid(
         UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs);
     void computeRLDeletionLatencyAndUpdateIfLogTimePairIsValid(
@@ -100,7 +100,7 @@ private:
         UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, std::ofstream& csvFileStream);
     void savePrintsAvailableToCsvFile(UserIdentifiers const& userIdentifiers, std::ofstream& csvFileStream);
     static void setLogTimeIfNeeded(std::string const& lineInLogs, LogTime& logTime);
-    static double getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser) ;
+    static double getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser);
     static double getTotalMicroseconds(wcdmaToolsBackend::BtsLogTime const& btsLogTime);
     DataCollection<double> m_messageQueueingTime;
     DataCollection<double> m_rlhRlSetupLatency;

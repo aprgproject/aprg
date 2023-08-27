@@ -15,4 +15,4 @@ TEST(AnimizeColorTest, DISABLED_GatherAndSaveStatistics) {
     gatherAndSaveDataInAnimizeColor(bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\Foals.bmp)");
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

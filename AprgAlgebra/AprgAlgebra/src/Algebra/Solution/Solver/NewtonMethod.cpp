@@ -14,8 +14,7 @@ namespace alba::algebra {
 constexpr double INITIAL_DELTA_FOR_SLOPE = 1E-6;
 
 NewtonMethod::NewtonMethod(AlbaNumber const& initialValue, Function const& functionToIterate)
-    : 
-      m_currentValue(initialValue),
+    : m_currentValue(initialValue),
       m_positiveDeltaForSlope(INITIAL_DELTA_FOR_SLOPE),
       m_functionToIterate(functionToIterate) {}
 

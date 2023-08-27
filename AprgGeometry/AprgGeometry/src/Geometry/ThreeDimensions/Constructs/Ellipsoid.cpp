@@ -5,7 +5,7 @@ using namespace std;
 
 namespace alba::ThreeDimensions {
 
-Ellipsoid::Ellipsoid() :  m_aValue(0), m_bValue(0), m_cValue(0) {}
+Ellipsoid::Ellipsoid() : m_aValue(0), m_bValue(0), m_cValue(0) {}
 
 Ellipsoid::Ellipsoid(
     Point const& center, double const aCoefficient, double const bCoefficient, double const cCoefficient)

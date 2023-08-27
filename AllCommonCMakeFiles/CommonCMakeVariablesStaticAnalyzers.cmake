@@ -16,9 +16,9 @@ if(APRG_ENABLE_STATIC_ANALYZERS)
     find_program(CLANG_TIDY_PROGRAM "clang-tidy")
     print_variable(CLANG_TIDY_PROGRAM)
     if(CLANG_TIDY_PROGRAM)
-	    string(REPLACE "/" "\\/" CLANG_TIDY_HEADER_REGEX ${CMAKE_CURRENT_SOURCE_DIR})
-		set(CLANG_TIDY_HEADER_REGEX "${CLANG_TIDY_HEADER_REGEX}.*")
-		
+        string(REPLACE "/" "\\/" CLANG_TIDY_HEADER_REGEX ${CMAKE_CURRENT_SOURCE_DIR})
+        set(CLANG_TIDY_HEADER_REGEX "${CLANG_TIDY_HEADER_REGEX}.*")
+
         print_variable(CLANG_TIDY_HEADER_REGEX)
 
         # additional flags: --fix --warnings-as-errors=*;
@@ -28,7 +28,7 @@ if(APRG_ENABLE_STATIC_ANALYZERS)
                                    "--config-file=${APRG_DIR}/Clang/ClangTidyFiles/autofix.clang-tidy")
             set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_PROGRAM} --fix "--header-filter=${CLANG_TIDY_HEADER_REGEX}"
                                      "--config-file=${APRG_DIR}/Clang/ClangTidyFiles/autofix.clang-tidy")
-		else()
+        else()
             # check only
             set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY_PROGRAM} "--header-filter=${CLANG_TIDY_HEADER_REGEX}")
             set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_PROGRAM} "--header-filter=${CLANG_TIDY_HEADER_REGEX}")

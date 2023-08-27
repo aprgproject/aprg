@@ -9,8 +9,7 @@ using namespace std;
 
 namespace alba::soosa {
 
-InputConfiguration::InputConfiguration()
-    :  m_formDetails{} {}
+InputConfiguration::InputConfiguration() : m_formDetails{} {}
 
 int InputConfiguration::getNumberOfColumns() const { return m_formDetails.columnToNumberOfQuestionsMap.size(); }
 

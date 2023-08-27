@@ -31,7 +31,8 @@ public:
     }
 
 private:
-    [[nodiscard]] Index getIndexOfValueWithoutCheck(Index const lowIndex, Index const highIndex, Value const& target) const {
+    [[nodiscard]] Index getIndexOfValueWithoutCheck(
+        Index const lowIndex, Index const highIndex, Value const& target) const {
         // Based from https://en.wikipedia.org/wiki/Ternary_search#Algorithm
 
         Index result(INVALID_INDEX);

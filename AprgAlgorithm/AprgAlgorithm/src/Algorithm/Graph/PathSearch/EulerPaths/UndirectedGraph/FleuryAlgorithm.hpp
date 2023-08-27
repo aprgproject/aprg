@@ -20,7 +20,8 @@ public:
     using SetOfEdges = typename GraphTypes<Vertex>::SetOfEdges;
     using GraphToManipulate = UndirectedGraphWithListOfEdges<Vertex>;
 
-    explicit FleuryAlgorithm(BaseUndirectedGraphWithVertex const& graph) : BaseClass(graph), b_graph(BaseClass::m_graph) {}
+    explicit FleuryAlgorithm(BaseUndirectedGraphWithVertex const& graph)
+        : BaseClass(graph), b_graph(BaseClass::m_graph) {}
 
     [[nodiscard]] Path getEulerCycle() const override {
         // Fleury’s Algorithm
@@ -51,7 +52,8 @@ public:
     }
 
 private:
-    [[nodiscard]] bool isStillConnectedAfterRemovingThisEdge(GraphToManipulate const& graph, Edge const& edgeToDelete) const {
+    [[nodiscard]] bool isStillConnectedAfterRemovingThisEdge(
+        GraphToManipulate const& graph, Edge const& edgeToDelete) const {
         // THIS IS COSTLY!
         GraphToManipulate graphWithDeletedEdge(graph);
         graphWithDeletedEdge.disconnect(edgeToDelete.first, edgeToDelete.second);

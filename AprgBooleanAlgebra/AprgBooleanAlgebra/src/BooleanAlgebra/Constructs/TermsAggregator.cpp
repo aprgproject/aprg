@@ -12,7 +12,7 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
-TermsAggregator::TermsAggregator(Terms const& terms) :  m_terms(terms) {}
+TermsAggregator::TermsAggregator(Terms const& terms) : m_terms(terms) {}
 
 Terms const& TermsAggregator::getTermsConstReference() const { return m_terms; }
 

@@ -20,8 +20,8 @@ public:
     [[nodiscard]] Value getMedian() const {
         if (m_container1.empty() && m_container2.empty()) {
             return Value{};
-        }             return getMedianAtLeastOneContainerIsNotEmpty();
-       
+        }
+        return getMedianAtLeastOneContainerIsNotEmpty();
     }
 
 private:
@@ -63,7 +63,9 @@ private:
         return !container1.empty() ? container2 : container1;
     }
 
-    [[nodiscard]] int getTotalOnBothContainers(int const indexOn1) const { return indexOn1 + 1 + getCountOn2(indexOn1); }
+    [[nodiscard]] int getTotalOnBothContainers(int const indexOn1) const {
+        return indexOn1 + 1 + getCountOn2(indexOn1);
+    }
 
     [[nodiscard]] int getCorrespondingIndexOn2(int const indexOn1) const { return getCountOn2(indexOn1) - 1; }
 
@@ -74,15 +76,15 @@ private:
         auto it = std::lower_bound(m_container2.cbegin(), m_container2.cend(), m_container1[indexOn1]);
         if (it != m_container2.cend()) {
             return std::distance(m_container2.cbegin(), it);
-        }             return m_container2.size();
-       
+        }
+        return m_container2.size();
     }
 
     [[nodiscard]] Value getValueAtBorder(int const indexOn1, int const indexOn2) const {
         if (!m_container2.empty()) {
             return std::max(m_container1[indexOn1], m_container2[indexOn2]);
-        }             return m_container1[indexOn1];
-       
+        }
+        return m_container1[indexOn1];
     }
 
     Values const& m_container1;

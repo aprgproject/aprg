@@ -18,7 +18,7 @@ public:
         NodeUniquePointer next;
     };
 
-    LinkedListBag() :  m_first(nullptr) {}
+    LinkedListBag() : m_first(nullptr) {}
 
     [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
 

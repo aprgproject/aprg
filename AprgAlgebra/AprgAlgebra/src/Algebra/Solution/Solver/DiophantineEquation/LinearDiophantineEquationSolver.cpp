@@ -8,7 +8,7 @@ using namespace std;
 
 namespace alba::algebra {
 
-LinearDiophantineEquationSolver::LinearDiophantineEquationSolver()  {}
+LinearDiophantineEquationSolver::LinearDiophantineEquationSolver() {}
 
 MultipleVariableSolutionSet LinearDiophantineEquationSolver::calculateSolutionAndReturnSolutionSet(
     Equation const& equation) {

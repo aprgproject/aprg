@@ -46,7 +46,8 @@ private:
         return m_hornerHashFunction.getHashCode(key.substr(0, m_queryLength));
     }
 
-    [[nodiscard]] HashValue getNextHash(HashValue const currentHash, char const charToRemove, char const charToAdd) const {
+    [[nodiscard]] HashValue getNextHash(
+        HashValue const currentHash, char const charToRemove, char const charToAdd) const {
         // First, subtract value for charToRemove
         HashValue result =
             (currentHash + m_largeRandomPrime - (m_radixRaiseToMatchLengthHash * charToRemove % m_largeRandomPrime)) %

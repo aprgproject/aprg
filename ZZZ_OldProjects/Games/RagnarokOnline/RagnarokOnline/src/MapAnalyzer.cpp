@@ -265,14 +265,12 @@ void MapAnalyzer::sortMaps() {
                             return first.mobCount > second.mobCount;
                         }
                         return first.annoyanceHp < second.annoyanceHp;
-
-                    }                         return first.jobExperiencePotential > second.jobExperiencePotential;
-                   
-                }                     return first.baseExperiencePotential > second.baseExperiencePotential;
-               
-            } 
-                return first.zenyPotential > second.zenyPotential;
-           
+                    }
+                    return first.jobExperiencePotential > second.jobExperiencePotential;
+                }
+                return first.baseExperiencePotential > second.baseExperiencePotential;
+            }
+            return first.zenyPotential > second.zenyPotential;
         });
 }
 

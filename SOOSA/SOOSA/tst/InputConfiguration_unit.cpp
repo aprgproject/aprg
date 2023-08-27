@@ -175,4 +175,4 @@ TEST(InputConfigurationTest, SetFormDetailsTitleWorks) {
     EXPECT_EQ("FormDetailsTitleToTest", inputConfiguration.getFormDetailsTitle());
 }
 
-}  // namespace alba
+}  // namespace alba::soosa

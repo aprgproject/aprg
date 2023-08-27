@@ -24,7 +24,8 @@ bool FileDirectoryDatabase::isFileIncluded(string const& baseDirectory, string c
     for (auto fullPathOfFileFromDatabase : m_files) {
         if (whereItShouldBePath == fullPathOfFileFromDatabase) {
             return true;
-        } if (isFileInFullPath(fullPathOfFileFromDatabase, fileName)) {
+        }
+        if (isFileInFullPath(fullPathOfFileFromDatabase, fileName)) {
             return true;
         }
     }
@@ -53,7 +54,8 @@ string FileDirectoryDatabase::getFullPathOfFile(string const& baseDirectory, str
     for (string fullPathOfFileFromDatabase : m_files) {
         if (whereItShouldBePath == fullPathOfFileFromDatabase) {
             return whereItShouldBePath;
-        } if (isFileInFullPath(fullPathOfFileFromDatabase, fileName)) {
+        }
+        if (isFileInFullPath(fullPathOfFileFromDatabase, fileName)) {
             unsigned int currentLevenshteinDistance =
                 getLevenshteinDistance(whereItShouldBePath, fullPathOfFileFromDatabase);
             int lengthDifference = abs((int)(whereItShouldBePath.length() - fullPathOfFileFromDatabase.length()));

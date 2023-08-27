@@ -29,9 +29,7 @@ bool LogDetails::operator==(LogDetails const& logDetails) const {
     return string1 == string2;
 }
 
-LogStatisticsAnalyzer::LogStatisticsAnalyzer() : m_btsLogPathHandler("") {
-    initializeLogDetailsToCheck();
-}
+LogStatisticsAnalyzer::LogStatisticsAnalyzer() : m_btsLogPathHandler("") { initializeLogDetailsToCheck(); }
 
 void LogStatisticsAnalyzer::saveDataToCsv(string const& csvPath) {
     AlbaLocalPathHandler outputFileHandler(csvPath);

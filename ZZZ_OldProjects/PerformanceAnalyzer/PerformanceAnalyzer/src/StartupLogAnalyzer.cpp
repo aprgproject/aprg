@@ -17,7 +17,7 @@ namespace alba {
 
 StartupLogAnalyzer::StartupLogAnalyzer()
     : m_btsLogPathHandler(""),
-      
+
       m_firstDspToBecomeAvailableTimeDescriptionString("First DSP to become available time: "),
       m_allDspsBecomeAvailableTimeDescriptionString("All DSPs become available time: "),
       m_settingSrioRoutesTimeDescriptionString("Setting SRIO routes time: "),

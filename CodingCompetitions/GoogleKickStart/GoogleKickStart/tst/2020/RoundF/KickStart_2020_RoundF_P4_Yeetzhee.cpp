@@ -83,8 +83,9 @@ double ans(vector<int> a, int tot) {
         return sum <= x;
     };
     double sum = 1;
-    for (auto c : go) { sum += c.second * c.first / m;
-}
+    for (auto c : go) {
+        sum += c.second * c.first / m;
+    }
     double vl = 0, vr = sum;
     int it = 100;
     while ((it--) != 0) {
@@ -93,7 +94,7 @@ double ans(vector<int> a, int tot) {
             vr = vm;
         } else {
             vl = vm;
-}
+        }
     }
     return mp[a] = vr;
 }

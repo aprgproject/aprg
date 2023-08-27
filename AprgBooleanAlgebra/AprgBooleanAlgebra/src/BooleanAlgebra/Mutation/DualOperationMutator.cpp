@@ -11,4 +11,4 @@ void DualOperationMutator::mutateExpression(Expression& expression) {
     BaseMutator::mutateExpression(expression);
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

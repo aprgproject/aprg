@@ -24,9 +24,7 @@ std::string const END_ENTRY_PATTERN = "}])";
 
 namespace alba {
 
-RevisionEditor::RevisionEditor()
-    : 
-      m_sixtyRandomizer(1, 59) {}
+RevisionEditor::RevisionEditor() : m_sixtyRandomizer(1, 59) {}
 
 void RevisionEditor::setRevisionDataFromFile() {
     setDataFromGitHistory();

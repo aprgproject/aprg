@@ -8,4 +8,4 @@ namespace alba::booleanAlgebra {
 
 using BaseTermUniquePointer = std::unique_ptr<BaseTerm>;
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

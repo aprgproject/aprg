@@ -8,8 +8,7 @@ using namespace std;
 
 namespace alba {
 
-AlbaGrepStringEvaluator::AlbaGrepStringEvaluator(string const& condition)
-     {
+AlbaGrepStringEvaluator::AlbaGrepStringEvaluator(string const& condition) {
     extractTokens(condition);
     generateExpressionEvaluatorPostfix();
 

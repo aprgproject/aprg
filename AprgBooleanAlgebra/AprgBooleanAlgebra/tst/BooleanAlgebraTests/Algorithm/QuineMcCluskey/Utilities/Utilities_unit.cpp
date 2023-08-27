@@ -9,4 +9,4 @@ TEST(QuineMcCluskeyUtilitiesTest, GetLogicalValueWorks) {
     EXPECT_EQ(LogicalValue::True, getLogicalValue(true));
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

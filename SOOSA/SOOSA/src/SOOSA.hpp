@@ -142,19 +142,20 @@ private:
         int const numberQuestionsInColumn) const;
     static void retrieveBarPointsThatFitAndSaveToKMeans(
         TwoDimensionKMeans& kMeansForBarPoints, PointAndWidthPairs const& pointsAndWidths,
-        RangeOfDoubles const& minMaxCriteriaForBar) ;
+        RangeOfDoubles const& minMaxCriteriaForBar);
     static void saveQuestionBarCoordinatesFromKMeansWithBarPoints(
         QuestionBarCoordinates& questionBarCoordinates, TwoDimensionKMeans const& kMeansForBarPoints,
-        int const numberQuestionsInColumn) ;
+        int const numberQuestionsInColumn);
 
     // Widths functions
     [[nodiscard]] RangeOfDoubles getMinMaxCriteriaForBar(PointAndWidthPairs const& pointAndWidthPairs) const;
     static RangeOfDoubles getMinMaxCriteriaForBar(
-        OneDimensionStatistics& firstGroupStatistics, OneDimensionStatistics& secondGroupStatistics) ;
+        OneDimensionStatistics& firstGroupStatistics, OneDimensionStatistics& secondGroupStatistics);
     static OneDimensionKMeans getKMeansForWidths(PointAndWidthPairs const& pointAndWidthPairs);
     [[nodiscard]] PointAndWidthPairs getAcceptablePointAndWidthPairs(
         BitmapSnippet const& snippet, Line const& line, Point const& startPoint, Point const& endPoint) const;
-    [[nodiscard]] Point getNearestBlackPointFromLine(BitmapSnippet const& snippet, Line const& line, Point const& pointInLine) const;
+    [[nodiscard]] Point getNearestBlackPointFromLine(
+        BitmapSnippet const& snippet, Line const& line, Point const& pointInLine) const;
     [[nodiscard]] Point getLeftOrRightMostBlackPoint(
         BitmapSnippet const& snippet, Point const& nearestBlackPoint, Line const& perpendicularLine,
         int const maxLineAndBarWidth, int const sign) const;
@@ -179,8 +180,8 @@ private:
     void addAndRetainBarPointsIfPossible(
         TwoDimensionKMeans& kMeansForBarPoints, GroupOfTwoDimensionSamples const& listOfGroupOfBarPoints,
         int const indexToRemove) const;
-    [[nodiscard]] static OneDimensionSamples getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints) ;
-    [[nodiscard]] static double getHeight(TwoDimensionSamples const& barPoints) ;
+    [[nodiscard]] static OneDimensionSamples getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints);
+    [[nodiscard]] static double getHeight(TwoDimensionSamples const& barPoints);
 
     // output related functions
     [[nodiscard]] std::string getCsvFilePath(std::string const& path) const;

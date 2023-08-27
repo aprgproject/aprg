@@ -28,8 +28,7 @@ using namespace std;
 namespace alba::algebra {
 
 TermsOverTerms::TermsOverTerms()
-    : 
-      m_shouldSimplifyToFactors(false),
+    : m_shouldSimplifyToFactors(false),
       m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails()) {}
 
 TermsOverTerms::TermsOverTerms(TermsWithDetails const& termsInMultiplicationAndDivision)

@@ -26,7 +26,8 @@ public:
     [[nodiscard]] PenCircleDetails getPenCircleDetails(BitmapXY const& point) const;
     [[nodiscard]] PointToPenCircleDetailsMap const& getPenCircles() const;
     [[nodiscard]] CircleCenterConnections const& getCenterConnections() const;
-    [[nodiscard]] PointAndPenCircleDetailsPairs getNearestPenCirclesToAPoint(BitmapXY const& point, int const distance) const;
+    [[nodiscard]] PointAndPenCircleDetailsPairs getNearestPenCirclesToAPoint(
+        BitmapXY const& point, int const distance) const;
 
     PointToPenCircleDetailsMap& getPenCirclesReference();
 

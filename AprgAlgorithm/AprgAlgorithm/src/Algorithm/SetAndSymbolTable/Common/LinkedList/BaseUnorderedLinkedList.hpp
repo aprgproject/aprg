@@ -17,7 +17,7 @@ public:
     using TraverseFunctionWithNoChange = std::function<void(Node const&, bool&)>;
     using TraverseFunctionWithChange = std::function<void(Node&, bool&)>;
 
-    BaseUnorderedLinkedList() :  m_first(nullptr) {}
+    BaseUnorderedLinkedList() : m_first(nullptr) {}
 
     ~BaseUnorderedLinkedList() override = default;  // no need for virtual destructor because base destructor is virtual
                                                     // (similar to other virtual functions)

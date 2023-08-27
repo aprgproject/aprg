@@ -1,9 +1,8 @@
 #include "ModuleTest.hpp"
 
 ModuleTest::ModuleTest()
-    : 
-      m_findings(),
-      
+    : m_findings(),
+
       m_termTranslator(MT_FILE_READER_TEST_FILE, m_findings, m_terms),
       m_termAnalyzer(m_terms, m_database, m_findings) {}
 

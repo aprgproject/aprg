@@ -9,7 +9,7 @@ class Lcg {
 public:
     Lcg(unsigned int const lcgId, unsigned int const percentageShare);
     bool operator<(Lcg const& lcg) const;
-    [[nodiscard]] unsigned int getLcgId[[nodiscard]] () const;
+    [[nodiscard]] unsigned int getLcgId [[nodiscard]] () const;
     [[nodiscard]] unsigned int getPercentageShare() const;
 
 private:

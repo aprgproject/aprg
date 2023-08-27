@@ -83,7 +83,9 @@ public:
     }
 
 private:
-    [[nodiscard]] Index getSquareRootSize(Index const numberOfValues) const { return static_cast<Index>(sqrt(numberOfValues)); }
+    [[nodiscard]] Index getSquareRootSize(Index const numberOfValues) const {
+        return static_cast<Index>(sqrt(numberOfValues));
+    }
 
     [[nodiscard]] Ranges getValidRangesAndSortForMoAlgorithm(Ranges const& ranges) const {
         Ranges result;
@@ -108,8 +110,8 @@ private:
             Index blockIndex2 = range2.first / blockSize;
             if (blockIndex1 == blockIndex2) {
                 return range1.second < range2.second;
-            }                 return blockIndex1 < blockIndex2;
-           
+            }
+            return blockIndex1 < blockIndex2;
         });
         return result;
     }

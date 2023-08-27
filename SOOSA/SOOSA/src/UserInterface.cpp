@@ -76,4 +76,4 @@ void UserInterface::saveFormDetailsFromFormDetailPath(string const& formDetailsF
     }
 }
 
-}  // namespace alba
+}  // namespace alba::soosa

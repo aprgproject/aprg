@@ -22,7 +22,9 @@ public:
         initializeIfNeeded();
     }
 
-    [[nodiscard]] Vertex getAncestor(Vertex const& child, int const distance) const { return getAncestorInternal(child, distance); }
+    [[nodiscard]] Vertex getAncestor(Vertex const& child, int const distance) const {
+        return getAncestorInternal(child, distance);
+    }
 
 private:
     [[nodiscard]] Vertex getAncestorInternal(Vertex const& vertex, int const distance) const {

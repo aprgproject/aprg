@@ -108,7 +108,8 @@ private:
                     m_lowIndex = interpolatedIndex;
                     m_highIndex = interpolatedIndex;
                     break;
-                } if (target > valueAtInterpolatedIndex) {
+                }
+                if (target > valueAtInterpolatedIndex) {
                     m_lowIndex = interpolatedIndex;
                 } else if (target < valueAtInterpolatedIndex) {
                     m_highIndex = interpolatedIndex;

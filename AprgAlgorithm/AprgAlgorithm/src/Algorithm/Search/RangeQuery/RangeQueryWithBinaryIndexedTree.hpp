@@ -105,7 +105,9 @@ private:
         return result;
     }
 
-    [[nodiscard]] Index getGreatestPowerOf2Factor(Index const index) const { return mathHelper::getGreatestPowerOf2Factor(index); }
+    [[nodiscard]] Index getGreatestPowerOf2Factor(Index const index) const {
+        return mathHelper::getGreatestPowerOf2Factor(index);
+    }
 
     Values m_values;
     Values m_partialTreeSums;

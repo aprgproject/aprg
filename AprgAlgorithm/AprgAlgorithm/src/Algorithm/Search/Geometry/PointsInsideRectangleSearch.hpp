@@ -9,24 +9,24 @@ template <typename Key>
 bool isEqualThanWithDepth(Key const& key1, Key const& key2, int const depth) {
     if (mathHelper::isOdd(depth)) {
         return key1.first == key2.first;
-    }         return key1.second == key2.second;
-   
+    }
+    return key1.second == key2.second;
 }
 
 template <typename Key>
 bool isLessThanWithDepth(Key const& key1, Key const& key2, int const depth) {
     if (mathHelper::isOdd(depth)) {
         return key1.first < key2.first;
-    }         return key1.second < key2.second;
-   
+    }
+    return key1.second < key2.second;
 }
 
 template <typename Key>
 bool isGreaterThanWithDepth(Key const& key1, Key const& key2, int const depth) {
     if (mathHelper::isOdd(depth)) {
         return key1.first > key2.first;
-    }         return key1.second > key2.second;
-   
+    }
+    return key1.second > key2.second;
 }
 
 template <typename Unit>
@@ -73,15 +73,15 @@ private:
     [[nodiscard]] inline bool shouldGoToLeftChild(Point const& point, int const depth) const {
         if (mathHelper::isOdd(depth)) {
             return m_rectangleBottomLeft.first < point.first;
-        }             return m_rectangleBottomLeft.second < point.second;
-       
+        }
+        return m_rectangleBottomLeft.second < point.second;
     }
 
     [[nodiscard]] inline bool shouldGoToRightChild(Point const& point, int const depth) const {
         if (mathHelper::isOdd(depth)) {
             return m_rectangleTopRight.first > point.first;
-        }             return m_rectangleTopRight.second > point.second;
-       
+        }
+        return m_rectangleTopRight.second > point.second;
     }
 
     [[nodiscard]] inline bool isInsideRectangle(Point const& point) const {

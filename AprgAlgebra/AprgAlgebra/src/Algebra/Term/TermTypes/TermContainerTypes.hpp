@@ -16,4 +16,4 @@ using VariableNamesSet = std::set<std::string>;
 using FunctionsSet = std::set<Function>;
 using TermSet = std::set<Term>;
 
-}  // namespace alba
+}  // namespace alba::algebra

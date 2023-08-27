@@ -12,9 +12,7 @@ class DoublingSizeCircularQueue : public BaseQueue<Object> {
 public:
     static constexpr int MINUMUM_CONTAINER_SIZE = 1;
 
-    DoublingSizeCircularQueue() :  m_objects(nullptr) {
-        initialize(MINUMUM_CONTAINER_SIZE);
-    }
+    DoublingSizeCircularQueue() : m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
 
     ~DoublingSizeCircularQueue() { deleteAllObjects(); }
 
@@ -23,8 +21,8 @@ public:
     [[nodiscard]] int getSize() const override {
         if (m_firstIndex <= m_afterLastIndex) {
             return m_afterLastIndex - m_firstIndex;
-        }             return m_containerSize - m_firstIndex + m_afterLastIndex;
-       
+        }
+        return m_containerSize - m_firstIndex + m_afterLastIndex;
     }
 
     void enqueue(Object const& object) override {

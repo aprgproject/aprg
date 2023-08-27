@@ -2,9 +2,9 @@
 
 namespace alba::algebra {
 
-TermsRaiseToTerms::TermsRaiseToTerms()  {}
+TermsRaiseToTerms::TermsRaiseToTerms() {}
 
 TermsRaiseToTerms::TermsRaiseToTerms(BaseToExponentMap const& baseToExponentMap)
     : TermsRaiseToTermsBase(baseToExponentMap) {}
 
-}  // namespace alba
+}  // namespace alba::algebra

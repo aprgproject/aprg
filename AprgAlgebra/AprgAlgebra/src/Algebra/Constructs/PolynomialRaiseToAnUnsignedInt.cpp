@@ -11,8 +11,7 @@ using namespace std;
 
 namespace alba::algebra {
 
-PolynomialRaiseToAnUnsignedInt::PolynomialRaiseToAnUnsignedInt(Polynomial const& polynomial)
-    : m_base(polynomial) {
+PolynomialRaiseToAnUnsignedInt::PolynomialRaiseToAnUnsignedInt(Polynomial const& polynomial) : m_base(polynomial) {
     PolynomialToNumberMap factorsToExponent;
     Monomial commonMonomialInBase(1, {});
     factorizeAndUpdateCommonMonomialAndFactorsToExponent(polynomial, factorsToExponent, commonMonomialInBase);

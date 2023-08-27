@@ -10,8 +10,7 @@ using namespace std;
 namespace alba::algebra {
 
 SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::
-    SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever(strings const& variableNames)
-     {
+    SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever(strings const& variableNames) {
     initializeWithVariableNames(variableNames);
 }
 

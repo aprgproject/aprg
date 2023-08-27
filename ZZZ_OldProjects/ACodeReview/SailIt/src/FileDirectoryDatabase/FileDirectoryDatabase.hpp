@@ -15,7 +15,7 @@ public:
     [[nodiscard]] string getFullPathOfFile(string const& baseDirectory, string const& fileName) const;
     SetOfFiles& getSetOfFilesReference();
     SetOfDirectories& getSetOfDirectoriesReference();
-    [[nodiscard]] static bool isFileInFullPath(string const& fullPathFromDatabase, string const& fileName) ;
+    [[nodiscard]] static bool isFileInFullPath(string const& fullPathFromDatabase, string const& fileName);
 
     void allowNonExistentDirectories();
     void addFileOrDirectory(string const& fileOrDirectory);

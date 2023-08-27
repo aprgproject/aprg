@@ -52,7 +52,7 @@ private:
 
 class Invoker {
 public:
-    Invoker()  {}
+    Invoker() {}
 
     void setCommand(Command* command) { m_command = command; }
 

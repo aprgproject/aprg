@@ -20,10 +20,7 @@ class DataBlocks {
 public:
     DataBlocks(
         AlbaLargeSorterConfiguration const& configuration, BlockCache& memoryCache, BlockCache& fileStreamOpenedCache)
-        : m_configuration(configuration),
-          m_memoryCache(memoryCache),
-          m_fileStreamOpenedCache(fileStreamOpenedCache)
-          {
+        : m_configuration(configuration), m_memoryCache(memoryCache), m_fileStreamOpenedCache(fileStreamOpenedCache) {
         initializeDataBlocks();
     }
     [[nodiscard]] bool isEmpty() const {

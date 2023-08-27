@@ -4,4 +4,4 @@ namespace alba::algebra {
 
 enum class LimitAtAValueApproachType { BothSides, PositiveSide, NegativeSide };
 
-}  // namespace alba
+}  // namespace alba::algebra

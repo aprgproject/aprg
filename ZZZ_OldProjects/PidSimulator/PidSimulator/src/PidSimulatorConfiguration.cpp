@@ -7,8 +7,8 @@ using namespace std;
 namespace alba {
 
 PidSimulatorConfiguration::PidSimulatorConfiguration(stringHelper::strings const& argumentsInMain)
-    
-      {
+
+{
     std::map<std::string, std::string> argumentsToValuesMap;
     processArgumentsWithEqualDelimeter(argumentsToValuesMap, argumentsInMain);
     saveArgumentValues(argumentsToValuesMap);

@@ -10,7 +10,7 @@ namespace alba {
 
 namespace booleanAlgebra::Simplification {
 
-SimplificationOfExpression::SimplificationOfExpression()  {}
+SimplificationOfExpression::SimplificationOfExpression() {}
 
 SimplificationOfExpression::SimplificationOfExpression(Expression const& expression) : m_expression(expression) {}
 

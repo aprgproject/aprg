@@ -12,4 +12,4 @@ using Samples = std::vector<Sample>;
 
 PairOfDoubles getMinMaxFromSamples(Samples const& samples);
 
-}  // namespace alba
+}  // namespace alba::OneDimensionsStatistics

@@ -24,8 +24,7 @@ public:
         : BaseClass(graph, startVertex),
           b_graph(BaseClass::m_graph),
           b_startVertex(BaseClass::m_startVertex),
-          b_vertexToEdgeWithBestWeightMap(BaseClass::m_vertexToEdgeWithBestWeightMap)
-          {
+          b_vertexToEdgeWithBestWeightMap(BaseClass::m_vertexToEdgeWithBestWeightMap) {
         // searchForPathUsingOriginalBellmanFord(); // this is inefficient because of manual cycle detection
         searchForPathUsingAutomaticCycleDetection();
     }

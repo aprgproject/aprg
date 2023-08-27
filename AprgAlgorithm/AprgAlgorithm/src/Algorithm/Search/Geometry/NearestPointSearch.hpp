@@ -12,24 +12,24 @@ template <typename Key>
 bool isEqualThanWithDepth(Key const& key1, Key const& key2, int const depth) {
     if (mathHelper::isOdd(depth)) {
         return key1.first == key2.first;
-    }         return key1.second == key2.second;
-   
+    }
+    return key1.second == key2.second;
 }
 
 template <typename Key>
 bool isLessThanWithDepth(Key const& key1, Key const& key2, int const depth) {
     if (mathHelper::isOdd(depth)) {
         return key1.first < key2.first;
-    }         return key1.second < key2.second;
-   
+    }
+    return key1.second < key2.second;
 }
 
 template <typename Key>
 bool isGreaterThanWithDepth(Key const& key1, Key const& key2, int const depth) {
     if (mathHelper::isOdd(depth)) {
         return key1.first > key2.first;
-    }         return key1.second > key2.second;
-   
+    }
+    return key1.second > key2.second;
 }
 
 template <typename Unit>

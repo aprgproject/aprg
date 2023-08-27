@@ -8,4 +8,4 @@ namespace alba::algebra {
 
 TEST(BaseTermTest, ConstructionWorks) { BaseTerm(); }
 
-}  // namespace alba
+}  // namespace alba::algebra

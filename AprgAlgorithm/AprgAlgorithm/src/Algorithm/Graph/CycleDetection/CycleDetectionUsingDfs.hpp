@@ -19,7 +19,8 @@ public:
     using VertexToVertexMap = typename GraphTypes<Vertex>::VertexToVertexMap;
     using VertexToVertexStateMap = std::map<Vertex, VertexState>;
 
-    explicit CycleDetectionUsingDfs(BaseGraphWithVertex const& graph) : m_graph(graph), m_searchType(SearchType::Unknown) {}
+    explicit CycleDetectionUsingDfs(BaseGraphWithVertex const& graph)
+        : m_graph(graph), m_searchType(SearchType::Unknown) {}
 
     Paths getAllCycles() {
         initialize();
@@ -106,7 +107,8 @@ private:
             if (SearchType::OneCycle == m_searchType && hasACycle()) {
                 // this check is needed to prune all recursion instances once cycle has been detected
                 break;
-            } if (VertexState::NotProcessed == adjacentVertexState) {
+            }
+            if (VertexState::NotProcessed == adjacentVertexState) {
                 m_vertexToPreviousVertexMap[adjacentVertex] = startVertex;
                 searchUsingDfsWithDirectedGraph(adjacentVertex);
             } else if (VertexState::Processing == adjacentVertexState) {
@@ -124,7 +126,8 @@ private:
             if (SearchType::OneCycle == m_searchType && hasACycle()) {
                 // this check is needed to end all recursion instances once cycle has been detected
                 break;
-            } if (VertexState::NotProcessed == adjacentVertexState) {
+            }
+            if (VertexState::NotProcessed == adjacentVertexState) {
                 m_vertexToPreviousVertexMap[adjacentVertex] = startVertex;
                 searchUsingDfsWithUndirectedGraph(adjacentVertex, startVertex);
             } else if (previousVertex != adjacentVertex && VertexState::Processing == adjacentVertexState) {

@@ -7,4 +7,4 @@ namespace alba::algebra::Factorization {
 Terms factorizeTerm(Term const& term);
 Terms factorizeTerms(Terms const& terms);
 
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

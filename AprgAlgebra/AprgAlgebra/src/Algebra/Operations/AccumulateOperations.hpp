@@ -10,4 +10,4 @@ void accumulateTermsForAdditionAndSubtraction(Term& combinedTerm, TermsWithDetai
 void accumulateTermsForMultiplicationAndDivision(Term& combinedTerm, TermsWithDetails const& termsToCombine);
 void accumulateTermsForRaiseToPower(Term& combinedTerm, TermsWithDetails const& termsToCombine);
 
-}  // namespace alba
+}  // namespace alba::algebra

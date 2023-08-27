@@ -12,4 +12,4 @@ public:
     void retrieveFromVariableTerm(VariableTerm const& variableTerm) override;
 };
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

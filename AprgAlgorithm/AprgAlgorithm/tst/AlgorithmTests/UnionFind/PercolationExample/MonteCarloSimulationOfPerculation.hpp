@@ -15,8 +15,7 @@ namespace alba::algorithm {
 template <int DIMENSION>
 class MonteCarloSimulationOfPerculation {
 public:
-    MonteCarloSimulationOfPerculation()
-        :  m_unionFindOfIndexes(),  m_randomizer(0, getDimensionsSquared() - 1) {}
+    MonteCarloSimulationOfPerculation() : m_unionFindOfIndexes(), m_randomizer(0, getDimensionsSquared() - 1) {}
 
     [[nodiscard]] bool isPercolated() const {
         return m_unionFindOfIndexes.isConnected(getVirtualTopIndex(), getVirtualBottomIndex());

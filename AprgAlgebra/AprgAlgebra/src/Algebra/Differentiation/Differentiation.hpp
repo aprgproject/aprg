@@ -47,7 +47,8 @@ private:
     [[nodiscard]] Term differentiateTermsInAdditionOrSubtraction(Expression const& expression) const;
     [[nodiscard]] Term differentiateTermsInMultiplicationOrDivision(Expression const& expression) const;
     [[nodiscard]] Term differentiateByProcessingAsPolynomialsOverPolynomials(Term const& term) const;
-    [[nodiscard]] Term differentiateTermsInMultiplicationOrDivisionTermByTerm(TermsWithDetails const& termsWithDetails) const;
+    [[nodiscard]] Term differentiateTermsInMultiplicationOrDivisionTermByTerm(
+        TermsWithDetails const& termsWithDetails) const;
     [[nodiscard]] Term differentiateTermsInRaiseToPower(Expression const& expression) const;
     [[nodiscard]] Term differentiateNonChangingTermRaiseToChangingTerm(Term const& base, Term const& exponent) const;
     [[nodiscard]] Term differentiateChangingTermRaiseToNonChangingTerm(Term const& base, Term const& exponent) const;

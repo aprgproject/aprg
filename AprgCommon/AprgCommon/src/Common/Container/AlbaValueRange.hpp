@@ -27,9 +27,13 @@ public:
 
     [[nodiscard]] bool isEmpty() const { return m_startValue == 0 && m_endValue == 0 && m_intervalMagnitude == 0; }
 
-    [[nodiscard]] bool isValueInsideInclusive(DataType const value) const { return getMinimum() <= value && getMaximum() >= value; }
+    [[nodiscard]] bool isValueInsideInclusive(DataType const value) const {
+        return getMinimum() <= value && getMaximum() >= value;
+    }
 
-    [[nodiscard]] bool isValueInsideExclusive(DataType const value) const { return getMinimum() < value && getMaximum() > value; }
+    [[nodiscard]] bool isValueInsideExclusive(DataType const value) const {
+        return getMinimum() < value && getMaximum() > value;
+    }
 
     [[nodiscard]] DataType getStartValue() const { return m_startValue; }
 
@@ -39,13 +43,17 @@ public:
 
     [[nodiscard]] DataType getMaximum() const { return std::max(m_startValue, m_endValue); }
 
-    [[nodiscard]] AlbaValueRangeType getRangeType() const { return getRangeTypeFromStartAndEnd(m_startValue, m_endValue); }
+    [[nodiscard]] AlbaValueRangeType getRangeType() const {
+        return getRangeTypeFromStartAndEnd(m_startValue, m_endValue);
+    }
 
     [[nodiscard]] DataType getInterval() const { return getIntervalWithSign(m_intervalMagnitude, getRangeType()); }
 
     [[nodiscard]] DataType getIntervalMagnitude() const { return m_intervalMagnitude; }
 
-    [[nodiscard]] TerminationCondition getTerminationCondition() const { return getTerminationCondition(getRangeType()); }
+    [[nodiscard]] TerminationCondition getTerminationCondition() const {
+        return getTerminationCondition(getRangeType());
+    }
 
     [[nodiscard]] DataType getDelta() const {
         DataType delta(m_endValue - m_startValue);
@@ -125,7 +133,8 @@ private:
         return intervalWithSign;
     }
 
-    [[nodiscard]] AlbaValueRangeType getRangeTypeFromStartAndEnd(DataType const startValue, DataType const endValue) const {
+    [[nodiscard]] AlbaValueRangeType getRangeTypeFromStartAndEnd(
+        DataType const startValue, DataType const endValue) const {
         AlbaValueRangeType rangeType(AlbaValueRangeType::Unknown);
         if (startValue == endValue) {
             rangeType = AlbaValueRangeType::Once;

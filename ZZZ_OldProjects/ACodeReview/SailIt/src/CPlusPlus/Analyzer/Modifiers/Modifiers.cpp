@@ -22,7 +22,8 @@ bool TermAnalyzer::isModifiedDueToUpdatedIdentifiers(
                 replaceTermWithMacroEquivalent(replaceLooper, m_database.getMacroReference(identifierName));
                 temporaryFindings.copyCurrentFindings(m_findings);
                 return true;
-            } if (m_database.isNamespaceWithAlias(identifierName)) {
+            }
+            if (m_database.isNamespaceWithAlias(identifierName)) {
                 term.setTermType(TermType::Namespace);
             } else if (m_database.isClassWithAlias(identifierName)) {
                 term.setTermType(TermType::Class);

@@ -52,11 +52,11 @@ protected:
             char c(keyToCheck[index]);
             if (c < currentNodePointer->c) {
                 return getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->left, keyToCheck, index);
-            } if (c > currentNodePointer->c) {
+            }
+            if (c > currentNodePointer->c) {
                 return getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->right, keyToCheck, index);
-            } 
-                return getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->mid, keyToCheck, index + 1);
-           
+            }
+            return getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->mid, keyToCheck, index + 1);
         }
         return index;
     }

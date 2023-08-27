@@ -10,7 +10,7 @@ using namespace codeReview;
 using namespace std;
 
 struct TermTranslatorTest : public ::testing::Test {
-    TermTranslatorTest() : m_findings(),  m_termTranslator(MT_FILE_READER_TEST_FILE, m_findings, m_terms) {}
+    TermTranslatorTest() : m_findings(), m_termTranslator(MT_FILE_READER_TEST_FILE, m_findings, m_terms) {}
 
     void processFile() {
         m_termTranslator.readFile();

@@ -8,4 +8,4 @@ void accumulateTerms(Term& combinedTerm, Terms const& termsToCombine, OperatorLe
 void accumulateTermsWithAndOperation(Term& combinedTerm, Terms const& termsToCombine);
 void accumulateTermsWithOrOperation(Term& combinedTerm, Terms const& termsToCombine);
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

@@ -24,7 +24,7 @@ public:
     using NodePointer = std::unique_ptr<Node>;
 
     RangeQueryWithDynamicSegmentTree(Values const& valuesToCheck, Function const& functionObject)
-        :  m_numberOfValues(valuesToCheck.size()), m_function(functionObject) {
+        : m_numberOfValues(valuesToCheck.size()), m_function(functionObject) {
         initialize(valuesToCheck);
     }
 

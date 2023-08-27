@@ -281,7 +281,8 @@ bool Audio<T>::decodeWaveFile(vector<uint8_t>& fileDataBytes) {
                 sampleAsInt = (fileDataBytes[sampleIndex + 2] << 16) | (fileDataBytes[sampleIndex + 1] << 8) |
                               fileDataBytes[sampleIndex];
 
-                if ((sampleAsInt & 0x800000) != 0) {  //  if the 24th bit is set, this is a negative number in 24-bit world
+                if ((sampleAsInt & 0x800000) !=
+                    0) {  //  if the 24th bit is set, this is a negative number in 24-bit world
                     sampleAsInt = sampleAsInt | ~0xFFFFFF;  // so make sure sign is extended to the 32 bit float
                 }
 
@@ -384,7 +385,8 @@ bool Audio<T>::decodeAiffFile(vector<uint8_t>& fileDataBytes) {
                 sampleAsInt = (fileDataBytes[sampleIndex] << 16) | (fileDataBytes[sampleIndex + 1] << 8) |
                               fileDataBytes[sampleIndex + 2];
 
-                if ((sampleAsInt & 0x800000) != 0) {  //  if the 24th bit is set, this is a negative number in 24-bit world
+                if ((sampleAsInt & 0x800000) !=
+                    0) {  //  if the 24th bit is set, this is a negative number in 24-bit world
                     sampleAsInt = sampleAsInt | ~0xFFFFFF;  // so make sure sign is extended to the 32 bit float
                 }
 

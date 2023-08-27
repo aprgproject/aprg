@@ -6,4 +6,4 @@ void VariableNamesRetriever::retrieveFromVariableTerm(VariableTerm const& variab
     m_savedData.emplace(variableTerm.getVariableTermName());
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

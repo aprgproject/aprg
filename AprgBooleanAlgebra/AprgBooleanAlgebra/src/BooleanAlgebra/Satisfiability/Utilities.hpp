@@ -11,4 +11,4 @@ int getSatisfiabilityLevel(SatisfiabilityTerms const& satTerms);
 SatisfiabilityTerms getSatisfiabilityTerms(Term const& term);
 SatisfiabilityTerms getSatisfiabilityTerms(Expression const& expression);
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

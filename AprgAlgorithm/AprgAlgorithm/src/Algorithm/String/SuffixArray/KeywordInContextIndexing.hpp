@@ -8,7 +8,8 @@ namespace alba::algorithm {
 template <typename Index>
 class KeywordInContextIndexing {
 public:
-    explicit KeywordInContextIndexing(std::string const& searchSpace) : m_searchSpace(searchSpace), m_suffixArray(searchSpace) {}
+    explicit KeywordInContextIndexing(std::string const& searchSpace)
+        : m_searchSpace(searchSpace), m_suffixArray(searchSpace) {}
 
     stringHelper::strings getKeywordInContextIndexing(std::string const& stringToCheck, Index const lengthOfContext) {
         stringHelper::strings result;

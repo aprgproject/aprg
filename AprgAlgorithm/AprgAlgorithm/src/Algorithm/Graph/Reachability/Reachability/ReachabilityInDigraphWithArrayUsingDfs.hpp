@@ -18,7 +18,9 @@ public:
         initialize();
     }
 
-    [[nodiscard]] bool isReachable(Vertex const& destinationVertex) const override { return m_isReachableArray[destinationVertex]; }
+    [[nodiscard]] bool isReachable(Vertex const& destinationVertex) const override {
+        return m_isReachableArray[destinationVertex];
+    }
 
 private:
     [[nodiscard]] bool isNotFound(Vertex const& vertex) const { return !m_isReachableArray[vertex]; }

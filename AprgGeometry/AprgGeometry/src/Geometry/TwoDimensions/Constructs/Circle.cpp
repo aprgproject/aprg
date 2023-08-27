@@ -12,13 +12,12 @@ using namespace std;
 
 namespace alba::TwoDimensions {
 
-Circle::Circle() :  m_radius(0), m_radiusSquared(0) {}
+Circle::Circle() : m_radius(0), m_radiusSquared(0) {}
 
 Circle::Circle(Point const& center, double const radius)
     : m_center(center), m_radius(radius), m_radiusSquared(radius * radius) {}
 
-Circle::Circle(double const a, double const d, double const e, double const f)
-    :  m_radius(0), m_radiusSquared(0) {
+Circle::Circle(double const a, double const d, double const e, double const f) : m_radius(0), m_radiusSquared(0) {
     determineAndSaveCenterAndRadiusFromCoefficients(a, d, e, f);
 }
 

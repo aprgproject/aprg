@@ -420,4 +420,4 @@ void checkAnswersForSpecialUnitsPattern3(SOOSA const& soosa) {
 
 void checkAnswersForEmptyForm(SOOSA const& soosa) { EXPECT_EQ(0, soosa.getNumberOfAnswers()); }
 
-}  // namespace alba
+}  // namespace alba::soosa

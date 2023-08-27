@@ -4,7 +4,7 @@ using namespace std;
 
 namespace alba::TwoDimensions {
 
-Rectangle::Rectangle()  {}
+Rectangle::Rectangle() {}
 
 Rectangle::Rectangle(Point const& topLeft, Point const& bottomRight)
     : Quadrilateral{

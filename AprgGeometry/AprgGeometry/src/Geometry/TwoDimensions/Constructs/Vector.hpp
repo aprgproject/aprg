@@ -7,4 +7,4 @@ namespace alba::TwoDimensions {
 
 using Vector = AlbaMathVector<double, 2>;
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

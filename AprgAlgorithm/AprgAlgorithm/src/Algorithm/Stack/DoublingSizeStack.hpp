@@ -12,7 +12,7 @@ class DoublingSizeStack : public BaseStack<Object> {
 public:
     static constexpr int MINUMUM_CONTAINER_SIZE = 1;
 
-    DoublingSizeStack() :  m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
+    DoublingSizeStack() : m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
 
     ~DoublingSizeStack() { deleteAllObjects(); }
 

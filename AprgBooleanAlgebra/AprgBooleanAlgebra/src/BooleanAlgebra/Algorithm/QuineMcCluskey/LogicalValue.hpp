@@ -4,4 +4,4 @@ namespace alba::booleanAlgebra {
 
 enum class LogicalValue { True, False, DontCare };
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

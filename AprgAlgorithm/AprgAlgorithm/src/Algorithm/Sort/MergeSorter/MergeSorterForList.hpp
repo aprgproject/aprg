@@ -40,7 +40,7 @@ private:
         auto middle = values.cbegin();
         for (int count = 0; count < halfSize && middle != values.cend(); middle++, count++) {
             ;
-}
+        }
         return middle;
     }
 

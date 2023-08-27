@@ -14,4 +14,4 @@ TEST(ThreeDimensionsPointTest, PointsCanBeCreated) {
     EXPECT_EQ(300, point.getZ());
 }
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

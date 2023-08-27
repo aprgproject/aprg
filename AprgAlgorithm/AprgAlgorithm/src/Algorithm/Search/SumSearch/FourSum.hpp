@@ -61,7 +61,8 @@ private:
                 if (currentSum == targetSum) {
                     result = {sumOfPairOfValues[lowIndex], sumOfPairOfValues[highIndex]};
                     break;
-                } if (currentSum > targetSum) {
+                }
+                if (currentSum > targetSum) {
                     highIndex--;
                 } else if (currentSum < targetSum) {
                     lowIndex++;

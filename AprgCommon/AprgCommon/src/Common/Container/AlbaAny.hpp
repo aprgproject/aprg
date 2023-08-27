@@ -14,7 +14,7 @@ namespace alba {
 class AlbaAny {
     // This requires copy constructor and default constructor on ContentType
 public:
-    AlbaAny() :  m_typeId(EMPTY_TYPE_ID) {}
+    AlbaAny() : m_typeId(EMPTY_TYPE_ID) {}
 
     template <typename ContentType>
     explicit AlbaAny(ContentType const& content)  // copy constructor for other ContentType

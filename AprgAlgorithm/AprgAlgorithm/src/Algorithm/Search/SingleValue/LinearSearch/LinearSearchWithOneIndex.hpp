@@ -34,7 +34,8 @@ public:
     }
 
 private:
-    [[nodiscard]] Index getIndexOfValueWithoutCheck(Index const startIndex, Index const endIndex, Value const& target) const {
+    [[nodiscard]] Index getIndexOfValueWithoutCheck(
+        Index const startIndex, Index const endIndex, Value const& target) const {
         Index result(INVALID_INDEX);
         auto it = std::find(m_values.cbegin() + startIndex, m_values.cbegin() + endIndex + 1, target);
         if (it != m_values.cbegin() + endIndex + 1) {

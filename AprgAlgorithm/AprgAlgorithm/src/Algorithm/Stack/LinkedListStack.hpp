@@ -17,7 +17,7 @@ public:
         NodeUniquePointer next;  // one pointer overhead for every item
     };
 
-    LinkedListStack() :  m_first(nullptr) {}
+    LinkedListStack() : m_first(nullptr) {}
 
     [[nodiscard]] bool isEmpty() const override { return m_first == nullptr; }
 

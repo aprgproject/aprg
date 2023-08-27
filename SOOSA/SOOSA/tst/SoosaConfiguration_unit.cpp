@@ -59,4 +59,4 @@ TEST(SoosaConfigurationTest, LoadConfigurationFromFileWorks) {
     EXPECT_DOUBLE_EQ(0.40, soosaConfiguration.getMinimumPercentageOfBlackPixelsForAFilledCircle());
 }
 
-}  // namespace alba
+}  // namespace alba::soosa

@@ -42,7 +42,8 @@ public:
                 if (valueAtLower == target) {
                     result = std::distance(m_values.cbegin(), itLower);
                     break;
-                } if (valueAtHigher == target) {
+                }
+                if (valueAtHigher == target) {
                     result = std::distance(m_values.cbegin(), itHigher);
                     break;
                 } else {

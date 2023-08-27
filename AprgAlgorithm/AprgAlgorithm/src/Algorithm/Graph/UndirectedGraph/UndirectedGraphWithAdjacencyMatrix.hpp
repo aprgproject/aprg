@@ -13,7 +13,7 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using AdjacencyMatrix = matrix::AlbaMatrix<bool>;
 
-    UndirectedGraphWithAdjacencyMatrix() :  m_adjacencyMatrix(MAX_VERTEX_VALUE, MAX_VERTEX_VALUE) {}
+    UndirectedGraphWithAdjacencyMatrix() : m_adjacencyMatrix(MAX_VERTEX_VALUE, MAX_VERTEX_VALUE) {}
 
     [[nodiscard]] bool isEmpty() const override { return m_numberOfEdges == 0; }
 

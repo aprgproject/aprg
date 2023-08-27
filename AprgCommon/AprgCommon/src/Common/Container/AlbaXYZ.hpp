@@ -66,7 +66,9 @@ public:
         return *this;
     }
 
-    [[nodiscard]] bool isEmpty() const { return CoordinateType{} == m_x && CoordinateType{} == m_y && CoordinateType{} == m_z; }
+    [[nodiscard]] bool isEmpty() const {
+        return CoordinateType{} == m_x && CoordinateType{} == m_y && CoordinateType{} == m_z;
+    }
 
     [[nodiscard]] CoordinateType getX() const { return m_x; }
 

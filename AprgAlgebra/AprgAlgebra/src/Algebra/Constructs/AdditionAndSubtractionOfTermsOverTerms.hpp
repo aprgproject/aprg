@@ -12,7 +12,8 @@ public:
     [[nodiscard]] TermAssociationTypes const& getAssociations() const;
     [[nodiscard]] Expression getCombinedExpression() const;
     [[nodiscard]] Terms getLcmOfDenominatorTerms() const;
-    [[nodiscard]] Terms getRevisedNumeratorTermsBasedOnLcmOnIndex(int itemIndex, Terms const& lcmOfDenominatorTerms) const;
+    [[nodiscard]] Terms getRevisedNumeratorTermsBasedOnLcmOnIndex(
+        int itemIndex, Terms const& lcmOfDenominatorTerms) const;
 
     void putAsAddition(TermsOverTerms const& addend);
     void putAsSubtraction(TermsOverTerms const& subtrahend);
@@ -29,7 +30,8 @@ private:
     static void emplaceNonMonomialMultipliers(Terms& numeratorTerms, Terms const& nonMonomialMultiplierTerms);
     [[nodiscard]] Expression getCombinedNumeratorExpression(Terms const& lcmDenominatorTerms) const;
     static Expression getCombinedDenominatorExpression(Terms const& lcmDenominatorTerms);
-    [[nodiscard]] Expression getCombinedExpressionForNumeratorOnIndex(int numeratorIndex, Terms const& lcmDenominatorTerms) const;
+    [[nodiscard]] Expression getCombinedExpressionForNumeratorOnIndex(
+        int numeratorIndex, Terms const& lcmDenominatorTerms) const;
     static void combineExpressionAsAddOrSubtract(
         Expression& combinedExpression, Expression const& expression, TermAssociationType const association);
     static TermsOverTerms getSimplifiedTermsOverTerms(TermsOverTerms const& termsOverTerms);

@@ -9,4 +9,4 @@ struct LowerAndHigherValues {
     AlbaNumber higherValue;
 };
 
-}  // namespace alba
+}  // namespace alba::algebra

@@ -104,8 +104,9 @@ bool CheckerHelpers::isSingleLineOrMultiLineComment(TermType const termType) {
 }
 
 bool CheckerHelpers::isStopForTermSimplification(Term const& term) {
-    if (TermType::Macro == term.getTermType()) { return true;
-}
+    if (TermType::Macro == term.getTermType()) {
+        return true;
+    }
     vector<string> operators{";", ")", "}"};
     return isIncludedInTheList(operators, term.getString());
 }

@@ -11,4 +11,4 @@ UnsignedInteger getNumberOfSymmetricCombinationsUsingBurnsideLemma(
 UnsignedInteger getNumberOfCombinationsOfAPearlNecklace(
     UnsignedInteger const numberOfPearls, UnsignedInteger const& numberOfColors);
 
-}  // namespace alba
+}  // namespace alba::math

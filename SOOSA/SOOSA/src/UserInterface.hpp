@@ -21,4 +21,4 @@ private:
     AlbaUserInterface m_userInterface;
 };
 
-}  // namespace alba
+}  // namespace alba::soosa

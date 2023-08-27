@@ -38,7 +38,7 @@ public:
     using StepCount = int;
 
     RangeQueryWithPersistentDynamicSegmentTree(Values const& valuesToCheck, Function const& functionObject)
-        :  m_numberOfValues(valuesToCheck.size()), m_function(functionObject) {
+        : m_numberOfValues(valuesToCheck.size()), m_function(functionObject) {
         initialize(valuesToCheck);
     }
 

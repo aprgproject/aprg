@@ -8,8 +8,7 @@ using namespace alba::mathHelper;
 namespace alba::algebra {
 
 LinearDiophantineEquationCoefficientSolver::LinearDiophantineEquationCoefficientSolver(
-    AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c)
-     {
+    AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c) {
     solve(a, b, c);
 }
 

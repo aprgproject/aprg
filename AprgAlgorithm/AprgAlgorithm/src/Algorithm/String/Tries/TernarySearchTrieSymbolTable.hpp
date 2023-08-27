@@ -91,17 +91,19 @@ protected:
             char c(keyToCheck[index]);
             if (c < currentNodePointer->c) {
                 return getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->left, keyToCheck, index);
-            } if (c > currentNodePointer->c) {
+            }
+            if (c > currentNodePointer->c) {
                 return getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->right, keyToCheck, index);
-            }                 int lengthWithValue = 0;
-                if (currentNodePointer->valueUniquePointer) {
-                    lengthWithValue = index + 1;
-                }
-                return std::max(
-                    lengthWithValue,
-                    getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->mid, keyToCheck, index + 1));
-           
-        } if (index == static_cast<int>(keyToCheck.length())) {
+            }
+            int lengthWithValue = 0;
+            if (currentNodePointer->valueUniquePointer) {
+                lengthWithValue = index + 1;
+            }
+            return std::max(
+                lengthWithValue,
+                getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->mid, keyToCheck, index + 1));
+        }
+        if (index == static_cast<int>(keyToCheck.length())) {
             return index;
         }
         return 0;

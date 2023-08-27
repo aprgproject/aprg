@@ -24,7 +24,8 @@ public:
     KdTree() = default;
 
 protected:
-    [[nodiscard]] bool doesContainStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const override {
+    [[nodiscard]] bool doesContainStartingOnThisNode(
+        NodeUniquePointer const& nodePointer, Key const& key) const override {
         static int depth = 0;
         depth++;
         bool result(false);

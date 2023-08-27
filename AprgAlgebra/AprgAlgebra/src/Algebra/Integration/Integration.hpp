@@ -249,7 +249,7 @@ private:
     static Configuration getConfigurationWithCombiningRadicals();
 
     // Initialize and Finalize steps
-    static void finalizeTermForIntegration(Term& term) ;
+    static void finalizeTermForIntegration(Term& term);
 
     // Miscellaneous
     [[nodiscard]] bool isVariableToIntegrate(std::string const& variableName) const;

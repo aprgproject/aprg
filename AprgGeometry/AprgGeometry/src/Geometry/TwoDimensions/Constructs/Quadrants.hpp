@@ -4,4 +4,4 @@ namespace alba::TwoDimensions {
 
 enum class Quadrant { Invalid, I, II, III, IV };
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

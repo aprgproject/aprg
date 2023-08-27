@@ -20,14 +20,16 @@ public:
     using Keys = std::vector<Key>;
     using HashTable = std::array<UnorderedLinkedList, HASH_TABLE_SIZE>;
 
-    BaseSeparateChainingHash()  {}
+    BaseSeparateChainingHash() {}
 
     ~BaseSeparateChainingHash() override = default;  // no need for virtual destructor because base destructor is
                                                      // virtual (similar to other virtual functions)
 
     [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
 
-    [[nodiscard]] bool doesContain(Key const& key) const override { return m_smallerSymbolTables[getHash(key)].doesContain(key); }
+    [[nodiscard]] bool doesContain(Key const& key) const override {
+        return m_smallerSymbolTables[getHash(key)].doesContain(key);
+    }
 
     [[nodiscard]] int getSize() const override { return m_size; }
 

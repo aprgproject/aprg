@@ -5,7 +5,7 @@ using namespace std;
 
 namespace alba::ThreeDimensions {
 
-EllipticHyperboloid::EllipticHyperboloid() :  m_aValue(0), m_bValue(0), m_cValue(0), m_oneWithSign(0) {}
+EllipticHyperboloid::EllipticHyperboloid() : m_aValue(0), m_bValue(0), m_cValue(0), m_oneWithSign(0) {}
 
 EllipticHyperboloid::EllipticHyperboloid(
     Point const& center, double const aCoefficient, double const bCoefficient, double const cCoefficient,

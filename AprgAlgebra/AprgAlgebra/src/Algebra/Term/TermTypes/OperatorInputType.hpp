@@ -4,4 +4,4 @@ namespace alba::algebra {
 
 enum class OperatorInputType { Unknown, UnaryOperation, BinaryOperation };
 
-}  // namespace alba
+}  // namespace alba::algebra

@@ -29,7 +29,8 @@ public:
     [[nodiscard]] double getAUnitIncreaseInY() const;
     [[nodiscard]] Point getAPoint() const;
     [[nodiscard]] Points getPoints(Point const& first, Point const& second, double const interval) const;
-    [[nodiscard]] Points getPointsWithoutLastPoint(Point const& first, Point const& second, double const interval) const;
+    [[nodiscard]] Points getPointsWithoutLastPoint(
+        Point const& first, Point const& second, double const interval) const;
     [[nodiscard]] double calculateYFromX(double const x) const;
     [[nodiscard]] double calculateXFromY(double const y) const;
 

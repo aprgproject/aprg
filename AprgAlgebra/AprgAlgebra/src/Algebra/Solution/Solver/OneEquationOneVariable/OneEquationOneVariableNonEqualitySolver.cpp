@@ -10,8 +10,7 @@ using namespace std;
 
 namespace alba::algebra {
 
-OneEquationOneVariableNonEqualitySolver::OneEquationOneVariableNonEqualitySolver()
-     {}
+OneEquationOneVariableNonEqualitySolver::OneEquationOneVariableNonEqualitySolver() {}
 
 void OneEquationOneVariableNonEqualitySolver::calculateSolution(SolutionSet& solutionSet, Equation const& equation) {
     if (!equation.getEquationOperator().isEqual()) {

@@ -23,7 +23,7 @@ namespace alba {
 
 namespace algebra::Simplification {
 
-SimplificationOfExpression::SimplificationOfExpression()  {}
+SimplificationOfExpression::SimplificationOfExpression() {}
 
 SimplificationOfExpression::SimplificationOfExpression(Expression const& expression) : m_expression(expression) {}
 

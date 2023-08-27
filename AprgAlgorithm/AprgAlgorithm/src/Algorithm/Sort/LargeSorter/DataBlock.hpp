@@ -21,10 +21,7 @@ class DataBlock {
 
 public:
     DataBlock(DataBlockType const blockType, int const blockNumber, std::string const& fileDumpPath)
-        : m_blockType(blockType),
-          m_blockId(blockNumber),
-          m_fileDumpPath(fileDumpPath)
-          {
+        : m_blockType(blockType), m_blockId(blockNumber), m_fileDumpPath(fileDumpPath) {
         switch (blockType) {
             case DataBlockType::Empty:
                 break;

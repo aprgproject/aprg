@@ -15,4 +15,4 @@ TEST(ColorStatisticsTest, DISABLED_GatherAndSaveStatistics) {
     gatherAndSaveColorStatistics(bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\JohnMayerDark.bmp)");
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

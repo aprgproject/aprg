@@ -28,7 +28,8 @@ void accumulateTermsWithAndOperation(Term& combinedTerm, Terms const& termsToCom
             }
             if (willHaveNoEffectOnAndOperation(term)) {
                 continue;
-            } if (isFirst) {
+            }
+            if (isFirst) {
                 combinedTerm = term;
                 isFirst = false;
             } else {
@@ -53,7 +54,8 @@ void accumulateTermsWithOrOperation(Term& combinedTerm, Terms const& termsToComb
             }
             if (willHaveNoEffectOnOrOperation(term)) {
                 continue;
-            } if (isFirst) {
+            }
+            if (isFirst) {
                 combinedTerm = term;
                 isFirst = false;
             } else {

@@ -8,4 +8,4 @@ public:
     virtual ~BaseTermData() = default;  // virtual destructor because it needs to be polymorphically deleted
 };
 
-}  // namespace alba
+}  // namespace alba::algebra

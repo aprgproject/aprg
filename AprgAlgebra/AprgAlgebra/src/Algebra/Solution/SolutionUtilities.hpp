@@ -14,4 +14,4 @@ void retrieveInitialValuesForIteratingMethods(AlbaNumbersSet& allValues, Term co
 
 AlbaNumbers getInitialValuesForIteratingMethods(Equation const& equation);
 
-}  // namespace alba
+}  // namespace alba::algebra

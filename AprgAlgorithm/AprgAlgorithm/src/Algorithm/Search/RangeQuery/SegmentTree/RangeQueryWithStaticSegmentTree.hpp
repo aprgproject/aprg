@@ -50,7 +50,8 @@ public:
         return getValueOnIntervalFromBottomToTop(start, end);
     }
 
-    [[nodiscard]] Value getValueOnIntervalFromTopToBottom(Index const start, Index const end) const  // top to bottom approach
+    [[nodiscard]] Value getValueOnIntervalFromTopToBottom(
+        Index const start, Index const end) const  // top to bottom approach
     {
         // This has log(N) running time
         Value result{};
@@ -67,7 +68,8 @@ public:
         changeValueAtIndexFromBottomToTop(index, newValue);
     }
 
-    [[nodiscard]] Index getIndexWithTargetValue(Index const start, Value const targetValue, Function const& inverseFunction) const {
+    [[nodiscard]] Index getIndexWithTargetValue(
+        Index const start, Value const targetValue, Function const& inverseFunction) const {
         Index result(-1);
         Index startTreeIndex = m_startOfChildren + start;
         if (startTreeIndex < static_cast<Index>(m_treeValues.size())) {
@@ -215,28 +217,32 @@ protected:
         if (targetValue == m_treeValues[treeIndex]) {
             if (leftChild < static_cast<int>(m_treeValues.size()) && targetValue == m_treeValues[leftChild]) {
                 return getIndexWithTargetValueInternal(leftChild, targetValue, inverseFunction);
-            } if (rightChild < static_cast<int>(m_treeValues.size())) {
+            }
+            if (rightChild < static_cast<int>(m_treeValues.size())) {
                 return getIndexWithTargetValueInternal(
                     rightChild, inverseFunction(targetValue, m_treeValues[leftChild]), inverseFunction);
-            } if (leftChild < static_cast<int>(m_treeValues.size())) {
+            }
+            if (leftChild < static_cast<int>(m_treeValues.size())) {
                 return getIndexWithTargetValueInternal(leftChild, targetValue, inverseFunction);
-            }                 return treeIndex;
-           
-        } if (leftChild < static_cast<int>(m_treeValues.size()) && targetValue <= m_treeValues[leftChild]) {
+            }
+            return treeIndex;
+        }
+        if (leftChild < static_cast<int>(m_treeValues.size()) && targetValue <= m_treeValues[leftChild]) {
             return getIndexWithTargetValueInternal(leftChild, targetValue, inverseFunction);
-        } if (
-            rightChild < static_cast<int>(m_treeValues.size()) &&
+        }
+        if (rightChild < static_cast<int>(m_treeValues.size()) &&
             targetValue <= m_treeValues[leftChild] + m_treeValues[rightChild]) {
             return getIndexWithTargetValueInternal(
                 rightChild, inverseFunction(targetValue, m_treeValues[leftChild]), inverseFunction);
-        } if (targetValue <= m_treeValues[treeIndex]) {
+        }
+        if (targetValue <= m_treeValues[treeIndex]) {
             // do nothing
         } else if (treeIndex > 0) {
             if (Utilities::isALeftChild(treeIndex)) {
                 return getIndexWithTargetValueInternal(parent, targetValue, inverseFunction);
-            }                 return getIndexWithTargetValueInternal(
-                    parent, m_function(m_treeValues[Utilities::getLeftChild(parent)], targetValue), inverseFunction);
-           
+            }
+            return getIndexWithTargetValueInternal(
+                parent, m_function(m_treeValues[Utilities::getLeftChild(parent)], targetValue), inverseFunction);
         }
         return result;
     }

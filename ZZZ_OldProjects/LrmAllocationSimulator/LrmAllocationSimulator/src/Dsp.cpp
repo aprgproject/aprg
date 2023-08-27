@@ -4,10 +4,10 @@ using namespace std;
 
 namespace alba {
 DspDetails::DspDetails()
-    
-      {}
 
-Dsp::Dsp()  {}
+{}
+
+Dsp::Dsp() {}
 
 Dsp::Dsp(DspDetails const& dspDetails) : m_dspDetails(dspDetails) {}
 

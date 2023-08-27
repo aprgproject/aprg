@@ -28,7 +28,7 @@ public:
     void saveNewRevisionHistory() const;
 
 private:
-    static RevisionEntry getRevisionEntry(std::string const& line) ;
+    static RevisionEntry getRevisionEntry(std::string const& line);
     static AlbaDateTime getDateTime(std::string const& date);
     static DaysInterval createDaysInterval(
         uint32_t const year1, uint32_t const month1, uint32_t const day1, uint32_t const year2, uint32_t const month2,

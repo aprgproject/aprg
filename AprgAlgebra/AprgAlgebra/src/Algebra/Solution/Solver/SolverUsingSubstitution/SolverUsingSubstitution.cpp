@@ -11,7 +11,7 @@ using namespace std;
 
 namespace alba::algebra {
 
-SolverUsingSubstitution::SolverUsingSubstitution()  {}
+SolverUsingSubstitution::SolverUsingSubstitution() {}
 
 MultipleVariableSolutionSets SolverUsingSubstitution::calculateSolutionAndReturnSolutionSet(
     Equations const& equations) {

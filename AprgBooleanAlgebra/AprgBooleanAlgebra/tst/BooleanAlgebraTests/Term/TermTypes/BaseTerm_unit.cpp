@@ -8,4 +8,4 @@ namespace alba::booleanAlgebra {
 
 TEST(BaseTermTest, ConstructionWorks) { BaseTerm(); }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

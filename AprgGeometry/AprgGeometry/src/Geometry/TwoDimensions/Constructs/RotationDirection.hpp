@@ -4,4 +4,4 @@ namespace alba::TwoDimensions {
 
 enum class RotationDirection { Collinear, ClockWise, CounterClockWise };
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

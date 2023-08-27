@@ -4,8 +4,7 @@ using namespace std;
 
 namespace alba::algebra {
 
-SingleVariableNameRetriever::SingleVariableNameRetriever()
-     {}
+SingleVariableNameRetriever::SingleVariableNameRetriever() {}
 
 std::string const& SingleVariableNameRetriever::getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty() const {
     return m_singleVariableName;

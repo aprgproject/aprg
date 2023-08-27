@@ -27,8 +27,7 @@ AlbaDateTime convertSinceEpochTimeToAlbaDateTime(LibraryTime const& inputTime) {
         static_cast<uint32_t>(microsecondsSinceEpoch % AlbaDateTimeConstants::NUMBER_OF_MICROSECONDS_IN_A_SECOND);
     auto remainingSeconds =
         static_cast<uint32_t>(microsecondsSinceEpoch / AlbaDateTimeConstants::NUMBER_OF_MICROSECONDS_IN_A_SECOND);
-    auto remainingDays =
-        static_cast<uint32_t>(remainingSeconds / AlbaDateTimeConstants::NUMBER_OF_SECONDS_IN_A_DAY);
+    auto remainingDays = static_cast<uint32_t>(remainingSeconds / AlbaDateTimeConstants::NUMBER_OF_SECONDS_IN_A_DAY);
     remainingSeconds = remainingSeconds % AlbaDateTimeConstants::NUMBER_OF_SECONDS_IN_A_DAY;
 
     return AlbaDateTime::createFromTotalDaysAndSecondsAndMicroSeconds(

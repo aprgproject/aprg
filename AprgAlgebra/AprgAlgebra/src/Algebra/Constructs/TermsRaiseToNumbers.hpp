@@ -12,4 +12,4 @@ public:
     explicit TermsRaiseToNumbers(BaseToExponentMap const& baseToExponentMap);
 };
 
-}  // namespace alba
+}  // namespace alba::algebra

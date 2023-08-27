@@ -22,8 +22,7 @@ class AlbaLargeSorter {
 
 public:
     explicit AlbaLargeSorter(AlbaLargeSorterConfiguration const& configuration)
-        : 
-          m_configuration(configuration),
+        : m_configuration(configuration),
           m_memoryCache(),
           m_fileStreamOpenedCache(),
           m_blocks(m_configuration, m_memoryCache, m_fileStreamOpenedCache) {

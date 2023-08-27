@@ -9,8 +9,7 @@ using namespace std;
 
 namespace alba::math {
 
-ChineseRemainderTheorem::ChineseRemainderTheorem(UnsignedIntegers const& numbers, UnsignedIntegers const& modulos)
-     {
+ChineseRemainderTheorem::ChineseRemainderTheorem(UnsignedIntegers const& numbers, UnsignedIntegers const& modulos) {
     solve(numbers, modulos);
 }
 

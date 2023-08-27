@@ -2,9 +2,9 @@
 
 namespace alba {
 
-FspDetails::FspDetails()  {}
+FspDetails::FspDetails() {}
 
-Fsp::Fsp()  {}
+Fsp::Fsp() {}
 
 Fsp::Fsp(FspDetails const& fspDetails) : m_fspDetails(fspDetails) {}
 

@@ -29,11 +29,13 @@ public:
     using Coordinate = std::pair<int, NodeId>;
     using Coordinates = std::vector<Coordinate>;
 
-    RWayTrieUsingMatrix() :   m_nodePointerMatrix(RADIX, MAX_NUMBER_IDS) {}
+    RWayTrieUsingMatrix() : m_nodePointerMatrix(RADIX, MAX_NUMBER_IDS) {}
 
     [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
 
-    [[nodiscard]] bool doesContain(Key const& key) const override { return static_cast<bool>(getValuePointer(0, key, 0)); }
+    [[nodiscard]] bool doesContain(Key const& key) const override {
+        return static_cast<bool>(getValuePointer(0, key, 0));
+    }
 
     [[nodiscard]] int getSize() const override { return m_size; }
 
@@ -163,7 +165,8 @@ private:
         return result;
     }
 
-    [[nodiscard]] ValueUniquePointer getValuePointer(NodeId const nodeId, Key const& key, int const startingIndex) const {
+    [[nodiscard]] ValueUniquePointer getValuePointer(
+        NodeId const nodeId, Key const& key, int const startingIndex) const {
         ValueUniquePointer result;
         NodeId currentNodeId(nodeId);
         for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); keyIndex++) {
@@ -187,7 +190,8 @@ private:
         return result;
     }
 
-    [[nodiscard]] int getLengthOfLongestPrefix(NodeId const nodeId, Key const& keyToCheck, int const startingIndex) const {
+    [[nodiscard]] int getLengthOfLongestPrefix(
+        NodeId const nodeId, Key const& keyToCheck, int const startingIndex) const {
         int currentLongestLength(0);
         NodeId currentNodeId(nodeId);
         for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(keyToCheck.length()); keyIndex++) {

@@ -76,26 +76,28 @@ int calc(int s, ll ban, int a, int b, int who) {
         if (can_move(ban, a)) {
             int score = -1e9;
             for (int x : g[a]) {
-                if (((ban >> x) & 1) != 0) { continue;
-}
+                if (((ban >> x) & 1) != 0) {
+                    continue;
+                }
                 ll go = ban | (1ll << x);
                 score = max(score, calc(s, go, x, b, 1) + 1);
             }
             return ok[s][a][b][who][ban] = score;
-        }             return ok[s][a][b][who][ban] = calc(s, ban, a, b, 1);
-       
-    }         if (can_move(ban, b)) {
-            int score = 1e9;
-            for (int x : g[b]) {
-                if (((ban >> x) & 1) != 0) { continue;
-}
-                ll go = ban | (1ll << x);
-                score = min(score, calc(s, go, a, x, 0) - 1);
+        }
+        return ok[s][a][b][who][ban] = calc(s, ban, a, b, 1);
+    }
+    if (can_move(ban, b)) {
+        int score = 1e9;
+        for (int x : g[b]) {
+            if (((ban >> x) & 1) != 0) {
+                continue;
             }
-            return ok[s][a][b][who][ban] = score;
-        }             return ok[s][a][b][who][ban] = calc(s, ban, a, b, 0);
-       
-   
+            ll go = ban | (1ll << x);
+            score = min(score, calc(s, go, a, x, 0) - 1);
+        }
+        return ok[s][a][b][who][ban] = score;
+    }
+    return ok[s][a][b][who][ban] = calc(s, ban, a, b, 0);
 }
 
 void runTestCase(int const testCaseNumber) {

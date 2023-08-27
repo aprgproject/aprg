@@ -14,4 +14,4 @@ TEST(SummationSeriesOfArithmeticSeriesTest, IsConvergentWorks) {
     EXPECT_FALSE(seriesWithDifferenceLessThanOne.isConvergent());
 }
 
-}  // namespace alba
+}  // namespace alba::algebra

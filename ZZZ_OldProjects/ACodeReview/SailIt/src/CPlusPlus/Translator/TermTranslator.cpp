@@ -23,7 +23,7 @@ constexpr char TermTranslator::APOSTROPHE_STRING[];
 TermTranslator::TermTranslator(string const& fileName, Findings& findings, DequeOfTerms& dequeOfTerms)
     : m_fileStream(fileName.c_str()),
       m_albaFileReader(m_fileStream),
-      
+
       m_findings(findings),
       m_termBuilder(dequeOfTerms),
       m_stringOfOperators{KEYWORD_OPERATORS, THREE_CHAR_OPERATORS, TWO_CHAR_OPERATORS, ONE_CHAR_OPERATORS},
@@ -57,7 +57,7 @@ void TermTranslator::readFile() {
             if (isNotNpos(index)) {
                 while (getCPlusPlusTerm(lineString, index)) {
                     ;
-}
+                }
             }
             m_termBuilder.addNewLine();
         }
@@ -120,8 +120,9 @@ bool TermTranslator::hasMacro(string& lineString, int& index) {
             int start = index;
             // stlalgorithm
             for (; index < length; index++) {
-                if (!isLetter(lineString[index])) { break;
-}
+                if (!isLetter(lineString[index])) {
+                    break;
+                }
             }
             m_termBuilder.addMacro(string("#") + lineString.substr(start, index - start));
             return true;
@@ -186,8 +187,9 @@ bool TermTranslator::hasWord(string& lineString, int& index) {
     if (isLetterOrNumberOrUnderscore(lineString[index])) {
         int start = index;
         for (; index < length; index++) {
-            if (!isLetterOrNumberOrUnderscore(lineString[index])) { break;
-}
+            if (!isLetterOrNumberOrUnderscore(lineString[index])) {
+                break;
+            }
         }
 
         string word(lineString.substr(start, index - start));
@@ -238,8 +240,9 @@ string TermTranslator::getLine() {
 }
 
 bool TermTranslator::isEqualToFirstTwoCharacters(string const& lineString, int& index, string const& stringToCheck) {
-    if (!isLessThanStringLength(lineString, index + 1)) { return false;
-}
+    if (!isLessThanStringLength(lineString, index + 1)) {
+        return false;
+    }
     return stringToCheck == lineString.substr(index, 2);
 }
 

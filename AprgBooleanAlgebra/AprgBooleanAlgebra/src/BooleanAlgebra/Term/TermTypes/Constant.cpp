@@ -12,7 +12,9 @@ bool Constant::operator==(Constant const& second) const { return m_booleanValue 
 
 bool Constant::operator!=(Constant const& second) const { return m_booleanValue != second.m_booleanValue; }
 
-bool Constant::operator<(Constant const& second) const { return static_cast<int>(m_booleanValue) < static_cast<int>(second.m_booleanValue); }
+bool Constant::operator<(Constant const& second) const {
+    return static_cast<int>(m_booleanValue) < static_cast<int>(second.m_booleanValue);
+}
 
 Constant Constant::operator~() const {
     Constant result(*this);

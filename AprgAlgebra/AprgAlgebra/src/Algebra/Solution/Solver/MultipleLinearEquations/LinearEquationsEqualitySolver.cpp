@@ -12,7 +12,7 @@ using namespace std;
 
 namespace alba::algebra {
 
-LinearEquationsEqualitySolver::LinearEquationsEqualitySolver()  {}
+LinearEquationsEqualitySolver::LinearEquationsEqualitySolver() {}
 
 MultipleVariableSolutionSet LinearEquationsEqualitySolver::calculateSolutionAndReturnSolutionSet(
     Equations const& equations) {

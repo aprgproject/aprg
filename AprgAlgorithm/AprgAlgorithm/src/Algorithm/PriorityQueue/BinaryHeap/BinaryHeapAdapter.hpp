@@ -13,7 +13,9 @@ public:
 
     explicit BinaryHeapAdapter(Objects& objects) : m_comparator(), m_objects(objects) {}
 
-    [[nodiscard]] Object const& getObjectOnTree(int const treeIndex) const { return m_objects[getContainerIndex(treeIndex)]; }
+    [[nodiscard]] Object const& getObjectOnTree(int const treeIndex) const {
+        return m_objects[getContainerIndex(treeIndex)];
+    }
 
     Object& getObjectReferenceOnTree(int const treeIndex) { return m_objects[getContainerIndex(treeIndex)]; }
 
@@ -63,10 +65,13 @@ public:
 
     [[nodiscard]] inline int getFirstChildIndex(int const treeIndex) const { return treeIndex * NUMBER_OF_CHILDREN; }
 
-    [[nodiscard]] inline int getLastChildIndex(int const treeIndex) const { return (treeIndex + 1) * NUMBER_OF_CHILDREN - 1; }
+    [[nodiscard]] inline int getLastChildIndex(int const treeIndex) const {
+        return (treeIndex + 1) * NUMBER_OF_CHILDREN - 1;
+    }
 
 private:
-    [[nodiscard]] inline int getChildIndexThatWouldMostBreakTheHeapOrder(int const treeIndex, int const treeSize) const {
+    [[nodiscard]] inline int getChildIndexThatWouldMostBreakTheHeapOrder(
+        int const treeIndex, int const treeSize) const {
         int firstChildIndex(getFirstChildIndex(treeIndex));
         int lastPossibleChildIndex(std::min(getLastChildIndex(treeIndex), treeSize));
         int significantChildIndex = firstChildIndex;
@@ -80,7 +85,9 @@ private:
         return significantChildIndex;
     }
 
-    [[nodiscard]] bool isInHeapOrder(Object const& child, Object const& parent) const { return m_comparator(child, parent); }
+    [[nodiscard]] bool isInHeapOrder(Object const& child, Object const& parent) const {
+        return m_comparator(child, parent);
+    }
 
     Comparator m_comparator;  // Heap order: isInHeapOrder(child, parent) is true,
                               // so std::less -> MaxPriority and std::greater -> MinPriority

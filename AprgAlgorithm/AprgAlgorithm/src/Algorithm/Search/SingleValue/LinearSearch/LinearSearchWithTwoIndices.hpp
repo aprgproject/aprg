@@ -34,7 +34,8 @@ public:
     }
 
 private:
-    [[nodiscard]] Index getIndexOfValueWithoutCheck(Index const startIndex, Index const endIndex, Value const& target) const {
+    [[nodiscard]] Index getIndexOfValueWithoutCheck(
+        Index const startIndex, Index const endIndex, Value const& target) const {
         Index result(INVALID_INDEX);
         for (auto itLower = m_values.cbegin() + startIndex, itHigher = m_values.cbegin() + endIndex;
              itLower <= itHigher; itLower++, itHigher--) {
@@ -43,7 +44,8 @@ private:
             if (valueAtLower == target) {
                 result = std::distance(m_values.cbegin(), itLower);
                 break;
-            } if (valueAtHigher == target) {
+            }
+            if (valueAtHigher == target) {
                 result = std::distance(m_values.cbegin(), itHigher);
                 break;
             }

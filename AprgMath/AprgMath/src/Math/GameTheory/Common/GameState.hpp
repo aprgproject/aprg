@@ -7,4 +7,4 @@ namespace alba::math {
 
 enum class GameState { Losing, Winning };
 
-}  // namespace alba
+}  // namespace alba::math

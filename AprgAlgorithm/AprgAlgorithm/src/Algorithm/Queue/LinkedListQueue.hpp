@@ -17,7 +17,7 @@ public:
         NodeUniquePointer next;
     };
 
-    LinkedListQueue() :  m_first(nullptr), m_nextOfLastDoublePointer(&m_first) {}
+    LinkedListQueue() : m_first(nullptr), m_nextOfLastDoublePointer(&m_first) {}
 
     [[nodiscard]] bool isEmpty() const override { return m_first == nullptr; }
 

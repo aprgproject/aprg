@@ -94,7 +94,8 @@ protected:
             if (shouldStop())  // needs to stop here to prune all dfs recursion instances
             {
                 break;
-            } if (m_processedVertices.isNotFound(adjacentVertex)) {
+            }
+            if (m_processedVertices.isNotFound(adjacentVertex)) {
                 traverseUsingDfs(currentPath, adjacentVertex);
             }
         }

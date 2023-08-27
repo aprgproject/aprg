@@ -17,7 +17,8 @@ public:
     static Term integrate(Function const& functionObject);
 
     [[nodiscard]] Term integrateWithPlusC(Term const& term) const;
-    [[nodiscard]] Term integrateAtDefiniteValues(Term const& term, AlbaNumber const& lowerEnd, AlbaNumber const& higherEnd) const;
+    [[nodiscard]] Term integrateAtDefiniteValues(
+        Term const& term, AlbaNumber const& lowerEnd, AlbaNumber const& higherEnd) const;
 
     [[nodiscard]] Term integrateTerm(Term const& term) const;
     [[nodiscard]] Monomial integrateConstant(Constant const& constant) const;
@@ -31,10 +32,14 @@ private:
     // For Monomial and Polynomial
     [[nodiscard]] Monomial integrateMonomialInFallingPower(Monomial const& monomial) const;
     [[nodiscard]] Polynomial integratePolynomialInFallingPower(Polynomial const& polynomial) const;
-    [[nodiscard]] Polynomial convertMonomialWithPositiveExponentsFromRegularPowerToFallingPower(Monomial const& monomial) const;
-    [[nodiscard]] Polynomial convertMonomialWithPositiveExponentsFromFallingPowerToRegularPower(Monomial const& monomial) const;
-    [[nodiscard]] Polynomial convertPolynomialWithPositiveExponentsFromRegularPowerToFallingPower(Polynomial const& polynomial) const;
-    [[nodiscard]] Polynomial convertPolynomialWithPositiveExponentsFromFallingPowerToRegularPower(Polynomial const& polynomial) const;
+    [[nodiscard]] Polynomial convertMonomialWithPositiveExponentsFromRegularPowerToFallingPower(
+        Monomial const& monomial) const;
+    [[nodiscard]] Polynomial convertMonomialWithPositiveExponentsFromFallingPowerToRegularPower(
+        Monomial const& monomial) const;
+    [[nodiscard]] Polynomial convertPolynomialWithPositiveExponentsFromRegularPowerToFallingPower(
+        Polynomial const& polynomial) const;
+    [[nodiscard]] Polynomial convertPolynomialWithPositiveExponentsFromFallingPowerToRegularPower(
+        Polynomial const& polynomial) const;
 
     // For Expression
     [[nodiscard]] Term integrateAsTermOrExpressionIfNeeded(Expression const& expression) const;

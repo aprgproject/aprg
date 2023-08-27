@@ -34,9 +34,12 @@ public:
 private:
     void determineAndSaveCenterAndRadiusFromCoefficients(
         double const a, double const d, double const e, double const f);
-    [[nodiscard]] Points getPointsInTraversingXAndY(double const signOfX, double const signOfY, double const interval) const;
-    [[nodiscard]] Points getPointsInTraversingY(double const signOfX, double const signOfY, double const interval) const;
-    [[nodiscard]] Points getPointsInTraversingX(double const signOfX, double const signOfY, double const interval) const;
+    [[nodiscard]] Points getPointsInTraversingXAndY(
+        double const signOfX, double const signOfY, double const interval) const;
+    [[nodiscard]] Points getPointsInTraversingY(
+        double const signOfX, double const signOfY, double const interval) const;
+    [[nodiscard]] Points getPointsInTraversingX(
+        double const signOfX, double const signOfY, double const interval) const;
 
     friend std::ostream& operator<<(std::ostream& out, Circle const& circle);
 

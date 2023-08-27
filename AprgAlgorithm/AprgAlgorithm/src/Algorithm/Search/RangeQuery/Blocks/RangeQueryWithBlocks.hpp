@@ -36,7 +36,7 @@ public:
         Values const& valuesToCheck, Index const suggestedNumberOfBlocks, ValuesFunction const& valuesFunction,
         BlockValuesFunction const& blockValuesFunction)
         : m_values(valuesToCheck),
-          
+
           m_blocks(),
           m_valuesFunction(valuesFunction),
           m_blockValuesFunction(blockValuesFunction) {

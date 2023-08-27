@@ -139,4 +139,4 @@ void SoosaConfiguration::readNamesAndValuesFromFile(string const& filePath) {
     }
 }
 
-}  // namespace alba
+}  // namespace alba::soosa

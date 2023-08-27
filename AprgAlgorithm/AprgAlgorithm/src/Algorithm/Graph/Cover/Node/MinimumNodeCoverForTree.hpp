@@ -58,8 +58,8 @@ private:
             Count result = std::min(countIfVertexIsIncluded, countIfVertexIsNotIncluded);
             vertexToCountMap.emplace(vertex, result);
             return result;
-        }             return it->second;
-       
+        }
+        return it->second;
     }
 
     SetOfVerticesWithVertex getMinimumNodeCoverUsingMemoizationDP(
@@ -84,11 +84,11 @@ private:
             if (setIfVertexIsIncluded.size() <= setIfVertexIsNotIncluded.size()) {
                 vertexToMinimumSetMap.emplace(vertex, setIfVertexIsIncluded);
                 return setIfVertexIsIncluded;
-            }                 vertexToMinimumSetMap.emplace(vertex, setIfVertexIsNotIncluded);
-                return setIfVertexIsNotIncluded;
-           
-        }             return it->second;
-       
+            }
+            vertexToMinimumSetMap.emplace(vertex, setIfVertexIsNotIncluded);
+            return setIfVertexIsNotIncluded;
+        }
+        return it->second;
     }
     BaseUndirectedGraphWithVertex const& m_nAryTreeGraph;
     Vertex m_rootOfTree;

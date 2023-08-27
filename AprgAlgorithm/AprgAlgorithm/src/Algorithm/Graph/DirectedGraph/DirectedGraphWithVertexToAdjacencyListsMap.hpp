@@ -17,7 +17,7 @@ public:
     using AdjacencyList = SetOfVertices;
     using AdjacencyLists = std::map<Vertex, AdjacencyList>;
 
-    DirectedGraphWithVertexToAdjacencyListsMap()  {}
+    DirectedGraphWithVertexToAdjacencyListsMap() {}
 
     [[nodiscard]] bool isEmpty() const override { return m_adjacencyLists.empty(); }
 

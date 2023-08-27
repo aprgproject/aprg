@@ -19,7 +19,9 @@ public:
         return m_symbolTable.find(getUniqueVertexIdentifier<Vertex, Object>(object)) != m_symbolTable.cend();
     }
 
-    [[nodiscard]] Vertex getVertex(Object const& object) const { return getUniqueVertexIdentifier<Vertex, Object>(object); }
+    [[nodiscard]] Vertex getVertex(Object const& object) const {
+        return getUniqueVertexIdentifier<Vertex, Object>(object);
+    }
 
     [[nodiscard]] Object getObject(Vertex const& key) const {
         Object result{};

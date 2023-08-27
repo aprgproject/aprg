@@ -22,7 +22,8 @@ public:
                 if (currentSum == targetSum) {
                     result = Values(m_valuesToCheck.cbegin() + start, m_valuesToCheck.cbegin() + end + 1);
                     break;
-                } if (currentSum > targetSum) {
+                }
+                if (currentSum > targetSum) {
                     if (start < end) {
                         currentSum -= m_valuesToCheck[start];
                         start++;

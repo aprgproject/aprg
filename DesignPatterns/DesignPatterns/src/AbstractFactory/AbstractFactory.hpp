@@ -74,15 +74,23 @@ public:
 
 class ConcreteFactoryX : public AbstractFactory {
 public:
-    [[nodiscard]] std::unique_ptr<ProductA> createProductA() const override { return std::make_unique<ConcreteProductAX>(); }
-    [[nodiscard]] std::unique_ptr<ProductB> createProductB() const override { return std::make_unique<ConcreteProductBX>(); }
+    [[nodiscard]] std::unique_ptr<ProductA> createProductA() const override {
+        return std::make_unique<ConcreteProductAX>();
+    }
+    [[nodiscard]] std::unique_ptr<ProductB> createProductB() const override {
+        return std::make_unique<ConcreteProductBX>();
+    }
     // ...
 };
 
 class ConcreteFactoryY : public AbstractFactory {
 public:
-    [[nodiscard]] std::unique_ptr<ProductA> createProductA() const override { return std::make_unique<ConcreteProductAY>(); }
-    [[nodiscard]] std::unique_ptr<ProductB> createProductB() const override { return std::make_unique<ConcreteProductBY>(); }
+    [[nodiscard]] std::unique_ptr<ProductA> createProductA() const override {
+        return std::make_unique<ConcreteProductAY>();
+    }
+    [[nodiscard]] std::unique_ptr<ProductB> createProductB() const override {
+        return std::make_unique<ConcreteProductBY>();
+    }
     // ...
 };
 

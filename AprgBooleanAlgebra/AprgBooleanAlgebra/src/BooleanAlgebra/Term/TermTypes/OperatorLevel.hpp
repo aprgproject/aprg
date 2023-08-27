@@ -4,4 +4,4 @@ namespace alba::booleanAlgebra {
 
 enum class OperatorLevel { Unknown, And, Or };
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

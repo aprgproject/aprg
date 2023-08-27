@@ -36,7 +36,7 @@ public:
     [[nodiscard]] bool isPointer() const;
     [[nodiscard]] bool isReference() const;
     [[nodiscard]] bool isEqualIgnoreReference(CPlusPlusType const& type) const;
-    static void swapType(CPlusPlusTypeType& type1, CPlusPlusTypeType& type2) ;
+    static void swapType(CPlusPlusTypeType& type1, CPlusPlusTypeType& type2);
 
     bool operator==(CPlusPlusType const& cPlusPlusType) const;
     void incrementPointerCount();

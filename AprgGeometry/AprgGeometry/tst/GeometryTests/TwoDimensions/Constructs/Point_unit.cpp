@@ -12,4 +12,4 @@ TEST(TwoDimensionsPointTest, PointsCanBeCreated) {
     EXPECT_EQ(200, point.getY());
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

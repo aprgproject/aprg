@@ -5,7 +5,7 @@ using namespace std;
 
 namespace alba::ThreeDimensions {
 
-EllipticCone::EllipticCone() :  m_aValue(0), m_bValue(0), m_cValue(0) {}
+EllipticCone::EllipticCone() : m_aValue(0), m_bValue(0), m_cValue(0) {}
 
 EllipticCone::EllipticCone(
     Point const& center, double const aCoefficient, double const bCoefficient, double const cCoefficient)

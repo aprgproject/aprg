@@ -36,10 +36,7 @@ public:
 
     RangeQueryWithSparseSegmentTree(
         Index const numberOfValues, Value const& defaultValue, Function const& functionObject)
-        : 
-          m_numberOfValues(numberOfValues),
-          m_defaultValue(defaultValue),
-          m_function(functionObject) {
+        : m_numberOfValues(numberOfValues), m_defaultValue(defaultValue), m_function(functionObject) {
         initialize();
     }
 

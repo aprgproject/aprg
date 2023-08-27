@@ -10,4 +10,4 @@ Term performNot(Term const& term);
 Term performAnd(Term const& term1, Term const& term2);
 Term performOr(Term const& term1, Term const& term2);
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

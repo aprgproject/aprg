@@ -7,4 +7,4 @@ namespace alba::math {
 using NimHeapSize = UnsignedInteger;
 using NimState = UnsignedIntegers;
 
-}  // namespace alba
+}  // namespace alba::math

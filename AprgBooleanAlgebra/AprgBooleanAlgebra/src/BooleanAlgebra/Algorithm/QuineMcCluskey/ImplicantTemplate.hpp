@@ -51,12 +51,12 @@ public:
                 if (string1[i] == '-' || string2[i] == '-') {
                     result = false;
                     break;
-                } if (difference > 1) {
+                }
+                if (difference > 1) {
                     result = false;
                     break;
-                } 
-                    difference++;
-               
+                }
+                difference++;
             }
         }
         return result;
@@ -103,7 +103,9 @@ public:
 
     [[nodiscard]] Minterms const& getMinterms() const { return m_minterms; }
 
-    [[nodiscard]] std::string getEquivalentString() const { return getEquivalentString(getMaxLengthOfEquivalentString()); }
+    [[nodiscard]] std::string getEquivalentString() const {
+        return getEquivalentString(getMaxLengthOfEquivalentString());
+    }
 
     [[nodiscard]] std::string getEquivalentString(int const length) const {
         std::string booleanEquivalent;

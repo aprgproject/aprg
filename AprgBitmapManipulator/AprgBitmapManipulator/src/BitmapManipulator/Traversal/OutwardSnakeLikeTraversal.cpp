@@ -10,8 +10,7 @@ namespace alba::AprgBitmap {
 OutwardSnakeLikeTraversal::OutwardSnakeLikeTraversal(
     BitmapXY const& currentPoint, Direction const direction, int const lowestLeft, int const highestRight,
     int const lowestTop, int const highestBottom)
-    : 
-      m_direction(direction),
+    : m_direction(direction),
       m_lowestLeft(lowestLeft),
       m_highestRight(highestRight),
       m_lowestTop(lowestTop),
@@ -19,8 +18,7 @@ OutwardSnakeLikeTraversal::OutwardSnakeLikeTraversal(
       m_lastMostLeft(currentPoint.getX()),
       m_lastMostRight(currentPoint.getX()),
       m_lastMostTop(currentPoint.getY()),
-      m_lastMostBottom(currentPoint.getY())
-      {
+      m_lastMostBottom(currentPoint.getY()) {
     m_currentPoint = fixPoint(currentPoint);
     m_lastMostLeft = m_currentPoint.getX();
     m_lastMostRight = m_currentPoint.getX();

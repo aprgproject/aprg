@@ -38,16 +38,22 @@ public:
 
     Value getMedian() { return m_sortedValuesInHalf.empty() ? Value{} : getMedianWithoutCheck(); }
 
-    [[nodiscard]] Value getSmallerMedian() const { return m_sortedValuesInHalf.empty() ? Value{} : getSmallerMedianWithoutCheck(); }
+    [[nodiscard]] Value getSmallerMedian() const {
+        return m_sortedValuesInHalf.empty() ? Value{} : getSmallerMedianWithoutCheck();
+    }
 
-    [[nodiscard]] Value getLargerMedian() const { return m_sortedValuesInHalf.empty() ? Value{} : getLargerMedianWithoutCheck(); }
+    [[nodiscard]] Value getLargerMedian() const {
+        return m_sortedValuesInHalf.empty() ? Value{} : getLargerMedianWithoutCheck();
+    }
 
 private:
     [[nodiscard]] Index getMedianSize(Index const size) const { return (size + 2) / 2; }
 
     [[nodiscard]] Index getMedianSizeWithOverFlow(Index const medianSize) const { return medianSize + 1; }
 
-    [[nodiscard]] Value getMedianWithoutCheck() const { return (getSmallerMedianWithoutCheck() + getLargerMedianWithoutCheck()) / 2; }
+    [[nodiscard]] Value getMedianWithoutCheck() const {
+        return (getSmallerMedianWithoutCheck() + getLargerMedianWithoutCheck()) / 2;
+    }
 
     [[nodiscard]] Value getSmallerMedianWithoutCheck() const {
         auto it = std::prev(m_sortedValuesInHalf.end());

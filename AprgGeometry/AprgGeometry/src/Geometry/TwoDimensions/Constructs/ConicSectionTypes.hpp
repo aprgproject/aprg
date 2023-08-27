@@ -6,4 +6,4 @@ namespace alba::TwoDimensions {
 
 enum class ConicSectionType { Unknown, Point, Line, Circle, Parabola, Ellipse, Hyperbola };
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

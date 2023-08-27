@@ -8,19 +8,16 @@ using namespace std;
 
 namespace alba {
 
-SelectionDspResult::SelectionDspResult()
-     {}
+SelectionDspResult::SelectionDspResult() {}
 
-SelectionDspResultForCcdAndMcd::SelectionDspResultForCcdAndMcd()
-     {}
+SelectionDspResultForCcdAndMcd::SelectionDspResultForCcdAndMcd() {}
 
 FspPairDetails::FspPairDetails(
     unsigned int const firstFspTemp, unsigned int const secondFspTemp, unsigned int const priorityTemp)
     : firstFspAddress(firstFspTemp), secondFspAddress(secondFspTemp), priority(priorityTemp) {}
 
 Lrm::Lrm(HardwareConfiguration& hardwareConfiguration)
-    : 
-      m_hardwareConfigurationReference(hardwareConfiguration),
+    : m_hardwareConfigurationReference(hardwareConfiguration),
       m_addressToDspMap(m_hardwareConfigurationReference.getAddressToDspMapReference()),
       m_addressToFspMap(m_hardwareConfigurationReference.getAddressToFspMapReference()) {}
 

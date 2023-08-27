@@ -42,12 +42,12 @@ public:
                 if (value == target) {
                     result = std::distance(m_values.cbegin(), it);
                     break;
-                }                     Value currentDeviation(mathHelper::getPositiveDelta(value, target));
-                    if (minimumDeviation > currentDeviation) {
-                        minimumDeviation = currentDeviation;
-                        result = std::distance(m_values.cbegin(), it);
-                    }
-               
+                }
+                Value currentDeviation(mathHelper::getPositiveDelta(value, target));
+                if (minimumDeviation > currentDeviation) {
+                    minimumDeviation = currentDeviation;
+                    result = std::distance(m_values.cbegin(), it);
+                }
             }
         }
         return result;

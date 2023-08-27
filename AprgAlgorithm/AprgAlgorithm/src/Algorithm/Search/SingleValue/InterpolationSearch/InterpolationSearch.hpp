@@ -32,7 +32,8 @@ public:
     }
 
 private:
-    [[nodiscard]] Index getIndexOfValueWithoutCheck(Index const startIndex, Index const endIndex, Value const& targetValue) const {
+    [[nodiscard]] Index getIndexOfValueWithoutCheck(
+        Index const startIndex, Index const endIndex, Value const& targetValue) const {
         Index result(INVALID_INDEX);
         Index lowIndex(startIndex), highIndex(endIndex);
         while (lowIndex <= highIndex) {
@@ -40,23 +41,23 @@ private:
             Value higherValue(m_sortedValues[highIndex]);
             if (targetValue < lowerValue || higherValue < targetValue) {  // out of range
                 break;
-            } if (lowerValue == higherValue) {
+            }
+            if (lowerValue == higherValue) {
                 result = getMidpointOfIndexes(lowIndex, highIndex);
                 break;
-            } 
-                Index interpolatedIndex = lowIndex + mathHelper::getIntegerAfterRoundingADoubleValue<Index>(
-                                                         static_cast<double>(highIndex - lowIndex) *
-                                                         (targetValue - lowerValue) / (higherValue - lowerValue));
-                Value valueAtInterpolatedIndex(m_sortedValues[interpolatedIndex]);
-                if (targetValue < valueAtInterpolatedIndex) {
-                    highIndex = interpolatedIndex - 1;
-                } else if (valueAtInterpolatedIndex < targetValue) {
-                    lowIndex = interpolatedIndex + 1;
-                } else {  // valueAtInterpolatedIndex <= targetValue
-                    result = interpolatedIndex;
-                    break;
-                }
-           
+            }
+            Index interpolatedIndex = lowIndex + mathHelper::getIntegerAfterRoundingADoubleValue<Index>(
+                                                     static_cast<double>(highIndex - lowIndex) *
+                                                     (targetValue - lowerValue) / (higherValue - lowerValue));
+            Value valueAtInterpolatedIndex(m_sortedValues[interpolatedIndex]);
+            if (targetValue < valueAtInterpolatedIndex) {
+                highIndex = interpolatedIndex - 1;
+            } else if (valueAtInterpolatedIndex < targetValue) {
+                lowIndex = interpolatedIndex + 1;
+            } else {  // valueAtInterpolatedIndex <= targetValue
+                result = interpolatedIndex;
+                break;
+            }
         }
         return result;
     }

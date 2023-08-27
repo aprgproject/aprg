@@ -9,4 +9,4 @@ struct PolarCoordinate {
     AlbaAngle angle;
 };
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

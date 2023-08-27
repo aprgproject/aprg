@@ -61,15 +61,15 @@ private:
         if (numberOfPiles == 2) {
             itLow->mergeWith(*itHigh);
             return itLow;
-        } if (numberOfPiles > 2) {
+        }
+        if (numberOfPiles > 2) {
             auto middleIt = std::next(itLow, numberOfPiles / 2);
             auto itFirstPart = mergePiles(itLow, middleIt);
             auto itSecondPart = mergePiles(std::next(middleIt), itHigh);
             itFirstPart->mergeWith(*itSecondPart);
             return itFirstPart;
-        } 
-            return itLow;
-       
+        }
+        return itLow;
     }
 
     void copyMergedPileToValues(Values& valuesToSort, Piles const& piles) const {

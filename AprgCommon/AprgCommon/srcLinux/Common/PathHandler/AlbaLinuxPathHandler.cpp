@@ -23,10 +23,7 @@ using namespace std;
 
 namespace alba {
 
-AlbaLinuxPathHandler::AlbaLinuxPathHandler(string_view path)
-    : AlbaPathHandler(R"(/)") {
-    setPath(path);
-}
+AlbaLinuxPathHandler::AlbaLinuxPathHandler(string_view path) : AlbaPathHandler(R"(/)") { setPath(path); }
 
 AlbaLinuxPathHandler AlbaLinuxPathHandler::createPathHandlerForDetectedPath() {
     return AlbaLinuxPathHandler(getCurrentDetectedPath());

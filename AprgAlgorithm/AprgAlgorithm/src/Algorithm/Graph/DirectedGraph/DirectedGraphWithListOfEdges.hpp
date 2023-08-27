@@ -16,7 +16,7 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using SetOfEdges = typename GraphTypes<Vertex>::SetOfEdges;
 
-    DirectedGraphWithListOfEdges()  {}
+    DirectedGraphWithListOfEdges() {}
 
     [[nodiscard]] bool isEmpty() const override { return m_edges.empty(); }
 

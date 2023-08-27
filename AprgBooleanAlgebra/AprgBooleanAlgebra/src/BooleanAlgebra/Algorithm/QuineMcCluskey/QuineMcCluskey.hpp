@@ -26,7 +26,7 @@ public:
     using InputToOutputMap = std::map<Minterm, LogicalValue>;
     using ComputationalTable = std::map<Minterm, MintermToImplicantsMap>;
 
-    QuineMcCluskey()  {}
+    QuineMcCluskey() {}
 
     [[nodiscard]] LogicalValue getOutput(Minterm const input) const {
         LogicalValue result(LogicalValue::False);
@@ -37,7 +37,9 @@ public:
         return result;
     }
 
-    [[nodiscard]] int getNumberOfOnes(Minterm const value) const { return AlbaBitValueUtilities<Minterm>::getNumberOfOnes(value); }
+    [[nodiscard]] int getNumberOfOnes(Minterm const value) const {
+        return AlbaBitValueUtilities<Minterm>::getNumberOfOnes(value);
+    }
 
     [[nodiscard]] Implicants getImplicants(int numberOfOnes, int commonalityCount) const {
         Implicants result;
@@ -214,9 +216,8 @@ public:
                         combinedInnerTerms.erase(combinedInnerTerms.begin() + j);
                         if (i < static_cast<int>(combinedInnerTerms.size())) {
                             continue;
-                        } 
-                            break;
-                       
+                        }
+                        break;
                     }
                 }
             }
@@ -293,15 +294,14 @@ public:
                 }
                 if (implicantsWithLoneMinterm.empty()) {
                     break;
-                } 
-                    for (auto const& implicant : implicantsWithLoneMinterm) {
-                        result.emplace(implicant);
-                        remainingImplicants.erase(implicant);
-                        for (Minterm const& coveredMinterm : implicant.getMinterms()) {
-                            mintermsToCover.erase(coveredMinterm);
-                        }
+                }
+                for (auto const& implicant : implicantsWithLoneMinterm) {
+                    result.emplace(implicant);
+                    remainingImplicants.erase(implicant);
+                    for (Minterm const& coveredMinterm : implicant.getMinterms()) {
+                        mintermsToCover.erase(coveredMinterm);
                     }
-               
+                }
             }
 
             // Process an implicant that covers the maximum number of minterms

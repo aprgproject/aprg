@@ -19,7 +19,7 @@ public:
     using Objects = std::vector<Object>;
     using Comparator = ComparatorTemplateType<Object>;
 
-    IndexedBinaryHeapPriorityQueue()  {}
+    IndexedBinaryHeapPriorityQueue() {}
 
     [[nodiscard]] bool isEmpty() const { return getSize() == 0; }
 
@@ -115,7 +115,9 @@ private:
         return treeIndex - 1;
     }
 
-    [[nodiscard]] Object const& getObjectOnTree(int const treeIndex) const { return m_objects[m_treeIndexToObjectIndex[treeIndex]]; }
+    [[nodiscard]] Object const& getObjectOnTree(int const treeIndex) const {
+        return m_objects[m_treeIndexToObjectIndex[treeIndex]];
+    }
 
     void resizeToHaveThisIndexIfNeeded(int const index) {
         if (m_maxSize <= index) {

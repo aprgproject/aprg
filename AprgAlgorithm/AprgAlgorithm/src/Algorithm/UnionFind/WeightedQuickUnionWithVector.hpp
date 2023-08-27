@@ -12,9 +12,7 @@ public:
     using RootVector = std::vector<Object>;
     using SizeVector = std::vector<int>;
 
-    explicit WeightedQuickUnionWithVector(int const maximumSize) : m_relativeRoots() {
-        initialize(maximumSize);
-    }
+    explicit WeightedQuickUnionWithVector(int const maximumSize) : m_relativeRoots() { initialize(maximumSize); }
 
     [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
         return getRoot(object1) == getRoot(object2);

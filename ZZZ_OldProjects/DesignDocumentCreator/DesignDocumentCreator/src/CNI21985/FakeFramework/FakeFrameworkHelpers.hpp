@@ -12,4 +12,4 @@ TTask getTask(ComponentName const componentName);
 TAaSysComNids getRlhNids(STCWamAddressIndNew const& wamAddressInd);
 TAaSysComSicad createSicad(TAaSysComNid const nid, TTask const taskId);
 TAaSysComSicad getNid(TAaSysComSicad const sicad);
-}  // namespace DesignDocumentCreator
+}  // namespace DesignDocumentCreator::FakeFrameworkHelpers

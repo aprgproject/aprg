@@ -96,5 +96,6 @@ jobs:
       - name: Commit and Push Changes
         run: |
           git commit -m "APRGPROJECT: Automatic commit for Static Analyzers with Auto Fixes"
+          git pull --no-edit
           echo "last step is push"
           #git push

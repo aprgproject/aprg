@@ -8,4 +8,4 @@ enum class TermAssociationType { Positive, Negative };
 
 using TermAssociationTypes = std::vector<TermAssociationType>;
 
-}  // namespace alba
+}  // namespace alba::algebra

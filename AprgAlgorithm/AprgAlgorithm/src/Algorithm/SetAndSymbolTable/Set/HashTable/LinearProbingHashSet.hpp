@@ -7,4 +7,4 @@ namespace alba::algorithm {
 template <typename Key, typename HashFunction>
 class LinearProbingHashSet : public BaseLinearProbingHashSet<Key, HashFunction> {};
 
-}  // namespace alba
+}  // namespace alba::algorithm

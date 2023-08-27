@@ -18,10 +18,7 @@ public:
     using ReachabilityPointerArray = typename std::array<ReachabilityPointer, MAX_VERTEX_VALUE>;
     using ReachabilityInitializerList = typename std::initializer_list<Reachability>;
 
-    explicit TransitiveClosureWithArray(BaseDirectedGraphWithVertex const& graph)
-        : m_graph(graph) {
-        initialize();
-    }
+    explicit TransitiveClosureWithArray(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) { initialize(); }
 
     [[nodiscard]] bool isReachable(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
         bool result(false);

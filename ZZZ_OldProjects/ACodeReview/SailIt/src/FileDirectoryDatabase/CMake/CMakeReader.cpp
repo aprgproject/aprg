@@ -17,10 +17,7 @@ using namespace alba::stringHelper;
 namespace codeReview {
 
 CMakeReader::CMakeReader(string const& fileName, CMakeDatabase& fileDirectoryDatabase)
-    : m_fileStream(fileName.c_str()),
-      m_albaFileReader(m_fileStream),
-      m_fileDirectoryDatabase(fileDirectoryDatabase)
-      {
+    : m_fileStream(fileName.c_str()), m_albaFileReader(m_fileStream), m_fileDirectoryDatabase(fileDirectoryDatabase) {
     AlbaLocalPathHandler pathHandler(fileName);
     if (pathHandler.isFoundInLocalSystem() && pathHandler.isFile()) {
         if (m_fileStream.is_open()) {
@@ -313,9 +310,8 @@ void CMakeReader::findOpeningParenthesisAndProceed(string& lineString, int& inde
         if (checkAndProceedIfCharacterIsFound(lineString, "(", index)) {
             continueSearching = false;
             break;
-        } 
-            continueSearching = readAnotherLineIfPossible(lineString, index);
-       
+        }
+        continueSearching = readAnotherLineIfPossible(lineString, index);
     }
 }
 
@@ -328,11 +324,10 @@ string CMakeReader::extractContentsUntilCloseParenthesis(string& lineString, int
             checkAndProceedIfCharacterIsFound(lineString, ")", index);
             continueSearching = false;
             break;
-        } 
-            contents += lineString;
-            contents += " ";
-            continueSearching = readAnotherLineIfPossible(lineString, index);
-       
+        }
+        contents += lineString;
+        contents += " ";
+        continueSearching = readAnotherLineIfPossible(lineString, index);
     }
     return contents;
 }
@@ -378,8 +373,9 @@ void CMakeReader::ignoreEntireLine(string const& string1, int& index) { index = 
 
 bool CMakeReader::isIgnorable(string const& string1) {
     int index = string1.find_first_not_of(WHITESPACE_STRING, 0);
-    if (isNpos(index)) { return false;
-}
+    if (isNpos(index)) {
+        return false;
+    }
     return string1[index] == '#';
 }
 

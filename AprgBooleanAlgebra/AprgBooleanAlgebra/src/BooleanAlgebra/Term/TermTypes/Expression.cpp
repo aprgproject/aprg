@@ -16,7 +16,7 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
-Expression::Expression() : m_commonOperatorLevel(OperatorLevel::Unknown),  m_isSimplified(false) {}
+Expression::Expression() : m_commonOperatorLevel(OperatorLevel::Unknown), m_isSimplified(false) {}
 
 Expression::Expression(BaseTerm const& baseTerm)
     : m_commonOperatorLevel(OperatorLevel::Unknown), m_wrappedTerms({baseTerm}), m_isSimplified(false) {}

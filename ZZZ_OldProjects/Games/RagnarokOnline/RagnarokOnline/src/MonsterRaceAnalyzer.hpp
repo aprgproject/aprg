@@ -36,7 +36,7 @@ public:
 private:
     static void retrieveBestWinners(
         RaceConfiguration& bestConfiguration, BestWinners& queueOfWinners, PreviousRaces const& previousRaces,
-        RaceConfiguration const& currentConfiguration) ;
+        RaceConfiguration const& currentConfiguration);
     static void showWinners(BestWinners& queueOfWinners);
     static void showBestConfiguration(
         RaceConfiguration const& bestConfiguration, RaceConfiguration const& currentConfiguration);

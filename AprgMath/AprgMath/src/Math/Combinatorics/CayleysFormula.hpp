@@ -6,4 +6,4 @@ namespace alba::math {
 
 UnsignedInteger getNumberOfLabeledTreesUsingCayleysFormula(UnsignedInteger const& numberOfNodes);
 
-}  // namespace alba
+}  // namespace alba::math

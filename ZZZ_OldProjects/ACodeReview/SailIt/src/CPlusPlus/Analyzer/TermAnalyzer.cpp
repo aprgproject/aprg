@@ -22,18 +22,16 @@ TermAnalyzer::TermAnalyzer(DequeOfTerms& terms, CPlusPlusDatabase& database, Fin
     : m_terms(terms),
       m_database(database),
       m_findings(findings),
-      
-      m_isTermsModified(false)
-      {}
+
+      m_isTermsModified(false) {}
 
 TermAnalyzer::TermAnalyzer(DequeOfTerms& terms, CPlusPlusDatabase& database, Findings& findings, SailIt& sailIt)
     : m_terms(terms),
       m_database(database),
       m_findings(findings),
-      
+
       m_optionalSailIt(sailIt),
-      m_isTermsModified(false)
-      {}
+      m_isTermsModified(false) {}
 
 void TermAnalyzer::setFileName(string const& directory, string const& fileName) {
     m_baseDirectory = directory;
@@ -65,7 +63,8 @@ void TermAnalyzer::analyzeThisScope(Looper const& startLooper) {
                                       << " " << mainLooper.getContentReference() << "]");
         clearFlagsForAnotherIteration();
 
-        if (isModifiedDueToUpdatedIdentifiers(mainLooper, previousUpdatedIndexForMacro, previousUpdatedIndexForOthers)) {
+        if (isModifiedDueToUpdatedIdentifiers(
+                mainLooper, previousUpdatedIndexForMacro, previousUpdatedIndexForOthers)) {
             ;
         } else if (isModifiedDueToMacros(mainLooper)) {
             ;
@@ -185,9 +184,11 @@ bool TermAnalyzer::isStringFoundInLooper(Looper const& startLooper, string const
         string currentString(searchLooper.getContentReference().getString());
         if (stringToCompare == currentString) {
             return true;
-        } if (m_database.isMacro(currentString)) {
-            if (isStringFoundInMacro(currentString, stringToCompare)) { return true;
-}
+        }
+        if (m_database.isMacro(currentString)) {
+            if (isStringFoundInMacro(currentString, stringToCompare)) {
+                return true;
+            }
         }
         searchLooper++;
     }
@@ -200,9 +201,11 @@ bool TermAnalyzer::isStringFoundInMacro(string const& macroName, string const& s
         string currentString(term.getString());
         if (currentString == stringToCompare) {
             return true;
-        } if (m_database.isMacro(macroName)) {
-            if (isStringFoundInMacro(macroName, currentString)) { return true;
-}
+        }
+        if (m_database.isMacro(macroName)) {
+            if (isStringFoundInMacro(macroName, currentString)) {
+                return true;
+            }
         }
     };
     return false;
@@ -230,10 +233,10 @@ string TermAnalyzer::getLocatorString(Looper const& startLooper) {
         if (length > numberOfCharactersLeftToPrint) {
             locator = stringToPrint.substr(length - numberOfCharactersLeftToPrint) + locator;
             break;
-        } 
-            locator = stringToPrint + locator;
-            numberOfCharactersLeftToPrint -= length;
-       
+        }
+        locator = stringToPrint + locator;
+        numberOfCharactersLeftToPrint -= length;
+
         printBackward--;
     }
     Looper printForward(startLooper + 1);
@@ -245,10 +248,10 @@ string TermAnalyzer::getLocatorString(Looper const& startLooper) {
         if (length > numberOfCharactersLeftToPrint) {
             locator = locator + stringToPrint.substr(0, numberOfCharactersLeftToPrint);
             break;
-        } 
-            locator = locator + stringToPrint;
-            numberOfCharactersLeftToPrint -= length;
-       
+        }
+        locator = locator + stringToPrint;
+        numberOfCharactersLeftToPrint -= length;
+
         printForward++;
     }
     return locator;

@@ -394,4 +394,4 @@ TEST(SoosaTest, DISABLED_ProcessWorksWithADirectory) {
     soosa.process();
 }
 
-}  // namespace alba
+}  // namespace alba::soosa

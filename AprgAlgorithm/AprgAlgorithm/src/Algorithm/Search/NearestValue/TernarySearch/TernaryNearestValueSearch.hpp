@@ -43,7 +43,8 @@ public:
     }
 
 private:
-    [[nodiscard]] Index getIndexOfNearestValueWithoutCheck(Index const lowIndex, Index const highIndex, Value const& target) const {
+    [[nodiscard]] Index getIndexOfNearestValueWithoutCheck(
+        Index const lowIndex, Index const highIndex, Value const& target) const {
         Index result(INVALID_INDEX);
         if (target < m_sortedValues[lowIndex]) {
             result = (lowIndex == 0) ? 0 : getIndexOfNearestValueInBetweenTwoIndices(lowIndex - 1, lowIndex, target);

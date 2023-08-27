@@ -11,4 +11,4 @@ UnsignedInteger getGrundyNumber(SetOfUnsignedIntegers const& nextGrundyNumbers);
 UnsignedInteger getCombinedGrundyNumber(UnsignedInteger const grundyNumber1, UnsignedInteger const grundyNumber2);
 UnsignedInteger getOverallGrundyNumber(UnsignedIntegers const& grundyNumbers);
 
-}  // namespace alba
+}  // namespace alba::math

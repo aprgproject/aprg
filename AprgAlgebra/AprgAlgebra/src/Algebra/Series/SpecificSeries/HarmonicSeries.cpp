@@ -12,4 +12,4 @@ Term HarmonicSeries::getFormula() {
     return Term(createExpressionIfPossible({1, "/", denominator}));
 }
 
-}  // namespace alba
+}  // namespace alba::algebra

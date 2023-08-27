@@ -8,8 +8,8 @@ using namespace std;
 namespace alba::SackFileReaderStateMachineNamespace {
 
 InnerStates::InnerStates()
-    
-      {}
+
+{}
 
 void InnerStates::reset() {
     stateForConstant = StateForConstant::BeforeName;
@@ -29,7 +29,7 @@ SackFileReaderStateMachine::SackFileReaderStateMachine(Database& database, strin
     : BaseSackFileReaderStateMachine(State::Idle),
       m_filePathHandler(fullPath),
       m_isMessageIdFile(isStringFoundNotCaseSensitive(m_filePathHandler.getFilenameOnly(), "MessageId_")),
-      
+
       m_pathFromIInterface(getCorrectPathWithReplacedSlashCharacters<'/'>(
           string(R"(\I_Interface\)") + getStringAfterThisString(m_filePathHandler.getFullPath(), R"(\I_Interface\)"))),
       m_database(database) {}

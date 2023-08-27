@@ -35,7 +35,9 @@ private:
         buffer.addData(&m_dynamicPayload, sizeof(DynamicPartSackType));
         return buffer;
     }
-    [[nodiscard]] unsigned int calculateOffsetForDynamicPart() const { return sizeof(SackType) - sizeof(DynamicPlaceHolderSackType); }
+    [[nodiscard]] unsigned int calculateOffsetForDynamicPart() const {
+        return sizeof(SackType) - sizeof(DynamicPlaceHolderSackType);
+    }
     SackType m_staticPayload;
     DynamicPartSackType m_dynamicPayload;
 };

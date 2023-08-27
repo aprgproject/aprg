@@ -7,4 +7,4 @@ namespace alba::booleanAlgebra {
 Term simplifyAndConvertExpressionToSimplestTerm(Expression const& expression);
 Term convertExpressionToSimplestTerm(Expression const& expression);
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

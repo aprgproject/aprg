@@ -52,11 +52,11 @@ int partitionAndGetPartitionIndexUsingHoare(
         // Important: This loops exits when it finds a value greater than pivotValue
         while (values[++indexWithGreaterValue] < pivotValue) {
             ;
-}
+        }
         // Important: This loops exits when it finds a value less than pivotValue
         while (pivotValue < values[--indexWithLesserValue]) {
             ;
-}
+        }
 
         // Stop if the indexWithGreaterValue and indexWithLesserValue meet
         if (indexWithGreaterValue < indexWithLesserValue) {
@@ -73,10 +73,9 @@ int partitionAndGetPartitionIndexUsingHoare(
     }
     if (isPivotNotYetSwapped) {
         return lowIndex;  // return original position
-    }         // Swap at pivot at the border of the right partition.
-        std::swap(values[indexWithPivotValue], values[indexWithGreaterValue]);
-        return indexWithGreaterValue;  // return swapped position
-   
+    }                     // Swap at pivot at the border of the right partition.
+    std::swap(values[indexWithPivotValue], values[indexWithGreaterValue]);
+    return indexWithGreaterValue;  // return swapped position
 }
 
 template <typename Values>
@@ -115,10 +114,10 @@ typename Values::iterator partitionAndGetPartitionIteratorInTwoDirections(
     while (true) {
         while (*++itWithGreaterValue < pivotValue && itWithGreaterValue != itHigh) {
             ;
-}
+        }
         while (pivotValue < *--itWithLesserValue && itWithLesserValue != itLow) {
             ;
-}
+        }
         // check two positions because the iterators moves by two (one move back, one move forward)
         if (itWithGreaterValue != itWithLesserValue && itWithGreaterValue != std::next(itWithLesserValue)) {
             std::swap(*itWithGreaterValue, *itWithLesserValue);

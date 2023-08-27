@@ -40,17 +40,17 @@ public:
     }
 
 private:
-    [[nodiscard]] Index getIndexUsingIntervalsInsideTarget(Index const lowIndex, Index const highIndex, Value const& target) const {
+    [[nodiscard]] Index getIndexUsingIntervalsInsideTarget(
+        Index const lowIndex, Index const highIndex, Value const& target) const {
         if (lowIndex + 1 < highIndex) {
             // Binary search with one comparison per iteration
             Index middleIndex = getMidpointOfIndexes(lowIndex, highIndex);
             if (m_sortedValues[middleIndex] <= target) {
                 return getIndexUsingIntervalsInsideTarget(middleIndex, highIndex, target);
-            }                 return getIndexUsingIntervalsInsideTarget(lowIndex, middleIndex, target);
-           
-        } 
-            return getIndexOfNearestValueInBetweenTwoIndices(lowIndex, highIndex, target);
-       
+            }
+            return getIndexUsingIntervalsInsideTarget(lowIndex, middleIndex, target);
+        }
+        return getIndexOfNearestValueInBetweenTwoIndices(lowIndex, highIndex, target);
     }
 
     [[nodiscard]] Index getIndexOfNearestValueInBetweenTwoIndices(

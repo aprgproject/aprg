@@ -7,7 +7,7 @@ using namespace std;
 
 namespace alba::TwoDimensions {
 
-Triangle::Triangle()  {}
+Triangle::Triangle() {}
 
 Triangle::Triangle(Point const& first, Point const& second, Point const& third)
     : TrianglePolygonParent{first, second, third} {}

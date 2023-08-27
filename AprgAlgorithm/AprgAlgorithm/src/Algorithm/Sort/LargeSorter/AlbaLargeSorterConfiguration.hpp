@@ -9,8 +9,7 @@ namespace alba::algorithm {
 
 struct AlbaLargeSorterConfiguration {
     AlbaLargeSorterConfiguration()
-        : 
-          m_minimumNumberOfObjectsPerBlock(100),
+        : m_minimumNumberOfObjectsPerBlock(100),
           m_maximumNumberOfObjectsPerBlock(1000),
           m_maximumNumberOfObjectsInMemory(2000),
           m_maximumFileStreams(100) {}

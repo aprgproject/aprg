@@ -14,7 +14,7 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using AdjacencyMatrix = matrix::AlbaMatrix<bool>;
 
-    DirectedGraphWithAdjacencyMatrix() :  m_adjacencyMatrix(MAX_VERTEX_VALUE, MAX_VERTEX_VALUE) {}
+    DirectedGraphWithAdjacencyMatrix() : m_adjacencyMatrix(MAX_VERTEX_VALUE, MAX_VERTEX_VALUE) {}
 
     [[nodiscard]] bool isEmpty() const override { return m_numberOfEdges == 0; }
 

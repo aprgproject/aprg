@@ -16,8 +16,8 @@ using wcdmaToolsBackend::BtsLogTimeType;
 namespace alba {
 
 BtsLogAnalyzer::PrintsAvailable::PrintsAvailable()
-    
-      {}
+
+{}
 
 BtsLogAnalyzer::BtsLogAnalyzer() : m_btsLogPathHandler("") {}
 

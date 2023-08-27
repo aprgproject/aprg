@@ -14,7 +14,9 @@ public:
     using Indexes = std::vector<Index>;
     using StringViews = std::vector<std::string_view>;
 
-    explicit SuffixArray(std::string const& mainString) : m_mainString(mainString), m_mainStringIndexes() { initialize(); }
+    explicit SuffixArray(std::string const& mainString) : m_mainString(mainString), m_mainStringIndexes() {
+        initialize();
+    }
 
     [[nodiscard]] Index getSize() const { return m_mainStringIndexes.size(); }
 

@@ -115,7 +115,7 @@ private:
         BitmapXY const& penBitmapXY, TwoDimensions::Circle const& circleToCheck,
         TwoDimensions::Circle const& circleToCompare);
     [[nodiscard]] static uint32_t getBlurredColor(
-        uint32_t const centerColor, uint32_t const colorToCompare, uint32_t const similarityColorLimit) ;
+        uint32_t const centerColor, uint32_t const colorToCompare, uint32_t const similarityColorLimit);
     static uint8_t getBlurredColorPart(
         uint8_t const centerColorPart, uint8_t const colorToComparePart, uint32_t const similarityColorLimit);
     [[nodiscard]] uint32_t getBlurredColorUsingACircle(

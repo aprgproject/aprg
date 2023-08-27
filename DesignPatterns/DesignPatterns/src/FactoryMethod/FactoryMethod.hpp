@@ -51,13 +51,17 @@ public:
 
 class ConcreteCreatorA : public Creator {
 public:
-    [[nodiscard]] std::unique_ptr<Product> createProduct() const override { return std::make_unique<ConcreteProductA>(); }
+    [[nodiscard]] std::unique_ptr<Product> createProduct() const override {
+        return std::make_unique<ConcreteProductA>();
+    }
     // ...
 };
 
 class ConcreteCreatorB : public Creator {
 public:
-    [[nodiscard]] std::unique_ptr<Product> createProduct() const override { return std::make_unique<ConcreteProductB>(); }
+    [[nodiscard]] std::unique_ptr<Product> createProduct() const override {
+        return std::make_unique<ConcreteProductB>();
+    }
     // ...
 };
 

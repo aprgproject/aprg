@@ -63,7 +63,9 @@ private:
         return range.first < static_cast<Index>(m_values.size()) && range.second < static_cast<Index>(m_values.size());
     }
 
-    [[nodiscard]] Index getSquareRootSize(Index const numberOfValues) const { return static_cast<Index>(sqrt(numberOfValues)); }
+    [[nodiscard]] Index getSquareRootSize(Index const numberOfValues) const {
+        return static_cast<Index>(sqrt(numberOfValues));
+    }
 
     void moveToTargetRange(
         Index& numberOfDistinct, FrequencyArray& frequencyArray, Range& currentRange, Range const& targetRange) const {
@@ -126,8 +128,8 @@ private:
             Index blockIndex2 = range2.first / blockSize;
             if (blockIndex1 == blockIndex2) {
                 return range1.second < range2.second;
-            }                 return blockIndex1 < blockIndex2;
-           
+            }
+            return blockIndex1 < blockIndex2;
         });
         return result;
     }

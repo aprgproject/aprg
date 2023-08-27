@@ -8,7 +8,7 @@ using LasVegasAlgorithm = std::function<void(void)>;
 
 void performALasVegasAlgorithm(LasVegasAlgorithm const& lasVegasAlgorithm) { lasVegasAlgorithm(); }
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // A Las Vegas algorithm is a randomized algorithm that always gives the correct answer,
 // but its running time varies randomly.

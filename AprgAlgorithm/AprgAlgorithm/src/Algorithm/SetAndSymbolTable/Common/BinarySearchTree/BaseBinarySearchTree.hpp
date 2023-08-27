@@ -115,7 +115,8 @@ protected:
 
     virtual void updateTreeNodeDetails(Node& node) const { node.sizeOfThisSubTree = calculateSizeOfThisSubTree(node); }
 
-    [[nodiscard]] virtual bool doesContainStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const {
+    [[nodiscard]] virtual bool doesContainStartingOnThisNode(
+        NodeUniquePointer const& nodePointer, Key const& key) const {
         bool result(false);
         if (nodePointer) {
             Key const& currentKey(nodePointer->key);
@@ -156,7 +157,8 @@ protected:
         return result;
     }
 
-    [[nodiscard]] Node const* selectNodeWithIndexStartingOnThisNode(NodeUniquePointer const& nodePointer, int const index) const {
+    [[nodiscard]] Node const* selectNodeWithIndexStartingOnThisNode(
+        NodeUniquePointer const& nodePointer, int const index) const {
         Node const* result(nullptr);
         if (nodePointer) {
             int sizeOfThisSubTree = getSizeOfThisSubTree(nodePointer->left);
@@ -171,7 +173,8 @@ protected:
         return result;
     }
 
-    [[nodiscard]] virtual Node const* getNodeWithFloorStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const {
+    [[nodiscard]] virtual Node const* getNodeWithFloorStartingOnThisNode(
+        NodeUniquePointer const& nodePointer, Key const& key) const {
         Node const* result(nullptr);
         if (nodePointer) {
             Key const& currentKey(nodePointer->key);
@@ -242,8 +245,8 @@ protected:
             if (nodePointer->left) {
                 // find the left most node until null
                 return getMinimumNodePointerReferenceStartingOnThisNode(nodePointer->left);
-            }                 return nodePointer;
-           
+            }
+            return nodePointer;
         }
         return nodePointer;
     }

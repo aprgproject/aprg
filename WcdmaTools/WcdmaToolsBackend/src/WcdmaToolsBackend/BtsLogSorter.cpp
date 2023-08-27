@@ -17,7 +17,7 @@ namespace alba::ProgressCounters {
 extern double totalSizeToBeReadForCombine;
 extern double totalSizeReadForCombine;
 extern int writeProgressForCombine;
-}  // namespace alba
+}  // namespace alba::ProgressCounters
 
 namespace wcdmaToolsBackend {
 

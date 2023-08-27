@@ -97,9 +97,9 @@ private:
         auto it = m_vertexToDfs.find(vertex);
         if (it != m_vertexToDfs.cend()) {
             return it->second;
-        }             m_vertexToDfs.emplace(vertex, Dfs(m_graph, {vertex}));
-            return m_vertexToDfs.at(vertex);
-       
+        }
+        m_vertexToDfs.emplace(vertex, Dfs(m_graph, {vertex}));
+        return m_vertexToDfs.at(vertex);
     }
 
     BaseUndirectedGraphWithVertex const& m_graph;

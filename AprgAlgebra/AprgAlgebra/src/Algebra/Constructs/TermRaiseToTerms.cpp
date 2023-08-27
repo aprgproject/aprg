@@ -34,7 +34,7 @@ TermRaiseToTerms::TermRaiseToTerms(TermsWithDetails const& termsInRaiseToPowerEx
 
 TermRaiseToTerms::TermRaiseToTerms(Term const& base, Terms const& exponents)
     : m_base(base),
-      
+
       m_shouldSimplifyToFactors(false),
       m_shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt(false),
       m_shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase(false) {

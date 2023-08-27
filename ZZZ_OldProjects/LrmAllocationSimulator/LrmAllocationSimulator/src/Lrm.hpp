@@ -68,7 +68,8 @@ private:
     void sortFspBasedPriorityForMcdSelection2(FspAddresses& fspAddresses, unsigned int const lcgId) const;
     void sortFspBasedPriorityForNbicMcdSelection(FspAddresses& fspAddresses, unsigned int const lcgId) const;
     void sortFspBasedPriorityForNbicMcdSelection2(FspAddresses& fspAddresses, unsigned int const lcgId) const;
-    [[nodiscard]] unsigned int getPriorityBasedOnNAndTnCountForFspMcdSelection(Fsp const& fsp, unsigned int const lcgId) const;
+    [[nodiscard]] unsigned int getPriorityBasedOnNAndTnCountForFspMcdSelection(
+        Fsp const& fsp, unsigned int const lcgId) const;
     [[nodiscard]] unsigned int getPriorityBasedSharedLcgFspMcdSelection(Fsp const& fsp, unsigned int const lcgId) const;
     [[nodiscard]] SelectionDspResult selectNonEmptyDspToClearForMcd(unsigned int const lcgId) const;
     void removeNotNeededFspsForMcd(FspAddresses& fspAddresses, unsigned int const lcgId) const;
@@ -77,7 +78,8 @@ private:
     [[nodiscard]] FspAddresses selectFspsForCcdMcd(unsigned int const lcgId) const;
     [[nodiscard]] FspAddresses selectFspsForCcdMcd2(unsigned int const lcgId) const;
     void sortFspBasedPriorityForCcdMcdSelection(FspAddresses& fspAddresses, unsigned int const lcgId) const;
-    [[nodiscard]] unsigned int getPriorityBasedOnNAndTnCountForFspCcdMcdSelection(Fsp const& fsp, unsigned int const lcgId) const;
+    [[nodiscard]] unsigned int getPriorityBasedOnNAndTnCountForFspCcdMcdSelection(
+        Fsp const& fsp, unsigned int const lcgId) const;
     void removeNotNeededFspsForCcdMcd(FspAddresses& fspAddresses, unsigned int const lcgId) const;
 
     // NBIC MCD
@@ -94,8 +96,10 @@ private:
     // PIC
     [[nodiscard]] SelectionDspResult selectFspForPic(unsigned int const lcgId) const;
     void sortFspBasedPriorityForPicSelection(FspAddresses& fspAddresses, unsigned int const lcgId) const;
-    [[nodiscard]] unsigned int getPriorityBasedSharedLcgTnInPicSelection(Fsp const& fsp, unsigned int const lcgId) const;
-    [[nodiscard]] unsigned int getPriorityBasedOnTnWithoutCfsForFspPicSelection(Fsp const& fsp, unsigned int const lcgId) const;
+    [[nodiscard]] unsigned int getPriorityBasedSharedLcgTnInPicSelection(
+        Fsp const& fsp, unsigned int const lcgId) const;
+    [[nodiscard]] unsigned int getPriorityBasedOnTnWithoutCfsForFspPicSelection(
+        Fsp const& fsp, unsigned int const lcgId) const;
 
     // Common
     // void saveNeededFspsForCcdOrMcdBasedOnNyquist(UniqueFspAddresses & neededUniqueFspAddresses, unsigned int&
@@ -171,7 +175,8 @@ private:
     static void removeFspPairsBasedOnCondition(
         FspPairsDetails& fspPairsDetails, FspPairDetailsCondition const& condition);
     void updatePriorityForAllFspPairs(FspPairsDetails& fspPairsDetail, unsigned int const lcgId) const;
-    [[nodiscard]] unsigned int getPriorityForFspPair(FspPairDetails const& fspPairDetails, unsigned int const lcgId) const;
+    [[nodiscard]] unsigned int getPriorityForFspPair(
+        FspPairDetails const& fspPairDetails, unsigned int const lcgId) const;
 
     void changeModeForCcdAndUpdateDspDetails(SelectionDspResultForCcdAndMcd const& selectionDspResultForCcdAndMcd);
     void changeModeForMcdAndUpdateDspDetails(SelectionDspResultForCcdAndMcd const& selectionDspResultForCcdAndMcd);

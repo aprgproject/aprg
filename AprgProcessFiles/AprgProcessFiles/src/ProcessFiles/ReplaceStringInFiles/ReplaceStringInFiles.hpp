@@ -21,14 +21,14 @@ public:
     void replaceCToCPlusPlusStylePrintOnDirectories(
         std::string const& inputDirectory, std::string const& outputDirectory);
     void replaceCToCPlusPlusStylePrintOnFile(std::string const& inputFilePath, std::string const& outputFilePath);
-    [[nodiscard]] static std::string getCPlusPlusStylePrintFromC(std::string const& inputString) ;
+    [[nodiscard]] static std::string getCPlusPlusStylePrintFromC(std::string const& inputString);
 
 private:
     static std::string getNewPrintStreamBasedFromOldPrintFunction(std::string const& printFunction);
     static void removeStartingAndTrailingWhiteSpaceInPrintParameters(stringHelper::strings& printParameters);
     [[nodiscard]] static std::string constructCPlusPlusPrint(
         std::string const& newPrintStream, std::string const& endPrintStream, std::string const& printString,
-        stringHelper::strings const& printParameters) ;
+        stringHelper::strings const& printParameters);
     static void appendCharacterToResult(std::string& result, bool& isOnStringLiteral, char const c);
     static void appendParameterToResult(std::string& result, bool& isOnStringLiteral, std::string const& parameter);
     static bool isCOrCPlusPlusFile(std::string const& extension);

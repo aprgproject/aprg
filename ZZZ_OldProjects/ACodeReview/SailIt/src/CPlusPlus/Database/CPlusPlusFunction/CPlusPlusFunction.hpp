@@ -29,7 +29,8 @@ public:
     void replaceTemplateParameters(
         CPlusPlusClassTemplateSignature& templateSignature, CPlusPlusClassTemplateSignature& templateInstantiation);
     CPlusPlusFunctionSignatures& getFunctionSignaturesReference();
-    [[nodiscard]] CPlusPlusType getReturnTypeWithSignature(CPlusPlusFunctionSignature const& cPlusPlusFunctionSignature) const;
+    [[nodiscard]] CPlusPlusType getReturnTypeWithSignature(
+        CPlusPlusFunctionSignature const& cPlusPlusFunctionSignature) const;
 
 private:
     CPlusPlusFunctionSignatures m_signatures;

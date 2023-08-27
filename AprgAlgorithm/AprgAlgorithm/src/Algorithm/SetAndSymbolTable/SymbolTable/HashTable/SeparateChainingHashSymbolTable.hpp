@@ -8,4 +8,4 @@ template <typename Key, typename Value, typename HashFunction, int HASH_TABLE_SI
 class SeparateChainingHashSymbolTable
     : public BaseSeparateChainingHashSymbolTable<Key, Value, HashFunction, HASH_TABLE_SIZE> {};
 
-}  // namespace alba
+}  // namespace alba::algorithm

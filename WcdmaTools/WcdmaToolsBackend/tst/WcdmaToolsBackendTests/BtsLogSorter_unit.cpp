@@ -9,7 +9,7 @@ namespace alba::ProgressCounters {
 double totalSizeToBeReadForCombine;
 double totalSizeReadForCombine;
 int writeProgressForCombine;
-}  // namespace alba
+}  // namespace alba::ProgressCounters
 
 using namespace alba;
 using namespace std;

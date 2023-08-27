@@ -9,4 +9,4 @@ void verifyOneTransportBearerRegisterForCell(GenericMessage const& genericMessag
 void verifySuccessfulHwConfigurationResponseMessage(GenericMessage const& genericMessage);
 void verifyTcomDeploymentIndMessage(GenericMessage const& genericMessage);
 void verifyLinkStateResponseMessage(GenericMessage const& genericMessage);
-}  // namespace DesignDocumentCreator
+}  // namespace DesignDocumentCreator::MessageVerifier

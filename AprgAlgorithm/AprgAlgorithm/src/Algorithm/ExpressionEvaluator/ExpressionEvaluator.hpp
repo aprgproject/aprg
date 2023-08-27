@@ -102,7 +102,8 @@ private:
             if (term.isOperator()) {
                 if (term.isStartGroupOperator()) {
                     continue;
-                } if (term.isEndGroupOperator()) {
+                }
+                if (term.isEndGroupOperator()) {
                     performOperationWithStacks(valueStack, operatorStack);
                 } else {
                     while (!operatorStack.empty() &&
@@ -235,8 +236,9 @@ public:
                 transferTermStackToTerms(operatorStack, termsInPostfix, [term](TermStack& termStack) {
                     return !termStack.top().isStartGroupOperator();
                 });
-                if (!operatorStack.empty()) { operatorStack.pop();
-}
+                if (!operatorStack.empty()) {
+                    operatorStack.pop();
+                }
             } else if (term.isOperator()) {
                 transferTermStackToTerms(operatorStack, termsInPostfix, [term](TermStack& termStack) {
                     return term.getOperatorPriority() <= termStack.top().getOperatorPriority() &&

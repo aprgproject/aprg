@@ -32,7 +32,9 @@ public:
                    mathHelper::isAlmostEqual(capacity, second.capacity) && mathHelper::isAlmostEqual(flow, second.flow);
         }
 
-        [[nodiscard]] Vertex getTheOtherVertex(Vertex const& mainVertex) const { return source == mainVertex ? destination : source; }
+        [[nodiscard]] Vertex getTheOtherVertex(Vertex const& mainVertex) const {
+            return source == mainVertex ? destination : source;
+        }
 
         [[nodiscard]] FlowDataType getResidualCapacityTo(Vertex const& vertex) const {
             FlowDataType result{};
@@ -109,7 +111,9 @@ public:
 
     [[nodiscard]] FlowDataTypes getSortedWeights() const { return getSortedCapacities(); }
 
-    [[nodiscard]] EdgeToFlowEdgeDetailsMap const& getEdgeToFlowEdgeDetailsMap() const { return m_edgeToFlowEdgeDetailsMap; }
+    [[nodiscard]] EdgeToFlowEdgeDetailsMap const& getEdgeToFlowEdgeDetailsMap() const {
+        return m_edgeToFlowEdgeDetailsMap;
+    }
 
     [[nodiscard]] FlowEdges getFlowEdges() const {
         FlowEdges result;

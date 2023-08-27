@@ -17,11 +17,13 @@ public:
     using AdjacencyList = SetOfVertices;
     using AdjacencyLists = std::array<AdjacencyList, MAX_VERTEX_VALUE>;
 
-    UndirectedGraphWithArrayOfAdjacencyLists()  {}
+    UndirectedGraphWithArrayOfAdjacencyLists() {}
 
     [[nodiscard]] bool isEmpty() const override { return m_numberOfVertices == 0 && m_numberOfEdges == 0; }
 
-    [[nodiscard]] bool hasAnyConnection(Vertex const& vertex) const override { return !m_adjacencyLists[vertex].empty(); }
+    [[nodiscard]] bool hasAnyConnection(Vertex const& vertex) const override {
+        return !m_adjacencyLists[vertex].empty();
+    }
 
     [[nodiscard]] bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
         AdjacencyList const& adjacencyList(m_adjacencyLists[vertex1]);
