@@ -19,7 +19,7 @@ jobs:
       - name: Set up Git
         run: |
           git config user.name "aprgproject"
-          git config user.email "aprgproject@example.com"
+          git config user.email "aprgproject@gmail.com"
         
       - name: Make Changes
         run: |
