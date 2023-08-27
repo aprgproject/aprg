@@ -23,11 +23,17 @@ jobs:
         
       - name: Make Changes
         run: |
-          echo "Automated commit" > delete_this.txt
+          echo "Random number: $RANDOM" > delete_this.txt
         
       - name: Push Changes
         run: |
           git add delete_this.txt
-          git commit -m "Automatic commit for Static Analyzers With Auto Fixes"
-          git remote set-url --push origin https://aprgproject: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@github.com/aprgproject/aprg
-          git push origin main
+          git commit -m "APRG: Automatic commit for Static Analyzers With Auto Fixes"
+          # set origin (fetch)
+          git remote set-url origin https://$WORKFLOW_TOKEN@github.com/aprgproject/aprg
+          # set origin (push)
+          git remote set-url --push origin https://$WORKFLOW_TOKEN@github.com/aprgproject/aprg
+          # git remote -v
+          git push
+        env:
+          WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
