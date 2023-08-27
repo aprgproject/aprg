@@ -22,8 +22,6 @@ if [ -z "$cppProjects" ]; then
     exit 1
 fi
 
-scriptPrint "$scriptName" "$LINENO" "cppProjects: [$cppProjects]"
-
 # Create needed functions
 runStaticAnalyzersInDirectory() {
     local directoryPath
@@ -36,7 +34,10 @@ runStaticAnalyzersInDirectory() {
     "$buildAndRunScriptPath" build "StaticAnalyzersBuild" "Debug"
 }
 
+
 # Split the cppProjects into individual items
+scriptPrint "$scriptName" "$LINENO" "cppProjects: [$cppProjects]"
+chmod +x "$buildAndRunScriptPath"
 IFS=',' read -ra cppProjectDirectories <<< "$cppProjects"
 
 # Loop through the items and call a separate script for each
