@@ -7,6 +7,7 @@ scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
 includePathRegex=$(basename "$1")
 skipPathRegex=$(basename "$2")
+locatorFilename=$(basename "$3")
 if [ -z "$4" ]; then
     # If there are no second argument use the first argument
     fileToCopy=$(realpath "$(pwd)/$3")
@@ -25,7 +26,7 @@ source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 
 # Validate input
 if [ -z "$locatorFilename" ]; then
-    scriptPrint "$scriptName" "$LINENO" "Error: The filename cannot be empty."
+    scriptPrint "$scriptName" "$LINENO" "Error: The locatorFilename cannot be empty."
     exit 1
 fi
 if ! [[ -e $fileToCopy ]]; then
