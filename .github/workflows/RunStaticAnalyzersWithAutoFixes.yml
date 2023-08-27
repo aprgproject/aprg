@@ -85,6 +85,7 @@ jobs:
           staticAnalysisScriptPath=$(realpath "$(pwd)/${{ env.staticAnalysisScriptRelativePath }}")
           echo "pwd: [$(pwd)]"
           echo "staticAnalysisScriptPath: [$(staticAnalysisScriptPath)]"
+          chmod +x "$staticAnalysisScriptPath"
           "$staticAnalysisScriptPath"  "${{ needs.determineCppProjects.outputs.projectsToBuild }}"
         
       - name: Make Changes
