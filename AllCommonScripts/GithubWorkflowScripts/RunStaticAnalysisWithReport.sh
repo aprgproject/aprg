@@ -57,11 +57,16 @@ while read -r lineInAnalyzerOutput; do
         scriptPrint "$scriptName" "$LINENO" "pass issues: [$issues]"
         IFS=',' read -ra issues <<< "$issues"
         for issue in "${issues[@]}"; do
-            scriptPrint "$scriptName" "$LINENO" "pass issue: [$issue]"
+            scriptPrint "$scriptName" "$LINENO" "pass2 issue: [$issue]"
             (( issueToCountMap["$issue"]++ ))
+            scriptPrint "$scriptName" "$LINENO" "pass3 issue: [$issue]"
         done
+        scriptPrint "$scriptName" "$LINENO" "pass4 issue: [$lineInAnalyzerOutput]"
     fi
+        scriptPrint "$scriptName" "$LINENO" "pass5 issue: [$lineInAnalyzerOutput]"
 done < "$analyzerOutputFile"
+
+scriptPrint "$scriptName" "$LINENO" "pass6"
 
 # Sort the counts in descending order and store the keys (issue names) in an array
 sortedIssues=()
