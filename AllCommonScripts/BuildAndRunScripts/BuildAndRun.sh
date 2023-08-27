@@ -167,13 +167,13 @@ elif [ "$scriptOption" == "cleanAndConfigureWithClangAndStaticAnalyzers" ]; then
     getArgumentsForConfigure
     getClangAndClazyCompiler
     printConfigureParameters
-    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "cleanAndConfigureWithStaticAnalyzersWithAutoFix" ]; then
     performClean
     getArgumentsForConfigure
     getClangAndClazyCompiler
     printConfigureParameters
-    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "-DAPRG_ENABLE_STATIC_ANALYZERS_AUTO_FIX=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "-DAPRG_ENABLE_STATIC_ANALYZERS_AUTO_FIX=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "build" ]; then
     getArgumentsForBuild
     printBuildParameters

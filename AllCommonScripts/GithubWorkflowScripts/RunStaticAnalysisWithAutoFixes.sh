@@ -31,13 +31,13 @@ runStaticAnalyzersInDirectory() {
 
     cd "$directoryPath" || exit 1
     "$buildAndRunScriptPath" cleanAndConfigureWithStaticAnalyzersWithAutoFix "StaticAnalyzersBuild" "Debug" "Ninja"
+    set +e
     "$buildAndRunScriptPath" buildOnOneCore "StaticAnalyzersBuild" "Debug"
+    set -e
 }
-
 
 # Split the cppProjects into individual items
 scriptPrint "$scriptName" "$LINENO" "cppProjects: [$cppProjects]"
-chmod +x "$buildAndRunScriptPath"
 IFS=',' read -ra cppProjectDirectories <<< "$cppProjects"
 
 # Loop through the items and call a separate script for each

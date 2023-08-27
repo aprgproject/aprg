@@ -35,6 +35,7 @@ Checks: '
   -fuchsia-statically-constructed-objects,
   -google-runtime-int,
   -hicpp-vararg,
+  -misc-const-correctness,
   -readability-magic-numbers,
   -readability-function-cognitive-complexity,
   -misc-non-private-member-variables-in-classes

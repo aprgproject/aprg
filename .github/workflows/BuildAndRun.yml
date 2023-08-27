@@ -51,12 +51,12 @@ jobs:
         
       - name: Prepare for linting
         run: |
-          sudo apt-get update
+          sudo apt update
           sudo pip install cmakelang 
           echo "cmake-lint version: [$(cmake-lint --version)]"
-          sudo apt-get install shellcheck
+          sudo apt install shellcheck
           echo "shellcheck version: [$(shellcheck --version)]"
-          sudo apt-get install pylint
+          sudo apt install pylint
           echo "pylint version: [$(pylint --version)]"
           
       - name: Perform linting for cmake files
@@ -190,12 +190,12 @@ jobs:
       - name: Update APT for dependencies in Ubuntu
         if: startsWith(matrix.configurationName, 'Ubuntu')
         run: |
-          sudo apt-get update
+          sudo apt update
 
       - name: Install dependencies on Ubuntu/Gcc
         if: matrix.configurationName == 'UbuntuLatestGcc'
         run: |
-          sudo apt-get install cmake ninja-build
+          sudo apt install cmake ninja-build
           echo "cmake version: [$(cmake --version)]"
           echo "ninja version: [$(ninja --version)]"
           echo "gcc version: [$(gcc --version)]"
@@ -203,7 +203,7 @@ jobs:
       - name: Install dependencies on Ubuntu/Clang
         if: matrix.configurationName == 'UbuntuLatestClang'
         run: |
-          sudo apt-get install ninja-build cmake
+          sudo apt install ninja-build cmake
           echo "cmake version: [$(cmake --version)]"
           echo "ninja version: [$(ninja --version)]"
           echo "clang version: [$(clang --version)]"
@@ -219,19 +219,19 @@ jobs:
       - name: Install Boost on Ubuntu
         if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWithBoost), matrix.project)
         run: |
-          sudo apt-get install libboost-all-dev
+          sudo apt install libboost-all-dev
           echo "libboost-all-dev version (dpkg): [$(dpkg -l | grep libboost-all-dev)]"
 
       - name: Install GSL on Ubuntu
         if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWithGsl), matrix.project)
         run: |
-          sudo apt-get install libgsl-dev
+          sudo apt install libgsl-dev
           echo "libgsl-dev version (dpkg): [$(dpkg -l | grep libgsl-dev)]"
 
       - name: Install 7zip
         if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWith7Zip), matrix.project)
         run: |
-          sudo apt-get install p7zip-full
+          sudo apt install p7zip-full
           echo "p7zip-full version (dpkg): [$(dpkg -l | grep p7zip-full)]"
           
       - name: Prepare aprg directories and scripts
@@ -307,7 +307,7 @@ jobs:
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          sudo apt-get install clang-tidy cppcheck clazy
+          sudo apt install clang-tidy cppcheck clazy
           echo "clang-tidy version: [$(clang-tidy --version)]"
           echo "cppcheck version: [$(cppcheck --version)]"
           echo "clazy version: [$(clazy --version)]"

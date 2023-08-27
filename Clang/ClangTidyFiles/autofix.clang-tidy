@@ -1,5 +1,6 @@
 # -> Checkers that should be auto fixed
 Checks: '
+  cppcoreguidelines-init-variables,
   cppcoreguidelines-special-member-functions,
   google-explicit-constructor,
   google-readability-braces-around-statements,

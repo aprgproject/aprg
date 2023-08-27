@@ -9,7 +9,7 @@ set(JSON_Install OFF)
 set(JSON_SystemInclude ON)
 
 # Guide to JSON flags from CMakeLists.txt
-# option(JSON_BuildTests                     "Build the unit tests when BUILD_TESTING is enabled." ${JSON_BuildTests_INIT})
+# option(JSON_BuildTests                     "Build the unit tests when ${JSON_BuildTests_INIT} is enabled." )
 # option(JSON_CI                             "Enable CI build targets." OFF)
 # option(JSON_Diagnostics                    "Use extended diagnostic messages." OFF)
 # option(JSON_GlobalUDLs                     "Place use-defined string literals in the global namespace." ON)
