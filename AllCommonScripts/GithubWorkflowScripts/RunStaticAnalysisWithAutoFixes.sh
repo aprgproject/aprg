@@ -39,12 +39,10 @@ runStaticAnalyzersInDirectory() {
 # Split the cppProjects into individual items
 IFS=',' read -ra cppProjectDirectories <<< "$cppProjects"
 
-scriptPrint "$scriptName" "$LINENO" "cppProjectDirectories: [$cppProjectDirectories]"
-
 # Loop through the items and call a separate script for each
 for cppProjectDirectory in "${cppProjectDirectories[@]}"; do
     scriptPrint "$scriptName" "$LINENO" "cppProjectDirectory in: [$cppProjectDirectory]"
-    cppProjectAbsolutePath=$(realpath "$aprgDirectory/cppProjectDirectory/")
+    cppProjectAbsolutePath=$(realpath "$aprgDirectory/$cppProjectDirectory/")
     scriptPrint "$scriptName" "$LINENO" "cppProjectAbsolutePath in: [$cppProjectAbsolutePath]"
     runStaticAnalyzersInDirectory "$cppProjectAbsolutePath"
 done

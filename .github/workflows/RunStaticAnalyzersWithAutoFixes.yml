@@ -36,7 +36,7 @@ jobs:
           
           
   runStaticAnalyzersOnCppProjects:
-    name: Auto fix ${{ matrix.project }} using Static Analyzers 
+    name: Run Static Analyzers On C/C++ Projects
     needs: determineCppProjects
     runs-on: ubuntu-latest
     steps:
@@ -82,8 +82,8 @@ jobs:
       - name: Build and Run with Static Analyzers
         shell: bash
         run: |
+          echo "C/C++ Projects to check: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
           staticAnalysisScriptPath=$(realpath "$(pwd)/${{ env.staticAnalysisScriptRelativePath }}")
-          echo "pwd: [$(pwd)]"
           echo "staticAnalysisScriptPath: [$(staticAnalysisScriptPath)]"
           chmod +x "$staticAnalysisScriptPath"
           "$staticAnalysisScriptPath"  "${{ needs.determineCppProjects.outputs.projectsToBuild }}"

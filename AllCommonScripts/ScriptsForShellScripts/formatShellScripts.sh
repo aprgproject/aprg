@@ -36,6 +36,9 @@ formatShellScriptsInDirectory() {
             # convert tabs to 4 spaces
             expand -t 4 "$filePath" > "$tempFile"
             mv "$tempFile" "$filePath"
+
+            # be sure to make it an executable
+            chmod +x "$filePath"
         fi
     done < <(find "$directoryPath" -type f -name "*.sh")
 }
