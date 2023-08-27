@@ -7,7 +7,7 @@ using namespace std;
 
 namespace alba {
 
-AsilBasebandPooling::AsilBasebandPooling() {}
+AsilBasebandPooling::AsilBasebandPooling() = default;
 
 AsilBasebandPooling::AsilBasebandPooling(
     LcgInitializerList const& lcgs, BasebandCardInitializerList const& basebandCards) {
