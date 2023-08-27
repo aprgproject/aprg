@@ -9,8 +9,100 @@ on:
         default: 'all'
 
 jobs:
-  RunAutoFixesThenCommitPush:
+
+  initialSetup:
+    name: Perform initial setup
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+        
+  determineCppProjects:
+    name: Determine CPP Projects
+    runs-on: ubuntu-latest
+    needs: initialSetup
+    outputs:
+      projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_CPP_DIRECTORIES }}
+      excludedConfigurations: ${{ steps.idOfGetCppProjectStep.outputs.APRG_EXCLUDED_CONFIGURATIONS }}
+      projectsWithBoost: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_BOOST }}
+      projectsWithGsl: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_GSL }}
+      projectsWith7Zip: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_7ZIP }}
+    steps:
+      - name: Checkout code for changes checking
+        id: idOfCheckout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+      - name: Get C/C++ Projects from Git Diff and User Input
+        id: idOfGetCppProjectStep
+        run: |
+          determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
+          echo "determineCppProjectsPath: [$determineCppProjectsPath]"
+          chmod +x "$determineCppProjectsPath"
+          "$determineCppProjectsPath" checkUserInput "${{ inputs.cppCMakeProjects }}"
+          
+          
+  runStaticAnalyzersOnCppProjects:
+    name: Auto fix ${{ matrix.project }} using Static Analyzers 
+    needs: determineCppProjects
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
+    steps:
+          
+      - name: Print Job Details
+        run: |
+          echo matrix.project: ${{ matrix.project }}
+          echo github.event.action: ${{ github.event.action }}
+          echo github.event_name: ${{ github.event_name }}
+
+      - name: Install dependencies on Ubuntu/Clang
+        run: |
+          sudo apt-get install ninja-build cmake
+          echo "cmake version: [$(cmake --version)]"
+          echo "ninja version: [$(ninja --version)]"
+          echo "clang version: [$(clang --version)]"
+
+      - name: Install Boost on Ubuntu
+        if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWithBoost), matrix.project)
+        run: |
+          sudo apt-get install libboost-all-dev
+          echo "libboost-all-dev version (dpkg): [$(dpkg -l | grep libboost-all-dev)]"
+
+      - name: Install GSL on Ubuntu
+        if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWithGsl), matrix.project)
+        run: |
+          sudo apt-get install libgsl-dev
+          echo "libgsl-dev version (dpkg): [$(dpkg -l | grep libgsl-dev)]"
+
+      - name: Install 7zip
+        if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWith7Zip), matrix.project)
+        run: |
+          sudo apt-get install p7zip-full
+          echo "p7zip-full version (dpkg): [$(dpkg -l | grep p7zip-full)]"
+            
+      - name: Build and Run with Static Analyzers
+        shell: bash
+        working-directory: ${{ matrix.project }}
+        run: |
+          sudo apt-get install clang-tidy cppcheck clazy
+          echo "clang-tidy version: [$(clang-tidy --version)]"
+          echo "cppcheck version: [$(cppcheck --version)]"
+          echo "clazy version: [$(clazy --version)]"
+          currentDirectory="$(pwd)"
+          "$buildAndRunScriptPath" cleanAndConfigureWithStaticAnalyzersWithAutoFix "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          echo "Running Static Analysis..."
+          echo "Showing grepped output:"
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }} | grep -P "^.*$unquotedProject.* (style|warning|error): .*$" || true
+
+ 
+  commitAndPushChanges:
+    runs-on: ubuntu-latest
+    needs: runStaticAnalyzersOnCppProjects
     permissions:
       contents: write
     
@@ -22,20 +114,20 @@ jobs:
         run: |
           git config user.name "aprgproject"
           git config user.email "aprgproject@gmail.com"
-        
-      - name: Make Changes
-        run: |
-          echo "Random number: $RANDOM" >> delete_this.txt
-        
-      - name: Push Changes
-        run: |
-          git add delete_this.txt
-          git commit -m "APRG: Automatic commit for Static Analyzers With Auto Fixes"
           # set origin (fetch)
           git remote set-url origin https://$WORKFLOW_TOKEN@github.com/aprgproject/aprg
           # set origin (push)
           git remote set-url --push origin https://$WORKFLOW_TOKEN@github.com/aprgproject/aprg
           # git remote -v
-          git push
         env:
           WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+        
+      - name: Make Changes
+        run: |
+          git add -u
+          git diff --cached | head -n 100
+        
+      - name: Commit and Push Changes
+        run: |
+          git commit -m "APRG: Automatic commit for Static Analyzers With Auto Fixes"
+          git push

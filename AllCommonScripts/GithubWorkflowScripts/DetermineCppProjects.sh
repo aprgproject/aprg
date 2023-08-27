@@ -5,7 +5,8 @@ scriptPath=$(realpath "$0")
 scriptDirectory=$(dirname "$scriptPath")
 scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
-userInput="$1"
+scriptOption="$1"
+userInput="$2"
 cppProjects=""
 
 # Source needed scripts
@@ -19,19 +20,20 @@ source "$scriptDirectory/ProjectsWithGsl.sh"
 projectsWith7Zip=""
 source "$scriptDirectory/ProjectsWith7Zip.sh"
 
-# Get C/C++ projects by git changes or searching on directories.
-if [[ -z $userInput ]]; then
+# Get C/C++ projects by git changes or by user input.
+if [[ "$scriptOption" == "checkGitAndUserInput" || "$scriptOption" == "checkGit" ]]; then
     scriptPrint "$scriptName" "$LINENO" "The userInput is empty so getting C/C++ projects from Git changes."
     cppProjectsFromGit=""
     source "$scriptDirectory/DetectGitChanges.sh"
     detectGitChanges
-    cppProjects=$cppProjectsFromGit
-else
+    cppProjects="$cppProjects $cppProjectsFromGit"
+fi
+if [[ -z $userInput && ("$scriptOption" == "checkGitAndUserInput" || "$scriptOption" == "checkUserInput") ]]; then
     scriptPrint "$scriptName" "$LINENO" "The userInput is [$userInput], proceeding to search C/C++ projects."
     cppProjectsFound=""
     source "$scriptDirectory/FindCppProjects.sh"
     findCppProjects "$userInput"
-    cppProjects=$cppProjectsFound
+    cppProjects="$cppProjects $cppProjectsFound"
 fi
 
 # Put AprgCommon if empty

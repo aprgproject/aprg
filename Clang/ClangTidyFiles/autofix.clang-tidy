@@ -12,6 +12,7 @@ Checks: '
   hicpp-use-auto,
   hicpp-use-equals-default,
   llvm-else-after-return,
+  llvm-namespace-comment,
   readability-braces-around-statements,
   readability-convert-member-functions-to-static,
   readability-else-after-return,
