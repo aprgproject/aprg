@@ -2,7 +2,7 @@
 
 namespace alba {
 
-LrmAllocationSimulator::LrmAllocationSimulator() {}
+LrmAllocationSimulator::LrmAllocationSimulator() = default;
 
 Configuration createConfigurationForOneFspOneLcg() {
     Configuration configuration;

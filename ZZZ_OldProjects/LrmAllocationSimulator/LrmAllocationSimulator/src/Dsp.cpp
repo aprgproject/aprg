@@ -5,9 +5,9 @@ using namespace std;
 namespace alba {
 DspDetails::DspDetails()
 
-{}
+= default;
 
-Dsp::Dsp() {}
+Dsp::Dsp() = default;
 
 Dsp::Dsp(DspDetails const& dspDetails) : m_dspDetails(dspDetails) {}
 

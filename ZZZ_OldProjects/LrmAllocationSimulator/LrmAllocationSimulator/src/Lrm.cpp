@@ -8,9 +8,9 @@ using namespace std;
 
 namespace alba {
 
-SelectionDspResult::SelectionDspResult() {}
+SelectionDspResult::SelectionDspResult() = default;
 
-SelectionDspResultForCcdAndMcd::SelectionDspResultForCcdAndMcd() {}
+SelectionDspResultForCcdAndMcd::SelectionDspResultForCcdAndMcd() = default;
 
 FspPairDetails::FspPairDetails(
     unsigned int const firstFspTemp, unsigned int const secondFspTemp, unsigned int const priorityTemp)

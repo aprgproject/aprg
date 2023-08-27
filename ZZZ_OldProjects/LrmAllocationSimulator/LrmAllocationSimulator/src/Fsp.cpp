@@ -2,9 +2,9 @@
 
 namespace alba {
 
-FspDetails::FspDetails() {}
+FspDetails::FspDetails() = default;
 
-Fsp::Fsp() {}
+Fsp::Fsp() = default;
 
 Fsp::Fsp(FspDetails const& fspDetails) : m_fspDetails(fspDetails) {}
 
