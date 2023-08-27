@@ -8,6 +8,7 @@ on:
         required: true
         default: 'all'
 env:
+  determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
   staticAnalysisScriptRelativePath: "AllCommonScripts/GithubWorkflowScripts/RunStaticAnalysisWithAutoFixes.sh"
 
 
@@ -85,17 +86,6 @@ jobs:
           echo "pwd: [$(pwd)]"
           echo "staticAnalysisScriptPath: [$(staticAnalysisScriptPath)]"
           "$staticAnalysisScriptPath"  "${{ needs.determineCppProjects.outputs.projectsToBuild }}"
-
- 
-  commitAndPushChanges:
-    runs-on: ubuntu-latest
-    needs: runStaticAnalyzersOnCppProjects
-    permissions:
-      contents: write
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
         
       - name: Make Changes
         run: |
@@ -104,5 +94,6 @@ jobs:
         
       - name: Commit and Push Changes
         run: |
-          git commit -m "APRG: Automatic commit for Static Analyzers With Auto Fixes"
-          git push
+          git commit -m "APRGPROJECT: Automatic commit for Static Analyzers with Auto Fixes"
+          echo "last step is push"
+          #git push

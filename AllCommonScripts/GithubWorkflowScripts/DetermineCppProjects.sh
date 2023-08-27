@@ -28,14 +28,14 @@ if [[ "$scriptOption" == "checkGit" ]]; then
     cppProjectsFromGit=""
     source "$scriptDirectory/DetectGitChanges.sh"
     detectGitChanges
-    cppProjects="$cppProjects $cppProjectsFromGit"
+    cppProjects="$cppProjectsFromGit"
     scriptPrint "$scriptName" "$LINENO" "The C/C++ projects based from git changes: [$cppProjects]"
 elif [[ "$scriptOption" == "checkUserInput" ]]; then
     scriptPrint "$scriptName" "$LINENO" "Searching C/C++ projects based from user input: [$userInput]..."
     cppProjectsFound=""
     source "$scriptDirectory/FindCppProjects.sh"
     findCppProjects "$userInput"
-    cppProjects="$cppProjects $cppProjectsFound"
+    cppProjects="$cppProjectsFound"
     scriptPrint "$scriptName" "$LINENO" "The C/C++ projects based from user input: [$cppProjects]"
 fi
 
