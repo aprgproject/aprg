@@ -16,7 +16,7 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         
       - name: Set up Git
         run: |
@@ -35,7 +35,7 @@ jobs:
           git remote set-url origin https://$WORKFLOW_TOKEN@github.com/aprgproject/aprg
           # set origin (push)
           git remote set-url --push origin https://$WORKFLOW_TOKEN@github.com/aprgproject/aprg
-          git remote -v
-          GIT_TRACE=1 git push
+          # git remote -v
+          git push
         env:
           WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
