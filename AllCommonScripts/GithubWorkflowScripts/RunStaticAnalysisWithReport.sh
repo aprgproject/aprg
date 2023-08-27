@@ -7,7 +7,7 @@ scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
 buildAndRunScriptPath="$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
 analyzerOutputFile="$aprgDirectory/ZZZ_Temp/analyzerIssues.txt"
-cppProjects="$1"
+cppProjects="ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator" #"$1"
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
@@ -37,15 +37,15 @@ runStaticAnalyzersInDirectory() {
 
 # Split the cppProjects into individual items
 scriptPrint "$scriptName" "$LINENO" "cppProjects: [$cppProjects]"
-IFS=',' read -ra cppProjectDirectories <<< "$cppProjects"
-
-# Loop through the items and call a separate script for each
-for cppProjectDirectory in "${cppProjectDirectories[@]}"; do
-    scriptPrint "$scriptName" "$LINENO" "cppProjectDirectory in: [$cppProjectDirectory]"
-    cppProjectAbsolutePath=$(realpath "$aprgDirectory/$cppProjectDirectory/")
-    scriptPrint "$scriptName" "$LINENO" "cppProjectAbsolutePath in: [$cppProjectAbsolutePath]"
-    runStaticAnalyzersInDirectory "$cppProjectAbsolutePath"
-done
+#IFS=',' read -ra cppProjectDirectories <<< "$cppProjects"
+#
+## Loop through the items and call a separate script for each
+#for cppProjectDirectory in "${cppProjectDirectories[@]}"; do
+#    scriptPrint "$scriptName" "$LINENO" "cppProjectDirectory in: [$cppProjectDirectory]"
+#    cppProjectAbsolutePath=$(realpath "$aprgDirectory/$cppProjectDirectory/")
+#    scriptPrint "$scriptName" "$LINENO" "cppProjectAbsolutePath in: [$cppProjectAbsolutePath]"
+#    runStaticAnalyzersInDirectory "$cppProjectAbsolutePath"
+#done
 
 scriptPrint "$scriptName" "$LINENO" "pass1"
 # Save issues into a map, and increment count for each issue
@@ -58,6 +58,7 @@ while read -r lineInAnalyzerOutput; do
         IFS=',' read -ra issues <<< "$issues"
         for issue in "${issues[@]}"; do
             scriptPrint "$scriptName" "$LINENO" "pass2 issue: [$issue]"
+            issueToCountMap["$issue"]=$(( issueToCountMap["$issue"] ))
             (( issueToCountMap["$issue"]++ ))
             scriptPrint "$scriptName" "$LINENO" "pass3 issue: [$issue]"
         done
