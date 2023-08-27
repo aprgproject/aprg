@@ -1,0 +1,95 @@
+name: Run Static Analyzers With Report
+
+on:
+  workflow_dispatch:
+    inputs:
+      cppCMakeProjects:
+        description: 'C/C++ Project ("all" for all projects)'
+        required: true
+        default: 'all'
+env:
+  determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
+  staticAnalysisScriptRelativePath: "AllCommonScripts/GithubWorkflowScripts/RunStaticAnalysisWithReport.sh"
+  formatCppFilesRelativePath: "AllCommonScripts/ScriptsForCpp/formatCppFiles.sh"
+
+jobs:
+        
+  determineCppProjects:
+    name: Determine CPP Projects
+    runs-on: ubuntu-latest
+    outputs:
+      projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_CPP_DIRECTORIES }}
+    steps:
+      - name: Checkout code for changes checking
+        id: idOfCheckout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+      - name: Get C/C++ Projects from Git Diff and User Input
+        id: idOfGetCppProjectStep
+        run: |
+          determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
+          echo "determineCppProjectsPath: [$determineCppProjectsPath]"
+          chmod +x "$determineCppProjectsPath"
+          "$determineCppProjectsPath" checkUserInput "${{ inputs.cppCMakeProjects }}"
+          
+          
+  runStaticAnalyzersOnCppProjects:
+    name: Run Static Analyzers On C/C++ Projects
+    needs: determineCppProjects
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+          
+      - name: Print Job Details
+        run: |
+          echo github.event.action: ${{ github.event.action }}
+          echo github.event_name: ${{ github.event_name }}
+          
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false 
+          # use the personal access token (without this setting, the GITHUB_TOKEN is used)
+          # this is needed to trigger BuildAndRun github workflow after commit
+        
+      - name: Set up Git
+        run: |
+          git config user.name "aprgproject"
+          git config user.email "aprgproject@gmail.com"
+          # set origin (fetch)
+          git remote set-url origin https://$WORKFLOW_TOKEN@github.com/aprgproject/aprg
+          # set origin (push)
+          git remote set-url --push origin https://$WORKFLOW_TOKEN@github.com/aprgproject/aprg
+          # git remote -v
+        env:
+          WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install ninja-build cmake
+          echo "cmake version: [$(cmake --version)]"
+          echo "ninja version: [$(ninja --version)]"
+          echo "clang version: [$(clang --version)]"
+          sudo apt install libboost-all-dev
+          echo "libboost-all-dev version (dpkg): [$(dpkg -l | grep libboost-all-dev | tr -s ' ')]"
+          sudo apt install libgsl-dev
+          echo "libgsl-dev version (dpkg): [$(dpkg -l | grep libgsl-dev | tr -s ' ')]"
+          sudo apt install p7zip-full
+          echo "p7zip-full version (dpkg): [$(dpkg -l | grep p7zip-full | tr -s ' ')]"
+          sudo apt install clang-tidy cppcheck clazy
+          echo "clang-tidy version: [$(clang-tidy --version)]"
+          echo "cppcheck version: [$(cppcheck --version)]"
+          echo "clazy version: [$(clazy --version)]"
+            
+      - name: Build and Run with Static Analyzers
+        shell: bash
+        run: |
+          echo "C/C++ Projects to check: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
+          staticAnalysisScriptPath=$(realpath "$(pwd)/${{ env.staticAnalysisScriptRelativePath }}")
+          echo "staticAnalysisScriptPath: [$(staticAnalysisScriptPath)]"
+          chmod +x "$staticAnalysisScriptPath"
+          "$staticAnalysisScriptPath"  "${{ needs.determineCppProjects.outputs.projectsToBuild }}"

@@ -39,13 +39,13 @@ runStaticAnalyzersInDirectory() {
 scriptPrint "$scriptName" "$LINENO" "cppProjects: [$cppProjects]"
 IFS=',' read -ra cppProjectDirectories <<< "$cppProjects"
 
-## Loop through the items and call a separate script for each
-#for cppProjectDirectory in "${cppProjectDirectories[@]}"; do
-#    scriptPrint "$scriptName" "$LINENO" "cppProjectDirectory in: [$cppProjectDirectory]"
-#    cppProjectAbsolutePath=$(realpath "$aprgDirectory/$cppProjectDirectory/")
-#    scriptPrint "$scriptName" "$LINENO" "cppProjectAbsolutePath in: [$cppProjectAbsolutePath]"
-#    runStaticAnalyzersInDirectory "$cppProjectAbsolutePath"
-#done
+# Loop through the items and call a separate script for each
+for cppProjectDirectory in "${cppProjectDirectories[@]}"; do
+    scriptPrint "$scriptName" "$LINENO" "cppProjectDirectory in: [$cppProjectDirectory]"
+    cppProjectAbsolutePath=$(realpath "$aprgDirectory/$cppProjectDirectory/")
+    scriptPrint "$scriptName" "$LINENO" "cppProjectAbsolutePath in: [$cppProjectAbsolutePath]"
+    runStaticAnalyzersInDirectory "$cppProjectAbsolutePath"
+done
 
 # Save issues into a map, and increment count for each issue
 declare -A issueToCountMap
