@@ -42,23 +42,13 @@ env:
 
 jobs:
 
-  initialSetup:
-    name: Perform initial setup
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code for changes checking
-        id: idOfCheckout
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: 2
-
-
   lintChecks:
     name: Perform linting
-    needs: initialSetup
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
       - name: Prepare for linting
         run: |
           sudo apt-get update
@@ -129,7 +119,6 @@ jobs:
   determineCppProjects:
     name: Determine CPP Projects
     runs-on: ubuntu-latest
-    needs: initialSetup
     outputs:
       projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_CPP_DIRECTORIES }}
       excludedConfigurations: ${{ steps.idOfGetCppProjectStep.outputs.APRG_EXCLUDED_CONFIGURATIONS }}
@@ -137,6 +126,13 @@ jobs:
       projectsWithGsl: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_GSL }}
       projectsWith7Zip: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_7ZIP }}
     steps:
+      - name: Checkout code for changes checking
+        id: idOfCheckout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+          
       - name: Get C/C++ Projects from Git Diff and User Input
         id: idOfGetCppProjectStep
         run: |
@@ -158,13 +154,15 @@ jobs:
         exclude: ${{ fromJSON(needs.determineCppProjects.outputs.excludedConfigurations) }}
         
     steps:
-          
       - name: Print Job Details
         run: |
           echo matrix.project: ${{ matrix.project }}
           echo matrix.configurationName: ${{ matrix.configurationName }}
           echo github.event.action: ${{ github.event.action }}
           echo github.event_name: ${{ github.event_name }}
+          
+      - name: Checkout code
+        uses: actions/checkout@v3
           
       - name: Install dependencies on Windows
         if: startsWith(matrix.configurationName, 'Windows')
