@@ -97,7 +97,6 @@ public:
     template <PrintFormat printFormat>
     struct PrintObject {
         explicit PrintObject(AlbaDateTime const& dataTimeToPrint) : savedDateTime(dataTimeToPrint) {}
-        // NOLINTNEXTLINE(cppcoreguidelines-non-private-member-variables-in-classes,misc-non-private-member-variables-in-classes)
         AlbaDateTime const& savedDateTime;
     };
 
