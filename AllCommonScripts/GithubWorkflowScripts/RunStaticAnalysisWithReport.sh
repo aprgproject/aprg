@@ -47,13 +47,17 @@ for cppProjectDirectory in "${cppProjectDirectories[@]}"; do
     runStaticAnalyzersInDirectory "$cppProjectAbsolutePath"
 done
 
+scriptPrint "$scriptName" "$LINENO" "pass1"
 # Save issues into a map, and increment count for each issue
 declare -A issueToCountMap
 while read -r lineInAnalyzerOutput; do
+    scriptPrint "$scriptName" "$LINENO" "pass lineInAnalyzerOutput: [$lineInAnalyzerOutput]"
     issues=$(echo "$lineInAnalyzerOutput" | sed -nE 's|^.*\[(.*)\].*$|\1|p')
     if [[ -n "$issues" ]]; then
+        scriptPrint "$scriptName" "$LINENO" "pass issues: [$issues]"
         IFS=',' read -ra issues <<< "$issues"
         for issue in "${issues[@]}"; do
+            scriptPrint "$scriptName" "$LINENO" "pass issue: [$issue]"
             (( issueToCountMap["$issue"]++ ))
         done
     fi
@@ -62,11 +66,14 @@ done < "$analyzerOutputFile"
 # Sort the counts in descending order and store the keys (issue names) in an array
 sortedIssues=()
 while IFS= read -r issueAndCount; do
+    scriptPrint "$scriptName" "$LINENO" "pass issueAndCount: [$issueAndCount]"
     issue="${issueAndCount%% *}"
+    scriptPrint "$scriptName" "$LINENO" "pass issue: [$issue]"
     sortedIssues+=("$issue")
 done < <(for issue in "${!issueToCountMap[@]}"; do echo "$issue ${issueToCountMap[$issue]}"; done | sort -nr -k2)
 
 # Print the contents of the map with highest counts first
 for issue in "${sortedIssues[@]}"; do
+    scriptPrint "$scriptName" "$LINENO" "pass issue: [$issue]"
     scriptPrint "$scriptName" "$LINENO" "issue: [$issue] | numberOfHits: ${issueToCountMap[$issue]}"
 done

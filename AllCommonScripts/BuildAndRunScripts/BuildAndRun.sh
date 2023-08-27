@@ -193,3 +193,5 @@ else
     scriptPrintInCppMatcherFormat "$scriptPath" "$LINENO" "${BASH_LINENO[0]}" "error: The script option [$scriptOption] is NOT supported by the shell script."
     exit 1
 fi
+
+scriptPrint "$scriptName" "$LINENO" "The script is finished."
