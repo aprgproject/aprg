@@ -34,6 +34,6 @@ jobs:
           # set origin (push)
           git remote set-url --push origin https://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@github.com/aprgproject/aprg
           git remote -v
-          git push
+          GIT_TRACE=1 git push
         env:
           WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
