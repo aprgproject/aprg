@@ -50,6 +50,10 @@ jobs:
           
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false 
+          # use the personal access token (without this setting, the GITHUB_TOKEN is used)
+          # this is needed to trigger BuildAndRun github workflow after commit
         
       - name: Set up Git
         run: |
@@ -102,9 +106,14 @@ jobs:
         
       - name: Commit and Push Changes
         run: |
+          echo "Perfoming "git add" to add all versioned files that was changed..."
           git add -u
-          echo "Performing git diff, just showing changes for 100 lines:"
+          echo "Performing "git diff" to see the local changes (just showing the first 100 lines):"
           git diff --cached | head -n 100
+          echo "Performing "git commit" with a message..."
           git commit -m "APRGPROJECT: Automatic commit for Static Analyzers with Auto Fixes"
+          echo "Performing "git pull" for the last time before "push" to merge with recent commits..."
           git pull --no-edit
+          echo "Performing "git push"..."
           git push
+          echo "The git push done has finished, the changes should exist now in the repository."
