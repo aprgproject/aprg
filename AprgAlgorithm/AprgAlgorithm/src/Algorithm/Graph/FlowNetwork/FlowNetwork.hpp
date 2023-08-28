@@ -23,10 +23,10 @@ public:
         }
     };
     struct FlowEdge {
-        Vertex source;
-        Vertex destination;
-        FlowDataType capacity;
-        FlowDataType flow;
+        Vertex source{};
+        Vertex destination{};
+        FlowDataType capacity{};
+        FlowDataType flow{};
         bool operator==(FlowEdge const& second) const {
             return source == second.source && destination == second.destination &&
                    mathHelper::isAlmostEqual(capacity, second.capacity) && mathHelper::isAlmostEqual(flow, second.flow);

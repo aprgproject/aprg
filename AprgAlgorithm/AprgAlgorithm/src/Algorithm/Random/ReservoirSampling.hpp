@@ -19,7 +19,7 @@ public:
         // Auxiliary Space: O(k)
 
         Samples reservoir;
-        int i;
+        int i = 0;
         for (i = 0; i < numberOfSamples; i++) {
             reservoir.emplace_back(stream[i]);
         }

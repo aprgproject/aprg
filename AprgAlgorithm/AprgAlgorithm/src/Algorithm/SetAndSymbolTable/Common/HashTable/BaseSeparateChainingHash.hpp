@@ -20,7 +20,7 @@ public:
     using Keys = std::vector<Key>;
     using HashTable = std::array<UnorderedLinkedList, HASH_TABLE_SIZE>;
 
-    BaseSeparateChainingHash() {}
+    BaseSeparateChainingHash() = default;
 
     ~BaseSeparateChainingHash() override = default;  // no need for virtual destructor because base destructor is
                                                      // virtual (similar to other virtual functions)

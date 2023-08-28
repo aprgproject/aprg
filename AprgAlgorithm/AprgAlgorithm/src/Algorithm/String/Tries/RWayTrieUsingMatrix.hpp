@@ -21,7 +21,7 @@ public:
     using SetOfNodeIds = std::set<NodeId>;
     using ValueUniquePointer = std::unique_ptr<Value>;
     struct Node {
-        NodeId nextNodeId;
+        NodeId nextNodeId{};
         ValueUniquePointer valueUniquePointer;
     };
     using NodePointer = std::unique_ptr<Node>;

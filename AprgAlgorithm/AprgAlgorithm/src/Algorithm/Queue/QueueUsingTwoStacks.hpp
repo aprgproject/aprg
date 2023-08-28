@@ -10,7 +10,7 @@ namespace alba::algorithm {
 template <typename Object, typename StackWithObject>
 class QueueUsingTwoStacks : public BaseQueue<Object> {
 public:
-    QueueUsingTwoStacks() {}
+    QueueUsingTwoStacks() = default;
 
     [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 

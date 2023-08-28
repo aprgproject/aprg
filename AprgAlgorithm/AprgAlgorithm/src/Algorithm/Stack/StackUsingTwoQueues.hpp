@@ -11,7 +11,7 @@ namespace alba::algorithm {
 template <typename Object, typename QueueWithObject>
 class StackUsingTwoQueues : public BaseStack<Object> {
 public:
-    StackUsingTwoQueues() {}
+    StackUsingTwoQueues() = default;
 
     [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 
