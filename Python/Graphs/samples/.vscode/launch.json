@@ -5,12 +5,57 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
+            "name": "Run In WSL",
+            "type": "node",
+            "request": "launch",
+            "program": "python3",
+            "args": [
+                "${relativeFile}"
+            ],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "runtimeExecutable": "wsl",
+            "runtimeArgs": [],
+            "env": {},
+            "stopOnEntry": true,
+            "outFiles": [],
+            "sourceMaps": false,
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "name": "Run locally",
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true
+        },
+        {
+            "name": "Check with Pylint",
+            "type": "node",
+            "request": "launch",
+            "program": "pylint",
+            "args": [
+                "--rcfile=$(pwd)/../../.pylintrc",
+                "${relativeFile}"
+            ],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "runtimeExecutable": "wsl",
+            "runtimeArgs": [],
+            "env": {},
+            "stopOnEntry": true,
+            "outFiles": [],
+            "sourceMaps": false,
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
         }
     ]
 }

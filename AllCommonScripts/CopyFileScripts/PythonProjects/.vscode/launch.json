@@ -8,21 +8,15 @@
             "name": "Run In WSL",
             "type": "node",
             "request": "launch",
-            "program": "./.vscode/runWslCommonScript.sh",
+            "program": "python3",
             "args": [
-                "outputWithAbsolutePaths",
-                "run",
-                "WslBuild",
-                "" //"--gtest_filter=*.*"
+                "${relativeFile}"
             ],
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
-            "preLaunchTask": "Install In WSL",
             "runtimeExecutable": "wsl",
-            "runtimeArgs": [
-                "bash"
-            ],
+            "runtimeArgs": [],
             "env": {},
             "stopOnEntry": true,
             "outFiles": [],
@@ -30,25 +24,38 @@
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
-            },
+            }
         },
-        // For local builds, just run cmake in command palette (Ctrl + Shift + P)
         {
             "name": "Run locally",
-            "type": "cppvsdbg",
+            "type": "python",
             "request": "launch",
-            "program": "${command:cmake.launchTargetPath}",
-            "args": [
-                "" //"--gtest_filter=*.*"
-            ],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
+            "program": "${file}",
             "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Check with Pylint",
+            "type": "node",
+            "request": "launch",
+            "program": "pylint",
+            "args": [
+                "--rcfile=$(pwd)/../../.pylintrc",
+                "${relativeFile}"
+            ],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "runtimeExecutable": "wsl",
+            "runtimeArgs": [],
+            "env": {},
+            "stopOnEntry": true,
+            "outFiles": [],
+            "sourceMaps": false,
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
-            },
+            }
         }
     ]
 }
