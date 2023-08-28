@@ -123,7 +123,7 @@ AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
     Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
     AlbaNumber const& initialValueForIteration, int maxNumberOfIterations) {
     AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
-    scopeConfigurationObject.setInThisScopeTheTolerancesToZero();
+    AlbaNumber::ScopeConfigurationObject::setInThisScopeTheTolerancesToZero();
 
     SubstitutionOfVariablesToValues substitution;
     AlbaNumber currentInput(initialValueForIteration);
@@ -163,7 +163,7 @@ AlbaNumber getLimitAtAValueUsingTrendOfValues(
     Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
     AlbaNumber const& previousAcceptedInput, AlbaNumber const& previousOfPreviousAcceptedInput) {
     AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
-    scopeConfigurationObject.setInThisScopeTheTolerancesToZero();
+    AlbaNumber::ScopeConfigurationObject::setInThisScopeTheTolerancesToZero();
 
     AlbaNumber result(ALBA_NUMBER_NOT_A_NUMBER);
     SubstitutionOfVariablesToValues substitution;

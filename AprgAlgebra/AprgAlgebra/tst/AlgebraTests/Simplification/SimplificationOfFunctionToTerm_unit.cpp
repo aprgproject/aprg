@@ -12,8 +12,10 @@ namespace alba::algebra::Simplification {
 TEST(SimplificationOfFunctionToTermTest, SimplifyWorksWhenInputIsConstant) {
     SimplificationOfFunctionToTerm simplification;
 
-    Term termToVerify1(simplification.simplifyToTerm(Functions::abs(-5)));
-    Term termToVerify2(simplification.simplifyToTerm(Functions::abs(-5)));
+    Term termToVerify1(
+        alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(Functions::abs(-5)));
+    Term termToVerify2(
+        alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(Functions::abs(-5)));
 
     Term termToExpect1(5);
     Term termToExpect2(5);
@@ -32,12 +34,12 @@ TEST(
 
     SimplificationOfFunctionToTerm simplification;
 
-    Term termToVerify1(simplification.simplifyToTerm(sin("x")));
-    Term termToVerify2(simplification.simplifyToTerm(cos("x")));
-    Term termToVerify3(simplification.simplifyToTerm(tan("x")));
-    Term termToVerify4(simplification.simplifyToTerm(csc("x")));
-    Term termToVerify5(simplification.simplifyToTerm(sec("x")));
-    Term termToVerify6(simplification.simplifyToTerm(cot("x")));
+    Term termToVerify1(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(sin("x")));
+    Term termToVerify2(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(cos("x")));
+    Term termToVerify3(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(tan("x")));
+    Term termToVerify4(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(csc("x")));
+    Term termToVerify5(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(sec("x")));
+    Term termToVerify6(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(cot("x")));
 
     Term termToExpect1(sin("x"));
     Term termToExpect2(cos("x"));
@@ -64,12 +66,12 @@ TEST(
 
     SimplificationOfFunctionToTerm simplification;
 
-    Term termToVerify1(simplification.simplifyToTerm(sin("x")));
-    Term termToVerify2(simplification.simplifyToTerm(cos("x")));
-    Term termToVerify3(simplification.simplifyToTerm(tan("x")));
-    Term termToVerify4(simplification.simplifyToTerm(csc("x")));
-    Term termToVerify5(simplification.simplifyToTerm(sec("x")));
-    Term termToVerify6(simplification.simplifyToTerm(cot("x")));
+    Term termToVerify1(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(sin("x")));
+    Term termToVerify2(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(cos("x")));
+    Term termToVerify3(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(tan("x")));
+    Term termToVerify4(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(csc("x")));
+    Term termToVerify5(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(sec("x")));
+    Term termToVerify6(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(cot("x")));
 
     Term termToExpect1(sin("x"));
     Term termToExpect2(cos("x"));
@@ -99,14 +101,20 @@ TEST(
     Term multiplicationAndDivisionExpression(createExpressionIfPossible({"x", "*", "y", "/", "z"}));
     Term raiseToPowerExpression(createExpressionIfPossible({"x", "^", "y", "^", "z"}));
 
-    Term termToVerify1(simplification.simplifyToTerm(ln("x")));
-    Term termToVerify2(simplification.simplifyToTerm(ln(addAndSubtractExpression)));
-    Term termToVerify3(simplification.simplifyToTerm(ln(multiplicationAndDivisionExpression)));
-    Term termToVerify4(simplification.simplifyToTerm(ln(raiseToPowerExpression)));
-    Term termToVerify5(simplification.simplifyToTerm(log("x")));
-    Term termToVerify6(simplification.simplifyToTerm(log(addAndSubtractExpression)));
-    Term termToVerify7(simplification.simplifyToTerm(log(multiplicationAndDivisionExpression)));
-    Term termToVerify8(simplification.simplifyToTerm(log(raiseToPowerExpression)));
+    Term termToVerify1(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(ln("x")));
+    Term termToVerify2(
+        alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(ln(addAndSubtractExpression)));
+    Term termToVerify3(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(
+        ln(multiplicationAndDivisionExpression)));
+    Term termToVerify4(
+        alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(ln(raiseToPowerExpression)));
+    Term termToVerify5(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(log("x")));
+    Term termToVerify6(
+        alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(log(addAndSubtractExpression)));
+    Term termToVerify7(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(
+        log(multiplicationAndDivisionExpression)));
+    Term termToVerify8(
+        alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(log(raiseToPowerExpression)));
 
     Term termToExpect1(ln("x"));
     Term termToExpect2(ln(addAndSubtractExpression));
@@ -140,14 +148,20 @@ TEST(
     Term multiplicationAndDivisionExpression(createExpressionIfPossible({"x", "*", "y", "/", "z"}));
     Term raiseToPowerExpression(createExpressionIfPossible({"x", "^", "y", "^", "z"}));
 
-    Term termToVerify1(simplification.simplifyToTerm(ln("x")));
-    Term termToVerify2(simplification.simplifyToTerm(ln(addAndSubtractExpression)));
-    Term termToVerify3(simplification.simplifyToTerm(ln(multiplicationAndDivisionExpression)));
-    Term termToVerify4(simplification.simplifyToTerm(ln(raiseToPowerExpression)));
-    Term termToVerify5(simplification.simplifyToTerm(log("x")));
-    Term termToVerify6(simplification.simplifyToTerm(log(addAndSubtractExpression)));
-    Term termToVerify7(simplification.simplifyToTerm(log(multiplicationAndDivisionExpression)));
-    Term termToVerify8(simplification.simplifyToTerm(log(raiseToPowerExpression)));
+    Term termToVerify1(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(ln("x")));
+    Term termToVerify2(
+        alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(ln(addAndSubtractExpression)));
+    Term termToVerify3(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(
+        ln(multiplicationAndDivisionExpression)));
+    Term termToVerify4(
+        alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(ln(raiseToPowerExpression)));
+    Term termToVerify5(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(log("x")));
+    Term termToVerify6(
+        alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(log(addAndSubtractExpression)));
+    Term termToVerify7(alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(
+        log(multiplicationAndDivisionExpression)));
+    Term termToVerify8(
+        alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(log(raiseToPowerExpression)));
 
     Term termToExpect1(ln("x"));
     Term termToExpect2(ln(addAndSubtractExpression));

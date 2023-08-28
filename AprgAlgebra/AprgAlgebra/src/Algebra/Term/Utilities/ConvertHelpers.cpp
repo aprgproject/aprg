@@ -106,7 +106,7 @@ Term convertExpressionToSimplestTerm(Expression const& expression) {
 
 Term convertFunctionToSimplestTerm(Function const& functionObject) {
     SimplificationOfFunctionToTerm simplification;
-    return simplification.simplifyToTerm(functionObject);
+    return alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(functionObject);
 }
 
 }  // namespace alba::algebra
