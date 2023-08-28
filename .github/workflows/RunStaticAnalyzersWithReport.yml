@@ -10,7 +10,8 @@ on:
 env:
   determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
   staticAnalysisScriptRelativePath: "AllCommonScripts/GithubWorkflowScripts/RunStaticAnalysisWithReport.sh"
-  formatCppFilesRelativePath: "AllCommonScripts/ScriptsForCpp/formatCppFiles.sh"
+  generateReportScriptRelativePath: "Python/GithubWorkflowScripts/generate_static_analysis_report.py"
+  analyzerOutputFileRelativePath: "ZZZ_Temp/analyzerIssues.txt"
 
 jobs:
         
@@ -102,4 +103,16 @@ jobs:
           staticAnalysisScriptPath=$(realpath "$(pwd)/${{ env.staticAnalysisScriptRelativePath }}")
           echo "staticAnalysisScriptPath: [$(staticAnalysisScriptPath)]"
           chmod +x "$staticAnalysisScriptPath"
-          "$staticAnalysisScriptPath"  "${{ needs.determineCppProjects.outputs.projectsToBuild }}"
+          analyzerOutputPath=$(realpath "$(pwd)/${{ env.analyzerOutputFileRelativePath }}")
+          echo "analyzerOutputPath: [$(analyzerOutputPath)]"
+          echo "analyzerOutputPath=$analyzerOutputPath" >> "$GITHUB_ENV"
+          "$staticAnalysisScriptPath" "${{ needs.determineCppProjects.outputs.projectsToBuild }}" "$analyzerOutputPath"
+            
+      - name: Generate Report
+        shell: bash
+        run: |
+          generateReportScriptPath=$(realpath "$(pwd)/${{ env.generateReportScriptRelativePath }}")
+          echo "generateReportScriptPath: [$(generateReportScriptPath)]"
+          chmod +x "$generateReportScriptPath"
+          echo "Generating report using python script: [$generateReportScriptPath]"
+          python3 "$generateReportScriptPath" "$analyzerOutputPath"

@@ -1,18 +1,17 @@
-import os
 import logging
+import os
 import re
+import sys
 from tabulate import tabulate
 
-logging.basicConfig(level=logging.INFO,
-                    format='[%(levelname)s] | %(asctime)s | %(filename)s | %(message)s')
+logging.basicConfig(
+    level=logging.INFO,
+    format='[%(levelname)s] | \033[35m%(asctime)s\033[0m  | '
+           '\033[33m%(filename)s:%(lineno)d\033[0m | %(message)s'
+)
 
-script_directory = __file__
-logging.info("script_directory: [%s]", script_directory)
-aprg_directory = os.path.abspath(os.path.join(script_directory, "../.."))
-logging.info("aprg_directory: [%s]", aprg_directory)
-analyzer_issues_path = os.path.join(
-    aprg_directory, "ZZZ_Temp", "analyzerIssues.txt")
-logging.info("aprg_directory: [%s]", analyzer_issues_path)
+analyzer_issues_path = os.path.realpath(sys.argv[1])
+logging.info("analyzer_issues_path: [%s]", analyzer_issues_path)
 
 logging.info("Counting all issues based from analyzer output...")
 

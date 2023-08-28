@@ -6,9 +6,8 @@ scriptDirectory=$(dirname "$scriptPath")
 scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
 buildAndRunScriptPath="$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
-generateReportScriptPath="$aprgDirectory/Python/GithubWorkflowScripts/generate_static_analysis_report.py"
-analyzerOutputFile="$aprgDirectory/ZZZ_Temp/analyzerIssues.txt"
 cppProjects="$1"
+analyzerOutputFile="$2"
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
@@ -45,6 +44,3 @@ for cppProjectDirectory in "${cppProjectDirectories[@]}"; do
     scriptPrint "$scriptName" "$LINENO" "cppProjectAbsolutePath in: [$cppProjectAbsolutePath]"
     runStaticAnalyzersInDirectory "$cppProjectAbsolutePath"
 done
-
-scriptPrint "$scriptName" "$LINENO" "Generating report using python script: [$generateReportScriptPath]"
-python3 "$generateReportScriptPath"
