@@ -90,13 +90,14 @@ jobs:
       - name: Build and Run with Static Analyzers
         shell: bash
         continue-on-error: true
-        timeout-minutes: 300
+        timeout-minutes: 340
         run: |
           echo "C/C++ Projects to check: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
           staticAnalysisScriptPath=$(realpath "$(pwd)/${{ env.staticAnalysisScriptRelativePath }}")
           echo "staticAnalysisScriptPath: [$(staticAnalysisScriptPath)]"
           chmod +x "$staticAnalysisScriptPath"
-          "$staticAnalysisScriptPath"  "${{ needs.determineCppProjects.outputs.projectsToBuild }}"
+          # 19800 seconds translates to 5 hours and 30 minutes
+          timeout 19800 "$staticAnalysisScriptPath" "${{ needs.determineCppProjects.outputs.projectsToBuild }}"
             
       - name: Run clang format
         shell: bash
