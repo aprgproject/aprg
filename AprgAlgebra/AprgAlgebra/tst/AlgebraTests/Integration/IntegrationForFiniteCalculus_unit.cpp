@@ -89,7 +89,7 @@ TEST(IntegrationForFiniteCalculusTest, IntegrateWorksForExpression) {
 TEST(IntegrationForFiniteCalculusTest, IntegrateWorksForFunction) {
     IntegrationForFiniteCalculus integrationForX("x");
 
-    Term termToVerify(integrationForX.integrate(sin("x")));
+    Term termToVerify(alba::algebra::IntegrationForFiniteCalculus::integrate(sin("x")));
 
     ASSERT_TRUE(termToVerify.isConstant());
     EXPECT_TRUE(termToVerify.getAsNumber().isNotANumber());
@@ -242,7 +242,7 @@ TEST(IntegrationForFiniteCalculusTest, IntegrateWorksWithTermRaiseToTerm) {
 TEST(IntegrationForFiniteCalculusTest, IntegrateFunctionWorks) {
     IntegrationForFiniteCalculus integrationForX("x");
 
-    Term termToVerify(integrationForX.integrateFunction(sin("x")));
+    Term termToVerify(alba::algebra::IntegrationForFiniteCalculus::integrateFunction(sin("x")));
     ASSERT_TRUE(termToVerify.isConstant());
     EXPECT_TRUE(termToVerify.getAsNumber().isNotANumber());
 }

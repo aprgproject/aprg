@@ -19,7 +19,7 @@ namespace alba::algebra {
 
 TEST(LimitTest, IsAlmostEqualForLimitIterationWorks) {
     AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
-    scopeConfigurationObject.setInThisScopeTheTolerancesToZero();
+    AlbaNumber::ScopeConfigurationObject::setInThisScopeTheTolerancesToZero();
 
     EXPECT_TRUE(isAlmostEqualForLimitIteration(AlbaNumber(0), AlbaNumber(0)));
     EXPECT_FALSE(isAlmostEqualForLimitIteration(AlbaNumber(0.1), AlbaNumber(0.2)));

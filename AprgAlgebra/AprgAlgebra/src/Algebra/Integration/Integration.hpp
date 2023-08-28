@@ -32,7 +32,7 @@ public:
     };
 
     struct TrigonometricSubstitutionDetails {
-        bool isTrigonometricSubstitutionPossible;
+        bool isTrigonometricSubstitutionPossible{};
         std::string thetaName;
         Term a;
         Term u;
