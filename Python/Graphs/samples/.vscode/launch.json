@@ -5,12 +5,50 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
-            "type": "python",
+            "name": "Run In WSL",
+            "type": "node",
             "request": "launch",
-            "program": "${file}",
+            "program": "./.vscode/runWslCommonScript.sh",
+            "args": [
+                "outputWithAbsolutePaths",
+                "run",
+                "WslBuild",
+                "" //"--gtest_filter=*.*"
+            ],
+            "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
-            "justMyCode": true
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Install In WSL",
+            "runtimeExecutable": "wsl",
+            "runtimeArgs": [
+                "bash"
+            ],
+            "env": {},
+            "stopOnEntry": true,
+            "outFiles": [],
+            "sourceMaps": false,
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+        },
+        // For local builds, just run cmake in command palette (Ctrl + Shift + P)
+        {
+            "name": "Run locally",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [
+                "" //"--gtest_filter=*.*"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
         }
     ]
 }

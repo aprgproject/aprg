@@ -81,6 +81,44 @@
 			}
 		},
 		{
+			"label": "Build In WSL (On One Core)",
+			"type": "shell",
+			"command": "wsl",
+			"args": [
+				"./.vscode/runWslCommonScript.sh",
+				"outputWithAbsolutePaths",
+				"buildOnOneCore",
+				"WslBuild",
+				"Debug"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": {
+				"owner": "cpp",
+				"fileLocation": [
+					"autoDetect",
+					"${workspaceRoot}"
+				],
+				"pattern": {
+					"regexp": "^(.*):(\\d+):(\\d+):\\s+(style|warning|error):\\s+(.*)$",
+					"file": 1,
+					"line": 2,
+					"column": 3,
+					"severity": 4,
+					"message": 5
+				}
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		{
 			"label": "Install In WSL",
 			"type": "shell",
 			"command": "wsl",
