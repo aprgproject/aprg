@@ -356,7 +356,7 @@ bool Audio<T>::decodeAiffFile(vector<uint8_t>& fileDataBytes) {
     int numBytesPerSample = bitDepth / 8;
     int numBytesPerFrame = numBytesPerSample * numChannels;
     int totalNumAudioSampleBytes = numSamplesPerChannel * numBytesPerFrame;
-    int samplesStartIndex = s + 16 + (int)offset;
+    int samplesStartIndex = s + 16 + static_cast<int>(offset);
 
     // sanity check the data
     if ((soundDataChunkSize - 8) != totalNumAudioSampleBytes ||
@@ -373,7 +373,7 @@ bool Audio<T>::decodeAiffFile(vector<uint8_t>& fileDataBytes) {
             int sampleIndex = samplesStartIndex + (numBytesPerFrame * i) + channel * numBytesPerSample;
 
             if (bitDepth == 8) {
-                auto sampleAsSigned8Bit = (int8_t)fileDataBytes[sampleIndex];
+                auto sampleAsSigned8Bit = static_cast<int8_t>(fileDataBytes[sampleIndex]);
                 T sample = (T)sampleAsSigned8Bit / (T)128.;
                 samples[channel].push_back(sample);
             } else if (bitDepth == 16) {
@@ -495,9 +495,9 @@ bool Audio<T>::saveToWaveFile(string const& filePath) {
                 auto sampleAsIntAgain = (int32_t)(samples[channel][i] * (T)8388608.);
 
                 uint8_t bytes[3];
-                bytes[2] = (uint8_t)(sampleAsIntAgain >> 16) & 0xFF;
-                bytes[1] = (uint8_t)(sampleAsIntAgain >> 8) & 0xFF;
-                bytes[0] = (uint8_t)sampleAsIntAgain & 0xFF;
+                bytes[2] = static_cast<uint8_t>(sampleAsIntAgain >> 16) & 0xFF;
+                bytes[1] = static_cast<uint8_t>(sampleAsIntAgain >> 8) & 0xFF;
+                bytes[0] = static_cast<uint8_t>(sampleAsIntAgain) & 0xFF;
 
                 fileDataBytes.push_back(bytes[0]);
                 fileDataBytes.push_back(bytes[1]);
@@ -570,9 +570,9 @@ bool Audio<T>::saveToAiffFile(string const& filePath) {
                 auto sampleAsIntAgain = (int32_t)(samples[channel][i] * (T)8388608.);
 
                 uint8_t bytes[3];
-                bytes[0] = (uint8_t)(sampleAsIntAgain >> 16) & 0xFF;
-                bytes[1] = (uint8_t)(sampleAsIntAgain >> 8) & 0xFF;
-                bytes[2] = (uint8_t)sampleAsIntAgain & 0xFF;
+                bytes[0] = static_cast<uint8_t>(sampleAsIntAgain >> 16) & 0xFF;
+                bytes[1] = static_cast<uint8_t>(sampleAsIntAgain >> 8) & 0xFF;
+                bytes[2] = static_cast<uint8_t>(sampleAsIntAgain) & 0xFF;
 
                 fileDataBytes.push_back(bytes[0]);
                 fileDataBytes.push_back(bytes[1]);
@@ -676,7 +676,7 @@ AudioFormat Audio<T>::determineAudioFormat(vector<uint8_t>& fileDataBytes) {
 
 template <class T>
 int32_t Audio<T>::fourBytesToInt(vector<uint8_t> const& source, int startIndex, Endianness endianness) {
-    int32_t result;
+    int32_t result = 0;
 
     if (endianness == Endianness::LittleEndian) {
         result = (source[startIndex + 3] << 24) | (source[startIndex + 2] << 16) | (source[startIndex + 1] << 8) |
@@ -691,7 +691,7 @@ int32_t Audio<T>::fourBytesToInt(vector<uint8_t> const& source, int startIndex, 
 
 template <class T>
 int16_t Audio<T>::twoBytesToInt(vector<uint8_t> const& source, int startIndex, Endianness endianness) {
-    int16_t result;
+    int16_t result = 0;
 
     if (endianness == Endianness::LittleEndian) {
         result = (source[startIndex + 1] << 8) | source[startIndex];
@@ -705,7 +705,7 @@ int16_t Audio<T>::twoBytesToInt(vector<uint8_t> const& source, int startIndex, E
 template <class T>
 int Audio<T>::getIndexOfString(vector<uint8_t> const& source, string const& stringToSearchFor) {
     int index = -1;
-    int stringLength = (int)stringToSearchFor.length();
+    int stringLength = static_cast<int>(stringToSearchFor.length());
 
     for (int i = 0; i < static_cast<int>(source.size() - stringLength); i++) {
         string section(source.cbegin() + i, source.cbegin() + i + stringLength);
