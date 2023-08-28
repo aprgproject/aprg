@@ -5,8 +5,8 @@ scriptPath=$(realpath "$0")
 scriptDirectory=$(dirname "$scriptPath")
 scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
-includePathRegex=$(basename "$1")
-skipPathRegex=$(basename "$2")
+includePathRegex="$1"
+skipPathRegex="$2"
 locatorFilename=$(basename "$3")
 if [ -z "$4" ]; then
     # If there are no second argument use the first argument
@@ -39,7 +39,7 @@ scriptPrint "$scriptName" "$LINENO" "Searching all files in [$aprgDirectory] wit
 fileToCopyDisplay=$(echo "$fileToCopy" | tail -c "$shortenedPathLengthForDisplay")
 scriptPrint "$scriptName" "$LINENO" "Copying [...$fileToCopyDisplay] ->"
 find "$aprgDirectory" -type f -name "$locatorFilename" | while read -r locatorFilePath; do
-    # Check if it can be skipped
+    # Check regexes
     if  [[ "$locatorFilePath" =~ $includePathRegex && ! "$locatorFilePath" =~ $skipPathRegex ]]; then
         locatorDirectory=$(dirname "$locatorFilePath")
         directoryToDisplay=$(echo "$locatorDirectory" | tail -c "$shortenedPathLengthForDisplay")
