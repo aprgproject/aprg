@@ -123,10 +123,9 @@ TEST(GslTest, GettingPermutationsInGslWorks) {
 TEST(GslTest, GettingCombinationsInGslWorks) {
     // This prints all subsets of the set 0, 1, 2, 3 ordered by size.
 
-    gsl_combination *combination(nullptr);
     cout << "All subsets of {0,1,2,3} by size:\n";
     for (int i = 0; i <= 4; i++) {
-        combination = gsl_combination_calloc(4, i);
+        gsl_combination *combination = gsl_combination_calloc(4, i);
         int exitStatus = GSL_SUCCESS;
         while (exitStatus == GSL_SUCCESS) {
             printf("{");
@@ -141,10 +140,9 @@ TEST(GslTest, GettingCombinationsInGslWorks) {
 TEST(GslTest, GettingMultisetsInGslWorks) {
     // This prints all multisets elements containing the values 0; 1; 2; 3 ordered by size.
 
-    gsl_multiset *multiset(nullptr);
     cout << "All subsets of {0,1,2,3} by size:\n";
     for (int i = 0; i <= 4; i++) {
-        multiset = gsl_multiset_calloc(4, i);
+        gsl_multiset *multiset = gsl_multiset_calloc(4, i);
         int exitStatus = GSL_SUCCESS;
         while (exitStatus == GSL_SUCCESS) {
             printf("{");
