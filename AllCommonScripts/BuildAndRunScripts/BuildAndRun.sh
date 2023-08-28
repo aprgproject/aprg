@@ -194,4 +194,4 @@ else
     exit 1
 fi
 
-scriptPrint "$scriptName" "$LINENO" "The script is finished."
+scriptPrint "$scriptName" "$LINENO" "The script [$scriptName] for [$scriptOption] is finished."

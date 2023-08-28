@@ -6,9 +6,9 @@ from tabulate import tabulate
 logging.basicConfig(level=logging.INFO,
                     format='[%(levelname)s] | %(asctime)s | %(filename)s | %(message)s')
 
-current_directory = os.getcwd()
-logging.info("current_directory: [%s]", current_directory)
-aprg_directory = os.path.abspath(os.path.join(current_directory, "../.."))
+script_directory = __file__
+logging.info("script_directory: [%s]", script_directory)
+aprg_directory = os.path.abspath(os.path.join(script_directory, "../.."))
 logging.info("aprg_directory: [%s]", aprg_directory)
 analyzer_issues_path = os.path.join(
     aprg_directory, "ZZZ_Temp", "analyzerIssues.txt")

@@ -76,6 +76,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
+          pip install --upgrade pip
           sudo apt install ninja-build cmake
           echo "cmake version: [$(cmake --version)]"
           echo "ninja version: [$(ninja --version)]"

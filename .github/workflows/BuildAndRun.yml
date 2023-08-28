@@ -52,6 +52,7 @@ jobs:
       - name: Prepare for linting
         run: |
           sudo apt update
+          pip install --upgrade pip
           sudo pip install cmakelang 
           echo "cmake-lint version: [$(cmake-lint --version)]"
           sudo apt install shellcheck
