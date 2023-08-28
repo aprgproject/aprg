@@ -167,6 +167,9 @@ public:
 
     [[nodiscard]] MatrixData const& getMatrixData() const { return m_matrixData; }
 
+    // Use getMatrixDataReference() only if needed
+    MatrixData& getMatrixDataReference() { return m_matrixData; }
+
     void retrieveColumn(MatrixData& column, size_t const xPosition) const {
         column.reserve(m_numberOfRows);
         for (size_t yPosition = 0; yPosition < m_numberOfRows; yPosition++) {
