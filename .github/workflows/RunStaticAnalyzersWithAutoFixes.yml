@@ -117,7 +117,7 @@ jobs:
           echo "Performing [git commit] with a message..."
           git commit -m "APRGPROJECT: Automatic commit for Static Analyzers with Auto Fixes"
           echo "Performing [git pull] for the last time before "push" to merge with recent commits..."
-          git pull --no-edit
+          git pull --no-rebase --no-edit 
           echo "Performing [git push]..."
           git push
           echo "The git push done has finished, the changes should exist now in the repository."
