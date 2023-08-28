@@ -12,7 +12,7 @@ class FixedSizeStack : public BaseStack<Object> {
 public:
     using Objects = std::array<Object, SIZE>;
 
-    FixedSizeStack() {}
+    FixedSizeStack() = default;
 
     [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
 

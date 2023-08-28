@@ -289,7 +289,7 @@ TEST(WavLoadingTests, DISABLED_Mono_16bit_48000) {
 }
 
 bool writeTest(int numChannels, int sampleRate, int bitDepth, AudioFormat format) {
-    auto sampleRateAsFloat = (float)sampleRate;
+    auto sampleRateAsFloat = static_cast<float>(sampleRate);
 
     Audio<float> audioFile;
 

@@ -18,7 +18,7 @@ public:
         Permutation currentPermutation;
         BooleanVector isProcessed;
         Objects const& objects;
-        int const targetPermutationLength;
+        int const targetPermutationLength{};
     };
 
     struct SwappingRecursionData {

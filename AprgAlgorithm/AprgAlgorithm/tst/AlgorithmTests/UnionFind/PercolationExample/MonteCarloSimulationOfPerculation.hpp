@@ -77,7 +77,7 @@ private:
     }
 
     void connectNeighboringSitesAt(int const index) {
-        int x, y;
+        int x = 0, y = 0;
         retrieveCoordinates(index, x, y);
         if (x > 0) {
             connectNeighborSites(index, getIndex(x - 1, y));
@@ -100,7 +100,7 @@ private:
     }
 
     void connectToVirtualTopOrBottomIfNeeded(int const indexToCheck) {
-        int x, y;
+        int x = 0, y = 0;
         retrieveCoordinates(indexToCheck, x, y);
         if (y == 0) {
             m_unionFindOfIndexes.connect(getVirtualTopIndex(), indexToCheck);

@@ -177,7 +177,7 @@ private:
     TrieNodeUniquePointer buildTrie(FrequencyOfEachCharacter const& frequency) {
         // This is quite different from the original huffman algorithm
         // Here, frequency is not placed on the trie because its not really needed after building the trie.
-        std::priority_queue<CharacterFrequency, std::deque<CharacterFrequency>, std::greater<CharacterFrequency>>
+        std::priority_queue<CharacterFrequency, std::deque<CharacterFrequency>, std::greater<>>
             frequenciesInMinimumOrder;
         std::array<TrieNodeUniquePointer, RADIX> characterNode{};
         for (Count c = 0; c < RADIX; c++) {

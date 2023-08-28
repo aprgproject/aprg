@@ -12,7 +12,7 @@ class BaseOrderedArray : public BaseDataStructure {
 public:
     using Keys = std::vector<Key>;
 
-    BaseOrderedArray() {}
+    BaseOrderedArray() = default;
 
     ~BaseOrderedArray() override = default;  // no need for virtual destructor because base destructor is virtual
                                              // (similar to other virtual functions)

@@ -19,7 +19,7 @@ public:
     using Objects = std::vector<Object>;
     using Comparator = ComparatorTemplateType<Object>;
 
-    IndexedBinaryHeapPriorityQueue() {}
+    IndexedBinaryHeapPriorityQueue() = default;
 
     [[nodiscard]] bool isEmpty() const { return getSize() == 0; }
 

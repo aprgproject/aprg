@@ -17,7 +17,7 @@ public:
     using AdjacencyList = SetOfVertices;
     using AdjacencyLists = std::array<AdjacencyList, MAX_VERTEX_VALUE>;
 
-    UndirectedGraphWithArrayOfAdjacencyLists() {}
+    UndirectedGraphWithArrayOfAdjacencyLists() = default;
 
     [[nodiscard]] bool isEmpty() const override { return m_numberOfVertices == 0 && m_numberOfEdges == 0; }
 

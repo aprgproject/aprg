@@ -240,7 +240,7 @@ TEST(AlbaLargeSorterTest, FileHandlerTest_FileAreWrittenAtTheEndAgainAfterReleas
 
     AlbaLocalPathHandler inputPathHandler(ALBA_LARGE_SORTER_TEST_FILE);
     ASSERT_TRUE(inputPathHandler.isFoundInLocalSystem());
-    int valueFromFile;
+    int valueFromFile = 0;
     ifstream inputTestFile(inputPathHandler.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
     inputTestFile >> valueFromFile;
@@ -301,7 +301,7 @@ TEST(AlbaLargeSorterTest, PrimitiveDataTypesForBlocksAreCreatedWhenBlocksWhenMem
         largeSorter.add(inputValue);
     }
 
-    int integerInFile;
+    int integerInFile = 0;
     ifstream inputTestFile0(
         AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_1.txt)").getFullPath());
     ifstream inputTestFile1(

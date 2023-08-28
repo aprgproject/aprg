@@ -13,7 +13,7 @@ class FixedSizeCircularQueue : public BaseQueue<Object> {
 public:
     using Objects = std::array<Object, SIZE>;
 
-    FixedSizeCircularQueue() {}
+    FixedSizeCircularQueue() = default;
 
     [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 

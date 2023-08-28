@@ -17,8 +17,8 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using EdgeOrderedByWeight = typename GraphTypesWithWeights<Vertex, Weight>::EdgeOrderedByWeight;
     using VertexOrderedByWeight = typename GraphTypesWithWeights<Vertex, Weight>::VertexOrderedByWeight;
-    using VertexOrderedByWeightMinimumPriorityQueue = std::priority_queue<
-        VertexOrderedByWeight, std::deque<VertexOrderedByWeight>, std::greater<VertexOrderedByWeight>>;
+    using VertexOrderedByWeightMinimumPriorityQueue =
+        std::priority_queue<VertexOrderedByWeight, std::deque<VertexOrderedByWeight>, std::greater<>>;
     using VertexToEdgeOrderedByWeightMap =
         typename GraphTypesWithWeights<Vertex, Weight>::VertexToEdgeOrderedByWeightMap;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;

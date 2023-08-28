@@ -16,7 +16,7 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using EdgeOrderedByWeight = typename GraphTypesWithWeights<Vertex, Weight>::EdgeOrderedByWeight;
     using EdgeOrderedByWeightsPriorityQueue =
-        std::priority_queue<EdgeOrderedByWeight, std::deque<EdgeOrderedByWeight>, std::greater<EdgeOrderedByWeight>>;
+        std::priority_queue<EdgeOrderedByWeight, std::deque<EdgeOrderedByWeight>, std::greater<>>;
 
     KruskalAlgorithm(EdgeWeightedGraph const& graph, Vertex const& startVertex)
         : m_graph(graph), m_startVertex(startVertex) {
