@@ -1,0 +1,8 @@
+2023-08-28T23:45:52
+/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/AudioManipulator.cpp:27:25: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/AudioManipulator.cpp:40:25: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/NearestSamples.cpp:30:21: style: Condition 'itUpper!=m_valuesToIndexes.cend()' is always true [knownConditionTrueFalse]
+/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/NewSamplesBuilder.cpp:10:42: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
+/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/NewSamplesBuilder.cpp:10:65: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/Utilities.cpp:56:16: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
+DONE!
