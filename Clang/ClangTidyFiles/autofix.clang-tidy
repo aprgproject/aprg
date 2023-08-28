@@ -12,6 +12,7 @@ Checks: '
   hicpp-member-init,
   hicpp-noexcept-move,
   hicpp-special-member-function,
+  hicpp-uppercase-literal-suffix,
   hicpp-use-auto,
   hicpp-use-equals-default,
   llvm-else-after-return,
@@ -29,7 +30,8 @@ Checks: '
   readability-else-after-return,
   readability-implicit-bool-conversion,
   readability-redundant-member-init,
-  readability-static-accessed-through-instance
+  readability-static-accessed-through-instance,
+  readability-uppercase-literal-suffix
 '
 
 # -> Configure specific checkers

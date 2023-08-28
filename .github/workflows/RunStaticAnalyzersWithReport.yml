@@ -24,9 +24,7 @@ jobs:
       - name: Checkout code for changes checking
         id: idOfCheckout
         uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: 2
+        
       - name: Get C/C++ Projects from Git Diff and User Input
         id: idOfGetCppProjectStep
         run: |
@@ -52,27 +50,9 @@ jobs:
           
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          persist-credentials: false 
-          # use the personal access token (without this setting, the GITHUB_TOKEN is used)
-          # this is needed to trigger BuildAndRun github workflow after commit
-        
-      - name: Set up Git
-        run: |
-          git config user.name "aprgproject"
-          git config user.email "aprgproject@gmail.com"
-          # set origin (fetch)
-          git remote set-url origin https://$WORKFLOW_TOKEN@github.com/aprgproject/aprg
-          # set origin (push)
-          git remote set-url --push origin https://$WORKFLOW_TOKEN@github.com/aprgproject/aprg
-          # git remote -v
-        env:
-          WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           
       - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
+        uses: actions/setup-python@v4
 
       - name: Install dependencies
         run: |
