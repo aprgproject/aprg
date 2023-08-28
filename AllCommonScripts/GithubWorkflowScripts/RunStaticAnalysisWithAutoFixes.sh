@@ -14,6 +14,12 @@ scriptPrint "$scriptName" "$LINENO" "cppProjects: [$cppProjects]"
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 
+# Validate input
+if [ -z "$staticAnalysisFilename" ]; then
+    scriptPrint "$scriptName" "$LINENO" "The static analysis file cannot be empty, staticAnalysisFilename: [$staticAnalysisFilename]"
+    exit 1
+fi
+
 # Process input remove formatting because of JSON format
 cppProjects=${cppProjects#\[}
 cppProjects=${cppProjects%\]}
@@ -35,7 +41,7 @@ runStaticAnalyzersInDirectory() {
     "$buildAndRunScriptPath" cleanAndConfigureWithStaticAnalyzersWithAutoFix "StaticAnalyzersBuild" "Debug" "Ninja"
     set +e
     # "note" is added in the grep to cover "FIX-IT"
-    "$buildAndRunScriptPath" buildOnOneCore "StaticAnalyzersBuild" "Debug" | grep -P "^.*$directoryPath.* (note|style|warning|error): .*$" | tee -a "$staticAnalysisFilename"
+    timeout 1 "$buildAndRunScriptPath" buildOnOneCore "StaticAnalyzersBuild" "Debug" | grep -P "^.*$directoryPath.* (note|style|warning|error): .*$" | tee -a "$staticAnalysisFilename"
     set -e
     
     "DONE!" >> "$staticAnalysisFilename"
@@ -52,4 +58,5 @@ for cppProjectDirectory in "${cppProjectDirectories[@]}"; do
     cppProjectAbsolutePath=$(realpath "$aprgDirectory/$cppProjectDirectory/")
     scriptPrint "$scriptName" "$LINENO" "cppProjectAbsolutePath in: [$cppProjectAbsolutePath]"
     runStaticAnalyzersInDirectory "$cppProjectAbsolutePath"
+    break
 done

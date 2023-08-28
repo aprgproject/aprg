@@ -12,6 +12,12 @@ staticAnalysisFilename="$2"
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 
+# Validate input
+if [ -z "$staticAnalysisFilename" ]; then
+    scriptPrint "$scriptName" "$LINENO" "The static analysis file cannot be empty, staticAnalysisFilename: [$staticAnalysisFilename]"
+    exit 1
+fi
+
 # Process input remove formatting because of JSON format
 cppProjects=${cppProjects#\[}
 cppProjects=${cppProjects%\]}

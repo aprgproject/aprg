@@ -6,11 +6,7 @@ on:
     paths:
       - '**StaticAnalysisAutoFix.txt'
   workflow_dispatch:
-    inputs:
-      cppCMakeProjects:
-        description: 'C/C++ Project ("all" for all projects)'
-        required: true
-        default: 'all'
+  
 env:
   determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
   staticAnalysisScriptRelativePath: "AllCommonScripts/GithubWorkflowScripts/RunStaticAnalysisWithAutoFixes.sh"
@@ -29,7 +25,7 @@ jobs:
         id: idOfCheckout
         uses: actions/checkout@v3
         
-      - name: Get C/C++ Projects from Git Diff and User Input
+      - name: Get C/C++ Projects for Static Analysis
         id: idOfGetCppProjectStep
         run: |
           determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
@@ -101,7 +97,7 @@ jobs:
           echo "staticAnalysisScriptPath: [$(staticAnalysisScriptPath)]"
           chmod +x "$staticAnalysisScriptPath"
           # 19800 seconds translates to 5 hours and 30 minutes
-          timeout 19800 "$staticAnalysisScriptPath" "${{ needs.determineCppProjects.outputs.projectsToBuild }}"
+          timeout 19800 "$staticAnalysisScriptPath" "${{ needs.determineCppProjects.outputs.projectsToBuild }}" "${{ env.staticAnalysisFilename }}"
             
       - name: Run clang format
         shell: bash

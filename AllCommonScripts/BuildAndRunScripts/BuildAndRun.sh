@@ -181,7 +181,7 @@ elif [ "$scriptOption" == "build" ]; then
 elif [ "$scriptOption" == "buildOnOneCore" ]; then
     getArgumentsForBuild
     printBuildParameters
-    timeout 1 cmake --build . --config "$buildType" --parallel 1
+    cmake --build . --config "$buildType" --parallel 1
 elif [ "$scriptOption" == "install" ]; then
     getArgumentsForBuild
     printInstallParameters
