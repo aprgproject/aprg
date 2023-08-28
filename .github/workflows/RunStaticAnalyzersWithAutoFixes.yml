@@ -1,6 +1,10 @@
 name: Run Static Analyzers With Auto Fixes Workflow
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '**StaticAnalysisAutoFix.txt'
   workflow_dispatch:
     inputs:
       cppCMakeProjects:
@@ -11,6 +15,7 @@ env:
   determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
   staticAnalysisScriptRelativePath: "AllCommonScripts/GithubWorkflowScripts/RunStaticAnalysisWithAutoFixes.sh"
   formatCppFilesRelativePath: "AllCommonScripts/ScriptsForCpp/formatCppFiles.sh"
+  staticAnalysisFilename: "StaticAnalysisAutoFix.txt"
 
 jobs:
         
@@ -30,7 +35,7 @@ jobs:
           determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
           echo "determineCppProjectsPath: [$determineCppProjectsPath]"
           chmod +x "$determineCppProjectsPath"
-          "$determineCppProjectsPath" checkUserInput "${{ inputs.cppCMakeProjects }}"
+          "$determineCppProjectsPath" checkStaticAnalysisFiles "${{ env.staticAnalysisFilename }}"
           
           
   runStaticAnalyzersOnCppProjects:
@@ -90,7 +95,6 @@ jobs:
       - name: Build and Run with Static Analyzers
         shell: bash
         continue-on-error: true
-        timeout-minutes: 340
         run: |
           echo "C/C++ Projects to check: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
           staticAnalysisScriptPath=$(realpath "$(pwd)/${{ env.staticAnalysisScriptRelativePath }}")

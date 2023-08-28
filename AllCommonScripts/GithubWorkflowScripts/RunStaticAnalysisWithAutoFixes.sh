@@ -7,7 +7,7 @@ scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
 buildAndRunScriptPath="$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
 cppProjects="$1"
-analyzerOutputFilename="StaticAnalysisAutoFix.txt"
+staticAnalysisFilename="$2"
 
 scriptPrint "$scriptName" "$LINENO" "cppProjects: [$cppProjects]"
 
@@ -30,16 +30,16 @@ runStaticAnalyzersInDirectory() {
 
     scriptPrint "$scriptName" "$LINENO" "Running Static Analysis in: [$directoryPath]"
     cd "$directoryPath" || exit 1
-    
-    date +%Y-%m-%dT%H:%M:%S > "$analyzerOutputFilename"
+
+    date +%Y-%m-%dT%H:%M:%S > "$staticAnalysisFilename"
     "$buildAndRunScriptPath" cleanAndConfigureWithStaticAnalyzersWithAutoFix "StaticAnalyzersBuild" "Debug" "Ninja"
     set +e
     # "note" is added in the grep to cover "FIX-IT"
-    "$buildAndRunScriptPath" buildOnOneCore "StaticAnalyzersBuild" "Debug" | grep -P "^.*$directoryPath.* (note|style|warning|error): .*$" | tee -a "$analyzerOutputFilename"
+    "$buildAndRunScriptPath" buildOnOneCore "StaticAnalyzersBuild" "Debug" | grep -P "^.*$directoryPath.* (note|style|warning|error): .*$" | tee -a "$staticAnalysisFilename"
     set -e
     
-    "DONE!" >> "$analyzerOutputFilename"
-    git add "$analyzerOutputFilename"
+    "DONE!" >> "$staticAnalysisFilename"
+    git add "$staticAnalysisFilename"
 }
 
 # Split the cppProjects into individual items

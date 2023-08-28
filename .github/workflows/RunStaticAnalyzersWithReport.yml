@@ -1,6 +1,10 @@
 name: Run Static Analyzers With Report
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '**StaticAnalysisReport.txt'
   workflow_dispatch:
     inputs:
       cppCMakeProjects:
@@ -11,6 +15,7 @@ env:
   determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
   staticAnalysisScriptRelativePath: "AllCommonScripts/GithubWorkflowScripts/RunStaticAnalysisWithReport.sh"
   generateReportScriptRelativePath: "Python/GithubWorkflowScripts/generate_static_analysis_report.py"
+  staticAnalysisFilename: "StaticAnalysisReport.txt"
 
 jobs:
         
@@ -30,7 +35,7 @@ jobs:
           determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
           echo "determineCppProjectsPath: [$determineCppProjectsPath]"
           chmod +x "$determineCppProjectsPath"
-          "$determineCppProjectsPath" checkUserInput "${{ inputs.cppCMakeProjects }}"
+          "$determineCppProjectsPath" checkStaticAnalysisFiles "${{ env.staticAnalysisFilename }}"
           
           
   runStaticAnalyzersOnCppProjects:
@@ -48,6 +53,10 @@ jobs:
           
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false 
+          # use the personal access token (without this setting, the GITHUB_TOKEN is used)
+          # this is needed to trigger BuildAndRun github workflow after commit
         
       - name: Set up Git
         run: |
@@ -88,7 +97,6 @@ jobs:
       - name: Build and Run with Static Analyzers
         shell: bash
         continue-on-error: true
-        timeout-minutes: 340
         run: |
           echo "C/C++ Projects to check: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
           staticAnalysisScriptPath=$(realpath "$(pwd)/${{ env.staticAnalysisScriptRelativePath }}")
@@ -118,4 +126,4 @@ jobs:
           echo "generateReportScriptPath: [$(generateReportScriptPath)]"
           chmod +x "$generateReportScriptPath"
           echo "Generating report using python script: [$generateReportScriptPath]"
-          python3 "$generateReportScriptPath"
+          python3 "$generateReportScriptPath" "${{ env.staticAnalysisFilename }}"

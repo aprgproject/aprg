@@ -7,7 +7,7 @@ scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
 buildAndRunScriptPath="$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
 cppProjects="$1"
-analyzerOutputFilename="StaticAnalysisReport.txt"
+staticAnalysisFilename="$2"
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
@@ -29,14 +29,14 @@ runStaticAnalyzersInDirectory() {
     scriptPrint "$scriptName" "$LINENO" "Running Static Analysis in: [$directoryPath]"
     cd "$directoryPath" || exit 1
 
-    date +%Y-%m-%dT%H:%M:%S > "$analyzerOutputFilename"
+    date +%Y-%m-%dT%H:%M:%S > "$staticAnalysisFilename"
     "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "StaticAnalyzersBuild" "Debug" "Ninja"
     set +e
-    "$buildAndRunScriptPath" build "StaticAnalyzersBuild" "Debug" | grep -P "^.*$directoryPath.* (style|warning|error): .*$" | tee -a "$analyzerOutputFilename"
+    "$buildAndRunScriptPath" build "StaticAnalyzersBuild" "Debug" | grep -P "^.*$directoryPath.* (style|warning|error): .*$" | tee -a "$staticAnalysisFilename"
     set -e
 
-    "DONE!" >> "$analyzerOutputFilename"
-    git add "$analyzerOutputFilename"
+    "DONE!" >> "$staticAnalysisFilename"
+    git add "$staticAnalysisFilename"
 }
 
 # Loop through the items and call a separate script for each

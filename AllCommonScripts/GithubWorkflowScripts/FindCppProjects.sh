@@ -27,5 +27,3 @@ findCppProjects() {
     scriptPrint "$scriptName" "$LINENO" "The cppProjectsFound are: [$cppProjectsFound]"
     export cppProjectsFound
 }
-
-findCppProjects "all"

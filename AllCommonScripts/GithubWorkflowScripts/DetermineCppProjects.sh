@@ -6,7 +6,7 @@ scriptDirectory=$(dirname "$scriptPath")
 scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
 scriptOption="$1"
-userInput="$2"
+firstArgument="$2"
 cppProjects=""
 
 # Source needed scripts
@@ -31,12 +31,22 @@ if [[ "$scriptOption" == "checkGit" ]]; then
     cppProjects="$cppProjectsFromGit"
     scriptPrint "$scriptName" "$LINENO" "The C/C++ projects based from git changes: [$cppProjects]"
 elif [[ "$scriptOption" == "checkUserInput" ]]; then
+    userInput="$firstArgument"
     scriptPrint "$scriptName" "$LINENO" "Searching C/C++ projects based from user input: [$userInput]..."
     cppProjectsFound=""
     source "$scriptDirectory/FindCppProjects.sh"
     findCppProjects "$userInput"
     cppProjects="$cppProjectsFound"
     scriptPrint "$scriptName" "$LINENO" "The C/C++ projects based from user input: [$cppProjects]"
+elif [[ "$scriptOption" == "checkStaticAnalysisFiles" ]]; then
+    staticAnalysisFilename="$firstArgument"
+    scriptPrint "$scriptName" "$LINENO" "Searching C/C++ projects..."
+    scriptPrint "$scriptName" "$LINENO" "Saving results of static analysis to [$staticAnalysisFilename]"
+    cppProjectsFound=""
+    source "$scriptDirectory/FindCppProjectsForStaticAnalysis.sh"
+    findCppProjectsForStaticAnalysis "$staticAnalysisFilename"
+    cppProjects="$cppProjectsFound"
+    scriptPrint "$scriptName" "$LINENO" "The C/C++ projects based from static analysis: [$cppProjects]"
 fi
 
 # Put AprgCommon if empty

@@ -27,7 +27,7 @@ logging.info("The aprg_directory is [%s]", aprg_directory)
 
 logging.info("Searching all issues based from different analyzer files...")
 
-REPORT_FILENAME = 'StaticAnalysisReport.txt'
+REPORT_FILENAME = sys.argv[1]
 reports = find_files(aprg_directory, REPORT_FILENAME)
 if not reports:
     logging.info("The filename [%s] is not found", REPORT_FILENAME)
