@@ -41,7 +41,7 @@ runStaticAnalyzersInDirectory() {
     "$buildAndRunScriptPath" build "StaticAnalyzersBuild" "Debug" | grep -P "^.*$directoryPath.* (style|warning|error): .*$" | tee -a "$staticAnalysisFilename"
     set -e
 
-    "DONE!" >> "$staticAnalysisFilename"
+    echo "DONE!" >> "$staticAnalysisFilename"
     git add "$staticAnalysisFilename"
 }
 

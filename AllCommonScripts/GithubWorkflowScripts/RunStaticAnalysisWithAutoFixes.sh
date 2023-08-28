@@ -44,7 +44,7 @@ runStaticAnalyzersInDirectory() {
     timeout 1 "$buildAndRunScriptPath" buildOnOneCore "StaticAnalyzersBuild" "Debug" | grep -P "^.*$directoryPath.* (note|style|warning|error): .*$" | tee -a "$staticAnalysisFilename"
     set -e
     
-    "DONE!" >> "$staticAnalysisFilename"
+    echo "DONE!" >> "$staticAnalysisFilename"
     git add "$staticAnalysisFilename"
 }
 
