@@ -14,7 +14,7 @@ namespace alba::AprgBitmap {
 
 BitmapConfiguration::BitmapConfiguration()
 
-{}
+    = default;
 
 bool BitmapConfiguration::isValid() const {
     return isSignatureValid() && isHeaderValid() && isNumberOfColorPlanesValid() && isNumberOfBitsPerPixelValid();
