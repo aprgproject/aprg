@@ -1,5 +1,5 @@
-name: Run Static Analyzers With Report
-run-name: Run Static Analyzers With Report
+name: Run Static Analyzers With Report Workflow
+run-name: Run Static Analyzers With Report Workflow
 
 on:
   push:
@@ -91,7 +91,7 @@ jobs:
           pip install tabulate
           echo "tabulate version: [$(pip show tabulate)]"
             
-      - name: Build and Run with Static Analyzers
+      - name: Build and Run with Static Analyzers with Report
         shell: bash
         continue-on-error: true
         run: |
