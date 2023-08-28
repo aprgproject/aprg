@@ -41,11 +41,14 @@ runStaticAnalyzersInDirectory() {
     "$buildAndRunScriptPath" cleanAndConfigureWithStaticAnalyzersWithAutoFix "StaticAnalyzersBuild" "Debug" "Ninja"
     set +e
     # "note" is added in the grep to cover "FIX-IT"
-    timeout 1 "$buildAndRunScriptPath" buildOnOneCore "StaticAnalyzersBuild" "Debug" | grep -P "^.*$directoryPath.* (note|style|warning|error): .*$" | tee -a "$staticAnalysisFilename"
+    "$buildAndRunScriptPath" buildOnOneCore "StaticAnalyzersBuild" "Debug" | grep -P "^.*$directoryPath.* (note|style|warning|error): .*$" | tee -a "$staticAnalysisFilename"
     set -e
     
     echo "DONE!" >> "$staticAnalysisFilename"
+    scriptPrint "$scriptName" "$LINENO" "Performing [git add] to [$staticAnalysisFilename]"
     git add "$staticAnalysisFilename"
+    scriptPrint "$scriptName" "$LINENO" "Performing [git diff] to see the local changes (just showing the first 10 lines):"
+    git diff --cached | head -n 10
 }
 
 # Split the cppProjects into individual items

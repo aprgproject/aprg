@@ -1,4 +1,5 @@
 name: Run Static Analyzers With Auto Fixes Workflow
+run-name: Run Static Analyzers With Auto Fixes Workflow
 
 on:
   push:
@@ -109,14 +110,14 @@ jobs:
         
       - name: Commit and Push Changes
         run: |
-          echo "Perfoming "git add" to add all versioned files that was changed..."
+          echo "Performing [git add] to add all versioned files that was changed..."
           git add -u
-          echo "Performing "git diff" to see the local changes (just showing the first 100 lines):"
+          echo "Performing [git diff] to see the local changes (just showing the first 100 lines):"
           git diff --cached | head -n 100
-          echo "Performing "git commit" with a message..."
+          echo "Performing [git commit] with a message..."
           git commit -m "APRGPROJECT: Automatic commit for Static Analyzers with Auto Fixes"
-          echo "Performing "git pull" for the last time before "push" to merge with recent commits..."
+          echo "Performing [git pull] for the last time before "push" to merge with recent commits..."
           git pull --no-edit
-          echo "Performing "git push"..."
+          echo "Performing [git push]..."
           git push
           echo "The git push done has finished, the changes should exist now in the repository."

@@ -42,7 +42,10 @@ runStaticAnalyzersInDirectory() {
     set -e
 
     echo "DONE!" >> "$staticAnalysisFilename"
+    scriptPrint "$scriptName" "$LINENO" "Performing [git add] to [$staticAnalysisFilename]"
     git add "$staticAnalysisFilename"
+    scriptPrint "$scriptName" "$LINENO" "Performing [git diff] to see the local changes (just showing the first 10 lines):"
+    git diff --cached | head -n 10
 }
 
 # Loop through the items and call a separate script for each
@@ -53,4 +56,5 @@ for cppProjectDirectory in "${cppProjectDirectories[@]}"; do
     cppProjectAbsolutePath=$(realpath "$aprgDirectory/$cppProjectDirectory/")
     scriptPrint "$scriptName" "$LINENO" "cppProjectAbsolutePath in: [$cppProjectAbsolutePath]"
     runStaticAnalyzersInDirectory "$cppProjectAbsolutePath"
+    break
 done

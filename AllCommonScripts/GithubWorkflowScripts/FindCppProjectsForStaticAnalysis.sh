@@ -22,20 +22,24 @@ findCppProjectsForStaticAnalysis() {
         aprgProjectDirectory=$(echo "$aprgProjectLocatorPath" | sed -E "s|$cppIndicatorFilePath||")
         staticAnalysisOutputPath="$aprgProjectDirectory/$staticAnalysisFilename"
         cppProject=$(echo "$aprgProjectDirectory" | sed -E "s|^.*$aprgDirectory/(.*)$|\"\1\"|")
+        scriptPrint "$scriptName" "$LINENO" "The cppProject: [$cppProject]"
+        scriptPrint "$scriptName" "$LINENO" "The static analysis file: [$staticAnalysisOutputPath]"
         if [[ -e $staticAnalysisOutputPath ]]; then
-            scriptPrint "$scriptName" "$LINENO" "Check when the file was modified, staticAnalysisOutputPath: [$staticAnalysisOutputPath]"
+            scriptPrint "$scriptName" "$LINENO" "The static analysis file exists, proceeding to check when the file was modified..."
             modifiedDateTime=$(stat -c %Y "$staticAnalysisOutputPath")
             timeDifference=$((currentDateTime - modifiedDateTime))
             scriptPrint "$scriptName" "$LINENO" "currentDateTime: [$currentDateTime], modifiedDateTime: [$modifiedDateTime], timeDifference: [$timeDifference]"
             if [ "$timeDifference" -gt 86400 ]; then
-                scriptPrint "$scriptName" "$LINENO" "This file was modified more than 24 hours ago, staticAnalysisOutputPath: [$staticAnalysisOutputPath]"
+                scriptPrint "$scriptName" "$LINENO" "The project is ADDED because the static analysis file was modified more than 24 hours ago."
                 cppProjectsFound+="$cppProject,"
+            else
+                scriptPrint "$scriptName" "$LINENO" "The project is NOT ADDED because the static analysis file was modified within the last 24 hours."
             fi
         else
-            scriptPrint "$scriptName" "$LINENO" "This file does not exist, staticAnalysisOutputPath: [$staticAnalysisOutputPath]"
+            scriptPrint "$scriptName" "$LINENO" "The project is ADDED because the static analysis file does not exist."
             cppProjectsFound+="$cppProject,"
         fi
-    done < <(find "$aprgDirectory" -depth -type f -wholename "$searchCondition")
+    done < <(find "$aprgDirectory" -depth -type f -wholename "$searchCondition" | sort -f)
     
     scriptPrint "$scriptName" "$LINENO" "The cppProjectsFound are: [$cppProjectsFound]"
     export cppProjectsFound
