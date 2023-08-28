@@ -7,7 +7,7 @@ using namespace std;
 
 namespace alba::AprgAudio {
 
-NewSamplesBuilder::SampleMergingDetails::SampleMergingDetails() {}
+NewSamplesBuilder::SampleMergingDetails::SampleMergingDetails() = default;
 
 NewSamplesBuilder::NewSamplesBuilder(Samples const& oldSamples) : m_oldSamples(oldSamples) {}
 
