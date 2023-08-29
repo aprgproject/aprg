@@ -88,7 +88,7 @@ int SOOSA::FrequencyDatabase::getFrequencyOfAnswer(int const questionIndex, int 
     return frequency;
 }
 
-SOOSA::Status::Status() {}
+SOOSA::Status::Status() = default;
 
 SOOSA::Status SOOSA::Status::getInstance() {
     static Status instance;
@@ -246,11 +246,12 @@ Line SOOSA::findVerticalLine(BitmapSnippet const& snippet, RangeOfInts const& ra
              x += rangeForX.getInterval()) {
             if (isBlackAt(snippet, BitmapXY(x, y))) {
                 if (consecutiveBlackPixels.isEmpty()) {
-                    consecutiveBlackPixels.setStartValue((double)x);
+                    consecutiveBlackPixels.setStartValue(static_cast<double>(x));
                 }
-                consecutiveBlackPixels.setEndValue((double)x);
+                consecutiveBlackPixels.setEndValue(static_cast<double>(x));
             } else if (!consecutiveBlackPixels.isEmpty()) {
-                samples.emplace_back(TwoDimensionSample{consecutiveBlackPixels.getMidpointValue(), (double)y});
+                samples.emplace_back(
+                    TwoDimensionSample{consecutiveBlackPixels.getMidpointValue(), static_cast<double>(y)});
                 break;
             }
         }
@@ -267,11 +268,12 @@ Line SOOSA::findHorizontalLine(BitmapSnippet const& snippet, RangeOfInts const& 
              y += rangeForY.getInterval()) {
             if (isBlackAt(snippet, BitmapXY(x, y))) {
                 if (consecutiveBlackPixels.isEmpty()) {
-                    consecutiveBlackPixels.setStartValue((double)y);
+                    consecutiveBlackPixels.setStartValue(static_cast<double>(y));
                 }
-                consecutiveBlackPixels.setEndValue((double)y);
+                consecutiveBlackPixels.setEndValue(static_cast<double>(y));
             } else if (!consecutiveBlackPixels.isEmpty()) {
-                samples.emplace_back(TwoDimensionSample{(double)x, consecutiveBlackPixels.getMidpointValue()});
+                samples.emplace_back(
+                    TwoDimensionSample{static_cast<double>(x), consecutiveBlackPixels.getMidpointValue()});
                 break;
             }
         }
@@ -296,14 +298,16 @@ Line SOOSA::findVerticalLineUsingStartingLine(
     for (int y = snippet.getTopLeftCorner().getY(); y <= snippet.getBottomRightCorner().getY(); y++) {
         AlbaValueRange<double> consecutiveBlackPixels;
         double xInLine = round(startingLine.calculateXFromY(y));
-        for (int x = (int)xInLine; conditionForX(x, rangeForX.getEndValue()); x += rangeForX.getInterval()) {
+        for (int x = static_cast<int>(xInLine); conditionForX(x, rangeForX.getEndValue());
+             x += rangeForX.getInterval()) {
             if (isBlackAt(snippet, BitmapXY(x, y))) {
                 if (consecutiveBlackPixels.isEmpty()) {
-                    consecutiveBlackPixels.setStartValue((double)x);
+                    consecutiveBlackPixels.setStartValue(static_cast<double>(x));
                 }
-                consecutiveBlackPixels.setEndValue((double)x);
+                consecutiveBlackPixels.setEndValue(static_cast<double>(x));
             } else if (!consecutiveBlackPixels.isEmpty()) {
-                samples.emplace_back(TwoDimensionSample{consecutiveBlackPixels.getMidpointValue(), (double)y});
+                samples.emplace_back(
+                    TwoDimensionSample{consecutiveBlackPixels.getMidpointValue(), static_cast<double>(y)});
                 break;
             }
         }
@@ -524,7 +528,8 @@ double SOOSA::getRadiusForChoiceChecking(
 Point SOOSA::getCenterOfCircleForChoiceChecking(
     BitmapSnippet const& snippet, Point const& leftPoint, Point const& rightPoint, double const radius,
     int const choiceIndex) const {
-    double choiceIndexRatio = (((double)choiceIndex * 2) + 1) / (m_soosaConfiguration.getNumberOfChoices() * 2);
+    double choiceIndexRatio =
+        ((static_cast<double>(choiceIndex) * 2) + 1) / (m_soosaConfiguration.getNumberOfChoices() * 2);
     double differenceFromLeftToRightInX = rightPoint.getX() - leftPoint.getX();
     double differenceFromLeftToRightInY = rightPoint.getY() - leftPoint.getY();
     Point originalCenter(
@@ -1056,17 +1061,18 @@ int SOOSA::getMaximumLineAndBarWidth(BitmapSnippet const& snippet) const {
 
 BitmapXY SOOSA::convertToBitmapXY(Point const& point) {
     return BitmapXY(
-        (int)round(clampLowerBound(point.getX(), (double)0)), (int)round(clampLowerBound(point.getY(), (double)0)));
+        static_cast<int>(round(clampLowerBound(point.getX(), static_cast<double>(0)))),
+        static_cast<int>(round(clampLowerBound(point.getY(), static_cast<double>(0)))));
 }
 
 BitmapXY SOOSA::convertToBitmapXY(Sample const& sample) {
     return BitmapXY(
-        (int)round(clampLowerBound(sample.getValueAt(0), (double)0)),
-        (int)round(clampLowerBound(sample.getValueAt(1), (double)0)));
+        static_cast<int>(round(clampLowerBound(sample.getValueAt(0), static_cast<double>(0)))),
+        static_cast<int>(round(clampLowerBound(sample.getValueAt(1), static_cast<double>(0)))));
 }
 
 Point SOOSA::convertToPoint(BitmapXY const& bitmapXY) {
-    return Point((double)bitmapXY.getX(), (double)bitmapXY.getY());
+    return Point(static_cast<double>(bitmapXY.getX()), static_cast<double>(bitmapXY.getY()));
 }
 
 Point SOOSA::convertToPoint(Sample const& sample) { return Point(sample.getValueAt(0), sample.getValueAt(1)); }

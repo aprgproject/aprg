@@ -44,29 +44,29 @@ private:
     void readNamesAndValuesFromFile(std::string const& filePath);
 
     // Line model parameters
-    int m_acceptableLineDeviationForLineModelInPixels;
-    double m_removalRatioForSquareErrorsInLineModel;
-    int m_minimumLineSamples;
+    int m_acceptableLineDeviationForLineModelInPixels{};
+    double m_removalRatioForSquareErrorsInLineModel{};
+    int m_minimumLineSamples{};
 
     // Line and bar parameters
-    double m_bitmapWidthToBarWidthMultiplier;
-    int m_lineBarWidthSearchInitialBlackPointsValue;
-    double m_lineBarWidthSearchAcceptedRunningBlackRatio;
-    double m_acceptableDistanceOverWidthRatioFromWidthMidpoint;
-    double m_acceptableMinimumDistanceFromWidthMidpoint;
-    double m_acceptableSdOverMeanDeviationForLine;
-    double m_acceptableSdOverMeanDeviationForBar;
-    double m_removalRatioForLineAndBar;
-    double m_initialValueForMaximumDistanceBetweenBarHeights;
-    double m_multiplierForMaximumDistanceBetweenBarHeights;
-    double m_acceptableSdOverMeanDeviationForBarHeight;
-    double m_removalRatioForBarHeight;
+    double m_bitmapWidthToBarWidthMultiplier{};
+    int m_lineBarWidthSearchInitialBlackPointsValue{};
+    double m_lineBarWidthSearchAcceptedRunningBlackRatio{};
+    double m_acceptableDistanceOverWidthRatioFromWidthMidpoint{};
+    double m_acceptableMinimumDistanceFromWidthMidpoint{};
+    double m_acceptableSdOverMeanDeviationForLine{};
+    double m_acceptableSdOverMeanDeviationForBar{};
+    double m_removalRatioForLineAndBar{};
+    double m_initialValueForMaximumDistanceBetweenBarHeights{};
+    double m_multiplierForMaximumDistanceBetweenBarHeights{};
+    double m_acceptableSdOverMeanDeviationForBarHeight{};
+    double m_removalRatioForBarHeight{};
 
     // Choices related parameters
-    int m_numberOfChoices;
-    int m_colorIntensityForWhite;
-    double m_barHeightToDiameterMultiplier;
-    double m_minimumPercentageOfBlackPixelsForAFilledCircle;
+    int m_numberOfChoices{};
+    int m_colorIntensityForWhite{};
+    double m_barHeightToDiameterMultiplier{};
+    double m_minimumPercentageOfBlackPixelsForAFilledCircle{};
 
     // Buffer
     BufferMap m_nameToValueStringMapBuffer;
