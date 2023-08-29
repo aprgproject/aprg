@@ -55,7 +55,8 @@ jobs:
           echo "github.event_name: [${{ github.event_name }}]"
           echo "github.event.action: [${{ github.event.action }}]"
           echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
-          echo "staticAnalysisJobId: [${{ inputs.staticAnalysisJobId }}]"
+          echo "env.staticAnalysisFilename: [${{ env.staticAnalysisFilename }}]"
+          echo "inputs.staticAnalysisJobId: [${{ inputs.staticAnalysisJobId }}]"
           
       - name: Checkout code
         uses: actions/checkout@v3
@@ -75,6 +76,17 @@ jobs:
           # git remote -v
         env:
           WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+          
+      - name: Get Static Analysis Job Id from Git Or from User Input
+        run: |
+          staticAnalysisJobId="${{ inputs.staticAnalysisJobId }}" 
+          if [[ -z $staticAnalysisJobId ]]; then
+            lastCommitMessage=$(git log -1 --pretty=%B)
+            echo "lastCommitMessage: [$lastCommitMessage]"
+            staticAnalysisJobId=$(echo "$lastCommitMessage" | sed -nE "s|^.*JobId:\[(.*)\].*$|\1|p")
+          fi
+          echo "staticAnalysisJobId: [$staticAnalysisJobId]"
+          echo "staticAnalysisJobId=$staticAnalysisJobId" >> "$GITHUB_ENV"
 
       - name: Install dependencies
         run: |
@@ -107,7 +119,7 @@ jobs:
           echo "staticAnalysisScriptPath: [$(staticAnalysisScriptPath)]"
           chmod +x "$staticAnalysisScriptPath"
           # 19800 seconds translates to 5 hours and 30 minutes
-          timeout 19800 "$staticAnalysisScriptPath" "${{ inputs.staticAnalysisJobId }}" "${{ env.staticAnalysisFilename }}" "${{ needs.determineCppProjects.outputs.projectsToBuild }}" 
+          timeout 19800 "$staticAnalysisScriptPath" "$staticAnalysisJobId" "${{ env.staticAnalysisFilename }}" "${{ needs.determineCppProjects.outputs.projectsToBuild }}" 
             
       - name: Run clang format
         shell: bash
@@ -122,4 +134,4 @@ jobs:
           gitAddCommitPushScriptPath=$(realpath "$(pwd)/${{ env.gitAddCommitPushScriptRelativePath }}")
           echo "gitAddCommitPushScriptPath: [$(gitAddCommitPushScriptPath)]"
           chmod +x "$gitAddCommitPushScriptPath"
-          "$gitAddCommitPushScriptPath" "WORKFLOW COMMIT: Automatic fixes from Static Analyzers."
+          "$gitAddCommitPushScriptPath" "$staticAnalysisJobId"  "WORKFLOW COMMIT: Automatic fixes from Static Analyzers."

@@ -29,7 +29,7 @@ findCppProjectsForStaticAnalysis() {
 
             scriptPrint "$scriptName" "$LINENO" "The static analysis file exists, checking the job identifiers..."
             read -r jobIdentifierLine < "$staticAnalysisOutputPath"
-            jobIdentifierFromFile=$(echo "$jobIdentifierLine" | sed -nE "s|^.*StaticAnalysisJobIdentifier:.*\[(.*)\].*$|\1|p")
+            jobIdentifierFromFile=$(echo "$jobIdentifierLine" | sed -nE "s|^.*StaticAnalysisJobIdentifier:\s+\[(.*)\].*$|\1|p")
             scriptPrint "$scriptName" "$LINENO" "jobIdentifierFromRun: [$jobIdentifierFromRun], jobIdentifierFromFile: [$jobIdentifierFromFile]"
 
             if [ "$jobIdentifierFromRun" == "$jobIdentifierFromFile" ]; then
