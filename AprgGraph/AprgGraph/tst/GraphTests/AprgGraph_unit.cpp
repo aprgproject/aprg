@@ -24,7 +24,7 @@ TEST(AprgGraphTest, DISABLED_BitmapGraph24Bits) {
     defaultFile.copyToNewFile(graphOutputFile.getFullPath());
 
     AprgGraph graph(graphOutputFile.getFullPath(), BitmapXY(800, 450), BitmapDoubleXY(50, 50));
-    graph.drawGrid(BitmapDoubleXY((double)5, (double)5));
+    graph.drawGrid(BitmapDoubleXY(static_cast<double>(5), static_cast<double>(5)));
     graph.drawLine(Line(1, 1, 1), 0x00FF0000);
     graph.drawCircle(Circle(Point(0, 0), 10), 0x000000FF);
     graph.drawEllipse(Ellipse(Point(0, 0), 15, 10), 0x0000FFFF);
@@ -56,7 +56,7 @@ TEST(AprgGraphTest, TemporaryTest) {
     defaultFile.copyToNewFile(graphOutputFile.getFullPath());
 
     AprgGraph graph(graphOutputFile.getFullPath(), BitmapXY(800, 450), BitmapDoubleXY(50, 50));
-    graph.drawGrid(BitmapDoubleXY((double)5, (double)5));
+    graph.drawGrid(BitmapDoubleXY(static_cast<double>(5), static_cast<double>(5)));
 
     Equation equation(buildEquationIfPossible("x^x = y"));
     graph.drawEquationWithXYSubstitution(equation, 0x0000A1BA);
