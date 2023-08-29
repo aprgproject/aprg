@@ -104,8 +104,8 @@ struct RoMap {
 
 struct ShopItemDetail {
     std::string itemName;
-    double averagePrice;
-    unsigned int totalNumber;
+    double averagePrice{};
+    unsigned int totalNumber{};
 };
 
 using ItemIdToItemMap = std::map<unsigned int, Item>;

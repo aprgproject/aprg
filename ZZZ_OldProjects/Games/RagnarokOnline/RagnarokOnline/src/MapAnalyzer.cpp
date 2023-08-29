@@ -5,13 +5,14 @@
 
 #include <algorithm>
 #include <iostream>
+#include <math.h>
 
 using namespace alba::stringHelper;
 using namespace std;
 
 namespace alba {
 
-MapAnalyzer::MapAnalyzer() {}
+MapAnalyzer::MapAnalyzer() = default;
 
 void MapAnalyzer::analyze() {
     gatherData();
@@ -48,7 +49,7 @@ void MapAnalyzer::printPotentialZenyFromMonster(string const& monsterName) const
     for (NameAndRate const& dropWithRate : monster.dropsWithRates) {
         if (isDropRateAcceptable(dropWithRate.rate)) {
             Item item(m_ragnarokOnline.getItem(dropWithRate.name));
-            string fixedItemName(m_ragnarokOnline.getFixedItemName(item));
+            string fixedItemName(alba::RagnarokOnline::getFixedItemName(item));
             double bestPrice(getBestPrice(item));
             double itemPotentialZeny = bestPrice * getTalonRoDropRate(dropWithRate.rate) / 100;
             cout << "Item name: [" << fixedItemName << "] Item potential zeny: [" << itemPotentialZeny
@@ -288,8 +289,8 @@ double MapAnalyzer::getTalonRoDropRate(double const dropRate) {
 }
 
 double MapAnalyzer::getBestPrice(Item const& item) const {
-    double result;
-    string fixedItemName(m_ragnarokOnline.getFixedItemName(item));
+    double result = NAN;
+    string fixedItemName(alba::RagnarokOnline::getFixedItemName(item));
     double npcPrice = item.sellingPrice;
     double talonRoBuyingPrice = m_ragnarokOnline.getTalonRoBuyingPrice(fixedItemName);
     double talonRoSellingPrice = m_ragnarokOnline.getTalonRoSellingPrice(fixedItemName);
