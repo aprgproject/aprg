@@ -55,7 +55,8 @@ private:
 
     void mergePilesToOnePile(Piles& piles) const { mergePiles(piles.begin(), std::prev(piles.end())); }
 
-    [[nodiscard]] PilesIterator mergePiles(PilesIterator itLow, PilesIterator itHigh) const {
+    // NOLINTNEXTLINE(modernize-use-nodiscard)
+    PilesIterator mergePiles(PilesIterator itLow, PilesIterator itHigh) const {
         // https://en.wikipedia.org/wiki/K-way_merge_algorithm
         int numberOfPiles = std::distance(itLow, itHigh) + 1;
         if (numberOfPiles == 2) {
