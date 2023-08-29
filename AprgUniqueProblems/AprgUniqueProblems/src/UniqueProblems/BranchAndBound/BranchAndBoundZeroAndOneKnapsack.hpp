@@ -19,7 +19,7 @@ public:
     using Profits = std::vector<Profit>;
     using Items = std::vector<Item>;
 
-    static [[nodiscard]] Profit getBestProfit(Weight const maximumWeight, Items const& items);
+    [[nodiscard]] static Profit getBestProfit(Weight const maximumWeight, Items const& items);
 
 private:
     static Profit getMaxPossibleProfit(Node const& currentNode, Weight const maximumWeight, Items const& items);
