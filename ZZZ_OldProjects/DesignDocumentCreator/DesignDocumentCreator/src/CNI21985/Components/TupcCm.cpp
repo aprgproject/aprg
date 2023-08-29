@@ -78,7 +78,7 @@ void TupcCm::sendCmBearersSetupRespBasedCmBearersSetupReq(GenericMessage const& 
     payload.nbccId = cmBearersSetupReqPayload.nbccId;
     payload.numConnections = cmBearersSetupReqPayload.numConnections;
     for (unsigned int connection = 0; connection < cmBearersSetupReqPayload.numConnections; connection++) {
-        SCmBearersSetupRespDynamicPart payloadDynamicPart;
+        SCmBearersSetupRespDynamicPart payloadDynamicPart{};
         SCmBearersSetupReqDynamicPart& cmBearersSetupReqDynamicPartPayload(
             cmBearersSetupReqMessage.getDynamicPayloadReferenceAtAndCreateIfNeeded(connection));
         payloadDynamicPart.bearerType = cmBearersSetupReqDynamicPartPayload.bearerType;
@@ -101,7 +101,7 @@ void TupcCm::sendCmBearersReleaseRespBasedCmBearersReleaseReq(GenericMessage con
     SCmBearersReleaseReqMsg const& cmBearersReleaseReqPayload(cmBearersReleaseReqMessage.getStaticPayloadReference());
     payload.numConnections = cmBearersReleaseReqPayload.numConnections;
     for (unsigned int connection = 0; connection < cmBearersReleaseReqPayload.numConnections; connection++) {
-        SCmBearersReleaseRespDynamicPart payloadDynamicPart;
+        SCmBearersReleaseRespDynamicPart payloadDynamicPart{};
         SCmBearersReleaseReqDynamicPart& cmBearersReleaseReqDynamicPartPayload(
             cmBearersReleaseReqMessage.getDynamicPayloadReferenceAtAndCreateIfNeeded(connection));
         // payloadDynamicPart.fpSicAddress = <<missing>>
@@ -146,8 +146,8 @@ void TupcCm::handleMessageEvent(GenericMessage const& genericMessage) {
 }
 
 void TupcCm::handleTimerEvent(Timer const& timer) {
-    cout << "Handle Timer, timerType: " << convertToString(timer.getType()) << " timerId:" << (int)timer.getId()
-         << "\n";
+    cout << "Handle Timer, timerType: " << convertToString(timer.getType())
+         << " timerId:" << static_cast<int>(timer.getId()) << "\n";
 }
 
 void TupcCm::handleOtherEvent(OtherEvent const& otherEvent) {

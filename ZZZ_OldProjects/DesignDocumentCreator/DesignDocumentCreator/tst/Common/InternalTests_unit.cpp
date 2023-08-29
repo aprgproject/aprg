@@ -54,7 +54,7 @@ TEST(MessagesTest, SpecificDynamicPolymorphicMessageCanBeCreatedWithPayload) {
 }
 
 TEST(MessagesTest, GenericMessageCanBeCreatedWithPayload) {
-    StaticMessageSack payload;
+    StaticMessageSack payload{};
     payload.sampleParameter = 5678;
     GenericMessage genericMessage(MessageName::SampleStaticMessage, &payload, sizeof(payload));
     StaticMessageSack outputPayload(
@@ -67,7 +67,7 @@ TEST(MessagesTest, GenericMessageCanBeCreatedWithPayload) {
 }
 
 TEST(MessagesTest, GenericMessageCanBeConvertedToSpecificStatic) {
-    StaticMessageSack payload;
+    StaticMessageSack payload{};
     payload.sampleParameter = 5678;
     GenericMessage genericMessage(MessageName::SampleStaticMessage, &payload, sizeof(payload));
     genericMessage.setSender(ComponentName::SampleComponent);
@@ -83,7 +83,7 @@ TEST(MessagesTest, GenericMessageCanBeConvertedToSpecificStatic) {
 }
 
 TEST(MessagesTest, GenericMessageCanBeConvertedToSpecificDynamicArrayToSmallerSpecificMessage) {
-    SampleActualDynamicArrayMessageSack payload;
+    SampleActualDynamicArrayMessageSack payload{};
     payload.staticPart.sampleStaticParameter = 1010;
     payload.dynamicPart[0].dynamicArrayParameter = 1111;
     payload.dynamicPart[1].dynamicArrayParameter = 2222;
@@ -104,7 +104,7 @@ TEST(MessagesTest, GenericMessageCanBeConvertedToSpecificDynamicArrayToSmallerSp
 }
 
 TEST(MessagesTest, GenericMessageCanBeConvertedToSpecificDynamicArrayToLargerSpecificMessage) {
-    SampleActualDynamicArrayMessageSack payload;
+    SampleActualDynamicArrayMessageSack payload{};
     payload.staticPart.sampleStaticParameter = 1010;
     payload.dynamicPart[0].dynamicArrayParameter = 1111;
     payload.dynamicPart[1].dynamicArrayParameter = 2222;
@@ -127,7 +127,7 @@ TEST(MessagesTest, GenericMessageCanBeConvertedToSpecificDynamicArrayToLargerSpe
 }
 
 TEST(MessagesTest, GenericMessageCanBeConvertedToSpecificDynamicPolymorphic) {
-    SampleActualDynamicPolymorphicMessageSack payload;
+    SampleActualDynamicPolymorphicMessageSack payload{};
     payload.staticPart.sampleStaticParameter = 0x12345678;
     payload.dynamicPart.dynamicPolymorphicParameter = 0x11111111;
     GenericMessage genericMessage(MessageName::SampleDynamicPolymorphicMessage, &payload, sizeof(payload));
@@ -221,7 +221,7 @@ TEST(TimerTest, TimersCanBeCreated) {
 }
 
 TEST(EventsTest, MessageEventsCanBeCreated) {
-    StaticMessageSack payload;
+    StaticMessageSack payload{};
     payload.sampleParameter = 5678;
     GenericMessage genericMessage(MessageName::SampleStaticMessage, &payload, sizeof(payload));
     Event event(genericMessage);
@@ -255,7 +255,7 @@ TEST(EventsTest, OtherEventsCanBeCreated) {
 }
 
 TEST(ComponentsTest, MessageEventsAreHandledByComponents) {
-    StaticMessageSack payload;
+    StaticMessageSack payload{};
     payload.sampleParameter = 5678;
     GenericMessage genericMessage(MessageName::SampleStaticMessage, &payload, sizeof(payload));
     Event event(genericMessage);
@@ -289,7 +289,7 @@ TEST(ComponentsTest, SpecificComponentCanBeFetchedFromComponents) {
 TEST(EnvironmentTest, SentMessagesAreReceivedByRecipientComponent) {
     Environment& environment(Environment::getInstance());
     environment.clear();
-    StaticMessageSack payload;
+    StaticMessageSack payload{};
     GenericMessage genericMessage(MessageName::SampleStaticMessage, &payload, sizeof(payload));
     Component* componentPointer(
         environment.getComponentsReference().getComponentPointer(ComponentName::SampleComponent));
@@ -304,7 +304,7 @@ TEST(EnvironmentTest, SentMessagesAreReceivedByRecipientComponent) {
 TEST(EnvironmentTest, SentMessagesAreExecutedByRecipientComponent) {
     Environment& environment(Environment::getInstance());
     environment.clear();
-    StaticMessageSack payload;
+    StaticMessageSack payload{};
     GenericMessage genericMessage(MessageName::SampleStaticMessage, &payload, sizeof(payload));
     Component* componentPointer(
         environment.getComponentsReference().getComponentPointer(ComponentName::SampleComponent));

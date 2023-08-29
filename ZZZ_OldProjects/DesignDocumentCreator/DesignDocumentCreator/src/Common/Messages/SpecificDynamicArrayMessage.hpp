@@ -51,7 +51,7 @@ private:
         return buffer;
     }
     [[nodiscard]] unsigned int calculateOffsetForDynamicPart() const {
-        return sizeof(SackType) + ((int)-1 * sizeof(DynamicPartSackType));
+        return sizeof(SackType) + (-1 * sizeof(DynamicPartSackType));
     }
     SackType m_staticPayload;
     std::vector<DynamicPartSackType> m_dynamicArrayPayload;

@@ -18,9 +18,9 @@ private:
     virtual void handleMessageEvent(GenericMessage const& genericMessage);
     virtual void handleTimerEvent(Timer const& timer);
     virtual void handleOtherEvent(OtherEvent const& otherEvent);
-    TAaSysComSicad m_oamAddress;
-    TAaSysComSicad m_tupcCmAddress;
-    TAaSysComSicad m_tupcIlmAddress;
+    TAaSysComSicad m_oamAddress{};
+    TAaSysComSicad m_tupcCmAddress{};
+    TAaSysComSicad m_tupcIlmAddress{};
 };
 
 }  // namespace DesignDocumentCreator
