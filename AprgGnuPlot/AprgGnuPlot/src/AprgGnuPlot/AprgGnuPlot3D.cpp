@@ -6,7 +6,7 @@ using namespace std;
 namespace alba {
 
 AprgGnuPlot3D::PointInGraph AprgGnuPlot3D::getPoint(double const x, double const y, double const z) {
-    return AprgGnuPlot3D::PointInGraph(make_pair(make_pair(x, y), z));
+    return static_cast<AprgGnuPlot3D::PointInGraph>(make_pair(make_pair(x, y), z));
 }
 
 void AprgGnuPlot3D::graph(PointsInGraph const& points, string const& graphName, string const& configurationString) {

@@ -34,7 +34,7 @@ THE SOFTWARE.
 template <typename T>
 class NonCopyable : boost::noncopyable, public std::vector<T> {
 public:
-	NonCopyable() { }
+	NonCopyable() = default;
 };
 
 TEST(GnuplotIostreamTest, DISABLED_TestNonCopyable)
