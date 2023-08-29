@@ -1,0 +1,10 @@
+2023-08-29T06:06:06
+/home/runner/work/aprg/aprg/TddLecture/TddLecture/src/TddLecture.cpp:9:28: warning: 'm_sample' should be initialized in an in-class default member initializer [cppcoreguidelines-prefer-member-initializer]
+/home/runner/work/aprg/aprg/TddLecture/TddLecture/src/TddLecture.cpp:15:37: warning: 5 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
+/home/runner/work/aprg/aprg/TddLecture/TddLecture/src/TddLecture.cpp:15:40: warning: 6 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
+/home/runner/work/aprg/aprg/TddLecture/TddLecture/src/TddLecture.cpp:15:43: warning: 7 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
+/home/runner/work/aprg/aprg/TddLecture/TddLecture/src/TddLecture.cpp:15:46: warning: 8 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
+/home/runner/work/aprg/aprg/TddLecture/TddLecture/src/TddLecture.cpp:15:49: warning: 9 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
+/home/runner/work/aprg/aprg/TddLecture/TddLecture/src/TddLecture.cpp:15:52: warning: 10 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
+/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:13:39: warning: static member accessed through instance [readability-static-accessed-through-instance]
+DONE!
