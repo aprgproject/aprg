@@ -4,4 +4,4 @@ namespace CodeJam_2021_Round1C_P1_ClosestPick {
 
 int main();  // this is main
 
-}
+}  // namespace CodeJam_2021_Round1C_P1_ClosestPick

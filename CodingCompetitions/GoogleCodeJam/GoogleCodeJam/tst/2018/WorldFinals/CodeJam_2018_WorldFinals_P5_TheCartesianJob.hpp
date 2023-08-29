@@ -4,4 +4,4 @@ namespace CodeJam_2018_WorldFinals_P5_TheCartesianJob {
 
 int main();  // this is main
 
-}
+}  // namespace CodeJam_2018_WorldFinals_P5_TheCartesianJob
