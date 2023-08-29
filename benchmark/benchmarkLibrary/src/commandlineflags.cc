@@ -283,7 +283,7 @@ bool IsFlag(const char* str, const char* flag) {
 bool IsTruthyFlagValue(const std::string& value) {
   if (value.size() == 1) {
     char v = value[0];
-    return isalnum(v) &&
+    return (isalnum(v) != 0) &&
            !(v == '0' || v == 'f' || v == 'F' || v == 'n' || v == 'N');
   } if (!value.empty()) {
     std::string value_lower(value);
@@ -291,8 +291,7 @@ bool IsTruthyFlagValue(const std::string& value) {
                    [](char c) { return static_cast<char>(::tolower(c)); });
     return !(value_lower == "false" || value_lower == "no" ||
              value_lower == "off");
-  } else
-    return true;
+  }     return true;
 }
 
 }  // end namespace benchmark

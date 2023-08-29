@@ -132,7 +132,7 @@ bool JSONReporter::ReportContext(const Context& context) {
 
   out << indent << FormatKV("host_name", context.sys_info.name) << ",\n";
 
-  if (Context::executable_name) {
+  if (Context::executable_name != nullptr) {
     out << indent << FormatKV("executable", Context::executable_name) << ",\n";
   }
 

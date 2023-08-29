@@ -14,26 +14,25 @@
 
 #include "counter.h"
 
-namespace benchmark {
-namespace internal {
+namespace benchmark::internal {
 
 double Finish(Counter const& c, IterationCount iterations, double cpu_time,
               double num_threads) {
   double v = c.value;
-  if (c.flags & Counter::kIsRate) {
+  if ((c.flags & Counter::kIsRate) != 0u) {
     v /= cpu_time;
   }
-  if (c.flags & Counter::kAvgThreads) {
+  if ((c.flags & Counter::kAvgThreads) != 0u) {
     v /= num_threads;
   }
-  if (c.flags & Counter::kIsIterationInvariant) {
+  if ((c.flags & Counter::kIsIterationInvariant) != 0u) {
     v *= iterations;
   }
-  if (c.flags & Counter::kAvgIterations) {
+  if ((c.flags & Counter::kAvgIterations) != 0u) {
     v /= iterations;
   }
 
-  if (c.flags & Counter::kInvert) {  // Invert is *always* last.
+  if ((c.flags & Counter::kInvert) != 0u) {  // Invert is *always* last.
     v = 1.0 / v;
   }
   return v;
@@ -77,5 +76,4 @@ bool SameNames(UserCounters const& l, UserCounters const& r) {
   return true;
 }
 
-}  // end namespace internal
 }  // end namespace benchmark

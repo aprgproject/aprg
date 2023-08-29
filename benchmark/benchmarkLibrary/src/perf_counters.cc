@@ -22,8 +22,7 @@
 #include "perfmon/pfmlib_perf_event.h"
 #endif
 
-namespace benchmark {
-namespace internal {
+namespace benchmark::internal {
 
 constexpr size_t PerfCounterValues::kMaxCounters;
 
@@ -128,5 +127,4 @@ PerfCounters PerfCounters::Create(
 
 PerfCounters::~PerfCounters() = default;
 #endif  // defined HAVE_LIBPFM
-}  // namespace internal
 }  // namespace benchmark
