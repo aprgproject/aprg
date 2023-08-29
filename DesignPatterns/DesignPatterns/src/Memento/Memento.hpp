@@ -19,7 +19,6 @@ private:
     void setState(int const state) { m_state = state; }
     // ...
 
-private:
     int m_state;
     // ...
 };

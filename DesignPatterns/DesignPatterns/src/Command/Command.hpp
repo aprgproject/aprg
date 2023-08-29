@@ -8,10 +8,13 @@ namespace Command {
 
 class Receiver {
 public:
-    static void action() { std::cout << "Receiver: perform action\n"; }
+    Receiver() = default;
+    void action() { std::cout << "Receiver: perform action, someValue: [" << someValue++ << "]\n"; }
 
-    static void reverseAction() { std::cout << "Receiver: perform reverse action\n"; }
+    void reverseAction() { std::cout << "Receiver: perform reverse action, someValue: [" << someValue-- << "]\n"; }
     // ...
+private:
+    int someValue{};
 };
 
 // Command
@@ -37,9 +40,9 @@ class ConcreteCommand : public Command {
 public:
     explicit ConcreteCommand(Receiver& receiver) : m_receiver(receiver) {}
 
-    void execute() override { Command::Receiver::action(); }
+    void execute() override { m_receiver.action(); }
 
-    void undo() override { Command::Receiver::reverseAction(); }
+    void undo() override { m_receiver.reverseAction(); }
     // ...
 
 private:
