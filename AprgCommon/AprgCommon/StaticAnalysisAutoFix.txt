@@ -1,4 +1,5 @@
-2023-08-29T10:43:01
+StaticAnalysisJobIdentifier: [9]
+2023-08-29T20:46:51
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Container/AlbaOptional_unit.cpp:188:22: warning: explicitly assigning value of variable of type 'AlbaOptional<int>' to itself [-Wself-assign-overloaded]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Debug/AlbaDebug.hpp:13:2: warning: ("The class AlbaDebug is used. Please remove after your done debugging.") // GCC extension [clang-diagnostic-#warnings]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Debug/AlbaDebug.hpp:13:2: warning: #warning is a language extension [clang-diagnostic-pedantic]
