@@ -25,7 +25,7 @@ using namespace std;
 
 namespace alba::AprgAudio {
 
-TEST(AiffLoadingTests, DISABLED_Stereo_8bit_44100) {
+TEST(AiffLoadingTests, StereoWith8BitWithSampleRate44100) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\aiff_stereo_8bit_44100.aif)");
@@ -43,7 +43,7 @@ TEST(AiffLoadingTests, DISABLED_Stereo_8bit_44100) {
     }
 }
 
-TEST(AiffLoadingTests, DISABLED_Stereo_16bit_44100) {
+TEST(AiffLoadingTests, StereoWith16BitWithSampleRate44100) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\aiff_stereo_16bit_44100.aif)");
@@ -61,7 +61,7 @@ TEST(AiffLoadingTests, DISABLED_Stereo_16bit_44100) {
     }
 }
 
-TEST(AiffLoadingTests, DISABLED_Stereo_24bit_44100) {
+TEST(AiffLoadingTests, StereoWith24BitWithSampleRate44100) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\aiff_stereo_24bit_44100.aif)");
@@ -79,7 +79,7 @@ TEST(AiffLoadingTests, DISABLED_Stereo_24bit_44100) {
     }
 }
 
-TEST(AiffLoadingTests, DISABLED_Stereo_8bit_48000) {
+TEST(AiffLoadingTests, StereoWith8BitWithSampleRate48000) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\aiff_stereo_8bit_48000.aif)");
@@ -97,7 +97,7 @@ TEST(AiffLoadingTests, DISABLED_Stereo_8bit_48000) {
     }
 }
 
-TEST(AiffLoadingTests, DISABLED_Stereo_16bit_48000) {
+TEST(AiffLoadingTests, StereoWith16BitWithSampleRate48000) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\aiff_stereo_16bit_48000.aif)");
@@ -115,7 +115,7 @@ TEST(AiffLoadingTests, DISABLED_Stereo_16bit_48000) {
     }
 }
 
-TEST(AiffLoadingTests, DISABLED_Stereo_24bit_48000) {
+TEST(AiffLoadingTests, StereoWith24BitWithSampleRate48000) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\aiff_stereo_24bit_48000.aif)");
@@ -133,7 +133,7 @@ TEST(AiffLoadingTests, DISABLED_Stereo_24bit_48000) {
     }
 }
 
-TEST(WritingTest, DISABLED_WriteFromCopiedSampleBuffer) {
+TEST(WritingTest, WriteFromCopiedSampleBuffer) {
     Audio<float> audioFile1, audioFile2;
 
     bool isLoadingSuccessful =
@@ -144,7 +144,7 @@ TEST(WritingTest, DISABLED_WriteFromCopiedSampleBuffer) {
     audioFile2.save("audio-write-tests/copied_audio_file.aif", AudioFormat::Aiff);
 }
 
-TEST(WavLoadingTests, DISABLED_Stereo_8bit_44100) {
+TEST(WavLoadingTests, StereoWith8BitWithSampleRate44100) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_stereo_8bit_44100.wav)");
@@ -162,7 +162,7 @@ TEST(WavLoadingTests, DISABLED_Stereo_8bit_44100) {
     }
 }
 
-TEST(WavLoadingTests, DISABLED_Stereo_16bit_44100) {
+TEST(WavLoadingTests, StereoWith16BitWithSampleRate44100) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_stereo_16bit_44100.wav)");
@@ -180,7 +180,7 @@ TEST(WavLoadingTests, DISABLED_Stereo_16bit_44100) {
     }
 }
 
-TEST(WavLoadingTests, DISABLED_Stereo_24bit_44100) {
+TEST(WavLoadingTests, StereoWith24BitWithSampleRate44100) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_stereo_24bit_44100.wav)");
@@ -198,7 +198,7 @@ TEST(WavLoadingTests, DISABLED_Stereo_24bit_44100) {
     }
 }
 
-TEST(WavLoadingTests, DISABLED_Mono_16bit_44100) {
+TEST(WavLoadingTests, MonoWith16BitWithSampleRate44100) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_mono_16bit_44100.wav)");
@@ -216,7 +216,7 @@ TEST(WavLoadingTests, DISABLED_Mono_16bit_44100) {
     }
 }
 
-TEST(WavLoadingTests, DISABLED_Stereo_8bit_48000) {
+TEST(WavLoadingTests, StereoWith8BitWithSampleRate48000) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_stereo_8bit_48000.wav)");
@@ -234,7 +234,7 @@ TEST(WavLoadingTests, DISABLED_Stereo_8bit_48000) {
     }
 }
 
-TEST(WavLoadingTests, DISABLED_Stereo_16bit_48000) {
+TEST(WavLoadingTests, StereoWith16BitWithSampleRate48000) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_stereo_16bit_48000.wav)");
@@ -252,7 +252,7 @@ TEST(WavLoadingTests, DISABLED_Stereo_16bit_48000) {
     }
 }
 
-TEST(WavLoadingTests, DISABLED_Stereo_24bit_48000) {
+TEST(WavLoadingTests, StereoWith24BitWithSampleRate48000) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_stereo_24bit_48000.wav)");
@@ -270,7 +270,7 @@ TEST(WavLoadingTests, DISABLED_Stereo_24bit_48000) {
     }
 }
 
-TEST(WavLoadingTests, DISABLED_Mono_16bit_48000) {
+TEST(WavLoadingTests, MonoWith16BitWithSampleRate48000) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_mono_16bit_48000.wav)");
@@ -324,7 +324,7 @@ bool writeTest(int numChannels, int sampleRate, int bitDepth, AudioFormat format
     return false;
 }
 
-TEST(WritingTest, DISABLED_WriteSineToneToManyFormats) {
+TEST(WritingTest, WriteSineToneToManyFormats) {
     std::vector<int> sampleRates = {22050, 44100, 48000, 96000};
     std::vector<int> bitDepths = {8, 16, 24};
     std::vector<int> numChannels = {1, 2};
