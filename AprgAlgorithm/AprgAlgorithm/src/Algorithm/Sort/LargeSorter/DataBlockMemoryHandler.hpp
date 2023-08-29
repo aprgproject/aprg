@@ -9,7 +9,7 @@ using DataBlockMemoryContainer = std::deque<ObjectToSort>;
 
 template <typename ObjectToSort>
 class DataBlockMemoryHandler {
-    typedef DataBlockMemoryContainer<ObjectToSort> MemoryContainer;
+    using MemoryContainer = DataBlockMemoryContainer<ObjectToSort>;
 
 public:
     void add(ObjectToSort const& objectToSort) { m_DataBlockMemoryContainer.push_back(objectToSort); }

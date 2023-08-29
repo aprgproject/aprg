@@ -1,41 +1,25 @@
-2023-08-28T23:54:00
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:13:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:13:9: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:19:35: warning: static member accessed through instance [readability-static-accessed-through-instance]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:19:35: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:58:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:84:52: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:84:52: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:84:108: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:89:58: warning: static member accessed through instance [readability-static-accessed-through-instance]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:89:58: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:126:26: warning: redundant cast to the same type [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:126:26: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:130:20: warning: redundant cast to the same type [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:130:20: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:15:22: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:17:1: note: FIX-IT applied suggested code changes
+StaticAnalysisJobIdentifier: [9]
+2023-08-29T19:54:48
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:60:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:92:38: warning: narrowing conversion from 'uint64_t' (aka 'unsigned long') to signed type 'std::basic_istream<char>::off_type' (aka 'long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:110:45: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:120:53: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:63:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:67:49: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:71:49: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:78:63: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:81:55: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:82:57: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:83:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:105:12: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:109:12: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:114:12: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:134:16: warning: narrowing conversion from 'unsigned long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:234:69: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:241:26: warning: variable 'compressedMethodType' is not initialized [cppcoreguidelines-init-variables]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:10:16: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:10:32: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:74:48: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:74:48: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:74:104: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:201:77: warning: redundant cast to the same type [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:201:77: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:22:46: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:22:46: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:22:56: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:22:69: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:22:69: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:22:78: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:33:46: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:33:46: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:33:57: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:33:70: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:33:70: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:33:79: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:38:54: warning: narrowing conversion from 'size_t' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:23:22: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:23:25: warning: narrowing conversion from 'double' to 'int' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:35:22: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:35:25: warning: narrowing conversion from 'double' to 'int' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 DONE!

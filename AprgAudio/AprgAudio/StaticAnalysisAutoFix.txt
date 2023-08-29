@@ -1,4 +1,5 @@
-2023-08-28T23:31:35
+StaticAnalysisJobIdentifier: [9]
+2023-08-29T19:40:26
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:81:12: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:81:48: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:97:23: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
@@ -9,12 +10,6 @@
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:289:28: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:289:45: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:327:16: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:359:38: warning: C-style casts are discouraged; use static_cast (if needed, the cast may be redundant) [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:359:38: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:359:49: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:376:43: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:376:43: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:376:77: note: FIX-IT applied suggested code changes
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:377:28: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:377:52: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:393:28: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
@@ -23,34 +18,15 @@
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:479:39: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:495:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:495:73: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:498:28: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:498:28: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:499:28: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:499:28: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:500:28: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:500:28: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:500:53: note: FIX-IT applied suggested code changes
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:570:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:570:73: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:573:28: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:573:28: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:574:28: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:574:28: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:575:28: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:575:28: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:575:53: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:679:13: warning: variable 'result' is not initialized [cppcoreguidelines-init-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:679:19: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:694:13: warning: variable 'result' is not initialized [cppcoreguidelines-init-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:694:19: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:708:24: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:708:24: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:708:55: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:697:18: warning: narrowing conversion from 'int' to signed type 'int16_t' (aka 'short') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:699:18: warning: narrowing conversion from 'int' to signed type 'int16_t' (aka 'short') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:20:5: warning: use 'using' instead of 'typedef' [modernize-use-using]
+/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:20:5: note: FIX-IT applied suggested code changes
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:220:25: style: Variable 'formatChunkID' is assigned a value that is never used. [unreadVariable]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:259:23: style: Variable 'dataChunkID' is assigned a value that is never used. [unreadVariable]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:323:23: style: Variable 'commChunkID' is assigned a value that is never used. [unreadVariable]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:351:28: style: Variable 'soundDataChunkID' is assigned a value that is never used. [unreadVariable]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:292:30: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:292:30: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:292:47: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:302:39: warning: narrowing conversion from 'double' to '__gnu_cxx::__alloc_traits<std::allocator<float>, float>::value_type' (aka 'float') [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 DONE!

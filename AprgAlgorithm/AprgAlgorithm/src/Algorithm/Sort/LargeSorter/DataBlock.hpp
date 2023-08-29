@@ -17,7 +17,7 @@ enum class DataBlockType { Empty, File, Memory };
 
 template <typename ObjectToSort>
 class DataBlock {
-    typedef DataBlockMemoryContainer<ObjectToSort> MemoryContainer;
+    using MemoryContainer = DataBlockMemoryContainer<ObjectToSort>;
 
 public:
     DataBlock(DataBlockType const blockType, int const blockNumber, std::string const& fileDumpPath)
