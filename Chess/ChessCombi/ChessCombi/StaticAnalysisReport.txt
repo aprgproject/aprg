@@ -1,0 +1,3 @@
+2023-08-29T03:43:05
+/home/runner/work/aprg/aprg/Chess/ChessCombi/ChessCombi/src/ChessCombi.cpp:5:28: warning: 'm_sample' should be initialized in an in-class default member initializer [cppcoreguidelines-prefer-member-initializer]
+DONE!
