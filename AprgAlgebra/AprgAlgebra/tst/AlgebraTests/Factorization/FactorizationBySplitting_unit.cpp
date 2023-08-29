@@ -31,7 +31,7 @@ TEST(FactorizationBySplittingTest, FactorizeBySplittingSmallerPolynomialsWorksWh
     EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
 }
 
-TEST(FactorizationBySplittingTest, FactorizeBySplittingToSmallerPolynomialsIfPossible_IsEmptyWhenItCannotBeFactored) {
+TEST(FactorizationBySplittingTest, FactorizeBySplittingToSmallerPolynomialsIfPossibleIsEmptyWhenItCannotBeFactored) {
     Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
 
     Polynomials polynomialsToVerify;
@@ -42,7 +42,7 @@ TEST(FactorizationBySplittingTest, FactorizeBySplittingToSmallerPolynomialsIfPos
 
 TEST(
     FactorizationBySplittingTest,
-    FactorizeBySplittingToSmallerPolynomialsIfPossible_WorksBySplittingByPolynomialDegree) {
+    FactorizeBySplittingToSmallerPolynomialsIfPossibleWorksBySplittingByPolynomialDegree) {
     Polynomial polynomialToTest{Monomial(25, {{"x", 2}}), Monomial(30, {{"x", 1}, {"y", 1}}),
                                 Monomial(9, {{"y", 2}}),  Monomial(15, {{"x", 1}}),
                                 Monomial(9, {{"y", 1}}),  Monomial(2, {})};
@@ -59,7 +59,7 @@ TEST(
 
 TEST(
     FactorizationBySplittingTest,
-    FactorizeBySplittingToSmallerPolynomialsIfPossible_WorksBySplittingByDivisibilityOfExponents) {
+    FactorizeBySplittingToSmallerPolynomialsIfPossibleWorksBySplittingByDivisibilityOfExponents) {
     Polynomial polynomialToTest{
         Monomial(1, {{"x", 2}}), Monomial(2, {{"x", 1}, {"y", 1}}), Monomial(-1, {{"z", 2}}),
         Monomial(-2, {{"y", 1}, {"z", 1}})};
@@ -74,7 +74,7 @@ TEST(
     EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
 }
 
-TEST(FactorizationBySplittingTest, FactorizeBySplittingToSmallerPolynomialsIfPossible_WorksBySplittingByFirstVariable) {
+TEST(FactorizationBySplittingTest, FactorizeBySplittingToSmallerPolynomialsIfPossibleWorksBySplittingByFirstVariable) {
     Polynomial polynomialToTest{
         Monomial(1, {{"a", 1}, {"x", 1}}), Monomial(-1, {{"a", 1}, {"y", 1}}), Monomial(-1, {{"b", 1}, {"y", 1}}),
         Monomial(1, {{"b", 1}, {"x", 1}})};
@@ -91,7 +91,7 @@ TEST(FactorizationBySplittingTest, FactorizeBySplittingToSmallerPolynomialsIfPos
 
 TEST(
     FactorizationBySplittingTest,
-    FactorizeBySplittingToSmallerPolynomialsIfPossible_IsEmptyWhenFactorsAreOnlyConstants) {
+    FactorizeBySplittingToSmallerPolynomialsIfPossibleIsEmptyWhenFactorsAreOnlyConstants) {
     Polynomial polynomialToTest{
         Monomial(-18, {{"dy/dx", 1}, {"y", 5}}), Monomial(-5, {{"dy/dx", 1}, {"y", 4}}), Monomial(6, {{"x", 5}}),
         Monomial(2, {{"dy/dx", 1}, {"y", 1}}), Monomial(-2, {})};
@@ -102,7 +102,7 @@ TEST(
     EXPECT_TRUE(polynomialsToVerify.empty());
 }
 
-TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByPolynomialDegree_IsEmptyWhenItCannotBeFactored) {
+TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByPolynomialDegreeIsEmptyWhenItCannotBeFactored) {
     Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
 
     Polynomials polynomialsToVerify;
@@ -111,7 +111,7 @@ TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByPolynomialDeg
     EXPECT_TRUE(polynomialsToVerify.empty());
 }
 
-TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByPolynomialDegree_Works) {
+TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByPolynomialDegreeWorks) {
     Polynomial polynomialToTest{Monomial(25, {{"x", 2}}), Monomial(30, {{"x", 1}, {"y", 1}}),
                                 Monomial(9, {{"y", 2}}),  Monomial(15, {{"x", 1}}),
                                 Monomial(9, {{"y", 1}}),  Monomial(2, {})};
@@ -128,7 +128,7 @@ TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByPolynomialDeg
 
 TEST(
     FactorizationBySplittingTest,
-    FactorizeIfPossibleBySplittingByDivisibilityOfExponents_IsEmptyWhenItCannotBeFactored) {
+    FactorizeIfPossibleBySplittingByDivisibilityOfExponentsIsEmptyWhenItCannotBeFactored) {
     Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
 
     Polynomials polynomialsToVerify;
@@ -137,7 +137,7 @@ TEST(
     EXPECT_TRUE(polynomialsToVerify.empty());
 }
 
-TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByDivisibilityOfExponents_Works) {
+TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByDivisibilityOfExponentsWorks) {
     Polynomial polynomialToTest{
         Monomial(1, {{"x", 2}}), Monomial(2, {{"x", 1}, {"y", 1}}), Monomial(-1, {{"z", 2}}),
         Monomial(-2, {{"y", 1}, {"z", 1}})};
@@ -152,7 +152,7 @@ TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByDivisibilityO
     EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
 }
 
-TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByFirstVariable_IsEmptyWhenItCannotBeFactored) {
+TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByFirstVariableIsEmptyWhenItCannotBeFactored) {
     Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
 
     Polynomials polynomialsToVerify;
@@ -161,8 +161,7 @@ TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByFirstVariable
     EXPECT_TRUE(polynomialsToVerify.empty());
 }
 
-TEST(
-    FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByFirstVariable_IsEmptyWhenPolynomialCannotBeSplitted) {
+TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByFirstVariableIsEmptyWhenPolynomialCannotBeSplitted) {
     Polynomial polynomialToTest{Monomial(1, {{"x", 3}}), Monomial(13, {{"x", 7}})};
 
     Polynomials polynomialsToVerify;
@@ -173,7 +172,7 @@ TEST(
 
 TEST(
     FactorizationBySplittingTest,
-    FactorizeIfPossibleBySplittingByFirstVariable_IsEmptyWhenNoCommonFactorsCanBeFoundAfterSplit) {
+    FactorizeIfPossibleBySplittingByFirstVariableIsEmptyWhenNoCommonFactorsCanBeFoundAfterSplit) {
     Polynomial polynomialToTest{Monomial(1, {{"a", 3}}), Monomial(13, {{"b", 7}})};
 
     Polynomials polynomialsToVerify;
@@ -182,7 +181,7 @@ TEST(
     EXPECT_TRUE(polynomialsToVerify.empty());
 }
 
-TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByFirstVariable_WorksOnAXPlusBTimesCXPlusD) {
+TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByFirstVariableWorksOnAXPlusBTimesCXPlusD) {
     Polynomial polynomialToTest{
         Monomial(1, {{"a", 1}, {"c", 1}, {"x", 2}}), Monomial(1, {{"a", 1}, {"d", 1}, {"x", 1}}),
         Monomial(1, {{"b", 1}, {"c", 1}, {"x", 1}}), Monomial(1, {{"b", 1}, {"d", 1}})};
@@ -197,7 +196,7 @@ TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByFirstVariable
     EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
 }
 
-TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByFirstVariable_WorksOnExample1) {
+TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByFirstVariableWorksOnExample1) {
     Polynomial polynomialToTest{
         Monomial(15, {{"a", 1}, {"b", 1}}), Monomial(-20, {{"a", 1}}), Monomial(-21, {{"b", 1}}), Monomial(28, {})};
 
@@ -211,7 +210,7 @@ TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByFirstVariable
     EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
 }
 
-TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByFirstVariable_WorksOnExample2) {
+TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByFirstVariableWorksOnExample2) {
     Polynomial polynomialToTest{
         Monomial(1, {{"a", 1}, {"x", 1}}), Monomial(-1, {{"a", 1}, {"y", 1}}), Monomial(-1, {{"b", 1}, {"y", 1}}),
         Monomial(1, {{"b", 1}, {"x", 1}})};
@@ -226,7 +225,7 @@ TEST(FactorizationBySplittingTest, FactorizeIfPossibleBySplittingByFirstVariable
     EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
 }
 
-TEST(FactorizationBySplittingTest, SplitPolynomialsByPolynomialDegree_Works) {
+TEST(FactorizationBySplittingTest, SplitPolynomialsByPolynomialDegreeWorks) {
     Polynomial polynomialToTest{Monomial(25, {{"x", 2}}), Monomial(30, {{"x", 1}, {"y", 1}}),
                                 Monomial(9, {{"y", 2}}),  Monomial(15, {{"x", 1}}),
                                 Monomial(9, {{"y", 1}}),  Monomial(2, {})};
@@ -244,7 +243,7 @@ TEST(FactorizationBySplittingTest, SplitPolynomialsByPolynomialDegree_Works) {
     EXPECT_EQ(polynomialToExpect3, polynomialsToVerify[2]);
 }
 
-TEST(FactorizationBySplittingTest, SplitPolynomialsByDivisibilityOfExponents_Works) {
+TEST(FactorizationBySplittingTest, SplitPolynomialsByDivisibilityOfExponentsWorks) {
     Polynomial polynomialToTest{
         Monomial(1, {{"x", 2}}), Monomial(2, {{"x", 1}, {"y", 1}}), Monomial(-1, {{"z", 2}}),
         Monomial(-2, {{"y", 1}, {"z", 1}})};
@@ -259,7 +258,7 @@ TEST(FactorizationBySplittingTest, SplitPolynomialsByDivisibilityOfExponents_Wor
     EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
 }
 
-TEST(FactorizationBySplittingTest, SplitPolynomialsByFirstVariable_Works) {
+TEST(FactorizationBySplittingTest, SplitPolynomialsByFirstVariableWorks) {
     Polynomial polynomialToTest{
         Monomial(1, {{"a", 1}, {"x", 1}}), Monomial(1, {{"a", 1}, {"y", 1}}), Monomial(1, {{"b", 1}, {"x", 1}}),
         Monomial(1, {{"b", 1}, {"y", 1}})};
@@ -274,7 +273,7 @@ TEST(FactorizationBySplittingTest, SplitPolynomialsByFirstVariable_Works) {
     EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
 }
 
-TEST(FactorizationBySplittingTest, factorizeSmallerPolynomials_WorksByFactoringOutCommonFactors) {
+TEST(FactorizationBySplittingTest, factorizeSmallerPolynomialsWorksByFactoringOutCommonFactors) {
     Polynomial polynomial1{Monomial(1, {{"a", 1}, {"x", 1}}), Monomial(1, {{"a", 1}, {"y", 1}})};
     Polynomial polynomial2{Monomial(1, {{"b", 1}, {"x", 1}}), Monomial(1, {{"b", 1}, {"y", 1}})};
     Polynomials polynomialsToTest{polynomial1, polynomial2};
@@ -289,7 +288,7 @@ TEST(FactorizationBySplittingTest, factorizeSmallerPolynomials_WorksByFactoringO
     EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
 }
 
-TEST(FactorizationBySplittingTest, FactorizeSmallerPolynomials_WorksBySubstitutingCommonFactorsToVariables) {
+TEST(FactorizationBySplittingTest, FactorizeSmallerPolynomialsWorksBySubstitutingCommonFactorsToVariables) {
     Polynomial polynomial1{Monomial(25, {{"x", 2}}), Monomial(30, {{"x", 1}, {"y", 1}}), Monomial(9, {{"y", 2}})};
     Polynomial polynomial2{Monomial(15, {{"x", 1}}), Monomial(9, {{"y", 1}})};
     Polynomial polynomial3{Monomial(2, {})};

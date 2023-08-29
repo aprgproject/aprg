@@ -314,7 +314,7 @@ TEST(BrentMethodTest, RunWorksOnCubicExample) {
     EXPECT_EQ(57, brentMethod.getNumberOfIterationsExecuted());
 }
 
-TEST(BrentMethodTest, RunWorksOnQuarticExample_FailedExampleBasedOnInitialValues) {
+TEST(BrentMethodTest, RunWorksOnQuarticFailedExampleBasedOnInitialValues) {
     BrentMethod brentMethod(AlbaNumbers{2112, -296, -5878, 409, 4095});
     brentMethod.resetCalculation(-4095, 4095);
 
@@ -325,7 +325,7 @@ TEST(BrentMethodTest, RunWorksOnQuarticExample_FailedExampleBasedOnInitialValues
     EXPECT_EQ(1000, brentMethod.getNumberOfIterationsExecuted());
 }
 
-TEST(BrentMethodTest, RunWorksOnQuarticExample_SuccessfulExampleBasedOnInitialValues) {
+TEST(BrentMethodTest, RunWorksOnQuarticSuccessfulExampleBasedOnInitialValues) {
     BrentMethod brentMethod(AlbaNumbers{8448, -888, -11756, 409});
     brentMethod.resetCalculation(-8448, -0.646933510774966);
 

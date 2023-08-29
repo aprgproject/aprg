@@ -24,7 +24,7 @@ using ShortestPathSearchForTest =
 
 }  // namespace
 
-TEST(OptimalGraphByDijkstraTest, GetOptimalDirectedGraph_UndirectedToOptimizedDirectedWorksOnExample1) {
+TEST(OptimalGraphByDijkstraTest, GetOptimalDirectedGraphWithUndirectedToOptimizedDirectedWorksOnExample1) {
     EdgeWeightedUndirectedGraphForTest graph;
     graph.connect(1, 2, 3.0);
     graph.connect(1, 3, 5.0);
