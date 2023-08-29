@@ -15,7 +15,7 @@ public:
     using Keys = std::vector<Key>;
     using TraverseFunction = std::function<void(Node const&)>;
 
-    virtual ~BaseBinarySearchTree() = default;  // virtual destructor because of virtual functions (vtable exists)
+    ~BaseBinarySearchTree() override = default;  // virtual destructor because of virtual functions (vtable exists)
 
     [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 

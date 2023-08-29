@@ -14,7 +14,7 @@ public:
 
     DoublingSizeStack() : m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
 
-    ~DoublingSizeStack() { deleteAllObjects(); }
+    ~DoublingSizeStack() override { deleteAllObjects(); }
 
     [[nodiscard]] bool isEmpty() const override { return m_stackSize == 0; }
 
@@ -39,7 +39,7 @@ public:
 private:
     void deleteAllObjects() {
         if (m_objects != nullptr) {
-            delete[](m_objects);
+            delete[] (m_objects);
         }
     }
 
@@ -55,7 +55,7 @@ private:
         auto* newObjects = new Object[newSize];
         if (m_objects != nullptr) {
             std::copy(m_objects, m_objects + std::min(m_stackSize, newSize), newObjects);
-            delete[](m_objects);
+            delete[] (m_objects);
         }
         m_objects = newObjects;
         m_containerSize = newSize;

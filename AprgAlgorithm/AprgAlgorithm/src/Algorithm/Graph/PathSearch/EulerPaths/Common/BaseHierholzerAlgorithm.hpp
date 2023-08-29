@@ -14,7 +14,8 @@ public:
 
     explicit BaseHierholzerAlgorithm(BaseGraphType const& graph) : BaseClass(graph), b_graph(BaseClass::m_graph) {}
 
-    virtual ~BaseHierholzerAlgorithm() = default;  // virtual destructor because of virtual functions (vtable exists)
+    // virtual destructor because of virtual functions (vtable exists)
+    ~BaseHierholzerAlgorithm() override = default;
 
     [[nodiscard]] Path getEulerCycle() const override {
         Path result;

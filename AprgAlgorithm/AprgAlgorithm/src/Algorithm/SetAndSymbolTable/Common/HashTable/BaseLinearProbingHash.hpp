@@ -22,10 +22,8 @@ public:
 
     BaseLinearProbingHash() : m_entryPointers(nullptr) { initialize(INITIAL_HASH_TABLE_SIZE); }
 
-    virtual ~BaseLinearProbingHash()  // virtual destructor because of virtual functions (vtable exists)
-    {
-        deleteAllEntries();
-    }
+    // virtual destructor because of virtual functions (vtable exists)
+    ~BaseLinearProbingHash() override { deleteAllEntries(); }
 
     [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
 
@@ -153,7 +151,7 @@ protected:
 
     void deleteAllEntries() {
         if (m_entryPointers != nullptr) {
-            delete[](m_entryPointers);
+            delete[] (m_entryPointers);
         }
     }
 
@@ -182,7 +180,7 @@ protected:
             }
         }
         if (oldEntryPointers != nullptr) {
-            delete[](oldEntryPointers);
+            delete[] (oldEntryPointers);
         }
     }
 

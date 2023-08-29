@@ -7,7 +7,8 @@ namespace alba::algorithm {
 template <typename Vertex>
 class BaseUndirectedGraph : public BaseGraph<Vertex> {
 public:
-    virtual ~BaseUndirectedGraph() = default;  // virtual destructor because of virtual functions (vtable exists)
+    // virtual destructor because of virtual functions (vtable exists)
+    ~BaseUndirectedGraph() override = default;
 
     [[nodiscard]] virtual bool hasAnyConnection(Vertex const& vertex) const = 0;
 

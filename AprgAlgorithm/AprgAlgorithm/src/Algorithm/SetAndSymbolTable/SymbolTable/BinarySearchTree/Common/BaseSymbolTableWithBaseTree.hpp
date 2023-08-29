@@ -13,8 +13,8 @@ public:
 
     BaseSymbolTableWithBaseTree() : b_root(BaseTree::m_root) {}
 
-    virtual ~BaseSymbolTableWithBaseTree() =
-        default;  // virtual destructor because of virtual functions (vtable exists)
+    // virtual destructor because of virtual functions (vtable exists)
+    ~BaseSymbolTableWithBaseTree() override = default;
 
     [[nodiscard]] Value get(Key const& key) const override {  // overrides in BaseSymbolTable
         return getStartingOnThisNode(b_root, key);

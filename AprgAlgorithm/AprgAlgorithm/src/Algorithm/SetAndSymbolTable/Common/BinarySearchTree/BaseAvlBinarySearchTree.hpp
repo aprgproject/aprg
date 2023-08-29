@@ -19,22 +19,22 @@ public:
     ~BaseAvlBinarySearchTree() override = default;
 
 protected:
-    virtual void updateTreeNodeDetails(Node& node) const override {
+    void updateTreeNodeDetails(Node& node) const override {
         node.sizeOfThisSubTree = this->calculateSizeOfThisSubTree(node);
         node.heightOfThisSubTree = calculateHeightOfSubTree(node);
     }
 
-    virtual void deleteBasedOnKeyStartingOnThisNode(NodeUniquePointer& nodePointer, Key const& key) override {
+    void deleteBasedOnKeyStartingOnThisNode(NodeUniquePointer& nodePointer, Key const& key) override {
         BaseClass::deleteBasedOnKeyStartingOnThisNode(nodePointer, key);
         reBalanceTreeOnDeleteAction(nodePointer);
     }
 
-    virtual void deleteMinimumStartingOnThisNode(NodeUniquePointer& nodePointer) override {
+    void deleteMinimumStartingOnThisNode(NodeUniquePointer& nodePointer) override {
         BaseClass::deleteMinimumStartingOnThisNode(nodePointer);
         reBalanceTreeOnDeleteAction(nodePointer);
     }
 
-    virtual void deleteMaximumStartingOnThisNode(NodeUniquePointer& nodePointer) override {
+    void deleteMaximumStartingOnThisNode(NodeUniquePointer& nodePointer) override {
         BaseClass::deleteMaximumStartingOnThisNode(nodePointer);
         reBalanceTreeOnDeleteAction(nodePointer);
     }
