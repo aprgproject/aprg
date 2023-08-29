@@ -4,4 +4,4 @@ namespace CodeJam_2019_Round1C_P2_PowerArrangers {
 
 int main();  // this is main
 
-}
+}  // namespace CodeJam_2019_Round1C_P2_PowerArrangers

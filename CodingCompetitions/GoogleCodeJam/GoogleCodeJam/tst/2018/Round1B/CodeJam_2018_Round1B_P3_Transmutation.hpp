@@ -4,4 +4,4 @@ namespace CodeJam_2018_Round1B_P3_Transmutation {
 
 int main();  // this is main
 
-}
+}  // namespace CodeJam_2018_Round1B_P3_Transmutation

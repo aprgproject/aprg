@@ -4,4 +4,4 @@ namespace CodeJam_2018_QualificationRound_P2_TroubleSort {
 
 int main();  // this is main
 
-}
+}  // namespace CodeJam_2018_QualificationRound_P2_TroubleSort
