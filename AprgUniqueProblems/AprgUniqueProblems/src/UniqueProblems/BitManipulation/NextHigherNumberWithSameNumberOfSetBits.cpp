@@ -6,12 +6,12 @@ using namespace std;
 
 namespace alba {
 
-NextHigherNumberWithSameNumberOfSetBits::NextHigherNumberWithSameNumberOfSetBits() {}
+NextHigherNumberWithSameNumberOfSetBits::NextHigherNumberWithSameNumberOfSetBits() = default;
 
 NextHigherNumberWithSameNumberOfSetBits::Value NextHigherNumberWithSameNumberOfSetBits::getNextHigherNumber(
     Value const value) {
     Value result{};
-    if (value != 0u) {
+    if (value != 0U) {
         Value lastBitOne = AlbaBitValueUtilities<Value>::getLastBitOneOnly(value);
         Value nextHigherByOneBit = value + lastBitOne;
         Value remainingBitsAtTheRight = ((value ^ nextHigherByOneBit) / lastBitOne) >> 2;

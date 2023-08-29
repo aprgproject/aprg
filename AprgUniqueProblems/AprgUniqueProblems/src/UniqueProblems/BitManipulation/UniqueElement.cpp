@@ -8,7 +8,7 @@ using namespace std;
 
 namespace alba {
 
-UniqueElement::UniqueElement() {}
+UniqueElement::UniqueElement() = default;
 
 UniqueElement::Value UniqueElement::getAUniqueElementOnTwoDuplicatedValues(Values const& values) {
     return getXorResult(values);
@@ -24,7 +24,7 @@ UniqueElement::ValuePairs UniqueElement::getTwoUniqueElementsOnTwoDuplicatedValu
 
     Value valueWithOne{}, valueWithZero{};
     for (Value const& value : values) {
-        if ((value & lastBitOne) != 0u) {
+        if ((value & lastBitOne) != 0U) {
             valueWithOne ^= value;
         } else {
             valueWithZero ^= value;
