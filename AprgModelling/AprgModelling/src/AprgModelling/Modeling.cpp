@@ -8,13 +8,14 @@
 
 #include <algorithm>
 #include <iostream>
+#include <math.h>
 
 using namespace alba::matrix;
 using namespace std;
 
 namespace alba {
 
-Modeling::Modeling() {}
+Modeling::Modeling() = default;
 
 unsigned int Modeling::getNumberOfSamples() const { return m_retrievedDataForY.getNumberOfRows(); }
 
@@ -115,7 +116,7 @@ void Modeling::saveRetrievedDataToValidationData(unsigned int numberOfSamples) {
 void Modeling::modelUsingLeastSquares() { calculateCoefficientsUsingLeastSquares(); }
 
 Modeling::ValidationResult Modeling::validate() {
-    ValidationResult result;
+    ValidationResult result{};
     vector<double> calculationDataBuffer;
 
     unsigned int dataHeight = m_validationDataForY.getNumberOfRows();
@@ -221,10 +222,10 @@ void Modeling::saveRetrievedDataToMatrix(
 void Modeling::calculateCoefficientsUsingLeastSquares() {
     unsigned int dataHeight = m_modelingDataForY.getNumberOfRows();
     unsigned int dataWidth = m_modelingDataForX.getNumberOfColumns();
-    double chisq;
+    double chisq = NAN;
 
-    gsl_matrix *xModelingData, *calculatedCovariance;
-    gsl_vector *yModelingData, *calculatedCoefficients;
+    gsl_matrix *xModelingData = nullptr, *calculatedCovariance = nullptr;
+    gsl_vector *yModelingData = nullptr, *calculatedCoefficients = nullptr;
 
     xModelingData = gsl_matrix_alloc(dataHeight, dataWidth);
     yModelingData = gsl_vector_alloc(dataHeight);
