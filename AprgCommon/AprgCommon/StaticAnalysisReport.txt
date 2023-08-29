@@ -1,4 +1,4 @@
-2023-08-28T23:14:21
+2023-08-29T09:34:30
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Bit/Common/AlbaBitManipulationClassDefinition.hpp:200:101: warning: 8 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Bit/Common/AlbaBitManipulationTemplateInstances.hpp:21:72: warning: 8 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Bit/Common/AlbaBitManipulationTemplateInstances.hpp:24:19: warning: 5 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
