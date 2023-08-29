@@ -1,0 +1,30 @@
+2023-08-29T10:28:00
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/CommonTypes.hpp:132:8: warning: constructor does not initialize these fields: isUsedInIfs [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/CommonTypes.hpp:138:21: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/LyxGenerator.cpp:445:45: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/CommonTypes.hpp:11:8: warning: constructor does not initialize these fields: isUsedInIfs [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/CommonTypes.hpp:17:21: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/CommonTypes.hpp:29:8: warning: constructor does not initialize these fields: isUsedInIfs [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/CommonTypes.hpp:33:21: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/CommonTypes.hpp:59:8: warning: constructor does not initialize these fields: isUsedInIfs [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/CommonTypes.hpp:65:21: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/CommonTypes.hpp:75:8: warning: constructor does not initialize these fields: isAnArray [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/CommonTypes.hpp:80:19: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/CommonTypes.hpp:94:8: warning: constructor does not initialize these fields: isMessage, isUsedInIfs [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/CommonTypes.hpp:101:19: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/CommonTypes.hpp:102:21: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/CommonTypes.hpp:114:8: warning: constructor does not initialize these fields: isUsedInIfs [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/CommonTypes.hpp:121:21: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/SackFileReader/CommentStateMachine.hpp:11:8: warning: constructor does not initialize these fields: isNewLine [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/SackFileReader/CommentStateMachine.hpp:12:19: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/SackFileReader/SackFileReaderStateMachine.hpp:142:8: warning: constructor does not initialize these fields: isInMultilineComment, isNotInComment [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/SackFileReader/SackFileReaderStateMachine.hpp:143:30: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/SackFileReader/SackFileReaderStateMachine.hpp:144:24: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/SackFileReader/SackFileReaderStateMachine.cpp:10:14: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/SackFileReader/SackFileReaderStateMachine.cpp:12:1: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/SackFileReader/SackFileReaderStateMachine.cpp:28:1: warning: constructor does not initialize these fields: m_isNextLineNeeded, m_parameterDescriptionType [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/SackFileReader/SackFileReaderStateMachine.hpp:208:28: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/SackFileReader/SackFileReaderStateMachine.cpp:28:29: warning: Member variable 'SackFileReaderStateMachine::m_parameterDescriptionType' is not initialized in the constructor. [uninitMemberVar]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/SackReader.cpp:67:23: warning: variable 'currentDefinitionType' is not initialized [cppcoreguidelines-init-variables]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SackReader/SackReader/src/SackReader.cpp:187:14: warning: Missing reference in range-for with non trivial type (alba::EnumDetails::ParameterPair) [-Wclazy-range-loop-reference]
+DONE!

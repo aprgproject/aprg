@@ -9,7 +9,7 @@ namespace alba::SackFileReaderStateMachineNamespace {
 
 InnerStates::InnerStates()
 
-{}
+    = default;
 
 void InnerStates::reset() {
     stateForConstant = StateForConstant::BeforeName;

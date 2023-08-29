@@ -14,7 +14,7 @@ struct ConstantDetails {
     std::string description;
     std::string descriptionFromUser;
     std::string path;
-    bool isUsedInIfs;
+    bool isUsedInIfs{};
     void clear() {
         name.clear();
         value.clear();
@@ -30,7 +30,7 @@ struct MessageDetails {
     std::string name;
     std::string structureName;
     std::string path;
-    bool isUsedInIfs;
+    bool isUsedInIfs{};
     void clear() {
         name.clear();
         structureName.clear();
@@ -62,7 +62,7 @@ struct EnumDetails {
     std::string name;
     ParameterMap parameters;
     std::string path;
-    bool isUsedInIfs;
+    bool isUsedInIfs{};
     void clear() {
         name.clear();
         parameters.clear();
@@ -77,7 +77,7 @@ struct ParameterDetails {
     std::string name;
     std::string description;
     std::string descriptionFromUser;
-    bool isAnArray;
+    bool isAnArray{};
     std::string arraySize;
     void clear() {
         type.clear();
@@ -98,8 +98,8 @@ struct StructureDetails {
     ParameterMap parameters;
     std::vector<std::string> parametersWithCorrectOrder;  // unordered_map
     std::string path;
-    bool isMessage;
-    bool isUsedInIfs;
+    bool isMessage{};
+    bool isUsedInIfs{};
     void clear() {
         name.clear();
         parameters.clear();
@@ -118,7 +118,7 @@ struct UnionDetails {
     ParameterMap parameters;
     std::vector<std::string> parametersWithCorrectOrder;  // unordered_map
     std::string path;
-    bool isUsedInIfs;
+    bool isUsedInIfs{};
     void clear() {
         name.clear();
         parameters.clear();
@@ -135,7 +135,7 @@ struct TypedefDetails {
     std::string description;
     std::string descriptionFromUser;
     std::string path;
-    bool isUsedInIfs;
+    bool isUsedInIfs{};
     void clear() {
         name.clear();
         typedefDerivedName.clear();

@@ -140,8 +140,8 @@ enum class StateForAtTypedefDescription {
 enum class ParameterDescriptionType { None, Structure, Enum, Union };
 
 struct InputToken {
-    bool isInMultilineComment;
-    bool isNotInComment;
+    bool isInMultilineComment{};
+    bool isNotInComment{};
     std::string token;
     std::string line;
 };
@@ -205,7 +205,7 @@ private:
     void saveTypedefDescriptionToDatabase(std::string const& partialString);
     AlbaLocalPathHandler m_filePathHandler;
     bool m_isMessageIdFile;
-    bool m_isNextLineNeeded;
+    bool m_isNextLineNeeded{};
     InnerStates m_innerStates;
     std::string m_pathFromIInterface;
     std::string m_arraySize;

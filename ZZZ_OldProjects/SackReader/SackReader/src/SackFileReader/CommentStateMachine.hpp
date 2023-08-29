@@ -9,7 +9,7 @@ namespace alba::CommentStateMachineNamespace {
 enum class State { NotInComment, Slash, DoubleSlash, InCommentNotInAsterisk, InCommentAsterisk };
 
 struct InputToken {
-    bool isNewLine;
+    bool isNewLine{};
     std::string token;
 };
 
