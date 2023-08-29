@@ -1,0 +1,102 @@
+2023-08-29T06:54:08
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:91:16: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:91:25: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:249:58: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:249:58: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:249:67: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:251:52: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:251:52: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:251:61: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:253:100: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:253:100: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:253:109: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:270:58: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:270:58: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:270:67: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:272:52: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:272:52: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:272:61: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:274:57: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:274:57: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:274:66: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:299:22: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:299:22: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:299:34: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:302:58: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:302:58: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:302:67: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:304:52: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:304:52: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:304:61: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:306:100: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:306:100: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:306:109: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:345:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:527:33: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:527:33: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:527:52: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1058:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1059:9: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1059:9: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1059:61: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1059:50: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1059:50: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1059:59: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1059:63: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1059:63: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1059:115: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1059:104: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1059:104: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1059:113: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1063:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1064:9: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1064:9: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1064:69: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1064:58: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1064:58: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1064:67: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1065:9: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1065:9: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1065:69: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1065:58: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1065:58: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1065:67: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1069:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1069:18: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1069:18: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1069:41: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1069:43: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1069:43: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1069:66: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1072:60: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1081:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:684:9: style: Same expression used in consecutive assignments of 'blackCount' and 'totalCount'. [duplicateAssignExpression]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:685:9: note: Same expression used in consecutive assignments of 'blackCount' and 'totalCount'.
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:684:9: note: Same expression used in consecutive assignments of 'blackCount' and 'totalCount'.
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:177:9: warning: Call to temporary is a no-op: alba::soosa::SOOSA::Status::setError [-Wclazy-writing-to-temporary]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:343:9: warning: Call to temporary is a no-op: alba::soosa::SOOSA::Status::setError [-Wclazy-writing-to-temporary]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:431:9: warning: Call to temporary is a no-op: alba::soosa::SOOSA::Status::setError [-Wclazy-writing-to-temporary]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:459:13: warning: Call to temporary is a no-op: alba::soosa::SOOSA::Status::setError [-Wclazy-writing-to-temporary]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.cpp:11:1: warning: constructor does not initialize these fields: m_acceptableLineDeviationForLineModelInPixels, m_removalRatioForSquareErrorsInLineModel, m_minimumLineSamples, m_bitmapWidthToBarWidthMultiplier, m_lineBarWidthSearchInitialBlackPointsValue, m_lineBarWidthSearchAcceptedRunningBlackRatio, m_acceptableDistanceOverWidthRatioFromWidthMidpoint, m_acceptableMinimumDistanceFromWidthMidpoint, m_acceptableSdOverMeanDeviationForLine, m_acceptableSdOverMeanDeviationForBar, m_removalRatioForLineAndBar, m_initialValueForMaximumDistanceBetweenBarHeights, m_multiplierForMaximumDistanceBetweenBarHeights, m_acceptableSdOverMeanDeviationForBarHeight, m_removalRatioForBarHeight, m_numberOfChoices, m_colorIntensityForWhite, m_barHeightToDiameterMultiplier, m_minimumPercentageOfBlackPixelsForAFilledCircle [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:47:54: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:48:52: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:49:29: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:52:45: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:53:52: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:54:57: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:55:63: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:56:56: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:57:50: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:58:49: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:59:39: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:60:61: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:61:59: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:62:55: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:63:38: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:66:26: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:67:33: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:68:43: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.hpp:69:60: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.cpp:11:21: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
+/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.cpp:11:42: note: FIX-IT applied suggested code changes
+DONE!
