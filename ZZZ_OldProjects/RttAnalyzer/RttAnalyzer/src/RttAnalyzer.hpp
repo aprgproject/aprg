@@ -11,8 +11,8 @@ namespace alba {
 
 struct RttDetails {
     std::string dateTime;
-    unsigned int multiplePos[6];
-    unsigned int pnPos;
+    unsigned int multiplePos[6]{};
+    unsigned int pnPos{};
 };
 
 class RttAnalyzer {
@@ -28,7 +28,7 @@ private:
     std::vector<RttDetails> m_allRttDetails;
     std::optional<unsigned int> m_cx8IndexOptional;
     std::optional<unsigned int> m_pnPosIndexOptional;
-    unsigned int m_posNumber;
+    unsigned int m_posNumber{};
 };
 
 }  // namespace alba

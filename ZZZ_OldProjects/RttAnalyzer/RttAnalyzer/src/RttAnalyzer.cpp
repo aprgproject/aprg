@@ -9,7 +9,7 @@ using namespace std;
 
 namespace alba {
 
-RttAnalyzer::RttAnalyzer() {}
+RttAnalyzer::RttAnalyzer() = default;
 
 void RttAnalyzer::processFile(std::string const& file) {
     AlbaLocalPathHandler pathHandler(file);
