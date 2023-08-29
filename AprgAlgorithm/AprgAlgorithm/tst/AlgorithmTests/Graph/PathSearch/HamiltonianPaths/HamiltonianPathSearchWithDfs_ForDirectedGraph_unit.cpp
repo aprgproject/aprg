@@ -13,7 +13,7 @@ using PathForTest = PathSearchForTest::Path;
 using PathsForTest = PathSearchForTest::Paths;
 }  // namespace
 
-TEST(HamiltonianPathSearchWithDfsTest_ForDirectedGraph, GetAllHamiltonianPathsWorks) {
+TEST(HamiltonianPathSearchWithDfsTestForDirectedGraph, GetAllHamiltonianPathsWorks) {
     GraphForTest graph;
     graph.connect(0, 1);
     graph.connect(1, 2);
@@ -27,7 +27,7 @@ TEST(HamiltonianPathSearchWithDfsTest_ForDirectedGraph, GetAllHamiltonianPathsWo
     EXPECT_EQ(pathsToExpect, pathsToVerify);
 }
 
-TEST(HamiltonianPathSearchWithDfsTest_ForDirectedGraph, GetOneHamiltonianPathWorks) {
+TEST(HamiltonianPathSearchWithDfsTestForDirectedGraph, GetOneHamiltonianPathWorks) {
     GraphForTest graph;
     graph.connect(0, 1);
     graph.connect(1, 2);
@@ -41,7 +41,7 @@ TEST(HamiltonianPathSearchWithDfsTest_ForDirectedGraph, GetOneHamiltonianPathWor
     EXPECT_EQ(pathsToExpect, pathsToVerify);
 }
 
-TEST(HamiltonianPathSearchWithDfsTest_ForDirectedGraph, GetAllHamiltonianCyclesWorks) {
+TEST(HamiltonianPathSearchWithDfsTestForDirectedGraph, GetAllHamiltonianCyclesWorks) {
     GraphForTest graph;
     graph.connect(0, 1);
     graph.connect(1, 2);
@@ -55,7 +55,7 @@ TEST(HamiltonianPathSearchWithDfsTest_ForDirectedGraph, GetAllHamiltonianCyclesW
     EXPECT_EQ(pathsToExpect, pathsToVerify);
 }
 
-TEST(HamiltonianPathSearchWithDfsTest_ForDirectedGraph, GetOneHamiltonianCycleWorks) {
+TEST(HamiltonianPathSearchWithDfsTestForDirectedGraph, GetOneHamiltonianCycleWorks) {
     GraphForTest graph;
     graph.connect(0, 1);
     graph.connect(1, 2);

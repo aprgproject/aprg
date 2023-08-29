@@ -206,7 +206,7 @@ void TupcTbm::sendCmBearersSetupReqBasedOnTbRegisterMsg(GenericMessage const& tb
     payload.nbccId = tbRegisterPayloadMsg.nbccId;
     payload.numConnections = tbRegisterPayloadMsg.numConnections;
     for (unsigned int connection = 0; connection < tbRegisterPayloadMsg.numConnections; connection++) {
-        SCmBearersSetupReqDynamicPart payloadDynamicPart;
+        SCmBearersSetupReqDynamicPart payloadDynamicPart{};
         STransportBearerLocationData& tbLocationDataPayload(
             tbRegisterMessage.getDynamicPayloadReferenceAtAndCreateIfNeeded(connection));
         payloadDynamicPart.bearerType = tbLocationDataPayload.bearerType;
@@ -238,7 +238,7 @@ void TupcTbm::sendCmBearersReleaseReqBasedOnTbUnregisterMsg(GenericMessage const
     payload.nbccId = tbUnregisterPayloadMsg.nbccId;
     payload.numConnections = tbUnregisterPayloadMsg.numConnections;
     for (unsigned int connection = 0; connection < tbUnregisterPayloadMsg.numConnections; connection++) {
-        SCmBearersReleaseReqDynamicPart payloadDynamicPart;
+        SCmBearersReleaseReqDynamicPart payloadDynamicPart{};
         TTransportBearerId& tbId(tbUnregisterMessage.getDynamicPayloadReferenceAtAndCreateIfNeeded(connection));
         payloadDynamicPart.transportBearerId = tbId;
         specificMessage.addDynamicPart(payloadDynamicPart);
@@ -265,7 +265,7 @@ void TupcTbm::sendCmBearersModifyReqBasedOnTbModificationPrepareReqMsg(
         "TUPC/TBM uses transport bearer modification type as **ECmBearersModifyTransactionType_ModificationPrepare**");
     payload.transactionType = ECmBearersModifyTransactionType_ModificationPrepare;
     for (unsigned int connection = 0; connection < tbModificationPreparePayloadMsg.numConnections; connection++) {
-        SCmBearersModifyReqDynamicPart payloadDynamicPart;
+        SCmBearersModifyReqDynamicPart payloadDynamicPart{};
         STransportBearerModificationData& tbModificationPrepareDynamicPayload(
             tbModificationPrepareMessage.getDynamicPayloadReferenceAtAndCreateIfNeeded(connection));
         payloadDynamicPart.transportBearerId = tbModificationPrepareDynamicPayload.transportBearerId;
@@ -503,8 +503,8 @@ void TupcTbm::handleMessageEvent(GenericMessage const& genericMessage) {
 }
 
 void TupcTbm::handleTimerEvent(Timer const& timer) {
-    cout << "Handle Timer, timerType: " << convertToString(timer.getType()) << " timerId:" << (int)timer.getId()
-         << "\n";
+    cout << "Handle Timer, timerType: " << convertToString(timer.getType())
+         << " timerId:" << static_cast<int>(timer.getId()) << "\n";
 }
 
 void TupcTbm::handleOtherEvent(OtherEvent const& otherEvent) {

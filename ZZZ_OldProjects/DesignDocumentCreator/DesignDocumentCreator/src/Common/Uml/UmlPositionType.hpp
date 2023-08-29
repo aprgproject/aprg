@@ -4,4 +4,4 @@ namespace DesignDocumentCreator {
 
 enum class UmlPositionType { right, left, over };
 
-}
+}  // namespace DesignDocumentCreator

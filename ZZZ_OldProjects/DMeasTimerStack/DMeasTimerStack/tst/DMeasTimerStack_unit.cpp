@@ -9,7 +9,7 @@ TEST(TimerStackTest, TestForEmptyTimerStack) {
     TimerStack timerStack;
     TSfn sampleSfn = 0;
     TimerStack::TimerIndex sampleTimerIndex = 0;
-    TimerData sampleTimerData;
+    TimerData sampleTimerData{};
     TimeCounter sampleTimeCounter = 0;
 
     EXPECT_EQ(EBoolean_True, timerStack.mayIPrint());
@@ -23,7 +23,7 @@ TEST(TimerStackTest, TestForEmptyTimerStack) {
     timerStack.initIterator(sampleTimerIndex);
     EXPECT_EQ(EBoolean_False, timerStack.isValidIterator(sampleTimerIndex));
     timerStack.clearUserTimers(0);
-    timerStack.removeTimerPrint(TimerType::FreeTimer, 0);
+    DMeas::TimerStack::removeTimerPrint(TimerType::FreeTimer, 0);
     timerStack.dump(0, 0);
     timerStack.dump();
 
@@ -35,7 +35,7 @@ TEST(TimerStackTest, TestForEmptyTimerStack) {
 TEST(TimerStackTest, InsertThenExpireAndRemoveTheTimer) {
     TimerStack timerStack;
     TSfn sampleSfn = 17;
-    TimerData sampleTimerData;
+    TimerData sampleTimerData{};
     sampleTimerData.timerType = TimerType::MeasurementInit;
     sampleTimerData.timerValue = 20;
     TimerStack::TimerIndex firstTimerIndex = 0;

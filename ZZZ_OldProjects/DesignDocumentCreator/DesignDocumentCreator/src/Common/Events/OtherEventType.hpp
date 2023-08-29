@@ -4,4 +4,4 @@ namespace DesignDocumentCreator {
 
 enum class OtherEventType { Empty, MainProcessStartup, SubProcessStartup };
 
-}
+}  // namespace DesignDocumentCreator

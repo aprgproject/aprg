@@ -42,7 +42,7 @@ bool Component::isEventQueueEmpty() const { return m_eventQueue.empty(); }
 GenericMessage Component::peekMessageAtStartOfTheEventQueue() const {
     GenericMessage message;
     if (!isEventQueueEmpty()) {
-        message = GenericMessage(m_eventQueue.front().getMessage());
+        message = (m_eventQueue.front().getMessage());
     }
     return message;
 }
@@ -93,15 +93,16 @@ void Component::handleEvent(Event const& event) {
 }
 
 void Component::handleMessageEvent(GenericMessage const& genericMessage) {
-    cout << "Message event not handled. MessageName: " << (int)genericMessage.getMessageName() << "\n";
+    cout << "Message event not handled. MessageName: " << static_cast<int>(genericMessage.getMessageName()) << "\n";
 }
 
 void Component::handleTimerEvent(Timer const& timer) {
-    cout << "Timer event not handled. Type: " << (int)timer.getType() << " Id:" << (int)timer.getId() << "\n";
+    cout << "Timer event not handled. Type: " << static_cast<int>(timer.getType())
+         << " Id:" << static_cast<int>(timer.getId()) << "\n";
 }
 
 void Component::handleOtherEvent(OtherEvent const& otherEvent) {
-    cout << "Timer event not handled. Type: " << (int)otherEvent.getType() << "\n";
+    cout << "Timer event not handled. Type: " << static_cast<int>(otherEvent.getType()) << "\n";
 }
 
 }  // namespace DesignDocumentCreator

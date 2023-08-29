@@ -15,7 +15,7 @@ using namespace std;
 
 namespace DesignDocumentCreator {
 
-UmlLogger::UmlLogger() {}
+UmlLogger::UmlLogger() = default;
 
 void UmlLogger::logMessage(string const& senderName, string const& receiverName, string const& messageName) {
     m_umlLogBuffer << senderName << " " << UmlArrow::getArrowBaseFromMessageName(messageName) << " " << receiverName

@@ -102,32 +102,32 @@ TEST(AlbaLargeSorterTest, ObjectsCanBeSavedAndLoadFromFile) {
     inputTestFile.close();
 }
 
-TEST(AlbaLargeSorterTest, ConfigurationTest_SuccessfulWhenTheConfigurationIsValid) {
+TEST(AlbaLargeSorterTest, ConfigurationWorksAsSuccessfulWhenTheConfigurationIsValid) {
     AlbaLargeSorterConfiguration configuration(ALBA_LARGE_SORTER_BLOCK_DIR, 100, 1000, 1, 100);
     EXPECT_TRUE(configuration.isConfigurationValid());
 }
 
-TEST(AlbaLargeSorterTest, ConfigurationTest_FailedWhenTheDirectoryDoesNotExist) {
+TEST(AlbaLargeSorterTest, ConfigurationWorksAsFailedWhenTheDirectoryDoesNotExist) {
     AlbaLargeSorterConfiguration configuration("io23i4uoiyw4oiy5", 100, 1000, 1, 100);
     EXPECT_FALSE(configuration.isConfigurationValid());
 }
 
-TEST(AlbaLargeSorterTest, ConfigurationTest_FailedWhenDirectoryPathIsGiven) {
+TEST(AlbaLargeSorterTest, ConfigurationWorksAsFailedWhenDirectoryPathIsGiven) {
     AlbaLargeSorterConfiguration configuration(ALBA_LARGE_SORTER_TEST_FILE, 100, 1000, 1, 100);
     EXPECT_FALSE(configuration.isConfigurationValid());
 }
 
-TEST(AlbaLargeSorterTest, ConfigurationTest_FailedWhenMiminumIsZero) {
+TEST(AlbaLargeSorterTest, ConfigurationWorksAsFailedWhenMiminumIsZero) {
     AlbaLargeSorterConfiguration configuration(ALBA_LARGE_SORTER_TEST_FILE, 0, 1000, 1, 100);
     EXPECT_FALSE(configuration.isConfigurationValid());
 }
 
-TEST(AlbaLargeSorterTest, ConfigurationTest_FailedWhenMiminumIsGreaterThanMaximum) {
+TEST(AlbaLargeSorterTest, ConfigurationWorksAsFailedWhenMiminumIsGreaterThanMaximum) {
     AlbaLargeSorterConfiguration configuration(ALBA_LARGE_SORTER_TEST_FILE, 100, 99, 1, 100);
     EXPECT_FALSE(configuration.isConfigurationValid());
 }
 
-TEST(AlbaLargeSorterTest, CacheTest_ObjectsCanBeAdded) {
+TEST(AlbaLargeSorterTest, CacheWorksAsObjectsCanBeAdded) {
     DataBlockCache<int> cache;
     cache.addBlock(1, 10);
     cache.addBlock(2, 20);
@@ -137,7 +137,7 @@ TEST(AlbaLargeSorterTest, CacheTest_ObjectsCanBeAdded) {
     EXPECT_EQ(5U, cache.getContainerReference().size());
 }
 
-TEST(AlbaLargeSorterTest, CacheTest_ObjectsCanNotBeDuplicated) {
+TEST(AlbaLargeSorterTest, CacheWorksAsObjectsCanNotBeDuplicated) {
     DataBlockCache<int> cache;
     cache.addBlock(1, 10);
     cache.addBlock(2, 20);
@@ -151,7 +151,7 @@ TEST(AlbaLargeSorterTest, CacheTest_ObjectsCanNotBeDuplicated) {
     EXPECT_EQ(5U, cache.getContainerReference().size());
 }
 
-TEST(AlbaLargeSorterTest, CacheTest_ObjectsCanBeDeleted) {
+TEST(AlbaLargeSorterTest, CacheWorksAsObjectsCanBeDeleted) {
     DataBlockCache<int> cache;
     cache.addBlock(1, 10);
     cache.addBlock(2, 20);
@@ -166,7 +166,7 @@ TEST(AlbaLargeSorterTest, CacheTest_ObjectsCanBeDeleted) {
     EXPECT_TRUE(cache.getContainerReference().empty());
 }
 
-TEST(AlbaLargeSorterTest, CacheTest_CacheIsUnchangedByDeletionOfNonExistingObjects) {
+TEST(AlbaLargeSorterTest, CacheWorksAsUnchangedWhenDeletingNonExistingObjects) {
     DataBlockCache<int> cache;
     cache.addBlock(1, 10);
     cache.addBlock(2, 20);
@@ -181,7 +181,7 @@ TEST(AlbaLargeSorterTest, CacheTest_CacheIsUnchangedByDeletionOfNonExistingObjec
     EXPECT_EQ(5U, cache.getContainerReference().size());
 }
 
-TEST(AlbaLargeSorterTest, CacheTest_EarliestObjectsCanBePop) {
+TEST(AlbaLargeSorterTest, CacheWorksAsEarliestObjectsCanBePopped) {
     DataBlockCache<int> cache;
     cache.addBlock(1, 10);
     cache.addBlock(2, 20);
@@ -196,7 +196,7 @@ TEST(AlbaLargeSorterTest, CacheTest_EarliestObjectsCanBePop) {
     EXPECT_TRUE(cache.getContainerReference().empty());
 }
 
-TEST(AlbaLargeSorterTest, CacheTest_CacheCanBeCleared) {
+TEST(AlbaLargeSorterTest, CacheWorksAsItCanBeCleared) {
     DataBlockCache<int> cache;
     cache.addBlock(1, 10);
     cache.addBlock(2, 20);
@@ -207,7 +207,7 @@ TEST(AlbaLargeSorterTest, CacheTest_CacheCanBeCleared) {
     EXPECT_TRUE(cache.getContainerReference().empty());
 }
 
-TEST(AlbaLargeSorterTest, CacheTest_ContainerReferenceCanFetched) {
+TEST(AlbaLargeSorterTest, CacheWorksAsItsContainerReferenceCanFetched) {
     DataBlockCache<int> cache;
     cache.addBlock(1, 10);
     cache.addBlock(2, 20);
@@ -223,7 +223,7 @@ TEST(AlbaLargeSorterTest, CacheTest_ContainerReferenceCanFetched) {
     EXPECT_EQ(10, container[4].m_blockInformation);
 }
 
-TEST(AlbaLargeSorterTest, FileHandlerTest_FileAreWrittenAtTheEndAgainAfterRelease) {
+TEST(AlbaLargeSorterTest, FileHandlerWorksAsFileAreWrittenAtTheEndAgainAfterRelease) {
     AlbaLocalPathHandler(ALBA_LARGE_SORTER_TEST_FILE).deleteFile();
 
     DataBlockFileHandler<int> fileHandler;
