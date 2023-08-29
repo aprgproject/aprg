@@ -18,7 +18,7 @@ public:
     static void replaceStringWithStringOnFile(
         std::string const& inputFilePath, std::string const& outputFilePath, StringPairs const& replacePairs);
 
-    void replaceCToCPlusPlusStylePrintOnDirectories(
+    static void replaceCToCPlusPlusStylePrintOnDirectories(
         std::string const& inputDirectory, std::string const& outputDirectory);
     static void replaceCToCPlusPlusStylePrintOnFile(
         std::string const& inputFilePath, std::string const& outputFilePath);

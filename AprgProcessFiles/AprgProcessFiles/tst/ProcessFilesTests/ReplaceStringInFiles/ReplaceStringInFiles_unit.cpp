@@ -38,7 +38,7 @@ TEST(AlbaReplaceStringInFileTest, DISABLED_ReplaceCStylePrintWithCPlusPlusStyleI
 
 TEST(AlbaReplaceStringInFileTest, DISABLED_ReplaceCStylePrintWithCPlusPlusStyleInDirectories) {
     ReplaceStringInFiles replacer;
-    replacer.replaceCToCPlusPlusStylePrintOnDirectories(
+    alba::ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnDirectories(
         R"(D:\Branches\MODERNIZATION\TLH\C_Application\SC_TCOM\CP_TLH\)",
         R"(D:\Branches\MODERNIZATION\TLH\C_Application\SC_TCOM\NewTLH\)");
 }
