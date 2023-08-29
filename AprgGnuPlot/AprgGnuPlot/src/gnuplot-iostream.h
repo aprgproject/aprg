@@ -157,7 +157,7 @@ THE SOFTWARE.
 #ifdef _WIN32
 // "pgnuplot" is considered deprecated according to the Internet.  It may be faster.  It
 // doesn't seem to handle binary data though.
-//# define GNUPLOT_DEFAULT_COMMAND "pgnuplot -persist"
+// # define GNUPLOT_DEFAULT_COMMAND "pgnuplot -persist"
 // On Windows, gnuplot echos commands to stderr.  So we forward its stderr to the bit bucket.
 // Unfortunately, this means you will miss out on legitimate error messages.
 #define GNUPLOT_DEFAULT_COMMAND "gnuplot -persist 2> NUL"
@@ -264,7 +264,6 @@ public:
         }
     }
 
-public:
     boost::filesystem::path file;
 };
 #endif  // GNUPLOT_USE_TMPFILE
@@ -354,45 +353,45 @@ private:
     FILE *pty_fh;
     int master_fd, slave_fd;
 };
-//#elif defined GNUPLOT_USE_TMPFILE
+// #elif defined GNUPLOT_USE_TMPFILE
 //// Currently this doesn't work since fscanf doesn't block (need something like "tail -f")
-//#define GNUPLOT_ENABLE_FEEDBACK
-// class GnuplotFeedbackTmpfile : public GnuplotFeedback {
-// public:
-//  explicit GnuplotFeedbackTmpfile(bool debug_messages) :
-//      tmp_file(),
-//      fh(NULL)
-//  {
-//      if(debug_messages) {
-//          std::cerr << "feedback_fn=" << filename() << std::endl;
-//      }
-//      GNUPLOT_MSVC_WARNING_4996_PUSH
-//      fh = std::fopen(filename().c_str(), "a");
-//      GNUPLOT_MSVC_WARNING_4996_POP
-//  }
+// #define GNUPLOT_ENABLE_FEEDBACK
+//  class GnuplotFeedbackTmpfile : public GnuplotFeedback {
+//  public:
+//   explicit GnuplotFeedbackTmpfile(bool debug_messages) :
+//       tmp_file(),
+//       fh(NULL)
+//   {
+//       if(debug_messages) {
+//           std::cerr << "feedback_fn=" << filename() << std::endl;
+//       }
+//       GNUPLOT_MSVC_WARNING_4996_PUSH
+//       fh = std::fopen(filename().c_str(), "a");
+//       GNUPLOT_MSVC_WARNING_4996_POP
+//   }
 //
-//  ~GnuplotFeedbackTmpfile() {
-//      fclose(fh);
-//  }
+//   ~GnuplotFeedbackTmpfile() {
+//       fclose(fh);
+//   }
 //
-// private:
-//  // noncopyable
-//  GnuplotFeedbackTmpfile(const GnuplotFeedbackTmpfile &);
-//  const GnuplotFeedbackTmpfile& operator=(const GnuplotFeedbackTmpfile &);
+//  private:
+//   // noncopyable
+//   GnuplotFeedbackTmpfile(const GnuplotFeedbackTmpfile &);
+//   const GnuplotFeedbackTmpfile& operator=(const GnuplotFeedbackTmpfile &);
 //
-// public:
-//  std::string filename() const {
-//      return tmp_file.file.string();
-//  }
+//  public:
+//   std::string filename() const {
+//       return tmp_file.file.string();
+//   }
 //
-//  FILE *handle() const {
-//      return fh;
-//  }
+//   FILE *handle() const {
+//       return fh;
+//   }
 //
-// private:
-//  GnuplotTmpfile tmp_file;
-//  FILE *fh;
-//};
+//  private:
+//   GnuplotTmpfile tmp_file;
+//   FILE *fh;
+// };
 #endif  // GNUPLOT_ENABLE_PTY, GNUPLOT_USE_TMPFILE
 // }}}1
 
@@ -1892,7 +1891,7 @@ private:
         if (!feedback) {
 #ifdef GNUPLOT_ENABLE_PTY
             feedback = new GnuplotFeedbackPty(debug_messages);
-//#elif defined GNUPLOT_USE_TMPFILE
+// #elif defined GNUPLOT_USE_TMPFILE
 //// Currently this doesn't work since fscanf doesn't block (need something like "tail -f")
 //          feedback = new GnuplotFeedbackTmpfile(debug_messages);
 #else
