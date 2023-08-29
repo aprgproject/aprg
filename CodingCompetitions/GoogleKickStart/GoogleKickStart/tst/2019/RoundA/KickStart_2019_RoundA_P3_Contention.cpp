@@ -78,11 +78,11 @@ int getMinimumSeatsFromRightToLeft(Intervals& bookings) {
 }
 
 void runTestCase(int const testCaseNumber) {
-    int numberOfSeats, numberOfBookings;
+    int numberOfSeats = 0, numberOfBookings = 0;
     my_cin >> numberOfSeats >> numberOfBookings;
     Intervals bookings;
     for (int y = 0; y < numberOfBookings; ++y) {
-        int leftIndex, rightIndex;
+        int leftIndex = 0, rightIndex = 0;
         my_cin >> leftIndex >> rightIndex;
         bookings.emplace_back(leftIndex, rightIndex);
     }
@@ -212,7 +212,7 @@ void runTestCase(int const testCaseNumber)
 */
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

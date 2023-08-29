@@ -27,7 +27,7 @@ namespace KickStart_2020_RoundB_P1_BikeTour {
 #endif
 
 void runTestCase(int const testCaseNumber) {
-    int N;
+    int N = 0;
     my_cin >> N;
     vector<int> H(N);
     for (int& a : H) {
@@ -42,7 +42,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

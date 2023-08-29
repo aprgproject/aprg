@@ -4,4 +4,4 @@ namespace KickStart_2020_Round_P1_Allocation {
 
 int main();  // this is main
 
-}
+}  // namespace KickStart_2020_Round_P1_Allocation

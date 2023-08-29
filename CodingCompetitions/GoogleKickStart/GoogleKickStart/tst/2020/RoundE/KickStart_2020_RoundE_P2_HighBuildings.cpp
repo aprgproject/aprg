@@ -28,7 +28,7 @@ namespace KickStart_2020_RoundE_P2_HighBuildings {
 #endif
 
 void runTestCase(int const testCaseNumber) {
-    int N, A, B, C;
+    int N = 0, A = 0, B = 0, C = 0;
     my_cin >> N >> A >> B >> C;
 
     assert(1 <= C && C <= N);
@@ -73,7 +73,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

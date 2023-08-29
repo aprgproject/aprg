@@ -30,7 +30,7 @@ namespace KickStart_2020_RoundE_P3_Toys {
 #endif
 
 void runTestCase(int const testCaseNumber) {
-    int N;
+    int N = 0;
     my_cin >> N;
     vector<int64_t> E(N);
     vector<pair<int64_t, int>> R(N);
@@ -41,7 +41,7 @@ void runTestCase(int const testCaseNumber) {
     }
     sort(R.begin(), R.end());
 
-    int64_t C = std::accumulate(E.begin(), E.end(), int64_t(0));
+    int64_t C = std::accumulate(E.begin(), E.end(), static_cast<int64_t>(0));
 
     // compute prefix sums of alive toys
     vector<int64_t> bit(N);
@@ -51,7 +51,7 @@ void runTestCase(int const testCaseNumber) {
         }
     }
 
-    priority_queue<int, vector<int>, greater<int>> is_bad;
+    priority_queue<int, vector<int>, greater<>> is_bad;
 
     const int64_t INF = 8e18;
     int64_t ans = -1;
@@ -95,7 +95,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

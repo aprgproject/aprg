@@ -30,9 +30,9 @@ namespace KickStart_2020_RoundD_P4_LockedDoors {
 #endif
 
 struct UnionFind {
-    long long num;
+    long long num{};
     vector<long long> rs, ps;
-    UnionFind() {}
+    UnionFind() = default;
     explicit UnionFind(long long n) : num(n), rs(n, 1), ps(n, 0) { iota(ps.begin(), ps.end(), 0); }
     long long find(long long x) { return (x == ps[x] ? x : ps[x] = find(ps[x])); }
     bool same(long long x, long long y) { return find(x) == find(y); }
@@ -54,7 +54,7 @@ struct UnionFind {
 };
 
 void runTestCase(int const testCaseNumber) {
-    long long n, q;
+    long long n = 0, q = 0;
     my_cin >> n >> q;
     vector<long long> ds(n - 1);
     for (long long i = 0; i < n - 1; i++) {
@@ -148,7 +148,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

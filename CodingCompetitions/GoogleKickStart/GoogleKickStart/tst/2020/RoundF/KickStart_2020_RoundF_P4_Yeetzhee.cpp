@@ -37,16 +37,16 @@ bool in(vector<int> a) {
     if (a.size() > need.size()) {
         return false;
     }
-    int ptr = (int)need.size() - (int)a.size();
-    for (int i = 0; i < (int)a.size(); i++) {
-        if (ptr == (int)need.size()) {
+    int ptr = static_cast<int>(need.size()) - static_cast<int>(a.size());
+    for (int i = 0; i < static_cast<int>(a.size()); i++) {
+        if (ptr == static_cast<int>(need.size())) {
             return true;
         }
         if (a[i] <= need[ptr]) {
             ptr++;
         }
     }
-    return (ptr == (int)need.size());
+    return (ptr == static_cast<int>(need.size()));
 }
 
 map<vector<int>, double> mp;
@@ -57,23 +57,23 @@ double ans(vector<int> a, int tot) {
     if (!in(a)) {
         return 1e18;
     }
-    if (mp.count(a) != 0u) {
+    if (mp.count(a) != 0U) {
         return mp[a];
     }
     if (tot == n) {
         return 0;
     }
     vector<pair<int, double> > go;
-    for (int i = 0; i < (int)a.size(); i++) {
+    for (int i = 0; i < static_cast<int>(a.size()); i++) {
         a[i]++;
         double ret = ans(a, tot + 1);
         go.push_back({1, ret});
         a[i]--;
     }
-    if ((int)a.size() != m) {
+    if (static_cast<int>(a.size()) != m) {
         auto b = a;
         b.insert(b.begin(), 1);
-        go.push_back({m - (int)a.size(), ans(b, tot + 1)});
+        go.push_back({m - static_cast<int>(a.size()), ans(b, tot + 1)});
     }
     auto check = [&](double x) {
         double sum = 1;
@@ -102,8 +102,8 @@ double ans(vector<int> a, int tot) {
 void runTestCase(int const testCaseNumber) {
     mp.clear();
     my_cin >> n >> m;
-    iv = 1 / (double)m;
-    int k;
+    iv = 1 / static_cast<double>(m);
+    int k = 0;
     my_cin >> k;
     need.resize(k);
     for (int i = 0; i < k; i++) {
@@ -116,7 +116,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

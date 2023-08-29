@@ -23,7 +23,7 @@ namespace KickStart_2020_RoundH_P3_Rugby {
 #endif
 
 void runTestCase(int const testCaseNumber) {
-    int N;
+    int N = 0;
     my_cin >> N;
     vector<int64_t> X(N);
     vector<int64_t> Y(N);
@@ -50,7 +50,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

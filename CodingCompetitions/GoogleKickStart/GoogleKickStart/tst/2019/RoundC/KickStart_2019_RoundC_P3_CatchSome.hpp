@@ -4,4 +4,4 @@ namespace KickStart_2019_RoundC_P3_CatchSome {
 
 int main();  // this is main
 
-}
+}  // namespace KickStart_2019_RoundC_P3_CatchSome

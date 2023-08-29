@@ -27,9 +27,9 @@ namespace KickStart_2020_RoundB_P2_BusRoutes {
 #endif
 
 void runTestCase(int const testCaseNumber) {
-    int N;
+    int N = 0;
     my_cin >> N;
-    int64_t D;
+    int64_t D = 0;
     my_cin >> D;
     vector<int64_t> X(N);
     for (int i = 0; i < N; i++) {
@@ -43,7 +43,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

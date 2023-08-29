@@ -4,4 +4,4 @@ namespace KickStart_2019_RoundG_P1_BookReading {
 
 int main();  // this is main
 
-}
+}  // namespace KickStart_2019_RoundG_P1_BookReading

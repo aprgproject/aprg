@@ -32,7 +32,7 @@ int signum(int a) { return static_cast<int>(a > 0) - static_cast<int>(a < 0); }
 int compare(int a, int b) { return signum(a - b); }
 
 void runTestCase(int const testCaseNumber) {
-    int N;
+    int N = 0;
     my_cin >> N;
     vector<int> A(N);
     for (int i = 0; i < N; i++) {
@@ -55,7 +55,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

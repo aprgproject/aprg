@@ -4,4 +4,4 @@ namespace KickStart_2020_RoundF_P3_PaintersDuel {
 
 int main();  // this is main
 
-}
+}  // namespace KickStart_2020_RoundF_P3_PaintersDuel

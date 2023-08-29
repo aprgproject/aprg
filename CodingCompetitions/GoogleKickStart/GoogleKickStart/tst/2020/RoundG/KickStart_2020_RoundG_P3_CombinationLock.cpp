@@ -29,7 +29,7 @@ namespace KickStart_2020_RoundG_P3_CombinationLock {
 #endif
 
 void runTestCase(int const testCaseNumber) {
-    int n, k;
+    int n = 0, k = 0;
     my_cin >> n >> k;
     vector<int> a(n);
     for (int i = 0; i < n; ++i) {
@@ -61,7 +61,7 @@ void runTestCase(int const testCaseNumber) {
             cnt_minus++;
             ++L;
         }
-        long long maybe = current + (long long)(n - 1 - 2 * cnt_minus) * a[me];
+        long long maybe = current + static_cast<long long>(n - 1 - 2 * cnt_minus) * a[me];
         best_answer = min(best_answer, maybe);
         current += -a[me];
     }
@@ -69,7 +69,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

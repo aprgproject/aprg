@@ -59,22 +59,22 @@ void app(int i, ll x) {
 void runTestCase(int const testCaseNumber) {
     my_cin >> n >> q;
     for (int i = 0; i < n; ++i) {
-        ll a;
+        ll a = 0;
         my_cin >> a;
         app(i, a);
     }
     ll ans = 0;
     while ((q--) != 0) {
-        char qt;
+        char qt = 0;
         my_cin >> qt;
         if (qt == 'Q') {
-            int l, r;
+            int l = 0, r = 0;
             my_cin >> l >> r, --l, --r;
             ll s = f1[l & 1].qry(r + 1) - f1[l & 1].qry(l) - (l - 1) * (f0[l & 1].qry(r + 1) - f0[l & 1].qry(l));
             ans += s;
             // cout << s << "\n";
         } else {
-            int i, x;
+            int i = 0, x = 0;
             my_cin >> i >> x, --i;
             app(i, x);
         }
@@ -86,7 +86,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

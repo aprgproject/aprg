@@ -21,7 +21,7 @@ namespace KickStart_2020_RoundH_P2_BoringNumbers {
 #endif
 
 void runTestCase(int const testCaseNumber) {
-    int64_t L, R;
+    int64_t L = 0, R = 0;
     my_cin >> L >> R;
     ++R;
     bool parity = false;
@@ -66,7 +66,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

@@ -28,7 +28,7 @@ namespace KickStart_2020_RoundF_P1_AtmQueue {
 #endif
 
 void runTestCase(int const testCaseNumber) {
-    int n, x;
+    int n = 0, x = 0;
     my_cin >> n >> x;
     vector<int> a(n);
     for (int i = 0; i < n; i++) {
@@ -51,7 +51,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

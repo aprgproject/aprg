@@ -27,7 +27,7 @@ namespace KickStart_2020_RoundG_P4_MergeCards {
 #endif
 
 void runTestCase(int const testCaseNumber) {
-    int n;
+    int n = 0;
     my_cin >> n;
     vector<int> a(n);
     for (int i = 0; i < n; ++i) {
@@ -36,10 +36,10 @@ void runTestCase(int const testCaseNumber) {
     double answer = 0;
     for (int x = 0; x < n - 1; ++x) {
         for (int i = x; i >= 0; --i) {
-            answer += a[i] / (double)(x - i + 1);
+            answer += a[i] / static_cast<double>(x - i + 1);
         }
         for (int i = x + 1; i < n; ++i) {
-            answer += a[i] / (double)(i - x);
+            answer += a[i] / static_cast<double>(i - x);
         }
     }
     my_cout.precision(10);
@@ -47,7 +47,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

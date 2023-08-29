@@ -247,7 +247,7 @@ protected:
         }
     }
 
-    Index m_startOfChildren;
+    Index m_startOfChildren{};
     Values m_treeValues;
     Function m_function;
 };
@@ -390,7 +390,7 @@ void runTestCase(int const testCaseNumber)
 }*/
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

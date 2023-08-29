@@ -144,8 +144,8 @@ Direction getDirection(char const directionChar) {
 }
 
 void runTestCase(int const testCaseNumber) {
-    int numberOfRows, numberOfColumns;
-    int numberOfInstructions, startX, startY;
+    int numberOfRows = 0, numberOfColumns = 0;
+    int numberOfInstructions = 0, startX = 0, startY = 0;
     string instructions;
     my_cin >> numberOfInstructions >> numberOfRows >> numberOfColumns >> startY >> startX;
     my_cin >> instructions;
@@ -160,7 +160,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

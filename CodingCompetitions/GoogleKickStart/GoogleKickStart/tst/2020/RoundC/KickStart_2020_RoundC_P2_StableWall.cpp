@@ -48,7 +48,7 @@ void dfs(int u) {
         }
     }
     act[u] = false;
-    ans += (char)(u + 'A');
+    ans += static_cast<char>(u + 'A');
 }
 
 void runTestCase(int const testCaseNumber) {
@@ -85,7 +85,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

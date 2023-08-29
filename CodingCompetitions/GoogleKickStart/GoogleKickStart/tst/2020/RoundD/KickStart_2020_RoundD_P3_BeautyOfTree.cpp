@@ -28,9 +28,9 @@ namespace KickStart_2020_RoundD_P3_BeautyOfTree {
 #endif
 
 void runTestCase(int const testCaseNumber) {
-    int N;
+    int N = 0;
     my_cin >> N;
-    array<int, 2> A;
+    array<int, 2> A{};
     my_cin >> A[0] >> A[1];
 
     vector<array<int, 20>> par(N);
@@ -60,8 +60,8 @@ void runTestCase(int const testCaseNumber) {
             }
             cnt[cur][z] += cnt[i][z];
         }
-        double va = double(cnt[i][0]) / double(N);
-        double vb = double(cnt[i][1]) / double(N);
+        double va = static_cast<double>(cnt[i][0]) / static_cast<double>(N);
+        double vb = static_cast<double>(cnt[i][1]) / static_cast<double>(N);
         ans += va + vb - va * vb;
     }
 
@@ -71,7 +71,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);
