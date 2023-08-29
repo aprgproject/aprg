@@ -6,7 +6,7 @@ using namespace std;
 
 namespace alba {
 
-CountTotalSetBitsInAllNumbersFrom1ToN::CountTotalSetBitsInAllNumbersFrom1ToN() {}
+CountTotalSetBitsInAllNumbersFrom1ToN::CountTotalSetBitsInAllNumbersFrom1ToN() = default;
 
 CountTotalSetBitsInAllNumbersFrom1ToN::Value CountTotalSetBitsInAllNumbersFrom1ToN::getTotalSetBitsUsingPopcount(
     Value const endValue) {
@@ -43,9 +43,9 @@ CountTotalSetBitsInAllNumbersFrom1ToN::getTotalSetBitsUsingPreComputedBitCounts(
         // -> For 1000: 12 + 1 = 13
         // -> For 1110: (12 + 7) + (compute for 110) = 19 + (compute for 110)
         // -> For 11: 1 + 2 + (compute for 1)  = 3 + (compute for 1)
-        Value powerOfTwo = Value(1) << bitPositionPlusOne;
+        Value powerOfTwo = static_cast<Value>(1) << bitPositionPlusOne;
         Value seriesOfOnes = powerOfTwo - 1;
-        if ((remainingValue & powerOfTwo) != 0u) {
+        if ((remainingValue & powerOfTwo) != 0U) {
             result += countsBeforeThisBit[bitPositionPlusOne - 1] + remainingValue - seriesOfOnes;
             remainingValue ^= powerOfTwo;
         }
@@ -60,9 +60,9 @@ CountTotalSetBitsInAllNumbersFrom1ToN::Value CountTotalSetBitsInAllNumbersFrom1T
     Value result(endValue & 1);
     Value countBeforeThisBit = 1;
     for (Value bitPosition = 1; bitPosition < MAX_NUMBER_OF_BITS; ++bitPosition) {
-        Value powerOfTwo = Value(1) << bitPosition;
+        Value powerOfTwo = static_cast<Value>(1) << bitPosition;
         Value seriesOfOnes = powerOfTwo - 1;
-        if ((endValue & powerOfTwo) != 0u) {
+        if ((endValue & powerOfTwo) != 0U) {
             Value countForThisBit = (endValue & seriesOfOnes) + 1;
             result += countBeforeThisBit + countForThisBit;
         }
