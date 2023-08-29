@@ -32,7 +32,7 @@ void TopLogAnalyzer::ColumnHeaders::set(
     memIndex = memIndexFromTop;
 }
 
-TopLogAnalyzer::TopLogAnalyzer() {}
+TopLogAnalyzer::TopLogAnalyzer() = default;
 
 void TopLogAnalyzer::clear() {
     m_state = TopLogAnalyzerState::BeforeColumnHeaders;
@@ -136,7 +136,7 @@ void TopLogAnalyzer::putEntriesInCpuReport(
     cpuReportFileStream.precision(3);
     for (DataEntry const& entry : m_dataEntries) {
         double totalCalculatedCpu = accumulate(
-            entry.processToCpuMemMap.begin(), entry.processToCpuMemMap.end(), double(0),
+            entry.processToCpuMemMap.begin(), entry.processToCpuMemMap.end(), static_cast<double>(0),
             [](double const partialSum, DataEntry::ProcessToCpuMemPair const& processToCpuMemPair) {
                 return partialSum + processToCpuMemPair.second.cpuLoad;
             });

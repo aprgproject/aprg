@@ -23,7 +23,7 @@ public:
         using ProcessToCpuMemMap = std::map<std::string, CpuMemLoad>;
         using ProcessToCpuMemPair = std::pair<std::string, CpuMemLoad>;
         AlbaDateTime timeInTop;
-        double totalCpuFromTop;
+        double totalCpuFromTop{};
         ProcessToCpuMemMap processToCpuMemMap;
         void clear();
         [[nodiscard]] bool isEmpty() const;
@@ -68,7 +68,7 @@ private:
     static void saveOverallCpuData(std::string const& lineInLogs, DataEntry& currentEntry);
     void saveCpuAndMem(std::string const& lineInLogs, DataEntry& currentEntry);
     TopLogAnalyzerState m_state;
-    ColumnHeaders m_columnHeaders;
+    ColumnHeaders m_columnHeaders{};
     std::vector<DataEntry> m_dataEntries;
     std::map<std::string, CpuMemCollection> m_processToCpuMemCollectionMap;
 };

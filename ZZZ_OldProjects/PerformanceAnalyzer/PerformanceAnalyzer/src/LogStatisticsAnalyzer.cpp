@@ -56,12 +56,13 @@ void LogStatisticsAnalyzer::saveLogDetailsToCsv(ofstream& outputCsvFileStream) {
         dataToDisplay.emplace(stringInCsv, logDetails.count);
     }
     for (pair<string, unsigned int> const& data : dataToDisplay) {
-        outputCsvFileStream << data.first << "," << data.second << "," << ((double)data.second) / m_totalLines * 100
-                            << "\n";
+        outputCsvFileStream << data.first << "," << data.second << ","
+                            << (static_cast<double>(data.second)) / m_totalLines * 100 << "\n";
     }
     outputCsvFileStream << "Total Lines found," << m_totalLinesFound << ","
-                        << ((double)m_totalLinesFound) / m_totalLines * 100 << "\n";
-    outputCsvFileStream << "Total Lines," << m_totalLines << "," << ((double)m_totalLines) / m_totalLines * 100 << "\n";
+                        << (static_cast<double>(m_totalLinesFound)) / m_totalLines * 100 << "\n";
+    outputCsvFileStream << "Total Lines," << m_totalLines << ","
+                        << (static_cast<double>(m_totalLines)) / m_totalLines * 100 << "\n";
 }
 
 void LogStatisticsAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSortedLog) {

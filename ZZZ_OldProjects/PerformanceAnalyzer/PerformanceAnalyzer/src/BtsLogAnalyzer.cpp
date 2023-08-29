@@ -17,7 +17,7 @@ namespace alba {
 
 BtsLogAnalyzer::PrintsAvailable::PrintsAvailable()
 
-{}
+    = default;
 
 BtsLogAnalyzer::BtsLogAnalyzer() : m_btsLogPathHandler("") {}
 
@@ -573,8 +573,8 @@ double BtsLogAnalyzer::getTotalMicroseconds(LogTimePair const& logTimePairOfTheU
 
 double BtsLogAnalyzer::getTotalMicroseconds(BtsLogTime const& btsLogTime) {
     double result(
-        (double)btsLogTime.getMinutes() * 1000000 * 60 + (double)btsLogTime.getSeconds() * 1000000 +
-        (double)btsLogTime.getMicroSeconds());
+        static_cast<double>(btsLogTime.getMinutes()) * 1000000 * 60 +
+        static_cast<double>(btsLogTime.getSeconds()) * 1000000 + static_cast<double>(btsLogTime.getMicroSeconds()));
     return result;
 }
 

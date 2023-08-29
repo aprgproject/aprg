@@ -14,7 +14,7 @@ namespace alba {
 
 struct LogDetails {
     stringHelper::strings logStrings;
-    unsigned int count;
+    unsigned int count{};
     bool operator<(LogDetails const& logDetails) const;
     bool operator>(LogDetails const& logDetails) const;
     bool operator==(LogDetails const& logDetails) const;

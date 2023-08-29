@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <iostream>
 #include <map>
+#include <math.h>
 #include <unordered_map>
 
 using namespace alba::stringHelper;
@@ -115,7 +116,7 @@ string PerformanceAnalyzer::extract(string const& inputPath) const {
     string outputPath(inputPath);
     if (pathHandler.isDirectory()) {
         fileExtractor.extractAllRelevantFiles(pathHandler.getFullPath());
-    } else if (fileExtractor.isRecognizedCompressedFile(pathHandler.getExtension())) {
+    } else if (alba::AprgFileExtractor::isRecognizedCompressedFile(pathHandler.getExtension())) {
         fileExtractor.extractAllRelevantFiles(pathHandler.getFullPath());
         pathHandler.input(pathHandler.getDirectory() + R"(\)" + pathHandler.getFilenameOnly());
         outputPath = pathHandler.getFullPath();
@@ -189,7 +190,7 @@ void PerformanceAnalyzer::processFileForMsgQueueingTime(string const& filePath) 
     }
     cout << "TotalMsgQueueingTime: " << totalMsgQueueingTime << "\n";
     cout << "highestMsgQueueingTime: " << highestMsgQueueingTime << "\n";
-    cout << "AverageMsgQueueingTime: " << ((double)totalMsgQueueingTime) / numberOfInstances << "\n";
+    cout << "AverageMsgQueueingTime: " << (static_cast<double>(totalMsgQueueingTime)) / numberOfInstances << "\n";
     cout << "numberOfPrints: " << numberOfInstances << "\n";
 }
 
@@ -268,7 +269,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInRlh(string const& filePath
         }
     }
     cout.precision(10);
-    cout << "Average Delay(ms): " << (double)totalDelay / count / 1000 << "\n";
+    cout << "Average Delay(ms): " << totalDelay / count / 1000 << "\n";
     cout << "Max Delay(ms): " << maxDelay / 1000 << "\n";
     cout << "User with max delay -> nbccId: " << userIdForMaxDelay.nbccId << " crnccId: " << userIdForMaxDelay.crnccId
          << " transactionId: " << userIdForMaxDelay.transactionId << "\n";
@@ -310,7 +311,7 @@ void PerformanceAnalyzer::processFileForRlDeletionDelayInRlh(string const& fileP
                 btsLogDelay.startTimeOptional->getTotalSeconds() <= btsLogDelay.endTimeOptional->getTotalSeconds()) {
                 int delay =
                     getDelayTimeInUs(btsLogDelay.endTimeOptional.value(), btsLogDelay.startTimeOptional.value());
-                maxDelay = std::max(maxDelay, (double)delay);
+                maxDelay = std::max(maxDelay, static_cast<double>(delay));
                 totalDelay += delay;
                 count++;
                 stringstream ss;
@@ -322,7 +323,7 @@ void PerformanceAnalyzer::processFileForRlDeletionDelayInRlh(string const& fileP
         }
     }
     cout.precision(10);
-    cout << "Average Delay(ms): " << (double)totalDelay / count / 1000 << "\n";
+    cout << "Average Delay(ms): " << totalDelay / count / 1000 << "\n";
     cout << "Max Delay(ms): " << maxDelay / 1000 << "\n";
 }
 
@@ -612,7 +613,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
             tupcLogDelays.erase(tupcUserId);
         }
     }
-    cout << "Average Delay:" << (double)totalDelay / count << " Max Delay:" << maxDelay << "\n";
+    cout << "Average Delay:" << totalDelay / count << " Max Delay:" << maxDelay << "\n";
     cout << "User with max delay -> nbccId: " << userIdForMaxDelay.nbccId << " crnccId: " << userIdForMaxDelay.crnccId
          << " transactionId: " << userIdForMaxDelay.transactionId << "\n";
 }
@@ -766,7 +767,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
             tupcLogDelays.erase(tupcUserId);
         }
     }
-    cout << "Average Delay:" << (double)totalDelay / count << " Max Delay:" << maxDelay << "\n";
+    cout << "Average Delay:" << totalDelay / count << " Max Delay:" << maxDelay << "\n";
     cout << "User with max delay -> nbccId: " << userIdForMaxDelay.nbccId << " crnccId: " << userIdForMaxDelay.crnccId
          << " transactionId: " << userIdForMaxDelay.transactionId << "\n";
 }
@@ -793,7 +794,7 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
     double maxDelay = 0;
     double totalDelay = 0;
     int count = 0;
-    double endWiresharkTime;
+    double endWiresharkTime = NAN;
     struct WiresharkLogKey {
         unsigned int operation;
         unsigned int said;
@@ -807,8 +808,8 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
     struct WiresharkLogDelay {
         optional<double> startTimeOptional;
         optional<double> endTimeOptional;
-        unsigned int numberInWiresharkOfStart;
-        unsigned int numberInWiresharkOfEnd;
+        unsigned int numberInWiresharkOfStart{};
+        unsigned int numberInWiresharkOfEnd{};
     };
     std::map<WiresharkLogKey, WiresharkLogDelay> wiresharkLogDelays;
     while (fileReader.isNotFinished()) {
@@ -819,7 +820,7 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
             auto wiresharkTime = convertStringToNumber<double>(timeString);
             endWiresharkTime = wiresharkTime;
             auto numberInWireshark = convertStringToNumber<unsigned int>(getStringBeforeThisString(nextLine, " "));
-            WiresharkLogKey key;
+            WiresharkLogKey key{};
             while (fileReader.isNotFinished()) {
                 string followingLine(fileReader.getLineAndIgnoreWhiteSpaces());
                 if (isStringFoundNotCaseSensitive(followingLine, R"(0000)")) {
@@ -885,7 +886,7 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
             }
         }
     }
-    cout << "Average Delay:" << (double)totalDelay / count << " Max Delay:" << maxDelay << "\n";
+    cout << "Average Delay:" << totalDelay / count << " Max Delay:" << maxDelay << "\n";
     cout << "endWiresharkTime:" << endWiresharkTime << "\n";
 }
 
@@ -903,7 +904,7 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath) {
     double maxCpuTupcConman = 0;
     double maxCpuTcomAalman = 0;
     double maxTotalCpu = 0;
-    double maxTotalCpuFromTop;
+    double maxTotalCpuFromTop = NAN;
     vector<string> processNames;
     vector<double> cpuConsumptions;
     unsigned int state = 0;
