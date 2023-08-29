@@ -6,7 +6,7 @@ using namespace std;
 
 namespace alba {
 
-UserIdentifiers::UserIdentifiers() {}
+UserIdentifiers::UserIdentifiers() = default;
 
 UserIdentifiers::UserIdentifiers(std::string const& lineInLogs) { saveUserIndentfiers(lineInLogs); }
 

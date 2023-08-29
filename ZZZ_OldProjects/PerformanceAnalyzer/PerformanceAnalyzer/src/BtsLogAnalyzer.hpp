@@ -26,7 +26,7 @@ public:
     struct DspData {
         DspData()
 
-        {}
+            = default;
         unsigned int boardId{0};
         unsigned int cpuId{0};
         unsigned int lcgId{0};
