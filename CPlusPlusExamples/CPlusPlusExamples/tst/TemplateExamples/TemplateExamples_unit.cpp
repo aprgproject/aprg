@@ -183,7 +183,7 @@ TEST(TemplateExamplesTest, TemplateTypeDeductionWorks) {
     // does not match adjusted type 'array<[...], 9>' of argument [with T = int, U = double]
 
     // fooFunction([](double x) { return int(x); }); // Compilation error
-    fooFunction(+[](double x) { return int(x); });
+    fooFunction(+[](double x) { return static_cast<int>(x); });
     // Captureless lambda types are always implicitly convertible to function pointer type.
     // But being implicitly convertible to a thing doesn't mean actually being that thing!
     // Protip: If you absolute need the function-pointer conversion to happen add a unary+.
@@ -575,7 +575,7 @@ struct InstantiationClass {
 
 TEST(TemplateExamplesTest, TemplateIsOnlyInstantiatedWhenNeeded) {
     // NoInstantiationClass<int> variable1;  // Compiler error (static_assert failure)
-    NoInstantiationClass<int>* variable2;  // No compiler error.
+    NoInstantiationClass<int>* variable2 = nullptr;  // No compiler error.
 
     InstantiationClass<int> variable3;  // No compiler error.
     // InstantiationClass<int>::noInstantiationStaticFunction(); // Compiler error (static_assert failure)
@@ -771,7 +771,7 @@ TEST(TemplateExamplesTest, FunctionSelectionWorksAsExpected) {
     commonFunctionName(5);  // commonFunctionName(int)
 
     // template specialization is second
-    commonFunctionName(5.f);  // commonFunctionName(Type) [with Type = float]
+    commonFunctionName(5.F);  // commonFunctionName(Type) [with Type = float]
 
     // template instantiation is third
     commonFunctionName(5.0);  // commonFunctionName(Type) [with Type = double]

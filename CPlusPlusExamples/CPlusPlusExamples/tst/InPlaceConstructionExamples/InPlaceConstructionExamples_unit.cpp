@@ -222,7 +222,7 @@ string willThisRvo10() {
 }
 
 struct MoveOnlyConstExprObject {
-    constexpr MoveOnlyConstExprObject() {}
+    constexpr MoveOnlyConstExprObject() = default;
     constexpr MoveOnlyConstExprObject(MoveOnlyConstExprObject&&) noexcept : x{1} {}
     int x{0};
 };
