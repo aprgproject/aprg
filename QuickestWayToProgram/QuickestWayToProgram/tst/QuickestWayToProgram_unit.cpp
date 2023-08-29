@@ -14,6 +14,7 @@
 #include <iostream>
 #include <iterator>
 #include <map>
+#include <math.h>
 #include <queue>
 #include <stdio.h>
 #include <string>
@@ -28,8 +29,8 @@ int numberOfFilesAnalyzedForExtraction;
 }  // namespace ProgressCounters
 
 TEST(SampleTest, PrimerTest) {
-    int i;
-    double d;
+    int i = 0;
+    double d = NAN;
     d = i = 3.5;
     ALBA_INF_PRINT2(cout, i, d);  // 3,3
     i = d = 3.5;
