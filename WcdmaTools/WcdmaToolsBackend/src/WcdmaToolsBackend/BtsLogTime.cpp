@@ -14,7 +14,7 @@ using namespace std;
 
 namespace wcdmaToolsBackend {
 
-BtsLogTime::BtsLogTime() {}
+BtsLogTime::BtsLogTime() = default;
 
 BtsLogTime::BtsLogTime(BtsLogTimeType logTimeType, string const& timeStampString) {
     setTimeByTimeStamp(logTimeType, timeStampString);
@@ -78,8 +78,9 @@ void BtsLogTime::setTimeByTimeStamp(BtsLogTimeType logTimeType, string const& ti
         }
     }
     m_dateTime.setTime(
-        (unsigned short int)years, (unsigned char)months, (unsigned char)days, (unsigned char)hours,
-        (unsigned char)minutes, (unsigned char)seconds, microseconds);
+        static_cast<unsigned short int>(years), static_cast<unsigned char>(months), static_cast<unsigned char>(days),
+        static_cast<unsigned char>(hours), static_cast<unsigned char>(minutes), static_cast<unsigned char>(seconds),
+        microseconds);
 }
 
 bool BtsLogTime::isEmpty() const { return m_dateTime.isEmpty(); }
@@ -176,8 +177,9 @@ istream& operator>>(istream& in, BtsLogTime& btsLogTime) {
     auto seconds(reader.readData<unsigned int>());
     auto microseconds(reader.readData<unsigned int>());
     btsLogTime.m_dateTime.setTime(
-        (unsigned short int)years, (unsigned char)months, (unsigned char)days, (unsigned char)hours,
-        (unsigned char)minutes, (unsigned char)seconds, microseconds);
+        static_cast<unsigned short int>(years), static_cast<unsigned char>(months), static_cast<unsigned char>(days),
+        static_cast<unsigned char>(hours), static_cast<unsigned char>(minutes), static_cast<unsigned char>(seconds),
+        microseconds);
     return in;
 }
 

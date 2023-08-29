@@ -6,7 +6,7 @@ using namespace std;
 
 namespace wcdmaToolsBackend {
 
-BtsPrintReaderWithRollback::BtsPrintReaderWithRollback() {}
+BtsPrintReaderWithRollback::BtsPrintReaderWithRollback() = default;
 
 void BtsPrintReaderWithRollback::clear() {
     m_isRollbackActivated = false;
