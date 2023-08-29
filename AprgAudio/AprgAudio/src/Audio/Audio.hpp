@@ -17,7 +17,7 @@ enum class AudioFormat { Error, NotLoaded, Wave, Aiff };
 template <class T>
 class Audio {
 public:
-    typedef std::vector<std::vector<T> > AudioBuffer;
+    using AudioBuffer = std::vector<std::vector<T>>;
 
     Audio();
 
