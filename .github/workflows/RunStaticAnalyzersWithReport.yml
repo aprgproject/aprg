@@ -56,7 +56,7 @@ jobs:
           echo "github.event.action: [${{ github.event.action }}]"
           echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
           echo "staticAnalysisFilename: [${{ env.staticAnalysisFilename }}]"
-          echo "staticAnalysisJobId: [${{ input.staticAnalysisJobId }}]"
+          echo "staticAnalysisJobId: [${{ inputs.staticAnalysisJobId }}]"
           
       - name: Checkout code
         uses: actions/checkout@v3
