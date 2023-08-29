@@ -7,4 +7,4 @@ namespace alba {
 
 enum class SymbolTableFileType { SymbolTableFromObjdump, MappedFile };
 
-}
+}  // namespace alba

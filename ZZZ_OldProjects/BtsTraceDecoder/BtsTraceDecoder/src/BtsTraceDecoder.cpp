@@ -11,7 +11,7 @@ using namespace alba::stringHelper;
 
 namespace alba {
 
-BtsTraceDecoder::BtsTraceDecoder() {}
+BtsTraceDecoder::BtsTraceDecoder() = default;
 
 void BtsTraceDecoder::saveSymbolTableFromObjdump(std::string const& symbolTableFilePath) {
     saveSymbolTable(symbolTableFilePath, SymbolTableFileType::SymbolTableFromObjdump);

@@ -17,7 +17,7 @@ struct BtsLogDelay {
 };
 
 struct UniqueId {
-    UniqueId() {}
+    UniqueId() = default;
     int crnccId{0};
     int nbccId{0};
     int transactionId{0};
