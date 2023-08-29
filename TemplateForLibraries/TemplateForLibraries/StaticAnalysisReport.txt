@@ -1,0 +1,3 @@
+2023-08-29T06:18:31
+/home/runner/work/aprg/aprg/TemplateForLibraries/TemplateForLibraries/src/TemplateForLibraries/TemplateForLibraries.cpp:5:48: warning: 'm_sample' should be initialized in an in-class default member initializer [cppcoreguidelines-prefer-member-initializer]
+DONE!
