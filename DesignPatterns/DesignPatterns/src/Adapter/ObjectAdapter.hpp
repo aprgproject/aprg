@@ -29,7 +29,7 @@ public:
 class Adapter : public Target {
 public:
     void request() override {
-        adaptee.specificRequest();
+        ObjectAdapter::Adaptee::specificRequest();
         // ...
     }
     // ...

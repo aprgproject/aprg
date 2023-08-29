@@ -37,9 +37,9 @@ class ConcreteCommand : public Command {
 public:
     explicit ConcreteCommand(Receiver& receiver) : m_receiver(receiver) {}
 
-    void execute() override { m_receiver.action(); }
+    void execute() override { Command::Receiver::action(); }
 
-    void undo() override { m_receiver.reverseAction(); }
+    void undo() override { Command::Receiver::reverseAction(); }
     // ...
 
 private:
@@ -52,7 +52,7 @@ private:
 
 class Invoker {
 public:
-    Invoker() {}
+    Invoker() = default;
 
     void setCommand(Command* command) { m_command = command; }
 
