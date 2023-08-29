@@ -5,7 +5,7 @@
 namespace alba::TwoDimensions {
 
 struct PolarCoordinate {
-    double radius;
+    double radius{};
     AlbaAngle angle;
 };
 

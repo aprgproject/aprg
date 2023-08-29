@@ -11,7 +11,7 @@ namespace alba::TwoDimensions {
 template <int numberOfCoefficients>
 class Polynomial {
 public:
-    Polynomial() {}
+    Polynomial() = default;
 
     Polynomial(std::initializer_list<double> const& coefficients) {
         static_assert(numberOfCoefficients > 0, "The numberOfCoefficients is not more than 0. Its not a polynomial");
