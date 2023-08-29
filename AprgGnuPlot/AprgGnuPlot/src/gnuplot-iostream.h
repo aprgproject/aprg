@@ -179,7 +179,7 @@ namespace gnuplotio {
 // classes.
 template <typename T>
 struct dont_treat_as_stl_container {
-    typedef boost::mpl::bool_<false> type;
+    using type = boost::mpl::bool_<false>;
 };
 
 BOOST_MPL_HAS_XXX_TRAIT_DEF(value_type)
@@ -187,23 +187,22 @@ BOOST_MPL_HAS_XXX_TRAIT_DEF(const_iterator)
 
 template <typename T>
 struct is_like_stl_container {
-    typedef boost::mpl::and_<
+    using type = boost::mpl::and_<
         typename has_value_type<T>::type, typename has_const_iterator<T>::type,
-        boost::mpl::not_<dont_treat_as_stl_container<T> > >
-        type;
+        boost::mpl::not_<dont_treat_as_stl_container<T>>>;
     static const bool value = type::value;
 };
 
 template <typename T>
 struct is_boost_tuple_nulltype {
     static const bool value = false;
-    typedef boost::mpl::bool_<value> type;
+    using type = boost::mpl::bool_<value>;
 };
 
 template <>
 struct is_boost_tuple_nulltype<boost::tuples::null_type> {
     static const bool value = true;
-    typedef boost::mpl::bool_<value> type;
+    using type = boost::mpl::bool_<value>;
 };
 
 BOOST_MPL_HAS_XXX_TRAIT_DEF(head_type)
@@ -211,7 +210,7 @@ BOOST_MPL_HAS_XXX_TRAIT_DEF(tail_type)
 
 template <typename T>
 struct is_boost_tuple {
-    typedef boost::mpl::and_<typename has_head_type<T>::type, typename has_tail_type<T>::type> type;
+    using type = boost::mpl::and_<typename has_head_type<T>::type, typename has_tail_type<T>::type>;
     static const bool value = type::value;
 };
 
@@ -545,7 +544,7 @@ struct TextSender<long double> : FloatTextSender<long double> {};
 // {{{2 std::pair support
 
 template <typename T, typename U>
-struct TextSender<std::pair<T, U> > {
+struct TextSender<std::pair<T, U>> {
     static void send(std::ostream &stream, const std::pair<T, U> &v) {
         TextSender<T>::send(stream, v.first);
         stream << " ";
@@ -554,7 +553,7 @@ struct TextSender<std::pair<T, U> > {
 };
 
 template <typename T, typename U>
-struct BinfmtSender<std::pair<T, U> > {
+struct BinfmtSender<std::pair<T, U>> {
     static void send(std::ostream &stream) {
         BinfmtSender<T>::send(stream);
         BinfmtSender<U>::send(stream);
@@ -562,7 +561,7 @@ struct BinfmtSender<std::pair<T, U> > {
 };
 
 template <typename T, typename U>
-struct BinarySender<std::pair<T, U> > {
+struct BinarySender<std::pair<T, U>> {
     static void send(std::ostream &stream, const std::pair<T, U> &v) {
         BinarySender<T>::send(stream, v.first);
         BinarySender<U>::send(stream, v.second);
@@ -574,7 +573,7 @@ struct BinarySender<std::pair<T, U> > {
 // {{{2 std::complex support
 
 template <typename T>
-struct TextSender<std::complex<T> > {
+struct TextSender<std::complex<T>> {
     static void send(std::ostream &stream, const std::complex<T> &v) {
         TextSender<T>::send(stream, v.real());
         stream << " ";
@@ -583,7 +582,7 @@ struct TextSender<std::complex<T> > {
 };
 
 template <typename T>
-struct BinfmtSender<std::complex<T> > {
+struct BinfmtSender<std::complex<T>> {
     static void send(std::ostream &stream) {
         BinfmtSender<T>::send(stream);
         BinfmtSender<T>::send(stream);
@@ -591,7 +590,7 @@ struct BinfmtSender<std::complex<T> > {
 };
 
 template <typename T>
-struct BinarySender<std::complex<T> > {
+struct BinarySender<std::complex<T>> {
     static void send(std::ostream &stream, const std::complex<T> &v) {
         BinarySender<T>::send(stream, v.real());
         BinarySender<T>::send(stream, v.imag());
@@ -605,7 +604,7 @@ struct BinarySender<std::complex<T> > {
 template <typename T>
 struct TextSender<
     T, typename boost::enable_if<boost::mpl::and_<
-           is_boost_tuple<T>, boost::mpl::not_<is_boost_tuple_nulltype<typename T::tail_type> > > >::type> {
+           is_boost_tuple<T>, boost::mpl::not_<is_boost_tuple_nulltype<typename T::tail_type>>>>::type> {
     static void send(std::ostream &stream, const T &v) {
         TextSender<typename T::head_type>::send(stream, v.get_head());
         stream << " ";
@@ -616,7 +615,7 @@ struct TextSender<
 template <typename T>
 struct TextSender<
     T, typename boost::enable_if<
-           boost::mpl::and_<is_boost_tuple<T>, is_boost_tuple_nulltype<typename T::tail_type> > >::type> {
+           boost::mpl::and_<is_boost_tuple<T>, is_boost_tuple_nulltype<typename T::tail_type>>>::type> {
     static void send(std::ostream &stream, const T &v) {
         TextSender<typename T::head_type>::send(stream, v.get_head());
     }
@@ -625,7 +624,7 @@ struct TextSender<
 template <typename T>
 struct BinfmtSender<
     T, typename boost::enable_if<boost::mpl::and_<
-           is_boost_tuple<T>, boost::mpl::not_<is_boost_tuple_nulltype<typename T::tail_type> > > >::type> {
+           is_boost_tuple<T>, boost::mpl::not_<is_boost_tuple_nulltype<typename T::tail_type>>>>::type> {
     static void send(std::ostream &stream) {
         BinfmtSender<typename T::head_type>::send(stream);
         stream << " ";
@@ -636,14 +635,14 @@ struct BinfmtSender<
 template <typename T>
 struct BinfmtSender<
     T, typename boost::enable_if<
-           boost::mpl::and_<is_boost_tuple<T>, is_boost_tuple_nulltype<typename T::tail_type> > >::type> {
+           boost::mpl::and_<is_boost_tuple<T>, is_boost_tuple_nulltype<typename T::tail_type>>>::type> {
     static void send(std::ostream &stream) { BinfmtSender<typename T::head_type>::send(stream); }
 };
 
 template <typename T>
 struct BinarySender<
     T, typename boost::enable_if<boost::mpl::and_<
-           is_boost_tuple<T>, boost::mpl::not_<is_boost_tuple_nulltype<typename T::tail_type> > > >::type> {
+           is_boost_tuple<T>, boost::mpl::not_<is_boost_tuple_nulltype<typename T::tail_type>>>>::type> {
     static void send(std::ostream &stream, const T &v) {
         BinarySender<typename T::head_type>::send(stream, v.get_head());
         BinarySender<typename T::tail_type>::send(stream, v.get_tail());
@@ -653,7 +652,7 @@ struct BinarySender<
 template <typename T>
 struct BinarySender<
     T, typename boost::enable_if<
-           boost::mpl::and_<is_boost_tuple<T>, is_boost_tuple_nulltype<typename T::tail_type> > >::type> {
+           boost::mpl::and_<is_boost_tuple<T>, is_boost_tuple_nulltype<typename T::tail_type>>>::type> {
     static void send(std::ostream &stream, const T &v) {
         BinarySender<typename T::head_type>::send(stream, v.get_head());
     }
@@ -683,8 +682,8 @@ void std_tuple_formatcode_helper(std::ostream &stream, const Tuple *, int_<0>) {
 }
 
 template <typename... Args>
-struct BinfmtSender<std::tuple<Args...> > {
-    typedef typename std::tuple<Args...> Tuple;
+struct BinfmtSender<std::tuple<Args...>> {
+    using Tuple = typename std::tuple<Args...>;
 
     static void send(std::ostream &stream) {
         std_tuple_formatcode_helper(stream, (const Tuple *)(0), int_<sizeof...(Args) - 1>());
@@ -704,8 +703,8 @@ void std_tuple_textsend_helper(std::ostream &stream, const Tuple &v, int_<0>) {
 }
 
 template <typename... Args>
-struct TextSender<std::tuple<Args...> > {
-    typedef typename std::tuple<Args...> Tuple;
+struct TextSender<std::tuple<Args...>> {
+    using Tuple = typename std::tuple<Args...>;
 
     static void send(std::ostream &stream, const Tuple &v) {
         std_tuple_textsend_helper(stream, v, int_<sizeof...(Args) - 1>());
@@ -724,8 +723,8 @@ void std_tuple_binsend_helper(std::ostream &stream, const Tuple &v, int_<0>) {
 }
 
 template <typename... Args>
-struct BinarySender<std::tuple<Args...> > {
-    typedef typename std::tuple<Args...> Tuple;
+struct BinarySender<std::tuple<Args...>> {
+    using Tuple = typename std::tuple<Args...>;
 
     static void send(std::ostream &stream, const Tuple &v) {
         std_tuple_binsend_helper(stream, v, int_<sizeof...(Args) - 1>());
@@ -793,7 +792,7 @@ struct BinarySender<std::tuple<Args...> > {
 struct Error_WasNotContainer {
     // This is just here to make VC++ happy.
     // https://connect.microsoft.com/VisualStudio/feedback/details/777612/class-template-specialization-that-compiles-in-g-but-not-visual-c
-    typedef void subiter_type;
+    using subiter_type = void;
 };
 
 // Error messages involving this stem from calling deref instead of deref_subiter for a nested
@@ -805,9 +804,9 @@ template <typename T, typename Enable = void>
 class ArrayTraits {
 public:
     // The value type of elements after all levels of nested containers have been dereferenced.
-    typedef Error_WasNotContainer value_type;
+    using value_type = Error_WasNotContainer;
     // The type of the range (a.k.a. iterator) that `get_range()` returns.
-    typedef Error_WasNotContainer range_type;
+    using range_type = Error_WasNotContainer;
     // Tells whether T is in fact a container type.
     static const bool is_container = false;
     // This flag supports the legacy behavior of automatically guessing whether the data should
@@ -830,7 +829,7 @@ public:
 template <typename V>
 class ArrayTraitsDefaults {
 public:
-    typedef V value_type;
+    using value_type = V;
 
     static const bool is_container = true;
     static const bool allow_auto_unwrap = true;
@@ -861,8 +860,8 @@ public:
     IteratorRange(const TI &_it, const TI &_end) : it(_it), end(_end) {}
 
     static const bool is_container = ArrayTraits<TV>::is_container;
-    typedef typename boost::mpl::if_c<is_container, Error_InappropriateDeref, TV>::type value_type;
-    typedef typename ArrayTraits<TV>::range_type subiter_type;
+    using value_type = typename boost::mpl::if_c<is_container, Error_InappropriateDeref, TV>::type;
+    using subiter_type = typename ArrayTraits<TV>::range_type;
 
     [[nodiscard]] bool is_end() const { return it == end; }
 
@@ -889,10 +888,10 @@ private:
 };
 
 template <typename T>
-class ArrayTraits<T, typename boost::enable_if<is_like_stl_container<T> >::type>
+class ArrayTraits<T, typename boost::enable_if<is_like_stl_container<T>>::type>
     : public ArrayTraitsDefaults<typename T::value_type> {
 public:
-    typedef IteratorRange<typename T::const_iterator, typename T::value_type> range_type;
+    using range_type = IteratorRange<typename T::const_iterator, typename T::value_type>;
 
     static range_type get_range(const T &arg) { return range_type(arg.begin(), arg.end()); }
 };
@@ -904,7 +903,7 @@ public:
 template <typename T, size_t N>
 class ArrayTraits<T[N]> : public ArrayTraitsDefaults<T> {
 public:
-    typedef IteratorRange<const T *, T> range_type;
+    using range_type = IteratorRange<const T *, T>;
 
     static range_type get_range(const T (&arg)[N]) { return range_type(arg, arg + N); }
 };
@@ -924,8 +923,8 @@ public:
 
     static const bool is_container = RT::is_container && RU::is_container;
 
-    typedef std::pair<typename RT::value_type, typename RU::value_type> value_type;
-    typedef PairOfRange<typename RT::subiter_type, typename RU::subiter_type> subiter_type;
+    using value_type = std::pair<typename RT::value_type, typename RU::value_type>;
+    using subiter_type = PairOfRange<typename RT::subiter_type, typename RU::subiter_type>;
 
     [[nodiscard]] bool is_end() const {
         bool el = l.is_end();
@@ -951,10 +950,10 @@ private:
 };
 
 template <typename T, typename U>
-class ArrayTraits<std::pair<T, U> > {
+class ArrayTraits<std::pair<T, U>> {
 public:
-    typedef PairOfRange<typename ArrayTraits<T>::range_type, typename ArrayTraits<U>::range_type> range_type;
-    typedef std::pair<typename ArrayTraits<T>::value_type, typename ArrayTraits<U>::value_type> value_type;
+    using range_type = PairOfRange<typename ArrayTraits<T>::range_type, typename ArrayTraits<U>::range_type>;
+    using value_type = std::pair<typename ArrayTraits<T>::value_type, typename ArrayTraits<U>::value_type>;
     static const bool is_container = ArrayTraits<T>::is_container && ArrayTraits<U>::is_container;
     // Don't allow colwrap since it's already wrapped.
     static const bool allow_auto_unwrap = false;
@@ -975,14 +974,14 @@ public:
 
 template <typename T>
 class ArrayTraits<
-    T, typename boost::enable_if<boost::mpl::and_<
-           is_boost_tuple<T>, boost::mpl::not_<is_boost_tuple_nulltype<typename T::tail_type> > > >::type>
-    : public ArrayTraits<typename std::pair<typename T::head_type, typename T::tail_type> > {
+    T, typename boost::enable_if<
+           boost::mpl::and_<is_boost_tuple<T>, boost::mpl::not_<is_boost_tuple_nulltype<typename T::tail_type>>>>::type>
+    : public ArrayTraits<typename std::pair<typename T::head_type, typename T::tail_type>> {
 public:
-    typedef typename T::head_type HT;
-    typedef typename T::tail_type TT;
+    using HT = typename T::head_type;
+    using TT = typename T::tail_type;
 
-    typedef ArrayTraits<typename std::pair<HT, TT> > parent;
+    using parent = ArrayTraits<typename std::pair<HT, TT>>;
 
     static typename parent::range_type get_range(const T &arg) {
         return typename parent::range_type(
@@ -993,11 +992,11 @@ public:
 template <typename T>
 class ArrayTraits<
     T, typename boost::enable_if<
-           boost::mpl::and_<is_boost_tuple<T>, is_boost_tuple_nulltype<typename T::tail_type> > >::type>
+           boost::mpl::and_<is_boost_tuple<T>, is_boost_tuple_nulltype<typename T::tail_type>>>::type>
     : public ArrayTraits<typename T::head_type> {
-    typedef typename T::head_type HT;
+    using HT = typename T::head_type;
 
-    typedef ArrayTraits<HT> parent;
+    using parent = ArrayTraits<HT>;
 
 public:
     static typename parent::range_type get_range(const T &arg) { return parent::get_range(arg.get_head()); }
@@ -1011,8 +1010,8 @@ public:
 
 template <typename Tuple, size_t idx>
 struct StdTupUnwinder {
-    typedef std::pair<typename StdTupUnwinder<Tuple, idx - 1>::type, typename std::tuple_element<idx, Tuple>::type>
-        type;
+    using type =
+        std::pair<typename StdTupUnwinder<Tuple, idx - 1>::type, typename std::tuple_element<idx, Tuple>::type>;
 
     static typename ArrayTraits<type>::range_type get_range(const Tuple &arg) {
         return typename ArrayTraits<type>::range_type(
@@ -1023,7 +1022,7 @@ struct StdTupUnwinder {
 
 template <typename Tuple>
 struct StdTupUnwinder<Tuple, 0> {
-    typedef typename std::tuple_element<0, Tuple>::type type;
+    using type = typename std::tuple_element<0, Tuple>::type;
 
     static typename ArrayTraits<type>::range_type get_range(const Tuple &arg) {
         return ArrayTraits<type>::get_range(std::get<0>(arg));
@@ -1031,10 +1030,10 @@ struct StdTupUnwinder<Tuple, 0> {
 };
 
 template <typename... Args>
-class ArrayTraits<std::tuple<Args...> >
+class ArrayTraits<std::tuple<Args...>>
     : public ArrayTraits<typename StdTupUnwinder<std::tuple<Args...>, sizeof...(Args) - 1>::type> {
-    typedef std::tuple<Args...> Tuple;
-    typedef ArrayTraits<typename StdTupUnwinder<Tuple, sizeof...(Args) - 1>::type> parent;
+    using Tuple = std::tuple<Args...>;
+    using parent = ArrayTraits<typename StdTupUnwinder<Tuple, sizeof...(Args) - 1>::type>;
 
 public:
     static typename parent::range_type get_range(const Tuple &arg) {
@@ -1065,8 +1064,8 @@ public:
     // Don't allow colwrap since it's already wrapped.
     static const bool allow_auto_unwrap = false;
 
-    typedef std::vector<typename RT::value_type> value_type;
-    typedef VecOfRange<typename RT::subiter_type> subiter_type;
+    using value_type = std::vector<typename RT::value_type>;
+    using subiter_type = VecOfRange<typename RT::subiter_type>;
 
     [[nodiscard]] bool is_end() const {
         if (rvec.empty()) {
@@ -1109,7 +1108,7 @@ private:
 
 template <typename T>
 VecOfRange<typename ArrayTraits<T>::range_type::subiter_type> get_columns_range(const T &arg) {
-    typedef typename ArrayTraits<T>::range_type::subiter_type U;
+    using U = typename ArrayTraits<T>::range_type::subiter_type;
     std::vector<U> rvec;
     typename ArrayTraits<T>::range_type outer = ArrayTraits<T>::get_range(arg);
     while (!outer.is_end()) {
@@ -1212,31 +1211,31 @@ struct ModeAutoDecoder {};
 
 template <typename T>
 struct ModeAutoDecoder<T, typename boost::enable_if_c<(ArrayTraits<T>::depth == 1)>::type> {
-    typedef Mode1D mode;
+    using mode = Mode1D;
 };
 
 template <typename T>
 struct ModeAutoDecoder<
     T, typename boost::enable_if_c<(ArrayTraits<T>::depth == 2) && !ArrayTraits<T>::allow_auto_unwrap>::type> {
-    typedef Mode2D mode;
+    using mode = Mode2D;
 };
 
 template <typename T>
 struct ModeAutoDecoder<
     T, typename boost::enable_if_c<(ArrayTraits<T>::depth == 2) && ArrayTraits<T>::allow_auto_unwrap>::type> {
-    typedef Mode1DUnwrap mode;
+    using mode = Mode1DUnwrap;
 };
 
 template <typename T>
 struct ModeAutoDecoder<
     T, typename boost::enable_if_c<(ArrayTraits<T>::depth > 2) && ArrayTraits<T>::allow_auto_unwrap>::type> {
-    typedef Mode2DUnwrap mode;
+    using mode = Mode2DUnwrap;
 };
 
 template <typename T>
 struct ModeAutoDecoder<
     T, typename boost::enable_if_c<(ArrayTraits<T>::depth > 2) && !ArrayTraits<T>::allow_auto_unwrap>::type> {
-    typedef Mode2D mode;
+    using mode = Mode2D;
 };
 
 // }}}2
@@ -1623,7 +1622,7 @@ private:
     const Gnuplot &operator=(const Gnuplot &);
 
 public:
-    ~Gnuplot() {
+    ~Gnuplot() override {
         if (debug_messages) {
             std::cerr << "ending gnuplot session" << std::endl;
         }
@@ -1907,7 +1906,7 @@ private:
 private:
     GnuplotFeedback *feedback;
 #ifdef GNUPLOT_USE_TMPFILE
-    std::vector<boost::shared_ptr<GnuplotTmpfile> > tmp_files;
+    std::vector<boost::shared_ptr<GnuplotTmpfile>> tmp_files;
 #else
     // just a placeholder
     std::vector<int> tmp_files;
@@ -1944,7 +1943,7 @@ using gnuplotio::Gnuplot;
 namespace gnuplotio {
 
 template <typename T, int N>
-struct BinfmtSender<blitz::TinyVector<T, N> > {
+struct BinfmtSender<blitz::TinyVector<T, N>> {
     static void send(std::ostream &stream) {
         for (int i = 0; i < N; i++) {
             BinfmtSender<T>::send(stream);
@@ -1953,7 +1952,7 @@ struct BinfmtSender<blitz::TinyVector<T, N> > {
 };
 
 template <typename T, int N>
-struct TextSender<blitz::TinyVector<T, N> > {
+struct TextSender<blitz::TinyVector<T, N>> {
     static void send(std::ostream &stream, const blitz::TinyVector<T, N> &v) {
         for (int i = 0; i < N; i++) {
             if (i) stream << " ";
@@ -1963,7 +1962,7 @@ struct TextSender<blitz::TinyVector<T, N> > {
 };
 
 template <typename T, int N>
-struct BinarySender<blitz::TinyVector<T, N> > {
+struct BinarySender<blitz::TinyVector<T, N>> {
     static void send(std::ostream &stream, const blitz::TinyVector<T, N> &v) {
         for (int i = 0; i < N; i++) {
             BinarySender<T>::send(stream, v[i]);
@@ -2030,7 +2029,7 @@ private:
 };
 
 template <typename T, int ArrayDim>
-class ArrayTraits<blitz::Array<T, ArrayDim> > : public ArrayTraitsDefaults<T> {
+class ArrayTraits<blitz::Array<T, ArrayDim>> : public ArrayTraitsDefaults<T> {
 public:
     static const bool allow_auto_unwrap = false;
     static const size_t depth = ArrayTraits<T>::depth + ArrayDim;
@@ -2065,30 +2064,30 @@ public:
 namespace gnuplotio {
 
 template <typename T>
-struct dont_treat_as_stl_container<arma::Row<T> > {
+struct dont_treat_as_stl_container<arma::Row<T>> {
     typedef boost::mpl::bool_<true> type;
 };
 template <typename T>
-struct dont_treat_as_stl_container<arma::Col<T> > {
+struct dont_treat_as_stl_container<arma::Col<T>> {
     typedef boost::mpl::bool_<true> type;
 };
 template <typename T>
-struct dont_treat_as_stl_container<arma::Mat<T> > {
+struct dont_treat_as_stl_container<arma::Mat<T>> {
     typedef boost::mpl::bool_<true> type;
 };
 template <typename T>
-struct dont_treat_as_stl_container<arma::Cube<T> > {
+struct dont_treat_as_stl_container<arma::Cube<T>> {
     typedef boost::mpl::bool_<true> type;
 };
 template <typename T>
-struct dont_treat_as_stl_container<arma::field<T> > {
+struct dont_treat_as_stl_container<arma::field<T>> {
     typedef boost::mpl::bool_<true> type;
 };
 
 // {{{3 Cube
 
 template <typename T>
-class ArrayTraits<arma::Cube<T> > : public ArrayTraitsDefaults<T> {
+class ArrayTraits<arma::Cube<T>> : public ArrayTraitsDefaults<T> {
     class SliceRange {
     public:
         SliceRange() : p(NULL), col(0), slice(0) {}
@@ -2246,17 +2245,17 @@ public:
 };
 
 template <typename T>
-class ArrayTraits<arma::field<T> > : public ArrayTraits_ArmaMatOrField<arma::field<T>, T> {};
+class ArrayTraits<arma::field<T>> : public ArrayTraits_ArmaMatOrField<arma::field<T>, T> {};
 
 template <typename T>
-class ArrayTraits<arma::Mat<T> > : public ArrayTraits_ArmaMatOrField<arma::Mat<T>, T> {};
+class ArrayTraits<arma::Mat<T>> : public ArrayTraits_ArmaMatOrField<arma::Mat<T>, T> {};
 
 // }}}3
 
 // {{{3 Row
 
 template <typename T>
-class ArrayTraits<arma::Row<T> > : public ArrayTraitsDefaults<T> {
+class ArrayTraits<arma::Row<T>> : public ArrayTraitsDefaults<T> {
 public:
     static const bool allow_auto_unwrap = false;
 
@@ -2273,7 +2272,7 @@ public:
 // {{{3 Col
 
 template <typename T>
-class ArrayTraits<arma::Col<T> > : public ArrayTraitsDefaults<T> {
+class ArrayTraits<arma::Col<T>> : public ArrayTraitsDefaults<T> {
 public:
     static const bool allow_auto_unwrap = false;
 
