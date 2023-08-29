@@ -32,54 +32,55 @@ void animize(string const& inputFile, string const& outputFile) {
     animizeColor.calculateNewValues();
     doStuffsAfterSteps(localTimer, "Determining the new colors for animizing");
 
-    bitmapFilters.determinePenPoints(penPointsBeforeAnimeColor, tempSnippet, 3, 0x08);
-    bitmapFilters.drawPenPoints(penPointsBeforeAnimeColor, tempSnippet, debugSnippet);
+    alba::AprgBitmap::BitmapFilters::determinePenPoints(penPointsBeforeAnimeColor, tempSnippet, 3, 0x08);
+    alba::AprgBitmap::BitmapFilters::drawPenPoints(penPointsBeforeAnimeColor, tempSnippet, debugSnippet);
     doStuffsAfterSteps(
         localTimer, bitmapFilters, debugSnippet, inputFile, "Determining pen points (before anime color)");
 
-    bitmapFilters.determinePenCirclesFromPenPoints(
+    alba::AprgBitmap::BitmapFilters::determinePenCirclesFromPenPoints(
         penCirclesBeforeAnimeColor, penPointsBeforeAnimeColor, tempSnippet, 0x06, 0.90);
     debugSnippet = bitmapFilters.getBlankSnippetWithBackground();
-    bitmapFilters.drawPenCircles(penCirclesBeforeAnimeColor, debugSnippet);
+    alba::AprgBitmap::BitmapFilters::drawPenCircles(penCirclesBeforeAnimeColor, debugSnippet);
     doStuffsAfterSteps(
         localTimer, bitmapFilters, debugSnippet, inputFile, "Determining pen circles (before anime color)");
 
-    bitmapFilters.drawAnimeColor(tempSnippet, animizeColor);
+    alba::AprgBitmap::BitmapFilters::drawAnimeColor(tempSnippet, animizeColor);
     doStuffsAfterSteps(localTimer, bitmapFilters, tempSnippet, inputFile, "Drawing to anime color");
 
-    bitmapFilters.drawWithBlurringDisimilarColors(tempSnippet, 5, 0x02);
+    alba::AprgBitmap::BitmapFilters::drawWithBlurringDisimilarColors(tempSnippet, 5, 0x02);
     doStuffsAfterSteps(localTimer, bitmapFilters, tempSnippet, inputFile, "Blur disimilar colors");
 
-    bitmapFilters.determinePenPoints(penPointsAfterAnimeColor, tempSnippet, 3, 0x08);  // detect pixelation
+    alba::AprgBitmap::BitmapFilters::determinePenPoints(
+        penPointsAfterAnimeColor, tempSnippet, 3, 0x08);  // detect pixelation
     debugSnippet = bitmapFilters.getBlankSnippetWithBackground();
-    bitmapFilters.drawPenPoints(penPointsAfterAnimeColor, tempSnippet, debugSnippet);
+    alba::AprgBitmap::BitmapFilters::drawPenPoints(penPointsAfterAnimeColor, tempSnippet, debugSnippet);
     doStuffsAfterSteps(
         localTimer, bitmapFilters, debugSnippet, inputFile, "Determining pen points (after anime color)");
 
-    bitmapFilters.determinePenCirclesFromPenPoints(
+    alba::AprgBitmap::BitmapFilters::determinePenCirclesFromPenPoints(
         penCirclesAfterAnimeColor, penPointsAfterAnimeColor, tempSnippet, 0x08, 0.60);
     debugSnippet = bitmapFilters.getBlankSnippetWithBackground();
-    bitmapFilters.drawPenCircles(penCirclesAfterAnimeColor, debugSnippet);
+    alba::AprgBitmap::BitmapFilters::drawPenCircles(penCirclesAfterAnimeColor, debugSnippet);
     doStuffsAfterSteps(
         localTimer, bitmapFilters, debugSnippet, inputFile, "Determining pen circles (after anime color)");
 
-    bitmapFilters.drawNonPenPoints(penPointsAfterAnimeColor, tempSnippet, outputSnippet);
+    alba::AprgBitmap::BitmapFilters::drawNonPenPoints(penPointsAfterAnimeColor, tempSnippet, outputSnippet);
     doStuffsAfterSteps(localTimer, bitmapFilters, outputSnippet, inputFile, "Drawing non pen points");
 
     bitmapFilters.drawToFillGapsUsingBlur(outputSnippet, 2);
     doStuffsAfterSteps(localTimer, bitmapFilters, outputSnippet, inputFile, "Drawing to fill gaps");
 
-    bitmapFilters.drawPenCircles(penCirclesAfterAnimeColor, outputSnippet);
+    alba::AprgBitmap::BitmapFilters::drawPenCircles(penCirclesAfterAnimeColor, outputSnippet);
     debugSnippet = bitmapFilters.getBlankSnippetWithBackground();
-    bitmapFilters.drawPenCircles(penCirclesAfterAnimeColor, debugSnippet);
+    alba::AprgBitmap::BitmapFilters::drawPenCircles(penCirclesAfterAnimeColor, debugSnippet);
     doStuffsAfterSteps(localTimer, bitmapFilters, debugSnippet, inputFile, "Drawing pen circles (after anime color)");
 
     animeColorsInPenCircles(penCirclesBeforeAnimeColor, animizeColor);
     doStuffsAfterSteps(localTimer, "Convert pen circles (before anime color) to anime color");
 
-    bitmapFilters.drawPenCircles(penCirclesBeforeAnimeColor, outputSnippet);
+    alba::AprgBitmap::BitmapFilters::drawPenCircles(penCirclesBeforeAnimeColor, outputSnippet);
     debugSnippet = bitmapFilters.getBlankSnippetWithBackground();
-    bitmapFilters.drawPenCircles(penCirclesBeforeAnimeColor, debugSnippet);
+    alba::AprgBitmap::BitmapFilters::drawPenCircles(penCirclesBeforeAnimeColor, debugSnippet);
     doStuffsAfterSteps(localTimer, bitmapFilters, debugSnippet, inputFile, "Drawing pen circles (before anime color)");
 
     bitmapFilters.saveSnippetIntoFileWithFullFilePath(outputSnippet, outputFilePathHandler.getFullPath());

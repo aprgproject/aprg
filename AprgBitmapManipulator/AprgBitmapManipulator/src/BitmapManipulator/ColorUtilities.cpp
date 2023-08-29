@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdint>
+#include <math.h>
 
 using namespace alba::mathHelper;
 using namespace std;
@@ -54,7 +55,7 @@ ColorPercentagesData calculateColorPercentagesData(uint32_t const color) {
 }
 
 double calculateHueDegrees(ColorPercentagesData const& colorPercentagesData) {
-    double hueDegrees;
+    double hueDegrees = NAN;
     if (colorPercentagesData.deltaMaxMinPercentage == 0) {
         hueDegrees = 0;
     } else {
@@ -80,7 +81,7 @@ double calculateHueDegrees(ColorPercentagesData const& colorPercentagesData) {
 }
 
 double calculateColorIntensityDecimal(uint32_t const color) {
-    return (((double)extractRed(color) + extractGreen(color) + extractBlue(color)) / MAX_COLOR_VALUE) / 3;
+    return ((static_cast<double>(extractRed(color)) + extractGreen(color) + extractBlue(color)) / MAX_COLOR_VALUE) / 3;
 }
 
 double calculateLuma601Decimal(uint32_t const color) {
@@ -96,12 +97,12 @@ double calculateLuma709Decimal(uint32_t const color) {
 }
 
 double calculateSaturationColorIntensityDecimal(uint32_t const color) {
-    double result;
+    double result = NAN;
     double colorIntensityDecimal(calculateColorIntensityDecimal(color));
     if (colorIntensityDecimal == 0) {
         result = 0;
     } else {
-        result = 1 - ((double)extractMinForOneColor(color) / MAX_COLOR_VALUE / colorIntensityDecimal);
+        result = 1 - (static_cast<double>(extractMinForOneColor(color)) / MAX_COLOR_VALUE / colorIntensityDecimal);
     }
     return result;
 }
