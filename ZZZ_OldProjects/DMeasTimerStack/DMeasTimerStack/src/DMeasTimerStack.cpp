@@ -239,7 +239,7 @@ void TimerStack::trigExpired(TimerIndex timerIndex) {
 #define MAX_SFN_CYCLE_LEN 4095
 
 EBoolean TimerStack::preRefresh(TSfn const newSfn) {
-    TSfn tmpSfn;
+    TSfn tmpSfn = 0;
     EBoolean retVal = EBoolean_False;
 
     if (DMeas::currSfn < newSfn) {
@@ -323,7 +323,7 @@ EBoolean TimerStack::refresh(const TSfn newSfn) {
 
 EBoolean TimerStack::insert(TSfn const sfn, TimerData const& timerData) {
     MTPRINTF("DMEAS: TimerStack: insert - start\n");
-    TimerIndex timerIndex;
+    TimerIndex timerIndex = 0;
     TimeCounter timerValue = timeOffsetToSFN + sfn;
 
     if (sfn < DMeas::currSfn) {
@@ -344,7 +344,7 @@ EBoolean TimerStack::isValidIterator(TimerIndex const& timerIndex) {
 EBoolean TimerStack::insertMeasurement(
     const DMeas::TimerType timerType, const TimeCounter timeAdvance, const TMeasurementID measurementId,
     const TUserId userId, TimerIndex& timerIndex, TAaSysComSicad const sicadToWait, EFaultId const faultId) {
-    TimerData timerData;
+    TimerData timerData{};
     timerData.timerType = timerType;
     timerData.value.measurement.measurementId = measurementId;
     timerData.value.measurement.userId = userId;
@@ -362,7 +362,7 @@ EBoolean TimerStack::insertMeasurement(
 EBoolean TimerStack::mayIPrint() {
     EBoolean ret = EBoolean_False;
 
-    if (nthFib == 0u) {
+    if (nthFib == 0U) {
         nthFib = (nthFib + 1) % 6;
         ret = EBoolean_True;
     } else {
