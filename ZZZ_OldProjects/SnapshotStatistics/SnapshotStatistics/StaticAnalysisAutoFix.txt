@@ -1,0 +1,9 @@
+2023-08-29T10:35:43
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:36:5: warning: ignoring return value of function declared with 'nodiscard' attribute [clang-diagnostic-unused-result]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:38:5: warning: ignoring return value of function declared with 'nodiscard' attribute [clang-diagnostic-unused-result]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:36:21: warning: Return value of function m_fileExtractor.extractOnceForAllFiles() is not used. [ignoredReturnValue]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:38:21: warning: Return value of function m_fileExtractor.extractOnceForAllFiles() is not used. [ignoredReturnValue]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:116:48: style: Consider using std::find_if algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:36:5: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:38:5: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+DONE!
