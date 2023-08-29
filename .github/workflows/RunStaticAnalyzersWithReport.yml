@@ -8,7 +8,7 @@ on:
       - '**StaticAnalysisReport.txt'
   workflow_dispatch:
     inputs:
-      jobId:
+      staticAnalysisJobId:
         description: 'Job Identifier'
         type: number
         required: true
@@ -39,7 +39,7 @@ jobs:
           determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
           echo "determineCppProjectsPath: [$determineCppProjectsPath]"
           chmod +x "$determineCppProjectsPath"
-          "$determineCppProjectsPath" checkStaticAnalysisFiles "${{ inputs.jobId }}" "${{ env.staticAnalysisFilename }}"
+          "$determineCppProjectsPath" checkStaticAnalysisFiles "${{ inputs.staticAnalysisJobId }}" "${{ env.staticAnalysisFilename }}"
           
           
   runStaticAnalyzersOnCppProjects:
@@ -55,6 +55,8 @@ jobs:
           echo "github.event_name: [${{ github.event_name }}]"
           echo "github.event.action: [${{ github.event.action }}]"
           echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
+          echo "staticAnalysisFilename: [${{ env.staticAnalysisFilename }}]"
+          echo "staticAnalysisJobId: [${{ input.staticAnalysisJobId }}]"
           
       - name: Checkout code
         uses: actions/checkout@v3
@@ -106,7 +108,7 @@ jobs:
           echo "staticAnalysisScriptPath: [$(staticAnalysisScriptPath)]"
           chmod +x "$staticAnalysisScriptPath"
           # 19800 seconds translates to 5 hours and 30 minutes
-          timeout 19800 "$staticAnalysisScriptPath" "${{ inputs.jobId }}" "${{ env.staticAnalysisFilename }}" "${{ needs.determineCppProjects.outputs.projectsToBuild }}" 
+          timeout 19800 "$staticAnalysisScriptPath" "${{ inputs.staticAnalysisJobId }}" "${{ env.staticAnalysisFilename }}" "${{ needs.determineCppProjects.outputs.projectsToBuild }}" 
         
       - name: Commit and Push Reports
         run: |
