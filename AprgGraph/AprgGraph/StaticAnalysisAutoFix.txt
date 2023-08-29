@@ -1,0 +1,27 @@
+2023-08-29T02:16:16
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:29:52: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:111:9: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:111:9: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:116:9: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:116:9: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:121:9: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:121:9: note: Variable 'y' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:126:9: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:126:9: note: Variable 'y' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:224:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:230:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:303:20: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:320:20: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/tst/GraphTests/AprgGraph_unit.cpp:27:35: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/tst/GraphTests/AprgGraph_unit.cpp:27:35: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/tst/GraphTests/AprgGraph_unit.cpp:27:44: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/tst/GraphTests/AprgGraph_unit.cpp:27:46: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/tst/GraphTests/AprgGraph_unit.cpp:27:46: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/tst/GraphTests/AprgGraph_unit.cpp:27:55: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/tst/GraphTests/AprgGraph_unit.cpp:59:35: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/tst/GraphTests/AprgGraph_unit.cpp:59:35: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/tst/GraphTests/AprgGraph_unit.cpp:59:44: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/tst/GraphTests/AprgGraph_unit.cpp:59:46: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/tst/GraphTests/AprgGraph_unit.cpp:59:46: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/tst/GraphTests/AprgGraph_unit.cpp:59:55: note: FIX-IT applied suggested code changes
+DONE!
