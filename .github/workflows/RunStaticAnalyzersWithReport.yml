@@ -41,7 +41,7 @@ jobs:
           if [[ -z $staticAnalysisJobId ]]; then
             lastCommitMessage=$(git log -1 --pretty=%B)
             echo "lastCommitMessage: [$lastCommitMessage]"
-            staticAnalysisJobId=$(echo "$lastCommitMessage" | sed -nE "s|^.*JobId:\[(.*)\].*$|\1|p")
+            staticAnalysisJobId=$(echo "$lastCommitMessage" | sed -nE "s|^.*JobId\[(.*)\].*$|\1|p")
           fi
           echo "staticAnalysisJobId: [$staticAnalysisJobId]"
           echo "staticAnalysisJobId=$staticAnalysisJobId" >> "$GITHUB_ENV"
