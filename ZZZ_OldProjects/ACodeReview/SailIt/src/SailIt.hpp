@@ -21,7 +21,7 @@ public:
     void addAndAnalyzeThisFileToCPlusPlusDatabase(string const& fullPathFile);
 
 private:
-    bool m_isValid;
+    bool m_isValid{};
     FileCPlusPlusDatabasesMap m_fileCPlusPlusDatabasesMap;
     FileFindingsMap m_fileFindingsMap;
     FileDirectoryDatabase m_fileDirectoryDatabase;

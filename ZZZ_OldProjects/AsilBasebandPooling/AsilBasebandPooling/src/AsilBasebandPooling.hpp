@@ -16,7 +16,7 @@ struct BasebandCardsSplitBasedOnNumberOfLcgs {
 };
 
 struct BasebandPoolingResult {
-    bool isSuccessful;
+    bool isSuccessful{};
     KeplerNidToLcgMap keplerNidToLcgMap;
 };
 

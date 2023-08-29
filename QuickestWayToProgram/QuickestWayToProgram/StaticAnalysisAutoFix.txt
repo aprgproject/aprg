@@ -1,0 +1,12 @@
+2023-08-29T06:45:21
+/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/src/NsapHelper.cpp:21:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/src/NsapHelper.cpp:36:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/src/NsapHelper.cpp:73:16: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/tst/QuickestWayToProgram_unit.cpp:31:9: warning: variable 'i' is not initialized [cppcoreguidelines-init-variables]
+/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/tst/QuickestWayToProgram_unit.cpp:31:10: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/tst/QuickestWayToProgram_unit.cpp:32:12: warning: variable 'd' is not initialized [cppcoreguidelines-init-variables]
+/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/tst/QuickestWayToProgram_unit.cpp:18:1: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/tst/QuickestWayToProgram_unit.cpp:32:13: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/tst/QuickestWayToProgram_unit.cpp:33:13: warning: implicit conversion from 'double' to 'int' changes value from 3.5 to 3 [clang-diagnostic-literal-conversion]
+/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/tst/QuickestWayToProgram_unit.cpp:34:13: warning: implicit conversion from 'double' to 'int' changes value from 3.5 to 3 [-Wliteral-conversion]
+DONE!

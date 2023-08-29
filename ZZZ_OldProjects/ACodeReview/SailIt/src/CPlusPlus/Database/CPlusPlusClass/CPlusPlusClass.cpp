@@ -51,7 +51,7 @@ CPlusPlusClassTemplateParameters& CPlusPlusClassTemplateSignature::getTemplatePa
 
 int CPlusPlusClassTemplateSignature::getNumberOfParameters() const { return m_templateParameters.size(); }
 
-CPlusPlusClass::CPlusPlusClass() {}
+CPlusPlusClass::CPlusPlusClass() = default;
 
 CPlusPlusClass::CPlusPlusClass(string const& className) : m_type(CPlusPlusType(className, CPlusPlusTypeType::Class)) {}
 
@@ -89,7 +89,7 @@ void CPlusPlusClass::addNamespace(string const& namespaceName) { m_namespaces.pu
 
 void CPlusPlusClass::addVariable(string const& variableName) { m_variables.push_back(variableName); }
 
-CPlusPlusTemplateClass::CPlusPlusTemplateClass() {}
+CPlusPlusTemplateClass::CPlusPlusTemplateClass() = default;
 
 CPlusPlusTemplateClass::CPlusPlusTemplateClass(
     string const& templateClassName, CPlusPlusClassTemplateSignature const& cPlusPlusClassTemplateSignature)

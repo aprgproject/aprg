@@ -54,7 +54,7 @@ private:
     int m_pointerCount;
     CPlusPlusTypeType m_typeType;
     string m_typeName;
-    int m_templateInstantationIndex;
+    int m_templateInstantationIndex{};
 };
 
 }  // namespace codeReview

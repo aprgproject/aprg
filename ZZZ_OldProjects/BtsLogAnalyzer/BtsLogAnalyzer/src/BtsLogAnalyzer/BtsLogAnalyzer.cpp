@@ -133,7 +133,7 @@ void BtsLogAnalyzer::processFileForMsgQueuingTime(string const& filePath) {
         }
     }
     cout << "TotalMsgQueuingTime: " << totalMsgQueuingTime << " highestMsgQueuingTime: " << highestMsgQueuingTime
-         << " AverageMsgQueuingTime: " << ((double)totalMsgQueuingTime) / numberOfPrints
+         << " AverageMsgQueuingTime: " << (static_cast<double>(totalMsgQueuingTime)) / numberOfPrints
          << " numberOfPrints: " << numberOfPrints << "\n";
 }
 
@@ -500,7 +500,7 @@ string BtsLogAnalyzer::getNumberAfterThisString(string const& mainString, string
     int firstIndexOfFirstString = mainString.find(stringToSearch);
     if (stringHelper::isNotNpos(firstIndexOfFirstString)) {
         int lastIndexOfFirstString = static_cast<int>(firstIndexOfFirstString + stringToSearch.length());
-        int lastIndexOfNumber;
+        int lastIndexOfNumber = 0;
         for (lastIndexOfNumber = lastIndexOfFirstString; stringHelper::isNumber(mainString[lastIndexOfNumber]);
              ++lastIndexOfNumber) {
             ;
@@ -512,7 +512,7 @@ string BtsLogAnalyzer::getNumberAfterThisString(string const& mainString, string
 
 double BtsLogAnalyzer::getComputedAverageDelay() const {
     cout << "totalDelay: " << m_totalDelay << " count: " << m_count << "\n";
-    return (double)m_totalDelay / m_count;
+    return m_totalDelay / m_count;
 }
 
 }  // namespace alba

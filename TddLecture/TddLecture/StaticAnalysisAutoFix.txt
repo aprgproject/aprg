@@ -1,0 +1,4 @@
+2023-08-29T07:05:46
+/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:13:39: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:13:39: note: FIX-IT applied suggested code changes
+DONE!

@@ -222,8 +222,8 @@ TEST(ConstExamplesTest, FunctionMatchingWithConstInFunctionSignatureOfAClassWork
     Foo a;
     Foo const b(a);
 
-    a.myFunction();  // goes to "const"
-    b.myFunction();  // goes to "const"
+    Foo::myFunction();  // goes to "const"
+    Foo::myFunction();  // goes to "const"
 
     // Note: If the member function is const, then you can use it in non const structures to add "const"ness to the
     // operation.
@@ -238,7 +238,7 @@ TEST(ConstExamplesTest, FunctionMatchingWithoutConstInFunctionSignatureOfAClassW
     Foo a;
     // Foo const b(a);
 
-    a.myFunction();  // goes to "non-const"
+    Foo::myFunction();  // goes to "non-const"
     // b.myFunction(); // Error because b is const
 
     // Note: If the member function is non-const, then you cannot use it in const structures.

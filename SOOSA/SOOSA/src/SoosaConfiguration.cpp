@@ -8,7 +8,7 @@ using namespace std;
 
 namespace alba::soosa {
 
-SoosaConfiguration::SoosaConfiguration() {}
+SoosaConfiguration::SoosaConfiguration() = default;
 
 int SoosaConfiguration::getAcceptableLineDeviationForLineModelInPixels() const {
     return m_acceptableLineDeviationForLineModelInPixels;
