@@ -30,7 +30,7 @@ void Lrm::setMaxAmountOfNonDcdsPerFsp(unsigned int const maxAmountOfNonDcdsPerFs
 }
 
 void Lrm::setNumberOfUnallocatedPicPoolsPerLcg(unsigned int const lcgId, unsigned int const numberOfPicPools) {
-    m_lcgToUnallocatedPicPools[lcgId] = (numberOfPicPools != 0u);
+    m_lcgToUnallocatedPicPools[lcgId] = (numberOfPicPools != 0U);
 }
 
 void Lrm::clearLcgToUnallocatedPicPools(unsigned int const lcgId) { m_lcgToUnallocatedPicPools.erase(lcgId); }

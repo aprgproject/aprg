@@ -1,0 +1,15 @@
+2023-08-29T09:08:39
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:33:62: warning: integer literal has suffix 'u', which is not uppercase [hicpp-uppercase-literal-suffix,readability-uppercase-literal-suffix]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:33:63: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:68:10: style: Unused private function: 'Lrm::sortFspBasedPriorityForMcdSelection2' [unusedPrivateFunction]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:70:10: style: Unused private function: 'Lrm::sortFspBasedPriorityForNbicMcdSelection2' [unusedPrivateFunction]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:79:32: style: Unused private function: 'Lrm::selectFspsForCcdMcd2' [unusedPrivateFunction]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:93:32: style: Unused private function: 'Lrm::selectFspsForCcdNbicMcd2' [unusedPrivateFunction]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1177:24: style: Redundant condition: isSharedLcgId. '!A || (A && B)' is equivalent to '!A || B' [redundantCondition]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:873:29: style: Condition 'priorityForDsp1!=priorityForDsp2' is always false [knownConditionTrueFalse]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:866:38: note: priorityForDsp1 is assigned 'getPriorityBasedOnLessUsersAndHsupaCfsForDsp(dsp1)' here.
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:867:84: note: Assignment 'priorityForDsp2=getPriorityBasedOnLessUsersAndHsupaCfsForDsp(dsp1)', assigned value is symbolic=priorityForDsp1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:873:29: note: Condition 'priorityForDsp1!=priorityForDsp2' is always false
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1182:111: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1199:29: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
+DONE!
