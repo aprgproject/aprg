@@ -21,7 +21,7 @@ public:
 private:
     void solve(UnsignedIntegers const& numbers, UnsignedIntegers const& modulos);
     UnsignedInteger m_solutionValue{};
-    UnsignedInteger m_productOfModulos;
+    UnsignedInteger m_productOfModulos{};
 };
 
 }  // namespace alba::math
