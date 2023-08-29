@@ -33,9 +33,9 @@ void MonsterRaceAnalyzer::showNextPossibleWinners(RaceConfiguration const& curre
     BestWinners singleRaceWinners;
     BestWinners dualRaceFirstWinners;
     BestWinners dualRaceSecondWinners;
-    RaceConfiguration bestSingleRace;
-    RaceConfiguration bestDualRaceFirst;
-    RaceConfiguration bestDualRaceSecond;
+    RaceConfiguration bestSingleRace{};
+    RaceConfiguration bestDualRaceFirst{};
+    RaceConfiguration bestDualRaceSecond{};
 
     retrieveBestWinners(bestSingleRace, singleRaceWinners, m_singleRace, currentConfiguration);
     retrieveBestWinners(bestDualRaceFirst, dualRaceFirstWinners, m_dualRaceFirstPlace, currentConfiguration);

@@ -45,7 +45,7 @@ bool Monster::hasStoneCurseSkill() const {
     return result;
 }
 
-RagnarokOnline::RagnarokOnline() {}
+RagnarokOnline::RagnarokOnline() = default;
 
 void RagnarokOnline::retrieveItemDataFromRmsWebpages(string const& directoryPathOfWebPages) {
     AlbaLocalPathHandler directoryPathHandler(directoryPathOfWebPages);
