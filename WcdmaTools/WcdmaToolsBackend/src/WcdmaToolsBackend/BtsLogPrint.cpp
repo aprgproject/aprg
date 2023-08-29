@@ -17,7 +17,7 @@ int const NUMBER_OF_CHARACTER_FOR_FILE = 25;
 int const NUMBER_OF_LETTERS_IN_HARDWARE_TYPE = 3;
 int const NUMBER_OF_NUMBERS_IN_HARDWARE_TYPE = 4;
 
-BtsLogPrint::BtsLogPrint() {}
+BtsLogPrint::BtsLogPrint() = default;
 
 BtsLogPrint::BtsLogPrint(string const& lineInLogs) { analyzeLineInLogs(lineInLogs); }
 
