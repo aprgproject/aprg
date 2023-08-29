@@ -58,7 +58,8 @@ string FileDirectoryDatabase::getFullPathOfFile(string const& baseDirectory, str
         if (isFileInFullPath(fullPathOfFileFromDatabase, fileName)) {
             unsigned int currentLevenshteinDistance =
                 getLevenshteinDistance(whereItShouldBePath, fullPathOfFileFromDatabase);
-            int lengthDifference = abs((int)(whereItShouldBePath.length() - fullPathOfFileFromDatabase.length()));
+            int lengthDifference =
+                abs(static_cast<int>(whereItShouldBePath.length() - fullPathOfFileFromDatabase.length()));
             int currentScore = currentLevenshteinDistance - lengthDifference;
             if (fullPathOfFirstFileFound.empty() || score > currentScore ||
                 (score == currentScore && levenshteinDistance > currentLevenshteinDistance)) {

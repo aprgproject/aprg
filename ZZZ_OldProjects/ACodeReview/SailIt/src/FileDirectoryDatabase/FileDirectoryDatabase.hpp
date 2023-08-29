@@ -23,7 +23,7 @@ public:
 private:
     SetOfDirectories m_directories;
     SetOfFiles m_files;
-    bool m_isNonExistentDirectoriesAllowed;
+    bool m_isNonExistentDirectoriesAllowed{};
 };
 
 }  // namespace codeReview
