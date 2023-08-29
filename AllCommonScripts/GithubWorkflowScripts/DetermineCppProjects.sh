@@ -7,6 +7,7 @@ scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
 scriptOption="$1"
 firstArgument="$2"
+secondArgument="$3"
 cppProjects=""
 
 # Source needed scripts
@@ -39,12 +40,14 @@ elif [[ "$scriptOption" == "checkUserInput" ]]; then
     cppProjects="$cppProjectsFound"
     scriptPrint "$scriptName" "$LINENO" "The C/C++ projects based from user input: [$cppProjects]"
 elif [[ "$scriptOption" == "checkStaticAnalysisFiles" ]]; then
-    staticAnalysisFilename="$firstArgument"
+    staticAnalysisJobIdentifier="$firstArgument"
+    staticAnalysisFilename="$secondArgument"
     scriptPrint "$scriptName" "$LINENO" "Searching C/C++ projects..."
-    scriptPrint "$scriptName" "$LINENO" "Saving results of static analysis to [$staticAnalysisFilename]"
+    scriptPrint "$scriptName" "$LINENO" "The job identifier of the run is [$staticAnalysisJobIdentifier]"
+    scriptPrint "$scriptName" "$LINENO" "The results will be placed on [$staticAnalysisFilename]"
     cppProjectsFound=""
     source "$scriptDirectory/FindCppProjectsForStaticAnalysis.sh"
-    findCppProjectsForStaticAnalysis "$staticAnalysisFilename"
+    findCppProjectsForStaticAnalysis "$staticAnalysisJobIdentifier" "$staticAnalysisFilename"
     cppProjects="$cppProjectsFound"
     scriptPrint "$scriptName" "$LINENO" "The C/C++ projects based from static analysis: [$cppProjects]"
 fi

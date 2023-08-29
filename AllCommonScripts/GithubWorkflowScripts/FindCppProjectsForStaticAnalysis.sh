@@ -7,14 +7,14 @@ findCppProjectsForStaticAnalysis() {
     local staticAnalysisFilename
     scriptName="FindCppProjectsForStaticAnalysis.sh"
     aprgDirectory=$(realpath "$(dirname "$0")/../../")
-    staticAnalysisFilename="$1"
+    jobIdentifierFromRun="$1"
+    staticAnalysisFilename="$2"
     
     # Source needed scripts
     source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
     cppIndicatorFilePath=""
     source "$aprgDirectory/AllCommonScripts/CommonRegex/IndicatorPaths.sh"
     
-    currentDateTime=$(date +%s)
     cppProjectsFound=""
     searchCondition="*$cppIndicatorFilePath"
     scriptPrint "$scriptName" "$LINENO" "Searching directories for C/C++ projects using searchCondition: [$searchCondition]"
@@ -24,21 +24,26 @@ findCppProjectsForStaticAnalysis() {
         cppProject=$(echo "$aprgProjectDirectory" | sed -E "s|^.*$aprgDirectory/(.*)$|\"\1\"|")
         scriptPrint "$scriptName" "$LINENO" "The cppProject: [$cppProject]"
         scriptPrint "$scriptName" "$LINENO" "The static analysis file: [$staticAnalysisOutputPath]"
+        
         if [[ -e $staticAnalysisOutputPath ]]; then
-            scriptPrint "$scriptName" "$LINENO" "The static analysis file exists, proceeding to check when the file was modified..."
-            modifiedDateTime=$(stat -c %Y "$staticAnalysisOutputPath")
-            timeDifference=$((currentDateTime - modifiedDateTime))
-            scriptPrint "$scriptName" "$LINENO" "currentDateTime: [$currentDateTime], modifiedDateTime: [$modifiedDateTime], timeDifference: [$timeDifference]"
-            if [ "$timeDifference" -gt 86400 ]; then
-                scriptPrint "$scriptName" "$LINENO" "The project is ADDED because the static analysis file was modified more than 24 hours ago."
-                cppProjectsFound+="$cppProject,"
+
+            scriptPrint "$scriptName" "$LINENO" "The static analysis file exists, checking the job identifiers..."
+            read -r jobIdentifierLine < "$staticAnalysisOutputPath"
+            jobIdentifierFromFile=$(echo "$jobIdentifierLine" | sed -nE "s|^.*StaticAnalysisJobIdentifier:.*\[(.*)\].*$|\1|p")
+            scriptPrint "$scriptName" "$LINENO" "jobIdentifierFromRun: [$jobIdentifierFromRun], jobIdentifierFromFile: [$jobIdentifierFromFile]"
+
+            if [ "$jobIdentifierFromRun" == "$jobIdentifierFromFile" ]; then
+                scriptPrint "$scriptName" "$LINENO" "The job indentifiers MATCH so the project is NOT ADDED."
             else
-                scriptPrint "$scriptName" "$LINENO" "The project is NOT ADDED because the static analysis file was modified within the last 24 hours."
+                scriptPrint "$scriptName" "$LINENO" "The job indentifiers DO NOT MATCH so the project is ADDED."
+                cppProjectsFound+="$cppProject,"
             fi
+
         else
             scriptPrint "$scriptName" "$LINENO" "The project is ADDED because the static analysis file does not exist."
             cppProjectsFound+="$cppProject,"
         fi
+
     done < <(find "$aprgDirectory" -depth -type f -wholename "$searchCondition" | sort -f)
     
     scriptPrint "$scriptName" "$LINENO" "The cppProjectsFound are: [$cppProjectsFound]"

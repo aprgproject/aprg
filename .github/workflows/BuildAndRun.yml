@@ -9,31 +9,31 @@ on:
     inputs:
       cppProjects:
         description: 'C/C++ Project ("all" for all projects)'
+        type: string
         required: true
         default: 'all'
       cppBuildConfigurations:
         description: 'Build Configurations'
         required: true
         default: '["WindowsLatestMsvc", "WindowsLatestMingw", "UbuntuLatestGcc", "UbuntuLatestClang"]'  #"MacOSLatestClang"
-        type: string
       cppCMakeBuildType:
         description: 'Build Type to use for C/C++ Project'
+        type: choice
         required: true
         default: 'Debug'
-        type: choice
         options:
         - Debug
         - Release
       enableAsan:
         description: 'Enable Address Sanitizer for Ubuntu/Clang'
+        type: boolean
         required: true
         default: false
-        type: boolean
       enableStaticAnalyzers:
         description: 'Enable Static Analyzers for Ubuntu/Clang'
+        type: boolean
         required: true
         default: false
-        type: boolean
 
 
 env:
@@ -176,7 +176,6 @@ jobs:
           echo "github.event_name: [${{ github.event_name }}]"
           echo "github.event.action: [${{ github.event.action }}]"
           echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
-          echo "git latest commit: [$(git log -1 --pretty=%B)]"
           echo "matrix.project: [${{ matrix.project }}]"
           echo "matrix.configurationName: [${{ matrix.configurationName }}]"
           

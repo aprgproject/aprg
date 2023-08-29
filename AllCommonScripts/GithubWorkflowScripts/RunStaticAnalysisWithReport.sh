@@ -6,8 +6,9 @@ scriptDirectory=$(dirname "$scriptPath")
 scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
 buildAndRunScriptPath="$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
-cppProjects="$1"
+staticAnalysisJobIdentifier="$1"
 staticAnalysisFilename="$2"
+cppProjects="$3"
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
@@ -29,12 +30,15 @@ fi
 
 # Create needed functions
 runStaticAnalyzersInDirectory() {
+    local jobIdentifier
     local directoryPath
-    directoryPath="$1"
+    jobIdentifier="$1"
+    directoryPath="$2"
 
     scriptPrint "$scriptName" "$LINENO" "Running Static Analysis in: [$directoryPath]"
     cd "$directoryPath" || exit 1
 
+    echo "StaticAnalysisJobIdentifier: [$jobIdentifier]" >> "$staticAnalysisFilename"
     date +%Y-%m-%dT%H:%M:%S > "$staticAnalysisFilename"
     "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "StaticAnalyzersBuild" "Debug" "Ninja"
     set +e
@@ -55,7 +59,7 @@ for cppProjectDirectory in "${cppProjectDirectories[@]}"; do
     scriptPrint "$scriptName" "$LINENO" "cppProjectDirectory in: [$cppProjectDirectory]"
     cppProjectAbsolutePath=$(realpath "$aprgDirectory/$cppProjectDirectory/")
     scriptPrint "$scriptName" "$LINENO" "cppProjectAbsolutePath in: [$cppProjectAbsolutePath]"
-    runStaticAnalyzersInDirectory "$cppProjectAbsolutePath"
+    runStaticAnalyzersInDirectory "$staticAnalysisJobIdentifier" "$cppProjectAbsolutePath"
     # break after one cpp project to make the job exit before github timeout
     break 
 done
