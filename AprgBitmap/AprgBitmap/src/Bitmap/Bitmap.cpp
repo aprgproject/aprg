@@ -10,13 +10,15 @@ BitmapConfiguration Bitmap::getConfiguration() const { return m_configuration; }
 
 BitmapSnippet Bitmap::createColorFilledSnippetWithSizeOfWholeBitmap(uint8_t const colorByte) const {
     BitmapSnippet snippet(
-        m_configuration.getUpLeftCornerPoint(), m_configuration.getDownRightCornerPoint(), m_configuration);
+        alba::AprgBitmap::BitmapConfiguration::getUpLeftCornerPoint(), m_configuration.getDownRightCornerPoint(),
+        m_configuration);
     snippet.clearAndPutOneColorOnWholeSnippet(colorByte);
     return snippet;
 }
 
 BitmapSnippet Bitmap::getSnippetReadFromFileWholeBitmap() const {
-    return getSnippetReadFromFile(m_configuration.getUpLeftCornerPoint(), m_configuration.getDownRightCornerPoint());
+    return getSnippetReadFromFile(
+        alba::AprgBitmap::BitmapConfiguration::getUpLeftCornerPoint(), m_configuration.getDownRightCornerPoint());
 }
 
 BitmapSnippet Bitmap::getSnippetReadFromFileWithOutOfRangeCoordinates(
@@ -80,13 +82,14 @@ void Bitmap::setSnippetWriteToFile(BitmapSnippet const& snippet) const {
                 int snippetIndex = 0;
 
                 for (int y = offsetInYForStart; y >= offsetInYForEnd && snippetIndex < snippetSize; y--) {
-                    uint64_t fileOffsetForStart = m_configuration.getPixelArrayAddress() +
-                                                  ((uint64_t)m_configuration.getNumberOfBytesPerRowInFile() * y) +
-                                                  byteOffsetInXForStart;
+                    uint64_t fileOffsetForStart =
+                        m_configuration.getPixelArrayAddress() +
+                        (static_cast<uint64_t>(m_configuration.getNumberOfBytesPerRowInFile()) * y) +
+                        byteOffsetInXForStart;
                     char const* pixelDataPointer =
                         static_cast<char const*>(snippet.getPixelDataConstReference().getConstantBufferPointer()) +
                         snippetIndex;
-                    streamFile.seekg(fileOffsetForStart, streamFile.beg);
+                    streamFile.seekg(fileOffsetForStart, std::fstream::beg);
                     streamFile.write(pixelDataPointer, numberOfBytesToBeCopiedForX);
                     snippetIndex += numberOfBytesToBeCopiedForX;
                 }
@@ -123,11 +126,11 @@ void Bitmap::calculateNewCornersBasedOnCenterAndNumberOfBytes(
 }
 
 void Bitmap::adjustToTargetLength(int& low, int& high, int const targetLength, int const maxLength) {
-    if (high - low + 1 < (int)targetLength) {
+    if (high - low + 1 < targetLength) {
         int additionalSizeInX = targetLength - (high - low + 1);
         if ((low - additionalSizeInX) >= 0) {
             low = low - additionalSizeInX;
-        } else if ((int)(high + additionalSizeInX) < maxLength) {
+        } else if ((high + additionalSizeInX) < maxLength) {
             high = high + additionalSizeInX;
         }
     }

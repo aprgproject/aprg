@@ -10,7 +10,7 @@ using namespace std;
 
 namespace alba::ThreeDimensions {
 
-Line::Line() {}
+Line::Line() = default;
 
 Line::Line(Point const& first, Point const& second) {
     double deltaX = second.getX() - first.getX();

@@ -17,7 +17,7 @@ using namespace std;
 
 namespace alba::AprgBitmap {
 
-PenCirclesDrawer::ColorDetails::ColorDetails() {}
+PenCirclesDrawer::ColorDetails::ColorDetails() = default;
 
 bool PenCirclesDrawer::ColorDetails::isEmpty() const { return totalWeight == 0; }
 

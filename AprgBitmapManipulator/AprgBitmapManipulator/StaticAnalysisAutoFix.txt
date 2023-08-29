@@ -1,0 +1,82 @@
+2023-08-29T00:00:52
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:35:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:35:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:36:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:36:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:40:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:40:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:43:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:43:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:47:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:47:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:50:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:50:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:53:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:53:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:55:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:55:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:59:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:59:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:62:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:62:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:66:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:66:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:72:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:72:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:74:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:74:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:80:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:80:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:82:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:82:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimizeColor.cpp:26:15: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimizeColor.cpp:26:30: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimizeColor.cpp:92:20: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/BitmapFilters.cpp:70:46: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/BitmapFilters.cpp:70:46: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/BitmapFilters.cpp:70:72: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/BitmapFilters.cpp:122:9: style: The scope of the variable 'currentLabel' can be reduced. [variableScope]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/BitmapFilters.cpp:404:9: style: The scope of the variable 'currentLabel' can be reduced. [variableScope]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/ColorUtilities.cpp:57:12: warning: variable 'hueDegrees' is not initialized [cppcoreguidelines-init-variables]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/ColorUtilities.cpp:2:1: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/ColorUtilities.cpp:57:22: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/ColorUtilities.cpp:83:14: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/ColorUtilities.cpp:83:14: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/ColorUtilities.cpp:83:39: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/ColorUtilities.cpp:99:12: warning: variable 'result' is not initialized [cppcoreguidelines-init-variables]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/ColorUtilities.cpp:99:18: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/ColorUtilities.cpp:104:23: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/ColorUtilities.cpp:104:23: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/ColorUtilities.cpp:104:59: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/PenCirclesDrawer.cpp:20:33: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/PenCirclesDrawer.cpp:20:48: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.hpp:33:24: style: Unused private function: 'OutwardSnakeLikeTraversal::isPointInCorner' [unusedPrivateFunction]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Utilities.cpp:10:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Utilities.cpp:14:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:19:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:19:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:29:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:29:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:53:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:53:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:54:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:54:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:59:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:59:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:60:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:60:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:73:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:73:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:74:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:74:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:78:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:78:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:100:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:100:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:101:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:101:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:105:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:105:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:125:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/tst/BitmapManipulatorTests/BitmapFilters_unit.cpp:125:5: note: FIX-IT applied suggested code changes
+DONE!

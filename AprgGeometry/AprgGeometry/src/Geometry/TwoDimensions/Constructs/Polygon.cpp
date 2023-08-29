@@ -9,7 +9,7 @@ using namespace std;
 namespace alba::TwoDimensions {
 
 template <int numberOfVertices>
-Polygon<numberOfVertices>::Polygon() {}
+Polygon<numberOfVertices>::Polygon() = default;
 
 template <int numberOfVertices>
 Polygon<numberOfVertices>::Polygon(initializer_list<Point> const& vertices) {

@@ -67,7 +67,7 @@ optional<Circle> BitmapFilters::getPossiblePenCircle(
                 totalPixelCount++;
             });
         if (previousRadius != currentRadius) {
-            double calculatedPenPercentage = (double)similarPixelsCount / totalPixelCount;
+            double calculatedPenPercentage = static_cast<double>(similarPixelsCount) / totalPixelCount;
             if (calculatedPenPercentage < acceptablePenPercentage) {
                 result.emplace(convertBitmapXYToPoint(centerPoint), previousRadius);
                 break;

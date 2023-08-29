@@ -23,7 +23,7 @@ void gatherAndSaveDataInAnimizeColor(string const& bitmapPath) {
     statistics.saveColorData(colorDataPathHandler.getFullPath());
 }
 
-AnimizeColor::AnimizeColor() {}
+AnimizeColor::AnimizeColor() = default;
 
 uint32_t AnimizeColor::getNewColor(uint32_t const originalColor) const {
     HueSaturationLightnessData newHslData(convertColorToHueSaturationLightnessData(originalColor));

@@ -9,15 +9,15 @@ using namespace std;
 namespace alba {
 
 int FrequencyStatistics::calculateNumberOfSamples(FrequencySamples const& samples) {
-    return accumulate(
-        samples.cbegin(), samples.cend(), (int)0, [](int partialResult, FrequencyPair const& frequencyPair) {
-            return partialResult + ((int)frequencyPair.second);
-        });
+    return accumulate(samples.cbegin(), samples.cend(), 0, [](int partialResult, FrequencyPair const& frequencyPair) {
+        return partialResult + (static_cast<int>(frequencyPair.second));
+    });
 }
 
 double FrequencyStatistics::calculateSum(FrequencySamples const& samples) {
     return accumulate(
-        samples.cbegin(), samples.cend(), (double)0, [](double partialResult, FrequencyPair const& frequencyPair) {
+        samples.cbegin(), samples.cend(), static_cast<double>(0),
+        [](double partialResult, FrequencyPair const& frequencyPair) {
             return partialResult + (frequencyPair.first * frequencyPair.second);
         });
 }
@@ -33,7 +33,7 @@ double FrequencyStatistics::calculateMean(FrequencySamples const& samples) {
 
 double FrequencyStatistics::calculateMedian(FrequencySamples const& samples) {
     int numberOfSamples = calculateNumberOfSamples(samples);
-    double medianLocation = ((double)numberOfSamples + 1) / 2;
+    double medianLocation = (static_cast<double>(numberOfSamples) + 1) / 2;
     int rangeOffsetForCurrentValue = 0;
     int previousMinimumValue = 0;
     double previousValue = 0;
@@ -47,7 +47,7 @@ double FrequencyStatistics::calculateMedian(FrequencySamples const& samples) {
         }
         if (previousMinimumValue <= medianLocation &&
             medianLocation <= rangeOffsetForCurrentValue + frequencyPair.second) {
-            result = (((double)previousValue + frequencyPair.first) / 2);
+            result = ((previousValue + frequencyPair.first) / 2);
             break;
         }
         if (frequencyPair.second > 0) {

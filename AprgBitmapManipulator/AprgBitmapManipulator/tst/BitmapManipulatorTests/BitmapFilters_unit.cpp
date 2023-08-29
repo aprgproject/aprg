@@ -16,7 +16,7 @@ TEST(BitmapFiltersTest, DISABLED_BlurringDisimilarColors) {
     BitmapFilters bitmapFilters(sampleFile.getFullPath());
     BitmapSnippet outputSnippet(bitmapFilters.getWholeBitmapSnippet());
 
-    bitmapFilters.drawWithBlurringDisimilarColors(outputSnippet, 5, 0x02);
+    alba::AprgBitmap::BitmapFilters::drawWithBlurringDisimilarColors(outputSnippet, 5, 0x02);
     bitmapFilters.saveSnippetIntoFileInTheSameDirectory(outputSnippet, "santanaPixelatedBlurredOut.bmp");
 }
 
@@ -26,7 +26,7 @@ TEST(BitmapFiltersTest, DISABLED_BlurUsingSnakeLikeTraversal) {
     BitmapFilters bitmapFilters(sampleFile.getFullPath());
     BitmapSnippet outputSnippet(bitmapFilters.getWholeBitmapSnippet());
 
-    bitmapFilters.drawWithBlurUsingSnakeLikeTraversal(outputSnippet, 0x08);
+    alba::AprgBitmap::BitmapFilters::drawWithBlurUsingSnakeLikeTraversal(outputSnippet, 0x08);
     bitmapFilters.saveSnippetIntoFileInTheSameDirectory(outputSnippet, "santanaPixelatedBlurredOut.bmp");
 }
 
@@ -50,14 +50,14 @@ TEST(BitmapFiltersTest, DISABLED_DeterminePenCircles) {
     PenPoints penPoints;
     PenCircles penCircles;
 
-    bitmapFilters.determinePenPoints(penPoints, tempSnippet, 2, 0x08);
-    bitmapFilters.drawPenPoints(penPoints, tempSnippet, outputSnippet);
+    alba::AprgBitmap::BitmapFilters::determinePenPoints(penPoints, tempSnippet, 2, 0x08);
+    alba::AprgBitmap::BitmapFilters::drawPenPoints(penPoints, tempSnippet, outputSnippet);
     bitmapFilters.saveSnippetIntoFileInTheSameDirectory(
         outputSnippet, "JohnMayerVideoBlurredAnimizedColor_1PenPoints.bmp");
 
     outputSnippet = bitmapFilters.getBlankSnippetWithBackground();
-    bitmapFilters.determinePenCirclesFromPenPoints(penCircles, penPoints, tempSnippet, 0x08, 0.80);
-    bitmapFilters.drawPenCircles(penCircles, outputSnippet);
+    alba::AprgBitmap::BitmapFilters::determinePenCirclesFromPenPoints(penCircles, penPoints, tempSnippet, 0x08, 0.80);
+    alba::AprgBitmap::BitmapFilters::drawPenCircles(penCircles, outputSnippet);
     bitmapFilters.saveSnippetIntoFileInTheSameDirectory(
         outputSnippet, "JohnMayerVideoBlurredAnimizedColor_2PenCircles.bmp");
 }
@@ -70,12 +70,12 @@ TEST(BitmapFiltersTest, DISABLED_DeterminePenAndNonPen) {
     BitmapSnippet outputSnippet(bitmapFilters.getBlankSnippetWithBackground());
     PenPoints penPoints;
 
-    bitmapFilters.determinePenPoints(penPoints, tempSnippet, 2, 0x08);
-    bitmapFilters.drawPenPoints(penPoints, tempSnippet, outputSnippet);
+    alba::AprgBitmap::BitmapFilters::determinePenPoints(penPoints, tempSnippet, 2, 0x08);
+    alba::AprgBitmap::BitmapFilters::drawPenPoints(penPoints, tempSnippet, outputSnippet);
     bitmapFilters.saveSnippetIntoFileInTheSameDirectory(outputSnippet, "VeronicaMars_Pen.bmp");
 
     outputSnippet = bitmapFilters.getBlankSnippetWithBackground();
-    bitmapFilters.drawNonPenPoints(penPoints, tempSnippet, outputSnippet);
+    alba::AprgBitmap::BitmapFilters::drawNonPenPoints(penPoints, tempSnippet, outputSnippet);
     bitmapFilters.saveSnippetIntoFileInTheSameDirectory(outputSnippet, "VeronicaMars_NonPen.bmp");
 }
 
@@ -97,12 +97,12 @@ TEST(BitmapFiltersTest, DISABLED_FindPenAndNonPenAndFillNonPenGaps) {
     BitmapSnippet outputSnippet(bitmapFilters.getBlankSnippetWithBackground());
     PenPoints penPoints;
 
-    bitmapFilters.determinePenPoints(penPoints, tempSnippet, 2, 0x08);
-    bitmapFilters.drawPenPoints(penPoints, tempSnippet, outputSnippet);
+    alba::AprgBitmap::BitmapFilters::determinePenPoints(penPoints, tempSnippet, 2, 0x08);
+    alba::AprgBitmap::BitmapFilters::drawPenPoints(penPoints, tempSnippet, outputSnippet);
     bitmapFilters.saveSnippetIntoFileInTheSameDirectory(outputSnippet, "BitmapPenPoints.bmp");
 
     outputSnippet = bitmapFilters.getBlankSnippetWithBackground();
-    bitmapFilters.drawNonPenPoints(penPoints, tempSnippet, outputSnippet);
+    alba::AprgBitmap::BitmapFilters::drawNonPenPoints(penPoints, tempSnippet, outputSnippet);
     bitmapFilters.saveSnippetIntoFileInTheSameDirectory(outputSnippet, "BitmapNonPenPoints.bmp");
 
     outputSnippet = bitmapFilters.getBlankSnippetWithBackground();
@@ -122,7 +122,7 @@ TEST(BitmapFiltersTest, DISABLED_ConvertToAnimeColorWorks) {
     animizeColor.gatherStatistics(inputBitmapFile);
     animizeColor.calculateNewValues();
 
-    bitmapFilters.drawAnimeColor(outputSnippet, animizeColor);
+    alba::AprgBitmap::BitmapFilters::drawAnimeColor(outputSnippet, animizeColor);
     bitmapFilters.saveSnippetIntoFileInTheSameDirectory(outputSnippet, "santana_NonPenFilledGaps_AnimeColor.bmp");
 }
 

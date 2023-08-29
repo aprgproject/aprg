@@ -7,7 +7,7 @@ using namespace std;
 
 namespace alba::AprgBitmap {
 
-BitmapSnippet::BitmapSnippet() {}
+BitmapSnippet::BitmapSnippet() = default;
 
 BitmapSnippet::BitmapSnippet(
     BitmapXY const topLeftCornerPosition, BitmapXY const bottomRightCornerPosition,
@@ -70,9 +70,9 @@ void BitmapSnippet::loadPixelDataFromFileInConfiguration() {
                 m_configuration.getOneRowSizeInBytesFromBytes(byteOffsetInXForStart, byteOffsetInXForEnd));
 
             for (int y = offsetInYForStart; y >= offsetInYForEnd; y--) {
-                uint64_t fileOffsetForStart = m_configuration.getPixelArrayAddress() +
-                                              ((uint64_t)m_configuration.getNumberOfBytesPerRowInFile() * y) +
-                                              byteOffsetInXForStart;
+                uint64_t fileOffsetForStart =
+                    m_configuration.getPixelArrayAddress() +
+                    (static_cast<uint64_t>(m_configuration.getNumberOfBytesPerRowInFile()) * y) + byteOffsetInXForStart;
                 fileReader.moveLocation(fileOffsetForStart);
                 fileReader.saveDataToMemoryBuffer(m_pixelData, numberOfBytesToBeCopiedForX);
             }
@@ -198,7 +198,7 @@ void BitmapSnippet::setPixelAtForMultipleBytePixels(uint8_t* writer, int const i
     uint32_t valueToSave(value);
     int minimumNumberOfBytesForOnePixel = m_configuration.getMinimumNumberOfBytesForOnePixel();
     if (index + minimumNumberOfBytesForOnePixel - 1 < static_cast<int>(m_pixelData.getSize())) {
-        for (int indexForMultipleBytePixel = 0; indexForMultipleBytePixel < (int)minimumNumberOfBytesForOnePixel;
+        for (int indexForMultipleBytePixel = 0; indexForMultipleBytePixel < minimumNumberOfBytesForOnePixel;
              indexForMultipleBytePixel++) {
             *(writer + index + indexForMultipleBytePixel) = valueToSave & AlbaBitConstants::BYTE_MASK;
             valueToSave >>= AlbaBitConstants::BYTE_SIZE_IN_BITS;
