@@ -26,7 +26,7 @@ public:
     using InputToOutputMap = std::map<Minterm, LogicalValue>;
     using ComputationalTable = std::map<Minterm, MintermToImplicantsMap>;
 
-    QuineMcCluskey() {}
+    QuineMcCluskey() = default;
 
     [[nodiscard]] LogicalValue getOutput(Minterm const input) const {
         LogicalValue result(LogicalValue::False);
