@@ -16,6 +16,7 @@ on:
   
 env:
   determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
+  gitAddCommitPushScriptRelativePath: "AllCommonScripts/GithubWorkflowScripts/GitAddCommitPush.sh"
   staticAnalysisScriptRelativePath: "AllCommonScripts/GithubWorkflowScripts/RunStaticAnalysisWithAutoFixes.sh"
   formatCppFilesRelativePath: "AllCommonScripts/ScriptsForCpp/formatCppFiles.sh"
   staticAnalysisFilename: "StaticAnalysisAutoFix.txt"
