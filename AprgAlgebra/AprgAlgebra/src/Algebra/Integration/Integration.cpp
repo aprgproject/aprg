@@ -1033,9 +1033,10 @@ Polynomial Integration::getPartialNumeratorForPartialFractions(int const degree,
 }
 
 string Integration::getNewVariableNameForPartialFractions() {
+    constexpr int MAX_NUMBER_OF_VARIABLES = 1000;
     static int variableCount(0);
     variableCount++;
-    if (variableCount > 999) {
+    if (variableCount > MAX_NUMBER_OF_VARIABLES) {
         variableCount = 0;
     }
 

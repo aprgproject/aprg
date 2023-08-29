@@ -19,7 +19,7 @@ public:
     Function(std::string const& functionName, BaseTerm&& baseTerm, EvaluationFunction const& evaluationFunction);
 
     // rule of five of six
-    ~Function() = default;
+    ~Function() override = default;
     Function(Function const& functionObject);
     Function& operator=(Function const& functionObject);
     Function(Function&& functionObject) = default;

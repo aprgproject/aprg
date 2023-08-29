@@ -44,7 +44,7 @@ public:
     // enabled via a type template parameter
 
     // rule of five or six
-    ~Term() = default;
+    ~Term() override = default;
     Term(Term const& term);
     Term& operator=(Term const& term);
     Term(Term&& term) = default;

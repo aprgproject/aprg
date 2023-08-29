@@ -12,9 +12,9 @@ public:
     OneEquationOneVariableEqualitySolver();
 
 private:
-    void calculateSolution(SolutionSet& solutionSet, Equation const& equation);
-    void calculateForEquation(SolutionSet& solutionSet, Equation const& equation);
-    void calculateForTermAndVariable(Term const& term, std::string const& variableName);
+    void calculateSolution(SolutionSet& solutionSet, Equation const& equation) override;
+    void calculateForEquation(SolutionSet& solutionSet, Equation const& equation) override;
+    void calculateForTermAndVariable(Term const& term, std::string const& variableName) override;
     void addValuesToSolutionSetIfNeeded(SolutionSet& solutionSet, Term const& term, std::string const& variableName);
     void performNewtonMethodToFindSolution(Term const& termToCheck, std::string const& variableNameForSubstitution);
     static NewtonMethod::Function getFunctionToIterate(

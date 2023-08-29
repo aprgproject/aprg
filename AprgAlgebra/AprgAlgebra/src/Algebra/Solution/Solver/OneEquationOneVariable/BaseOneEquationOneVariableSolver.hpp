@@ -10,8 +10,8 @@ namespace alba::algebra {
 class BaseOneEquationOneVariableSolver : public BaseSolver {
 public:
     BaseOneEquationOneVariableSolver() = default;
-    virtual ~BaseOneEquationOneVariableSolver() =
-        default;  // virtual destructor because of virtual functions (vtable exists)
+    // virtual destructor because of virtual functions (vtable exists)
+    virtual ~BaseOneEquationOneVariableSolver() = default;
 
     SolutionSet calculateSolutionAndReturnSolutionSet(Equation const& equation);
 
