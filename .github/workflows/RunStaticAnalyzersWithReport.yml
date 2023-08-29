@@ -10,6 +10,7 @@ on:
   
 env:
   determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
+  gitAddCommitPushScriptRelativePath: "AllCommonScripts/GithubWorkflowScripts/GitAddCommitPush.sh"
   staticAnalysisScriptRelativePath: "AllCommonScripts/GithubWorkflowScripts/RunStaticAnalysisWithReport.sh"
   generateReportScriptRelativePath: "Python/GithubWorkflowScripts/generate_static_analysis_report.py"
   staticAnalysisFilename: "StaticAnalysisReport.txt"
@@ -45,8 +46,10 @@ jobs:
           
       - name: Print Job Details
         run: |
-          echo github.event.action: ${{ github.event.action }}
-          echo github.event_name: ${{ github.event_name }}
+          echo "github.event_name: [${{ github.event_name }}]"
+          echo "github.event.action: [${{ github.event.action }}]"
+          echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
+          echo "git latest commit: [$(git log -1 --pretty=%B)]"
           
       - name: Checkout code
         uses: actions/checkout@v3
@@ -69,11 +72,12 @@ jobs:
           
       - name: Set up Python
         uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
           sudo apt update
-          pip install --upgrade pip
           sudo apt install ninja-build cmake
           echo "cmake version: [$(cmake --version)]"
           echo "ninja version: [$(ninja --version)]"
@@ -88,14 +92,11 @@ jobs:
           echo "clang-tidy version: [$(clang-tidy --version)]"
           echo "cppcheck version: [$(cppcheck --version)]"
           echo "clazy version: [$(clazy --version)]"
-          pip install tabulate
-          echo "tabulate version: [$(pip show tabulate)]"
             
       - name: Build and Run with Static Analyzers with Report
         shell: bash
         continue-on-error: true
         run: |
-          echo "C/C++ Projects to check: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
           staticAnalysisScriptPath=$(realpath "$(pwd)/${{ env.staticAnalysisScriptRelativePath }}")
           echo "staticAnalysisScriptPath: [$(staticAnalysisScriptPath)]"
           chmod +x "$staticAnalysisScriptPath"
@@ -104,17 +105,10 @@ jobs:
         
       - name: Commit and Push Reports
         run: |
-          echo "Performing [git add] to add all versioned files that was changed..."
-          git add -u
-          echo "Performing [git diff] to see the local changes (just showing the first 100 lines):"
-          git diff --cached | head -n 100
-          echo "Performing [git commit] with a message..."
-          git commit -m "APRGPROJECT: Automatic commit for Static Analyzers with Auto Fixes"
-          echo "Performing [git pull] for the last time before "push" to merge with recent commits..."
-          git pull --no-rebase --no-edit
-          echo "Performing [git push]..."
-          git push
-          echo "The git push done has finished, the changes should exist now in the repository."
+          gitAddCommitPushScriptPath=$(realpath "$(pwd)/${{ env.gitAddCommitPushScriptRelativePath }}")
+          echo "gitAddCommitPushScriptPath: [$(gitAddCommitPushScriptPath)]"
+          chmod +x "$gitAddCommitPushScriptPath"
+          "$gitAddCommitPushScriptPath" "WORKFLOW COMMIT: Report from Static Analyzers."
             
       - name: Generate Overall Report
         shell: bash

@@ -2,7 +2,6 @@ import logging
 import os
 import re
 import sys
-from tabulate import tabulate
 
 
 logging.basicConfig(
@@ -20,14 +19,15 @@ def find_files(directory, filename):
     return found_files
 
 
+REPORT_FILENAME = sys.argv[1]
 SCRIPT_DIRECTORY = __file__
+logging.info("Generate Static Analysis Report Script")
 logging.info("The script_directory is [%s]", SCRIPT_DIRECTORY)
 aprg_directory = os.path.abspath(os.path.join(SCRIPT_DIRECTORY, "../../.."))
 logging.info("The aprg_directory is [%s]", aprg_directory)
 
 logging.info("Searching all issues based from different analyzer files...")
 
-REPORT_FILENAME = sys.argv[1]
 reports = find_files(aprg_directory, REPORT_FILENAME)
 if not reports:
     logging.info("The filename [%s] is not found", REPORT_FILENAME)
@@ -61,23 +61,19 @@ logging.info("issue_to_count_map: [%s]", issue_to_count_map)
 for issue, count in issue_to_count_map.items():
     logging.info("issue: [%s] | number of hits: %d", issue, count)
 
-# Generating table
-print("\n")
-logging.info("Printing the data in table:")
-table_data = [[issue, count] for issue, count in issue_to_count_map.items()]
-headers = ["Issue", "Number Of Hits"]
-table = tabulate(table_data, headers=headers, tablefmt="grid")
-print(table)
-
 # Extract issue names and counts for plotting
 print("\n")
-logging.info("Printing the data in bar graph:")
+logging.info("Printing the data in a bar graph:")
 MIN_BAR_LENGTH = 1
 MAX_BAR_LENGTH = 59
 BAR_TO_SCALE = MAX_BAR_LENGTH-MIN_BAR_LENGTH
 max_count = max(issue_to_count_map.values())
-for issue, count in issue_to_count_map.items():
-    display_bar_length = int(
-        BAR_TO_SCALE * (count / max_count)) + MIN_BAR_LENGTH
-    display_bar = "X" * display_bar_length
-    print(f"{issue:<60}: [{display_bar:<{MAX_BAR_LENGTH}}] ({count} hits)")
+with open('StaticAnalysisOverallReport.txt', 'w') as overall_report_file:
+    overall_report_file.write('Static Analysis overall report:\n')
+    for issue, count in issue_to_count_map.items():
+        display_bar_length = int(
+            BAR_TO_SCALE * (count / max_count)) + MIN_BAR_LENGTH
+        display_bar = "X" * display_bar_length
+        overall_report_line = f"{issue:<60}: [{display_bar:<{MAX_BAR_LENGTH}}] ({count} hits)"
+        print(overall_report_line)
+        overall_report_file.write(overall_report_line + "\n")

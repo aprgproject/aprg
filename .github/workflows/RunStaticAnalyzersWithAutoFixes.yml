@@ -45,8 +45,10 @@ jobs:
           
       - name: Print Job Details
         run: |
-          echo github.event.action: ${{ github.event.action }}
-          echo github.event_name: ${{ github.event_name }}
+          echo "github.event_name: [${{ github.event_name }}]"
+          echo "github.event.action: [${{ github.event.action }}]"
+          echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
+          echo "git latest commit: [$(git log -1 --pretty=%B)]"
           
       - name: Checkout code
         uses: actions/checkout@v3
@@ -110,14 +112,7 @@ jobs:
         
       - name: Commit and Push Changes
         run: |
-          echo "Performing [git add] to add all versioned files that was changed..."
-          git add -u
-          echo "Performing [git diff] to see the local changes (just showing the first 100 lines):"
-          git diff --cached | head -n 100
-          echo "Performing [git commit] with a message..."
-          git commit -m "APRGPROJECT: Automatic commit for Static Analyzers with Auto Fixes"
-          echo "Performing [git pull] for the last time before "push" to merge with recent commits..."
-          git pull --no-rebase --no-edit 
-          echo "Performing [git push]..."
-          git push
-          echo "The git push done has finished, the changes should exist now in the repository."
+          gitAddCommitPushScriptPath=$(realpath "$(pwd)/${{ env.gitAddCommitPushScriptRelativePath }}")
+          echo "gitAddCommitPushScriptPath: [$(gitAddCommitPushScriptPath)]"
+          chmod +x "$gitAddCommitPushScriptPath"
+          "$gitAddCommitPushScriptPath" "WORKFLOW COMMIT: Automatic fixes from Static Analyzers."

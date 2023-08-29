@@ -34,7 +34,7 @@ elif [[ "$scriptOption" == "checkUserInput" ]]; then
     userInput="$firstArgument"
     scriptPrint "$scriptName" "$LINENO" "Searching C/C++ projects based from user input: [$userInput]..."
     cppProjectsFound=""
-    source "$scriptDirectory/FindCppProjects.sh"
+    source "$scriptDirectory/FindCppProjectsFromUserInput.sh"
     findCppProjects "$userInput"
     cppProjects="$cppProjectsFound"
     scriptPrint "$scriptName" "$LINENO" "The C/C++ projects based from user input: [$cppProjects]"
@@ -47,12 +47,6 @@ elif [[ "$scriptOption" == "checkStaticAnalysisFiles" ]]; then
     findCppProjectsForStaticAnalysis "$staticAnalysisFilename"
     cppProjects="$cppProjectsFound"
     scriptPrint "$scriptName" "$LINENO" "The C/C++ projects based from static analysis: [$cppProjects]"
-fi
-
-# Put AprgCommon if empty
-if [[ -z $cppProjects ]]; then
-    scriptPrint "$scriptName" "$LINENO" "The cppProjects is empty, adding AprgCommon to check that common functionalities are not broken."
-    cppProjects='"AprgCommon/AprgCommon"'
 fi
 
 # Save environment variables in Github Workflow

@@ -7,10 +7,15 @@ on:
       - '**'
   workflow_dispatch:
     inputs:
-      cppCMakeProjects:
+      cppProjects:
         description: 'C/C++ Project ("all" for all projects)'
         required: true
         default: 'all'
+      cppBuildConfigurations:
+        description: 'Build Configurations'
+        required: true
+        default: '["WindowsLatestMsvc", "WindowsLatestMingw", "UbuntuLatestGcc", "UbuntuLatestClang"]'  #"MacOSLatestClang"
+        type: string
       cppCMakeBuildType:
         description: 'Build Type to use for C/C++ Project'
         required: true
@@ -30,12 +35,14 @@ on:
         default: false
         type: boolean
 
+
 env:
   checkCMakeFilesRelativePath: "AllCommonScripts/ScriptsForCMakeFiles/checkCMakeFiles.sh"
   checkShellScriptsRelativePath: "AllCommonScripts/ScriptsForShellScripts/checkShellScripts.sh"
   checkPythonScriptsRelativePath: "AllCommonScripts/ScriptsForPython/checkPythonScripts.sh"
   determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
   buildAndRunScriptRelativePath: "AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
+  buildConfiguration: ${{ inputs.cppBuildConfigurations != '' && inputs.cppBuildConfigurations || '["WindowsLatestMsvc", "WindowsLatestMingw", "UbuntuLatestGcc", "UbuntuLatestClang"]'}} # ternary operator
   buildType: ${{ inputs.cppCMakeBuildType != '' && inputs.cppCMakeBuildType || 'Debug'}} # ternary operator
   buildDirectory: "GithubBuild"
   windowsEnvironmentScript: "C:/Program Files (x86)/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
@@ -143,13 +150,13 @@ jobs:
           determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
           echo "determineCppProjectsPath: [$determineCppProjectsPath]"
           chmod +x "$determineCppProjectsPath"
-          userInput="${{ inputs.cppCMakeProjects }}"
+          userInput="${{ inputs.cppProjects }}"
           if [[ -z $userInput ]]; then
             echo "User input is empty, [checkGit] is set as argument to script."
             "$determineCppProjectsPath" checkGit
           else
             echo "User input isnot empty, [checkUserInput] is set as argument to script."
-            "$determineCppProjectsPath" checkUserInput "${{ inputs.cppCMakeProjects }}"
+            "$determineCppProjectsPath" checkUserInput "${{ inputs.cppProjects }}"
           fi
 
 
@@ -161,16 +168,18 @@ jobs:
       fail-fast: false
       matrix:
         project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
-        configurationName: ["WindowsLatestMsvc", "WindowsLatestMingw", "UbuntuLatestGcc", "UbuntuLatestClang"] #"MacOSLatestClang"
+        configurationName: ${{ fromJSON(env.buildConfiguration) }}
         exclude: ${{ fromJSON(needs.determineCppProjects.outputs.excludedConfigurations) }}
         
     steps:
       - name: Print Job Details
         run: |
-          echo matrix.project: ${{ matrix.project }}
-          echo matrix.configurationName: ${{ matrix.configurationName }}
-          echo github.event.action: ${{ github.event.action }}
-          echo github.event_name: ${{ github.event_name }}
+          echo "github.event_name: [${{ github.event_name }}]"
+          echo "github.event.action: [${{ github.event.action }}]"
+          echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
+          echo "git latest commit: [$(git log -1 --pretty=%B)]"
+          echo "matrix.project: [${{ matrix.project }}]"
+          echo "matrix.configurationName: [${{ matrix.configurationName }}]"
           
       - name: Checkout code
         uses: actions/checkout@v3

@@ -47,8 +47,8 @@ runStaticAnalyzersInDirectory() {
     echo "DONE!" >> "$staticAnalysisFilename"
     scriptPrint "$scriptName" "$LINENO" "Performing [git add] to [$staticAnalysisFilename]"
     git add "$staticAnalysisFilename"
-    scriptPrint "$scriptName" "$LINENO" "Performing [git diff] to see the local changes (just showing the first 10 lines):"
-    git diff --cached | head -n 10
+    scriptPrint "$scriptName" "$LINENO" "Performing [git diff] to see the local changes (file paths only):"
+    git diff --cached --name-only
 }
 
 # Split the cppProjects into individual items
@@ -61,5 +61,6 @@ for cppProjectDirectory in "${cppProjectDirectories[@]}"; do
     cppProjectAbsolutePath=$(realpath "$aprgDirectory/$cppProjectDirectory/")
     scriptPrint "$scriptName" "$LINENO" "cppProjectAbsolutePath in: [$cppProjectAbsolutePath]"
     runStaticAnalyzersInDirectory "$cppProjectAbsolutePath"
-    break
+    # break after one cpp project to make the job exit before github timeout
+    break 
 done
