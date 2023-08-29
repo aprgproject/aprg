@@ -7,7 +7,7 @@ using namespace std;
 
 namespace alba {
 
-AlbaSackReaderType::AlbaSackReaderType() {}
+AlbaSackReaderType::AlbaSackReaderType() = default;
 
 bool AlbaSackReaderType::isUnion() const { return m_isUnion; }
 

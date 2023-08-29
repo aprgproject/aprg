@@ -32,8 +32,8 @@ void retrieveNumberOfFilesAndDirectoriesFromPath(
 TEST(SampleTest, DestroyOneFileTest) {
     FileDestructor fileDestructor;
     AlbaLocalPathHandler pathHandler(APRG_FILE_DESTRUCTION_TEST_DIRECTORY);
-    unsigned int numberOfFiles;
-    unsigned int numberOfDirectories;
+    unsigned int numberOfFiles = 0;
+    unsigned int numberOfDirectories = 0;
     createAFileInDirectory(pathHandler.getFullPath());
     retrieveNumberOfFilesAndDirectoriesFromPath(pathHandler, numberOfFiles, numberOfDirectories);
     EXPECT_EQ(1U, numberOfFiles);

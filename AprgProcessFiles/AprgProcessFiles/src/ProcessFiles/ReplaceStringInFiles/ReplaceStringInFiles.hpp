@@ -20,7 +20,8 @@ public:
 
     void replaceCToCPlusPlusStylePrintOnDirectories(
         std::string const& inputDirectory, std::string const& outputDirectory);
-    void replaceCToCPlusPlusStylePrintOnFile(std::string const& inputFilePath, std::string const& outputFilePath);
+    static void replaceCToCPlusPlusStylePrintOnFile(
+        std::string const& inputFilePath, std::string const& outputFilePath);
     [[nodiscard]] static std::string getCPlusPlusStylePrintFromC(std::string const& inputString);
 
 private:

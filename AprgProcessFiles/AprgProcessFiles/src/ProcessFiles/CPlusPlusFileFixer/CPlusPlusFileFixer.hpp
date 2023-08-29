@@ -48,7 +48,7 @@ private:
     std::vector<std::string> m_linesAfterTheHeader;
     std::vector<std::string> m_headerListFromAngleBrackets;
     std::set<std::string> m_headerListFromQuotations;
-    bool m_isPragmaOnceFound;
+    bool m_isPragmaOnceFound{};
 };
 
 }  // namespace alba
