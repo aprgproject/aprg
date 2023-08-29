@@ -57,7 +57,7 @@ jobs:
           
           
   runStaticAnalyzersOnCppProjects:
-    name: Run Static Analyzers On C/C++ Projects
+    name: JobId[${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}] Run Static Analyzers with Report
     needs: determineCppProjects
     runs-on: ubuntu-latest
     permissions:
