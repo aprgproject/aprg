@@ -44,7 +44,7 @@ ostream& operator<<(ostream& out, Move const& move) {
 }
 
 istream& operator>>(istream& in, Move& move) {
-    int firstX, firstY, secondX, secondY;
+    int firstX = 0, firstY = 0, secondX = 0, secondY = 0;
     in >> firstX;
     in >> firstY;
     in >> secondX;
