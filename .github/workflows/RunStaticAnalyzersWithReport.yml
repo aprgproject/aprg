@@ -27,11 +27,25 @@ jobs:
     name: Determine CPP Projects
     runs-on: ubuntu-latest
     outputs:
+      staticAnalysisJobId: ${{ steps.idOfGetJobIdStep.outputs.STATIC_ANALYSIS_JOB_ID }}
       projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_CPP_DIRECTORIES }}
     steps:
       - name: Checkout code for changes checking
         id: idOfCheckout
         uses: actions/checkout@v3
+          
+      - name: Get Static Analysis Job Id from Git Or from User Input
+        id: idOfGetJobIdStep
+        run: |
+          staticAnalysisJobId="${{ inputs.staticAnalysisJobId }}" 
+          if [[ -z $staticAnalysisJobId ]]; then
+            lastCommitMessage=$(git log -1 --pretty=%B)
+            echo "lastCommitMessage: [$lastCommitMessage]"
+            staticAnalysisJobId=$(echo "$lastCommitMessage" | sed -nE "s|^.*JobId:\[(.*)\].*$|\1|p")
+          fi
+          echo "staticAnalysisJobId: [$staticAnalysisJobId]"
+          echo "staticAnalysisJobId=$staticAnalysisJobId" >> "$GITHUB_ENV"
+          echo "STATIC_ANALYSIS_JOB_ID=$staticAnalysisJobId" >> "$GITHUB_OUTPUT"
         
       - name: Get C/C++ Projects for Static Analysis
         id: idOfGetCppProjectStep
@@ -39,7 +53,7 @@ jobs:
           determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
           echo "determineCppProjectsPath: [$determineCppProjectsPath]"
           chmod +x "$determineCppProjectsPath"
-          "$determineCppProjectsPath" checkStaticAnalysisFiles "${{ inputs.staticAnalysisJobId }}" "${{ env.staticAnalysisFilename }}"
+          "$determineCppProjectsPath" checkStaticAnalysisFiles "$staticAnalysisJobId" "${{ env.staticAnalysisFilename }}"
           
           
   runStaticAnalyzersOnCppProjects:
@@ -55,8 +69,8 @@ jobs:
           echo "github.event_name: [${{ github.event_name }}]"
           echo "github.event.action: [${{ github.event.action }}]"
           echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
-          echo "env.staticAnalysisFilename: [${{ env.staticAnalysisFilename }}]"
-          echo "inputs.staticAnalysisJobId: [${{ inputs.staticAnalysisJobId }}]"
+          echo "staticAnalysisFilename: [${{ env.staticAnalysisFilename }}]"
+          echo "staticAnalysisJobId: [${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}]"
           
       - name: Checkout code
         uses: actions/checkout@v3
@@ -76,17 +90,6 @@ jobs:
           # git remote -v
         env:
           WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
-          
-      - name: Get Static Analysis Job Id from Git Or from User Input
-        run: |
-          staticAnalysisJobId="${{ inputs.staticAnalysisJobId }}" 
-          if [[ -z $staticAnalysisJobId ]]; then
-            lastCommitMessage=$(git log -1 --pretty=%B)
-            echo "lastCommitMessage: [$lastCommitMessage]"
-            staticAnalysisJobId=$(echo "$lastCommitMessage" | sed -nE "s|^.*JobId:\[(.*)\].*$|\1|p")
-          fi
-          echo "staticAnalysisJobId: [$staticAnalysisJobId]"
-          echo "staticAnalysisJobId=$staticAnalysisJobId" >> "$GITHUB_ENV"
           
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -119,14 +122,14 @@ jobs:
           echo "staticAnalysisScriptPath: [$(staticAnalysisScriptPath)]"
           chmod +x "$staticAnalysisScriptPath"
           # 19800 seconds translates to 5 hours and 30 minutes
-          timeout 19800 "$staticAnalysisScriptPath" "$staticAnalysisJobId" "${{ env.staticAnalysisFilename }}" "${{ needs.determineCppProjects.outputs.projectsToBuild }}" 
+          timeout 19800 "$staticAnalysisScriptPath" "${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}" "${{ env.staticAnalysisFilename }}" "${{ needs.determineCppProjects.outputs.projectsToBuild }}" 
         
       - name: Commit and Push Reports
         run: |
           gitAddCommitPushScriptPath=$(realpath "$(pwd)/${{ env.gitAddCommitPushScriptRelativePath }}")
           echo "gitAddCommitPushScriptPath: [$(gitAddCommitPushScriptPath)]"
           chmod +x "$gitAddCommitPushScriptPath"
-          "$gitAddCommitPushScriptPath" "$staticAnalysisJobId" "WORKFLOW COMMIT: Report from Static Analyzers."
+          "$gitAddCommitPushScriptPath" "${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}" "WORKFLOW COMMIT: Report from Static Analyzers."
             
       - name: Generate Overall Report
         shell: bash
