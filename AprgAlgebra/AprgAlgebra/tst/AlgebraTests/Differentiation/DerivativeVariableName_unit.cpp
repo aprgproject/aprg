@@ -15,7 +15,7 @@ TEST(DerivativeVariableNameTest, ConstructionUsingParameterWorks) {
     EXPECT_EQ("y", derivativeVariableName.getDependentVariable());
 }
 
-TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationWorks_WithOneCharacterVariables) {
+TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationExpressionWorksWithOneCharacterVariables) {
     DerivativeVariableName derivativeVariableName("d[y]/d[x]");
 
     EXPECT_TRUE(derivativeVariableName.isValid());
@@ -24,7 +24,7 @@ TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationWorks_WithOneCh
     EXPECT_EQ("y", derivativeVariableName.getDependentVariable());
 }
 
-TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationWorks_WithMultipleCharacterVariables) {
+TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationExpressionWorksWithMultipleCharacterVariables) {
     DerivativeVariableName derivativeVariableName("d[distance]/d[time]");
 
     EXPECT_TRUE(derivativeVariableName.isValid());
@@ -33,7 +33,9 @@ TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationWorks_WithMulti
     EXPECT_EQ("distance", derivativeVariableName.getDependentVariable());
 }
 
-TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationWorks_WithOneCharacterVariablesAndMultipleNumbers) {
+TEST(
+    DerivativeVariableNameTest,
+    ConstructionUsingLeibnizNotationExpressionWorksWithOneCharacterVariablesAndMultipleNumbers) {
     DerivativeVariableName derivativeVariableName("d32[y]/d[x]32");
 
     EXPECT_TRUE(derivativeVariableName.isValid());
@@ -44,7 +46,7 @@ TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationWorks_WithOneCh
 
 TEST(
     DerivativeVariableNameTest,
-    ConstructionUsingLeibnizNotationWorks_WithMultipleCharacterVariablesAndMultipleNumbers) {
+    ConstructionUsingLeibnizNotationExpressionWorksWithMultipleCharacterVariablesAndMultipleNumbers) {
     DerivativeVariableName derivativeVariableName("d175[distance]/d[time]175");
 
     EXPECT_TRUE(derivativeVariableName.isValid());
@@ -53,13 +55,13 @@ TEST(
     EXPECT_EQ("distance", derivativeVariableName.getDependentVariable());
 }
 
-TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationWorks_WithInvalidFormatResultsToInvalid) {
+TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationExpressionWorksWithInvalidFormatResultsToInvalid) {
     DerivativeVariableName derivativeVariableName("oisuadhfh");
 
     EXPECT_FALSE(derivativeVariableName.isValid());
 }
 
-TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationWorks_WithNotEqualNumbersResultsToInvalid) {
+TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationExpressionWorksWithNotEqualNumbersResultsToInvalid) {
     DerivativeVariableName derivativeVariableName("d175[distance]/d[time]471");
 
     EXPECT_FALSE(derivativeVariableName.isValid());

@@ -37,7 +37,7 @@ TEST(SimplificationUtilitiesTest, SimplifyToACommonDenominatorWorks) {
     EXPECT_TRUE(didItOccurOnTopLevelExpression);
 }
 
-TEST(SimplificationUtilitiesTest, SimplifyToACommonDenominatorWorks_OnExponentPlusPolynomialDenominator) {
+TEST(SimplificationUtilitiesTest, SimplifyToACommonDenominatorWorksOnExponentPlusPolynomialDenominator) {
     Expression expression(createExpressionIfPossible(tokenizeToTerms("2^x+((1)/(x+2))")));
 
     bool didItOccurOnTopLevelExpression =
@@ -48,7 +48,7 @@ TEST(SimplificationUtilitiesTest, SimplifyToACommonDenominatorWorks_OnExponentPl
     EXPECT_TRUE(didItOccurOnTopLevelExpression);
 }
 
-TEST(SimplificationUtilitiesTest, SimplifyToACommonDenominatorWorks_OnExponentWithFractionExpressions) {
+TEST(SimplificationUtilitiesTest, SimplifyToACommonDenominatorWorksOnExponentWithFractionExpressions) {
     Expression expression(createExpressionIfPossible(tokenizeToTerms("2^(((1)/(x+2))+((1)/(x-2)))")));
 
     bool didItOccurOnTopLevelExpression =
