@@ -1,0 +1,4 @@
+2023-08-29T09:24:16
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmDssWcdmaLteLoadMonitoring/LrmDssWcdmaLteLoadMonitoring/src/LrmDssWcdmaLteLoadMonitoring.cpp:5:31: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmDssWcdmaLteLoadMonitoring/LrmDssWcdmaLteLoadMonitoring/src/LrmDssWcdmaLteLoadMonitoring.cpp:7:1: note: FIX-IT applied suggested code changes
+DONE!
