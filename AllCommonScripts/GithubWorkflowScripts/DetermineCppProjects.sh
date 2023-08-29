@@ -26,7 +26,7 @@ scriptPrint "$scriptName" "$LINENO" "The scriptOption is: [$scriptOption]"
 if [[ "$scriptOption" == "checkGit" ]]; then
     scriptPrint "$scriptName" "$LINENO" "Searching C/C++ projects from Git changes..."
     cppProjectsFromGit=""
-    source "$scriptDirectory/DetectGitChanges.sh"
+    source "$scriptDirectory/FindCppProjectsFromGitChanges.sh"
     detectGitChanges
     cppProjects="$cppProjectsFromGit"
     scriptPrint "$scriptName" "$LINENO" "The C/C++ projects based from git changes: [$cppProjects]"
