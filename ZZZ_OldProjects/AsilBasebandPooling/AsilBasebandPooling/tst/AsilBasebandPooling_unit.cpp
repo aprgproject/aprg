@@ -207,7 +207,7 @@ TEST(AsilBasebandPoolingTest, SortAndPrioritizeBasebandCardsIsCorrect) {
         BasebandCard(0x16, {0x1630, 0x1640}),
         BasebandCard(0x17, {0x1730})};
 
-    pooling.sortAndPrioritizeBasebandCards(basebandCards);
+    alba::AsilBasebandPooling::sortAndPrioritizeBasebandCards(basebandCards);
 
     ASSERT_EQ(7U, basebandCards.size());
     EXPECT_EQ(0x14U, basebandCards[0].getBoardId());
@@ -223,7 +223,7 @@ TEST(AsilBasebandPoolingTest, SortAndPrioritizeLcgsIsCorrect) {
     AsilBasebandPooling pooling;
     VectorOfLcgs lcgs{Lcg(1, 10), Lcg(2, 25), Lcg(3, 40), Lcg(4, 25)};
 
-    pooling.sortAndPrioritizeLcgs(lcgs);
+    alba::AsilBasebandPooling::sortAndPrioritizeLcgs(lcgs);
 
     ASSERT_EQ(4U, lcgs.size());
     EXPECT_EQ(3U, lcgs[0].getLcgId());
@@ -240,7 +240,7 @@ TEST(AsilBasebandPoolingTest, AssignBasebandCardsWithOneLcgIsCorrect) {
         BasebandCard(0x12, {0x1230, 0x1240, 0x1250}), BasebandCard(0x13, {0x1330, 0x1340, 0x1350, 0x1360}),
         BasebandCard(0x14, {0x1430, 0x1440, 0x1450, 0x1460, 0x1470}),
         BasebandCard(0x15, {0x1530, 0x1540, 0x1550, 0x1560})};
-    pooling.assignBasebandCardsWithOneLcg(poolingMap, lcgs, basebandCards);
+    alba::AsilBasebandPooling::assignBasebandCardsWithOneLcg(poolingMap, lcgs, basebandCards);
 
     ASSERT_EQ(16U, poolingMap.size());
     EXPECT_EQ(4U, poolingMap.at(0x1230));
@@ -267,7 +267,7 @@ TEST(AsilBasebandPoolingTest, AssignBasebandCardsWithMultipleLcgsIsCorrect) {
     VectorOfLcgs lcgs{Lcg(1, 40), Lcg(2, 30), Lcg(3, 20), Lcg(4, 10)};
     SetOfBasebandCards basebandCards{
         BasebandCard(0x12, {0x1230, 0x1240, 0x1250}), BasebandCard(0x14, {0x1430, 0x1440, 0x1450, 0x1460})};
-    pooling.assignBasebandCardsWithMultipleLcgs(poolingMap, lcgs, basebandCards);
+    alba::AsilBasebandPooling::assignBasebandCardsWithMultipleLcgs(poolingMap, lcgs, basebandCards);
 
     ASSERT_EQ(7U, poolingMap.size());
     EXPECT_EQ(3U, poolingMap.at(0x1230));

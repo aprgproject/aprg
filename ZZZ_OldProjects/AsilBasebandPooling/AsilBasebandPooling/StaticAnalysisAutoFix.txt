@@ -1,0 +1,13 @@
+2023-08-29T07:57:03
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/AsilBasebandPooling.hpp:18:8: warning: constructor does not initialize these fields: isSuccessful [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/AsilBasebandPooling.hpp:19:22: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/AsilBasebandPooling.cpp:55:16: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/tst/AsilBasebandPooling_unit.cpp:210:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/tst/AsilBasebandPooling_unit.cpp:210:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/tst/AsilBasebandPooling_unit.cpp:226:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/tst/AsilBasebandPooling_unit.cpp:226:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/tst/AsilBasebandPooling_unit.cpp:243:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/tst/AsilBasebandPooling_unit.cpp:243:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/tst/AsilBasebandPooling_unit.cpp:270:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/tst/AsilBasebandPooling_unit.cpp:270:5: note: FIX-IT applied suggested code changes
+DONE!
