@@ -1,8 +1,14 @@
-2023-08-28T23:45:52
+StaticAnalysisJobIdentifier: [9]
+2023-08-29T19:47:52
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/AudioManipulator.cpp:27:25: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/AudioManipulator.cpp:40:25: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/NearestSamples.cpp:30:21: style: Condition 'itUpper!=m_valuesToIndexes.cend()' is always true [knownConditionTrueFalse]
-/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/NewSamplesBuilder.cpp:10:42: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
-/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/NewSamplesBuilder.cpp:10:65: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/NewSamplesBuilder.cpp:24:29: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/NewSamplesBuilder.cpp:41:22: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/Utilities.cpp:30:64: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/Utilities.cpp:34:106: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/Utilities.cpp:93:65: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/Utilities.cpp:96:59: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/Utilities.cpp:56:16: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/tst/AudioManipulatorTests/Utilities_unit.cpp:24:63: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 DONE!
