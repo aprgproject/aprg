@@ -284,10 +284,10 @@ public:
 
 class GnuplotFeedback {
 public:
-    GnuplotFeedback() {}
-    virtual ~GnuplotFeedback() {}
-    virtual std::string filename() const = 0;
-    virtual FILE *handle() const = 0;
+    GnuplotFeedback() = default;
+    virtual ~GnuplotFeedback() = default;
+    [[nodiscard]] virtual std::string filename() const = 0;
+    [[nodiscard]] virtual FILE *handle() const = 0;
 
 private:
     // noncopyable
@@ -514,7 +514,7 @@ struct BinarySender<boost::uint64_t> : public FlatBinarySender<boost::uint64_t> 
 // Make char types print as integers, not as characters.
 template <typename T>
 struct CastIntTextSender {
-    static void send(std::ostream &stream, const T &v) { stream << int(v); }
+    static void send(std::ostream &stream, const T &v) { stream << static_cast<int>(v); }
 };
 template <>
 struct TextSender<char> : public CastIntTextSender<char> {};
@@ -858,18 +858,18 @@ class ArrayTraits<T &&> : public ArrayTraits<T> {};
 template <typename TI, typename TV>
 class IteratorRange {
 public:
-    IteratorRange() {}
+    IteratorRange() = default;
     IteratorRange(const TI &_it, const TI &_end) : it(_it), end(_end) {}
 
     static const bool is_container = ArrayTraits<TV>::is_container;
     typedef typename boost::mpl::if_c<is_container, Error_InappropriateDeref, TV>::type value_type;
     typedef typename ArrayTraits<TV>::range_type subiter_type;
 
-    bool is_end() const { return it == end; }
+    [[nodiscard]] bool is_end() const { return it == end; }
 
     void inc() { ++it; }
 
-    value_type deref() const {
+    [[nodiscard]] value_type deref() const {
         GNUPLOT_STATIC_ASSERT_MSG(sizeof(TV) && !is_container, "deref called on nested container");
         if (is_end()) {
             throw std::runtime_error("attepted to dereference past end of iterator");
@@ -877,7 +877,7 @@ public:
         return *it;
     }
 
-    subiter_type deref_subiter() const {
+    [[nodiscard]] subiter_type deref_subiter() const {
         GNUPLOT_STATIC_ASSERT_MSG(sizeof(TV) && is_container, "deref_subiter called on non-nested container");
         if (is_end()) {
             throw std::runtime_error("attepted to dereference past end of iterator");
@@ -920,7 +920,7 @@ class PairOfRange {
     friend void deref_and_print(std::ostream &, const PairOfRange<T, U> &, PrintMode);
 
 public:
-    PairOfRange() {}
+    PairOfRange() = default;
     PairOfRange(const RT &_l, const RU &_r) : l(_l), r(_r) {}
 
     static const bool is_container = RT::is_container && RU::is_container;
@@ -928,7 +928,7 @@ public:
     typedef std::pair<typename RT::value_type, typename RU::value_type> value_type;
     typedef PairOfRange<typename RT::subiter_type, typename RU::subiter_type> subiter_type;
 
-    bool is_end() const {
+    [[nodiscard]] bool is_end() const {
         bool el = l.is_end();
         bool er = r.is_end();
         if (el != er) {
@@ -942,9 +942,9 @@ public:
         r.inc();
     }
 
-    value_type deref() const { return std::make_pair(l.deref(), r.deref()); }
+    [[nodiscard]] value_type deref() const { return std::make_pair(l.deref(), r.deref()); }
 
-    subiter_type deref_subiter() const { return subiter_type(l.deref_subiter(), r.deref_subiter()); }
+    [[nodiscard]] subiter_type deref_subiter() const { return subiter_type(l.deref_subiter(), r.deref_subiter()); }
 
 private:
     RT l;
@@ -1059,7 +1059,7 @@ class VecOfRange {
     friend void deref_and_print(std::ostream &, const VecOfRange<T> &, PrintMode);
 
 public:
-    VecOfRange() {}
+    VecOfRange() = default;
     explicit VecOfRange(const std::vector<RT> &_rvec) : rvec(_rvec) {}
 
     static const bool is_container = RT::is_container;
@@ -1069,8 +1069,10 @@ public:
     typedef std::vector<typename RT::value_type> value_type;
     typedef VecOfRange<typename RT::subiter_type> subiter_type;
 
-    bool is_end() const {
-        if (rvec.empty()) return true;
+    [[nodiscard]] bool is_end() const {
+        if (rvec.empty()) {
+            return true;
+        }
         bool ret = rvec[0].is_end();
         for (size_t i = 1; i < rvec.size(); i++) {
             if (ret != rvec[i].is_end()) {
@@ -1086,7 +1088,7 @@ public:
         }
     }
 
-    value_type deref() const {
+    [[nodiscard]] value_type deref() const {
         value_type ret(rvec.size());
         for (size_t i = 0; i < rvec.size(); i++) {
             ret[i] = rvec[i].deref();
@@ -1094,7 +1096,7 @@ public:
         return ret;
     }
 
-    subiter_type deref_subiter() const {
+    [[nodiscard]] subiter_type deref_subiter() const {
         std::vector<typename RT::subiter_type> subvec(rvec.size());
         for (size_t i = 0; i < rvec.size(); i++) {
             subvec[i] = rvec[i].deref_subiter();
@@ -1133,7 +1135,7 @@ VecOfRange<typename ArrayTraits<T>::range_type::subiter_type> get_columns_range(
 // If this is set, then text-mode data will be sent in a format that is not compatible with
 // gnuplot, but which helps the programmer tell what the library is thinking.  Basically it
 // puts brackets around groups of items and puts a message delineating blocks of data.
-static bool debug_array_print = 0;
+static bool debug_array_print = false;
 
 // This is thrown when an empty container is being plotted.  This exception should always
 // be caught and should not propagate to the user.
@@ -1153,24 +1155,24 @@ public:
 // ModeBinfmt - Sends the gnuplot format code for binary data (e.g. "%double%double")
 // ModeSize   - Sends the size of an array.  Needed when sending binary data.
 struct ModeText {
-    static const bool is_text = 1;
-    static const bool is_binfmt = 0;
-    static const bool is_size = 0;
+    static const bool is_text = true;
+    static const bool is_binfmt = false;
+    static const bool is_size = false;
 };
 struct ModeBinary {
-    static const bool is_text = 0;
-    static const bool is_binfmt = 0;
-    static const bool is_size = 0;
+    static const bool is_text = false;
+    static const bool is_binfmt = false;
+    static const bool is_size = false;
 };
 struct ModeBinfmt {
-    static const bool is_text = 0;
-    static const bool is_binfmt = 1;
-    static const bool is_size = 0;
+    static const bool is_text = false;
+    static const bool is_binfmt = true;
+    static const bool is_size = false;
 };
 struct ModeSize {
-    static const bool is_text = 0;
-    static const bool is_binfmt = 0;
-    static const bool is_size = 1;
+    static const bool is_text = false;
+    static const bool is_binfmt = false;
+    static const bool is_size = true;
 };
 
 // Whether to treat the outermost level of a nested container as columns (column major mode).
@@ -1289,34 +1291,50 @@ typename boost::disable_if_c<T::is_container>::type deref_and_print(std::ostream
 // text mode, put a space between columns.
 template <typename T, typename PrintMode>
 typename boost::enable_if_c<T::is_container>::type deref_and_print(std::ostream &stream, const T &arg, PrintMode) {
-    if (arg.is_end()) throw plotting_empty_container();
+    if (arg.is_end()) {
+        throw plotting_empty_container();
+    }
     typename T::subiter_type subrange = arg.deref_subiter();
-    if (PrintMode::is_binfmt && subrange.is_end()) throw plotting_empty_container();
-    if (debug_array_print && PrintMode::is_text) stream << "{";
+    if (PrintMode::is_binfmt && subrange.is_end()) {
+        throw plotting_empty_container();
+    }
+    if (debug_array_print && PrintMode::is_text) {
+        stream << "{";
+    }
     bool first = true;
     while (!subrange.is_end()) {
-        if (!first && PrintMode::is_text) stream << " ";
+        if (!first && PrintMode::is_text) {
+            stream << " ";
+        }
         first = false;
         deref_and_print(stream, subrange, PrintMode());
         subrange.inc();
     }
-    if (debug_array_print && PrintMode::is_text) stream << "}";
+    if (debug_array_print && PrintMode::is_text) {
+        stream << "}";
+    }
 }
 
 // PairOfRange is treated as columns.  In text mode, put a space between columns.
 template <typename T, typename U, typename PrintMode>
 void deref_and_print(std::ostream &stream, const PairOfRange<T, U> &arg, PrintMode) {
     deref_and_print(stream, arg.l, PrintMode());
-    if (PrintMode::is_text) stream << " ";
+    if (PrintMode::is_text) {
+        stream << " ";
+    }
     deref_and_print(stream, arg.r, PrintMode());
 }
 
 // VecOfRange is treated as columns.  In text mode, put a space between columns.
 template <typename T, typename PrintMode>
 void deref_and_print(std::ostream &stream, const VecOfRange<T> &arg, PrintMode) {
-    if (PrintMode::is_binfmt && arg.rvec.empty()) throw plotting_empty_container();
+    if (PrintMode::is_binfmt && arg.rvec.empty()) {
+        throw plotting_empty_container();
+    }
     for (size_t i = 0; i < arg.rvec.size(); i++) {
-        if (i && PrintMode::is_text) stream << " ";
+        if (i && PrintMode::is_text) {
+            stream << " ";
+        }
         deref_and_print(stream, arg.rvec[i], PrintMode());
     }
 }
@@ -1343,14 +1361,20 @@ void deref_and_print(std::ostream &stream, const VecOfRange<T> &arg, PrintMode) 
 template <size_t Depth, typename T, typename PrintMode>
 typename boost::enable_if_c<(Depth == 1) && !PrintMode::is_size>::type print_block(
     std::ostream &stream, T &arg, PrintMode) {
-    if (PrintMode::is_binfmt && arg.is_end()) throw plotting_empty_container();
+    if (PrintMode::is_binfmt && arg.is_end()) {
+        throw plotting_empty_container();
+    }
     for (; !arg.is_end(); arg.inc()) {
         // print_entry(arg.deref());
         deref_and_print(stream, arg, PrintMode());
         // If asked to print the binary format string, only the first element needs to be
         // looked at.
-        if (PrintMode::is_binfmt) break;
-        if (PrintMode::is_text) stream << std::endl;
+        if (PrintMode::is_binfmt) {
+            break;
+        }
+        if (PrintMode::is_text) {
+            stream << std::endl;
+        }
     }
 }
 
@@ -1359,21 +1383,31 @@ typename boost::enable_if_c<(Depth == 1) && !PrintMode::is_size>::type print_blo
 template <size_t Depth, typename T, typename PrintMode>
 typename boost::enable_if_c<(Depth > 1) && !PrintMode::is_size>::type print_block(
     std::ostream &stream, T &arg, PrintMode) {
-    if (PrintMode::is_binfmt && arg.is_end()) throw plotting_empty_container();
+    if (PrintMode::is_binfmt && arg.is_end()) {
+        throw plotting_empty_container();
+    }
     bool first = true;
     for (; !arg.is_end(); arg.inc()) {
         if (first) {
             first = false;
         } else {
-            if (PrintMode::is_text) stream << std::endl;
+            if (PrintMode::is_text) {
+                stream << std::endl;
+            }
         }
-        if (debug_array_print && PrintMode::is_text) stream << "<block>" << std::endl;
-        if (arg.is_end()) throw plotting_empty_container();
+        if (debug_array_print && PrintMode::is_text) {
+            stream << "<block>" << std::endl;
+        }
+        if (arg.is_end()) {
+            throw plotting_empty_container();
+        }
         typename T::subiter_type sub = arg.deref_subiter();
         print_block<Depth - 1>(stream, sub, PrintMode());
         // If asked to print the binary format string, only the first element needs to be
         // looked at.
-        if (PrintMode::is_binfmt) break;
+        if (PrintMode::is_binfmt) {
+            break;
+        }
     }
 }
 
@@ -1382,7 +1416,9 @@ template <typename T>
 size_t get_range_size(const T &arg) {
     // FIXME - not the fastest way.  Implement a size() method for range.
     size_t ret = 0;
-    for (T i = arg; !i.is_end(); i.inc()) ++ret;
+    for (T i = arg; !i.is_end(); i.inc()) {
+        ++ret;
+    }
     return ret;
 }
 
@@ -1397,7 +1433,9 @@ typename boost::enable_if_c<(Depth == 1) && PrintMode::is_size>::type print_bloc
 template <size_t Depth, typename T, typename PrintMode>
 typename boost::enable_if_c<(Depth > 1) && PrintMode::is_size>::type print_block(
     std::ostream &stream, T &arg, PrintMode) {
-    if (arg.is_end()) throw plotting_empty_container();
+    if (arg.is_end()) {
+        throw plotting_empty_container();
+    }
     // It seems that size for two dimensional arrays needs the fastest varying index first,
     // contrary to intuition.  The gnuplot documentation is not too clear on this point.
     typename T::subiter_type sub = arg.deref_subiter();
@@ -1494,7 +1532,7 @@ struct FileHandleWrapper {
                 std::cerr << "pclose returned error" << std::endl;
             }
         } else {
-            if (fclose(wrapped_fh)) {
+            if (fclose(wrapped_fh) != 0) {
                 std::cerr << "fclose returned error" << std::endl;
             }
         }
@@ -1521,11 +1559,10 @@ private:
         GNUPLOT_MSVC_WARNING_4996_PUSH
         char *from_env = std::getenv("GNUPLOT_IOSTREAM_CMD");
         GNUPLOT_MSVC_WARNING_4996_POP
-        if (from_env && from_env[0]) {
+        if ((from_env != nullptr) && (from_env[0] != 0)) {
             return from_env;
-        } else {
-            return GNUPLOT_DEFAULT_COMMAND;
         }
+        return GNUPLOT_DEFAULT_COMMAND;
     }
 
     static FileHandleWrapper open_cmdline(const std::string &in) {
@@ -1536,13 +1573,16 @@ private:
             GNUPLOT_MSVC_WARNING_4996_PUSH
             FILE *fh = std::fopen(fn.c_str(), "w");
             GNUPLOT_MSVC_WARNING_4996_POP
-            if (!fh) throw(std::ios_base::failure("cannot open file " + fn));
-            return FileHandleWrapper(fh, false);
-        } else {
-            FILE *fh = GNUPLOT_POPEN(cmd.c_str(), "w");
-            if (!fh) throw(std::ios_base::failure("cannot open pipe " + cmd));
-            return FileHandleWrapper(fh, true);
+            if (fh == nullptr) {
+                throw(std::ios_base::failure("cannot open file " + fn));
+            }
+            return {fh, false};
         }
+        FILE *fh = GNUPLOT_POPEN(cmd.c_str(), "w");
+        if (fh == nullptr) {
+            throw(std::ios_base::failure("cannot open pipe " + cmd));
+        }
+        return {fh, true};
     }
 
 public:
@@ -1557,13 +1597,13 @@ public:
 #endif
               ),
           feedback(NULL),
-          tmp_files(),
+
           debug_messages(false) {
         *this << std::scientific << std::setprecision(17);  // refer <iomanip>
     }
 
     explicit Gnuplot(FILE *_fh)
-        : FileHandleWrapper(_fh, 0),
+        : FileHandleWrapper(_fh, false),
           boost::iostreams::stream<boost::iostreams::file_descriptor_sink>(
               fh_fileno(),
 #if BOOST_VERSION >= 104400
@@ -1573,7 +1613,7 @@ public:
 #endif
               ),
           feedback(NULL),
-          tmp_files(),
+
           debug_messages(false) {
         *this << std::scientific << std::setprecision(17);  // refer <iomanip>
     }
@@ -1668,7 +1708,9 @@ public:
     // NOTE: empty filename makes temporary file
     template <typename T, typename OrganizationMode>
     std::string file(const T &arg, std::string filename, OrganizationMode) {
-        if (filename.empty()) filename = make_tmpfile();
+        if (filename.empty()) {
+            filename = make_tmpfile();
+        }
         std::fstream tmp_stream(filename.c_str(), std::fstream::out);
         tmp_stream << std::scientific << std::setprecision(17);
         top_level_array_sender(tmp_stream, arg, OrganizationMode(), ModeText());
@@ -1683,7 +1725,9 @@ public:
     // NOTE: empty filename makes temporary file
     template <typename T, typename OrganizationMode>
     std::string binaryFile(const T &arg, std::string filename, const std::string &arr_or_rec, OrganizationMode) {
-        if (filename.empty()) filename = make_tmpfile();
+        if (filename.empty()) {
+            filename = make_tmpfile();
+        }
         std::fstream tmp_stream(filename.c_str(), std::fstream::out | std::fstream::binary);
         top_level_array_sender(tmp_stream, arg, OrganizationMode(), ModeBinary());
         tmp_stream.close();

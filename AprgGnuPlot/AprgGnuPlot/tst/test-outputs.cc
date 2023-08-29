@@ -144,10 +144,10 @@ TEST(GnuplotIostreamTest, DISABLED_TestOutputs)
 	std::vector<std::vector<std::vector<int> > > vvvi(NX);
 	std::vector<std::vector<std::vector<std::pair<double, int> > > > vvvp(NX);
 	int ai[NX];
-	boost::array<int, NX> bi;
+	boost::array<int, NX> bi{};
 	std::vector<boost::tuple<double, int, int> > v_bt;
 #if GNUPLOT_ENABLE_CXX11
-	std::array<int, NX> si;
+	std::array<int, NX> si{};
 	std::vector<  std::tuple<double, int, int> > v_st;
 #endif
 

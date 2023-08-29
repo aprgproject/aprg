@@ -39,8 +39,8 @@ TEST(GnuplotIostreamTest, DISABLED_ExampleInteractive)
 	// Create field of arrows at random locations.
 	std::vector<boost::tuple<double,double,double,double> > arrows;
 	for(size_t i=0; i<100; i++) {
-		double x = rand() / double(RAND_MAX);
-		double y = rand() / double(RAND_MAX);
+		double x = rand() / static_cast<double>(RAND_MAX);
+		double y = rand() / static_cast<double>(RAND_MAX);
 		arrows.push_back(boost::make_tuple(x, y, 0, 0));
 	}
 

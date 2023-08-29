@@ -290,9 +290,9 @@ void demo_animation() {
 	std::vector<double> pts(N);
 
 	double theta = 0;
-	while(1) {
+	while(true) {
 		for(int i=0; i<N; i++) {
-			double alpha = (double(i)/N-0.5) * 10;
+			double alpha = (static_cast<double>(i)/N-0.5) * 10;
 			pts[i] = sin(alpha*8.0 + theta) * exp(-alpha*alpha/2.0);
 		}
 
@@ -315,8 +315,8 @@ void demo_NaN() {
 
 	std::vector<std::pair<double, double> > xy_pts;
 	for(int i=0; i<100; i++) {
-		double theta = double(i)/100*2*M_PI;
-		if((i/5)%2) {
+		double theta = static_cast<double>(i)/100*2*M_PI;
+		if(((i/5)%2) != 0) {
 			xy_pts.push_back(std::make_pair(
 					std::cos(theta), std::sin(theta)
 				));
@@ -348,7 +348,7 @@ void demo_segments() {
 	for(int j=0; j<10; j++) {
 		std::vector<std::pair<double, double> > segment;
 		for(int i=0; i<5; i++) {
-			double theta = double(j*10+i)/100*2*M_PI;
+			double theta = static_cast<double>(j*10+i)/100*2*M_PI;
 			segment.push_back(std::make_pair(
 					std::cos(theta), std::sin(theta)
 				));

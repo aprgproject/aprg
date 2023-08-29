@@ -1,0 +1,323 @@
+2023-08-29T01:46:39
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:246:7: warning: class 'GnuplotTmpfile' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:285:7: warning: class 'GnuplotFeedback' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:287:5: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:287:23: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:288:13: warning: use '= default' to define a trivial destructor [hicpp-use-equals-default,modernize-use-equals-default]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:288:32: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:289:5: warning: function 'filename' should be marked [[nodiscard]] [modernize-use-nodiscard]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:289:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:290:5: warning: function 'handle' should be marked [[nodiscard]] [modernize-use-nodiscard]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:290:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:676:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:691:45: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:861:5: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:861:21: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:868:5: warning: function 'is_end' should be marked [[nodiscard]] [modernize-use-nodiscard]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:868:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:872:5: warning: function 'deref' should be marked [[nodiscard]] [modernize-use-nodiscard]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:872:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:880:5: warning: function 'deref_subiter' should be marked [[nodiscard]] [modernize-use-nodiscard]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:880:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:923:5: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:923:19: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:931:5: warning: function 'is_end' should be marked [[nodiscard]] [modernize-use-nodiscard]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:931:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1062:5: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1062:18: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1072:5: warning: function 'is_end' should be marked [[nodiscard]] [modernize-use-nodiscard]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1072:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1073:26: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1073:26: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1073:39: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1136:33: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1136:33: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1156:33: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1156:33: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1157:35: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1157:35: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1158:33: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1158:33: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1161:33: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1161:33: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1162:35: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1162:35: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1163:33: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1163:33: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1166:33: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1166:33: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1167:35: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1167:35: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1168:33: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1168:33: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1171:33: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1171:33: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1172:35: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1172:35: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1173:33: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1173:33: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1292:22: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1292:22: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1292:56: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1294:51: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1294:51: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1294:85: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1295:49: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1295:49: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1295:64: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1298:42: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1298:42: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1298:57: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1303:49: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1303:49: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1303:64: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1310:28: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1310:28: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1310:43: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1317:50: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1317:50: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1317:84: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1319:37: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1319:37: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1319:52: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1346:46: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1346:46: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1346:80: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1352:34: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1352:34: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1352:41: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1353:32: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1353:32: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1353:53: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1362:46: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1362:46: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1362:80: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1368:36: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1368:36: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1368:57: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1370:53: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1370:53: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1370:87: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1371:26: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1371:26: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1371:60: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1376:34: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1376:34: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1376:41: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1385:42: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1385:42: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1385:49: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1400:22: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1400:22: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1400:56: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1497:17: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1497:35: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1513:7: warning: class 'Gnuplot' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1524:13: warning: implicit conversion 'char *' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1524:13: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1524:21: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1524:25: warning: implicit conversion 'char' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1524:25: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1524:36: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1526:11: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1526:11: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1526:16: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1539:18: warning: implicit conversion 'FILE *' (aka '_IO_FILE *') -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1539:17: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1539:20: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1539:21: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1539:21: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1539:78: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1540:20: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1540:20: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1540:47: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1541:11: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1541:11: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1541:16: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1543:18: warning: implicit conversion 'FILE *' (aka '_IO_FILE *') -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1543:21: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1544:20: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1560:11: warning: initializer for member 'tmp_files' is redundant [readability-redundant-member-init]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1560:11: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1566:34: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1566:34: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1576:11: warning: initializer for member 'tmp_files' is redundant [readability-redundant-member-init]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1576:11: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1671:30: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1671:30: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1671:57: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1686:30: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1686:30: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1686:57: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:185:1: error: There is an unknown macro here somewhere. Configuration is required. If BOOST_MPL_HAS_XXX_TRAIT_DEF is a macro then please configure it. [unknownMacro]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/AprgGnuPlot/AprgGnuPlot3D.cpp:9:12: warning: C-style casts are discouraged; use static_cast (if needed, the cast may be redundant) [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/AprgGnuPlot/AprgGnuPlot3D.cpp:9:12: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:246:7: warning: class 'GnuplotTmpfile' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:285:7: warning: class 'GnuplotFeedback' defines a default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:676:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:691:45: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1532:7: warning: class 'Gnuplot' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1561:18: warning: implicit conversion 'FILE *' (aka '_IO_FILE *') -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1561:17: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1561:20: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1561:21: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1561:21: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1561:79: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1562:20: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1562:20: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1562:46: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:185:1: error: There is an unknown macro here somewhere. Configuration is required. If BOOST_MPL_HAS_XXX_TRAIT_DEF is a macro then please configure it. [unknownMacro]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:246:7: warning: class 'GnuplotTmpfile' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:285:7: warning: class 'GnuplotFeedback' defines a default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:676:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:691:45: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1532:7: warning: class 'Gnuplot' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:185:1: error: There is an unknown macro here somewhere. Configuration is required. If BOOST_MPL_HAS_XXX_TRAIT_DEF is a macro then please configure it. [unknownMacro]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:246:7: warning: class 'GnuplotTmpfile' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:285:7: warning: class 'GnuplotFeedback' defines a default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:676:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:691:45: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1532:7: warning: class 'Gnuplot' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:29:5: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:29:5: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:30:9: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:30:9: note: Variable 'y' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:57:5: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:57:5: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:58:9: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:58:9: note: Variable 'y' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:246:7: warning: class 'GnuplotTmpfile' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:285:7: warning: class 'GnuplotFeedback' defines a default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:676:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:691:45: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1532:7: warning: class 'Gnuplot' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:18:5: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:18:5: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:40:5: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:40:5: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:76:5: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:76:5: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:77:9: warning: Variable 'z' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:77:9: note: Variable 'z' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:106:5: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:106:5: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:107:9: warning: Variable 'z' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:107:9: note: Variable 'z' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:148:5: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:148:5: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:149:9: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:149:9: note: Variable 'y' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:159:5: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:159:5: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:160:9: warning: Variable 'z' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:160:9: note: Variable 'z' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:246:7: warning: class 'GnuplotTmpfile' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:285:7: warning: class 'GnuplotFeedback' defines a default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:676:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:691:45: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1532:7: warning: class 'Gnuplot' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:246:7: warning: class 'GnuplotTmpfile' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:285:7: warning: class 'GnuplotFeedback' defines a default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:676:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:691:45: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:945:5: warning: function 'deref' should be marked [[nodiscard]] [modernize-use-nodiscard]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:945:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:947:5: warning: function 'deref_subiter' should be marked [[nodiscard]] [modernize-use-nodiscard]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:947:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1090:5: warning: function 'deref' should be marked [[nodiscard]] [modernize-use-nodiscard]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1090:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1098:5: warning: function 'deref_subiter' should be marked [[nodiscard]] [modernize-use-nodiscard]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1098:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1532:7: warning: class 'Gnuplot' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-data-1d.cc:114:1: warning: namespace 'gnuplotio' not terminated with a closing comment [google-readability-namespace-comments,llvm-namespace-comment]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-data-1d.cc:84:11: note: namespace 'gnuplotio' starts here
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:246:7: warning: class 'GnuplotTmpfile' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:285:7: warning: class 'GnuplotFeedback' defines a default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:676:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:691:45: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1532:7: warning: class 'Gnuplot' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-data-2d.cc:101:1: warning: namespace 'gnuplotio' not terminated with a closing comment [google-readability-namespace-comments,llvm-namespace-comment]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-data-2d.cc:71:11: note: namespace 'gnuplotio' starts here
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:246:7: warning: class 'GnuplotTmpfile' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:285:7: warning: class 'GnuplotFeedback' defines a default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:676:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:691:45: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1532:7: warning: class 'Gnuplot' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-interactive.cc:42:23: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-interactive.cc:42:23: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-interactive.cc:43:23: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-interactive.cc:43:23: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:246:7: warning: class 'GnuplotTmpfile' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:285:7: warning: class 'GnuplotFeedback' defines a default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:676:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:691:45: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1532:7: warning: class 'Gnuplot' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:79:2: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:79:2: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:85:2: warning: Variable 'alpha' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:85:2: note: Variable 'alpha' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:102:2: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:102:2: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:108:2: warning: Variable 'alpha' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:108:2: note: Variable 'alpha' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:126:2: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:126:2: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:132:2: warning: Variable 'alpha' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:132:2: note: Variable 'alpha' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:168:2: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:168:2: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:174:2: warning: Variable 'alpha' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:174:2: note: Variable 'alpha' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:191:2: warning: Variable 'alpha' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:191:2: note: Variable 'alpha' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:208:2: warning: Variable 'alpha' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:208:2: note: Variable 'alpha' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:293:8: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:293:8: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:295:20: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:295:20: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:318:18: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:318:18: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:319:6: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:319:6: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:319:13: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:351:19: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/example-misc.cc:351:19: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:246:7: warning: class 'GnuplotTmpfile' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:285:7: warning: class 'GnuplotFeedback' defines a default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:676:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:691:45: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1532:7: warning: class 'Gnuplot' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:246:7: warning: class 'GnuplotTmpfile' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:285:7: warning: class 'GnuplotFeedback' defines a default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:676:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:691:45: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1532:7: warning: class 'Gnuplot' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:246:7: warning: class 'GnuplotTmpfile' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:285:7: warning: class 'GnuplotFeedback' defines a default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:676:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:691:45: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1532:7: warning: class 'Gnuplot' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/test-empty.cc:50:1: warning: non-POD static (basic_string) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:246:7: warning: class 'GnuplotTmpfile' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:285:7: warning: class 'GnuplotFeedback' defines a default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:676:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:691:45: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1532:7: warning: class 'Gnuplot' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/test-noncopyable.cc:37:2: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/test-noncopyable.cc:37:16: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:246:7: warning: class 'GnuplotTmpfile' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:285:7: warning: class 'GnuplotFeedback' defines a default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:517:68: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:517:68: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:676:41: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:691:45: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/gnuplot-iostream.h:1532:7: warning: class 'Gnuplot' defines a non-default destructor, a copy constructor and a copy assignment operator but does not define a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/test-outputs.cc:130:19: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/test-outputs.cc:130:19: warning: C-style casts are discouraged; use static_cast (if needed, the cast may be redundant) [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/test-outputs.cc:147:2: warning: uninitialized record type: 'bi' [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/test-outputs.cc:147:26: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/test-outputs.cc:150:2: warning: uninitialized record type: 'si' [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/test-outputs.cc:150:24: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/test-outputs.cc:53:1: warning: non-POD static (basic_string) [-Wclazy-non-pod-global-static]
+DONE!
