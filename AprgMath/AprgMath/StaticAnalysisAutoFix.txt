@@ -1,21 +1,23 @@
-2023-08-29T03:08:01
+StaticAnalysisJobIdentifier: [9]
+2023-08-29T23:17:45
+/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/Combinatorics/Derangements.cpp:179:65: warning: narrowing conversion from 'unsigned long long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/Combinatorics/Derangements.cpp:183:62: warning: narrowing conversion from 'unsigned long long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/NimGame.cpp:32:13: style: Consider using std::find_if algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SpecificGames/GameWithGraph.cpp:46:13: style: Consider using std::find_if algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SpecificGames/GameWithMaze.cpp:63:13: style: Consider using std::find_if algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SpecificGames/GameWithMaze.cpp:76:70: style: Consider using std::find_if algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SpecificGames/MisereGame.cpp:32:13: style: Consider using std::find_if algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SpecificGames/MisereGame.cpp:64:13: style: Unused variable: minIt [unusedVariable]
+/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SubGames/GrundyGame.cpp:68:55: warning: narrowing conversion from 'alba::math::UnsignedInteger' (aka 'unsigned long long') to signed type 'std::_Deque_iterator::difference_type' (aka 'long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SubGames/GrundyGame.cpp:69:57: warning: narrowing conversion from 'alba::math::UnsignedInteger' (aka 'unsigned long long') to signed type 'std::_Deque_iterator::difference_type' (aka 'long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SubGames/GrundyGame.cpp:70:57: warning: narrowing conversion from 'alba::math::UnsignedInteger' (aka 'unsigned long long') to signed type 'std::_Deque_iterator::difference_type' (aka 'long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SubGames/GrundyGame.cpp:93:17: warning: narrowing conversion from 'unsigned long long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SubGames/GrundyGame.cpp:22:16: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/NumberTheory/ChineseRemainderTheorem.cpp:12:1: warning: constructor does not initialize these fields: m_productOfModulos [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
-/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/NumberTheory/ChineseRemainderTheorem.hpp:24:39: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/NumberTheory/ChineseRemainderTheorem.cpp:29:63: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/NumberTheory/ChineseRemainderTheorem.cpp:29:63: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/NumberTheory/ChineseRemainderTheorem.cpp:29:83: warning: prefer transparent functors 'multiplies<>' [modernize-use-transparent-functors]
-/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/NumberTheory/ModularArithmetic.cpp:143:21: warning: variable 'x' is not initialized [cppcoreguidelines-init-variables]
-/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/NumberTheory/ModularArithmetic.cpp:143:22: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/NumberTheory/ModularArithmetic.cpp:143:24: warning: variable 'y' is not initialized [cppcoreguidelines-init-variables]
-/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/NumberTheory/ModularArithmetic.cpp:143:25: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/NumberTheory/ChineseRemainderTheorem.cpp:29:80: warning: prefer transparent functors 'multiplies<>' [modernize-use-transparent-functors]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/NumberTheory/OtherUtilities.cpp:113:79: warning: prefer transparent functors 'plus<>' [modernize-use-transparent-functors]
+/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/NumberTheory/PrimeAndFactorUtilities.cpp:113:12: warning: narrowing conversion from 'alba::math::UnsignedInteger' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/NumberTheory/PrimeAndFactorUtilities.cpp:113:12: warning: narrowing conversion from 'double' to 'alba::math::UnsignedInteger' (aka 'unsigned long long') [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/NumberTheory/PrimeAndFactorUtilities.cpp:147:49: warning: narrowing conversion from 'alba::math::UnsignedInteger' (aka 'unsigned long long') to signed type 'std::iterator<std::random_access_iterator_tag, bool>::difference_type' (aka 'long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/NumberTheory/PrimeAndFactorUtilities.cpp:90:23: style: Unused variable: primeFactor [unusedVariable]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/Probability/ProbabilityUtilities.cpp:235:20: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/tst/Math/Set/MathSet_unit.cpp:16:1: warning: non-POD static (function) [-Wclazy-non-pod-global-static]
