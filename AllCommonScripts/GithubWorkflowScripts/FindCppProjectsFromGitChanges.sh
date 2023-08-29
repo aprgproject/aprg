@@ -49,10 +49,12 @@ detectGitChanges() {
     # Put AprgCommon if empty
     if [[ -z $cppProjectsFromGit ]]; then
         scriptPrint "$scriptName" "$LINENO" "The cppProjectsFromGit is empty, adding AprgCommon to check that common functionalities are not broken."
-        cppProjectsFromGit="AprgCommon/AprgCommon"
+        # shellcheck disable=SC2089
+        cppProjectsFromGit='"AprgCommon/AprgCommon"'
     fi
     
     # Save the value for Github Workflow
     scriptPrint "$scriptName" "$LINENO" "The cppProjectsFromGit are: [$cppProjectsFromGit]"
+    # shellcheck disable=SC2090
     export cppProjectsFromGit
 }
