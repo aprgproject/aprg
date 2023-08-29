@@ -15,8 +15,8 @@ void SampleComponent::handleMessageEvent(GenericMessage const& genericMessage) {
 }
 
 void SampleComponent::handleTimerEvent(Timer const& timer) {
-    cout << "Handle Timer, timerType: " << convertToString(timer.getType()) << " timerId:" << (int)timer.getId()
-         << "\n";
+    cout << "Handle Timer, timerType: " << convertToString(timer.getType())
+         << " timerId:" << static_cast<int>(timer.getId()) << "\n";
 }
 
 }  // namespace DesignDocumentCreator

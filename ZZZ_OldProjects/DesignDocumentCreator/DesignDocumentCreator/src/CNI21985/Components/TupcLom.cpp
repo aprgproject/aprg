@@ -87,8 +87,8 @@ void TupcLom::handleMessageEvent(GenericMessage const& genericMessage) {
 }
 
 void TupcLom::handleTimerEvent(Timer const& timer) {
-    cout << "Handle Timer, timerType: " << convertToString(timer.getType()) << " timerId:" << (int)timer.getId()
-         << "\n";
+    cout << "Handle Timer, timerType: " << convertToString(timer.getType())
+         << " timerId:" << static_cast<int>(timer.getId()) << "\n";
 }
 
 void TupcLom::handleOtherEvent(OtherEvent const& otherEvent) {
