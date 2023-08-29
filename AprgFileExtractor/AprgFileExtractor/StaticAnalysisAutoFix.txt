@@ -1,2 +1,7 @@
-2023-08-29T01:21:56
+StaticAnalysisJobIdentifier: [9]
+2023-08-29T21:21:38
+/home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:135:65: warning: narrowing conversion from 'std::set<std::basic_string<char>>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:164:65: warning: narrowing conversion from 'std::set<std::basic_string<char>>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.hpp:11:5: warning: use 'using' instead of 'typedef' [modernize-use-using]
+/home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.hpp:11:5: note: FIX-IT applied suggested code changes
 DONE!

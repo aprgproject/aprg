@@ -8,7 +8,7 @@
 namespace alba {
 
 class AprgFileExtractor {
-    typedef std::set<std::string> SetOfFilePaths;
+    using SetOfFilePaths = std::set<std::string>;
 
 public:
     AprgFileExtractor();
