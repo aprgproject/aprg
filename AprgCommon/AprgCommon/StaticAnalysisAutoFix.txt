@@ -1,0 +1,15 @@
+2023-08-29T00:41:33
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Container/AlbaOptional_unit.cpp:188:22: warning: explicitly assigning value of variable of type 'AlbaOptional<int>' to itself [-Wself-assign-overloaded]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Debug/AlbaDebug.hpp:13:2: warning: ("The class AlbaDebug is used. Please remove after your done debugging.") // GCC extension [clang-diagnostic-#warnings]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Debug/AlbaDebug.hpp:13:2: warning: #warning is a language extension [clang-diagnostic-pedantic]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Debug/AlbaDebug.hpp:13:2: warning: #warning is a language extension [-Wpedantic]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Debug/AlbaDebug.hpp:13:2: warning: ("The class AlbaDebug is used. Please remove after your done debugging.") // GCC extension [-W#warnings]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/File/AlbaFileReader.hpp:99:24: warning: shift count >= width of type [clang-diagnostic-shift-count-overflow]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/File/AlbaFileReader.hpp:57:12: note: in instantiation of function template specialization 'alba::AlbaFileReader::getData<unsigned char, 1UL>' requested here
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/File/AlbaFileReader_unit.cpp:276:33: note: in instantiation of function template specialization 'alba::AlbaFileReader::getOneByteData<unsigned char>' requested here
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/File/AlbaFileReader.hpp:99:24: warning: shift count >= width of type [-Wshift-count-overflow]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/File/AlbaFileReader.hpp:57:12: note: in instantiation of function template specialization 'alba::AlbaFileReader::getData<unsigned char, 1UL>' requested here
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/File/AlbaFileReader_unit.cpp:276:33: note: in instantiation of function template specialization 'alba::AlbaFileReader::getOneByteData<unsigned char>' requested here
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Macros/AlbaMacros_unit.cpp:40:9: warning: ALBA_MACROS_TEST_SAMPLE_MACRO1=10000 [clang-diagnostic-#pragma-messages]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Macros/AlbaMacros_unit.cpp:40:9: warning: ALBA_MACROS_TEST_SAMPLE_MACRO1=10000 [-W#pragma-messages]
+DONE!
