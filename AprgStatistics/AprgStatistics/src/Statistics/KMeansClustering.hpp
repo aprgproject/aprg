@@ -19,7 +19,7 @@ public:
     using SamplesGroupPair = std::pair<Sample, int>;
     using SamplesGroupPairs = std::vector<std::pair<Sample, int>>;
 
-    KMeansClustering() {}
+    KMeansClustering() = default;
 
     void clear() { m_samples.clear(); }
 
