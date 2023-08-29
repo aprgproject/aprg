@@ -246,7 +246,7 @@ private:
     MoveBackType m_moveBackType;
     string m_baseDirectory;
     string m_fileName;
-    unsigned int m_uniqueFileId;
+    unsigned int m_uniqueFileId{};
 };
 
 }  // namespace codeReview

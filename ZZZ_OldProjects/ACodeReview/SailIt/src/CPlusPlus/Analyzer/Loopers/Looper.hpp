@@ -64,7 +64,7 @@ private:
     LooperIndex m_endIndex;
     DequeOfTerms& m_terms;
     UniqueId m_uniqueGroupId;
-    UniqueId m_uniqueId;
+    UniqueId m_uniqueId{};
     static UniqueId s_objectCount;
     static ActiveLoopersMap s_activeLoopers;
 };

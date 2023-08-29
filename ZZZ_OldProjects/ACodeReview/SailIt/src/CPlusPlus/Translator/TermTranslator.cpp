@@ -134,8 +134,8 @@ bool TermTranslator::hasMacro(string& lineString, int& index) {
 bool TermTranslator::hasStringConstant(string& lineString, int& index) {
     if (QUOTATION_CHAR == lineString[index]) {
         string stringLiteral(QUOTATION_STRING);
-        int slashCharacterIndex;
-        int slashCount;
+        int slashCharacterIndex = 0;
+        int slashCount = 0;
         index++;
         do {
             stringLiteral += readAndAccumulateUntilStringIfFound(lineString, index, QUOTATION_STRING);
@@ -155,8 +155,8 @@ bool TermTranslator::hasStringConstant(string& lineString, int& index) {
 bool TermTranslator::hasCharacterConstant(string& lineString, int& index) {
     if (APOSTROPHE_CHAR == lineString[index]) {
         string stringLiteral(APOSTROPHE_STRING);
-        int slashCharacterIndex;
-        int slashCount;
+        int slashCharacterIndex = 0;
+        int slashCount = 0;
         index++;
         do {
             stringLiteral += readAndAccumulateUntilStringIfFound(lineString, index, APOSTROPHE_STRING);

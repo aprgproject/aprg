@@ -111,7 +111,7 @@ TEST(CMakeDatabaseTest, SearchCMakeFileDirectoryInnerDirection) {
     sub3.addFileOrDirectory(directory + "directoryAsub3\\");
     sub3.addFileOrDirectory(directory + "directoryBsub3\\");
 
-    bool isFound;
+    bool isFound = 0;
     string correctFullPath;
     CMakeDatabase& foundCMakeDatabase = mainDirectory.find_InnerDirection("file2sub2", isFound, correctFullPath);
     ASSERT_TRUE(isFound);
@@ -164,7 +164,7 @@ TEST(CMakeDatabaseTest, SearchCMakeFileDirectoryOuterDirection) {
     sub3.addFileOrDirectory(directory + "directoryAsub3\\");
     sub3.addFileOrDirectory(directory + "directoryBsub3\\");
 
-    bool isFound;
+    bool isFound = 0;
     string correctFullPath;
     CMakeDatabase& foundCMakeDatabase = sub3.find_OuterDirection("file2sub2", isFound, correctFullPath);
     ASSERT_TRUE(isFound);

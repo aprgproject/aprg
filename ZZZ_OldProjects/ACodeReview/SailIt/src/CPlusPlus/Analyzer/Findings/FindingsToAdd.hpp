@@ -9,4 +9,4 @@ enum class FindingsToAdd {
     UnexpectsNewLineAndUnexpectsWhiteSpace
 };
 
-}
+}  // namespace codeReview

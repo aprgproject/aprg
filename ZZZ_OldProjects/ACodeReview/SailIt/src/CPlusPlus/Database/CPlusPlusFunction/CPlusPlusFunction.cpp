@@ -8,7 +8,7 @@ using namespace std;
 
 namespace codeReview {
 
-CPlusPlusFunction::CPlusPlusFunction() {}
+CPlusPlusFunction::CPlusPlusFunction() = default;
 
 void CPlusPlusFunction::printSignatures() const {
     for (CPlusPlusFunctionSignature const& signature : m_signatures) {
