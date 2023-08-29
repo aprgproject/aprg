@@ -45,7 +45,7 @@ runStaticAnalyzersInDirectory() {
     "$buildAndRunScriptPath" cleanAndConfigureWithStaticAnalyzersWithAutoFix "StaticAnalyzersBuild" "Debug" "Ninja"
     set +e
     # "note" is added in the grep to cover "FIX-IT"
-    "$buildAndRunScriptPath" buildOnOneCore "StaticAnalyzersBuild" "Debug" | grep -P "^.*$directoryPath.* (note|style|warning|error): .*$" | tee -a "$staticAnalysisFilename"
+    timeout 1 "$buildAndRunScriptPath" buildOnOneCore "StaticAnalyzersBuild" "Debug" | grep -P "^.*$directoryPath.* (note|style|warning|error): .*$" | tee -a "$staticAnalysisFilename"
     set -e
     
     echo "DONE!" >> "$staticAnalysisFilename"

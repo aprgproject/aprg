@@ -153,9 +153,9 @@ void AprgGraph::drawFunctionUsingY(uint32_t const color, FunctionWithDoubles con
 void AprgGraph::drawNumberLabel(
     LabelType const labelType, Point const& bitmapPointNumberPosition, double const number) {
     string label(m_numberToStringConverter.convertToString(number));
+    constexpr int widthOfCharacter = 12;
+    constexpr int heightOfCharacter = 20;
     int labelCharacterLength = label.length();
-    int widthOfCharacter = 12;
-    int heightOfCharacter = 20;
     int startPositionInX = 0, startPositionInY = 0;
     int numberPositionInX = static_cast<int>(round(bitmapPointNumberPosition.getX()));
     int numberPositionInY = static_cast<int>(round(bitmapPointNumberPosition.getY()));

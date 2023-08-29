@@ -24,7 +24,8 @@ gitPushExitStatus=1
 while [ "$retries" -lt "$maxRetries" ] && [ "$gitPushExitStatus" -ne 0 ]; do
     scriptPrint "$scriptName" "$LINENO" "The current number of retries: [$retries], the max number of retries: [$maxRetries]."
     scriptPrint "$scriptName" "$LINENO" "Performing [git pull] before [push] to merge with recent commits..."
-    git pull --no-rebase --no-edit -m "Automatic merging of [$commitMessage]"
+    git pull --no-rebase --no-edit
+    git commit --amend -m "$commitMessage"
 
     set +e
     scriptPrint "$scriptName" "$LINENO" "Performing [git push]..."
