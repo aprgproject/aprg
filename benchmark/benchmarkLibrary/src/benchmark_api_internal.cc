@@ -4,8 +4,7 @@
 
 #include "string_util.h"
 
-namespace benchmark {
-namespace internal {
+namespace benchmark::internal {
 
 BenchmarkInstance::BenchmarkInstance(Benchmark* benchmark, int family_idx,
                                      int per_family_instance_idx,
@@ -90,5 +89,4 @@ State BenchmarkInstance::Run(
   return st;
 }
 
-}  // namespace internal
 }  // namespace benchmark

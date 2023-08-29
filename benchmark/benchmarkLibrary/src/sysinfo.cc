@@ -242,7 +242,7 @@ int CountSetBitsInCPUMap(std::string Val) {
     CPUMask Mask(benchmark::stoul(Part, nullptr, 16));
     return static_cast<int>(Mask.count());
   };
-  size_t Pos;
+  size_t Pos = 0;
   int total = 0;
   while ((Pos = Val.find(',')) != std::string::npos) {
     total += CountBits(Val.substr(0, Pos));
@@ -548,7 +548,7 @@ double GetCPUCyclesPerSecond(CPUInfo::Scaling scaling) {
   (void)scaling;
 
 #if defined BENCHMARK_OS_LINUX || defined BENCHMARK_OS_CYGWIN
-  long freq;
+  long freq = 0;
 
   // If the kernel is exporting the tsc frequency use that. There are issues
   // where cpuinfo_max_freq cannot be relied on because the BIOS may be

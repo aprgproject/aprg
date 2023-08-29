@@ -98,16 +98,15 @@ std::string FormatString(const char* msg, va_list args) {
 
   if (ret == 0) {  // handle empty expansion
     return {};
-  } if (static_cast<size_t>(ret) < size)
+  } if (static_cast<size_t>(ret) < size) {
     return local_buff;
-  else {
-    // we did not provide a long enough buffer on our first attempt.
+  }     // we did not provide a long enough buffer on our first attempt.
     size = (size_t)ret + 1;  // + 1 for the null byte
     std::unique_ptr<char[]> buff(new char[size]);
     ret = vsnprintf(buff.get(), size, msg, args);
     BM_CHECK(ret > 0 && ((size_t)ret) < size);
     return buff.get();
-  }
+ 
 }
 
 std::string FormatString(const char* msg, ...) {
@@ -150,7 +149,7 @@ void ColorPrintf(std::ostream& out, LogColor color, const char* fmt,
   SetConsoleTextAttribute(stdout_handle, old_color_attrs);
 #else
   const char* color_code = GetPlatformColorCode(color);
-  if (color_code) { out << FormatString("\033[0;3%sm", color_code);
+  if (color_code != nullptr) { out << FormatString("\033[0;3%sm", color_code);
 }
   out << FormatString(fmt, args) << "\033[m";
 #endif
@@ -176,7 +175,7 @@ bool IsColorTerminal() {
 
   bool term_supports_color = false;
   for (const char* candidate : SUPPORTED_TERM_VALUES) {
-    if (term && 0 == strcmp(term, candidate)) {
+    if ((term != nullptr) && 0 == strcmp(term, candidate)) {
       term_supports_color = true;
       break;
     }

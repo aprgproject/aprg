@@ -104,7 +104,7 @@ std::string ExponentToPrefix(int64_t exponent, bool iec) {
 std::string ToBinaryStringFullySpecified(double value, double threshold,
                                          int precision, double one_k = 1024.0) {
   std::string mantissa;
-  int64_t exponent;
+  int64_t exponent = 0;
   ToExponentAndMantissa(value, threshold, precision, one_k, &mantissa,
                         &exponent);
   return mantissa + ExponentToPrefix(exponent, false);
@@ -133,7 +133,7 @@ std::string StrFormatImp(const char* msg, va_list args) {
 
   // TODO(ericwf): use std::array for first attempt to avoid one memory
   // allocation guess what the size might be
-  std::array<char, 256> local_buff;
+  std::array<char, 256> local_buff{};
   std::size_t size = local_buff.size();
   // 2015-10-08: vsnprintf is used instead of snd::vsnprintf due to a limitation
   // in the android-ndk

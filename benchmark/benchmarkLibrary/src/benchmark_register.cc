@@ -84,7 +84,7 @@ class BenchmarkFamilies {
                       std::ostream* Err);
 
  private:
-  BenchmarkFamilies() {}
+  BenchmarkFamilies() = default;
 
   std::vector<std::unique_ptr<Benchmark>> families_;
   Mutex mutex_;
@@ -221,7 +221,7 @@ Benchmark::Benchmark(const char* name)
   ComputeStatistics("cv", StatisticsCV, kPercentage);
 }
 
-Benchmark::~Benchmark() {}
+Benchmark::~Benchmark() = default;
 
 Benchmark* Benchmark::Name(const std::string& name) {
   SetName(name.c_str());
