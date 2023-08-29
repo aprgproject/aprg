@@ -28,7 +28,7 @@ namespace KickStart_2019_PracticeRound_P2_Mural {
 #endif
 
 void runTestCase(int const testCaseNumber) {
-    int numberOfSections;
+    int numberOfSections = 0;
     my_cin >> numberOfSections;
     string scoresString;
     my_cin >> scoresString;
@@ -72,7 +72,7 @@ void runTestCase(int const testCaseNumber)
 }*/
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

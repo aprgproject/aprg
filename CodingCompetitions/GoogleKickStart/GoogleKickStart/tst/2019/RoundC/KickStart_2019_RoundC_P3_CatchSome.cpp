@@ -37,7 +37,7 @@ struct ColorDetail {
 using ColorDetails = vector<ColorDetail>;
 
 void runTestCase(int const testCaseNumber) {
-    int numberOfDogs, targetNumberOfObserves;
+    int numberOfDogs = 0, targetNumberOfObserves = 0;
     my_cin >> numberOfDogs >> targetNumberOfObserves;
     vector<int> positionsOfDogs(numberOfDogs);
     vector<int> colorsOfDogs(numberOfDogs);
@@ -82,7 +82,7 @@ void runTestCase(int const testCaseNumber) {
         for (int colorIndex = 0; colorIndex < numberOfColors; colorIndex++) {
             Distances const& distances(colorDetails[colorIndex].distances);
             if (colorIndex == 0) {
-                if (currentNumberOfObserves <= (int)distances.size()) {
+                if (currentNumberOfObserves <= static_cast<int>(distances.size())) {
                     int distance(distances[currentNumberOfObserves - 1]);
                     int& savedTimeWithLast(savedTimesWithLast[getIndex(currentNumberOfObserves, 0)]);
                     int& savedTimeWithoutLast(savedTimesWithoutLast[getIndex(currentNumberOfObserves, 0)]);
@@ -90,7 +90,7 @@ void runTestCase(int const testCaseNumber) {
                     savedTimeWithoutLast = min(savedTimeWithoutLast, 2 * distance);
                 }
             } else {
-                int distanceIndexLimit = min(currentNumberOfObserves, (int)distances.size());
+                int distanceIndexLimit = min(currentNumberOfObserves, static_cast<int>(distances.size()));
                 for (int distanceIndex = 0; distanceIndex < distanceIndexLimit; distanceIndex++) {
                     int distance(distances[distanceIndex]);
                     int possibleNumberOfObserves = distanceIndex + 1;
@@ -118,7 +118,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

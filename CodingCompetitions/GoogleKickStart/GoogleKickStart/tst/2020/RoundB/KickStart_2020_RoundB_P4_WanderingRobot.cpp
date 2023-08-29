@@ -28,12 +28,12 @@ namespace KickStart_2020_RoundB_P4_WanderingRobot {
 #define my_cin cin
 #endif
 
-vector<long double> logFact(int(3.1e5));
+vector<long double> logFact(static_cast<int>(3.1e5));
 
 void runTestCase(int const testCaseNumber) {
-    int X, Y;
+    int X = 0, Y = 0;
     my_cin >> X >> Y;
-    int Xlo, Xhi, Ylo, Yhi;
+    int Xlo = 0, Xhi = 0, Ylo = 0, Yhi = 0;
     my_cin >> Xlo >> Ylo >> Xhi >> Yhi;
 
     auto probPath = [&](int r, int c) -> long double {
@@ -73,11 +73,11 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    for (int i = 1; i < int(logFact.size()); i++) {
-        logFact[i] = logFact[i - 1] + log((long double)(i));
+    for (int i = 1; i < static_cast<int>(logFact.size()); i++) {
+        logFact[i] = logFact[i - 1] + log(static_cast<long double>(i));
     }
 
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

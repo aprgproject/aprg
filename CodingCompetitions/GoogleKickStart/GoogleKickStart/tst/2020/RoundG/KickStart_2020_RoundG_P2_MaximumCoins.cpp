@@ -27,12 +27,12 @@ namespace KickStart_2020_RoundG_P2_MaximumCoins {
 #endif
 
 void runTestCase(int const testCaseNumber) {
-    int n;
+    int n = 0;
     my_cin >> n;
     map<int, long long> mapka;
     for (int row = 0; row < n; ++row) {
         for (int col = 0; col < n; ++col) {
-            int x;
+            int x = 0;
             my_cin >> x;
             mapka[row - col] += x;
         }
@@ -45,7 +45,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

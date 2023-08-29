@@ -110,7 +110,7 @@ void runTestCase(int const testCaseNumber)
 int getIndex(int const index, int const time) { return index * maxTime + time; }
 
 int getMaxEnergy(int const index, int const elapsedTime) {
-    if (index < (int)stones.size()) {
+    if (index < static_cast<int>(stones.size())) {
         int& savedEnergy(savedEnergies[getIndex(index, elapsedTime)]);
         if (savedEnergy == INT_MAX) {
             Stone stone(stones[index]);
@@ -131,7 +131,7 @@ void runTestCase(int const testCaseNumber) {
     stones.clear();
     stones.reserve(numberOfStones);
     for (int y = 0; y < numberOfStones; ++y) {
-        Stone stone;
+        Stone stone{};
         my_cin >> stone.timeToConsume >> stone.energy >> stone.rateOfLoss;
         totalConsumptionTime += stone.timeToConsume;
         stones.emplace_back(stone);
@@ -155,7 +155,7 @@ void runTestCase(int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);

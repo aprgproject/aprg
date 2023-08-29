@@ -97,7 +97,7 @@ private:
 
     [[nodiscard]] Index getMatrixIndex(Index const x, Index const y) const { return y * m_columns + x; }
 
-    [[nodiscard]] Index get2ToThePowerOf(Index const exponent) const { return Index(1) << exponent; }
+    [[nodiscard]] Index get2ToThePowerOf(Index const exponent) const { return static_cast<Index>(1) << exponent; }
 
     [[nodiscard]] bool isPowerOfTwo(Index const index) const { return (index & (index - 1)) == 0; }
 
@@ -133,7 +133,7 @@ RangeQueryWithSelector<vector<int>>::SelectorFunction maximumSelectorFunction = 
 int getIndex(int const x, int const y) { return y * numberOfColumns + x; }
 
 void runTestCase(int const testCaseNumber) {
-    int maxAllowableThickness;
+    int maxAllowableThickness = 0;
     my_cin >> numberOfRows >> numberOfColumns >> maxAllowableThickness;
     vector<int> thicknessPerCell(numberOfRows * numberOfColumns);
 
@@ -234,7 +234,7 @@ void runTestCase(int const testCaseNumber)
 }*/
 
 void runAllTestCases() {
-    int numberOfTestCases;
+    int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
     for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);
