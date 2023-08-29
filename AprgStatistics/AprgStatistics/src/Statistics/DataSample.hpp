@@ -95,12 +95,12 @@ public:
 
     [[nodiscard]] Sample calculateRaiseToPower(double const value) const {
         return performDataTypeAndConstantFunction(
-            value, [](double value1, double value2) -> double { return pow((double)value1, (double)value2); });
+            value, [](double value1, double value2) -> double { return pow(value1, value2); });
     }
 
     [[nodiscard]] Sample calculateRaiseToInversePower(double const value) const {
         return performDataTypeAndConstantFunction(
-            value, [](double value1, double value2) -> double { return pow((double)value1, (double)1 / value2); });
+            value, [](double value1, double value2) -> double { return pow(value1, static_cast<double>(1) / value2); });
     }
 
     Sample performDataTypeAndDataTypeFunction(

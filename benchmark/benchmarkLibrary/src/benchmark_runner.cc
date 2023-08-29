@@ -53,9 +53,7 @@
 #include "thread_manager.h"
 #include "thread_timer.h"
 
-namespace benchmark {
-
-namespace internal {
+namespace benchmark::internal {
 
 MemoryManager* memory_manager = nullptr;
 
@@ -101,7 +99,7 @@ BenchmarkReporter::Run CreateRunReport(
     if (memory_iterations > 0) {
       report.has_memory_result = true;
       report.allocs_per_iter =
-          memory_iterations ? static_cast<double>(memory_result.num_allocs) /
+          memory_iterations != 0u ? static_cast<double>(memory_result.num_allocs) /
                                   memory_iterations
                             : 0;
       report.max_bytes_used = memory_result.max_bytes_used;
@@ -164,10 +162,10 @@ BenchmarkRunner::BenchmarkRunner(
       FLAGS_benchmark_report_aggregates_only;
   if (b.aggregation_report_mode() != internal::ARM_Unspecified) {
     run_results.display_report_aggregates_only =
-        (b.aggregation_report_mode() &
-         internal::ARM_DisplayReportAggregatesOnly);
+        ((b.aggregation_report_mode() &
+         internal::ARM_DisplayReportAggregatesOnly) != 0u);
     run_results.file_report_aggregates_only =
-        (b.aggregation_report_mode() & internal::ARM_FileReportAggregatesOnly);
+        ((b.aggregation_report_mode() & internal::ARM_FileReportAggregatesOnly) != 0u);
     BM_CHECK(FLAGS_benchmark_perf_counters.empty() ||
              perf_counters_measurement.IsValid())
         << "Perf counters were requested but could not be set up.";
@@ -327,7 +325,7 @@ void BenchmarkRunner::DoOneRepetition() {
       CreateRunReport(b, i.results, memory_iterations, memory_result, i.seconds,
                       num_repetitions_done, repeats);
 
-  if (reports_for_family) {
+  if (reports_for_family != nullptr) {
     ++reports_for_family->num_runs_done;
     if (!report.error_occurred) { reports_for_family->Runs.push_back(report);
 }
@@ -346,7 +344,5 @@ RunResults&& BenchmarkRunner::GetResults() {
 
   return std::move(run_results);
 }
-
-}  // end namespace internal
 
 }  // end namespace benchmark

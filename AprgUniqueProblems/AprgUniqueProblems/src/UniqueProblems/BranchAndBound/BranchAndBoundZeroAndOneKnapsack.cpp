@@ -8,7 +8,7 @@ using namespace std;
 namespace alba {
 
 BranchAndBoundZeroAndOneKnapsack::Profit BranchAndBoundZeroAndOneKnapsack::getBestProfit(
-    Weight const maximumWeight, Items const& items) const {
+    Weight const maximumWeight, Items const& items) {
     Items sortedItems(items);
     sort(sortedItems.begin(), sortedItems.end(), [](Item const& item1, Item const& item2) {
         return static_cast<double>(item1.first) / item1.second > static_cast<double>(item2.first) / item2.second;
@@ -26,7 +26,7 @@ BranchAndBoundZeroAndOneKnapsack::Profit BranchAndBoundZeroAndOneKnapsack::getBe
             continue;
         }
 
-        Node nextNode;
+        Node nextNode{};
         nextNode.level = currentNode.level + 1;
         // include item for first possible node
         nextNode.weight = currentNode.weight + items[nextNode.level].first;

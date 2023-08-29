@@ -34,7 +34,7 @@ extern std::map<std::string, std::string>* global_context;
 BenchmarkReporter::BenchmarkReporter()
     : output_stream_(&std::cout), error_stream_(&std::cerr) {}
 
-BenchmarkReporter::~BenchmarkReporter() {}
+BenchmarkReporter::~BenchmarkReporter() = default;
 
 void BenchmarkReporter::PrintBasicContext(std::ostream *out,
                                           Context const &context) {
@@ -43,8 +43,8 @@ void BenchmarkReporter::PrintBasicContext(std::ostream *out,
 
   Out << LocalDateTimeString() << "\n";
 
-  if (context.executable_name) {
-    Out << "Running " << context.executable_name << "\n";
+  if (benchmark::BenchmarkReporter::Context::executable_name != nullptr) {
+    Out << "Running " << benchmark::BenchmarkReporter::Context::executable_name << "\n";
 }
 
   const CPUInfo &info = context.cpu_info;

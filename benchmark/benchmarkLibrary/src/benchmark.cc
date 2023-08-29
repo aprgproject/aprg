@@ -145,7 +145,7 @@ State::State(IterationCount max_iters, const std::vector<int64_t>& ranges,
       error_occurred_(false),
       range_(ranges),
       complexity_n_(0),
-      counters(),
+      
       thread_index_(thread_i),
       threads_(n_threads),
       timer_(timer),
@@ -184,7 +184,7 @@ void State::PauseTiming() {
   // Add in time accumulated so far
   BM_CHECK(started_ && !finished_ && !error_occurred_);
   timer_->StopTimer();
-  if (perf_counters_measurement_) {
+  if (perf_counters_measurement_ != nullptr) {
     auto measurements = perf_counters_measurement_->StopAndGetMeasurements();
     for (const auto& name_and_measurement : measurements) {
       auto name = name_and_measurement.first;
@@ -198,7 +198,7 @@ void State::PauseTiming() {
 void State::ResumeTiming() {
   BM_CHECK(started_ && !finished_ && !error_occurred_);
   timer_->StartTimer();
-  if (perf_counters_measurement_) {
+  if (perf_counters_measurement_ != nullptr) {
     perf_counters_measurement_->Start();
   }
 }
@@ -253,7 +253,7 @@ namespace {
 // Flushes streams after invoking reporter methods that write to them. This
 // ensures users get timely updates even when streams are not line-buffered.
 void FlushStreams(BenchmarkReporter* reporter) {
-  if (!reporter) { return;
+  if (reporter == nullptr) { return;
 }
   std::flush(reporter->GetOutputStream());
   std::flush(reporter->GetErrorStream());
@@ -276,7 +276,7 @@ void Report(BenchmarkReporter* display_reporter,
 
   report_one(display_reporter, run_results.display_report_aggregates_only,
              run_results);
-  if (file_reporter) {
+  if (file_reporter != nullptr) {
     report_one(file_reporter, run_results.file_report_aggregates_only,
                run_results);
 }
@@ -316,7 +316,7 @@ void RunBenchmarks(const std::vector<BenchmarkInstance>& benchmarks,
       per_family_reports;
 
   if (display_reporter->ReportContext(context) &&
-      (!file_reporter || file_reporter->ReportContext(context))) {
+      ((file_reporter == nullptr) || file_reporter->ReportContext(context))) {
     FlushStreams(display_reporter);
     FlushStreams(file_reporter);
 
@@ -333,7 +333,7 @@ void RunBenchmarks(const std::vector<BenchmarkInstance>& benchmarks,
       runners.emplace_back(benchmark, reports_for_family);
       int num_repeats_of_this_instance = runners.back().GetNumRepeats();
       num_repetitions_total += num_repeats_of_this_instance;
-      if (reports_for_family) {
+      if (reports_for_family != nullptr) {
         reports_for_family->num_runs_total += num_repeats_of_this_instance;
 }
     }
@@ -374,7 +374,7 @@ void RunBenchmarks(const std::vector<BenchmarkInstance>& benchmarks,
                                              additional_run_stats.begin(),
                                              additional_run_stats.end());
           per_family_reports.erase(
-              (int)reports_for_family->Runs.front().family_index);
+              static_cast<int>(reports_for_family->Runs.front().family_index));
         }
       }
 
@@ -382,7 +382,7 @@ void RunBenchmarks(const std::vector<BenchmarkInstance>& benchmarks,
     }
   }
   display_reporter->Finalize();
-  if (file_reporter) { file_reporter->Finalize();
+  if (file_reporter != nullptr) { file_reporter->Finalize();
 }
   FlushStreams(display_reporter);
   FlushStreams(file_reporter);
@@ -402,7 +402,7 @@ std::unique_ptr<BenchmarkReporter> CreateReporter(
     return PtrType(new ConsoleReporter(output_opts));
   } if (name == "json") {
     return PtrType(new JSONReporter);
-  } else if (name == "csv") {
+  } if (name == "csv") {
     return PtrType(new CSVReporter);
   } else {
     std::cerr << "Unexpected format: '" << name << "'\n";
@@ -465,7 +465,7 @@ size_t RunSpecifiedBenchmarks(BenchmarkReporter* display_reporter,
   std::ofstream output_file;
   std::unique_ptr<BenchmarkReporter> default_display_reporter;
   std::unique_ptr<BenchmarkReporter> default_file_reporter;
-  if (!display_reporter) {
+  if (display_reporter == nullptr) {
     default_display_reporter = internal::CreateReporter(
         FLAGS_benchmark_format, internal::GetOutputOptions());
     display_reporter = default_display_reporter.get();
@@ -474,7 +474,7 @@ size_t RunSpecifiedBenchmarks(BenchmarkReporter* display_reporter,
   auto& Err = display_reporter->GetErrorStream();
 
   std::string const& fname = FLAGS_benchmark_out;
-  if (fname.empty() && file_reporter) {
+  if (fname.empty() && (file_reporter != nullptr)) {
     Err << "A custom file reporter was provided but "
            "--benchmark_out=<file> was not specified."
         << std::endl;
@@ -486,7 +486,7 @@ size_t RunSpecifiedBenchmarks(BenchmarkReporter* display_reporter,
       Err << "invalid file name: '" << fname << "'" << std::endl;
       std::exit(1);
     }
-    if (!file_reporter) {
+    if (file_reporter == nullptr) {
       default_file_reporter = internal::CreateReporter(
           FLAGS_benchmark_out_format, ConsoleReporter::OO_None);
       file_reporter = default_file_reporter.get();
@@ -555,8 +555,8 @@ void PrintUsageAndExit() {
 void ParseCommandLineFlags(int* argc, char** argv) {
   using namespace benchmark;
   BenchmarkReporter::Context::executable_name =
-      (argc && *argc > 0) ? argv[0] : "unknown";
-  for (int i = 1; argc && i < *argc; ++i) {
+      ((argc != nullptr) && *argc > 0) ? argv[0] : "unknown";
+  for (int i = 1; (argc != nullptr) && i < *argc; ++i) {
     if (ParseBoolFlag(argv[i], "benchmark_list_tests",
                       &FLAGS_benchmark_list_tests) ||
         ParseStringFlag(argv[i], "benchmark_filter", &FLAGS_benchmark_filter) ||

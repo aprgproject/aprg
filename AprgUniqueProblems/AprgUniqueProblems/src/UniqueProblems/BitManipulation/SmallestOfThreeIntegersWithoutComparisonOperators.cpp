@@ -4,7 +4,7 @@ using namespace std;
 
 namespace alba {
 
-SmallestOfThreeIntegersWithoutComparisonOperators::SmallestOfThreeIntegersWithoutComparisonOperators() {}
+SmallestOfThreeIntegersWithoutComparisonOperators::SmallestOfThreeIntegersWithoutComparisonOperators() = default;
 
 SmallestOfThreeIntegersWithoutComparisonOperators::UnsignedValue
 SmallestOfThreeIntegersWithoutComparisonOperators::getSmallest(
@@ -24,7 +24,7 @@ bool SmallestOfThreeIntegersWithoutComparisonOperators::isLessThan(
     UnsignedValue const value1, UnsignedValue const value2) {
     // This comparison works only on unsigned values.
     // return !(value1 / value2); // this has a problem when value1 and value 2 are both zero
-    return static_cast<bool>(value2) && ((value1 / value2) == 0u);  // if value2 is zero, immediately return false
+    return static_cast<bool>(value2) && ((value1 / value2) == 0U);  // if value2 is zero, immediately return false
 }
 
 }  // namespace alba
