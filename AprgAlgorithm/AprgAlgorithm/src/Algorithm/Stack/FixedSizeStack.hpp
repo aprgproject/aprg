@@ -34,7 +34,7 @@ public:
 
 private:
     int m_size{0};
-    Objects m_objects;
+    Objects m_objects{};
 };
 
 }  // namespace alba::algorithm

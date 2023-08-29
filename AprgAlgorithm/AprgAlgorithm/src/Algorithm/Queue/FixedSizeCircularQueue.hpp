@@ -46,7 +46,7 @@ private:
 
     int m_firstIndex{0};
     int m_afterLastIndex{0};
-    Objects m_objects;
+    Objects m_objects{};
 };
 
 }  // namespace alba::algorithm
