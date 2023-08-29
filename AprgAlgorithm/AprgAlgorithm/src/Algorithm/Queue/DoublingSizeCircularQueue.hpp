@@ -45,7 +45,7 @@ public:
 private:
     void deleteAllObjects() {
         if (m_objects != nullptr) {
-            delete[] (m_objects);
+            delete[](m_objects);
         }
     }
 
@@ -71,7 +71,7 @@ private:
                 std::copy(m_objects + m_firstIndex, m_objects + m_containerSize, newObjects);
                 std::copy(m_objects, m_objects + m_afterLastIndex, newObjects + m_containerSize - m_firstIndex);
             }
-            delete[] (m_objects);
+            delete[](m_objects);
         }
         m_afterLastIndex = getSize();
         m_firstIndex = 0;

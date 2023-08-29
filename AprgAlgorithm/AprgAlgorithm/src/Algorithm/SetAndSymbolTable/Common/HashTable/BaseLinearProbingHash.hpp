@@ -151,7 +151,7 @@ protected:
 
     void deleteAllEntries() {
         if (m_entryPointers != nullptr) {
-            delete[] (m_entryPointers);
+            delete[](m_entryPointers);
         }
     }
 
@@ -180,7 +180,7 @@ protected:
             }
         }
         if (oldEntryPointers != nullptr) {
-            delete[] (oldEntryPointers);
+            delete[](oldEntryPointers);
         }
     }
 
