@@ -1,0 +1,6 @@
+2023-08-29T08:24:53
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/CrnccIdMapping/CrnccIdMapping/tst/CrnccIdMapping_unit.cpp:26:17: warning: Value stored to 'nbccIdAccess' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/CrnccIdMapping/CrnccIdMapping/tst/CrnccIdMapping_unit.cpp:26:17: note: Value stored to 'nbccIdAccess' during its initialization is never read
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/CrnccIdMapping/CrnccIdMapping/tst/CrnccIdMapping_unit.cpp:26:17: warning: unused variable 'nbccIdAccess' [clang-diagnostic-unused-variable]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/CrnccIdMapping/CrnccIdMapping/tst/CrnccIdMapping_unit.cpp:26:17: warning: unused variable 'nbccIdAccess' [-Wunused-variable]
+DONE!
