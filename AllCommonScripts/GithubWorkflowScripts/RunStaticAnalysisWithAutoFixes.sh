@@ -40,8 +40,8 @@ runStaticAnalyzersInDirectory() {
     scriptPrint "$scriptName" "$LINENO" "Running Static Analysis in: [$directoryPath]"
     cd "$directoryPath" || exit 1
 
-    echo "StaticAnalysisJobIdentifier: [$jobIdentifier]" >> "$staticAnalysisFilename"
-    date +%Y-%m-%dT%H:%M:%S > "$staticAnalysisFilename"
+    echo "StaticAnalysisJobIdentifier: [$jobIdentifier]" > "$staticAnalysisFilename"
+    date +%Y-%m-%dT%H:%M:%S >> "$staticAnalysisFilename"
     "$buildAndRunScriptPath" cleanAndConfigureWithStaticAnalyzersWithAutoFix "StaticAnalyzersBuild" "Debug" "Ninja"
     set +e
     # "note" is added in the grep to cover "FIX-IT"

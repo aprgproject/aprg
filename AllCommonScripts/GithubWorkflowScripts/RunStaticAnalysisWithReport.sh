@@ -38,8 +38,8 @@ runStaticAnalyzersInDirectory() {
     scriptPrint "$scriptName" "$LINENO" "Running Static Analysis in: [$directoryPath]"
     cd "$directoryPath" || exit 1
 
-    echo "StaticAnalysisJobIdentifier: [$jobIdentifier]" >> "$staticAnalysisFilename"
-    date +%Y-%m-%dT%H:%M:%S > "$staticAnalysisFilename"
+    echo "StaticAnalysisJobIdentifier: [$jobIdentifier]" > "$staticAnalysisFilename"
+    date +%Y-%m-%dT%H:%M:%S >> "$staticAnalysisFilename"
     "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "StaticAnalyzersBuild" "Debug" "Ninja"
     set +e
     "$buildAndRunScriptPath" build "StaticAnalyzersBuild" "Debug" | grep -P "^.*$directoryPath.* (style|warning|error): .*$" | tee -a "$staticAnalysisFilename"
