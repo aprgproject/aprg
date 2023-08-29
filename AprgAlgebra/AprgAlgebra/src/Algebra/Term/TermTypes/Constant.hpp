@@ -30,9 +30,6 @@ public:
 private:
     friend std::ostream& operator<<(std::ostream& out, Constant const& constant);
 
-private:
-    friend std::ostream& operator<<(std::ostream& out, Constant const& constant);
-
     AlbaNumber m_constantValue;
 };
 
