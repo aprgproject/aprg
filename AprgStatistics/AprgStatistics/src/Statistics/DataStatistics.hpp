@@ -17,7 +17,7 @@ public:
     using SampleOptional = std::optional<Sample>;
     using DoubleOptional = std::optional<double>;
 
-    DataStatistics() {}
+    DataStatistics() = default;
 
     explicit DataStatistics(Samples const& samples) : m_samples(samples) {}
 

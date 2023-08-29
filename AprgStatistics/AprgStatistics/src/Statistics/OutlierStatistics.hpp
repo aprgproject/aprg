@@ -19,7 +19,7 @@ public:
         LocalStatistics::calculateSampleStandardDeviationIfNeeded();
         double acceptableDeviation(
             calculateAcceptableDeviationBasedOnChauvenetCriterion(LocalStatistics::m_samples.size()));
-        Sample deviation(Sample(sample - LocalStatistics::m_mean.value()).calculateAbsoluteValue());
+        Sample deviation(static_cast<Sample>(sample - LocalStatistics::m_mean.value()).calculateAbsoluteValue());
         Sample deviationOverStandardDeviation(deviation / LocalStatistics::m_sampleStandardDeviation.value());
         bool isAnOutlier(false);
         for (int i = 0; i < deviationOverStandardDeviation.getSize(); i++) {
@@ -32,8 +32,8 @@ public:
     }
 
     double calculateAcceptableDeviationBasedOnChauvenetCriterion(int const sampleSize) {
-        return mathHelper::getAbsoluteValue(
-            mathHelper::getInverseCumulativeStandardDistributionApproximation(1 / ((double)4 * sampleSize), 20));
+        return mathHelper::getAbsoluteValue(mathHelper::getInverseCumulativeStandardDistributionApproximation(
+            1 / (static_cast<double>(4) * sampleSize), 20));
     }
 };
 
