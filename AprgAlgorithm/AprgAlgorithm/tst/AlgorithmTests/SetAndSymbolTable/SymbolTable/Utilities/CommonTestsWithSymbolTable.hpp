@@ -4,8 +4,6 @@
 
 #include <vector>
 
-using namespace std;
-
 namespace alba::algorithm::CommonTestsWithSymbolTable {
 
 template <typename SymbolTable>

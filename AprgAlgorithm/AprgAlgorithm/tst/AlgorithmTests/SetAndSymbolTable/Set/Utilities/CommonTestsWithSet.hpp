@@ -4,8 +4,6 @@
 
 #include <vector>
 
-using namespace std;
-
 namespace alba::algorithm::CommonTestsWithSet {
 
 template <typename Set>

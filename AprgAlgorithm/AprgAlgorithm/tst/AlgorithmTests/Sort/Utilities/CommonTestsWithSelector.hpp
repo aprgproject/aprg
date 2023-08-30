@@ -2,8 +2,6 @@
 
 #include <gtest/gtest.h>
 
-using namespace std;
-
 namespace alba::algorithm::CommonTestsWithSelector {
 
 template <typename Selector, typename Values>

@@ -8,8 +8,6 @@
 #include <string>
 #include <vector>
 
-using namespace alba::stringHelper;
-
 namespace alba::algorithm {
 
 template <int DIMENSION>
@@ -35,7 +33,7 @@ public:
             }
         }
         displayTable.setBorders("-", "|");
-        return convertToString(displayTable);
+        return stringHelper::convertToString(displayTable);
     }
 
     void addOpenSitesUntilItPercolates() {

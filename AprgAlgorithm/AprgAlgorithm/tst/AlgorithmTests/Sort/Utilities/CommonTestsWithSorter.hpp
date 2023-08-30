@@ -6,8 +6,6 @@
 
 #include <algorithm>
 
-using namespace std;
-
 namespace alba::algorithm::CommonTestsWithSorter {
 
 template <typename Sorter, typename Values>
