@@ -11,9 +11,9 @@ public:
 
 private:
     void handleStartup();
-    virtual void handleMessageEvent(GenericMessage const& genericMessage);
-    virtual void handleTimerEvent(Timer const& timer);
-    virtual void handleOtherEvent(OtherEvent const& otherEvent);
+    void handleMessageEvent(GenericMessage const& genericMessage) override;
+    void handleTimerEvent(Timer const& timer) override;
+    void handleOtherEvent(OtherEvent const& otherEvent) override;
 };
 
 }  // namespace DesignDocumentCreator
