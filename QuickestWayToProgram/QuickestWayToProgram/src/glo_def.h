@@ -27,35 +27,35 @@ extern "C" {
 #define ENUM_32BIT_ENFORCER 0x7FFFFFFF
 
 /* Global type defintions */
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32; /* int == long */
-typedef signed char i8;
-typedef signed short i16;
-typedef signed int i32;   /* int == long */
-typedef float r32;        /* Do not use this in DSP */
-typedef double r64;       /* Do not use this in DSP */
-typedef long double r128; /* Do not use this in DSP */
-typedef unsigned char *pu8;
-typedef u8 *pu8h;
-typedef unsigned short *pu16;
-typedef unsigned int *pu32;
-typedef signed char *pi8;
-typedef signed short *pi16;
-typedef signed int *pi32;
+using u8 = unsigned char;
+using u16 = unsigned short;
+using u32 = unsigned int; /* int == long */
+using i8 = signed char;
+using i16 = short;
+using i32 = int;          /* int == long */
+using r32 = float;        /* Do not use this in DSP */
+using r64 = double;       /* Do not use this in DSP */
+using r128 = long double; /* Do not use this in DSP */
+using pu8 = unsigned char *;
+using pu8h = u8 *;
+using pu16 = unsigned short *;
+using pu32 = unsigned int *;
+using pi8 = signed char *;
+using pi16 = short *;
+using pi32 = int *;
 
-typedef unsigned char GLO_BOOLEAN;
+using GLO_BOOLEAN = unsigned char;
 
-typedef u32 TBoolean;
-typedef unsigned long MESSAGEID;
-typedef MESSAGEID TMsgId;
+using TBoolean = u32;
+using MESSAGEID = unsigned long;
+using TMsgId = MESSAGEID;
 
 /* For AGERE SC100 C complier */
 /* For compilation only, X. Song 14.06.2001*/
-typedef struct {
+using sc100_u64 = struct {
     long first;
     long second;
-} sc100_u64;
+};
 
 #ifdef __DCC__ /* For diab compiler environment */
 
@@ -67,8 +67,8 @@ typedef signed long long i64;
 #ifdef __GNUC__ /* For GNU C compiler environment */
 #if (0 < __GNUC__)
 
-typedef unsigned long long u64;
-typedef signed long long i64;
+using u64 = unsigned long long;
+using i64 = long long;
 
 #endif
 #endif
