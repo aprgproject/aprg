@@ -141,7 +141,7 @@ private:
         BitmapSnippet const& snippet, Line const& line, Point const& startPoint, Point const& endPoint,
         int const numberQuestionsInColumn) const;
     static void retrieveBarPointsThatFitAndSaveToKMeans(
-        TwoDimensionKMeans& kMeansForBarPoints, PointAndWidthPairs const& pointsAndWidths,
+        TwoDimensionKMeans& kMeansForBarPoints, PointAndWidthPairs const& pointAndWidthPairs,
         RangeOfDoubles const& minMaxCriteriaForBar);
     static void saveQuestionBarCoordinatesFromKMeansWithBarPoints(
         QuestionBarCoordinates& questionBarCoordinates, TwoDimensionKMeans const& kMeansForBarPoints,
@@ -164,7 +164,7 @@ private:
         double const acceptableSdOverMeanDeviation) const;
     void addPointAndWidthPairIfAcceptable(
         PointAndWidthPairs& pointAndWidthPairs, BitmapSnippet const& snippet, Line const& line,
-        Point const& blackPoint) const;
+        Point const& pointInLine) const;
 
     // Height functions
     void removeBarPointsWithFewHeightPoints(

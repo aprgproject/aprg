@@ -7,7 +7,6 @@ using namespace std;
 namespace alba {
 
 TEST(AlbaReplaceStringInFileTest, ReplaceCStylePrintWithCPlusPlusStylePrint) {
-    ReplaceStringInFiles replacer;
     string result(alba::ReplaceStringInFiles::getCPlusPlusStylePrintFromC(
         R"(TLH_DEBUG_PRINT("Creating new licence entry in DB for featureCode: %d.", featureCode);)"));
     EXPECT_EQ(
@@ -15,7 +14,6 @@ TEST(AlbaReplaceStringInFileTest, ReplaceCStylePrintWithCPlusPlusStylePrint) {
 }
 
 TEST(AlbaReplaceStringInFileTest, ReplaceCStylePrintWithCPlusPlusStylePrintWithPercentWithNumber) {
-    ReplaceStringInFiles replacer;
     string result(alba::ReplaceStringInFiles::getCPlusPlusStylePrintFromC(
         R"(TLH_DEBUG_PRINT("Received LMS_FEATURE_NOTIFICATION_RESP_MSG (0x%04x), featureCode: %u, successCode: %s", LMS_FEATURE_NOTIFICATION_RESP_MSG, featureCode, (successCode == EBoolean_True ? "Success" : "Fail"));)"));
     EXPECT_EQ(
@@ -24,20 +22,17 @@ TEST(AlbaReplaceStringInFileTest, ReplaceCStylePrintWithCPlusPlusStylePrintWithP
 }
 
 TEST(AlbaReplaceStringInFileTest, ReplaceCStylePrintWithCPlusPlusStylePrintWithNoParameters) {
-    ReplaceStringInFiles replacer;
     string result(alba::ReplaceStringInFiles::getCPlusPlusStylePrintFromC(R"(TLH_DEBUG_PRINT("TLH::reset() ");)"));
     EXPECT_EQ("debug() << \"TLH::reset()\" << flush();", result);
 }
 
 TEST(AlbaReplaceStringInFileTest, DISABLED_ReplaceCStylePrintWithCPlusPlusStyleInFile) {
-    ReplaceStringInFiles replacer;
     alba::ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnFile(
         R"(D:\Branches\MODERNIZATION\TLH\C_Application\SC_TCOM\CP_TLH\srcLegacy\TLHMasterState.cpp)",
         R"(D:\Branches\MODERNIZATION\TLH\C_Application\SC_TCOM\NewTLH\srcLegacy\TLHMasterState.cpp)");
 }
 
 TEST(AlbaReplaceStringInFileTest, DISABLED_ReplaceCStylePrintWithCPlusPlusStyleInDirectories) {
-    ReplaceStringInFiles replacer;
     alba::ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnDirectories(
         R"(D:\Branches\MODERNIZATION\TLH\C_Application\SC_TCOM\CP_TLH\)",
         R"(D:\Branches\MODERNIZATION\TLH\C_Application\SC_TCOM\NewTLH\)");

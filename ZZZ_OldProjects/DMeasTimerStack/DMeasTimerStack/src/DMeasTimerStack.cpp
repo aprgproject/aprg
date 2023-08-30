@@ -23,7 +23,7 @@ void tcomSetSfn(unsigned int sfn) { MY_SFN = sfn; }
 
 using namespace std;
 
-// NOLINTBEGIN(cppcoreguidelines-pro-type-union-access)
+// NOLINTBEGIN(cppcoreguidelines-pro-type-union-access,cppcoreguidelines-pro-type-vararg,hicpp-vararg)
 namespace DMeas {
 
 TimerStack::TimerIndex TimerStack::s_timerCounter = 0;
@@ -607,4 +607,4 @@ void TimerStack::clear(void) {
 
 }  // namespace DMeas
 
-// NOLINTEND(cppcoreguidelines-pro-type-union-access)
+// NOLINTEND(cppcoreguidelines-pro-type-union-access,cppcoreguidelines-pro-type-vararg,hicpp-vararg)

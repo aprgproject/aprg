@@ -51,7 +51,7 @@ public:
 
     BtsLogAnalyzer();
     void clear();
-    void processFileWithSortedPrints(std::string const& pathOfBtsLog);
+    void processFileWithSortedPrints(std::string const& pathOfBtsSortedLog);
     void printAllCollectedData() const;
 
 private:

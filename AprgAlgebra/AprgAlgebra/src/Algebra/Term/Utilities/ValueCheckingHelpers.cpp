@@ -12,19 +12,19 @@ namespace alba::algebra {
 
 namespace {
 
-NumberCheckingCondition IsDoubleCondition = [](AlbaNumber const& numberToCheck) -> bool {
+NumberCheckingCondition const IsDoubleCondition = [](AlbaNumber const& numberToCheck) -> bool {
     return numberToCheck.isDoubleType();
 };
 
-NumberCheckingCondition IsNanCondition = [](AlbaNumber const& numberToCheck) -> bool {
+NumberCheckingCondition const IsNanCondition = [](AlbaNumber const& numberToCheck) -> bool {
     return numberToCheck.isNotANumber();
 };
 
-NumberCheckingCondition IsNotARealFiniteNumberCondition = [](AlbaNumber const& numberToCheck) -> bool {
+NumberCheckingCondition const IsNotARealFiniteNumberCondition = [](AlbaNumber const& numberToCheck) -> bool {
     return !numberToCheck.isARealFiniteValue();
 };
 
-NumberCheckingCondition IsPositiveOrNegativeInfinityCondition = [](AlbaNumber const& numberToCheck) -> bool {
+NumberCheckingCondition const IsPositiveOrNegativeInfinityCondition = [](AlbaNumber const& numberToCheck) -> bool {
     return numberToCheck.isPositiveOrNegativeInfinity();
 };
 

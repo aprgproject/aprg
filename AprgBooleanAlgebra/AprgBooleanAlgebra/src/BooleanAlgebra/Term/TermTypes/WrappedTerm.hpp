@@ -15,10 +15,10 @@ struct WrappedTerm {
 
     // rule of five or six
     ~WrappedTerm() = default;
-    WrappedTerm(WrappedTerm const& termWithDetails);
-    WrappedTerm& operator=(WrappedTerm const& termWithDetails);
-    WrappedTerm(WrappedTerm&& termWithDetails) = default;
-    WrappedTerm& operator=(WrappedTerm&& termWithDetails) = default;
+    WrappedTerm(WrappedTerm const& wrappedTerm);
+    WrappedTerm& operator=(WrappedTerm const& wrappedTerm);
+    WrappedTerm(WrappedTerm&& wrappedTerm) = default;
+    WrappedTerm& operator=(WrappedTerm&& wrappedTerm) = default;
 
     bool operator==(WrappedTerm const& second) const;
     bool operator!=(WrappedTerm const& second) const;

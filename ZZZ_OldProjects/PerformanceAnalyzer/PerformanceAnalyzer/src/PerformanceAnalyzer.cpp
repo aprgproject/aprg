@@ -825,7 +825,6 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
                 string followingLine(fileReader.getLineAndIgnoreWhiteSpaces());
                 if (isStringFoundNotCaseSensitive(followingLine, R"(0000)")) {
                     auto msgId = convertHexStringToNumber<unsigned int>(followingLine.substr(18, 2));
-                    auto upperSaidKey = convertHexStringToNumber<unsigned int>(followingLine.substr(48, 5));
                     if (msgId == 0x75 || msgId == 0x77 || msgId == 0x7E) {
                         string followingLine2(fileReader.getLineAndIgnoreWhiteSpaces());
                         if (isStringFoundNotCaseSensitive(followingLine2, R"(0010)")) {
@@ -847,8 +846,7 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
                     } else if (msgId == 0x74 || msgId == 0x76 || msgId == 0x7C) {
                         string followingLine2(fileReader.getLineAndIgnoreWhiteSpaces());
                         if (isStringFoundNotCaseSensitive(followingLine2, R"(0010)")) {
-                            auto lowerSaidKey = convertHexStringToNumber<unsigned int>(followingLine2.substr(6, 5));
-                            key.said = 0;  //((upperSaidKey&0xFFFF)<<16) | (lowerSaidKey&0xFFFF);
+                            key.said = 0;
                             if (msgId == 0x74) {
                                 key.operation = 1;
                             } else if (msgId == 0x76) {
@@ -1095,7 +1093,7 @@ void PerformanceAnalyzer::processFileForRlSetupPerSecond(string const& filePath)
         BtsLogPrint logPrint(lineInLogs);
         BtsLogTime logTime(logPrint.getBtsTime());
 
-        int hourOffsetForDay = 0;
+        // int hourOffsetForDay = 0;
         // cout<<"hourOffsetForDay"<<hourOffsetForDay<<"D1:"<<firstLogTime.getDays()<<"D1:"<<logTime.getDays()<<"\n";
         if (!logTime.isStartup()) {
             if ((hour == logTime.getHours()) && (min == logTime.getMinutes()) && (sec == logTime.getSeconds())) {
@@ -1124,7 +1122,7 @@ void PerformanceAnalyzer::processFileForTraceLog(string const& traceLogPath) {
     cout << "processFile: " << filePathHandler.getFullPath() << " isOpen: " << inputLogFileStream.is_open()
          << " fileReader: " << fileReader.isNotFinished() << "\n";
 
-    int hour = 0, min = 0, sec = 0, rlSetups = 0;
+    int hour = 0, min = 0, sec = 0;
 
     stringstream ss;
     while (fileReader.isNotFinished()) {

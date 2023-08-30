@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cstdio>
 
+// NOLINTBEGIN(cppcoreguidelines-pro-type-vararg,hicpp-vararg)
 namespace CommonClassLib {
 
 inline u8 CNsapHelper::getIpByte(TTransportLayerAddress const& nsap, u8 const index) {
@@ -76,3 +77,5 @@ std::string CNsapHelper::convertNsapToIp(TTransportLayerAddress const& nsap) {
 }
 
 }  // namespace CommonClassLib
+
+// NOLINTEND(cppcoreguidelines-pro-type-vararg,hicpp-vararg)

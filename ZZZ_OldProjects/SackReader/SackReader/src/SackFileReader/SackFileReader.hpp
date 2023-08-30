@@ -7,7 +7,7 @@ namespace alba {
 class SackFileReader {
 public:
     explicit SackFileReader(Database& database);
-    void readFile(std::string const& fileName);
+    void readFile(std::string const& fileFullPath);
 
 private:
     Database& m_database;

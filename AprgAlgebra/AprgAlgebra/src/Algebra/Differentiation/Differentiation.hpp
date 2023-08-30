@@ -40,7 +40,7 @@ public:
 
 private:
     void separateNonChangingAndChangingVariables(
-        Monomial& nonChangingVariablesAndConstant, Monomial& affectedVariables, Monomial const& monomial) const;
+        Monomial& nonChangingVariablesAndConstant, Monomial& changingVariables, Monomial const& monomial) const;
     [[nodiscard]] Polynomial differentiateMonomialWithChangingVariables(Monomial const& changingVariables) const;
     [[nodiscard]] Term differentiateAsTermOrExpressionIfNeeded(Expression const& expression) const;
     [[nodiscard]] Term differentiateSimplifiedExpressionOnly(Expression const& expression) const;

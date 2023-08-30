@@ -44,7 +44,7 @@ public:
 
     TopLogAnalyzer();
     void clear();
-    void processTopLog(std::string const& pathOfBtsLog);
+    void processTopLog(std::string const& pathOfTopLog);
 
 private:
     void readTopLogsAndSaveToDatabase(std::string const& pathOfTopLog);

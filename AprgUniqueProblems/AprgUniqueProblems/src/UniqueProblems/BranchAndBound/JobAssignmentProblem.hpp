@@ -39,7 +39,7 @@ public:
     int getMinimalCostAndPrintAssignments();
 
 private:
-    SearchNode createNode(SearchNode const& currentNode, Coordinate const& nextAssignment);
+    SearchNode createNode(SearchNode const& currentNode, Coordinate const& nextWorkerAndJob);
     [[nodiscard]] int getAccumulatedCost(int const workerId, int const jobId, SearchNode const& currentNode) const;
     [[nodiscard]] int getMinimumPossibleCost(
         int const workerId, int const jobId, BoolVector const& isJobAssigned) const;

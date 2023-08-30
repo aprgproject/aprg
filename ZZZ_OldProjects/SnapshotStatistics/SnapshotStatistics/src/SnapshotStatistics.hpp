@@ -31,7 +31,7 @@ public:
     [[nodiscard]] std::string getWildcardNameIfFileGroupsIsFound(std::string const& fileName) const;
     void processSnapshot(std::string const& snapshotPath);
 
-    void processMemory(std::string const& ramFilePath, std::string const& snapshotName);
+    void processMemory(std::string const& memoryFilePath, std::string const& snapshotName);
     static double convertFileSizeToDouble(std::string const& fileSizeInString);
     void addStatisticForMemory(std::string const& fileName, std::string const& snapshotName, double const fileSize);
     void saveSizesForMemory(std::string const& outputPath);

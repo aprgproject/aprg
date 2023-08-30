@@ -39,7 +39,7 @@ OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingIterat
         transform(
             m_valueAndFrequencyPairs.cbegin(), m_valueAndFrequencyPairs.cend(), back_inserter(frequencies),
             [](ValueAndFrequencyPair const& pair) { return pair.second; });
-        RangeQueryWithAccumulator<Frequencies> frequencyRange(frequencies, plus<Frequency>(), minus<Frequency>());
+        RangeQueryWithAccumulator<Frequencies> frequencyRange(frequencies, plus<>(), minus<>());
 
         // length = 1
         for (Index index = 0; index < numberOfPairs; index++) {

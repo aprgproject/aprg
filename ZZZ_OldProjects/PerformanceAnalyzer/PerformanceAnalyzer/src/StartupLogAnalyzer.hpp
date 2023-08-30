@@ -18,7 +18,7 @@ public:
     void saveDataToCsv(std::string const& csvPath);
     static void saveDataTimeToCsv(
         std::ofstream& outputCsvFileStream, std::string const& description, std::vector<double> const& data);
-    void processFileWithSortedPrints(std::string const& pathOfBtsLog);
+    void processFileWithSortedPrints(std::string const& pathOfBtsSortedLog);
 
 private:
     void analyzeStartupDelays(std::string const& lineInLogs, wcdmaToolsBackend::BtsLogTime& previousNotableTime);

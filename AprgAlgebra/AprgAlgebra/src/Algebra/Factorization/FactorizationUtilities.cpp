@@ -44,9 +44,7 @@ bool isPerfectNthPower(Monomial const& monomial, int const nthPower) {
 bool doesNotNeedToBeFactorized(Polynomial const& polynomial) {
     Monomials const& monomials(polynomial.getMonomials());
     bool result(false);
-    if (hasNonRealFiniteNumbers(polynomial)) {
-        result = true;
-    } else if (monomials.size() <= 1) {
+    if (hasNonRealFiniteNumbers(polynomial) || monomials.size() <= 1) {
         result = true;
     } else if (monomials.size() == 2) {
         Monomial const& first(monomials[0]);

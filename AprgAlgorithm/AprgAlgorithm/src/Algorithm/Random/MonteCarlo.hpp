@@ -6,7 +6,7 @@ namespace alba::algorithm {
 
 using MonteCarloAlgorithm = std::function<bool(void)>;
 
-void performAMonteCarloAlgorithm(MonteCarloAlgorithm const& monteCarloAlgorithm) { monteCarloAlgorithm(); }
+inline void performAMonteCarloAlgorithm(MonteCarloAlgorithm const& monteCarloAlgorithm) { monteCarloAlgorithm(); }
 
 }  // namespace alba::algorithm
 

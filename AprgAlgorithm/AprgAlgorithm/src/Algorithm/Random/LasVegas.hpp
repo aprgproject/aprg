@@ -6,7 +6,7 @@ namespace alba::algorithm {
 
 using LasVegasAlgorithm = std::function<void(void)>;
 
-void performALasVegasAlgorithm(LasVegasAlgorithm const& lasVegasAlgorithm) { lasVegasAlgorithm(); }
+inline void performALasVegasAlgorithm(LasVegasAlgorithm const& lasVegasAlgorithm) { lasVegasAlgorithm(); }
 
 }  // namespace alba::algorithm
 

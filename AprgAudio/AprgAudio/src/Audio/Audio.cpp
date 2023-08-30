@@ -13,7 +13,7 @@ namespace alba::AprgAudio {
 
 // Pre-defined 10-byte representations of common sample rates
 
-unordered_map<int, vector<uint8_t>> aiffSampleRateTable = {
+unordered_map<int, vector<uint8_t>> const aiffSampleRateTable = {
     {8000, {64, 11, 250, 0, 0, 0, 0, 0, 0, 0}},    {11025, {64, 12, 172, 68, 0, 0, 0, 0, 0, 0}},
     {16000, {64, 12, 250, 0, 0, 0, 0, 0, 0, 0}},   {22050, {64, 13, 172, 68, 0, 0, 0, 0, 0, 0}},
     {32000, {64, 13, 250, 0, 0, 0, 0, 0, 0, 0}},   {37800, {64, 14, 147, 168, 0, 0, 0, 0, 0, 0}},
@@ -79,7 +79,7 @@ std::vector<T>& Audio<T>::getSamplesReferenceAtChannel(int const channelIndex) {
 
 template <class T>
 double Audio<T>::getLengthInSeconds() const {
-    return (double)getNumSamplesPerChannel() / (double)sampleRate;
+    return static_cast<double>(getNumSamplesPerChannel()) / static_cast<double>(sampleRate);
 }
 
 template <class T>
@@ -95,7 +95,7 @@ void Audio<T>::printSummary() const {
 
 template <class T>
 bool Audio<T>::setAudioBuffer(AudioBuffer& newBuffer) {
-    int numChannels = (int)newBuffer.size();
+    int numChannels = static_cast<int>(newBuffer.size());
 
     if (numChannels <= 0) {
         assert(false && "The buffer your are trying to use has no channels");
@@ -222,10 +222,10 @@ bool Audio<T>::decodeWaveFile(vector<uint8_t>& fileDataBytes) {
     // int32_t formatChunkSize = fourBytesToInt (fileDataBytes, f + 4);
     int16_t audioFormat = twoBytesToInt(fileDataBytes, f + 8);
     int16_t numChannels = twoBytesToInt(fileDataBytes, f + 10);
-    sampleRate = (int)fourBytesToInt(fileDataBytes, f + 12);
+    sampleRate = static_cast<int>(fourBytesToInt(fileDataBytes, f + 12));
     int32_t numBytesPerSecond = fourBytesToInt(fileDataBytes, f + 16);
     int16_t numBytesPerBlock = twoBytesToInt(fileDataBytes, f + 20);
-    bitDepth = (int)twoBytesToInt(fileDataBytes, f + 22);
+    bitDepth = static_cast<int>(twoBytesToInt(fileDataBytes, f + 22));
 
     int numBytesPerSample = bitDepth / 8;
 
@@ -325,7 +325,7 @@ bool Audio<T>::decodeAiffFile(vector<uint8_t>& fileDataBytes) {
     // int32_t commChunkSize = fourBytesToInt (fileDataBytes, p + 4, Endianness::BigEndian);
     int16_t numChannels = twoBytesToInt(fileDataBytes, p + 8, Endianness::BigEndian);
     int32_t numSamplesPerChannel = fourBytesToInt(fileDataBytes, p + 10, Endianness::BigEndian);
-    bitDepth = (int)twoBytesToInt(fileDataBytes, p + 14, Endianness::BigEndian);
+    bitDepth = static_cast<int>(twoBytesToInt(fileDataBytes, p + 14, Endianness::BigEndian));
     sampleRate = getAiffSampleRate(fileDataBytes, p + 16);
 
     // check the sample rate was properly decoded

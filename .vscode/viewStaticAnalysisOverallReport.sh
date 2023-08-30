@@ -16,7 +16,7 @@ set -e
 # Show all issues found in static analysis reports
 while IFS= read -r staticAnalysisReportPath; do
     scriptPrint "$scriptName" "$LINENO" "Processing static report: [$staticAnalysisReportPath]..."
-    sed -E "s|/home/runner/work/aprg/|F:/Branches/aprg_project/aprg/|g" "$staticAnalysisReportPath" | grep "cppcoreguidelines-explicit-virtual-functions" || true
+    sed -E "s|/home/runner/work/aprg/|F:/Branches/aprg_project/aprg/|g" "$staticAnalysisReportPath" | grep "performance-inefficient-string-concatenation" || true
 done < <(find "$aprgDirectory" -depth -type f -name "StaticAnalysisReport.txt")
 
 scriptPrint "$scriptName" "$LINENO" "The exit code is: [$exitCode]"

@@ -31,10 +31,10 @@ private:
     void markUnionAsNeededForIfsRecursively(std::string const& unionName);
     void markEnumAsNeededForIfsRecursively(std::string const& enumName);
     void markTypedefAsNeededForIfsRecursively(std::string const& typedefName);
-    void markConstantAsNeededForIfs(std::string const& enumName);
+    void markConstantAsNeededForIfs(std::string const& constantName);
     void readOamTcomTupcMessageFiles();
     void readConstantFiles();
-    void readFileUsingTypeName(std::string const& fileName);
+    void readFileUsingTypeName(std::string const& typeName);
     void readFileUsingTypeFileName(std::string const& typeFileName);
     void updateDescriptionFromUser(
         IfsDefinitionType const currentDefinitionType, std::string const& name, std::string const& parameterName,

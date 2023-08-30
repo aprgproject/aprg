@@ -38,7 +38,7 @@ private:
     void sendTransportBearerReallocationCancelResp() const;
     void sendTransportBearerReallocationCleanupResp() const;
     void sendCmBearersSetupReqBasedOnTbRegisterMsg(GenericMessage const& tbRegisterGenericMessage) const;
-    void sendCmBearersReleaseReqBasedOnTbUnregisterMsg(GenericMessage const& tbRegisterGenericMessage) const;
+    void sendCmBearersReleaseReqBasedOnTbUnregisterMsg(GenericMessage const& tbUnregisterGenericMessage) const;
     void sendCmBearersModifyReqBasedOnTbModificationPrepareReqMsg(
         GenericMessage const& tbModificationPrepareGenericMessage) const;
     void sendCmBearersModifyReqBasedOnTbModificationCommitReqMsg(
@@ -53,7 +53,7 @@ private:
     void sendTransportConnectionReleaseReqsBasedOnCmBearersUpdateInd(
         GenericMessage const& cmBearerGenericMessage) const;
     void sendTransportConnectionReleaseReqsBasedOnReallocationCleanupReqMsg(
-        GenericMessage const& cmBearerGenericMessage) const;
+        GenericMessage const& tbReallocationCleanupGenericMessage) const;
     void sendTransportConnectionTransferReqsBasedOnReallocationPrepareReqMsg(
         GenericMessage const& tbReallocationPrepareGenericMessage) const;
     void handleMessageEvent(GenericMessage const& genericMessage) override;

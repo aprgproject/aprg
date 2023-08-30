@@ -78,7 +78,7 @@ string StringHelpers::convertToString(UmlPositionType const position) {
     return stringHelper::getStringAfterThisString(result, "UmlLogPosition::");
 }
 
-string StringHelpers::convertToString(ComponentNames const componentNames) {
+string StringHelpers::convertToString(ComponentNames const& componentNames) {
     string result(accumulate(
         componentNames.cbegin(), componentNames.cend(), string(""),
         [](string const& partialResult, ComponentName const componentName) {

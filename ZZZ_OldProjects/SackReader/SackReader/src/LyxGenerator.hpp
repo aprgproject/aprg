@@ -21,12 +21,12 @@ private:
     void saveUnionDefinitions(std::ofstream& lyxOutputFileStream);
     void saveConstantDefinitions(std::ofstream& lyxOutputFileStream);
     void saveTypedefDefinitions(std::ofstream& lyxOutputFileStream);
-    void saveMessageDefinitionSubsubsection(std::string const& messageName, std::ofstream& messageTableStream);
+    void saveMessageDefinitionSubsubsection(std::string const& messageName, std::ofstream& messageDefinitionsStream);
     void saveStructureDefinitionSubsubsection(
         std::string const& structureName, std::ofstream& structureDefinitionsStream);
     void saveEnumDefinitionSubsubsection(std::string const& enumName, std::ofstream& enumDefinitionsStream);
     void saveUnionDefinitionSubsubsection(std::string const& unionName, std::ofstream& unionDefinitionsStream);
-    void saveConstantDefinitionSubsubsection(std::string const& constantName, std::ofstream& unionDefinitionsStream);
+    void saveConstantDefinitionSubsubsection(std::string const& constantName, std::ofstream& constantDefinitionsStream);
     void saveTypedefDefinitionSubsubsectionFromDatabase(std::ofstream& lyxOutputFileStream);
     void saveTypedefDefinitionSubsubsectionUsingTypedefName(
         std::string const& typedefName, std::ofstream& typedefDefinitionsStream);
@@ -41,9 +41,9 @@ private:
     void saveUnionTable(std::string const& unionName, std::ofstream& unionTableStream);
     void saveConstantTable(std::string const& constantName, std::ofstream& constantTableStream);
     void saveTypedefTable(TypedefDetails const& typedefDetails, std::ofstream& typedefTableStream);
-    static void saveDisplayTable(DisplayTable const& messageTable, std::ofstream& messageTableStream);
+    static void saveDisplayTable(DisplayTable const& displayTable, std::ofstream& displayTableStream);
     void generateStructureForDisplayTablesIfNeeded(
-        std::string const& structureName, DisplayTable& messageTable, std::string const& indentionInType,
+        std::string const& structureName, DisplayTable& displayTable, std::string const& indentionInType,
         bool const areInnerStructuresGenerated);
     void generateEnumForDisplayTablesIfNeeded(std::string const& enumName, DisplayTable& displayTable);
     void generateUnionForDisplayTablesIfNeeded(

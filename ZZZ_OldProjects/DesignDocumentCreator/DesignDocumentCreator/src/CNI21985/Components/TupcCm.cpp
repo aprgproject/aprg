@@ -101,12 +101,9 @@ void TupcCm::sendCmBearersReleaseRespBasedCmBearersReleaseReq(GenericMessage con
     SCmBearersReleaseReqMsg const& cmBearersReleaseReqPayload(cmBearersReleaseReqMessage.getStaticPayloadReference());
     payload.numConnections = cmBearersReleaseReqPayload.numConnections;
     for (unsigned int connection = 0; connection < cmBearersReleaseReqPayload.numConnections; connection++) {
-        SCmBearersReleaseRespDynamicPart payloadDynamicPart{};
-        SCmBearersReleaseReqDynamicPart& cmBearersReleaseReqDynamicPartPayload(
-            cmBearersReleaseReqMessage.getDynamicPayloadReferenceAtAndCreateIfNeeded(connection));
         // payloadDynamicPart.fpSicAddress = <<missing>>
         // payloadDynamicPart.localPort = <<missing>>
-        specificMessage.addDynamicPart(payloadDynamicPart);
+        specificMessage.addDynamicPart({});
     }
     send(ComponentName::TupcTbm, convertSpecificDynamicArrayToGeneric(specificMessage));
     logNoteOnPreviousMessage("TUPC/CM responds TUPC_CM_BEARERS_RELEASE_RESP_MSG to TUPC/TBM.");

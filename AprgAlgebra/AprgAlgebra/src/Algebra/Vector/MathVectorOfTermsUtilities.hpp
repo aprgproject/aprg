@@ -167,7 +167,7 @@ Term getDivergence(MathVectorOfTerms<SIZE> const& termVector, ArrayOfStrings<SIZ
     using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
     MathVectorOfTerms<SIZE> del(getDel<SIZE>(termVector, coordinateVariables));
     Values const& values(del.getValues());
-    return std::accumulate(values.cbegin(), values.cend(), Term(0), std::plus<Term>());
+    return std::accumulate(values.cbegin(), values.cend(), Term(0), std::plus<>());
 }
 
 template <size_t SIZE>
@@ -175,7 +175,7 @@ Term getLaplaceTerm(MathVectorOfTerms<SIZE> const& termVector, ArrayOfStrings<SI
     using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
     MathVectorOfTerms<SIZE> del(getDoubleDel<SIZE>(termVector, coordinateVariables));
     Values const& values(del.getValues());
-    return std::accumulate(values.cbegin(), values.cend(), Term(0), std::plus<Term>());
+    return std::accumulate(values.cbegin(), values.cend(), Term(0), std::plus<>());
 }
 
 template <size_t SIZE>

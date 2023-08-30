@@ -21,24 +21,24 @@ public:
 
     [[nodiscard]] ValuePair getNonDuplicateTwoValuesWithSum(Value const& targetSum) const {
         // std::less because index must be distinct
-        return getTwoValuesWithSum(targetSum, 0, m_sortedValues.size() - 1, std::less<Index>());
+        return getTwoValuesWithSum(targetSum, 0, m_sortedValues.size() - 1, std::less<>());
     }
 
     [[nodiscard]] ValuePair getNonDuplicateTwoValuesWithSum(
         Value const& targetSum, Index const lowIndex, Index const highIndex) const {
         // std::less because index must be distinct
-        return getTwoValuesWithSum(targetSum, lowIndex, highIndex, std::less<Index>());
+        return getTwoValuesWithSum(targetSum, lowIndex, highIndex, std::less<>());
     }
 
     [[nodiscard]] ValuePair getPossibleDuplicatedTwoValuesWithSum(Value const& targetSum) const {
         // std::less_equal because index can be equal
-        return getTwoValuesWithSum(targetSum, 0, m_sortedValues.size() - 1, std::less_equal<Index>());
+        return getTwoValuesWithSum(targetSum, 0, m_sortedValues.size() - 1, std::less_equal<>());
     }
 
     [[nodiscard]] ValuePair getPossibleDuplicatedTwoValuesWithSum(
         Value const& targetSum, Index const lowIndex, Index const highIndex) const {
         // std::less_equal because index can be equal
-        return getTwoValuesWithSum(targetSum, lowIndex, highIndex, std::less_equal<Index>());
+        return getTwoValuesWithSum(targetSum, lowIndex, highIndex, std::less_equal<>());
     }
 
 private:

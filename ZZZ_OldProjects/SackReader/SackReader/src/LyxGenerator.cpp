@@ -399,8 +399,6 @@ void LyxGenerator::saveDisplayTable(DisplayTable const& displayTable, ofstream& 
             {
                 displayTableStream << tableTemplateLine << "\n";
             }
-        } else if (isStringFoundCaseSensitive(tableTemplateLine, "LYX_TABLE_DESCRIPTION_COLUMN_REPLACE")) {
-            displayTableStream << tableTemplateLine << "\n";  // for description
         } else {
             displayTableStream << tableTemplateLine << "\n";
         }

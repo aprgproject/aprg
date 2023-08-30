@@ -56,37 +56,25 @@ public:
 
     bool operator!=(Sample const& value) const { return !(*this == value); }
 
-    Sample operator+(Sample const& value) const {
-        return performDataTypeAndDataTypeFunction(value, std::plus<double>());
-    }
+    Sample operator+(Sample const& value) const { return performDataTypeAndDataTypeFunction(value, std::plus<>()); }
 
-    Sample operator-(Sample const& value) const {
-        return performDataTypeAndDataTypeFunction(value, std::minus<double>());
-    }
+    Sample operator-(Sample const& value) const { return performDataTypeAndDataTypeFunction(value, std::minus<>()); }
 
     Sample operator*(Sample const& value) const {
-        return performDataTypeAndDataTypeFunction(value, std::multiplies<double>());
+        return performDataTypeAndDataTypeFunction(value, std::multiplies<>());
     }
 
-    Sample operator/(Sample const& value) const {
-        return performDataTypeAndDataTypeFunction(value, std::divides<double>());
-    }
+    Sample operator/(Sample const& value) const { return performDataTypeAndDataTypeFunction(value, std::divides<>()); }
 
-    Sample operator+(double const value) const {
-        return performDataTypeAndConstantFunction(value, std::plus<double>());
-    }
+    Sample operator+(double const value) const { return performDataTypeAndConstantFunction(value, std::plus<>()); }
 
-    Sample operator-(double const value) const {
-        return performDataTypeAndConstantFunction(value, std::minus<double>());
-    }
+    Sample operator-(double const value) const { return performDataTypeAndConstantFunction(value, std::minus<>()); }
 
     Sample operator*(double const value) const {
-        return performDataTypeAndConstantFunction(value, std::multiplies<double>());
+        return performDataTypeAndConstantFunction(value, std::multiplies<>());
     }
 
-    Sample operator/(double const value) const {
-        return performDataTypeAndConstantFunction(value, std::divides<double>());
-    }
+    Sample operator/(double const value) const { return performDataTypeAndConstantFunction(value, std::divides<>()); }
 
     [[nodiscard]] Sample calculateAbsoluteValue() const {
         return performDataTypeFunction(
@@ -111,7 +99,7 @@ public:
     }
 
     Sample performDataTypeAndConstantFunction(
-        double const value, std::function<double(double, double)> binaryFunction) const {
+        double const value, std::function<double(double, double)> const& binaryFunction) const {
         Sample result;
         std::transform(m_data.begin(), m_data.cend(), result.m_data.begin(), [&](double const data) -> double {
             return binaryFunction(data, value);
@@ -119,7 +107,7 @@ public:
         return result;
     }
 
-    Sample performDataTypeFunction(std::function<double(double)> unaryFunction) const {
+    Sample performDataTypeFunction(std::function<double(double)> const& unaryFunction) const {
         Sample result;
         std::transform(m_data.begin(), m_data.cend(), result.m_data.begin(), unaryFunction);
         return result;

@@ -17,12 +17,12 @@ namespace alba::algebra {
 
 namespace {
 
-ConditionFunctionForTermsWithDetails isCommonPart = [](TermWithDetails const& termWithDetails) -> bool {
+ConditionFunctionForTermsWithDetails const isCommonPart = [](TermWithDetails const& termWithDetails) -> bool {
     Term const& term(getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer));
     return termWithDetails.hasNegativeAssociation() || term.isExpression() || term.isFunction();
 };
 
-ConditionFunctionForTermsWithDetails isMergePart = [](TermWithDetails const& termWithDetails) -> bool {
+ConditionFunctionForTermsWithDetails const isMergePart = [](TermWithDetails const& termWithDetails) -> bool {
     return !isCommonPart(termWithDetails);
 };
 

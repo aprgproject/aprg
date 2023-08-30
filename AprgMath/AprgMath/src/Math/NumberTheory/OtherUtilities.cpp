@@ -110,7 +110,7 @@ bool isZeckendorfTheoremTrue(UnsignedInteger const number) {
 
     if (isComplete) {
         UnsignedInteger sumOfFibonaccis =
-            accumulate(fibonaccisForSum.cbegin(), fibonaccisForSum.cend(), 0, std::plus<UnsignedInteger>());
+            accumulate(fibonaccisForSum.cbegin(), fibonaccisForSum.cend(), 0, std::plus<>());
         result = sumOfFibonaccis == number;
     }
     return result;

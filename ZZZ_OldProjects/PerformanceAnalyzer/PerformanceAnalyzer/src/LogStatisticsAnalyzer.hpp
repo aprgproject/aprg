@@ -25,7 +25,7 @@ public:
     LogStatisticsAnalyzer();
     void saveDataToCsv(std::string const& csvPath);
     void saveLogDetailsToCsv(std::ofstream& outputCsvFileStream);
-    void processFileWithSortedPrints(std::string const& pathOfBtsLog);
+    void processFileWithSortedPrints(std::string const& pathOfBtsSortedLog);
 
 private:
     void analyzeLog(std::string const& lineInLogs);

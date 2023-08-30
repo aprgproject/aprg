@@ -2,12 +2,12 @@
 
 namespace aiff_stereo_24bit_44100 {
 
-int numSamplesPerChannel = 352800;
-int bitDepth = 24;
-int sampleRate = 44100;
-int numChannels = 2;
+constexpr int numSamplesPerChannel = 352800;
+constexpr int bitDepth = 24;
+constexpr int sampleRate = 44100;
+constexpr int numChannels = 2;
 
-std::vector<std::vector<double>> testBuffer = {
+static std::vector<std::vector<double>> testBuffer = {
     {0.0,
      2.38418579102e-07,
      1.78813934326e-06,

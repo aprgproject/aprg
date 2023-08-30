@@ -178,8 +178,6 @@ TEST(SampleTest, SampleTest1) {
 
     auto* rlSetupReqPointer = reinterpret_cast<BB_2_RlSetupReq*>(dynamicPayload);
 
-    u8* movablePointer = (u8*)dynamicPayload;
-
     unsigned int offset =
         sizeof(BB_2_RlSetupReq) - sizeof(TDynamicData) +
         (sizeof(SDlDpchInfoRlSetup) * swap4(rlSetupReqPointer->numOfDlDpchInfo)) +
@@ -504,8 +502,6 @@ TEST(SampleTest, SampleTest2) {
        0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};*/
 
     auto* rlSetupReqPointer = reinterpret_cast<BB_2_RlSetupReq*>(dynamicPayload);
-
-    u8* movablePointer = (u8*)dynamicPayload;
 
     unsigned int offset =
         sizeof(BB_2_RlSetupReq) - sizeof(TDynamicData) +

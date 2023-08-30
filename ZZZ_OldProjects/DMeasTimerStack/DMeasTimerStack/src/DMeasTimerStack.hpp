@@ -86,11 +86,11 @@ public:
     TimerData* timersFindNbccRecovery(TNodeBCommunicationContextId nbccId, TimerIndex& timerIndex);
     EBoolean trigExpiredAndRemove(TimerIndex& timerIndex);
     EBoolean preRefresh(TSfn const newSfn);
-    EBoolean insert(TSfn const expirationTime, TimerData const& timerData);
-    EBoolean insert(TimeCounter expirationTime, TimerData const& timerData, TimerIndex& timerIndex);
+    EBoolean insert(TSfn const sfn, TimerData const& timerData);
+    EBoolean insert(TimeCounter timerValue, TimerData const& timerData, TimerIndex& timerIndex);
     EBoolean insertMeasurement(
         TimerType const timerType, TimeCounter const timeAdvance, TMeasurementID const measurementId,
-        TUserId const userId, TimerIndex& timerIndex, TAaSysComSicad const timedOutSicad = 0,
+        TUserId const userId, TimerIndex& timerIndex, TAaSysComSicad const sicadToWait = 0,
         EFaultId const faultId = EFaultId_NoResponseAl);
     EBoolean renewMeasurement(TimerIndex& timerIndex, TimeCounter const timeAdvance);
     EBoolean remove(TimerIndex& timerIndex);

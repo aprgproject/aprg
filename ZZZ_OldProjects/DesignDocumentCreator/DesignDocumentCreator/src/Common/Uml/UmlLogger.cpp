@@ -38,7 +38,7 @@ void UmlLogger::logNoteOnComponent(ComponentName const componentName, string con
     m_umlLogBuffer << "end note\n";
 }
 
-void UmlLogger::logNoteOnComponents(ComponentNames const componentNames, string const& note) {
+void UmlLogger::logNoteOnComponents(ComponentNames const& componentNames, string const& note) {
     m_umlLogBuffer << "rnote over " << StringHelpers::convertToString(componentNames) << " #white\n";
     logNote(note);
     m_umlLogBuffer << "end note\n";

@@ -20,11 +20,11 @@ bool isNonEmptyOrNonOperatorOrNonExpressionType(Term const& term) {
 }
 
 bool getNoEffectValueInOperation(OperatorLevel const operatorLevel) {
-    return OperatorLevel::And == operatorLevel ? true : OperatorLevel::Or == operatorLevel ? false : false;
+    return OperatorLevel::And == operatorLevel ? true : false;
 }
 
 bool getShortCircuitValueEffectInOperation(OperatorLevel const operatorLevel) {
-    return OperatorLevel::And == operatorLevel ? false : OperatorLevel::Or == operatorLevel ? true : false;
+    return OperatorLevel::Or == operatorLevel ? true : false;
 }
 
 VariableNamesSet getVariableNames(Term const& term) {

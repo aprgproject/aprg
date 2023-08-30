@@ -31,7 +31,7 @@ class MonsterRaceAnalyzer {
 public:
     MonsterRaceAnalyzer();
 
-    void showNextPossibleWinners(RaceConfiguration const& raceConfiguration) const;
+    void showNextPossibleWinners(RaceConfiguration const& currentConfiguration) const;
 
 private:
     static void retrieveBestWinners(

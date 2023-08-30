@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2019_RoundB_P1_BuildingPalindromes.hpp"
 
@@ -39,8 +39,8 @@ int32_t getPalindromeValue(string const& blocksString, Question const& question)
 }
 
 bool canPalindrome(string const& blocksString, Question const& question) {
-    int length = question.second - question.first + 1;
-    /* if (length % 2 == 0) {
+    /*int length = question.second - question.first + 1;
+     if (length % 2 == 0) {
         return __builtin_popcount(getPalindromeValue(blocksString, question)) == 0;
     } else {
         return __builtin_popcount(getPalindromeValue(blocksString, question)) == 1;

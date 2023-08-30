@@ -219,9 +219,6 @@ TEST(ConstExamplesTest, FunctionMatchingWithConstInFunctionSignatureOfAClassWork
         static void myFunction() { cout << "calling const\n"; }
     };
 
-    Foo a;
-    Foo const b(a);
-
     Foo::myFunction();  // goes to "const"
     Foo::myFunction();  // goes to "const"
 

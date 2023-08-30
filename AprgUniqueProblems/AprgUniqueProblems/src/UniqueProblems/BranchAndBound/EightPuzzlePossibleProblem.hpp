@@ -44,7 +44,7 @@ private:
 
     void clearIfInvalid();
     void clear();
-    SearchNode createNode(SearchNodeId const& currentNodeId, Coordinate const& newBlankTile, int const searchLevel);
+    SearchNode createNode(SearchNodeId const& currentNodeId, Coordinate const& nextBlankTile, int const searchLevel);
     SearchNodeId getNextNodeId();
     static void moveTile(NumberMatrix& matrix, Coordinate const& previousBlankTile, Coordinate const& nextBlankTile);
     [[nodiscard]] bool isValidCoordinate(Coordinate const& coordinate) const;
