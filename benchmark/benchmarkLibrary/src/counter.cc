@@ -19,20 +19,20 @@ namespace benchmark::internal {
 double Finish(Counter const& c, IterationCount iterations, double cpu_time,
               double num_threads) {
   double v = c.value;
-  if ((c.flags & Counter::kIsRate) != 0u) {
+  if ((c.flags & Counter::kIsRate) != 0U) {
     v /= cpu_time;
   }
-  if ((c.flags & Counter::kAvgThreads) != 0u) {
+  if ((c.flags & Counter::kAvgThreads) != 0U) {
     v /= num_threads;
   }
-  if ((c.flags & Counter::kIsIterationInvariant) != 0u) {
+  if ((c.flags & Counter::kIsIterationInvariant) != 0U) {
     v *= iterations;
   }
-  if ((c.flags & Counter::kAvgIterations) != 0u) {
+  if ((c.flags & Counter::kAvgIterations) != 0U) {
     v /= iterations;
   }
 
-  if ((c.flags & Counter::kInvert) != 0u) {  // Invert is *always* last.
+  if ((c.flags & Counter::kInvert) != 0U) {  // Invert is *always* last.
     v = 1.0 / v;
   }
   return v;

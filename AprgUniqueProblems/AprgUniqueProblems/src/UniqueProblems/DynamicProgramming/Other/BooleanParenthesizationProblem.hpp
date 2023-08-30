@@ -20,17 +20,18 @@ public:
 
     BooleanParenthesizationProblem(Booleans const& inputValues, Operators const& operators);
 
-    Count getNumberOfWaysForTrueUsingNaiveRecursion() const;
-    Count getNumberOfWaysForTrueUsingMemoizationDP() const;
-    Count getNumberOfWaysForTrueUsingIterativeDP() const;
+    [[nodiscard]] Count getNumberOfWaysForTrueUsingNaiveRecursion() const;
+    [[nodiscard]] Count getNumberOfWaysForTrueUsingMemoizationDP() const;
+    [[nodiscard]] Count getNumberOfWaysForTrueUsingIterativeDP() const;
 
 private:
-    Count getNumberOfWaysUsingNaiveRecursion(bool const expectedOutput, Index const left, Index const right) const;
+    [[nodiscard]] Count getNumberOfWaysUsingNaiveRecursion(
+        bool const expectedOutput, Index const left, Index const right) const;
     Count getNumberOfWaysUsingMemoizationDP(
         CountMatrices& countMatrices, bool const expectedOutput, Index const left, Index const right) const;
 
     static Count convertBoolToCount(bool const booleanValue);
-    bool areSizesCorrect() const;
+    [[nodiscard]] bool areSizesCorrect() const;
     void initialize();
     Booleans m_inputValues;
     Operators m_operators;

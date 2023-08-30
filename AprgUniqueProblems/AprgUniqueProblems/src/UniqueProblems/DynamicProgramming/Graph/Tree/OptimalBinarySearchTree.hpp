@@ -18,13 +18,13 @@ public:
     using CostMatrix = matrix::AlbaMatrix<Cost>;
     static constexpr Cost MAX_COUNT = std::numeric_limits<Cost>::max();
 
-    OptimalBinarySearchTree(ValueAndFrequencyPairs const& valueAndFrequencyPairs);
+    explicit OptimalBinarySearchTree(ValueAndFrequencyPairs const& valueAndFrequencyPairs);
 
-    Cost getMinimumCostUsingNaiveRecursion() const;
-    Cost getMinimumCostUsingIterativeDP() const;
+    [[nodiscard]] Cost getMinimumCostUsingNaiveRecursion() const;
+    [[nodiscard]] Cost getMinimumCostUsingIterativeDP() const;
 
 private:
-    Cost getMinimumCostUsingNaiveRecursion(Cost const depth, Index const left, Index const right) const;
+    [[nodiscard]] Cost getMinimumCostUsingNaiveRecursion(Cost const depth, Index const left, Index const right) const;
 
     static Cost getCost(Cost const depth, Cost const frequency);
     void initialize();

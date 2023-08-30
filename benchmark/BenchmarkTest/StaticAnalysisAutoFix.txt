@@ -1,4 +1,5 @@
-2023-08-29T03:57:30
+StaticAnalysisJobIdentifier: [9]
+2023-08-30T00:21:40
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:120:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:121:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:122:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]

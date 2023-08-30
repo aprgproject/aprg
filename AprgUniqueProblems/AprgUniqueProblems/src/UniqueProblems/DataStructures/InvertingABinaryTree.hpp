@@ -2,9 +2,7 @@
 
 #include <memory>
 
-namespace alba {
-
-namespace InvertingABinaryTree {
+namespace alba::InvertingABinaryTree {
 
 struct Node {
     int value;
@@ -15,6 +13,4 @@ struct Node {
 
 std::unique_ptr<Node> invertABinaryTree(std::unique_ptr<Node> parent);
 
-}  // namespace InvertingABinaryTree
-
-}  // namespace alba
+}  // namespace alba::InvertingABinaryTree

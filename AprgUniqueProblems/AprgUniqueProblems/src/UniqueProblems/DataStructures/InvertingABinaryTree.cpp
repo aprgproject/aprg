@@ -2,9 +2,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace InvertingABinaryTree {
+namespace alba::InvertingABinaryTree {
 
 unique_ptr<Node> invertABinaryTree(unique_ptr<Node> parent) {
     if (parent) {
@@ -16,6 +14,4 @@ unique_ptr<Node> invertABinaryTree(unique_ptr<Node> parent) {
     return parent;
 }
 
-}  // namespace InvertingABinaryTree
-
-}  // namespace alba
+}  // namespace alba::InvertingABinaryTree

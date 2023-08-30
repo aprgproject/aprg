@@ -105,10 +105,8 @@ VertexCoverProblem::SetOfVertices VertexCoverProblem::getMinimumSetUsingMemoizat
         }
         vertexToMinimumSetMap.emplace(vertex, setIfVertexIsNotIncluded);
         return setIfVertexIsNotIncluded;
-
-    } else {
-        return it->second;
     }
+    return it->second;
 }
 
 }  // namespace alba

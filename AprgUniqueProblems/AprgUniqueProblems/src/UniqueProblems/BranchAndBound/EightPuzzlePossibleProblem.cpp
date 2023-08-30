@@ -12,7 +12,7 @@ EightPuzzlePossibleProblem::EightPuzzlePossibleProblem(
     : m_startMatrix(startMatrix),
       m_targetMatrix(targetMatrix),
       m_sideSize(m_startMatrix.getNumberOfColumns()),
-      m_nodeIdToSnapshot(),
+
       m_nodeId(START_NODE_ID) {
     clearIfInvalid();
 }
@@ -88,7 +88,7 @@ int EightPuzzlePossibleProblem::countDifference(
     int result = 0;
     for (int x = 0; x < m_sideSize; ++x) {
         for (int y = 0; y < m_sideSize; ++y) {
-            if (startMatrix.getEntry(x, y) && startMatrix.getEntry(x, y) != targetMatrix.getEntry(x, y)) {
+            if ((startMatrix.getEntry(x, y) != 0) && startMatrix.getEntry(x, y) != targetMatrix.getEntry(x, y)) {
                 ++result;
             }
         }

@@ -13,10 +13,10 @@ public:
     using Value = int;
     using Values = std::vector<Value>;
 
-    CountNumberOfWaysToReachAGivenScoreInAGame(Value const targetScore);
+    explicit CountNumberOfWaysToReachAGivenScoreInAGame(Value const targetScore);
 
-    Value getMinimumCostUsingIterativeDP() const;
-    Value getMinimumCostUsingCoinProblemSolutions() const;
+    [[nodiscard]] Value getMinimumCostUsingIterativeDP() const;
+    [[nodiscard]] Value getMinimumCostUsingCoinProblemSolutions() const;
 
 private:
     Value m_targetScore;

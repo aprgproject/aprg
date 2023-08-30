@@ -15,12 +15,13 @@ public:
 
     EggDroppingPuzzle(Count const numberOfEggs, Count const numberOfFloors);
 
-    Count getMinimumNumberOfTrialsUsingNaiveRecursion() const;
-    Count getMinimumNumberOfTrialsUsingMemoizationDP() const;
-    Count getMinimumNumberOfTrialsUsingIterativeDP() const;
+    [[nodiscard]] Count getMinimumNumberOfTrialsUsingNaiveRecursion() const;
+    [[nodiscard]] Count getMinimumNumberOfTrialsUsingMemoizationDP() const;
+    [[nodiscard]] Count getMinimumNumberOfTrialsUsingIterativeDP() const;
 
 private:
-    Count getMinimumNumberOfTrialsUsingNaiveRecursion(Count const remainingEggs, Count const floorIndexPlusOne) const;
+    [[nodiscard]] Count getMinimumNumberOfTrialsUsingNaiveRecursion(
+        Count const remainingEggs, Count const floorIndexPlusOne) const;
     Count getMinimumNumberOfTrialsUsingMemoizationDP(
         CountMatrix& valueMatrix, Count const remainingEggs, Count const floorIndexPlusOne) const;
     Count const m_numberOfEggs;

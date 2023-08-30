@@ -2,9 +2,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace ReversingALinkedList {
+namespace alba::ReversingALinkedList {
 
 unique_ptr<Node> reverseALinkedList(unique_ptr<Node> head) {
     unique_ptr<Node> result;
@@ -21,6 +19,4 @@ unique_ptr<Node> reverseALinkedList(unique_ptr<Node> head) {
     return result;
 }
 
-}  // namespace ReversingALinkedList
-
-}  // namespace alba
+}  // namespace alba::ReversingALinkedList

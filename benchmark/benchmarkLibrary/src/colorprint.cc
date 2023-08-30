@@ -36,7 +36,7 @@ namespace {
 #ifdef BENCHMARK_OS_WINDOWS
 typedef WORD PlatformColorCode;
 #else
-typedef const char* PlatformColorCode;
+using PlatformColorCode = const char *;
 #endif
 
 PlatformColorCode GetPlatformColorCode(LogColor color) {
@@ -101,7 +101,7 @@ std::string FormatString(const char* msg, va_list args) {
   } if (static_cast<size_t>(ret) < size) {
     return local_buff;
   }     // we did not provide a long enough buffer on our first attempt.
-    size = (size_t)ret + 1;  // + 1 for the null byte
+    size = static_cast<size_t>(ret) + 1;  // + 1 for the null byte
     std::unique_ptr<char[]> buff(new char[size]);
     ret = vsnprintf(buff.get(), size, msg, args);
     BM_CHECK(ret > 0 && ((size_t)ret) < size);

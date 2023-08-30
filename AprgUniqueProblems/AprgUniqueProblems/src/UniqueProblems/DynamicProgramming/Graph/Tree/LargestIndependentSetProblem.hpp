@@ -21,12 +21,12 @@ public:
 
     LargestIndependentSetProblem(Graph const& nAryTreeGraph, Vertex const rootOfTree);
 
-    Count getMaximumCountUsingNaiveRecursion() const;
-    Count getMaximumCountUsingMemoizationDP() const;
-    SetOfVertices getMaximumSetUsingMemoizationDP() const;
+    [[nodiscard]] Count getMaximumCountUsingNaiveRecursion() const;
+    [[nodiscard]] Count getMaximumCountUsingMemoizationDP() const;
+    [[nodiscard]] SetOfVertices getMaximumSetUsingMemoizationDP() const;
 
 private:
-    Count getMaximumCountUsingNaiveRecursion(Vertex const vertex) const;
+    [[nodiscard]] Count getMaximumCountUsingNaiveRecursion(Vertex const vertex) const;
     Count getMaximumCountUsingMemoizationDP(VertexToCountMap& vertexToCountMap, Vertex const vertex) const;
     SetOfVertices getMaximumSetUsingMemoizationDP(
         VertexToSetOfVerticesMap& vertexToMaximumSetMap, Vertex const vertex) const;

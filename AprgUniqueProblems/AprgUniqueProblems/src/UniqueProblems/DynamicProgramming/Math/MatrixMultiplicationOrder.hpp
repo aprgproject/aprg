@@ -16,14 +16,14 @@ public:
     using CountMatrix = matrix::AlbaMatrix<Count>;
     static constexpr Count MAX_COUNT = std::numeric_limits<Count>::max();
 
-    MatrixMultiplicationOrder(Dimensions const& dimensions);
+    explicit MatrixMultiplicationOrder(Dimensions const& dimensions);
 
-    Count getMinimumNumberOfOperationsUsingNaiveRecursion() const;
-    Count getMinimumNumberOfOperationsUsingMemoizationDP() const;
-    Count getMinimumNumberOfOperationsUsingIterativeDP() const;
+    [[nodiscard]] Count getMinimumNumberOfOperationsUsingNaiveRecursion() const;
+    [[nodiscard]] Count getMinimumNumberOfOperationsUsingMemoizationDP() const;
+    [[nodiscard]] Count getMinimumNumberOfOperationsUsingIterativeDP() const;
 
 private:
-    Count getMinimumNumberOfOperationsUsingNaiveRecursion(Index const left, Index const right) const;
+    [[nodiscard]] Count getMinimumNumberOfOperationsUsingNaiveRecursion(Index const left, Index const right) const;
     Count getMinimumNumberOfOperationsUsingMemoizationDP(
         CountMatrix& countMatrix, Index const left, Index const right) const;
     Dimensions m_dimensions;

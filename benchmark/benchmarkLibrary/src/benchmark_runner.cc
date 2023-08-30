@@ -99,7 +99,7 @@ BenchmarkReporter::Run CreateRunReport(
     if (memory_iterations > 0) {
       report.has_memory_result = true;
       report.allocs_per_iter =
-          memory_iterations != 0u ? static_cast<double>(memory_result.num_allocs) /
+          memory_iterations != 0U ? static_cast<double>(memory_result.num_allocs) /
                                   memory_iterations
                             : 0;
       report.max_bytes_used = memory_result.max_bytes_used;
@@ -163,9 +163,9 @@ BenchmarkRunner::BenchmarkRunner(
   if (b.aggregation_report_mode() != internal::ARM_Unspecified) {
     run_results.display_report_aggregates_only =
         ((b.aggregation_report_mode() &
-         internal::ARM_DisplayReportAggregatesOnly) != 0u);
+         internal::ARM_DisplayReportAggregatesOnly) != 0U);
     run_results.file_report_aggregates_only =
-        ((b.aggregation_report_mode() & internal::ARM_FileReportAggregatesOnly) != 0u);
+        ((b.aggregation_report_mode() & internal::ARM_FileReportAggregatesOnly) != 0U);
     BM_CHECK(FLAGS_benchmark_perf_counters.empty() ||
              perf_counters_measurement.IsValid())
         << "Perf counters were requested but could not be set up.";

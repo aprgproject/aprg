@@ -9,11 +9,7 @@ namespace alba {
 CountingTilings::CountingTilings(Count const numberOfColumns, Count const numberOfRows)
     : m_numberOfColumns(numberOfColumns),
       m_numberOfRows(numberOfRows),
-      m_numberOfCells(m_numberOfColumns * m_numberOfRows),
-      m_numberFilledCells(0),
-      m_numberOfSolutions(0),
-      m_grid()  // just initialize this when searching
-{}
+      m_numberOfCells(m_numberOfColumns * m_numberOfRows) {}
 
 CountingTilings::Count CountingTilings::getNumberOfSolutionsUsingDynamicProgramming() {
     // lets make the column the smaller dimension
@@ -108,7 +104,7 @@ void CountingTilings::doCompleteSearchAt(Count const gridIndex) {
     if (m_numberFilledCells == m_numberOfCells) {
         m_numberOfSolutions++;
     } else if (gridIndex < m_numberOfCells) {
-        size_t x, y;
+        size_t x = 0, y = 0;
         m_grid.retrieveXAndYFromIndex(x, y, gridIndex);
         if (m_grid.getEntry(x, y) == '\0') {
             if (m_grid.isInside(x + 1, y) && m_grid.getEntry(x + 1, y) == '\0') {

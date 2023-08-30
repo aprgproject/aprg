@@ -47,9 +47,9 @@ private:
     SearchNode createNode(SearchNodeId const& currentNodeId, Coordinate const& newBlankTile, int const searchLevel);
     SearchNodeId getNextNodeId();
     static void moveTile(NumberMatrix& matrix, Coordinate const& previousBlankTile, Coordinate const& nextBlankTile);
-    bool isValidCoordinate(Coordinate const& coordinate) const;
-    int countDifference(NumberMatrix const& startMatrix, NumberMatrix const& targetMatrix) const;
-    Coordinate getBlankTile(NumberMatrix const& matrix) const;
+    [[nodiscard]] bool isValidCoordinate(Coordinate const& coordinate) const;
+    [[nodiscard]] int countDifference(NumberMatrix const& startMatrix, NumberMatrix const& targetMatrix) const;
+    [[nodiscard]] Coordinate getBlankTile(NumberMatrix const& matrix) const;
     void printSteps(SearchNodeId const nodeId) const;
     static void printMatrix(NumberMatrix const& numberMatrix);
 

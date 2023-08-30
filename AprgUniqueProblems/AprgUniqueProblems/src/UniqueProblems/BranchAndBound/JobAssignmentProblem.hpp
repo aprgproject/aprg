@@ -34,14 +34,15 @@ public:
     static constexpr SearchNodeId INVALID_NODE_ID = 0;
     static constexpr SearchNodeId START_NODE_ID = 1;
 
-    JobAssignmentProblem(CostMatrix const& costMatrix);
+    explicit JobAssignmentProblem(CostMatrix const& costMatrix);
 
     int getMinimalCostAndPrintAssignments();
 
 private:
     SearchNode createNode(SearchNode const& currentNode, Coordinate const& nextAssignment);
-    int getAccumulatedCost(int const workerId, int const jobId, SearchNode const& currentNode) const;
-    int getMinimumPossibleCost(int const workerId, int const jobId, BoolVector const& isJobAssigned) const;
+    [[nodiscard]] int getAccumulatedCost(int const workerId, int const jobId, SearchNode const& currentNode) const;
+    [[nodiscard]] int getMinimumPossibleCost(
+        int const workerId, int const jobId, BoolVector const& isJobAssigned) const;
     SearchNodeId getNextNodeId();
     void printAssignments(SearchNodeId const nodeId) const;
 

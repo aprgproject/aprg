@@ -11,16 +11,16 @@ public:
     using Counts = std::vector<Count>;
     static constexpr Count MAX_COUNT = std::numeric_limits<Count>::max();
 
-    MinimumNumberOfSquaresWithSumEqualToN(Count const sumOfSquares);
+    explicit MinimumNumberOfSquaresWithSumEqualToN(Count const sumOfSquares);
 
-    Count getMinimumCountUsingNaiveRecursion() const;
-    Count getMinimumCountUsingMemoizationDP() const;
-    Count getMinimumCountUsingIterativeDP() const;
-    Count getMinimumCountUsingBfs() const;
-    Count getMinimumCountUsingFewestCoins() const;
+    [[nodiscard]] Count getMinimumCountUsingNaiveRecursion() const;
+    [[nodiscard]] Count getMinimumCountUsingMemoizationDP() const;
+    [[nodiscard]] Count getMinimumCountUsingIterativeDP() const;
+    [[nodiscard]] Count getMinimumCountUsingBfs() const;
+    [[nodiscard]] Count getMinimumCountUsingFewestCoins() const;
 
 private:
-    Count getMinimumCountUsingNaiveRecursion(Count const sumOfSquares) const;
+    [[nodiscard]] Count getMinimumCountUsingNaiveRecursion(Count const sumOfSquares) const;
     Count getMinimumCountUsingMemoizationDP(Counts& savedMinimumCounts, Count const sumOfSquares) const;
 
     Count const m_sumOfSquares;

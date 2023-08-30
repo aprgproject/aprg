@@ -2,13 +2,7 @@
 
 namespace alba {
 
-GridPathSearch::GridPathSearch(int const gridSide)
-    : m_gridSide(gridSide),
-      m_numberOfCells(gridSide * gridSide),
-      m_numberTraversedCells(0),
-      m_numberOfCompletePaths(0),
-      m_grid()  // just initialize this when searching
-{}
+GridPathSearch::GridPathSearch(int const gridSide) : m_gridSide(gridSide), m_numberOfCells(gridSide * gridSide) {}
 
 int GridPathSearch::countPaths() {
     startSearch();

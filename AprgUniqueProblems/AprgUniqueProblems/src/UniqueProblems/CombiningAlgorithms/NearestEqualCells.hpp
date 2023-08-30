@@ -23,17 +23,17 @@ public:
     using Graph = algorithm::UndirectedGraphWithListOfEdges<Coordinate>;
     using Bfs = algorithm::PathSearchUsingBfsWithDistanceCount<Coordinate>;
 
-    NearestEqualCells(ValueMatrix const& valueMatrix);
+    explicit NearestEqualCells(ValueMatrix const& valueMatrix);
 
-    CoordinatePair getNearestEqualPair(Value const value) const;
-    CoordinatePair getNearestEqualPairByCheckingAllPairs(Value const value) const;
-    CoordinatePair getNearestEqualPairUsingBfs(Value const value) const;
+    [[nodiscard]] CoordinatePair getNearestEqualPair(Value const value) const;
+    [[nodiscard]] CoordinatePair getNearestEqualPairByCheckingAllPairs(Value const value) const;
+    [[nodiscard]] CoordinatePair getNearestEqualPairUsingBfs(Value const value) const;
 
 private:
     void initializeGraph();
-    Coordinates getCoordinatesWithThisValue(Value const value) const;
-    Coordinate getFirstCoordinateUsingBfs(Value const value) const;
-    Coordinate getSecondCoordinateUsingBfs(Value const value, Coordinate const& firstCoordinate) const;
+    [[nodiscard]] Coordinates getCoordinatesWithThisValue(Value const value) const;
+    [[nodiscard]] Coordinate getFirstCoordinateUsingBfs(Value const value) const;
+    [[nodiscard]] Coordinate getSecondCoordinateUsingBfs(Value const value, Coordinate const& firstCoordinate) const;
     Coordinate getCoordinateUsingBfs(Value const value, Coordinate const& firstCoordinate, Bfs& bfs) const;
     static int getDistance(Coordinate const& coordinate1, Coordinate const& coordinate2);
     ValueMatrix const& m_valueMatrix;

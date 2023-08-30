@@ -2,9 +2,7 @@
 
 #include <memory>
 
-namespace alba {
-
-namespace ReversingALinkedList {
+namespace alba::ReversingALinkedList {
 
 struct Node {
     int value;
@@ -15,6 +13,4 @@ struct Node {
 
 std::unique_ptr<Node> reverseALinkedList(std::unique_ptr<Node> parent);
 
-}  // namespace ReversingALinkedList
-
-}  // namespace alba
+}  // namespace alba::ReversingALinkedList

@@ -15,14 +15,14 @@ public:
 
     BinomialCoefficient(Value const n, Value const k);
 
-    Value getBinomialCoefficientUsingNaiveRecursion() const;
-    Value getBinomialCoefficientUsingMemoizationDP() const;
-    Value getBinomialCoefficientUsingIterativeDP() const;
-    Value getBinomialCoefficientUsingIterativeDPAndSpaceEfficient() const;
-    Value getBinomialCoefficientUsingGcf() const;
+    [[nodiscard]] Value getBinomialCoefficientUsingNaiveRecursion() const;
+    [[nodiscard]] Value getBinomialCoefficientUsingMemoizationDP() const;
+    [[nodiscard]] Value getBinomialCoefficientUsingIterativeDP() const;
+    [[nodiscard]] Value getBinomialCoefficientUsingIterativeDPAndSpaceEfficient() const;
+    [[nodiscard]] Value getBinomialCoefficientUsingGcf() const;
 
 private:
-    Value getBinomialCoefficientUsingNaiveRecursion(Value const n, Value const k) const;
+    [[nodiscard]] Value getBinomialCoefficientUsingNaiveRecursion(Value const n, Value const k) const;
     Value getBinomialCoefficientUsingMemoizationDP(ValueMatrix& valueMatrix, Value const n, Value const k) const;
     Value const m_n;
     Value const m_k;
