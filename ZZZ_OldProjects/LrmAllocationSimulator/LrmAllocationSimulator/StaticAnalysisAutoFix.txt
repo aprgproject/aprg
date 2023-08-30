@@ -1,6 +1,5 @@
-2023-08-29T09:08:39
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:33:62: warning: integer literal has suffix 'u', which is not uppercase [hicpp-uppercase-literal-suffix,readability-uppercase-literal-suffix]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:33:63: note: FIX-IT applied suggested code changes
+StaticAnalysisJobIdentifier: [9]
+2023-08-30T05:03:57
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:68:10: style: Unused private function: 'Lrm::sortFspBasedPriorityForMcdSelection2' [unusedPrivateFunction]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:70:10: style: Unused private function: 'Lrm::sortFspBasedPriorityForNbicMcdSelection2' [unusedPrivateFunction]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:79:32: style: Unused private function: 'Lrm::selectFspsForCcdMcd2' [unusedPrivateFunction]
