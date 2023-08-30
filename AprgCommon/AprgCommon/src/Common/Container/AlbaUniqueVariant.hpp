@@ -62,15 +62,15 @@ struct CheckIfInList<Type> {
 }  // namespace detail
 
 // Purpose: Variant type base class
-class VariantDataType {
+class BaseVariantDataType {
 public:
     // rule of five or six
-    VariantDataType() = default;
-    virtual ~VariantDataType() = default;  // virtual destructor because derived classes need this
-    VariantDataType(VariantDataType const &) = delete;
-    VariantDataType &operator=(VariantDataType const &) = delete;
-    VariantDataType(VariantDataType &&) = delete;
-    VariantDataType &operator=(VariantDataType &&) = delete;
+    BaseVariantDataType() = default;
+    virtual ~BaseVariantDataType() = default;  // virtual destructor because derived classes need this
+    BaseVariantDataType(BaseVariantDataType const &) = delete;
+    BaseVariantDataType &operator=(BaseVariantDataType const &) = delete;
+    BaseVariantDataType(BaseVariantDataType &&) = delete;
+    BaseVariantDataType &operator=(BaseVariantDataType &&) = delete;
 };
 
 // Purpose: A compile-time checking unique variant class
@@ -78,7 +78,7 @@ template <class... Types>
 // class [[deprecated("Use std::variant instead! (needs c++17)")]] UniqueVariant // lets remove [[deprecated]] to avoid
 // unnecessary warnings
 class UniqueVariant {
-    using CheckIfAllClassesDerive = typename detail::CheckIfDerive<VariantDataType, Types...>::next;
+    using CheckIfAllClassesDerive = typename detail::CheckIfDerive<BaseVariantDataType, Types...>::next;
     using MaxSizeClass = typename detail::MaxSizeType<Types...>::type;
 
 public:
@@ -97,17 +97,18 @@ public:
     UniqueVariant &operator=(UniqueVariant const &variant) = delete;
     UniqueVariant &operator=(UniqueVariant &&variant) = delete;
 
-    template <class T>
-    T &acquire() {
+    template <class VariantDataType>
+    VariantDataType &acquire() {
         static_assert(
-            detail::CheckIfInList<T, Types...>::type::value, "Aquiring type from unique variant that doesn't exists");
-        constructIfNeeded<T>();
-        return getValue<T>();
+            detail::CheckIfInList<VariantDataType, Types...>::type::value,
+            "Aquiring type from unique variant that doesn't exists");
+        constructIfNeeded<VariantDataType>();
+        return getValue<VariantDataType>();
     }
 
     void clear() {
         if (m_typeId > 0) {
-            m_ptr->~VariantDataType();
+            m_ptr->~BaseVariantDataType();
         }
         m_typeId = 0;
     }
@@ -115,36 +116,36 @@ public:
 private:
     void allocate() {
         delete m_ptr;
-        m_ptr = static_cast<VariantDataType *>(::operator new(sizeof(MaxSizeClass)));
+        m_ptr = static_cast<BaseVariantDataType *>(::operator new(sizeof(MaxSizeClass)));
     }
 
-    template <class T>
+    template <class VariantDataType>
     void constructIfNeeded() {
         if (!m_typeId) {
-            placementNew<T>();
-        } else if (m_typeId != GetTypeId<T>()) {
-            m_ptr->~VariantDataType();
-            placementNew<T>();
+            placementNew<VariantDataType>();
+        } else if (m_typeId != GetTypeId<VariantDataType>()) {
+            m_ptr->~BaseVariantDataType();
+            placementNew<VariantDataType>();
         }
     }
 
-    template <class T>
+    template <class VariantDataType>
     void placementNew() {
-        updateTypeId<T>();
-        m_ptr = static_cast<VariantDataType *>(new (m_ptr) T);
+        updateTypeId<VariantDataType>();
+        m_ptr = static_cast<BaseVariantDataType *>(new (m_ptr) VariantDataType);
     }
 
-    template <class T>
+    template <class VariantDataType>
     void updateTypeId() {
-        m_typeId = GetTypeId<T>();
+        m_typeId = GetTypeId<VariantDataType>();
     }
 
-    template <class T>
-    T &getValue() {
-        return *static_cast<T *>(m_ptr);
+    template <class VariantDataType>
+    VariantDataType &getValue() {
+        return *static_cast<VariantDataType *>(m_ptr);
     }
 
-    VariantDataType *m_ptr{nullptr};
+    BaseVariantDataType *m_ptr{nullptr};
     TypeId m_typeId{0};
 };
 

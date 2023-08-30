@@ -9,34 +9,33 @@ namespace alba {
 
 TEST(AlbaUniqueVariantTest, AcquiringVariantTypeInvokesDefaultConstructor) {
     // Given
-    struct ExampleStructure1 : public VariantDataType {
-        ExampleStructure1() = default;
+    struct ExampleStructure1 : public BaseVariantDataType {
+        ExampleStructure1() : unsignedField(2), floatField(2.3) {}
 
-        uint8_t unsignedField{};
-        float floatField{};
+        uint8_t unsignedField;
+        float floatField;
     };
 
-    struct ExampleStructure2 : public VariantDataType {
-        ExampleStructure2() = default;
+    struct ExampleStructure2 : public BaseVariantDataType {
+        ExampleStructure2() : doubleField(4.5), charField('a') {}
 
-        double doubleField{};
-        char charField{};
+        double doubleField;
+        char charField;
     };
-
-    UniqueVariant<ExampleStructure1, ExampleStructure2> variant;
 
     // When
-    auto& exampleStructure1 = variant.acquire<ExampleStructure1>();
-    auto& exampleStructure2 = variant.acquire<ExampleStructure2>();
+    UniqueVariant<ExampleStructure1, ExampleStructure2> variant;
 
     // Then
-    ASSERT_EQ(0U, exampleStructure1.unsignedField);
-    ASSERT_FLOAT_EQ(0.F, exampleStructure1.floatField);
-    ASSERT_TRUE(isAlmostEqual(0.0, exampleStructure2.doubleField));
-    ASSERT_EQ('\0', exampleStructure2.charField);
+    auto& exampleStructure1 = variant.acquire<ExampleStructure1>();
+    EXPECT_EQ(2U, exampleStructure1.unsignedField);
+    EXPECT_FLOAT_EQ(2.3F, exampleStructure1.floatField);
+    auto& exampleStructure2 = variant.acquire<ExampleStructure2>();
+    EXPECT_DOUBLE_EQ(4.5, exampleStructure2.doubleField);
+    EXPECT_EQ('a', exampleStructure2.charField);
 }
 
-class DestructorClass : public VariantDataType {
+class DestructorClass : public BaseVariantDataType {
 public:
     static bool s_destructorInvoked;
 
@@ -56,20 +55,20 @@ TEST(AlbaUniqueVariantTest, AcquiringVariantTypeDifferentThanAlreadyInVariantInv
 
     // When
     {
-        UniqueVariant<DestructorClass, VariantDataType> variant;
+        UniqueVariant<DestructorClass, BaseVariantDataType> variant;
         variant.acquire<DestructorClass>();
-        variant.acquire<VariantDataType>();
+        variant.acquire<BaseVariantDataType>();
     }
 
     // Then
-    ASSERT_TRUE(DestructorClass::s_destructorInvoked);
+    EXPECT_TRUE(DestructorClass::s_destructorInvoked);
 }
 
 TEST(AlbaUniqueVariantTest, PolymorphismIsSupportedByUniqueVariant) {
     // Given
     constexpr int valueFromTest = 467;
 
-    class Base : public VariantDataType {
+    class Base : public BaseVariantDataType {
         int m_value;
 
     public:
@@ -100,7 +99,7 @@ TEST(AlbaUniqueVariantTest, PolymorphismIsSupportedByUniqueVariant) {
     Base& baseRef = variant.acquire<Derived>();
 
     // Then
-    ASSERT_EQ(valueFromTest, baseRef.getValue());
+    EXPECT_EQ(valueFromTest, baseRef.getValue());
 }
 
 }  // namespace alba
