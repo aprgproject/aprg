@@ -33,7 +33,7 @@ class Decorator : public Component {
 public:
     explicit Decorator(std::unique_ptr<Component> componentPointer) : m_componentPointer(std::move(componentPointer)) {}
 
-    virtual void operation() override { m_componentPointer->operation(); }
+    void operation() override { m_componentPointer->operation(); }
     // ...
 
 private:

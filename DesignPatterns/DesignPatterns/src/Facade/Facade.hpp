@@ -42,13 +42,13 @@ public:
     Facade() : m_subsystemA(), m_subsystemB(), m_subsystemC() {}
 
     void operation1() {
-        m_subsystemA.suboperation();
-        m_subsystemB.suboperation();
+        Facade::SubsystemA::suboperation();
+        Facade::SubsystemB::suboperation();
         // ...
     }
 
     void operation2() {
-        m_subsystemC.suboperation();
+        Facade::SubsystemC::suboperation();
         // ...
     }
     // ...

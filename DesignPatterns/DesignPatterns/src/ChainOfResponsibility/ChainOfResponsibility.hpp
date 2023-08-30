@@ -36,7 +36,7 @@ public:
         return false;
     }
 
-    virtual void handleRequest() override {
+    void handleRequest() override {
         if (canHandle()) {
             std::cout << "Handled by Concrete Handler 1\n";
         } else {
@@ -55,7 +55,7 @@ public:
         return true;
     }
 
-    virtual void handleRequest() override {
+    void handleRequest() override {
         if (canHandle()) {
             std::cout << "Handled by Handler 2\n";
         } else {
