@@ -33,14 +33,6 @@ using namespace alba::matrix;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba::matrix {
-
-template <>
-bool isEqualForMathMatrixDataType(double const &value1, double const &value2) {
-    return isAlmostEqual<double>(value1, value2);
-}
-}  // namespace alba::matrix
-
 TEST(GslTest, GettingTheBesselFunctionInGslWorks) {
     double xValue = 5.0;
     double yValue = gsl_sf_bessel_J0(xValue);
