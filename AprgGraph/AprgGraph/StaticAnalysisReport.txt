@@ -1,4 +1,5 @@
-2023-08-29T00:57:47
+StaticAnalysisJobIdentifier: [19]
+2023-08-30T00:17:39
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:29:52: warning: static member accessed through instance [readability-static-accessed-through-instance]
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:31:44: warning: 5 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:111:9: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
@@ -13,15 +14,9 @@
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:126:9: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:126:21: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:126:79: warning: loop induction expression should not have floating-point type [cert-flp30-c]
-/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:156:32: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:157:28: warning: 12 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:158:29: warning: 20 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:158:32: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:224:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:230:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:303:20: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:320:20: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/tst/GraphTests/AprgGraph_unit.cpp:27:35: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/tst/GraphTests/AprgGraph_unit.cpp:27:46: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/tst/GraphTests/AprgGraph_unit.cpp:59:35: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/tst/GraphTests/AprgGraph_unit.cpp:59:46: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
 DONE!
