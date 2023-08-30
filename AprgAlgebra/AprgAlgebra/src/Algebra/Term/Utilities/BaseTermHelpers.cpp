@@ -16,18 +16,18 @@ BaseTermUniquePointer duplicateUniquePointer(BaseTermUniquePointer const& unique
     return static_cast<BaseTermUniquePointer>(make_unique<Term>(getTermConstReferenceFromUniquePointer(uniquePointer)));
 }
 
-Term const& getTermConstReferenceFromBaseTerm(BaseTerm const& baseTerm) { return static_cast<Term const&>(baseTerm); }
+Term const& getTermConstReferenceFromBaseTerm(BaseTerm const& baseTerm) { return dynamic_cast<Term const&>(baseTerm); }
 
 Term const& getTermConstReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer) {
-    return static_cast<Term const&>(*uniquePointer.get());
+    return dynamic_cast<Term const&>(*uniquePointer.get());
 }
 
-Term&& getTermRValueReferenceFromBaseTerm(BaseTerm&& baseTerm) { return static_cast<Term&&>(baseTerm); }
+Term&& getTermRValueReferenceFromBaseTerm(BaseTerm&& baseTerm) { return dynamic_cast<Term&&>(baseTerm); }
 
-Term& getTermReferenceFromBaseTerm(BaseTerm& baseTerm) { return static_cast<Term&>(baseTerm); }
+Term& getTermReferenceFromBaseTerm(BaseTerm& baseTerm) { return dynamic_cast<Term&>(baseTerm); }
 
 Term& getTermReferenceFromUniquePointer(BaseTermUniquePointer& uniquePointer) {
-    return *static_cast<Term*>(uniquePointer.get());
+    return *dynamic_cast<Term*>(uniquePointer.get());
 }
 
 BaseTerm const& getBaseTermConstReferenceFromTerm(Term const& term) { return static_cast<BaseTerm const&>(term); }

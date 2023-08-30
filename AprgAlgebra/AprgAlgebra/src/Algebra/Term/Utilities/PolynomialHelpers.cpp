@@ -197,7 +197,8 @@ AlbaNumber getEvaluatedValueUsingHornersSubstitutionOfOneVariablePolynomial(
         Polynomial simplifiedPolynomial(polynomial);
         simplifiedPolynomial.simplify();
         bool isFirst(true);
-        AlbaNumber previousExponent, currentExponent;
+        AlbaNumber previousExponent;
+        AlbaNumber currentExponent;
         for (Monomial const& monomial : simplifiedPolynomial.getMonomials()) {
             currentExponent = monomial.getExponentForVariable(singleVariableName);
             if (isFirst) {

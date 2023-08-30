@@ -50,9 +50,9 @@ private:
     void calculateBasesAndExponentsAndPutThatToNumeratorsAndDenominators(
         Terms& numeratorTerms, Terms& denominatorTerms);
     void putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToTerms(
-        Terms& numeratorTerms, Terms& denominatorTerms, TermsRaiseToTerms const& termsRaiseToTerms);
+        Terms& numeratorTerms, Terms& denominatorTerms, TermsRaiseToTerms const& termsRaiseToTerms) const;
     void putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToNumbers(
-        Terms& numeratorTerms, Terms& denominatorTerms, TermsRaiseToNumbers const& termsRaiseToNumbers);
+        Terms& numeratorTerms, Terms& denominatorTerms, TermsRaiseToNumbers const& termsRaiseToNumbers) const;
     static void handleZerosInNumeratorOrDenominator(Terms& denominators, Terms& numerators);
     static void populateTermsWithBase(Terms& termsToUpdate, Term const& base, AlbaNumber const& exponent);
     static void removeTermsThatHaveNoEffect(Terms& terms);

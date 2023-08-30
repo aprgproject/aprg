@@ -132,9 +132,9 @@ TEST(FactorizationUtilitiesTest, SimplifyAndEmplacePolynomialIfListIsEmptyWorksW
     simplifyAndEmplaceBackPolynomialIfListIsEmpty(polynomialsToVerify, singlePolynomial);
 
     ASSERT_EQ(3U, polynomialsToVerify.size());
-    Polynomial polynomialToExpect1(polynomial1);
-    Polynomial polynomialToExpect2(polynomial2);
-    Polynomial polynomialToExpect3(polynomial3);
+    const Polynomial& polynomialToExpect1(polynomial1);
+    const Polynomial& polynomialToExpect2(polynomial2);
+    const Polynomial& polynomialToExpect3(polynomial3);
     EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
     EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
     EXPECT_EQ(polynomialToExpect3, polynomialsToVerify[2]);
@@ -147,7 +147,7 @@ TEST(FactorizationUtilitiesTest, SimplifyAndEmplacePolynomialIfListIsEmptyWorksW
     simplifyAndEmplaceBackPolynomialIfListIsEmpty(polynomialsToVerify, singlePolynomial);
 
     ASSERT_EQ(1U, polynomialsToVerify.size());
-    Polynomial polynomialToExpect1(singlePolynomial);
+    const Polynomial& polynomialToExpect1(singlePolynomial);
     EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
 }
 

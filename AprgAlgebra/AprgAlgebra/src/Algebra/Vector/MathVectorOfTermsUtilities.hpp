@@ -122,7 +122,8 @@ Term getTermThatYieldsToThisGradient(
     stringHelper::strings allCoordinates(coordinateVariables.cbegin(), coordinateVariables.cend());
     for (size_t i = 0; isExactDifferential && i < SIZE; i++) {
         std::string const& coordinateVariableName(coordinateVariables[i]);
-        Term termWithOtherCoordinates, termWithoutOtherCoordinates;
+        Term termWithOtherCoordinates;
+        Term termWithoutOtherCoordinates;
         retrieveWithAndWithoutOtherCoordinates(
             termWithOtherCoordinates, termWithoutOtherCoordinates, gradient.getValueAt(i), coordinateVariableName,
             allCoordinates);

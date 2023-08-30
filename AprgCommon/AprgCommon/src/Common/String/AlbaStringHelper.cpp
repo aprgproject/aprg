@@ -142,7 +142,8 @@ bool isPalindrome(string_view str) {
     bool result(false);
     if (!str.empty()) {
         result = true;
-        size_t left(0), right(str.length() - 1);
+        size_t left(0);
+        size_t right(str.length() - 1);
         while (left < right) {
             if (str[left++] != str[right--]) {
                 result = false;
@@ -306,7 +307,8 @@ string getStringWithLowerCaseLetters(string_view str) {
 
 string getStringWithUrlDecodedString(string_view str) {
     string result;
-    size_t index = 0, length = str.length();
+    size_t index = 0;
+    size_t length = str.length();
     while (index < length) {
         if (str[index] == '%' && (static_cast<int>(index) < static_cast<int>(length) - 2) &&
             isHexDigit(str[index + 1]) && isHexDigit(str[index + 2])) {
@@ -349,7 +351,8 @@ string getStringWithoutStartingAndTrailingWhiteSpace(string_view str) {
 
 string getStringWithoutWhiteSpace(string_view str) {
     string result;
-    size_t index = 0, length = str.length();
+    size_t index = 0;
+    size_t length = str.length();
     while (index < length) {
         if (!isWhiteSpace(str[index])) {
             result += str[index];
@@ -361,7 +364,8 @@ string getStringWithoutWhiteSpace(string_view str) {
 
 string getStringWithoutRedundantWhiteSpace(string_view str) {
     string result;
-    size_t index = 0, length = str.length();
+    size_t index = 0;
+    size_t length = str.length();
     while (index < length) {
         size_t indexNotWhiteSpace = str.find_first_not_of(WHITESPACE_STRING, index);
         if (isNpos(static_cast<int>(indexNotWhiteSpace))) {

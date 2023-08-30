@@ -50,7 +50,8 @@ AlbaNumber AlbaNumber::createFraction(NumeratorDataType const numerator, Numerat
     if (isDivisible(numerator, denominator)) {
         return {static_cast<IntDataType>(numerator) / denominator};
     }
-    NumeratorDataType newNumerator = numerator, newDenominator = denominator;
+    NumeratorDataType newNumerator = numerator;
+    NumeratorDataType newDenominator = denominator;
     changeFractionToSimplestFormForSigned(newNumerator, newDenominator);
     return {FractionData{newNumerator, static_cast<DenominatorDataType>(newDenominator)}};
 }
@@ -573,7 +574,8 @@ AlbaNumber AlbaNumber::multiplyFractionAndDoubleAndReturnNumber(
 }
 
 AlbaNumber AlbaNumber::divideBothIntegersAndReturnNumber(IntDataType const dividend, IntDataType const divisor) {
-    IntDataType newDividend(dividend), newDivisor(divisor);
+    IntDataType newDividend(dividend);
+    IntDataType newDivisor(divisor);
     changeFractionToSimplestFormForSigned(newDividend, newDivisor);
     if (isValueWithinLimits<NumeratorDataType>(static_cast<double>(newDividend)) &&
         isValueWithinLimits<DenominatorDataType>(static_cast<double>(newDivisor))) {

@@ -231,13 +231,15 @@ Term getLimitWithMultipleVariablesWithDifferentApproaches(
 }
 
 Term getLimitUsingLhopitalsRule(Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
-    Term newTerm, limitValue;
+    Term newTerm;
+    Term limitValue;
     calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, term, variableName, valueToApproach);
     return limitValue;
 }
 
 Term getTermUsingLhopitalsRule(Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
-    Term newTerm, limitValue;
+    Term newTerm;
+    Term limitValue;
     calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, term, variableName, valueToApproach);
     return newTerm;
 }

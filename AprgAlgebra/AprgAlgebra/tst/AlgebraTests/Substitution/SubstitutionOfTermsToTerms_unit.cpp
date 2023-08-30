@@ -106,8 +106,8 @@ TEST(SubstitutionOfTermsToTermsTest, PerformSubstitutionToWorksOnTerm) {
 
     Term expectTerm1;
     Term expectTerm2(2);
-    Term expectTerm3(term3);
-    Term expectTerm4(term4);
+    const Term& expectTerm3(term3);
+    const Term& expectTerm4(term4);
     Term expectTerm5(32);
     Term expectTerm6(10);
     EXPECT_EQ(expectTerm1, verifyTerm1);
