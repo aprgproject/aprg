@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Common/Math/Matrix/Utilities/AlbaMatrixUtilities.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Common/User/DisplayTable.hpp>
 
@@ -12,9 +13,6 @@
 #include <vector>
 
 namespace alba::matrix {
-
-template <typename DataType>
-bool isEqualForMathMatrixDataType(DataType const& value1, DataType const& value2);
 
 template <typename DataType>
 class AlbaSparseMatrix {

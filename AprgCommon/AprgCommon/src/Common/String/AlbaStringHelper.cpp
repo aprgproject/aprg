@@ -704,6 +704,7 @@ string getStringWithAlignment(string_view mainText, size_t const targetLength, A
         case AlignmentType::Left:
             return getStringWithLeftAlignment(mainText, targetLength);
     }
+    return {};
 }
 
 string getStringWithJustifyAlignment(string_view mainText, size_t const targetLength) {
