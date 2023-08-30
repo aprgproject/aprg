@@ -311,7 +311,6 @@ AlbaDateTime AlbaDateTime::subtractDateTimeMagnitude(
 }
 
 template <AlbaDateTime::PrintFormat printFormat>
-// NOLINTNEXTLINE(hicpp-named-parameter,readability-named-parameter)
 ostream& operator<<(ostream& out, AlbaDateTime::PrintObject<printFormat> const&) {
     using PrintObjectWithFormat = AlbaDateTime::PrintObject<printFormat>;
     static_assert(

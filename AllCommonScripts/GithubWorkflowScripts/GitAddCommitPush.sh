@@ -35,6 +35,11 @@ while [ "$retries" -lt "$maxRetries" ] && [ "$gitPushExitStatus" -ne 0 ]; do
     git push
     gitPushExitStatus=$?
     set -e
+    
+    if [ "$gitPushExitStatus" -ne 0 ]; then
+        scriptPrint "$scriptName" "$LINENO" "Sleeping for 10 seconds before trying again..."
+        sleep 10
+    fi
 
     retries=$((retries + 1))
 done

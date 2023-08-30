@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Algorithm/Graph/PathSearch/DepthFirstSearch/PathSearchUsingDfs.hpp>
-#include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
+#include <Algorithm/Graph/Utilities/GraphUtilities.hpp>
 #include <Common/Bit/AlbaBitValueUtilities.hpp>
 
 namespace alba::algorithm {

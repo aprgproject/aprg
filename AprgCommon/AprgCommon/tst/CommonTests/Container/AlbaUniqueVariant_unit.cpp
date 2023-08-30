@@ -1,6 +1,9 @@
 #include <Common/Container/AlbaUniqueVariant.hpp>
+#include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
 #include <gtest/gtest.h>
+
+using namespace alba::mathHelper;
 
 namespace alba {
 
@@ -29,7 +32,7 @@ TEST(AlbaUniqueVariantTest, AcquiringVariantTypeInvokesDefaultConstructor) {
     // Then
     ASSERT_EQ(0U, exampleStructure1.unsignedField);
     ASSERT_FLOAT_EQ(0.F, exampleStructure1.floatField);
-    ASSERT_DOUBLE_EQ(0.0, exampleStructure2.doubleField);
+    ASSERT_TRUE(isAlmostEqual(0.0, exampleStructure2.doubleField));
     ASSERT_EQ('\0', exampleStructure2.charField);
 }
 

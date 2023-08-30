@@ -49,7 +49,6 @@ void printParameter(ostream& out, string const& parameter) { out << quoted(param
 void printParameter(ostream& out, char const* const parameter) { out << quoted(parameter); }
 
 template <>
-// NOLINTNEXTLINE(hicpp-named-parameter,readability-named-parameter)
 void printParameterWithName(ostream& out, string_view, char const* const parameter) {
     // the name is not printing to avoid printing the same string literal twice
     out << R"([")" << parameter << R"("])";

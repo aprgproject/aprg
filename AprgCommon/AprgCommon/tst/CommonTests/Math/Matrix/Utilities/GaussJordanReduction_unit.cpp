@@ -1,5 +1,4 @@
 #include <Common/Math/Matrix/Utilities/GaussJordanReduction.hpp>
-#include <CommonTests/Math/Matrix/AlbaMatrixInternalFunctions.hpp>
 
 #include <gtest/gtest.h>
 
