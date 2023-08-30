@@ -20,8 +20,8 @@ using std::vector;
 using alba::AlbaFileReader;
 
 namespace codeReview {
-typedef unordered_map<string, set<string>> VariableMapType;
-typedef unordered_map<string, set<string>>::iterator VariableMapIterator;
+using VariableMapType = unordered_map<string, set<string>>;
+using VariableMapIterator = unordered_map<string, set<string>>::iterator;
 
 class CMakeReader {
 public:

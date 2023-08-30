@@ -14,7 +14,7 @@ namespace codeReview {
 
 class CPlusPlusClassTemplateSignature;
 
-typedef vector<CPlusPlusFunctionSignature> CPlusPlusFunctionSignatures;
+using CPlusPlusFunctionSignatures = vector<CPlusPlusFunctionSignature>;
 
 class CPlusPlusFunction {
 public:
@@ -36,6 +36,6 @@ private:
     CPlusPlusFunctionSignatures m_signatures;
 };
 
-typedef alba::AlbaOptional<CPlusPlusFunction> CPlusPlusFunctionOptional;
+using CPlusPlusFunctionOptional = alba::AlbaOptional<CPlusPlusFunction>;
 
 }  // namespace codeReview

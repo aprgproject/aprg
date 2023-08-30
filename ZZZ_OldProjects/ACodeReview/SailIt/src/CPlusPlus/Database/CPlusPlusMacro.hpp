@@ -12,7 +12,7 @@ using std::string;
 
 namespace codeReview {
 
-typedef map<int, int> MapOfPositionToParameter;
+using MapOfPositionToParameter = map<int, int>;
 
 class CPlusPlusMacro {
 public:

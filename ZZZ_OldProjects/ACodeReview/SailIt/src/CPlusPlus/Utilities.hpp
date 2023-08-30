@@ -15,14 +15,14 @@ using std::vector;
 
 namespace codeReview {
 
-typedef vector<string> VectorOfStrings;
-typedef set<string> SetOfStrings;
+using VectorOfStrings = vector<string>;
+using SetOfStrings = set<string>;
 
-typedef deque<Term> DequeOfTerms;
-typedef deque<Term>::iterator TermsIterator;
-typedef deque<Term>::reverse_iterator TermsReverseIterator;
-typedef vector<Term> VectorOfTerms;
-typedef vector<Term>::iterator ExpectedTermsIterator;
+using DequeOfTerms = deque<Term>;
+using TermsIterator = deque<Term>::iterator;
+using TermsReverseIterator = deque<Term>::reverse_iterator;
+using VectorOfTerms = vector<Term>;
+using ExpectedTermsIterator = vector<Term>::iterator;
 
 void printTerms(DequeOfTerms const& terms);
 void printTerms(VectorOfTerms const& terms);

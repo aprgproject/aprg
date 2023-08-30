@@ -5,8 +5,8 @@
 #include <ostream>
 
 namespace codeReview {
-typedef set<string> SetOfFiles;
-typedef set<string> SetOfDirectories;
+using SetOfFiles = set<string>;
+using SetOfDirectories = set<string>;
 
 class FileDirectoryDatabase {
 public:
