@@ -84,11 +84,11 @@ void SoosaConfiguration::bufferNameAndValueString(string const& nameOfParameter,
 void SoosaConfiguration::update() {
     BufferMap::iterator it;
 
-#define UPDATE_PARAMETER(nameOfParameter, type)                    \
-    it = m_nameToValueStringMapBuffer.find(#nameOfParameter);      \
-    if (it != m_nameToValueStringMapBuffer.end()) {                \
-        nameOfParameter = convertStringToNumber<type>(it->second); \
-        m_nameToValueStringMapBuffer.erase(it);                    \
+#define UPDATE_PARAMETER(nameOfParameter, type)                      \
+    it = m_nameToValueStringMapBuffer.find(#nameOfParameter);        \
+    if (it != m_nameToValueStringMapBuffer.end()) {                  \
+        (nameOfParameter) = convertStringToNumber<type>(it->second); \
+        m_nameToValueStringMapBuffer.erase(it);                      \
     }
 
     // Line model parameters

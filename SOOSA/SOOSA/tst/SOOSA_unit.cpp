@@ -229,7 +229,7 @@ TEST(SoosaTest, DISABLED_ScannedExampleWorks) {
     checkAnswersForCharityPayWardsPattern1(soosa);
 }
 
-TEST(SoosaTest, DISABLED_Example_1Q20_DEM11_Works) {
+TEST(SoosaTest, DISABLED_Example1Q20DEM11Works) {
     AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\DEM\1Q20_DEM11.bmp)");
     AlbaLocalPathHandler tempFileToTest(APRG_DIR R"(\SOOSA\FilesForTests\Temp.bmp)");
     inputFile.copyToNewFile(tempFileToTest.getFullPath());
@@ -242,7 +242,7 @@ TEST(SoosaTest, DISABLED_Example_1Q20_DEM11_Works) {
     checkAnswersForDemObasPattern1(soosa);
 }
 
-TEST(SoosaTest, DISABLED_Example_1Q20_DEM12_Works) {
+TEST(SoosaTest, DISABLED_Example1Q20DEM12Works) {
     AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\DEM\1Q20_DEM12.bmp)");
     AlbaLocalPathHandler tempFileToTest(APRG_DIR R"(\SOOSA\FilesForTests\Temp.bmp)");
     inputFile.copyToNewFile(tempFileToTest.getFullPath());
@@ -255,7 +255,7 @@ TEST(SoosaTest, DISABLED_Example_1Q20_DEM12_Works) {
     checkAnswersForDemObasPattern2(soosa);
 }
 
-TEST(SoosaTest, DISABLED_Example_1Q20_DEM13_Works) {
+TEST(SoosaTest, DISABLED_Example1Q20DEM13Works) {
     AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\DEM\1Q20_DEM13.bmp)");
     AlbaLocalPathHandler tempFileToTest(APRG_DIR R"(\SOOSA\FilesForTests\Temp.bmp)");
     inputFile.copyToNewFile(tempFileToTest.getFullPath());
@@ -268,7 +268,7 @@ TEST(SoosaTest, DISABLED_Example_1Q20_DEM13_Works) {
     checkAnswersForDemObasPattern3(soosa);
 }
 
-TEST(SoosaTest, DISABLED_Example_1Q20_DEM14_Works) {
+TEST(SoosaTest, DISABLED_Example1Q20DEM14Works) {
     AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\DEM\1Q20_DEM14.bmp)");
     AlbaLocalPathHandler tempFileToTest(APRG_DIR R"(\SOOSA\FilesForTests\Temp.bmp)");
     inputFile.copyToNewFile(tempFileToTest.getFullPath());
@@ -281,7 +281,7 @@ TEST(SoosaTest, DISABLED_Example_1Q20_DEM14_Works) {
     checkAnswersForDemObasPattern4(soosa);
 }
 
-TEST(SoosaTest, DISABLED_Example_1Q20_DEM15_Works) {
+TEST(SoosaTest, DISABLED_Example1Q20DEM15Works) {
     AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\DEM\1Q20_DEM15.bmp)");
     AlbaLocalPathHandler tempFileToTest(APRG_DIR R"(\SOOSA\FilesForTests\Temp.bmp)");
     inputFile.copyToNewFile(tempFileToTest.getFullPath());
@@ -294,7 +294,7 @@ TEST(SoosaTest, DISABLED_Example_1Q20_DEM15_Works) {
     checkAnswersForDemObasPattern5(soosa);
 }
 
-TEST(SoosaTest, DISABLED_Example_PS2Q21_SPE_CVS_Works) {
+TEST(SoosaTest, DISABLED_ExamplePS2Q21SPECVSWorks) {
     AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\CVS_Special Unit_A5 Size\PS2Q21_SPE_CVS.bmp)");
     AlbaLocalPathHandler tempFileToTest(APRG_DIR R"(\SOOSA\FilesForTests\Temp.bmp)");
     inputFile.copyToNewFile(tempFileToTest.getFullPath());
@@ -307,7 +307,7 @@ TEST(SoosaTest, DISABLED_Example_PS2Q21_SPE_CVS_Works) {
     checkAnswersForSpecialUnitsPattern1(soosa);
 }
 
-TEST(SoosaTest, DISABLED_Example_PS2Q21_SPE_CVS_2_Works) {
+TEST(SoosaTest, DISABLED_ExamplePS2Q21SPECVS2Works) {
     AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\CVS_Special Unit_A5 Size\PS2Q21_SPE_CVS(2).bmp)");
     AlbaLocalPathHandler tempFileToTest(APRG_DIR R"(\SOOSA\FilesForTests\Temp.bmp)");
     inputFile.copyToNewFile(tempFileToTest.getFullPath());
@@ -320,7 +320,7 @@ TEST(SoosaTest, DISABLED_Example_PS2Q21_SPE_CVS_2_Works) {
     checkAnswersForSpecialUnitsPattern2(soosa);
 }
 
-TEST(SoosaTest, DISABLED_Example_PS2Q21_SPE_CVS_3_Works) {
+TEST(SoosaTest, DISABLED_ExamplePS2Q21SPECVS3Works) {
     AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\CVS_Special Unit_A5 Size\PS2Q21_SPE_CVS(3).bmp)");
     AlbaLocalPathHandler tempFileToTest(APRG_DIR R"(\SOOSA\FilesForTests\Temp.bmp)");
     inputFile.copyToNewFile(tempFileToTest.getFullPath());

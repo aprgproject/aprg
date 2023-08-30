@@ -346,7 +346,7 @@ Line SOOSA::getLineModel(TwoDimensionSamples const& samples) const {
            << " Minimum number of samples: " << m_soosaConfiguration.getMinimumLineSamples() << ".";
         Status::getInstance().setError(ss.str());
     }
-    return Line(lineModel.aCoefficient, lineModel.bCoefficient, lineModel.cCoefficient);
+    return {lineModel.aCoefficient, lineModel.bCoefficient, lineModel.cCoefficient};
 }
 
 SOOSA::DoubleCollection SOOSA::getAcceptableSquareErrorCollectionUsingRemovalRatio(
@@ -1060,22 +1060,22 @@ int SOOSA::getMaximumLineAndBarWidth(BitmapSnippet const& snippet) const {
 }
 
 BitmapXY SOOSA::convertToBitmapXY(Point const& point) {
-    return BitmapXY(
+    return {
         static_cast<int>(round(clampLowerBound(point.getX(), static_cast<double>(0)))),
-        static_cast<int>(round(clampLowerBound(point.getY(), static_cast<double>(0)))));
+        static_cast<int>(round(clampLowerBound(point.getY(), static_cast<double>(0))))};
 }
 
 BitmapXY SOOSA::convertToBitmapXY(Sample const& sample) {
-    return BitmapXY(
+    return {
         static_cast<int>(round(clampLowerBound(sample.getValueAt(0), static_cast<double>(0)))),
-        static_cast<int>(round(clampLowerBound(sample.getValueAt(1), static_cast<double>(0)))));
+        static_cast<int>(round(clampLowerBound(sample.getValueAt(1), static_cast<double>(0))))};
 }
 
 Point SOOSA::convertToPoint(BitmapXY const& bitmapXY) {
-    return Point(static_cast<double>(bitmapXY.getX()), static_cast<double>(bitmapXY.getY()));
+    return {static_cast<double>(bitmapXY.getX()), static_cast<double>(bitmapXY.getY())};
 }
 
-Point SOOSA::convertToPoint(Sample const& sample) { return Point(sample.getValueAt(0), sample.getValueAt(1)); }
+Point SOOSA::convertToPoint(Sample const& sample) { return {sample.getValueAt(0), sample.getValueAt(1)}; }
 
 Sample SOOSA::convertToTwoDimensionSample(Point const& point) { return Sample{point.getX(), point.getY()}; }
 
@@ -1084,7 +1084,7 @@ SOOSA::RangeOfDoubles SOOSA::getMinMaxRangeOfSamples(OneDimensionSamples const& 
     for (OneDimensionSample const& sample : samples) {
         collection.addData(sample.getValueAt(0));
     }
-    return RangeOfDoubles(collection.getMinimum(), collection.getMaximum(), 1);
+    return {collection.getMinimum(), collection.getMaximum(), 1};
 }
 
 }  // namespace alba::soosa
