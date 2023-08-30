@@ -1,4 +1,5 @@
-2023-08-29T08:00:55
+StaticAnalysisJobIdentifier: [19]
+2023-08-30T07:00:58
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Dsp.cpp:28:50: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Dsp.cpp:28:73: warning: 0xFF00 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/HardwareConfiguration.cpp:32:12: warning: 0x1200 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
@@ -93,7 +94,6 @@
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/HardwareConfiguration.cpp:338:27: warning: 0xF000 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/HardwareConfiguration.cpp:338:38: warning: 12 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Fsp.cpp:9:10: warning: pass by value and use std::move [modernize-pass-by-value]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:33:62: warning: integer literal has suffix 'u', which is not uppercase [hicpp-uppercase-literal-suffix,readability-uppercase-literal-suffix]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:431:20: warning: 8 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:433:20: warning: 7 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:435:20: warning: 6 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
