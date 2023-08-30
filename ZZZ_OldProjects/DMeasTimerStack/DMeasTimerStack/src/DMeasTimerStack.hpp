@@ -39,12 +39,12 @@ enum class TimerType {
     Test
 };
 
-typedef struct {
+using TMeasurementTimer = struct {
     TMeasurementID measurementId;  // Measurement Id that this timer was set for
     TUserId userId;                // User Id that this timer was set for
     TAaSysComSicad sicadToWait;    // Sicad where timer was probably started for
     EFaultId faultId;
-} TMeasurementTimer;
+};
 
 struct SNBCCRecovery {
     SDedMeasInitReq3G* msg;
