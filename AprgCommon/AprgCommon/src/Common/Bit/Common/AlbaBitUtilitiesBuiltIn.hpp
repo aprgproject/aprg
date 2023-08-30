@@ -15,9 +15,9 @@ namespace alba {
 #define INLINE_WITH_BUILT_IN
 #endif
 
-namespace BitUtilitiesBuiltIn {
+namespace bitUtilitiesBuiltIn {
 
-INLINE_WITHOUT_BUILT_IN namespace BitUtilitiesWithoutBuiltIn {
+INLINE_WITHOUT_BUILT_IN namespace bitUtilitiesWithoutBuiltIn {
     template <typename DataType>
     constexpr inline std::size_t getNumberOfOnes(DataType const value) {
         std::size_t result(0);
@@ -57,9 +57,9 @@ INLINE_WITHOUT_BUILT_IN namespace BitUtilitiesWithoutBuiltIn {
         }
         return result;
     }
-}  // namespace BitUtilitiesWithoutBuiltIn
+}  // namespace bitUtilitiesWithoutBuiltIn
 
-INLINE_WITH_BUILT_IN namespace BitUtilitiesWithBuiltIn {
+INLINE_WITH_BUILT_IN namespace bitUtilitiesWithBuiltIn {
 #ifdef __has_builtin
     // check this documentation: https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html
 
@@ -105,7 +105,7 @@ INLINE_WITH_BUILT_IN namespace BitUtilitiesWithBuiltIn {
         } else if constexpr (sizeof(DataType) <= sizeof(unsigned long long)) {
             return __builtin_clzll(value);
         } else {
-            return BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb(value);
+            return bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb(value);
         }
     }
     template <typename DataType>
@@ -120,7 +120,7 @@ INLINE_WITH_BUILT_IN namespace BitUtilitiesWithBuiltIn {
         } else if constexpr (sizeof(DataType) <= sizeof(unsigned long long)) {
             return __builtin_ctzll(value);
         } else {
-            return BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb(value);
+            return bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb(value);
         }
     }
     // NOLINTEND(google-runtime-int)
@@ -128,7 +128,7 @@ INLINE_WITH_BUILT_IN namespace BitUtilitiesWithBuiltIn {
 #endif
 }
 
-}  // namespace BitUtilitiesBuiltIn
+}  // namespace bitUtilitiesBuiltIn
 
 #undef INLINE_WITH_BUILT_IN
 #undef INLINE_WITHOUT_BUILT_IN

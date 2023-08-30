@@ -693,6 +693,19 @@ void splitToStringsUsingASeriesOfDelimeters(
     }
 }
 
+string getStringWithAlignment(string_view mainText, size_t const targetLength, AlignmentType const alignmentType) {
+    switch (alignmentType) {
+        case AlignmentType::Justify:
+            return getStringWithJustifyAlignment(mainText, targetLength);
+        case AlignmentType::Center:
+            return getStringWithCenterAlignment(mainText, targetLength);
+        case AlignmentType::Right:
+            return getStringWithRightAlignment(mainText, targetLength);
+        case AlignmentType::Left:
+            return getStringWithLeftAlignment(mainText, targetLength);
+    }
+}
+
 string getStringWithJustifyAlignment(string_view mainText, size_t const targetLength) {
     string result;
     result.reserve(targetLength);
@@ -704,27 +717,37 @@ string getStringWithJustifyAlignment(string_view mainText, size_t const targetLe
     } else if (noRedundantWhiteSpace.length() >= targetLength) {
         result = noRedundantWhiteSpace;
     } else if (isOneWord(mainText)) {
-        size_t noRedundantWhiteSpaceLength = noRedundantWhiteSpace.length();
-        size_t gapLength = (targetLength - noWhiteSpace.length()) / (noRedundantWhiteSpaceLength + 1);
+        size_t noWhiteSpaceLength = noWhiteSpace.length();
+        size_t numberOfSpaces = targetLength - noWhiteSpaceLength;
+        size_t gapLength = (noWhiteSpaceLength <= 1)                    ? 0
+                           : (numberOfSpaces >= noWhiteSpaceLength + 1) ? numberOfSpaces / (noWhiteSpaceLength + 1)
+                                                                        : numberOfSpaces / (noWhiteSpaceLength - 1);
+        size_t remainingLengthAtTheEnds = numberOfSpaces - (gapLength * (noWhiteSpaceLength - 1));
         string gap(gapLength, ' ');
-        result += gap;
-        for (size_t index1 = 0; index1 < noRedundantWhiteSpaceLength; index1++) {
-            result += noRedundantWhiteSpace[index1];
+        result += string(remainingLengthAtTheEnds / 2, ' ');
+        for (size_t index = 0; index + 1 < noWhiteSpaceLength; index++) {
+            result += noWhiteSpace[index];
             result += gap;
         }
+        result += noWhiteSpace.back();
         result += string(targetLength - result.length(), ' ');
     } else {
         strings actualStrings;
-        splitToStrings<SplitStringType::WithoutDelimeters>(actualStrings, noRedundantWhiteSpace, " ");
+        splitToStrings<SplitStringType::WithoutDelimeters>(actualStrings, noRedundantWhiteSpace, WHITESPACE_STRING);
         size_t numberOfStrings = actualStrings.size();
-        size_t gapLength = (targetLength - noWhiteSpace.length()) / (numberOfStrings - 1);
+        size_t noWhiteSpaceLength = noWhiteSpace.length();
+        size_t numberOfSpaces = targetLength - noWhiteSpaceLength;
+        size_t gapLength = (numberOfStrings <= 1)                    ? 0
+                           : (numberOfSpaces >= numberOfStrings + 1) ? numberOfSpaces / (numberOfStrings + 1)
+                                                                     : numberOfSpaces / (numberOfStrings - 1);
+        size_t remainingLengthAtTheEnds = numberOfSpaces - (gapLength * (numberOfStrings - 1));
         string gap(gapLength, ' ');
-        for (size_t index1 = 0; index1 < numberOfStrings; index1++) {
-            result += actualStrings[index1];
-            if (index1 < numberOfStrings - 1) {
-                result += gap;
-            }
+        result += string(remainingLengthAtTheEnds / 2, ' ');
+        for (size_t index = 0; index + 1 < numberOfStrings; index++) {
+            result += actualStrings[index];
+            result += gap;
         }
+        result += actualStrings.back();
         result += string(targetLength - result.length(), ' ');
     }
     return result;

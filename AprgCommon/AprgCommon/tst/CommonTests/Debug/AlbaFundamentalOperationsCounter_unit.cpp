@@ -31,12 +31,12 @@ public:
 };
 }  // namespace original
 
-inline namespace WithCounter  // inline this namespace to hoist it up and replace the [SampleClass] with the
+inline namespace withCounter  // inline this namespace to hoist it up and replace the [SampleClass] with the
                               // [SampleClass with counter]
 {
 using SampleClass = AlbaFundamentalOperationsCounter<original::SampleClass>;
 using CountsForSampleClass = AlbaFundamentalOperationsCounts<original::SampleClass>;
-}  // namespace WithCounter
+}  // namespace withCounter
 
 namespace {
 SampleClass getRValue() {

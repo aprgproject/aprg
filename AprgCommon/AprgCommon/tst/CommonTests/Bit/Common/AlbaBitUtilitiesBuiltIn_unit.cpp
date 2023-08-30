@@ -7,123 +7,123 @@ using namespace std;
 namespace alba {
 
 TEST(AlbaBitUtilitiesBuiltInTest, IsEvenParityWorks) {
-    EXPECT_TRUE(BitUtilitiesBuiltIn::isEvenParity(0U));
-    EXPECT_FALSE(BitUtilitiesBuiltIn::isEvenParity(1U));
-    EXPECT_FALSE(BitUtilitiesBuiltIn::isEvenParity(2U));
-    EXPECT_TRUE(BitUtilitiesBuiltIn::isEvenParity(3U));
-    EXPECT_FALSE(BitUtilitiesBuiltIn::isEvenParity(4U));
+    EXPECT_TRUE(bitUtilitiesBuiltIn::isEvenParity(0U));
+    EXPECT_FALSE(bitUtilitiesBuiltIn::isEvenParity(1U));
+    EXPECT_FALSE(bitUtilitiesBuiltIn::isEvenParity(2U));
+    EXPECT_TRUE(bitUtilitiesBuiltIn::isEvenParity(3U));
+    EXPECT_FALSE(bitUtilitiesBuiltIn::isEvenParity(4U));
 }
 
 TEST(AlbaBitUtilitiesBuiltInTest, IsEvenParityWorksUsingWithoutBuiltIn) {
-    EXPECT_TRUE(BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::isEvenParity(0U));
-    EXPECT_FALSE(BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::isEvenParity(1U));
-    EXPECT_FALSE(BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::isEvenParity(2U));
-    EXPECT_TRUE(BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::isEvenParity(3U));
-    EXPECT_FALSE(BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::isEvenParity(4U));
+    EXPECT_TRUE(bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::isEvenParity(0U));
+    EXPECT_FALSE(bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::isEvenParity(1U));
+    EXPECT_FALSE(bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::isEvenParity(2U));
+    EXPECT_TRUE(bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::isEvenParity(3U));
+    EXPECT_FALSE(bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::isEvenParity(4U));
 }
 
 TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfOnesWorks) {
-    EXPECT_EQ(3U, BitUtilitiesBuiltIn::getNumberOfOnes<uint8_t>(0xA1U));
-    EXPECT_EQ(8U, BitUtilitiesBuiltIn::getNumberOfOnes<uint16_t>(0xA1BAU));
-    EXPECT_EQ(16U, BitUtilitiesBuiltIn::getNumberOfOnes<uint32_t>(0xA1BA'A1BAU));
-    EXPECT_EQ(32U, BitUtilitiesBuiltIn::getNumberOfOnes<uint64_t>(0xA1BA'A1BA'A1BA'A1BAULL));
+    EXPECT_EQ(3U, bitUtilitiesBuiltIn::getNumberOfOnes<uint8_t>(0xA1U));
+    EXPECT_EQ(8U, bitUtilitiesBuiltIn::getNumberOfOnes<uint16_t>(0xA1BAU));
+    EXPECT_EQ(16U, bitUtilitiesBuiltIn::getNumberOfOnes<uint32_t>(0xA1BA'A1BAU));
+    EXPECT_EQ(32U, bitUtilitiesBuiltIn::getNumberOfOnes<uint64_t>(0xA1BA'A1BA'A1BA'A1BAULL));
 }
 
 TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfOnesWorksUsingWithoutBuiltIn) {
-    EXPECT_EQ(3U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint8_t>(0xA1U));
-    EXPECT_EQ(8U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint16_t>(0xA1BAU));
-    EXPECT_EQ(16U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint32_t>(0xA1BA'A1BAU));
+    EXPECT_EQ(3U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint8_t>(0xA1U));
+    EXPECT_EQ(8U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint16_t>(0xA1BAU));
+    EXPECT_EQ(16U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint32_t>(0xA1BA'A1BAU));
     EXPECT_EQ(
-        32U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint64_t>(0xA1BA'A1BA'A1BA'A1BAULL));
+        32U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint64_t>(0xA1BA'A1BA'A1BA'A1BAULL));
 }
 
 TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfConsecutiveZerosFromMsbWorks) {
-    EXPECT_EQ(0U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint8_t>(0x80U));
-    EXPECT_EQ(3U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint8_t>(0x10U));
-    EXPECT_EQ(7U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint8_t>(0x01U));
-    EXPECT_EQ(0U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint16_t>(0x8000U));
-    EXPECT_EQ(3U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint16_t>(0x1000U));
-    EXPECT_EQ(15U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint16_t>(0x0001U));
-    EXPECT_EQ(0U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint32_t>(0x8000'0000U));
-    EXPECT_EQ(3U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint32_t>(0x1000'0000U));
-    EXPECT_EQ(31U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint32_t>(0x0000'0001U));
-    EXPECT_EQ(0U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint64_t>(0x8000'0000'0000'0000ULL));
-    EXPECT_EQ(3U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint64_t>(0x1000'0000'0000'0000ULL));
-    EXPECT_EQ(63U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint64_t>(0x0000'0000'0000'0001ULL));
+    EXPECT_EQ(0U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint8_t>(0x80U));
+    EXPECT_EQ(3U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint8_t>(0x10U));
+    EXPECT_EQ(7U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint8_t>(0x01U));
+    EXPECT_EQ(0U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint16_t>(0x8000U));
+    EXPECT_EQ(3U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint16_t>(0x1000U));
+    EXPECT_EQ(15U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint16_t>(0x0001U));
+    EXPECT_EQ(0U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint32_t>(0x8000'0000U));
+    EXPECT_EQ(3U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint32_t>(0x1000'0000U));
+    EXPECT_EQ(31U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint32_t>(0x0000'0001U));
+    EXPECT_EQ(0U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint64_t>(0x8000'0000'0000'0000ULL));
+    EXPECT_EQ(3U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint64_t>(0x1000'0000'0000'0000ULL));
+    EXPECT_EQ(63U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint64_t>(0x0000'0000'0000'0001ULL));
 }
 
 TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfConsecutiveZerosFromMsbWorksUsingWithoutBuiltIn) {
-    EXPECT_EQ(0U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint8_t>(0x80U));
-    EXPECT_EQ(3U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint8_t>(0x10U));
-    EXPECT_EQ(7U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint8_t>(0x01U));
+    EXPECT_EQ(0U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint8_t>(0x80U));
+    EXPECT_EQ(3U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint8_t>(0x10U));
+    EXPECT_EQ(7U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint8_t>(0x01U));
     EXPECT_EQ(
-        0U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint16_t>(0x8000U));
+        0U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint16_t>(0x8000U));
     EXPECT_EQ(
-        3U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint16_t>(0x1000U));
+        3U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint16_t>(0x1000U));
     EXPECT_EQ(
-        15U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint16_t>(0x0001U));
+        15U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint16_t>(0x0001U));
     EXPECT_EQ(
         0U,
-        BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint32_t>(0x8000'0000U));
+        bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint32_t>(0x8000'0000U));
     EXPECT_EQ(
         3U,
-        BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint32_t>(0x1000'0000U));
+        bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint32_t>(0x1000'0000U));
     EXPECT_EQ(
         31U,
-        BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint32_t>(0x0000'0001U));
+        bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint32_t>(0x0000'0001U));
     EXPECT_EQ(
-        0U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint64_t>(
+        0U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint64_t>(
                 0x8000'0000'0000'0000ULL));
     EXPECT_EQ(
-        3U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint64_t>(
+        3U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint64_t>(
                 0x1000'0000'0000'0000ULL));
     EXPECT_EQ(
-        63U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint64_t>(
+        63U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint64_t>(
                  0x0000'0000'0000'0001ULL));
 }
 
 TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfConsecutiveZerosFromLsbWorks) {
-    EXPECT_EQ(7U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint8_t>(0x80U));
-    EXPECT_EQ(3U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint8_t>(0x08U));
-    EXPECT_EQ(0U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint8_t>(0x01U));
-    EXPECT_EQ(15U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint16_t>(0x8000U));
-    EXPECT_EQ(3U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint16_t>(0x0008U));
-    EXPECT_EQ(0U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint16_t>(0x0001U));
-    EXPECT_EQ(31U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint32_t>(0x8000'0000U));
-    EXPECT_EQ(3U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint32_t>(0x0000'0008U));
-    EXPECT_EQ(0U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint32_t>(0x0000'0001U));
-    EXPECT_EQ(63U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint64_t>(0x8000'0000'0000'0000ULL));
-    EXPECT_EQ(3U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint64_t>(0x0000'0000'0000'0008ULL));
-    EXPECT_EQ(0U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint64_t>(0x0000'0000'0000'0001ULL));
+    EXPECT_EQ(7U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint8_t>(0x80U));
+    EXPECT_EQ(3U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint8_t>(0x08U));
+    EXPECT_EQ(0U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint8_t>(0x01U));
+    EXPECT_EQ(15U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint16_t>(0x8000U));
+    EXPECT_EQ(3U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint16_t>(0x0008U));
+    EXPECT_EQ(0U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint16_t>(0x0001U));
+    EXPECT_EQ(31U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint32_t>(0x8000'0000U));
+    EXPECT_EQ(3U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint32_t>(0x0000'0008U));
+    EXPECT_EQ(0U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint32_t>(0x0000'0001U));
+    EXPECT_EQ(63U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint64_t>(0x8000'0000'0000'0000ULL));
+    EXPECT_EQ(3U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint64_t>(0x0000'0000'0000'0008ULL));
+    EXPECT_EQ(0U, bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint64_t>(0x0000'0000'0000'0001ULL));
 }
 
 TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfConsecutiveZerosFromLsbWorksUsingWithoutBuiltIn) {
-    EXPECT_EQ(7U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint8_t>(0x80U));
-    EXPECT_EQ(3U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint8_t>(0x08U));
-    EXPECT_EQ(0U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint8_t>(0x01U));
+    EXPECT_EQ(7U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint8_t>(0x80U));
+    EXPECT_EQ(3U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint8_t>(0x08U));
+    EXPECT_EQ(0U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint8_t>(0x01U));
     EXPECT_EQ(
-        15U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint16_t>(0x8000U));
+        15U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint16_t>(0x8000U));
     EXPECT_EQ(
-        3U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint16_t>(0x0008U));
+        3U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint16_t>(0x0008U));
     EXPECT_EQ(
-        0U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint16_t>(0x0001U));
+        0U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint16_t>(0x0001U));
     EXPECT_EQ(
         31U,
-        BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint32_t>(0x8000'0000U));
+        bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint32_t>(0x8000'0000U));
     EXPECT_EQ(
         3U,
-        BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint32_t>(0x0000'0008U));
+        bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint32_t>(0x0000'0008U));
     EXPECT_EQ(
         0U,
-        BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint32_t>(0x0000'0001U));
+        bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint32_t>(0x0000'0001U));
     EXPECT_EQ(
-        63U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint64_t>(
+        63U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint64_t>(
                  0x8000'0000'0000'0000ULL));
     EXPECT_EQ(
-        3U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint64_t>(
+        3U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint64_t>(
                 0x0000'0000'0000'0008ULL));
     EXPECT_EQ(
-        0U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint64_t>(
+        0U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint64_t>(
                 0x0000'0000'0000'0001ULL));
 }
 

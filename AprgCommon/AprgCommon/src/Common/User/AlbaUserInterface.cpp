@@ -37,15 +37,15 @@ NumberType AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(
 
     DisplayTable table;
     table.addRow();
-    table.getLastRow().addCell("Choice", DisplayTableCellMode::right);
+    table.getLastRow().addCell("Choice", HorizontalAlignment::Right);
     table.getLastRow().addCell("  :  ");
-    table.getLastRow().addCell("Description", DisplayTableCellMode::left);
+    table.getLastRow().addCell("Description", HorizontalAlignment::Left);
     for (auto const& [choiceString, descriptionString] : choices) {
         table.addRow();
         table.getLastRow().addCell(
-            string("[") + converter.convertToString<NumberType>(choiceString) + "]", DisplayTableCellMode::right);
+            string("[") + converter.convertToString<NumberType>(choiceString) + "]", HorizontalAlignment::Right);
         table.getLastRow().addCell("  :  ");
-        table.getLastRow().addCell(descriptionString, DisplayTableCellMode::left);
+        table.getLastRow().addCell(descriptionString, HorizontalAlignment::Left);
     }
     cout << table << "\n";
 
@@ -61,15 +61,15 @@ string AlbaUserInterface::displayQuestionAndChoicesAndGetStringAnswerInAllCapita
 
     DisplayTable table;
     table.addRow();
-    table.getLastRow().addCell("Choice", DisplayTableCellMode::right);
+    table.getLastRow().addCell("Choice", HorizontalAlignment::Right);
     table.getLastRow().addCell("  :  ");
-    table.getLastRow().addCell("Description", DisplayTableCellMode::left);
+    table.getLastRow().addCell("Description", HorizontalAlignment::Left);
     for (auto const& [choiceString, descriptionString] : choices) {
         table.addRow();
         table.getLastRow().addCell(
-            string("[") + getStringWithCapitalLetters(choiceString) + "]", DisplayTableCellMode::right);
+            string("[") + getStringWithCapitalLetters(choiceString) + "]", HorizontalAlignment::Right);
         table.getLastRow().addCell("  :  ");
-        table.getLastRow().addCell(descriptionString, DisplayTableCellMode::left);
+        table.getLastRow().addCell(descriptionString, HorizontalAlignment::Left);
     }
     cout << table << "\n";
 

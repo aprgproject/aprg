@@ -1,89 +1,134 @@
 #pragma once
 
+#include <Common/String/AlbaStringHelper.hpp>
+
+#include <optional>
 #include <string>
 #include <vector>
 
 namespace alba {
 
-enum class DisplayTableCellMode { justify, center, right, left };
-
-enum class DisplayTableRowMode { align, justify };
+using HorizontalAlignment = stringHelper::AlignmentType;
+enum class VerticalAlignment { Justify, Center, Top, Bottom };
 
 class DisplayTableCell {
 public:
     DisplayTableCell();
     explicit DisplayTableCell(std::string_view displayText);
-    explicit DisplayTableCell(std::string_view displayText, DisplayTableCellMode const horizontalMode);
+    DisplayTableCell(std::string_view displayText, HorizontalAlignment const horizontalAlignment);
+    DisplayTableCell(
+        std::string_view displayText, HorizontalAlignment const horizontalAlignment,
+        VerticalAlignment const verticalAlignment);
 
     // rule of zero
 
     [[nodiscard]] std::string getText() const;
-    [[nodiscard]] DisplayTableCellMode getHorizontalMode() const;
+    [[nodiscard]] HorizontalAlignment getHorizontalAlignment() const;
+    [[nodiscard]] VerticalAlignment getVerticalAlignment() const;
 
     std::string& getTextReference();
     void setText(std::string_view text);
-    void setHorizontalMode(DisplayTableCellMode const mode);
+    void setHorizontalAlignment(HorizontalAlignment const horizontalAlignment);
+    void setVerticalAlignment(VerticalAlignment const verticalAlignment);
 
 private:
     std::string m_displayText;
-    DisplayTableCellMode m_horizontalMode;
+    HorizontalAlignment m_horizontalAlignment;
+    VerticalAlignment m_verticalAlignment;
 };
 
-using Cells = std::vector<DisplayTableCell>;
+using DisplayTableCells = std::vector<DisplayTableCell>;
 
 class DisplayTableRow {
 public:
     DisplayTableRow() = default;
-    explicit DisplayTableRow(size_t const numberOfCells);
+    explicit DisplayTableRow(int const numberOfCells);
 
     // rule of zero
 
-    [[nodiscard]] size_t getNumberOfColumns() const;
-    [[nodiscard]] size_t getCharacters() const;
-    [[nodiscard]] Cells const& getCells() const;
-    [[nodiscard]] DisplayTableCell const& getCellAt(size_t const columnIndex) const;
+    [[nodiscard]] int getNumberOfColumns() const;
+    [[nodiscard]] DisplayTableCells const& getCells() const;
+    [[nodiscard]] DisplayTableCell const& getCellAt(int const columnIndex) const;
 
-    Cells& getCellsReference();
-    DisplayTableCell& getCellReferenceAt(size_t const columnIndex);
+    DisplayTableCells& getCellsReference();
+    DisplayTableCell& getCellReferenceAt(int const columnIndex);
     void addCell(std::string_view text);
-    void addCell(std::string_view text, DisplayTableCellMode const horizontalMode);
+    void addCell(std::string_view displayText, HorizontalAlignment const horizontalAlignment);
+    void addCell(
+        std::string_view displayText, HorizontalAlignment const horizontalAlignment,
+        VerticalAlignment const verticalAlignment);
 
 private:
-    Cells m_cells;
+    DisplayTableCells m_cells;
 };
+
+using DisplayTableRows = std::vector<DisplayTableRow>;
 
 class DisplayTable {
 public:
     DisplayTable() = default;
-    DisplayTable(size_t const numberOfColumns, size_t const numberOfRows);
+    DisplayTable(int const numberOfColumns, int const numberOfRows);
 
     // rule of zero
 
-    [[nodiscard]] size_t getTotalRows() const;
-    [[nodiscard]] size_t getTotalColumns() const;
-    [[nodiscard]] size_t getMaxCharactersInOneRow() const;
-    [[nodiscard]] DisplayTableCell const& getCellAt(size_t const columnIndex, size_t const rowIndex) const;
+    [[nodiscard]] int getNumberOfRows() const;
+    [[nodiscard]] int getMaxNumberOfColumns() const;
+    [[nodiscard]] DisplayTableRows const& getRows() const;
+    [[nodiscard]] DisplayTableRow const& getRowAt(int const rowIndex) const;
+    [[nodiscard]] DisplayTableCell const& getCellAt(int const columnIndex, int const rowIndex) const;
+    [[nodiscard]] std::string getHorizontalBorder() const;
+    [[nodiscard]] std::string getVerticalBorder() const;
 
     DisplayTableRow& getLastRow();
-    DisplayTableRow& getRowReferenceAt(size_t const rowIndex);
-    DisplayTableCell& getCellReferenceAt(size_t const columnIndex, size_t const rowIndex);
+    DisplayTableRow& getRowReferenceAt(int const rowIndex);
+    DisplayTableCell& getCellReferenceAt(int const columnIndex, int const rowIndex);
     void addRow();
     void setBorders(std::string_view horizontalBorder, std::string_view verticalBorder);
     void setHorizontalBorder(std::string_view horizontalBorder);
     void setVerticalBorder(std::string_view verticalBorder);
 
 private:
-    static std::string getCellTextWithDesiredLength(DisplayTableCell const& cell, size_t const desiredLength);
-    [[nodiscard]] std::string getHorizontalBorderLine(size_t const length) const;
-    [[nodiscard]] std::string getVerticalBorderPoint() const;
-    [[nodiscard]] size_t getVerticalBorderLength() const;
-    [[nodiscard]] size_t getHorizontalBorderLength(size_t const totalColumnLength) const;
-
     friend std::ostream& operator<<(std::ostream& out, DisplayTable const& displayTable);
 
     std::string m_horizontalBorder;
     std::string m_verticalBorder;
-    std::vector<DisplayTableRow> m_rows;
+    DisplayTableRows m_rows;
+};
+
+class DisplayTablePrinter {
+public:
+    using Line = std::string;
+    using Lines = std::vector<Line>;
+    struct Cell {
+        HorizontalAlignment horizontalAlignment;
+        VerticalAlignment verticalAlignment;
+        Lines lines;
+    };
+    using Cells = std::vector<Cell>;
+    struct Row {
+        Cells cells;
+    };
+    using Rows = std::vector<Row>;
+
+    explicit DisplayTablePrinter(DisplayTable const& displayTable);
+    void print(std::ostream& out) const;
+
+private:
+    void saveTableInformation(DisplayTable const& displayTable);
+    [[nodiscard]] static std::string getTextBasedOnVerticalAlignment(
+        VerticalAlignment const alignment, int const lineIndexAtRow, int const numberOfLinesAtRow,
+        Lines const& linesAtCell);
+    [[nodiscard]] bool shouldBePrintedAtThisRow() const;
+    [[nodiscard]] std::string getHorizontalBorderLine() const;
+    [[nodiscard]] std::string getVerticalBorderPoint() const;
+    [[nodiscard]] int getVerticalBorderLength() const;
+    [[nodiscard]] int getHorizontalBorderLength() const;
+    Rows m_rows{};
+    std::vector<int> m_maxLengthAtColumn;
+    std::vector<int> m_maxWidthAtRow;
+    int m_totalColumnLength{};
+    std::string m_horizontalBorder;
+    std::string m_verticalBorder;
 };
 
 }  // namespace alba

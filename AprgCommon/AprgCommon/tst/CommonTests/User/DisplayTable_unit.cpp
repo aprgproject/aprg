@@ -8,7 +8,7 @@ using namespace std;
 
 namespace alba {
 
-TEST(DisplayTableTest, TableCanOutputProvideText) {
+TEST(DisplayTableTest, ConvertingToStringWorks) {
     DisplayTable table;
 
     table.addRow();
@@ -17,7 +17,7 @@ TEST(DisplayTableTest, TableCanOutputProvideText) {
     EXPECT_EQ("Test\n", convertToString(table));
 }
 
-TEST(DisplayTableTest, TableCanOutputTextWithBorders) {
+TEST(DisplayTableTest, TableWorksWithBorders) {
     DisplayTable table;
 
     table.setBorders("X", "X");
@@ -27,7 +27,7 @@ TEST(DisplayTableTest, TableCanOutputTextWithBorders) {
     EXPECT_EQ("XXXXXX\nXTestX\nXXXXXX\n", convertToString(table));
 }
 
-TEST(DisplayTableTest, TableCanOutputTextFor3by3Table) {
+TEST(DisplayTableTest, TableWorksFor3by3Table) {
     DisplayTable table;
 
     table.setBorders("-", "|");
@@ -50,24 +50,24 @@ TEST(DisplayTableTest, TableCanOutputTextFor3by3Table) {
         convertToString(table));
 }
 
-TEST(DisplayTableTest, CellWithAlignmentCanBeAdded) {
+TEST(DisplayTableTest, TableCellWithAlignmentCanBeAdded) {
     DisplayTable table;
 
     table.addRow();
     table.getLastRow().addCell("12345");
     table.addRow();
-    table.getLastRow().addCell("C", DisplayTableCellMode::center);
+    table.getLastRow().addCell("C", HorizontalAlignment::Center);
     table.addRow();
-    table.getLastRow().addCell("L", DisplayTableCellMode::left);
+    table.getLastRow().addCell("L", HorizontalAlignment::Left);
     table.addRow();
-    table.getLastRow().addCell("R", DisplayTableCellMode::right);
+    table.getLastRow().addCell("R", HorizontalAlignment::Right);
     table.addRow();
-    table.getLastRow().addCell("J", DisplayTableCellMode::justify);
+    table.getLastRow().addCell("J", HorizontalAlignment::Justify);
 
     EXPECT_EQ("12345\n  C  \nL    \n    R\n  J  \n", convertToString(table));
 }
 
-TEST(DisplayTableTest, CanBeConstructedWithNumberOfColumnsAndRows) {
+TEST(DisplayTableTest, TableCanBeConstructedWithNumberOfColumnsAndRows) {
     DisplayTable table(2U, 3U);
 
     table.setBorders("-", "|");
@@ -80,6 +80,66 @@ TEST(DisplayTableTest, CanBeConstructedWithNumberOfColumnsAndRows) {
 
     EXPECT_EQ(
         "-------------\n|(0,0)|(1,0)|\n-------------\n|(0,1)|(1,1)|\n-------------\n|(0,2)|(1,2)|\n-------------\n",
+        convertToString(table));
+}
+
+TEST(DisplayTableTest, TableWorksForMultilineCell) {
+    DisplayTable table;
+
+    table.setBorders("-", "|");
+    table.addRow();
+    table.getLastRow().addCell("10000000\n100");
+    table.getLastRow().addCell("2\n20000000000\n200\n22");
+    table.getLastRow().addCell("3\n300\n30000");
+    table.addRow();
+    table.getLastRow().addCell("4.1\n4\n4");
+    table.getLastRow().addCell("5\n55\n555\n5555\n555555\n5555555");
+    table.getLastRow().addCell("6.55\n6......");
+    table.addRow();
+    table.getLastRow().addCell("7\n7\n7\n7\n7\n7\n7\n7\n7\n7\n");
+    table.getLastRow().addCell("8 8 8 8 8");
+    table.getLastRow().addCell("9000000");
+
+    EXPECT_EQ(
+        "------------------------------\n|        |     2     |   3   |\n|10000000|20000000000|  300  |\n|  100   |    "
+        "200    | 30000 |\n|        |    22     |       |\n------------------------------\n|        |     5     |      "
+        " |\n|  4.1   |    55     |       |\n|   4    |    555    | 6.55  |\n|   4    |   5555    |6......|\n|        "
+        "|  555555   |       |\n|        |  5555555  |       |\n------------------------------\n|   7    |           | "
+        "      |\n|   7    |           |       |\n|   7    |           |       |\n|   7    |           |       |\n|   "
+        "7    | 8 8 8 8 8 |9000000|\n|   7    |           |       |\n|   7    |           |       |\n|   7    |        "
+        "   |       |\n|   7    |           |       |\n|   7    |           |       "
+        "|\n------------------------------\n",
+        convertToString(table));
+}
+
+TEST(DisplayTableTest, TableWorksForMultilineCellWithDifferentAlignments) {
+    DisplayTable table;
+
+    table.setBorders("-", "|");
+    table.addRow();
+    table.getLastRow().addCell("10000000\n100", HorizontalAlignment::Center, VerticalAlignment::Center);
+    table.getLastRow().addCell("2\n20000000000\n200\n22", HorizontalAlignment::Justify, VerticalAlignment::Justify);
+    table.getLastRow().addCell("3\n300\n30000", HorizontalAlignment::Left, VerticalAlignment::Top);
+    table.addRow();
+    table.getLastRow().addCell("4.1\n4\n4", HorizontalAlignment::Right, VerticalAlignment::Bottom);
+    table.getLastRow().addCell(
+        "5\n55\n555\n5555\n555555\n5555555", HorizontalAlignment::Justify, VerticalAlignment::Center);
+    table.getLastRow().addCell("6.55\n6......", HorizontalAlignment::Justify, VerticalAlignment::Justify);
+    table.addRow();
+    table.getLastRow().addCell(
+        "7\n7\n7\n7\n7\n7\n7\n7\n7\n7\n", HorizontalAlignment::Center, VerticalAlignment::Center);
+    table.getLastRow().addCell("8 8 8 8 8", HorizontalAlignment::Justify, VerticalAlignment::Bottom);
+    table.getLastRow().addCell("9000000", HorizontalAlignment::Center, VerticalAlignment::Bottom);
+
+    EXPECT_EQ(
+        "------------------------------\n|        |     2     |3      |\n|10000000|20000000000|300    |\n|  100   |  2 "
+        " 0  0  |30000  |\n|        |   2   2   |       |\n------------------------------\n|        |     5     |      "
+        " |\n|        |   5   5   |6 . 5 5|\n|        |  5  5  5  |       |\n|     4.1|  5 5 5 5  |6......|\n|       "
+        "4|5 5 5 5 5 5|       |\n|       4|  5555555  |       |\n------------------------------\n|   7    |           "
+        "|       |\n|   7    |           |       |\n|   7    |           |       |\n|   7    |           |       |\n|  "
+        " 7    |           |       |\n|   7    |           |       |\n|   7    |           |       |\n|   7    |       "
+        "    |       |\n|   7    |           |       |\n|   7    | 8 8 8 8 8 "
+        "|9000000|\n------------------------------\n",
         convertToString(table));
 }
 

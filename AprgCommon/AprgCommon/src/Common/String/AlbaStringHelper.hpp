@@ -188,6 +188,9 @@ OutputStringType convertToAnotherBasicStringVariant(InputStringType const& input
 
 // Alignments
 
+enum class AlignmentType { Justify, Center, Right, Left };
+std::string getStringWithAlignment(
+    std::string_view mainText, size_t const targetLength, AlignmentType const alignmentType);
 std::string getStringWithJustifyAlignment(std::string_view mainText, size_t const targetLength);
 std::string getStringWithCenterAlignment(std::string_view mainText, size_t const targetLength);
 std::string getStringWithRightAlignment(std::string_view mainText, size_t const targetLength);

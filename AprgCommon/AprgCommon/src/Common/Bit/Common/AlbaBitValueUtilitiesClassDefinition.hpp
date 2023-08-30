@@ -29,7 +29,7 @@ public:
         return getValueWithLastBitOneAsZero(value) == 0;
     }
 
-    static inline constexpr bool isEvenParity(DataType const value) { return BitUtilitiesBuiltIn::isEvenParity(value); }
+    static inline constexpr bool isEvenParity(DataType const value) { return bitUtilitiesBuiltIn::isEvenParity(value); }
 
     static constexpr inline bool areAllOnesStartingFromTheFirstOne(DataType const value) {
         // These values also follow this formula: (2^n)-1.
@@ -118,15 +118,15 @@ public:
     }
 
     static inline constexpr size_t getNumberOfOnes(DataType const value) {
-        return BitUtilitiesBuiltIn::getNumberOfOnes(value);
+        return bitUtilitiesBuiltIn::getNumberOfOnes(value);
     }
 
     static inline constexpr size_t getNumberOfConsecutiveZerosFromMsb(DataType const value) {
-        return BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb(value);
+        return bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb(value);
     }
 
     static inline constexpr size_t getNumberOfConsecutiveZerosFromLsb(DataType const value) {
-        return BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb(value);
+        return bitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb(value);
     }
 
     static constexpr inline size_t getHammingDistance(DataType const value1, DataType const value2) {

@@ -708,10 +708,13 @@ TEST(GetStringWithAlignmentFromStringTest, GetStringUsingJustifyAlignment) {
     EXPECT_EQ("                        M                         ", getStringWithJustifyAlignment("M", 50));
     EXPECT_EQ("         M         a         r         k          ", getStringWithJustifyAlignment("Mark", 50));
     EXPECT_EQ(
-        "Mark        Earvin        Alba        1234567890  ",
+        "     Mark     Earvin     Alba     1234567890      ",
         getStringWithJustifyAlignment("Mark Earvin Alba 1234567890", 50));
     EXPECT_EQ("Mark Earvin Alba 1234567890", getStringWithJustifyAlignment("Mark Earvin Alba 1234567890", 1));
     EXPECT_EQ("                                                  ", getStringWithJustifyAlignment(string(), 50));
+    EXPECT_EQ("5 5 5 5 5 5", getStringWithJustifyAlignment("555555", 11));
+    EXPECT_EQ("  555555  ", getStringWithJustifyAlignment("555555", 10));
+    EXPECT_EQ(" 8 8 8 8 8 ", getStringWithJustifyAlignment("8 8 8 8 8", 11));
 }
 
 TEST(GetStringWithAlignmentFromStringTest, GetStringUsingCenterAlignment) {
