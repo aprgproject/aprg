@@ -2,7 +2,7 @@
 
 #include <Algorithm/Graph/PathSearch/Common/BasePathSearchWithRelax.hpp>
 #include <Algorithm/Graph/Types/GraphTypes.hpp>
-#include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
+#include <Algorithm/Graph/Utilities/GraphUtilities.hpp>
 
 #include <queue>
 

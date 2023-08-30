@@ -1,5 +1,4 @@
 #include <Algorithm/LinearProgramming/SimplexAlgorithm.hpp>
-#include <AlgorithmTests/Utilities/MatrixUtilities.hpp>
 
 #include <gtest/gtest.h>
 
