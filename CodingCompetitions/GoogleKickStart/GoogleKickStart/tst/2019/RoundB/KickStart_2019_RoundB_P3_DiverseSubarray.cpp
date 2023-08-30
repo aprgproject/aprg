@@ -83,7 +83,7 @@ public:
     RangeQueryWithStaticSegmentTree() = default;
 
     RangeQueryWithStaticSegmentTree(Values const& valuesToCheck, Function const& functionObject)
-        : m_startOfChildren(0), m_treeValues(), m_function(functionObject) {
+        : m_treeValues(), m_function(functionObject) {
         initialize(valuesToCheck);
     }
 

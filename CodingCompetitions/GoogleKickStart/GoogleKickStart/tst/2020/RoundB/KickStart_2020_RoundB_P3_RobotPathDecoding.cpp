@@ -27,7 +27,7 @@ namespace KickStart_2020_RoundB_P3_RobotPathDecoding {
 #define my_cin cin
 #endif
 
-typedef long long ll;
+using ll = long long;
 
 void runTestCase(int const testCaseNumber) {
     string s;
