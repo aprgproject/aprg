@@ -266,7 +266,7 @@ void TermsOverTerms::calculateBasesAndExponentsAndPutThatToNumeratorsAndDenomina
 }
 
 void TermsOverTerms::putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToTerms(
-    Terms& numeratorTerms, Terms& denominatorTerms, TermsRaiseToTerms const& termsRaiseToTerms) {
+    Terms& numeratorTerms, Terms& denominatorTerms, TermsRaiseToTerms const& termsRaiseToTerms) const {
     for (auto const& [base, exponent] : termsRaiseToTerms.getBaseToExponentMap()) {
         if (!isIntegerConstant(exponent) || m_shouldSimplifyToFactors) {
             if (isANegativeTerm(exponent)) {
@@ -288,7 +288,7 @@ void TermsOverTerms::putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToTerms
 }
 
 void TermsOverTerms::putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToNumbers(
-    Terms& numeratorTerms, Terms& denominatorTerms, TermsRaiseToNumbers const& termsRaiseToNumbers) {
+    Terms& numeratorTerms, Terms& denominatorTerms, TermsRaiseToNumbers const& termsRaiseToNumbers) const {
     for (auto const& [base, exponent] : termsRaiseToNumbers.getBaseToExponentMap()) {
         if (!exponent.isIntegerType() || m_shouldSimplifyToFactors) {
             if (exponent > 0) {
@@ -324,7 +324,10 @@ void TermsOverTerms::removeTermsThatHaveNoEffect(Terms& terms) {
 }
 
 void TermsOverTerms::putTermsOnNumeratorAndDenominatorCorrectly(Terms& numerators, Terms& denominators) {
-    Terms retainedNumerators, retainedDenominators, termsToPutInNumerators, termsToPutInDenominators;
+    Terms retainedNumerators;
+    Terms retainedDenominators;
+    Terms termsToPutInNumerators;
+    Terms termsToPutInDenominators;
     putTermsToRetainAndOnTheOtherSide(numerators, retainedNumerators, termsToPutInDenominators);
     putTermsToRetainAndOnTheOtherSide(denominators, retainedDenominators, termsToPutInNumerators);
 
@@ -373,7 +376,10 @@ void TermsOverTerms::simplifyPolynomialNumeratorAndPolynomialDenominator(
 }
 
 void TermsOverTerms::simplifyMonomialsToPolynomialOverPolynomial() {
-    Terms monomialsNumerators, nonMonomialNumerators, monomialDenominators, nonMonomialDenominators;
+    Terms monomialsNumerators;
+    Terms nonMonomialNumerators;
+    Terms monomialDenominators;
+    Terms nonMonomialDenominators;
     segregateMonomialsAndNonMonomials(m_numerators, monomialsNumerators, nonMonomialNumerators);
     segregateMonomialsAndNonMonomials(m_denominators, monomialDenominators, nonMonomialDenominators);
     Polynomial polynomialNumerator(multiplyPolynomialTerms(monomialsNumerators));
@@ -384,7 +390,10 @@ void TermsOverTerms::simplifyMonomialsToPolynomialOverPolynomial() {
 }
 
 void TermsOverTerms::simplifyPolynomialsToPolynomialOverPolynomial() {
-    Terms polynomialNumerators, nonPolynomialNumerators, polynomialDenominators, nonPolynomialDenominators;
+    Terms polynomialNumerators;
+    Terms nonPolynomialNumerators;
+    Terms polynomialDenominators;
+    Terms nonPolynomialDenominators;
     segregatePolynomialAndNonPolynomials(m_numerators, polynomialNumerators, nonPolynomialNumerators);
     segregatePolynomialAndNonPolynomials(m_denominators, polynomialDenominators, nonPolynomialDenominators);
     Polynomial polynomialNumerator(multiplyPolynomialTerms(polynomialNumerators));

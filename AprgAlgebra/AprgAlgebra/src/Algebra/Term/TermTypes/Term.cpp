@@ -148,37 +148,37 @@ TermType Term::getTermType() const { return m_type; }
 
 Constant const& Term::getAsConstant() const {
     assert(m_type == TermType::Constant);
-    return *static_cast<Constant const*>(m_baseTermDataPointer.get());
+    return *dynamic_cast<Constant const*>(m_baseTermDataPointer.get());
 }
 
 Variable const& Term::getAsVariable() const {
     assert(m_type == TermType::Variable);
-    return *static_cast<Variable const*>(m_baseTermDataPointer.get());
+    return *dynamic_cast<Variable const*>(m_baseTermDataPointer.get());
 }
 
 Operator const& Term::getAsOperator() const {
     assert(m_type == TermType::Operator);
-    return *static_cast<Operator const*>(m_baseTermDataPointer.get());
+    return *dynamic_cast<Operator const*>(m_baseTermDataPointer.get());
 }
 
 Monomial const& Term::getAsMonomial() const {
     assert(m_type == TermType::Monomial);
-    return *static_cast<Monomial const*>(m_baseTermDataPointer.get());
+    return *dynamic_cast<Monomial const*>(m_baseTermDataPointer.get());
 }
 
 Polynomial const& Term::getAsPolynomial() const {
     assert(m_type == TermType::Polynomial);
-    return *static_cast<Polynomial const*>(m_baseTermDataPointer.get());
+    return *dynamic_cast<Polynomial const*>(m_baseTermDataPointer.get());
 }
 
 Expression const& Term::getAsExpression() const {
     assert((m_type == TermType::Expression));
-    return *static_cast<Expression const*>(m_baseTermDataPointer.get());
+    return *dynamic_cast<Expression const*>(m_baseTermDataPointer.get());
 }
 
 Function const& Term::getAsFunction() const {
     assert((m_type == TermType::Function));
-    return *static_cast<Function const*>(m_baseTermDataPointer.get());
+    return *dynamic_cast<Function const*>(m_baseTermDataPointer.get());
 }
 
 AlbaNumber const& Term::getAsNumber() const { return getAsConstant().getNumber(); }
@@ -221,43 +221,43 @@ string Term::getDebugString() const {
 Constant& Term::getAsConstantReference() {
     clearSimplifiedFlag();
     assert(m_type == TermType::Constant);
-    return *static_cast<Constant*>(m_baseTermDataPointer.get());
+    return *dynamic_cast<Constant*>(m_baseTermDataPointer.get());
 }
 
 Variable& Term::getAsVariableReference() {
     clearSimplifiedFlag();
     assert(m_type == TermType::Variable);
-    return *static_cast<Variable*>(m_baseTermDataPointer.get());
+    return *dynamic_cast<Variable*>(m_baseTermDataPointer.get());
 }
 
 Operator& Term::getAsOperatorReference() {
     clearSimplifiedFlag();
     assert(m_type == TermType::Operator);
-    return *static_cast<Operator*>(m_baseTermDataPointer.get());
+    return *dynamic_cast<Operator*>(m_baseTermDataPointer.get());
 }
 
 Monomial& Term::getAsMonomialReference() {
     clearSimplifiedFlag();
     assert(m_type == TermType::Monomial);
-    return *static_cast<Monomial*>(m_baseTermDataPointer.get());
+    return *dynamic_cast<Monomial*>(m_baseTermDataPointer.get());
 }
 
 Polynomial& Term::getAsPolynomialReference() {
     clearSimplifiedFlag();
     assert(m_type == TermType::Polynomial);
-    return *static_cast<Polynomial*>(m_baseTermDataPointer.get());
+    return *dynamic_cast<Polynomial*>(m_baseTermDataPointer.get());
 }
 
 Expression& Term::getAsExpressionReference() {
     clearSimplifiedFlag();
     assert((m_type == TermType::Expression));
-    return *static_cast<Expression*>(m_baseTermDataPointer.get());
+    return *dynamic_cast<Expression*>(m_baseTermDataPointer.get());
 }
 
 Function& Term::getAsFunctionReference() {
     clearSimplifiedFlag();
     assert((m_type == TermType::Function));
-    return *static_cast<Function*>(m_baseTermDataPointer.get());
+    return *dynamic_cast<Function*>(m_baseTermDataPointer.get());
 }
 
 BaseTermUniquePointer Term::createBasePointerByMove() {

@@ -32,8 +32,11 @@ void LinearDiophantineEquationSolver::calculateForEquation(
     if (canBeConvertedToPolynomial(nonZeroLeftHandTerm)) {
         Polynomial polynomial(createPolynomialIfPossible(nonZeroLeftHandTerm));
         bool isPatternRecognized(false);
-        AlbaNumber a, b, c;
-        string xName, yName;
+        AlbaNumber a;
+        AlbaNumber b;
+        AlbaNumber c;
+        string xName;
+        string yName;
         retrieveDetailsFromPolynomial(isPatternRecognized, a, b, c, xName, yName, polynomial);
         if (isPatternRecognized) {
             LinearDiophantineEquationCoefficientSolver solver(a, b, c);

@@ -30,7 +30,8 @@ void RationalizeTermOverTerm::rationalizeNumerator() { rationalize(m_numerator, 
 void RationalizeTermOverTerm::rationalizeDenominator() { rationalize(m_denominator, m_numerator); }
 
 void RationalizeTermOverTerm::rationalize(Term& termToRationalize, Term& otherTerm) {
-    Term rationalizedTerm, multiplier;
+    Term rationalizedTerm;
+    Term multiplier;
     retrieveTermsForRationalization(rationalizedTerm, multiplier, termToRationalize);
     while (!multiplier.isEmpty()) {
         termToRationalize = rationalizedTerm;

@@ -240,7 +240,7 @@ TEST(TermRaiseToTermsTest, SimplifyWorksWithReducingExponentialToLogarithmic) {
 
     EXPECT_EQ(Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})}), termRaiseToTerms.getBase());
     EXPECT_TRUE(termRaiseToTerms.getExponents().empty());
-    Term expectedCombinedTerm(polynomialTerm);
+    const Term& expectedCombinedTerm(polynomialTerm);
     EXPECT_EQ(expectedCombinedTerm, termRaiseToTerms.getCombinedTerm());
 }
 

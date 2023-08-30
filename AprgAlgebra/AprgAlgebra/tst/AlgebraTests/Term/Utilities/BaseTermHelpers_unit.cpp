@@ -70,7 +70,7 @@ TEST(BaseTermHelpersTest, GetBaseTermConstReferenceFromTermWorks) {
 
     BaseTerm const& baseTerm(getBaseTermConstReferenceFromTerm(originalTerm));
 
-    Term const& termToVerify(static_cast<Term const&>(baseTerm));
+    Term const& termToVerify(dynamic_cast<Term const&>(baseTerm));
     EXPECT_EQ(Term(7896), termToVerify);
 }
 
@@ -79,7 +79,7 @@ TEST(BaseTermHelpersTest, GetBaseTermConstReferenceFromUniquePointerWorks) {
 
     BaseTerm const& baseTerm(getBaseTermConstReferenceFromUniquePointer(uniquePointer));
 
-    Term const& termToVerify(static_cast<Term const&>(baseTerm));
+    Term const& termToVerify(dynamic_cast<Term const&>(baseTerm));
     EXPECT_EQ(Term(6415), termToVerify);
 }
 
@@ -87,7 +87,7 @@ TEST(BaseTermHelpersTest, GetBaseTermReferenceFromTermWorks) {
     Term originalTerm(7896);
 
     BaseTerm& baseTerm(getBaseTermReferenceFromTerm(originalTerm));
-    Term& termToVerify(static_cast<Term&>(baseTerm));
+    Term& termToVerify(dynamic_cast<Term&>(baseTerm));
     originalTerm = Term(854);
 
     EXPECT_EQ(Term(854), termToVerify);
@@ -98,7 +98,7 @@ TEST(BaseTermHelpersTest, GetBaseTermReferenceFromUniquePointerWorks) {
 
     BaseTerm& baseTerm(getBaseTermReferenceFromUniquePointer(uniquePointer));
 
-    Term const& termToVerify(static_cast<Term const&>(baseTerm));
+    Term const& termToVerify(dynamic_cast<Term const&>(baseTerm));
     EXPECT_EQ(Term(6415), termToVerify);
 }
 

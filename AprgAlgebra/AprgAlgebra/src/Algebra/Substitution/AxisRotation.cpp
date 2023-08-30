@@ -42,7 +42,8 @@ void AxisRotation::initializeSubstitution(
     Term oldY(yName);
     Term sinTheta(sin(angle));
     Term cosTheta(cos(angle));
-    Term newX, newY;
+    Term newX;
+    Term newY;
     if (doRotationBack) {
         newX = oldX * cosTheta - oldY * sinTheta;
         newY = oldX * sinTheta + oldY * cosTheta;

@@ -204,7 +204,8 @@ TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingTrigonometricEx
     Term oneOverX(createExpressionIfPossible({1, "/", "x"}));
     Term termToTest(createExpressionIfPossible({sin(oneOverX), "/", arctan(oneOverX)}));
 
-    Term newTerm, limitValue;
+    Term newTerm;
+    Term limitValue;
     calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, termToTest, "x", ALBA_NUMBER_POSITIVE_INFINITY);
 
     string stringToExpect("((1[x^2] + 1)*cos((1/x))/1[x^2])");
@@ -218,7 +219,8 @@ TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingLogarithmicAndE
     Term denominator(Monomial(3, {{"x", 1}}));
     Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
 
-    Term newTerm, limitValue;
+    Term newTerm;
+    Term limitValue;
     calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, termToTest, "x", ALBA_NUMBER_POSITIVE_INFINITY);
 
     string stringToExpect("(1/3)");
@@ -232,7 +234,8 @@ TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingTrigonometricEx
     Term termToTestPart2(createExpressionIfPossible({1, "/", xSquared, "/", sec("x")}));
     Term termToTest(createExpressionIfPossible({termToTestPart1, "-", termToTestPart2}));
 
-    Term newTerm, limitValue;
+    Term newTerm;
+    Term limitValue;
     calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, termToTest, "x", 0);
 
     string stringToExpect("((sec(x)^2)/(2+(1[x^2]*(sec(x)^2))+(2[x]*tan(x))))");

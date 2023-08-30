@@ -13,7 +13,9 @@ double getCumulativeStandardDistributionApproximation(double const zValue) {
 
 double getInverseCumulativeStandardDistributionApproximation(
     double const probability, size_t const numberOfIterations) {
-    double lowestZ = -10, highestZ = 10, zValue(0);
+    double lowestZ = -10;
+    double highestZ = 10;
+    double zValue(0);
     for (size_t iterationCount = 0; iterationCount < numberOfIterations; iterationCount++) {
         auto middleZ = getAverage<double>(lowestZ, highestZ);
         double probabilityLowest = getCumulativeStandardDistributionApproximation(lowestZ);

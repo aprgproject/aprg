@@ -20,7 +20,8 @@ SolutionSet calculateDomainUsingTransitionValues(
     // This would be better if we have differentiation.
     SolutionSet domain;
 
-    AlbaNumbersSet sortedValues, collectedValues;
+    AlbaNumbersSet sortedValues;
+    AlbaNumbersSet collectedValues;
     collectAndUniqueValuesAndSort(sortedValues, domainValuesToCheck);
     collectMinAndMaxValues(collectedValues, sortedValues);
     appendTransitionValues(collectedValues, sortedValues, functionToCheck);
@@ -65,7 +66,8 @@ SolutionSet calculateDomainForEquation(
     VariableNamesRetriever variableNamesRetriever;
     variableNamesRetriever.retrieveFromEquation(equation);
     VariableNamesSet const& variableNames(variableNamesRetriever.getVariableNames());
-    string inputName, outputName;
+    string inputName;
+    string outputName;
     retrieveTwoVariableNames(inputName, outputName, variableNames, variableNameToCheck);
     if (!inputName.empty() && !outputName.empty()) {
         domain = calculateDomainForEquationWithVariableToSubstitute(inputName, valuesToCheck, equation);
@@ -83,7 +85,8 @@ SolutionSet calculateRangeForEquation(
     VariableNamesRetriever variableNamesRetriever;
     variableNamesRetriever.retrieveFromEquation(equation);
     VariableNamesSet const& variableNames(variableNamesRetriever.getVariableNames());
-    string inputName, outputName;
+    string inputName;
+    string outputName;
     retrieveTwoVariableNames(inputName, outputName, variableNames, variableNameToCheck);
     if (!inputName.empty() && !outputName.empty()) {
         domain = calculateDomainForEquationWithVariableToSubstitute(outputName, valuesToCheck, equation);
