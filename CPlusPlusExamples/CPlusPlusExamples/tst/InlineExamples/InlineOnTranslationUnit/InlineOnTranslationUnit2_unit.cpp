@@ -127,7 +127,9 @@ TEST(InlineOnTranslationUnit2Test, VariableValuesAreChangedAndReflectedOnOtherTr
 
 TEST(InlineOnTranslationUnit2Test, FunctionReturnValuesAreCorrect) {
     EXPECT_EQ(1, freeFunction());
-    EXPECT_EQ(1, inlineFreeFunction());
+    auto inlineFreeFunctionResult = inlineFreeFunction();
+    // The value is 1 or 2 depending of which one the compiler finds:
+    EXPECT_TRUE((inlineFreeFunctionResult == 1 || inlineFreeFunctionResult == 2));
 }
 
 }  // namespace alba::InlineOnTranslationUnits
