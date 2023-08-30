@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2020_RoundF_P2_MetalHarvest.hpp"
 
@@ -27,7 +27,7 @@ namespace KickStart_2020_RoundF_P2_MetalHarvest {
 #define my_cin cin
 #endif
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     int n = 0, k = 0;
     my_cin >> n >> k;
     vector<pair<int, int> > e;

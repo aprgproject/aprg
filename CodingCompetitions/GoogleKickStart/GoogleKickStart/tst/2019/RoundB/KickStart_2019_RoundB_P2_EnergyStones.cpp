@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2019_RoundB_P2_EnergyStones.hpp"
 
@@ -124,7 +124,7 @@ int getMaxEnergy(int const index, int const elapsedTime) {
     return 0;
 }
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     my_cin >> numberOfStones;
 
     int totalConsumptionTime = 0;

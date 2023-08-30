@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2020_RoundC_P2_StableWall.hpp"
 
@@ -51,7 +51,7 @@ void dfs(int u) {
     ans += static_cast<char>(u + 'A');
 }
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     my_cin >> n >> m;
     set<char> t;
     for (int i = 0; i < n; ++i) {

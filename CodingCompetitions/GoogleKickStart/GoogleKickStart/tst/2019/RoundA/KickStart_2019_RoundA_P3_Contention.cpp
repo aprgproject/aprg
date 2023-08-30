@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2019_RoundA_P3_Contention.hpp"
 
@@ -77,7 +77,7 @@ int getMinimumSeatsFromRightToLeft(Intervals& bookings) {
     return getMinimumSeats(bookings);
 }
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     int numberOfSeats = 0, numberOfBookings = 0;
     my_cin >> numberOfSeats >> numberOfBookings;
     Intervals bookings;

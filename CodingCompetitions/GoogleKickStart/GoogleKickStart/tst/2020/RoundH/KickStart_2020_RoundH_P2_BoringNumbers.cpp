@@ -20,7 +20,7 @@ namespace KickStart_2020_RoundH_P2_BoringNumbers {
 #define my_cin cin
 #endif
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     int64_t L = 0, R = 0;
     my_cin >> L >> R;
     ++R;

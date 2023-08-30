@@ -1,11 +1,11 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2019_RoundC_P3_CatchSome.hpp"
 
 #include <Fake/FakeNames.hpp>
 
-//#include <Common/Math/Matrix/AlbaMatrix.hpp>
+// #include <Common/Math/Matrix/AlbaMatrix.hpp>
 #endif
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
@@ -36,7 +36,7 @@ struct ColorDetail {
 };
 using ColorDetails = vector<ColorDetail>;
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     int numberOfDogs = 0, targetNumberOfObserves = 0;
     my_cin >> numberOfDogs >> targetNumberOfObserves;
     vector<int> positionsOfDogs(numberOfDogs);

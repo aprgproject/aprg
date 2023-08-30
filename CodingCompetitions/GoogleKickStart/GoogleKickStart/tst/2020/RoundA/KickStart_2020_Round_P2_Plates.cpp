@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2020_Round_P2_Plates.hpp"
 
@@ -29,7 +29,7 @@ namespace KickStart_2020_Round_P2_Plates {
 int n, k, p, a[50][30];
 int dp[51][1501];
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     my_cin >> n >> k >> p;
     memset(dp, 0xc0, sizeof(dp));
     dp[0][0] = 0;

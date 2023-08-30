@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2020_RoundH_P1_Retype.hpp"
 
@@ -25,7 +25,7 @@ namespace KickStart_2020_RoundH_P1_Retype {
 #define my_cin cin
 #endif
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     int64_t n = 0, k = 0, s = 0;
     my_cin >> n >> k >> s;
     int64_t answer = min(n + 1, (k - s) + (n - s) + 1) + (k - 1);

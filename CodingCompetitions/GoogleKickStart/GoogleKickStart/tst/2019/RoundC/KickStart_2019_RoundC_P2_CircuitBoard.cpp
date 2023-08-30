@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2019_RoundC_P2_CircuitBoard.hpp"
 
@@ -132,7 +132,7 @@ RangeQueryWithSelector<vector<int>>::SelectorFunction maximumSelectorFunction = 
 
 int getIndex(int const x, int const y) { return y * numberOfColumns + x; }
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     int maxAllowableThickness = 0;
     my_cin >> numberOfRows >> numberOfColumns >> maxAllowableThickness;
     vector<int> thicknessPerCell(numberOfRows * numberOfColumns);

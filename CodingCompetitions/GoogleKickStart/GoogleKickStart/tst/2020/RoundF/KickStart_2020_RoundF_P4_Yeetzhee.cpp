@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2020_RoundF_P4_Yeetzhee.hpp"
 
@@ -99,7 +99,7 @@ double ans(vector<int> a, int tot) {
     return mp[a] = vr;
 }
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     mp.clear();
     my_cin >> n >> m;
     iv = 1 / static_cast<double>(m);

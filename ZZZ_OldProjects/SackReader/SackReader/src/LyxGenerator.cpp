@@ -296,7 +296,7 @@ void LyxGenerator::saveStructureTable(string const& structureName, ofstream& str
     structureTable.getLastRow().addCell("\\series bold \nIE Type");
     structureTable.getLastRow().addCell("\\series bold \nDescription");
     generateStructureForDisplayTablesIfNeeded(structureName, structureTable, "", false);
-    if (structureTable.getTotalRows() > 1) {
+    if (structureTable.getNumberOfRows() > 1) {
         // cout<<structureTable.drawOutput()<<"\n";
         saveDisplayTable(structureTable, structureTableStream);
     }
@@ -322,7 +322,7 @@ void LyxGenerator::saveUnionTable(string const& unionName, ofstream& unionTableS
     unionTable.getLastRow().addCell("\\series bold \nIE Type");
     unionTable.getLastRow().addCell("\\series bold \nDescription");
     generateUnionForDisplayTablesIfNeeded(unionName, unionTable, "", false);
-    if (unionTable.getTotalRows() > 1) {
+    if (unionTable.getNumberOfRows() > 1) {
         // cout<<unionTable.drawOutput()<<"\n";
         saveDisplayTable(unionTable, unionTableStream);
     }
@@ -336,7 +336,7 @@ void LyxGenerator::saveConstantTable(string const& constantName, ofstream& const
     constantTable.getLastRow().addCell("\\series bold \nIE Value");
     constantTable.getLastRow().addCell("\\series bold \nDescription");
     generateConstantForDisplayTablesIfNeeded(constantName, constantTable);
-    if (constantTable.getTotalRows() > 1) {
+    if (constantTable.getNumberOfRows() > 1) {
         // cout<<constantTable.drawOutput()<<"\n";
         saveDisplayTable(constantTable, constantTableStream);
     }
@@ -350,7 +350,7 @@ void LyxGenerator::saveTypedefTable(TypedefDetails const& typedefDetails, ofstre
     typedefTable.getLastRow().addCell("\\series bold \nIE Type");
     typedefTable.getLastRow().addCell("\\series bold \nDescription");
     generateTypedefForDisplayTablesIfNeeded(typedefDetails, typedefTable);
-    if (typedefTable.getTotalRows() > 1) {
+    if (typedefTable.getNumberOfRows() > 1) {
         // cout<<typedefTable.drawOutput()<<"\n";
         saveDisplayTable(typedefTable, typedefTableStream);
     }
@@ -362,13 +362,13 @@ void LyxGenerator::saveDisplayTable(DisplayTable const& displayTable, ofstream& 
     while (tableTemplateReader.isNotFinished()) {
         string tableTemplateLine(tableTemplateReader.getLine());
         if (isStringFoundCaseSensitive(tableTemplateLine, "LYX_TABLE_REPLACE")) {
-            for (unsigned int row = 0; row < displayTable.getTotalRows(); row++) {
+            for (unsigned int row = 0; row < displayTable.getNumberOfRows(); row++) {
                 ifstream tableRowTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\TableRow.txt)");
                 AlbaFileReader tableRowTemplateReader(tableRowTemplateStream);
                 while (tableRowTemplateReader.isNotFinished()) {
                     string tableRowTemplateLine(tableRowTemplateReader.getLine());
                     if (isStringFoundCaseSensitive(tableRowTemplateLine, "LYX_TABLE_ROW_REPLACE")) {
-                        for (unsigned int column = 0; column < displayTable.getTotalColumns(); column++) {
+                        for (unsigned int column = 0; column < displayTable.getMaxNumberOfColumns(); column++) {
                             ifstream tableCellTemplateStream(
                                 R"(C:\APRG\SackReader\SackReader\LyxTemplates\TableCell.txt)");
                             AlbaFileReader tableCellTemplateReader(tableCellTemplateStream);
@@ -390,12 +390,13 @@ void LyxGenerator::saveDisplayTable(DisplayTable const& displayTable, ofstream& 
             isStringFoundCaseSensitive(tableTemplateLine, "LYX_TABLE_NUM_ROW_REPLACE") ||
             isStringFoundCaseSensitive(tableTemplateLine, "LYX_TABLE_NUM_COLUMN_REPLACE")) {
             replaceAllAndReturnIfFound(
-                tableTemplateLine, "LYX_TABLE_NUM_ROW_REPLACE", convertToString(displayTable.getTotalRows()));
+                tableTemplateLine, "LYX_TABLE_NUM_ROW_REPLACE", convertToString(displayTable.getNumberOfRows()));
             replaceAllAndReturnIfFound(
-                tableTemplateLine, "LYX_TABLE_NUM_COLUMN_REPLACE", convertToString(displayTable.getTotalColumns()));
+                tableTemplateLine, "LYX_TABLE_NUM_COLUMN_REPLACE",
+                convertToString(displayTable.getMaxNumberOfColumns()));
             displayTableStream << tableTemplateLine << "\n";
         } else if (isStringFoundCaseSensitive(tableTemplateLine, "LYX_TABLE_COLUMN_REPLACE")) {
-            for (unsigned int i = 0; i < displayTable.getTotalColumns() - 1; i++)  // until description
+            for (unsigned int i = 0; i < displayTable.getMaxNumberOfColumns() - 1; i++)  // until description
             {
                 displayTableStream << tableTemplateLine << "\n";
             }

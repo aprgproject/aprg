@@ -168,7 +168,7 @@ void ResultPrinter::setMovesSequenceOnGrid(
     DisplayTable& grid, MovesSequence const& movesSequence, int const rowSize) const {
     SequenceOfMovesAnalyzer analyzer(m_engineBoardWithContext);
     Board const& analyzerBoard(analyzer.getCurrentBoard());
-    int numberOfBoardDisplayColumns = static_cast<int>(grid.getTotalColumns());
+    int numberOfBoardDisplayColumns = static_cast<int>(grid.getMaxNumberOfColumns());
     int movesDisplayed = 0;
     int xOffset = 0;
     bool isUnSurePreMove = false;
@@ -248,7 +248,7 @@ void ResultPrinter::printHeaders(strings const& prefixHeaders, strings const& su
 void ResultPrinter::printHorizontalBorder() const { cout << m_horizontalBorder << "\n"; }
 
 void ResultPrinter::setSeparatorsOnGrid(DisplayTable& grid, int const xOffset) const {
-    int const numberOfColumns = grid.getTotalColumns(), numberOfRows = grid.getTotalRows();
+    int const numberOfColumns = grid.getMaxNumberOfColumns(), numberOfRows = grid.getNumberOfRows();
     for (int j = 0; j < numberOfRows; j++) {
         for (int separatorIndex = xOffset - 1; separatorIndex < numberOfColumns; separatorIndex += xOffset) {
             grid.getCellReferenceAt(separatorIndex, j).setText(SEPARATOR);

@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2020_RoundF_P1_AtmQueue.hpp"
 
@@ -27,7 +27,7 @@ namespace KickStart_2020_RoundF_P1_AtmQueue {
 #define my_cin cin
 #endif
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     int n = 0, x = 0;
     my_cin >> n >> x;
     vector<int> a(n);

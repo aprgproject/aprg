@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2020_Round_P1_Allocation.hpp"
 
@@ -27,7 +27,7 @@ namespace KickStart_2020_Round_P1_Allocation {
 #endif
 
 int n, b, a[100000];
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     my_cin >> n >> b;
     for (int i = 0; i < n; ++i) {
         my_cin >> a[i];

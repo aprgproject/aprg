@@ -13,7 +13,7 @@ namespace alba::AprgAudio {
 
 // Pre-defined 10-byte representations of common sample rates
 
-unordered_map<int, vector<uint8_t>> const aiffSampleRateTable = {
+unordered_map<int, vector<uint8_t>> aiffSampleRateTable = {
     {8000, {64, 11, 250, 0, 0, 0, 0, 0, 0, 0}},    {11025, {64, 12, 172, 68, 0, 0, 0, 0, 0, 0}},
     {16000, {64, 12, 250, 0, 0, 0, 0, 0, 0, 0}},   {22050, {64, 13, 172, 68, 0, 0, 0, 0, 0, 0}},
     {32000, {64, 13, 250, 0, 0, 0, 0, 0, 0, 0}},   {37800, {64, 14, 147, 168, 0, 0, 0, 0, 0, 0}},

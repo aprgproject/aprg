@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2020_RoundC_P4_Candies.hpp"
 
@@ -56,7 +56,7 @@ void app(int i, ll x) {
     a[i] = x;
 }
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     my_cin >> n >> q;
     for (int i = 0; i < n; ++i) {
         ll a = 0;

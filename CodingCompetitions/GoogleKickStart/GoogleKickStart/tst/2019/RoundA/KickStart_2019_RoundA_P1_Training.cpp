@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2019_RoundA_P1_Training.hpp"
 
@@ -27,7 +27,7 @@ namespace KickStart_2019_RoundA_P1_Training {
 #define my_cin cin
 #endif
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     int numberOfStudents = 0, numberOfStudentsPerTeam = 0;
     my_cin >> numberOfStudents >> numberOfStudentsPerTeam;
     vector<int> skillsOfStudents(numberOfStudents);

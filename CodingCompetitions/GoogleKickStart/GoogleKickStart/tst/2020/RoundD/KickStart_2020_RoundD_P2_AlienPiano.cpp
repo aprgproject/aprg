@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2020_RoundD_P2_AlienPiano.hpp"
 
@@ -31,7 +31,7 @@ namespace KickStart_2020_RoundD_P2_AlienPiano {
 int signum(int a) { return static_cast<int>(a > 0) - static_cast<int>(a < 0); }
 int compare(int a, int b) { return signum(a - b); }
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     int N = 0;
     my_cin >> N;
     vector<int> A(N);

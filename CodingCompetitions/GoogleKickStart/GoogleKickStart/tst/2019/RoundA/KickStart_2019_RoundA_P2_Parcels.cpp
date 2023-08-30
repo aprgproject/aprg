@@ -114,7 +114,7 @@ bool doAllDistancesFitsOnTheDistanceLimit(vector<int> const& distanceGrid, int c
     return false;
 }
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     my_cin >> rows >> columns;
     Coordinates deliveryOffices;
     for (int y = 0; y < rows; ++y) {

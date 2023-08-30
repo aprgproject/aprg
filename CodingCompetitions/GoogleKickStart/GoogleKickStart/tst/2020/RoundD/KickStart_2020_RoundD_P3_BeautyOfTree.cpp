@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2020_RoundD_P3_BeautyOfTree.hpp"
 
@@ -27,7 +27,7 @@ namespace KickStart_2020_RoundD_P3_BeautyOfTree {
 #define my_cin cin
 #endif
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     int N = 0;
     my_cin >> N;
     array<int, 2> A{};

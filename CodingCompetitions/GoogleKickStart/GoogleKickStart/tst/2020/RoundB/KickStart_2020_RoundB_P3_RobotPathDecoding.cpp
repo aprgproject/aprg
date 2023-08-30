@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2020_RoundB_P3_RobotPathDecoding.hpp"
 
@@ -29,7 +29,7 @@ namespace KickStart_2020_RoundB_P3_RobotPathDecoding {
 
 using ll = long long;
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     string s;
     my_cin >> s;
     ll mod = 1e9;

@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2019_PracticeRound_P2_Mural.hpp"
 
@@ -27,7 +27,7 @@ namespace KickStart_2019_PracticeRound_P2_Mural {
 #define my_cin cin
 #endif
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     int numberOfSections = 0;
     my_cin >> numberOfSections;
     string scoresString;

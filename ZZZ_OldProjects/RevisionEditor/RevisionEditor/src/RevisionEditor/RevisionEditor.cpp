@@ -134,17 +134,17 @@ RevisionEditor::RevisionEntry RevisionEditor::getRevisionEntry(string const& lin
 
 AlbaDateTime RevisionEditor::getDateTime(string const& date) {
     int index = 0;
-    int year = convertStringToNumber<int>(getStringBeforeThisString(date, "-", index));
+    uint16_t year = convertStringToNumber<uint16_t>(getStringBeforeThisString(date, "-", index));
     index = date.find("-", index) + 1;
-    int month = convertStringToNumber<int>(getStringBeforeThisString(date, "-", index));
+    uint8_t month = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "-", index));
     index = date.find("-", index) + 1;
-    int day = convertStringToNumber<int>(getStringBeforeThisString(date, "T", index));
+    uint8_t day = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "T", index));
     index = date.find("T", index) + 1;
-    int hour = convertStringToNumber<int>(getStringBeforeThisString(date, ":", index));
+    uint8_t hour = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, ":", index));
     index = date.find(":", index) + 1;
-    int minute = convertStringToNumber<int>(getStringBeforeThisString(date, ":", index));
+    uint8_t minute = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, ":", index));
     index = date.find(":", index) + 1;
-    int second = convertStringToNumber<int>(getStringBeforeThisString(date, "+", index));
+    uint8_t second = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "+", index));
 
     return {year, month, day, hour, minute, second, 0U};
 }

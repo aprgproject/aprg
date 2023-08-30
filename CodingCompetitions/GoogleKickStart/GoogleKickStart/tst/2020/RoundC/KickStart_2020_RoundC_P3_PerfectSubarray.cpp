@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2020_RoundC_P3_PerfectSubarray.hpp"
 
@@ -30,7 +30,7 @@ namespace KickStart_2020_RoundC_P3_PerfectSubarray {
 const int mxN = 1e5;
 int n, a[mxN], c[2 * 100 * mxN + 1];
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     my_cin >> n;
     int s1 = 0, s2 = 0;
     for (int i = 0; i < n; ++i) {

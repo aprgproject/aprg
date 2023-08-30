@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2020_RoundB_P2_BusRoutes.hpp"
 
@@ -26,7 +26,7 @@ namespace KickStart_2020_RoundB_P2_BusRoutes {
 #define my_cin cin
 #endif
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     int N = 0;
     my_cin >> N;
     int64_t D = 0;

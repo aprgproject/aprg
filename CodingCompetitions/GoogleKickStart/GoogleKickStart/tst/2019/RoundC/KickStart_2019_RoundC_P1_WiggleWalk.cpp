@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2019_RoundC_P1_WiggleWalk.hpp"
 
@@ -143,7 +143,7 @@ Direction getDirection(char const directionChar) {
     }
 }
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     int numberOfRows = 0, numberOfColumns = 0;
     int numberOfInstructions = 0, startX = 0, startY = 0;
     string instructions;

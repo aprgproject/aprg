@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2020_RoundG_P3_CombinationLock.hpp"
 
@@ -28,7 +28,7 @@ namespace KickStart_2020_RoundG_P3_CombinationLock {
 #define my_cin cin
 #endif
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     int n = 0, k = 0;
     my_cin >> n >> k;
     vector<int> a(n);

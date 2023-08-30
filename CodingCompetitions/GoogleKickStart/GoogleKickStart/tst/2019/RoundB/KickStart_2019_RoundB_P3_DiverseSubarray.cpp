@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2019_RoundB_P3_DiverseSubarray.hpp"
 
@@ -266,7 +266,7 @@ int getDeltaByAddingType(int const type) {
     return delta;
 }
 
-void runTestCase(int const) {
+void runTestCase(int const testCaseNumber) {
     my_cin >> numberOfTrinkets >> allowableCountForAType;
     vector<int> typesOfTrinkets(numberOfTrinkets, 0);
     for (int i = 0; i < numberOfTrinkets; ++i) {
