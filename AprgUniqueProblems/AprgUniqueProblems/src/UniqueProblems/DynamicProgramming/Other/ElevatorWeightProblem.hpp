@@ -37,7 +37,7 @@ public:
     int getNumberOfOptimalRides();
 
 private:
-    static [[nodiscard]] bool isPersonIncluded(PeopleBits const peopleBits, Person const person);
+    [[nodiscard]] static bool isPersonIncluded(PeopleBits const peopleBits, Person const person);
     [[nodiscard]] Person getNumberOfPeople() const;
     [[nodiscard]] PeopleBits getNumberOfPeopleSubsets() const;
     static PeopleBits getProductBits(Person const person);
