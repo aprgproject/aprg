@@ -56,9 +56,9 @@ private:
         GenericMessage const& cmBearerGenericMessage) const;
     void sendTransportConnectionTransferReqsBasedOnReallocationPrepareReqMsg(
         GenericMessage const& tbReallocationPrepareGenericMessage) const;
-    virtual void handleMessageEvent(GenericMessage const& genericMessage);
-    virtual void handleTimerEvent(Timer const& timer);
-    virtual void handleOtherEvent(OtherEvent const& otherEvent);
+    void handleMessageEvent(GenericMessage const& genericMessage) override;
+    void handleTimerEvent(Timer const& timer) override;
+    void handleOtherEvent(OtherEvent const& otherEvent) override;
     TAaSysComSicad m_tupcCmAddress{};
     unsigned int m_modifyTransactionType{};
 };

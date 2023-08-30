@@ -21,9 +21,9 @@ private:
     void sendCmBearersSetupRespBasedCmBearersSetupReq(GenericMessage const& genericMessage) const;
     void sendCmBearersReleaseRespBasedCmBearersReleaseReq(GenericMessage const& genericMessage) const;
     void sendCmBearersModifyRespBasedCmBearersModifyReq(GenericMessage const& genericMessage) const;
-    virtual void handleMessageEvent(GenericMessage const& genericMessage);
-    virtual void handleTimerEvent(Timer const& timer);
-    virtual void handleOtherEvent(OtherEvent const& otherEvent);
+    void handleMessageEvent(GenericMessage const& genericMessage) override;
+    void handleTimerEvent(Timer const& timer) override;
+    void handleOtherEvent(OtherEvent const& otherEvent) override;
 };
 
 }  // namespace DesignDocumentCreator

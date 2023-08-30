@@ -171,7 +171,7 @@ public:
     SackFileReaderStateMachine(Database& database, std::string const& fullPath);
     [[nodiscard]] bool isNextLineNeeded() const;
 
-    void processInput(InputToken const& inputToken);
+    void processInput(InputToken const& inputToken) override;
     void processEndOfLine();
 
 private:

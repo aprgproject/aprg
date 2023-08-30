@@ -9,9 +9,9 @@ namespace DesignDocumentCreator {
 template <MessageName messageName, typename DynamicPartSackType>
 class SpecificDynamicPolymorphicMessage : public Message {
 public:
-    typedef MessageWrapper<messageName> SpecificDynamicPolymorphicMessageWrapper;
-    typedef typename SpecificDynamicPolymorphicMessageWrapper::MessageDynamicPolymorphicSackType SackType;
-    typedef typename SpecificDynamicPolymorphicMessageWrapper::DynamicPlaceHolderSackType DynamicPlaceHolderSackType;
+    using SpecificDynamicPolymorphicMessageWrapper = MessageWrapper<messageName>;
+    using SackType = typename SpecificDynamicPolymorphicMessageWrapper::MessageDynamicPolymorphicSackType;
+    using DynamicPlaceHolderSackType = typename SpecificDynamicPolymorphicMessageWrapper::DynamicPlaceHolderSackType;
     SpecificDynamicPolymorphicMessage() : Message(SpecificDynamicPolymorphicMessageWrapper::getMessageName()) {}
     SpecificDynamicPolymorphicMessage(
         alba::AlbaMemoryBuffer const& payloadBufferReference, ComponentName const sender, ComponentName const receiver)

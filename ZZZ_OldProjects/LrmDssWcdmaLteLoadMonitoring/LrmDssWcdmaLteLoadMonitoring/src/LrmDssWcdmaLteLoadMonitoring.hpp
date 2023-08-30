@@ -5,13 +5,13 @@ namespace alba {
 // DssWcdmaLteLoadStateChangeFilteringCounts
 constexpr unsigned int DSS_WCDMA_LTE_LOAD_STATE_CHANGE_FILTERING_COUNT = 5;
 
-typedef enum EDssWcdmaFilterBandwidth {
+using EDssWcdmaFilterBandwidth = enum EDssWcdmaFilterBandwidth {
     EDssWcdmaFilterBandwidth_0_KHz = 0,
     EDssWcdmaFilterBandwidth_600_KHz = 1,
     EDssWcdmaFilterBandwidth_1200_KHz = 2
-} EDssWcdmaFilterBandwidth;
+};
 
-typedef enum EDssWcdmaLoad { EDssWcdmaLoad_Low = 0, EDssWcdmaLoad_Medium = 1, EDssWcdmaLoad_High = 2 } EDssWcdmaLoad;
+using EDssWcdmaLoad = enum EDssWcdmaLoad { EDssWcdmaLoad_Low = 0, EDssWcdmaLoad_Medium = 1, EDssWcdmaLoad_High = 2 };
 
 class LrmDssWcdmaLteLoadMonitoring {
 public:

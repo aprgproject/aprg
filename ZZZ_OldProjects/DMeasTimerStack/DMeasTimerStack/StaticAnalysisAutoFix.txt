@@ -1,15 +1,10 @@
-2023-08-29T08:42:35
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:242:10: warning: variable 'tmpSfn' is not initialized [cppcoreguidelines-init-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:242:16: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:326:16: warning: variable 'timerIndex' is not initialized [cppcoreguidelines-init-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:326:26: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:347:5: warning: uninitialized record type: 'timerData' [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:347:24: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:365:19: warning: integer literal has suffix 'u', which is not uppercase [hicpp-uppercase-literal-suffix,readability-uppercase-literal-suffix]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:365:20: note: FIX-IT applied suggested code changes
+StaticAnalysisJobIdentifier: [9]
+2023-08-30T04:43:48
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:545:52: warning: unused parameter 'end' [clang-diagnostic-unused-parameter]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:589:43: warning: invalid conversion specifier 'U' [clang-diagnostic-format-invalid-specifier]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:590:83: warning: data argument not used by format string [clang-diagnostic-format-extra-args]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:42:1: warning: use 'using' instead of 'typedef' [modernize-use-using]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:42:1: note: FIX-IT applied suggested code changes
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:70:7: warning: class 'TimerStack' defines a non-default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:100:9: warning: %d in format string (no. 2) requires 'int' but the argument type is 'unsigned int'. [invalidPrintfArgType_sint]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:177:13: warning: %u in format string (no. 5) requires 'unsigned int' but the argument type is 'signed int'. [invalidPrintfArgType_uint]
@@ -26,12 +21,6 @@
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:590:83: warning: data argument not used by format string [-Wformat-extra-args]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:545:52: warning: unused parameter 'end' [-Wunused-parameter]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:70:7: warning: class 'TimerStack' defines a non-default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/tst/DMeasTimerStack_unit.cpp:12:5: warning: uninitialized record type: 'sampleTimerData' [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/tst/DMeasTimerStack_unit.cpp:12:30: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/tst/DMeasTimerStack_unit.cpp:26:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/tst/DMeasTimerStack_unit.cpp:26:5: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/tst/DMeasTimerStack_unit.cpp:38:5: warning: uninitialized record type: 'sampleTimerData' [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/tst/DMeasTimerStack_unit.cpp:38:30: note: FIX-IT applied suggested code changes
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/tst/DMeasTimerStack_unit.cpp:51:5: note: in instantiation of function template specialization 'testing::internal::EqHelper::Compare<int, unsigned int, nullptr>' requested here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/tst/DMeasTimerStack_unit.cpp:51:5: note: in instantiation of function template specialization 'testing::internal::EqHelper::Compare<int, unsigned int, nullptr>' requested here
 DONE!

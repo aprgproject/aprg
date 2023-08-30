@@ -11,9 +11,9 @@ namespace DesignDocumentCreator {
 template <MessageName messageName>
 class SpecificDynamicArrayMessage : public Message {
 public:
-    typedef MessageWrapper<messageName> SpecificDynamicArrayMessageWrapper;
-    typedef typename SpecificDynamicArrayMessageWrapper::MessageDynamicArraySackType SackType;
-    typedef typename SpecificDynamicArrayMessageWrapper::DynamicPartSackType DynamicPartSackType;
+    using SpecificDynamicArrayMessageWrapper = MessageWrapper<messageName>;
+    using SackType = typename SpecificDynamicArrayMessageWrapper::MessageDynamicArraySackType;
+    using DynamicPartSackType = typename SpecificDynamicArrayMessageWrapper::DynamicPartSackType;
     SpecificDynamicArrayMessage() : Message(SpecificDynamicArrayMessageWrapper::getMessageName()) {}
     SpecificDynamicArrayMessage(
         alba::AlbaMemoryBuffer const& payloadBufferReference, ComponentName const sender, ComponentName const receiver)

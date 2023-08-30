@@ -26,8 +26,8 @@ private:
     void sendsTcomDeploymentInd() const;
     void saveConfiguration(SHwConfigurationMsg const& hwConfigurationMsg);
 
-    virtual void handleMessageEvent(GenericMessage const& genericMessage);
-    virtual void handleTimerEvent(Timer const& timer);
+    void handleMessageEvent(GenericMessage const& genericMessage) override;
+    void handleTimerEvent(Timer const& timer) override;
     HwConfiguration m_configuration;
 };
 
