@@ -8,28 +8,37 @@ namespace Facade {
 
 class SubsystemA {
 public:
-    static void suboperation() {
-        std::cout << "Subsystem A method\n";
+    void suboperation() {
+        std::cout << "Subsystem A method, someValue: [" << someValue++ << "]\n";
         // ...
     }
+
+private:
+    int someValue{};
     // ...
 };
 
 class SubsystemB {
 public:
-    static void suboperation() {
-        std::cout << "Subsystem B method\n";
+    void suboperation() {
+        std::cout << "Subsystem B method, someValue: [" << someValue++ << "]\n";
         // ...
     }
+
+private:
+    int someValue{};
     // ...
 };
 
 class SubsystemC {
 public:
-    static void suboperation() {
-        std::cout << "Subsystem C method\n";
+    void suboperation() {
+        std::cout << "Subsystem C method, someValue: [" << someValue++ << "]\n";
         // ...
     }
+
+private:
+    int someValue{};
     // ...
 };
 
@@ -42,13 +51,13 @@ public:
     Facade() : m_subsystemA(), m_subsystemB(), m_subsystemC() {}
 
     void operation1() {
-        Facade::SubsystemA::suboperation();
-        Facade::SubsystemB::suboperation();
+        m_subsystemA.suboperation();
+        m_subsystemB.suboperation();
         // ...
     }
 
     void operation2() {
-        Facade::SubsystemC::suboperation();
+        m_subsystemC.suboperation();
         // ...
     }
     // ...
