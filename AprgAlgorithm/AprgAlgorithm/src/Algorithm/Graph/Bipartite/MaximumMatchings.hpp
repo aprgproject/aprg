@@ -100,9 +100,7 @@ private:
         for (auto const& [startVertexOfEdge, endVertexOfEdge] : graph.getEdges()) {
             bool startVertexColor = m_bipartiteChecker.hasFirstColor(startVertexOfEdge);
             bool endVertexColor = m_bipartiteChecker.hasFirstColor(endVertexOfEdge);
-            if (startVertexColor && !endVertexColor) {
-                flowNetwork.connect(startVertexOfEdge, endVertexOfEdge, 1, 0);
-            } else if (!startVertexColor && endVertexColor) {
+            if ((startVertexColor && !endVertexColor) || (!startVertexColor && endVertexColor)) {
                 flowNetwork.connect(startVertexOfEdge, endVertexOfEdge, 1, 0);
             }
         }

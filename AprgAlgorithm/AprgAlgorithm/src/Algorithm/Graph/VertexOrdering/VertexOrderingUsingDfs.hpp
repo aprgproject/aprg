@@ -101,10 +101,7 @@ private:
                 traversePreOrderAt(traversedVertices, startVertex);
                 break;
             }
-            case VertexTraversalOrder::PostOrder: {
-                traversePostOrderAt(traversedVertices, startVertex);
-                break;
-            }
+            case VertexTraversalOrder::PostOrder:
             case VertexTraversalOrder::ReversePostOrder: {
                 traversePostOrderAt(traversedVertices, startVertex);
                 break;

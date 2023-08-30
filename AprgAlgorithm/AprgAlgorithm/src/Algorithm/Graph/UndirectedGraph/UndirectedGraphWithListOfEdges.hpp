@@ -47,9 +47,7 @@ public:
     [[nodiscard]] Vertices getVertices() const override {
         Vertices result;
         for (auto const& [startVertexOfEdge, endVertexOfEdge] : m_edges) {
-            if (result.empty()) {
-                result.emplace_back(startVertexOfEdge);
-            } else if (result.back() != startVertexOfEdge) {
+            if (result.empty() || (result.back() != startVertexOfEdge)) {
                 result.emplace_back(startVertexOfEdge);
             }
         }
