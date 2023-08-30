@@ -1,11 +1,5 @@
-2023-08-29T10:21:53
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.cpp:12:1: warning: constructor does not initialize these fields: m_posNumber [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.hpp:31:29: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.cpp:12:14: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.cpp:12:28: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.hpp:12:8: warning: constructor does not initialize these fields: multiplePos, pnPos [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.hpp:14:32: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.hpp:15:23: note: FIX-IT applied suggested code changes
+StaticAnalysisJobIdentifier: [9]
+2023-08-30T06:17:28
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.hpp:31:18: warning: private field 'm_posNumber' is not used [clang-diagnostic-unused-private-field]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.hpp:31:18: warning: private field 'm_posNumber' is not used [-Wunused-private-field]
 DONE!
