@@ -1,4 +1,5 @@
-2023-08-29T01:26:43
+StaticAnalysisJobIdentifier: [19]
+2023-08-30T00:46:50
 /home/runner/work/aprg/aprg/AprgGrepStringEvaluator/AprgGrepStringEvaluator/src/GrepStringEvaluator/AlbaGrepStringEvaluatorTerm.hpp:19:24: warning: variable 's_mainString' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/AprgGrepStringEvaluator/AprgGrepStringEvaluator/src/GrepStringEvaluator/AlbaGrepStringEvaluator.cpp:161:13: warning: switch could be better written as an if/else statement [hicpp-multiway-paths-covered]
 /home/runner/work/aprg/aprg/AprgGrepStringEvaluator/AprgGrepStringEvaluator/src/GrepStringEvaluator/AlbaGrepStringEvaluator.cpp:172:13: warning: switch could be better written as an if/else statement [hicpp-multiway-paths-covered]
