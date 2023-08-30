@@ -32,7 +32,7 @@ class Adapter : public Target,
                 private Adaptee  // note the access control
 {
 public:
-    virtual void request() override { specificRequest(); }
+    void request() override { specificRequest(); }
     // ...
 };
 
