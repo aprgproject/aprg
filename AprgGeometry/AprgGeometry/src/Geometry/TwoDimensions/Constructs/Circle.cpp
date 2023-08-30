@@ -137,7 +137,7 @@ optional<double> Circle::calculateXFromYWithoutCenter(double const y, double con
 Point Circle::getPointAtAngle(double const angleInRadians) {
     double deltaX = cos(angleInRadians) * m_radius;
     double deltaY = sin(angleInRadians) * m_radius;
-    return Point(m_center.getX() + deltaX, m_center.getY() + deltaY);
+    return {m_center.getX() + deltaX, m_center.getY() + deltaY};
 }
 
 Point Circle::getNearestPointInCircumference(Point const& point) const {
@@ -145,7 +145,7 @@ Point Circle::getNearestPointInCircumference(Point const& point) const {
     double angle = atan(deltaPoint.getY() / deltaPoint.getX());
     double nearestDeltaPointX = cos(angle) * m_radius * getSign(deltaPoint.getX());
     double nearestDeltaPointY = sin(angle) * m_radius * getSign(deltaPoint.getY());
-    return Point(m_center.getX() + nearestDeltaPointX, m_center.getY() + nearestDeltaPointY);
+    return {m_center.getX() + nearestDeltaPointX, m_center.getY() + nearestDeltaPointY};
 }
 
 void Circle::determineAndSaveCenterAndRadiusFromCoefficients(

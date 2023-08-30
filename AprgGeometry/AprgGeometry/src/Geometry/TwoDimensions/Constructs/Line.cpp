@@ -76,12 +76,12 @@ Point Line::getAPoint() const {
         return {};
     }
     if (m_type == LineType::Vertical) {
-        return Point(getXIntercept(), 0);
+        return {getXIntercept(), 0};
     }
     if (m_type == LineType::Horizontal) {
-        return Point(0, getYIntercept());
+        return {0, getYIntercept()};
     }
-    return Point(0, calculateYFromX(0));
+    return {0, calculateYFromX(0)};
 }
 
 Points Line::getPoints(Point const& first, Point const& second, double const interval) const {

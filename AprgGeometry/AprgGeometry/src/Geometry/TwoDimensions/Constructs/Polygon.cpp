@@ -96,7 +96,7 @@ AlbaAngles Polygon<numberOfVertices>::getAnglesAtVertices() const {
 
 template <int numberOfVertices>
 AlbaAngle Polygon<numberOfVertices>::getSumOfAngles() const {
-    return AlbaAngle(AngleUnitType::Degrees, (numberOfVertices - 2) * 180);
+    return {AngleUnitType::Degrees, (numberOfVertices - 2) * 180};
 }
 
 template <int numberOfVertices>

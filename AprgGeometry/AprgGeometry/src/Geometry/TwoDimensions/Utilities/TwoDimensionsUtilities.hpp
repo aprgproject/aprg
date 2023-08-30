@@ -155,14 +155,14 @@ template <int numberOfCoefficients>
 Line getPolynomialTangentLineAt(PolynomialInXEqualsY<numberOfCoefficients> polynomial, double const x) {
     double slope = polynomial.getSlopeAt(x);
     double y = polynomial.calculateYfromX(x);
-    return Line(Point(x, y), Point(x + 1, y + slope));
+    return {Point(x, y), Point(x + 1, y + slope)};
 }
 
 template <int numberOfCoefficients>
 Line getPolynomialTangentLineAt(PolynomialInYEqualsX<numberOfCoefficients> polynomial, double const y) {
     double slopeInY = polynomial.getValueOfFirstDerivative(y);
     double x = polynomial.calculateXfromY(x);
-    return Line(Point(x, y), Point(x + slopeInY, y + 1));
+    return {Point(x, y), Point(x + slopeInY, y + 1)};
 }
 
 }  // namespace alba::TwoDimensions::twoDimensionsUtilities

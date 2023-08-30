@@ -383,8 +383,8 @@ AlbaAngle getTheInnerAngleUsingThreePoints(
     Point deltaBA(firstPoint - commonPoint);
     Point deltaCA(secondPoint - commonPoint);
 
-    return AlbaAngle(
-        AngleUnitType::Radians, acos(getCosineOfAngleUsing2Deltas(constructVector(deltaBA), constructVector(deltaCA))));
+    return {
+        AngleUnitType::Radians, acos(getCosineOfAngleUsing2Deltas(constructVector(deltaBA), constructVector(deltaCA)))};
 }
 
 AlbaAngle getTheSmallerAngleBetweenTwoLines(Line const& line1, Line const& line2) {
@@ -404,7 +404,7 @@ AlbaAngle getTheSmallerAngleBetweenTwoLines(Line const& line1, Line const& line2
 
 AlbaAngle getTheLargerAngleBetweenTwoLines(Line const& line1, Line const& line2) {
     AlbaAngle smallerAngle(getTheSmallerAngleBetweenTwoLines(line1, line2));
-    return AlbaAngle(AngleUnitType::Degrees, 180 - smallerAngle.getDegrees());
+    return {AngleUnitType::Degrees, 180 - smallerAngle.getDegrees()};
 }
 
 Point getIntersectionOfTwoLines(Line const& line1, Line const& line2) {
@@ -418,7 +418,7 @@ Point getIntersectionOfTwoLines(Line const& line1, Line const& line2) {
 
     double xOfIntersection = getCrossProduct(bcVector1, bcVector2) / abCrossProduct;
     double yOfIntersection = getCrossProduct(acVector1, acVector2) / -abCrossProduct;
-    return Point(xOfIntersection, yOfIntersection);
+    return {xOfIntersection, yOfIntersection};
 }
 
 Point getIntersectionOfTwoLineSegment(LineSegment const& segment1, LineSegment const& segment2) {
@@ -457,7 +457,7 @@ Point getIntersectionOfTwoLineSegment(LineSegment const& segment1, LineSegment c
 }
 
 Point getMidpoint(Point const& point1, Point const& point2) {
-    return Point((point1.getX() + point2.getX()) / 2, (point1.getY() + point2.getY()) / 2);
+    return {(point1.getX() + point2.getX()) / 2, (point1.getY() + point2.getY()) / 2};
 }
 
 Point getPointAlongALineWithDistanceFromAPoint(
@@ -532,7 +532,7 @@ Point rotateAxisByAngle(Point const& point, AlbaAngle const& angle) {
     double cosTheta = cos(angle.getRadians());
     double newX = point.getX() * cosTheta + point.getY() * sinTheta;
     double newY = -point.getX() * sinTheta + point.getY() * cosTheta;
-    return Point(newX, newY);
+    return {newX, newY};
 }
 
 Point rotateAxisBackByAngle(Point const& point, AlbaAngle const& angle) {
@@ -540,12 +540,12 @@ Point rotateAxisBackByAngle(Point const& point, AlbaAngle const& angle) {
     double cosTheta = cos(angle.getRadians());
     double newX = point.getX() * cosTheta - point.getY() * sinTheta;
     double newY = point.getX() * sinTheta + point.getY() * cosTheta;
-    return Point(newX, newY);
+    return {newX, newY};
 }
 
 Point convertFromPolarCoordinates(PolarCoordinate const& coordinate) {
-    return Point(
-        coordinate.radius * cos(coordinate.angle.getRadians()), coordinate.radius * sin(coordinate.angle.getRadians()));
+    return {
+        coordinate.radius * cos(coordinate.angle.getRadians()), coordinate.radius * sin(coordinate.angle.getRadians())};
 }
 
 PolarCoordinate convertToPolarCoordinate(Point const& point) {
@@ -753,31 +753,31 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points) {
 }
 
 Line getLineWithSameSlope(Line const& line, Point const& point) {
-    return Line(
+    return {
         line.getACoefficient(), line.getBCoefficient(),
-        -1 * ((line.getACoefficient() * point.getX()) + (line.getBCoefficient() * point.getY())));
+        -1 * ((line.getACoefficient() * point.getX()) + (line.getBCoefficient() * point.getY()))};
 }
 
 Line getLineWithPerpendicularSlope(Line const& line, Point const& point) {
-    return Line(
+    return {
         line.getBCoefficient(), -line.getACoefficient(),
-        (line.getACoefficient() * point.getY()) - (line.getBCoefficient() * point.getX()));
+        (line.getACoefficient() * point.getY()) - (line.getBCoefficient() * point.getX())};
 }
 
 Line getTangentLineAt(Circle const& circle, Point const& point) {
     Point nearestPoint(circle.getNearestPointInCircumference(point));
     Point center(circle.getCenter());
     Point deltaNearestPoint(nearestPoint.getX() - center.getX(), nearestPoint.getY() - center.getY());
-    return Line(deltaNearestPoint.getY(), -1 * deltaNearestPoint.getX(), nearestPoint);
+    return {deltaNearestPoint.getY(), -1 * deltaNearestPoint.getX(), nearestPoint};
 }
 
 // fix and test this
 Line getTangentLineAt(Ellipse const& ellipse, Point const& point) {
-    return Line(point.getX() / pow(ellipse.getAValue(), 2), point.getY() / pow(ellipse.getBValue(), 2), -1);
+    return {point.getX() / pow(ellipse.getAValue(), 2), point.getY() / pow(ellipse.getBValue(), 2), -1};
 }
 
 Line getTangentLineAt(Hyperbola const& hyperbola, Point const& point) {
-    return Line(point.getX() / pow(hyperbola.getAValue(), 2), -point.getY() / pow(hyperbola.getBValue(), 2), -1);
+    return {point.getX() / pow(hyperbola.getAValue(), 2), -point.getY() / pow(hyperbola.getBValue(), 2), -1};
 }
 
 void addPointIfInsideTwoPoints(
