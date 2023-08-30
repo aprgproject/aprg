@@ -49,7 +49,7 @@ TEST(AprgGraphTest, DISABLED_BitmapGraph24Bits) {
     graph.saveChangesToBitmapFile();
 }
 
-TEST(AprgGraphTest, TemporaryTest) {
+TEST(AprgGraphTest, DISABLED_TemporaryTest) {
     AlbaLocalPathHandler defaultFile(APRG_GRAPH_24_BIT_DEFAULT_FILE);
     AlbaLocalPathHandler graphOutputFile(APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE);
     graphOutputFile.deleteFile();

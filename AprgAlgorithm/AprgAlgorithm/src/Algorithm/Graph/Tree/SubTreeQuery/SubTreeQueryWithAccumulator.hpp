@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Algorithm/Graph/Tree/SubTreeQuery/SubTreeQuery.hpp>
-#include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
+#include <Algorithm/Graph/Utilities/GraphUtilities.hpp>
 #include <Algorithm/Search/RangeQuery/RangeQueryWithAccumulator.hpp>
 
 namespace alba::algorithm {

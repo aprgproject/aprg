@@ -1,5 +1,4 @@
 #include <Common/Math/Matrix/Utilities/Simplex.hpp>
-#include <CommonTests/Math/Matrix/AlbaMatrixInternalFunctions.hpp>
 
 #include <gtest/gtest.h>
 

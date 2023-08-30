@@ -1,12 +1,21 @@
 #pragma once
 
 #include "AlbaMatrixUtilitiesHeaders.hpp"  // needs to be first
+#include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 
 #include <algorithm>
 #include <cassert>
 
 namespace alba::matrix {
+
+template <typename DataType>
+bool isEqualForMathMatrixDataType(DataType const& value1, DataType const& value2) {
+    if constexpr (typeHelper::isFloatingPointType<DataType>()) {
+        return mathHelper::isAlmostEqual(value1, value2);
+    }
+    return value1 == value2;
+}
 
 template <typename DataType>
 bool isSquare(AlbaMatrix<DataType> const& matrix) {

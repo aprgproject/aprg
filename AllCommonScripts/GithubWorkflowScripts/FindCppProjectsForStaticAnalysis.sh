@@ -37,11 +37,13 @@ findCppProjectsForStaticAnalysis() {
             else
                 scriptPrint "$scriptName" "$LINENO" "The job indentifiers DO NOT MATCH so the project is ADDED."
                 cppProjectsFound+="$cppProject,"
+                # break # one project per job
             fi
 
         else
             scriptPrint "$scriptName" "$LINENO" "The project is ADDED because the static analysis file does not exist."
             cppProjectsFound+="$cppProject,"
+            # break # one project per job
         fi
 
     done < <(find "$aprgDirectory" -depth -type f -wholename "$searchCondition" | sort -f)
