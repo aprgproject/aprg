@@ -113,7 +113,7 @@ static std::string FormatTime(double time) {
 }
 
 void ConsoleReporter::PrintRunData(const Run& result) {
-  typedef void(PrinterFn)(std::ostream&, LogColor, const char*, ...);
+  using PrinterFn = void (std::ostream &, LogColor, const char *, ...);
   auto& Out = GetOutputStream();
   PrinterFn* printer = (output_options_ & OO_Color) != 0 ?
                          static_cast<PrinterFn*>(ColorPrintf) : IgnoreColorPrint;
@@ -169,8 +169,8 @@ void ConsoleReporter::PrintRunData(const Run& result) {
       unit = "%";
     } else {
       s = HumanReadableNumber(c.second.value, c.second.oneK);
-      if ((c.second.flags & Counter::kIsRate) != 0u) {
-        unit = (c.second.flags & Counter::kInvert) != 0u ? "s" : "/s";
+      if ((c.second.flags & Counter::kIsRate) != 0U) {
+        unit = (c.second.flags & Counter::kInvert) != 0U ? "s" : "/s";
 }
     }
     if ((output_options_ & OO_Tabular) != 0) {

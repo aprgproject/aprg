@@ -397,17 +397,16 @@ void RunBenchmarks(const std::vector<BenchmarkInstance>& benchmarks,
 
 std::unique_ptr<BenchmarkReporter> CreateReporter(
     std::string const& name, ConsoleReporter::OutputOptions output_opts) {
-  typedef std::unique_ptr<BenchmarkReporter> PtrType;
+  using PtrType = std::unique_ptr<BenchmarkReporter>;
   if (name == "console") {
     return PtrType(new ConsoleReporter(output_opts));
   } if (name == "json") {
     return PtrType(new JSONReporter);
   } if (name == "csv") {
     return PtrType(new CSVReporter);
-  } else {
-    std::cerr << "Unexpected format: '" << name << "'\n";
+  }     std::cerr << "Unexpected format: '" << name << "'\n";
     std::exit(1);
-  }
+ 
 }
 
 #ifdef __GNUC__
