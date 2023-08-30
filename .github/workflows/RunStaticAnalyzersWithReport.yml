@@ -18,7 +18,7 @@ env:
   determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
   gitAddCommitPushScriptRelativePath: "AllCommonScripts/GithubWorkflowScripts/GitAddCommitPush.sh"
   staticAnalysisScriptRelativePath: "AllCommonScripts/GithubWorkflowScripts/RunStaticAnalysisWithReport.sh"
-  generateReportScriptRelativePath: "Python/GithubWorkflowScripts/generate_static_analysis_report.py"
+  generateReportScriptRelativePath: "Python/GithubWorkflowPythonScripts/generate_static_analysis_report.py"
   staticAnalysisFilename: "StaticAnalysisReport.txt"
 
 jobs:
