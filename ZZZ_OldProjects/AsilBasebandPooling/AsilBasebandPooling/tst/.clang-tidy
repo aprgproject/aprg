@@ -14,6 +14,7 @@ Checks: '
   -fuchsia-default-arguments-calls,
   -fuchsia-default-arguments-declarations,
   -fuchsia-overloaded-operator,
+  -fuchsia-statically-constructed-objects,
   -google-build-using-namespace,
   -hicpp-named-parameter,
   -llvmlibc-implementation-in-namespace,
@@ -35,7 +36,6 @@ Checks: '
   -fuchsia-statically-constructed-objects,
   -google-runtime-int,
   -hicpp-vararg,
-  -misc-const-correctness,
   -readability-magic-numbers,
   -readability-function-cognitive-complexity,
   -misc-non-private-member-variables-in-classes
