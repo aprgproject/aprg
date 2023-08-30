@@ -12,8 +12,8 @@ struct CPlusPlusClassTemplateParameter;
 struct CPlusPlusClassTemplateSignature;
 class CPlusPlusClass;
 
-typedef vector<CPlusPlusClassTemplateParameter> CPlusPlusClassTemplateParameters;
-typedef vector<CPlusPlusClassTemplateSignature> CPlusPlusClassTemplateSignatures;
+using CPlusPlusClassTemplateParameters = vector<CPlusPlusClassTemplateParameter>;
+using CPlusPlusClassTemplateSignatures = vector<CPlusPlusClassTemplateSignature>;
 
 class CPlusPlusClassTemplateParameter {
 public:

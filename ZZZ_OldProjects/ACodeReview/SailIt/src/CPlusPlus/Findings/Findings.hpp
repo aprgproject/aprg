@@ -10,8 +10,8 @@ using std::pair;
 using std::string;
 
 namespace codeReview {
-typedef multimap<int, Finding> MultiMapOfFindings;
-typedef pair<int, Finding> FindingsPair;
+using MultiMapOfFindings = multimap<int, Finding>;
+using FindingsPair = pair<int, Finding>;
 
 class Findings {
 public:

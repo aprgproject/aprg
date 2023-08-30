@@ -5,10 +5,10 @@
 #include <FileDirectoryDatabase/FileDirectoryDatabase.hpp>
 
 namespace codeReview {
-typedef map<string, CPlusPlusDatabase> FileCPlusPlusDatabasesMap;
-typedef pair<string, CPlusPlusDatabase> FileCPlusPlusDatabasesPair;
-typedef map<string, Findings> FileFindingsMap;
-typedef pair<string, Findings> FileFindingsPair;
+using FileCPlusPlusDatabasesMap = map<string, CPlusPlusDatabase>;
+using FileCPlusPlusDatabasesPair = pair<string, CPlusPlusDatabase>;
+using FileFindingsMap = map<string, Findings>;
+using FileFindingsPair = pair<string, Findings>;
 
 class SailIt {
 public:

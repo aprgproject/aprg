@@ -48,8 +48,8 @@ class CPlusPlusFunction;
 class CPlusPlusFunctionSignature;
 
 class TermAnalyzer {
-    typedef unordered_map<int, VectorOfTerms> MapOfMacroUsageParameters;
-    typedef unordered_map<string, CPlusPlusType> MapOfCPlusPlusTypesForTypedef;
+    using MapOfMacroUsageParameters = unordered_map<int, VectorOfTerms>;
+    using MapOfCPlusPlusTypesForTypedef = unordered_map<string, CPlusPlusType>;
 
 public:
     explicit TermAnalyzer(DequeOfTerms& terms, CPlusPlusDatabase& database, Findings& findings);

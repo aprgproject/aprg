@@ -11,7 +11,7 @@ using std::vector;
 
 namespace codeReview {
 
-typedef vector<CPlusPlusFunctionParameter> CPlusPlusFunctionParameters;
+using CPlusPlusFunctionParameters = vector<CPlusPlusFunctionParameter>;
 
 class CPlusPlusFunctionSignature {
 public:
