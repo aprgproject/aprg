@@ -238,7 +238,7 @@ void BitmapConfiguration::calculateOtherValuesAfterReading() {
 }
 
 CompressedMethodType BitmapConfiguration::determineCompressedMethodType(uint32_t compressedMethodValue) {
-    CompressedMethodType compressedMethodType;
+    CompressedMethodType compressedMethodType(CompressedMethodType::Unknown);
     switch (compressedMethodValue) {
         case 0:
             compressedMethodType = CompressedMethodType::RGB;

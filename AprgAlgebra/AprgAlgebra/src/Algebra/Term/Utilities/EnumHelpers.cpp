@@ -70,7 +70,7 @@ int getTermTypePriorityValue(TermType const termType) {
 }
 
 TermAssociationType getReversedAssociationType(TermAssociationType const associationType) {
-    TermAssociationType reversedAssociationType;
+    TermAssociationType reversedAssociationType(TermAssociationType::Positive);
     if (TermAssociationType::Positive == associationType) {
         reversedAssociationType = TermAssociationType::Negative;
     } else  // if(TermAssociationType::Negative == associationType)

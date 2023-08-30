@@ -8,8 +8,6 @@
 
 namespace alba::algorithm {
 
-namespace {
-
 template <typename Vertex>
 bool areAllDegreesEven(BaseUndirectedGraph<Vertex> const& graph) {
     auto vertices(graph.getVertices());
@@ -66,7 +64,6 @@ bool hasAtLeastOneLesserAndGreaterInAndOutDegrees(BaseDirectedGraph<Vertex> cons
     }
     return result;
 }
-}  // namespace
 
 template <typename Vertex>
 bool hasEulerCycleForUndirectedGraph(BaseUndirectedGraph<Vertex> const& graph) {

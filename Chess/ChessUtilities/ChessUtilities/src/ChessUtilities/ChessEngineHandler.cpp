@@ -22,7 +22,7 @@ typedef struct _mydata {
 } CallBackData, *PointerToCallBackData;
 
 int IsWinNT() {
-    OSVERSIONINFO osv;
+    OSVERSIONINFO osv{};
     osv.dwOSVersionInfoSize = sizeof(osv);
     GetVersionEx(&osv);
     return (osv.dwPlatformId == VER_PLATFORM_WIN32_NT);
@@ -60,7 +60,7 @@ void ChessEngineHandler::reset() {
 }
 
 void ChessEngineHandler::sendStringToEngine(string const& stringToEngine) {
-    DWORD bytesWritten(0U);
+    DWORD bytesWritten{};
     string stringToWrite(stringToEngine);
     stringToWrite += "\n";
     long remainingLength = stringToWrite.length();
@@ -87,9 +87,9 @@ void ChessEngineHandler::processStringFromEngine(string const& stringFromEngine)
 }
 
 void ChessEngineHandler::startMonitoringEngineOutput() {
-    std::lock_guard<std::mutex> const lockGuard(m_readMutex);
-    DWORD bytesRead;       // bytes read
-    DWORD bytesAvailable;  // bytes available
+    lock_guard<mutex> const lockGuard(m_readMutex);
+    DWORD bytesRead{};       // bytes read
+    DWORD bytesAvailable{};  // bytes available
     array<char, MAX_BUFFER_SIZE> buffer{};
     string stringBuffer;
     while (true) {
@@ -140,7 +140,7 @@ void ChessEngineHandler::setAdditionalStepsInProcessingAStringFromEngine(
 }
 
 void ChessEngineHandler::initializeEngine() {
-    SECURITY_DESCRIPTOR securityDescriptor;  // security information for pipes
+    SECURITY_DESCRIPTOR securityDescriptor{};  // security information for pipes
     SECURITY_ATTRIBUTES securityAttributes;
 
     if (IsWinNT()) {

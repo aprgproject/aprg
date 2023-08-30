@@ -131,7 +131,7 @@ void simplifyByQuineMcKluskey(Term& term) {
     int numberOfBits = variableNames.size();
     if (numberOfBits > 0 && numberOfBits <= static_cast<int>(AlbaBitValueUtilities<Minterm>::getNumberOfBits())) {
         // cannot be used if number of bits is beyond limit
-        OperatorLevel targetOuter, targetInner;
+        OperatorLevel targetOuter(OperatorLevel::Unknown), targetInner(OperatorLevel::Unknown);
         retrieveTargetOperations(targetOuter, targetInner);
         if (OperatorLevel::And == targetOuter && OperatorLevel::Or == targetInner) {
             DualOperationMutator mutator;

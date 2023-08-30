@@ -196,7 +196,7 @@ TEST(SimplificationUtilitiesTest, RetrieveTargetOperationsWorks) {
         SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
     SimplificationOfExpression::ScopeObject scopeObject;
 
-    OperatorLevel targetOuter, targetInner;
+    OperatorLevel targetOuter(OperatorLevel::Unknown), targetInner(OperatorLevel::Unknown);
 
     configurationDetails.shouldSimplifyWithOuterOrAndInnerAnd = false;
     configurationDetails.shouldSimplifyWithOuterAndAndInnerOr = false;

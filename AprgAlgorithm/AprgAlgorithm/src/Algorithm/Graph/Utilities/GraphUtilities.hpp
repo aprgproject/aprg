@@ -13,8 +13,6 @@
 
 namespace alba::algorithm::GraphUtilities {
 
-namespace {
-// utilities in utilities
 template <typename Vertex>
 void putEdgesToUnionFind(BaseUnionFind<Vertex>& unionFind, typename GraphTypes<Vertex>::Edges const& edges) {
     using Edge = typename GraphTypes<Vertex>::Edge;
@@ -27,7 +25,6 @@ template <typename Vertex>
 void putGraphToUnionFind(BaseUnionFind<Vertex>& unionFind, BaseGraph<Vertex> const& graph) {
     putEdgesToUnionFind(unionFind, graph.getEdges());
 }
-}  // namespace
 
 template <typename Vertex>
 bool isASimplePath(typename GraphTypes<Vertex>::Path const& path) {

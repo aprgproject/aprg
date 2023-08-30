@@ -32,7 +32,7 @@ double Limacon::getBValue() const { return m_bValue; }
 LimaconTrigonometricFunctionType Limacon::getTrigonometricFunctionType() const { return m_trigonometricFunctionType; }
 
 LimaconType Limacon::getLimaconType() const {
-    LimaconType result;
+    LimaconType result(LimaconType::Unknown);
     double ratio(getAbsoluteValue(m_aValue / m_bValue));
     if (ratio >= 2) {
         result = LimaconType::Convex;

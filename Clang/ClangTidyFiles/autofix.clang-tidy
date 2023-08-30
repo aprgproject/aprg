@@ -27,6 +27,7 @@ Checks: '
   llvm-namespace-comment,
   misc-const-correctness,
   modernize-concat-nested-namespaces,
+  modernize-redundant-void-arg,
   modernize-return-braced-init-list,
   modernize-use-auto,
   modernize-use-bool-literals,
