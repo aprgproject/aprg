@@ -10,8 +10,8 @@ namespace alba {
 
 class AlbaSackReaderType {
 public:
-    typedef std::vector<AlbaSackReaderParameter> Parameters;
-    typedef std::set<std::string> TypeNames;
+    using Parameters = std::vector<AlbaSackReaderParameter>;
+    using TypeNames = std::set<std::string>;
 
     AlbaSackReaderType();
     [[nodiscard]] bool isUnion() const;
