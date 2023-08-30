@@ -36,8 +36,8 @@ int ElevatorWeightProblem::getNumberOfOptimalRides() {
     return result;
 }
 
-bool ElevatorWeightProblem::isPersonIncluded(PeopleBits const peopleBits, Person const person) const {
-    return peopleBits & getProductBits(person);
+bool ElevatorWeightProblem::isPersonIncluded(PeopleBits const peopleBits, Person const person) {
+    return (peopleBits & getProductBits(person)) != 0;
 }
 
 ElevatorWeightProblem::Person ElevatorWeightProblem::getNumberOfPeople() const { return m_peopleWeights.size(); }

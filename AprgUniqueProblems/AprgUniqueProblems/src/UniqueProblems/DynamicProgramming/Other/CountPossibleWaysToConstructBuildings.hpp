@@ -13,11 +13,11 @@ public:
     using Index = int;
     static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
 
-    CountPossibleWaysToConstructBuildings(Count const numberOfSections);
+    explicit CountPossibleWaysToConstructBuildings(Count const numberOfSections);
 
-    Count getNumberOfWaysUsingCountOfBuildingAndSpaces() const;
-    Count getNumberOfWaysUsingFibonacciNumber() const;
-    Count getNumberOfWaysUsingCombinations() const;
+    [[nodiscard]] Count getNumberOfWaysUsingCountOfBuildingAndSpaces() const;
+    [[nodiscard]] Count getNumberOfWaysUsingFibonacciNumber() const;
+    [[nodiscard]] Count getNumberOfWaysUsingCombinations() const;
 
 private:
     Count m_numberOfSections;

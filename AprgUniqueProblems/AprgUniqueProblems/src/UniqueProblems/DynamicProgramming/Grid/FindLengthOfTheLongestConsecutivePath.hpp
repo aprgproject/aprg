@@ -13,12 +13,12 @@ public:
     using CountGrid = matrix::AlbaMatrix<Count>;
     static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
 
-    FindLengthOfTheLongestConsecutivePath(ValueGrid const& inputGrid);
+    explicit FindLengthOfTheLongestConsecutivePath(ValueGrid const& inputGrid);
 
-    Count getLongestLengthUsingNaiveRecursion() const;
-    Count getLongestLengthUsingMemoizationDP() const;
-    Count getLongestLengthStartingAtUsingNaiveRecursion(Index const x, Index const y) const;
-    Count getLongestLengthStartingAtUsingMemoizationDP(Index const x, Index const y) const;
+    [[nodiscard]] Count getLongestLengthUsingNaiveRecursion() const;
+    [[nodiscard]] Count getLongestLengthUsingMemoizationDP() const;
+    [[nodiscard]] Count getLongestLengthStartingAtUsingNaiveRecursion(Index const x, Index const y) const;
+    [[nodiscard]] Count getLongestLengthStartingAtUsingMemoizationDP(Index const x, Index const y) const;
 
 private:
     Count getLongestLengthStartingAtUsingMemoizationDP(CountGrid& countGrid, Index const x, Index const y) const;

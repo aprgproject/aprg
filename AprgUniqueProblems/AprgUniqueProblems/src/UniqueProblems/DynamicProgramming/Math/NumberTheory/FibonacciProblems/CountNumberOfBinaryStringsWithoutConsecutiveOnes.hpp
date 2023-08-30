@@ -13,15 +13,15 @@ public:
     using CountMatrix = matrix::AlbaMatrix<Count>;
     static constexpr Count UNUSED_VALUE = std::numeric_limits<Count>::max();
 
-    CountNumberOfBinaryStringsWithoutConsecutiveOnes(Count const length);
+    explicit CountNumberOfBinaryStringsWithoutConsecutiveOnes(Count const length);
 
-    Count getCountUsingNaiveRecursion() const;
-    Count getCountUsingIterativeDP() const;
-    Count getCountUsingIterativeDPAndSpaceEfficient() const;
-    Count getCountUsingFibonacci() const;
+    [[nodiscard]] Count getCountUsingNaiveRecursion() const;
+    [[nodiscard]] Count getCountUsingIterativeDP() const;
+    [[nodiscard]] Count getCountUsingIterativeDPAndSpaceEfficient() const;
+    [[nodiscard]] Count getCountUsingFibonacci() const;
 
 private:
-    Count getCountUsingNaiveRecursion(bool const previousValue, Count const length) const;
+    [[nodiscard]] Count getCountUsingNaiveRecursion(bool const previousValue, Count const length) const;
     // no memoization because there is no recomputation
     Count const m_length;
 };

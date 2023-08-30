@@ -140,10 +140,9 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingNaive
     }
     if (k == 0 || n == k) {
         return 1;
-    } else {
-        return getBinomialCoefficientUsingNaiveRecursion(n - 1, k) +
-               getBinomialCoefficientUsingNaiveRecursion(n - 1, k - 1);
     }
+    return getBinomialCoefficientUsingNaiveRecursion(n - 1, k) +
+           getBinomialCoefficientUsingNaiveRecursion(n - 1, k - 1);
 }
 
 BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingMemoizationDP(

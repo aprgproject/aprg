@@ -101,10 +101,8 @@ LargestIndependentSetProblem::SetOfVertices LargestIndependentSetProblem::getMax
         }
         vertexToMaximumSetMap.emplace(vertex, setIfVertexIsNotIncluded);
         return setIfVertexIsNotIncluded;
-
-    } else {
-        return it->second;
     }
+    return it->second;
 }
 
 }  // namespace alba

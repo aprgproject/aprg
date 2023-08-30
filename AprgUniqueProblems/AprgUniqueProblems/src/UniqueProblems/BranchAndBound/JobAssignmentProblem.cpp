@@ -11,7 +11,7 @@ JobAssignmentProblem::JobAssignmentProblem(CostMatrix const& costMatrix)
     : m_costMatrix(costMatrix),
       m_numberOfWorkers(m_costMatrix.getNumberOfColumns()),
       m_numberOfJobs(m_costMatrix.getNumberOfRows()),
-      m_nodeIdToDetails(),
+
       m_nodeId(START_NODE_ID) {}
 
 int JobAssignmentProblem::getMinimalCostAndPrintAssignments() {

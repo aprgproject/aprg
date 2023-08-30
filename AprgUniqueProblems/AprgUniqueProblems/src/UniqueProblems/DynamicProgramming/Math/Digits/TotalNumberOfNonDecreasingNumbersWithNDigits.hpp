@@ -14,16 +14,16 @@ public:
     using CountMatrix = matrix::AlbaMatrix<Count>;
     static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
 
-    TotalNumberOfNonDecreasingNumbersWithNDigits(Count const numberOfDigits);
+    explicit TotalNumberOfNonDecreasingNumbersWithNDigits(Count const numberOfDigits);
 
-    Count getCountUsingNaiveRecursion() const;
-    Count getCountUsingMemoizationDP() const;
-    Count getCountUsingIterativeDP() const;
-    Count getCountUsingIterativeDPAndSpaceEfficient() const;
-    Count getCountUsingSummationFormula() const;
+    [[nodiscard]] Count getCountUsingNaiveRecursion() const;
+    [[nodiscard]] Count getCountUsingMemoizationDP() const;
+    [[nodiscard]] Count getCountUsingIterativeDP() const;
+    [[nodiscard]] Count getCountUsingIterativeDPAndSpaceEfficient() const;
+    [[nodiscard]] Count getCountUsingSummationFormula() const;
 
 private:
-    Count getCountUsingNaiveRecursion(Value const digitValue, Count const digitIndex) const;
+    [[nodiscard]] Count getCountUsingNaiveRecursion(Value const digitValue, Count const digitIndex) const;
     Count getCountUsingMemoizationDP(CountMatrix& countMatrix, Value const digitValue, Count const digitIndex) const;
 
     Count const m_numberOfDigits;

@@ -9,9 +9,7 @@ using namespace std;
 
 namespace alba {
 
-NearestEqualCells::NearestEqualCells(ValueMatrix const& valueMatrix) : m_valueMatrix(valueMatrix), m_coordinateGraph() {
-    initializeGraph();
-}
+NearestEqualCells::NearestEqualCells(ValueMatrix const& valueMatrix) : m_valueMatrix(valueMatrix) { initializeGraph(); }
 
 NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPair(Value const value) const {
     // One way to solve the problem is to choose either of the algorithms and use it for all letters.

@@ -20,16 +20,17 @@ public:
 
     MaximizeProfitInZeroOneKnapsack(Weight const maximumWeight, Items const& items);
 
-    Profit getBestProfitUsingNaiveRecursion() const;
-    Profit getBestProfitUsingMemoizationDP() const;
-    Profit getBestProfitUsingIterativeDP() const;
-    Profit getBestProfitUsingIterativeDPAndSpaceEfficient() const;
+    [[nodiscard]] Profit getBestProfitUsingNaiveRecursion() const;
+    [[nodiscard]] Profit getBestProfitUsingMemoizationDP() const;
+    [[nodiscard]] Profit getBestProfitUsingIterativeDP() const;
+    [[nodiscard]] Profit getBestProfitUsingIterativeDPAndSpaceEfficient() const;
 
 private:
-    Profit getBestProfitUsingNaiveRecursion(Weight const remainingWeight, ItemIndex const itemIndex) const;
+    [[nodiscard]] Profit getBestProfitUsingNaiveRecursion(
+        Weight const remainingWeight, ItemIndex const itemIndex) const;
     Profit getBestProfitUsingMemoizationDP(
         ProfitMatrix& profitMatrix, Weight const remainingWeight, ItemIndex const itemIndex) const;
-    Weight getSmallestItemWeight() const;
+    [[nodiscard]] Weight getSmallestItemWeight() const;
     Weight const m_maximumWeight;
     Items const m_items;
 };

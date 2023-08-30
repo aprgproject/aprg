@@ -16,14 +16,14 @@ public:
 
     CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum(Count const numberOfDigits, Value const sumOfDigits);
 
-    Count getCountUsingNaiveRecursion() const;
-    Count getCountUsingMemoizationDP() const;
-    Count getCountUsingIterativeDP() const;
-    Count getCountUsingIterativeDPAndSpaceEfficient() const;
-    Count getCountBySearchingValuesWith1And9Increment() const;
+    [[nodiscard]] Count getCountUsingNaiveRecursion() const;
+    [[nodiscard]] Count getCountUsingMemoizationDP() const;
+    [[nodiscard]] Count getCountUsingIterativeDP() const;
+    [[nodiscard]] Count getCountUsingIterativeDPAndSpaceEfficient() const;
+    [[nodiscard]] Count getCountBySearchingValuesWith1And9Increment() const;
 
 private:
-    Count getCountUsingNaiveRecursion(Value const partialSum, Count const digitIndex) const;
+    [[nodiscard]] Count getCountUsingNaiveRecursion(Value const partialSum, Count const digitIndex) const;
     Count getCountUsingMemoizationDP(CountMatrix& countMatrix, Value const partialSum, Count const digitIndex) const;
 
     Count const m_numberOfDigits;

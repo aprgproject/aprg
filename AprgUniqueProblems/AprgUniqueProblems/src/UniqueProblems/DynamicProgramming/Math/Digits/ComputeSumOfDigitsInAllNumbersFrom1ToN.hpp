@@ -11,14 +11,14 @@ public:
     using Values = std::vector<Value>;
     static constexpr Value UNUSED_COUNT = std::numeric_limits<Value>::max();
 
-    ComputeSumOfDigitsInAllNumbersFrom1ToN(Value const lastNumber);
+    explicit ComputeSumOfDigitsInAllNumbersFrom1ToN(Value const lastNumber);
 
-    Value getValueUsingNaiveSolution() const;
-    Value getValueUsingMemoizationDP() const;
-    Value getValueUsingSummationValues() const;
+    [[nodiscard]] Value getValueUsingNaiveSolution() const;
+    [[nodiscard]] Value getValueUsingMemoizationDP() const;
+    [[nodiscard]] Value getValueUsingSummationValues() const;
 
 private:
-    Value getValueUsingMemoizationDP(Value const number) const;
+    [[nodiscard]] Value getValueUsingMemoizationDP(Value const number) const;
     static Value getSummationFrom1ToN(Value const number);
     Value const m_lastNumber;
 };

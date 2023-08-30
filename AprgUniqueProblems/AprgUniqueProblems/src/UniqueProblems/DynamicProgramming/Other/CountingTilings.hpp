@@ -25,14 +25,14 @@ private:
     static Row getEmptyRow(Count const length);
     void searchNextRow(Count const rowIndex, Row const& currentRow);
     Rows const& getNextRows(Row const& currentRow);
-    Rows calculateNextRows(Row const& currentRow);
+    static Rows calculateNextRows(Row const& currentRow);
     void startCompleteSearch();
     void doCompleteSearchAt(Count const gridIndex);
     Count m_numberOfColumns;
     Count m_numberOfRows;
     Count const m_numberOfCells;
-    Count m_numberFilledCells;
-    Count m_numberOfSolutions;
+    Count m_numberFilledCells{0};
+    Count m_numberOfSolutions{0};
     Grid m_grid;
     RowToRowsMap m_currentRowToNextRows;
 };

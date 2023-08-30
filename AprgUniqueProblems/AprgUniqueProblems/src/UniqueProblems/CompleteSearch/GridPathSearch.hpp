@@ -17,7 +17,7 @@ public:
         Down,
     };
 
-    GridPathSearch(int const gridSide);
+    explicit GridPathSearch(int const gridSide);
 
     int countPaths();
 
@@ -30,8 +30,8 @@ private:
     void searchNextCoordinate(int const x, int const y, Movement const movement);
     int const m_gridSide;
     int const m_numberOfCells;
-    int m_numberTraversedCells;
-    int m_numberOfCompletePaths;
+    int m_numberTraversedCells{0};
+    int m_numberOfCompletePaths{0};
     Grid m_grid;
 };
 

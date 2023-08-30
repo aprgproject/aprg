@@ -42,30 +42,30 @@ public:
     using CoinCombinationsPerValue = std::vector<CoinCombinations>;
     static constexpr int UNUSED_COUNT = std::numeric_limits<int>::max();
 
-    CoinProblem(Coins const& availableCoins);
+    explicit CoinProblem(Coins const& availableCoins);
 
     // fewest coins
-    int getNumberOfFewestCoinsUsingMemoizationDP(Value const total) const;
-    int getNumberOfFewestCoinsIterativeDP(Value const total) const;
-    Coins getFewestCoinsUsingMemoizationDP(Value const total) const;
-    Coins getFewestCoinsUsingIterativeDP(Value const total) const;
+    [[nodiscard]] int getNumberOfFewestCoinsUsingMemoizationDP(Value const total) const;
+    [[nodiscard]] int getNumberOfFewestCoinsIterativeDP(Value const total) const;
+    [[nodiscard]] Coins getFewestCoinsUsingMemoizationDP(Value const total) const;
+    [[nodiscard]] Coins getFewestCoinsUsingIterativeDP(Value const total) const;
 
     // permutations
-    int getNumberOfCoinPermutationsMemoizationDP(Value const total) const;
-    int getNumberOfCoinPermutationsIterativeDP(Value const total) const;
-    CoinPermutations getCoinPermutationsUsingMemoizationDP(Value const total) const;
-    CoinPermutations getCoinPermutationsUsingIterativeDP(Value const total) const;
+    [[nodiscard]] int getNumberOfCoinPermutationsMemoizationDP(Value const total) const;
+    [[nodiscard]] int getNumberOfCoinPermutationsIterativeDP(Value const total) const;
+    [[nodiscard]] CoinPermutations getCoinPermutationsUsingMemoizationDP(Value const total) const;
+    [[nodiscard]] CoinPermutations getCoinPermutationsUsingIterativeDP(Value const total) const;
 
     // combinations
-    int getNumberOfCoinCombinationsUsingMemoizationDP(Value const total) const;
-    int getNumberOfCoinCombinationsUsingIterativeDP(Value const total) const;
-    int getNumberOfCoinCombinationsUsingIterativeDPAndSpaceEfficient(Value const total) const;
-    CoinCombinations getCoinCombinationsUsingMemoizationDP(Value const total) const;
-    CoinCombinations getCoinCombinationsUsingIterativeDP(Value const total) const;
+    [[nodiscard]] int getNumberOfCoinCombinationsUsingMemoizationDP(Value const total) const;
+    [[nodiscard]] int getNumberOfCoinCombinationsUsingIterativeDP(Value const total) const;
+    [[nodiscard]] int getNumberOfCoinCombinationsUsingIterativeDPAndSpaceEfficient(Value const total) const;
+    [[nodiscard]] CoinCombinations getCoinCombinationsUsingMemoizationDP(Value const total) const;
+    [[nodiscard]] CoinCombinations getCoinCombinationsUsingIterativeDP(Value const total) const;
 
 private:
-    Value getMaxAvailableCoin() const;
-    Value getMaxOfTotalAndMaxCoinPlusOne(Value const total) const;
+    [[nodiscard]] Value getMaxAvailableCoin() const;
+    [[nodiscard]] Value getMaxOfTotalAndMaxCoinPlusOne(Value const total) const;
 
     // fewest coins
     int getNumberOfFewestCoinsUsingMemoizationDPInternal(CountPerValue& countPerValue, Value const total) const;

@@ -18,13 +18,13 @@ public:
 
     IsPartialSumPossibleInZeroOneKnapsack(Value const targetSum, Values const& values);
 
-    bool isPartialSumPossibleUsingNaiveRecursion() const;
-    bool isPartialSumPossibleUsingMemoizationDP() const;
-    bool isPartialSumPossibleUsingIterativeDP() const;
-    bool isPartialSumPossibleUsingIterativeDPAndSpaceEfficient() const;
+    [[nodiscard]] bool isPartialSumPossibleUsingNaiveRecursion() const;
+    [[nodiscard]] bool isPartialSumPossibleUsingMemoizationDP() const;
+    [[nodiscard]] bool isPartialSumPossibleUsingIterativeDP() const;
+    [[nodiscard]] bool isPartialSumPossibleUsingIterativeDPAndSpaceEfficient() const;
 
 private:
-    bool isPartialSumPossibleUsingNaiveRecursion(Value const partialSum, Index const valueIndex) const;
+    [[nodiscard]] bool isPartialSumPossibleUsingNaiveRecursion(Value const partialSum, Index const valueIndex) const;
     bool isPartialSumPossibleUsingMemoizationDP(
         StateMatrix& stateMatrix, Value const partialSum, Index const valueIndex) const;
 

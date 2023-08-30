@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Integers = vector<int>;
@@ -66,6 +64,4 @@ TEST(SortInWaveFormTest, SortWorksOnIntegersUsingForwardListExample) {
     EXPECT_EQ(valuesToExpect, valuesToTest);
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
