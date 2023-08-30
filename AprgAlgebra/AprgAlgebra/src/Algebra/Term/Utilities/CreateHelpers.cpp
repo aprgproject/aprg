@@ -10,9 +10,9 @@ using namespace std;
 
 namespace alba::algebra {
 
-Monomial createMonomialFromNumber(AlbaNumber const& number) { return Monomial(number, {}); }
+Monomial createMonomialFromNumber(AlbaNumber const& number) { return {number, {}}; }
 
-Monomial createMonomialFromVariable(Variable const& variable) { return Monomial(1, {{variable.getVariableName(), 1}}); }
+Monomial createMonomialFromVariable(Variable const& variable) { return {1, {{variable.getVariableName(), 1}}}; }
 
 Monomial createMonomialIfPossible(Term const& term) {
     Monomial result;
@@ -100,11 +100,11 @@ Function createFunctionWithEmptyInputExpression(string const& functionName) {
 }
 
 Function createFunctionInAnFunction(Function const& functionObject) {
-    return Function(functionObject.getFunctionName(), Term(functionObject), functionObject.getEvaluationFunction());
+    return {functionObject.getFunctionName(), Term(functionObject), functionObject.getEvaluationFunction()};
 }
 
 Term createTermWithAnExpressionWithATermWithAnExpression(Expression const& expression) {
-    return Term(Expression(Term(expression)));
+    return {Expression(Term(expression))};
 }
 
 Term createTermWithAdditionAndSubtractionTermsWithDetails(TermsWithDetails const& termsWithDetails) {

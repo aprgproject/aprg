@@ -18,7 +18,7 @@ Equation getCircleEquation() {
     Term rSquared(createExpressionIfPossible({r, "^", 2}));
     Term leftHandSide(createExpressionIfPossible({xSquared, "+", ySquared}));
     Term const& rightHandSide(rSquared);
-    return Equation(leftHandSide, "=", rightHandSide);
+    return {leftHandSide, "=", rightHandSide};
 }
 
 Equation getEllipseEquation() {
@@ -29,7 +29,7 @@ Equation getEllipseEquation() {
     Term aSquared(createExpressionIfPossible({a, "^", 2}));
     Term bSquared(createExpressionIfPossible({b, "^", 2}));
     Term leftHandSide(createExpressionIfPossible({xSquared, "/", aSquared, "+", ySquared, "/", bSquared}));
-    return Equation(leftHandSide, "=", 1);
+    return {leftHandSide, "=", 1};
 }
 
 Equation getHyperbolaEquation() {
@@ -40,7 +40,7 @@ Equation getHyperbolaEquation() {
     Term aSquared(createExpressionIfPossible({a, "^", 2}));
     Term bSquared(createExpressionIfPossible({b, "^", 2}));
     Term leftHandSide(createExpressionIfPossible({xSquared, "/", aSquared, "-", ySquared, "/", bSquared}));
-    return Equation(leftHandSide, "=", 1);
+    return {leftHandSide, "=", 1};
 }
 
 Equation getLimaconEquation(LimaconTrigonometricFunctionType const type) {
@@ -52,12 +52,12 @@ Equation getLimaconEquation(LimaconTrigonometricFunctionType const type) {
     }
     Term leftHandSide(createExpressionIfPossible({a, "+", b, "*", trigPart}));
     Term rightHandSide(r);
-    return Equation(leftHandSide, "=", rightHandSide);
+    return {leftHandSide, "=", rightHandSide};
 }
 
 Equation getLineEquation() {
     Term leftHandSide(createExpressionIfPossible({a, "*", x, "+", b, "*", y, "+", c}));
-    return Equation(leftHandSide, "=", 0);
+    return {leftHandSide, "=", 0};
 }
 
 Equation getParabolaEquation(ParabolaOrientation const parabolaOrientation) {
@@ -107,7 +107,7 @@ Term getSurfaceAreaOfAConicalFrustum() {
          "^",
          AlbaNumber::createFraction(1, 2)}));
 
-    return Term(createExpressionIfPossible({topCircleArea, "+", bottomCircleArea, "+", sideArea}));
+    return {createExpressionIfPossible({topCircleArea, "+", bottomCircleArea, "+", sideArea})};
 }
 
 Term getVolumeOfAConicalFrustum() {

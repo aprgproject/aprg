@@ -13,7 +13,7 @@ ArithmeticSeries::ArithmeticSeries(
     : SeriesBasedOnFormula(getFormula(valueAtIndex1, index1, valueAtIndex2, index2), n) {}
 
 Term ArithmeticSeries::getFormula(AlbaNumber const& firstValue, AlbaNumber const& commonDifference) {
-    return Term(firstValue) + Term(commonDifference) * Term(n);
+    return {Term(firstValue) + Term(commonDifference) * Term(n)};
 }
 
 Term ArithmeticSeries::getFormula(

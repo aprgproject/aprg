@@ -86,7 +86,7 @@ Term IntegrationForFiniteCalculus::integrateTerm(Term const& term) const {
 }
 
 Monomial IntegrationForFiniteCalculus::integrateConstant(Constant const& constant) const {
-    return Monomial(constant.getNumber(), {{m_nameOfVariableToIntegrate, 1}});
+    return {constant.getNumber(), {{m_nameOfVariableToIntegrate, 1}}};
 }
 
 Polynomial IntegrationForFiniteCalculus::integrateVariable(Variable const& variable) const {
@@ -286,7 +286,7 @@ Term IntegrationForFiniteCalculus::integrateTermsInAdditionOrSubtraction(Express
             accumulatedExpression.putTermWithSubtractionIfNeeded(integratedTerm);
         }
     }
-    return Term(accumulatedExpression);
+    return {accumulatedExpression};
 }
 
 Term IntegrationForFiniteCalculus::integrateTermsInMultiplicationOrDivision(Expression const& expression) const {

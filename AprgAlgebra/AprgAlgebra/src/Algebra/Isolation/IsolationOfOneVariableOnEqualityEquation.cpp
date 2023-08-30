@@ -48,7 +48,7 @@ Equation IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariableOnLeft
     Term termWithVariable;
     Term termWithWithoutVariable;
     isolateTermWithVariable(variableName, termWithVariable, termWithWithoutVariable);
-    return Equation(termWithVariable, "=", termWithWithoutVariable);
+    return {termWithVariable, "=", termWithWithoutVariable};
 }
 
 Equation IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariableOnRightSideOfEquation(
@@ -56,7 +56,7 @@ Equation IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariableOnRigh
     Term termWithVariable;
     Term termWithWithoutVariable;
     isolateTermWithVariable(variableName, termWithVariable, termWithWithoutVariable);
-    return Equation(termWithWithoutVariable, "=", termWithVariable);
+    return {termWithWithoutVariable, "=", termWithVariable};
 }
 
 void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(

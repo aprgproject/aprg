@@ -215,7 +215,7 @@ Monomial compareMonomialsAndSaveMinimumExponentsForEachVariable(
         newVariableExponentMap[variableName] = min(
             firstMonomial.getExponentForVariable(variableName), secondMonomial.getExponentForVariable(variableName));
     }
-    return Monomial(1, newVariableExponentMap);
+    return {1, newVariableExponentMap};
 }
 
 Monomial compareMonomialsAndSaveMaximumExponentsForEachVariable(
@@ -228,7 +228,7 @@ Monomial compareMonomialsAndSaveMaximumExponentsForEachVariable(
         newVariableExponentMap[variableName] = max(
             firstMonomial.getExponentForVariable(variableName), secondMonomial.getExponentForVariable(variableName));
     }
-    return Monomial(1, newVariableExponentMap);
+    return {1, newVariableExponentMap};
 }
 
 Monomial getMonomialWithMinimumExponentsInMonomials(Monomials const& monomials) {

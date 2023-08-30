@@ -17,7 +17,7 @@ Term GeometricSeries::getInfiniteSumStartingFrom(int const startingNthIndex) {
 }
 
 Term GeometricSeries::getFormula(AlbaNumber const& firstValue, AlbaNumber const& commonMultiplier) {
-    return Term(firstValue) * (Term(commonMultiplier) ^ Term(n));
+    return {Term(firstValue) * (Term(commonMultiplier) ^ Term(n))};
 }
 
 Term GeometricSeries::getFormula(

@@ -178,7 +178,7 @@ Term getInfiniteSumOfGeometricSeriesIfCommonMultiplierIsFractional(
 
 PowerSeries getEToTheXPowerSeries() {
     Term formula(convertExpressionToSimplestTerm(createExpressionIfPossible({1, "/", factorial(n)})));
-    return PowerSeries(formula, n, x, 0);
+    return {formula, n, x, 0};
 }
 
 }  // namespace alba::algebra

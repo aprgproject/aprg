@@ -91,13 +91,12 @@ TermRaiseToANumber createTermRaiseToANumberFromMonomial(Monomial const& monomial
     AlbaNumber exponent = (variablesToExponentsMap.size() == 1) ? (variablesToExponentsMap.cbegin())->second
                                                                 : getGcfOfExponentsInMonomial(newMonomial);
     newMonomial.raiseToPowerNumber(AlbaNumber(1) / exponent);
-    return TermRaiseToANumber(Term(newMonomial), exponent);
+    return {Term(newMonomial), exponent};
 }
 
 TermRaiseToANumber createTermRaiseToANumberFromPolynomial(Polynomial const& polynomial) {
     PolynomialRaiseToAnUnsignedInt polynomialRaiseToAnUnsignedInt(polynomial);
-    return TermRaiseToANumber(
-        Term(polynomialRaiseToAnUnsignedInt.getBase()), polynomialRaiseToAnUnsignedInt.getExponent());
+    return {Term(polynomialRaiseToAnUnsignedInt.getBase()), polynomialRaiseToAnUnsignedInt.getExponent()};
 }
 
 TermRaiseToANumber createTermRaiseToANumberFromExpression(Expression const& expression) {

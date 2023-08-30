@@ -283,7 +283,7 @@ Equation getRelationshipOfDerivativeOfTheInverseAndTheDerivative(
     Term oneOverDerivativeWithNewVariable(createExpressionIfPossible({1, "/", derivativeWithNewVariable}));
     derivativeOfInverseWithNewVariable.simplify();
     oneOverDerivativeWithNewVariable.simplify();
-    return Equation(derivativeOfInverseWithNewVariable, "=", oneOverDerivativeWithNewVariable);
+    return {derivativeOfInverseWithNewVariable, "=", oneOverDerivativeWithNewVariable};
 }
 
 Equation getIntegralEquationForFirstOrderDifferentialEquation(
@@ -327,7 +327,7 @@ Equation getIntegralEquationForFirstOrderDifferentialEquation(
     Term integralOfQExpression(integration.integrate(qExpression));
     Term qcExpression(createExpressionIfPossible({integralOfQExpression, "+", cExpression}));
     Term pqcExpression(createExpressionIfPossible({eToTheNegativeIntegralOfP, "*", qcExpression}));
-    return Equation(yVariableName, "=", pqcExpression);
+    return {yVariableName, "=", pqcExpression};
 }
 
 void simplifyDerivativeByDefinition(Term& term) {

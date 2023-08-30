@@ -13,7 +13,7 @@ DifferentiationForFiniteCalculus::DifferentiationForFiniteCalculus(string const&
 Term DifferentiationForFiniteCalculus::differentiate(Term const& term) const { return differentiateTerm(term); }
 
 Term DifferentiationForFiniteCalculus::differentiate(Constant const& constant) {
-    return Term(differentiateConstant(constant));
+    return {differentiateConstant(constant)};
 }
 
 Term DifferentiationForFiniteCalculus::differentiate(Variable const& variable) const {
@@ -92,19 +92,19 @@ Polynomial DifferentiationForFiniteCalculus::differentiateVariable(Variable cons
 }
 
 Term DifferentiationForFiniteCalculus::differentiateMonomial(Monomial const& monomial) const {
-    return Term(getDerivativeDefinitionForFiniteCalculus(Term(monomial), m_nameOfVariableToDifferentiate));
+    return {getDerivativeDefinitionForFiniteCalculus(Term(monomial), m_nameOfVariableToDifferentiate)};
 }
 
 Term DifferentiationForFiniteCalculus::differentiatePolynomial(Polynomial const& polynomial) const {
-    return Term(getDerivativeDefinitionForFiniteCalculus(Term(polynomial), m_nameOfVariableToDifferentiate));
+    return {getDerivativeDefinitionForFiniteCalculus(Term(polynomial), m_nameOfVariableToDifferentiate)};
 }
 
 Term DifferentiationForFiniteCalculus::differentiateExpression(Expression const& expression) const {
-    return Term(getDerivativeDefinitionForFiniteCalculus(Term(expression), m_nameOfVariableToDifferentiate));
+    return {getDerivativeDefinitionForFiniteCalculus(Term(expression), m_nameOfVariableToDifferentiate)};
 }
 
 Term DifferentiationForFiniteCalculus::differentiateFunction(Function const& functionObject) const {
-    return Term(getDerivativeDefinitionForFiniteCalculus(Term(functionObject), m_nameOfVariableToDifferentiate));
+    return {getDerivativeDefinitionForFiniteCalculus(Term(functionObject), m_nameOfVariableToDifferentiate)};
 }
 
 Equation DifferentiationForFiniteCalculus::differentiateEquation(Equation const& equation) const {

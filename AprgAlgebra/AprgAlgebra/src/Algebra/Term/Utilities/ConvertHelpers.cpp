@@ -32,16 +32,16 @@ bool canBeConvertedToPolynomial(Term const& term) {
 
 Operator reverse(Operator const& operatorToReverse) {
     if (operatorToReverse.isAddition()) {
-        return Operator("-");
+        return {"-"};
     }
     if (operatorToReverse.isSubtraction()) {
-        return Operator("+");
+        return {"+"};
     }
     if (operatorToReverse.isMultiplication()) {
-        return Operator("/");
+        return {"/"};
     }
     if (operatorToReverse.isDivision()) {
-        return Operator("*");
+        return {"*"};
     }
     return {};
 }

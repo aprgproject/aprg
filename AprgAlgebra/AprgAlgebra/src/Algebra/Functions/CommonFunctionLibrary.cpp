@@ -11,7 +11,7 @@ using namespace std;
 namespace alba::algebra::Functions {
 
 Function abs(Term const& term) {
-    return Function("abs", term, [](AlbaNumber const& number) -> AlbaNumber { return getAbsoluteValue(number); });
+    return {"abs", term, [](AlbaNumber const& number) -> AlbaNumber { return getAbsoluteValue(number); }};
 }
 
 Function greatestIntegerFunction(Term const& term) {
@@ -43,11 +43,11 @@ Function factorial(Term const& term) {
 }
 
 Function ln(Term const& term) {
-    return Function("ln", term, [](AlbaNumber const& number) -> AlbaNumber { return ::log(number.getDouble()); });
+    return {"ln", term, [](AlbaNumber const& number) -> AlbaNumber { return ::log(number.getDouble()); }};
 }
 
 Function log(Term const& term) {
-    return Function("log", term, [](AlbaNumber const& number) -> AlbaNumber { return ::log10(number.getDouble()); });
+    return {"log", term, [](AlbaNumber const& number) -> AlbaNumber { return ::log10(number.getDouble()); }};
 }
 
 Function harmonicNumber(Term const& term) {
@@ -64,39 +64,39 @@ Function harmonicNumber(Term const& term) {
 }
 
 Function sin(Term const& term) {
-    return Function("sin", term, [](AlbaNumber const& number) -> AlbaNumber { return ::sin(number.getDouble()); });
+    return {"sin", term, [](AlbaNumber const& number) -> AlbaNumber { return ::sin(number.getDouble()); }};
 }
 
 Function cos(Term const& term) {
-    return Function("cos", term, [](AlbaNumber const& number) -> AlbaNumber { return ::cos(number.getDouble()); });
+    return {"cos", term, [](AlbaNumber const& number) -> AlbaNumber { return ::cos(number.getDouble()); }};
 }
 
 Function tan(Term const& term) {
-    return Function("tan", term, [](AlbaNumber const& number) -> AlbaNumber { return ::tan(number.getDouble()); });
+    return {"tan", term, [](AlbaNumber const& number) -> AlbaNumber { return ::tan(number.getDouble()); }};
 }
 
 Function csc(Term const& term) {
-    return Function("csc", term, [](AlbaNumber const& number) -> AlbaNumber { return 1 / ::sin(number.getDouble()); });
+    return {"csc", term, [](AlbaNumber const& number) -> AlbaNumber { return 1 / ::sin(number.getDouble()); }};
 }
 
 Function sec(Term const& term) {
-    return Function("sec", term, [](AlbaNumber const& number) -> AlbaNumber { return 1 / ::cos(number.getDouble()); });
+    return {"sec", term, [](AlbaNumber const& number) -> AlbaNumber { return 1 / ::cos(number.getDouble()); }};
 }
 
 Function cot(Term const& term) {
-    return Function("cot", term, [](AlbaNumber const& number) -> AlbaNumber { return 1 / ::tan(number.getDouble()); });
+    return {"cot", term, [](AlbaNumber const& number) -> AlbaNumber { return 1 / ::tan(number.getDouble()); }};
 }
 
 Function arcsin(Term const& term) {
-    return Function("arcsin", term, [](AlbaNumber const& number) -> AlbaNumber { return ::asin(number.getDouble()); });
+    return {"arcsin", term, [](AlbaNumber const& number) -> AlbaNumber { return ::asin(number.getDouble()); }};
 }
 
 Function arccos(Term const& term) {
-    return Function("arccos", term, [](AlbaNumber const& number) -> AlbaNumber { return ::acos(number.getDouble()); });
+    return {"arccos", term, [](AlbaNumber const& number) -> AlbaNumber { return ::acos(number.getDouble()); }};
 }
 
 Function arctan(Term const& term) {
-    return Function("arctan", term, [](AlbaNumber const& number) -> AlbaNumber { return ::atan(number.getDouble()); });
+    return {"arctan", term, [](AlbaNumber const& number) -> AlbaNumber { return ::atan(number.getDouble()); }};
 }
 
 Function arccsc(Term const& term) {
@@ -115,15 +115,15 @@ Function arccot(Term const& term) {
 }
 
 Function sinh(Term const& term) {
-    return Function("sinh", term, [](AlbaNumber const& number) -> AlbaNumber { return ::sinh(number.getDouble()); });
+    return {"sinh", term, [](AlbaNumber const& number) -> AlbaNumber { return ::sinh(number.getDouble()); }};
 }
 
 Function cosh(Term const& term) {
-    return Function("cosh", term, [](AlbaNumber const& number) -> AlbaNumber { return ::cosh(number.getDouble()); });
+    return {"cosh", term, [](AlbaNumber const& number) -> AlbaNumber { return ::cosh(number.getDouble()); }};
 }
 
 Function tanh(Term const& term) {
-    return Function("tanh", term, [](AlbaNumber const& number) -> AlbaNumber { return ::tanh(number.getDouble()); });
+    return {"tanh", term, [](AlbaNumber const& number) -> AlbaNumber { return ::tanh(number.getDouble()); }};
 }
 
 Function csch(Term const& term) {

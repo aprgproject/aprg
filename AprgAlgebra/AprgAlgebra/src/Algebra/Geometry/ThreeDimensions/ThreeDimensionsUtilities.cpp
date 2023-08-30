@@ -17,7 +17,7 @@ Equation getEllipsoidEquation() {
     Term cSquared(createExpressionIfPossible({c, "^", 2}));
     Term leftHandSide(createExpressionIfPossible(
         {xSquared, "/", aSquared, "+", ySquared, "/", bSquared, "+", zSquared, "/", cSquared}));
-    return Equation(leftHandSide, "=", 1);
+    return {leftHandSide, "=", 1};
 }
 
 Equation getEllipticConeEquation() {
@@ -32,7 +32,7 @@ Equation getEllipticConeEquation() {
     Term cSquared(createExpressionIfPossible({c, "^", 2}));
     Term leftHandSide(createExpressionIfPossible(
         {xSquared, "/", aSquared, "+", ySquared, "/", bSquared, "+", zSquared, "/", cSquared}));
-    return Equation(leftHandSide, "=", 0);
+    return {leftHandSide, "=", 0};
 }
 
 Equation getEllipticHyperboloidEquation(bool const isOneNegative) {
@@ -48,7 +48,7 @@ Equation getEllipticHyperboloidEquation(bool const isOneNegative) {
     Term leftHandSide(createExpressionIfPossible(
         {xSquared, "/", aSquared, "+", ySquared, "/", bSquared, "-", zSquared, "/", cSquared}));
     Term oneWithSign = isOneNegative ? -1 : 1;
-    return Equation(leftHandSide, "=", oneWithSign);
+    return {leftHandSide, "=", oneWithSign};
 }
 
 Equation getEllipticParaboloidEquation() {
@@ -62,7 +62,7 @@ Equation getEllipticParaboloidEquation() {
     Term zOverC(createExpressionIfPossible({zMinusZ0, "/", c}));
     Term leftHandSide(createExpressionIfPossible({xSquared, "/", aSquared, "+", ySquared, "/", bSquared}));
     Term const& rightHandSide(zOverC);
-    return Equation(leftHandSide, "=", rightHandSide);
+    return {leftHandSide, "=", rightHandSide};
 }
 
 Equation getHyperbolicParaboloidEquation() {
@@ -76,7 +76,7 @@ Equation getHyperbolicParaboloidEquation() {
     Term zOverC(createExpressionIfPossible({zMinusZ0, "/", c}));
     Term leftHandSide(createExpressionIfPossible({ySquared, "/", bSquared, "-", xSquared, "/", aSquared}));
     Term const& rightHandSide(zOverC);
-    return Equation(leftHandSide, "=", rightHandSide);
+    return {leftHandSide, "=", rightHandSide};
 }
 
 Equations getLineEquations() {
@@ -94,7 +94,7 @@ Equations getLineEquations() {
 
 Equation getPlaneEquation() {
     Term leftHandSide(createExpressionIfPossible({a, "*", x, "+", b, "*", y, "+", c, "*", z, "+", d}));
-    return Equation(leftHandSide, "=", 0);
+    return {leftHandSide, "=", 0};
 }
 
 Equation getPlaneEquationWithPointCoordinates() {
@@ -102,7 +102,7 @@ Equation getPlaneEquationWithPointCoordinates() {
     Term yMinusY0(createExpressionIfPossible({y, "-", y0}));
     Term zMinusZ0(createExpressionIfPossible({z, "-", z0}));
     Term leftHandSide(createExpressionIfPossible({a, "*", xMinusX0, "+", b, "*", yMinusY0, "+", c, "*", zMinusZ0}));
-    return Equation(leftHandSide, "=", 0);
+    return {leftHandSide, "=", 0};
 }
 
 Equation getSphereEquation() {
@@ -115,7 +115,7 @@ Equation getSphereEquation() {
     Term rSquared(createExpressionIfPossible({r, "^", 2}));
     Term leftHandSide(createExpressionIfPossible({xSquared, "+", ySquared, "+", zSquared}));
     Term const& rightHandSide(rSquared);
-    return Equation(leftHandSide, "=", rightHandSide);
+    return {leftHandSide, "=", rightHandSide};
 }
 
 }  // namespace alba::algebra::ThreeDimensions

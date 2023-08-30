@@ -88,7 +88,7 @@ Term Integration::integrateAtDefiniteTerms(Term const& term, Term const& lowerEn
 }
 
 Monomial Integration::integrateConstant(Constant const& constant) {
-    return Monomial(constant.getNumber(), {{getCurrentVariableToIntegrate(), 1}});
+    return {constant.getNumber(), {{getCurrentVariableToIntegrate(), 1}}};
 }
 
 Monomial Integration::integrateVariable(Variable const& variable) {

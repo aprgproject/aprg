@@ -159,7 +159,7 @@ void appendTransitionValues(
 }
 
 AlbaNumbers getNumbers(AlbaNumbersSet const& collectedValues) {
-    return AlbaNumbers(collectedValues.cbegin(), collectedValues.cend());
+    return {collectedValues.cbegin(), collectedValues.cend()};
 }
 
 AlbaNumber getTransitionValue(
