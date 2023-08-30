@@ -60,7 +60,7 @@ uint32_t BitmapConfiguration::getNumberOfBytesPerRowInFile() const { return m_nu
 uint32_t BitmapConfiguration::getBitMaskForValue() const { return m_bitMaskForValue; }
 
 BitmapXY BitmapConfiguration::getPointWithinTheBitmap(int const xCoordinate, int const yCoordinate) const {
-    return BitmapXY(getXCoordinateWithinTheBitmap(xCoordinate), getYCoordinateWithinTheBitmap(yCoordinate));
+    return {getXCoordinateWithinTheBitmap(xCoordinate), getYCoordinateWithinTheBitmap(yCoordinate)};
 }
 
 int BitmapConfiguration::getXCoordinateWithinTheBitmap(int const coordinate) const {
@@ -75,12 +75,12 @@ int BitmapConfiguration::getCoordinateWithinRange(int const coordinate, int maxL
     return (coordinate < 0 || maxLength <= 0) ? 0 : (coordinate >= maxLength) ? maxLength - 1 : coordinate;
 }
 
-BitmapXY BitmapConfiguration::getUpLeftCornerPoint() { return BitmapXY(0, 0); }
+BitmapXY BitmapConfiguration::getUpLeftCornerPoint() { return {0, 0}; }
 
 BitmapXY BitmapConfiguration::getDownRightCornerPoint() const {
     int maxX = m_bitmapWidth == 0 ? 0 : m_bitmapWidth - 1;
     int maxY = m_bitmapHeight == 0 ? 0 : m_bitmapHeight - 1;
-    return BitmapXY(maxX, maxY);
+    return {maxX, maxY};
 }
 
 uint32_t BitmapConfiguration::getColorUsingPixelValue(uint32_t const pixelValue) const {

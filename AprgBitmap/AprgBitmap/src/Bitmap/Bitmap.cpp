@@ -57,9 +57,9 @@ BitmapSnippet Bitmap::getSnippetReadFromFile(BitmapXY const topLeftCorner, Bitma
         m_configuration.convertBytesToPixels(byteOffsetInXForEnd) +
         m_configuration.getMaximumNumberOfPixelsBeforeOneByte())));
 
-    return BitmapSnippet(
+    return {
         BitmapXY(startPixelInX, topLeftCorner.getY()), BitmapXY(endPixelInX, bottomRightCorner.getY()),
-        m_configuration);
+        m_configuration};
 }
 
 void Bitmap::setSnippetWriteToFile(BitmapSnippet const& snippet) const {
