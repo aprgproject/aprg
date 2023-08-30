@@ -22,7 +22,7 @@ namespace KickStart_2020_RoundH_P3_Rugby {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int N = 0;
     my_cin >> N;
     vector<int64_t> X(N);

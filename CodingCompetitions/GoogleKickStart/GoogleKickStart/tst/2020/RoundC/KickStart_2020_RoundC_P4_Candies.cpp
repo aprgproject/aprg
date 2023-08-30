@@ -56,7 +56,7 @@ void app(int i, ll x) {
     a[i] = x;
 }
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     my_cin >> n >> q;
     for (int i = 0; i < n; ++i) {
         ll a = 0;

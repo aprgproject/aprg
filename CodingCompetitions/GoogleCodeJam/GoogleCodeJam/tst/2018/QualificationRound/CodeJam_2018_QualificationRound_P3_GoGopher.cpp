@@ -25,7 +25,7 @@ namespace CodeJam_2018_QualificationRound_P3_GoGopher {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     // my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
 }
 

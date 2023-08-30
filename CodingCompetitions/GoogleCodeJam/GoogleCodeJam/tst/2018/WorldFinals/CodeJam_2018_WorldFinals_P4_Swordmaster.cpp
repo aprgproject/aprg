@@ -25,7 +25,7 @@ namespace CodeJam_2018_WorldFinals_P4_Swordmaster {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     // my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
 }
 

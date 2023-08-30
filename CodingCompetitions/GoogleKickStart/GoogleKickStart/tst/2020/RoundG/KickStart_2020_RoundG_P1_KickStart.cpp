@@ -27,7 +27,7 @@ namespace KickStart_2020_RoundG_P1_KickStart {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     string s;
     my_cin >> s;
     int n = s.length();

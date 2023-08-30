@@ -51,7 +51,7 @@ void dfs(int u) {
     ans += static_cast<char>(u + 'A');
 }
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     my_cin >> n >> m;
     set<char> t;
     for (int i = 0; i < n; ++i) {

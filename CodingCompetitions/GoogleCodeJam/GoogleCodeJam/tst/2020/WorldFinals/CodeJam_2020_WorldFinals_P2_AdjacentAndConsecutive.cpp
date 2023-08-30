@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "CodeJam_2020_WorldFinals_P2_AdjacentAndConsecutive.hpp"
 
@@ -25,7 +25,7 @@ namespace CodeJam_2020_WorldFinals_P2_AdjacentAndConsecutive {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     // my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
 }
 

@@ -25,7 +25,7 @@ namespace CodeJam_2018_PracticeRound_P4_BathroomStalls {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     // my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
 }
 

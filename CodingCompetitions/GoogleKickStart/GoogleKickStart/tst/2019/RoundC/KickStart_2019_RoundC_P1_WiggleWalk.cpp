@@ -143,7 +143,7 @@ Direction getDirection(char const directionChar) {
     }
 }
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int numberOfRows = 0, numberOfColumns = 0;
     int numberOfInstructions = 0, startX = 0, startY = 0;
     string instructions;

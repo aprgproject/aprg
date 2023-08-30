@@ -25,7 +25,7 @@ namespace KickStart_2021_RoundE_P4_IncreasingSequenceCardGame {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     // my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
 }
 

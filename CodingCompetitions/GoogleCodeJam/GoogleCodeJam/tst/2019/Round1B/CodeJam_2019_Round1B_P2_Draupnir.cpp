@@ -25,7 +25,7 @@ namespace CodeJam_2019_Round1B_P2_Draupnir {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     // my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
 }
 

@@ -27,7 +27,7 @@ TEST(MonsterRaceAnalyzerTest, DISABLED_AnalyzeWorks) {
     analyzer.showNextPossibleWinners(currentConfiguration);
 }
 
-TEST(MonsterRaceAnalyzerTest, DISABLED_Duplicated_AnalyzeWorks) {
+TEST(MonsterRaceAnalyzerTest, DISABLED_DuplicatedAnalyzeWorks) {
     // For faster typing
     //
     // #Luck: , , , , ,

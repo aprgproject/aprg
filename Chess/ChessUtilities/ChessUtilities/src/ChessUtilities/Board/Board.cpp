@@ -177,7 +177,7 @@ Exchange Board::getExchangeAt(Coordinate const& coordinate) const {
             break;
         }
     }
-    return Exchange(exchangeValue, exchangeCount);
+    return {exchangeValue, exchangeCount};
 }
 
 string Board::getAlgebraicNotationOfCoordinate(Coordinate const& coordinate) const {

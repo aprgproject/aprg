@@ -1,5 +1,4 @@
 #pragma once
-// NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
 
 #include <Common/Container/AlbaConfigurationHolder.hpp>
 #include <Common/Math/AlbaMathConstants.hpp>
@@ -10,6 +9,7 @@
 #include <cstdint>
 #include <ostream>
 
+// NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions,cppcoreguidelines-pro-type-union-access)
 namespace alba {
 class AlbaNumber  // This is value type.
 {
@@ -218,4 +218,4 @@ AlbaNumber::ConfigurationDetails getDefaultConfigurationDetails<AlbaNumber::Conf
 
 }  // namespace alba
 
-// NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
+// NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions,cppcoreguidelines-pro-type-union-access)

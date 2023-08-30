@@ -83,7 +83,7 @@ int getMaxEnergy(
     return savedEnergy;
 }
 
-void runTestCase(int const testCaseNumber)
+void runTestCase(int const)
 {
     my_cin >> numberOfStones;
 
@@ -124,7 +124,7 @@ int getMaxEnergy(int const index, int const elapsedTime) {
     return 0;
 }
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     my_cin >> numberOfStones;
 
     int totalConsumptionTime = 0;

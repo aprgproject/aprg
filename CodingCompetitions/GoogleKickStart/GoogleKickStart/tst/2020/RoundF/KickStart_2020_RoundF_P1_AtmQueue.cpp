@@ -27,7 +27,7 @@ namespace KickStart_2020_RoundF_P1_AtmQueue {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int n = 0, x = 0;
     my_cin >> n >> x;
     vector<int> a(n);

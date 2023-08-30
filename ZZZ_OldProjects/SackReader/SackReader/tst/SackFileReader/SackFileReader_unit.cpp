@@ -34,7 +34,7 @@ TEST(SackFileReaderTest, DISABLED_DTechLogDef) {
     EXPECT_EQ("16", details.value);
 }
 
-TEST(SackFileReaderTest, DISABLED_IfAaSysComGw_Defs) {
+TEST(SackFileReaderTest, DISABLED_IfAaSysComGwDefs) {
     Database database;
     SackFileReader sackFileReader(database);
     sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\IfAaSysComGw_Defs.h)");

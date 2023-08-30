@@ -53,7 +53,7 @@ struct UnionFind {
     [[nodiscard]] long long count() const { return num; }
 };
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     long long n = 0, q = 0;
     my_cin >> n >> q;
     vector<long long> ds(n - 1);

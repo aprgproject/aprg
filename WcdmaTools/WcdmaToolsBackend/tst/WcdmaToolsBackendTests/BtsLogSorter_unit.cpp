@@ -24,7 +24,7 @@ TEST_F(BtsLogSorterTest, DISABLED_PerformanceTest) {
         R"(D:\W\ZZZ_Useless_Logs\PR111534\PR(alarm 160 didn't cancel)\Test\sortednew.log)");
 }
 
-TEST_F(BtsLogSorterTest, SyslogsAndSnapshotTest_PrintsAreMerged) {
+TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreMerged) {
     BtsLogSorter btsLogSorter(m_configuration);
     AlbaLocalPathHandler inputPathHandler(
         APRG_DIR
@@ -46,7 +46,7 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotTest_PrintsAreMerged) {
     EXPECT_EQ(3, lines);
 }
 
-TEST_F(BtsLogSorterTest, SyslogsAndSnapshotTest_PrintsAreMerged2) {
+TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreMerged2) {
     BtsLogSorter btsLogSorter(m_configuration);
     AlbaLocalPathHandler inputPathHandler(
         APRG_DIR
@@ -68,7 +68,7 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotTest_PrintsAreMerged2) {
     EXPECT_EQ(60, lines);
 }
 
-TEST_F(BtsLogSorterTest, SyslogsAndSnapshotTest_PrintsAreOrderedBasedOnBtsTime) {
+TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreOrderedBasedOnBtsTime) {
     BtsLogSorter btsLogSorter(m_configuration);
     AlbaLocalPathHandler inputPathHandler(
         APRG_DIR
@@ -90,7 +90,7 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotTest_PrintsAreOrderedBasedOnBtsTime) 
     EXPECT_EQ(5, lines);
 }
 
-TEST_F(BtsLogSorterTest, SyslogsAndSnapshotTest_PrintsAreFiltered) {
+TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreFiltered) {
     m_configuration.m_isFilterGrepOn = true;
     m_configuration.m_filterGrepCondition = "[TCOM/NC]";
     BtsLogSorter btsLogSorter(m_configuration);

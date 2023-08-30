@@ -23,6 +23,7 @@ void tcomSetSfn(unsigned int sfn) { MY_SFN = sfn; }
 
 using namespace std;
 
+// NOLINTBEGIN(cppcoreguidelines-pro-type-union-access)
 namespace DMeas {
 
 TimerStack::TimerIndex TimerStack::s_timerCounter = 0;
@@ -542,7 +543,7 @@ TimerData* TimerStack::timersFindNbccRecovery(TNodeBCommunicationContextId nbccI
     return nullptr;
 }
 
-void TimerStack::dump(TimerIndex begin, TimerIndex end) {
+void TimerStack::dump(TimerIndex begin, TimerIndex) {
     MTPRINTF(
         "TimersTable[id]: timeVal |    type    | value  ( timeCounter = %u timeOffsetToSFN = %u DMeas::currSfn = %u "
         ")\n",
@@ -605,3 +606,5 @@ void TimerStack::clear(void) {
 #endif /* MEASURE_DEDICATED_MT_TEST */
 
 }  // namespace DMeas
+
+// NOLINTEND(cppcoreguidelines-pro-type-union-access)

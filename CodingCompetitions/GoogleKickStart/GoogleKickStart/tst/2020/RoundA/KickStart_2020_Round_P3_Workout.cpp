@@ -27,7 +27,7 @@ namespace KickStart_2020_Round_P3_Workout {
 
 int n, k, a[100000];
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     my_cin >> n >> k;
     for (int i = 0; i < n; ++i) {
         my_cin >> a[i];

@@ -247,8 +247,7 @@ void setInputOutput(QuineMcCluskeyForTest& quineMcCluskey, MintermForTest const 
 
 }  // namespace
 
-TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFileWorks_HasZeroInDigitForByte)  //
-{
+TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFileWorksWithInputHasZeroInDigitForByte) {
     QuineMcCluskeyForTest quineMcCluskey;
     AlbaLocalPathHandler pathOfNewAlgorithm(
         APRG_DIR R"(\AprgBooleanAlgebra\FilesForTests\QuineMcKluskeyTest\HasZeroInDigitForByte.txt)");
@@ -337,7 +336,7 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFileWorks_HasZeroInDigitForBy
     cout << quineMcCluskey.getOutputTable(bestPrimeImplicants);
 }
 
-TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_LogarithmBase2ForByte) {
+TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFileWithInputHasLogarithmBase2ForByte) {
     QuineMcCluskeyForTest qm0;
     QuineMcCluskeyForTest qm1;
     QuineMcCluskeyForTest qm2;
@@ -375,7 +374,7 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_LogarithmBase2ForByte) {
     cout << qm2.getOutputTable(primeImplicants2);
 }
 
-TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_ZeroesStartingFromMsb) {
+TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFileWithInputHasZeroesStartingFromMsb) {
     QuineMcCluskeyForTest qm0;
     QuineMcCluskeyForTest qm1;
     QuineMcCluskeyForTest qm2;

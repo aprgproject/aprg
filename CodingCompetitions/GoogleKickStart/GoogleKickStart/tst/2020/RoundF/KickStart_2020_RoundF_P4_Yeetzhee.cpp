@@ -99,7 +99,7 @@ double ans(vector<int> a, int tot) {
     return mp[a] = vr;
 }
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     mp.clear();
     my_cin >> n >> m;
     iv = 1 / static_cast<double>(m);

@@ -221,13 +221,13 @@ double AprgGraph::getLowestInterval() const { return min(1 / m_magnification.get
 Point AprgGraph::convertBitmapXYToRealPoint(BitmapXY const& bitmapPosition) const {
     double xPosition = convertBitmapXCoordinateToRealXCoordinate(bitmapPosition.getX());
     double yPosition = convertBitmapYCoordinateToRealYCoordinate(bitmapPosition.getY());
-    return Point(xPosition, yPosition);
+    return {xPosition, yPosition};
 }
 
 Point AprgGraph::convertRealPointToBitmapPoint(Point const& realPosition) const {
     auto xPosition = static_cast<double>(convertRealXCoordinateToBitmapXCoordinate(realPosition.getX()));
     auto yPosition = static_cast<double>(convertRealYCoordinateToBitmapYCoordinate(realPosition.getY()));
-    return Point(xPosition, yPosition);
+    return {xPosition, yPosition};
 }
 
 int AprgGraph::convertRealXCoordinateToBitmapXCoordinate(double const xCoordinate) const {

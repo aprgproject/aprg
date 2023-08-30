@@ -25,7 +25,7 @@ namespace KickStart_2021_RoundF_P2_Festival {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     // my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
 }
 

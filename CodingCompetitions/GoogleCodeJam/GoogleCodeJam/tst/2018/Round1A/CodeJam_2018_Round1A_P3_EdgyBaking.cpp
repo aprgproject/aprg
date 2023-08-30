@@ -25,7 +25,7 @@ namespace CodeJam_2018_Round1A_P3_EdgyBaking {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     // my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
 }
 

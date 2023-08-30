@@ -26,7 +26,7 @@ namespace KickStart_2020_RoundB_P2_BusRoutes {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int N = 0;
     my_cin >> N;
     int64_t D = 0;

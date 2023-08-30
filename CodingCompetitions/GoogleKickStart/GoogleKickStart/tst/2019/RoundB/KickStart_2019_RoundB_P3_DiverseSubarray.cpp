@@ -266,7 +266,7 @@ int getDeltaByAddingType(int const type) {
     return delta;
 }
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     my_cin >> numberOfTrinkets >> allowableCountForAType;
     vector<int> typesOfTrinkets(numberOfTrinkets, 0);
     for (int i = 0; i < numberOfTrinkets; ++i) {
@@ -352,7 +352,7 @@ void removeTypeToAllowableCount(int & allowableCount, int const type)
     }
 }
 
-void runTestCase(int const testCaseNumber)
+void runTestCase(int const)
 {
     my_cin >> numberOfTrinkets >> allowableCountForAType;
 

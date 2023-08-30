@@ -25,7 +25,7 @@ namespace CodeJam_2020_Round1A_P1_PatternMatching {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     // my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
 }
 

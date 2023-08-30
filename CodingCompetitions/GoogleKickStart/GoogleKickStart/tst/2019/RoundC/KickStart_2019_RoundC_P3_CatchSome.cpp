@@ -36,7 +36,7 @@ struct ColorDetail {
 };
 using ColorDetails = vector<ColorDetail>;
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int numberOfDogs = 0, targetNumberOfObserves = 0;
     my_cin >> numberOfDogs >> targetNumberOfObserves;
     vector<int> positionsOfDogs(numberOfDogs);

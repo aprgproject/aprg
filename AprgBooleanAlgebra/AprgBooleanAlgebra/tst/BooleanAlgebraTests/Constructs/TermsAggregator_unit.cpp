@@ -39,7 +39,7 @@ TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithBinaryOperation) {
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
-TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithDifferentOperationLevels_AndOperationPrioritizedBeforeOrOperation) {
+TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithDifferentOperationLevelsAndOperationPrioritizedBeforeOrOperation) {
     TermsAggregator aggregator({"a", "|", "b", "&", "c", "&", "d", "|", "e"});
 
     aggregator.buildExpressionFromTerms();

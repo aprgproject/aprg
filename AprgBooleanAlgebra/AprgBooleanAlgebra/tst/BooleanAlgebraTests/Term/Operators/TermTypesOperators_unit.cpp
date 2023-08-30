@@ -7,232 +7,232 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
-TEST(TermTypesOperatorsTest, UnaryNotOperator_NotConstantOperationWorks) {
+TEST(TermTypesOperatorsTest, UnaryNotOperatorNotConstantOperationWorks) {
     Term term(~Constant(false));
 
     EXPECT_EQ(Term(true), term);
 }
 
-TEST(TermTypesOperatorsTest, UnaryNotOperator_NotVariableTermOperationWorks) {
+TEST(TermTypesOperatorsTest, UnaryNotOperatorNotVariableTermOperationWorks) {
     Term term(~VariableTerm("x"));
 
     EXPECT_EQ(Term("x'"), term);
 }
 
-TEST(TermTypesOperatorsTest, UnaryNotOperator_NotExpressionOperationWorks) {
+TEST(TermTypesOperatorsTest, UnaryNotOperatorNotExpressionOperationWorks) {
     Term term(~createExpressionIfPossible({false}));
 
     EXPECT_EQ(Term(createExpressionIfPossible({true})), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryAndOperator_EmptyAndConstantOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryAndOperatorEmptyAndConstantOperationWorks) {
     Term term(Term() & Constant(true));
 
     EXPECT_EQ(Term(true), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryAndOperator_ConstantAndEmptyOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryAndOperatorConstantAndEmptyOperationWorks) {
     Term term(Constant(true) & Term());
 
     EXPECT_EQ(Term(true), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryAndOperator_ConstantAndConstantOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryAndOperatorConstantAndConstantOperationWorks) {
     Term term(Constant(true) & Constant(false));
 
     EXPECT_EQ(Term(false), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryAndOperator_ConstantAndVariableTermOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryAndOperatorConstantAndVariableTermOperationWorks) {
     Term term(Constant(true) & VariableTerm("x"));
 
     Term termToExpect("x");
     EXPECT_EQ(termToExpect, term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryAndOperator_ConstantAndExpressionOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryAndOperatorConstantAndExpressionOperationWorks) {
     Term term(Constant(true) & createExpressionIfPossible({false}));
 
     Term termToExpect(false);
     EXPECT_EQ(Term(termToExpect), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryAndOperator_ConstantAndTermOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryAndOperatorConstantAndTermOperationWorks) {
     Term term(Constant(true) & Term(false));
 
     EXPECT_EQ(Term(false), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryAndOperator_VariableTermAndConstantOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryAndOperatorVariableTermAndConstantOperationWorks) {
     Term term(VariableTerm("x") & Constant(true));
 
     Term termToExpect("x");
     EXPECT_EQ(termToExpect, term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryAndOperator_VariableTermAndVariableTermOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryAndOperatorVariableTermAndVariableTermOperationWorks) {
     Term term(VariableTerm("x") & VariableTerm("y"));
 
     Term termToExpect(createExpressionIfPossible({"x", "&", "y"}));
     EXPECT_EQ(termToExpect, term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryAndOperator_VariableTermAndExpressionOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryAndOperatorVariableTermAndExpressionOperationWorks) {
     Term term(VariableTerm("x") & createExpressionIfPossible({true}));
 
     Term termToExpect("x");
     EXPECT_EQ(Term(termToExpect), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryAndOperator_VariableTermAndTermOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryAndOperatorVariableTermAndTermOperationWorks) {
     Term term(VariableTerm("x") & Term(true));
 
     Term termToExpect("x");
     EXPECT_EQ(termToExpect, term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryAndOperator_ExpressionAndConstantOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryAndOperatorExpressionAndConstantOperationWorks) {
     Term term(createExpressionIfPossible({false}) & Constant(true));
 
     Term termToExpect(false);
     EXPECT_EQ(Term(termToExpect), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryAndOperator_ExpressionAndVariableTermOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryAndOperatorExpressionAndVariableTermOperationWorks) {
     Term term(createExpressionIfPossible({true}) & VariableTerm("x"));
 
     Term termToExpect("x");
     EXPECT_EQ(Term(termToExpect), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryAndOperator_ExpressionAndTermOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryAndOperatorExpressionAndTermOperationWorks) {
     Term term(createExpressionIfPossible({false}) & Term(true));
 
     Term termToExpect(false);
     EXPECT_EQ(Term(termToExpect), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryAndOperator_TermAndConstantOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryAndOperatorTermAndConstantOperationWorks) {
     Term term(Term(true) & Constant(false));
 
     EXPECT_EQ(Term(false), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryAndOperator_TermAndVariableTermOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryAndOperatorTermAndVariableTermOperationWorks) {
     Term term(Term(true) & VariableTerm("x"));
 
     Term termToExpect("x");
     EXPECT_EQ(termToExpect, term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryAndOperator_TermAndExpressionOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryAndOperatorTermAndExpressionOperationWorks) {
     Term term(Term(true) & createExpressionIfPossible({false}));
 
     Term termToExpect(false);
     EXPECT_EQ(Term(termToExpect), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryOrOperator_EmptyOrConstantOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryOrOperatorEmptyOrConstantOperationWorks) {
     Term term(Term() | Constant(false));
 
     EXPECT_EQ(Term(false), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryOrOperator_ConstantOrEmptyOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryOrOperatorConstantOrEmptyOperationWorks) {
     Term term(Constant(false) | Term());
 
     EXPECT_EQ(Term(false), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryOrOperator_ConstantOrConstantOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryOrOperatorConstantOrConstantOperationWorks) {
     Term term(Constant(true) | Constant(false));
 
     EXPECT_EQ(Term(true), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryOrOperator_ConstantOrVariableTermOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryOrOperatorConstantOrVariableTermOperationWorks) {
     Term term(Constant(false) | VariableTerm("x"));
 
     Term termToExpect("x");
     EXPECT_EQ(termToExpect, term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryOrOperator_ConstantOrExpressionOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryOrOperatorConstantOrExpressionOperationWorks) {
     Term term(Constant(true) | createExpressionIfPossible({false}));
 
     Term termToExpect(true);
     EXPECT_EQ(Term(termToExpect), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryOrOperator_ConstantOrTermOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryOrOperatorConstantOrTermOperationWorks) {
     Term term(Constant(true) | Term(false));
 
     EXPECT_EQ(Term(true), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryOrOperator_VariableTermOrConstantOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryOrOperatorVariableTermOrConstantOperationWorks) {
     Term term(VariableTerm("x") | Constant(false));
 
     Term termToExpect("x");
     EXPECT_EQ(termToExpect, term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryOrOperator_VariableTermOrVariableTermOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryOrOperatorVariableTermOrVariableTermOperationWorks) {
     Term term(VariableTerm("x") | VariableTerm("y"));
 
     Term termToExpect(createExpressionIfPossible({"x", "|", "y"}));
     EXPECT_EQ(termToExpect, term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryOrOperator_VariableTermOrExpressionOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryOrOperatorVariableTermOrExpressionOperationWorks) {
     Term term(VariableTerm("x") | createExpressionIfPossible({false}));
 
     Term termToExpect("x");
     EXPECT_EQ(Term(termToExpect), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryOrOperator_VariableTermOrTermOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryOrOperatorVariableTermOrTermOperationWorks) {
     Term term(VariableTerm("x") | Term(false));
 
     Term termToExpect("x");
     EXPECT_EQ(termToExpect, term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryOrOperator_ExpressionOrConstantOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryOrOperatorExpressionOrConstantOperationWorks) {
     Term term(createExpressionIfPossible({false}) | Constant(true));
 
     Term termToExpect(true);
     EXPECT_EQ(Term(termToExpect), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryOrOperator_ExpressionOrVariableTermOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryOrOperatorExpressionOrVariableTermOperationWorks) {
     Term term(createExpressionIfPossible({false}) | VariableTerm("x"));
 
     Term termToExpect("x");
     EXPECT_EQ(Term(termToExpect), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryOrOperator_ExpressionOrTermOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryOrOperatorExpressionOrTermOperationWorks) {
     Term term(createExpressionIfPossible({false}) | Term(true));
 
     Term termToExpect(true);
     EXPECT_EQ(Term(termToExpect), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryOrOperator_TermOrConstantOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryOrOperatorTermOrConstantOperationWorks) {
     Term term(Term(true) | Constant(false));
 
     EXPECT_EQ(Term(true), term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryOrOperator_TermOrVariableTermOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryOrOperatorTermOrVariableTermOperationWorks) {
     Term term(Term(false) | VariableTerm("x"));
 
     Term termToExpect("x");
     EXPECT_EQ(termToExpect, term);
 }
 
-TEST(TermTypesOperatorsTest, BinaryOrOperator_TermOrExpressionOperationWorks) {
+TEST(TermTypesOperatorsTest, BinaryOrOperatorTermOrExpressionOperationWorks) {
     Term term(Term(true) | createExpressionIfPossible({false}));
 
     Term termToExpect(true);

@@ -47,7 +47,7 @@ TEST(ProbabilityExampleTest, DrawCardExampleWorks) {
         getProbability(1U, 1U) * getProbability(3U, 51U) * getProbability(2U, 50U));
 }
 
-TEST(ProbabilityExampleTest, BallsAndBoxesExample_ExpectedNumberOfBallsInABox) {
+TEST(ProbabilityExampleTest, BallsAndBoxesWorksWithExpectedNumberOfBallsInABox) {
     // How many balls fall in a given box?
     // The number of balls that fall in given bin follows the binomial distribution.
     // The expected number of balls that fall in a box is numberOfBalls/numberOfBoxes
@@ -57,7 +57,7 @@ TEST(ProbabilityExampleTest, BallsAndBoxesExample_ExpectedNumberOfBallsInABox) {
     EXPECT_EQ(AlbaNumber::createFraction(1, 5), AlbaNumber::createFraction(numberOfBalls, numberOfBoxes));
 }
 
-TEST(ProbabilityExampleTest, BallsAndBoxesExample_ProbabilityOfOneBall) {
+TEST(ProbabilityExampleTest, BallsAndBoxesWorksWithProbabilityOfOneBall) {
     // How many balls must we toss on the average until a given box contains a ball?
 
     auto numberOfBoxes = 2;
@@ -65,14 +65,14 @@ TEST(ProbabilityExampleTest, BallsAndBoxesExample_ProbabilityOfOneBall) {
     EXPECT_EQ(AlbaNumber::createFraction(1, 2), getProbabilityOnGeometricDistribution(probabilityOfASingleEvent, 1));
 }
 
-TEST(ProbabilityExampleTest, BallsAndBoxesExample_ProbabilityOfEveryBinHasOneBall) {
+TEST(ProbabilityExampleTest, BallsAndBoxesWorksWithProbabilityOfEveryBinHasOneBall) {
     // How many balls must we toss until every bin contains at least one ball?
 
     // E[n] = E[ summation from 1 to b of i (ni0 ]
     // E[n] = b(ln b + O(1))
 }
 
-TEST(ProbabilityExampleTest, BallsAndBoxesExample_ProbabilityOfSingleEmptyBoxes) {
+TEST(ProbabilityExampleTest, BallsAndBoxesWorksWithProbabilityOfSingleEmptyBoxes) {
     // Let us now consider a problem where n balls are randomly placed in n boxes, and our task is to calculate the
     // probability of single empty boxes. Assume that each ball has an uniform probability to be placed in any of the
     // boxes.
@@ -98,7 +98,7 @@ TEST(ProbabilityExampleTest, BallsAndBoxesExample_ProbabilityOfSingleEmptyBoxes)
     EXPECT_EQ(AlbaNumber::createFraction(2, 3), calculatedProbability);
 }
 
-TEST(ProbabilityExampleTest, StreaksExample_LongestStreak) {
+TEST(ProbabilityExampleTest, StreaksWorksWithLongestStreak) {
     // Suppose you flip a fair coin n times.
     // What is the longest streak of consecutive heads that you expect to see?
     // Probability that all k flips are head is P(AllHeads) = 1/(2^k).
@@ -231,7 +231,7 @@ TEST(ProbabilityExampleTest, BinomialDistributionExpectedValueExampleWorks) {
     EXPECT_EQ(AlbaNumber::createFraction(5, 3U), getExpectedValueInBinomialDistribution(getProbability(1U, 6U), 10U));
 }
 
-TEST(ProbabilityExampleTest, GeometricDistributionExpectedValueWorks_OnExample1) {
+TEST(ProbabilityExampleTest, GeometricDistributionExpectedValueWorksOnExample1) {
     // In a geometric distribution, the probability that an attempt succeeds is p, and we continue until the first
     // success happens.
 
@@ -242,7 +242,7 @@ TEST(ProbabilityExampleTest, GeometricDistributionExpectedValueWorks_OnExample1)
     EXPECT_EQ(AlbaNumber(6), getExpectedValueInGeometricDistribution(getProbability(1U, 6U)));
 }
 
-TEST(ProbabilityExampleTest, GeometricDistributionExpectedValueWorks_OnBirthExample) {
+TEST(ProbabilityExampleTest, GeometricDistributionExpectedValueWorksOnBirthExample) {
     // In a country, all families want a boy.
     // They keep having babies till a boy is born.
     // What is the expected ratio of boys and girls in the country?

@@ -30,7 +30,7 @@ namespace KickStart_2020_RoundB_P4_WanderingRobot {
 
 vector<long double> logFact(static_cast<int>(3.1e5));
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int X = 0, Y = 0;
     my_cin >> X >> Y;
     int Xlo = 0, Xhi = 0, Ylo = 0, Yhi = 0;

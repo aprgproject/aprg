@@ -27,7 +27,7 @@ namespace KickStart_2020_Round_P1_Allocation {
 #endif
 
 int n, b, a[100000];
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     my_cin >> n >> b;
     for (int i = 0; i < n; ++i) {
         my_cin >> a[i];

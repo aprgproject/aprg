@@ -18,7 +18,7 @@ std::string CNsapHelper::convertNsapToIpv4(TTransportLayerAddress const& nsap) {
         buffer, MAX_IPV4_STRING_LENGTH, "%hhu.%hhu.%hhu.%hhu", getIpByte(nsap, 0), getIpByte(nsap, 1),
         getIpByte(nsap, 2), getIpByte(nsap, 3));
 
-    return std::string(buffer);
+    return {buffer};
 }
 
 std::string CNsapHelper::convertNsapToIpv6(TTransportLayerAddress const& nsap) {
@@ -33,7 +33,7 @@ std::string CNsapHelper::convertNsapToIpv6(TTransportLayerAddress const& nsap) {
         getIpByte(nsap, 10), getIpByte(nsap, 11), getIpByte(nsap, 12), getIpByte(nsap, 13), getIpByte(nsap, 14),
         getIpByte(nsap, 15));
 
-    return std::string(buffer);
+    return {buffer};
 }
 
 void CNsapHelper::convertNsapToIPv4(TTransportLayerAddress const& nsap, u8* const destination) {
@@ -70,7 +70,7 @@ bool CNsapHelper::isIpv6(TTransportLayerAddress const& nsap) { return nsap[ICP_O
 
 std::string CNsapHelper::convertNsapToIp(TTransportLayerAddress const& nsap) {
     if (nsap[AFI_OFFSET] != AUTHORITY_FORMAT_IDENTIFIER) {
-        return std::string("");
+        return {};
     }
     return isIpv6(nsap) ? convertNsapToIpv6(nsap) : convertNsapToIpv4(nsap);
 }

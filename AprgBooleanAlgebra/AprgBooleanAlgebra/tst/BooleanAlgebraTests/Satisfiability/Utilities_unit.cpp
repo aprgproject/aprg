@@ -51,7 +51,8 @@ TEST(SatisfiabilityUtilitiesTest, GetSatisfiabilityTermsWorksWithExpression) {
 }
 
 TEST(
-    SatisfiabilityUtilitiesTest, GetSatisfiabilityTermsWorksWithExpression_ResultsAreEmptyWithConstantInAndExpression) {
+    SatisfiabilityUtilitiesTest,
+    GetSatisfiabilityTermsWorksWithExpressionAndResultsAreEmptyWithConstantInAndExpression) {
     Expression subExpression1(createExpressionIfPossible({"b", "|", "c"}));
     Expression subExpression2(createExpressionIfPossible({"d", "|", "e", "|", "f"}));
     Expression expressionToTest(OperatorLevel::And, {Term(true), Term(subExpression1), Term(subExpression2)});
@@ -61,7 +62,9 @@ TEST(
     EXPECT_TRUE(satTermsToVerify.empty());
 }
 
-TEST(SatisfiabilityUtilitiesTest, GetSatisfiabilityTermsWorksWithExpression_ResultsAreEmptyWithConstantInOrExpression) {
+TEST(
+    SatisfiabilityUtilitiesTest,
+    GetSatisfiabilityTermsWorksWithExpressionAndResultsAreEmptyWithConstantInOrExpression) {
     Expression subExpression1(createExpressionIfPossible({"b", "|", "c"}));
     Expression subExpression2(createExpressionIfPossible({true, "|", "e", "|", "f"}));
     Expression expressionToTest(OperatorLevel::And, {Term("a"), Term(subExpression1), Term(subExpression2)});

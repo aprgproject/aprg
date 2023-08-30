@@ -178,6 +178,7 @@ jobs:
           echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
           echo "matrix.project: [${{ matrix.project }}]"
           echo "matrix.configurationName: [${{ matrix.configurationName }}]"
+          echo "buildType: [${{ env.buildType }}]"
           
       - name: Checkout code
         uses: actions/checkout@v3

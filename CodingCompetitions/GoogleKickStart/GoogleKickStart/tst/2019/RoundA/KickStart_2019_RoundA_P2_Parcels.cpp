@@ -1,11 +1,11 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2019_RoundA_P2_Parcels.hpp"
 
 #include <Fake/FakeNames.hpp>
 
-//#include <Common/Math/Matrix/AlbaMatrix.hpp>
+// #include <Common/Math/Matrix/AlbaMatrix.hpp>
 #endif
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
@@ -42,7 +42,7 @@ inline int isValid(int const x, int const y) { return static_cast<int>(x >= 0 &&
 inline int getIndex(int const x, int const y) { return (y * columns) + x; }
 
 inline Coordinate rotateBy45(Coordinate const original) {
-    return Coordinate(original.first + original.second, original.second - original.first);
+    return {original.first + original.second, original.second - original.first};
 }
 
 void fillupDistanceGridViaBfs(vector<int>& distanceGrid, Coordinates const& deliveryOffices) {
@@ -114,7 +114,7 @@ bool doAllDistancesFitsOnTheDistanceLimit(vector<int> const& distanceGrid, int c
     return false;
 }
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     my_cin >> rows >> columns;
     Coordinates deliveryOffices;
     for (int y = 0; y < rows; ++y) {

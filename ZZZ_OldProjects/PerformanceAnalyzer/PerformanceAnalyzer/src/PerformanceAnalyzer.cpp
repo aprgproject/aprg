@@ -412,7 +412,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
         optional<BtsLogTime> tupcTbRegisterResponseTimeOptional;
         optional<BtsLogTime> rlhTbRegisterResponseTimeOptional;
         optional<BtsLogTime> rlhRlSetupResponseOptional;
-        [[nodiscard]] bool isComplete(int nbccId) const {
+        [[nodiscard]] bool isComplete(int) const {
             return rlhRlSetupRequestOptional && rlhTbRegisterTimeOptional && tupcTbRegisterTimeOptional &&
                    tupcFirstErqSentOptional && tupcLastEcfReceivedOptional &&
                    tupcFirstTransportConnectionSetupOptional && tupcLastTransportConnectionSetupResponseOptional &&
@@ -648,7 +648,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
         optional<BtsLogTime> tupcLastEcfReceivedOptional;
         optional<BtsLogTime> tupcFirstTransportConnectionSetupOptional;
         optional<BtsLogTime> rlhRlSetupResponseOptional;
-        [[nodiscard]] bool isComplete(int nbccId) const {
+        [[nodiscard]] bool isComplete(int) const {
             return rlhRlSetupRequestOptional && tupcTbRegisterTimeOptional && tupcFirstErqSentOptional &&
                    tupcLastEcfReceivedOptional && tupcFirstTransportConnectionSetupOptional &&
                    rlhRlSetupResponseOptional;

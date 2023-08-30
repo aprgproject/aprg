@@ -146,7 +146,7 @@ AlbaDateTime RevisionEditor::getDateTime(string const& date) {
     index = date.find(":", index) + 1;
     int second = convertStringToNumber<int>(getStringBeforeThisString(date, "+", index));
 
-    return AlbaDateTime(year, month, day, hour, minute, second, 0U);
+    return {year, month, day, hour, minute, second, 0U};
 }
 
 RevisionEditor::DaysInterval RevisionEditor::createDaysInterval(

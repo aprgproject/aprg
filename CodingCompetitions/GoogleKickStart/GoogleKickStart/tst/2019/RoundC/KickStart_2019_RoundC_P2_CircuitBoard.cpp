@@ -132,7 +132,7 @@ RangeQueryWithSelector<vector<int>>::SelectorFunction maximumSelectorFunction = 
 
 int getIndex(int const x, int const y) { return y * numberOfColumns + x; }
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int maxAllowableThickness = 0;
     my_cin >> numberOfRows >> numberOfColumns >> maxAllowableThickness;
     vector<int> thicknessPerCell(numberOfRows * numberOfColumns);
@@ -191,7 +191,7 @@ int getIndexFromMaxLength(int const x, int const y, int const z)
     return z*MAX_LENGTH*MAX_LENGTH + y*MAX_LENGTH + x;
 }
 
-void runTestCase(int const testCaseNumber)
+void runTestCase(int const)
 {
     int maxAllowableThickness;
     my_cin >> numberOfRows >> numberOfColumns >> maxAllowableThickness;

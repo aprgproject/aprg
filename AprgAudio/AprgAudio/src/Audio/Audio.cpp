@@ -2,6 +2,7 @@
 
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
+#include <array>
 #include <fstream>
 #include <iterator>
 #include <unordered_map>
@@ -494,14 +495,9 @@ bool Audio<T>::saveToWaveFile(string const& filePath) {
             } else if (bitDepth == 24) {
                 auto sampleAsIntAgain = (int32_t)(samples[channel][i] * (T)8388608.);
 
-                uint8_t bytes[3];
-                bytes[2] = static_cast<uint8_t>(sampleAsIntAgain >> 16) & 0xFF;
-                bytes[1] = static_cast<uint8_t>(sampleAsIntAgain >> 8) & 0xFF;
-                bytes[0] = static_cast<uint8_t>(sampleAsIntAgain) & 0xFF;
-
-                fileDataBytes.push_back(bytes[0]);
-                fileDataBytes.push_back(bytes[1]);
-                fileDataBytes.push_back(bytes[2]);
+                fileDataBytes.push_back(static_cast<uint8_t>(sampleAsIntAgain >> 16) & 0xFF);
+                fileDataBytes.push_back(static_cast<uint8_t>(sampleAsIntAgain >> 8) & 0xFF);
+                fileDataBytes.push_back(static_cast<uint8_t>(sampleAsIntAgain) & 0xFF);
             } else {
                 assert(false && "Trying to write a file with unsupported bit depth");
                 return false;
@@ -638,7 +634,7 @@ void Audio<T>::addInt32ToFileData(vector<uint8_t>& fileDataBytes, int32_t i, End
 
 template <class T>
 void Audio<T>::addInt16ToFileData(vector<uint8_t>& fileDataBytes, int16_t i, Endianness endianness) {
-    uint8_t bytes[2];
+    array<uint8_t, 2> bytes{};
 
     if (endianness == Endianness::LittleEndian) {
         bytes[1] = (i >> 8) & 0xFF;

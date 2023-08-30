@@ -288,7 +288,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksWithOuterAndAndInnerOr) {
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
 
-TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOrOperation_WithDefaultConfiguration) {
+TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOrOperationWithDefaultConfiguration) {
     Expression subExpression1(createExpressionIfPossible({"a", "&", "b"}));
     Expression subExpression2(createExpressionIfPossible({subExpression1, "|", "c"}));
     Expression subExpression3(createExpressionIfPossible({subExpression2, "&", "d"}));
@@ -303,7 +303,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOr
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
 
-TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOrOperation_WithOuterOrAndInnerAnd) {
+TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOrOperationWithOuterOrAndInnerAnd) {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
         SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyWithOuterOrAndInnerAnd = true;
@@ -324,7 +324,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOr
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
 
-TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOrOperation_WithOuterAndAndInnerOr) {
+TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOrOperationWithOuterAndAndInnerOr) {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
         SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyWithOuterAndAndInnerOr = true;
@@ -345,7 +345,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOr
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
 
-TEST(SimplificationOfExpressionTest, SimplifyWorksByRemovingNeededTerms_WithOuterOrAndInnerAnd) {
+TEST(SimplificationOfExpressionTest, SimplifyWorksByRemovingNeededTermsWithOuterOrAndInnerAnd) {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
         SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyWithOuterOrAndInnerAnd = true;
@@ -363,7 +363,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByRemovingNeededTerms_WithOute
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
 
-TEST(SimplificationOfExpressionTest, SimplifyWorksByRemovingNeededTerms_WithOuterAndAndInnerOr) {
+TEST(SimplificationOfExpressionTest, SimplifyWorksByRemovingNeededTermsWithOuterAndAndInnerOr) {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
         SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyWithOuterAndAndInnerOr = true;
@@ -381,7 +381,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByRemovingNeededTerms_WithOute
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
 
-TEST(SimplificationOfExpressionTest, SimplifyWorksWithCombininingTermsByCheckingTheCommonFactor_Pattern1) {
+TEST(SimplificationOfExpressionTest, SimplifyWorksWithCombininingTermsByCheckingTheCommonFactorUsingPattern1) {
     Expression subExpression1(createExpressionIfPossible({"x", "&", "y"}));
     Expression subExpression2(createExpressionIfPossible({"x", "&", "y'"}));
     Expression expressionToTest(createExpressionIfPossible({subExpression1, "|", subExpression2}));
@@ -394,7 +394,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksWithCombininingTermsByChecking
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
 
-TEST(SimplificationOfExpressionTest, SimplifyWorksWithCombininingTermsByCheckingTheCommonFactor_Pattern2) {
+TEST(SimplificationOfExpressionTest, SimplifyWorksWithCombininingTermsByCheckingTheCommonFactorUsingPattern2) {
     Expression subExpression1(createExpressionIfPossible({"x", "|", "y"}));
     Expression subExpression2(createExpressionIfPossible({"x", "|", "y'"}));
     Expression expressionToTest(createExpressionIfPossible({subExpression1, "&", subExpression2}));
@@ -407,7 +407,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksWithCombininingTermsByChecking
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
 
-TEST(SimplificationOfExpressionTest, SimplifyWorksWithCombininingTermsByCheckingTheCommonFactor_Pattern3) {
+TEST(SimplificationOfExpressionTest, SimplifyWorksWithCombininingTermsByCheckingTheCommonFactorUsingPattern3) {
     Expression subExpression1(createExpressionIfPossible({"x", "&", "y"}));
     Expression expressionToTest(createExpressionIfPossible({"x", "|", subExpression1}));
     SimplificationOfExpression simplification(expressionToTest);
@@ -419,7 +419,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksWithCombininingTermsByChecking
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
 
-TEST(SimplificationOfExpressionTest, SimplifyWorksWithCombininingTermsByCheckingTheCommonFactor_Pattern4) {
+TEST(SimplificationOfExpressionTest, SimplifyWorksWithCombininingTermsByCheckingTheCommonFactorUsingPattern4) {
     Expression subExpression1(createExpressionIfPossible({"x", "|", "y"}));
     Expression expressionToTest(createExpressionIfPossible({"x", "&", subExpression1}));
     SimplificationOfExpression simplification(expressionToTest);

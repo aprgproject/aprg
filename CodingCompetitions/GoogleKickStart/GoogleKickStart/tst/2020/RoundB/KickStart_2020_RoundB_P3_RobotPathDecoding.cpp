@@ -29,7 +29,7 @@ namespace KickStart_2020_RoundB_P3_RobotPathDecoding {
 
 using ll = long long;
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     string s;
     my_cin >> s;
     ll mod = 1e9;

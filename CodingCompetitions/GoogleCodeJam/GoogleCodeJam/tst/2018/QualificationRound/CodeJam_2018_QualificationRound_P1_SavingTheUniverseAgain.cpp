@@ -25,7 +25,7 @@ namespace CodeJam_2018_QualificationRound_P1_SavingTheUniverseAgain {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     // my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
 }
 

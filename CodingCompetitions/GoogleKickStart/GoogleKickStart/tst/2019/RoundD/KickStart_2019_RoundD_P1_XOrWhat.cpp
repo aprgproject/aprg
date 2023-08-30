@@ -162,7 +162,7 @@ RangeQuery::ValuesFunction xorARangeOfValues = [](Values::const_iterator itStart
         itStart + 1, itEnd, *itStart, [](Value const value1, Value const value2) { return value1 ^ value2; });
 };
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     /* int numberOfValues, numberOfModifications;
     my_cin >> numberOfValues >> numberOfModifications;
     Values values(numberOfValues);

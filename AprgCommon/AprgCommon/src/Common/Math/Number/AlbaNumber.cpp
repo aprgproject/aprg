@@ -13,6 +13,7 @@ using namespace alba::AlbaMathConstants;
 using namespace alba::mathHelper;
 using namespace std;
 
+// NOLINTBEGIN(cppcoreguidelines-pro-type-union-access)
 namespace alba {
 
 AlbaNumber::ConfigurationDetails AlbaNumber::Configuration::getConfigurationDetailsWithZeroTolerance() {
@@ -679,3 +680,5 @@ AlbaNumber::ConfigurationDetails getDefaultConfigurationDetails<AlbaNumber::Conf
 }
 
 }  // namespace alba
+
+// NOLINTEND(cppcoreguidelines-pro-type-union-access)

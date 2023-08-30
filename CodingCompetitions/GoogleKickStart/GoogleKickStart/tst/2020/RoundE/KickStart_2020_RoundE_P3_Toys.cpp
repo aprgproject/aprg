@@ -29,7 +29,7 @@ namespace KickStart_2020_RoundE_P3_Toys {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int N = 0;
     my_cin >> N;
     vector<int64_t> E(N);

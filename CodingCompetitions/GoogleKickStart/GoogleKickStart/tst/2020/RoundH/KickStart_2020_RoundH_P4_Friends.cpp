@@ -22,7 +22,7 @@ namespace KickStart_2020_RoundH_P4_Friends {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     /* int N, Q;
     my_cin >> N >> Q;
     const int INF = 1e9;

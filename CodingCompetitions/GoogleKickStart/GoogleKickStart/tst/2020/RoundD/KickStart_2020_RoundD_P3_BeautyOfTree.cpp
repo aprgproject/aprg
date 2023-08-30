@@ -27,7 +27,7 @@ namespace KickStart_2020_RoundD_P3_BeautyOfTree {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int N = 0;
     my_cin >> N;
     array<int, 2> A{};

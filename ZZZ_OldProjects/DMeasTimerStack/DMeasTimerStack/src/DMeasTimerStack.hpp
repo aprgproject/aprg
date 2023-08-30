@@ -14,6 +14,7 @@
 
 #include <map>
 
+// NOLINTBEGIN(cppcoreguidelines-pro-type-union-access)
 namespace DMeas {
 
 #define TIMER_INVALID_ITERATOR 0xFFFFFFFF
@@ -125,3 +126,4 @@ private:
     static const int fibs[6];
 };
 }  // namespace DMeas
+// NOLINTEND(cppcoreguidelines-pro-type-union-access)

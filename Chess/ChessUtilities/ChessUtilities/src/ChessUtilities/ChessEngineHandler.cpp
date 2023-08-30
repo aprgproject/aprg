@@ -3,6 +3,7 @@
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Common/Windows/AlbaWindowsHelper.hpp>
 
+#include <array>
 #include <iostream>
 
 using namespace alba::stringHelper;
@@ -89,14 +90,14 @@ void ChessEngineHandler::startMonitoringEngineOutput() {
     std::lock_guard<std::mutex> const lockGuard(m_readMutex);
     DWORD bytesRead;       // bytes read
     DWORD bytesAvailable;  // bytes available
-    char buffer[MAX_BUFFER_SIZE];
+    array<char, MAX_BUFFER_SIZE> buffer{};
     string stringBuffer;
     while (true) {
-        PeekNamedPipe(m_outputStreamOnHandler, buffer, MAX_BUFFER_SIZE, NULL, &bytesAvailable, NULL);
+        PeekNamedPipe(m_outputStreamOnHandler, buffer.data(), MAX_BUFFER_SIZE, NULL, &bytesAvailable, NULL);
         if (bytesAvailable > 0) {
-            ReadFile(m_outputStreamOnHandler, buffer, MAX_BUFFER_SIZE, &bytesRead, NULL);
+            ReadFile(m_outputStreamOnHandler, buffer.data(), MAX_BUFFER_SIZE, &bytesRead, NULL);
             stringBuffer.reserve(stringBuffer.size() + bytesRead);
-            copy(begin(buffer), begin(buffer) + bytesRead, back_inserter(stringBuffer));
+            copy(buffer.begin(), buffer.begin() + bytesRead, back_inserter(stringBuffer));
 
             int currentIndex(0U);
             bool shouldContinue(true);

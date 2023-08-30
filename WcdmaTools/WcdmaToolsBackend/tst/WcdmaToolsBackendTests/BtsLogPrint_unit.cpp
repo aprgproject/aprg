@@ -94,7 +94,7 @@ TEST(BtsLogPrintTest, PrintFromSctLogsIsUsed) {
     EXPECT_EQ(expectedPrint, logPrint.getPrint());
 }
 
-TEST(BtsLogPrintTest, HardwareTypeIsEmptyWhenInvalidHardwareTypesAreDetected_NotThreeLetters) {
+TEST(BtsLogPrintTest, HardwareTypeIsEmptyWhenInvalidHardwareTypesAreDetectedWithNothreeLetters) {
     BtsLogPrint logPrint(
         "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSPJ-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
         "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
@@ -112,7 +112,7 @@ TEST(BtsLogPrintTest, HardwareTypeIsEmptyWhenInvalidHardwareTypesAreDetected_Not
     EXPECT_EQ(expectedPrint, logPrint.getPrint());
 }
 
-TEST(BtsLogPrintTest, HardwareTypeIsEmptyWhenInvalidHardwareTypesAreDetected_NotFourHexDigit) {
+TEST(BtsLogPrintTest, HardwareTypeIsEmptyWhenInvalidHardwareTypesAreDetectedWithNoFourHexDigit) {
     BtsLogPrint logPrint(
         "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSP-120DE-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
         "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "

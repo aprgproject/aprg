@@ -92,7 +92,7 @@ TEST(CombinationsExamplesTest, BoxesAndBallsExampleScenario2Works) {
     EXPECT_EQ(15U, getNumberOfCombinations(6U, 2U));
 }
 
-TEST(CombinationsExamplesTest, BoxesAndBallsExampleScenario3Works_Example1) {
+TEST(CombinationsExamplesTest, BoxesAndBallsExampleScenario3WorksWithExample1) {
     // Scenario 3: Each box may contain at most one ball, and in addition, no two adjacent boxes may both contain a
     // ball.
 
@@ -135,7 +135,7 @@ TEST(CombinationsExamplesTest, BoxesAndBallsExampleScenario3Works_Example1) {
     EXPECT_EQ(6U, getNumberOfCombinations(4U, 2U));
 }
 
-TEST(CombinationsExamplesTest, BoxesAndBallsExampleScenario3Works_Example2) {
+TEST(CombinationsExamplesTest, BoxesAndBallsExampleScenario3WorksWithExample2) {
     // Scenario 3: Each box may contain at most one ball, and in addition, no two adjacent boxes may both contain a
     // ball.
 
@@ -157,7 +157,7 @@ TEST(CombinationsExamplesTest, BoxesAndBallsExampleScenario3Works_Example2) {
     EXPECT_EQ(4U, getNumberOfCombinations(4U, 1U));
 }
 
-TEST(CombinationsExamplesTest, BoxesAndBallsExampleScenario3Works_Example3) {
+TEST(CombinationsExamplesTest, BoxesAndBallsExampleScenario3WorksWithExample3) {
     // Scenario 3: Each box may contain at most one ball, and in addition, no two adjacent boxes may both contain a
     // ball.
 

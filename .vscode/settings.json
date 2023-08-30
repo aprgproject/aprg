@@ -1,6 +1,11 @@
 {
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
-        "queue": "cpp"
+        "queue": "cpp",
+        "vector": "cpp",
+        "fstream": "cpp",
+        "array": "cpp",
+        "xutility": "cpp",
+        "xstring": "cpp"
     }
 }

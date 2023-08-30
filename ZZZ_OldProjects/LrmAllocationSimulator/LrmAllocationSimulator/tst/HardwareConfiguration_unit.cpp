@@ -61,7 +61,7 @@ TEST(HardwareConfigurationTest, OneFspTwoLcgEvenDistribution) {
     EXPECT_TRUE(fspIn1200.isMasterTcom());
 }
 
-TEST(HardwareConfigurationTest, TwoFspOneLcgEvenDistribution_CheckSecondFsp) {
+TEST(HardwareConfigurationTest, TwoFspOneLcgEvenDistributionCheckSecondFsp) {
     HardwareConfiguration hardwareConfiguration;
     hardwareConfiguration.changeConfigurationToTwoFspOneLcgEvenDistribution();
     AddressToDspMap& addressToDspMap(hardwareConfiguration.getAddressToDspMapReference());

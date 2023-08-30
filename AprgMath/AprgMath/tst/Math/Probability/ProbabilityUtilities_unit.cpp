@@ -94,7 +94,7 @@ TEST(ProbabilityUtilitiesTest, GetExpectedValueWorks) {
     EXPECT_EQ(AlbaNumber(3), getExpectedValue(pairsToTest));
 }
 
-TEST(ProbabilityUtilitiesTest, GetExpectedValueWorks_OnExample1) {
+TEST(ProbabilityUtilitiesTest, GetExpectedValueWorksOnExample1) {
     // Problem: Given a fair dice with 6 faces,
     // the dice is thrown n times, find the expected value of the sum of all results.
     // For example, if n = 2, there are total 36 possible outcomes.
@@ -107,7 +107,7 @@ TEST(ProbabilityUtilitiesTest, GetExpectedValueWorks_OnExample1) {
     EXPECT_EQ(AlbaNumber(7), sumOfTwo);
 }
 
-TEST(ProbabilityUtilitiesTest, GetExpectedValueWorks_OnHatCheckProblem) {
+TEST(ProbabilityUtilitiesTest, GetExpectedValueWorksOnHatCheckProblem) {
     // Hat-Check Problem: Let there be a group of n men where every man has one hat.
     // The hats are redistributed and every man gets a random hat back.
     // What is the expected number of men that get their original hat back?

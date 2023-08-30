@@ -50,10 +50,10 @@ BoardValue::Data const& BoardValue::getData() const { return m_data; }
 Coordinate BoardValue::getCorrectCoordinate(
     Board const& board, CoordinateDataType const x, CoordinateDataType const y) {
     if (BoardOrientation::BlackUpWhiteDown == board.getOrientation()) {
-        return Coordinate(x, y);
+        return {x, y};
     }
     if (BoardOrientation::WhiteUpBlackDown == board.getOrientation()) {
-        return Coordinate(7 - x, 7 - y);
+        return {7 - x, 7 - y};
     }
     return {};
 }

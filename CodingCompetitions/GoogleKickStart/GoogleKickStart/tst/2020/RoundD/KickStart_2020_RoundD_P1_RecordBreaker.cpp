@@ -26,7 +26,7 @@ namespace KickStart_2020_RoundD_P1_RecordBreaker {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int N = 0;
     my_cin >> N;
     vector<int> V(N);

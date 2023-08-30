@@ -27,7 +27,7 @@ namespace KickStart_2020_RoundF_P2_MetalHarvest {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int n = 0, k = 0;
     my_cin >> n >> k;
     vector<pair<int, int> > e;

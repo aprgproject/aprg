@@ -28,7 +28,7 @@ namespace KickStart_2020_RoundG_P3_CombinationLock {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int n = 0, k = 0;
     my_cin >> n >> k;
     vector<int> a(n);

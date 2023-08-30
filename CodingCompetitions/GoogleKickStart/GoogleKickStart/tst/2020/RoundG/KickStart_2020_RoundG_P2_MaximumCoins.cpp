@@ -26,7 +26,7 @@ namespace KickStart_2020_RoundG_P2_MaximumCoins {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int n = 0;
     my_cin >> n;
     map<int, long long> mapka;

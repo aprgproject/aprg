@@ -123,7 +123,7 @@ TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario2Works) {
     EXPECT_EQ(12U, getNumberOfPermutations(4U, 2U));
 }
 
-TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario3Works_Example1) {
+TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario3WorksWithExample1) {
     // Scenario 3: Each seat can contain at most one person, and in addition, no two adjacent seats may both contain a
     // person.
 
@@ -161,7 +161,7 @@ TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario3Works_Example1) {
     EXPECT_EQ(12U, getNumberOfPermutations(4U, 2U));
 }
 
-TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario3Works_Example2) {
+TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario3WorksWithExample2) {
     // Scenario 3: Each seat can contain at most one person, and in addition, no two adjacent seats may both contain a
     // person.
 

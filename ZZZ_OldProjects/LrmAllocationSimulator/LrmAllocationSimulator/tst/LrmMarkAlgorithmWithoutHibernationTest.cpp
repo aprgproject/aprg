@@ -6,7 +6,7 @@ using namespace std;
 
 namespace alba {
 
-TEST(LrmMarkAlgorithmWithoutHibernationTest, McdAllocation_MasterTcomIsPrioritizedForNyquist) {
+TEST(LrmMarkAlgorithmWithoutHibernationTest, McdAllocationWorksWithMasterTcomIsPrioritizedForNyquist) {
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -21,7 +21,7 @@ TEST(LrmMarkAlgorithmWithoutHibernationTest, McdAllocation_MasterTcomIsPrioritiz
     EXPECT_EQ(0x1230U, selectionResult.address);
 }
 
-TEST(LrmMarkAlgorithmWithoutHibernationTest, McdAllocation_MasterTcomIsPrioritizedForTurboNyquist) {
+TEST(LrmMarkAlgorithmWithoutHibernationTest, McdAllocationWorksWithMasterTcomIsPrioritizedForTurboNyquist) {
     HardwareConfiguration hardwareConfiguration;
     AddressToDspMap& addressToDspMap(hardwareConfiguration.getAddressToDspMapReference());
     Lrm lrm(hardwareConfiguration);
@@ -40,7 +40,7 @@ TEST(LrmMarkAlgorithmWithoutHibernationTest, McdAllocation_MasterTcomIsPrioritiz
     EXPECT_EQ(0x1240U, selectionResult.address);
 }
 
-TEST(LrmMarkAlgorithmWithoutHibernationTest, McdAllocation_BiggestNumberOfMcdCcdWithEmptyNyquist) {
+TEST(LrmMarkAlgorithmWithoutHibernationTest, McdAllocationWorksWithBiggestNumberOfMcdCcdWithEmptyNyquist) {
     HardwareConfiguration hardwareConfiguration;
     AddressToDspMap& addressToDspMap(hardwareConfiguration.getAddressToDspMapReference());
     Lrm lrm(hardwareConfiguration);
@@ -62,7 +62,7 @@ TEST(LrmMarkAlgorithmWithoutHibernationTest, McdAllocation_BiggestNumberOfMcdCcd
     EXPECT_EQ(0x1350U, selectionResult.address);
 }
 
-TEST(LrmMarkAlgorithmWithoutHibernationTest, CcdMcdAllocation_MasterTcomIsPrioritizedForNyquist) {
+TEST(LrmMarkAlgorithmWithoutHibernationTest, CcdMcdAllocationWorksWithMasterTcomIsPrioritizedForNyquist) {
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 

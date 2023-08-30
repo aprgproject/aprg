@@ -100,7 +100,7 @@ int calc(int s, ll ban, int a, int b, int who) {
     return ok[s][a][b][who][ban] = calc(s, ban, a, b, 0);
 }
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int s = 0, ra = 0, pa = 0, rb = 0, pb = 0, c = 0;
     my_cin >> s >> ra >> pa >> rb >> pb >> c;
     ra--, pa--, rb--, pb--;

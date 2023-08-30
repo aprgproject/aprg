@@ -26,7 +26,7 @@ namespace KickStart_2020_RoundG_P4_MergeCards {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int n = 0;
     my_cin >> n;
     vector<int> a(n);

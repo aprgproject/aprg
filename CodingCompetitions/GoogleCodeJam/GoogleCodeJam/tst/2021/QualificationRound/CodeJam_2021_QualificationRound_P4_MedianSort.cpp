@@ -25,7 +25,7 @@ namespace CodeJam_2021_QualificationRound_P4_MedianSort {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     // my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
 }
 

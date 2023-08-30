@@ -66,7 +66,7 @@ long long getGeometricTerm(long long i, long long k) {
     return ((i * (raiseToPower(i, k) - 1) % MAX_MODULO) * raiseToPower(i - 1, MAX_MODULO - 2)) % MAX_MODULO;
 }
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     my_cin >> N >> K >> x1 >> y1 >> C >> D >> E1 >> E2 >> F;
     vector<long long> A(N);
 

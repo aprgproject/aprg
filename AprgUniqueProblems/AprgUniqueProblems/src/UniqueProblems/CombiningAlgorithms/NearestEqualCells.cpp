@@ -63,7 +63,7 @@ NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPairUsingBfs
     // The minimum distance between two cells with letter c will be calculated in O(n) time.
 
     Coordinate firstCoordinate(getFirstCoordinateUsingBfs(value));
-    return CoordinatePair(firstCoordinate, getSecondCoordinateUsingBfs(value, firstCoordinate));
+    return {firstCoordinate, getSecondCoordinateUsingBfs(value, firstCoordinate)};
 }
 
 void NearestEqualCells::initializeGraph() {

@@ -27,7 +27,7 @@ namespace KickStart_2020_RoundE_P2_HighBuildings {
 #define my_cin cin
 #endif
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int N = 0, A = 0, B = 0, C = 0;
     my_cin >> N >> A >> B >> C;
 

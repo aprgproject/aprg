@@ -48,7 +48,7 @@ bool canPalindrome(string const& blocksString, Question const& question) {
     return false;
 }
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     int numberOfBlocks = 0, numberOfQuestions = 0;
     my_cin >> numberOfBlocks >> numberOfQuestions;
     string blocksString;

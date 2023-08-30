@@ -36,7 +36,7 @@ bool ckmin(T& a, const T& b) {
     return b < a ? a = b, 1 : 0;
 }
 
-void runTestCase(int const testCaseNumber) {
+void runTestCase(int const) {
     /* int N, M, S, R;
     my_cin >> N >> M >> S >> R;
     vector<vector<int>> graph(N);
