@@ -1,5 +1,3 @@
-2023-08-29T07:09:02
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsTraceDecoder/BtsTraceDecoder/src/BtsTraceDecoder.cpp:14:18: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsTraceDecoder/BtsTraceDecoder/src/SymbolTableFileType.hpp:10:1: warning: namespace 'alba' not terminated with a closing comment [llvm-namespace-comment]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsTraceDecoder/BtsTraceDecoder/src/SymbolTableFileType.hpp:10:1: warning: namespace 'alba' not terminated with a closing comment [llvm-namespace-comment]
+StaticAnalysisJobIdentifier: [19]
+2023-08-30T06:07:35
 DONE!
