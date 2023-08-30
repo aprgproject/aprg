@@ -5,8 +5,6 @@
 #include <Algorithm/Graph/ConnectedComponents/ConnectedComponentsUsingDfs.hpp>
 #include <Algorithm/Graph/ConnectedComponents/StronglyConnectedComponentsUsingKosarajuSharir.hpp>
 #include <Algorithm/Graph/CycleDetection/CycleDetectionUsingDfs.hpp>
-#include <Algorithm/Graph/PathSearch/DirectedAcyclicGraph/PathSearchForDirectedAcyclicGraph.hpp>
-#include <Algorithm/Graph/Tree/LongestPathsInTree.hpp>
 #include <Algorithm/UnionFind/BaseUnionFind.hpp>
 #include <Algorithm/UnionFind/UnionFindUsingMap.hpp>
 
@@ -314,15 +312,6 @@ int getNumberOfSelfLoops(BaseGraph<Vertex> const& graph) {
 }
 
 template <typename Vertex>
-int getDiameterOfATree(BaseUndirectedGraph<Vertex> const& graph) {
-    // The diameter of a tree is the maximum length of a path between two nodes.
-
-    LongestPathsInTree<Vertex> longestPathsInTree(graph);
-    longestPathsInTree.searchForAtLeastOneEndPointPair();
-    return longestPathsInTree.getLongestDistance();
-}
-
-template <typename Vertex>
 std::pair<int, int> getInDegreeAndOutDegreeAt(BaseDirectedGraph<Vertex> const& graph, Vertex const& vertex) {
     // In a directed graph, the indegree of a node is the number of edges that end at the node,
     // and the outdegree of a node is the number of edges that start at the node.
@@ -352,22 +341,6 @@ std::map<Vertex, std::pair<int, int>> getAllInDegreesAndOutDegrees(BaseDirectedG
     for (Edge const& edge : graph.getEdges()) {
         result[edge.first].first++;
         result[edge.second].second++;
-    }
-    return result;
-}
-
-template <typename Vertex, typename Weight, typename EdgeWeightedGraphType>
-typename GraphTypes<Vertex>::Path getCriticalPath(
-    EdgeWeightedGraphType const& graph, Vertex const& sourceVertex, Vertex const& destinationVertex) {
-    using Path = typename GraphTypes<Vertex>::Path;
-
-    Path result;
-    // Needs to be a directed acyclic path because if not the maximum path will be forever loop around the cycle
-    if (isDirectedAcyclicGraph(graph)) {
-        // Use greater comparison for longest path
-        PathSearchForDirectedAcyclicGraph<Vertex, Weight, EdgeWeightedGraphType, std::greater> pathSearch(
-            graph, sourceVertex);
-        result = pathSearch.getPathTo(destinationVertex);
     }
     return result;
 }

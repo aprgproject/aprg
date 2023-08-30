@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Algorithm/Graph/PathSearch/DepthFirstSearch/PathSearchUsingDfsWithDistanceCount.hpp>
-#include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
+#include <Algorithm/Graph/Utilities/GraphUtilities.hpp>
 
 namespace alba::algorithm {
 
