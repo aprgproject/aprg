@@ -1,4 +1,5 @@
-2023-08-29T09:27:33
+StaticAnalysisJobIdentifier: [19]
+2023-08-30T08:31:04
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/FileGroup.cpp:7:22: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/FileGroup.cpp:7:50: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:15:5: warning: variable 'numberOfFilesToBeAnalyzedForExtraction' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
