@@ -10,8 +10,8 @@ public:
     explicit SampleComponent(ComponentName const componentName);
 
 private:
-    virtual void handleMessageEvent(GenericMessage const& genericMessage);
-    virtual void handleTimerEvent(Timer const& timer);
+    void handleMessageEvent(GenericMessage const& genericMessage) override;
+    void handleTimerEvent(Timer const& timer) override;
     ComponentName m_componentName;
 };
 

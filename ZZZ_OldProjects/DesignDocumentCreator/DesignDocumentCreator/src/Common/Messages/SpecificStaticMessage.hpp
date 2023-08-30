@@ -9,8 +9,8 @@ namespace DesignDocumentCreator {
 template <MessageName messageName>
 class SpecificStaticMessage : public Message {
 public:
-    typedef MessageWrapper<messageName> SpecificStaticMessageWrapper;
-    typedef typename SpecificStaticMessageWrapper::MessageStaticSackType SackType;
+    using SpecificStaticMessageWrapper = MessageWrapper<messageName>;
+    using SackType = typename SpecificStaticMessageWrapper::MessageStaticSackType;
     SpecificStaticMessage() : Message(SpecificStaticMessageWrapper::getMessageName()) {}
     SpecificStaticMessage(
         alba::AlbaMemoryBuffer const& payloadBufferReference, ComponentName const sender, ComponentName const receiver)
