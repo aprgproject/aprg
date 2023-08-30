@@ -7,11 +7,11 @@ using namespace alba::TwoDimensions;
 namespace alba::AprgBitmap {
 
 Point convertBitmapXYToPoint(BitmapXY const& bitmapPosition) {
-    return Point(bitmapPosition.getX(), bitmapPosition.getY());
+    return {static_cast<double>(bitmapPosition.getX()), static_cast<double>(bitmapPosition.getY())};
 }
 
 BitmapXY convertPointToBitmapXY(Point const& pointPosition) {
-    return BitmapXY(round(pointPosition.getX()), round(pointPosition.getY()));
+    return {static_cast<int>(round(pointPosition.getX())), static_cast<int>(round(pointPosition.getY()))};
 }
 
 void animeColorsInPenCircles(PenCircles& penCircles, AnimizeColor const& animizeColor) {
