@@ -20,7 +20,7 @@ public:
     [[nodiscard]] bool isInSingleLineComment() const;
     [[nodiscard]] bool isInMultilineComment() const;
     [[nodiscard]] bool isInComment() const;
-    void processInput(InputToken const& inputToken);
+    void processInput(InputToken const& inputToken) override;
 
 private:
     void processStateNotInComment(InputToken const& inputToken);
