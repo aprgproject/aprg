@@ -1,4 +1,5 @@
-2023-08-29T10:35:43
+StaticAnalysisJobIdentifier: [9]
+2023-08-30T06:33:06
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:36:5: warning: ignoring return value of function declared with 'nodiscard' attribute [clang-diagnostic-unused-result]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:38:5: warning: ignoring return value of function declared with 'nodiscard' attribute [clang-diagnostic-unused-result]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:36:21: warning: Return value of function m_fileExtractor.extractOnceForAllFiles() is not used. [ignoredReturnValue]
