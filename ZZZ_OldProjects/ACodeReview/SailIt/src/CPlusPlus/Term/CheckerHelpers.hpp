@@ -13,7 +13,7 @@ namespace codeReview {
 class TermChecker;
 
 namespace CheckerHelpers {
-typedef vector<string> VectorOfStrings;
+using VectorOfStrings = vector<string>;
 bool isAssignmentOperator(Term const& term);
 bool isBiDirectionalOperator(Term const& term);
 bool isConstant(TermType const termType);

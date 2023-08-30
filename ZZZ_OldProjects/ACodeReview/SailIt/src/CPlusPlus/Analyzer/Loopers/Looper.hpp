@@ -7,9 +7,9 @@ namespace codeReview {
 using namespace std;
 
 class Looper;
-typedef int LooperIndex;
-typedef unsigned int UniqueId;
-typedef map<UniqueId, Looper*> ActiveLoopersMap;
+using LooperIndex = int;
+using UniqueId = unsigned int;
+using ActiveLoopersMap = map<UniqueId, Looper*>;
 
 struct ModifyDetails {
     ModifyDetails() : m_startIndex(0), m_lengthAdded(0) {}

@@ -24,23 +24,23 @@ using std::vector;
 
 namespace codeReview {
 
-typedef set<string> IncludeFiles;
-typedef string IncludeFile;
-typedef map<string, CPlusPlusClass> Classes;
-typedef pair<string, CPlusPlusClass> ClassPair;
-typedef map<string, CPlusPlusTemplateClass> TemplateClasses;
-typedef pair<string, CPlusPlusTemplateClass> TemplateClassPair;
-typedef map<string, CPlusPlusFunction> Functions;
-typedef pair<string, CPlusPlusFunction> FunctionPair;
-typedef map<string, CPlusPlusMacro> Macros;
-typedef pair<string, CPlusPlusMacro> MacroPair;
-typedef map<string, CPlusPlusNamespace> Namespaces;
-typedef pair<string, CPlusPlusNamespace> NamespacePair;
-typedef map<string, CPlusPlusType> Types;
-typedef pair<string, CPlusPlusType> TypePair;
-typedef map<string, CPlusPlusVariable> Variables;
-typedef pair<string, CPlusPlusVariable> VariablePair;
-typedef vector<CPlusPlusScope> Scopes;
+using IncludeFiles = set<string>;
+using IncludeFile = string;
+using Classes = map<string, CPlusPlusClass>;
+using ClassPair = pair<string, CPlusPlusClass>;
+using TemplateClasses = map<string, CPlusPlusTemplateClass>;
+using TemplateClassPair = pair<string, CPlusPlusTemplateClass>;
+using Functions = map<string, CPlusPlusFunction>;
+using FunctionPair = pair<string, CPlusPlusFunction>;
+using Macros = map<string, CPlusPlusMacro>;
+using MacroPair = pair<string, CPlusPlusMacro>;
+using Namespaces = map<string, CPlusPlusNamespace>;
+using NamespacePair = pair<string, CPlusPlusNamespace>;
+using Types = map<string, CPlusPlusType>;
+using TypePair = pair<string, CPlusPlusType>;
+using Variables = map<string, CPlusPlusVariable>;
+using VariablePair = pair<string, CPlusPlusVariable>;
+using Scopes = vector<CPlusPlusScope>;
 
 class CPlusPlusDatabase {
 public:

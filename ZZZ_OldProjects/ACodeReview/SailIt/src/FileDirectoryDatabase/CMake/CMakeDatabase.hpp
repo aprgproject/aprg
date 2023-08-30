@@ -12,9 +12,9 @@ enum class RecursionDirectionType { Inner, Outer };
 
 class CMakeDatabase;
 
-typedef set<string> SetOfFiles;
-typedef set<string> SetOfDirectories;
-typedef vector<CMakeDatabase> SubCMakeDatabases;
+using SetOfFiles = set<string>;
+using SetOfDirectories = set<string>;
+using SubCMakeDatabases = vector<CMakeDatabase>;
 
 class CMakeDatabase {
 public:
