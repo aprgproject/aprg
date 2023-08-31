@@ -59,22 +59,22 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXs(
     ListOfStartEndOfXAndY result;
     int groupSize = groupOfPointsBasedOnYValue.size();
     if (groupSize == 1) {
-        Points points(groupOfPointsBasedOnYValue[0]);
+        const Points& points(groupOfPointsBasedOnYValue[0]);
         result = getStartEndForXsFor1Points(points);
     } else if (groupSize == 2) {
-        Points points1(groupOfPointsBasedOnYValue[0]);
-        Points points2(groupOfPointsBasedOnYValue[1]);
+        const Points& points1(groupOfPointsBasedOnYValue[0]);
+        const Points& points2(groupOfPointsBasedOnYValue[1]);
         result = getStartEndForXsFor2Points(points1, points2, interval);
     } else if (groupSize == 3) {
-        Points points1(groupOfPointsBasedOnYValue[0]);
-        Points points2(groupOfPointsBasedOnYValue[1]);
-        Points points3(groupOfPointsBasedOnYValue[2]);
+        const Points& points1(groupOfPointsBasedOnYValue[0]);
+        const Points& points2(groupOfPointsBasedOnYValue[1]);
+        const Points& points3(groupOfPointsBasedOnYValue[2]);
         result = getStartEndForXsFor3Points(points1, points2, points3, interval);
     } else if (groupSize == 4) {
-        Points points1(groupOfPointsBasedOnYValue[0]);
-        Points points2(groupOfPointsBasedOnYValue[1]);
-        Points points3(groupOfPointsBasedOnYValue[2]);
-        Points points4(groupOfPointsBasedOnYValue[3]);
+        const Points& points1(groupOfPointsBasedOnYValue[0]);
+        const Points& points2(groupOfPointsBasedOnYValue[1]);
+        const Points& points3(groupOfPointsBasedOnYValue[2]);
+        const Points& points4(groupOfPointsBasedOnYValue[3]);
         result = getStartEndForXsFor4Points(points1, points2, points3, points4, interval);
     }
     return result;

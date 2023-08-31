@@ -1,5 +1,8 @@
-StaticAnalysisJobIdentifier: [9]
-2023-08-29T20:02:01
+StaticAnalysisJobIdentifier: [20]
+2023-08-31T00:53:06
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimizeColor.cpp:89:20: warning: method 'calculateNewValues' can be made const [readability-make-member-function-const]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimizeColor.cpp:89:66: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimizeColor.hpp:30:56: note: FIX-IT applied suggested code changes
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimizeColor.cpp:92:20: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/BitmapFilters.cpp:259:34: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/BitmapFilters.cpp:122:9: style: The scope of the variable 'currentLabel' can be reduced. [variableScope]
@@ -8,9 +11,28 @@ StaticAnalysisJobIdentifier: [9]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/LabelForPoints.cpp:20:18: warning: narrowing conversion from 'size_t' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/PenCirclesDrawer.cpp:77:25: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/PenCirclesDrawer.cpp:120:25: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:23:5: warning: 'm_lastMostLeft' should be initialized in a member initializer of the constructor [cppcoreguidelines-prefer-member-initializer]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:19:7: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:23:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:24:5: warning: 'm_lastMostRight' should be initialized in a member initializer of the constructor [cppcoreguidelines-prefer-member-initializer]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:20:7: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:24:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:25:5: warning: 'm_lastMostTop' should be initialized in a member initializer of the constructor [cppcoreguidelines-prefer-member-initializer]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:21:7: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:25:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:26:5: warning: 'm_lastMostBottom' should be initialized in a member initializer of the constructor [cppcoreguidelines-prefer-member-initializer]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:21:44: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:26:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:29:37: warning: method 'fixPoint' can be made const [readability-make-member-function-const]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.hpp:20:45: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:29:68: note: FIX-IT applied suggested code changes
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.hpp:33:24: style: Unused private function: 'OutwardSnakeLikeTraversal::isPointInCorner' [unusedPrivateFunction]
-/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Utilities.cpp:10:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Utilities.cpp:14:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Utilities.cpp:14:21: warning: narrowing conversion from 'double' to 'int' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Utilities.cpp:14:50: warning: narrowing conversion from 'double' to 'int' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:19:7: error: multiple initializations given for non-static member 'm_lastMostLeft'
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:18:7: note: previous initialization is here
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:20:7: error: multiple initializations given for non-static member 'm_lastMostRight'
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:19:46: note: previous initialization is here
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:21:7: error: multiple initializations given for non-static member 'm_lastMostTop'
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:20:47: note: previous initialization is here
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:21:84: error: multiple initializations given for non-static member 'm_lastMostBottom'
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:21:45: note: previous initialization is here
 DONE!
