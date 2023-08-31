@@ -134,7 +134,8 @@ TEST(AiffLoadingTests, DISABLED_StereoWith24BitWithSampleRate48000) {
 }
 
 TEST(WritingTest, DISABLED_WriteFromCopiedSampleBuffer) {
-    Audio<float> audioFile1, audioFile2;
+    Audio<float> audioFile1;
+    Audio<float> audioFile2;
 
     bool isLoadingSuccessful =
         audioFile1.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_stereo_16bit_44100.wav)");

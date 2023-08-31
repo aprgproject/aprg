@@ -114,9 +114,9 @@ private:
 
     bool writeDataToFile(std::vector<uint8_t>& fileDataBytes, std::string const& filePath);
 
-    AudioFormat audioFileFormat;
-    int sampleRate;
-    int bitDepth;
+    AudioFormat audioFileFormat{AudioFormat::NotLoaded};
+    int sampleRate{44100};
+    int bitDepth{16};
 };
 
 }  // namespace alba::AprgAudio

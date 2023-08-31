@@ -27,11 +27,8 @@ unordered_map<int, vector<uint8_t>> aiffSampleRateTable = {
 
 template <class T>
 Audio<T>::Audio() {
-    bitDepth = 16;
-    sampleRate = 44100;
     samples.resize(1);
     samples[0].resize(0);
-    audioFileFormat = AudioFormat::NotLoaded;
 }
 
 template <class T>
@@ -179,7 +176,8 @@ bool Audio<T>::load(string const& filePath) {
     }
 
     file.unsetf(ios::skipws);
-    istream_iterator<uint8_t> begin(file), end;
+    istream_iterator<uint8_t> begin(file);
+    istream_iterator<uint8_t> end;
     vector<uint8_t> fileDataBytes(begin, end);
 
     // get audio file format
