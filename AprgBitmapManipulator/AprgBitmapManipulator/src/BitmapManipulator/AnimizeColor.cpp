@@ -86,7 +86,7 @@ void AnimizeColor::addCountToValue(ColorDataMap& colorDataMap, double const valu
     }
 }
 
-void AnimizeColor::calculateNewValues(ColorDataMap& colorDataMap) {
+void AnimizeColor::calculateNewValues(ColorDataMap& colorDataMap) const {
     int totalCount = 0;
     for (auto const& colorDataPair : colorDataMap) {
         totalCount += colorDataPair.second.count;

@@ -27,7 +27,7 @@ public:
 private:
     [[nodiscard]] bool isValueIncluded(double const value) const;
     void addCountToValue(ColorDataMap& colorDataMap, double const value);
-    void calculateNewValues(ColorDataMap& colorDataMap);
+    void calculateNewValues(ColorDataMap& colorDataMap) const;
     [[nodiscard]] double getNewValue(ColorDataMap const& colorDataMap, double const originalValue) const;
     double m_lowestIncludedValue{0.1};
     double m_highestIncludedValue{0.9};

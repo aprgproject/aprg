@@ -17,7 +17,7 @@ public:
     BitmapXY getNextPoint();
 
 private:
-    BitmapXY fixPoint(BitmapXY const& point);
+    BitmapXY fixPoint(BitmapXY const& point) const;
     void gotoNextPoint();
     void move();
     void moveLeft();
