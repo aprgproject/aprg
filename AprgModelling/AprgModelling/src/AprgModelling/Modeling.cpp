@@ -22,8 +22,10 @@ unsigned int Modeling::getNumberOfSamples() const { return m_retrievedDataForY.g
 Modeling::MatrixOfDoubles Modeling::getCoefficients() const { return m_coefficients; }
 
 void Modeling::retrieveDataFromFileWithFileFormat1(string const& filePath) {
-    VectorOfDoubles retrievedDataForX, retrievedDataForY;
-    unsigned int columnsForX = 0, numberOfSamples = 0;
+    VectorOfDoubles retrievedDataForX;
+    VectorOfDoubles retrievedDataForY;
+    unsigned int columnsForX = 0;
+    unsigned int numberOfSamples = 0;
     ifstream inputFile(filePath);
     AlbaFileReader fileReader(inputFile);
     fileReader.getLineAndIgnoreWhiteSpaces();  // Get Headers
@@ -45,8 +47,10 @@ void Modeling::retrieveDataFromFileWithFileFormat1(string const& filePath) {
 }
 
 void Modeling::retrieveDataFromFileWithFileFormat2(string const& filePath) {
-    VectorOfDoubles retrievedDataForX, retrievedDataForY;
-    unsigned int columnsForX = 0, numberOfSamples = 0;
+    VectorOfDoubles retrievedDataForX;
+    VectorOfDoubles retrievedDataForY;
+    unsigned int columnsForX = 0;
+    unsigned int numberOfSamples = 0;
     bool isLineWithYValues(true);
     VectorOfDoubles reversedCoordinates;
     unsigned int reversedCoordinatesColumns(0);
@@ -182,7 +186,8 @@ void Modeling::copyVectorToMatrix(
     unsigned int const numberOfColumns, unsigned int const numberOfRows, VectorOfDoubles const& retrievedDataForX,
     MatrixOfDoubles& matrixOfDoubles) {
     matrixOfDoubles.clearAndResize(numberOfColumns, numberOfRows);
-    unsigned int x = 0, y = 0;
+    unsigned int x = 0;
+    unsigned int y = 0;
     for (double const value : retrievedDataForX) {
         matrixOfDoubles.setEntry(x, y, value);
         x++;
@@ -224,8 +229,10 @@ void Modeling::calculateCoefficientsUsingLeastSquares() {
     unsigned int dataWidth = m_modelingDataForX.getNumberOfColumns();
     double chisq = NAN;
 
-    gsl_matrix *xModelingData = nullptr, *calculatedCovariance = nullptr;
-    gsl_vector *yModelingData = nullptr, *calculatedCoefficients = nullptr;
+    gsl_matrix* xModelingData = nullptr;
+    gsl_matrix* calculatedCovariance = nullptr;
+    gsl_vector* yModelingData = nullptr;
+    gsl_vector* calculatedCoefficients = nullptr;
 
     xModelingData = gsl_matrix_alloc(dataHeight, dataWidth);
     yModelingData = gsl_vector_alloc(dataHeight);
