@@ -33,7 +33,8 @@ void runTestCase(int const testCaseNumber) {
     string s;
     my_cin >> s;
     ll mod = 1e9;
-    ll x = 0, y = 0;
+    ll x = 0;
+    ll y = 0;
     vector<ll> mul = {1};
     for (char c : s) {
         if (c >= '2' && c <= '9') {

@@ -30,7 +30,8 @@ const long long MAX_MODULO = 1000000007;
 long long N, K, x1, y1, C, D, E1, E2, F;
 
 long long raiseToPower(long long a, long long p) {
-    long long result = 1, cp = a;
+    long long result = 1;
+    long long cp = a;
     while (p != 0) {
         if ((p & 1) != 0) {
             result = (result * cp) % MAX_MODULO;  // is even
@@ -43,7 +44,8 @@ long long raiseToPower(long long a, long long p) {
 
 void buildA(vector<long long>& A) {
     A[0] = (x1 + y1) % F;
-    long long CD = C + D, E = E1 + E2;
+    long long CD = C + D;
+    long long E = E1 + E2;
     for (long long i = 1; i < static_cast<decltype(i)>(A.size()); ++i) {
         A[i] = (CD * A[i - 1] + E) % F;
     }
@@ -73,7 +75,10 @@ void runTestCase(int const testCaseNumber) {
     buildA(A);
 
     // The summation of a geometric progression, it can also be written as Ax * (p^(K+1)-1)/(p-1).
-    long long geometricSum = 0, numberOfInstances = 1, currentK = N, totalPower = 0;
+    long long geometricSum = 0;
+    long long numberOfInstances = 1;
+    long long currentK = N;
+    long long totalPower = 0;
     for (long long i = N - 1; i >= 0; --i) {
         geometricSum = (geometricSum + numberOfInstances * A[i]) % MAX_MODULO;
         ++numberOfInstances;

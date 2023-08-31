@@ -28,13 +28,15 @@ namespace KickStart_2020_RoundF_P2_MetalHarvest {
 #endif
 
 void runTestCase(int const testCaseNumber) {
-    int n = 0, k = 0;
+    int n = 0;
+    int k = 0;
     my_cin >> n >> k;
     vector<pair<int, int> > e;
     for (int i = 0; i < n; i++) {
-        int l = 0, r = 0;
+        int l = 0;
+        int r = 0;
         my_cin >> l >> r;
-        e.push_back({l, r});
+        e.emplace_back(l, r);
     }
     sort(e.begin(), e.end());
     int last = 0;

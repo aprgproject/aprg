@@ -68,13 +68,15 @@ void runTestCase(int const testCaseNumber) {
         char qt = 0;
         my_cin >> qt;
         if (qt == 'Q') {
-            int l = 0, r = 0;
+            int l = 0;
+            int r = 0;
             my_cin >> l >> r, --l, --r;
             ll s = f1[l & 1].qry(r + 1) - f1[l & 1].qry(l) - (l - 1) * (f0[l & 1].qry(r + 1) - f0[l & 1].qry(l));
             ans += s;
             // cout << s << "\n";
         } else {
-            int i = 0, x = 0;
+            int i = 0;
+            int x = 0;
             my_cin >> i >> x, --i;
             app(i, x);
         }
