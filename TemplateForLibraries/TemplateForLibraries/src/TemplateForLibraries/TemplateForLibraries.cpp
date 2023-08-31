@@ -2,6 +2,6 @@
 
 namespace alba {
 
-TemplateForLibraries::TemplateForLibraries() { m_sample = 0; }
+TemplateForLibraries::TemplateForLibraries() {}
 
 }  // namespace alba
