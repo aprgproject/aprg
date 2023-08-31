@@ -2,6 +2,6 @@
 
 namespace alba {
 
-MessageContentChecker::MessageContentChecker() { m_sample = 0; }
+MessageContentChecker::MessageContentChecker() {}
 
 }  // namespace alba

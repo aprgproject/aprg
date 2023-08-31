@@ -1,25 +1,19 @@
-StaticAnalysisJobIdentifier: [9]
-2023-08-30T05:22:09
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:181:9: warning: Value stored to 'movablePointer' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:181:9: note: Value stored to 'movablePointer' during its initialization is never read
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:181:9: warning: unused variable 'movablePointer' [clang-diagnostic-unused-variable]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:181:26: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:194:11: warning: Value stored to 'printPointer' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:194:11: note: Value stored to 'printPointer' during its initialization is never read
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:194:11: warning: unused variable 'printPointer' [clang-diagnostic-unused-variable]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:508:9: warning: Value stored to 'movablePointer' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:508:9: note: Value stored to 'movablePointer' during its initialization is never read
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:508:9: warning: unused variable 'movablePointer' [clang-diagnostic-unused-variable]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:508:26: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:521:23: warning: comparison of integers of different signs: 'int' and 'unsigned int' [clang-diagnostic-sign-compare]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:525:27: warning: comparison of integers of different signs: 'int' and 'unsigned int' [clang-diagnostic-sign-compare]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:537:11: warning: Value stored to 'printPointer' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:537:11: note: Value stored to 'printPointer' during its initialization is never read
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:537:11: warning: unused variable 'printPointer' [clang-diagnostic-unused-variable]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:181:9: warning: unused variable 'movablePointer' [-Wunused-variable]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:194:11: warning: unused variable 'printPointer' [-Wunused-variable]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:508:9: warning: unused variable 'movablePointer' [-Wunused-variable]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:537:11: warning: unused variable 'printPointer' [-Wunused-variable]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:521:23: warning: comparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:525:27: warning: comparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare]
+StaticAnalysisJobIdentifier: [20]
+2023-08-31T09:43:56
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/src/MessageContentChecker.cpp:5:50: warning: 'm_sample' should be initialized in an in-class default member initializer [cppcoreguidelines-prefer-member-initializer]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/src/MessageContentChecker.hpp:10:17: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/src/MessageContentChecker.cpp:5:50: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/src/MessageContentChecker.hpp:10:9: warning: private field 'm_sample' is not used [-Wunused-private-field]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:192:11: warning: Value stored to 'printPointer' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:192:11: note: Value stored to 'printPointer' during its initialization is never read
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:192:11: warning: unused variable 'printPointer' [clang-diagnostic-unused-variable]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:517:23: warning: comparison of integers of different signs: 'int' and 'unsigned int' [clang-diagnostic-sign-compare]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:521:27: warning: comparison of integers of different signs: 'int' and 'unsigned int' [clang-diagnostic-sign-compare]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:533:11: warning: Value stored to 'printPointer' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:533:11: note: Value stored to 'printPointer' during its initialization is never read
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:533:11: warning: unused variable 'printPointer' [clang-diagnostic-unused-variable]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:192:11: warning: unused variable 'printPointer' [-Wunused-variable]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:533:11: warning: unused variable 'printPointer' [-Wunused-variable]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:517:23: warning: comparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:521:27: warning: comparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare]
 DONE!
