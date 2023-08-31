@@ -2,6 +2,6 @@
 
 namespace alba {
 
-ChessCombi::ChessCombi() { m_sample = 0; }
+ChessCombi::ChessCombi() {}
 
 }  // namespace alba
