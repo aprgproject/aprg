@@ -48,9 +48,7 @@ public:
         constructSetBasedOnRosterList(rosterList);
     }
 
-    MathSet(std::string const& description, Rule const& rule) : m_description(description) {
-        m_ruleToBeInTheSet = rule;
-    }
+    MathSet(std::string const& description, Rule const& rule) : m_description(description), m_ruleToBeInTheSet(rule) {}
 
     [[nodiscard]] bool contains(ElementType const& elementToCheck) const { return m_ruleToBeInTheSet(elementToCheck); }
 

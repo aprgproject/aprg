@@ -140,7 +140,8 @@ UnsignedInteger getModularInverseByGcfEuclidAlgorithm(UnsignedInteger const numb
     // Note: getGreatestCommonFactorWithLastValues in AprgCommon already implements GCF with last values.
 
     UnsignedInteger result{};
-    UnsignedInteger x = 0, y = 0;
+    UnsignedInteger x = 0;
+    UnsignedInteger y = 0;
     UnsignedInteger gcf = getGreatestCommonFactorWithLastValues(number, modulo, x, y);
     if (1 == gcf)  // is coprime
     {
