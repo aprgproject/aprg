@@ -99,17 +99,17 @@ public:
     void clearUserTimers(TNodeBCommunicationContextId const nBCCId);
     static void removeTimerPrint(TimerType const timerType, TNodeBCommunicationContextId const nBCCId);
     void dump(TimerIndex begin, TimerIndex end);
-    void dump(void);
+    void dump();
 
 private:
-    inline int ARRAY_timers_empty(void);
+    inline int ARRAY_timers_empty();
     TimerIndex ARRAY_timers_insert(TimeCounter timerValue, TimerData const& timerData);
     TimerIndex ARRAY_timers_find(TimeCounter);
-    TimerIndex ARRAY_timers_begin(void);
+    TimerIndex ARRAY_timers_begin();
 
-    inline TimerIndex ARRAY_timers_end(void);
+    inline TimerIndex ARRAY_timers_end();
     EBoolean ARRAY_timers_erase(TimerIndex& timerIndex);
-    void ARRAY_timers_clear(void);
+    void ARRAY_timers_clear();
     TimerIndex ARRAY_timers_next(TimerIndex timerIndex);
     void trigExpired(TimerIndex timerIndex);
     EBoolean refresh(TSfn const newSFN);
@@ -118,11 +118,11 @@ private:
     void clear(void);
 #endif
 
-    TimeCounter timeCounter;
-    TimeCounter timeOffsetToSFN;
+    TimeCounter timeCounter{0};
+    TimeCounter timeOffsetToSFN{0};
     TimerTable m_timers;
-    TimeCounter timeFromStart;
-    u32 nthFib;
+    TimeCounter timeFromStart{0};
+    u32 nthFib{0};
     static const int fibs[6];
 };
 }  // namespace DMeas

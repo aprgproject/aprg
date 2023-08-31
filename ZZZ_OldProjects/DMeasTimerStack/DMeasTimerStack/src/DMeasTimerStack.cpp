@@ -29,7 +29,7 @@ namespace DMeas {
 TimerStack::TimerIndex TimerStack::s_timerCounter = 0;
 int const TimerStack::fibs[6] = {0, 1000, 1000, 2000, 3000, 5000};
 
-inline int TimerStack::ARRAY_timers_empty(void) { return static_cast<int>(m_timers.empty()); }
+inline int TimerStack::ARRAY_timers_empty() { return static_cast<int>(m_timers.empty()); }
 
 TimerStack::TimerIndex TimerStack::ARRAY_timers_insert(TimeCounter timerValue, TimerData const& timerData) {
     TimerData timerDataToBeSaved = timerData;
@@ -63,7 +63,7 @@ TimerStack::TimerIndex TimerStack::ARRAY_timers_find(TimeCounter timeToSearch) {
     return timerIndex;
 }
 
-TimerStack::TimerIndex TimerStack::ARRAY_timers_begin(void) {
+TimerStack::TimerIndex TimerStack::ARRAY_timers_begin() {
     TimerIndex timerIndex = TIMER_INVALID_ITERATOR;
     if (!m_timers.empty()) {
         timerIndex = 0;
@@ -71,7 +71,7 @@ TimerStack::TimerIndex TimerStack::ARRAY_timers_begin(void) {
     return timerIndex;
 }
 
-inline TimerStack::TimerIndex TimerStack::ARRAY_timers_end(void) {
+inline TimerStack::TimerIndex TimerStack::ARRAY_timers_end() {
     TimerIndex timerIndex = TIMER_INVALID_ITERATOR;
     if (!m_timers.empty()) {
         auto endIterator = m_timers.end();
@@ -88,7 +88,7 @@ EBoolean TimerStack::ARRAY_timers_erase(TimerStack::TimerIndex& timerIndex) {
         if (timerData.timerType == TimerType::NbccRecovery) {
             if (timerData.value.nbccRecovery.msg != nullptr) {
                 delete timerData.value.nbccRecovery.msg;
-                timerData.value.nbccRecovery.msg = 0;
+                timerData.value.nbccRecovery.msg = nullptr;
             }
         }
 
@@ -105,7 +105,7 @@ EBoolean TimerStack::ARRAY_timers_erase(TimerStack::TimerIndex& timerIndex) {
     return retStatus;
 }
 
-void TimerStack::ARRAY_timers_clear(void) { m_timers.clear(); }
+void TimerStack::ARRAY_timers_clear() { m_timers.clear(); }
 
 TimeCounter TimerStack::ARRAY_timers_first(TimerStack::TimerIndex timerIndex) {
     TimeCounter timeCounter = TIMER_INVALID_ITERATOR;
@@ -150,10 +150,7 @@ TSfn currSfn;
 TimerStack::TimerStack() {
     MTSPRINTF("DMEAS: TimerStack constructed\n");
     DMeas::currSfn = 0;
-    timeCounter = 0;
-    timeOffsetToSFN = 0;
-    timeFromStart = 0;
-    nthFib = 0;
+
     ARRAY_timers_clear();
 }
 
@@ -510,7 +507,7 @@ void TimerStack::removeTimerPrint(TimerType const timerType, TNodeBCommunication
     }
 }
 
-void TimerStack::dump(void) {
+void TimerStack::dump() {
     // MKJ: 18108EO09P   if( !timers.empty() ) {
     if (ARRAY_timers_empty() == 0) {
         // MKJ: 18108EO09P     dump( timers.begin(), timers.end() );
