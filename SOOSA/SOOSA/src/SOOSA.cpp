@@ -186,7 +186,10 @@ void SOOSA::processBitmapFile(Bitmap const& bitmap) {
     BitmapSnippet globalSnippet(bitmap.getSnippetReadFromFileWholeBitmap());
 
     Line emptyLine;
-    Line leftLine, rightLine, topLine, bottomLine;
+    Line leftLine;
+    Line rightLine;
+    Line topLine;
+    Line bottomLine;
     leftLine = findLeftLine(globalSnippet);
     rightLine = findRightLine(globalSnippet);
     topLine = findTopLine(globalSnippet);
@@ -503,7 +506,8 @@ SOOSA::Answers SOOSA::getAnswersAtQuestion(
 double SOOSA::getShadePercentage(
     BitmapSnippet const& snippet, Point const& leftPoint, Point const& rightPoint, double const radius,
     int const choiceIndex) const {
-    int totalPoints(0), numberOfBlackPoints(0);
+    int totalPoints(0);
+    int numberOfBlackPoints(0);
     Point centerOfCircle = getCenterOfCircleForChoiceChecking(snippet, leftPoint, rightPoint, radius, choiceIndex);
     Circle circle(centerOfCircle, radius);
     circle.traverseArea(1, [&](Point const& pointInCircle) {
@@ -537,7 +541,8 @@ Point SOOSA::getCenterOfCircleForChoiceChecking(
         leftPoint.getY() + (differenceFromLeftToRightInY * choiceIndexRatio));
     Point result = originalCenter;
 
-    int numberOfBlackPoints(1), previousNumberOfBlackPoints(0);
+    int numberOfBlackPoints(1);
+    int previousNumberOfBlackPoints(0);
     while (previousNumberOfBlackPoints < numberOfBlackPoints && getDistance(originalCenter, result) < radius) {
         Circle circle(result, radius);
         TwoDimensionSamples blackPointSamples{convertToTwoDimensionSample(result)};
@@ -769,7 +774,9 @@ SOOSA::CountToEndPointIndexesMultiMap SOOSA::getHeightPointsCountToEndPointIndex
     TwoDimensionKMeans& kMeansForBarPoints) const {
     TwoDimensionSamples const& barPointsSamples(kMeansForBarPoints.getSamples());
     CountToEndPointIndexesMultiMap result;
-    int startIndex(0), endIndex(1), heightPointsCount(2);
+    int startIndex(0);
+    int endIndex(1);
+    int heightPointsCount(2);
     double previousHeight(0);
     for (; endIndex < static_cast<int>(barPointsSamples.size()); endIndex++) {
         double currentHeight =
