@@ -1,0 +1,4 @@
+StaticAnalysisJobIdentifier: [20]
+2023-08-31T06:28:31
+/home/runner/work/aprg/aprg/AprgCppCodeUtilities/AprgCppCodeUtilities/src/AprgCppCodeUtilities/AprgCppCodeUtilities.cpp:5:46: warning: 'm_sample' should be initialized in an in-class default member initializer [cppcoreguidelines-prefer-member-initializer]
+DONE!
