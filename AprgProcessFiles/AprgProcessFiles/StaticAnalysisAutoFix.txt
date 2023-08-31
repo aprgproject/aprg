@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [9]
-2023-08-29T23:41:28
+StaticAnalysisJobIdentifier: [20]
+2023-08-31T04:22:33
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CPlusPlusFileFixer/CPlusPlusFileFixer.cpp:220:46: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'std::set<int>::key_type' (aka 'int') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CPlusPlusFileFixer/CPlusPlusFileFixer.cpp:290:24: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CPlusPlusFileFixer/CPlusPlusFileFixer.cpp:305:24: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
@@ -16,26 +16,9 @@ StaticAnalysisJobIdentifier: [9]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CropFile/AlbaCropFile.cpp:73:34: warning: narrowing conversion from 'size_t' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/GrepFile/AlbaGrepFile.cpp:29:25: warning: narrowing conversion from 'size_t' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/GrepFile/AlbaGrepFile.cpp:37:37: warning: narrowing conversion from 'unsigned long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/ReplaceStringInFiles/ReplaceStringInFiles.cpp:49:28: warning: method 'replaceCToCPlusPlusStylePrintOnDirectories' can be made static [readability-convert-member-functions-to-static]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/ReplaceStringInFiles/ReplaceStringInFiles.hpp:21:5: note: FIX-IT applied suggested code changes
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/SackReader/AlbaSackReader.hpp:30:12: warning: constructor does not initialize these fields: state [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/SackReader/AlbaSackReaderType.hpp:13:5: warning: use 'using' instead of 'typedef' [modernize-use-using]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/SackReader/AlbaSackReaderType.hpp:13:5: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/SackReader/AlbaSackReaderType.hpp:14:5: warning: use 'using' instead of 'typedef' [modernize-use-using]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/SackReader/AlbaSackReaderType.hpp:14:5: note: FIX-IT applied suggested code changes
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/CropFile/AlbaCropFile_unit.cpp:55:34: warning: narrowing conversion from 'unsigned long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/CropFile/AlbaCropFile_unit.cpp:100:34: warning: narrowing conversion from 'unsigned long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/CropFile/AlbaCropFile_unit.cpp:139:34: warning: narrowing conversion from 'unsigned long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/CropFile/AlbaCropFile_unit.cpp:182:34: warning: narrowing conversion from 'unsigned long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/ReplaceStringInFiles/ReplaceStringInFiles_unit.cpp:10:26: warning: unused variable 'replacer' [clang-diagnostic-unused-variable]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/ReplaceStringInFiles/ReplaceStringInFiles_unit.cpp:18:26: warning: unused variable 'replacer' [clang-diagnostic-unused-variable]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/ReplaceStringInFiles/ReplaceStringInFiles_unit.cpp:27:26: warning: unused variable 'replacer' [clang-diagnostic-unused-variable]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/ReplaceStringInFiles/ReplaceStringInFiles_unit.cpp:33:26: warning: unused variable 'replacer' [clang-diagnostic-unused-variable]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/ReplaceStringInFiles/ReplaceStringInFiles_unit.cpp:41:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/ReplaceStringInFiles/ReplaceStringInFiles_unit.cpp:41:5: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/ReplaceStringInFiles/ReplaceStringInFiles_unit.cpp:10:26: warning: unused variable 'replacer' [-Wunused-variable]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/ReplaceStringInFiles/ReplaceStringInFiles_unit.cpp:18:26: warning: unused variable 'replacer' [-Wunused-variable]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/ReplaceStringInFiles/ReplaceStringInFiles_unit.cpp:27:26: warning: unused variable 'replacer' [-Wunused-variable]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/ReplaceStringInFiles/ReplaceStringInFiles_unit.cpp:33:26: warning: unused variable 'replacer' [-Wunused-variable]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/ReplaceStringInFiles/ReplaceStringInFiles_unit.cpp:40:26: warning: unused variable 'replacer' [-Wunused-variable]
 DONE!
