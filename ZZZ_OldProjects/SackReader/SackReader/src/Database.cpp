@@ -10,7 +10,7 @@ using namespace std;
 
 namespace alba {
 
-void Database::saveDatabaseToFile(string const& path) {
+void Database::saveDatabaseToFile(string const& path) const {
     ofstream fileStream(path);
     AlbaStreamParameterWriter writer(fileStream);
     writer.writeMapData(fileToPathMap);

@@ -63,7 +63,8 @@ void SackReader::loadMessagesToGenerate(string const& path) {
 void SackReader::loadDescriptionToAdd(string const& path) {
     ifstream messageToGenerateStream(path);
     AlbaFileReader messageToGenerateReader(messageToGenerateStream);
-    string name, parameterName;
+    string name;
+    string parameterName;
     IfsDefinitionType currentDefinitionType(IfsDefinitionType::Constant);
     while (messageToGenerateReader.isNotFinished()) {
         string line(messageToGenerateReader.getLineAndIgnoreWhiteSpaces());

@@ -8,7 +8,7 @@
 namespace alba {
 
 struct Database {
-    void saveDatabaseToFile(std::string const& path);
+    void saveDatabaseToFile(std::string const& path) const;
     void loadDatabaseFromFile(std::string const& path);
     [[nodiscard]] std::string getFileFullPath(std::string const& fileName) const;
     [[nodiscard]] ConstantDetails getConstantDetails(std::string const& constantName) const;
