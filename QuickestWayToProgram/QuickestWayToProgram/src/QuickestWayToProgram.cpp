@@ -2,6 +2,6 @@
 
 namespace alba {
 
-QuickestWayToProgram::QuickestWayToProgram() { m_sample = 0; }
+QuickestWayToProgram::QuickestWayToProgram() {}
 
 }  // namespace alba
