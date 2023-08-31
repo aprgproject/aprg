@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [19]
-2023-08-30T08:17:20
+StaticAnalysisJobIdentifier: [20]
+2023-08-31T09:07:09
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.hpp:14:5: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.hpp:14:30: warning: 6 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.hpp:31:18: warning: private field 'm_posNumber' is not used [clang-diagnostic-unused-private-field]
