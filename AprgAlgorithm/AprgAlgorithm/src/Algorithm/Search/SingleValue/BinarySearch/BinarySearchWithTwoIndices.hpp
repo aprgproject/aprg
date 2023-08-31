@@ -33,7 +33,8 @@ public:
 private:
     [[nodiscard]] Index getIndexUsingInterval(Index const startIndex, Index const endIndex, Value const& target) const {
         Index result(INVALID_INDEX);
-        Index lowIndex(startIndex), highIndex(endIndex);
+        Index lowIndex(startIndex);
+        Index highIndex(endIndex);
         while (lowIndex <= highIndex) {
             Index middleIndex = getMidpointOfIndexes(lowIndex, highIndex);
             Value middleValue(m_sortedValues[middleIndex]);

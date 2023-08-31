@@ -15,9 +15,11 @@ public:
     void sort(Values& valuesToSort) const override {
         // Based from https://en.wikipedia.org/wiki/Cocktail_shaker_sort#Pseudocode
         // This can be reimplemented with iterators (for list)
-        int lowIndex = 0, highIndex = valuesToSort.size() - 1;
+        int lowIndex = 0;
+        int highIndex = valuesToSort.size() - 1;
         while (lowIndex <= highIndex) {
-            int lowBoundary = highIndex, highBoundary = lowIndex;
+            int lowBoundary = highIndex;
+            int highBoundary = lowIndex;
             for (int i = lowIndex; i < highIndex; i++) {
                 if (valuesToSort[i] > valuesToSort[i + 1]) {
                     std::swap(valuesToSort[i], valuesToSort[i + 1]);

@@ -37,8 +37,9 @@ public:
 private:
     void sortInternal(
         Values& valuesToSort, int const lowContainerIndex, int const highContainerIndex, int const digitIndex) const {
-        int lowIndexWithEqualValue = lowContainerIndex, i = lowContainerIndex + 1,
-            highIndexWithEqualValue = highContainerIndex;
+        int lowIndexWithEqualValue = lowContainerIndex;
+        int i = lowContainerIndex + 1;
+        int highIndexWithEqualValue = highContainerIndex;
         Value const& partitionValue(valuesToSort[lowContainerIndex]);  // use first value as partition
 
         DigitValue partitionDigit(m_getDigitAtFunction(partitionValue, digitIndex));

@@ -32,7 +32,8 @@ private:
     int getCycleLength(Vertex const& startOfGraph) {
         // This is actually cyclePath.size()-1.
         // For example the cycle, {4, 5, 6, 4} has a cycle length of 3.
-        int powerOfTwo = 1, cycleLength = 1;
+        int powerOfTwo = 1;
+        int cycleLength = 1;
         Vertex tortoise = startOfGraph;
         Vertex hare = walkOne(startOfGraph);
         while (tortoise != hare) {

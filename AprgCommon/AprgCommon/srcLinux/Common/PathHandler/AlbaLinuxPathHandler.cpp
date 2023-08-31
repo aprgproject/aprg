@@ -68,7 +68,7 @@ AlbaDateTime AlbaLinuxPathHandler::getFileCreationTime() const {
 void AlbaLinuxPathHandler::createDirectoriesForNonExisitingDirectories() const {
     string fullPath(getFullPath());
     size_t index = 0;
-    size_t length = static_cast<size_t>(fullPath.length());
+    auto length = static_cast<size_t>(fullPath.length());
     while (index < length) {
         auto indexWithSlashCharacter = static_cast<size_t>(fullPath.find_first_of(m_slashCharacterString, index));
         if (isNpos(static_cast<int>(indexWithSlashCharacter))) {

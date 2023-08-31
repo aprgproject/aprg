@@ -20,7 +20,7 @@ TEST(UtilitiesTest, RetrieveDeltasWorks) {
 
     AudioInDouble const& audio(audioManipulator.getAudio());
     Samples deltaSamplesInChannel0;
-    auto samplesInChannel0(audio.getSamplesAtChannel(0));
+    const auto& samplesInChannel0(audio.getSamplesAtChannel(0));
     retrieveDeltas(deltaSamplesInChannel0, samplesInChannel0, samplesInChannel0.size());
 }
 

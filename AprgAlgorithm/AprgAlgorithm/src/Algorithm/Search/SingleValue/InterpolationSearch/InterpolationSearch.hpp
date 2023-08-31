@@ -35,7 +35,8 @@ private:
     [[nodiscard]] Index getIndexOfValueWithoutCheck(
         Index const startIndex, Index const endIndex, Value const& targetValue) const {
         Index result(INVALID_INDEX);
-        Index lowIndex(startIndex), highIndex(endIndex);
+        Index lowIndex(startIndex);
+        Index highIndex(endIndex);
         while (lowIndex <= highIndex) {
             Value lowerValue(m_sortedValues[lowIndex]);
             Value higherValue(m_sortedValues[highIndex]);

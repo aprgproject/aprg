@@ -46,7 +46,8 @@ private:
         Value const& targetSum, Index const lowIndex, Index const highIndex, Comparator const& shouldContinue) const {
         ValuePair result{};
         if (!m_sortedValues.empty()) {
-            Index iLow = lowIndex, iHigh = highIndex;
+            Index iLow = lowIndex;
+            Index iHigh = highIndex;
             while (shouldContinue(iLow, iHigh)) {
                 Value currentSum(m_sortedValues[iLow] + m_sortedValues[iHigh]);
                 if (currentSum == targetSum) {

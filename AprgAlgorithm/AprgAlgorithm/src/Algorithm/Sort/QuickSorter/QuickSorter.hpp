@@ -29,7 +29,8 @@ private:
     }
 
     void sortInTailRecursive(Values& valuesToSort, int const lowIndex, int const highIndex) const {
-        int iLow(lowIndex), iHigh(highIndex);
+        int iLow(lowIndex);
+        int iHigh(highIndex);
         while (iLow < iHigh) {
             int partitionIndex = partitionAndGetPartitionIndex(valuesToSort, iLow, iHigh, m_pivotType);
             sort(valuesToSort, iLow, iHigh - 1);  // only one recursive call

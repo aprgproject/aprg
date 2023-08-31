@@ -20,7 +20,8 @@ public:
     void sort(Values& valuesToSort) const override {
         if (!valuesToSort.empty()) {
             auto&& [minIt, maxIt] = std::minmax_element(valuesToSort.cbegin(), valuesToSort.cend());
-            Value minimumValue = *minIt, maximumValue = *maxIt;
+            Value minimumValue = *minIt;
+            Value maximumValue = *maxIt;
             Value range = maximumValue - minimumValue + 1;
 
             // Create an array of vectors.

@@ -71,7 +71,8 @@ public:
     static int getRank(Key const& key, Keys const& keys) {
         // this is binary search
         int result(0);
-        int lowIndex = 0, highIndex = keys.size() - 1;
+        int lowIndex = 0;
+        int highIndex = keys.size() - 1;
         while (lowIndex <= highIndex) {
             int middleIndex = getMidpointOfIndexes(lowIndex, highIndex);
             Key const& keyAtMiddleIndex(keys[middleIndex]);

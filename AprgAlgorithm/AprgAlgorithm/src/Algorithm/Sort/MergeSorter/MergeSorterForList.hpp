@@ -68,7 +68,8 @@ private:
         // this is similar with std::list::merge
 
         Values result;
-        ConstIterator it1 = firstPart.cbegin(), it2 = secondPart.cbegin();
+        ConstIterator it1 = firstPart.cbegin();
+        ConstIterator it2 = secondPart.cbegin();
         for (; it1 != firstPart.cend() && it2 != secondPart.cend();) {
             if (*it1 <= *it2) {
                 result.emplace_back(*it1++);

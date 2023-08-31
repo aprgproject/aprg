@@ -25,7 +25,8 @@ public:
     static constexpr Indexes getPrefixLengthsUsingTheZAlgorithm(std::string const &mainString) {
         Index mainStringLength = mainString.length();
         Indexes prefixLengths(mainStringLength, Index{});
-        Index startOfPrefix = 0, endOfPrefix = 0;
+        Index startOfPrefix = 0;
+        Index endOfPrefix = 0;
         for (Index index = 1; index < mainStringLength; index++) {
             // compute prefix length from previous prefix lengths
             Index &prefixLength(prefixLengths[index]);

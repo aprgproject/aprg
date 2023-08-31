@@ -18,7 +18,8 @@ public:
         AlbaStreamBitReader reader(input);
         AlbaStreamBitWriter writer(output);
         Count currentCount(0);
-        bool currentBit(false), previousBit(false);
+        bool currentBit(false);
+        bool previousBit(false);
         while (true) {
             currentBit = reader.readBoolData();
             if (!input.eof())  // do not continue if end of file

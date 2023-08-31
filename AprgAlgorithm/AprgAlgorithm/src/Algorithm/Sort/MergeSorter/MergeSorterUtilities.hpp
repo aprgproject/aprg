@@ -9,7 +9,9 @@ template <typename Values>
 void mergeTheTwoSortedParts(
     Values& valuesToSort, Values& auxiliary, int const lowest, int const middle, int const highest) {
     std::copy(valuesToSort.cbegin() + lowest, valuesToSort.cbegin() + highest + 1, auxiliary.begin() + lowest);
-    int mainIndex = lowest, lowPartIndex = lowest, highPartIndex = middle + 1;
+    int mainIndex = lowest;
+    int lowPartIndex = lowest;
+    int highPartIndex = middle + 1;
     for (; mainIndex <= highest && lowPartIndex <= middle && highPartIndex <= highest; mainIndex++) {
         if (auxiliary[highPartIndex] < auxiliary[lowPartIndex]) {  // high part has lower value
             valuesToSort[mainIndex] = auxiliary[highPartIndex++];  // copy and move high index
@@ -25,7 +27,8 @@ template <typename Values>
 Values mergeTwoSortedSequences(Values const& sortedValues1, Values const& sortedValues2) {
     Values result;
     result.reserve(sortedValues1.size() + sortedValues2.size());
-    int i = 0, j = 0;
+    int i = 0;
+    int j = 0;
     while (i < static_cast<int>(sortedValues1.size()) && j < static_cast<int>(sortedValues2.size())) {
         if (sortedValues2[j] < sortedValues1[i]) {    // second has lower value
             result.emplace_back(sortedValues2[j++]);  // copy and move second index
