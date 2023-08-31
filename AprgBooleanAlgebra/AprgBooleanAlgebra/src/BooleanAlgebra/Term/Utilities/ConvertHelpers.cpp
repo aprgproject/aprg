@@ -15,7 +15,7 @@ Term convertExpressionToSimplestTerm(Expression const& expression) {
     if (expression.isEmpty()) {
         newTerm.clear();
     } else if (expression.containsOnlyOneTerm()) {
-        Term const& term = static_cast<Term const&>(expression.getFirstTermConstReference());
+        Term const& term = dynamic_cast<Term const&>(expression.getFirstTermConstReference());
         newTerm = term;
         newTerm.simplify();
     }

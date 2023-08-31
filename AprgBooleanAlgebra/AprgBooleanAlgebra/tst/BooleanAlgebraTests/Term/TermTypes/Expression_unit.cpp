@@ -46,7 +46,7 @@ TEST(ExpressionTest, ExpressionThatIsCopyConstructedHasIsSimplifiedFlagCopied) {
     Expression expressionWithSimplifiedSet;
     expressionWithSimplifiedSet.setAsSimplified();
 
-    Expression expression1(expressionWithSimplifiedNotSet);
+    const Expression& expression1(expressionWithSimplifiedNotSet);
     Expression expression2(expressionWithSimplifiedSet);
 
     EXPECT_FALSE(expression1.isSimplified());

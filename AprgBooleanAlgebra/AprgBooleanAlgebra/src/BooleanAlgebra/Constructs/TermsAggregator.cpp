@@ -221,7 +221,7 @@ bool TermsAggregator::hasNoValueBeforeThisIndex(int const index) const {
 }
 
 void TermsAggregator::eraseAndThenInsert(int const firstIndex, int const secondIndex, Term const& term) {
-    Term newTerm(term);
+    const Term& newTerm(term);
     eraseTermsInclusive(firstIndex, secondIndex);
     insertTerm(firstIndex, newTerm);
 }
