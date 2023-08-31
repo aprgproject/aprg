@@ -139,7 +139,8 @@ TEST(AlbaMemoryBufferTest, ResizeWorksOnMakingTheBufferSmaller) {
 }
 
 TEST(AlbaMemoryBufferTest, ClearAndSetNewDataWorks) {
-    int input = 11111111, input2 = 22222222;
+    int input = 11111111;
+    int input2 = 22222222;
     AlbaMemoryBuffer buffer;
 
     buffer.clearAndSetNewData(static_cast<void*>(&input), sizeof(input));

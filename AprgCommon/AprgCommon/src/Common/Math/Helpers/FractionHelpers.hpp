@@ -74,7 +74,8 @@ NumeratorType getPartialNumerator(
 template <typename NumberType>
 FractionDetails<NumberType> getFractionFromPartialNumerators(
     std::vector<NumberType> const& calculatedPartialNumerators, bool& isBeyondUnsignedIntegerLimits) {
-    double numerator(0), denominator(0);
+    double numerator(0);
+    double denominator(0);
     if (!calculatedPartialNumerators.empty()) {
         numerator = calculatedPartialNumerators.back();
         denominator = 1;
@@ -101,7 +102,8 @@ FractionDetails<NumberType> getBestFractionDetailsForDoubleValue(double const do
     FractionDetails<NumberType> result{1, 0, 1};
 
     std::vector<NumberType> partialNumerators;
-    double fractionalPart(getAbsoluteValue(doubleValue)), doubleValueForNextIteration(doubleValue);
+    double fractionalPart(getAbsoluteValue(doubleValue));
+    double doubleValueForNextIteration(doubleValue);
     bool isBeyondUnsignedIntegerLimits(false);
     while (fractionalPart > tolerance && !isBeyondUnsignedIntegerLimits) {
         partialNumerators.emplace_back(

@@ -128,7 +128,8 @@ AlbaMatrix<DataType> multiplyMatrices(AlbaMatrix<DataType> const& first, AlbaMat
     assert(first.getNumberOfColumns() == second.getNumberOfRows());
 
     AlbaMatrix<DataType> result(second.getNumberOfColumns(), first.getNumberOfRows());
-    ListOfAlbaMatrixData<DataType> rowsOfFirstMatrix, columnsOfSecondMatrix;
+    ListOfAlbaMatrixData<DataType> rowsOfFirstMatrix;
+    ListOfAlbaMatrixData<DataType> columnsOfSecondMatrix;
     first.retrieveRows(rowsOfFirstMatrix);
     second.retrieveColumns(columnsOfSecondMatrix);
     size_t yPosition = 0;

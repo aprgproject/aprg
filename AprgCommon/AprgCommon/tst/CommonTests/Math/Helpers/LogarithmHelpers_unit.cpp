@@ -87,7 +87,8 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTestWorksW
     // Results: ~850ms
 
     int result(0);
-    int minValue(2), maxValue(2000);
+    int minValue(2);
+    int maxValue(2000);
     AlbaUniformNonDeterministicRandomizer<int> randomizer(minValue, maxValue);
     for (int iterations = 1; iterations < 10000000LL; iterations++) {
         int base = randomizer.getRandomValue();
@@ -101,7 +102,8 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanc
     // Results: ~790ms
 
     int result(0);
-    int minValue(2), maxValue(2000);
+    int minValue(2);
+    int maxValue(2000);
     AlbaUniformNonDeterministicRandomizer<int> randomizer(minValue, maxValue);
     for (int iterations = 1; iterations < 10000000LL; iterations++) {
         int base = randomizer.getRandomValue();

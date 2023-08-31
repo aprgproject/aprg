@@ -34,7 +34,9 @@ TEST(AlbaDebugTest, DebugPrintingWorks) {
 TEST(AlbaDebugTest, ManipulateOutputStreamsWorks) {
     s_debugStringStream.str(string());
     s_debugStringStream.clear();
-    int singleParameter1 = 12, singleParameter2 = 345, singleParameter3 = 6789;
+    int singleParameter1 = 12;
+    int singleParameter2 = 345;
+    int singleParameter3 = 6789;
 
     ALBA_DBG_PRINT_MANIPULATE_OUTPUT(uppercase);
     ALBA_DBG_PRINT_MANIPULATE_OUTPUT(hex);
