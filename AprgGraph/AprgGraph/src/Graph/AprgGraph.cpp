@@ -156,7 +156,8 @@ void AprgGraph::drawNumberLabel(
     constexpr int widthOfCharacter = 12;
     constexpr int heightOfCharacter = 20;
     int labelCharacterLength = label.length();
-    int startPositionInX = 0, startPositionInY = 0;
+    int startPositionInX = 0;
+    int startPositionInY = 0;
     int numberPositionInX = static_cast<int>(round(bitmapPointNumberPosition.getX()));
     int numberPositionInY = static_cast<int>(round(bitmapPointNumberPosition.getY()));
     if (LabelType::HorizontalLabel == labelType) {

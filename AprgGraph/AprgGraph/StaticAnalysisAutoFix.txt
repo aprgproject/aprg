@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [9]
-2023-08-29T22:21:29
+StaticAnalysisJobIdentifier: [20]
+2023-08-31T03:09:47
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:29:52: warning: static member accessed through instance [readability-static-accessed-through-instance]
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:111:9: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:111:9: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
@@ -10,8 +10,8 @@ StaticAnalysisJobIdentifier: [9]
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:126:9: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:126:9: note: Variable 'y' with floating point type 'double' should not be used as a loop counter
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:158:32: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:224:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:230:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:303:20: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:320:20: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:159:5: warning: multiple declarations in a single statement reduces readability [readability-isolate-declaration]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:159:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:304:20: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:321:20: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 DONE!
