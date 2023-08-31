@@ -1,5 +1,17 @@
-StaticAnalysisJobIdentifier: [9]
-2023-08-30T05:40:54
+StaticAnalysisJobIdentifier: [20]
+2023-08-31T10:04:04
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:24:22: warning: method 'calculatePid' can be made const [readability-make-member-function-const]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:24:75: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.hpp:14:65: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:120:22: warning: method 'computeFromMachsModel' can be made const [readability-make-member-function-const]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:121:91: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.hpp:22:120: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:146:5: warning: multiple declarations in a single statement reduces readability [readability-isolate-declaration]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:146:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:147:5: warning: multiple declarations in a single statement reduces readability [readability-isolate-declaration]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:147:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:148:5: warning: multiple declarations in a single statement reduces readability [readability-isolate-declaration]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:148:5: note: FIX-IT applied suggested code changes
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:196:53: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:196:71: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 DONE!
