@@ -62,7 +62,8 @@ int JobAssignmentProblem::getMinimumPossibleCost(
     int cost = 0;
     BoolVector isJobAssignedLocal = isJobAssigned;
     for (int workerIndex = workerId + 1; workerIndex < m_numberOfWorkers; workerIndex++) {
-        int minimumCost = INT_MAX, minIndex = -1;
+        int minimumCost = INT_MAX;
+        int minIndex = -1;
         for (int jobIndex = 0; jobIndex < jobId; jobIndex++) {
             if (!isJobAssignedLocal[jobIndex] && m_costMatrix.getEntry(workerIndex, jobIndex) < minimumCost) {
                 minIndex = jobIndex;

@@ -10,7 +10,9 @@ SubArraySum::Values SubArraySum::getSubArrayWithSum(Value const targetSum) const
     Values result;
     if (!m_valuesToCheck.empty()) {
         bool isFound(false);
-        Index start = 0, end = 0, size = m_valuesToCheck.size();
+        Index start = 0;
+        Index end = 0;
+        Index size = m_valuesToCheck.size();
         Value currentSum = m_valuesToCheck[0];
         while (start < size && end < size) {
             if (currentSum == targetSum) {

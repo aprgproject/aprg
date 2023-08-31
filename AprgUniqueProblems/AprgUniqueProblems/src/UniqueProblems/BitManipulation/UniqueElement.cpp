@@ -22,7 +22,8 @@ UniqueElement::ValuePairs UniqueElement::getTwoUniqueElementsOnTwoDuplicatedValu
     Value xorResult = getXorResult(values);
     Value lastBitOne = AlbaBitValueUtilities<Value>::getLastBitOneOnly(xorResult);
 
-    Value valueWithOne{}, valueWithZero{};
+    Value valueWithOne{};
+    Value valueWithZero{};
     for (Value const& value : values) {
         if ((value & lastBitOne) != 0U) {
             valueWithOne ^= value;
@@ -46,7 +47,8 @@ UniqueElement::Value UniqueElement::getAUniqueElementOnThreeDuplicatedValues(Val
     // -> maskToRemoveCommonBits: 11 | 11
     // -> oneElementTracker at the end: 01
 
-    Value twoElementsTracker{}, oneElementTracker{};
+    Value twoElementsTracker{};
+    Value oneElementTracker{};
     for (Value const& value : values) {
         twoElementsTracker |= (oneElementTracker & value);
         oneElementTracker ^= value;

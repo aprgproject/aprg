@@ -49,7 +49,8 @@ PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathUsingIterativeDP() c
     Path path;
     if (!m_inputGrid.isEmpty()) {
         Grid partialSumGrid(getPartialSumGridUsingIterativeDP());
-        Index x = partialSumGrid.getNumberOfColumns() - 1, y = partialSumGrid.getNumberOfRows() - 1;
+        Index x = partialSumGrid.getNumberOfColumns() - 1;
+        Index y = partialSumGrid.getNumberOfRows() - 1;
         path = {m_inputGrid.getEntry(x, y)};
         while (true) {
             if (x == 0 && y == 0) {

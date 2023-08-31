@@ -133,7 +133,8 @@ int CoinProblem::getNumberOfCoinCombinationsUsingIterativeDP(Value const total) 
         }
         for (Value partialValue = 1; partialValue <= total; partialValue++) {
             for (int coinIndex = 0; coinIndex < static_cast<int>(m_availableCoins.size()); coinIndex++) {
-                Value countWithoutCoin(0), countWithCoin(0);
+                Value countWithoutCoin(0);
+                Value countWithCoin(0);
                 if (coinIndex > 0) {
                     countWithoutCoin = countByValueByCoin.getEntry(
                         partialValue, coinIndex - 1);  // possibilities before this coin entry

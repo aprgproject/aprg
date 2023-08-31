@@ -22,15 +22,15 @@ public:
     using CountDetailMatrix = matrix::AlbaMatrix<CountDetail>;
     static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
 
-    PrintMaximumNumberOfAs(Count const numberOfPresses);
+    explicit PrintMaximumNumberOfAs(Count const numberOfPresses);
 
-    Count getMaxCountOfAOnScreenUsingNaiveRecursion() const;
-    Count getMaxCountOfAOnScreenUsingMemoizationDP() const;
-    Count getMaxCountOfAOnScreenUsingIterativeDP() const;
-    Count getMaxCountOfAOnScreenUsingIterativeDPAndSpaceEfficient() const;
+    [[nodiscard]] Count getMaxCountOfAOnScreenUsingNaiveRecursion() const;
+    [[nodiscard]] Count getMaxCountOfAOnScreenUsingMemoizationDP() const;
+    [[nodiscard]] Count getMaxCountOfAOnScreenUsingIterativeDP() const;
+    [[nodiscard]] Count getMaxCountOfAOnScreenUsingIterativeDPAndSpaceEfficient() const;
 
 private:
-    CountDetail getMaxCountOfAOnScreenUsingNaiveRecursion(
+    [[nodiscard]] CountDetail getMaxCountOfAOnScreenUsingNaiveRecursion(
         Count const remainingNumberOfPresses, PressType const pressType) const;
     CountDetail getMaxCountOfAOnScreenUsingMemoizationDP(
         CountDetailMatrix& savedCounts, Count const remainingNumberOfPresses, PressType const pressType) const;

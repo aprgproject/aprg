@@ -147,14 +147,13 @@ PrintMaximumNumberOfAs::CountDetail PrintMaximumNumberOfAs::getBestDetailBasedOn
                 return first.numberInScreen + first.numberInBuffer < second.numberInScreen + second.numberInBuffer;
             });
         return *it;
-    } else {
-        auto it = max_element(
-            previousDetails.cbegin(), previousDetails.cend(), [](CountDetail const& first, CountDetail const& second) {
-                return first.numberInScreen + max(first.numberInBuffer, first.numberInSelection) <
-                       second.numberInScreen + max(second.numberInBuffer, second.numberInSelection);
-            });
-        return *it;
     }
+    auto it = max_element(
+        previousDetails.cbegin(), previousDetails.cend(), [](CountDetail const& first, CountDetail const& second) {
+            return first.numberInScreen + max(first.numberInBuffer, first.numberInSelection) <
+                   second.numberInScreen + max(second.numberInBuffer, second.numberInSelection);
+        });
+    return *it;
 }
 
 void PrintMaximumNumberOfAs::updateDetailsBasedOnPressType(CountDetails& previousDetails, PressType const pressType) {
@@ -190,8 +189,8 @@ void PrintMaximumNumberOfAs::updateDetailsBasedOnPressType(CountDetails& previou
 }
 
 ostream& operator<<(ostream& out, PrintMaximumNumberOfAs::CountDetail const& countDetail) {
-    out << (int)countDetail.numberInScreen << ":" << (int)countDetail.numberInBuffer << ":"
-        << (int)countDetail.numberInSelection;
+    out << static_cast<int>(countDetail.numberInScreen) << ":" << static_cast<int>(countDetail.numberInBuffer) << ":"
+        << static_cast<int>(countDetail.numberInSelection);
     return out;
 }
 

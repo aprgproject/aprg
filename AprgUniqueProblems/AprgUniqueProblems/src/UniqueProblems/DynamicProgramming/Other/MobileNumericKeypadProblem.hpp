@@ -15,15 +15,15 @@ public:
     using CountMatrix = matrix::AlbaMatrix<Count>;
     static constexpr Count UNUSED_VALUE = std::numeric_limits<Count>::max();
 
-    MobileNumericKeypadProblem(Count const length);
+    explicit MobileNumericKeypadProblem(Count const length);
 
-    Count getCountUsingNaiveRecursion() const;
-    Count getCountUsingMemoizationDP() const;
-    Count getCountUsingIterativeDP() const;
-    Count getCountUsingIterativeDPAndSpaceEfficient() const;
+    [[nodiscard]] Count getCountUsingNaiveRecursion() const;
+    [[nodiscard]] Count getCountUsingMemoizationDP() const;
+    [[nodiscard]] Count getCountUsingIterativeDP() const;
+    [[nodiscard]] Count getCountUsingIterativeDPAndSpaceEfficient() const;
 
 private:
-    Count getCountForValueUsingNaiveRecursion(Count const length, NumpadValue const numpadValue) const;
+    [[nodiscard]] Count getCountForValueUsingNaiveRecursion(Count const length, NumpadValue const numpadValue) const;
     Count getCountForValueUsingMemoizationDP(
         CountMatrix& countMatrix, Count const length, NumpadValue const numpadValue) const;
     // no memoization because there is no recomputation
