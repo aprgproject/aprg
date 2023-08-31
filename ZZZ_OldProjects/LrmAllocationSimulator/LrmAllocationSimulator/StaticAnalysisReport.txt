@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [19]
-2023-08-30T07:00:58
+StaticAnalysisJobIdentifier: [20]
+2023-08-31T08:00:34
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Dsp.cpp:28:50: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Dsp.cpp:28:73: warning: 0xFF00 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/HardwareConfiguration.cpp:32:12: warning: 0x1200 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
@@ -115,9 +115,4 @@ StaticAnalysisJobIdentifier: [19]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:873:29: style: Condition 'priorityForDsp1!=priorityForDsp2' is always false [knownConditionTrueFalse]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1182:111: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1199:29: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/tst/HardwareConfiguration_unit.cpp:64:33: warning: avoid using "_" in test name "TwoFspOneLcgEvenDistribution_CheckSecondFsp" according to Googletest FAQ [google-readability-avoid-underscore-in-googletest-name]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/tst/LrmMarkAlgorithmWithoutHibernationTest.cpp:9:46: warning: avoid using "_" in test name "McdAllocation_MasterTcomIsPrioritizedForNyquist" according to Googletest FAQ [google-readability-avoid-underscore-in-googletest-name]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/tst/LrmMarkAlgorithmWithoutHibernationTest.cpp:24:46: warning: avoid using "_" in test name "McdAllocation_MasterTcomIsPrioritizedForTurboNyquist" according to Googletest FAQ [google-readability-avoid-underscore-in-googletest-name]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/tst/LrmMarkAlgorithmWithoutHibernationTest.cpp:43:46: warning: avoid using "_" in test name "McdAllocation_BiggestNumberOfMcdCcdWithEmptyNyquist" according to Googletest FAQ [google-readability-avoid-underscore-in-googletest-name]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/tst/LrmMarkAlgorithmWithoutHibernationTest.cpp:65:46: warning: avoid using "_" in test name "CcdMcdAllocation_MasterTcomIsPrioritizedForNyquist" according to Googletest FAQ [google-readability-avoid-underscore-in-googletest-name]
 DONE!
