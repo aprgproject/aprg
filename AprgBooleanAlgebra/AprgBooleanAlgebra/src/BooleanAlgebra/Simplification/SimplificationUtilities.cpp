@@ -131,7 +131,8 @@ void simplifyByQuineMcKluskey(Term& term) {
     int numberOfBits = variableNames.size();
     if (numberOfBits > 0 && numberOfBits <= static_cast<int>(AlbaBitValueUtilities<Minterm>::getNumberOfBits())) {
         // cannot be used if number of bits is beyond limit
-        OperatorLevel targetOuter(OperatorLevel::Unknown), targetInner(OperatorLevel::Unknown);
+        OperatorLevel targetOuter(OperatorLevel::Unknown);
+        OperatorLevel targetInner(OperatorLevel::Unknown);
         retrieveTargetOperations(targetOuter, targetInner);
         if (OperatorLevel::And == targetOuter && OperatorLevel::Or == targetInner) {
             DualOperationMutator mutator;
@@ -269,7 +270,8 @@ void distributeTermsIfNeeded(
     Term& outputTerm, Terms const& inputTerms, OperatorLevel const distributeOuterOperation,
     OperatorLevel const distributeInnerOperation) {
     if (!inputTerms.empty()) {
-        OperatorLevel targetOuter, targetInner;
+        OperatorLevel targetOuter;
+        OperatorLevel targetInner;
         retrieveTargetOperations(targetOuter, targetInner);
         if (distributeOuterOperation == targetInner &&
             distributeInnerOperation == targetOuter)  // distribute only if its different from target
