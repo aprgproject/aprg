@@ -32,7 +32,8 @@ int n, a[mxN], c[2 * 100 * mxN + 1];
 
 void runTestCase(int const testCaseNumber) {
     my_cin >> n;
-    int s1 = 0, s2 = 0;
+    int s1 = 0;
+    int s2 = 0;
     for (int i = 0; i < n; ++i) {
         my_cin >> a[i];
         if (a[i] < 0) {

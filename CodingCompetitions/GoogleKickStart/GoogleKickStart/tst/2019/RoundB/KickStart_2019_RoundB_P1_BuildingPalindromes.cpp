@@ -49,14 +49,16 @@ bool canPalindrome(string const& blocksString, Question const& question) {
 }
 
 void runTestCase(int const testCaseNumber) {
-    int numberOfBlocks = 0, numberOfQuestions = 0;
+    int numberOfBlocks = 0;
+    int numberOfQuestions = 0;
     my_cin >> numberOfBlocks >> numberOfQuestions;
     string blocksString;
     my_cin >> blocksString;
 
     Questions questions;
     for (int y = 0; y < numberOfQuestions; ++y) {
-        int leftIndex = 0, rightIndex = 0;
+        int leftIndex = 0;
+        int rightIndex = 0;
         my_cin >> leftIndex >> rightIndex;
         questions.emplace_back(leftIndex, rightIndex);
     }

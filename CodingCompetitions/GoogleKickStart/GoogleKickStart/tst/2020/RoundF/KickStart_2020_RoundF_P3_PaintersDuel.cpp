@@ -101,7 +101,12 @@ int calc(int s, ll ban, int a, int b, int who) {
 }
 
 void runTestCase(int const testCaseNumber) {
-    int s = 0, ra = 0, pa = 0, rb = 0, pb = 0, c = 0;
+    int s = 0;
+    int ra = 0;
+    int pa = 0;
+    int rb = 0;
+    int pb = 0;
+    int c = 0;
     my_cin >> s >> ra >> pa >> rb >> pb >> c;
     ra--, pa--, rb--, pb--;
     for (int i = 0; i < s * s; i++) {
@@ -114,7 +119,8 @@ void runTestCase(int const testCaseNumber) {
         }
     }
     auto add_edge = [&](int ra, int pa, int rb, int pb) {
-        int u = id[ra][pa], v = id[rb][pb];
+        int u = id[ra][pa];
+        int v = id[rb][pb];
         g[u].push_back(v);
         g[v].push_back(u);
     };
@@ -130,12 +136,14 @@ void runTestCase(int const testCaseNumber) {
     }
     ll ban = 0;
     for (int i = 0; i < c; i++) {
-        int r = 0, p = 0;
+        int r = 0;
+        int p = 0;
         my_cin >> r >> p;
         r--, p--;
         ban |= (1LL << id[r][p]);
     }
-    int a = id[ra][pa], b = id[rb][pb];
+    int a = id[ra][pa];
+    int b = id[rb][pb];
     ban |= (1LL << a);
     ban |= (1LL << b);
     my_cout << "Case #" << testCaseNumber << ": " << calc(s, ban, a, b, 0) << "\n";

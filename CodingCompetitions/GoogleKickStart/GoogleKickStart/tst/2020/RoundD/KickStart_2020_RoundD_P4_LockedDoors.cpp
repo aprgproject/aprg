@@ -54,14 +54,16 @@ struct UnionFind {
 };
 
 void runTestCase(int const testCaseNumber) {
-    long long n = 0, q = 0;
+    long long n = 0;
+    long long q = 0;
     my_cin >> n >> q;
     vector<long long> ds(n - 1);
     for (long long i = 0; i < n - 1; i++) {
         my_cin >> ds[i];
     }
 
-    vector<long long> ss(q), ks(q);
+    vector<long long> ss(q);
+    vector<long long> ks(q);
     for (long long i = 0; i < q; i++) {
         my_cin >> ss[i] >> ks[i], ss[i]--;
     }
@@ -80,7 +82,8 @@ void runTestCase(int const testCaseNumber) {
 
     // check(ls[i]) = false
     // check(rs[i]) = true
-    vector<long long> ls(q, -1), rs(q, n - 1);
+    vector<long long> ls(q, -1);
+    vector<long long> rs(q, n - 1);
     while (true) {
         long long flg = 0;
         vector<vector<long long>> G(n);

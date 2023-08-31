@@ -33,7 +33,8 @@ void runTestCase(int const testCaseNumber) {
         my_cin >> a[i];
     }
 
-    int lb = 1, rb = a[n - 1] - a[0];
+    int lb = 1;
+    int rb = a[n - 1] - a[0];
     while (lb < rb) {
         int mb = (lb + rb) / 2;
         int k2 = 0;

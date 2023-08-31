@@ -67,13 +67,13 @@ double ans(vector<int> a, int tot) {
     for (int i = 0; i < static_cast<int>(a.size()); i++) {
         a[i]++;
         double ret = ans(a, tot + 1);
-        go.push_back({1, ret});
+        go.emplace_back(1, ret);
         a[i]--;
     }
     if (static_cast<int>(a.size()) != m) {
         auto b = a;
         b.insert(b.begin(), 1);
-        go.push_back({m - static_cast<int>(a.size()), ans(b, tot + 1)});
+        go.emplace_back(m - static_cast<int>(a.size()), ans(b, tot + 1));
     }
     auto check = [&](double x) {
         double sum = 1;
@@ -86,7 +86,8 @@ double ans(vector<int> a, int tot) {
     for (auto c : go) {
         sum += c.second * c.first / m;
     }
-    double vl = 0, vr = sum;
+    double vl = 0;
+    double vr = sum;
     int it = 100;
     while ((it--) != 0) {
         double vm = (vl + vr) / 2;

@@ -29,7 +29,8 @@ namespace KickStart_2020_RoundG_P3_CombinationLock {
 #endif
 
 void runTestCase(int const testCaseNumber) {
-    int n = 0, k = 0;
+    int n = 0;
+    int k = 0;
     my_cin >> n >> k;
     vector<int> a(n);
     for (int i = 0; i < n; ++i) {
@@ -38,7 +39,8 @@ void runTestCase(int const testCaseNumber) {
     }
     sort(a.begin(), a.end());
     long long best_answer = numeric_limits<long long>::max();
-    int L = 0, R = 0;
+    int L = 0;
+    int R = 0;
     long long current = 0;
     for (int i = 1; i < n; ++i) {
         current += k - a[i];

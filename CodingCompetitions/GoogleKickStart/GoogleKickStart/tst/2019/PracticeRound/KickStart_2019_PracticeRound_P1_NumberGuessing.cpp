@@ -26,11 +26,13 @@ namespace KickStart_2019_PracticeRound_P1_NumberGuessing {
 #endif
 
 void runTestCase(int const) {
-    long long minimumValue = 0, maximumValue = 0;
+    long long minimumValue = 0;
+    long long maximumValue = 0;
     my_cin >> minimumValue >> maximumValue;
     int numberOfTries = 0;
     my_cin >> numberOfTries;
-    int lowValue = minimumValue + 1, highValue = maximumValue;
+    int lowValue = minimumValue + 1;
+    int highValue = maximumValue;
     while (true) {
         long long m = (lowValue + highValue) / 2;
         my_cout << m << endl;

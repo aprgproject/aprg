@@ -28,7 +28,8 @@ namespace KickStart_2019_RoundA_P1_Training {
 #endif
 
 void runTestCase(int const testCaseNumber) {
-    int numberOfStudents = 0, numberOfStudentsPerTeam = 0;
+    int numberOfStudents = 0;
+    int numberOfStudentsPerTeam = 0;
     my_cin >> numberOfStudents >> numberOfStudentsPerTeam;
     vector<int> skillsOfStudents(numberOfStudents);
     for (int i = 0; i < numberOfStudents; ++i) {

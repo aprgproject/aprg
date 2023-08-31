@@ -83,7 +83,10 @@ bool doAllDistancesFitsOnTheDistanceLimit(vector<int> const& distanceGrid, int c
     // distance from the location to a square with a current delivery time greater than K is at most K in constant time.
     // Hence, we can check if the answer is at most K with a time complexity of O(RC).
 
-    int plusMaxLimit = INT_MAX, plusMinLimit = INT_MIN, minusMaxLimit = INT_MAX, minusMinLimit = INT_MIN;
+    int plusMaxLimit = INT_MAX;
+    int plusMinLimit = INT_MIN;
+    int minusMaxLimit = INT_MAX;
+    int minusMinLimit = INT_MIN;
     bool noCellIsBeyondTheLimit(true);
     for (int x = 0; x < columns; ++x) {
         for (int y = 0; y < rows; ++y) {
@@ -101,7 +104,8 @@ bool doAllDistancesFitsOnTheDistanceLimit(vector<int> const& distanceGrid, int c
     }
     for (int x = 0; x < columns; ++x) {
         for (int y = 0; y < rows; ++y) {
-            int plus = x + y, minus = x - y;
+            int plus = x + y;
+            int minus = x - y;
             // this means that if there is a cell within the distance limit: this is a candidate for a new delivery
             // office so return true
             if (plusMinLimit <= plus && plus <= plusMaxLimit && minusMinLimit <= minus &&
@@ -131,7 +135,8 @@ void runTestCase(int const testCaseNumber) {
     vector<int> distanceGrid(rows * columns, INT_MAX);
     fillupDistanceGridViaBfs(distanceGrid, deliveryOffices);
 
-    int lowerDistance = 0, higherDistance = INT_MAX;
+    int lowerDistance = 0;
+    int higherDistance = INT_MAX;
     while (lowerDistance < higherDistance) {
         int middleDistance = lowerDistance + (higherDistance - lowerDistance) / 2;
         if (doAllDistancesFitsOnTheDistanceLimit(distanceGrid, middleDistance)) {
