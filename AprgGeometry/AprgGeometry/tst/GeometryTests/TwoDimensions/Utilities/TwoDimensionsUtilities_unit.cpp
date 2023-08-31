@@ -393,7 +393,8 @@ TEST(TwoDimensionsUtilitiesTest, GetRotationDirectionTraversing3PointsWorksOnDet
     // If the cross product is positive, p is located on the left side,
     // and if the cross product is negative, p is located on the right side.
     // Finally, if the cross product is zero, points s1, s2 and p are on the same line.
-    Point s1(0, 0), s2(2, 2);
+    Point s1(0, 0);
+    Point s2(2, 2);
 
     EXPECT_EQ(RotationDirection::CounterClockWise, getRotationDirectionTraversing3Points(s1, s2, Point(1, 3)));
     EXPECT_EQ(RotationDirection::ClockWise, getRotationDirectionTraversing3Points(s1, s2, Point(3, 1)));
