@@ -55,7 +55,8 @@ private:
         Value const& targetSum, SumsOfPairOfValues const& sumOfPairOfValues, Comparator const& shouldContinue) const {
         PairOfSumOfPairOfValues result{};
         if (!sumOfPairOfValues.empty()) {
-            Index lowIndex = 0, highIndex = sumOfPairOfValues.size() - 1;
+            Index lowIndex = 0;
+            Index highIndex = sumOfPairOfValues.size() - 1;
             while (shouldContinue(lowIndex, highIndex)) {
                 Value currentSum(std::get<0>(sumOfPairOfValues[lowIndex]) + std::get<0>(sumOfPairOfValues[highIndex]));
                 if (currentSum == targetSum) {

@@ -67,7 +67,8 @@ private:
         // product. After this modification, matrix powers correspond to shortest paths in the graph.
 
         DistancetMatrix result(second.getNumberOfColumns(), first.getNumberOfRows());
-        DistancetMatrix::ListOfMatrixData rowsOfFirstMatrix, columnsOfSecondMatrix;
+        DistancetMatrix::ListOfMatrixData rowsOfFirstMatrix;
+        DistancetMatrix::ListOfMatrixData columnsOfSecondMatrix;
         first.retrieveRows(rowsOfFirstMatrix);
         second.retrieveColumns(columnsOfSecondMatrix);
         int y = 0;

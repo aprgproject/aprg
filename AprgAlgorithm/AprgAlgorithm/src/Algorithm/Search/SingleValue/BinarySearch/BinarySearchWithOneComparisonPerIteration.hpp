@@ -45,7 +45,8 @@ private:
         // -> If interval is four elements, this reduces to one element or two elements
 
         Index result(INVALID_INDEX);
-        Index lowIndex(startIndex), highIndex(endIndex);
+        Index lowIndex(startIndex);
+        Index highIndex(endIndex);
         while (lowIndex < highIndex) {
             Index middleIndex = getMidpointOfIndexes(lowIndex, highIndex);
             if (m_sortedValues[middleIndex] <= target) {
@@ -71,7 +72,8 @@ private:
         // -> If interval is four elements, this reduces to two element or three elements
 
         Index result(INVALID_INDEX);
-        Index lowIndex(startIndex), highIndex(endIndex);
+        Index lowIndex(startIndex);
+        Index highIndex(endIndex);
         while (lowIndex + 1 < highIndex) {
             Index middleIndex = getMidpointOfIndexes(lowIndex, highIndex);
             if (target <= m_sortedValues[middleIndex]) {

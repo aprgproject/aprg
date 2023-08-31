@@ -38,7 +38,8 @@ public:
         // This linear-time algorithm is attributed to J. B. Kadane, and the algorithm is sometimes called Kadane’s
         // algorithm.
 
-        Value currentSum(0), bestSum(0);
+        Value currentSum(0);
+        Value bestSum(0);
         for (Value const& value : m_valuesToCheck) {
             currentSum = std::max(value, currentSum + value);
             bestSum = std::max(bestSum, currentSum);
@@ -47,7 +48,8 @@ public:
     }
 
     SubArrayDetails getMaximumSubArraySumWithDetails() {
-        SubArrayDetails currentSubArray{}, bestSubArray{};
+        SubArrayDetails currentSubArray{};
+        SubArrayDetails bestSubArray{};
         int index(0);
         for (Value const& value : m_valuesToCheck) {
             if (value > currentSubArray.sum + value)  // new sub array contains only value

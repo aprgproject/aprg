@@ -22,7 +22,8 @@ private:
         int result(static_cast<int>(std::string::npos));
         int searchSpaceLength(searchSpace.length());
         int queryLength(query.length());
-        int searchIndex = 0, matchIndex = 0;
+        int searchIndex = 0;
+        int matchIndex = 0;
         for (; searchIndex < searchSpaceLength && matchIndex < queryLength; searchIndex++) {
             if (searchSpace[searchIndex] == query[matchIndex]) {
                 matchIndex++;  // matchIndex represents the index of matches as well

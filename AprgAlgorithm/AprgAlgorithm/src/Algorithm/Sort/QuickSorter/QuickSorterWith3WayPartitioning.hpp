@@ -26,7 +26,8 @@ private:
             int indexWithPivotValue = getPivotIndex(valuesToSort, lowIndex, highIndex, m_pivotType);
             auto pivotValue = valuesToSort[indexWithPivotValue];
 
-            int boundaryIndexForLessThan = lowIndex, boundaryIndexForGreaterThan = highIndex;
+            int boundaryIndexForLessThan = lowIndex;
+            int boundaryIndexForGreaterThan = highIndex;
             int compareIndex = lowIndex;
 
             while (compareIndex <= boundaryIndexForGreaterThan) {  // i moves within the boundaries

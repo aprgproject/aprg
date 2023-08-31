@@ -29,7 +29,8 @@ private:
         // Running time: O(log(container1)*log(container2))
 
         int medianSize = (m_container1.size() + m_container2.size() + 1) / 2;
-        int lowIndexOn1 = 0, highIndexOn1 = m_container1.size() - 1;
+        int lowIndexOn1 = 0;
+        int highIndexOn1 = m_container1.size() - 1;
         while (lowIndexOn1 < highIndexOn1) {
             int midIndexOn1 = getMidpointOfIndexes(lowIndexOn1, highIndexOn1);
             int totalAtMid = getTotalOnBothContainers(midIndexOn1);

@@ -35,10 +35,11 @@ private:
     [[nodiscard]] int getIndexWithGreaterValueUsingBinarySearch(
         Values const& valuesToSort, int const lowIndex, int const highIndex, Value const& value) const {
         int result(INVALID_INDEX);
-        int iLow(lowIndex), iHigh(highIndex);
+        int iLow(lowIndex);
+        int iHigh(highIndex);
         while (iLow <= iHigh) {
             int middleIndex = getMidpointOfIndexes(iLow, iHigh);
-            Value middleValue(valuesToSort[middleIndex]);
+            const Value& middleValue(valuesToSort[middleIndex]);
             if (value < middleValue) {
                 result = middleIndex;
                 iHigh = middleIndex - 1;

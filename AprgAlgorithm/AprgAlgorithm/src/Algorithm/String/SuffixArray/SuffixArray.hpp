@@ -23,7 +23,8 @@ public:
     [[nodiscard]] Index getIndexOnMainStringOfSuffixAt(Index const index) const { return m_mainStringIndexes[index]; }
 
     [[nodiscard]] Index getRank(std::string_view key) const {
-        Index low = 0, high = getSize() - 1;
+        Index low = 0;
+        Index high = getSize() - 1;
         while (low <= high) {
             Index mid = getMidpointOfIndexes(low, high);
             auto compareValue = key.compare(getSuffixViewAt(mid));
