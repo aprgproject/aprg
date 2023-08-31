@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [20]
-2023-08-30T23:23:15
+StaticAnalysisJobIdentifier: [30]
+2023-08-31T23:41:51
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/AudioManipulator.cpp:27:25: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/AudioManipulator.cpp:40:25: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/NearestSamples.cpp:41:9: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
@@ -16,6 +16,5 @@ StaticAnalysisJobIdentifier: [20]
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/Utilities.cpp:142:66: warning: 48000 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/Utilities.cpp:142:73: warning: 100 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/Utilities.cpp:56:16: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/tst/AudioManipulatorTests/Utilities_unit.cpp:23:10: warning: the variable 'samplesInChannel0' is copy-constructed from a const reference but is only used as const reference; consider making it a const reference [performance-unnecessary-copy-initialization]
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/tst/AudioManipulatorTests/Utilities_unit.cpp:24:63: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 DONE!
