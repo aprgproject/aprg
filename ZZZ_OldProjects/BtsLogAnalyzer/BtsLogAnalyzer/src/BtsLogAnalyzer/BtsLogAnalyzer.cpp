@@ -479,7 +479,8 @@ void BtsLogAnalyzer::processFileForBtsDelayForGrm(string const& filePath) {
 
 double BtsLogAnalyzer::getWireSharkTime(string const& lineInLogs) {
     int length(lineInLogs.length());
-    int startIndexOfTime = 0, endIndexOfTime = 0;
+    int startIndexOfTime = 0;
+    int endIndexOfTime = 0;
     int i = 0;
     for (; i < length && stringHelper::isWhiteSpace(lineInLogs[i]); i++) {
     }
