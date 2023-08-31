@@ -73,7 +73,8 @@ TEST(BaseTermHelpersTest, GetBaseTermConstReferenceFromTermWorks) {
 
     BaseTerm const& baseTerm(getBaseTermConstReferenceFromTerm(originalTerm));
 
-    Term const& termToVerify(dynamic_cast<Term const&>(baseTerm));
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    Term const& termToVerify(static_cast<Term const&>(baseTerm));
     EXPECT_EQ(Term(true), termToVerify);
 }
 
@@ -82,7 +83,8 @@ TEST(BaseTermHelpersTest, GetBaseTermConstReferenceFromUniquePointerWorks) {
 
     BaseTerm const& baseTerm(getBaseTermConstReferenceFromUniquePointer(uniquePointer));
 
-    Term const& termToVerify(dynamic_cast<Term const&>(baseTerm));
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    Term const& termToVerify(static_cast<Term const&>(baseTerm));
     EXPECT_EQ(Term(true), termToVerify);
 }
 
@@ -90,7 +92,8 @@ TEST(BaseTermHelpersTest, GetBaseTermReferenceFromTermWorks) {
     Term originalTerm(true);
 
     BaseTerm& baseTerm(getBaseTermReferenceFromTerm(originalTerm));
-    Term& termToVerify(dynamic_cast<Term&>(baseTerm));
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    Term& termToVerify(static_cast<Term&>(baseTerm));
     originalTerm = Term(true);
 
     EXPECT_EQ(Term(true), termToVerify);
@@ -101,7 +104,8 @@ TEST(BaseTermHelpersTest, GetBaseTermReferenceFromUniquePointerWorks) {
 
     BaseTerm& baseTerm(getBaseTermReferenceFromUniquePointer(uniquePointer));
 
-    Term const& termToVerify(dynamic_cast<Term const&>(baseTerm));
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    Term const& termToVerify(static_cast<Term const&>(baseTerm));
     EXPECT_EQ(Term(true), termToVerify);
 }
 

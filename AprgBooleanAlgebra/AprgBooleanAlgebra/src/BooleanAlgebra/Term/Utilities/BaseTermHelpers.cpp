@@ -16,18 +16,29 @@ BaseTermUniquePointer duplicateUniquePointer(BaseTermUniquePointer const& unique
     return static_cast<BaseTermUniquePointer>(make_unique<Term>(getTermConstReferenceFromUniquePointer(uniquePointer)));
 }
 
-Term const& getTermConstReferenceFromBaseTerm(BaseTerm const& baseTerm) { return dynamic_cast<Term const&>(baseTerm); }
-
-Term const& getTermConstReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer) {
-    return dynamic_cast<Term const&>(*uniquePointer.get());
+Term const& getTermConstReferenceFromBaseTerm(BaseTerm const& baseTerm) {
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return static_cast<Term const&>(baseTerm);
 }
 
-Term&& getTermRValueReferenceFromBaseTerm(BaseTerm&& baseTerm) { return dynamic_cast<Term&&>(baseTerm); }
+Term const& getTermConstReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer) {
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return static_cast<Term const&>(*uniquePointer.get());
+}
 
-Term& getTermReferenceFromBaseTerm(BaseTerm& baseTerm) { return dynamic_cast<Term&>(baseTerm); }
+Term&& getTermRValueReferenceFromBaseTerm(BaseTerm&& baseTerm) {
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return static_cast<Term&&>(baseTerm);
+}
+
+Term& getTermReferenceFromBaseTerm(BaseTerm& baseTerm) {
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return static_cast<Term&>(baseTerm);
+}
 
 Term& getTermReferenceFromUniquePointer(BaseTermUniquePointer& uniquePointer) {
-    return *dynamic_cast<Term*>(uniquePointer.get());
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return *static_cast<Term*>(uniquePointer.get());
 }
 
 BaseTerm const& getBaseTermConstReferenceFromTerm(Term const& term) { return static_cast<BaseTerm const&>(term); }

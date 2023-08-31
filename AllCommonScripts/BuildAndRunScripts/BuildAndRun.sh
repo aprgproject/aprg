@@ -64,6 +64,11 @@ getClangAndClazyCompiler() {
     cppCompilerLocation="$(command -v clazy)" # Use clazy as static analyzer
 }
 
+printBuildPathAndLsCommand() {
+    scriptPrint "$scriptName" "$LINENO" "The build path is [$(pwd)] and the output of [$lsCommand]:"
+    $lsCommand
+}
+
 printConfigureParameters() {
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType] and cmakeGenerator is [$cmakeGenerator]."
     if [[ -n $cCompilerLocation ]]; then
@@ -72,21 +77,18 @@ printConfigureParameters() {
     if [[ -n $cppCompilerLocation ]]; then
         scriptPrint "$scriptName" "$LINENO" "The cppCompilerLocation is [$cppCompilerLocation]."
     fi
-    scriptPrint "$scriptName" "$LINENO" "The build path is [$(pwd)] and the output of [$lsCommand]:"
-    $lsCommand
+    printBuildPathAndLsCommand
 }
 
 printBuildParameters() {
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."
     scriptPrint "$scriptName" "$LINENO" "The numberOfCores is [$numberOfCores]."
-    scriptPrint "$scriptName" "$LINENO" "The build path is [$(pwd)] and the output of [$lsCommand]:"
-    $lsCommand
+    printBuildPathAndLsCommand
 }
 
 printInstallParameters() {
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."
-    scriptPrint "$scriptName" "$LINENO" "The build path is [$(pwd)] and the output of [$lsCommand]:"
-    $lsCommand
+    printBuildPathAndLsCommand
 }
 
 performClean() {
@@ -96,6 +98,15 @@ performClean() {
         scriptPrint "$scriptName" "$LINENO" "After deletion in [$(pwd)] contents:"
         $lsCommand
     fi
+}
+
+performGenerateCompileCommandsJsonFile() {
+    # The [compile_commands.json] is useful to save configuration on compilation so you can use other tools.
+    scriptPrint "$scriptName" "$LINENO" "Generating [compile_commands.json], make sure the project is already configured."
+    printBuildPathAndLsCommand
+    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON "../$immediateDirectoryName/"
+    scriptPrint "$scriptName" "$LINENO" "The location of [compile_commands.json]:"
+    find "$(pwd)" -type f -name "compile_commands.json" -print
 }
 
 performRun(){
@@ -174,6 +185,8 @@ elif [ "$scriptOption" == "cleanAndConfigureWithStaticAnalyzersWithAutoFix" ]; t
     getClangAndClazyCompiler
     printConfigureParameters
     cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "-DAPRG_ENABLE_STATIC_ANALYZERS_AUTO_FIX=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+elif [ "$scriptOption" == "generateCompileCommandsJsonFile" ]; then
+    performGenerateCompileCommandsJsonFile
 elif [ "$scriptOption" == "build" ]; then
     getArgumentsForBuild
     printBuildParameters

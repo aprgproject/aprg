@@ -14,6 +14,11 @@ findCppProjectsForStaticAnalysis() {
     source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
     cppIndicatorFilePath=""
     source "$aprgDirectory/AllCommonScripts/CommonRegex/IndicatorPaths.sh"
+
+    if [ -z "$jobIdentifierFromRun" ]; then
+        scriptPrint "$scriptName" "$LINENO" "There the job identifier is empty: [$jobIdentifierFromRun], exiting with error."
+        exit 1
+    fi
     
     cppProjectsFound=""
     searchCondition="*$cppIndicatorFilePath"
