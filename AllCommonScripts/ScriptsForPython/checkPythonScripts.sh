@@ -5,11 +5,11 @@ scriptPath=$(realpath "$0")
 scriptDirectory=$(dirname "$scriptPath")
 scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
-directoryToConvertAllFiles="$1"
+inputDirectory="$1"
 
 # Use aprgDirectory/Python directory if there are no arguments
-if [ -z "$directoryToConvertAllFiles" ]; then
-    directoryToConvertAllFiles="$aprgDirectory/Python"
+if [ -z "$inputDirectory" ]; then
+    inputDirectory="$aprgDirectory/Python"
 fi
 
 # Source needed scripts
@@ -31,6 +31,12 @@ checkPythonScriptsInDirectory() {
         if  [[ "$filePath" =~ $pathRegex ]]; then
             scriptPrint "$scriptName" "$LINENO" "Processing python file: [$filePath]"
             
+            flake8 "--config" "$aprgDirectory/.flake8" "$filePath" | sed -E "s@\/mnt\/(\w+)\/@ \U\1:/@g"
+            currentStatus=$?
+            if [ "$currentStatus" -gt "$localLintStatus" ]; then
+                localLintStatus=$currentStatus
+            fi
+            
             pylint "--rcfile=$aprgDirectory/.pylintrc" "$filePath"
             currentStatus=$?
             if [ "$currentStatus" -gt "$localLintStatus" ]; then
@@ -46,8 +52,8 @@ checkPythonScriptsInDirectory() {
 lintStatus=0
 
 # Find all files with the same name in the target folder
-scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles]..."
-checkPythonScriptsInDirectory "$lintStatus" "$directoryToConvertAllFiles"
+scriptPrint "$scriptName" "$LINENO" "Searching all files in [$inputDirectory]..."
+checkPythonScriptsInDirectory "$lintStatus" "$inputDirectory"
 lintStatus=$?
 
 scriptPrint "$scriptName" "$LINENO" "All shell scripts in the directory are processed."

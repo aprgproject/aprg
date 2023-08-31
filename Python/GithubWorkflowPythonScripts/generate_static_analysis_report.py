@@ -66,9 +66,9 @@ print("\n")
 logging.info("Printing the data in a bar graph:")
 MIN_BAR_LENGTH = 1
 MAX_BAR_LENGTH = 59
-BAR_TO_SCALE = MAX_BAR_LENGTH-MIN_BAR_LENGTH
+BAR_TO_SCALE = MAX_BAR_LENGTH - MIN_BAR_LENGTH
 max_count = max(issue_to_count_map.values())
-with open('StaticAnalysisOverallReport.txt', 'w') as overall_report_file:
+with open('StaticAnalysisOverallReport.txt', 'w', encoding='utf-8') as overall_report_file:
     overall_report_file.write('Static Analysis overall report:\n')
     for issue, count in issue_to_count_map.items():
         display_bar_length = int(

@@ -6,11 +6,11 @@ scriptDirectory=$(dirname "$scriptPath")
 scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
 buildAndRunScriptPath="$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
-directoryToConvertAllFiles="$1"
+inputDirectory="$1"
 
 # Use aprg directory if there are no arguments
-if [ -z "$directoryToConvertAllFiles" ]; then
-    directoryToConvertAllFiles="$aprgDirectory"
+if [ -z "$inputDirectory" ]; then
+    inputDirectory="$aprgDirectory"
 fi
 
 # Source needed scripts
@@ -32,7 +32,7 @@ runStaticAnalyzersInDirectory() {
 }
 
 # Find all files with the same name in the target folder
-scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles]..."
+scriptPrint "$scriptName" "$LINENO" "Searching all files in [$inputDirectory]..."
 while IFS= read -r aprgProjectLocatorPath; do
     aprgProjectDirectory=$(echo "$aprgProjectLocatorPath" | sed -E "s|$cppIndicatorFilePath||")
     scriptPrint "$scriptName" "$LINENO" "Searching in aprg project: [$aprgProjectDirectory]"

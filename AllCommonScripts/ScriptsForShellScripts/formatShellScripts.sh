@@ -5,11 +5,11 @@ scriptPath=$(realpath "$0")
 scriptDirectory=$(dirname "$scriptPath")
 scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
-directoryToConvertAllFiles="$1"
+inputDirectory="$1"
 
 # Use aprg directory if there are no arguments
-if [ -z "$directoryToConvertAllFiles" ]; then
-    directoryToConvertAllFiles="$aprgDirectory"
+if [ -z "$inputDirectory" ]; then
+    inputDirectory="$aprgDirectory"
 fi
 
 # Source needed scripts
@@ -44,7 +44,7 @@ formatShellScriptsInDirectory() {
 }
 
 # Find all files with the same name in the target folder
-scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles]..."
-formatShellScriptsInDirectory "$directoryToConvertAllFiles"
+scriptPrint "$scriptName" "$LINENO" "Searching all files in [$inputDirectory]..."
+formatShellScriptsInDirectory "$inputDirectory"
 
 scriptPrint "$scriptName" "$LINENO" "All shell scripts in the directory are processed."

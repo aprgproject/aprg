@@ -10,8 +10,8 @@ class MoveState(enum.Enum):
 
 class Cell(enum.Enum):
     EMPTY = 0
-    X = 1
-    O = 2
+    X_MARK = 1
+    O_MARK = 2
 
 
 @dataclass
@@ -32,9 +32,9 @@ BOARD_SIZE = BOARD_SIDE_SIZE * BOARD_SIDE_SIZE
 def get_cell_display(cell):
     if Cell.EMPTY == cell:
         return DISPLAY_EMPTY
-    if Cell.X == cell:
+    if Cell.X_MARK == cell:
         return DISPLAY_X
-    if Cell.O == cell:
+    if Cell.O_MARK == cell:
         return DISPLAY_O
     return DISPLAY_UNKNOWN
 
@@ -52,7 +52,7 @@ def get_available_indexes(board):
 
 
 def toggle_cell(current_cell):
-    return Cell.O if current_cell == Cell.X else Cell.X
+    return Cell.O_MARK if current_cell == Cell.X_MARK else Cell.X_MARK
 
 
 def create_empty_board():
@@ -209,7 +209,7 @@ def get_random_index(board):
 
 
 def play_tic_tac_toe():
-    current_cell = Cell.O
+    current_cell = Cell.O_MARK
     state = MoveState.COMPUTER_MOVE
     main_board = create_empty_board()
     print('Game start')

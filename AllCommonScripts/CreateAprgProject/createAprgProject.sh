@@ -8,7 +8,7 @@ aprgDirectory=$(realpath "$scriptDirectory/../../")
 scriptOption="$1"
 projectName="$2"
 capitalUnderscoreName="$3"
-parentDirectory=$(realpath "$4")
+parentDirectory="$4"
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
@@ -22,6 +22,10 @@ if [ -z "$projectName" ]; then
     scriptPrint "$scriptName" "$LINENO" "Error: The projectName cannot be empty, projectName: [$projectName]."
     exit 1
 fi
+if [ -z "$parentDirectory" ]; then
+    parentDirectory="$aprgDirectory"
+fi
+parentDirectory=$(realpath "$parentDirectory")
 if ! [[ -d $parentDirectory ]]; then
     scriptPrint "$scriptName" "$LINENO" "Error: The directory [$parentDirectory] does not exist."
     exit 1
@@ -34,7 +38,7 @@ copyTemplateFiles() {
     projectDirectory="$parentDirectory/$projectName"
     scriptPrint "$scriptName" "$LINENO" "copyTemplateFiles() [$templateName] [$templateDirectory] [$projectDirectory]"
     mkdir -p "$projectDirectory"
-    rsync --verbose --archive --recursive --force --include='*/' --include='.*' "$templateDirectory/*" "$projectDirectory"
+    rsync --verbose --archive --recursive --force --include='*/' --include='.*' "$templateDirectory/" "$projectDirectory"
 }
 
 replaceAllText() {

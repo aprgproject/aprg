@@ -1,3 +1,5 @@
+#pragma once
+
 #define KEYWORD_OPERATORS \
     "typeid", "const_cast", "static_cast", "reinterpret_cast", "static_cast", "sizeof", "new", "delete", "throw"
 #define THREE_CHAR_OPERATORS "->*", "<<=", ">>="

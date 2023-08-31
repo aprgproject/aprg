@@ -57,6 +57,8 @@ inline bool isPunctuation(char const character) { return ispunct(character) != 0
 
 inline bool isUnderscore(char const character) { return '_' == character; }
 
+inline bool isLetterOrUnderscore(char const character) { return isLetter(character) || isUnderscore(character); }
+
 inline bool isLetterOrNumberOrUnderscore(char const character) {
     return isLetterOrNumber(character) || isUnderscore(character);
 }

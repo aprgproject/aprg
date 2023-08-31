@@ -6,11 +6,11 @@ scriptDirectory=$(dirname "$scriptPath")
 scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
 allCommonCMakeFilesDirectory=$(realpath "$aprgDirectory/AllCommonCMakeFiles")
-directoryToConvertAllFiles="$1"
+inputDirectory="$1"
 
 # Use aprg directory if there are no arguments
-if [ -z "$directoryToConvertAllFiles" ]; then
-    directoryToConvertAllFiles="$aprgDirectory"
+if [ -z "$inputDirectory" ]; then
+    inputDirectory="$aprgDirectory"
 fi
 
 # Source needed scripts
@@ -44,7 +44,7 @@ formatCMakeFilesInDirectory() {
 formatCMakeFilesInDirectory "$allCommonCMakeFilesDirectory"
 
 # Find all cmake files in aprg directories
-scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles] ..."
+scriptPrint "$scriptName" "$LINENO" "Searching all files in [$inputDirectory] ..."
 while IFS= read -r aprgProjectLocatorPath; do
     aprgProjectDirectory=$(echo "$aprgProjectLocatorPath" | sed -E "s|$cppIndicatorFilePath||")
     scriptPrint "$scriptName" "$LINENO" "Searching in aprg project: [$aprgProjectDirectory]"
@@ -54,6 +54,6 @@ while IFS= read -r aprgProjectLocatorPath; do
         scriptPrint "$scriptName" "$LINENO" "Searching in AprgCMakeToInclude directory: [$aprgCMakeIncludeDirectory]"
         formatCMakeFilesInDirectory "$aprgCMakeIncludeDirectory"
     fi
-done < <(find "$directoryToConvertAllFiles" -depth -type f -wholename "$searchCondition")
+done < <(find "$inputDirectory" -depth -type f -wholename "$searchCondition")
 
 scriptPrint "$scriptName" "$LINENO" "All C/C++ in the directory are processed."

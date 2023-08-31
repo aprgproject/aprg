@@ -13,8 +13,14 @@ source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 
 scriptPrint "$scriptName" "$LINENO"  "Performing [git add] to add all versioned files that was changed..."
 git add -u
-scriptPrint "$scriptName" "$LINENO"  "Performing [git diff] to see the local changes (file paths only):"
-git diff --cached --name-only
+scriptPrint "$scriptName" "$LINENO"  "Performing [git diff] to see the local changes..."
+changedFiles=$(git diff --cached --name-only)
+scriptPrint "$scriptName" "$LINENO"  "Output of [git diff] (file paths only): [$changedFiles]"
+if [ -z "$changedFiles" ]; then
+    scriptPrint "$scriptName" "$LINENO" "There are no detected changes, so exiting without an error."
+    exit 0
+fi
+
 scriptPrint "$scriptName" "$LINENO"  "Performing [git commit] with a message..."
 git commit -m "JobId[$jobIdentifier] $commitMessage"
 
