@@ -10,28 +10,25 @@ namespace alba::AprgBitmap {
 OutwardSnakeLikeTraversal::OutwardSnakeLikeTraversal(
     BitmapXY const& currentPoint, Direction const direction, int const lowestLeft, int const highestRight,
     int const lowestTop, int const highestBottom)
-    : m_direction(direction),
+    : m_currentPoint(fixPoint(currentPoint, lowestLeft, highestRight, lowestTop, highestBottom)),
+      m_direction(direction),
       m_lowestLeft(lowestLeft),
       m_highestRight(highestRight),
       m_lowestTop(lowestTop),
       m_highestBottom(highestBottom),
-      m_lastMostLeft(currentPoint.getX()),
       m_lastMostLeft(m_currentPoint.getX()),
-      m_lastMostRight(currentPoint.getX()),
       m_lastMostRight(m_currentPoint.getX()),
-      m_lastMostTop(currentPoint.getY()),
       m_lastMostTop(m_currentPoint.getY()),
-      m_lastMostBottom(currentPoint.getY()),
-      m_lastMostBottom(m_currentPoint.getY()) {
-    m_currentPoint = fixPoint(currentPoint);
-}
+      m_lastMostBottom(m_currentPoint.getY()) {}
 
-BitmapXY OutwardSnakeLikeTraversal::fixPoint(BitmapXY const& point) const {
+BitmapXY OutwardSnakeLikeTraversal::fixPoint(
+    BitmapXY const& point, int const lowestLeft, int const highestRight, int const lowestTop,
+    int const highestBottom) const {
     BitmapXY newPoint(point);
-    newPoint.setX(clampLowerBound(newPoint.getX(), m_lowestLeft));
-    newPoint.setX(clampHigherBound(newPoint.getX(), m_highestRight));
-    newPoint.setY(clampLowerBound(newPoint.getY(), m_lowestTop));
-    newPoint.setY(clampHigherBound(newPoint.getY(), m_highestBottom));
+    newPoint.setX(clampLowerBound(newPoint.getX(), lowestLeft));
+    newPoint.setX(clampHigherBound(newPoint.getX(), highestRight));
+    newPoint.setY(clampLowerBound(newPoint.getY(), lowestTop));
+    newPoint.setY(clampHigherBound(newPoint.getY(), highestBottom));
     return newPoint;
 }
 
