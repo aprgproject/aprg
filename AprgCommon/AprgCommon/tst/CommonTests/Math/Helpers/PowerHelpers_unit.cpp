@@ -225,7 +225,8 @@ TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformance
     // Results: ~3.1s
 
     long long result(0);
-    int minValue(1), maxValue(2000);
+    int minValue(1);
+    int maxValue(2000);
     AlbaUniformNonDeterministicRandomizer<long long> randomizer(minValue, maxValue);
     for (long long iterations = 1; iterations < 10000000LL; iterations++) {
         long long base = randomizer.getRandomValue();
@@ -239,7 +240,8 @@ TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersUsingPowPer
     // Results: ~3.1s
 
     long long result(0);
-    int minValue(1), maxValue(2000);
+    int minValue(1);
+    int maxValue(2000);
     AlbaUniformNonDeterministicRandomizer<long long> randomizer(minValue, maxValue);
     for (long long iterations = 1; iterations < 10000000LL; iterations++) {
         long long base = randomizer.getRandomValue();

@@ -57,7 +57,9 @@ NumberType getRaiseToPowerForIntegers(NumberType const base, NumberType const ex
 
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
-    NumberType result(1), currentBase(base), remainingExponent(exponent);
+    NumberType result(1);
+    NumberType currentBase(base);
+    NumberType remainingExponent(exponent);
     while (remainingExponent > 0) {
         if (isEven(remainingExponent)) {
             currentBase *= currentBase;
@@ -133,7 +135,8 @@ template <typename NumberType>
 NumberType getSquareRootUsingBinarySearch(NumberType const radicand) {
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
-    NumberType low(0), high(radicand);
+    NumberType low(0);
+    NumberType high(radicand);
     while (low < high) {
         NumberType mid = low + (high - low) / 2;
         if (mid * mid <= radicand) {

@@ -66,7 +66,8 @@ NumberType getGreatestCommonFactorUsingEuclidAlgorithm(NumberType const firstNum
     // -> if b!=0: gcd(b, a%b)
 
     NumberType result(0);
-    NumberType first(getAbsoluteValue(firstNumber)), second(getAbsoluteValue(secondNumber));  // only consider positive
+    NumberType first(getAbsoluteValue(firstNumber));
+    NumberType second(getAbsoluteValue(secondNumber));  // only consider positive
     while (true) {
         if (second == 0) {
             result = first;
@@ -94,7 +95,8 @@ NumberType getGreatestCommonFactorUsingBinaryGcdAlgorithm(NumberType const first
     // odd.
     // -----> gcd(u, v) = gcd(|u − v|, min(u, v)), if u and v are both odd.
 
-    NumberType first(getAbsoluteValue(firstNumber)), second(getAbsoluteValue(secondNumber));  // only consider positive
+    NumberType first(getAbsoluteValue(firstNumber));
+    NumberType second(getAbsoluteValue(secondNumber));  // only consider positive
     if (first == 0) {
         return second;
     }
@@ -136,7 +138,8 @@ NumberType getGreatestCommonFactorWithLastValues(
         lastValue2 = 0;
         result = number1;
     } else {
-        NumberType previous1{}, previous2{};
+        NumberType previous1{};
+        NumberType previous2{};
         result = getGreatestCommonFactorWithLastValues(
             number2, number1 % number2, previous1, previous2);  // Recursively find the gcf
         lastValue1 = previous2;

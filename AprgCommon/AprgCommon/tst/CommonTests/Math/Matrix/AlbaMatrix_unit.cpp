@@ -360,7 +360,8 @@ TEST(AlbaMatrixTest, RetrieveRowsWorks) {
 TEST(AlbaMatrixTest, RetrieveXAndYFromIndexWorks) {
     AlbaMatrix<int> matrix(14, 6);
 
-    size_t xValue{}, yValue{};
+    size_t xValue{};
+    size_t yValue{};
     matrix.retrieveXAndYFromIndex(xValue, yValue, 43);
 
     EXPECT_EQ(1U, xValue);
