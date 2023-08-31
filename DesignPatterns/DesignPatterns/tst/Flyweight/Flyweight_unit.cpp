@@ -18,7 +18,7 @@ TEST(FlyweightTest, Test1) {
     auto sharedObjectWith2 = factory.getSharedFlyweight(2);
     sharedObjectWith2->operation(30);
 
-    auto unsharedObjectWith2 = factory.getUnsharedFlyweight(3);
+    auto unsharedObjectWith2 = Flyweight::FlyweightFactory::getUnsharedFlyweight(3);
     unsharedObjectWith2->operation(40);
 }
 
