@@ -1,26 +1,56 @@
-StaticAnalysisJobIdentifier: [9]
-2023-08-30T04:43:48
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:545:52: warning: unused parameter 'end' [clang-diagnostic-unused-parameter]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:589:43: warning: invalid conversion specifier 'U' [clang-diagnostic-format-invalid-specifier]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:590:83: warning: data argument not used by format string [clang-diagnostic-format-extra-args]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:42:1: warning: use 'using' instead of 'typedef' [modernize-use-using]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:42:1: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:70:7: warning: class 'TimerStack' defines a non-default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:100:9: warning: %d in format string (no. 2) requires 'int' but the argument type is 'unsigned int'. [invalidPrintfArgType_sint]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:177:13: warning: %u in format string (no. 5) requires 'unsigned int' but the argument type is 'signed int'. [invalidPrintfArgType_uint]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:265:13: warning: %d in format string (no. 3) requires 'int' but the argument type is 'unsigned int'. [invalidPrintfArgType_sint]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:354:5: warning: %d in format string (no. 2) requires 'int' but the argument type is 'unsigned int'. [invalidPrintfArgType_sint]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:354:5: warning: %d in format string (no. 4) requires 'int' but the argument type is 'unsigned int'. [invalidPrintfArgType_sint]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:429:13: warning: %d in format string (no. 2) requires 'int' but the argument type is 'unsigned int'. [invalidPrintfArgType_sint]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:429:13: warning: %d in format string (no. 4) requires 'int' but the argument type is 'unsigned int'. [invalidPrintfArgType_sint]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:588:13: warning: %d in format string (no. 1) requires 'int' but the argument type is 'unsigned int'. [invalidPrintfArgType_sint]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:588:13: warning: %u in format string (no. 3) requires 'unsigned int' but the argument type is 'const signed char *'. [invalidPrintfArgType_uint]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:588:13: warning: %s in format string (no. 4) requires 'char *' but the argument type is 'unsigned int'. [invalidPrintfArgType_s]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:242:17: style: Variable 'tmpSfn' is assigned a value that is never used. [unreadVariable]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:589:43: warning: invalid conversion specifier 'U' [-Wformat-invalid-specifier]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:590:83: warning: data argument not used by format string [-Wformat-extra-args]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:545:52: warning: unused parameter 'end' [-Wunused-parameter]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:70:7: warning: class 'TimerStack' defines a non-default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+StaticAnalysisJobIdentifier: [20]
+2023-08-31T09:01:19
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:32:43: warning: redundant void argument list in function definition [modernize-redundant-void-arg]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:32:43: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:66:55: warning: redundant void argument list in function definition [modernize-redundant-void-arg]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:66:55: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:74:60: warning: redundant void argument list in function definition [modernize-redundant-void-arg]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:74:60: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:91:52: warning: use nullptr [modernize-use-nullptr]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:91:52: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:108:37: warning: redundant void argument list in function definition [modernize-redundant-void-arg]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:108:37: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:153:5: warning: 'timeCounter' should be initialized in an in-class default member initializer [cppcoreguidelines-prefer-member-initializer]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:153:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:121:28: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:154:5: warning: 'timeOffsetToSFN' should be initialized in an in-class default member initializer [cppcoreguidelines-prefer-member-initializer]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:154:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:122:32: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:155:5: warning: 'timeFromStart' should be initialized in an in-class default member initializer [cppcoreguidelines-prefer-member-initializer]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:155:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:124:30: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:156:5: warning: 'nthFib' should be initialized in an in-class default member initializer [cppcoreguidelines-prefer-member-initializer]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:156:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:125:15: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:513:23: warning: redundant void argument list in function definition [modernize-redundant-void-arg]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:513:23: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:590:43: warning: invalid conversion specifier 'U' [clang-diagnostic-format-invalid-specifier]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:591:83: warning: data argument not used by format string [clang-diagnostic-format-extra-args]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:71:7: warning: class 'TimerStack' defines a non-default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:102:15: warning: redundant void argument list in function declaration [modernize-redundant-void-arg]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:102:15: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:105:35: warning: redundant void argument list in function declaration [modernize-redundant-void-arg]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:105:35: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:108:35: warning: redundant void argument list in function declaration [modernize-redundant-void-arg]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:108:35: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:110:40: warning: redundant void argument list in function declaration [modernize-redundant-void-arg]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:110:40: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:112:29: warning: redundant void argument list in function declaration [modernize-redundant-void-arg]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:112:29: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:101:9: warning: %d in format string (no. 2) requires 'int' but the argument type is 'unsigned int'. [invalidPrintfArgType_sint]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:178:13: warning: %u in format string (no. 5) requires 'unsigned int' but the argument type is 'signed int'. [invalidPrintfArgType_uint]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:266:13: warning: %d in format string (no. 3) requires 'int' but the argument type is 'unsigned int'. [invalidPrintfArgType_sint]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:355:5: warning: %d in format string (no. 2) requires 'int' but the argument type is 'unsigned int'. [invalidPrintfArgType_sint]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:355:5: warning: %d in format string (no. 4) requires 'int' but the argument type is 'unsigned int'. [invalidPrintfArgType_sint]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:430:13: warning: %d in format string (no. 2) requires 'int' but the argument type is 'unsigned int'. [invalidPrintfArgType_sint]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:430:13: warning: %d in format string (no. 4) requires 'int' but the argument type is 'unsigned int'. [invalidPrintfArgType_sint]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:589:13: warning: %d in format string (no. 1) requires 'int' but the argument type is 'unsigned int'. [invalidPrintfArgType_sint]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:589:13: warning: %u in format string (no. 3) requires 'unsigned int' but the argument type is 'const signed char *'. [invalidPrintfArgType_uint]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:589:13: warning: %s in format string (no. 4) requires 'char *' but the argument type is 'unsigned int'. [invalidPrintfArgType_s]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:243:17: style: Variable 'tmpSfn' is assigned a value that is never used. [unreadVariable]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:590:43: warning: invalid conversion specifier 'U' [-Wformat-invalid-specifier]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.cpp:591:83: warning: data argument not used by format string [-Wformat-extra-args]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/src/DMeasTimerStack.hpp:71:7: warning: class 'TimerStack' defines a non-default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/tst/DMeasTimerStack_unit.cpp:51:5: note: in instantiation of function template specialization 'testing::internal::EqHelper::Compare<int, unsigned int, nullptr>' requested here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/DMeasTimerStack/DMeasTimerStack/tst/DMeasTimerStack_unit.cpp:51:5: note: in instantiation of function template specialization 'testing::internal::EqHelper::Compare<int, unsigned int, nullptr>' requested here
 DONE!

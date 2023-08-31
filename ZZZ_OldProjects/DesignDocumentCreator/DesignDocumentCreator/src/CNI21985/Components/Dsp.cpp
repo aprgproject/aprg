@@ -12,17 +12,17 @@ namespace DesignDocumentCreator {
 
 Dsp::Dsp(ComponentName const componentName) : Component(componentName) {}
 
-void Dsp::handleTransportSetupReq(GenericMessage const&) {
+void Dsp::handleTransportSetupReq(GenericMessage const&) const {
     // I am not coding DSP. :)
     sendTransportSetupResp();
 }
 
-void Dsp::handleTransportReleaseReq(GenericMessage const&) {
+void Dsp::handleTransportReleaseReq(GenericMessage const&) const {
     // I am not coding DSP. :)
     sendTransportReleaseResp();
 }
 
-void Dsp::handleTransportTransferReq(GenericMessage const&) {
+void Dsp::handleTransportTransferReq(GenericMessage const&) const {
     // I am not coding DSP. :)
     sendTransportTransferResp();
 }

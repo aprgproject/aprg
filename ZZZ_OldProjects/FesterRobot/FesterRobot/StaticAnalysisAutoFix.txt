@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [9]
-2023-08-30T04:49:57
+StaticAnalysisJobIdentifier: [20]
+2023-08-31T09:07:51
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/FesterRobot/FesterRobot/src/FesterRobot.cpp:24:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/FesterRobot/FesterRobot/src/FesterRobot.cpp:24:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/FesterRobot/FesterRobot/src/FesterRobot.cpp:26:30: error: no member named 'isLetterPressed' in 'alba::AlbaLinuxUserAutomation' [clang-diagnostic-error]

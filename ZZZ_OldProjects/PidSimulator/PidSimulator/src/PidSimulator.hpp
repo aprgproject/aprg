@@ -11,7 +11,7 @@ class PidSimulator {
 public:
     explicit PidSimulator(stringHelper::strings const& argumentsInMain);
 
-    double calculatePid(double const input, double const target);
+    double calculatePid(double const input, double const target) const;
     void generateInput();
     void generateTriangleWavesForInput();
     void generateSineWavesForInput();
@@ -19,7 +19,8 @@ public:
     void generateStepDownForInput();
     void generateRandomForInput();
     void calculateAndGenerateOutputImage();
-    double computeFromMachsModel(double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand);
+    double computeFromMachsModel(
+        double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) const;
     static double computeFromMachsModel1(
         double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand);
     static double computeFromMachsModel2(

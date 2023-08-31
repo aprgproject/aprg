@@ -1,4 +1,4 @@
-StaticAnalysisJobIdentifier: [9]
-2023-08-30T03:53:00
+StaticAnalysisJobIdentifier: [20]
+2023-08-31T08:08:54
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/AsilBasebandPooling.cpp:55:16: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
 DONE!

@@ -55,7 +55,8 @@ void RevisionEditor::editCommitDates() {
                        createDaysInterval(2023, 11, 11, 2023, 11, 14), createDaysInterval(2023, 12, 14, 2023, 12, 31)};
     uint32_t startDayCount = startDate.getTotalDays();
     uint32_t endDayCount = endDate.getTotalDays();
-    int revisionIndex = 0, gapIndex = 0;
+    int revisionIndex = 0;
+    int gapIndex = 0;
     int const numberOfRevisions = static_cast<int>(m_revisionEntries.size());
     for (uint32_t currentDayCount = startDayCount; revisionIndex < numberOfRevisions; ++currentDayCount) {
         uint32_t remainingNumberOfDays = (endDayCount > currentDayCount) ? endDayCount - currentDayCount : 1;
@@ -134,17 +135,17 @@ RevisionEditor::RevisionEntry RevisionEditor::getRevisionEntry(string const& lin
 
 AlbaDateTime RevisionEditor::getDateTime(string const& date) {
     int index = 0;
-    uint16_t year = convertStringToNumber<uint16_t>(getStringBeforeThisString(date, "-", index));
+    auto year = convertStringToNumber<uint16_t>(getStringBeforeThisString(date, "-", index));
     index = date.find("-", index) + 1;
-    uint8_t month = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "-", index));
+    auto month = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "-", index));
     index = date.find("-", index) + 1;
-    uint8_t day = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "T", index));
+    auto day = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "T", index));
     index = date.find("T", index) + 1;
-    uint8_t hour = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, ":", index));
+    auto hour = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, ":", index));
     index = date.find(":", index) + 1;
-    uint8_t minute = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, ":", index));
+    auto minute = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, ":", index));
     index = date.find(":", index) + 1;
-    uint8_t second = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "+", index));
+    auto second = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "+", index));
 
     return {year, month, day, hour, minute, second, 0U};
 }
@@ -159,7 +160,8 @@ void RevisionEditor::setDataFromGitHistory() {
     ifstream revisionHistoryStream(R"(F:\Branches\GitMigration\git_old_repo\formattedGitHistory.txt)");
     AlbaFileReader revisionHistoryReader(revisionHistoryStream);
     AlbaYearMonthDay dayToCheck;
-    int numberOfCommitsOnThisDay = 1, totalNumberOfInstances = 0;
+    int numberOfCommitsOnThisDay = 1;
+    int totalNumberOfInstances = 0;
     bool isFirst = true;
     while (revisionHistoryReader.isNotFinished()) {
         string line(revisionHistoryReader.getLineAndIgnoreWhiteSpaces());

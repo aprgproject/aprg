@@ -21,7 +21,7 @@ PidSimulator::PidSimulator(stringHelper::strings const& argumentsInMain)
 
       m_randomizer(0, static_cast<int>(m_conf.amplitudeOfInputDemand)) {}
 
-double PidSimulator::calculatePid(double const input, double const target) {
+double PidSimulator::calculatePid(double const input, double const target) const {
     // https://en.wikipedia.org/wiki/PID_controller
 
     static double integral = 0;
@@ -118,7 +118,7 @@ void PidSimulator::generateRandomForInput() {
 }
 
 double PidSimulator::computeFromMachsModel(
-    double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) {
+    double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) const {
     double result(0);
     if ("MachsModel1" == m_conf.machsModelType) {
         result = computeFromMachsModel1(inputDemandSample, psuedoMaxTxPower, adjustedDemand);
@@ -143,10 +143,18 @@ double PidSimulator::computeFromMachsModel2(
 }
 
 void PidSimulator::calculateAndGenerateOutputImage() {
-    int index = 0, xRightMax = 0, xLeftMax = 0, yBottomMax = 0, yTopMax = 0;
-    double tcomReceivedPowerFromMachs = m_conf.maxCellTxPower, adjustedDemand = 0;
-    Points targetSeries, inputDemandSeries, pseudoMaxTxPowerSeries, tcomReceivedPowerFromMachsSeries,
-        adjustedDemandSeries;
+    int index = 0;
+    int xRightMax = 0;
+    int xLeftMax = 0;
+    int yBottomMax = 0;
+    int yTopMax = 0;
+    double tcomReceivedPowerFromMachs = m_conf.maxCellTxPower;
+    double adjustedDemand = 0;
+    Points targetSeries;
+    Points inputDemandSeries;
+    Points pseudoMaxTxPowerSeries;
+    Points tcomReceivedPowerFromMachsSeries;
+    Points adjustedDemandSeries;
     for (double const inputDemandSample : m_inputSample) {
         double pidOutput(calculatePid(tcomReceivedPowerFromMachs, m_conf.targetInPidCalculation));
         double psuedoMaxTxPower = min(pidOutput, m_conf.maxCellTxPower);

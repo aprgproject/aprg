@@ -100,7 +100,9 @@ void MapAnalyzer::selectMaps() {
         };
         RoMap const& roMap(mapNameToRoMap.second);
 
-        bool hasAcceptableSmall(false), hasAcceptableMedium(false), hasAcceptableLarge(false);
+        bool hasAcceptableSmall(false);
+        bool hasAcceptableMedium(false);
+        bool hasAcceptableLarge(false);
         map<string, MonsterData> monstersNameToDataMap;
         for (MonsterDetailsOnRoMap const& monsterDetailsOnMap : roMap.monstersDetailsOnMap) {
             Monster monster(m_ragnarokOnline.getMonster(monsterDetailsOnMap.monsterName));

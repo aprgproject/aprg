@@ -83,8 +83,7 @@ bool PerformanceAnalyzer::UniqueUserId::operator<(UniqueUserId const& uniqueUser
 
 PerformanceAnalyzer::PerformanceAnalyzer() {
     // defautlvalues
-    m_extractGrepCondition =
-        R"([LRM] || [alarm] || [UDP] || [CPU] || [syslog] || [ccns] || [tcom] || [startup] || [runtime] || [system] || [radparam] || ([bts]&&([.log]||[.zip]||[.tar])) || [snapshot] || ([tech]&&[report]) || [BTSLogFiles])";
+
     AlbaLocalPathHandler pathHandler(R"(C:\temp\BtsSorter\)");
     pathHandler.createDirectoriesForNonExisitingDirectories();
     m_sorterConfiguration.m_acceptedFilesGrepCondition =
@@ -209,7 +208,8 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInRlh(string const& filePath
     int count = 0;
     int countFail = 0;
     std::map<UniqueUserId, BtsLogDelay> btsLogDelays;
-    BtsLogTime startTest, endTest;
+    BtsLogTime startTest;
+    BtsLogTime endTest;
     while (fileReader.isNotFinished()) {
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if (isStringFoundNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlSetupReq3G)")) {
@@ -1086,7 +1086,10 @@ void PerformanceAnalyzer::processFileForRlSetupPerSecond(string const& filePath)
          << " fileReader: " << fileReader.isNotFinished() << "\n";
     logLineInRawDataFile("BtsTime,instances");
 
-    int hour = 0, min = 0, sec = 0, instances = 0;
+    int hour = 0;
+    int min = 0;
+    int sec = 0;
+    int instances = 0;
     BtsLogTime firstLogTime;
     while (fileReader.isNotFinished()) {
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
@@ -1122,7 +1125,9 @@ void PerformanceAnalyzer::processFileForTraceLog(string const& traceLogPath) {
     cout << "processFile: " << filePathHandler.getFullPath() << " isOpen: " << inputLogFileStream.is_open()
          << " fileReader: " << fileReader.isNotFinished() << "\n";
 
-    int hour = 0, min = 0, sec = 0;
+    int hour = 0;
+    int min = 0;
+    int sec = 0;
 
     stringstream ss;
     while (fileReader.isNotFinished()) {

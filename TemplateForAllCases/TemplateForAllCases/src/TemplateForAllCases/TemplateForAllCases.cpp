@@ -2,6 +2,6 @@
 
 namespace alba {
 
-TemplateForAllCases::TemplateForAllCases() { m_sample = 0; }
+TemplateForAllCases::TemplateForAllCases() {}
 
 }  // namespace alba
