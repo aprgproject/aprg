@@ -57,9 +57,9 @@ private:
     void generateMemReport(std::string const& pathOfTopLog);
     stringHelper::strings getProcessNamesForMemReport();
     static void putHeadersInMemReport(
-        stringHelper::strings const& processNamesInReport, std::ofstream& cpuReportFileStream);
+        stringHelper::strings const& processNamesInReport, std::ofstream& memReportFileStream);
     void putEntriesInMemReport(
-        stringHelper::strings const& processNamesInReport, std::ofstream& cpuReportFileStream) const;
+        stringHelper::strings const& processNamesInReport, std::ofstream& memReportFileStream) const;
     static bool isTopCommandFirstLine(std::string const& lineInLogs);
     static bool isTopCommandHeaderLine(std::string const& lineInLogs);
     void saveAndClearCurrentEntry(DataEntry& currentEntry);

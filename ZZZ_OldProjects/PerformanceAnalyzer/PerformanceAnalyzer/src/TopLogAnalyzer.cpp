@@ -206,7 +206,7 @@ stringHelper::strings TopLogAnalyzer::getProcessNamesForMemReport() {
 }
 
 void TopLogAnalyzer::putHeadersInMemReport(
-    stringHelper::strings const& processNamesInReport, ofstream& cpuReportFileStream) {
+    stringHelper::strings const& processNamesInReport, ofstream& memReportFileStream) {
     memReportFileStream << "Time,";
     for (string const& processName : processNamesInReport) {
         memReportFileStream << processName << ",";
@@ -215,7 +215,7 @@ void TopLogAnalyzer::putHeadersInMemReport(
 }
 
 void TopLogAnalyzer::putEntriesInMemReport(
-    stringHelper::strings const& processNamesInReport, ofstream& cpuReportFileStream) const {
+    stringHelper::strings const& processNamesInReport, ofstream& memReportFileStream) const {
     memReportFileStream.precision(3);
     for (DataEntry const& entry : m_dataEntries) {
         memReportFileStream << entry.timeInTop.getPrintObject<AlbaDateTime::PrintFormat::TimeWithColon>() << ",";
