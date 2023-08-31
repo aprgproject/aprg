@@ -1,5 +1,6 @@
 # -> Standard checkers
 # ---> start of checkers for avoiding warnings in tests is on -cert-err58-cpp,
+# -> Nice checks to have: misc-const-correctness
 Checks: '
   *,
   -altera-struct-pack-align,
@@ -21,6 +22,7 @@ Checks: '
   -llvmlibc-callee-namespace,
   -llvmlibc-restrict-system-libc-headers,
   -llvm-header-guard,
+  -misc-const-correctness,
   -misc-non-private-member-variables-in-classes,
   -misc-no-recursion,
   -modernize-use-trailing-return-type,
