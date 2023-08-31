@@ -109,8 +109,13 @@ Piece Board::getPieceAt(Coordinate const& coordinate) const {
 
 Exchange Board::getExchangeAt(Coordinate const& coordinate) const {
     enum class ExchangeState { Defended, Attacked };
-    constexpr int PAWN_INDEX = 0, KNIGHT_INDEX = 1, BISHOP_INDEX = 2, ROOK_INDEX = 3, QUEEN_INDEX = 4, KING_INDEX = 5,
-                  SIZE = 6;
+    constexpr int PAWN_INDEX = 0;
+    constexpr int KNIGHT_INDEX = 1;
+    constexpr int BISHOP_INDEX = 2;
+    constexpr int ROOK_INDEX = 3;
+    constexpr int QUEEN_INDEX = 4;
+    constexpr int KING_INDEX = 5;
+    constexpr int SIZE = 6;
     vector<int> pieceValue{1, 3, 3, 5, 9, 0};
     AttackDefendCounts counts(6, AttackDefendCount{});
     retrievePawnAttackDefendCountToThis(counts[PAWN_INDEX], coordinate);
