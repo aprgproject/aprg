@@ -14,11 +14,11 @@ struct SampleClassWithStatic {
     static inline std::string staticInlinedString = "500";
     // mutable static int staticMutableData; // Static data members cannot be mutable.
 
-    int nonStaticFunctionWithClassDeclaration();
+    [[nodiscard]] int nonStaticFunctionWithClassDeclaration() const;
 
     static int staticFunctionWithClassDeclaration();
 
-    int nonStaticFunctionWithClassDefinition() { return nonStaticData; }
+    [[nodiscard]] int nonStaticFunctionWithClassDefinition() const { return nonStaticData; }
 
     static int staticFunctionWithClassDefinition() {
         // return this->staticData;

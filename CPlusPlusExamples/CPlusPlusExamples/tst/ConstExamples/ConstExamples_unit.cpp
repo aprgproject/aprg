@@ -352,7 +352,8 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
     // optimizations
     // -----> and less so as a tag for omniscient compilers to automatically generate better code"
 
-    int a = 10, b = 10;
+    int a = 10;
+    int b = 10;
     foo(a, b);
     foo(a, a);  // Two loads are needed here.
 
