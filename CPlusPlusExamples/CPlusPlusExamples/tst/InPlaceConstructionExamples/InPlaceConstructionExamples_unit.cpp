@@ -354,7 +354,7 @@ struct Value {
 TEST(InPlaceConstructionExamplesTest, CreatingAVectorOfPairs) {
     vector<pair<int, Value>> v;
 
-    v.push_back(make_pair(1, Value{42, "hello", 3.14}));  // This is no good
+    v.emplace_back(1, Value{42, "hello", 3.14});  // This is no good
 
     v.emplace_back(make_pair(1, Value{42, "hello", 3.14}));  // This is no better
 
@@ -499,7 +499,9 @@ using S = ClassesWithBasicFunctionWorks::S;
 
 TEST(InPlaceConstructionExamplesTest, OptionalAssignment) {
     using VariantS = optional<S>;
-    VariantS opt1, opt2, opt3;
+    VariantS opt1;
+    VariantS opt2;
+    VariantS opt3;
 
     opt1 = Arg{};     // 1 value construction, 1 destruction, good
     opt2 = S{1};      // 1 value construction, 1 move construction, 2 destructions, not good
@@ -527,7 +529,9 @@ using S = ClassesWithBasicFunctionWorks::S;
 
 TEST(InPlaceConstructionExamplesTest, VariantAssignment) {
     using VariantS = variant<int, S>;
-    VariantS opt1, opt2, opt3;
+    VariantS opt1;
+    VariantS opt2;
+    VariantS opt3;
 
     opt1 = Arg{};        // 1 value construction, 1 destruction, good
     opt2 = S{1};         // 1 value construction, 1 move construction, 2 destructions, not good

@@ -138,7 +138,8 @@ TEST(AlgorithmExamplesTest, ProcessConfigurationUpdates) {
     vector<string> current{
         "Configuration1", "ConfigurationA", "ConfigurationAlpha", "ConfigurationB", "ConfigurationBeta"};
     vector<string> update{"Configuration2", "ConfigurationA", "ConfigurationAlpha", "ConfigurationC"};
-    vector<string> newItems, removedItems;
+    vector<string> newItems;
+    vector<string> removedItems;
 
     // sort(begin(current), end(current)); // no need for sort because already sorted
     // sort(begin(update), end(update)); // no need for sort because already sorted

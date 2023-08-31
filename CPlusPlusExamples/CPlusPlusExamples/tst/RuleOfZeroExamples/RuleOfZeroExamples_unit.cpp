@@ -39,8 +39,7 @@ class NaiveIntVector {
 public:
     NaiveIntVector() = default;
     ~NaiveIntVector() { delete[] m_ptr; }
-    NaiveIntVector(NaiveIntVector const& rightHandSide) {
-        m_size = rightHandSide.m_size;
+    NaiveIntVector(NaiveIntVector const& rightHandSide) : m_size(rightHandSide.m_size) {
         m_ptr = new int[m_size];
         copy(rightHandSide.m_ptr, rightHandSide.m_ptr + m_size, m_ptr);
     }
