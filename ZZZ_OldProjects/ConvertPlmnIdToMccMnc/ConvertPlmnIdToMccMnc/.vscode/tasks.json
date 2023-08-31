@@ -182,7 +182,8 @@
 				"cleanAndConfigureWithGcc",
 				"cleanAndConfigureWithClang",
 				"cleanAndConfigureWithClangWithAsan",
-				"cleanAndConfigureWithClangAndStaticAnalyzers"
+				"cleanAndConfigureWithClangAndStaticAnalyzers",
+				"generateCompileCommandsJsonFile"
 			],
 			"default": "configureWithClang"
 		}
