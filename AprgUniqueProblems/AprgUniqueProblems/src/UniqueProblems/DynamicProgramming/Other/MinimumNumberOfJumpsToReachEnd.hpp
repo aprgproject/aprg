@@ -16,16 +16,16 @@ public:
     using Counts = std::vector<Count>;
     static constexpr Count MAX_COUNT = std::numeric_limits<Count>::max();
 
-    MinimumNumberOfJumpsToReachEnd(Counts const& sequence);
+    explicit MinimumNumberOfJumpsToReachEnd(Counts const& sequence);
 
-    Count getMinimumNumberOfJumpsUsingNaiveRecursion() const;
-    Count getMinimumNumberOfJumpsUsingMemoizationDP() const;
-    Count getMinimumNumberOfJumpsUsingIterativeDP() const;
-    Count getMinimumNumberOfJumpsUsingIterativeDPAndTimeEfficient() const;
-    Indices getPathOfMinimumNumberOfJumps() const;
+    [[nodiscard]] Count getMinimumNumberOfJumpsUsingNaiveRecursion() const;
+    [[nodiscard]] Count getMinimumNumberOfJumpsUsingMemoizationDP() const;
+    [[nodiscard]] Count getMinimumNumberOfJumpsUsingIterativeDP() const;
+    [[nodiscard]] Count getMinimumNumberOfJumpsUsingIterativeDPAndTimeEfficient() const;
+    [[nodiscard]] Indices getPathOfMinimumNumberOfJumps() const;
 
 private:
-    Count getMinimumNumberOfJumpsUsingNaiveRecursion(Index const startJumpIndex) const;
+    [[nodiscard]] Count getMinimumNumberOfJumpsUsingNaiveRecursion(Index const startJumpIndex) const;
     Count getMinimumNumberOfJumpsUsingMemoizationDP(Counts& indexToCountOfJumps, Index const startJumpIndex) const;
     Counts m_sequence;
 };

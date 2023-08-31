@@ -104,7 +104,8 @@ void CountingTilings::doCompleteSearchAt(Count const gridIndex) {
     if (m_numberFilledCells == m_numberOfCells) {
         m_numberOfSolutions++;
     } else if (gridIndex < m_numberOfCells) {
-        size_t x = 0, y = 0;
+        size_t x = 0;
+        size_t y = 0;
         m_grid.retrieveXAndYFromIndex(x, y, gridIndex);
         if (m_grid.getEntry(x, y) == '\0') {
             if (m_grid.isInside(x + 1, y) && m_grid.getEntry(x + 1, y) == '\0') {

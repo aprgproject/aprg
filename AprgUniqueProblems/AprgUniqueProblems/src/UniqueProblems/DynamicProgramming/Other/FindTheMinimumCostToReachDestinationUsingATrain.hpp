@@ -16,14 +16,14 @@ public:
     static constexpr Value UNUSED_VALUE = std::numeric_limits<Value>::max();
     static constexpr Value MAX_VALUE = UNUSED_VALUE - 1;
 
-    FindTheMinimumCostToReachDestinationUsingATrain(ValueMatrix const& prices);
+    explicit FindTheMinimumCostToReachDestinationUsingATrain(ValueMatrix const& prices);
 
-    Value getMinimumCostUsingNaiveRecursion() const;
-    Value getMinimumCostUsingMemoizationDP() const;
-    Value getMinimumCostUsingIterativeDP() const;
+    [[nodiscard]] Value getMinimumCostUsingNaiveRecursion() const;
+    [[nodiscard]] Value getMinimumCostUsingMemoizationDP() const;
+    [[nodiscard]] Value getMinimumCostUsingIterativeDP() const;
 
 private:
-    Value getMinimumCostUsingNaiveRecursion(Index const endStation) const;
+    [[nodiscard]] Value getMinimumCostUsingNaiveRecursion(Index const endStation) const;
     Value getMinimumCostUsingMemoizationDP(Values& savedCosts, Index const endStation) const;
     void clearIfInvalid();
     ValueMatrix m_pricesAtEachStation;

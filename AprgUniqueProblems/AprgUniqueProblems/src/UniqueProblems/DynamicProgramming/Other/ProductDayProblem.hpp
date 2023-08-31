@@ -19,20 +19,20 @@ public:
     static constexpr Price INVALID_PRICE = std::numeric_limits<Price>::max();
     static constexpr Price UNUSED_PRICE = INVALID_PRICE - 1;
 
-    ProductDayProblem(PriceMatrix const& pricesInDayByProduct);
+    explicit ProductDayProblem(PriceMatrix const& pricesInDayByProduct);
 
-    Price getMinimumPriceUsingMemoizationDP() const;
-    Price getMinimumPriceUsingIterativeDP() const;
+    [[nodiscard]] Price getMinimumPriceUsingMemoizationDP() const;
+    [[nodiscard]] Price getMinimumPriceUsingIterativeDP() const;
 
 private:
     Price getMinimumPriceUsingMemoizationDP(
         PriceMatrix& minimumPrices, Day const day, ProductBits const productBits) const;
 
-    bool isProductIncluded(ProductBits const productBits, Product const product) const;
-    Product getNumberOfProducts() const;
-    Day getNumberOfDays() const;
-    ProductBits getNumberOfProductsSubsets() const;
-    ProductBits getProductBitsWithAllProducts() const;
+    static [[nodiscard]] bool isProductIncluded(ProductBits const productBits, Product const product);
+    [[nodiscard]] Product getNumberOfProducts() const;
+    [[nodiscard]] Day getNumberOfDays() const;
+    [[nodiscard]] ProductBits getNumberOfProductsSubsets() const;
+    [[nodiscard]] ProductBits getProductBitsWithAllProducts() const;
     static ProductBits getProductBits(Product const product);
     static ProductBits addProduct(ProductBits const productBits, Product const product);
     static ProductBits removeProduct(ProductBits const productBits, Product const product);

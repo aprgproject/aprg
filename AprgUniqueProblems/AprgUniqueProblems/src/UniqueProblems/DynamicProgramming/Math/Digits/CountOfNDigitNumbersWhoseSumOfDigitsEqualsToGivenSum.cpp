@@ -102,7 +102,8 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountBySearchingValuesW
         for (Value value = start; value < end;
              value += (value == m_targetSumOfDigits) ? 9 : 1)  // once sum is found just add 9 to find the next one
         {
-            Value currentSumOfDigits = 0, remainingDigits = value;
+            Value currentSumOfDigits = 0;
+            Value remainingDigits = value;
             while (remainingDigits != 0) {
                 currentSumOfDigits += remainingDigits % 10;
                 remainingDigits /= 10;

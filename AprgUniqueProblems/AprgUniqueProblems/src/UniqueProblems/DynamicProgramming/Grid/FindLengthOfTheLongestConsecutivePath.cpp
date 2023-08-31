@@ -42,7 +42,8 @@ FindLengthOfTheLongestConsecutivePath::getLongestLengthStartingAtUsingNaiveRecur
     Value nextValue = m_inputGrid.getEntry(x, y) + 1;
 
     for (auto const& [xOffset, yOffset] : columnOffsets) {
-        Index neighborX = x + xOffset, neighborY = y + yOffset;
+        Index neighborX = x + xOffset;
+        Index neighborY = y + yOffset;
         if (m_inputGrid.isInside(neighborX, neighborY) && m_inputGrid.getEntry(neighborX, neighborY) == nextValue) {
             result = max(result, getLongestLengthStartingAtUsingNaiveRecursion(neighborX, neighborY));
         }
@@ -71,7 +72,8 @@ FindLengthOfTheLongestConsecutivePath::getLongestLengthStartingAtUsingMemoizatio
         Value nextValue = m_inputGrid.getEntry(x, y) + 1;
 
         for (auto const& neighborOffset : columnOffsets) {
-            Index neighborX = x + neighborOffset.first, neighborY = y + neighborOffset.second;
+            Index neighborX = x + neighborOffset.first;
+            Index neighborY = y + neighborOffset.second;
             if (m_inputGrid.isInside(neighborX, neighborY) && m_inputGrid.getEntry(neighborX, neighborY) == nextValue) {
                 result = max(result, getLongestLengthStartingAtUsingNaiveRecursion(neighborX, neighborY));
             }

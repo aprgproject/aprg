@@ -43,8 +43,12 @@ UglyNumbers::Number UglyNumbers::getNthUglyNumberByMultiplesUsingIterativeDP() c
         Numbers uglyNumbers{1};
         uglyNumbers.reserve(m_nth);
 
-        Index indexFor2(0), indexFor3(0), indexFor5(0);
-        Number next2Multiple(2), next3Multiple(3), next5Multiple(5);
+        Index indexFor2(0);
+        Index indexFor3(0);
+        Index indexFor5(0);
+        Number next2Multiple(2);
+        Number next3Multiple(3);
+        Number next5Multiple(5);
         while (static_cast<Number>(uglyNumbers.size()) < m_nth) {
             Number nextUglyNumber = min(min(next2Multiple, next3Multiple), next5Multiple);
             uglyNumbers.emplace_back(nextUglyNumber);

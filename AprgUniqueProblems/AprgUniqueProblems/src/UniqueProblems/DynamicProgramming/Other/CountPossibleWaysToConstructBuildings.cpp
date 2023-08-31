@@ -47,7 +47,8 @@ CountPossibleWaysToConstructBuildings::getNumberOfWaysUsingCountOfBuildingAndSpa
     } else if (m_numberOfSections == 1) {
         resultInOnSide = 2;  // 2 for one side and 4 for two sides
     } else {
-        Count countOfBuildings = 1, countOfSpaces = 1;
+        Count countOfBuildings = 1;
+        Count countOfSpaces = 1;
         for (Count section = 2; section <= m_numberOfSections; section++) {
             Count previousCountOfBuildings = countOfBuildings;
             Count previousCountOfSpaces = countOfSpaces;

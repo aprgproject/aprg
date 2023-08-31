@@ -20,14 +20,14 @@ public:
 
     MaximizeProfitInCuttingARod(Length const length, Rods const rods);
 
-    Profit getBestProfitUsingNaiveRecursion() const;
-    Profit getBestProfitUsingMemoizationDP() const;
-    Profit getBestProfitUsingIterativeDP() const;
+    [[nodiscard]] Profit getBestProfitUsingNaiveRecursion() const;
+    [[nodiscard]] Profit getBestProfitUsingMemoizationDP() const;
+    [[nodiscard]] Profit getBestProfitUsingIterativeDP() const;
 
 private:
-    Profit getBestProfitUsingNaiveRecursion(Length const remainingLength) const;
+    [[nodiscard]] Profit getBestProfitUsingNaiveRecursion(Length const remainingLength) const;
     Profit getBestProfitUsingMemoizationDP(Profits& partialProfits, Length const remainingLength) const;
-    Length getSmallestItemLength() const;
+    [[nodiscard]] Length getSmallestItemLength() const;
     Length const m_length;
     Rods const m_rods;
 };

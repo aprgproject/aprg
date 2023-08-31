@@ -14,7 +14,8 @@ TwoSum::ValuesPair TwoSum::getTwoValuesWithSum(Value const targetSum) const {
     ValuesPair result{};
     if (!m_sortedValues.empty()) {
         bool isFound(false);
-        Index lowIndex = 0, highIndex = m_sortedValues.size() - 1;
+        Index lowIndex = 0;
+        Index highIndex = m_sortedValues.size() - 1;
         while (lowIndex < highIndex) {
             Value currentSum(m_sortedValues[lowIndex] + m_sortedValues[highIndex]);
             if (currentSum > targetSum) {

@@ -98,7 +98,8 @@ MinimumNumberOfJumpsToReachEnd::Indices MinimumNumberOfJumpsToReachEnd::getPathO
         Count jumpCount(0);
         Count maxIndexAtNextJump(m_sequence.front());
         Count stepsAtCurrentJump(m_sequence.front());
-        Index startOfJump = 0, startOfNextJump = 0;
+        Index startOfJump = 0;
+        Index startOfNextJump = 0;
         for (Index index(1); index <= maxIndexAtNextJump; index++) {
             indexToPreviousIndex[index] = startOfJump;
 

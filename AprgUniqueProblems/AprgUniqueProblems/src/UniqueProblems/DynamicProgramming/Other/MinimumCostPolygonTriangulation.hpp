@@ -15,17 +15,17 @@ public:
     using CostMatrix = matrix::AlbaMatrix<Cost>;
     static constexpr Cost MAX_COUNT = std::numeric_limits<Cost>::max();
 
-    MinimumCostPolygonTriangulation(TwoDimensions::Points const& points);
+    explicit MinimumCostPolygonTriangulation(TwoDimensions::Points const& points);
 
-    Cost getMinimumNumberOfOperationsUsingNaiveRecursion() const;
-    Cost getMinimumNumberOfOperationsUsingMemoizationDP() const;
-    Cost getMinimumNumberOfOperationsUsingIterativeDP() const;
+    [[nodiscard]] Cost getMinimumNumberOfOperationsUsingNaiveRecursion() const;
+    [[nodiscard]] Cost getMinimumNumberOfOperationsUsingMemoizationDP() const;
+    [[nodiscard]] Cost getMinimumNumberOfOperationsUsingIterativeDP() const;
 
 private:
-    Cost getMinimumNumberOfOperationsUsingNaiveRecursion(Index const left, Index const right) const;
+    [[nodiscard]] Cost getMinimumNumberOfOperationsUsingNaiveRecursion(Index const left, Index const right) const;
     Cost getMinimumNumberOfOperationsUsingMemoizationDP(
         CostMatrix& countMatrix, Index const left, Index const right) const;
-    Cost getCostOfThreePoints(Index const index1, Index const index2, Index const index3) const;
+    [[nodiscard]] Cost getCostOfThreePoints(Index const index1, Index const index2, Index const index3) const;
     TwoDimensions::Points m_vertices;
 };
 
