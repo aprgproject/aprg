@@ -1,6 +1,8 @@
-StaticAnalysisJobIdentifier: [9]
-2023-08-30T04:00:17
+StaticAnalysisJobIdentifier: [20]
+2023-08-31T08:17:42
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:481:16: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:482:5: warning: multiple declarations in a single statement reduces readability [readability-isolate-declaration]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:482:5: note: FIX-IT applied suggested code changes
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:500:35: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:159:26: style: The scope of the variable 'delayForCrnccId' can be reduced. [variableScope]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:215:26: style: The scope of the variable 'delayForCrnccId' can be reduced. [variableScope]
