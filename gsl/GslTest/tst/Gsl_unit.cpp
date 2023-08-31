@@ -173,7 +173,8 @@ TEST(GslTest, GettingMultisetsInGslWorks) {
 TEST(GslTest, SortingAndGettingTheSmallestValuesInGslWorks) {
     // This uses the function gsl_sort_smallest() to select the 5 smallest numbers.
 
-    constexpr int NUMBER_OF_VALUES = 10, NUMBER_OF_SMALLEST_VALUES = 5;
+    constexpr int NUMBER_OF_VALUES = 10;
+    constexpr int NUMBER_OF_SMALLEST_VALUES = 5;
     constexpr size_t stride = 1;
     std::array<double, NUMBER_OF_VALUES> values{3, 8, 4, 5, 1, 7, 9, 0, 2, 6};
     std::array<double, NUMBER_OF_SMALLEST_VALUES> smallestValues{};
