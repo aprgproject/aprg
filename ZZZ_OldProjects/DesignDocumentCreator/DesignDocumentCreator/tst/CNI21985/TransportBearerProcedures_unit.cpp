@@ -16,10 +16,11 @@ using namespace MessageFactory;
 using namespace MessageVerifier;
 using namespace StringHelpers;
 
+// NOLINTBEGIN(cppcoreguidelines-pro-type-static-cast-downcast)
 TEST_F(ModuleTest, OneTransportBearerRegister) {
-    TupcTbm& tupcTbm(*dynamic_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
-    TupcCm& tupcCm(*dynamic_cast<TupcCm*>(getComponentAndActivateAsParticipant(ComponentName::TupcCm, "TUPC/CM")));
-    Dsp& dsp(*dynamic_cast<Dsp*>(getComponentAndActivateAsParticipant(ComponentName::Dsp, "DSP")));
+    TupcTbm& tupcTbm(*static_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
+    TupcCm& tupcCm(*static_cast<TupcCm*>(getComponentAndActivateAsParticipant(ComponentName::TupcCm, "TUPC/CM")));
+    Dsp& dsp(*static_cast<Dsp*>(getComponentAndActivateAsParticipant(ComponentName::Dsp, "DSP")));
 
     sendMessage(ComponentName::TcomCchhRlh, ComponentName::TupcTbm, createOneTransportBearerRegisterForCell());
     tupcTbm.handleOneEvent();
@@ -30,10 +31,9 @@ TEST_F(ModuleTest, OneTransportBearerRegister) {
 }
 
 TEST_F(ModuleTest, OneTransportBearerUnregister) {
-    TupcTbm& tupcTbm(*dynamic_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
-    TupcCm& tupcCm(*dynamic_cast<TupcCm*>(getComponentAndActivateAsParticipant(ComponentName::TupcCm, "TUPC/CM")));
-    Trsw& trsw(*dynamic_cast<Trsw*>(getComponentAndActivateAsParticipant(ComponentName::Trsw, "TRSW/Transport")));
-    Dsp& dsp(*dynamic_cast<Dsp*>(getComponentAndActivateAsParticipant(ComponentName::Dsp, "DSP")));
+    TupcTbm& tupcTbm(*static_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
+    TupcCm& tupcCm(*static_cast<TupcCm*>(getComponentAndActivateAsParticipant(ComponentName::TupcCm, "TUPC/CM")));
+    Dsp& dsp(*static_cast<Dsp*>(getComponentAndActivateAsParticipant(ComponentName::Dsp, "DSP")));
 
     sendMessage(ComponentName::TcomCchhRlh, ComponentName::TupcTbm, createOneTransportBearerUnregisterForCell());
     tupcTbm.handleOneEvent();
@@ -44,10 +44,8 @@ TEST_F(ModuleTest, OneTransportBearerUnregister) {
 }
 
 TEST_F(ModuleTest, OneTransportBearerModificationPrepareForUser) {
-    TupcTbm& tupcTbm(*dynamic_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
-    TupcCm& tupcCm(*dynamic_cast<TupcCm*>(getComponentAndActivateAsParticipant(ComponentName::TupcCm, "TUPC/CM")));
-    Trsw& trsw(*dynamic_cast<Trsw*>(getComponentAndActivateAsParticipant(ComponentName::Trsw, "TRSW/Transport")));
-
+    TupcTbm& tupcTbm(*static_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
+    TupcCm& tupcCm(*static_cast<TupcCm*>(getComponentAndActivateAsParticipant(ComponentName::TupcCm, "TUPC/CM")));
     sendMessage(
         ComponentName::TcomCchhRlh, ComponentName::TupcTbm, createOneTransportBearerModificationPrepareForUser());
     tupcTbm.handleOneEvent();
@@ -56,9 +54,8 @@ TEST_F(ModuleTest, OneTransportBearerModificationPrepareForUser) {
 }
 
 TEST_F(ModuleTest, OneTransportBearerModificationCommitForUser) {
-    TupcTbm& tupcTbm(*dynamic_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
-    TupcCm& tupcCm(*dynamic_cast<TupcCm*>(getComponentAndActivateAsParticipant(ComponentName::TupcCm, "TUPC/CM")));
-    Trsw& trsw(*dynamic_cast<Trsw*>(getComponentAndActivateAsParticipant(ComponentName::Trsw, "TRSW/Transport")));
+    TupcTbm& tupcTbm(*static_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
+    TupcCm& tupcCm(*static_cast<TupcCm*>(getComponentAndActivateAsParticipant(ComponentName::TupcCm, "TUPC/CM")));
 
     sendMessage(
         ComponentName::TcomCchhRlh, ComponentName::TupcTbm, createOneTransportBearerModificationCommitForUser());
@@ -68,9 +65,8 @@ TEST_F(ModuleTest, OneTransportBearerModificationCommitForUser) {
 }
 
 TEST_F(ModuleTest, OneTransportBearerModificationCancelForUser) {
-    TupcTbm& tupcTbm(*dynamic_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
-    TupcCm& tupcCm(*dynamic_cast<TupcCm*>(getComponentAndActivateAsParticipant(ComponentName::TupcCm, "TUPC/CM")));
-    Trsw& trsw(*dynamic_cast<Trsw*>(getComponentAndActivateAsParticipant(ComponentName::Trsw, "TRSW/Transport")));
+    TupcTbm& tupcTbm(*static_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
+    TupcCm& tupcCm(*static_cast<TupcCm*>(getComponentAndActivateAsParticipant(ComponentName::TupcCm, "TUPC/CM")));
 
     sendMessage(
         ComponentName::TcomCchhRlh, ComponentName::TupcTbm, createOneTransportBearerModificationCancelForUser());
@@ -80,8 +76,8 @@ TEST_F(ModuleTest, OneTransportBearerModificationCancelForUser) {
 }
 
 TEST_F(ModuleTest, OneTransportBearerReallocationPrepareForUser) {
-    TupcTbm& tupcTbm(*dynamic_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
-    Dsp& dsp(*dynamic_cast<Dsp*>(getComponentAndActivateAsParticipant(ComponentName::Dsp, "New DSP")));
+    TupcTbm& tupcTbm(*static_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
+    Dsp& dsp(*static_cast<Dsp*>(getComponentAndActivateAsParticipant(ComponentName::Dsp, "New DSP")));
 
     sendMessage(
         ComponentName::TcomCchhRlh, ComponentName::TupcTbm, createOneTransportBearerReallocationPrepareForUser());
@@ -91,9 +87,8 @@ TEST_F(ModuleTest, OneTransportBearerReallocationPrepareForUser) {
 }
 
 TEST_F(ModuleTest, OneTransportBearerReallocationCommitForUser) {
-    TupcTbm& tupcTbm(*dynamic_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
-    TupcCm& tupcCm(*dynamic_cast<TupcCm*>(getComponentAndActivateAsParticipant(ComponentName::TupcCm, "TUPC/CM")));
-    Trsw& trsw(*dynamic_cast<Trsw*>(getComponentAndActivateAsParticipant(ComponentName::Trsw, "TRSW/Transport")));
+    TupcTbm& tupcTbm(*static_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
+    TupcCm& tupcCm(*static_cast<TupcCm*>(getComponentAndActivateAsParticipant(ComponentName::TupcCm, "TUPC/CM")));
 
     sendMessage(
         ComponentName::TcomCchhRlh, ComponentName::TupcTbm, createOneTransportBearerReallocationCommitForUser());
@@ -103,8 +98,8 @@ TEST_F(ModuleTest, OneTransportBearerReallocationCommitForUser) {
 }
 
 TEST_F(ModuleTest, OneTransportBearerReallocationCleanupForUser) {
-    TupcTbm& tupcTbm(*dynamic_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
-    Dsp& dsp(*dynamic_cast<Dsp*>(getComponentAndActivateAsParticipant(ComponentName::Dsp, "Old DSP")));
+    TupcTbm& tupcTbm(*static_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
+    Dsp& dsp(*static_cast<Dsp*>(getComponentAndActivateAsParticipant(ComponentName::Dsp, "Old DSP")));
 
     sendMessage(
         ComponentName::TcomCchhRlh, ComponentName::TupcTbm, createOneTransportBearerReallocationCleanupForUser());
@@ -114,7 +109,7 @@ TEST_F(ModuleTest, OneTransportBearerReallocationCleanupForUser) {
 }
 
 TEST_F(ModuleTest, OneTransportBearerReallocationCancelForUser) {
-    TupcTbm& tupcTbm(*dynamic_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
+    TupcTbm& tupcTbm(*static_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
 
     sendMessage(
         ComponentName::TcomCchhRlh, ComponentName::TupcTbm, createOneTransportBearerReallocationCancelForUser());
@@ -123,8 +118,8 @@ TEST_F(ModuleTest, OneTransportBearerReallocationCancelForUser) {
 
 TEST_F(ModuleTest, OneTransportBearerUnexpectedRelFromTransport) {
     UmlLogger& umlLogger(Environment::getInstance().getUmlLogger());
-    TupcTbm& tupcTbm(*dynamic_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
-    Dsp& dsp(*dynamic_cast<Dsp*>(getComponentAndActivateAsParticipant(ComponentName::Dsp, "DSP")));
+    TupcTbm& tupcTbm(*static_cast<TupcTbm*>(getComponentAndActivateAsParticipant(ComponentName::TupcTbm, "TUPC/TBM")));
+    Dsp& dsp(*static_cast<Dsp*>(getComponentAndActivateAsParticipant(ComponentName::Dsp, "DSP")));
 
     umlLogger.logNoteOnComponents(
         ComponentNames{ComponentName::TupcCm, ComponentName::Trsw}, "TupcCm receives REL from TRSW/Transport");
@@ -136,6 +131,7 @@ TEST_F(ModuleTest, OneTransportBearerUnexpectedRelFromTransport) {
     dsp.handleOneEvent();
     tupcTbm.handleOneEvent();
 }
+// NOLINTEND(cppcoreguidelines-pro-type-static-cast-downcast)
 
 /*TEST_F(ModuleTest, TransportChannelReset)
 {

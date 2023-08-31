@@ -97,7 +97,8 @@ Term convertExpressionToSimplestTerm(Expression const& expression) {
     if (expression.isEmpty()) {
         newTerm.clear();
     } else if (expression.containsOnlyOnePositivelyAssociatedTerm()) {
-        Term const& term = dynamic_cast<Term const&>(expression.getFirstTerm());
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+        Term const& term = static_cast<Term const&>(expression.getFirstTerm());
         newTerm = term;
         newTerm.simplify();
     }

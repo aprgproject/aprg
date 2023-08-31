@@ -74,7 +74,7 @@ void TupcTbm::handleTransportBearerReallocationCleanupReqMsg(GenericMessage cons
     sendTransportConnectionReleaseReqsBasedOnReallocationCleanupReqMsg(genericMessage);
 }
 
-void TupcTbm::handleTransportBearerReallocationCancelReqMsg(GenericMessage const& genericMessage) {
+void TupcTbm::handleTransportBearerReallocationCancelReqMsg(GenericMessage const&) {
     logNoteOnComponent("TCOM informs TUPC/TBM on the same board (for exception please refer to Exc 1)");
     m_modifyTransactionType = 7;
     logNoteOnComponent("TUPC/TBM stops reallocation timer and cancels reallocation procedure");
