@@ -145,7 +145,7 @@ TEST(GnuplotIostreamTest, DISABLED_ExampleData1d)
 	{
 		std::vector<std::pair<std::pair<double, double>, double> > pts;
 		for(int i=0; i<num_steps; i++) {
-			pts.push_back(std::make_pair(std::make_pair(get_x(i, shift), get_y(i, shift)), get_z(i, shift)));
+			pts.emplace_back(std::make_pair(get_x(i, shift), get_y(i, shift)), get_z(i, shift));
 		}
 		gp << gp.binFile1d(pts, "record") << "with lines title 'vector of nested std::pair'";
 	}
@@ -157,7 +157,7 @@ TEST(GnuplotIostreamTest, DISABLED_ExampleData1d)
 		// complex is treated as if it were a pair
 		std::vector<std::pair<std::complex<double>, double> > pts;
 		for(int i=0; i<num_steps; i++) {
-			pts.push_back(std::make_pair(std::complex<double>(get_x(i, shift), get_y(i, shift)), get_z(i, shift)));
+			pts.emplace_back(std::complex<double>(get_x(i, shift), get_y(i, shift)), get_z(i, shift));
 		}
 		gp << gp.binFile1d(pts, "record") << "with lines title 'vector of pair of cplx and double'";
 	}
@@ -177,7 +177,9 @@ TEST(GnuplotIostreamTest, DISABLED_ExampleData1d)
 	shift += 1.0/num_examples;
 
 	{
-		std::vector<double> x_pts, y_pts, z_pts;
+		std::vector<double> x_pts;
+		std::vector<double> y_pts;
+		std::vector<double> z_pts;
 		for(int i=0; i<num_steps; i++) {
 			x_pts.push_back(get_x(i, shift));
 			y_pts.push_back(get_y(i, shift));
@@ -231,7 +233,7 @@ TEST(GnuplotIostreamTest, DISABLED_ExampleData1d)
 	{
 		std::vector<MyTriple<double> > pts;
 		for(int i=0; i<num_steps; i++) {
-			pts.push_back(MyTriple<double>(get_x(i, shift), get_y(i, shift), get_z(i, shift)));
+			pts.emplace_back(get_x(i, shift), get_y(i, shift), get_z(i, shift));
 		}
 		gp << gp.binFile1d(pts, "record") << "with lines title 'vector of MyTriple'";
 	}
