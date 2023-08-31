@@ -61,7 +61,8 @@ SelectionDspResult Lrm::allocateMcdForLcgIdAccordingToMark(unsigned int const lc
 SelectionDspResultForCcdAndMcd Lrm::allocateCcdMcdForLcgIdAccordingToMark(unsigned int const lcgId) {
     SelectionDspResultForCcdAndMcd ccdMcdAddress;
     FspAddresses selectedFspAddresses = selectFspsForCcdMcd(lcgId);
-    unsigned int ccdFspAddress(0), mcdFspAddress(0);
+    unsigned int ccdFspAddress(0);
+    unsigned int mcdFspAddress(0);
     if (selectedFspAddresses.size() == 1) {
         ccdFspAddress = selectedFspAddresses[0];
         mcdFspAddress = selectedFspAddresses[0];
@@ -123,7 +124,8 @@ SelectionDspResult Lrm::allocateNbicMcdForLcgIdAccordingToMark(unsigned int cons
 SelectionDspResultForCcdAndMcd Lrm::allocateCcdNbicMcdForLcgIdAccordingToMark(unsigned int const lcgId) {
     SelectionDspResultForCcdAndMcd ccdMcdAddress;
     FspAddresses selectedFspAddresses = selectFspsForCcdNbicMcd(lcgId);
-    unsigned int ccdFspAddress(0), mcdFspAddress(0);
+    unsigned int ccdFspAddress(0);
+    unsigned int mcdFspAddress(0);
     if (selectedFspAddresses.size() == 1) {
         ccdFspAddress = selectedFspAddresses[0];
         mcdFspAddress = selectedFspAddresses[0];
