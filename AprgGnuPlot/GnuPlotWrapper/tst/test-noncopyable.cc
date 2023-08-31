@@ -40,7 +40,8 @@ public:
 TEST(GnuplotIostreamTest, DISABLED_TestNonCopyable)
 {
 	Gnuplot gp;
-	NonCopyable<double> nc_x, nc_y;
+	NonCopyable<double> nc_x;
+	NonCopyable<double> nc_y;
 	for(int i=0; i<100; i++) {
 		nc_x.push_back(-i);
 		nc_y.push_back(i*i);

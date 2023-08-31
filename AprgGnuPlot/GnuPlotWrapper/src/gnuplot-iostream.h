@@ -671,7 +671,7 @@ struct int_ {};  // compile-time counter
 
 template <typename Tuple, std::size_t I>
 void std_tuple_formatcode_helper(std::ostream &stream, const Tuple *, int_<I>) {
-    std_tuple_formatcode_helper(stream, (const Tuple *)(0), int_<I - 1>());
+    std_tuple_formatcode_helper(stream, (const Tuple *)nullptr, int_<I - 1>());
     stream << " ";
     BinfmtSender<typename std::tuple_element<I, Tuple>::type>::send(stream);
 }
@@ -686,7 +686,7 @@ struct BinfmtSender<std::tuple<Args...>> {
     using Tuple = typename std::tuple<Args...>;
 
     static void send(std::ostream &stream) {
-        std_tuple_formatcode_helper(stream, (const Tuple *)(0), int_<sizeof...(Args) - 1>());
+        std_tuple_formatcode_helper(stream, (const Tuple *)nullptr, int_<sizeof...(Args) - 1>());
     }
 };
 
@@ -1524,7 +1524,7 @@ struct FileHandleWrapper {
     FileHandleWrapper(std::FILE *_fh, bool _should_use_pclose)
         : wrapped_fh(_fh), should_use_pclose(_should_use_pclose) {}
 
-    void fh_close() {
+    void fh_close() const {
         if (should_use_pclose) {
             if (GNUPLOT_PCLOSE(wrapped_fh)) {
                 std::cerr << "pclose returned error" << std::endl;
@@ -1536,7 +1536,7 @@ struct FileHandleWrapper {
         }
     }
 
-    int fh_fileno() { return GNUPLOT_FILENO(wrapped_fh); }
+    [[nodiscard]] int fh_fileno() const { return GNUPLOT_FILENO(wrapped_fh); }
 
     std::FILE *wrapped_fh;
     bool should_use_pclose;
@@ -1594,7 +1594,7 @@ public:
               false
 #endif
               ),
-          feedback(NULL),
+          feedback(nullptr),
 
           debug_messages(false) {
         *this << std::scientific << std::setprecision(17);  // refer <iomanip>
@@ -1610,7 +1610,7 @@ public:
               false
 #endif
               ),
-          feedback(NULL),
+          feedback(nullptr),
 
           debug_messages(false) {
         *this << std::scientific << std::setprecision(17);  // refer <iomanip>

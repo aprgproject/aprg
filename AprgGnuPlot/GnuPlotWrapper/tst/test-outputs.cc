@@ -135,7 +135,9 @@ void basic_datatype_test_float(std::string name) {
 
 TEST(GnuplotIostreamTest, DISABLED_TestOutputs)
 {
-	const int NX=3, NY=4, NZ=2;
+	const int NX=3;
+	const int NY=4;
+	const int NZ=2;
 	std::vector<double> vd;
 	std::vector<int> vi;
 	std::vector<float> vf;
@@ -157,7 +159,7 @@ TEST(GnuplotIostreamTest, DISABLED_TestOutputs)
 		vf.push_back(x+7.2F);
 		v_bt.push_back(boost::make_tuple(x+0.123, 100+x, 200+x));
 #if GNUPLOT_ENABLE_CXX11
-		v_st.push_back(std::make_tuple(x+0.123, 100+x, 200+x));
+		v_st.emplace_back(x+0.123, 100+x, 200+x);
 		si[x] = x+90;
 #endif
 		ai[x] = x+7;
@@ -172,9 +174,9 @@ TEST(GnuplotIostreamTest, DISABLED_TestOutputs)
 
 			std::vector<std::pair<double, int> > stuff;
 			for(int z=0; z<NZ; z++) {
-				stuff.push_back(std::make_pair(
+				stuff.emplace_back(
 						x*1000+y*100+z+0.5,
-						x*1000+y*100+z));
+						x*1000+y*100+z);
 			}
 			vvvp[x].push_back(stuff);
 		}

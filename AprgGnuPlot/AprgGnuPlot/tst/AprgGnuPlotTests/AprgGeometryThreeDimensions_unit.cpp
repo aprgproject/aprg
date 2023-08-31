@@ -16,7 +16,8 @@ TEST(AprgGeometryThreeDimensionsTest, DISABLED_LineWithSlope) {
     Line line(Point(0, 0, 0), Point(2, 3, -4));
     AprgGnuPlot3D::PointsInGraph points;
     for (double x = -10; x < 10; x += 0.1) {
-        auto yOptional = line.calculateYFromX(x), zOptional = line.calculateZFromX(x);
+        auto yOptional = line.calculateYFromX(x);
+        auto zOptional = line.calculateZFromX(x);
         if (yOptional && zOptional) {
             points.emplace_back(AprgGnuPlot3D::getPoint(x, yOptional.value(), zOptional.value()));
         }
@@ -38,15 +39,18 @@ TEST(AprgGeometryThreeDimensionsTest, DISABLED_MultipleLinesAndPoints) {
     AprgGnuPlot3D::PointsInGraph points2;
     AprgGnuPlot3D::PointsInGraph points3;
     for (double x = -10; x < 10; x += 0.1) {
-        auto y1Optional = line1.calculateYFromX(x), z1Optional = line1.calculateZFromX(x);
+        auto y1Optional = line1.calculateYFromX(x);
+        auto z1Optional = line1.calculateZFromX(x);
         if (y1Optional && z1Optional) {
             points1.emplace_back(AprgGnuPlot3D::getPoint(x, y1Optional.value(), z1Optional.value()));
         }
-        auto y2Optional = line2.calculateYFromX(x), z2Optional = line2.calculateZFromX(x);
+        auto y2Optional = line2.calculateYFromX(x);
+        auto z2Optional = line2.calculateZFromX(x);
         if (y2Optional && z2Optional) {
             points1.emplace_back(AprgGnuPlot3D::getPoint(x, y2Optional.value(), z2Optional.value()));
         }
-        auto y3Optional = line3.calculateYFromX(x), z3Optional = line3.calculateZFromX(x);
+        auto y3Optional = line3.calculateYFromX(x);
+        auto z3Optional = line3.calculateZFromX(x);
         if (y3Optional && z2Optional) {
             points1.emplace_back(AprgGnuPlot3D::getPoint(x, y3Optional.value(), z3Optional.value()));
         }

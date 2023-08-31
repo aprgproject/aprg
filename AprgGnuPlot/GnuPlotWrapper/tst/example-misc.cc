@@ -78,13 +78,13 @@ void demo_basic() {
 	std::vector<std::pair<double, double> > xy_pts_A;
 	for(double x=-2; x<2; x+=0.01) {
 		double y = x*x*x;
-		xy_pts_A.push_back(std::make_pair(x, y));
+		xy_pts_A.emplace_back(x, y);
 	}
 
 	std::vector<std::pair<double, double> > xy_pts_B;
 	for(double alpha=0; alpha<1; alpha+=1.0/24.0) {
 		double theta = alpha*2.0*3.14159;
-		xy_pts_B.push_back(std::make_pair(cos(theta), sin(theta)));
+		xy_pts_B.emplace_back(cos(theta), sin(theta));
 	}
 
 	gp << "set xrange [-2:2]\nset yrange [-2:2]\n";
@@ -101,13 +101,13 @@ void demo_binary() {
 	std::vector<std::pair<double, double> > xy_pts_A;
 	for(double x=-2; x<2; x+=0.01) {
 		double y = x*x*x;
-		xy_pts_A.push_back(std::make_pair(x, y));
+		xy_pts_A.emplace_back(x, y);
 	}
 
 	std::vector<std::pair<double, double> > xy_pts_B;
 	for(double alpha=0; alpha<1; alpha+=1.0/24.0) {
 		double theta = alpha*2.0*3.14159;
-		xy_pts_B.push_back(std::make_pair(cos(theta), sin(theta)));
+		xy_pts_B.emplace_back(cos(theta), sin(theta));
 	}
 
 	gp << "set xrange [-2:2]\nset yrange [-2:2]\n";
@@ -125,13 +125,13 @@ void demo_tmpfile() {
 	std::vector<std::pair<double, double> > xy_pts_A;
 	for(double x=-2; x<2; x+=0.01) {
 		double y = x*x*x;
-		xy_pts_A.push_back(std::make_pair(x, y));
+		xy_pts_A.emplace_back(x, y);
 	}
 
 	std::vector<std::pair<double, double> > xy_pts_B;
 	for(double alpha=0; alpha<1; alpha+=1.0/24.0) {
 		double theta = alpha*2.0*3.14159;
-		xy_pts_B.push_back(std::make_pair(cos(theta), sin(theta)));
+		xy_pts_B.emplace_back(cos(theta), sin(theta));
 	}
 
 	gp << "set xrange [-2:2]\nset yrange [-2:2]\n";
@@ -167,13 +167,13 @@ void demo_png() {
 	std::vector<std::pair<double, double> > xy_pts_A;
 	for(double x=-2; x<2; x+=0.01) {
 		double y = x*x*x;
-		xy_pts_A.push_back(std::make_pair(x, y));
+		xy_pts_A.emplace_back(x, y);
 	}
 
 	std::vector<std::pair<double, double> > xy_pts_B;
 	for(double alpha=0; alpha<1; alpha+=1.0/24.0) {
 		double theta = alpha*2.0*3.14159;
-		xy_pts_B.push_back(std::make_pair(cos(theta), sin(theta)));
+		xy_pts_B.emplace_back(cos(theta), sin(theta));
 	}
 
 	std::cout << "Creating my_graph_2.png" << std::endl;
@@ -317,11 +317,11 @@ void demo_NaN() {
 	for(int i=0; i<100; i++) {
 		double theta = static_cast<double>(i)/100*2*M_PI;
 		if(((i/5)%2) != 0) {
-			xy_pts.push_back(std::make_pair(
+			xy_pts.emplace_back(
 					std::cos(theta), std::sin(theta)
-				));
+				);
 		} else {
-			xy_pts.push_back(std::make_pair(nan, nan));
+			xy_pts.emplace_back(nan, nan);
 		}
 	}
 
@@ -349,9 +349,9 @@ void demo_segments() {
 		std::vector<std::pair<double, double> > segment;
 		for(int i=0; i<5; i++) {
 			double theta = static_cast<double>(j*10+i)/100*2*M_PI;
-			segment.push_back(std::make_pair(
+			segment.emplace_back(
 					std::cos(theta), std::sin(theta)
-				));
+				);
 		}
 		all_segments.push_back(segment);
 	}

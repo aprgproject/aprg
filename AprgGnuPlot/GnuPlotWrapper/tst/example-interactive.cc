@@ -41,10 +41,11 @@ TEST(GnuplotIostreamTest, DISABLED_ExampleInteractive)
 	for(size_t i=0; i<100; i++) {
 		double x = rand() / static_cast<double>(RAND_MAX);
 		double y = rand() / static_cast<double>(RAND_MAX);
-		arrows.push_back(boost::make_tuple(x, y, 0, 0));
+		arrows.emplace_back(boost::make_tuple(x, y, 0, 0));
 	}
 
-	double mx=0.5, my=0.5;
+	double mx=0.5;
+	double my=0.5;
 	int mb=1;
 	while(mb != 3 && mb >= 0) {
 		// Make the arrows point towards the mouse click.
