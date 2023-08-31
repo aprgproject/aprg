@@ -1,11 +1,8 @@
-StaticAnalysisJobIdentifier: [9]
-2023-08-30T00:55:20
+StaticAnalysisJobIdentifier: [20]
+2023-08-31T05:31:50
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.hpp:32:12: warning: constructor does not initialize these fields: pieceType [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/BoardValue.cpp:53:16: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/BoardValue.cpp:56:16: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:93:27: warning: narrowing conversion from 'int' to signed type 'char' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:180:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1308:19: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1313:19: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.hpp:32:12: warning: constructor does not initialize these fields: pieceType [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/BoardUtilities.cpp:159:50: warning: narrowing conversion from 'int' to signed type 'char' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/BoardUtilities.cpp:159:68: warning: narrowing conversion from 'int' to signed type 'char' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
