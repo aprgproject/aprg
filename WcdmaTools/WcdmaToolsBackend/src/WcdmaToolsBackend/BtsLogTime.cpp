@@ -78,9 +78,9 @@ void BtsLogTime::setTimeByTimeStamp(BtsLogTimeType logTimeType, string const& ti
         }
     }
     m_dateTime.setTime(
-        static_cast<unsigned short int>(years), static_cast<unsigned char>(months), static_cast<unsigned char>(days),
-        static_cast<unsigned char>(hours), static_cast<unsigned char>(minutes), static_cast<unsigned char>(seconds),
-        microseconds);
+        static_cast<uint16_t>(years), static_cast<uint8_t>(months), static_cast<uint8_t>(days),
+        static_cast<uint8_t>(hours), static_cast<uint8_t>(minutes), static_cast<uint8_t>(seconds),
+        static_cast<uint32_t>(microseconds));
 }
 
 bool BtsLogTime::isEmpty() const { return m_dateTime.isEmpty(); }
@@ -177,9 +177,8 @@ istream& operator>>(istream& in, BtsLogTime& btsLogTime) {
     auto seconds(reader.readData<unsigned int>());
     auto microseconds(reader.readData<unsigned int>());
     btsLogTime.m_dateTime.setTime(
-        static_cast<unsigned short int>(years), static_cast<unsigned char>(months), static_cast<unsigned char>(days),
-        static_cast<unsigned char>(hours), static_cast<unsigned char>(minutes), static_cast<unsigned char>(seconds),
-        microseconds);
+        static_cast<unsigned short int>(years), static_cast<uint8_t>(months), static_cast<uint8_t>(days),
+        static_cast<uint8_t>(hours), static_cast<uint8_t>(minutes), static_cast<uint8_t>(seconds), microseconds);
     return in;
 }
 

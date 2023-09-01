@@ -12,7 +12,7 @@ public:
     using Values = std::vector<Value>;
     static constexpr Value MIN_VALUE = std::numeric_limits<Value>::min();
 
-    LongestEqualLengthSubArraysWithSameSum(Values const& values);
+    explicit LongestEqualLengthSubArraysWithSameSum(Values const& values);
 
     Index getLongestTotalLengthOfSubArraysUsingPartialSums() const;
     Index getLongestTotalLengthOfSubArraysByAccumulatingSum() const;

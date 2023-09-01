@@ -14,10 +14,10 @@ namespace alba::AprgAudio {
 
 enum class AudioFormat { Error, NotLoaded, Wave, Aiff };
 
-template <class T>
+template <class DataType>
 class Audio {
 public:
-    using AudioBuffer = std::vector<std::vector<T>>;
+    using AudioBuffer = std::vector<std::vector<DataType>>;
 
     Audio();
 
@@ -37,8 +37,8 @@ public:
 
     [[nodiscard]] int getNumSamplesPerChannel() const;
 
-    [[nodiscard]] std::vector<T> const& getSamplesAtChannel(int const channelIndex) const;
-    std::vector<T>& getSamplesReferenceAtChannel(int const channelIndex);
+    [[nodiscard]] std::vector<DataType> const& getSamplesAtChannel(int const channelIndex) const;
+    std::vector<DataType>& getSamplesReferenceAtChannel(int const channelIndex);
 
     /** @Returns the length[[nodiscard]]  in seconds of the audio file based on the number of samples and sample rate */
     [[nodiscard]] double getLengthInSeconds() const;
@@ -95,16 +95,16 @@ private:
         std::vector<uint8_t> const& source, int startIndex, Endianness endianness = Endianness::LittleEndian);
     int getIndexOfString(std::vector<uint8_t> const& source, std::string const& s);
 
-    T sixteenBitIntToSample(int16_t sample);
-    int16_t sampleToSixteenBitInt(T sample);
+    DataType sixteenBitIntToSample(int16_t sample);
+    int16_t sampleToSixteenBitInt(DataType sample);
 
-    uint8_t sampleToSingleByte(T sample);
-    T singleByteToSample(uint8_t sample);
+    uint8_t sampleToSingleByte(DataType sample);
+    DataType singleByteToSample(uint8_t sample);
 
     int getAiffSampleRate(std::vector<uint8_t>& fileDataBytes, int sampleRateStartIndex);
     bool tenByteMatch(std::vector<uint8_t>& v1, int startIndex1, std::vector<uint8_t>& v2, int startIndex2);
     void addSampleRateToAiffData(std::vector<uint8_t>& fileDataBytes, int sampleRate);
-    T clamp(T value, T minValue, T maxValue);
+    DataType clamp(DataType value, DataType minValue, DataType maxValue);
 
     void addStringToFileData(std::vector<uint8_t>& fileDataBytes, std::string const& s);
     void addInt32ToFileData(

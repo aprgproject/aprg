@@ -73,14 +73,14 @@ void Summation::calculateSumStartingFromANumber(Term& result, AlbaNumber const& 
 
 void Summation::calculateSumUsingEachTerm(
     Term& result, AlbaNumber const& startNumber, AlbaNumber const& endNumber) const {
-    long long start(startNumber.getInteger());
-    long long end(endNumber.getInteger());
+    int64_t start(startNumber.getInteger());
+    int64_t end(endNumber.getInteger());
     Term sum;
     if (start <= end) {
         SubstitutionOfVariablesToValues substitution;
         substitution.putVariableWithValue(m_variableName, start);
         sum = substitution.performSubstitutionTo(m_termToSum);
-        for (long long value = start + 1; value <= end; value++) {
+        for (int64_t value = start + 1; value <= end; value++) {
             substitution.putVariableWithValue(m_variableName, value);
             sum += substitution.performSubstitutionTo(m_termToSum);
         }

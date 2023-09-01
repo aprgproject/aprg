@@ -66,6 +66,7 @@ template <typename Stack>
 void testPopAssertionWhenEmptyWithInt() {
     Stack stack;
 
+    // NOLINTNEXTLINE(cert-err33-c)
     EXPECT_DEATH(stack.pop(), "Assertion failed!");
 }
 

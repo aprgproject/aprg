@@ -13,7 +13,7 @@ namespace alba::AprgAudio {
 
 // Pre-defined 10-byte representations of common sample rates
 
-unordered_map<int, vector<uint8_t>> aiffSampleRateTable = {
+unordered_map<int, vector<uint8_t>> const aiffSampleRateTable = {
     {8000, {64, 11, 250, 0, 0, 0, 0, 0, 0, 0}},    {11025, {64, 12, 172, 68, 0, 0, 0, 0, 0, 0}},
     {16000, {64, 12, 250, 0, 0, 0, 0, 0, 0, 0}},   {22050, {64, 13, 172, 68, 0, 0, 0, 0, 0, 0}},
     {32000, {64, 13, 250, 0, 0, 0, 0, 0, 0, 0}},   {37800, {64, 14, 147, 168, 0, 0, 0, 0, 0, 0}},
@@ -25,62 +25,62 @@ unordered_map<int, vector<uint8_t>> aiffSampleRateTable = {
     {352800, {64, 17, 172, 68, 0, 0, 0, 0, 0, 0}}, {2822400, {64, 20, 172, 68, 0, 0, 0, 0, 0, 0}},
     {5644800, {64, 21, 172, 68, 0, 0, 0, 0, 0, 0}}};
 
-template <class T>
-Audio<T>::Audio() {
+template <class DataType>
+Audio<DataType>::Audio() {
     samples.resize(1);
     samples[0].resize(0);
 }
 
-template <class T>
-int Audio<T>::getSampleRate() const {
+template <class DataType>
+int Audio<DataType>::getSampleRate() const {
     return sampleRate;
 }
 
-template <class T>
-int Audio<T>::getNumChannels() const {
+template <class DataType>
+int Audio<DataType>::getNumChannels() const {
     return samples.size();
 }
 
-template <class T>
-bool Audio<T>::isMono() const {
+template <class DataType>
+bool Audio<DataType>::isMono() const {
     return getNumChannels() == 1;
 }
 
-template <class T>
-bool Audio<T>::isStereo() const {
+template <class DataType>
+bool Audio<DataType>::isStereo() const {
     return getNumChannels() == 2;
 }
 
-template <class T>
-int Audio<T>::getBitDepth() const {
+template <class DataType>
+int Audio<DataType>::getBitDepth() const {
     return bitDepth;
 }
 
-template <class T>
-int Audio<T>::getNumSamplesPerChannel() const {
+template <class DataType>
+int Audio<DataType>::getNumSamplesPerChannel() const {
     if (!samples.empty()) {
         return samples[0].size();
     }
     return 0;
 }
 
-template <class T>
-std::vector<T> const& Audio<T>::getSamplesAtChannel(int const channelIndex) const {
+template <class DataType>
+std::vector<DataType> const& Audio<DataType>::getSamplesAtChannel(int const channelIndex) const {
     return samples[channelIndex];
 }
 
-template <class T>
-std::vector<T>& Audio<T>::getSamplesReferenceAtChannel(int const channelIndex) {
+template <class DataType>
+std::vector<DataType>& Audio<DataType>::getSamplesReferenceAtChannel(int const channelIndex) {
     return samples[channelIndex];
 }
 
-template <class T>
-double Audio<T>::getLengthInSeconds() const {
+template <class DataType>
+double Audio<DataType>::getLengthInSeconds() const {
     return static_cast<double>(getNumSamplesPerChannel()) / static_cast<double>(sampleRate);
 }
 
-template <class T>
-void Audio<T>::printSummary() const {
+template <class DataType>
+void Audio<DataType>::printSummary() const {
     cout << "|======================================|\n";
     cout << "Num Channels: " << getNumChannels() << "\n";
     cout << "Num Samples Per Channel: " << getNumSamplesPerChannel() << "\n";
@@ -90,8 +90,8 @@ void Audio<T>::printSummary() const {
     cout << "|======================================|\n";
 }
 
-template <class T>
-bool Audio<T>::setAudioBuffer(AudioBuffer& newBuffer) {
+template <class DataType>
+bool Audio<DataType>::setAudioBuffer(AudioBuffer& newBuffer) {
     int numChannels = static_cast<int>(newBuffer.size());
 
     if (numChannels <= 0) {
@@ -117,14 +117,14 @@ bool Audio<T>::setAudioBuffer(AudioBuffer& newBuffer) {
     return true;
 }
 
-template <class T>
-void Audio<T>::setAudioBufferSize(int numChannels, int numSamples) {
+template <class DataType>
+void Audio<DataType>::setAudioBufferSize(int numChannels, int numSamples) {
     samples.resize(numChannels);
     setNumSamplesPerChannel(numSamples);
 }
 
-template <class T>
-void Audio<T>::setNumSamplesPerChannel(int numSamples) {
+template <class DataType>
+void Audio<DataType>::setNumSamplesPerChannel(int numSamples) {
     int originalSize = getNumSamplesPerChannel();
 
     for (int i = 0; i < getNumChannels(); i++) {
@@ -132,13 +132,13 @@ void Audio<T>::setNumSamplesPerChannel(int numSamples) {
 
         // set any new samples to zero
         if (numSamples > originalSize) {
-            fill(samples[i].begin() + originalSize, samples[i].end(), (T)0);
+            fill(samples[i].begin() + originalSize, samples[i].end(), static_cast<DataType>(0));
         }
     }
 }
 
-template <class T>
-void Audio<T>::setNumChannels(int numChannels) {
+template <class DataType>
+void Audio<DataType>::setNumChannels(int numChannels) {
     int originalNumChannels = static_cast<int>(getNumChannels());
     int originalNumSamplesPerChannel = static_cast<int>(getNumSamplesPerChannel());
 
@@ -149,23 +149,23 @@ void Audio<T>::setNumChannels(int numChannels) {
     if (numChannels > originalNumChannels) {
         for (int i = originalNumChannels; i < numChannels; i++) {
             samples[i].resize(originalNumSamplesPerChannel);
-            fill(samples[i].begin(), samples[i].end(), (T)0.);
+            fill(samples[i].begin(), samples[i].end(), static_cast<DataType>(0.));
         }
     }
 }
 
-template <class T>
-void Audio<T>::setBitDepth(int numBitsPerSample) {
+template <class DataType>
+void Audio<DataType>::setBitDepth(int numBitsPerSample) {
     bitDepth = numBitsPerSample;
 }
 
-template <class T>
-void Audio<T>::setSampleRate(int newSampleRate) {
+template <class DataType>
+void Audio<DataType>::setSampleRate(int newSampleRate) {
     sampleRate = newSampleRate;
 }
 
-template <class T>
-bool Audio<T>::load(string const& filePath) {
+template <class DataType>
+bool Audio<DataType>::load(string const& filePath) {
     ifstream file(AlbaLocalPathHandler(filePath).getFullPath(), ios::binary);
 
     // check the file exists
@@ -193,8 +193,8 @@ bool Audio<T>::load(string const& filePath) {
     return false;
 }
 
-template <class T>
-bool Audio<T>::decodeWaveFile(vector<uint8_t>& fileDataBytes) {
+template <class DataType>
+bool Audio<DataType>::decodeWaveFile(vector<uint8_t>& fileDataBytes) {
     // -----------------------------------------------------------
     // HEADER CHUNK
     string headerChunkID(fileDataBytes.begin(), fileDataBytes.begin() + 4);
@@ -269,11 +269,11 @@ bool Audio<T>::decodeWaveFile(vector<uint8_t>& fileDataBytes) {
             int sampleIndex = samplesStartIndex + (numBytesPerBlock * i) + channel * numBytesPerSample;
 
             if (bitDepth == 8) {
-                T sample = singleByteToSample(fileDataBytes[sampleIndex]);
+                DataType sample = singleByteToSample(fileDataBytes[sampleIndex]);
                 samples[channel].push_back(sample);
             } else if (bitDepth == 16) {
                 int16_t sampleAsInt = twoBytesToInt(fileDataBytes, sampleIndex);
-                T sample = sixteenBitIntToSample(sampleAsInt);
+                DataType sample = sixteenBitIntToSample(sampleAsInt);
                 samples[channel].push_back(sample);
             } else if (bitDepth == 24) {
                 int32_t sampleAsInt = 0;
@@ -285,7 +285,7 @@ bool Audio<T>::decodeWaveFile(vector<uint8_t>& fileDataBytes) {
                     sampleAsInt = sampleAsInt | ~0xFFFFFF;  // so make sure sign is extended to the 32 bit float
                 }
 
-                T sample = (T)sampleAsInt / (T)8388608.;
+                DataType sample = static_cast<DataType>(sampleAsInt) / static_cast<DataType>(8388608.);
                 samples[channel].push_back(sample);
             } else {
                 assert(false);
@@ -296,8 +296,8 @@ bool Audio<T>::decodeWaveFile(vector<uint8_t>& fileDataBytes) {
     return true;
 }
 
-template <class T>
-bool Audio<T>::decodeAiffFile(vector<uint8_t>& fileDataBytes) {
+template <class DataType>
+bool Audio<DataType>::decodeAiffFile(vector<uint8_t>& fileDataBytes) {
     // -----------------------------------------------------------
     // HEADER CHUNK
     string headerChunkID(fileDataBytes.begin(), fileDataBytes.begin() + 4);
@@ -373,11 +373,11 @@ bool Audio<T>::decodeAiffFile(vector<uint8_t>& fileDataBytes) {
 
             if (bitDepth == 8) {
                 auto sampleAsSigned8Bit = static_cast<int8_t>(fileDataBytes[sampleIndex]);
-                T sample = (T)sampleAsSigned8Bit / (T)128.;
+                DataType sample = static_cast<DataType>(sampleAsSigned8Bit) / static_cast<DataType>(128.);
                 samples[channel].push_back(sample);
             } else if (bitDepth == 16) {
                 int16_t sampleAsInt = twoBytesToInt(fileDataBytes, sampleIndex, Endianness::BigEndian);
-                T sample = sixteenBitIntToSample(sampleAsInt);
+                DataType sample = sixteenBitIntToSample(sampleAsInt);
                 samples[channel].push_back(sample);
             } else if (bitDepth == 24) {
                 int32_t sampleAsInt = 0;
@@ -389,7 +389,7 @@ bool Audio<T>::decodeAiffFile(vector<uint8_t>& fileDataBytes) {
                     sampleAsInt = sampleAsInt | ~0xFFFFFF;  // so make sure sign is extended to the 32 bit float
                 }
 
-                T sample = (T)sampleAsInt / (T)8388608.;
+                DataType sample = static_cast<DataType>(sampleAsInt) / static_cast<DataType>(8388608.);
                 samples[channel].push_back(sample);
             } else {
                 assert(false);
@@ -400,8 +400,8 @@ bool Audio<T>::decodeAiffFile(vector<uint8_t>& fileDataBytes) {
     return true;
 }
 
-template <class T>
-int Audio<T>::getAiffSampleRate(vector<uint8_t>& fileDataBytes, int sampleRateStartIndex) {
+template <class DataType>
+int Audio<DataType>::getAiffSampleRate(vector<uint8_t>& fileDataBytes, int sampleRateStartIndex) {
     for (auto it : aiffSampleRateTable) {
         if (tenByteMatch(fileDataBytes, sampleRateStartIndex, it.second, 0)) {
             return it.first;
@@ -411,8 +411,8 @@ int Audio<T>::getAiffSampleRate(vector<uint8_t>& fileDataBytes, int sampleRateSt
     return -1;
 }
 
-template <class T>
-bool Audio<T>::tenByteMatch(vector<uint8_t>& v1, int startIndex1, vector<uint8_t>& v2, int startIndex2) {
+template <class DataType>
+bool Audio<DataType>::tenByteMatch(vector<uint8_t>& v1, int startIndex1, vector<uint8_t>& v2, int startIndex2) {
     for (int i = 0; i < 10; i++) {
         if (v1[startIndex1 + i] != v2[startIndex2 + i]) {
             return false;
@@ -422,17 +422,17 @@ bool Audio<T>::tenByteMatch(vector<uint8_t>& v1, int startIndex1, vector<uint8_t
     return true;
 }
 
-template <class T>
-void Audio<T>::addSampleRateToAiffData(vector<uint8_t>& fileDataBytes, int sampleRate) {
+template <class DataType>
+void Audio<DataType>::addSampleRateToAiffData(vector<uint8_t>& fileDataBytes, int sampleRate) {
     if (aiffSampleRateTable.count(sampleRate) > 0) {
         for (int i = 0; i < 10; i++) {
-            fileDataBytes.push_back(aiffSampleRateTable[sampleRate][i]);
+            fileDataBytes.push_back(aiffSampleRateTable.at(sampleRate)[i]);
         }
     }
 }
 
-template <class T>
-bool Audio<T>::save(string const& filePath, AudioFormat format) {
+template <class DataType>
+bool Audio<DataType>::save(string const& filePath, AudioFormat format) {
     AlbaLocalPathHandler filePathHandler(filePath);
     if (format == AudioFormat::Wave) {
         return saveToWaveFile(filePathHandler.getFullPath());
@@ -444,8 +444,8 @@ bool Audio<T>::save(string const& filePath, AudioFormat format) {
     return false;
 }
 
-template <class T>
-bool Audio<T>::saveToWaveFile(string const& filePath) {
+template <class DataType>
+bool Audio<DataType>::saveToWaveFile(string const& filePath) {
     vector<uint8_t> fileDataBytes;
 
     auto dataChunkSize = static_cast<int32_t>(getNumSamplesPerChannel() * (getNumChannels() * bitDepth / 8));
@@ -491,7 +491,7 @@ bool Audio<T>::saveToWaveFile(string const& filePath) {
                 int16_t sampleAsInt = sampleToSixteenBitInt(samples[channel][i]);
                 addInt16ToFileData(fileDataBytes, sampleAsInt);
             } else if (bitDepth == 24) {
-                auto sampleAsIntAgain = (int32_t)(samples[channel][i] * (T)8388608.);
+                auto sampleAsIntAgain = (int32_t)(samples[channel][i] * static_cast<DataType>(8388608.));
 
                 fileDataBytes.push_back(static_cast<uint8_t>(sampleAsIntAgain >> 16) & 0xFF);
                 fileDataBytes.push_back(static_cast<uint8_t>(sampleAsIntAgain >> 8) & 0xFF);
@@ -514,8 +514,8 @@ bool Audio<T>::saveToWaveFile(string const& filePath) {
     return writeDataToFile(fileDataBytes, filePath);
 }
 
-template <class T>
-bool Audio<T>::saveToAiffFile(string const& filePath) {
+template <class DataType>
+bool Audio<DataType>::saveToAiffFile(string const& filePath) {
     vector<uint8_t> fileDataBytes;
 
     int32_t numBytesPerSample = bitDepth / 8;
@@ -561,9 +561,9 @@ bool Audio<T>::saveToAiffFile(string const& filePath) {
                 int16_t sampleAsInt = sampleToSixteenBitInt(samples[channel][i]);
                 addInt16ToFileData(fileDataBytes, sampleAsInt, Endianness::BigEndian);
             } else if (bitDepth == 24) {
-                auto sampleAsIntAgain = (int32_t)(samples[channel][i] * (T)8388608.);
+                auto sampleAsIntAgain = (int32_t)(samples[channel][i] * static_cast<DataType>(8388608.));
 
-                uint8_t bytes[3];
+                array<uint8_t, 3> bytes;
                 bytes[0] = static_cast<uint8_t>(sampleAsIntAgain >> 16) & 0xFF;
                 bytes[1] = static_cast<uint8_t>(sampleAsIntAgain >> 8) & 0xFF;
                 bytes[2] = static_cast<uint8_t>(sampleAsIntAgain) & 0xFF;
@@ -589,8 +589,8 @@ bool Audio<T>::saveToAiffFile(string const& filePath) {
     return writeDataToFile(fileDataBytes, filePath);
 }
 
-template <class T>
-bool Audio<T>::writeDataToFile(vector<uint8_t>& fileDataBytes, string const& filePath) {
+template <class DataType>
+bool Audio<DataType>::writeDataToFile(vector<uint8_t>& fileDataBytes, string const& filePath) {
     ofstream outputFile(filePath, ios::binary);
 
     if (outputFile.is_open()) {
@@ -604,15 +604,15 @@ bool Audio<T>::writeDataToFile(vector<uint8_t>& fileDataBytes, string const& fil
     return false;
 }
 
-template <class T>
-void Audio<T>::addStringToFileData(vector<uint8_t>& fileDataBytes, string const& s) {
+template <class DataType>
+void Audio<DataType>::addStringToFileData(vector<uint8_t>& fileDataBytes, string const& s) {
     fileDataBytes.reserve(fileDataBytes.size() + s.size());
     copy(s.cbegin(), s.cend(), back_inserter(fileDataBytes));
 }
 
-template <class T>
-void Audio<T>::addInt32ToFileData(vector<uint8_t>& fileDataBytes, int32_t i, Endianness endianness) {
-    uint8_t bytes[4];
+template <class DataType>
+void Audio<DataType>::addInt32ToFileData(vector<uint8_t>& fileDataBytes, int32_t i, Endianness endianness) {
+    array<uint8_t, 4> bytes;
 
     if (endianness == Endianness::LittleEndian) {
         bytes[3] = (i >> 24) & 0xFF;
@@ -627,11 +627,11 @@ void Audio<T>::addInt32ToFileData(vector<uint8_t>& fileDataBytes, int32_t i, End
     }
 
     fileDataBytes.reserve(fileDataBytes.size() + 4);
-    copy(cbegin(bytes), cend(bytes), back_inserter(fileDataBytes));
+    copy(bytes.cbegin(), bytes.cend(), back_inserter(fileDataBytes));
 }
 
-template <class T>
-void Audio<T>::addInt16ToFileData(vector<uint8_t>& fileDataBytes, int16_t i, Endianness endianness) {
+template <class DataType>
+void Audio<DataType>::addInt16ToFileData(vector<uint8_t>& fileDataBytes, int16_t i, Endianness endianness) {
     array<uint8_t, 2> bytes{};
 
     if (endianness == Endianness::LittleEndian) {
@@ -646,8 +646,8 @@ void Audio<T>::addInt16ToFileData(vector<uint8_t>& fileDataBytes, int16_t i, End
     fileDataBytes.push_back(bytes[1]);
 }
 
-template <class T>
-void Audio<T>::clearAudioBuffer() {
+template <class DataType>
+void Audio<DataType>::clearAudioBuffer() {
     for (int i = 0; i < static_cast<int>(samples.size()); i++) {
         samples[i].clear();
     }
@@ -655,8 +655,8 @@ void Audio<T>::clearAudioBuffer() {
     samples.clear();
 }
 
-template <class T>
-AudioFormat Audio<T>::determineAudioFormat(vector<uint8_t>& fileDataBytes) {
+template <class DataType>
+AudioFormat Audio<DataType>::determineAudioFormat(vector<uint8_t>& fileDataBytes) {
     string header(fileDataBytes.begin(), fileDataBytes.begin() + 4);
 
     if (header == "RIFF") {
@@ -668,8 +668,8 @@ AudioFormat Audio<T>::determineAudioFormat(vector<uint8_t>& fileDataBytes) {
     return AudioFormat::Error;
 }
 
-template <class T>
-int32_t Audio<T>::fourBytesToInt(vector<uint8_t> const& source, int startIndex, Endianness endianness) {
+template <class DataType>
+int32_t Audio<DataType>::fourBytesToInt(vector<uint8_t> const& source, int startIndex, Endianness endianness) {
     int32_t result = 0;
 
     if (endianness == Endianness::LittleEndian) {
@@ -683,8 +683,8 @@ int32_t Audio<T>::fourBytesToInt(vector<uint8_t> const& source, int startIndex, 
     return result;
 }
 
-template <class T>
-int16_t Audio<T>::twoBytesToInt(vector<uint8_t> const& source, int startIndex, Endianness endianness) {
+template <class DataType>
+int16_t Audio<DataType>::twoBytesToInt(vector<uint8_t> const& source, int startIndex, Endianness endianness) {
     int16_t result = 0;
 
     if (endianness == Endianness::LittleEndian) {
@@ -696,8 +696,8 @@ int16_t Audio<T>::twoBytesToInt(vector<uint8_t> const& source, int startIndex, E
     return result;
 }
 
-template <class T>
-int Audio<T>::getIndexOfString(vector<uint8_t> const& source, string const& stringToSearchFor) {
+template <class DataType>
+int Audio<DataType>::getIndexOfString(vector<uint8_t> const& source, string const& stringToSearchFor) {
     int index = -1;
     int stringLength = static_cast<int>(stringToSearchFor.length());
 
@@ -713,31 +713,31 @@ int Audio<T>::getIndexOfString(vector<uint8_t> const& source, string const& stri
     return index;
 }
 
-template <class T>
-T Audio<T>::sixteenBitIntToSample(int16_t sample) {
-    return static_cast<T>(sample) / static_cast<T>(32768.);
+template <class DataType>
+DataType Audio<DataType>::sixteenBitIntToSample(int16_t sample) {
+    return static_cast<DataType>(sample) / static_cast<DataType>(32768.);
 }
 
-template <class T>
-int16_t Audio<T>::sampleToSixteenBitInt(T sample) {
+template <class DataType>
+int16_t Audio<DataType>::sampleToSixteenBitInt(DataType sample) {
     sample = clamp(sample, -1., 1.);
     return static_cast<int16_t>(sample * 32767.);
 }
 
-template <class T>
-uint8_t Audio<T>::sampleToSingleByte(T sample) {
+template <class DataType>
+uint8_t Audio<DataType>::sampleToSingleByte(DataType sample) {
     sample = clamp(sample, -1., 1.);
     sample = (sample + 1.) / 2.;
     return static_cast<uint8_t>(sample * 255.);
 }
 
-template <class T>
-T Audio<T>::singleByteToSample(uint8_t sample) {
-    return static_cast<T>(sample - 128) / static_cast<T>(128.);
+template <class DataType>
+DataType Audio<DataType>::singleByteToSample(uint8_t sample) {
+    return static_cast<DataType>(sample - 128) / static_cast<DataType>(128.);
 }
 
-template <class T>
-T Audio<T>::clamp(T value, T minValue, T maxValue) {
+template <class DataType>
+DataType Audio<DataType>::clamp(DataType value, DataType minValue, DataType maxValue) {
     value = min(value, maxValue);
     value = max(value, minValue);
     return value;

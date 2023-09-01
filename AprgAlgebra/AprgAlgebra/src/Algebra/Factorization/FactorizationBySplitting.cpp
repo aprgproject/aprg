@@ -71,7 +71,7 @@ void splitPolynomialsByDivisibilityOfExponents(Polynomials& result, Polynomial c
     AlbaNumber polynomialDegree(getMaxDegree(polynomial));
     if (polynomialDegree.isIntegerType() && polynomialDegree > 0) {
         Monomials remainingMonomials = polynomial.getMonomials();
-        long long int degree = polynomialDegree.getInteger();
+        int64_t degree = polynomialDegree.getInteger();
         for (; degree >= 2; degree--) {
             Polynomial partialPolynomial;
             Monomials collectedMonomials;

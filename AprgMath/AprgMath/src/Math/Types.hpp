@@ -8,7 +8,7 @@
 
 namespace alba::math {
 
-using UnsignedInteger = unsigned long long;
+using UnsignedInteger = uint64_t;
 using UnsignedIntegerPair = std::pair<UnsignedInteger, UnsignedInteger>;
 using UnsignedIntegerTriplet = std::tuple<UnsignedInteger, UnsignedInteger, UnsignedInteger>;
 using UnsignedIntegers = std::vector<UnsignedInteger>;
@@ -17,7 +17,7 @@ using UnsignedIntegerUnaryFunction = std::function<UnsignedInteger(UnsignedInteg
 using UnsignedIntegerBinaryFunction = std::function<UnsignedInteger(UnsignedInteger const, UnsignedInteger const)>;
 using UnsignedIntegerMatrix = alba::matrix::AlbaMatrix<UnsignedInteger>;
 
-using SignedInteger = long long;
+using SignedInteger = int64_t;
 using SignedIntegers = std::vector<SignedInteger>;
 
 }  // namespace alba::math

@@ -172,7 +172,7 @@ AlbaNumbers getDerivativeCoefficients(AlbaNumbers const& coefficients) {
     AlbaNumbers derivativeCoefficients(coefficients);
     if (!derivativeCoefficients.empty()) {
         derivativeCoefficients.pop_back();
-        AlbaNumber derivativeMultiplier(static_cast<long long int>(derivativeCoefficients.size()));
+        AlbaNumber derivativeMultiplier(static_cast<int64_t>(derivativeCoefficients.size()));
         for (AlbaNumber& derivativeCoefficient : derivativeCoefficients) {
             derivativeCoefficient = derivativeCoefficient * derivativeMultiplier;
             derivativeMultiplier = derivativeMultiplier - 1;

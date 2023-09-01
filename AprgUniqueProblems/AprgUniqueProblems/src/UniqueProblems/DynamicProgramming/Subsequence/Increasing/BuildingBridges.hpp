@@ -13,7 +13,7 @@ public:
     using IndexToIndex = std::vector<Index>;
     using IndexToValue = std::vector<Value>;
 
-    BuildingBridges(Bridges const& sequence);
+    explicit BuildingBridges(Bridges const& sequence);
 
     Index getNumberOfPossibleBridges() const;
     Bridges getPossibleBridges() const;

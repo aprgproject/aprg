@@ -15,7 +15,7 @@ public:
     using IndexToIndex = std::vector<Index>;
     using Values = std::vector<Value>;
 
-    MaximumSumIncreasingSubsequence(Values const& sequence);
+    explicit MaximumSumIncreasingSubsequence(Values const& sequence);
 
     Value getMaximumSum() const;
     Values getSubsequenceWithMaximumSum() const;

@@ -179,8 +179,8 @@ void BtsLogSorter::addStartupLogsOnSorterWithPcTime() {
 
 void BtsLogSorter::writeLogsWithoutPcTimeToOutputFile(ofstream& outputLogFileStream) {
     cout << "Save sorted logs without PC time.\n";
-    unsigned long long printCount(0);
-    unsigned long long size(m_sorterWithoutPcTime.getSize());
+    uint64_t printCount(0);
+    uint64_t size(m_sorterWithoutPcTime.getSize());
     m_sorterWithoutPcTime.sortThenDoFunctionThenReleaseAllObjects([&](BtsLogPrint const& logPrint) {
         updateOrWriteCurrentPrint(logPrint, outputLogFileStream);
         ProgressCounters::writeProgressForCombine = static_cast<int>(75 + (printCount++ * 25 / size));
@@ -196,8 +196,8 @@ void BtsLogSorter::separateLogsWithoutPcTimeIntoDifferentAddresses() {
         hardwareAddressToOutputSteamMap[hardwareAddress].open(
             getPathOfLogWithoutPcTimeBasedFromHardwareAddress(m_directoryOfLogsWithoutPcTime, hardwareAddress));
     }
-    unsigned long long printCount(0);
-    unsigned long long size(m_sorterWithoutPcTime.getSize());
+    uint64_t printCount(0);
+    uint64_t size(m_sorterWithoutPcTime.getSize());
     m_sorterWithoutPcTime.sortThenDoFunctionThenReleaseAllObjects([&](BtsLogPrint const& logPrint) {
         hardwareAddressToOutputSteamMap[logPrint.getHardwareAddress()] << logPrint << "\n";
 
@@ -212,8 +212,8 @@ void BtsLogSorter::writeLogsWithPcTimeToOutputFile(ofstream& outputLogFileStream
         hardwareAddressToReaderMap[hardwareAddress].openIfNeeded(
             getPathOfLogWithoutPcTimeBasedFromHardwareAddress(m_directoryOfLogsWithoutPcTime, hardwareAddress));
     }
-    unsigned long long printCount(0);
-    unsigned long long size(m_sorterWithPcTime.getSize());
+    uint64_t printCount(0);
+    uint64_t size(m_sorterWithPcTime.getSize());
     m_sorterWithPcTime.sortThenDoFunctionThenReleaseAllObjects([&](BtsLogPrint const& logPrint) {
         writePrintsFromFileReaderBeforeThisPrint(
             hardwareAddressToReaderMap[logPrint.getHardwareAddress()], logPrint, outputLogFileStream);

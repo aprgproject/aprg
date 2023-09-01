@@ -13,8 +13,11 @@ namespace DesignDocumentCreator {
 class Component {
 public:
     explicit Component(ComponentName const componentName);
-    Component(Component const&) = delete;
-    Component& operator=(Component const&) = delete;
+    virtual ~Component() = default;  // virtual destructor because of virtual functions (vtable exists)
+    Component(Component const& component) = default;
+    Component(Component&& component) = default;
+    Component& operator=(Component const& component) = default;
+    Component& operator=(Component&& component) = default;
     void pushBackEvent(Event const& event);
     void handleOneEvent();
     void handleAllEvents();

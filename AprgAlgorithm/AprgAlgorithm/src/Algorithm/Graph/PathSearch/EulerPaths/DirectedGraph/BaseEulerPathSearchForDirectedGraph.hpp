@@ -18,8 +18,8 @@ public:
 
     explicit BaseEulerPathSearchForDirectedGraph(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}
 
-    virtual ~BaseEulerPathSearchForDirectedGraph() =
-        default;  // virtual destructor because of virtual functions (vtable exists)
+    // virtual destructor because of virtual functions (vtable exists)
+    virtual ~BaseEulerPathSearchForDirectedGraph() = default;
 
     [[nodiscard]] bool hasEulerCycle() const { return hasEulerCycleForDirectedGraph(m_graph); }
 

@@ -13,7 +13,7 @@ public:
     [[nodiscard]] DataType getSum() const { return m_sum; }
     [[nodiscard]] int getCount() const { return m_count; }
     [[nodiscard]] DataType getAverage() const { return (m_count == 0) ? 0 : m_sum / m_count; }
-    [[nodiscard]] double getAverageWithDoubleFormat() const { return (double)m_sum / m_count; }
+    [[nodiscard]] double getAverageWithDoubleFormat() const { return static_cast<double>(m_sum) / m_count; }
     void addData(DataType const& dataValue) {
         if (m_count == 0) {
             m_minimum = dataValue;

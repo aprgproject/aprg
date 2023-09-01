@@ -15,7 +15,7 @@ public:
     using IndexPair = std::pair<Index, Index>;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    FindKClosestElements(Values const& values) : m_values(values) {}
+    explicit FindKClosestElements(Values const& values) : m_values(values) {}
 
     IndexPair getIndexPairClosestElements(int const numberOfClosestElements, Value const& valueToCheck) {
         IndexPair result{INVALID_INDEX, INVALID_INDEX};

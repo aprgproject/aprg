@@ -11,11 +11,11 @@ constexpr unsigned int MAX_USERS_IN_NODEB = 2500;
 
 #pragma once
 
-//#include <TCRNCCommunicationContextId.h>
-//#include <TNbccId.h>
+// #include <TCRNCCommunicationContextId.h>
+// #include <TNbccId.h>
 
 #ifdef __cplusplus
-//#include <DOpenIUBCommonDefs.h>
+// #include <DOpenIUBCommonDefs.h>
 
 #include <array>
 
@@ -25,7 +25,7 @@ public:
     static TNbccId get(TCRNCCommunicationContextId const crnccId);
 
 private:
-    static std::array<TCRNCCommunicationContextId, MAX_USERS_IN_NODEB + 1> m_crnccIdMapping;
+    static std::array<TCRNCCommunicationContextId, MAX_USERS_IN_NODEB + 1> m_crnccIdMapping{};
 };
 
 extern "C" {

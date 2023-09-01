@@ -29,7 +29,7 @@ public:
 
     using BoolFunction = std::function<bool(Value)>;
 
-    FindSmallestValueWithTrue(BoolFunction const& boolFunction) : m_boolFunction(boolFunction) {}
+    explicit FindSmallestValueWithTrue(BoolFunction const& boolFunction) : m_boolFunction(boolFunction) {}
 
     Value getSmallestValueWithTrue(Value const& startValue, Value const& endValue) const {
         // Binary search with skip

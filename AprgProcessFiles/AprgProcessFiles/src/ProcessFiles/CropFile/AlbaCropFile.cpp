@@ -66,7 +66,7 @@ void AlbaCropFile::performCropForFile(
     AlbaFileReader fileReader(inputFileStream);
     LocationsInFile locations(getLocationsInFile(foundLocation, fileReader.getFileSize()));
     inputFileStream.clear();
-    fileReader.moveLocation(static_cast<unsigned long long>(locations.startLocation));
+    fileReader.moveLocation(static_cast<uint64_t>(locations.startLocation));
 
     double locationDifference = locations.endLocation - locations.startLocation;
     while (fileReader.isNotFinished()) {

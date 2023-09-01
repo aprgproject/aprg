@@ -16,7 +16,7 @@ public:
     using BoolMatrix = matrix::AlbaMatrix<bool>;
     static constexpr Count MAX_COUNT = std::numeric_limits<Count>::max();
 
-    PalindromePartitioning(std::string const& stringParameter);
+    explicit PalindromePartitioning(std::string const& stringParameter);
 
     Count getMinimumNumberOfCutsUsingNaiveRecursion() const;
     Count getMinimumNumberOfCutsUsingMemoizationDP() const;

@@ -13,7 +13,7 @@ public:
     using Value = typename Values::value_type;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    SearchUnsortedElementOnAlmostSortedContainer(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    explicit SearchUnsortedElementOnAlmostSortedContainer(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
     Index getIndexOfValue(Value const& value) const {
         Index result(INVALID_INDEX);

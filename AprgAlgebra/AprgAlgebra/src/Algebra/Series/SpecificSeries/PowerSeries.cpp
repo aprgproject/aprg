@@ -39,7 +39,7 @@ AlbaNumber PowerSeries::getRadiusOfConvergence() const {
                    getAbsoluteValue(
                        nextInterval.getHigherEndpoint().getValue() - nextInterval.getLowerEndpoint().getValue());
         });
-    result = result / static_cast<long long int>(intervals.size()) / 2;
+    result = result / static_cast<int64_t>(intervals.size()) / 2;
     return result;
 }
 

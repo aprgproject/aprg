@@ -126,7 +126,7 @@ protected:
             calculateSampleStandardDeviationIfNeeded();
             Sample dispersionCalculationTemp(m_sampleStandardDeviation.value());
             dispersionCalculationTemp = dispersionCalculationTemp.calculateRaiseToPower(2);
-            m_dispersionAroundTheCentroid = pow((double)dispersionCalculationTemp.getSum(), 0.5);
+            m_dispersionAroundTheCentroid = pow(static_cast<double>(dispersionCalculationTemp.getSum()), 0.5);
         }
     }
 

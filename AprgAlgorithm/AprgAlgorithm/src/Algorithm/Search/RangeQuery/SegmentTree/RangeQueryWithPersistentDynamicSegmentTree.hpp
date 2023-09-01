@@ -73,7 +73,7 @@ public:
         }
     }
 
-protected:
+private:
     [[nodiscard]] Value getValueOnIntervalFromTopToBottom(
         Index const startInterval, Index const endInterval, NodePointer const& nodePointer, Index const baseLeft,
         Index const baseRight) const {
