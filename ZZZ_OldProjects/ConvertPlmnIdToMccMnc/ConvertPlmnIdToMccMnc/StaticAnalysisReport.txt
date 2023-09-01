@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [20]
-2023-08-31T07:14:12
+StaticAnalysisJobIdentifier: [30]
+2023-09-01T08:11:47
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/ConvertPlmnIdToMccMnc/ConvertPlmnIdToMccMnc/src/ConvertPlmnIdToMccMnc.cpp:26:56: warning: 100 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/ConvertPlmnIdToMccMnc/ConvertPlmnIdToMccMnc/src/ConvertPlmnIdToMccMnc.cpp:26:90: warning: 5 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/ConvertPlmnIdToMccMnc/ConvertPlmnIdToMccMnc/src/ConvertPlmnIdToMccMnc.cpp:26:103: warning: 10 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]

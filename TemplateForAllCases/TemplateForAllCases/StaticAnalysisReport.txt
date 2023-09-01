@@ -1,4 +1,6 @@
-StaticAnalysisJobIdentifier: [20]
-2023-08-31T06:28:31
-/home/runner/work/aprg/aprg/TemplateForAllCases/TemplateForAllCases/src/TemplateForAllCases/TemplateForAllCases.cpp:5:46: warning: 'm_sample' should be initialized in an in-class default member initializer [cppcoreguidelines-prefer-member-initializer]
+StaticAnalysisJobIdentifier: [30]
+2023-09-01T07:20:15
+/home/runner/work/aprg/aprg/TemplateForAllCases/TemplateForAllCases/src/TemplateForAllCases/TemplateForAllCases.cpp:5:22: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
+/home/runner/work/aprg/aprg/TemplateForAllCases/TemplateForAllCases/src/TemplateForAllCases/TemplateForAllCases.hpp:10:9: warning: private field 'm_sample' is not used [clang-diagnostic-unused-private-field]
+/home/runner/work/aprg/aprg/TemplateForAllCases/TemplateForAllCases/src/TemplateForAllCases/TemplateForAllCases.hpp:10:9: warning: private field 'm_sample' is not used [-Wunused-private-field]
 DONE!
