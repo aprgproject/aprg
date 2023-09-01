@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [20]
-2023-08-31T05:40:45
+StaticAnalysisJobIdentifier: [30]
+2023-09-01T06:24:36
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Builder/Builder.hpp:27:7: warning: class 'Builder' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/AbstractFactory/AbstractFactory.hpp:10:7: warning: class 'ProductA' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/AbstractFactory/AbstractFactory.hpp:37:7: warning: class 'ProductB' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
@@ -20,7 +20,6 @@ StaticAnalysisJobIdentifier: [20]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/FactoryMethod/FactoryMethod.hpp:39:7: warning: class 'Creator' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Flyweight/Flyweight.hpp:11:7: warning: class 'Flyweight' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Flyweight/Flyweight.hpp:61:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Flyweight/Flyweight_unit.cpp:21:32: warning: static member accessed through instance [readability-static-accessed-through-instance]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Interpreter/Interpreter.hpp:26:7: warning: class 'AbstractExpression' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Interpreter/Interpreter.hpp:41:33: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Interpreter/Interpreter_unit.cpp:13:10: warning: variable name 'a' is too short, expected at least 3 characters [readability-identifier-length]
