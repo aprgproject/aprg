@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [20]
-2023-08-31T04:36:42
+StaticAnalysisJobIdentifier: [30]
+2023-09-01T05:21:35
 /home/runner/work/aprg/aprg/CodingCompetitions/GoogleCodeJam/GoogleCodeJam/tst/2018/PracticeRound/CodeJam_2018_PracticeRound_P1_NumberGuessing_unit.cpp:11:6: warning: avoid using "_" in test case name "CodeJam_2018_PracticeRound_P1_NumberGuessingTest" according to Googletest FAQ [google-readability-avoid-underscore-in-googletest-name]
 /home/runner/work/aprg/aprg/CodingCompetitions/GoogleCodeJam/GoogleCodeJam/tst/2018/PracticeRound/CodeJam_2018_PracticeRound_P2_SenateEvacuation_unit.cpp:11:6: warning: avoid using "_" in test case name "CodeJam_2018_PracticeRound_P2_SenateEvacuationTest" according to Googletest FAQ [google-readability-avoid-underscore-in-googletest-name]
 /home/runner/work/aprg/aprg/CodingCompetitions/GoogleCodeJam/GoogleCodeJam/tst/2018/PracticeRound/CodeJam_2018_PracticeRound_P3_Steed2CruiseControl_unit.cpp:11:6: warning: avoid using "_" in test case name "CodeJam_2018_PracticeRound_P3_Steed2CruiseControlTest" according to Googletest FAQ [google-readability-avoid-underscore-in-googletest-name]
