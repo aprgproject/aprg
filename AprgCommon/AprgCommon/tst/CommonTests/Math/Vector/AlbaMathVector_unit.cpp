@@ -1,5 +1,4 @@
 #include <Common/Math/Vector/AlbaMathVector.hpp>
-#include <CommonTests/Math/Vector/AlbaMathVectorInternalFunctions.hpp>
 
 #include <gtest/gtest.h>
 

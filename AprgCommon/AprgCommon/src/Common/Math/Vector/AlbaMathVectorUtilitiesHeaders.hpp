@@ -1,9 +1,15 @@
 #pragma once
 
 #include <Common/Math/Angle/AlbaAngle.hpp>
-#include <Common/Math/Vector/AlbaMathVector.hpp>
+#include <Common/Math/Vector/AlbaMathVectorDataTypes.hpp>
 
 namespace alba {
+
+template <typename DataType>
+bool isEqualForMathVectorDataType(DataType const& value1, DataType const& value2);
+
+template <typename DataType>
+DataType raiseToPowerForMathVectorDataType(DataType const& value1, DataType const& value2);
 
 template <typename DataType, size_t SIZE>
 bool areVectorsPerpendicular(
