@@ -24,7 +24,10 @@ void CopyGoogleTemplates::copyTemplatesForOneRound(
             replaceAllAndReturnIfFound(newFile, replacePair.first, replacePair.second);
         }
         if (!isStringFoundCaseSensitive(newFile, "SampleProblem")) {
-            AlbaLocalPathHandler newFilePathHandler(destinationPath + "\\" + newFile);
+            string newFilePath(destinationPath);
+            newFilePath += "/";
+            newFilePath += newFile;
+            AlbaLocalPathHandler newFilePathHandler(newFilePath);
             newFilePathHandler.createDirectoriesForNonExisitingDirectories();
             replaceStringWithStringOnFile(originalFilePath, newFilePathHandler.getFullPath(), replacePairs);
         }

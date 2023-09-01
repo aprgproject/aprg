@@ -92,7 +92,7 @@ AlbaNumber LimitsAtInfinity::getDegreeToRemove(AlbaNumber const& numeratorDegree
         degreeToRemove = numeratorDegree;
     } else if (numeratorDegree > denominatorDegree) {
         degreeToRemove = min(numeratorDegree, denominatorDegree);
-    } else if (numeratorDegree < denominatorDegree) {
+    } else {
         degreeToRemove = max(numeratorDegree, denominatorDegree);
     }
     return degreeToRemove;

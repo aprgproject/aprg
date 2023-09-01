@@ -51,6 +51,9 @@ Term::Term(Term const& term)
       m_baseTermDataPointer(createANewPointerFrom(term)) {}
 
 Term& Term::operator=(Term const& term) {
+    if (this == &term) {
+        return *this;
+    }
     m_type = term.m_type;
     m_isSimplified = term.m_isSimplified;
     m_baseTermDataPointer = createANewPointerFrom(term);

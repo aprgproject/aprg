@@ -4,7 +4,7 @@ namespace alba {
 
 class TemplateForLibraries {
 public:
-    TemplateForLibraries();
+    TemplateForLibraries() = default;
 
 private:
     int m_sample{0};

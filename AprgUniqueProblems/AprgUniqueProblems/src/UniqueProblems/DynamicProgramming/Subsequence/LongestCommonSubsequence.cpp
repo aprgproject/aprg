@@ -79,11 +79,10 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingN
     }
     if (m_sequence1[index1 - 1] == m_sequence2[index2 - 1]) {
         return 1 + getLongestLengthUsingNaiveRecursion(index1 - 1, index2 - 1);
-    } else {
-        return max(
-            getLongestLengthUsingNaiveRecursion(index1, index2 - 1),
-            getLongestLengthUsingNaiveRecursion(index1 - 1, index2));
     }
+    return max(
+        getLongestLengthUsingNaiveRecursion(index1, index2 - 1),
+        getLongestLengthUsingNaiveRecursion(index1 - 1, index2));
 }
 
 LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingMemoizationDP(

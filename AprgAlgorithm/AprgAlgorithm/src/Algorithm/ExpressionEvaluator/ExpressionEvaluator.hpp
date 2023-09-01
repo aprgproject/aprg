@@ -173,10 +173,7 @@ public:
                 }
             }
         }
-        if (resultStackSize != 1) {
-            return false;
-        }
-        return true;
+        return resultStackSize == 1;
     }
 
 private:

@@ -178,8 +178,8 @@ protected:
                 putEntry(*entryPointer);
             }
         }
-        delete[] m_entryPointers;
-        m_entryPointers = nullptr;
+        delete[] oldEntryPointers;
+        oldEntryPointers = nullptr;
     }
 
     void resizeOnPutIfNeeded() {

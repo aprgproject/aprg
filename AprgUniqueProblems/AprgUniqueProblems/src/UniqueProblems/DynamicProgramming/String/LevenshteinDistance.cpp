@@ -110,14 +110,14 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingNaive
     }
     if (index2 == 0) {
         return index1;
-    } else if (m_string1[index1 - 1] == m_string2[index2 - 1]) {
-        return getLevenshteinDistanceUsingNaiveRecursion(index1 - 1, index2 - 1);
-    } else {
-        Index replaceDistance = getLevenshteinDistanceUsingNaiveRecursion(index1 - 1, index2 - 1);
-        Index deleteDistance = getLevenshteinDistanceUsingNaiveRecursion(index1 - 1, index2);
-        Index insertDistance = getLevenshteinDistanceUsingNaiveRecursion(index1, index2 - 1);
-        return min(min(replaceDistance, deleteDistance), insertDistance) + 1;
     }
+    if (m_string1[index1 - 1] == m_string2[index2 - 1]) {
+        return getLevenshteinDistanceUsingNaiveRecursion(index1 - 1, index2 - 1);
+    }
+    Index replaceDistance = getLevenshteinDistanceUsingNaiveRecursion(index1 - 1, index2 - 1);
+    Index deleteDistance = getLevenshteinDistanceUsingNaiveRecursion(index1 - 1, index2);
+    Index insertDistance = getLevenshteinDistanceUsingNaiveRecursion(index1, index2 - 1);
+    return min(min(replaceDistance, deleteDistance), insertDistance) + 1;
 }
 
 LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingMemoizationDP(

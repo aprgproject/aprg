@@ -13,7 +13,7 @@ public:
 private:
     [[nodiscard]] int searchWithLoops(std::string const&, std::string const&) const {
         static_assert(
-            sizeof(BruteForceSubstringSearch) != sizeof(BruteForceSubstringSearch),
+            sizeof(BruteForceSubstringSearch) != 0,
             "The number of loops should be one or two. Other numbers have no implementation");
         return 0;
     }

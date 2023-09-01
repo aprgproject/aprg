@@ -274,7 +274,7 @@ void TopLogAnalyzer::saveDataFromHeaders(string const& lineInLogs) {
 }
 
 void TopLogAnalyzer::saveOverallCpuData(string const& lineInLogs, DataEntry& currentEntry) {
-    unsigned int bracketCpuIndexInLine(lineInLogs.find("["));
+    unsigned int bracketCpuIndexInLine(lineInLogs.find('['));
     if (bracketCpuIndexInLine > 3) {
         currentEntry.totalCpuFromTop =
             stringHelper::convertStringToNumber<double>(lineInLogs.substr(bracketCpuIndexInLine - 3, 3));

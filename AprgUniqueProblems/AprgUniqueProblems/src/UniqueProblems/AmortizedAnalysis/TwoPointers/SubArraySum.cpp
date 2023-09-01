@@ -30,7 +30,7 @@ SubArraySum::Values SubArraySum::getSubArrayWithSum(Value const targetSum) const
                 } else {
                     break;
                 }
-            } else if (currentSum < targetSum) {
+            } else {
                 if (end + 1 < size) {
                     end++;
                     currentSum += m_valuesToCheck[end];

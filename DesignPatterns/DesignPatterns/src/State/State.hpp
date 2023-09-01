@@ -36,11 +36,7 @@ public:
 
 class Context {
 public:
-    Context()
-
-    {
-        //...
-    }
+    Context() = default;
 
     void setState(std::unique_ptr<State> statePointer) { m_statePointer = move(statePointer); }
 

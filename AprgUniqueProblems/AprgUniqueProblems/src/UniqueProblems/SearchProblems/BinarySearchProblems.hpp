@@ -51,7 +51,7 @@ public:
         // The idea here is finding left and right most occurrences of key in the array using binary search.
         // We can modify floor function to trace right most occurrence and left most occurrence.
 
-        Index result(getInvalidIndex<Index>());
+        auto result(getInvalidIndex<Index>());
         if (!sortedValues.empty()) {
             // reversed
             Index higherIndex = getNearestFloorIndex(sortedValues, valueToCheck);
@@ -77,7 +77,7 @@ public:
         // we converge our search space to A[1 … m].
         // At every iteration we check for search space size, if it is 1, we are done.
 
-        Index result(getInvalidIndex<Index>());
+        auto result(getInvalidIndex<Index>());
         Index lowerIndex(0), higherIndex(sortedValues.size() - 1);
         if (sortedValues[lowerIndex] <= sortedValues[higherIndex]) {
             result = lowerIndex;

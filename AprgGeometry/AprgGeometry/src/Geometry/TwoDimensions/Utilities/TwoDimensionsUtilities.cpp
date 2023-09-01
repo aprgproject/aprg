@@ -704,9 +704,9 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points) {
     sort(next(auxiliary.begin()), auxiliary.end(), [firstPoint](Point const& point1, Point const& point2) {
         RotationDirection direction = getRotationDirectionTraversing3Points(firstPoint, point1, point2);
         if (RotationDirection::Collinear == direction) {
-            return getDistance(firstPoint, point1) <= getDistance(firstPoint, point2) ? true : false;
+            return getDistance(firstPoint, point1) <= getDistance(firstPoint, point2);
         }
-        return RotationDirection::CounterClockWise == direction ? true : false;
+        return RotationDirection::CounterClockWise == direction;
     });
 
     // remove collinear points

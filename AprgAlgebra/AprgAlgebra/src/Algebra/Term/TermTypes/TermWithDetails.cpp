@@ -18,6 +18,9 @@ TermWithDetails::TermWithDetails(TermWithDetails const& termWithDetails)
       association(termWithDetails.association) {}
 
 TermWithDetails& TermWithDetails::operator=(TermWithDetails const& termWithDetails) {
+    if (this == &termWithDetails) {
+        return *this;
+    }
     baseTermPointer = duplicateUniquePointer(termWithDetails.baseTermPointer);
     association = termWithDetails.association;
     return *this;

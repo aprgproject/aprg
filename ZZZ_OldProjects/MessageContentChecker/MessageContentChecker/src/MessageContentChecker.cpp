@@ -1,7 +1,3 @@
 #include "MessageContentChecker.hpp"
 
-namespace alba {
-
-MessageContentChecker::MessageContentChecker() {}
-
-}  // namespace alba
+namespace alba {}  // namespace alba

@@ -29,6 +29,9 @@ Function::Function(Function const& functionObject)
       m_isSimplified(functionObject.m_isSimplified) {}
 
 Function& Function::operator=(Function const& functionObject) {
+    if (this == &functionObject) {
+        return *this;
+    }
     m_functionName = functionObject.m_functionName;
     m_inputTermPointer = duplicateUniquePointer(functionObject.m_inputTermPointer);
     m_evaluationFunction = functionObject.m_evaluationFunction;

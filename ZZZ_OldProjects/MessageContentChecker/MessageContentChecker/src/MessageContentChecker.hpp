@@ -4,7 +4,7 @@ namespace alba {
 
 class MessageContentChecker {
 public:
-    MessageContentChecker();
+    MessageContentChecker() = default;
 
 private:
     int m_sample{0};

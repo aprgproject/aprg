@@ -7,7 +7,7 @@ namespace alba {
 class TddLecture {
 public:
     using UnsignedInts = std::vector<unsigned int>;
-    TddLecture();
+    TddLecture() = default;
     void functionality1() const {}
     void functionality2() const {}
     void functionality3() const {}

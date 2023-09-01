@@ -17,7 +17,10 @@ struct OperationPrinter {
     ~OperationPrinter() { cout << "Destructor\n"; }
     OperationPrinter(OperationPrinter const&) { cout << "Copy constructor\n"; }
     OperationPrinter(OperationPrinter&&) noexcept { cout << "Move constructor\n"; }
-    OperationPrinter& operator=(OperationPrinter const&) {
+    OperationPrinter& operator=(OperationPrinter const& rhs) {
+        if (this == &rhs) {
+            return *this;
+        }
         cout << "Copy assignment\n";
         return *this;
     }

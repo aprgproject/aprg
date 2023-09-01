@@ -45,7 +45,8 @@ private:
                 }
                 if (currentSum == targetSum) {
                     break;
-                } else if (currentSum > targetSum) {
+                }
+                if (currentSum > targetSum) {
                     higherIndex--;
                 } else if (currentSum < targetSum) {
                     lowerIndex++;

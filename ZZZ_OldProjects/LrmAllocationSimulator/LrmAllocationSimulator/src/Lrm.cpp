@@ -866,7 +866,7 @@ SelectionDspResult Lrm::selectTnPriotizingLessUsersAndHsupaCfsInFsp(
     });
     sortDspAddressesBasedOnCondition(dspAddressesForLcgInFsp, [&](Dsp const& dsp1, Dsp const& dsp2) {
         unsigned int priorityForDsp1 = getPriorityBasedOnLessUsersAndHsupaCfsForDsp(dsp1);
-        unsigned int priorityForDsp2 = getPriorityBasedOnLessUsersAndHsupaCfsForDsp(dsp1);
+        unsigned int priorityForDsp2 = getPriorityBasedOnLessUsersAndHsupaCfsForDsp(dsp2);
         unsigned int dchUsersForDsp1 = dsp1.getNumberOfDchUsers();
         unsigned int dchUsersForDsp2 = dsp2.getNumberOfDchUsers();
         unsigned int hsupaCfsForDsp1 = dsp1.getNumberOfHsupaCfs();

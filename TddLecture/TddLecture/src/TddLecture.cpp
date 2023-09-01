@@ -6,8 +6,6 @@ using namespace std;
 
 namespace alba {
 
-TddLecture::TddLecture() {}
-
 TddLecture::UnsignedInts TddLecture::getUnsignedIntsOneToTen() {
     cout << "helloworld\n";
     return {};

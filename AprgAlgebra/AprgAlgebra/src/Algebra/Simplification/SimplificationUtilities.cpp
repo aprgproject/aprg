@@ -137,8 +137,8 @@ void simplifyAndCopyTermsFromAnExpressionAndChangeOperatorLevelIfNeeded(
     OperatorLevel subExpressionOperatorLevel(subExpression.getCommonOperatorLevel());
     if (subExpression.containsOnlyOnePositivelyAssociatedTerm() || OperatorLevel::Unknown == mainOperatorLevel ||
         (subExpressionOperatorLevel == mainOperatorLevel &&
-         OperatorLevel::AdditionAndSubtraction == mainOperatorLevel &&
-         OperatorLevel::MultiplicationAndDivision == mainOperatorLevel)) {
+         (OperatorLevel::AdditionAndSubtraction == mainOperatorLevel ||
+          OperatorLevel::MultiplicationAndDivision == mainOperatorLevel))) {
         if (OperatorLevel::Unknown == mainOperatorLevel) {
             mainOperatorLevel = subExpression.getCommonOperatorLevel();
         }

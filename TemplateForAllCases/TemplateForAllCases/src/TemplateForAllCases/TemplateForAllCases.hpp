@@ -4,7 +4,7 @@ namespace alba {
 
 class TemplateForAllCases {
 public:
-    TemplateForAllCases();
+    TemplateForAllCases() = default;
 
 private:
     int m_sample{0};

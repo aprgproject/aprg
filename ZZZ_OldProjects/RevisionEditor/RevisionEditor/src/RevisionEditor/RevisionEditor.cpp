@@ -136,15 +136,15 @@ RevisionEditor::RevisionEntry RevisionEditor::getRevisionEntry(string const& lin
 AlbaDateTime RevisionEditor::getDateTime(string const& date) {
     int index = 0;
     auto year = convertStringToNumber<uint16_t>(getStringBeforeThisString(date, "-", index));
-    index = date.find("-", index) + 1;
+    index = date.find('-', index) + 1;
     auto month = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "-", index));
-    index = date.find("-", index) + 1;
+    index = date.find('-', index) + 1;
     auto day = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "T", index));
-    index = date.find("T", index) + 1;
+    index = date.find('T', index) + 1;
     auto hour = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, ":", index));
-    index = date.find(":", index) + 1;
+    index = date.find(':', index) + 1;
     auto minute = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, ":", index));
-    index = date.find(":", index) + 1;
+    index = date.find(':', index) + 1;
     auto second = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "+", index));
 
     return {year, month, day, hour, minute, second, 0U};

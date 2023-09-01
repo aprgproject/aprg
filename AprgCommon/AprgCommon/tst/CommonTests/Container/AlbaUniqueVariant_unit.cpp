@@ -10,14 +10,14 @@ namespace alba {
 TEST(AlbaUniqueVariantTest, AcquiringVariantTypeInvokesDefaultConstructor) {
     // Given
     struct ExampleStructure1 : public BaseVariantDataType {
-        ExampleStructure1() {}
+        ExampleStructure1() = default;
 
         uint8_t unsignedField{2};
         float floatField{2.3};
     };
 
     struct ExampleStructure2 : public BaseVariantDataType {
-        ExampleStructure2() {}
+        ExampleStructure2() = default;
 
         double doubleField{4.5};
         char charField{'a'};

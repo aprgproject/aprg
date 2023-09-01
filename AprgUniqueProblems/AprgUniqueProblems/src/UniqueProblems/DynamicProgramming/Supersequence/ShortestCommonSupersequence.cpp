@@ -100,12 +100,12 @@ ShortestCommonSupersequence::Count ShortestCommonSupersequence::getShortestLengt
     }
     if (index2 == 0) {
         return index1;
-    } else if (m_sequence1[index1 - 1] == m_sequence2[index2 - 1]) {
-        return 1 + getShortestLengthUsingNaiveRecursion(index1 - 1, index2 - 1);
-    } else {
-        return 1 + min(getShortestLengthUsingNaiveRecursion(index1, index2 - 1),
-                       getShortestLengthUsingNaiveRecursion(index1 - 1, index2));
     }
+    if (m_sequence1[index1 - 1] == m_sequence2[index2 - 1]) {
+        return 1 + getShortestLengthUsingNaiveRecursion(index1 - 1, index2 - 1);
+    }
+    return 1 + min(getShortestLengthUsingNaiveRecursion(index1, index2 - 1),
+                   getShortestLengthUsingNaiveRecursion(index1 - 1, index2));
 }
 
 ShortestCommonSupersequence::Count ShortestCommonSupersequence::getShortestLengthUsingMemoizationDP(

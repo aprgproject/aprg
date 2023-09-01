@@ -10,8 +10,6 @@ using namespace std;
 
 namespace alba {
 
-TowersOfHanoi::TowersOfHanoi() {}
-
 void TowersOfHanoi::transferDisksFromStartToFinish(int const numberOfDisks) const {
     StackOfDisks startStack{"startStack", {}};
     StackOfDisks inBetweenStack{"inBetweenStack", {}};

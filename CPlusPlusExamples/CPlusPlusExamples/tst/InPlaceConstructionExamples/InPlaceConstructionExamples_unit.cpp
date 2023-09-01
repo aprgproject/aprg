@@ -27,7 +27,10 @@ struct S {
     ~S() { cout << "Destruct\n"; }
     S(S const&) { cout << "Copy construct\n"; }
     S(S&&) noexcept { cout << "Move construct\n"; }
-    S& operator=(S const&) {
+    S& operator=(S const& rhs) {
+        if (this == &rhs) {
+            return *this;
+        }
         cout << "Copy assign\n";
         return *this;
     }

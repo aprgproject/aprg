@@ -46,16 +46,15 @@ public:
                 if (valueAtHigher == target) {
                     result = std::distance(m_values.cbegin(), itHigher);
                     break;
-                } else {
-                    Value deviationAtLower(mathHelper::getPositiveDelta(valueAtLower, target));
-                    Value deviationAtHigher(mathHelper::getPositiveDelta(valueAtHigher, target));
-                    if (deviationAtLower <= deviationAtHigher && minimumDeviation > deviationAtLower) {
-                        minimumDeviation = deviationAtLower;
-                        result = std::distance(m_values.cbegin(), itLower);
-                    } else if (deviationAtLower > deviationAtHigher && minimumDeviation > deviationAtHigher) {
-                        minimumDeviation = deviationAtHigher;
-                        result = std::distance(m_values.cbegin(), itHigher);
-                    }
+                }
+                Value deviationAtLower(mathHelper::getPositiveDelta(valueAtLower, target));
+                Value deviationAtHigher(mathHelper::getPositiveDelta(valueAtHigher, target));
+                if (deviationAtLower <= deviationAtHigher && minimumDeviation > deviationAtLower) {
+                    minimumDeviation = deviationAtLower;
+                    result = std::distance(m_values.cbegin(), itLower);
+                } else if (deviationAtLower > deviationAtHigher && minimumDeviation > deviationAtHigher) {
+                    minimumDeviation = deviationAtHigher;
+                    result = std::distance(m_values.cbegin(), itHigher);
                 }
                 if (itLower == itHigher) {
                     break;

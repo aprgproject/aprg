@@ -64,12 +64,12 @@ private:
     void processPendingCommands();
 
     // log functions
-    static void log(std::string const& logString);
+    void log(std::string const& logString);
 
     // send functions
-    static void sendUci();
+    void sendUci();
     void sendQuit();
-    static void sendStop();
+    void sendStop();
     void sendUciAndUciOptions();
     void sendUciOptions();
     void sendStopIfCalculating();

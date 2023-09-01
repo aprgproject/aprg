@@ -9,8 +9,7 @@ class FindCommonElementsInThreeSortedContainers {
 public:
     using Value = typename Values::value_type;
 
-    FindCommonElementsInThreeSortedContainers()  // values can be unsorted
-    {}
+    FindCommonElementsInThreeSortedContainers() = default;
 
     Values getCommonElements(Values const& values1, Values const& values2, Values const& values3) {
         Values result;

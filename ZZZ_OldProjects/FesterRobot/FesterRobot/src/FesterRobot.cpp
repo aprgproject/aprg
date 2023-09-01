@@ -105,7 +105,7 @@ void FesterRobot::runFesterFunctionInMatlab() {
     saveDataToOutputFile(clipboardData);
 }
 
-bool FesterRobot::isRunningInClipboardData(string const& clipboardData) const {
+bool FesterRobot::isRunningInClipboardData(string const& clipboardData) {
     return stringHelper::isStringFoundCaseSensitive(clipboardData, "running iteration");
 }
 
@@ -144,22 +144,22 @@ string FesterRobot::getFrequenciesStringForExcel() const {
 
 void FesterRobot::updateFrequenciesBasedFreqUsageBits(unsigned int freqUsageBits) {
     m_frequencies.clear();
-    if (freqUsageBits & 0x1 > 0) {
+    if ((freqUsageBits & 0x1) > 0) {
         m_frequencies.emplace_back(-1800);
     }
-    if (freqUsageBits & 0x2 > 0) {
+    if ((freqUsageBits & 0x2) > 0) {
         m_frequencies.emplace_back(-1600);
     }
-    if (freqUsageBits & 0x4 > 0) {
+    if ((freqUsageBits & 0x4) > 0) {
         m_frequencies.emplace_back(-1400);
     }
-    if (freqUsageBits & 0x8 > 0) {
+    if ((freqUsageBits & 0x8) > 0) {
         m_frequencies.emplace_back(1400);
     }
-    if (freqUsageBits & 0x16 > 0) {
+    if ((freqUsageBits & 0x16) > 0) {
         m_frequencies.emplace_back(1600);
     }
-    if (freqUsageBits & 0x32 > 0) {
+    if ((freqUsageBits & 0x32) > 0) {
         m_frequencies.emplace_back(1800);
     }
 }

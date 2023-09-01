@@ -933,7 +933,7 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath) {
             maxTotalCpu = std::max(maxTotalCpu, totalCpu);
             totalCpuFromTop = 0;
         } else if (state == 1 && isStringFoundNotCaseSensitive(lineInLogs, "%Cpu0  :")) {
-            unsigned int bracketCpuIndexInLine(lineInLogs.find("["));
+            unsigned int bracketCpuIndexInLine(lineInLogs.find('['));
             totalCpuFromTop = convertStringToNumber<double>(lineInLogs.substr(bracketCpuIndexInLine - 3, 3));
             maxTotalCpuFromTop = std::max(maxTotalCpuFromTop, totalCpuFromTop);
         }

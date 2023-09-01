@@ -1,7 +1,3 @@
 #include "ChessCombi.hpp"
 
-namespace alba {
-
-ChessCombi::ChessCombi() {}
-
-}  // namespace alba
+namespace alba {}  // namespace alba

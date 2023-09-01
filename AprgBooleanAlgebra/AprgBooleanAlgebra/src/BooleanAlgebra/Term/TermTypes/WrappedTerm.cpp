@@ -17,6 +17,9 @@ WrappedTerm::WrappedTerm(WrappedTerm const& wrappedTerm)
     : baseTermPointer(duplicateUniquePointer(wrappedTerm.baseTermPointer)) {}
 
 WrappedTerm& WrappedTerm::operator=(WrappedTerm const& wrappedTerm) {
+    if (this == &wrappedTerm) {
+        return *this;
+    }
     baseTermPointer = duplicateUniquePointer(wrappedTerm.baseTermPointer);
     return *this;
 }

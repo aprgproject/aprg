@@ -29,7 +29,7 @@ Indexes NearestSamples::getNearestSamplesIndexes(double const value, int const r
         }
         if (itUpper != m_valuesToIndexes.cend()) {
             indexesInOrder.emplace(itUpper->second);
-            itUpper--;
+            itUpper++;
         }
     }
     result.reserve(result.size());

@@ -14,7 +14,7 @@ class TowersOfHanoi {
     };
 
 public:
-    TowersOfHanoi();
+    TowersOfHanoi() = default;
     void transferDisksFromStartToFinish(int const numberOfDisks) const;
 
 private:

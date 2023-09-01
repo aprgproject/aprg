@@ -4,7 +4,7 @@ namespace alba {
 
 class TemplateForPrograms {
 public:
-    TemplateForPrograms();
+    TemplateForPrograms() = default;
 
 private:
     int m_sample{0};

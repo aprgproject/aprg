@@ -4,7 +4,7 @@ namespace alba {
 
 class ChessCombi {
 public:
-    ChessCombi();
+    ChessCombi() = default;
 
 private:
     int m_sample{0};
