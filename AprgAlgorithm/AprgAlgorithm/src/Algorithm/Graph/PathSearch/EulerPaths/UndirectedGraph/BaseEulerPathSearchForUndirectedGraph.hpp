@@ -18,8 +18,8 @@ public:
 
     explicit BaseEulerPathSearchForUndirectedGraph(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph) {}
 
-    virtual ~BaseEulerPathSearchForUndirectedGraph() =
-        default;  // virtual destructor because of virtual functions (vtable exists)
+    // virtual destructor because of virtual functions (vtable exists)
+    virtual ~BaseEulerPathSearchForUndirectedGraph() = default;
 
     [[nodiscard]] bool hasEulerCycle() const { return hasEulerCycleForUndirectedGraph(m_graph); }
 

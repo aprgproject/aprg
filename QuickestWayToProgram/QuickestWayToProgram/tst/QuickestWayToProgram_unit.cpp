@@ -3,8 +3,6 @@
 #include <Common/Print/AlbaLogPrints.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 #include <FileExtractor/AprgFileExtractor.hpp>
-#include <NsapHelper.hpp>
-#include <QuickestWayToProgram.hpp>
 
 #include <gtest/gtest.h>
 
@@ -22,11 +20,6 @@
 using namespace std;
 
 namespace alba {
-
-namespace ProgressCounters {
-int numberOfFilesToBeAnalyzedForExtraction;
-int numberOfFilesAnalyzedForExtraction;
-}  // namespace ProgressCounters
 
 TEST(SampleTest, PrimerTest) {
     int i = 0;

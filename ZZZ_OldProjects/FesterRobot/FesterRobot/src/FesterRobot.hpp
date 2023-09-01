@@ -12,7 +12,7 @@ namespace alba {
 
 class FesterRobot {
 public:
-    FesterRobot(std::string const& outputPath);
+    explicit FesterRobot(std::string const& outputPath);
     void run();
 
 private:

@@ -16,11 +16,11 @@ using namespace std;
 
 namespace {
 using RecognizedItems = vector<string>;
-RecognizedItems recognizedKeywords{CPLUSPLUS_KEYWORDS, KEYWORD_OPERATORS};
-RecognizedItems recognizedPrimitiveTypes{PRIMITIVE_TYPES};
-RecognizedItems recognizedThreeCharOperators{THREE_CHAR_OPERATORS};
-RecognizedItems recognizedTwoCharOperators{TWO_CHAR_OPERATORS};
-RecognizedItems recognizedOneCharOperators{ONE_CHAR_OPERATORS};
+RecognizedItems const recognizedKeywords{CPLUSPLUS_KEYWORDS, KEYWORD_OPERATORS};
+RecognizedItems const recognizedPrimitiveTypes{PRIMITIVE_TYPES};
+RecognizedItems const recognizedThreeCharOperators{THREE_CHAR_OPERATORS};
+RecognizedItems const recognizedTwoCharOperators{TWO_CHAR_OPERATORS};
+RecognizedItems const recognizedOneCharOperators{ONE_CHAR_OPERATORS};
 
 bool isRecognized(RecognizedItems const& recognizedItems, string const& searchString) {
     return any_of(recognizedItems.cbegin(), recognizedItems.cend(), [searchString](string const& recognizedItem) {

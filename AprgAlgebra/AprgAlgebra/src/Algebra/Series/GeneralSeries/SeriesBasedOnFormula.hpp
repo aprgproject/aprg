@@ -9,7 +9,13 @@ namespace alba::algebra {
 
 class SeriesBasedOnFormula {
 public:
-    SeriesBasedOnFormula(Term const& formulaForSeries, std::string const& variableName);
+    SeriesBasedOnFormula(Term const &formulaForSeries, std::string const &variableName);
+    virtual ~SeriesBasedOnFormula() = default;  // virtual destructor because of virtual functions (vtable exists)
+    SeriesBasedOnFormula(SeriesBasedOnFormula const &series) = default;
+    SeriesBasedOnFormula(SeriesBasedOnFormula &&series) = default;
+    SeriesBasedOnFormula &operator=(SeriesBasedOnFormula const &series) = default;
+    SeriesBasedOnFormula &operator=(SeriesBasedOnFormula &&series) = default;
+
     [[nodiscard]] virtual bool isConvergent() const;
     [[nodiscard]] virtual bool isIncreasing() const;
     [[nodiscard]] virtual bool isDecreasing() const;

@@ -2,8 +2,8 @@
 
 namespace alba {
 
-using u32 = unsigned int;
-using u16 = unsigned short int;
+using u32 = uint32_t;
+using u16 = uint16_t;
 
 struct MccMncPair {
     u16 mcc;

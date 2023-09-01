@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Common/Math/Vector/AlbaMathVector.hpp>
-#include <Geometry/Dimensionless/Vector/VectorInternalFunctions.hpp>
 
 namespace alba::TwoDimensions {
 

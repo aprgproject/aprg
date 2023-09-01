@@ -65,6 +65,7 @@ void testDequeueWithInt() {
 template <typename Queue>
 void testDequeueAssertionWhenEmptyWithInt() {
     Queue queue;
+    // NOLINTNEXTLINE(cert-err33-c)
     EXPECT_DEATH(queue.dequeue(), "Assertion failed!");
 }
 

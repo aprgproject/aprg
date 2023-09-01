@@ -1,10 +1,33 @@
 #pragma once
 
+#include <Common/Math/Helpers/PowerHelpers.hpp>
+#include <Common/Math/Helpers/PrecisionHelpers.hpp>
+#include <Common/Math/Vector/AlbaMathVector.hpp>
 #include <Common/Math/Vector/AlbaMathVectorUtilitiesHeaders.hpp>
 
 #include <cmath>
 
 namespace alba {
+
+template <typename DataType>
+bool isEqualForMathVectorDataType(DataType const& value1, DataType const& value2) {
+    if constexpr (typeHelper::isFloatingPointType<DataType>()) {
+        return mathHelper::isAlmostEqual(value1, value2);
+    }
+    return value1 == value2;
+}
+
+template <typename DataType>
+DataType raiseToPowerForMathVectorDataType(DataType const& value1, DataType const& value2) {
+    if constexpr (typeHelper::isIntegralType<DataType>()) {
+        return mathHelper::getRaiseToPowerForIntegers(value1, value2);
+    } else if constexpr (typeHelper::isFloatingPointType<DataType>()) {
+        return static_cast<DataType>(pow(value1, value2));
+    } else if constexpr (typeHelper::areSameTypes<DataType, AlbaNumber>()) {
+        return value1 ^ value2;
+    }
+    return static_cast<DataType>(pow(value1, value2));
+}
 
 template <typename DataType, size_t SIZE>
 bool areVectorsPerpendicular(

@@ -20,7 +20,7 @@ bool areExponentsDivisible(Monomial const& monomial, int const divisor) {
     bool result(true);
     for (auto const& [variableName, exponent] : monomial.getVariablesToExponentsMap()) {
         if (!exponent.isIntegerType() ||
-            !isDivisible<long long int>(getAbsoluteValue(exponent.getInteger()), divisor)) {
+            !isDivisible<int64_t>(getAbsoluteValue(exponent.getInteger()), divisor)) {
             result = false;
             break;
         }

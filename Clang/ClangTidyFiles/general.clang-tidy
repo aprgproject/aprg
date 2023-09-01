@@ -1,5 +1,6 @@
 # -> Standard checkers
 # -> Nice checks to have: misc-const-correctness
+# -> cppcoreguidelines-virtual-class-destructor conflicts with hicpp-use-override and modernize-use-override
 Checks: '
   *,
   -altera-struct-pack-align,
@@ -11,6 +12,7 @@ Checks: '
   -cppcoreguidelines-non-private-member-variables-in-classes,
   -cppcoreguidelines-pro-bounds-constant-array-index,
   -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-virtual-class-destructor,
   -fuchsia-default-arguments-calls,
   -fuchsia-default-arguments-declarations,
   -fuchsia-overloaded-operator,

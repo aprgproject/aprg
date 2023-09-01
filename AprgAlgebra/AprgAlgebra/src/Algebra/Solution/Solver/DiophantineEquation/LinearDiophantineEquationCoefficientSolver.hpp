@@ -8,7 +8,7 @@ class LinearDiophantineEquationCoefficientSolver {
 public:
     // A Linear Diophantine Equation is an equation of the form ax+by = c
 
-    using Integer = long long int;
+    using Integer = int64_t;
 
     enum class SolutionStatus { Unknown, CannotBeSolved, InfiniteSolutions, NoSolution, Solved };
 

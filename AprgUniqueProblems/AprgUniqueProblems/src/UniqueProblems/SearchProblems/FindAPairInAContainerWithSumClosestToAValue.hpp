@@ -20,7 +20,7 @@ public:
     using Value = typename Values::value_type;
     using ValuePair = std::pair<Value, Value>;
 
-    FindAPairInAContainerWithSumClosestToAValue(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    explicit FindAPairInAContainerWithSumClosestToAValue(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
     ValuePair getValuePairWithSumClosestToAValue(Value const& targetSum) const {
         // std::less_equal because index can be equal

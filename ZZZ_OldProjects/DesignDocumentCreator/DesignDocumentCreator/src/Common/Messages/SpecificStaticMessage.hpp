@@ -4,6 +4,7 @@
 #include <Common/Messages/Message.hpp>
 #include <Common/Messages/MessageWrapper.hpp>
 
+// NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
 namespace DesignDocumentCreator {
 
 template <MessageName messageName>
@@ -29,3 +30,5 @@ private:
 };
 
 }  // namespace DesignDocumentCreator
+
+// NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)

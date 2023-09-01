@@ -6,6 +6,8 @@
 
 #include <vector>
 
+// NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
+
 namespace DesignDocumentCreator {
 
 template <MessageName messageName>
@@ -58,3 +60,5 @@ private:
 };
 
 }  // namespace DesignDocumentCreator
+
+// NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)

@@ -17,7 +17,7 @@ public:
     using Value = typename Values::value_type;
     using ValuePair = std::pair<Value, Value>;
 
-    GetValuePairWithPositiveDelta(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    explicit GetValuePairWithPositiveDelta(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
     ValuePair getValuePairWithPositiveDelta(Value const& targetPositiveDelta) const {
         ValuePair result{};

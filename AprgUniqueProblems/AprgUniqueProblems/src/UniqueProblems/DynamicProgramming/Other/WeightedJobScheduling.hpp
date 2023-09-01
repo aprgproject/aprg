@@ -21,7 +21,7 @@ public:
     using Profits = std::vector<Profit>;
     using Jobs = std::vector<Job>;
 
-    WeightedJobScheduling(Jobs const& jobs);
+    explicit WeightedJobScheduling(Jobs const& jobs);
 
     Profit getMaxProfitByMonitoringTimeStampsUsingIterativeDP() const;
     Profit getMaxProfitByMonitoringJobsUsingIterativeDP() const;

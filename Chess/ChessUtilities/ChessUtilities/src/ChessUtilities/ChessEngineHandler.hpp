@@ -17,7 +17,7 @@ public:
     enum class LogType { FromEngine, ToEngine, HandlerStatus };
     using ProcessAStringFunction = std::function<void(std::string const&)>;
 
-    ChessEngineHandler(std::string const& enginePath);
+    explicit ChessEngineHandler(std::string const& enginePath);
     ~ChessEngineHandler();
 
     void reset();

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Common/Math/Vector/AlbaMathVectorUtilitiesHeaders.hpp>
+
 #include <algorithm>
 #include <array>
 #include <cassert>
@@ -11,12 +13,6 @@
 #include <string>
 
 namespace alba {
-
-template <typename DataType>
-bool isEqualForMathVectorDataType(DataType const& value1, DataType const& value2);
-
-template <typename DataType>
-DataType raiseToPowerForMathVectorDataType(DataType const& value1, DataType const& value2);
 
 template <typename DataType, size_t SIZE>
 class AlbaMathVector {

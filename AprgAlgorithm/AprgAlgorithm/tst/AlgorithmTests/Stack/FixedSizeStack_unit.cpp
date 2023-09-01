@@ -36,6 +36,7 @@ TEST(FixedSizeStackTest, DISABLED_PushWorksWithAssertionWhenItReachesMaximumSize
     for (int i = 0; i < 10; i++) {
         stack.push(i);
     }
+    // NOLINTNEXTLINE(cert-err33-c)
     EXPECT_DEATH(stack.push(100), "Assertion failed!");
 }
 
