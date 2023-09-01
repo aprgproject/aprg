@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [20]
-2023-08-31T03:08:07
+StaticAnalysisJobIdentifier: [30]
+2023-09-01T03:49:48
 /home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/DataCollection.hpp:16:70: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
 /home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/DataStatistics.hpp:129:49: warning: C-style casts are discouraged; use static_cast/const_cast/reinterpret_cast [google-readability-casting]
 /home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/DataStatistics.hpp:129:93: warning: 0.5 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
