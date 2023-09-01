@@ -693,7 +693,7 @@ Point SOOSA::getLeftOrRightMostBlackPoint(
     int const maxLineAndBarWidth, int const sign) const {
     Point result(nearestBlackPoint);
     int blackCount = m_soosaConfiguration.getLineBarWidthSearchInitialBlackPointsValue();
-    int totalCount = m_soosaConfiguration.getLineBarWidthSearchInitialBlackPointsValue();
+    int totalCount = blackCount;
     bool shouldContinue(true);
     for (int offset = 1; offset <= maxLineAndBarWidth && shouldContinue; offset++) {
         double possibleBlackPointInX = nearestBlackPoint.getX() + (static_cast<int>(offset) * sign);
