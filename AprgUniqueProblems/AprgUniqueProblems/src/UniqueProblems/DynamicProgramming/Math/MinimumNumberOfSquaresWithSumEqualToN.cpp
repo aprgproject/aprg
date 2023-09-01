@@ -72,7 +72,7 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
         for (Count base = 1; base * base <= immediateNode.sum; base++) {
             Count newSum = immediateNode.sum - base * base;
             if (newSum == 0 || !isProcessed[newSum]) {
-                isProcessed[newSum] = 1;
+                isProcessed[newSum] = true;
                 immediateNodes.emplace(NodeDetails{newSum, immediateNode.count + 1});
             }
         }

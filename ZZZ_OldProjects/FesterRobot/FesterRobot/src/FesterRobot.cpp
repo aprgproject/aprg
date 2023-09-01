@@ -21,7 +21,7 @@ FesterRobot::FesterRobot(string const& outputPath) : m_outputStream(outputPath),
 
 void FesterRobot::run() {
     cout << "Press the key 'ctrl' to start.\n";
-    while (1) {
+    while (true) {
         exitIfSpecialKeyIsPressed();
         if (m_userAutomation.isLetterPressed(VK_CONTROL)) {
             cout << "Starting robot duties.\n";
@@ -144,22 +144,22 @@ string FesterRobot::getFrequenciesStringForExcel() const {
 
 void FesterRobot::updateFrequenciesBasedFreqUsageBits(unsigned int freqUsageBits) {
     m_frequencies.clear();
-    if (freqUsageBits & 0x1) {
+    if (freqUsageBits & 0x1 > 0) {
         m_frequencies.emplace_back(-1800);
     }
-    if (freqUsageBits & 0x2) {
+    if (freqUsageBits & 0x2 > 0) {
         m_frequencies.emplace_back(-1600);
     }
-    if (freqUsageBits & 0x4) {
+    if (freqUsageBits & 0x4 > 0) {
         m_frequencies.emplace_back(-1400);
     }
-    if (freqUsageBits & 0x8) {
+    if (freqUsageBits & 0x8 > 0) {
         m_frequencies.emplace_back(1400);
     }
-    if (freqUsageBits & 0x16) {
+    if (freqUsageBits & 0x16 > 0) {
         m_frequencies.emplace_back(1600);
     }
-    if (freqUsageBits & 0x32) {
+    if (freqUsageBits & 0x32 > 0) {
         m_frequencies.emplace_back(1800);
     }
 }

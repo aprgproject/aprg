@@ -64,12 +64,12 @@ private:
     void processPendingCommands();
 
     // log functions
-    void log(std::string const& logString);
+    static void log(std::string const& logString);
 
     // send functions
-    void sendUci();
+    static void sendUci();
     void sendQuit();
-    void sendStop();
+    static void sendStop();
     void sendUciAndUciOptions();
     void sendUciOptions();
     void sendStopIfCalculating();
@@ -82,8 +82,8 @@ private:
     void processInWaitingForUciOkay(std::string const& stringToProcess);
     void processInCalculating(std::string const& stringToProcess);
 
-    std::string constructUciOptionCommand(std::string const& name, std::string const& value);
-    std::string getEnumString(ControllerState const state);
+    static std::string constructUciOptionCommand(std::string const& name, std::string const& value);
+    static std::string getEnumString(ControllerState const state);
     void putStringProcessingFunctionAsCallBack();
 
     ChessEngineHandler& m_engineHandler;

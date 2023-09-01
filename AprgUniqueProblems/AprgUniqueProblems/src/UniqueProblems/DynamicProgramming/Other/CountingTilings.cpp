@@ -31,7 +31,10 @@ CountingTilings::Count CountingTilings::getNumberOfSolutionsUsingCompleteSearch(
     return m_numberOfSolutions;
 }
 
-CountingTilings::Row CountingTilings::getEmptyRow(Count const length) { return {length, ' '}; }
+CountingTilings::Row CountingTilings::getEmptyRow(Count const length) {
+    // NOLINTNEXTLINE(modernize-return-braced-init-list)
+    return Row(length, ' ');
+}
 
 void CountingTilings::searchNextRow(Count const rowIndex, Row const& currentRow) {
     if (rowIndex < m_numberOfRows - 1) {

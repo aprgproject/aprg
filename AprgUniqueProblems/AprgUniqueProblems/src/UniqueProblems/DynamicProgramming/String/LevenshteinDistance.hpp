@@ -23,7 +23,8 @@ public:
 
 private:
     Count getLevenshteinDistanceUsingNaiveRecursion(Index const index1, Index const index2) const;
-    Count getLevenshteinDistanceUsingMemoizationDP(CountGrid& indexGrid, Index const index1, Index const index2) const;
+    Count getLevenshteinDistanceUsingMemoizationDP(
+        CountGrid& distanceGrid, Index const index1, Index const index2) const;
     std::string m_string1;
     std::string m_string2;
 };

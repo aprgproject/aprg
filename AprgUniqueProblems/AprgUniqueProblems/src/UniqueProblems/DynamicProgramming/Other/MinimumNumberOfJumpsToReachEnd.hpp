@@ -25,8 +25,8 @@ public:
     [[nodiscard]] Indices getPathOfMinimumNumberOfJumps() const;
 
 private:
-    [[nodiscard]] Count getMinimumNumberOfJumpsUsingNaiveRecursion(Index const startJumpIndex) const;
-    Count getMinimumNumberOfJumpsUsingMemoizationDP(Counts& indexToCountOfJumps, Index const startJumpIndex) const;
+    [[nodiscard]] Count getMinimumNumberOfJumpsUsingNaiveRecursion(Index const startOfJumpIndex) const;
+    Count getMinimumNumberOfJumpsUsingMemoizationDP(Counts& indexToCountOfJumps, Index const startOfJumpIndex) const;
     Counts m_sequence;
 };
 

@@ -5,6 +5,7 @@
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Common/Math/Matrix/Utilities/AlbaMatrixUtilities.hpp>
 
+#include <algorithm>
 #include <numeric>
 
 using namespace alba::algorithm;
@@ -174,7 +175,7 @@ UnsignedInteger getNthFibonacciUsingLogarithmicTabularDP(UnsignedInteger const n
 
     UnsignedInteger result(number);
     if (number > 1) {
-        UnsignedInteger size = max(number + 1, 2ULL);
+        UnsignedInteger size = max(static_cast<UnsignedInteger>(number + 1), static_cast<UnsignedInteger>(2));
         UnsignedIntegers tabularData(size);
         tabularData[0] = 0;
         tabularData[1] = 1;

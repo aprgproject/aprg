@@ -150,9 +150,8 @@ protected:
     virtual void putEntry(Entry const& entry) = 0;
 
     void deleteAllEntries() {
-        if (m_entryPointers != nullptr) {
-            delete[](m_entryPointers);
-        }
+        delete[] m_entryPointers;
+        m_entryPointers = nullptr;
     }
 
     void deleteEntryOnIndex(int const index) {
@@ -179,9 +178,8 @@ protected:
                 putEntry(*entryPointer);
             }
         }
-        if (oldEntryPointers != nullptr) {
-            delete[](oldEntryPointers);
-        }
+        delete[] m_entryPointers;
+        m_entryPointers = nullptr;
     }
 
     void resizeOnPutIfNeeded() {

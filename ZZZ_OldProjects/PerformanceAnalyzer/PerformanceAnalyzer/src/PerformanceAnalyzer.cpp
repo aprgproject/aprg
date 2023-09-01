@@ -6,10 +6,10 @@
 #include <FileExtractor/AprgFileExtractor.hpp>
 #include <WcdmaToolsBackend/BtsLogSorter.hpp>
 
+#include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <map>
-#include <math.h>
 #include <unordered_map>
 
 using namespace alba::stringHelper;
@@ -928,7 +928,6 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath) {
             for (auto const& consumption : cpuConsumptions) {
                 totalCpu += consumption;
                 ss << consumption << ", ";
-                consumption = 0;
             }
             masterStringStream << totalCpuFromTop << ", " << totalCpu << ", " << ss.str() << "\n";
             maxTotalCpu = std::max(maxTotalCpu, totalCpu);
@@ -1022,10 +1021,9 @@ void PerformanceAnalyzer::processFileForTopLogsMem(string const& filePath) {
 
             double totalMem(0);
             stringstream ss;
-            for (int& consumption : memConsumptions) {
+            for (int const& consumption : memConsumptions) {
                 totalMem += consumption;
                 ss << consumption << ", ";
-                consumption = 0;
             }
             masterStringStream << totalMem << ", " << ss.str() << "\n";
         }

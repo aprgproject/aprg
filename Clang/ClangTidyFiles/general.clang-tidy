@@ -1,6 +1,8 @@
 # -> Standard checkers
-# -> Nice checks to have: misc-const-correctness
-# -> cppcoreguidelines-virtual-class-destructor conflicts with hicpp-use-override and modernize-use-override
+# -> Notes: 
+# ---> The check misc-const-correctness flags too much errors (but its nice to have in the future).
+# ---> The check cppcoreguidelines-virtual-class-destructor conflicts with hicpp-use-override and modernize-use-override
+# ---> The checks llvm-qualified-auto,readability-qualified-auto wants to change iterators to pointers
 Checks: '
   *,
   -altera-struct-pack-align,
@@ -23,13 +25,15 @@ Checks: '
   -llvmlibc-callee-namespace,
   -llvmlibc-restrict-system-libc-headers,
   -llvm-header-guard,
+  -llvm-qualified-auto,
   -misc-const-correctness,
   -misc-non-private-member-variables-in-classes,
   -misc-no-recursion,
   -modernize-use-trailing-return-type,
   -readability-avoid-const-params-in-decls,
   -readability-isolate-declaration,
-  -readability-named-parameter
+  -readability-named-parameter,
+  -readability-qualified-auto,
 '
 
 # -> Configure specific checkers

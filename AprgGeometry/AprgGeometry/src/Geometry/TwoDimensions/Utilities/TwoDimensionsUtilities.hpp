@@ -161,7 +161,7 @@ Line getPolynomialTangentLineAt(PolynomialInXEqualsY<numberOfCoefficients> polyn
 template <int numberOfCoefficients>
 Line getPolynomialTangentLineAt(PolynomialInYEqualsX<numberOfCoefficients> polynomial, double const y) {
     double slopeInY = polynomial.getValueOfFirstDerivative(y);
-    double x = polynomial.calculateXfromY(x);
+    double x = polynomial.calculateXfromY(y);
     return {Point(x, y), Point(x + slopeInY, y + 1)};
 }
 

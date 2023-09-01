@@ -94,7 +94,7 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getTotalL
 }
 
 WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getCost(
-    Index const maxLength, Indices const& lengths) const {
+    Index const maxLength, Indices const& lengths) {
     Cost result(0);
     if (lengths.size() == 1) {
         result = getCostFromExtraSpaces(lengths.front());

@@ -15,7 +15,7 @@ public:
     using CostMatrix = matrix::AlbaMatrix<Cost>;
     static constexpr Cost MAX_COUNT = std::numeric_limits<Cost>::max();
 
-    explicit MinimumCostPolygonTriangulation(TwoDimensions::Points const& points);
+    explicit MinimumCostPolygonTriangulation(TwoDimensions::Points const& vertices);
 
     [[nodiscard]] Cost getMinimumNumberOfOperationsUsingNaiveRecursion() const;
     [[nodiscard]] Cost getMinimumNumberOfOperationsUsingMemoizationDP() const;

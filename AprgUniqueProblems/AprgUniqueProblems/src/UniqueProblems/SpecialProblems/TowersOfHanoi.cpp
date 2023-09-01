@@ -48,7 +48,7 @@ void TowersOfHanoi::transferByBulk(
     printStacksContents(source, destination);
 }
 
-void TowersOfHanoi::transferOneDisk(StackOfDisks& source, StackOfDisks& destination) const {
+void TowersOfHanoi::transferOneDisk(StackOfDisks& source, StackOfDisks& destination) {
     Disk disk = source.disks.top();
     destination.disks.push(source.disks.top());
     source.disks.pop();

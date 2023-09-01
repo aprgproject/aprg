@@ -22,7 +22,7 @@ private:
     void transferByBulk(
         StackOfDisks& source, StackOfDisks& temporary, StackOfDisks& destination,
         int const numberOfDisksToTransfer) const;
-    void transferOneDisk(StackOfDisks& source, StackOfDisks& destination) const;
+    static void transferOneDisk(StackOfDisks& source, StackOfDisks& destination);
     static void printStacksContents(StackOfDisks& source, StackOfDisks& destination);
 };
 

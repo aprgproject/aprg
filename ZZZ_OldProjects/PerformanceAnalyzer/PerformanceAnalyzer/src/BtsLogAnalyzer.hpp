@@ -73,7 +73,7 @@ private:
         wcdmaToolsBackend::BtsLogPrint const& logPrint);
     void initializeDataDumpOfAllDspsForR3();
     void initializeDataDumpOfAllDspsForR2();
-    void initializeDataDumpOfOneDsp(std::string const& dspAddress);
+    void initializeDataDumpOfOneDsp(std::string const& fileName);
     void initializeTotalUsersAndCfsDump();
     void initializeSaveAllUsersAndCfsDump();
     void saveDataDumpOfOneDsp(

@@ -36,7 +36,7 @@ TEST(FixedSizeCircularQueueTest, DISABLED_PushWorksWithAssertionWhenItReachesMax
     for (int i = 0; i < 9; i++) {
         queue.enqueue(i);
     }
-    // NOLINTNEXTLINE(cert-err33-c)
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto,cert-err33-c)
     EXPECT_DEATH(queue.enqueue(100), "Assertion failed!");
 }
 

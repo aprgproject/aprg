@@ -22,8 +22,7 @@ OutwardSnakeLikeTraversal::OutwardSnakeLikeTraversal(
       m_lastMostBottom(m_currentPoint.getY()) {}
 
 BitmapXY OutwardSnakeLikeTraversal::fixPoint(
-    BitmapXY const& point, int const lowestLeft, int const highestRight, int const lowestTop,
-    int const highestBottom) const {
+    BitmapXY const& point, int const lowestLeft, int const highestRight, int const lowestTop, int const highestBottom) {
     BitmapXY newPoint(point);
     newPoint.setX(clampLowerBound(newPoint.getX(), lowestLeft));
     newPoint.setX(clampHigherBound(newPoint.getX(), highestRight));

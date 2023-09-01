@@ -810,7 +810,9 @@ void SOOSA::removeBarPointsWithFewHeightPointsCount(
     TwoDimensionSamples barPointsSamplesCopy(kMeansForBarPoints.getSamples());
     kMeansForBarPoints.clear();
     int count = 0;
-    for (auto const& [_, range] : ranges::reverse_view(countToEndPointsIndexesMultiMap)) {
+    for (auto itMap = countToEndPointsIndexesMultiMap.crbegin(); itMap != countToEndPointsIndexesMultiMap.crend();
+         itMap++) {
+        EndPointIndexes const& range(itMap->second);
         for (auto itForRange = barPointsSamplesCopy.begin() + range.first;
              itForRange != barPointsSamplesCopy.begin() + range.second + 1; itForRange++) {
             kMeansForBarPoints.addSample(*itForRange);

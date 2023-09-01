@@ -7,8 +7,8 @@
 #include <gsl/gsl_multifit.h>
 
 #include <algorithm>
+#include <cmath>
 #include <iostream>
-#include <math.h>
 
 using namespace alba::matrix;
 using namespace std;

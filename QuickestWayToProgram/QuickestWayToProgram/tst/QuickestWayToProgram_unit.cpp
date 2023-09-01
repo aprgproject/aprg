@@ -8,13 +8,12 @@
 
 #include <algorithm>
 #include <bitset>
+#include <cmath>
 #include <cstdio>
 #include <iostream>
 #include <iterator>
 #include <map>
-#include <math.h>
 #include <queue>
-#include <stdio.h>
 #include <string>
 
 using namespace std;

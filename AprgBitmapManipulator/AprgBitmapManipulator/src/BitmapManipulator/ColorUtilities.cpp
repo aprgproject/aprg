@@ -6,7 +6,6 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdint>
-#include <math.h>
 
 using namespace alba::mathHelper;
 using namespace std;

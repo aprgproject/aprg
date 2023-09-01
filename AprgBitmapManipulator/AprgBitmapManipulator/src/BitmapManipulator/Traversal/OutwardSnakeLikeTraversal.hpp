@@ -17,9 +17,9 @@ public:
     BitmapXY getNextPoint();
 
 private:
-    BitmapXY fixPoint(
+    static BitmapXY fixPoint(
         BitmapXY const& point, int const lowestLeft, int const highestRight, int const lowestTop,
-        int const highestBottom) const;
+        int const highestBottom);
     void gotoNextPoint();
     void move();
     void moveLeft();

@@ -4,8 +4,8 @@
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <algorithm>
+#include <cmath>
 #include <iostream>
-#include <math.h>
 
 using namespace alba::stringHelper;
 using namespace std;

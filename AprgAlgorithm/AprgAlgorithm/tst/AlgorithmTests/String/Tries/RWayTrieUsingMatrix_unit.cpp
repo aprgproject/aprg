@@ -145,7 +145,7 @@ TEST(RWayTrieUsingMatrixTest, GetUnusedNodeIdsWorks) {
 TEST(RWayTrieUsingMatrixTest, DISABLED_AssertionWorksWhenNodeIdsReachesMaximumSize) {
     RWayTrieUsingMatrix<int, 1> trie;
 
-    // NOLINTNEXTLINE(cert-err33-c)
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto,cert-err33-c)
     EXPECT_DEATH(trie.put("se", 100), "Assertion failed!");
 }
 

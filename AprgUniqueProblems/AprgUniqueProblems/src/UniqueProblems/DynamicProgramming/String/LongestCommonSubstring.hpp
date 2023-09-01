@@ -25,7 +25,7 @@ public:
 private:
     Count getLongestCommonSubstringLengthUsingNaiveRecursion(Index const index1, Index const index2) const;
     Count getLongestCommonSubstringLengthUsingMemoizationDP(
-        CountGrid& indexGrid, Index const index1, Index const index2) const;
+        CountGrid& lengthGrid, Index const index1, Index const index2) const;
     std::string m_string1;
     std::string m_string2;
 };

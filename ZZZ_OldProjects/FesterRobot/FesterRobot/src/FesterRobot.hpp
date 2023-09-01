@@ -21,11 +21,11 @@ private:
     void setupFesterEnvironmentInMatlab();
     void editCellInExcelWithNewFrequencies(MousePosition const& excelCellPosition);
     void runFesterFunctionInMatlab();
-    bool isRunningInClipboardData(std::string const& clipboardData) const;
+    static bool isRunningInClipboardData(std::string const& clipboardData) const;
     bool isRunningFinishedInClipboardData(std::string const& clipboardData) const;
     std::string getClipboardFormattedData() const;
     void saveDataToOutputFile(std::string const& clipboardData);
-    std::string getFrequenciesStringForExcel() const;
+    static std::string getFrequenciesStringForExcel() const;
     void updateFrequenciesBasedFreqUsageBits(unsigned int freqUsageBits);
     std::ofstream m_outputStream;
     Frequencies m_frequencies;

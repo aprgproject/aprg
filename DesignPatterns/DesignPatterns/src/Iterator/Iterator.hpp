@@ -25,10 +25,7 @@ public:
 
 class ConcreteAggregate : public Aggregate {
 public:
-    explicit ConcreteAggregate(int const size) {
-        m_listPointer = std::make_unique<int[]>(size);
-        m_count = size;
-    }
+    explicit ConcreteAggregate(int const size) : m_listPointer(std::make_unique<int[]>(size)), m_count(size) {}
 
     std::unique_ptr<Iterator> createIterator() override;  // defined after Iterator is declared
 
