@@ -9,6 +9,7 @@ unusedStructMember
 passedByValue
 missingReturn
 noExplicitConstructor
+variableScope
 
 
 // Full command:

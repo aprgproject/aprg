@@ -66,7 +66,7 @@ int calc(int s, ll ban, int a, int b, int who) {
         }
         ban |= (1LL << i);
     }
-    if (ok[s][a][b][who].count(ban) != 0U) {
+    if (ok[s][a][b][who].contains(ban)) {
         return ok[s][a][b][who][ban];
     }
     if (!can_move(ban, a) && !can_move(ban, b)) {

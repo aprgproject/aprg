@@ -575,12 +575,12 @@ void Integration::integrateUsingTrigonometricSubstitutionWithDeterminedTerms(
 
     TermRaiseToANumber uToANumber(createTermRaiseToANumberFromTerm(uSquared));
     if (AlbaNumber(2) == uToANumber.getExponent()) {
-        Term a(createExpressionIfPossible({aSquared, "^", AlbaNumber::createFraction(1, 2)}));
+        Term aValue(createExpressionIfPossible({aSquared, "^", AlbaNumber::createFraction(1, 2)}));
         Term const& u(uToANumber.getBase());
-        a.simplify();
+        aValue.simplify();
 
         TrigonometricSubstitutionDetails details(calculateTrigonometricSubstitutionDetails(
-            a, u, aSquaredAndUSquaredName, aSquaredAndUSquared, isANegative, isUNegative));
+            aValue, u, aSquaredAndUSquaredName, aSquaredAndUSquared, isANegative, isUNegative));
         if (details.isTrigonometricSubstitutionPossible) {
             Term termToIntegrateWithTrigSub(substituteToTrigonometricFunctions(mainTerm, details));
             if (!termToIntegrateWithTrigSub.isEmpty()) {
@@ -1553,7 +1553,7 @@ void Integration::fixTrigonometricFunctionsBasedFromExponents(
         InputTermToTrigonometryFunctionExponentsMap newTrigFunctionsInputTermToExponents(
             trigFunctionsInputTermToExponents);
         bool isChanged(false);
-        for (auto& [inputTerm, exponents] : newTrigFunctionsInputTermToExponents) {
+        for (auto& [_, exponents] : newTrigFunctionsInputTermToExponents) {
             TrigonometryFunctionExponents newExponents(getTrigonometricExponentsSuitableForIntegration(exponents));
             isChanged = isChanged || !areExponentsSame(exponents, newExponents);
             exponents = newExponents;

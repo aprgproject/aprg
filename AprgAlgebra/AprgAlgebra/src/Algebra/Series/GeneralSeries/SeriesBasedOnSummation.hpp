@@ -23,7 +23,6 @@ protected:
     static Summation getSummation(Term const& formulaForEachTermInSummation, std::string const& variableName);
     static Term getFormulaForSummation(Term const& formulaForEachTermInSummation, std::string const& variableName);
     Term m_formulaForEachTermInSummation;
-    std::string m_variableName;
     Summation m_summation;
     bool m_isSummationModelValid;
 };

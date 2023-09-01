@@ -61,7 +61,7 @@ bool doesCoefficientsHaveSameSign(Monomial const& monomial1, Monomial const& mon
 
 bool hasNegativeExponents(Monomial const& monomial) {
     bool result(false);
-    for (auto const& [variableName, exponent] : monomial.getVariablesToExponentsMap()) {
+    for (auto const& [_, exponent] : monomial.getVariablesToExponentsMap()) {
         if (exponent < 0) {
             result = true;
             break;
@@ -97,7 +97,7 @@ string getFirstVariableName(Monomial const& monomial) {
 
 AlbaNumber getDegree(Monomial const& monomial) {
     AlbaNumber degree;
-    for (auto const& [variableName, exponent] : monomial.getVariablesToExponentsMap()) {
+    for (auto const& [_, exponent] : monomial.getVariablesToExponentsMap()) {
         degree = degree + exponent;
     }
     return degree;
@@ -120,7 +120,7 @@ AlbaNumber getMaxExponent(Monomial const& monomial) {
 AlbaNumber getGcfOfExponentsInMonomial(Monomial const& monomial) {
     AlbaNumber commonExponent(1);
     bool isFirst(true);
-    for (auto const& [variableName, exponent] : monomial.getVariablesToExponentsMap()) {
+    for (auto const& [_, exponent] : monomial.getVariablesToExponentsMap()) {
         if (exponent.isIntegerOrFractionType()) {
             if (isFirst) {
                 commonExponent = exponent;

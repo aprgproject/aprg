@@ -344,10 +344,10 @@ VariableNameToCriticalNumbersMap getCriticalNumbersWithMultipleVariables(
     MultipleVariableSolutionSets solutionSets(
         solver.calculateSolutionAndReturnSolutionSet(equationsWithPartialDerivatives));
     for (MultipleVariableSolutionSet const& solutionSet : solutionSets) {
-        for (auto const& [variableName, solutionSet] : solutionSet.getVariableNameToSolutionSetMap()) {
+        for (auto const& [variableName, solutionSetInMap] : solutionSet.getVariableNameToSolutionSetMap()) {
             AlbaNumbers& criticalNumbers(result[variableName]);
-            AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
-            AlbaNumbers const& rejectedValues(solutionSet.getRejectedValues());
+            AlbaNumbers const& acceptedValues(solutionSetInMap.getAcceptedValues());
+            AlbaNumbers const& rejectedValues(solutionSetInMap.getRejectedValues());
             criticalNumbers.reserve(acceptedValues.size() + rejectedValues.size());
             copy(acceptedValues.cbegin(), acceptedValues.cend(), back_inserter(criticalNumbers));
             copy(rejectedValues.cbegin(), rejectedValues.cend(), back_inserter(criticalNumbers));

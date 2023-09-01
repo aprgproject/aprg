@@ -16,7 +16,6 @@ private:
     void calculateForTermAndVariable(Term const& term, std::string const&) override;
     void addIntervalsToSolutionSetIfNeeded(
         SolutionSet& solutionSet, Equation const& equation, std::string const& variableName);
-    AlbaNumbers m_calculatedValues;
 };
 
 }  // namespace alba::algebra

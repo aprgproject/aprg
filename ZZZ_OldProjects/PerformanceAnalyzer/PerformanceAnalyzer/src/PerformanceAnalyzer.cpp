@@ -457,16 +457,16 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
             BtsLogPrint logPrint(lineInLogs);
             if (!logPrint.getBtsTime().isStartup()) {
                 btsLogDelay.startTimeOptional = logPrint.getBtsTime();
-                UniqueUserId tupcUserId;
-                tupcUserId.saveNbccId(lineInLogs);
-                TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcUserId];
+                UniqueUserId tupcUserIdInStartup;
+                tupcUserIdInStartup.saveNbccId(lineInLogs);
+                TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcUserIdInStartup];
                 tupcLogDelay.rlhRlSetupRequestOptional = logPrint.getBtsTime();
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(RLH send TC_TRANSPORT_BEARER_REGISTER_MSG)")) {
             BtsLogPrint logPrint(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
-            if (tupcLogDelays.count(tupcUserId) > 0) {
+            if (tupcLogDelays.contains(tupcUserId)) {
                 TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcUserId];
                 tupcLogDelay.rlhTbRegisterTimeOptional = logPrint.getBtsTime();
             }
@@ -474,14 +474,14 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
             BtsLogPrint logPrint(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
-            if (tupcLogDelays.count(tupcUserId) > 0) {
+            if (tupcLogDelays.contains(tupcUserId)) {
                 TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcUserId];
                 tupcLogDelay.tupcTbRegisterTimeOptional = logPrint.getBtsTime();
                 tupcRegisterRequestTupcUserId = tupcUserId;
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"([Sent:M_IP_ERQ])")) {
             BtsLogPrint logPrint(lineInLogs);
-            if (tupcLogDelays.count(tupcRegisterRequestTupcUserId) > 0) {
+            if (tupcLogDelays.contains(tupcRegisterRequestTupcUserId)) {
                 TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcRegisterRequestTupcUserId];
                 if (!tupcLogDelay.tupcFirstErqSentOptional) {
                     tupcLogDelay.tupcFirstErqSentOptional = logPrint.getBtsTime();
@@ -494,7 +494,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
             BtsLogPrint logPrint(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
-            if (tupcLogDelays.count(tupcUserId) > 0) {
+            if (tupcLogDelays.contains(tupcUserId)) {
                 TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcUserId];
                 if (!tupcLogDelay.tupcFirstTransportConnectionSetupOptional) {
                     tupcLogDelay.tupcLastEcfReceivedOptional = ecfLogPrint.getBtsTime();
@@ -505,7 +505,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
             BtsLogPrint logPrint(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
-            if (tupcLogDelays.count(tupcUserId) > 0) {
+            if (tupcLogDelays.contains(tupcUserId)) {
                 TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcUserId];
                 tupcLogDelay.tupcLastTransportConnectionSetupResponseOptional = logPrint.getBtsTime();
             }
@@ -513,7 +513,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
             BtsLogPrint logPrint(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
-            if (tupcLogDelays.count(tupcUserId) > 0) {
+            if (tupcLogDelays.contains(tupcUserId)) {
                 TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcUserId];
                 tupcLogDelay.tupcTbRegisterResponseTimeOptional = logPrint.getBtsTime();
             }
@@ -521,7 +521,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
             BtsLogPrint logPrint(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
-            if (tupcLogDelays.count(tupcUserId) > 0) {
+            if (tupcLogDelays.contains(tupcUserId)) {
                 TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcUserId];
                 tupcLogDelay.rlhTbRegisterResponseTimeOptional = logPrint.getBtsTime();
             }
@@ -684,23 +684,23 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
             BtsLogPrint logPrint(lineInLogs);
             if (!logPrint.getBtsTime().isStartup()) {
                 btsLogDelay.startTimeOptional = logPrint.getBtsTime();
-                UniqueUserId tupcUserId;
-                tupcUserId.saveNbccId(lineInLogs);
-                TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcUserId];
+                UniqueUserId tupcUserIdInStartup;
+                tupcUserIdInStartup.saveNbccId(lineInLogs);
+                TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcUserIdInStartup];
                 tupcLogDelay.rlhRlSetupRequestOptional = logPrint.getBtsTime();
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"([Rcvd:TC_TRANSPORT_BEARER_REGISTER_MSG])")) {
             BtsLogPrint logPrint(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
-            if (tupcLogDelays.count(tupcUserId) > 0) {
+            if (tupcLogDelays.contains(tupcUserId)) {
                 TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcUserId];
                 tupcLogDelay.tupcTbRegisterTimeOptional = logPrint.getBtsTime();
                 tupcRegisterRequestTupcUserId = tupcUserId;
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"([Sent:M_IP_ERQ])")) {
             BtsLogPrint logPrint(lineInLogs);
-            if (tupcLogDelays.count(tupcRegisterRequestTupcUserId) > 0) {
+            if (tupcLogDelays.contains(tupcRegisterRequestTupcUserId)) {
                 TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcRegisterRequestTupcUserId];
                 if (!tupcLogDelay.tupcFirstErqSentOptional) {
                     tupcLogDelay.tupcFirstErqSentOptional = logPrint.getBtsTime();
@@ -713,7 +713,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
             BtsLogPrint logPrint(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
-            if (tupcLogDelays.count(tupcUserId) > 0) {
+            if (tupcLogDelays.contains(tupcUserId)) {
                 TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcUserId];
                 if (!tupcLogDelay.tupcFirstTransportConnectionSetupOptional) {
                     tupcLogDelay.tupcLastEcfReceivedOptional = ecfLogPrint.getBtsTime();
@@ -925,11 +925,10 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath) {
 
             double totalCpu(0);
             stringstream ss;
-            for (int i = 0; i < cpuConsumptions.size(); i++) {
-                totalCpu += cpuConsumptions[i];
-                // ss<<processNames[i]<<":";
-                ss << cpuConsumptions[i] << ", ";
-                cpuConsumptions[i] = 0;
+            for (auto const& consumption : cpuConsumptions) {
+                totalCpu += consumption;
+                ss << consumption << ", ";
+                consumption = 0;
             }
             masterStringStream << totalCpuFromTop << ", " << totalCpu << ", " << ss.str() << "\n";
             maxTotalCpu = std::max(maxTotalCpu, totalCpu);
@@ -983,8 +982,8 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath) {
 
     stringstream ss;
     ss << "totalCpuFromTop, totalCpu, ";
-    for (int i = 0; i < processNames.size(); i++) {
-        ss << processNames[i] << ", ";
+    for (auto const& processName : processNames) {
+        ss << processName << ", ";
     }
     logLineInRawDataFile(ss.str());
     logLineInRawDataFile(masterStringStream.str());
@@ -1023,11 +1022,10 @@ void PerformanceAnalyzer::processFileForTopLogsMem(string const& filePath) {
 
             double totalMem(0);
             stringstream ss;
-            for (int i = 0; i < memConsumptions.size(); i++) {
-                totalMem += memConsumptions[i];
-                // ss<<processNames[i]<<":";
-                ss << memConsumptions[i] << ", ";
-                memConsumptions[i] = 0;
+            for (int& consumption : memConsumptions) {
+                totalMem += consumption;
+                ss << consumption << ", ";
+                consumption = 0;
             }
             masterStringStream << totalMem << ", " << ss.str() << "\n";
         }
@@ -1070,8 +1068,8 @@ void PerformanceAnalyzer::processFileForTopLogsMem(string const& filePath) {
 
     stringstream ss;
     ss << "totalMEM, ";
-    for (int i = 0; i < processNames.size(); i++) {
-        ss << processNames[i] << ", ";
+    for (auto const& processName : processNames) {
+        ss << processName << ", ";
     }
     logLineInRawDataFile(ss.str());
     logLineInRawDataFile(masterStringStream.str());
@@ -1125,22 +1123,18 @@ void PerformanceAnalyzer::processFileForTraceLog(string const& traceLogPath) {
     cout << "processFile: " << filePathHandler.getFullPath() << " isOpen: " << inputLogFileStream.is_open()
          << " fileReader: " << fileReader.isNotFinished() << "\n";
 
-    int hour = 0;
-    int min = 0;
-    int sec = 0;
-
     stringstream ss;
     while (fileReader.isNotFinished()) {
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if (isStringFoundNotCaseSensitive(lineInLogs, R"(START time=)")) {
-            hour = convertStringToNumber<int>(lineInLogs.substr(22, 2));
-            min = convertStringToNumber<int>(lineInLogs.substr(25, 2));
-            sec = convertStringToNumber<int>(lineInLogs.substr(28, 2));
+            int hour = convertStringToNumber<int>(lineInLogs.substr(22, 2));
+            int min = convertStringToNumber<int>(lineInLogs.substr(25, 2));
+            int sec = convertStringToNumber<int>(lineInLogs.substr(28, 2));
             ss << hour << ":" << min << ":" << sec << ",";
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(STOP  time=)")) {
-            hour = convertStringToNumber<int>(lineInLogs.substr(22, 2));
-            min = convertStringToNumber<int>(lineInLogs.substr(25, 2));
-            sec = convertStringToNumber<int>(lineInLogs.substr(28, 2));
+            int hour = convertStringToNumber<int>(lineInLogs.substr(22, 2));
+            int min = convertStringToNumber<int>(lineInLogs.substr(25, 2));
+            int sec = convertStringToNumber<int>(lineInLogs.substr(28, 2));
             ss << hour << ":" << min << ":" << sec;
         }
     }

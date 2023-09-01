@@ -10,6 +10,8 @@
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 
+#include <ranges>
+
 using namespace alba::mathHelper;
 using namespace std;
 
@@ -125,8 +127,8 @@ bool BrentMethod::isAlmostEqualForBrentMethod(AlbaNumber const& value1, double c
 AlbaNumber BrentMethod::calculate(AlbaNumber const& inputValue) const {
     AlbaNumber result;
     AlbaNumber partialProduct(1);
-    for (auto it = m_coefficients.crbegin(); it != m_coefficients.crend(); ++it) {
-        result = result + (*it) * partialProduct;
+    for (auto const& coefficient : ranges::reverse_view(m_coefficients)) {
+        result = result + coefficient * partialProduct;
         partialProduct = partialProduct * inputValue;
     }
     return result;

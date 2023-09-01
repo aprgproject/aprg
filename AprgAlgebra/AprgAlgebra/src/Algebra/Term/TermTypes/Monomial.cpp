@@ -115,7 +115,7 @@ void Monomial::divideNumber(AlbaNumber const& number) {
 
 void Monomial::raiseToPowerNumber(AlbaNumber const& number) {
     m_constant = m_constant ^ number;
-    for (auto& [variableName, exponent] : m_variablesToExponentsMap) {
+    for (auto& [_, exponent] : m_variablesToExponentsMap) {
         exponent = exponent * number;
     }
     clearSimplifiedFlag();

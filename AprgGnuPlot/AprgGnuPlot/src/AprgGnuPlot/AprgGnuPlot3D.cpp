@@ -17,9 +17,8 @@ void AprgGnuPlot3D::graph(PointsInGraph const& points, string const& graphName, 
 void AprgGnuPlot3D::graph(
     ThreeDimensions::Points const& geometryPoints, string const& graphName, string const& configurationString) {
     PointsInGraph points;
-    for (int i = 0; i < static_cast<int>(geometryPoints.size()); i++) {
-        points.emplace_back(
-            make_pair(make_pair(geometryPoints[i].getX(), geometryPoints[i].getY()), geometryPoints[i].getZ()));
+    for (auto const& point : geometryPoints) {
+        points.emplace_back(make_pair(make_pair(point.getX(), point.getY()), point.getZ()));
     }
     graph(points, graphName, configurationString);
 }

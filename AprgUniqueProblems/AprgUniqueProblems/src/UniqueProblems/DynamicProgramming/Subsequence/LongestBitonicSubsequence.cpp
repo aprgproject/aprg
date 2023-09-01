@@ -133,7 +133,7 @@ LongestBitonicSubsequence::Values LongestBitonicSubsequence::getLongestSubsequen
     }
     sequenceInDeque.emplace_back(m_sequence[traverseIndex]);
 
-    return Values(sequenceInDeque.cbegin(), sequenceInDeque.cend());
+    return {sequenceInDeque.cbegin(), sequenceInDeque.cend()};
 }
 
 }  // namespace alba

@@ -182,13 +182,16 @@ Equations getPerpendicularLineOnAPointOfASurface(
 
 MathVectorOfThreeTerms getCurl(
     MathVectorOfThreeTerms const& termVector, ArrayOfThreeStrings const& coordinateVariables) {
-    Term const& a(termVector.getValueAt(0));
-    Term const& b(termVector.getValueAt(1));
-    Term const& c(termVector.getValueAt(2));
-    Term x(getPartialDerivative(c, coordinateVariables[1]) - getPartialDerivative(b, coordinateVariables[2]));
-    Term y(getPartialDerivative(a, coordinateVariables[2]) - getPartialDerivative(c, coordinateVariables[0]));
-    Term z(getPartialDerivative(b, coordinateVariables[0]) - getPartialDerivative(a, coordinateVariables[1]));
-    return MathVectorOfThreeTerms{x, y, z};
+    Term const& aValue(termVector.getValueAt(0));
+    Term const& bValue(termVector.getValueAt(1));
+    Term const& cValue(termVector.getValueAt(2));
+    Term xValue(
+        getPartialDerivative(cValue, coordinateVariables[1]) - getPartialDerivative(bValue, coordinateVariables[2]));
+    Term yValue(
+        getPartialDerivative(aValue, coordinateVariables[2]) - getPartialDerivative(cValue, coordinateVariables[0]));
+    Term zValue(
+        getPartialDerivative(bValue, coordinateVariables[0]) - getPartialDerivative(aValue, coordinateVariables[1]));
+    return MathVectorOfThreeTerms{xValue, yValue, zValue};
 }
 
 void simplifyForTermInVector(Term& term) {

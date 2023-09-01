@@ -13,7 +13,7 @@ enum class LimaconTrigonometricFunctionType { Cosine, Sine };
 
 class Limacon {
 public:
-    Limacon();
+    Limacon() = default;
     Limacon(
         double const aCoefficient, double const bCoefficient,
         LimaconTrigonometricFunctionType const trigonometricFunction);  // a + b*(cos or sin)(theta) = r
@@ -35,9 +35,9 @@ private:
 
     friend std::ostream& operator<<(std::ostream& out, Limacon const& limacon);
 
-    double m_aValue;
-    double m_bValue;
-    LimaconTrigonometricFunctionType m_trigonometricFunctionType;
+    double m_aValue{0};
+    double m_bValue{0};
+    LimaconTrigonometricFunctionType m_trigonometricFunctionType{LimaconTrigonometricFunctionType::Sine};
 };
 
 using Limacons = std::vector<Limacon>;

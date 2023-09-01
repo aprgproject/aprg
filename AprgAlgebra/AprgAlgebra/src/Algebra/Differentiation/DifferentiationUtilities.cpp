@@ -81,13 +81,13 @@ bool isFirstOrderDifferentialEquation(
     Term remainingTermWithoutDyOverDx = dyOverDx / derivativeVariableName.getNameInLeibnizNotation();
     remainingTermWithoutDyOverDx.simplify();
     if (Term(1) == remainingTermWithoutDyOverDx) {
-        VariableNamesRetriever retriever;
-        retriever.retrieveFromTerm(p);
-        VariableNamesSet const& namesFromP(retriever.getVariableNames());
+        VariableNamesRetriever retriever1;
+        retriever1.retrieveFromTerm(p);
+        VariableNamesSet const& namesFromP(retriever1.getVariableNames());
         if (namesFromP.find(yVariableName) != namesFromP.cend()) {
-            VariableNamesRetriever retriever;
-            retriever.retrieveFromTerm(q);
-            VariableNamesSet const& namesFromQ(retriever.getVariableNames());
+            VariableNamesRetriever retriever2;
+            retriever2.retrieveFromTerm(q);
+            VariableNamesSet const& namesFromQ(retriever2.getVariableNames());
             if (namesFromQ.find(xVariableName) != namesFromQ.cend()) {
                 result = true;
             }

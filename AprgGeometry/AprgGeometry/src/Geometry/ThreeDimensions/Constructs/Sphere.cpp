@@ -20,13 +20,10 @@ bool Sphere::operator==(Sphere const& sphere) const {
 bool Sphere::operator!=(Sphere const& sphere) const { return !((*this) == sphere); }
 
 bool Sphere::operator<(Sphere const& sphere) const {
-    bool result(false);
     if (m_center == sphere.m_center) {
         return m_radius < sphere.m_radius;
     }
     return m_center < sphere.m_center;
-
-    return result;
 }
 
 Point Sphere::getCenter() const { return m_center; }

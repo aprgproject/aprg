@@ -15,7 +15,6 @@ namespace alba::algebra {
 SeriesBasedOnSummation::SeriesBasedOnSummation(Term const& formulaForEachTermInSummation, string const& variableName)
     : SeriesBasedOnFormula(getFormulaForSummation(formulaForEachTermInSummation, variableName), variableName),
       m_formulaForEachTermInSummation(formulaForEachTermInSummation),
-      m_variableName(variableName),
       m_summation(getSummation(formulaForEachTermInSummation, variableName)),
       m_isSummationModelValid(!isNan(getFormulaForSeries())) {}
 

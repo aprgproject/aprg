@@ -61,7 +61,7 @@ UnsignedInteger MisereGame::countNonEmptyHeaps(NimState const& nimState) {
 }
 
 NimHeapSize MisereGame::getMaxHeapSize(NimState const& nimState) {
-    auto&& [minIt, maxIt] = minmax_element(nimState.cbegin(), nimState.cend());
+    auto&& [_, maxIt] = minmax_element(nimState.cbegin(), nimState.cend());
     return *maxIt;
 }
 

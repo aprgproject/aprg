@@ -15,7 +15,7 @@ KnightsTour::KnightsTour(int const chessBoardX, int const chessBoardY)
 KnightsTour::ChessBoardIndexes KnightsTour::getAnOpenKnightsTour() const {
     ChessBoardIndexes result;
     HamiltonianPathSearchWithDfs<VertexOfKnightsTour> hamiltonianPathSearch(m_graph);
-    for (auto const& [count, chessBoardIndex] : hamiltonianPathSearch.getOneHamiltonianPath()) {
+    for (auto const& [_, chessBoardIndex] : hamiltonianPathSearch.getOneHamiltonianPath()) {
         result.emplace_back(chessBoardIndex);
     }
     return result;
@@ -24,7 +24,7 @@ KnightsTour::ChessBoardIndexes KnightsTour::getAnOpenKnightsTour() const {
 KnightsTour::ChessBoardIndexes KnightsTour::getAClosedKnightsTour() const {
     ChessBoardIndexes result;
     HamiltonianPathSearchWithDfs<VertexOfKnightsTour> hamiltonianPathSearch(m_graph);
-    for (auto const& [count, chessBoardIndex] : hamiltonianPathSearch.getOneHamiltonianCycle()) {
+    for (auto const& [_, chessBoardIndex] : hamiltonianPathSearch.getOneHamiltonianCycle()) {
         result.emplace_back(chessBoardIndex);
     }
     return result;

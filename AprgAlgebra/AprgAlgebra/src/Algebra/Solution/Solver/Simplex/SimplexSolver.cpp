@@ -73,9 +73,9 @@ void SimplexSolver::processConstraints(
         simplifiedEquation.simplify();
         Term const& leftHandTerm(simplifiedEquation.getLeftHandTerm());
         if (canBeConvertedToPolynomial(leftHandTerm)) {
-            Polynomial constraint(createPolynomialIfPossible(leftHandTerm));
-            inputVariablesRetriever.retrieveFromPolynomial(constraint);
-            if (isPolynomialLinear(constraint)) {
+            Polynomial constraintLeftTerm(createPolynomialIfPossible(leftHandTerm));
+            inputVariablesRetriever.retrieveFromPolynomial(constraintLeftTerm);
+            if (isPolynomialLinear(constraintLeftTerm)) {
                 EquationOperator const& equationOperator(simplifiedEquation.getEquationOperator());
                 bool shouldIncludeConstraint(false);
                 if (equationOperator.isEqual()) {
@@ -85,11 +85,11 @@ void SimplexSolver::processConstraints(
                     shouldIncludeConstraint = true;
                 } else if (equationOperator.isAGreaterThanVariant()) {
                     indicesWithSlackVariables.emplace(index);
-                    constraint.multiplyNumber(-1);
+                    constraintLeftTerm.multiplyNumber(-1);
                     shouldIncludeConstraint = true;
                 }
                 if (shouldIncludeConstraint) {
-                    constraintsInStandardForm.emplace_back(constraint);
+                    constraintsInStandardForm.emplace_back(constraintLeftTerm);
                     index++;
                 }
             }

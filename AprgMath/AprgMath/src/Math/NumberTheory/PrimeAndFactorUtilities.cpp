@@ -87,7 +87,7 @@ bool isWilsonTheoremTrue(UnsignedInteger const number) {
 UnsignedInteger getNumberOfFactors(UnsignedInteger const number) {
     FactorsToCountMap primeFactorsToCountMap(getPrimeFactorsToCountMap(number));
     UnsignedInteger result(1);
-    for (auto const& [primeFactor, count] : primeFactorsToCountMap) {
+    for (auto const& [_, count] : primeFactorsToCountMap) {
         result *= count + 1;
     }
     return result;

@@ -2,6 +2,7 @@
 
 #include <Statistics/DataSample.hpp>
 
+#include <cmath>
 #include <numeric>
 #include <vector>
 
@@ -20,7 +21,7 @@ public:
     static double calculateDistance(Sample const& sample1, Sample const& sample2) {
         Sample distanceCalculationTemp(sample1 - sample2);
         distanceCalculationTemp = distanceCalculationTemp.calculateRaiseToPower(2);
-        return pow(static_cast<double>(distanceCalculationTemp.getSum(), 0.5));
+        return pow(static_cast<double>(distanceCalculationTemp.getSum()), 0.5);
     }
 };
 

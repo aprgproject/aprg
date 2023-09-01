@@ -102,8 +102,7 @@ string LongestCommonSubstring::getLongestCommonSubstringUsingIterativeDPAndSpace
             }
         }
     }
-    return string(
-        m_string1.cbegin() + endIndexWithMaxLength - maxLength + 1, m_string1.cbegin() + endIndexWithMaxLength + 1);
+    return {m_string1.cbegin() + endIndexWithMaxLength - maxLength + 1, m_string1.cbegin() + endIndexWithMaxLength + 1};
 }
 
 LongestCommonSubstring::Count LongestCommonSubstring::getLongestCommonSubstringLengthUsingNaiveRecursion(

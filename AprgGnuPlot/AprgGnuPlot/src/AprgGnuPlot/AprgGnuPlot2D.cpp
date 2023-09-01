@@ -13,8 +13,8 @@ void AprgGnuPlot2D::graph(PointsInGraph const& points, string const& graphName, 
 void AprgGnuPlot2D::graph(
     TwoDimensions::Points const& geometryPoints, string const& graphName, string const& configurationString) {
     PointsInGraph points;
-    for (int i = 0; i < static_cast<int>(geometryPoints.size()); i++) {
-        points.emplace_back(make_pair(geometryPoints[i].getX(), geometryPoints[i].getY()));
+    for (auto const& geometryPoint : geometryPoints) {
+        points.emplace_back(make_pair(geometryPoint.getX(), geometryPoint.getY()));
     }
     graph(points, graphName, configurationString);
 }

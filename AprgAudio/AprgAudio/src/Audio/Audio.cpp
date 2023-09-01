@@ -216,8 +216,8 @@ bool Audio<DataType>::decodeWaveFile(vector<uint8_t>& fileDataBytes) {
     // -----------------------------------------------------------
     // FORMAT CHUNK
     int f = indexOfFormatChunk;
-    string formatChunkID(fileDataBytes.begin() + f, fileDataBytes.begin() + f + 4);
-    // int32_t formatChunkSize = fourBytesToInt (fileDataBytes, f + 4);
+    // string formatChunkID(fileDataBytes.begin() + f, fileDataBytes.begin() + f + 4);
+    //  int32_t formatChunkSize = fourBytesToInt (fileDataBytes, f + 4);
     int16_t audioFormat = twoBytesToInt(fileDataBytes, f + 8);
     int16_t numChannels = twoBytesToInt(fileDataBytes, f + 10);
     sampleRate = static_cast<int>(fourBytesToInt(fileDataBytes, f + 12));
@@ -255,7 +255,7 @@ bool Audio<DataType>::decodeWaveFile(vector<uint8_t>& fileDataBytes) {
     // -----------------------------------------------------------
     // DATA CHUNK
     int d = indexOfDataChunk;
-    string dataChunkID(fileDataBytes.begin() + d, fileDataBytes.begin() + d + 4);
+    // string dataChunkID(fileDataBytes.begin() + d, fileDataBytes.begin() + d + 4);
     int32_t dataChunkSize = fourBytesToInt(fileDataBytes, d + 4);
 
     int numSamples = dataChunkSize / (numChannels * bitDepth / 8);
@@ -319,8 +319,8 @@ bool Audio<DataType>::decodeAiffFile(vector<uint8_t>& fileDataBytes) {
     // -----------------------------------------------------------
     // COMM CHUNK
     int p = indexOfCommChunk;
-    string commChunkID(fileDataBytes.begin() + p, fileDataBytes.begin() + p + 4);
-    // int32_t commChunkSize = fourBytesToInt (fileDataBytes, p + 4, Endianness::BigEndian);
+    // string commChunkID(fileDataBytes.begin() + p, fileDataBytes.begin() + p + 4);
+    //  int32_t commChunkSize = fourBytesToInt (fileDataBytes, p + 4, Endianness::BigEndian);
     int16_t numChannels = twoBytesToInt(fileDataBytes, p + 8, Endianness::BigEndian);
     int32_t numSamplesPerChannel = fourBytesToInt(fileDataBytes, p + 10, Endianness::BigEndian);
     bitDepth = static_cast<int>(twoBytesToInt(fileDataBytes, p + 14, Endianness::BigEndian));
@@ -347,7 +347,7 @@ bool Audio<DataType>::decodeAiffFile(vector<uint8_t>& fileDataBytes) {
     // -----------------------------------------------------------
     // SSND CHUNK
     int s = indexOfSoundDataChunk;
-    string soundDataChunkID(fileDataBytes.begin() + s, fileDataBytes.begin() + s + 4);
+    // string soundDataChunkID(fileDataBytes.begin() + s, fileDataBytes.begin() + s + 4);
     int32_t soundDataChunkSize = fourBytesToInt(fileDataBytes, s + 4, Endianness::BigEndian);
     int32_t offset = fourBytesToInt(fileDataBytes, s + 8, Endianness::BigEndian);
     // int32_t blockSize = fourBytesToInt (fileDataBytes, s + 12, Endianness::BigEndian);
@@ -424,7 +424,7 @@ bool Audio<DataType>::tenByteMatch(vector<uint8_t>& v1, int startIndex1, vector<
 
 template <class DataType>
 void Audio<DataType>::addSampleRateToAiffData(vector<uint8_t>& fileDataBytes, int sampleRate) {
-    if (aiffSampleRateTable.count(sampleRate) > 0) {
+    if (aiffSampleRateTable.contains(sampleRate)) {
         for (int i = 0; i < 10; i++) {
             fileDataBytes.push_back(aiffSampleRateTable.at(sampleRate)[i]);
         }

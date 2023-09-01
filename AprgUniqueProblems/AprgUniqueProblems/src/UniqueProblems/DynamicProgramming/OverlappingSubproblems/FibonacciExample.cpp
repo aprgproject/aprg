@@ -169,14 +169,14 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicIterat
         for (Number const step : logarithmicSteps) {
             Number& resultForStep(iterativeData[step]);
             if (mathHelper::isOdd(step)) {
-                Number k = (step + 1) / 2;
-                Number fibonacciAtK = iterativeData[k];
-                Number fibonacciAtKMinus1 = iterativeData[k - 1];
+                Number k2 = (step + 1) / 2;
+                Number fibonacciAtK = iterativeData[k2];
+                Number fibonacciAtKMinus1 = iterativeData[k2 - 1];
                 resultForStep = fibonacciAtK * fibonacciAtK + fibonacciAtKMinus1 * fibonacciAtKMinus1;
             } else {
-                Number k = step / 2;
-                Number fibonacciAtK = iterativeData[k];
-                Number fibonacciAtKMinus1 = iterativeData[k - 1];
+                Number k2 = step / 2;
+                Number fibonacciAtK = iterativeData[k2];
+                Number fibonacciAtKMinus1 = iterativeData[k2 - 1];
                 resultForStep = (2 * fibonacciAtKMinus1 + fibonacciAtK) * fibonacciAtK;
             }
         }

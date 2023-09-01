@@ -144,7 +144,7 @@ template void TermsRaiseToExponents<Term, TermRaiseToTerms>::subtractExponents(
 
 template <typename ExponentType, typename BaseRaiseToExponentType>
 void TermsRaiseToExponents<ExponentType, BaseRaiseToExponentType>::multiplyToExponents(ExponentType const& exponent) {
-    for (auto& [base, exponentFromMap] : m_baseToExponentMap) {
+    for (auto& [_, exponentFromMap] : m_baseToExponentMap) {
         exponentFromMap *= exponent;
     }
 }

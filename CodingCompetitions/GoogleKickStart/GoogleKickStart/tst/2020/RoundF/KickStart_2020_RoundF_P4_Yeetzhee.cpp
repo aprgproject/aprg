@@ -57,7 +57,7 @@ double ans(vector<int> a, int tot) {
     if (!in(a)) {
         return 1e18;
     }
-    if (mp.count(a) != 0U) {
+    if (mp.contains(a)) {
         return mp[a];
     }
     if (tot == n) {

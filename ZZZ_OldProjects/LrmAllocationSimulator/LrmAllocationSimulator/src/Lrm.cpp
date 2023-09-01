@@ -1432,7 +1432,7 @@ void Lrm::setAsNbicIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const 
 }
 
 unsigned int Lrm::getNumberOfUnallocatedPicPoolsForLcg(unsigned int const lcgId) const {
-    return m_lcgToUnallocatedPicPools.count(lcgId) > 0 ? static_cast<int>(m_lcgToUnallocatedPicPools.at(lcgId)) : 0;
+    return m_lcgToUnallocatedPicPools.contains(lcgId) ? static_cast<int>(m_lcgToUnallocatedPicPools.at(lcgId)) : 0;
 }
 
 }  // namespace alba

@@ -15,6 +15,7 @@
 #include <algorithm>
 #include <iostream>
 #include <optional>
+#include <ranges>
 #include <sstream>
 
 using namespace alba::AprgBitmap;
@@ -809,9 +810,7 @@ void SOOSA::removeBarPointsWithFewHeightPointsCount(
     TwoDimensionSamples barPointsSamplesCopy(kMeansForBarPoints.getSamples());
     kMeansForBarPoints.clear();
     int count = 0;
-    for (auto itMap = countToEndPointsIndexesMultiMap.crbegin(); itMap != countToEndPointsIndexesMultiMap.crend();
-         itMap++) {
-        EndPointIndexes const& range(itMap->second);
+    for (auto const& [_, range] : ranges::reverse_view(countToEndPointsIndexesMultiMap)) {
         for (auto itForRange = barPointsSamplesCopy.begin() + range.first;
              itForRange != barPointsSamplesCopy.begin() + range.second + 1; itForRange++) {
             kMeansForBarPoints.addSample(*itForRange);

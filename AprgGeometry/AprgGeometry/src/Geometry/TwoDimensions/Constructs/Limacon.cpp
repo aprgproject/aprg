@@ -11,8 +11,6 @@ using namespace std;
 
 namespace alba::TwoDimensions {
 
-Limacon::Limacon() : m_aValue(0), m_bValue(0) {}
-
 Limacon::Limacon(
     double const aCoefficient, double const bCoefficient,
     LimaconTrigonometricFunctionType const trigonometricFunctionType)
