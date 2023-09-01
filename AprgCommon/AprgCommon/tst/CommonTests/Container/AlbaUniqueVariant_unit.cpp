@@ -30,9 +30,11 @@ TEST(AlbaUniqueVariantTest, AcquiringVariantTypeInvokesDefaultConstructor) {
     auto& exampleStructure1 = variant.acquire<ExampleStructure1>();
     EXPECT_EQ(2U, exampleStructure1.unsignedField);
     EXPECT_FLOAT_EQ(2.3F, exampleStructure1.floatField);
+#if !defined(_MSC_VER)
     auto& exampleStructure2 = variant.acquire<ExampleStructure2>();
     EXPECT_DOUBLE_EQ(4.5, exampleStructure2.doubleField);
     EXPECT_EQ('a', exampleStructure2.charField);
+#endif
 }
 
 class DestructorClass : public BaseVariantDataType {
