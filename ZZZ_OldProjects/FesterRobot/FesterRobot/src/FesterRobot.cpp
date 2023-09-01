@@ -17,7 +17,7 @@ using namespace std;
 
 namespace alba {
 
-FesterRobot::FesterRobot(string const& outputPath) : m_outputStream(outputPath), m_retryCurrentFrequencies(false) {}
+FesterRobot::FesterRobot(string const& outputPath) : m_outputStream(outputPath) {}
 
 void FesterRobot::run() {
     cout << "Press the key 'ctrl' to start.\n";

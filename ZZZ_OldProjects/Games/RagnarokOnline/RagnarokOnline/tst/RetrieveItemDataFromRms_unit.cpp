@@ -32,6 +32,7 @@ TEST(RagnarokOnlineItemTest, DISABLED_RetrieveItemDataFromRmsWebPagesWorks) {
     EXPECT_EQ(6225U, ragnarokOnline.getItemIdToItemMap().size());
 }
 
+// NOLINTNEXTLINE(google-readability-function-size,hicpp-function-size,readability-function-size)
 TEST(RagnarokOnlineItemTest, DISABLED_RetrieveItemDataFromRmsWebPageWorksWithExample1) {
     RagnarokOnline ragnarokOnline;
 
@@ -324,6 +325,7 @@ TEST(RagnarokOnlineItemTest, DISABLED_RetrieveItemDataFromRmsWebPageWorksWithExa
     EXPECT_TRUE(item12.droppedByMonstersWithRates.empty());
 }
 
+// NOLINTNEXTLINE(google-readability-function-size,hicpp-function-size,readability-function-size)
 TEST(RagnarokOnlineItemTest, DISABLED_RetrieveItemDataFromRmsWebPageWorksWithExample2) {
     RagnarokOnline ragnarokOnline;
 

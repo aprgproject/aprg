@@ -33,6 +33,8 @@ public:
     NumberType getEightByteSwappedData();
     template <typename NumberType, size_t numberOfBytesToRead>
     NumberType getData();
+    template <typename NumberType>
+    NumberType getDataForOneByte();
     void saveDataToMemoryBuffer(AlbaMemoryBuffer& buffer, size_t numberOfBytesToRead);
     void skipLine();
     std::string getLine();
@@ -54,7 +56,7 @@ private:
 
 template <typename NumberType>
 NumberType AlbaFileReader::getOneByteData() {
-    return getData<NumberType, 1>();
+    return getDataForOneByte<NumberType>();
 }
 
 template <typename NumberType>
@@ -89,18 +91,24 @@ NumberType AlbaFileReader::getEightByteSwappedData() {
 
 template <typename NumberType, size_t numberOfBytesToRead>
 NumberType AlbaFileReader::getData() {
-    NumberType result(0);
     m_stream.read(getCharacterBufferPointer(), numberOfBytesToRead);
     auto numberOfCharacters = m_stream.gcount();
-    result = std::accumulate(
+    return std::accumulate(
         m_characterBuffer.cbegin(), m_characterBuffer.cbegin() + numberOfCharacters, static_cast<NumberType>(0U),
         [&](NumberType partialSum, char newValue) {
-            // NOLINTNEXTLINE(hicpp-signed-bitwise)
             partialSum <<= 8;
             partialSum |= static_cast<NumberType>(AlbaBitConstants::ALL_ONES_8_BITS & static_cast<uint8_t>(newValue));
             return partialSum;
         });
-    return result;
+}
+
+template <typename NumberType>
+NumberType AlbaFileReader::getDataForOneByte() {
+    m_stream.read(getCharacterBufferPointer(), 1U);
+    if (m_stream.gcount() > 0) {
+        return static_cast<NumberType>(m_characterBuffer.front());
+    }
+    return 0;
 }
 
 }  // namespace alba

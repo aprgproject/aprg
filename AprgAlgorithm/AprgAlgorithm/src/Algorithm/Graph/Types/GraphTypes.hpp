@@ -65,6 +65,11 @@ struct GraphTypesWithWeights {
 
         bool operator==(EdgeOrderedByWeight const& otherEdge) const { return weight == otherEdge.weight; }
 
+        [[nodiscard]] Edge getEdge() const {
+            // slice the object the proper way
+            return Edge(*this);
+        }
+
         Weight weight;
     };
     using EdgesWithWeight = std::vector<EdgeOrderedByWeight>;

@@ -36,6 +36,7 @@ void runTestCase(int const testCaseNumber) {
         my_cin >> a[i];
     }
     vector<pair<int, int> > q;
+    q.reserve(n);
     for (int i = 0; i < n; i++) {
         q.emplace_back((a[i] + x - 1) / x, i);
     }

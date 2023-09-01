@@ -33,6 +33,7 @@ auto goodIncrementBy(int y) {
     return [=](int x) { return x + y; };
 }
 auto badIncrementBy(int y) {
+    // NOLINTNEXTLINE(clang-diagnostic-return-stack-address)
     return [&](int x) { return x + y; };
 }
 

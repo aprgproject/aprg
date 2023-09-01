@@ -4,7 +4,7 @@ using namespace std;
 
 namespace alba {
 
-MaximizeProfitInCuttingARod::MaximizeProfitInCuttingARod(Length const length, Rods const rods)
+MaximizeProfitInCuttingARod::MaximizeProfitInCuttingARod(Length const length, Rods const& rods)
     : m_length(length), m_rods(rods) {}
 
 MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUsingNaiveRecursion() const {

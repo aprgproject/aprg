@@ -96,6 +96,7 @@ TEST(InPlaceConstructionExamplesTest, NoRvoBecauseNoOpportunity) {
 namespace NoRvoBecauseWrongType {
 string sadFunction() {
     string s("No RVO for you!");
+    // NOLINTNEXTLINE(clang-diagnostic-pessimizing-move)
     return move(s);
 }
 
@@ -377,6 +378,7 @@ TEST(InPlaceConstructionExamplesTest, CreatingAVectorOfPairs) {
 namespace InitializerListHasConstStorageSoWeCantLocalInitializerLists {
 template <int... ints>
 auto f() {
+    // NOLINTNEXTLINE(clang-diagnostic-return-stack-address)
     return initializer_list<int>{ints...};  // returns a temporary object
 }
 void fineFunction() {

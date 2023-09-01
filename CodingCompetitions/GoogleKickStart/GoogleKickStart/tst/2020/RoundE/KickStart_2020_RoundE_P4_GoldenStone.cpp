@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2020_RoundE_P4_GoldenStone.hpp"
 
@@ -28,7 +28,6 @@ namespace KickStart_2020_RoundE_P4_GoldenStone {
 #endif
 
 using ll = long long;
-const ll INF = 1000000000000;
 #define F0R(i, a) for (int i = 0; i < (a); i++)
 #define trav(a, x) for (auto& a : x)
 template <class T>

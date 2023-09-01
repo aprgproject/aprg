@@ -30,7 +30,7 @@ private:
     std::ofstream m_outputStream;
     Frequencies m_frequencies;
     AlbaWindowsUserAutomation m_userAutomation;
-    bool m_retryCurrentFrequencies;
+    bool m_retryCurrentFrequencies{false};
 };
 
 }  // namespace alba

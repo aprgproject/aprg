@@ -1176,7 +1176,7 @@ bool Lrm::canAFreeDliBeAllocatedInFsp(unsigned int const fspAddress, unsigned in
     bool result(false);
     bool isSharedLcgId(isSharedLcg(lcgId));
     Fsp const& fsp(m_addressToFspMap.at(fspAddress));
-    if (!isSharedLcgId || (isSharedLcgId && fsp.getSmType() == SmType::MSM)) {
+    if (!isSharedLcgId || fsp.getSmType() == SmType::MSM) {
         for (unsigned int const freeDliToBeAllocated : freeDliPools) {
             unsigned int conflictingDliPoolForThisDli(getConflictingDliPoolForThisDli(freeDliToBeAllocated));
             bool canBeAllocated(true);

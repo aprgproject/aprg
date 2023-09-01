@@ -42,9 +42,7 @@ void BtsLogAnalyzer::processFileForToCountUsersWithTracing(string const& filePat
                 cout << "msgType: " << msgType << " nbccId: " << nbccId
                      << " number of usersWithTracing: " << usersWithTracing.size() << "\n";
             } else if (msgType == 0x1300) {
-                if (usersWithTracing.find(nbccId) != usersWithTracing.end()) {
-                    usersWithTracing.erase(nbccId);
-                }
+                usersWithTracing.erase(nbccId);
                 cout << "msgType: " << msgType << " nbccId: " << nbccId
                      << " number of usersWithTracing: " << usersWithTracing.size() << "\n";
             }

@@ -144,7 +144,7 @@ private:
     }
 
     void updateConnectionsAndMatchBitsOfEquivalentStatesThruBfs(DequeOfIndexes& nearestStates) {
-        while (nearestStates.size()) {
+        while (nearestStates.empty()) {
             Index currentState = nearestStates.back();
             nearestStates.pop_back();
             for (Index character = 0; character < RADIX; ++character) {

@@ -158,24 +158,18 @@ void AlbaGrepStringEvaluator::addOperator(char const characterOperator) {
             }
             break;
         case AlbaGrepStringOperatorType::XorOperator:
-            switch (currentCharacter) {
-                case '!':
-                    previousToken.appendToString(currentCharacter);
-                    previousToken.setOperatorType(AlbaGrepStringOperatorType::XnorOperator);
-                    break;
-                default:
-                    invalidOperator = true;
-                    break;
+            if (currentCharacter == '!') {
+                previousToken.appendToString(currentCharacter);
+                previousToken.setOperatorType(AlbaGrepStringOperatorType::XnorOperator);
+            } else {
+                invalidOperator = true;
             }
             break;
         case AlbaGrepStringOperatorType::XnorOperator:
-            switch (currentCharacter) {
-                case '!':
-                    m_tokens.emplace_back(AlbaGrepStringOperatorType::NotOperator, string("") + currentCharacter);
-                    break;
-                default:
-                    invalidOperator = true;
-                    break;
+            if (currentCharacter == '!') {
+                m_tokens.emplace_back(AlbaGrepStringOperatorType::NotOperator, string("") + currentCharacter);
+            } else {
+                invalidOperator = true;
             }
             break;
         default:

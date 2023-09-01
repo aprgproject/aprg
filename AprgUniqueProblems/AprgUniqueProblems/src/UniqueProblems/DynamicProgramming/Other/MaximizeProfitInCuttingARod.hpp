@@ -18,7 +18,7 @@ public:
     using ProfitMatrix = matrix::AlbaMatrix<Profit>;
     static constexpr Profit UNUSED_PROFIT = std::numeric_limits<Profit>::max();
 
-    MaximizeProfitInCuttingARod(Length const length, Rods const rods);
+    MaximizeProfitInCuttingARod(Length const length, Rods const& rods);
 
     [[nodiscard]] Profit getBestProfitUsingNaiveRecursion() const;
     [[nodiscard]] Profit getBestProfitUsingMemoizationDP() const;

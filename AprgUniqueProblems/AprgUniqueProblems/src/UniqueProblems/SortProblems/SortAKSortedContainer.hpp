@@ -10,7 +10,7 @@ template <typename Values>
 class SortAKSortedContainer {
 public:
     using Value = typename Values::value_type;
-    using KPriorityQueue = std::priority_queue<Value, std::deque<Value>, std::greater<Value>>;
+    using KPriorityQueue = std::priority_queue<Value, std::deque<Value>, std::greater<>>;
 
     SortAKSortedContainer() = default;
 

@@ -1,6 +1,6 @@
 #include "CrnccIdMapping.hpp"
 
-std::array<TCRNCCommunicationContextId, MAX_USERS_IN_NODEB + 1> CrnccIdMapping::m_crnccIdMapping;
+std::array<TCRNCCommunicationContextId, MAX_USERS_IN_NODEB + 1> CrnccIdMapping::m_crnccIdMapping{};
 
 void CrnccIdMapping::set(TCRNCCommunicationContextId const crnccId, TNbccId const nbccId) {
     m_crnccIdMapping[nbccId] = crnccId;

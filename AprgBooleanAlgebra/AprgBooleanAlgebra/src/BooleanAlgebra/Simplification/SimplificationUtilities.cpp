@@ -27,7 +27,7 @@ Implicants getBestPrimeImplicantsUsingQuineMcCluskey(Term const& term, VariableN
     int numberOfBits = variableNames.size();
     QuineMcCluskey qmc;
     SubstitutionOfVariablesToValues substitution;
-    for (Minterm minterm = 0; minterm < static_cast<Minterm>(1 << numberOfBits); minterm++) {
+    for (Minterm minterm = 0; minterm < static_cast<Minterm>(1) << static_cast<Minterm>(numberOfBits); ++minterm) {
         int i = 0;
         for (string const& variableName : variableNames) {
             bool value = (minterm & (1 << i++)) > 0;

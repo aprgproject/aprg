@@ -51,8 +51,8 @@ struct ft {
 void app(int i, ll x) {
     f0[i & 1].upd(i, x - a[i]);
     f1[i & 1].upd(i, i * (x - a[i]));
-    f0[i & 1 ^ 1].upd(i, -(x - a[i]));
-    f1[i & 1 ^ 1].upd(i, -i * (x - a[i]));
+    f0[(i & 1) ^ 1].upd(i, -(x - a[i]));
+    f1[(i & 1) ^ 1].upd(i, -i * (x - a[i]));
     a[i] = x;
 }
 

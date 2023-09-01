@@ -81,6 +81,7 @@ void RevisionEditor::editCommitDates() {
         AlbaYearMonthDay ymd = AlbaYearMonthDay::createFromTotalDays(currentDayCount);
         ALBA_INF_PRINT5(cout, ymd.getYears(), ymd.getMonths(), ymd.getDays(), targetAverageCommit, numberOfCommits);
         vector<AlbaHourMinuteSecond> hmses;
+        hmses.reserve(numberOfCommits);
         for (int commitNumber = 0; commitNumber < numberOfCommits; ++commitNumber) {
             hmses.emplace_back(getRandomHour(), m_sixtyRandomizer.getRandomValue(), m_sixtyRandomizer.getRandomValue());
         }

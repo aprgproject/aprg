@@ -22,6 +22,11 @@ namespace alba {
 
 TEST(SampleTest, PrimerTest) {
     int i = 0;
+    ALBA_INF_PRINT2(cout, i);
+}
+
+/*TEST(SampleTest, PrimerTest) {
+    int i = 0;
     double d = NAN;
     d = i = 3.5;
     ALBA_INF_PRINT2(cout, i, d);  // 3,3
@@ -29,7 +34,7 @@ TEST(SampleTest, PrimerTest) {
     ALBA_INF_PRINT2(cout, i, d);  // 3, 3.5
 }
 
-/*TEST(SampleTest, uninintializedcopyTest) {
+TEST(SampleTest, uninintializedcopyTest) {
     std::vector<int> v1 = {1, 2, 3, 4, 5};
     std::vector<int> v2(3);
 

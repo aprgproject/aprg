@@ -36,7 +36,7 @@ WeightedJobScheduling::Profit WeightedJobScheduling::getMaxProfitByMonitoringTim
             timeStamps.emplace_back(job.endTime);
         }
         sort(timeStamps.begin(), timeStamps.end());
-        timeStamps.erase(unique(timeStamps.begin(), timeStamps.end()));
+        timeStamps.erase(unique(timeStamps.begin(), timeStamps.end()), timeStamps.end());
 
         Profits maxProfitsAtTime(timeStamps.size(), 0);
 

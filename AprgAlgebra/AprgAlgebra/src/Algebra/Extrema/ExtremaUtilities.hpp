@@ -17,12 +17,12 @@ struct MinimumAndMaximum {
 };
 
 struct Extremum {
-    ExtremumType extremumType;
+    ExtremumType extremumType{ExtremumType::Unknown};
     std::pair<AlbaNumber, AlbaNumber> inputOutputValues;
 };
 
 struct ExtremumWithMultipleVariables {
-    ExtremumType extremumType;
+    ExtremumType extremumType{ExtremumType::Unknown};
     std::map<std::string, AlbaNumber> variableNamesToValues;
 };
 

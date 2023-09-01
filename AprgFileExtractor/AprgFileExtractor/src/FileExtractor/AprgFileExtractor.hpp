@@ -18,8 +18,10 @@ public:
     void extractAllRelevantFiles(std::string const& pathOfFileOrDirectory);
     void copyRelativeFilePathsFromCompressedFile(
         std::string const& filePathOfCompressedFile, SetOfFilePaths& files) const;
-    [[nodiscard]] std::string extractOnceForAllFiles(std::string const& filePathOfCompressedFile) const;
-    [[nodiscard]] std::string extractOneFile(
+    // NOLINTNEXTLINE(modernize-use-nodiscard)
+    std::string extractOnceForAllFiles(std::string const& filePathOfCompressedFile) const;
+    // NOLINTNEXTLINE(modernize-use-nodiscard)
+    std::string extractOneFile(
         std::string const& filePathOfCompressedFile, std::string const& relativePathOfFile) const;
     static bool isRecognizedCompressedFile(std::string const& extension);
 

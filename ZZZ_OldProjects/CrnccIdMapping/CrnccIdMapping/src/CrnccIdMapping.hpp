@@ -25,7 +25,7 @@ public:
     static TNbccId get(TCRNCCommunicationContextId const crnccId);
 
 private:
-    static std::array<TCRNCCommunicationContextId, MAX_USERS_IN_NODEB + 1> m_crnccIdMapping{};
+    static std::array<TCRNCCommunicationContextId, MAX_USERS_IN_NODEB + 1> m_crnccIdMapping;
 };
 
 extern "C" {

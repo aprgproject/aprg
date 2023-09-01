@@ -122,8 +122,8 @@ template <typename T>
 using myvec = vector<T>;  // alias template
 
 TEST(TemplateExamplesTest, AliasTemplatesWork) {
-    cout << "is alias same with int: " << (areSameTypes<myvec<int>, vector<int>> != nullptr) << "\n";
-    cout << "is alias same with double: " << (areSameTypes<myvec<double>, vector<double>> != nullptr) << "\n";
+    cout << "is alias same with int: " << areSameTypes<myvec<int>, vector<int>>() << "\n";
+    cout << "is alias same with double: " << areSameTypes<myvec<double>, vector<double>>() << "\n";
 }
 
 // -> In C++11, alias templates was introduced.

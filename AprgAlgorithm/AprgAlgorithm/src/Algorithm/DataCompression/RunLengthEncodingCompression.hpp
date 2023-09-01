@@ -51,7 +51,7 @@ public:
             auto currentCount(reader.readBigEndianNumberData<Count>());
             if (!input.eof())  // do not continue if end of file
             {
-                for (char i = 0; i < currentCount; i++) {
+                for (Count i = 0; i < currentCount; i++) {
                     writer.writeBoolData(bit);  // write number of bits based from the count
                 }
                 bit = !bit;  // switch from 0->1 or 1->0

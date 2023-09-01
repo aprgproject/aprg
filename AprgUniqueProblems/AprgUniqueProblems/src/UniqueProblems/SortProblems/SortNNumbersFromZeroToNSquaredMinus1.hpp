@@ -26,6 +26,7 @@ public:
             // If we set b as n, the value of O(logb(n)) becomes O(1) and overall time complexity becomes O(n).
             int numberOfBitsInDigit = AlbaBitValueUtilities<int>::getCeilOfLogarithmWithBase2Of(size);
             int numberOfDigits =
+                // NOLINTNEXTLINE(clang-analyzer-core.DivideZero)
                 (AlbaBitValueUtilities<Integer>::getNumberOfBits() + numberOfBitsInDigit - 1) / numberOfBitsInDigit;
             Integer mask = AlbaBitValueUtilities<Integer>::generateOnesWithNumberOfBits(numberOfBitsInDigit);
 

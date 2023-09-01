@@ -34,7 +34,7 @@ public:
         std::transform(
             m_vertexToEdgeWithMinimumWeightMap.cbegin(), m_vertexToEdgeWithMinimumWeightMap.cend(),
             std::back_inserter(result), [](auto const& vertexToEdgeOrderedByWeightPair) {
-                return static_cast<Edge>(vertexToEdgeOrderedByWeightPair.second);
+                return vertexToEdgeOrderedByWeightPair.second.getEdge();
             });
         return result;
     }
