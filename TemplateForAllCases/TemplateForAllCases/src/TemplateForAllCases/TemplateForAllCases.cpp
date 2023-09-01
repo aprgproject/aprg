@@ -1,3 +1,7 @@
 #include "TemplateForAllCases.hpp"
 
-namespace alba {}  // namespace alba
+namespace alba {
+
+int TemplateForAllCases::getSample() const { return m_sample; }
+
+}  // namespace alba

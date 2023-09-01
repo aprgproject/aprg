@@ -1,3 +1,7 @@
 #include "TemplateForLibraries.hpp"
 
-namespace alba {}  // namespace alba
+namespace alba {
+
+int TemplateForLibraries::getSample() const { return m_sample; }
+
+}  // namespace alba

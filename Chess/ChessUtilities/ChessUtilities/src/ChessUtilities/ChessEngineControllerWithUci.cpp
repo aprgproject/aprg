@@ -82,8 +82,8 @@ void ChessEngineControllerWithUci::goWithPonder() {
 void ChessEngineControllerWithUci::goWithDepth(int const depth) {
     log("Go with depth!");
     sendStopIfCalculating();
-    stringstream ss;
-    ss << "go depth " << depth;
+    stringstream ss("go depth ");
+    ss << depth;
     send(CommandType::Go, ss.str());
 }
 

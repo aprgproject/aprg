@@ -691,15 +691,15 @@ struct IntegralConstantWithAuto {
     static constexpr auto value = Value;
 };
 
-TEST(TemplateExamplesTest, TemplateAutoWorks) {
-    using FortyTwoWithoutAuto = IntegralConstantWithoutAuto<int, 42>;
-    using TrueTypeWithoutAuto = IntegralConstantWithoutAuto<bool, true>;
-
-    using FortyTwoWithAuto = IntegralConstantWithAuto<42>;
-    using TrueTypeWithAuto = IntegralConstantWithAuto<true>;
-
-    // These (IntegralConstantWithoutAuto, IntegralConstantWithAuto) are basically the same.
-}
+// TEST(TemplateExamplesTest, TemplateAutoWorks) {
+//     using FortyTwoWithoutAuto = IntegralConstantWithoutAuto<int, 42>;
+//     using TrueTypeWithoutAuto = IntegralConstantWithoutAuto<bool, true>;
+//
+//     using FortyTwoWithAuto = IntegralConstantWithAuto<42>;
+//     using TrueTypeWithAuto = IntegralConstantWithAuto<true>;
+//
+//     // These (IntegralConstantWithoutAuto, IntegralConstantWithAuto) are basically the same.
+// }
 
 }  // namespace TemplateAutoWorks
 
@@ -742,8 +742,8 @@ struct myvec {
     explicit myvec(int) { cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n"; }
     explicit myvec(double) { cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n"; }
 };
-myvec(int)->myvec<double>;  // deduction guide
-myvec(double)->myvec<int>;  // deduction guide
+myvec(int) -> myvec<double>;  // deduction guide
+myvec(double) -> myvec<int>;  // deduction guide
 
 TEST(TemplateExamplesTest, TemplateDeductionGuidesWorksForCpp17) {
     myvec v1(5);    // myvec(int) [with T = double]

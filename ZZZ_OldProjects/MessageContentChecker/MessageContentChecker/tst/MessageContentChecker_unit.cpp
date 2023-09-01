@@ -192,6 +192,8 @@ TEST(SampleTest, SampleTest1) {
     auto* printPointer = reinterpret_cast<SEDpchInformation_Ver2*>(
         dynamicPayload + sizeof(BB_2_RlSetupReq) - sizeof(TDynamicData) + offset);
 
+    cout << printPointer->servingEDchRlId << "\n";
+
     /*
         unsigned int offset = (sizeof(SDlDpchInfoRlSetup)*swap4(rlSetupReqPointer->numOfDlDpchInfo))
                 + (sizeof(SRadioLinkSetup_Ver2)*swap4(rlSetupReqPointer->numOfRlInfo))
@@ -531,6 +533,8 @@ TEST(SampleTest, SampleTest2) {
     offset += (sizeof(SHsDschInformation_Ver2) * swap4(rlSetupReqPointer->numOfHsDschInfo));
 
     auto* printPointer = reinterpret_cast<SEDpchInformation_Ver2*>(dynamicPayload + offset);
+
+    cout << printPointer->servingEDchRlId << "\n";
 
     /*
         unsigned int offset = (sizeof(SDlDpchInfoRlSetup)*swap4(rlSetupReqPointer->numOfDlDpchInfo))

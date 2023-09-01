@@ -6,6 +6,8 @@ class ChessCombi {
 public:
     ChessCombi() = default;
 
+    int getSample() const;
+
 private:
     int m_sample{0};
 };

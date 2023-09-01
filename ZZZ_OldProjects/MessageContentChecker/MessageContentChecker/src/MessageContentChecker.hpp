@@ -6,6 +6,8 @@ class MessageContentChecker {
 public:
     MessageContentChecker() = default;
 
+    int getSample() const;
+
 private:
     int m_sample{0};
 };

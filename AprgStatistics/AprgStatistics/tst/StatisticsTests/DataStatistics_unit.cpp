@@ -91,7 +91,6 @@ TEST(DataStatisticsTest, StatisticsCanBeClearedAfterCalculation) {
     LocalSample sampleStandardDeviation(localStatistics.getSampleStandardDeviation());
     LocalSample populationVariance(localStatistics.getPopulationVariance());
     LocalSample populationStandardDeviation(localStatistics.getPopulationStandardDeviation());
-    double dispersion(localStatistics.getDispersionAroundTheCentroid());
     samples.clear();
     localStatistics.clearPreviousCalculations();
     sum = localStatistics.getSum();
@@ -100,7 +99,7 @@ TEST(DataStatisticsTest, StatisticsCanBeClearedAfterCalculation) {
     sampleStandardDeviation = localStatistics.getSampleStandardDeviation();
     populationVariance = localStatistics.getPopulationVariance();
     populationStandardDeviation = localStatistics.getPopulationStandardDeviation();
-    dispersion = localStatistics.getDispersionAroundTheCentroid();
+    double dispersion = localStatistics.getDispersionAroundTheCentroid();
 
     EXPECT_EQ(expectedSum, sum);
     EXPECT_EQ(expectedMean, mean);

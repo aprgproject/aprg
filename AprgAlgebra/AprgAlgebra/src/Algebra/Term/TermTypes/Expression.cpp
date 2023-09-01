@@ -34,7 +34,7 @@ Expression::Expression(OperatorLevel const operatorLevel, TermsWithDetails const
 
 Expression::Expression(OperatorLevel const operatorLevel, TermsWithDetails&& termsWithDetails)
     : m_commonOperatorLevel(termsWithDetails.empty() ? OperatorLevel::Unknown : operatorLevel),
-      m_termsWithAssociation(std::move(termsWithDetails)),
+      m_termsWithAssociation(termsWithDetails),
       m_isSimplified(false) {}
 
 bool Expression::operator==(Expression const& second) const {

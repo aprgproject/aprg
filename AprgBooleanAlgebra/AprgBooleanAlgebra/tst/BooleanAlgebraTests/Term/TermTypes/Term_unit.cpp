@@ -183,6 +183,7 @@ TEST(TermTest, AssignmentOperatorWorks) {
     Term term2(true);
     term2 = false;
     Term term3(false);
+    // NOLINTNEXTLINE(clang-diagnostic-self-assign-overloaded)
     term3 = term3;
 
     ASSERT_EQ(TermType::Constant, term1.getTermType());

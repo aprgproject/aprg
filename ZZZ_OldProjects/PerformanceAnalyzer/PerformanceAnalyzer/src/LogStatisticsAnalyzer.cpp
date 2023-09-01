@@ -55,7 +55,7 @@ void LogStatisticsAnalyzer::saveLogDetailsToCsv(ofstream& outputCsvFileStream) {
         }
         dataToDisplay.emplace(stringInCsv, logDetails.count);
     }
-    for (pair<string, unsigned int> const& data : dataToDisplay) {
+    for (auto const& data : dataToDisplay) {
         outputCsvFileStream << data.first << "," << data.second << ","
                             << (static_cast<double>(data.second)) / m_totalLines * 100 << "\n";
     }

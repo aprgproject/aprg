@@ -44,7 +44,7 @@ StringsSorter::GetDigitAtFunction getCharacterAtForString = [](string const& val
                                                                int const mostSignificantDigitIndex) -> int {
     int digitValue{};
     if (mostSignificantDigitIndex < static_cast<int>(value.length())) {
-        digitValue = value[mostSignificantDigitIndex];
+        digitValue = static_cast<int>(value[mostSignificantDigitIndex]);
     }
     return digitValue;
 };

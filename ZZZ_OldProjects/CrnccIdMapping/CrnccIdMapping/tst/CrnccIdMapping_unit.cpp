@@ -24,6 +24,7 @@ TEST(SampleTest, DISABLED_PerformanceAccessTestWithRandomValues) {
     for (unsigned int iteration = 0; iteration < accessIterations; iteration++) {
         TCRNCCommunicationContextId crnccIdAccess = crnccIds[crnccIdRandomizer.getRandomValue()];
         TNbccId nbccIdAccess = getNbccIdFromCrnccId(crnccIdAccess);
+        setCrnccIdMapping(crnccIdAccess, nbccIdAccess);
     }
 }
 

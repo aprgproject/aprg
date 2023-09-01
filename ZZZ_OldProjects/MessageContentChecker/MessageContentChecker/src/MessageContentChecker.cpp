@@ -1,3 +1,7 @@
 #include "MessageContentChecker.hpp"
 
-namespace alba {}  // namespace alba
+namespace alba {
+
+int MessageContentChecker::getSample() const { return m_sample; }
+
+}  // namespace alba

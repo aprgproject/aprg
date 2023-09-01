@@ -6,6 +6,9 @@ using namespace std;
 
 namespace alba {
 
-TEST(SampleTest, DISABLED_SampleTest1) { ChessCombi entity; }
+TEST(SampleTest, DISABLED_SampleTest1) { 
+ChessCombi entity; 
+EXPECT_EQ(0, entity.getSample());
+}
 
 }  // namespace alba

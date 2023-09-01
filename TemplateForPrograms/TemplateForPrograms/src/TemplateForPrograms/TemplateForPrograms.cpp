@@ -1,3 +1,7 @@
 #include "TemplateForPrograms.hpp"
 
-namespace alba {}  // namespace alba
+namespace alba {
+
+int TemplateForPrograms::getSample() const { return m_sample; }
+
+}  // namespace alba

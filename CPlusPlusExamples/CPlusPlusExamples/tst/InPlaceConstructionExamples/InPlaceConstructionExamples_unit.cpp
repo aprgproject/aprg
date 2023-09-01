@@ -261,6 +261,8 @@ TEST(InPlaceConstructionExamplesTest, MultipleExamplesOfRvo) {
     string s14(willThisRvo09());                   // RVO is successful
     string s15(willThisRvo10());                   // RVO is successful
     MoveOnlyConstExprObject o01(willThisRvo11());  // It depends
+
+    EXPECT_EQ(0, o01.x);
 }
 }  // namespace MultipleExamplesOfRvo
 
@@ -334,8 +336,9 @@ TEST(InPlaceConstructionExamplesTest, AvoidUnecessaryMovesInConstruction) {
     vector<string_view> tokens;
 
     string_view newToken;
-    tokens.emplace_back(move(newToken));  // move in unnecessary
-    // move here prevents in-place construction
+    tokens.emplace_back(newToken);
+    // tokens.emplace_back(move(newToken));  // move in unnecessary
+    //  move here prevents in-place construction
 }
 }  // namespace AvoidUnecessaryMovesInConstruction
 

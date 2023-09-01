@@ -28,7 +28,6 @@ private:
     std::vector<RttDetails> m_allRttDetails;
     std::optional<unsigned int> m_cx8IndexOptional;
     std::optional<unsigned int> m_pnPosIndexOptional;
-    unsigned int m_posNumber{};
 };
 
 }  // namespace alba

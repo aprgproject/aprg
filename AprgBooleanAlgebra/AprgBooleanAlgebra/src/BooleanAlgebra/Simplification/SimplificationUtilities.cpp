@@ -270,8 +270,8 @@ void distributeTermsIfNeeded(
     Term& outputTerm, Terms const& inputTerms, OperatorLevel const distributeOuterOperation,
     OperatorLevel const distributeInnerOperation) {
     if (!inputTerms.empty()) {
-        OperatorLevel targetOuter;
-        OperatorLevel targetInner;
+        OperatorLevel targetOuter{};
+        OperatorLevel targetInner{};
         retrieveTargetOperations(targetOuter, targetInner);
         if (distributeOuterOperation == targetInner &&
             distributeInnerOperation == targetOuter)  // distribute only if its different from target

@@ -16,7 +16,6 @@ using namespace alba::stringHelper;
 using namespace std;
 using wcdmaToolsBackend::BtsLogPrint;
 using wcdmaToolsBackend::BtsLogTime;
-using wcdmaToolsBackend::BtsLogTimeType;
 
 namespace alba {
 

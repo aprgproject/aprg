@@ -87,15 +87,15 @@ AlbaNumber getDegree(Term const& term) {
         if (OperatorLevel::AdditionAndSubtraction == expression.getCommonOperatorLevel()) {
             AlbaNumber maxDegree(0);
             for (TermWithDetails const& termWithDetails : termsWithDetails) {
-                Term const& term(getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer));
-                maxDegree = max(maxDegree, getDegree(term));
+                Term const& innerTerm(getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer));
+                maxDegree = max(maxDegree, getDegree(innerTerm));
             }
             result = maxDegree;
         } else if (OperatorLevel::MultiplicationAndDivision == expression.getCommonOperatorLevel()) {
             AlbaNumber sumDegree(0);
             for (TermWithDetails const& termWithDetails : termsWithDetails) {
-                Term const& term(getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer));
-                sumDegree += getDegree(term);
+                Term const& innerTerm(getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer));
+                sumDegree += getDegree(innerTerm);
             }
             result = sumDegree;
         } else if (OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel()) {

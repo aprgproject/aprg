@@ -11,7 +11,6 @@ using namespace alba::stringHelper;
 using namespace std;
 using wcdmaToolsBackend::BtsLogPrint;
 using wcdmaToolsBackend::BtsLogTime;
-using wcdmaToolsBackend::BtsLogTimeType;
 
 namespace alba {
 
@@ -359,7 +358,7 @@ void BtsLogAnalyzer::saveTotalUsersAndCfs(BtsLogPrint const& logPrint) {
     unsigned int totalCfs(0);
     unsigned int totalR99Users(0);
     unsigned int totalHsupaUsers(0);
-    for (DspDataPair const& dspDataPair : m_dspDataMap) {
+    for (auto const& dspDataPair : m_dspDataMap) {
         totalCfs += dspDataPair.second.hsupaCFs;
         totalR99Users += dspDataPair.second.dchUsers;
         totalHsupaUsers += dspDataPair.second.hsupaUsers;
