@@ -1,6 +1,9 @@
 # -> Standard checkers
 # ---> start of checkers for avoiding warnings in tests is on -cert-err58-cpp,
-# -> Nice checks to have: misc-const-correctness
+# -> Notes: 
+# ---> The check misc-const-correctness flags too much errors (but its nice to have in the future).
+# ---> The check cppcoreguidelines-virtual-class-destructor conflicts with hicpp-use-override and modernize-use-override
+# ---> The checks llvm-qualified-auto,readability-qualified-auto wants to change iterators to pointers
 Checks: '
   *,
   -altera-struct-pack-align,
@@ -12,6 +15,7 @@ Checks: '
   -cppcoreguidelines-non-private-member-variables-in-classes,
   -cppcoreguidelines-pro-bounds-constant-array-index,
   -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-virtual-class-destructor,
   -fuchsia-default-arguments-calls,
   -fuchsia-default-arguments-declarations,
   -fuchsia-overloaded-operator,
@@ -22,6 +26,7 @@ Checks: '
   -llvmlibc-callee-namespace,
   -llvmlibc-restrict-system-libc-headers,
   -llvm-header-guard,
+  -llvm-qualified-auto,
   -misc-const-correctness,
   -misc-non-private-member-variables-in-classes,
   -misc-no-recursion,
@@ -29,6 +34,7 @@ Checks: '
   -readability-avoid-const-params-in-decls,
   -readability-isolate-declaration,
   -readability-named-parameter,
+  -readability-qualified-auto,
   -cert-err58-cpp,
   -cppcoreguidelines-avoid-magic-numbers,
   -cppcoreguidelines-owning-memory,

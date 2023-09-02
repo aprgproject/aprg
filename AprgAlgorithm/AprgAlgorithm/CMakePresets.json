@@ -21,7 +21,8 @@
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_INSTALL_PREFIX": "",
         "CMAKE_C_COMPILER": "cl",
-        "CMAKE_CXX_COMPILER": "cl"
+        "CMAKE_CXX_COMPILER": "cl",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
@@ -42,11 +43,12 @@
         "strategy": "external"
       },
       "cacheVariables": {
-		"CMAKE_MAKE_PROGRAM":"C:/Qt/Tools/Ninja/ninja.exe",
+        "CMAKE_MAKE_PROGRAM": "C:/Qt/Tools/Ninja/ninja.exe",
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_INSTALL_PREFIX": "",
         "CMAKE_C_COMPILER": "gcc",
-        "CMAKE_CXX_COMPILER": "g++"
+        "CMAKE_CXX_COMPILER": "g++",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
@@ -67,11 +69,12 @@
         "strategy": "external"
       },
       "cacheVariables": {
-		"CMAKE_MAKE_PROGRAM":"C:/Qt/Tools/Ninja/ninja.exe",
+        "CMAKE_MAKE_PROGRAM": "C:/Qt/Tools/Ninja/ninja.exe",
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_INSTALL_PREFIX": "",
         "CMAKE_C_COMPILER": "C:/Compilers/LLVM-MINGW/llvm-mingw-20230614-msvcrt-x86_64/bin/x86_64-w64-mingw32-clang.exe",
-        "CMAKE_CXX_COMPILER": "C:/Compilers/LLVM-MINGW/llvm-mingw-20230614-msvcrt-x86_64/bin/x86_64-w64-mingw32-clang++.exe"
+        "CMAKE_CXX_COMPILER": "C:/Compilers/LLVM-MINGW/llvm-mingw-20230614-msvcrt-x86_64/bin/x86_64-w64-mingw32-clang++.exe",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
