@@ -24,6 +24,8 @@ namespace alba::soosa {
 
 class SOOSA {
 public:
+    enum class LineOrientation { ConsideredHorizontal, ConsideredVertical };
+
     class FrequencyDatabase {
     public:
         FrequencyDatabase(int const numberOfQuestions, int const numberOfChoices);
@@ -93,21 +95,33 @@ private:
     void saveToFrequencyDatabase();
 
     // find line
+    [[nodiscard]] bool areLinesValid(
+        Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine) const;
+    [[nodiscard]] static bool isConsideredHorizontal(double const aCoefficient, double const bCoefficient);
+    [[nodiscard]] static bool isConsideredVertical(double const aCoefficient, double const bCoefficient);
     [[nodiscard]] Line findLeftLine(BitmapSnippet const& snippet) const;
     [[nodiscard]] Line findRightLine(BitmapSnippet const& snippet) const;
     [[nodiscard]] Line findTopLine(BitmapSnippet const& snippet) const;
     [[nodiscard]] Line findBottomLine(BitmapSnippet const& snippet) const;
-    [[nodiscard]] Line findVerticalLine(BitmapSnippet const& snippet, RangeOfInts const& range) const;
-    [[nodiscard]] Line findHorizontalLine(BitmapSnippet const& snippet, RangeOfInts const& range) const;
+    TwoDimensionSamples getSamplesInVerticalLine(BitmapSnippet const& snippet, RangeOfInts const& range) const;
+    TwoDimensionSamples getSamplesInHorizontalLine(BitmapSnippet const& snippet, RangeOfInts const& range) const;
     [[nodiscard]] Line findLeftLineUsingStartingLine(BitmapSnippet const& snippet, Line const& startingLine) const;
     [[nodiscard]] Line findRightLineUsingStartingLine(BitmapSnippet const& snippet, Line const& startingLine) const;
     [[nodiscard]] Line findVerticalLineUsingStartingLine(
         BitmapSnippet const& snippet, Line const& startingLine, RangeOfInts const& rangeForX) const;
 
     // Line modeling functions
-    [[nodiscard]] Line getLineModel(TwoDimensionSamples const& samples) const;
+    [[nodiscard]] Line getLeftLineModel(TwoDimensionSamples& samples) const;
+    [[nodiscard]] Line getRightLineModel(TwoDimensionSamples& samples) const;
+    [[nodiscard]] Line getTopLineModel(TwoDimensionSamples& samples) const;
+    [[nodiscard]] Line getBottomLineModel(TwoDimensionSamples& samples) const;
+    [[nodiscard]] Line getLineModel(TwoDimensionSamples& samples) const;
+    void removeFurthestSamplesUntilLineOrientationMatch(
+        TwoDimensionSamples& samples, LineOrientation const lineOrientation) const;
+    void removeErroneousSamplesInLine(TwoDimensionSamples& samples) const;
     [[nodiscard]] DoubleCollection getAcceptableSquareErrorCollectionUsingRemovalRatio(
         ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap) const;
+    [[nodiscard]] int getRetainSizeInLineModel(int const size, double const removalRatio) const;
     static void updateSamplesForLineModeling(
         TwoDimensionSamples& samplesLineModeling, ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap,
         double const maxAcceptableSquareError);

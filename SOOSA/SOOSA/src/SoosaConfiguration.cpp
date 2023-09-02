@@ -14,8 +14,8 @@ int SoosaConfiguration::getAcceptableLineDeviationForLineModelInPixels() const {
     return m_acceptableLineDeviationForLineModelInPixels;
 }
 
-double SoosaConfiguration::getRemovalRatioForSquareErrorsInLineModel() const {
-    return m_removalRatioForSquareErrorsInLineModel;
+double SoosaConfiguration::getRemovalRatioForLineModel() const {
+    return m_removalRatioForLineModel;
 }
 
 int SoosaConfiguration::getMinimumLineSamples() const { return m_minimumLineSamples; }
@@ -93,7 +93,7 @@ void SoosaConfiguration::update() {
 
     // Line model parameters
     UPDATE_PARAMETER(m_acceptableLineDeviationForLineModelInPixels, int);
-    UPDATE_PARAMETER(m_removalRatioForSquareErrorsInLineModel, double);
+    UPDATE_PARAMETER(m_removalRatioForLineModel, double);
     UPDATE_PARAMETER(m_minimumLineSamples, int);
 
     // Line and bar parameters

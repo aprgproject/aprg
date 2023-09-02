@@ -13,7 +13,7 @@ public:
 
     // Line model parameters
     [[nodiscard]] int getAcceptableLineDeviationForLineModelInPixels() const;
-    [[nodiscard]] double getRemovalRatioForSquareErrorsInLineModel() const;
+    [[nodiscard]] double getRemovalRatioForLineModel() const;
     [[nodiscard]] int getMinimumLineSamples() const;
 
     // Line and bar parameters
@@ -45,7 +45,7 @@ private:
 
     // Line model parameters
     int m_acceptableLineDeviationForLineModelInPixels{};
-    double m_removalRatioForSquareErrorsInLineModel{};
+    double m_removalRatioForLineModel{};
     int m_minimumLineSamples{};
 
     // Line and bar parameters

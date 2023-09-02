@@ -9,7 +9,7 @@ SoosaConfiguration getSoosaConfiguration() {
 
     // Line model parameters
     soosaConfiguration.bufferNameAndValueString("m_acceptableLineDeviationForLineModelInPixels", "2");
-    soosaConfiguration.bufferNameAndValueString("m_removalRatioForSquareErrorsInLineModel", "0.05");
+    soosaConfiguration.bufferNameAndValueString("m_removalRatioForLineModel", "0.05");
     soosaConfiguration.bufferNameAndValueString("m_minimumLineSamples", "10");
 
     // Line and bar parameters

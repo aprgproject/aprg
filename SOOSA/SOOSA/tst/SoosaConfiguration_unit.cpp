@@ -28,14 +28,14 @@ TEST(SoosaConfigurationTest, TwoParametersCanBeUpdated) {
 }
 
 TEST(SoosaConfigurationTest, LoadConfigurationFromFileWorks) {
-    AlbaLocalPathHandler fileForSoosa(APRG_DIR R"(\SOOSA\FilesForTests\SoosaConfigurationForTest.txt)");
+    AlbaLocalPathHandler fileForSoosa(APRG_DIR R"(\SOOSA\FilesForTests\SoosaConfigurationForUnitTest.txt)");
     SoosaConfiguration soosaConfiguration;
 
     soosaConfiguration.loadConfigurationFromFile(fileForSoosa.getFullPath());
 
     // Line model parameters
     EXPECT_EQ(2, soosaConfiguration.getAcceptableLineDeviationForLineModelInPixels());
-    EXPECT_DOUBLE_EQ(0.05, soosaConfiguration.getRemovalRatioForSquareErrorsInLineModel());
+    EXPECT_DOUBLE_EQ(0.05, soosaConfiguration.getRemovalRatioForLineModel());
     EXPECT_EQ(10, soosaConfiguration.getMinimumLineSamples());
 
     // Line and bar parameters

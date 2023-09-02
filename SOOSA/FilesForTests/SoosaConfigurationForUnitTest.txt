@@ -1,7 +1,7 @@
 
 // Line model parameters
 m_acceptableLineDeviationForLineModelInPixels: 2
-m_removalRatioForSquareErrorsInLineModel: 0.05
+m_removalRatioForLineModel: 0.05
 m_minimumLineSamples: 10
 
 // Line and bar parameters
