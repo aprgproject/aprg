@@ -19,7 +19,7 @@ MaximumProfitByBuyingAndSellingAShareAtMostTwice::getMaximumProfitUsingIterative
         Values profit(m_prices.size(), 0);
 
         Value maxPriceAtTheRight = m_prices.back();
-        for (Index right = m_prices.size() - 1; right > 0; right--) {
+        for (Index right = m_prices.size() - 1; right > 0; --right) {
             Index left = right - 1;
             if (m_prices[left] > maxPriceAtTheRight) {
                 maxPriceAtTheRight = m_prices[left];
@@ -28,7 +28,7 @@ MaximumProfitByBuyingAndSellingAShareAtMostTwice::getMaximumProfitUsingIterative
         }
 
         Value minPriceAtTheLeft = m_prices.front();
-        for (Index right = 1; right < static_cast<Index>(m_prices.size()); right++) {
+        for (Index right = 1; right < static_cast<Index>(m_prices.size()); ++right) {
             Index left = right - 1;
             if (m_prices[right] < minPriceAtTheLeft) {
                 minPriceAtTheLeft = m_prices[right];

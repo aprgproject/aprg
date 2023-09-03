@@ -18,7 +18,7 @@ public:
         SuffixArray<Index> suffixArray(stringToCheck);
         std::string result;
         Index length(stringToCheck.length());
-        for (Index i = 1; i < length; i++) {
+        for (Index i = 1; i < length; ++i) {
             std::string commonPrefix(suffixArray.getLongestCommonPrefixOfTwoSuffixes(i - 1, i));
             if (result.size() < commonPrefix.size()) {
                 result = commonPrefix;

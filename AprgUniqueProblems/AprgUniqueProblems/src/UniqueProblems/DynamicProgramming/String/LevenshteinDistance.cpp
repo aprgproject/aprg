@@ -87,12 +87,12 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingItera
     Counts& firstPrevious(previousAndCurrentCounts[0]);
     iota(firstPrevious.begin(), firstPrevious.end(), 0);  // first row
 
-    for (Index index2 = 1; index2 <= static_cast<Index>(m_string2.length()); index2++) {
+    for (Index index2 = 1; index2 <= static_cast<Index>(m_string2.length()); ++index2) {
         Counts& previousCounts(previousAndCurrentCounts[(index2 - 1) % 2]);
         Counts& currentCounts(previousAndCurrentCounts[index2 % 2]);
 
         currentCounts[0] = index2;  // first column
-        for (Index index1 = 1; index1 <= static_cast<Index>(m_string1.length()); index1++) {
+        for (Index index1 = 1; index1 <= static_cast<Index>(m_string1.length()); ++index1) {
             int cost = m_string1[index1 - 1] == m_string2[index2 - 1] ? 0 : 1;
             currentCounts[index1] =
                 min(min(currentCounts[index1 - 1] + 1, previousCounts[index1] + 1), previousCounts[index1 - 1] + cost);

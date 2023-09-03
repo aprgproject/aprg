@@ -30,7 +30,7 @@ private:
         // Traverse all parents (starting from bottom to top), and sink down to put items in heap order
         // Note: According to CLRS this runs on O(n) / linear time.
         for (int parentIndex = getLastParentAtTheBottom(maxBinaryHeapAdapter);
-             parentIndex >= maxBinaryHeapAdapter.getTopTreeIndex(); parentIndex--) {
+             parentIndex >= maxBinaryHeapAdapter.getTopTreeIndex(); --parentIndex) {
             maxBinaryHeapAdapter.sink(parentIndex, size);
         }
     }
@@ -43,7 +43,7 @@ private:
             std::swap(
                 maxBinaryHeapAdapter.getObjectReferenceOnTree(maxBinaryHeapAdapter.getTopTreeIndex()),
                 maxBinaryHeapAdapter.getObjectReferenceOnTree(treeIndex));
-            treeIndex--;  // move the next last place
+            --treeIndex;  // move the next last place
             // starting from the top (where the object is swapped), sink down to maintain heap order
             maxBinaryHeapAdapter.sink(maxBinaryHeapAdapter.getTopTreeIndex(), treeIndex);
         }

@@ -150,7 +150,7 @@ Term IntegrationForFiniteCalculus::integratePolynomial(Polynomial const& polynom
     auto const& monomials(polynomial.getMonomials());
     if (!monomials.empty()) {
         result = integrateMonomial(monomials.front());
-        for (auto it = monomials.cbegin() + 1; it != monomials.cend(); it++) {
+        for (auto it = monomials.cbegin() + 1; it != monomials.cend(); ++it) {
             result = result + integrateMonomial(*it);
         }
         result.simplify();
@@ -198,7 +198,7 @@ Polynomial IntegrationForFiniteCalculus::convertMonomialWithPositiveExponentsFro
         int exponentUnsigned = static_cast<int>(exponent);
         Monomial monomialToRetain(monomial);
         monomialToRetain.putVariableWithExponent(m_nameOfVariableToIntegrate, 0);
-        for (int i = 0; i <= exponentUnsigned; i++) {
+        for (int i = 0; i <= exponentUnsigned; ++i) {
             result.addMonomial(
                 Monomial(getStirlingNumberOfTheSecondKind(exponentUnsigned, i), {{m_nameOfVariableToIntegrate, i}}));
         }
@@ -217,7 +217,7 @@ Polynomial IntegrationForFiniteCalculus::convertMonomialWithPositiveExponentsFro
         result = createPolynomialFromNumber(1);
         Monomial monomialToRetain(monomial);
         monomialToRetain.putVariableWithExponent(m_nameOfVariableToIntegrate, 0);
-        for (int i = 0; i < exponentUnsigned; i++) {
+        for (int i = 0; i < exponentUnsigned; ++i) {
             result.multiplyPolynomial(
                 Polynomial{Monomial(1, {{m_nameOfVariableToIntegrate, 1}}), Monomial(-AlbaNumber(i), {})});
         }

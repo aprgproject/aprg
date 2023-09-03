@@ -438,7 +438,7 @@ void BtsLogAnalyzer::saveRlSetupPerSecond(string const& lineInLogs) {
         currentLogTime = logPrint.getBtsTime();
         currentLogTime.clearMicroSeconds();
         if (savedSecond == currentLogTime) {
-            numberOfUsersInSecond++;
+            ++numberOfUsersInSecond;
         } else {
             if (rlSetupPerSecondFileStreamOptional) {
                 ofstream& rlSetupPerSecondFileStream(rlSetupPerSecondFileStreamOptional.value());

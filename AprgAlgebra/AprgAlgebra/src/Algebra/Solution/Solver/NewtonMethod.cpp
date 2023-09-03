@@ -34,11 +34,11 @@ void NewtonMethod::runOneIteration() {
         m_currentValue - (m_functionToIterate(m_currentValue) / getSlopeApproximationAt(m_currentValue));
     updatePositiveDeltaForSlopeIfNeeded(newValue);
     m_currentValue = newValue;
-    m_numberOfIterationsExecuted++;
+    ++m_numberOfIterationsExecuted;
 }
 
 void NewtonMethod::runMaxNumberOfIterationsOrUntilFinished(int const maxIterations) {
-    for (int i = 0; !isFinished() && i < maxIterations; i++) {
+    for (int i = 0; !isFinished() && i < maxIterations; ++i) {
         runOneIteration();
     }
 }

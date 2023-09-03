@@ -45,7 +45,7 @@ template <int numberOfVertices>
 Lines Polygon<numberOfVertices>::getLines() const {
     Lines lines;
     int sizeMinusOne = static_cast<int>(m_vertices.size()) - 1;
-    for (int i = 0; i < sizeMinusOne; i++) {
+    for (int i = 0; i < sizeMinusOne; ++i) {
         lines.emplace_back(m_vertices[i], m_vertices[i + 1]);
     }
     lines.emplace_back(m_vertices[sizeMinusOne], m_vertices[0]);
@@ -56,7 +56,7 @@ template <int numberOfVertices>
 LineSegments Polygon<numberOfVertices>::getLineSegments() const {
     LineSegments lineSegments;
     int sizeMinusOne = static_cast<int>(m_vertices.size()) - 1;
-    for (int i = 0; i < sizeMinusOne; i++) {
+    for (int i = 0; i < sizeMinusOne; ++i) {
         lineSegments.emplace_back(m_vertices[i], m_vertices[i + 1]);
     }
     lineSegments.emplace_back(m_vertices[sizeMinusOne], m_vertices[0]);
@@ -67,7 +67,7 @@ template <int numberOfVertices>
 typename Polygon<numberOfVertices>::Distances Polygon<numberOfVertices>::getLengthOfSides() const {
     Distances lengthOfSides;
     int sizeMinusOne = static_cast<int>(m_vertices.size()) - 1;
-    for (int i = 0; i < sizeMinusOne; i++) {
+    for (int i = 0; i < sizeMinusOne; ++i) {
         lengthOfSides[i] = getDistance(m_vertices[i], m_vertices[i + 1]);
     }
     lengthOfSides[sizeMinusOne] = getDistance(m_vertices[sizeMinusOne], m_vertices[0]);
@@ -85,7 +85,7 @@ AlbaAngles Polygon<numberOfVertices>::getAnglesAtVertices() const {
     int sizeMinusOne = static_cast<int>(m_vertices.size()) - 1;
     anglesAtVertices.emplace_back(
         getTheInnerAngleUsingThreePoints(m_vertices[0], m_vertices[sizeMinusOne], m_vertices[1]));
-    for (int i = 1; i < sizeMinusOne; i++) {
+    for (int i = 1; i < sizeMinusOne; ++i) {
         anglesAtVertices.emplace_back(
             getTheInnerAngleUsingThreePoints(m_vertices[i], m_vertices[i - 1], m_vertices[i + 1]));
     }
@@ -103,7 +103,7 @@ template <int numberOfVertices>
 Points Polygon<numberOfVertices>::getPoints(double const interval) const {
     Points points;
     int sizeMinusOne = static_cast<int>(m_vertices.size()) - 1;
-    for (int i = 0; i < sizeMinusOne; i++) {
+    for (int i = 0; i < sizeMinusOne; ++i) {
         getPointsFromVerticesWithoutLastPoint(points, interval, i, i + 1);
     }
     getPointsFromVerticesWithoutLastPoint(points, interval, sizeMinusOne, 0);

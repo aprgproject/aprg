@@ -23,7 +23,7 @@ public:
             while (didSwapHappened || gap > 1) {
                 didSwapHappened = false;
                 gap = getNextGapValue(gap);
-                for (int i = 0; i < size - gap; i++) {
+                for (int i = 0; i < size - gap; ++i) {
                     if (valuesToSort[i] > valuesToSort[i + gap]) {
                         didSwapHappened = true;
                         std::swap(valuesToSort[i], valuesToSort[i + gap]);

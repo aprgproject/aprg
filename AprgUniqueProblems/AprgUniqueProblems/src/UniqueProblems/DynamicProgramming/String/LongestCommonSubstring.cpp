@@ -11,8 +11,8 @@ LongestCommonSubstring::LongestCommonSubstring(string const& string1, string con
 
 LongestCommonSubstring::Count LongestCommonSubstring::getLongestCommonSubstringLengthUsingNaiveRecursion() const {
     Index maxLength = 0;
-    for (Index index2 = 0; index2 < static_cast<int>(m_string2.length()); index2++) {
-        for (Index index1 = 0; index1 < static_cast<int>(m_string1.length()); index1++) {
+    for (Index index2 = 0; index2 < static_cast<int>(m_string2.length()); ++index2) {
+        for (Index index1 = 0; index1 < static_cast<int>(m_string1.length()); ++index1) {
             if (m_string1[index1] == m_string2[index2]) {
                 Index length = getLongestCommonSubstringLengthUsingNaiveRecursion(index1, index2);
                 maxLength = max(maxLength, length);
@@ -25,8 +25,8 @@ LongestCommonSubstring::Count LongestCommonSubstring::getLongestCommonSubstringL
 LongestCommonSubstring::Count LongestCommonSubstring::getLongestCommonSubstringLengthUsingMemoizationDP() const {
     Index maxLength = 0;
     CountGrid lengthGrid(m_string1.length(), m_string2.length(), UNUSED_INDEX);
-    for (Index index2 = 0; index2 < static_cast<int>(m_string2.length()); index2++) {
-        for (Index index1 = 0; index1 < static_cast<int>(m_string1.length()); index1++) {
+    for (Index index2 = 0; index2 < static_cast<int>(m_string2.length()); ++index2) {
+        for (Index index1 = 0; index1 < static_cast<int>(m_string1.length()); ++index1) {
             if (m_string1[index1] == m_string2[index2]) {
                 Index length = getLongestCommonSubstringLengthUsingMemoizationDP(lengthGrid, index1, index2);
                 maxLength = max(maxLength, length);
@@ -39,8 +39,8 @@ LongestCommonSubstring::Count LongestCommonSubstring::getLongestCommonSubstringL
 LongestCommonSubstring::Count LongestCommonSubstring::getLongestCommonSubstringLengthUsingIterativeDP() const {
     Index maxLength = 0;
     CountGrid lengthGrid(m_string1.length(), m_string2.length(), 0);
-    for (Index index2 = 0; index2 < static_cast<int>(m_string2.length()); index2++) {
-        for (Index index1 = 0; index1 < static_cast<int>(m_string1.length()); index1++) {
+    for (Index index2 = 0; index2 < static_cast<int>(m_string2.length()); ++index2) {
+        for (Index index1 = 0; index1 < static_cast<int>(m_string1.length()); ++index1) {
             if (m_string1[index1] == m_string2[index2]) {
                 Index length = 0;
                 if (index1 == 0 || index2 == 0) {
@@ -60,8 +60,8 @@ LongestCommonSubstring::Count LongestCommonSubstring::getLongestCommonSubstringL
     const {
     Index maxLength = 0;
     Counts previousLengths(m_string1.length(), 0);
-    for (Index index2 = 0; index2 < static_cast<int>(m_string2.length()); index2++) {
-        for (Index index1 = static_cast<int>(m_string1.length()) - 1; index1 >= 0; index1--) {
+    for (Index index2 = 0; index2 < static_cast<int>(m_string2.length()); ++index2) {
+        for (Index index1 = static_cast<int>(m_string1.length()) - 1; index1 >= 0; --index1) {
             if (m_string1[index1] == m_string2[index2]) {
                 Index length = 0;
                 if (index1 == 0 || index2 == 0) {
@@ -83,8 +83,8 @@ string LongestCommonSubstring::getLongestCommonSubstringUsingIterativeDPAndSpace
     Index maxLength = 0;
     Index endIndexWithMaxLength = 0;
     Counts previousLengths(m_string1.length(), 0);
-    for (Index index2 = 0; index2 < static_cast<int>(m_string2.length()); index2++) {
-        for (Index index1 = static_cast<int>(m_string1.length()) - 1; index1 >= 0; index1--) {
+    for (Index index2 = 0; index2 < static_cast<int>(m_string2.length()); ++index2) {
+        for (Index index1 = static_cast<int>(m_string1.length()) - 1; index1 >= 0; --index1) {
             if (m_string1[index1] == m_string2[index2]) {
                 Index length = 0;
                 if (index1 == 0 || index2 == 0) {

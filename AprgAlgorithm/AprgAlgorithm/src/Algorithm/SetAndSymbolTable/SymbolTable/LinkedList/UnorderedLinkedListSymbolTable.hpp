@@ -40,7 +40,7 @@ public:
         if (!isKeyFound) {
             NodeUniquePointer newNext(std::move(b_first));
             b_first.reset(new Node{key, value, std::move(newNext)});
-            b_size++;
+            ++b_size;
         }
     }
 

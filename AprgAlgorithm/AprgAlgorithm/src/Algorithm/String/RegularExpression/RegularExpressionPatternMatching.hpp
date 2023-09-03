@@ -24,7 +24,7 @@ public:
         Indexes nullTransitionStates(getNullTransitionsStates({0}));  // start from first index
         Index checkLength(stringToCheck.size());
         Index lengthOfRE(m_regularExpression.size());
-        for (Index checkIndex = 0; !isEndReached && checkIndex < checkLength; checkIndex++) {
+        for (Index checkIndex = 0; !isEndReached && checkIndex < checkLength; ++checkIndex) {
             Indexes nextStatesFromAMatch;
             for (Index const nullTransitionState : nullTransitionStates) {
                 if (nullTransitionState < lengthOfRE) {
@@ -70,7 +70,7 @@ private:
     void buildNullTransitionsGraph() {
         std::stack<Index> operatorIndexes;
         Index lengthOfRE(m_regularExpression.length());
-        for (Index indexOfRE = 0; indexOfRE < lengthOfRE; indexOfRE++) {
+        for (Index indexOfRE = 0; indexOfRE < lengthOfRE; ++indexOfRE) {
             Index startIndexOfExpression = indexOfRE;
             if (m_regularExpression[indexOfRE] == '(' || m_regularExpression[indexOfRE] == '|') {
                 operatorIndexes.push(indexOfRE);  // push to stack if '(' or '|'

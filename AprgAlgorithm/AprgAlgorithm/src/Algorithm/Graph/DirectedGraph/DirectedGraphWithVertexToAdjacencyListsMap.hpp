@@ -63,14 +63,14 @@ public:
 
     void connect(Vertex const& sourceVertex, Vertex const& destinationVertex) override {
         if (!isDirectlyConnected(sourceVertex, destinationVertex)) {
-            m_numberOfEdges++;
+            ++m_numberOfEdges;
             m_adjacencyLists[sourceVertex].emplace(destinationVertex);
         }
     }
 
     void disconnect(Vertex const& sourceVertex, Vertex const& destinationVertex) override {
         if (isDirectlyConnected(sourceVertex, destinationVertex)) {
-            m_numberOfEdges--;
+            --m_numberOfEdges;
             m_adjacencyLists[sourceVertex].erase(destinationVertex);
         }
     }

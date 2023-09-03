@@ -37,7 +37,7 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFro
     for (auto const& [variableName, term] : m_variableNameToTermMap) {
         if (variableName == variable.getVariableName()) {
             lastVariableNameFound = variableName;
-            numberOfTimesFound++;
+            ++numberOfTimesFound;
         }
     }
     saveTerm(Term(variable), numberOfTimesFound, lastVariableNameFound);
@@ -49,7 +49,7 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFro
     for (auto const& [variableName, term] : m_variableNameToTermMap) {
         if (monomial.getExponentForVariable(variableName) != 0) {
             lastVariableNameFound = variableName;
-            numberOfTimesFound++;
+            ++numberOfTimesFound;
         }
     }
     saveTerm(Term(monomial), numberOfTimesFound, lastVariableNameFound);
@@ -74,7 +74,7 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFro
         for (auto const& [variableName, term] : m_variableNameToTermMap) {
             if (namesInExpression.find(variableName) != namesInExpression.cend()) {
                 lastVariableNameFound = variableName;
-                numberOfTimesFound++;
+                ++numberOfTimesFound;
             }
         }
         saveTerm(Term(expression), numberOfTimesFound, lastVariableNameFound);
@@ -91,7 +91,7 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFro
     for (auto const& [variableName, term] : m_variableNameToTermMap) {
         if (namesInFunction.find(variableName) != namesInFunction.cend()) {
             lastVariableNameFound = variableName;
-            numberOfTimesFound++;
+            ++numberOfTimesFound;
         }
     }
     saveTerm(Term(functionObject), numberOfTimesFound, lastVariableNameFound);

@@ -112,7 +112,7 @@ AlbaNumber getGcfOfConstants(AlbaNumbers const& constantFactorsPerAddends) {
     AlbaNumber constantGcf;
     if (!constantFactorsPerAddends.empty()) {
         constantGcf = constantFactorsPerAddends.front();
-        for (auto it = constantFactorsPerAddends.cbegin() + 1; it != constantFactorsPerAddends.cend(); it++) {
+        for (auto it = constantFactorsPerAddends.cbegin() + 1; it != constantFactorsPerAddends.cend(); ++it) {
             constantGcf = getGreatestCommonFactor(constantGcf, *it);
         }
     }
@@ -123,7 +123,7 @@ void retrieveCommonNonConstantFactors(
     TermsRaiseToNumbers& commonNonConstantFactors, vector<TermsRaiseToNumbers> const& nonConstantFactorsPerAddends) {
     if (!nonConstantFactorsPerAddends.empty()) {
         commonNonConstantFactors = nonConstantFactorsPerAddends.front();
-        for (auto it = nonConstantFactorsPerAddends.cbegin() + 1; it != nonConstantFactorsPerAddends.cend(); it++) {
+        for (auto it = nonConstantFactorsPerAddends.cbegin() + 1; it != nonConstantFactorsPerAddends.cend(); ++it) {
             for (auto const& [base, exponentAtCommonFactor] : commonNonConstantFactors.getBaseToExponentMap()) {
                 AlbaNumber exponentAtAddend(it->getExponentOfBase(base));
                 if (exponentAtAddend > 0) {
@@ -151,7 +151,7 @@ TermsRaiseToNumbers getFactorizedItemsForAdditionAndSubtraction(
     for (int i = 0;
          i < static_cast<int>(constantFactorsPerAddends.size()) &&
          i < static_cast<int>(nonConstantFactorsPerAddends.size()) && i < static_cast<int>(originalAddends.size());
-         i++) {
+         ++i) {
         TermsWithDetails innerMultipliers;
         putRemainingConstantFactorAsAnInnerMultiplier(innerMultipliers, constantFactorsPerAddends[i], constantGcf);
         putRemainingNonConstantFactorsAsInnerMultipliers(

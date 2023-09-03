@@ -91,17 +91,17 @@ public:
         table.setBorders("-", "|");
         table.addRow();
         table.getLastRow().addCell(" ");
-        for (int c = 0; c < RADIX; c++) {
+        for (int c = 0; c < RADIX; ++c) {
             if (stringHelper::isDisplayableCharacter(c)) {
                 table.getLastRow().addCell(stringHelper::convertToString(static_cast<char>(c)));
             } else {
                 table.getLastRow().addCell(" ");
             }
         }
-        for (int y = 0; y < m_nodePointerMatrix.getNumberOfRows(); y++) {
+        for (int y = 0; y < m_nodePointerMatrix.getNumberOfRows(); ++y) {
             table.addRow();
             table.getLastRow().addCell(stringHelper::convertToString(y));
-            for (int x = 0; x < m_nodePointerMatrix.getNumberOfColumns(); x++) {
+            for (int x = 0; x < m_nodePointerMatrix.getNumberOfColumns(); ++x) {
                 NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(x, y).getObject());
                 if (nodePointer) {
                     table.getLastRow().addCell(stringHelper::convertToString(nodePointer->nextNodeId));
@@ -122,7 +122,7 @@ private:
 
     [[nodiscard]] bool isNodeEmpty(NodeId const nodeId) const {
         bool result(true);
-        for (int c = 0; result && c < RADIX; c++) {
+        for (int c = 0; result && c < RADIX; ++c) {
             NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, nodeId));
             result = result && !nodePointer;
         }
@@ -145,7 +145,7 @@ private:
     [[nodiscard]] Coordinate getCoordinate(NodeId const nodeId, Key const& key, int const startingIndex) const {
         Coordinate result{INVALID_NODE_ID, 0};
         NodeId currentNodeId(nodeId);
-        for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); keyIndex++) {
+        for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); ++keyIndex) {
             bool isNextNodeFound(false);
             if (isValidNodeId(currentNodeId)) {
                 char c(key[keyIndex]);
@@ -169,7 +169,7 @@ private:
         NodeId const nodeId, Key const& key, int const startingIndex) const {
         ValueUniquePointer result;
         NodeId currentNodeId(nodeId);
-        for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); keyIndex++) {
+        for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); ++keyIndex) {
             bool isNextNodeFound(false);
             if (isValidNodeId(currentNodeId)) {
                 char c(key[keyIndex]);
@@ -194,7 +194,7 @@ private:
         NodeId const nodeId, Key const& keyToCheck, int const startingIndex) const {
         int currentLongestLength(0);
         NodeId currentNodeId(nodeId);
-        for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(keyToCheck.length()); keyIndex++) {
+        for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(keyToCheck.length()); ++keyIndex) {
             bool isNextNodeFound(false);
             if (isValidNodeId(currentNodeId)) {
                 char c(keyToCheck[keyIndex]);
@@ -217,7 +217,7 @@ private:
 
     void collectAllKeysAtNode(NodeId const nodeId, std::string const& previousPrefix, Strings& collectedKeys) const {
         if (isValidNodeId(nodeId)) {
-            for (int c = 0; c < RADIX; c++) {
+            for (int c = 0; c < RADIX; ++c) {
                 NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, nodeId));
                 if (nodePointer) {
                     std::string newPrefix(previousPrefix + static_cast<char>(c));
@@ -238,7 +238,7 @@ private:
             int prefixLength = previousPrefix.length();
             if (prefixLength < static_cast<NodeId>(patternToMatch.length())) {
                 char charToMatch = patternToMatch[prefixLength];
-                for (int c = 0; c < RADIX; c++) {
+                for (int c = 0; c < RADIX; ++c) {
                     if ('.' == charToMatch || charToMatch == static_cast<char>(c)) {
                         NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, nodeId));
                         if (nodePointer) {
@@ -261,7 +261,7 @@ private:
 
     void put(NodeId const nodeId, Key const& key, Value const& value, int const startingIndex) {
         NodeId currentNodeId(nodeId);
-        for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); keyIndex++) {
+        for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); ++keyIndex) {
             char c(key[keyIndex]);
             NodePointer& nodePointer(m_nodePointerMatrix.getEntryReference(c, currentNodeId));
             if (!nodePointer) {
@@ -273,7 +273,7 @@ private:
                 if (valueUniquePointer) {
                     *valueUniquePointer = value;
                 } else {
-                    m_size++;
+                    ++m_size;
                     valueUniquePointer = std::make_unique<Value>(value);
                 }
             } else if (nodePointer->nextNodeId == INVALID_NODE_ID) {
@@ -288,7 +288,7 @@ private:
         bool isDeleted(false);
         NodeId currentNodeId(nodeId);
         Coordinates traversedCoordinates;
-        for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); keyIndex++) {
+        for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); ++keyIndex) {
             bool isNextNodeFound(false);
             if (isValidNodeId(currentNodeId)) {
                 char c(key[keyIndex]);
@@ -299,7 +299,7 @@ private:
                     currentNodeId = nodePointer->nextNodeId;
                     ValueUniquePointer& valueUniquePointer(nodePointer->valueUniquePointer);
                     if (keyIndex + 1 == static_cast<NodeId>(key.length()) && valueUniquePointer) {
-                        m_size--;
+                        --m_size;
                         isDeleted = true;
                         valueUniquePointer.reset();
                         if (nodePointer->nextNodeId == INVALID_NODE_ID) {
@@ -317,7 +317,7 @@ private:
             NodeId previousNodeId(lastCoordinate.second);
             bool isPreviousNodeEmpty(isNodeEmpty(previousNodeId));
             addToUnusedNodesIfNeeded(previousNodeId, isPreviousNodeEmpty);
-            for (auto it = traversedCoordinates.crbegin() + 1; it != traversedCoordinates.crend(); it++) {
+            for (auto it = traversedCoordinates.crbegin() + 1; it != traversedCoordinates.crend(); ++it) {
                 Coordinate const& coordinate(*it);
                 if (isPreviousNodeEmpty) {
                     NodePointer& nodePointer(

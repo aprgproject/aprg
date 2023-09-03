@@ -29,7 +29,7 @@ public:
     [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
         Vertices result;
         Vertex numberOfRows(m_adjacencyMatrix.getNumberOfRows());
-        for (Vertex possibleAdjacentVertex = 0; possibleAdjacentVertex < numberOfRows; possibleAdjacentVertex++) {
+        for (Vertex possibleAdjacentVertex = 0; possibleAdjacentVertex < numberOfRows; ++possibleAdjacentVertex) {
             if (isDirectlyConnected(vertex, possibleAdjacentVertex)) {
                 result.emplace_back(possibleAdjacentVertex);
             }
@@ -42,8 +42,8 @@ public:
 
         Vertex numberOfColumns(m_adjacencyMatrix.getNumberOfColumns());
         Vertex numberOfRows(m_adjacencyMatrix.getNumberOfRows());
-        for (Vertex vertex1 = 0; vertex1 < numberOfColumns; vertex1++) {
-            for (Vertex vertex2 = 0; vertex2 < numberOfRows; vertex2++) {
+        for (Vertex vertex1 = 0; vertex1 < numberOfColumns; ++vertex1) {
+            for (Vertex vertex2 = 0; vertex2 < numberOfRows; ++vertex2) {
                 if (isDirectlyConnected(vertex1, vertex2)) {
                     isVertexIncluded[vertex1] = true;
                     isVertexIncluded[vertex2] = true;
@@ -52,7 +52,7 @@ public:
         }
 
         Vertices result;
-        for (Vertex vertex = 0; vertex < MAX_VERTEX_VALUE; vertex++) {
+        for (Vertex vertex = 0; vertex < MAX_VERTEX_VALUE; ++vertex) {
             if (isVertexIncluded[vertex]) {
                 result.emplace_back(vertex);
             }
@@ -64,8 +64,8 @@ public:
         Edges result;
         Vertex numberOfColumns(m_adjacencyMatrix.getNumberOfColumns());
         Vertex numberOfRows(m_adjacencyMatrix.getNumberOfRows());
-        for (Vertex vertex1 = 0; vertex1 < numberOfColumns; vertex1++) {
-            for (Vertex vertex2 = 0; vertex2 < numberOfRows; vertex2++) {
+        for (Vertex vertex1 = 0; vertex1 < numberOfColumns; ++vertex1) {
+            for (Vertex vertex2 = 0; vertex2 < numberOfRows; ++vertex2) {
                 if (isDirectlyConnected(vertex1, vertex2)) {
                     result.emplace_back(vertex1, vertex2);
                 }
@@ -78,14 +78,14 @@ public:
 
     void connect(Vertex const& vertex1, Vertex const& vertex2) override {
         if (!isDirectlyConnected(vertex1, vertex2)) {
-            m_numberOfEdges++;
+            ++m_numberOfEdges;
             m_adjacencyMatrix.setEntry(vertex1, vertex2, true);
         }
     }
 
     void disconnect(Vertex const& vertex1, Vertex const& vertex2) override {
         if (isDirectlyConnected(vertex1, vertex2)) {
-            m_numberOfEdges--;
+            --m_numberOfEdges;
             m_adjacencyMatrix.setEntry(vertex1, vertex2, false);
         }
     }
@@ -99,7 +99,7 @@ protected:
     friend std::ostream& operator<<(std::ostream& out, DirectedGraphWithAdjacencyMatrix const& graph) {
         matrix::AlbaMatrix<std::string> matrixToDisplay(MAX_VERTEX_VALUE + 1, MAX_VERTEX_VALUE + 1);
         matrixToDisplay.setEntry(0, 0, "X");
-        for (int i = 0; i < MAX_VERTEX_VALUE; i++) {
+        for (int i = 0; i < MAX_VERTEX_VALUE; ++i) {
             matrixToDisplay.setEntry(i + 1, 0, std::string("[") + stringHelper::convertToString(i) + std::string("]"));
             matrixToDisplay.setEntry(0, i + 1, std::string("[") + stringHelper::convertToString(i) + std::string("]"));
         }

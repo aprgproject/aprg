@@ -36,16 +36,16 @@ void KnightsTour::initialize() {
 }
 
 void KnightsTour::initializeNeighborMatrix() {
-    for (int y = 0; y < static_cast<int>(m_chessBoardY); y++) {
-        for (int x = 0; x < static_cast<int>(m_chessBoardX); x++) {
+    for (int y = 0; y < static_cast<int>(m_chessBoardY); ++y) {
+        for (int x = 0; x < static_cast<int>(m_chessBoardX); ++x) {
             m_neighborMatrix.setEntry(x, y, countNumberOfNeighbors(x, y));
         }
     }
 }
 
 void KnightsTour::initializeGraph() {
-    for (int y = 0; y < static_cast<int>(m_chessBoardY); y++) {
-        for (int x = 0; x < static_cast<int>(m_chessBoardX); x++) {
+    for (int y = 0; y < static_cast<int>(m_chessBoardY); ++y) {
+        for (int x = 0; x < static_cast<int>(m_chessBoardX); ++x) {
             connectAllAt(x, y);
         }
     }
@@ -87,28 +87,28 @@ int KnightsTour::getNumberOfNeighbors(int const x, int const y) const { return m
 int KnightsTour::countNumberOfNeighbors(int const x, int const y) const {
     int numberOfNeighbors(0);
     if (isInside(x - 2, y - 1)) {
-        numberOfNeighbors++;
+        ++numberOfNeighbors;
     }
     if (isInside(x - 2, y + 1)) {
-        numberOfNeighbors++;
+        ++numberOfNeighbors;
     }
     if (isInside(x - 1, y - 2)) {
-        numberOfNeighbors++;
+        ++numberOfNeighbors;
     }
     if (isInside(x - 1, y + 2)) {
-        numberOfNeighbors++;
+        ++numberOfNeighbors;
     }
     if (isInside(x + 1, y - 2)) {
-        numberOfNeighbors++;
+        ++numberOfNeighbors;
     }
     if (isInside(x + 1, y + 2)) {
-        numberOfNeighbors++;
+        ++numberOfNeighbors;
     }
     if (isInside(x + 2, y - 1)) {
-        numberOfNeighbors++;
+        ++numberOfNeighbors;
     }
     if (isInside(x + 2, y + 1)) {
-        numberOfNeighbors++;
+        ++numberOfNeighbors;
     }
     return numberOfNeighbors;
 }

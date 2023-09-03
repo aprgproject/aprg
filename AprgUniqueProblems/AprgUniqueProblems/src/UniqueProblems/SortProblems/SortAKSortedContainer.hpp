@@ -23,7 +23,7 @@ public:
 
             int sortedIndex(0);
             for (int newPqIndex = maximumDistanceFromCorrectPosition + 1;
-                 newPqIndex < static_cast<int>(valuesToSort.size()); newPqIndex++) {
+                 newPqIndex < static_cast<int>(valuesToSort.size()); ++newPqIndex) {
                 valuesToSort[sortedIndex++] = pq.top();
                 pq.pop();
                 pq.push(valuesToSort[newPqIndex]);

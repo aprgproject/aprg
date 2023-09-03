@@ -15,7 +15,7 @@ public:
 
     void sort(Values& valuesToSort) const override {
         if (!valuesToSort.empty()) {
-            for (auto insertIt = std::next(valuesToSort.begin()); insertIt != valuesToSort.end(); insertIt++) {
+            for (auto insertIt = std::next(valuesToSort.begin()); insertIt != valuesToSort.end(); ++insertIt) {
                 continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
                 // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
             }
@@ -27,7 +27,7 @@ private:
         auto rItLow = std::make_reverse_iterator(insertIt);  // make_reverse_iterator moves it by one
         auto rItHigh = std::prev(rItLow);                    // move it back to original place (same as insert It)
         // so final the stiuation here is rItLow < rItHigh and insertIt
-        for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; rItLow++, rItHigh++) {
+        for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; ++rItLow, ++rItHigh) {
             std::swap(*rItLow, *rItHigh);
         }
     }
@@ -38,7 +38,7 @@ private:
         auto insertItem = *insertIt;
         auto rItLow = std::make_reverse_iterator(insertIt);  // make_reverse_iterator moves it by one
         // so final the stiuation here is rItLow < insertIt
-        for (; rItLow != valuesToSort.rend() && *rItLow > insertItem; rItLow++) {
+        for (; rItLow != valuesToSort.rend() && *rItLow > insertItem; ++rItLow) {
             *std::prev(rItLow) = *rItLow;  // move
         }
         *std::prev(rItLow) = insertItem;

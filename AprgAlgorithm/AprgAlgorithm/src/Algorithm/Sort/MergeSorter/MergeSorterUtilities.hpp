@@ -12,7 +12,7 @@ void mergeTheTwoSortedParts(
     int mainIndex = lowest;
     int lowPartIndex = lowest;
     int highPartIndex = middle + 1;
-    for (; mainIndex <= highest && lowPartIndex <= middle && highPartIndex <= highest; mainIndex++) {
+    for (; mainIndex <= highest && lowPartIndex <= middle && highPartIndex <= highest; ++mainIndex) {
         if (auxiliary[highPartIndex] < auxiliary[lowPartIndex]) {  // high part has lower value
             valuesToSort[mainIndex] = auxiliary[highPartIndex++];  // copy and move high index
         } else {

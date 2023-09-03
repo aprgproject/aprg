@@ -21,7 +21,7 @@ void findDistinctNonConsecutiveFibonacciNumbersForSum(
     bool& isComplete, UnsignedIntegers& fibonaccisForSum, UnsignedIntegers const& fibonaccis, UnsignedInteger const sum,
     UnsignedInteger const index) {
     // This can be improved by dynamic programming
-    for (UnsignedInteger i = index; i < fibonaccis.size(); i++) {
+    for (UnsignedInteger i = index; i < fibonaccis.size(); ++i) {
         UnsignedInteger fibonacci(fibonaccis[i]);
         if (sum > fibonacci) {
             fibonaccisForSum.emplace_back(fibonacci);
@@ -74,7 +74,7 @@ bool isALuckyNumber(UnsignedInteger const number) {
             break;
         }
         remainingValue = remainingValue - (remainingValue / removedNumber);
-        removedNumber++;
+        ++removedNumber;
     }
     return result;
 }
@@ -86,7 +86,7 @@ bool isLagrangeTheoremTrue(UnsignedInteger const number) {
     auto maxElement = static_cast<UnsignedInteger>(pow(number, 0.5));  // max element is square root
     UnsignedIntegers squaredElements;
     squaredElements.reserve(maxElement - 1);
-    for (UnsignedInteger i = 1; i < maxElement; i++) {
+    for (UnsignedInteger i = 1; i < maxElement; ++i) {
         squaredElements.emplace_back(i * i);
     }
 
@@ -125,7 +125,7 @@ UnsignedInteger getNthFibonacciNumber(UnsignedInteger const number) {
     }
     UnsignedInteger previousFibonacci(0);
     UnsignedInteger currentFibonacci(1);
-    for (UnsignedInteger n = 2; n <= number; n++) {
+    for (UnsignedInteger n = 2; n <= number; ++n) {
         UnsignedInteger nextFibonacci = currentFibonacci + previousFibonacci;
         previousFibonacci = currentFibonacci;
         currentFibonacci = nextFibonacci;

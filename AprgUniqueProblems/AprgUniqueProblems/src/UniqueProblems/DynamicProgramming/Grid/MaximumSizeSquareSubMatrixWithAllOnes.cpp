@@ -15,8 +15,8 @@ MaximumSizeSquareSubMatrixWithAllOnes::getMaximumSquareAreaUsingMemoizationDP() 
     Unit result(0);
     if (!m_booleanMatrix.isEmpty()) {
         UnitMatrix sideMatrix(m_booleanMatrix.getNumberOfColumns(), m_booleanMatrix.getNumberOfRows(), UNUSED_UNIT);
-        for (int x = static_cast<int>(sideMatrix.getNumberOfColumns() - 1); x >= 0; x--) {
-            for (int y = static_cast<int>(sideMatrix.getNumberOfRows() - 1); y >= 0; y--) {
+        for (int x = static_cast<int>(sideMatrix.getNumberOfColumns() - 1); x >= 0; --x) {
+            for (int y = static_cast<int>(sideMatrix.getNumberOfRows() - 1); y >= 0; --y) {
                 getMaximumSideUsingMemoizationDP(sideMatrix, x, y);
             }
         }
@@ -52,10 +52,10 @@ MaximumSizeSquareSubMatrixWithAllOnes::getMaximumSquareAreaUsingIterativeDP() co
                 int leftY = static_cast<int>(y - maxSideOfSmallerSquare);
 
                 bool areAllOnes(true);
-                for (int i = static_cast<int>(x - 1); areAllOnes && i >= upX; i--) {
+                for (int i = static_cast<int>(x - 1); areAllOnes && i >= upX; --i) {
                     areAllOnes = areAllOnes && m_booleanMatrix.getEntry(i, y);
                 }
-                for (int i = static_cast<int>(y - 1); areAllOnes && i >= leftY; i--) {
+                for (int i = static_cast<int>(y - 1); areAllOnes && i >= leftY; --i) {
                     areAllOnes = areAllOnes && m_booleanMatrix.getEntry(x, i);
                 }
                 entryResult = areAllOnes ? maxSideOfSmallerSquare + 1 : 1;
@@ -84,15 +84,15 @@ MaximumSizeSquareSubMatrixWithAllOnes::getMaximumSquareAreaUsingIterativeDPAndTi
     if (!m_booleanMatrix.isEmpty()) {
         UnitMatrix sideMatrix(m_booleanMatrix.getNumberOfColumns(), m_booleanMatrix.getNumberOfRows());
 
-        for (Index x = 0; x < static_cast<Index>(m_booleanMatrix.getNumberOfColumns()); x++) {
+        for (Index x = 0; x < static_cast<Index>(m_booleanMatrix.getNumberOfColumns()); ++x) {
             sideMatrix.setEntry(x, 0, getUnitAt(x, 0));
         }
-        for (Index y = 0; y < static_cast<Index>(m_booleanMatrix.getNumberOfRows()); y++) {
+        for (Index y = 0; y < static_cast<Index>(m_booleanMatrix.getNumberOfRows()); ++y) {
             sideMatrix.setEntry(0, y, getUnitAt(0, y));
         }
 
-        for (Index x = 1; x < static_cast<Index>(m_booleanMatrix.getNumberOfColumns()); x++) {
-            for (Index y = 1; y < static_cast<Index>(m_booleanMatrix.getNumberOfRows()); y++) {
+        for (Index x = 1; x < static_cast<Index>(m_booleanMatrix.getNumberOfColumns()); ++x) {
+            for (Index y = 1; y < static_cast<Index>(m_booleanMatrix.getNumberOfRows()); ++y) {
                 Unit entryResult(0);
                 if (m_booleanMatrix.getEntry(x, y)) {
                     entryResult = 1 + min(min(sideMatrix.getEntry(x - 1, y - 1), sideMatrix.getEntry(x, y - 1)),
@@ -124,10 +124,10 @@ MaximumSizeSquareSubMatrixWithAllOnes::Unit MaximumSizeSquareSubMatrixWithAllOne
             int leftY = static_cast<int>(y - maxSideOfSmallerSquare);
 
             bool areAllOnes(true);
-            for (int i = static_cast<int>(x - 1); areAllOnes && i >= upX; i--) {
+            for (int i = static_cast<int>(x - 1); areAllOnes && i >= upX; --i) {
                 areAllOnes = areAllOnes && m_booleanMatrix.getEntry(i, y);
             }
-            for (int i = static_cast<int>(y - 1); areAllOnes && i >= leftY; i--) {
+            for (int i = static_cast<int>(y - 1); areAllOnes && i >= leftY; --i) {
                 areAllOnes = areAllOnes && m_booleanMatrix.getEntry(x, i);
             }
             result = areAllOnes ? maxSideOfSmallerSquare + 1 : 1;

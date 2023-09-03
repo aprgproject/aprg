@@ -13,11 +13,11 @@ ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingMemoizationDP() 
     Price result(0);
     if (!m_pricesInDayByProduct.isEmpty()) {
         PriceMatrix minimumPrices(getNumberOfDays(), getNumberOfProductsSubsets(), static_cast<Price>(UNUSED_PRICE));
-        for (Day day = 0; day < getNumberOfDays(); day++)  // set zero cost on empty product bits
+        for (Day day = 0; day < getNumberOfDays(); ++day)  // set zero cost on empty product bits
         {
             minimumPrices.setEntry(day, 0, 0);
         }
-        for (Product product = 0; product < getNumberOfProducts(); product++)  // fill up first day
+        for (Product product = 0; product < getNumberOfProducts(); ++product)  // fill up first day
         {
             minimumPrices.setEntry(0, getProductBits(product), m_pricesInDayByProduct.getEntry(0, product));
         }
@@ -31,23 +31,23 @@ ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingIterativeDP() co
     // set half max to all entries (half max because theres addition so values might exceed if we use max)
     PriceMatrix minimumPrices(getNumberOfDays(), getNumberOfProductsSubsets(), static_cast<Price>(UNUSED_PRICE));
 
-    for (Day day = 0; day < getNumberOfDays(); day++)  // set zero cost on empty product bits
+    for (Day day = 0; day < getNumberOfDays(); ++day)  // set zero cost on empty product bits
     {
         minimumPrices.setEntry(day, 0, 0);
     }
 
-    for (Product product = 0; product < getNumberOfProducts(); product++)  // fill up first day
+    for (Product product = 0; product < getNumberOfProducts(); ++product)  // fill up first day
     {
         minimumPrices.setEntry(0, getProductBits(product), m_pricesInDayByProduct.getEntry(0, product));
     }
 
-    for (Day day = 1; day < getNumberOfDays(); day++)  // fill up remaining days using dynamic programming
+    for (Day day = 1; day < getNumberOfDays(); ++day)  // fill up remaining days using dynamic programming
     {
         // productBits representation: 0 not included, 1 is included
-        for (ProductBits productBits = 0; productBits < getNumberOfProductsSubsets(); productBits++) {
+        for (ProductBits productBits = 0; productBits < getNumberOfProductsSubsets(); ++productBits) {
             minimumPrices.setEntry(
                 day, productBits, minimumPrices.getEntry(day - 1, productBits));  // put total of previous day
-            for (Product product = 0; product < getNumberOfProducts(); product++) {
+            for (Product product = 0; product < getNumberOfProducts(); ++product) {
                 if (isProductIncluded(productBits, product)) {
                     Price previousDayWithoutProduct =
                         minimumPrices.getEntry(day - 1, removeProduct(productBits, product));
@@ -79,7 +79,7 @@ ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingMemoizationDP(
         if (UNUSED_PRICE == result) {
             // put total of previous day
             result = getMinimumPriceUsingMemoizationDP(minimumPrices, day - 1, productBits);
-            for (Product product = 0; product < getNumberOfProducts(); product++) {
+            for (Product product = 0; product < getNumberOfProducts(); ++product) {
                 if (isProductIncluded(productBits, product)) {
                     Price previousDayWithoutProduct =
                         getMinimumPriceUsingMemoizationDP(minimumPrices, day - 1, removeProduct(productBits, product));

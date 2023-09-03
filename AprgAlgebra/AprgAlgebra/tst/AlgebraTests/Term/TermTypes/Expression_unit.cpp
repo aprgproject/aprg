@@ -606,7 +606,7 @@ TEST(ExpressionTest, PutTermWithMultiplicationUsingExpressionWithSameOperationLe
     expression5.putTermWithMultiplicationIfNeeded(Term(expressionToApply));
 
     Expression expressionToExpect1(createExpressionIfPossible({"x", "/", "y"}));
-    const Expression& expressionToExpect2(expressionToExpect1);
+    Expression const& expressionToExpect2(expressionToExpect1);
     Expression expressionToExpect3(createExpressionIfPossible({"(", "-", 1, ")", "*", expressionToExpect1}));
     Expression expressionToExpect4(createExpressionIfPossible({695, "*", "interest", "*", "x", "/", "y"}));
     Expression expressionToExpect5(
@@ -635,7 +635,7 @@ TEST(ExpressionTest, PutTermWithMultiplicationUsingExpressionWithDifferentOperat
     Expression subExpression1(createExpressionIfPossible({"x", "-", "y"}));
     Expression subExpression2(createExpressionIfPossible({695, "+", "interest"}));
     Expression expressionToExpect1(createExpressionIfPossible({"x", "-", "y"}));
-    const Expression& expressionToExpect2(expressionToExpect1);
+    Expression const& expressionToExpect2(expressionToExpect1);
     Expression expressionToExpect3(createExpressionIfPossible({"(", "-", 1, ")", "*", expressionToExpect1}));
     Expression expressionToExpect4(createExpressionIfPossible({695, "*", "interest", "*", subExpression1}));
     Expression expressionToExpect5(createExpressionIfPossible({subExpression2, "*", subExpression1}));

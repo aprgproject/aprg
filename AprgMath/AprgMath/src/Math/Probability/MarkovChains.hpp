@@ -48,7 +48,7 @@ public:
     ProbabilityDistribution getNextProbabilityDistribution(
         ProbabilityDistribution const& current, int const numberOfSteps) {
         ProbabilityDistribution result(current);
-        for (int i = 0; i < numberOfSteps; i++) {
+        for (int i = 0; i < numberOfSteps; ++i) {
             result = getNextProbabilityDistribution(result);
         }
         return result;
@@ -57,12 +57,12 @@ public:
 private:
     ProbabilityDistribution calculateNextProbabilityDistribution(ProbabilityDistribution const& current) {
         ProbabilityMatrix inputMatrix(1U, MAX_STATE_VALUE);
-        for (int i = 0; i < MAX_STATE_VALUE; i++) {
+        for (int i = 0; i < MAX_STATE_VALUE; ++i) {
             inputMatrix.setEntry(0U, i, current[i]);
         }
         ProbabilityMatrix outputMatrix = m_probabilityMatrix * inputMatrix;
         ProbabilityDistribution result;
-        for (int i = 0; i < MAX_STATE_VALUE; i++) {
+        for (int i = 0; i < MAX_STATE_VALUE; ++i) {
             result[i] = outputMatrix.getEntry(0U, i);
         }
         return result;

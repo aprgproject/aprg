@@ -439,7 +439,7 @@ void Integration::integrateTermUsingSubstitutionWithMaxDepth(
     if (isIntegrationUsingSubstitutionAllowed(term)) {
         constexpr int MAX_DEPTH = 2;
         static int depth = 0;
-        depth++;
+        ++depth;
         if (depth <= MAX_DEPTH) {
             integrateTermUsingSubstitution(result, term, configuration);
         }
@@ -739,7 +739,7 @@ Term Integration::substituteFromTrigonometricFunctionsBackToNormal(
 void Integration::integrateInMultiplicationOrDivisionByTryingReverseChainRule(
     Term& result, TermsWithDetails const& termsWithDetailsInMultiplicationOrDivision) {
     int numberOfTerms(termsWithDetailsInMultiplicationOrDivision.size());
-    for (int i = 0; result.isEmpty() && i < numberOfTerms; i++) {
+    for (int i = 0; result.isEmpty() && i < numberOfTerms; ++i) {
         TermsWithDetails termsInFirstTerms(termsWithDetailsInMultiplicationOrDivision);
         termsInFirstTerms.erase(termsInFirstTerms.cbegin() + i);
         Term firstTerm(createTermWithMultiplicationAndDivisionTermsWithDetails(termsInFirstTerms));
@@ -901,7 +901,7 @@ void Integration::retrievePartialFractions(
             Polynomial polynomialFactor(createPolynomialIfPossible(factorsToProcess));
             int maxDegreeOfFactor = static_cast<int>(getMaxDegree(polynomialFactor).getInteger());
             int denominatorExponent = static_cast<int>(negatedExponent.getInteger());
-            for (int i = 1; i <= denominatorExponent; i++) {
+            for (int i = 1; i <= denominatorExponent; ++i) {
                 Polynomial partialDenominator(polynomialFactor);
                 partialDenominator.raiseToUnsignedInteger(i);
                 partialDenominators.emplace_back(partialDenominator);
@@ -916,7 +916,7 @@ Polynomial Integration::getTotalNumeratorWithNewVariables(
     Polynomial const& originalDenominator, Polynomials const& partialNumerators,
     Polynomials const& partialDenominators) {
     Polynomial numeratorWithNewVariables;
-    for (int i = 0; i < static_cast<int>(partialDenominators.size()); i++) {
+    for (int i = 0; i < static_cast<int>(partialDenominators.size()); ++i) {
         Term currentNumeratorTerm = originalDenominator / partialDenominators[i] * partialNumerators[i];
         currentNumeratorTerm.simplify();
         if (canBeConvertedToPolynomial(currentNumeratorTerm)) {
@@ -1007,12 +1007,12 @@ void Integration::integratePartialFractionsBasedOnSolvedMatrix(
     Polynomials const& partialNumerators, Polynomials const& partialDenominators) {
     SubstitutionOfVariablesToTerms substitution;
     auto it = newVariableNames.cbegin();
-    for (int i = 0; i < static_cast<int>(solvedMatrix.getNumberOfRows()) && it != newVariableNames.cend(); i++) {
+    for (int i = 0; i < static_cast<int>(solvedMatrix.getNumberOfRows()) && it != newVariableNames.cend(); ++i) {
         substitution.putVariableWithTerm(*it, solvedMatrix.getEntry(newVariableNames.size(), i));
-        it++;
+        ++it;
     }
     Term partialResult;
-    for (int i = 0; i < static_cast<int>(partialNumerators.size()); i++) {
+    for (int i = 0; i < static_cast<int>(partialNumerators.size()); ++i) {
         Polynomial const& partialNumerator(partialNumerators[i]);
         Polynomial const& partialDenominator(partialDenominators[i]);
         Term termToIntegrate = substitution.performSubstitutionTo(partialNumerator) / partialDenominator;
@@ -1025,7 +1025,7 @@ void Integration::integratePartialFractionsBasedOnSolvedMatrix(
 
 Polynomial Integration::getPartialNumeratorForPartialFractions(int const degree, string const& variableName) {
     Polynomial result;
-    for (int i = 0; i < degree; i++) {
+    for (int i = 0; i < degree; ++i) {
         result.addMonomial(Monomial(1, {{variableName, i}, {getNewVariableNameForPartialFractions(), 1}}));
     }
     result.simplify();
@@ -1035,7 +1035,7 @@ Polynomial Integration::getPartialNumeratorForPartialFractions(int const degree,
 string Integration::getNewVariableNameForPartialFractions() {
     constexpr int MAX_NUMBER_OF_VARIABLES = 1000;
     static int variableCount(0);
-    variableCount++;
+    ++variableCount;
     if (variableCount > MAX_NUMBER_OF_VARIABLES) {
         variableCount = 0;
     }
@@ -1067,7 +1067,7 @@ void Integration::integrateUsingIntegrationByPartsByTryingTwoTerms(Term& result,
             TermsWithDetails const& termsWithDetailsInMultiplicationAndDivision(
                 expression.getTermsWithAssociation().getTermsWithDetails());
             int numberOfTerms(termsWithDetailsInMultiplicationAndDivision.size());
-            for (int i = 0; result.isEmpty() && i < numberOfTerms; i++) {
+            for (int i = 0; result.isEmpty() && i < numberOfTerms; ++i) {
                 TermsWithDetails termsInFirstTerms(termsWithDetailsInMultiplicationAndDivision);
                 termsInFirstTerms.erase(termsInFirstTerms.cbegin() + i);
                 Term firstTerm(createTermWithMultiplicationAndDivisionTermsWithDetails(termsInFirstTerms));
@@ -1100,7 +1100,7 @@ void Integration::integrateUsingIntegrationByPartsAndCheckingPreviousValues(
     constexpr int MAX_DEPTH = 5;
     constexpr int MAX_SIZE = 5;
     static int depth = 0;
-    depth++;
+    ++depth;
 
     if (depth < MAX_DEPTH) {
         if (listOfIntegrationByPartsTerms.size() < MAX_SIZE) {
@@ -1128,7 +1128,7 @@ void Integration::integrateUsingPreviousIntegrationByPartsTerms(
     bool isFirstRelationshipFound(true);
     while (isChanged) {
         isChanged = false;
-        for (int i = 0; i < static_cast<int>(termsToAnalyze.size()); i++) {
+        for (int i = 0; i < static_cast<int>(termsToAnalyze.size()); ++i) {
             IntegrationByPartsTerms const& integrationByPartsTerms(termsToAnalyze[i]);
             Term quotient(currentTermToIntegrate / integrationByPartsTerms.vTimesDuToIntegrate);
             quotient.simplify();

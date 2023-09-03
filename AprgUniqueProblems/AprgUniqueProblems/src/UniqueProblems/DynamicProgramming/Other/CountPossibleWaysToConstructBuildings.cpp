@@ -49,7 +49,7 @@ CountPossibleWaysToConstructBuildings::getNumberOfWaysUsingCountOfBuildingAndSpa
     } else {
         Count countOfBuildings = 1;
         Count countOfSpaces = 1;
-        for (Count section = 2; section <= m_numberOfSections; section++) {
+        for (Count section = 2; section <= m_numberOfSections; ++section) {
             Count previousCountOfBuildings = countOfBuildings;
             Count previousCountOfSpaces = countOfSpaces;
 
@@ -120,7 +120,7 @@ CountPossibleWaysToConstructBuildings::Count CountPossibleWaysToConstructBuildin
 
     Count maxNumberOfBuildings = (m_numberOfSections + 1) / 2;
     Count resultInOnSide(0);
-    for (Count numberOfBuildings = 0; numberOfBuildings <= maxNumberOfBuildings; numberOfBuildings++) {
+    for (Count numberOfBuildings = 0; numberOfBuildings <= maxNumberOfBuildings; ++numberOfBuildings) {
         resultInOnSide += getNumberOfCombinations(m_numberOfSections - numberOfBuildings + 1, numberOfBuildings);
     }
     return resultInOnSide * resultInOnSide;

@@ -151,7 +151,7 @@ void SolverUsingSubstitution::solveAndUpdate(
         SolutionSet firstPotentialSolution;
         firstPotentialSolution.addAcceptedValue(acceptedValues.front());
         solutionSet.addSolutionSetForVariable(variableNameToSolve, firstPotentialSolution);
-        for (auto it = acceptedValues.cbegin() + 1; it != acceptedValues.cend(); it++) {
+        for (auto it = acceptedValues.cbegin() + 1; it != acceptedValues.cend(); ++it) {
             SolutionSet potentialSolution;
             potentialSolution.addAcceptedValue(*it);
             MultipleVariableSolutionSet multipleVariableSolutionSet;

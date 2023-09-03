@@ -85,7 +85,7 @@ TEST(TermTest, TermsAsMonomialsWorks) {
     Monomial::VariableExponentPair const& variable3_1(*variableMap3It);
     EXPECT_EQ("distance", variable3_1.first);
     EXPECT_DOUBLE_EQ(-3.75, variable3_1.second.getDouble());
-    variableMap3It++;
+    ++variableMap3It;
     Monomial::VariableExponentPair const& variable3_2(*variableMap3It);
     EXPECT_EQ("power", variable3_2.first);
     EXPECT_DOUBLE_EQ(4.5, variable3_2.second.getDouble());
@@ -128,7 +128,7 @@ TEST(TermTest, TermsAsPolynomialsWorks) {
     Monomial::VariableExponentPair const& variable3_1(*variableMap3It);
     EXPECT_EQ("distance", variable3_1.first);
     EXPECT_DOUBLE_EQ(-3.75, variable3_1.second.getDouble());
-    variableMap3It++;
+    ++variableMap3It;
     Monomial::VariableExponentPair const& variable3_2(*variableMap3It);
     EXPECT_EQ("power", variable3_2.first);
     EXPECT_DOUBLE_EQ(4.5, variable3_2.second.getDouble());

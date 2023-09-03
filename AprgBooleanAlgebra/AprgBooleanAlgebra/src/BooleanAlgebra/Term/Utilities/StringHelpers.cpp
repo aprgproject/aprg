@@ -78,7 +78,7 @@ string getString(WrappedTerms const& wrappedTerms) {
     stringstream ss;
     if (!wrappedTerms.empty()) {
         ss << wrappedTerms.front();
-        for (auto it = wrappedTerms.cbegin() + 1; it != wrappedTerms.cend(); it++) {
+        for (auto it = wrappedTerms.cbegin() + 1; it != wrappedTerms.cend(); ++it) {
             ss << ", " << *it;
         }
     }

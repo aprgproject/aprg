@@ -30,7 +30,7 @@ bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingMemoization
     bool result(false);
     if (!m_inputValues.empty()) {
         StateMatrix stateMatrix(m_targetSum + 1, m_inputValues.size() + 1, State::Unused);
-        for (Index valueIndex = 0; valueIndex < static_cast<Index>(stateMatrix.getNumberOfRows()); valueIndex++) {
+        for (Index valueIndex = 0; valueIndex < static_cast<Index>(stateMatrix.getNumberOfRows()); ++valueIndex) {
             stateMatrix.setEntry(0, valueIndex, State::True);
         }
         result = isPartialSumPossibleUsingMemoizationDP(stateMatrix, m_targetSum, 0);
@@ -45,11 +45,11 @@ bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingIterativeDP
     bool result(false);
     if (!m_inputValues.empty()) {
         BooleanMatrix isPossibleMatrix(m_targetSum + 1, m_inputValues.size() + 1, false);
-        for (Index valueIndex = 0; valueIndex < static_cast<Index>(isPossibleMatrix.getNumberOfRows()); valueIndex++) {
+        for (Index valueIndex = 0; valueIndex < static_cast<Index>(isPossibleMatrix.getNumberOfRows()); ++valueIndex) {
             isPossibleMatrix.setEntry(0, valueIndex, true);
         }
-        for (Value partialSum = 1; partialSum <= m_targetSum; partialSum++) {
-            for (Index valueIndex = 1; valueIndex <= static_cast<Index>(m_inputValues.size()); valueIndex++) {
+        for (Value partialSum = 1; partialSum <= m_targetSum; ++partialSum) {
+            for (Index valueIndex = 1; valueIndex <= static_cast<Index>(m_inputValues.size()); ++valueIndex) {
                 Value previousValue(m_inputValues[valueIndex - 1]);
                 bool isPossible(isPossibleMatrix.getEntry(partialSum, valueIndex - 1));  // get previous entry result
                 if (!isPossible && partialSum >= previousValue) {
@@ -75,7 +75,7 @@ bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingIterativeDP
         isPartialSumPossible[0] = true;
         for (Value const& inputValue : m_inputValues) {  // input values are only used values
             // reverse traversal so that the changed values wont be changed again in one iteration
-            for (Value partialSum(m_targetSum); partialSum > 0; partialSum--) {
+            for (Value partialSum(m_targetSum); partialSum > 0; --partialSum) {
                 if (partialSum >= inputValue && isPartialSumPossible[partialSum - inputValue]) {
                     isPartialSumPossible[partialSum] = true;
                 }

@@ -19,9 +19,9 @@ TwoSum::ValuesPair TwoSum::getTwoValuesWithSum(Value const targetSum) const {
         while (lowIndex < highIndex) {
             Value currentSum(m_sortedValues[lowIndex] + m_sortedValues[highIndex]);
             if (currentSum > targetSum) {
-                highIndex--;
+                --highIndex;
             } else if (currentSum < targetSum) {
-                lowIndex++;
+                ++lowIndex;
             } else {  // (currentSum == targetSum)
                 isFound = true;
                 break;

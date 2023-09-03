@@ -98,7 +98,7 @@ private:
 
     FrequencyOfEachCharacter getFrequencyOfEachCharacter(Characters const& charactersInput) {
         FrequencyOfEachCharacter frequency{};
-        for (Count i = 0; i < static_cast<Count>(charactersInput.size()); i++) {
+        for (Count i = 0; i < static_cast<Count>(charactersInput.size()); ++i) {
             frequency[charactersInput[i]]++;
         }
         return frequency;
@@ -106,7 +106,7 @@ private:
 
     void writeHuffmanCodes(
         AlbaStreamBitWriter& writer, Characters const& wholeInput, HuffmanCodeTable const& huffmanCodeTable) {
-        for (Count i = 0; i < static_cast<Count>(wholeInput.size()); i++) {
+        for (Count i = 0; i < static_cast<Count>(wholeInput.size()); ++i) {
             HuffmanCode const& huffmanCode(huffmanCodeTable[wholeInput[i]]);
             for (bool const b : huffmanCode) {
                 writer.writeBoolData(b);
@@ -117,7 +117,7 @@ private:
     void expandAllCharacters(
         AlbaStreamBitReader& reader, AlbaStreamBitWriter& writer, TrieNodeUniquePointer const& root,
         Count const lengthOfString) {
-        for (Count i = 0; i < lengthOfString; i++) {
+        for (Count i = 0; i < lengthOfString; ++i) {
             expandOneCharacterBasedFromTrieAndCode(reader, writer, root);
         }
     }
@@ -180,7 +180,7 @@ private:
         std::priority_queue<CharacterFrequency, std::deque<CharacterFrequency>, std::greater<>>
             frequenciesInMinimumOrder;
         std::array<TrieNodeUniquePointer, RADIX> characterNode{};
-        for (Count c = 0; c < RADIX; c++) {
+        for (Count c = 0; c < RADIX; ++c) {
             if (frequency[c] > 0) {
                 // This PQ is used to prioritize low frequency characters first
                 frequenciesInMinimumOrder.emplace(static_cast<char>(c), frequency[c], false);

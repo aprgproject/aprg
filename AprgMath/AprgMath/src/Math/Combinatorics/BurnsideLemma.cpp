@@ -21,7 +21,7 @@ UnsignedInteger getNumberOfSymmetricCombinationsUsingBurnsideLemma(
 
     UnsignedInteger result(0);
     if (numberOfWaysToChangePosition > 0) {
-        for (UnsignedInteger kthWay = 1; kthWay <= numberOfWaysToChangePosition; kthWay++) {
+        for (UnsignedInteger kthWay = 1; kthWay <= numberOfWaysToChangePosition; ++kthWay) {
             result += getNumberOfCombinationsFunction(numberOfWaysToChangePosition, kthWay);
         }
         result /= numberOfWaysToChangePosition;

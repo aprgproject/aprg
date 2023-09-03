@@ -20,21 +20,21 @@ MinimumInitialPointsToReachDestination::getMinimalInitialPointsUsingIterativeDP(
         Grid neededPointsGrid(m_inputGrid.getNumberOfColumns(), m_inputGrid.getNumberOfRows());
         neededPointsGrid.setEntry(lastX, lastY, lastValue);
 
-        for (int x = lastX - 1; x >= 0; x--)  // last row has no bottom neighbors
+        for (int x = lastX - 1; x >= 0; --x)  // last row has no bottom neighbors
         {
             Value neededPointsForThisCell =
                 max(1, neededPointsGrid.getEntry(x + 1, lastY) - m_inputGrid.getEntry(x, lastY));
             neededPointsGrid.setEntry(x, lastY, neededPointsForThisCell);
         }
-        for (int y = lastY - 1; y >= 0; y--)  // last column has no right neighbors
+        for (int y = lastY - 1; y >= 0; --y)  // last column has no right neighbors
         {
             Value neededPointsForThisCell =
                 max(1, neededPointsGrid.getEntry(lastX, y + 1) - m_inputGrid.getEntry(lastX, y));
             neededPointsGrid.setEntry(lastX, y, neededPointsForThisCell);
         }
-        for (int y = lastY - 1; y >= 0; y--)  // the rest of the matrix
+        for (int y = lastY - 1; y >= 0; --y)  // the rest of the matrix
         {
-            for (int x = lastX - 1; x >= 0; x--) {
+            for (int x = lastX - 1; x >= 0; --x) {
                 Value minFromRightOrDown =
                     min(neededPointsGrid.getEntry(x + 1, y), neededPointsGrid.getEntry(x, y + 1));
                 Value neededPointsForThisCell = max(1, minFromRightOrDown - m_inputGrid.getEntry(x, y));

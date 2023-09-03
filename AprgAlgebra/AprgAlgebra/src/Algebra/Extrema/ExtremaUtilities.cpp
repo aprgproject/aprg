@@ -302,7 +302,7 @@ Extremum getAbsoluteExtremumBasedOnRelativeExtremaOnInterval(
         auto const& [inputValue, outputValue] = extremum.inputOutputValues;
         if (interval.isValueInsideTheInterval(inputValue)) {
             extremumInInterval = extremum;
-            numberOfExtremaFoundInInterval++;
+            ++numberOfExtremaFoundInInterval;
             if (numberOfExtremaFoundInInterval > 1) {
                 break;
             }
@@ -476,7 +476,7 @@ void putArbitiaryValuesFromInterval(AlbaNumbers& arbitiaryValues, AlbaNumberInte
     if (highEndpoint.isClose()) {
         arbitiaryValues.emplace_back(highValue);
     }
-    for (int level = 0; level < 5; level++) {
+    for (int level = 0; level < 5; ++level) {
         AlbaNumber midpoint = (lowValue + highValue) / 2;
         lowValue = (lowValue + midpoint) / 2;
         highValue = (highValue + midpoint) / 2;

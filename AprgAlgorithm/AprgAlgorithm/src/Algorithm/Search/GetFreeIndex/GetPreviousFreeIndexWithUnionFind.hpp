@@ -34,7 +34,7 @@ public:
             auto& relativeRoots(m_unionFind.getRelativeRootVectorReference());
 
             relativeRoots[index] = index;
-            for (Index i = index + 1; i < static_cast<Index>(relativeRoots.size()); i++) {
+            for (Index i = index + 1; i < static_cast<Index>(relativeRoots.size()); ++i) {
                 if (relativeRoots[i] == rootOfIndex) {
                     relativeRoots[i] = index;
                 }

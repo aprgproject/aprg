@@ -27,7 +27,7 @@ public:
     void add(Object const& object) override {
         NodeUniquePointer newNext(std::move(m_first));
         m_first.reset(new Node{object, std::move(newNext)});
-        m_size++;
+        ++m_size;
     }
 
     void traverse(TraverseFunction const& traverseFunction) override {

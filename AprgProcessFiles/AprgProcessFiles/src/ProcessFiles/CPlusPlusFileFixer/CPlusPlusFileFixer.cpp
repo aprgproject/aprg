@@ -268,7 +268,7 @@ void CPlusPlusFileFixer::fixHeaders(string const&) {
 
 void CPlusPlusFileFixer::removeTrailingLinesInCode() {
     auto nonWhiteSpaceLineIterator = m_linesAfterTheHeader.rbegin();
-    for (; nonWhiteSpaceLineIterator != m_linesAfterTheHeader.rend(); nonWhiteSpaceLineIterator++) {
+    for (; nonWhiteSpaceLineIterator != m_linesAfterTheHeader.rend(); ++nonWhiteSpaceLineIterator) {
         if (!isWhiteSpace(*nonWhiteSpaceLineIterator)) {
             break;
         }

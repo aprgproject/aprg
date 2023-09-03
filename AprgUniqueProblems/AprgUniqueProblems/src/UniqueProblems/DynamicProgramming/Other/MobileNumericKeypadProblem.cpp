@@ -14,7 +14,7 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingNaive
     // one function call) Auxiliary Space: Constant
 
     Count result(0);
-    for (NumpadValue numpadValue = 0; numpadValue <= 9; numpadValue++) {
+    for (NumpadValue numpadValue = 0; numpadValue <= 9; ++numpadValue) {
         result += getCountForValueUsingNaiveRecursion(m_length, numpadValue);
     }
     return result;
@@ -26,7 +26,7 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingMemoi
 
     Count result(0);
     CountMatrix countMatrix(m_length + 1, 10, UNUSED_VALUE);
-    for (NumpadValue numpadValue = 0; numpadValue <= 9; numpadValue++) {
+    for (NumpadValue numpadValue = 0; numpadValue <= 9; ++numpadValue) {
         result += getCountForValueUsingMemoizationDP(countMatrix, m_length, numpadValue);
     }
     return result;
@@ -39,10 +39,10 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingItera
     Count result(0);
     if (m_length > 0) {
         CountMatrix countMatrix(m_length, 10);
-        for (NumpadValue numpadValue = 0; numpadValue <= 9; numpadValue++) {
+        for (NumpadValue numpadValue = 0; numpadValue <= 9; ++numpadValue) {
             countMatrix.setEntry(0, numpadValue, 1);
         }
-        for (Count lengthMinus1 = 1; lengthMinus1 < m_length; lengthMinus1++) {
+        for (Count lengthMinus1 = 1; lengthMinus1 < m_length; ++lengthMinus1) {
             Count previousLengthMinus1 = lengthMinus1 - 1;
             countMatrix.setEntry(
                 lengthMinus1, 0,
@@ -86,7 +86,7 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingItera
                 countMatrix.getEntry(previousLengthMinus1, 9) + countMatrix.getEntry(previousLengthMinus1, 6) +
                     countMatrix.getEntry(previousLengthMinus1, 8));
         }
-        for (NumpadValue numpadValue = 0; numpadValue <= 9; numpadValue++) {
+        for (NumpadValue numpadValue = 0; numpadValue <= 9; ++numpadValue) {
             result += countMatrix.getEntry(m_length - 1, numpadValue);
         }
     }
@@ -100,7 +100,7 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingItera
     Count result(0);
     if (m_length > 0) {
         vector<Counts> previousAndCurrentCounts(2, NumpadValues(10, 1));
-        for (Count lengthMinus1 = 1; lengthMinus1 < m_length; lengthMinus1++) {
+        for (Count lengthMinus1 = 1; lengthMinus1 < m_length; ++lengthMinus1) {
             Counts& previousCounts(previousAndCurrentCounts[(lengthMinus1 - 1) % 2]);
             Counts& currentCounts(previousAndCurrentCounts[lengthMinus1 % 2]);
 
@@ -119,7 +119,7 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingItera
         }
 
         Counts const& lastCurrent(previousAndCurrentCounts[(m_length - 1) % 2]);
-        for (NumpadValue numpadValue = 0; numpadValue <= 9; numpadValue++) {
+        for (NumpadValue numpadValue = 0; numpadValue <= 9; ++numpadValue) {
             result += lastCurrent[numpadValue];
         }
     }

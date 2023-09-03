@@ -27,7 +27,7 @@ void ChineseRemainderTheorem::solve(UnsignedIntegers const& numbers, UnsignedInt
 
         m_productOfModulos =
             std::accumulate(modulos.cbegin(), modulos.cend(), static_cast<UnsignedInteger>(1), std::multiplies<>());
-        for (int k = 0; k < static_cast<int>(numbers.size()); k++) {
+        for (int k = 0; k < static_cast<int>(numbers.size()); ++k) {
             UnsignedInteger const& number(numbers[k]);
             UnsignedInteger const& modulo(modulos[k]);
             UnsignedInteger formulaForK = m_productOfModulos / modulo;

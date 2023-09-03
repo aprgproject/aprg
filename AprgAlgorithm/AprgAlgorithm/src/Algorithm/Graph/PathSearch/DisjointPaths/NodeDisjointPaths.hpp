@@ -43,7 +43,7 @@ public:
                 Path path{previousVertex};
                 // reserve this much even though duplicates exists
                 path.reserve(pathWithDuplicate.size());
-                for (auto it = pathWithDuplicate.cbegin() + 1; it != pathWithDuplicate.cend(); it++) {
+                for (auto it = pathWithDuplicate.cbegin() + 1; it != pathWithDuplicate.cend(); ++it) {
                     Vertex const& vertex(it->first);
                     if (previousVertex != vertex) {
                         path.emplace_back(vertex);

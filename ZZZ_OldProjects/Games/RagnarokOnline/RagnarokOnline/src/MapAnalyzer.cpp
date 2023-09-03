@@ -144,13 +144,13 @@ void MapAnalyzer::selectMaps() {
         }
         int countAcceptable(0);
         if (hasAcceptableSmall) {
-            countAcceptable++;
+            ++countAcceptable;
         }
         if (hasAcceptableMedium) {
-            countAcceptable++;
+            ++countAcceptable;
         }
         if (hasAcceptableLarge) {
-            countAcceptable++;
+            ++countAcceptable;
         }
         bool isMapAcceptable = countAcceptable >= 3;
         if (isMapAcceptable && !monstersNameToDataMap.empty()) {

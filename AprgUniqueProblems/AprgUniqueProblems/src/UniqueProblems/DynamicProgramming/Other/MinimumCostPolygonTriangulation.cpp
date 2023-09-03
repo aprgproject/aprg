@@ -44,11 +44,11 @@ MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getMinimu
     if (!m_vertices.empty()) {
         CostMatrix countMatrix(m_vertices.size(), m_vertices.size(), 0);
 
-        for (Index length = 3; length <= static_cast<Index>(m_vertices.size()); length++) {
-            for (Index left = 0; left + length <= static_cast<Index>(countMatrix.getNumberOfColumns()); left++) {
+        for (Index length = 3; length <= static_cast<Index>(m_vertices.size()); ++length) {
+            for (Index left = 0; left + length <= static_cast<Index>(countMatrix.getNumberOfColumns()); ++left) {
                 Index right = left + length - 1;
                 Cost minimumCount(MAX_COUNT);
-                for (Index inBetween = left + 1; inBetween < right; inBetween++) {
+                for (Index inBetween = left + 1; inBetween < right; ++inBetween) {
                     Cost currentCount = countMatrix.getEntry(left, inBetween) + countMatrix.getEntry(inBetween, right) +
                                         getCostOfThreePoints(left, inBetween, right);
                     minimumCount = min(minimumCount, currentCount);
@@ -67,7 +67,7 @@ MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getMinimu
     if (left + 2 <= right)  // distance should be two for at least three elements
     {
         result = MAX_COUNT;
-        for (Index inBetween = left + 1; inBetween < right; inBetween++) {
+        for (Index inBetween = left + 1; inBetween < right; ++inBetween) {
             Cost currentCount = getMinimumNumberOfOperationsUsingNaiveRecursion(left, inBetween) +
                                 getMinimumNumberOfOperationsUsingNaiveRecursion(inBetween, right) +
                                 getCostOfThreePoints(left, inBetween, right);
@@ -84,7 +84,7 @@ MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getMinimu
         if (left + 2 <= right)  // distance should be two for at least three elements
         {
             // result is already set to MAX_COUNT so we can proceed on using min
-            for (Index inBetween = left + 1; inBetween < right; inBetween++) {
+            for (Index inBetween = left + 1; inBetween < right; ++inBetween) {
                 Cost currentCount = getMinimumNumberOfOperationsUsingMemoizationDP(countMatrix, left, inBetween) +
                                     getMinimumNumberOfOperationsUsingMemoizationDP(countMatrix, inBetween, right) +
                                     getCostOfThreePoints(left, inBetween, right);

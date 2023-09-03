@@ -12,7 +12,7 @@ TEST(FactorizationUsingPatternsTest, FactorizeUsingPatternsWorksWhenItCannotBeFa
     Polynomials polynomialsToVerify(factorizeUsingPatterns(polynomialToTest));
 
     ASSERT_EQ(1U, polynomialsToVerify.size());
-    const Polynomial& polynomialToExpect1(polynomialToTest);
+    Polynomial const& polynomialToExpect1(polynomialToTest);
     EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
 }
 

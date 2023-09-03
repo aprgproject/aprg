@@ -42,18 +42,18 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
         CountMatrix countsForFalse(m_inputValues.size(), m_inputValues.size());
         CountMatrix countsForTrue(m_inputValues.size(), m_inputValues.size());
 
-        for (Index index = 0; index < static_cast<Index>(m_inputValues.size()); index++) {
+        for (Index index = 0; index < static_cast<Index>(m_inputValues.size()); ++index) {
             // for length 1
             countsForFalse.setEntry(index, index, convertBoolToCount(!m_inputValues[index]));
             countsForTrue.setEntry(index, index, convertBoolToCount(m_inputValues[index]));
         }
-        for (Index length = 2; length <= static_cast<Index>(m_inputValues.size()); length++) {
+        for (Index length = 2; length <= static_cast<Index>(m_inputValues.size()); ++length) {
             for (Index leftParenthesis = 0; leftParenthesis + length <= static_cast<Index>(m_inputValues.size());
-                 leftParenthesis++) {
+                 ++leftParenthesis) {
                 Index rightParenthesis = leftParenthesis + length - 1;
                 Count currentCountForFalse(0);
                 Count currentCountForTrue(0);
-                for (Index operationIndex = leftParenthesis; operationIndex < rightParenthesis; operationIndex++) {
+                for (Index operationIndex = leftParenthesis; operationIndex < rightParenthesis; ++operationIndex) {
                     Count numberOfFalseInLeft = countsForFalse.getEntry(leftParenthesis, operationIndex);
                     Count numberOfTrueInLeft = countsForTrue.getEntry(leftParenthesis, operationIndex);
                     Count numberOfFalseInRight = countsForFalse.getEntry(operationIndex + 1, rightParenthesis);
@@ -90,7 +90,7 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
     Count result(0);
     if (leftParenthesis + 1 <= rightParenthesis)  // distance should be one for at least two elements
     {
-        for (Index operationIndex = leftParenthesis; operationIndex < rightParenthesis; operationIndex++) {
+        for (Index operationIndex = leftParenthesis; operationIndex < rightParenthesis; ++operationIndex) {
             Count numberOfFalseInLeft = getNumberOfWaysUsingNaiveRecursion(false, leftParenthesis, operationIndex);
             Count numberOfTrueInLeft = getNumberOfWaysUsingNaiveRecursion(true, leftParenthesis, operationIndex);
             Count numberOfFalseInRight =
@@ -129,7 +129,7 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
         result = 0;
         if (leftParenthesis + 1 <= rightParenthesis)  // distance should be one for at least two elements
         {
-            for (Index operationIndex = leftParenthesis; operationIndex < rightParenthesis; operationIndex++) {
+            for (Index operationIndex = leftParenthesis; operationIndex < rightParenthesis; ++operationIndex) {
                 Count numberOfFalseInLeft = getNumberOfWaysUsingNaiveRecursion(false, leftParenthesis, operationIndex);
                 Count numberOfTrueInLeft = getNumberOfWaysUsingNaiveRecursion(true, leftParenthesis, operationIndex);
                 Count numberOfFalseInRight =

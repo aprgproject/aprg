@@ -29,7 +29,7 @@ public:
             }
         }
         m_sum += dataValue;
-        m_count++;
+        ++m_count;
     }
     void clear() {
         m_minimum = 0;

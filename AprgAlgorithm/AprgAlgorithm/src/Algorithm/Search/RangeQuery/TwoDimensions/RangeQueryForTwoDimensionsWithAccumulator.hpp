@@ -47,14 +47,14 @@ private:
         // Quadratic time because of the second loop.
 
         Value partialResultOnFirstRow{};
-        for (int x = 0; x < static_cast<int>(valueMatrix.getNumberOfColumns()); x++) {
+        for (int x = 0; x < static_cast<int>(valueMatrix.getNumberOfColumns()); ++x) {
             partialResultOnFirstRow += valueMatrix.getEntryConstReference(x, 0);
             m_partialResults.setEntry(x, 0, partialResultOnFirstRow);
         }
 
-        for (int y = 1; y < static_cast<int>(valueMatrix.getNumberOfRows()); y++) {
+        for (int y = 1; y < static_cast<int>(valueMatrix.getNumberOfRows()); ++y) {
             Value partialResultOnRow{};
-            for (int x = 0; x < static_cast<int>(valueMatrix.getNumberOfColumns()); x++) {
+            for (int x = 0; x < static_cast<int>(valueMatrix.getNumberOfColumns()); ++x) {
                 partialResultOnRow += valueMatrix.getEntryConstReference(x, y);
                 m_partialResults.setEntry(x, y, partialResultOnRow + m_partialResults.getEntryConstReference(x, y - 1));
             }

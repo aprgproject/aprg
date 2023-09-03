@@ -80,7 +80,7 @@ Term Differentiation::differentiateWithDefiniteValue(Term const& term, AlbaNumbe
 
 Term Differentiation::differentiateMultipleTimes(Term const& term, int const numberOfTimes) const {
     Term currentResult(term);
-    for (int i = 0; i < numberOfTimes; i++) {
+    for (int i = 0; i < numberOfTimes; ++i) {
         currentResult = differentiate(currentResult);
     }
     return currentResult;
@@ -88,7 +88,7 @@ Term Differentiation::differentiateMultipleTimes(Term const& term, int const num
 
 Equation Differentiation::differentiateMultipleTimes(Equation const& equation, int const numberOfTimes) const {
     Equation currentResult(equation);
-    for (int i = 0; i < numberOfTimes; i++) {
+    for (int i = 0; i < numberOfTimes; ++i) {
         currentResult = differentiate(currentResult);
     }
     return currentResult;
@@ -289,7 +289,7 @@ Term Differentiation::differentiateTermsInMultiplicationOrDivisionTermByTerm(
         } else {
             accumulatedTerm = differentiateTwoDividedTerms(accumulatedTerm, firstTerm);
         }
-        for (auto it = termsWithDetails.cbegin() + 1; it != termsWithDetails.cend(); it++) {
+        for (auto it = termsWithDetails.cbegin() + 1; it != termsWithDetails.cend(); ++it) {
             TermWithDetails const& termWithDetails(*it);
             Term const& currentTerm(getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer));
             if (termWithDetails.hasPositiveAssociation()) {

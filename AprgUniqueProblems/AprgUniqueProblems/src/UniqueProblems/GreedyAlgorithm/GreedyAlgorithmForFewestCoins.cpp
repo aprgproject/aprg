@@ -21,7 +21,7 @@ int GreedyAlgorithmForFewestCoins::getFewestNumberOfCoins(Value const value) con
     for (Coin const& coin : m_sortedAvailableCoins) {
         while (partialValue >= coin) {
             partialValue -= coin;
-            count++;
+            ++count;
         }
     }
     if (partialValue == 0) {

@@ -64,7 +64,7 @@ void GridPathSearch::search(int const x, int const y, Movement const previousMov
     if (m_numberTraversedCells == m_numberOfCells) {
         if (isLowerRightCorner(x, y))  // lower-right corner
         {
-            m_numberOfCompletePaths++;
+            ++m_numberOfCompletePaths;
         }
     } else if (!isLowerRightCorner(x, y)) {
         // Optimization 2: If the path reaches the lower-right square before it has visited all other squares of the
@@ -81,11 +81,11 @@ void GridPathSearch::search(int const x, int const y, Movement const previousMov
 
 void GridPathSearch::searchNextCoordinate(int const x, int const y, Movement const movement) {
     if (canTraverse(x, y)) {
-        m_numberTraversedCells++;
+        ++m_numberTraversedCells;
         m_grid.setEntry(x, y, true);
         search(x, y, movement);
         m_grid.setEntry(x, y, false);
-        m_numberTraversedCells--;
+        --m_numberTraversedCells;
     }
 }
 

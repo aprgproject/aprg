@@ -18,7 +18,7 @@ public:
 protected:
     void initialize(Key const& searchSpace) {
         int length = searchSpace.length();
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < length; ++i) {
             TernarySearchSuffixTrie::put(searchSpace.substr(i), i);
         }
     }

@@ -67,7 +67,7 @@ protected:
     [[nodiscard]] int getNumberOfNodes(NodeUniquePointer const& currentNodePointer) const {
         int result(0);
         if (currentNodePointer) {
-            result++;
+            ++result;
             result += getNumberOfNodes(currentNodePointer->left);
             result += getNumberOfNodes(currentNodePointer->right);
             result += getNumberOfNodes(currentNodePointer->mid);

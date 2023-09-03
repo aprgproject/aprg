@@ -15,7 +15,7 @@ public:
         stringHelper::strings result;
         Index totalLength(m_searchSpace.length());
         for (Index i = m_suffixArray.getRank(stringToCheck);
-             i < totalLength && doesItStartWith(m_suffixArray.getSuffixViewAt(i), stringToCheck); i++) {
+             i < totalLength && doesItStartWith(m_suffixArray.getSuffixViewAt(i), stringToCheck); ++i) {
             Index start =
                 std::max(static_cast<Index>(0), m_suffixArray.getIndexOnMainStringOfSuffixAt(i) - lengthOfContext);
             Index end =

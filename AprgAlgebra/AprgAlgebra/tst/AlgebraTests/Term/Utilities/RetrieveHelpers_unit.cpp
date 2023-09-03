@@ -55,16 +55,16 @@ TEST(RetrieveHelpersTest, GetCoefficientsForVariablesOnlyWorks) {
     auto it = variableToValueMap.cbegin();
     EXPECT_EQ("a", it->first);
     EXPECT_EQ(AlbaNumber(516), it->second);
-    it++;
+    ++it;
     EXPECT_EQ("b", it->first);
     EXPECT_EQ(AlbaNumber(643), it->second);
-    it++;
+    ++it;
     EXPECT_EQ("x", it->first);
     EXPECT_EQ(AlbaNumber(587), it->second);
-    it++;
+    ++it;
     EXPECT_EQ("y", it->first);
     EXPECT_EQ(AlbaNumber(975), it->second);
-    it++;
+    ++it;
 }
 
 TEST(RetrieveHelpersTest, RetrieveTermsFromTermsWithDetailsWorks) {

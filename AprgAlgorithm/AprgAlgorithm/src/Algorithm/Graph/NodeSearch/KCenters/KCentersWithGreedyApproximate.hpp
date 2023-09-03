@@ -25,7 +25,7 @@ private:
 
     void traverseWithGreedyApproach() {
         Vertex currentCenter(m_startVertex);  // start vertex is a center
-        for (int centerCount = 0; centerCount < m_numberOfCenters; centerCount++) {
+        for (int centerCount = 0; centerCount < m_numberOfCenters; ++centerCount) {
             m_foundCenters.emplace_back(currentCenter);
             updateClosestDistances(currentCenter);
             currentCenter = getVertexForMaximumClosestDistance();

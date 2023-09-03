@@ -21,7 +21,7 @@ string DeBruijnSequences::getDeBruijnString() const {
         auto eulerPath(eulerPathSearch.getEulerPath());
         if (!eulerPath.empty()) {
             result = eulerPath.front();
-            for (auto it = eulerPath.cbegin() + 1; it != eulerPath.cend(); it++) {
+            for (auto it = eulerPath.cbegin() + 1; it != eulerPath.cend(); ++it) {
                 result += it->back();
             }
         }

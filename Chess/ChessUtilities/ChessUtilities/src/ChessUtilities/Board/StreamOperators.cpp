@@ -61,8 +61,8 @@ ostream& operator<<(ostream& out, Board const& board) {
     DisplayTable displayTable(Board::CHESS_SIDE_SIZE, Board::CHESS_SIDE_SIZE);
     displayTable.setBorders("-", "|");
     int i = 0;
-    for (int y = 0; y < Board::CHESS_SIDE_SIZE; y++) {
-        for (int x = 0; x < Board::CHESS_SIDE_SIZE; x++) {
+    for (int y = 0; y < Board::CHESS_SIDE_SIZE; ++y) {
+        for (int x = 0; x < Board::CHESS_SIDE_SIZE; ++x) {
             displayTable.getCellReferenceAt(x, y).setText(string(" ") + pieceGrid[i++].getFenCharacter() + string(" "));
         }
     }
@@ -90,8 +90,8 @@ void printHexValuesInBoard(ostream& out, Board const& board) {
     Board::PieceGrid const& pieceGrid(board.getPieceGrid());
     int i = 0;
     out << hex << uppercase;
-    for (int y = 0; y < Board::CHESS_SIDE_SIZE; y++) {
-        for (int x = 0; x < Board::CHESS_SIDE_SIZE; x++) {
+    for (int y = 0; y < Board::CHESS_SIDE_SIZE; ++y) {
+        for (int x = 0; x < Board::CHESS_SIDE_SIZE; ++x) {
             out << "0x" << static_cast<uint32_t>(pieceGrid[i++].getData()) << ", ";
         }
     }

@@ -35,12 +35,12 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingItera
     Value result(0);
     if (m_n >= m_k) {
         ValueMatrix valueMatrix(m_n + 1, m_k + 1, 0);
-        for (Value n = 0; n <= m_n; n++) {
+        for (Value n = 0; n <= m_n; ++n) {
             valueMatrix.setEntry(n, 0, 1);
         }
-        for (Value n = 1; n <= m_n; n++) {
+        for (Value n = 1; n <= m_n; ++n) {
             Value lastK = min(n, m_k);
-            for (Value k = 1; k <= lastK; k++) {
+            for (Value k = 1; k <= lastK; ++k) {
                 if (n == k) {
                     valueMatrix.setEntry(n, k, 1);
                 } else {
@@ -87,9 +87,9 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingItera
     if (m_n >= m_k) {
         Values partialValues(m_k + 1, 0);
         partialValues[0] = 1;
-        for (Value n = 1; n <= m_n; n++) {
+        for (Value n = 1; n <= m_n; ++n) {
             Value lastK = min(n, m_k);
-            for (Value k = lastK; k > 0; k--)  // reverse traversal to avoid accessing already computed values
+            for (Value k = lastK; k > 0; --k)  // reverse traversal to avoid accessing already computed values
             {
                 partialValues[k] += partialValues[k - 1];
             }

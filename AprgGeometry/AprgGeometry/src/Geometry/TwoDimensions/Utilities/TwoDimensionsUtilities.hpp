@@ -143,7 +143,7 @@ double getArea(Polygon<numberOfVertices> const& polygon) {
     double area(0);
     Points const& vertices(polygon.getVertices());
     int sizeMinusOne = static_cast<int>(vertices.size()) - 1;
-    for (int i = 0; i < sizeMinusOne; i++) {
+    for (int i = 0; i < sizeMinusOne; ++i) {
         area += getSignedCounterClockwiseDoubleTriangleAreaOfOriginAnd2Points(vertices[i], vertices[i + 1]);
     }
     area += getSignedCounterClockwiseDoubleTriangleAreaOfOriginAnd2Points(vertices[sizeMinusOne], vertices[0]);

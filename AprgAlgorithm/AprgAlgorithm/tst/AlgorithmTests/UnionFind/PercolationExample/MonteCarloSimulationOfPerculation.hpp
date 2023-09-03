@@ -25,9 +25,9 @@ public:
 
     [[nodiscard]] std::string getSitesToDisplay() const {
         DisplayTable displayTable;
-        for (int y = 0; y < DIMENSION; y++) {
+        for (int y = 0; y < DIMENSION; ++y) {
             displayTable.addRow();
-            for (int x = 0; x < DIMENSION; x++) {
+            for (int x = 0; x < DIMENSION; ++x) {
                 std::string cell = isSiteOpen(getIndex(x, y)) ? " " : "X";
                 displayTable.getLastRow().addCell(cell);
             }
@@ -49,7 +49,7 @@ public:
                 m_sites[newOpenSiteIndex] = true;
                 connectNeighboringSitesAt(newOpenSiteIndex);
                 connectToVirtualTopOrBottomIfNeeded(newOpenSiteIndex);
-                m_numberOfOpenSites++;
+                ++m_numberOfOpenSites;
                 break;
             }
         }

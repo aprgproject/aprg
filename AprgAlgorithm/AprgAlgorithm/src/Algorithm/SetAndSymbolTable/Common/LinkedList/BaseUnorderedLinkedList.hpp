@@ -41,7 +41,7 @@ public:
         int result(0);
         traverseWithNoChange([&](Node const& node, bool&) {
             if (key > node.key) {
-                result++;
+                ++result;
             }
         });
         return result;

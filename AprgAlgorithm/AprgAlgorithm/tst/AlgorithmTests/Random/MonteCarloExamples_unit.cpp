@@ -33,7 +33,7 @@ TEST(MonteCarloTest, VerifyingMatrixExample) {
         // multiplications of nxn and nx1 size matrices are needed.
 
         MatrixForTest x(1, b.getNumberOfColumns());
-        for (int i = 0; i < static_cast<int>(x.getNumberOfRows()); i++) {
+        for (int i = 0; i < static_cast<int>(x.getNumberOfRows()); ++i) {
             x.setEntry(0, i, randomizer.getRandomValue());
         }
         MatrixForTest bx = b * x;

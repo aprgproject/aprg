@@ -24,7 +24,7 @@ public:
     void sort(Values& valuesToSort) const override {
         // highest index so least signficant first
         for (int digitIndex = static_cast<int>(m_getNumberOfDigitsFunction(valuesToSort)) - 1; 0 <= digitIndex;
-             digitIndex--) {
+             --digitIndex) {
             sortAtLeastSignificantDigit(valuesToSort, digitIndex);
         }
     }
@@ -53,7 +53,7 @@ private:
 
     void computeCumulatesToGetNewIndexes(ArrayOfCountPerDigitValue& newIndexes) const {
         int newIndexesSize = newIndexes.size();
-        for (int i = 0; i + 1 < static_cast<int>(newIndexesSize); i++) {
+        for (int i = 0; i + 1 < static_cast<int>(newIndexesSize); ++i) {
             newIndexes[i + 1] += newIndexes[i];
         }
     }

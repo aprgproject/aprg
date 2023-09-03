@@ -55,7 +55,7 @@ private:
         StringViews suffixViews;
         suffixViews.reserve(length);
         auto suffixPointer = m_mainString.data();
-        for (int suffixLength = length; suffixLength > 0; suffixPointer++, suffixLength--) {
+        for (int suffixLength = length; suffixLength > 0; ++suffixPointer, --suffixLength) {
             suffixViews.emplace_back(suffixPointer, suffixLength);
         }
         std::sort(suffixViews.begin(), suffixViews.end());

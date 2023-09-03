@@ -37,12 +37,12 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
     if (!m_dimensions.empty()) {
         CountMatrix countMatrix(m_dimensions.size(), m_dimensions.size(), 0);
 
-        for (Index length = 3; length <= static_cast<Index>(m_dimensions.size()); length++) {
+        for (Index length = 3; length <= static_cast<Index>(m_dimensions.size()); ++length) {
             for (Index leftParenthesis = 0;
-                 leftParenthesis + length <= static_cast<Index>(countMatrix.getNumberOfColumns()); leftParenthesis++) {
+                 leftParenthesis + length <= static_cast<Index>(countMatrix.getNumberOfColumns()); ++leftParenthesis) {
                 Index rightParenthesis = leftParenthesis + length - 1;
                 Count minimumCount(MAX_COUNT);
-                for (Index inBetween = leftParenthesis + 1; inBetween < rightParenthesis; inBetween++) {
+                for (Index inBetween = leftParenthesis + 1; inBetween < rightParenthesis; ++inBetween) {
                     Count currentCount =
                         countMatrix.getEntry(leftParenthesis, inBetween) +
                         countMatrix.getEntry(inBetween, rightParenthesis) +
@@ -63,7 +63,7 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
     if (leftParenthesis + 2 <= rightParenthesis) {
         // distance should be two for at least three elements
         result = MAX_COUNT;
-        for (Index inBetween = leftParenthesis + 1; inBetween < rightParenthesis; inBetween++) {
+        for (Index inBetween = leftParenthesis + 1; inBetween < rightParenthesis; ++inBetween) {
             Count currentCount =
                 getMinimumNumberOfOperationsUsingNaiveRecursion(leftParenthesis, inBetween) +
                 getMinimumNumberOfOperationsUsingNaiveRecursion(inBetween, rightParenthesis) +
@@ -81,7 +81,7 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
         if (leftParenthesis + 2 <= rightParenthesis)  // distance should be two for at least three elements
         {
             // result is already set to MAX_COUNT so we can proceed on using min
-            for (Index inBetween = leftParenthesis + 1; inBetween < rightParenthesis; inBetween++) {
+            for (Index inBetween = leftParenthesis + 1; inBetween < rightParenthesis; ++inBetween) {
                 Count currentCount =
                     getMinimumNumberOfOperationsUsingMemoizationDP(countMatrix, leftParenthesis, inBetween) +
                     getMinimumNumberOfOperationsUsingMemoizationDP(countMatrix, inBetween, rightParenthesis) +

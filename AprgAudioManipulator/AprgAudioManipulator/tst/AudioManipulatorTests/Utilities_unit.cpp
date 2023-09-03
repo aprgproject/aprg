@@ -67,7 +67,7 @@ TEST(UtilitiesTest, DISABLED_SearchAndTryToReplicateSamplesWorks) {
     int numberOfChannels =
         max(max(audioToReplicate.getNumberOfChannels(), audioToSearch.getNumberOfChannels()),
             audioToChange.getNumberOfChannels());
-    for (int i = 0; i < numberOfChannels; i++) {
+    for (int i = 0; i < numberOfChannels; ++i) {
         searchAndTryToReplicateSamples(
             audioToChange, audioToReplicate, audioToSearch, clampHigherBound(i, audioToChange.getNumberOfChannels()),
             clampHigherBound(i, audioToReplicate.getNumberOfChannels()),

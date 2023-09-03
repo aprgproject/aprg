@@ -30,7 +30,7 @@ NimState NimGame::getOptimalNextState(NimState const& nimState) {
         for (NimHeapSize& nimHeapSize : result) {
             if (nimHeapSize > 0)  // just take one to prolong the game
             {
-                nimHeapSize--;
+                --nimHeapSize;
                 break;
             }
         }

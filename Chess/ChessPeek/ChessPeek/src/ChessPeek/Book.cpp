@@ -68,7 +68,7 @@ void Book::loadDatabaseFrom(std::string const& path) {
         lineDetail.colorToMove = static_cast<PieceColor>(colorToMove);
         inStream >> lineDetail.totalNumberOfGames;
         inStream >> moveSize;
-        for (int i = 0; i < moveSize; i++) {
+        for (int i = 0; i < moveSize; ++i) {
             MoveDetail moveDetail;
             moveDetail.move = fileReader.getLineAndIgnoreWhiteSpaces();
             inStream >> moveDetail.winPercentage;

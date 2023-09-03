@@ -26,10 +26,10 @@ int MaximumEmployeeCount::getMaximumCountOfEmployeesAtATime() const {
     int maxCount(0);
     for (Event const& event : m_sortedEvents) {
         if (EventType::StartOfDayOfEmployee == event.eventType) {
-            count++;
+            ++count;
             maxCount = max(maxCount, count);
         } else if (EventType::EndOfDayOfEmployee == event.eventType) {
-            count--;
+            --count;
         }
     }
     return maxCount;

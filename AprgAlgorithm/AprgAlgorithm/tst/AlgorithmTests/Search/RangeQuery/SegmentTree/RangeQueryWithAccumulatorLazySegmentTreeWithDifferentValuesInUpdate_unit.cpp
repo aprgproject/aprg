@@ -17,7 +17,7 @@ RangeQueryForTest::IncrementFunction incrementFunction = [](IndexForTest const i
     // Increase the first value in range [a,b] by 1, the second value by 2, the third value by 3, and so on.
 
     ValueForTest incrementValue = 0;
-    for (IndexForTest index = intervalStart; index <= intervalEnd; index++) {
+    for (IndexForTest index = intervalStart; index <= intervalEnd; ++index) {
         incrementValue += index + 1;
     }
     return incrementValue;

@@ -39,9 +39,9 @@ MaximizeProfitInZeroOneKnapsack::Profit MaximizeProfitInZeroOneKnapsack::getBest
         Weight const& maximumWeightInIteration(m_maximumWeight + 1);
         ProfitMatrix profitMatrix(maximumWeightInIteration, m_items.size() + 1, 0);
         Weight smallestItemWeight(getSmallestItemWeight());
-        for (int itemIndex = static_cast<int>(m_items.size()) - 1; itemIndex >= 0; itemIndex--) {
+        for (int itemIndex = static_cast<int>(m_items.size()) - 1; itemIndex >= 0; --itemIndex) {
             auto const& [itemWeight, itemProfit] = m_items[itemIndex];
-            for (Weight weight(smallestItemWeight); weight < maximumWeightInIteration; weight++) {
+            for (Weight weight(smallestItemWeight); weight < maximumWeightInIteration; ++weight) {
                 if (weight >= itemWeight) {
                     Profit profit =
                         max(profitMatrix.getEntry(weight, itemIndex + 1),
@@ -71,7 +71,7 @@ MaximizeProfitInZeroOneKnapsack::getBestProfitUsingIterativeDPAndSpaceEfficient(
         Weight smallestItemWeight(getSmallestItemWeight());
         for (auto const& [itemWeight, itemProfit] : m_items) {
             // reverse traversal to avoid accessing already computed values
-            for (Weight weight = m_maximumWeight; weight >= smallestItemWeight; weight--) {
+            for (Weight weight = m_maximumWeight; weight >= smallestItemWeight; --weight) {
                 if (weight >= itemWeight) {
                     weightToProfit[weight] =
                         max(weightToProfit[weight], weightToProfit[weight - itemWeight] + itemProfit);
@@ -118,7 +118,7 @@ MaximizeProfitInZeroOneKnapsack::Profit MaximizeProfitInZeroOneKnapsack::getBest
 
 MaximizeProfitInZeroOneKnapsack::Weight MaximizeProfitInZeroOneKnapsack::getSmallestItemWeight() const {
     Weight result(m_items.front().first);
-    for (auto it = m_items.cbegin() + 1; it != m_items.cend(); it++) {
+    for (auto it = m_items.cbegin() + 1; it != m_items.cend(); ++it) {
         result = min(result, it->first);
     }
     return result;

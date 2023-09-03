@@ -24,9 +24,9 @@ private:
         int queryLength(query.length());
         int searchIndex = 0;
         int matchIndex = 0;
-        for (; searchIndex < searchSpaceLength && matchIndex < queryLength; searchIndex++) {
+        for (; searchIndex < searchSpaceLength && matchIndex < queryLength; ++searchIndex) {
             if (searchSpace[searchIndex] == query[matchIndex]) {
-                matchIndex++;  // matchIndex represents the index of matches as well
+                ++matchIndex;  // matchIndex represents the index of matches as well
             } else {
                 searchIndex -= matchIndex;  // if there is a mismatch, go back
                 matchIndex = 0;             // reset because matchIndex represents the index of matches as well
@@ -43,9 +43,9 @@ private:
         int result(static_cast<int>(std::string::npos));
         int searchSpaceLength(searchSpace.length());
         int queryLength(query.length());
-        for (int offset = 0; offset + queryLength <= searchSpaceLength; offset++) {
+        for (int offset = 0; offset + queryLength <= searchSpaceLength; ++offset) {
             int matchIndex = 0;
-            for (; matchIndex < queryLength; matchIndex++) {
+            for (; matchIndex < queryLength; ++matchIndex) {
                 if (searchSpace[offset + matchIndex] != query[matchIndex]) {
                     // matchIndex represents the index of matches as well
                     break;

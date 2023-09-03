@@ -33,7 +33,7 @@ TEST(FixedSizeStackTest, DISABLED_PopWorksWithAssertionWhenItsEmpty) {
 TEST(FixedSizeStackTest, DISABLED_PushWorksWithAssertionWhenItReachesMaximumSize) {
     StackForTest stack;
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; ++i) {
         stack.push(i);
     }
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto,cert-err33-c)

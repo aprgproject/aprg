@@ -80,7 +80,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnDifferentRaiseToPowerExpress
     simplification.simplify();
 
     Expression expressionToVerify(simplification.getExpression());
-    const Expression& expressionToExpect(expressionToTest);
+    Expression const& expressionToExpect(expressionToTest);
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
 

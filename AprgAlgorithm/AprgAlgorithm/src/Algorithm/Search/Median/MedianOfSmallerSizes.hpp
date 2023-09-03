@@ -31,7 +31,7 @@ public:
         ConstIterator const endIt)  // half open interval
         : m_size(std::distance(startIt, endIt)), m_medianSize(getMedianSize(m_size)) {
         m_sortedValuesInHalf.reserve(getMedianSizeWithOverFlow(m_medianSize));
-        for (auto it = startIt; it != endIt; it++) {
+        for (auto it = startIt; it != endIt; ++it) {
             addValueToMedianValues(*it);
         }
     }
@@ -58,7 +58,7 @@ private:
     [[nodiscard]] Value getSmallerMedianWithoutCheck() const {
         auto it = std::prev(m_sortedValuesInHalf.end());
         if (mathHelper::isEven(m_size)) {
-            it--;
+            --it;
         }
         return *it;
     }
@@ -68,7 +68,7 @@ private:
     void addValueToMedianValues(Value const& value) {
         // this is similar to insertion sort for link list
         bool isInserted(false);
-        for (auto it = m_sortedValuesInHalf.cbegin(); it != m_sortedValuesInHalf.cend(); it++) {
+        for (auto it = m_sortedValuesInHalf.cbegin(); it != m_sortedValuesInHalf.cend(); ++it) {
             if (value < *it) {
                 m_sortedValuesInHalf.emplace(it, value);
                 isInserted = true;

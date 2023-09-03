@@ -55,8 +55,8 @@ HumanScoreGenerator::DataFromExchanges HumanScoreGenerator::getDataFromExchanges
 
     int hangingValue = isACaptureMove(pieceAtStart, pieceAtEnd) ? -getValueOfPieceType(pieceAtEnd.getType()) : 0;
     int complicatedScore = 0;
-    for (int j = 0; j < Board::CHESS_SIDE_SIZE; j++) {
-        for (int i = 0; i < Board::CHESS_SIDE_SIZE; i++) {
+    for (int j = 0; j < Board::CHESS_SIDE_SIZE; ++j) {
+        for (int i = 0; i < Board::CHESS_SIDE_SIZE; ++i) {
             Coordinate coordinate{i, j};
             Piece piece(boardAfterMove.getPieceAt(coordinate));
             Exchange exchange(boardAfterMove.getExchangeAt(coordinate));

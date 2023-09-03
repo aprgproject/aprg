@@ -55,8 +55,8 @@ int PolynomialRaiseToAnUnsignedInt::getGcfOfExponents(PolynomialToNumberMap cons
     if (!factorsToExponent.empty()) {
         auto it = factorsToExponent.cbegin();
         result = it->second;
-        it++;
-        for (; it != factorsToExponent.cend(); it++) {
+        ++it;
+        for (; it != factorsToExponent.cend(); ++it) {
             result = getGreatestCommonFactor(result, it->second);
         }
     }

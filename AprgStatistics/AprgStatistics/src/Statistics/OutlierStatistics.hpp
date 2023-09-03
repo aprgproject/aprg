@@ -22,7 +22,7 @@ public:
         Sample deviation(static_cast<Sample>(sample - LocalStatistics::m_mean.value()).calculateAbsoluteValue());
         Sample deviationOverStandardDeviation(deviation / LocalStatistics::m_sampleStandardDeviation.value());
         bool isAnOutlier(false);
-        for (int i = 0; i < deviationOverStandardDeviation.getSize(); i++) {
+        for (int i = 0; i < deviationOverStandardDeviation.getSize(); ++i) {
             if (deviationOverStandardDeviation.getValueAt(i) > acceptableDeviation) {
                 isAnOutlier = true;
                 break;

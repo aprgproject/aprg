@@ -35,7 +35,7 @@ public:
         int numbersOfElementsInSet = std::min(values.size(), c * mathHelper::getLogarithmWithBase2Of(values.size()));
         AlbaUniformNonDeterministicRandomizer<int> randomizer(0, static_cast<int>(values.size()) - 1);
         SetOfValues orderedValues;
-        for (int i = 0; i < numbersOfElementsInSet; i++) {
+        for (int i = 0; i < numbersOfElementsInSet; ++i) {
             orderedValues.emplace(values[randomizer.getRandomValue()]);
         }
         Value result{};

@@ -17,7 +17,7 @@ ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom
     // Auxiliary Space: Constant
 
     Value result(0);
-    for (Value number = 1; number <= m_lastNumber; number++) {
+    for (Value number = 1; number <= m_lastNumber; ++number) {
         for (Value numberForDigitsSum = number; numberForDigitsSum > 0; numberForDigitsSum /= 10) {
             result += numberForDigitsSum % 10;
         }
@@ -41,7 +41,7 @@ ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom
     Value powerOf10 = 1;
     Value previousDigits = 0;
     for (Value numberForDigitsSum = m_lastNumber; numberForDigitsSum > 0;
-         numberForDigitsSum /= 10, digitIndex++, previousPowerOf10 = powerOf10, powerOf10 *= 10) {
+         numberForDigitsSum /= 10, ++digitIndex, previousPowerOf10 = powerOf10, powerOf10 *= 10) {
         Value digitValue = numberForDigitsSum % 10;
         Value sumAtDigit = getSummationFrom1ToN(digitValue - 1) * powerOf10 + digitValue * (previousDigits + 1);
         Value numberOf0To9 = digitIndex * previousPowerOf10;
@@ -72,7 +72,7 @@ ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom
 
         sumAtDigitIndex[0] = 0;
         sumAtDigitIndex[1] = 45;
-        for (Value digitIndex = 2; digitIndex <= numberOfDigitsMinus1; digitIndex++) {
+        for (Value digitIndex = 2; digitIndex <= numberOfDigitsMinus1; ++digitIndex) {
             sumAtDigitIndex[digitIndex] =
                 10 * sumAtDigitIndex[digitIndex - 1] + 45 * getRaiseToPowerForIntegers(10, digitIndex - 1);
         }

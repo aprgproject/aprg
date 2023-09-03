@@ -86,7 +86,7 @@ int StringConstruction::count(int const prefixLength) {
             subString == m_stringToConstruct.substr(prefixLength - subStringLength, subStringLength)) {
             result += getCount(prefixLength - subStringLength);
         } else if (subStringLength == prefixLength && subString == m_stringToConstruct.substr(0, prefixLength)) {
-            result++;
+            ++result;
         }
     }
     return result;
@@ -105,7 +105,7 @@ int StringConstruction::countSquareRootAlgorithm(int const prefixLength) {
 
     int result(0);
     int limit = min(m_subStrings.size(), m_subStringHash.size());
-    for (int i = 0; i < limit; i++) {
+    for (int i = 0; i < limit; ++i) {
         int subStringLength = m_subStrings[i].length();
         HashValue subStringHash = m_subStringHash[i];
 
@@ -116,7 +116,7 @@ int StringConstruction::countSquareRootAlgorithm(int const prefixLength) {
         } else if (
             subStringLength == prefixLength &&
             subStringHash == mainHashFunction.getHashCodeOfSubstring(0, prefixLength - 1)) {
-            result++;
+            ++result;
         }
     }
     return result;

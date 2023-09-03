@@ -22,7 +22,7 @@ public:
         Indexes prefixLengths = calculatePrefixLengths(stringForZAlgorithm);
         Index queryLength = m_query.length();
         Index i = queryLength;
-        for (; i < static_cast<Index>(prefixLengths.size()); i++) {
+        for (; i < static_cast<Index>(prefixLengths.size()); ++i) {
             if (prefixLengths[i] >= queryLength) {
                 result = i - queryLength - 1;
                 break;
@@ -37,7 +37,7 @@ public:
         Indexes prefixLengths = calculatePrefixLengths(stringForZAlgorithm);
         Index queryLength = m_query.length();
         Index i = queryLength;
-        for (; i < static_cast<int>(prefixLengths.size()); i++) {
+        for (; i < static_cast<int>(prefixLengths.size()); ++i) {
             if (prefixLengths[i] >= queryLength) {
                 result.emplace_back(i - queryLength - 1);
             }

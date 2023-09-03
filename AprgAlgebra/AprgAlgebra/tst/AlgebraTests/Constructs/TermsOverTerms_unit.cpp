@@ -122,13 +122,13 @@ TEST(TermsOverTermsTest, GetTermsRaiseToNumbersWorks) {
     auto itVerify = baseToExponentMap.cbegin();
     EXPECT_EQ(Term("a"), itVerify->first);
     EXPECT_EQ(AlbaNumber(1), itVerify->second);
-    itVerify++;
+    ++itVerify;
     EXPECT_EQ(Term("b"), itVerify->first);
     EXPECT_EQ(AlbaNumber(1), itVerify->second);
-    itVerify++;
+    ++itVerify;
     EXPECT_EQ(Term("x"), itVerify->first);
     EXPECT_EQ(AlbaNumber(-1), itVerify->second);
-    itVerify++;
+    ++itVerify;
     EXPECT_EQ(Term("y"), itVerify->first);
     EXPECT_EQ(AlbaNumber(-1), itVerify->second);
 }

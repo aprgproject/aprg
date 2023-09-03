@@ -62,7 +62,7 @@ optional<Circle> BitmapFilters::getPossiblePenCircle(
             [&](BitmapXY const& pointInCircle) {
                 uint32_t const currentColor(inputSnippet.getColorAt(pointInCircle));
                 if (isSimilar(centerColor, currentColor, similarityColorLimit)) {
-                    similarPixelsCount++;
+                    ++similarPixelsCount;
                 }
                 totalPixelCount++;
             });
@@ -202,7 +202,7 @@ void BitmapFilters::drawWithBlurringDisimilarColors(
     BitmapSnippet& snippet, int const numberOfPasses, uint32_t const similarityColorLimit) {
     PointToColorMap disimilarPointsToNewColors;
 
-    for (int i = 0; i < numberOfPasses; i++) {
+    for (int i = 0; i < numberOfPasses; ++i) {
         disimilarPointsToNewColors.clear();
         collectDisimilarPointsToNewColors(disimilarPointsToNewColors, snippet, similarityColorLimit);
         for (auto const& disimilarPointAndNewColorPair : disimilarPointsToNewColors) {
@@ -329,9 +329,9 @@ void BitmapFilters::collectDisimilarPointsToNewColors(
             redTotal += extractRed(neighborPointColor);
             greenTotal += extractGreen(neighborPointColor);
             blueTotal += extractBlue(neighborPointColor);
-            neighborCount++;
+            ++neighborCount;
             if (!isSimilar(pointColor, neighborPointColor, similarityColorLimit)) {
-                disimilarNeighborCount++;
+                ++disimilarNeighborCount;
             }
         });
         uint32_t newColor = combineRgbToColor(
@@ -411,7 +411,7 @@ void BitmapFilters::determineConnectedComponentsUsingTwoPassInFirstPass(
                 m_labelForPixels.setLabel(currentPoint, smallestNeighborLabel);
             } else {
                 m_labelForPixels.setLabel(currentPoint, currentLabel);
-                currentLabel++;
+                ++currentLabel;
             }
         }
     });

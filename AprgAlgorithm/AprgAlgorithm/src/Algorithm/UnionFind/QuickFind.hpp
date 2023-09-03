@@ -39,7 +39,7 @@ private:
     }
 
     void replaceAllOldRootsWithNewRoot(Object const& oldRoot, Object const& newRoot) {
-        for (int i = 0; i < SIZE; i++) {
+        for (int i = 0; i < SIZE; ++i) {
             if (m_roots[i] == oldRoot) {
                 m_roots[i] = newRoot;
             }

@@ -55,7 +55,7 @@ Function harmonicNumber(Term const& term) {
                 AlbaNumber result;
                 if ((number.getInteger() != 0) && number > 0) {
                     int lastNumber = static_cast<int>(number.getInteger());
-                    for (int i = 1; i <= lastNumber; i++) {
+                    for (int i = 1; i <= lastNumber; ++i) {
                         result = result + AlbaNumber::createFraction(1, i);
                     }
                 }

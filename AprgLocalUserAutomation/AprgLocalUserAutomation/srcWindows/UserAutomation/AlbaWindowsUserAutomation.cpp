@@ -158,11 +158,11 @@ void AlbaWindowsUserAutomation::performKeyCombination(
         sleepWithRealisticDelay();
     }
     sleepWithRealisticDelay();
-    for (auto rit = characters.rbegin(); rit != characters.rend(); rit++) {
+    for (auto rit = characters.rbegin(); rit != characters.rend(); ++rit) {
         pressKey(convertToVirtualKey(*rit));
         sleepWithRealisticDelay();
     }
-    for (auto rit = keys.rbegin(); rit != keys.rend(); rit++) {
+    for (auto rit = keys.rbegin(); rit != keys.rend(); ++rit) {
         pressKey(*rit);
         sleepWithRealisticDelay();
     }

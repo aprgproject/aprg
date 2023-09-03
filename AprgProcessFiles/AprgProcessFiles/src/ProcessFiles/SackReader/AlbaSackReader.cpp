@@ -110,7 +110,7 @@ void AlbaSackReader::combineWords(stringHelper::strings& tokens) {
         string token;
     };
     vector<TokenAndIndex> recentWords;
-    for (int i = 0; i < static_cast<int>(tokens.size()); i++) {
+    for (int i = 0; i < static_cast<int>(tokens.size()); ++i) {
         string token(tokens[i]);
         if (stringHelper::isIdentifier(token)) {
             TokenAndIndex tokenAndIndex{};
@@ -154,7 +154,7 @@ void AlbaSackReader::combineArrayOperators(stringHelper::strings& tokens) {
     int state = 0;
     int nonWhiteSpaceIndex = 0;
     int closingBracketIndex = 0;
-    for (int i = 0; i < static_cast<int>(tokens.size()); i++) {
+    for (int i = 0; i < static_cast<int>(tokens.size()); ++i) {
         string token(tokens[i]);
         if (0 == state) {
             if ('[' == token[0]) {

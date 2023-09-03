@@ -19,10 +19,10 @@ TEST(TermsRaiseToNumbersTest, ConstructionWorks) {
     auto itToVerify = mapToVerify.cbegin();
     EXPECT_EQ(Term("x"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(1), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term("y"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(-2), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term("z"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(3), itToVerify->second);
 }
@@ -36,10 +36,10 @@ TEST(TermsRaiseToNumbersTest, GetBaseToExponentMapWorks) {
     auto itToVerify = mapToVerify.cbegin();
     EXPECT_EQ(Term("x"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(1), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term("y"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(-2), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term("z"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(3), itToVerify->second);
 }
@@ -95,10 +95,10 @@ TEST(TermsRaiseToNumbersTest, AddExponentsWorks) {
     auto itToVerify = mapToVerify.cbegin();
     EXPECT_EQ(Term("x"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(5), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term("y"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(-7), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term("z"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(9), itToVerify->second);
 }
@@ -114,10 +114,10 @@ TEST(TermsRaiseToNumbersTest, SubtractExponentsWorks) {
     auto itToVerify = mapToVerify.cbegin();
     EXPECT_EQ(Term("x"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(3), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term("y"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(-3), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term("z"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(3), itToVerify->second);
 }
@@ -132,10 +132,10 @@ TEST(TermsRaiseToNumbersTest, MultiplyNumberToExponentsWorks) {
     auto itToVerify = mapToVerify.cbegin();
     EXPECT_EQ(Term("x"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(20), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term("y"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(-25), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term("z"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(30), itToVerify->second);
 }
@@ -155,16 +155,16 @@ TEST(TermsRaiseToNumbersTest, PutTermWorksOnMonomial) {
     auto itToVerify = mapToVerify.cbegin();
     EXPECT_EQ(Term(5), itToVerify->first);
     EXPECT_EQ(AlbaNumber(1), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term(7), itToVerify->first);
     EXPECT_EQ(AlbaNumber(-1), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term("x"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(7), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term("y"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(-10), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term("z"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(3), itToVerify->second);
 }
@@ -182,10 +182,10 @@ TEST(TermsRaiseToNumbersTest, PutTermWorksOnOtherTermTypes) {
     auto itToVerify = mapToVerify.cbegin();
     EXPECT_EQ(Term(cos("x")), itToVerify->first);
     EXPECT_EQ(AlbaNumber(7), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term(sin("x")), itToVerify->first);
     EXPECT_EQ(AlbaNumber(-10), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term(tan("x")), itToVerify->first);
     EXPECT_EQ(AlbaNumber(3), itToVerify->second);
 }
@@ -201,10 +201,10 @@ TEST(TermsRaiseToNumbersTest, PutTermsWorks) {
     auto itToVerify = mapToVerify.cbegin();
     EXPECT_EQ(Term("x"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(6), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term("y"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(4), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term("z"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(10), itToVerify->second);
 }
@@ -231,7 +231,7 @@ TEST(TermsRaiseToNumbersTest, RemoveItemWithBaseWorks) {
     auto itToVerify = mapToVerify.cbegin();
     EXPECT_EQ(Term("y"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(-2), itToVerify->second);
-    itToVerify++;
+    ++itToVerify;
     EXPECT_EQ(Term("z"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(3), itToVerify->second);
 }

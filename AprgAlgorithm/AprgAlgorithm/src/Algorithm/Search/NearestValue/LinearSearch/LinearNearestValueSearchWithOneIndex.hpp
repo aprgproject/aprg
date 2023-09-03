@@ -37,7 +37,7 @@ public:
         Index result(INVALID_INDEX);
         if (!m_values.empty()) {
             Value minimumDeviation(std::numeric_limits<Value>::max());
-            for (auto it = m_values.cbegin() + m_startIndex; it != m_values.cbegin() + m_endIndex; it++) {
+            for (auto it = m_values.cbegin() + m_startIndex; it != m_values.cbegin() + m_endIndex; ++it) {
                 Value value(*it);
                 if (value == target) {
                     result = std::distance(m_values.cbegin(), it);

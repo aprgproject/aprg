@@ -23,8 +23,8 @@ TEST(OutwardCircleTraversalTest, ConstructedRadiusToCoordinatesAreCorrectForZero
         EXPECT_DOUBLE_EQ(itInExpect->first, itInVerify->first);
         EXPECT_EQ(itInExpect->second.coordinate1, itInVerify->second.coordinate1);
         EXPECT_EQ(itInExpect->second.coordinate2, itInVerify->second.coordinate2);
-        itInExpect++;
-        itInVerify++;
+        ++itInExpect;
+        ++itInVerify;
     }
 }
 
@@ -61,8 +61,8 @@ TEST(OutwardCircleTraversalTest, ConstructedRadiusToCoordinatesAreCorrectForRadi
         EXPECT_DOUBLE_EQ(itInExpect->first, itInVerify->first);
         EXPECT_EQ(itInExpect->second.coordinate1, itInVerify->second.coordinate1);
         EXPECT_EQ(itInExpect->second.coordinate2, itInVerify->second.coordinate2);
-        itInExpect++;
-        itInVerify++;
+        ++itInExpect;
+        ++itInVerify;
     }
 }
 

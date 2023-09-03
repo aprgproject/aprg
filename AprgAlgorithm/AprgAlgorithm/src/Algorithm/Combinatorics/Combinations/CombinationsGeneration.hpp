@@ -50,7 +50,7 @@ private:
             Objects const& objects(recursionData.objects);
             Combination& currentCombination(recursionData.currentCombination);
 
-            for (int index = recursionData.currentIndex; index < static_cast<int>(objects.size()); index++) {
+            for (int index = recursionData.currentIndex; index < static_cast<int>(objects.size()); ++index) {
                 currentCombination.emplace_back(objects[index]);
                 recursionData.currentIndex = index + 1;
                 collectCombinationsUsingRecursion(recursionData);

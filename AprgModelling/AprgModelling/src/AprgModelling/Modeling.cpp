@@ -80,7 +80,7 @@ void Modeling::retrieveDataFromFileWithFileFormat2(string const& filePath) {
                 for_each(it, itemsFound.cend(), [&](string const& item) {
                     reversedCoordinates.emplace_back(stringHelper::convertStringToNumber<double>(item));
                 });
-                reversedCoordinatesRows++;
+                ++reversedCoordinatesRows;
             }
         }
     }
@@ -190,10 +190,10 @@ void Modeling::copyVectorToMatrix(
     unsigned int y = 0;
     for (double const value : retrievedDataForX) {
         matrixOfDoubles.setEntry(x, y, value);
-        x++;
+        ++x;
         if (x >= numberOfColumns) {
             x = 0;
-            y++;
+            ++y;
         }
     }
 }

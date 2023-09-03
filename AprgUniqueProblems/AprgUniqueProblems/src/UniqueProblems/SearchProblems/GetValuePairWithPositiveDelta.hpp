@@ -30,9 +30,9 @@ public:
                     break;
                 }
                 if (currentPositiveDelta > targetPositiveDelta) {
-                    lowerIndex++;
+                    ++lowerIndex;
                 } else if (currentPositiveDelta < targetPositiveDelta) {
-                    higherIndex++;
+                    ++higherIndex;
                 }
             }
         }

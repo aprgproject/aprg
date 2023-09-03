@@ -266,7 +266,7 @@ TEST(AlbaLargeSorterTest, SorterIsNotEmptyWhenElementIsNotAdded) {
 
 TEST(AlbaLargeSorterTest, PrimitiveDataTypesAreFoundWhenAdded) {
     AlbaLargeSorter<int> largeSorter(AlbaLargeSorterConfiguration(ALBA_LARGE_SORTER_BLOCK_DIR, 100, 1000, 1000, 100));
-    for (int inputValue = 0; inputValue < 100; inputValue++) {
+    for (int inputValue = 0; inputValue < 100; ++inputValue) {
         largeSorter.add(inputValue);
     }
 
@@ -297,7 +297,7 @@ TEST(AlbaLargeSorterTest, PrimitiveDataTypesAreSortedWhenAdded) {
 
 TEST(AlbaLargeSorterTest, PrimitiveDataTypesForBlocksAreCreatedWhenBlocksWhenMemoryIsLimited) {
     AlbaLargeSorter<int> largeSorter(AlbaLargeSorterConfiguration(ALBA_LARGE_SORTER_BLOCK_DIR, 3, 10, 0, 100));
-    for (int inputValue = 0; inputValue < 10; inputValue++) {
+    for (int inputValue = 0; inputValue < 10; ++inputValue) {
         largeSorter.add(inputValue);
     }
 
@@ -353,7 +353,7 @@ TEST(AlbaLargeSorterTest, FilesForBlocksAreDeletedAfterFileForBlocksAreCreated) 
 
     AlbaLargeSorter<int> largeSorter(AlbaLargeSorterConfiguration(ALBA_LARGE_SORTER_BLOCK_DIR, 3, 10, 0, 200));
 
-    for (int inputValue = 0; inputValue < 200; inputValue++) {
+    for (int inputValue = 0; inputValue < 200; ++inputValue) {
         largeSorter.add(inputValue);
     }
 
@@ -755,7 +755,7 @@ TEST(AlbaLargeSorterTest, DISABLED_FileStreamAreLimitedByMaximumFileStreams) {
     vector<int> integersToShuffle;
     constexpr int NUMBER_OF_INTEGERS = 1000;
     integersToShuffle.reserve(NUMBER_OF_INTEGERS);
-    for (int inputValue = 0; inputValue < NUMBER_OF_INTEGERS; inputValue++) {
+    for (int inputValue = 0; inputValue < NUMBER_OF_INTEGERS; ++inputValue) {
         integersToShuffle.emplace_back(inputValue);
     }
     shuffle(

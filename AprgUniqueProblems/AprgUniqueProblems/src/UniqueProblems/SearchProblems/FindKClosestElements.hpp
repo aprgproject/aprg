@@ -27,19 +27,19 @@ public:
             Index low(nearestIndex), high(nearestIndex);
             while (count < numberOfClosestElements && low > 0 && high + 1 < static_cast<Index>(m_values.size())) {
                 if (valueToCheck - m_values[low] <= m_values[high] - valueToCheck) {
-                    low--;
+                    --low;
                 } else {
-                    high++;
+                    ++high;
                 }
                 count++;
             }
             while (count < numberOfClosestElements && low > 0) {
-                low--;
-                count++;
+                --low;
+                ++count;
             }
             while (count < numberOfClosestElements && high + 1 < static_cast<Index>(m_values.size())) {
-                high++;
-                count++;
+                ++high;
+                ++count;
             }
             result = {low, high};
         }

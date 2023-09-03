@@ -46,12 +46,12 @@ MinimumNumberOfJumpsToReachEnd::Count MinimumNumberOfJumpsToReachEnd::getMinimum
     if (!m_sequence.empty()) {
         Counts indexToCountOfJumps(m_sequence.size(), static_cast<Count>(MAX_COUNT));
         indexToCountOfJumps[0] = 0;
-        for (Index startOfJumpIndex(0); startOfJumpIndex < static_cast<Index>(m_sequence.size()); startOfJumpIndex++) {
+        for (Index startOfJumpIndex(0); startOfJumpIndex < static_cast<Index>(m_sequence.size()); ++startOfJumpIndex) {
             Count countOfJumps = indexToCountOfJumps[startOfJumpIndex] + 1;
             Index maxPossibleJumpIndex =
                 min(startOfJumpIndex + m_sequence[startOfJumpIndex], static_cast<Index>(m_sequence.size() - 1));
             for (Index endOfJumpIndex = startOfJumpIndex + 1; endOfJumpIndex <= maxPossibleJumpIndex;
-                 endOfJumpIndex++) {
+                 ++endOfJumpIndex) {
                 Count& countOfJumpsAtIndex(indexToCountOfJumps[endOfJumpIndex]);
                 countOfJumpsAtIndex = min(countOfJumpsAtIndex, countOfJumps);
             }
@@ -73,13 +73,13 @@ MinimumNumberOfJumpsToReachEnd::getMinimumNumberOfJumpsUsingIterativeDPAndTimeEf
         Count jumpCount(0);
         Count maxIndexAtNextJump(m_sequence.front());
         Count stepsAtCurrentJump(m_sequence.front());
-        for (Index index(1); index <= maxIndexAtNextJump; index++) {
+        for (Index index(1); index <= maxIndexAtNextJump; ++index) {
             maxIndexAtNextJump =
                 min(max(maxIndexAtNextJump, index + m_sequence[index]), static_cast<Index>(m_sequence.size() - 1));
-            stepsAtCurrentJump--;
+            --stepsAtCurrentJump;
             if (stepsAtCurrentJump == 0) {
                 stepsAtCurrentJump = maxIndexAtNextJump - index;
-                jumpCount++;
+                ++jumpCount;
             }
         }
         result = jumpCount;
@@ -100,7 +100,7 @@ MinimumNumberOfJumpsToReachEnd::Indices MinimumNumberOfJumpsToReachEnd::getPathO
         Count stepsAtCurrentJump(m_sequence.front());
         Index startOfJump = 0;
         Index startOfNextJump = 0;
-        for (Index index(1); index <= maxIndexAtNextJump; index++) {
+        for (Index index(1); index <= maxIndexAtNextJump; ++index) {
             indexToPreviousIndex[index] = startOfJump;
 
             Index nextJumpIndex = min(index + m_sequence[index], static_cast<Index>(m_sequence.size() - 1));
@@ -113,7 +113,7 @@ MinimumNumberOfJumpsToReachEnd::Indices MinimumNumberOfJumpsToReachEnd::getPathO
             if (stepsAtCurrentJump == 0) {
                 stepsAtCurrentJump = maxIndexAtNextJump - index;
                 startOfJump = startOfNextJump;
-                jumpCount++;
+                ++jumpCount;
             }
         }
 
@@ -136,7 +136,7 @@ MinimumNumberOfJumpsToReachEnd::Count MinimumNumberOfJumpsToReachEnd::getMinimum
         result = MAX_COUNT;
         Index maxPossibleJumpIndex =
             min(startOfJumpIndex + m_sequence[startOfJumpIndex], static_cast<Index>(m_sequence.size() - 1));
-        for (Index endOfJumpIndex = startOfJumpIndex + 1; endOfJumpIndex <= maxPossibleJumpIndex; endOfJumpIndex++) {
+        for (Index endOfJumpIndex = startOfJumpIndex + 1; endOfJumpIndex <= maxPossibleJumpIndex; ++endOfJumpIndex) {
             result = min(result, getMinimumNumberOfJumpsUsingNaiveRecursion(endOfJumpIndex));
         }
         result++;
@@ -153,7 +153,7 @@ MinimumNumberOfJumpsToReachEnd::Count MinimumNumberOfJumpsToReachEnd::getMinimum
             Index maxPossibleJumpIndex =
                 min(startOfJumpIndex + m_sequence[startOfJumpIndex], static_cast<Index>(m_sequence.size() - 1));
             for (Index endOfJumpIndex = startOfJumpIndex + 1; endOfJumpIndex <= maxPossibleJumpIndex;
-                 endOfJumpIndex++) {
+                 ++endOfJumpIndex) {
                 result = min(result, getMinimumNumberOfJumpsUsingMemoizationDP(indexToCountOfJumps, endOfJumpIndex));
             }
             result++;

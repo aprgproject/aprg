@@ -193,7 +193,7 @@ void TermRaiseToTerms::simplifyAdditionAndSubtractionExpressionRaiseToPositiveIn
     Term& base, Expression const& expressionBase, int const exponent) {
     Term result(1);
     Term termToMultiply(expressionBase);
-    for (int i = 0; i < exponent; i++) {
+    for (int i = 0; i < exponent; ++i) {
         result = result * termToMultiply;
     }
     result.simplify();
@@ -204,7 +204,7 @@ void TermRaiseToTerms::simplifyConstantRaiseToMultiplicationAndDivisionExpressio
     Term& base, TermsWithDetails& exponents, Term const& exponentCombinedTerm) {
     TermsWithDetails termsWithDetails(
         exponentCombinedTerm.getAsExpression().getTermsWithAssociation().getTermsWithDetails());
-    for (int i = 0; i < static_cast<int>(termsWithDetails.size()); i++) {
+    for (int i = 0; i < static_cast<int>(termsWithDetails.size()); ++i) {
         TermWithDetails const& exponentWithDetails(termsWithDetails[i]);
         Term const& exponent(getTermConstReferenceFromUniquePointer(exponentWithDetails.baseTermPointer));
         if (exponentWithDetails.hasPositiveAssociation() && exponent.isFunction()) {

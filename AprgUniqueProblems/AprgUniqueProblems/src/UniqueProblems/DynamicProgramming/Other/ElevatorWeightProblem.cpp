@@ -11,10 +11,10 @@ ElevatorWeightProblem::ElevatorWeightProblem(Weight const maximumElevatorWeight,
 
 int ElevatorWeightProblem::getNumberOfOptimalRides() {
     int result(0);
-    for (PeopleBits peopleBits = 1; peopleBits < getNumberOfPeopleSubsets(); peopleBits++) {
+    for (PeopleBits peopleBits = 1; peopleBits < getNumberOfPeopleSubsets(); ++peopleBits) {
         // initial value: n+1 rides are needed
         m_numberOfRidesAndLastWeights[peopleBits] = NumberOfRidesAndWeight{getNumberOfPeople() + 1, 0};
-        for (Person person = 0; person < getNumberOfPeople(); person++) {
+        for (Person person = 0; person < getNumberOfPeople(); ++person) {
             if (isPersonIncluded(peopleBits, person)) {
                 NumberOfRidesAndWeight newOption = m_numberOfRidesAndLastWeights[removePerson(peopleBits, person)];
                 if (newOption.second + m_peopleWeights[person] <= m_maximumElevatorWeight) {

@@ -63,7 +63,7 @@ BranchAndBoundZeroAndOneKnapsack::Profit BranchAndBoundZeroAndOneKnapsack::getMa
         while (itemIndex < itemSize && totalWeight + items[itemIndex].first <= maximumWeight) {
             totalWeight += items[itemIndex].first;
             maxPossibleProfit += items[itemIndex].second;
-            itemIndex++;
+            ++itemIndex;
         }
         if (itemIndex < itemSize) {
             // for fractional part

@@ -27,11 +27,11 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
     Cost result(0);
     if (!m_words.empty() && m_maxLineLength > 0) {
         Costs costsAtLength(m_maxLineLength + 1, static_cast<Cost>(MAX_COST));
-        for (Index targetLineLength = 1; targetLineLength <= m_maxLineLength; targetLineLength++) {
+        for (Index targetLineLength = 1; targetLineLength <= m_maxLineLength; ++targetLineLength) {
             Cost costAtLength(0);
             bool hasNoSolutions(false);
             Index lineLength(m_words.front().length());
-            for (auto it = m_words.cbegin() + 1; it != m_words.cend(); it++) {
+            for (auto it = m_words.cbegin() + 1; it != m_words.cend(); ++it) {
                 Index wordLength(it->length());
                 if (wordLength > targetLineLength) {
                     hasNoSolutions = true;
@@ -66,12 +66,12 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
         Index numberOfWords(m_words.size());
         Costs costsIfFirstWord(numberOfWords, static_cast<Cost>(MAX_COST));
         for (int firstWordIndex = numberOfWords - 1; firstWordIndex >= 0;
-             firstWordIndex--)  // try all first word in lines
+             --firstWordIndex)  // try all first word in lines
         {
             Cost& costIfFirstWord(costsIfFirstWord[firstWordIndex]);
             Index lineLength(0);
             for (Index lastWordIndex = firstWordIndex; lastWordIndex < numberOfWords;
-                 lastWordIndex++)  // try all last word in lines
+                 ++lastWordIndex)  // try all last word in lines
             {
                 lineLength += m_words[lastWordIndex].length();
                 lineLength += (static_cast<Index>(firstWordIndex) < lastWordIndex) ? 1 : 0;  // add space character
@@ -120,7 +120,7 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getTotalLength(
     Index result(0);
     if (!m_words.empty()) {
         result = m_words.front().length();
-        for (auto it = m_words.cbegin() + 1; it != m_words.cend(); it++) {
+        for (auto it = m_words.cbegin() + 1; it != m_words.cend(); ++it) {
             result += it->length() + 1;  // plus one for space
         }
     }

@@ -26,7 +26,7 @@ public:
     void enqueue(Object const& object) override {
         m_nextOfLastDoublePointer->reset(new Node{object, nullptr});
         m_nextOfLastDoublePointer = &((*m_nextOfLastDoublePointer)->next);
-        m_size++;
+        ++m_size;
     }
 
     Object dequeue() override {
@@ -35,7 +35,7 @@ public:
         if (m_first) {
             result = m_first->object;
             m_first = std::move(m_first->next);
-            m_size--;
+            --m_size;
             if (isEmpty()) {
                 m_nextOfLastDoublePointer = &m_first;
             }

@@ -215,7 +215,7 @@ void Line::mergePointsFromPointsFromXAndY(
             if (isDirectionAscendingForX) {
                 if (isAlmostEqual(iteratorForX->getX(), iteratorForY->getX())) {
                     points.emplace_back(*iteratorForX++);
-                    iteratorForY++;
+                    ++iteratorForY;
                 } else if (iteratorForX->getX() < iteratorForY->getX()) {
                     points.emplace_back(*iteratorForX++);
                 } else {
@@ -224,7 +224,7 @@ void Line::mergePointsFromPointsFromXAndY(
             } else {
                 if (isAlmostEqual(iteratorForX->getX(), iteratorForY->getX())) {
                     points.emplace_back(*iteratorForX++);
-                    iteratorForY++;
+                    ++iteratorForY;
                 } else if (iteratorForX->getX() > iteratorForY->getX()) {
                     points.emplace_back(*iteratorForX++);
                 } else {

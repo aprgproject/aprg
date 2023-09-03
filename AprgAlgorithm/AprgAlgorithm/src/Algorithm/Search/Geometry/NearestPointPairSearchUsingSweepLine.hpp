@@ -36,7 +36,7 @@ public:
                 // process all the points with y that fits the smallest distance
                 auto itYStart = setOfYs.lower_bound(point.second - smallestDistance);
                 auto itYEnd = setOfYs.upper_bound(point.second + smallestDistance);
-                for (auto itY = itYStart; itY != itYEnd; itY++) {
+                for (auto itY = itYStart; itY != itYEnd; ++itY) {
                     Point possibleNearPoint(x, *itY);
                     if (point != possibleNearPoint) {
                         Unit distance = getDistance(point, possibleNearPoint);

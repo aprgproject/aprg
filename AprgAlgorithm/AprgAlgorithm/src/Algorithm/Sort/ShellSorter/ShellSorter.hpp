@@ -24,7 +24,7 @@ private:
     void sortWithSkipping(Values& valuesToSort, int const skipValue) const {
         // This is h-sorting. An h-sorted array is h interleaved sorted subsequences.
         // This is insertion sort but with skipping
-        for (int i = skipValue; i < static_cast<int>(valuesToSort.size()); i++) {
+        for (int i = skipValue; i < static_cast<int>(valuesToSort.size()); ++i) {
             continuouslySwapDownIfStillOutOfOrderWithSkipping(valuesToSort, i, skipValue);
         }
     }

@@ -30,7 +30,7 @@ public:
                 }
             }
 
-            for (Value partialValue = initialValue; partialValue < newSize; partialValue++) {
+            for (Value partialValue = initialValue; partialValue < newSize; ++partialValue) {
                 Permutations& permutations(m_permutations[partialValue]);
                 for (Value const inputValue : m_inputValues) {
                     if (partialValue > inputValue) {

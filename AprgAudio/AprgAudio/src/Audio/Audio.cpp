@@ -102,12 +102,12 @@ bool Audio<DataType>::setAudioBuffer(AudioBuffer& newBuffer) {
     // set the number of channels
     samples.resize(newBuffer.size());
 
-    for (int k = 0; k < getNumberOfChannels(); k++) {
+    for (int k = 0; k < getNumberOfChannels(); ++k) {
         assert(static_cast<int>(newBuffer[k].size()) == numberOfSamples);
 
         samples[k].resize(numberOfSamples);
 
-        for (int i = 0; i < numberOfSamples; i++) {
+        for (int i = 0; i < numberOfSamples; ++i) {
             samples[k][i] = newBuffer[k][i];
         }
     }
@@ -125,7 +125,7 @@ template <class DataType>
 void Audio<DataType>::setNumSamplesPerChannel(int numberOfSamples) {
     int originalSize = getNumberOfSamplesPerChannel();
 
-    for (int i = 0; i < getNumberOfChannels(); i++) {
+    for (int i = 0; i < getNumberOfChannels(); ++i) {
         samples[i].resize(numberOfSamples);
 
         // set any new samples to zero
@@ -145,7 +145,7 @@ void Audio<DataType>::setNumberOfChannels(int numberOfChannels) {
     // make sure any new channels are set to the right size
     // and filled with zeros
     if (numberOfChannels > originalNumberOfChannels) {
-        for (int i = originalNumberOfChannels; i < numberOfChannels; i++) {
+        for (int i = originalNumberOfChannels; i < numberOfChannels; ++i) {
             samples[i].resize(originalNumSamplesPerChannel);
             fill(samples[i].begin(), samples[i].end(), static_cast<DataType>(0.));
         }
@@ -262,8 +262,8 @@ bool Audio<DataType>::decodeWaveFile(vector<uint8_t>& dataBuffer) {
     clearAudioBuffer();
     samples.resize(numberOfChannels);
 
-    for (int i = 0; i < numberOfSamples; i++) {
-        for (int channel = 0; channel < numberOfChannels; channel++) {
+    for (int i = 0; i < numberOfSamples; ++i) {
+        for (int channel = 0; channel < numberOfChannels; ++channel) {
             int sampleIndex = samplesStartIndex + (numberBytesPerBlock * i) + channel * numberBytesPerSample;
 
             if (bitDepth == 8) {
@@ -365,8 +365,8 @@ bool Audio<DataType>::decodeAiffFile(vector<uint8_t>& dataBuffer) {
     clearAudioBuffer();
     samples.resize(numberOfChannels);
 
-    for (int i = 0; i < numberOfSamplesPerChannel; i++) {
-        for (int channel = 0; channel < numberOfChannels; channel++) {
+    for (int i = 0; i < numberOfSamplesPerChannel; ++i) {
+        for (int channel = 0; channel < numberOfChannels; ++channel) {
             int sampleIndex = samplesStartIndex + (numberBytesPerFrame * i) + channel * numberBytesPerSample;
 
             if (bitDepth == 8) {
@@ -411,7 +411,7 @@ int Audio<DataType>::getAiffSampleRate(vector<uint8_t>& dataBuffer, int sampleRa
 
 template <class DataType>
 bool Audio<DataType>::tenByteMatch(vector<uint8_t>& v1, int startIndex1, vector<uint8_t>& v2, int startIndex2) {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; ++i) {
         if (v1[startIndex1 + i] != v2[startIndex2 + i]) {
             return false;
         }
@@ -423,7 +423,7 @@ bool Audio<DataType>::tenByteMatch(vector<uint8_t>& v1, int startIndex1, vector<
 template <class DataType>
 void Audio<DataType>::addSampleRateToAiffData(vector<uint8_t>& dataBuffer, int sampleRate) {
     if (aiffSampleRateTable.contains(sampleRate)) {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; ++i) {
             dataBuffer.push_back(aiffSampleRateTable.at(sampleRate)[i]);
         }
     }
@@ -480,8 +480,8 @@ bool Audio<DataType>::saveToWaveFile(string const& filePath) {
     addStringToFileData(dataBuffer, "data");
     addInt32ToFileData(dataBuffer, dataChunkSize);
 
-    for (int i = 0; i < getNumberOfSamplesPerChannel(); i++) {
-        for (int channel = 0; channel < getNumberOfChannels(); channel++) {
+    for (int i = 0; i < getNumberOfSamplesPerChannel(); ++i) {
+        for (int channel = 0; channel < getNumberOfChannels(); ++channel) {
             if (bitDepth == 8) {
                 uint8_t byte = sampleToSingleByte(samples[channel][i]);
                 dataBuffer.push_back(byte);
@@ -551,8 +551,8 @@ bool Audio<DataType>::saveToAiffFile(string const& filePath) {
     addInt32ToFileData(dataBuffer, 0, Endianness::BigEndian);  // offset
     addInt32ToFileData(dataBuffer, 0, Endianness::BigEndian);  // block size
 
-    for (int i = 0; i < getNumberOfSamplesPerChannel(); i++) {
-        for (int channel = 0; channel < getNumberOfChannels(); channel++) {
+    for (int i = 0; i < getNumberOfSamplesPerChannel(); ++i) {
+        for (int channel = 0; channel < getNumberOfChannels(); ++channel) {
             if (bitDepth == 8) {
                 uint8_t byte = sampleToSingleByte(samples[channel][i]);
                 dataBuffer.push_back(byte);
@@ -642,7 +642,7 @@ void Audio<DataType>::addInt16ToFileData(vector<uint8_t>& dataBuffer, int16_t in
 
 template <class DataType>
 void Audio<DataType>::clearAudioBuffer() {
-    for (int i = 0; i < static_cast<int>(samples.size()); i++) {
+    for (int i = 0; i < static_cast<int>(samples.size()); ++i) {
         samples[i].clear();
     }
 
@@ -695,7 +695,7 @@ int Audio<DataType>::getIndexOfString(vector<uint8_t> const& source, string cons
     int index = -1;
     int stringLength = static_cast<int>(stringToSearchFor.length());
 
-    for (int i = 0; i < static_cast<int>(source.size() - stringLength); i++) {
+    for (int i = 0; i < static_cast<int>(source.size() - stringLength); ++i) {
         string section(source.cbegin() + i, source.cbegin() + i + stringLength);
 
         if (section == stringToSearchFor) {

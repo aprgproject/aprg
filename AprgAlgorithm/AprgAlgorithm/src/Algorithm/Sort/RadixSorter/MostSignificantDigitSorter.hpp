@@ -79,7 +79,7 @@ private:
         int const lowContainerIndex, int const highContainerIndex, int const digitIndex) const {
         int limit(std::min(highContainerIndex + 1, static_cast<int>(valuesToSort.size())));
         // starts at low container index and ends at high container index
-        for (auto it = valuesToSort.cbegin() + lowContainerIndex; it != valuesToSort.cbegin() + limit; it++) {
+        for (auto it = valuesToSort.cbegin() + lowContainerIndex; it != valuesToSort.cbegin() + limit; ++it) {
             Value const& value(*it);
             countPerDigitValue[m_getDigitAtFunction(value, digitIndex) + 2]++;
             areAllDigitsInvalid &= m_isDigitInvalidFunction(value, digitIndex);
@@ -87,7 +87,7 @@ private:
     }
 
     void computeCumulatesToGetNewIndexes(ArrayOfCountPerDigitValue& newIndexes) const {
-        for (int i = 0; i + 1 < static_cast<int>(newIndexes.size()); i++) {
+        for (int i = 0; i + 1 < static_cast<int>(newIndexes.size()); ++i) {
             newIndexes[i + 1] += newIndexes[i];
         }
     }
@@ -100,7 +100,7 @@ private:
         // copy first and then copy back to output in the new indexes;
         Values copiedValues(valuesToSort.cbegin() + lowContainerIndex, valuesToSort.cbegin() + limit);
 
-        for (auto it = copiedValues.cbegin(); it != copiedValues.cend(); it++) {
+        for (auto it = copiedValues.cbegin(); it != copiedValues.cend(); ++it) {
             // replace index uses the character index before it
             Value const& copiedValue(*it);
             int replaceIndex = lowContainerIndex + newIndexes[m_getDigitAtFunction(copiedValue, digitIndex) + 1]++;
@@ -111,7 +111,7 @@ private:
     void sortForEachCharacterValue(
         Values& valuesToSort, ArrayOfCountPerDigitValue const& newIndexes, int const lowContainerIndex,
         int const digitIndex) const {
-        for (int i = 0; i < MAX_NUMBER_OF_DIGIT_VALUES; i++) {
+        for (int i = 0; i < MAX_NUMBER_OF_DIGIT_VALUES; ++i) {
             int newLowContainerIndex(lowContainerIndex + newIndexes[i]);
             int newHighContainerIndex(lowContainerIndex + newIndexes[i + 1] - 1);
             if (newLowContainerIndex < newHighContainerIndex) {

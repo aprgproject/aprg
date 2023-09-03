@@ -23,7 +23,7 @@ public:
         auto result(static_cast<Index>(std::string::npos));
         if (m_queryLength > 0 && m_queryLength <= static_cast<Index>(searchSpace.length())) {
             HornerHashFunctionForSubstrings<HashValue> hashFunction(RADIX, A_LARGE_PRIME, searchSpace);
-            for (Index offset = 0; offset + m_queryLength <= static_cast<Index>(searchSpace.length()); offset++) {
+            for (Index offset = 0; offset + m_queryLength <= static_cast<Index>(searchSpace.length()); ++offset) {
                 if (m_queryHash == hashFunction.getHashCodeOfSubstring(offset, offset + m_queryLength - 1)) {
                     result = offset;  // Monte carlo approach (no double check)
                     break;

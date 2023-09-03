@@ -119,7 +119,7 @@ void createTermRaiseToANumberFromRaiseToPowerExpression(TermRaiseToANumber& resu
         result = TermRaiseToANumber(base, 1);
     } else if (raiseToPowerTerms.size() >= 2) {
         AlbaNumber combinedExponentValue(1);
-        for (auto it = raiseToPowerTerms.begin() + 1; it != raiseToPowerTerms.end(); it++) {
+        for (auto it = raiseToPowerTerms.begin() + 1; it != raiseToPowerTerms.end(); ++it) {
             Term& exponentTerm(getTermReferenceFromUniquePointer(it->baseTermPointer));
             if (exponentTerm.isConstant()) {
                 combinedExponentValue = combinedExponentValue * exponentTerm.getAsNumber();
@@ -269,7 +269,7 @@ void createTermRaiseToTermsFromMultiplicationAndDivisionExpression(
         for (int i = 0;
              i < static_cast<int>(constantFactorsOfExponents.size()) &&
              i < static_cast<int>(nonConstantFactorsOfExponents.size()) && i < static_cast<int>(originalBases.size());
-             i++) {
+             ++i) {
             AlbaNumber uniqueConstantExponent(constantFactorsOfExponents[i] / constantGcf);
             TermsRaiseToNumbers remainingNonConstantFactors(nonConstantFactorsOfExponents[i]);
             remainingNonConstantFactors.subtractExponents(commonNonConstantFactorsOfExponents);

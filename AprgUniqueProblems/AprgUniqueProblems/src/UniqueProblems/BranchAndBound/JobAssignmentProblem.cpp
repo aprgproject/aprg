@@ -31,7 +31,7 @@ int JobAssignmentProblem::getMinimalCostAndPrintAssignments() {
             minimalCost = currentNode.minimumPossibleCost;
             break;
         }
-        for (int nextJobId = 0; nextJobId < m_numberOfJobs; nextJobId++) {
+        for (int nextJobId = 0; nextJobId < m_numberOfJobs; ++nextJobId) {
             if (!m_nodeIdToDetails[currentNode.nodeId].isJobAssigned[nextJobId]) {
                 nodesInMinCost.push(createNode(currentNode, Coordinate{nextWorkerId, nextJobId}));
             }
@@ -61,10 +61,10 @@ int JobAssignmentProblem::getMinimumPossibleCost(
     int const workerId, int const jobId, BoolVector const& isJobAssigned) const {
     int cost = 0;
     BoolVector isJobAssignedLocal = isJobAssigned;
-    for (int workerIndex = workerId + 1; workerIndex < m_numberOfWorkers; workerIndex++) {
+    for (int workerIndex = workerId + 1; workerIndex < m_numberOfWorkers; ++workerIndex) {
         int minimumCost = INT_MAX;
         int minIndex = -1;
-        for (int jobIndex = 0; jobIndex < jobId; jobIndex++) {
+        for (int jobIndex = 0; jobIndex < jobId; ++jobIndex) {
             if (!isJobAssignedLocal[jobIndex] && m_costMatrix.getEntry(workerIndex, jobIndex) < minimumCost) {
                 minIndex = jobIndex;
                 minimumCost = m_costMatrix.getEntry(workerIndex, jobIndex);

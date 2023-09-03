@@ -28,7 +28,7 @@ public:
         if (m_queryHash == currentHash) {
             result = 0;
         } else {
-            for (Index searchIndex = m_queryLength; searchIndex < searchLength; searchIndex++) {
+            for (Index searchIndex = m_queryLength; searchIndex < searchLength; ++searchIndex) {
                 currentHash =
                     getNextHash(currentHash, searchSpace[searchIndex - m_queryLength], searchSpace[searchIndex]);
                 if (m_queryHash == currentHash) {
@@ -59,7 +59,7 @@ private:
 
     [[nodiscard]] HashValue getRadixRaiseToMatchLengthHash() const {
         HashValue result(1);
-        for (int i = 1; i < m_queryLength; i++) {
+        for (int i = 1; i < m_queryLength; ++i) {
             result = (result * RADIX) % m_largeRandomPrime;
         }
         return result;

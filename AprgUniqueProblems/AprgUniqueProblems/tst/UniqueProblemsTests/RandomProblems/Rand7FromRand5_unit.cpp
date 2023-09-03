@@ -12,7 +12,7 @@ TEST(Rand7FromRand5Test, GetRandomFrom0To6WorksAsUniformlyDistributed) {
     int const allowedDeviationCount(iterations / 10);
     vector<int> hitsForEachValue(7, 0);
 
-    for (int i = 0; i < iterations; i++) {
+    for (int i = 0; i < iterations; ++i) {
         auto randomValue(rand7FromRand5.getRandomFrom0To6());
         hitsForEachValue[randomValue]++;
     }

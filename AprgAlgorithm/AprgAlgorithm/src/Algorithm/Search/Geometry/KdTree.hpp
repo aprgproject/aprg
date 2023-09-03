@@ -27,7 +27,7 @@ protected:
     [[nodiscard]] bool doesContainStartingOnThisNode(
         NodeUniquePointer const& nodePointer, Key const& key) const override {
         static int depth = 0;
-        depth++;
+        ++depth;
         bool result(false);
         if (nodePointer) {
             Key const& currentKey(nodePointer->key);
@@ -46,7 +46,7 @@ protected:
     [[nodiscard]] Node const* getNodeWithFloorStartingOnThisNode(
         NodeUniquePointer const& nodePointer, Key const& key) const override {
         static int depth = 0;
-        depth++;
+        ++depth;
         Node const* result(nullptr);
         if (nodePointer) {
             Key const& currentKey(nodePointer->key);
@@ -74,7 +74,7 @@ protected:
     [[nodiscard]] Node const* getNodeWithCeilingStartingOnThisNode(
         NodeUniquePointer const& nodePointer, Key const& key) const override {
         static int depth = 0;
-        depth++;
+        ++depth;
         Node const* result(nullptr);
         if (nodePointer) {
             Key const& currentKey(nodePointer->key);
@@ -97,7 +97,7 @@ protected:
 
     [[nodiscard]] int getRankStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const override {
         static int depth = 0;
-        depth++;
+        ++depth;
         int result(0);
         if (nodePointer) {
             Key const& currentKey(nodePointer->key);
@@ -117,7 +117,7 @@ protected:
 
     void putStartingOnThisNode(NodeUniquePointer& nodePointer, Key const& key) override {
         static int depth = 0;
-        depth++;
+        ++depth;
         if (nodePointer) {
             Key const& currentKey(nodePointer->key);
             if (isLessThanWithDepth(key, currentKey, depth)) {
@@ -139,7 +139,7 @@ protected:
 
     void deleteBasedOnKeyStartingOnThisNode(NodeUniquePointer& nodePointer, Key const& key) override {
         static int depth = 0;
-        depth++;
+        ++depth;
         // this is called hibbard deletion
         if (nodePointer) {
             if (isLessThanWithDepth(key, nodePointer->key, depth)) {
@@ -174,7 +174,7 @@ protected:
     void retrieveKeysInRangeInclusiveStartingOnThisNode(
         Keys& keys, NodeUniquePointer const& nodePointer, Key const& low, Key const& high) const override {
         static int depth = 0;
-        depth++;
+        ++depth;
         if (nodePointer) {
             if (isLessThanWithDepth(low, nodePointer->key, depth)) {
                 retrieveKeysInRangeInclusiveStartingOnThisNode(keys, nodePointer->left, low, high);

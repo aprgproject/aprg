@@ -130,7 +130,7 @@ AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
     AlbaNumber previousAcceptedInput(currentInput);
     AlbaNumber previousOfPreviousAcceptedInput(currentInput);
     AlbaNumber previousRejectedInput(valueToApproach);
-    for (int i = 0; i < maxNumberOfIterations && currentInput != previousRejectedInput; i++) {
+    for (int i = 0; i < maxNumberOfIterations && currentInput != previousRejectedInput; ++i) {
         // As current currentInput approaches valueToApproach the calculation becomes inaccurate so limit value is not
         // accurate.
         substitution.putVariableWithValue(variableName, currentInput);
@@ -220,7 +220,7 @@ Term getLimitWithMultipleVariablesWithDifferentApproaches(
     Term result;
     if (!limitValues.empty()) {
         result = limitValues.front();
-        for (auto it = limitValues.cbegin() + 1; it != limitValues.cend(); it++) {
+        for (auto it = limitValues.cbegin() + 1; it != limitValues.cend(); ++it) {
             if (result != *it) {
                 result = ALBA_NUMBER_NOT_A_NUMBER;
                 break;

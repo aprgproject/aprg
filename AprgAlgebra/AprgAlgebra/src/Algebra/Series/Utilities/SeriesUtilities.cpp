@@ -43,7 +43,7 @@ bool isConvergentUsingComparisonTest(
     bool result(false);
     if (convergentSeries.isConvergent()) {
         bool areAllValuesSatisfied(true);
-        for (int i = 0; i < static_cast<int>(numberOfIndexesToTest); i++) {
+        for (int i = 0; i < static_cast<int>(numberOfIndexesToTest); ++i) {
             Term termToCheck(seriesToCheck.getTermValueAtIndex(i));
             Term convergentTerm(convergentSeries.getTermValueAtIndex(i));
             if (termToCheck.isConstant() && convergentTerm.isConstant()) {
@@ -64,7 +64,7 @@ bool isDivergentUsingComparisonTest(
     bool result(false);
     if (!divergentSeries.isConvergent()) {
         bool areAllValuesSatisfied(true);
-        for (int i = 0; i < static_cast<int>(numberOfIndexesToTest); i++) {
+        for (int i = 0; i < static_cast<int>(numberOfIndexesToTest); ++i) {
             Term termToCheck(seriesToCheck.getTermValueAtIndex(i));
             Term divergentTerm(divergentSeries.getTermValueAtIndex(i));
             if (termToCheck.isConstant() && divergentTerm.isConstant()) {

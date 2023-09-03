@@ -41,7 +41,7 @@ bool Polynomial::operator<(Polynomial const& second) const {
     bool result(false);
     if (monomials1.size() == monomials2.size()) {
         int size = monomials1.size();
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; ++i) {
             Monomial const& monomial1(monomials1[i]);
             Monomial const& monomial2(monomials2[i]);
             if (monomial1 != monomial2) {
@@ -153,7 +153,7 @@ void Polynomial::divideMonomial(Monomial const& monomial) {
 
 void Polynomial::raiseToUnsignedInteger(int const exponent) {
     Polynomial base(*this);
-    for (int exponentCount = 1; exponentCount < exponent; exponentCount++) {
+    for (int exponentCount = 1; exponentCount < exponent; ++exponentCount) {
         multiplyPolynomial(base);
     }
     clearSimplifiedFlag();
@@ -200,7 +200,7 @@ ostream& operator<<(ostream& out, Polynomial const& polynomial) {
         out << "(EmptyPolynomial)";
     } else {
         out << "(" << monomials.front();
-        for (auto it = monomials.cbegin() + 1; it != monomials.cend(); it++) {
+        for (auto it = monomials.cbegin() + 1; it != monomials.cend(); ++it) {
             out << " + " << *it;
         }
         out << ")";

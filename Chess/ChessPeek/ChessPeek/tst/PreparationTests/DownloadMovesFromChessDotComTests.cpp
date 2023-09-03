@@ -362,7 +362,7 @@ strings getLineOfMoves(string const& lineFile, int const lineNumber) {
         }
         if (i < lineNumber) {
             fileReader.skipLine();
-            i++;
+            ++i;
         } else if (i == lineNumber) {
             string lineString = fileReader.getLineAndIgnoreWhiteSpaces();
             splitToStrings<SplitStringType::WithoutDelimeters>(result, lineString, ",");

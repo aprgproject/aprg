@@ -18,7 +18,7 @@ Term getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(
     AlbaNumber incrementInX(lengthOfInterval / numberOfSamples);
     SubstitutionOfVariablesToValues substitution;
     Term sum(0);
-    for (int i = 0; i <= numberOfSamples; i++) {
+    for (int i = 0; i <= numberOfSamples; ++i) {
         AlbaNumber currentX(integralDetails.lowerEnd + incrementInX * i);
         substitution.putVariableWithValue(integralDetails.variableName, currentX);
         Term currentY(substitution.performSubstitutionTo(term));
@@ -38,7 +38,7 @@ Term getAnApproximateOfDefiniteIntegralUsingSimpsonRule(
     AlbaNumber incrementInX(lengthOfInterval / numberOfSamples);
     SubstitutionOfVariablesToValues substitution;
     Term sum(0);
-    for (int i = 0; i <= numberOfSamples; i++) {
+    for (int i = 0; i <= numberOfSamples; ++i) {
         AlbaNumber currentX(integralDetails.lowerEnd + incrementInX * i);
         substitution.putVariableWithValue(integralDetails.variableName, currentX);
         Term currentY(substitution.performSubstitutionTo(term));

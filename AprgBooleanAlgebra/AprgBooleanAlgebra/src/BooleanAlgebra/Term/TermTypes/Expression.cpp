@@ -288,7 +288,7 @@ ostream& operator<<(ostream& out, Expression const& expression) {
     out << "(";
     if (!wrappedTerms.empty()) {
         out << getTermConstReferenceFromUniquePointer(wrappedTerms.front().baseTermPointer);
-        for (auto it = wrappedTerms.cbegin() + 1; it != wrappedTerms.cend(); it++) {
+        for (auto it = wrappedTerms.cbegin() + 1; it != wrappedTerms.cend(); ++it) {
             Term const& term(getTermConstReferenceFromUniquePointer(it->baseTermPointer));
             out << operatorString << term;
         }

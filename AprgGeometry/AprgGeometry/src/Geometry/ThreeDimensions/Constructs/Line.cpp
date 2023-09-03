@@ -104,15 +104,15 @@ void Line::calculateAndSaveInitialValuesIfPossible(Point const& first) {
             int count = 0;
             if (!isAlmostEqual(m_aCoefficient, 0.0)) {
                 minimizedMultiplierForInitialValue += first.getX() / m_aCoefficient;
-                count++;
+                ++count;
             }
             if (!isAlmostEqual(m_bCoefficient, 0.0)) {
                 minimizedMultiplierForInitialValue += first.getY() / m_bCoefficient;
-                count++;
+                ++count;
             }
             if (!isAlmostEqual(m_cCoefficient, 0.0)) {
                 minimizedMultiplierForInitialValue += first.getZ() / m_cCoefficient;
-                count++;
+                ++count;
             }
             minimizedMultiplierForInitialValue = round(-1 * minimizedMultiplierForInitialValue / count);
         }

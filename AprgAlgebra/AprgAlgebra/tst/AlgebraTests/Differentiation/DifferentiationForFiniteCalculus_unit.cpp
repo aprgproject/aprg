@@ -167,7 +167,7 @@ TEST(DifferentiationForFiniteCalculusTest, DifferentiateTermWorks) {
     Term termToVerify5(differentiationForX.differentiateTerm(expressionTerm));
 
     Term termToExpect1(0);
-    const Term& termToExpect2(xPlusOne);
+    Term const& termToExpect2(xPlusOne);
     Term termToExpect3(Polynomial{Monomial(15, {{"x", 2}}), Monomial(15, {{"x", 1}}), Monomial(5, {})});
     Term termToExpect4(Polynomial{Monomial(-4, {{"x", 1}}), Monomial(6, {})});
     Term termToExpect5(createExpressionIfPossible({3, "^", xPlusOne, "-", 3, "^", "x"}));

@@ -65,7 +65,7 @@ public:
 
     void gotoFirst() override { index = 0; }
 
-    void gotoNext() override { index++; }
+    void gotoNext() override { ++index; }
 
     [[nodiscard]] bool isDone() const override { return (index >= m_aggregate.size()); }
 

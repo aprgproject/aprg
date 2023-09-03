@@ -16,7 +16,7 @@ AllPartialSumsInZeroOneKnapsack::Values AllPartialSumsInZeroOneKnapsack::getAllP
     isPartialSumPossible[0] = true;
     for (Value const& inputValue : m_inputValues) {
         // reverse traversal so that the changed values wont be changed again in one iteration
-        for (Value partialSum = sum; partialSum > 0; partialSum--) {
+        for (Value partialSum = sum; partialSum > 0; --partialSum) {
             if (partialSum >= inputValue && isPartialSumPossible[partialSum - inputValue]) {
                 isPartialSumPossible[partialSum] = true;
             }
@@ -32,7 +32,7 @@ AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSumsBySettingFutureValues(
     isPartialSumPossible[0] = true;
     // reverse traversal so that the changed values wont be changed again in one iteration
     for (Value const& inputValue : m_inputValues) {
-        for (int partialSum = sum; partialSum >= 0; partialSum--) {
+        for (int partialSum = sum; partialSum >= 0; --partialSum) {
             if (isPartialSumPossible[partialSum]) {
                 Value possibleNextValue = static_cast<Value>(partialSum) + inputValue;
                 if (possibleNextValue <= sum) {
@@ -76,10 +76,10 @@ AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSumsWithSquareRootAlgorith
     for (auto const& [currentValue, currentCount] : inputValueToCount) {
         // reverse traversal so that the changed values wont be changed again in one iteration
         // O(n) or linear time
-        for (int partialSumIndex = sum; partialSumIndex >= 0; partialSumIndex--) {
+        for (int partialSumIndex = sum; partialSumIndex >= 0; --partialSumIndex) {
             if (isPartialSumPossible[partialSumIndex]) {
                 // near constant time
-                for (int i = 1; i <= currentCount; i++) {
+                for (int i = 1; i <= currentCount; ++i) {
                     isPartialSumPossible[static_cast<Value>(partialSumIndex) + (i * currentValue)] = true;
                 }
             }
@@ -92,7 +92,7 @@ AllPartialSumsInZeroOneKnapsack::Values AllPartialSumsInZeroOneKnapsack::getAllP
     Booleans const& isPartialSumPossible) {
     Values result;
     for (int partialSumIndex = 0; partialSumIndex < static_cast<int>(isPartialSumPossible.size());
-         partialSumIndex++)  // O(n) or linear time
+         ++partialSumIndex)  // O(n) or linear time
     {
         if (isPartialSumPossible[partialSumIndex]) {
             result.emplace_back(partialSumIndex);

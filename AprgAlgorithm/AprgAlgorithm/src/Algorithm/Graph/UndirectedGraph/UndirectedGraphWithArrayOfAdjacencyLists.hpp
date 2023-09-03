@@ -41,7 +41,7 @@ public:
 
     [[nodiscard]] Vertices getVertices() const override {
         Vertices result;
-        for (Vertex vertex = 0; vertex < static_cast<Vertex>(m_adjacencyLists.size()); vertex++) {
+        for (Vertex vertex = 0; vertex < static_cast<Vertex>(m_adjacencyLists.size()); ++vertex) {
             if (!m_adjacencyLists[vertex].empty()) {
                 result.emplace_back(vertex);
             }
@@ -51,7 +51,7 @@ public:
 
     [[nodiscard]] Edges getEdges() const override {
         Edges result;
-        for (Vertex vertex1 = 0; vertex1 < static_cast<Vertex>(m_adjacencyLists.size()); vertex1++) {
+        for (Vertex vertex1 = 0; vertex1 < static_cast<Vertex>(m_adjacencyLists.size()); ++vertex1) {
             AdjacencyList const& adjacencyList(m_adjacencyLists[vertex1]);
             if (!adjacencyList.empty()) {
                 std::for_each(adjacencyList.lower_bound(vertex1), adjacencyList.cend(), [&](Vertex const& vertex2) {
@@ -65,10 +65,10 @@ public:
     void connect(Vertex const& vertex1, Vertex const& vertex2) override {
         if (!isDirectlyConnected(vertex1, vertex2)) {
             if (!hasAnyConnection(vertex1)) {
-                m_numberOfVertices++;
+                ++m_numberOfVertices;
             }
             if (!hasAnyConnection(vertex2)) {
-                m_numberOfVertices++;
+                ++m_numberOfVertices;
             }
             m_numberOfEdges++;
             m_adjacencyLists[vertex1].emplace(vertex2);
@@ -78,14 +78,14 @@ public:
 
     void disconnect(Vertex const& vertex1, Vertex const& vertex2) override {
         if (isDirectlyConnected(vertex1, vertex2)) {
-            m_numberOfEdges--;
+            --m_numberOfEdges;
             m_adjacencyLists[vertex1].erase(vertex2);
             m_adjacencyLists[vertex2].erase(vertex1);
             if (!hasAnyConnection(vertex1)) {
-                m_numberOfVertices--;
+                --m_numberOfVertices;
             }
             if (!hasAnyConnection(vertex2)) {
-                m_numberOfVertices--;
+                --m_numberOfVertices;
             }
         }
     }
@@ -93,7 +93,7 @@ public:
     void clear() override {
         m_numberOfVertices = 0;
         m_numberOfEdges = 0;
-        for (Vertex vertex = 0; vertex < static_cast<Vertex>(m_adjacencyLists.size()); vertex++) {
+        for (Vertex vertex = 0; vertex < static_cast<Vertex>(m_adjacencyLists.size()); ++vertex) {
             m_adjacencyLists[vertex].clear();
         }
     }
@@ -101,7 +101,7 @@ public:
 protected:
     friend std::ostream& operator<<(std::ostream& out, UndirectedGraphWithArrayOfAdjacencyLists const& graph) {
         out << "Adjacency Lists: \n";
-        for (Vertex vertex = 0; vertex < static_cast<Vertex>(graph.m_adjacencyLists.size()); vertex++) {
+        for (Vertex vertex = 0; vertex < static_cast<Vertex>(graph.m_adjacencyLists.size()); ++vertex) {
             AdjacencyList const& adjacencyList(graph.m_adjacencyLists[vertex]);
             if (!adjacencyList.empty()) {
                 out << "Adjacent with vertex " << vertex << ": {";

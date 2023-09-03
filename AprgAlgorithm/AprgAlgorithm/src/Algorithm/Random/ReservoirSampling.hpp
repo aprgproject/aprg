@@ -20,12 +20,12 @@ public:
 
         Samples reservoir;
         int i = 0;
-        for (i = 0; i < numberOfSamples; i++) {
+        for (i = 0; i < numberOfSamples; ++i) {
             reservoir.emplace_back(stream[i]);
         }
 
         AlbaUniformNonDeterministicRandomizer<int> randomizer;
-        for (; i < sizeOfStream; i++) {
+        for (; i < sizeOfStream; ++i) {
             randomizer.setMinimumAndMaximum(0, i);
             int randomIndex = randomizer.getRandomValue();
             if (randomIndex < numberOfSamples) {

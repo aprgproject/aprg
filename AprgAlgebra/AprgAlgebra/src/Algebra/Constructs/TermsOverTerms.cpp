@@ -310,7 +310,7 @@ void TermsOverTerms::putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToNumbe
 
 void TermsOverTerms::populateTermsWithBase(Terms& termsToUpdate, Term const& base, AlbaNumber const& exponent) {
     int exponentCount = static_cast<int>(getAbsoluteValue(exponent).getInteger());
-    for (int i = 0; i < exponentCount; i++) {
+    for (int i = 0; i < exponentCount; ++i) {
         termsToUpdate.emplace_back(base);
     }
 }

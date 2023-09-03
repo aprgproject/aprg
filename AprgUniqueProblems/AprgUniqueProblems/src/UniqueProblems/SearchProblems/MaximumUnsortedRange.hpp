@@ -38,7 +38,7 @@ public:
 private:
     Index getStartIndex(Values const& valuesToSort) const {
         Index startIndex(0);
-        for (; startIndex + 1 < static_cast<Index>(valuesToSort.size()); startIndex++) {
+        for (; startIndex + 1 < static_cast<Index>(valuesToSort.size()); ++startIndex) {
             if (valuesToSort[startIndex] > valuesToSort[startIndex + 1]) {
                 break;
             }
@@ -48,7 +48,7 @@ private:
 
     Index getEndIndex(Values const& valuesToSort) const {
         int endIndex = valuesToSort.size() - 1;
-        for (; endIndex > 0; endIndex--) {
+        for (; endIndex > 0; --endIndex) {
             if (valuesToSort[endIndex] < valuesToSort[endIndex - 1]) {
                 break;
             }
@@ -65,7 +65,7 @@ private:
     Index getAdjustedStartIndex(Values const& valuesToSort, Index const startIndex, Value const& minimum) const {
         int adjustedStartIndex = static_cast<int>(startIndex);
         while (adjustedStartIndex - 1 > 0 && minimum < valuesToSort[adjustedStartIndex - 1]) {
-            adjustedStartIndex--;
+            --adjustedStartIndex;
         }
         return static_cast<Index>(adjustedStartIndex);
     }

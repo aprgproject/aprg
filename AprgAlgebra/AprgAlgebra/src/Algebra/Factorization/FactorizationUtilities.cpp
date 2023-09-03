@@ -76,7 +76,7 @@ bool IsEmptyOrContainConstantsOrOneNonConstant(Polynomials const& polynomials) {
     int nonConstantsCount = 0;
     for (Polynomial const& polynomial : polynomials) {
         if (!doesThePolynomialHaveOnlyOneConstant(polynomial)) {
-            nonConstantsCount++;
+            ++nonConstantsCount;
             if (nonConstantsCount > 1) {
                 result = false;
                 break;

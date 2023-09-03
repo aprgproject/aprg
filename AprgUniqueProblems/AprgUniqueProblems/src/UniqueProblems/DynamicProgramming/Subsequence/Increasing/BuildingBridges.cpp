@@ -50,7 +50,7 @@ BuildingBridges::Bridges BuildingBridges::getPossibleBridges() const {
         IndexToIndex indexToPreviousIndex(secondPoints.size());
         iota(indexToPreviousIndex.begin(), indexToPreviousIndex.end(), 0);
         lengthMinus1ToEndValue[0] = secondPoints.front();
-        for (Index i = 1; i < static_cast<Index>(secondPoints.size()); i++) {
+        for (Index i = 1; i < static_cast<Index>(secondPoints.size()); ++i) {
             Value const& value(secondPoints[i]);
             auto beginIt = lengthMinus1ToEndValue.begin(), endIt = lengthMinus1ToEndValue.begin() + longestLength;
             auto lowerBoundItForEndValue = lower_bound(beginIt, endIt, value);

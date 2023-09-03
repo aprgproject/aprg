@@ -36,13 +36,13 @@ Quadrilateral::GroupOfPoints Quadrilateral::getGroupOfPointsBasedOnYValue() cons
         Point previousPoint(vertices.front());
         result.emplace_back();
         result[groupOfPointsIndex].emplace_back(vertices.front());
-        for (auto it = vertices.cbegin() + 1; it != vertices.cend(); it++) {
+        for (auto it = vertices.cbegin() + 1; it != vertices.cend(); ++it) {
             Point const& currentPoint(*it);
             if (isAlmostEqual(currentPoint.getY(), previousPoint.getY())) {
                 result[groupOfPointsIndex].emplace_back(currentPoint);
             } else {
                 result.emplace_back();
-                groupOfPointsIndex++;
+                ++groupOfPointsIndex;
                 result[groupOfPointsIndex].emplace_back(currentPoint);
             }
             previousPoint = currentPoint;
@@ -59,22 +59,22 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXs(
     ListOfStartEndOfXAndY result;
     int groupSize = groupOfPointsBasedOnYValue.size();
     if (groupSize == 1) {
-        const Points& points(groupOfPointsBasedOnYValue[0]);
+        Points const& points(groupOfPointsBasedOnYValue[0]);
         result = getStartEndForXsFor1Points(points);
     } else if (groupSize == 2) {
-        const Points& points1(groupOfPointsBasedOnYValue[0]);
-        const Points& points2(groupOfPointsBasedOnYValue[1]);
+        Points const& points1(groupOfPointsBasedOnYValue[0]);
+        Points const& points2(groupOfPointsBasedOnYValue[1]);
         result = getStartEndForXsFor2Points(points1, points2, interval);
     } else if (groupSize == 3) {
-        const Points& points1(groupOfPointsBasedOnYValue[0]);
-        const Points& points2(groupOfPointsBasedOnYValue[1]);
-        const Points& points3(groupOfPointsBasedOnYValue[2]);
+        Points const& points1(groupOfPointsBasedOnYValue[0]);
+        Points const& points2(groupOfPointsBasedOnYValue[1]);
+        Points const& points3(groupOfPointsBasedOnYValue[2]);
         result = getStartEndForXsFor3Points(points1, points2, points3, interval);
     } else if (groupSize == 4) {
-        const Points& points1(groupOfPointsBasedOnYValue[0]);
-        const Points& points2(groupOfPointsBasedOnYValue[1]);
-        const Points& points3(groupOfPointsBasedOnYValue[2]);
-        const Points& points4(groupOfPointsBasedOnYValue[3]);
+        Points const& points1(groupOfPointsBasedOnYValue[0]);
+        Points const& points2(groupOfPointsBasedOnYValue[1]);
+        Points const& points3(groupOfPointsBasedOnYValue[2]);
+        Points const& points4(groupOfPointsBasedOnYValue[3]);
         result = getStartEndForXsFor4Points(points1, points2, points3, points4, interval);
     }
     return result;

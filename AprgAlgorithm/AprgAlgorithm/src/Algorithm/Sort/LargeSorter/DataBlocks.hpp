@@ -35,12 +35,12 @@ public:
         if (isLessThanOrEqual(m_mainIterator->getLowestObject(), objectToSort)) {
             while ((m_mainIterator != m_blocks.end()) &&
                    isLessThanOrEqual(m_mainIterator->getLowestObject(), objectToSort)) {
-                m_mainIterator++;
+                ++m_mainIterator;
             }
             m_mainIterator--;
         } else if (objectToSort < m_mainIterator->getLowestObject()) {
             while ((m_mainIterator != m_blocks.begin()) && (objectToSort < m_mainIterator->getLowestObject())) {
-                m_mainIterator--;
+                --m_mainIterator;
             }
         }
         return m_mainIterator;
@@ -51,8 +51,8 @@ public:
             iteratorAfterNewBlock, blockType, m_numberOfBlocks,
             m_configuration.getFilePathWithBlockNumber(m_numberOfBlocks));
         BlockIterator newBlockIterator(iteratorAfterNewBlock);
-        newBlockIterator--;
-        m_numberOfBlocks++;
+        --newBlockIterator;
+        ++m_numberOfBlocks;
     }
     void deleteBlock(BlockIterator const& iteratorOfBlockToErase) {
         bool const isMainIteratorDeleted = m_mainIterator == iteratorOfBlockToErase;

@@ -47,9 +47,9 @@ bool isTwinPrimeConjectureTrue(UnsignedInteger const number) {
 
     UnsignedIntegers numbers(getPrimesBelowThisNumber(number));
     UnsignedInteger twinPrimeCount = 0;
-    for (UnsignedInteger i = 0; i < numbers.size() - 1; i++) {
+    for (UnsignedInteger i = 0; i < numbers.size() - 1; ++i) {
         if (numbers[i + 1] - numbers[i] == 2) {
-            twinPrimeCount++;
+            ++twinPrimeCount;
         }
     }
     return twinPrimeCount > 0;  // actually we should check if this is infinite (continuously increasing)
@@ -61,7 +61,7 @@ bool isLegendreConjectureTrue(UnsignedInteger const number) {
     UnsignedInteger start = getRaiseToPowerForIntegers(number, static_cast<UnsignedInteger>(2));
     UnsignedInteger end = getRaiseToPowerForIntegers(number + 1, static_cast<UnsignedInteger>(2));
     bool result(false);
-    for (UnsignedInteger numberToCheck = start + 1; numberToCheck < end; numberToCheck++) {
+    for (UnsignedInteger numberToCheck = start + 1; numberToCheck < end; ++numberToCheck) {
         if (isPrime(numberToCheck)) {
             result = true;
             break;
@@ -148,7 +148,7 @@ UnsignedIntegers getPrimesBelowThisNumber(UnsignedInteger const number) {
         candidatePrime = distance(sieveOfEratosthenes.cbegin(), itLowestCandidate);
     }
     UnsignedIntegers result;
-    for (UnsignedInteger prime = 2; prime < number; prime++) {
+    for (UnsignedInteger prime = 2; prime < number; ++prime) {
         if (sieveOfEratosthenes[prime]) {
             result.emplace_back(prime);
         }
@@ -159,7 +159,7 @@ UnsignedIntegers getPrimesBelowThisNumber(UnsignedInteger const number) {
 UnsignedIntegers getPrimeFactorsOfNumber(UnsignedInteger const number) {
     UnsignedIntegers result;
     UnsignedInteger remainingFactor(number);
-    for (UnsignedInteger factor = 2; factor * factor <= remainingFactor; factor++) {
+    for (UnsignedInteger factor = 2; factor * factor <= remainingFactor; ++factor) {
         while (remainingFactor % factor == 0) {
             result.emplace_back(factor);
             remainingFactor /= factor;
@@ -174,10 +174,10 @@ UnsignedIntegers getPrimeFactorsOfNumber(UnsignedInteger const number) {
 FactorsToCountMap getPrimeFactorsToCountMap(UnsignedInteger const number) {
     FactorsToCountMap result;
     UnsignedInteger remainingFactor(number);
-    for (UnsignedInteger factor = 2; factor * factor <= remainingFactor; factor++) {
+    for (UnsignedInteger factor = 2; factor * factor <= remainingFactor; ++factor) {
         if (remainingFactor % factor == 0) {
             UnsignedInteger count = 0;
-            for (; remainingFactor % factor == 0; count++) {
+            for (; remainingFactor % factor == 0; ++count) {
                 remainingFactor /= factor;
             }
             result.emplace(factor, count);

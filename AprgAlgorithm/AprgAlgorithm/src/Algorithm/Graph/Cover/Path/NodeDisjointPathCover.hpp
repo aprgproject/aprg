@@ -73,7 +73,7 @@ private:
                     detectedEdges.erase(detectedEdges.begin() + i);
                     i = 0;
                 } else {
-                    i++;
+                    ++i;
                 }
             }
             paths.emplace_back(pathInDeque);

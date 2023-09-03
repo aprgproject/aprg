@@ -16,7 +16,7 @@ AudioInDouble const& AudioManipulator::getAudio() const { return m_audio; }
 AudioInDouble& AudioManipulator::getAudioReference() { return m_audio; }
 
 void AudioManipulator::addSamplesWithValue(double const value) {
-    for (int i = 0; i < m_audio.getNumberOfChannels(); i++) {
+    for (int i = 0; i < m_audio.getNumberOfChannels(); ++i) {
         addSamplesAtChannelWithValue(i, value);
     }
 }
@@ -29,7 +29,7 @@ void AudioManipulator::addSamplesAtChannelWithValue(int const channelIndex, doub
 }
 
 void AudioManipulator::multiplySamplesWithValue(double const value) {
-    for (int i = 0; i < m_audio.getNumberOfChannels(); i++) {
+    for (int i = 0; i < m_audio.getNumberOfChannels(); ++i) {
         multiplySamplesAtChannelWithValue(i, value);
     }
 }

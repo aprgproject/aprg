@@ -47,9 +47,9 @@ private:
                     break;
                 }
                 if (currentSum > targetSum) {
-                    higherIndex--;
+                    --higherIndex;
                 } else if (currentSum < targetSum) {
-                    lowerIndex++;
+                    ++lowerIndex;
                 }
             }
         }

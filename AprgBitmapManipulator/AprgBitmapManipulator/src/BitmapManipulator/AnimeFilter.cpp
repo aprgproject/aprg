@@ -97,7 +97,7 @@ void doStuffsAfterSteps(
     string const& description) {
     static int step = 1;
     localTimer.stopTimer();
-    bitmapFilters.saveSnippetIntoFileWithFullFilePath(snippet, getNewFilePath(inputFilePath, step++, description));
+    bitmapFilters.saveSnippetIntoFileWithFullFilePath(snippet, getNewFilePath(inputFilePath, ++step, description));
     cout << localTimer.getDifferenceAsAlbaDateTime() << ": " << description << "\n";
     localTimer.resetTimer();
 }

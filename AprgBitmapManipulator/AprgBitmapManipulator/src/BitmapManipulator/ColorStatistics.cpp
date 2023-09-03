@@ -83,7 +83,7 @@ void AprgColorStatistics::saveColorData(string const& path) {
                             << *saturationLightnessIterator++ << ", " << *lightnessIterator++ << ", "
                             << *saturationValueIterator++ << ", " << *valueIterator++ << ", " << *luma601Iterator++
                             << ", " << *luma709Iterator++ << "\n";
-        count++;
+        ++count;
     }
 }
 

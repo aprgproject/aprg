@@ -22,10 +22,10 @@ using PointToSetOfPiecesMap = std::map<XY, SetOfPieces>;
 
 void writeBottomRightBorder(BitmapSnippet& outputSnippet, XY const& deltaChessBoard) {
     XY cellBottomRightCorner(deltaChessBoard / 8U);
-    for (int x = 0; x < cellBottomRightCorner.getX(); x++) {
+    for (int x = 0; x < cellBottomRightCorner.getX(); ++x) {
         outputSnippet.setPixelAt(convertToBitmapXY({x, cellBottomRightCorner.getY()}), 0U);
     }
-    for (int y = 0; y < cellBottomRightCorner.getY(); y++) {
+    for (int y = 0; y < cellBottomRightCorner.getY(); ++y) {
         outputSnippet.setPixelAt(convertToBitmapXY({cellBottomRightCorner.getY(), y}), 0U);
     }
 }

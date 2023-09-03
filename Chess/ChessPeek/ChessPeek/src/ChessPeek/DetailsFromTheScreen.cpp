@@ -43,8 +43,8 @@ bool DetailsFromTheScreen::areKingsValid() const {
 Board DetailsFromTheScreen::getBoardAndSaveDetails() {
     Board board;
     m_countOfPieces = {};
-    for (int j = 0; j < Board::CHESS_SIDE_SIZE; j++) {
-        for (int i = 0; i < Board::CHESS_SIDE_SIZE; i++) {
+    for (int j = 0; j < Board::CHESS_SIDE_SIZE; ++j) {
+        for (int i = 0; i < Board::CHESS_SIDE_SIZE; ++i) {
             Coordinate coordinate(i, j);
             Piece piece(m_boardObserver.getPieceFromCell(i, j));
             board.setPieceAt(coordinate, piece);

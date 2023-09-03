@@ -30,7 +30,7 @@ public:
 
     [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
         Vertices result;
-        for (auto it = m_edges.lower_bound({vertex, Vertex{}}); it != m_edges.cend() && it->first == vertex; it++) {
+        for (auto it = m_edges.lower_bound({vertex, Vertex{}}); it != m_edges.cend() && it->first == vertex; ++it) {
             result.emplace_back(it->second);
         };
         return result;
@@ -51,14 +51,14 @@ public:
 
     void connect(Vertex const& sourceVertex, Vertex const& destinationVertex) override {
         if (!isDirectlyConnected(sourceVertex, destinationVertex)) {
-            m_numberOfEdges++;
+            ++m_numberOfEdges;
             m_edges.emplace(sourceVertex, destinationVertex);
         }
     }
 
     void disconnect(Vertex const& sourceVertex, Vertex const& destinationVertex) override {
         if (isDirectlyConnected(sourceVertex, destinationVertex)) {
-            m_numberOfEdges--;
+            --m_numberOfEdges;
             m_edges.erase({sourceVertex, destinationVertex});
         }
     }

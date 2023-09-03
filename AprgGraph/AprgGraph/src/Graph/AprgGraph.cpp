@@ -170,7 +170,7 @@ void AprgGraph::drawNumberLabel(
         startPositionInX = numberPositionInX;
         startPositionInY = numberPositionInY;
     }
-    for (int i = 0; i < labelCharacterLength; i++) {
+    for (int i = 0; i < labelCharacterLength; ++i) {
         drawCharacter(BitmapXY(startPositionInX + (i * widthOfCharacter), startPositionInY), label[i], 0x00000000);
     }
 }

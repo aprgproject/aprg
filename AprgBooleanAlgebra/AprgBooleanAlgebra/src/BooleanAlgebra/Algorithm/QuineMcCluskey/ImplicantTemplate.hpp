@@ -46,7 +46,7 @@ public:
         std::string string2(implicant.getEquivalentString(commonLength));
         bool result(true);
         int difference = 0;
-        for (int i = 0; i < commonLength; i++) {
+        for (int i = 0; i < commonLength; ++i) {
             if (string1[i] != string2[i]) {
                 if (string1[i] == '-' || string2[i] == '-') {
                     result = false;
@@ -113,7 +113,7 @@ public:
             constexpr int NUMBER_OF_BITS(AlbaBitValueUtilities<Minterm>::getNumberOfBits());
             std::bitset<NUMBER_OF_BITS> xorBits(performAndOperationOfAllMinterms() ^ performOrOperationOfAllMinterms());
             std::bitset<NUMBER_OF_BITS> displayBits(getFirstMinterm());
-            for (int i = 0; i < length; i++) {
+            for (int i = 0; i < length; ++i) {
                 int bitIndex = length - i - 1;
                 if (xorBits[bitIndex]) {
                     booleanEquivalent.push_back('-');

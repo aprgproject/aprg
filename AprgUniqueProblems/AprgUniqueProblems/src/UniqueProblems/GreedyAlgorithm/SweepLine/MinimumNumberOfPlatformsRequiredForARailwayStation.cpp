@@ -21,10 +21,10 @@ int MinimumNumberOfPlatformsRequiredForARailwayStation::getMinimumNumberOfPlatfo
     int numberOfWaitingTrains(0);
     for (Event const& event : m_sortedEvents) {
         if (EventType::ArrivalToThePlatform == event.eventType) {
-            numberOfWaitingTrains++;
+            ++numberOfWaitingTrains;
             minimumNumberOfPlatforms = max(minimumNumberOfPlatforms, numberOfWaitingTrains);
         } else if (EventType::DepartureFromThePlatform == event.eventType) {
-            numberOfWaitingTrains--;
+            --numberOfWaitingTrains;
         }
     }
     return minimumNumberOfPlatforms;

@@ -18,7 +18,7 @@ TEST(BitmapWriteTest, TestForWritingBitmap) {
 
     BitmapSnippet snippet(bitmap.getSnippetReadFromFile(BitmapXY(10, 10), BitmapXY(90, 90)));
 
-    for (unsigned i = 10; i <= 90; i++) {
+    for (unsigned i = 10; i <= 90; ++i) {
         snippet.setPixelAt(
             BitmapXY(i, round(static_cast<double>(50) + 40 * (sin(static_cast<double>(i) / 5)))), 0x00FF0000);
     }
@@ -30,7 +30,7 @@ TEST(BitmapWriteTest, TestForWritingMissingBitmapFile) {
     ASSERT_FALSE(bitmap.getConfiguration().isValid());
 
     BitmapSnippet snippet(bitmap.getSnippetReadFromFile(BitmapXY(50, 50), BitmapXY(150, 150)));
-    for (unsigned i = 50; i <= 150; i++) {
+    for (unsigned i = 50; i <= 150; ++i) {
         snippet.setPixelAt(
             BitmapXY(i, round(static_cast<double>(100) + 40 * (sin(static_cast<double>(i) / 10)))), 0x00FF0000);
     }

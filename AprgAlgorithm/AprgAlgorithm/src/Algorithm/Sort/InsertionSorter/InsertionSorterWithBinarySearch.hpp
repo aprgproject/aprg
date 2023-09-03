@@ -16,7 +16,7 @@ public:
     InsertionSorterWithBinarySearch() = default;
 
     void sort(Values& valuesToSort) const override {
-        for (int insertIndex(1); insertIndex < static_cast<int>(valuesToSort.size()); insertIndex++) {
+        for (int insertIndex(1); insertIndex < static_cast<int>(valuesToSort.size()); ++insertIndex) {
             swapDownWithIndexFoundInBinarySearch(valuesToSort, insertIndex);
         }
     }
@@ -26,7 +26,7 @@ private:
         int indexWithGreaterValue =
             getIndexWithGreaterValueUsingBinarySearch(valuesToSort, 0, insertIndex - 1, valuesToSort[insertIndex]);
         if (indexWithGreaterValue != INVALID_INDEX) {
-            for (int swapIndex(insertIndex); swapIndex > indexWithGreaterValue; swapIndex--) {
+            for (int swapIndex(insertIndex); swapIndex > indexWithGreaterValue; --swapIndex) {
                 std::swap(valuesToSort[swapIndex - 1], valuesToSort[swapIndex]);
             }
         }
@@ -39,7 +39,7 @@ private:
         int iHigh(highIndex);
         while (iLow <= iHigh) {
             int middleIndex = getMidpointOfIndexes(iLow, iHigh);
-            const Value& middleValue(valuesToSort[middleIndex]);
+            Value const& middleValue(valuesToSort[middleIndex]);
             if (value < middleValue) {
                 result = middleIndex;
                 iHigh = middleIndex - 1;

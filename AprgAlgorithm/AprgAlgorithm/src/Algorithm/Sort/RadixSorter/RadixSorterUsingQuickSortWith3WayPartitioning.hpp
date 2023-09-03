@@ -51,7 +51,7 @@ private:
             } else if (currentDigit > partitionDigit) {
                 std::swap(valuesToSort[i], valuesToSort[highIndexWithEqualValue--]);
             } else {
-                i++;
+                ++i;
             }
         }
 

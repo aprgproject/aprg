@@ -80,7 +80,7 @@ void SolutionSet::checkValuesAndPutIntervals(
         AlbaNumber intervalValueToCheck(firstValueToCheck - getAbsoluteValue(firstValueToCheck));
         addInterval(ALBA_NUMBER_NEGATIVE_INFINITY, intervalValueToCheck, firstValueToCheck, isValueAcceptedFunction);
         AlbaNumber previousValueToCheck(firstValueToCheck);
-        for (auto it = valuesToCheck.cbegin() + 1; it != valuesToCheck.cend(); it++) {
+        for (auto it = valuesToCheck.cbegin() + 1; it != valuesToCheck.cend(); ++it) {
             AlbaNumber const& valueToCheck(*it);
             intervalValueToCheck = getAverage(previousValueToCheck, valueToCheck);
             addInterval(previousValueToCheck, intervalValueToCheck, valueToCheck, isValueAcceptedFunction);

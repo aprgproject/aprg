@@ -657,7 +657,7 @@ Points getConvexHullPointsUsingJarvisAlgorithm(Points const& points) {
     assert(points.size() >= 3);
 
     int indexOfLeftMostPoint = 0;
-    for (int index = 1; index < static_cast<int>(points.size()); index++) {
+    for (int index = 1; index < static_cast<int>(points.size()); ++index) {
         if (points[index].getX() < points[indexOfLeftMostPoint].getX()) {
             indexOfLeftMostPoint = index;
         }
@@ -668,7 +668,7 @@ Points getConvexHullPointsUsingJarvisAlgorithm(Points const& points) {
     do {
         result.push_back(points[startIndex]);
         int endIndex = (startIndex + 1) % points.size();
-        for (int indexInBetween = 0; indexInBetween < static_cast<int>(points.size()); indexInBetween++) {
+        for (int indexInBetween = 0; indexInBetween < static_cast<int>(points.size()); ++indexInBetween) {
             if (RotationDirection::CounterClockWise ==
                 getRotationDirectionTraversing3Points(points[startIndex], points[indexInBetween], points[endIndex])) {
                 endIndex = indexInBetween;
@@ -711,7 +711,7 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points) {
 
     // remove collinear points
     int newIndex = 1;
-    for (int index = 1; index < auxiliarySize; index++) {
+    for (int index = 1; index < auxiliarySize; ++index) {
         for (; index < auxiliarySize - 1 &&
                RotationDirection::Collinear ==
                    getRotationDirectionTraversing3Points(firstPoint, auxiliary[index], auxiliary[index + 1]);
@@ -727,7 +727,7 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points) {
         stack<Point> convertHullPoints;
         convertHullPoints.push(auxiliary[0]);
         convertHullPoints.push(auxiliary[1]);
-        for (auto it = auxiliary.begin() + 2; it != auxiliary.end(); it++) {
+        for (auto it = auxiliary.begin() + 2; it != auxiliary.end(); ++it) {
             Point const& currentPoint(*it);
             Point previousTop = convertHullPoints.top();
             convertHullPoints.pop();

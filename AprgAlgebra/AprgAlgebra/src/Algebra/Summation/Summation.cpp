@@ -80,7 +80,7 @@ void Summation::calculateSumUsingEachTerm(
         SubstitutionOfVariablesToValues substitution;
         substitution.putVariableWithValue(m_variableName, start);
         sum = substitution.performSubstitutionTo(m_termToSum);
-        for (int64_t value = start + 1; value <= end; value++) {
+        for (int64_t value = start + 1; value <= end; ++value) {
             substitution.putVariableWithValue(m_variableName, value);
             sum += substitution.performSubstitutionTo(m_termToSum);
         }

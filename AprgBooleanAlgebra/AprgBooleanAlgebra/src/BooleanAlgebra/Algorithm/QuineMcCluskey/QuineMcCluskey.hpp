@@ -59,9 +59,9 @@ public:
 
     [[nodiscard]] Implicants getAllPrimeImplicants() const {
         Implicants result;
-        for (auto it = m_computationalTable.begin(); it != m_computationalTable.end(); it++) {
+        for (auto it = m_computationalTable.begin(); it != m_computationalTable.end(); ++it) {
             MintermToImplicantsMap const& implicantsMap(it->second);
-            for (auto reverseIt = implicantsMap.rbegin(); reverseIt != implicantsMap.rend(); reverseIt++) {
+            for (auto reverseIt = implicantsMap.rbegin(); reverseIt != implicantsMap.rend(); ++reverseIt) {
                 Implicants const& implicantsFromTable(reverseIt->second);
                 for (Implicant const& implicantFromTable : implicantsFromTable) {
                     bool isAlreadyCovered(false);
@@ -102,12 +102,12 @@ public:
         while (!areAllCombinationsFound) {
             bool isCombinationFound(false);
             for (int numberOfOnes = 0; numberOfOnes + 1 < static_cast<int>(m_computationalTable.size());
-                 numberOfOnes++) {
+                 ++numberOfOnes) {
                 findCombinationOfImplicants(numberOfOnes, commonalityCount);
                 isCombinationFound = isCombinationFound | doImplicantsExistAt(numberOfOnes, commonalityCount + 1);
             }
             areAllCombinationsFound = !isCombinationFound;
-            commonalityCount++;
+            ++commonalityCount;
         }
         m_maxCommonalityCount = (commonalityCount > 0) ? commonalityCount - 1 : 0;
     }
@@ -210,8 +210,8 @@ public:
             }
 
             // Simplify X + XY = X  to lessen terms
-            for (int i = 0; i < static_cast<int>(combinedInnerTerms.size()); i++) {
-                for (int j = 0; j < static_cast<int>(combinedInnerTerms.size()); j++) {
+            for (int i = 0; i < static_cast<int>(combinedInnerTerms.size()); ++i) {
+                for (int j = 0; j < static_cast<int>(combinedInnerTerms.size()); ++j) {
                     if (i != j && isASubset(combinedInnerTerms[i], combinedInnerTerms[j])) {
                         combinedInnerTerms.erase(combinedInnerTerms.begin() + j);
                         if (i < static_cast<int>(combinedInnerTerms.size())) {
@@ -229,8 +229,8 @@ public:
         if (!outerTerms.empty()) {
             // Final simplification of X + XY = X.
             InnerTerms& onlyInnerTerms(outerTerms.front());
-            for (int i = 0; i < static_cast<int>(onlyInnerTerms.size()); i++) {
-                for (int j = 0; j < static_cast<int>(onlyInnerTerms.size()); j++) {
+            for (int i = 0; i < static_cast<int>(onlyInnerTerms.size()); ++i) {
+                for (int j = 0; j < static_cast<int>(onlyInnerTerms.size()); ++j) {
                     if (i != j && isASubset(onlyInnerTerms[i], onlyInnerTerms[j])) {
                         onlyInnerTerms.erase(onlyInnerTerms.begin() + j);
                         continue;
@@ -241,7 +241,7 @@ public:
             // locate the item with least number of ids
             int minSize = std::numeric_limits<int>::max();
             int minSizeIndex = 0;
-            for (int i = 0; i < static_cast<int>(onlyInnerTerms.size()); i++) {
+            for (int i = 0; i < static_cast<int>(onlyInnerTerms.size()); ++i) {
                 int idsSize = onlyInnerTerms[i].size();
                 if (minSize > idsSize) {
                     minSizeIndex = i;
@@ -281,7 +281,7 @@ public:
                     Implicant lastImplicantThatCovers;
                     for (Implicant const& remainingImplicant : remainingImplicants) {
                         if (remainingImplicant.hasMinterm(mintermToCover)) {
-                            numberOfImplicantsThatCover++;
+                            ++numberOfImplicantsThatCover;
                             if (numberOfImplicantsThatCover > 1) {
                                 break;
                             }
@@ -311,7 +311,7 @@ public:
                     int mintermCount(0U);
                     for (auto const& mintermToCover : mintermsToCover) {
                         if (remainingImplicant.hasMinterm(mintermToCover)) {
-                            mintermCount++;
+                            ++mintermCount;
                         }
                     }
                     if (mintermCountAndImplicantPair.first < mintermCount) {

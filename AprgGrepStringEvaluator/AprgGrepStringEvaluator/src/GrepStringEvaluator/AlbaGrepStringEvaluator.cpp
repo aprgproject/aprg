@@ -201,11 +201,11 @@ void AlbaGrepStringEvaluator::addParenthesis(char const currentCharacter, int& p
     switch (currentCharacter) {
         case '(':
             m_tokens.emplace_back(AlbaGrepStringOperatorType::OpeningParenthesis);
-            parenthesisCount++;
+            ++parenthesisCount;
             break;
         case ')':
             m_tokens.emplace_back(AlbaGrepStringOperatorType::ClosingParenthesis);
-            parenthesisCount--;
+            --parenthesisCount;
             break;
         default:
             break;

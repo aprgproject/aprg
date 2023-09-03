@@ -37,7 +37,7 @@ public:
         splitToSmallestBlocksIfOverflow(blockIterator);
         limitMemoryConsumption();
         limitFileStreams();
-        m_size++;
+        ++m_size;
     }
     void addAtTheStart(ObjectToSort const& objectToSort) {
         m_blocks.moveMainInteratorToStart();
@@ -46,7 +46,7 @@ public:
         splitToSmallestBlocksIfOverflow(blockIterator);
         limitMemoryConsumption();
         limitFileStreams();
-        m_size++;
+        ++m_size;
     }
     void sortThenDoFunctionThenReleaseAllObjects(std::function<void(ObjectToSort const&)> doFunctionForAllObjects) {
         m_blocks.sortThenDoFunctionThenReleaseAllObjects(doFunctionForAllObjects);
@@ -89,7 +89,7 @@ private:
     // sort implementation
     void splitToSmallestBlocks(BlockIterator const& blockIterator, DataBlockType const blockTypeForNewBlocks) {
         BlockIterator iteratorAfterBlockToSplit(blockIterator);
-        iteratorAfterBlockToSplit++;
+        ++iteratorAfterBlockToSplit;
         int numberOfObjectsInCurrentBlock = 0;
         auto newBlockIterator(iteratorAfterBlockToSplit);
         blockIterator->sortThenDoFunctionThenRelease([&](ObjectToSort const& objectToSort) {
@@ -97,10 +97,10 @@ private:
                 limitFileStreams();
                 m_blocks.createNewBlockBeforeThisIterator(iteratorAfterBlockToSplit, blockTypeForNewBlocks);
                 newBlockIterator = iteratorAfterBlockToSplit;
-                newBlockIterator--;
+                --newBlockIterator;
             }
             m_blocks.addObjectToBlock(newBlockIterator, objectToSort);
-            numberOfObjectsInCurrentBlock++;
+            ++numberOfObjectsInCurrentBlock;
             if (numberOfObjectsInCurrentBlock >= m_configuration.m_minimumNumberOfObjectsPerBlock) {
                 numberOfObjectsInCurrentBlock = 0;
             }

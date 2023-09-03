@@ -16,7 +16,7 @@ Indexes NearestSamples::getNearestSamplesIndexes(double const value, int const r
         containerHelper::getLowerAndUpperConstIteratorsInMap(m_valuesToIndexes, value));
 
     set<int> indexesInOrder;
-    for (auto it = lowerAndUpperIterator.first; it != lowerAndUpperIterator.second; it++) {
+    for (auto it = lowerAndUpperIterator.first; it != lowerAndUpperIterator.second; ++it) {
         indexesInOrder.emplace(it->second);
     }
     auto itLower = lowerAndUpperIterator.first;
@@ -25,11 +25,11 @@ Indexes NearestSamples::getNearestSamplesIndexes(double const value, int const r
            itLower != m_valuesToIndexes.cbegin() && itUpper != m_valuesToIndexes.cend()) {
         if (itLower != m_valuesToIndexes.cbegin()) {
             indexesInOrder.emplace(itLower->second);
-            itLower--;
+            --itLower;
         }
         if (itUpper != m_valuesToIndexes.cend()) {
             indexesInOrder.emplace(itUpper->second);
-            itUpper++;
+            ++itUpper;
         }
     }
     result.reserve(result.size());
@@ -40,7 +40,7 @@ Indexes NearestSamples::getNearestSamplesIndexes(double const value, int const r
 void NearestSamples::saveToValuesToIndexes() {
     int i = 0;
     for (double const sample : m_samples) {
-        m_valuesToIndexes.emplace(sample, i++);
+        m_valuesToIndexes.emplace(sample, ++i);
     }
 }
 

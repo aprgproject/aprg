@@ -25,7 +25,7 @@ public:
         Index queryLength(m_query.length());
         Index searchIndex = 0;
         Index matchIndex = 0;
-        for (; searchIndex < searchSpaceLength && matchIndex < queryLength; searchIndex++) {
+        for (; searchIndex < searchSpaceLength && matchIndex < queryLength; ++searchIndex) {
             // use DFA to determine next state
             matchIndex = m_nextIndexDfa.getNextState(matchIndex, searchSpace[searchIndex]);
         }

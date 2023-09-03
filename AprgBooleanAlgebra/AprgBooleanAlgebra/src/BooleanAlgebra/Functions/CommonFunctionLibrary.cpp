@@ -93,7 +93,7 @@ Term getUniquenessQuantification(Terms const& terms, UnaryBooleanFunction const&
     auto it = std::find_if(terms.cbegin(), terms.cend(), unaryBooleanFunction);
     bool result(false);
     if (it != terms.cend()) {
-        it++;
+        ++it;
         result = std::none_of(it, terms.cend(), unaryBooleanFunction);
     }
     return result;

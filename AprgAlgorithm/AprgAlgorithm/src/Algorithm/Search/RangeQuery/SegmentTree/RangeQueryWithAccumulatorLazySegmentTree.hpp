@@ -203,7 +203,7 @@ private:
                 remainingNumberOfTimes /= 2;
             } else {
                 increment(valueToChange, doublingValue);
-                remainingNumberOfTimes--;
+                --remainingNumberOfTimes;
             }
         }
     }

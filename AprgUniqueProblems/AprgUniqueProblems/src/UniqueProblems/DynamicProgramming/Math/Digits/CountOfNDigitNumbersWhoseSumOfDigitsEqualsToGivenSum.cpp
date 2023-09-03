@@ -45,13 +45,13 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingIterativeDP()
     if (m_numberOfDigits > 0) {
         CountMatrix countMatrix(m_targetSumOfDigits + 1, m_numberOfDigits, 0);
 
-        for (Value digitValue = 0; digitValue <= min(m_targetSumOfDigits, 9); digitValue++) {
+        for (Value digitValue = 0; digitValue <= min(m_targetSumOfDigits, 9); ++digitValue) {
             countMatrix.setEntry(digitValue, 0, 1);
         }
-        for (Count digitIndex = 1; digitIndex < m_numberOfDigits; digitIndex++) {
+        for (Count digitIndex = 1; digitIndex < m_numberOfDigits; ++digitIndex) {
             countMatrix.setEntry(0, digitIndex, 1);
-            for (Value partialSum = 1; partialSum <= m_targetSumOfDigits; partialSum++) {
-                for (Value digitValue = 0; digitValue <= min(partialSum - 1, 9); digitValue++) {
+            for (Value partialSum = 1; partialSum <= m_targetSumOfDigits; ++partialSum) {
+                for (Value digitValue = 0; digitValue <= min(partialSum - 1, 9); ++digitValue) {
                     countMatrix.getEntryReference(partialSum, digitIndex) +=
                         countMatrix.getEntry(partialSum - digitValue, digitIndex - 1);
                 }
@@ -70,13 +70,13 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingIterativeDPAn
     Count result(0);
     if (m_numberOfDigits > 0) {
         Counts partialSumToCount(m_targetSumOfDigits + 1);
-        for (Value digitValue = 0; digitValue <= min(m_targetSumOfDigits, 9); digitValue++) {
+        for (Value digitValue = 0; digitValue <= min(m_targetSumOfDigits, 9); ++digitValue) {
             partialSumToCount[digitValue] = 1;
         }
-        for (Count digitIndex = 1; digitIndex < m_numberOfDigits; digitIndex++) {
-            for (Value partialSum = m_targetSumOfDigits; partialSum > 0; partialSum--) {
+        for (Count digitIndex = 1; digitIndex < m_numberOfDigits; ++digitIndex) {
+            for (Value partialSum = m_targetSumOfDigits; partialSum > 0; --partialSum) {
                 for (Value digitValue = 1; digitValue <= min(partialSum - 1, 9);
-                     digitValue++)  // When digitValue==0, the count is 1, so no need to process
+                     ++digitValue)  // When digitValue==0, the count is 1, so no need to process
                 {
                     partialSumToCount[partialSum] += partialSumToCount[partialSum - digitValue];
                 }
@@ -109,7 +109,7 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountBySearchingValuesW
                 remainingDigits /= 10;
             }
             if (currentSumOfDigits == m_targetSumOfDigits) {
-                result++;
+                ++result;
             }
         }
     }
@@ -123,7 +123,7 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingNaiveRecursio
     if (digitIndex > 0) {
         if (partialSum > 0) {
             Value lastDigitValue = min(partialSum - 1, 9);
-            for (Value digitValue = 0; digitValue <= lastDigitValue; digitValue++) {
+            for (Value digitValue = 0; digitValue <= lastDigitValue; ++digitValue) {
                 result += getCountUsingNaiveRecursion(partialSum - digitValue, digitIndex - 1);
             }
         } else {
@@ -145,7 +145,7 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingMemoizationDP
         if (digitIndex > 0) {
             if (partialSum > 0) {
                 Value lastDigitValue = min(partialSum - 1, 9);
-                for (Value digitValue = 0; digitValue <= lastDigitValue; digitValue++) {
+                for (Value digitValue = 0; digitValue <= lastDigitValue; ++digitValue) {
                     result += getCountUsingMemoizationDP(countMatrix, partialSum - digitValue, digitIndex - 1);
                 }
             } else {

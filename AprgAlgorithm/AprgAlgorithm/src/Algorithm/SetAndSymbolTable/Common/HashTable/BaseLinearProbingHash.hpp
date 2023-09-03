@@ -49,7 +49,7 @@ public:
     [[nodiscard]] Key getMinimum() const override {
         Key result{};
         bool isFirst(true);
-        for (int i = 0; i < m_hashTableSize; i++) {
+        for (int i = 0; i < m_hashTableSize; ++i) {
             EntryUniquePointer const& entryPointer(m_entryPointers[i]);
             if (entryPointer) {
                 if (isFirst) {
@@ -66,7 +66,7 @@ public:
     [[nodiscard]] Key getMaximum() const override {
         Key result{};
         bool isFirst(true);
-        for (int i = 0; i < m_hashTableSize; i++) {
+        for (int i = 0; i < m_hashTableSize; ++i) {
             EntryUniquePointer const& entryPointer(m_entryPointers[i]);
             if (entryPointer) {
                 if (isFirst) {
@@ -119,7 +119,7 @@ public:
 
     [[nodiscard]] Keys getKeys() const override {
         Keys result;
-        for (int i = 0; i < m_hashTableSize; i++) {
+        for (int i = 0; i < m_hashTableSize; ++i) {
             EntryUniquePointer const& entryPointer(m_entryPointers[i]);
             if (entryPointer) {
                 result.emplace_back(entryPointer->key);
@@ -131,7 +131,7 @@ public:
 
     [[nodiscard]] Keys getKeysInRangeInclusive(Key const& low, Key const& high) const override {
         Keys result;
-        for (int i = 0; i < m_hashTableSize; i++) {
+        for (int i = 0; i < m_hashTableSize; ++i) {
             EntryUniquePointer const& entryPointer(m_entryPointers[i]);
             if (entryPointer) {
                 Key const& currentKey(entryPointer->key);
@@ -156,7 +156,7 @@ protected:
 
     void deleteEntryOnIndex(int const index) {
         m_entryPointers[index].reset();
-        m_size--;
+        --m_size;
     }
 
     void initialize(int const initialSize) {
@@ -172,7 +172,7 @@ protected:
         m_size = 0;
         m_entryPointers = new EntryUniquePointer[newHashTableSize]();
         m_hashTableSize = newHashTableSize;
-        for (int i = 0; i < oldHashTableSize; i++) {
+        for (int i = 0; i < oldHashTableSize; ++i) {
             EntryUniquePointer const& entryPointer(oldEntryPointers[i]);
             if (entryPointer) {
                 putEntry(*entryPointer);

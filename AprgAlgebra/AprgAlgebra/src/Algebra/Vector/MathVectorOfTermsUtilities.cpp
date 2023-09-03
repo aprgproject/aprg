@@ -28,11 +28,11 @@ bool isGaussDivergenceTheoremInAPlaneTrue(
 
     // Line Integral result
     SubstitutionOfVariablesToTerms substitution;
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 2; ++i) {
         substitution.putVariableWithTerm(coordinateVariables[i], regionOfLineIntegral.getValueAt(i));
     }
     MathVectorOfTwoTerms linePathInVectorField;
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 2; ++i) {
         linePathInVectorField.getValueReferenceAt(i) = substitution.performSubstitutionTo(vectorField.getValueAt(i));
     }
     Term termIntegrate(getDotProduct(linePathInVectorField, unitOutwardNormal));
@@ -58,11 +58,11 @@ bool isStokesTheoremInAPlaneTrue(
 
     // Line Integral result
     SubstitutionOfVariablesToTerms substitution;
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 2; ++i) {
         substitution.putVariableWithTerm(coordinateVariables[i], regionOfLineIntegral.getValueAt(i));
     }
     MathVectorOfTwoTerms linePathInVectorField;
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 2; ++i) {
         linePathInVectorField.getValueReferenceAt(i) = substitution.performSubstitutionTo(vectorField.getValueAt(i));
     }
     Term termIntegrate(getDotProduct(linePathInVectorField, unitTangentVector));

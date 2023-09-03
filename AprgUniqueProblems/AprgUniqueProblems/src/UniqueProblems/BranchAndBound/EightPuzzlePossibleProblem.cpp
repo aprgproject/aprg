@@ -32,7 +32,7 @@ void EightPuzzlePossibleProblem::printStepsToSolve() {
             break;
         }
         Coordinate currentBlankTile(m_nodeIdToSnapshot[currentNode.nodeId].blankTile);
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; ++i) {
             Coordinate nextBlankTile{currentBlankTile.first + X_OFFSETS[i], currentBlankTile.second + Y_OFFSETS[i]};
             if (isValidCoordinate(nextBlankTile)) {
                 nodesInMinCost.push(createNode(currentNode.nodeId, nextBlankTile, currentNode.searchLevel + 1));
@@ -98,8 +98,8 @@ int EightPuzzlePossibleProblem::countDifference(
 
 EightPuzzlePossibleProblem::Coordinate EightPuzzlePossibleProblem::getBlankTile(NumberMatrix const& matrix) const {
     Coordinate result{};
-    for (int y = 0; y < m_sideSize; y++) {
-        for (int x = 0; x < m_sideSize; x++) {
+    for (int y = 0; y < m_sideSize; ++y) {
+        for (int x = 0; x < m_sideSize; ++x) {
             if (matrix.getEntry(x, y) == 0) {
                 result = Coordinate{x, y};
             }

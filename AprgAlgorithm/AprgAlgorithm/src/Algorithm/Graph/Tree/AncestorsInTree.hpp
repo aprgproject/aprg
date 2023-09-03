@@ -65,7 +65,7 @@ private:
                 auto it = vertexToPreviousVertexMap.find(currentParent);
                 if (it != vertexToPreviousVertexMap.cend()) {
                     currentParent = it->second;
-                    distanceFromChild++;
+                    ++distanceFromChild;
                 } else {
                     break;
                 }

@@ -10,10 +10,10 @@ CountingSubGrids::CountingSubGrids(BitGrid const& bitGrid) { initialize(bitGrid)
 
 int CountingSubGrids::countSubGridsWithAllBlackCorners() const {
     int result = 0;
-    for (int row = 0; row < static_cast<int>(m_bitValueGrid.getNumberOfRows()); row++) {
-        for (int nextRow = row + 1; nextRow < static_cast<int>(m_bitValueGrid.getNumberOfRows()); nextRow++) {
+    for (int row = 0; row < static_cast<int>(m_bitValueGrid.getNumberOfRows()); ++row) {
+        for (int nextRow = row + 1; nextRow < static_cast<int>(m_bitValueGrid.getNumberOfRows()); ++nextRow) {
             int commonBlackColumns(0);
-            for (int i = 0; i < static_cast<int>(m_bitValueGrid.getNumberOfColumns()); i++) {
+            for (int i = 0; i < static_cast<int>(m_bitValueGrid.getNumberOfColumns()); ++i) {
                 commonBlackColumns += BitValueUtilities::getNumberOfOnes(
                     m_bitValueGrid.getEntry(i, row) & m_bitValueGrid.getEntry(i, nextRow));
             }
@@ -30,8 +30,8 @@ void CountingSubGrids::initialize(BitGrid const& bitGrid) {
         int newRows(bitGrid.getNumberOfRows());
         m_bitValueGrid.clearAndResize(newColumns, newRows);
         bitset<NUMBER_OF_BITS> bitsetValue;
-        for (int y = 0; y < static_cast<int>(bitGrid.getNumberOfRows()); y++) {
-            for (int x = 0; x < static_cast<int>(bitGrid.getNumberOfColumns()); x++) {
+        for (int y = 0; y < static_cast<int>(bitGrid.getNumberOfRows()); ++y) {
+            for (int x = 0; x < static_cast<int>(bitGrid.getNumberOfColumns()); ++x) {
                 if (x % NUMBER_OF_BITS == 0) {
                     bitsetValue.reset();
                 }
@@ -47,8 +47,8 @@ void CountingSubGrids::initialize(BitGrid const& bitGrid) {
         int newRows(bitGrid.getNumberOfColumns());
         m_bitValueGrid.clearAndResize(newColumns, newRows);
         bitset<NUMBER_OF_BITS> bitsetValue;
-        for (int y = 0; y < static_cast<int>(bitGrid.getNumberOfColumns()); y++) {
-            for (int x = 0; x < static_cast<int>(bitGrid.getNumberOfRows()); x++) {
+        for (int y = 0; y < static_cast<int>(bitGrid.getNumberOfColumns()); ++y) {
+            for (int x = 0; x < static_cast<int>(bitGrid.getNumberOfRows()); ++x) {
                 int bitPosition = x % NUMBER_OF_BITS;
                 if (bitPosition == 0) {
                     bitsetValue.reset();

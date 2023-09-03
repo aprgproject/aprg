@@ -73,7 +73,7 @@ private:
             newValues.reserve(estimatedSize);
             for (Index i1 = tree1.getStartOfChildren(), i2 = tree2.getStartOfChildren();
                  i1 < static_cast<Index>(treeValues1.size()) && i2 < static_cast<Index>(treeValues2.size());
-                 i1++, i2++) {
+                 ++i1, ++i2) {
                 newValues.emplace_back(m_function(treeValues1[i1], treeValues2[i2]));
             }
             newValues.shrink_to_fit();

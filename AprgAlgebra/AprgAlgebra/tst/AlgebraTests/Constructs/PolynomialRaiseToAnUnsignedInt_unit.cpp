@@ -54,7 +54,7 @@ TEST(PolynomialRaiseToAnUnsignedIntTest, PolynomialWithPerfectSquareWithNegative
     Polynomial polynomial{Monomial(-7, {{"x", 2}}), Monomial(-28, {{"x", 1}}), Monomial(-28, {})};
     PolynomialRaiseToAnUnsignedInt polynomialRaiseToAnUnsignedInt(polynomial);
 
-    const Polynomial& expectedBase(polynomial);
+    Polynomial const& expectedBase(polynomial);
     EXPECT_EQ(expectedBase, polynomialRaiseToAnUnsignedInt.getBase());
     EXPECT_EQ(1, polynomialRaiseToAnUnsignedInt.getExponent());
 }

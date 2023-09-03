@@ -22,7 +22,7 @@ public:
         wholeInputString += END_CHARACTER;  // put end character for decoding
         std::string stringOutput;
         SuffixArray<Index> suffixArray(wholeInputString);
-        for (Index i = 0; i < static_cast<Index>(suffixArray.getSize()); i++) {
+        for (Index i = 0; i < static_cast<Index>(suffixArray.getSize()); ++i) {
             Index deltaLength(wholeInputString.length() - suffixArray.getSuffixViewAt(i).length());
             if (deltaLength > 0) {
                 // if its a suffix, take the character based from the delta
@@ -47,8 +47,8 @@ public:
                 prefix.emplace_back(1, c);
             }
             alba::stringHelper::strings possibleOutputs(prefix.size());
-            for (Index iteration = 0; iteration < static_cast<Index>(wholeInputString.length()); iteration++) {
-                for (Index index = 0; index < static_cast<Index>(wholeInputString.length()); index++) {
+            for (Index iteration = 0; iteration < static_cast<Index>(wholeInputString.length()); ++iteration) {
+                for (Index index = 0; index < static_cast<Index>(wholeInputString.length()); ++index) {
                     possibleOutputs[index] = prefix[index] + possibleOutputs[index];  // add prefixes
                 }
                 // sort outputs, possible optimization to use radix sort here

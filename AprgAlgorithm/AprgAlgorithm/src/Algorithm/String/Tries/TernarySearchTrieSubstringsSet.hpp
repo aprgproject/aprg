@@ -38,7 +38,7 @@ protected:
     [[nodiscard]] int getSizeStartingOnThisNode(NodeUniquePointer const& currentNodePointer) const override {
         int result(0);
         if (currentNodePointer) {
-            result++;
+            ++result;
             result += getSizeStartingOnThisNode(currentNodePointer->left);
             result += getSizeStartingOnThisNode(currentNodePointer->right);
             result += getSizeStartingOnThisNode(currentNodePointer->mid);

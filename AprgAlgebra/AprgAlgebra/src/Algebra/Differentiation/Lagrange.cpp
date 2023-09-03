@@ -38,7 +38,7 @@ Term getTermWithLagrangeFunctions(
     Term const& term, Terms const& lagrangeFunctions, strings const& lagrangeMultiplierNames) {
     int size(min(lagrangeFunctions.size(), lagrangeMultiplierNames.size()));
     Term result(term);
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; ++i) {
         result += lagrangeFunctions[i] * Term(lagrangeMultiplierNames[i]);
     }
     return result;
@@ -46,7 +46,7 @@ Term getTermWithLagrangeFunctions(
 
 strings getLagrangeMultiplierNames(int const size) {
     strings result;
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; ++i) {
         result.emplace_back(getLagrangeMultiplierName(i));
     }
     return result;

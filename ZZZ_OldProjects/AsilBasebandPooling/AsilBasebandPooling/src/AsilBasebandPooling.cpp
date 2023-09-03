@@ -72,7 +72,7 @@ BasebandCardsSplitBasedOnNumberOfLcgs AsilBasebandPooling::getBasebandCardsSplit
     while (reverseTraversal != m_basebandCards.crend()) {
         if (numberOfBasebandCardRemaining > 0 && canMultipleLcgsBePutOnBasebandCard(*reverseTraversal)) {
             basebandCards.basebandCardsWithMultipleLcgs.emplace(*reverseTraversal);
-            numberOfBasebandCardRemaining--;
+            --numberOfBasebandCardRemaining;
         } else {
             basebandCards.basebandCardsWithOneLcg.emplace(*reverseTraversal);
         }
@@ -133,7 +133,7 @@ void AsilBasebandPooling::assignBasebandCardsWithMultipleLcgs(
         unsigned int keplerCount = 0;
         for (Kepler const& kepler : keplersInBasebandCard) {
             if (keplerCount % 2 == 0 && keplerCount != 0) {
-                lcgsIterator++;
+                ++lcgsIterator;
             }
             if (lcgsIterator != lcgsInPriorityOrder.cend()) {
                 unsigned int lcgId(lcgsIterator->getLcgId());

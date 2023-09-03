@@ -38,7 +38,7 @@ bool isNumberOfCombinationsEqualToItsCounterpart(UnsignedInteger const n, Unsign
 bool isTheSumOfAllNumberOfCombinationsEqualTo2ToTheN(UnsignedInteger const n) {
     // Sum of all (n, k) from k=0 to k=n is equal to 2^n
     UnsignedInteger sumOfNumberOfCombinations(0);
-    for (UnsignedInteger k = 0; k <= n; k++) {
+    for (UnsignedInteger k = 0; k <= n; ++k) {
         sumOfNumberOfCombinations += getNumberOfCombinations(n, k);
     }
 

@@ -437,7 +437,7 @@ TEST(BtsLogPrintTest, DISABLED_InputStreamWorks) {
     while (inputFileStream.good()) {
         BtsLogPrint logPrint;
         inputFileStream >> logPrint;
-        count++;
+        ++count;
     }
     EXPECT_EQ(1001, count);
 }

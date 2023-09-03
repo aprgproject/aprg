@@ -324,8 +324,8 @@ void HardwareConfiguration::setLcgIdOfDsps(LcgIds const& lcgIds) {
     auto lcgIdsIteratorEnd = lcgIds.cend();
     while (lcgIdsIterator != lcgIdsIteratorEnd && mapIterator != mapIteratorEnd) {
         mapIterator->second.setLcgId(*lcgIdsIterator);
-        lcgIdsIterator++;
-        mapIterator++;
+        ++lcgIdsIterator;
+        ++mapIterator;
     }
 }
 

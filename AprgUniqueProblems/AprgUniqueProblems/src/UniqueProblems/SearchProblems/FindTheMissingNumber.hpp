@@ -40,7 +40,7 @@ public:
         Value accumulatedXor =
             std::accumulate(values.cbegin(), values.cend(), static_cast<Value>(1), std::bit_xor<Value>());
         for (Value number(2); number <= totalCountOfNumbers;
-             number++)  // start with 2 (skip 1 because its processed in accumulate)
+             ++number)  // start with 2 (skip 1 because its processed in accumulate)
         {
             accumulatedXor ^= number;
         }

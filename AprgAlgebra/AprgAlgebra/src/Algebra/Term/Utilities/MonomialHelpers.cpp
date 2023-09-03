@@ -109,8 +109,8 @@ AlbaNumber getMaxExponent(Monomial const& monomial) {
     if (!variablesToExponentsMap.empty()) {
         auto it = variablesToExponentsMap.cbegin();
         maxExponent = it->second;
-        it++;
-        for (; it != variablesToExponentsMap.cend(); it++) {
+        ++it;
+        for (; it != variablesToExponentsMap.cend(); ++it) {
             maxExponent = max(maxExponent, it->second);
         }
     }
@@ -173,7 +173,7 @@ AlbaNumber getCommonSignInMonomials(Monomials const& monomials) {
     int negativeSignCount(0);
     for (Monomial const& monomial : monomials) {
         if (monomial.getCoefficient() < AlbaNumber(0)) {
-            negativeSignCount++;
+            ++negativeSignCount;
             if (isFirstMonomial) {
                 isFirstMonomialNegative = true;
             }
@@ -235,7 +235,7 @@ Monomial getMonomialWithMinimumExponentsInMonomials(Monomials const& monomials) 
     Monomial monomialWithMinimumExponents(1, {});
     if (!monomials.empty()) {
         monomialWithMinimumExponents = monomials.front();
-        for (auto it = monomials.cbegin() + 1; it != monomials.cend(); it++) {
+        for (auto it = monomials.cbegin() + 1; it != monomials.cend(); ++it) {
             monomialWithMinimumExponents =
                 compareMonomialsAndSaveMinimumExponentsForEachVariable(monomialWithMinimumExponents, *it);
         }
@@ -248,7 +248,7 @@ Monomial getMonomialWithMaximumExponentsInMonomials(Monomials const& monomials) 
     Monomial monomialWithMaximumExponents(1, {});
     if (!monomials.empty()) {
         monomialWithMaximumExponents = monomials.front();
-        for (auto it = monomials.cbegin() + 1; it != monomials.cend(); it++) {
+        for (auto it = monomials.cbegin() + 1; it != monomials.cend(); ++it) {
             monomialWithMaximumExponents =
                 compareMonomialsAndSaveMaximumExponentsForEachVariable(monomialWithMaximumExponents, *it);
         }

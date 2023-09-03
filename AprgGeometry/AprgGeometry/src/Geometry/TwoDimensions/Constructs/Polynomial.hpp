@@ -42,7 +42,7 @@ public:
 
 protected:
     void saveFirstDerivativeCoefficients() {
-        for (int i = 1; i < numberOfCoefficients; i++) {
+        for (int i = 1; i < numberOfCoefficients; ++i) {
             m_coefficientsOfFirstDerivative[i - 1] = i * m_coefficients[i];
         }
     }

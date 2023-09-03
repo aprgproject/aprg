@@ -43,9 +43,9 @@ FindTheMinimumCostToReachDestinationUsingATrain::getMinimumCostUsingIterativeDP(
     Value result(0);
     if (!m_pricesAtEachStation.isEmpty()) {
         Values savedCosts(m_pricesAtEachStation.getNumberOfColumns(), 0);
-        for (Index endStation = 1; endStation < static_cast<Index>(savedCosts.size()); endStation++) {
+        for (Index endStation = 1; endStation < static_cast<Index>(savedCosts.size()); ++endStation) {
             Value entryResult(MAX_VALUE);
-            for (Index immediateStation = 0; immediateStation < endStation; immediateStation++) {
+            for (Index immediateStation = 0; immediateStation < endStation; ++immediateStation) {
                 entryResult =
                     min(entryResult,
                         savedCosts[immediateStation] + m_pricesAtEachStation.getEntry(immediateStation, endStation));
@@ -62,7 +62,7 @@ FindTheMinimumCostToReachDestinationUsingATrain::getMinimumCostUsingNaiveRecursi
     Value result(0);
     if (endStation > 0) {
         result = MAX_VALUE;
-        for (int immediateStation = static_cast<int>(endStation) - 1; immediateStation >= 0; immediateStation--) {
+        for (int immediateStation = static_cast<int>(endStation) - 1; immediateStation >= 0; --immediateStation) {
             result =
                 min(result, getMinimumCostUsingNaiveRecursion(immediateStation) +
                                 m_pricesAtEachStation.getEntry(immediateStation, endStation));
@@ -79,7 +79,7 @@ FindTheMinimumCostToReachDestinationUsingATrain::getMinimumCostUsingMemoizationD
         result = 0;
         if (endStation > 0) {
             result = MAX_VALUE;
-            for (int immediateStation = static_cast<int>(endStation) - 1; immediateStation >= 0; immediateStation--) {
+            for (int immediateStation = static_cast<int>(endStation) - 1; immediateStation >= 0; --immediateStation) {
                 result =
                     min(result, getMinimumCostUsingNaiveRecursion(immediateStation) +
                                     m_pricesAtEachStation.getEntry(immediateStation, endStation));

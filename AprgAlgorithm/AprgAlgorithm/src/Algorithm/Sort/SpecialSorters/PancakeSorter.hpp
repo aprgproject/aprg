@@ -14,7 +14,7 @@ public:
 
     void sort(Values& valuesToSort) const override {
         if (!valuesToSort.empty()) {
-            for (auto itLast = std::prev(valuesToSort.end()); itLast != valuesToSort.begin(); itLast--) {
+            for (auto itLast = std::prev(valuesToSort.end()); itLast != valuesToSort.begin(); --itLast) {
                 auto itMax = std::max_element(valuesToSort.begin(), std::next(itLast));
                 flipLowerPartAt(valuesToSort, itMax);
                 flipLowerPartAt(valuesToSort, itLast);
@@ -25,7 +25,7 @@ public:
 private:
     void flipLowerPartAt(Values& valuesToSort, Iterator const flipIt) const {
         for (auto lowIt = valuesToSort.begin(), highIt = flipIt; lowIt != highIt && lowIt != std::next(highIt);
-             lowIt++, highIt--) {
+             ++lowIt, --highIt) {
             std::swap(*lowIt, *highIt);
         }
     }

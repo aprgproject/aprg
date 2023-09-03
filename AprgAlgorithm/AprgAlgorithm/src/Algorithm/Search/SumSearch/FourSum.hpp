@@ -43,8 +43,8 @@ private:
         SumsOfPairOfValues result;
         Index size = m_sortedValues.size();
         result.reserve(size * size);  // reserve this much
-        for (Index i = 0; i < size; i++) {
-            for (Index j = i; j < size; j++) {
+        for (Index i = 0; i < size; ++i) {
+            for (Index j = i; j < size; ++j) {
                 result.emplace_back(m_sortedValues[i] + m_sortedValues[j], i, j);
             }
         }
@@ -64,9 +64,9 @@ private:
                     break;
                 }
                 if (currentSum > targetSum) {
-                    highIndex--;
+                    --highIndex;
                 } else if (currentSum < targetSum) {
-                    lowIndex++;
+                    ++lowIndex;
                 }
             }
         }

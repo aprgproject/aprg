@@ -55,7 +55,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDP(Numbe
     Numbers tabulationData(size);
     tabulationData[0] = 0;
     tabulationData[1] = 1;
-    for (Number i = 2; i <= number; i++) {
+    for (Number i = 2; i <= number; ++i) {
         tabulationData[i] = tabulationData[i - 1] + tabulationData[i - 2];
     }
     return tabulationData[number];
@@ -74,7 +74,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDPAndSpa
     }
     Number previousFibonacci(0);
     Number currentFibonacci(1);
-    for (Number n = 2; n <= number; n++) {
+    for (Number n = 2; n <= number; ++n) {
         Number nextFibonacci = currentFibonacci + previousFibonacci;
         previousFibonacci = currentFibonacci;
         currentFibonacci = nextFibonacci;
@@ -113,7 +113,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMatrixMultiplicat
     NumberMatrix formulaicTransform(2, 2, {0, 1, 1, 1});
 
     NumberMatrix fibonacciMatrix(formulaicTransform);
-    for (Number i = 2; i < number; i++) {
+    for (Number i = 2; i < number; ++i) {
         fibonacciMatrix *= formulaicTransform;
     }
     return fibonacciMatrix.getEntry(1, 1);

@@ -30,7 +30,7 @@ Term BinomialSeries::getBinomialSeriesApproximation(
     Term partialProduct(1);
     Term monomialPartRaiseToPower(1);
     AlbaNumber factorialValue(1);
-    for (int n = 1; n <= numberOfTimes; n++) {
+    for (int n = 1; n <= numberOfTimes; ++n) {
         monomialPartRaiseToPower *= monomialPart;
         Term multiplier(exponent - n + 1);
         partialProduct *= multiplier;

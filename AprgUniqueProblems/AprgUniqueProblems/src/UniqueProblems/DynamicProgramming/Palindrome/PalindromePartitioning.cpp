@@ -38,13 +38,13 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
         Index stringLength = m_string.length();
         CountMatrix countMatrix(stringLength, stringLength, 0);
 
-        for (Index length = 1; length <= stringLength; length++) {
-            for (Index left = 0; left + length <= static_cast<Index>(countMatrix.getNumberOfColumns()); left++) {
+        for (Index length = 1; length <= stringLength; ++length) {
+            for (Index left = 0; left + length <= static_cast<Index>(countMatrix.getNumberOfColumns()); ++left) {
                 Index right = left + length - 1;
                 Count entryResult(0);
                 if (!isPalindrome(left, right)) {
                     Count minimumCuts(MAX_COUNT);
-                    for (Index cutIndex(left); cutIndex < right; cutIndex++) {
+                    for (Index cutIndex(left); cutIndex < right; ++cutIndex) {
                         minimumCuts =
                             min(minimumCuts,
                                 countMatrix.getEntry(left, cutIndex) + countMatrix.getEntry(cutIndex + 1, right));
@@ -69,17 +69,17 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
         Counts partialCounts(stringLength, 0);
         BoolMatrix isSubstrAPalindrome(stringLength, stringLength, false);
 
-        for (Index index = 0; index < stringLength; index++)  // length = 1
+        for (Index index = 0; index < stringLength; ++index)  // length = 1
         {
             isSubstrAPalindrome.setEntry(index, index, true);
         }
-        for (Index index = 0; index + 1 < stringLength; index++)  // length = 2
+        for (Index index = 0; index + 1 < stringLength; ++index)  // length = 2
         {
             isSubstrAPalindrome.setEntry(index, index + 1, m_string[index] == m_string[index + 1]);
         }
-        for (Index length = 3; length <= stringLength; length++)  // length = >3
+        for (Index length = 3; length <= stringLength; ++length)  // length = >3
         {
-            for (Index left = 0; left + length <= stringLength; left++) {
+            for (Index left = 0; left + length <= stringLength; ++left) {
                 Index right = left + length - 1;
                 if (m_string[left] == m_string[right] && isSubstrAPalindrome.getEntry(left + 1, right - 1)) {
                     isSubstrAPalindrome.setEntry(left, right, true);
@@ -87,11 +87,11 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
             }
         }
 
-        for (Index right = 0; right < stringLength; right++) {
+        for (Index right = 0; right < stringLength; ++right) {
             if (!isSubstrAPalindrome.getEntry(0, right)) {
                 Count& partialCountAtIndex(partialCounts[right]);
                 partialCountAtIndex = MAX_COUNT;
-                for (Index left = 0; left < right; left++) {
+                for (Index left = 0; left < right; ++left) {
                     if (isSubstrAPalindrome.getEntry(left + 1, right)) {
                         partialCountAtIndex = min(partialCountAtIndex, 1 + partialCounts[left]);
                     }
@@ -124,7 +124,7 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
     Count result(0);
     if (left < right && !isPalindrome(left, right)) {
         Count minimumCuts(MAX_COUNT);
-        for (Index cutMatrix(left); cutMatrix < right; cutMatrix++) {
+        for (Index cutMatrix(left); cutMatrix < right; ++cutMatrix) {
             minimumCuts =
                 min(minimumCuts, getMinimumNumberOfCutsUsingNaiveRecursion(left, cutMatrix) +
                                      getMinimumNumberOfCutsUsingNaiveRecursion(cutMatrix + 1, right));
@@ -141,7 +141,7 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
         result = 0;
         if (left < right && !isPalindrome(left, right)) {
             Count minimumCuts(MAX_COUNT);
-            for (Index cutIndex(left); cutIndex < right; cutIndex++) {
+            for (Index cutIndex(left); cutIndex < right; ++cutIndex) {
                 minimumCuts =
                     min(minimumCuts, getMinimumNumberOfCutsUsingMemoizationDP(countMatrix, left, cutIndex) +
                                          getMinimumNumberOfCutsUsingMemoizationDP(countMatrix, cutIndex + 1, right));

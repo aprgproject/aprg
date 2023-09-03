@@ -38,7 +38,7 @@ private:
         Index const startIndex, Index const endIndex, Value const& target) const {
         Index result(INVALID_INDEX);
         for (auto itLower = m_values.cbegin() + startIndex, itHigher = m_values.cbegin() + endIndex;
-             itLower <= itHigher; itLower++, itHigher--) {
+             itLower <= itHigher; ++itLower, --itHigher) {
             Value valueAtLower = *itLower;
             Value valueAtHigher = *itHigher;
             if (valueAtLower == target) {

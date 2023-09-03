@@ -38,7 +38,7 @@ public:
         ThreeValues result{};
         if (!m_sortedValues.empty()) {
             TwoSum<Values> twoSum(m_sortedValues);
-            for (Index firstIndex = 0; firstIndex < static_cast<Index>(m_sortedValues.size()); firstIndex++) {
+            for (Index firstIndex = 0; firstIndex < static_cast<Index>(m_sortedValues.size()); ++firstIndex) {
                 Value const& firstValue(m_sortedValues[firstIndex]);
                 auto twoSumValues(twoSum.getNonDuplicateTwoValuesWithSum(
                     targetSum - firstValue, firstIndex + 1, m_sortedValues.size() - 1));
@@ -55,7 +55,7 @@ public:
         ThreeValues result{};
         if (!m_sortedValues.empty()) {
             TwoSum<Values> twoSum(m_sortedValues);
-            for (Index firstIndex = 0; firstIndex < static_cast<Index>(m_sortedValues.size()); firstIndex++) {
+            for (Index firstIndex = 0; firstIndex < static_cast<Index>(m_sortedValues.size()); ++firstIndex) {
                 Value const& firstValue(m_sortedValues[firstIndex]);
                 auto twoSumValues(twoSum.getPossibleDuplicatedTwoValuesWithSum(
                     targetSum - firstValue, firstIndex, m_sortedValues.size() - 1));

@@ -21,7 +21,7 @@ bool isAtMostTwoVerticesHaveOddDegrees(BaseUndirectedGraph<Vertex> const& graph)
     int countOfOdd(0);
     for (Vertex const& vertex : graph.getVertices()) {
         if (mathHelper::isOdd(GraphUtilities::getDegreeAt(graph, vertex))) {
-            countOfOdd++;
+            ++countOfOdd;
         }
         if (countOfOdd > 2) {
             break;

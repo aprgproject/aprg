@@ -38,7 +38,7 @@ public:
             writeCode(writer, codeTrie.get(bestTrieMatch));  // write code word for the best match in trie
             Code matchLength(bestTrieMatch.length());
             if (matchLength < static_cast<Code>(wholeInputString.length()) && lastCode < MAX_NUMBER_CODE_WORDS) {
-                codeTrie.put(wholeInputString.substr(0, matchLength + 1), lastCode++);  // add new next code word
+                codeTrie.put(wholeInputString.substr(0, matchLength + 1), ++lastCode);  // add new next code word
             }
             // remove processed part in the input:
             wholeInputString = wholeInputString.substr(matchLength);
@@ -71,7 +71,7 @@ public:
                 }
                 if (multiCharCode < MAX_NUMBER_CODE_WORDS) {
                     lookupTable.emplace_back(currentString + nextString[0]);  // add a new code word
-                    multiCharCode++;
+                    ++multiCharCode;
                 }
                 currentString = nextString;
             } else {
@@ -82,13 +82,13 @@ public:
 
 private:
     void initializeCodeTableWithAllSingleCharacters(SymbolTableUsingTrie& codeTrie) {
-        for (Code c = 0; c < RADIX; c++) {
+        for (Code c = 0; c < RADIX; ++c) {
             codeTrie.put(std::string() + static_cast<char>(c), c);
         }
     }
 
     void initializeLookupTablewithAllSingleCharacters(stringHelper::strings& lookupTable) {
-        for (Code c = 0; c < RADIX; c++) {
+        for (Code c = 0; c < RADIX; ++c) {
             lookupTable.emplace_back(std::string() + static_cast<char>(c));
         }
         lookupTable.emplace_back("");  // assign one for stop code word (location is at RADIX, so after the loop)

@@ -81,7 +81,7 @@ void Bitmap::setSnippetWriteToFile(BitmapSnippet const& snippet) const {
                 int snippetSize = snippet.getPixelDataSize();
                 int snippetIndex = 0;
 
-                for (int y = offsetInYForStart; y >= offsetInYForEnd && snippetIndex < snippetSize; y--) {
+                for (int y = offsetInYForStart; y >= offsetInYForEnd && snippetIndex < snippetSize; --y) {
                     uint64_t fileOffsetForStart =
                         m_configuration.getPixelArrayAddress() +
                         (static_cast<uint64_t>(m_configuration.getNumberOfBytesPerRowInFile()) * y) +

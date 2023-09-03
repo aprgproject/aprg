@@ -25,7 +25,7 @@ private:
             do {
                 auto itNextSkip = valuesToSort.begin();
                 for (auto itFirst = valuesToSort.begin(), itSecond = std::next(valuesToSort.begin());
-                     itSecond != itLast; itFirst++, itSecond++) {
+                     itSecond != itLast; ++itFirst, ++itSecond) {
                     if (*itSecond < *itFirst) {
                         std::swap(*itFirst, *itSecond);
                         itNextSkip = itSecond;
@@ -40,10 +40,10 @@ private:
         // Based from https://en.wikipedia.org/wiki/Bubble_sort#Optimizing_bubble_sort
         if (!valuesToSort.empty()) {
             auto itBeginPlusOne = std::next(valuesToSort.begin());
-            for (auto itLast = valuesToSort.end(); itBeginPlusOne != itLast; itLast--) {
+            for (auto itLast = valuesToSort.end(); itBeginPlusOne != itLast; --itLast) {
                 bool noSwapHappened(true);
                 for (auto itFirst = valuesToSort.begin(), itSecond = std::next(valuesToSort.begin());
-                     itSecond != itLast; itFirst++, itSecond++) {
+                     itSecond != itLast; ++itFirst, ++itSecond) {
                     if (*itSecond < *itFirst) {
                         std::swap(*itFirst, *itSecond);
                         noSwapHappened = false;

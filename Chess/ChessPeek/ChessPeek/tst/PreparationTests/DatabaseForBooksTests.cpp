@@ -47,7 +47,7 @@ TEST(DatabaseForBooksTest, DISABLED_SavingChessDotComDatabaseWorks) {
 
         int totalNumberOfGames{};
         Book::LineDetail lineDetail{nameOfLine, playerColor, {}, {}};
-        for (int i = 0; i < numberOfNextMoves; i++) {
+        for (int i = 0; i < numberOfNextMoves; ++i) {
             string nextMove =
                 getStringInBetweenTwoStrings(fileReader.getLineAndIgnoreWhiteSpaces(), "NextMove: [", "]");
             int numberOfGames = convertStringToNumber<int>(

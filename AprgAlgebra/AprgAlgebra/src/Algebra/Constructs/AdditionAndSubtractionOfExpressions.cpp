@@ -43,7 +43,7 @@ int AdditionAndSubtractionOfExpressions::getSize() const { return min(m_expressi
 TermsWithDetails AdditionAndSubtractionOfExpressions::getAsTermsWithDetails() const {
     TermsWithDetails result;
     int size = getSize();
-    for (int index = 0; index < size; index++) {
+    for (int index = 0; index < size; ++index) {
         result.emplace_back(convertExpressionToSimplestTerm(m_expressions[index]), m_associations[index]);
     }
     return result;
@@ -91,8 +91,8 @@ void AdditionAndSubtractionOfExpressions::combineExpressionsIfPossible() {
 void AdditionAndSubtractionOfExpressions::mergeExpressionsByCheckingTwoTermsAtATime(
     Terms& mergeParts, Terms& commonParts) {
     int size = mergeParts.size();
-    for (int i = 0; i < size; i++) {
-        for (int j = i + 1; j < size; j++) {
+    for (int i = 0; i < size; ++i) {
+        for (int j = i + 1; j < size; ++j) {
             // quadratic time: think on how this can be better
             if (canBeMerged(mergeParts[i], mergeParts[j], commonParts[i], commonParts[j])) {
                 Term mergedTerm(mergeTerms(mergeParts[i], mergeParts[j], m_associations[i], m_associations[j]));

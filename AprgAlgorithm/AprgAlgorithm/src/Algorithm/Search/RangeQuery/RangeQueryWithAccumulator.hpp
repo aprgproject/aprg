@@ -46,7 +46,7 @@ private:
         if (!valuesToCheck.empty()) {
             partialResult = valuesToCheck.front();
             m_partialResults.emplace_back(partialResult);
-            for (auto it = valuesToCheck.cbegin() + 1; it != valuesToCheck.cend(); it++) {
+            for (auto it = valuesToCheck.cbegin() + 1; it != valuesToCheck.cend(); ++it) {
                 partialResult = m_accumulator(partialResult, *it);
                 m_partialResults.emplace_back(partialResult);
             }

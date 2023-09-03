@@ -41,7 +41,7 @@ public:
 
     [[nodiscard]] Edges getEdges() const override {
         Edges result;
-        for (Vertex vertex1 = 0; vertex1 < static_cast<Vertex>(m_adjacencyLists.size()); vertex1++) {
+        for (Vertex vertex1 = 0; vertex1 < static_cast<Vertex>(m_adjacencyLists.size()); ++vertex1) {
             AdjacencyList const& adjacencyList(m_adjacencyLists[vertex1]);
             for (Vertex const& vertex2 : adjacencyList) {
                 result.emplace_back(vertex1, vertex2);
@@ -52,21 +52,21 @@ public:
 
     void connect(Vertex const& sourceVertex, Vertex const& destinationVertex) override {
         if (!isDirectlyConnected(sourceVertex, destinationVertex)) {
-            m_numberOfEdges++;
+            ++m_numberOfEdges;
             m_adjacencyLists[sourceVertex].emplace(destinationVertex);
         }
     }
 
     void disconnect(Vertex const& sourceVertex, Vertex const& destinationVertex) override {
         if (isDirectlyConnected(sourceVertex, destinationVertex)) {
-            m_numberOfEdges--;
+            --m_numberOfEdges;
             m_adjacencyLists[sourceVertex].erase(destinationVertex);
         }
     }
 
     void clear() override {
         m_numberOfEdges = 0;
-        for (Vertex sourceVertex = 0; sourceVertex < static_cast<Vertex>(m_adjacencyLists.size()); sourceVertex++) {
+        for (Vertex sourceVertex = 0; sourceVertex < static_cast<Vertex>(m_adjacencyLists.size()); ++sourceVertex) {
             m_adjacencyLists[sourceVertex].clear();
         }
     }
@@ -74,7 +74,7 @@ public:
 protected:
     [[nodiscard]] SetOfVertices getUniqueVertices() const {
         SetOfVertices uniqueVertices;
-        for (Vertex sourceVertex = 0; sourceVertex < static_cast<Vertex>(m_adjacencyLists.size()); sourceVertex++) {
+        for (Vertex sourceVertex = 0; sourceVertex < static_cast<Vertex>(m_adjacencyLists.size()); ++sourceVertex) {
             AdjacencyList const& adjacencyList(m_adjacencyLists[sourceVertex]);
             if (!adjacencyList.empty()) {
                 uniqueVertices.emplace(sourceVertex);
@@ -88,7 +88,7 @@ protected:
 
     friend std::ostream& operator<<(std::ostream& out, DirectedGraphWithArrayOfAdjacencyLists const& graph) {
         out << "Adjacency Lists: \n";
-        for (Vertex vertex = 0; vertex < static_cast<Vertex>(graph.m_adjacencyLists.size()); vertex++) {
+        for (Vertex vertex = 0; vertex < static_cast<Vertex>(graph.m_adjacencyLists.size()); ++vertex) {
             DirectedGraphWithArrayOfAdjacencyLists::AdjacencyList const& adjacencyList(graph.m_adjacencyLists[vertex]);
             if (!adjacencyList.empty()) {
                 out << "Adjacent with vertex " << vertex << ": {";

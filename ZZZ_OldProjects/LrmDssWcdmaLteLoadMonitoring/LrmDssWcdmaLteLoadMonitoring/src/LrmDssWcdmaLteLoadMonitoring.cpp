@@ -84,7 +84,7 @@ LrmDssWcdmaLteLoadMonitoring::determineLoadStateForTheNextFilterUpdateAndUpdateC
     EDssWcdmaLoad const currentLoadState, EDssWcdmaLoad const currentLoadStateOfTheAppliedFilter) {
     EDssWcdmaLoad result(currentLoadState);
     if (currentLoadState < currentLoadStateOfTheAppliedFilter) {
-        m_consecutiveLowerLoadStateCount++;
+        ++m_consecutiveLowerLoadStateCount;
         if (m_consecutiveLowerLoadStateCount < DSS_WCDMA_LTE_LOAD_STATE_CHANGE_FILTERING_COUNT) {
             result = getNextLowerLoadState(currentLoadStateOfTheAppliedFilter);
         } else {

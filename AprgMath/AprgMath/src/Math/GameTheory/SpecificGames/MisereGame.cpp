@@ -30,7 +30,7 @@ NimState MisereGame::getOptimalNextState(NimState const& inputNimState) {
         for (NimHeapSize& nimHeapSize : result) {
             if (nimHeapSize > 0)  // just take one to prolong the game
             {
-                nimHeapSize--;
+                --nimHeapSize;
                 break;
             }
         }
@@ -38,7 +38,7 @@ NimState MisereGame::getOptimalNextState(NimState const& inputNimState) {
     {
         NimHeapSize nimSum(NimGame::getNimSum(inputNimState));
         UnsignedInteger i = 0;
-        for (; i < result.size(); i++) {
+        for (; i < result.size(); ++i) {
             NimHeapSize hammingDistanceFromNimSum = result[i] ^ nimSum;
             if (hammingDistanceFromNimSum < result[i]) {
                 result[i] = hammingDistanceFromNimSum;

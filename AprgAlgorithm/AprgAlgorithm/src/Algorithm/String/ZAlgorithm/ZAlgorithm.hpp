@@ -27,7 +27,7 @@ public:
         Indexes prefixLengths(mainStringLength, Index{});
         Index startOfPrefix = 0;
         Index endOfPrefix = 0;
-        for (Index index = 1; index < mainStringLength; index++) {
+        for (Index index = 1; index < mainStringLength; ++index) {
             // compute prefix length from previous prefix lengths
             Index &prefixLength(prefixLengths[index]);
             if (startOfPrefix <= index && index <= endOfPrefix) {

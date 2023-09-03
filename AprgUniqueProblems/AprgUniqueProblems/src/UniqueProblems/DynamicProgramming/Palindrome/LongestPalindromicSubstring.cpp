@@ -41,20 +41,20 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
         Index const stringLength = m_string.length();
         BoolMatrix isSubstrAPalindrome(stringLength, stringLength, false);
 
-        for (Index index = 0; index < stringLength; index++)  // length = 1
+        for (Index index = 0; index < stringLength; ++index)  // length = 1
         {
             isSubstrAPalindrome.setEntry(index, index, true);
         }
-        for (Index index = 0; index + 1 < stringLength; index++)  // length = 2
+        for (Index index = 0; index + 1 < stringLength; ++index)  // length = 2
         {
             if (m_string[index] == m_string[index + 1]) {
                 isSubstrAPalindrome.setEntry(index, index + 1, true);
                 result = 2;
             }
         }
-        for (Index length = 3; length <= stringLength; length++)  // length >= 3
+        for (Index length = 3; length <= stringLength; ++length)  // length >= 3
         {
-            for (Index left = 0; left + length <= stringLength; left++) {
+            for (Index left = 0; left + length <= stringLength; ++left) {
                 Index right = left + length - 1;
                 if (m_string[left] == m_string[right] && isSubstrAPalindrome.getEntry(left + 1, right - 1)) {
                     isSubstrAPalindrome.setEntry(left, right, true);
@@ -75,18 +75,18 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
     if (!m_string.empty()) {
         Index const stringLength = m_string.length();
         Index maxLength = 1;
-        for (Index centerIndex = 0; centerIndex < stringLength; centerIndex++) {
+        for (Index centerIndex = 0; centerIndex < stringLength; ++centerIndex) {
             Index lowIndex = centerIndex - 1;
             Index highIndex = centerIndex + 1;
             while (highIndex < stringLength && m_string[highIndex] == m_string[centerIndex]) {
-                highIndex++;
+                ++highIndex;
             }
             while (lowIndex >= 0 && m_string[lowIndex] == m_string[centerIndex]) {
-                lowIndex--;
+                --lowIndex;
             }
             while (lowIndex >= 0 && highIndex < stringLength && m_string[lowIndex] == m_string[highIndex]) {
-                lowIndex--;
-                highIndex++;
+                --lowIndex;
+                ++highIndex;
             }
             maxLength = std::max(maxLength, highIndex - lowIndex - 1);
         }
@@ -103,18 +103,18 @@ string LongestPalindromicSubstring::getLongestStringUsingIterativeDPAndSpaceEffi
         Index const stringLength = m_string.length();
         Index maxLength = 1;
         Index startIndex = 0;
-        for (Index centerIndex = 0; centerIndex < stringLength; centerIndex++) {
+        for (Index centerIndex = 0; centerIndex < stringLength; ++centerIndex) {
             Index lowIndex = centerIndex - 1;
             Index highIndex = centerIndex + 1;
             while (highIndex < stringLength && m_string[highIndex] == m_string[centerIndex]) {
-                highIndex++;
+                ++highIndex;
             }
             while (lowIndex >= 0 && m_string[lowIndex] == m_string[centerIndex]) {
-                lowIndex--;
+                --lowIndex;
             }
             while (lowIndex >= 0 && highIndex < stringLength && m_string[lowIndex] == m_string[highIndex]) {
-                lowIndex--;
-                highIndex++;
+                --lowIndex;
+                ++highIndex;
             }
             if (maxLength < highIndex - lowIndex - 1) {
                 maxLength = highIndex - lowIndex - 1;

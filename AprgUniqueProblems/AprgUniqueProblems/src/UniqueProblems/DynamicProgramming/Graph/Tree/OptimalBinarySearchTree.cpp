@@ -42,17 +42,17 @@ OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingIterat
         RangeQueryWithAccumulator<Frequencies> frequencyRange(frequencies, plus<>(), minus<>());
 
         // length = 1
-        for (Index index = 0; index < numberOfPairs; index++) {
+        for (Index index = 0; index < numberOfPairs; ++index) {
             costMatrix.setEntry(index, index, m_valueAndFrequencyPairs[index].second);
         }
         // length >= 2
-        for (Index length = 2; length <= numberOfPairs; length++) {
-            for (Index left = 0; left + length <= static_cast<Index>(costMatrix.getNumberOfColumns()); left++) {
+        for (Index length = 2; length <= numberOfPairs; ++length) {
+            for (Index left = 0; left + length <= static_cast<Index>(costMatrix.getNumberOfColumns()); ++left) {
                 Index right = left + length - 1;
                 Cost entryResult(MAX_COUNT);
                 Cost offsetCost(
                     frequencyRange.getAccumulatedValueOnInterval(left, right));  // pattern when going down with depth
-                for (Index possibleParent = left; possibleParent <= right; possibleParent++) {
+                for (Index possibleParent = left; possibleParent <= right; ++possibleParent) {
                     Cost costOfPossibleParent(offsetCost);
                     if (left < possibleParent) {
                         costOfPossibleParent += costMatrix.getEntry(left, possibleParent - 1);  // left child
@@ -75,7 +75,7 @@ OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingNaiveR
     Cost result(0);
     if (left <= right) {
         result = MAX_COUNT;
-        for (Index possibleParent = left; possibleParent <= right; possibleParent++) {
+        for (Index possibleParent = left; possibleParent <= right; ++possibleParent) {
             Cost costOfPossibleParent(getCost(depth, m_valueAndFrequencyPairs[possibleParent].second));
             if (left < possibleParent) {
                 // left child

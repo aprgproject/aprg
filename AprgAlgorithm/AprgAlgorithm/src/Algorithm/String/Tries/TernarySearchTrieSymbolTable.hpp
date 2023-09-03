@@ -76,7 +76,7 @@ protected:
         if (currentNodePointer) {
             ValueUniquePointer const& valueUniquePointer(currentNodePointer->valueUniquePointer);
             if (valueUniquePointer) {
-                result++;
+                ++result;
             }
             result += getSizeStartingOnThisNode(currentNodePointer->left);
             result += getSizeStartingOnThisNode(currentNodePointer->right);

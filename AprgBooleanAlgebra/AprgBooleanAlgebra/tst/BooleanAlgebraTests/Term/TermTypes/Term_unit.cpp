@@ -112,7 +112,7 @@ TEST(TermTest, TermThatIsCopyConstructedHasIsSimplifiedFlagCopied) {
     Term termWithSimplifiedSet;
     termWithSimplifiedSet.setAsSimplified();
 
-    const Term& term1(termWithSimplifiedNotSet);
+    Term const& term1(termWithSimplifiedNotSet);
     Term term2(termWithSimplifiedSet);
 
     EXPECT_FALSE(term1.isSimplified());

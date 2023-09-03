@@ -53,7 +53,7 @@ private:
                     newExponent /= 2;
                 } else {
                     result = transformOneTime(result, newBase);
-                    newExponent--;
+                    --newExponent;
                 }
             }
         }
@@ -76,7 +76,7 @@ private:
             int x = 0;
             for (DistancetMatrix::MatrixData const& columnOfSecondMatrix : columnsOfSecondMatrix) {
                 result.setEntry(x, y, transformOneSetOfValues(rowOfFirstMatrix, columnOfSecondMatrix));
-                x++;
+                ++x;
             }
             y++;
         }
@@ -87,7 +87,7 @@ private:
         DistancetMatrix::MatrixData const& first, DistancetMatrix::MatrixData const& second) {
         DistanceEntry result(AlbaNumberConstants::ALBA_NUMBER_POSITIVE_INFINITY);
         int minSize = std::min(first.size(), second.size());
-        for (int i = 0; i < minSize; i++) {
+        for (int i = 0; i < minSize; ++i) {
             AlbaNumber currentValue = first[i] + second[i];
             if (currentValue < result) {
                 result = currentValue;

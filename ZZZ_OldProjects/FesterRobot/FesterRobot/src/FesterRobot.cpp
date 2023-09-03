@@ -32,7 +32,7 @@ void FesterRobot::run() {
                 m_outputStream << "FREQUENCIES BIT: [" << std::hex << filterBitInteger << std::dec << "]\n";
                 runFesterFunctionInMatlab();
                 if (!m_retryCurrentFrequencies) {
-                    filterBitInteger--;
+                    --filterBitInteger;
                 }
             }
             break;

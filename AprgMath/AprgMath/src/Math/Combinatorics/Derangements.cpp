@@ -152,7 +152,7 @@ UnsignedInteger getNumberOfDerangements(UnsignedInteger const n) {
         UnsignedInteger previousOfPrevious = 0;
         UnsignedInteger previous = 1;
         result = 1;
-        for (UnsignedInteger i = 3; i <= n; i++) {
+        for (UnsignedInteger i = 3; i <= n; ++i) {
             result = (i - 1) * (previous + previousOfPrevious);
             previousOfPrevious = previous;
             previous = result;

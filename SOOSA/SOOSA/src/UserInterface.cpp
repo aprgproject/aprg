@@ -68,7 +68,7 @@ void UserInterface::saveFormDetailsFromFormDetailPath(string const& formDetailsF
         string line(fileReader.getLineAndIgnoreWhiteSpaces());
         if (!line.empty()) {
             if (line == "NEW_COLUMN") {
-                columnNumber++;
+                ++columnNumber;
             } else {
                 m_savedConfiguration.addQuestion(columnNumber, line);
             }

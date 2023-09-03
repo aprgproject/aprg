@@ -21,7 +21,7 @@ CountNumberOfWaysToReachAGivenScoreInAGame::getMinimumCostUsingIterativeDP() con
     Values countsPerScore(m_targetScore + 1, 0);
     countsPerScore[0] = 1;
     for (Value const& moveScore : moveScores) {
-        for (Value partialScore = moveScore; partialScore <= m_targetScore; partialScore++) {
+        for (Value partialScore = moveScore; partialScore <= m_targetScore; ++partialScore) {
             countsPerScore[partialScore] += countsPerScore[partialScore - moveScore];
         }
     }

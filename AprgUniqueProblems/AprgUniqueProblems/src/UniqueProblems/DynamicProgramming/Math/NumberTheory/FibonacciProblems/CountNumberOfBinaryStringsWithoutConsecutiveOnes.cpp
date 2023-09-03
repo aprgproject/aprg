@@ -28,7 +28,7 @@ CountNumberOfBinaryStringsWithoutConsecutiveOnes::getCountUsingIterativeDP() con
         CountMatrix valueMatrix(2, m_length, 0);
         valueMatrix.setEntry(0, 0, 1);
         valueMatrix.setEntry(1, 0, 1);
-        for (Count index = 1; index < m_length; index++) {
+        for (Count index = 1; index < m_length; ++index) {
             Count previousZeroCount = valueMatrix.getEntry(0, index - 1);
             Count previousOneCount = valueMatrix.getEntry(1, index - 1);
             valueMatrix.setEntry(0, index, previousZeroCount + previousOneCount);
@@ -49,7 +49,7 @@ CountNumberOfBinaryStringsWithoutConsecutiveOnes::getCountUsingIterativeDPAndSpa
     if (m_length > 0) {
         Count zeroCount = 1;
         Count oneCount = 1;
-        for (Count subLength = 1; subLength < m_length; subLength++) {
+        for (Count subLength = 1; subLength < m_length; ++subLength) {
             Count nextZeroCount = zeroCount + oneCount;
             oneCount = zeroCount;
             zeroCount = nextZeroCount;

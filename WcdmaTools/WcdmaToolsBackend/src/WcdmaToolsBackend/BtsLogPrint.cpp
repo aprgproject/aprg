@@ -102,7 +102,7 @@ void BtsLogPrint::analyzeLineInLogs(string const& lineInLogs) {
     int const length = lineInLogs.length();
 
     TransactionData transactionData;
-    for (int index = 0; !transactionData.isBtsTimeSaved && index < length; index++) {
+    for (int index = 0; !transactionData.isBtsTimeSaved && index < length; ++index) {
         char const character = lineInLogs[index];
         switch (state) {
             case State::UnknownState:

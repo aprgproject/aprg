@@ -69,7 +69,7 @@ void BitmapSnippet::loadPixelDataFromFileInConfiguration() {
             int numberOfBytesToBeCopiedForX = static_cast<int>(
                 m_configuration.getOneRowSizeInBytesFromBytes(byteOffsetInXForStart, byteOffsetInXForEnd));
 
-            for (int y = offsetInYForStart; y >= offsetInYForEnd; y--) {
+            for (int y = offsetInYForStart; y >= offsetInYForEnd; --y) {
                 uint64_t fileOffsetForStart =
                     m_configuration.getPixelArrayAddress() +
                     (static_cast<uint64_t>(m_configuration.getNumberOfBytesPerRowInFile()) * y) + byteOffsetInXForStart;
@@ -121,8 +121,8 @@ void BitmapSnippet::setPixelAt(BitmapXY const position, uint32_t const value) {
 }
 
 void BitmapSnippet::traverse(TraverseFunction const& traverseFunction) const {
-    for (int y = m_topLeftCorner.getY(); y <= m_bottomRightCorner.getY(); y++) {
-        for (int x = m_topLeftCorner.getX(); x <= m_bottomRightCorner.getX(); x++) {
+    for (int y = m_topLeftCorner.getY(); y <= m_bottomRightCorner.getY(); ++y) {
+        for (int x = m_topLeftCorner.getX(); x <= m_bottomRightCorner.getX(); ++x) {
             BitmapXY currentPoint(x, y);
             traverseFunction(currentPoint, getPixelAt(currentPoint));
         }
@@ -130,8 +130,8 @@ void BitmapSnippet::traverse(TraverseFunction const& traverseFunction) const {
 }
 
 void BitmapSnippet::traverseAndUpdate(TraverseAndUpdateFunction const& traverseAndUpdateFunction) {
-    for (int x = m_topLeftCorner.getX(); x <= m_bottomRightCorner.getX(); x++) {
-        for (int y = m_topLeftCorner.getY(); y <= m_bottomRightCorner.getY(); y++) {
+    for (int x = m_topLeftCorner.getX(); x <= m_bottomRightCorner.getX(); ++x) {
+        for (int y = m_topLeftCorner.getY(); y <= m_bottomRightCorner.getY(); ++y) {
             BitmapXY currentPoint(x, y);
             uint32_t colorToBeUpdated(getPixelAt(currentPoint));
             traverseAndUpdateFunction(currentPoint, colorToBeUpdated);
@@ -173,7 +173,7 @@ uint32_t BitmapSnippet::getPixelAtForMultipleBytePixels(uint8_t const* reader, i
     int minimumNumberOfBytesForOnePixel = m_configuration.getMinimumNumberOfBytesForOnePixel();
     if (index + minimumNumberOfBytesForOnePixel - 1 < static_cast<int>(m_pixelData.getSize())) {
         for (int indexForMultipleBytePixel = static_cast<int>(minimumNumberOfBytesForOnePixel) - 1;
-             indexForMultipleBytePixel >= 0; indexForMultipleBytePixel--) {
+             indexForMultipleBytePixel >= 0; --indexForMultipleBytePixel) {
             result <<= AlbaBitConstants::BYTE_SIZE_IN_BITS;
             result = result | static_cast<uint32_t>(*(reader + index + indexForMultipleBytePixel));
         }
@@ -199,7 +199,7 @@ void BitmapSnippet::setPixelAtForMultipleBytePixels(uint8_t* writer, int const i
     int minimumNumberOfBytesForOnePixel = m_configuration.getMinimumNumberOfBytesForOnePixel();
     if (index + minimumNumberOfBytesForOnePixel - 1 < static_cast<int>(m_pixelData.getSize())) {
         for (int indexForMultipleBytePixel = 0; indexForMultipleBytePixel < minimumNumberOfBytesForOnePixel;
-             indexForMultipleBytePixel++) {
+             ++indexForMultipleBytePixel) {
             *(writer + index + indexForMultipleBytePixel) = valueToSave & AlbaBitConstants::BYTE_MASK;
             valueToSave >>= AlbaBitConstants::BYTE_SIZE_IN_BITS;
         }

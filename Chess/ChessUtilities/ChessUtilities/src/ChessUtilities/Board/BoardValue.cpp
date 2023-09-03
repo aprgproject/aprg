@@ -100,7 +100,7 @@ void BoardValue::saveBoardToData(Board const& board) {
 }
 
 bool operator<(BoardValue const& bv1, BoardValue const& bv2) {
-    for (int i = 0; i < BoardValue::SIZE_OF_DATA; i++) {
+    for (int i = 0; i < BoardValue::SIZE_OF_DATA; ++i) {
         if (bv1.m_data[i] != bv2.m_data[i]) {
             return bv1.m_data[i] < bv2.m_data[i];
         }
@@ -109,7 +109,7 @@ bool operator<(BoardValue const& bv1, BoardValue const& bv2) {
 }
 
 bool operator==(BoardValue const& bv1, BoardValue const& bv2) {
-    for (int i = 0; i < BoardValue::SIZE_OF_DATA; i++) {
+    for (int i = 0; i < BoardValue::SIZE_OF_DATA; ++i) {
         if (bv1.m_data[i] != bv2.m_data[i]) {
             return false;
         }

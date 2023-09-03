@@ -53,7 +53,7 @@ private:
     [[nodiscard]] int getLowestCommonAncestorIndex(int const vertexIndex1, int const vertexIndex2) const {
         int result = vertexIndex1;
         int minimumDepth(m_depths[vertexIndex1]);
-        for (int i = vertexIndex1 + 1; i <= vertexIndex2; i++) {
+        for (int i = vertexIndex1 + 1; i <= vertexIndex2; ++i) {
             int currentDepth(m_depths[i]);
             if (minimumDepth > currentDepth) {
                 minimumDepth = currentDepth;
@@ -91,7 +91,7 @@ private:
         // first visit. Hence, a node that has k children appears k+1 times in the array and there are a total of 2n-1
         // nodes in the array. Tree order: parent1, child1, grandchild1, child1, parent1,
 
-        depth++;
+        ++depth;
         m_processedVertices.putVertex(vertex);
         m_vertexToFirstIndexMap[vertex] = index;
         addVertex(index, depth, vertex);  // add vertex for tree traversal
@@ -107,7 +107,7 @@ private:
     void addVertex(int& index, int const depth, Vertex const& vertex) {
         m_verticesInTreeOrder.emplace_back(vertex);
         m_depths.emplace_back(depth);
-        index++;
+        ++index;
     }
 
     BaseUndirectedGraphWithVertex const& m_graph;

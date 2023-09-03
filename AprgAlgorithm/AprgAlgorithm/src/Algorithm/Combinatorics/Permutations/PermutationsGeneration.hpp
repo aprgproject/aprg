@@ -110,7 +110,7 @@ private:
             Permutation& currentPermutation(recursionData.currentPermutation);
             BooleanVector& isProcessed(recursionData.isProcessed);
 
-            for (int index = 0; index < static_cast<int>(objects.size()); index++) {
+            for (int index = 0; index < static_cast<int>(objects.size()); ++index) {
                 if (!isProcessed[index]) {
                     currentPermutation.emplace_back(objects[index]);
                     isProcessed[index] = true;
@@ -128,7 +128,7 @@ private:
         } else {
             Permutation& currentPermutation(recursionData.currentPermutation);
 
-            for (int swapIndex = recursionData.lowIndex; swapIndex <= recursionData.highIndex; swapIndex++) {
+            for (int swapIndex = recursionData.lowIndex; swapIndex <= recursionData.highIndex; ++swapIndex) {
                 std::swap(currentPermutation[recursionData.lowIndex], currentPermutation[swapIndex]);
                 ++recursionData.lowIndex;
 

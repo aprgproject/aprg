@@ -38,7 +38,7 @@ private:
     [[nodiscard]] ConstIterator getMiddleIterator(Values const& values) const {
         int halfSize = (values.size() + 1) / 2;
         auto middle = values.cbegin();
-        for (int count = 0; count < halfSize && middle != values.cend(); middle++, count++) {
+        for (int count = 0; count < halfSize && middle != values.cend(); ++middle, ++count) {
             ;
         }
         return middle;

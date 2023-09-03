@@ -55,7 +55,7 @@ public:
             Range previousRange = validRanges.front();
             Output savedOutput = this->getResultOnInterval(previousRange.first, previousRange.second);
             result.emplace_back(previousRange, savedOutput);
-            for (auto it = validRanges.cbegin() + 1; it != validRanges.cend(); it++) {
+            for (auto it = validRanges.cbegin() + 1; it != validRanges.cend(); ++it) {
                 Range const& currentRange(*it);
                 if (previousRange.first < currentRange.first) {
                     // remove elements

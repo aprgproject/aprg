@@ -87,7 +87,7 @@ public:
 
     void deleteBasedOnKey(Key const& key) override {
         m_smallerSymbolTables[getHash(key)].deleteBasedOnKey(key);
-        m_size--;
+        --m_size;
     }
 
     void deleteMinimum() override { deleteBasedOnKey(getMinimum()); }

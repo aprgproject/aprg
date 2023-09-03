@@ -16,7 +16,7 @@ namespace alba::AprgAudio {
 void retrieveDeltas(Samples& deltaSamples, Samples const& pointerOfSampleToCheck, int const numberOfSamples) {
     deltaSamples.reserve(numberOfSamples);
     double previousValue(0);
-    for (int i = 0; i < numberOfSamples; i++) {
+    for (int i = 0; i < numberOfSamples; ++i) {
         deltaSamples.emplace_back(pointerOfSampleToCheck[i] - previousValue);
         previousValue = pointerOfSampleToCheck[i];
     }
@@ -160,7 +160,7 @@ void searchAndTryToReplicate(
     int numberOfChannels =
         max(max(audioToReplicate.getNumberOfChannels(), audioToSearch.getNumberOfChannels()),
             audioToChange.getNumberOfChannels());
-    for (int i = 0; i < numberOfChannels; i++) {
+    for (int i = 0; i < numberOfChannels; ++i) {
         searchAndTryToReplicateSamples(
             audioToChange, audioToReplicate, audioToSearch, clampHigherBound(i, audioToChange.getNumberOfChannels()),
             clampHigherBound(i, audioToReplicate.getNumberOfChannels()),

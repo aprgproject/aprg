@@ -45,7 +45,7 @@ public:
         int result(0);
         for (auto const& [vertex, adjacencyList] : m_adjacencyLists) {
             if (!adjacencyList.empty()) {
-                result++;
+                ++result;
             }
         }
         return result;
@@ -89,7 +89,7 @@ public:
 
     void connect(Vertex const& vertex1, Vertex const& vertex2) override {
         if (!isDirectlyConnected(vertex1, vertex2)) {
-            m_numberOfEdges++;
+            ++m_numberOfEdges;
             m_adjacencyLists[vertex1].emplace(vertex2);
             m_adjacencyLists[vertex2].emplace(vertex1);
         }
@@ -97,7 +97,7 @@ public:
 
     void disconnect(Vertex const& vertex1, Vertex const& vertex2) override {
         if (isDirectlyConnected(vertex1, vertex2)) {
-            m_numberOfEdges--;
+            --m_numberOfEdges;
             m_adjacencyLists[vertex1].erase(vertex2);
             m_adjacencyLists[vertex2].erase(vertex1);
         }

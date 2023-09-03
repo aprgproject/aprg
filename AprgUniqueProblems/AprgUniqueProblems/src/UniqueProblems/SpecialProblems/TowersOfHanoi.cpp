@@ -20,7 +20,7 @@ void TowersOfHanoi::transferDisksFromStartToFinish(int const numberOfDisks) cons
 }
 
 void TowersOfHanoi::initialStartStack(StackOfDisks& startStack, int const numberOfDisks) {
-    for (int i = numberOfDisks; i > 0; i--) {
+    for (int i = numberOfDisks; i > 0; --i) {
         startStack.disks.push(i);
     }
 }

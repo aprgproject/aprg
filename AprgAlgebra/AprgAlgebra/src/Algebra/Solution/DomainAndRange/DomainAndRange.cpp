@@ -132,7 +132,7 @@ void collectMinAndMaxValues(AlbaNumbersSet& collectedValues, AlbaNumbersSet cons
     } else if (sortedValues.size() >= 2) {
         auto itFront = sortedValues.cbegin();
         auto itBack = sortedValues.cend();
-        itBack--;
+        --itBack;
         collectedValues.emplace(*itFront);
         collectedValues.emplace(*itBack);
     }
@@ -146,8 +146,8 @@ void appendTransitionValues(
         auto it = sortedValues.cbegin();
         previousInputValue = *it;
         previousOutputValue = functionToCheck(previousInputValue);
-        it++;
-        for (; it != sortedValues.cend(); it++) {
+        ++it;
+        for (; it != sortedValues.cend(); ++it) {
             AlbaNumber const& inputValue(*it);
             AlbaNumber outputValue(functionToCheck(inputValue));
             if (previousOutputValue.isARealFiniteValue() && !outputValue.isARealFiniteValue()) {

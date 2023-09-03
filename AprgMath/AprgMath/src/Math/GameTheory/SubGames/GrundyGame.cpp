@@ -31,7 +31,7 @@ GrundyGame::HeapIndexAndFirstPileAndSecondPile GrundyGame::getOptimalWayToSplit(
     UnsignedInteger overallGrundyNumber = getOverallGrundyNumber();
     GameState gameState = getGameStateFromGrundyNumber(overallGrundyNumber);
     if (GameState::Losing == gameState) {
-        for (UnsignedInteger heapIndex = 0; heapIndex < m_stickHeaps.size(); heapIndex++) {
+        for (UnsignedInteger heapIndex = 0; heapIndex < m_stickHeaps.size(); ++heapIndex) {
             UnsignedInteger const& stickHeap(m_stickHeaps[heapIndex]);
             if (stickHeap >= 3)  // sizes 1 and 2 cannot be split with different sizes
             {
@@ -41,11 +41,11 @@ GrundyGame::HeapIndexAndFirstPileAndSecondPile GrundyGame::getOptimalWayToSplit(
         }
     } else if (GameState::Winning == gameState) {
         bool isFound(false);
-        for (UnsignedInteger heapIndex = 0; !isFound && heapIndex < m_stickHeaps.size(); heapIndex++) {
+        for (UnsignedInteger heapIndex = 0; !isFound && heapIndex < m_stickHeaps.size(); ++heapIndex) {
             UnsignedInteger const& stickHeap(m_stickHeaps[heapIndex]);
             UnsignedInteger grundyNumberAtIndex = getGrundyNumberWithNumberOfSticks(stickHeap);
             UnsignedInteger hammingDistance = grundyNumberAtIndex ^ overallGrundyNumber;
-            for (int a = (static_cast<int>(stickHeap) - 1) / 2; !isFound && a > 0; a--) {
+            for (int a = (static_cast<int>(stickHeap) - 1) / 2; !isFound && a > 0; --a) {
                 int b = static_cast<int>(stickHeap) - a;
                 if (hammingDistance ==
                     getCombinedGrundyNumber(
@@ -89,7 +89,7 @@ SetOfUnsignedIntegers GrundyGame::getNextGrundyNumbersWithNumberOfSticks(Unsigne
     SetOfUnsignedIntegers result;
 
     UnsignedInteger limit = (numberOfSticks + 1) / 2;
-    for (int a = 1; a < static_cast<int>(limit); a++) {
+    for (int a = 1; a < static_cast<int>(limit); ++a) {
         int b = numberOfSticks - a;
         result.emplace(
             getCombinedGrundyNumber(getGrundyNumberWithNumberOfSticks(a), getGrundyNumberWithNumberOfSticks(b)));

@@ -216,7 +216,7 @@ TEST(PolynomialTest, SimplifyWorksAsSkippedWhenIsSimplifiedIsSet) {
     auto it = variableToExponentMap.cbegin();
     EXPECT_EQ("y", it->first);
     EXPECT_EQ(AlbaNumber(0), it->second);
-    it++;
+    ++it;
     EXPECT_EQ("z", it->first);
     EXPECT_EQ(AlbaNumber(0), it->second);
 }

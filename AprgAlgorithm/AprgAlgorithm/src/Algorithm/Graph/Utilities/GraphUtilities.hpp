@@ -92,7 +92,7 @@ bool isARegularGraph(BaseGraph<Vertex> const& graph) {
     auto vertices(graph.getVertices());
     if (!vertices.empty()) {
         int degreeThatShouldMatch = getDegreeAt(graph, vertices.front());
-        for (auto it = vertices.cbegin() + 1; it != vertices.cend(); it++) {
+        for (auto it = vertices.cbegin() + 1; it != vertices.cend(); ++it) {
             if (degreeThatShouldMatch != getDegreeAt(graph, *it)) {
                 result = false;
                 break;
@@ -273,7 +273,7 @@ int getMinDegree(BaseGraph<Vertex> const& graph) {
     auto vertices(graph.getVertices());
     if (!vertices.empty()) {
         result = getDegreeAt(graph, vertices.front());
-        for (auto it = vertices.cbegin() + 1; it != vertices.cend(); it++) {
+        for (auto it = vertices.cbegin() + 1; it != vertices.cend(); ++it) {
             result = std::min(result, getDegreeAt(graph, *it));
         }
     }
@@ -302,7 +302,7 @@ int getNumberOfSelfLoops(BaseGraph<Vertex> const& graph) {
     int count(0);
     for (Edge const& edge : graph.getEdges()) {
         if (edge.first == edge.second) {
-            count++;
+            ++count;
         }
     }
     return count;

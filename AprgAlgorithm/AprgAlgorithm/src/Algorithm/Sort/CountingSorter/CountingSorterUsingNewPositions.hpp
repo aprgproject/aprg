@@ -25,13 +25,13 @@ public:
         }
 
         // Change count[i] so that count[i] now contains actual position of this character in output array
-        for (int c = 1; c < static_cast<int>(correctPositions.size()); c++) {
+        for (int c = 1; c < static_cast<int>(correctPositions.size()); ++c) {
             correctPositions[c] += correctPositions[c - 1];
         }
 
         Values copiedValues(valuesToSort);
         // For stable algorithm, reverse the traversal in copied values
-        for (int i = copiedValues.size() - 1; i >= 0; i--) {
+        for (int i = copiedValues.size() - 1; i >= 0; --i) {
             auto indexableValue(m_valueToIndexableValueFunction(copiedValues[i]));
             valuesToSort[--correctPositions[indexableValue]] = copiedValues[i];
         }

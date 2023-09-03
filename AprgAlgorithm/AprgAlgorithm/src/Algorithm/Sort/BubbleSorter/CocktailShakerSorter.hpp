@@ -20,14 +20,14 @@ public:
         while (lowIndex <= highIndex) {
             int lowBoundary = highIndex;
             int highBoundary = lowIndex;
-            for (int i = lowIndex; i < highIndex; i++) {
+            for (int i = lowIndex; i < highIndex; ++i) {
                 if (valuesToSort[i] > valuesToSort[i + 1]) {
                     std::swap(valuesToSort[i], valuesToSort[i + 1]);
                     highBoundary = i + 1;
                 }
             }
             highIndex = highBoundary - 1;
-            for (int i = highIndex; i >= lowIndex; i--) {
+            for (int i = highIndex; i >= lowIndex; --i) {
                 if (valuesToSort[i] > valuesToSort[i + 1]) {
                     std::swap(valuesToSort[i], valuesToSort[i + 1]);
                     lowBoundary = i;

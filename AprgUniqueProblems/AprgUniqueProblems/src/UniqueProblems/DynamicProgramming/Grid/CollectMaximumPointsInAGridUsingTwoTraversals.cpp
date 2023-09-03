@@ -57,10 +57,10 @@ CollectMaximumPointsInAGridUsingTwoTraversals::getMaximumPointsUsingIterativeDP(
             valueGrids[0].setEntry(columnLeft, columnRight, firstEntryResult);
         }
 
-        for (Index row(1); row < static_cast<Index>(m_inputGrid.getNumberOfRows()); row++) {
-            for (Index columnLeft(0); columnLeft < static_cast<Index>(m_inputGrid.getNumberOfColumns()); columnLeft++) {
+        for (Index row(1); row < static_cast<Index>(m_inputGrid.getNumberOfRows()); ++row) {
+            for (Index columnLeft(0); columnLeft < static_cast<Index>(m_inputGrid.getNumberOfColumns()); ++columnLeft) {
                 for (Index columnRight(0); columnRight < static_cast<Index>(m_inputGrid.getNumberOfColumns());
-                     columnRight++) {
+                     ++columnRight) {
                     Value entryResult(INVALID_COUNT);
                     for (auto const& [leftOffset, rightOffset] : columnsOffsets) {
                         Index previousRow = row - 1;

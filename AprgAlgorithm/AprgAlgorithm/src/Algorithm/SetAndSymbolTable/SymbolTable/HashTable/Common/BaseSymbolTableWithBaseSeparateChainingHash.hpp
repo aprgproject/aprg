@@ -23,7 +23,7 @@ public:
 
     void put(Key const& key, Value const& value) override {
         b_smallerSymbolTables[this->getHash(key)].put(key, value);
-        b_size++;
+        ++b_size;
     }
 
 private:

@@ -150,7 +150,7 @@ void simplifyByQuineMcKluskey(Term& term) {
                     implicantExpression.putTerm(
                         getTermFromVariableAndPrimeValue(variableName, primeBit),
                         targetInner);  // if "outer and" "inner or", its the saved as dual
-                    i--;
+                    --i;
                 }
                 newExpression.putTerm(
                     Term(implicantExpression), targetOuter);  // if "outer and" "inner or", its the saved as dual
@@ -196,9 +196,9 @@ void combineComplementaryTerms(Terms& termsToCombine, OperatorLevel const operat
     for (Term& negatedTerm : negatedTerms) {
         negatedTerm.negate();
     }
-    for (int i = 0; i < static_cast<int>(termsToCombine.size()); i++) {
+    for (int i = 0; i < static_cast<int>(termsToCombine.size()); ++i) {
         bool hasComplimentary(false);
-        for (int j = i + 1; j < static_cast<int>(termsToCombine.size()); j++) {
+        for (int j = i + 1; j < static_cast<int>(termsToCombine.size()); ++j) {
             if (termsToCombine[i] == negatedTerms[j]) {
                 termsToCombine.erase(termsToCombine.begin() + j);
                 negatedTerms.erase(negatedTerms.begin() + j);
@@ -212,14 +212,14 @@ void combineComplementaryTerms(Terms& termsToCombine, OperatorLevel const operat
 }
 
 void combineTermsByCheckingCommonFactor(Terms& termsToCombine, OperatorLevel const operatorLevel) {
-    for (int i = 0; i < static_cast<int>(termsToCombine.size()); i++) {
-        for (int j = i + 1; j < static_cast<int>(termsToCombine.size()); j++) {
+    for (int i = 0; i < static_cast<int>(termsToCombine.size()); ++i) {
+        for (int j = i + 1; j < static_cast<int>(termsToCombine.size()); ++j) {
             Term combinedTerm(
                 combineTwoTermsByCheckingCommonFactorIfPossible(termsToCombine[i], termsToCombine[j], operatorLevel));
             if (!combinedTerm.isEmpty()) {
                 termsToCombine[i] = combinedTerm;
                 termsToCombine.erase(termsToCombine.begin() + j);
-                i--;
+                --i;
                 break;
             }
         }
@@ -237,13 +237,13 @@ Term combineTwoTermsByCheckingCommonFactorIfPossible(
         Terms commonFactors;
         Terms uniqueTerms1(getTermOrSubTerms(term1));
         Terms uniqueTerms2(getTermOrSubTerms(term2));
-        for (int i1 = 0; i1 < static_cast<int>(uniqueTerms1.size()); i1++) {
-            for (int i2 = 0; i2 < static_cast<int>(uniqueTerms2.size()); i2++) {
+        for (int i1 = 0; i1 < static_cast<int>(uniqueTerms1.size()); ++i1) {
+            for (int i2 = 0; i2 < static_cast<int>(uniqueTerms2.size()); ++i2) {
                 if (uniqueTerms1[i1] == uniqueTerms2[i2]) {
                     commonFactors.emplace_back(uniqueTerms1[i1]);
                     uniqueTerms1.erase(uniqueTerms1.begin() + i1);
                     uniqueTerms2.erase(uniqueTerms2.begin() + i2);
-                    i1--;
+                    --i1;
                     break;
                 }
             }

@@ -48,7 +48,7 @@ string DerivativeVariableName::getNameInLeibnizNotation() const {
     return ss.str();
 }
 
-void DerivativeVariableName::differentiate() { m_differentiationLevel++; }
+void DerivativeVariableName::differentiate() { ++m_differentiationLevel; }
 
 void DerivativeVariableName::processNumerator(string const& numerator) {
     enum class ProcessingState { Initial, AfterD, Number, VariableWithBrackets, LastState, Invalid };

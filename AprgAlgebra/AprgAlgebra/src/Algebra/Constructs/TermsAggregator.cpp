@@ -41,7 +41,7 @@ void TermsAggregator::updateStartIndexAndEndIndexAndCheckOpeningAndClosingOperat
     if (!m_terms.empty()) {
         m_endIndex = m_terms.size() - 1;
     }
-    for (int i = 0; i < static_cast<int>(m_terms.size()); i++) {
+    for (int i = 0; i < static_cast<int>(m_terms.size()); ++i) {
         Term const& term(m_terms[i]);
         if (term.isOperator()) {
             Operator const& operatorTerm(term.getAsOperator());
@@ -136,7 +136,7 @@ bool TermsAggregator::performTraverseStepsWithUnaryOperationAndReturnIfContinue(
 TermsAggregator::Indexes TermsAggregator::getNextOperatorIndexes(OperatorInputType const operatorInputType) const {
     Indexes operatorIndexes;
     multimap<int, int> operatorLevelToIndexMap;
-    for (int i = m_startIndex; i < m_endIndex; i++) {
+    for (int i = m_startIndex; i < m_endIndex; ++i) {
         Term const& term(m_terms[i]);
         if (term.isOperator()) {
             Operator const& operatorTerm(term.getAsOperator());
@@ -264,7 +264,7 @@ void TermsAggregator::insertTerm(int const index, Term const& term) {
     if (isOutsideStartAndEndIndex) {
         updateStartIndexAndEndIndexAndCheckOpeningAndClosingOperators();
     } else {
-        m_endIndex++;
+        ++m_endIndex;
     }
 }
 

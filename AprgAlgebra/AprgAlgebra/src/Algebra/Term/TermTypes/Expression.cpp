@@ -82,7 +82,7 @@ string Expression::getDebugString() const {
         ss << getFirstStringIfNegativeAssociation(m_commonOperatorLevel, firstTermWithDetails.association)
            << getTermConstReferenceFromUniquePointer(firstTermWithDetails.baseTermPointer).getDebugString()
            << getEnumShortString(firstTermWithDetails.association);
-        for (auto it = termsWithDetails.cbegin() + 1; it != termsWithDetails.cend(); it++) {
+        for (auto it = termsWithDetails.cbegin() + 1; it != termsWithDetails.cend(); ++it) {
             TermWithDetails const& termWithDetails(*it);
             ss << getOperatingString(m_commonOperatorLevel, termWithDetails.association)
                << getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer).getDebugString()
@@ -541,7 +541,7 @@ ostream& operator<<(ostream& out, Expression const& expression) {
         TermWithDetails const& firstTermWithDetails(termsWithDetails.front());
         out << getFirstStringIfNegativeAssociation(operatorLevel, firstTermWithDetails.association)
             << getTermConstReferenceFromUniquePointer(firstTermWithDetails.baseTermPointer);
-        for (auto it = termsWithDetails.cbegin() + 1; it != termsWithDetails.cend(); it++) {
+        for (auto it = termsWithDetails.cbegin() + 1; it != termsWithDetails.cend(); ++it) {
             TermWithDetails const& termWithDetails(*it);
             out << getOperatingString(operatorLevel, termWithDetails.association)
                 << getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer);

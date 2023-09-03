@@ -30,9 +30,9 @@ public:
                     result = {*forwardIt1, *reverseIt2};
                 }
                 if (currentSum < sumToCheck) {
-                    forwardIt1++;
+                    ++forwardIt1;
                 } else {
-                    reverseIt2++;
+                    ++reverseIt2;
                 }
             }
         }

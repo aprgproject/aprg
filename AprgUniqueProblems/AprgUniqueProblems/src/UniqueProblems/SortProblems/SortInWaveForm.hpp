@@ -13,9 +13,9 @@ public:
 
     void sort(Values& valuesToSort) const {
         auto previousOddIt = valuesToSort.begin();
-        for (auto it = valuesToSort.begin(); it != valuesToSort.end(); it++) {
+        for (auto it = valuesToSort.begin(); it != valuesToSort.end(); ++it) {
             auto nextOddIt = it;  // get next odd
-            nextOddIt++;
+            ++nextOddIt;
 
             // all odds must be larger than even
             if (*it < *previousOddIt)  // previous odd must be greater

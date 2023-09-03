@@ -147,7 +147,7 @@ void ResultPrinter::setNextMovesOnGrid(
     DisplayTable& grid, GenericMoves const& genericMoves, int const startIndex, int const rowSize) const {
     int xOffset = 0;
     Board const& engineBoard(m_engineBoardWithContext.getBoard());
-    for (int moveIndex = 0; moveIndex < rowSize; moveIndex++) {
+    for (int moveIndex = 0; moveIndex < rowSize; ++moveIndex) {
         Move const& nextMove(genericMoves[startIndex + moveIndex].move);
         setMoveOnGrid(grid, engineBoard, nextMove, xOffset, 1, optional<char>());
         xOffset += NEXT_OFFSET_OF_GRID;
@@ -183,7 +183,7 @@ void ResultPrinter::setMovesSequenceOnGrid(
                 setMoveOnGrid(grid, analyzerBoard, halfMove, xOffset, movesDisplayed + 1, firstChar);
 
                 xOffset += NEXT_OFFSET_OF_GRID;
-                movesDisplayed++;
+                ++movesDisplayed;
                 if (movesDisplayed >= rowSize) {
                     break;
                 }
@@ -226,7 +226,7 @@ void ResultPrinter::printHeadersForBestLine(MovesSequence const& movesSequence, 
 void ResultPrinter::printHeaders(strings const& prefixHeaders, strings const& suffixHeaders, int const rowSize) const {
     if (!prefixHeaders.empty() || !suffixHeaders.empty()) {
         bool isFirst = true;
-        for (int i = 0; i < rowSize; i++) {
+        for (int i = 0; i < rowSize; ++i) {
             if (isFirst) {
                 isFirst = false;
             } else {
@@ -249,7 +249,7 @@ void ResultPrinter::printHorizontalBorder() const { cout << m_horizontalBorder <
 
 void ResultPrinter::setSeparatorsOnGrid(DisplayTable& grid, int const xOffset) const {
     int const numberOfColumns = grid.getMaxNumberOfColumns(), numberOfRows = grid.getNumberOfRows();
-    for (int j = 0; j < numberOfRows; j++) {
+    for (int j = 0; j < numberOfRows; ++j) {
         for (int separatorIndex = xOffset - 1; separatorIndex < numberOfColumns; separatorIndex += xOffset) {
             grid.getCellReferenceAt(separatorIndex, j).setText(SEPARATOR);
         }
@@ -257,8 +257,8 @@ void ResultPrinter::setSeparatorsOnGrid(DisplayTable& grid, int const xOffset) c
 }
 
 void ResultPrinter::setBoardOnGrid(DisplayTable& grid, Board const& board, int const xOffset) const {
-    for (CoordinateDataType y = 0; y < Board::CHESS_SIDE_SIZE; y++) {
-        for (CoordinateDataType x = 0; x < Board::CHESS_SIDE_SIZE; x++) {
+    for (CoordinateDataType y = 0; y < Board::CHESS_SIDE_SIZE; ++y) {
+        for (CoordinateDataType x = 0; x < Board::CHESS_SIDE_SIZE; ++x) {
             Piece piece(board.getPieceAt(Coordinate(x, y)));
             grid.getCellReferenceAt(x + xOffset, y)
                 .setText(getDisplayableStringForABoardCell(piece, 0, optional<char>()));
@@ -365,7 +365,7 @@ void ResultPrinter::removeTooManyPawnMoves(NextMoves& nextMoves) const {
             Move const& move(moveDetail.move);
             if (PieceType::Pawn == engineBoard.getPieceAt(move.first).getType()) {
                 if (numberOfPawnMoves < MAX_NUMBER_OF_PAWN_MOVES) {
-                    numberOfPawnMoves++;
+                    ++numberOfPawnMoves;
                 } else {
                     return true;
                 }
@@ -428,7 +428,7 @@ strings ResultPrinter::getNextMovesString(NextMoves const& nextMoves, int const 
     if (startIndex < static_cast<int>(nextMoves.size())) {
         int rowSize = min(MAX_NUMBER_OF_BOARDS_IN_A_ROW, static_cast<int>(nextMoves.size() - startIndex));
         result.reserve(rowSize);
-        for (int moveIndex = 0; moveIndex < rowSize; moveIndex++) {
+        for (int moveIndex = 0; moveIndex < rowSize; ++moveIndex) {
             auto const& nextMove(nextMoves[startIndex + moveIndex]);
             result.emplace_back(formatToHeaderString(getDisplayableString(nextMove)));
         }
@@ -440,7 +440,7 @@ strings ResultPrinter::getBookMovesString(BookMoves const& bookMoves) const {
     strings result;
     int rowSize = min(MAX_NUMBER_OF_BOARDS_IN_A_ROW, static_cast<int>(bookMoves.size()));
     result.reserve(rowSize);
-    for (int moveIndex = 0; moveIndex < rowSize; moveIndex++) {
+    for (int moveIndex = 0; moveIndex < rowSize; ++moveIndex) {
         auto const& bookMove(bookMoves[moveIndex]);
         result.emplace_back(formatToHeaderString(getDisplayableString(bookMove)));
     }

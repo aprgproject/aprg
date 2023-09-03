@@ -152,8 +152,8 @@ Move ChessPeek::getPerformedMove() const {
     Board const& newBoard(m_detailsFromTheScreen.getBoardWithContext().getBoard());
 
     Coordinates changedCoordinates;
-    for (int j = 0; j < 8; j++) {
-        for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; ++j) {
+        for (int i = 0; i < 8; ++i) {
             Coordinate coordinate(i, j);
             Piece oldPiece(oldBoard.getPieceAt(coordinate));
             Piece newPiece(newBoard.getPieceAt(coordinate));

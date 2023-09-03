@@ -16,7 +16,7 @@ LongestIncreasingSubsequenceLinearithmic::Index LongestIncreasingSubsequenceLine
         IndexToValue lengthMinus1ToEndValue(m_sequence.size(), 0);  // dynamic programming
         lengthMinus1ToEndValue[0] = m_sequence.front();
         longestLength = 1;
-        for (auto itValue = m_sequence.cbegin() + 1; itValue != m_sequence.cend(); itValue++) {
+        for (auto itValue = m_sequence.cbegin() + 1; itValue != m_sequence.cend(); ++itValue) {
             auto beginIt = lengthMinus1ToEndValue.begin(), endIt = lengthMinus1ToEndValue.begin() + longestLength;
             auto lowerBoundItForEndValue = lower_bound(beginIt, endIt, *itValue);
 
@@ -41,7 +41,7 @@ LongestIncreasingSubsequenceLinearithmic::Values LongestIncreasingSubsequenceLin
         IndexToIndex indexToPreviousIndex(m_sequence.size());
         iota(indexToPreviousIndex.begin(), indexToPreviousIndex.end(), 0);
         lengthMinus1ToEndValue[0] = m_sequence.front();
-        for (Index i = 1; i < static_cast<Index>(m_sequence.size()); i++) {
+        for (Index i = 1; i < static_cast<Index>(m_sequence.size()); ++i) {
             Value const& value(m_sequence[i]);
             auto beginIt = lengthMinus1ToEndValue.begin(), endIt = lengthMinus1ToEndValue.begin() + longestLength;
             auto lowerBoundItForEndValue = lower_bound(beginIt, endIt, value);

@@ -66,7 +66,7 @@ void MonsterRaceAnalyzer::readPreviousRaceDatabase() {
             splitToStrings<SplitStringType::WithoutDelimeters>(
                 hpValuesStrings, getStringAfterThisString(line, "#HP:"), ",");
             int limit = min(NUMBER_OF_MONSTERS, static_cast<int>(hpValuesStrings.size()));
-            for (int i = 0; i < limit; i++) {
+            for (int i = 0; i < limit; ++i) {
                 previousRace.raceConfiguration.hp[i] = convertStringToNumber<int>(hpValuesStrings.at(i));
             }
         } else if (isStringFoundCaseSensitive(line, "#Luck:")) {
@@ -74,7 +74,7 @@ void MonsterRaceAnalyzer::readPreviousRaceDatabase() {
             splitToStrings<SplitStringType::WithoutDelimeters>(
                 luckValuesStrings, getStringAfterThisString(line, "#Luck:"), ",");
             int limit = min(NUMBER_OF_MONSTERS, static_cast<int>(luckValuesStrings.size()));
-            for (int i = 0; i < limit; i++) {
+            for (int i = 0; i < limit; ++i) {
                 previousRace.raceConfiguration.luck[i] = convertStringToNumber<int>(luckValuesStrings.at(i));
             }
         } else if (isStringFoundCaseSensitive(line, "#Winner:")) {
@@ -148,7 +148,7 @@ void MonsterRaceAnalyzer::showBestConfiguration(
         cout << setfill(' ') << setw(2) << value << ", ";
     }
     cout << "sum: ";
-    for (int i = 0; i < NUMBER_OF_MONSTERS; i++) {
+    for (int i = 0; i < NUMBER_OF_MONSTERS; ++i) {
         cout << setfill(' ') << setw(3) << currentConfiguration.luck[i] + currentConfiguration.hp[i] << ", ";
     }
     cout << "\n";
@@ -161,7 +161,7 @@ void MonsterRaceAnalyzer::showBestConfiguration(
         cout << setfill(' ') << setw(2) << value << ", ";
     }
     cout << "sum: ";
-    for (int i = 0; i < NUMBER_OF_MONSTERS; i++) {
+    for (int i = 0; i < NUMBER_OF_MONSTERS; ++i) {
         cout << setfill(' ') << setw(3) << bestConfiguration.luck[i] + bestConfiguration.hp[i] << ", ";
     }
     cout << "\n";
@@ -169,7 +169,7 @@ void MonsterRaceAnalyzer::showBestConfiguration(
 
 int MonsterRaceAnalyzer::getDiscrepancy(RaceConfiguration const& r1, RaceConfiguration const& r2) {
     int result = 0;
-    for (int i = 0; i < NUMBER_OF_MONSTERS; i++) {
+    for (int i = 0; i < NUMBER_OF_MONSTERS; ++i) {
         result += getAbsoluteValue(r1.luck[i] - r2.luck[i]);
         result += getAbsoluteValue(r1.hp[i] - r2.hp[i]);
         // result += (r1.luck[i] - r2.luck[i]) * (r1.luck[i] - r2.luck[i]);

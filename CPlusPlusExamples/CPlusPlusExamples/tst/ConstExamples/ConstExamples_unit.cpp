@@ -37,11 +37,11 @@ TEST(ConstExamplesTest, MutationWithConstInPointersSometimesWorks) {
     int a[] = {1, 2, 3};
 
     int* b = a;
-    b++;
+    ++b;
     *b = 20;
 
     int const* c = a;
-    c++;
+    ++c;
     //*c = 20; // Error because "c" is const*
 
     int* const d = a;
@@ -103,12 +103,12 @@ TEST(ConstExamplesTest, MutationWithConstInPrimitiveTypesInStructsDoesNotWork) {
     Foo* ptr_f = &f;
     ptr_f->a++;
     // ptr_f->b++; // Error because "b" is const
-    ptr_f++;  // No error because ptr_f can be moved
+    ++ptr_f;  // No error because ptr_f can be moved
 
     Foo const* c_ptr_f = &f;
     // c_ptr_f->a++; // Error because "c_ptr_f" is const*
     // c_ptr_f->b++; // Error because "c_ptr_f" is const*
-    c_ptr_f++;  // No error because c_ptr_f can be moved
+    ++c_ptr_f;  // No error because c_ptr_f can be moved
 
     // Note: You can't modify the "const members of structures" and "members of const structures".
 }

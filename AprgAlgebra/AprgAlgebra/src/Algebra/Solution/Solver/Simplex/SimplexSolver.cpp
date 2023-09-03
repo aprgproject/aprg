@@ -27,9 +27,9 @@ AlbaNumber SimplexSolver::getOptimizedObjectiveValue() const {
 Equations SimplexSolver::getSolutionEquations() const {
     Equations result;
     int lastX = m_simplexTable.getNumberOfColumns() - 1;
-    for (int y = 0; y < static_cast<int>(m_simplexTable.getNumberOfRows()) - 1; y++) {
+    for (int y = 0; y < static_cast<int>(m_simplexTable.getNumberOfRows()) - 1; ++y) {
         Polynomial solutionPolynomial;
-        for (int x = 0; x < static_cast<int>(m_inputVariables.size()); x++) {
+        for (int x = 0; x < static_cast<int>(m_inputVariables.size()); ++x) {
             AlbaNumber coefficient(m_simplexTable.getEntry(x, y));
             if (coefficient != 0) {
                 solutionPolynomial.addMonomial(Monomial(coefficient, {{m_inputVariables[x], 1}}));
@@ -90,7 +90,7 @@ void SimplexSolver::processConstraints(
                 }
                 if (shouldIncludeConstraint) {
                     constraintsInStandardForm.emplace_back(constraintLeftTerm);
-                    index++;
+                    ++index;
                 }
             }
         }
@@ -111,12 +111,12 @@ void SimplexSolver::initializeSimplexTable(
     map<string, int> variableNameToIndexMap;
     int i = 0;
     for (string const& inputVariableName : inputVariableNames) {
-        variableNameToIndexMap.emplace(inputVariableName, i++);
+        variableNameToIndexMap.emplace(inputVariableName, ++i);
     }
 
     int lastX = m_simplexTable.getNumberOfColumns() - 1;
     int slackColumn = inputVariableNames.size();
-    for (int y = 0; y < static_cast<int>(constraintsInStandardForm.size()); y++) {
+    for (int y = 0; y < static_cast<int>(constraintsInStandardForm.size()); ++y) {
         Polynomial const& standardFormConstraint(constraintsInStandardForm[y]);
         for (Monomial const& monomial : standardFormConstraint.getMonomials()) {
             string variableName(getFirstVariableName(monomial));

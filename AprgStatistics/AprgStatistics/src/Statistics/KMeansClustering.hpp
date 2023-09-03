@@ -46,7 +46,7 @@ public:
             for (SamplesGroupPair& samplesGroupPair : samplesGroupPairs) {
                 int nearestGroup(0);
                 double nearestDistance(0);
-                for (int groupIndex = 0; groupIndex < numberOfGroups; groupIndex++) {
+                for (int groupIndex = 0; groupIndex < numberOfGroups; ++groupIndex) {
                     double currentDistance(
                         StatisticsUtilities::calculateDistance(samplesGroupPair.first, meanForEachGroup[groupIndex]));
                     if (groupIndex == 0 || nearestDistance > currentDistance) {
@@ -65,7 +65,7 @@ private:
     [[nodiscard]] GroupOfSamples calculateGroupOfSamplesFromSamplesGroupPairs(
         SamplesGroupPairs const& samplesGroupPairs, int const numberOfGroups) const {
         GroupOfSamples result;
-        for (int groupIndex = 0; groupIndex < numberOfGroups; groupIndex++) {
+        for (int groupIndex = 0; groupIndex < numberOfGroups; ++groupIndex) {
             result.emplace_back();
         }
         for (SamplesGroupPair const& samplesGroupPair : samplesGroupPairs) {
@@ -86,7 +86,7 @@ private:
 
     [[nodiscard]] Samples calculateMeanForEachGroup(GroupOfSamples const& groupOfSamples) const {
         Samples meanForEachGroup;
-        for (int groupIndex = 0; groupIndex < static_cast<int>(groupOfSamples.size()); groupIndex++) {
+        for (int groupIndex = 0; groupIndex < static_cast<int>(groupOfSamples.size()); ++groupIndex) {
             Statistics statistics(groupOfSamples[groupIndex]);
             meanForEachGroup.emplace_back(statistics.getMean());
         }

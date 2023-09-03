@@ -24,7 +24,7 @@ void NewSamplesBuilder::retrieveSampleMergingDetails(
     int searchSamplesSize = searchSamples.size();
     for (SearchResultDetails const& detail : details) {
         double midpoint = static_cast<double>(detail.numberOfSamples) / 2;
-        for (int i = 0; i < detail.numberOfSamples && (i + detail.searchIndex) < searchSamplesSize; i++) {
+        for (int i = 0; i < detail.numberOfSamples && (i + detail.searchIndex) < searchSamplesSize; ++i) {
             double distanceFromMidpoint = getPositiveDelta(midpoint, static_cast<double>(i));
             double weightForPosition = 1 - distanceFromMidpoint / midpoint;
             double searchSampleValue(searchSamples[i + detail.searchIndex]);
@@ -39,7 +39,7 @@ void NewSamplesBuilder::retrieveSampleMergingDetails(
 void NewSamplesBuilder::saveToNewSamples(
     Samples& newSamples, SamplesMergingDetails const& samplesMergingDetails, bool const alwaysPutNewValue) {
     int sampleSize = min(samplesMergingDetails.size(), newSamples.size());
-    for (int i = 0; i < sampleSize; i++) {
+    for (int i = 0; i < sampleSize; ++i) {
         SampleMergingDetails const& mergingDetails(samplesMergingDetails.at(i));
         if (mergingDetails.isChanged) {
             double mergedValue(mergingDetails.totalValue / mergingDetails.weight);

@@ -28,7 +28,7 @@ public:
     {
         NodeUniquePointer next(std::move(m_first));        // previous first is the new next
         m_first.reset(new Node{object, std::move(next)});  // create a new node at first
-        m_size++;
+        ++m_size;
     }
 
     Object pop() override  // runs in constant time, but array is still faster because here there is to deallocation
@@ -38,7 +38,7 @@ public:
         if (m_first) {
             result = m_first->object;            // get value for result
             m_first = std::move(m_first->next);  //  delete previous first and assign the next to first
-            m_size--;
+            --m_size;
         }
         return result;
     }

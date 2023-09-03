@@ -33,10 +33,10 @@ LongestPalindromicSubsequence::Count LongestPalindromicSubsequence::getLongestLe
         Index stringLength = m_string.length();
         CountMatrix lengthMatrix(stringLength, stringLength, 0);
 
-        for (Index index2 = 0; index2 < stringLength; index2++) {
+        for (Index index2 = 0; index2 < stringLength; ++index2) {
             lengthMatrix.setEntry(index2, index2, 1);
             for (int index1 = static_cast<int>(index2) - 1; index1 >= 0;
-                 index1--)  // reverse traversal to get previous values
+                 --index1)  // reverse traversal to get previous values
             {
                 Count entryResult(0);
                 if (m_string[index1] == m_string[index2]) {
@@ -67,13 +67,13 @@ LongestPalindromicSubsequence::Count LongestPalindromicSubsequence::getLongestLe
     // current and previous are the rows in the dynamic programming solution
     Index stringLength = m_string.length();
     vector<Counts> previousAndCurrentCounts(2, Counts(stringLength, 0));  // set first row to zero
-    for (Index index2 = 0; index2 < stringLength; index2++) {
+    for (Index index2 = 0; index2 < stringLength; ++index2) {
         Counts& previousCounts(previousAndCurrentCounts[index2 % 2]);
         Counts& currentCounts(previousAndCurrentCounts[(index2 + 1) % 2]);
 
         currentCounts[index2] = 1;
         for (int index1 = static_cast<int>(index2) - 1; index1 >= 0;
-             index1--)  // reverse traversal to get previous values
+             --index1)  // reverse traversal to get previous values
         {
             if (m_string[index1] == m_string[index2]) {
                 currentCounts[index1] = 2 + previousCounts[index1 + 1];

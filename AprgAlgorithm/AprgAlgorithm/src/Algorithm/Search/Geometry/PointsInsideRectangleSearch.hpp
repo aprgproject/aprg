@@ -54,7 +54,7 @@ public:
 private:
     void searchForPoints(NodeUniquePointer const& nodePointer, Points& pointsInsideRectangle) const {
         static int depth = 0;
-        depth++;
+        ++depth;
         if (nodePointer) {
             Point const& currentPoint(nodePointer->key);
             if (isInsideRectangle(currentPoint)) {

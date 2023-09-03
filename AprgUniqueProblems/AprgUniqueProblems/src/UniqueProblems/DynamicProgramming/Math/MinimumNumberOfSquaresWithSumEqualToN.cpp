@@ -37,9 +37,9 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
 
     Counts minimumCounts(m_sumOfSquares + 1, MAX_COUNT);  // plus one so no more conversion
     minimumCounts[0] = 0;
-    for (Count previousSumOfSquares = 1; previousSumOfSquares <= m_sumOfSquares; previousSumOfSquares++) {
+    for (Count previousSumOfSquares = 1; previousSumOfSquares <= m_sumOfSquares; ++previousSumOfSquares) {
         Count entryResult(MAX_COUNT);
-        for (Count base = 1; base * base <= previousSumOfSquares; base++) {
+        for (Count base = 1; base * base <= previousSumOfSquares; ++base) {
             entryResult =
                 min(entryResult,
                     minimumCounts.at(
@@ -69,7 +69,7 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
         if (immediateNode.sum == 0) {
             result = min(result, immediateNode.count);
         }
-        for (Count base = 1; base * base <= immediateNode.sum; base++) {
+        for (Count base = 1; base * base <= immediateNode.sum; ++base) {
             Count newSum = immediateNode.sum - base * base;
             if (newSum == 0 || !isProcessed[newSum]) {
                 isProcessed[newSum] = true;
@@ -85,7 +85,7 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
     CoinProblem::Coins squaredValues;
     auto highestBase = getIntegerAfterFloorOfDoubleValue<Count>(pow(m_sumOfSquares, 0.5));
     squaredValues.reserve(highestBase);
-    for (Count base = 1; base <= highestBase; base++) {
+    for (Count base = 1; base <= highestBase; ++base) {
         squaredValues.emplace_back(base * base);
     }
 
@@ -100,7 +100,7 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
     if (sumOfSquares == highestBase * highestBase) {
         result = sumOfSquares > 0 ? 1 : 0;
     } else {
-        for (Count base = highestBase; base >= 1 && result != 1; base--) {
+        for (Count base = highestBase; base >= 1 && result != 1; --base) {
             result = min(result, getMinimumCountUsingNaiveRecursion(sumOfSquares - base * base));
         }
         ++result;
@@ -116,7 +116,7 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
         if (sumOfSquares == highestBase * highestBase) {
             result = sumOfSquares > 0 ? 1 : 0;
         } else {
-            for (Count base = highestBase; base >= 1 && result != 1; base--) {
+            for (Count base = highestBase; base >= 1 && result != 1; --base) {
                 result = min(result, getMinimumCountUsingMemoizationDP(savedMinimumCounts, sumOfSquares - base * base));
             }
             ++result;

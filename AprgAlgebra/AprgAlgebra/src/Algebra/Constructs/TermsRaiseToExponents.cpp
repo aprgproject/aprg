@@ -232,7 +232,7 @@ void TermsRaiseToExponents<ExponentType, BaseRaiseToExponentType>::removeItemsWi
             m_baseToExponentMap.erase(it);
             it = m_baseToExponentMap.begin();
         } else {
-            it++;
+            ++it;
         }
     }
 }

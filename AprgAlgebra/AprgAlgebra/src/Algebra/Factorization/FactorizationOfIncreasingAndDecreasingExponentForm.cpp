@@ -34,7 +34,7 @@ void factorizeIncreasingAndDecreasingExponentsFormIfPossible(Polynomials& result
         Monomial firstMonomial(monomials.front());
         Monomial lastMonomial(monomials.back());
         int maxExponentDivisor(calculateMaxExponentDivisor(firstMonomial, lastMonomial));
-        for (int exponentDivisor = 2; exponentDivisor <= maxExponentDivisor; exponentDivisor++) {
+        for (int exponentDivisor = 2; exponentDivisor <= maxExponentDivisor; ++exponentDivisor) {
             if (areExponentsDivisible(firstMonomial, exponentDivisor) &&
                 areExponentsDivisible(lastMonomial, exponentDivisor)) {
                 Monomial unitFirstMonomial(1, firstMonomial.getVariablesToExponentsMap());
@@ -147,7 +147,7 @@ AlbaNumbers calculatePolynomialRootsUsingBrentMethod(
     sort(valuesForRootFinding.begin(), valuesForRootFinding.end());
     BrentMethod brentMethod(coefficients);
     int size = valuesForRootFinding.size();
-    for (int i = 0; i < size - 1; i++) {
+    for (int i = 0; i < size - 1; ++i) {
         int j = i + 1;
         brentMethod.resetCalculation(valuesForRootFinding[i], valuesForRootFinding[j]);
         brentMethod.runMaxNumberOfIterationsOrUntilFinished(NUMBER_OF_ITERATIONS_IN_BRENT_METHOD);
@@ -184,7 +184,7 @@ AlbaNumbers getDerivativeCoefficients(AlbaNumbers const& coefficients) {
 Monomials getMonomialsWithExponentsInOrder(
     int const exponentDivisor, Monomial const& firstInPolynomial, Monomial const& lastInPolynomial) {
     Monomials monomialsWithExponentsInOrder;
-    for (int i = 0; i <= exponentDivisor; i++) {
+    for (int i = 0; i <= exponentDivisor; ++i) {
         Monomial firstPart(firstInPolynomial);
         firstPart.raiseToPowerNumber(exponentDivisor - i);
         Monomial secondPart(lastInPolynomial);

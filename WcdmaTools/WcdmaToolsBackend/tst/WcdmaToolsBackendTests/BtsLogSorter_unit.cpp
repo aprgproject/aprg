@@ -40,7 +40,7 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreMerged) {
     AlbaFileReader fileReader(inputLogFileStream);
     while (fileReader.isNotFinished()) {
         fileReader.getLineAndIgnoreWhiteSpaces();
-        lines++;
+        ++lines;
     }
 
     EXPECT_EQ(2, lines);
@@ -62,7 +62,7 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreMerged2) {
     AlbaFileReader fileReader(inputLogFileStream);
     while (fileReader.isNotFinished()) {
         fileReader.getLineAndIgnoreWhiteSpaces();
-        lines++;
+        ++lines;
     }
 
     EXPECT_EQ(59, lines);
@@ -84,7 +84,7 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreOrderedBasedOnBtsTi
     AlbaFileReader fileReader(inputLogFileStream);
     while (fileReader.isNotFinished()) {
         cout << fileReader.getLineAndIgnoreWhiteSpaces() << "\n";
-        lines++;
+        ++lines;
     }
 
     EXPECT_EQ(4, lines);
@@ -108,7 +108,7 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreFiltered) {
     AlbaFileReader fileReader(inputLogFileStream);
     while (fileReader.isNotFinished()) {
         cout << fileReader.getLineAndIgnoreWhiteSpaces() << "\n";
-        lines++;
+        ++lines;
     }
 
     EXPECT_EQ(3, lines);

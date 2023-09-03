@@ -47,7 +47,7 @@ void LogStatisticsAnalyzer::saveLogDetailsToCsv(ofstream& outputCsvFileStream) {
         if (!logStrings.empty()) {
             string firstLogStringInCsv(string("[") + logStrings.front() + "]");
             stringInCsv += firstLogStringInCsv;
-            for (auto it = logStrings.cbegin() + 1; it != logStrings.cend(); it++) {
+            for (auto it = logStrings.cbegin() + 1; it != logStrings.cend(); ++it) {
                 string logStringInCsv(string("[") + *it + "]");
                 stringInCsv += " && ";
                 stringInCsv += logStringInCsv;
@@ -103,7 +103,7 @@ void LogStatisticsAnalyzer::analyzeLog(std::string const& lineInLogs) {
         cout << "line not processed: [" << lineInLogs << "]"
              << "\n";
     } else {
-        m_totalLinesFound++;
+        ++m_totalLinesFound;
     }
 }
 

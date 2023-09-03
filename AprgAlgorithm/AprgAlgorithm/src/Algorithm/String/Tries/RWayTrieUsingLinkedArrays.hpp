@@ -86,9 +86,9 @@ private:
         if (currentNodePointer) {
             ValueUniquePointer const& valueUniquePointer(currentNodePointer->valueUniquePointer);
             if (valueUniquePointer) {
-                result++;
+                ++result;
             }
-            for (int c = 0; c < RADIX; c++) {
+            for (int c = 0; c < RADIX; ++c) {
                 result += getSize(currentNodePointer->next[c]);
             }
         }
@@ -98,8 +98,8 @@ private:
     [[nodiscard]] int getNumberOfNodes(NodeUniquePointer const& currentNodePointer) const {
         int result(0);
         if (currentNodePointer) {
-            result++;
-            for (int c = 0; c < RADIX; c++) {
+            ++result;
+            for (int c = 0; c < RADIX; ++c) {
                 result += getNumberOfNodes(currentNodePointer->next[c]);
             }
         }
@@ -141,7 +141,7 @@ private:
             if (valueUniquePointer) {
                 collectedKeys.emplace_back(previousPrefix);
             }
-            for (int c = 0; c < RADIX; c++) {
+            for (int c = 0; c < RADIX; ++c) {
                 collectAllKeysAtNode(
                     currentNodePointer->next[c].get(), previousPrefix + static_cast<char>(c), collectedKeys);
             }
@@ -157,7 +157,7 @@ private:
                 collectedKeys.emplace_back(previousPrefix);
             } else if (prefixLength < static_cast<int>(patternToMatch.length())) {
                 char charToMatch = patternToMatch[prefixLength];
-                for (int c = 0; c < RADIX; c++) {
+                for (int c = 0; c < RADIX; ++c) {
                     if ('.' == charToMatch || charToMatch == static_cast<char>(c)) {
                         collectKeysThatMatchAtNode(
                             currentNodePointer->next[c].get(), previousPrefix + static_cast<char>(c), patternToMatch,

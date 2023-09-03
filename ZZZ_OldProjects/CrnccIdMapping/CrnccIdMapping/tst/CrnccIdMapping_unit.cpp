@@ -14,14 +14,14 @@ TEST(SampleTest, DISABLED_PerformanceAccessTestWithRandomValues) {
     AlbaUniformNonDeterministicRandomizer<unsigned int> crnccIdRandomizer(1, 65536);
     AlbaUniformNonDeterministicRandomizer<unsigned int> nbccIdRandomizer(1, 2500);
     vector<unsigned int> crnccIds;
-    for (unsigned int currentSize = 0; currentSize < initialSize; currentSize++) {
+    for (unsigned int currentSize = 0; currentSize < initialSize; ++currentSize) {
         TCRNCCommunicationContextId crnccId = crnccIdRandomizer.getRandomValue();
         TNbccId nbccId = nbccIdRandomizer.getRandomValue();
         crnccIds.emplace_back(crnccId);
         setCrnccIdMapping(crnccId, nbccId);
     }
 
-    for (unsigned int iteration = 0; iteration < accessIterations; iteration++) {
+    for (unsigned int iteration = 0; iteration < accessIterations; ++iteration) {
         TCRNCCommunicationContextId crnccIdAccess = crnccIds[crnccIdRandomizer.getRandomValue()];
         TNbccId nbccIdAccess = getNbccIdFromCrnccId(crnccIdAccess);
         setCrnccIdMapping(crnccIdAccess, nbccIdAccess);
@@ -34,7 +34,7 @@ TEST(SampleTest, DISABLED_PerformanceAddTestWithRandomValues) {
     AlbaUniformNonDeterministicRandomizer<unsigned int> crnccIdRandomizer(1, 65536);
     AlbaUniformNonDeterministicRandomizer<unsigned int> nbccIdRandomizer(1, 2500);
     vector<unsigned int> crnccIds;
-    for (unsigned int currentSize = 0; currentSize < initialSize; currentSize++) {
+    for (unsigned int currentSize = 0; currentSize < initialSize; ++currentSize) {
         TCRNCCommunicationContextId crnccId = crnccIdRandomizer.getRandomValue();
         TNbccId nbccId = nbccIdRandomizer.getRandomValue();
         crnccIds.emplace_back(crnccId);

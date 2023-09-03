@@ -155,12 +155,12 @@ Exchange Board::getExchangeAt(Coordinate const& coordinate) const {
                     pendingPieceValue = pieceValue[ai];
                     counts[ai].attack--;
                     totalCount.attack--;
-                    exchangeCount++;
+                    ++exchangeCount;
                 } else {
                     break;  // opponent dont want to exchange
                 }
             } else if (counts[ai].attack == 0) {
-                ai++;
+                ++ai;
             }
         } else if (ExchangeState::Attacked == exchangeState) {
             if (counts[di].defend > 0) {
@@ -171,12 +171,12 @@ Exchange Board::getExchangeAt(Coordinate const& coordinate) const {
                     pendingPieceValue = pieceValue[di];
                     counts[di].defend--;
                     totalCount.defend--;
-                    exchangeCount++;
+                    ++exchangeCount;
                 } else {
                     break;  // player dont want to exchange
                 }
             } else if (counts[di].defend == 0) {
-                di++;
+                ++di;
             }
         } else {
             break;
@@ -225,7 +225,7 @@ string Board::getNotationPartOfFenString() const {
             Coordinate coordinate(x, y);
             Piece piece(getPieceAt(coordinate));
             if (piece.isEmpty()) {
-                emptyCellsInRank++;
+                ++emptyCellsInRank;
             } else {
                 if (emptyCellsInRank != 0) {
                     ss << emptyCellsInRank;
@@ -935,14 +935,14 @@ Board::NotationDetailsOfMove Board::determineNotationDetailsOfMove(string const&
             case State::LastX: {
                 if (isAToH(c)) {
                     result.lastX = getXInCorrectOrientation(c - 'a');
-                    it++;
+                    ++it;
                 }
                 state = State::Capture;
                 break;
             }
             case State::Capture: {
                 if (c == 'x') {
-                    it++;
+                    ++it;
                 }
                 state = State::FirstY;
                 break;
@@ -950,7 +950,7 @@ Board::NotationDetailsOfMove Board::determineNotationDetailsOfMove(string const&
             case State::FirstY: {
                 if (is1To8(c)) {
                     result.firstY = getYInCorrectOrientation(c - '1');
-                    it++;
+                    ++it;
                 }
                 state = State::FirstX;
                 break;
@@ -958,7 +958,7 @@ Board::NotationDetailsOfMove Board::determineNotationDetailsOfMove(string const&
             case State::FirstX: {
                 if (isAToH(c)) {
                     result.firstX = getXInCorrectOrientation(c - 'a');
-                    it++;
+                    ++it;
                 }
                 state = State::PiecePart;
                 break;

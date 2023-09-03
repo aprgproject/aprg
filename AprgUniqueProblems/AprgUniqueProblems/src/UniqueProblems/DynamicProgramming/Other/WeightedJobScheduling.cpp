@@ -53,7 +53,7 @@ WeightedJobScheduling::Profit WeightedJobScheduling::getMaxProfitByMonitoringTim
             Profit profitIfJobIsDone = profitBeforeJob + job.profit;
             Profit maxProfitForJob = max(profitIfJobIsDone, profitAfterJob);
             for (Index timeToUpdate = timeIndexAfterJob; timeToUpdate < static_cast<Index>(timeStamps.size());
-                 timeToUpdate++) {
+                 ++timeToUpdate) {
                 maxProfitsAtTime[timeToUpdate] = max(maxProfitsAtTime[timeToUpdate], maxProfitForJob);
             }
         }
@@ -74,7 +74,7 @@ WeightedJobScheduling::Profit WeightedJobScheduling::getMaxProfitByMonitoringJob
         Profits maxProfitsAtJob(m_jobs.size(), 0);
         maxProfitsAtJob.front() = jobsSortedByEndTime.front().profit;
 
-        for (Index jobIndex = 1; jobIndex < static_cast<Index>(jobsSortedByEndTime.size()); jobIndex++) {
+        for (Index jobIndex = 1; jobIndex < static_cast<Index>(jobsSortedByEndTime.size()); ++jobIndex) {
             Job const& currentJob(jobsSortedByEndTime[jobIndex]);
             Profit currentProfit = currentJob.profit;
             auto itLatestNonConflictingJob = lower_bound(

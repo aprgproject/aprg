@@ -141,7 +141,7 @@ Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedNumeratorExpressio
     Terms const& lcmDenominatorTerms) const {
     Expression combinedNumerator;
     int numberOfItems = m_items.size();
-    for (int numeratorIndex = 0; numeratorIndex < numberOfItems; numeratorIndex++) {
+    for (int numeratorIndex = 0; numeratorIndex < numberOfItems; ++numeratorIndex) {
         Expression combinedNumeratorOnIndex(
             getCombinedExpressionForNumeratorOnIndex(numeratorIndex, lcmDenominatorTerms));
         combineExpressionAsAddOrSubtract(combinedNumerator, combinedNumeratorOnIndex, m_associations[numeratorIndex]);

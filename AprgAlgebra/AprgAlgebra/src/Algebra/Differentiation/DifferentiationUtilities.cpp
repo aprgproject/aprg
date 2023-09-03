@@ -198,7 +198,7 @@ Term getApproximationUsingTaylorsFormula(
     Term differenceRaiseToPower(1);
     AlbaNumber factorialValue(1);
     Term result(evaluateAtDefiniteTerm(term, variableName, startingValue));
-    for (int n = 1; n <= numberOfTimes; n++) {
+    for (int n = 1; n <= numberOfTimes; ++n) {
         currentDerivative = differentiation.differentiate(currentDerivative);
         differenceRaiseToPower *= difference;
         factorialValue *= n;

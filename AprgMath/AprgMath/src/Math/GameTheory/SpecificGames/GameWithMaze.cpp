@@ -84,9 +84,9 @@ GameWithMaze::Coordinate GameWithMaze::getNextCoordinateWithGrundyNumber(
 string GameWithMaze::getString() {
     DisplayTable table;
     table.setBorders("-", "|");
-    for (int y = 0; y < static_cast<int>(m_isBlockedMatrix.getNumberOfRows()); y++) {
+    for (int y = 0; y < static_cast<int>(m_isBlockedMatrix.getNumberOfRows()); ++y) {
         table.addRow();
-        for (int x = 0; x < static_cast<int>(m_isBlockedMatrix.getNumberOfColumns()); x++) {
+        for (int x = 0; x < static_cast<int>(m_isBlockedMatrix.getNumberOfColumns()); ++x) {
             stringstream ss;
             if (m_isBlockedMatrix.getEntry(x, y)) {
                 ss << "X";
@@ -120,7 +120,7 @@ GameWithMaze::Coordinates GameWithMaze::getNextCoordinates(Coordinate const& coo
 }
 
 void GameWithMaze::retrieveLeftCoordinates(Coordinates& retrievedCoordinates, Coordinate const& coordinate) const {
-    for (int x = coordinate.first - 1; x >= 0; x--) {
+    for (int x = coordinate.first - 1; x >= 0; --x) {
         Coordinate xyToCheck(x, coordinate.second);
         if (!m_isBlockedMatrix.getEntry(xyToCheck.first, xyToCheck.second)) {
             retrievedCoordinates.emplace_back(xyToCheck);
@@ -131,7 +131,7 @@ void GameWithMaze::retrieveLeftCoordinates(Coordinates& retrievedCoordinates, Co
 }
 
 void GameWithMaze::retrieveUpCoordinates(Coordinates& retrievedCoordinates, Coordinate const& coordinate) const {
-    for (int y = coordinate.second - 1; y >= 0; y--) {
+    for (int y = coordinate.second - 1; y >= 0; --y) {
         Coordinate xyToCheck(coordinate.first, y);
         if (!m_isBlockedMatrix.getEntry(xyToCheck.first, xyToCheck.second)) {
             retrievedCoordinates.emplace_back(xyToCheck);

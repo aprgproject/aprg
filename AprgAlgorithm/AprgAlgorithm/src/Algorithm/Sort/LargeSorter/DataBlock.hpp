@@ -67,13 +67,13 @@ public:
                 break;
         }
         setLowestObjectIfNeeded(objectToSort);
-        m_numberOfObjects++;
+        ++m_numberOfObjects;
     }
     void addAtTheStart(ObjectToSort const& objectToSort) {
         switchToMemoryMode();
         m_memoryBlockHandler->addAtTheStart(objectToSort);
         setLowestObjectIfNeeded(objectToSort);
-        m_numberOfObjects++;
+        ++m_numberOfObjects;
     }
     void sortThenDoFunctionThenRelease(std::function<void(ObjectToSort const&)> doFunctionForAllObjects) {
         switchToMemoryMode();

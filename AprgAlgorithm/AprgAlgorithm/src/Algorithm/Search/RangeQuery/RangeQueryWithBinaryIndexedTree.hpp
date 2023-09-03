@@ -85,7 +85,7 @@ private:
         // This has N*log(N) running time
         m_partialTreeSums.reserve(m_values.size());
         // Indexes here have plus one (for easier end loop conditions)
-        for (Index indexPlusOne = 1; indexPlusOne <= static_cast<Index>(m_values.size()); indexPlusOne++) {
+        for (Index indexPlusOne = 1; indexPlusOne <= static_cast<Index>(m_values.size()); ++indexPlusOne) {
             Index powerOf2Factor(getGreatestPowerOf2Factor(indexPlusOne));
             m_partialTreeSums.emplace_back(getPartialTreeSum(powerOf2Factor, indexPlusOne));
         }

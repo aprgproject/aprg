@@ -29,11 +29,11 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
     Index totalLength(getTotalLength());
     if (totalLength > 0) {
         Costs costsAtLength(totalLength, static_cast<Cost>(MAX_COST));
-        for (Index targetLineLength = 1; targetLineLength < totalLength; targetLineLength++) {
+        for (Index targetLineLength = 1; targetLineLength < totalLength; ++targetLineLength) {
             Cost costAtLength(0);
             bool hasNoSolutions(false);
             Index lineLength(m_words.front().length());
-            for (auto it = m_words.cbegin() + 1; it != m_words.cend(); it++) {
+            for (auto it = m_words.cbegin() + 1; it != m_words.cend(); ++it) {
                 Index wordLength(it->length());
                 if (wordLength > targetLineLength) {
                     hasNoSolutions = true;
@@ -86,7 +86,7 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getTotalL
     Index result(0);
     if (!m_words.empty()) {
         result = m_words.front().length();
-        for (auto it = m_words.cbegin() + 1; it != m_words.cend(); it++) {
+        for (auto it = m_words.cbegin() + 1; it != m_words.cend(); ++it) {
             result += it->length() + 1;  // plus one for space
         }
     }

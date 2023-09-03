@@ -14,9 +14,9 @@ MaximumSumIncreasingSubsequence::Value MaximumSumIncreasingSubsequence::getMaxim
     Value result(0);
     if (!m_sequence.empty()) {
         Values partialSums(m_sequence.size(), 0);
-        for (Index index(0); index < static_cast<Index>(m_sequence.size()); index++) {
+        for (Index index(0); index < static_cast<Index>(m_sequence.size()); ++index) {
             Value& partialSum(partialSums[index]);
-            for (Index lowerIndex = 0; lowerIndex < index; lowerIndex++) {
+            for (Index lowerIndex = 0; lowerIndex < index; ++lowerIndex) {
                 if (m_sequence[lowerIndex] < m_sequence[index]) {
                     partialSum = max(partialSum, partialSums[lowerIndex]);
                 }
@@ -37,10 +37,10 @@ MaximumSumIncreasingSubsequence::Values MaximumSumIncreasingSubsequence::getSubs
         IndexToIndex indexToPreviousIndex(m_sequence.size());
         iota(indexToPreviousIndex.begin(), indexToPreviousIndex.end(), 0);
 
-        for (Index index(0); index < static_cast<Index>(m_sequence.size()); index++) {
+        for (Index index(0); index < static_cast<Index>(m_sequence.size()); ++index) {
             Value& partialSum(partialSums[index]);
             Value& previousIndex(indexToPreviousIndex[index]);
-            for (Index lowerIndex = 0; lowerIndex < index; lowerIndex++) {
+            for (Index lowerIndex = 0; lowerIndex < index; ++lowerIndex) {
                 if (m_sequence[lowerIndex] < m_sequence[index] && partialSum < partialSums[lowerIndex]) {
                     partialSum = partialSums[lowerIndex];
                     previousIndex = lowerIndex;

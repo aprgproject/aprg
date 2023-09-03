@@ -78,7 +78,7 @@ public:
 private:
     void searchNearestPoint(NodeUniquePointer const& nodePointer, SearchDetails& searchDetails) const {
         static int depth = 0;
-        depth++;
+        ++depth;
         if (nodePointer) {
             Point const& currentPoint(nodePointer->key);
             if (currentPoint != searchDetails.pointToCheck)  // only consider other points

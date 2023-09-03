@@ -90,7 +90,7 @@ int partitionAndGetPartitionIndexUsingLomuto(
 
     // Notice this has preincrement inside the loop to offset the  -1 start it to lowIndex
     int partitionIndex = lowIndex - 1;
-    for (int compareIndex = lowIndex; compareIndex < highIndex; compareIndex++) {
+    for (int compareIndex = lowIndex; compareIndex < highIndex; ++compareIndex) {
         if (values[compareIndex] <= pivotValue) {
             std::swap(values[++partitionIndex], values[compareIndex]);
         }
@@ -137,7 +137,7 @@ typename Values::iterator partitionAndGetPartitionIteratorInOneDirection(
 
     auto partitionIt = itLow;
     auto stopIt = itHighPlusOne;
-    for (auto compareIt = std::next(itLow); compareIt != stopIt; compareIt++) {
+    for (auto compareIt = std::next(itLow); compareIt != stopIt; ++compareIt) {
         if (*compareIt <= pivotValue) {
             std::swap(*++partitionIt, *compareIt);
         }

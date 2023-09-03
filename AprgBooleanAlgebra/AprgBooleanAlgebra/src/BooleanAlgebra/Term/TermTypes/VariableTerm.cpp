@@ -56,7 +56,7 @@ void VariableTerm::negate() { m_isNegated = !m_isNegated; }
 void VariableTerm::initializeIfNotEmpty() {
     int lastIndex = m_variableName.length() - 1;
     int index = lastIndex;
-    for (; index >= 0; index--) {
+    for (; index >= 0; --index) {
         if (!isPrime(m_variableName[index])) {
             break;
         }

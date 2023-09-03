@@ -20,7 +20,7 @@ UglyNumbers::Number UglyNumbers::getNthUglyNumberByCheckingPreviousUglyNumbersUs
 
         Number currentNumber = 1;
         for (Number count = 1; count < m_nth;) {
-            currentNumber++;
+            ++currentNumber;
             bool isCurrentNumberUgly = isDivisible(currentNumber, 2)   ? isUglyNumber[(currentNumber / 2) - 1]
                                        : isDivisible(currentNumber, 3) ? isUglyNumber[(currentNumber / 3) - 1]
                                        : isDivisible(currentNumber, 5) ? isUglyNumber[(currentNumber / 5) - 1]

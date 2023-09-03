@@ -18,11 +18,11 @@ public:
         bool isKeyFound = rank < b_size && b_keys[rank] == key;
         if (!isKeyFound) {
             b_keys.emplace_back();
-            for (int i = b_size; i > rank; i--) {
+            for (int i = b_size; i > rank; --i) {
                 b_keys[i] = b_keys[i - 1];
             }
             b_keys[rank] = key;
-            b_size++;
+            ++b_size;
         }
     }
 
@@ -30,26 +30,26 @@ public:
         int rank(this->getRank(key));
         if (rank < b_size && b_keys[rank] == key) {
             if (b_size >= 2) {
-                for (int i = rank; i < b_size - 1; i++) {
+                for (int i = rank; i < b_size - 1; ++i) {
                     b_keys[i] = b_keys[i + 1];
                 }
             }
             b_keys.pop_back();
-            b_size--;
+            --b_size;
         }
     }
 
     void deleteMinimum() override {
-        for (int i = 0; i < b_size - 1; i++) {
+        for (int i = 0; i < b_size - 1; ++i) {
             b_keys[i] = b_keys[i + 1];
         }
         b_keys.pop_back();
-        b_size--;
+        --b_size;
     }
 
     void deleteMaximum() override {
         b_keys.pop_back();
-        b_size--;
+        --b_size;
     }
 
 private:

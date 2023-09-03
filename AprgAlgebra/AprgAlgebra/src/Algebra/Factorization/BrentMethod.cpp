@@ -111,7 +111,7 @@ void BrentMethod::runOneIteration() {
 }
 
 void BrentMethod::runMaxNumberOfIterationsOrUntilFinished(int const maxIterations) {
-    for (int i = 0; !isFinished() && i < maxIterations; i++) {
+    for (int i = 0; !isFinished() && i < maxIterations; ++i) {
         runOneIteration();
     }
 }

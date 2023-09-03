@@ -75,7 +75,7 @@ private:
         int firstChildIndex(getFirstChildIndex(treeIndex));
         int lastPossibleChildIndex(std::min(getLastChildIndex(treeIndex), treeSize));
         int significantChildIndex = firstChildIndex;
-        for (int childIndex = firstChildIndex + 1; childIndex <= lastPossibleChildIndex; childIndex++) {
+        for (int childIndex = firstChildIndex + 1; childIndex <= lastPossibleChildIndex; ++childIndex) {
             // Heap order: isInHeapOrder(child, parent) is true
             // Get the child the most break the heap order (this would be swapped in sink)
             if (!isInHeapOrder(getObjectOnTree(childIndex), getObjectOnTree(significantChildIndex))) {

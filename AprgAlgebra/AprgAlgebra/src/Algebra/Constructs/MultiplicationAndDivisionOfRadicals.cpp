@@ -102,7 +102,7 @@ AlbaNumber MultiplicationAndDivisionOfRadicals::getGcfOfExponents(RadicalDetails
     AlbaNumber gcfOfExponents(1);
     if (!radicalDetails.empty()) {
         gcfOfExponents = radicalDetails.front().radical.getExponent();
-        for (auto it = radicalDetails.cbegin() + 1; it != radicalDetails.cend(); it++) {
+        for (auto it = radicalDetails.cbegin() + 1; it != radicalDetails.cend(); ++it) {
             gcfOfExponents = getGreatestCommonFactor(gcfOfExponents, it->radical.getExponent());
         }
     }

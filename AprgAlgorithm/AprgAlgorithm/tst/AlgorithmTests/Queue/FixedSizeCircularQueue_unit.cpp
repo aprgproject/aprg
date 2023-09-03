@@ -33,7 +33,7 @@ TEST(FixedSizeCircularQueueTest, DISABLED_DequeueWorksWithAssertionWhenItsEmpty)
 TEST(FixedSizeCircularQueueTest, DISABLED_PushWorksWithAssertionWhenItReachesMaximumSize) {
     QueueForTest queue;
 
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 9; ++i) {
         queue.enqueue(i);
     }
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto,cert-err33-c)

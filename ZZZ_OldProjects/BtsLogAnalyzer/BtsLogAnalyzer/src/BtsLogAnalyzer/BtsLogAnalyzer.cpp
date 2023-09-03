@@ -95,7 +95,7 @@ void BtsLogAnalyzer::processFileForWireSharkDelay(string const& filePath) {
             if (delayForCrnccId.startTimeOptional && delayForCrnccId.endTimeOptional) {
                 double delay = delayForCrnccId.endTimeOptional.value() - delayForCrnccId.startTimeOptional.value();
                 m_totalDelay += delay;
-                m_count++;
+                ++m_count;
                 m_outputStream << crnccId << "," << setw(10) << delay << "\n";
                 // cout<<"CrnccId: "<<crnccId<<" Delay: "<<delay<<" count: "<<m_count<<" totalDelay:
                 // "<<m_totalDelay<<"\n";
@@ -127,7 +127,7 @@ void BtsLogAnalyzer::processFileForMsgQueuingTime(string const& filePath) {
                 highestMsgQueuingTime = msgQueuingTime;
             }
             m_outputStream << msgQueuingTime << "," << lineInLogs << "\n";
-            numberOfPrints++;
+            ++numberOfPrints;
         }
     }
     cout << "TotalMsgQueuingTime: " << totalMsgQueuingTime << " highestMsgQueuingTime: " << highestMsgQueuingTime
@@ -183,7 +183,7 @@ void BtsLogAnalyzer::processFileForBtsDelayForRlh(string const& filePath) {
                 // "<<delayForCrnccId.startTimeOptional.getReference()<<"endTimeOptional
                 // "<<delayForCrnccId.endTimeOptional.getReference()<<"\n";}
                 m_totalDelay += delay;
-                m_count++;
+                ++m_count;
                 m_outputStream << uniqueKey.crnccId << "," << uniqueKey.nbccId << "," << uniqueKey.transactionId << ","
                                << setw(10) << delay << "\n";
                 m_btsLogDelays.erase(uniqueKey);
@@ -239,7 +239,7 @@ void BtsLogAnalyzer::processFileForBtsDelayForRlDeletion(string const& filePath)
                 // "<<delayForCrnccId.startTimeOptional.getReference()<<"endTimeOptional
                 // "<<delayForCrnccId.endTimeOptional.getReference()<<"\n";}
                 m_totalDelay += delay;
-                m_count++;
+                ++m_count;
                 m_outputStream << uniqueKey.crnccId << "," << uniqueKey.nbccId << "," << uniqueKey.transactionId << ","
                                << setw(10) << delay << "\n";
                 m_btsLogDelays.erase(uniqueKey);
@@ -306,7 +306,7 @@ void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePat
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "diff in ms: "));
             if (difference != 0x80000000) {
                 grmFetchTotal += difference * 1000;
-                grmFetchCount++;
+                ++grmFetchCount;
                 grmFetchFileStream << crnccId << "," << nbccId << "," << transactionId << "," << setw(10) << difference
                                    << "\n";
             }
@@ -372,7 +372,7 @@ void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePat
                     processMapInstance.endTimeOptional.value() - processMapInstance.startTimeOptional.value();
                 int delay = static_cast<int>(delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000);
                 grmProcessTotal += delay;
-                grmProcessCount++;
+                ++grmProcessCount;
                 grmProcessFileStream << uniqueKey.crnccId << "," << uniqueKey.nbccId << "," << uniqueKey.transactionId
                                      << "," << setw(10) << delay << "\n";
             }
@@ -386,7 +386,7 @@ void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePat
                     messageDeliveryInstance.endTimeOptional.value() - messageDeliveryInstance.startTimeOptional.value();
                 int delay = static_cast<int>(delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000);
                 messageDeliveryTotal += delay;
-                messageDeliveryCount++;
+                ++messageDeliveryCount;
                 messageDeliveryFileStream << uniqueKey.crnccId << "," << uniqueKey.nbccId << ","
                                           << uniqueKey.transactionId << "," << setw(10) << delay << "\n";
             }
@@ -400,7 +400,7 @@ void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePat
                     rlSetupMapInstance.endTimeOptional.value() - rlSetupMapInstance.startTimeOptional.value();
                 int delay = static_cast<int>(delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000);
                 rlSetupTotal += delay;
-                rlSetupCount++;
+                ++rlSetupCount;
                 rlSetupFileStream << uniqueKey.crnccId << "," << uniqueKey.nbccId << "," << uniqueKey.transactionId
                                   << "," << setw(10) << delay << "\n";
             }
@@ -452,7 +452,7 @@ void BtsLogAnalyzer::processFileForBtsDelayForGrm(string const& filePath) {
                 int delay = static_cast<int>(delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000);
                 if (delay < 1000000) {
                     m_totalDelay += delay;
-                    m_count++;
+                    ++m_count;
                     m_outputStream << crnccId << "," << nbccId << "," << transactionId << "," << setw(10) << delay
                                    << "\n";
                 }
@@ -480,14 +480,14 @@ double BtsLogAnalyzer::getWireSharkTime(string const& lineInLogs) {
     int startIndexOfTime = 0;
     int endIndexOfTime = 0;
     int i = 0;
-    for (; i < length && stringHelper::isWhiteSpace(lineInLogs[i]); i++) {
+    for (; i < length && stringHelper::isWhiteSpace(lineInLogs[i]); ++i) {
     }
-    for (; i < length && stringHelper::isNumber(lineInLogs[i]); i++) {
+    for (; i < length && stringHelper::isNumber(lineInLogs[i]); ++i) {
     }
     startIndexOfTime = i;
-    for (; i < length && stringHelper::isWhiteSpace(lineInLogs[i]); i++) {
+    for (; i < length && stringHelper::isWhiteSpace(lineInLogs[i]); ++i) {
     }
-    for (; i < length && !stringHelper::isWhiteSpace(lineInLogs[i]); i++) {
+    for (; i < length && !stringHelper::isWhiteSpace(lineInLogs[i]); ++i) {
     }
     endIndexOfTime = i;
     return stringHelper::convertStringToNumber<double>(

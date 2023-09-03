@@ -51,7 +51,7 @@ public:
     void setNumberOfItems(int const numberOfItems) { resizeToHaveThisIndexIfNeeded(numberOfItems); }
 
     void insert(int const objectIndex, Object const& object) {
-        m_size++;
+        ++m_size;
         resizeToHaveThisIndexIfNeeded(std::max(objectIndex, m_size));
         m_objectIndexToTreeIndex[objectIndex] = m_size;
         m_treeIndexToObjectIndex[m_size] = objectIndex;
@@ -64,7 +64,7 @@ public:
         if (!isEmpty()) {
             topObject = getTopObject();
             int objectIndexOfTopObject = getIndexOfTopObject();
-            swapIndexes(IndexedBinaryHeapPriorityQueueConstants::INDEX_OF_TOP_TREE, m_size--);
+            swapIndexes(IndexedBinaryHeapPriorityQueueConstants::INDEX_OF_TOP_TREE, --m_size);
             sink(IndexedBinaryHeapPriorityQueueConstants::INDEX_OF_TOP_TREE);
             m_objectIndexToTreeIndex[objectIndexOfTopObject] =
                 IndexedBinaryHeapPriorityQueueConstants::VALUE_FOR_UNUSED_INDEX;
@@ -78,7 +78,7 @@ public:
         if (objectIndex < static_cast<int>(m_objects.size())) {
             int treeIndex(m_objectIndexToTreeIndex[objectIndex]);
             if (treeIndex != IndexedBinaryHeapPriorityQueueConstants::VALUE_FOR_UNUSED_INDEX) {
-                swapIndexes(treeIndex, m_size--);
+                swapIndexes(treeIndex, --m_size);
                 swim(treeIndex);
                 sink(treeIndex);
                 m_objects[objectIndex] = Object{};
@@ -95,7 +95,7 @@ public:
             m_objects[objectIndex] = object;
             int treeIndex(m_objectIndexToTreeIndex[objectIndex]);
             if (treeIndex == IndexedBinaryHeapPriorityQueueConstants::VALUE_FOR_UNUSED_INDEX) {
-                m_size++;
+                ++m_size;
                 m_objectIndexToTreeIndex[objectIndex] = m_size;
                 m_treeIndexToObjectIndex[m_size] = objectIndex;
                 treeIndex = m_size;

@@ -43,7 +43,7 @@ int getIndexOfMedianNinther(Values const& values, int const lowIndex, int const 
     Indexes indexes;
     indexes.reserve(9);
     int deltaSize = highIndex - lowIndex;
-    for (int i = 0; i <= 8; i++) {
+    for (int i = 0; i <= 8; ++i) {
         indexes.emplace_back(lowIndex + i * deltaSize / 8);
     }
 
@@ -57,9 +57,9 @@ template <typename Values>
 int getMedianIndexOfLessThanFive(
     Values const& values, Indexes& medianIndexes, int const lowIndex, int const highIndex) {
     // Perform insertion sort
-    for (int insertIndex = lowIndex + 1; insertIndex <= highIndex; insertIndex++) {
+    for (int insertIndex = lowIndex + 1; insertIndex <= highIndex; ++insertIndex) {
         for (int iLow = insertIndex - 1, iHigh = insertIndex;
-             lowIndex <= iLow && values[medianIndexes[iLow]] > values[medianIndexes[iHigh]]; iLow--, iHigh--) {
+             lowIndex <= iLow && values[medianIndexes[iLow]] > values[medianIndexes[iHigh]]; --iLow, --iHigh) {
             std::swap(medianIndexes[iLow], medianIndexes[iHigh]);
         }
     }

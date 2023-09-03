@@ -22,17 +22,17 @@ SubArraySum::Values SubArraySum::getSubArrayWithSum(Value const targetSum) const
             if (currentSum > targetSum) {
                 if (start < end) {
                     currentSum -= m_valuesToCheck[start];
-                    start++;
+                    ++start;
                 } else if (end + 1 < size) {
-                    start++;
-                    end++;
+                    ++start;
+                    ++end;
                     currentSum = m_valuesToCheck[end];
                 } else {
                     break;
                 }
             } else {
                 if (end + 1 < size) {
-                    end++;
+                    ++end;
                     currentSum += m_valuesToCheck[end];
                 } else {
                     break;

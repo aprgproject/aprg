@@ -39,7 +39,7 @@ TEST(LasVegasTest, GraphColoringExample) {
             numberOfEdgesWithDifferentColors = 0;
             for (Edge const& edge : graph.getEdges()) {
                 if (vertexToColorMap[edge.first] != vertexToColorMap[edge.second]) {
-                    numberOfEdgesWithDifferentColors++;
+                    ++numberOfEdgesWithDifferentColors;
                 }
             }
         } while (numberOfEdgesWithDifferentColors >= graph.getNumberOfEdges() / 2);

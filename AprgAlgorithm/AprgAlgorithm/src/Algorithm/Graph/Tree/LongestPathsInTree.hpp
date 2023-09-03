@@ -60,7 +60,7 @@ private:
         if (!allVertices.empty()) {
             Dfs const& dfs(getDfs(allVertices.front()));  // start at some arbitiary node
             int maxDistance(0);
-            for (auto it = allVertices.cbegin() + 1; it != allVertices.cend(); it++) {
+            for (auto it = allVertices.cbegin() + 1; it != allVertices.cend(); ++it) {
                 updateIfMaxDistance(result, maxDistance, dfs, *it);
             }
         }

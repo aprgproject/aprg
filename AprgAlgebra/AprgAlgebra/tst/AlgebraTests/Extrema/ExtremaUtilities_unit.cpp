@@ -191,7 +191,7 @@ TEST(ExtremaUtilitiesTest, GetCriticalNumbersWithMultipleVariablesWorksWithExamp
     auto it = variableToCriticalNumbersMap.cbegin();
     EXPECT_EQ("x", it->first);
     EXPECT_EQ(AlbaNumbers{0}, it->second);
-    it++;
+    ++it;
     EXPECT_EQ("y", it->first);
     EXPECT_EQ(AlbaNumbers{0}, it->second);
 }
@@ -208,7 +208,7 @@ TEST(ExtremaUtilitiesTest, GetCriticalNumbersWithMultipleVariablesWorksWithExamp
     auto it = variableToCriticalNumbersMap.cbegin();
     EXPECT_EQ("x", it->first);
     EXPECT_EQ(AlbaNumbers{3}, it->second);
-    it++;
+    ++it;
     EXPECT_EQ("y", it->first);
     EXPECT_EQ(AlbaNumbers{-1}, it->second);
 }
@@ -305,7 +305,7 @@ TEST(ExtremaUtilitiesTest, GetRelativeExtremaWithMultipleVariablesWithExample1) 
     auto it = variableNamesToValues.cbegin();
     EXPECT_EQ("x", it->first);
     EXPECT_EQ(AlbaNumber(0), it->second);
-    it++;
+    ++it;
     EXPECT_EQ("y", it->first);
     EXPECT_EQ(AlbaNumber(0), it->second);
 }
@@ -325,7 +325,7 @@ TEST(ExtremaUtilitiesTest, GetRelativeExtremaWithMultipleVariablesWithExample2) 
     auto it = variableNamesToValues.cbegin();
     EXPECT_EQ("x", it->first);
     EXPECT_EQ(AlbaNumber(3), it->second);
-    it++;
+    ++it;
     EXPECT_EQ("y", it->first);
     EXPECT_EQ(AlbaNumber(-1), it->second);
 }
@@ -345,7 +345,7 @@ TEST(ExtremaUtilitiesTest, GetRelativeExtremaWithMultipleVariablesWithExample3) 
     auto it = variableNamesToValues1.cbegin();
     EXPECT_EQ("x", it->first);
     EXPECT_EQ(AlbaNumber::createFraction(-1, 2), it->second);
-    it++;
+    ++it;
     EXPECT_EQ("y", it->first);
     EXPECT_EQ(AlbaNumber(1), it->second);
 
@@ -356,7 +356,7 @@ TEST(ExtremaUtilitiesTest, GetRelativeExtremaWithMultipleVariablesWithExample3) 
     it = variableNamesToValues2.cbegin();
     EXPECT_EQ("x", it->first);
     EXPECT_EQ(AlbaNumber::createFraction(1, 2), it->second);
-    it++;
+    ++it;
     EXPECT_EQ("y", it->first);
     EXPECT_EQ(AlbaNumber(1), it->second);
 
@@ -367,7 +367,7 @@ TEST(ExtremaUtilitiesTest, GetRelativeExtremaWithMultipleVariablesWithExample3) 
     it = variableNamesToValues3.cbegin();
     EXPECT_EQ("x", it->first);
     EXPECT_EQ(AlbaNumber(0), it->second);
-    it++;
+    ++it;
     EXPECT_EQ("y", it->first);
     EXPECT_EQ(AlbaNumber(1), it->second);
 }

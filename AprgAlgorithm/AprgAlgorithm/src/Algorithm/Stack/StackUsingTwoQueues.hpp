@@ -64,7 +64,7 @@ private:
         rotate(m_queueAtTheBottom, m_queueAtTheBottom.getSize() - numberOfItems);
 
         // put a logarithmic size at the top
-        for (int i = 0; !m_queueAtTheBottom.isEmpty() && i < numberOfItems; i++) {
+        for (int i = 0; !m_queueAtTheBottom.isEmpty() && i < numberOfItems; ++i) {
             m_queueAtTheTop.enqueue(m_queueAtTheBottom.dequeue());
         }
     }
@@ -74,7 +74,7 @@ private:
     }
 
     void rotate(QueueWithObject& queue, int const numberOfTimes) {
-        for (int i = 0; i < numberOfTimes; i++) {
+        for (int i = 0; i < numberOfTimes; ++i) {
             queue.enqueue(queue.dequeue());
         }
     }

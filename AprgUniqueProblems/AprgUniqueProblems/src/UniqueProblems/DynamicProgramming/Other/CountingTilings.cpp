@@ -45,7 +45,7 @@ void CountingTilings::searchNextRow(Count const rowIndex, Row const& currentRow)
         Row emptyRow(getEmptyRow(currentRow.length()));
         for (Row const& nextRow : getNextRows(currentRow)) {
             if (emptyRow == nextRow) {
-                m_numberOfSolutions++;
+                ++m_numberOfSolutions;
             }
         }
     }
@@ -105,7 +105,7 @@ void CountingTilings::doCompleteSearchAt(Count const gridIndex) {
     // This is not exactly DP but "complete search".
 
     if (m_numberFilledCells == m_numberOfCells) {
-        m_numberOfSolutions++;
+        ++m_numberOfSolutions;
     } else if (gridIndex < m_numberOfCells) {
         size_t x = 0;
         size_t y = 0;

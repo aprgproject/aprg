@@ -161,13 +161,13 @@ public:
         int resultStackSize(0);
         for (Term const& term : m_terms) {
             if (term.isValue()) {
-                resultStackSize++;
+                ++resultStackSize;
             } else if (term.isPrefixUnaryOperator()) {
                 if (resultStackSize <= 0) {
                     return false;
                 }
             } else if (term.isBinaryOperator()) {
-                resultStackSize--;
+                --resultStackSize;
                 if (resultStackSize <= 0) {
                     return false;
                 }

@@ -139,7 +139,7 @@ TEST(GslTest, GettingCombinationsInGslWorks) {
 
     constexpr int NUMBER_OF_DIGITS = 3;
     cout << "All subsets of {0,1,2,3} by size:\n";
-    for (int index = 0; index <= NUMBER_OF_DIGITS; index++) {
+    for (int index = 0; index <= NUMBER_OF_DIGITS; ++index) {
         gsl_combination *combination = gsl_combination_calloc(NUMBER_OF_DIGITS, index);
         int exitStatus = GSL_SUCCESS;
         while (exitStatus == GSL_SUCCESS) {
@@ -157,7 +157,7 @@ TEST(GslTest, GettingMultisetsInGslWorks) {
 
     constexpr int NUMBER_OF_DIGITS = 3;
     cout << "All subsets of {0,1,2} by size:\n";
-    for (int index = 0; index <= NUMBER_OF_DIGITS; index++) {
+    for (int index = 0; index <= NUMBER_OF_DIGITS; ++index) {
         gsl_multiset *multiset = gsl_multiset_calloc(NUMBER_OF_DIGITS, index);
         int exitStatus = GSL_SUCCESS;
         while (exitStatus == GSL_SUCCESS) {
@@ -301,13 +301,13 @@ TEST(GslTest, FastFourierTransformInGslWorks) {
     array<double, NUMBER_OF_ITEMS> inputData{};
     gsl_fft_real_workspace *workspace = gsl_fft_real_workspace_alloc(NUMBER_OF_ITEMS);
     int index{};
-    for (index = 0; index < NUMBER_OF_ITEMS; index++) {
+    for (index = 0; index < NUMBER_OF_ITEMS; ++index) {
         inputData[index] = 0.0;
     }
-    for (index = NUMBER_OF_ITEMS / 3; index < 2 * NUMBER_OF_ITEMS / 3; index++) {
+    for (index = NUMBER_OF_ITEMS / 3; index < 2 * NUMBER_OF_ITEMS / 3; ++index) {
         inputData[index] = 1.0;
     }
-    for (index = 0; index < NUMBER_OF_ITEMS; index++) {
+    for (index = 0; index < NUMBER_OF_ITEMS; ++index) {
         cout << index << ": " << inputData[index] << ", ";
     }
     cout << "\n";
@@ -315,14 +315,14 @@ TEST(GslTest, FastFourierTransformInGslWorks) {
     gsl_fft_real_wavetable *real = gsl_fft_real_wavetable_alloc(NUMBER_OF_ITEMS);
     gsl_fft_real_transform(inputData.data(), 1, NUMBER_OF_ITEMS, real, workspace);
     gsl_fft_real_wavetable_free(real);
-    for (index = 11; index < NUMBER_OF_ITEMS; index++) {
+    for (index = 11; index < NUMBER_OF_ITEMS; ++index) {
         inputData[index] = 0;
     }
 
     gsl_fft_halfcomplex_wavetable *halfComplex = gsl_fft_halfcomplex_wavetable_alloc(NUMBER_OF_ITEMS);
     gsl_fft_halfcomplex_inverse(inputData.data(), 1, NUMBER_OF_ITEMS, halfComplex, workspace);
     gsl_fft_halfcomplex_wavetable_free(halfComplex);
-    for (index = 0; index < NUMBER_OF_ITEMS; index++) {
+    for (index = 0; index < NUMBER_OF_ITEMS; ++index) {
         cout << index << ": " << inputData[index] << ", ";
     }
     cout << "\n";
@@ -406,7 +406,7 @@ TEST(GslTest, UsingARandomGeneratorInGslWorks) {
     gsl_rng_env_setup();
     gsl_rng *randomGenerator = gsl_rng_alloc(randomGeneratorType);
     int NUMBER_OF_ITEMS = 10;
-    for (int index = 0; index < NUMBER_OF_ITEMS; index++) {
+    for (int index = 0; index < NUMBER_OF_ITEMS; ++index) {
         cout << gsl_rng_uniform(randomGenerator) << ",";
     }
     cout << "\n";
@@ -419,7 +419,7 @@ TEST(GslTest, UsingAQuasiRandomGeneratorInGslWorks) {
 
     gsl_qrng *quasiRandomSequenceGenerator = gsl_qrng_alloc(gsl_qrng_sobol, 2);
     std::array<double, 2> randomValues{};
-    for (int index = 0; index < 10; index++) {
+    for (int index = 0; index < 10; ++index) {
         gsl_qrng_get(quasiRandomSequenceGenerator, randomValues.data());
         cout << randomValues[0] << " " << randomValues[1] << ",";
     }

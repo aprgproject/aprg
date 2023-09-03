@@ -36,7 +36,7 @@ void UciInterpreter::processInfoTokens(strings const& infoTokens) {
 }
 
 void UciInterpreter::processBestMoveTokens(strings const& tokens) {
-    for (int i = 0; i < static_cast<int>(tokens.size()); i++) {
+    for (int i = 0; i < static_cast<int>(tokens.size()); ++i) {
         string const& token(tokens[i]);
         if (token == "bestmove") {
             m_calculationDetails.bestMove = tokens[++i];
@@ -48,7 +48,7 @@ void UciInterpreter::processBestMoveTokens(strings const& tokens) {
 
 UciInterpreter::InfoDetails UciInterpreter::createInfoDetailsFromInfoTokens(strings const& tokens) {
     InfoDetails infoDetails{};
-    for (int i = 1; i < static_cast<int>(tokens.size()); i++) {
+    for (int i = 1; i < static_cast<int>(tokens.size()); ++i) {
         string const& token(tokens[i]);
         if (shouldSkipTheEntireInfo(token)) {
             break;
@@ -61,8 +61,8 @@ UciInterpreter::InfoDetails UciInterpreter::createInfoDetailsFromInfoTokens(stri
         } else if ("mate" == token) {
             infoDetails.mateValue = convertStringToNumber<int>(tokens[++i]);
         } else if ("pv" == token) {
-            i++;  // skip "pv"
-            for (; i < static_cast<int>(tokens.size()); i++) {
+            ++i;  // skip "pv"
+            for (; i < static_cast<int>(tokens.size()); ++i) {
                 infoDetails.pvHalfMoves.emplace_back(tokens[i]);
             }
         }

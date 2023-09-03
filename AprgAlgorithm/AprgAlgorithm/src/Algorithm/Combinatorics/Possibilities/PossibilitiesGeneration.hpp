@@ -56,7 +56,7 @@ private:
             Objects const& objects(recursionData.objects);
             Possibility& currentPossibility(recursionData.currentPossibility);
 
-            for (int index = 0; index < static_cast<int>(objects.size()); index++) {
+            for (int index = 0; index < static_cast<int>(objects.size()); ++index) {
                 currentPossibility.emplace_back(objects[index]);
                 collectPossibilitiesUsingRecursion(recursionData);
                 currentPossibility.pop_back();

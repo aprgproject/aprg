@@ -31,7 +31,7 @@ public:
 
 private:
     void initialize() {
-        for (Vertex vertex = 0; vertex < MAX_VERTEX_VALUE; vertex++) {
+        for (Vertex vertex = 0; vertex < MAX_VERTEX_VALUE; ++vertex) {
             m_reachabilityPointerArray[vertex] = std::make_unique<Reachability>(m_graph, vertex);
         }
     }

@@ -183,7 +183,7 @@ void PerformanceAnalyzer::processFileForMsgQueueingTime(string const& filePath) 
             totalMsgQueueingTime += msgQueueingTime;
             highestMsgQueueingTime = std::max(msgQueueingTime, highestMsgQueueingTime);
             logLineInRawDataFile(lineInLogs);
-            numberOfInstances++;
+            ++numberOfInstances;
         }
     }
     cout << "TotalMsgQueueingTime: " << totalMsgQueueingTime << "\n";
@@ -240,7 +240,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInRlh(string const& filePath
                     userIdForMaxDelay = uniqueUserId;
                 }
                 totalDelay += delay;
-                count++;
+                ++count;
                 stringstream ss;
                 ss << uniqueUserId.crnccId << "," << uniqueUserId.nbccId << "," << uniqueUserId.transactionId
                    << ",successful," << setw(10) << delay;
@@ -258,7 +258,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInRlh(string const& filePath
                 btsLogDelay.startTimeOptional->getTotalSeconds() <= btsLogDelay.endTimeOptional->getTotalSeconds()) {
                 int delay =
                     getDelayTimeInUs(btsLogDelay.endTimeOptional.value(), btsLogDelay.startTimeOptional.value());
-                countFail++;
+                ++countFail;
                 stringstream ss;
                 ss << uniqueUserId.crnccId << "," << uniqueUserId.nbccId << "," << uniqueUserId.transactionId
                    << ",fail," << setw(10) << delay;
@@ -312,7 +312,7 @@ void PerformanceAnalyzer::processFileForRlDeletionDelayInRlh(string const& fileP
                     getDelayTimeInUs(btsLogDelay.endTimeOptional.value(), btsLogDelay.startTimeOptional.value());
                 maxDelay = std::max(maxDelay, static_cast<double>(delay));
                 totalDelay += delay;
-                count++;
+                ++count;
                 stringstream ss;
                 ss << uniqueUserId.crnccId << "," << uniqueUserId.nbccId << "," << uniqueUserId.transactionId << ","
                    << setw(10) << delay;
@@ -546,7 +546,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
                     userIdForMaxDelay = uniqueUserId;
                 }
                 totalDelay += delay;
-                count++;
+                ++count;
                 stringstream ss;
 
                 ss << uniqueUserId.crnccId << "," << uniqueUserId.nbccId << "," << uniqueUserId.transactionId << ","
@@ -741,7 +741,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
                     userIdForMaxDelay = uniqueUserId;
                 }
                 totalDelay += delay;
-                count++;
+                ++count;
                 stringstream ss;
 
                 ss << uniqueUserId.crnccId << "," << uniqueUserId.nbccId << "," << uniqueUserId.transactionId << ","
@@ -870,7 +870,7 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
                     checkWiresharkLogDelay.endTimeOptional.value() - checkWiresharkLogDelay.startTimeOptional.value();
                 maxDelay = std::max(maxDelay, delay);
                 totalDelay += delay;
-                count++;
+                ++count;
                 stringstream ss;
                 ss << "0x" << std::hex << key.said << ",";
                 ss.precision(17);
@@ -943,7 +943,7 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath) {
             if (cpuLoad > 0 && processName != "`- top") {
                 int i = 0;
                 bool isFound(false);
-                for (; i < processNames.size(); i++) {
+                for (; i < processNames.size(); ++i) {
                     if (processNames[i] == processName) {
                         isFound = true;
                         break;
@@ -1033,7 +1033,7 @@ void PerformanceAnalyzer::processFileForTopLogsMem(string const& filePath) {
             if (memLoad > 0 && processName != "`- top") {
                 int i = 0;
                 bool isFound(false);
-                for (; i < processNames.size(); i++) {
+                for (; i < processNames.size(); ++i) {
                     if (processNames[i] == processName) {
                         isFound = true;
                         break;
@@ -1095,7 +1095,7 @@ void PerformanceAnalyzer::processFileForRlSetupPerSecond(string const& filePath)
         // cout<<"hourOffsetForDay"<<hourOffsetForDay<<"D1:"<<firstLogTime.getDays()<<"D1:"<<logTime.getDays()<<"\n";
         if (!logTime.isStartup()) {
             if ((hour == logTime.getHours()) && (min == logTime.getMinutes()) && (sec == logTime.getSeconds())) {
-                instances++;
+                ++instances;
             } else {
                 stringstream ss;
                 ss << hour << ":" << min << ":" << sec << "," << instances;

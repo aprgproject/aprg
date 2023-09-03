@@ -10,7 +10,7 @@ namespace alba::math {
 
 bool MultipleGamesWithMaze::hasNoMoves() const {
     bool result(true);
-    for (UnsignedInteger gameIndex = 0; gameIndex < m_games.size(); gameIndex++) {
+    for (UnsignedInteger gameIndex = 0; gameIndex < m_games.size(); ++gameIndex) {
         if (!m_games[gameIndex].hasNoMoves(m_coordinateInGames[gameIndex])) {
             result = false;
             break;
@@ -28,7 +28,7 @@ MultipleGamesWithMaze::GameIndexAndCoordinatePair MultipleGamesWithMaze::getOpti
     UnsignedInteger overallGrundyNumber = getOverallGrundyNumber();
     GameState gameState = getGameStateFromGrundyNumber(overallGrundyNumber);
     if (GameState::Losing == gameState) {
-        for (UnsignedInteger gameIndex = 0; gameIndex < m_games.size(); gameIndex++) {
+        for (UnsignedInteger gameIndex = 0; gameIndex < m_games.size(); ++gameIndex) {
             Game& game(m_games[gameIndex]);
             Coordinate const& coordinate(m_coordinateInGames[gameIndex]);
             if (!game.hasNoMoves(coordinate)) {
@@ -37,7 +37,7 @@ MultipleGamesWithMaze::GameIndexAndCoordinatePair MultipleGamesWithMaze::getOpti
             }
         }
     } else if (GameState::Winning == gameState) {
-        for (UnsignedInteger gameIndex = 0; gameIndex < m_games.size(); gameIndex++) {
+        for (UnsignedInteger gameIndex = 0; gameIndex < m_games.size(); ++gameIndex) {
             Game& game(m_games[gameIndex]);
             Coordinate const& coordinate(m_coordinateInGames[gameIndex]);
             UnsignedInteger grundyNumberAtGame = game.getGrundyNumberAt(coordinate);
@@ -53,7 +53,7 @@ MultipleGamesWithMaze::GameIndexAndCoordinatePair MultipleGamesWithMaze::getOpti
 
 string MultipleGamesWithMaze::getString() {
     stringstream result;
-    for (UnsignedInteger gameIndex = 0; gameIndex < m_games.size(); gameIndex++) {
+    for (UnsignedInteger gameIndex = 0; gameIndex < m_games.size(); ++gameIndex) {
         result << "Game " << gameIndex << ":";
         result << m_games[gameIndex].getString();
     }
@@ -74,7 +74,7 @@ void MultipleGamesWithMaze::addGameWithMaze(
 
 UnsignedInteger MultipleGamesWithMaze::getCombinedGrundyNumber() {
     UnsignedInteger result(0U);
-    for (UnsignedInteger gameIndex = 0; gameIndex < m_games.size(); gameIndex++) {
+    for (UnsignedInteger gameIndex = 0; gameIndex < m_games.size(); ++gameIndex) {
         result =
             math::getCombinedGrundyNumber(result, m_games[gameIndex].getGrundyNumberAt(m_coordinateInGames[gameIndex]));
     }

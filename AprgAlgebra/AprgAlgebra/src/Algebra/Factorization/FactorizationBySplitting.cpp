@@ -72,7 +72,7 @@ void splitPolynomialsByDivisibilityOfExponents(Polynomials& result, Polynomial c
     if (polynomialDegree.isIntegerType() && polynomialDegree > 0) {
         Monomials remainingMonomials = polynomial.getMonomials();
         int64_t degree = polynomialDegree.getInteger();
-        for (; degree >= 2; degree--) {
+        for (; degree >= 2; --degree) {
             Polynomial partialPolynomial;
             Monomials collectedMonomials;
             for (Monomial const& remainingMonomial : remainingMonomials) {
@@ -169,7 +169,7 @@ void factorizePolynomialWithNewVariables(
 void getCommonFactorsInThesePolynomials(Polynomials& commonFactors, Polynomials const& smallerPolynomials) {
     if (!smallerPolynomials.empty()) {
         commonFactors = factorizeAPolynomial(smallerPolynomials.front());
-        for (auto it = smallerPolynomials.cbegin() + 1; it != smallerPolynomials.cend(); it++) {
+        for (auto it = smallerPolynomials.cbegin() + 1; it != smallerPolynomials.cend(); ++it) {
             Polynomials commonFactorsOfAPolynomial(factorizeAPolynomial(*it));
             updateToGetSubsetOfFactors(commonFactors, commonFactorsOfAPolynomial);
         }
@@ -216,10 +216,10 @@ void updateToGetSubsetOfFactors(Polynomials& commonFactors, Polynomials const& c
     Polynomials previousCommonFactors(commonFactors);
     Polynomials currentCommonFactors(commonFactorsOfAPolynomial);
     commonFactors.clear();
-    for (int i = 0; i < static_cast<int>(previousCommonFactors.size()); i++) {
+    for (int i = 0; i < static_cast<int>(previousCommonFactors.size()); ++i) {
         bool isFound(false);
         Polynomial const& previousCommonFactor(previousCommonFactors[i]);
-        for (int j = 0; j < static_cast<int>(currentCommonFactors.size()); j++) {
+        for (int j = 0; j < static_cast<int>(currentCommonFactors.size()); ++j) {
             Polynomial const& currentCommonFactor(currentCommonFactors[j]);
             if (isOneMonomial(previousCommonFactor) && isOneMonomial(currentCommonFactor)) {
                 Monomial gcfMonomial(getGcfMonomialInMonomials(
@@ -240,7 +240,7 @@ void updateToGetSubsetOfFactors(Polynomials& commonFactors, Polynomials const& c
         }
         if (isFound) {
             previousCommonFactors.erase(previousCommonFactors.begin() + i);
-            i--;
+            --i;
         }
     }
 }

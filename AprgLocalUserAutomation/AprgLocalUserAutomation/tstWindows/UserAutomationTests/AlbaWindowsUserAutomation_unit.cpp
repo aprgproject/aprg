@@ -25,7 +25,7 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_ShowMousePositions) {
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_SetMouseTest) {
     AlbaWindowsUserAutomation userAutomation;
-    for (int x = 0; x < 100; x++) {
+    for (int x = 0; x < 100; ++x) {
         MousePosition position{x, x};
         userAutomation.setMousePosition(position);
     }
@@ -42,21 +42,21 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_KeyPressDownAndUpSmallLetterTest) {
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_TypeSmallLetterTest) {
     AlbaWindowsUserAutomation userAutomation;
-    for (char c = 'a'; c <= 'z'; c++) {
+    for (char c = 'a'; c <= 'z'; ++c) {
         userAutomation.typeCharacter(c);
     }
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_TypeCapitalLetterTest) {
     AlbaWindowsUserAutomation userAutomation;
-    for (char c = 'A'; c <= 'Z'; c++) {
+    for (char c = 'A'; c <= 'Z'; ++c) {
         userAutomation.typeCharacter(c);
     }
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_TypeNumberTest) {
     AlbaWindowsUserAutomation userAutomation;
-    for (char c = '0'; c <= '9'; c++) {
+    for (char c = '0'; c <= '9'; ++c) {
         userAutomation.typeCharacter(c);
     }
 }

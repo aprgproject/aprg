@@ -308,8 +308,8 @@ void BoardObserver::retrieveOffsetPointsWithCondition(
 
     int xLimit = chessCellBottomRight.getX() - chessCellTopLeft.getX();
     int yLimit = chessCellBottomRight.getY() - chessCellTopLeft.getY();
-    for (int x = 0U; x < xLimit; x++) {
-        for (int y = 0U; y < yLimit; y++) {
+    for (int x = 0U; x < xLimit; ++x) {
+        for (int y = 0U; y < yLimit; ++y) {
             if (condition(calculateColorIntensityDecimal(
                     getColorAt(chessCellTopLeft.getX() + x, chessCellTopLeft.getY() + y)))) {
                 bitmapXYs.emplace_back(x, y);
