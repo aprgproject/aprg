@@ -7,10 +7,9 @@
 
 namespace alba::AprgAudio {
 
-/** The different types of audio file, plus some other types to
- * indicate a failure to load a file, or that one hasn't been
- * loaded yet
- */
+// The different types of audio file, plus some other types to
+// indicate a failure to load a file, or that one hasn't been
+// loaded yet
 
 enum class AudioFormat { Error, NotLoaded, Wave, Aiff };
 
@@ -27,7 +26,7 @@ public:
 
     [[nodiscard]] int getSampleRate() const;
 
-    [[nodiscard]] int getNumChannels() const;
+    [[nodiscard]] int getNumberOfChannels() const;
 
     [[nodiscard]] bool isMono() const;
 
@@ -35,54 +34,50 @@ public:
 
     [[nodiscard]] int getBitDepth() const;
 
-    [[nodiscard]] int getNumSamplesPerChannel() const;
+    [[nodiscard]] int getNumberOfSamplesPerChannel() const;
 
     [[nodiscard]] std::vector<DataType> const& getSamplesAtChannel(int const channelIndex) const;
     std::vector<DataType>& getSamplesReferenceAtChannel(int const channelIndex);
 
-    /** @Returns the length[[nodiscard]]  in seconds of the audio file based on the number of samples and sample rate */
+    // @Returns the length in seconds of the audio file based on the number of samples and sample rate
     [[nodiscard]] double getLengthInSeconds() const;
 
-    /** Prints a summary of the audio file to the console */
+    // Prints a summary of the audio file to the console
     void printSummary() const;
 
-    /** Set the audio buffer for this Audio by copying samples from another buffer.
-     * @Returns true if the buffer was copied successfully.
-     */
+    // Set the audio buffer for this Audio by copying samples from another buffer.
+    // @Returns true if the buffer was copied successfully.
     bool setAudioBuffer(AudioBuffer& newBuffer);
 
-    /** Sets the audio buffer to a given number of channels and number of samples per channel. This will try to preserve
-     * the existing audio, adding zeros to any new channels or new samples in a given channel.
-     */
-    void setAudioBufferSize(int numChannels, int numSamples);
+    // Sets the audio buffer to a given number of channels and number of samples per channel. This will try to preserve
+    // the existing audio, adding zeros to any new channels or new samples in a given channel.
+    void setAudioBufferSize(int numberOfChannels, int numberOfSamples);
 
     /** Sets the number of samples per channel in the audio buffer. This will try to preserve
      * the existing audio, adding zeros to new samples in a given channel if the number of samples is increased.
      */
-    void setNumSamplesPerChannel(int numSamples);
+    void setNumSamplesPerChannel(int numberOfSamples);
 
-    /** Sets the number of channels. New channels will have the correct number of samples and be initialised to zero */
-    void setNumChannels(int numChannels);
+    // Sets the number of channels. New channels will have the correct number of samples and be initialised to zero
+    void setNumberOfChannels(int numberOfChannels);
 
-    /** Sets the bit depth for the audio file. If you use the save() function, this bit depth rate will be used */
-    void setBitDepth(int numBitsPerSample);
+    // Sets the bit depth for the audio file. If you use the save() function, this bit depth rate will be used
+    void setBitDepth(int numberOfBitsPerSample);
 
-    /** Sets the sample rate for the audio file. If you use the save() function, this sample rate will be used */
+    // Sets the sample rate for the audio file. If you use the save() function, this sample rate will be used
     void setSampleRate(int newSampleRate);
 
-    /** A vector of vectors holding the audio samples for the Audio. You can
-     * access the samples by channel and then by sample index, i.e:
-     *
-     *      samples[channel][sampleIndex]
-     */
+    // A vector of vectors holding the audio samples for the Audio. You can
+    // access the samples by channel and then by sample index, i.e:
+    //      samples[channel][sampleIndex]
     AudioBuffer samples;
 
 private:
     enum class Endianness { LittleEndian, BigEndian };
 
-    AudioFormat determineAudioFormat(std::vector<uint8_t>& fileDataBytes);
-    bool decodeWaveFile(std::vector<uint8_t>& fileDataBytes);
-    bool decodeAiffFile(std::vector<uint8_t>& fileDataBytes);
+    AudioFormat determineAudioFormat(std::vector<uint8_t>& dataBuffer);
+    bool decodeWaveFile(std::vector<uint8_t>& dataBuffer);
+    bool decodeAiffFile(std::vector<uint8_t>& dataBuffer);
 
     bool saveToWaveFile(std::string const& filePath);
     bool saveToAiffFile(std::string const& filePath);
@@ -101,18 +96,18 @@ private:
     uint8_t sampleToSingleByte(DataType sample);
     DataType singleByteToSample(uint8_t sample);
 
-    int getAiffSampleRate(std::vector<uint8_t>& fileDataBytes, int sampleRateStartIndex);
+    int getAiffSampleRate(std::vector<uint8_t>& dataBuffer, int sampleRateStartIndex);
     bool tenByteMatch(std::vector<uint8_t>& v1, int startIndex1, std::vector<uint8_t>& v2, int startIndex2);
-    void addSampleRateToAiffData(std::vector<uint8_t>& fileDataBytes, int sampleRate);
+    void addSampleRateToAiffData(std::vector<uint8_t>& dataBuffer, int sampleRate);
     DataType clamp(DataType value, DataType minValue, DataType maxValue);
 
-    void addStringToFileData(std::vector<uint8_t>& fileDataBytes, std::string const& s);
+    void addStringToFileData(std::vector<uint8_t>& dataBuffer, std::string const& stringToCopy);
     void addInt32ToFileData(
-        std::vector<uint8_t>& fileDataBytes, int32_t i, Endianness endianness = Endianness::LittleEndian);
+        std::vector<uint8_t>& dataBuffer, int32_t integerToCopy, Endianness endianness = Endianness::LittleEndian);
     void addInt16ToFileData(
-        std::vector<uint8_t>& fileDataBytes, int16_t i, Endianness endianness = Endianness::LittleEndian);
+        std::vector<uint8_t>& dataBuffer, int16_t integerToCopy, Endianness endianness = Endianness::LittleEndian);
 
-    bool writeDataToFile(std::vector<uint8_t>& fileDataBytes, std::string const& filePath);
+    bool writeDataToFile(std::vector<uint8_t>& dataBuffer, std::string const& filePath);
 
     AudioFormat audioFileFormat{AudioFormat::NotLoaded};
     int sampleRate{44100};
