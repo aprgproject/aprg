@@ -227,15 +227,15 @@ void AlbaWindowsPathHandler::findFilesAndDirectoriesUnlimitedDepth(
 }
 
 void AlbaWindowsPathHandler::findFilesAndDirectoriesWithDepth(
-    string_view const currentDirectory, string_view const wildCardSearch, set<string>& listOfFiles, set<string>& listOfDirectories,
-    int const depth) const {
+    string_view const currentDirectory, string_view const wildCardSearch, set<string>& listOfFiles,
+    set<string>& listOfDirectories, int const depth) const {
     HANDLE hFind{};
     WIN32_FIND_DATAW data;
 
     if (depth == 0) {
         return;
     }
-    depth -= (depth > 0) ? 1 : 0;
+    int correctedDepth = (depth > 0) ? depth - 1 : depth;
 
     string currentDirectoryString(currentDirectory);
     string searchString = currentDirectoryString + string(wildCardSearch);
@@ -247,7 +247,8 @@ void AlbaWindowsPathHandler::findFilesAndDirectoriesWithDepth(
             if (data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
                 string newDirectory(currentDirectoryString + fileOrDirectoryName + '\\');
                 listOfDirectories.emplace(newDirectory);
-                findFilesAndDirectoriesWithDepth(newDirectory, wildCardSearch, listOfFiles, listOfDirectories, depth);
+                findFilesAndDirectoriesWithDepth(
+                    newDirectory, wildCardSearch, listOfFiles, listOfDirectories, correctedDepth);
             } else {
                 listOfFiles.emplace(currentDirectoryString + fileOrDirectoryName);
             }
@@ -298,7 +299,8 @@ bool AlbaWindowsPathHandler::canBeLocated(string_view fullPath) const {
     return INVALID_FILE_ATTRIBUTES != attributes;
 }
 
-bool AlbaWindowsPathHandler::isSlashNeededAtTheEnd(string_view const correctedPath, string_view const originalPath) const {
+bool AlbaWindowsPathHandler::isSlashNeededAtTheEnd(
+    string_view const correctedPath, string_view const originalPath) const {
     bool result(false);
     if (!correctedPath.empty()) {
         bool isCorrectPathLastCharacterNotASlash(

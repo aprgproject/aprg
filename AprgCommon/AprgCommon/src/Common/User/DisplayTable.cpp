@@ -22,7 +22,8 @@ DisplayTableCell::DisplayTableCell(string_view const displayText, HorizontalAlig
       m_verticalAlignment(VerticalAlignment::Center) {}
 
 DisplayTableCell::DisplayTableCell(
-    string_view const displayText, HorizontalAlignment const horizontalAlignment, VerticalAlignment const verticalAlignment)
+    string_view const displayText, HorizontalAlignment const horizontalAlignment,
+    VerticalAlignment const verticalAlignment)
     : m_displayText(displayText), m_horizontalAlignment(horizontalAlignment), m_verticalAlignment(verticalAlignment) {}
 
 string DisplayTableCell::getText() const { return m_displayText; }
@@ -62,7 +63,8 @@ void DisplayTableRow::addCell(string_view const displayText, HorizontalAlignment
 }
 
 void DisplayTableRow::addCell(
-    string_view const displayText, HorizontalAlignment const horizontalAlignment, VerticalAlignment const verticalAlignment) {
+    string_view const displayText, HorizontalAlignment const horizontalAlignment,
+    VerticalAlignment const verticalAlignment) {
     m_cells.emplace_back(displayText, horizontalAlignment, verticalAlignment);
 }
 
@@ -176,7 +178,7 @@ void DisplayTablePrinter::saveTableInformation(DisplayTable const& displayTable)
     }
 
     m_totalColumnLength = accumulate(
-        m_maxLengthAtColumn.cbegin(), m_maxLengthAtColumn.cend(), 0, [](int const partialSum, int const lengthPerColumn) {
+        m_maxLengthAtColumn.cbegin(), m_maxLengthAtColumn.cend(), 0, [](int partialSum, int lengthPerColumn) {
             partialSum += lengthPerColumn;
             return partialSum;
         });
