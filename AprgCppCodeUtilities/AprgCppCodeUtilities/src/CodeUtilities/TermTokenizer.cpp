@@ -1,5 +1,6 @@
 #include "TermTokenizer.hpp"
 
+#include <CodeUtilities/TermConstants.hpp>
 #include <CodeUtilities/TermCreateHelpers.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/Math/Helpers/DivisibilityHelpers.hpp>
@@ -234,7 +235,7 @@ bool TermTokenizer::hasProcessedAnOperator() {
         } else {
             termString = m_code.substr(m_index, 1);
         }
-        m_index += termString.length();
+        m_index += static_cast<int>(termString.length());
         m_terms.emplace_back(createOperator(termString));
         return true;
     }

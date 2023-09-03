@@ -1,28 +1,11 @@
 #pragma once
-
-#include <CodeUtilities/TermConstants.hpp>
+#include <CodeUtilities/TermType.hpp>
 
 #include <ostream>
 #include <string>
 #include <vector>
 
 namespace alba::CodeUtilities {
-
-enum class TermType {
-    Boolean,
-    CharacterLiteral,
-    CommentMultiline,
-    CommentSingleLine,
-    Identifier,
-    Keyword,
-    Macro,
-    Number,
-    Operator,
-    PrimitiveType,
-    StringLiteral,
-    Unknown,
-    WhiteSpace
-};
 
 class Term {
 public:
@@ -34,7 +17,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out, Term const& term);
 
     [[nodiscard]] TermType getTermType() const;
-    [[nodiscard]] std::string getString() const;
+    [[nodiscard]] std::string getContent() const;
     [[nodiscard]] std::string getTermTypeString() const;
 
     void clearValueType();

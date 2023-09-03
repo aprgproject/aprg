@@ -1,17 +1,10 @@
 #include <CodeUtilities/TermTokenizer.hpp>
-#include <CodeUtilitiesTests/MtDirectoryConstants.hpp>
 
 #include <gtest/gtest.h>
 
-#include <fstream>
-
-using namespace alba::CodeUtilities;
 using namespace std;
 
-TEST(TermTokenizerTest, DISABLED_ActualTest) {
-    Terms terms;
-    TermTokenizer tokenizer(terms);
-}
+namespace alba::CodeUtilities {
 
 TEST(TermTokenizerTest, CheckWhiteSpace) {
     Terms terms;
@@ -389,3 +382,5 @@ TEST(TermTokenizerTest, CheckKeyword) {
     EXPECT_EQ(*termIterator++, Term(TermType::Keyword, "if"));
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
 }
+
+}  // namespace alba::CodeUtilities
