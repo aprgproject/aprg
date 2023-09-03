@@ -1,6 +1,5 @@
-StaticAnalysisJobIdentifier: [30]
-2023-09-01T07:20:15
-/home/runner/work/aprg/aprg/TemplateForAllCases/TemplateForAllCases/src/TemplateForAllCases/TemplateForAllCases.cpp:5:22: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
-/home/runner/work/aprg/aprg/TemplateForAllCases/TemplateForAllCases/src/TemplateForAllCases/TemplateForAllCases.hpp:10:9: warning: private field 'm_sample' is not used [clang-diagnostic-unused-private-field]
-/home/runner/work/aprg/aprg/TemplateForAllCases/TemplateForAllCases/src/TemplateForAllCases/TemplateForAllCases.hpp:10:9: warning: private field 'm_sample' is not used [-Wunused-private-field]
+StaticAnalysisJobIdentifier: [31]
+2023-09-03T06:46:37
+/home/runner/work/aprg/aprg/TemplateForAllCases/TemplateForAllCases/src/TemplateForAllCases/TemplateForAllCases.hpp:9:5: warning: function 'getSample' should be marked [[nodiscard]] [modernize-use-nodiscard]
+/home/runner/work/aprg/aprg/TemplateForAllCases/TemplateForAllCases/src/TemplateForAllCases/TemplateForAllCases.hpp:9:5: warning: function 'getSample' should be marked [[nodiscard]] [modernize-use-nodiscard]
 DONE!

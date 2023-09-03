@@ -1,8 +1,5 @@
-StaticAnalysisJobIdentifier: [30]
-2023-09-01T08:20:01
+StaticAnalysisJobIdentifier: [31]
+2023-09-03T07:39:34
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/CrnccIdMapping/CrnccIdMapping/src/CrnccIdMapping.cpp:3:81: warning: variable 'm_crnccIdMapping' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/CrnccIdMapping/CrnccIdMapping/src/CrnccIdMapping.hpp:28:76: warning: variable 'm_crnccIdMapping' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/CrnccIdMapping/CrnccIdMapping/tst/CrnccIdMapping_unit.cpp:26:17: warning: Value stored to 'nbccIdAccess' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/CrnccIdMapping/CrnccIdMapping/tst/CrnccIdMapping_unit.cpp:26:17: warning: unused variable 'nbccIdAccess' [clang-diagnostic-unused-variable]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/CrnccIdMapping/CrnccIdMapping/tst/CrnccIdMapping_unit.cpp:26:17: warning: unused variable 'nbccIdAccess' [-Wunused-variable]
 DONE!

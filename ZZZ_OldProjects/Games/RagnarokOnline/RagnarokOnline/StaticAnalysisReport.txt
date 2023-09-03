@@ -1,6 +1,5 @@
-StaticAnalysisJobIdentifier: [30]
-2023-09-01T08:54:28
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MapAnalyzer.cpp:8:10: warning: inclusion of deprecated C++ header 'math.h'; consider using 'cmath' instead [hicpp-deprecated-headers,modernize-deprecated-headers]
+StaticAnalysisJobIdentifier: [31]
+2023-09-03T07:51:55
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MapAnalyzer.cpp:24:20: warning: 10 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MapAnalyzer.cpp:38:82: warning: 100 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MapAnalyzer.cpp:45:20: warning: 10 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
@@ -105,8 +104,6 @@ StaticAnalysisJobIdentifier: [30]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:192:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:193:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:194:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:35:1: warning: function 'TestBody' exceeds recommended size/complexity thresholds [google-readability-function-size,hicpp-function-size,readability-function-size]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:327:1: warning: function 'TestBody' exceeds recommended size/complexity thresholds [google-readability-function-size,hicpp-function-size,readability-function-size]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:185:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:186:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:187:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]

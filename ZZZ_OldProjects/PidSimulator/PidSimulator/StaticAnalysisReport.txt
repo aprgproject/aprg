@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [30]
-2023-09-01T09:34:13
+StaticAnalysisJobIdentifier: [31]
+2023-09-03T08:32:07
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:204:53: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:204:71: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:207:50: warning: 0x00444444 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]

@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [30]
-2023-09-01T09:03:02
+StaticAnalysisJobIdentifier: [31]
+2023-09-03T07:59:50
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Dsp.cpp:28:50: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Dsp.cpp:28:73: warning: 0xFF00 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/HardwareConfiguration.cpp:32:12: warning: 0x1200 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
@@ -105,14 +105,11 @@ StaticAnalysisJobIdentifier: [30]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1330:20: warning: 7 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1335:20: warning: 6 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1339:20: warning: 5 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1435:39: warning: use 'contains' to check for membership [readability-container-contains]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:191:45: warning: 6 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:68:10: style: Unused private function: 'Lrm::sortFspBasedPriorityForMcdSelection2' [unusedPrivateFunction]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:70:10: style: Unused private function: 'Lrm::sortFspBasedPriorityForNbicMcdSelection2' [unusedPrivateFunction]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:79:32: style: Unused private function: 'Lrm::selectFspsForCcdMcd2' [unusedPrivateFunction]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:93:32: style: Unused private function: 'Lrm::selectFspsForCcdNbicMcd2' [unusedPrivateFunction]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1179:24: style: Redundant condition: isSharedLcgId. '!A || (A && B)' is equivalent to '!A || B' [redundantCondition]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:875:29: style: Condition 'priorityForDsp1!=priorityForDsp2' is always false [knownConditionTrueFalse]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1184:111: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1201:29: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 DONE!
