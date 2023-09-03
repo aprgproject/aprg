@@ -21,6 +21,8 @@ void fixConstReferenceOrder(Terms& terms);
 void fixConstReferenceOrder(Terms& terms, TermMatcher const& typeMatcher);
 void fixCStyleStaticCast(Terms& terms);
 void fixCStyleStaticCast(Terms& terms, TermMatcher const& typeMatcher);
+void fixNoConstPassByValue(Terms& terms);
+void fixNoConstPassByValue(Terms& terms, TermMatchers const& matchers);
 void findTermsAndSwapAt(Terms& terms, TermMatchers const& matchers, int const index1, int const index2);
 void combinePrimitiveTypes(Terms& terms);
 

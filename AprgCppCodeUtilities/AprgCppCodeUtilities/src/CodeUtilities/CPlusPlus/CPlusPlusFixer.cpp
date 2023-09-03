@@ -81,8 +81,9 @@ void writeAllTerms(string const& path, Terms const& terms) {
 void fixTerms(Terms& terms) {
     combinePrimitiveTypes(terms);
     // fixPostFixIncrementDecrement(terms);
-    fixConstReferenceOrder(terms);
-    fixCStyleStaticCast(terms);
+    // fixConstReferenceOrder(terms);
+    // fixCStyleStaticCast(terms);
+    // fixNoConstPassByValue(terms);
 }
 
 void fixPostFixIncrementDecrement(Terms& terms) {
@@ -154,6 +155,48 @@ void fixCStyleStaticCast(Terms& terms, TermMatcher const& typeMatcher) {
             terms[patternIndexes[1]].setContent("static_cast<");
             terms[patternIndexes[3]].setContent(">(");
             ALBA_INF_PRINT3(cout, terms[patternIndexes[0]], terms[patternIndexes[1]], terms[patternIndexes[2]]);
+        }
+    }
+}
+void fixNoConstPassByValue(Terms& terms) {
+    fixNoConstPassByValue(
+        terms,
+        TermMatchers{
+            TermMatcher("("), TermMatcher(TermType::Identifier), TermMatcher(TermType::Identifier), TermMatcher(",")});
+    fixNoConstPassByValue(
+        terms,
+        TermMatchers{
+            TermMatcher(","), TermMatcher(TermType::Identifier), TermMatcher(TermType::Identifier), TermMatcher(",")});
+    fixNoConstPassByValue(
+        terms,
+        TermMatchers{
+            TermMatcher(","), TermMatcher(TermType::Identifier), TermMatcher(TermType::Identifier), TermMatcher(")")});
+    fixNoConstPassByValue(
+        terms, TermMatchers{
+                   TermMatcher("("), TermMatcher(TermType::PrimitiveType), TermMatcher(TermType::Identifier),
+                   TermMatcher(",")});
+    fixNoConstPassByValue(
+        terms, TermMatchers{
+                   TermMatcher(","), TermMatcher(TermType::PrimitiveType), TermMatcher(TermType::Identifier),
+                   TermMatcher(",")});
+    fixNoConstPassByValue(
+        terms, TermMatchers{
+                   TermMatcher(","), TermMatcher(TermType::PrimitiveType), TermMatcher(TermType::Identifier),
+                   TermMatcher(")")});
+}
+
+void fixNoConstPassByValue(Terms& terms, TermMatchers const& matchers) {
+    int termIndex = 0;
+    bool isFound(true);
+    while (isFound) {
+        PatternIndexes patternIndexes = findFirstPatternIgnoringSpacesAndComments(terms, matchers, termIndex);
+        isFound = !patternIndexes.empty();
+        if (isFound) {
+            termIndex = patternIndexes.back();
+            terms.insert(terms.begin() + patternIndexes[2], Term(TermType::Identifier, "const "));
+            ALBA_INF_PRINT4(
+                cout, terms[patternIndexes[0]], terms[patternIndexes[1]], terms[patternIndexes[2]],
+                terms[patternIndexes[3]]);
         }
     }
 }
