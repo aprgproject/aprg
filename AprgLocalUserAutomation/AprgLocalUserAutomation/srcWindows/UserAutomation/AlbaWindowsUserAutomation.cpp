@@ -42,8 +42,8 @@ void AlbaWindowsUserAutomation::setMousePosition(MousePosition const& position) 
     doOperation([&](INPUT& input) {
         input.type = INPUT_MOUSE;
         input.mi.dwFlags = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE;
-        input.mi.dx = (long)ratioInX;
-        input.mi.dy = (long)ratioInY;
+        input.mi.dx = static_cast<long>(ratioInX);
+        input.mi.dy = static_cast<long>(ratioInY);
     });
     sleepWithRealisticDelay();
 }
@@ -275,7 +275,7 @@ uint16_t AlbaWindowsUserAutomation::convertToVirtualKey(char const character) co
 void AlbaWindowsUserAutomation::setForegroundWindowWithWindowHandle(HWND const windowHandle) const {
     bool isSuccessful(false);
     if (windowHandle != nullptr) {
-        isSuccessful = (bool)SetWindowPos(
+        isSuccessful = static_cast<bool>(SetWindowPos(
             windowHandle,                             // handle to window
             HWND_TOPMOST,                             // placement-order handle
             0,                                        // horizontal position
@@ -283,7 +283,7 @@ void AlbaWindowsUserAutomation::setForegroundWindowWithWindowHandle(HWND const w
             0,                                        // width
             0,                                        // height
             SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOMOVE  // window-positioning options
-        );
+            ));
     }
     if (!isSuccessful) {
         cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
