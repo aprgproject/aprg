@@ -4,6 +4,12 @@ using namespace std;
 
 namespace alba::CodeUtilities {
 
+bool isComment(Term const& term) {
+    return term.getTermType() == TermType::CommentMultiline || term.getTermType() == TermType::CommentSingleLine;
+}
+
+bool isWhiteSpace(Term const& term) { return term.getTermType() == TermType::WhiteSpace; }
+
 string convertToString(TermType const termType) {
 #define GET_ENUM_STRING(en) \
     case en:                \

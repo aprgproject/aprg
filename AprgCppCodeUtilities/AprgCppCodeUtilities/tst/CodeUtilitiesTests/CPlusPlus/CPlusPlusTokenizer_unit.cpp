@@ -1,4 +1,4 @@
-#include <CodeUtilities/TermTokenizer.hpp>
+#include <CodeUtilities/CPlusPlus/CPlusPlusTokenizer.hpp>
 
 #include <gtest/gtest.h>
 
@@ -6,7 +6,7 @@ using namespace std;
 
 namespace alba::CodeUtilities {
 
-TEST(TermTokenizerTest, CheckWhiteSpace) {
+TEST(CPlusPlusTokenizerTest, CheckWhiteSpace) {
     Terms terms;
     TermTokenizer tokenizer(terms);
 
@@ -60,7 +60,7 @@ TEST(TermTokenizerTest, CheckWhiteSpace) {
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
 }
 
-TEST(TermTokenizerTest, CheckIncludeFiles) {
+TEST(CPlusPlusTokenizerTest, CheckIncludeFiles) {
     Terms terms;
     TermTokenizer tokenizer(terms);
 
@@ -95,7 +95,7 @@ TEST(TermTokenizerTest, CheckIncludeFiles) {
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, " \n"));
 }
 
-TEST(TermTokenizerTest, CheckIdentifiersAndConstants) {
+TEST(CPlusPlusTokenizerTest, CheckIdentifiersAndConstants) {
     Terms terms;
     TermTokenizer tokenizer(terms);
 
@@ -120,7 +120,7 @@ TEST(TermTokenizerTest, CheckIdentifiersAndConstants) {
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
 }
 
-TEST(TermTokenizerTest, CheckMacros) {
+TEST(CPlusPlusTokenizerTest, CheckMacros) {
     Terms terms;
     TermTokenizer tokenizer(terms);
 
@@ -162,7 +162,7 @@ TEST(TermTokenizerTest, CheckMacros) {
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, " "));
 }
 
-TEST(TermTokenizerTest, CheckOperatorWords) {
+TEST(CPlusPlusTokenizerTest, CheckOperatorWords) {
     Terms terms;
     TermTokenizer tokenizer(terms);
 
@@ -191,7 +191,7 @@ TEST(TermTokenizerTest, CheckOperatorWords) {
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
 }
 
-TEST(TermTokenizerTest, CheckTypeWords) {
+TEST(CPlusPlusTokenizerTest, CheckTypeWords) {
     Terms terms;
     TermTokenizer tokenizer(terms);
 
@@ -228,7 +228,7 @@ TEST(TermTokenizerTest, CheckTypeWords) {
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
 }
 
-TEST(TermTokenizerTest, CheckMultipleCharacterOperators) {
+TEST(CPlusPlusTokenizerTest, CheckMultipleCharacterOperators) {
     Terms terms;
     TermTokenizer tokenizer(terms);
 
@@ -245,7 +245,7 @@ TEST(TermTokenizerTest, CheckMultipleCharacterOperators) {
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
 }
 
-TEST(TermTokenizerTest, CheckPeriod) {
+TEST(CPlusPlusTokenizerTest, CheckPeriod) {
     Terms terms;
     TermTokenizer tokenizer(terms);
 
@@ -265,7 +265,7 @@ TEST(TermTokenizerTest, CheckPeriod) {
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
 }
 
-TEST(TermTokenizerTest, CheckSingleLineComment) {
+TEST(CPlusPlusTokenizerTest, CheckSingleLineComment) {
     Terms terms;
     TermTokenizer tokenizer(terms);
 
@@ -283,7 +283,7 @@ TEST(TermTokenizerTest, CheckSingleLineComment) {
         *termIterator++, Term(TermType::CommentSingleLine, "//This is @ 1 line comment with spaces and tabs before"));
 }
 
-TEST(TermTokenizerTest, CheckMultiLineComment) {
+TEST(CPlusPlusTokenizerTest, CheckMultiLineComment) {
     Terms terms;
     TermTokenizer tokenizer(terms);
 
@@ -302,7 +302,7 @@ TEST(TermTokenizerTest, CheckMultiLineComment) {
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
 }
 
-TEST(TermTokenizerTest, CheckString) {
+TEST(CPlusPlusTokenizerTest, CheckString) {
     Terms terms;
     TermTokenizer tokenizer(terms);
 
@@ -335,7 +335,7 @@ TEST(TermTokenizerTest, CheckString) {
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
 }
 
-TEST(TermTokenizerTest, CheckStringWithSlashes) {
+TEST(CPlusPlusTokenizerTest, CheckStringWithSlashes) {
     Terms terms;
     TermTokenizer tokenizer(terms);
 
@@ -366,7 +366,7 @@ TEST(TermTokenizerTest, CheckStringWithSlashes) {
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
 }
 
-TEST(TermTokenizerTest, CheckKeyword) {
+TEST(CPlusPlusTokenizerTest, CheckKeyword) {
     Terms terms;
     TermTokenizer tokenizer(terms);
 

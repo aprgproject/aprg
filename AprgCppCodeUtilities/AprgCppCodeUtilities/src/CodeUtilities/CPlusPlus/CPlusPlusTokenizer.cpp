@@ -1,6 +1,6 @@
-#include "TermTokenizer.hpp"
+#include "CPlusPlusTokenizer.hpp"
 
-#include <CodeUtilities/TermConstants.hpp>
+#include <CodeUtilities/CPlusPlus/CPlusPlusConstants.hpp>
 #include <CodeUtilities/TermCreateHelpers.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/Math/Helpers/DivisibilityHelpers.hpp>

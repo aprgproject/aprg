@@ -1,4 +1,5 @@
 #pragma once
+
 #include <CodeUtilities/TermType.hpp>
 
 #include <ostream>
