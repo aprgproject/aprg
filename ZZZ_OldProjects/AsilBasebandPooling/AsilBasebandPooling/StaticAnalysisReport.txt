@@ -1,14 +1,7 @@
-StaticAnalysisJobIdentifier: [30]
-2023-09-01T07:49:13
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/Kepler.hpp:10:12: warning: consider replacing 'unsigned short' with 'uint16' [google-runtime-int]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/Kepler.hpp:15:5: warning: consider replacing 'unsigned short' with 'uint16' [google-runtime-int]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/Kepler.cpp:9:16: warning: consider replacing 'unsigned short' with 'uint16' [google-runtime-int]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/Kepler.hpp:10:12: warning: consider replacing 'unsigned short' with 'uint16' [google-runtime-int]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/Kepler.hpp:15:5: warning: consider replacing 'unsigned short' with 'uint16' [google-runtime-int]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/Kepler.hpp:10:12: warning: consider replacing 'unsigned short' with 'uint16' [google-runtime-int]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/Kepler.hpp:15:5: warning: consider replacing 'unsigned short' with 'uint16' [google-runtime-int]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/AsilBasebandPooling.cpp:55:16: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/tst/AsilBasebandPooling_unit.cpp:294:14: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/tst/AsilBasebandPooling_unit.cpp:294:40: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/tst/AsilBasebandPooling_unit.cpp:297:22: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+StaticAnalysisJobIdentifier: [31]
+2023-09-03T07:16:48
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/Kepler.hpp:10:12: error: unknown type name 'uint16_t' [clang-diagnostic-error]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/Kepler.hpp:15:5: error: unknown type name 'uint16_t' [clang-diagnostic-error]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/Kepler.hpp:10:12: error: unknown type name 'uint16_t' [clang-diagnostic-error]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/Kepler.hpp:15:5: error: unknown type name 'uint16_t' [clang-diagnostic-error]
 DONE!
