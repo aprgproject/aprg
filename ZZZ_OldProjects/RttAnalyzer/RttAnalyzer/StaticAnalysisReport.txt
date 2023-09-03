@@ -1,8 +1,6 @@
-StaticAnalysisJobIdentifier: [30]
-2023-09-01T10:33:16
+StaticAnalysisJobIdentifier: [31]
+2023-09-03T09:04:28
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.hpp:14:5: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.hpp:14:30: warning: 6 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.hpp:31:18: warning: private field 'm_posNumber' is not used [clang-diagnostic-unused-private-field]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.hpp:31:18: warning: private field 'm_posNumber' is not used [-Wunused-private-field]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.hpp:14:5: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
 DONE!
