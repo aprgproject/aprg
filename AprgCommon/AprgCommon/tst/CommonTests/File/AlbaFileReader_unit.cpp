@@ -70,12 +70,11 @@ TEST_F(AlbaFileReaderTest, SkipLineWorksUsingVariousCharacters) {
     ASSERT_TRUE(testFileReadStream.good());
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
-    for (int i = 0; i < 21; i++) {
+    for (int i = 0; i < 20; i++) {
         fileReader.skipLine();
         EXPECT_TRUE(fileReader.isNotFinished());
     }
-    EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_TRUE(fileReader.getLine().empty());
+    fileReader.skipLine();
     EXPECT_FALSE(fileReader.isNotFinished());
 }
 
@@ -111,8 +110,6 @@ TEST_F(AlbaFileReaderTest, GetLineWorksUsingVariousCharacters) {
     EXPECT_EQ("               ", fileReader.getLine());
     EXPECT_EQ("ABCDEFGHIJKLMNOPQRSTUVWXYZ", fileReader.getLine());
     EXPECT_EQ(R"(!@#$%^&*()[]{}<>:;"'/\?)", fileReader.getLine());
-    EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_TRUE(fileReader.getLine().empty());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
 
@@ -140,8 +137,6 @@ TEST_F(AlbaFileReaderTest, GetLineAndIgnoreWhiteSpacesWorksUsingVariousCharacter
     EXPECT_EQ("abcdefghijklmnopqrstuvwxyz", fileReader.getLineAndIgnoreWhiteSpaces());
     EXPECT_EQ("ABCDEFGHIJKLMNOPQRSTUVWXYZ", fileReader.getLineAndIgnoreWhiteSpaces());
     EXPECT_EQ(R"(!@#$%^&*()[]{}<>:;"'/\?)", fileReader.getLineAndIgnoreWhiteSpaces());
-    EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_TRUE(fileReader.getLineAndIgnoreWhiteSpaces().empty());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
 
@@ -188,8 +183,6 @@ TEST_F(AlbaFileReaderTest, ReadSingleCharacterFromBinaryFile) {
     EXPECT_EQ('\r', fileReader.getCharacter());
     EXPECT_EQ('\n', fileReader.getCharacter());
 #endif
-    EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(fileReader.getCharacter(), 0);
     EXPECT_FALSE(fileReader.isNotFinished());
 }
 
@@ -216,10 +209,7 @@ TEST_F(AlbaFileReaderTest, ReadMultipleCharacters) {
     charPointer = fileReader.getCharacters(numberOfCharacters);
     EXPECT_EQ(" \t\n", string(charPointer, numberOfCharacters));
     EXPECT_EQ(3U, numberOfCharacters);
-    EXPECT_TRUE(fileReader.isNotFinished());
-    charPointer = fileReader.getCharacters(numberOfCharacters);
-    EXPECT_TRUE(string(charPointer, numberOfCharacters).empty());
-    EXPECT_EQ(0U, numberOfCharacters);
+    EXPECT_FALSE(fileReader.isNotFinished());
 #elif defined(OS_WINDOWS)
     charPointer = fileReader.getCharacters(numberOfCharacters);
     EXPECT_EQ(" \t\r", string(charPointer, numberOfCharacters));
@@ -228,8 +218,8 @@ TEST_F(AlbaFileReaderTest, ReadMultipleCharacters) {
     charPointer = fileReader.getCharacters(numberOfCharacters);
     EXPECT_EQ("\n", string(charPointer, numberOfCharacters));
     EXPECT_EQ(1U, numberOfCharacters);
-#endif
     EXPECT_FALSE(fileReader.isNotFinished());
+#endif
 }
 
 TEST_F(AlbaFileReaderTest, RequestToReadMultipleCharactersThatIsTheBeyondBufferSize) {
@@ -284,8 +274,6 @@ TEST_F(AlbaFileReaderTest, ReadOneByteNumbers) {
     EXPECT_EQ(0xA1U, fileReader.getOneByteData<uint8_t>());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0xBAU, fileReader.getOneByteData<uint8_t>());
-    EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(0x0U, fileReader.getOneByteData<uint8_t>());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
 
@@ -310,8 +298,6 @@ TEST_F(AlbaFileReaderTest, ReadTwoByteNumbers) {
     EXPECT_EQ(0x4567U, fileReader.getTwoByteData<uint16_t>());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0xA1BAU, fileReader.getTwoByteData<uint16_t>());
-    EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(0x0U, fileReader.getTwoByteData<uint16_t>());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
 
@@ -378,8 +364,6 @@ TEST_F(AlbaFileReaderTest, ReadSwappedTwoByteNumbers) {
     EXPECT_EQ(0x6745U, fileReader.getTwoByteSwappedData<uint16_t>());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0xBAA1U, fileReader.getTwoByteSwappedData<uint16_t>());
-    EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(0x0U, fileReader.getTwoByteSwappedData<uint16_t>());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
 

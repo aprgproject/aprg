@@ -49,7 +49,9 @@ public:
 
 private:
     char* getCharacterBufferPointer();
+    [[nodiscard]] static size_t getFileSize(std::ifstream& inputStream);
     static constexpr size_t INITIAL_MAX_BUFFER_SIZE = 10000;
+    size_t m_fileSize{};
     std::vector<char> m_characterBuffer;
     std::ifstream& m_stream;
 };

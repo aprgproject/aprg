@@ -10,13 +10,18 @@ using namespace std;
 
 namespace alba {
 
-AlbaFileReader::AlbaFileReader(ifstream& stream) : m_stream(stream) { setMaxBufferSize(INITIAL_MAX_BUFFER_SIZE); }
+AlbaFileReader::AlbaFileReader(ifstream& stream) : m_fileSize(getFileSize(stream)), m_stream(stream) {
+    setMaxBufferSize(INITIAL_MAX_BUFFER_SIZE);
+}
 
-AlbaFileReader::AlbaFileReader(ifstream& stream, size_t const size) : m_stream(stream) { setMaxBufferSize(size); }
+AlbaFileReader::AlbaFileReader(ifstream& stream, size_t const size)
+    : m_fileSize(getFileSize(stream)), m_stream(stream) {
+    setMaxBufferSize(size);
+}
 
 bool AlbaFileReader::isNotFinished() {
-    // return (!m_stream.eof()) && (m_stream.peek()!=EOF);
-    return !m_stream.eof();
+    // return !m_stream.eof() && m_stream.peek()!=EOF;
+    return getCurrentLocation() < m_fileSize && !m_stream.eof();
 }
 
 char AlbaFileReader::getCharacter() {
@@ -43,7 +48,7 @@ void AlbaFileReader::saveDataToMemoryBuffer(AlbaMemoryBuffer& buffer, size_t num
 }
 
 void AlbaFileReader::skipLine() {
-    if (!m_stream.eof()) {
+    if (isNotFinished()) {
         m_stream.clear();
         m_stream.getline(getCharacterBufferPointer(), static_cast<streamsize>(m_characterBuffer.size()));
     }
@@ -51,7 +56,7 @@ void AlbaFileReader::skipLine() {
 
 string AlbaFileReader::getLine() {
     string result;
-    if (!m_stream.eof()) {
+    if (isNotFinished()) {
         m_stream.clear();
         m_stream.getline(getCharacterBufferPointer(), static_cast<streamsize>(m_characterBuffer.size()));
         result = string(getCharacterBufferPointer());
@@ -61,7 +66,7 @@ string AlbaFileReader::getLine() {
 
 string AlbaFileReader::getLineAndIgnoreWhiteSpaces() {
     string result;
-    while (!m_stream.eof()) {
+    while (isNotFinished()) {
         m_stream.clear();
         m_stream.getline(getCharacterBufferPointer(), static_cast<streamsize>(m_characterBuffer.size()));
         string stringFromBuffer(getCharacterBufferPointer());
@@ -73,14 +78,12 @@ string AlbaFileReader::getLineAndIgnoreWhiteSpaces() {
     return result;
 }
 
-size_t AlbaFileReader::getCurrentLocation() const { return m_stream.tellg(); }
-
-size_t AlbaFileReader::getFileSize() const {
-    m_stream.seekg(0, ifstream::end);
-    size_t fileSize = m_stream.tellg();
-    moveToTheBeginning();
-    return fileSize;
+size_t AlbaFileReader::getCurrentLocation() const {
+    auto tellgOutput = m_stream.tellg();
+    return tellgOutput > 0 ? static_cast<size_t>(tellgOutput) : 0U;
 }
+
+size_t AlbaFileReader::getFileSize() const { return m_fileSize; }
 
 void AlbaFileReader::moveToTheBeginning() const { m_stream.seekg(0, ifstream::beg); }
 
@@ -104,5 +107,13 @@ size_t AlbaFileReader::getMaxBufferSize() const {
 }
 
 char* AlbaFileReader::getCharacterBufferPointer() { return &(m_characterBuffer.front()); }
+
+size_t AlbaFileReader::getFileSize(ifstream& inputStream) {
+    inputStream.seekg(0, ifstream::end);
+    auto tellgOutput = inputStream.tellg();
+    size_t fileSize = tellgOutput > 0 ? static_cast<size_t>(tellgOutput) : 0U;
+    inputStream.seekg(0, ifstream::beg);
+    return fileSize;
+}
 
 }  // namespace alba
