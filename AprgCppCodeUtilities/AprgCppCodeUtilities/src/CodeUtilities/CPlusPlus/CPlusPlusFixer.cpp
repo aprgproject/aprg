@@ -2,7 +2,6 @@
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusTokenizer.hpp>
 #include <CodeUtilities/Common/FindPatterns.hpp>
-#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/Print/AlbaLogPrints.hpp>
@@ -124,9 +123,6 @@ void findTermsAndSwapAt(Terms& terms, TermMatchers const& matchers, int const in
         PatternIndexes patternIndexes = findFirstPatternIgnoringSpacesAndComments(terms, matchers, termIndex);
         isFound = !patternIndexes.empty();
         if (isFound) {
-            ALBA_DBG_PRINT(patternIndexes);
-            ALBA_DBG_PRINT(
-                terms[patternIndexes[0]], terms[patternIndexes[1]], terms[patternIndexes[2]], terms[patternIndexes[3]]);
             termIndex = patternIndexes.back();
             std::swap(terms[patternIndexes[index1]], terms[patternIndexes[index2]]);
         }
