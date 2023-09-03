@@ -1,16 +1,16 @@
 #pragma once
 
-#include <CodeUtilities/Term.hpp>
+#include <CodeUtilities/Common/Term.hpp>
 
 #include <string>
 #include <vector>
 
 namespace alba::CodeUtilities {
 
-class TermTokenizer {
+class CPlusPlusTokenizer {
 public:
     enum class ScopeType { NoScope, SingleLineComment, MultiLineComment, StringLiteral, CharLiteral, WhiteSpace };
-    explicit TermTokenizer(Terms& terms);
+    explicit CPlusPlusTokenizer(Terms& terms);
 
     void processCode(std::string const& code);
     void processLeftoverCode();

@@ -1,6 +1,6 @@
 #include "Term.hpp"
 
-#include <CodeUtilities/TermUtilities.hpp>
+#include <CodeUtilities/Common/TermUtilities.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <string>

@@ -10,6 +10,8 @@ bool isComment(Term const& term) {
 
 bool isWhiteSpace(Term const& term) { return term.getTermType() == TermType::WhiteSpace; }
 
+bool isCommentOrWhiteSpace(Term const& term) { return isComment(term) || isWhiteSpace(term); }
+
 string convertToString(TermType const termType) {
 #define GET_ENUM_STRING(en) \
     case en:                \

@@ -8,7 +8,7 @@ namespace alba::CodeUtilities {
 
 TEST(CPlusPlusTokenizerTest, CheckWhiteSpace) {
     Terms terms;
-    TermTokenizer tokenizer(terms);
+    CPlusPlusTokenizer tokenizer(terms);
 
     tokenizer.processCode("   ABC   DE  GH  I JK  L MN  OPQ   \n");
     tokenizer.processCode("\t\t ABC\t\t\tDE\t GH \tI\tJK\t L\tMN \tOPQ \t \n");
@@ -62,7 +62,7 @@ TEST(CPlusPlusTokenizerTest, CheckWhiteSpace) {
 
 TEST(CPlusPlusTokenizerTest, CheckIncludeFiles) {
     Terms terms;
-    TermTokenizer tokenizer(terms);
+    CPlusPlusTokenizer tokenizer(terms);
 
     tokenizer.processCode("#include<iostream>\n");
     tokenizer.processCode("#INCLUDE<main1.cpp>\n");
@@ -97,7 +97,7 @@ TEST(CPlusPlusTokenizerTest, CheckIncludeFiles) {
 
 TEST(CPlusPlusTokenizerTest, CheckIdentifiersAndConstants) {
     Terms terms;
-    TermTokenizer tokenizer(terms);
+    CPlusPlusTokenizer tokenizer(terms);
 
     tokenizer.processCode("aBcdwXyZ def1 2ghi jkl_3 4_mnop true false\n");
     tokenizer.processLeftoverCode();
@@ -122,7 +122,7 @@ TEST(CPlusPlusTokenizerTest, CheckIdentifiersAndConstants) {
 
 TEST(CPlusPlusTokenizerTest, CheckMacros) {
     Terms terms;
-    TermTokenizer tokenizer(terms);
+    CPlusPlusTokenizer tokenizer(terms);
 
     tokenizer.processCode("#define # undef #  ifdef #nottrue #\tifndef #\nendif #   if #\t \tinclude ");
     tokenizer.processLeftoverCode();
@@ -164,7 +164,7 @@ TEST(CPlusPlusTokenizerTest, CheckMacros) {
 
 TEST(CPlusPlusTokenizerTest, CheckOperatorWords) {
     Terms terms;
-    TermTokenizer tokenizer(terms);
+    CPlusPlusTokenizer tokenizer(terms);
 
     tokenizer.processCode("typeid const_cast static_cast reinterpret_cast static_cast sizeof new delete throw\n");
     tokenizer.processLeftoverCode();
@@ -193,7 +193,7 @@ TEST(CPlusPlusTokenizerTest, CheckOperatorWords) {
 
 TEST(CPlusPlusTokenizerTest, CheckTypeWords) {
     Terms terms;
-    TermTokenizer tokenizer(terms);
+    CPlusPlusTokenizer tokenizer(terms);
 
     tokenizer.processCode("bool char char16_t char32_t double float int long short signed unsigned void wchar_t\n");
     tokenizer.processLeftoverCode();
@@ -230,7 +230,7 @@ TEST(CPlusPlusTokenizerTest, CheckTypeWords) {
 
 TEST(CPlusPlusTokenizerTest, CheckMultipleCharacterOperators) {
     Terms terms;
-    TermTokenizer tokenizer(terms);
+    CPlusPlusTokenizer tokenizer(terms);
 
     tokenizer.processCode("->* <<= >>=\n");
     tokenizer.processLeftoverCode();
@@ -247,7 +247,7 @@ TEST(CPlusPlusTokenizerTest, CheckMultipleCharacterOperators) {
 
 TEST(CPlusPlusTokenizerTest, CheckPeriod) {
     Terms terms;
-    TermTokenizer tokenizer(terms);
+    CPlusPlusTokenizer tokenizer(terms);
 
     tokenizer.processCode(". .. ...\n");
     tokenizer.processLeftoverCode();
@@ -267,7 +267,7 @@ TEST(CPlusPlusTokenizerTest, CheckPeriod) {
 
 TEST(CPlusPlusTokenizerTest, CheckSingleLineComment) {
     Terms terms;
-    TermTokenizer tokenizer(terms);
+    CPlusPlusTokenizer tokenizer(terms);
 
     tokenizer.processCode("aBcdwXyZ //This is @ 1 line comment\n");
     tokenizer.processCode("         \t\t    //This is @ 1 line comment with spaces and tabs before");
@@ -285,7 +285,7 @@ TEST(CPlusPlusTokenizerTest, CheckSingleLineComment) {
 
 TEST(CPlusPlusTokenizerTest, CheckMultiLineComment) {
     Terms terms;
-    TermTokenizer tokenizer(terms);
+    CPlusPlusTokenizer tokenizer(terms);
 
     tokenizer.processCode("aBcdwXyZ /*This is @\n");
     tokenizer.processCode("  Multiline\n");
@@ -304,7 +304,7 @@ TEST(CPlusPlusTokenizerTest, CheckMultiLineComment) {
 
 TEST(CPlusPlusTokenizerTest, CheckString) {
     Terms terms;
-    TermTokenizer tokenizer(terms);
+    CPlusPlusTokenizer tokenizer(terms);
 
     tokenizer.processCode("aBcdwXyZ \"This is @ simple string\" deFsTUv\n");
     tokenizer.processCode("aBcdwXyZ \"This is @ string with \\\"quotation\\\"\" deFsTUv\n");
@@ -337,7 +337,7 @@ TEST(CPlusPlusTokenizerTest, CheckString) {
 
 TEST(CPlusPlusTokenizerTest, CheckStringWithSlashes) {
     Terms terms;
-    TermTokenizer tokenizer(terms);
+    CPlusPlusTokenizer tokenizer(terms);
 
     tokenizer.processCode("aBcdwXyZ1 \"\\\\\" deFsTUv2\n");
     tokenizer.processCode("aBcdwXyZ3 \"\\\\\\\\\" deFsTUv4\n");
@@ -368,7 +368,7 @@ TEST(CPlusPlusTokenizerTest, CheckStringWithSlashes) {
 
 TEST(CPlusPlusTokenizerTest, CheckKeyword) {
     Terms terms;
-    TermTokenizer tokenizer(terms);
+    CPlusPlusTokenizer tokenizer(terms);
 
     tokenizer.processCode("for while if\n");
     tokenizer.processLeftoverCode();

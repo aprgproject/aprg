@@ -1,7 +1,7 @@
 #include "CPlusPlusTokenizer.hpp"
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusConstants.hpp>
-#include <CodeUtilities/TermCreateHelpers.hpp>
+#include <CodeUtilities/Common/TermCreateHelpers.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/Math/Helpers/DivisibilityHelpers.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
@@ -50,14 +50,14 @@ bool isRecognizedOneCharOperators(string const& searchString) {
 
 namespace alba::CodeUtilities {
 
-TermTokenizer::TermTokenizer(Terms& terms) : m_terms(terms) {}
+CPlusPlusTokenizer::CPlusPlusTokenizer(Terms& terms) : m_terms(terms) {}
 
-void TermTokenizer::processCode(string const& code) {
+void CPlusPlusTokenizer::processCode(string const& code) {
     m_code.append(code);
     processCode();
 }
 
-void TermTokenizer::processLeftoverCode() {
+void CPlusPlusTokenizer::processLeftoverCode() {
     switch (getCurrentScope()) {
         case ScopeType::SingleLineComment:
             m_terms.emplace_back(createCommentSingleLine(m_scopeContent));
@@ -81,13 +81,13 @@ void TermTokenizer::processLeftoverCode() {
     m_scopes.clear();
 }
 
-void TermTokenizer::processCode() {
+void CPlusPlusTokenizer::processCode() {
     while (m_index < static_cast<int>(m_code.length())) {
         processScope();
     }
 }
 
-void TermTokenizer::processScope() {
+void CPlusPlusTokenizer::processScope() {
     switch (getCurrentScope()) {
         case ScopeType::SingleLineComment:
             processInSingleLineCommentScope();
@@ -110,7 +110,7 @@ void TermTokenizer::processScope() {
     }
 }
 
-void TermTokenizer::processInCodeScope() {
+void CPlusPlusTokenizer::processInCodeScope() {
     if (hasProcessedASingleLineComment()) {
         ;
     } else if (hasProcessedAMultiLineComment()) {
@@ -134,7 +134,7 @@ void TermTokenizer::processInCodeScope() {
     }
 }
 
-bool TermTokenizer::hasProcessedASingleLineComment() {
+bool CPlusPlusTokenizer::hasProcessedASingleLineComment() {
     if (isNextString("//")) {
         m_scopeContent.append("//");
         m_index += 2;
@@ -145,7 +145,7 @@ bool TermTokenizer::hasProcessedASingleLineComment() {
     return false;
 }
 
-bool TermTokenizer::hasProcessedAMultiLineComment() {
+bool CPlusPlusTokenizer::hasProcessedAMultiLineComment() {
     if (isNextString("/*")) {
         m_scopeContent.append("/*");
         m_index += 2;
@@ -156,7 +156,7 @@ bool TermTokenizer::hasProcessedAMultiLineComment() {
     return false;
 }
 
-bool TermTokenizer::hasProcessedAStringLiteral() {
+bool CPlusPlusTokenizer::hasProcessedAStringLiteral() {
     if (isNextString(R"(")")) {
         m_scopeContent += '\"';
         ++m_index;
@@ -167,7 +167,7 @@ bool TermTokenizer::hasProcessedAStringLiteral() {
     return false;
 }
 
-bool TermTokenizer::hasProcessedACharLiteral() {
+bool CPlusPlusTokenizer::hasProcessedACharLiteral() {
     if (isNextString(R"(')")) {
         m_scopeContent += '\'';
         ++m_index;
@@ -178,7 +178,7 @@ bool TermTokenizer::hasProcessedACharLiteral() {
     return false;
 }
 
-bool TermTokenizer::hasProcessedAWhiteSpace() {
+bool CPlusPlusTokenizer::hasProcessedAWhiteSpace() {
     if (isWhiteSpaceAt(m_index)) {
         enterScope(ScopeType::WhiteSpace);
         processInWhiteSpaceScope();
@@ -187,7 +187,7 @@ bool TermTokenizer::hasProcessedAWhiteSpace() {
     return false;
 }
 
-bool TermTokenizer::hasProcessedAMacro() {
+bool CPlusPlusTokenizer::hasProcessedAMacro() {
     if (isNextString("#") && isIndentifierStartAt(m_index + 1)) {
         string termString = string("#") + getIndentifierAt(m_index + 1);
         m_index += static_cast<int>(termString.length());
@@ -197,7 +197,7 @@ bool TermTokenizer::hasProcessedAMacro() {
     return false;
 }
 
-bool TermTokenizer::hasProcessedANumber() {
+bool CPlusPlusTokenizer::hasProcessedANumber() {
     if (isNumberAt(m_index)) {
         string termString = getNumberAt(m_index);
         m_index += static_cast<int>(termString.length());
@@ -207,7 +207,7 @@ bool TermTokenizer::hasProcessedANumber() {
     return false;
 }
 
-bool TermTokenizer::hasProcessedAnIdentifier() {
+bool CPlusPlusTokenizer::hasProcessedAnIdentifier() {
     if (isIndentifierStartAt(m_index)) {
         string termString = getIndentifierAt(m_index);
         m_index += static_cast<int>(termString.length());
@@ -225,7 +225,7 @@ bool TermTokenizer::hasProcessedAnIdentifier() {
     return false;
 }
 
-bool TermTokenizer::hasProcessedAnOperator() {
+bool CPlusPlusTokenizer::hasProcessedAnOperator() {
     if (isOperatorAt(m_index)) {
         string termString;
         if (isThreeCharOperatorAt(m_index)) {
@@ -242,14 +242,14 @@ bool TermTokenizer::hasProcessedAnOperator() {
     return false;
 }
 
-void TermTokenizer::processInSingleLineCommentScope() {
+void CPlusPlusTokenizer::processInSingleLineCommentScope() {
     if (isTerminatedWhileCheckingTerminatingString("\n")) {
         m_terms.emplace_back(createCommentSingleLine(m_scopeContent));
         exitScope();
     }
 }
 
-void TermTokenizer::processInMultiLineCommentScope() {
+void CPlusPlusTokenizer::processInMultiLineCommentScope() {
     if (isTerminatedWhileCheckingTerminatingString("*/")) {
         m_scopeContent.append("*/");
         m_index += 2;
@@ -258,42 +258,42 @@ void TermTokenizer::processInMultiLineCommentScope() {
     }
 }
 
-void TermTokenizer::processInStringLiteralScope() {
+void CPlusPlusTokenizer::processInStringLiteralScope() {
     if (isTerminatedWhileCheckingALiteralWithEscape('\"')) {
         m_terms.emplace_back(createStringLiteral(m_scopeContent));
         exitScope();
     }
 }
 
-void TermTokenizer::processInCharLiteralScope() {
+void CPlusPlusTokenizer::processInCharLiteralScope() {
     if (isTerminatedWhileCheckingALiteralWithEscape('\'')) {
         m_terms.emplace_back(createCharacterLiteral(m_scopeContent));
         exitScope();
     }
 }
 
-void TermTokenizer::processInWhiteSpaceScope() {
+void CPlusPlusTokenizer::processInWhiteSpaceScope() {
     if (isTerminatedWhileCheckingWhiteSpace()) {
         m_terms.emplace_back(createWhiteSpace(m_scopeContent));
         exitScope();
     }
 }
 
-void TermTokenizer::enterScope(ScopeType const scopeType) { m_scopes.emplace_back(scopeType); }
+void CPlusPlusTokenizer::enterScope(ScopeType const scopeType) { m_scopes.emplace_back(scopeType); }
 
-void TermTokenizer::exitScope() {
+void CPlusPlusTokenizer::exitScope() {
     m_scopeContent.clear();
     m_scopes.pop_back();
 }
 
-bool TermTokenizer::isTerminatedWhileCheckingWhiteSpace() {
+bool CPlusPlusTokenizer::isTerminatedWhileCheckingWhiteSpace() {
     for (; m_index < static_cast<int>(m_code.length()) && isWhiteSpace(m_code[m_index]); ++m_index) {
         m_scopeContent += m_code[m_index];
     }
     return m_index < static_cast<int>(m_code.length()) && !isWhiteSpace(m_code[m_index]);
 }
 
-bool TermTokenizer::isTerminatedWhileCheckingALiteralWithEscape(char const terminatingCharacter) {
+bool CPlusPlusTokenizer::isTerminatedWhileCheckingALiteralWithEscape(char const terminatingCharacter) {
     bool isTerminated(false);
     int numberSlashes = 0;
     for (; m_index < static_cast<int>(m_code.length()); ++m_index) {
@@ -329,7 +329,7 @@ bool TermTokenizer::isTerminatedWhileCheckingALiteralWithEscape(char const termi
     return isTerminated;
 }
 
-bool TermTokenizer::isTerminatedWhileCheckingTerminatingString(string const& terminatingString) {
+bool CPlusPlusTokenizer::isTerminatedWhileCheckingTerminatingString(string const& terminatingString) {
     auto searchIndex = static_cast<int>(m_code.find(terminatingString, m_index));
     if (isNotNpos(searchIndex)) {
         m_scopeContent.append(m_code.substr(m_index, searchIndex - m_index));
@@ -341,31 +341,31 @@ bool TermTokenizer::isTerminatedWhileCheckingTerminatingString(string const& ter
     return false;
 }
 
-TermTokenizer::ScopeType TermTokenizer::getCurrentScope() const {
+CPlusPlusTokenizer::ScopeType CPlusPlusTokenizer::getCurrentScope() const {
     return !m_scopes.empty() ? m_scopes.back() : ScopeType::NoScope;
 }
 
-bool TermTokenizer::isNextString(string const& expectedString) const {
+bool CPlusPlusTokenizer::isNextString(string const& expectedString) const {
     if (m_index + expectedString.length() <= m_code.length()) {
         return expectedString == m_code.substr(m_index, expectedString.length());
     }
     return false;
 }
-bool TermTokenizer::isIndentifierStartAt(int const index) const {
+bool CPlusPlusTokenizer::isIndentifierStartAt(int const index) const {
     if (index < static_cast<int>(m_code.length())) {
         return isLetterOrUnderscore(m_code[index]);
     }
     return false;
 }
 
-bool TermTokenizer::isNumberAt(int const index) const {
+bool CPlusPlusTokenizer::isNumberAt(int const index) const {
     if (index < static_cast<int>(m_code.length())) {
         return isNumber(m_code[index]);
     }
     return false;
 }
 
-bool TermTokenizer::isOperatorAt(int const index) const {
+bool CPlusPlusTokenizer::isOperatorAt(int const index) const {
     if (index < static_cast<int>(m_code.length())) {
         char character = m_code[index];
         return isDisplayableCharacter(character) && !isLetterOrNumberOrUnderscore(character) &&
@@ -374,7 +374,7 @@ bool TermTokenizer::isOperatorAt(int const index) const {
     return false;
 }
 
-bool TermTokenizer::isThreeCharOperatorAt(int const index) const {
+bool CPlusPlusTokenizer::isThreeCharOperatorAt(int const index) const {
     if (index + 2 < static_cast<int>(m_code.length())) {
         string possibleOperator = m_code.substr(index, 3);
         return isRecognizedThreeCharOperators(possibleOperator);
@@ -382,7 +382,7 @@ bool TermTokenizer::isThreeCharOperatorAt(int const index) const {
     return false;
 }
 
-bool TermTokenizer::isTwoCharOperatorAt(int const index) const {
+bool CPlusPlusTokenizer::isTwoCharOperatorAt(int const index) const {
     if (index + 1 < static_cast<int>(m_code.length())) {
         string possibleOperator = m_code.substr(index, 2);
         return isRecognizedTwoCharOperators(possibleOperator);
@@ -390,7 +390,7 @@ bool TermTokenizer::isTwoCharOperatorAt(int const index) const {
     return false;
 }
 
-bool TermTokenizer::isOneCharOperatorAt(int const index) const {
+bool CPlusPlusTokenizer::isOneCharOperatorAt(int const index) const {
     if (index < static_cast<int>(m_code.length())) {
         string possibleOperator = m_code.substr(index, 1);
         return isRecognizedOneCharOperators(possibleOperator);
@@ -398,14 +398,14 @@ bool TermTokenizer::isOneCharOperatorAt(int const index) const {
     return false;
 }
 
-bool TermTokenizer::isWhiteSpaceAt(int const index) const {
+bool CPlusPlusTokenizer::isWhiteSpaceAt(int const index) const {
     if (index < static_cast<int>(m_code.length())) {
         return isWhiteSpace(m_code[index]);
     }
     return false;
 }
 
-string TermTokenizer::getIndentifierAt(int const index) const {
+string CPlusPlusTokenizer::getIndentifierAt(int const index) const {
     string result;
     if (isLetterOrUnderscore(m_code[index])) {
         result += m_code[index];
@@ -414,7 +414,7 @@ string TermTokenizer::getIndentifierAt(int const index) const {
     return result;
 }
 
-string TermTokenizer::getNumberAt(int const index) const {
+string CPlusPlusTokenizer::getNumberAt(int const index) const {
     string result;
     if (isNumber(m_code[index])) {
         result += m_code[index];
@@ -423,7 +423,7 @@ string TermTokenizer::getNumberAt(int const index) const {
     return result;
 }
 
-string TermTokenizer::getAlphaNumericUnderscoreStringAt(int const index) const {
+string CPlusPlusTokenizer::getAlphaNumericUnderscoreStringAt(int const index) const {
     string result;
     for (int identifierIndex = index;
          identifierIndex < static_cast<int>(m_code.length()) && isLetterOrNumberOrUnderscore(m_code[identifierIndex]);

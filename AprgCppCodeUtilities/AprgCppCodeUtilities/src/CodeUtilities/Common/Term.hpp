@@ -1,6 +1,6 @@
 #pragma once
 
-#include <CodeUtilities/TermType.hpp>
+#include <CodeUtilities/Common/TermType.hpp>
 
 #include <ostream>
 #include <string>
