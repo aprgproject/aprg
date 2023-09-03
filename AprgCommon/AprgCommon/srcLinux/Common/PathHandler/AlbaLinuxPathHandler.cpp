@@ -258,19 +258,19 @@ void AlbaLinuxPathHandler::setPath(string_view path) {
 }
 
 void AlbaLinuxPathHandler::findFilesAndDirectoriesWithDepth(
-    string_view const currentDirectory, string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories,
-    int const depth) const {
+    string_view const currentDirectory, string_view const wildCardSearch, ListOfPaths& listOfFiles,
+    ListOfPaths& listOfDirectories, int const depth) const {
     if (depth == 0) {
         return;
     }
-    depth -= (depth > 0) ? 1 : 0;
+    int correctedDepth = (depth > 0) ? depth - 1 : depth;
 
     DIR* directoryStream(nullptr);
 
     directoryStream = opendir(currentDirectory.data());
     if (directoryStream != nullptr) {
         loopAllFilesAndDirectoriesInDirectoryStream(
-            directoryStream, currentDirectory, wildCardSearch, listOfFiles, listOfDirectories, depth);
+            directoryStream, currentDirectory, wildCardSearch, listOfFiles, listOfDirectories, correctedDepth);
     } else if (errno != 0) {
         cout << "Error in AlbaLinuxPathHandler::findFilesAndDirectoriesWithDepth() currentDirectory:["
              << currentDirectory << "] 'opendir' errno value:[" << errno << "] error message:["
@@ -282,8 +282,8 @@ void AlbaLinuxPathHandler::findFilesAndDirectoriesWithDepth(
 }
 
 void AlbaLinuxPathHandler::loopAllFilesAndDirectoriesInDirectoryStream(
-    DIR* directoryStream, string_view const currentDirectory, string_view const wildCardSearch, set<string>& listOfFiles,
-    set<string>& listOfDirectories, int const depth) const {
+    DIR* directoryStream, string_view const currentDirectory, string_view const wildCardSearch,
+    set<string>& listOfFiles, set<string>& listOfDirectories, int const depth) const {
     struct dirent* directoryPointer = nullptr;
     do {
         // NOLINTNEXTLINE(concurrency-mt-unsafe)
@@ -332,7 +332,8 @@ bool AlbaLinuxPathHandler::canBeLocated(string_view fullPath) {
     return stat(fullPath.data(), &statBuffer) == 0;
 }
 
-bool AlbaLinuxPathHandler::isSlashNeededAtTheEnd(string_view const correctedPath, string_view const originalPath) const {
+bool AlbaLinuxPathHandler::isSlashNeededAtTheEnd(
+    string_view const correctedPath, string_view const originalPath) const {
     bool result = false;
     if (!correctedPath.empty()) {
         bool isCorrectPathLastCharacterNotASlash(
