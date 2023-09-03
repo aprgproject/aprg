@@ -1,6 +1,5 @@
-StaticAnalysisJobIdentifier: [30]
-2023-09-01T07:26:44
-/home/runner/work/aprg/aprg/TemplateForLibraries/TemplateForLibraries/src/TemplateForLibraries/TemplateForLibraries.cpp:5:23: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
-/home/runner/work/aprg/aprg/TemplateForLibraries/TemplateForLibraries/src/TemplateForLibraries/TemplateForLibraries.hpp:10:9: warning: private field 'm_sample' is not used [clang-diagnostic-unused-private-field]
-/home/runner/work/aprg/aprg/TemplateForLibraries/TemplateForLibraries/src/TemplateForLibraries/TemplateForLibraries.hpp:10:9: warning: private field 'm_sample' is not used [-Wunused-private-field]
+StaticAnalysisJobIdentifier: [31]
+2023-09-03T06:52:38
+/home/runner/work/aprg/aprg/TemplateForLibraries/TemplateForLibraries/src/TemplateForLibraries/TemplateForLibraries.hpp:9:5: warning: function 'getSample' should be marked [[nodiscard]] [modernize-use-nodiscard]
+/home/runner/work/aprg/aprg/TemplateForLibraries/TemplateForLibraries/src/TemplateForLibraries/TemplateForLibraries.hpp:9:5: warning: function 'getSample' should be marked [[nodiscard]] [modernize-use-nodiscard]
 DONE!
