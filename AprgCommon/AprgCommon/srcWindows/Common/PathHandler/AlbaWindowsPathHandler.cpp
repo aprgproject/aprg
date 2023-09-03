@@ -36,7 +36,8 @@ double AlbaWindowsPathHandler::getFileSizeEstimate() {
     if (GetFileAttributesExW(
             convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str(), GetFileExInfoStandard,
             &attributeData)) {
-        fileSizeEstimate = (double)attributeData.nFileSizeHigh * 0x100'000'000 + attributeData.nFileSizeLow;
+        fileSizeEstimate =
+            static_cast<double>(attributeData.nFileSizeHigh) * 0x100'000'000 + attributeData.nFileSizeLow;
     } else {
         cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
         cout << "Path:" << getFullPath() << "\n";
@@ -93,7 +94,8 @@ void AlbaWindowsPathHandler::createDirectoriesForNonExisitingDirectories() const
 bool AlbaWindowsPathHandler::deleteFile() {
     bool isSuccessful(false);
     if (isFile()) {
-        isSuccessful = (bool)DeleteFileW(convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str());
+        isSuccessful =
+            static_cast<bool>(DeleteFileW(convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str()));
         if (!isSuccessful) {
             cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
             cout << "Path: [" << getFullPath() << "]\n";
@@ -108,8 +110,8 @@ bool AlbaWindowsPathHandler::deleteFile() {
 bool AlbaWindowsPathHandler::deleteDirectoryWithoutFilesAndDirectories() {
     bool isSuccessful(false);
     if (isDirectory()) {
-        isSuccessful =
-            (bool)RemoveDirectoryW(convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str());
+        isSuccessful = static_cast<bool>(
+            RemoveDirectoryW(convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str()));
         if (!isSuccessful) {
             cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
             cout << "Path: [" << getFullPath() << "]\n";
@@ -154,9 +156,9 @@ void AlbaWindowsPathHandler::deleteDirectoryWithFilesAndDirectories() {
 bool AlbaWindowsPathHandler::copyToNewFile(string_view newFilePath) {
     bool isSuccessful(false);
     if (isFile()) {
-        isSuccessful = (bool)CopyFileW(
+        isSuccessful = static_cast<bool>(CopyFileW(
             convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str(),
-            convertToAnotherBasicStringVariant<string_view, wstring>(newFilePath).c_str(), 0);
+            convertToAnotherBasicStringVariant<string_view, wstring>(newFilePath).c_str(), 0));
         if (!isSuccessful) {
             cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
             cout << "Path: [" << getFullPath() << "]\n";
@@ -173,9 +175,9 @@ bool AlbaWindowsPathHandler::renameFile(string_view newFileName) {
     bool isSuccessful(false);
     if (isFile()) {
         string newPath(m_directory + string(newFileName));
-        isSuccessful = (bool)MoveFileW(
+        isSuccessful = static_cast<bool>(MoveFileW(
             convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str(),
-            convertToAnotherBasicStringVariant<string, wstring>(newPath).c_str());
+            convertToAnotherBasicStringVariant<string, wstring>(newPath).c_str()));
         if (!isSuccessful) {
             cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
             cout << "Path: [" << getFullPath() << "]\n";
@@ -194,9 +196,9 @@ bool AlbaWindowsPathHandler::renameImmediateDirectory(string_view newDirectoryNa
         AlbaWindowsPathHandler newPathHandler(getFullPath());
         newPathHandler.goUp();
         newPathHandler.input(newPathHandler.getDirectory() + m_slashCharacterString + string(newDirectoryName));
-        isSuccessful = (bool)MoveFileW(
+        isSuccessful = static_cast<bool>(MoveFileW(
             convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str(),
-            convertToAnotherBasicStringVariant<string, wstring>(newPathHandler.getFullPath()).c_str());
+            convertToAnotherBasicStringVariant<string, wstring>(newPathHandler.getFullPath()).c_str()));
         if (!isSuccessful) {
             cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
             cout << "Path: [" << getFullPath() << "]\n";
