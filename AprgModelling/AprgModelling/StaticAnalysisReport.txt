@@ -1,6 +1,5 @@
-StaticAnalysisJobIdentifier: [30]
-2023-09-01T03:33:03
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:11:10: warning: inclusion of deprecated C++ header 'math.h'; consider using 'cmath' instead [hicpp-deprecated-headers,modernize-deprecated-headers]
+StaticAnalysisJobIdentifier: [31]
+2023-09-03T04:11:31
 /home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:38:51: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:69:55: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:78:55: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
