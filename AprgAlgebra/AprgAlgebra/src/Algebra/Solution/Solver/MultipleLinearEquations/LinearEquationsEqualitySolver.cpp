@@ -81,7 +81,7 @@ void LinearEquationsEqualitySolver::setMatrixCoefficients(
                 coefficientsMatrix.setEntry(columnIndex++, rowIndex, it->second);
             }
         }
-        coefficientsMatrix.setEntry(columnIndex, ++rowIndex, getCoefficientOfMonomialWithNoVariables(polynomial));
+        coefficientsMatrix.setEntry(columnIndex, rowIndex++, getCoefficientOfMonomialWithNoVariables(polynomial));
     }
 }
 

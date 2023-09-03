@@ -38,7 +38,7 @@ public:
             writeCode(writer, codeTrie.get(bestTrieMatch));  // write code word for the best match in trie
             Code matchLength(bestTrieMatch.length());
             if (matchLength < static_cast<Code>(wholeInputString.length()) && lastCode < MAX_NUMBER_CODE_WORDS) {
-                codeTrie.put(wholeInputString.substr(0, matchLength + 1), ++lastCode);  // add new next code word
+                codeTrie.put(wholeInputString.substr(0, matchLength + 1), lastCode++);  // add new next code word
             }
             // remove processed part in the input:
             wholeInputString = wholeInputString.substr(matchLength);

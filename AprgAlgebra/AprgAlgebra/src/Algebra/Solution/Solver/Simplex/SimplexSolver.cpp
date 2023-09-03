@@ -111,7 +111,7 @@ void SimplexSolver::initializeSimplexTable(
     map<string, int> variableNameToIndexMap;
     int i = 0;
     for (string const& inputVariableName : inputVariableNames) {
-        variableNameToIndexMap.emplace(inputVariableName, ++i);
+        variableNameToIndexMap.emplace(inputVariableName, i++);
     }
 
     int lastX = m_simplexTable.getNumberOfColumns() - 1;

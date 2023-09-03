@@ -227,7 +227,7 @@ void AlbaWindowsPathHandler::findFilesAndDirectoriesUnlimitedDepth(
 void AlbaWindowsPathHandler::findFilesAndDirectoriesWithDepth(
     string_view currentDirectory, string_view wildCardSearch, set<string>& listOfFiles, set<string>& listOfDirectories,
     int depth) const {
-    HANDLE hFind;
+    HANDLE hFind{};
     WIN32_FIND_DATAW data;
 
     if (depth == 0) {
