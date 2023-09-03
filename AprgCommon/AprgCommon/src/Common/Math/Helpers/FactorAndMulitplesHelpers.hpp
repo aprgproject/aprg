@@ -22,7 +22,7 @@ bool isPrime(NumberType const number) {
 
     bool result(number >= 2);
     NumberType limit(pow(number, 0.5));
-    for (NumberType i = 2; i <= limit; i++) {
+    for (NumberType i = 2; i <= limit; ++i) {
         if (isDivisible(number, i)) {
             result = false;
             break;

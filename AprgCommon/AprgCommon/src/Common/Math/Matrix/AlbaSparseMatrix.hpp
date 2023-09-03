@@ -73,10 +73,10 @@ public:
         assert(m_numberOfColumns == secondMatrix.m_numberOfRows);
         size_t size(std::min(m_numberOfColumns, secondMatrix.m_numberOfRows));
         AlbaSparseMatrix result(m_numberOfRows, secondMatrix.m_numberOfColumns);
-        for (size_t yPosition = 0; yPosition < m_numberOfRows; yPosition++) {
-            for (size_t xPosition = 0; xPosition < secondMatrix.m_numberOfColumns; xPosition++) {
+        for (size_t yPosition = 0; yPosition < m_numberOfRows; ++yPosition) {
+            for (size_t xPosition = 0; xPosition < secondMatrix.m_numberOfColumns; ++xPosition) {
                 DataType cellValue{};
-                for (size_t kPosition = 0; kPosition < size; kPosition++) {
+                for (size_t kPosition = 0; kPosition < size; ++kPosition) {
                     cellValue += getEntry(kPosition, yPosition) * secondMatrix.getEntry(xPosition, kPosition);
                 }
                 result.setEntry(xPosition, yPosition, cellValue);
@@ -112,7 +112,7 @@ public:
 
     void setEntries(ListedMatrixData const& dataSampleValues) {
         size_t limit = std::min<size_t>(dataSampleValues.size(), m_numberOfColumns * m_numberOfRows);
-        for (size_t i = 0; i < limit; i++) {
+        for (size_t i = 0; i < limit; ++i) {
             if (!isEqualForMathMatrixDataType(dataSampleValues[i], static_cast<DataType>(0))) {
                 m_matrixData[i] = dataSampleValues[i];
             }
@@ -196,9 +196,9 @@ private:
     friend std::ostream& operator<<(std::ostream& out, AlbaSparseMatrix<DataType> const& matrix) {
         DisplayTable table;
         table.setBorders("-", "|");
-        for (size_t yPosition = 0; yPosition < matrix.m_numberOfRows; yPosition++) {
+        for (size_t yPosition = 0; yPosition < matrix.m_numberOfRows; ++yPosition) {
             table.addRow();
-            for (size_t xPosition = 0; xPosition < matrix.m_numberOfColumns; xPosition++) {
+            for (size_t xPosition = 0; xPosition < matrix.m_numberOfColumns; ++xPosition) {
                 table.getLastRow().addCell(alba::stringHelper::convertToString(matrix.getEntry(xPosition, yPosition)));
             }
         }

@@ -70,7 +70,7 @@ TEST_F(AlbaFileReaderTest, SkipLineWorksUsingVariousCharacters) {
     ASSERT_TRUE(testFileReadStream.good());
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 20; ++i) {
         fileReader.skipLine();
         EXPECT_TRUE(fileReader.isNotFinished());
     }

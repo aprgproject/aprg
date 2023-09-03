@@ -19,7 +19,7 @@ template <typename NumberType>
 NumberType getFactorial(NumberType const number) {
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
     NumberType result(1);
-    for (NumberType currentNumber = number; currentNumber > 1; currentNumber--) {
+    for (NumberType currentNumber = number; currentNumber > 1; --currentNumber) {
         result *= currentNumber;
     }
     return result;
@@ -32,7 +32,7 @@ NumberType getNumberOfPermutations(NumberType const nValue, NumberType const rVa
     NumberType result(0);
     if (nValue >= rValue) {
         result = 1;
-        for (NumberType currentNumber = nValue; currentNumber > nValue - rValue; currentNumber--) {
+        for (NumberType currentNumber = nValue; currentNumber > nValue - rValue; --currentNumber) {
             result *= currentNumber;
         }
     }
@@ -63,7 +63,7 @@ NumberType getNumberOfCombinations(NumberType const nValue, NumberType const rVa
         NumberType accumulatedDenominator = 1;
         NumberType numeratorMultiplier = nValue;
         NumberType denominatorMultiplier = smallerR;
-        for (NumberType iterations = 0; iterations < smallerR; iterations++) {
+        for (NumberType iterations = 0; iterations < smallerR; ++iterations) {
             accumulatedNumerator *= numeratorMultiplier--;
             accumulatedDenominator *= denominatorMultiplier--;
             if (accumulatedDenominator > 1 &&
@@ -95,7 +95,7 @@ NumberType getNumberOfCombinationsFasterButPossibleOfRange(NumberType const nVal
     if (nValue >= rValue) {
         NumberType smallerR = (nValue < 2 * rValue) ? nValue - rValue : rValue;
         NumberType result(1);
-        for (NumberType offset = 0; offset < smallerR; offset++) {
+        for (NumberType offset = 0; offset < smallerR; ++offset) {
             result *= (nValue - offset);
             result /= (offset + 1);
         }
@@ -138,7 +138,7 @@ typename std::make_signed<NumberType>::type getStirlingNumberOfTheSecondKind(
 
     SignedType sum(0);
     bool isDivisibleByTwo(true);
-    for (NumberType i = 0; i <= kValue; i++) {
+    for (NumberType i = 0; i <= kValue; ++i) {
         SignedType sign = isDivisibleByTwo ? 1 : -1;
         sum += sign * getNumberOfCombinations(kValue, i) * getRaiseToPowerForIntegersUsingPow(kValue - i, nValue);
         isDivisibleByTwo = !isDivisibleByTwo;

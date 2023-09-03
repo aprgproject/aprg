@@ -16,7 +16,7 @@ TEST(AlbaCombinedEntropySourceTest, DISABLED_OperatorWorksAsNonDeterministic) {
     int const allowedDeviationCount(iterations / 10);
 
     int equalCount(0);
-    for (int i = 0; i < iterations; i++) {
+    for (int i = 0; i < iterations; ++i) {
         equalCount += (source1() == source2()) ? 1 : 0;
     }
 

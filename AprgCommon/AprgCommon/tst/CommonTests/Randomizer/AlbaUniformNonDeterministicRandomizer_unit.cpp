@@ -27,7 +27,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, SetMinimumAndMaximumWorks) {
 
     randomizer.setMinimumAndMaximum(minimumValue, maximumValue);
 
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 1000; ++i) {
         auto randomValue(randomizer.getRandomValue());
         ASSERT_GE(randomValue, minimumValue);
         ASSERT_LE(randomValue, maximumValue);
@@ -41,7 +41,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, ResetRandomSeedWorks) {
 
     randomizer.resetRandomSeed();
 
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 1000; ++i) {
         auto randomValue(randomizer.getRandomValue());
         ASSERT_GE(randomValue, minimumValue);
         ASSERT_LE(randomValue, maximumValue);
@@ -53,7 +53,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorksWithinMinim
     constexpr int maximumValue(9);
     IntegerRandomizerForTest randomizer(minimumValue, maximumValue);
 
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 1000; ++i) {
         auto randomValue(randomizer.getRandomValue());
         ASSERT_GE(randomValue, minimumValue);
         ASSERT_LE(randomValue, maximumValue);
@@ -70,7 +70,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorksAsNonDeterm
     int const allowedDeviationCount(iterations / 10);
 
     int equalCount(0);
-    for (int i = 0; i < iterations; i++) {
+    for (int i = 0; i < iterations; ++i) {
         auto random1 = randomizer1.getRandomValue();
         auto random2 = randomizer2.getRandomValue();
         equalCount += (random1 == random2) ? 1 : 0;
@@ -88,7 +88,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorksAsUniformly
     int const allowedDeviationCount(iterations / 10);
     vector<int> hitsForEachValue(numberOfRandomValues, 0);
 
-    for (int i = 0; i < iterations; i++) {
+    for (int i = 0; i < iterations; ++i) {
         auto randomValue(randomizer.getRandomValue());
         hitsForEachValue[randomValue]++;
     }
@@ -104,7 +104,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomFloatingValueWorksWithi
     constexpr double maximumValue(23.25);
     FloatingPointRandomizerForTest randomizer(minimumValue, maximumValue);
 
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 1000; ++i) {
         auto randomValue(randomizer.getRandomValue());
         ASSERT_GE(randomValue, minimumValue);
         ASSERT_LE(randomValue, maximumValue);
@@ -121,7 +121,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomFloatingValueWorksAsNon
     int const allowedDeviationCount(iterations / 10);
 
     int equalCount(0);
-    for (int i = 0; i < iterations; i++) {
+    for (int i = 0; i < iterations; ++i) {
         equalCount += (randomizer1.getRandomValue() == randomizer2.getRandomValue()) ? 1 : 0;
     }
 
@@ -137,7 +137,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomFloatingValueWorksAsUni
     int const allowedDeviationCount(iterations / 10);
     vector<int> hitsForEachValue(numberOfRandomValues, 0);
 
-    for (int i = 0; i < iterations; i++) {
+    for (int i = 0; i < iterations; ++i) {
         hitsForEachValue[static_cast<int>(randomizer.getRandomValue())]++;
     }
 

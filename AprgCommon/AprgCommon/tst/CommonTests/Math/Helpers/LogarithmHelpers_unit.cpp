@@ -63,8 +63,8 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTestWorksW
     // Results: ~330ms
 
     double result(0);
-    for (int base = 2; base < 200; base++) {
-        for (int exponent = 1; exponent < 20000; exponent++) {
+    for (int base = 2; base < 200; ++base) {
+        for (int exponent = 1; exponent < 20000; ++exponent) {
             result = std::max(result, getLogarithm(base, exponent));
         }
     }
@@ -75,8 +75,8 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanc
     // Results: ~100ms
 
     int result(0);
-    for (int base = 2; base < 200; base++) {
-        for (int exponent = 1; exponent < 20000; exponent++) {
+    for (int base = 2; base < 200; ++base) {
+        for (int exponent = 1; exponent < 20000; ++exponent) {
             result = std::max(result, getLogarithmForIntegers(base, exponent));
         }
     }
@@ -90,7 +90,7 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTestWorksW
     int minValue(2);
     int maxValue(2000);
     AlbaUniformNonDeterministicRandomizer<int> randomizer(minValue, maxValue);
-    for (int iterations = 1; iterations < 10000000LL; iterations++) {
+    for (int iterations = 1; iterations < 10000000LL; ++iterations) {
         int base = randomizer.getRandomValue();
         int exponent = randomizer.getRandomValue();
         result = max(result, getLogarithmForIntegers(base, exponent));
@@ -105,7 +105,7 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanc
     int minValue(2);
     int maxValue(2000);
     AlbaUniformNonDeterministicRandomizer<int> randomizer(minValue, maxValue);
-    for (int iterations = 1; iterations < 10000000LL; iterations++) {
+    for (int iterations = 1; iterations < 10000000LL; ++iterations) {
         int base = randomizer.getRandomValue();
         int exponent = randomizer.getRandomValue();
         result = max(result, getLogarithmForIntegers(base, exponent));

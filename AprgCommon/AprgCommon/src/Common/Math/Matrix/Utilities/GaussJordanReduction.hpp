@@ -13,10 +13,10 @@ bool areRowsWithAllZerosInTheBottom(AlbaMatrix<DataType> const& matrix) {
     size_t numberOfRows(matrix.getNumberOfRows());
     size_t numberOfColumns(matrix.getNumberOfColumns());
     bool isRowWithNonZeroEncountered(false);
-    for (size_t yPlusOne = numberOfRows; yPlusOne > 0; yPlusOne--) {
+    for (size_t yPlusOne = numberOfRows; yPlusOne > 0; --yPlusOne) {
         size_t yPosition(yPlusOne - 1);
         bool isRowWithAllZero(true);
-        for (size_t xPosition = 0; xPosition < numberOfColumns; xPosition++) {
+        for (size_t xPosition = 0; xPosition < numberOfColumns; ++xPosition) {
             if (isRowWithAllZero &&
                 !isEqualForMathMatrixDataType(matrix.getEntry(xPosition, yPosition), static_cast<DataType>(0))) {
                 isRowWithAllZero = false;
@@ -39,12 +39,12 @@ bool areLeadingEntriesInReducedRowEchelonForm(AlbaMatrix<DataType> const& matrix
     size_t numberOfRows(matrix.getNumberOfRows());
     size_t numberOfColumns(matrix.getNumberOfColumns());
     int currentLeadingEntryColumn(-1);
-    for (size_t yPosition = 0; yPosition < numberOfRows; yPosition++) {
-        for (size_t xPosition = 0; xPosition < numberOfColumns; xPosition++) {
+    for (size_t yPosition = 0; yPosition < numberOfRows; ++yPosition) {
+        for (size_t xPosition = 0; xPosition < numberOfColumns; ++xPosition) {
             if (isEqualForMathMatrixDataType(matrix.getEntry(xPosition, yPosition), static_cast<DataType>(0))) {
             } else if (isEqualForMathMatrixDataType(matrix.getEntry(xPosition, yPosition), static_cast<DataType>(1))) {
                 if (currentLeadingEntryColumn < static_cast<int>(xPosition)) {
-                    for (size_t yZeroCheck = 0; yZeroCheck < numberOfRows; yZeroCheck++) {
+                    for (size_t yZeroCheck = 0; yZeroCheck < numberOfRows; ++yZeroCheck) {
                         if (yZeroCheck != yPosition &&
                             !isEqualForMathMatrixDataType(
                                 matrix.getEntry(xPosition, yZeroCheck), static_cast<DataType>(0))) {
@@ -80,14 +80,14 @@ void transformToReducedEchelonFormUsingGaussJordanReduction(AlbaMatrix<DataType>
     size_t numberOfRows(matrix.getNumberOfRows());
     size_t numberOfColumns(matrix.getNumberOfColumns());
     size_t yWithLeadingEntry = 0;
-    for (size_t xPosition = 0; xPosition < numberOfColumns; xPosition++) {
-        for (size_t yPosition = yWithLeadingEntry; yPosition < numberOfRows; yPosition++) {
+    for (size_t xPosition = 0; xPosition < numberOfColumns; ++xPosition) {
+        for (size_t yPosition = yWithLeadingEntry; yPosition < numberOfRows; ++yPosition) {
             if (!isEqualForMathMatrixDataType(matrix.getEntry(xPosition, yPosition), static_cast<DataType>(0))) {
                 interchangeRows(matrix, yPosition, yWithLeadingEntry);
                 multiplyValueInRowAndPutProductInAnotherRow(
                     matrix, static_cast<DataType>(1) / matrix.getEntry(xPosition, yWithLeadingEntry), yWithLeadingEntry,
                     yWithLeadingEntry);
-                for (size_t yToZero = 0; yToZero < numberOfRows; yToZero++) {
+                for (size_t yToZero = 0; yToZero < numberOfRows; ++yToZero) {
                     if (yToZero != yWithLeadingEntry &&
                         !isEqualForMathMatrixDataType(matrix.getEntry(xPosition, yToZero), static_cast<DataType>(0))) {
                         subtractRowsWithMultiplierPutDifferenceInAnotherRow(

@@ -578,7 +578,7 @@ TEST(SplitStringTest, SplitBySpaces) {
 
     EXPECT_EQ(expectedStrings.size(), actualStrings.size());
     size_t size = min(expectedStrings.size(), actualStrings.size());
-    for (size_t i = 0; i < size; i++) {
+    for (size_t i = 0; i < size; ++i) {
         EXPECT_EQ(expectedStrings[i], actualStrings[i]);
     }
 }
@@ -592,7 +592,7 @@ TEST(SplitStringTest, SplitBySpacesWithDelimeters) {
 
     EXPECT_EQ(expectedStrings.size(), actualStrings.size());
     size_t size = min(expectedStrings.size(), actualStrings.size());
-    for (size_t i = 0; i < size; i++) {
+    for (size_t i = 0; i < size; ++i) {
         EXPECT_EQ(expectedStrings[i], actualStrings[i]);
     }
 }
@@ -607,7 +607,7 @@ TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksWithLargeTargetLength)
 
     EXPECT_EQ(expectedStrings.size(), actualStrings.size());
     size_t size = min(expectedStrings.size(), actualStrings.size());
-    for (size_t i = 0; i < size; i++) {
+    for (size_t i = 0; i < size; ++i) {
         EXPECT_EQ(expectedStrings[i], actualStrings[i]);
     }
 }
@@ -622,7 +622,7 @@ TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksLastLineIsIncluded) {
 
     EXPECT_EQ(expectedStrings.size(), actualStrings.size());
     size_t size = min(expectedStrings.size(), actualStrings.size());
-    for (size_t i = 0; i < size; i++) {
+    for (size_t i = 0; i < size; ++i) {
         EXPECT_EQ(expectedStrings[i], actualStrings[i]);
     }
 }
@@ -637,7 +637,7 @@ TEST(SplitStringTest, SplitLinesToAchieveTargetLengthCanBeSplitPerCharacter) {
 
     EXPECT_EQ(expectedStrings.size(), actualStrings.size());
     size_t size = min(expectedStrings.size(), actualStrings.size());
-    for (size_t i = 0; i < size; i++) {
+    for (size_t i = 0; i < size; ++i) {
         EXPECT_EQ(expectedStrings[i], actualStrings[i]);
     }
 }
@@ -652,7 +652,7 @@ TEST(SplitStringTest, SplitToStringsUsingASeriesOfDelimetersWorks) {
 
     EXPECT_EQ(expectedStrings.size(), actualStrings.size());
     size_t size = min(expectedStrings.size(), actualStrings.size());
-    for (size_t i = 0; i < size; i++) {
+    for (size_t i = 0; i < size; ++i) {
         EXPECT_EQ(expectedStrings[i], actualStrings[i]);
     }
 }

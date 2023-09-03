@@ -29,7 +29,7 @@ TEST(AlbaUniformDeterministicAllBitsRandomizerTest, SetRandomSeedWorks) {
     constexpr int newCustomSeed(42);
     randomizer.setRandomSeed(newCustomSeed);
 
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 1000; ++i) {
         auto randomValue(static_cast<long long>(randomizer.getRandomValue()));
         ASSERT_GE(randomValue, minimumValue);
         ASSERT_LE(randomValue, maximumValue);
@@ -42,7 +42,7 @@ TEST(AlbaUniformDeterministicAllBitsRandomizerTest, GetRandomIntegerWorksWithinM
     constexpr int customSeed(5);
     IntegerRandomizerForTest randomizer(customSeed);
 
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 1000; ++i) {
         auto randomValue(static_cast<long long>(randomizer.getRandomValue()));
         ASSERT_GE(randomValue, minimumValue);
         ASSERT_LE(randomValue, maximumValue);
@@ -54,7 +54,7 @@ TEST(AlbaUniformDeterministicAllBitsRandomizerTest, GetRandomIntegerWorksAsDeter
     IntegerRandomizerForTest randomizer1(customSeed);
     IntegerRandomizerForTest randomizer2(customSeed);
 
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 1000; ++i) {
         ASSERT_EQ(randomizer1.getRandomValue(), randomizer2.getRandomValue());
     }
 }
@@ -64,7 +64,7 @@ TEST(AlbaUniformDeterministicAllBitsRandomizerTest, GetRandomFloatingValueWorksA
     FloatingPointRandomizerForTest randomizer1(customSeed);
     FloatingPointRandomizerForTest randomizer2(customSeed);
 
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 1000; ++i) {
         ASSERT_EQ(randomizer1.getRandomValue(), randomizer2.getRandomValue());
     }
 }

@@ -71,7 +71,7 @@ void AlbaStreamBitWriter::transferAllToStream() {
     bitset<8> byte;
     auto bitBufferSize = static_cast<int>(m_bitBuffer.size());
     int index = 0;
-    for (; index < bitBufferSize; index++) {
+    for (; index < bitBufferSize; ++index) {
         int remainder(index % 8);
         byte.set(7 - remainder, m_bitBuffer[remainder]);
         if (remainder == 7) {

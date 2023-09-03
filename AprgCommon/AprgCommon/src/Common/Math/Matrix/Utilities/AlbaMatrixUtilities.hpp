@@ -35,8 +35,8 @@ bool isIdentityMatrix(AlbaMatrix<DataType> const& matrix) {
     size_t numberOfRows(matrix.getNumberOfRows());
     size_t numberOfColumns(matrix.getNumberOfColumns());
     bool isIdentityMatrix(numberOfRows == numberOfColumns);
-    for (size_t yPosition = 0; isIdentityMatrix && yPosition < numberOfRows; yPosition++) {
-        for (size_t xPosition = 0; isIdentityMatrix && xPosition < numberOfColumns; xPosition++) {
+    for (size_t yPosition = 0; isIdentityMatrix && yPosition < numberOfRows; ++yPosition) {
+        for (size_t xPosition = 0; isIdentityMatrix && xPosition < numberOfColumns; ++xPosition) {
             if (xPosition == yPosition) {
                 isIdentityMatrix = isIdentityMatrix && matrix.getEntry(xPosition, yPosition) == 1;
             } else {
@@ -65,7 +65,7 @@ bool isSingular(AlbaMatrix<DataType> const& matrix)  // means the its non invert
 template <typename DataType>
 AlbaMatrix<DataType> getIdentityMatrix(size_t const sideSize) {
     AlbaMatrix<DataType> resultMatrix(sideSize, sideSize);
-    for (size_t index = 0; index < sideSize; index++) {
+    for (size_t index = 0; index < sideSize; ++index) {
         resultMatrix.setEntry(index, index, 1);
     }
     return resultMatrix;
@@ -137,7 +137,7 @@ AlbaMatrix<DataType> multiplyMatrices(AlbaMatrix<DataType> const& first, AlbaMat
         size_t xPosition = 0;
         for (AlbaMatrixData<DataType> const& columnOfSecondMatrix : columnsOfSecondMatrix) {
             result.setEntry(xPosition, yPosition, multiplyEachItemAndGetSum(rowOfFirstMatrix, columnOfSecondMatrix));
-            xPosition++;
+            ++xPosition;
         }
         yPosition++;
     }
@@ -157,7 +157,7 @@ AlbaMatrix<DataType> getMatrixRaiseToScalarPower(AlbaMatrix<DataType> const& bas
             newExponent /= 2;
         } else {
             result *= newBase;
-            newExponent--;
+            --newExponent;
         }
     }
     return result;
@@ -166,7 +166,7 @@ AlbaMatrix<DataType> getMatrixRaiseToScalarPower(AlbaMatrix<DataType> const& bas
 template <typename DataType>
 void interchangeRows(AlbaMatrix<DataType>& matrix, size_t const yPosition1, size_t const yPosition2) {
     assert((yPosition1 < matrix.getNumberOfRows()) && (yPosition2 < matrix.getNumberOfRows()));
-    for (size_t xPosition = 0; xPosition < matrix.getNumberOfColumns(); xPosition++) {
+    for (size_t xPosition = 0; xPosition < matrix.getNumberOfColumns(); ++xPosition) {
         std::swap(matrix.getEntryReference(xPosition, yPosition1), matrix.getEntryReference(xPosition, yPosition2));
     }
 }
@@ -184,7 +184,7 @@ template <typename DataType>
 DataType multiplyEachItemAndGetSum(AlbaMatrixData<DataType> const& first, AlbaMatrixData<DataType> const& second) {
     DataType result{};
     size_t minSize = std::min(first.size(), second.size());
-    for (size_t index = 0; index < minSize; index++) {
+    for (size_t index = 0; index < minSize; ++index) {
         result += first[index] * second[index];
     }
     return result;
@@ -212,7 +212,7 @@ void traverseWithUnaryOperationForDifferentRows(
     AlbaMatrix<DataType>& matrix, size_t const yInput, size_t const yOutput,
     UnaryFunction<DataType> const& unaryFunction) {
     assert((yInput < matrix.getNumberOfRows()) && (yOutput < matrix.getNumberOfRows()));
-    for (size_t xPosition = 0; xPosition < matrix.getNumberOfColumns(); xPosition++) {
+    for (size_t xPosition = 0; xPosition < matrix.getNumberOfColumns(); ++xPosition) {
         matrix.setEntry(xPosition, yOutput, unaryFunction(matrix.getEntry(xPosition, yInput)));
     }
 }
@@ -224,7 +224,7 @@ void traverseWithBinaryOperationForDifferentRows(
     assert(
         (yInput1 < matrix.getNumberOfRows()) && (yInput2 < matrix.getNumberOfRows()) &&
         (yOutput < matrix.getNumberOfRows()));
-    for (size_t xPosition = 0; xPosition < matrix.getNumberOfColumns(); xPosition++) {
+    for (size_t xPosition = 0; xPosition < matrix.getNumberOfColumns(); ++xPosition) {
         matrix.setEntry(
             xPosition, yOutput,
             binaryFunction(matrix.getEntry(xPosition, yInput1), matrix.getEntry(xPosition, yInput2)));

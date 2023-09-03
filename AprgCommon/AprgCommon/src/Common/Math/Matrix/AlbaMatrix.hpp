@@ -172,27 +172,27 @@ public:
 
     void retrieveColumn(MatrixData& column, size_t const xPosition) const {
         column.reserve(m_numberOfRows);
-        for (size_t yPosition = 0; yPosition < m_numberOfRows; yPosition++) {
+        for (size_t yPosition = 0; yPosition < m_numberOfRows; ++yPosition) {
             column.emplace_back(getEntry(xPosition, yPosition));
         }
     }
 
     void retrieveRow(MatrixData& row, size_t const yPosition) const {
         row.reserve(m_numberOfColumns);
-        for (size_t xPosition = 0; xPosition < m_numberOfColumns; xPosition++) {
+        for (size_t xPosition = 0; xPosition < m_numberOfColumns; ++xPosition) {
             row.emplace_back(getEntry(xPosition, yPosition));
         }
     }
 
     void retrieveColumns(ListOfMatrixData& columns) const {
-        for (size_t xPosition = 0; xPosition < m_numberOfColumns; xPosition++) {
+        for (size_t xPosition = 0; xPosition < m_numberOfColumns; ++xPosition) {
             columns.emplace_back();
             retrieveColumn(columns.back(), xPosition);
         }
     }
 
     void retrieveRows(ListOfMatrixData& rows) const {
-        for (size_t yPosition = 0; yPosition < m_numberOfRows; yPosition++) {
+        for (size_t yPosition = 0; yPosition < m_numberOfRows; ++yPosition) {
             rows.emplace_back();
             retrieveRow(rows.back(), yPosition);
         }
@@ -220,14 +220,14 @@ public:
 
     void setColumn(size_t const columnIndex, MatrixData const& dataSampleValues) {
         size_t limit = std::min(m_numberOfRows, static_cast<size_t>(dataSampleValues.size()));
-        for (size_t yPosition = 0; yPosition < limit; yPosition++) {
+        for (size_t yPosition = 0; yPosition < limit; ++yPosition) {
             setEntry(columnIndex, yPosition, dataSampleValues[yPosition]);
         }
     }
 
     void setRow(size_t const rowIndex, MatrixData const& dataSampleValues) {
         size_t limit = std::min(m_numberOfColumns, static_cast<size_t>(dataSampleValues.size()));
-        for (size_t xPosition = 0; xPosition < limit; xPosition++) {
+        for (size_t xPosition = 0; xPosition < limit; ++xPosition) {
             setEntry(xPosition, rowIndex, dataSampleValues[xPosition]);
         }
     }
@@ -272,7 +272,7 @@ public:
             tempMatrix.m_matrixData[getMatrixIndex(xPosition, yPosition, newColumns)] = getEntry(xPosition, yPosition);
         });
         size_t diagonalLimit = std::min(m_numberOfColumns, m_numberOfRows);
-        for (size_t diagonalCount = 0; diagonalCount < diagonalLimit; diagonalCount++) {
+        for (size_t diagonalCount = 0; diagonalCount < diagonalLimit; ++diagonalCount) {
             tempMatrix.m_matrixData[getMatrixIndex(m_numberOfColumns + diagonalCount, diagonalCount, newColumns)] = 1;
         }
         transformToReducedEchelonFormUsingGaussJordanReduction(tempMatrix);
@@ -283,8 +283,8 @@ public:
     }
 
     void iterateAllThroughYAndThenX(LoopFunction const& loopFunction) const {
-        for (size_t yPosition = 0; yPosition < m_numberOfRows; yPosition++) {
-            for (size_t xPosition = 0; xPosition < m_numberOfColumns; xPosition++) {
+        for (size_t yPosition = 0; yPosition < m_numberOfRows; ++yPosition) {
+            for (size_t xPosition = 0; xPosition < m_numberOfColumns; ++xPosition) {
                 loopFunction(xPosition, yPosition);
             }
         }
@@ -320,9 +320,9 @@ private:
     friend std::ostream& operator<<(std::ostream& out, AlbaMatrix<DataType> const& matrix) {
         DisplayTable table;
         table.setBorders("-", "|");
-        for (size_t yPosition = 0; yPosition < matrix.m_numberOfRows; yPosition++) {
+        for (size_t yPosition = 0; yPosition < matrix.m_numberOfRows; ++yPosition) {
             table.addRow();
-            for (size_t xPosition = 0; xPosition < matrix.m_numberOfColumns; xPosition++) {
+            for (size_t xPosition = 0; xPosition < matrix.m_numberOfColumns; ++xPosition) {
                 table.getLastRow().addCell(
                     alba::stringHelper::convertToString(matrix.getEntryConstReference(xPosition, yPosition)));
             }

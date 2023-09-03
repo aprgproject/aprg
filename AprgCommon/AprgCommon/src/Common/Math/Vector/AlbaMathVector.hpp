@@ -157,7 +157,7 @@ private:
         ValuesInArray const& values(mathVector.m_values);
         if (!values.empty()) {
             out << "{" << values.front();
-            for (auto it = values.cbegin() + 1; it != values.cend(); it++) {
+            for (auto it = values.cbegin() + 1; it != values.cend(); ++it) {
                 out << ", " << *it;
             }
             out << "}";

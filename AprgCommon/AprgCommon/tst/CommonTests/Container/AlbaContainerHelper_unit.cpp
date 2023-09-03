@@ -166,15 +166,15 @@ TEST(AlbaContainerHelperTest, GetLowerAndUpperConstIteratorsInMapWorksOnMultiMap
 
     auto firstIterator = begin(sampleMap);
     auto secondIterator = firstIterator;
-    secondIterator++;
+    ++secondIterator;
     auto thirdIterator = secondIterator;
-    thirdIterator++;
+    ++thirdIterator;
     auto fourthIterator = thirdIterator;
-    fourthIterator++;
+    ++fourthIterator;
     auto fifthIterator = fourthIterator;
-    fifthIterator++;
+    ++fifthIterator;
     auto sixthIterator = fifthIterator;
-    sixthIterator++;
+    ++sixthIterator;
     PairOfIterators iteratorsToVerify1(getLowerAndUpperConstIteratorsInMap(sampleMap, 0));
     EXPECT_EQ(firstIterator, iteratorsToVerify1.first);
     EXPECT_EQ(firstIterator, iteratorsToVerify1.second);
@@ -202,15 +202,15 @@ TEST(AlbaContainerHelperTest, GetLowerAndUpperIteratorsInMapWorksOnMultiMap) {
 
     auto firstIterator = begin(sampleMap);
     auto secondIterator = firstIterator;
-    secondIterator++;
+    ++secondIterator;
     auto thirdIterator = secondIterator;
-    thirdIterator++;
+    ++thirdIterator;
     auto fourthIterator = thirdIterator;
-    fourthIterator++;
+    ++fourthIterator;
     auto fifthIterator = fourthIterator;
-    fifthIterator++;
+    ++fifthIterator;
     auto sixthIterator = fifthIterator;
-    sixthIterator++;
+    ++sixthIterator;
     PairOfIterators iteratorsToVerify1(getLowerAndUpperIteratorsInMap(sampleMap, 0));
     EXPECT_EQ(firstIterator, iteratorsToVerify1.first);
     EXPECT_EQ(firstIterator, iteratorsToVerify1.second);
@@ -458,7 +458,7 @@ TEST_F(AlbaContainerHelperReaderTest, FetrieveContentsFromStreamWorksForAMapOfIn
     auto verifyIt = begin(temporaryMap);
     EXPECT_EQ(1, verifyIt->first);
     EXPECT_EQ(2, verifyIt->second);
-    verifyIt++;
+    ++verifyIt;
     EXPECT_EQ(3, verifyIt->first);
     EXPECT_EQ(4, verifyIt->second);
 }

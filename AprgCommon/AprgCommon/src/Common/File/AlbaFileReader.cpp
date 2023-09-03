@@ -101,7 +101,7 @@ void AlbaFileReader::setMaxBufferSize(size_t const bufferSize) {
 size_t AlbaFileReader::getMaxBufferSize() const {
     auto bufferSize = static_cast<size_t>(m_characterBuffer.size());
     if (bufferSize > 0) {
-        bufferSize--;
+        --bufferSize;
     }
     return bufferSize;
 }

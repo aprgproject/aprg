@@ -179,7 +179,7 @@ double AlbaComplexNumber<DataType>::getBestAngleInRaiseToPowerInRadians(DataType
     bool isFirst(true);
     double bestAngleWithoutPi(0);
     double minDeltaFromNearestInteger(1);
-    for (size_t rootIndex = 0; rootIndex < numberRootsToProcess; rootIndex++) {
+    for (size_t rootIndex = 0; rootIndex < numberRootsToProcess; ++rootIndex) {
         auto possibleAngleWithoutPi =
             (angleWithoutPi + 2.0 * static_cast<double>(rootIndex)) * static_cast<double>(exponent);
         double deltaFromNearestInteger = getPositiveDelta(possibleAngleWithoutPi, round(possibleAngleWithoutPi));

@@ -66,7 +66,7 @@ NumberType getRaiseToPowerForIntegers(NumberType const base, NumberType const ex
             remainingExponent /= 2;
         } else {
             result *= currentBase;
-            remainingExponent--;
+            --remainingExponent;
         }
     }
     return result;
@@ -103,7 +103,7 @@ NumberType getNthRoot(
     NumberType current(initialGuess);
     // set previous to an arbitiary value that is not equal to result
     NumberType previous = current - 1;
-    for (int i = 0; i < numberOfIterations && !isAlmostEqual(previous, current); i++) {
+    for (int i = 0; i < numberOfIterations && !isAlmostEqual(previous, current); ++i) {
         // xk+1 = (n-1)*xk/n + (A/n) * (1/(xk^(n−1)))
         previous = current;
         current = (rootDegree - 1) * current / rootDegree +
@@ -123,7 +123,7 @@ NumberType getSquareRootUsingNewtonMethod(
     NumberType current(initialGuess);
     // set previous to an arbitiary value that is not equal to result
     NumberType previous = current - 1;
-    for (int i = 0; i < numberOfIterations && !isAlmostEqual(previous, current); i++) {
+    for (int i = 0; i < numberOfIterations && !isAlmostEqual(previous, current); ++i) {
         // xk+1 = (xk + radicand/xk)/2
         previous = current;
         current = (current + radicand / current) / 2;

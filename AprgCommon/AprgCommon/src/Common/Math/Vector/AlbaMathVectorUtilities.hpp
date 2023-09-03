@@ -91,7 +91,7 @@ AlbaMathVector<DataType, SIZE> getVectorProjection(
 template <typename DataType, size_t SIZE>
 DataType getDotProduct(AlbaMathVector<DataType, SIZE> const& vector1, AlbaMathVector<DataType, SIZE> const& vector2) {
     DataType result(0);
-    for (size_t i = 0; i < SIZE; i++) {
+    for (size_t i = 0; i < SIZE; ++i) {
         result += vector1.getValueAt(i) * vector2.getValueAt(i);
     }
     return result;

@@ -21,16 +21,16 @@ void adjustLowerAndUpperIterators(
     if (!container.empty()) {
         if (itLower != container.cbegin()) {
             if (itLower == container.cend() || *itLower != value) {
-                itLower--;
+                --itLower;
             }
         }
         if (itUpper != container.cbegin()) {
             if (itUpper == container.cend()) {
-                itUpper--;
+                --itUpper;
             } else if (*itUpper != value) {
-                itUpper--;
+                --itUpper;
                 if (*itUpper != value) {
-                    itUpper++;
+                    ++itUpper;
                 }
             }
         }
@@ -121,16 +121,16 @@ void adjustLowerAndUpperIteratorsInMap(
     if (!container.empty()) {
         if (itLower != container.cbegin()) {
             if (itLower == container.cend() || itLower->first != keyValue) {
-                itLower--;
+                --itLower;
             }
         }
         if (itUpper != container.cbegin()) {
             if (itUpper == container.cend()) {
-                itUpper--;
+                --itUpper;
             } else if (itUpper->first != keyValue) {
-                itUpper--;
+                --itUpper;
                 if (itUpper->first != keyValue) {
-                    itUpper++;
+                    ++itUpper;
                 }
             }
         }

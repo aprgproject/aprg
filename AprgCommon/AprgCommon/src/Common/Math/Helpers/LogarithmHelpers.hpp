@@ -42,11 +42,11 @@ NumberType getLogarithmForIntegers(NumberType const base, NumberType const input
             if (nextRemainingValue > 0) {
                 result += currentCount;
                 currentBase *= base;
-                currentCount++;
+                ++currentCount;
             } else {
                 nextRemainingValue = remainingValue / base;
                 if (nextRemainingValue > 0) {
-                    result++;
+                    ++result;
                     currentBase = base * base;
                     currentCount = 2;
                 }
@@ -73,7 +73,7 @@ IntegerType getIterativeLogarithm(double const base, double const inputForLogari
     IntegerType count(0);
     double currentLogarithm = getLogarithm(base, inputForLogarithm);
     while (currentLogarithm >= 0 && !isAlmostEqual(currentLogarithm, 1.0)) {
-        count++;
+        ++count;
         currentLogarithm = getLogarithm(base, currentLogarithm);
     }
     return count;

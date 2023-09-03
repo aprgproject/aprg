@@ -87,7 +87,7 @@ template <typename TypeToWrite>
 void AlbaStreamBitWriter::putBigEndianNumberDataInBuffer(TypeToWrite const& data) {
     constexpr size_t numberOfBits(AlbaBitValueUtilities<TypeToWrite>::getNumberOfBits());
     std::bitset<numberOfBits> dataBitset(data);
-    for (int i = numberOfBits - 1; i >= 0; i--) {
+    for (int i = numberOfBits - 1; i >= 0; --i) {
         m_bitBuffer.emplace_back(dataBitset[i]);
     }
 }
@@ -97,8 +97,8 @@ void AlbaStreamBitWriter::putLittleEndianNumberDataInBuffer(TypeToWrite const& d
     constexpr size_t numberOfBits(AlbaBitValueUtilities<TypeToWrite>::getNumberOfBits());
     std::bitset<numberOfBits> dataBitset(data);
     auto byteSize = static_cast<size_t>(ceil(static_cast<double>(numberOfBits) / AlbaBitConstants::BYTE_SIZE_IN_BITS));
-    for (size_t byteIndex = 0; byteIndex < byteSize; byteIndex++) {
-        for (int i = AlbaBitConstants::BYTE_SIZE_IN_BITS - 1; i >= 0; i--) {
+    for (size_t byteIndex = 0; byteIndex < byteSize; ++byteIndex) {
+        for (int i = AlbaBitConstants::BYTE_SIZE_IN_BITS - 1; i >= 0; --i) {
             m_bitBuffer.emplace_back(dataBitset[(byteIndex * AlbaBitConstants::BYTE_SIZE_IN_BITS) + i]);
         }
     }

@@ -80,7 +80,7 @@ FractionDetails<NumberType> getFractionFromPartialNumerators(
         numerator = calculatedPartialNumerators.back();
         denominator = 1;
         for (auto itPartialNumerator = calculatedPartialNumerators.crbegin() + 1;
-             itPartialNumerator != calculatedPartialNumerators.crend(); itPartialNumerator++) {
+             itPartialNumerator != calculatedPartialNumerators.crend(); ++itPartialNumerator) {
             double previousNumerator = numerator;
             numerator = (*itPartialNumerator * numerator) + denominator;
             denominator = previousNumerator;

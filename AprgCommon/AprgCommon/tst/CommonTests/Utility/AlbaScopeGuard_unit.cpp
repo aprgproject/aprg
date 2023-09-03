@@ -19,7 +19,7 @@ TEST(AlbaScopeGuardTest, FunctionIsExecutedWhenItGoesOutOfScope) {
 TEST(AlbaScopeGuardTest, FunctionIsExecutedWhenItsCalledDirectly) {
     int valueToTest = 1;
 
-    AlbaScopeGuard incrementer([&valueToTest]() { valueToTest++; });
+    AlbaScopeGuard incrementer([&valueToTest]() { ++valueToTest; });
     incrementer();
     incrementer();
     incrementer();

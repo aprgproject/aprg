@@ -74,12 +74,12 @@ DataType getDeterminantWhenSideIsMoreThan2(AlbaMatrix<DataType> const& matrix) {
     size_t bestIndex = getIndexWithHighestNumberOfZeros(rowsAndColumns);
     if (bestIndex < numberOfRows) {
         size_t yPosition = bestIndex;
-        for (size_t xPosition = 0; xPosition < numberOfColumns; xPosition++) {
+        for (size_t xPosition = 0; xPosition < numberOfColumns; ++xPosition) {
             determinant += getValueFromCoFactorExpansion(matrix, xPosition, yPosition);
         }
     } else {
         size_t xPosition = bestIndex - numberOfRows;
-        for (size_t yPosition = 0; yPosition < numberOfRows; yPosition++) {
+        for (size_t yPosition = 0; yPosition < numberOfRows; ++yPosition) {
             determinant += getValueFromCoFactorExpansion(matrix, xPosition, yPosition);
         }
     }

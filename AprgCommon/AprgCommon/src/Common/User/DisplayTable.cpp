@@ -131,7 +131,7 @@ void DisplayTablePrinter::print(std::ostream& out) const {
     int rowIndex = 0;
     for (Row const& row : m_rows) {
         int numberOfLinesAtRow = m_maxWidthAtRow[rowIndex];
-        for (int lineIndexAtRow = 0; lineIndexAtRow < numberOfLinesAtRow; lineIndexAtRow++) {
+        for (int lineIndexAtRow = 0; lineIndexAtRow < numberOfLinesAtRow; ++lineIndexAtRow) {
             out << verticalBorderPoint;
             int columnIndex = 0;
             for (Cell const& cell : row.cells) {
@@ -144,7 +144,7 @@ void DisplayTablePrinter::print(std::ostream& out) const {
                         ? string(targetLength, ' ')
                         : getStringWithAlignment(textOnVerticalAlignment, targetLength, cell.horizontalAlignment);
                 out << cellTextLine;
-                columnIndex++;
+                ++columnIndex;
                 out << verticalBorderPoint;
             }
             out << "\n";

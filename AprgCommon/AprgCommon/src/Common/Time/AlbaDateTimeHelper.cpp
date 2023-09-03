@@ -138,7 +138,7 @@ uint32_t getNumberOfDaysInTheYearBeforeThisMonth(uint32_t const month, uint32_t 
             break;
     }
     if (month > FEBRUARY && year > 0 && isLeapYear(year)) {
-        numberOfDays++;
+        ++numberOfDays;
     }
     return numberOfDays;
 }
@@ -200,7 +200,7 @@ uint32_t getAndRemoveYearsFromNumberOfDays(uint32_t& remainingDays) {
     int32_t remainingDaysTemp =
         static_cast<int32_t>(remainingDays) - static_cast<int32_t>(getNumberOfDaysBeforeThisYear(years));
     while (remainingDaysTemp <= 0 && years > 0) {
-        years--;
+        --years;
         remainingDaysTemp += static_cast<int32_t>(getNumberOfDaysInAYear(years));
     }
     remainingDays = static_cast<uint32_t>(remainingDaysTemp);

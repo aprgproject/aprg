@@ -35,12 +35,12 @@ size_t getLevenshteinDistance(string_view otherString, string_view basisString) 
     Counts& firstPrevious(previousAndCurrentCounts[0]);
     iota(begin(firstPrevious), end(firstPrevious), 0);  // first row
 
-    for (size_t otherIndex = 1; otherIndex <= otherString.length(); otherIndex++) {
+    for (size_t otherIndex = 1; otherIndex <= otherString.length(); ++otherIndex) {
         Counts& previousCounts(previousAndCurrentCounts[(otherIndex - 1) % 2]);
         Counts& currentCounts(previousAndCurrentCounts[otherIndex % 2]);
 
         currentCounts[0] = otherIndex;  // first column
-        for (size_t basisIndex = 1; basisIndex <= basisString.length(); basisIndex++) {
+        for (size_t basisIndex = 1; basisIndex <= basisString.length(); ++basisIndex) {
             size_t cost = basisString[basisIndex - 1] == otherString[otherIndex - 1] ? 0 : 1;
             currentCounts[basisIndex] =
                 min(min(currentCounts[basisIndex - 1] + 1, previousCounts[basisIndex] + 1),
@@ -57,9 +57,9 @@ size_t getHammingDistance(string_view string1, string_view string2) {
     // the strings differ.
     size_t result(0);
     size_t commonLength = min(string1.length(), string2.length());
-    for (size_t index1 = 0; index1 < commonLength; index1++) {
+    for (size_t index1 = 0; index1 < commonLength; ++index1) {
         if (string1[index1] != string2[index1]) {
-            result++;
+            ++result;
         }
     }
     return result;
@@ -98,10 +98,10 @@ int getPeriodValue(string_view str, string_view period) {
 
     int periodCount(0);
     if (!period.empty()) {
-        for (size_t index1(0U), index2(0U); index1 < str.length(); index1++, index2++) {
+        for (size_t index1(0U), index2(0U); index1 < str.length(); ++index1, ++index2) {
             if (index2 == period.length()) {
                 index2 = 0;
-                periodCount++;
+                ++periodCount;
             }
             if (str[index1] != period[index2]) {
                 periodCount = 0;
@@ -170,9 +170,9 @@ bool isSubsequence(string_view mainText, string_view subsequence) {
     // For example, the subsequences of ABCD are A, B, C, D, AB, AC, AD, BC, BD, CD, ABC, ABD, ACD, BCD and ABCD.
 
     size_t index2(0U);
-    for (size_t index1(0U); index1 < mainText.length() && index2 < subsequence.length(); index1++) {
+    for (size_t index1(0U); index1 < mainText.length() && index2 < subsequence.length(); ++index1) {
         if (mainText[index1] == subsequence[index2]) {
-            index2++;
+            ++index2;
         }
     }
     return index2 == subsequence.length();
@@ -183,7 +183,7 @@ bool isPrefix(string_view mainText, string_view prefix) {
     // For example, the prefixes of ABCD are A, AB, ABC and ABCD.
 
     size_t index2(0U);
-    for (size_t index1(0U); index1 < mainText.length() && index2 < prefix.length(); index1++, index2++) {
+    for (size_t index1(0U); index1 < mainText.length() && index2 < prefix.length(); ++index1, ++index2) {
         if (mainText[index1] != prefix[index2]) {
             break;
         }
@@ -196,7 +196,7 @@ bool isSuffix(string_view mainText, string_view suffix) {
     // For example, the suffixes of ABCD are D, CD, BCD and ABCD.
 
     int index2 = static_cast<int>(suffix.length()) - 1;
-    for (int index1 = static_cast<int>(mainText.length()) - 1; index1 >= 0 && index2 >= 0; index1--, index2--) {
+    for (int index1 = static_cast<int>(mainText.length()) - 1; index1 >= 0 && index2 >= 0; --index1, --index2) {
         if (mainText[index1] != suffix[index2]) {
             break;
         }
@@ -413,7 +413,7 @@ string getStringWithoutOpeningClosingOperators(
 
 string getLongestCommonPrefix(string_view first, string_view second) {
     size_t index1 = 0;
-    for (; index1 < first.length() && index1 < second.length(); index1++) {
+    for (; index1 < first.length() && index1 < second.length(); ++index1) {
         if (first[index1] != second[index1]) {
             break;
         }
@@ -568,7 +568,7 @@ string getRandomAlphaNumericString(size_t const length) {
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
 strings getArgumentsToStringInMain(int const argc, char const* const argv[]) {
     strings result;
-    for (int argumentIndex = 0; argumentIndex < argc; argumentIndex++) {
+    for (int argumentIndex = 0; argumentIndex < argc; ++argumentIndex) {
         result.emplace_back(argv[argumentIndex]);
     }
     return result;
@@ -632,7 +632,7 @@ void splitLinesToAchieveTargetLength(strings& strings, string_view mainText, siz
     size_t mainTextLength = mainText.length();
     bool isPreviousCharacterAWhitespace(false);
     transitionIndexes.emplace(0);
-    for (size_t index1 = 0; index1 < mainTextLength; index1++) {
+    for (size_t index1 = 0; index1 < mainTextLength; ++index1) {
         char currentCharacter = mainText[index1];
         if (isPreviousCharacterAWhitespace && !isWhiteSpace(currentCharacter)) {
             transitionIndexes.emplace(index1 - 1);
@@ -730,7 +730,7 @@ string getStringWithJustifyAlignment(string_view mainText, size_t const targetLe
         size_t remainingLengthAtTheEnds = numberOfSpaces - (gapLength * (noWhiteSpaceLength - 1));
         string gap(gapLength, ' ');
         result += string(remainingLengthAtTheEnds / 2, ' ');
-        for (size_t index = 0; index + 1 < noWhiteSpaceLength; index++) {
+        for (size_t index = 0; index + 1 < noWhiteSpaceLength; ++index) {
             result += noWhiteSpace[index];
             result += gap;
         }
@@ -748,7 +748,7 @@ string getStringWithJustifyAlignment(string_view mainText, size_t const targetLe
         size_t remainingLengthAtTheEnds = numberOfSpaces - (gapLength * (numberOfStrings - 1));
         string gap(gapLength, ' ');
         result += string(remainingLengthAtTheEnds / 2, ' ');
-        for (size_t index = 0; index + 1 < numberOfStrings; index++) {
+        for (size_t index = 0; index + 1 < numberOfStrings; ++index) {
             result += actualStrings[index];
             result += gap;
         }

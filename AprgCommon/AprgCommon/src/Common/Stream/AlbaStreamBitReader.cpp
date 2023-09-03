@@ -22,7 +22,7 @@ char AlbaStreamBitReader::readCharData() { return AlbaStreamBitReader::readBigEn
 
 string AlbaStreamBitReader::readStringData(size_t const numberOfCharacters) {
     string result;
-    for (size_t i = 0; i < numberOfCharacters; i++) {
+    for (size_t i = 0; i < numberOfCharacters; ++i) {
         char character(readCharData());
         if (!m_stream.eof()) {
             result += character;
