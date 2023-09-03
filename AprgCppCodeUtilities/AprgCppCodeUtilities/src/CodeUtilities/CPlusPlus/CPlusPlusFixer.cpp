@@ -1,7 +1,7 @@
 #include "CPlusPlusFixer.hpp"
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusTokenizer.hpp>
-#include <CodeUtilities/Common/FindPatterns.hpp>
+#include <CodeUtilities/Common/TermUtilities.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/Print/AlbaLogPrints.hpp>
@@ -12,8 +12,29 @@ using namespace std;
 
 namespace alba::CodeUtilities::CPlusPlusFixer {
 
-bool isCppFile(string const& extension) {
-    return extension == "cpp" || extension == "c" || extension == "cc" || extension == "hpp" || extension == "h";
+void processAprgDirectory(string const& aprgPath) {
+    AlbaLocalPathHandler aprgPathHandler(aprgPath);
+    ALBA_INF_PRINT1(cout, aprgPath);
+    ListOfPaths directories;
+    ListOfPaths files;
+    aprgPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
+    for (auto const& file : files) {
+        AlbaLocalPathHandler filePathHandler(file);
+        if (filePathHandler.getFile() == "CppProjectIndicatorFile.txt") {
+            processDirectory(filePathHandler.getDirectory());
+        }
+    }
+}
+
+void processPath(string const& path) {
+    AlbaLocalPathHandler pathHandler(path);
+    if (pathHandler.isFoundInLocalSystem()) {
+        if (pathHandler.isDirectory()) {
+            processDirectory(path);
+        } else if (pathHandler.isFile()) {
+            processFile(path);
+        }
+    }
 }
 
 void processDirectory(string const& path) {
@@ -30,7 +51,6 @@ void processDirectory(string const& path) {
 }
 
 void processFile(string const& path) {
-    ALBA_INF_PRINT1(cout, path);
     Terms terms(getTermsFromFile(path));
     fixTerms(terms);
     writeAllTerms(path, terms);
@@ -59,9 +79,15 @@ void writeAllTerms(string const& path, Terms const& terms) {
 }
 
 void fixTerms(Terms& terms) {
+    combinePrimitiveTypes(terms);
+    // fixPostFixIncrementDecrement(terms);
+    fixConstReferenceOrder(terms);
+    fixCStyleStaticCast(terms);
+}
+
+void fixPostFixIncrementDecrement(Terms& terms) {
     fixPostFixIncrementDecrement(terms, "++");
     fixPostFixIncrementDecrement(terms, "--");
-    fixConstReferenceOrder(terms);
 }
 
 void fixPostFixIncrementDecrement(Terms& terms, string const& crementOperator) {
@@ -98,22 +124,38 @@ void fixPostFixIncrementDecrement(Terms& terms, string const& crementOperator) {
 }
 
 void fixConstReferenceOrder(Terms& terms) {
+    fixConstReferenceOrder(terms, TermMatcher(TermType::Identifier));
+    fixConstReferenceOrder(terms, TermMatcher(TermType::PrimitiveType));
+    fixConstReferenceOrder(terms, TermMatcher("auto"));
+}
+
+void fixConstReferenceOrder(Terms& terms, TermMatcher const& typeMatcher) {
     findTermsAndSwapAt(
-        terms,
-        TermMatchers{TermMatcher("{"), TermMatcher("const"), TermMatcher(TermType::Identifier), TermMatcher("&")}, 1,
-        2);
+        terms, TermMatchers{TermMatcher("{"), TermMatcher("const"), typeMatcher, TermMatcher("&")}, 1, 2);
     findTermsAndSwapAt(
-        terms,
-        TermMatchers{TermMatcher(";"), TermMatcher("const"), TermMatcher(TermType::Identifier), TermMatcher("&")}, 1,
-        2);
+        terms, TermMatchers{TermMatcher(";"), TermMatcher("const"), typeMatcher, TermMatcher("&")}, 1, 2);
     findTermsAndSwapAt(
-        terms,
-        TermMatchers{TermMatcher("("), TermMatcher("const"), TermMatcher(TermType::Identifier), TermMatcher("&")}, 1,
-        2);
+        terms, TermMatchers{TermMatcher("("), TermMatcher("const"), typeMatcher, TermMatcher("&")}, 1, 2);
     findTermsAndSwapAt(
-        terms,
-        TermMatchers{TermMatcher(","), TermMatcher("const"), TermMatcher(TermType::Identifier), TermMatcher("&")}, 1,
-        2);
+        terms, TermMatchers{TermMatcher(","), TermMatcher("const"), typeMatcher, TermMatcher("&")}, 1, 2);
+}
+
+void fixCStyleStaticCast(Terms& terms) { fixCStyleStaticCast(terms, TermMatcher(TermType::PrimitiveType)); }
+
+void fixCStyleStaticCast(Terms& terms, TermMatcher const& typeMatcher) {
+    TermMatchers matchers{TermMatcher(TermType::Operator), TermMatcher("("), typeMatcher, TermMatcher(")")};
+    int termIndex = 0;
+    bool isFound(true);
+    while (isFound) {
+        PatternIndexes patternIndexes = findFirstPatternIgnoringSpacesAndComments(terms, matchers, termIndex);
+        isFound = !patternIndexes.empty();
+        if (isFound) {
+            termIndex = patternIndexes.back();
+            terms[patternIndexes[1]].setContent("static_cast<");
+            terms[patternIndexes[3]].setContent(">(");
+            ALBA_INF_PRINT3(cout, terms[patternIndexes[0]], terms[patternIndexes[1]], terms[patternIndexes[2]]);
+        }
+    }
 }
 
 void findTermsAndSwapAt(Terms& terms, TermMatchers const& matchers, int const index1, int const index2) {
@@ -125,8 +167,28 @@ void findTermsAndSwapAt(Terms& terms, TermMatchers const& matchers, int const in
         if (isFound) {
             termIndex = patternIndexes.back();
             std::swap(terms[patternIndexes[index1]], terms[patternIndexes[index2]]);
+            ALBA_INF_PRINT2(cout, terms[patternIndexes[index1]], terms[patternIndexes[index2]]);
         }
     }
+}
+
+void combinePrimitiveTypes(Terms& terms) {
+    int termIndex = 0;
+    bool isFound(true);
+    TermMatchers primitiveTypeMatchers{TermMatcher(TermType::PrimitiveType), TermMatcher(TermType::PrimitiveType)};
+    while (isFound) {
+        PatternIndexes patternIndexes =
+            findFirstPatternIgnoringSpacesAndComments(terms, primitiveTypeMatchers, termIndex);
+        isFound = !patternIndexes.empty();
+        if (isFound) {
+            termIndex = patternIndexes.front();
+            combineTermsInPlace(terms, TermType::PrimitiveType, patternIndexes[0], patternIndexes[1]);
+        }
+    }
+}
+
+bool isCppFile(string const& extension) {
+    return extension == "cpp" || extension == "c" || extension == "cc" || extension == "hpp" || extension == "h";
 }
 
 }  // namespace alba::CodeUtilities::CPlusPlusFixer
