@@ -306,7 +306,7 @@ jobs:
         working-directory: ${{ matrix.project }}
         run: |
           "$buildAndRunScriptPath" clean ${{ env.buildDirectory }}
-          "$buildAndRunScriptPath" configureWithClangWithAsan "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          "$buildAndRunScriptPath" cleanAndConfigureWithClangWithAsan "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
