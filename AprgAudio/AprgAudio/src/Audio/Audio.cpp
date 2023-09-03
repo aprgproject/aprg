@@ -116,7 +116,7 @@ bool Audio<DataType>::setAudioBuffer(AudioBuffer& newBuffer) {
 }
 
 template <class DataType>
-void Audio<DataType>::setAudioBufferSize(int numberOfChannels, int numberOfSamples) {
+void Audio<DataType>::setAudioBufferSize(int const numberOfChannels, int const numberOfSamples) {
     samples.resize(numberOfChannels);
     setNumSamplesPerChannel(numberOfSamples);
 }
@@ -399,7 +399,7 @@ bool Audio<DataType>::decodeAiffFile(vector<uint8_t>& dataBuffer) {
 }
 
 template <class DataType>
-int Audio<DataType>::getAiffSampleRate(vector<uint8_t>& dataBuffer, int sampleRateStartIndex) {
+int Audio<DataType>::getAiffSampleRate(vector<uint8_t>& dataBuffer, int const sampleRateStartIndex) {
     for (auto it : aiffSampleRateTable) {
         if (tenByteMatch(dataBuffer, sampleRateStartIndex, it.second, 0)) {
             return it.first;
@@ -410,7 +410,7 @@ int Audio<DataType>::getAiffSampleRate(vector<uint8_t>& dataBuffer, int sampleRa
 }
 
 template <class DataType>
-bool Audio<DataType>::tenByteMatch(vector<uint8_t>& v1, int startIndex1, vector<uint8_t>& v2, int startIndex2) {
+bool Audio<DataType>::tenByteMatch(vector<uint8_t>& v1, int const startIndex1, vector<uint8_t>& v2, int const startIndex2) {
     for (int i = 0; i < 10; ++i) {
         if (v1[startIndex1 + i] != v2[startIndex2 + i]) {
             return false;
@@ -421,7 +421,7 @@ bool Audio<DataType>::tenByteMatch(vector<uint8_t>& v1, int startIndex1, vector<
 }
 
 template <class DataType>
-void Audio<DataType>::addSampleRateToAiffData(vector<uint8_t>& dataBuffer, int sampleRate) {
+void Audio<DataType>::addSampleRateToAiffData(vector<uint8_t>& dataBuffer, int const sampleRate) {
     if (aiffSampleRateTable.contains(sampleRate)) {
         for (int i = 0; i < 10; ++i) {
             dataBuffer.push_back(aiffSampleRateTable.at(sampleRate)[i]);
@@ -430,7 +430,7 @@ void Audio<DataType>::addSampleRateToAiffData(vector<uint8_t>& dataBuffer, int s
 }
 
 template <class DataType>
-bool Audio<DataType>::save(string const& filePath, AudioFormat format) {
+bool Audio<DataType>::save(string const& filePath, AudioFormat const format) {
     AlbaLocalPathHandler filePathHandler(filePath);
     if (format == AudioFormat::Wave) {
         return saveToWaveFile(filePathHandler.getFullPath());
@@ -605,7 +605,7 @@ void Audio<DataType>::addStringToFileData(vector<uint8_t>& dataBuffer, string co
 }
 
 template <class DataType>
-void Audio<DataType>::addInt32ToFileData(vector<uint8_t>& dataBuffer, int32_t integerToCopy, Endianness endianness) {
+void Audio<DataType>::addInt32ToFileData(vector<uint8_t>& dataBuffer, int32_t const integerToCopy, Endianness const endianness) {
     array<uint8_t, 4> bytes{};
 
     if (endianness == Endianness::LittleEndian) {
@@ -625,7 +625,7 @@ void Audio<DataType>::addInt32ToFileData(vector<uint8_t>& dataBuffer, int32_t in
 }
 
 template <class DataType>
-void Audio<DataType>::addInt16ToFileData(vector<uint8_t>& dataBuffer, int16_t integerToCopy, Endianness endianness) {
+void Audio<DataType>::addInt16ToFileData(vector<uint8_t>& dataBuffer, int16_t const integerToCopy, Endianness const endianness) {
     array<uint8_t, 2> bytes{};
 
     if (endianness == Endianness::LittleEndian) {
@@ -663,7 +663,7 @@ AudioFormat Audio<DataType>::determineAudioFormat(vector<uint8_t>& dataBuffer) {
 }
 
 template <class DataType>
-int32_t Audio<DataType>::fourBytesToInt(vector<uint8_t> const& source, int startIndex, Endianness endianness) {
+int32_t Audio<DataType>::fourBytesToInt(vector<uint8_t> const& source, int const startIndex, Endianness const endianness) {
     int32_t result = 0;
 
     if (endianness == Endianness::LittleEndian) {
@@ -678,7 +678,7 @@ int32_t Audio<DataType>::fourBytesToInt(vector<uint8_t> const& source, int start
 }
 
 template <class DataType>
-int16_t Audio<DataType>::twoBytesToInt(vector<uint8_t> const& source, int startIndex, Endianness endianness) {
+int16_t Audio<DataType>::twoBytesToInt(vector<uint8_t> const& source, int const startIndex, Endianness const endianness) {
     int16_t result = 0;
 
     if (endianness == Endianness::LittleEndian) {
@@ -731,7 +731,7 @@ DataType Audio<DataType>::singleByteToSample(uint8_t sample) {
 }
 
 template <class DataType>
-DataType Audio<DataType>::clamp(DataType value, DataType minValue, DataType maxValue) {
+DataType Audio<DataType>::clamp(DataType const value, DataType const minValue, DataType const maxValue) {
     value = min(value, maxValue);
     value = max(value, minValue);
     return value;

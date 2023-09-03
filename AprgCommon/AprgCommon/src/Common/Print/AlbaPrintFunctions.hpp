@@ -9,7 +9,7 @@
 
 namespace alba {
 
-void printLogHeader(std::ostream& out, std::string_view fileName, int lineNumber, std::string_view functionName);
+void printLogHeader(std::ostream& out, std::string_view fileName, int const lineNumber, std::string_view functionName);
 void printCurrentDateTime(std::ostream& out);
 void printStringAndShortenIfPossible(
     std::ostream& out, std::string_view longStr, size_t const prefixLength, size_t const suffixLength);
@@ -27,7 +27,7 @@ template <typename... UnderlyingTypes>
 void printParameter(std::ostream& out, std::pair<UnderlyingTypes...> const& parameter);
 template <typename... UnderlyingTypes>
 void printParameter(std::ostream& out, std::tuple<UnderlyingTypes...> const& parameter);
-template <typename ValueType, size_t SIZE, template <typename, size_t> class TemplateType>
+template <typename ValueType, size_t const SIZE, template <typename, size_t> class TemplateType>
 std::enable_if_t<typeHelper::hasBeginAndEnd<TemplateType<ValueType, SIZE>>(), void> printParameter(
     std::ostream& out, TemplateType<ValueType, SIZE> const& parameter);
 template <typename... UnderlyingTypes, template <typename...> class TemplateType>
@@ -125,7 +125,7 @@ void printParameter(std::ostream& out, std::tuple<UnderlyingTypes...> const& par
     out << ")";
 }
 
-template <typename ValueType, size_t SIZE, template <typename, size_t> class TemplateType>
+template <typename ValueType, size_t const SIZE, template <typename, size_t> class TemplateType>
 std::enable_if_t<typeHelper::hasBeginAndEnd<TemplateType<ValueType, SIZE>>(), void> printParameter(
     std::ostream& out, TemplateType<ValueType, SIZE> const& parameter) {
     out << "{Constant size: " << SIZE << " | ";

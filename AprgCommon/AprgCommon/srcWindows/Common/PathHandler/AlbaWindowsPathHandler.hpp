@@ -35,7 +35,7 @@ public:
     void findFilesAndDirectoriesOneDepth(
         std::string_view wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
     void findFilesAndDirectoriesMultipleDepth(
-        std::string_view wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories, int depth) const;
+        std::string_view wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories, int const depth) const;
     void findFilesAndDirectoriesUnlimitedDepth(
         std::string_view wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
 
@@ -46,7 +46,7 @@ private:
     void setDriveOrRoot();
     void findFilesAndDirectoriesWithDepth(
         std::string_view currentDirectory, std::string_view wildCardSearch, ListOfPaths& listOfFiles,
-        ListOfPaths& listOfDirectories, int depth) const;
+        ListOfPaths& listOfDirectories, int const depth) const;
     bool canBeLocated(std::string_view fullPath) const;
     bool isSlashNeededAtTheEnd(std::string_view correctedPath, std::string_view originalPath) const;
     std::string m_driveOrRoot;

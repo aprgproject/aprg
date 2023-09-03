@@ -211,17 +211,17 @@ bool AlbaLinuxPathHandler::renameImmediateDirectory(string_view newDirectoryName
 }
 
 void AlbaLinuxPathHandler::findFilesAndDirectoriesOneDepth(
-    string_view wildCardSearch, set<string>& listOfFiles, set<string>& listOfDirectories) const {
+    string_view const wildCardSearch, set<string>& listOfFiles, set<string>& listOfDirectories) const {
     findFilesAndDirectoriesWithDepth(m_directory, wildCardSearch, listOfFiles, listOfDirectories, 1);
 }
 
 void AlbaLinuxPathHandler::findFilesAndDirectoriesMultipleDepth(
-    string_view wildCardSearch, set<string>& listOfFiles, set<string>& listOfDirectories, int depth) const {
+    string_view const wildCardSearch, set<string>& listOfFiles, set<string>& listOfDirectories, int const depth) const {
     findFilesAndDirectoriesWithDepth(m_directory, wildCardSearch, listOfFiles, listOfDirectories, depth);
 }
 
 void AlbaLinuxPathHandler::findFilesAndDirectoriesUnlimitedDepth(
-    string_view wildCardSearch, set<string>& listOfFiles, set<string>& listOfDirectories) const {
+    string_view const wildCardSearch, set<string>& listOfFiles, set<string>& listOfDirectories) const {
     findFilesAndDirectoriesWithDepth(m_directory, wildCardSearch, listOfFiles, listOfDirectories, -1);
 }
 
@@ -258,8 +258,8 @@ void AlbaLinuxPathHandler::setPath(string_view path) {
 }
 
 void AlbaLinuxPathHandler::findFilesAndDirectoriesWithDepth(
-    string_view currentDirectory, string_view wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories,
-    int depth) const {
+    string_view const currentDirectory, string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories,
+    int const depth) const {
     if (depth == 0) {
         return;
     }
@@ -282,8 +282,8 @@ void AlbaLinuxPathHandler::findFilesAndDirectoriesWithDepth(
 }
 
 void AlbaLinuxPathHandler::loopAllFilesAndDirectoriesInDirectoryStream(
-    DIR* directoryStream, string_view currentDirectory, string_view wildCardSearch, set<string>& listOfFiles,
-    set<string>& listOfDirectories, int depth) const {
+    DIR* directoryStream, string_view const currentDirectory, string_view const wildCardSearch, set<string>& listOfFiles,
+    set<string>& listOfDirectories, int const depth) const {
     struct dirent* directoryPointer = nullptr;
     do {
         // NOLINTNEXTLINE(concurrency-mt-unsafe)
@@ -332,7 +332,7 @@ bool AlbaLinuxPathHandler::canBeLocated(string_view fullPath) {
     return stat(fullPath.data(), &statBuffer) == 0;
 }
 
-bool AlbaLinuxPathHandler::isSlashNeededAtTheEnd(string_view correctedPath, string_view originalPath) const {
+bool AlbaLinuxPathHandler::isSlashNeededAtTheEnd(string_view const correctedPath, string_view const originalPath) const {
     bool result = false;
     if (!correctedPath.empty()) {
         bool isCorrectPathLastCharacterNotASlash(

@@ -32,7 +32,7 @@ public:
     [[nodiscard]] bool isNumberOfBitsPerPixelValid() const;
     [[nodiscard]] bool isCompressedMethodSupported() const;
     [[nodiscard]] bool isPositionWithinTheBitmap(BitmapXY const position) const;
-    [[nodiscard]] bool isPositionWithinTheBitmap(int x, int y) const;
+    [[nodiscard]] bool isPositionWithinTheBitmap(int const x, int const y) const;
 
     [[nodiscard]] CompressedMethodType getCompressedMethodType() const;
     [[nodiscard]] std::string getPath() const;
@@ -46,7 +46,7 @@ public:
     [[nodiscard]] BitmapXY getPointWithinTheBitmap(int const xCoordinate, int const yCoordinate) const;
     [[nodiscard]] int getXCoordinateWithinTheBitmap(int const coordinate) const;
     [[nodiscard]] int getYCoordinateWithinTheBitmap(int const coordinate) const;
-    static int getCoordinateWithinRange(int const coordinate, int maxLength);
+    static int getCoordinateWithinRange(int const coordinate, int const maxLength);
     static BitmapXY getUpLeftCornerPoint();
     [[nodiscard]] BitmapXY getDownRightCornerPoint() const;
 

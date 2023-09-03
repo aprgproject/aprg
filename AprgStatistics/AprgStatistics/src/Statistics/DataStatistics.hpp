@@ -95,7 +95,7 @@ protected:
         calculateStandardDeviationIfNeeded(m_populationStandardDeviation, m_populationVariance, m_samples.size());
     }
 
-    void calculateVarianceIfNeeded(SampleOptional& variance, int sampleSize) {
+    void calculateVarianceIfNeeded(SampleOptional& variance, int const sampleSize) {
         if (!variance) {
             if (!m_samples.empty()) {
                 Samples varianceCalculationTemp(m_samples);
@@ -112,7 +112,7 @@ protected:
     }
 
     void calculateStandardDeviationIfNeeded(
-        SampleOptional& standardDeviation, SampleOptional& variance, int sampleSize) {
+        SampleOptional& standardDeviation, SampleOptional& variance, int const sampleSize) {
         if (!standardDeviation) {
             calculateVarianceIfNeeded(variance, sampleSize);
             Sample standardDeviationTemp(variance.value());

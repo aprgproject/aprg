@@ -44,7 +44,7 @@ public:
         return result;
     }
 
-    void setValueAt(int index, double const dataSampleValue) {
+    void setValueAt(int const index, double const dataSampleValue) {
         if (isIndexValid(index)) {
             m_data[index] = dataSampleValue;
         }
@@ -83,12 +83,12 @@ public:
 
     [[nodiscard]] Sample calculateRaiseToPower(double const value) const {
         return performDataTypeAndConstantFunction(
-            value, [](double value1, double value2) -> double { return pow(value1, value2); });
+            value, [](double const value1, double const value2) -> double { return pow(value1, value2); });
     }
 
     [[nodiscard]] Sample calculateRaiseToInversePower(double const value) const {
         return performDataTypeAndConstantFunction(
-            value, [](double value1, double value2) -> double { return pow(value1, static_cast<double>(1) / value2); });
+            value, [](double const value1, double const value2) -> double { return pow(value1, static_cast<double>(1) / value2); });
     }
 
     Sample performDataTypeAndDataTypeFunction(

@@ -95,7 +95,7 @@ void Modeling::retrieveDataFromFileWithFileFormat2(string const& filePath) {
 }
 
 void Modeling::saveRetrievedDataForXAndY(
-    unsigned int numberOfIndicators, unsigned int numberOfSamples, VectorOfDoubles const& retrievedDataForX,
+    unsigned int const numberOfIndicators, unsigned int const numberOfSamples, VectorOfDoubles const& retrievedDataForX,
     VectorOfDoubles const& retrievedDataForY) {
     copyVectorToMatrix(numberOfIndicators, numberOfSamples, retrievedDataForX, m_retrievedDataForX);
     copyVectorToMatrix(1, numberOfSamples, retrievedDataForY, m_retrievedDataForY);
@@ -199,7 +199,7 @@ void Modeling::copyVectorToMatrix(
 }
 
 void Modeling::saveRetrievedDataToMatrixRandomly(
-    MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int numberOfSamples) {
+    MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int const numberOfSamples) {
     matrixInX.clearAndResize(m_retrievedDataForX.getNumberOfColumns(), numberOfSamples);
     matrixInY.clearAndResize(1, numberOfSamples);
     AlbaUniformNonDeterministicRandomizer<unsigned int> randomizer(0, m_retrievedDataForY.getNumberOfRows() - 1);
@@ -213,7 +213,7 @@ void Modeling::saveRetrievedDataToMatrixRandomly(
 }
 
 void Modeling::saveRetrievedDataToMatrix(
-    MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int numberOfSamples) {
+    MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int const numberOfSamples) {
     matrixInX.clearAndResize(m_retrievedDataForX.getNumberOfColumns(), numberOfSamples);
     matrixInY.clearAndResize(1, numberOfSamples);
     for (unsigned int j = 0; j < numberOfSamples; ++j) {

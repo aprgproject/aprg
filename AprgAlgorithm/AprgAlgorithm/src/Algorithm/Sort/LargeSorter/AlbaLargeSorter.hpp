@@ -116,7 +116,7 @@ private:
         BlockCacheContainer const& memoryLimitCache(m_memoryCache.getContainerReference());
         int totalMemoryConsumption = accumulate(
             memoryLimitCache.cbegin(), memoryLimitCache.cend(), 0,
-            [](int memoryConsumption, BlockCacheEntry const& blockCacheEntry) {
+            [](int const memoryConsumption, BlockCacheEntry const& blockCacheEntry) {
                 memoryConsumption += blockCacheEntry.m_blockInformation->getNumberOfObjectsInMemory();
                 return memoryConsumption;
             });
@@ -151,7 +151,7 @@ private:
             temporaryLocalDirectory.deleteInnerFilesAndDirectories();
         }
     }
-    void putIndexesWithMultiplesOfNumber(Indexes& indexes, int number, int numberOfObjects) {
+    void putIndexesWithMultiplesOfNumber(Indexes& indexes, int const number, int const numberOfObjects) {
         for (int index = 0; index < numberOfObjects; index += number) {
             indexes.emplace_back(index);
         }

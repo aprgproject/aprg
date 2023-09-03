@@ -17,7 +17,7 @@ public:
         uint8_t const colorByte) const;                                     // implement UT
     [[nodiscard]] BitmapSnippet getSnippetReadFromFileWholeBitmap() const;  // implement UT
     [[nodiscard]] BitmapSnippet getSnippetReadFromFileWithOutOfRangeCoordinates(
-        int outOfRangeLeft, int outOfRangeTop, int outOfRangeRight, int outOfRangeBottom) const;
+        int const outOfRangeLeft, int const outOfRangeTop, int const outOfRangeRight, int const outOfRangeBottom) const;
     [[nodiscard]] BitmapSnippet getSnippetReadFromFileWithNumberOfBytesToRead(
         BitmapXY const center, int const numberOfBytesToRead) const;
     [[nodiscard]] BitmapSnippet getSnippetReadFromFile(

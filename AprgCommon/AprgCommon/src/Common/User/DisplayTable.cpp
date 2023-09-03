@@ -16,13 +16,13 @@ DisplayTableCell::DisplayTableCell(string_view displayText)
       m_horizontalAlignment(HorizontalAlignment::Center),
       m_verticalAlignment(VerticalAlignment::Center) {}
 
-DisplayTableCell::DisplayTableCell(string_view displayText, HorizontalAlignment const horizontalAlignment)
+DisplayTableCell::DisplayTableCell(string_view const displayText, HorizontalAlignment const horizontalAlignment)
     : m_displayText(displayText),
       m_horizontalAlignment(horizontalAlignment),
       m_verticalAlignment(VerticalAlignment::Center) {}
 
 DisplayTableCell::DisplayTableCell(
-    string_view displayText, HorizontalAlignment const horizontalAlignment, VerticalAlignment const verticalAlignment)
+    string_view const displayText, HorizontalAlignment const horizontalAlignment, VerticalAlignment const verticalAlignment)
     : m_displayText(displayText), m_horizontalAlignment(horizontalAlignment), m_verticalAlignment(verticalAlignment) {}
 
 string DisplayTableCell::getText() const { return m_displayText; }
@@ -57,12 +57,12 @@ DisplayTableCell& DisplayTableRow::getCellReferenceAt(int const columnIndex) { r
 
 void DisplayTableRow::addCell(string_view text) { m_cells.emplace_back(text); }
 
-void DisplayTableRow::addCell(string_view displayText, HorizontalAlignment const horizontalAlignment) {
+void DisplayTableRow::addCell(string_view const displayText, HorizontalAlignment const horizontalAlignment) {
     m_cells.emplace_back(displayText, horizontalAlignment);
 }
 
 void DisplayTableRow::addCell(
-    string_view displayText, HorizontalAlignment const horizontalAlignment, VerticalAlignment const verticalAlignment) {
+    string_view const displayText, HorizontalAlignment const horizontalAlignment, VerticalAlignment const verticalAlignment) {
     m_cells.emplace_back(displayText, horizontalAlignment, verticalAlignment);
 }
 
@@ -101,7 +101,7 @@ DisplayTableCell& DisplayTable::getCellReferenceAt(int const columnIndex, int co
 
 void DisplayTable::addRow() { m_rows.emplace_back(); }
 
-void DisplayTable::setBorders(string_view horizontalBorder, string_view verticalBorder) {
+void DisplayTable::setBorders(string_view const horizontalBorder, string_view const verticalBorder) {
     m_horizontalBorder = horizontalBorder;
     m_verticalBorder = verticalBorder;
 }
@@ -176,7 +176,7 @@ void DisplayTablePrinter::saveTableInformation(DisplayTable const& displayTable)
     }
 
     m_totalColumnLength = accumulate(
-        m_maxLengthAtColumn.cbegin(), m_maxLengthAtColumn.cend(), 0, [](int partialSum, int const lengthPerColumn) {
+        m_maxLengthAtColumn.cbegin(), m_maxLengthAtColumn.cend(), 0, [](int const partialSum, int const lengthPerColumn) {
             partialSum += lengthPerColumn;
             return partialSum;
         });

@@ -327,7 +327,7 @@ TEST(WavLoadingTests, DISABLED_MonoWith16BitWithSampleRate48000) {
     }
 }
 
-bool writeTest(int numberOfChannels, int sampleRate, int bitDepth, AudioFormat format) {
+bool writeTest(int const numberOfChannels, int const sampleRate, int const bitDepth, AudioFormat const format) {
     auto sampleRateAsFloat = static_cast<float>(sampleRate);
 
     Audio<float> audioFile;

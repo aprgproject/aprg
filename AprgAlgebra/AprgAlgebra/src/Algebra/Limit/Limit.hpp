@@ -29,7 +29,7 @@ AlbaNumber getLimitAtAValueInTheNegativeSide(
     Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
 AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
     Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach,
-    AlbaNumber const& initialValueForIteration, int maxNumberOfIterations);
+    AlbaNumber const& initialValueForIteration, int const maxNumberOfIterations);
 AlbaNumber getLimitAtAValueUsingTrendOfValues(
     Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach,
     AlbaNumber const& previousAcceptedInput, AlbaNumber const& previousOfPreviousAcceptedInput);

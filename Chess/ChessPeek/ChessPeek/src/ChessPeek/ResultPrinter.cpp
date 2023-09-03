@@ -503,7 +503,7 @@ string ResultPrinter::getDisplayableStringForABoardCell(
     return result;
 }
 
-optional<char> ResultPrinter::getFirstCharOfABoardCell(bool const isSurePreMove, bool isUnsurePreMove) const {
+optional<char> ResultPrinter::getFirstCharOfABoardCell(bool const isSurePreMove, bool const isUnsurePreMove) const {
     optional<char> result;
     if (isSurePreMove) {
         result = '*';

@@ -205,7 +205,7 @@ void clickReset() {
     userAutomation.doLeftClickAt(MousePosition(3426, 952));
 }
 
-string getStringInBetween(string_view mainString, string_view firstString, string_view secondString, int& index) {
+string getStringInBetween(string_view const mainString, string_view const firstString, string_view const secondString, int& index) {
     string result{};
     int indexToStart = index;
     int firstIndexOfFirstString = mainString.find(firstString, indexToStart);
@@ -220,7 +220,7 @@ string getStringInBetween(string_view mainString, string_view firstString, strin
     return result;
 }
 
-string getStringInBetween(string_view mainString, string_view firstString, string_view secondString) {
+string getStringInBetween(string_view const mainString, string_view const firstString, string_view const secondString) {
     int tempIndex = 0;
     return getStringInBetween(mainString, firstString, secondString, tempIndex);
 }

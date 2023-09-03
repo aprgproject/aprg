@@ -1299,7 +1299,7 @@ Board::CastleType Board::getCastleTypeWithAlgebraicNotation(string const& textIn
                                                 : CastleType::NotACastle;
 }
 
-int Board::getGridIndex(int x, int y) { return (y * CHESS_SIDE_SIZE) + x; }
+int Board::getGridIndex(int const x, int const y) { return (y * CHESS_SIDE_SIZE) + x; }
 
 int Board::getNumberOfWaysToBlockPath(
     Coordinate const& startpoint, Coordinate const& endpoint, PieceColor const blockingPieceColor,
@@ -1520,7 +1520,7 @@ bool Board::doesAllCellsInBetweenSatisfyTheCondition(
 
 void Board::updateAttackDefendCount(
     Board::AttackDefendCount& count, PieceColor const pieceColor, PieceColor const sameColor,
-    PieceColor oppositeColor) {
+    PieceColor const oppositeColor) {
     if (sameColor == pieceColor) {
         count.defend++;
     } else if (oppositeColor == pieceColor) {

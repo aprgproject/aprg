@@ -52,7 +52,7 @@ Terms AdditionAndSubtractionOfTermsOverTerms::getLcmOfDenominatorTerms() const {
 }
 
 Terms AdditionAndSubtractionOfTermsOverTerms::getRevisedNumeratorTermsBasedOnLcmOnIndex(
-    int itemIndex, Terms const& lcmOfDenominatorTerms) const {
+    int const itemIndex, Terms const& lcmOfDenominatorTerms) const {
     Terms numeratorTerms;
     if (itemIndex < static_cast<int>(m_items.size())) {
         Terms const& multipliers(lcmOfDenominatorTerms);
@@ -103,7 +103,7 @@ Monomial AdditionAndSubtractionOfTermsOverTerms::getCombinedMonomialMultiplier(T
 }
 
 void AdditionAndSubtractionOfTermsOverTerms::updateMonomialAndNonMonomialMultipliersBasedOnDenominatorOnIndex(
-    int itemIndex, Monomial& monomialMultiplier, Terms& nonMonomialMultiplierTerms) const {
+    int const itemIndex, Monomial& monomialMultiplier, Terms& nonMonomialMultiplierTerms) const {
     for (Term const& denominatorTerm : m_items[itemIndex].getDenominators()) {
         if (canBeConvertedToMonomial(denominatorTerm)) {
             monomialMultiplier.divideMonomial(createMonomialIfPossible(denominatorTerm));
@@ -117,7 +117,7 @@ void AdditionAndSubtractionOfTermsOverTerms::updateMonomialAndNonMonomialMultipl
     }
 }
 
-void AdditionAndSubtractionOfTermsOverTerms::emplaceExistingNumeratorTerms(Terms& numeratorTerms, int itemIndex) const {
+void AdditionAndSubtractionOfTermsOverTerms::emplaceExistingNumeratorTerms(Terms& numeratorTerms, int const itemIndex) const {
     for (Term const& numeratorTerm : m_items[itemIndex].getNumerators()) {
         numeratorTerms.emplace_back(numeratorTerm);
     }
@@ -158,7 +158,7 @@ Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedDenominatorExpress
 }
 
 Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpressionForNumeratorOnIndex(
-    int numeratorIndex, Terms const& lcmDenominatorTerms) const {
+    int const numeratorIndex, Terms const& lcmDenominatorTerms) const {
     Expression combinedNumeratorOnIndex(Term(1));
     Terms numeratorTermsOnIndex(getRevisedNumeratorTermsBasedOnLcmOnIndex(numeratorIndex, lcmDenominatorTerms));
     for (Term const& numeratorTermOnIndex : numeratorTermsOnIndex) {

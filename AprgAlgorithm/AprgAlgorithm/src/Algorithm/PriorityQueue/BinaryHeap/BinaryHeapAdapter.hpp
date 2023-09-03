@@ -5,7 +5,7 @@
 
 namespace alba::algorithm {
 
-template <typename Objects, int NUMBER_OF_CHILDREN, template <class> class ComparatorTemplateType>
+template <typename Objects, int const NUMBER_OF_CHILDREN, template <class> class ComparatorTemplateType>
 class BinaryHeapAdapter {
 public:
     using Object = typename Objects::value_type;

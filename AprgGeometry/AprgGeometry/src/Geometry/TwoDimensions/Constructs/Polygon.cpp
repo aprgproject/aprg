@@ -112,7 +112,7 @@ Points Polygon<numberOfVertices>::getPoints(double const interval) const {
 
 template <int numberOfVertices>
 void Polygon<numberOfVertices>::getPointsFromVerticesWithoutLastPoint(
-    Points& points, double const interval, int vertexIndex1, int vertexIndex2) const {
+    Points& points, double const interval, int const vertexIndex1, int const vertexIndex2) const {
     Point const& firstPoint(m_vertices[vertexIndex1]);
     Point const& secondPoint(m_vertices[vertexIndex2]);
     Line line(firstPoint, secondPoint);

@@ -68,7 +68,7 @@ HBITMAP AlbaWindowsScreenMonitoring::createBitmapHandlerFromScreen(HDC screenHan
     return bitmapHandler;
 }
 
-void AlbaWindowsScreenMonitoring::saveBitmapInfo(HDC screenHandler, HBITMAP bitmapHandler) {
+void AlbaWindowsScreenMonitoring::saveBitmapInfo(HDC const screenHandler, HBITMAP const bitmapHandler) {
     m_bitmapInfo.bmiHeader.biSize = sizeof(m_bitmapInfo.bmiHeader);
 
     if (0 == GetDIBits(screenHandler, bitmapHandler, 0, 0, NULL, &m_bitmapInfo, DIB_RGB_COLORS)) {
@@ -88,7 +88,7 @@ void AlbaWindowsScreenMonitoring::saveBitmapInfo(HDC screenHandler, HBITMAP bitm
 }
 
 void AlbaWindowsScreenMonitoring::savePixelsFromBitmapScreen(
-    HDC screenHandler, HBITMAP bitmapHandler, BITMAPINFO& bitmapInfo) {
+    HDC const screenHandler, HBITMAP const bitmapHandler, BITMAPINFO& bitmapInfo) {
     if (0 == GetDIBits(
                  screenHandler, bitmapHandler, 0, bitmapInfo.bmiHeader.biHeight, (LPVOID)m_pixelData.getBufferPointer(),
                  &bitmapInfo, DIB_RGB_COLORS)) {

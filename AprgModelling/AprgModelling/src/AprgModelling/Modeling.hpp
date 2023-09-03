@@ -23,7 +23,7 @@ public:
     void retrieveDataFromFileWithFileFormat1(std::string const& filePath);
     void retrieveDataFromFileWithFileFormat2(std::string const& filePath);
     void saveRetrievedDataForXAndY(
-        unsigned int numberOfIndicators, unsigned int numberOfSamples, VectorOfDoubles const& retrievedDataForX,
+        unsigned int const numberOfIndicators, unsigned int const numberOfSamples, VectorOfDoubles const& retrievedDataForX,
         VectorOfDoubles const& retrievedDataForY);
     void saveRetrievedDataToModelingDataRandomly(unsigned int numberOfSamples);
     void saveRetrievedDataToValidationDataRandomly(unsigned int numberOfSamples);
@@ -41,9 +41,9 @@ private:
         MatrixOfDoubles& matrixOfDoubles);
     static void printData(MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY);
     void saveRetrievedDataToMatrixRandomly(
-        MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int numberOfSamples);
+        MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int const numberOfSamples);
     void saveRetrievedDataToMatrix(
-        MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int numberOfSamples);
+        MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int const numberOfSamples);
     void calculateCoefficientsUsingLeastSquares();
     static unsigned int getIndex(unsigned int const i, unsigned int const j, unsigned int const numberOfColumns);
     MatrixOfDoubles m_coefficients;

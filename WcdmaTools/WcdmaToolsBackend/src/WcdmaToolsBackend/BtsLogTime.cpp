@@ -16,13 +16,13 @@ namespace wcdmaToolsBackend {
 
 BtsLogTime::BtsLogTime() = default;
 
-BtsLogTime::BtsLogTime(BtsLogTimeType logTimeType, string const& timeStampString) {
+BtsLogTime::BtsLogTime(BtsLogTimeType const logTimeType, string const& timeStampString) {
     setTimeByTimeStamp(logTimeType, timeStampString);
 }
 
 void BtsLogTime::clear() { m_dateTime.clear(); }
 
-void BtsLogTime::setTimeByTimeStamp(BtsLogTimeType logTimeType, string const& timeStampString) {
+void BtsLogTime::setTimeByTimeStamp(BtsLogTimeType const logTimeType, string const& timeStampString) {
     unsigned int years = 0;
     unsigned int months = 0;
     unsigned int days = 0;

@@ -91,21 +91,21 @@ struct VectorIterator {
 };
 
 template <typename Iterator>
-Iterator advanceImpl(Iterator begin, int, std::false_type) {
+Iterator advanceImpl(Iterator const begin, int, std::false_type) {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
     // for (int i = 0; i < n; ++i) ++begin; // sample implementation
     return begin;
 }
 
 template <typename Iterator>
-Iterator advanceImpl(Iterator begin, int, std::true_type) {
+Iterator advanceImpl(Iterator const begin, int, std::true_type) {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
     // begin += n;  // sample implementation
     return begin;
 }
 
 template <typename Iterator>
-auto advance(Iterator begin, int n) {
+auto advance(Iterator const begin, int const n) {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
     return advanceImpl(begin, n, typename Iterator::SupportsPlusType{});  // why typename? (see Notes)
 }
@@ -141,21 +141,21 @@ struct IteratorTraits<VectorIterator<Element>> {
 };
 
 template <typename Iterator>
-Iterator advanceImpl(Iterator begin, int, std::false_type) {
+Iterator advanceImpl(Iterator const begin, int, std::false_type) {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
     // for (int i = 0; i < n; ++i) ++begin; // sample implementation
     return begin;
 }
 
 template <typename Iterator>
-Iterator advanceImpl(Iterator begin, int, std::true_type) {
+Iterator advanceImpl(Iterator const begin, int, std::true_type) {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
     // begin += n;  // sample implementation
     return begin;
 }
 
 template <typename Iterator>
-auto advance(Iterator begin, int n) {
+auto advance(Iterator const begin, int const n) {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
     return advanceImpl(begin, n, typename IteratorTraits<Iterator>::SupportsPlusType{});  // why typename? (see Notes)
 }

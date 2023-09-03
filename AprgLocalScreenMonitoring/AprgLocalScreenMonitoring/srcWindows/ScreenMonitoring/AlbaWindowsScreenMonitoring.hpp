@@ -22,8 +22,8 @@ private:
 
     void initializeScreenParameters();
     HBITMAP createBitmapHandlerFromScreen(HDC deviceContextHandler) const;
-    void saveBitmapInfo(HDC screenHandler, HBITMAP bitmapHandler);
-    void savePixelsFromBitmapScreen(HDC screenHandler, HBITMAP bitmapHandler, BITMAPINFO& bitmapInfo);
+    void saveBitmapInfo(HDC const screenHandler, HBITMAP const bitmapHandler);
+    void savePixelsFromBitmapScreen(HDC const screenHandler, HBITMAP const bitmapHandler, BITMAPINFO& bitmapInfo);
     int m_screenWidth;
     int m_screenHeight;
     HDC m_screenHandler;

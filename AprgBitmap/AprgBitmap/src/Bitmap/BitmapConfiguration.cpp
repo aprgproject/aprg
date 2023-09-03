@@ -39,7 +39,7 @@ bool BitmapConfiguration::isPositionWithinTheBitmap(BitmapXY const position) con
     return position.getX() < static_cast<int>(m_bitmapWidth) && position.getY() < static_cast<int>(m_bitmapHeight);
 }
 
-bool BitmapConfiguration::isPositionWithinTheBitmap(int x, int y) const {
+bool BitmapConfiguration::isPositionWithinTheBitmap(int const x, int const y) const {
     return x < static_cast<int>(m_bitmapWidth) && y < static_cast<int>(m_bitmapHeight) && x >= 0 && y >= 0;
 }
 
@@ -71,7 +71,7 @@ int BitmapConfiguration::getYCoordinateWithinTheBitmap(int const coordinate) con
     return getCoordinateWithinRange(coordinate, m_bitmapHeight);
 }
 
-int BitmapConfiguration::getCoordinateWithinRange(int const coordinate, int maxLength) {
+int BitmapConfiguration::getCoordinateWithinRange(int const coordinate, int const maxLength) {
     return (coordinate < 0 || maxLength <= 0) ? 0 : (coordinate >= maxLength) ? maxLength - 1 : coordinate;
 }
 

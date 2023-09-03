@@ -8,7 +8,7 @@ using namespace alba::soosa;
 using namespace alba::stringHelper;
 using namespace std;
 
-int main(int argc, char *argv[]) {
+int main(int const argc, char *argv[]) {
     cout << "Survey Output Optical Scan Analyzer developed by the IRPDS\n";
     cout << "Code version: " << APRG_CODE_REVISION << "\n\n";
 

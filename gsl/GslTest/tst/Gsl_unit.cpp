@@ -330,7 +330,7 @@ TEST(GslTest, FastFourierTransformInGslWorks) {
     gsl_fft_real_workspace_free(workspace);
 }
 
-double function1ToIntegrate(double inputValue, void *parameters) {
+double function1ToIntegrate(double const inputValue, void *parameters) {
     double alpha = *static_cast<double *>(parameters);
     return log(alpha * inputValue) / sqrt(inputValue);
 }
@@ -363,7 +363,7 @@ TEST(GslTest, NumericalAdaptiveIntegrationInGslWorks) {
     gsl_integration_workspace_free(workspace);
 }
 
-double function2ToIntegrate(double inputValue, void *parameters) {
+double function2ToIntegrate(double const inputValue, void *parameters) {
     int mFunctionInput = *static_cast<int *>(parameters);
     return gsl_pow_int(inputValue, mFunctionInput) + 1.0;
 }

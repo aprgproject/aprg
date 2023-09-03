@@ -104,7 +104,7 @@ private:
     std::string formatToHeaderString(std::string const& content) const;
     std::string getDisplayableStringForABoardCell(
         Piece const& piece, int const moveNumber, std::optional<char> const& firstChar) const;
-    std::optional<char> getFirstCharOfABoardCell(bool const isCertainPreMove, bool isPossiblePreMove) const;
+    std::optional<char> getFirstCharOfABoardCell(bool const isCertainPreMove, bool const isPossiblePreMove) const;
     ScorePair getBestAndWorstScores(Variations const& variations) const;
     int getNumberOfColumnsOfGrid(int const numberOfBoards) const;
     int getHorizontalBorderSize(int const numberOfBoards) const;

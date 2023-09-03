@@ -10,7 +10,7 @@ using namespace alba::stringHelper;
 
 namespace alba::CodeUtilities {
 
-Term::Term(TermType termType, string const& content) : m_termType(termType), m_content(content) {}
+Term::Term(TermType const termType, string const& content) : m_termType(termType), m_content(content) {}
 
 bool Term::operator==(Term const& term) const { return m_termType == term.m_termType && m_content == term.m_content; }
 

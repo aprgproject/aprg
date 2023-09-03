@@ -11,9 +11,9 @@ enum class BtsLogTimeType { BtsTimeStamp, PcTimeStamp };
 class BtsLogTime {
 public:
     BtsLogTime();
-    BtsLogTime(BtsLogTimeType logTimeType, std::string const& timeStampString);
+    BtsLogTime(BtsLogTimeType const logTimeType, std::string const& timeStampString);
     void clear();
-    void setTimeByTimeStamp(BtsLogTimeType logTimeType, std::string const& timeStampString);
+    void setTimeByTimeStamp(BtsLogTimeType const logTimeType, std::string const& timeStampString);
     [[nodiscard]] bool isEmpty() const;
     [[nodiscard]] bool isStartup() const;
     [[nodiscard]] unsigned int getYears() const;

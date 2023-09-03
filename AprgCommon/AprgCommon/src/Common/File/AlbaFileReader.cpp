@@ -41,7 +41,7 @@ char* AlbaFileReader::getCharacters(size_t& numberOfCharacters) {
     return getCharacterBufferPointer();
 }
 
-void AlbaFileReader::saveDataToMemoryBuffer(AlbaMemoryBuffer& buffer, size_t numberOfBytesToRead) {
+void AlbaFileReader::saveDataToMemoryBuffer(AlbaMemoryBuffer& buffer, size_t const numberOfBytesToRead) {
     char* writer =
         static_cast<char*>(buffer.resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(numberOfBytesToRead));
     m_stream.read(writer, static_cast<streamsize>(numberOfBytesToRead));

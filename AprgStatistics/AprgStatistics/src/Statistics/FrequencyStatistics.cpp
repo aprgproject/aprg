@@ -9,7 +9,7 @@ using namespace std;
 namespace alba {
 
 int FrequencyStatistics::calculateNumberOfSamples(FrequencySamples const& samples) {
-    return accumulate(samples.cbegin(), samples.cend(), 0, [](int partialResult, FrequencyPair const& frequencyPair) {
+    return accumulate(samples.cbegin(), samples.cend(), 0, [](int const partialResult, FrequencyPair const& frequencyPair) {
         return partialResult + (static_cast<int>(frequencyPair.second));
     });
 }
@@ -17,7 +17,7 @@ int FrequencyStatistics::calculateNumberOfSamples(FrequencySamples const& sample
 double FrequencyStatistics::calculateSum(FrequencySamples const& samples) {
     return accumulate(
         samples.cbegin(), samples.cend(), static_cast<double>(0),
-        [](double partialResult, FrequencyPair const& frequencyPair) {
+        [](double const partialResult, FrequencyPair const& frequencyPair) {
             return partialResult + (frequencyPair.first * frequencyPair.second);
         });
 }

@@ -198,7 +198,7 @@ public:
         }
     }
 
-    void retrieveXAndYFromIndex(size_t& xPosition, size_t& yPosition, size_t index) const {
+    void retrieveXAndYFromIndex(size_t& xPosition, size_t& yPosition, size_t const index) const {
         xPosition = index % m_numberOfColumns;
         yPosition = index / m_numberOfColumns;
     }

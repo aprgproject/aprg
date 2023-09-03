@@ -194,7 +194,7 @@ private:
 
     static void updateAttackDefendCount(
         Board::AttackDefendCount& count, PieceColor const pieceColor, PieceColor const sameColor,
-        PieceColor oppositeColor);
+        PieceColor const oppositeColor);
     void changePieceGridWithMove(Move const& move);
 
     BoardOrientation m_orientation;

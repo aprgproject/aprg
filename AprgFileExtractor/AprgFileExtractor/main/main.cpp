@@ -15,7 +15,7 @@ int numberOfFilesAnalyzedForExtraction;
 
 }  // namespace alba
 
-int main(int argc, char *argv[]) {
+int main(int const argc, char *argv[]) {
     if (argc != 3) {
         cout << "There are must be only 2 arguments.\n";
         return 1;

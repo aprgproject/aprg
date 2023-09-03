@@ -121,7 +121,7 @@ AlbaNumber getLimitAtAValueInTheNegativeSide(
 
 AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
     Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
-    AlbaNumber const& initialValueForIteration, int maxNumberOfIterations) {
+    AlbaNumber const& initialValueForIteration, int const maxNumberOfIterations) {
     AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
     AlbaNumber::ScopeConfigurationObject::setInThisScopeTheTolerancesToZero();
 

@@ -14,8 +14,8 @@ struct AlbaLargeSorterConfiguration {
           m_maximumNumberOfObjectsInMemory(2000),
           m_maximumFileStreams(100) {}
     AlbaLargeSorterConfiguration(
-        std::string const& directoryForBlocks, int minimumNumberOfObjectsPerBlock, int maximumNumberOfObjectsPerBlock,
-        int maximumNumberOfObjectsInMemory, int maximumFileStreams)
+        std::string const& directoryForBlocks, int const minimumNumberOfObjectsPerBlock, int const maximumNumberOfObjectsPerBlock,
+        int const maximumNumberOfObjectsInMemory, int const maximumFileStreams)
         : m_directoryForBlocks(getFixedPath(directoryForBlocks)),
           m_minimumNumberOfObjectsPerBlock(minimumNumberOfObjectsPerBlock),
           m_maximumNumberOfObjectsPerBlock(maximumNumberOfObjectsPerBlock),

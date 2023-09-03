@@ -212,23 +212,23 @@ bool AlbaWindowsPathHandler::renameImmediateDirectory(string_view newDirectoryNa
 }
 
 void AlbaWindowsPathHandler::findFilesAndDirectoriesOneDepth(
-    string_view wildCardSearch, set<string>& listOfFiles, set<string>& listOfDirectories) const {
+    string_view const wildCardSearch, set<string>& listOfFiles, set<string>& listOfDirectories) const {
     findFilesAndDirectoriesWithDepth(m_directory, wildCardSearch, listOfFiles, listOfDirectories, 1);
 }
 
 void AlbaWindowsPathHandler::findFilesAndDirectoriesMultipleDepth(
-    string_view wildCardSearch, set<string>& listOfFiles, set<string>& listOfDirectories, int depth) const {
+    string_view const wildCardSearch, set<string>& listOfFiles, set<string>& listOfDirectories, int const depth) const {
     findFilesAndDirectoriesWithDepth(m_directory, wildCardSearch, listOfFiles, listOfDirectories, depth);
 }
 
 void AlbaWindowsPathHandler::findFilesAndDirectoriesUnlimitedDepth(
-    string_view wildCardSearch, set<string>& listOfFiles, set<string>& listOfDirectories) const {
+    string_view const wildCardSearch, set<string>& listOfFiles, set<string>& listOfDirectories) const {
     findFilesAndDirectoriesWithDepth(m_directory, wildCardSearch, listOfFiles, listOfDirectories, -1);
 }
 
 void AlbaWindowsPathHandler::findFilesAndDirectoriesWithDepth(
-    string_view currentDirectory, string_view wildCardSearch, set<string>& listOfFiles, set<string>& listOfDirectories,
-    int depth) const {
+    string_view const currentDirectory, string_view const wildCardSearch, set<string>& listOfFiles, set<string>& listOfDirectories,
+    int const depth) const {
     HANDLE hFind{};
     WIN32_FIND_DATAW data;
 
@@ -298,7 +298,7 @@ bool AlbaWindowsPathHandler::canBeLocated(string_view fullPath) const {
     return INVALID_FILE_ATTRIBUTES != attributes;
 }
 
-bool AlbaWindowsPathHandler::isSlashNeededAtTheEnd(string_view correctedPath, string_view originalPath) const {
+bool AlbaWindowsPathHandler::isSlashNeededAtTheEnd(string_view const correctedPath, string_view const originalPath) const {
     bool result(false);
     if (!correctedPath.empty()) {
         bool isCorrectPathLastCharacterNotASlash(

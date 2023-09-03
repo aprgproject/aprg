@@ -32,7 +32,7 @@ int InputConfiguration::getQuestionIndexInColumn(int const columnNumber, int con
         } else {
             questionIndex = accumulate(
                 m_formDetails.columnToNumberOfQuestionsMap.cbegin(), columnMapIterator, 0,
-                [](int partialResult, FormDetails::ColumnToNumberOfQuestionsPair const& columnQuestionPair) {
+                [](int const partialResult, FormDetails::ColumnToNumberOfQuestionsPair const& columnQuestionPair) {
                     return partialResult += columnQuestionPair.second;
                 });
             questionIndex += questionOffsetInColumn;

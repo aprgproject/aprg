@@ -14,7 +14,7 @@ namespace alba {
 //    out << "string view" << quoted(string(parameter));
 // }
 
-void printLogHeader(ostream& out, string_view fileName, int lineNumber, string_view functionName) {
+void printLogHeader(ostream& out, string_view const fileName, int const lineNumber, string_view const functionName) {
     constexpr int MAX_FILENAME_PREFIX_LENGTH = 0;
     constexpr int MAX_FILENAME_SUFFIX_LENGTH = 30;
     constexpr int MAX_FUNCTION_NAME_PREFIX_LENGTH = 10;
@@ -35,7 +35,7 @@ void printCurrentDateTime(ostream& out) {
 }
 
 void printStringAndShortenIfPossible(
-    ostream& out, string_view longStr, size_t const prefixLength, size_t const suffixLength) {
+    ostream& out, string_view const longStr, size_t const prefixLength, size_t const suffixLength) {
     size_t const length = longStr.length();
     if (prefixLength + suffixLength + 3 < length) {
         out << longStr.substr(0, prefixLength) << "..." << longStr.substr(length - suffixLength, suffixLength);

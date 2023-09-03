@@ -41,7 +41,7 @@ public:
         return AlbaBitValueUtilities<Minterm>::getNumberOfOnes(value);
     }
 
-    [[nodiscard]] Implicants getImplicants(int numberOfOnes, int commonalityCount) const {
+    [[nodiscard]] Implicants getImplicants(int const numberOfOnes, int const commonalityCount) const {
         Implicants result;
         auto numberOfOnesIt = m_computationalTable.find(numberOfOnes);
         if (numberOfOnesIt != m_computationalTable.end()) {
@@ -80,7 +80,7 @@ public:
         return result;
     }
 
-    [[nodiscard]] bool doImplicantsExistAt(int numberOfOnes, int commonalityCount) const {
+    [[nodiscard]] bool doImplicantsExistAt(int const numberOfOnes, int const commonalityCount) const {
         bool result(false);
         auto numberOfOnesIt = m_computationalTable.find(numberOfOnes);
         if (numberOfOnesIt != m_computationalTable.end()) {
@@ -118,7 +118,7 @@ public:
         }
     }
 
-    void findCombinationOfImplicants(int numberOfOnes, int commonalityCount) {
+    void findCombinationOfImplicants(int const numberOfOnes, int const commonalityCount) {
         if (numberOfOnes + 1 < static_cast<int>(m_computationalTable.size())) {
             Implicants const& implicants1(m_computationalTable[numberOfOnes][commonalityCount]);
             Implicants const& implicants2(m_computationalTable[numberOfOnes + 1][commonalityCount]);

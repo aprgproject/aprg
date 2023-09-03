@@ -37,7 +37,7 @@ public:
     void findFilesAndDirectoriesOneDepth(
         std::string_view wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
     void findFilesAndDirectoriesMultipleDepth(
-        std::string_view wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories, int depth) const;
+        std::string_view wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories, int const depth) const;
     void findFilesAndDirectoriesUnlimitedDepth(
         std::string_view wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
 
@@ -47,10 +47,10 @@ private:
     void setPath(std::string_view path);
     void findFilesAndDirectoriesWithDepth(
         std::string_view currentDirectory, std::string_view wildCardSearch, ListOfPaths& listOfFiles,
-        ListOfPaths& listOfDirectories, int depth) const;
+        ListOfPaths& listOfDirectories, int const depth) const;
     void loopAllFilesAndDirectoriesInDirectoryStream(
         DIR* directoryStream, std::string_view currentDirectory, std::string_view wildCardSearch,
-        std::set<std::string>& listOfFiles, std::set<std::string>& listOfDirectories, int depth) const;
+        std::set<std::string>& listOfFiles, std::set<std::string>& listOfDirectories, int const depth) const;
     [[nodiscard]] bool isPathADirectory(std::string_view fileOrDirectoryName) const;
     static bool canBeLocated(std::string_view fullPath);
     [[nodiscard]] bool isSlashNeededAtTheEnd(std::string_view correctedPath, std::string_view originalPath) const;

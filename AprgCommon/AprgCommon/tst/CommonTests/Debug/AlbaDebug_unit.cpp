@@ -25,7 +25,7 @@ TEST(AlbaDebugTest, DebugPrintingWorks) {
     s_debugStringStream.str(string());
     s_debugStringStream.clear();
     performASimplePrintingTest(
-        s_debugStringStream, [](stringstream&, int singleParameter1, int singleParameter2, int singleParameter3) {
+        s_debugStringStream, [](stringstream&, int const singleParameter1, int const singleParameter2, int const singleParameter3) {
             // NOLINTNEXTLINE(bugprone-lambda-function-name)
             ALBA_DBG_PRINT3(singleParameter1, singleParameter2, singleParameter3);
         });
@@ -56,7 +56,7 @@ TEST(AlbaDebugTest, ManipulateOutputStreamsWorks) {
 namespace {
 class SampleClass {
 public:
-    SampleClass(int parameter1, int parameter2) : m_parameter1(parameter1), m_parameter2(parameter2) {}
+    SampleClass(int const parameter1, int const parameter2) : m_parameter1(parameter1), m_parameter2(parameter2) {}
 
     [[nodiscard]] int getSum() const { return m_parameter1 + m_parameter2; }
 
@@ -95,7 +95,7 @@ TEST(AlbaDebugTest, PrintingWithoutSpecifyNumberOfParametersWorks) {
     s_debugStringStream.str(string());
     s_debugStringStream.clear();
     performASimplePrintingTest(
-        s_debugStringStream, [](stringstream&, int singleParameter1, int singleParameter2, int singleParameter3) {
+        s_debugStringStream, [](stringstream&, int const singleParameter1, int const singleParameter2, int const singleParameter3) {
             // NOLINTNEXTLINE(bugprone-lambda-function-name)
             ALBA_DBG_PRINT(singleParameter1, singleParameter2, singleParameter3);
         });

@@ -105,7 +105,7 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::initializeW
 }
 
 void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::saveTerm(
-    Term const& term, int numberOfTimesFound, string const& variableName) {
+    Term const& term, int const numberOfTimesFound, string const& variableName) {
     if (numberOfTimesFound == 0) {
         m_remainingTerm += term;
     } else if (numberOfTimesFound == 1) {

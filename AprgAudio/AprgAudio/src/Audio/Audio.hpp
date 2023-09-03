@@ -51,7 +51,7 @@ public:
 
     // Sets the audio buffer to a given number of channels and number of samples per channel. This will try to preserve
     // the existing audio, adding zeros to any new channels or new samples in a given channel.
-    void setAudioBufferSize(int numberOfChannels, int numberOfSamples);
+    void setAudioBufferSize(int const numberOfChannels, int const numberOfSamples);
 
     // Sets the number of samples per channel in the audio buffer. This will try to preserve
     // the existing audio, adding zeros to new samples in a given channel if the number of samples is increased.
@@ -84,9 +84,9 @@ private:
     void clearAudioBuffer();
 
     int32_t fourBytesToInt(
-        std::vector<uint8_t> const& source, int startIndex, Endianness endianness = Endianness::LittleEndian);
+        std::vector<uint8_t> const& source, int const startIndex, Endianness endianness = Endianness::LittleEndian);
     int16_t twoBytesToInt(
-        std::vector<uint8_t> const& source, int startIndex, Endianness endianness = Endianness::LittleEndian);
+        std::vector<uint8_t> const& source, int const startIndex, Endianness endianness = Endianness::LittleEndian);
     int getIndexOfString(std::vector<uint8_t> const& source, std::string const& s);
 
     DataType sixteenBitIntToSample(int16_t sample);
@@ -95,16 +95,16 @@ private:
     uint8_t sampleToSingleByte(DataType sample);
     DataType singleByteToSample(uint8_t sample);
 
-    int getAiffSampleRate(std::vector<uint8_t>& dataBuffer, int sampleRateStartIndex);
-    bool tenByteMatch(std::vector<uint8_t>& v1, int startIndex1, std::vector<uint8_t>& v2, int startIndex2);
-    void addSampleRateToAiffData(std::vector<uint8_t>& dataBuffer, int sampleRate);
-    DataType clamp(DataType value, DataType minValue, DataType maxValue);
+    int getAiffSampleRate(std::vector<uint8_t>& dataBuffer, int const sampleRateStartIndex);
+    bool tenByteMatch(std::vector<uint8_t>& v1, int const startIndex1, std::vector<uint8_t>& v2, int const startIndex2);
+    void addSampleRateToAiffData(std::vector<uint8_t>& dataBuffer, int const sampleRate);
+    DataType clamp(DataType const value, DataType const minValue, DataType const maxValue);
 
     void addStringToFileData(std::vector<uint8_t>& dataBuffer, std::string const& stringToCopy);
     void addInt32ToFileData(
-        std::vector<uint8_t>& dataBuffer, int32_t integerToCopy, Endianness endianness = Endianness::LittleEndian);
+        std::vector<uint8_t>& dataBuffer, int32_t const integerToCopy, Endianness endianness = Endianness::LittleEndian);
     void addInt16ToFileData(
-        std::vector<uint8_t>& dataBuffer, int16_t integerToCopy, Endianness endianness = Endianness::LittleEndian);
+        std::vector<uint8_t>& dataBuffer, int16_t const integerToCopy, Endianness endianness = Endianness::LittleEndian);
 
     bool writeDataToFile(std::vector<uint8_t>& dataBuffer, std::string const& filePath);
 

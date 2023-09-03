@@ -12,7 +12,7 @@ namespace alba {
 AlbaPathHandler::AlbaPathHandler(string_view slashCharacterString)
     : m_pathType(PathType::Empty), m_slashCharacterString(slashCharacterString) {}
 
-AlbaPathHandler::AlbaPathHandler(string_view path, string_view slashCharacterString)
+AlbaPathHandler::AlbaPathHandler(string_view const path, string_view const slashCharacterString)
     : m_pathType(PathType::Empty), m_slashCharacterString(slashCharacterString) {
     setPath(path);
 }

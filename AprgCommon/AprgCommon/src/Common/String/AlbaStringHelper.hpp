@@ -140,7 +140,7 @@ std::string getStringInBetweenTwoStrings(
 std::string getStringBeforeThisCharacters(
     std::string_view mainText, std::string_view characters, size_t const indexToStart = 0);
 std::string getStringAndReplaceNonAlphanumericCharactersToUnderScore(std::string_view path);
-std::string getStringByRepeatingUntilDesiredLength(std::string_view stringToRepeat, size_t desiredLength);
+std::string getStringByRepeatingUntilDesiredLength(std::string_view stringToRepeat, size_t const desiredLength);
 std::string getNumberAfterThisString(std::string_view mainText, std::string_view stringToSearch);
 std::string getHexNumberAfterThisString(std::string_view mainText, std::string_view stringToSearch);
 std::string getHexEquivalentOfCharacters(std::string_view stringToCheck);

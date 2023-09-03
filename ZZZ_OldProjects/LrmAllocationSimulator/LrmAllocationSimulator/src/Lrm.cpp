@@ -1047,7 +1047,7 @@ void Lrm::copyDspAddressesThatSatisfiesThisCondition(
 }
 
 void Lrm::copyDspAddressesInFspThatSatisfiesThisCondition(
-    DspAddresses& dspAddressesForLcgInFsp, unsigned int fspAddress, DspBooleanCondition const& condition) const {
+    DspAddresses& dspAddressesForLcgInFsp, unsigned int const fspAddress, DspBooleanCondition const& condition) const {
     Fsp const& fsp(m_addressToFspMap.at(fspAddress));
     DspAddresses const& dspAddresses(fsp.getDspAddresses());
     copy_if(

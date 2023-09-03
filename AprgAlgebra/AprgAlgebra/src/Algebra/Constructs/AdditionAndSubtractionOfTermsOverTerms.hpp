@@ -13,7 +13,7 @@ public:
     [[nodiscard]] Expression getCombinedExpression() const;
     [[nodiscard]] Terms getLcmOfDenominatorTerms() const;
     [[nodiscard]] Terms getRevisedNumeratorTermsBasedOnLcmOnIndex(
-        int itemIndex, Terms const& lcmOfDenominatorTerms) const;
+        int const itemIndex, Terms const& lcmOfDenominatorTerms) const;
 
     void putAsAddition(TermsOverTerms const& addend);
     void putAsSubtraction(TermsOverTerms const& subtrahend);
@@ -24,14 +24,14 @@ private:
         Term const& termToCheck, Terms& commonFactors, Terms& outputFactors);
     static Monomial getCombinedMonomialMultiplier(Terms const& monomialMultiplierTerms);
     void updateMonomialAndNonMonomialMultipliersBasedOnDenominatorOnIndex(
-        int itemIndex, Monomial& monomialMultiplier, Terms& nonMonomialMultiplierTerms) const;
-    void emplaceExistingNumeratorTerms(Terms& numeratorTerms, int itemIndex) const;
+        int const itemIndex, Monomial& monomialMultiplier, Terms& nonMonomialMultiplierTerms) const;
+    void emplaceExistingNumeratorTerms(Terms& numeratorTerms, int const itemIndex) const;
     static void emplaceMonomialMultiplierIfNeeded(Terms& numeratorTerms, Monomial const& monomialMultiplier);
     static void emplaceNonMonomialMultipliers(Terms& numeratorTerms, Terms const& nonMonomialMultiplierTerms);
     [[nodiscard]] Expression getCombinedNumeratorExpression(Terms const& lcmDenominatorTerms) const;
     static Expression getCombinedDenominatorExpression(Terms const& lcmDenominatorTerms);
     [[nodiscard]] Expression getCombinedExpressionForNumeratorOnIndex(
-        int numeratorIndex, Terms const& lcmDenominatorTerms) const;
+        int const numeratorIndex, Terms const& lcmDenominatorTerms) const;
     static void combineExpressionAsAddOrSubtract(
         Expression& combinedExpression, Expression const& expression, TermAssociationType const association);
     static TermsOverTerms getSimplifiedTermsOverTerms(TermsOverTerms const& termsOverTerms);

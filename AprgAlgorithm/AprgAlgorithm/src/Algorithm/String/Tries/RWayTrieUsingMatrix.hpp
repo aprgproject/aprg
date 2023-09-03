@@ -337,7 +337,7 @@ private:
         return isDeleted;
     }
 
-    void addToUnusedNodesIfNeeded(NodeId const nodeId, bool isEmptyNode) {
+    void addToUnusedNodesIfNeeded(NodeId const nodeId, bool const isEmptyNode) {
         if (isEmptyNode) {
             m_unusedNodeIds.emplace(nodeId);
         }

@@ -71,7 +71,7 @@ void AlbaWebPathHandler::setPath(string_view path) {
 }
 
 void AlbaWebPathHandler::splitPathToBeforeAndAfterProtocol(
-    string_view path, string& protocolWithSymbols, string& pathAfterProtocol) {
+    string_view const path, string& protocolWithSymbols, string& pathAfterProtocol) {
     int indexBeforeProtocol = static_cast<int>(path.find("://"));
     int indexBeforeSlash = static_cast<int>(path.find_first_of(m_slashCharacterString));
     if (isNotNpos(indexBeforeProtocol) && isNotNpos(indexBeforeSlash) && indexBeforeProtocol < indexBeforeSlash) {

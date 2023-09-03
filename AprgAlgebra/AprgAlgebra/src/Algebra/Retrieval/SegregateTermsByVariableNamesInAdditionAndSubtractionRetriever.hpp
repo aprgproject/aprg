@@ -26,7 +26,7 @@ public:
 
 private:
     void initializeWithVariableNames(stringHelper::strings const& namesInOrder);
-    void saveTerm(Term const& term, int numberOfTimesFound, std::string const& variableName);
+    void saveTerm(Term const& term, int const numberOfTimesFound, std::string const& variableName);
     VariableNameToTermMap m_variableNameToTermMap;
     Term m_termWithMultipleVariableNames;
     Term m_remainingTerm;

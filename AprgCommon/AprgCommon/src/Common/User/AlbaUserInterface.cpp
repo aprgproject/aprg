@@ -30,7 +30,7 @@ string AlbaUserInterface::getFilePathInput() {
 
 template <typename NumberType>
 NumberType AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(
-    string_view question, Choices<NumberType> const& choices) {
+    string_view const question, Choices<NumberType> const& choices) {
     cout << question << "\n";
 
     StringConverterWithFormatting converter(5, ' ');
@@ -53,10 +53,10 @@ NumberType AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(
     return convertStringToNumber<NumberType>(getUserInput());
 }
 template int AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(
-    string_view question, Choices<int> const& choices);
+    string_view const question, Choices<int> const& choices);
 
 string AlbaUserInterface::displayQuestionAndChoicesAndGetStringAnswerInAllCapitals(
-    string_view question, Choices<string> const& choices) {
+    string_view const question, Choices<string> const& choices) {
     cout << question << "\n";
 
     DisplayTable table;

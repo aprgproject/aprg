@@ -22,7 +22,7 @@ BitmapSnippet Bitmap::getSnippetReadFromFileWholeBitmap() const {
 }
 
 BitmapSnippet Bitmap::getSnippetReadFromFileWithOutOfRangeCoordinates(
-    int outOfRangeLeft, int outOfRangeTop, int outOfRangeRight, int outOfRangeBottom) const {
+    int const outOfRangeLeft, int const outOfRangeTop, int const outOfRangeRight, int const outOfRangeBottom) const {
     if (outOfRangeLeft > outOfRangeRight) {
         swap(outOfRangeLeft, outOfRangeRight);
     }

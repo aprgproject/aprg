@@ -30,7 +30,7 @@ public:
 
     [[nodiscard]] Points getPoints(double const interval) const;
     void getPointsFromVerticesWithoutLastPoint(
-        Points& points, double const interval, int vertexIndex1, int vertexIndex2) const;
+        Points& points, double const interval, int const vertexIndex1, int const vertexIndex2) const;
 
 protected:
     std::array<Point, numberOfVertices> m_vertices;

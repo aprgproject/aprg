@@ -27,7 +27,7 @@ void searchForBestSampleIndexes(
 
 void searchAndTryToReplicateSamples(
     AudioInDouble& audioToChange, AudioInDouble const& audioToReplicate, AudioInDouble const& audioToSearch,
-    int channelIndexInAudioToChange, int channelIndexInAudioToReplicate, int channelIndexInAudioToSearch,
+    int const channelIndexInAudioToChange, int const channelIndexInAudioToReplicate, int const channelIndexInAudioToSearch,
     bool const alwaysPutNewValue);
 
 void searchAndTryToReplicate(
