@@ -2,8 +2,12 @@
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusTokenizer.hpp>
 #include <CodeUtilities/Common/FindPatterns.hpp>
+#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
+#include <Common/Print/AlbaLogPrints.hpp>
+
+#include <iostream>
 
 using namespace std;
 
@@ -27,6 +31,7 @@ void processDirectory(string const& path) {
 }
 
 void processFile(string const& path) {
+    ALBA_INF_PRINT1(cout, path);
     Terms terms(getTermsFromFile(path));
     fixTerms(terms);
     writeAllTerms(path, terms);
@@ -40,6 +45,7 @@ Terms getTermsFromFile(string const& path) {
     AlbaFileReader fileReader(inputStream);
     while (fileReader.isNotFinished()) {
         tokenizer.processCode(fileReader.getLine());
+        tokenizer.processCode("\n");
     }
     tokenizer.processLeftoverCode();
     return result;
@@ -47,30 +53,68 @@ Terms getTermsFromFile(string const& path) {
 
 void writeAllTerms(string const& path, Terms const& terms) {
     AlbaLocalPathHandler filePathHandler(path);
-    ofstream outputStream(filePathHandler.getFullPath());
+    ofstream outputStream(filePathHandler.getFullPath(), ios::binary);
     for (Term const& term : terms) {
         outputStream << term.getContent();
     }
 }
 
-void fixTerms(Terms& terms) { fixPostFixIncrements(terms); }
+void fixTerms(Terms& terms) {
+    fixPostFixIncrementDecrement(terms, "++");
+    fixPostFixIncrementDecrement(terms, "--");
+    fixConstReferenceOrder(terms);
+}
 
-void fixPostFixIncrements(Terms& terms) {
+void fixPostFixIncrementDecrement(Terms& terms, string const& crementOperator) {
     findTermsAndSwapAt(
-        terms, TermMatchers{TermMatcher(";"), TermMatcher(TermType::Identifier), TermMatcher("++"), TermMatcher(";")},
+        terms,
+        TermMatchers{
+            TermMatcher("{"), TermMatcher(TermType::Identifier), TermMatcher(crementOperator), TermMatcher(";")},
         1, 2);
     findTermsAndSwapAt(
-        terms, TermMatchers{TermMatcher(";"), TermMatcher(TermType::Identifier), TermMatcher("++"), TermMatcher(")")},
+        terms,
+        TermMatchers{
+            TermMatcher(";"), TermMatcher(TermType::Identifier), TermMatcher(crementOperator), TermMatcher(";")},
         1, 2);
     findTermsAndSwapAt(
-        terms, TermMatchers{TermMatcher(";"), TermMatcher(TermType::Identifier), TermMatcher("++"), TermMatcher(",")},
+        terms,
+        TermMatchers{
+            TermMatcher(";"), TermMatcher(TermType::Identifier), TermMatcher(crementOperator), TermMatcher(")")},
         1, 2);
     findTermsAndSwapAt(
-        terms, TermMatchers{TermMatcher(","), TermMatcher(TermType::Identifier), TermMatcher("++"), TermMatcher(",")},
+        terms,
+        TermMatchers{
+            TermMatcher(";"), TermMatcher(TermType::Identifier), TermMatcher(crementOperator), TermMatcher(",")},
         1, 2);
     findTermsAndSwapAt(
-        terms, TermMatchers{TermMatcher(","), TermMatcher(TermType::Identifier), TermMatcher("++"), TermMatcher(")")},
+        terms,
+        TermMatchers{
+            TermMatcher(","), TermMatcher(TermType::Identifier), TermMatcher(crementOperator), TermMatcher(",")},
         1, 2);
+    findTermsAndSwapAt(
+        terms,
+        TermMatchers{
+            TermMatcher(","), TermMatcher(TermType::Identifier), TermMatcher(crementOperator), TermMatcher(")")},
+        1, 2);
+}
+
+void fixConstReferenceOrder(Terms& terms) {
+    findTermsAndSwapAt(
+        terms,
+        TermMatchers{TermMatcher("{"), TermMatcher("const"), TermMatcher(TermType::Identifier), TermMatcher("&")}, 1,
+        2);
+    findTermsAndSwapAt(
+        terms,
+        TermMatchers{TermMatcher(";"), TermMatcher("const"), TermMatcher(TermType::Identifier), TermMatcher("&")}, 1,
+        2);
+    findTermsAndSwapAt(
+        terms,
+        TermMatchers{TermMatcher("("), TermMatcher("const"), TermMatcher(TermType::Identifier), TermMatcher("&")}, 1,
+        2);
+    findTermsAndSwapAt(
+        terms,
+        TermMatchers{TermMatcher(","), TermMatcher("const"), TermMatcher(TermType::Identifier), TermMatcher("&")}, 1,
+        2);
 }
 
 void findTermsAndSwapAt(Terms& terms, TermMatchers const& matchers, int const index1, int const index2) {
@@ -80,8 +124,11 @@ void findTermsAndSwapAt(Terms& terms, TermMatchers const& matchers, int const in
         PatternIndexes patternIndexes = findFirstPatternIgnoringSpacesAndComments(terms, matchers, termIndex);
         isFound = !patternIndexes.empty();
         if (isFound) {
+            ALBA_DBG_PRINT(patternIndexes);
+            ALBA_DBG_PRINT(
+                terms[patternIndexes[0]], terms[patternIndexes[1]], terms[patternIndexes[2]], terms[patternIndexes[3]]);
             termIndex = patternIndexes.back();
-            std::swap(patternIndexes[index1], patternIndexes[index2]);
+            std::swap(terms[patternIndexes[index1]], terms[patternIndexes[index2]]);
         }
     }
 }

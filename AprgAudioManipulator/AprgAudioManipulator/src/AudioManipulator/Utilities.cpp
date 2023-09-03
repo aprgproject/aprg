@@ -158,12 +158,13 @@ void searchAndTryToReplicate(
     AudioInDouble& audioToChange(audioToChangeManipulator.getAudioReference());
 
     int numberOfChannels =
-        max(max(audioToReplicate.getNumChannels(), audioToSearch.getNumChannels()), audioToChange.getNumChannels());
+        max(max(audioToReplicate.getNumberOfChannels(), audioToSearch.getNumberOfChannels()),
+            audioToChange.getNumberOfChannels());
     for (int i = 0; i < numberOfChannels; i++) {
         searchAndTryToReplicateSamples(
-            audioToChange, audioToReplicate, audioToSearch, clampHigherBound(i, audioToChange.getNumChannels()),
-            clampHigherBound(i, audioToReplicate.getNumChannels()), clampHigherBound(i, audioToSearch.getNumChannels()),
-            alwaysPutNewValue);
+            audioToChange, audioToReplicate, audioToSearch, clampHigherBound(i, audioToChange.getNumberOfChannels()),
+            clampHigherBound(i, audioToReplicate.getNumberOfChannels()),
+            clampHigherBound(i, audioToSearch.getNumberOfChannels()), alwaysPutNewValue);
     }
     audioToChangeManipulator.saveAudioIntoCurrentFile();
 }

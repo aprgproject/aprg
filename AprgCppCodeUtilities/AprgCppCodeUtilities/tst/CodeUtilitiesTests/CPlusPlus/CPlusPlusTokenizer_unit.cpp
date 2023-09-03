@@ -309,9 +309,10 @@ TEST(CPlusPlusTokenizerTest, CheckString) {
     tokenizer.processCode("aBcdwXyZ \"This is @ simple string\" deFsTUv\n");
     tokenizer.processCode("aBcdwXyZ \"This is @ string with \\\"quotation\\\"\" deFsTUv\n");
     tokenizer.processCode("\'Q\' \'\"\' \'\\\'\' \'This is @character\'\n");
+    tokenizer.processCode("R\"(Space   \\\" \' Space)\"\n");
     tokenizer.processLeftoverCode();
 
-    // ASSERT_EQ(terms.size(), 20U);
+    ASSERT_EQ(terms.size(), 22U);
     auto termIterator = terms.begin();
     EXPECT_EQ(*termIterator++, Term(TermType::Identifier, "aBcdwXyZ"));
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, " "));
@@ -333,6 +334,8 @@ TEST(CPlusPlusTokenizerTest, CheckString) {
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, " "));
     EXPECT_EQ(*termIterator++, Term(TermType::CharacterLiteral, "\'This is @character\'"));
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
+    EXPECT_EQ(*termIterator++, Term(TermType::StringLiteral, "R\"(Space   \\\" \' Space)\""));
+    EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
 }
 
 TEST(CPlusPlusTokenizerTest, CheckStringWithSlashes) {
@@ -342,9 +345,10 @@ TEST(CPlusPlusTokenizerTest, CheckStringWithSlashes) {
     tokenizer.processCode("aBcdwXyZ1 \"\\\\\" deFsTUv2\n");
     tokenizer.processCode("aBcdwXyZ3 \"\\\\\\\\\" deFsTUv4\n");
     tokenizer.processCode("aBcdwXyZ5 \"\\\\\\\"\\\"\\\\\" deFsTUv6\n");
+    tokenizer.processCode("aBcdwXyZ5 R\"(\\\\\\\"\\\"\\\\)\" deFsTUv6\n");
     tokenizer.processLeftoverCode();
 
-    ASSERT_EQ(terms.size(), 18U);
+    ASSERT_EQ(terms.size(), 24U);
     auto termIterator = terms.begin();
     EXPECT_EQ(*termIterator++, Term(TermType::Identifier, "aBcdwXyZ1"));
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, " "));
@@ -361,6 +365,12 @@ TEST(CPlusPlusTokenizerTest, CheckStringWithSlashes) {
     EXPECT_EQ(*termIterator++, Term(TermType::Identifier, "aBcdwXyZ5"));
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, " "));
     EXPECT_EQ(*termIterator++, Term(TermType::StringLiteral, "\"\\\\\\\"\\\"\\\\\""));
+    EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, " "));
+    EXPECT_EQ(*termIterator++, Term(TermType::Identifier, "deFsTUv6"));
+    EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
+    EXPECT_EQ(*termIterator++, Term(TermType::Identifier, "aBcdwXyZ5"));
+    EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, " "));
+    EXPECT_EQ(*termIterator++, Term(TermType::StringLiteral, "R\"(\\\\\\\"\\\"\\\\)\""));
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, " "));
     EXPECT_EQ(*termIterator++, Term(TermType::Identifier, "deFsTUv6"));
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));

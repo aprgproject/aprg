@@ -22,7 +22,7 @@ namespace alba {
 
 TEST(SampleTest, PrimerTest) {
     int i = 0;
-    ALBA_INF_PRINT(cout, i);
+    ALBA_INF_PRINT1(cout, i);
 }
 
 /*TEST(SampleTest, PrimerTest) {

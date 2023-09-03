@@ -9,7 +9,15 @@ namespace alba::CodeUtilities {
 
 class CPlusPlusTokenizer {
 public:
-    enum class ScopeType { NoScope, SingleLineComment, MultiLineComment, StringLiteral, CharLiteral, WhiteSpace };
+    enum class ScopeType {
+        NoScope,
+        SingleLineComment,
+        MultiLineComment,
+        StringLiteral,
+        RawStringLiteral,
+        CharLiteral,
+        WhiteSpace
+    };
     explicit CPlusPlusTokenizer(Terms& terms);
 
     void processCode(std::string const& code);
@@ -22,6 +30,7 @@ private:
     bool hasProcessedASingleLineComment();
     bool hasProcessedAMultiLineComment();
     bool hasProcessedAStringLiteral();
+    bool hasProcessedARawStringLiteral();
     bool hasProcessedACharLiteral();
     bool hasProcessedAWhiteSpace();
     bool hasProcessedAMacro();
@@ -31,6 +40,7 @@ private:
     void processInSingleLineCommentScope();
     void processInMultiLineCommentScope();
     void processInStringLiteralScope();
+    void processInRawStringLiteralScope();
     void processInCharLiteralScope();
     void processInWhiteSpaceScope();
     void enterScope(ScopeType const scopeType);

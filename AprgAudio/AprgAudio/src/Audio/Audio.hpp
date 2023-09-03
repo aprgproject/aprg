@@ -53,9 +53,8 @@ public:
     // the existing audio, adding zeros to any new channels or new samples in a given channel.
     void setAudioBufferSize(int numberOfChannels, int numberOfSamples);
 
-    /** Sets the number of samples per channel in the audio buffer. This will try to preserve
-     * the existing audio, adding zeros to new samples in a given channel if the number of samples is increased.
-     */
+    // Sets the number of samples per channel in the audio buffer. This will try to preserve
+    // the existing audio, adding zeros to new samples in a given channel if the number of samples is increased.
     void setNumSamplesPerChannel(int numberOfSamples);
 
     // Sets the number of channels. New channels will have the correct number of samples and be initialised to zero

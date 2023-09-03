@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 namespace alba {
 
 using u32 = uint32_t;

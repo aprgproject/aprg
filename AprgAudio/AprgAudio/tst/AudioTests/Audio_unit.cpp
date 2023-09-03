@@ -338,7 +338,7 @@ bool writeTest(int numberOfChannels, int sampleRate, int bitDepth, AudioFormat f
         auto sample = static_cast<float>(sin(2.0 * getPi() * bufferIndex / sampleRateAsFloat * 440.0));
 
         for (int channelIndex = 0; channelIndex < static_cast<int>(audioFile.getNumberOfChannels()); channelIndex++) {
-            audioFile.samples[channelIndex][bufferIndex] = sample * 0.5;
+            audioFile.samples[channelIndex][bufferIndex] = static_cast<float>(sample * 0.5);
         }
     }
 

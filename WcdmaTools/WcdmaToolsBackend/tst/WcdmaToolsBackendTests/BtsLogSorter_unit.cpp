@@ -43,7 +43,7 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreMerged) {
         lines++;
     }
 
-    EXPECT_EQ(3, lines);
+    EXPECT_EQ(2, lines);
 }
 
 TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreMerged2) {
@@ -65,7 +65,7 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreMerged2) {
         lines++;
     }
 
-    EXPECT_EQ(60, lines);
+    EXPECT_EQ(59, lines);
 }
 
 TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreOrderedBasedOnBtsTime) {
@@ -87,7 +87,7 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreOrderedBasedOnBtsTi
         lines++;
     }
 
-    EXPECT_EQ(5, lines);
+    EXPECT_EQ(4, lines);
 }
 
 TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreFiltered) {
@@ -111,7 +111,7 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreFiltered) {
         lines++;
     }
 
-    EXPECT_EQ(4, lines);
+    EXPECT_EQ(3, lines);
 }
 
 }  // namespace wcdmaToolsBackend

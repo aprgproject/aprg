@@ -68,6 +68,9 @@ void CPlusPlusTokenizer::processLeftoverCode() {
         case ScopeType::StringLiteral:
             m_terms.emplace_back(createStringLiteral(m_scopeContent));
             break;
+        case ScopeType::RawStringLiteral:
+            m_terms.emplace_back(createStringLiteral(m_scopeContent));
+            break;
         case ScopeType::CharLiteral:
             m_terms.emplace_back(createCharacterLiteral(m_scopeContent));
             break;
@@ -98,6 +101,9 @@ void CPlusPlusTokenizer::processScope() {
         case ScopeType::StringLiteral:
             processInStringLiteralScope();
             break;
+        case ScopeType::RawStringLiteral:
+            processInRawStringLiteralScope();
+            break;
         case ScopeType::CharLiteral:
             processInCharLiteralScope();
             break;
@@ -111,11 +117,14 @@ void CPlusPlusTokenizer::processScope() {
 }
 
 void CPlusPlusTokenizer::processInCodeScope() {
+    // NOLINTBEGIN(bugprone-branch-clone)
     if (hasProcessedASingleLineComment()) {
         ;
     } else if (hasProcessedAMultiLineComment()) {
         ;
     } else if (hasProcessedAStringLiteral()) {
+        ;
+    } else if (hasProcessedARawStringLiteral()) {
         ;
     } else if (hasProcessedACharLiteral()) {
         ;
@@ -132,6 +141,7 @@ void CPlusPlusTokenizer::processInCodeScope() {
     } else {
         m_terms.emplace_back(createUnknown(m_code.substr(m_index++)));
     }
+    // NOLINTEND(bugprone-branch-clone)
 }
 
 bool CPlusPlusTokenizer::hasProcessedASingleLineComment() {
@@ -162,6 +172,17 @@ bool CPlusPlusTokenizer::hasProcessedAStringLiteral() {
         ++m_index;
         enterScope(ScopeType::StringLiteral);
         processInStringLiteralScope();
+        return true;
+    }
+    return false;
+}
+
+bool CPlusPlusTokenizer::hasProcessedARawStringLiteral() {
+    if (isNextString("R\"(")) {
+        m_scopeContent += "R\"(";
+        m_index += 3;
+        enterScope(ScopeType::RawStringLiteral);
+        processInRawStringLiteralScope();
         return true;
     }
     return false;
@@ -260,6 +281,15 @@ void CPlusPlusTokenizer::processInMultiLineCommentScope() {
 
 void CPlusPlusTokenizer::processInStringLiteralScope() {
     if (isTerminatedWhileCheckingALiteralWithEscape('\"')) {
+        m_terms.emplace_back(createStringLiteral(m_scopeContent));
+        exitScope();
+    }
+}
+
+void CPlusPlusTokenizer::processInRawStringLiteralScope() {
+    if (isTerminatedWhileCheckingTerminatingString(")\"")) {
+        m_scopeContent.append(")\"");
+        m_index += 2;
         m_terms.emplace_back(createStringLiteral(m_scopeContent));
         exitScope();
     }
