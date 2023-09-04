@@ -1,9 +1,7 @@
 #pragma once
 
-#include <vector>
-
 namespace alba::CodeUtilities {
 
-using Indexes = std::vector<int>;
+enum class TermSpecialMatcherType { NotAWhiteSpace };
 
 }  // namespace alba::CodeUtilities

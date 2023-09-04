@@ -7,7 +7,8 @@ using namespace std;
 namespace alba::CodeUtilities::CPlusPlusFixer {
 
 TEST(CPlusPlusFixerTest, DISABLED_ActualTest) {
-    processPath(R"(F:\Branches\aprg_project\aprg\aprg\AprgCommon\AprgCommon)");
+    processPath(
+        R"(F:\Branches\aprg_project\aprg_semi_clean\aprg\AprgAlgebra\AprgAlgebra\src\Algebra\Solution\Solver\MultipleLinearEquations\LinearEquationsEqualitySolver.cpp)");
     // processPath(
     //     R"(F:\Branches\aprg_project\aprg\aprg\AprgCommon\AprgCommon\src\Common\Container\AlbaContainerHelper.hpp)");
 }

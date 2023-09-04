@@ -26,9 +26,9 @@ TEST(TermUtilitiesTest, FindFirstPatternIgnoringSpacesAndCommentsWorksInTheMiddl
         Term(TermType::Identifier, "identifier1"), Term(TermType::Identifier, "identifier2"),
         Term(TermType::Identifier, "identifier3"), Term(TermType::Identifier, "identifier4"),
         Term(TermType::Identifier, "identifier5")};
-    TermMatchers matchers{TermMatcher("identifier2"), TermMatcher("identifier3"), TermMatcher("identifier4")};
+    Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
 
-    PatternIndexes patternIndexes = findFirstPatternIgnoringSpacesAndComments(terms, matchers);
+    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
     EXPECT_EQ(3U, patternIndexes.size());
     EXPECT_EQ(1, patternIndexes[0]);
     EXPECT_EQ(2, patternIndexes[1]);
@@ -41,9 +41,9 @@ TEST(TermUtilitiesTest, FindFirstPatternIgnoringSpacesAndCommentsWorksWhileIgnor
                 Term(TermType::Identifier, "identifier3"), Term(TermType::CommentMultiline, "/*Comment*/"),
                 Term(TermType::Identifier, "identifier4"), Term(TermType::CommentMultiline, "/*Comment*/"),
                 Term(TermType::Identifier, "identifier5"), Term(TermType::CommentMultiline, "/*Comment*/")};
-    TermMatchers matchers{TermMatcher("identifier2"), TermMatcher("identifier3"), TermMatcher("identifier4")};
+    Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
 
-    PatternIndexes patternIndexes = findFirstPatternIgnoringSpacesAndComments(terms, matchers);
+    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
     EXPECT_EQ(3U, patternIndexes.size());
     EXPECT_EQ(2, patternIndexes[0]);
     EXPECT_EQ(4, patternIndexes[1]);
@@ -56,9 +56,9 @@ TEST(TermUtilitiesTest, FindFirstPatternIgnoringSpacesAndCommentsWorksWhileSpace
                 Term(TermType::Identifier, "identifier3"), Term(TermType::WhiteSpace, "\t"),
                 Term(TermType::Identifier, "identifier4"), Term(TermType::WhiteSpace, "\t"),
                 Term(TermType::Identifier, "identifier5"), Term(TermType::WhiteSpace, "\t")};
-    TermMatchers matchers{TermMatcher("identifier2"), TermMatcher("identifier3"), TermMatcher("identifier4")};
+    Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
 
-    PatternIndexes patternIndexes = findFirstPatternIgnoringSpacesAndComments(terms, matchers);
+    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
     EXPECT_EQ(3U, patternIndexes.size());
     EXPECT_EQ(2, patternIndexes[0]);
     EXPECT_EQ(4, patternIndexes[1]);

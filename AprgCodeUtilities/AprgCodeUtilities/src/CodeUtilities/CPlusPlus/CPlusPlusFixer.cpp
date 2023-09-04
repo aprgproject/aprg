@@ -83,7 +83,7 @@ void fixTerms(Terms& terms) {
     // fixPostFixIncrementDecrement(terms);
     // fixConstReferenceOrder(terms);
     // fixCStyleStaticCast(terms);
-    // fixNoConstPassByValue(terms);
+    fixNoConstPassByValue(terms);
 }
 
 void fixPostFixIncrementDecrement(Terms& terms) {
@@ -92,104 +92,74 @@ void fixPostFixIncrementDecrement(Terms& terms) {
 }
 
 void fixPostFixIncrementDecrement(Terms& terms, string const& crementOperator) {
-    findTermsAndSwapAt(
-        terms,
-        TermMatchers{
-            TermMatcher("{"), TermMatcher(TermType::Identifier), TermMatcher(crementOperator), TermMatcher(";")},
-        1, 2);
-    findTermsAndSwapAt(
-        terms,
-        TermMatchers{
-            TermMatcher(";"), TermMatcher(TermType::Identifier), TermMatcher(crementOperator), TermMatcher(";")},
-        1, 2);
-    findTermsAndSwapAt(
-        terms,
-        TermMatchers{
-            TermMatcher(";"), TermMatcher(TermType::Identifier), TermMatcher(crementOperator), TermMatcher(")")},
-        1, 2);
-    findTermsAndSwapAt(
-        terms,
-        TermMatchers{
-            TermMatcher(";"), TermMatcher(TermType::Identifier), TermMatcher(crementOperator), TermMatcher(",")},
-        1, 2);
-    findTermsAndSwapAt(
-        terms,
-        TermMatchers{
-            TermMatcher(","), TermMatcher(TermType::Identifier), TermMatcher(crementOperator), TermMatcher(",")},
-        1, 2);
-    findTermsAndSwapAt(
-        terms,
-        TermMatchers{
-            TermMatcher(","), TermMatcher(TermType::Identifier), TermMatcher(crementOperator), TermMatcher(")")},
-        1, 2);
+    fixPostFixIncrementDecrementInLine(terms, crementOperator);
+    fixPostFixIncrementDecrementInForLoop(terms, crementOperator);
+}
+
+void fixPostFixIncrementDecrementInLine(Terms& terms, string const& crementOperator) {
+    findTermsAndSwapAt(terms, {{M("{"), M(TermType::Identifier), M(crementOperator), M(";")}}, 1, 2);
+    findTermsAndSwapAt(terms, {{M("}"), M(TermType::Identifier), M(crementOperator), M(";")}}, 1, 2);
+    findTermsAndSwapAt(terms, {{M(";"), M(TermType::Identifier), M(crementOperator), M(";")}}, 1, 2);
+    findTermsAndSwapAt(terms, {{M(","), M(TermType::Identifier), M(crementOperator), M(";")}}, 1, 2);
+    findTermsAndSwapAt(terms, {{M(";"), M(TermType::Identifier), M(crementOperator), M(",")}}, 1, 2);
+    findTermsAndSwapAt(terms, {{M(";"), M(TermType::Identifier), M(crementOperator), M(")")}}, 1, 2);
+}
+
+void fixPostFixIncrementDecrementInForLoop(Terms& terms, string const& crementOperator) {
+    findTermsAndCheckForLoopAndSwapAt(terms, {{M(","), M(TermType::Identifier), M(crementOperator), M(")")}}, 1, 2);
+    findTermsAndCheckForLoopAndSwapAt(terms, {{M(","), M(TermType::Identifier), M(crementOperator), M(",")}}, 1, 2);
 }
 
 void fixConstReferenceOrder(Terms& terms) {
-    fixConstReferenceOrder(terms, TermMatcher(TermType::Identifier));
-    fixConstReferenceOrder(terms, TermMatcher(TermType::PrimitiveType));
-    fixConstReferenceOrder(terms, TermMatcher("auto"));
+    fixConstReferenceOrder(terms, M(TermType::Identifier));
+    fixConstReferenceOrder(terms, M(TermType::PrimitiveType));
+    fixConstReferenceOrder(terms, M("auto"));
 }
 
 void fixConstReferenceOrder(Terms& terms, TermMatcher const& typeMatcher) {
-    findTermsAndSwapAt(
-        terms, TermMatchers{TermMatcher("{"), TermMatcher("const"), typeMatcher, TermMatcher("&")}, 1, 2);
-    findTermsAndSwapAt(
-        terms, TermMatchers{TermMatcher(";"), TermMatcher("const"), typeMatcher, TermMatcher("&")}, 1, 2);
-    findTermsAndSwapAt(
-        terms, TermMatchers{TermMatcher("("), TermMatcher("const"), typeMatcher, TermMatcher("&")}, 1, 2);
-    findTermsAndSwapAt(
-        terms, TermMatchers{TermMatcher(","), TermMatcher("const"), typeMatcher, TermMatcher("&")}, 1, 2);
+    findTermsAndSwapAt(terms, {{M("{"), M("const"), typeMatcher, M("&")}}, 1, 2);
+    findTermsAndSwapAt(terms, {{M("}"), M("const"), typeMatcher, M("&")}}, 1, 2);
+    findTermsAndSwapAt(terms, {{M(";"), M("const"), typeMatcher, M("&")}}, 1, 2);
+    findTermsAndSwapAt(terms, {{M("("), M("const"), typeMatcher, M("&")}}, 1, 2);
+    findTermsAndSwapAt(terms, {{M(","), M("const"), typeMatcher, M("&")}}, 1, 2);
 }
 
-void fixCStyleStaticCast(Terms& terms) { fixCStyleStaticCast(terms, TermMatcher(TermType::PrimitiveType)); }
+void fixCStyleStaticCast(Terms& terms) { fixCStyleStaticCast(terms, M(TermType::PrimitiveType)); }
 
 void fixCStyleStaticCast(Terms& terms, TermMatcher const& typeMatcher) {
-    TermMatchers matchers{TermMatcher(TermType::Operator), TermMatcher("("), typeMatcher, TermMatcher(")")};
+    Patterns searchPatterns{
+        {M(TermType::Operator), M("("), typeMatcher, M(")"), M(TermSpecialMatcherType::NotAWhiteSpace)}};
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        PatternIndexes patternIndexes = findFirstPatternIgnoringSpacesAndComments(terms, matchers, termIndex);
+        Indexes patternIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
         isFound = !patternIndexes.empty();
         if (isFound) {
             termIndex = patternIndexes.back();
-            terms[patternIndexes[1]].setContent("static_cast<");
-            terms[patternIndexes[3]].setContent(">(");
-            ALBA_INF_PRINT3(cout, terms[patternIndexes[0]], terms[patternIndexes[1]], terms[patternIndexes[2]]);
+            if (terms[patternIndexes[4]].getContent() != "=") {
+                changeTerm(terms[patternIndexes[1]], TermType::Aggregate, "static_cast<");
+                changeTerm(terms[patternIndexes[3]], TermType::Aggregate, ">(");
+                ALBA_INF_PRINT3(cout, terms[patternIndexes[0]], terms[patternIndexes[1]], terms[patternIndexes[2]]);
+            }
         }
     }
 }
 void fixNoConstPassByValue(Terms& terms) {
-    fixNoConstPassByValue(
-        terms,
-        TermMatchers{
-            TermMatcher("("), TermMatcher(TermType::Identifier), TermMatcher(TermType::Identifier), TermMatcher(",")});
-    fixNoConstPassByValue(
-        terms,
-        TermMatchers{
-            TermMatcher(","), TermMatcher(TermType::Identifier), TermMatcher(TermType::Identifier), TermMatcher(",")});
-    fixNoConstPassByValue(
-        terms,
-        TermMatchers{
-            TermMatcher(","), TermMatcher(TermType::Identifier), TermMatcher(TermType::Identifier), TermMatcher(")")});
-    fixNoConstPassByValue(
-        terms, TermMatchers{
-                   TermMatcher("("), TermMatcher(TermType::PrimitiveType), TermMatcher(TermType::Identifier),
-                   TermMatcher(",")});
-    fixNoConstPassByValue(
-        terms, TermMatchers{
-                   TermMatcher(","), TermMatcher(TermType::PrimitiveType), TermMatcher(TermType::Identifier),
-                   TermMatcher(",")});
-    fixNoConstPassByValue(
-        terms, TermMatchers{
-                   TermMatcher(","), TermMatcher(TermType::PrimitiveType), TermMatcher(TermType::Identifier),
-                   TermMatcher(")")});
+    fixNoConstPassByValue(terms, {{M("("), M(TermType::Identifier), M(TermType::Identifier), M(")")}});
+    fixNoConstPassByValue(terms, {{M("("), M(TermType::Identifier), M(TermType::Identifier), M(",")}});
+    fixNoConstPassByValue(terms, {{M(","), M(TermType::Identifier), M(TermType::Identifier), M(",")}});
+    fixNoConstPassByValue(terms, {{M(","), M(TermType::Identifier), M(TermType::Identifier), M(")")}});
+    fixNoConstPassByValue(terms, {{M("("), M(TermType::PrimitiveType), M(TermType::Identifier), M(")")}});
+    fixNoConstPassByValue(terms, {{M("("), M(TermType::PrimitiveType), M(TermType::Identifier), M(",")}});
+    fixNoConstPassByValue(terms, {{M(","), M(TermType::PrimitiveType), M(TermType::Identifier), M(",")}});
+    fixNoConstPassByValue(terms, {{M(","), M(TermType::PrimitiveType), M(TermType::Identifier), M(")")}});
 }
 
-void fixNoConstPassByValue(Terms& terms, TermMatchers const& matchers) {
+void fixNoConstPassByValue(Terms& terms, Patterns const& searchPatterns) {
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        PatternIndexes patternIndexes = findFirstPatternIgnoringSpacesAndComments(terms, matchers, termIndex);
+        Indexes patternIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
         isFound = !patternIndexes.empty();
         if (isFound) {
             termIndex = patternIndexes.back();
@@ -201,16 +171,36 @@ void fixNoConstPassByValue(Terms& terms, TermMatchers const& matchers) {
     }
 }
 
-void findTermsAndSwapAt(Terms& terms, TermMatchers const& matchers, int const index1, int const index2) {
+void findTermsAndSwapAt(Terms& terms, Patterns const& searchPatterns, int const index1, int const index2) {
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        PatternIndexes patternIndexes = findFirstPatternIgnoringSpacesAndComments(terms, matchers, termIndex);
-        isFound = !patternIndexes.empty();
+        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
+        isFound = !hitIndexes.empty();
         if (isFound) {
-            termIndex = patternIndexes.back();
-            std::swap(terms[patternIndexes[index1]], terms[patternIndexes[index2]]);
-            ALBA_INF_PRINT2(cout, terms[patternIndexes[index1]], terms[patternIndexes[index2]]);
+            termIndex = hitIndexes.back();
+            std::swap(terms[hitIndexes[index1]], terms[hitIndexes[index2]]);
+            ALBA_INF_PRINT2(cout, terms[hitIndexes[index1]], terms[hitIndexes[index2]]);
+        }
+    }
+}
+
+void findTermsAndCheckForLoopAndSwapAt(
+    Terms& terms, Patterns const& searchPatterns, int const index1, int const index2) {
+    int termIndex = 0;
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            termIndex = hitIndexes.back();
+            Patterns forLoopPatterns{{M("for"), M("(")}, {M(";")}, {M("{")}, {M("}")}};
+            Indexes forLoopHitIndexes = searchForPatternsBackwards(terms, hitIndexes.front(), forLoopPatterns);
+            if (forLoopHitIndexes.size() == 2 && terms[forLoopHitIndexes[0]].getContent() == "for" &&
+                terms[forLoopHitIndexes[1]].getContent() == "(") {
+                std::swap(terms[hitIndexes[index1]], terms[hitIndexes[index2]]);
+                ALBA_INF_PRINT2(cout, terms[hitIndexes[index1]], terms[hitIndexes[index2]]);
+            }
         }
     }
 }
@@ -218,10 +208,9 @@ void findTermsAndSwapAt(Terms& terms, TermMatchers const& matchers, int const in
 void combinePrimitiveTypes(Terms& terms) {
     int termIndex = 0;
     bool isFound(true);
-    TermMatchers primitiveTypeMatchers{TermMatcher(TermType::PrimitiveType), TermMatcher(TermType::PrimitiveType)};
+    Patterns primitiveTypesPatterns{{M(TermType::PrimitiveType), M(TermType::PrimitiveType)}};
     while (isFound) {
-        PatternIndexes patternIndexes =
-            findFirstPatternIgnoringSpacesAndComments(terms, primitiveTypeMatchers, termIndex);
+        Indexes patternIndexes = searchForPatternsForwards(terms, termIndex, primitiveTypesPatterns);
         isFound = !patternIndexes.empty();
         if (isFound) {
             termIndex = patternIndexes.front();

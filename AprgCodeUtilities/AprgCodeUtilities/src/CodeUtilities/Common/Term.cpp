@@ -17,7 +17,7 @@ bool Term::operator==(Term const& term) const { return m_termType == term.m_term
 bool Term::operator!=(Term const& term) const { return !(*this == term); }
 
 ostream& operator<<(ostream& out, Term const& term) {
-    out << "[type: {" << term.getTermTypeString() << "} | content:{" << term.m_content << "}]";
+    out << "[type: (" << term.getTermTypeString() << ") | content: (" << term.m_content << ")]";
     return out;
 }
 
@@ -27,7 +27,7 @@ string Term::getContent() const { return m_content; }
 
 string Term::getTermTypeString() const { return convertToString(m_termType); }
 
-void Term::setTermType(TermType termType) { m_termType = termType; }
+void Term::setTermType(TermType const termType) { m_termType = termType; }
 
 void Term::setContent(string const& content) { m_content = content; }
 

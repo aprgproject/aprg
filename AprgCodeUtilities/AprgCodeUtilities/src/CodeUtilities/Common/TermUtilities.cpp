@@ -6,26 +6,45 @@ using namespace std;
 
 namespace alba::CodeUtilities {
 
-PatternIndexes findFirstPatternIgnoringSpacesAndComments(
-    Terms const& terms, TermMatchers const& matchers, int const startIndex) {
+Indexes searchForPatternsForwards(Terms const& terms, int const startIndex, Patterns const& searchPatterns) {
     for (int termIndex = startIndex; termIndex < static_cast<int>(terms.size()); ++termIndex) {
-        int matchIndex = 0;
-        PatternIndexes patternIndexes;
-        for (int termIndexInPattern = termIndex;
-             termIndexInPattern < static_cast<int>(terms.size()) && matchIndex < static_cast<int>(matchers.size());
-             ++termIndexInPattern) {
-            Term const& currentTerm(terms[termIndexInPattern]);
-            bool isAMatch = currentTerm == matchers[matchIndex];
+        IndexesOptional patternIndexesOptional = checkPatternAt(terms, termIndex, searchPatterns);
+        if (patternIndexesOptional) {
+            return patternIndexesOptional.value();
+        }
+    }
+    return {};
+}
+
+Indexes searchForPatternsBackwards(Terms const& terms, int const startIndex, Patterns const& searchPatterns) {
+    for (int termIndex = startIndex; termIndex >= 0; --termIndex) {
+        IndexesOptional patternIndexesOptional = checkPatternAt(terms, termIndex, searchPatterns);
+        if (patternIndexesOptional) {
+            return patternIndexesOptional.value();
+        }
+    }
+    return {};
+}
+
+IndexesOptional checkPatternAt(Terms const& terms, int const termIndex, Patterns const& searchPatterns) {
+    int matchIndex = 0;
+    Indexes patternIndexes;
+    for (Pattern const& searchPattern : searchPatterns) {
+        for (int termIndex2 = termIndex;
+             termIndex2 < static_cast<int>(terms.size()) && matchIndex < static_cast<int>(searchPattern.size());
+             ++termIndex2) {
+            Term const& currentTerm(terms[termIndex2]);
+            bool isAMatch = currentTerm == searchPattern[matchIndex];
             if (isAMatch) {
-                patternIndexes.emplace_back(termIndexInPattern);
+                patternIndexes.emplace_back(termIndex2);
                 ++matchIndex;
             }
             if (!isCommentOrWhiteSpace(currentTerm) && !isAMatch) {
                 break;
             }
         }
-        if (static_cast<int>(patternIndexes.size()) == static_cast<int>(matchers.size())) {
-            return patternIndexes;
+        if (matchIndex == static_cast<int>(searchPattern.size())) {
+            return {patternIndexes};
         }
     }
     return {};
@@ -39,18 +58,22 @@ void combineTermsInPlace(Terms& terms, TermType const newTermType, int const sta
             combinedContent += terms[termIndex].getContent();
         }
         Term& firstTerm(terms[startIndex]);
-        firstTerm.setTermType(newTermType);
-        firstTerm.setContent(combinedContent);
+        changeTerm(firstTerm, newTermType, combinedContent);
         terms.erase(terms.begin() + startIndex + 1, terms.begin() + endIndex + 1);
     }
 }
 
-string convertToString(TermType const termType) {
+void changeTerm(Term& term, TermType const newTermType, string const& content) {
+    term.setTermType(newTermType);
+    term.setContent(content);
+}
+
+string convertToString(TermType const type) {
 #define GET_ENUM_STRING(en) \
     case en:                \
         return #en;
-
-    switch (termType) {
+    switch (type) {
+        GET_ENUM_STRING(TermType::Aggregate)
         GET_ENUM_STRING(TermType::Boolean)
         GET_ENUM_STRING(TermType::CharacterLiteral)
         GET_ENUM_STRING(TermType::CommentMultiline)
@@ -66,6 +89,22 @@ string convertToString(TermType const termType) {
         GET_ENUM_STRING(TermType::WhiteSpace)
     }
     return {};
+}
+
+string convertToString(TermSpecialMatcherType const type) {
+#define GET_ENUM_STRING(en) \
+    case en:                \
+        return #en;
+    switch (type) { GET_ENUM_STRING(TermSpecialMatcherType::NotAWhiteSpace) }
+    return {};
+}
+
+bool isAMatch(TermSpecialMatcherType const specialMatcherType, Term const& term) {
+    switch (specialMatcherType) {
+        case TermSpecialMatcherType::NotAWhiteSpace:
+            return !isWhiteSpace(term);
+    }
+    return false;
 }
 
 bool isComment(Term const& term) {
