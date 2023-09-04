@@ -1,5 +1,4 @@
 #pragma once
-// NOLINTBEGIN(hicpp-signed-bitwise)
 
 #include <Common/Bit/AlbaBitConstants.hpp>
 #include <Common/Bit/Common/AlbaBitUtilitiesBuiltIn.hpp>
@@ -7,6 +6,7 @@
 
 #include <cmath>
 
+// NOLINTBEGIN(hicpp-signed-bitwise)
 namespace alba {
 
 template <typename DataType>

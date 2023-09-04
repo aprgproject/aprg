@@ -1,5 +1,6 @@
 #include "TermUtilities.hpp"
 
+#include <Common/Macros/AlbaMacros.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <algorithm>
@@ -72,35 +73,32 @@ void changeTerm(Term& term, TermType const newTermType, string const& content) {
 }
 
 string convertToString(TermType const type) {
-#define GET_ENUM_STRING(en) \
-    case en:                \
-        return #en;
     switch (type) {
-        GET_ENUM_STRING(TermType::Aggregate)
-        GET_ENUM_STRING(TermType::Boolean)
-        GET_ENUM_STRING(TermType::CharacterLiteral)
-        GET_ENUM_STRING(TermType::CommentMultiline)
-        GET_ENUM_STRING(TermType::CommentSingleLine)
-        GET_ENUM_STRING(TermType::Identifier)
-        GET_ENUM_STRING(TermType::Keyword)
-        GET_ENUM_STRING(TermType::Macro)
-        GET_ENUM_STRING(TermType::Number)
-        GET_ENUM_STRING(TermType::Operator)
-        GET_ENUM_STRING(TermType::PrimitiveType)
-        GET_ENUM_STRING(TermType::StringLiteral)
-        GET_ENUM_STRING(TermType::Unknown)
-        GET_ENUM_STRING(TermType::WhiteSpace)
+        ALBA_MACROS_CASE_ENUM_STRING(TermType::Aggregate)
+        ALBA_MACROS_CASE_ENUM_STRING(TermType::Boolean)
+        ALBA_MACROS_CASE_ENUM_STRING(TermType::CharacterLiteral)
+        ALBA_MACROS_CASE_ENUM_STRING(TermType::CommentMultiline)
+        ALBA_MACROS_CASE_ENUM_STRING(TermType::CommentSingleLine)
+        ALBA_MACROS_CASE_ENUM_STRING(TermType::Identifier)
+        ALBA_MACROS_CASE_ENUM_STRING(TermType::Keyword)
+        ALBA_MACROS_CASE_ENUM_STRING(TermType::Macro)
+        ALBA_MACROS_CASE_ENUM_STRING(TermType::Number)
+        ALBA_MACROS_CASE_ENUM_STRING(TermType::Operator)
+        ALBA_MACROS_CASE_ENUM_STRING(TermType::PrimitiveType)
+        ALBA_MACROS_CASE_ENUM_STRING(TermType::StringLiteral)
+        ALBA_MACROS_CASE_ENUM_STRING(TermType::Unknown)
+        ALBA_MACROS_CASE_ENUM_STRING(TermType::WhiteSpace)
     }
     return {};
 }
 
 string convertToString(MatcherType const type) {
-#define GET_ENUM_STRING(en) \
-    case en:                \
-        return #en;
     switch (type) {
-        GET_ENUM_STRING(MatcherType::NotAWhiteSpace)
-        GET_ENUM_STRING(MatcherType::IdentifierWithPascalCase)
+        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::NotAWhiteSpace)
+        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::IdentifierWithPascalCase)
+        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::IdentifierWithSnakeCase)
+        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::IdentifierAndNotAScreamingSnakeCase)
+        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::Comment)
     }
     return {};
 }
@@ -111,6 +109,12 @@ bool isAMatch(MatcherType const matcherType, Term const& term) {
             return !isWhiteSpace(term);
         case MatcherType::IdentifierWithPascalCase:
             return TermType::Identifier == term.getTermType() && isPascalCase(term.getContent());
+        case MatcherType::IdentifierWithSnakeCase:
+            return TermType::Identifier == term.getTermType() && isSnakeCase(term.getContent());
+        case MatcherType::IdentifierAndNotAScreamingSnakeCase:
+            return TermType::Identifier == term.getTermType() && !isScreamingSnakeCase(term.getContent());
+        case MatcherType::Comment:
+            return isComment(term);
     }
     return false;
 }

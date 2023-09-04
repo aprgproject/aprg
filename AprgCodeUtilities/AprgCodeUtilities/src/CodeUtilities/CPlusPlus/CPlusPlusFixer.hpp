@@ -24,7 +24,9 @@ void fixConstReferenceOrder(Terms& terms, TermMatcher const& typeMatcher);
 void fixCStyleStaticCast(Terms& terms);
 void fixCStyleStaticCast(Terms& terms, TermMatcher const& typeMatcher);
 void fixNoConstPassByValue(Terms& terms);
+void fixNoConstPassByValue(Terms& terms, TermMatcher const& typeMatcher);
 void fixNoConstPassByValue(Terms& terms, Patterns const& searchPatterns);
+void fixCommentsPositionOfBraces(Terms& terms);
 void findTermsAndSwapAt(Terms& terms, Patterns const& searchPatterns, int const index1, int const index2);
 void findTermsAndCheckForLoopAndSwapAt(
     Terms& terms, Patterns const& searchPatterns, int const index1, int const index2);

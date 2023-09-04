@@ -29,7 +29,10 @@ public:
     AlbaOptional(AlbaOptional&& optional) noexcept : m_contentPointer(std::move(optional.m_contentPointer)) {}
 
     AlbaOptional& operator=(AlbaOptional const& optional) {
-        if (this != &optional && optional.m_contentPointer) {
+        if (this == &optional) {
+            return *this;
+        }
+        if (optional.m_contentPointer) {
             m_contentPointer = std::make_unique<ContentType>(*(optional.m_contentPointer));
         }
         return *this;
@@ -105,10 +108,8 @@ public:
 
     AlbaOptional() : m_hasContent(false), m_contentPointer(nullptr) {}
 
-    explicit AlbaOptional(ContentType& content)
-        : m_hasContent(true),
-          m_contentPointer(std::addressof(content))  {
-    // std::addressof should be used because & might be overloaded}
+    // std::addressof should be used because & might be overloaded
+    explicit AlbaOptional(ContentType& content) : m_hasContent(true), m_contentPointer(std::addressof(content)) {}
 
     ~AlbaOptional() = default;
 

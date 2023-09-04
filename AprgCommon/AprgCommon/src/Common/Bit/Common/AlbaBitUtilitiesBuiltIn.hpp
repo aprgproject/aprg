@@ -1,9 +1,9 @@
 #pragma once
-// NOLINTBEGIN(hicpp-signed-bitwise)
 
 #include <Common/Bit/AlbaBitConstants.hpp>
 #include <Common/Types/AlbaTypeHelper.hpp>
 
+// NOLINTBEGIN(hicpp-signed-bitwise)
 // NOLINTNEXTLINE(modernize-concat-nested-namespaces)
 namespace alba {
 

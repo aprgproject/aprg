@@ -83,7 +83,8 @@ void fixTerms(Terms& terms) {
     // fixPostFixIncrementDecrement(terms);
     // fixConstReferenceOrder(terms);
     // fixCStyleStaticCast(terms);
-    fixNoConstPassByValue(terms);
+    // fixNoConstPassByValue(terms);
+    fixCommentsPositionOfBraces(terms);
 }
 
 void fixPostFixIncrementDecrement(Terms& terms) {
@@ -143,15 +144,19 @@ void fixCStyleStaticCast(Terms& terms, TermMatcher const& typeMatcher) {
         }
     }
 }
+
 void fixNoConstPassByValue(Terms& terms) {
-    fixNoConstPassByValue(terms, {{M("("), M(MatcherType::IdentifierWithPascalCase), M(TermType::Identifier), M(")")}});
-    fixNoConstPassByValue(terms, {{M("("), M(MatcherType::IdentifierWithPascalCase), M(TermType::Identifier), M(",")}});
-    fixNoConstPassByValue(terms, {{M(","), M(MatcherType::IdentifierWithPascalCase), M(TermType::Identifier), M(",")}});
-    fixNoConstPassByValue(terms, {{M(","), M(MatcherType::IdentifierWithPascalCase), M(TermType::Identifier), M(")")}});
-    fixNoConstPassByValue(terms, {{M("("), M(TermType::PrimitiveType), M(TermType::Identifier), M(")")}});
-    fixNoConstPassByValue(terms, {{M("("), M(TermType::PrimitiveType), M(TermType::Identifier), M(",")}});
-    fixNoConstPassByValue(terms, {{M(","), M(TermType::PrimitiveType), M(TermType::Identifier), M(",")}});
-    fixNoConstPassByValue(terms, {{M(","), M(TermType::PrimitiveType), M(TermType::Identifier), M(")")}});
+    fixNoConstPassByValue(terms, M(MatcherType::IdentifierAndNotAScreamingSnakeCase));
+    fixNoConstPassByValue(terms, M(TermType::PrimitiveType));
+}
+
+void fixNoConstPassByValue(Terms& terms, TermMatcher const& typeMatcher) {
+    fixNoConstPassByValue(terms, {{M("("), typeMatcher, M(TermType::Identifier), M(")")}});
+    fixNoConstPassByValue(terms, {{M("("), typeMatcher, M(TermType::Identifier), M(",")}});
+    fixNoConstPassByValue(terms, {{M(","), typeMatcher, M(TermType::Identifier), M(",")}});
+    fixNoConstPassByValue(terms, {{M(","), typeMatcher, M(TermType::Identifier), M(")")}});
+    fixNoConstPassByValue(terms, {{M("::"), typeMatcher, M(TermType::Identifier), M(",")}});
+    fixNoConstPassByValue(terms, {{M("::"), typeMatcher, M(TermType::Identifier), M(")")}});
 }
 
 void fixNoConstPassByValue(Terms& terms, Patterns const& searchPatterns) {
@@ -168,6 +173,11 @@ void fixNoConstPassByValue(Terms& terms, Patterns const& searchPatterns) {
                 terms[patternIndexes[3]]);
         }
     }
+}
+
+void fixCommentsPositionOfBraces(Terms& terms) {
+    Patterns searchPatterns{{M(")"), M(MatcherType::Comment), M("{")}};
+    findTermsAndSwapAt(terms, searchPatterns, 1, 2);
 }
 
 void findTermsAndSwapAt(Terms& terms, Patterns const& searchPatterns, int const index1, int const index2) {
