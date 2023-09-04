@@ -19,9 +19,9 @@ void combineTermsInPlace(Terms& terms, TermType const newTermType, int const sta
 void changeTerm(Term& term, TermType const newTermType, std::string const& content);
 
 std::string convertToString(TermType const termType);
-std::string convertToString(TermSpecialMatcherType const type);
+std::string convertToString(MatcherType const type);
 
-bool isAMatch(TermSpecialMatcherType const specialMatcherType, Term const& term);
+bool isAMatch(MatcherType const matcherType, Term const& term);
 bool isComment(Term const& term);
 bool isWhiteSpace(Term const& term);
 bool isCommentOrWhiteSpace(Term const& term);

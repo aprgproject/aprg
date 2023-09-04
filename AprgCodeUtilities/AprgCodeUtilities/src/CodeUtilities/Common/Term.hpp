@@ -10,6 +10,7 @@ namespace alba::CodeUtilities {
 
 class Term {
 public:
+    Term(TermType const termType, std::string && content);
     Term(TermType const termType, std::string const& content);
 
     bool operator==(Term const& term) const;
@@ -22,7 +23,7 @@ public:
     [[nodiscard]] std::string getTermTypeString() const;
 
     void clearValueType();
-    void setTermType(TermType termType);
+    void setTermType(TermType const termType);
     void setContent(std::string const& content);
 
 private:

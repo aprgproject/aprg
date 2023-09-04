@@ -1,7 +1,7 @@
 #pragma once
 
 #include <CodeUtilities/Common/Term.hpp>
-#include <CodeUtilities/Common/TermSpecialMatcherType.hpp>
+#include <CodeUtilities/Common/MatcherType.hpp>
 
 #include <optional>
 
@@ -11,7 +11,7 @@ class TermMatcher {
 public:
     explicit TermMatcher(TermType const termType);
     explicit TermMatcher(std::string const& content);
-    explicit TermMatcher(TermSpecialMatcherType const termSpecialMatcherType);
+    explicit TermMatcher(MatcherType const matcherType);
     TermMatcher(TermType const termType, std::string const& content);
 
     friend bool operator==(TermMatcher const& matcher, Term const& term);
@@ -23,7 +23,7 @@ public:
 private:
     std::optional<TermType> m_termTypeOptional;
     std::optional<std::string> m_contentOptional;
-    std::optional<TermSpecialMatcherType> m_termSpecialMatcherTypeOptional;
+    std::optional<MatcherType> m_matcherTypeOptional;
 };
 
 using Pattern = std::vector<TermMatcher>;

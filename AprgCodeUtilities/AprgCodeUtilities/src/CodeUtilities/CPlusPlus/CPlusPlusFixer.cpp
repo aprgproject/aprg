@@ -127,8 +127,7 @@ void fixConstReferenceOrder(Terms& terms, TermMatcher const& typeMatcher) {
 void fixCStyleStaticCast(Terms& terms) { fixCStyleStaticCast(terms, M(TermType::PrimitiveType)); }
 
 void fixCStyleStaticCast(Terms& terms, TermMatcher const& typeMatcher) {
-    Patterns searchPatterns{
-        {M(TermType::Operator), M("("), typeMatcher, M(")"), M(TermSpecialMatcherType::NotAWhiteSpace)}};
+    Patterns searchPatterns{{M(TermType::Operator), M("("), typeMatcher, M(")"), M(MatcherType::NotAWhiteSpace)}};
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
@@ -145,10 +144,10 @@ void fixCStyleStaticCast(Terms& terms, TermMatcher const& typeMatcher) {
     }
 }
 void fixNoConstPassByValue(Terms& terms) {
-    fixNoConstPassByValue(terms, {{M("("), M(TermType::Identifier), M(TermType::Identifier), M(")")}});
-    fixNoConstPassByValue(terms, {{M("("), M(TermType::Identifier), M(TermType::Identifier), M(",")}});
-    fixNoConstPassByValue(terms, {{M(","), M(TermType::Identifier), M(TermType::Identifier), M(",")}});
-    fixNoConstPassByValue(terms, {{M(","), M(TermType::Identifier), M(TermType::Identifier), M(")")}});
+    fixNoConstPassByValue(terms, {{M("("), M(MatcherType::IdentifierWithPascalCase), M(TermType::Identifier), M(")")}});
+    fixNoConstPassByValue(terms, {{M("("), M(MatcherType::IdentifierWithPascalCase), M(TermType::Identifier), M(",")}});
+    fixNoConstPassByValue(terms, {{M(","), M(MatcherType::IdentifierWithPascalCase), M(TermType::Identifier), M(",")}});
+    fixNoConstPassByValue(terms, {{M(","), M(MatcherType::IdentifierWithPascalCase), M(TermType::Identifier), M(")")}});
     fixNoConstPassByValue(terms, {{M("("), M(TermType::PrimitiveType), M(TermType::Identifier), M(")")}});
     fixNoConstPassByValue(terms, {{M("("), M(TermType::PrimitiveType), M(TermType::Identifier), M(",")}});
     fixNoConstPassByValue(terms, {{M(","), M(TermType::PrimitiveType), M(TermType::Identifier), M(",")}});

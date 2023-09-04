@@ -2,6 +2,6 @@
 
 namespace alba::CodeUtilities {
 
-enum class TermSpecialMatcherType { NotAWhiteSpace };
+enum class MatcherType { NotAWhiteSpace, IdentifierWithPascalCase };
 
 }  // namespace alba::CodeUtilities

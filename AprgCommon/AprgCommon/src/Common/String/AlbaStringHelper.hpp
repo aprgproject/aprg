@@ -108,6 +108,11 @@ bool isStringFoundNotCaseSensitive(std::string_view mainText, std::string_view s
 bool isWildcardMatch(
     std::string_view mainText, std::string_view wildcard, size_t const mainTextIndex = 0,
     size_t const wildcardIndex = 0);
+bool isCamelCase(std::string_view str);
+bool isPascalCase(std::string_view str);
+bool isSnakeCase(std::string_view str);
+bool isKebabCase(std::string_view str);
+bool isScreamingSnakeCase(std::string_view str);
 
 // String processing
 

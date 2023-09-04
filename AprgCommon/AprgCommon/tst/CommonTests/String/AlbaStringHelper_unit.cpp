@@ -704,7 +704,26 @@ TEST(CombineStringTest, CombinedStringsWithComma) {
     EXPECT_EQ(expectedString, actualString);
 }
 
-TEST(GetStringWithAlignmentFromStringTest, GetStringUsingJustifyAlignment) {
+TEST(GetStringWithAlignmentFromStringTest, GetStringWithAlignment) {
+    EXPECT_EQ(
+        "                        M                         ", getStringWithAlignment("M", 50, AlignmentType::Justify));
+    EXPECT_EQ(
+        "         M         a         r         k          ",
+        getStringWithAlignment("Mark", 50, AlignmentType::Justify));
+    EXPECT_EQ(
+        "           Mark Earvin Alba 1234567890            ",
+        getStringWithAlignment("Mark Earvin Alba 1234567890", 50, AlignmentType::Center));
+    EXPECT_EQ(
+        "Mark Earvin Alba 1234567890", getStringWithAlignment("Mark Earvin Alba 1234567890", 1, AlignmentType::Center));
+    EXPECT_EQ(
+        "                                                  ",
+        getStringWithAlignment(string(), 50, AlignmentType::Right));
+    EXPECT_EQ("     555555", getStringWithAlignment("555555", 11, AlignmentType::Right));
+    EXPECT_EQ("555555    ", getStringWithAlignment("555555", 10, AlignmentType::Left));
+    EXPECT_EQ("8 8 8 8 8  ", getStringWithAlignment("8 8 8 8 8", 11, AlignmentType::Left));
+}
+
+TEST(GetStringWithAlignmentFromStringTest, GetStringWithJustifyAlignment) {
     EXPECT_EQ("                        M                         ", getStringWithJustifyAlignment("M", 50));
     EXPECT_EQ("         M         a         r         k          ", getStringWithJustifyAlignment("Mark", 50));
     EXPECT_EQ(
@@ -717,7 +736,7 @@ TEST(GetStringWithAlignmentFromStringTest, GetStringUsingJustifyAlignment) {
     EXPECT_EQ(" 8 8 8 8 8 ", getStringWithJustifyAlignment("8 8 8 8 8", 11));
 }
 
-TEST(GetStringWithAlignmentFromStringTest, GetStringUsingCenterAlignment) {
+TEST(GetStringWithAlignmentFromStringTest, GetStringWithCenterAlignment) {
     EXPECT_EQ("                       Mark                       ", getStringWithCenterAlignment("Mark", 50));
     EXPECT_EQ(
         "           Mark Earvin Alba 1234567890            ",
@@ -726,7 +745,7 @@ TEST(GetStringWithAlignmentFromStringTest, GetStringUsingCenterAlignment) {
     EXPECT_EQ("                                                  ", getStringWithCenterAlignment(string(), 50));
 }
 
-TEST(GetStringWithAlignmentFromStringTest, GetStringUsingRightAlignment) {
+TEST(GetStringWithAlignmentFromStringTest, GetStringWithRightAlignment) {
     EXPECT_EQ("                                              Mark", getStringWithRightAlignment("Mark", 50));
     EXPECT_EQ(
         "                       Mark Earvin Alba 1234567890",
@@ -735,7 +754,7 @@ TEST(GetStringWithAlignmentFromStringTest, GetStringUsingRightAlignment) {
     EXPECT_EQ("                                                  ", getStringWithRightAlignment(string(), 50));
 }
 
-TEST(GetStringWithAlignmentFromStringTest, GetStringUsingLeftAlignment) {
+TEST(GetStringWithAlignmentFromStringTest, GetStringWithLeftAlignment) {
     EXPECT_EQ("Mark                                              ", getStringWithLeftAlignment("Mark", 50));
     EXPECT_EQ(
         "Mark Earvin Alba 1234567890                       ",
@@ -1010,6 +1029,76 @@ TEST(BooleanStringTest, IsWildcardMatchTest) {
     EXPECT_FALSE(isWildcardMatch("alba", "alb*b?a"));
     EXPECT_TRUE(isWildcardMatch("alba", "*l*a"));
     EXPECT_TRUE(isWildcardMatch("alba", "*?l*a"));
+}
+
+TEST(BooleanStringTest, IsCamelCaseTest) {
+    string testString1("calculateTotalAmount");
+    string testString2("CalculateTotalAmount");
+    string testString3("calculate_total_amount");
+    string testString4("calculate-total-amount");
+    string testString5("MAX_VALUE");
+
+    EXPECT_TRUE(isCamelCase(testString1));
+    EXPECT_FALSE(isCamelCase(testString2));
+    EXPECT_FALSE(isCamelCase(testString3));
+    EXPECT_FALSE(isCamelCase(testString4));
+    EXPECT_FALSE(isCamelCase(testString5));
+}
+
+TEST(BooleanStringTest, IsPascalCaseTest) {
+    string testString1("calculateTotalAmount");
+    string testString2("CalculateTotalAmount");
+    string testString3("calculate_total_amount");
+    string testString4("calculate-total-amount");
+    string testString5("MAX_VALUE");
+
+    EXPECT_FALSE(isPascalCase(testString1));
+    EXPECT_TRUE(isPascalCase(testString2));
+    EXPECT_FALSE(isPascalCase(testString3));
+    EXPECT_FALSE(isPascalCase(testString4));
+    EXPECT_FALSE(isPascalCase(testString5));
+}
+
+TEST(BooleanStringTest, IsSnakeCaseTest) {
+    string testString1("calculateTotalAmount");
+    string testString2("CalculateTotalAmount");
+    string testString3("calculate_total_amount");
+    string testString4("calculate-total-amount");
+    string testString5("MAX_VALUE");
+
+    EXPECT_FALSE(isSnakeCase(testString1));
+    EXPECT_FALSE(isSnakeCase(testString2));
+    EXPECT_TRUE(isSnakeCase(testString3));
+    EXPECT_FALSE(isSnakeCase(testString4));
+    EXPECT_FALSE(isSnakeCase(testString5));
+}
+
+TEST(BooleanStringTest, IsKebabCaseTest) {
+    string testString1("calculateTotalAmount");
+    string testString2("CalculateTotalAmount");
+    string testString3("calculate_total_amount");
+    string testString4("calculate-total-amount");
+    string testString5("MAX_VALUE");
+
+    EXPECT_FALSE(isKebabCase(testString1));
+    EXPECT_FALSE(isKebabCase(testString2));
+    EXPECT_FALSE(isKebabCase(testString3));
+    EXPECT_TRUE(isKebabCase(testString4));
+    EXPECT_FALSE(isKebabCase(testString5));
+}
+
+TEST(BooleanStringTest, IsScreamingSnakeCaseTest) {
+    string testString1("calculateTotalAmount");
+    string testString2("CalculateTotalAmount");
+    string testString3("calculate_total_amount");
+    string testString4("calculate-total-amount");
+    string testString5("MAX_VALUE");
+
+    EXPECT_FALSE(isScreamingSnakeCase(testString1));
+    EXPECT_FALSE(isScreamingSnakeCase(testString2));
+    EXPECT_FALSE(isScreamingSnakeCase(testString3));
+    EXPECT_FALSE(isScreamingSnakeCase(testString4));
+    EXPECT_TRUE(isScreamingSnakeCase(testString5));
 }
 
 TEST(ConvertFromStringTest, ConvertStringToBool) {

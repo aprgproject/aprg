@@ -10,8 +10,8 @@ TermMatcher::TermMatcher(TermType const termType) : m_termTypeOptional(termType)
 
 TermMatcher::TermMatcher(std::string const& content) : m_contentOptional(content) {}
 
-TermMatcher::TermMatcher(TermSpecialMatcherType const termSpecialMatcherType)
-    : m_termSpecialMatcherTypeOptional(termSpecialMatcherType) {}
+TermMatcher::TermMatcher(MatcherType const matcherType)
+    : m_matcherTypeOptional(matcherType) {}
 
 TermMatcher::TermMatcher(TermType const termType, string const& content)
     : m_termTypeOptional(termType), m_contentOptional(content) {}
@@ -24,8 +24,8 @@ ostream& operator<<(ostream& out, TermMatcher const& matcher) {
     if (matcher.m_contentOptional) {
         out << "content: (" << matcher.m_contentOptional.value() << ") ";
     }
-    if (matcher.m_termSpecialMatcherTypeOptional) {
-        out << "special matcher: (" << convertToString(matcher.m_termSpecialMatcherTypeOptional.value()) << ") ";
+    if (matcher.m_matcherTypeOptional) {
+        out << "special matcher: (" << convertToString(matcher.m_matcherTypeOptional.value()) << ") ";
     }
     out << "]";
     return out;
@@ -42,8 +42,8 @@ bool operator==(TermMatcher const& matcher, Term const& term) {
             return false;
         }
     }
-    if (matcher.m_termSpecialMatcherTypeOptional) {
-        if (!isAMatch(matcher.m_termSpecialMatcherTypeOptional.value(), term)) {
+    if (matcher.m_matcherTypeOptional) {
+        if (!isAMatch(matcher.m_matcherTypeOptional.value(), term)) {
             return false;
         }
     }

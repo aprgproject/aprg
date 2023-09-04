@@ -279,6 +279,49 @@ bool isWildcardMatch(
     return result;
 }
 
+bool isCamelCase(string_view str) {
+    if (!str.empty()) {
+        return isLowerCaseLetter(str.front()) &&
+               all_of(begin(str), end(str), [](char const character) { return isLetterOrNumber(character); });
+    }
+    return false;
+}
+
+bool isPascalCase(string_view str) {
+    if (!str.empty()) {
+        return isCapitalLetter(str.front()) &&
+               all_of(begin(str), end(str), [](char const character) { return isLetterOrNumber(character); });
+    }
+    return false;
+}
+
+bool isSnakeCase(string_view str) {
+    if (!str.empty()) {
+        return isLowerCaseLetter(str.front()) && all_of(begin(str), end(str), [](char const character) {
+                   return isLowerCaseLetter(character) || isUnderscore(character);
+               });
+    }
+    return false;
+}
+
+bool isKebabCase(string_view str) {
+    if (!str.empty()) {
+        return isLowerCaseLetter(str.front()) && all_of(begin(str), end(str), [](char const character) {
+                   return isLowerCaseLetter(character) || '-' == character;
+               });
+    }
+    return false;
+}
+
+bool isScreamingSnakeCase(string_view str) {
+    if (!str.empty()) {
+        return isCapitalLetter(str.front()) && all_of(begin(str), end(str), [](char const character) {
+                   return isCapitalLetter(character) || isUnderscore(character);
+               });
+    }
+    return false;
+}
+
 string getStringWithCapitalLetters(string_view str) {
     string result;
     result.resize(str.length());
@@ -434,7 +477,8 @@ void copyBeforeStringAndAfterString(
     }
 }
 
-string getStringBeforeThisString(string_view const mainText, string_view const stringToSearch, size_t const indexToStart) {
+string getStringBeforeThisString(
+    string_view const mainText, string_view const stringToSearch, size_t const indexToStart) {
     string result;
     size_t firstIndexOfFirstString = mainText.find(stringToSearch, indexToStart);
     if (isNotNpos(static_cast<int>(firstIndexOfFirstString))) {
@@ -443,7 +487,8 @@ string getStringBeforeThisString(string_view const mainText, string_view const s
     return result;
 }
 
-string getStringAfterThisString(string_view const mainText, string_view const stringToSearch, size_t const indexToStart) {
+string getStringAfterThisString(
+    string_view const mainText, string_view const stringToSearch, size_t const indexToStart) {
     string result;
     size_t firstIndexOfFirstString = mainText.find(stringToSearch, indexToStart);
     if (isNotNpos(static_cast<int>(firstIndexOfFirstString))) {
@@ -454,7 +499,8 @@ string getStringAfterThisString(string_view const mainText, string_view const st
 }
 
 string getStringInBetweenTwoStrings(
-    string_view const mainText, string_view const firstString, string_view const secondString, size_t const indexToStart) {
+    string_view const mainText, string_view const firstString, string_view const secondString,
+    size_t const indexToStart) {
     string result;
     size_t firstIndexOfFirstString = mainText.find(firstString, indexToStart);
     if (isNotNpos(static_cast<int>(firstIndexOfFirstString))) {
@@ -467,7 +513,8 @@ string getStringInBetweenTwoStrings(
     return result;
 }
 
-string getStringBeforeThisCharacters(string_view const mainText, string_view const characters, size_t const indexToStart) {
+string getStringBeforeThisCharacters(
+    string_view const mainText, string_view const characters, size_t const indexToStart) {
     string result;
     size_t firstIndexOfNotOfCharacters(mainText.find_first_of(characters, indexToStart));
     if (isNotNpos(static_cast<int>(firstIndexOfNotOfCharacters))) {
@@ -697,7 +744,8 @@ void splitToStringsUsingASeriesOfDelimeters(
     }
 }
 
-string getStringWithAlignment(string_view const mainText, size_t const targetLength, AlignmentType const alignmentType) {
+string getStringWithAlignment(
+    string_view const mainText, size_t const targetLength, AlignmentType const alignmentType) {
     switch (alignmentType) {
         case AlignmentType::Justify:
             return getStringWithJustifyAlignment(mainText, targetLength);

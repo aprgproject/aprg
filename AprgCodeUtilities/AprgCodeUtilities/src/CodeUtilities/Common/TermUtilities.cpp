@@ -1,7 +1,10 @@
 #include "TermUtilities.hpp"
 
+#include <Common/String/AlbaStringHelper.hpp>
+
 #include <algorithm>
 
+using namespace alba::stringHelper;
 using namespace std;
 
 namespace alba::CodeUtilities {
@@ -34,12 +37,12 @@ IndexesOptional checkPatternAt(Terms const& terms, int const termIndex, Patterns
              termIndex2 < static_cast<int>(terms.size()) && matchIndex < static_cast<int>(searchPattern.size());
              ++termIndex2) {
             Term const& currentTerm(terms[termIndex2]);
-            bool isAMatch = currentTerm == searchPattern[matchIndex];
-            if (isAMatch) {
+            bool isMatchForThisIndex = currentTerm == searchPattern[matchIndex];
+            if (isMatchForThisIndex) {
                 patternIndexes.emplace_back(termIndex2);
                 ++matchIndex;
             }
-            if (!isCommentOrWhiteSpace(currentTerm) && !isAMatch) {
+            if (!isCommentOrWhiteSpace(currentTerm) && !isMatchForThisIndex) {
                 break;
             }
         }
@@ -91,18 +94,23 @@ string convertToString(TermType const type) {
     return {};
 }
 
-string convertToString(TermSpecialMatcherType const type) {
+string convertToString(MatcherType const type) {
 #define GET_ENUM_STRING(en) \
     case en:                \
         return #en;
-    switch (type) { GET_ENUM_STRING(TermSpecialMatcherType::NotAWhiteSpace) }
+    switch (type) {
+        GET_ENUM_STRING(MatcherType::NotAWhiteSpace)
+        GET_ENUM_STRING(MatcherType::IdentifierWithPascalCase)
+    }
     return {};
 }
 
-bool isAMatch(TermSpecialMatcherType const specialMatcherType, Term const& term) {
-    switch (specialMatcherType) {
-        case TermSpecialMatcherType::NotAWhiteSpace:
+bool isAMatch(MatcherType const matcherType, Term const& term) {
+    switch (matcherType) {
+        case MatcherType::NotAWhiteSpace:
             return !isWhiteSpace(term);
+        case MatcherType::IdentifierWithPascalCase:
+            return TermType::Identifier == term.getTermType() && isPascalCase(term.getContent());
     }
     return false;
 }
