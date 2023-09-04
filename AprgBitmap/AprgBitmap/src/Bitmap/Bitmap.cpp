@@ -23,14 +23,18 @@ BitmapSnippet Bitmap::getSnippetReadFromFileWholeBitmap() const {
 
 BitmapSnippet Bitmap::getSnippetReadFromFileWithOutOfRangeCoordinates(
     int const outOfRangeLeft, int const outOfRangeTop, int const outOfRangeRight, int const outOfRangeBottom) const {
-    if (outOfRangeLeft > outOfRangeRight) {
-        swap(outOfRangeLeft, outOfRangeRight);
+    int left = outOfRangeLeft;
+    int top = outOfRangeTop;
+    int right = outOfRangeRight;
+    int bottom = outOfRangeBottom;
+    if (left > right) {
+        swap(left, right);
     }
-    if (outOfRangeTop > outOfRangeBottom) {
-        swap(outOfRangeTop, outOfRangeBottom);
+    if (top > bottom) {
+        swap(top, bottom);
     }
-    BitmapXY const topLeftCorner = m_configuration.getPointWithinTheBitmap(outOfRangeLeft, outOfRangeTop);
-    BitmapXY const bottomRightCorner = m_configuration.getPointWithinTheBitmap(outOfRangeRight, outOfRangeBottom);
+    BitmapXY const topLeftCorner = m_configuration.getPointWithinTheBitmap(left, top);
+    BitmapXY const bottomRightCorner = m_configuration.getPointWithinTheBitmap(right, bottom);
     return getSnippetReadFromFile(topLeftCorner, bottomRightCorner);
 }
 

@@ -46,8 +46,8 @@ public:
     using TrieNodeUniquePointer = std::unique_ptr<TrieNode>;
     struct TrieNode {
         TrieNode(
-            char const characterAsParameter, TrieNodeUniquePointer const leftAsParameter,
-            TrieNodeUniquePointer const rightAsParameter)
+            char const characterAsParameter, TrieNodeUniquePointer&& leftAsParameter,
+            TrieNodeUniquePointer&& rightAsParameter)
             : character(characterAsParameter), left(std::move(leftAsParameter)), right(std::move(rightAsParameter)) {}
 
         [[nodiscard]] bool isLeaf() const { return !left && !right; }

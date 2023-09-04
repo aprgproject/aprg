@@ -117,8 +117,7 @@ private:
         int totalMemoryConsumption = accumulate(
             memoryLimitCache.cbegin(), memoryLimitCache.cend(), 0,
             [](int const memoryConsumption, BlockCacheEntry const& blockCacheEntry) {
-                memoryConsumption += blockCacheEntry.m_blockInformation->getNumberOfObjectsInMemory();
-                return memoryConsumption;
+                return memoryConsumption + blockCacheEntry.m_blockInformation->getNumberOfObjectsInMemory();
             });
         return totalMemoryConsumption;
     }
