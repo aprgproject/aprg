@@ -719,15 +719,12 @@ DataType Audio<DataType>::sixteenBitIntToSample(int16_t const sample) {
 
 template <class DataType>
 int16_t Audio<DataType>::sampleToSixteenBitInt(DataType const sample) {
-    sample = clamp(sample, -1., 1.);
-    return static_cast<int16_t>(sample * 32767.);
+    return static_cast<int16_t>(clamp(sample, -1., 1.) * 32767.);
 }
 
 template <class DataType>
 uint8_t Audio<DataType>::sampleToSingleByte(DataType const sample) {
-    sample = clamp(sample, -1., 1.);
-    sample = (sample + 1.) / 2.;
-    return static_cast<uint8_t>(sample * 255.);
+    return static_cast<uint8_t>((clamp(sample, -1., 1.) + 1.) / 2. * 255.);
 }
 
 template <class DataType>
