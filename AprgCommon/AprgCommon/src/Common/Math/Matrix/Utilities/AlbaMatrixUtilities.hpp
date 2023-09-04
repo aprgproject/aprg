@@ -48,8 +48,8 @@ bool isIdentityMatrix(AlbaMatrix<DataType> const& matrix) {
 }
 
 template <typename DataType>
-bool isSingular(AlbaMatrix<DataType> const& matrix)  // means the its non invertible
-{
+bool isSingular(AlbaMatrix<DataType> const& matrix)  {
+// means the its non invertible
     // Another method:
     // Matrix is invertible iff determinant is zero
     // But this is costly because of determinant.

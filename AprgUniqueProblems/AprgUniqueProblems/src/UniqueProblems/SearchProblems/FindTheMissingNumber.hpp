@@ -19,8 +19,8 @@ public:
 
     FindTheMissingNumber() = default;
 
-    Value getTheMissingNumberUsingSum(Values const& values)  // values can be unsorted because of xor
-    {
+    Value getTheMissingNumberUsingSum(Values const& values)  {
+    // values can be unsorted because of xor
         static_assert(typeHelper::isIntegralType<Value>(), "Value needs to be an integer.");
 
         // There is only one loop here.
@@ -31,8 +31,8 @@ public:
         return expectedSum - actualSum;
     }
 
-    Value getTheMissingNumberUsingXor(Values const& values)  // values can be unsorted because of xor
-    {
+    Value getTheMissingNumberUsingXor(Values const& values)  {
+    // values can be unsorted because of xor
         static_assert(typeHelper::isIntegralType<Value>(), "Value needs to be an integer.");
 
         // There are two loops here (std::accumulate and for loop)

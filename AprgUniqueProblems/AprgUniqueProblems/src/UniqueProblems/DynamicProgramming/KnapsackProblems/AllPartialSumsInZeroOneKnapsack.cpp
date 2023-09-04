@@ -62,8 +62,8 @@ AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSumsWithSquareRootAlgorith
     // record the new sums of weights that can be formed using this group and the previous groups.
 
     map<Value, int> inputValueToCount;  // divide into groups of distinct weights and count number of same weights
-    for (Value const inputValue : m_inputValues)  // n*log(n)
-    {
+    for (Value const inputValue : m_inputValues)  {
+    // n*log(n)
         inputValueToCount.emplace(inputValue, 0);
         inputValueToCount[inputValue]++;
     }

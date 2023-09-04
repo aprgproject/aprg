@@ -66,8 +66,8 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
         Index numberOfWords(m_words.size());
         Costs costsIfFirstWord(numberOfWords, static_cast<Cost>(MAX_COST));
         for (int firstWordIndex = numberOfWords - 1; firstWordIndex >= 0;
-             --firstWordIndex)  // try all first word in lines
-        {
+             --firstWordIndex)  {
+        // try all first word in lines
             Cost& costIfFirstWord(costsIfFirstWord[firstWordIndex]);
             Index lineLength(0);
             for (Index lastWordIndex = firstWordIndex; lastWordIndex < numberOfWords; ++lastWordIndex) {

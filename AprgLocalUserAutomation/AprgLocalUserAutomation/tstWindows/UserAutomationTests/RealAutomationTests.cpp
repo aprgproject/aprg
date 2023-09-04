@@ -15,8 +15,8 @@ using namespace std;
 
 namespace alba {
 
-TEST(RealAutomationTest, DISABLED_TraverseTalonRoShops)  // DISABLED_
-{
+TEST(RealAutomationTest, DISABLED_TraverseTalonRoShops)  {
+// DISABLED_
     AlbaWindowsUserAutomation userAutomation;
     // AlbaLocalPathHandler itemDatabaseFolder(R"(C:\Users\detectivemark7\Desktop\RO\TalonRO\BuyingShops\)");
     AlbaLocalPathHandler itemDatabaseFolder(R"(C:\Users\detectivemark7\Desktop\RO\TalonRO\SellingShops\)");
@@ -120,8 +120,8 @@ TEST(RealAutomationTest, DISABLED_NormalizeAudioForMp3Files) {
     AlbaLocalPathHandler mp3FilesPathHandler(R"(N:\MUSIC\111_DoAutomationHere)");
 
     while (1) {
-        if (userAutomation.isLetterPressed('s'))  // s for start
-        {
+        if (userAutomation.isLetterPressed('s'))  {
+        // s for start
             ListOfPaths filePaths;
             ListOfPaths directoryPaths;
             mp3FilesPathHandler.findFilesAndDirectoriesOneDepth("*.*", filePaths, directoryPaths);
@@ -129,8 +129,8 @@ TEST(RealAutomationTest, DISABLED_NormalizeAudioForMp3Files) {
             for (string const& filePath : filePaths) {
                 AlbaLocalPathHandler filePathHandler(filePath);
                 if (filePathHandler.getExtension() == "mp3" &&
-                    filePathHandler.getFileSizeEstimate() < 100000000)  // 100MB
-                {
+                    filePathHandler.getFileSizeEstimate() < 100000000)  {
+                // 100MB
                     // close previous file
                     userAutomation.performKeyCombination({VK_CONTROL}, {'W'});
                     userAutomation.sleep(1000);

@@ -37,8 +37,8 @@ private:
         Vertex tortoise = startOfGraph;
         Vertex hare = walkOne(startOfGraph);
         while (tortoise != hare) {
-            if (powerOfTwo == cycleLength)  // if cycleLength is power of 2
-            {
+            if (powerOfTwo == cycleLength)  {
+            // if cycleLength is power of 2
                 tortoise = hare;  // set current vertex as something to check
                 powerOfTwo *= 2;  // set next power of 2 limit
                 cycleLength = 0;
@@ -52,12 +52,12 @@ private:
     Vertex getStartOfCycle(Vertex const& startOfGraph, int const cycleLength) {
         Vertex vertex1 = startOfGraph;
         Vertex vertex2 = startOfGraph;
-        for (int i = 0; i < cycleLength; ++i)  // put cycle length distance between vertex1 and vertex2;
-        {
+        for (int i = 0; i < cycleLength; ++i)  {
+        // put cycle length distance between vertex1 and vertex2;
             vertex2 = walkOne(vertex2);
         }
-        while (vertex1 != vertex2)  // walk both until equal
-        {
+        while (vertex1 != vertex2)  {
+        // walk both until equal
             vertex1 = walkOne(vertex1);
             vertex2 = walkOne(vertex2);
         }
@@ -66,8 +66,8 @@ private:
 
     void saveCycle(Vertex const& startOfCycle, int const cycleLength) {
         Vertex vertex = startOfCycle;
-        for (int i = 0; i < cycleLength; ++i)  // based from cycle length, iterate vertex of cycle
-        {
+        for (int i = 0; i < cycleLength; ++i)  {
+        // based from cycle length, iterate vertex of cycle
             m_cyclePath.emplace_back(vertex);
             vertex = walkOne(vertex);
         }

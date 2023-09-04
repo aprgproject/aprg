@@ -53,8 +53,8 @@ inline NumberType clampWithin(NumberType const value, NumberType const lowest, N
     return clampHigherBound(clampLowerBound(value, lowest), highest);
 }
 
-inline AlbaNumber getAverage(AlbaNumber const& value1, AlbaNumber const& value2)  // pass as const reference
-{
+inline AlbaNumber getAverage(AlbaNumber const& value1, AlbaNumber const& value2)  {
+// pass as const reference
     return (value1 + value2) / 2;
 }
 

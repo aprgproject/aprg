@@ -219,8 +219,8 @@ bool isSinkSourceFlowNetworkFeasible(SinkSourceFlowNetworkType const& flowNetwor
     for (auto const& vertex : flowNetwork.getVertices()) {
         for (auto const& adjacentVertex : flowNetwork.getAdjacentVerticesAt(vertex)) {
             auto edgeDetails(flowNetwork.getFlowEdgeDetails(vertex, adjacentVertex));
-            if (edgeDetails.flow < 0 || edgeDetails.flow > edgeDetails.capacity)  // out of range
-            {
+            if (edgeDetails.flow < 0 || edgeDetails.flow > edgeDetails.capacity)  {
+            // out of range
                 result = false;
                 break;
             }
@@ -230,8 +230,8 @@ bool isSinkSourceFlowNetworkFeasible(SinkSourceFlowNetworkType const& flowNetwor
         for (auto const& vertex : flowNetwork.getVertices()) {
             if (flowNetwork.getSourceVertex() != vertex && flowNetwork.getSinkVertex() != vertex &&
                 !flowNetwork.hasLocalEquilibrium(
-                    vertex))  // should have local equilibrium at non source and sink vertices
-            {
+                    vertex))  {
+            // should have local equilibrium at non source and sink vertices
                 result = false;
                 break;
             }

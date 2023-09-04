@@ -40,8 +40,8 @@ LinearDiophantineEquationCoefficientSolver::Integer LinearDiophantineEquationCoe
 void LinearDiophantineEquationCoefficientSolver::solve(
     AlbaNumber const& aNumber, AlbaNumber const& bNumber, AlbaNumber const& cNumber) {
     if (aNumber.isIntegerType() && bNumber.isIntegerType() &&
-        cNumber.isIntegerType())  // Each number in the equation has to be an integer.
-    {
+        cNumber.isIntegerType())  {
+    // Each number in the equation has to be an integer.
         m_a = aNumber.getInteger();
         m_b = bNumber.getInteger();
         m_c = cNumber.getInteger();

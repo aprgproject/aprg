@@ -73,8 +73,8 @@ private:
         m_pParts.reserve(m_stringToHash.length());
         m_hParts.emplace_back(m_stringToHash.front());
         m_pParts.emplace_back(1);
-        for (auto it = m_stringToHash.cbegin() + 1; it != m_stringToHash.cend(); ++it)  // linear time
-        {
+        for (auto it = m_stringToHash.cbegin() + 1; it != m_stringToHash.cend(); ++it)  {
+        // linear time
             m_hParts.emplace_back((m_hParts.back() * m_radix + *it) % m_largeRandomPrime);
             m_pParts.emplace_back((m_pParts.back() * m_radix) % m_largeRandomPrime);
         }

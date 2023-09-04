@@ -38,8 +38,8 @@ private:
                         result = adjacentVertices.front();
                     }
                 }
-                if (mathHelper::isPowerOfTwo(distance) != 0)  // save distance if power of 2
-                {
+                if (mathHelper::isPowerOfTwo(distance) != 0)  {
+                // save distance if power of 2
                     m_startAndDistancePairToDestinationMap.emplace(VertexAndCountPair{vertex, distance}, result);
                 }
             }

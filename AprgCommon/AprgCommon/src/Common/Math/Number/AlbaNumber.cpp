@@ -303,8 +303,8 @@ AlbaNumber AlbaNumber::operator^(AlbaNumber const& second) const {
     double baseInDouble(first.getDouble());
     double exponentInDouble(second.getDouble());
     double powerResultInDouble(pow(baseInDouble, exponentInDouble));
-    if (!isnan(baseInDouble) && !isnan(exponentInDouble) && isnan(powerResultInDouble))  // should convert to complex
-    {
+    if (!isnan(baseInDouble) && !isnan(exponentInDouble) && isnan(powerResultInDouble))  {
+    // should convert to complex
         result = createComplexNumber(
             ComplexFloat(static_cast<float>(baseInDouble), 0) ^ static_cast<float>(exponentInDouble));
     } else {

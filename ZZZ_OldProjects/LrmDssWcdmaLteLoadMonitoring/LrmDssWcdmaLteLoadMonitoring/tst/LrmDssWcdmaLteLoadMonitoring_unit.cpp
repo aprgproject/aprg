@@ -150,8 +150,8 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, HsfachIsCalculatedAsPartOfCellLoad) {
 
 TEST(
     LrmDssWcdmaLteLoadMonitoringTest,
-    CellLoadIsCalculatedCorrectlyWhenAllParametersArePresent)  // not TDD but for peace of mind
-{
+    CellLoadIsCalculatedCorrectlyWhenAllParametersArePresent)  {
+// not TDD but for peace of mind
     // Given
     LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 
@@ -272,11 +272,11 @@ TEST(
 
 TEST(
     LrmDssWcdmaLteLoadMonitoringTest,
-    NextLoadStateIsTheSameLoadStateOfAppliedFilterWhenCurrentLoadStateIsHigherThanLoadStateOfAppliedFilter)  // Not TDD
+    NextLoadStateIsTheSameLoadStateOfAppliedFilterWhenCurrentLoadStateIsHigherThanLoadStateOfAppliedFilter)  {
                                                                                                              // but for
                                                                                                              // piece of
                                                                                                              // mind
-{
+// Not TDD
     // Given
     LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 

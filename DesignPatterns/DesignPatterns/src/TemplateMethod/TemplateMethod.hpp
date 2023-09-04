@@ -9,8 +9,8 @@ class AbstractClass {
 public:
     virtual ~AbstractClass() = default;
 
-    void templateMethod()  // should NOT be "virtual" or should be marked as "final"
-    {
+    void templateMethod()  {
+    // should NOT be "virtual" or should be marked as "final"
         // ...
         primitiveOperation1();
         // ...

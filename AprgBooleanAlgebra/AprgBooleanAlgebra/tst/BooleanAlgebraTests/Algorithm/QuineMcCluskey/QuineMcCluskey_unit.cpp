@@ -207,8 +207,8 @@ TEST(QuineMcCluskeyTest, GetAllPrimeImplicantsAndGetBestPrimeImplicantsWorksWith
     cout << quineMcCluskey.getOutputTable(bestPrimeImplicants);
 }
 
-TEST(QuineMcCluskeyTest, ExperimentalTest)  //
-{
+TEST(QuineMcCluskeyTest, ExperimentalTest)  {
+//
     QuineMcCluskeyForTest quineMcCluskey;
     quineMcCluskey.setInputOutput(2, LogicalValue::True);
     quineMcCluskey.setInputOutput(3, LogicalValue::DontCare);

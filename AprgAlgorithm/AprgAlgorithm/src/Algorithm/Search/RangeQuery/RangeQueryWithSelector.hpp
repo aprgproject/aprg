@@ -31,8 +31,8 @@ public:
         // This is on constant time
         Value result{};
         if (start < static_cast<Index>(m_selectedValueMatrix.getNumberOfColumns()) &&
-            end < static_cast<Index>(m_selectedValueMatrix.getNumberOfColumns()))  // this condition is correct
-        {
+            end < static_cast<Index>(m_selectedValueMatrix.getNumberOfColumns()))  {
+        // this condition is correct
             if (start < end) {
                 Index exponentOfDelta = getCeilOfLogarithmWithBase2Of(end + 1 - start) - 1;
                 Index delta = get2ToThePowerOf(exponentOfDelta);  // Half of the distance that would fit

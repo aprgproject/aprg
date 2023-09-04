@@ -24,8 +24,8 @@ TEST(SummationTest, ExperimentalTest1) {
     // digits.
 
     Term formula(1);
-    for (int i = 1; i < 10; ++i)  // continue to integrate for number of digits
-    {
+    for (int i = 1; i < 10; ++i)  {
+    // continue to integrate for number of digits
         Summation summation(formula, "x");
         formula = summation.getSummationModelWithUnknownConstant();
         formula = formula - Term("C");

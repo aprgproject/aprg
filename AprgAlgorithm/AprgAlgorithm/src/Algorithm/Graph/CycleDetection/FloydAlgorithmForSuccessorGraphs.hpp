@@ -31,8 +31,8 @@ private:
     Vertex getMeetingVertexAndCheckForACycle(Vertex const& startOfGraph) {
         Vertex turtoise(walkOne(startOfGraph));
         Vertex hare(walkTwo(startOfGraph));
-        while (turtoise != hare && !isAtTheEnd(hare))  // stop if there meet or end is reached
-        {
+        while (turtoise != hare && !isAtTheEnd(hare))  {
+        // stop if there meet or end is reached
             turtoise = walkOne(turtoise);  // walks one
             hare = walkTwo(hare);          // walks two
         }
@@ -44,8 +44,8 @@ private:
     Vertex getStartOfCycle(Vertex const& startOfGraph, Vertex const& meetingVertex) {
         Vertex vertex1 = startOfGraph;
         Vertex vertex2 = meetingVertex;
-        while (vertex1 != vertex2)  // if they meet again, then its the start of the cycle
-        {
+        while (vertex1 != vertex2)  {
+        // if they meet again, then its the start of the cycle
             vertex1 = walkOne(vertex1);
             vertex2 = walkOne(vertex2);
         }

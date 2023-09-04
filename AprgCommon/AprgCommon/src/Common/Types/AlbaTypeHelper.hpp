@@ -191,8 +191,8 @@ constexpr bool isAPolymorphicType() {
 }
 
 template <typename Type>
-constexpr bool isAnAbstractType()  // isAnInterface
-{
+constexpr bool isAnAbstractType()  {
+// isAnInterface
     return std::is_abstract<Type>::value;
 }
 

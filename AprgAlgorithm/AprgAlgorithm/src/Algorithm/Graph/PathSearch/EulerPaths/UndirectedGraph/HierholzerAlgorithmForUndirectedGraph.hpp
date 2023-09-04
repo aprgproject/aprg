@@ -34,8 +34,8 @@ private:
 
         while (!nonDeadEndPath.empty()) {
             SetOfVertices& adjacentVertices(vertexToSetOfAdjacencyVerticesMap[currentVertex]);
-            if (!adjacentVertices.empty())  // if not dead end
-            {
+            if (!adjacentVertices.empty())  {
+            // if not dead end
                 nonDeadEndPath.push(currentVertex);
                 auto firstIt = adjacentVertices.cbegin();
                 Vertex nextVertex(*firstIt);

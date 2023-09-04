@@ -107,8 +107,8 @@ public:
 
     explicit AlbaOptional(ContentType& content)
         : m_hasContent(true),
-          m_contentPointer(std::addressof(content))  // std::addressof should be used because & might be overloaded
-    {}
+          m_contentPointer(std::addressof(content))  {
+    // std::addressof should be used because & might be overloaded}
 
     ~AlbaOptional() = default;
 

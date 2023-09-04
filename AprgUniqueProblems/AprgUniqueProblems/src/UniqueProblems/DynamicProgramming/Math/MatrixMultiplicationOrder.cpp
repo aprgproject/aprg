@@ -78,8 +78,8 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
     CountMatrix& countMatrix, Index const leftParenthesis, Index const rightParenthesis) const {
     Count result(countMatrix.getEntry(leftParenthesis, rightParenthesis));
     if (MAX_COUNT == result) {
-        if (leftParenthesis + 2 <= rightParenthesis)  // distance should be two for at least three elements
-        {
+        if (leftParenthesis + 2 <= rightParenthesis)  {
+        // distance should be two for at least three elements
             // result is already set to MAX_COUNT so we can proceed on using min
             for (Index inBetween = leftParenthesis + 1; inBetween < rightParenthesis; ++inBetween) {
                 Count currentCount =

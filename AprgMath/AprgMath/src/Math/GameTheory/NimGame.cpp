@@ -28,8 +28,8 @@ NimState NimGame::getOptimalNextState(NimState const& nimState) {
         // the nim sum also changes, so the nim sum is different from 0 after the move.
 
         for (NimHeapSize& nimHeapSize : result) {
-            if (nimHeapSize > 0)  // just take one to prolong the game
-            {
+            if (nimHeapSize > 0)  {
+            // just take one to prolong the game
                 --nimHeapSize;
                 break;
             }

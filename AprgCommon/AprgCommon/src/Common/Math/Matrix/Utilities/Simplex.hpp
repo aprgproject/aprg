@@ -30,8 +30,8 @@ AlbaMatrix<DataType> constructSimplexTableWithLessThanConstraints(
     constraintsCoefficients.iterateAllThroughYAndThenX([&](size_t const xPosition, size_t const yPosition) {
         result.setEntry(xPosition, yPosition, constraintsCoefficients.getEntry(xPosition, yPosition));
     });
-    for (size_t i = 0; i < constraintsCoefficients.getNumberOfRows(); ++i)  // setting 1 for identity matrix
-    {
+    for (size_t i = 0; i < constraintsCoefficients.getNumberOfRows(); ++i)  {
+    // setting 1 for identity matrix
         result.setEntry(i + constraintsCoefficients.getNumberOfColumns(), i, 1);
     }
     result.setRow(numberOfRows - 1, objectiveFunctionCoefficients);
@@ -47,8 +47,8 @@ void solveSimplexTable(AlbaMatrix<DataType>& simplexTable) {
         size_t pivotingColumn(getPivotingColumnUsingBlandsRule(simplexTable));
         if (pivotingColumn < simplexTable.getNumberOfColumns()) {
             size_t pivotingRow(getPivotingRowUsingMinRatioRule(simplexTable, pivotingColumn));
-            if (pivotingRow < simplexTable.getNumberOfRows())  // if no pivoting row then its unbounded
-            {
+            if (pivotingRow < simplexTable.getNumberOfRows())  {
+            // if no pivoting row then its unbounded
                 pivotAt(simplexTable, pivotingColumn, pivotingRow);
                 // Pivoting makes the column of the objective function (last row) result to zero
                 didPivot = true;
@@ -90,11 +90,11 @@ size_t getPivotingRowUsingMinRatioRule(AlbaMatrix<DataType> const& simplexTable,
     DataType pivotingRatio{};
     size_t lastX(simplexTable.getNumberOfColumns() - 1);
     for (size_t yPosition = 0; yPosition < simplexTable.getNumberOfRows() - 1;
-         ++yPosition)  // pivoting row does not include the last row (because last row contains the objective function)
-    {
+         ++yPosition)  {
+    // pivoting row does not include the last row (because last row contains the objective function)
         if (simplexTable.getEntry(pivotingColumn, yPosition) >
-            0)  // consider only positive coefficient and positive value
-        {
+            0)  {
+        // consider only positive coefficient and positive value
             // If there are no positive entries in the pivot column then the objective function is unbounded and there
             // is no optimal solution.
             DataType currentRatio =
@@ -103,8 +103,8 @@ size_t getPivotingRowUsingMinRatioRule(AlbaMatrix<DataType> const& simplexTable,
                 pivotingRow = yPosition;
                 pivotingRatio = currentRatio;
                 isFirst = false;
-            } else if (currentRatio < pivotingRatio)  // ratio must be smaller
-            {
+            } else if (currentRatio < pivotingRatio)  {
+            // ratio must be smaller
                 pivotingRow = yPosition;
                 pivotingRatio = currentRatio;
             }

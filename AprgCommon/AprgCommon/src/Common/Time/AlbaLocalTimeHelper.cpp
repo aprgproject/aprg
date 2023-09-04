@@ -49,8 +49,8 @@ LibrarySystemTime convertAlbaDateTimeToSystemTime(AlbaDateTime const& inputTime)
     timeInformation.tm_year = static_cast<int>(inputTime.getYears()) - YEAR_OFFSET;
 
     time_t timeWithoutMicroSeconds = mktime(&timeInformation);
-    if (timeWithoutMicroSeconds != -1)  // mktime returns -1 if cannot be represented
-    {
+    if (timeWithoutMicroSeconds != -1)  {
+    // mktime returns -1 if cannot be represented
         result = system_clock::from_time_t(timeWithoutMicroSeconds) + microseconds(inputTime.getMicroSeconds());
     }
     return result;

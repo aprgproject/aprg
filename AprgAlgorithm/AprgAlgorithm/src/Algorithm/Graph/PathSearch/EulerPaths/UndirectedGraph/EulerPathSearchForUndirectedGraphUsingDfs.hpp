@@ -56,13 +56,13 @@ private:
             auto it = vertexToQueueOfEdgesMap.find(currentVertex);
             // check the most recent vertex if there is a new path
             while (it != vertexToQueueOfEdgesMap.cend() &&
-                   !it->second.empty())  // traverse to find a continuous path, until a dead end is found
-            {
+                   !it->second.empty())  {
+            // traverse to find a continuous path, until a dead end is found
                 QueueOfEdges& queueOfEdgesAtVertex(vertexToQueueOfEdgesMap[currentVertex]);
                 Edge currentEdge(queueOfEdgesAtVertex.front());
                 queueOfEdgesAtVertex.pop();
-                if (previousEdges.find(currentEdge) != previousEdges.cend())  // must be a new edge
-                {
+                if (previousEdges.find(currentEdge) != previousEdges.cend())  {
+                // must be a new edge
                     continue;
                 }
                 previousEdges.emplace(currentEdge);

@@ -34,8 +34,8 @@ public:
         return currentRoot;
     }
 
-    Object getRootWithPathCompressionOnePass(Object const& object)  // no longer const
-    {
+    Object getRootWithPathCompressionOnePass(Object const& object)  {
+    // no longer const
         Object result(object);
         while (result != m_relativeRoots[object]) {
             m_relativeRoots[object] =
@@ -45,8 +45,8 @@ public:
         return result;
     }
 
-    Object getRootWithPathCompressionTwoPass(Object const& object)  // no longer const
-    {
+    Object getRootWithPathCompressionTwoPass(Object const& object)  {
+    // no longer const
         RootVector relativeRoots;
         Object currentRoot(object);
         Object nextRoot(m_relativeRoots[object]);
@@ -56,9 +56,9 @@ public:
             nextRoot = m_relativeRoots[currentRoot];
         }
         for (Object const& relativeRoot :
-             relativeRoots)  // set found root to all examined relative roots -> makes the tree really flat (Hopcroft
+             relativeRoots)  {
                              // Ulman Tarjan proof -> almost linear)
-        {
+        // set found root to all examined relative roots -> makes the tree really flat (Hopcroft
             m_relativeRoots[relativeRoot] = currentRoot;
         }
         return currentRoot;

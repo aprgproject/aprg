@@ -135,8 +135,8 @@ protected:
                 first = Utilities::getParent(first);
                 last = Utilities::getParent(last);
             }
-            if (first == last)  // add value if it ends on the same place
-            {
+            if (first == last)  {
+            // add value if it ends on the same place
                 result = m_function(result, m_treeValues[first]);
             }
         }

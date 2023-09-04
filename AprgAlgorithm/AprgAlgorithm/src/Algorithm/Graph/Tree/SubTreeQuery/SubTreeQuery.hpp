@@ -48,8 +48,8 @@ protected:
 
     void traverseStartingFromAVertex(Vertex const& startVertex) {
         if (m_processedVertices.isNotFound(startVertex) &&
-            !m_graph.getAdjacentVerticesAt(startVertex).empty())  // dont include invalid vertex
-        {
+            !m_graph.getAdjacentVerticesAt(startVertex).empty())  {
+        // dont include invalid vertex
             m_subTreeSize.resize(m_graph.getNumberOfVertices());
 
             int treeSize(0);

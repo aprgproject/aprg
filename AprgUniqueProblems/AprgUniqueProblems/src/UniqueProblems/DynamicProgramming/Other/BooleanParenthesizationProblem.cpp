@@ -88,8 +88,8 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
 BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberOfWaysUsingNaiveRecursion(
     bool const expectedOutput, Index const leftParenthesis, Index const rightParenthesis) const {
     Count result(0);
-    if (leftParenthesis + 1 <= rightParenthesis)  // distance should be one for at least two elements
-    {
+    if (leftParenthesis + 1 <= rightParenthesis)  {
+    // distance should be one for at least two elements
         for (Index operationIndex = leftParenthesis; operationIndex < rightParenthesis; ++operationIndex) {
             Count numberOfFalseInLeft = getNumberOfWaysUsingNaiveRecursion(false, leftParenthesis, operationIndex);
             Count numberOfTrueInLeft = getNumberOfWaysUsingNaiveRecursion(true, leftParenthesis, operationIndex);
@@ -113,8 +113,8 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
                 result += numberOfFalseInLeft * numberOfTrueInRight + numberOfTrueInLeft * numberOfFalseInRight;
             }
         }
-    } else if (leftParenthesis == rightParenthesis)  // one element
-    {
+    } else if (leftParenthesis == rightParenthesis)  {
+    // one element
         result = convertBoolToCount(m_inputValues[leftParenthesis] == expectedOutput);
     }
     return result;
@@ -127,8 +127,8 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
     Count result(countMatrices[expectedOutputIndex].getEntry(leftParenthesis, rightParenthesis));
     if (UNUSED_COUNT == result) {
         result = 0;
-        if (leftParenthesis + 1 <= rightParenthesis)  // distance should be one for at least two elements
-        {
+        if (leftParenthesis + 1 <= rightParenthesis)  {
+        // distance should be one for at least two elements
             for (Index operationIndex = leftParenthesis; operationIndex < rightParenthesis; ++operationIndex) {
                 Count numberOfFalseInLeft = getNumberOfWaysUsingNaiveRecursion(false, leftParenthesis, operationIndex);
                 Count numberOfTrueInLeft = getNumberOfWaysUsingNaiveRecursion(true, leftParenthesis, operationIndex);
@@ -153,8 +153,8 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
                     result += numberOfFalseInLeft * numberOfTrueInRight + numberOfTrueInLeft * numberOfFalseInRight;
                 }
             }
-        } else if (leftParenthesis == rightParenthesis)  // one element
-        {
+        } else if (leftParenthesis == rightParenthesis)  {
+        // one element
             result = convertBoolToCount(m_inputValues[leftParenthesis] == expectedOutput);
         }
         countMatrices[expectedOutputIndex].setEntry(leftParenthesis, rightParenthesis, result);

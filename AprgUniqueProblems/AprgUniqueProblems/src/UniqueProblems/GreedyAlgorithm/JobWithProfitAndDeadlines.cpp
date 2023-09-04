@@ -17,8 +17,8 @@ JobWithProfitAndDeadlines::JobNames JobWithProfitAndDeadlines::getJobsOrderWithM
     Jobs jobToSchedule(m_jobs);
     sort(
         jobToSchedule.begin(), jobToSchedule.end(),
-        [](Job const& job1, Job const& job2)  // sort by larger profit
-        { return job1.profit > job2.profit; });
+        [](Job const& job1, Job const& job2)  {
+        // sort by larger profit return job1.profit > job2.profit; });
 
     PreviousFreeIndex availableSchedule(getMaximumDeadline() + 1);  // plus one because deadline should indexable
     for (Job const& job : jobToSchedule) {

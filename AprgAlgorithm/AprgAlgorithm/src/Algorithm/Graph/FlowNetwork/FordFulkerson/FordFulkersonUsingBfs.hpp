@@ -34,8 +34,8 @@ protected:
         b_processedVertices.putVertex(b_flowNetwork.getSourceVertex());
         std::deque<Vertex> queueOfVerticesToProcess{b_flowNetwork.getSourceVertex()};
 
-        while (!queueOfVerticesToProcess.empty())  // BFS like traversal
-        {
+        while (!queueOfVerticesToProcess.empty())  {
+        // BFS like traversal
             Vertex vertex(queueOfVerticesToProcess.back());
             queueOfVerticesToProcess.pop_back();
             for (FlowEdge const& flowEdge : b_flowNetwork.getFlowEdgesWithVertex(vertex)) {

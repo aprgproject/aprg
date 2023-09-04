@@ -99,8 +99,8 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountBySearchingValuesW
         Value end = getRaiseToPowerForIntegers(10, m_numberOfDigits);
 
         for (Value value = start; value < end;
-             value += (value == m_targetSumOfDigits) ? 9 : 1)  // once sum is found just add 9 to find the next one
-        {
+             value += (value == m_targetSumOfDigits) ? 9 : 1)  {
+        // once sum is found just add 9 to find the next one
             Value currentSumOfDigits = 0;
             Value remainingDigits = value;
             while (remainingDigits != 0) {
@@ -128,8 +128,8 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingNaiveRecursio
         } else {
             result = 1;
         }
-    } else if (partialSum <= 9)  // 1 to 9
-    {
+    } else if (partialSum <= 9)  {
+    // 1 to 9
         result = 1;
     }
     return result;
@@ -150,8 +150,8 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingMemoizationDP
             } else {
                 result = 1;
             }
-        } else if (partialSum <= 9)  // 1 to 9
-        {
+        } else if (partialSum <= 9)  {
+        // 1 to 9
             result = 1;
         }
         countMatrix.setEntry(partialSum, digitIndex, result);

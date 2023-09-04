@@ -22,8 +22,8 @@ public:
 
     void sort(Values& valuesToSort) const override {
         int numberOfDigits(m_getNumberOfDigitsFunction(valuesToSort));
-        for (int digitIndex = 0; digitIndex < numberOfDigits; ++digitIndex)  // start at least significant digit
-        {
+        for (int digitIndex = 0; digitIndex < numberOfDigits; ++digitIndex)  {
+        // start at least significant digit
             auto getDigitFunction = [&](Value const& value) { return m_getDigitAtFunction(value, digitIndex); };
             CountingSorterUsingNewPositions<Values, MAX_NUMBER_OF_DIGIT_VALUES> countingSorter(getDigitFunction);
             countingSorter.sort(valuesToSort);

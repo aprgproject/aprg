@@ -54,8 +54,8 @@ VariableNamesSet TwoSatisfiabilityUsingGraphs::createVariableNamesFromSatTerms(S
 TwoSatisfiabilityUsingGraphs::DirectedGraph TwoSatisfiabilityUsingGraphs::createDirectedGraphBasedFromSatTerms(
     SatisfiabilityTerms const& satTerms) {
     DirectedGraph result;
-    if (2U == getSatisfiabilityLevel(satTerms))  // 2SAT
-    {
+    if (2U == getSatisfiabilityLevel(satTerms))  {
+    // 2SAT
         for (SatisfiabilityTerm const& satTerm : satTerms) {
             if (satTerm.size() == 1) {
                 result.connect(~satTerm[0], satTerm[0]);

@@ -19,8 +19,8 @@ public:
         return *m_instancePointer;
     }
 
-    static void restartInstance()  // "static variable approach" has no restart
-    {
+    static void restartInstance()  {
+    // "static variable approach" has no restart
         if (m_instancePointer) {
             m_instancePointer.reset();
         }

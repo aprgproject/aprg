@@ -28,14 +28,14 @@ NimState MisereGame::getOptimalNextState(NimState const& inputNimState) {
     GameState gameState(getGameState(inputNimState));
     if (GameState::Losing == gameState) {
         for (NimHeapSize& nimHeapSize : result) {
-            if (nimHeapSize > 0)  // just take one to prolong the game
-            {
+            if (nimHeapSize > 0)  {
+            // just take one to prolong the game
                 --nimHeapSize;
                 break;
             }
         }
-    } else if (GameState::Winning == gameState)  // state is only winning when size is odd (checked on getGameState)
-    {
+    } else if (GameState::Winning == gameState)  {
+    // state is only winning when size is odd (checked on getGameState)
         NimHeapSize nimSum(NimGame::getNimSum(inputNimState));
         UnsignedInteger i = 0;
         for (; i < result.size(); ++i) {

@@ -91,8 +91,8 @@ protected:
         m_processedVertices.putVertex(vertex);
         for (Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(vertex)) {
             checkCycleAndSaveIfNeeded(currentPath, adjacentVertex);
-            if (shouldStop())  // needs to stop here to prune all dfs recursion instances
-            {
+            if (shouldStop())  {
+            // needs to stop here to prune all dfs recursion instances
                 break;
             }
             if (m_processedVertices.isNotFound(adjacentVertex)) {

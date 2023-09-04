@@ -39,8 +39,8 @@ SubArraySum::Values SubArraySum::getSubArrayWithSum(Value const targetSum) const
                 }
             }
         }
-        if (isFound)  // empty if not found
-        {
+        if (isFound)  {
+        // empty if not found
             result = Values(m_valuesToCheck.cbegin() + start, m_valuesToCheck.begin() + end + 1);
         }
     }

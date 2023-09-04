@@ -16,8 +16,8 @@ namespace alba::AprgBitmap::ColorUtilities {
 
 constexpr uint8_t MAX_COLOR_VALUE = 0xFF;
 
-bool isSimilar(uint32_t const color1, uint32_t const color2, uint32_t const similarityColorLimit)  // RGB algo
-{
+bool isSimilar(uint32_t const color1, uint32_t const color2, uint32_t const similarityColorLimit)  {
+// RGB algo
     bool isRedDifferenceBeyondLimit =
         getPositiveDelta<uint32_t>(extractRed(color1), extractRed(color2)) > similarityColorLimit;
     bool isGreenDifferenceBeyondLimit =

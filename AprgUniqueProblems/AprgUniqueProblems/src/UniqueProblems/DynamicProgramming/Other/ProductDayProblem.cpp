@@ -13,12 +13,12 @@ ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingMemoizationDP() 
     Price result(0);
     if (!m_pricesInDayByProduct.isEmpty()) {
         PriceMatrix minimumPrices(getNumberOfDays(), getNumberOfProductsSubsets(), static_cast<Price>(UNUSED_PRICE));
-        for (Day day = 0; day < getNumberOfDays(); ++day)  // set zero cost on empty product bits
-        {
+        for (Day day = 0; day < getNumberOfDays(); ++day)  {
+        // set zero cost on empty product bits
             minimumPrices.setEntry(day, 0, 0);
         }
-        for (Product product = 0; product < getNumberOfProducts(); ++product)  // fill up first day
-        {
+        for (Product product = 0; product < getNumberOfProducts(); ++product)  {
+        // fill up first day
             minimumPrices.setEntry(0, getProductBits(product), m_pricesInDayByProduct.getEntry(0, product));
         }
         result =
@@ -31,18 +31,18 @@ ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingIterativeDP() co
     // set half max to all entries (half max because theres addition so values might exceed if we use max)
     PriceMatrix minimumPrices(getNumberOfDays(), getNumberOfProductsSubsets(), static_cast<Price>(UNUSED_PRICE));
 
-    for (Day day = 0; day < getNumberOfDays(); ++day)  // set zero cost on empty product bits
-    {
+    for (Day day = 0; day < getNumberOfDays(); ++day)  {
+    // set zero cost on empty product bits
         minimumPrices.setEntry(day, 0, 0);
     }
 
-    for (Product product = 0; product < getNumberOfProducts(); ++product)  // fill up first day
-    {
+    for (Product product = 0; product < getNumberOfProducts(); ++product)  {
+    // fill up first day
         minimumPrices.setEntry(0, getProductBits(product), m_pricesInDayByProduct.getEntry(0, product));
     }
 
-    for (Day day = 1; day < getNumberOfDays(); ++day)  // fill up remaining days using dynamic programming
-    {
+    for (Day day = 1; day < getNumberOfDays(); ++day)  {
+    // fill up remaining days using dynamic programming
         // productBits representation: 0 not included, 1 is included
         for (ProductBits productBits = 0; productBits < getNumberOfProductsSubsets(); ++productBits) {
             minimumPrices.setEntry(
@@ -65,8 +65,8 @@ ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingIterativeDP() co
 
     Price result{};
     if (minimumPrices.isInside(
-            getNumberOfDays() - 1, getNumberOfProductsSubsets() - 1))  // best price is on the last column and row
-    {
+            getNumberOfDays() - 1, getNumberOfProductsSubsets() - 1))  {
+    // best price is on the last column and row
         result = minimumPrices.getEntry(getNumberOfDays() - 1, getNumberOfProductsSubsets() - 1);
     }
     return result;

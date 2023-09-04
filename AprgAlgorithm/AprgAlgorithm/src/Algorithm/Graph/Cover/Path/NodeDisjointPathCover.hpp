@@ -57,8 +57,8 @@ private:
         Paths result;
         DequeOfEdges detectedEdges(edges.cbegin(), edges.cend());
         VectorOfDequeOfVertices paths;
-        while (!detectedEdges.empty())  // construct paths from detected edges
-        {
+        while (!detectedEdges.empty())  {
+        // construct paths from detected edges
             Edge firstEdge(detectedEdges.front());
             detectedEdges.pop_front();
             DequeOfVertices pathInDeque{firstEdge.first, firstEdge.second};

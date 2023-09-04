@@ -143,8 +143,8 @@ UnsignedInteger getModularInverseByGcfEuclidAlgorithm(UnsignedInteger const numb
     UnsignedInteger x = 0;
     UnsignedInteger y = 0;
     UnsignedInteger gcf = getGreatestCommonFactorWithLastValues(number, modulo, x, y);
-    if (1 == gcf)  // is coprime
-    {
+    if (1 == gcf)  {
+    // is coprime
         result = (x % modulo + modulo) % modulo;
     }
     return result;

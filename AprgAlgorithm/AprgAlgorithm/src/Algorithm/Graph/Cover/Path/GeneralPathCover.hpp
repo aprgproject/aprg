@@ -69,8 +69,8 @@ private:
         Edges allEdges(m_graph.getEdges());
         DequeOfEdges detectedEdges;
         SetOfEdges unprocessedEdges(allEdges.cbegin(), allEdges.cend());
-        for (auto const& [firstVertex, secondVertex] : vertexPairs)  // get detected edges and unprocessed edges
-        {
+        for (auto const& [firstVertex, secondVertex] : vertexPairs)  {
+        // get detected edges and unprocessed edges
             if (m_graph.isDirectlyConnected(firstVertex, secondVertex)) {
                 detectedEdges.emplace_back(firstVertex, secondVertex);
                 unprocessedEdges.erase(Edge(firstVertex, secondVertex));
@@ -98,8 +98,8 @@ private:
             }
             paths.emplace_back(pathInDeque);
         }
-        for (DequeOfVertices& pathInDeque : paths)  // add unprocessed edges to existing paths
-        {
+        for (DequeOfVertices& pathInDeque : paths)  {
+        // add unprocessed edges to existing paths
             for (auto unprocessEdgeIt = unprocessedEdges.begin(); unprocessEdgeIt != unprocessedEdges.end();) {
                 auto const& [startVertexOfEdge, endVertexOfEdge] = *unprocessEdgeIt;
                 if (pathInDeque.front() == endVertexOfEdge) {
@@ -117,19 +117,19 @@ private:
         }
         Vertices allVertices(m_graph.getVertices());
         SetOfVertices unprocessedVertices(allVertices.cbegin(), allVertices.cend());
-        for (DequeOfVertices const& pathInDeque : paths)  // remove vertices from path to get unprocessed vertices
-        {
+        for (DequeOfVertices const& pathInDeque : paths)  {
+        // remove vertices from path to get unprocessed vertices
             for (Vertex const& vertex : pathInDeque) {
                 unprocessedVertices.erase(vertex);
             }
         }
         for (Vertex const& unprocessedVertex :
-             unprocessedVertices)  // add each of the unprocessed vertices as its own path
-        {
+             unprocessedVertices)  {
+        // add each of the unprocessed vertices as its own path
             paths.emplace_back(DequeOfVertices{unprocessedVertex});
         }
-        for (DequeOfVertices const& pathInDeque : paths)  // convert pathsInDeque to paths
-        {
+        for (DequeOfVertices const& pathInDeque : paths)  {
+        // convert pathsInDeque to paths
             result.emplace_back(pathInDeque.begin(), pathInDeque.cend());
         }
         return result;

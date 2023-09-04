@@ -19,15 +19,15 @@ public:
         return nullptr;
     }
 
-    virtual void add(std::unique_ptr<Component>)  // Make sure that this doesn't break interface segregation principle.
+    virtual void add(std::unique_ptr<Component>)  {
                                                   // (Make sure the method/function makes sense.)
-    {
+    // Make sure that this doesn't break interface segregation principle.
         //...
     }
 
-    virtual void removeAtIndex(int const)  // Make sure that this doesn't break interface segregation
+    virtual void removeAtIndex(int const)  {
                                            // principle. (Make sure the method/function makes sense.)
-    {
+    // Make sure that this doesn't break interface segregation
         //...
     }
 

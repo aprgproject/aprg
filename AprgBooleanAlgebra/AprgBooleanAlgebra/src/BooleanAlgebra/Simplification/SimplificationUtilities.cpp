@@ -274,8 +274,8 @@ void distributeTermsIfNeeded(
         OperatorLevel targetInner{};
         retrieveTargetOperations(targetOuter, targetInner);
         if (distributeOuterOperation == targetInner &&
-            distributeInnerOperation == targetOuter)  // distribute only if its different from target
-        {
+            distributeInnerOperation == targetOuter)  {
+        // distribute only if its different from target
             Terms outerFactors;
             Expressions innerExpressions;
             for (Term const& inputTerm : inputTerms) {

@@ -32,8 +32,8 @@ private:
 
         while (!nonDeadEndPath.empty()) {
             Vertices& adjacentVertices(vertexToAdjacentVerticesMap[currentVertex]);
-            if (!adjacentVertices.empty())  // if not dead end
-            {
+            if (!adjacentVertices.empty())  {
+            // if not dead end
                 nonDeadEndPath.push(currentVertex);
                 currentVertex = adjacentVertices.back();
                 adjacentVertices.pop_back();

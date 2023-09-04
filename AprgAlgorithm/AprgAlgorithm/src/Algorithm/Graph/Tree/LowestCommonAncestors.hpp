@@ -73,8 +73,8 @@ private:
 
     void traverseStartingFromAVertex(Vertex const& startVertex) {
         if (m_processedVertices.isNotFound(startVertex) &&
-            !m_graph.getAdjacentVerticesAt(startVertex).empty())  // dont include invalid vertex
-        {
+            !m_graph.getAdjacentVerticesAt(startVertex).empty())  {
+        // dont include invalid vertex
             int index(0);
             int depth(0);
 

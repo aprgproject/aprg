@@ -267,8 +267,8 @@ void HardwareConfiguration::printDspAllocations(unsigned int const printFlags) {
             streamTemp << "LCG:" << dsp.getLcgId() << "\n" << dsp.getNbicString() << dsp.getModeString();
             table.getLastRow().addCell(streamTemp.str(), HorizontalAlignment::Center);
         }
-        if ((printFlags & 1) > 0)  // users
-        {
+        if ((printFlags & 1) > 0)  {
+        // users
             table.addRow();
             table.getLastRow().addCell("");
             for (unsigned int const dspAddress : addressToFspPair.second.getDspAddresses()) {
@@ -278,8 +278,8 @@ void HardwareConfiguration::printDspAllocations(unsigned int const printFlags) {
                 table.getLastRow().addCell(streamTemp.str(), HorizontalAlignment::Center);
             }
         }
-        if ((printFlags & 2) > 0)  // DLI
-        {
+        if ((printFlags & 2) > 0)  {
+        // DLI
             table.addRow();
             table.getLastRow().addCell("");
             for (unsigned int const dspAddress : addressToFspPair.second.getDspAddresses()) {

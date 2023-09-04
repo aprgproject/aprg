@@ -67,8 +67,8 @@ TEST(BucketSorterTest, SortWorksOnDoublesUsingExample1) {
 
 // CANNOT SORT STRINGS
 
-TEST(BucketSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1)  // NOT REALLY STABLE
-{
+TEST(BucketSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1)  {
+// NOT REALLY STABLE
     // Not really stable but samples are too few
 
     StabilityCheckObjectsSorter sorter(StabilityCheckObject('A', 0), StabilityCheckObject('Z', 0));

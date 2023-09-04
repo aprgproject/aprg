@@ -92,8 +92,8 @@ private:
         result.reserve(ranges.size());
         for (Range const& range : ranges) {
             if (range.first < static_cast<Index>(b_values.size()) &&
-                range.second < static_cast<Index>(b_values.size()))  // index must be inside the give values
-            {
+                range.second < static_cast<Index>(b_values.size()))  {
+            // index must be inside the give values
                 result.emplace_back(range);
             }
         }

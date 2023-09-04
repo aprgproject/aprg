@@ -109,17 +109,17 @@ Points Hyperbola::getPointsInTraversingXAndY(double const signOfX, double const 
     Points result;
     Points pointsFromTraversingX(getPointsInTraversingX(signOfX, signOfY, interval));
     Points pointsFromTraversingY(getPointsInTraversingY(signOfX, signOfY, interval));
-    if (signOfX > 0 && signOfY > 0)  // first quarter
-    {
+    if (signOfX > 0 && signOfY > 0)  {
+    // first quarter
         result = getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
-    } else if (signOfX > 0 && signOfY < 0)  // fourth quarter
-    {
+    } else if (signOfX > 0 && signOfY < 0)  {
+    // fourth quarter
         result = getMergedPointsInIncreasingX(pointsFromTraversingX, pointsFromTraversingY);
-    } else if (signOfX < 0 && signOfY > 0)  // second quarter
-    {
+    } else if (signOfX < 0 && signOfY > 0)  {
+    // second quarter
         result = getMergedPointsInIncreasingX(pointsFromTraversingX, pointsFromTraversingY);
-    } else if (signOfX < 0 && signOfY < 0)  // third quarter
-    {
+    } else if (signOfX < 0 && signOfY < 0)  {
+    // third quarter
         result = getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
     }
     return result;

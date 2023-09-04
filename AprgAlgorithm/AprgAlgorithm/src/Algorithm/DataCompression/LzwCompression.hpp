@@ -61,11 +61,11 @@ public:
         while (true) {
             writer.writeStringData(currentString);
             codeWord = readOneCodeword(reader);
-            if (!input.eof() && codeWord != RADIX)  // exit at stop code word(RADIX)
-            {
+            if (!input.eof() && codeWord != RADIX)  {
+            // exit at stop code word(RADIX)
                 std::string nextString(lookupTable[codeWord]);
-                if (codeWord == multiCharCode)  // not in the symbol table yet (tricky case)
-                {
+                if (codeWord == multiCharCode)  {
+                // not in the symbol table yet (tricky case)
                     // we expand the current string as the same time as processing it as next
                     nextString = currentString + currentString[0];
                 }

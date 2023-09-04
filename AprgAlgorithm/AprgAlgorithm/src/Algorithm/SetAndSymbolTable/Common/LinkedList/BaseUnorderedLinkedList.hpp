@@ -97,8 +97,8 @@ public:
             } else if (isFirst && key > node.key) {
                 floor = node.key;
                 isFirst = false;
-            } else if (!isFirst && key > node.key && key - node.key < key - floor)  // less than key and nearer than key
-            {
+            } else if (!isFirst && key > node.key && key - node.key < key - floor)  {
+            // less than key and nearer than key
                 floor = node.key;
             }
         });
@@ -115,9 +115,9 @@ public:
             } else if (isFirst && key < node.key) {
                 ceiling = node.key;
                 isFirst = false;
-            } else if (!isFirst && key < node.key && node.key - key < ceiling - key)  // greater than key and nearer
+            } else if (!isFirst && key < node.key && node.key - key < ceiling - key)  {
                                                                                       // than key
-            {
+            // greater than key and nearer
                 ceiling = node.key;
             }
         });
