@@ -15,9 +15,9 @@ public:
     virtual ~BaseGraph() = default;  // virtual destructor because of virtual functions (vtable exists)
     BaseGraph() = default;
     BaseGraph(BaseGraph const& graph) = default;
-    BaseGraph(BaseGraph&& graph) = default;
+    BaseGraph(BaseGraph&& graph) noexcept = default;
     BaseGraph& operator=(BaseGraph const& graph) = default;
-    BaseGraph& operator=(BaseGraph&& graph) = default;
+    BaseGraph& operator=(BaseGraph&& graph) noexcept = default;
 
     [[nodiscard]] virtual bool isEmpty() const = 0;
     [[nodiscard]] virtual bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const = 0;
