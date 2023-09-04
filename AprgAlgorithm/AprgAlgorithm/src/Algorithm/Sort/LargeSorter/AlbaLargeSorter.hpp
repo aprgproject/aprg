@@ -122,9 +122,10 @@ private:
         return totalMemoryConsumption;
     }
     void transferMemoryBlocksToFileIfNeeded(int const totalMemoryConsumption) {
-        while (totalMemoryConsumption > m_configuration.m_maximumNumberOfObjectsInMemory) {
+        int memoryConsumption = totalMemoryConsumption;
+        while (memoryConsumption > m_configuration.m_maximumNumberOfObjectsInMemory) {
             auto blockToSwitchToFileMode(m_memoryCache.popTheEarliestAddedBlock());
-            totalMemoryConsumption -= blockToSwitchToFileMode->getNumberOfObjectsInMemory();
+            memoryConsumption -= blockToSwitchToFileMode->getNumberOfObjectsInMemory();
             if (blockToSwitchToFileMode->getNumberOfObjectsInMemory() >
                 m_configuration.m_minimumNumberOfObjectsPerBlock) {
                 splitToSmallestBlocks(blockToSwitchToFileMode, DataBlockType::File);

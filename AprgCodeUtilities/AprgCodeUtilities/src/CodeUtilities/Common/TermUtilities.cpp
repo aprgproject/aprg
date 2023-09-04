@@ -127,4 +127,6 @@ bool isWhiteSpace(Term const& term) { return term.getTermType() == TermType::Whi
 
 bool isCommentOrWhiteSpace(Term const& term) { return isComment(term) || isWhiteSpace(term); }
 
+bool hasNewLine(Term const& term) { return stringHelper::hasNewLine(term.getContent()); }
+
 }  // namespace alba::CodeUtilities

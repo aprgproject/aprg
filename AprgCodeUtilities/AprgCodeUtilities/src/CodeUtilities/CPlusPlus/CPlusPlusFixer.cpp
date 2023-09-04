@@ -132,14 +132,14 @@ void fixCStyleStaticCast(Terms& terms, TermMatcher const& typeMatcher) {
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes patternIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
-        isFound = !patternIndexes.empty();
+        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
+        isFound = !hitIndexes.empty();
         if (isFound) {
-            termIndex = patternIndexes.back();
-            if (terms[patternIndexes[4]].getContent() != "=") {
-                changeTerm(terms[patternIndexes[1]], TermType::Aggregate, "static_cast<");
-                changeTerm(terms[patternIndexes[3]], TermType::Aggregate, ">(");
-                ALBA_INF_PRINT3(cout, terms[patternIndexes[0]], terms[patternIndexes[1]], terms[patternIndexes[2]]);
+            termIndex = hitIndexes.back();
+            if (terms[hitIndexes[4]].getContent() != "=") {
+                changeTerm(terms[hitIndexes[1]], TermType::Aggregate, "static_cast<");
+                changeTerm(terms[hitIndexes[3]], TermType::Aggregate, ">(");
+                ALBA_INF_PRINT3(cout, terms[hitIndexes[0]], terms[hitIndexes[1]], terms[hitIndexes[2]]);
             }
         }
     }
@@ -163,21 +163,34 @@ void fixNoConstPassByValue(Terms& terms, Patterns const& searchPatterns) {
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes patternIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
-        isFound = !patternIndexes.empty();
+        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
+        isFound = !hitIndexes.empty();
         if (isFound) {
-            termIndex = patternIndexes.back();
-            terms.insert(terms.begin() + patternIndexes[2], Term(TermType::Identifier, "const "));
+            termIndex = hitIndexes.back();
+            terms.insert(terms.begin() + hitIndexes[2], Term(TermType::Identifier, "const "));
             ALBA_INF_PRINT4(
-                cout, terms[patternIndexes[0]], terms[patternIndexes[1]], terms[patternIndexes[2]],
-                terms[patternIndexes[3]]);
+                cout, terms[hitIndexes[0]], terms[hitIndexes[1]], terms[hitIndexes[2]], terms[hitIndexes[3]]);
         }
     }
 }
 
 void fixCommentsPositionOfBraces(Terms& terms) {
-    Patterns searchPatterns{{M(")"), M(MatcherType::Comment), M("{")}};
-    findTermsAndSwapAt(terms, searchPatterns, 1, 2);
+    Patterns searchPatterns{{M(MatcherType::Comment), M("{")}};
+    int termIndex = 0;
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            termIndex = hitIndexes.back();
+            std::swap(terms[hitIndexes[0]], terms[hitIndexes[1]]);
+            Term nextTermAfterComment = terms[hitIndexes[1] + 1];
+            if (!hasNewLine(nextTermAfterComment)) {
+                terms.insert(terms.begin() + hitIndexes[1] + 1, Term(TermType::WhiteSpace, "\n"));
+            }
+            ALBA_INF_PRINT2(cout, terms[hitIndexes[0]], terms[hitIndexes[1]]);
+        }
+    }
 }
 
 void findTermsAndSwapAt(Terms& terms, Patterns const& searchPatterns, int const index1, int const index2) {
@@ -219,11 +232,11 @@ void combinePrimitiveTypes(Terms& terms) {
     bool isFound(true);
     Patterns primitiveTypesPatterns{{M(TermType::PrimitiveType), M(TermType::PrimitiveType)}};
     while (isFound) {
-        Indexes patternIndexes = searchForPatternsForwards(terms, termIndex, primitiveTypesPatterns);
-        isFound = !patternIndexes.empty();
+        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, primitiveTypesPatterns);
+        isFound = !hitIndexes.empty();
         if (isFound) {
-            termIndex = patternIndexes.front();
-            combineTermsInPlace(terms, TermType::PrimitiveType, patternIndexes[0], patternIndexes[1]);
+            termIndex = hitIndexes.front();
+            combineTermsInPlace(terms, TermType::PrimitiveType, hitIndexes[0], hitIndexes[1]);
         }
     }
 }

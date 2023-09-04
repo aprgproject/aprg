@@ -23,7 +23,7 @@ inline bool isWhiteSpace(char const character) { return isspace(character) != 0;
 // inline bool isWhiteSpace(char const character) { return (' ' == character || '\t' == character || '\n' == character
 // || '\r' == character); }
 
-inline bool isNewline(char const character) { return ('\n' == character || '\r' == character); }
+inline bool isNewLine(char const character) { return ('\n' == character || '\r' == character); }
 
 inline bool isNotNpos(int const index) { return static_cast<int>(std::string::npos) != index; }
 
@@ -89,7 +89,8 @@ int getPeriodValue(std::string_view const str, std::string_view const period);
 
 bool isNumber(std::string_view const str);
 bool isWhiteSpace(std::string_view const str);
-bool isNewline(std::string_view const str);
+bool isNewLine(std::string_view const str);
+bool hasNewLine(std::string_view const str);
 bool isIdentifier(std::string_view const str);
 bool isOneWord(std::string_view const str);
 bool isPalindrome(std::string_view const str);
@@ -103,7 +104,8 @@ bool isBorder(std::string_view const mainText, std::string_view const border);
 bool isEqualNotCaseSensitive(std::string_view const str1, std::string_view const str2);
 bool isEqualWithLowestCommonLength(std::string_view const str1, std::string_view const str2);
 bool isStringFoundCaseSensitive(std::string_view const mainText, std::string_view const stringToSearch);
-bool isStringFoundCaseSensitive(std::string_view const mainText, std::string_view const stringToSearch, int& runningOffset);
+bool isStringFoundCaseSensitive(
+    std::string_view const mainText, std::string_view const stringToSearch, int& runningOffset);
 bool isStringFoundNotCaseSensitive(std::string_view const mainText, std::string_view const stringToSearch);
 bool isWildcardMatch(
     std::string_view const mainText, std::string_view const wildcard, size_t const mainTextIndex = 0,
@@ -121,7 +123,8 @@ std::string getStringWithFirstNonWhiteSpaceCharacterToCapital(std::string_view c
 std::string getStringWithLowerCaseLetters(std::string_view const str);
 std::string getStringWithUrlDecodedString(std::string_view const str);
 std::string getStringThatContainsWhiteSpaceIndention(std::string_view const str);
-std::string getStringWithoutStartingAndTrailingCharacters(std::string_view const str, std::string_view const characters);
+std::string getStringWithoutStartingAndTrailingCharacters(
+    std::string_view const str, std::string_view const characters);
 std::string getStringWithoutStartingAndTrailingWhiteSpace(std::string_view const str);
 std::string getStringWithoutWhiteSpace(std::string_view const str);
 std::string getStringWithoutRedundantWhiteSpace(std::string_view const str);
@@ -133,8 +136,8 @@ std::string getStringWithoutOpeningClosingOperators(
     std::string_view const str, char const openingOperator, char const closingOperator);
 std::string getLongestCommonPrefix(std::string_view const first, std::string_view const second);
 void copyBeforeStringAndAfterString(
-    std::string_view const mainText, std::string_view const stringToSearch, std::string& beforeString, std::string& afterString,
-    size_t const indexToStartTheSearch = 0);
+    std::string_view const mainText, std::string_view const stringToSearch, std::string& beforeString,
+    std::string& afterString, size_t const indexToStartTheSearch = 0);
 std::string getStringBeforeThisString(
     std::string_view const mainText, std::string_view const stringToSearch, size_t const indexToStart = 0);
 std::string getStringAfterThisString(
@@ -160,7 +163,8 @@ strings getArgumentsToStringInMain(int const argc, char const* const argv[]);
 
 // Find and replace
 
-bool replaceAllAndReturnIfFound(std::string& mainText, std::string_view const targetStr, std::string_view const replacementStr);
+bool replaceAllAndReturnIfFound(
+    std::string& mainText, std::string_view const targetStr, std::string_view const replacementStr);
 
 // Split and combine
 
@@ -168,7 +172,8 @@ enum class SplitStringType { WithDelimeters, WithoutDelimeters };
 template <SplitStringType splitStringType>
 void splitToStrings(strings& listOfStrings, std::string_view const mainText, std::string_view const delimiters);
 std::string combineStrings(strings const& strings, std::string_view const delimiters);
-void splitLinesToAchieveTargetLength(strings& listOfStrings, std::string_view const mainText, size_t const targetLength);
+void splitLinesToAchieveTargetLength(
+    strings& listOfStrings, std::string_view const mainText, size_t const targetLength);
 void splitToStringsUsingASeriesOfDelimeters(
     strings& listOfStrings, std::string_view const mainText, strings const& seriesOfDelimiters);
 
@@ -207,7 +212,8 @@ std::string getStringWithLeftAlignment(std::string_view const mainText, size_t c
 
 std::string getCorrectPathWithoutUrlParameters(std::string_view const path);
 std::string getUrlParameters(std::string_view const path);
-std::string getCorrectPathWithReplacedSlashCharacters(std::string_view const path, std::string_view const slashCharacterString);
+std::string getCorrectPathWithReplacedSlashCharacters(
+    std::string_view const path, std::string_view const slashCharacterString);
 std::string getCorrectPathWithoutDoublePeriod(std::string_view const path, std::string_view const slashCharacterString);
 std::string getStringBeforeDoublePeriod(std::string_view const path, std::string_view const slashCharacterString);
 std::string getImmediateDirectoryName(std::string_view const path, std::string_view const slashCharacterString);

@@ -120,14 +120,18 @@ bool isWhiteSpace(string_view const str) {
     return all_of(begin(str), end(str), [](char const character) { return isWhiteSpace(character); });
 }
 
-bool isNewline(string_view const str) {
-    return all_of(begin(str), end(str), [](char const character) { return isNewline(character); });
+bool isNewLine(string_view const str) {
+    return all_of(begin(str), end(str), [](char const character) { return isNewLine(character); });
+}
+
+bool hasNewLine(string_view const str) {
+    return any_of(begin(str), end(str), [](char const character) { return isNewLine(character); });
 }
 
 bool isIdentifier(string_view const str) {
     bool isIdentifier(false);
     if (!str.empty()) {
-        char firstCharacter = str[0];
+        char firstCharacter = str.front();
         isIdentifier = isLetter(firstCharacter) || isUnderscore(firstCharacter);
     }
     return isIdentifier;

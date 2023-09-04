@@ -25,5 +25,6 @@ bool isAMatch(MatcherType const matcherType, Term const& term);
 bool isComment(Term const& term);
 bool isWhiteSpace(Term const& term);
 bool isCommentOrWhiteSpace(Term const& term);
+bool hasNewLine(Term const& term);
 
 }  // namespace alba::CodeUtilities

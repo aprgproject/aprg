@@ -29,24 +29,24 @@ TEST(BoolCharacterStringTest, IsWhiteSpaceWorks) {
     EXPECT_FALSE(isWhiteSpace('0'));
 }
 
-TEST(BoolCharacterStringTest, IsNewlineWorks) {
-    EXPECT_FALSE(isNewline('\0'));
-    EXPECT_TRUE(isNewline('\xA'));
-    EXPECT_TRUE(isNewline('\r'));
-    EXPECT_TRUE(isNewline('\n'));
-    EXPECT_FALSE(isNewline('\t'));
-    EXPECT_FALSE(isNewline(' '));
-    EXPECT_FALSE(isNewline('!'));
-    EXPECT_FALSE(isNewline('~'));
-    EXPECT_FALSE(isNewline('A'));
-    EXPECT_FALSE(isNewline('J'));
-    EXPECT_FALSE(isNewline('Z'));
-    EXPECT_FALSE(isNewline('a'));
-    EXPECT_FALSE(isNewline('j'));
-    EXPECT_FALSE(isNewline('z'));
-    EXPECT_FALSE(isNewline('1'));
-    EXPECT_FALSE(isNewline('9'));
-    EXPECT_FALSE(isNewline('0'));
+TEST(BoolCharacterStringTest, IsNewLineWorks) {
+    EXPECT_FALSE(isNewLine('\0'));
+    EXPECT_TRUE(isNewLine('\xA'));
+    EXPECT_TRUE(isNewLine('\r'));
+    EXPECT_TRUE(isNewLine('\n'));
+    EXPECT_FALSE(isNewLine('\t'));
+    EXPECT_FALSE(isNewLine(' '));
+    EXPECT_FALSE(isNewLine('!'));
+    EXPECT_FALSE(isNewLine('~'));
+    EXPECT_FALSE(isNewLine('A'));
+    EXPECT_FALSE(isNewLine('J'));
+    EXPECT_FALSE(isNewLine('Z'));
+    EXPECT_FALSE(isNewLine('a'));
+    EXPECT_FALSE(isNewLine('j'));
+    EXPECT_FALSE(isNewLine('z'));
+    EXPECT_FALSE(isNewLine('1'));
+    EXPECT_FALSE(isNewLine('9'));
+    EXPECT_FALSE(isNewLine('0'));
 }
 
 TEST(BoolCharacterStringTest, IsCapitalLetterWorks) {
