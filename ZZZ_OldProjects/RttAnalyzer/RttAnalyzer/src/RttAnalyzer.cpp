@@ -87,7 +87,7 @@ void RttAnalyzer::processTitles(strings const& titles) {
             m_cx8IndexOptional = index;
             break;
         }
-        index++;
+        ++index;
     }
 }
 

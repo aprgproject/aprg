@@ -499,7 +499,7 @@ TEST(AlbaLargeSorterTest, ObjectsAreSortedWhenBlocksAreCreated) {
             default:
                 break;
         }
-        expectedValue++;
+        ++expectedValue;
     });
     EXPECT_EQ(16, expectedValue);
 }
@@ -618,7 +618,7 @@ TEST(AlbaLargeSorterTest, ObjectsAreStableSortedWhenDuplicateValuesAreExisting) 
             default:
                 break;
         }
-        expectedValue++;
+        ++expectedValue;
     });
     EXPECT_EQ(16, expectedValue);
 }
@@ -745,7 +745,7 @@ TEST(AlbaLargeSorterTest, ObjectsAreSortedWhenUsingRandomShuffle) {
             default:
                 break;
         }
-        expectedValue++;
+        ++expectedValue;
     });
     EXPECT_EQ(16, expectedValue);
 }

@@ -49,7 +49,7 @@ UnsignedInteger getGrundyNumber(SetOfUnsignedIntegers const& nextGrundyNumbers) 
             if (possibleGrundyNumber != nextGrundyNumber) {
                 break;
             }
-            possibleGrundyNumber++;
+            ++possibleGrundyNumber;
         }
         result = possibleGrundyNumber;
     }

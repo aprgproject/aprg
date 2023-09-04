@@ -70,7 +70,7 @@ public:
             if (!hasAnyConnection(vertex2)) {
                 ++m_numberOfVertices;
             }
-            m_numberOfEdges++;
+            ++m_numberOfEdges;
             m_adjacencyLists[vertex1].emplace(vertex2);
             m_adjacencyLists[vertex2].emplace(vertex1);
         }

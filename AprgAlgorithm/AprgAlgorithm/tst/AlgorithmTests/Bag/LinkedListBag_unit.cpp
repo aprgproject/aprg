@@ -45,7 +45,7 @@ TEST(LinkedListBagTest, TraverseWorks) {
         } else if (i == 2) {
             EXPECT_EQ(1, object);
         }
-        i++;
+        ++i;
     });
 }
 
@@ -66,7 +66,7 @@ TEST(LinkedListBagTest, AddWorks) {
         } else if (i == 2) {
             EXPECT_EQ(1, object);
         }
-        i++;
+        ++i;
     });
 }
 

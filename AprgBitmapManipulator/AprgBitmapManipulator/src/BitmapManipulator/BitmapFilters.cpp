@@ -64,7 +64,7 @@ optional<Circle> BitmapFilters::getPossiblePenCircle(
                 if (isSimilar(centerColor, currentColor, similarityColorLimit)) {
                     ++similarPixelsCount;
                 }
-                totalPixelCount++;
+                ++totalPixelCount;
             });
         if (previousRadius != currentRadius) {
             double calculatedPenPercentage = static_cast<double>(similarPixelsCount) / totalPixelCount;
@@ -132,7 +132,7 @@ void BitmapFilters::determineConnectedComponentsByOneComponentAtATime(BitmapSnip
                 analyzeFourConnectivityNeighborPointsForConnectedComponentsOneComponentAtATime(
                     inputSnippet, pointsInDeque, poppedPoint, currentLabel);
             }
-            currentLabel++;
+            ++currentLabel;
         }
     });
 }

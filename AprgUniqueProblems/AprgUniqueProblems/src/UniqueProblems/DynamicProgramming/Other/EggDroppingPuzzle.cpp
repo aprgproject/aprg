@@ -84,7 +84,7 @@ EggDroppingPuzzle::Count EggDroppingPuzzle::getMinimumNumberOfTrialsUsingMemoiza
                             countMatrix, remainingEggs, floorIndexPlusOne - currentFloor));
                 result = min(result, countForFloor);
             }
-            result++;
+            ++result;
         }
         countMatrix.setEntry(remainingEggs, floorIndexPlusOne, result);
     }

@@ -97,7 +97,7 @@ void LinearEquationsEqualitySolver::saveSolutionSetsFromTheCoefficientMatrix(
             solutionSetForVariable.addAcceptedValue(-coefficientsMatrix.getEntry(columnEndIndex, index));
             solutionSet.addSolutionSetForVariable(variableName, solutionSetForVariable);
         }
-        index++;
+        ++index;
     }
 }
 

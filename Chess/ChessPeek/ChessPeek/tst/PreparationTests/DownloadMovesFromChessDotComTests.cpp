@@ -418,7 +418,7 @@ bool shouldIncludeLine(strings const& currentLine, Book const& book) {
                 exit(0);
             }
         }
-        index++;
+        ++index;
     }
     auto lineDetailOptional = book.getLine(updatedBoard);
     if (lineDetailOptional) {
@@ -483,7 +483,7 @@ void doAllPagesRecursively(Paths const& paths) {
             cout << "Skipping line." << endl;
             saveSkippedLineAtTheEndOfLineFile(currentLine, paths.linesFile);
         }
-        lineNumber++;
+        ++lineNumber;
         setLineNumber(paths.lineNumberFile, lineNumber);
         currentLine = getLineOfMoves(paths.linesFile, lineNumber);
     }

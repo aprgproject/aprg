@@ -81,7 +81,7 @@ void LogStatisticsAnalyzer::analyzeLog(std::string const& lineInLogs) {
         cout << "m_totalLines: [" << m_totalLines << "]"
              << "\n";
     }
-    m_totalLines++;
+    ++m_totalLines;
     bool areLogStringFoundInTheLine = false;
     for (LogDetails& logDetails : m_logDetailsToCheck) {
         bool areLogStringFound = false;

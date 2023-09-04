@@ -31,7 +31,7 @@ public:
                 } else {
                     ++high;
                 }
-                count++;
+                ++count;
             }
             while (count < numberOfClosestElements && low > 0) {
                 --low;

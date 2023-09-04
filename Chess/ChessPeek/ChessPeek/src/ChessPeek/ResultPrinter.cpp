@@ -419,7 +419,7 @@ void ResultPrinter::fillMovesSequenceFromVariation(MovesSequence& result, Variat
         } else {
             break;  // retain only line with valid moves
         }
-        index++;
+        ++index;
     }
 }
 

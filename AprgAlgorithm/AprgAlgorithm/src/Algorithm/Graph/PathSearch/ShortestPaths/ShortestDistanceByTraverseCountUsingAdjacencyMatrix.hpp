@@ -78,7 +78,7 @@ private:
                 result.setEntry(x, y, transformOneSetOfValues(rowOfFirstMatrix, columnOfSecondMatrix));
                 ++x;
             }
-            y++;
+            ++y;
         }
         return result;
     }

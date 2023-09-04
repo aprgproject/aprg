@@ -95,7 +95,7 @@ void transformToReducedEchelonFormUsingGaussJordanReduction(AlbaMatrix<DataType>
                             yToZero, yWithLeadingEntry, yToZero);
                     }
                 }
-                yWithLeadingEntry++;
+                ++yWithLeadingEntry;
                 break;
             }
         }

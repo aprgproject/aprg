@@ -48,7 +48,7 @@ FindLengthOfTheLongestConsecutivePath::getLongestLengthStartingAtUsingNaiveRecur
             result = max(result, getLongestLengthStartingAtUsingNaiveRecursion(neighborX, neighborY));
         }
     }
-    result++;  // count this node
+    ++result;  // count this node
     return result;
 }
 
@@ -78,7 +78,7 @@ FindLengthOfTheLongestConsecutivePath::getLongestLengthStartingAtUsingMemoizatio
                 result = max(result, getLongestLengthStartingAtUsingNaiveRecursion(neighborX, neighborY));
             }
         }
-        result++;  // count this node
+        ++result;  // count this node
         countGrid.setEntry(x, y, result);
     }
     return result;

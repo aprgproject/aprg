@@ -106,7 +106,7 @@ bool ChessEngineControllerWithUci::waitTillReadyAndReturnIfResetWasPerformed() {
             shouldReset = true;
             break;
         }
-        countWith100ms++;
+        ++countWith100ms;
         sleepFor(100);
     }
 

@@ -59,7 +59,7 @@ void FileDestructor::renameDirectory(string const& directoryPath) {
         if (!isNotSuccessful) {
             cout << "Renamed directory: [" << directoryPathHandler.getFullPath() << "]\n";
         }
-        retries--;
+        --retries;
     }
 }
 
@@ -80,7 +80,7 @@ void FileDestructor::destroyFile(string const& filePath) {
         if (!isNotSuccessful) {
             cout << "Destroyed File: [" << filePathHandler.getFullPath() << "]\n";
         }
-        retries--;
+        --retries;
     }
 }
 

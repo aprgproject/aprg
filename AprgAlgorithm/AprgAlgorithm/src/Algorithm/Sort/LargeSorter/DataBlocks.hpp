@@ -37,7 +37,7 @@ public:
                    isLessThanOrEqual(m_mainIterator->getLowestObject(), objectToSort)) {
                 ++m_mainIterator;
             }
-            m_mainIterator--;
+            --m_mainIterator;
         } else if (objectToSort < m_mainIterator->getLowestObject()) {
             while ((m_mainIterator != m_blocks.begin()) && (objectToSort < m_mainIterator->getLowestObject())) {
                 --m_mainIterator;

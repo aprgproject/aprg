@@ -135,7 +135,7 @@ public:
                     } else {
                         previousNodePointer->next = std::move(currentNodePointer->next);
                     }
-                    m_size--;
+                    --m_size;
                     break;
                 }
             }

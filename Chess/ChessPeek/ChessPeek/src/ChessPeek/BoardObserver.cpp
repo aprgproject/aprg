@@ -41,7 +41,7 @@ BoardObserver::BitSet64 BoardObserver::getBitValueFromCell(int const xIndex, int
         if (index >= 63) {
             break;
         }
-        index++;
+        ++index;
     }
     return result;
 }

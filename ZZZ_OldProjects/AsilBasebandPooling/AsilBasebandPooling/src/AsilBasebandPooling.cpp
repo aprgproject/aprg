@@ -76,7 +76,7 @@ BasebandCardsSplitBasedOnNumberOfLcgs AsilBasebandPooling::getBasebandCardsSplit
         } else {
             basebandCards.basebandCardsWithOneLcg.emplace(*reverseTraversal);
         }
-        reverseTraversal++;
+        ++reverseTraversal;
     }
     return basebandCards;
 }
@@ -112,7 +112,7 @@ void AsilBasebandPooling::assignBasebandCardsWithOneLcg(
             for (Kepler const& kepler : keplersInBasebandCard) {
                 poolingMap[kepler.getNid()] = lcgId;
             }
-            lcgsIterator++;
+            ++lcgsIterator;
         }
     }
     lcgsInPriorityOrder.erase(lcgsInPriorityOrder.cbegin(), lcgsIterator);
@@ -139,9 +139,9 @@ void AsilBasebandPooling::assignBasebandCardsWithMultipleLcgs(
                 unsigned int lcgId(lcgsIterator->getLcgId());
                 poolingMap[kepler.getNid()] = lcgId;
             }
-            keplerCount++;
+            ++keplerCount;
         }
-        lcgsIterator++;
+        ++lcgsIterator;
     }
     lcgsInPriorityOrder.erase(lcgsInPriorityOrder.cbegin(), lcgsIterator);
 }

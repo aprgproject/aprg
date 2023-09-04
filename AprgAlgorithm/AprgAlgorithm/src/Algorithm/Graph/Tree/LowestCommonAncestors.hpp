@@ -101,7 +101,7 @@ private:
                 addVertex(index, depth, vertex);  // add vertex for tree traversal
             }
         }
-        depth--;
+        --depth;
     }
 
     void addVertex(int& index, int const depth, Vertex const& vertex) {

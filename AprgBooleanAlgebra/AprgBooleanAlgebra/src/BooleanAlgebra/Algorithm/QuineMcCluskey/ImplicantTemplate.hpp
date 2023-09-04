@@ -56,7 +56,7 @@ public:
                     result = false;
                     break;
                 }
-                difference++;
+                ++difference;
             }
         }
         return result;

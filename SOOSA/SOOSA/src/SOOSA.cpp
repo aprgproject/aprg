@@ -555,7 +555,7 @@ void SOOSA::processQuestions(
             Status::getInstance().setError(errorStream.str());
             cout << errorStream.str() << "\n";
         }
-        questionNumber++;
+        ++questionNumber;
     }
 }
 
@@ -789,7 +789,7 @@ Point SOOSA::getLeftOrRightMostBlackPoint(
             result = possibleBlackPoint;
             ++blackCount;
         }
-        totalCount++;
+        ++totalCount;
         shouldContinue = m_soosaConfiguration.getLineBarWidthSearchAcceptedRunningBlackRatio() <=
                          static_cast<double>(blackCount) / totalCount;
     }
@@ -902,7 +902,7 @@ void SOOSA::removeBarPointsWithFewHeightPointsCount(
              itForRange != barPointsSamplesCopy.begin() + range.second + 1; ++itForRange) {
             kMeansForBarPoints.addSample(*itForRange);
         }
-        count++;
+        ++count;
         if (count >= numberQuestionsInColumn) {
             break;
         }
@@ -952,7 +952,7 @@ void SOOSA::removeBarPointsToGetConsistentHeight(
         if (countForPrint == 5) {
             cout << "Figuring out the correct heights. Please wait.\n";
         }
-        countForPrint++;
+        ++countForPrint;
     }
 }
 

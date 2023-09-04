@@ -109,7 +109,7 @@ MinimumNumberOfJumpsToReachEnd::Indices MinimumNumberOfJumpsToReachEnd::getPathO
                 startOfNextJump = index;
             }
 
-            stepsAtCurrentJump--;
+            --stepsAtCurrentJump;
             if (stepsAtCurrentJump == 0) {
                 stepsAtCurrentJump = maxIndexAtNextJump - index;
                 startOfJump = startOfNextJump;
@@ -139,7 +139,7 @@ MinimumNumberOfJumpsToReachEnd::Count MinimumNumberOfJumpsToReachEnd::getMinimum
         for (Index endOfJumpIndex = startOfJumpIndex + 1; endOfJumpIndex <= maxPossibleJumpIndex; ++endOfJumpIndex) {
             result = min(result, getMinimumNumberOfJumpsUsingNaiveRecursion(endOfJumpIndex));
         }
-        result++;
+        ++result;
     }
     return result;
 }
@@ -156,7 +156,7 @@ MinimumNumberOfJumpsToReachEnd::Count MinimumNumberOfJumpsToReachEnd::getMinimum
                  ++endOfJumpIndex) {
                 result = min(result, getMinimumNumberOfJumpsUsingMemoizationDP(indexToCountOfJumps, endOfJumpIndex));
             }
-            result++;
+            ++result;
         } else {
             result = 0;
         }

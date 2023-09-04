@@ -26,7 +26,7 @@ public:
                 std::swap(*it, *nextOddIt);  // next odd must be greater
             }
 
-            it++;  // keep it even
+            ++it;  // keep it even
             if (it != valuesToSort.end()) {
                 previousOddIt = it;  // get previous odd
             } else {

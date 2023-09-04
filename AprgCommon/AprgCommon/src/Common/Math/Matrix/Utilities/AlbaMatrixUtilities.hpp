@@ -139,7 +139,7 @@ AlbaMatrix<DataType> multiplyMatrices(AlbaMatrix<DataType> const& first, AlbaMat
             result.setEntry(xPosition, yPosition, multiplyEachItemAndGetSum(rowOfFirstMatrix, columnOfSecondMatrix));
             ++xPosition;
         }
-        yPosition++;
+        ++yPosition;
     }
     return result;
 }
@@ -202,7 +202,7 @@ size_t getIndexWithHighestSatisfiedCount(
             highestCount = count;
             bestIndex = index;
         }
-        index++;
+        ++index;
     }
     return bestIndex;
 }

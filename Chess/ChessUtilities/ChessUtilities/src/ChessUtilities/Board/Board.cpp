@@ -929,7 +929,7 @@ Board::NotationDetailsOfMove Board::determineNotationDetailsOfMove(string const&
                     result.lastY = getYInCorrectOrientation(c - '1');
                     state = State::LastX;
                 }
-                it++;
+                ++it;
                 break;
             }
             case State::LastX: {

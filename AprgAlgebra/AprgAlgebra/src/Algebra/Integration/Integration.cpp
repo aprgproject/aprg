@@ -443,7 +443,7 @@ void Integration::integrateTermUsingSubstitutionWithMaxDepth(
         if (depth <= MAX_DEPTH) {
             integrateTermUsingSubstitution(result, term, configuration);
         }
-        depth--;
+        --depth;
     }
 }
 
@@ -1111,7 +1111,7 @@ void Integration::integrateUsingIntegrationByPartsAndCheckingPreviousValues(
         }
     }
 
-    depth--;
+    --depth;
     if (depth == 0) {
         listOfIntegrationByPartsTerms.clear();
     }

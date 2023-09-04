@@ -357,7 +357,7 @@ string getStringWithoutWhiteSpace(string_view str) {
         if (!isWhiteSpace(str[index])) {
             result += str[index];
         }
-        index++;
+        ++index;
     }
     return result;
 }

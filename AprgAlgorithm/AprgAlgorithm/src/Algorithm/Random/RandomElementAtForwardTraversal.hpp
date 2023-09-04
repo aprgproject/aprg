@@ -27,7 +27,7 @@ public:
             if (randomIndex == 0) {
                 result = value;
             }
-            count++;
+            ++count;
         }
         return result;
     }

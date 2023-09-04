@@ -19,7 +19,7 @@ public:
                  it1 != values1.cend() && it2 != values2.cend() && it3 != values3.cend();) {
                 if (*it1 == *it2 && *it2 == *it3) {
                     result.emplace_back(*it1);
-                    ++it1, ++it2, it3++;
+                    ++it1, ++it2, ++it3;
                 } else if (*it1 < *it2) {
                     ++it1;
                 } else if (*it2 < *it3) {

@@ -35,7 +35,7 @@ public:
                     writer.writeBigEndianNumberData<Count>(0);             // write 0 to switch bits when reading
                     currentCount = 0;                                      // reset count
                 }
-                currentCount++;
+                ++currentCount;
             } else {
                 break;
             }

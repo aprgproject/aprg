@@ -107,7 +107,7 @@ void BrentMethod::runOneIteration() {
         swap(m_values.a, m_values.b);
         swap(m_values.fa, m_values.fb);
     }
-    m_numberOfIterationsExecuted++;
+    ++m_numberOfIterationsExecuted;
 }
 
 void BrentMethod::runMaxNumberOfIterationsOrUntilFinished(int const maxIterations) {

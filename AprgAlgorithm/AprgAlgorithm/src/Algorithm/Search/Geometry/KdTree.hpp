@@ -39,7 +39,7 @@ protected:
                 result = true;
             }
         }
-        depth--;
+        --depth;
         return result;
     }
 
@@ -67,7 +67,7 @@ protected:
                 }
             }
         }
-        depth--;
+        --depth;
         return result;
     }
 
@@ -91,7 +91,7 @@ protected:
                 }
             }
         }
-        depth--;
+        --depth;
         return result;
     }
 
@@ -111,7 +111,7 @@ protected:
                 result = this->getSizeOfThisSubTree(nodePointer->left);  // if equal, just get size of the subtree
             }
         }
-        depth--;
+        --depth;
         return result;
     }
 
@@ -134,7 +134,7 @@ protected:
         } else {
             nodePointer.reset(new Node{key, nullptr, nullptr, 1});
         }
-        depth--;
+        --depth;
     }
 
     void deleteBasedOnKeyStartingOnThisNode(NodeUniquePointer& nodePointer, Key const& key) override {
@@ -168,7 +168,7 @@ protected:
                 this->updateTreeNodeDetails(*nodePointer);
             }
         }
-        depth--;
+        --depth;
     }
 
     void retrieveKeysInRangeInclusiveStartingOnThisNode(
@@ -189,7 +189,7 @@ protected:
                 retrieveKeysInRangeInclusiveStartingOnThisNode(keys, nodePointer->right, low, high);
             }
         }
-        depth--;
+        --depth;
     }
 };
 

@@ -67,7 +67,7 @@ private:
                 searchForPoints(nodePointer->right, pointsInsideRectangle);
             }
         }
-        depth--;
+        --depth;
     }
 
     [[nodiscard]] inline bool shouldGoToLeftChild(Point const& point, int const depth) const {

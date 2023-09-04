@@ -49,7 +49,7 @@ void selectVariableNameAndEquationNumber(
                 break;
             }
         }
-        equationIndex++;
+        ++equationIndex;
     }
 }
 

@@ -31,7 +31,7 @@ public:
         if (!isFound) {
             b_entryPointers[i].reset(new Entry{key});
         }
-        b_size++;
+        ++b_size;
     }
 
 protected:

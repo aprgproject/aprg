@@ -36,7 +36,7 @@ MaximumSubArraySum::SubArrayDetails MaximumSubArraySum::getMaximumSubArraySumWit
         if (bestSubArray.sum < currentSubArray.sum) {
             bestSubArray = currentSubArray;
         }
-        index++;
+        ++index;
     }
     return bestSubArray;
 }

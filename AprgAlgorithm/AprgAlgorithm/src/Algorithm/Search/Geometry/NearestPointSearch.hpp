@@ -97,7 +97,7 @@ private:
                 }
             }
         }
-        depth--;
+        --depth;
     }
 
     [[nodiscard]] SearchAction getSearchAction(

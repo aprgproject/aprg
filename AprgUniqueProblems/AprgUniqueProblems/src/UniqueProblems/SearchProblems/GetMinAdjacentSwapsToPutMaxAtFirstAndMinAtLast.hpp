@@ -29,7 +29,7 @@ public:
                     minimum = value;
                     lastMinIndex = i;
                 }
-                i++;
+                ++i;
             }
             result = firstMaxIndex + (values.size() - 1 - lastMinIndex);
             if (lastMinIndex < firstMaxIndex) {
