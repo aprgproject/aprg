@@ -25,8 +25,8 @@ public:
 
     void writeBoolData(bool const data);
     void writeCharData(char const data);
-    void writeStringData(std::string_view data);
-    void writeHexDigitData(std::string_view hexDigitsData);
+    void writeStringData(std::string_view const data);
+    void writeHexDigitData(std::string_view const hexDigitsData);
     template <typename TypeToWrite>
     void writeNumberData(AlbaStreamBitEndianType const endianType, TypeToWrite const& data);
     template <typename TypeToWrite>

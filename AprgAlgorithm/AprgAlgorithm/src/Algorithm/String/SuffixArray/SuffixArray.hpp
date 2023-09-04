@@ -22,7 +22,7 @@ public:
 
     [[nodiscard]] Index getIndexOnMainStringOfSuffixAt(Index const index) const { return m_mainStringIndexes[index]; }
 
-    [[nodiscard]] Index getRank(std::string_view key) const {
+    [[nodiscard]] Index getRank(std::string_view const key) const {
         Index low = 0;
         Index high = getSize() - 1;
         while (low <= high) {

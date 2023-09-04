@@ -26,7 +26,7 @@ public:
     }
 
 private:
-    bool doesItStartWith(std::string_view searchSpace, std::string_view stringToCheck) {
+    bool doesItStartWith(std::string_view const searchSpace, std::string_view const stringToCheck) {
         return searchSpace.length() >= stringToCheck.length() &&
                searchSpace.substr(0, stringToCheck.length()) == stringToCheck;
     }

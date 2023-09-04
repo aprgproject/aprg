@@ -14,10 +14,10 @@ enum class VerticalAlignment { Justify, Center, Top, Bottom };
 class DisplayTableCell {
 public:
     DisplayTableCell();
-    explicit DisplayTableCell(std::string_view displayText);
-    DisplayTableCell(std::string_view displayText, HorizontalAlignment const horizontalAlignment);
+    explicit DisplayTableCell(std::string_view const displayText);
+    DisplayTableCell(std::string_view const displayText, HorizontalAlignment const horizontalAlignment);
     DisplayTableCell(
-        std::string_view displayText, HorizontalAlignment const horizontalAlignment,
+        std::string_view const displayText, HorizontalAlignment const horizontalAlignment,
         VerticalAlignment const verticalAlignment);
 
     // rule of zero
@@ -27,7 +27,7 @@ public:
     [[nodiscard]] VerticalAlignment getVerticalAlignment() const;
 
     std::string& getTextReference();
-    void setText(std::string_view text);
+    void setText(std::string_view const text);
     void setHorizontalAlignment(HorizontalAlignment const horizontalAlignment);
     void setVerticalAlignment(VerticalAlignment const verticalAlignment);
 
@@ -52,10 +52,10 @@ public:
 
     DisplayTableCells& getCellsReference();
     DisplayTableCell& getCellReferenceAt(int const columnIndex);
-    void addCell(std::string_view text);
-    void addCell(std::string_view displayText, HorizontalAlignment const horizontalAlignment);
+    void addCell(std::string_view const text);
+    void addCell(std::string_view const displayText, HorizontalAlignment const horizontalAlignment);
     void addCell(
-        std::string_view displayText, HorizontalAlignment const horizontalAlignment,
+        std::string_view const displayText, HorizontalAlignment const horizontalAlignment,
         VerticalAlignment const verticalAlignment);
 
 private:
@@ -83,9 +83,9 @@ public:
     DisplayTableRow& getRowReferenceAt(int const rowIndex);
     DisplayTableCell& getCellReferenceAt(int const columnIndex, int const rowIndex);
     void addRow();
-    void setBorders(std::string_view horizontalBorder, std::string_view verticalBorder);
-    void setHorizontalBorder(std::string_view horizontalBorder);
-    void setVerticalBorder(std::string_view verticalBorder);
+    void setBorders(std::string_view const horizontalBorder, std::string_view const verticalBorder);
+    void setHorizontalBorder(std::string_view const horizontalBorder);
+    void setVerticalBorder(std::string_view const verticalBorder);
 
 private:
     friend std::ostream& operator<<(std::ostream& out, DisplayTable const& displayTable);

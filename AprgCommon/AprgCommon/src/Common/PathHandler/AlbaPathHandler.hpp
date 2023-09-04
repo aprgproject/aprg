@@ -8,8 +8,8 @@ enum class PathType { Empty, Directory, File };
 
 class AlbaPathHandler {
 public:
-    explicit AlbaPathHandler(std::string_view slashCharacterString);
-    explicit AlbaPathHandler(std::string_view path, std::string_view slashCharacterString);
+    explicit AlbaPathHandler(std::string_view const slashCharacterString);
+    explicit AlbaPathHandler(std::string_view const path, std::string_view const slashCharacterString);
     virtual ~AlbaPathHandler() = default;  // virtual destructor because of virtual functions (vtable exists)
     AlbaPathHandler(AlbaPathHandler const &pathHandler) = default;
     AlbaPathHandler(AlbaPathHandler &&pathHandler) = default;
@@ -19,7 +19,7 @@ public:
     virtual void clear();
     [[nodiscard]] virtual std::string getFullPath() const;
     [[nodiscard]] virtual std::string getDirectory() const;
-    void input(std::string_view path);
+    void input(std::string_view const path);
     void reInput();
     void goUp();
     [[nodiscard]] std::string getImmediateDirectoryName() const;
@@ -32,10 +32,10 @@ public:
     [[nodiscard]] bool isEmpty() const;
 
 protected:
-    virtual void save(std::string_view path);
-    void setPath(std::string_view path);  // non virtual because used by constructor
-    void setExtensionFromPath(std::string_view path);
-    void setDirectoryAndFileFromPath(std::string_view path);
+    virtual void save(std::string_view const path);
+    void setPath(std::string_view const path);  // non virtual because used by constructor
+    void setExtensionFromPath(std::string_view const path);
+    void setDirectoryAndFileFromPath(std::string_view const path);
     void setFileType();
     PathType m_pathType;
     std::string m_slashCharacterString;

@@ -20,13 +20,13 @@ using InputAndOutputPairsForTest = typename RangeQueryForTest::InputAndOutputPai
 RangeQueryForTest::TwoBlocksFunction plusForAPairOfBlockValues = plus<>();
 RangeQueryForTest::TwoBlocksFunction minusForPairOfBlockValues = minus<>();
 
-RangeQueryForTest::ValuesFunction plusForARangeOfValues = [](ValuesForTest::const_iterator itStart,
-                                                             ValuesForTest::const_iterator itEnd) {
+RangeQueryForTest::ValuesFunction plusForARangeOfValues = [](ValuesForTest::const_iterator const itStart,
+                                                             ValuesForTest::const_iterator const itEnd) {
     return std::accumulate(itStart + 1, itEnd, *itStart, plus<>());
 };
 
-RangeQueryForTest::ValuesFunction plusForARangeOfBlockValues = [](BlockValuesForTest::const_iterator itStart,
-                                                                  BlockValuesForTest::const_iterator itEnd) {
+RangeQueryForTest::ValuesFunction plusForARangeOfBlockValues = [](BlockValuesForTest::const_iterator const itStart,
+                                                                  BlockValuesForTest::const_iterator const itEnd) {
     return std::accumulate(itStart + 1, itEnd, *itStart, plus<>());
 };
 }  // namespace

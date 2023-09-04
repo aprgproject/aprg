@@ -4,6 +4,6 @@
 
 namespace alba {
 
-void clearContentsOfFile(std::string_view path);
+void clearContentsOfFile(std::string_view const path);
 
 }  // namespace alba

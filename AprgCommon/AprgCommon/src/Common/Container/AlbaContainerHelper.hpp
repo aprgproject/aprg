@@ -179,7 +179,7 @@ typename Adapter::container_type& getUnderlyingContainerReference(Adapter& adapt
 
 // SaveContentsToStream
 
-template <typename ValueType, std::size_t SIZE, template <typename, std::size_t> class Container>
+template <typename ValueType, std::size_t const SIZE, template <typename, std::size_t> class Container>
 void saveContentsToStream(
     std::ostream& outputStream, Container<ValueType, SIZE> const& container, StreamFormat const streamFormat) {
     // tested on array
@@ -245,7 +245,7 @@ void saveContentsInDecimalAndHexadecimalFormat(std::ostream& outputStream, Conta
 }
 
 // RetrieveContentsFromStream
-template <typename ValueType, std::size_t SIZE, template <typename, std::size_t> class Container>
+template <typename ValueType, std::size_t const SIZE, template <typename, std::size_t> class Container>
 void retrieveContentsFromStream(std::istream& inputStream, Container<ValueType, SIZE>& container) {
     // tested on array
     std::istream_iterator<ValueType> inputIterator(inputStream);

@@ -13,7 +13,7 @@ namespace alba {
 
 class AlbaLinuxPathHandler : public AlbaPathHandler {
 public:
-    explicit AlbaLinuxPathHandler(std::string_view path);
+    explicit AlbaLinuxPathHandler(std::string_view const path);
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
 
     static AlbaLinuxPathHandler createPathHandlerForDetectedPath();
@@ -30,30 +30,30 @@ public:
     void deleteFilesInDirectory();                     // do tests
     void deleteInnerFilesAndDirectories();             // do tests
     void deleteDirectoryWithFilesAndDirectories();     // do tests
-    bool copyToNewFile(std::string_view newFilePath);
-    bool renameFile(std::string_view newFileName);
-    bool renameImmediateDirectory(std::string_view newDirectoryName);
+    bool copyToNewFile(std::string_view const newFilePath);
+    bool renameFile(std::string_view const newFileName);
+    bool renameImmediateDirectory(std::string_view const newDirectoryName);
 
     void findFilesAndDirectoriesOneDepth(
-        std::string_view wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
+        std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
     void findFilesAndDirectoriesMultipleDepth(
-        std::string_view wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories, int const depth) const;
+        std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories, int const depth) const;
     void findFilesAndDirectoriesUnlimitedDepth(
-        std::string_view wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
+        std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
 
 private:
     static std::string getCurrentDetectedPath();
-    void save(std::string_view path) override;
-    void setPath(std::string_view path);
+    void save(std::string_view const path) override;
+    void setPath(std::string_view const path);
     void findFilesAndDirectoriesWithDepth(
-        std::string_view currentDirectory, std::string_view wildCardSearch, ListOfPaths& listOfFiles,
+        std::string_view const currentDirectory, std::string_view const wildCardSearch, ListOfPaths& listOfFiles,
         ListOfPaths& listOfDirectories, int const depth) const;
     void loopAllFilesAndDirectoriesInDirectoryStream(
-        DIR* directoryStream, std::string_view currentDirectory, std::string_view wildCardSearch,
+        DIR* directoryStream, std::string_view const currentDirectory, std::string_view const wildCardSearch,
         std::set<std::string>& listOfFiles, std::set<std::string>& listOfDirectories, int const depth) const;
-    [[nodiscard]] bool isPathADirectory(std::string_view fileOrDirectoryName) const;
-    static bool canBeLocated(std::string_view fullPath);
-    [[nodiscard]] bool isSlashNeededAtTheEnd(std::string_view correctedPath, std::string_view originalPath) const;
+    [[nodiscard]] bool isPathADirectory(std::string_view const fileOrDirectoryName) const;
+    static bool canBeLocated(std::string_view const fullPath);
+    [[nodiscard]] bool isSlashNeededAtTheEnd(std::string_view const correctedPath, std::string_view const originalPath) const;
     bool m_foundInLocalSystem{false};
     bool m_relativePath{false};
 };

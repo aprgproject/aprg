@@ -6,7 +6,7 @@ namespace alba {
 
 struct AlbaLinuxPathHandlerTest : public testing::Test {
     AlbaLinuxPathHandlerTest() = default;
-    static std::string convertToSimplestPath(std::string_view path);
+    static std::string convertToSimplestPath(std::string_view const path);
 };
 
 }  // namespace alba

@@ -108,9 +108,9 @@ void DisplayTable::setBorders(string_view const horizontalBorder, string_view co
     m_verticalBorder = verticalBorder;
 }
 
-void DisplayTable::setHorizontalBorder(std::string_view horizontalBorder) { m_horizontalBorder = horizontalBorder; }
+void DisplayTable::setHorizontalBorder(std::string_view const horizontalBorder) { m_horizontalBorder = horizontalBorder; }
 
-void DisplayTable::setVerticalBorder(std::string_view verticalBorder) { m_verticalBorder = verticalBorder; }
+void DisplayTable::setVerticalBorder(std::string_view const verticalBorder) { m_verticalBorder = verticalBorder; }
 
 ostream& operator<<(ostream& out, DisplayTable const& displayTable) {
     DisplayTablePrinter printer(displayTable);

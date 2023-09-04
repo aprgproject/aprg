@@ -8,7 +8,7 @@ namespace alba {
 
 class AlbaWebPathHandler : public AlbaPathHandler {
 public:
-    explicit AlbaWebPathHandler(std::string_view path);
+    explicit AlbaWebPathHandler(std::string_view const path);
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
 
     void clear() override;
@@ -16,15 +16,15 @@ public:
     [[nodiscard]] std::string getDirectory() const override;
     [[nodiscard]] bool hasProtocol() const;
     [[nodiscard]] std::string getProtocol() const;
-    void gotoLink(std::string_view newPath);
-    void setProtocolWithSymbols(std::string_view protocolWithSymbols);
+    void gotoLink(std::string_view const newPath);
+    void setProtocolWithSymbols(std::string_view const protocolWithSymbols);
 
 private:
-    void save(std::string_view path) override;
-    void setPath(std::string_view path);
+    void save(std::string_view const path) override;
+    void setPath(std::string_view const path);
     void splitPathToBeforeAndAfterProtocol(
-        std::string_view path, std::string& protocolWithSymbols, std::string& pathAfterProtocol);
-    void setUrlParameters(std::string_view urlParameters);
+        std::string_view const path, std::string& protocolWithSymbols, std::string& pathAfterProtocol);
+    void setUrlParameters(std::string_view const urlParameters);
     std::string m_protocolWithSymbols;
     std::string m_urlParameters;
     bool m_hasProtocol{false};

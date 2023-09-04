@@ -20,14 +20,14 @@ public:
     std::string getFilePathInput();
 
     std::string displayQuestionAndChoicesAndGetStringAnswerInAllCapitals(
-        std::string_view question, Choices<std::string> const& choices);
+        std::string_view const question, Choices<std::string> const& choices);
 
     template <typename NumberType>
     NumberType getNumberFromInput();
 
     template <typename NumberType>
     NumberType displayQuestionAndChoicesAndGetNumberAnswer(
-        std::string_view question, Choices<NumberType> const& choices);
+        std::string_view const question, Choices<NumberType> const& choices);
 
 private:
     static constexpr int BUFFER_SIZE = 1000;
