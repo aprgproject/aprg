@@ -17,7 +17,7 @@ using namespace std;
 
 namespace alba {
 
-AlbaWindowsPathHandler::AlbaWindowsPathHandler(string_view path) : AlbaPathHandler(R"(\)") { setPath(path); }
+AlbaWindowsPathHandler::AlbaWindowsPathHandler(string_view const path) : AlbaPathHandler(R"(\)") { setPath(path); }
 
 AlbaWindowsPathHandler AlbaWindowsPathHandler::createPathHandlerForDetectedPath() { return {getCurrentDetectedPath()}; }
 
@@ -153,7 +153,7 @@ void AlbaWindowsPathHandler::deleteDirectoryWithFilesAndDirectories() {
     reInput();
 }
 
-bool AlbaWindowsPathHandler::copyToNewFile(string_view newFilePath) {
+bool AlbaWindowsPathHandler::copyToNewFile(string_view const newFilePath) {
     bool isSuccessful(false);
     if (isFile()) {
         isSuccessful = static_cast<bool>(CopyFileW(
@@ -171,7 +171,7 @@ bool AlbaWindowsPathHandler::copyToNewFile(string_view newFilePath) {
     return isSuccessful;
 }
 
-bool AlbaWindowsPathHandler::renameFile(string_view newFileName) {
+bool AlbaWindowsPathHandler::renameFile(string_view const newFileName) {
     bool isSuccessful(false);
     if (isFile()) {
         string newPath(m_directory + string(newFileName));
@@ -190,7 +190,7 @@ bool AlbaWindowsPathHandler::renameFile(string_view newFileName) {
     return isSuccessful;
 }
 
-bool AlbaWindowsPathHandler::renameImmediateDirectory(string_view newDirectoryName) {
+bool AlbaWindowsPathHandler::renameImmediateDirectory(string_view const newDirectoryName) {
     bool isSuccessful(false);
     if (isDirectory()) {
         AlbaWindowsPathHandler newPathHandler(getFullPath());
@@ -270,9 +270,9 @@ string AlbaWindowsPathHandler::getCurrentDetectedPath() {
     return result;
 }
 
-void AlbaWindowsPathHandler::save(string_view path) { setPath(path); }
+void AlbaWindowsPathHandler::save(string_view const path) { setPath(path); }
 
-void AlbaWindowsPathHandler::setPath(string_view path) {
+void AlbaWindowsPathHandler::setPath(string_view const path) {
     string correctPath(getCorrectPathWithoutDoublePeriod(
         getCorrectPathWithReplacedSlashCharacters(path, m_slashCharacterString), m_slashCharacterString));
     if (isSlashNeededAtTheEnd(correctPath, path)) {
@@ -294,7 +294,7 @@ void AlbaWindowsPathHandler::setDriveOrRoot() {
     m_relativePath = m_driveOrRoot.empty();
 }
 
-bool AlbaWindowsPathHandler::canBeLocated(string_view fullPath) const {
+bool AlbaWindowsPathHandler::canBeLocated(string_view const fullPath) const {
     DWORD attributes = GetFileAttributesW(convertToAnotherBasicStringVariant<string_view, wstring>(fullPath).c_str());
     return INVALID_FILE_ATTRIBUTES != attributes;
 }

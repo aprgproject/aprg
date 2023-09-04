@@ -11,9 +11,9 @@ void AlbaStreamParameterWriter::writeData(string const& data) const {
     writeStringViewData(data);
 }
 
-void AlbaStreamParameterWriter::writeData(string_view data) const { writeStringViewData(data); }
+void AlbaStreamParameterWriter::writeData(string_view const data) const { writeStringViewData(data); }
 
-void AlbaStreamParameterWriter::writeStringViewData(string_view data) const {
+void AlbaStreamParameterWriter::writeStringViewData(string_view const data) const {
     bool isExisting(!data.empty());
     m_stream << isExisting << "\n";
     if (isExisting) {

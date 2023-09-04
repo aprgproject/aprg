@@ -16,7 +16,7 @@ using namespace std;
 
 namespace alba::stringHelper {
 
-size_t generateUniqueId(string_view str) {
+size_t generateUniqueId(string_view const str) {
     return accumulate(begin(str), end(str), 1ULL, [](size_t const accumulatedChar, uint8_t const character) {
         return (accumulatedChar * character) + 1;
     });
@@ -65,14 +65,14 @@ size_t getHammingDistance(string_view const string1, string_view const string2) 
     return result;
 }
 
-size_t getNumberOfSubStrings(string_view str) {
+size_t getNumberOfSubStrings(string_view const str) {
     // A string of length n has n(n+1)/2 substrings.
 
     size_t length = str.length();
     return length * (length + 1) / 2;
 }
 
-size_t getNumberOfSubsequences(string_view str) {
+size_t getNumberOfSubsequences(string_view const str) {
     // A string of length n has 2^n - 1 subsequences.
 
     return static_cast<size_t>(get2ToThePowerOf(str.length()) - 1);
@@ -112,19 +112,19 @@ int getPeriodValue(string_view const str, string_view const period) {
     return (periodCount > 0) ? periodCount : static_cast<int>(string::npos);
 }
 
-bool isNumber(string_view str) {
+bool isNumber(string_view const str) {
     return any_of(begin(str), end(str), [](char const character) { return isNumber(character); });
 }
 
-bool isWhiteSpace(string_view str) {
+bool isWhiteSpace(string_view const str) {
     return all_of(begin(str), end(str), [](char const character) { return isWhiteSpace(character); });
 }
 
-bool isNewline(string_view str) {
+bool isNewline(string_view const str) {
     return all_of(begin(str), end(str), [](char const character) { return isNewline(character); });
 }
 
-bool isIdentifier(string_view str) {
+bool isIdentifier(string_view const str) {
     bool isIdentifier(false);
     if (!str.empty()) {
         char firstCharacter = str[0];
@@ -133,12 +133,12 @@ bool isIdentifier(string_view str) {
     return isIdentifier;
 }
 
-bool isOneWord(string_view str) {
+bool isOneWord(string_view const str) {
     return (!str.empty()) &&
            none_of(begin(str), end(str), [](char const character) { return isWhiteSpace(character); });
 }
 
-bool isPalindrome(string_view str) {
+bool isPalindrome(string_view const str) {
     bool result(false);
     if (!str.empty()) {
         result = true;
@@ -279,7 +279,7 @@ bool isWildcardMatch(
     return result;
 }
 
-bool isCamelCase(string_view str) {
+bool isCamelCase(string_view const str) {
     if (!str.empty()) {
         return isLowerCaseLetter(str.front()) &&
                all_of(begin(str), end(str), [](char const character) { return isLetterOrNumber(character); });
@@ -287,7 +287,7 @@ bool isCamelCase(string_view str) {
     return false;
 }
 
-bool isPascalCase(string_view str) {
+bool isPascalCase(string_view const str) {
     if (!str.empty()) {
         return isCapitalLetter(str.front()) &&
                all_of(begin(str), end(str), [](char const character) { return isLetterOrNumber(character); });
@@ -295,7 +295,7 @@ bool isPascalCase(string_view str) {
     return false;
 }
 
-bool isSnakeCase(string_view str) {
+bool isSnakeCase(string_view const str) {
     if (!str.empty()) {
         return isLowerCaseLetter(str.front()) && all_of(begin(str), end(str), [](char const character) {
                    return isLowerCaseLetter(character) || isUnderscore(character);
@@ -304,7 +304,7 @@ bool isSnakeCase(string_view str) {
     return false;
 }
 
-bool isKebabCase(string_view str) {
+bool isKebabCase(string_view const str) {
     if (!str.empty()) {
         return isLowerCaseLetter(str.front()) && all_of(begin(str), end(str), [](char const character) {
                    return isLowerCaseLetter(character) || '-' == character;
@@ -313,7 +313,7 @@ bool isKebabCase(string_view str) {
     return false;
 }
 
-bool isScreamingSnakeCase(string_view str) {
+bool isScreamingSnakeCase(string_view const str) {
     if (!str.empty()) {
         return isCapitalLetter(str.front()) && all_of(begin(str), end(str), [](char const character) {
                    return isCapitalLetter(character) || isUnderscore(character);
@@ -322,14 +322,14 @@ bool isScreamingSnakeCase(string_view str) {
     return false;
 }
 
-string getStringWithCapitalLetters(string_view str) {
+string getStringWithCapitalLetters(string_view const str) {
     string result;
     result.resize(str.length());
     transform(begin(str), end(str), begin(result), ::toupper);
     return result;
 }
 
-string getStringWithFirstNonWhiteSpaceCharacterToCapital(string_view str) {
+string getStringWithFirstNonWhiteSpaceCharacterToCapital(string_view const str) {
     string result(str);
     size_t resultLength = result.length();
     for (size_t index1 = 0; index1 < resultLength; ++index1) {
@@ -341,14 +341,14 @@ string getStringWithFirstNonWhiteSpaceCharacterToCapital(string_view str) {
     return result;
 }
 
-string getStringWithLowerCaseLetters(string_view str) {
+string getStringWithLowerCaseLetters(string_view const str) {
     string result;
     result.resize(str.length());
     transform(begin(str), end(str), begin(result), ::tolower);
     return result;
 }
 
-string getStringWithUrlDecodedString(string_view str) {
+string getStringWithUrlDecodedString(string_view const str) {
     string result;
     size_t index = 0;
     size_t length = str.length();
@@ -364,7 +364,7 @@ string getStringWithUrlDecodedString(string_view str) {
     return result;
 }
 
-string getStringThatContainsWhiteSpaceIndention(string_view str) {
+string getStringThatContainsWhiteSpaceIndention(string_view const str) {
     string result;
     size_t firstIndexOfNotOfCharacters(str.find_first_not_of(WHITESPACE_STRING));
     if (isNotNpos(static_cast<int>(firstIndexOfNotOfCharacters))) {
@@ -388,11 +388,11 @@ string getStringWithoutStartingAndTrailingCharacters(string_view const str, stri
     return result;
 }
 
-string getStringWithoutStartingAndTrailingWhiteSpace(string_view str) {
+string getStringWithoutStartingAndTrailingWhiteSpace(string_view const str) {
     return getStringWithoutStartingAndTrailingCharacters(str, WHITESPACE_STRING);
 }
 
-string getStringWithoutWhiteSpace(string_view str) {
+string getStringWithoutWhiteSpace(string_view const str) {
     string result;
     size_t index = 0;
     size_t length = str.length();
@@ -405,7 +405,7 @@ string getStringWithoutWhiteSpace(string_view str) {
     return result;
 }
 
-string getStringWithoutRedundantWhiteSpace(string_view str) {
+string getStringWithoutRedundantWhiteSpace(string_view const str) {
     string result;
     size_t index = 0;
     size_t length = str.length();
@@ -422,7 +422,7 @@ string getStringWithoutRedundantWhiteSpace(string_view str) {
     return result;
 }
 
-string getStringWithoutQuotations(string_view str) {
+string getStringWithoutQuotations(string_view const str) {
     size_t length = str.length();
     if (length > 2 && str[0] == '\"' && str[length - 1] == '\"') {
         return string(str.substr(1, length - 2));
@@ -523,7 +523,7 @@ string getStringBeforeThisCharacters(
     return result;
 }
 
-string getStringAndReplaceNonAlphanumericCharactersToUnderScore(string_view path) {
+string getStringAndReplaceNonAlphanumericCharactersToUnderScore(string_view const path) {
     bool isPreviousCharacterNonAlphanumeric = false;
     string correctPath = accumulate(
         path.cbegin(), path.cend(), string(),
@@ -580,7 +580,7 @@ string getHexNumberAfterThisString(string_view const mainText, string_view const
     return result;
 }
 
-string getHexEquivalentOfCharacters(string_view stringToCheck) {
+string getHexEquivalentOfCharacters(string_view const stringToCheck) {
     stringstream bufferStream;
     for (unsigned char const character : stringToCheck) {
         bufferStream << hex << uppercase << setfill('0') << setw(2) << static_cast<uint64_t>(character);
@@ -588,7 +588,7 @@ string getHexEquivalentOfCharacters(string_view stringToCheck) {
     return bufferStream.str();
 }
 
-string getQuotedString(string_view stringToCheck) {
+string getQuotedString(string_view const stringToCheck) {
     stringstream bufferStream;
     bufferStream << quoted(string(stringToCheck));  // remove temporary string object when quoted has string view
     return bufferStream.str();
@@ -855,7 +855,7 @@ string getStringWithLeftAlignment(string_view const mainText, size_t const targe
     return result;
 }
 
-string getCorrectPathWithoutUrlParameters(string_view path) {
+string getCorrectPathWithoutUrlParameters(string_view const path) {
     string correctPathWithoutUrlParameters(path);
     size_t indexOfQuestionMark = path.find_first_of('?');
     if (isNotNpos(static_cast<int>(indexOfQuestionMark))) {
@@ -864,7 +864,7 @@ string getCorrectPathWithoutUrlParameters(string_view path) {
     return correctPathWithoutUrlParameters;
 }
 
-string getUrlParameters(string_view path) {
+string getUrlParameters(string_view const path) {
     string urlParameters;
     size_t indexOfQuestionMark = path.find_first_of('?');
     if (isNotNpos(static_cast<int>(indexOfQuestionMark))) {
@@ -935,34 +935,34 @@ string getImmediateDirectoryName(string_view const path, string_view const slash
 }
 
 template <char slashCharacter>
-string getCorrectPathWithReplacedSlashCharacters(string_view path) {
+string getCorrectPathWithReplacedSlashCharacters(string_view const path) {
     return getCorrectPathWithReplacedSlashCharacters(path, string(1, slashCharacter));
 }
-template string getCorrectPathWithReplacedSlashCharacters<'\\'>(string_view path);
-template string getCorrectPathWithReplacedSlashCharacters<'/'>(string_view path);
+template string getCorrectPathWithReplacedSlashCharacters<'\\'>(string_view const path);
+template string getCorrectPathWithReplacedSlashCharacters<'/'>(string_view const path);
 
 template <char slashCharacter>
-string getCorrectPathWithoutDoublePeriod(string_view path) {
+string getCorrectPathWithoutDoublePeriod(string_view const path) {
     return getCorrectPathWithoutDoublePeriod(path, string(1, slashCharacter));
 }
-template string getCorrectPathWithoutDoublePeriod<'\\'>(string_view path);
-template string getCorrectPathWithoutDoublePeriod<'/'>(string_view path);
+template string getCorrectPathWithoutDoublePeriod<'\\'>(string_view const path);
+template string getCorrectPathWithoutDoublePeriod<'/'>(string_view const path);
 
 template <char slashCharacter>
-string getStringBeforeDoublePeriod(string_view path) {
+string getStringBeforeDoublePeriod(string_view const path) {
     return getStringBeforeDoublePeriod(path, string(1, slashCharacter));
 }
-template string getStringBeforeDoublePeriod<'\\'>(string_view path);
-template string getStringBeforeDoublePeriod<'/'>(string_view path);
+template string getStringBeforeDoublePeriod<'\\'>(string_view const path);
+template string getStringBeforeDoublePeriod<'/'>(string_view const path);
 
 template <char slashCharacter>
-string getImmediateDirectoryName(string_view path) {
+string getImmediateDirectoryName(string_view const path) {
     return getImmediateDirectoryName(path, string(1, slashCharacter));
 }
-template string getImmediateDirectoryName<'\\'>(string_view path);
-template string getImmediateDirectoryName<'/'>(string_view path);
+template string getImmediateDirectoryName<'\\'>(string_view const path);
+template string getImmediateDirectoryName<'/'>(string_view const path);
 
-bool convertStringToBool(string_view stringToConvert) {
+bool convertStringToBool(string_view const stringToConvert) {
     string allCapital(getStringWithCapitalLetters(stringToConvert));
     bool result(false);
     if ("TRUE" == allCapital) {
@@ -975,7 +975,7 @@ bool convertStringToBool(string_view stringToConvert) {
     return result;
 }
 
-AlbaNumber convertStringToAlbaNumber(string_view stringToConvert) {
+AlbaNumber convertStringToAlbaNumber(string_view const stringToConvert) {
     AlbaNumber result;
     if (isStringFoundCaseSensitive(stringToConvert, ".")) {
         result = AlbaNumber(convertStringToNumber<double>(stringToConvert));

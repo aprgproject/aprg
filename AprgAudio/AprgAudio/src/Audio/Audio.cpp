@@ -713,7 +713,7 @@ int Audio<DataType>::getIndexOfString(vector<uint8_t> const& source, string cons
 }
 
 template <class DataType>
-DataType Audio<DataType>::sixteenBitIntToSample(int16_t sample) {
+DataType Audio<DataType>::sixteenBitIntToSample(int16_t const sample) {
     return static_cast<DataType>(sample) / static_cast<DataType>(32768.);
 }
 
@@ -731,7 +731,7 @@ uint8_t Audio<DataType>::sampleToSingleByte(DataType const sample) {
 }
 
 template <class DataType>
-DataType Audio<DataType>::singleByteToSample(uint8_t sample) {
+DataType Audio<DataType>::singleByteToSample(uint8_t const sample) {
     return static_cast<DataType>(sample - 128) / static_cast<DataType>(128.);
 }
 

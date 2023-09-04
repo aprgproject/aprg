@@ -70,7 +70,7 @@ private:
     void readDibHeader(AlbaFileReader& fileReader);
     void readColors(AlbaFileReader& fileReader);
     void calculateOtherValuesAfterReading();
-    static CompressedMethodType determineCompressedMethodType(uint32_t compressedMethodValue);
+    static CompressedMethodType determineCompressedMethodType(uint32_t const compressedMethodValue);
     uint32_t m_fileSize{0};
     uint32_t m_pixelArrayAddress{0};
     uint32_t m_sizeOfHeader{0};

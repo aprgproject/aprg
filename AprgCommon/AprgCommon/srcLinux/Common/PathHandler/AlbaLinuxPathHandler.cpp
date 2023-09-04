@@ -23,7 +23,7 @@ using namespace std;
 
 namespace alba {
 
-AlbaLinuxPathHandler::AlbaLinuxPathHandler(string_view path) : AlbaPathHandler(R"(/)") { setPath(path); }
+AlbaLinuxPathHandler::AlbaLinuxPathHandler(string_view const path) : AlbaPathHandler(R"(/)") { setPath(path); }
 
 AlbaLinuxPathHandler AlbaLinuxPathHandler::createPathHandlerForDetectedPath() {
     return AlbaLinuxPathHandler(getCurrentDetectedPath());
@@ -143,7 +143,7 @@ void AlbaLinuxPathHandler::deleteDirectoryWithFilesAndDirectories() {
     reInput();
 }
 
-bool AlbaLinuxPathHandler::copyToNewFile(string_view newFilePath) {
+bool AlbaLinuxPathHandler::copyToNewFile(string_view const newFilePath) {
     int readFileDescriptor{};
     struct stat statBuffer {};
     off_t offset = 0;
@@ -175,7 +175,7 @@ bool AlbaLinuxPathHandler::copyToNewFile(string_view newFilePath) {
     return isSuccessful;
 }
 
-bool AlbaLinuxPathHandler::renameFile(string_view newFileName) {
+bool AlbaLinuxPathHandler::renameFile(string_view const newFileName) {
     bool isSuccessful(false);
     if (isFile()) {
         string newPath(m_directory + string(newFileName));
@@ -191,7 +191,7 @@ bool AlbaLinuxPathHandler::renameFile(string_view newFileName) {
     return isSuccessful;
 }
 
-bool AlbaLinuxPathHandler::renameImmediateDirectory(string_view newDirectoryName) {
+bool AlbaLinuxPathHandler::renameImmediateDirectory(string_view const newDirectoryName) {
     bool isSuccessful(false);
     if (isDirectory()) {
         AlbaLinuxPathHandler newPathHandler(getFullPath());
@@ -239,9 +239,9 @@ string AlbaLinuxPathHandler::getCurrentDetectedPath() {
     return {detectedLocalPath.cbegin(), detectedLocalPath.cend()};
 }
 
-void AlbaLinuxPathHandler::save(string_view path) { setPath(path); }
+void AlbaLinuxPathHandler::save(string_view const path) { setPath(path); }
 
-void AlbaLinuxPathHandler::setPath(string_view path) {
+void AlbaLinuxPathHandler::setPath(string_view const path) {
     string correctPath(getCorrectPathWithoutDoublePeriod(
         // getStringWithoutCharAtTheEnd(
         getCorrectPathWithReplacedSlashCharacters(path, m_slashCharacterString)
@@ -313,7 +313,7 @@ void AlbaLinuxPathHandler::loopAllFilesAndDirectoriesInDirectoryStream(
     } while (directoryPointer != nullptr);
 }
 
-bool AlbaLinuxPathHandler::isPathADirectory(string_view fileOrDirectoryName) const {
+bool AlbaLinuxPathHandler::isPathADirectory(string_view const fileOrDirectoryName) const {
     bool result(false);
     if (canBeLocated(fileOrDirectoryName)) {
         struct stat statBuffer {};
@@ -327,7 +327,7 @@ bool AlbaLinuxPathHandler::isPathADirectory(string_view fileOrDirectoryName) con
     return result;
 }
 
-bool AlbaLinuxPathHandler::canBeLocated(string_view fullPath) {
+bool AlbaLinuxPathHandler::canBeLocated(string_view const fullPath) {
     struct stat statBuffer {};
     return stat(fullPath.data(), &statBuffer) == 0;
 }

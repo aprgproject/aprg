@@ -11,7 +11,7 @@ namespace alba {
 DisplayTableCell::DisplayTableCell()
     : m_horizontalAlignment(HorizontalAlignment::Center), m_verticalAlignment(VerticalAlignment::Center) {}
 
-DisplayTableCell::DisplayTableCell(string_view displayText)
+DisplayTableCell::DisplayTableCell(string_view const displayText)
     : m_displayText(displayText),
       m_horizontalAlignment(HorizontalAlignment::Center),
       m_verticalAlignment(VerticalAlignment::Center) {}
@@ -34,7 +34,7 @@ VerticalAlignment DisplayTableCell::getVerticalAlignment() const { return m_vert
 
 string& DisplayTableCell::getTextReference() { return m_displayText; }
 
-void DisplayTableCell::setText(string_view text) { m_displayText = text; }
+void DisplayTableCell::setText(string_view const text) { m_displayText = text; }
 
 void DisplayTableCell::setHorizontalAlignment(HorizontalAlignment const horizontalAlignment) {
     m_horizontalAlignment = horizontalAlignment;
@@ -56,7 +56,7 @@ DisplayTableCells& DisplayTableRow::getCellsReference() { return m_cells; }
 
 DisplayTableCell& DisplayTableRow::getCellReferenceAt(int const columnIndex) { return m_cells[columnIndex]; }
 
-void DisplayTableRow::addCell(string_view text) { m_cells.emplace_back(text); }
+void DisplayTableRow::addCell(string_view const text) { m_cells.emplace_back(text); }
 
 void DisplayTableRow::addCell(string_view const displayText, HorizontalAlignment const horizontalAlignment) {
     m_cells.emplace_back(displayText, horizontalAlignment);

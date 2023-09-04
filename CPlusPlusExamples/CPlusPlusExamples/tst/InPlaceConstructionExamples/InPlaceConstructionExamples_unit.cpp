@@ -79,7 +79,7 @@ TEST(InPlaceConstructionExamplesTest, RvoWorks) {
 }  // namespace RvoWorks
 
 namespace NoRvoBecauseNoOpportunity {
-string sadFunction(string s) {
+string sadFunction(string const s) {
     s += "No RVO for you!";
     return s;
 }
@@ -150,9 +150,9 @@ string willThisRvo02(bool const condition) {
     // This will RVO because returning a temporary works.
     // This will RVO even in debug builds
 }
-string willThisRvo03(bool const condition, string prohibitingRvo) {
+string willThisRvo03(bool const condition, string const prohibitingRvo) {
     if (condition) {
-        prohibitingRvo = "I won't RVO";
+        const_cast<string>(prohibitingRvo) = "I won't RVO";
     }
     return prohibitingRvo;
 

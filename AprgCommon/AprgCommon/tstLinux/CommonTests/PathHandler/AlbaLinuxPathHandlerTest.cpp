@@ -7,7 +7,7 @@ using namespace std;
 
 namespace alba {
 
-string AlbaLinuxPathHandlerTest::convertToSimplestPath(string_view path) {
+string AlbaLinuxPathHandlerTest::convertToSimplestPath(string_view const path) {
     return getCorrectPathWithoutDoublePeriod<'/'>(getCorrectPathWithReplacedSlashCharacters<'/'>(path));
 }
 

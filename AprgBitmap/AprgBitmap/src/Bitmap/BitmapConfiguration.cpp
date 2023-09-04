@@ -237,7 +237,7 @@ void BitmapConfiguration::calculateOtherValuesAfterReading() {
     m_bitMaskForValue = AlbaBitValueUtilities<uint32_t>::generateOnesWithNumberOfBits(m_numberOfBitsPerPixel);
 }
 
-CompressedMethodType BitmapConfiguration::determineCompressedMethodType(uint32_t compressedMethodValue) {
+CompressedMethodType BitmapConfiguration::determineCompressedMethodType(uint32_t const compressedMethodValue) {
     CompressedMethodType compressedMethodType(CompressedMethodType::Unknown);
     switch (compressedMethodValue) {
         case 0:

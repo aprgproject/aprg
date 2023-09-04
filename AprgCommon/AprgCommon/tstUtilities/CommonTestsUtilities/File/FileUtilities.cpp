@@ -6,7 +6,7 @@ using namespace std;
 
 namespace alba {
 
-void clearContentsOfFile(string_view path) {
+void clearContentsOfFile(string_view const path) {
     ofstream fileStream(path.data());
     fileStream.close();
 }

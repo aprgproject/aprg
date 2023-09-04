@@ -89,11 +89,11 @@ private:
         std::vector<uint8_t> const& source, int const startIndex, Endianness endianness = Endianness::LittleEndian);
     int getIndexOfString(std::vector<uint8_t> const& source, std::string const& s);
 
-    DataType sixteenBitIntToSample(int16_t sample);
+    DataType sixteenBitIntToSample(int16_t const sample);
     int16_t sampleToSixteenBitInt(DataType const sample);
 
     uint8_t sampleToSingleByte(DataType const sample);
-    DataType singleByteToSample(uint8_t sample);
+    DataType singleByteToSample(uint8_t const sample);
 
     int getAiffSampleRate(std::vector<uint8_t>& dataBuffer, int const sampleRateStartIndex);
     bool tenByteMatch(std::vector<uint8_t>& v1, int const startIndex1, std::vector<uint8_t>& v2, int const startIndex2);

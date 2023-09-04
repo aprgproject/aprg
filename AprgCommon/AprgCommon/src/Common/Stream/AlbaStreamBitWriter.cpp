@@ -21,14 +21,14 @@ void AlbaStreamBitWriter::writeCharData(char const data) {
     transferBytesAsMuchAsPossibleToStream();
 }
 
-void AlbaStreamBitWriter::writeStringData(string_view data) {
+void AlbaStreamBitWriter::writeStringData(string_view const data) {
     for (char const character : data) {
         putCharDataToBuffer(character);
     }
     transferBytesAsMuchAsPossibleToStream();
 }
 
-void AlbaStreamBitWriter::writeHexDigitData(string_view hexDigitsData) {
+void AlbaStreamBitWriter::writeHexDigitData(string_view const hexDigitsData) {
     for (char const character : hexDigitsData) {
         bitset<4> hexDigitBitset(convertHexCharacterToNumber<char>(character));
         putBoolDataToBuffer(hexDigitBitset[3]);

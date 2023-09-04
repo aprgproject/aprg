@@ -10,7 +10,7 @@ using namespace std;
 
 namespace alba {
 
-AlbaWebPathHandler::AlbaWebPathHandler(string_view path) : AlbaPathHandler("/") { setPath(path); }
+AlbaWebPathHandler::AlbaWebPathHandler(string_view const path) : AlbaPathHandler("/") { setPath(path); }
 
 void AlbaWebPathHandler::clear() {
     AlbaPathHandler::clear();
@@ -37,7 +37,7 @@ string AlbaWebPathHandler::getProtocol() const {
     return protocol;
 }
 
-void AlbaWebPathHandler::gotoLink(string_view newPath) {
+void AlbaWebPathHandler::gotoLink(string_view const newPath) {
     AlbaWebPathHandler newPathHandler(newPath);
     if (newPathHandler.hasProtocol()) {
         input(newPath);
@@ -46,7 +46,7 @@ void AlbaWebPathHandler::gotoLink(string_view newPath) {
     }
 }
 
-void AlbaWebPathHandler::setProtocolWithSymbols(string_view protocolWithSymbols) {
+void AlbaWebPathHandler::setProtocolWithSymbols(string_view const protocolWithSymbols) {
     m_protocolWithSymbols = protocolWithSymbols;
     int index = static_cast<int>(protocolWithSymbols.find_first_of(R"(:/\)"));
     if (isNotNpos(index) && protocolWithSymbols[static_cast<string::size_type>(index)] == ':') {
@@ -54,9 +54,9 @@ void AlbaWebPathHandler::setProtocolWithSymbols(string_view protocolWithSymbols)
     }
 }
 
-void AlbaWebPathHandler::save(string_view path) { setPath(path); }
+void AlbaWebPathHandler::save(string_view const path) { setPath(path); }
 
-void AlbaWebPathHandler::setPath(string_view path) {
+void AlbaWebPathHandler::setPath(string_view const path) {
     string protocolWithSymbols;
     string pathAfterProtocol;
     splitPathToBeforeAndAfterProtocol(path, protocolWithSymbols, pathAfterProtocol);
@@ -83,6 +83,6 @@ void AlbaWebPathHandler::splitPathToBeforeAndAfterProtocol(
     }
 }
 
-void AlbaWebPathHandler::setUrlParameters(string_view urlParameters) { m_urlParameters = urlParameters; }
+void AlbaWebPathHandler::setUrlParameters(string_view const urlParameters) { m_urlParameters = urlParameters; }
 
 }  // namespace alba
