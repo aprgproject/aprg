@@ -48,7 +48,10 @@ Checks: '
   -hicpp-vararg,
   -readability-magic-numbers,
   -readability-function-cognitive-complexity,
-  -misc-non-private-member-variables-in-classes
+  -misc-non-private-member-variables-in-classes,
+  -readability-magic-numbers,
+  -readability-identifier-length,
+  -hicpp-signed-bitwise
 '
 # -> Noisy checks
 #  -readability-magic-numbers,

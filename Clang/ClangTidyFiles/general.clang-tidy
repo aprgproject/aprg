@@ -36,10 +36,13 @@ Checks: '
   -readability-isolate-declaration,
   -readability-named-parameter,
   -readability-qualified-auto,
+  -readability-magic-numbers,
+  -readability-identifier-length,
+  -hicpp-signed-bitwise
 '
 # -> Noisy checks
 #  -readability-magic-numbers,
-#  -readability-identifier-length
+#  -readability-identifier-length,
 #  -hicpp-signed-bitwise
 
 # -> Configure specific checkers
