@@ -3,6 +3,7 @@
 # ---> The check misc-const-correctness flags too much errors (but its nice to have in the future).
 # ---> The check cppcoreguidelines-virtual-class-destructor conflicts with hicpp-use-override and modernize-use-override
 # ---> The checks llvm-qualified-auto,readability-qualified-auto wants to change iterators to pointers
+# ---> The checks cppcoreguidelines-avoid-magic-numbers is disabled, but readability-magic-numbers is enabled.
 Checks: '
   *,
   -altera-struct-pack-align,
@@ -10,6 +11,7 @@ Checks: '
   -altera-id-dependent-backward-branch,
   -android-cloexec-open,
   -bugprone-easily-swappable-parameters,
+  -cppcoreguidelines-avoid-magic-numbers,
   -cppcoreguidelines-macro-usage,
   -cppcoreguidelines-non-private-member-variables-in-classes,
   -cppcoreguidelines-pro-bounds-constant-array-index,
@@ -34,7 +36,14 @@ Checks: '
   -readability-isolate-declaration,
   -readability-named-parameter,
   -readability-qualified-auto,
+  -readability-magic-numbers,
+  -readability-identifier-length,
+  -hicpp-signed-bitwise
 '
+# -> Noisy checks
+#  -readability-magic-numbers,
+#  -readability-identifier-length,
+#  -hicpp-signed-bitwise
 
 # -> Configure specific checkers
 CheckOptions:
