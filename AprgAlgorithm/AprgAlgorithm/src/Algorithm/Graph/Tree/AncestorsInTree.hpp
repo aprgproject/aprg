@@ -29,10 +29,10 @@ public:
 private:
     [[nodiscard]] Vertex getAncestorInternal(Vertex const& vertex, int const distance) const {
         Vertex result{};
-        if (distance > 0)  {
-        // not zero
-            if (BitValueUtilities::isPowerOfTwo(distance))  {
-            // is power of two
+        if (distance > 0) {
+            // not zero
+            if (BitValueUtilities::isPowerOfTwo(distance)) {
+                // is power of two
                 auto it = m_startAndDistancePairToDestinationMap.find({vertex, distance});
                 if (it != m_startAndDistancePairToDestinationMap.cend()) {
                     result = it->second;
@@ -77,9 +77,8 @@ private:
     }
 
     void updateDestinationMapIfNeeded(Vertex const& child, int const distanceFromChild, Vertex const& parent) {
-        if (distanceFromChild > 0 &&
-            BitValueUtilities::isPowerOfTwo(distanceFromChild))  {
-        // is power of two but not zero
+        if (distanceFromChild > 0 && BitValueUtilities::isPowerOfTwo(distanceFromChild)) {
+            // is power of two but not zero
             m_startAndDistancePairToDestinationMap[VertexAndCountPair(child, distanceFromChild)] = parent;
         }
     }

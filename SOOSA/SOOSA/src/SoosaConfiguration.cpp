@@ -14,9 +14,7 @@ int SoosaConfiguration::getAcceptableLineDeviationForLineModelInPixels() const {
     return m_acceptableLineDeviationForLineModelInPixels;
 }
 
-double SoosaConfiguration::getRemovalRatioForLineModel() const {
-    return m_removalRatioForLineModel;
-}
+double SoosaConfiguration::getRemovalRatioForLineModel() const { return m_removalRatioForLineModel; }
 
 int SoosaConfiguration::getMinimumLineSamples() const { return m_minimumLineSamples; }
 

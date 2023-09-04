@@ -134,8 +134,8 @@ void searchForBestSampleIndexes(
 
 void searchAndTryToReplicateSamples(
     AudioInDouble& audioToChange, AudioInDouble const& audioToReplicate, AudioInDouble const& audioToSearch,
-    int const channelIndexInAudioToChange, int const channelIndexInAudioToReplicate, int const channelIndexInAudioToSearch,
-    bool const alwaysPutNewValue) {
+    int const channelIndexInAudioToChange, int const channelIndexInAudioToReplicate,
+    int const channelIndexInAudioToSearch, bool const alwaysPutNewValue) {
     SearchResultsDetails replicateAndSearchIndexes;
     Samples const& samplesToReplicate(audioToReplicate.getSamplesAtChannel(channelIndexInAudioToReplicate));
     Samples const& samplesToSearch(audioToSearch.getSamplesAtChannel(channelIndexInAudioToSearch));

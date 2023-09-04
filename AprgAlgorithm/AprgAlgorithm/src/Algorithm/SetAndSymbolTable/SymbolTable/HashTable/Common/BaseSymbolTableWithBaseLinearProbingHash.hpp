@@ -48,8 +48,8 @@ public:
     }
 
 protected:
-    void putEntry(Entry const& entry) override  {
-    // overrides in BaseLinearProbingHash
+    void putEntry(Entry const& entry) override {
+        // overrides in BaseLinearProbingHash
         put(entry.key, entry.value);
     }
 

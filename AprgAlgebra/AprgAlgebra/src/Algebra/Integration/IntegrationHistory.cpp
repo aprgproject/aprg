@@ -61,16 +61,16 @@ void IntegrationHistory::addIntegrationPurpose(IntegrationPurpose const purpose)
 }
 
 void IntegrationHistory::logBefore(
-    Term const&,               // input,
-    IntegrationPurpose const)  {
-// purpose)
+    Term const&,  // input,
+    IntegrationPurpose const) {
+    // purpose)
 }
 
 void IntegrationHistory::logAfter(
     Term const&,               // input,
     IntegrationPurpose const,  // purpose,
-    Term const&)               {
-// output)
+    Term const&) {
+    // output)
 }
 
 }  // namespace alba::algebra

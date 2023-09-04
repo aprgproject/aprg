@@ -97,9 +97,8 @@ AlbaNumber getLimitAtAValueInBothSides(
     AlbaNumber result(ALBA_NUMBER_NOT_A_NUMBER);
     AlbaNumber limitPositiveSide(getLimitAtAValueInThePositiveSide(term, variableName, valueToApproach));
     AlbaNumber limitNegativeSide(getLimitAtAValueInTheNegativeSide(term, variableName, valueToApproach));
-    if (isAlmostEqualForLimitChecking(
-            limitPositiveSide, limitNegativeSide))  {
-    // limit only exists if both sides are equal  (Calculus Theorem)
+    if (isAlmostEqualForLimitChecking(limitPositiveSide, limitNegativeSide)) {
+        // limit only exists if both sides are equal  (Calculus Theorem)
         result = getAverage(limitPositiveSide, limitNegativeSide);
     }
     return result;

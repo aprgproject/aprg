@@ -12,22 +12,21 @@ class Component {
 public:
     virtual ~Component() = default;
 
-    [[nodiscard]] virtual Component const* getChildPointerAt(
-        int const) const  {
-                          // method/function makes sense.)
-    // Make sure that this doesn't break interface segregation principle. (Make sure the
+    [[nodiscard]] virtual Component const* getChildPointerAt(int const) const {
+        // method/function makes sense.)
+        // Make sure that this doesn't break interface segregation principle. (Make sure the
         return nullptr;
     }
 
-    virtual void add(std::unique_ptr<Component>)  {
-                                                  // (Make sure the method/function makes sense.)
-    // Make sure that this doesn't break interface segregation principle.
+    virtual void add(std::unique_ptr<Component>) {
+        // (Make sure the method/function makes sense.)
+        // Make sure that this doesn't break interface segregation principle.
         //...
     }
 
-    virtual void removeAtIndex(int const)  {
-                                           // principle. (Make sure the method/function makes sense.)
-    // Make sure that this doesn't break interface segregation
+    virtual void removeAtIndex(int const) {
+        // principle. (Make sure the method/function makes sense.)
+        // Make sure that this doesn't break interface segregation
         //...
     }
 

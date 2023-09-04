@@ -19,8 +19,7 @@ namespace alba::algebra::Factorization {
 bool areExponentsDivisible(Monomial const& monomial, int const divisor) {
     bool result(true);
     for (auto const& [variableName, exponent] : monomial.getVariablesToExponentsMap()) {
-        if (!exponent.isIntegerType() ||
-            !isDivisible<int64_t>(getAbsoluteValue(exponent.getInteger()), divisor)) {
+        if (!exponent.isIntegerType() || !isDivisible<int64_t>(getAbsoluteValue(exponent.getInteger()), divisor)) {
             result = false;
             break;
         }

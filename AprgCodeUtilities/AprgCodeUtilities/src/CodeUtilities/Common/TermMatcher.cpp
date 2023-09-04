@@ -10,8 +10,7 @@ TermMatcher::TermMatcher(TermType const termType) : m_termTypeOptional(termType)
 
 TermMatcher::TermMatcher(std::string const& content) : m_contentOptional(content) {}
 
-TermMatcher::TermMatcher(MatcherType const matcherType)
-    : m_matcherTypeOptional(matcherType) {}
+TermMatcher::TermMatcher(MatcherType const matcherType) : m_matcherTypeOptional(matcherType) {}
 
 TermMatcher::TermMatcher(TermType const termType, string const& content)
     : m_termTypeOptional(termType), m_contentOptional(content) {}

@@ -27,8 +27,8 @@ public:
         return !(firstXyz == secondXyz);
     }
 
-    bool operator<(AlbaXYZ const& xyz) const  {
-    // this is added so it can be used in map
+    bool operator<(AlbaXYZ const& xyz) const {
+        // this is added so it can be used in map
         return std::tie(m_x, m_y, m_z) < std::tie(xyz.m_x, xyz.m_y, xyz.m_z);
     }
 

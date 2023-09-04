@@ -35,7 +35,8 @@ public:
     void findFilesAndDirectoriesOneDepth(
         std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
     void findFilesAndDirectoriesMultipleDepth(
-        std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories, int const depth) const;
+        std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories,
+        int const depth) const;
     void findFilesAndDirectoriesUnlimitedDepth(
         std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
 

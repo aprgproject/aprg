@@ -44,8 +44,8 @@ public:
                     break;
                 }
             }
-            if (skipValue == 0)  {
-            // all letters matched
+            if (skipValue == 0) {
+                // all letters matched
                 result = searchIndex;
                 break;
             }

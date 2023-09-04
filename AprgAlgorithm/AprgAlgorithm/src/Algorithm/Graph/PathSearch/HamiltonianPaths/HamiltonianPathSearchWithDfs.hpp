@@ -6,9 +6,9 @@
 namespace alba::algorithm {
 
 template <typename Vertex>
-class HamiltonianPathSearchWithDfs  {
-                                    // NP-complete problem)
-// The Traveling Salesman Problem. // This is an intractable problem (classical
+class HamiltonianPathSearchWithDfs {
+    // NP-complete problem)
+    // The Traveling Salesman Problem. // This is an intractable problem (classical
 public:
     using BaseGraphWithVertex = BaseGraph<Vertex>;
     using Path = typename GraphTypes<Vertex>::Path;
@@ -91,8 +91,8 @@ protected:
         m_processedVertices.putVertex(vertex);
         for (Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(vertex)) {
             checkCycleAndSaveIfNeeded(currentPath, adjacentVertex);
-            if (shouldStop())  {
-            // needs to stop here to prune all dfs recursion instances
+            if (shouldStop()) {
+                // needs to stop here to prune all dfs recursion instances
                 break;
             }
             if (m_processedVertices.isNotFound(adjacentVertex)) {

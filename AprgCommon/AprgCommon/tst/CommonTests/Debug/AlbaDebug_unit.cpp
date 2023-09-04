@@ -25,7 +25,8 @@ TEST(AlbaDebugTest, DebugPrintingWorks) {
     s_debugStringStream.str(string());
     s_debugStringStream.clear();
     performASimplePrintingTest(
-        s_debugStringStream, [](stringstream&, int const singleParameter1, int const singleParameter2, int const singleParameter3) {
+        s_debugStringStream,
+        [](stringstream&, int const singleParameter1, int const singleParameter2, int const singleParameter3) {
             // NOLINTNEXTLINE(bugprone-lambda-function-name)
             ALBA_DBG_PRINT3(singleParameter1, singleParameter2, singleParameter3);
         });
@@ -95,7 +96,8 @@ TEST(AlbaDebugTest, PrintingWithoutSpecifyNumberOfParametersWorks) {
     s_debugStringStream.str(string());
     s_debugStringStream.clear();
     performASimplePrintingTest(
-        s_debugStringStream, [](stringstream&, int const singleParameter1, int const singleParameter2, int const singleParameter3) {
+        s_debugStringStream,
+        [](stringstream&, int const singleParameter1, int const singleParameter2, int const singleParameter3) {
             // NOLINTNEXTLINE(bugprone-lambda-function-name)
             ALBA_DBG_PRINT(singleParameter1, singleParameter2, singleParameter3);
         });

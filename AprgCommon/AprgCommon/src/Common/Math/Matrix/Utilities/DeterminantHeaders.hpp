@@ -18,7 +18,8 @@ DataType getValueUsingCramerRule(
     AlbaMatrix<DataType> const& matrix, size_t const columnIndex, AlbaMatrixData<DataType> const& newColumnValues);
 
 template <typename DataType>
-DataType getValueFromCoFactorExpansion(AlbaMatrix<DataType> const& matrix, size_t const xPosition, size_t const yPosition);
+DataType getValueFromCoFactorExpansion(
+    AlbaMatrix<DataType> const& matrix, size_t const xPosition, size_t const yPosition);
 
 template <typename DataType>
 DataType getDeterminantWhenSideIsMoreThan2(AlbaMatrix<DataType> const& matrix);

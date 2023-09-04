@@ -59,8 +59,8 @@ GameWithMaze::Coordinate GameWithMaze::getOptimalNextCoordinateAt(Coordinate con
         }
     } else if (GameState::Winning == gameState) {
         for (Coordinate const& nextCoordinate : getNextCoordinates(coordinate)) {
-            if (0U == getGrundyNumberAt(nextCoordinate))  {
-            // force your opponent to losing state
+            if (0U == getGrundyNumberAt(nextCoordinate)) {
+                // force your opponent to losing state
                 result = nextCoordinate;
                 break;
             }

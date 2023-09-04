@@ -19,8 +19,8 @@ public:
 
     [[nodiscard]] EndPointPairs const& getEndPointPairsOfLongestPaths() const { return m_endPointPairsOfLongestPaths; }
 
-    int getLongestDistance()  {
-    // this function is coupled with search function
+    int getLongestDistance() {
+        // this function is coupled with search function
         int result(0);
         if (!m_endPointPairsOfLongestPaths.empty()) {
             auto [start, end] = m_endPointPairsOfLongestPaths.front();
@@ -92,8 +92,8 @@ private:
         }
     }
 
-    Dfs const& getDfs(Vertex const& vertex)  {
-    // uses dynamic programming
+    Dfs const& getDfs(Vertex const& vertex) {
+        // uses dynamic programming
         auto it = m_vertexToDfs.find(vertex);
         if (it != m_vertexToDfs.cend()) {
             return it->second;

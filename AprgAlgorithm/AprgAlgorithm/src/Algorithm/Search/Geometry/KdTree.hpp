@@ -148,8 +148,8 @@ protected:
             } else if (isGreaterThanWithDepth(key, nodePointer->key, depth)) {
                 // search for the node in the right in greater than
                 deleteBasedOnKeyStartingOnThisNode(nodePointer->right, key);
-            } else  {
-            // if found
+            } else {
+                // if found
                 // get the minimum on the right
                 // place the keys of the minimum on this node and then delete it
                 // why are we using deletion of minimum on the right instead of deletion of maximum in the left? No real

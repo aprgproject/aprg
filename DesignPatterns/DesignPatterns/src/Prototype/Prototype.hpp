@@ -38,8 +38,8 @@ public:
 // Client
 // creates a new object by asking a prototype to clone itself
 
-class Client  {
-// This actually works like a "prototype manager"
+class Client {
+    // This actually works like a "prototype manager"
 public:
     static constexpr int NUMBER_OF_TYPES = 2;
 

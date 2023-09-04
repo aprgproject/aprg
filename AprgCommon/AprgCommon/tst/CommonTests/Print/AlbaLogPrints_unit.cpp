@@ -10,7 +10,8 @@ namespace alba {
 TEST(AlbaLogPrintsTest, InfLogPrintingWorks) {
     stringstream ssToVerify;
     performASimplePrintingTest(
-        ssToVerify, [](stringstream &ssToVerify, int const singleParameter1, int const singleParameter2, int const singleParameter3) {
+        ssToVerify, [](stringstream &ssToVerify, int const singleParameter1, int const singleParameter2,
+                       int const singleParameter3) {
             // NOLINTNEXTLINE(bugprone-lambda-function-name)
             ALBA_INF_PRINT3(ssToVerify, singleParameter1, singleParameter2, singleParameter3);
         });
@@ -19,7 +20,8 @@ TEST(AlbaLogPrintsTest, InfLogPrintingWorks) {
 TEST(AlbaLogPrintsTest, WrnLogPrintingWorks) {
     stringstream ssToVerify;
     performASimplePrintingTest(
-        ssToVerify, [](stringstream &ssToVerify, int const singleParameter1, int const singleParameter2, int const singleParameter3) {
+        ssToVerify, [](stringstream &ssToVerify, int const singleParameter1, int const singleParameter2,
+                       int const singleParameter3) {
             // NOLINTNEXTLINE(bugprone-lambda-function-name)
             ALBA_WRN_PRINT3(ssToVerify, singleParameter1, singleParameter2, singleParameter3);
         });
@@ -28,7 +30,8 @@ TEST(AlbaLogPrintsTest, WrnLogPrintingWorks) {
 TEST(AlbaLogPrintsTest, ErrLogPrintingWorks) {
     stringstream ssToVerify;
     performASimplePrintingTest(
-        ssToVerify, [](stringstream &ssToVerify, int const singleParameter1, int const singleParameter2, int const singleParameter3) {
+        ssToVerify, [](stringstream &ssToVerify, int const singleParameter1, int const singleParameter2,
+                       int const singleParameter3) {
             // NOLINTNEXTLINE(bugprone-lambda-function-name)
             ALBA_ERR_PRINT3(ssToVerify, singleParameter1, singleParameter2, singleParameter3);
         });
@@ -39,7 +42,8 @@ TEST(AlbaLogPrintsTest, ErrLogPrintingWorks) {
 TEST(AlbaLogPrintsTest, InfLogPrintingWithoutSpecifyNumberOfParametersWorks) {
     stringstream ssToVerify;
     performASimplePrintingTest(
-        ssToVerify, [](stringstream &ssToVerify, int const singleParameter1, int const singleParameter2, int const singleParameter3) {
+        ssToVerify, [](stringstream &ssToVerify, int const singleParameter1, int const singleParameter2,
+                       int const singleParameter3) {
             // NOLINTNEXTLINE(bugprone-lambda-function-name)
             ALBA_INF_PRINT(ssToVerify, singleParameter1, singleParameter2, singleParameter3);
         });
@@ -48,7 +52,8 @@ TEST(AlbaLogPrintsTest, InfLogPrintingWithoutSpecifyNumberOfParametersWorks) {
 TEST(AlbaLogPrintsTest, WrnLogPrintingWithoutSpecifyNumberOfParametersWorks) {
     stringstream ssToVerify;
     performASimplePrintingTest(
-        ssToVerify, [](stringstream &ssToVerify, int const singleParameter1, int const singleParameter2, int const singleParameter3) {
+        ssToVerify, [](stringstream &ssToVerify, int const singleParameter1, int const singleParameter2,
+                       int const singleParameter3) {
             // NOLINTNEXTLINE(bugprone-lambda-function-name)
             ALBA_WRN_PRINT(ssToVerify, singleParameter1, singleParameter2, singleParameter3);
         });
@@ -57,7 +62,8 @@ TEST(AlbaLogPrintsTest, WrnLogPrintingWithoutSpecifyNumberOfParametersWorks) {
 TEST(AlbaLogPrintsTest, ErrLogPrintingWithoutSpecifyNumberOfParametersWorks) {
     stringstream ssToVerify;
     performASimplePrintingTest(
-        ssToVerify, [](stringstream &ssToVerify, int const singleParameter1, int const singleParameter2, int const singleParameter3) {
+        ssToVerify, [](stringstream &ssToVerify, int const singleParameter1, int const singleParameter2,
+                       int const singleParameter3) {
             // NOLINTNEXTLINE(bugprone-lambda-function-name)
             ALBA_ERR_PRINT(ssToVerify, singleParameter1, singleParameter2, singleParameter3);
         });

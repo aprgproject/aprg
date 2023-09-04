@@ -19,9 +19,8 @@ public:
 
     [[nodiscard]] Path getEulerCycle() const override {
         Path result;
-        if (!b_graph.isEmpty() &&
-            this->hasEulerCycle())  {
-        // this is check is needed because Hierholzer algorithm does not check this
+        if (!b_graph.isEmpty() && this->hasEulerCycle()) {
+            // this is check is needed because Hierholzer algorithm does not check this
             searchForEulerPath(result, this->getStartingVertexForEulerCycle());
         }
         return result;
@@ -29,9 +28,8 @@ public:
 
     [[nodiscard]] Path getEulerPath() const override {
         Path result;
-        if (!b_graph.isEmpty() &&
-            this->hasEulerPath())  {
-        // this is check is needed because Hierholzer algorithm does not check this
+        if (!b_graph.isEmpty() && this->hasEulerPath()) {
+            // this is check is needed because Hierholzer algorithm does not check this
             searchForEulerPath(result, this->getStartingVertexForEulerPath());
         }
         return result;

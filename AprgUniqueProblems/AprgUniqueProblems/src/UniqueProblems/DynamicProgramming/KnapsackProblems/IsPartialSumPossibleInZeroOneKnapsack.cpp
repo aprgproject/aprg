@@ -97,8 +97,8 @@ bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingNaiveRecurs
             result = isPartialSumPossibleUsingNaiveRecursion(partialSum, valueIndex + 1)  // skip value
                      || isPartialSumPossibleUsingNaiveRecursion(
                             partialSum - currentValue, valueIndex + 1);  // reserve value to sum
-        } else                                                           {
-        // partialSum < currentValue
+        } else {
+            // partialSum < currentValue
             result = isPartialSumPossibleUsingNaiveRecursion(partialSum, valueIndex + 1);  // skip value
         }
     }

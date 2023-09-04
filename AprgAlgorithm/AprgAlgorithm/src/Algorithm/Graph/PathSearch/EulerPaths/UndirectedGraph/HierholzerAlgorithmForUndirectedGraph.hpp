@@ -34,16 +34,16 @@ private:
 
         while (!nonDeadEndPath.empty()) {
             SetOfVertices& adjacentVertices(vertexToSetOfAdjacencyVerticesMap[currentVertex]);
-            if (!adjacentVertices.empty())  {
-            // if not dead end
+            if (!adjacentVertices.empty()) {
+                // if not dead end
                 nonDeadEndPath.push(currentVertex);
                 auto firstIt = adjacentVertices.cbegin();
                 Vertex nextVertex(*firstIt);
                 adjacentVertices.erase(firstIt);
                 vertexToSetOfAdjacencyVerticesMap[nextVertex].erase(currentVertex);
                 currentVertex = nextVertex;
-            } else  {
-            // if dead end
+            } else {
+                // if dead end
                 result.emplace_back(currentVertex);    // add dead end vertex
                 currentVertex = nonDeadEndPath.top();  // check last vertex on "non dead end path"
                 nonDeadEndPath.pop();

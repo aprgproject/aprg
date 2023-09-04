@@ -42,8 +42,8 @@ GameWithGraph::Vertex GameWithGraph::getOptimalNextVertexAt(Vertex const vertex)
         }
     } else if (GameState::Winning == gameState) {
         for (Vertex const nextVertex : m_graph.getAdjacentVerticesAt(vertex)) {
-            if (0U == getGrundyNumberAt(nextVertex))  {
-            // force your opponent to losing state
+            if (0U == getGrundyNumberAt(nextVertex)) {
+                // force your opponent to losing state
                 result = nextVertex;
                 break;
             }

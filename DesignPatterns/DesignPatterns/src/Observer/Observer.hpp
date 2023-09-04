@@ -78,9 +78,8 @@ private:
     // ...
 };
 
-void ConcreteObserver::update(
-    Subject const* const subject)  {
-// Implementation is here because subject needs to be defined first
+void ConcreteObserver::update(Subject const* const subject) {
+    // Implementation is here because subject needs to be defined first
     m_observer_state = subject->getState();
     std::cout << "Observer state updated.\n";
 }

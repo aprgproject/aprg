@@ -62,8 +62,8 @@ void GridPathSearch::startSearch() {
 
 void GridPathSearch::search(int const x, int const y, Movement const previousMovement) {
     if (m_numberTraversedCells == m_numberOfCells) {
-        if (isLowerRightCorner(x, y))  {
-        // lower-right corner
+        if (isLowerRightCorner(x, y)) {
+            // lower-right corner
             ++m_numberOfCompletePaths;
         }
     } else if (!isLowerRightCorner(x, y)) {

@@ -33,8 +33,8 @@ GrundyGame::HeapIndexAndFirstPileAndSecondPile GrundyGame::getOptimalWayToSplit(
     if (GameState::Losing == gameState) {
         for (UnsignedInteger heapIndex = 0; heapIndex < m_stickHeaps.size(); ++heapIndex) {
             UnsignedInteger const& stickHeap(m_stickHeaps[heapIndex]);
-            if (stickHeap >= 3)  {
-            // sizes 1 and 2 cannot be split with different sizes
+            if (stickHeap >= 3) {
+                // sizes 1 and 2 cannot be split with different sizes
                 result = make_tuple(heapIndex, 1ULL, stickHeap - 1ULL);
                 break;
             }

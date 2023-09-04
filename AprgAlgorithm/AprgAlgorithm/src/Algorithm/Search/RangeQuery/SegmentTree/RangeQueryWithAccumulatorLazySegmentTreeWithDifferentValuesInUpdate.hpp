@@ -29,9 +29,9 @@ public:
           b_treeValues(BaseClass::m_treeValues),
           b_function(BaseClass::m_function),
           m_incrementFunction(incrementFunction),
-          m_startIndexesForPendingUpdates(b_startOfChildren, PendingUpdateDetail())  {
-    // only parent have pending updates
-}
+          m_startIndexesForPendingUpdates(b_startOfChildren, PendingUpdateDetail()) {
+        // only parent have pending updates
+    }
 
     Value getValueOnInterval(Index const start, Index const end) {
         // This has log(N) running time

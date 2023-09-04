@@ -35,9 +35,8 @@ Equations SimplexSolver::getSolutionEquations() const {
                 solutionPolynomial.addMonomial(Monomial(coefficient, {{m_inputVariables[x], 1}}));
             }
         }
-        if (!solutionPolynomial
-                 .isEmpty())  {
-        // only consider solutions with input coefficients (dont consider slack variables)
+        if (!solutionPolynomial.isEmpty()) {
+            // only consider solutions with input coefficients (dont consider slack variables)
             solutionPolynomial.addMonomial(Monomial(m_simplexTable.getEntry(lastX, y) * -1, {}));  // put constant
             Equation solutionEquation(solutionPolynomial, "=", 0);
             solutionEquation.simplify();

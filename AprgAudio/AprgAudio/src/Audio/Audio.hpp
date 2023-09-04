@@ -102,9 +102,11 @@ private:
 
     void addStringToFileData(std::vector<uint8_t>& dataBuffer, std::string const& stringToCopy);
     void addInt32ToFileData(
-        std::vector<uint8_t>& dataBuffer, int32_t const integerToCopy, Endianness endianness = Endianness::LittleEndian);
+        std::vector<uint8_t>& dataBuffer, int32_t const integerToCopy,
+        Endianness endianness = Endianness::LittleEndian);
     void addInt16ToFileData(
-        std::vector<uint8_t>& dataBuffer, int16_t const integerToCopy, Endianness endianness = Endianness::LittleEndian);
+        std::vector<uint8_t>& dataBuffer, int16_t const integerToCopy,
+        Endianness endianness = Endianness::LittleEndian);
 
     bool writeDataToFile(std::vector<uint8_t>& dataBuffer, std::string const& filePath);
 

@@ -25,8 +25,8 @@ public:
         return !(firstXy == secondXy);
     }
 
-    bool operator<(AlbaXY const& xyValues) const  {
-    // this is added so it can be used in map
+    bool operator<(AlbaXY const& xyValues) const {
+        // this is added so it can be used in map
         return std::tie(m_x, m_y) < std::tie(xyValues.m_x, xyValues.m_y);
     }
 

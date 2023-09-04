@@ -25,8 +25,8 @@ TEST(AlbaLocalTimerTest, DISABLED_StopTimerWorks) {
     EXPECT_EQ(2U, timer.getElapsedTimeInSeconds());
 }
 
-TEST(AlbaLocalTimerTest, DISABLED_GetElapsedTimeInNanosecondsWorks)  {
-// this is unstable because its not precise
+TEST(AlbaLocalTimerTest, DISABLED_GetElapsedTimeInNanosecondsWorks) {
+    // this is unstable because its not precise
     AlbaLocalTimer timer;
     sleepFor(1234);
     timer.stopTimer();
@@ -34,8 +34,8 @@ TEST(AlbaLocalTimerTest, DISABLED_GetElapsedTimeInNanosecondsWorks)  {
     EXPECT_EQ(1234000000U, timer.getElapsedTimeInNanoseconds());
 }
 
-TEST(AlbaLocalTimerTest, DISABLED_GetElapsedTimeInMicrosecondsWorks)  {
-// this is unstable because its not precise
+TEST(AlbaLocalTimerTest, DISABLED_GetElapsedTimeInMicrosecondsWorks) {
+    // this is unstable because its not precise
     AlbaLocalTimer timer;
     sleepFor(4321);
     timer.stopTimer();
@@ -43,8 +43,8 @@ TEST(AlbaLocalTimerTest, DISABLED_GetElapsedTimeInMicrosecondsWorks)  {
     EXPECT_EQ(4321000U, timer.getElapsedTimeInMicroseconds());
 }
 
-TEST(AlbaLocalTimerTest, DISABLED_GetElapsedTimeInMillisecondsWorks)  {
-// this is unstable because its not precise
+TEST(AlbaLocalTimerTest, DISABLED_GetElapsedTimeInMillisecondsWorks) {
+    // this is unstable because its not precise
     AlbaLocalTimer timer;
     sleepFor(4321);
     timer.stopTimer();
@@ -60,8 +60,8 @@ TEST(AlbaLocalTimerTest, DISABLED_GetElapsedTimeInSecondsWorks) {
     EXPECT_EQ(4U, timer.getElapsedTimeInSeconds());
 }
 
-TEST(AlbaLocalTimerTest, DISABLED_GetDifferenceAsAlbaDateTimeWorks)  {
-// this is unstable because its not precise
+TEST(AlbaLocalTimerTest, DISABLED_GetDifferenceAsAlbaDateTimeWorks) {
+    // this is unstable because its not precise
     AlbaLocalTimer timer;
     sleepFor(4321);
     timer.stopTimer();

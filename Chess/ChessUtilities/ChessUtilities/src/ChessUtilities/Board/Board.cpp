@@ -65,8 +65,8 @@ Moves Board::getAttacksToThis(Coordinate const& endpoint, PieceColor const& move
 Move Board::getMoveUsingUciNotation(string const& text) const {
     // Source: https://en.wikipedia.org/wiki/Universal_Chess_Interface
     Move result{};
-    if (text.size() == 4 || text.size() == 5)  {
-    // 5 is for promotion
+    if (text.size() == 4 || text.size() == 5) {
+        // 5 is for promotion
         result = {
             getCoordinateFromAlgebraicNotation(text.substr(0, 2)),
             getCoordinateFromAlgebraicNotation(text.substr(2, 2))};

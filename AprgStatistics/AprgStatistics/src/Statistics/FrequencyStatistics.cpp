@@ -9,9 +9,10 @@ using namespace std;
 namespace alba {
 
 int FrequencyStatistics::calculateNumberOfSamples(FrequencySamples const& samples) {
-    return accumulate(samples.cbegin(), samples.cend(), 0, [](int const partialResult, FrequencyPair const& frequencyPair) {
-        return partialResult + (static_cast<int>(frequencyPair.second));
-    });
+    return accumulate(
+        samples.cbegin(), samples.cend(), 0, [](int const partialResult, FrequencyPair const& frequencyPair) {
+            return partialResult + (static_cast<int>(frequencyPair.second));
+        });
 }
 
 double FrequencyStatistics::calculateSum(FrequencySamples const& samples) {

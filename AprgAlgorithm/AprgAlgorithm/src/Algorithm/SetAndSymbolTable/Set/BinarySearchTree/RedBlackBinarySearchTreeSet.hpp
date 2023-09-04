@@ -16,12 +16,12 @@ protected:
     void putStartingOnThisNode(NodeUniquePointer& nodePointer, Key const& key) override {
         if (nodePointer) {
             Key const& currentKey(nodePointer->key);
-            if (key < currentKey)  {
-            // same as BST
+            if (key < currentKey) {
+                // same as BST
                 putStartingOnThisNode(nodePointer->left, key);
                 this->updateTreeNodeDetails(*nodePointer);
-            } else if (key > currentKey)  {
-            // same as BST
+            } else if (key > currentKey) {
+                // same as BST
                 putStartingOnThisNode(nodePointer->right, key);
                 this->updateTreeNodeDetails(*nodePointer);
             }

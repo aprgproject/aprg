@@ -27,8 +27,8 @@ TwoSum::ValuesPair TwoSum::getTwoValuesWithSum(Value const targetSum) const {
                 break;
             }
         }
-        if (isFound)  {
-        // empty if not found
+        if (isFound) {
+            // empty if not found
             result = {m_sortedValues[lowIndex], m_sortedValues[highIndex]};
         }
     }

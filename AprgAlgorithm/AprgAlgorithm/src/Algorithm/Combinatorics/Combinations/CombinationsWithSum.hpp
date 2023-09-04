@@ -54,9 +54,8 @@ public:
                 }
             }
 
-            for (Value partialValue = initialValue; partialValue < newSize;
-                 ++partialValue)  {
-            // iterate to all values with no combination (partialValue)
+            for (Value partialValue = initialValue; partialValue < newSize; ++partialValue) {
+                // iterate to all values with no combination (partialValue)
                 Combinations& combinations(m_combinations[partialValue]);
                 for (Value const inputValue : m_inputValues) {
                     // check for each value if can be part of combination

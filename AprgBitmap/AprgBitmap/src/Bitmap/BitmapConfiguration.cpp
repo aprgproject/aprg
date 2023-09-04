@@ -164,8 +164,8 @@ void BitmapConfiguration::readBitmap(string const& path) {
     if (inputStream.is_open()) {
         AlbaFileReader fileReader(inputStream);
         readBitmapFileHeader(fileReader);
-        if (isSignatureValid())  {
-        // dont check further if its invalid
+        if (isSignatureValid()) {
+            // dont check further if its invalid
             readDibHeader(fileReader);
             readColors(fileReader);
             calculateOtherValuesAfterReading();
@@ -185,8 +185,8 @@ void BitmapConfiguration::readBitmapFileHeader(AlbaFileReader& fileReader) {
     m_pixelArrayAddress = fileReader.getFourByteSwappedData<uint32_t>();
 }
 
-void BitmapConfiguration::readDibHeader(AlbaFileReader& fileReader)  {
-// only supports BITMAPINFOHEADER format
+void BitmapConfiguration::readDibHeader(AlbaFileReader& fileReader) {
+    // only supports BITMAPINFOHEADER format
     fileReader.moveLocation(14);
     m_sizeOfHeader = fileReader.getFourByteSwappedData<uint32_t>();
 
