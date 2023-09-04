@@ -91,9 +91,8 @@ AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSumsWithSquareRootAlgorith
 AllPartialSumsInZeroOneKnapsack::Values AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSums(
     Booleans const& isPartialSumPossible) {
     Values result;
-    for (int partialSumIndex = 0; partialSumIndex < static_cast<int>(isPartialSumPossible.size());
-         ++partialSumIndex)  // O(n) or linear time
-    {
+    for (int partialSumIndex = 0; partialSumIndex < static_cast<int>(isPartialSumPossible.size()); ++partialSumIndex) {
+        // O(n) or linear time
         if (isPartialSumPossible[partialSumIndex]) {
             result.emplace_back(partialSumIndex);
         }

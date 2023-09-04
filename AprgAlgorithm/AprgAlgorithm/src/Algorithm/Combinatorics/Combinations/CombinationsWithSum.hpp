@@ -58,12 +58,12 @@ public:
                  ++partialValue)  // iterate to all values with no combination (partialValue)
             {
                 Combinations& combinations(m_combinations[partialValue]);
-                for (Value const inputValue : m_inputValues)  // check for each value if can be part of combination
-                {
+                for (Value const inputValue : m_inputValues) {
+                    // check for each value if can be part of combination
                     if (partialValue > inputValue) {
-                        for (Combination const& combinationWithoutValue : m_combinations.at(
-                                 partialValue - inputValue))  // check combinations in partialValue-inputValue
-                        {
+                        for (Combination const& combinationWithoutValue :
+                             m_combinations.at(partialValue - inputValue)) {
+                            // check combinations in partialValue-inputValue
                             Combination combinationWithValue(combinationWithoutValue);
                             combinationWithValue.emplace(inputValue);
                             combinations.emplace(combinationWithValue);  // add this combination for this partial value

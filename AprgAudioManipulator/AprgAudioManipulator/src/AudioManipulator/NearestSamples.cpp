@@ -40,7 +40,7 @@ Indexes NearestSamples::getNearestSamplesIndexes(double const value, int const r
 void NearestSamples::saveToValuesToIndexes() {
     int i = 0;
     for (double const sample : m_samples) {
-        m_valuesToIndexes.emplace(sample, ++i);
+        m_valuesToIndexes.emplace(sample, i++);
     }
 }
 

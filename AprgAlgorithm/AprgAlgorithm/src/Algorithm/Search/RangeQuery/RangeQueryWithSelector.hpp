@@ -55,14 +55,12 @@ private:
                                         : 0;  // half (reason for minus1) of min exponent in power of 2 that would fit
             m_selectedValueMatrix = ValueMatrix(
                 valuesToCheck.size(), lastExponentOf2 + 1);  // column is index, row is exponent of size with base 2
-            for (Index index = 0; index < static_cast<Index>(valuesToCheck.size());
-                 ++index)  // put values in first column
-            {
+            for (Index index = 0; index < static_cast<Index>(valuesToCheck.size()); ++index) {
+                // put values in first column
                 m_selectedValueMatrix.setEntry(index, 0, valuesToCheck[index]);
             }
-            for (Index subExponentOf2 = 0; subExponentOf2 < lastExponentOf2;
-                 ++subExponentOf2)  // put remaining values with "powers of 2 sized" ranges
-            {
+            for (Index subExponentOf2 = 0; subExponentOf2 < lastExponentOf2; ++subExponentOf2) {
+                // put remaining values with "powers of 2 sized" ranges
                 Index offset = get2ToThePowerOf(subExponentOf2);
                 Index limit = valuesToCheck.size() - offset;
                 for (Index index = 0; index < limit; ++index) {

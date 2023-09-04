@@ -49,9 +49,8 @@ private:
     static void collectOrderedSubsetsUsingDfs(
         Subsets& subsets, Subset& currentSubset, Objects const& objects, int const index) {
         // DFS like traversal
-        for (int currentIndex = index; currentIndex < static_cast<int>(objects.size());
-             ++currentIndex)  // loop indexes starting from the index
-        {
+        for (int currentIndex = index; currentIndex < static_cast<int>(objects.size()); ++currentIndex) {
+            // loop indexes starting from the index
             currentSubset.emplace_back(objects[currentIndex]);
             subsets.emplace_back(currentSubset);
             collectOrderedSubsetsUsingDfs(

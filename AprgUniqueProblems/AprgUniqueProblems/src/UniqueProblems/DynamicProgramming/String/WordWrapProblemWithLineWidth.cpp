@@ -70,9 +70,8 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
         {
             Cost& costIfFirstWord(costsIfFirstWord[firstWordIndex]);
             Index lineLength(0);
-            for (Index lastWordIndex = firstWordIndex; lastWordIndex < numberOfWords;
-                 ++lastWordIndex)  // try all last word in lines
-            {
+            for (Index lastWordIndex = firstWordIndex; lastWordIndex < numberOfWords; ++lastWordIndex) {
+                // try all last word in lines
                 lineLength += m_words[lastWordIndex].length();
                 lineLength += (static_cast<Index>(firstWordIndex) < lastWordIndex) ? 1 : 0;  // add space character
                 if (lineLength <= m_maxLineLength) {

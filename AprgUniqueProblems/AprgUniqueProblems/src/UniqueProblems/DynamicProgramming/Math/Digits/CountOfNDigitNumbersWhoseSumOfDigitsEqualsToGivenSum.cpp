@@ -75,9 +75,8 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingIterativeDPAn
         }
         for (Count digitIndex = 1; digitIndex < m_numberOfDigits; ++digitIndex) {
             for (Value partialSum = m_targetSumOfDigits; partialSum > 0; --partialSum) {
-                for (Value digitValue = 1; digitValue <= min(partialSum - 1, 9);
-                     ++digitValue)  // When digitValue==0, the count is 1, so no need to process
-                {
+                for (Value digitValue = 1; digitValue <= min(partialSum - 1, 9); ++digitValue) {
+                    // When digitValue==0, the count is 1, so no need to process
                     partialSumToCount[partialSum] += partialSumToCount[partialSum - digitValue];
                 }
             }
