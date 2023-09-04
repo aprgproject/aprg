@@ -110,8 +110,8 @@ private:
         Ranges result;
         result.reserve(ranges.size());
         for (Range const& range : ranges) {
-            if (isValidRange(range))  {
-            // index must be inside the give values
+            if (isValidRange(range)) {
+                // index must be inside the give values
                 result.emplace_back(range);
             }
         }

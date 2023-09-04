@@ -73,8 +73,8 @@ TermAssociationType getReversedAssociationType(TermAssociationType const associa
     TermAssociationType reversedAssociationType(TermAssociationType::Positive);
     if (TermAssociationType::Positive == associationType) {
         reversedAssociationType = TermAssociationType::Negative;
-    } else  {
-    // if(TermAssociationType::Negative == associationType)
+    } else {
+        // if(TermAssociationType::Negative == associationType)
         reversedAssociationType = TermAssociationType::Positive;
     }
     return reversedAssociationType;

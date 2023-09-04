@@ -37,7 +37,8 @@ public:
     void findFilesAndDirectoriesOneDepth(
         std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
     void findFilesAndDirectoriesMultipleDepth(
-        std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories, int const depth) const;
+        std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories,
+        int const depth) const;
     void findFilesAndDirectoriesUnlimitedDepth(
         std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
 
@@ -53,7 +54,8 @@ private:
         std::set<std::string>& listOfFiles, std::set<std::string>& listOfDirectories, int const depth) const;
     [[nodiscard]] bool isPathADirectory(std::string_view const fileOrDirectoryName) const;
     static bool canBeLocated(std::string_view const fullPath);
-    [[nodiscard]] bool isSlashNeededAtTheEnd(std::string_view const correctedPath, std::string_view const originalPath) const;
+    [[nodiscard]] bool isSlashNeededAtTheEnd(
+        std::string_view const correctedPath, std::string_view const originalPath) const;
     bool m_foundInLocalSystem{false};
     bool m_relativePath{false};
 };

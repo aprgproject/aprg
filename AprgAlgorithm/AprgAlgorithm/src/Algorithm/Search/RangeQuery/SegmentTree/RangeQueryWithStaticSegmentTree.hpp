@@ -44,15 +44,14 @@ public:
 
     [[nodiscard]] Values const& getTreeValues() const { return m_treeValues; }
 
-    [[nodiscard]] Value getValueOnInterval(Index const start, Index const end) const  {
-    // bottom to top approach
+    [[nodiscard]] Value getValueOnInterval(Index const start, Index const end) const {
+        // bottom to top approach
         // This has log(N) running time
         return getValueOnIntervalFromBottomToTop(start, end);
     }
 
-    [[nodiscard]] Value getValueOnIntervalFromTopToBottom(
-        Index const start, Index const end) const  {
-    // top to bottom approach
+    [[nodiscard]] Value getValueOnIntervalFromTopToBottom(Index const start, Index const end) const {
+        // top to bottom approach
         // This has log(N) running time
         Value result{};
         if (start <= end && (m_startOfChildren + start) < static_cast<Index>(m_treeValues.size()) &&
@@ -135,8 +134,8 @@ protected:
                 first = Utilities::getParent(first);
                 last = Utilities::getParent(last);
             }
-            if (first == last)  {
-            // add value if it ends on the same place
+            if (first == last) {
+                // add value if it ends on the same place
                 result = m_function(result, m_treeValues[first]);
             }
         }

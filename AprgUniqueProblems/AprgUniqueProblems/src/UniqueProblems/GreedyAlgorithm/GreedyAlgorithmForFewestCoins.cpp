@@ -31,11 +31,10 @@ int GreedyAlgorithmForFewestCoins::getFewestNumberOfCoins(Value const value) con
 }
 
 void GreedyAlgorithmForFewestCoins::initialize() {
-    sort(
-        m_sortedAvailableCoins.begin(), m_sortedAvailableCoins.end(),
-        [](Coin const& coin1, Coin const& coin2)  {
+    sort(m_sortedAvailableCoins.begin(), m_sortedAvailableCoins.end(), [](Coin const& coin1, Coin const& coin2) {
         // sort by higher
- return coin1 > coin2; });
+        return coin1 > coin2;
+    });
 }
 
 }  // namespace alba

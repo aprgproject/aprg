@@ -25,8 +25,8 @@ public:
 
     // rule of zero
 
-    explicit operator bool() const  {
-    // not explicit
+    explicit operator bool() const {
+        // not explicit
         return hasContent();
     }
 

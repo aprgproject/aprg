@@ -71,9 +71,8 @@ private:
     void traverseStartingFromAVertex(
         Vertices& traversedVertices, Vertex const& startVertex, VertexTraversalOrder const traversalOrder) {
         clear();
-        if (m_processedVertices.isNotFound(startVertex) &&
-            !m_graph.getAdjacentVerticesAt(startVertex).empty())  {
-        // dont include invalid vertex
+        if (m_processedVertices.isNotFound(startVertex) && !m_graph.getAdjacentVerticesAt(startVertex).empty()) {
+            // dont include invalid vertex
             traverseAt(traversedVertices, traversalOrder, startVertex);
         }
     }

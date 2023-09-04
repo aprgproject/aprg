@@ -23,16 +23,15 @@ public:
 
     [[nodiscard]] int getSize() const override { return m_size; }
 
-    void push(Object const& object)
-        override  {
-    // runs in constant time, but array is still faster because here there is allocation
+    void push(Object const& object) override {
+        // runs in constant time, but array is still faster because here there is allocation
         NodeUniquePointer next(std::move(m_first));        // previous first is the new next
         m_first.reset(new Node{object, std::move(next)});  // create a new node at first
         ++m_size;
     }
 
-    Object pop() override  {
-    // runs in constant time, but array is still faster because here there is to deallocation
+    Object pop() override {
+        // runs in constant time, but array is still faster because here there is to deallocation
         assert(m_first);
         Object result{};
         if (m_first) {

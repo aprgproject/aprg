@@ -180,8 +180,8 @@ void CPlusPlusFileFixer::notifyIfAlbaDebugHeaderExistInProductionCode(string con
         (find(
              m_headerListFromAngleBrackets.cbegin(), m_headerListFromAngleBrackets.cend(),
              string("Debug/AlbaDebug.hpp")) != m_headerListFromAngleBrackets.end());
-    if (isAlbaDebugHeaderFound)  {
-    // !isUnitTest)
+    if (isAlbaDebugHeaderFound) {
+        // !isUnitTest)
         cout << "CHECK THIS: AlbaDebug found in:[" << path << "].\n";
     }
 }
@@ -193,8 +193,8 @@ void CPlusPlusFileFixer::notifyIfIostreamHeaderExistInProductionCode(string cons
          m_headerListFromAngleBrackets.end());
     // bool isCpp = filePathHandler.getExtension() == "cpp";
     bool isUnitTest = isStringFoundCaseSensitive(filePathHandler.getFile(), "_unit.cpp");
-    if (isIostreamFound && !isUnitTest)  {
-    // && !isCpp) // !isUnitTest)
+    if (isIostreamFound && !isUnitTest) {
+        // && !isCpp) // !isUnitTest)
         cout << "CHECK THIS: iostream found in:[" << path << "].\n";
     }
 }

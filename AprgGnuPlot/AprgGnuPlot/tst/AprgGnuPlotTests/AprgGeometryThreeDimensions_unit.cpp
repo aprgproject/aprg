@@ -151,8 +151,8 @@ TEST(AprgGeometryThreeDimensionsTest, DISABLED_BrewersProblemForSimplexTest) {
     AprgGnuPlot3D::PointsInGraph c3Points;
     for (double x = 0; x < 200; x += 2) {
         for (double y = 0; y < 200; y += 2) {
-            if (x + 3 * y <= 96 && x + y <= 40 && 7 * x + 4 * y <= 238)  {
-            // A+3B<=96, A+B<=40, 7A+4B<=238
+            if (x + 3 * y <= 96 && x + y <= 40 && 7 * x + 4 * y <= 238) {
+                // A+3B<=96, A+B<=40, 7A+4B<=238
                 auto zOptional = profitModel.calculateYFromXAndZ(x, y);
                 if (zOptional) {
                     profitPoints.emplace_back(AprgGnuPlot3D::getPoint(x, y, zOptional.value()));

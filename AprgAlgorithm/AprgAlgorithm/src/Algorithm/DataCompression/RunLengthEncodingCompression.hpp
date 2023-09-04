@@ -22,15 +22,15 @@ public:
         bool previousBit(false);
         while (true) {
             currentBit = reader.readBoolData();
-            if (!input.eof())  {
-            // do not continue if end of file
-                if (currentBit != previousBit)  {
-                // if there is 0->1 or 1->0
+            if (!input.eof()) {
+                // do not continue if end of file
+                if (currentBit != previousBit) {
+                    // if there is 0->1 or 1->0
                     writer.writeBigEndianNumberData<Count>(currentCount);  // write count
                     currentCount = 0;                                      // reset count
                     previousBit = currentBit;                              // switch to the next bit value
-                } else if (currentCount == maxValueForCount)               {
-                // if count reached max
+                } else if (currentCount == maxValueForCount) {
+                    // if count reached max
                     writer.writeBigEndianNumberData<Count>(currentCount);  // write current count
                     writer.writeBigEndianNumberData<Count>(0);             // write 0 to switch bits when reading
                     currentCount = 0;                                      // reset count
@@ -49,8 +49,8 @@ public:
         bool bit(false);  // start with 0
         while (true) {
             auto currentCount(reader.readBigEndianNumberData<Count>());
-            if (!input.eof())  {
-            // do not continue if end of file
+            if (!input.eof()) {
+                // do not continue if end of file
                 for (Count i = 0; i < currentCount; ++i) {
                     writer.writeBoolData(bit);  // write number of bits based from the count
                 }

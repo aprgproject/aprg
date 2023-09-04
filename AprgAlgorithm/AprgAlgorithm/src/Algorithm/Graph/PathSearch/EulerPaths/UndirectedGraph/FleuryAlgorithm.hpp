@@ -90,8 +90,8 @@ private:
                     return deletedEdge.second == edgeToDelete.first &&
                            isStillConnectedAfterRemovingThisEdge(graphToManipulate, edgeToDelete);
                 });
-            if (edgeToDeleteIt == edgesReference.cend())  {
-            // if not found just get next edge
+            if (edgeToDeleteIt == edgesReference.cend()) {
+                // if not found just get next edge
                 edgeToDeleteIt = std::find_if(
                     edgesReference.cbegin(), edgesReference.cend(),
                     [&](Edge const& edgeToDelete) { return deletedEdge.second == edgeToDelete.first; });

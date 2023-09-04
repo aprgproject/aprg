@@ -102,9 +102,8 @@ uint32_t BitmapSnippet::getColorAt(BitmapXY const position) const {
     return m_configuration.getColorUsingPixelValue(getPixelAt(position));
 }
 
-bool BitmapSnippet::isBlackAt(BitmapXY const position)
-    const  {
-// this is the only assumption, colors can depend on numberofbits of pixel and color table
+bool BitmapSnippet::isBlackAt(BitmapXY const position) const {
+    // this is the only assumption, colors can depend on numberofbits of pixel and color table
     return (m_configuration.getColorUsingPixelValue(getPixelAt(position)) == 0x00000000);
 }
 

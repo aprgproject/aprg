@@ -308,8 +308,8 @@ Extremum getAbsoluteExtremumBasedOnRelativeExtremaOnInterval(
             }
         }
     }
-    if (numberOfExtremaFoundInInterval == 1)  {
-    // if its the only extrema in interval then its absolute
+    if (numberOfExtremaFoundInInterval == 1) {
+        // if its the only extrema in interval then its absolute
         result = extremumInInterval;
     }
     return result;

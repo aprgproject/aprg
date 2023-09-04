@@ -49,9 +49,8 @@ CoinProblem::Coins CoinProblem::getFewestCoinsUsingIterativeDP(Value const total
         for (Value const availableCoin : m_availableCoins) {
             if (partialValue >= availableCoin &&
                 (fewestCoins[partialValue].empty()  // has no solution
-                 || fewestCoins[partialValue].size() >
-                        fewestCoins[partialValue - availableCoin].size() + 1))  {
-            // is this solution better
+                 || fewestCoins[partialValue].size() > fewestCoins[partialValue - availableCoin].size() + 1)) {
+                // is this solution better
                 fewestCoinsForValue = fewestCoins[partialValue - availableCoin];
                 fewestCoinsForValue.emplace_back(availableCoin);
                 // if only count is required, we can use a counter here here instead of list of
@@ -139,8 +138,8 @@ int CoinProblem::getNumberOfCoinCombinationsUsingIterativeDP(Value const total) 
                     countWithoutCoin = countByValueByCoin.getEntry(
                         partialValue, coinIndex - 1);  // possibilities before this coin entry
                 }
-                if (partialValue >= m_availableCoins[coinIndex])  {
-                // if coin can be subtracted to value
+                if (partialValue >= m_availableCoins[coinIndex]) {
+                    // if coin can be subtracted to value
                     countWithCoin = countByValueByCoin.getEntry(
                         partialValue - m_availableCoins[coinIndex],
                         coinIndex);  // possibilities with the subtracted value
@@ -234,8 +233,8 @@ int CoinProblem::getNumberOfFewestCoinsUsingMemoizationDPInternal(
 CoinProblem::Coins CoinProblem::getFewestCoinsUsingMemoizationDPInternal(
     VectorOfCoins& fewestCoins, Value const total) const {
     Coins result(fewestCoins[total]);
-    if (total != 0 && result.empty())  {
-    // not zero value and no solution yet
+    if (total != 0 && result.empty()) {
+        // not zero value and no solution yet
         int fewestSize(UNUSED_COUNT);
         for (Value const availableCoin : m_availableCoins) {
             if (total > availableCoin) {
@@ -273,8 +272,8 @@ int CoinProblem::getNumberOfCoinPermutationsMemoizationDPInternal(
 CoinProblem::CoinPermutations CoinProblem::getCoinPermutationsUsingMemoizationDPInternal(
     CoinPermutationsPerValue& coinPermutationsPerValue, Value const total) const {
     CoinPermutations result(coinPermutationsPerValue[total]);
-    if (total != 0 && result.empty())  {
-    // not zero value and no solution yet
+    if (total != 0 && result.empty()) {
+        // not zero value and no solution yet
         for (Value const availableCoin : m_availableCoins) {
             if (total > availableCoin) {
                 for (CoinPermutation const& subPermutation :
@@ -300,8 +299,8 @@ int CoinProblem::getNumberOfCoinCombinationsUsingMemoizationDPInternal(
             Value countWithCoin(0);
             Value countWithoutCoin = getNumberOfCoinCombinationsUsingMemoizationDPInternal(
                 countByValueByCoin, total, coinIndex - 1);  // possibilities before this coin entry
-            if (total >= m_availableCoins[coinIndex])       {
-            // if coin can be subtracted to value
+            if (total >= m_availableCoins[coinIndex]) {
+                // if coin can be subtracted to value
                 countWithCoin = getNumberOfCoinCombinationsUsingMemoizationDPInternal(
                     countByValueByCoin, total - m_availableCoins[coinIndex],
                     coinIndex);  // possibilities with the subtracted value
@@ -318,8 +317,8 @@ int CoinProblem::getNumberOfCoinCombinationsUsingMemoizationDPInternal(
 CoinProblem::CoinCombinations CoinProblem::getCoinCombinationsUsingMemoizationDPInternal(
     CoinCombinationsPerValue& coinCombinationsPerValue, Value const total) const {
     CoinCombinations result(coinCombinationsPerValue[total]);
-    if (total != 0 && result.empty())  {
-    // not zero value and no solution yet
+    if (total != 0 && result.empty()) {
+        // not zero value and no solution yet
         for (Value const availableCoin : m_availableCoins) {
             if (total > availableCoin) {
                 for (CoinCombination const& subCombination :

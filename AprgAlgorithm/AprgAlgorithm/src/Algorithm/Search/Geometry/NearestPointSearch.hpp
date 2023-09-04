@@ -81,8 +81,8 @@ private:
         ++depth;
         if (nodePointer) {
             Point const& currentPoint(nodePointer->key);
-            if (currentPoint != searchDetails.pointToCheck)  {
-            // only consider other points
+            if (currentPoint != searchDetails.pointToCheck) {
+                // only consider other points
                 Unit currentDistance(getDistance(currentPoint, searchDetails.pointToCheck));
                 if (currentDistance < searchDetails.nearestDistance) {
                     searchDetails.nearestPoint = currentPoint;

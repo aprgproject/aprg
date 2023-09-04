@@ -1,7 +1,7 @@
 #pragma once
 
-#include <CodeUtilities/Common/Term.hpp>
 #include <CodeUtilities/Common/MatcherType.hpp>
+#include <CodeUtilities/Common/Term.hpp>
 
 #include <optional>
 

@@ -47,8 +47,8 @@ void AlbaStreamParameterWriter::writeVectorData(std::vector<TypeToWrite> const& 
 }
 
 template <typename TypeToWrite>
-void AlbaStreamParameterWriter::writeSetData(std::set<TypeToWrite> const& setOfData) const  {
-// test
+void AlbaStreamParameterWriter::writeSetData(std::set<TypeToWrite> const& setOfData) const {
+    // test
     m_stream << setOfData.size() << "\n";
     for (TypeToWrite const& data : setOfData) {
         writeData(data);

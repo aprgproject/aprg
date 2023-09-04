@@ -50,7 +50,8 @@ DataType getValueUsingCramerRule(
 }
 
 template <typename DataType>
-DataType getValueFromCoFactorExpansion(AlbaMatrix<DataType> const& matrix, size_t const xPosition, size_t const yPosition) {
+DataType getValueFromCoFactorExpansion(
+    AlbaMatrix<DataType> const& matrix, size_t const xPosition, size_t const yPosition) {
     DataType value{};
     DataType entry = matrix.getEntry(xPosition, yPosition);
     if (!isEqualForMathMatrixDataType(entry, 0)) {

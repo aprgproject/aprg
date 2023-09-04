@@ -21,9 +21,8 @@ public:
         return getRoot(object1) == getRoot(object2);
     }
 
-    [[nodiscard]] Object getRoot(
-        Object const& object) const override  {
-    // worst case runs in logarithmic time (base 2 log) -> acceptable
+    [[nodiscard]] Object getRoot(Object const& object) const override {
+        // worst case runs in logarithmic time (base 2 log) -> acceptable
         // Continuously find relative root until its equal to the previous root
         Object currentRoot(object);
         Object nextRoot(m_relativeRoots[object]);
@@ -34,8 +33,8 @@ public:
         return currentRoot;
     }
 
-    Object getRootWithPathCompressionOnePass(Object const& object)  {
-    // no longer const
+    Object getRootWithPathCompressionOnePass(Object const& object) {
+        // no longer const
         Object result(object);
         while (result != m_relativeRoots[object]) {
             m_relativeRoots[object] =
@@ -45,8 +44,8 @@ public:
         return result;
     }
 
-    Object getRootWithPathCompressionTwoPass(Object const& object)  {
-    // no longer const
+    Object getRootWithPathCompressionTwoPass(Object const& object) {
+        // no longer const
         RootVector relativeRoots;
         Object currentRoot(object);
         Object nextRoot(m_relativeRoots[object]);
@@ -55,18 +54,16 @@ public:
             relativeRoots.emplace_back(nextRoot);
             nextRoot = m_relativeRoots[currentRoot];
         }
-        for (Object const& relativeRoot :
-             relativeRoots)  {
-                             // Ulman Tarjan proof -> almost linear)
-        // set found root to all examined relative roots -> makes the tree really flat (Hopcroft
+        for (Object const& relativeRoot : relativeRoots) {
+            // Ulman Tarjan proof -> almost linear)
+            // set found root to all examined relative roots -> makes the tree really flat (Hopcroft
             m_relativeRoots[relativeRoot] = currentRoot;
         }
         return currentRoot;
     }
 
-    void connect(Object const& object1, Object const& object2)
-        override  {
-    // worst case runs in logarithmic time because of getRoot() -> acceptable
+    void connect(Object const& object1, Object const& object2) override {
+        // worst case runs in logarithmic time because of getRoot() -> acceptable
         Object root1(getRoot(object1));
         Object root2(getRoot(object2));
         if (root1 != root2) {

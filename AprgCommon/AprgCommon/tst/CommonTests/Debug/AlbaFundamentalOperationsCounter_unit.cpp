@@ -31,8 +31,8 @@ public:
 };
 }  // namespace original
 
-inline namespace withCounter  {
-                              // [SampleClass with counter]
+inline namespace withCounter {
+// [SampleClass with counter]
 // inline this namespace to hoist it up and replace the [SampleClass] with the
 using SampleClass = AlbaFundamentalOperationsCounter<original::SampleClass>;
 using CountsForSampleClass = AlbaFundamentalOperationsCounts<original::SampleClass>;

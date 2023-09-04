@@ -16,8 +16,8 @@ public:
     ~BaseSetWithBaseLinearProbingHash() override = default;  // no need for virtual destructor because base destructor
                                                              // is virtual (similar to other virtual functions)
 
-    void put(Key const& key) override  {
-    // overrides in BaseSet
+    void put(Key const& key) override {
+        // overrides in BaseSet
         this->resizeOnPutIfNeeded();
         bool isFound(false);
         int i = this->getHash(key);

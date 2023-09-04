@@ -29,13 +29,13 @@ public:
             for (Index const nullTransitionState : nullTransitionStates) {
                 if (nullTransitionState < lengthOfRE) {
                     char charInRE(m_regularExpression[nullTransitionState]);
-                    if (charInRE == stringToCheck[checkIndex] || charInRE == '.')  {
-                    // if there is a match
+                    if (charInRE == stringToCheck[checkIndex] || charInRE == '.') {
+                        // if there is a match
                         nextStatesFromAMatch.emplace_back(
                             nullTransitionState + 1);  // proceed to next state from nullTransitionState
                     }
-                } else if (nullTransitionState == lengthOfRE)  {
-                // null transition reached the end
+                } else if (nullTransitionState == lengthOfRE) {
+                    // null transition reached the end
                     isEndReached = true;
                     break;
                 }
@@ -77,8 +77,8 @@ private:
             } else if (m_regularExpression[indexOfRE] == ')') {
                 Index operatorIndex(operatorIndexes.top());
                 operatorIndexes.pop();
-                if (m_regularExpression[operatorIndex] == '|')  {
-                // if stack has an or operator
+                if (m_regularExpression[operatorIndex] == '|') {
+                    // if stack has an or operator
                     startIndexOfExpression = operatorIndexes.top();
                     operatorIndexes.pop();
                     m_nullTransitionsGraph.connect(
@@ -86,14 +86,13 @@ private:
                         operatorIndex + 1);  // add edge to skip the first part of the expression
                     m_nullTransitionsGraph.connect(
                         operatorIndex, indexOfRE);  // add edge to skip the second part of the expression
-                } else                              {
-                // opening parenthesis goes here
+                } else {
+                    // opening parenthesis goes here
                     startIndexOfExpression = operatorIndex;
                 }
             }
-            if (indexOfRE < lengthOfRE - 1 &&
-                m_regularExpression[indexOfRE + 1] == '*')  {
-            // do one character look ahead if its a star
+            if (indexOfRE < lengthOfRE - 1 && m_regularExpression[indexOfRE + 1] == '*') {
+                // do one character look ahead if its a star
                 m_nullTransitionsGraph.connect(
                     startIndexOfExpression,
                     indexOfRE + 1);  // add edge from first part of an expression to current state

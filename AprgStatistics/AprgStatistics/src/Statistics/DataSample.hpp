@@ -87,8 +87,9 @@ public:
     }
 
     [[nodiscard]] Sample calculateRaiseToInversePower(double const value) const {
-        return performDataTypeAndConstantFunction(
-            value, [](double const value1, double const value2) -> double { return pow(value1, static_cast<double>(1) / value2); });
+        return performDataTypeAndConstantFunction(value, [](double const value1, double const value2) -> double {
+            return pow(value1, static_cast<double>(1) / value2);
+        });
     }
 
     Sample performDataTypeAndDataTypeFunction(

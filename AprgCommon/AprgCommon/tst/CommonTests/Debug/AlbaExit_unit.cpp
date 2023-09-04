@@ -6,8 +6,8 @@ using namespace std;
 
 namespace alba {
 
-TEST(AlbaExitTest, DISABLED_ExitMacrosWorks)  {
-// too slow
+TEST(AlbaExitTest, DISABLED_ExitMacrosWorks) {
+    // too slow
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto,concurrency-mt-unsafe,cert-err33-c)
     EXPECT_EXIT(ALBA_SUCCESSFUL_EXIT, ::testing::ExitedWithCode(0), string());
 

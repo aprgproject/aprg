@@ -5,8 +5,8 @@
 namespace alba::algorithm {
 
 template <typename Object>
-class BaseBag  {
-// Bag data stucture just collects data and can traverse the data (order does not matter)
+class BaseBag {
+    // Bag data stucture just collects data and can traverse the data (order does not matter)
 public:
     using TraverseFunction = std::function<void(Object const& object)>;
 

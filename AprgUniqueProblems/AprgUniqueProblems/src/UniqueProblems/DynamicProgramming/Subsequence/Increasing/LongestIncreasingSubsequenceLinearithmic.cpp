@@ -20,8 +20,8 @@ LongestIncreasingSubsequenceLinearithmic::Index LongestIncreasingSubsequenceLine
             auto beginIt = lengthMinus1ToEndValue.begin(), endIt = lengthMinus1ToEndValue.begin() + longestLength;
             auto lowerBoundItForEndValue = lower_bound(beginIt, endIt, *itValue);
 
-            if (lowerBoundItForEndValue == endIt)  {
-            // if current value is the highest
+            if (lowerBoundItForEndValue == endIt) {
+                // if current value is the highest
                 lengthMinus1ToEndValue[longestLength++] = *itValue;  // extend
             } else {
                 *lowerBoundItForEndValue = *itValue;  // replace
@@ -46,8 +46,8 @@ LongestIncreasingSubsequenceLinearithmic::Values LongestIncreasingSubsequenceLin
             auto beginIt = lengthMinus1ToEndValue.begin(), endIt = lengthMinus1ToEndValue.begin() + longestLength;
             auto lowerBoundItForEndValue = lower_bound(beginIt, endIt, value);
 
-            if (lowerBoundItForEndValue == endIt)  {
-            // if current value is the highest
+            if (lowerBoundItForEndValue == endIt) {
+                // if current value is the highest
                 indexToPreviousIndex[i] = lengthMinus1ToEndIndex[longestLength - 1];
                 lengthMinus1ToEndIndex[longestLength] = i;
                 lengthMinus1ToEndValue[longestLength++] = value;  // extend

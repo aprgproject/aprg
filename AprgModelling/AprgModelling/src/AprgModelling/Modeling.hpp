@@ -23,8 +23,8 @@ public:
     void retrieveDataFromFileWithFileFormat1(std::string const& filePath);
     void retrieveDataFromFileWithFileFormat2(std::string const& filePath);
     void saveRetrievedDataForXAndY(
-        unsigned int const numberOfIndicators, unsigned int const numberOfSamples, VectorOfDoubles const& retrievedDataForX,
-        VectorOfDoubles const& retrievedDataForY);
+        unsigned int const numberOfIndicators, unsigned int const numberOfSamples,
+        VectorOfDoubles const& retrievedDataForX, VectorOfDoubles const& retrievedDataForY);
     void saveRetrievedDataToModelingDataRandomly(unsigned int const numberOfSamples);
     void saveRetrievedDataToValidationDataRandomly(unsigned int const numberOfSamples);
     void saveRetrievedDataToModelingData(unsigned int const numberOfSamples);

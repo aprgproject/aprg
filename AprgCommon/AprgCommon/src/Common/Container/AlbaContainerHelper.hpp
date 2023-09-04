@@ -218,8 +218,8 @@ void saveContentsToStream(
     // tested on map
     std::string delimeter(getDelimeterBasedOnFormat(streamFormat));
     if (StreamFormat::String == streamFormat) {
-        for (auto const& [key, value] : container)  {
-        // C++17, structured bindings
+        for (auto const& [key, value] : container) {
+            // C++17, structured bindings
             outputStream << "{" << key << ":" << value << "}" << delimeter;
         }
     } else {

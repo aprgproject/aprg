@@ -32,13 +32,13 @@ private:
 
         while (!nonDeadEndPath.empty()) {
             Vertices& adjacentVertices(vertexToAdjacentVerticesMap[currentVertex]);
-            if (!adjacentVertices.empty())  {
-            // if not dead end
+            if (!adjacentVertices.empty()) {
+                // if not dead end
                 nonDeadEndPath.push(currentVertex);
                 currentVertex = adjacentVertices.back();
                 adjacentVertices.pop_back();
-            } else  {
-            // if dead end
+            } else {
+                // if dead end
                 result.emplace_back(currentVertex);    // add dead end vertex
                 currentVertex = nonDeadEndPath.top();  // check last vertex on "non dead end path"
                 nonDeadEndPath.pop();

@@ -148,10 +148,8 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, HsfachIsCalculatedAsPartOfCellLoad) {
     EXPECT_EQ(56U, loadMonitoring.calculateCellLoad(0, 0, true));
 }
 
-TEST(
-    LrmDssWcdmaLteLoadMonitoringTest,
-    CellLoadIsCalculatedCorrectlyWhenAllParametersArePresent)  {
-// not TDD but for peace of mind
+TEST(LrmDssWcdmaLteLoadMonitoringTest, CellLoadIsCalculatedCorrectlyWhenAllParametersArePresent) {
+    // not TDD but for peace of mind
     // Given
     LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 
@@ -272,11 +270,11 @@ TEST(
 
 TEST(
     LrmDssWcdmaLteLoadMonitoringTest,
-    NextLoadStateIsTheSameLoadStateOfAppliedFilterWhenCurrentLoadStateIsHigherThanLoadStateOfAppliedFilter)  {
-                                                                                                             // but for
-                                                                                                             // piece of
-                                                                                                             // mind
-// Not TDD
+    NextLoadStateIsTheSameLoadStateOfAppliedFilterWhenCurrentLoadStateIsHigherThanLoadStateOfAppliedFilter) {
+    // but for
+    // piece of
+    // mind
+    // Not TDD
     // Given
     LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 

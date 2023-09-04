@@ -54,7 +54,7 @@ private:
         auto* newObjects = new Object[newSize];
         if (m_objects != nullptr) {
             std::copy(m_objects, m_objects + std::min(m_stackSize, newSize), newObjects);
-            delete[] (m_objects);
+            delete[](m_objects);
         }
         m_objects = newObjects;
         m_containerSize = newSize;

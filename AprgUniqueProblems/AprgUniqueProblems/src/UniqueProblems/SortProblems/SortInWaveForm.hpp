@@ -18,8 +18,8 @@ public:
             ++nextOddIt;
 
             // all odds must be larger than even
-            if (*it < *previousOddIt)  {
-            // previous odd must be greater
+            if (*it < *previousOddIt) {
+                // previous odd must be greater
                 std::swap(*it, *previousOddIt);
             }
             if (nextOddIt != valuesToSort.end() && *it < *nextOddIt) {

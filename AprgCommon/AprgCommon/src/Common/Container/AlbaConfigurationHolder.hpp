@@ -47,8 +47,8 @@ public:
     }
 
 private:
-    void setInThisScopeTheValuesBack() const noexcept  {
-    // called in scope guard
+    void setInThisScopeTheValuesBack() const noexcept {
+        // called in scope guard
         AlbaConfigurationHolder<ConfigurationDetails>::getInstance().setConfigurationDetails(
             m_savedConfigurationDetails);
     }

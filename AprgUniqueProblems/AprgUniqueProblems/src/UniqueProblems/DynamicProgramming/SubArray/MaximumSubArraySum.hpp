@@ -5,8 +5,8 @@
 
 namespace alba {
 
-class MaximumSubArraySum  {
-// the largest possible sum of a sequence of consecutive values in the array
+class MaximumSubArraySum {
+    // the largest possible sum of a sequence of consecutive values in the array
 public:
     using Index = int;
     using Value = int;

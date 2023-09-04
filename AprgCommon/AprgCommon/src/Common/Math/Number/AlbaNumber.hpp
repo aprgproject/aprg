@@ -11,8 +11,8 @@
 
 // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions,cppcoreguidelines-pro-type-union-access)
 namespace alba {
-class AlbaNumber  {
-// This is value type.
+class AlbaNumber {
+    // This is value type.
 public:
     using IntDataType = int64_t;
     using NumeratorDataType = int32_t;
@@ -21,18 +21,18 @@ public:
     static constexpr double ADJUSTMENT_FLOAT_TOLERANCE = 1E-15;
 
     enum class Type { Integer, Double, Fraction, ComplexNumber };
-    struct FractionData  {
-    // alignas(8) has no effect on performance (tested in benchmark)
+    struct FractionData {
+        // alignas(8) has no effect on performance (tested in benchmark)
         NumeratorDataType numerator;
         DenominatorDataType denominator;
     };
-    struct ComplexNumberData  {
-    // alignas(8) has no effect on performance (tested in benchmark)
+    struct ComplexNumberData {
+        // alignas(8) has no effect on performance (tested in benchmark)
         float realPart;
         float imaginaryPart;
     };
-    union NumberUnionData  {
-    // alignas(8) has no effect on performance (tested in benchmark)
+    union NumberUnionData {
+        // alignas(8) has no effect on performance (tested in benchmark)
         constexpr NumberUnionData() : intData{} {}
         constexpr NumberUnionData(IntDataType const integer) : intData(integer) {}
         constexpr NumberUnionData(double const doubleValue) : doubleData(doubleValue) {}

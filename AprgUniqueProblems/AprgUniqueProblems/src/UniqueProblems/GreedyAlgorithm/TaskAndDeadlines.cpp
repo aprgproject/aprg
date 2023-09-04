@@ -19,18 +19,16 @@ TaskAndDeadlines::TaskNames TaskAndDeadlines::getTasksOrderWithMaximumScore() co
     TaskNames result;
 
     Tasks taskToSchedule(m_tasks);
-    sort(
-        taskToSchedule.begin(), taskToSchedule.end(),
-        [](Task const& task1, Task const& task2)  {
+    sort(taskToSchedule.begin(), taskToSchedule.end(), [](Task const& task1, Task const& task2) {
         // sort by duration
- return task1.duration < task2.duration; });
+        return task1.duration < task2.duration;
+    });
 
     result.reserve(taskToSchedule.size());
-    transform(
-        taskToSchedule.cbegin(), taskToSchedule.cend(), back_inserter(result),
-        [](Task const& task)  {
+    transform(taskToSchedule.cbegin(), taskToSchedule.cend(), back_inserter(result), [](Task const& task) {
         // get names
- return task.taskName; });
+        return task.taskName;
+    });
 
     return result;
 }

@@ -39,8 +39,8 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
                 }
                 if (lineLength + 1 + wordLength <= targetLineLength) {
                     lineLength += 1 + wordLength;  // plus one for space
-                } else                             {
-                // does not fit with line so create next line
+                } else {
+                    // does not fit with line so create next line
                     costAtLength += getCostFromExtraSpaces(m_maxLineLength - lineLength);
                     lineLength = wordLength;  // new line
                 }
@@ -65,9 +65,8 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
     if (!m_words.empty()) {
         Index numberOfWords(m_words.size());
         Costs costsIfFirstWord(numberOfWords, static_cast<Cost>(MAX_COST));
-        for (int firstWordIndex = numberOfWords - 1; firstWordIndex >= 0;
-             --firstWordIndex)  {
-        // try all first word in lines
+        for (int firstWordIndex = numberOfWords - 1; firstWordIndex >= 0; --firstWordIndex) {
+            // try all first word in lines
             Cost& costIfFirstWord(costsIfFirstWord[firstWordIndex]);
             Index lineLength(0);
             for (Index lastWordIndex = firstWordIndex; lastWordIndex < numberOfWords; ++lastWordIndex) {

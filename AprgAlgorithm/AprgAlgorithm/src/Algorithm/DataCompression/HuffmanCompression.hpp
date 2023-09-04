@@ -128,11 +128,11 @@ private:
         while (!currentNodePointer->isLeaf()) {
             bool bit(reader.readBoolData());
             if (!reader.getInputStream().eof()) {
-                if (bit)  {
-                // if one, go to the right
+                if (bit) {
+                    // if one, go to the right
                     currentNodePointer = currentNodePointer->right.get();
-                } else  {
-                // if zero, go to the left
+                } else {
+                    // if zero, go to the left
                     currentNodePointer = currentNodePointer->left.get();
                 }
             } else {
@@ -159,12 +159,12 @@ private:
         TrieNodeUniquePointer result;
         bool bit(reader.readBoolData());
         if (!reader.getInputStream().eof()) {
-            if (bit)  {
-            // this mean its a leaf
+            if (bit) {
+                // this mean its a leaf
                 char c(reader.readCharData());
                 result = std::make_unique<TrieNode>(c, nullptr, nullptr);
-            } else  {
-            // keep reading if not leaf
+            } else {
+                // keep reading if not leaf
                 // recursively read the left and read the right
                 TrieNodeUniquePointer left(readTrie(reader));
                 TrieNodeUniquePointer right(readTrie(reader));

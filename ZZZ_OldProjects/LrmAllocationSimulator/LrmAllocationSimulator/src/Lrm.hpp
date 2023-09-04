@@ -141,7 +141,8 @@ private:
     void copyDspAddressesThatSatisfiesThisCondition(
         DspAddresses& dspAddressesForLcgInFsp, DspBooleanCondition const& condition) const;
     void copyDspAddressesInFspThatSatisfiesThisCondition(
-        DspAddresses& dspAddressesForLcgInFsp, unsigned int const fspAddress, DspBooleanCondition const& condition) const;
+        DspAddresses& dspAddressesForLcgInFsp, unsigned int const fspAddress,
+        DspBooleanCondition const& condition) const;
     void sortDspAddressesBasedOnCondition(
         DspAddresses& dspAddressesForLcgInFsp, DspComparisonCondition const& condition) const;
 

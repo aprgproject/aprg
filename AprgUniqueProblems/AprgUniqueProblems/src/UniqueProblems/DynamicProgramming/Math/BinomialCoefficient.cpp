@@ -89,8 +89,8 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingItera
         partialValues[0] = 1;
         for (Value n = 1; n <= m_n; ++n) {
             Value lastK = min(n, m_k);
-            for (Value k = lastK; k > 0; --k)  {
-            // reverse traversal to avoid accessing already computed values
+            for (Value k = lastK; k > 0; --k) {
+                // reverse traversal to avoid accessing already computed values
                 partialValues[k] += partialValues[k - 1];
             }
         }

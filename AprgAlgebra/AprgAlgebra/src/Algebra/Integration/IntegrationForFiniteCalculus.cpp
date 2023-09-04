@@ -334,8 +334,8 @@ Term IntegrationForFiniteCalculus::integrateNonChangingTermRaiseToChangingTerm(
     Term exponentWithNPlusOneSubstitution(substitution.performSubstitutionTo(exponent));
     Term exponentDifference(exponentWithNPlusOneSubstitution - exponent);
 
-    if (!isChangingTerm(exponentDifference))  {
-    // if exponentDifference can be factored out
+    if (!isChangingTerm(exponentDifference)) {
+        // if exponentDifference can be factored out
         Term denominator(createExpressionIfPossible({base, "^", exponentDifference, "-", 1}));
         denominator.simplify();
         result = createExpressionIfPossible({base, "^", exponent, "/", denominator});

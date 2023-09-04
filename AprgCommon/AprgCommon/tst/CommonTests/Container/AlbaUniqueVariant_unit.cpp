@@ -56,7 +56,7 @@ TEST(AlbaUniqueVariantTest, AcquiringVariantTypeDifferentThanAlreadyInVariantInv
     DestructorClass::s_destructorInvoked = false;
 
     {
-    // When
+        // When
         UniqueVariant<DestructorClass, BaseVariantDataType> variant;
         variant.acquire<DestructorClass>();
         variant.acquire<BaseVariantDataType>();

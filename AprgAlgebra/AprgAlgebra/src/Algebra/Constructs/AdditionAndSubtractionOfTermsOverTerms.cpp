@@ -117,7 +117,8 @@ void AdditionAndSubtractionOfTermsOverTerms::updateMonomialAndNonMonomialMultipl
     }
 }
 
-void AdditionAndSubtractionOfTermsOverTerms::emplaceExistingNumeratorTerms(Terms& numeratorTerms, int const itemIndex) const {
+void AdditionAndSubtractionOfTermsOverTerms::emplaceExistingNumeratorTerms(
+    Terms& numeratorTerms, int const itemIndex) const {
     for (Term const& numeratorTerm : m_items[itemIndex].getNumerators()) {
         numeratorTerms.emplace_back(numeratorTerm);
     }

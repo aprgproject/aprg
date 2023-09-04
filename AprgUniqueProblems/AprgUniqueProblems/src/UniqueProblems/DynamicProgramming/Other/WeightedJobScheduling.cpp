@@ -8,9 +8,8 @@ namespace alba {
 
 namespace {
 
-auto endTimeJobComparator = [](WeightedJobScheduling::Job const& job1,
-                               WeightedJobScheduling::Job const& job2)  {
-// sort by end time
+auto endTimeJobComparator = [](WeightedJobScheduling::Job const& job1, WeightedJobScheduling::Job const& job2) {
+    // sort by end time
     return (job1.endTime != job2.endTime) ? job1.endTime < job2.endTime  // sort on jobs that end early
                                           : job1.profit > job2.profit;   // stylistic choice, put higher profits works
 };

@@ -18,21 +18,19 @@ SchedulingEvents::EventNames SchedulingEvents::getAsMuchEventsAsPossible() const
 
     if (!m_events.empty()) {
         Events eventsToSchedule(m_events);
-        sort(
-            eventsToSchedule.begin(), eventsToSchedule.end(),
-            [](Event const& event1, Event const& event2)  {
+        sort(eventsToSchedule.begin(), eventsToSchedule.end(), [](Event const& event1, Event const& event2) {
             // sort by end time
-                if (event1.endTime != event2.endTime) {
-                    return event1.endTime < event2.endTime;  // sort on events that end early
-                }
-                return event1.startTime < event2.startTime;  // stylistic choice, prioritize longest events first
-            });
+            if (event1.endTime != event2.endTime) {
+                return event1.endTime < event2.endTime;  // sort on events that end early
+            }
+            return event1.startTime < event2.startTime;  // stylistic choice, prioritize longest events first
+        });
 
         Event selectedEvent(eventsToSchedule.front());
         result.emplace_back(selectedEvent.eventName);
         for (Event const& eventToSchedule : eventsToSchedule) {
-            if (selectedEvent.endTime <= eventToSchedule.startTime)  {
-            // select next earliest event that can start
+            if (selectedEvent.endTime <= eventToSchedule.startTime) {
+                // select next earliest event that can start
                 selectedEvent = eventToSchedule;
                 result.emplace_back(selectedEvent.eventName);
             }
