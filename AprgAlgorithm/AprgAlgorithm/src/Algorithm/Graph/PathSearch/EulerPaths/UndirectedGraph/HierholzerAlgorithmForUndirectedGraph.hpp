@@ -42,8 +42,8 @@ private:
                 adjacentVertices.erase(firstIt);
                 vertexToSetOfAdjacencyVerticesMap[nextVertex].erase(currentVertex);
                 currentVertex = nextVertex;
-            } else  // if dead end
-            {
+            } else  {
+            // if dead end
                 result.emplace_back(currentVertex);    // add dead end vertex
                 currentVertex = nonDeadEndPath.top();  // check last vertex on "non dead end path"
                 nonDeadEndPath.pop();

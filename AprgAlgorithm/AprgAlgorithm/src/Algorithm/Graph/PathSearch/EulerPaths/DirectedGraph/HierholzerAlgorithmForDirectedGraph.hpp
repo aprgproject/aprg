@@ -37,8 +37,8 @@ private:
                 nonDeadEndPath.push(currentVertex);
                 currentVertex = adjacentVertices.back();
                 adjacentVertices.pop_back();
-            } else  // if dead end
-            {
+            } else  {
+            // if dead end
                 result.emplace_back(currentVertex);    // add dead end vertex
                 currentVertex = nonDeadEndPath.top();  // check last vertex on "non dead end path"
                 nonDeadEndPath.pop();

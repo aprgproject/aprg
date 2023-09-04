@@ -95,21 +95,21 @@ public:
             *this, secondMatrix, BinaryFunction<DataType>(std::minus<DataType>()));
     }
 
-    AlbaMatrix operator*(DataType const& scalarMultiplier) const  // scalar multiplication
-    {
+    AlbaMatrix operator*(DataType const& scalarMultiplier) const  {
+    // scalar multiplication
         UnaryFunction<DataType> scalarMultiplication = [&scalarMultiplier](DataType const& value) {
             return scalarMultiplier * value;
         };
         return doUnaryOperation(*this, scalarMultiplication);
     }
 
-    AlbaMatrix operator*(AlbaMatrix const& secondMatrix) const  // matrix multiplication
-    {
+    AlbaMatrix operator*(AlbaMatrix const& secondMatrix) const  {
+    // matrix multiplication
         return multiplyMatrices(*this, secondMatrix);
     }
 
-    AlbaMatrix operator^(DataType const& scalarExponent) const  // scalar raise to power
-    {
+    AlbaMatrix operator^(DataType const& scalarExponent) const  {
+    // scalar raise to power
         return getMatrixRaiseToScalarPower(*this, scalarExponent);
     }
 

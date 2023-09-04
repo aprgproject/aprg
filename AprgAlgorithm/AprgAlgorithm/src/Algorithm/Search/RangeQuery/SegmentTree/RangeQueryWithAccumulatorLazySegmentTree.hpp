@@ -47,7 +47,8 @@ public:
           m_inverseFunction(inverseFunction),
           m_identityValue(identityValue),
           m_pendingUpdates(b_startOfChildren, m_identityValue)  {
-    // only parent have pending updates}
+    // only parent have pending updates
+}
 
     Value getValueOnInterval(Index const start, Index const end) {
         // This has log(N) running time

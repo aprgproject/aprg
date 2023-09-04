@@ -6,8 +6,8 @@
 namespace alba::algorithm {
 
 template <typename HashValue>
-class HornerHashFunctionForWholeString  // horners rule: continuously mod to keep the value
-{
+class HornerHashFunctionForWholeString  {
+// horners rule: continuously mod to keep the value
 public:
     HornerHashFunctionForWholeString(HashValue const radix, HashValue const largeRandomPrime)
         : m_radix(radix), m_largeRandomPrime(largeRandomPrime) {}

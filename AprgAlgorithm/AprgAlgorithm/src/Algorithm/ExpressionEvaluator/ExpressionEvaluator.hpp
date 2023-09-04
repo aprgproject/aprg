@@ -139,8 +139,8 @@ private:
 };
 
 template <typename ValueTemplateType, typename OperatorTemplateType>
-class ExpressionPostfixEvaluator  // prefix is reverse postfix, so no prefix needed
-{
+class ExpressionPostfixEvaluator  {
+// prefix is reverse postfix, so no prefix needed
 public:
     using Term = ExpressionEvaluatorTerm<ValueTemplateType, OperatorTemplateType>;
     using Terms = std::vector<Term>;

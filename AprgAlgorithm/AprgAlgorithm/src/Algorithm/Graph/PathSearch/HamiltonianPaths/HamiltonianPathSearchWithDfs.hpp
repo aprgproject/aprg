@@ -6,9 +6,9 @@
 namespace alba::algorithm {
 
 template <typename Vertex>
-class HamiltonianPathSearchWithDfs  // The Traveling Salesman Problem. // This is an intractable problem (classical
+class HamiltonianPathSearchWithDfs  {
                                     // NP-complete problem)
-{
+// The Traveling Salesman Problem. // This is an intractable problem (classical
 public:
     using BaseGraphWithVertex = BaseGraph<Vertex>;
     using Path = typename GraphTypes<Vertex>::Path;

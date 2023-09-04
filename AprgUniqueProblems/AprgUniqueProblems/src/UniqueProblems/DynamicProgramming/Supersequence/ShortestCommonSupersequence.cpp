@@ -67,9 +67,9 @@ ShortestCommonSupersequence::Count ShortestCommonSupersequence::getShortestLengt
     // we only really need 2 rows (not a matrix) to keep track partial values.
 
     // current and previous are the rows in the dynamic programming solution
-    vector<Counts> previousAndCurrentCounts(2, Counts(m_sequence1.size() + 1, 0));  // set first row to zero
+    vector<Counts> previousAndCurrentCounts(2, Counts(m_sequence1.size() + 1, 0));  {
 
-    {
+    // set first row to zero
         Counts& currentCounts(previousAndCurrentCounts[1]);
         for (Index index1 = 0; index1 <= static_cast<Index>(m_sequence1.size()); ++index1) {
             currentCounts[index1] = index1;

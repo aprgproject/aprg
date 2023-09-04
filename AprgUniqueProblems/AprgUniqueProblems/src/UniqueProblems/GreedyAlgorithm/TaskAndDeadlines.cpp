@@ -22,13 +22,15 @@ TaskAndDeadlines::TaskNames TaskAndDeadlines::getTasksOrderWithMaximumScore() co
     sort(
         taskToSchedule.begin(), taskToSchedule.end(),
         [](Task const& task1, Task const& task2)  {
-        // sort by duration return task1.duration < task2.duration; });
+        // sort by duration
+ return task1.duration < task2.duration; });
 
     result.reserve(taskToSchedule.size());
     transform(
         taskToSchedule.cbegin(), taskToSchedule.cend(), back_inserter(result),
         [](Task const& task)  {
-        // get names return task.taskName; });
+        // get names
+ return task.taskName; });
 
     return result;
 }

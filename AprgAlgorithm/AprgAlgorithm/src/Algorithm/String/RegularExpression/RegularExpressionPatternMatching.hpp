@@ -86,8 +86,8 @@ private:
                         operatorIndex + 1);  // add edge to skip the first part of the expression
                     m_nullTransitionsGraph.connect(
                         operatorIndex, indexOfRE);  // add edge to skip the second part of the expression
-                } else                              // opening parenthesis goes here
-                {
+                } else                              {
+                // opening parenthesis goes here
                     startIndexOfExpression = operatorIndex;
                 }
             }

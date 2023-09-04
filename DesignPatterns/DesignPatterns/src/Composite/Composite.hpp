@@ -13,9 +13,9 @@ public:
     virtual ~Component() = default;
 
     [[nodiscard]] virtual Component const* getChildPointerAt(
-        int const) const  // Make sure that this doesn't break interface segregation principle. (Make sure the
+        int const) const  {
                           // method/function makes sense.)
-    {
+    // Make sure that this doesn't break interface segregation principle. (Make sure the
         return nullptr;
     }
 

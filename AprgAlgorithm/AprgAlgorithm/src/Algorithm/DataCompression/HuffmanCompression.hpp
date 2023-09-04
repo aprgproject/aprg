@@ -131,8 +131,8 @@ private:
                 if (bit)  {
                 // if one, go to the right
                     currentNodePointer = currentNodePointer->right.get();
-                } else  // if zero, go to the left
-                {
+                } else  {
+                // if zero, go to the left
                     currentNodePointer = currentNodePointer->left.get();
                 }
             } else {
@@ -163,8 +163,8 @@ private:
             // this mean its a leaf
                 char c(reader.readCharData());
                 result = std::make_unique<TrieNode>(c, nullptr, nullptr);
-            } else  // keep reading if not leaf
-            {
+            } else  {
+            // keep reading if not leaf
                 // recursively read the left and read the right
                 TrieNodeUniquePointer left(readTrie(reader));
                 TrieNodeUniquePointer right(readTrie(reader));

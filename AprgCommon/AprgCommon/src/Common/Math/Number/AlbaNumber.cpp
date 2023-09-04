@@ -315,8 +315,8 @@ AlbaNumber AlbaNumber::operator^(AlbaNumber const& second) const {
         } else if (first.m_type == Type::ComplexNumber) {
             result = createComplexNumber(
                 createComplexFloat(first.m_data.complexNumberData) ^ static_cast<float>(exponentInDouble));
-        } else  // if(first.m_type != Type::ComplexNumber)
-        {
+        } else  {
+        // if(first.m_type != Type::ComplexNumber)
             correctPowerResult(powerResultInDouble, baseInDouble, exponentInDouble);
             result = createNumberFromDoubleAndRoundIfNeeded(powerResultInDouble);
         }

@@ -28,8 +28,8 @@ MaximumSubArraySum::SubArrayDetails MaximumSubArraySum::getMaximumSubArraySumWit
         if (value > currentSubArray.sum + value)  {
         // new sub array contains only value
             currentSubArray = {index, index, value};
-        } else  // add value to current sub array
-        {
+        } else  {
+        // add value to current sub array
             currentSubArray.highIndex = index;
             currentSubArray.sum += value;
         }

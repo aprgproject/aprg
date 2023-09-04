@@ -5,9 +5,9 @@
 
 namespace alba {
 
-class MaximumProfitByBuyingAndSellingAShareAtMostTwice  // the largest possible sum of a sequence of consecutive values
+class MaximumProfitByBuyingAndSellingAShareAtMostTwice  {
                                                         // in the array
-{
+// the largest possible sum of a sequence of consecutive values
 public:
     using Index = int;
     using Value = int;

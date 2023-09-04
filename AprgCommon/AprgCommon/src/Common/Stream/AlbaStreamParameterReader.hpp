@@ -44,8 +44,8 @@ void AlbaStreamParameterReader::readVectorData(std::vector<TypeToRetrieve>& vect
 }
 
 template <typename TypeToRetrieve>
-void AlbaStreamParameterReader::readSetData(std::set<TypeToRetrieve>& setOfData) const  // test
-{
+void AlbaStreamParameterReader::readSetData(std::set<TypeToRetrieve>& setOfData) const  {
+// test
     size_t size{};
     m_stream >> size;
     for (size_t i = 0; i < size; ++i) {

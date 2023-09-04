@@ -22,8 +22,8 @@ public:
     }
 
     [[nodiscard]] Object getRoot(
-        Object const& object) const override  // worst case runs in logarithmic time (base 2 log) -> acceptable
-    {
+        Object const& object) const override  {
+    // worst case runs in logarithmic time (base 2 log) -> acceptable
         // Continuously find relative root until its equal to the previous root
         Object currentRoot(object);
         Object nextRoot(m_relativeRoots[object]);
@@ -65,8 +65,8 @@ public:
     }
 
     void connect(Object const& object1, Object const& object2)
-        override  // worst case runs in logarithmic time because of getRoot() -> acceptable
-    {
+        override  {
+    // worst case runs in logarithmic time because of getRoot() -> acceptable
         Object root1(getRoot(object1));
         Object root2(getRoot(object2));
         if (root1 != root2) {

@@ -6,8 +6,8 @@
 namespace alba::algorithm {
 
 template <typename HashValue>
-class HornerHashFunctionForSubstrings  // horners rule: continuously mod to keep the value
-{
+class HornerHashFunctionForSubstrings  {
+// horners rule: continuously mod to keep the value
 public:
     using HashValues = std::vector<HashValue>;
 

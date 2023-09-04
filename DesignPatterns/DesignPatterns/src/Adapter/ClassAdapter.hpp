@@ -29,8 +29,8 @@ public:
 // ie adapts the interface of Adaptee to the Target interface
 
 class Adapter : public Target,
-                private Adaptee  // note the access control
-{
+                private Adaptee  {
+// note the access control
 public:
     void request() override { specificRequest(); }
     // ...
