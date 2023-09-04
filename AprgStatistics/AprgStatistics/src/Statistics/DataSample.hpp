@@ -24,11 +24,11 @@ public:
         std::copy(dataSampleValues.begin(), dataSampleValues.begin() + limit, m_data.begin());
     }
 
-    [[nodiscard]] bool isIndexValid(int index) const { return index >= 0 && index < DIMENSIONS; }
+    [[nodiscard]] bool isIndexValid(int const index) const { return index >= 0 && index < DIMENSIONS; }
 
     [[nodiscard]] int getSize() const { return m_data.size(); }
 
-    [[nodiscard]] double getValueAt(int index) const {
+    [[nodiscard]] double getValueAt(int const index) const {
         double result(0);
         if (isIndexValid(index)) {
             result = m_data[index];
@@ -78,7 +78,7 @@ public:
 
     [[nodiscard]] Sample calculateAbsoluteValue() const {
         return performDataTypeFunction(
-            [](double value) -> double { return mathHelper::getAbsoluteValue<double>(value); });
+            [](double const value) -> double { return mathHelper::getAbsoluteValue<double>(value); });
     }
 
     [[nodiscard]] Sample calculateRaiseToPower(double const value) const {

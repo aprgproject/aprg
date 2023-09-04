@@ -52,7 +52,7 @@ private:
         return vertex1;
     }
 
-    void saveCycle(Vertex startOfCycle) {
+    void saveCycle(Vertex const startOfCycle) {
         m_cyclePath.emplace_back(startOfCycle);
         Vertex vertex = walkOne(startOfCycle);  // vertex traverses the cycle
         while (startOfCycle != vertex) {

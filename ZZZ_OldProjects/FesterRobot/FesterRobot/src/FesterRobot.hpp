@@ -17,7 +17,7 @@ public:
 
 private:
     void exitIfSpecialKeyIsPressed();
-    void updateExcelFile(unsigned int freqUsageBits);
+    void updateExcelFile(unsigned int const freqUsageBits);
     void setupFesterEnvironmentInMatlab();
     void editCellInExcelWithNewFrequencies(MousePosition const& excelCellPosition);
     void runFesterFunctionInMatlab();
@@ -26,7 +26,7 @@ private:
     std::string getClipboardFormattedData() const;
     void saveDataToOutputFile(std::string const& clipboardData);
     std::string getFrequenciesStringForExcel() const;
-    void updateFrequenciesBasedFreqUsageBits(unsigned int freqUsageBits);
+    void updateFrequenciesBasedFreqUsageBits(unsigned int const freqUsageBits);
     std::ofstream m_outputStream;
     Frequencies m_frequencies;
     AlbaWindowsUserAutomation m_userAutomation;

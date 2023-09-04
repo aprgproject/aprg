@@ -21,7 +21,7 @@ private:
     void cleanup();
 
     void initializeScreenParameters();
-    HBITMAP createBitmapHandlerFromScreen(HDC deviceContextHandler) const;
+    HBITMAP createBitmapHandlerFromScreen(HDC const deviceContextHandler) const;
     void saveBitmapInfo(HDC const screenHandler, HBITMAP const bitmapHandler);
     void savePixelsFromBitmapScreen(HDC const screenHandler, HBITMAP const bitmapHandler, BITMAPINFO& bitmapInfo);
     int m_screenWidth;

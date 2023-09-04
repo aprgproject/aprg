@@ -178,7 +178,7 @@ void DisplayTablePrinter::saveTableInformation(DisplayTable const& displayTable)
     }
 
     m_totalColumnLength = accumulate(
-        m_maxLengthAtColumn.cbegin(), m_maxLengthAtColumn.cend(), 0, [](int partialSum, int lengthPerColumn) {
+        m_maxLengthAtColumn.cbegin(), m_maxLengthAtColumn.cend(), 0, [](int const partialSum, int const lengthPerColumn) {
             partialSum += lengthPerColumn;
             return partialSum;
         });

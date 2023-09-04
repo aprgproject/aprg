@@ -14,7 +14,7 @@ class AlbaOptional {
 public:
     AlbaOptional() = default;
 
-    explicit AlbaOptional(ContentType content) : m_contentPointer(std::make_unique<ContentType>(content)) {}
+    explicit AlbaOptional(ContentType const content) : m_contentPointer(std::make_unique<ContentType>(content)) {}
 
     explicit AlbaOptional(ContentType& content) : m_contentPointer(std::make_unique<ContentType>(content)) {}
 
@@ -46,7 +46,7 @@ public:
 
     void createObjectUsingDefaultConstructor() { m_contentPointer = std::make_unique<ContentType>(); }
 
-    void setValue(ContentType content) {
+    void setValue(ContentType const content) {
         if (m_contentPointer) {
             *m_contentPointer = content;
         } else {
@@ -127,7 +127,7 @@ public:
 
     AlbaOptional& operator=(AlbaOptional&& optional) = delete;
 
-    void setValue(ContentType content) {
+    void setValue(ContentType const content) {
         if (m_hasContent && isContentPointerValid()) {
             *m_contentPointer = content;
         }

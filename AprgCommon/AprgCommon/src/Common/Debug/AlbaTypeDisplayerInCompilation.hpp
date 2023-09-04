@@ -26,7 +26,7 @@ template <typename TypeToDisplay>
 class DisplayThisType;
 
 template <typename TypeInTemplate>
-void displayTypeInTemplateByValue(TypeInTemplate parameter) {
+void displayTypeInTemplateByValue(TypeInTemplate const parameter) {
     DisplayThisType<TypeInTemplate> objectWithTypeInTemplate;
     DisplayThisType<decltype(parameter)> objectWithParameterType;
 }

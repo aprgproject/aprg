@@ -25,7 +25,7 @@ using namespace std;
 
 namespace alba {
 
-unsigned int swap4(unsigned int temp) {
+unsigned int swap4(unsigned int const temp) {
     return alba::AlbaBitManipulation<unsigned int>::swapForFourBytes(temp);
     // return temp;
 }

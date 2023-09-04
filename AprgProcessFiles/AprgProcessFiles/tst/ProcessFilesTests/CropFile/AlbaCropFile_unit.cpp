@@ -32,7 +32,7 @@ TEST(AlbaCropFileTest, CropUpdatesWorks) {
     testFile.close();
 
     double capturedPercentage = 0;
-    AlbaCropFile cropFile("[50]", 50, [&](double percentage) -> void { capturedPercentage = percentage; });
+    AlbaCropFile cropFile("[50]", 50, [&](double const percentage) -> void { capturedPercentage = percentage; });
     EXPECT_FALSE(cropFile.isOutputFileWritten());
     cropFile.processFile(file1ToReadPathHandler.getFullPath(), file2ToReadPathHandler.getFullPath());
     EXPECT_TRUE(cropFile.isOutputFileWritten());

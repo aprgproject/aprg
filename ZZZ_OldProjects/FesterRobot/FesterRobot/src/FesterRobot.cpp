@@ -63,7 +63,7 @@ void FesterRobot::setupFesterEnvironmentInMatlab() {
     m_userAutomation.typeCharacter(VK_RETURN);
 }
 
-void FesterRobot::updateExcelFile(unsigned int freqUsageBits) {
+void FesterRobot::updateExcelFile(unsigned int const freqUsageBits) {
     updateFrequenciesBasedFreqUsageBits(freqUsageBits);
     editCellInExcelWithNewFrequencies(MousePosition(EXCEL_CELL_COORDINATES1));
     editCellInExcelWithNewFrequencies(MousePosition(EXCEL_CELL_COORDINATES2));
@@ -142,7 +142,7 @@ string FesterRobot::getFrequenciesStringForExcel() const {
     return frequencyString;
 }
 
-void FesterRobot::updateFrequenciesBasedFreqUsageBits(unsigned int freqUsageBits) {
+void FesterRobot::updateFrequenciesBasedFreqUsageBits(unsigned int const freqUsageBits) {
     m_frequencies.clear();
     if ((freqUsageBits & 0x1) > 0) {
         m_frequencies.emplace_back(-1800);

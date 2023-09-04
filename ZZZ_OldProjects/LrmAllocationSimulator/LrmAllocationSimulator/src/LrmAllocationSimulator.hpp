@@ -17,7 +17,7 @@ public:
     LrmAllocationSimulator();
     Configuration createConfigurationForOneFspOneLcg();
     Configuration createConfigurationForTwoFspsOneLcg();
-    void addFspInConfiguration(unsigned int address);
+    void addFspInConfiguration(unsigned int const address);
 
 private:
 };

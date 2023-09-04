@@ -15,7 +15,7 @@ namespace alba {
 
 namespace TestStaticLocalVariableInFunctionTemplates {
 template <class T>
-auto kitten(T t) {
+auto kitten(T const t) {
     static int x = 0;
     return (++x) + t;
 }
@@ -29,12 +29,12 @@ TEST(LambdaExamplesTest, TestStaticLocalVariableInFunctionTemplates) {
 }  // namespace TestStaticLocalVariableInFunctionTemplates
 
 namespace TestCapturingByValueVsByReference {
-auto goodIncrementBy(int y) {
-    return [=](int x) { return x + y; };
+auto goodIncrementBy(int const y) {
+    return [=](int const x) { return x + y; };
 }
-auto badIncrementBy(int y) {
+auto badIncrementBy(int const y) {
     // NOLINTNEXTLINE(clang-diagnostic-return-stack-address)
-    return [&](int x) { return x + y; };
+    return [&](int const x) { return x + y; };
 }
 
 TEST(LambdaExamplesTest, TestCapturingByValueVsByReference) {
@@ -79,17 +79,17 @@ TEST(LambdaExamplesTest, CapturingGlobalVariablesWorks) {
 }  // namespace CapturingGlobalVariablesWorks
 
 namespace CapturingStaticVariablesWorks {
-auto makeKitten(int capturedByValue) {
+auto makeKitten(int const capturedByValue) {
     static int staticOutsideTheLambda = 0;
-    return [=](int lambdaArgument) {
+    return [=](int const lambdaArgument) {
         static int staticInsideTheLambda = 0;
         return (staticOutsideTheLambda++) + (staticInsideTheLambda++) + capturedByValue + lambdaArgument;
     };
 }
 
-auto makeKittenWithEachHasStatic(int capturedByValue) {
+auto makeKittenWithEachHasStatic(int const capturedByValue) {
     static int staticOutsideTheLambda = 0;
-    return [capturedByValue, staticInsideTheLambda = 0](int lambdaArgument) mutable {
+    return [capturedByValue, staticInsideTheLambda = 0](int const lambdaArgument) mutable {
         return (staticOutsideTheLambda++) + (staticInsideTheLambda++) + capturedByValue + lambdaArgument;
     };
 }
@@ -131,15 +131,15 @@ TEST(LambdaExamplesTest, CapturingStaticVariablesWorks) {
 namespace ClassMemberFunctionTemplatesWorks {
 class Kitten {
 public:
-    explicit Kitten(int value) : m_value(value) {}
+    explicit Kitten(int const value) : m_value(value) {}
 
     template <class T>
-    [[nodiscard]] [[nodiscard]] auto plusMe(T x) const {
+    [[nodiscard]] [[nodiscard]] auto plusMe(T const x) const {
         return x + m_value;
     }
 
     template <class T>
-    auto operator()(T x) const {
+    auto operator()(T const x) const {
         return x + m_value;
     }
 
@@ -184,7 +184,7 @@ TEST(LambdaExamplesTest, ClassMemberFunctionTemplatesWorks) {
 namespace ClassMemberFunctionVariadicTemplatesWorks {
 class Kitten {
 public:
-    explicit Kitten(int value) : m_value(value) {}
+    explicit Kitten(int const value) : m_value(value) {}
 
     template <class... Ts>
     auto operator()(Ts... xs) const {

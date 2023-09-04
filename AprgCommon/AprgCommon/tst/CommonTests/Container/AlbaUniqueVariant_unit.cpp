@@ -74,7 +74,7 @@ TEST(AlbaUniqueVariantTest, PolymorphismIsSupportedByUniqueVariant) {
         int m_value;
 
     public:
-        explicit Base(int value) : m_value(value) {}
+        explicit Base(int const value) : m_value(value) {}
         Base(Base const&) = delete;
         Base& operator=(Base const&) = delete;
         Base(Base&&) = delete;

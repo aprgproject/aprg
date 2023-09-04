@@ -51,9 +51,9 @@ public:
     [[nodiscard]] BitmapXY getDownRightCornerPoint() const;
 
     [[nodiscard]] uint32_t getColorUsingPixelValue(uint32_t const pixelValue) const;
-    [[nodiscard]] int convertPixelsToBytesRoundedToFloor(int pixels) const;
-    [[nodiscard]] int convertPixelsToBytesRoundedToCeil(int pixels) const;
-    [[nodiscard]] int convertBytesToPixels(int bytes) const;
+    [[nodiscard]] int convertPixelsToBytesRoundedToFloor(int const pixels) const;
+    [[nodiscard]] int convertPixelsToBytesRoundedToCeil(int const pixels) const;
+    [[nodiscard]] int convertBytesToPixels(int const bytes) const;
     [[nodiscard]] int getNumberOfPixelsForOneByte() const;
     [[nodiscard]] int getMaximumNumberOfPixelsBeforeOneByte() const;
     [[nodiscard]] int getMinimumNumberOfBytesForOnePixel() const;

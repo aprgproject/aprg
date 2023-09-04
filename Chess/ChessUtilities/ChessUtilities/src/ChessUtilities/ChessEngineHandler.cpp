@@ -28,7 +28,7 @@ int IsWinNT() {
     return (osv.dwPlatformId == VER_PLATFORM_WIN32_NT);
 }
 
-DWORD WINAPI engineMonitoringCallbackFunction(LPVOID lpParam) {
+DWORD WINAPI engineMonitoringCallbackFunction(LPVOID const lpParam) {
     PointerToCallBackData pointerToCallBackData = (PointerToCallBackData)lpParam;
     ChessEngineHandler* chessEngineHandlerPointer =
         reinterpret_cast<ChessEngineHandler*>(pointerToCallBackData->epointer);

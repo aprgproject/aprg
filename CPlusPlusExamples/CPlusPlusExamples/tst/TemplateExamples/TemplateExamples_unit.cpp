@@ -17,7 +17,7 @@ namespace alba {
 namespace FunctionTemplatesWork {
 
 template <typename T>
-T abs(T x) {
+T abs(T const x) {
     return (x >= 0) ? x : -x;
 }
 
@@ -183,7 +183,7 @@ TEST(TemplateExamplesTest, TemplateTypeDeductionWorks) {
     // does not match adjusted type 'array<[...], 9>' of argument [with T = int, U = double]
 
     // fooFunction([](double x) { return int(x); }); // Compilation error
-    fooFunction(+[](double x) { return static_cast<int>(x); });
+    fooFunction(+[](double const x) { return static_cast<int>(x); });
     // Captureless lambda types are always implicitly convertible to function pointer type.
     // But being implicitly convertible to a thing doesn't mean actually being that thing!
     // Protip: If you absolute need the function-pointer conversion to happen add a unary+.

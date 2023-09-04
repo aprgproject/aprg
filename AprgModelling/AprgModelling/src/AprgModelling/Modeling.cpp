@@ -101,19 +101,19 @@ void Modeling::saveRetrievedDataForXAndY(
     copyVectorToMatrix(1, numberOfSamples, retrievedDataForY, m_retrievedDataForY);
 }
 
-void Modeling::saveRetrievedDataToModelingDataRandomly(unsigned int numberOfSamples) {
+void Modeling::saveRetrievedDataToModelingDataRandomly(unsigned int const numberOfSamples) {
     saveRetrievedDataToMatrixRandomly(m_modelingDataForX, m_modelingDataForY, numberOfSamples);
 }
 
-void Modeling::saveRetrievedDataToValidationDataRandomly(unsigned int numberOfSamples) {
+void Modeling::saveRetrievedDataToValidationDataRandomly(unsigned int const numberOfSamples) {
     saveRetrievedDataToMatrixRandomly(m_validationDataForX, m_validationDataForY, numberOfSamples);
 }
 
-void Modeling::saveRetrievedDataToModelingData(unsigned int numberOfSamples) {
+void Modeling::saveRetrievedDataToModelingData(unsigned int const numberOfSamples) {
     saveRetrievedDataToMatrix(m_modelingDataForX, m_modelingDataForY, numberOfSamples);
 }
 
-void Modeling::saveRetrievedDataToValidationData(unsigned int numberOfSamples) {
+void Modeling::saveRetrievedDataToValidationData(unsigned int const numberOfSamples) {
     saveRetrievedDataToMatrix(m_validationDataForX, m_validationDataForY, numberOfSamples);
 }
 

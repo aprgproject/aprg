@@ -141,7 +141,7 @@ namespace MultipleExamplesOfRvo {
 string directlyReturnTemporary() { return ("I will RVO!"); }
 
 string willThisRvo01() { return ("I will RVO!"); }
-string willThisRvo02(bool condition) {
+string willThisRvo02(bool const condition) {
     if (condition) {
         return ("I will RVO!");
     }
@@ -158,7 +158,7 @@ string willThisRvo03(bool const condition, string prohibitingRvo) {
 
     // This will NOT RVO because there is no opportunity for construction.
 }
-string willThisRvo04(bool condition) {
+string willThisRvo04(bool const condition) {
     if (condition) {
         return directlyReturnTemporary();
     }
@@ -167,7 +167,7 @@ string willThisRvo04(bool condition) {
     // This will RVO (can elide multiple copies).
     // This will RVO in both cases because they are temporaries.
 }
-string willThisRvo05(bool condition) {
+string willThisRvo05(bool const condition) {
     if (condition) {
         string s("I can RVO!");
         return s;
@@ -178,7 +178,7 @@ string willThisRvo05(bool condition) {
     // -> Clang: Yes
     // -> GCC/MSVC: No
 }
-string willThisRvo06(bool condition) {
+string willThisRvo06(bool const condition) {
     string s("I can't RVO!");
     if (condition) {
         return s;
@@ -188,7 +188,7 @@ string willThisRvo06(bool condition) {
     // This will NOT RVO because compiler can't see it.
     // -> Possibly in the future?
 }
-string willThisRvo07(bool condition) {
+string willThisRvo07(bool const condition) {
     string s("I won't RVO!");
     return condition ? s : "I won't RVO as well!";
 
@@ -197,7 +197,7 @@ string willThisRvo07(bool condition) {
     // We are NOT returning the right type because the TERNARY operator in this case produces an lvalue reference.
     // -> We CAN'T even move here, we have to copy it.
 }
-string willThisRvo08(bool condition) {
+string willThisRvo08(bool const condition) {
     string s("I will RVO!");
     return condition ? directlyReturnTemporary() : "I will RVO as well!";
 
@@ -323,7 +323,7 @@ TEST(InPlaceConstructionExamplesTest, CopyingToAVectorFromAnArrayOfInts) {
     // copy(a.cbegin(), a.cend(), back_inserter(v));  // compiler failure
     // Compiler is angry at us because push_back does not work on constructors (explicit constructor)
 
-    transform(a.cbegin(), a.cend(), back_inserter(v), [](int i) { return S(i); });
+    transform(a.cbegin(), a.cend(), back_inserter(v), [](int const i) { return S(i); });
     // -> Does push_back underneath
     // ---> Results to: Construction of temporary, move construction to vector, and destruction of temporary
     // -> This is the best thing we can do right now.

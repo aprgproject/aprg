@@ -418,7 +418,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
                    tupcTbRegisterResponseTimeOptional && rlhTbRegisterResponseTimeOptional &&
                    rlhRlSetupResponseOptional;
         }
-        [[nodiscard]] bool isCorrect(int nbccId) const {
+        [[nodiscard]] bool isCorrect(int const nbccId) const {
             if (!isComplete(nbccId)) {
                 return false;
             }
@@ -652,7 +652,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
                    tupcLastEcfReceivedOptional && tupcFirstTransportConnectionSetupOptional &&
                    rlhRlSetupResponseOptional;
         }
-        [[nodiscard]] bool isCorrect(int nbccId) const {
+        [[nodiscard]] bool isCorrect(int const nbccId) const {
             if (!isComplete(nbccId)) {
                 return false;
             }

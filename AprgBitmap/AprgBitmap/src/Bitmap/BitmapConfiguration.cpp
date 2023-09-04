@@ -101,16 +101,16 @@ uint32_t BitmapConfiguration::getColorUsingPixelValue(uint32_t const pixelValue)
     return color;
 }
 
-int BitmapConfiguration::convertPixelsToBytesRoundedToFloor(int pixels) const {
+int BitmapConfiguration::convertPixelsToBytesRoundedToFloor(int const pixels) const {
     return (pixels * m_numberOfBitsPerPixel) / AlbaBitConstants::BYTE_SIZE_IN_BITS;
 }
 
-int BitmapConfiguration::convertPixelsToBytesRoundedToCeil(int pixels) const {
+int BitmapConfiguration::convertPixelsToBytesRoundedToCeil(int const pixels) const {
     return ((pixels * m_numberOfBitsPerPixel) + AlbaBitConstants::BYTE_SIZE_IN_BITS - 1) /
            AlbaBitConstants::BYTE_SIZE_IN_BITS;
 }
 
-int BitmapConfiguration::convertBytesToPixels(int bytes) const {
+int BitmapConfiguration::convertBytesToPixels(int const bytes) const {
     return (bytes * AlbaBitConstants::BYTE_SIZE_IN_BITS) / m_numberOfBitsPerPixel;
 }
 

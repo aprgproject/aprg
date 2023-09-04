@@ -31,7 +31,7 @@ TEST(AlbaGrepFileTest, GrepUpdatesWorks) {
     testFile.close();
 
     double capturedPercentage = 0;
-    AlbaGrepFile grepFile("[0]", [&](double percentage) -> void { capturedPercentage = percentage; });
+    AlbaGrepFile grepFile("[0]", [&](double const percentage) -> void { capturedPercentage = percentage; });
     EXPECT_FALSE(grepFile.isOutputFileWritten());
     grepFile.processFile(file1ToReadPathHandler.getFullPath(), file2ToReadPathHandler.getFullPath());
     EXPECT_TRUE(grepFile.isOutputFileWritten());

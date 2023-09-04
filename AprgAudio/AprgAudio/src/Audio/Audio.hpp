@@ -55,16 +55,16 @@ public:
 
     // Sets the number of samples per channel in the audio buffer. This will try to preserve
     // the existing audio, adding zeros to new samples in a given channel if the number of samples is increased.
-    void setNumSamplesPerChannel(int numberOfSamples);
+    void setNumSamplesPerChannel(int const numberOfSamples);
 
     // Sets the number of channels. New channels will have the correct number of samples and be initialised to zero
-    void setNumberOfChannels(int numberOfChannels);
+    void setNumberOfChannels(int const numberOfChannels);
 
     // Sets the bit depth for the audio file. If you use the save() function, this bit depth rate will be used
-    void setBitDepth(int numberOfBitsPerSample);
+    void setBitDepth(int const numberOfBitsPerSample);
 
     // Sets the sample rate for the audio file. If you use the save() function, this sample rate will be used
-    void setSampleRate(int newSampleRate);
+    void setSampleRate(int const newSampleRate);
 
     // A vector of vectors holding the audio samples for the Audio. You can
     // access the samples by channel and then by sample index, i.e:
@@ -90,9 +90,9 @@ private:
     int getIndexOfString(std::vector<uint8_t> const& source, std::string const& s);
 
     DataType sixteenBitIntToSample(int16_t sample);
-    int16_t sampleToSixteenBitInt(DataType sample);
+    int16_t sampleToSixteenBitInt(DataType const sample);
 
-    uint8_t sampleToSingleByte(DataType sample);
+    uint8_t sampleToSingleByte(DataType const sample);
     DataType singleByteToSample(uint8_t sample);
 
     int getAiffSampleRate(std::vector<uint8_t>& dataBuffer, int const sampleRateStartIndex);

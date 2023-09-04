@@ -25,10 +25,10 @@ public:
     void saveRetrievedDataForXAndY(
         unsigned int const numberOfIndicators, unsigned int const numberOfSamples, VectorOfDoubles const& retrievedDataForX,
         VectorOfDoubles const& retrievedDataForY);
-    void saveRetrievedDataToModelingDataRandomly(unsigned int numberOfSamples);
-    void saveRetrievedDataToValidationDataRandomly(unsigned int numberOfSamples);
-    void saveRetrievedDataToModelingData(unsigned int numberOfSamples);
-    void saveRetrievedDataToValidationData(unsigned int numberOfSamples);
+    void saveRetrievedDataToModelingDataRandomly(unsigned int const numberOfSamples);
+    void saveRetrievedDataToValidationDataRandomly(unsigned int const numberOfSamples);
+    void saveRetrievedDataToModelingData(unsigned int const numberOfSamples);
+    void saveRetrievedDataToValidationData(unsigned int const numberOfSamples);
     void printRetrievedData();
     void printModelingData();
     void printValidationData();

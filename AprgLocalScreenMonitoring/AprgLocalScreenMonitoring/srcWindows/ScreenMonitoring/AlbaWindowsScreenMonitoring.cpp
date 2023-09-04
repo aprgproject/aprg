@@ -51,7 +51,7 @@ void AlbaWindowsScreenMonitoring::initializeScreenParameters() {
     m_screenHandler = GetDC(NULL);
 }
 
-HBITMAP AlbaWindowsScreenMonitoring::createBitmapHandlerFromScreen(HDC screenHandler) const {
+HBITMAP AlbaWindowsScreenMonitoring::createBitmapHandlerFromScreen(HDC const screenHandler) const {
     // Create compatible DC, create a compatible bitmap and copy the screen using BitBlt()
     HDC memoryHandler = CreateCompatibleDC(screenHandler);
     HBITMAP bitmapHandler = CreateCompatibleBitmap(screenHandler, m_screenWidth, m_screenHeight);

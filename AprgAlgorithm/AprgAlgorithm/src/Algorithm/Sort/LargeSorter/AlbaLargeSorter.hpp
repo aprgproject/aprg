@@ -121,7 +121,7 @@ private:
             });
         return totalMemoryConsumption;
     }
-    void transferMemoryBlocksToFileIfNeeded(int totalMemoryConsumption) {
+    void transferMemoryBlocksToFileIfNeeded(int const totalMemoryConsumption) {
         while (totalMemoryConsumption > m_configuration.m_maximumNumberOfObjectsInMemory) {
             auto blockToSwitchToFileMode(m_memoryCache.popTheEarliestAddedBlock());
             totalMemoryConsumption -= blockToSwitchToFileMode->getNumberOfObjectsInMemory();

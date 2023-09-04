@@ -44,8 +44,8 @@ TEST(AprgGraphTest, DISABLED_BitmapGraph24Bits) {
     graph.drawEquationWithXYSubstitution(equation3, 0x00A100BA);
     graph.drawEquationWithXYSubstitution(equation4, 0x0000BAA1);
 
-    graph.drawFunctionUsingX(0x00AA0033, [](double xValue) -> double { return 5 * sin(xValue / 2); });
-    graph.drawFunctionUsingY(0x003300AA, [](double yValue) -> double { return 5 * sin(yValue / 2); });
+    graph.drawFunctionUsingX(0x00AA0033, [](double const xValue) -> double { return 5 * sin(xValue / 2); });
+    graph.drawFunctionUsingY(0x003300AA, [](double const yValue) -> double { return 5 * sin(yValue / 2); });
     graph.saveChangesToBitmapFile();
 }
 

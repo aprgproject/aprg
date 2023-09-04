@@ -122,7 +122,7 @@ void Audio<DataType>::setAudioBufferSize(int const numberOfChannels, int const n
 }
 
 template <class DataType>
-void Audio<DataType>::setNumSamplesPerChannel(int numberOfSamples) {
+void Audio<DataType>::setNumSamplesPerChannel(int const numberOfSamples) {
     int originalSize = getNumberOfSamplesPerChannel();
 
     for (int i = 0; i < getNumberOfChannels(); ++i) {
@@ -136,7 +136,7 @@ void Audio<DataType>::setNumSamplesPerChannel(int numberOfSamples) {
 }
 
 template <class DataType>
-void Audio<DataType>::setNumberOfChannels(int numberOfChannels) {
+void Audio<DataType>::setNumberOfChannels(int const numberOfChannels) {
     int originalNumberOfChannels = static_cast<int>(getNumberOfChannels());
     int originalNumSamplesPerChannel = static_cast<int>(getNumberOfSamplesPerChannel());
 
@@ -153,12 +153,12 @@ void Audio<DataType>::setNumberOfChannels(int numberOfChannels) {
 }
 
 template <class DataType>
-void Audio<DataType>::setBitDepth(int numberOfBitsPerSample) {
+void Audio<DataType>::setBitDepth(int const numberOfBitsPerSample) {
     bitDepth = numberOfBitsPerSample;
 }
 
 template <class DataType>
-void Audio<DataType>::setSampleRate(int newSampleRate) {
+void Audio<DataType>::setSampleRate(int const newSampleRate) {
     sampleRate = newSampleRate;
 }
 
@@ -718,13 +718,13 @@ DataType Audio<DataType>::sixteenBitIntToSample(int16_t sample) {
 }
 
 template <class DataType>
-int16_t Audio<DataType>::sampleToSixteenBitInt(DataType sample) {
+int16_t Audio<DataType>::sampleToSixteenBitInt(DataType const sample) {
     sample = clamp(sample, -1., 1.);
     return static_cast<int16_t>(sample * 32767.);
 }
 
 template <class DataType>
-uint8_t Audio<DataType>::sampleToSingleByte(DataType sample) {
+uint8_t Audio<DataType>::sampleToSingleByte(DataType const sample) {
     sample = clamp(sample, -1., 1.);
     sample = (sample + 1.) / 2.;
     return static_cast<uint8_t>(sample * 255.);
