@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [50]
-2023-09-04T20:04:30
+StaticAnalysisJobIdentifier: [51]
+2023-09-05T21:29:11
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:16:43: warning: initialization of 'aiffSampleRateTable' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:195:23: warning: function 'decodeWaveFile' has cognitive complexity of 26 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:298:23: warning: function 'decodeAiffFile' has cognitive complexity of 26 (threshold 25) [readability-function-cognitive-complexity]
