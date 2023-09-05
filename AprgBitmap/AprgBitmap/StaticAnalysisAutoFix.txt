@@ -1,8 +1,8 @@
-StaticAnalysisJobIdentifier: [20]
-2023-08-31T00:44:53
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:92:38: warning: narrowing conversion from 'uint64_t' (aka 'unsigned long') to signed type 'std::basic_istream<char>::off_type' (aka 'long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:110:45: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:120:53: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+StaticAnalysisJobIdentifier: [50]
+2023-09-05T11:18:43
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:96:38: warning: narrowing conversion from 'uint64_t' (aka 'unsigned long') to signed type 'std::basic_istream<char>::off_type' (aka 'long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:114:45: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:124:53: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:67:49: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:71:49: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:81:55: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
