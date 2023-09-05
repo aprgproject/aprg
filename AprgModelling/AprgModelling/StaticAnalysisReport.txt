@@ -1,21 +1,5 @@
-StaticAnalysisJobIdentifier: [31]
-2023-09-03T04:11:31
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:38:51: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:69:55: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:78:55: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
+StaticAnalysisJobIdentifier: [50]
+2023-09-05T08:46:53
 /home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:150:49: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:151:55: warning: 0.5 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
 /home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:154:25: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:189:18: warning: variable name 'x' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:190:18: warning: variable name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:242:23: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:243:27: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:248:23: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:249:27: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:273:52: warning: parameter name 'i' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.cpp:273:74: warning: parameter name 'j' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.hpp:48:53: warning: parameter name 'i' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.hpp:48:75: warning: parameter name 'j' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.hpp:48:53: warning: parameter name 'i' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgModelling/AprgModelling/src/AprgModelling/Modeling.hpp:48:75: warning: parameter name 'j' is too short, expected at least 3 characters [readability-identifier-length]
 DONE!
