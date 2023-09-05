@@ -1,6 +1,7 @@
-StaticAnalysisJobIdentifier: [20]
-2023-08-31T07:28:54
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/src/TddLecture.cpp:9:28: warning: 'm_sample' should be initialized in an in-class default member initializer [cppcoreguidelines-prefer-member-initializer]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/src/TddLecture.cpp:9:28: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/src/TddLecture.hpp:22:17: note: FIX-IT applied suggested code changes
+StaticAnalysisJobIdentifier: [50]
+2023-09-05T17:41:24
+/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:9:53: warning: unused variable 'entity' [clang-diagnostic-unused-variable]
+/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:12:16: warning: unused variable 'entity' [clang-diagnostic-unused-variable]
+/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:9:53: warning: unused variable 'entity' [-Wunused-variable]
+/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:12:16: warning: unused variable 'entity' [-Wunused-variable]
 DONE!
