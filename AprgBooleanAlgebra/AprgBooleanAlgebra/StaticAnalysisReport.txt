@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [50]
-2023-09-04T20:42:23
+StaticAnalysisJobIdentifier: [51]
+2023-09-05T22:03:40
 /home/runner/work/aprg/aprg/AprgBooleanAlgebra/AprgBooleanAlgebra/src/BooleanAlgebra/Term/TermTypes/BaseTerm.hpp:7:7: warning: class 'BaseTerm' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/AprgBooleanAlgebra/AprgBooleanAlgebra/src/BooleanAlgebra/Term/TermTypes/BaseTermData.hpp:5:7: warning: class 'BaseTermData' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/AprgBooleanAlgebra/AprgBooleanAlgebra/src/BooleanAlgebra/Constructs/TermsAggregator.cpp:15:34: warning: pass by value and use std::move [modernize-pass-by-value]
