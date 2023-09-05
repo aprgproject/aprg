@@ -108,7 +108,8 @@ bool PalindromePartitioning::isPalindrome(Index const left, Index const right) c
     bool result(false);
     if (!m_string.empty()) {
         result = true;
-        int traverseLeft(left), traverseRight(right);
+        int traverseLeft(left);
+        int traverseRight(right);
         while (traverseLeft < traverseRight) {
             if (m_string[traverseLeft++] != m_string[traverseRight--]) {
                 result = false;

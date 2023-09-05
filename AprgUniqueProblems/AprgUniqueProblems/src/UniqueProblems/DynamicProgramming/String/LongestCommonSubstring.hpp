@@ -16,14 +16,15 @@ public:
 
     LongestCommonSubstring(std::string const& string1, std::string const& string2);
 
-    Count getLongestCommonSubstringLengthUsingNaiveRecursion() const;
-    Count getLongestCommonSubstringLengthUsingMemoizationDP() const;
-    Count getLongestCommonSubstringLengthUsingIterativeDP() const;
-    Count getLongestCommonSubstringLengthUsingIterativeDPAndSpaceEfficient() const;
-    std::string getLongestCommonSubstringUsingIterativeDPAndSpaceEfficient() const;
+    [[nodiscard]] Count getLongestCommonSubstringLengthUsingNaiveRecursion() const;
+    [[nodiscard]] Count getLongestCommonSubstringLengthUsingMemoizationDP() const;
+    [[nodiscard]] Count getLongestCommonSubstringLengthUsingIterativeDP() const;
+    [[nodiscard]] Count getLongestCommonSubstringLengthUsingIterativeDPAndSpaceEfficient() const;
+    [[nodiscard]] std::string getLongestCommonSubstringUsingIterativeDPAndSpaceEfficient() const;
 
 private:
-    Count getLongestCommonSubstringLengthUsingNaiveRecursion(Index const index1, Index const index2) const;
+    [[nodiscard]] Count getLongestCommonSubstringLengthUsingNaiveRecursion(
+        Index const index1, Index const index2) const;
     Count getLongestCommonSubstringLengthUsingMemoizationDP(
         CountGrid& lengthGrid, Index const index1, Index const index2) const;
     std::string m_string1;

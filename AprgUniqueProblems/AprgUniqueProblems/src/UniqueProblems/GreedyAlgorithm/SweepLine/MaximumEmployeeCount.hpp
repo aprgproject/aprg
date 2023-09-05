@@ -17,7 +17,7 @@ public:
         bool operator<(Event const& event) const;
     };
 
-    int getMaximumCountOfEmployeesAtATime() const;
+    [[nodiscard]] int getMaximumCountOfEmployeesAtATime() const;
     void addEmployeeSchedule(int const startTime, int const endTime);  // assumption is every entry is unique
 
 private:

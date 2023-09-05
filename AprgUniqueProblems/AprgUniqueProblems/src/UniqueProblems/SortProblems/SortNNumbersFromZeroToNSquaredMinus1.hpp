@@ -4,9 +4,7 @@
 #include <Common/Bit/AlbaBitValueUtilities.hpp>
 #include <Common/Types/AlbaTypeHelper.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Integers>
 class SortNNumbersFromZeroToNSquaredMinus1 {
@@ -43,9 +41,7 @@ public:
     }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Given an array of numbers of size n.
 // It is also given that the array elements are in range from 0 to n2 – 1.

@@ -22,7 +22,7 @@ public:
     using Events = std::deque<Event>;
     using EventNames = stringHelper::strings;
 
-    EventNames getAsMuchEventsAsPossible() const;
+    [[nodiscard]] EventNames getAsMuchEventsAsPossible() const;
 
     void addEvent(std::string const& eventName, int const startTime, int const endTime);
 

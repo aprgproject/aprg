@@ -2,9 +2,7 @@
 
 #include <Algorithm/Utilities/IndexHelper.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class BinarySearchProblems {
@@ -78,7 +76,8 @@ public:
         // At every iteration we check for search space size, if it is 1, we are done.
 
         auto result(getInvalidIndex<Index>());
-        Index lowerIndex(0), higherIndex(sortedValues.size() - 1);
+        Index lowerIndex(0);
+        Index higherIndex(sortedValues.size() - 1);
         if (sortedValues[lowerIndex] <= sortedValues[higherIndex]) {
             result = lowerIndex;
         } else {
@@ -99,9 +98,10 @@ public:
     }
 
 private:
-    Index getNearestFloorIndex(Values const& sortedValues, Value const& value) const {
+    [[nodiscard]] Index getNearestFloorIndex(Values const& sortedValues, Value const& value) const {
         // Similar to nearest value binary search
-        Index lowerIndex(0), higherIndex(sortedValues.size() - 1);
+        Index lowerIndex(0);
+        Index higherIndex(sortedValues.size() - 1);
         while (lowerIndex + 1 < higherIndex) {
             Index middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
             Value middleValue(sortedValues[middleIndex]);
@@ -114,9 +114,10 @@ private:
         return lowerIndex;
     }
 
-    Index getNearestCielIndex(Values const& sortedValues, Value const& value) const {
+    [[nodiscard]] Index getNearestCielIndex(Values const& sortedValues, Value const& value) const {
         // Similar to nearest value binary search
-        Index lowerIndex(0), higherIndex(sortedValues.size() - 1);
+        Index lowerIndex(0);
+        Index higherIndex(sortedValues.size() - 1);
         while (lowerIndex + 1 < higherIndex) {
             Index middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
             Value middleValue(sortedValues[middleIndex]);
@@ -130,9 +131,7 @@ private:
     }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Questions:
 // 1. A function called signum(x, y) is defined as,

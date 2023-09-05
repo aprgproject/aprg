@@ -18,14 +18,14 @@ public:
 
     explicit PalindromePartitioning(std::string const& stringParameter);
 
-    Count getMinimumNumberOfCutsUsingNaiveRecursion() const;
-    Count getMinimumNumberOfCutsUsingMemoizationDP() const;
-    Count getMinimumNumberOfCutsUsingIterativeDP() const;
-    Count getMinimumNumberOfCutsUsingIterativeDPAndTimeEfficient() const;
+    [[nodiscard]] Count getMinimumNumberOfCutsUsingNaiveRecursion() const;
+    [[nodiscard]] Count getMinimumNumberOfCutsUsingMemoizationDP() const;
+    [[nodiscard]] Count getMinimumNumberOfCutsUsingIterativeDP() const;
+    [[nodiscard]] Count getMinimumNumberOfCutsUsingIterativeDPAndTimeEfficient() const;
 
 private:
-    bool isPalindrome(Index const left, Index const right) const;
-    Count getMinimumNumberOfCutsUsingNaiveRecursion(Index const left, Index const right) const;
+    [[nodiscard]] bool isPalindrome(Index const left, Index const right) const;
+    [[nodiscard]] Count getMinimumNumberOfCutsUsingNaiveRecursion(Index const left, Index const right) const;
     Count getMinimumNumberOfCutsUsingMemoizationDP(CountMatrix& countMatrix, Index const left, Index const right) const;
     std::string m_string;
 };

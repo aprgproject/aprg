@@ -21,8 +21,8 @@ public:
 
     KnightsTour(int const chessBoardX, int const chessBoardY);
 
-    ChessBoardIndexes getAnOpenKnightsTour() const;
-    ChessBoardIndexes getAClosedKnightsTour() const;
+    [[nodiscard]] ChessBoardIndexes getAnOpenKnightsTour() const;
+    [[nodiscard]] ChessBoardIndexes getAClosedKnightsTour() const;
 
 private:
     void initialize();
@@ -30,10 +30,10 @@ private:
     void initializeGraph();
     void connectAllAt(int const x, int const y);
     void connectIfNeeded(int const sourceNeighbors, int const sourceIndex, int const x, int const y);
-    bool isInside(int const x, int const y) const;
-    int getNumberOfNeighbors(int const x, int const y) const;
-    int countNumberOfNeighbors(int const x, int const y) const;
-    int getChessBoardIndex(int const x, int const y) const;
+    [[nodiscard]] bool isInside(int const x, int const y) const;
+    [[nodiscard]] int getNumberOfNeighbors(int const x, int const y) const;
+    [[nodiscard]] int countNumberOfNeighbors(int const x, int const y) const;
+    [[nodiscard]] int getChessBoardIndex(int const x, int const y) const;
     int const m_chessBoardX;
     int const m_chessBoardY;
     algorithm::UndirectedGraphWithListOfEdges<VertexOfKnightsTour> m_graph;

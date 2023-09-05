@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -44,6 +42,4 @@ TEST(FindTheMissingNumberTest, GetTheMissingNumberWorksOnExample2) {
     EXPECT_EQ(5, query.getTheMissingNumberUsingSum(valuesForTest));
     EXPECT_EQ(5, query.getTheMissingNumberUsingXor(valuesForTest));
 }
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

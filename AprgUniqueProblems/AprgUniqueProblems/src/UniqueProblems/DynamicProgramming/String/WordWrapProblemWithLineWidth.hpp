@@ -22,14 +22,15 @@ public:
 
     WordWrapProblemWithLineWidth(Index const lineWidth, stringHelper::strings const& words);
 
-    Cost getOptimizedCostUsingNaiveRecursion() const;
-    Cost getOptimizedCostByTryingAllLengths() const;
-    Cost getOptimizedCostByCheckingFirstAndLastWords() const;
+    [[nodiscard]] Cost getOptimizedCostUsingNaiveRecursion() const;
+    [[nodiscard]] Cost getOptimizedCostByTryingAllLengths() const;
+    [[nodiscard]] Cost getOptimizedCostByCheckingFirstAndLastWords() const;
 
 private:
-    Cost getOptimizedCostUsingNaiveRecursion(RecursionDetails const& recursionDetails, Index const wordIndex) const;
-    Cost getTotalLength() const;
-    Cost getTotalCostOfAllLines(Indices const& lengths) const;
+    [[nodiscard]] Cost getOptimizedCostUsingNaiveRecursion(
+        RecursionDetails const& recursionDetails, Index const wordIndex) const;
+    [[nodiscard]] Cost getTotalLength() const;
+    [[nodiscard]] Cost getTotalCostOfAllLines(Indices const& lengths) const;
     static Cost getCostFromExtraSpaces(Index const numberOfExtraSpaces);
     Index m_maxLineLength;
     stringHelper::strings m_words;

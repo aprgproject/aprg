@@ -14,8 +14,8 @@ public:
 
     explicit LongestEqualLengthSubArraysWithSameSum(Values const& values);
 
-    Index getLongestTotalLengthOfSubArraysUsingPartialSums() const;
-    Index getLongestTotalLengthOfSubArraysByAccumulatingSum() const;
+    [[nodiscard]] Index getLongestTotalLengthOfSubArraysUsingPartialSums() const;
+    [[nodiscard]] Index getLongestTotalLengthOfSubArraysByAccumulatingSum() const;
 
 private:
     Values const m_values;

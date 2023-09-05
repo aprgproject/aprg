@@ -21,12 +21,13 @@ public:
 
     explicit WordWrapProblemWithoutLineWidth(stringHelper::strings const& words);
 
-    Cost getOptimizedCostUsingNaiveRecursion() const;
-    Cost getOptimizedCostByTryingAllLengths() const;
+    [[nodiscard]] Cost getOptimizedCostUsingNaiveRecursion() const;
+    [[nodiscard]] Cost getOptimizedCostByTryingAllLengths() const;
 
 private:
-    Cost getOptimizedCostUsingNaiveRecursion(RecursionDetails const& recursionDetails, Index const wordIndex) const;
-    Cost getTotalLength() const;
+    [[nodiscard]] Cost getOptimizedCostUsingNaiveRecursion(
+        RecursionDetails const& recursionDetails, Index const wordIndex) const;
+    [[nodiscard]] Cost getTotalLength() const;
     static Cost getCost(Index const maxLength, Indices const& lengths);
     static Cost getCostFromExtraSpaces(Index const numberOfExtraSpaces);
     stringHelper::strings m_words;

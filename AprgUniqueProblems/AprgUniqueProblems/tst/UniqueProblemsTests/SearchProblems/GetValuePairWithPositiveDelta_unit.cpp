@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -38,6 +36,4 @@ TEST(GetValuePairWithPositiveDeltaTest, GetPossibleDuplicatedTwoValuesWithSumWit
     EXPECT_EQ(pairToExpect, query.getValuePairWithPositiveDelta(8));
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

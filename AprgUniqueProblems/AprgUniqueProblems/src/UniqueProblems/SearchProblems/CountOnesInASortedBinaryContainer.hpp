@@ -1,8 +1,6 @@
 #pragma once
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class CountOnesInASortedBinaryContainer {
@@ -16,7 +14,8 @@ public:
     Count getNumberOfOnesInASortedBinaryContainer(Values const& sortedBinaryValues) {
         Count result(0);
         if (!sortedBinaryValues.empty()) {
-            Index lowerIndex(0), higherIndex(sortedBinaryValues.size() - 1);
+            Index lowerIndex(0);
+            Index higherIndex(sortedBinaryValues.size() - 1);
             while (lowerIndex < higherIndex) {
                 Index middleIndex = (lowerIndex + higherIndex) / 2;
                 if (sortedBinaryValues[middleIndex]) {
@@ -53,9 +52,7 @@ public:
     //    }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Given a binary array sorted in non-increasing order, count the number of 1’s in it.
 

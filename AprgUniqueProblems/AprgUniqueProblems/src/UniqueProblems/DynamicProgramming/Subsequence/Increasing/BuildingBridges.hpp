@@ -15,8 +15,8 @@ public:
 
     explicit BuildingBridges(Bridges const& bridges);
 
-    Index getNumberOfPossibleBridges() const;
-    Bridges getPossibleBridges() const;
+    [[nodiscard]] Index getNumberOfPossibleBridges() const;
+    [[nodiscard]] Bridges getPossibleBridges() const;
 
 private:
     Bridges m_bridges;

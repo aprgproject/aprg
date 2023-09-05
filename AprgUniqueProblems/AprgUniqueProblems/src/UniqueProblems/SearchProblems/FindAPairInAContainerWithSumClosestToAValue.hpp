@@ -5,9 +5,7 @@
 #include <limits>
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class FindAPairInAContainerWithSumClosestToAValue {
@@ -22,20 +20,21 @@ public:
 
     explicit FindAPairInAContainerWithSumClosestToAValue(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
-    ValuePair getValuePairWithSumClosestToAValue(Value const& targetSum) const {
+    [[nodiscard]] ValuePair getValuePairWithSumClosestToAValue(Value const& targetSum) const {
         // std::less_equal because index can be equal
         return getValuePairWithSumClosestToAValue(targetSum, 0, m_sortedValues.size() - 1);
     }
 
 private:
-    ValuePair getValuePairWithSumClosestToAValue(
+    [[nodiscard]] ValuePair getValuePairWithSumClosestToAValue(
         Value const& targetSum, Index const lowestIndex, Index const highestIndex) const {
         ValuePair result{};
         if (!m_sortedValues.empty()) {
             // similar to TwoSum
 
             Value minimumDeviation(std::numeric_limits<Value>::max());
-            Index lowerIndex = lowestIndex, higherIndex = highestIndex;
+            Index lowerIndex = lowestIndex;
+            Index higherIndex = highestIndex;
             while (lowerIndex < higherIndex) {
                 Value currentSum(m_sortedValues[lowerIndex] + m_sortedValues[higherIndex]);
                 Value currentDeviation(mathHelper::getPositiveDelta(currentSum, targetSum));
@@ -59,9 +58,7 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Given a sorted array and a number x, find a pair in array whose sum is closest to x.
 

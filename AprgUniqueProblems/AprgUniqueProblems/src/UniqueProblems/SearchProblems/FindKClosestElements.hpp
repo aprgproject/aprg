@@ -3,9 +3,7 @@
 #include <Algorithm/Search/NearestValue/BinarySearch/BinaryNearestValueSearchWithTwoIndices.hpp>
 #include <Algorithm/Utilities/IndexHelper.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class FindKClosestElements {
@@ -24,7 +22,8 @@ public:
         Index nearestIndex(binarySearch.getIndexOfNearestValue(valueToCheck));
         if (nearestIndex != INVALID_INDEX) {
             Index count(1);
-            Index low(nearestIndex), high(nearestIndex);
+            Index low(nearestIndex);
+            Index high(nearestIndex);
             while (count < numberOfClosestElements && low > 0 && high + 1 < static_cast<Index>(m_values.size())) {
                 if (valueToCheck - m_values[low] <= m_values[high] - valueToCheck) {
                     --low;
@@ -50,9 +49,7 @@ private:
     Values const& m_values;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Given a sorted array arr[] and a value X, find the k closest elements to X in arr[].
 // Examples:

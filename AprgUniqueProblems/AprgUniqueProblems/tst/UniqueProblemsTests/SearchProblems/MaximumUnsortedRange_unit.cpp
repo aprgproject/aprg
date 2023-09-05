@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValueForTest = int;
@@ -46,6 +44,4 @@ TEST(MaximumUnsortedRangeTest, GetMaximumUnsortedRangeWorksOnExample2) {
     EXPECT_EQ(expectedIndexPair, query.getMaximumUnsortedRange(valuesForTest));
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

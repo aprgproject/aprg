@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValueForTest = int;
@@ -64,6 +62,4 @@ TEST(FindCommonElementsInThreeSortedContainersTest, GetValuePairThatIsClosestToS
     EXPECT_EQ(expectedValues1, query.getCommonElements(values1, values2, values3));
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

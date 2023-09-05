@@ -6,9 +6,7 @@
 #include <functional>
 #include <numeric>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class FindTheMissingNumber {
@@ -47,9 +45,7 @@ public:
     }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Find the Missing Number
 

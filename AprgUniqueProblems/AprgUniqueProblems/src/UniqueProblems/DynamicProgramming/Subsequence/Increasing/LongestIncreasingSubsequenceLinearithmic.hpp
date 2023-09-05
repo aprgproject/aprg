@@ -16,8 +16,8 @@ public:
 
     explicit LongestIncreasingSubsequenceLinearithmic(Values const& sequence);
 
-    Index getLongestLength() const;
-    Values getLongestSubsequence() const;
+    [[nodiscard]] Index getLongestLength() const;
+    [[nodiscard]] Values getLongestSubsequence() const;
 
 private:
     Values m_sequence;

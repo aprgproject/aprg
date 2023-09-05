@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -46,6 +44,4 @@ TEST(FindAPairInAContainerWithSumClosestToAValueTest, GetValuePairWithSumClosest
     EXPECT_EQ(expectedValuePair, query.getValuePairWithSumClosestToAValue(54));
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

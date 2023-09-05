@@ -17,7 +17,7 @@ public:
         bool operator<(Event const& event) const;
     };
 
-    int getMinimumNumberOfPlatforms() const;
+    [[nodiscard]] int getMinimumNumberOfPlatforms() const;
     void addTrainSchedule(int const startTime, int const endTime);  // assumption is every entry is unique
 
 private:

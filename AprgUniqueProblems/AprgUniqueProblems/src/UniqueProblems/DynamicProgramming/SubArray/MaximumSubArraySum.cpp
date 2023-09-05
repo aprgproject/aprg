@@ -13,7 +13,8 @@ MaximumSubArraySum::Value MaximumSubArraySum::getMaximumSubArraySum() const {
     // Time Complexity: O(n)
     // Auxiliary Space: O(1)
 
-    Value currentSum(0), bestSum(MIN_VALUE);
+    Value currentSum(0);
+    Value bestSum(MIN_VALUE);
     for (Value const& value : m_values) {
         currentSum = max(value, currentSum + value);
         bestSum = max(bestSum, currentSum);
@@ -22,7 +23,8 @@ MaximumSubArraySum::Value MaximumSubArraySum::getMaximumSubArraySum() const {
 }
 
 MaximumSubArraySum::SubArrayDetails MaximumSubArraySum::getMaximumSubArraySumWithDetails() const {
-    SubArrayDetails currentSubArray{}, bestSubArray{0, 0, MIN_VALUE};
+    SubArrayDetails currentSubArray{};
+    SubArrayDetails bestSubArray{0, 0, MIN_VALUE};
     int index(0);
     for (Value const& value : m_values) {
         if (value > currentSubArray.sum + value) {

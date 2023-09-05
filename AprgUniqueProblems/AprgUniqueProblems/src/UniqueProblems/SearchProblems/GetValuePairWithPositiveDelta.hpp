@@ -2,9 +2,7 @@
 
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class GetValuePairWithPositiveDelta {
@@ -19,10 +17,11 @@ public:
 
     explicit GetValuePairWithPositiveDelta(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
-    ValuePair getValuePairWithPositiveDelta(Value const& targetPositiveDelta) const {
+    [[nodiscard]] ValuePair getValuePairWithPositiveDelta(Value const& targetPositiveDelta) const {
         ValuePair result{};
         if (!m_sortedValues.empty()) {
-            Index lowerIndex(0), higherIndex(1);
+            Index lowerIndex(0);
+            Index higherIndex(1);
             while (lowerIndex < higherIndex && higherIndex < static_cast<Index>(m_sortedValues.size())) {
                 Value currentPositiveDelta = m_sortedValues[higherIndex] - m_sortedValues[lowerIndex];
                 if (currentPositiveDelta == targetPositiveDelta) {
@@ -43,6 +42,4 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

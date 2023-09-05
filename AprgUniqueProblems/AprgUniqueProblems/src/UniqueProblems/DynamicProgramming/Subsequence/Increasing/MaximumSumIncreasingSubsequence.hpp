@@ -17,8 +17,8 @@ public:
 
     explicit MaximumSumIncreasingSubsequence(Values const& sequence);
 
-    Value getMaximumSum() const;
-    Values getSubsequenceWithMaximumSum() const;
+    [[nodiscard]] Value getMaximumSum() const;
+    [[nodiscard]] Values getSubsequenceWithMaximumSum() const;
 
 private:
     Values m_sequence;

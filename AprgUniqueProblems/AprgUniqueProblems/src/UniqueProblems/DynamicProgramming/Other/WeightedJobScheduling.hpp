@@ -23,8 +23,8 @@ public:
 
     explicit WeightedJobScheduling(Jobs const& jobs);
 
-    Profit getMaxProfitByMonitoringTimeStampsUsingIterativeDP() const;
-    Profit getMaxProfitByMonitoringJobsUsingIterativeDP() const;
+    [[nodiscard]] Profit getMaxProfitByMonitoringTimeStampsUsingIterativeDP() const;
+    [[nodiscard]] Profit getMaxProfitByMonitoringJobsUsingIterativeDP() const;
 
 private:
     Jobs m_jobs;

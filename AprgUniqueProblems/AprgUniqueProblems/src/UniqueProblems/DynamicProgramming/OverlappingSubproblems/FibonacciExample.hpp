@@ -15,7 +15,7 @@ public:
     using NumberMatrix = matrix::AlbaMatrix<Number>;
     static constexpr Number UNUSED_VALUE = std::numeric_limits<Number>::max();
 
-    Number getNthFibonacciUsingNaiveRecursion(Number const number) const;
+    [[nodiscard]] Number getNthFibonacciUsingNaiveRecursion(Number const number) const;
     Number getNthFibonacciUsingMemoizationDP(Number const number);
     static Number getNthFibonacciUsingIterativeDP(Number const number);
     static Number getNthFibonacciUsingIterativeDPAndSpaceEfficient(Number const number);

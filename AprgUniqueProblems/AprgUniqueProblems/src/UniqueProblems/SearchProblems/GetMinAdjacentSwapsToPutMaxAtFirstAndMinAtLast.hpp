@@ -1,8 +1,6 @@
 #pragma once
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class GetMinAdjacentSwapsToPutMaxAtFirstAndMinAtLast {
@@ -17,8 +15,10 @@ public:
         Count result(0);
         Index size = values.size();
         if (size > 1) {
-            Index firstMaxIndex = 0, lastMinIndex = 0;
-            Value minimum(values.front()), maximum(values.front());
+            Index firstMaxIndex = 0;
+            Index lastMinIndex = 0;
+            Value minimum(values.front());
+            Value maximum(values.front());
             int i = 0;
             for (Value const& value : values) {
                 if (maximum < value) {
@@ -40,9 +40,7 @@ public:
     }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Given N number of elements, find the minimum number of swaps required so that the maximum element
 // is at the beginning and the minimum element is at last with the condition that only swapping of adjacent elements is

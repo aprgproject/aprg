@@ -17,15 +17,15 @@ public:
 
     explicit LongestPalindromicSubstring(std::string const& stringParameter);
 
-    Index getLongestLengthUsingNaiveRecursion() const;
-    Index getLongestLengthUsingMemoizationDP() const;
-    Index getLongestLengthUsingIterativeDP() const;
-    Index getLongestLengthUsingIterativeDPAndSpaceEfficient() const;
+    [[nodiscard]] Index getLongestLengthUsingNaiveRecursion() const;
+    [[nodiscard]] Index getLongestLengthUsingMemoizationDP() const;
+    [[nodiscard]] Index getLongestLengthUsingIterativeDP() const;
+    [[nodiscard]] Index getLongestLengthUsingIterativeDPAndSpaceEfficient() const;
 
-    std::string getLongestStringUsingIterativeDPAndSpaceEfficient() const;
+    [[nodiscard]] std::string getLongestStringUsingIterativeDPAndSpaceEfficient() const;
 
 private:
-    Index getLongestLengthUsingNaiveRecursion(Index const left, Index const right) const;
+    [[nodiscard]] Index getLongestLengthUsingNaiveRecursion(Index const left, Index const right) const;
     Index getLongestLengthUsingMemoizationDP(IndexMatrix& lengthMatrix, Index const left, Index const right) const;
     std::string m_string;
 };

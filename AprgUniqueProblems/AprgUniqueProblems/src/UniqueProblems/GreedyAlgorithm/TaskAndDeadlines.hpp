@@ -22,7 +22,7 @@ public:
     using Tasks = std::deque<Task>;
     using TaskNames = stringHelper::strings;
 
-    TaskNames getTasksOrderWithMaximumScore() const;
+    [[nodiscard]] TaskNames getTasksOrderWithMaximumScore() const;
 
     void addTask(std::string const& taskName, int const duration, int const deadline);
 

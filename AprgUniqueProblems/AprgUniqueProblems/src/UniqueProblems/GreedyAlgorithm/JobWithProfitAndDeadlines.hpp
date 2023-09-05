@@ -18,12 +18,12 @@ public:
     using Jobs = std::deque<Job>;
     using JobNames = stringHelper::strings;
 
-    JobNames getJobsOrderWithMaximumProfit() const;
+    [[nodiscard]] JobNames getJobsOrderWithMaximumProfit() const;
 
     void addJob(std::string const& jobName, int const profit, int const deadline);
 
 private:
-    int getMaximumDeadline() const;
+    [[nodiscard]] int getMaximumDeadline() const;
     Jobs m_jobs;
 };
 

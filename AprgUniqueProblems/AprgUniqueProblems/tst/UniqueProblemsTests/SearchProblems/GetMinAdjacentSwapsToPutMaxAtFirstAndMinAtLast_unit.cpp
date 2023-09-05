@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -41,6 +39,4 @@ TEST(GetMinAdjacentSwapsToPutMaxAtFirstAndMinAtLastTest, WorksOnExample2) {
     EXPECT_EQ(2, query.getMinAdjacentSwaps(valuesForTest));
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

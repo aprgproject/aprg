@@ -52,7 +52,8 @@ BuildingBridges::Bridges BuildingBridges::getPossibleBridges() const {
         lengthMinus1ToEndValue[0] = secondPoints.front();
         for (Index i = 1; i < static_cast<Index>(secondPoints.size()); ++i) {
             Value const& value(secondPoints[i]);
-            auto beginIt = lengthMinus1ToEndValue.begin(), endIt = lengthMinus1ToEndValue.begin() + longestLength;
+            auto beginIt = lengthMinus1ToEndValue.begin();
+            auto endIt = lengthMinus1ToEndValue.begin() + longestLength;
             auto lowerBoundItForEndValue = lower_bound(beginIt, endIt, value);
 
             if (lowerBoundItForEndValue == endIt) {

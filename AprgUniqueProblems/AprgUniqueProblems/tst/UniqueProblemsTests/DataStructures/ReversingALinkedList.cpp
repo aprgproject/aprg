@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace ReversingALinkedList {
+namespace alba::ReversingALinkedList {
 
 TEST(ReversingALinkedListTest, ThreeNodes) {
     std::unique_ptr<Node> node1(new Node{1, nullptr});
@@ -60,6 +58,4 @@ TEST(ReversingALinkedListTest, SevenNodes) {
     EXPECT_FALSE(result);
 }
 
-}  // namespace ReversingALinkedList
-
-}  // namespace alba
+}  // namespace alba::ReversingALinkedList

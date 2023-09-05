@@ -19,13 +19,13 @@ public:
 
     ShortestCommonSupersequence(Values const& sequence1, Values const& sequence2);
 
-    Count getShortestLengthUsingNaiveRecursion() const;
-    Count getShortestLengthUsingMemoizationDP() const;
-    Count getShortestLengthUsingIterativeDP() const;
-    Count getShortestLengthUsingIterativeDPAndSpaceEfficient() const;
+    [[nodiscard]] Count getShortestLengthUsingNaiveRecursion() const;
+    [[nodiscard]] Count getShortestLengthUsingMemoizationDP() const;
+    [[nodiscard]] Count getShortestLengthUsingIterativeDP() const;
+    [[nodiscard]] Count getShortestLengthUsingIterativeDPAndSpaceEfficient() const;
 
 private:
-    Count getShortestLengthUsingNaiveRecursion(Index const index1, Index const index2) const;
+    [[nodiscard]] Count getShortestLengthUsingNaiveRecursion(Index const index1, Index const index2) const;
     Count getShortestLengthUsingMemoizationDP(CountMatrix& lengthMatrix, Index const index1, Index const index2) const;
     Values m_sequence1;
     Values m_sequence2;

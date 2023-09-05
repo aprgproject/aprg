@@ -1,8 +1,6 @@
 #pragma once
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class FindCommonElementsInThreeSortedContainers {
@@ -33,9 +31,7 @@ public:
     }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Given three arrays sorted in non-decreasing order, print all common elements in these arrays.
 // We are given two arrays ar1[0…m-1] and ar2[0..n-1] and a number x,

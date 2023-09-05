@@ -4,9 +4,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value>
 class FindSmallestValueWithTrue {
@@ -31,7 +29,7 @@ public:
 
     explicit FindSmallestValueWithTrue(BoolFunction const& boolFunction) : m_boolFunction(boolFunction) {}
 
-    Value getSmallestValueWithTrue(Value const& startValue, Value const& endValue) const {
+    [[nodiscard]] Value getSmallestValueWithTrue(Value const& startValue, Value const& endValue) const {
         // Binary search with skip
 
         Value result{};
@@ -58,9 +56,7 @@ private:
     BoolFunction const m_boolFunction;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // An alternative method to implement binary search is based on an efficient way to iterate through the elements of the
 // array. The idea is to make jumps and slow the speed when we get closer to the target element.

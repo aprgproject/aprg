@@ -2,9 +2,7 @@
 
 #include <Algorithm/Utilities/IndexHelper.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class SearchUnsortedElementOnAlmostSortedContainer {
@@ -15,7 +13,7 @@ public:
 
     explicit SearchUnsortedElementOnAlmostSortedContainer(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
-    Index getIndexOfValue(Value const& value) const {
+    [[nodiscard]] Index getIndexOfValue(Value const& value) const {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
             result = getIndexOfValueWithoutCheck(0, m_sortedValues.size() - 1, value);
@@ -23,7 +21,7 @@ public:
         return result;
     }
 
-    Index getIndexOfValue(Index const lowerIndex, Index const higherIndex, Value const& value) const {
+    [[nodiscard]] Index getIndexOfValue(Index const lowerIndex, Index const higherIndex, Value const& value) const {
         Index result(INVALID_INDEX);
         if (lowerIndex < static_cast<Index>(m_sortedValues.size()) &&
             higherIndex < static_cast<Index>(m_sortedValues.size()) && lowerIndex <= higherIndex) {
@@ -33,7 +31,8 @@ public:
     }
 
 private:
-    Index getIndexOfValueWithoutCheck(Index const lowerIndex, Index const higherIndex, Value const& value) const {
+    [[nodiscard]] Index getIndexOfValueWithoutCheck(
+        Index const lowerIndex, Index const higherIndex, Value const& value) const {
         Index result(INVALID_INDEX);
         if (lowerIndex <= higherIndex) {
             Index middleIndex = (lowerIndex + higherIndex) / 2;
@@ -56,9 +55,7 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Given an array which is sorted, but after sorting some elements are moved to either of the adjacent positions,
 // i.e., arr[i] may be present at arr[i+1] or arr[i-1].

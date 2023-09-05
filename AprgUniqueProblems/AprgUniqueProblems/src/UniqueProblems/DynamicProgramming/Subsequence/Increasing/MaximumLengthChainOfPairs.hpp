@@ -14,8 +14,8 @@ public:
 
     explicit MaximumLengthChainOfPairs(Pairs const& sequence);
 
-    Index getLongestLength() const;
-    Pairs getLongestSubsequence() const;
+    [[nodiscard]] Index getLongestLength() const;
+    [[nodiscard]] Pairs getLongestSubsequence() const;
 
 private:
     Pairs m_sequence;

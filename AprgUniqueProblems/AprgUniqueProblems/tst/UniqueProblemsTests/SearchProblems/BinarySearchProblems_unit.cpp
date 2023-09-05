@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValueForTest = int;
@@ -42,6 +40,4 @@ TEST(BinarySearchProblemsTest, GetPositionOfRotationWorks) {
     EXPECT_EQ(5, query.getPositionOfRotation(valuesForTest));
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

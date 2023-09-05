@@ -13,7 +13,7 @@ public:
 
     DeBruijnSequences(int const substringSize, std::string const& alphabet);
 
-    std::string getDeBruijnString() const;
+    [[nodiscard]] std::string getDeBruijnString() const;
 
 private:
     void initialize();

@@ -4,9 +4,7 @@
 
 #include <limits>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class FindThePairWithClosestToSum {
@@ -40,9 +38,7 @@ public:
     }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Given two sorted arrays and a number x, find the pair whose sum is closest to x and the pair has an element from each
 // array. We are given two arrays ar1[0…m-1] and ar2[0..n-1] and a number x, we need to find the pair ar1[i] + ar2[j]

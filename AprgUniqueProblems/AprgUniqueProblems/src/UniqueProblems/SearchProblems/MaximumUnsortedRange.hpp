@@ -5,9 +5,7 @@
 #include <algorithm>
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class MaximumUnsortedRange {
@@ -20,7 +18,7 @@ public:
 
     MaximumUnsortedRange() = default;
 
-    IndexPair getMaximumUnsortedRange(Values const& valuesToSort) const {
+    [[nodiscard]] IndexPair getMaximumUnsortedRange(Values const& valuesToSort) const {
         IndexPair result{INVALID_INDEX, INVALID_INDEX};
         if (!valuesToSort.empty()) {
             Index startIndex(getStartIndex(valuesToSort));
@@ -36,7 +34,7 @@ public:
     }
 
 private:
-    Index getStartIndex(Values const& valuesToSort) const {
+    [[nodiscard]] Index getStartIndex(Values const& valuesToSort) const {
         Index startIndex(0);
         for (; startIndex + 1 < static_cast<Index>(valuesToSort.size()); ++startIndex) {
             if (valuesToSort[startIndex] > valuesToSort[startIndex + 1]) {
@@ -46,7 +44,7 @@ private:
         return startIndex;
     }
 
-    Index getEndIndex(Values const& valuesToSort) const {
+    [[nodiscard]] Index getEndIndex(Values const& valuesToSort) const {
         int endIndex = valuesToSort.size() - 1;
         for (; endIndex > 0; --endIndex) {
             if (valuesToSort[endIndex] < valuesToSort[endIndex - 1]) {
@@ -56,13 +54,15 @@ private:
         return static_cast<Index>(endIndex);
     }
 
-    ValuePair getMinMaxPairInUnsorted(Values const& valuesToSort, Index const startIndex, Index const endIndex) const {
+    [[nodiscard]] ValuePair getMinMaxPairInUnsorted(
+        Values const& valuesToSort, Index const startIndex, Index const endIndex) const {
         auto&& [minIt, maxIt] =
             std::minmax_element(valuesToSort.cbegin() + startIndex, valuesToSort.cbegin() + endIndex + 1);
         return ValuePair(*minIt, *maxIt);
     }
 
-    Index getAdjustedStartIndex(Values const& valuesToSort, Index const startIndex, Value const& minimum) const {
+    [[nodiscard]] Index getAdjustedStartIndex(
+        Values const& valuesToSort, Index const startIndex, Value const& minimum) const {
         int adjustedStartIndex = static_cast<int>(startIndex);
         while (adjustedStartIndex - 1 > 0 && minimum < valuesToSort[adjustedStartIndex - 1]) {
             --adjustedStartIndex;
@@ -70,7 +70,8 @@ private:
         return static_cast<Index>(adjustedStartIndex);
     }
 
-    Index getAdjustedEndIndex(Values const& valuesToSort, Index const endIndex, Value const& maximum) const {
+    [[nodiscard]] Index getAdjustedEndIndex(
+        Values const& valuesToSort, Index const endIndex, Value const& maximum) const {
         Index adjustedEndIndex(endIndex);
         while (adjustedEndIndex + 1 < static_cast<Index>(valuesToSort.size()) &&
                valuesToSort[adjustedEndIndex + 1] < maximum) {
@@ -80,9 +81,7 @@ private:
     }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Find the Minimum length Unsorted Subarray, sorting which makes the complete array sorted
 // Given an unsorted array arr[0..n-1] of size n,

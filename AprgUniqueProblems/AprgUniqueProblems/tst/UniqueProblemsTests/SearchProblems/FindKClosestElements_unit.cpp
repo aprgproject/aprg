@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValueForTest = int;
@@ -38,6 +36,4 @@ TEST(FindKClosestElementsTest, GetIndexPairClosestElementsWorksOnExample1) {
     EXPECT_EQ(expectedIndexPair, query.getIndexPairClosestElements(4, 35));
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace InvertingABinaryTree {
+namespace alba::InvertingABinaryTree {
 
 TEST(InvertingABinaryTreeTest, ThreeNodes) {
     std::unique_ptr<Node> node1(new Node{1, nullptr, nullptr});
@@ -52,6 +50,4 @@ TEST(InvertingABinaryTreeTest, SevenNodes) {
     EXPECT_EQ(1, result->rightPointer->rightPointer->value);
 }
 
-}  // namespace InvertingABinaryTree
-
-}  // namespace alba
+}  // namespace alba::InvertingABinaryTree

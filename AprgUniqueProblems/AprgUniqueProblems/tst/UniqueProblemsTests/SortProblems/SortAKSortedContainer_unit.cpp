@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Integers = vector<int>;
@@ -52,6 +50,4 @@ TEST(SortAKSortedContainerTest, SortWorksOnIntegersUsingExample2) {
     EXPECT_EQ(valuesToExpect, valuesToTest);
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

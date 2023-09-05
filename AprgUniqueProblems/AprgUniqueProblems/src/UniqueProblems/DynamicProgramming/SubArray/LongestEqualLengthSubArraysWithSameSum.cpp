@@ -46,7 +46,8 @@ LongestEqualLengthSubArraysWithSameSum::getLongestTotalLengthOfSubArraysByAccumu
     for (Index startOfSubArray2 = 1; startOfSubArray2 < static_cast<Index>(m_values.size()); ++startOfSubArray2) {
         Index endOfSubArray1 = startOfSubArray2 - 1;
         Index subArrayLength = 0;
-        Value sum1(0), sum2(0);
+        Value sum1(0);
+        Value sum2(0);
         while (endOfSubArray1 >= subArrayLength &&
                startOfSubArray2 + subArrayLength < static_cast<Index>(m_values.size())) {
             sum1 += m_values[endOfSubArray1 - subArrayLength];

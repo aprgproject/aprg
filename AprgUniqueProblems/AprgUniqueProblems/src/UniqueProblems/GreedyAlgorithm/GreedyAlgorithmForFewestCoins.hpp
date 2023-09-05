@@ -12,7 +12,7 @@ public:
 
     explicit GreedyAlgorithmForFewestCoins(Coins const& availableCoins);
 
-    int getFewestNumberOfCoins(Value const value) const;
+    [[nodiscard]] int getFewestNumberOfCoins(Value const value) const;
 
 private:
     void initialize();

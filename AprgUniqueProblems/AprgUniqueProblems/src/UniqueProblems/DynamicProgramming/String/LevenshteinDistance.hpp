@@ -16,13 +16,13 @@ public:
 
     LevenshteinDistance(std::string const& string1, std::string const& string2);
 
-    Count getLevenshteinDistanceUsingNaiveRecursion() const;
-    Count getLevenshteinDistanceUsingMemoizationDP() const;
-    Count getLevenshteinDistanceUsingIterativeDP() const;
-    Count getLevenshteinDistanceUsingIterativeDPAndSpaceEfficient() const;
+    [[nodiscard]] Count getLevenshteinDistanceUsingNaiveRecursion() const;
+    [[nodiscard]] Count getLevenshteinDistanceUsingMemoizationDP() const;
+    [[nodiscard]] Count getLevenshteinDistanceUsingIterativeDP() const;
+    [[nodiscard]] Count getLevenshteinDistanceUsingIterativeDPAndSpaceEfficient() const;
 
 private:
-    Count getLevenshteinDistanceUsingNaiveRecursion(Index const index1, Index const index2) const;
+    [[nodiscard]] Count getLevenshteinDistanceUsingNaiveRecursion(Index const index1, Index const index2) const;
     Count getLevenshteinDistanceUsingMemoizationDP(
         CountGrid& distanceGrid, Index const index1, Index const index2) const;
     std::string m_string1;

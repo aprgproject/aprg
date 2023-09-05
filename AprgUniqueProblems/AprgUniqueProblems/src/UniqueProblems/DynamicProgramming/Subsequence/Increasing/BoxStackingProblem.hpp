@@ -18,11 +18,11 @@ public:
 
     explicit BoxStackingProblem(Boxes const& boxes);
 
-    Index getMaximumStackedHeight() const;
-    Boxes getBoxesWithMaximumStackedHeight() const;
+    [[nodiscard]] Index getMaximumStackedHeight() const;
+    [[nodiscard]] Boxes getBoxesWithMaximumStackedHeight() const;
 
 private:
-    Boxes getAllPossibleBoxes() const;
+    [[nodiscard]] Boxes getAllPossibleBoxes() const;
     Boxes m_boxes;
 };
 

@@ -2,9 +2,7 @@
 
 #include <queue>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class SortAKSortedContainer {
@@ -37,9 +35,7 @@ public:
     }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Sort a nearly sorted (or K sorted) array:
 // -> Given an array of n elements, where each element is at most k away from its target position, devise an algorithm

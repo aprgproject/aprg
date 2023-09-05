@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValueForTest = int;
@@ -25,6 +23,4 @@ TEST(FindSmallestValueWithTrueTest, GetNearestValueWorksWhenThereAreMultipleValu
     EXPECT_EQ(111, binarySearch.getSmallestValueWithTrue(45, 500));
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

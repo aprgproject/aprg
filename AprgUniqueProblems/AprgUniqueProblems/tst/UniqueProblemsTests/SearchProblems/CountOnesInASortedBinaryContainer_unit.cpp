@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<bool>;
@@ -48,6 +46,4 @@ TEST(CountOnesInASortedBinaryContainerTest, GetNumberOfOnesInASortedBinaryContai
     EXPECT_EQ(4, query.getNumberOfOnesInASortedBinaryContainer(valuesForTest));
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

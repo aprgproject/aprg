@@ -19,13 +19,13 @@ public:
 
     LongestCommonSubsequence(Values const& sequence1, Values const& sequence2);
 
-    Count getLongestLengthUsingNaiveRecursion() const;
-    Count getLongestLengthUsingMemoizationDP() const;
-    Count getLongestLengthUsingIterativeDP() const;
-    Count getLongestLengthUsingIterativeDPAndSpaceEfficient() const;
+    [[nodiscard]] Count getLongestLengthUsingNaiveRecursion() const;
+    [[nodiscard]] Count getLongestLengthUsingMemoizationDP() const;
+    [[nodiscard]] Count getLongestLengthUsingIterativeDP() const;
+    [[nodiscard]] Count getLongestLengthUsingIterativeDPAndSpaceEfficient() const;
 
 private:
-    Count getLongestLengthUsingNaiveRecursion(Index const index1, Index const index2) const;
+    [[nodiscard]] Count getLongestLengthUsingNaiveRecursion(Index const index1, Index const index2) const;
     Count getLongestLengthUsingMemoizationDP(CountMatrix& lengthMatrix, Index const index1, Index const index2) const;
     Values m_sequence1;
     Values m_sequence2;

@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace BitManipulation {
+namespace alba::BitManipulation {
 
 TEST(BitManipulationUniqueProblemsTest, ChangeKthBitToOneWorks) {
     EXPECT_EQ(2U, changeKthBitToOne(0, 1));
@@ -56,6 +54,4 @@ TEST(BitManipulationUniqueProblemsTest, InvertAllBitsAfterTheLastOneWorks) {
     EXPECT_EQ(7U, invertAllBitsAfterTheLastOne(4));
 }
 
-}  // namespace BitManipulation
-
-}  // namespace alba
+}  // namespace alba::BitManipulation

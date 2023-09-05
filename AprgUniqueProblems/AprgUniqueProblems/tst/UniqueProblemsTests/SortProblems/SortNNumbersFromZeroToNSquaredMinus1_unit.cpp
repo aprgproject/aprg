@@ -7,9 +7,7 @@
 using namespace alba::algorithm::CommonTestsWithSorter;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Characters = vector<char>;
@@ -44,6 +42,4 @@ TEST(SortNNumbersFromZeroToNSquaredMinus1Test, SortWorksOnCharactersUsingExample
 // CANNOT SORT STRINGS
 // CANNOT SORT STABILITY OBJECTS
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

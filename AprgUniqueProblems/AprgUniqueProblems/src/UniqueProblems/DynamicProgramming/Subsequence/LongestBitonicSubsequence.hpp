@@ -14,8 +14,8 @@ public:
 
     explicit LongestBitonicSubsequence(Values const& sequence);
 
-    Index getLongestLength() const;
-    Values getLongestSubsequence() const;
+    [[nodiscard]] Index getLongestLength() const;
+    [[nodiscard]] Values getLongestSubsequence() const;
 
 private:
     void computeIncreasingPartialLengths(IndexToIndex& increasingPartialLengths) const;
