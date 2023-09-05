@@ -6,7 +6,7 @@ class MessageContentChecker {
 public:
     MessageContentChecker() = default;
 
-    int getSample() const;
+    [[nodiscard]] int getSample() const;
 
 private:
     int m_sample{0};
