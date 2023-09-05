@@ -74,7 +74,7 @@ public:
     // ...
 
 private:
-    int m_subjectState;
+    int m_subjectState{};
     // ...
 };
 
