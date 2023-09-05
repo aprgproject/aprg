@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [50]
-2023-09-05T06:49:55
+StaticAnalysisJobIdentifier: [51]
+2023-09-05T23:10:07
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Line.cpp:21:27: warning: narrowing conversion from 'typename iterator_traits<__normal_iterator<const double *, vector<double>>>::difference_type' (aka 'long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:75:5: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:75:41: warning: loop induction expression should not have floating-point type [cert-flp30-c]
