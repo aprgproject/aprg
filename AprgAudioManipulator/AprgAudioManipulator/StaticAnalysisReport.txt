@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [50]
-2023-09-04T20:11:57
+StaticAnalysisJobIdentifier: [51]
+2023-09-05T21:35:45
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/AudioManipulator.cpp:27:25: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/AudioManipulator.cpp:40:25: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/NearestSamples.cpp:30:21: style: Condition 'itUpper!=m_valuesToIndexes.cend()' is always true [knownConditionTrueFalse]
