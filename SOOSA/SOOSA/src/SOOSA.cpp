@@ -216,8 +216,7 @@ void SOOSA::saveToFrequencyDatabase() {
     }
 }
 
-bool SOOSA::areLinesValid(
-    Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine) const {
+bool SOOSA::areLinesValid(Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine) {
     Line emptyLine;
     if (emptyLine == leftLine || !isConsideredVertical(leftLine.getACoefficient(), leftLine.getBCoefficient())) {
         cout << "The leftLine is not found.\n";
@@ -451,7 +450,7 @@ SOOSA::DoubleCollection SOOSA::getAcceptableSquareErrorCollectionUsingRemovalRat
     return squareErrorCollection;
 }
 
-int SOOSA::getRetainSizeInLineModel(int const size, double const removalRatio) const {
+int SOOSA::getRetainSizeInLineModel(int const size, double const removalRatio) {
     int removalSize = ceil(size * removalRatio);
     return clampHigherBound(size - removalSize, size);
 }

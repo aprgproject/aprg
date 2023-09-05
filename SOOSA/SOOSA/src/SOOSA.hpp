@@ -95,16 +95,18 @@ private:
     void saveToFrequencyDatabase();
 
     // find line
-    [[nodiscard]] bool areLinesValid(
-        Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine) const;
+    [[nodiscard]] static bool areLinesValid(
+        Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine);
     [[nodiscard]] static bool isConsideredHorizontal(double const aCoefficient, double const bCoefficient);
     [[nodiscard]] static bool isConsideredVertical(double const aCoefficient, double const bCoefficient);
     [[nodiscard]] Line findLeftLine(BitmapSnippet const& snippet) const;
     [[nodiscard]] Line findRightLine(BitmapSnippet const& snippet) const;
     [[nodiscard]] Line findTopLine(BitmapSnippet const& snippet) const;
     [[nodiscard]] Line findBottomLine(BitmapSnippet const& snippet) const;
-    TwoDimensionSamples getSamplesInVerticalLine(BitmapSnippet const& snippet, RangeOfInts const& range) const;
-    TwoDimensionSamples getSamplesInHorizontalLine(BitmapSnippet const& snippet, RangeOfInts const& range) const;
+    [[nodiscard]] TwoDimensionSamples getSamplesInVerticalLine(
+        BitmapSnippet const& snippet, RangeOfInts const& range) const;
+    [[nodiscard]] TwoDimensionSamples getSamplesInHorizontalLine(
+        BitmapSnippet const& snippet, RangeOfInts const& range) const;
     [[nodiscard]] Line findLeftLineUsingStartingLine(BitmapSnippet const& snippet, Line const& startingLine) const;
     [[nodiscard]] Line findRightLineUsingStartingLine(BitmapSnippet const& snippet, Line const& startingLine) const;
     [[nodiscard]] Line findVerticalLineUsingStartingLine(
@@ -121,7 +123,7 @@ private:
     void removeErroneousSamplesInLine(TwoDimensionSamples& samples) const;
     [[nodiscard]] DoubleCollection getAcceptableSquareErrorCollectionUsingRemovalRatio(
         ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap) const;
-    [[nodiscard]] int getRetainSizeInLineModel(int const size, double const removalRatio) const;
+    [[nodiscard]] static int getRetainSizeInLineModel(int const size, double const removalRatio);
     static void updateSamplesForLineModeling(
         TwoDimensionSamples& samplesLineModeling, ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap,
         double const maxAcceptableSquareError);
