@@ -1,7 +1,5 @@
-StaticAnalysisJobIdentifier: [20]
-2023-08-31T05:16:59
-/home/runner/work/aprg/aprg/Chess/ChessCombi/ChessCombi/src/ChessCombi.cpp:5:28: warning: 'm_sample' should be initialized in an in-class default member initializer [cppcoreguidelines-prefer-member-initializer]
-/home/runner/work/aprg/aprg/Chess/ChessCombi/ChessCombi/src/ChessCombi.hpp:10:17: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/Chess/ChessCombi/ChessCombi/src/ChessCombi.cpp:5:28: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/Chess/ChessCombi/ChessCombi/src/ChessCombi.hpp:10:9: warning: private field 'm_sample' is not used [-Wunused-private-field]
+StaticAnalysisJobIdentifier: [50]
+2023-09-05T16:11:17
+/home/runner/work/aprg/aprg/Chess/ChessCombi/ChessCombi/src/ChessCombi.hpp:9:5: warning: function 'getSample' should be marked [[nodiscard]] [modernize-use-nodiscard]
+/home/runner/work/aprg/aprg/Chess/ChessCombi/ChessCombi/src/ChessCombi.hpp:9:5: note: FIX-IT applied suggested code changes
 DONE!
