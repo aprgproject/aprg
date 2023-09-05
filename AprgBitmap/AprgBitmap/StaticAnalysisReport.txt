@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [50]
-2023-09-04T20:20:10
+StaticAnalysisJobIdentifier: [51]
+2023-09-05T21:44:51
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:96:38: warning: narrowing conversion from 'uint64_t' (aka 'unsigned long') to signed type 'std::basic_istream<char>::off_type' (aka 'long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:114:45: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:124:53: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
