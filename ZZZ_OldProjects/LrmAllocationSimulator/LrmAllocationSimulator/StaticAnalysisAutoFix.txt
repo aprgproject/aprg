@@ -1,18 +1,9 @@
-StaticAnalysisJobIdentifier: [20]
-2023-08-31T09:24:37
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:64:5: warning: multiple declarations in a single statement reduces readability [readability-isolate-declaration]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:64:5: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:126:5: warning: multiple declarations in a single statement reduces readability [readability-isolate-declaration]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:126:5: note: FIX-IT applied suggested code changes
+StaticAnalysisJobIdentifier: [50]
+2023-09-05T19:13:12
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:68:10: style: Unused private function: 'Lrm::sortFspBasedPriorityForMcdSelection2' [unusedPrivateFunction]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:70:10: style: Unused private function: 'Lrm::sortFspBasedPriorityForNbicMcdSelection2' [unusedPrivateFunction]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:79:32: style: Unused private function: 'Lrm::selectFspsForCcdMcd2' [unusedPrivateFunction]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:93:32: style: Unused private function: 'Lrm::selectFspsForCcdNbicMcd2' [unusedPrivateFunction]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1179:24: style: Redundant condition: isSharedLcgId. '!A || (A && B)' is equivalent to '!A || B' [redundantCondition]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:875:29: style: Condition 'priorityForDsp1!=priorityForDsp2' is always false [knownConditionTrueFalse]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:868:38: note: priorityForDsp1 is assigned 'getPriorityBasedOnLessUsersAndHsupaCfsForDsp(dsp1)' here.
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:869:84: note: Assignment 'priorityForDsp2=getPriorityBasedOnLessUsersAndHsupaCfsForDsp(dsp1)', assigned value is symbolic=priorityForDsp1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:875:29: note: Condition 'priorityForDsp1!=priorityForDsp2' is always false
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1184:111: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1201:29: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 DONE!
