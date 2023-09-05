@@ -1,13 +1,3 @@
-StaticAnalysisJobIdentifier: [20]
-2023-08-31T07:07:29
-/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/src/TTransportLayerAddress.h:20:1: warning: use 'using' instead of 'typedef' [modernize-use-using]
-/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/src/QuickestWayToProgram.cpp:5:48: warning: 'm_sample' should be initialized in an in-class default member initializer [cppcoreguidelines-prefer-member-initializer]
-/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/src/QuickestWayToProgram.cpp:5:48: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/src/QuickestWayToProgram.hpp:10:17: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/src/QuickestWayToProgram.hpp:10:9: warning: private field 'm_sample' is not used [-Wunused-private-field]
-/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/src/TTransportLayerAddress.h:20:1: warning: use 'using' instead of 'typedef' [modernize-use-using]
-/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/tst/QuickestWayToProgram_unit.cpp:34:13: warning: narrowing conversion from constant 'double' to 'int' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/tst/QuickestWayToProgram_unit.cpp:34:13: warning: implicit conversion from 'double' to 'int' changes value from 3.5 to 3 [clang-diagnostic-literal-conversion]
-/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/tst/QuickestWayToProgram_unit.cpp:36:9: warning: narrowing conversion from 'double' to 'int' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/tst/QuickestWayToProgram_unit.cpp:34:13: warning: implicit conversion from 'double' to 'int' changes value from 3.5 to 3 [-Wliteral-conversion]
+StaticAnalysisJobIdentifier: [50]
+2023-09-05T17:24:15
 DONE!
