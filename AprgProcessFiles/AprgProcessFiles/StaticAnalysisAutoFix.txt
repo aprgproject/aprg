@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [20]
-2023-08-31T04:22:33
+StaticAnalysisJobIdentifier: [50]
+2023-09-05T14:57:49
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CPlusPlusFileFixer/CPlusPlusFileFixer.cpp:220:46: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'std::set<int>::key_type' (aka 'int') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CPlusPlusFileFixer/CPlusPlusFileFixer.cpp:290:24: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CPlusPlusFileFixer/CPlusPlusFileFixer.cpp:305:24: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
@@ -17,8 +17,5 @@ StaticAnalysisJobIdentifier: [20]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/GrepFile/AlbaGrepFile.cpp:29:25: warning: narrowing conversion from 'size_t' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/GrepFile/AlbaGrepFile.cpp:37:37: warning: narrowing conversion from 'unsigned long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/SackReader/AlbaSackReader.hpp:30:12: warning: constructor does not initialize these fields: state [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/CropFile/AlbaCropFile_unit.cpp:55:34: warning: narrowing conversion from 'unsigned long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/CropFile/AlbaCropFile_unit.cpp:100:34: warning: narrowing conversion from 'unsigned long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/CropFile/AlbaCropFile_unit.cpp:139:34: warning: narrowing conversion from 'unsigned long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/CropFile/AlbaCropFile_unit.cpp:182:34: warning: narrowing conversion from 'unsigned long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 DONE!
