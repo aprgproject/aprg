@@ -1,3 +1,9 @@
-StaticAnalysisJobIdentifier: [9]
-2023-08-30T02:52:20
+StaticAnalysisJobIdentifier: [50]
+2023-09-05T11:57:01
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.hpp:58:24: style: Unused private function: 'CPlusPlusTokenizer::isOneCharOperatorAt' [unusedPrivateFunction]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:20:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:21:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:22:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:23:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:24:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
 DONE!
