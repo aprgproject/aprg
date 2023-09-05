@@ -11,7 +11,7 @@ class PidSimulator {
 public:
     explicit PidSimulator(stringHelper::strings const& argumentsInMain);
 
-    double calculatePid(double const input, double const target) const;
+    [[nodiscard]] double calculatePid(double const input, double const target) const;
     void generateInput();
     void generateTriangleWavesForInput();
     void generateSineWavesForInput();
