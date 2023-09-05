@@ -1,9 +1,3 @@
-StaticAnalysisJobIdentifier: [20]
-2023-08-31T05:10:25
-/home/runner/work/aprg/aprg/boost/BoostTest/tst/Boost_unit.cpp:22:99: warning: use nullptr [modernize-use-nullptr]
-/home/runner/work/aprg/aprg/boost/BoostTest/tst/Boost_unit.cpp:22:99: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/boost/BoostTest/tst/Boost_unit.cpp:26:76: warning: use nullptr [modernize-use-nullptr]
-/home/runner/work/aprg/aprg/boost/BoostTest/tst/Boost_unit.cpp:26:76: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/boost/BoostTest/tst/Boost_unit.cpp:27:76: warning: use nullptr [modernize-use-nullptr]
-/home/runner/work/aprg/aprg/boost/BoostTest/tst/Boost_unit.cpp:27:76: note: FIX-IT applied suggested code changes
+StaticAnalysisJobIdentifier: [50]
+2023-09-05T16:04:56
 DONE!
