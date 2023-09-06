@@ -1,14 +1,9 @@
-StaticAnalysisJobIdentifier: [31]
-2023-09-03T09:11:48
+StaticAnalysisJobIdentifier: [51]
+2023-09-06T06:29:01
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/FileGroup.cpp:7:22: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/FileGroup.cpp:7:50: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:15:5: warning: variable 'numberOfFilesToBeAnalyzedForExtraction' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:16:5: warning: variable 'numberOfFilesAnalyzedForExtraction' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:57:28: warning: 20 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:103:28: warning: 20 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:156:28: warning: 1000 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:158:28: warning: 1000000 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:172:28: warning: 20 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:192:26: warning: function 'initializeFileGroups' has cognitive complexity of 106 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:116:48: style: Consider using std::find_if algorithm instead of a raw loop. [useStlAlgorithm]
 DONE!
