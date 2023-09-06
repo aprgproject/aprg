@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [50]
-2023-09-05T07:06:21
+StaticAnalysisJobIdentifier: [51]
+2023-09-05T23:24:45
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/AprgGnuPlot/AprgGnuPlotBase.hpp:15:5: warning: explicitly defaulted copy constructor is implicitly deleted [clang-diagnostic-defaulted-function-deleted]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/AprgGnuPlot/AprgGnuPlotBase.hpp:16:5: warning: explicitly defaulted move constructor is implicitly deleted [clang-diagnostic-defaulted-function-deleted]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/AprgGnuPlot/AprgGnuPlotBase.hpp:17:22: warning: explicitly defaulted copy assignment operator is implicitly deleted [clang-diagnostic-defaulted-function-deleted]
