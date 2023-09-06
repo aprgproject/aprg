@@ -1,7 +1,4 @@
-StaticAnalysisJobIdentifier: [31]
-2023-09-03T07:16:48
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/Kepler.hpp:10:12: error: unknown type name 'uint16_t' [clang-diagnostic-error]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/Kepler.hpp:15:5: error: unknown type name 'uint16_t' [clang-diagnostic-error]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/Kepler.hpp:10:12: error: unknown type name 'uint16_t' [clang-diagnostic-error]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/Kepler.hpp:15:5: error: unknown type name 'uint16_t' [clang-diagnostic-error]
+StaticAnalysisJobIdentifier: [51]
+2023-09-06T04:28:12
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/AsilBasebandPooling.cpp:55:16: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
 DONE!
