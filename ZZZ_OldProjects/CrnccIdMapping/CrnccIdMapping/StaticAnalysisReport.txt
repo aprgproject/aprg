@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [31]
-2023-09-03T07:39:34
+StaticAnalysisJobIdentifier: [51]
+2023-09-06T04:54:22
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/CrnccIdMapping/CrnccIdMapping/src/CrnccIdMapping.cpp:3:81: warning: variable 'm_crnccIdMapping' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/CrnccIdMapping/CrnccIdMapping/src/CrnccIdMapping.hpp:28:76: warning: variable 'm_crnccIdMapping' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 DONE!
