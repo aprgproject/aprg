@@ -1,14 +1,5 @@
-StaticAnalysisJobIdentifier: [31]
-2023-09-03T08:32:07
+StaticAnalysisJobIdentifier: [51]
+2023-09-06T05:46:46
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:204:53: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:204:71: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:207:50: warning: 0x00444444 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:208:55: warning: 0x000000FF is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:209:60: warning: 0x0000FF00 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:210:70: warning: 0x00FF0000 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:228:57: warning: 0.1 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:253:47: warning: 10 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.cpp:254:47: warning: 10 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.hpp:14:5: warning: function 'calculatePid' should be marked [[nodiscard]] [modernize-use-nodiscard]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PidSimulator/PidSimulator/src/PidSimulator.hpp:14:5: warning: function 'calculatePid' should be marked [[nodiscard]] [modernize-use-nodiscard]
 DONE!
