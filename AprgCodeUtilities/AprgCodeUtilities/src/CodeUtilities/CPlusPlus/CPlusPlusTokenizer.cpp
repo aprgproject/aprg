@@ -2,17 +2,10 @@
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusConstants.hpp>
 #include <CodeUtilities/Common/TermCreateHelpers.hpp>
-#include <Common/File/AlbaFileReader.hpp>
-#include <Common/Math/Helpers/DivisibilityHelpers.hpp>
-#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
-
-#include <algorithm>
-#include <string>
 
 using namespace alba;
 using namespace alba::stringHelper;
-using namespace alba::mathHelper;
 using namespace std;
 
 namespace {
@@ -66,13 +59,14 @@ void CPlusPlusTokenizer::processLeftoverCode() {
             m_terms.emplace_back(createCommentMultiLine(m_scopeContent));
             break;
         case ScopeType::StringLiteral:
-            m_terms.emplace_back(createStringLiteral(m_scopeContent));
-            break;
         case ScopeType::RawStringLiteral:
             m_terms.emplace_back(createStringLiteral(m_scopeContent));
             break;
         case ScopeType::CharLiteral:
             m_terms.emplace_back(createCharacterLiteral(m_scopeContent));
+            break;
+        case ScopeType::Attribute:
+            m_terms.emplace_back(createAttribute(m_scopeContent));
             break;
         case ScopeType::WhiteSpace:
             m_terms.emplace_back(createWhiteSpace(m_scopeContent));
@@ -107,6 +101,9 @@ void CPlusPlusTokenizer::processScope() {
         case ScopeType::CharLiteral:
             processInCharLiteralScope();
             break;
+        case ScopeType::Attribute:
+            processInAttributeScope();
+            break;
         case ScopeType::WhiteSpace:
             processInWhiteSpaceScope();
             break;
@@ -127,6 +124,8 @@ void CPlusPlusTokenizer::processInCodeScope() {
     } else if (hasProcessedARawStringLiteral()) {
         ;
     } else if (hasProcessedACharLiteral()) {
+        ;
+    } else if (hasProcessedAnAttribute()) {
         ;
     } else if (hasProcessedAWhiteSpace()) {
         ;
@@ -194,6 +193,17 @@ bool CPlusPlusTokenizer::hasProcessedACharLiteral() {
         ++m_index;
         enterScope(ScopeType::CharLiteral);
         processInCharLiteralScope();
+        return true;
+    }
+    return false;
+}
+
+bool CPlusPlusTokenizer::hasProcessedAnAttribute() {
+    if (isNextString("[[")) {
+        m_scopeContent.append("[[");
+        m_index += 2;
+        enterScope(ScopeType::Attribute);
+        processInAttributeScope();
         return true;
     }
     return false;
@@ -298,6 +308,15 @@ void CPlusPlusTokenizer::processInRawStringLiteralScope() {
 void CPlusPlusTokenizer::processInCharLiteralScope() {
     if (isTerminatedWhileCheckingALiteralWithEscape('\'')) {
         m_terms.emplace_back(createCharacterLiteral(m_scopeContent));
+        exitScope();
+    }
+}
+
+void CPlusPlusTokenizer::processInAttributeScope() {
+    if (isTerminatedWhileCheckingTerminatingString("]]")) {
+        m_scopeContent.append("]]");
+        m_index += 2;
+        m_terms.emplace_back(createAttribute(m_scopeContent));
         exitScope();
     }
 }

@@ -4,6 +4,8 @@ using namespace std;
 
 namespace alba::CodeUtilities {
 
+Term createAttribute(string const& content) { return {TermType::Attribute, content}; }
+
 Term createBoolean(string const& content) { return {TermType::Boolean, content}; }
 
 Term createCharacterLiteral(string const& content) { return {TermType::CharacterLiteral, content}; }

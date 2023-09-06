@@ -393,4 +393,21 @@ TEST(CPlusPlusTokenizerTest, CheckKeyword) {
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
 }
 
+TEST(CPlusPlusTokenizerTest, CheckAttibute) {
+    Terms terms;
+    CPlusPlusTokenizer tokenizer(terms);
+
+    tokenizer.processCode("[[nodiscard]] [[gnu::unused]] [[deprecated(\"because\")]]\n");
+    tokenizer.processLeftoverCode();
+
+    ASSERT_EQ(terms.size(), 6U);
+    auto termIterator = terms.begin();
+    EXPECT_EQ(*termIterator++, Term(TermType::Attribute, "[[nodiscard]]"));
+    EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, " "));
+    EXPECT_EQ(*termIterator++, Term(TermType::Attribute, "[[gnu::unused]]"));
+    EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, " "));
+    EXPECT_EQ(*termIterator++, Term(TermType::Attribute, "[[deprecated(\"because\")]]"));
+    EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
+}
+
 }  // namespace alba::CodeUtilities

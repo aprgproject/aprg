@@ -12,8 +12,6 @@ void processPath(std::string const& path);
 void processDirectory(std::string const& path);
 void processFile(std::string const& path);
 
-Terms getTermsFromFile(std::string const& path);
-void writeAllTerms(std::string const& path, Terms const& terms);
 void fixTerms(Terms& terms);
 void fixPostFixIncrementDecrement(Terms& terms);
 void fixPostFixIncrementDecrement(Terms& terms, std::string const& crementOperator);

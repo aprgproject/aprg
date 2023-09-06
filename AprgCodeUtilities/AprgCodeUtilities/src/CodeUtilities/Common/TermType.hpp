@@ -4,6 +4,7 @@ namespace alba::CodeUtilities {
 
 enum class TermType {
     Aggregate,
+    Attribute,
     Boolean,
     CharacterLiteral,
     CommentMultiline,

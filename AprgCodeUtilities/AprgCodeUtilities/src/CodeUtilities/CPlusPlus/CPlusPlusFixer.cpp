@@ -1,14 +1,15 @@
 #include "CPlusPlusFixer.hpp"
 
-#include <CodeUtilities/CPlusPlus/CPlusPlusTokenizer.hpp>
+#include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
 #include <CodeUtilities/Common/TermUtilities.hpp>
-#include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/Print/AlbaLogPrints.hpp>
 
+#include <fstream>
 #include <iostream>
 
 using namespace std;
+using namespace alba::CodeUtilities::CPlusPlusUtilities;
 
 namespace alba::CodeUtilities::CPlusPlusFixer {
 
@@ -54,28 +55,6 @@ void processFile(string const& path) {
     Terms terms(getTermsFromFile(path));
     fixTerms(terms);
     writeAllTerms(path, terms);
-}
-
-Terms getTermsFromFile(string const& path) {
-    Terms result;
-    CPlusPlusTokenizer tokenizer(result);
-    AlbaLocalPathHandler filePathHandler(path);
-    ifstream inputStream(filePathHandler.getFullPath());
-    AlbaFileReader fileReader(inputStream);
-    while (fileReader.isNotFinished()) {
-        tokenizer.processCode(fileReader.getLine());
-        tokenizer.processCode("\n");
-    }
-    tokenizer.processLeftoverCode();
-    return result;
-}
-
-void writeAllTerms(string const& path, Terms const& terms) {
-    AlbaLocalPathHandler filePathHandler(path);
-    ofstream outputStream(filePathHandler.getFullPath(), ios::binary);
-    for (Term const& term : terms) {
-        outputStream << term.getContent();
-    }
 }
 
 void fixTerms(Terms& terms) {

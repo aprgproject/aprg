@@ -4,6 +4,7 @@
 
 namespace alba::CodeUtilities {
 
+Term createAttribute(std::string const& content);
 Term createBoolean(std::string const& content);
 Term createCharacterLiteral(std::string const& content);
 Term createCommentMultiLine(std::string const& content);

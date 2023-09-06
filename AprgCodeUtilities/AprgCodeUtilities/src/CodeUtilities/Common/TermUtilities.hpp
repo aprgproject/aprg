@@ -13,11 +13,14 @@ using IndexesOptional = std::optional<Indexes>;
 
 Indexes searchForPatternsForwards(Terms const& terms, int const startIndex, Patterns const& searchPatterns);
 Indexes searchForPatternsBackwards(Terms const& terms, int const startIndex, Patterns const& searchPatterns);
-IndexesOptional checkPatternAt(Terms const& terms, int const termIndex, Patterns const& searchPatterns);
+Indexes checkPatternAt(Terms const& terms, int const termIndex, Patterns const& searchPatterns);
 
 void combineTermsInPlace(Terms& terms, TermType const newTermType, int const startIndex, int const endIndex);
 void changeTerm(Term& term, TermType const newTermType, std::string const& content);
 
+std::string getCombinedContents(Terms const& terms);
+std::string getCombinedContents(Terms const& terms, int const startIndex, int const endIndex);
+std::string getLocatorString(Terms const& terms, int const index);
 std::string convertToString(TermType const termType);
 std::string convertToString(MatcherType const type);
 

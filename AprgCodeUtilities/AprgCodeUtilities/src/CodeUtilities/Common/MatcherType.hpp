@@ -3,11 +3,12 @@
 namespace alba::CodeUtilities {
 
 enum class MatcherType {
-    NotAWhiteSpace,
+    Comment,
+    HasNewLine,
     IdentifierWithPascalCase,
     IdentifierWithSnakeCase,
     IdentifierAndNotAScreamingSnakeCase,
-    Comment
+    NotAWhiteSpace
 };
 
 }  // namespace alba::CodeUtilities

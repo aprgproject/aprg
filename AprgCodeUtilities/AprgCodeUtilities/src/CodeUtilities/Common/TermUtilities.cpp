@@ -12,9 +12,9 @@ namespace alba::CodeUtilities {
 
 Indexes searchForPatternsForwards(Terms const& terms, int const startIndex, Patterns const& searchPatterns) {
     for (int termIndex = startIndex; termIndex < static_cast<int>(terms.size()); ++termIndex) {
-        IndexesOptional patternIndexesOptional = checkPatternAt(terms, termIndex, searchPatterns);
-        if (patternIndexesOptional) {
-            return patternIndexesOptional.value();
+        Indexes patternIndexes = checkPatternAt(terms, termIndex, searchPatterns);
+        if (!patternIndexes.empty()) {
+            return patternIndexes;
         }
     }
     return {};
@@ -22,18 +22,18 @@ Indexes searchForPatternsForwards(Terms const& terms, int const startIndex, Patt
 
 Indexes searchForPatternsBackwards(Terms const& terms, int const startIndex, Patterns const& searchPatterns) {
     for (int termIndex = startIndex; termIndex >= 0; --termIndex) {
-        IndexesOptional patternIndexesOptional = checkPatternAt(terms, termIndex, searchPatterns);
-        if (patternIndexesOptional) {
-            return patternIndexesOptional.value();
+        Indexes patternIndexes = checkPatternAt(terms, termIndex, searchPatterns);
+        if (!patternIndexes.empty()) {
+            return patternIndexes;
         }
     }
     return {};
 }
 
-IndexesOptional checkPatternAt(Terms const& terms, int const termIndex, Patterns const& searchPatterns) {
-    int matchIndex = 0;
+Indexes checkPatternAt(Terms const& terms, int const termIndex, Patterns const& searchPatterns) {
     Indexes patternIndexes;
     for (Pattern const& searchPattern : searchPatterns) {
+        int matchIndex = 0;
         for (int termIndex2 = termIndex;
              termIndex2 < static_cast<int>(terms.size()) && matchIndex < static_cast<int>(searchPattern.size());
              ++termIndex2) {
@@ -57,14 +57,43 @@ IndexesOptional checkPatternAt(Terms const& terms, int const termIndex, Patterns
 void combineTermsInPlace(Terms& terms, TermType const newTermType, int const startIndex, int const endIndex) {
     if (startIndex < endIndex) {
         string combinedContent;
-        for (int termIndex = startIndex; termIndex <= endIndex && termIndex < static_cast<int>(terms.size());
-             ++termIndex) {
+        for (int termIndex = startIndex; termIndex <= endIndex; ++termIndex) {
             combinedContent += terms[termIndex].getContent();
         }
         Term& firstTerm(terms[startIndex]);
         changeTerm(firstTerm, newTermType, combinedContent);
         terms.erase(terms.begin() + startIndex + 1, terms.begin() + endIndex + 1);
     }
+}
+
+string getCombinedContents(Terms const& terms) {
+    return getCombinedContents(terms, 0, static_cast<int>(terms.size()) - 1);
+}
+
+string getCombinedContents(Terms const& terms, int const startIndex, int const endIndex) {
+    string combinedContent;
+    for (int termIndex = startIndex; termIndex <= endIndex; ++termIndex) {
+        combinedContent += terms[termIndex].getContent();
+    }
+    return combinedContent;
+}
+
+string getLocatorString(Terms const& terms, int const index) {
+    string combinedContent;
+    constexpr int itemsOnOneSide = 6;
+    int sizeIndex = static_cast<int>(terms.size());
+    int startIndex = (index >= itemsOnOneSide) ? index - itemsOnOneSide : 0;
+    int endIndex = (index + itemsOnOneSide < sizeIndex) ? index + itemsOnOneSide : sizeIndex - 1;
+    for (int termIndex = startIndex; termIndex < index; ++termIndex) {
+        combinedContent += terms[termIndex].getContent();
+    }
+    combinedContent += "@";
+    combinedContent += terms[index].getContent();
+    combinedContent += "@";
+    for (int termIndex = index + 1; termIndex <= endIndex; ++termIndex) {
+        combinedContent += terms[termIndex].getContent();
+    }
+    return combinedContent;
 }
 
 void changeTerm(Term& term, TermType const newTermType, string const& content) {
@@ -75,6 +104,7 @@ void changeTerm(Term& term, TermType const newTermType, string const& content) {
 string convertToString(TermType const type) {
     switch (type) {
         ALBA_MACROS_CASE_ENUM_STRING(TermType::Aggregate)
+        ALBA_MACROS_CASE_ENUM_STRING(TermType::Attribute)
         ALBA_MACROS_CASE_ENUM_STRING(TermType::Boolean)
         ALBA_MACROS_CASE_ENUM_STRING(TermType::CharacterLiteral)
         ALBA_MACROS_CASE_ENUM_STRING(TermType::CommentMultiline)
@@ -94,27 +124,30 @@ string convertToString(TermType const type) {
 
 string convertToString(MatcherType const type) {
     switch (type) {
-        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::NotAWhiteSpace)
+        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::Comment)
+        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::HasNewLine)
         ALBA_MACROS_CASE_ENUM_STRING(MatcherType::IdentifierWithPascalCase)
         ALBA_MACROS_CASE_ENUM_STRING(MatcherType::IdentifierWithSnakeCase)
         ALBA_MACROS_CASE_ENUM_STRING(MatcherType::IdentifierAndNotAScreamingSnakeCase)
-        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::Comment)
+        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::NotAWhiteSpace)
     }
     return {};
 }
 
 bool isAMatch(MatcherType const matcherType, Term const& term) {
     switch (matcherType) {
-        case MatcherType::NotAWhiteSpace:
-            return !isWhiteSpace(term);
+        case MatcherType::Comment:
+            return isComment(term);
+        case MatcherType::HasNewLine:
+            return hasNewLine(term);
         case MatcherType::IdentifierWithPascalCase:
             return TermType::Identifier == term.getTermType() && isPascalCase(term.getContent());
         case MatcherType::IdentifierWithSnakeCase:
             return TermType::Identifier == term.getTermType() && isSnakeCase(term.getContent());
         case MatcherType::IdentifierAndNotAScreamingSnakeCase:
             return TermType::Identifier == term.getTermType() && !isScreamingSnakeCase(term.getContent());
-        case MatcherType::Comment:
-            return isComment(term);
+        case MatcherType::NotAWhiteSpace:
+            return !isWhiteSpace(term);
     }
     return false;
 }

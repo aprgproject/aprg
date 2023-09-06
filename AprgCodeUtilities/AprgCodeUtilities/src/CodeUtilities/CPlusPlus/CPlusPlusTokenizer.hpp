@@ -16,6 +16,7 @@ public:
         StringLiteral,
         RawStringLiteral,
         CharLiteral,
+        Attribute,
         WhiteSpace
     };
     explicit CPlusPlusTokenizer(Terms& terms);
@@ -32,6 +33,7 @@ private:
     bool hasProcessedAStringLiteral();
     bool hasProcessedARawStringLiteral();
     bool hasProcessedACharLiteral();
+    bool hasProcessedAnAttribute();
     bool hasProcessedAWhiteSpace();
     bool hasProcessedAMacro();
     bool hasProcessedANumber();
@@ -42,6 +44,7 @@ private:
     void processInStringLiteralScope();
     void processInRawStringLiteralScope();
     void processInCharLiteralScope();
+    void processInAttributeScope();
     void processInWhiteSpaceScope();
     void enterScope(ScopeType const scopeType);
     void exitScope();
