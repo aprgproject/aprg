@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [50]
-2023-09-05T08:27:04
+StaticAnalysisJobIdentifier: [51]
+2023-09-06T00:59:11
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/Combinatorics/Derangements.cpp:179:65: warning: narrowing conversion from 'unsigned long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/Combinatorics/Derangements.cpp:183:62: warning: narrowing conversion from 'unsigned long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/NimGame.cpp:31:34: style: Consider using std::find_if algorithm instead of a raw loop. [useStlAlgorithm]
