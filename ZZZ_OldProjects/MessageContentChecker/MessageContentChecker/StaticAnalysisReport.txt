@@ -1,7 +1,5 @@
-StaticAnalysisJobIdentifier: [31]
-2023-09-03T08:16:31
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/src/MessageContentChecker.hpp:9:5: warning: function 'getSample' should be marked [[nodiscard]] [modernize-use-nodiscard]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/src/MessageContentChecker.hpp:9:5: warning: function 'getSample' should be marked [[nodiscard]] [modernize-use-nodiscard]
+StaticAnalysisJobIdentifier: [51]
+2023-09-06T05:31:08
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:34:5: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:193:9: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:220:5: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
