@@ -1,11 +1,5 @@
-StaticAnalysisJobIdentifier: [31]
-2023-09-03T06:41:18
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/src/TddLecture.cpp:13:37: warning: 5 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/src/TddLecture.cpp:13:40: warning: 6 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/src/TddLecture.cpp:13:43: warning: 7 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/src/TddLecture.cpp:13:46: warning: 8 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/src/TddLecture.cpp:13:49: warning: 9 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/src/TddLecture.cpp:13:52: warning: 10 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
+StaticAnalysisJobIdentifier: [51]
+2023-09-06T03:53:41
 /home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:9:53: warning: unused variable 'entity' [clang-diagnostic-unused-variable]
 /home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:12:16: warning: unused variable 'entity' [clang-diagnostic-unused-variable]
 /home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:9:53: warning: unused variable 'entity' [-Wunused-variable]
