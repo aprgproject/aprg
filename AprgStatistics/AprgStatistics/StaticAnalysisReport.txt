@@ -1,20 +1,4 @@
-StaticAnalysisJobIdentifier: [31]
-2023-09-03T04:27:21
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/DataStatistics.hpp:129:106: warning: 0.5 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/DataStatisticsUtilities.hpp:24:75: warning: 0.5 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
+StaticAnalysisJobIdentifier: [51]
+2023-09-06T01:31:10
 /home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/KMeansClustering.hpp:82:20: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/DataStatistics.hpp:129:106: warning: 0.5 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/DataStatisticsUtilities.hpp:24:75: warning: 0.5 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/DataStatistics.hpp:129:106: warning: 0.5 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/DataStatisticsUtilities.hpp:24:75: warning: 0.5 is a magic number; consider replacing it with a named constant [cppcoreguidelines-avoid-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/TwoDimensionsStatistics.hpp:22:22: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/TwoDimensionsStatistics.hpp:22:32: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/TwoDimensionsStatistics.hpp:22:42: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/TwoDimensionsStatistics.hpp:22:22: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/TwoDimensionsStatistics.hpp:22:32: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/TwoDimensionsStatistics.hpp:22:42: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:187:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:208:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:230:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:262:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 DONE!
