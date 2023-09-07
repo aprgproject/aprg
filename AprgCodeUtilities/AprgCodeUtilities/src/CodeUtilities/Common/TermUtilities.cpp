@@ -152,6 +152,10 @@ string convertToString(MatcherType const type) {
     return {};
 }
 
+bool isAllWhiteSpaceOrComment(Terms const& terms) {
+    return all_of(terms.cbegin(), terms.cend(), [](Term const& term) { return isCommentOrWhiteSpace(term); });
+}
+
 bool isAMatch(MatcherType const matcherType, Term const& term) {
     switch (matcherType) {
         case MatcherType::Comment:
@@ -174,10 +178,17 @@ bool isComment(Term const& term) {
     return term.getTermType() == TermType::CommentMultiline || term.getTermType() == TermType::CommentSingleLine;
 }
 
+bool isOperator(Term const& term) { return term.getTermType() == TermType::Operator; }
+
 bool isWhiteSpace(Term const& term) { return term.getTermType() == TermType::WhiteSpace; }
 
 bool isCommentOrWhiteSpace(Term const& term) { return isComment(term) || isWhiteSpace(term); }
 
 bool hasNewLine(Term const& term) { return stringHelper::hasNewLine(term.getContent()); }
+
+bool hasBraces(string const& content) {
+    return any_of(
+        content.cbegin(), content.cend(), [](char const character) { return character == '{' || character == '}'; });
+}
 
 }  // namespace alba::CodeUtilities

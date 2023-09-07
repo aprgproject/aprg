@@ -14,6 +14,36 @@ using namespace alba::stringHelper;
 namespace alba::CodeUtilities {
 
 namespace {
+void processAprgDirectory(string const& aprgPath) {
+    CPlusPlusReorganizer reorganizer;
+    AlbaLocalPathHandler aprgPathHandler(aprgPath);
+    ListOfPaths directories;
+    ListOfPaths files;
+    aprgPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
+    for (auto const& file : files) {
+        AlbaLocalPathHandler filePathHandler(file);
+        if (filePathHandler.getFile() == "CppProjectIndicatorFile.txt") {
+            reorganizer.processDirectory(filePathHandler.getDirectory());
+        }
+    }
+}
+void runFormatterInDirectory(string const& aprgPath) {
+    CPlusPlusReorganizer reorganizer;
+    AlbaLocalPathHandler aprgPathHandler(aprgPath);
+    ListOfPaths directories;
+    ListOfPaths files;
+    aprgPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
+    for (auto const& file : files) {
+        AlbaLocalPathHandler filePathHandler(file);
+        string command(R"(")");
+        command += FORMATTER_APPLICATION_PATH;
+        command += R"(" -style=file -i ")";
+        command += filePathHandler.getFullPath();
+        command += R"(")";
+        cout << "---> command [" << command << "]:\n";
+        system(command.c_str());
+    }
+}
 void copyFile(string const& source, string const& destination) {
     AlbaLocalPathHandler sourcePathHandler(source);
     AlbaLocalPathHandler destinationPathHandler(destination);
@@ -44,8 +74,9 @@ void verifyFile(string const& expectedFile, string const& testFile) {
             cout << "---> EXPECTED: [" << lineInExpectedFile << "]\n";
             cout << "---> ACTUAL:   [" << lineInTestFile << "]\n\n";
             isDifferenceFound = true;
-            string command(DIFF_APPLICATION_PATH);
-            command += R"( ")";
+            string command(R"(")");
+            command += FORMATTER_APPLICATION_PATH;
+            command += R"(" ")";
             command += expectedFilePathHandler.getFullPath();
             command += R"(" ")";
             command += testFilePathHandler.getFullPath();
@@ -64,14 +95,13 @@ void verifyFile(string const& expectedFile, string const& testFile) {
 void clearFile(string const& file) { ofstream expectedFileStream(AlbaLocalPathHandler(file).getFullPath()); }
 }  // namespace
 
-TEST(CPlusPlusReorganizerTest, DISABLED_ActualTest) {
+TEST(CPlusPlusReorganizerTest, ActualTest) {
     CPlusPlusReorganizer reorganizer;
-    reorganizer.processHeaderAndImplementationFile(
-        R"(F:\Branches\aprg_project\aprg_semi_clean\aprg\AprgCommon\AprgCommon\src\Common\Math\Number\AlbaNumber.hpp)",
-        R"(F:\Branches\aprg_project\aprg_semi_clean\aprg\AprgCommon\AprgCommon\src\Common\Math\Number\AlbaNumber.cpp)");
+    reorganizer.processDirectory(R"(F:\Branches\aprg_project\aprg_temp\aprg\AprgCommon\AprgCommon)");
+    runFormatterInDirectory(R"(F:\Branches\aprg_project\aprg_temp\aprg\AprgCommon\AprgCommon)");
 }
 
-TEST(CPlusPlusReorganizerTest, AlbaNumberTest) {
+TEST(CPlusPlusReorganizerTest, ReorganizeAlbaNumberWorks) {
     CPlusPlusReorganizer reorganizer;
     copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaNumber.hpp)", TEST_HEADER_FILE);
     copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaNumber.cpp)", TEST_IMPLEMENTATION_FILE);
@@ -84,7 +114,27 @@ TEST(CPlusPlusReorganizerTest, AlbaNumberTest) {
     clearFile(TEST_IMPLEMENTATION_FILE);
 }
 
-TEST(CPlusPlusReorganizerTest, AlbaOptionalTest) {
+TEST(CPlusPlusReorganizerTest, ReorganizeAlbaConfigurationHolderWorks) {
+    CPlusPlusReorganizer reorganizer;
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaConfigurationHolder.hpp)", TEST_HEADER_FILE);
+
+    reorganizer.reorganizeFile(TEST_HEADER_FILE);
+
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaConfigurationHolder.hpp)", TEST_HEADER_FILE);
+    clearFile(TEST_HEADER_FILE);
+}
+
+TEST(CPlusPlusReorganizerTest, ReorganizeAlbaBitManipulationClassDefinitionWorks) {
+    CPlusPlusReorganizer reorganizer;
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaBitManipulationClassDefinition.hpp)", TEST_HEADER_FILE);
+
+    reorganizer.reorganizeFile(TEST_HEADER_FILE);
+
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaBitManipulationClassDefinition.hpp)", TEST_HEADER_FILE);
+    clearFile(TEST_HEADER_FILE);
+}
+
+TEST(CPlusPlusReorganizerTest, ReorganizeAlbaOptionalWorks) {
     CPlusPlusReorganizer reorganizer;
     copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaOptional.hpp)", TEST_HEADER_FILE);
 
@@ -94,13 +144,43 @@ TEST(CPlusPlusReorganizerTest, AlbaOptionalTest) {
     clearFile(TEST_HEADER_FILE);
 }
 
-TEST(CPlusPlusReorganizerTest, AlbaLocalPathHandlerTest) {
+TEST(CPlusPlusReorganizerTest, ReorganizeAlbaBitConstantsWorks) {
+    CPlusPlusReorganizer reorganizer;
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaBitConstants.hpp)", TEST_HEADER_FILE);
+
+    reorganizer.reorganizeFile(TEST_HEADER_FILE);
+
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaBitConstants.hpp)", TEST_HEADER_FILE);
+    clearFile(TEST_HEADER_FILE);
+}
+
+TEST(CPlusPlusReorganizerTest, ReorganizeAlbaLocalPathHandlerWorks) {
     CPlusPlusReorganizer reorganizer;
     copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaLocalPathHandler.hpp)", TEST_HEADER_FILE);
 
     reorganizer.reorganizeFile(TEST_HEADER_FILE);
 
     verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaLocalPathHandler.hpp)", TEST_HEADER_FILE);
+    clearFile(TEST_HEADER_FILE);
+}
+
+TEST(CPlusPlusReorganizerTest, ReorganizeAlbaValueRangeWorks) {
+    CPlusPlusReorganizer reorganizer;
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaValueRange.hpp)", TEST_HEADER_FILE);
+
+    reorganizer.reorganizeFile(TEST_HEADER_FILE);
+
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaValueRange.hpp)", TEST_HEADER_FILE);
+    clearFile(TEST_HEADER_FILE);
+}
+
+TEST(CPlusPlusReorganizerTest, ReorganizeAlbaMatrixWorks) {
+    CPlusPlusReorganizer reorganizer;
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaMatrix.hpp)", TEST_HEADER_FILE);
+
+    reorganizer.reorganizeFile(TEST_HEADER_FILE);
+
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaMatrix.hpp)", TEST_HEADER_FILE);
     clearFile(TEST_HEADER_FILE);
 }
 

@@ -165,9 +165,7 @@ private:
 
 [[nodiscard]] inline bool isContentPointerValid() const { return m_contentPointer != nullptr; }
 
-// think of how to remove this
-
-    friend std::ostream& operator<<(std::ostream& out, AlbaOptional<ContentType&> const& optional) {
+friend std::ostream& operator<<(std::ostream& out, AlbaOptional<ContentType&> const& optional) {
         out << "hasContent: " << optional.m_hasContent;
         if (optional.m_hasContent) {
             out << " value: " << optional.get();
@@ -176,7 +174,7 @@ private:
     }
 
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
-    static ContentType m_empty;
+    static ContentType m_empty;  // think of how to remove this
 bool m_hasContent;
 ContentType* m_contentPointer;
 

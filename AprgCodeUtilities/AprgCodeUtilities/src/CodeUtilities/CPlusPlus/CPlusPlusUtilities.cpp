@@ -43,7 +43,7 @@ Terms getTermsFromString(string const& code) {
     return result;
 }
 
-std::string getFunctionSignature(std::string const& functionText) {
+string getFunctionSignature(string const& functionText) {
     Terms terms(getTermsFromString(functionText));
     Patterns terminatingPatterns{{M(";")}, {M("{")}, {M(":")}};
     Indexes terminatingIndexes = searchForPatternsForwards(terms, 0, terminatingPatterns);
@@ -78,6 +78,16 @@ std::string getFunctionSignature(std::string const& functionText) {
     }
 
     return getCombinedContents(terms);
+}
+
+bool isCppFile(string const& extension) {
+    return extension == "cpp" || extension == "c" || extension == "cc" || extension == "hpp" || extension == "h";
+}
+
+bool isHeaderFile(string const& extension) { return extension == "hpp" || extension == "h"; }
+
+bool isImplementationFile(string const& extension) {
+    return extension == "cpp" || extension == "c" || extension == "cc";
 }
 
 }  // namespace alba::CodeUtilities::CPlusPlusUtilities

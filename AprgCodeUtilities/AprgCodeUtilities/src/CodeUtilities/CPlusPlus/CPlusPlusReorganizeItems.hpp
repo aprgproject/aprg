@@ -14,6 +14,7 @@ public:
         int numberOfLines;
         bool isDivider;
         bool isAccessControl;
+        bool isCommentOrWhiteSpace;
         int itemsIndex;
     };
     using SortItems = std::vector<SortItem>;
@@ -31,6 +32,7 @@ private:
     static void sortByComparingItems(SortItems& sortItems);
     void saveDetailsFromItemContent(SortItem& sortItem, std::string const& item) const;
     void saveDetailsFromHeaderSignatures(SortItem& sortItem, std::string const& item) const;
+    void putAdditionalDetailsOnCommentsAndWhiteSpace(SortItems& sortItems) const;
     [[nodiscard]] static Patterns getSearchPatterns();
     [[nodiscard]] bool processAndShouldStop(
         Terms& terms, int& termIndex, SortItem& sortItem, Indexes const& hitIndexes) const;

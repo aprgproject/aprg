@@ -410,4 +410,24 @@ TEST(CPlusPlusTokenizerTest, CheckAttibute) {
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
 }
 
+TEST(CPlusPlusTokenizerTest, CheckNumberWithCarat) {
+    Terms terms;
+    CPlusPlusTokenizer tokenizer(terms);
+
+    tokenizer.processCode("uint64_t ONE_THEN_ZERO_64_BITS = 0x55555555'55555555;\n");
+    tokenizer.processLeftoverCode();
+
+    // ASSERT_EQ(terms.size(), 9U);
+    auto termIterator = terms.begin();
+    EXPECT_EQ(*termIterator++, Term(TermType::Identifier, "uint64_t"));
+    EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, " "));
+    EXPECT_EQ(*termIterator++, Term(TermType::Identifier, "ONE_THEN_ZERO_64_BITS"));
+    EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, " "));
+    EXPECT_EQ(*termIterator++, Term(TermType::Operator, "="));
+    EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, " "));
+    EXPECT_EQ(*termIterator++, Term(TermType::Number, "0x55555555'55555555"));
+    EXPECT_EQ(*termIterator++, Term(TermType::Operator, ";"));
+    EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, "\n"));
+}
+
 }  // namespace alba::CodeUtilities

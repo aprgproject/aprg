@@ -469,7 +469,7 @@ string CPlusPlusTokenizer::getNumberAt(int const index) const {
     string result;
     if (isNumber(m_code[index])) {
         result += m_code[index];
-        result += getAlphaNumericUnderscoreStringAt(index + 1);
+        result += getContinuousDigitsAt(index + 1);
     }
     return result;
 }
@@ -478,6 +478,17 @@ string CPlusPlusTokenizer::getAlphaNumericUnderscoreStringAt(int const index) co
     string result;
     for (int identifierIndex = index;
          identifierIndex < static_cast<int>(m_code.length()) && isLetterOrNumberOrUnderscore(m_code[identifierIndex]);
+         ++identifierIndex) {
+        result += m_code[identifierIndex];
+    }
+    return result;
+}
+
+string CPlusPlusTokenizer::getContinuousDigitsAt(int const index) const {
+    string result;
+    for (int identifierIndex = index;
+         identifierIndex < static_cast<int>(m_code.length()) &&
+         (isLetterOrNumberOrUnderscore(m_code[identifierIndex]) || m_code[identifierIndex] == '\'');
          ++identifierIndex) {
         result += m_code[identifierIndex];
     }

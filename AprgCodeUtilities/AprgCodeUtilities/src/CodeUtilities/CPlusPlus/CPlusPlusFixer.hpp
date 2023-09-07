@@ -27,6 +27,4 @@ void findTermsAndCheckForLoopAndSwapAt(
     Terms& terms, Patterns const& searchPatterns, int const index1, int const index2);
 void combinePrimitiveTypes(Terms& terms);
 
-bool isCppFile(std::string const& extension);
-
 }  // namespace alba::CodeUtilities::CPlusPlusFixer

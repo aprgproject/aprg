@@ -220,8 +220,4 @@ void combinePrimitiveTypes(Terms& terms) {
     }
 }
 
-bool isCppFile(string const& extension) {
-    return extension == "cpp" || extension == "c" || extension == "cc" || extension == "hpp" || extension == "h";
-}
-
 }  // namespace alba::CodeUtilities::CPlusPlusFixer

@@ -2,6 +2,7 @@
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
 #include <CodeUtilities/Common/TermUtilities.hpp>
+#include <Common/Debug/AlbaDebug.hpp>
 
 #include <numeric>
 
@@ -22,24 +23,26 @@ Terms CPlusPlusReorganizeItems::getSortedAggregateTerms() const {
     Terms terms;
     SortItems sortedItems(getSortedItems());
     terms.emplace_back(TermType::WhiteSpace, "\n");
-    bool hasMultiline = hasMultilineItem(sortedItems);
+    bool hasMultiline = hasMultilineItem(sortedItems) || sortedItems.size() > 10;
     bool isPreviousAMultilineItem(hasMultiline);
+    bool isPreviousACommentOrWhiteSpace(false);
     for (SortItem const& sortItem : sortedItems) {
         string const& item(m_items[sortItem.itemsIndex]);
 
         bool isMultilineItem = isMultiLine(sortItem.numberOfLines) || (hasMultiline && sortItem.isAccessControl);
-        if (isMultilineItem || isPreviousAMultilineItem) {
+        if ((isMultilineItem || isPreviousAMultilineItem) && !isPreviousACommentOrWhiteSpace) {
             terms.emplace_back(TermType::WhiteSpace, "\n");
         }
 
         // terms.emplace_back(
-        //     TermType::CommentMultiline, "/*BEGIN ADD " + stringHelper::convertToString(sortItem.numberOfLines) +
-        //     "*/");
+        //     TermType::CommentMultiline, "/*BEGIN ADD (" + stringHelper::convertToString(sortItem.score) + "," +
+        //                                     stringHelper::convertToString(sortItem.itemsIndex) + ")*/");
         terms.emplace_back(TermType::Aggregate, item);
         // terms.emplace_back(TermType::CommentMultiline, "/*END ADD*/");
 
         terms.emplace_back(TermType::WhiteSpace, "\n");
         isPreviousAMultilineItem = isMultilineItem;
+        isPreviousACommentOrWhiteSpace = sortItem.isCommentOrWhiteSpace;
     }
     if (hasMultiline) {
         terms.emplace_back(TermType::WhiteSpace, "\n");
@@ -58,11 +61,12 @@ CPlusPlusReorganizeItems::SortItems CPlusPlusReorganizeItems::getSortItems() con
     sortItems.reserve(m_items.size());
     int index = 0;
     for (string const& item : m_items) {
-        SortItem sortItem{0, 0, 0, false, false, index++};
+        SortItem sortItem{0, 0, 0, false, false, false, index++};
         saveDetailsFromItemContent(sortItem, item);
         saveDetailsFromHeaderSignatures(sortItem, item);
         sortItems.emplace_back(sortItem);
     }
+    // putAdditionalDetailsOnCommentsAndWhiteSpace(sortItems);
     return sortItems;
 }
 
@@ -84,14 +88,18 @@ void CPlusPlusReorganizeItems::saveDetailsFromItemContent(SortItem& sortItem, st
     sortItem.numberOfLines = stringHelper::getNumberOfNewLines(item) + 1;
     int termIndex = 0;
     Terms terms(getTermsFromString(item));
-    Patterns searchPatterns(getSearchPatterns());
-    bool isFound(true);
-    while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
-        isFound = !hitIndexes.empty();
-        if (isFound) {
-            if (processAndShouldStop(terms, termIndex, sortItem, hitIndexes)) {
-                break;
+    if (isAllWhiteSpaceOrComment(terms)) {
+        sortItem.isCommentOrWhiteSpace = true;
+    } else {
+        Patterns searchPatterns(getSearchPatterns());
+        bool isFound(true);
+        while (isFound) {
+            Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
+            isFound = !hitIndexes.empty();
+            if (isFound) {
+                if (processAndShouldStop(terms, termIndex, sortItem, hitIndexes)) {
+                    break;
+                }
             }
         }
     }
@@ -99,6 +107,23 @@ void CPlusPlusReorganizeItems::saveDetailsFromItemContent(SortItem& sortItem, st
 
 void CPlusPlusReorganizeItems::saveDetailsFromHeaderSignatures(SortItem& sortItem, string const& item) const {
     sortItem.headerIndex = getBestHeaderIndex(item);
+}
+
+void CPlusPlusReorganizeItems::putAdditionalDetailsOnCommentsAndWhiteSpace(SortItems& sortItems) const {
+    // dont use this code, it obscures+ the meaning
+    int previousHeaderIndex = 0;
+    int previousScore = 0;
+    int previousNumberOfLines = 0;
+    for (auto itItem = sortItems.rbegin(); itItem != sortItems.rend(); ++itItem) {
+        if (itItem->isCommentOrWhiteSpace) {
+            itItem->headerIndex = previousHeaderIndex;
+            itItem->score = previousScore;
+            itItem->numberOfLines = previousNumberOfLines;
+        }
+        previousScore = itItem->score;
+        previousHeaderIndex = itItem->headerIndex;
+        previousNumberOfLines = itItem->numberOfLines;
+    }
 }
 
 Patterns CPlusPlusReorganizeItems::getSearchPatterns() {
@@ -205,20 +230,25 @@ bool CPlusPlusReorganizeItems::processAndShouldStop(
 }
 
 void CPlusPlusReorganizeItems::moveToEndParenthesis(Terms const& terms, int& termIndex, int const parenthesisIndex) {
-    termIndex = parenthesisIndex;
+    termIndex = parenthesisIndex + 1;
     Patterns searchPatterns{{M(")")}, {M(";")}, {M("{")}, {M(":")}};
     bool isFound(true);
+    bool isCloseParenthesisFound(false);
     while (isFound) {
         Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int firstHitIndex = hitIndexes.front();
-            if (terms[firstHitIndex].getContent() == ";" || terms[firstHitIndex].getContent() == "{" ||
-                terms[firstHitIndex].getContent() == ":") {
-                break;
-            }
             if (terms[firstHitIndex].getContent() == ")") {
                 termIndex = hitIndexes.back() + 1;
+                isCloseParenthesisFound = true;
+            }
+            if (terms[firstHitIndex].getContent() == ";" || terms[firstHitIndex].getContent() == "{" ||
+                terms[firstHitIndex].getContent() == ":") {
+                if (!isCloseParenthesisFound) {
+                    termIndex = hitIndexes.back();
+                }
+                break;
             }
         }
     }

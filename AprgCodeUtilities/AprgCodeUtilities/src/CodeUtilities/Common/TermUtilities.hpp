@@ -20,10 +20,13 @@ std::string getLocatorString(Terms const& terms, int const index);
 std::string convertToString(TermType const termType);
 std::string convertToString(MatcherType const type);
 
+bool isAllWhiteSpaceOrComment(Terms const& terms);
 bool isAMatch(MatcherType const matcherType, Term const& term);
 bool isComment(Term const& term);
+bool isOperator(Term const& term);
 bool isWhiteSpace(Term const& term);
 bool isCommentOrWhiteSpace(Term const& term);
 bool hasNewLine(Term const& term);
+bool hasBraces(std::string const& content);
 
 }  // namespace alba::CodeUtilities

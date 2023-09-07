@@ -60,6 +60,7 @@ private:
     [[nodiscard]] std::string getIndentifierAt(int const index) const;
     [[nodiscard]] std::string getNumberAt(int const index) const;
     [[nodiscard]] std::string getAlphaNumericUnderscoreStringAt(int const index) const;
+    [[nodiscard]] std::string getContinuousDigitsAt(int const index) const;
 
     Terms& m_terms;
     int m_index{};
