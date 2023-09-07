@@ -16,6 +16,16 @@ using namespace std;
 
 namespace alba::stringHelper {
 
+int getNumberOfNewLines(string_view const str) {
+    int result = 0;
+    for (char const character : str) {
+        if (character == '\n') {
+            ++result;
+        }
+    }
+    return result;
+}
+
 size_t generateUniqueId(string_view const str) {
     return accumulate(begin(str), end(str), 1ULL, [](size_t const accumulatedChar, uint8_t const character) {
         return (accumulatedChar * character) + 1;

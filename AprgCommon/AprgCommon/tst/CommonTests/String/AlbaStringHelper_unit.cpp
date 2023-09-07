@@ -237,6 +237,12 @@ TEST(BoolCharacterStringTest, IsDisplayableCharacterWorks) {
     EXPECT_TRUE(isDisplayableCharacter('0'));
 }
 
+TEST(IntegerStringTest, GetNumberOfNewLinesWorks) {
+    EXPECT_EQ(0, getNumberOfNewLines(""));
+    EXPECT_EQ(0, getNumberOfNewLines("ABCD"));
+    EXPECT_EQ(4, getNumberOfNewLines("This is a\nsample\nstring\nwith\nnewlines."));
+}
+
 TEST(IntegerStringTest, GenerateUniqueIdWorks) {
     string string1("Mark is the no#1 guy in the world. Mark is also the nicest guy.");
     string string2("MARK is the no#1 programmer in the world. MARK is also the nicest programmer.");

@@ -79,6 +79,7 @@ inline bool isLessThanStringLength(std::string_view const str, int const index) 
     return (index < static_cast<int>(str.length()));
 }
 
+int getNumberOfNewLines(std::string_view const str);
 size_t generateUniqueId(std::string_view const str);
 size_t getLevenshteinDistance(std::string_view const otherString, std::string_view const basisString);
 size_t getHammingDistance(std::string_view const string1, std::string_view const string2);
