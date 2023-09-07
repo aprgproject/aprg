@@ -16,29 +16,26 @@ CPlusPlusReorganizer::CPlusPlusReorganizer() = default;
 void CPlusPlusReorganizer::processHeaderAndImplementationFile(
     string const& headerFile, string const& implementationFile) {
     reorganizeFile(headerFile);
-    // gatherInformationFromFile(headerFile);
+    gatherInformationFromFile(headerFile);
     reorganizeFile(implementationFile);
-    m_informationItems.clear();
+    m_headerInformation = {};
 }
 
 void CPlusPlusReorganizer::reorganizeFile(string const& file) {
     m_purpose = Purpose::Reorganize;
-    processFile(file);
+    m_scopeDetails = {ScopeDetail{0, 0, 0, ScopeType::TopLevel, {}, {}}};
+    AlbaLocalPathHandler filePathHandler(file);
+    m_terms = getTermsFromFile(filePathHandler.getFullPath());
+    processTerms();
+    writeAllTerms(filePathHandler.getFullPath(), m_terms);
 }
 
 void CPlusPlusReorganizer::gatherInformationFromFile(string const& file) {
     m_purpose = Purpose::GatherInformation;
-    processFile(file);
-}
-
-void CPlusPlusReorganizer::processFile(string const& headerFile) {
     m_scopeDetails = {ScopeDetail{0, 0, 0, ScopeType::TopLevel, {}, {}}};
-    AlbaLocalPathHandler filePathHandler(headerFile);
+    AlbaLocalPathHandler filePathHandler(file);
     m_terms = getTermsFromFile(filePathHandler.getFullPath());
     processTerms();
-    if (Purpose::Reorganize == m_purpose) {
-        writeAllTerms(filePathHandler.getFullPath(), m_terms);
-    }
 }
 
 void CPlusPlusReorganizer::processTerms() {
@@ -132,7 +129,7 @@ void CPlusPlusReorganizer::exitScope(int& termIndex, int const scopeEndFirst, in
     if (scopeToExit.scopeType == ScopeType::ClassDeclaration || scopeToExit.scopeType == ScopeType::Namespace) {
         m_terms.erase(m_terms.cbegin() + scopeToExit.scopeHeaderDivider + 1, m_terms.cbegin() + scopeEndFirst);
 
-        CPlusPlusReorganizeItems sorter(getScopeNames(), scopeToExit.items, m_informationItems);
+        CPlusPlusReorganizeItems sorter(scopeToExit.items, getScopeNames(), m_headerInformation.signatures);
         Terms sortedTerms(sorter.getSortedAggregateTerms());
         m_terms.insert(m_terms.cbegin() + scopeToExit.scopeHeaderDivider + 1, sortedTerms.cbegin(), sortedTerms.cend());
 
@@ -158,7 +155,7 @@ void CPlusPlusReorganizer::addItemIfNeeded(string const& content) {
                 m_scopeDetails.back().items.emplace_back(content);
                 break;
             case Purpose::GatherInformation:
-                m_informationItems.emplace_back(content);
+                m_headerInformation.signatures.emplace_back(getFunctionSignature(content));
                 break;
             case Purpose::Unknown:
                 break;
@@ -205,10 +202,14 @@ CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
 strings CPlusPlusReorganizer::getScopeNames() const {
     strings result;
     for (ScopeDetail const& scopeDetail : m_scopeDetails) {
-        result.emplace_back(scopeDetail.name);
+        if (!scopeDetail.name.empty()) {
+            result.emplace_back(scopeDetail.name);
+        }
     }
     return result;
 }
+
+strings CPlusPlusReorganizer::getSavedSignatures() const { return m_headerInformation.signatures; }
 
 string CPlusPlusReorganizer::getContents(int const start, int const end) const {
     return getStringWithoutStartingAndTrailingWhiteSpace(getCombinedContents(m_terms, start, end));

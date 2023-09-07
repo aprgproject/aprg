@@ -3,6 +3,8 @@
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
 #include <CodeUtilities/Common/TermUtilities.hpp>
 
+#include <numeric>
+
 using namespace alba::CodeUtilities::CPlusPlusUtilities;
 using namespace alba::stringHelper;
 using namespace std;
@@ -10,26 +12,37 @@ using namespace std;
 namespace alba::CodeUtilities {
 
 CPlusPlusReorganizeItems::CPlusPlusReorganizeItems(
-    strings const& scopeNames, strings const& items, strings const& headerItems)
-    : m_scopeNames(scopeNames), m_items(items), m_headerItems(headerItems) {}
+    strings const& items, strings const& scopeNames, strings const& headerSignatures)
+    : m_items(items), m_scopeNames(scopeNames), m_headerSignatures(headerSignatures) {}
 
-CPlusPlusReorganizeItems::CPlusPlusReorganizeItems(strings&& scopeNames, strings&& items, strings&& headerItems)
-    : m_scopeNames(scopeNames), m_items(items), m_headerItems(headerItems) {}
+CPlusPlusReorganizeItems::CPlusPlusReorganizeItems(strings&& items, strings&& scopeNames, strings&& headerSignatures)
+    : m_items(items), m_scopeNames(scopeNames), m_headerSignatures(headerSignatures) {}
 
 Terms CPlusPlusReorganizeItems::getSortedAggregateTerms() const {
     Terms terms;
     SortItems sortedItems(getSortedItems());
     terms.emplace_back(TermType::WhiteSpace, "\n");
+    bool hasMultiline = hasMultilineItem(sortedItems);
+    bool isPreviousAMultilineItem(hasMultiline);
     for (SortItem const& sortItem : sortedItems) {
         string const& item(m_items[sortItem.itemsIndex]);
-        // terms.emplace_back(
-        //     TermType::CommentMultiline, "/*BEGIN ADD " + convertToString(sortItem.score) + "*/");
-        terms.emplace_back(TermType::Aggregate, item);
-        // terms.emplace_back(TermType::CommentMultiline, "/*END ADD*/");
-        terms.emplace_back(TermType::WhiteSpace, "\n");
-        if (sortItem.addNewLineAtEnd) {
+
+        bool isMultilineItem = isMultiLine(sortItem.numberOfLines) || (hasMultiline && sortItem.isAccessControl);
+        if (isMultilineItem || isPreviousAMultilineItem) {
             terms.emplace_back(TermType::WhiteSpace, "\n");
         }
+
+        // terms.emplace_back(
+        //     TermType::CommentMultiline, "/*BEGIN ADD " + stringHelper::convertToString(sortItem.numberOfLines) +
+        //     "*/");
+        terms.emplace_back(TermType::Aggregate, item);
+        // terms.emplace_back(TermType::CommentMultiline, "/*END ADD*/");
+
+        terms.emplace_back(TermType::WhiteSpace, "\n");
+        isPreviousAMultilineItem = isMultilineItem;
+    }
+    if (hasMultiline) {
+        terms.emplace_back(TermType::WhiteSpace, "\n");
     }
     return terms;
 }
@@ -45,9 +58,9 @@ CPlusPlusReorganizeItems::SortItems CPlusPlusReorganizeItems::getSortItems() con
     sortItems.reserve(m_items.size());
     int index = 0;
     for (string const& item : m_items) {
-        SortItem sortItem{static_cast<int>(m_headerItems.size()), 0, false, false, index++};
+        SortItem sortItem{0, 0, 0, false, false, index++};
         saveDetailsFromItemContent(sortItem, item);
-        saveDetailsFromItemContent(sortItem, item);
+        saveDetailsFromHeaderSignatures(sortItem, item);
         sortItems.emplace_back(sortItem);
     }
     return sortItems;
@@ -67,9 +80,8 @@ void CPlusPlusReorganizeItems::sortByComparingItems(SortItems& sortItems) {
     }
 }
 
-void CPlusPlusReorganizeItems::saveDetailsFromHeaderItemPosition(SortItem& sortItem, string const& item) const {}
-
 void CPlusPlusReorganizeItems::saveDetailsFromItemContent(SortItem& sortItem, string const& item) const {
+    sortItem.numberOfLines = stringHelper::getNumberOfNewLines(item) + 1;
     int termIndex = 0;
     Terms terms(getTermsFromString(item));
     Patterns searchPatterns(getSearchPatterns());
@@ -83,14 +95,10 @@ void CPlusPlusReorganizeItems::saveDetailsFromItemContent(SortItem& sortItem, st
             }
         }
     }
-    while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, Patterns{{M("}")}});
-        isFound = !hitIndexes.empty();
-        if (isFound) {
-            sortItem.addNewLineAtEnd = true;
-            break;
-        }
-    }
+}
+
+void CPlusPlusReorganizeItems::saveDetailsFromHeaderSignatures(SortItem& sortItem, string const& item) const {
+    sortItem.headerIndex = getBestHeaderIndex(item);
 }
 
 Patterns CPlusPlusReorganizeItems::getSearchPatterns() {
@@ -119,6 +127,7 @@ Patterns CPlusPlusReorganizeItems::getSearchPatterns() {
         {M("[[nodiscard]]")},
         {M(TermType::Attribute)},
         {M("bool")},
+        {M("void")},
         {M("friend")},
         {M(TermType::Macro)},
         {M("public"), M(":")},
@@ -176,6 +185,8 @@ bool CPlusPlusReorganizeItems::processAndShouldStop(
             sortItem.score += 20;
         } else if (terms[firstHitIndex].getTermType() == TermType::Attribute) {
             sortItem.score += 10;
+        } else if (terms[firstHitIndex].getContent() == "void") {
+            sortItem.score += 2;
         } else if (terms[firstHitIndex].getContent() == "bool") {
             sortItem.score += 1;
         } else if (terms[firstHitIndex].getContent() == "friend") {
@@ -186,7 +197,7 @@ bool CPlusPlusReorganizeItems::processAndShouldStop(
             terms[firstHitIndex].getContent() == "public" || terms[firstHitIndex].getContent() == "protected" ||
             terms[firstHitIndex].getContent() == "private") {
             sortItem.isDivider = true;
-            sortItem.addNewLineAtEnd = true;
+            sortItem.isAccessControl = true;
         }
         termIndex = hitIndexes.back() + 1;
     }
@@ -213,6 +224,31 @@ void CPlusPlusReorganizeItems::moveToEndParenthesis(Terms const& terms, int& ter
     }
 }
 
+int CPlusPlusReorganizeItems::getBestHeaderIndex(string const& item) const {
+    string itemSignature = getFunctionSignature(item);
+    int bestDifference = static_cast<int>(itemSignature.size());
+    int bestHeaderIndex = 0;
+    bool isFirst(true);
+    int headerIndex = 0;
+    for (string const& headerSignature : m_headerSignatures) {
+        int difference = static_cast<int>(getLevenshteinDistance(itemSignature, headerSignature));
+        if (isFirst) {
+            bestDifference = difference;
+            isFirst = false;
+        }
+        if (bestDifference > difference) {
+            bestDifference = difference;
+            bestHeaderIndex = headerIndex;
+        }
+        ++headerIndex;
+    }
+    if (bestDifference < 10 &&
+        static_cast<double>(bestDifference) / static_cast<double>(itemSignature.length()) < 0.10) {
+        return bestHeaderIndex;
+    }
+    return static_cast<int>(m_headerSignatures.size());
+}
+
 string CPlusPlusReorganizeItems::getIdentifierBeforeParenthesis(Terms const& terms, int const parenthesisIndex) {
     int beforeParenthesis = parenthesisIndex - 1;
     Patterns searchPatterns{{M(TermType::Identifier)}};
@@ -223,14 +259,28 @@ string CPlusPlusReorganizeItems::getIdentifierBeforeParenthesis(Terms const& ter
     return {};
 }
 
+int CPlusPlusReorganizeItems::getTotalNumberLines(SortItems const& sortItems) {
+    return accumulate(sortItems.cbegin(), sortItems.cend(), 0, [](int const partialResult, SortItem const& sortItem) {
+        return partialResult + sortItem.numberOfLines;
+    });
+}
+
+bool CPlusPlusReorganizeItems::hasMultilineItem(SortItems const& sortItems) {
+    return any_of(sortItems.cbegin(), sortItems.cend(), [&](SortItem const& sortItem) {
+        return isMultiLine(sortItem.numberOfLines);
+    });
+}
+
+bool CPlusPlusReorganizeItems::isMultiLine(int const numberOfLines) { return numberOfLines > 2; }
+
 bool operator<(CPlusPlusReorganizeItems::SortItem const& item1, CPlusPlusReorganizeItems::SortItem const& item2) {
-    if (item1.headerItemPosition == item2.headerItemPosition) {
+    if (item1.headerIndex == item2.headerIndex) {
         if (item1.score == item2.score) {
             return item1.itemsIndex < item2.itemsIndex;
         }
         return item1.score > item2.score;
     }
-    return item1.headerItemPosition < item2.headerItemPosition;
+    return item1.headerIndex < item2.headerIndex;
 }
 
 }  // namespace alba::CodeUtilities

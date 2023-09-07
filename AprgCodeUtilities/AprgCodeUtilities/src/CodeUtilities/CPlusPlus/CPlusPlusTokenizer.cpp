@@ -4,6 +4,8 @@
 #include <CodeUtilities/Common/TermCreateHelpers.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
+#include <algorithm>
+
 using namespace alba;
 using namespace alba::stringHelper;
 using namespace std;

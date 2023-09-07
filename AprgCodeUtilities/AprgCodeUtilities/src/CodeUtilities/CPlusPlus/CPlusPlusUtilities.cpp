@@ -43,7 +43,7 @@ Terms getTermsFromString(string const& code) {
     return result;
 }
 
-std::string getFunctionSignature(std::string const& functionText, strings const& scopeNames) {
+std::string getFunctionSignature(std::string const& functionText) {
     Terms terms(getTermsFromString(functionText));
     Patterns terminatingPatterns{{M(";")}, {M("{")}, {M(":")}};
     Indexes terminatingIndexes = searchForPatternsForwards(terms, 0, terminatingPatterns);
@@ -52,11 +52,15 @@ std::string getFunctionSignature(std::string const& functionText, strings const&
     }
 
     Patterns removePatterns{
-        {M(MatcherType::Comment)}, {M("explicit")},          {M("inline")}, {M("static")}, {M("constexpr")},
-        {M("volatile")},           {M(TermType::Attribute)}, {M("friend")}};
-    for (string const& scopeName : scopeNames) {
-        removePatterns.emplace_back(Pattern{M(scopeName), M("::")});
-    }
+        {M(MatcherType::Comment)},
+        {M("explicit")},
+        {M("inline")},
+        {M("static")},
+        {M("constexpr")},
+        {M("volatile")},
+        {M(TermType::Attribute)},
+        {M("friend")},
+        {M(TermType::Identifier), M("::")}};
     replaceAllForwards(terms, 0, removePatterns, {});
 
     replaceAllForwards(

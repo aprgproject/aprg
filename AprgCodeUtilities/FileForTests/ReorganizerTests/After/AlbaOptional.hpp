@@ -6,16 +6,17 @@
 #include <ostream>
 
 namespace alba {
+
 template <typename ContentType>
 // class [[deprecated("Use std::optional instead! (needs c++17)")]]
 class AlbaOptional {
+
 // This requires copy constructor and default constructor on ContentType
 public:
 
 AlbaOptional() = default;
 ~AlbaOptional() = default;
 explicit AlbaOptional(ContentType const content) : m_contentPointer(std::make_unique<ContentType>(content)) {}
-
 explicit AlbaOptional(ContentType& content) : m_contentPointer(std::make_unique<ContentType>(content)) {}
 
 AlbaOptional(AlbaOptional const& optional) {
@@ -42,7 +43,6 @@ AlbaOptional& operator=(AlbaOptional&& optional) noexcept {
     }
 
 explicit operator bool() const { return hasContent(); }
-
 explicit operator ContentType() const { return get(); }
 
 [[nodiscard]] ContentType const& getConstReference() const {
@@ -96,12 +96,14 @@ friend std::ostream& operator<<(std::ostream& out, AlbaOptional const& optional)
     }
 
 std::unique_ptr<ContentType> m_contentPointer;
+
 };
 
 template <typename ContentType>
 // class [[deprecated("Check if std::reference_wrapper can be used instead.")]] AlbaOptional
 // lets remove [[deprecated]] to avoid unnecessary warnings
 class AlbaOptional<ContentType&> {
+
 public:
 
 ~AlbaOptional() = default;
@@ -177,6 +179,7 @@ private:
     static ContentType m_empty;
 bool m_hasContent;
 ContentType* m_contentPointer;
+
 };
 
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)

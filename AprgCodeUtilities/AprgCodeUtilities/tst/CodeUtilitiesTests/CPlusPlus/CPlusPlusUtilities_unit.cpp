@@ -22,7 +22,7 @@ TEST(CPlusPlusUtilitiesTest, GetFunctionSignatureWorks) {
         "/*Comment*/ \t\t\n friend static name::AlbaOptional::AlbaOptional(AlbaOptional<ContentType&> const& optional) "
         ":  m_hasContent(optional.m_hasContent),  {}";
 
-    string functionSignature(getFunctionSignature(wholeFunction, {"AlbaOptional", "name"}));
+    string functionSignature(getFunctionSignature(wholeFunction));
 
     EXPECT_EQ("AlbaOptional(AlbaOptional<ContentType&> const& optional)", functionSignature);
 }

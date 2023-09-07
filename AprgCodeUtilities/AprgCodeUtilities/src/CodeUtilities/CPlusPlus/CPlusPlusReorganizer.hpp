@@ -17,6 +17,9 @@ public:
         std::string name;
         stringHelper::strings items;
     };
+    struct HeaderInformation {
+        stringHelper::strings signatures;
+    };
 
     CPlusPlusReorganizer();
 
@@ -25,7 +28,6 @@ public:
 
 private:
     void gatherInformationFromFile(std::string const& file);
-    void processFile(std::string const& file);
     void processTerms();
     void processMacro(int& termIndex, int const macroStartIndex);
     void processSemiColon(int& termIndex, int const semiColonIndex);
@@ -39,10 +41,11 @@ private:
     [[nodiscard]] ScopeDetail getCurrentScope() const;
     [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const scopeHeaderDivider) const;
     [[nodiscard]] stringHelper::strings getScopeNames() const;
+    [[nodiscard]] stringHelper::strings getSavedSignatures() const;
     [[nodiscard]] std::string getContents(int const start, int const end) const;
     Purpose m_purpose{Purpose::Unknown};
     std::vector<ScopeDetail> m_scopeDetails;
-    stringHelper::strings m_informationItems;
+    HeaderInformation m_headerInformation;
     Terms m_terms;
 };
 
