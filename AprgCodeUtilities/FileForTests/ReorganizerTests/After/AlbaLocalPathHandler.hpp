@@ -37,4 +37,5 @@ public:
     // rule of zero
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
 };
+
 }  // namespace alba
