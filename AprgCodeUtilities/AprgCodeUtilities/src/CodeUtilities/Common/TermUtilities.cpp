@@ -3,8 +3,6 @@
 #include <Common/Macros/AlbaMacros.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
-#include <algorithm>
-
 using namespace alba::stringHelper;
 using namespace std;
 
@@ -52,6 +50,26 @@ Indexes checkPatternAt(Terms const& terms, int const termIndex, Patterns const& 
         }
     }
     return {};
+}
+
+void replaceAllForwards(
+    Terms& terms, int const startIndex, Patterns const& searchPatterns, Terms const& replacementTerms) {
+    for (int termIndex = startIndex; termIndex < static_cast<int>(terms.size());) {
+        Indexes patternIndexes = checkPatternAt(terms, termIndex, searchPatterns);
+        if (!patternIndexes.empty()) {
+            terms.erase(terms.cbegin() + patternIndexes.front(), terms.cbegin() + patternIndexes.back() + 1);
+            terms.insert(terms.cbegin() + patternIndexes.front(), replacementTerms.cbegin(), replacementTerms.cend());
+            int sizeDifference =
+                static_cast<int>(replacementTerms.size()) - (patternIndexes.back() + 1 - patternIndexes.front());
+            if (sizeDifference == 0) {
+                termIndex = patternIndexes.front() + 1;
+            } else {
+                termIndex = patternIndexes.front();
+            }
+        } else {
+            ++termIndex;
+        }
+    }
 }
 
 void combineTermsInPlace(Terms& terms, TermType const newTermType, int const startIndex, int const endIndex) {

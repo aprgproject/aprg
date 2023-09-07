@@ -1,19 +1,15 @@
 #pragma once
 
-#include <CodeUtilities/Common/TermMatcher.hpp>
-
-#include <optional>
-#include <string>
-#include <vector>
+#include <CodeUtilities/Common/Index.hpp>
+#include <CodeUtilities/Common/Pattern.hpp>
 
 namespace alba::CodeUtilities {
-
-using Indexes = std::vector<int>;
-using IndexesOptional = std::optional<Indexes>;
 
 Indexes searchForPatternsForwards(Terms const& terms, int const startIndex, Patterns const& searchPatterns);
 Indexes searchForPatternsBackwards(Terms const& terms, int const startIndex, Patterns const& searchPatterns);
 Indexes checkPatternAt(Terms const& terms, int const termIndex, Patterns const& searchPatterns);
+void replaceAllForwards(
+    Terms& terms, int const startIndex, Patterns const& searchPatterns, Terms const& replacementTerms);
 
 void combineTermsInPlace(Terms& terms, TermType const newTermType, int const startIndex, int const endIndex);
 void changeTerm(Term& term, TermType const newTermType, std::string const& content);

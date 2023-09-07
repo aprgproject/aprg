@@ -6,6 +6,7 @@
 
 #include <gtest/gtest.h>
 
+#include <cstdlib>
 #include <fstream>
 
 using namespace std;
@@ -20,8 +21,10 @@ void copyFile(string const& source, string const& destination) {
     sourcePathHandler.copyToNewFile(destinationPathHandler.getFullPath());
 }
 void verifyFile(string const& expectedFile, string const& testFile) {
-    ifstream expectedFileStream(AlbaLocalPathHandler(expectedFile).getFullPath());
-    ifstream testFileStream(AlbaLocalPathHandler(testFile).getFullPath());
+    AlbaLocalPathHandler expectedFilePathHandler(expectedFile);
+    AlbaLocalPathHandler testFilePathHandler(testFile);
+    ifstream expectedFileStream(expectedFilePathHandler.getFullPath());
+    ifstream testFileStream(testFilePathHandler.getFullPath());
     AlbaFileReader expectedFileReader(expectedFileStream);
     AlbaFileReader testFileReader(testFileStream);
     bool isDifferenceFound(false);
@@ -32,7 +35,7 @@ void verifyFile(string const& expectedFile, string const& testFile) {
         EXPECT_EQ(lineInExpectedFile, lineInTestFile);
         if (lineInExpectedFile != lineInTestFile) {
             constexpr int LINES_TO_DISPLAY = 6;
-            int numberOfLines = lines.size();
+            int numberOfLines = static_cast<int>(lines.size());
             int lineIndex = numberOfLines < LINES_TO_DISPLAY ? 0 : numberOfLines - LINES_TO_DISPLAY;
             cout << "Difference occured at:\n";
             for (; lineIndex < numberOfLines; ++lineIndex) {
@@ -42,6 +45,14 @@ void verifyFile(string const& expectedFile, string const& testFile) {
             cout << "---> EXPECTED: [" << lineInExpectedFile << "]\n";
             cout << "---> ACTUAL:   [" << lineInTestFile << "]\n\n";
             isDifferenceFound = true;
+            string command(DIFF_APPLICATION_PATH);
+            command += R"( ")";
+            command += expectedFilePathHandler.getFullPath();
+            command += R"(" ")";
+            command += testFilePathHandler.getFullPath();
+            command += R"(")";
+            cout << "---> command [" << command << "]:\n";
+            system(command.c_str());
             break;
         }
         lines.emplace_back(lineInExpectedFile);
@@ -72,6 +83,26 @@ TEST(CPlusPlusReorganizerTest, AlbaNumberTest) {
     verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaNumber.cpp)", TEST_IMPLEMENTATION_FILE);
     clearFile(TEST_HEADER_FILE);
     clearFile(TEST_IMPLEMENTATION_FILE);
+}
+
+TEST(CPlusPlusReorganizerTest, AlbaOptionalTest) {
+    CPlusPlusReorganizer reorganizer;
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaOptional.hpp)", TEST_HEADER_FILE);
+
+    reorganizer.reorganizeFile(TEST_HEADER_FILE);
+
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaOptional.hpp)", TEST_HEADER_FILE);
+    clearFile(TEST_HEADER_FILE);
+}
+
+TEST(CPlusPlusReorganizerTest, AlbaLocalPathHandlerTest) {
+    CPlusPlusReorganizer reorganizer;
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaLocalPathHandler.hpp)", TEST_HEADER_FILE);
+
+    reorganizer.reorganizeFile(TEST_HEADER_FILE);
+
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaLocalPathHandler.hpp)", TEST_HEADER_FILE);
+    clearFile(TEST_HEADER_FILE);
 }
 
 }  // namespace alba::CodeUtilities

@@ -20,14 +20,11 @@ public:
     friend bool operator!=(Term const& term, TermMatcher const& matcher);
     friend std::ostream& operator<<(std::ostream& out, TermMatcher const& matcher);
 
-private:
+    // private:
     std::optional<TermType> m_termTypeOptional;
     std::optional<std::string> m_contentOptional;
     std::optional<MatcherType> m_matcherTypeOptional;
 };
-
-using Pattern = std::vector<TermMatcher>;
-using Patterns = std::vector<Pattern>;
 
 #define M(argument) alba::CodeUtilities::TermMatcher(argument)
 

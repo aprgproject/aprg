@@ -1,10 +1,7 @@
 #pragma once
 
 #include <CodeUtilities/Common/Term.hpp>
-#include <Common/Debug/AlbaDebug.hpp>
-
-#include <string>
-#include <vector>
+#include <Common/String/AlbaStringHelper.hpp>
 
 namespace alba::CodeUtilities {
 
@@ -17,23 +14,18 @@ public:
         int scopeHeaderDivider;
         int scopeEnd;
         ScopeType scopeType;
-        std::string scopeHeaderCode;
         std::string name;
-        std::vector<std::string> items;
-        friend ALBA_DBG_CLASS_OUTPUT_OPERATOR_DEFINITION(
-            ScopeDetail const& object, "(scopeHeaderStart:" << object.scopeHeaderStart
-                                                            << ",scopeHeaderDivider:" << object.scopeHeaderDivider
-                                                            << ",scopeEnd:" << object.scopeEnd << ")");
+        stringHelper::strings items;
     };
 
     CPlusPlusReorganizer();
 
     void processHeaderAndImplementationFile(std::string const& headerFile, std::string const& implementationFile);
-    void processHeaderFile(std::string const& headerFile);
-    void processImplementationFile(std::string const& implementationFile);
+    void reorganizeFile(std::string const& file);
 
 private:
-    void processFile(std::string const& headerFile);
+    void gatherInformationFromFile(std::string const& file);
+    void processFile(std::string const& file);
     void processTerms();
     void processMacro(int& termIndex, int const macroStartIndex);
     void processSemiColon(int& termIndex, int const semiColonIndex);
@@ -46,11 +38,11 @@ private:
     void addItemIfNeeded(std::string const& content);
     [[nodiscard]] ScopeDetail getCurrentScope() const;
     [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const scopeHeaderDivider) const;
+    [[nodiscard]] stringHelper::strings getScopeNames() const;
     [[nodiscard]] std::string getContents(int const start, int const end) const;
-    [[nodiscard]] bool isInClassDeclaration() const;
-    [[nodiscard]] bool isToReorganize() const;
     Purpose m_purpose{Purpose::Unknown};
     std::vector<ScopeDetail> m_scopeDetails;
+    stringHelper::strings m_informationItems;
     Terms m_terms;
 };
 

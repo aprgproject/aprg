@@ -3,9 +3,7 @@
 #include <CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.hpp>
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
 #include <CodeUtilities/Common/TermUtilities.hpp>
-#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
-#include <Common/String/AlbaStringHelper.hpp>
 
 using namespace std;
 using namespace alba::CodeUtilities::CPlusPlusUtilities;
@@ -17,23 +15,24 @@ CPlusPlusReorganizer::CPlusPlusReorganizer() = default;
 
 void CPlusPlusReorganizer::processHeaderAndImplementationFile(
     string const& headerFile, string const& implementationFile) {
-    processHeaderFile(headerFile);
-    processImplementationFile(implementationFile);
+    reorganizeFile(headerFile);
+    // gatherInformationFromFile(headerFile);
+    reorganizeFile(implementationFile);
+    m_informationItems.clear();
 }
 
-void CPlusPlusReorganizer::processHeaderFile(string const& headerFile) {
+void CPlusPlusReorganizer::reorganizeFile(string const& file) {
     m_purpose = Purpose::Reorganize;
-    m_scopeDetails = {ScopeDetail{0, 0, 0, ScopeType::TopLevel, {}, {}, {}}};
-    processFile(headerFile);
+    processFile(file);
 }
 
-void CPlusPlusReorganizer::processImplementationFile(string const& implementationFile) {
-    m_purpose = Purpose::Reorganize;
-    m_scopeDetails = {ScopeDetail{0, 0, 0, ScopeType::TopLevel, {}, {}, {}}};
-    processFile(implementationFile);
+void CPlusPlusReorganizer::gatherInformationFromFile(string const& file) {
+    m_purpose = Purpose::GatherInformation;
+    processFile(file);
 }
 
 void CPlusPlusReorganizer::processFile(string const& headerFile) {
+    m_scopeDetails = {ScopeDetail{0, 0, 0, ScopeType::TopLevel, {}, {}}};
     AlbaLocalPathHandler filePathHandler(headerFile);
     m_terms = getTermsFromFile(filePathHandler.getFullPath());
     processTerms();
@@ -76,7 +75,7 @@ void CPlusPlusReorganizer::processTerms() {
 void CPlusPlusReorganizer::processMacro(int& termIndex, int const macroStartIndex) {
     addItemIfNeeded(termIndex, macroStartIndex - 1);
     termIndex = macroStartIndex + 1;
-    Patterns searchPatterns{{M("\\"), M(MatcherType::HasNewLine)}, {M(MatcherType::HasNewLine)}};
+    Patterns searchPatterns{{M(MatcherType::HasNewLine)}, {M("\\"), M(MatcherType::HasNewLine)}};
     bool isFound(true);
     while (isFound) {
         Indexes hitIndexes = searchForPatternsForwards(m_terms, termIndex, searchPatterns);
@@ -133,14 +132,14 @@ void CPlusPlusReorganizer::exitScope(int& termIndex, int const scopeEndFirst, in
     if (scopeToExit.scopeType == ScopeType::ClassDeclaration || scopeToExit.scopeType == ScopeType::Namespace) {
         m_terms.erase(m_terms.cbegin() + scopeToExit.scopeHeaderDivider + 1, m_terms.cbegin() + scopeEndFirst);
 
-        CPlusPlusReorganizeItems sorter(scopeToExit.items);
+        CPlusPlusReorganizeItems sorter(getScopeNames(), scopeToExit.items, m_informationItems);
         Terms sortedTerms(sorter.getSortedAggregateTerms());
         m_terms.insert(m_terms.cbegin() + scopeToExit.scopeHeaderDivider + 1, sortedTerms.cbegin(), sortedTerms.cend());
 
-        int difference = static_cast<int>(sortedTerms.size()) - scopeEndFirst + scopeToExit.scopeHeaderDivider + 1;
+        int sizeDifference = static_cast<int>(sortedTerms.size()) - scopeEndFirst + scopeToExit.scopeHeaderDivider + 1;
         m_scopeDetails.pop_back();
-        addItemIfNeeded(scopeToExit.scopeHeaderStart, scopeEndSecond + difference);
-        termIndex = scopeEndSecond + 1 + difference;
+        addItemIfNeeded(scopeToExit.scopeHeaderStart, scopeEndSecond + sizeDifference);
+        termIndex = scopeEndSecond + 1 + sizeDifference;
     } else {
         m_scopeDetails.pop_back();
         addItemIfNeeded(scopeToExit.scopeHeaderStart, scopeEndSecond);
@@ -153,8 +152,17 @@ void CPlusPlusReorganizer::addItemIfNeeded(int const startIndex, int const endIn
 }
 
 void CPlusPlusReorganizer::addItemIfNeeded(string const& content) {
-    if (isToReorganize() && !content.empty()) {
-        m_scopeDetails.back().items.emplace_back(content);
+    if (!content.empty()) {
+        switch (m_purpose) {
+            case Purpose::Reorganize:
+                m_scopeDetails.back().items.emplace_back(content);
+                break;
+            case Purpose::GatherInformation:
+                m_informationItems.emplace_back(content);
+                break;
+            case Purpose::Unknown:
+                break;
+        }
     }
 }
 
@@ -162,15 +170,8 @@ CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::getCurrentScope() const 
 
 CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
     int const scopeHeaderStart, int const scopeHeaderDivider) const {
-    ScopeDetail scopeDetail{
-        scopeHeaderStart,
-        scopeHeaderDivider,
-        0,
-        ScopeType::Unknown,
-        getContents(scopeHeaderStart, scopeHeaderDivider - 1),
-        {},
-        {}};
-    Terms scopeHeaderTerms(getTermsFromString(scopeDetail.scopeHeaderCode));
+    ScopeDetail scopeDetail{scopeHeaderStart, scopeHeaderDivider, 0, ScopeType::Unknown, {}, {}};
+    Terms scopeHeaderTerms(getTermsFromString(getContents(scopeHeaderStart, scopeHeaderDivider - 1)));
     Patterns searchPatterns{
         {M("namespace"), M(TermType::Identifier)},
         {M("class"), M(TermType::Identifier)},
@@ -201,14 +202,16 @@ CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
     return scopeDetail;
 }
 
+strings CPlusPlusReorganizer::getScopeNames() const {
+    strings result;
+    for (ScopeDetail const& scopeDetail : m_scopeDetails) {
+        result.emplace_back(scopeDetail.name);
+    }
+    return result;
+}
+
 string CPlusPlusReorganizer::getContents(int const start, int const end) const {
     return getStringWithoutStartingAndTrailingWhiteSpace(getCombinedContents(m_terms, start, end));
 }
-
-bool CPlusPlusReorganizer::isInClassDeclaration() const {
-    return ScopeType::ClassDeclaration == m_scopeDetails.back().scopeType;
-}
-
-bool CPlusPlusReorganizer::isToReorganize() const { return Purpose::Reorganize == m_purpose; }
 
 }  // namespace alba::CodeUtilities

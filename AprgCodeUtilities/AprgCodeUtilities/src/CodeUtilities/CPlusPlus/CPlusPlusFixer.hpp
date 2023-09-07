@@ -1,9 +1,6 @@
 #pragma once
 
-#include <CodeUtilities/Common/TermMatcher.hpp>
-
-#include <string>
-#include <vector>
+#include <CodeUtilities/Common/Pattern.hpp>
 
 namespace alba::CodeUtilities::CPlusPlusFixer {
 
