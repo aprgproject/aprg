@@ -3,7 +3,6 @@
 #include <CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.hpp>
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
 #include <CodeUtilities/Common/TermUtilities.hpp>
-#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/Print/AlbaLogPrints.hpp>
 
@@ -75,12 +74,22 @@ void CPlusPlusReorganizer::gatherInformationFromFile(string const& file) {
 
 void CPlusPlusReorganizer::processTerms() {
     Patterns searchPatterns{
-        {M(TermType::Macro)}, {M(";")}, {M("{"), M("}"), M(";")}, {M("{"), M("}")},         {M("{")},
-        {M("}"), M(";")},     {M("}")}, {M("public"), M(":")},    {M("protected"), M(":")}, {M("private"), M(":")}};
-    int termIndex = 0;
+        {M(TermType::Macro)},
+        {M(";")},
+        {M("{"), M("}"), M(";")},
+        {M("{"), M("}")},
+        {M("{")},
+        {M("}"), M(";")},
+        {M("}")},
+        {M("(")},
+        {M("public"), M(":")},
+        {M("protected"), M(":")},
+        {M("private"), M(":")}};
+    int lastProcessedIndex = 0;
+    int searchIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(m_terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForPatternsForwards(m_terms, searchIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int firstHitIndex = hitIndexes.front();
@@ -88,38 +97,46 @@ void CPlusPlusReorganizer::processTerms() {
             Term const& firstTerm(m_terms[firstHitIndex]);
             Term const& lastTerm(m_terms[lastHitIndex]);
             if (firstTerm.getTermType() == TermType::Macro) {
-                processMacro(termIndex, firstHitIndex);
+                processMacro(lastProcessedIndex, firstHitIndex);
+                searchIndex = lastProcessedIndex;
             } else if (firstTerm.getContent() == ";") {
-                processSemiColon(termIndex, firstHitIndex);
+                processSemiColon(lastProcessedIndex, firstHitIndex);
+                searchIndex = lastProcessedIndex;
             } else if (
                 (firstTerm.getContent() == "{" && m_terms[hitIndexes[1]].getContent() == "}" &&
                  lastTerm.getContent() == ";") ||
                 (firstTerm.getContent() == "{" && lastTerm.getContent() == "}")) {
-                processOpeningAndClosingBrace(termIndex, firstHitIndex, lastHitIndex);
+                processOpeningAndClosingBrace(lastProcessedIndex, firstHitIndex, lastHitIndex);
+                searchIndex = lastProcessedIndex;
             } else if (firstTerm.getContent() == "{") {
-                processOpeningBrace(termIndex, firstHitIndex);
+                processOpeningBrace(lastProcessedIndex, firstHitIndex);
+                searchIndex = lastProcessedIndex;
             } else if (firstTerm.getContent() == "}") {
-                processClosingBrace(termIndex, firstHitIndex, lastHitIndex);
+                processClosingBrace(lastProcessedIndex, firstHitIndex, lastHitIndex);
+                searchIndex = lastProcessedIndex;
+            } else if (firstTerm.getContent() == "(") {
+                searchIndex = getIndexAtClosingString(m_terms, firstHitIndex, "(", ")");
             } else {
-                processRecognizedItem(termIndex, lastHitIndex);
+                processRecognizedItem(lastProcessedIndex, lastHitIndex);
+                searchIndex = lastProcessedIndex;
             }
         }
     }
 }
 
-void CPlusPlusReorganizer::processMacro(int& termIndex, int const macroStartIndex) {
-    addItemIfNeeded(termIndex, macroStartIndex - 1);  // add item before macro
-    termIndex = macroStartIndex + 1;
+void CPlusPlusReorganizer::processMacro(int& lastProcessedIndex, int const macroStartIndex) {
+    addItemIfNeeded(lastProcessedIndex, macroStartIndex - 1);  // add item before macro
+    lastProcessedIndex = macroStartIndex + 1;
     Patterns searchPatterns{{M(MatcherType::WhiteSpaceWithNewLine)}, {M("\\"), M(MatcherType::WhiteSpaceWithNewLine)}};
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(m_terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForPatternsForwards(m_terms, lastProcessedIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int firstHitIndex = hitIndexes.front();
             int lastHitIndex = hitIndexes.back();
             Term const& firstTerm(m_terms[firstHitIndex]);
-            termIndex = lastHitIndex + 1;
+            lastProcessedIndex = lastHitIndex + 1;
             if (firstTerm == M(MatcherType::WhiteSpaceWithNewLine)) {
                 addItemIfNeeded(macroStartIndex, lastHitIndex);
                 break;
@@ -128,57 +145,57 @@ void CPlusPlusReorganizer::processMacro(int& termIndex, int const macroStartInde
     }
 }
 
-void CPlusPlusReorganizer::processSemiColon(int& termIndex, int const semiColonIndex) {
+void CPlusPlusReorganizer::processSemiColon(int& lastProcessedIndex, int const semiColonIndex) {
     int endIndex = getIndexAtSameLineComment(semiColonIndex);
-    addItemIfNeeded(termIndex, endIndex);
-    termIndex = endIndex + 1;
+    addItemIfNeeded(lastProcessedIndex, endIndex);
+    lastProcessedIndex = endIndex + 1;
 }
 
 void CPlusPlusReorganizer::processOpeningAndClosingBrace(
-    int& termIndex, int const openingBraceIndex, int const closingBraceSemiColonIndex) {
+    int& lastProcessedIndex, int const openingBraceIndex, int const closingBraceSemiColonIndex) {
     int endIndex = getIndexAtSameLineComment(closingBraceSemiColonIndex);
-    Terms scopeHeaderTerms(getTermsFromString(getContents(termIndex, openingBraceIndex - 1)));
+    Terms scopeHeaderTerms(getTermsFromString(getContents(lastProcessedIndex, openingBraceIndex - 1)));
     strings& currentItems(m_scopeDetails.back().items);
     if (!currentItems.empty() && shouldConnectToPreviousItem(scopeHeaderTerms)) {
-        currentItems.back() += getCombinedContents(m_terms, termIndex, endIndex);
+        currentItems.back() += getCombinedContents(m_terms, lastProcessedIndex, endIndex);
     } else {
-        addItemIfNeeded(termIndex, endIndex);
+        addItemIfNeeded(lastProcessedIndex, endIndex);
     }
-    termIndex = endIndex + 1;
+    lastProcessedIndex = endIndex + 1;
 }
 
-void CPlusPlusReorganizer::processOpeningBrace(int& termIndex, int const openingBraceIndex) {
-    Terms scopeHeaderTerms(getTermsFromString(getContents(termIndex, openingBraceIndex - 1)));
+void CPlusPlusReorganizer::processOpeningBrace(int& lastProcessedIndex, int const openingBraceIndex) {
+    Terms scopeHeaderTerms(getTermsFromString(getContents(lastProcessedIndex, openingBraceIndex - 1)));
     strings& currentItems(m_scopeDetails.back().items);
     if (!currentItems.empty() && shouldConnectToPreviousItem(scopeHeaderTerms)) {
         string const& lastItem(currentItems.back());
         if (hasBraces(lastItem)) {
             Terms lastItemTerms = getTermsFromString(lastItem);
             currentItems.pop_back();
-            termIndex -= static_cast<int>(lastItemTerms.size()) + 1;
+            lastProcessedIndex -= static_cast<int>(lastItemTerms.size()) + 1;
         }
     }
-    enterScope(termIndex, openingBraceIndex);
-    termIndex = openingBraceIndex + 1;
+    enterScope(lastProcessedIndex, openingBraceIndex);
+    lastProcessedIndex = openingBraceIndex + 1;
 }
 
 void CPlusPlusReorganizer::processClosingBrace(
-    int& termIndex, int const closingBraceIndex, int const closingBraceSemiColonIndex) {
+    int& lastProcessedIndex, int const closingBraceIndex, int const closingBraceSemiColonIndex) {
     int endIndex = getIndexAtSameLineComment(closingBraceSemiColonIndex);
-    addItemIfNeeded(termIndex, closingBraceIndex - 1);
-    exitScope(termIndex, closingBraceIndex, endIndex);
+    addItemIfNeeded(lastProcessedIndex, closingBraceIndex - 1);
+    exitScope(lastProcessedIndex, closingBraceIndex, endIndex);
 }
 
-void CPlusPlusReorganizer::processRecognizedItem(int& termIndex, int const recognizedItemEndIndex) {
-    addItemIfNeeded(termIndex, recognizedItemEndIndex);
-    termIndex = recognizedItemEndIndex + 1;
+void CPlusPlusReorganizer::processRecognizedItem(int& lastProcessedIndex, int const recognizedItemEndIndex) {
+    addItemIfNeeded(lastProcessedIndex, recognizedItemEndIndex);
+    lastProcessedIndex = recognizedItemEndIndex + 1;
 }
 
 void CPlusPlusReorganizer::enterScope(int const scopeHeaderStart, int const openingBraceIndex) {
     m_scopeDetails.emplace_back(constructScopeDetails(scopeHeaderStart, openingBraceIndex));
 }
 
-void CPlusPlusReorganizer::exitScope(int& termIndex, int const closingBraceIndex, int const endIndex) {
+void CPlusPlusReorganizer::exitScope(int& lastProcessedIndex, int const closingBraceIndex, int const endIndex) {
     ScopeDetail& scopeToExit(m_scopeDetails.back());
     if (shouldReorganizeInThisScope(scopeToExit)) {
         m_terms.erase(m_terms.cbegin() + scopeToExit.openingBraceIndex + 1, m_terms.cbegin() + closingBraceIndex);
@@ -192,11 +209,11 @@ void CPlusPlusReorganizer::exitScope(int& termIndex, int const closingBraceIndex
             static_cast<int>(sortedTerms.size()) - closingBraceIndex + scopeToExit.openingBraceIndex + 1;
         m_scopeDetails.pop_back();
         addItemIfNeeded(scopeToExit.scopeHeaderStart, endIndex + sizeDifference);
-        termIndex = endIndex + 1 + sizeDifference;
+        lastProcessedIndex = endIndex + 1 + sizeDifference;
     } else {
         m_scopeDetails.pop_back();
         addItemIfNeeded(scopeToExit.scopeHeaderStart, endIndex);
-        termIndex = endIndex + 1;
+        lastProcessedIndex = endIndex + 1;
     }
 }
 
@@ -240,7 +257,7 @@ int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
     return endIndex;
 }
 
-int CPlusPlusReorganizer::getIndexAtClosing(
+int CPlusPlusReorganizer::getIndexAtClosingString(
     Terms const& terms, int const openingIndex, string const& openingString, string const& closingString) {
     Patterns searchPatterns{{M(openingString)}, {M(closingString)}};
     int endIndex = openingIndex + 1;
@@ -285,10 +302,10 @@ CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
         {M("class"), M(TermType::Identifier)},
         {M("struct"), M(TermType::Identifier)},
         {M("union"), M(TermType::Identifier)}};
-    int termIndex = 0;
+    int lastProcessedIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(scopeHeaderTerms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForPatternsForwards(scopeHeaderTerms, lastProcessedIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int firstHitIndex = hitIndexes.front();
@@ -307,9 +324,9 @@ CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
                 break;
             }
             if (firstTerm.getContent() == "template" && lastTerm.getContent() == "<") {
-                termIndex = getIndexAtClosing(scopeHeaderTerms, lastHitIndex, "<", ">");
+                lastProcessedIndex = getIndexAtClosingString(scopeHeaderTerms, lastHitIndex, "<", ">");
             } else {
-                termIndex = lastHitIndex + 1;
+                lastProcessedIndex = lastHitIndex + 1;
             }
         }
     }

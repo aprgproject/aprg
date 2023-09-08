@@ -30,19 +30,20 @@ public:
 private:
     void gatherInformationFromFile(std::string const& file);
     void processTerms();
-    void processMacro(int& termIndex, int const macroStartIndex);
-    void processSemiColon(int& termIndex, int const endIndex);
+    void processMacro(int& lastProcessedIndex, int const macroStartIndex);
+    void processSemiColon(int& lastProcessedIndex, int const endIndex);
     void processOpeningAndClosingBrace(
-        int& termIndex, int const openingBraceIndex, int const closingBraceSemiColonIndex);
-    void processOpeningBrace(int& termIndex, int const openingBraceIndex);
-    void processClosingBrace(int& termIndex, int const closingBraceIndex, int const closingBraceSemiColonIndex);
-    void processRecognizedItem(int& termIndex, int const recognizedItemEndIndex);
+        int& lastProcessedIndex, int const openingBraceIndex, int const closingBraceSemiColonIndex);
+    void processOpeningBrace(int& lastProcessedIndex, int const openingBraceIndex);
+    void processClosingBrace(
+        int& lastProcessedIndex, int const closingBraceIndex, int const closingBraceSemiColonIndex);
+    void processRecognizedItem(int& lastProcessedIndex, int const recognizedItemEndIndex);
     void enterScope(int const scopeHeaderStart, int const openingBraceIndex);
-    void exitScope(int& termIndex, int const closingBraceIndex, int const endIndex);
+    void exitScope(int& lastProcessedIndex, int const closingBraceIndex, int const endIndex);
     [[nodiscard]] static bool shouldReorganizeInThisScope(ScopeDetail const& scope);
     void addItemIfNeeded(int const startIndex, int const endIndex);
     [[nodiscard]] int getIndexAtSameLineComment(int const index) const;
-    static int getIndexAtClosing(
+    static int getIndexAtClosingString(
         Terms const& terms, int const openingIndex, std::string const& openingString, std::string const& closingString);
     [[nodiscard]] static bool shouldConnectToPreviousItem(Terms const& scopeHeaderTerms);
     [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const openingBraceIndex) const;

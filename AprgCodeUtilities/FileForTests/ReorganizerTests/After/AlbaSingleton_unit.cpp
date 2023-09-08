@@ -8,9 +8,8 @@ namespace alba {
 // because singleton is held as static variable
 class SingletonExample : public AlbaSingleton<SingletonExample> {
 public:
-    SingletonExample() { ++numberOfConstructorExecutions; }
-
-    static size_t numberOfConstructorExecutions;
+SingletonExample() { ++numberOfConstructorExecutions; }
+static size_t numberOfConstructorExecutions;
 };
 
 size_t SingletonExample::numberOfConstructorExecutions = 0;

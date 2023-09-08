@@ -3,7 +3,6 @@
 #include <CodeUtilities/CPlusPlus/CPlusPlusTokenizer.hpp>
 #include <CodeUtilities/Common/CommonTypes.hpp>
 #include <CodeUtilities/Common/TermUtilities.hpp>
-#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
@@ -57,6 +56,7 @@ string getFunctionSignature(string const& functionText) {
         {M("explicit")},
         {M("inline")},
         {M("static")},
+        {M("virtual")},
         {M("constexpr")},
         {M("volatile")},
         {M(TermType::Attribute)},

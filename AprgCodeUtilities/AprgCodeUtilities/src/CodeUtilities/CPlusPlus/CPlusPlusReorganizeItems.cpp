@@ -2,7 +2,6 @@
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
 #include <CodeUtilities/Common/TermUtilities.hpp>
-#include <Common/Debug/AlbaDebug.hpp>
 
 #include <numeric>
 
@@ -115,8 +114,8 @@ Patterns CPlusPlusReorganizeItems::getSearchPatterns() {
         {M("{")},
         {M(":")},
         {M("static_assert")},
-        {M("using")},
         {M("namespace")},
+        {M("using")},
         {M("enum")},
         {M("struct")},
         {M("union")},
@@ -128,6 +127,7 @@ Patterns CPlusPlusReorganizeItems::getSearchPatterns() {
         {M("operator")},
         {M("explicit")},
         {M("inline")},
+        {M("virtual")},
         {M("constexpr")},
         {M("static")},
         {M("volatile")},
@@ -163,6 +163,11 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
                 sortItem.itemType = ItemType::Declaration;
                 break;
             }
+            if (firstTerm.getContent() == "namespace") {
+                sortItem.itemType = ItemType::Namespace;
+                sortItem.isDivider = true;
+                break;
+            }
             if (firstTerm.getContent() == "using") {
                 sortItem.itemType = ItemType::Declaration;
                 sortItem.isDivider = true;
@@ -176,10 +181,7 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
                 sortItem.score += 10000000;
                 sortItem.itemType = ItemType::Function;
             } else {
-                if (firstTerm.getContent() == "namespace") {
-                    sortItem.score += 600000000;
-                    sortItem.itemType = ItemType::Namespace;
-                } else if (firstTerm.getContent() == "enum") {
+                if (firstTerm.getContent() == "enum") {
                     sortItem.score += 500000000;
                     sortItem.itemType = ItemType::Declaration;
                 } else if (firstTerm.getContent() == "struct") {
@@ -200,12 +202,14 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
                 } else if (firstTerm.getContent() == "=" && lastTerm.getContent() == "delete") {
                     sortItem.score += 200000;
                 } else if (firstTerm.getContent() == "operator" && lastTerm.getContent() == "=") {
-                    sortItem.score += 20000;
+                    sortItem.score += 30000;
                 } else if (firstTerm.getContent() == "operator") {
-                    sortItem.score += 10000;
+                    sortItem.score += 20000;
                 } else if (firstTerm.getContent() == "explicit") {
-                    sortItem.score += 4000;
+                    sortItem.score += 5000;
                 } else if (firstTerm.getContent() == "inline") {
+                    sortItem.score += 4000;
+                } else if (firstTerm.getContent() == "virtual") {
                     sortItem.score += 3000;
                 } else if (firstTerm.getContent() == "constexpr") {
                     sortItem.score += 2000;
@@ -330,14 +334,18 @@ int CPlusPlusReorganizeItems::getScoreAtReturnOfFunctionSignature(string const& 
         Term const& firstTerm(terms[firstHitIndex]);
         if (firstTerm.getTermType() == TermType::PrimitiveType) {
             if (firstTerm.getContent() == "bool") {
-                score = 5;
+                score = 6;
             } else if (firstTerm.getContent() == "void") {
+                score = 3;
+            } else {
+                score = 5;
+            }
+        } else if (firstTerm.getTermType() == TermType::Identifier) {
+            if (firstTerm.getContent() == "TEST" || firstTerm.getContent() == "TEST_F") {
                 score = 2;
             } else {
                 score = 4;
             }
-        } else if (firstTerm.getTermType() == TermType::Identifier) {
-            score = 3;
         } else if (firstTerm.getTermType() == TermType::Keyword) {
             score = 1;
         }
