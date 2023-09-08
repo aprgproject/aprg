@@ -17,13 +17,12 @@ using namespace std;
 namespace alba::stringHelper {
 
 int getNumberOfNewLines(string_view const str) {
-    int result = 0;
-    for (char const character : str) {
+    return accumulate(cbegin(str), cend(str), 0, [](int const partialResult, char const character) {
         if (character == '\n') {
-            ++result;
+            return partialResult + 1;
         }
-    }
-    return result;
+        return partialResult;
+    });
 }
 
 size_t generateUniqueId(string_view const str) {
