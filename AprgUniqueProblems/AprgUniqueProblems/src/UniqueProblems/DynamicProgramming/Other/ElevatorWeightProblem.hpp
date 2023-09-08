@@ -9,7 +9,6 @@ public:
     // There is an elevator with maximum weight x, and n people with known weights who want to get from the ground floor
     // to the top floor. What is the minimum number of rides needed if the people enter the elevator in an optimal
     // order?
-
     // Recursive formulation:
     // -> Let numberOfRides(peopleBits) be the number of rides of people in peopleBits
     // -> Let lastWeight(peopleBits) be the last weight of the ride of people in peopleBits (peopleBits includes people
@@ -22,7 +21,6 @@ public:
     // -----> Then, create a new ride with only the person
     // -----> numberOfRides(peopleBits with a person) = numberOfRides(peopleBits without a person)+1
     // -----> So, lastWeight(peopleBits with a person) = person weight
-
     using Weight = int;
     using Person = int;
     using PeopleBits = int;
@@ -31,17 +29,15 @@ public:
     using Weights = std::vector<Weight>;
     using NumberOfRidesAndWeight = std::pair<int, Weight>;
     using NumberOfRidesAndWeights = std::vector<NumberOfRidesAndWeight>;
-
     ElevatorWeightProblem(Weight const maximumElevatorWeight, Weights const& peopleWeights);
-
     int getNumberOfOptimalRides();
 
 private:
     [[nodiscard]] static bool isPersonIncluded(PeopleBits const peopleBits, Person const person);
-    [[nodiscard]] Person getNumberOfPeople() const;
-    [[nodiscard]] PeopleBits getNumberOfPeopleSubsets() const;
     static PeopleBits getProductBits(Person const person);
     static PeopleBits removePerson(PeopleBits const peopleBits, Person const person);
+    [[nodiscard]] Person getNumberOfPeople() const;
+    [[nodiscard]] PeopleBits getNumberOfPeopleSubsets() const;
     Weight m_maximumElevatorWeight;
     Weights m_peopleWeights;
     NumberOfRidesAndWeights m_numberOfRidesAndLastWeights;

@@ -2,8 +2,6 @@
 
 namespace alba::algebra {
 
-FirstCoefficientRetriever::FirstCoefficientRetriever() = default;
-
 AlbaNumber const& FirstCoefficientRetriever::getFirstCoefficient() const { return m_firstCoefficient; }
 
 void FirstCoefficientRetriever::retrieveFromEquations(Equations const& equations) {
@@ -18,21 +16,9 @@ void FirstCoefficientRetriever::retrieveFromEquation(Equation const& equation) {
     }
 }
 
-void FirstCoefficientRetriever::retrieveFromTerm(Term const& term) {
-    if (!m_isValueSet) {
-        BaseRetriever::retrieveFromTerm(term);
-    }
-}
 void FirstCoefficientRetriever::retrieveFromConstant(Constant const& constant) {
     if (!m_isValueSet) {
         m_firstCoefficient = constant.getNumber();
-        m_isValueSet = true;
-    }
-}
-
-void FirstCoefficientRetriever::retrieveFromVariable(Variable const&) {
-    if (!m_isValueSet) {
-        m_firstCoefficient = 1;
         m_isValueSet = true;
     }
 }
@@ -43,6 +29,7 @@ void FirstCoefficientRetriever::retrieveFromMonomial(Monomial const& monomial) {
         m_isValueSet = true;
     }
 }
+
 void FirstCoefficientRetriever::retrieveFromPolynomial(Polynomial const& polynomial) {
     if (!m_isValueSet) {
         BaseRetriever::retrieveFromPolynomial(polynomial);
@@ -64,6 +51,21 @@ void FirstCoefficientRetriever::retrieveFromFunction(Function const& functionObj
 void FirstCoefficientRetriever::retrieveFromPolynomials(Polynomials const& polynomials) {
     if (!m_isValueSet) {
         BaseRetriever::retrieveFromPolynomials(polynomials);
+    }
+}
+
+FirstCoefficientRetriever::FirstCoefficientRetriever() = default;
+
+void FirstCoefficientRetriever::retrieveFromTerm(Term const& term) {
+    if (!m_isValueSet) {
+        BaseRetriever::retrieveFromTerm(term);
+    }
+}
+
+void FirstCoefficientRetriever::retrieveFromVariable(Variable const&) {
+    if (!m_isValueSet) {
+        m_firstCoefficient = 1;
+        m_isValueSet = true;
     }
 }
 

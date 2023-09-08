@@ -62,11 +62,8 @@ private:
     }
 
     static constexpr int getVirtualTopIndex() { return getDimensionsSquared(); }
-
     static constexpr int getVirtualBottomIndex() { return getDimensionsSquared() + 1; }
-
     [[nodiscard]] bool isSiteOpen(int const index) const { return m_sites[index]; }
-
     [[nodiscard]] int getIndex(int const x, int const y) const { return y * DIMENSION + x; }
 
     void retrieveCoordinates(int const index, int& x, int& y) const {
@@ -74,6 +71,9 @@ private:
         y = index / DIMENSION;
     }
 
+    std::array<bool, getDimensionsSquared()> m_sites{};
+    WeightedQuickUnionWithArray<int, getDimensionsSquared() + 2>
+        m_unionFindOfIndexes;  //+2 because of virtual top site and bottom site
     void connectNeighboringSitesAt(int const index) {
         int x = 0;
         int y = 0;
@@ -109,9 +109,6 @@ private:
         }
     }
 
-    std::array<bool, getDimensionsSquared()> m_sites{};
-    WeightedQuickUnionWithArray<int, getDimensionsSquared() + 2>
-        m_unionFindOfIndexes;  //+2 because of virtual top site and bottom site
     int m_numberOfOpenSites{0};
     AlbaUniformNonDeterministicRandomizer<int> m_randomizer;
 };

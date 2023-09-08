@@ -8,9 +8,7 @@ namespace alba::algebra {
 
 BinomialSeries::BinomialSeries(Term const& monomialPart, Term const& exponent)
     : m_monomialPart(monomialPart), m_exponent(exponent) {}
-
 Term BinomialSeries::getMonomialPart() const { return m_monomialPart; }
-
 Term BinomialSeries::getExponent() const { return m_exponent; }
 
 Term BinomialSeries::getValueAtIndex(int const index) const {

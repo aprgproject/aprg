@@ -5,7 +5,6 @@ namespace Facade {
 // Subsystems
 // implement more complex subsystem functionality
 // and have no knowledge of the facade
-
 class SubsystemA {
 public:
     void suboperation() {
@@ -45,7 +44,6 @@ private:
 // Facade
 // delegates client requests to appropriate subsystem object
 // and unified interface that is easier to use
-
 class Facade {
 public:
     Facade() : m_subsystemA(), m_subsystemB(), m_subsystemC() {}
@@ -60,8 +58,8 @@ public:
         m_subsystemC.suboperation();
         // ...
     }
-    // ...
 
+    // ...
 private:
     SubsystemA m_subsystemA;
     SubsystemB m_subsystemB;

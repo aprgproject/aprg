@@ -38,15 +38,11 @@ public:
     using ParabolaParent = ParabolaPolynomialType<parabolaOrientation>;
     // vertex focus directrix?
     Parabola() : ParabolaParent() {}
-
     // ax2 + bx + c = y or ay2 + by + c = x
     Parabola(double const aCoefficient, double const bCoefficient, double const cCoefficient)
         : ParabolaParent{aCoefficient, bCoefficient, cCoefficient} {}
-
     [[nodiscard]] double getA() const { return ParabolaParent::m_coefficients[2]; }
-
     [[nodiscard]] double getB() const { return ParabolaParent::m_coefficients[1]; }
-
     [[nodiscard]] double getC() const { return ParabolaParent::m_coefficients[0]; }
 
     [[nodiscard]] double getP() const {

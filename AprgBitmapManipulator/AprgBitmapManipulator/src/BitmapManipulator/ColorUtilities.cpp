@@ -14,8 +14,6 @@ using namespace std;
 
 namespace alba::AprgBitmap::ColorUtilities {
 
-constexpr uint8_t MAX_COLOR_VALUE = 0xFF;
-
 bool isSimilar(uint32_t const color1, uint32_t const color2, uint32_t const similarityColorLimit) {
     // RGB algo
     bool isRedDifferenceBeyondLimit =
@@ -25,32 +23,6 @@ bool isSimilar(uint32_t const color1, uint32_t const color2, uint32_t const simi
     bool isBlueDifferenceBeyondLimit =
         getPositiveDelta<uint32_t>(extractBlue(color1), extractBlue(color2)) > similarityColorLimit;
     return !(isRedDifferenceBeyondLimit || isGreenDifferenceBeyondLimit || isBlueDifferenceBeyondLimit);
-}
-
-uint32_t getColorValueOnly(uint32_t const value) { return 0xFFFFFF & value; }
-
-/*
-bool isSimilar(uint32_t const color1, uint32_t const color2)//Pythagorean algo
-{
-    double
-colorDifferenceAcrossDifferentColors(getSquareRootOfXSquaredPlusYSquaredPlusZSquared<double>((double)getRed(color1)-(double)getRed(color2),
-(double)getGreen(color1)-(double)getGreen(color2), (double)getBlue(color1)-(double)getBlue(color2))); return
-colorDifferenceAcrossDifferentColors < m_similarityColorLimit;
-}
-*/
-
-ColorPercentagesData calculateColorPercentagesData(uint32_t const color) {
-    ColorPercentagesData result{};
-    double red = extractRed(color);
-    double green = extractGreen(color);
-    double blue = extractBlue(color);
-    result.redPercentage = red / MAX_COLOR_VALUE;
-    result.greenPercentage = green / MAX_COLOR_VALUE;
-    result.bluePercentage = blue / MAX_COLOR_VALUE;
-    result.colorPercentageMax = max(max(result.redPercentage, result.greenPercentage), result.bluePercentage);
-    result.colorPercentageMin = min(min(result.redPercentage, result.greenPercentage), result.bluePercentage);
-    result.deltaMaxMinPercentage = result.colorPercentageMax - result.colorPercentageMin;
-    return result;
 }
 
 double calculateHueDegrees(ColorPercentagesData const& colorPercentagesData) {
@@ -103,6 +75,31 @@ double calculateSaturationColorIntensityDecimal(uint32_t const color) {
     } else {
         result = 1 - (static_cast<double>(extractMinForOneColor(color)) / MAX_COLOR_VALUE / colorIntensityDecimal);
     }
+    return result;
+}
+
+uint32_t getColorValueOnly(uint32_t const value) { return 0xFFFFFF & value; }
+
+/*
+bool isSimilar(uint32_t const color1, uint32_t const color2)//Pythagorean algo
+{
+    double
+colorDifferenceAcrossDifferentColors(getSquareRootOfXSquaredPlusYSquaredPlusZSquared<double>((double)getRed(color1)-(double)getRed(color2),
+(double)getGreen(color1)-(double)getGreen(color2), (double)getBlue(color1)-(double)getBlue(color2))); return
+colorDifferenceAcrossDifferentColors < m_similarityColorLimit;
+}
+*/
+ColorPercentagesData calculateColorPercentagesData(uint32_t const color) {
+    ColorPercentagesData result{};
+    double red = extractRed(color);
+    double green = extractGreen(color);
+    double blue = extractBlue(color);
+    result.redPercentage = red / MAX_COLOR_VALUE;
+    result.greenPercentage = green / MAX_COLOR_VALUE;
+    result.bluePercentage = blue / MAX_COLOR_VALUE;
+    result.colorPercentageMax = max(max(result.redPercentage, result.greenPercentage), result.bluePercentage);
+    result.colorPercentageMin = min(min(result.redPercentage, result.greenPercentage), result.bluePercentage);
+    result.deltaMaxMinPercentage = result.colorPercentageMax - result.colorPercentageMin;
     return result;
 }
 
@@ -252,9 +249,7 @@ HueSaturationLightnessData convertHsvDataToHslData(HueSaturationValueData const&
 }
 
 uint8_t extractRed(uint32_t const color) { return (AlbaBitManipulation<uint32_t>::getByteAt<2>(color)); }
-
 uint8_t extractGreen(uint32_t const color) { return (AlbaBitManipulation<uint32_t>::getByteAt<1>(color)); }
-
 uint8_t extractBlue(uint32_t const color) { return (AlbaBitManipulation<uint32_t>::getByteAt<0>(color)); }
 
 uint8_t extractMaxForOneColor(uint32_t const color) {
@@ -264,5 +259,7 @@ uint8_t extractMaxForOneColor(uint32_t const color) {
 uint8_t extractMinForOneColor(uint32_t const color) {
     return min(min(extractRed(color), extractGreen(color)), extractBlue(color));
 }
+
+constexpr uint8_t MAX_COLOR_VALUE = 0xFF;
 
 }  // namespace alba::AprgBitmap::ColorUtilities

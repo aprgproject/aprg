@@ -13,20 +13,16 @@ template <typename Values>
 class RangeQueryWithPersistentDynamicSegmentTree {
 public:
     // This supports "selector" and "accumulator" type queries.
-
     // Using a dynamic implementation, it is also possible to create a persistent segment tree that stores the
     // modification history of the tree. In such an implementation, we can efficiently access all versions of the tree
     // that have existed during the algorithm. When the modification history is available, we can perform queries in any
     // previous tree like in an ordinary segment tree, because the full structure of each tree is stored. We can also
     // create new trees based on previous trees and modify them independently.
-
     // After each update, most nodes of the tree remain the same, so an efficient way to store the modification history
     // is to represent each tree in the history as a combination of new nodes and subtrees of previous trees.
-
     // The structure of each previous tree can be reconstructed by following the pointers starting at the corresponding
     // root node. Since each operation adds only O(logn) new nodes to the tree, it is possible to store the full
     // modification history of the tree.
-
     using Index = int;
     using Value = typename Values::value_type;
     using Function = std::function<Value(Value const&, Value const&)>;
@@ -40,6 +36,15 @@ public:
     RangeQueryWithPersistentDynamicSegmentTree(Values const& valuesToCheck, Function const& functionObject)
         : m_numberOfValues(valuesToCheck.size()), m_function(functionObject) {
         initialize(valuesToCheck);
+    }
+
+    virtual void changeValueAtIndex(Index const index, Value const& newValue) {
+        // This has log(N) running time
+        if (index < m_numberOfValues) {
+            NodeRoot& previousTreeRoot(m_roots.back());
+            m_roots.emplace_back();
+            changeValueOnIndexFromTopToBottom(index, newValue, previousTreeRoot, m_roots.back(), 0, m_maxChildrenIndex);
+        }
     }
 
     [[nodiscard]] Value getValueOnInterval(Index const start, Index const end) const {
@@ -64,21 +69,11 @@ public:
         return result;
     }
 
-    virtual void changeValueAtIndex(Index const index, Value const& newValue) {
-        // This has log(N) running time
-        if (index < m_numberOfValues) {
-            NodeRoot& previousTreeRoot(m_roots.back());
-            m_roots.emplace_back();
-            changeValueOnIndexFromTopToBottom(index, newValue, previousTreeRoot, m_roots.back(), 0, m_maxChildrenIndex);
-        }
-    }
-
 private:
     [[nodiscard]] Value getValueOnIntervalFromTopToBottom(
         Index const startInterval, Index const endInterval, NodePointer const& nodePointer, Index const baseLeft,
         Index const baseRight) const {
         // This has log(N) running time
-
         Value result{};
         if (startInterval <= baseLeft && baseRight <= endInterval) {
             result = nodePointer->value;
@@ -128,7 +123,6 @@ private:
     void setValuesFromTopToBottom(
         Values const& values, NodePointer& nodePointer, Index const baseLeft, Index const baseRight) {
         // This has log(N) running time
-
         if (!nodePointer) {
             nodePointer.reset(new Node{Value{}, nullptr, nullptr});
         }
@@ -148,7 +142,6 @@ private:
         Index const index, Value const& newValue, NodePointer const& previousTreeNode, NodePointer& newTreeNode,
         Index const baseLeft, Index const baseRight) {
         // This has log(N) running time
-
         if (previousTreeNode) {
             if (baseLeft == baseRight) {
                 newTreeNode.reset(new Node{newValue, nullptr, nullptr});

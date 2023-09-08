@@ -6,7 +6,6 @@ namespace alba::booleanAlgebra {
 
 // Not: ~a
 // Not operators are declared in the class
-
 // And: a & b
 Term operator&(Constant const& constant1, Constant const& constant2);
 Term operator&(Constant const& constant, VariableTerm const& variableTerm);
@@ -23,7 +22,6 @@ Term operator&(Expression const& expression, Term const& term);
 Term operator&(Term const& term, Constant const& constant);
 Term operator&(Term const& term, VariableTerm const& variableTerm);
 Term operator&(Term const& term, Expression const& expression);
-
 // Or: a | b
 Term operator|(Constant const& constant1, Constant const& constant2);
 Term operator|(Constant const& constant, VariableTerm const& variableTerm);

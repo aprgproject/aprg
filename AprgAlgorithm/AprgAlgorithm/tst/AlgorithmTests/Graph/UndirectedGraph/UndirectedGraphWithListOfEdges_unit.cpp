@@ -76,9 +76,7 @@ TEST(UndirectedGraphWithListOfEdgesTest, GetEdgesWorksWhenNotEmpty) {
 }
 
 TEST(UndirectedGraphWithListOfEdgesTest, ConnectWorks) { testConnectWithVertexAsInt<GraphForTest>(); }
-
 TEST(UndirectedGraphWithListOfEdgesTest, DisconnectWorks) { testDisconnectWithVertexAsInt<GraphForTest>(); }
-
 TEST(UndirectedGraphWithListOfEdgesTest, ClearWorks) { testClearWithVertexAsInt<GraphForTest>(); }
 
 TEST(UndirectedGraphWithListOfEdgesTest, GraphWorksAfterClear) {

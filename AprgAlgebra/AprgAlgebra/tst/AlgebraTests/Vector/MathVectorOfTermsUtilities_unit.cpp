@@ -307,12 +307,10 @@ TEST(MathVectorOfTermsUtilitiesTest, GetLaplaceTermWorks) {
 TEST(MathVectorOfTermsUtilitiesTest, GetLineIntegralWorksOnExample1) {
     // Suppose a particle moves along the parabola y=x^2 from the point (-1,1) to the point (2,4).
     // Find the total work done if the motion is caused by the force field F(x, y) = (x^2 + y^2)i + (3*x^2*y)j
-
     Term forceInX(Polynomial{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})});
     Term forceInY(Monomial(3, {{"x", 2}, {"y", 1}}));
     MathVectorOfTwoTerms vectorField{forceInX, forceInY};
     MathVectorOfTwoTerms linePath{"t", Monomial(1, {{"t", 2}})};  // this is a parabola
-
     Term termToVerify(getLineIntegral(vectorField, {"x", "y"}, linePath, {"t", -1, 2}));
 
     string stringToExpect("(363/5)");

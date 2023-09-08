@@ -19,7 +19,6 @@ public:
         // for i from 0 to n−2 do
         //      j ← random integer such that i ≤ j < n
         //      exchange a[i] and a[j]
-
         if (!valuesToShuffle.empty()) {
             AlbaUniformNonDeterministicRandomizer<int> randomizer;
             auto lastItemIt = std::prev(valuesToShuffle.end());
@@ -36,7 +35,6 @@ public:
         // for i from n−1 downto 1 do
         //      j ← random integer such that 0 ≤ j ≤ i
         //      exchange a[j] and a[i]
-
         if (!valuesToShuffle.empty()) {
             AlbaUniformNonDeterministicRandomizer<int> randomizer;
             auto firstItemIt = std::prev(valuesToShuffle.rend());

@@ -14,7 +14,6 @@ public:
 
     void sort(Values& valuesToSort) const override {
         // Based from https://en.wikipedia.org/wiki/Cocktail_shaker_sort#Pseudocode
-
         bool didSwapHappened(true);
         while (didSwapHappened) {
             didSwapHappened = false;

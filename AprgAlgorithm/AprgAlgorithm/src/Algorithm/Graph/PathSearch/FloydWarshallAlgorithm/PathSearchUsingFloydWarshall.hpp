@@ -13,6 +13,7 @@ public:
         Vertex bestInBetweenVertex;
         Weight bestWeight;
     };
+
     using Graph = EdgeWeightedGraph;
     using Path = typename GraphTypes<Vertex>::Path;
     using Vertices = typename GraphTypes<Vertex>::Vertices;

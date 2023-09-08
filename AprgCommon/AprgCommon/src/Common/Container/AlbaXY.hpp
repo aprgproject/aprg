@@ -11,11 +11,9 @@ template <typename CoordinateType>
 class AlbaXY {
 public:
     AlbaXY() : m_x{}, m_y{} {}
-
     AlbaXY(CoordinateType const& xValue, CoordinateType const& yValue) : m_x(xValue), m_y(yValue) {}
 
     // rule of zero
-
     bool operator==(AlbaXY const& xyValues) const {
         return mathHelper::isAlmostEqual(m_x, xyValues.m_x) && mathHelper::isAlmostEqual(m_y, xyValues.m_y);
     }
@@ -31,15 +29,10 @@ public:
     }
 
     AlbaXY operator+() const { return *this; }
-
     AlbaXY operator-() const { return AlbaXY(-m_x, -m_y); }
-
     AlbaXY operator+(AlbaXY const& secondXy) const { return AlbaXY(m_x + secondXy.m_x, m_y + secondXy.m_y); }
-
     AlbaXY operator-(AlbaXY const& secondXy) const { return AlbaXY(m_x - secondXy.m_x, m_y - secondXy.m_y); }
-
     AlbaXY operator*(CoordinateType const& multiplier) const { return AlbaXY(m_x * multiplier, m_y * multiplier); }
-
     AlbaXY operator/(CoordinateType const& divisor) const { return AlbaXY(m_x / divisor, m_y / divisor); }
 
     AlbaXY& operator+=(AlbaXY const& secondXy) {
@@ -67,15 +60,10 @@ public:
     }
 
     [[nodiscard]] bool isEmpty() const { return CoordinateType{} == m_x && CoordinateType{} == m_y; }
-
     [[nodiscard]] CoordinateType getX() const { return m_x; }
-
     [[nodiscard]] CoordinateType getY() const { return m_y; }
-
     [[nodiscard]] CoordinateType getXTimesY() const { return m_x * m_y; }
-
     void setX(CoordinateType const& xValue) { m_x = xValue; }
-
     void setY(CoordinateType const& yValue) { m_y = yValue; }
 
     void setXAndY(CoordinateType const& xValue, CoordinateType const& yValue) {

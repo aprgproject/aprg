@@ -13,15 +13,10 @@ using QueueForTest = LinkedListQueue<int>;
 }  // namespace
 
 TEST(LinkedListQueueTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<QueueForTest>(); }
-
 TEST(LinkedListQueueTest, IsEmptyWorksWhenNotEmpty) { testIsEmptyWhenNotEmptyWithInt<QueueForTest>(); }
-
 TEST(LinkedListQueueTest, GetSizeWorksWhenEmpty) { testGetSizeWhenEmptyWithInt<QueueForTest>(); }
-
 TEST(LinkedListQueueTest, GetSizeWorksWhenNotEmpty) { testGetSizeWhenNotEmptyWithInt<QueueForTest>(); }
-
 TEST(LinkedListQueueTest, EnqueueWorks) { testEnqueueWithInt<QueueForTest>(); }
-
 TEST(LinkedListQueueTest, DequeueWorks) { testDequeueWithInt<QueueForTest>(); }
 
 // disabled because it takes too long

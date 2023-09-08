@@ -126,11 +126,8 @@ AlbaNumberPairs evaluateAndGetInputOutputPair(
 }
 
 Term getPiAsATerm() { return ALBA_NUMBER_PI; }
-
 Term getEAsATerm() { return ALBA_NUMBER_E; }
-
 Term getPositiveInfinityAsATerm() { return ALBA_NUMBER_POSITIVE_INFINITY; }
-
 Term getNegativeInfinityAsATerm() { return ALBA_NUMBER_NEGATIVE_INFINITY; }
 
 Term convertPositiveTermIfNegative(Term const& term) {

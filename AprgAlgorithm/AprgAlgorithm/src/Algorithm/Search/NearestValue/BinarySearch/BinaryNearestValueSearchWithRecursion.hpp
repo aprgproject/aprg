@@ -10,9 +10,8 @@ class BinaryNearestValueSearchWithRecursion {
 public:
     using Index = int;
     using Value = typename Values::value_type;
-    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
-
     explicit BinaryNearestValueSearchWithRecursion(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     [[nodiscard]] Value getNearestValue(Value const& target) const {
         Value result{};

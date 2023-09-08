@@ -11,9 +11,7 @@ template <typename DigitValue>
 class Alphabet {
 public:
     using DigitValues = std::vector<DigitValue>;
-
     explicit Alphabet(std::string const& characters) : m_characters(characters) {}
-
     bool contains(char const c) { return stringHelper::isNotNpos(static_cast<int>(m_characters.find_first_of(c))); }
 
     char getCharacter(DigitValue const& digitValue) {
@@ -24,6 +22,12 @@ public:
         return result;
     }
 
+    int getRadix() { return m_characters.size(); }
+
+    int getNumbersOfBitsToRepresentCharacters() {
+        return AlbaBitValueUtilities<int>::getLogarithmWithBase2Of(getRadix());
+    }
+
     DigitValue getDigitValue(char const c) {
         DigitValue result{};
         int indexOfCharacter = m_characters.find_first_of(c);
@@ -31,12 +35,6 @@ public:
             result = static_cast<DigitValue>(indexOfCharacter);
         }
         return result;
-    }
-
-    int getRadix() { return m_characters.size(); }
-
-    int getNumbersOfBitsToRepresentCharacters() {
-        return AlbaBitValueUtilities<int>::getLogarithmWithBase2Of(getRadix());
     }
 
     DigitValues convertStringToDigitValues(std::string const& stringParameter) {

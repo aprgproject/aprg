@@ -8,10 +8,8 @@ using namespace alba::mathHelper;
 namespace alba::AprgBitmap {
 
 PenCircles::PenCircleDetails::PenCircleDetails() : radius(0), color(0U) {}
-
 PenCircles::PenCircleDetails::PenCircleDetails(double const radiusParameter, uint32_t const colorParameter)
     : radius(radiusParameter), color(colorParameter) {}
-
 bool PenCircles::isPenCircle(BitmapXY const& point) const { return m_penCircles.find(point) != m_penCircles.cend(); }
 
 PenCircles::PenCircleDetails PenCircles::getPenCircleDetails(BitmapXY const& point) const {
@@ -24,7 +22,6 @@ PenCircles::PenCircleDetails PenCircles::getPenCircleDetails(BitmapXY const& poi
 }
 
 PenCircles::PointToPenCircleDetailsMap const& PenCircles::getPenCircles() const { return m_penCircles; }
-
 PenCircles::CircleCenterConnections const& PenCircles::getCenterConnections() const { return m_centerConnections; }
 
 PenCircles::PointAndPenCircleDetailsPairs PenCircles::getNearestPenCirclesToAPoint(

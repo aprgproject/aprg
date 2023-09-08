@@ -17,11 +17,8 @@ class ImplicantTemplate {
 public:
     using MintermsInitializerList = std::initializer_list<Minterm>;
     using Minterms = std::set<Minterm>;
-
     ImplicantTemplate() = default;
-
     ImplicantTemplate(MintermsInitializerList const& minterms) : m_minterms(minterms) {}
-
     bool operator==(ImplicantTemplate const& second) const { return m_minterms == second.m_minterms; }
 
     bool operator!=(ImplicantTemplate const& second) const {
@@ -101,6 +98,12 @@ public:
         return result;
     }
 
+    [[nodiscard]] int getMaxLengthOfEquivalentString() const {
+        Minterm orResult(performOrOperationOfAllMinterms());
+        return AlbaBitValueUtilities<Minterm>::getNumberOfBits() -
+               AlbaBitValueUtilities<Minterm>::getNumberOfConsecutiveZerosFromMsb(orResult);
+    }
+
     [[nodiscard]] Minterms const& getMinterms() const { return m_minterms; }
 
     [[nodiscard]] std::string getEquivalentString() const {
@@ -133,12 +136,6 @@ public:
             result << minterm << "|";
         }
         return result.str();
-    }
-
-    [[nodiscard]] int getMaxLengthOfEquivalentString() const {
-        Minterm orResult(performOrOperationOfAllMinterms());
-        return AlbaBitValueUtilities<Minterm>::getNumberOfBits() -
-               AlbaBitValueUtilities<Minterm>::getNumberOfConsecutiveZerosFromMsb(orResult);
     }
 
     void addMinterm(Minterm const& minterm) { m_minterms.emplace(minterm); }

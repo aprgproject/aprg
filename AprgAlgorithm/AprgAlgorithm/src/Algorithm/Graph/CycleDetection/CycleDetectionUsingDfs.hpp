@@ -18,7 +18,6 @@ public:
     using Paths = typename GraphTypes<Vertex>::Paths;
     using VertexToVertexMap = typename GraphTypes<Vertex>::VertexToVertexMap;
     using VertexToVertexStateMap = std::map<Vertex, VertexState>;
-
     explicit CycleDetectionUsingDfs(BaseGraphWithVertex const& graph)
         : m_graph(graph), m_searchType(SearchType::Unknown) {}
 
@@ -157,7 +156,6 @@ private:
 // 3) Finally, after all successors of the node have been processed, its state becomes 2.
 // 4) If the graph contains a cycle, we will find this out during the search, because sooner or later we will arrive at
 // a node whose state is 1.
-
 // Other analysis:
 // Another way to find out whether a graph contains a cycle is to simply calculate the number of nodes and edges in
 // every component. If a component contains c nodes and no cycle, it must contain exactly c-1 edges (so it has to be a

@@ -26,8 +26,11 @@ namespace alba::algebra {
 IntegrationForFiniteCalculus::IntegrationForFiniteCalculus(string const& nameOfVariableToIntegrate)
     : m_nameOfVariableToIntegrate(nameOfVariableToIntegrate) {}
 
-Term IntegrationForFiniteCalculus::integrate(Term const& term) const { return integrateTerm(term); }
+Term IntegrationForFiniteCalculus::integrate(Function const& functionObject) {
+    return integrateFunction(functionObject);
+}
 
+Term IntegrationForFiniteCalculus::integrate(Term const& term) const { return integrateTerm(term); }
 Term IntegrationForFiniteCalculus::integrate(Constant const& constant) const { return integrateConstant(constant); }
 
 Term IntegrationForFiniteCalculus::integrate(Variable const& variable) const {
@@ -50,10 +53,6 @@ Term IntegrationForFiniteCalculus::integrate(Polynomial const& polynomial) const
 
 Term IntegrationForFiniteCalculus::integrate(Expression const& expression) const {
     return integrateExpression(expression);
-}
-
-Term IntegrationForFiniteCalculus::integrate(Function const& functionObject) {
-    return integrateFunction(functionObject);
 }
 
 Term IntegrationForFiniteCalculus::integrateWithPlusC(Term const& term) const {
@@ -118,7 +117,6 @@ Term IntegrationForFiniteCalculus::integrateMonomial(Monomial const& monomial) c
             // this is special case
             // in infinite calculus this ln(x), but in finite calculus its the summation of 1/x (this is called the
             // harmonic number) for the proof, consider doing the derivative of this
-
             Monomial monomialToRetain(monomial);
             monomialToRetain.putVariableWithExponent(m_nameOfVariableToIntegrate, 0);
             result = createExpressionIfPossible({monomialToRetain, "*", harmonicNumber(m_nameOfVariableToIntegrate)});
@@ -162,7 +160,24 @@ Term IntegrationForFiniteCalculus::integrateExpression(Expression const& express
     return integrateAsTermOrExpressionIfNeeded(expression);
 }
 
-Term IntegrationForFiniteCalculus::integrateFunction(Function const&) { return ALBA_NUMBER_NOT_A_NUMBER; }
+void IntegrationForFiniteCalculus::integrateChangingTermsInMultiplicationOrDivision(
+    Term& result, TermsWithDetails const&) {
+    // no impl
+    result = ALBA_NUMBER_NOT_A_NUMBER;
+}
+
+bool IntegrationForFiniteCalculus::isVariableToIntegrate(string const& variableName) const {
+    return variableName == m_nameOfVariableToIntegrate;
+}
+
+bool IntegrationForFiniteCalculus::isChangingTerm(Term const& term) const {
+    VariableNamesRetriever retriever;
+    retriever.retrieveFromTerm(term);
+    VariableNamesSet const& variableNames(retriever.getVariableNames());
+    return any_of(variableNames.cbegin(), variableNames.cend(), [&](string const& variableName) {
+        return isVariableToIntegrate(variableName);
+    });
+}
 
 Monomial IntegrationForFiniteCalculus::integrateMonomialInFallingPower(Monomial const& monomial) const {
     Monomial result(monomial);
@@ -328,7 +343,6 @@ Term IntegrationForFiniteCalculus::integrateNonChangingTermRaiseToChangingTerm(
     // c^x = (c-1) * Integrate((c^x))
     // (c^x)/(c-1) = Integrate((c^x))
     // Integrate((c^x)) = (c^x)/(c-1)
-
     Term nPlusOne(Polynomial{Monomial(1, {{m_nameOfVariableToIntegrate, 1}}), Monomial(1, {})});
     SubstitutionOfVariablesToTerms substitution{{m_nameOfVariableToIntegrate, nPlusOne}};
     Term exponentWithNPlusOneSubstitution(substitution.performSubstitutionTo(exponent));
@@ -341,14 +355,6 @@ Term IntegrationForFiniteCalculus::integrateNonChangingTermRaiseToChangingTerm(
         result = createExpressionIfPossible({base, "^", exponent, "/", denominator});
     }
     return result;
-}
-
-Term IntegrationForFiniteCalculus::integrateChangingTermRaiseToNonChangingTerm(Term const&, Term const&) {
-    return ALBA_NUMBER_NOT_A_NUMBER;
-}
-
-Term IntegrationForFiniteCalculus::integrateChangingTermRaiseToChangingTerm(Term const&, Term const&) {
-    return ALBA_NUMBER_NOT_A_NUMBER;
 }
 
 void IntegrationForFiniteCalculus::integrateNonChangingAndChangingTermsInMultiplicationOrDivision(
@@ -370,12 +376,6 @@ void IntegrationForFiniteCalculus::integrateNonChangingAndChangingTermsInMultipl
     }
 }
 
-void IntegrationForFiniteCalculus::integrateChangingTermsInMultiplicationOrDivision(
-    Term& result, TermsWithDetails const&) {
-    // no impl
-    result = ALBA_NUMBER_NOT_A_NUMBER;
-}
-
 void IntegrationForFiniteCalculus::segregateNonChangingAndChangingTerms(
     TermsWithDetails const& termsToSegregate, TermsWithDetails& nonChangingTerms,
     TermsWithDetails& changingTerms) const {
@@ -389,17 +389,14 @@ void IntegrationForFiniteCalculus::segregateNonChangingAndChangingTerms(
     }
 }
 
-bool IntegrationForFiniteCalculus::isVariableToIntegrate(string const& variableName) const {
-    return variableName == m_nameOfVariableToIntegrate;
+Term IntegrationForFiniteCalculus::integrateFunction(Function const&) { return ALBA_NUMBER_NOT_A_NUMBER; }
+
+Term IntegrationForFiniteCalculus::integrateChangingTermRaiseToNonChangingTerm(Term const&, Term const&) {
+    return ALBA_NUMBER_NOT_A_NUMBER;
 }
 
-bool IntegrationForFiniteCalculus::isChangingTerm(Term const& term) const {
-    VariableNamesRetriever retriever;
-    retriever.retrieveFromTerm(term);
-    VariableNamesSet const& variableNames(retriever.getVariableNames());
-    return any_of(variableNames.cbegin(), variableNames.cend(), [&](string const& variableName) {
-        return isVariableToIntegrate(variableName);
-    });
+Term IntegrationForFiniteCalculus::integrateChangingTermRaiseToChangingTerm(Term const&, Term const&) {
+    return ALBA_NUMBER_NOT_A_NUMBER;
 }
 
 }  // namespace alba::algebra

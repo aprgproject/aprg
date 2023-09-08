@@ -14,8 +14,8 @@ public:
         double totalValue{0};
         double weight{0};
     };
-    using SamplesMergingDetails = std::map<int, SampleMergingDetails>;
 
+    using SamplesMergingDetails = std::map<int, SampleMergingDetails>;
     explicit NewSamplesBuilder(Samples const& oldSamples);
 
     void putSamplesBasedOnSearchResultAndSamples(
@@ -26,9 +26,9 @@ private:
     static void retrieveSampleMergingDetails(
         SamplesMergingDetails& samplesMergingDetails, SearchResultsDetails const& details,
         Samples const& searchSamples);
+
     void saveToNewSamples(
         Samples& newSamples, SamplesMergingDetails const& samplesMergingDetails, bool const alwaysPutNewValue);
-
     Samples const& m_oldSamples;
 };
 

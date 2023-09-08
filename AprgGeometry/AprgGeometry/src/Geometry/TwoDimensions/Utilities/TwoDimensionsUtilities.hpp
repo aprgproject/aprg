@@ -33,7 +33,6 @@ bool areLinesParallel(Line const& line1, Line const& line2);
 bool areLinesPerpendicular(Line const& line1, Line const& line2);
 bool doesTheTwoLineSegmentsIntersect(LineSegment const& segment1, LineSegment const& segment2);
 bool isPointInsideTriangle(Triangle const& triangle, Point const& point);
-
 double getDistance(Point const& point1, Point const& point2);
 double getDistance(Line const& line, Point const& point);
 double getDistance(LineSegment const& lineSegment, Point const& point);
@@ -52,21 +51,17 @@ double getAreaOfTriangleUsingThreePoints(Triangle const& triangle);
 double getAreaOfTriangleUsingHeronsFormula(Triangle const& triangle);
 double getAreaOfQuadrilateral(Quadrilateral const& quadrilateral);
 double getAreaUsingPicksTheorem(int const numberOfPointsInside, int const numberOfPointsOnTheBoundary);
-
 Vector constructVector(AlbaXY<double> const& xy);
 Vector constructDeltaVector(Line const& line);
-
 ConicSectionType getConicSectionBasedOnEccentricity(double const eccentricity);
 ConicSectionType getConicSectionBasedOnGeneralForm(
     double const a, double const b, double const c, double const d, double const e);
 Quadrant getQuadrantOfAPoint(Point const& point);
 RotationDirection getRotationDirectionTraversing3Points(Point const a, Point const b, Point const c);
-
 AlbaAngle getAngleOfPointWithRespectToOrigin(Point const& point);
 AlbaAngle getTheInnerAngleUsingThreePoints(Point const& commonPoint, Point const& firstPoint, Point const& secondPoint);
 AlbaAngle getTheSmallerAngleBetweenTwoLines(Line const& line1, Line const& line2);
 AlbaAngle getTheLargerAngleBetweenTwoLines(Line const& line1, Line const& line2);
-
 Point getIntersectionOfTwoLines(Line const& line1, Line const& line2);
 Point getIntersectionOfTwoLineSegment(LineSegment const& segment1, LineSegment const& segment2);
 Point getMidpoint(Point const& point1, Point const& point2);
@@ -75,17 +70,14 @@ Point getPointAlongALineWithDistanceFromAPoint(
 Point popNearestPoint(Points& points, Point const& point);
 Point rotateAxisByAngle(Point const& point, AlbaAngle const& angle);
 Point rotateAxisBackByAngle(Point const& point, AlbaAngle const& angle);
-
 Point convertFromPolarCoordinates(PolarCoordinate const& coordinate);
 PolarCoordinate convertToPolarCoordinate(Point const& point);
-
 template <ParabolaOrientation parabolaOrientation>
 Points getIntersectionsOfParabolaAndLine(Parabola<parabolaOrientation> const& parabola, Line const& line);
 template <>
 Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::PolynomialX> const& parabola, Line const& line);
 template <>
 Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::PolynomialY> const& parabola, Line const& line);
-
 Points getConnectedPointsUsingALine(Points const& inputPoints, double const interval);
 Points getMergedPointsInIncreasingX(Points const& firstPointsToBeMerged, Points const& secondPointsToBeMerged);  // UT
 Points getMergedPointsInDecreasingX(Points const& firstPointsToBeMerged, Points const& secondPointsToBeMerged);
@@ -93,18 +85,17 @@ Points getPointsInSortedIncreasingX(Points const& pointsToBeSorted);  // UT
 Points getPointsInSortedDecreasingX(Points const& pointsToBeSorted);
 Points getConvexHullPointsUsingJarvisAlgorithm(Points const& points);
 Points getConvexHullPointsUsingGrahamScan(Points const& points);
-
 Line getLineWithSameSlope(Line const& line, Point const& point);
 Line getLineWithPerpendicularSlope(Line const& line, Point const& point);
 Line getTangentLineAt(Circle const& circle, Point const& point);
 Line getTangentLineAt(Ellipse const& ellipse, Point const& point);
 Line getTangentLineAt(Hyperbola const& hyperbola, Point const& point);
-
 void addPointIfInsideTwoPoints(
     Points& pointsAtBorder, Point const& point, Point const& minimumXAndY, Point const& maximumXAndY);
 void savePointsFromTwoPointsUsingALineWithoutLastPoint(
     Points& points, Point const& previousPoint, Point const& currentPoint, double const interval);
 void sortPointsInYAndThenX(Points& points);
+
 void traverseCircleAreaBetweenTwoRadius(
     Point const& center, double const innerRadius, double const outerRadius, double const interval,
     Circle::TraverseOperation const& traverseOperation);
@@ -124,7 +115,6 @@ bool isPointInsidePolygon(
     // ---> and calculate the number of times it touches the boundary of the polygon.
     // ---> If the number is odd, the point is inside the polygon,
     // ---> and if the number is even, the point is outside the polygon.
-
     LineSegments lineSegments(polygon.getLineSegments());
     LineSegment rayLineSegment(point, pointForRayTesting);
     int numberOfIntersections = std::count_if(
@@ -139,7 +129,6 @@ double getArea(Polygon<numberOfVertices> const& polygon) {
     // shoelace formula
     // https://en.wikipedia.org/wiki/Shoelace_formula
     // check also: https://en.wikipedia.org/wiki/Green%27s_theorem
-
     double area(0);
     Points const& vertices(polygon.getVertices());
     int sizeMinusOne = static_cast<int>(vertices.size()) - 1;

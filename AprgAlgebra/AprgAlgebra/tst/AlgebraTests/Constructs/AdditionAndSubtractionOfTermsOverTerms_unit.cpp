@@ -47,6 +47,7 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetLcmOfDenominatorTermsWithTer
     ASSERT_EQ(1U, termsToVerify.size());
     EXPECT_EQ(termToExpect1, termsToVerify[0]);
 }
+
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetLcmOfDenominatorTermsWithAllOneWorks) {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
     TermsOverTerms fraction1({1}, {1});

@@ -14,19 +14,12 @@ using namespace alba::mathHelper;
 
 namespace alba::algebra {
 
-RationalizeTermOverTerm::RationalizeTermOverTerm() = default;
-
 RationalizeTermOverTerm::RationalizeTermOverTerm(Term const& numerator, Term const& denominator)
     : m_numerator(numerator), m_denominator(denominator) {}
-
 Term const& RationalizeTermOverTerm::getNumerator() const { return m_numerator; }
-
 Term const& RationalizeTermOverTerm::getDenominator() const { return m_denominator; }
-
 Term RationalizeTermOverTerm::getCombinedTerm() const { return m_numerator / m_denominator; }
-
 void RationalizeTermOverTerm::rationalizeNumerator() { rationalize(m_numerator, m_denominator); }
-
 void RationalizeTermOverTerm::rationalizeDenominator() { rationalize(m_denominator, m_numerator); }
 
 void RationalizeTermOverTerm::rationalize(Term& termToRationalize, Term& otherTerm) {
@@ -205,5 +198,7 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpressionWhenEx
         firstRationalizedTermWithDetails, secondRationalizedTermTermWithDetails};
     rationalizedTerm = createTermWithAdditionAndSubtractionTermsWithDetails(rationalizedTermsWithDetails);
 }
+
+RationalizeTermOverTerm::RationalizeTermOverTerm() = default;
 
 }  // namespace alba::algebra

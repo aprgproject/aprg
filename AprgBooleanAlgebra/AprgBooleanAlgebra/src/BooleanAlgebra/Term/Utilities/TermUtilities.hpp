@@ -4,15 +4,10 @@
 #include <BooleanAlgebra/Term/TermTypes/TermContainerTypes.hpp>
 
 namespace alba::booleanAlgebra {
-
 bool isNonEmptyOrNonOperatorType(Term const& term);
 bool isNonEmptyOrNonOperatorOrNonExpressionType(Term const& term);
-
 bool getNoEffectValueInOperation(OperatorLevel const operatorLevel);
 bool getShortCircuitValueEffectInOperation(OperatorLevel const operatorLevel);
-
 VariableNamesSet getVariableNames(Term const& term);
-
 Term getTermFromVariableAndPrimeValue(std::string const& variableName, char const primeValue);
-
 }  // namespace alba::booleanAlgebra

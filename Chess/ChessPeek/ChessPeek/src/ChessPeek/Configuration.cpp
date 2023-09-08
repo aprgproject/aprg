@@ -22,17 +22,12 @@ Configuration::Configuration(Type const type)
     initialize();
 }
 
-Configuration::Type Configuration::getType() const { return m_type; }
-
-string const& Configuration::getChessEnginePath() const { return m_chessEnginePath; }
-
-XY Configuration::getTopLeftOfBoard() const { return m_boardTopLeft; }
-
-XY Configuration::getBottomRightOfBoard() const { return m_boardBottomRight; }
-
 double Configuration::getWhiteColorLimit() const { return m_whiteColorLimit; }
-
 double Configuration::getBlackColorLimit() const { return m_blackColorLimit; }
+Configuration::Type Configuration::getType() const { return m_type; }
+string const& Configuration::getChessEnginePath() const { return m_chessEnginePath; }
+XY Configuration::getTopLeftOfBoard() const { return m_boardTopLeft; }
+XY Configuration::getBottomRightOfBoard() const { return m_boardBottomRight; }
 
 stringHelper::StringPairs const& Configuration::getUciOptionNamesAndValuePairs() const {
     return m_uciOptionNamesAndValuePairs;
@@ -72,13 +67,11 @@ void Configuration::initializeCommonParameters() {
     // option name Use NNUE type check default true
     // option name EvalFile type string default nn-6877cd24400e.nnue
     // uciok
-
     StringConverterWithFormatting converter;
     m_uciOptionNamesAndValuePairs = {
         {"Threads", converter.convertToString(EngineConstants::NUMBER_OF_THREADS)},
         {"MultiPV", converter.convertToString(EngineConstants::NUMBER_OF_VARIATIONS)},
         {"Slow Mover", "1000"}};  // max value, let engine think for max time
-
     // Stockfish still thinking too long so this parameters have no impact:
     // {"UCI_LimitStrength", "true"},  // limit the strength to be more like a human
     // {"UCI_Elo", "1350"},            // limit the strength to be more like a human
@@ -146,7 +139,6 @@ void Configuration::initializeLichessStream() {
 }
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

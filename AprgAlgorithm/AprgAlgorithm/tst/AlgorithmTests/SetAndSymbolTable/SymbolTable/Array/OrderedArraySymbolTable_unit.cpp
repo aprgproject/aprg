@@ -31,19 +31,12 @@ TEST(OrderedArraySymbolTableTest, GetSizeWorksWhenNotEmpty) {
 }
 
 TEST(OrderedArraySymbolTableTest, GetWorks) { testGetWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(OrderedArraySymbolTableTest, GetRankWorks) { testGetRankWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(OrderedArraySymbolTableTest, GetMinimumWorks) { testGetMinimumWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(OrderedArraySymbolTableTest, GetMaximumWorks) { testGetMaximumWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(OrderedArraySymbolTableTest, SelectAtWorks) { testSelectAtWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(OrderedArraySymbolTableTest, GetFloorWorks) { testGetFloorWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(OrderedArraySymbolTableTest, GetCeilingWorks) { testGetCeilingWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(OrderedArraySymbolTableTest, PutWorks) { testPutWithUnsignedIntAndChar<SymbolTableForTest>(); }
 
 TEST(OrderedArraySymbolTableTest, DeleteBasedOnKeyWorks) {
@@ -51,9 +44,7 @@ TEST(OrderedArraySymbolTableTest, DeleteBasedOnKeyWorks) {
 }
 
 TEST(OrderedArraySymbolTableTest, DeleteMinimumWorks) { testDeleteMinimumWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(OrderedArraySymbolTableTest, DeleteMaximumWorks) { testDeleteMaximumWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(OrderedArraySymbolTableTest, GetKeys) { testGetKeysWithUnsignedIntAndChar<SymbolTableForTest>(); }
 
 TEST(OrderedArraySymbolTableTest, GetKeysInRangeWorks) {

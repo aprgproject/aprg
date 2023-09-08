@@ -10,26 +10,17 @@ public:
     using NodeUniquePointer = typename BaseTree::NodeUniquePointer;
     using Keys = typename BaseTree::Keys;
     using TraverseFunction = typename BaseTree::TraverseFunction;
-
-    BaseSymbolTableWithBaseTree() : b_root(BaseTree::m_root) {}
-
     // virtual destructor because of virtual functions (vtable exists)
     ~BaseSymbolTableWithBaseTree() override = default;
-
+    BaseSymbolTableWithBaseTree() : b_root(BaseTree::m_root) {}
     [[nodiscard]] Value get(Key const& key) const override {  // overrides in BaseSymbolTable
         return getStartingOnThisNode(b_root, key);
     }
-
     void put(Key const& key, Value const& value) override {  // overrides in BaseSymbolTable
         putStartingOnThisNode(b_root, key, value);
     }
 
 protected:
-    void copyNodeContents(Node& destinationNode, Node const& sourceNode) const override {
-        destinationNode.key = sourceNode.key;
-        destinationNode.value = sourceNode.value;
-    }
-
     [[nodiscard]] virtual Value getStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const {
         Value result{};
         if (nodePointer) {
@@ -46,6 +37,11 @@ protected:
     }
 
     virtual void putStartingOnThisNode(NodeUniquePointer& nodePointer, Key const& key, Value const& value) = 0;
+
+    void copyNodeContents(Node& destinationNode, Node const& sourceNode) const override {
+        destinationNode.key = sourceNode.key;
+        destinationNode.value = sourceNode.value;
+    }
 
 private:
     NodeUniquePointer& b_root;

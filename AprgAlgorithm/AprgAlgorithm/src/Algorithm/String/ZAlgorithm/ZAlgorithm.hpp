@@ -9,19 +9,17 @@ template <typename Index>
 class ZAlgorithm {
 public:
     using Indexes = std::vector<Index>;
-
     ZAlgorithm() = delete;
     ~ZAlgorithm() = delete;
     ZAlgorithm(ZAlgorithm const &) = delete;
-    ZAlgorithm &operator=(ZAlgorithm const &) = delete;
     ZAlgorithm(ZAlgorithm &&) = delete;
+    ZAlgorithm &operator=(ZAlgorithm const &) = delete;
     ZAlgorithm &operator=(ZAlgorithm &&) = delete;
 
     // The Z-array z of a string s of length n contains for each k = 0,1,...,n-1
     // the length of the longest substring of s that begins at position k and is a prefix of s.
     // Thus, z[k]=p tells us that s[0... p-1] equals s[k...k+p-1].
     // Many string processing problems can be efficiently solved using the Z-array.
-
     static constexpr Indexes getPrefixLengthsUsingTheZAlgorithm(std::string const &mainString) {
         Index mainStringLength = mainString.length();
         Indexes prefixLengths(mainStringLength, Index{});

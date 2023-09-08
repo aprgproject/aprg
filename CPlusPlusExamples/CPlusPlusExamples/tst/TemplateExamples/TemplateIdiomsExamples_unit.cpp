@@ -23,15 +23,14 @@ struct TreeIterator {
     }
 };
 
-TEST(TemplateIdiomsExamplesTest, TemplateParametersCanBeOmittedOnClassTemplates) {
-    TreeIterator<int> iterator;
-    ++iterator;  // still works
-}
-
 // -> Template parameters can be omitted on class templates:
 // ---> Inside the definition of a class template, the base template-name can be used a type-name,
 // -----> in which case its basically as if you <all the template-parameters> after it
 // ---> So this is fine, and helps cut down on repetition. I recommend it.
+TEST(TemplateIdiomsExamplesTest, TemplateParametersCanBeOmittedOnClassTemplates) {
+    TreeIterator<int> iterator;
+    ++iterator;  // still works
+}
 
 }  // namespace TemplateParametersCanBeOmittedOnClassTemplates
 
@@ -40,12 +39,14 @@ namespace DependentNamesShouldBeCalledWithTemplates {
 struct S1 {
     static constexpr int A = 0;
 };
+
 struct S2 {
     template <int N>
     static void A(int) {
         cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
     }
 };
+
 struct S3 {
     template <int N>
     struct A {
@@ -61,12 +62,6 @@ void foo() {
     // typename T::template A<0>(5);  // for S3
 }
 
-TEST(TemplateIdiomsExamplesTest, DependentNamesShouldBeCalledWithTemplates) {
-    // foo<S1>();
-    // foo<S2>();
-    // foo<S3>();
-}
-
 // -> Dependent names
 // ---> Why typename or ".template" or "::template"?
 // -----> C++'s grammar is not context-free.
@@ -75,6 +70,11 @@ TEST(TemplateIdiomsExamplesTest, DependentNamesShouldBeCalledWithTemplates) {
 // -----> So "typename" is there to notify that we are accessing a type in the template.
 // -----> By default, C++ will assume that any name whose lookup is dependent on a template parameter refers to
 // -------> a non-type, non-template, plain old variable/function/object-style entity.
+TEST(TemplateIdiomsExamplesTest, DependentNamesShouldBeCalledWithTemplates) {
+    // foo<S1>();
+    // foo<S2>();
+    // foo<S3>();
+}
 
 }  // namespace DependentNamesShouldBeCalledWithTemplates
 
@@ -110,6 +110,7 @@ auto advance(Iterator const begin, int const n) {
     return advanceImpl(begin, n, typename Iterator::SupportsPlusType{});  // why typename? (see Notes)
 }
 
+// Note: This works because we can overload on SupportsPlusType.
 TEST(TemplateIdiomsExamplesTest, TagDispatchIdiomWorks) {
     TreeIterator<int> treeIterator;
     VectorIterator<int> vectorIterator;
@@ -118,15 +119,12 @@ TEST(TemplateIdiomsExamplesTest, TagDispatchIdiomWorks) {
     advance(vectorIterator, 5);  // Correctly maps to tree iterator and true_type
 }
 
-// Note: This works because we can overload on SupportsPlusType.
-
 }  // namespace TagDispatchIdiomWorks
 
 namespace TagDispatchIdiomWithIteratorTraitsWorks {
 
 template <typename Element>
 struct TreeIterator {};
-
 template <typename Element>
 struct VectorIterator {};
 
@@ -160,6 +158,8 @@ auto advance(Iterator const begin, int const n) {
     return advanceImpl(begin, n, typename IteratorTraits<Iterator>::SupportsPlusType{});  // why typename? (see Notes)
 }
 
+// Note: This works because we can overload on SupportsPlusType.
+// Best practice is to follow STL, have "_t" on the template name for the type.
 TEST(TemplateIdiomsExamplesTest, TagDispatchIdiomWithIteratorTraitsWorks) {
     TreeIterator<int> treeIterator;
     VectorIterator<int> vectorIterator;
@@ -167,9 +167,6 @@ TEST(TemplateIdiomsExamplesTest, TagDispatchIdiomWithIteratorTraitsWorks) {
     advance(treeIterator, 5);    // Correctly maps to tree iterator and false_type
     advance(vectorIterator, 5);  // Correctly maps to tree iterator and true_type
 }
-
-// Note: This works because we can overload on SupportsPlusType.
-// Best practice is to follow STL, have "_t" on the template name for the type.
 
 }  // namespace TagDispatchIdiomWithIteratorTraitsWorks
 
@@ -192,6 +189,13 @@ struct Dog : public DoubleSpeaker<Dog> {
     static void speak() { cout << "Woof!\n"; }
 };
 
+// -> This implementation falls a fould of "DRY": Don't Repeat Yourself
+// ---> We really want to factor out the repeated speaktwice() code into a common base class
+// ---> Lets call that common base class DoubleSpeaker
+// -> Using polymorphism will cause virtual method calls which can be costly.
+// ---> We want to just do the right thing, statically.
+// ---> Plus, polymorphism is viral.
+// ---> CRTP is another way to do this without the virtual dispatch.
 TEST(TemplateIdiomsExamplesTest, CrtpWorks) {
     Cat cat;
     Dog dog;
@@ -199,15 +203,6 @@ TEST(TemplateIdiomsExamplesTest, CrtpWorks) {
     cat.speakTwice();
     dog.speakTwice();
 }
-
-// -> This implementation falls a fould of "DRY": Don't Repeat Yourself
-// ---> We really want to factor out the repeated speaktwice() code into a common base class
-// ---> Lets call that common base class DoubleSpeaker
-
-// -> Using polymorphism will cause virtual method calls which can be costly.
-// ---> We want to just do the right thing, statically.
-// ---> Plus, polymorphism is viral.
-// ---> CRTP is another way to do this without the virtual dispatch.
 
 }  // namespace CrtpWorks
 

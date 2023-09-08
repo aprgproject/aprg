@@ -21,7 +21,6 @@ namespace alba::algebra {
 
 SeriesBasedOnFormula::SeriesBasedOnFormula(Term const& formulaForSeries, string const& variableName)
     : m_formulaForSeries(formulaForSeries), m_variableName(variableName) {}
-
 bool SeriesBasedOnFormula::isConvergent() const { return isARealFiniteConstant(getValueAtInfinity()); }
 
 bool SeriesBasedOnFormula::isIncreasing() const {
@@ -103,6 +102,8 @@ AlbaNumberOptional SeriesBasedOnFormula::getLeastUpperBound() const {
     return result;
 }
 
+string SeriesBasedOnFormula::getNameForVariableInFormula() const { return m_variableName; }
+
 AlbaNumbers SeriesBasedOnFormula::getBoundValues() const {
     DifferentiationForFiniteCalculus differentiation(m_variableName);
     Term secondDerivative(differentiation.differentiateMultipleTimes(m_formulaForSeries, 2));
@@ -141,7 +142,5 @@ Term SeriesBasedOnFormula::getSignDerivativeForFiniteCalculus() const {
     signMutator.mutateTerm(derivative);
     return derivative;
 }
-
-string SeriesBasedOnFormula::getNameForVariableInFormula() const { return m_variableName; }
 
 }  // namespace alba::algebra

@@ -12,18 +12,18 @@ using namespace std;
 
 namespace alba::AprgBitmap {
 
-BitmapConfiguration::BitmapConfiguration()
+int BitmapConfiguration::getCoordinateWithinRange(int const coordinate, int const maxLength) {
+    return (coordinate < 0 || maxLength <= 0) ? 0 : (coordinate >= maxLength) ? maxLength - 1 : coordinate;
+}
 
-    = default;
+BitmapXY BitmapConfiguration::getUpLeftCornerPoint() { return {0, 0}; }
 
 bool BitmapConfiguration::isValid() const {
     return isSignatureValid() && isHeaderValid() && isNumberOfColorPlanesValid() && isNumberOfBitsPerPixelValid();
 }
 
 bool BitmapConfiguration::isSignatureValid() const { return (m_signature == "BM"); }
-
 bool BitmapConfiguration::isHeaderValid() const { return (m_sizeOfHeader == 40); }
-
 bool BitmapConfiguration::isNumberOfColorPlanesValid() const { return (m_numberOfColorPlanes == 1); }
 
 bool BitmapConfiguration::isNumberOfBitsPerPixelValid() const {
@@ -43,62 +43,12 @@ bool BitmapConfiguration::isPositionWithinTheBitmap(int const x, int const y) co
     return x < static_cast<int>(m_bitmapWidth) && y < static_cast<int>(m_bitmapHeight) && x >= 0 && y >= 0;
 }
 
-CompressedMethodType BitmapConfiguration::getCompressedMethodType() const { return m_compressionMethodType; }
-
-std::string BitmapConfiguration::getPath() const { return m_path; }
-
-uint32_t BitmapConfiguration::getPixelArrayAddress() const { return m_pixelArrayAddress; }
-
-uint32_t BitmapConfiguration::getBitmapWidth() const { return m_bitmapWidth; }
-
-uint32_t BitmapConfiguration::getBitmapHeight() const { return m_bitmapHeight; }
-
-uint16_t BitmapConfiguration::getNumberOfBitsPerPixel() const { return m_numberOfBitsPerPixel; }
-
-uint32_t BitmapConfiguration::getNumberOfBytesPerRowInFile() const { return m_numberOfBytesPerRowInFile; }
-
-uint32_t BitmapConfiguration::getBitMaskForValue() const { return m_bitMaskForValue; }
-
-BitmapXY BitmapConfiguration::getPointWithinTheBitmap(int const xCoordinate, int const yCoordinate) const {
-    return {getXCoordinateWithinTheBitmap(xCoordinate), getYCoordinateWithinTheBitmap(yCoordinate)};
-}
-
 int BitmapConfiguration::getXCoordinateWithinTheBitmap(int const coordinate) const {
     return getCoordinateWithinRange(coordinate, m_bitmapWidth);
 }
 
 int BitmapConfiguration::getYCoordinateWithinTheBitmap(int const coordinate) const {
     return getCoordinateWithinRange(coordinate, m_bitmapHeight);
-}
-
-int BitmapConfiguration::getCoordinateWithinRange(int const coordinate, int const maxLength) {
-    return (coordinate < 0 || maxLength <= 0) ? 0 : (coordinate >= maxLength) ? maxLength - 1 : coordinate;
-}
-
-BitmapXY BitmapConfiguration::getUpLeftCornerPoint() { return {0, 0}; }
-
-BitmapXY BitmapConfiguration::getDownRightCornerPoint() const {
-    int maxX = m_bitmapWidth == 0 ? 0 : m_bitmapWidth - 1;
-    int maxY = m_bitmapHeight == 0 ? 0 : m_bitmapHeight - 1;
-    return {maxX, maxY};
-}
-
-uint32_t BitmapConfiguration::getColorUsingPixelValue(uint32_t const pixelValue) const {
-    uint32_t color(0);
-    switch (m_numberOfBitsPerPixel) {
-        case 1:
-        case 2:
-        case 4:
-        case 8:
-            if (pixelValue < m_colors.size()) {
-                color = m_colors[pixelValue];
-            }
-            break;
-        default:
-            color = pixelValue;
-            break;
-    }
-    return color;
 }
 
 int BitmapConfiguration::convertPixelsToBytesRoundedToFloor(int const pixels) const {
@@ -153,11 +103,47 @@ int BitmapConfiguration::getOneRowSizeInBytesFromBytes(
     return rightByteInclusive - leftByteInclusive + getMinimumNumberOfBytesForOnePixel();
 }
 
+CompressedMethodType BitmapConfiguration::getCompressedMethodType() const { return m_compressionMethodType; }
+std::string BitmapConfiguration::getPath() const { return m_path; }
+uint32_t BitmapConfiguration::getPixelArrayAddress() const { return m_pixelArrayAddress; }
+uint32_t BitmapConfiguration::getBitmapWidth() const { return m_bitmapWidth; }
+uint32_t BitmapConfiguration::getBitmapHeight() const { return m_bitmapHeight; }
+uint16_t BitmapConfiguration::getNumberOfBitsPerPixel() const { return m_numberOfBitsPerPixel; }
+uint32_t BitmapConfiguration::getNumberOfBytesPerRowInFile() const { return m_numberOfBytesPerRowInFile; }
+uint32_t BitmapConfiguration::getBitMaskForValue() const { return m_bitMaskForValue; }
+
+BitmapXY BitmapConfiguration::getPointWithinTheBitmap(int const xCoordinate, int const yCoordinate) const {
+    return {getXCoordinateWithinTheBitmap(xCoordinate), getYCoordinateWithinTheBitmap(yCoordinate)};
+}
+
+BitmapXY BitmapConfiguration::getDownRightCornerPoint() const {
+    int maxX = m_bitmapWidth == 0 ? 0 : m_bitmapWidth - 1;
+    int maxY = m_bitmapHeight == 0 ? 0 : m_bitmapHeight - 1;
+    return {maxX, maxY};
+}
+
+uint32_t BitmapConfiguration::getColorUsingPixelValue(uint32_t const pixelValue) const {
+    uint32_t color(0);
+    switch (m_numberOfBitsPerPixel) {
+        case 1:
+        case 2:
+        case 4:
+        case 8:
+            if (pixelValue < m_colors.size()) {
+                color = m_colors[pixelValue];
+            }
+            break;
+        default:
+            color = pixelValue;
+            break;
+    }
+    return color;
+}
+
 Colors BitmapConfiguration::getColorTable() const { return m_colors; }
 
 void BitmapConfiguration::readBitmap(string const& path) {
     // https://en.wikipedia.org/wiki/BMP_file_format
-
     m_path = AlbaLocalPathHandler(path).getFullPath();
     ifstream inputStream(m_path, ios::binary);
 
@@ -171,6 +157,46 @@ void BitmapConfiguration::readBitmap(string const& path) {
             calculateOtherValuesAfterReading();
         }
     }
+}
+
+CompressedMethodType BitmapConfiguration::determineCompressedMethodType(uint32_t const compressedMethodValue) {
+    CompressedMethodType compressedMethodType(CompressedMethodType::Unknown);
+    switch (compressedMethodValue) {
+        case 0:
+            compressedMethodType = CompressedMethodType::RGB;
+            break;
+        case 1:
+            compressedMethodType = CompressedMethodType::RLE8;
+            break;
+        case 2:
+            compressedMethodType = CompressedMethodType::RLE4;
+            break;
+        case 3:
+            compressedMethodType = CompressedMethodType::BITFIELDS;
+            break;
+        case 4:
+            compressedMethodType = CompressedMethodType::JPEG;
+            break;
+        case 5:
+            compressedMethodType = CompressedMethodType::PNG;
+            break;
+        case 6:
+            compressedMethodType = CompressedMethodType::ALPHABITFIELDS;
+            break;
+        case 11:
+            compressedMethodType = CompressedMethodType::CMYK;
+            break;
+        case 12:
+            compressedMethodType = CompressedMethodType::CMYKRLE8;
+            break;
+        case 13:
+            compressedMethodType = CompressedMethodType::CMYKRLE4;
+            break;
+        default:
+            compressedMethodType = CompressedMethodType::Unknown;
+            break;
+    }
+    return compressedMethodType;
 }
 
 void BitmapConfiguration::readBitmapFileHeader(AlbaFileReader& fileReader) {
@@ -237,51 +263,15 @@ void BitmapConfiguration::calculateOtherValuesAfterReading() {
     m_bitMaskForValue = AlbaBitValueUtilities<uint32_t>::generateOnesWithNumberOfBits(m_numberOfBitsPerPixel);
 }
 
-CompressedMethodType BitmapConfiguration::determineCompressedMethodType(uint32_t const compressedMethodValue) {
-    CompressedMethodType compressedMethodType(CompressedMethodType::Unknown);
-    switch (compressedMethodValue) {
-        case 0:
-            compressedMethodType = CompressedMethodType::RGB;
-            break;
-        case 1:
-            compressedMethodType = CompressedMethodType::RLE8;
-            break;
-        case 2:
-            compressedMethodType = CompressedMethodType::RLE4;
-            break;
-        case 3:
-            compressedMethodType = CompressedMethodType::BITFIELDS;
-            break;
-        case 4:
-            compressedMethodType = CompressedMethodType::JPEG;
-            break;
-        case 5:
-            compressedMethodType = CompressedMethodType::PNG;
-            break;
-        case 6:
-            compressedMethodType = CompressedMethodType::ALPHABITFIELDS;
-            break;
-        case 11:
-            compressedMethodType = CompressedMethodType::CMYK;
-            break;
-        case 12:
-            compressedMethodType = CompressedMethodType::CMYKRLE8;
-            break;
-        case 13:
-            compressedMethodType = CompressedMethodType::CMYKRLE4;
-            break;
-        default:
-            compressedMethodType = CompressedMethodType::Unknown;
-            break;
-    }
-    return compressedMethodType;
-}
-
 bool areBitmapConfigurationsCompatibleForChangingPixelData(
     BitmapConfiguration const& configuration1, BitmapConfiguration const& configuration2) {
     return configuration1.getNumberOfBitsPerPixel() == configuration2.getNumberOfBitsPerPixel() &&
            configuration1.getBitmapHeight() == configuration2.getBitmapHeight() &&
            configuration1.getBitmapWidth() == configuration2.getBitmapWidth();
 }
+
+BitmapConfiguration::BitmapConfiguration()
+
+    = default;
 
 }  // namespace alba::AprgBitmap

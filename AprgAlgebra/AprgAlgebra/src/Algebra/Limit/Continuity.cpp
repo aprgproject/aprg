@@ -11,38 +11,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-bool isContinuousAt(Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
-    SubstitutionOfVariablesToValues substitution{{variableName, valueToApproach}};
-    Term substitutedResult(substitution.performSubstitutionTo(term));
-    Term limitAtValue(getLimit(term, variableName, valueToApproach));
-    return substitutedResult == limitAtValue && isARealFiniteConstant(substitutedResult);
-}
-
-bool isContinuousAt(
-    Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
-    LimitAtAValueApproachType const limitApproachType) {
-    bool result(false);
-    SubstitutionOfVariablesToValues substitution{{variableName, valueToApproach}};
-    Term substitutedResult(substitution.performSubstitutionTo(term));
-    if (substitutedResult.isConstant()) {
-        AlbaNumber limitAtValue(getLimitAtAValueByApproachType(term, variableName, valueToApproach, limitApproachType));
-        AlbaNumber const& substitutedResultValue(substitutedResult.getAsNumber());
-        result = isAlmostEqualForLimitChecking(substitutedResultValue, limitAtValue);
-    }
-    return result;
-}
-
-bool isContinuousAt(
-    Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
-    LimitAtAValueApproachType const limitApproachType, bool const isDifferentiableAtValue) {
-    // If a function is differentiable at X, then f is continuous at X.
-    bool result(true);
-    if (!isDifferentiableAtValue) {
-        result = isContinuousAt(term, variableName, valueToApproach, limitApproachType);
-    }
-    return result;
-}
-
 bool isContinuousAtWithMultipleVariablesWithDifferentApproaches(
     Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
     SubstitutionsOfVariablesToTerms const& substitutionsForApproaches) {
@@ -62,7 +30,6 @@ bool isIntermediateValueTheoremSatisfied(
     AlbaNumber const& valueToTest) {
     // Theorem: If the function f is continuous on the closed interval [v1, v2] and if f(v1) != f(v2),
     // then for any number k between f(v1) and f(v2) there exists a number v3 between v1 and v2 such that f(v3) = k
-
     bool result(false);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue(variableName, firstValue);
@@ -112,9 +79,40 @@ SolutionSet getContinuityDomain(Term const& term) {
     // Calculus Observation:  A radical function is continuous at every number in its domain.
     // Calculus Theorem:  A sine function is continuous at every number.
     // Calculus Theorem:  A cosine function is continuous at every number.
-
     // This code is not accurate. How about piecewise function?
     return calculateDomainForTermWithOneVariable(term);
+}
+
+bool isContinuousAt(Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
+    SubstitutionOfVariablesToValues substitution{{variableName, valueToApproach}};
+    Term substitutedResult(substitution.performSubstitutionTo(term));
+    Term limitAtValue(getLimit(term, variableName, valueToApproach));
+    return substitutedResult == limitAtValue && isARealFiniteConstant(substitutedResult);
+}
+
+bool isContinuousAt(
+    Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
+    LimitAtAValueApproachType const limitApproachType) {
+    bool result(false);
+    SubstitutionOfVariablesToValues substitution{{variableName, valueToApproach}};
+    Term substitutedResult(substitution.performSubstitutionTo(term));
+    if (substitutedResult.isConstant()) {
+        AlbaNumber limitAtValue(getLimitAtAValueByApproachType(term, variableName, valueToApproach, limitApproachType));
+        AlbaNumber const& substitutedResultValue(substitutedResult.getAsNumber());
+        result = isAlmostEqualForLimitChecking(substitutedResultValue, limitAtValue);
+    }
+    return result;
+}
+
+bool isContinuousAt(
+    Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
+    LimitAtAValueApproachType const limitApproachType, bool const isDifferentiableAtValue) {
+    // If a function is differentiable at X, then f is continuous at X.
+    bool result(true);
+    if (!isDifferentiableAtValue) {
+        result = isContinuousAt(term, variableName, valueToApproach, limitApproachType);
+    }
+    return result;
 }
 
 }  // namespace alba::algebra

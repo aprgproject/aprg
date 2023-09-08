@@ -15,7 +15,6 @@ ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom
     const {
     // Time Complexity: O(number * numberOfDigits)
     // Auxiliary Space: Constant
-
     Value result(0);
     for (Value number = 1; number <= m_lastNumber; ++number) {
         for (Value numberForDigitsSum = number; numberForDigitsSum > 0; numberForDigitsSum /= 10) {
@@ -34,7 +33,6 @@ ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom
     const {
     // Time Complexity: O(numberOfDigits)
     // Auxiliary Space: Constant
-
     Value result(0);
     Value digitIndex = 0;
     Value previousPowerOf10 = 0;
@@ -53,11 +51,15 @@ ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom
     return result;
 }
 
+ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom1ToN::getSummationFrom1ToN(
+    Value const number) {
+    return number * (number + 1) / 2;
+}
+
 ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom1ToN::getValueUsingMemoizationDP(
     Value const number) const {
     // Time Complexity: Even though there are recursion calls the time complexity is O(numberOfDigits)
     // Auxiliary Space: O(numberOfDigits^2)
-
     Value result(0);
     if (number < 10) {
         result = getSummationFrom1ToN(number);
@@ -69,7 +71,6 @@ ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom
         // sumAtDigitIndex[1]=sum of digit from 1 to 9 = 45
         // sumAtDigitIndex[2]=sum of digit from 1 to 99 = a[1]*10 + 45*10^1 = 900
         // sumAtDigitIndex[3]=sum of digit from 1 to 999 = a[2]*10 + 45*10^2 = 13500
-
         sumAtDigitIndex[0] = 0;
         sumAtDigitIndex[1] = 45;
         for (Value digitIndex = 2; digitIndex <= numberOfDigitsMinus1; ++digitIndex) {
@@ -86,11 +87,6 @@ ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom
                  mostSignificantDigit * (1 + remainingDigits) + getValueUsingMemoizationDP(remainingDigits);
     }
     return result;
-}
-
-ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom1ToN::getSummationFrom1ToN(
-    Value const number) {
-    return number * (number + 1) / 2;
 }
 
 }  // namespace alba

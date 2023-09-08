@@ -14,16 +14,12 @@ public:
     // Each square in the maze is either floor or wall.
     // On each turn, the player has to move the figure some number of steps left or up.
     // The winner of the game is the player who makes the last move.
-
     using GrundyNumberEntry = int;
     using GrundyNumberMatrix = matrix::AlbaMatrix<GrundyNumberEntry>;
     using BooleanMatrix = matrix::AlbaMatrix<bool>;
     using Coordinate = std::pair<int, int>;
     using Coordinates = std::vector<Coordinate>;
-    static constexpr GrundyNumberEntry INVALID_GRUNDY_NUMBER = -1;
-
     explicit GameWithMaze(BooleanMatrix const& isBlockedMatrix);
-
     [[nodiscard]] bool hasNoMoves(Coordinate const& coordinate) const;
     UnsignedInteger getGrundyNumberAt(Coordinate const& coordinate);
     GameState getGameStateAt(Coordinate const& coordinate);
@@ -31,13 +27,13 @@ public:
     Coordinate getNextCoordinateWithGrundyNumber(
         Coordinate const& coordinate, UnsignedInteger const& targetGrundyNumber);
     std::string getString();
+    static constexpr GrundyNumberEntry INVALID_GRUNDY_NUMBER = -1;
 
 private:
-    SetOfUnsignedIntegers getNextGrundyNumbers(Coordinate const& coordinate);
     [[nodiscard]] Coordinates getNextCoordinates(Coordinate const& coordinate) const;
     void retrieveLeftCoordinates(Coordinates& retrievedCoordinates, Coordinate const& coordinate) const;
     void retrieveUpCoordinates(Coordinates& retrievedCoordinates, Coordinate const& coordinate) const;
-
+    SetOfUnsignedIntegers getNextGrundyNumbers(Coordinate const& coordinate);
     BooleanMatrix const& m_isBlockedMatrix;
     GrundyNumberMatrix m_grundyNumberMatrix;  // dynamic programming
 };

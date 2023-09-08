@@ -12,7 +12,6 @@ public:
     // Many scheduling problems can be solved using greedy algorithms.
     // A classic problem is as follows:
     // Given n events with their starting and ending times, find a schedule that includes as many events as possible.
-
     struct Event {
         std::string eventName;
         int startTime;
@@ -21,9 +20,7 @@ public:
 
     using Events = std::deque<Event>;
     using EventNames = stringHelper::strings;
-
     [[nodiscard]] EventNames getAsMuchEventsAsPossible() const;
-
     void addEvent(std::string const& eventName, int const startTime, int const endTime);
 
 private:

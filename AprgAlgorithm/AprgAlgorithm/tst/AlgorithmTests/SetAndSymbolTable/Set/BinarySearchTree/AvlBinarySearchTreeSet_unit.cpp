@@ -21,7 +21,6 @@ TEST(AvlBinarySearchTreeSetTest, IsEmptyWorksWhenNotEmpty) {
 }
 
 TEST(AvlBinarySearchTreeSetTest, DoesContainWorks) { testDoesContainWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(AvlBinarySearchTreeSetTest, GetSizeWorksWhenEmpty) { testGetSizeWhenEmptyWithUnsignedIntAndChar<SetForTest>(); }
 
 TEST(AvlBinarySearchTreeSetTest, GetSizeWorksWhenNotEmpty) {
@@ -29,27 +28,16 @@ TEST(AvlBinarySearchTreeSetTest, GetSizeWorksWhenNotEmpty) {
 }
 
 TEST(AvlBinarySearchTreeSetTest, GetWorks) { testGetWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(AvlBinarySearchTreeSetTest, GetRankWorks) { testGetRankWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(AvlBinarySearchTreeSetTest, GetMinimumWorks) { testGetMinimumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(AvlBinarySearchTreeSetTest, GetMaximumWorks) { testGetMaximumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(AvlBinarySearchTreeSetTest, SelectAtWorks) { testSelectAtWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(AvlBinarySearchTreeSetTest, GetFloorWorks) { testGetFloorWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(AvlBinarySearchTreeSetTest, GetCeilingWorks) { testGetCeilingWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(AvlBinarySearchTreeSetTest, PutWorks) { testPutWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(AvlBinarySearchTreeSetTest, DeleteBasedOnKeyWorks) { testDeleteBasedOnKeyWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(AvlBinarySearchTreeSetTest, DeleteMinimumWorks) { testDeleteMinimumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(AvlBinarySearchTreeSetTest, DeleteMaximumWorks) { testDeleteMaximumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(AvlBinarySearchTreeSetTest, GetKeys) { testGetKeysWithUnsignedIntAndChar<SetForTest>(); }
 
 TEST(AvlBinarySearchTreeSetTest, GetKeysInRangeWorks) {

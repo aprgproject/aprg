@@ -28,6 +28,16 @@ AlbaNumbers getInitialValuesForIteratingMethods(Term const& term) {
     return result;
 }
 
+AlbaNumbers getInitialValuesForIteratingMethods(Equation const& equation) {
+    AlbaNumbers result;
+    AlbaNumbersSet allValues;
+    retrieveInitialValuesForIteratingMethods(allValues, equation.getLeftHandTerm());
+    retrieveInitialValuesForIteratingMethods(allValues, equation.getRightHandTerm());
+    result.reserve(allValues.size());
+    copy(allValues.cbegin(), allValues.cend(), back_inserter(result));
+    return result;
+}
+
 void retrieveInitialValuesForIteratingMethods(AlbaNumbersSet& allValues, Term const& term) {
     NumbersRetriever retriever;
     retriever.retrieveFromTerm(term);
@@ -40,16 +50,6 @@ void retrieveInitialValuesForIteratingMethods(AlbaNumbersSet& allValues, Term co
         allValues.emplace(positiveLogarithm);
         allValues.emplace(positiveNumber);
     }
-}
-
-AlbaNumbers getInitialValuesForIteratingMethods(Equation const& equation) {
-    AlbaNumbers result;
-    AlbaNumbersSet allValues;
-    retrieveInitialValuesForIteratingMethods(allValues, equation.getLeftHandTerm());
-    retrieveInitialValuesForIteratingMethods(allValues, equation.getRightHandTerm());
-    result.reserve(allValues.size());
-    copy(allValues.cbegin(), allValues.cend(), back_inserter(result));
-    return result;
 }
 
 }  // namespace alba::algebra

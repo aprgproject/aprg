@@ -13,7 +13,6 @@ VertexCoverProblem::VertexCoverProblem(Graph const& nAryTreeGraph, Vertex const 
 VertexCoverProblem::Count VertexCoverProblem::getMinimumCountUsingNaiveRecursion() const {
     // Time Complexity: Exponential
     // Auxiliary Space: Constant
-
     Count result(0);
     if (!m_nAryTreeGraph.isEmpty()) {
         result = getMinimumCountUsingNaiveRecursion(m_rootOfTree);
@@ -24,7 +23,6 @@ VertexCoverProblem::Count VertexCoverProblem::getMinimumCountUsingNaiveRecursion
 VertexCoverProblem::Count VertexCoverProblem::getMinimumCountUsingMemoizationDP() const {
     // Time Complexity: O(n) where n is the number of nodes in given Binary tree.
     // Auxiliary Space: O(n)
-
     Count result(0);
     if (!m_nAryTreeGraph.isEmpty()) {
         VertexToCountMap vertexToCountMap;
@@ -36,7 +34,6 @@ VertexCoverProblem::Count VertexCoverProblem::getMinimumCountUsingMemoizationDP(
 VertexCoverProblem::SetOfVertices VertexCoverProblem::getMinimumSetUsingMemoizationDP() const {
     // Time Complexity: O(n) where n is the number of nodes in given Binary tree.
     // Auxiliary Space: O(n)
-
     SetOfVertices result;
     if (!m_nAryTreeGraph.isEmpty()) {
         VertexToSetOfVerticesMap vertexToMinimumSetMap;

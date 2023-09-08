@@ -28,10 +28,12 @@ INLINE_WITHOUT_BUILT_IN namespace bitUtilitiesWithoutBuiltIn {
         }
         return result;
     }
+
     template <typename DataType>
     constexpr inline bool isEvenParity(DataType const value) {
         return (getNumberOfOnes(value) & 1) == 0;  // AND implementation because we sure that its Unsigned
     }
+
     template <typename DataType>
     constexpr inline std::size_t getNumberOfConsecutiveZerosFromMsb(DataType const value) {
         std::size_t result(0);
@@ -45,6 +47,7 @@ INLINE_WITHOUT_BUILT_IN namespace bitUtilitiesWithoutBuiltIn {
         }
         return result;
     }
+
     template <typename DataType>
     constexpr inline std::size_t getNumberOfConsecutiveZerosFromLsb(DataType const value) {
         std::size_t result(0);
@@ -57,14 +60,13 @@ INLINE_WITHOUT_BUILT_IN namespace bitUtilitiesWithoutBuiltIn {
         }
         return result;
     }
-}  // namespace bitUtilitiesWithoutBuiltIn
 
+}  // namespace bitUtilitiesWithoutBuiltIn
 INLINE_WITH_BUILT_IN namespace bitUtilitiesWithBuiltIn {
 #ifdef __has_builtin
+
     // check this documentation: https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html
-
     // NOLINTBEGIN(google-runtime-int)
-
     template <typename DataType>
     constexpr inline bool isEvenParity(DataType const value) {
         if constexpr (sizeof(DataType) <= sizeof(unsigned int)) {
@@ -77,6 +79,7 @@ INLINE_WITH_BUILT_IN namespace bitUtilitiesWithBuiltIn {
             return false;  // just return something if size is too large
         }
     }
+
     template <typename DataType>
     constexpr inline std::size_t getNumberOfOnes(DataType const value) {
         if constexpr (sizeof(DataType) <= sizeof(unsigned int)) {
@@ -89,6 +92,7 @@ INLINE_WITH_BUILT_IN namespace bitUtilitiesWithBuiltIn {
             return 0;  // just return something if size is too large
         }
     }
+
     template <typename DataType>
     constexpr inline std::size_t getNumberOfConsecutiveZerosFromMsb(DataType const value) {
         if (value == 0) {
@@ -108,6 +112,7 @@ INLINE_WITH_BUILT_IN namespace bitUtilitiesWithBuiltIn {
             return bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb(value);
         }
     }
+
     template <typename DataType>
     constexpr inline std::size_t getNumberOfConsecutiveZerosFromLsb(DataType const value) {
         if (value == 0) {
@@ -123,8 +128,8 @@ INLINE_WITH_BUILT_IN namespace bitUtilitiesWithBuiltIn {
             return bitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb(value);
         }
     }
-    // NOLINTEND(google-runtime-int)
 
+// NOLINTEND(google-runtime-int)
 #endif
 }
 

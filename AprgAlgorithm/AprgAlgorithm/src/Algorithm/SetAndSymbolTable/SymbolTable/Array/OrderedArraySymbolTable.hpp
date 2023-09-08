@@ -11,7 +11,6 @@ public:
     using BaseClass = BaseOrderedArray<Key, BaseSymbolTable<Key, Value>>;
     using Keys = typename BaseClass::Keys;
     using Values = std::vector<Value>;
-
     OrderedArraySymbolTable() : BaseClass(), b_size(BaseClass::m_size), b_keys(BaseClass::m_keys) {}
 
     [[nodiscard]] Value get(Key const& key) const override {

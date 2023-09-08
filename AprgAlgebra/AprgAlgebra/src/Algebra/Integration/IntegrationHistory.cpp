@@ -8,7 +8,19 @@ using namespace std;
 
 namespace alba::algebra {
 
-IntegrationHistory::IntegrationHistory() = default;
+string IntegrationHistory::getEnumShortString(IntegrationPurpose const purpose) {
+    switch (purpose) {
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::NotSet, "NotSet")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::IntegrationByParts, "IntegrationByParts")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::Trigonometric, "Trigonometric")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::TrigonometricSubstitution, "TrigonometricSubstitution")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::Substitution, "Substitution")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::PartialFraction, "PartialFraction")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::NoChange, "NoChange")
+        default:
+            return "default";
+    }
+}
 
 bool IntegrationHistory::didThisIntegrationPurposeAlreadyHappened(IntegrationPurpose const purpose) const {
     return find(m_recordOfIntegrationPurposes.cbegin(), m_recordOfIntegrationPurposes.cend(), purpose) !=
@@ -23,20 +35,6 @@ IntegrationPurpose IntegrationHistory::getLastIntegrationPurpose() const {
         result = m_recordOfIntegrationPurposes.back();
     }
     return result;
-}
-
-string IntegrationHistory::getEnumShortString(IntegrationPurpose const purpose) {
-    switch (purpose) {
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::NotSet, "NotSet")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::IntegrationByParts, "IntegrationByParts")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::Trigonometric, "Trigonometric")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::TrigonometricSubstitution, "TrigonometricSubstitution")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::Substitution, "Substitution")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::PartialFraction, "PartialFraction")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::NoChange, "NoChange")
-        default:
-            return "default";
-    }
 }
 
 void IntegrationHistory::performStepsBeforeIntegration(Term const& input, IntegrationPurpose const purpose) {
@@ -59,6 +57,8 @@ void IntegrationHistory::addIntegrationPurpose(IntegrationPurpose const purpose)
         m_recordOfIntegrationPurposes.emplace_back(purpose);
     }
 }
+
+IntegrationHistory::IntegrationHistory() = default;
 
 void IntegrationHistory::logBefore(
     Term const&,  // input,

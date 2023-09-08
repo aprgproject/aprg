@@ -1,9 +1,7 @@
 #pragma once
 
 namespace alba {
-
 namespace algorithm {}  // namespace algorithm
-
 }  // namespace alba
 
 // Applications and Scope:

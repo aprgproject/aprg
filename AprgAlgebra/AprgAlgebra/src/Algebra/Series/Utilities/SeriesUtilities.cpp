@@ -23,7 +23,6 @@ bool isAxiomOfCompletenessTrue(SeriesBasedOnFormula const& series) {
     // Axiom of completeness
     // Every non empty set of real numbers that has a lower bound has a greatest lower bound.
     // Also, every non empty set of real numbers that has an upper bound has a least upper bound.
-
     AlbaNumberOptional greatestLowerBound(series.getGreatestLowerBound());
     AlbaNumberOptional leastUpperBound(series.getLeastUpperBound());
     return (greatestLowerBound && leastUpperBound) || (!greatestLowerBound && !leastUpperBound);
@@ -90,6 +89,36 @@ bool hasLinearity(
     return termWithInnerMultiplier == termWithOuterMultiplier;
 }
 
+Term getLimitForRatioTest(SeriesBasedOnSummation const& series, string const& variableName) {
+    SubstitutionOfVariablesToTerms substitution{
+        {variableName, Polynomial{Monomial(1, {{variableName, 1}}), Monomial(1, {})}}};
+    Term formulaForEachTerm(series.getFormulaForEachTermInSummation());
+    Term formulaForEachTermWithPlusOne(substitution.performSubstitutionTo(formulaForEachTerm));
+    Term termForLimit(
+        convertPositiveTermIfNegative(formulaForEachTermWithPlusOne) /
+        convertPositiveTermIfNegative(formulaForEachTerm));
+    return getLimit(termForLimit, variableName, ALBA_NUMBER_POSITIVE_INFINITY);
+}
+
+Term getSumOfArithmeticSeriesUsingFirstAndLastTerm(Term const& firstTerm, Term const& lastTerm, Term const& count) {
+    return (firstTerm + lastTerm) * count / 2;
+}
+
+Term getSumOfGeometricSeriesUsingFirstValueAndCommonMultiplier(
+    Term const& firstValue, Term const& commonMultiplier, int const count) {
+    return firstValue * (1 - (commonMultiplier ^ count)) / (1 - commonMultiplier);
+}
+
+Term getInfiniteSumOfGeometricSeriesIfCommonMultiplierIsFractional(
+    Term const& firstValue, Term const& commonMultiplier) {
+    return firstValue / (1 - commonMultiplier);
+}
+
+PowerSeries getEToTheXPowerSeries() {
+    Term formula(convertExpressionToSimplestTerm(createExpressionIfPossible({1, "/", factorial(n)})));
+    return {formula, n, x, 0};
+}
+
 void performLimitComparisonTest(
     bool& isConvergent, bool& isDivergent, SeriesBasedOnSummation const& series1, SeriesBasedOnSummation const& series2,
     string const& variableName) {
@@ -149,36 +178,6 @@ void performRootTest(
             isDivergent = true;
         }
     }
-}
-
-Term getLimitForRatioTest(SeriesBasedOnSummation const& series, string const& variableName) {
-    SubstitutionOfVariablesToTerms substitution{
-        {variableName, Polynomial{Monomial(1, {{variableName, 1}}), Monomial(1, {})}}};
-    Term formulaForEachTerm(series.getFormulaForEachTermInSummation());
-    Term formulaForEachTermWithPlusOne(substitution.performSubstitutionTo(formulaForEachTerm));
-    Term termForLimit(
-        convertPositiveTermIfNegative(formulaForEachTermWithPlusOne) /
-        convertPositiveTermIfNegative(formulaForEachTerm));
-    return getLimit(termForLimit, variableName, ALBA_NUMBER_POSITIVE_INFINITY);
-}
-
-Term getSumOfArithmeticSeriesUsingFirstAndLastTerm(Term const& firstTerm, Term const& lastTerm, Term const& count) {
-    return (firstTerm + lastTerm) * count / 2;
-}
-
-Term getSumOfGeometricSeriesUsingFirstValueAndCommonMultiplier(
-    Term const& firstValue, Term const& commonMultiplier, int const count) {
-    return firstValue * (1 - (commonMultiplier ^ count)) / (1 - commonMultiplier);
-}
-
-Term getInfiniteSumOfGeometricSeriesIfCommonMultiplierIsFractional(
-    Term const& firstValue, Term const& commonMultiplier) {
-    return firstValue / (1 - commonMultiplier);
-}
-
-PowerSeries getEToTheXPowerSeries() {
-    Term formula(convertExpressionToSimplestTerm(createExpressionIfPossible({1, "/", factorial(n)})));
-    return {formula, n, x, 0};
 }
 
 }  // namespace alba::algebra

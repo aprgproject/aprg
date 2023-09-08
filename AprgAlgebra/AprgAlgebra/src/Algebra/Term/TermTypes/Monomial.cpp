@@ -21,6 +21,29 @@ Monomial::Monomial(AlbaNumber const& constant, initializer_list<VariableExponent
 Monomial::Monomial(AlbaNumber const& constant, VariablesToExponentsMap const& variablesWithExponents)
     : m_constant(constant), m_variablesToExponentsMap(variablesWithExponents), m_isSimplified(false) {}
 
+bool Monomial::operator==(Monomial const& second) const {
+    return m_constant == second.m_constant && m_variablesToExponentsMap == second.m_variablesToExponentsMap;
+}
+
+bool Monomial::operator!=(Monomial const& second) const { return !(operator==(second)); }
+
+bool Monomial::operator<(Monomial const& second) const {
+    bool result(false);
+    if (m_variablesToExponentsMap == second.m_variablesToExponentsMap) {
+        result = m_constant < second.m_constant;
+    } else {
+        // highest degree is the lower priority for sorting
+        AlbaNumber degree1(getDegree(*this));
+        AlbaNumber degree2(getDegree(second));
+        if (degree1 == degree2) {
+            result = isLessThanByComparingVariableNameMaps(*this, second);
+        } else {
+            result = degree1 < degree2;
+        }
+    }
+    return result;
+}
+
 Monomial::VariablesToExponentsMap Monomial::combineVariableExponentMapByMultiplication(
     VariablesToExponentsMap const& variablesMap1, VariablesToExponentsMap const& variablesMap2) {
     VariablesToExponentsMap newVariableMap;
@@ -45,31 +68,7 @@ Monomial::VariablesToExponentsMap Monomial::combineVariableExponentMapByDivision
     return newVariableMap;
 }
 
-bool Monomial::operator==(Monomial const& second) const {
-    return m_constant == second.m_constant && m_variablesToExponentsMap == second.m_variablesToExponentsMap;
-}
-
-bool Monomial::operator!=(Monomial const& second) const { return !(operator==(second)); }
-
-bool Monomial::operator<(Monomial const& second) const {
-    bool result(false);
-    if (m_variablesToExponentsMap == second.m_variablesToExponentsMap) {
-        result = m_constant < second.m_constant;
-    } else {
-        // highest degree is the lower priority for sorting
-        AlbaNumber degree1(getDegree(*this));
-        AlbaNumber degree2(getDegree(second));
-        if (degree1 == degree2) {
-            result = isLessThanByComparingVariableNameMaps(*this, second);
-        } else {
-            result = degree1 < degree2;
-        }
-    }
-    return result;
-}
-
 bool Monomial::isSimplified() const { return m_isSimplified; }
-
 AlbaNumber const& Monomial::getCoefficient() const { return m_constant; }
 
 Monomial::VariablesToExponentsMap const& Monomial::getVariablesToExponentsMap() const {
@@ -157,7 +156,6 @@ void Monomial::putVariableWithExponent(string const& variable, AlbaNumber const&
 }
 
 void Monomial::setAsSimplified() { m_isSimplified = true; }
-
 void Monomial::clearSimplifiedFlag() { m_isSimplified = false; }
 
 bool Monomial::isLessThanByComparingVariableNameMaps(Monomial const& monomial1, Monomial const& monomial2) {

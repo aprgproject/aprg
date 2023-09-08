@@ -15,11 +15,8 @@ bool AlbaNumberIntervalEndpoint::operator==(AlbaNumberIntervalEndpoint const& se
 }
 
 bool AlbaNumberIntervalEndpoint::isOpen() const { return Type::Open == m_type; }
-
 bool AlbaNumberIntervalEndpoint::isClose() const { return Type::Close == m_type; }
-
 AlbaNumberIntervalEndpoint::Type AlbaNumberIntervalEndpoint::getType() const { return m_type; }
-
 AlbaNumber const& AlbaNumberIntervalEndpoint::getValue() const { return m_value; }
 
 string AlbaNumberIntervalEndpoint::getTypeString() const {

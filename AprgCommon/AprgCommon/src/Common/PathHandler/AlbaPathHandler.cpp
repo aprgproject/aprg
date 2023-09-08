@@ -17,6 +17,9 @@ AlbaPathHandler::AlbaPathHandler(string_view const path, string_view const slash
     setPath(path);
 }
 
+string AlbaPathHandler::getFullPath() const { return m_directory + m_file; }
+string AlbaPathHandler::getDirectory() const { return m_directory; }
+
 void AlbaPathHandler::clear() {
     m_pathType = PathType::Empty;
     m_directory.clear();
@@ -24,9 +27,26 @@ void AlbaPathHandler::clear() {
     m_extension.clear();
 }
 
-string AlbaPathHandler::getFullPath() const { return m_directory + m_file; }
+bool AlbaPathHandler::isDirectory() const { return m_pathType == PathType::Directory; }
+bool AlbaPathHandler::isFile() const { return m_pathType == PathType::File; }
+bool AlbaPathHandler::isEmpty() const { return m_pathType == PathType::Empty; }
 
-string AlbaPathHandler::getDirectory() const { return m_directory; }
+string AlbaPathHandler::getImmediateDirectoryName() const {
+    return stringHelper::getImmediateDirectoryName(m_directory, m_slashCharacterString);
+}
+
+string AlbaPathHandler::getFile() const { return m_file; }
+
+string AlbaPathHandler::getFilenameOnly() const {
+    int indexOfSlashOrPeriod = static_cast<int>(m_file.find_last_of('.'));
+    if (isNotNpos(indexOfSlashOrPeriod)) {
+        return m_file.substr(0, static_cast<string::size_type>(indexOfSlashOrPeriod));
+    }
+    return m_file;
+}
+
+string AlbaPathHandler::getExtension() const { return m_extension; }
+PathType AlbaPathHandler::getPathType() const { return m_pathType; }
 
 void AlbaPathHandler::input(string_view const path) {
     clear();
@@ -46,30 +66,6 @@ void AlbaPathHandler::goUp() {
         input(directoryWithoutSlash.substr(0, static_cast<string::size_type>(indexOfSlash) + 1));
     }
 }
-
-string AlbaPathHandler::getImmediateDirectoryName() const {
-    return stringHelper::getImmediateDirectoryName(m_directory, m_slashCharacterString);
-}
-
-string AlbaPathHandler::getFile() const { return m_file; }
-
-string AlbaPathHandler::getFilenameOnly() const {
-    int indexOfSlashOrPeriod = static_cast<int>(m_file.find_last_of('.'));
-    if (isNotNpos(indexOfSlashOrPeriod)) {
-        return m_file.substr(0, static_cast<string::size_type>(indexOfSlashOrPeriod));
-    }
-    return m_file;
-}
-
-string AlbaPathHandler::getExtension() const { return m_extension; }
-
-PathType AlbaPathHandler::getPathType() const { return m_pathType; }
-
-bool AlbaPathHandler::isDirectory() const { return m_pathType == PathType::Directory; }
-
-bool AlbaPathHandler::isFile() const { return m_pathType == PathType::File; }
-
-bool AlbaPathHandler::isEmpty() const { return m_pathType == PathType::Empty; }
 
 void AlbaPathHandler::save(string_view const path) { setPath(path); }
 

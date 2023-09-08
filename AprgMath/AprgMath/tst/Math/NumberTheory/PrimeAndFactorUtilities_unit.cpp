@@ -15,7 +15,6 @@ TEST(PrimeAndFactorUtilitiesTest, IsCoPrimeWorks) {
 
 TEST(PrimeAndFactorUtilitiesTest, IsNumberOfPrimesInfiniteWorks) {
     // The factors are 1, 2, 3, 4, 6, 7, 12, 14, 21, 28, 42 and 84.
-
     EXPECT_TRUE(isNumberOfPrimesInfinite());
 }
 
@@ -50,31 +49,26 @@ TEST(PrimeAndFactorUtilitiesTest, IsWilsonTheoremTrueWorks) {
 
 TEST(PrimeAndFactorUtilitiesTest, GetNumberOfFactorsWorks) {
     // The factors are 1, 2, 3, 4, 6, 7, 12, 14, 21, 28, 42 and 84.
-
     EXPECT_EQ(12U, getNumberOfFactors(84U));
 }
 
 TEST(PrimeAndFactorUtilitiesTest, GetSumOfFactorsWorks) {
     // 1 + 2 + 3 + 4 + 6 + 7 + 12 + 14 + 21 + 28 + 42 + 84 = 224
-
     EXPECT_EQ(224U, getSumOfFactors(84U));
 }
 
 TEST(PrimeAndFactorUtilitiesTest, GetProductOfFactorsWorks) {
     // 1 * 2 * 3 * 4 * 6 * 7 * 12 * 14 * 21 * 28 * 42 * 84 = 224
-
     EXPECT_EQ(351298031616U, getProductOfFactors(84U));
 }
 
 TEST(PrimeAndFactorUtilitiesTest, GetApproximateDensityOfPrimesWorks) {
     // The number of primes between 1 to 10^6 is 78498 and 72382 is a good approximation.
-
     EXPECT_EQ(72382U, getApproximateDensityOfPrimes(1000000U));
 }
 
 TEST(PrimeAndFactorUtilitiesTest, GetNumberOfCoPrimesBelowThisNumberWorks) {
     // The number of coprimes below 12 or phi(12) = 4, because 1, 5, 7 and 11 are coprime to 12.
-
     EXPECT_EQ(4U, getNumberOfCoPrimesBelowThisNumber(12));
 }
 

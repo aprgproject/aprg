@@ -12,7 +12,6 @@ MobileNumericKeypadProblem::MobileNumericKeypadProblem(Count const length) : m_l
 MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingNaiveRecursion() const {
     // Time Complexity: Exponential -> Since there are two calls per iteration:  O(5^n) (5 is maximum recursion calls in
     // one function call) Auxiliary Space: Constant
-
     Count result(0);
     for (NumpadValue numpadValue = 0; numpadValue <= 9; ++numpadValue) {
         result += getCountForValueUsingNaiveRecursion(m_length, numpadValue);
@@ -23,7 +22,6 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingNaive
 MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingMemoizationDP() const {
     // Time Complexity: Exponential -> Since there are two calls per iteration:  O(5^n) (5 is maximum recursion calls in
     // one function call) Auxiliary Space: Constant
-
     Count result(0);
     CountMatrix countMatrix(m_length + 1, 10, UNUSED_VALUE);
     for (NumpadValue numpadValue = 0; numpadValue <= 9; ++numpadValue) {
@@ -35,7 +33,6 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingMemoi
 MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingIterativeDP() const {
     // Time Complexity: O(n*d)
     // Auxiliary Space: O(n*d)
-
     Count result(0);
     if (m_length > 0) {
         CountMatrix countMatrix(m_length, 10);
@@ -96,7 +93,6 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingItera
 MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingIterativeDPAndSpaceEfficient() const {
     // Time Complexity: O(n*d)
     // Auxiliary Space: O(d)
-
     Count result(0);
     if (m_length > 0) {
         vector<Counts> previousAndCurrentCounts(2, NumpadValues(10, 1));

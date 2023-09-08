@@ -18,30 +18,23 @@ namespace ChessPeek {
 class ChessPeek {
 public:
     using EngineCalculationDetails = chess::CalculationDetails;
-
     ChessPeek();
-
     void runForever();
     void runOneIteration();
-
     void checkScreenAndSaveDetails();
     void startEngineAnalysisWithBoardFromScreen();
     void calculationMonitoringCallBackForEngine(EngineCalculationDetails const& engineCalculationDetails);
 
 private:
-    void initialize();
-    void saveCalculationDetails(EngineCalculationDetails const& engineCalculationDetails);
-
-    void printCalculationDetailsWithFiltering();
-    void printCalculationDetailsIfPending();
-    void printCalculationDetails();
-
-    Move getPerformedMove() const;
-
     bool shouldAnalyzeBoard() const;
     bool didPlayerChange() const;
     bool didBoardChange() const;
-
+    Move getPerformedMove() const;
+    void initialize();
+    void saveCalculationDetails(EngineCalculationDetails const& engineCalculationDetails);
+    void printCalculationDetailsWithFiltering();
+    void printCalculationDetailsIfPending();
+    void printCalculationDetails();
     Configuration m_configuration;
     ChessEngineHandler m_engineHandler;
     ChessEngineControllerWithUci m_engineController;
@@ -56,7 +49,6 @@ private:
 };
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

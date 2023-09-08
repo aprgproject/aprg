@@ -16,9 +16,7 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using AdjacencyList = SetOfVertices;
     using AdjacencyLists = std::array<AdjacencyList, MAX_VERTEX_VALUE>;
-
     UndirectedGraphWithArrayOfAdjacencyLists() = default;
-
     [[nodiscard]] bool isEmpty() const override { return m_numberOfVertices == 0 && m_numberOfEdges == 0; }
 
     [[nodiscard]] bool hasAnyConnection(Vertex const& vertex) const override {
@@ -31,7 +29,6 @@ public:
     }
 
     [[nodiscard]] int getNumberOfVertices() const override { return m_numberOfVertices; }
-
     [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
 
     [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {

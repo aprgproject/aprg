@@ -80,7 +80,6 @@ TEST(PowerHelpersTest, GetRaiseToPowerBasedOnTypeWorks) {
     EXPECT_EQ(243, getRaiseToPowerBasedOnType(3, 5));
     EXPECT_EQ(-128, getRaiseToPowerBasedOnType(-2, 7));
     EXPECT_EQ(1, getRaiseToPowerBasedOnType(-2, -1));  // this is wrong, but its easier on impl
-
     // Floating point
     EXPECT_DOUBLE_EQ(1.0, getRaiseToPowerBasedOnType(0.0, 0.0));
     EXPECT_DOUBLE_EQ(1.009576582776887, getRaiseToPowerBasedOnType(1.1, 0.1));
@@ -199,7 +198,6 @@ TEST(PowerHelpersTest, IsPerfectNthPowerForAlbaNumberWorks) {
 
 TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformanceTestWithIncreasingInput) {
     // Results: ~1s
-
     long long result(0);
     for (long long base = 1; base < 2000; ++base) {
         for (long long exponent = 1; exponent < 2000; ++exponent) {
@@ -211,7 +209,6 @@ TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformance
 
 TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersUsingPowPerformanceTestWithIncreasingInput) {
     // Results: ~1.3s
-
     long long result(0);
     for (long long base = 1; base < 2000; ++base) {
         for (long long exponent = 1; exponent < 2000; ++exponent) {
@@ -223,7 +220,6 @@ TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersUsingPowPer
 
 TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformanceTestWithRandomInput) {
     // Results: ~3.1s
-
     long long result(0);
     int minValue(1);
     int maxValue(2000);
@@ -238,7 +234,6 @@ TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformance
 
 TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersUsingPowPerformanceTestWithRandomInput) {
     // Results: ~3.1s
-
     long long result(0);
     int minValue(1);
     int maxValue(2000);

@@ -10,19 +10,6 @@ using namespace std;
 
 namespace alba::AprgBitmap {
 
-void gatherAndSaveColorStatistics(string const& bitmapPath) {
-    AlbaLocalPathHandler bitmapPathHandler(bitmapPath);
-    AlbaLocalPathHandler colorDataPathHandler(
-        bitmapPathHandler.getDirectory() + R"(\)" + bitmapPathHandler.getFilenameOnly() + R"(_SortedColorData.csv)");
-    AlbaLocalPathHandler colorStatisticsPathHandler(
-        bitmapPathHandler.getDirectory() + R"(\)" + bitmapPathHandler.getFilenameOnly() + R"(_Statistics.txt)");
-
-    AprgColorStatistics statistics;
-    statistics.gatherStatistics(bitmapPathHandler.getFullPath());
-    statistics.saveColorData(colorDataPathHandler.getFullPath());
-    statistics.saveColorStatistics(colorStatisticsPathHandler.getFullPath());
-}
-
 void AprgColorStatistics::gatherStatistics(string const& bitmapPath) {
     Bitmap bitmap(bitmapPath);
     BitmapSnippet canvas(bitmap.getSnippetReadFromFileWholeBitmap());
@@ -111,6 +98,19 @@ void AprgColorStatistics::saveColorStatistics(string const& path) {
                          << " StdDev: " << luma601Statistics.getSampleStandardDeviation() << "\n";
     statisticsFileStream << "Luma 709 Mean: " << luma709Statistics.getMean()
                          << " StdDev: " << luma709Statistics.getSampleStandardDeviation() << "\n";
+}
+
+void gatherAndSaveColorStatistics(string const& bitmapPath) {
+    AlbaLocalPathHandler bitmapPathHandler(bitmapPath);
+    AlbaLocalPathHandler colorDataPathHandler(
+        bitmapPathHandler.getDirectory() + R"(\)" + bitmapPathHandler.getFilenameOnly() + R"(_SortedColorData.csv)");
+    AlbaLocalPathHandler colorStatisticsPathHandler(
+        bitmapPathHandler.getDirectory() + R"(\)" + bitmapPathHandler.getFilenameOnly() + R"(_Statistics.txt)");
+
+    AprgColorStatistics statistics;
+    statistics.gatherStatistics(bitmapPathHandler.getFullPath());
+    statistics.saveColorData(colorDataPathHandler.getFullPath());
+    statistics.saveColorStatistics(colorStatisticsPathHandler.getFullPath());
 }
 
 }  // namespace alba::AprgBitmap

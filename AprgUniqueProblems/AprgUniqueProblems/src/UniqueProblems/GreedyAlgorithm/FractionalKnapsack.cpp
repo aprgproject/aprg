@@ -9,7 +9,6 @@ namespace alba {
 FractionalKnapsack::Profit FractionalKnapsack::getBestProfit(Weight const maximumWeight, Items const& items) {
     // Time Complexity: O(N log N)
     // Auxiliary Space: O(N)
-
     Items sortedItems(items);
     sort(sortedItems.begin(), sortedItems.end(), [](Item const& item1, Item const& item2) {
         return static_cast<double>(item1.first) / item1.second > static_cast<double>(item2.first) / item2.second;

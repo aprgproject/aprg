@@ -66,9 +66,7 @@ TEST(DirectedGraphWithListOfEdgesTest, GetEdgesWorksWhenNotEmpty) {
 }
 
 TEST(DirectedGraphWithListOfEdgesTest, ConnectWorks) { testConnectWithVertexAsInt<GraphForTest>(); }
-
 TEST(DirectedGraphWithListOfEdgesTest, DisconnectWorks) { testDisconnectWithVertexAsInt<GraphForTest>(); }
-
 TEST(DirectedGraphWithListOfEdgesTest, ClearWorks) { testClearWithVertexAsInt<GraphForTest>(); }
 
 TEST(DirectedGraphWithListOfEdgesTest, GraphWorksAfterClear) {

@@ -12,9 +12,7 @@ class InvertedMapForSymbolGraph {
 public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using ObjectToVertexMap = std::map<Object, Vertex>;
-
     [[nodiscard]] ObjectToVertexMap const& getObjectToVertexMap() const { return m_invertedMap; }
-
     [[nodiscard]] Vertices const& getUnusedVertices() const { return m_unusedVertices; }
 
     Vertex const& getVertexIdentifierAndAddObjectIfNeeded(Object const& object) {

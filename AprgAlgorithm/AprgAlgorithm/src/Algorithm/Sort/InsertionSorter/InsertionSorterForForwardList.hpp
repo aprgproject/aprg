@@ -12,7 +12,6 @@ template <typename Value>
 class InsertionSorterForForwardList : public BaseSorter<std::forward_list<Value>> {
 public:
     using Values = std::forward_list<Value>;
-
     InsertionSorterForForwardList() = default;
 
     void sort(Values& valuesToSort) const override {

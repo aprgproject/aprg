@@ -78,7 +78,6 @@ Equation getParabolaEquation(ParabolaOrientation const parabolaOrientation) {
 
 // A conical frustum is a frustum created by slicing the top off a cone (with the cut made parallel to the base).
 // For a right circular cone, let h be height, rb as bottom radius and rt as bottom radius.
-
 Term getSurfaceAreaOfAConicalFrustum() {
     Term topCircleArea(createExpressionIfPossible({getPiAsATerm(), "*", "rt", "^", 2}));
     Term bottomCircleArea(createExpressionIfPossible({getPiAsATerm(), "*", "rb", "^", 2}));

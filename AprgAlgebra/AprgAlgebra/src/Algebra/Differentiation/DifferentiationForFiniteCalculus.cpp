@@ -10,11 +10,12 @@ namespace alba::algebra {
 DifferentiationForFiniteCalculus::DifferentiationForFiniteCalculus(string const& nameOfVariableToDifferentiate)
     : m_nameOfVariableToDifferentiate(nameOfVariableToDifferentiate) {}
 
-Term DifferentiationForFiniteCalculus::differentiate(Term const& term) const { return differentiateTerm(term); }
-
 Term DifferentiationForFiniteCalculus::differentiate(Constant const& constant) {
     return {differentiateConstant(constant)};
 }
+
+AlbaNumber DifferentiationForFiniteCalculus::differentiateConstant(Constant const&) { return 0; }
+Term DifferentiationForFiniteCalculus::differentiate(Term const& term) const { return differentiateTerm(term); }
 
 Term DifferentiationForFiniteCalculus::differentiate(Variable const& variable) const {
     Term result(differentiateVariable(variable));
@@ -80,8 +81,6 @@ Term DifferentiationForFiniteCalculus::differentiateTerm(Term const& term) const
     }
     return result;
 }
-
-AlbaNumber DifferentiationForFiniteCalculus::differentiateConstant(Constant const&) { return 0; }
 
 Polynomial DifferentiationForFiniteCalculus::differentiateVariable(Variable const& variable) const {
     Polynomial result(createPolynomialFromNumber(0));

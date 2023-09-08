@@ -9,7 +9,38 @@ using namespace std;
 
 namespace alba {
 
-RttAnalyzer::RttAnalyzer() = default;
+/*
+void RttAnalyzer::processValues(string const& dateTime, strings const& values)
+{
+    static RttDetails rttDetails;
+    if(m_cx8IndexOptional && m_pnPosIndexOptional)
+    {
+        if(m_cx8IndexOptional.getReference()<values.size() && m_pnPosIndexOptional.getReference()<values.size() &&
+m_posNumber<6)
+        {
+            rttDetails.multiplePos[m_posNumber] = convertStringToNumber<unsigned
+int>(values[m_cx8IndexOptional.getReference()]); if(m_posNumber==0)
+            {
+                rttDetails.pnPos = convertStringToNumber<unsigned int>(values[m_pnPosIndexOptional.getReference()]);
+            }
+        }
+    }
+    m_posNumber++;
+    if(m_posNumber==6)
+    {
+        rttDetails.dateTime = dateTime;
+        m_allRttDetails.emplace_back(rttDetails);
+        m_posNumber=0;
+    }
+}
+*/
+void RttAnalyzer::saveAllRttDetails(ofstream& collectedRttDetails) const {
+    collectedRttDetails << "dateTime,Position(cx8)\n";
+
+    for (RttDetails const& rttDetails : m_allRttDetails) {
+        collectedRttDetails << rttDetails.dateTime << ", " << rttDetails.multiplePos[0] << "\n";
+    }
+}
 
 void RttAnalyzer::processFile(std::string const& file) {
     AlbaLocalPathHandler pathHandler(file);
@@ -79,7 +110,6 @@ isStringFoundNotCaseSensitive(line, "PN Pos"))
     }
 }
 */
-
 void RttAnalyzer::processTitles(strings const& titles) {
     unsigned int index = 0;
     for (string const& title : titles) {
@@ -109,7 +139,6 @@ void RttAnalyzer::processTitles(strings const& titles)
     }
 }
 */
-
 void RttAnalyzer::processValues(string const& dateTime, strings const& values) {
     static RttDetails rttDetails;
     if (m_cx8IndexOptional) {
@@ -121,40 +150,6 @@ void RttAnalyzer::processValues(string const& dateTime, strings const& values) {
                 m_allRttDetails.emplace_back(rttDetails);
             }
         }
-    }
-}
-
-/*
-void RttAnalyzer::processValues(string const& dateTime, strings const& values)
-{
-    static RttDetails rttDetails;
-    if(m_cx8IndexOptional && m_pnPosIndexOptional)
-    {
-        if(m_cx8IndexOptional.getReference()<values.size() && m_pnPosIndexOptional.getReference()<values.size() &&
-m_posNumber<6)
-        {
-            rttDetails.multiplePos[m_posNumber] = convertStringToNumber<unsigned
-int>(values[m_cx8IndexOptional.getReference()]); if(m_posNumber==0)
-            {
-                rttDetails.pnPos = convertStringToNumber<unsigned int>(values[m_pnPosIndexOptional.getReference()]);
-            }
-        }
-    }
-    m_posNumber++;
-    if(m_posNumber==6)
-    {
-        rttDetails.dateTime = dateTime;
-        m_allRttDetails.emplace_back(rttDetails);
-        m_posNumber=0;
-    }
-}
-*/
-
-void RttAnalyzer::saveAllRttDetails(ofstream& collectedRttDetails) const {
-    collectedRttDetails << "dateTime,Position(cx8)\n";
-
-    for (RttDetails const& rttDetails : m_allRttDetails) {
-        collectedRttDetails << rttDetails.dateTime << ", " << rttDetails.multiplePos[0] << "\n";
     }
 }
 
@@ -195,5 +190,7 @@ pos,diffPos1,diffPos2,diffPos3,diffPos4,diffPos5,diffPos6,minDifferencePos,maxDi
     }
 }
 */
+
+RttAnalyzer::RttAnalyzer() = default;
 
 }  // namespace alba

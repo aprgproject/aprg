@@ -21,82 +21,6 @@ namespace {
 constexpr int NUMBER_OF_ITERATIONS_IN_BRENT_METHOD = 1000;
 }  // namespace
 
-Polynomials factorizeIncreasingAndDecreasingExponentsForm(Polynomial const& polynomial) {
-    Polynomials result;
-    factorizeIncreasingAndDecreasingExponentsFormIfPossible(result, polynomial);
-    simplifyAndEmplaceBackPolynomialIfListIsEmpty(result, polynomial);
-    return result;
-}
-
-void factorizeIncreasingAndDecreasingExponentsFormIfPossible(Polynomials& result, Polynomial const& polynomial) {
-    Monomials monomials(polynomial.getMonomials());
-    if (monomials.size() > 1) {
-        Monomial firstMonomial(monomials.front());
-        Monomial lastMonomial(monomials.back());
-        int maxExponentDivisor(calculateMaxExponentDivisor(firstMonomial, lastMonomial));
-        for (int exponentDivisor = 2; exponentDivisor <= maxExponentDivisor; ++exponentDivisor) {
-            if (areExponentsDivisible(firstMonomial, exponentDivisor) &&
-                areExponentsDivisible(lastMonomial, exponentDivisor)) {
-                Monomial unitFirstMonomial(1, firstMonomial.getVariablesToExponentsMap());
-                Monomial unitSecondMonomial(1, lastMonomial.getVariablesToExponentsMap());
-                unitFirstMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, exponentDivisor));
-                unitSecondMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, exponentDivisor));
-                Monomials monomialsWithExponentsInOrder(
-                    getMonomialsWithExponentsInOrder(exponentDivisor, unitFirstMonomial, unitSecondMonomial));
-                if (areAllMonomialsFoundInMonomialsWithExponentsInOrder(monomials, monomialsWithExponentsInOrder)) {
-                    AlbaNumbers coefficients(
-                        getCoefficientsInMonomialsWithExponentsInOrder(polynomial, monomialsWithExponentsInOrder));
-                    factorizePolynomialForm(
-                        result, polynomial, coefficients, unitFirstMonomial.getVariablesToExponentsMap(),
-                        unitSecondMonomial.getVariablesToExponentsMap());
-                }
-                if (!result.empty()) {
-                    break;
-                }
-            }
-        }
-    }
-}
-
-void factorizePolynomialForm(
-    Polynomials& result, Polynomial const& polynomial, AlbaNumbers const& coefficients,
-    Monomial::VariablesToExponentsMap const& firstVariableExponent,
-    Monomial::VariablesToExponentsMap const& secondVariableExponent) {
-    AlbaNumbers rootValues(calculatePolynomialRoots(coefficients));
-    if (areRootsAcceptable(rootValues)) {
-        Polynomial remainingPolynomial(polynomial);
-        for (AlbaNumber const& rootValue : rootValues) {
-            AlbaNumber rootFirstCoefficient(1);
-            AlbaNumber rootSecondCoefficient(rootValue * -1);
-            AlbaNumber aCoefficient(getFirstMonomial(remainingPolynomial).getCoefficient());
-            if (aCoefficient.isIntegerOrFractionType() && rootSecondCoefficient.isIntegerOrFractionType()) {
-                fixCoefficientsOfFactors(aCoefficient, rootFirstCoefficient, rootSecondCoefficient);
-            }
-            Monomial rootFirstMonomial(rootFirstCoefficient, firstVariableExponent);
-            Monomial rootSecondMonomial(rootSecondCoefficient, secondVariableExponent);
-            Polynomial rootPolynomial{rootFirstMonomial, rootSecondMonomial};
-            PolynomialOverPolynomial divideProcess(remainingPolynomial, rootPolynomial);
-            PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(divideProcess.divide());
-            simplifyThenEmplaceBackIfPolynomialIsNotEmpty(result, rootPolynomial);
-            remainingPolynomial = quotientAndRemainder.quotient;
-        }
-        if (!rootValues.empty() && !isTheValue(remainingPolynomial, 1)) {
-            simplifyThenEmplaceBackIfPolynomialIsNotEmpty(result, remainingPolynomial);
-        }
-    }
-}
-
-void fixCoefficientsOfFactors(
-    AlbaNumber& aCoefficient, AlbaNumber& rootFirstCoefficient, AlbaNumber& rootSecondCoefficient) {
-    AlbaNumber::FractionData aCoefficientFractionData(aCoefficient.getFractionData());
-    AlbaNumber::FractionData secondFractionData(rootSecondCoefficient.getFractionData());
-    int multiplier = getGreatestCommonFactor<int>(
-        getAbsoluteValue(aCoefficientFractionData.numerator), secondFractionData.denominator);
-    rootFirstCoefficient = rootFirstCoefficient * multiplier;
-    rootSecondCoefficient = rootSecondCoefficient * multiplier;
-    aCoefficient = aCoefficient / multiplier;
-}
-
 bool areAllMonomialsFoundInMonomialsWithExponentsInOrder(
     Monomials const& monomialsToCheck, Monomials const& monomialsWithExponentsInOrder) {
     Polynomial polynomialWithExponentsInOrder(monomialsWithExponentsInOrder);
@@ -110,10 +34,23 @@ bool areAllMonomialsFoundInMonomialsWithExponentsInOrder(
     return areAllMonomialsFoundInPolynomialWithExponentsInOrder;
 }
 
+bool areRootsAcceptable(AlbaNumbers const& rootValues) {
+    bool doAnyRootsHaveDoubleValues =
+        any_of(rootValues.cbegin(), rootValues.cend(), [](AlbaNumber const& root) { return root.isDoubleType(); });
+    return !(shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue() && doAnyRootsHaveDoubleValues);
+}
+
 int calculateMaxExponentDivisor(Monomial const& firstMonomial, Monomial const& lastMonomial) {
     AlbaNumber maxExponent = max(getMaxExponent(firstMonomial), getMaxExponent(lastMonomial));
     int maxExponentDivisor = getAbsoluteValue(maxExponent.getInteger());
     return maxExponentDivisor;
+}
+
+Polynomials factorizeIncreasingAndDecreasingExponentsForm(Polynomial const& polynomial) {
+    Polynomials result;
+    factorizeIncreasingAndDecreasingExponentsFormIfPossible(result, polynomial);
+    simplifyAndEmplaceBackPolynomialIfListIsEmpty(result, polynomial);
+    return result;
 }
 
 AlbaNumbers getCoefficientsInMonomialsWithExponentsInOrder(
@@ -197,10 +134,73 @@ Monomials getMonomialsWithExponentsInOrder(
     return monomialsWithExponentsInOrder;
 }
 
-bool areRootsAcceptable(AlbaNumbers const& rootValues) {
-    bool doAnyRootsHaveDoubleValues =
-        any_of(rootValues.cbegin(), rootValues.cend(), [](AlbaNumber const& root) { return root.isDoubleType(); });
-    return !(shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue() && doAnyRootsHaveDoubleValues);
+void factorizeIncreasingAndDecreasingExponentsFormIfPossible(Polynomials& result, Polynomial const& polynomial) {
+    Monomials monomials(polynomial.getMonomials());
+    if (monomials.size() > 1) {
+        Monomial firstMonomial(monomials.front());
+        Monomial lastMonomial(monomials.back());
+        int maxExponentDivisor(calculateMaxExponentDivisor(firstMonomial, lastMonomial));
+        for (int exponentDivisor = 2; exponentDivisor <= maxExponentDivisor; ++exponentDivisor) {
+            if (areExponentsDivisible(firstMonomial, exponentDivisor) &&
+                areExponentsDivisible(lastMonomial, exponentDivisor)) {
+                Monomial unitFirstMonomial(1, firstMonomial.getVariablesToExponentsMap());
+                Monomial unitSecondMonomial(1, lastMonomial.getVariablesToExponentsMap());
+                unitFirstMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, exponentDivisor));
+                unitSecondMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, exponentDivisor));
+                Monomials monomialsWithExponentsInOrder(
+                    getMonomialsWithExponentsInOrder(exponentDivisor, unitFirstMonomial, unitSecondMonomial));
+                if (areAllMonomialsFoundInMonomialsWithExponentsInOrder(monomials, monomialsWithExponentsInOrder)) {
+                    AlbaNumbers coefficients(
+                        getCoefficientsInMonomialsWithExponentsInOrder(polynomial, monomialsWithExponentsInOrder));
+                    factorizePolynomialForm(
+                        result, polynomial, coefficients, unitFirstMonomial.getVariablesToExponentsMap(),
+                        unitSecondMonomial.getVariablesToExponentsMap());
+                }
+                if (!result.empty()) {
+                    break;
+                }
+            }
+        }
+    }
+}
+
+void factorizePolynomialForm(
+    Polynomials& result, Polynomial const& polynomial, AlbaNumbers const& coefficients,
+    Monomial::VariablesToExponentsMap const& firstVariableExponent,
+    Monomial::VariablesToExponentsMap const& secondVariableExponent) {
+    AlbaNumbers rootValues(calculatePolynomialRoots(coefficients));
+    if (areRootsAcceptable(rootValues)) {
+        Polynomial remainingPolynomial(polynomial);
+        for (AlbaNumber const& rootValue : rootValues) {
+            AlbaNumber rootFirstCoefficient(1);
+            AlbaNumber rootSecondCoefficient(rootValue * -1);
+            AlbaNumber aCoefficient(getFirstMonomial(remainingPolynomial).getCoefficient());
+            if (aCoefficient.isIntegerOrFractionType() && rootSecondCoefficient.isIntegerOrFractionType()) {
+                fixCoefficientsOfFactors(aCoefficient, rootFirstCoefficient, rootSecondCoefficient);
+            }
+            Monomial rootFirstMonomial(rootFirstCoefficient, firstVariableExponent);
+            Monomial rootSecondMonomial(rootSecondCoefficient, secondVariableExponent);
+            Polynomial rootPolynomial{rootFirstMonomial, rootSecondMonomial};
+            PolynomialOverPolynomial divideProcess(remainingPolynomial, rootPolynomial);
+            PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(divideProcess.divide());
+            simplifyThenEmplaceBackIfPolynomialIsNotEmpty(result, rootPolynomial);
+            remainingPolynomial = quotientAndRemainder.quotient;
+        }
+        if (!rootValues.empty() && !isTheValue(remainingPolynomial, 1)) {
+            simplifyThenEmplaceBackIfPolynomialIsNotEmpty(result, remainingPolynomial);
+        }
+    }
+}
+
+void fixCoefficientsOfFactors(
+    AlbaNumber& aCoefficient, AlbaNumber& rootFirstCoefficient, AlbaNumber& rootSecondCoefficient) {
+    AlbaNumber::FractionData aCoefficientFractionData(aCoefficient.getFractionData());
+    AlbaNumber::FractionData secondFractionData(rootSecondCoefficient.getFractionData());
+    int multiplier = getGreatestCommonFactor<int>(
+        getAbsoluteValue(aCoefficientFractionData.numerator), secondFractionData.denominator);
+    rootFirstCoefficient = rootFirstCoefficient * multiplier;
+    rootSecondCoefficient = rootSecondCoefficient * multiplier;
+    aCoefficient = aCoefficient / multiplier;
 }
 
 }  // namespace alba::algebra::Factorization

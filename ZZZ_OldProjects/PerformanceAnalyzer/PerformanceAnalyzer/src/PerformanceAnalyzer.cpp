@@ -27,30 +27,18 @@ double totalSizeReadForCombine;
 int writeProgressForCombine;
 }  // namespace ProgressCounters
 
-PerformanceAnalyzer::UniqueUserId::UniqueUserId() : nbccId(0), crnccId(0), transactionId(0) {}
-
 PerformanceAnalyzer::UniqueUserId::UniqueUserId(std::string const& lineInLogs)
     : nbccId(getNbccId(lineInLogs)), crnccId(getCrnccId(lineInLogs)), transactionId(getTransactionId(lineInLogs)) {}
+PerformanceAnalyzer::UniqueUserId::UniqueUserId() : nbccId(0), crnccId(0), transactionId(0) {}
 
-void PerformanceAnalyzer::UniqueUserId::saveNbccId(std::string const& lineInLogs) { nbccId = getNbccId(lineInLogs); }
-
-void PerformanceAnalyzer::UniqueUserId::saveCrnccId(std::string const& lineInLogs) { crnccId = getCrnccId(lineInLogs); }
-
-void PerformanceAnalyzer::UniqueUserId::saveTransactionId(std::string const& lineInLogs) {
-    transactionId = getTransactionId(lineInLogs);
-}
-
-int PerformanceAnalyzer::UniqueUserId::getCrnccId(std::string const& lineInLogs) {
-    int properCrnccId = 0;
-    int logCrnccId = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
-    int logCrncId = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crncId: "));
-    if (logCrncId > 0) {
-        properCrnccId = logCrncId;
+bool PerformanceAnalyzer::UniqueUserId::operator<(UniqueUserId const& uniqueUserId) const {
+    if (nbccId != uniqueUserId.nbccId) {
+        return nbccId < uniqueUserId.nbccId;
     }
-    if (logCrnccId > 0) {
-        properCrnccId = logCrnccId;
+    if (crnccId != uniqueUserId.crnccId) {
+        return crnccId < uniqueUserId.crnccId;
     }
-    return properCrnccId;
+    return transactionId < uniqueUserId.transactionId;
 }
 
 int PerformanceAnalyzer::UniqueUserId::getNbccId(std::string const& lineInLogs) {
@@ -66,23 +54,32 @@ int PerformanceAnalyzer::UniqueUserId::getNbccId(std::string const& lineInLogs) 
     return properNbccId;
 }
 
+int PerformanceAnalyzer::UniqueUserId::getCrnccId(std::string const& lineInLogs) {
+    int properCrnccId = 0;
+    int logCrnccId = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
+    int logCrncId = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crncId: "));
+    if (logCrncId > 0) {
+        properCrnccId = logCrncId;
+    }
+    if (logCrnccId > 0) {
+        properCrnccId = logCrnccId;
+    }
+    return properCrnccId;
+}
+
 int PerformanceAnalyzer::UniqueUserId::getTransactionId(std::string const& lineInLogs) {
     return convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
 }
 
-bool PerformanceAnalyzer::UniqueUserId::operator<(UniqueUserId const& uniqueUserId) const {
-    if (nbccId != uniqueUserId.nbccId) {
-        return nbccId < uniqueUserId.nbccId;
-    }
-    if (crnccId != uniqueUserId.crnccId) {
-        return crnccId < uniqueUserId.crnccId;
-    }
-    return transactionId < uniqueUserId.transactionId;
+void PerformanceAnalyzer::UniqueUserId::saveNbccId(std::string const& lineInLogs) { nbccId = getNbccId(lineInLogs); }
+void PerformanceAnalyzer::UniqueUserId::saveCrnccId(std::string const& lineInLogs) { crnccId = getCrnccId(lineInLogs); }
+
+void PerformanceAnalyzer::UniqueUserId::saveTransactionId(std::string const& lineInLogs) {
+    transactionId = getTransactionId(lineInLogs);
 }
 
 PerformanceAnalyzer::PerformanceAnalyzer() {
     // defautlvalues
-
     AlbaLocalPathHandler pathHandler(R"(C:\temp\BtsSorter\)");
     pathHandler.createDirectoriesForNonExisitingDirectories();
     m_sorterConfiguration.m_acceptedFilesGrepCondition =
@@ -105,6 +102,16 @@ PerformanceAnalyzer::PerformanceAnalyzer() {
     m_sorterConfiguration.m_configurationWithoutPcTime.m_maximumNumberOfObjectsPerBlock = 100000;
     m_sorterConfiguration.m_configurationWithoutPcTime.m_maximumNumberOfObjectsInMemory = 200000;
     m_sorterConfiguration.m_configurationWithoutPcTime.m_maximumFileStreams = 70;
+}
+
+int PerformanceAnalyzer::getDelayTimeInUs(BtsLogTime const& endTime, BtsLogTime const& startTime) {
+    BtsLogTime delayTime = endTime - startTime;
+    return delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000;
+}
+
+int PerformanceAnalyzer::getDelayTimeInMinutes(BtsLogTime const& endTime, BtsLogTime const& startTime) {
+    BtsLogTime delayTime = endTime - startTime;
+    return delayTime.getMinutes();
 }
 
 string PerformanceAnalyzer::extract(string const& inputPath) const {
@@ -401,16 +408,6 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
     int count = 0;
 
     struct TupcDelaysData {
-        optional<BtsLogTime> rlhRlSetupRequestOptional;
-        optional<BtsLogTime> rlhTbRegisterTimeOptional;
-        optional<BtsLogTime> tupcTbRegisterTimeOptional;
-        optional<BtsLogTime> tupcFirstErqSentOptional;
-        optional<BtsLogTime> tupcLastEcfReceivedOptional;
-        optional<BtsLogTime> tupcFirstTransportConnectionSetupOptional;
-        optional<BtsLogTime> tupcLastTransportConnectionSetupResponseOptional;
-        optional<BtsLogTime> tupcTbRegisterResponseTimeOptional;
-        optional<BtsLogTime> rlhTbRegisterResponseTimeOptional;
-        optional<BtsLogTime> rlhRlSetupResponseOptional;
         [[nodiscard]] bool isComplete(int) const {
             return rlhRlSetupRequestOptional && rlhTbRegisterTimeOptional && tupcTbRegisterTimeOptional &&
                    tupcFirstErqSentOptional && tupcLastEcfReceivedOptional &&
@@ -418,6 +415,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
                    tupcTbRegisterResponseTimeOptional && rlhTbRegisterResponseTimeOptional &&
                    rlhRlSetupResponseOptional;
         }
+
         [[nodiscard]] bool isCorrect(int const nbccId) const {
             if (!isComplete(nbccId)) {
                 return false;
@@ -438,6 +436,17 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
 
             return isCorrect;
         }
+
+        optional<BtsLogTime> rlhRlSetupRequestOptional;
+        optional<BtsLogTime> rlhTbRegisterTimeOptional;
+        optional<BtsLogTime> tupcTbRegisterTimeOptional;
+        optional<BtsLogTime> tupcFirstErqSentOptional;
+        optional<BtsLogTime> tupcLastEcfReceivedOptional;
+        optional<BtsLogTime> tupcFirstTransportConnectionSetupOptional;
+        optional<BtsLogTime> tupcLastTransportConnectionSetupResponseOptional;
+        optional<BtsLogTime> tupcTbRegisterResponseTimeOptional;
+        optional<BtsLogTime> rlhTbRegisterResponseTimeOptional;
+        optional<BtsLogTime> rlhRlSetupResponseOptional;
     };
 
     std::map<UniqueUserId, BtsLogDelay> btsLogDelays;
@@ -641,17 +650,12 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
     int count = 0;
 
     struct TupcDelaysData {
-        optional<BtsLogTime> rlhRlSetupRequestOptional;
-        optional<BtsLogTime> tupcTbRegisterTimeOptional;
-        optional<BtsLogTime> tupcFirstErqSentOptional;
-        optional<BtsLogTime> tupcLastEcfReceivedOptional;
-        optional<BtsLogTime> tupcFirstTransportConnectionSetupOptional;
-        optional<BtsLogTime> rlhRlSetupResponseOptional;
         [[nodiscard]] bool isComplete(int) const {
             return rlhRlSetupRequestOptional && tupcTbRegisterTimeOptional && tupcFirstErqSentOptional &&
                    tupcLastEcfReceivedOptional && tupcFirstTransportConnectionSetupOptional &&
                    rlhRlSetupResponseOptional;
         }
+
         [[nodiscard]] bool isCorrect(int const nbccId) const {
             if (!isComplete(nbccId)) {
                 return false;
@@ -665,6 +669,13 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
 
             return isCorrect;
         }
+
+        optional<BtsLogTime> rlhRlSetupRequestOptional;
+        optional<BtsLogTime> tupcTbRegisterTimeOptional;
+        optional<BtsLogTime> tupcFirstErqSentOptional;
+        optional<BtsLogTime> tupcLastEcfReceivedOptional;
+        optional<BtsLogTime> tupcFirstTransportConnectionSetupOptional;
+        optional<BtsLogTime> rlhRlSetupResponseOptional;
     };
 
     std::map<UniqueUserId, BtsLogDelay> btsLogDelays;
@@ -771,16 +782,6 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
          << " transactionId: " << userIdForMaxDelay.transactionId << "\n";
 }
 
-int PerformanceAnalyzer::getDelayTimeInUs(BtsLogTime const& endTime, BtsLogTime const& startTime) {
-    BtsLogTime delayTime = endTime - startTime;
-    return delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000;
-}
-
-int PerformanceAnalyzer::getDelayTimeInMinutes(BtsLogTime const& endTime, BtsLogTime const& startTime) {
-    BtsLogTime delayTime = endTime - startTime;
-    return delayTime.getMinutes();
-}
-
 void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) {
     AlbaLocalPathHandler filePathHandler(filePath);
     ifstream inputLogFileStream(filePath);
@@ -795,14 +796,15 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
     int count = 0;
     double endWiresharkTime = NAN;
     struct WiresharkLogKey {
-        unsigned int operation;
-        unsigned int said;
         bool operator<(WiresharkLogKey const& key) const {
             if (said == key.said) {
                 return operation < key.operation;
             }
             return said < key.said;
         }
+
+        unsigned int operation;
+        unsigned int said;
     };
     struct WiresharkLogDelay {
         optional<double> startTimeOptional;

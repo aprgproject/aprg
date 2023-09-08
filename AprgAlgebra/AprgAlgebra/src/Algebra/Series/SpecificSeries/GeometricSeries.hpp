@@ -16,6 +16,7 @@ public:
 
 protected:
     static Term getFormula(AlbaNumber const& firstValue, AlbaNumber const& commonMultiplier);
+
     static Term getFormula(
         AlbaNumber const& valueAtNthIndex1, int const nthIndex1, AlbaNumber const& valueAtNthIndex2,
         int const nthIndex2);

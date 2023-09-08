@@ -138,7 +138,6 @@ TEST(AlbaBitManipulationTest, BytesAreSuccessfullyObtainedWhenU32IsUsed) {
     const uint32_t input = 0x12345678;
 
     // When
-
     // Then
     EXPECT_EQ(0x78U, AlbaBitManipulation<uint32_t>::getByteAt<0>(input));
     EXPECT_EQ(0x56U, AlbaBitManipulation<uint32_t>::getByteAt<1>(input));
@@ -151,7 +150,6 @@ TEST(AlbaBitManipulationTest, NibblesAreSuccessfullyObtainedWhenU32IsUsed) {
     const uint32_t input = 0x12345678;
 
     // When
-
     // Then
     EXPECT_EQ(0x8U, AlbaBitManipulation<uint32_t>::getNibbleAt<0>(input));
     EXPECT_EQ(0x7U, AlbaBitManipulation<uint32_t>::getNibbleAt<1>(input));
@@ -168,7 +166,6 @@ TEST(AlbaBitManipulationTest, BitsAreSuccessfullyObtainedWhenU32IsUsed) {
     const uint32_t input = 0x12345678;
 
     // When
-
     // Then
     EXPECT_EQ(0x0U, AlbaBitManipulation<uint32_t>::getBitAt<0>(input));
     EXPECT_EQ(0x1U, AlbaBitManipulation<uint32_t>::getBitAt<3>(input));
@@ -182,7 +179,6 @@ TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedWhenU16IsUsed) {
     const uint16_t input = 0x1234;
 
     // When
-
     // Then
     EXPECT_EQ(0x3412U, AlbaBitManipulation<uint16_t>::swap(input));
 }
@@ -192,7 +188,6 @@ TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedWhenU32IsUsed) {
     const uint32_t input = 0x12345678;
 
     // When
-
     // Then
     EXPECT_EQ(0x78563412U, AlbaBitManipulation<uint32_t>::swap(input));
 }
@@ -202,7 +197,6 @@ TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedWhenU64IsUsed) {
     const uint64_t input = 0x1234'5678'9ABC'DEF0;
 
     // When
-
     // Then
     EXPECT_EQ(0xF0DE'BC9A'7856'3412U, AlbaBitManipulation<uint64_t>::swap(input));
 }
@@ -212,7 +206,6 @@ TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedForTwoBytes) {
     const uint16_t input = 0x1234;
 
     // When
-
     // Then
     EXPECT_EQ(0x3412U, AlbaBitManipulation<uint16_t>::swapForTwoBytes(input));
 }
@@ -222,7 +215,6 @@ TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedForFourBytes) {
     const uint32_t input = 0x1234'5678;
 
     // When
-
     // Then
     EXPECT_EQ(0x7856'3412U, AlbaBitManipulation<uint32_t>::swapForFourBytes(input));
 }
@@ -232,7 +224,6 @@ TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedForEightBytes) {
     const uint64_t input = 0x1234'5678'9ABC'DEF0;
 
     // When
-
     // Then
     EXPECT_EQ(0xF0DE'BC9A'7856'3412U, AlbaBitManipulation<uint64_t>::swapForEightBytes(input));
 }

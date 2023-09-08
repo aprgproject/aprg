@@ -6,8 +6,8 @@ namespace alba::booleanAlgebra {
 
 class BaseTerm {
 public:
-    BaseTerm() = default;
     virtual ~BaseTerm() = default;  // virtual destructor because of virtual functions (vtable exists)
+    BaseTerm() = default;
 
 private:
 };

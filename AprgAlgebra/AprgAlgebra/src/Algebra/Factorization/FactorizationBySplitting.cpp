@@ -20,6 +20,27 @@ Polynomials factorizeBySplittingToSmallerPolynomials(Polynomial const& polynomia
     return result;
 }
 
+Polynomial getNewPolynomialWithNewVariables(
+    SubstitutionOfVariablesToTerms& variableSubstitution, Polynomials const& smallerPolynomials) {
+    Polynomial newPolynomialWithVariables;
+    for (Polynomial const& smallerPolynomial : smallerPolynomials) {
+        Polynomial newSmallerPolynomialWithVariables(createPolynomialFromNumber(1));
+        Polynomials factors(factorizeAPolynomial(smallerPolynomial));
+        for (Polynomial const& factor : factors) {
+            if (isOneMonomial(factor)) {
+                newSmallerPolynomialWithVariables.multiplyMonomial(getFirstMonomial(factor));
+            } else {
+                string variableNameForSubstitution(createVariableNameForSubstitution(Term(factor)));
+                variableSubstitution.putVariableWithTerm(variableNameForSubstitution, factor);
+                newSmallerPolynomialWithVariables.multiplyMonomial(
+                    createMonomialFromVariable(Variable(variableNameForSubstitution)));
+            }
+        }
+        newPolynomialWithVariables.addPolynomial(newSmallerPolynomialWithVariables);
+    }
+    return newPolynomialWithVariables;
+}
+
 void factorizeBySplittingToSmallerPolynomialsIfPossible(Polynomials& result, Polynomial const& polynomial) {
     factorizeIfPossibleBySplittingByPolynomialDegree(result, polynomial);
     if (result.empty()) {
@@ -174,27 +195,6 @@ void getCommonFactorsInThesePolynomials(Polynomials& commonFactors, Polynomials 
             updateToGetSubsetOfFactors(commonFactors, commonFactorsOfAPolynomial);
         }
     }
-}
-
-Polynomial getNewPolynomialWithNewVariables(
-    SubstitutionOfVariablesToTerms& variableSubstitution, Polynomials const& smallerPolynomials) {
-    Polynomial newPolynomialWithVariables;
-    for (Polynomial const& smallerPolynomial : smallerPolynomials) {
-        Polynomial newSmallerPolynomialWithVariables(createPolynomialFromNumber(1));
-        Polynomials factors(factorizeAPolynomial(smallerPolynomial));
-        for (Polynomial const& factor : factors) {
-            if (isOneMonomial(factor)) {
-                newSmallerPolynomialWithVariables.multiplyMonomial(getFirstMonomial(factor));
-            } else {
-                string variableNameForSubstitution(createVariableNameForSubstitution(Term(factor)));
-                variableSubstitution.putVariableWithTerm(variableNameForSubstitution, factor);
-                newSmallerPolynomialWithVariables.multiplyMonomial(
-                    createMonomialFromVariable(Variable(variableNameForSubstitution)));
-            }
-        }
-        newPolynomialWithVariables.addPolynomial(newSmallerPolynomialWithVariables);
-    }
-    return newPolynomialWithVariables;
 }
 
 void getPolynomialsWithRemovedCommonFactors(

@@ -37,7 +37,6 @@ bool isTheFirstFundamentalTheoremOfCalculusTrue(Term const& term, string const& 
     // The first fundamental theorem of calculus
     // Let the function f be continuous on the closed interval [a, b] and let x be any number in [a, b].
     // If F is the definite integral of f from a to x then the derivative of F at x is equal to f at x.
-
     Integration integration(variableName);
     Differentiation differentiation(variableName);
     Term capitalF(integration.integrate(term));
@@ -75,7 +74,6 @@ bool isFirstOrderDifferentialEquation(
     Term const& dyOverDx, Term const& p, Term const& q, string const& xVariableName, string const& yVariableName) {
     // First order differential equation should follow this:
     // dy/dx = P(x)*y + Q(x)
-
     bool result(false);
     DerivativeVariableName derivativeVariableName(1, xVariableName, yVariableName);
     Term remainingTermWithoutDyOverDx = dyOverDx / derivativeVariableName.getNameInLeibnizNotation();
@@ -148,7 +146,6 @@ Term getLogarithmicDifferentiationToYieldDyOverDx(
     // -> y'/y = Dx(ln(|f(x)|))
     // -> y' = y * Dx(ln(|f(x)|))
     // -> dy/dx = f(x) * Dx(ln(|f(x)|))
-
     // dy/dx = f(x) * Dx(ln|f(x)|)
     // if domain is inside positive, then absolute value can be removed
     Term result;
@@ -259,7 +256,6 @@ SolutionSet getDifferentiabilityDomain(Term const& term, string const& variableN
     // This code is not accurate.
     // How about piecewise function?
     // How about absolute value function?
-
     Differentiation differentiation(variableName);
     Term derivativeTerm(differentiation.differentiate(term));
     return calculateDomainForTermWithOneVariable(derivativeTerm);
@@ -271,7 +267,6 @@ Equation getRelationshipOfDerivativeOfTheInverseAndTheDerivative(
     // Suppose the function f is continuous and monotonic on a closed interval [a, b] containing the number c, and let
     // f(c) = d. If f'(c) exists and f'(c) != 0, then (f-1)'(d) exists then: The relationship of the derivatives is
     // (f-1)'(d) = 1/f'(c)
-
     Differentiation differentiation(variableName);
     Term inverseOfTerm(invertTerm(term, variableName));
     Term derivative(differentiation.differentiate(term));
@@ -316,7 +311,6 @@ Equation getIntegralEquationForFirstOrderDifferentialEquation(
     Term const& p, Term const& q, string const& xVariableName, string const& yVariableName) {
     // First order differential equation should follow this:
     // dy/dx = P(x)*y + Q(x)
-
     Integration integration(xVariableName);
     Term integralOfP(integration.integrate(p));
     Term eToTheIntegralOfP(createExpressionIfPossible({getEAsATerm(), "^", integralOfP}));

@@ -37,19 +37,12 @@ TEST(LinearProbingHashSymbolTableTest, GetSizeWorksWhenNotEmpty) {
 }
 
 TEST(LinearProbingHashSymbolTableTest, GetWorks) { testGetWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(LinearProbingHashSymbolTableTest, GetRankWorks) { testGetRankWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(LinearProbingHashSymbolTableTest, GetMinimumWorks) { testGetMinimumWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(LinearProbingHashSymbolTableTest, GetMaximumWorks) { testGetMaximumWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(LinearProbingHashSymbolTableTest, SelectAtWorks) { testSelectAtWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(LinearProbingHashSymbolTableTest, GetFloorWorks) { testGetFloorWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(LinearProbingHashSymbolTableTest, GetCeilingWorks) { testGetCeilingWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(LinearProbingHashSymbolTableTest, PutWorks) { testPutWithUnsignedIntAndChar<SymbolTableForTest>(); }
 
 TEST(LinearProbingHashSymbolTableTest, DeleteBasedOnKeyWorks) {

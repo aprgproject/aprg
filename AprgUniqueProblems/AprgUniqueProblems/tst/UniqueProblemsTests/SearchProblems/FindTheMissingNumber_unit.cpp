@@ -42,4 +42,5 @@ TEST(FindTheMissingNumberTest, GetTheMissingNumberWorksOnExample2) {
     EXPECT_EQ(5, query.getTheMissingNumberUsingSum(valuesForTest));
     EXPECT_EQ(5, query.getTheMissingNumberUsingXor(valuesForTest));
 }
+
 }  // namespace alba::algorithm

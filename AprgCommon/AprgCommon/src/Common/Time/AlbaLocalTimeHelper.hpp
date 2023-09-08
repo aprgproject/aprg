@@ -9,15 +9,13 @@
 namespace alba {
 
 using LibrarySteadyTime = std::chrono::time_point<std::chrono::steady_clock>;
-
-void sleepFor(size_t const milliSeconds);
-void sleepUntil(AlbaDateTime const& awakeTime);
-
 LibrarySteadyTime getSteadyTimeNow();
 LibrarySystemTime getSystemTimeNow();
 AlbaDateTime convertSystemTimeToAlbaDateTime(LibrarySystemTime const& inputTime);
 LibrarySystemTime convertAlbaDateTimeToSystemTime(AlbaDateTime const& inputTime);
 AlbaDateTime getCurrentDateTime();
+void sleepFor(size_t const milliSeconds);
+void sleepUntil(AlbaDateTime const& awakeTime);
 
 template <typename LibraryTime>
 AlbaDateTime convertSinceEpochTimeToAlbaDateTime(LibraryTime const& inputTime) {

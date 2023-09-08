@@ -9,13 +9,11 @@ public:
     using Entry = typename BaseLinearProbingHash::Entry;
     using EntryUniquePointer = typename BaseLinearProbingHash::EntryUniquePointer;
     using EntryPointers = typename BaseLinearProbingHash::EntryPointers;
-
+    ~BaseSetWithBaseLinearProbingHash() override = default;  // no need for virtual destructor because base destructor
     BaseSetWithBaseLinearProbingHash()
         : b_size(BaseLinearProbingHash::m_size), b_entryPointers(BaseLinearProbingHash::m_entryPointers) {}
 
-    ~BaseSetWithBaseLinearProbingHash() override = default;  // no need for virtual destructor because base destructor
-                                                             // is virtual (similar to other virtual functions)
-
+    // is virtual (similar to other virtual functions)
     void put(Key const& key) override {
         // overrides in BaseSet
         this->resizeOnPutIfNeeded();

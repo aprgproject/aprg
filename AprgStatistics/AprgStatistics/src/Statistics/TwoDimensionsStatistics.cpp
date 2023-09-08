@@ -5,6 +5,13 @@
 
 namespace alba {
 
+double TwoDimensionsStatistics::calculateSquareError(Sample const& sample, LineModel const& lineModel) {
+    return pow(
+        lineModel.aCoefficient * sample.getValueAt(0) + lineModel.bCoefficient * sample.getValueAt(1) +
+            lineModel.cCoefficient,
+        2);
+}
+
 TwoDimensionsStatistics::LineModel TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(
     Samples const& samples) {
     bool areAllDifferenceForXZero(true);
@@ -12,7 +19,6 @@ TwoDimensionsStatistics::LineModel TwoDimensionsStatistics::calculateLineModelUs
     double xMinusXmeanSquared(0);           // Xi-mean(X)
     double yMinusYmeanSquared(0);           // Yi-mean(Y)
     double xMinusXmeanTimesYMinusYmean(0);  // (Xi-mean(X))*(Yi-mean(Y))
-
     LineModel lineModel;
     Statistics statistics(samples);
     Sample mean(statistics.getMean());
@@ -48,13 +54,6 @@ TwoDimensionsStatistics::LineModel TwoDimensionsStatistics::calculateLineModelUs
     lineModel.cCoefficient =
         -1 * (lineModel.aCoefficient * mean.getValueAt(0) + lineModel.bCoefficient * mean.getValueAt(1));
     return lineModel;
-}
-
-double TwoDimensionsStatistics::calculateSquareError(Sample const& sample, LineModel const& lineModel) {
-    return pow(
-        lineModel.aCoefficient * sample.getValueAt(0) + lineModel.bCoefficient * sample.getValueAt(1) +
-            lineModel.cCoefficient,
-        2);
 }
 
 TwoDimensionsStatistics::ValueToSampleMultimap TwoDimensionsStatistics::getSquareErrorToSampleMultimap(

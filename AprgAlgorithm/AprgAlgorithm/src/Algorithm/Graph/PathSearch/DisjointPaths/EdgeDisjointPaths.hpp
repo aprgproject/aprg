@@ -12,22 +12,17 @@ class EdgeDisjointPaths {
 public:
     // We will first focus on the problem of finding the maximum number of edge-disjoint paths from the source to the
     // sink. This means that we should construct a set of paths such that "each edge appears in at most one path".
-
     // It turns out that the maximum number of edge-disjoint paths equals the maximum flow of the graph, assuming that
     // the capacity of each edge is one. After the maximum flow has been constructed, the edge-disjoint paths can be
     // found greedily by following paths from the source to the sink.
-
     using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
     using Edge = typename GraphTypes<Vertex>::Edge;
     using Paths = typename GraphTypes<Vertex>::Paths;
     using FlowNetwork = SinkSourceFlowNetwork<Vertex, int, DirectedGraphWithListOfEdges<Vertex>>;
     using FordFulkerson = FordFulkersonUsingBfs<FlowNetwork>;
-
     EdgeDisjointPaths(BaseDirectedGraphWithVertex const& graph, Vertex const& startVertex, Vertex const& endVertex)
         : m_fordFulkerson(getFlowNetwork(graph, startVertex, endVertex)) {}
-
     [[nodiscard]] int getNumberOfEdgeDisjointPaths() const { return m_fordFulkerson.getMaxFlowValue(); }
-
     [[nodiscard]] Paths getEdgeDisjointPaths() const { return m_fordFulkerson.getAugmentingPaths(); }
 
 private:

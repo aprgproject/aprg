@@ -5,7 +5,6 @@
 namespace alba::algorithm::CommonTestsWithConnectedComponents {
 
 // UndirectedGraph
-
 template <typename ConnectedComponent, typename Graph>
 void testGetNumberOfComponentIdsWhenEmptyWithVertexAsIntWithUndirectedGraph() {
     Graph graph;
@@ -80,7 +79,6 @@ void testIsConnectedWhenNotEmptyWithVertexAsIntWithUndirectedGraph() {
 }
 
 // DirectedGraph
-
 template <typename ConnectedComponent, typename Graph>
 void testGetNumberOfComponentIdsWhenEmptyWithVertexAsIntWithDirectedGraph() {
     Graph graph;

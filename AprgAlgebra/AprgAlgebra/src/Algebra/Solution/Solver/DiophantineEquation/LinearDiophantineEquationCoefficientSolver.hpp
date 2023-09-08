@@ -7,15 +7,12 @@ namespace alba::algebra {
 class LinearDiophantineEquationCoefficientSolver {
 public:
     // A Linear Diophantine Equation is an equation of the form ax+by = c
-
     using Integer = int64_t;
 
     enum class SolutionStatus { Unknown, CannotBeSolved, InfiniteSolutions, NoSolution, Solved };
 
     LinearDiophantineEquationCoefficientSolver(AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c);
-
     [[nodiscard]] bool isSolved() const;
-
     [[nodiscard]] SolutionStatus getSolutionStatus() const;
     [[nodiscard]] Integer getX() const;
     [[nodiscard]] Integer getY() const;

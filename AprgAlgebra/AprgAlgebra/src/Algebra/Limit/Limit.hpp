@@ -14,25 +14,33 @@ bool isAlmostEqualForLimitChecking(AlbaNumber const& value1, AlbaNumber const& v
 bool hasVerticalAsymptoteAtValue(Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
 bool hasHorizontalAsymptoteAtValue(
     Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
+
 bool isSqueezeTheoremSatisfied(
     Term const& alwaysLowerTermAtInterval, Term const& termInBetweenAtInterval, Term const& alwaysHigherTermAtInterval,
     std::string const& variableName, AlbaNumber const& valueToApproach);
 
+bool continueToDifferentiateForLhopitalsRule(
+    Term const& numerator, Term const& denominator, Term const& numeratorValue, Term const& denominatorValue);
+
 AlbaNumber getLimitAtAValueByApproachType(
     Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach,
     LimitAtAValueApproachType const limitApproachType);
+
 AlbaNumber getLimitAtAValueInBothSides(
     Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
 AlbaNumber getLimitAtAValueInThePositiveSide(
     Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
 AlbaNumber getLimitAtAValueInTheNegativeSide(
     Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
+
 AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
     Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach,
     AlbaNumber const& initialValueForIteration, int const maxNumberOfIterations);
+
 AlbaNumber getLimitAtAValueUsingTrendOfValues(
     Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach,
     AlbaNumber const& previousAcceptedInput, AlbaNumber const& previousOfPreviousAcceptedInput);
+
 AlbaNumber getValueUsingLinearInterpolation(
     AlbaNumber const& input1, AlbaNumber const& input2, AlbaNumber const& inputValue, AlbaNumber const& output1,
     AlbaNumber const& output2);
@@ -44,13 +52,7 @@ Term getLimitWithMultipleVariablesWithDifferentApproaches(
     SubstitutionsOfVariablesToTerms const& substitutionsForApproaches);
 
 Term getLimitUsingLhopitalsRule(Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
-
 Term getTermUsingLhopitalsRule(Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
-
-void calculateTermAndLimitUsingLhopitalsRule(
-    Term& newTerm, Term& limitValue, Term const& term, std::string const& variableName,
-    AlbaNumber const& valueToApproach);
-
 Term getLimitAtAValueOrInfinity(Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
 
 Term getLimitAtAValue(
@@ -62,10 +64,10 @@ Term simplifyAndGetLimitAtAValue(
     LimitAtAValueApproachType const limitApproachType);
 
 Term getLimitAtInfinity(Term const& term, std::string const& variableName, AlbaNumber const infinityValue);
-
 Term getObliqueAsymptote(Term const& term);
 
-bool continueToDifferentiateForLhopitalsRule(
-    Term const& numerator, Term const& denominator, Term const& numeratorValue, Term const& denominatorValue);
+void calculateTermAndLimitUsingLhopitalsRule(
+    Term& newTerm, Term& limitValue, Term const& term, std::string const& variableName,
+    AlbaNumber const& valueToApproach);
 
 }  // namespace alba::algebra

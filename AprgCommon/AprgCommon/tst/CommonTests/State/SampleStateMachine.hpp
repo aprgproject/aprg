@@ -9,11 +9,11 @@ enum class State { StateWithNoValue, State1, State2, State3, State4 };
 enum class Action { InitializeTo1, Increase, Decrease, NoAction, MultiplyBy2 };
 
 using BaseSampleStateMachine = AlbaBaseStateMachine<State, Action>;
+
 class SampleStateMachine : public BaseSampleStateMachine {
 public:
     explicit SampleStateMachine(State const stateIdentifier);
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
-
     void processInput(Action const& action) override;
 
 private:

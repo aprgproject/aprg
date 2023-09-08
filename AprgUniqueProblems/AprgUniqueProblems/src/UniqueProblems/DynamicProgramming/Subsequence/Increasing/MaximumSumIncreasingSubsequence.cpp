@@ -10,7 +10,6 @@ MaximumSumIncreasingSubsequence::MaximumSumIncreasingSubsequence(Values const& s
 
 MaximumSumIncreasingSubsequence::Value MaximumSumIncreasingSubsequence::getMaximumSum() const {
     // Quadratic time because of double loop
-
     Value result(0);
     if (!m_sequence.empty()) {
         Values partialSums(m_sequence.size(), 0);
@@ -30,7 +29,6 @@ MaximumSumIncreasingSubsequence::Value MaximumSumIncreasingSubsequence::getMaxim
 
 MaximumSumIncreasingSubsequence::Values MaximumSumIncreasingSubsequence::getSubsequenceWithMaximumSum() const {
     // Quadratic time because of double loop
-
     Values result;
     if (!m_sequence.empty()) {
         Values partialSums(m_sequence.size(), 0);

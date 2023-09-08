@@ -9,9 +9,8 @@ class BinarySearchWithOneComparisonPerIteration {
 public:
     using Index = int;
     using Value = typename Values::value_type;
-    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
-
     explicit BinarySearchWithOneComparisonPerIteration(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     [[nodiscard]] Index getIndexOfValue(Value const& target) const {
         Index result(INVALID_INDEX);
@@ -43,7 +42,6 @@ private:
         // ---> target < middleValue -> high moves to left, only a retains
         // -> If interval is three elements, this reduces to one element
         // -> If interval is four elements, this reduces to one element or two elements
-
         Index result(INVALID_INDEX);
         Index lowIndex(startIndex);
         Index highIndex(endIndex);
@@ -70,7 +68,6 @@ private:
         // -> If interval is two elements[a,b], loop ends, we check either low or high target
         // -> If interval is three elements, this reduces to two elements
         // -> If interval is four elements, this reduces to two element or three elements
-
         Index result(INVALID_INDEX);
         Index lowIndex(startIndex);
         Index highIndex(endIndex);

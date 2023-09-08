@@ -17,29 +17,24 @@ public:
     // -> AB + A + B
     // -> A + B + AB
     // -> AB + AB
-
     using HashValue = uint64_t;
     using HashValues = std::vector<HashValue>;
-
-    static constexpr HashValue RADIX = 256;
-    static constexpr HashValue A_LARGE_PRIME = 1229952067;
-    static constexpr HashValue UNUSED_VALUE = std::numeric_limits<int>::max();
-
     StringConstruction(std::string const& stringToConstruct, stringHelper::strings const& subStrings);
-
+    static constexpr HashValue UNUSED_VALUE = std::numeric_limits<int>::max();
     int getCount();
     int getCountSquareRootAlgorithm();
+    static constexpr HashValue RADIX = 256;
+    static constexpr HashValue A_LARGE_PRIME = 1229952067;
 
 private:
-    void initialize();
-    void removeEmptySubstrings();
-    void removeDuplicateSubstrings();
-    void saveHashOfAllSubstrings();
     int getCount(int const prefixLength);
     int getCountSquareRootAlgorithm(int const prefixLength);
     int count(int const prefixLength);
     int countSquareRootAlgorithm(int const prefixLength);
-
+    void initialize();
+    void removeEmptySubstrings();
+    void removeDuplicateSubstrings();
+    void saveHashOfAllSubstrings();
     std::string m_stringToConstruct;
     stringHelper::strings m_subStrings;
     HashValues m_subStringHash;

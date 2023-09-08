@@ -11,13 +11,13 @@ namespace alba::algorithm {
 template <typename IntervalUnit>
 class Interval {
 public:
-    IntervalUnit start;
-    IntervalUnit end;
     bool operator<(Interval const& interval) const { return start < interval.start; }
     bool operator>(Interval const& interval) const { return start > interval.start; }
     bool operator==(Interval const& interval) const { return start == interval.start; }
     bool operator<=(Interval const& interval) const { return start <= interval.start; }
     bool operator>=(Interval const& interval) const { return start >= interval.start; }
+    IntervalUnit start;
+    IntervalUnit end;
 };
 
 template <typename IntervalUnit>
@@ -31,7 +31,6 @@ public:
     using Node = typename BaseClass::Node;
     using NodeUniquePointer = typename BaseClass::NodeUniquePointer;
     using BooleanBinaryFunction = std::function<bool(Key const&, Key const&)>;
-
     IntervalSearchTree() : b_root(BaseClass::m_root) {}
 
     [[nodiscard]] Keys getIntersectingIntervalsOf(Key const& intervalToCheck) const {
@@ -43,9 +42,51 @@ public:
     void mergeIntervals(BooleanBinaryFunction const& shouldMerge) { mergeIntervals(b_root, shouldMerge); }
 
 protected:
+    [[nodiscard]] bool areIntersectingIntervals(Key const& interval1, Key const& interval2) const {
+        auto delta1(mathHelper::getPositiveDelta(interval1.start, interval1.end));
+        auto delta2(mathHelper::getPositiveDelta(interval2.start, interval2.end));
+        auto sumOfDeltas(delta1 + delta2);
+        auto maxDeltaEndpoints(std::max(
+            mathHelper::getPositiveDelta(interval1.start, interval2.end),
+            mathHelper::getPositiveDelta(interval2.start, interval1.end)));
+        return maxDeltaEndpoints <= sumOfDeltas;
+    }
+
+    IntervalUnit getMaxValueBasedFromLeftAndRight(Node& node) const {
+        IntervalUnit maxIntervalValueInSubtree(node.key.end);
+        if (node.left) {
+            maxIntervalValueInSubtree = std::max(maxIntervalValueInSubtree, node.left->key.end);
+        }
+        if (node.right) {
+            maxIntervalValueInSubtree = std::max(maxIntervalValueInSubtree, node.right->key.end);
+        }
+        return maxIntervalValueInSubtree;
+    }
+
     void updateTreeNodeDetails(Node& node) const override {
         node.sizeOfThisSubTree = this->calculateSizeOfThisSubTree(node);
         node.maxIntervalValueInSubtree = getMaxValueBasedFromLeftAndRight(node);
+    }
+
+    void searchForIntersectingIntervals(
+        Keys& intersectingIntervals, NodeUniquePointer const& nodePointer, Key const& intervalToCheck) const {
+        if (nodePointer) {
+            if (areIntersectingIntervals(nodePointer->key, intervalToCheck)) {
+                // if interval in node intersect query interval
+                intersectingIntervals.emplace_back(nodePointer->key);
+            }
+            if (!nodePointer->left) {
+                // if left subtree is null, go right
+                searchForIntersectingIntervals(intersectingIntervals, nodePointer->right, intervalToCheck);
+            } else if (nodePointer->left->maxIntervalValueInSubtree < intervalToCheck.start) {
+                // if max endpoint in left subtree is less than low, go right
+                searchForIntersectingIntervals(intersectingIntervals, nodePointer->right, intervalToCheck);
+            } else {
+                // else go left (and go right as well because all intervals should be collected)
+                searchForIntersectingIntervals(intersectingIntervals, nodePointer->left, intervalToCheck);
+                searchForIntersectingIntervals(intersectingIntervals, nodePointer->right, intervalToCheck);
+            }
+        }
     }
 
     void putStartingOnThisNode(NodeUniquePointer& nodePointer, Key const& key) override {
@@ -70,48 +111,6 @@ protected:
         } else {
             nodePointer.reset(new Node{key, nullptr, nullptr, 1, RedBlackColor::Red, key.end});
         }
-    }
-
-    [[nodiscard]] bool areIntersectingIntervals(Key const& interval1, Key const& interval2) const {
-        auto delta1(mathHelper::getPositiveDelta(interval1.start, interval1.end));
-        auto delta2(mathHelper::getPositiveDelta(interval2.start, interval2.end));
-        auto sumOfDeltas(delta1 + delta2);
-        auto maxDeltaEndpoints(std::max(
-            mathHelper::getPositiveDelta(interval1.start, interval2.end),
-            mathHelper::getPositiveDelta(interval2.start, interval1.end)));
-        return maxDeltaEndpoints <= sumOfDeltas;
-    }
-
-    void searchForIntersectingIntervals(
-        Keys& intersectingIntervals, NodeUniquePointer const& nodePointer, Key const& intervalToCheck) const {
-        if (nodePointer) {
-            if (areIntersectingIntervals(nodePointer->key, intervalToCheck)) {
-                // if interval in node intersect query interval
-                intersectingIntervals.emplace_back(nodePointer->key);
-            }
-            if (!nodePointer->left) {
-                // if left subtree is null, go right
-                searchForIntersectingIntervals(intersectingIntervals, nodePointer->right, intervalToCheck);
-            } else if (nodePointer->left->maxIntervalValueInSubtree < intervalToCheck.start) {
-                // if max endpoint in left subtree is less than low, go right
-                searchForIntersectingIntervals(intersectingIntervals, nodePointer->right, intervalToCheck);
-            } else {
-                // else go left (and go right as well because all intervals should be collected)
-                searchForIntersectingIntervals(intersectingIntervals, nodePointer->left, intervalToCheck);
-                searchForIntersectingIntervals(intersectingIntervals, nodePointer->right, intervalToCheck);
-            }
-        }
-    }
-
-    IntervalUnit getMaxValueBasedFromLeftAndRight(Node& node) const {
-        IntervalUnit maxIntervalValueInSubtree(node.key.end);
-        if (node.left) {
-            maxIntervalValueInSubtree = std::max(maxIntervalValueInSubtree, node.left->key.end);
-        }
-        if (node.right) {
-            maxIntervalValueInSubtree = std::max(maxIntervalValueInSubtree, node.right->key.end);
-        }
-        return maxIntervalValueInSubtree;
     }
 
     void mergeIntervals(NodeUniquePointer& nodePointer, BooleanBinaryFunction const& shouldMerge) {

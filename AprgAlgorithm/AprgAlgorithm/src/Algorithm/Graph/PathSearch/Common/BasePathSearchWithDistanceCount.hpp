@@ -9,7 +9,6 @@ class BasePathSearchWithDistanceCount {
 public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using VertexToIntMap = typename GraphTypes<Vertex>::VertexToIntMap;
-
     BasePathSearchWithDistanceCount() = default;
 
     [[nodiscard]] int getDistanceTo(Vertex const& endVertex) const {

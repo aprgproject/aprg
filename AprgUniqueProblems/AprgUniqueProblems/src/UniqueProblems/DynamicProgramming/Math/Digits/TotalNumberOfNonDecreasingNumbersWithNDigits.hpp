@@ -12,10 +12,8 @@ public:
     using Value = int;
     using Counts = std::vector<Count>;
     using CountMatrix = matrix::AlbaMatrix<Count>;
-    static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
-
     explicit TotalNumberOfNonDecreasingNumbersWithNDigits(Count const numberOfDigits);
-
+    static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
     [[nodiscard]] Count getCountUsingNaiveRecursion() const;
     [[nodiscard]] Count getCountUsingMemoizationDP() const;
     [[nodiscard]] Count getCountUsingIterativeDP() const;
@@ -25,7 +23,6 @@ public:
 private:
     [[nodiscard]] Count getCountUsingNaiveRecursion(Value const digitValue, Count const digitIndex) const;
     Count getCountUsingMemoizationDP(CountMatrix& countMatrix, Value const digitValue, Count const digitIndex) const;
-
     Count const m_numberOfDigits;
 };
 

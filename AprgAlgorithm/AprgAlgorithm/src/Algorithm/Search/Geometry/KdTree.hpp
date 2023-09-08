@@ -20,7 +20,6 @@ public:
     using Node = typename BaseClass::Node;
     using NodeUniquePointer = typename BaseClass::NodeUniquePointer;
     using Keys = typename BaseClass::Keys;
-
     KdTree() = default;
 
 protected:
@@ -37,6 +36,26 @@ protected:
                 result = doesContainStartingOnThisNode(nodePointer->right, key);
             } else {
                 result = true;
+            }
+        }
+        --depth;
+        return result;
+    }
+
+    [[nodiscard]] int getRankStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const override {
+        static int depth = 0;
+        ++depth;
+        int result(0);
+        if (nodePointer) {
+            Key const& currentKey(nodePointer->key);
+            if (isLessThanWithDepth(key, currentKey, depth)) {
+                result = getRankStartingOnThisNode(nodePointer->left, key);  // recursively check rank on the right side
+            } else if (isGreaterThanWithDepth(key, currentKey, depth)) {
+                // get size of left, add one node for this node, and add the rank on the right side
+                result = 1 + this->getSizeOfThisSubTree(nodePointer->left) +
+                         getRankStartingOnThisNode(nodePointer->right, key);
+            } else {
+                result = this->getSizeOfThisSubTree(nodePointer->left);  // if equal, just get size of the subtree
             }
         }
         --depth;
@@ -95,24 +114,25 @@ protected:
         return result;
     }
 
-    [[nodiscard]] int getRankStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const override {
+    void retrieveKeysInRangeInclusiveStartingOnThisNode(
+        Keys& keys, NodeUniquePointer const& nodePointer, Key const& low, Key const& high) const override {
         static int depth = 0;
         ++depth;
-        int result(0);
         if (nodePointer) {
-            Key const& currentKey(nodePointer->key);
-            if (isLessThanWithDepth(key, currentKey, depth)) {
-                result = getRankStartingOnThisNode(nodePointer->left, key);  // recursively check rank on the right side
-            } else if (isGreaterThanWithDepth(key, currentKey, depth)) {
-                // get size of left, add one node for this node, and add the rank on the right side
-                result = 1 + this->getSizeOfThisSubTree(nodePointer->left) +
-                         getRankStartingOnThisNode(nodePointer->right, key);
-            } else {
-                result = this->getSizeOfThisSubTree(nodePointer->left);  // if equal, just get size of the subtree
+            if (isLessThanWithDepth(low, nodePointer->key, depth)) {
+                retrieveKeysInRangeInclusiveStartingOnThisNode(keys, nodePointer->left, low, high);
+            }
+            if ((isLessThanWithDepth(low, nodePointer->key, depth) ||
+                 isEqualThanWithDepth(low, nodePointer->key, depth)) &&
+                (isGreaterThanWithDepth(high, nodePointer->key, depth) ||
+                 isEqualThanWithDepth(high, nodePointer->key, depth))) {
+                keys.emplace_back(nodePointer->key);
+            }
+            if (isGreaterThanWithDepth(high, nodePointer->key, depth)) {
+                retrieveKeysInRangeInclusiveStartingOnThisNode(keys, nodePointer->right, low, high);
             }
         }
         --depth;
-        return result;
     }
 
     void putStartingOnThisNode(NodeUniquePointer& nodePointer, Key const& key) override {
@@ -166,27 +186,6 @@ protected:
             }
             if (nodePointer) {
                 this->updateTreeNodeDetails(*nodePointer);
-            }
-        }
-        --depth;
-    }
-
-    void retrieveKeysInRangeInclusiveStartingOnThisNode(
-        Keys& keys, NodeUniquePointer const& nodePointer, Key const& low, Key const& high) const override {
-        static int depth = 0;
-        ++depth;
-        if (nodePointer) {
-            if (isLessThanWithDepth(low, nodePointer->key, depth)) {
-                retrieveKeysInRangeInclusiveStartingOnThisNode(keys, nodePointer->left, low, high);
-            }
-            if ((isLessThanWithDepth(low, nodePointer->key, depth) ||
-                 isEqualThanWithDepth(low, nodePointer->key, depth)) &&
-                (isGreaterThanWithDepth(high, nodePointer->key, depth) ||
-                 isEqualThanWithDepth(high, nodePointer->key, depth))) {
-                keys.emplace_back(nodePointer->key);
-            }
-            if (isGreaterThanWithDepth(high, nodePointer->key, depth)) {
-                retrieveKeysInRangeInclusiveStartingOnThisNode(keys, nodePointer->right, low, high);
             }
         }
         --depth;

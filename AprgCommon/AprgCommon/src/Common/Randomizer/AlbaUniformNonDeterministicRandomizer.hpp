@@ -13,12 +13,10 @@ class AlbaUniformNonDeterministicRandomizer {
 public:
     static_assert(typeHelper::isArithmeticType<ValueType>(), "Value should be an arithmetic type");
     static_assert(sizeof(ValueType) != 0, "C++ standard does not allow char-types.");
-
     // Using std::random_device will NOT guarantee non determinism (see notes and tests)
     // using EntropySeedSource = std::random_device;
     // using EntropySeedSource = AlbaEntropySourceBasedOnTime; // there might be a random device
     using EntropySeedSource = AlbaCombinedEntropySource;
-
     // Assumption: Lets use the size of ValueType as basis for a better engine (not proven)
     using RandomEngine = typeHelper::ConditionalType<sizeof(ValueType) <= 4, std::mt19937, std::mt19937_64>;
 
@@ -26,12 +24,10 @@ public:
         typeHelper::isIntegralType<ValueType>(), std::uniform_int_distribution<ValueType>,
         std::uniform_real_distribution<ValueType>>;
 
-    // NOLINTNEXTLINE(cert-msc32-c,cert-msc51-cpp)
-    AlbaUniformNonDeterministicRandomizer() : m_randomEngine(), m_randomNumberDistribution() {}
-
     explicit AlbaUniformNonDeterministicRandomizer(ValueType const minimum, ValueType const maximum)
         : m_randomEngine(m_entropySeedSource()), m_randomNumberDistribution(minimum, maximum) {}
-
+    // NOLINTNEXTLINE(cert-msc32-c,cert-msc51-cpp)
+    AlbaUniformNonDeterministicRandomizer() : m_randomEngine(), m_randomNumberDistribution() {}
     ValueType getRandomValue() { return m_randomNumberDistribution(m_randomEngine); }
 
     void setMinimumAndMaximum(ValueType const minimum, ValueType const maximum) {

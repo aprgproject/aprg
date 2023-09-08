@@ -98,7 +98,6 @@ TEST(ProbabilityUtilitiesTest, GetExpectedValueWorksOnExample1) {
     // Problem: Given a fair dice with 6 faces,
     // the dice is thrown n times, find the expected value of the sum of all results.
     // For example, if n = 2, there are total 36 possible outcomes.
-
     ValueAndProbabilityPairs pairsToTest{{1U, getProbability(1U, 6U)}, {2U, getProbability(1U, 6U)},
                                          {3U, getProbability(1U, 6U)}, {4U, getProbability(1U, 6U)},
                                          {5U, getProbability(1U, 6U)}, {6U, getProbability(1U, 6U)}};
@@ -111,14 +110,12 @@ TEST(ProbabilityUtilitiesTest, GetExpectedValueWorksOnHatCheckProblem) {
     // Hat-Check Problem: Let there be a group of n men where every man has one hat.
     // The hats are redistributed and every man gets a random hat back.
     // What is the expected number of men that get their original hat back?
-
     // So the expected number of men to get the right hat back is
     // = E[R1] + E[R2]  +  .. + E[Rn]
     // = P(R1 = 1) + P(R2 = 1) + .... + P(Rn = 1)
     // [Here P(Ri = 1)  indicates probability that Ri is 1]
     // = 1/n + 1/n + ... + 1/n
     // = 1
-
     ValueAndProbabilityPairs pairsToTest{
         {1U, getProbability(1U, 5U)},
         {1U, getProbability(1U, 5U)},

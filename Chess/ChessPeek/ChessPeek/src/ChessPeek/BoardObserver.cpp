@@ -46,16 +46,109 @@ BoardObserver::BitSet64 BoardObserver::getBitValueFromCell(int const xIndex, int
     return result;
 }
 
-void BoardObserver::retrieveWhiteOffsetPoints(XYs& bitmapXYs, int const xIndex, int const yIndex) const {
-    retrieveOffsetPointsWithCondition(bitmapXYs, xIndex, yIndex, [&](double const colorIntensity) {
-        return colorIntensity > m_configuration.getWhiteColorLimit();
-    });
+bool BoardObserver::isBitValueAsserted(
+    CheckDetail const& checkDetail, XY const& chessCellTopLeft, XY const& chessCellBottomRight) const {
+    static const XYs aroundOffsets{XY(0, -1), XY(0, 1), XY(-1, 0), XY(1, 0)};
+
+    bool result(false);
+    int deltaX = chessCellBottomRight.getX() - chessCellTopLeft.getX();
+    int deltaY = chessCellBottomRight.getY() - chessCellTopLeft.getY();
+    int offsetInX = getIntegerAfterRoundingADoubleValue<int>(
+        static_cast<double>(checkDetail.pointOffset.getX()) * deltaX / m_checkMaxPoint.getX());
+    int offsetInY = getIntegerAfterRoundingADoubleValue<int>(
+        static_cast<double>(checkDetail.pointOffset.getY()) * deltaY / m_checkMaxPoint.getY());
+    XY pointToCheck{chessCellTopLeft.getX() + offsetInX, chessCellTopLeft.getY() + offsetInY};
+    uint32_t colorToCheck(getColorAt(pointToCheck.getX(), pointToCheck.getY()));
+    double currentIntensity(calculateColorIntensityDecimal(colorToCheck));
+    if (WhiteOrBlack::White == checkDetail.condition) {
+        double maximum(currentIntensity);
+        for (XY const& aroundOffset : aroundOffsets) {
+            XY pointWithOffset = pointToCheck + aroundOffset;
+            currentIntensity =
+                calculateColorIntensityDecimal(getColorAt(pointWithOffset.getX(), pointWithOffset.getY()));
+            if (maximum < currentIntensity) {
+                maximum = currentIntensity;
+            }
+        }
+        result = maximum > m_configuration.getWhiteColorLimit();
+    } else if (WhiteOrBlack::Black == checkDetail.condition) {
+        double minimum(currentIntensity);
+        for (XY const& aroundOffset : aroundOffsets) {
+            XY pointWithOffset = pointToCheck + aroundOffset;
+            currentIntensity =
+                calculateColorIntensityDecimal(getColorAt(pointWithOffset.getX(), pointWithOffset.getY()));
+            if (minimum > currentIntensity) {
+                minimum = currentIntensity;
+            }
+        }
+        result = minimum < m_configuration.getBlackColorLimit();
+    }
+    return result;
 }
 
-void BoardObserver::retrieveBlackOffsetPoints(XYs& bitmapXYs, int const xIndex, int const yIndex) const {
-    retrieveOffsetPointsWithCondition(bitmapXYs, xIndex, yIndex, [&](double const colorIntensity) {
-        return colorIntensity < m_configuration.getBlackColorLimit();
-    });
+uint32_t BoardObserver::getColorAt(int const x, int const y) const {
+    uint32_t result{};
+    if (m_screenMonitoringPtr) {
+        result = m_screenMonitoringPtr->getColorAt(x, y);
+    } else if (m_bitmapSnippetPtr) {
+        result = m_bitmapSnippetPtr->getColorAt({x, y});
+    }
+    return result;
+}
+
+PieceColorAndType BoardObserver::getBestPieceFromChessCellBitValue(uint64_t const chessCellBitValue) const {
+    PieceColorAndTypes bestFitPieces(getBestFitPiecesFromChessCellBitValue(chessCellBitValue));
+
+    PieceColorAndType result{};
+    if (bestFitPieces.size() == 1) {
+        result = bestFitPieces.back();
+    }
+    // For debugging
+    //    if (chessCellBitValue == 0b1001001100001011100101000100100100011001110101001010101100001000) {
+    //        bitset<64> bitsetValue(chessCellBitValue);
+    //        cout << "Cannot determine bestFitType with bitValue: " << bitsetValue.to_string() << "\n";
+    //        cout << "BestFitTypes with size " << bestFitPieces.size() << " :{";
+    //        for (PieceColorAndType const bestFitPiece : bestFitPieces) {
+    //            cout << getEnumString(bestFitPiece) << ", ";
+    //        }
+    //        cout << "}\n";
+    //    }
+    return result;
+}
+
+BoardObserver::PieceColorAndTypes BoardObserver::getBestFitPiecesFromChessCellBitValue(
+    uint64_t const chessCellBitValue) const {
+    PieceColorAndTypes result;
+    Count minimumDifferenceCount(65U);
+    for (auto& pieceAndChessCellBitValuePair : m_piecesToChessCellBitValuesMap) {
+        PieceColorAndType piece(pieceAndChessCellBitValuePair.first);
+        uint64_t pieceChessCellBitValue(pieceAndChessCellBitValuePair.second);
+        Count differenceCount =
+            static_cast<Count>(BitValueUtilities::getNumberOfOnes(pieceChessCellBitValue ^ chessCellBitValue));
+        if (minimumDifferenceCount > differenceCount) {
+            minimumDifferenceCount = differenceCount;
+            result.clear();
+            result.emplace_back(piece);
+        } else if (minimumDifferenceCount == differenceCount) {
+            result.emplace_back(piece);
+        }
+    }
+    return result;
+}
+
+void BoardObserver::retrieveChessCellTopLeftAndBottomRight(
+    XY& chessCellTopLeft, XY& chessCellBottomRight, int const xIndex, int const yIndex) const {
+    double startX = m_configuration.getTopLeftOfBoard().getX();
+    double startY = m_configuration.getTopLeftOfBoard().getY();
+    double endX = m_configuration.getBottomRightOfBoard().getX();
+    double endY = m_configuration.getBottomRightOfBoard().getY();
+    double deltaX = (endX - startX) / 8;
+    double deltaY = (endY - startY) / 8;
+    chessCellTopLeft =
+        XY{static_cast<int>(round(startX + deltaX * xIndex)), static_cast<int>(round(startY + deltaY * yIndex))};
+    chessCellBottomRight =
+        XY{static_cast<int>(round(startX + deltaX * (xIndex + 1))),
+           static_cast<int>(round(startY + deltaY * (yIndex + 1)))};
 }
 
 void BoardObserver::initialize(Configuration::Type const type) {
@@ -187,109 +280,16 @@ void BoardObserver::initializeConverterToLichessVersus() {
         0B0000000000000001000000001000000000001100100111011111000110000000;
 }
 
-bool BoardObserver::isBitValueAsserted(
-    CheckDetail const& checkDetail, XY const& chessCellTopLeft, XY const& chessCellBottomRight) const {
-    static const XYs aroundOffsets{XY(0, -1), XY(0, 1), XY(-1, 0), XY(1, 0)};
-
-    bool result(false);
-    int deltaX = chessCellBottomRight.getX() - chessCellTopLeft.getX();
-    int deltaY = chessCellBottomRight.getY() - chessCellTopLeft.getY();
-    int offsetInX = getIntegerAfterRoundingADoubleValue<int>(
-        static_cast<double>(checkDetail.pointOffset.getX()) * deltaX / m_checkMaxPoint.getX());
-    int offsetInY = getIntegerAfterRoundingADoubleValue<int>(
-        static_cast<double>(checkDetail.pointOffset.getY()) * deltaY / m_checkMaxPoint.getY());
-    XY pointToCheck{chessCellTopLeft.getX() + offsetInX, chessCellTopLeft.getY() + offsetInY};
-    uint32_t colorToCheck(getColorAt(pointToCheck.getX(), pointToCheck.getY()));
-    double currentIntensity(calculateColorIntensityDecimal(colorToCheck));
-    if (WhiteOrBlack::White == checkDetail.condition) {
-        double maximum(currentIntensity);
-        for (XY const& aroundOffset : aroundOffsets) {
-            XY pointWithOffset = pointToCheck + aroundOffset;
-            currentIntensity =
-                calculateColorIntensityDecimal(getColorAt(pointWithOffset.getX(), pointWithOffset.getY()));
-            if (maximum < currentIntensity) {
-                maximum = currentIntensity;
-            }
-        }
-        result = maximum > m_configuration.getWhiteColorLimit();
-    } else if (WhiteOrBlack::Black == checkDetail.condition) {
-        double minimum(currentIntensity);
-        for (XY const& aroundOffset : aroundOffsets) {
-            XY pointWithOffset = pointToCheck + aroundOffset;
-            currentIntensity =
-                calculateColorIntensityDecimal(getColorAt(pointWithOffset.getX(), pointWithOffset.getY()));
-            if (minimum > currentIntensity) {
-                minimum = currentIntensity;
-            }
-        }
-        result = minimum < m_configuration.getBlackColorLimit();
-    }
-    return result;
+void BoardObserver::retrieveWhiteOffsetPoints(XYs& bitmapXYs, int const xIndex, int const yIndex) const {
+    retrieveOffsetPointsWithCondition(bitmapXYs, xIndex, yIndex, [&](double const colorIntensity) {
+        return colorIntensity > m_configuration.getWhiteColorLimit();
+    });
 }
 
-uint32_t BoardObserver::getColorAt(int const x, int const y) const {
-    uint32_t result{};
-    if (m_screenMonitoringPtr) {
-        result = m_screenMonitoringPtr->getColorAt(x, y);
-    } else if (m_bitmapSnippetPtr) {
-        result = m_bitmapSnippetPtr->getColorAt({x, y});
-    }
-    return result;
-}
-
-PieceColorAndType BoardObserver::getBestPieceFromChessCellBitValue(uint64_t const chessCellBitValue) const {
-    PieceColorAndTypes bestFitPieces(getBestFitPiecesFromChessCellBitValue(chessCellBitValue));
-
-    PieceColorAndType result{};
-    if (bestFitPieces.size() == 1) {
-        result = bestFitPieces.back();
-    }
-    // For debugging
-    //    if (chessCellBitValue == 0b1001001100001011100101000100100100011001110101001010101100001000) {
-    //        bitset<64> bitsetValue(chessCellBitValue);
-    //        cout << "Cannot determine bestFitType with bitValue: " << bitsetValue.to_string() << "\n";
-    //        cout << "BestFitTypes with size " << bestFitPieces.size() << " :{";
-    //        for (PieceColorAndType const bestFitPiece : bestFitPieces) {
-    //            cout << getEnumString(bestFitPiece) << ", ";
-    //        }
-    //        cout << "}\n";
-    //    }
-    return result;
-}
-
-BoardObserver::PieceColorAndTypes BoardObserver::getBestFitPiecesFromChessCellBitValue(
-    uint64_t const chessCellBitValue) const {
-    PieceColorAndTypes result;
-    Count minimumDifferenceCount(65U);
-    for (auto& pieceAndChessCellBitValuePair : m_piecesToChessCellBitValuesMap) {
-        PieceColorAndType piece(pieceAndChessCellBitValuePair.first);
-        uint64_t pieceChessCellBitValue(pieceAndChessCellBitValuePair.second);
-        Count differenceCount =
-            static_cast<Count>(BitValueUtilities::getNumberOfOnes(pieceChessCellBitValue ^ chessCellBitValue));
-        if (minimumDifferenceCount > differenceCount) {
-            minimumDifferenceCount = differenceCount;
-            result.clear();
-            result.emplace_back(piece);
-        } else if (minimumDifferenceCount == differenceCount) {
-            result.emplace_back(piece);
-        }
-    }
-    return result;
-}
-
-void BoardObserver::retrieveChessCellTopLeftAndBottomRight(
-    XY& chessCellTopLeft, XY& chessCellBottomRight, int const xIndex, int const yIndex) const {
-    double startX = m_configuration.getTopLeftOfBoard().getX();
-    double startY = m_configuration.getTopLeftOfBoard().getY();
-    double endX = m_configuration.getBottomRightOfBoard().getX();
-    double endY = m_configuration.getBottomRightOfBoard().getY();
-    double deltaX = (endX - startX) / 8;
-    double deltaY = (endY - startY) / 8;
-    chessCellTopLeft =
-        XY{static_cast<int>(round(startX + deltaX * xIndex)), static_cast<int>(round(startY + deltaY * yIndex))};
-    chessCellBottomRight =
-        XY{static_cast<int>(round(startX + deltaX * (xIndex + 1))),
-           static_cast<int>(round(startY + deltaY * (yIndex + 1)))};
+void BoardObserver::retrieveBlackOffsetPoints(XYs& bitmapXYs, int const xIndex, int const yIndex) const {
+    retrieveOffsetPointsWithCondition(bitmapXYs, xIndex, yIndex, [&](double const colorIntensity) {
+        return colorIntensity < m_configuration.getBlackColorLimit();
+    });
 }
 
 void BoardObserver::retrieveOffsetPointsWithCondition(
@@ -319,7 +319,6 @@ void BoardObserver::retrieveOffsetPointsWithCondition(
 }
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

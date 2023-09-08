@@ -40,19 +40,6 @@ int JobAssignmentProblem::getMinimalCostAndPrintAssignments() {
     return minimalCost;
 }
 
-JobAssignmentProblem::SearchNode JobAssignmentProblem::createNode(
-    SearchNode const& currentNode, Coordinate const& nextWorkerAndJob) {
-    auto const [workerId, jobId] = nextWorkerAndJob;
-    SearchNodeId nextNodeId = getNextNodeId();
-    m_nodeIdToDetails.emplace_back(
-        SearchNodeDetails{currentNode.nodeId, workerId, jobId, m_nodeIdToDetails[currentNode.nodeId].isJobAssigned});
-    SearchNodeDetails& nextNodeDetails(m_nodeIdToDetails[nextNodeId]);
-    nextNodeDetails.isJobAssigned[jobId] = true;
-    int accumulatedCost = getAccumulatedCost(workerId, jobId, currentNode);
-    int minimumPossibleCost = accumulatedCost + getMinimumPossibleCost(workerId, jobId, nextNodeDetails.isJobAssigned);
-    return SearchNode{nextNodeId, accumulatedCost, minimumPossibleCost};
-}
-
 int JobAssignmentProblem::getAccumulatedCost(int const workerId, int const jobId, SearchNode const& currentNode) const {
     return currentNode.accumulatedCost + m_costMatrix.getEntry(workerId, jobId);
 }
@@ -78,8 +65,6 @@ int JobAssignmentProblem::getMinimumPossibleCost(
     return cost;
 }
 
-JobAssignmentProblem::SearchNodeId JobAssignmentProblem::getNextNodeId() { return m_nodeId++; }
-
 void JobAssignmentProblem::printAssignments(SearchNodeId const nodeId) const {
     if (nodeId != INVALID_NODE_ID) {
         SearchNodeDetails const& nodeDetails(m_nodeIdToDetails.at(nodeId));
@@ -87,5 +72,20 @@ void JobAssignmentProblem::printAssignments(SearchNodeId const nodeId) const {
         cout << "Assign Worker: [" << nodeDetails.workerId << "] to Job: [" << nodeDetails.jobId << "]\n";
     }
 }
+
+JobAssignmentProblem::SearchNode JobAssignmentProblem::createNode(
+    SearchNode const& currentNode, Coordinate const& nextWorkerAndJob) {
+    auto const [workerId, jobId] = nextWorkerAndJob;
+    SearchNodeId nextNodeId = getNextNodeId();
+    m_nodeIdToDetails.emplace_back(
+        SearchNodeDetails{currentNode.nodeId, workerId, jobId, m_nodeIdToDetails[currentNode.nodeId].isJobAssigned});
+    SearchNodeDetails& nextNodeDetails(m_nodeIdToDetails[nextNodeId]);
+    nextNodeDetails.isJobAssigned[jobId] = true;
+    int accumulatedCost = getAccumulatedCost(workerId, jobId, currentNode);
+    int minimumPossibleCost = accumulatedCost + getMinimumPossibleCost(workerId, jobId, nextNodeDetails.isJobAssigned);
+    return SearchNode{nextNodeId, accumulatedCost, minimumPossibleCost};
+}
+
+JobAssignmentProblem::SearchNodeId JobAssignmentProblem::getNextNodeId() { return m_nodeId++; }
 
 }  // namespace alba

@@ -7,78 +7,18 @@ using namespace std;
 
 namespace alba {
 
-AsilBasebandPooling::AsilBasebandPooling() = default;
-
 AsilBasebandPooling::AsilBasebandPooling(
     LcgInitializerList const& lcgs, BasebandCardInitializerList const& basebandCards) {
     copy(lcgs.begin(), lcgs.end(), inserter(m_lcgs, m_lcgs.cbegin()));
     copy(basebandCards.begin(), basebandCards.end(), inserter(m_basebandCards, m_basebandCards.cbegin()));
 }
 
-BasebandPoolingResult AsilBasebandPooling::performBasebandPoolingForAsil() const {
-    BasebandPoolingResult poolingResult;
-    poolingResult.isSuccessful = areLcgAndBasebandCardsValid();
-    if (poolingResult.isSuccessful) {
-        VectorOfLcgs lcgsInPriorityOrder(getLcgsInPriorityOrder());
-        unsigned int numberOfBasebandCardsWithMultipleLcgs(getNumberBasebandCardsWithMultipleLcgs());
-        BasebandCardsSplitBasedOnNumberOfLcgs basebandCardsBasedOnNumberOfLcgs(
-            getBasebandCardsSplitBetweenOneLcgAndMultipleLcgs(numberOfBasebandCardsWithMultipleLcgs));
-        assignBasebandCardsWithOneLcg(
-            poolingResult.keplerNidToLcgMap, lcgsInPriorityOrder,
-            basebandCardsBasedOnNumberOfLcgs.basebandCardsWithOneLcg);
-        assignBasebandCardsWithMultipleLcgs(
-            poolingResult.keplerNidToLcgMap, lcgsInPriorityOrder,
-            basebandCardsBasedOnNumberOfLcgs.basebandCardsWithMultipleLcgs);
-    }
-    return poolingResult;
-}
-
-bool AsilBasebandPooling::areLcgAndBasebandCardsValid() const {
-    return getMaxNumberOfLcgsInAllBasebandCards() >= m_lcgs.size();
-}
-
 bool AsilBasebandPooling::canMultipleLcgsBePutOnBasebandCard(BasebandCard const& basebandCard) {
     return getMaxNumberOfLcgsInBasebandCard(basebandCard) > 1;
 }
 
-unsigned int AsilBasebandPooling::getNumberBasebandCardsWithMultipleLcgs() const {
-    return m_lcgs.size() - m_basebandCards.size();
-}
-
 unsigned int AsilBasebandPooling::getMaxNumberOfLcgsInBasebandCard(BasebandCard const& basebandCard) {
     return basebandCard.getKeplers().size() / 2;
-}
-
-unsigned int AsilBasebandPooling::getMaxNumberOfLcgsInAllBasebandCards() const {
-    unsigned int result(0);
-    for (BasebandCard const& basebandCard : m_basebandCards) {
-        result += getMaxNumberOfLcgsInBasebandCard(basebandCard);
-    }
-    return result;
-}
-
-VectorOfLcgs AsilBasebandPooling::getLcgsInPriorityOrder() const {
-    VectorOfLcgs lcgsInPriorityOrder;
-    copy(m_lcgs.cbegin(), m_lcgs.cend(), back_inserter(lcgsInPriorityOrder));
-    sortAndPrioritizeLcgs(lcgsInPriorityOrder);
-    return lcgsInPriorityOrder;
-}
-
-BasebandCardsSplitBasedOnNumberOfLcgs AsilBasebandPooling::getBasebandCardsSplitBetweenOneLcgAndMultipleLcgs(
-    unsigned int const numberOfBasebandCardsWithMultipleLcgs) const {
-    unsigned int numberOfBasebandCardRemaining(numberOfBasebandCardsWithMultipleLcgs);
-    BasebandCardsSplitBasedOnNumberOfLcgs basebandCards;
-    auto reverseTraversal = m_basebandCards.crbegin();
-    while (reverseTraversal != m_basebandCards.crend()) {
-        if (numberOfBasebandCardRemaining > 0 && canMultipleLcgsBePutOnBasebandCard(*reverseTraversal)) {
-            basebandCards.basebandCardsWithMultipleLcgs.emplace(*reverseTraversal);
-            --numberOfBasebandCardRemaining;
-        } else {
-            basebandCards.basebandCardsWithOneLcg.emplace(*reverseTraversal);
-        }
-        ++reverseTraversal;
-    }
-    return basebandCards;
 }
 
 void AsilBasebandPooling::sortAndPrioritizeBasebandCards(VectorOfBasebandCards& basebandCardsWithPrioritization) {
@@ -145,5 +85,65 @@ void AsilBasebandPooling::assignBasebandCardsWithMultipleLcgs(
     }
     lcgsInPriorityOrder.erase(lcgsInPriorityOrder.cbegin(), lcgsIterator);
 }
+
+bool AsilBasebandPooling::areLcgAndBasebandCardsValid() const {
+    return getMaxNumberOfLcgsInAllBasebandCards() >= m_lcgs.size();
+}
+
+unsigned int AsilBasebandPooling::getNumberBasebandCardsWithMultipleLcgs() const {
+    return m_lcgs.size() - m_basebandCards.size();
+}
+
+unsigned int AsilBasebandPooling::getMaxNumberOfLcgsInAllBasebandCards() const {
+    unsigned int result(0);
+    for (BasebandCard const& basebandCard : m_basebandCards) {
+        result += getMaxNumberOfLcgsInBasebandCard(basebandCard);
+    }
+    return result;
+}
+
+BasebandPoolingResult AsilBasebandPooling::performBasebandPoolingForAsil() const {
+    BasebandPoolingResult poolingResult;
+    poolingResult.isSuccessful = areLcgAndBasebandCardsValid();
+    if (poolingResult.isSuccessful) {
+        VectorOfLcgs lcgsInPriorityOrder(getLcgsInPriorityOrder());
+        unsigned int numberOfBasebandCardsWithMultipleLcgs(getNumberBasebandCardsWithMultipleLcgs());
+        BasebandCardsSplitBasedOnNumberOfLcgs basebandCardsBasedOnNumberOfLcgs(
+            getBasebandCardsSplitBetweenOneLcgAndMultipleLcgs(numberOfBasebandCardsWithMultipleLcgs));
+        assignBasebandCardsWithOneLcg(
+            poolingResult.keplerNidToLcgMap, lcgsInPriorityOrder,
+            basebandCardsBasedOnNumberOfLcgs.basebandCardsWithOneLcg);
+        assignBasebandCardsWithMultipleLcgs(
+            poolingResult.keplerNidToLcgMap, lcgsInPriorityOrder,
+            basebandCardsBasedOnNumberOfLcgs.basebandCardsWithMultipleLcgs);
+    }
+    return poolingResult;
+}
+
+VectorOfLcgs AsilBasebandPooling::getLcgsInPriorityOrder() const {
+    VectorOfLcgs lcgsInPriorityOrder;
+    copy(m_lcgs.cbegin(), m_lcgs.cend(), back_inserter(lcgsInPriorityOrder));
+    sortAndPrioritizeLcgs(lcgsInPriorityOrder);
+    return lcgsInPriorityOrder;
+}
+
+BasebandCardsSplitBasedOnNumberOfLcgs AsilBasebandPooling::getBasebandCardsSplitBetweenOneLcgAndMultipleLcgs(
+    unsigned int const numberOfBasebandCardsWithMultipleLcgs) const {
+    unsigned int numberOfBasebandCardRemaining(numberOfBasebandCardsWithMultipleLcgs);
+    BasebandCardsSplitBasedOnNumberOfLcgs basebandCards;
+    auto reverseTraversal = m_basebandCards.crbegin();
+    while (reverseTraversal != m_basebandCards.crend()) {
+        if (numberOfBasebandCardRemaining > 0 && canMultipleLcgsBePutOnBasebandCard(*reverseTraversal)) {
+            basebandCards.basebandCardsWithMultipleLcgs.emplace(*reverseTraversal);
+            --numberOfBasebandCardRemaining;
+        } else {
+            basebandCards.basebandCardsWithOneLcg.emplace(*reverseTraversal);
+        }
+        ++reverseTraversal;
+    }
+    return basebandCards;
+}
+
+AsilBasebandPooling::AsilBasebandPooling() = default;
 
 }  // namespace alba

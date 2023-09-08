@@ -12,7 +12,6 @@ TEST(LasVegasTest, GraphColoringExample) {
     // Given a graph that contains n nodes and m edges,
     // our task is to find a way to color the nodes of the graph using two colors so that for at least m/2 edges,
     // the endpoints have different colors.
-
     using Vertex = int;
     using Color = int;
     using Edge = GraphTypes<Vertex>::Edge;

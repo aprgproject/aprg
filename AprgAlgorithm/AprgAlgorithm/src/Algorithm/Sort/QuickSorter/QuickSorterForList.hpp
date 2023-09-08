@@ -12,7 +12,6 @@ class QuickSorterForList : public BaseSorter<std::list<Value>> {
 public:
     using Values = std::list<Value>;
     using Iterator = typename Values::iterator;
-
     QuickSorterForList() = default;
 
     void sort(Values& valuesToSort) const override {

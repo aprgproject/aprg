@@ -26,7 +26,6 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingM
 LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingIterativeDP() const {
     // Time Complexity: O(m x n)
     // Auxiliary Space: O(m x n)
-
     CountMatrix lengthMatrix(m_sequence1.size() + 1, m_sequence2.size() + 1, 0);
 
     for (Index index1 = 1; index1 < static_cast<Index>(lengthMatrix.getNumberOfColumns()); ++index1) {
@@ -45,14 +44,11 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingI
 
 LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingIterativeDPAndSpaceEfficient() const {
     // Note this is same implementation in AlbaStringHelper
-
     // Time Complexity: O(m x n)
     // Auxiliary Space: O(m)
-
     // Space efficiency analysis:
     // Since accessing the previous partial values requires only one column or one row above,
     // we only really need 2 rows (not a matrix) to keep track partial values.
-
     // current and previous are the rows in the dynamic programming solution
     vector<Counts> previousAndCurrentCounts(2, Counts(m_sequence1.size() + 1, 0));  // set first row to zero
     for (Index index2 = 1; index2 <= static_cast<Index>(m_sequence2.size()); ++index2) {

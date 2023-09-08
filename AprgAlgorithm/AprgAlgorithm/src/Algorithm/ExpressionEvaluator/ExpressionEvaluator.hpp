@@ -25,25 +25,30 @@ template <typename ValueTemplateType, typename OperatorTemplateType>
 class ExpressionEvaluatorTerm {
 public:
     enum class TermType { Value, Operator };
+
     enum class OperatorSyntaxType { Unknown, PrefixUnary, Binary, StartGroup, EndGroup };
+
     explicit ExpressionEvaluatorTerm(ValueTemplateType const& value)
         : m_termType(TermType::Value),
           m_value(value),
           m_operator(),
           m_operatorSyntaxType(OperatorSyntaxType::Unknown),
           m_operatorPriority(0) {}
+
     explicit ExpressionEvaluatorTerm(OperatorSyntaxType const& operatorSyntaxValue)
         : m_termType(TermType::Operator),
           m_value(),
           m_operator(),
           m_operatorSyntaxType(operatorSyntaxValue),
           m_operatorPriority(0) {}
+
     ExpressionEvaluatorTerm(OperatorTemplateType const& operatorValue, OperatorSyntaxType const& operatorSyntaxValue)
         : m_termType(TermType::Operator),
           m_value(),
           m_operator(operatorValue),
           m_operatorSyntaxType(operatorSyntaxValue),
           m_operatorPriority(0) {}
+
     ExpressionEvaluatorTerm(
         OperatorTemplateType const& operatorValue, OperatorSyntaxType const& operatorSyntaxValue,
         int const operatorPriority)
@@ -52,16 +57,17 @@ public:
           m_operator(operatorValue),
           m_operatorSyntaxType(operatorSyntaxValue),
           m_operatorPriority(operatorPriority) {}
+
     [[nodiscard]] bool isOperator() const { return m_termType == TermType::Operator; }
     [[nodiscard]] bool isValue() const { return m_termType == TermType::Value; }
     [[nodiscard]] bool isStartGroupOperator() const { return m_operatorSyntaxType == OperatorSyntaxType::StartGroup; }
     [[nodiscard]] bool isEndGroupOperator() const { return m_operatorSyntaxType == OperatorSyntaxType::EndGroup; }
     [[nodiscard]] bool isPrefixUnaryOperator() const { return m_operatorSyntaxType == OperatorSyntaxType::PrefixUnary; }
     [[nodiscard]] bool isBinaryOperator() const { return m_operatorSyntaxType == OperatorSyntaxType::Binary; }
-    [[nodiscard]] ValueTemplateType getValue() const { return m_value; }
-    ValueTemplateType& getReferenceOfValue() { return m_value; }
-    [[nodiscard]] OperatorTemplateType getOperator() const { return m_operator; }
     [[nodiscard]] int getOperatorPriority() const { return m_operatorPriority; }
+    [[nodiscard]] ValueTemplateType getValue() const { return m_value; }
+    [[nodiscard]] OperatorTemplateType getOperator() const { return m_operator; }
+    ValueTemplateType& getReferenceOfValue() { return m_value; }
 
 private:
     TermType m_termType;
@@ -78,7 +84,8 @@ public:
     using Terms = std::vector<Term>;
     using ValueStack = std::stack<ValueTemplateType>;
     using OperatorStack = std::stack<Term>;
-    void addTerm(Term const& term) { m_terms.emplace_back(term); }
+    [[nodiscard]] Terms getTerms() const { return m_terms; }
+
     ValueTemplateType evaluate() {
         ValueTemplateType result{};
         ValueStack valueStack;
@@ -92,10 +99,13 @@ public:
         }
         return result;
     }
-    [[nodiscard]] Terms getTerms() const { return m_terms; }
+
     Terms& getTermsReference() { return m_terms; }
+    void addTerm(Term const& term) { m_terms.emplace_back(term); }
 
 private:
+    friend class ExpressionEvaluatorConverter<ValueTemplateType, OperatorTemplateType>;
+
     void traverseAllTermsForEvaluation(ValueStack& valueStack, OperatorStack& operatorStack) {
         // Dijkstra two stack algorithm
         for (Term const& term : m_terms) {
@@ -117,6 +127,7 @@ private:
             }
         }
     }
+
     void performOperationWithStacks(ValueStack& valueStack, OperatorStack& operatorStack) {
         if (!operatorStack.empty()) {
             Term operatorTerm(operatorStack.top());
@@ -134,8 +145,8 @@ private:
             }
         }
     }
+
     Terms m_terms;
-    friend class ExpressionEvaluatorConverter<ValueTemplateType, OperatorTemplateType>;
 };
 
 template <typename ValueTemplateType, typename OperatorTemplateType>
@@ -145,18 +156,7 @@ public:
     using Term = ExpressionEvaluatorTerm<ValueTemplateType, OperatorTemplateType>;
     using Terms = std::vector<Term>;
     using ValueStack = std::stack<ValueTemplateType>;
-    void addTerm(Term const& term) { m_terms.emplace_back(term); }
-    ValueTemplateType evaluate() {
-        ValueTemplateType result{};
-        ValueStack valueStack;
-        traverseAllTermsForEvaluation(valueStack);
-        if (valueStack.size() == 1) {
-            result = valueStack.top();
-        }
-        return result;
-    }
-    [[nodiscard]] Terms getTerms() const { return m_terms; }
-    Terms& getTermsReference() { return m_terms; }
+
     [[nodiscard]] bool isEvaluationPossible() const {
         int resultStackSize(0);
         for (Term const& term : m_terms) {
@@ -176,7 +176,24 @@ public:
         return resultStackSize == 1;
     }
 
+    [[nodiscard]] Terms getTerms() const { return m_terms; }
+
+    ValueTemplateType evaluate() {
+        ValueTemplateType result{};
+        ValueStack valueStack;
+        traverseAllTermsForEvaluation(valueStack);
+        if (valueStack.size() == 1) {
+            result = valueStack.top();
+        }
+        return result;
+    }
+
+    Terms& getTermsReference() { return m_terms; }
+    void addTerm(Term const& term) { m_terms.emplace_back(term); }
+
 private:
+    friend class ExpressionEvaluatorConverter<ValueTemplateType, OperatorTemplateType>;
+
     void traverseAllTermsForEvaluation(ValueStack& valueStack) {
         for (Term const& term : m_terms) {
             if (term.isOperator()) {
@@ -186,6 +203,7 @@ private:
             }
         }
     }
+
     void performOperationWithValueStack(ValueStack& valueStack, Term const& operatorTerm) {
         if (operatorTerm.isPrefixUnaryOperator() && !valueStack.empty()) {
             ValueTemplateType value(valueStack.top());
@@ -199,8 +217,8 @@ private:
             valueStack.push(performBinaryOperation(value1, operatorTerm.getOperator(), value2));
         }
     }
+
     Terms m_terms;
-    friend class ExpressionEvaluatorConverter<ValueTemplateType, OperatorTemplateType>;
 };
 
 template <typename ValueTemplateType, typename OperatorTemplateType>
@@ -212,13 +230,12 @@ public:
     using Terms = std::vector<Term>;
     using TermStack = std::stack<Term>;
     using TermsStack = std::stack<Terms>;
-
     // rule of five or six
     ExpressionEvaluatorConverter() = delete;
     ~ExpressionEvaluatorConverter() = delete;
     ExpressionEvaluatorConverter(ExpressionEvaluatorConverter const&) = delete;
-    ExpressionEvaluatorConverter& operator=(ExpressionEvaluatorConverter const&) = delete;
     ExpressionEvaluatorConverter(ExpressionEvaluatorConverter&&) = delete;
+    ExpressionEvaluatorConverter& operator=(ExpressionEvaluatorConverter const&) = delete;
     ExpressionEvaluatorConverter& operator=(ExpressionEvaluatorConverter&&) = delete;
 
     static PostfixEvaluator convertInfixToPostfix(InfixEvaluator const& infixEvaluator) {
@@ -285,13 +302,6 @@ public:
     }
 
 private:
-    static void transferTermStackToTerms(
-        TermStack& termStack, Terms& terms, std::function<bool(TermStack&)> loopCondition) {
-        while (!termStack.empty() && loopCondition(termStack)) {
-            terms.push_back(termStack.top());
-            termStack.pop();
-        }
-    }
     static Terms popTermsStackAndReturnTopValue(TermsStack& termsStack) {
         Terms terms;
         if (!termsStack.empty()) {
@@ -300,6 +310,15 @@ private:
         }
         return terms;
     }
+
+    static void transferTermStackToTerms(
+        TermStack& termStack, Terms& terms, std::function<bool(TermStack&)> loopCondition) {
+        while (!termStack.empty() && loopCondition(termStack)) {
+            terms.push_back(termStack.top());
+            termStack.pop();
+        }
+    }
+
     static void copyTermsAndPutGroupOperatorsIfNeeded(Terms const& inputTerms, Terms& outputTerms) {
         bool areGroupOperatorsNeeded = inputTerms.size() > 1;
         if (areGroupOperatorsNeeded) {

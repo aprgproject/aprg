@@ -7,18 +7,29 @@ using namespace alba::mathHelper;
 
 namespace alba {
 
+class DestructorClass : public BaseVariantDataType {
+public:
+    DestructorClass() = default;
+    DestructorClass(DestructorClass const&) = delete;
+    DestructorClass(DestructorClass&&) = delete;
+    DestructorClass& operator=(DestructorClass const&) = delete;
+    DestructorClass& operator=(DestructorClass&&) = delete;
+    ~DestructorClass() override { s_destructorInvoked = true; }
+    static bool s_destructorInvoked;
+};
+
+bool DestructorClass::s_destructorInvoked = false;
+
 TEST(AlbaUniqueVariantTest, AcquiringVariantTypeInvokesDefaultConstructor) {
     // Given
     struct ExampleStructure1 : public BaseVariantDataType {
         ExampleStructure1() = default;
-
         uint8_t unsignedField{2};
         float floatField{2.3};
     };
 
     struct ExampleStructure2 : public BaseVariantDataType {
         ExampleStructure2() = default;
-
         double doubleField{4.5};
         char charField{'a'};
     };
@@ -36,20 +47,6 @@ TEST(AlbaUniqueVariantTest, AcquiringVariantTypeInvokesDefaultConstructor) {
     EXPECT_EQ('a', exampleStructure2.charField);
 #endif
 }
-
-class DestructorClass : public BaseVariantDataType {
-public:
-    static bool s_destructorInvoked;
-
-    DestructorClass() = default;
-    DestructorClass(DestructorClass const&) = delete;
-    DestructorClass& operator=(DestructorClass const&) = delete;
-    DestructorClass(DestructorClass&&) = delete;
-    DestructorClass& operator=(DestructorClass&&) = delete;
-
-    ~DestructorClass() override { s_destructorInvoked = true; }
-};
-bool DestructorClass::s_destructorInvoked = false;
 
 TEST(AlbaUniqueVariantTest, AcquiringVariantTypeDifferentThanAlreadyInVariantInvokesDestructor) {
     // Given
@@ -74,25 +71,23 @@ TEST(AlbaUniqueVariantTest, PolymorphismIsSupportedByUniqueVariant) {
         int m_value;
 
     public:
-        explicit Base(int const value) : m_value(value) {}
-        Base(Base const&) = delete;
-        Base& operator=(Base const&) = delete;
-        Base(Base&&) = delete;
-        Base& operator=(Base&&) = delete;
         ~Base() override = default;  // 'virtual' is redundant since the function is already declared 'override'
-
+        Base(Base const&) = delete;
+        Base(Base&&) = delete;
+        Base& operator=(Base const&) = delete;
+        Base& operator=(Base&&) = delete;
+        explicit Base(int const value) : m_value(value) {}
         [[nodiscard]] virtual int getValue() const { return m_value; }
     };
 
     class Derived : public Base {
     public:
-        Derived() : Base(0) {}
-        Derived(Derived const&) = delete;
-        Derived& operator=(Derived const&) = delete;
-        Derived(Derived&&) = delete;
-        Derived& operator=(Derived&&) = delete;
         ~Derived() override = default;
-
+        Derived(Derived const&) = delete;
+        Derived(Derived&&) = delete;
+        Derived& operator=(Derived const&) = delete;
+        Derived& operator=(Derived&&) = delete;
+        Derived() : Base(0) {}
         [[nodiscard]] int getValue() const override { return valueFromTest; }
     };
 

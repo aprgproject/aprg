@@ -7,18 +7,13 @@ namespace Memento {
 // Memento
 // stores internal state of the Originator object
 // and protects against access by objects other than the originator
-
 class Memento {
 private:
     friend class Originator;  // accessible only to Originator
-
     explicit Memento(int const state) : m_state(state) {}
-
     [[nodiscard]] int getState() const { return m_state; }
-
     void setState(int const state) { m_state = state; }
     // ...
-
     int m_state;
     // ...
 };
@@ -26,14 +21,10 @@ private:
 // Originator
 // creates a memento containing a snapshot of its current internal state
 // and uses the memento to restore its internal state
-
 class Originator {
 public:
-    static constexpr int INVALID_STATE = 0;
-
-    Originator() : m_state(INVALID_STATE) {}
-
     explicit Originator(int const state) : m_state(state) {}
+    Originator() : m_state(INVALID_STATE) {}
 
     [[nodiscard]] std::unique_ptr<Memento> createMemento() const {
         std::cout << "In Originator, createMemento() with " << m_state << ".\n";
@@ -45,6 +36,8 @@ public:
         std::cout << "In Originator, restoreMemento() to " << m_state << ".\n";
     }
 
+    static constexpr int INVALID_STATE = 0;
+
 private:
     int m_state;
     // ...
@@ -52,14 +45,8 @@ private:
 
 // CareTaker
 // is responsible for the memento's safe keeping
-
 class CareTaker {
 public:
-    void save(Originator const& originator) {
-        std::cout << "In CareTaker, save state.\n";
-        m_history.emplace_back(originator.createMemento());
-    }
-
     Originator undoAndGetLastOriginator() {
         Originator result;
         if (!m_history.empty()) {
@@ -71,8 +58,13 @@ public:
         }
         return result;
     }
-    // ...
 
+    void save(Originator const& originator) {
+        std::cout << "In CareTaker, save state.\n";
+        m_history.emplace_back(originator.createMemento());
+    }
+
+    // ...
 private:
     std::vector<std::unique_ptr<Memento>> m_history;
     // ...

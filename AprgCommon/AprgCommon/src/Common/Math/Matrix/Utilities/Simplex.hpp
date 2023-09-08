@@ -19,7 +19,6 @@ AlbaMatrix<DataType> constructSimplexTableWithLessThanConstraints(
     //*        *|    A   | Identity matrix | b |
     //*        *|        |                 |   |
     //*    1   *|    c   |        0        | 0 |
-
     assert(constraintsCoefficients.getNumberOfColumns() == objectiveFunctionCoefficients.size());
     assert(constraintsCoefficients.getNumberOfRows() == constraintsValues.size());
     size_t numberOfColumns =
@@ -72,7 +71,6 @@ bool isOptimal(AlbaMatrix<DataType> const& simplexTable) {
 template <typename DataType>
 size_t getPivotingColumnUsingBlandsRule(AlbaMatrix<DataType> const& simplexTable) {
     // Finding entry q using Bland's rule: index of first column whose objective function coefficient is positive
-
     size_t lastY(simplexTable.getNumberOfRows() - 1);
     size_t xPosition = 0;
     for (; xPosition < simplexTable.getNumberOfColumns(); ++xPosition) {
@@ -120,7 +118,6 @@ void pivotAt(AlbaMatrix<DataType>& simplexTable, size_t const pivotingColumn, si
     // 1) subtracting the pivoting row to each row in the matrix and using the pivoting column as the basis on scaling
     // the pivoting row
     // 2) scaling the pivoting row such that the entry in the pivoting column is 1
-
     // scale all entries but pivoting row and pivoting column
     simplexTable.iterateAllThroughYAndThenX([&](size_t const xPosition, size_t const yPosition) {
         if (xPosition != pivotingColumn && yPosition != pivotingRow) {

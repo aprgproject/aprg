@@ -25,25 +25,16 @@ void UciInterpreter::updateCalculationDetails(string const& stringFromEngine) {
     }
 }
 
-void UciInterpreter::processInfoTokens(strings const& infoTokens) {
-    InfoDetails infoDetails(createInfoDetailsFromInfoTokens(infoTokens));
-    if (!infoDetails.pvHalfMoves.empty()) {
-        if (infoDetails.multipv == 1) {  // best line (because multipv is 1)
-            saveCommonParametersOfBestLine(infoDetails);
-        }
-        saveVariation(infoDetails);
-    }
+bool UciInterpreter::shouldSkipTheEntireInfo(string const& token) {
+    static const strings tokens{"currmove"};
+
+    return find(tokens.cbegin(), tokens.cend(), token) != tokens.cend();
 }
 
-void UciInterpreter::processBestMoveTokens(strings const& tokens) {
-    for (int i = 0; i < static_cast<int>(tokens.size()); ++i) {
-        string const& token(tokens[i]);
-        if (token == "bestmove") {
-            m_calculationDetails.bestMove = tokens[++i];
-        } else if (token == "ponder") {
-            m_calculationDetails.responseMoveToPonder = tokens[++i];
-        }
-    }
+bool UciInterpreter::isACommonParameter(string const& token) {
+    static const strings tokens{"depth", "seldepth"};
+
+    return find(tokens.cbegin(), tokens.cend(), token) != tokens.cend();
 }
 
 UciInterpreter::InfoDetails UciInterpreter::createInfoDetailsFromInfoTokens(strings const& tokens) {
@@ -68,6 +59,27 @@ UciInterpreter::InfoDetails UciInterpreter::createInfoDetailsFromInfoTokens(stri
         }
     }
     return infoDetails;
+}
+
+void UciInterpreter::processInfoTokens(strings const& infoTokens) {
+    InfoDetails infoDetails(createInfoDetailsFromInfoTokens(infoTokens));
+    if (!infoDetails.pvHalfMoves.empty()) {
+        if (infoDetails.multipv == 1) {  // best line (because multipv is 1)
+            saveCommonParametersOfBestLine(infoDetails);
+        }
+        saveVariation(infoDetails);
+    }
+}
+
+void UciInterpreter::processBestMoveTokens(strings const& tokens) {
+    for (int i = 0; i < static_cast<int>(tokens.size()); ++i) {
+        string const& token(tokens[i]);
+        if (token == "bestmove") {
+            m_calculationDetails.bestMove = tokens[++i];
+        } else if (token == "ponder") {
+            m_calculationDetails.responseMoveToPonder = tokens[++i];
+        }
+    }
 }
 
 void UciInterpreter::saveCommonParametersOfBestLine(InfoDetails const& infoDetails) {
@@ -95,18 +107,6 @@ void UciInterpreter::saveVariation(InfoDetails const& infoDetails) {
             m_calculationDetails.variations[index] = variation;
         }
     }
-}
-
-bool UciInterpreter::shouldSkipTheEntireInfo(string const& token) {
-    static const strings tokens{"currmove"};
-
-    return find(tokens.cbegin(), tokens.cend(), token) != tokens.cend();
-}
-
-bool UciInterpreter::isACommonParameter(string const& token) {
-    static const strings tokens{"depth", "seldepth"};
-
-    return find(tokens.cbegin(), tokens.cend(), token) != tokens.cend();
 }
 
 }  // namespace chess

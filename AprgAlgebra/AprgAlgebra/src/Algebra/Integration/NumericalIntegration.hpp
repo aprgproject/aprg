@@ -9,13 +9,10 @@ namespace alba::algebra {
 
 Term getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(
     Term const& term, DetailsForDefiniteIntegralWithValues const& integralDetails, int const numberOfSamples);
-
 Term getAnApproximateOfDefiniteIntegralUsingSimpsonRule(
     Term const& term, DetailsForDefiniteIntegralWithValues const& integralDetails, int const numberOfSamples);
-
 Term getActualTruncationErrorInTrapezoidalRule(
     Term const& term, DetailsForDefiniteIntegralWithValues const& integralDetails, int const numberOfSamples);
-
 Term getActualTruncationErrorInSimpsonRule(
     Term const& term, DetailsForDefiniteIntegralWithValues const& integralDetails, int const numberOfSamples);
 
@@ -28,7 +25,6 @@ Term getAnApproximateOfTruncationErrorInSimpsonRuleAt(
     AlbaNumber const& deltaX);
 
 AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(AlbaNumber const& input, int const numberOfSamples);
-
 AlbaNumber getAnApproximateOfNaturalLogarithmUsingSimpsonRule(AlbaNumber const& input, int const numberOfSamples);
 
 }  // namespace alba::algebra

@@ -13,7 +13,7 @@ class BaseBinarySearchTreeSymbolTable
           Value, BaseBinarySearchTree<Key, BasicTreeNodeWithValue<Key, Value>, BaseSymbolTable<Key, Value>>> {
 public:
     ~BaseBinarySearchTreeSymbolTable() override = default;  // no need for virtual destructor because base destructor is
-                                                            // virtual (similar to other virtual functions)
+    // virtual (similar to other virtual functions)
 };
 
 }  // namespace alba::algorithm

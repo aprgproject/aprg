@@ -13,23 +13,23 @@ public:
     using Cost = int;
     using Indices = std::vector<Index>;
     using Costs = std::vector<Cost>;
+
     struct RecursionDetails {
         Index maxLength;
         Indices lengths;
     };
-    static constexpr Cost MAX_COST = std::numeric_limits<Cost>::max();
 
     explicit WordWrapProblemWithoutLineWidth(stringHelper::strings const& words);
-
+    static constexpr Cost MAX_COST = std::numeric_limits<Cost>::max();
     [[nodiscard]] Cost getOptimizedCostUsingNaiveRecursion() const;
     [[nodiscard]] Cost getOptimizedCostByTryingAllLengths() const;
 
 private:
+    static Cost getCost(Index const maxLength, Indices const& lengths);
+    static Cost getCostFromExtraSpaces(Index const numberOfExtraSpaces);
     [[nodiscard]] Cost getOptimizedCostUsingNaiveRecursion(
         RecursionDetails const& recursionDetails, Index const wordIndex) const;
     [[nodiscard]] Cost getTotalLength() const;
-    static Cost getCost(Index const maxLength, Indices const& lengths);
-    static Cost getCostFromExtraSpaces(Index const numberOfExtraSpaces);
     stringHelper::strings m_words;
 };
 

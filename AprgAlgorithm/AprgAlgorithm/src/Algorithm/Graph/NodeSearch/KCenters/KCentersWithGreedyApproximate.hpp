@@ -21,6 +21,18 @@ public:
     [[nodiscard]] Vertices const& getFoundCenters() const { return m_foundCenters; }
 
 private:
+    Vertex getVertexForMaximumClosestDistance() {
+        Vertex result{};
+        Weight maximumClosestDistance{};
+        for (auto const& [vertex, closestDistance] : m_closestDistanceForVertex) {
+            if (maximumClosestDistance < closestDistance) {
+                maximumClosestDistance = closestDistance;
+                result = vertex;
+            }
+        }
+        return result;
+    }
+
     void initialize() { traverseWithGreedyApproach(); }
 
     void traverseWithGreedyApproach() {
@@ -42,18 +54,6 @@ private:
                 m_closestDistanceForVertex.emplace(vertex, distance);
             }
         }
-    }
-
-    Vertex getVertexForMaximumClosestDistance() {
-        Vertex result{};
-        Weight maximumClosestDistance{};
-        for (auto const& [vertex, closestDistance] : m_closestDistanceForVertex) {
-            if (maximumClosestDistance < closestDistance) {
-                maximumClosestDistance = closestDistance;
-                result = vertex;
-            }
-        }
-        return result;
     }
 
     EdgeWeightedGraph const& m_graph;

@@ -12,11 +12,12 @@ namespace alba {
 namespace {
 
 struct OperationPrinter {
-    OperationPrinter() { cout << "Default constructor\n"; }
     explicit OperationPrinter(int) { cout << "Value constructor\n"; }
+    OperationPrinter() { cout << "Default constructor\n"; }
     ~OperationPrinter() { cout << "Destructor\n"; }
     OperationPrinter(OperationPrinter const&) { cout << "Copy constructor\n"; }
     OperationPrinter(OperationPrinter&&) noexcept { cout << "Move constructor\n"; }
+
     OperationPrinter& operator=(OperationPrinter const& rhs) {
         if (this == &rhs) {
             return *this;
@@ -24,10 +25,12 @@ struct OperationPrinter {
         cout << "Copy assignment\n";
         return *this;
     }
+
     OperationPrinter& operator=(OperationPrinter&&) noexcept {
         cout << "Move assignment\n";
         return *this;
     }
+
     //    OperationPrinter& operator=(OperationPrinter) noexcept {
     //        cout << "Copy by value assignment\n";
     //        // Only need one assignment function
@@ -37,26 +40,29 @@ struct OperationPrinter {
 };
 
 // swap NaiveIntVector vectors
-
 class NaiveIntVector {
 public:
     NaiveIntVector() = default;
     ~NaiveIntVector() { delete[] m_ptr; }
+
     NaiveIntVector(NaiveIntVector const& rightHandSide) : m_size(rightHandSide.m_size) {
         m_ptr = new int[m_size];
         copy(rightHandSide.m_ptr, rightHandSide.m_ptr + m_size, m_ptr);
     }
+
     NaiveIntVector(NaiveIntVector&& rightHandSide) noexcept {
         cout << "Move constructor\n";
         m_ptr = exchange(rightHandSide.m_ptr, nullptr);
         m_size = exchange(rightHandSide.m_size, 0);
     }
+
     NaiveIntVector& operator=(NaiveIntVector const& rightHandSide) {
         cout << "Copy assignment\n";
         NaiveIntVector copy(rightHandSide);
         swap(copy, *this);  // The copy-and-swap idiom (to be safe for "self assignment").
         return *this;
     }
+
     NaiveIntVector& operator=(NaiveIntVector&& rightHandSide) noexcept {
         cout << "Move assignment\n";
         NaiveIntVector copy(move(rightHandSide));  // calls the move constructor
@@ -74,12 +80,11 @@ public:
     //        swap(copy, *this);
     //        return *this;
     //    }
-
     void push_back(int const newValue) {
         int* newPtr = new int[m_size + 1];  // This is inefficient because it rellocates every time.
         copy(m_ptr, m_ptr + m_size, newPtr);
         delete[] m_ptr;  // delete does not crash even if m_ptr is empty
-                         // (see https://en.cppreference.com/w/cpp/language/delete)
+        // (see https://en.cppreference.com/w/cpp/language/delete)
         m_ptr = newPtr;
         m_ptr[m_size++] = newValue;
     }
@@ -103,8 +108,7 @@ TEST(RuleOfZeroExamplesTest, InitializationIsNotAssignment) {
     // Even though "=" operation is used:
     OperationPrinter object2(3);         // Calls the value constructor
     OperationPrinter object3 = object1;  // Calls the copy constructor
-
-    object3 = object2;  // now it calls the copy assignment (operator=);
+    object3 = object2;                   // now it calls the copy assignment (operator=);
 }
 
 TEST(RuleOfZeroExamplesTest, NaiveIntVectorPushBackWorks) {

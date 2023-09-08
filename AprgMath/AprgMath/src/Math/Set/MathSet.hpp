@@ -29,17 +29,15 @@ public:
     using RosterLists = std::vector<RosterList>;
     using VoidElementFunction = std::function<void(ElementType const&)>;
     using GenerateFunction = std::function<void(VoidElementFunction const& generateElementFunction)>;
-
     MathSet()
         : m_description("Null set")
 #define NULL_RULE [](ElementType const&) -> bool { return false; }  // need to macro because it affects indentions
           ,
           m_ruleToBeInTheSet(NULL_RULE)
 #undef NULL_RULE
-    {
+              explicit MathSet(RosterList const& rosterList) {
+        constructSetBasedOnRosterList(rosterList);
     }
-
-    explicit MathSet(RosterList const& rosterList) { constructSetBasedOnRosterList(rosterList); }
 
     MathSet(RosterInitializerList const& initializerList) {
         RosterList rosterList;
@@ -49,24 +47,8 @@ public:
     }
 
     MathSet(std::string const& description, Rule const& rule) : m_description(description), m_ruleToBeInTheSet(rule) {}
-
     [[nodiscard]] bool contains(ElementType const& elementToCheck) const { return m_ruleToBeInTheSet(elementToCheck); }
-
     [[nodiscard]] bool doesNotContain(ElementType const& elementToCheck) const { return !contains(elementToCheck); }
-
-    [[nodiscard]] std::string getDescription() const { return std::string("{") + m_description + "}"; }
-
-    [[nodiscard]] std::string getGeneratedRosterString(GenerateFunction const& generateFunction) const {
-        std::stringstream descriptionStream;
-        int index = 0;
-        generateFunction([&](ElementType const& element) {
-            if (contains(element)) {
-                enumerateElement(descriptionStream, element, index);
-                ++index;
-            }
-        });
-        return std::string("{... ") + descriptionStream.str() + " ...}";
-    }
 
     [[nodiscard]] bool isASubsetOf(MathSet const& mathSet2, GenerateFunction const& generateFunction) const {
         bool result(true);
@@ -96,6 +78,20 @@ public:
             }
         });
         return result;
+    }
+
+    [[nodiscard]] std::string getDescription() const { return std::string("{") + m_description + "}"; }
+
+    [[nodiscard]] std::string getGeneratedRosterString(GenerateFunction const& generateFunction) const {
+        std::stringstream descriptionStream;
+        int index = 0;
+        generateFunction([&](ElementType const& element) {
+            if (contains(element)) {
+                enumerateElement(descriptionStream, element, index);
+                ++index;
+            }
+        });
+        return std::string("{... ") + descriptionStream.str() + " ...}";
     }
 
     [[nodiscard]] MathSet getComplement() const {
@@ -144,15 +140,9 @@ public:
         return result;
     }
 
-private:
-    void constructSetBasedOnRosterList(RosterList const& rosterList) {
-        RosterSet rosterSet(rosterList.cbegin(), rosterList.cend());
-        m_ruleToBeInTheSet = [rosterSet](ElementType const& elementToCheck) mutable -> bool {
-            return rosterSet.find(elementToCheck) != rosterSet.cend();
-        };
-        m_description = getDescriptionForRosterList(rosterList);
-    }
+    {}
 
+private:
     [[nodiscard]] std::string getDescriptionForRosterList(RosterList const& rosterList) const {
         std::stringstream descriptionStream;
         int index = 0;
@@ -170,6 +160,14 @@ private:
         } else {
             descriptionStream << ", " << elementInRoster;
         }
+    }
+
+    void constructSetBasedOnRosterList(RosterList const& rosterList) {
+        RosterSet rosterSet(rosterList.cbegin(), rosterList.cend());
+        m_ruleToBeInTheSet = [rosterSet](ElementType const& elementToCheck) mutable -> bool {
+            return rosterSet.find(elementToCheck) != rosterSet.cend();
+        };
+        m_description = getDescriptionForRosterList(rosterList);
     }
 
     std::string m_description;

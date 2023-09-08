@@ -41,12 +41,6 @@ void AprgGraph::drawDiscontinuousPoints(Points const& points, uint32_t const col
     }
 }
 
-bool AprgGraph::isBitmapPointInTheBitmap(Point const& bitmapPoint) {
-    int bitmapPointInX = static_cast<int>(round(bitmapPoint.getX()));
-    int bitmapPointInY = static_cast<int>(round(bitmapPoint.getY()));
-    return m_bitmap.getConfiguration().isPositionWithinTheBitmap(bitmapPointInX, bitmapPointInY);
-}
-
 void AprgGraph::drawContinuousPoints(Points const& points, uint32_t const color) {
     Points bitmapPointsInsideBitmap;
     Point previousBitmapPointNotOnTheBitmap;
@@ -219,18 +213,6 @@ string AprgGraph::getBitmapFilePathOfCharacter(char const character) {
 
 double AprgGraph::getLowestInterval() const { return min(1 / m_magnification.getX(), 1 / m_magnification.getY()); }
 
-Point AprgGraph::convertBitmapXYToRealPoint(BitmapXY const& bitmapPosition) const {
-    double xPosition = convertBitmapXCoordinateToRealXCoordinate(bitmapPosition.getX());
-    double yPosition = convertBitmapYCoordinateToRealYCoordinate(bitmapPosition.getY());
-    return {xPosition, yPosition};
-}
-
-Point AprgGraph::convertRealPointToBitmapPoint(Point const& realPosition) const {
-    auto xPosition = static_cast<double>(convertRealXCoordinateToBitmapXCoordinate(realPosition.getX()));
-    auto yPosition = static_cast<double>(convertRealYCoordinateToBitmapYCoordinate(realPosition.getY()));
-    return {xPosition, yPosition};
-}
-
 int AprgGraph::convertRealXCoordinateToBitmapXCoordinate(double const xCoordinate) const {
     return static_cast<int>(round((xCoordinate * m_magnification.getX()) + m_originInBitmap.getX()));
 }
@@ -245,6 +227,24 @@ double AprgGraph::convertBitmapXCoordinateToRealXCoordinate(double const xCoordi
 
 double AprgGraph::convertBitmapYCoordinateToRealYCoordinate(double const yCoordinate) const {
     return (yCoordinate - m_originInBitmap.getY()) / (m_magnification.getY() * -1);
+}
+
+Point AprgGraph::convertBitmapXYToRealPoint(BitmapXY const& bitmapPosition) const {
+    double xPosition = convertBitmapXCoordinateToRealXCoordinate(bitmapPosition.getX());
+    double yPosition = convertBitmapYCoordinateToRealYCoordinate(bitmapPosition.getY());
+    return {xPosition, yPosition};
+}
+
+Point AprgGraph::convertRealPointToBitmapPoint(Point const& realPosition) const {
+    auto xPosition = static_cast<double>(convertRealXCoordinateToBitmapXCoordinate(realPosition.getX()));
+    auto yPosition = static_cast<double>(convertRealYCoordinateToBitmapYCoordinate(realPosition.getY()));
+    return {xPosition, yPosition};
+}
+
+bool AprgGraph::isBitmapPointInTheBitmap(Point const& bitmapPoint) {
+    int bitmapPointInX = static_cast<int>(round(bitmapPoint.getX()));
+    int bitmapPointInY = static_cast<int>(round(bitmapPoint.getY()));
+    return m_bitmap.getConfiguration().isPositionWithinTheBitmap(bitmapPointInX, bitmapPointInY);
 }
 
 void AprgGraph::drawBitmapPointIfPossible(Point const& bitmapPoint, uint32_t const color) {

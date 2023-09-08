@@ -9,7 +9,6 @@ namespace alba {
 class SingletonExample : public AlbaSingleton<SingletonExample> {
 public:
     SingletonExample() { ++numberOfConstructorExecutions; }
-
     static size_t numberOfConstructorExecutions;
 };
 

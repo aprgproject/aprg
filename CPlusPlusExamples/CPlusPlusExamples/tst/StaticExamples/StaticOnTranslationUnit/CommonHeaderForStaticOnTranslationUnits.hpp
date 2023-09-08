@@ -3,20 +3,8 @@
 namespace alba::StaticOnTranslationUnits {
 
 constexpr int constInteger = 100;  // static (internal linkage) by default
-static int staticInteger = 200;    // explicitly static (internal linkage)
-
-// Linking failure if we include things with external linkage in the header:
-// -> int integer; // extern(external linkage) by default
-// ---> Linking error: multiple definition of `alba::integer'
-// -> extern const int externConstInteger; // explicitly extern(external linkage)
-// ---> Linking error: undefined reference to `alba::externConstInteger'
-
-// same goes for functions (but there are no free const functions)
-int freeFunction();               // extern by default
-static int staticFreeFunction();  // explicitly static
 
 // Utilities for tests
-
 struct TranslationUnitValues {
     int constInteger;
     int staticInteger;
@@ -25,10 +13,19 @@ struct TranslationUnitValues {
     int externConstInteger;
 };
 
-void restoreInitialValuesForTranslationUnit1();
-void restoreInitialValuesForTranslationUnit2();
+static int staticInteger = 200;   // explicitly static (internal linkage)
+static int staticFreeFunction();  // explicitly static
+// Linking failure if we include things with external linkage in the header:
+// -> int integer; // extern(external linkage) by default
+// ---> Linking error: multiple definition of `alba::integer'
+// -> extern const int externConstInteger; // explicitly extern(external linkage)
+// ---> Linking error: undefined reference to `alba::externConstInteger'
+// same goes for functions (but there are no free const functions)
+int freeFunction();  // extern by default
 TranslationUnitValues getValuesInTranslationUnit1();
 TranslationUnitValues getValuesInTranslationUnit2();
+void restoreInitialValuesForTranslationUnit1();
+void restoreInitialValuesForTranslationUnit2();
 
 }  // namespace alba::StaticOnTranslationUnits
 

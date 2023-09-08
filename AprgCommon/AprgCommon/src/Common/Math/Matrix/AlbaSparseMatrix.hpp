@@ -22,9 +22,7 @@ public:
     using UniqueIndexes = std::set<size_t>;
     using UnaryFunction = std::function<DataType(DataType const&)>;
     using BinaryFunction = std::function<DataType(DataType const&, DataType const&)>;
-
     AlbaSparseMatrix() : m_numberOfColumns(0), m_numberOfRows(0) {}
-
     AlbaSparseMatrix(size_t const numberOfColumns, size_t const numberOfRows)
         : m_numberOfColumns(numberOfColumns), m_numberOfRows(numberOfRows), m_matrixData() {}
 
@@ -34,7 +32,6 @@ public:
     }
 
     // rule of zero
-
     bool operator==(AlbaSparseMatrix const& secondMatrix) const {
         bool isEqual(true);
         if (m_numberOfColumns != secondMatrix.m_numberOfColumns || m_numberOfRows != secondMatrix.m_numberOfRows) {
@@ -86,7 +83,6 @@ public:
     }
 
     [[nodiscard]] size_t getNumberOfColumns() const { return m_numberOfColumns; }
-
     [[nodiscard]] size_t getNumberOfRows() const { return m_numberOfRows; }
 
     [[nodiscard]] size_t getMatrixIndex(size_t const xPosition, size_t const yPosition) const {

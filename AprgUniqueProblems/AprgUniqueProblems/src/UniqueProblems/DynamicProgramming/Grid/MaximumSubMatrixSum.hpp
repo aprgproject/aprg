@@ -10,6 +10,7 @@ class MaximumSubMatrixSum {
 public:
     using Index = int;
     using Value = int;
+
     struct SubArrayDetails {
         Index left;
         Index right;
@@ -17,12 +18,11 @@ public:
         Index down;
         Value sum;
     };
+
     using Values = std::vector<Value>;
     using ValueMatrix = matrix::AlbaMatrix<Value>;
-    static constexpr Value MIN_VALUE = std::numeric_limits<Value>::min();
-
     explicit MaximumSubMatrixSum(ValueMatrix const& valueMatrix);
-
+    static constexpr Value MIN_VALUE = std::numeric_limits<Value>::min();
     [[nodiscard]] Value getMaximumSubMatrixSum() const;
     [[nodiscard]] SubArrayDetails getMaximumSubMatrixSumWithDetails() const;
 

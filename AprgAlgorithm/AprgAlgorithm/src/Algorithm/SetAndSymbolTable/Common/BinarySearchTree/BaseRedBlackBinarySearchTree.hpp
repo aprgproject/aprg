@@ -14,7 +14,6 @@ public:
     using Key = KeyTemplateType;
     using Node = NodeTemplateType;
     using NodeUniquePointer = typename BaseClass::NodeUniquePointer;
-
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     ~BaseRedBlackBinarySearchTree() override = default;
 

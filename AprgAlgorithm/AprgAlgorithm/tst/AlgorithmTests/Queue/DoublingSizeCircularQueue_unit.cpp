@@ -13,15 +13,10 @@ using QueueForTest = DoublingSizeCircularQueue<int>;
 }  // namespace
 
 TEST(DoublingSizeCircularQueueTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<QueueForTest>(); }
-
 TEST(DoublingSizeCircularQueueTest, IsEmptyWorksWhenNotEmpty) { testIsEmptyWhenNotEmptyWithInt<QueueForTest>(); }
-
 TEST(DoublingSizeCircularQueueTest, GetSizeWorksWhenEmpty) { testGetSizeWhenEmptyWithInt<QueueForTest>(); }
-
 TEST(DoublingSizeCircularQueueTest, GetSizeWorksWhenNotEmpty) { testGetSizeWhenNotEmptyWithInt<QueueForTest>(); }
-
 TEST(DoublingSizeCircularQueueTest, EnqueueWorks) { testEnqueueWithInt<QueueForTest>(); }
-
 TEST(DoublingSizeCircularQueueTest, DequeueWorks) { testDequeueWithInt<QueueForTest>(); }
 
 TEST(DoublingSizeCircularQueueTest, GetContainerSizeWorks) {

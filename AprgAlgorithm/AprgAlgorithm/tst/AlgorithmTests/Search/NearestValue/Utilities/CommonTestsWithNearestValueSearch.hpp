@@ -5,7 +5,6 @@
 namespace alba::algorithm::CommonTestsWithNearestValueSearch {
 
 // getNearestValue
-
 template <typename Search, typename Values>
 void testGetNearestValueDoesNotCrashWithEmptyUnsignedInts() {
     Values emptyValues;
@@ -79,7 +78,6 @@ void testGetNearestValueWhenNearestValueIsHigherWithSortedUnsignedInts() {
 }
 
 // getIndexOfNearestValue
-
 template <typename Search, typename Values>
 void testGetIndexOfNearestValueDoesNotCrashWithEmptyUnsignedInts() {
     Values emptyValues;

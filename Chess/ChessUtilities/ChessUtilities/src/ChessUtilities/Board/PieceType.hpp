@@ -3,6 +3,7 @@
 namespace alba::chess {
 
 enum class PieceType {
+
     Empty = 0,
     Pawn = 1,
     Knight = 2,
@@ -10,6 +11,7 @@ enum class PieceType {
     Rook = 4,
     Queen = 5,
     King = 6,
+
 };
 
 }  // namespace alba::chess

@@ -10,21 +10,11 @@ namespace alba::algorithm {
 template <typename Object>
 class DoublingSizeStack : public BaseStack<Object> {
 public:
-    static constexpr int MINUMUM_CONTAINER_SIZE = 1;
-
     DoublingSizeStack() : m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
-
     ~DoublingSizeStack() override { deleteAllObjects(); }
-
     [[nodiscard]] bool isEmpty() const override { return m_stackSize == 0; }
-
     [[nodiscard]] int getSize() const override { return m_stackSize; }
-
-    // constant amortized (best case: constant, worst case: linear due to resizing)
-    void push(Object const& object) override {
-        resizeOnPushIfNeeded();
-        m_objects[m_stackSize++] = object;
-    }
+    [[nodiscard]] int getContainerSize() const { return m_containerSize; }
 
     // constant amortized (best case: constant, worst case: linear due to resizing)
     Object pop() override {
@@ -34,7 +24,13 @@ public:
         return result;
     }
 
-    [[nodiscard]] int getContainerSize() const { return m_containerSize; }
+    // constant amortized (best case: constant, worst case: linear due to resizing)
+    void push(Object const& object) override {
+        resizeOnPushIfNeeded();
+        m_objects[m_stackSize++] = object;
+    }
+
+    static constexpr int MINUMUM_CONTAINER_SIZE = 1;
 
 private:
     void deleteAllObjects() {
@@ -54,7 +50,7 @@ private:
         auto* newObjects = new Object[newSize];
         if (m_objects != nullptr) {
             std::copy(m_objects, m_objects + std::min(m_stackSize, newSize), newObjects);
-            delete[](m_objects);
+            delete[] (m_objects);
         }
         m_objects = newObjects;
         m_containerSize = newSize;

@@ -35,7 +35,6 @@ TEST(RedBlackBinarySearchTreeSymbolTableTest, GetSizeWorksWhenNotEmpty) {
 }
 
 TEST(RedBlackBinarySearchTreeSymbolTableTest, GetWorks) { testGetWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(RedBlackBinarySearchTreeSymbolTableTest, GetRankWorks) { testGetRankWithUnsignedIntAndChar<SymbolTableForTest>(); }
 
 TEST(RedBlackBinarySearchTreeSymbolTableTest, GetMinimumWorks) {

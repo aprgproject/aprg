@@ -17,29 +17,25 @@ public:
 
     BoardWithContext();
     BoardWithContext(PieceColor const& playerColor, Board const& board);
-
+    bool isPlayersKingOnCheck() const;
+    bool isOpponentsKingOnCheck() const;
     PieceColor getPlayerColor() const;
     Board const& getBoard() const;
     std::string getFenString() const;
     Coordinate getPlayerKingCoordinate() const;
     Coordinate getOpponentsKingCoordinate() const;
-    bool isPlayersKingOnCheck() const;
-    bool isOpponentsKingOnCheck() const;
-
     void save(PieceColor const& playerColor, Board const& board);
     void setPlayerColor(PieceColor const& playerColor);
     void move(Move const& move);
 
 private:
     void updateBoardDetails();
-
     PieceColor m_playerColor;
     Board m_board;
     BoardDetails m_boardDetails;
 };
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

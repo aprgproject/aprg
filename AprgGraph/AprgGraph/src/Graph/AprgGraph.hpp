@@ -20,6 +20,7 @@ namespace alba {
 class AprgGraph {
 public:
     enum class LabelType { VerticalLabel, HorizontalLabel, OriginLabel };
+
     using RangeWithDoubles = AlbaValueRange<double>;
     using FunctionWithDoubles = std::function<double(double)>;
 
@@ -34,10 +35,8 @@ public:
     void drawCircle(TwoDimensions::Circle const& circle, uint32_t const color);
     void drawEllipse(TwoDimensions::Ellipse const& ellipse, uint32_t const color);
     void drawHyperbola(TwoDimensions::Hyperbola const& hyperbola, uint32_t const color);
-
     void drawTermWithXYSubstitution(algebra::Term const& term, uint32_t const color);
     void drawEquationWithXYSubstitution(algebra::Equation const& equation, uint32_t const color);
-
     void drawGrid(AprgBitmap::BitmapDoubleXY const& gridInterval);
     void drawFunctionUsingX(uint32_t const color, FunctionWithDoubles const& functionFromXToY);
     void drawFunctionUsingY(uint32_t const color, FunctionWithDoubles const& functionFromYToX);
@@ -47,15 +46,15 @@ public:
     void saveChangesToBitmapFile();
 
 private:
-    bool isBitmapPointInTheBitmap(TwoDimensions::Point const& bitmapPoint);
     static std::string getBitmapFilePathOfCharacter(char const character);
     [[nodiscard]] double getLowestInterval() const;
-    [[nodiscard]] TwoDimensions::Point convertBitmapXYToRealPoint(AprgBitmap::BitmapXY const& bitmapPosition) const;
-    [[nodiscard]] TwoDimensions::Point convertRealPointToBitmapPoint(TwoDimensions::Point const& realPosition) const;
     [[nodiscard]] int convertRealXCoordinateToBitmapXCoordinate(double const xCoordinate) const;
     [[nodiscard]] int convertRealYCoordinateToBitmapYCoordinate(double const yCoordinate) const;
     [[nodiscard]] double convertBitmapXCoordinateToRealXCoordinate(double const xCoordinate) const;
     [[nodiscard]] double convertBitmapYCoordinateToRealYCoordinate(double const yCoordinate) const;
+    [[nodiscard]] TwoDimensions::Point convertBitmapXYToRealPoint(AprgBitmap::BitmapXY const& bitmapPosition) const;
+    [[nodiscard]] TwoDimensions::Point convertRealPointToBitmapPoint(TwoDimensions::Point const& realPosition) const;
+    bool isBitmapPointInTheBitmap(TwoDimensions::Point const& bitmapPoint);
     void drawBitmapPointIfPossible(TwoDimensions::Point const& bitmapPoint, uint32_t const color);
     void drawConnectedBitmapPointsIfPossible(TwoDimensions::Points const& bitmapPoints, uint32_t const color);
     void drawTermWithXSubstitution(algebra::Term const& term, uint32_t const color);

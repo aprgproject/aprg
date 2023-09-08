@@ -6,8 +6,6 @@ using namespace std;
 
 namespace alba {
 
-CountTotalSetBitsInAllNumbersFrom1ToN::CountTotalSetBitsInAllNumbersFrom1ToN() = default;
-
 CountTotalSetBitsInAllNumbersFrom1ToN::Value CountTotalSetBitsInAllNumbersFrom1ToN::getTotalSetBitsUsingPopcount(
     Value const endValue) {
     Value result{};
@@ -74,5 +72,7 @@ CountTotalSetBitsInAllNumbersFrom1ToN::Value CountTotalSetBitsInAllNumbersFrom1T
 
     return result;
 }
+
+CountTotalSetBitsInAllNumbersFrom1ToN::CountTotalSetBitsInAllNumbersFrom1ToN() = default;
 
 }  // namespace alba

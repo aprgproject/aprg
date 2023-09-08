@@ -68,9 +68,7 @@ TEST(DirectedGraphWithAdjacencyMatrixTest, GetEdgesWorksWhenNotEmpty) {
 }
 
 TEST(DirectedGraphWithAdjacencyMatrixTest, ConnectWorks) { testConnectWithVertexAsInt<GraphForTest>(); }
-
 TEST(DirectedGraphWithAdjacencyMatrixTest, DisconnectWorks) { testDisconnectWithVertexAsInt<GraphForTest>(); }
-
 TEST(DirectedGraphWithAdjacencyMatrixTest, ClearWorks) { testClearWithVertexAsInt<GraphForTest>(); }
 
 TEST(DirectedGraphWithAdjacencyMatrixTest, GraphWorksAfterClear) {

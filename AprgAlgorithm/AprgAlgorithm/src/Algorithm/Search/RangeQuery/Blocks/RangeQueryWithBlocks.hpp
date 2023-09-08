@@ -11,19 +11,16 @@ template <typename Values, typename BlockValues>
 class RangeQueryWithBlocks {
 public:
     // This supports "selector", "accumulator" and "count" type queries.
-
     // Assuming there are k blocks:
     // The preprocessing of partial sum can be constructed in O(n) time.
     // The range query can be done in max(O(k), O(n/k)) time.
     // The updating of a value can be done in O(n/k) time.
-
     // Note that having sqrt(n) of blocks is special.
     // The idea is to divide the array into blocks of size sqrt(n) so that each block contains the sum of elements
     // inside the block. Since the number of single elements is O(sqrt(n)) and the number of blocks is also O(sqrt(n)),
     // the sum query takes O(sqrt(n)) time. The purpose of the block size sqrt(n) is that it balances two things:
     // -> the array is divided into sqrt(n) blocks, each of which contains sqrt(n) elements.
     // So all operations take O(sqrt(n)) time.
-
     using Index = int;
     using Value = typename Values::value_type;
     using BlockValue = typename BlockValues::value_type;
@@ -44,7 +41,6 @@ public:
     }
 
     [[nodiscard]] Index getBlockSize() const { return m_blockSize; }
-
     [[nodiscard]] BlockValues const& getBlocks() const { return m_blocks; }
 
     [[nodiscard]] Output getResultOnInterval(Index const start, Index const end) const {

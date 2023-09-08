@@ -7,8 +7,6 @@ using namespace std;
 
 namespace alba::TwoDimensions {
 
-Triangle::Triangle() = default;
-
 Triangle::Triangle(Point const& first, Point const& second, Point const& third)
     : TrianglePolygonParent{first, second, third} {}
 
@@ -30,5 +28,7 @@ ostream& operator<<(ostream& out, Triangle const& triangle) {
     out << "[" << triangle.m_vertices[0] << "][" << triangle.m_vertices[1] << "][" << triangle.m_vertices[2] << "]";
     return out;
 }
+
+Triangle::Triangle() = default;
 
 }  // namespace alba::TwoDimensions

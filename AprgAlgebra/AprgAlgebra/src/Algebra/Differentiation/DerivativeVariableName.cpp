@@ -7,13 +7,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-DerivativeVariableName::DerivativeVariableName(
-    int const differentiationLevel, string const& baseVariable, string const& dependentVariable)
-    : m_isValid(true),
-      m_differentiationLevel(differentiationLevel),
-      m_baseVariable(baseVariable),
-      m_dependentVariable(dependentVariable) {}
-
 DerivativeVariableName::DerivativeVariableName(string const& derivativeVariableInLeibnizNotation)
     : m_isValid(false), m_differentiationLevel(0) {
     string numerator = getStringBeforeThisString(derivativeVariableInLeibnizNotation, "/");
@@ -24,12 +17,16 @@ DerivativeVariableName::DerivativeVariableName(string const& derivativeVariableI
     }
 }
 
+DerivativeVariableName::DerivativeVariableName(
+    int const differentiationLevel, string const& baseVariable, string const& dependentVariable)
+    : m_isValid(true),
+      m_differentiationLevel(differentiationLevel),
+      m_baseVariable(baseVariable),
+      m_dependentVariable(dependentVariable) {}
+
 bool DerivativeVariableName::isValid() const { return m_isValid; }
-
 int DerivativeVariableName::getDifferentiationLevel() const { return m_differentiationLevel; }
-
 string const& DerivativeVariableName::getBaseVariable() const { return m_baseVariable; }
-
 string const& DerivativeVariableName::getDependentVariable() const { return m_dependentVariable; }
 
 string DerivativeVariableName::getNameInLeibnizNotation() const {

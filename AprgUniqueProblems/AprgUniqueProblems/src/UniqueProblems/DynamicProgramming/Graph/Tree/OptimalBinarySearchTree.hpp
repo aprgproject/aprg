@@ -16,17 +16,14 @@ public:
     using ValueAndFrequencyPair = std::pair<int, Frequency>;
     using ValueAndFrequencyPairs = std::vector<ValueAndFrequencyPair>;
     using CostMatrix = matrix::AlbaMatrix<Cost>;
-    static constexpr Cost MAX_COUNT = std::numeric_limits<Cost>::max();
-
     explicit OptimalBinarySearchTree(ValueAndFrequencyPairs const& valueAndFrequencyPairs);
-
+    static constexpr Cost MAX_COUNT = std::numeric_limits<Cost>::max();
     [[nodiscard]] Cost getMinimumCostUsingNaiveRecursion() const;
     [[nodiscard]] Cost getMinimumCostUsingIterativeDP() const;
 
 private:
-    [[nodiscard]] Cost getMinimumCostUsingNaiveRecursion(Cost const depth, Index const left, Index const right) const;
-
     static Cost getCost(Cost const depth, Cost const frequency);
+    [[nodiscard]] Cost getMinimumCostUsingNaiveRecursion(Cost const depth, Index const left, Index const right) const;
     void initialize();
     void sortByValue();
     ValueAndFrequencyPairs m_valueAndFrequencyPairs;

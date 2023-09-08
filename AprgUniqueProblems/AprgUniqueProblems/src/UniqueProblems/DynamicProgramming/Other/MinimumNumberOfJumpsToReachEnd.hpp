@@ -14,10 +14,8 @@ public:
     using Indices = std::vector<Index>;
     using IndexToIndex = std::vector<Index>;
     using Counts = std::vector<Count>;
-    static constexpr Count MAX_COUNT = std::numeric_limits<Count>::max();
-
     explicit MinimumNumberOfJumpsToReachEnd(Counts const& sequence);
-
+    static constexpr Count MAX_COUNT = std::numeric_limits<Count>::max();
     [[nodiscard]] Count getMinimumNumberOfJumpsUsingNaiveRecursion() const;
     [[nodiscard]] Count getMinimumNumberOfJumpsUsingMemoizationDP() const;
     [[nodiscard]] Count getMinimumNumberOfJumpsUsingIterativeDP() const;

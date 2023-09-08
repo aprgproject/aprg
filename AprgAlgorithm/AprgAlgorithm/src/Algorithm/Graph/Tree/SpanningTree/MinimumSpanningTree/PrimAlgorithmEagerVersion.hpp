@@ -88,7 +88,6 @@ private:
 
 // Algorithm in short terms: Add nearest vertices in the tree.
 // Since its eager, nearest vertices are checked every time a new one is added on the tree.
-
 // Running time:
 // depends on Indexed-PQ implementation: Total = V inserts + V deletemins + E decrease-keys
 // array: insert(1), delete-min(V), decrease-key(1) -> total = V^2
@@ -107,15 +106,12 @@ private:
 // -> Travel up while the complete tree is not hepified (swim).
 // -> THIS IS NOT IMPLEMENTED ABOVE
 // ---> Updates to weight should be only decrease updates and decrease-key operation should be used
-
 // Other discussions:
 // Difference between eager and lazy?
 // -> Eager only adds (vertex) to search when it has better weight
-
 // The time complexity of Prim’s algorithm is O(n + mlogm) that equals the time complexity of Dijkstra’s algorithm.
 // Note: 'n' is nodes and 'm' is edges. In practice, Prim’s and Kruskal’s algorithms are both efficient, and the choice
 // of the algorithm is a matter of taste. Still, most competitive programmers use Kruskal’s algorithm.
-
 // We have discussed Kruskal’s algorithm for Minimum Spanning Tree.
 // Like Kruskal’s algorithm, Prim’s algorithm is also a Greedy algorithm.
 // It starts with an empty spanning tree.
@@ -127,12 +123,10 @@ private:
 // algorithm, we find a cut (of two sets, one contains the vertices already included in MST and other contains rest of
 // the vertices), pick the minimum weight edge from the cut and include this vertex to MST Set (the set that contains
 // already included vertices).
-
 // How does Prim’s Algorithm Work?
 // The idea behind Prim’s algorithm is simple, a spanning tree means all vertices must be connected.
 // So the two disjoint subsets (discussed above) of vertices must be connected to make a Spanning Tree.
 // And they must be connected with the minimum weight edge to make it a Minimum Spanning Tree.
-
 // Algorithm
 // -> 1) Create a set mstSet that keeps track of vertices already included in MST.
 // -> 2) Assign a key value to all vertices in the input graph.
@@ -148,7 +142,6 @@ private:
 // -> The key values are used only for vertices which are not yet included in MST,
 // -> the key value for these vertices indicate the minimum weight edges connecting them to the set of vertices included
 // in MST.
-
 // Time Complexity of the above program is O(V^2).
 // If the input graph is represented using adjacency list,
 // then the time complexity of Prim’s algorithm can be reduced to O(E log V) with the help of binary heap.

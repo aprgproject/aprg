@@ -10,14 +10,12 @@ MaximizeProfitInCuttingARod::MaximizeProfitInCuttingARod(Length const length, Ro
 MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUsingNaiveRecursion() const {
     // Time Complexity: O(n^r)
     // Auxiliary Space: O(1)
-
     return getBestProfitUsingNaiveRecursion(m_length);
 }
 
 MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUsingMemoizationDP() const {
     // Time Complexity: O(n^2).
     // Auxiliary Space: O(n).
-
     Profit result(0);
     if (!m_rods.empty()) {
         Profits partialProfits(m_length + 1, static_cast<Profit>(UNUSED_PROFIT));
@@ -29,7 +27,6 @@ MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUs
 MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUsingIterativeDP() const {
     // Time Complexity: O(n^2).
     // Auxiliary Space: O(n).
-
     Profit result(0);
     if (!m_rods.empty()) {
         Profits partialProfits(m_length + 1, 0);
@@ -60,6 +57,14 @@ MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUs
     return result;
 }
 
+MaximizeProfitInCuttingARod::Length MaximizeProfitInCuttingARod::getSmallestItemLength() const {
+    Length result(m_rods.front().first);
+    for (auto it = m_rods.cbegin() + 1; it != m_rods.cend(); ++it) {
+        result = min(result, it->first);
+    }
+    return result;
+}
+
 MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUsingMemoizationDP(
     Profits& partialProfits, Length const remainingLength) const {
     Profit result = partialProfits[remainingLength];
@@ -72,14 +77,6 @@ MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUs
             }
         }
         partialProfits[remainingLength] = result;
-    }
-    return result;
-}
-
-MaximizeProfitInCuttingARod::Length MaximizeProfitInCuttingARod::getSmallestItemLength() const {
-    Length result(m_rods.front().first);
-    for (auto it = m_rods.cbegin() + 1; it != m_rods.cend(); ++it) {
-        result = min(result, it->first);
     }
     return result;
 }

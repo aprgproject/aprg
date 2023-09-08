@@ -1,7 +1,6 @@
 #pragma once
 
 namespace alba::chess {
-
 enum class PieceColorAndType {
     Empty = 0,         // 0b0000
     WhitePawn = 1,     // 0b0001
@@ -17,5 +16,4 @@ enum class PieceColorAndType {
     BlackQueen = 13,   // 0b1101
     BlackKing = 14     // 0b1110
 };
-
 }  // namespace alba::chess

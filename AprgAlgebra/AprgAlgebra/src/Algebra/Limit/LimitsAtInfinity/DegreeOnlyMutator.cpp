@@ -6,6 +6,29 @@ namespace alba::algebra {
 
 DegreeOnlyMutator::DegreeOnlyMutator(string const& variableName) : m_variableName(variableName) {}
 
+Monomial DegreeOnlyMutator::getMonomialWithDegree(AlbaNumber const& degree) const {
+    Monomial result(1, {{m_variableName, degree}});
+    if (degree == 0) {
+        result = Monomial(1, {});
+    }
+    return result;
+}
+
+AlbaNumber DegreeOnlyMutator::getMaxDegreeForVariable(Polynomial const& polynomial) {
+    AlbaNumber maxDegreeForVariable;
+    auto const& monomials(polynomial.getMonomials());
+    if (!monomials.empty()) {
+        maxDegreeForVariable = monomials.front().getExponentForVariable(m_variableName);
+        for (auto it = monomials.cbegin() + 1; it != monomials.cend(); ++it) {
+            AlbaNumber currentDegreeForVariable(it->getExponentForVariable(m_variableName));
+            if (maxDegreeForVariable < currentDegreeForVariable) {
+                maxDegreeForVariable = currentDegreeForVariable;
+            }
+        }
+    }
+    return maxDegreeForVariable;
+}
+
 void DegreeOnlyMutator::mutateTerm(Term& term) {
     Term beforeMutation;
     do {
@@ -33,29 +56,6 @@ void DegreeOnlyMutator::mutateExpression(Expression& expression) {
         BaseMutator::mutateExpression(expression);
         expression.simplify();
     } while (beforeMutation != expression);
-}
-
-AlbaNumber DegreeOnlyMutator::getMaxDegreeForVariable(Polynomial const& polynomial) {
-    AlbaNumber maxDegreeForVariable;
-    auto const& monomials(polynomial.getMonomials());
-    if (!monomials.empty()) {
-        maxDegreeForVariable = monomials.front().getExponentForVariable(m_variableName);
-        for (auto it = monomials.cbegin() + 1; it != monomials.cend(); ++it) {
-            AlbaNumber currentDegreeForVariable(it->getExponentForVariable(m_variableName));
-            if (maxDegreeForVariable < currentDegreeForVariable) {
-                maxDegreeForVariable = currentDegreeForVariable;
-            }
-        }
-    }
-    return maxDegreeForVariable;
-}
-
-Monomial DegreeOnlyMutator::getMonomialWithDegree(AlbaNumber const& degree) const {
-    Monomial result(1, {{m_variableName, degree}});
-    if (degree == 0) {
-        result = Monomial(1, {});
-    }
-    return result;
 }
 
 }  // namespace alba::algebra

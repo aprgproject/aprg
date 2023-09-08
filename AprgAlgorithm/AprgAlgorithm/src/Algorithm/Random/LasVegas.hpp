@@ -3,11 +3,8 @@
 #include <functional>
 
 namespace alba::algorithm {
-
 using LasVegasAlgorithm = std::function<void(void)>;
-
 inline void performALasVegasAlgorithm(LasVegasAlgorithm const& lasVegasAlgorithm) { lasVegasAlgorithm(); }
-
 }  // namespace alba::algorithm
 
 // A Las Vegas algorithm is a randomized algorithm that always gives the correct answer,

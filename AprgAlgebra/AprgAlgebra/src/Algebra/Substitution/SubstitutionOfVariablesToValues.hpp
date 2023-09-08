@@ -10,16 +10,14 @@ using VariableValuePair = std::pair<std::string, AlbaNumber>;
 
 class SubstitutionOfVariablesToValues {
 public:
+    explicit SubstitutionOfVariablesToValues(VariablesToValuesMap const& variablesWithValues);
     SubstitutionOfVariablesToValues();
     SubstitutionOfVariablesToValues(std::initializer_list<VariableValuePair> const& variablesWithValues);
-    explicit SubstitutionOfVariablesToValues(VariablesToValuesMap const& variablesWithValues);
-
     [[nodiscard]] bool isEmpty() const;
     [[nodiscard]] bool isVariableFound(std::string const& variable) const;
     [[nodiscard]] int getSize() const;
     [[nodiscard]] AlbaNumber getValueForVariable(std::string const& variable) const;
     [[nodiscard]] VariablesToValuesMap const& getVariableToValuesMap() const;
-
     [[nodiscard]] Term performSubstitutionTo(Variable const& variable) const;
     [[nodiscard]] Term performSubstitutionTo(Monomial const& monomial) const;
     [[nodiscard]] Term performSubstitutionTo(Polynomial const& polynomial) const;
@@ -27,12 +25,10 @@ public:
     [[nodiscard]] Term performSubstitutionTo(Function const& functionObject) const;
     [[nodiscard]] Term performSubstitutionTo(Term const& term) const;
     [[nodiscard]] Equation performSubstitutionTo(Equation const& equation) const;
-
     [[nodiscard]] Monomial performSubstitutionForMonomial(Monomial const& monomial) const;
     [[nodiscard]] Polynomial performSubstitutionForPolynomial(Polynomial const& polynomial) const;
     [[nodiscard]] Expression performSubstitutionForExpression(Expression const& expression) const;
     [[nodiscard]] Function performSubstitutionForFunction(Function const& functionObject) const;
-
     void putVariablesWithValues(std::initializer_list<VariableValuePair> const& variablesWithValues);
     void putVariablesWithValues(VariablesToValuesMap const& variablesWithValues);
     void putVariableWithValue(std::string const& variable, AlbaNumber const& value);

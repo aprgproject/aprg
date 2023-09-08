@@ -14,7 +14,6 @@ public:
     using RootArray = std::array<Object, SIZE>;
     using RootVector = std::vector<Object>;
     using SizeArray = std::array<int, SIZE>;
-
     WeightedQuickUnionWithArray() : m_relativeRoots(), m_sizesOfRoots() { initialize(); }
 
     [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
@@ -32,6 +31,9 @@ public:
         }
         return currentRoot;
     }
+
+    [[nodiscard]] RootArray const& getRelativeRootArray() const { return m_relativeRoots; }
+    [[nodiscard]] SizeArray const& getSizesOfRootsArray() const { return m_sizesOfRoots; }
 
     Object getRootWithPathCompressionOnePass(Object const& object) {
         // no longer const
@@ -70,10 +72,6 @@ public:
             connectRootsBasedOnSize(root2, root1);
         }
     }
-
-    [[nodiscard]] RootArray const& getRelativeRootArray() const { return m_relativeRoots; }
-
-    [[nodiscard]] SizeArray const& getSizesOfRootsArray() const { return m_sizesOfRoots; }
 
 private:
     void initialize() {

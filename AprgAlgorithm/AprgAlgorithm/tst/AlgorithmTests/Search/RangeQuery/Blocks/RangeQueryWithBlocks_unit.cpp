@@ -191,7 +191,6 @@ TEST(RangeQueryWithBlocksTest, SquareRootSizeExampleWorks) {
     // the sum query takes O(sqrt(n)) time. The purpose of the block size sqrt(n) is that it balances two things:
     // -> the array is divided into sqrt(n) blocks, each of which contains sqrt(n) elements.
     // So all operations take O(sqrt(n)) time.
-
     ValuesForTest values{5, 8, 6, 3, 2, 5, 2, 6, 7, 1, 7, 5, 6, 2, 6, 2};
     RangeQueryForTest sumRangeQuery(values, 4, plusForARangeOfValues, plusForARangeOfBlockValues);
 

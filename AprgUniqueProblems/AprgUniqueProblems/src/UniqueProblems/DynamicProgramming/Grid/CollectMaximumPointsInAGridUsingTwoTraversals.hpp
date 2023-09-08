@@ -10,14 +10,12 @@ public:
     using Value = int;
     using ValueGrid = matrix::AlbaMatrix<Value>;
     using ValueGrids = std::vector<ValueGrid>;
-    static constexpr Value INVALID_COUNT = std::numeric_limits<Value>::max();
-    static constexpr Value UNUSED_COUNT = INVALID_COUNT - 1;
-
     explicit CollectMaximumPointsInAGridUsingTwoTraversals(ValueGrid const& inputGrid);
-
+    static constexpr Value INVALID_COUNT = std::numeric_limits<Value>::max();
     [[nodiscard]] Value getMaximumPointsUsingNaiveRecursion() const;
     [[nodiscard]] Value getMaximumPointsUsingMemoizationDP() const;
     [[nodiscard]] Value getMaximumPointsUsingIterativeDP() const;
+    static constexpr Value UNUSED_COUNT = INVALID_COUNT - 1;
 
 private:
     [[nodiscard]] Value getMaximumPointsUsingNaiveRecursion(

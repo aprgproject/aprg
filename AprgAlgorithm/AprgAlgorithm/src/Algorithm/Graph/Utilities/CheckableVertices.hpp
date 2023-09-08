@@ -12,15 +12,10 @@ class CheckableVertices {
 public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
-
     CheckableVertices() = default;
-
     [[nodiscard]] bool isFound(Vertex const& vertex) const { return m_vertices.find(vertex) != m_vertices.cend(); }
-
     [[nodiscard]] bool isNotFound(Vertex const& vertex) const { return m_vertices.find(vertex) == m_vertices.cend(); }
-
     [[nodiscard]] SetOfVertices const& getVertices() const { return m_vertices; }
-
     void putVertex(Vertex const& vertex) { m_vertices.emplace(vertex); }
 
     void putVertices(Vertices const& vertices) {
@@ -28,7 +23,6 @@ public:
     }
 
     void removeVertex(Vertex const& vertex) { m_vertices.erase(vertex); }
-
     void clear() { m_vertices.clear(); }
 
 private:

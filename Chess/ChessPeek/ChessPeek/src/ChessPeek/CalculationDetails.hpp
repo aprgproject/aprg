@@ -9,17 +9,15 @@ namespace chess {
 namespace ChessPeek {
 
 struct CalculationDetails {
+    bool operator==(CalculationDetails const& other) const;
+    bool operator!=(CalculationDetails const& other) const;
     int depthInPlies;
     Variations variations;
     std::string bestMove;
     std::string responseMoveToPonder;
-
-    bool operator==(CalculationDetails const& other) const;
-    bool operator!=(CalculationDetails const& other) const;
 };
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

@@ -7,7 +7,6 @@ namespace alba {
 // because its required by the standard to change what is displayed.
 // 2) boost.TypeIndex (.pretty_name()) provide accurate information in runtime, but we dont use boost.
 // 3) Print __PRETTY_FUNCTION__ or ALBA_MACROS_GET_PRETTY_FUNCTION it works!
-
 // Examples taken from Scott Meyers lecture.
 // NOTES on type deduction:
 // 1) auto type deduction is the same with template type deduction, except for brace initializer list (automatically
@@ -21,7 +20,6 @@ namespace alba {
 // 3.2) decltype(auto) -> Uses decltype type deduction rules
 // 4) decltype(something) mean the "declared type of something"
 // 4.1) decltype of a name is different from a decltype of an expression (check tests for details)
-
 template <typename TypeToDisplay>
 class DisplayThisType;
 

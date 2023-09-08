@@ -8,7 +8,6 @@ template <typename Values>
 class QuickSelector {
 public:
     using Value = typename Values::value_type;
-
     explicit QuickSelector(PivotType const pivotType) : m_pivotType(pivotType) {}
 
     Value getNthSelect(Values& valuesToSelect, int const selectionIndex) const {

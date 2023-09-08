@@ -12,12 +12,10 @@ public:
     // heaps in nim, and each heap contains some number of sticks. The players move alternately, and on each turn, the
     // player chooses a heap that still contains sticks and removes ANY NUMBER of sticks from it. The winner is the
     // player who removes the last stick.
-
     // The states in nim are of the form [x1, x2,..., xn], where xk denotes the number of sticks in heap k.
     // For example, [10,12,5] is a game where there are three heaps with 10, 12 and 5 sticks.
     // The state [0,0,...,0] is a losing state, because it is not possible to remove any sticks, and this is always the
     // final state.
-
     static GameState getGameState(NimState const& nimState);
     static GameState getGameState(NimHeapSize const nimSum);
     static NimState getOptimalNextState(NimState const& nimState);

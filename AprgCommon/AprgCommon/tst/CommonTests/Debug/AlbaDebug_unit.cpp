@@ -58,7 +58,6 @@ namespace {
 class SampleClass {
 public:
     SampleClass(int const parameter1, int const parameter2) : m_parameter1(parameter1), m_parameter2(parameter2) {}
-
     [[nodiscard]] int getSum() const { return m_parameter1 + m_parameter2; }
 
     // Note that "friend" keyword is added here.

@@ -27,9 +27,8 @@ public:
     [[nodiscard]] std::optional<double> calculateZFromXAndY(double const x, double const y) const;
 
 private:
-    friend std::ostream& operator<<(std::ostream& out, Plane const& plane);
-
     void calculateDCoefficientUsingCoefficientsABCAndAPoint(Point const& first);
+    friend std::ostream& operator<<(std::ostream& out, Plane const& plane);
     double m_aCoefficient;  // form: a*x + b*y + c*z + d = 0
     double m_bCoefficient;  // form: a*x + b*y + c*z + d = 0
     double m_cCoefficient;  // form: a*x + b*y + c*z + d = 0

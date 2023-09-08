@@ -46,7 +46,6 @@ bool isSymmetricOnOrigin(Equation const& equation) {
 }
 
 bool isEqual(Term const& leftTerm, Term const& rightTerm) { return leftTerm == rightTerm; }
-
 bool isNotEqual(Term const& leftTerm, Term const& rightTerm) { return leftTerm != rightTerm; }
 
 bool isLessThan(Term const& leftTerm, Term const& rightTerm) {

@@ -33,7 +33,6 @@ TEST(ScreenMonitoringTest, DISABLED_ScreenCaptureCanBeSavedAsBitmap) {
 }
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

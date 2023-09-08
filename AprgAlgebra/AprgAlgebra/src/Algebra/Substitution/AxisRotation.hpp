@@ -8,7 +8,6 @@ namespace alba::algebra {
 class AxisRotation {
 public:
     AxisRotation(std::string const& xName, std::string const& yName, double const angle, bool const doRotationBack);
-
     Term rotateTermByAngle(Term const& term);
     Term rotateConstantByAngle(Constant const& constant);
     Term rotateVariableByAngle(Variable const& variable);

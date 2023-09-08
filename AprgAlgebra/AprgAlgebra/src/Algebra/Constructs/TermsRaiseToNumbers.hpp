@@ -6,10 +6,11 @@
 namespace alba::algebra {
 
 using TermsRaiseToNumbersBase = TermsRaiseToExponents<AlbaNumber, TermRaiseToANumber>;
+
 class TermsRaiseToNumbers : public TermsRaiseToNumbersBase {
 public:
-    TermsRaiseToNumbers();
     explicit TermsRaiseToNumbers(BaseToExponentMap const& baseToExponentMap);
+    TermsRaiseToNumbers();
 };
 
 }  // namespace alba::algebra

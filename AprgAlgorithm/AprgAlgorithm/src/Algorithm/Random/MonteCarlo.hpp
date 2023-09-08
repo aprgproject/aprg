@@ -3,11 +3,8 @@
 #include <functional>
 
 namespace alba::algorithm {
-
 using MonteCarloAlgorithm = std::function<bool(void)>;
-
 inline void performAMonteCarloAlgorithm(MonteCarloAlgorithm const& monteCarloAlgorithm) { monteCarloAlgorithm(); }
-
 }  // namespace alba::algorithm
 
 // A Monte Carlo algorithm is a randomized algorithm that may sometimes give a wrong answer.

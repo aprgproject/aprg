@@ -18,20 +18,16 @@ bool Ellipsoid::operator==(Ellipsoid const& ellipsoid) const {
 
 bool Ellipsoid::operator!=(Ellipsoid const& ellipsoid) const { return !((*this) == ellipsoid); }
 
-Point Ellipsoid::getCenter() const { return m_center; }
-
-double Ellipsoid::getAValue() const { return m_aValue; }
-
-double Ellipsoid::getBValue() const { return m_bValue; }
-
-double Ellipsoid::getCValue() const { return m_cValue; }
-
 bool Ellipsoid::isInside(Point const& point) const {
     return (pow((point.getX() - m_center.getX()) / m_aValue, 2)) +
                (pow((point.getY() - m_center.getY()) / m_bValue, 2)) +
                (pow((point.getZ() - m_center.getZ()) / m_cValue, 2)) <=
            1;
 }
+
+double Ellipsoid::getAValue() const { return m_aValue; }
+double Ellipsoid::getBValue() const { return m_bValue; }
+double Ellipsoid::getCValue() const { return m_cValue; }
 
 double Ellipsoid::calculateXFromYAndZ(double const y, double const z, double const signOfRoot) const {
     return pow(1 - pow((y - m_center.getY()) / m_bValue, 2) - pow((z - m_center.getZ()) / m_cValue, 2), 0.5) *
@@ -50,6 +46,8 @@ double Ellipsoid::calculateZFromXAndY(double const x, double const y, double con
                signOfRoot * m_cValue +
            m_center.getZ();
 }
+
+Point Ellipsoid::getCenter() const { return m_center; }
 
 ostream& operator<<(ostream& out, Ellipsoid const& ellipsoid) {
     out << "(center: " << ellipsoid.m_center << " a: " << ellipsoid.m_aValue << " b: " << ellipsoid.m_bValue

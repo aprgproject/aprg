@@ -14,11 +14,11 @@ template <typename Count>
 class HuffmanCompression {
 public:
     static constexpr int RADIX = 256;
-
     using Characters = std::vector<char>;
     using HuffmanCode = std::vector<bool>;
     using FrequencyOfEachCharacter = std::array<Count, RADIX>;
     using HuffmanCodeTable = std::array<HuffmanCode, RADIX>;
+
     struct CharacterFrequency {
         CharacterFrequency(
             char const characterAsParameter, Count const frequencyAsParameter, bool const isProritizedAsParameter)
@@ -42,8 +42,10 @@ public:
         Count frequency;
         bool isProritized;
     };
+
     struct TrieNode;
     using TrieNodeUniquePointer = std::unique_ptr<TrieNode>;
+
     struct TrieNode {
         TrieNode(
             char const characterAsParameter, TrieNodeUniquePointer&& leftAsParameter,
@@ -104,57 +106,6 @@ private:
         return frequency;
     }
 
-    void writeHuffmanCodes(
-        AlbaStreamBitWriter& writer, Characters const& wholeInput, HuffmanCodeTable const& huffmanCodeTable) {
-        for (Count i = 0; i < static_cast<Count>(wholeInput.size()); ++i) {
-            HuffmanCode const& huffmanCode(huffmanCodeTable[wholeInput[i]]);
-            for (bool const b : huffmanCode) {
-                writer.writeBoolData(b);
-            }
-        }
-    }
-
-    void expandAllCharacters(
-        AlbaStreamBitReader& reader, AlbaStreamBitWriter& writer, TrieNodeUniquePointer const& root,
-        Count const lengthOfString) {
-        for (Count i = 0; i < lengthOfString; ++i) {
-            expandOneCharacterBasedFromTrieAndCode(reader, writer, root);
-        }
-    }
-
-    void expandOneCharacterBasedFromTrieAndCode(
-        AlbaStreamBitReader& reader, AlbaStreamBitWriter& writer, TrieNodeUniquePointer const& root) {
-        TrieNode const* currentNodePointer(root.get());
-        while (!currentNodePointer->isLeaf()) {
-            bool bit(reader.readBoolData());
-            if (!reader.getInputStream().eof()) {
-                if (bit) {
-                    // if one, go to the right
-                    currentNodePointer = currentNodePointer->right.get();
-                } else {
-                    // if zero, go to the left
-                    currentNodePointer = currentNodePointer->left.get();
-                }
-            } else {
-                break;
-            }
-        }
-        writer.writeCharData(currentNodePointer->character);
-    }
-
-    void writeTrie(AlbaStreamBitWriter& writer, TrieNodeUniquePointer const& nodePointer) {
-        if (nodePointer) {
-            if (nodePointer->isLeaf()) {
-                writer.writeBoolData(true);
-                writer.writeCharData(nodePointer->character);
-            } else {
-                writer.writeBoolData(false);
-                writeTrie(writer, nodePointer->left);
-                writeTrie(writer, nodePointer->right);
-            }
-        }
-    }
-
     TrieNodeUniquePointer readTrie(AlbaStreamBitReader& reader) {
         TrieNodeUniquePointer result;
         bool bit(reader.readBoolData());
@@ -212,6 +163,57 @@ private:
         HuffmanCodeTable result{};
         buildHuffmanCodeTableFromTrie(result, root, {});
         return result;
+    }
+
+    void writeHuffmanCodes(
+        AlbaStreamBitWriter& writer, Characters const& wholeInput, HuffmanCodeTable const& huffmanCodeTable) {
+        for (Count i = 0; i < static_cast<Count>(wholeInput.size()); ++i) {
+            HuffmanCode const& huffmanCode(huffmanCodeTable[wholeInput[i]]);
+            for (bool const b : huffmanCode) {
+                writer.writeBoolData(b);
+            }
+        }
+    }
+
+    void expandAllCharacters(
+        AlbaStreamBitReader& reader, AlbaStreamBitWriter& writer, TrieNodeUniquePointer const& root,
+        Count const lengthOfString) {
+        for (Count i = 0; i < lengthOfString; ++i) {
+            expandOneCharacterBasedFromTrieAndCode(reader, writer, root);
+        }
+    }
+
+    void expandOneCharacterBasedFromTrieAndCode(
+        AlbaStreamBitReader& reader, AlbaStreamBitWriter& writer, TrieNodeUniquePointer const& root) {
+        TrieNode const* currentNodePointer(root.get());
+        while (!currentNodePointer->isLeaf()) {
+            bool bit(reader.readBoolData());
+            if (!reader.getInputStream().eof()) {
+                if (bit) {
+                    // if one, go to the right
+                    currentNodePointer = currentNodePointer->right.get();
+                } else {
+                    // if zero, go to the left
+                    currentNodePointer = currentNodePointer->left.get();
+                }
+            } else {
+                break;
+            }
+        }
+        writer.writeCharData(currentNodePointer->character);
+    }
+
+    void writeTrie(AlbaStreamBitWriter& writer, TrieNodeUniquePointer const& nodePointer) {
+        if (nodePointer) {
+            if (nodePointer->isLeaf()) {
+                writer.writeBoolData(true);
+                writer.writeCharData(nodePointer->character);
+            } else {
+                writer.writeBoolData(false);
+                writeTrie(writer, nodePointer->left);
+                writeTrie(writer, nodePointer->right);
+            }
+        }
     }
 
     void buildHuffmanCodeTableFromTrie(

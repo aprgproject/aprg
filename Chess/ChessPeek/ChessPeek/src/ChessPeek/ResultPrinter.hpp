@@ -24,6 +24,7 @@ public:
         int engineScore;
         HumanScoreGenerator::Score humanScore;
     };
+
     using NextMoves = std::vector<NextMove>;
 
     struct MovesSequence {
@@ -38,6 +39,7 @@ public:
         std::string nameOfLineInBook;
         int winningPercentageInBook;
     };
+
     using BookMoves = std::vector<BookMove>;
 
     struct MovesToPrint {
@@ -47,11 +49,10 @@ public:
         MovesSequence bestLine;
         MovesSequence mostHumanLine;
     };
-    using ScorePair = std::pair<int, int>;
 
+    using ScorePair = std::pair<int, int>;
     ResultPrinter() = delete;
     ResultPrinter(CalculationDetails const& calculationDetails, BoardWithContext const& engineBoard, Book const& book);
-
     void print();
 
 private:
@@ -59,40 +60,22 @@ private:
     void printMovesGrids(MovesToPrint const& movesToPrint) const;
     template <typename GenericMoves>
     void printARowOfNextMoves(GenericMoves const& genericMoves, int const startIndex) const;
+
     template <typename GenericMoves>
     void setNextMovesOnGrid(
         DisplayTable& grid, GenericMoves const& genericMoves, int const startIndex, int const rowSize) const;
-    void printARowOfMovesSequence(MovesSequence const& movesSequence) const;
-    void setMovesSequenceOnGrid(DisplayTable& grid, MovesSequence const& movesSequence, int const rowSize) const;
 
-    void printHeadersForNextMoves(
-        NextMoves const& nextMoves, int const startIndex, stringHelper::strings const& suffixHeaders) const;
-    void printHeadersForBookMoves(BookMoves const& bookMoves) const;
-    void printHeadersForBestLine(MovesSequence const& movesSequence, stringHelper::strings const& suffixHeaders) const;
-    void printHeaders(
-        stringHelper::strings const& prefixHeaders, stringHelper::strings const& suffixHeaders,
-        int const rowSize) const;
-    void printHorizontalBorder() const;
-    void setSeparatorsOnGrid(DisplayTable& grid, int const xOffset) const;
-    void setBoardOnGrid(DisplayTable& grid, Board const& board, int const xOffset) const;
-    void setMoveOnGrid(
-        DisplayTable& grid, Board const& board, Move const& move, int const xOffset, int const moveNumber,
-        std::optional<char> const& firstChar) const;
-
+    int getNumberOfColumnsOfGrid(int const numberOfBoards) const;
+    int getHorizontalBorderSize(int const numberOfBoards) const;
+    int getRowSizeForHalfMoves(int const numberOfHalfMoves) const;
+    int getRowSizeForFullMoves(int const numberOfFullMoves) const;
     BookMoves getMovesFromBook() const;
-    void fillMovesFromBook(BookMoves& bookMoves) const;
     BookMove createBookMove(
         Move const& move, Book::LineDetail const& lineDetail, Book::MoveDetail const& bookMoveDetail) const;
     std::string getNameOfBookMove(Move const& move, Book::LineDetail const& lineDetail) const;
     NextMoves getNextMovesFromCalculation() const;
-    void fillNextMovesFromCalculation(NextMoves& nextMoves) const;
-    void humanizeMoves(NextMoves& nextMoves) const;
-    void sortForMoreHumanMoves(NextMoves& nextMoves) const;
-    void removeTooManyPawnMoves(NextMoves& nextMoves) const;
     NextMove createNextMove(Move const& move, Variation const& variation) const;
     MovesSequence getMovesSequenceFromMoveString(std::string const& moveString) const;
-    void fillMovesSequenceFromVariation(MovesSequence& result, Variation const& variation) const;
-
     stringHelper::strings getNextMovesString(NextMoves const& nextMoves, int const startIndex) const;
     stringHelper::strings getBookMovesString(BookMoves const& bookMoves) const;
     std::string getDisplayableString(NextMove const& nextMove) const;
@@ -106,11 +89,31 @@ private:
         Piece const& piece, int const moveNumber, std::optional<char> const& firstChar) const;
     std::optional<char> getFirstCharOfABoardCell(bool const isCertainPreMove, bool const isPossiblePreMove) const;
     ScorePair getBestAndWorstScores(Variations const& variations) const;
-    int getNumberOfColumnsOfGrid(int const numberOfBoards) const;
-    int getHorizontalBorderSize(int const numberOfBoards) const;
-    int getRowSizeForHalfMoves(int const numberOfHalfMoves) const;
-    int getRowSizeForFullMoves(int const numberOfFullMoves) const;
+    void printARowOfMovesSequence(MovesSequence const& movesSequence) const;
+    void setMovesSequenceOnGrid(DisplayTable& grid, MovesSequence const& movesSequence, int const rowSize) const;
+    void printHeadersForNextMoves(
+        NextMoves const& nextMoves, int const startIndex, stringHelper::strings const& suffixHeaders) const;
+    void printHeadersForBookMoves(BookMoves const& bookMoves) const;
+    void printHeadersForBestLine(MovesSequence const& movesSequence, stringHelper::strings const& suffixHeaders) const;
 
+    void printHeaders(
+        stringHelper::strings const& prefixHeaders, stringHelper::strings const& suffixHeaders,
+        int const rowSize) const;
+
+    void printHorizontalBorder() const;
+    void setSeparatorsOnGrid(DisplayTable& grid, int const xOffset) const;
+    void setBoardOnGrid(DisplayTable& grid, Board const& board, int const xOffset) const;
+
+    void setMoveOnGrid(
+        DisplayTable& grid, Board const& board, Move const& move, int const xOffset, int const moveNumber,
+        std::optional<char> const& firstChar) const;
+
+    void fillMovesFromBook(BookMoves& bookMoves) const;
+    void fillNextMovesFromCalculation(NextMoves& nextMoves) const;
+    void humanizeMoves(NextMoves& nextMoves) const;
+    void sortForMoreHumanMoves(NextMoves& nextMoves) const;
+    void removeTooManyPawnMoves(NextMoves& nextMoves) const;
+    void fillMovesSequenceFromVariation(MovesSequence& result, Variation const& variation) const;
     CalculationDetails const& m_calculationDetails;
     BoardWithContext const& m_engineBoardWithContext;
     Book const& m_book;
@@ -120,7 +123,6 @@ private:
 };
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

@@ -19,7 +19,7 @@ struct AlbaFundamentalOperationsCounts : public AlbaSingleton<AlbaFundamentalOpe
         size_t moveConstructionCount;
         size_t moveAssignmentCount;
     };
-    void resetCounts() { counts = {}; }
+
     [[nodiscard]] std::string getReport() const {
         std::stringstream outputStream;
         outputStream << "userConstructionCount: " << counts.userConstructionCount;
@@ -31,6 +31,8 @@ struct AlbaFundamentalOperationsCounts : public AlbaSingleton<AlbaFundamentalOpe
         outputStream << " moveAssignmentCount: " << counts.moveAssignmentCount;
         return outputStream.str();
     }
+
+    void resetCounts() { counts = {}; }
     Counts counts;
 };
 
@@ -40,7 +42,6 @@ public:
 #define COUNTS AlbaFundamentalOperationsCounts<TypeToShadow>::getInstance().counts
 
     // NOTE: COMMENT OUT operation if not needed
-
     template <typename... Params>
     explicit AlbaFundamentalOperationsCounter(Params&&... params) : TypeToShadow(std::forward<Params>(params)...) {
         // enable_if for isConstructible is not used here, because it still cause compiler error when not used
@@ -63,6 +64,12 @@ public:
         ++COUNTS.copyConstructionCount;
     }
 
+    AlbaFundamentalOperationsCounter(AlbaFundamentalOperationsCounter&& parameter) noexcept
+        : std::enable_if_t<typeHelper::isMoveConstructible<TypeToShadow>(), TypeToShadow>(
+              static_cast<TypeToShadow&&>(parameter)) {
+        ++COUNTS.moveConstructionCount;
+    }
+
     AlbaFundamentalOperationsCounter& operator=(AlbaFundamentalOperationsCounter const& parameter) {
         if (this != &parameter) {
             using EnabledTypeToShadow = std::enable_if_t<typeHelper::isCopyAssignable<TypeToShadow>(), TypeToShadow>;
@@ -70,12 +77,6 @@ public:
             ++COUNTS.copyAssignmentCount;
         }
         return *this;
-    }
-
-    AlbaFundamentalOperationsCounter(AlbaFundamentalOperationsCounter&& parameter) noexcept
-        : std::enable_if_t<typeHelper::isMoveConstructible<TypeToShadow>(), TypeToShadow>(
-              static_cast<TypeToShadow&&>(parameter)) {
-        ++COUNTS.moveConstructionCount;
     }
 
     AlbaFundamentalOperationsCounter& operator=(AlbaFundamentalOperationsCounter&& parameter) noexcept {

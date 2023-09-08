@@ -10,8 +10,6 @@ namespace alba {
 
 namespace booleanAlgebra::Simplification {
 
-SimplificationOfExpression::SimplificationOfExpression() = default;
-
 SimplificationOfExpression::SimplificationOfExpression(Expression const& expression) : m_expression(expression) {}
 
 bool SimplificationOfExpression::shouldSimplifyWithOuterOrAndInnerAnd() {
@@ -49,14 +47,6 @@ void SimplificationOfExpression::simplify() {
 
 bool SimplificationOfExpression::isChangeDetected(Expression const& expression1, Expression const& expression2) {
     return expression1 != expression2;
-}
-
-void SimplificationOfExpression::simplifyExpressionUntilNoChange() {
-    Expression beforeSimplify;
-    do {
-        beforeSimplify = m_expression;
-        simplifyExpression(m_expression);
-    } while (isChangeDetected(beforeSimplify, m_expression));
 }
 
 void SimplificationOfExpression::simplifyExpression(Expression& expression) {
@@ -112,6 +102,16 @@ void SimplificationOfExpression::processAndSaveTermsForOrOperation(
     }
     expression.setTerm(combinedTerm);
 }
+
+void SimplificationOfExpression::simplifyExpressionUntilNoChange() {
+    Expression beforeSimplify;
+    do {
+        beforeSimplify = m_expression;
+        simplifyExpression(m_expression);
+    } while (isChangeDetected(beforeSimplify, m_expression));
+}
+
+SimplificationOfExpression::SimplificationOfExpression() = default;
 
 }  // namespace booleanAlgebra::Simplification
 

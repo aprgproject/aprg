@@ -9,14 +9,12 @@ using namespace std;
 
 namespace alba::TwoDimensions {
 
-Quadrilateral::Quadrilateral() = default;
-
-Quadrilateral::Quadrilateral(Point const& first, Point const& second, Point const& third, Point const& fourth)
-    : QuadrilateralPolygonParent{first, second, third, fourth} {}
-
 Quadrilateral::StartEndOfXAndY::StartEndOfXAndY(
     double const xStartParameter, double const xEndParameter, double const yParameter)
     : xStart(xStartParameter), xEnd(xEndParameter), y(yParameter) {}
+
+Quadrilateral::Quadrilateral(Point const& first, Point const& second, Point const& third, Point const& fourth)
+    : QuadrilateralPolygonParent{first, second, third, fourth} {}
 
 void Quadrilateral::traverseArea(double const interval, TraverseOperation const& traverseOperation) const {
     GroupOfPoints groupOfPointsBasedOnYValue(getGroupOfPointsBasedOnYValue());
@@ -25,33 +23,6 @@ void Quadrilateral::traverseArea(double const interval, TraverseOperation const&
         AlbaValueRange<double> rangeForX(startEndOfXAndY.xStart, startEndOfXAndY.xEnd, interval);
         rangeForX.traverse([&](double const x) { traverseOperation(Point(x, startEndOfXAndY.y)); });
     }
-}
-
-Quadrilateral::GroupOfPoints Quadrilateral::getGroupOfPointsBasedOnYValue() const {
-    GroupOfPoints result;
-    Points vertices(m_vertices.begin(), m_vertices.end());
-    if (!vertices.empty()) {
-        sortPointsInYAndThenX(vertices);
-        int groupOfPointsIndex(0);
-        Point previousPoint(vertices.front());
-        result.emplace_back();
-        result[groupOfPointsIndex].emplace_back(vertices.front());
-        for (auto it = vertices.cbegin() + 1; it != vertices.cend(); ++it) {
-            Point const& currentPoint(*it);
-            if (isAlmostEqual(currentPoint.getY(), previousPoint.getY())) {
-                result[groupOfPointsIndex].emplace_back(currentPoint);
-            } else {
-                result.emplace_back();
-                ++groupOfPointsIndex;
-                result[groupOfPointsIndex].emplace_back(currentPoint);
-            }
-            previousPoint = currentPoint;
-        }
-        for (Points& pointsInResult : result) {
-            sort(pointsInResult.begin(), pointsInResult.end());
-        }
-    }
-    return result;
 }
 
 Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXs(
@@ -258,10 +229,39 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor4Points(
     return result;
 }
 
+Quadrilateral::GroupOfPoints Quadrilateral::getGroupOfPointsBasedOnYValue() const {
+    GroupOfPoints result;
+    Points vertices(m_vertices.begin(), m_vertices.end());
+    if (!vertices.empty()) {
+        sortPointsInYAndThenX(vertices);
+        int groupOfPointsIndex(0);
+        Point previousPoint(vertices.front());
+        result.emplace_back();
+        result[groupOfPointsIndex].emplace_back(vertices.front());
+        for (auto it = vertices.cbegin() + 1; it != vertices.cend(); ++it) {
+            Point const& currentPoint(*it);
+            if (isAlmostEqual(currentPoint.getY(), previousPoint.getY())) {
+                result[groupOfPointsIndex].emplace_back(currentPoint);
+            } else {
+                result.emplace_back();
+                ++groupOfPointsIndex;
+                result[groupOfPointsIndex].emplace_back(currentPoint);
+            }
+            previousPoint = currentPoint;
+        }
+        for (Points& pointsInResult : result) {
+            sort(pointsInResult.begin(), pointsInResult.end());
+        }
+    }
+    return result;
+}
+
 ostream& operator<<(ostream& out, Quadrilateral const& quadrilateral) {
     out << "[" << quadrilateral.m_vertices[0] << "][" << quadrilateral.m_vertices[1] << "]["
         << quadrilateral.m_vertices[2] << "][" << quadrilateral.m_vertices[3] << "]";
     return out;
 }
+
+Quadrilateral::Quadrilateral() = default;
 
 }  // namespace alba::TwoDimensions

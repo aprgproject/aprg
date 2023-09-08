@@ -22,7 +22,6 @@ bool GridPathSearch::shouldStop(int const x, int const y, Movement const previou
     // contain unvisited squares. Optimization 4: The idea of Optimization 3 can be generalized: if the path cannot
     // continue forward but can turn either left or right, the grid splits into two parts that both contain unvisited
     // squares.
-
     if (Movement::Left == previousMovement) {
         if (!canTraverse(x - 1, y) && canTraverse(x, y - 1) && canTraverse(x, y + 1)) {
             return true;
@@ -48,13 +47,11 @@ void GridPathSearch::startSearch() {
     // There are always two paths that are symmetric about the diagonal of the grid after the first step.
     // Hence, we can decide that we always first move one step down (or right), and finally multiply the number of
     // solutions by two.
-
     m_numberOfCompletePaths = 0;
     m_numberTraversedCells = 2;
     m_grid.clearAndResize(m_gridSide, m_gridSide);
     m_grid.setEntry(0, 0, true);
     m_grid.setEntry(1, 0, true);  // lets pick right
-
     search(1, 0, Movement::Right);
 
     m_numberOfCompletePaths *= 2;  // multiply by 2 (optimization 1)
@@ -69,7 +66,6 @@ void GridPathSearch::search(int const x, int const y, Movement const previousMov
     } else if (!isLowerRightCorner(x, y)) {
         // Optimization 2: If the path reaches the lower-right square before it has visited all other squares of the
         // grid, it is clear that it will not be possible to complete the solution.
-
         if (!shouldStop(x, y, previousMovement)) {
             searchNextCoordinate(x - 1, y, Movement::Left);
             searchNextCoordinate(x + 1, y, Movement::Right);

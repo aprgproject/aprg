@@ -6,18 +6,15 @@ namespace Proxy {
 // Subject
 // defines the common interface for RealSubject and Proxy
 // so that a Proxy can be used anywhere a RealSubject is expected
-
 class Subject {
 public:
     virtual ~Subject() = default;
-
     virtual void request() = 0;
     // ...
 };
 
 // Real Subject
 // defines the real object that the proxy represents
-
 class RealSubject : public Subject {
 public:
     void request() override { std::cout << "Real Subject request\n"; }
@@ -26,16 +23,14 @@ public:
 
 // Proxy
 // maintains a reference that lets the proxy access the real subject
-
 class Proxy : public Subject {
 public:
     Proxy() {
         m_subject = std::make_unique<RealSubject>();  // instantiation might happen elsewhere on other examples
     }
-
     void request() override { m_subject->request(); }
-    // ...
 
+    // ...
 private:
     std::unique_ptr<Subject> m_subject;
 };

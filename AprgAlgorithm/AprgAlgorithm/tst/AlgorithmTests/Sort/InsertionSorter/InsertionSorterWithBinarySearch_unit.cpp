@@ -47,7 +47,6 @@ TEST(InsertionSorterWithBinarySearchTest, SortWorksOnCharactersUsingExample2) {
 }
 
 // CANNOT SORT STD::LIST
-
 TEST(InsertionSorterWithBinarySearchTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
     IntegersSorter sorter;
     testSortUsingExample1WithPositiveAndNegativeIntegers<IntegersSorter, Integers>(sorter);

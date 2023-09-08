@@ -12,10 +12,9 @@ class JumpNearestValueSearch {
 public:
     using Index = int;
     using Value = typename Values::value_type;
-    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
-
     explicit JumpNearestValueSearch(Values const& values)  // values can be unsorted
         : m_blockSize(getOptimalSize(values)), m_sortedValues(values) {}
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     Value getNearestValue(Value const& target) {
         Value result{};

@@ -270,19 +270,16 @@ TEST(IntegerStringTest, GetHammingDistanceWorks) {
 
 TEST(IntegerStringTest, GetNumberOfSubStringsWorks) {
     // For example, the substrings of ABCD are A, B, C, D, AB, BC, CD, ABC, BCD and ABCD.
-
     EXPECT_EQ(10U, getNumberOfSubStrings("ABCD"));
 }
 
 TEST(IntegerStringTest, GetNumberOfSubsequencesWorks) {
     // For example, the subsequences of ABCD are A, B, C, D, AB, AC, AD, BC, BD, CD, ABC, ABD, ACD, BCD and ABCD.
-
     EXPECT_EQ(15U, getNumberOfSubsequences("ABCD"));
 }
 
 TEST(IntegerStringTest, GetRotationValueWorks) {
     // For example, the rotations of ABCD are ABCD, BCDA, CDAB and DABC.
-
     EXPECT_EQ(0, getRotationValue("ABCD", "ABCD"));
     EXPECT_EQ(1, getRotationValue("ABCD", "BCDA"));
     EXPECT_EQ(2, getRotationValue("ABCD", "CDAB"));
@@ -294,7 +291,6 @@ TEST(IntegerStringTest, GetRotationValueWorks) {
 
 TEST(IntegerStringTest, GetPeriodValueWorks) {
     // For example, the shortest period of ABCABCA is ABC.
-
     EXPECT_EQ(2, getPeriodValue("ABCABCA", "ABC"));
     EXPECT_EQ(1, getPeriodValue("ABCABCA", "ABCABC"));
     EXPECT_EQ(static_cast<int>(string::npos), getPeriodValue("ABCABCA", ""));
@@ -535,13 +531,14 @@ TEST(GetStringNumberFromStringTest, GetHexEquivalentOfCharacters) {
 }
 
 #if defined(__clang__) || defined(__GNUC__) || defined(__GNUG__)
+
 TEST(GetStringFromStringTest, GetQuotedString) {
     EXPECT_EQ(
         R"("std::quoted() quotes this string and embedded \"quotes\" too")",
         getQuotedString(R"(std::quoted() quotes this string and embedded "quotes" too)"));
 }
-#endif
 
+#endif
 TEST(UtilitiesStringTest, ConstructFileLocator) { EXPECT_FALSE(constructFileLocator(__FILE__, __LINE__).empty()); }
 
 TEST(UtilitiesStringTest, RandomString100Characters) {
@@ -868,7 +865,6 @@ TEST(BooleanStringTest, IsPalindromeTest) {
 
 TEST(BooleanStringTest, IsSubstringTest) {
     // For example, the substrings of ABCD are A, B, C, D, AB, BC, CD, ABC, BCD and ABCD.
-
     EXPECT_TRUE(isSubstring("ABCD", "A"));
     EXPECT_TRUE(isSubstring("ABCD", "B"));
     EXPECT_TRUE(isSubstring("ABCD", "C"));
@@ -885,7 +881,6 @@ TEST(BooleanStringTest, IsSubstringTest) {
 
 TEST(BooleanStringTest, IsSubsequenceTest) {
     // For example, the subsequences of ABCD are A, B, C, D, AB, AC, AD, BC, BD, CD, ABC, ABD, ACD, BCD and ABCD.
-
     EXPECT_TRUE(isSubsequence("ABCD", "A"));
     EXPECT_TRUE(isSubsequence("ABCD", "B"));
     EXPECT_TRUE(isSubsequence("ABCD", "C"));
@@ -908,7 +903,6 @@ TEST(BooleanStringTest, IsSubsequenceTest) {
 
 TEST(BooleanStringTest, IsPrefixTest) {
     // For example, the prefixes of ABCD are A, AB, ABC and ABCD.
-
     EXPECT_TRUE(isPrefix("ABCD", "A"));
     EXPECT_TRUE(isPrefix("ABCD", "AB"));
     EXPECT_TRUE(isPrefix("ABCD", "ABC"));
@@ -920,7 +914,6 @@ TEST(BooleanStringTest, IsPrefixTest) {
 
 TEST(BooleanStringTest, IsSuffixTest) {
     // For example, the suffixes of ABCD are D, CD, BCD and ABCD.
-
     EXPECT_TRUE(isSuffix("ABCD", "D"));
     EXPECT_TRUE(isSuffix("ABCD", "CD"));
     EXPECT_TRUE(isSuffix("ABCD", "BCD"));
@@ -932,7 +925,6 @@ TEST(BooleanStringTest, IsSuffixTest) {
 
 TEST(BooleanStringTest, IsRotationTest) {
     // For example, the rotations of ABCD are ABCD, BCDA, CDAB and DABC.
-
     EXPECT_TRUE(isRotation("ABCD", "ABCD"));
     EXPECT_TRUE(isRotation("ABCD", "BCDA"));
     EXPECT_TRUE(isRotation("ABCD", "CDAB"));
@@ -944,7 +936,6 @@ TEST(BooleanStringTest, IsRotationTest) {
 
 TEST(IntegerStringTest, IsPeriodWorks) {
     // For example, the shortest period of ABCABCA is ABC.
-
     EXPECT_TRUE(isPeriod("ABCABCA", "ABC"));
     EXPECT_TRUE(isPeriod("ABCABCA", "ABCABC"));
     EXPECT_FALSE(isPeriod("ABCABCA", ""));  // null strings are NOT considered
@@ -954,7 +945,6 @@ TEST(IntegerStringTest, IsPeriodWorks) {
 
 TEST(IntegerStringTest, IsBorderWorks) {
     // For example, the borders of ABACABA are A, ABA and ABACABA.
-
     EXPECT_TRUE(isBorder("ABACABA", "A"));
     EXPECT_TRUE(isBorder("ABACABA", "ABA"));
     EXPECT_TRUE(isBorder("ABACABA", ""));

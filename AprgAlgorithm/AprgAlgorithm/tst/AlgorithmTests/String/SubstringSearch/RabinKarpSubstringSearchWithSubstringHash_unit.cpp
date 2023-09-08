@@ -16,7 +16,6 @@ using SubstringSearchForTest = RabinKarpSubstringSearchWithSubstringHash<Index, 
 
 TEST(RabinKarpSubstringSearchWithSubstringHashTest, SearchWorksUsingEmptyStringsAndDoesNotCrash) {
     // SubstringSearchUsingZAlgorithm has unique results of handling empty strings
-
     string emptyString;
     string nonEmptyString("NonEmptyString");
     SubstringSearchForTest emptyStringSearch(emptyString);

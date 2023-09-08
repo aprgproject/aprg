@@ -12,7 +12,6 @@ using namespace std;
 namespace alba::AprgAudio {
 
 // Pre-defined 10-byte representations of common sample rates
-
 unordered_map<int, vector<uint8_t>> const aiffSampleRateTable = {
     {8000, {64, 11, 250, 0, 0, 0, 0, 0, 0, 0}},    {11025, {64, 12, 172, 68, 0, 0, 0, 0, 0, 0}},
     {16000, {64, 12, 250, 0, 0, 0, 0, 0, 0, 0}},   {22050, {64, 13, 172, 68, 0, 0, 0, 0, 0, 0}},
@@ -349,7 +348,6 @@ bool Audio<DataType>::decodeAiffFile(vector<uint8_t>& dataBuffer) {
     int32_t soundDataChunkSize = fourBytesToInt(dataBuffer, s + 4, Endianness::BigEndian);
     int32_t offset = fourBytesToInt(dataBuffer, s + 8, Endianness::BigEndian);
     // int32_t blockSize = fourBytesToInt (dataBuffer, s + 12, Endianness::BigEndian);
-
     int numberBytesPerSample = bitDepth / 8;
     int numberBytesPerFrame = numberBytesPerSample * numberOfChannels;
     int totalNumAudioSampleBytes = numberOfSamplesPerChannel * numberBytesPerFrame;
@@ -467,7 +465,6 @@ bool Audio<DataType>::saveToWaveFile(string const& filePath) {
     addInt16ToFileData(dataBuffer, 1);                                            // audio format = 1
     addInt16ToFileData(dataBuffer, static_cast<int16_t>(getNumberOfChannels()));  // num channels
     addInt32ToFileData(dataBuffer, static_cast<int32_t>(sampleRate));             // sample rate
-
     auto numberBytesPerSecond = static_cast<int32_t>((getNumberOfChannels() * sampleRate * bitDepth) / 8);
     addInt32ToFileData(dataBuffer, numberBytesPerSecond);
 
@@ -551,7 +548,6 @@ bool Audio<DataType>::saveToAiffFile(string const& filePath) {
     addInt32ToFileData(dataBuffer, soundDataChunkSize, Endianness::BigEndian);
     addInt32ToFileData(dataBuffer, 0, Endianness::BigEndian);  // offset
     addInt32ToFileData(dataBuffer, 0, Endianness::BigEndian);  // block size
-
     for (int i = 0; i < getNumberOfSamplesPerChannel(); ++i) {
         for (int channel = 0; channel < getNumberOfChannels(); ++channel) {
             if (bitDepth == 8) {

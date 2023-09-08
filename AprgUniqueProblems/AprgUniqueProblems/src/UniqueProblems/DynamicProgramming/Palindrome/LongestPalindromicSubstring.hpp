@@ -13,15 +13,12 @@ public:
     using Indices = std::vector<Index>;
     using IndexMatrix = matrix::AlbaMatrix<Index>;
     using BoolMatrix = matrix::AlbaMatrix<bool>;
-    static constexpr Index MAX_INDEX = std::numeric_limits<Index>::max();
-
     explicit LongestPalindromicSubstring(std::string const& stringParameter);
-
+    static constexpr Index MAX_INDEX = std::numeric_limits<Index>::max();
     [[nodiscard]] Index getLongestLengthUsingNaiveRecursion() const;
     [[nodiscard]] Index getLongestLengthUsingMemoizationDP() const;
     [[nodiscard]] Index getLongestLengthUsingIterativeDP() const;
     [[nodiscard]] Index getLongestLengthUsingIterativeDPAndSpaceEfficient() const;
-
     [[nodiscard]] std::string getLongestStringUsingIterativeDPAndSpaceEfficient() const;
 
 private:

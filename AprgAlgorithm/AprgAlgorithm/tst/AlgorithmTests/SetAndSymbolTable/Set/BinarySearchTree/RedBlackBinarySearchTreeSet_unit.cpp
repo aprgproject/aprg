@@ -33,19 +33,12 @@ TEST(RedBlackBinarySearchTreeSetTest, GetSizeWorksWhenNotEmpty) {
 }
 
 TEST(RedBlackBinarySearchTreeSetTest, GetWorks) { testGetWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(RedBlackBinarySearchTreeSetTest, GetRankWorks) { testGetRankWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(RedBlackBinarySearchTreeSetTest, GetMinimumWorks) { testGetMinimumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(RedBlackBinarySearchTreeSetTest, GetMaximumWorks) { testGetMaximumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(RedBlackBinarySearchTreeSetTest, SelectAtWorks) { testSelectAtWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(RedBlackBinarySearchTreeSetTest, GetFloorWorks) { testGetFloorWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(RedBlackBinarySearchTreeSetTest, GetCeilingWorks) { testGetCeilingWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(RedBlackBinarySearchTreeSetTest, PutWorks) { testPutWithUnsignedIntAndChar<SetForTest>(); }
 
 TEST(RedBlackBinarySearchTreeSetTest, DeleteBasedOnKeyWorks) {
@@ -53,9 +46,7 @@ TEST(RedBlackBinarySearchTreeSetTest, DeleteBasedOnKeyWorks) {
 }
 
 TEST(RedBlackBinarySearchTreeSetTest, DeleteMinimumWorks) { testDeleteMinimumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(RedBlackBinarySearchTreeSetTest, DeleteMaximumWorks) { testDeleteMaximumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(RedBlackBinarySearchTreeSetTest, GetKeys) { testGetKeysWithUnsignedIntAndChar<SetForTest>(); }
 
 TEST(RedBlackBinarySearchTreeSetTest, GetKeysInRangeWorks) {

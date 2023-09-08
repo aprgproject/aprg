@@ -11,7 +11,6 @@ class UnionFindUsingMap : public BaseUnionFind<Object> {
 public:
     using ConnectionMap =
         std::map<Object, Object>;  // you are using map, so log N but this should to be near constant (boo!)
-
     UnionFindUsingMap() = default;
 
     [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
@@ -34,6 +33,8 @@ public:
         return currentObject;
     }
 
+    [[nodiscard]] ConnectionMap const& getConnectionMap() const { return m_connectionMap; }
+
     void connect(Object const& object1, Object const& object2) override {
         initializeToConnectionMapIfNeeded(object1);
         initializeToConnectionMapIfNeeded(object2);
@@ -41,8 +42,6 @@ public:
         m_connectionMap[object1] = root;
         m_connectionMap[object2] = root;
     }
-
-    [[nodiscard]] ConnectionMap const& getConnectionMap() const { return m_connectionMap; }
 
 private:
     void initializeToConnectionMapIfNeeded(Object const& object) { m_connectionMap.emplace(object, object); }

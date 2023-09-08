@@ -8,16 +8,12 @@ using namespace std;
 
 namespace alba::soosa {
 
-SoosaConfiguration::SoosaConfiguration() = default;
-
 int SoosaConfiguration::getAcceptableLineDeviationForLineModelInPixels() const {
     return m_acceptableLineDeviationForLineModelInPixels;
 }
 
 double SoosaConfiguration::getRemovalRatioForLineModel() const { return m_removalRatioForLineModel; }
-
 int SoosaConfiguration::getMinimumLineSamples() const { return m_minimumLineSamples; }
-
 double SoosaConfiguration::getBitmapWidthToBarWidthMultiplier() const { return m_bitmapWidthToBarWidthMultiplier; }
 
 double SoosaConfiguration::getLineBarWidthSearchInitialBlackPointsValue() const {
@@ -59,11 +55,8 @@ double SoosaConfiguration::getAcceptableSdOverMeanDeviationForBarHeight() const 
 }
 
 double SoosaConfiguration::getRemovalRatioForBarHeight() const { return m_removalRatioForBarHeight; }
-
 int SoosaConfiguration::getNumberOfChoices() const { return m_numberOfChoices; }
-
 int SoosaConfiguration::getColorIntensityForWhite() const { return m_colorIntensityForWhite; }
-
 double SoosaConfiguration::getBarHeightToDiameterMultiplier() const { return m_barHeightToDiameterMultiplier; }
 
 double SoosaConfiguration::getMinimumPercentageOfBlackPixelsForAFilledCircle() const {
@@ -136,5 +129,7 @@ void SoosaConfiguration::readNamesAndValuesFromFile(string const& filePath) {
         }
     }
 }
+
+SoosaConfiguration::SoosaConfiguration() = default;
 
 }  // namespace alba::soosa

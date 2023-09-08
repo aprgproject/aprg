@@ -10,17 +10,15 @@ public:
     using Unit = int;
     using BooleanMatrix = matrix::AlbaMatrix<bool>;
     using UnitMatrix = matrix::AlbaMatrix<Unit>;
-    static constexpr Unit UNUSED_UNIT = std::numeric_limits<Unit>::max();
-
     explicit MaximumSizeSquareSubMatrixWithAllOnes(BooleanMatrix const& booleanMatrix);
-
+    static constexpr Unit UNUSED_UNIT = std::numeric_limits<Unit>::max();
     [[nodiscard]] Unit getMaximumSquareAreaUsingMemoizationDP() const;
     [[nodiscard]] Unit getMaximumSquareAreaUsingIterativeDP() const;
     [[nodiscard]] Unit getMaximumSquareAreaUsingIterativeDPAndTimeEfficient() const;
 
 private:
-    Unit getMaximumSideUsingMemoizationDP(UnitMatrix& sideMatrix, Index const x, Index const y) const;
     [[nodiscard]] Unit getUnitAt(Index const x, Index const y) const;
+    Unit getMaximumSideUsingMemoizationDP(UnitMatrix& sideMatrix, Index const x, Index const y) const;
     BooleanMatrix const m_booleanMatrix;
 };
 

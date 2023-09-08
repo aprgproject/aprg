@@ -15,7 +15,6 @@ MaximumLengthChainOfPairs::MaximumLengthChainOfPairs(Pairs const& sequence) : m_
 MaximumLengthChainOfPairs::Index MaximumLengthChainOfPairs::getLongestLength() const {
     // Time Complexity: O(n^2)
     // Auxilliary space: O(n)
-
     Index result(0);
     if (!m_sequence.empty()) {
         IndexToIndex subLengths(m_sequence.size(), 1);
@@ -35,7 +34,6 @@ MaximumLengthChainOfPairs::Index MaximumLengthChainOfPairs::getLongestLength() c
 MaximumLengthChainOfPairs::Pairs MaximumLengthChainOfPairs::getLongestSubsequence() const {
     // Time Complexity: O(n^2)
     // Auxilliary space: O(n)
-
     Pairs result;
     if (!m_sequence.empty()) {
         IndexToIndex subLengths(m_sequence.size(), 1);

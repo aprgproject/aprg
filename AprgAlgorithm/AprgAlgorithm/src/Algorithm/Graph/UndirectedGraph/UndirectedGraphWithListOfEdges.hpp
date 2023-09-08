@@ -14,9 +14,7 @@ public:
     using Edge = typename GraphTypes<Vertex>::Edge;
     using Edges = typename GraphTypes<Vertex>::Edges;
     using SetOfEdges = typename GraphTypes<Vertex>::SetOfEdges;
-
     UndirectedGraphWithListOfEdges() = default;
-
     [[nodiscard]] bool isEmpty() const override { return m_edges.empty(); }
 
     [[nodiscard]] bool hasAnyConnection(Vertex const& vertex) const override {
@@ -33,7 +31,6 @@ public:
     }
 
     [[nodiscard]] int getNumberOfVertices() const override { return getVertices().size(); }
-
     [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
 
     [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
@@ -64,6 +61,8 @@ public:
         return result;
     }
 
+    SetOfEdges& getSetOfEdgesReference() { return m_edges; }
+
     void connect(Vertex const& vertex1, Vertex const& vertex2) override {
         if (!isDirectlyConnected(vertex1, vertex2)) {
             ++m_numberOfEdges;
@@ -84,8 +83,6 @@ public:
         m_numberOfEdges = 0;
         m_edges.clear();
     }
-
-    SetOfEdges& getSetOfEdgesReference() { return m_edges; }
 
 protected:
     friend std::ostream& operator<<(std::ostream& out, UndirectedGraphWithListOfEdges const& graph) {

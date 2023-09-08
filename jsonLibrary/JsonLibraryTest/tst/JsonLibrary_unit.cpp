@@ -12,7 +12,6 @@ namespace alba {
 #define JSON_LIBRARY_TESTS_SAMPLE_FILE APRG_DIR R"(\jsonLibrary\FilesForTests\JsonSampleFile.txt)"
 
 // Based from: https://github.com/nlohmann/json#examples
-
 TEST(SampleTest, CreatingJsonObjectsFromJsonLiteralsTest) {
     // Creating json objects from JSON literals
     // Assume you want to create hard-code this literal JSON value in a file, as a json object:
@@ -20,9 +19,7 @@ TEST(SampleTest, CreatingJsonObjectsFromJsonLiteralsTest) {
     //   "pi": 3.141,
     //   "happy": true
     // }
-
     // There are various options:
-
     // Using (raw) string literals and json::parse
     json jsonObject1 = json::parse(R"({ "pi": 3.141, "happy": true })");
 
@@ -59,9 +56,7 @@ TEST(SampleTest, JsonAsFirstClassDataTypeTest) {
     //     "value": 42.99
     //   }
     // }
-
     // With this library, you could write:
-
     // create an empty structure (null)
     json jsonObject1;
 

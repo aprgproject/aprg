@@ -15,7 +15,6 @@ bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingNaiveRecurs
     // -> In the worst case, this solution tries two possibilities (whether to include or exclude) for every element.
     // The problem is in-fact NP-Complete (There is no known polynomial time solution for this problem).
     // Auxiliary Space: O(1)
-
     bool result(false);
     if (!m_inputValues.empty()) {
         result = isPartialSumPossibleUsingNaiveRecursion(m_targetSum, 0);
@@ -26,7 +25,6 @@ bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingNaiveRecurs
 bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingMemoizationDP() const {
     // Time Complexity: O(sum*n) (same as iterative)
     // Auxiliary Space: O(sum*n)
-
     bool result(false);
     if (!m_inputValues.empty()) {
         StateMatrix stateMatrix(m_targetSum + 1, m_inputValues.size() + 1, State::Unused);
@@ -41,7 +39,6 @@ bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingMemoization
 bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingIterativeDP() const {
     // Time Complexity: O(sum*n)
     // Auxiliary Space: O(sum*n)
-
     bool result(false);
     if (!m_inputValues.empty()) {
         BooleanMatrix isPossibleMatrix(m_targetSum + 1, m_inputValues.size() + 1, false);
@@ -68,7 +65,6 @@ bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingIterativeDP
 bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingIterativeDPAndSpaceEfficient() const {
     // Time Complexity: O(sum * n)
     // Auxiliary Space: O(sum)
-
     bool result(false);
     if (!m_inputValues.empty()) {
         Booleans isPartialSumPossible(m_targetSum + 1, false);

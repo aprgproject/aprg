@@ -11,7 +11,6 @@ class MedianOfSmallerSizes {
 public:
     // nth_element might be on larger sizes
     // but this is almost constant on smaller size
-
     using Index = int;
     using Value = typename Values::value_type;
     using MedianValues = std::vector<Value>;  // you need to make it small because vector is used
@@ -36,8 +35,6 @@ public:
         }
     }
 
-    Value getMedian() { return m_sortedValuesInHalf.empty() ? Value{} : getMedianWithoutCheck(); }
-
     [[nodiscard]] Value getSmallerMedian() const {
         return m_sortedValuesInHalf.empty() ? Value{} : getSmallerMedianWithoutCheck();
     }
@@ -46,9 +43,10 @@ public:
         return m_sortedValuesInHalf.empty() ? Value{} : getLargerMedianWithoutCheck();
     }
 
+    Value getMedian() { return m_sortedValuesInHalf.empty() ? Value{} : getMedianWithoutCheck(); }
+
 private:
     [[nodiscard]] Index getMedianSize(Index const size) const { return (size + 2) / 2; }
-
     [[nodiscard]] Index getMedianSizeWithOverFlow(Index const medianSize) const { return medianSize + 1; }
 
     [[nodiscard]] Value getMedianWithoutCheck() const {

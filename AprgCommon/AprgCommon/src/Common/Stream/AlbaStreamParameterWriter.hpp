@@ -11,9 +11,7 @@ namespace alba {
 class AlbaStreamParameterWriter {
 public:
     explicit AlbaStreamParameterWriter(std::ostream& stream);
-
     // rule of zero
-
     void writeData(std::string_view const data) const;
     template <typename TypeToWrite>
     void writeData(TypeToWrite const& data) const;

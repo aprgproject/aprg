@@ -14,16 +14,14 @@ public:
     void mutatePolynomial(Polynomial& polynomial) override;
     void mutateExpression(Expression& expression) override;
     void mutateFunction(Function&) override;
-
     void putVariableWithSign(std::string const& variableName, TermAssociationType const association);
 
 private:
-    Term getTermForMutationOfVariable(Variable const& variable);
     static Term getTermForMutationOfFunction(Function const& functionObject);
+    Term getTermForMutationOfVariable(Variable const& variable);
     void mutateExpressionWithAdditionAndSubtraction(Expression& expression);
     void mutateExpressionWithMultiplicationAndDivision(Expression& expression);
     void mutateExpressionWithRaiseToPower(Expression& expression);
-
     SubstitutionOfVariablesToValues m_substitution;
 };
 

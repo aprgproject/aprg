@@ -62,7 +62,6 @@ bool isSqueezeTheoremSatisfied(
     // possibly A itself, and that f(x) <= g(x) <= h(x) for all x in I for which x != A. Also that the limit for
     // f(x) as it approaches A and limit for h(x) as it approaches A, both exists and are both equal to L
     // Then, the limit of g(x) exists and equal to L as well.
-
     bool result(false);
     Term limitAtLower(simplifyAndGetLimitAtAValue(
         alwaysLowerTermAtInterval, variableName, valueToApproach, LimitAtAValueApproachType::BothSides));
@@ -76,6 +75,27 @@ bool isSqueezeTheoremSatisfied(
         result = limitAtTermInBetween == limitAtLower;
     }
     return result;
+}
+
+bool continueToDifferentiateForLhopitalsRule(
+    Term const& numerator, Term const& denominator, Term const& numeratorValue, Term const& denominatorValue) {
+    AlbaNumber numeratorDegree(getDegree(numerator));
+    AlbaNumber denominatorDegree(getDegree(denominator));
+
+    bool areBothDegreesZero = numeratorDegree == 0 && denominatorDegree == 0;
+    bool areDegreesEitherZeroOrNonZero =
+        (numeratorDegree == 0 && denominatorDegree != 0) || (numeratorDegree != 0 && denominatorDegree == 0);
+    bool areDegreesEitherNonZeroOrInfinite =
+        (numeratorDegree != 0 && denominatorDegree.isPositiveOrNegativeInfinity()) ||
+        (numeratorDegree.isPositiveOrNegativeInfinity() && denominatorDegree != 0);
+    bool continueBasedOnDegrees =
+        areBothDegreesZero || areDegreesEitherZeroOrNonZero || areDegreesEitherNonZeroOrInfinite;
+
+    bool areBothValuesZero = isTheValue(numeratorValue, 0) && isTheValue(denominatorValue, 0);
+    bool areBothValuesInfinite =
+        isPositiveOrNegativeInfinity(numeratorValue) && isPositiveOrNegativeInfinity(denominatorValue);
+    bool continueBasedOnValues = areBothValuesZero || areBothValuesInfinite;
+    return continueBasedOnDegrees && continueBasedOnValues;
 }
 
 AlbaNumber getLimitAtAValueByApproachType(
@@ -243,6 +263,50 @@ Term getTermUsingLhopitalsRule(Term const& term, string const& variableName, Alb
     return newTerm;
 }
 
+Term getLimitAtAValueOrInfinity(Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
+    Term result;
+    if (valueToApproach.isPositiveOrNegativeInfinity()) {
+        result = getLimitAtInfinity(term, variableName, valueToApproach);
+    } else {
+        result = simplifyAndGetLimitAtAValue(term, variableName, valueToApproach, LimitAtAValueApproachType::BothSides);
+    }
+    return result;
+}
+
+Term simplifyAndGetLimitAtAValue(
+    Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
+    LimitAtAValueApproachType const limitApproachType) {
+    Term simplifiedTerm(term);
+    simplifyTermToACommonDenominator(simplifiedTerm);
+    return getLimitAtAValue(simplifiedTerm, variableName, valueToApproach, limitApproachType);
+}
+
+Term getLimitAtInfinity(Term const& term, string const& variableName, AlbaNumber const infinityValue) {
+    LimitsAtInfinity limitsAtInfinity(term, variableName);
+    return limitsAtInfinity.getValueAtInfinity(infinityValue);
+}
+
+Term getObliqueAsymptote(Term const& term) {
+    // oblique asymptote definition
+    // if this true: limit to positive infinity of |f(x)/g(x) - (mx+b)| = 0 for a certain mx+b
+    // then y=mx+b is an oblique asymptote.
+    //
+    // So just divide polynomial over polynomial and get quotient if its a line
+    // If denominator is not constant, then remainder can be discarded
+    Term result;
+    PolynomialOverPolynomialOptional popOptional(createPolynomialOverPolynomialFromTermIfPossible(term));
+    if (popOptional) {
+        if (getMaxDegree(popOptional->getDenominator()) > 0) {
+            PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(popOptional->simplifyAndDivide());
+            Polynomial const& quotient(quotientAndRemainder.quotient);
+            if (hasOnlyASingleVariable(quotient) && AlbaNumber(1) == getMaxDegree(quotient)) {
+                result = Term(quotient);
+            }
+        }
+    }
+    return result;
+}
+
 void calculateTermAndLimitUsingLhopitalsRule(
     Term& newTerm, Term& limitValue, Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
     Differentiation differentiation(variableName);
@@ -274,16 +338,6 @@ void calculateTermAndLimitUsingLhopitalsRule(
     }
 }
 
-Term getLimitAtAValueOrInfinity(Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
-    Term result;
-    if (valueToApproach.isPositiveOrNegativeInfinity()) {
-        result = getLimitAtInfinity(term, variableName, valueToApproach);
-    } else {
-        result = simplifyAndGetLimitAtAValue(term, variableName, valueToApproach, LimitAtAValueApproachType::BothSides);
-    }
-    return result;
-}
-
 Term getLimitAtAValue(
     Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
     LimitAtAValueApproachType const limitApproachType) {
@@ -296,62 +350,6 @@ Term getLimitAtAValue(
         }
     }
     return limitResult;
-}
-
-Term simplifyAndGetLimitAtAValue(
-    Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
-    LimitAtAValueApproachType const limitApproachType) {
-    Term simplifiedTerm(term);
-    simplifyTermToACommonDenominator(simplifiedTerm);
-    return getLimitAtAValue(simplifiedTerm, variableName, valueToApproach, limitApproachType);
-}
-
-Term getLimitAtInfinity(Term const& term, string const& variableName, AlbaNumber const infinityValue) {
-    LimitsAtInfinity limitsAtInfinity(term, variableName);
-    return limitsAtInfinity.getValueAtInfinity(infinityValue);
-}
-
-Term getObliqueAsymptote(Term const& term) {
-    // oblique asymptote definition
-    // if this true: limit to positive infinity of |f(x)/g(x) - (mx+b)| = 0 for a certain mx+b
-    // then y=mx+b is an oblique asymptote.
-    //
-    // So just divide polynomial over polynomial and get quotient if its a line
-    // If denominator is not constant, then remainder can be discarded
-
-    Term result;
-    PolynomialOverPolynomialOptional popOptional(createPolynomialOverPolynomialFromTermIfPossible(term));
-    if (popOptional) {
-        if (getMaxDegree(popOptional->getDenominator()) > 0) {
-            PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(popOptional->simplifyAndDivide());
-            Polynomial const& quotient(quotientAndRemainder.quotient);
-            if (hasOnlyASingleVariable(quotient) && AlbaNumber(1) == getMaxDegree(quotient)) {
-                result = Term(quotient);
-            }
-        }
-    }
-    return result;
-}
-
-bool continueToDifferentiateForLhopitalsRule(
-    Term const& numerator, Term const& denominator, Term const& numeratorValue, Term const& denominatorValue) {
-    AlbaNumber numeratorDegree(getDegree(numerator));
-    AlbaNumber denominatorDegree(getDegree(denominator));
-
-    bool areBothDegreesZero = numeratorDegree == 0 && denominatorDegree == 0;
-    bool areDegreesEitherZeroOrNonZero =
-        (numeratorDegree == 0 && denominatorDegree != 0) || (numeratorDegree != 0 && denominatorDegree == 0);
-    bool areDegreesEitherNonZeroOrInfinite =
-        (numeratorDegree != 0 && denominatorDegree.isPositiveOrNegativeInfinity()) ||
-        (numeratorDegree.isPositiveOrNegativeInfinity() && denominatorDegree != 0);
-    bool continueBasedOnDegrees =
-        areBothDegreesZero || areDegreesEitherZeroOrNonZero || areDegreesEitherNonZeroOrInfinite;
-
-    bool areBothValuesZero = isTheValue(numeratorValue, 0) && isTheValue(denominatorValue, 0);
-    bool areBothValuesInfinite =
-        isPositiveOrNegativeInfinity(numeratorValue) && isPositiveOrNegativeInfinity(denominatorValue);
-    bool continueBasedOnValues = areBothValuesZero || areBothValuesInfinite;
-    return continueBasedOnDegrees && continueBasedOnValues;
 }
 
 }  // namespace alba::algebra

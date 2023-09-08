@@ -6,7 +6,6 @@ namespace ChainOfResponsibility {
 // Handler
 // defines an interface for handling requests and
 // optionally implements the successor link
-
 class Handler {
 public:
     virtual ~Handler() = default;
@@ -20,15 +19,14 @@ public:
             m_successorPointer->handleRequest();
         }
     }
-    // ...
 
+    // ...
 private:
     std::unique_ptr<Handler> m_successorPointer;
 };
 
 // Concrete Handlers
 // handle requests they are responsible for
-
 class ConcreteHandler1 : public Handler {
 public:
     static bool canHandle() {
@@ -45,6 +43,7 @@ public:
         }
         // ...
     }
+
     // ...
 };
 

@@ -6,20 +6,16 @@ using namespace std;
 
 namespace alba {
 
-string AlbaGrepStringEvaluatorTerm::s_mainString;
+AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm(string const& stringToFind)
+    : m_type(AlbaGrepStringEvaluatorTermType::StringToFind), m_savedResult(false), m_stringToFind(stringToFind) {}
+AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm(bool const result)
+    : m_type(AlbaGrepStringEvaluatorTermType::BooleanResult), m_savedResult(result) {}
+AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm()
+    : m_type(AlbaGrepStringEvaluatorTermType::Unknown), m_savedResult(false) {}
 
 void AlbaGrepStringEvaluatorTerm::setMainString(std::string const& mainString) {
     s_mainString = stringHelper::getStringWithCapitalLetters(mainString);
 }
-
-AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm()
-    : m_type(AlbaGrepStringEvaluatorTermType::Unknown), m_savedResult(false) {}
-
-AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm(string const& stringToFind)
-    : m_type(AlbaGrepStringEvaluatorTermType::StringToFind), m_savedResult(false), m_stringToFind(stringToFind) {}
-
-AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm(bool const result)
-    : m_type(AlbaGrepStringEvaluatorTermType::BooleanResult), m_savedResult(result) {}
 
 bool AlbaGrepStringEvaluatorTerm::getResult() const {
     bool result(false);
@@ -30,5 +26,7 @@ bool AlbaGrepStringEvaluatorTerm::getResult() const {
     }
     return result;
 }
+
+string AlbaGrepStringEvaluatorTerm::s_mainString;
 
 }  // namespace alba

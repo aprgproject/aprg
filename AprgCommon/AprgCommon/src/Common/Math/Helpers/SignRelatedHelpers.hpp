@@ -40,7 +40,6 @@ inline typename std::make_signed<NumberType>::type convertToSignedThenSubtract(
 
 // pass as const reference
 inline AlbaNumber getAbsoluteValue(AlbaNumber const& value) { return (value < 0) ? value * -1 : value; }
-
 // pass as const reference
 inline AlbaNumber getSign(AlbaNumber const& value) { return (value < 0) ? -1 : 1; }
 

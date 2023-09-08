@@ -13,13 +13,10 @@ public:
     Operator() = default;
     // NOLINTNEXTLINE(google-explicit-constructor,hicpp-explicit-conversions)
     Operator(std::string const& operatingString);
-
     // rule of zero
-
     bool operator==(Operator const& second) const;
     bool operator!=(Operator const& second) const;
     bool operator<(Operator const& second) const;
-
     [[nodiscard]] bool isAddition() const;
     [[nodiscard]] bool isSubtraction() const;
     [[nodiscard]] bool isMultiplication() const;
@@ -29,15 +26,12 @@ public:
     [[nodiscard]] bool isOpeningGroupOperator() const;
     [[nodiscard]] bool isClosingGroupOperator() const;
     [[nodiscard]] bool isSameOperatorInputType(OperatorInputType const operatorInputType) const;
-
     [[nodiscard]] OperatorLevel getOperatorLevel() const;
     [[nodiscard]] std::string getOperatorString() const;
-
     void setOperatorString(std::string const& operatingString);
 
 private:
     friend std::ostream& operator<<(std::ostream& out, Operator const& operatorObject);
-
     std::string m_operatingString;
 };
 

@@ -15,26 +15,20 @@ using namespace std;
 
 namespace alba::algebra {
 
-SolutionSet::SolutionSet() = default;
-
 bool SolutionSet::isEmpty() const {
     return m_acceptedValues.empty() && m_rejectedValues.empty() && m_acceptedIntervals.empty();
 }
 
 AlbaNumbers const& SolutionSet::getAcceptedValues() const { return m_acceptedValues; }
-
 AlbaNumbers const& SolutionSet::getRejectedValues() const { return m_rejectedValues; }
-
 AlbaNumberIntervals const& SolutionSet::getAcceptedIntervals() const { return m_acceptedIntervals; }
-
 void SolutionSet::addAcceptedValue(AlbaNumber const& value) { m_acceptedValues.emplace_back(value); }
+void SolutionSet::addRejectedValue(AlbaNumber const& value) { m_rejectedValues.emplace_back(value); }
 
 void SolutionSet::addAcceptedValues(AlbaNumbers const& values) {
     m_acceptedValues.reserve(m_acceptedValues.size() + values.size());
     copy(values.cbegin(), values.cend(), back_inserter(m_acceptedValues));
 }
-
-void SolutionSet::addRejectedValue(AlbaNumber const& value) { m_rejectedValues.emplace_back(value); }
 
 void SolutionSet::addRejectedValues(AlbaNumbers const& values) {
     m_rejectedValues.reserve(m_rejectedValues.size() + values.size());
@@ -141,5 +135,7 @@ ostream& operator<<(ostream& out, SolutionSet const& solutionSet) {
     printParameterWithName(out, "AcceptedIntervals:", solutionSet.m_acceptedIntervals);
     return out;
 }
+
+SolutionSet::SolutionSet() = default;
 
 }  // namespace alba::algebra

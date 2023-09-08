@@ -8,7 +8,6 @@ using namespace std;
 namespace alba {
 
 AlbaStreamBitWriter::AlbaStreamBitWriter(ostream& stream) : m_stream(stream) {}
-
 AlbaStreamBitWriter::~AlbaStreamBitWriter() { transferAllToStream(); }
 
 void AlbaStreamBitWriter::writeBoolData(bool const data) {
@@ -40,11 +39,8 @@ void AlbaStreamBitWriter::writeHexDigitData(string_view const hexDigitsData) {
 }
 
 ostream& AlbaStreamBitWriter::getOutputStream() { return m_stream; }
-
 void AlbaStreamBitWriter::flush() { transferAllToStream(); }
-
 void AlbaStreamBitWriter::putBoolDataToBuffer(bool const boolValue) { m_bitBuffer.emplace_back(boolValue); }
-
 void AlbaStreamBitWriter::putCharDataToBuffer(char const data) { putBigEndianNumberDataInBuffer<char>(data); }
 
 void AlbaStreamBitWriter::transferBytesAsMuchAsPossibleToStream() {

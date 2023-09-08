@@ -7,7 +7,6 @@ namespace alba::algebra {
 class NumberOfTermsRetriever final : public BaseRetriever {
 public:
     NumberOfTermsRetriever();
-
     [[nodiscard]] int getNumberOfTerms() const;
     void retrieveFromConstant(Constant const& constant) override;
     void retrieveFromVariable(Variable const& variable) override;

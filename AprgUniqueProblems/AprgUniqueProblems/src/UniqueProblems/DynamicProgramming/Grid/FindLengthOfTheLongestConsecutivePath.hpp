@@ -11,10 +11,8 @@ public:
     using Count = int;
     using ValueGrid = matrix::AlbaMatrix<Value>;
     using CountGrid = matrix::AlbaMatrix<Count>;
-    static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
-
     explicit FindLengthOfTheLongestConsecutivePath(ValueGrid const& inputGrid);
-
+    static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
     [[nodiscard]] Count getLongestLengthUsingNaiveRecursion() const;
     [[nodiscard]] Count getLongestLengthUsingMemoizationDP() const;
     [[nodiscard]] Count getLongestLengthStartingAtUsingNaiveRecursion(Index const x, Index const y) const;

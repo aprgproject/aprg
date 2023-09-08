@@ -5,24 +5,20 @@
 namespace alba::algebra {
 
 using NumberCheckingCondition = std::function<bool(AlbaNumber const& number)>;
-
 bool isValueSatisfyTheCondition(Term const& term, NumberCheckingCondition const& condition);
 bool isValueSatisfyTheCondition(Constant const& constant, NumberCheckingCondition const& condition);
 bool isValueSatisfyTheCondition(Monomial const& monomial, NumberCheckingCondition const& condition);
 bool isValueSatisfyTheCondition(Polynomial const& polynomial, NumberCheckingCondition const& condition);
 bool isValueSatisfyTheCondition(Expression const& expression, NumberCheckingCondition const& condition);
-
 bool doAnyNumbersSatisfyTheCondition(Term const& term, NumberCheckingCondition const& condition);
 bool doAnyNumbersSatisfyTheCondition(Monomial const& monomial, NumberCheckingCondition const& condition);
 bool doAnyNumbersSatisfyTheCondition(Polynomial const& polynomial, NumberCheckingCondition const& condition);
 bool doAnyNumbersSatisfyTheCondition(Expression const& expression, NumberCheckingCondition const& condition);
 bool doAnyNumbersSatisfyTheCondition(Function const& function, NumberCheckingCondition const& condition);
-
 bool willHaveNoEffectOnAdditionOrSubtraction(Term const& term);
 bool willHaveNoEffectOnAdditionOrSubtraction(Expression const& expression);
 bool willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(Term const& term);
 bool willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(Expression const& expression);
-
 bool isTheValue(Term const& term, AlbaNumber const& number);
 bool isTheValue(Constant const& constant, AlbaNumber const& number);
 bool isTheValue(Monomial const& monomial, AlbaNumber const& number);
@@ -46,7 +42,6 @@ bool isANegativeExpression(Expression const& expression);
 bool isIntegerConstant(Term const& term);
 bool isPositiveIntegerConstant(Term const& term);
 bool isARealFiniteConstant(Term const& term);
-
 bool hasDoubleValues(Term const& term);
 bool hasDoubleValues(Monomial const& monomial);
 bool hasDoubleValues(Polynomial const& polynomial);

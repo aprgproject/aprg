@@ -144,9 +144,7 @@ TEST(ComboTest, DifferentiationRelatedRatesConeWaterExampleTest) {
     // A tank is in the form of an inverted cone having an altitude of 16m and a radius of 4m.
     // Water is flowing into the tank at the rate of 2m3/min.
     // How fast is the water level rising when the water is 5m deep?
-
     // Solution: V = (1/3)*pi*r^2*h, 4*r = h -> V = (1/48)*pi*h^3
-
     Term term1ForEquation(Monomial(AlbaNumber::createFraction(1, 48U), {{"pi", 1}, {"h", 3}}));
     Term term2ForEquation(Monomial(1, {{"V", 1}}));
     Equation equation(term1ForEquation, "=", term2ForEquation);

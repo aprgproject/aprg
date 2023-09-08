@@ -19,15 +19,10 @@ public:
     using Keys = std::vector<Key>;
     using EntryUniquePointer = std::unique_ptr<Entry>;
     using EntryPointers = EntryUniquePointer*;
-
     BaseLinearProbingHash() : m_entryPointers(nullptr) { initialize(INITIAL_HASH_TABLE_SIZE); }
-
     // virtual destructor because of virtual functions (vtable exists)
     ~BaseLinearProbingHash() override { deleteAllEntries(); }
-
     [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
-
-    [[nodiscard]] int getSize() const override { return m_size; }
 
     [[nodiscard]] bool doesContain(Key const& key) const override {
         bool result(false);
@@ -41,10 +36,14 @@ public:
         return result;
     }
 
+    [[nodiscard]] int getSize() const override { return m_size; }
+
     [[nodiscard]] int getRank(Key const& key) const override {
         Keys keys(getKeys());
         return OrderedArray::getRank(key, keys);
     }
+
+    [[nodiscard]] int getHashTableSize() const { return m_hashTableSize; }
 
     [[nodiscard]] Key getMinimum() const override {
         Key result{};
@@ -95,28 +94,6 @@ public:
         return OrderedArray::getCeiling(key, keys);
     }
 
-    void deleteBasedOnKey(Key const& key) override {
-        int i(getHash(key));
-        for (; m_entryPointers[i] && m_entryPointers[i]->key != key; incrementHashTableIndexWithWrapAround(i)) {
-            ;
-        }
-        if (m_entryPointers[i] && m_entryPointers[i]->key == key) {
-            deleteEntryOnIndex(i);
-            incrementHashTableIndexWithWrapAround(i);
-            while (m_entryPointers[i]) {
-                Entry entryToReInput(*(m_entryPointers[i]));
-                deleteEntryOnIndex(i);
-                putEntry(entryToReInput);
-                incrementHashTableIndexWithWrapAround(i);
-            }
-            resizeOnDeleteIfNeeded();
-        }
-    }
-
-    void deleteMinimum() override { deleteBasedOnKey(getMinimum()); }
-
-    void deleteMaximum() override { deleteBasedOnKey(getMaximum()); }
-
     [[nodiscard]] Keys getKeys() const override {
         Keys result;
         for (int i = 0; i < m_hashTableSize; ++i) {
@@ -144,10 +121,31 @@ public:
         return result;
     }
 
-    [[nodiscard]] int getHashTableSize() const { return m_hashTableSize; }
+    void deleteBasedOnKey(Key const& key) override {
+        int i(getHash(key));
+        for (; m_entryPointers[i] && m_entryPointers[i]->key != key; incrementHashTableIndexWithWrapAround(i)) {
+            ;
+        }
+        if (m_entryPointers[i] && m_entryPointers[i]->key == key) {
+            deleteEntryOnIndex(i);
+            incrementHashTableIndexWithWrapAround(i);
+            while (m_entryPointers[i]) {
+                Entry entryToReInput(*(m_entryPointers[i]));
+                deleteEntryOnIndex(i);
+                putEntry(entryToReInput);
+                incrementHashTableIndexWithWrapAround(i);
+            }
+            resizeOnDeleteIfNeeded();
+        }
+    }
+
+    void deleteMinimum() override { deleteBasedOnKey(getMinimum()); }
+    void deleteMaximum() override { deleteBasedOnKey(getMaximum()); }
 
 protected:
     virtual void putEntry(Entry const& entry) = 0;
+    [[nodiscard]] int getHash(Key const& key) const { return HashFunction::getHash(key); }
+    void incrementHashTableIndexWithWrapAround(int& index) const { index = (index + 1) % m_hashTableSize; }
 
     void deleteAllEntries() {
         delete[] m_entryPointers;
@@ -193,10 +191,6 @@ protected:
             resize(m_hashTableSize / 2);
         }
     }
-
-    [[nodiscard]] int getHash(Key const& key) const { return HashFunction::getHash(key); }
-
-    void incrementHashTableIndexWithWrapAround(int& index) const { index = (index + 1) % m_hashTableSize; }
 
     static constexpr int INITIAL_HASH_TABLE_SIZE = 1;
     int m_size{0};

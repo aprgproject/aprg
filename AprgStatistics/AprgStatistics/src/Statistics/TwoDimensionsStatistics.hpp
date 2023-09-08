@@ -15,15 +15,15 @@ using ValueToSampleMultimap = std::multimap<double, Sample>;
 using ValueToSamplePair = std::pair<double, Sample>;
 
 struct LineModel {
+    LineModel() : aCoefficient(0), bCoefficient(0), cCoefficient(0) {}
+    LineModel(double const a, double const b, double const c) : aCoefficient(a), bCoefficient(b), cCoefficient(c) {}
     double aCoefficient;
     double bCoefficient;
     double cCoefficient;
-    LineModel() : aCoefficient(0), bCoefficient(0), cCoefficient(0) {}
-    LineModel(double const a, double const b, double const c) : aCoefficient(a), bCoefficient(b), cCoefficient(c) {}
 };
 
-LineModel calculateLineModelUsingLeastSquares(Samples const& samples);
 double calculateSquareError(Sample const& sample, LineModel const& lineModel);
+LineModel calculateLineModelUsingLeastSquares(Samples const& samples);
 ValueToSampleMultimap getSquareErrorToSampleMultimap(Samples& samples, LineModel const& lineModel);
 
 }  // namespace alba::TwoDimensionsStatistics

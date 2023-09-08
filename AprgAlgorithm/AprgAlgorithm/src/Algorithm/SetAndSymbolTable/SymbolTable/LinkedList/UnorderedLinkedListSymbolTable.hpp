@@ -14,7 +14,6 @@ public:
     using Node = typename BaseClass::Node;
     using NodeUniquePointer = typename BaseClass::NodeUniquePointer;
     using Keys = typename BaseClass::Keys;
-
     UnorderedLinkedListSymbolTable() : BaseClass(), b_size(BaseClass::m_size), b_first(BaseClass::m_first) {}
 
     [[nodiscard]] Value get(Key const& key) const override {

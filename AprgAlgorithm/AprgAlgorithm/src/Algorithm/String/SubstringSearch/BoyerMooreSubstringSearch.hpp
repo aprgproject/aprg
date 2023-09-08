@@ -15,7 +15,6 @@ public:
     static constexpr RadixType RADIX = 256;
     static constexpr Index INVALID_POSITION = -1;
     using SkipTable = std::array<Index, RADIX>;
-
     explicit BoyerMooreSubstringSearch(std::string const& query) : m_query(query) { initialize(); }
 
     [[nodiscard]] Index search(std::string const& searchSpace) const {

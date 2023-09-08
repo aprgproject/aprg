@@ -12,35 +12,36 @@ public:
     explicit Differentiation(std::string const& nameOfVariableToDifferentiate);
     Differentiation(
         std::string const& nameOfVariableToDifferentiate, VariableNamesSet const& namesOfDependentVariables);
-
-    [[nodiscard]] Term differentiate(Term const& term) const;
     static Term differentiate(Constant const& constant);
+    static AlbaNumber differentiateConstant(Constant const&);
+    [[nodiscard]] Term differentiate(Term const& term) const;
     [[nodiscard]] Term differentiate(Variable const& variable) const;
     [[nodiscard]] Term differentiate(Monomial const& monomial) const;
     [[nodiscard]] Term differentiate(Polynomial const& polynomial) const;
     [[nodiscard]] Term differentiate(Expression const& expression) const;
     [[nodiscard]] Term differentiate(Function const& functionObject) const;
     [[nodiscard]] Equation differentiate(Equation const& equation) const;
-
     [[nodiscard]] Term differentiateWithDefiniteValue(Term const& term, AlbaNumber const& value) const;
-
     [[nodiscard]] Term differentiateMultipleTimes(Term const& term, int const numberOfTimes) const;
     [[nodiscard]] Equation differentiateMultipleTimes(Equation const& equation, int const numberOfTimes) const;
-
-    static AlbaNumber differentiateConstant(Constant const&);
     [[nodiscard]] Monomial differentiateVariable(Variable const& variable) const;
     [[nodiscard]] Polynomial differentiateMonomial(Monomial const& monomial) const;
     [[nodiscard]] Polynomial differentiatePolynomial(Polynomial const& polynomial) const;
     [[nodiscard]] Term differentiateExpression(Expression const& expression) const;
     [[nodiscard]] Term differentiateFunction(Function const& functionObject) const;
     [[nodiscard]] Equation differentiateEquation(Equation const& equation) const;
-
     [[nodiscard]] Term differentiateTwoMultipliedTerms(Term const& term1, Term const& term2) const;
     [[nodiscard]] Term differentiateTwoDividedTerms(Term const& numerator, Term const& denominator) const;
 
 private:
-    void separateNonChangingAndChangingVariables(
-        Monomial& nonChangingVariablesAndConstant, Monomial& changingVariables, Monomial const& monomial) const;
+    static Term differentiateChangingTermRaiseToChangingTerm(Term const& firstTerm, Term const& secondTerm);
+    static Term differentiateFunctionOnly(Function const& functionObject);
+    [[nodiscard]] bool isVariableToDifferentiate(std::string const& variableName) const;
+    [[nodiscard]] bool isDependentVariable(std::string const& variableName) const;
+    [[nodiscard]] bool isDerivativeVariableNameAndAffectedByThisDifferentiation(
+        DerivativeVariableName const& derivativeVariable) const;
+    [[nodiscard]] bool isChangingVariableName(std::string const& variableName) const;
+    [[nodiscard]] bool isChangingTerm(Term const& term) const;
     [[nodiscard]] Polynomial differentiateMonomialWithChangingVariables(Monomial const& changingVariables) const;
     [[nodiscard]] Term differentiateAsTermOrExpressionIfNeeded(Expression const& expression) const;
     [[nodiscard]] Term differentiateSimplifiedExpressionOnly(Expression const& expression) const;
@@ -52,14 +53,8 @@ private:
     [[nodiscard]] Term differentiateTermsInRaiseToPower(Expression const& expression) const;
     [[nodiscard]] Term differentiateNonChangingTermRaiseToChangingTerm(Term const& base, Term const& exponent) const;
     [[nodiscard]] Term differentiateChangingTermRaiseToNonChangingTerm(Term const& base, Term const& exponent) const;
-    static Term differentiateChangingTermRaiseToChangingTerm(Term const& firstTerm, Term const& secondTerm);
-    static Term differentiateFunctionOnly(Function const& functionObject);
-    [[nodiscard]] bool isVariableToDifferentiate(std::string const& variableName) const;
-    [[nodiscard]] bool isDependentVariable(std::string const& variableName) const;
-    [[nodiscard]] bool isDerivativeVariableNameAndAffectedByThisDifferentiation(
-        DerivativeVariableName const& derivativeVariable) const;
-    [[nodiscard]] bool isChangingVariableName(std::string const& variableName) const;
-    [[nodiscard]] bool isChangingTerm(Term const& term) const;
+    void separateNonChangingAndChangingVariables(
+        Monomial& nonChangingVariablesAndConstant, Monomial& changingVariables, Monomial const& monomial) const;
     std::string m_nameOfVariableToDifferentiate;
     VariableNamesSet m_namesOfDependentVariables;
 };

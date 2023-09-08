@@ -10,10 +10,9 @@ using TermTermPair = std::pair<Term, Term>;
 
 class SubstitutionOfTermsToTerms {
 public:
+    explicit SubstitutionOfTermsToTerms(TermToTermMap const& variablesWithValues);
     SubstitutionOfTermsToTerms();
     SubstitutionOfTermsToTerms(std::initializer_list<TermTermPair> const& variablesWithValues);
-    explicit SubstitutionOfTermsToTerms(TermToTermMap const& variablesWithValues);
-
     [[nodiscard]] bool isEmpty() const;
     [[nodiscard]] bool isTermFound(Term const& term) const;
     [[nodiscard]] int getSize() const;
@@ -22,10 +21,8 @@ public:
     [[nodiscard]] Term performSubstitutionTo(Function const& functionObject) const;
     [[nodiscard]] Term performSubstitutionTo(Term const& term) const;
     [[nodiscard]] Equation performSubstitutionTo(Equation const& equation) const;
-
     [[nodiscard]] Expression performSubstitutionForExpression(Expression const& expression) const;
     [[nodiscard]] Function performSubstitutionForFunction(Function const& functionObject) const;
-
     void putTermsToTermsMapping(std::initializer_list<TermTermPair> const& variablesWithValues);
     void putTermsToTermsMapping(TermToTermMap const& variablesWithValues);
     void putTermToTermMapping(Term const& term1, Term const& term2);

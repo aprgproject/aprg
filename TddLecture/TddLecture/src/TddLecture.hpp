@@ -8,12 +8,10 @@ class TddLecture {
 public:
     using UnsignedInts = std::vector<unsigned int>;
     TddLecture() = default;
+    static UnsignedInts getUnsignedIntsOneToTen();
     void functionality1() const {}
     void functionality2() const {}
     void functionality3() const {}
-
-    static UnsignedInts getUnsignedIntsOneToTen();
-
     void functionality10() const {}
     void functionality11() const {}
     void functionality12() const {}

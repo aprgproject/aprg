@@ -14,9 +14,7 @@ template <typename Vertex>
 class NodeDisjointPathCover {
 public:
     // Path cover are set of paths that covers nodes.
-
     // In a node-disjoint path cover, each node belongs to exactly one path.
-
     using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Edge = typename GraphTypes<Vertex>::Edge;
@@ -30,7 +28,6 @@ public:
     using FlowNetwork =
         SinkSourceFlowNetwork<VertexWithLeftRight, int, DirectedGraphWithListOfEdges<VertexWithLeftRight>>;
     using FordFulkerson = FordFulkersonUsingBfs<FlowNetwork>;
-
     explicit NodeDisjointPathCover(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}
 
     [[nodiscard]] Paths getNodeDisjointPathCover(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
@@ -44,7 +41,6 @@ public:
         // It turns out that in directed, acyclic graphs,
         // we can reduce the problem of finding a minimum path cover to the problem of finding a maximum flow in another
         // graph.
-
         Edges result;
         if (GraphUtilities::isDirectedAcyclicGraph(m_graph)) {
             result = getEdgesOfNodeDisjointPathCoverUsingFordFulkerson(newSourceVertex, newSinkVertex);
@@ -119,7 +115,6 @@ private:
         // There is an edge from a left node to a right node if there is such an edge in the original graph.
         // In addition, the matching graph contains a source and a sink, and there are edges from the source to all left
         // nodes and from all right nodes to the sink.
-
         VertexWithLeftRight sourceVertexWithLeft{newSourceVertex, false};
         VertexWithLeftRight sinkVertexWithRight{newSinkVertex, true};
         FlowNetwork flowNetwork(sourceVertexWithLeft, sinkVertexWithRight);

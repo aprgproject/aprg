@@ -53,14 +53,12 @@ AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSumsWithSquareRootAlgorith
     // we should choose small numbers.
     // If we choose the numbers 1,2,...,k, the resulting sum is (k*(k+1))/2
     // Thus, the maximum amount of distinct numbers is k = O(sqrt(n)).
-
     // However, we can make the algorithm more efficient by using the fact that there are at most O(sqrt(n)) distinct
     // weights. Thus, we can process the weights in groups that consists of similar weights. We can process each group
     // in O(n) time, which yields an O(sqrt(n))) time algorithm. The idea is to use an array that records the sums of
     // weights that can be formed using the groups processed so far. The array contains n elements: element k is 1 if
     // the sum k can be formed and 0 otherwise. To process a group of weights, we scan the array from left to right and
     // record the new sums of weights that can be formed using this group and the previous groups.
-
     map<Value, int> inputValueToCount;  // divide into groups of distinct weights and count number of same weights
     for (Value const inputValue : m_inputValues) {
         // n*log(n)

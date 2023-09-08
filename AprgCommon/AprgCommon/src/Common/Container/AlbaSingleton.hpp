@@ -8,8 +8,8 @@ public:
     // rule of five or six
     ~AlbaSingleton() = default;
     AlbaSingleton(AlbaSingleton const &) = delete;
-    AlbaSingleton &operator=(AlbaSingleton const &) = delete;
     AlbaSingleton(AlbaSingleton &&) = delete;
+    AlbaSingleton &operator=(AlbaSingleton const &) = delete;
     AlbaSingleton &operator=(AlbaSingleton &&) = delete;
 
     static ObjectType &getInstance() {

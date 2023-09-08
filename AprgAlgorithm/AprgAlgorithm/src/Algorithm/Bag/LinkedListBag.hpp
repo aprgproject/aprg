@@ -13,15 +13,14 @@ public:
     using TraverseFunction = typename BaseBag<Object>::TraverseFunction;
     struct Node;
     using NodeUniquePointer = std::unique_ptr<Node>;
+
     struct Node {
         Object object;
         NodeUniquePointer next;
     };
 
     LinkedListBag() : m_first(nullptr) {}
-
     [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
-
     [[nodiscard]] int getSize() const override { return m_size; }
 
     void add(Object const& object) override {

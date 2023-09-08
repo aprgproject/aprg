@@ -11,8 +11,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-SolverUsingSubstitution::SolverUsingSubstitution() = default;
-
 MultipleVariableSolutionSets SolverUsingSubstitution::calculateSolutionAndReturnSolutionSet(
     Equations const& equations) {
     clear();
@@ -23,25 +21,6 @@ MultipleVariableSolutionSets SolverUsingSubstitution::calculateSolutionAndReturn
         calculateSolutions(equations);
     }
     return m_solutionsWithAllVariables;
-}
-
-bool SolverUsingSubstitution::isTheValueAlreadyExisting(string const& variableName, AlbaNumber const& value) const {
-    bool result(false);
-    for (MultipleVariableSolutionSet const& solutionSet : m_solutionsWithAllVariables) {
-        result = result || solutionSet.isValueAcceptedForVariable(variableName, value);
-        if (result) {
-            break;
-        }
-    }
-    if (!result) {
-        for (MultipleVariableSolutionSet const& solutionSet : m_solutionsWithSomeVariables) {
-            result = result || solutionSet.isValueAcceptedForVariable(variableName, value);
-            if (result) {
-                break;
-            }
-        }
-    }
-    return result;
 }
 
 bool SolverUsingSubstitution::isSolutionCorrect(
@@ -74,6 +53,25 @@ SubstitutionOfVariablesToValues SolverUsingSubstitution::getSubstitutionFromSolu
     return substitution;
 }
 
+bool SolverUsingSubstitution::isTheValueAlreadyExisting(string const& variableName, AlbaNumber const& value) const {
+    bool result(false);
+    for (MultipleVariableSolutionSet const& solutionSet : m_solutionsWithAllVariables) {
+        result = result || solutionSet.isValueAcceptedForVariable(variableName, value);
+        if (result) {
+            break;
+        }
+    }
+    if (!result) {
+        for (MultipleVariableSolutionSet const& solutionSet : m_solutionsWithSomeVariables) {
+            result = result || solutionSet.isValueAcceptedForVariable(variableName, value);
+            if (result) {
+                break;
+            }
+        }
+    }
+    return result;
+}
+
 void SolverUsingSubstitution::clear() {
     m_solutionsWithAllVariables.clear();
     m_solutionsWithSomeVariables.clear();
@@ -92,6 +90,37 @@ void SolverUsingSubstitution::calculateSolutions(Equations const& equations) {
     } while (!m_solutionsWithSomeVariables.empty());
 }
 
+void SolverUsingSubstitution::addIfSolutionIsCompleteAndCorrect(
+    MultipleVariableSolutionSet const& solutionSet, Equations const& equations) {
+    if (m_variablesNames == solutionSet.getVariableNames()) {
+        if (isSolutionCorrect(solutionSet, equations)) {
+            m_solutionsWithAllVariables.emplace_back(solutionSet);
+            setAsCompleteSolution();
+        }
+    }
+}
+
+void SolverUsingSubstitution::solveAndUpdate(
+    MultipleVariableSolutionSet& solutionSet, Equation const& equationToSolve, string const& variableNameToSolve) {
+    OneEquationOneVariableEqualitySolver solver;
+    SolutionSet solutionSetForOneVariable(solver.calculateSolutionAndReturnSolutionSet(equationToSolve));
+    AlbaNumbers const& acceptedValues(solutionSetForOneVariable.getAcceptedValues());
+    if (!acceptedValues.empty()) {
+        SolutionSet firstPotentialSolution;
+        firstPotentialSolution.addAcceptedValue(acceptedValues.front());
+        solutionSet.addSolutionSetForVariable(variableNameToSolve, firstPotentialSolution);
+        for (auto it = acceptedValues.cbegin() + 1; it != acceptedValues.cend(); ++it) {
+            SolutionSet potentialSolution;
+            potentialSolution.addAcceptedValue(*it);
+            MultipleVariableSolutionSet multipleVariableSolutionSet;
+            multipleVariableSolutionSet.addSolutionSetForVariable(variableNameToSolve, potentialSolution);
+            m_solutionsWithSomeVariables.emplace_back(multipleVariableSolutionSet);
+        }
+    }
+}
+
+SolverUsingSubstitution::SolverUsingSubstitution() = default;
+
 void SolverUsingSubstitution::calculateASolutionForAllVariables(
     MultipleVariableSolutionSet& solutionSet, Equations const& equations) {
     int previousNumberOfVariables(0);
@@ -102,16 +131,6 @@ void SolverUsingSubstitution::calculateASolutionForAllVariables(
         variablesWithSolution = solutionSet.getVariableNames();
     } while (previousNumberOfVariables != static_cast<int>(variablesWithSolution.size()) &&
              m_variablesNames.size() != variablesWithSolution.size());
-}
-
-void SolverUsingSubstitution::addIfSolutionIsCompleteAndCorrect(
-    MultipleVariableSolutionSet const& solutionSet, Equations const& equations) {
-    if (m_variablesNames == solutionSet.getVariableNames()) {
-        if (isSolutionCorrect(solutionSet, equations)) {
-            m_solutionsWithAllVariables.emplace_back(solutionSet);
-            setAsCompleteSolution();
-        }
-    }
 }
 
 void SolverUsingSubstitution::calculateASolutionForOneVariable(
@@ -138,25 +157,6 @@ void SolverUsingSubstitution::solveForTheFirstOneVariableEquationAndUpdate(
         string singleVariableName = getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(equationToSolve);
         if (!singleVariableName.empty()) {
             solveAndUpdate(solutionSet, equationToSolve, singleVariableName);
-        }
-    }
-}
-
-void SolverUsingSubstitution::solveAndUpdate(
-    MultipleVariableSolutionSet& solutionSet, Equation const& equationToSolve, string const& variableNameToSolve) {
-    OneEquationOneVariableEqualitySolver solver;
-    SolutionSet solutionSetForOneVariable(solver.calculateSolutionAndReturnSolutionSet(equationToSolve));
-    AlbaNumbers const& acceptedValues(solutionSetForOneVariable.getAcceptedValues());
-    if (!acceptedValues.empty()) {
-        SolutionSet firstPotentialSolution;
-        firstPotentialSolution.addAcceptedValue(acceptedValues.front());
-        solutionSet.addSolutionSetForVariable(variableNameToSolve, firstPotentialSolution);
-        for (auto it = acceptedValues.cbegin() + 1; it != acceptedValues.cend(); ++it) {
-            SolutionSet potentialSolution;
-            potentialSolution.addAcceptedValue(*it);
-            MultipleVariableSolutionSet multipleVariableSolutionSet;
-            multipleVariableSolutionSet.addSolutionSetForVariable(variableNameToSolve, potentialSolution);
-            m_solutionsWithSomeVariables.emplace_back(multipleVariableSolutionSet);
         }
     }
 }

@@ -17,6 +17,22 @@ using namespace std;
 
 namespace alba::algebra::Factorization {
 
+bool isFactorizeUsingPatternsNeeded(Polynomial const& polynomial) {
+    return polynomial.getMonomials().size() == 2 && hasAMonomialWithDegreeMoreThanOneOrFractional(polynomial);
+}
+
+bool isFactorizeIncreasingAndDecreasingExponentsFormNeeded(Polynomial const& polynomial) {
+    return hasAMonomialWithDegreeMoreThanOneOrFractional(polynomial);
+}
+
+bool isFactorizeBySplittingToSmallerPolynomialsNeeded(Polynomial const& polynomial) {
+    return polynomial.getMonomials().size() >= 4 && hasAMonomialWithMultipleVariables(polynomial);
+}
+
+int getDeltaSize(Polynomials const& polynomials, int const originalSize) {
+    return static_cast<int>(polynomials.size()) - originalSize;
+}
+
 Polynomials factorizeAPolynomial(Polynomial const& polynomial) {
     Polynomials result;
     factorizePolynomialsAndPutToResult(result, {polynomial});
@@ -76,6 +92,26 @@ void factorizePolynomialsAndPutToResult(Polynomials& result, Polynomials const& 
     }
 }
 
+void putFactorizedPolynomialsIfPossible(Polynomials& result, Polynomials const& factorizedPolynomials) {
+    bool shouldPutFactorizedPolynomials =
+        !(shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue() &&
+          doesOnePolynomialHaveADoubleValue(factorizedPolynomials));
+    if (shouldPutFactorizedPolynomials) {
+        result.reserve(result.size() + factorizedPolynomials.size());
+        copy(factorizedPolynomials.cbegin(), factorizedPolynomials.cend(), back_inserter(result));
+    }
+}
+
+void simplifyAndRemoveEmptyPolynomials(Polynomials& polynomials) {
+    for (Polynomial& polynomial : polynomials) {
+        polynomial.simplify();
+    }
+    polynomials.erase(
+        remove_if(
+            polynomials.begin(), polynomials.end(), [](Polynomial const& polynomial) { return polynomial.isEmpty(); }),
+        polynomials.end());
+}
+
 void tryToFactorizeCommonMonomial(
     Polynomials& polynomialsToFactorize, int& deltaSize, Polynomial const& simplifiedPolynomial,
     int const originalSize) {
@@ -118,42 +154,6 @@ void tryToFactorizeBySplittingToSmallerPolynomials(
         putFactorizedPolynomialsIfPossible(polynomialsToFactorize, factorizedPolynomials);
         deltaSize = polynomialsToFactorize.size() - originalSize;
     }
-}
-
-void putFactorizedPolynomialsIfPossible(Polynomials& result, Polynomials const& factorizedPolynomials) {
-    bool shouldPutFactorizedPolynomials =
-        !(shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue() &&
-          doesOnePolynomialHaveADoubleValue(factorizedPolynomials));
-    if (shouldPutFactorizedPolynomials) {
-        result.reserve(result.size() + factorizedPolynomials.size());
-        copy(factorizedPolynomials.cbegin(), factorizedPolynomials.cend(), back_inserter(result));
-    }
-}
-
-void simplifyAndRemoveEmptyPolynomials(Polynomials& polynomials) {
-    for (Polynomial& polynomial : polynomials) {
-        polynomial.simplify();
-    }
-    polynomials.erase(
-        remove_if(
-            polynomials.begin(), polynomials.end(), [](Polynomial const& polynomial) { return polynomial.isEmpty(); }),
-        polynomials.end());
-}
-
-int getDeltaSize(Polynomials const& polynomials, int const originalSize) {
-    return static_cast<int>(polynomials.size()) - originalSize;
-}
-
-bool isFactorizeUsingPatternsNeeded(Polynomial const& polynomial) {
-    return polynomial.getMonomials().size() == 2 && hasAMonomialWithDegreeMoreThanOneOrFractional(polynomial);
-}
-
-bool isFactorizeIncreasingAndDecreasingExponentsFormNeeded(Polynomial const& polynomial) {
-    return hasAMonomialWithDegreeMoreThanOneOrFractional(polynomial);
-}
-
-bool isFactorizeBySplittingToSmallerPolynomialsNeeded(Polynomial const& polynomial) {
-    return polynomial.getMonomials().size() >= 4 && hasAMonomialWithMultipleVariables(polynomial);
 }
 
 }  // namespace alba::algebra::Factorization

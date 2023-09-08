@@ -37,7 +37,6 @@ TEST(SeparateChainingHashSymbolTableTest, GetSizeWorksWhenNotEmpty) {
 }
 
 TEST(SeparateChainingHashSymbolTableTest, GetWorks) { testGetWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(SeparateChainingHashSymbolTableTest, GetRankWorks) { testGetRankWithUnsignedIntAndChar<SymbolTableForTest>(); }
 
 TEST(SeparateChainingHashSymbolTableTest, GetMinimumWorks) {
@@ -49,7 +48,6 @@ TEST(SeparateChainingHashSymbolTableTest, GetMaximumWorks) {
 }
 
 TEST(SeparateChainingHashSymbolTableTest, SelectAtWorks) { testSelectAtWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(SeparateChainingHashSymbolTableTest, GetFloorWorks) { testGetFloorWithUnsignedIntAndChar<SymbolTableForTest>(); }
 
 TEST(SeparateChainingHashSymbolTableTest, GetCeilingWorks) {

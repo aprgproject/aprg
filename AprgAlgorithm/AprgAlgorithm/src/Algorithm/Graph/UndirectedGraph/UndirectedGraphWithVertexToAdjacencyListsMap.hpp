@@ -16,9 +16,7 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using AdjacencyList = SetOfVertices;
     using AdjacencyLists = std::map<Vertex, AdjacencyList>;
-
     UndirectedGraphWithVertexToAdjacencyListsMap() = default;
-
     [[nodiscard]] bool isEmpty() const override { return m_adjacencyLists.empty(); }
 
     [[nodiscard]] bool hasAnyConnection(Vertex const& vertex) const override {

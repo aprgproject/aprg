@@ -78,14 +78,12 @@ TEST(MostSignificantDigitSorterTest, SortWorksOnCharactersUsingExample2) {
 }
 
 // CANNOT SORT STD::LIST
-
 TEST(MostSignificantDigitSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
     SmallIntegerSorter sorter(getNibbleAtForSmallInteger, isNibbleDigitInvalidForSmallInteger);
     testSortUsingExample1WithPositiveAndNegativeIntegers<SmallIntegerSorter, Integers>(sorter);
 }
 
 // CANNOT SORT DOUBLE VALUES
-
 TEST(MostSignificantDigitSorterTest, SortWorksOnStringsUsingExample1) {
     StringsSorter sorter(getCharacterAtForString, isDigitInvalidForString);
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);

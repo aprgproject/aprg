@@ -13,7 +13,6 @@ class HeapSorter : public BaseSorter<Values> {
 public:
     static constexpr int NUMBER_OF_CHILDREN_IN_HEAP_TREE = 2;
     using MaxBinaryHeapAdapter = BinaryHeapAdapter<Values, NUMBER_OF_CHILDREN_IN_HEAP_TREE, std::less>;
-
     HeapSorter() = default;
 
     void sort(Values& valuesToSort) const override {
@@ -25,6 +24,10 @@ public:
     }
 
 private:
+    [[nodiscard]] int getLastParentAtTheBottom(MaxBinaryHeapAdapter const& maxBinaryHeapAdapter) const {
+        return maxBinaryHeapAdapter.getParentIndex(maxBinaryHeapAdapter.getBottomTreeIndex());
+    }
+
     void putItemsInHeapOrder(MaxBinaryHeapAdapter& maxBinaryHeapAdapter) const {
         int size(maxBinaryHeapAdapter.getSize());
         // Traverse all parents (starting from bottom to top), and sink down to put items in heap order
@@ -47,10 +50,6 @@ private:
             // starting from the top (where the object is swapped), sink down to maintain heap order
             maxBinaryHeapAdapter.sink(maxBinaryHeapAdapter.getTopTreeIndex(), treeIndex);
         }
-    }
-
-    [[nodiscard]] int getLastParentAtTheBottom(MaxBinaryHeapAdapter const& maxBinaryHeapAdapter) const {
-        return maxBinaryHeapAdapter.getParentIndex(maxBinaryHeapAdapter.getBottomTreeIndex());
     }
 };
 

@@ -14,15 +14,13 @@ namespace alba {
 
 class AlbaStreamBitWriter {
 public:
-    explicit AlbaStreamBitWriter(std::ostream& stream);
-    ~AlbaStreamBitWriter();
     AlbaStreamBitWriter(AlbaStreamBitWriter const& bitWriter) = delete;
     AlbaStreamBitWriter(AlbaStreamBitWriter&& bitWriter) = delete;
     AlbaStreamBitWriter& operator=(AlbaStreamBitWriter const& bitWriter) = delete;
     AlbaStreamBitWriter& operator=(AlbaStreamBitWriter&& bitWriter) = delete;
-
+    explicit AlbaStreamBitWriter(std::ostream& stream);
+    ~AlbaStreamBitWriter();
     // rule of zero
-
     void writeBoolData(bool const data);
     void writeCharData(char const data);
     void writeStringData(std::string_view const data);
@@ -33,6 +31,7 @@ public:
     void writeBigEndianNumberData(TypeToWrite const& data);
     template <typename TypeToWrite>
     void writeLittleEndianNumberData(TypeToWrite const& data);
+
     template <auto BITSET_SIZE>
     void writeBitsetData(
         std::bitset<BITSET_SIZE> const& data, size_t const startBitsetIndex, size_t const endBitsetIndex);

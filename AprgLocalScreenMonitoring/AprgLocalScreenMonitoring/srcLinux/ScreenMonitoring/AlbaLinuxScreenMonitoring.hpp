@@ -6,7 +6,5 @@
 
 namespace alba {
 using MousePosition = AlbaXY<int>;
-
 class AlbaLinuxScreenMonitoring {};
-
 }  // namespace alba

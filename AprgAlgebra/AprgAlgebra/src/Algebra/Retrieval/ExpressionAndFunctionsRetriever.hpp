@@ -8,7 +8,6 @@ namespace alba::algebra {
 class ExpressionAndFunctionsRetriever final : public BaseRetriever {
 public:
     [[nodiscard]] TermSet const& getExpressionsAndFunctions() const;
-
     void retrieveFromPolynomial(Polynomial const&) override;
     void retrieveFromExpression(Expression const& expression) override;
     void retrieveFromFunction(Function const& functionObject) override;

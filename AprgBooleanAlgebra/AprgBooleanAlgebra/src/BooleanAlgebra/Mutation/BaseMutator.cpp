@@ -15,7 +15,6 @@ void BaseMutator::mutateTerm(Term &term) {
 }
 
 void BaseMutator::mutateConstant(Constant &) {}
-
 void BaseMutator::mutateVariableTerm(VariableTerm &) {}
 
 void BaseMutator::mutateExpression(Expression &expression) {

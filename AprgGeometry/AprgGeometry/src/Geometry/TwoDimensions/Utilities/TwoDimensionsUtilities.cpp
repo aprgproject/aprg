@@ -112,15 +112,12 @@ double getDistance(LineSegment const& lineSegment, Point const& point) {
     // Another feature of cross products is that the area of a triangle can be calculated using the formula
     // distance = |(a-c)x(b-c)|/2
     // where a, b and c are the vertices of the triangle.
-
     // Using this fact, we can derive a formula for calculating the shortest distance between a point and a line.
     // For example, in the following picture d is the shortest distance between the point p and the line that is defined
     // by the points s1 and s2:
-
     // The area of the triangle whose vertices are s1, s2 and p can be calculated in two ways:
     // -> it is both |s2-s1|*d/2 or ((s1-p)x(s2-p))/2.
     // Thus, the shortest distance is d = (s1-p)x(s2-p) / |s2-s1|
-
     Point deltaS1AndP = lineSegment.first - point;
     Point deltaS2AndP = lineSegment.second - point;
     Point deltaS1AndS2 = lineSegment.second - lineSegment.first;
@@ -159,9 +156,7 @@ double getManhattanDistanceWithAlternateWay(Point const& point1, Point const& po
     // becomes (x+y, y-x). Consider two points p1=(x1,y1) and p2=(x2,y2) whose rotated coordinates p1'=(x1',y1') and
     // p2'=(x2',y2') Now there are two ways to express the Manhattan distance between p1 and p2: |x1-x2|+|y1-y2| =
     // max(|x1'-x2'|,|y1'-y2'|)
-
     // Note that "addition operation" transforms to "maximum operation"
-
     Point point1Rotated(point1.getX() + point1.getY(), point1.getY() - point1.getX());
     Point point2Rotated(point2.getX() + point2.getY(), point2.getY() - point2.getX());
     Point deltaRotated = point1Rotated - point2Rotated;
@@ -173,11 +168,9 @@ double getMaximumManhattanDistanceOfTwoPoints(Points const& points) {
     // because we can consider x and y coordinates separately.
     // To maximize the Manhattan distance between two points, we should find two points whose rotated coordinates
     // maximize the value of max(|x1'-x2'|,|y1'-y2'|)
-
     // This is easy, because either the horizontal or vertical difference of the rotated coordinates has to be maximum.
     // Using the minimum and maximum would get the maximum distance.
     // So get the maximum distance for x and y, and that maximum of that would be the maximum manhattan distance.
-
     vector<double> rotatedXValues;
     vector<double> rotatedYValues;
     rotatedXValues.reserve(points.size());
@@ -213,7 +206,6 @@ double getSignedCounterClockwiseTriangleAreaOfOriginAnd2Points(Point const& poin
 
 double getSignedCounterClockwiseDoubleTriangleAreaOfOriginAnd2Points(Point const& point1, Point const& point2) {
     // This actually a quadrilateral area, one mirror/ghost point is implicitly generated for it to be a quadrilateral.
-
     return getCrossProduct(constructVector(point1), constructVector(point2));
 }
 
@@ -251,7 +243,6 @@ double getAreaOfQuadrilateral(Quadrilateral const& quadrilateral) {
     // that calculates the area of a quadrilateral whose vertices are (x1, y1), (x2, y2), (x3, y3) and (x4, y4).
     // This formula is easy to implement, there are no special cases, and we can even generalize the formula to all
     // polygons. Note: This is same with shoelace formula
-
     Points points(quadrilateral.getVertices());
     return getAbsoluteValue(
                points[0].getX() * points[1].getY() - points[1].getX() * points[0].getY() +
@@ -264,6 +255,9 @@ double getAreaOfQuadrilateral(Quadrilateral const& quadrilateral) {
 double getAreaUsingPicksTheorem(int const numberOfPointsInside, int const numberOfPointsOnTheBoundary) {
     return numberOfPointsInside + static_cast<double>(numberOfPointsOnTheBoundary) / 2 - 1;
 }
+
+Vector constructVector(AlbaXY<double> const& xy) { return Vector{xy.getX(), xy.getY()}; }
+Vector constructDeltaVector(Line const& line) { return Vector{line.getAUnitIncreaseInX(), line.getAUnitIncreaseInY()}; }
 
 ConicSectionType getConicSectionBasedOnEccentricity(double const eccentricity) {
     ConicSectionType result(ConicSectionType::Unknown);
@@ -278,10 +272,6 @@ ConicSectionType getConicSectionBasedOnEccentricity(double const eccentricity) {
     }
     return result;
 }
-
-Vector constructVector(AlbaXY<double> const& xy) { return Vector{xy.getX(), xy.getY()}; }
-
-Vector constructDeltaVector(Line const& line) { return Vector{line.getAUnitIncreaseInX(), line.getAUnitIncreaseInY()}; }
 
 ConicSectionType getConicSectionBasedOnGeneralForm(
     double const a, double const b, double const c, double const d, double const e) {
@@ -347,7 +337,6 @@ RotationDirection getRotationDirectionTraversing3Points(Point const a, Point con
     // The cross product axb of vectors a = (x1,y1) and b = (x2,y2) is calculated using he formula x1 y2¡x2 y1.
     // The cross product tells us whether b turns left (positive value),
     // does not turn (zero) or turns right (negative value) when it is placed directly after a.
-
     RotationDirection result(RotationDirection::Collinear);
     Point deltaBA(b - a);
     Point deltaCA(c - a);
@@ -430,7 +419,6 @@ Point getIntersectionOfTwoLineSegment(LineSegment const& segment1, LineSegment c
     // –--> (ab, c), (ab, d), (cd, a)), and (cd, b) are collinear and
     // –--> the x-projections of (ab) and (cd) intersect
     // –--> the y-projections of (ab) and (cd) intersect
-
     RotationDirection direction1 =
         getRotationDirectionTraversing3Points(segment1.first, segment1.second, segment2.first);
     RotationDirection direction2 =
@@ -653,7 +641,6 @@ Points getConvexHullPointsUsingJarvisAlgorithm(Points const& points) {
     // For every point on the hull we examine all the other points to determine the next point.
     // Worst case, Time complexity: O(n2).  The worst case occurs when all the points are on the hull (m = n).
     // Auxiliary Space: O(n), since n extra space has been taken.
-
     assert(points.size() >= 3);
 
     int indexOfLeftMostPoint = 0;
@@ -684,7 +671,6 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points) {
     // Applications:
     // Motion planning (go from one point to another point when there is polygon obstacle)
     // Farthest point pair problem
-
     assert(points.size() >= 3);
     Points auxiliary = points;
     int auxiliarySize = auxiliary.size();

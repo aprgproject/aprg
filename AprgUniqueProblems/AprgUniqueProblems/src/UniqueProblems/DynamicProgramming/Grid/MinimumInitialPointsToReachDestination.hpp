@@ -9,9 +9,7 @@ public:
     using Index = int;
     using Value = int;
     using Grid = matrix::AlbaMatrix<Value>;
-
     explicit MinimumInitialPointsToReachDestination(Grid const& inputGrid);
-
     [[nodiscard]] Value getMinimalInitialPointsUsingIterativeDP() const;
 
 private:

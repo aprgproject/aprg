@@ -12,16 +12,16 @@ class OrthogonalLineSegmentIntersectionSearch {
 public:
     using Point = std::pair<Unit, Unit>;
     using Points = std::vector<Point>;
+
     enum class EventType {
+
         StartOfHorizontalLineSegment = 1,
         CheckVerticalLineSegment = 2,
         EndOfHorizontalLineSegment = 3
+
     };
+
     struct Event {
-        Unit xLocation;
-        Unit yLocation1;
-        Unit yLocation2;
-        EventType eventType;
         bool operator<(Event const& event) const {
             bool result(false);
             if (xLocation != event.xLocation) {
@@ -31,6 +31,11 @@ public:
             }
             return result;
         }
+
+        Unit xLocation;
+        Unit yLocation1;
+        Unit yLocation2;
+        EventType eventType;
     };
 
     [[nodiscard]] Points getIntersectingPoints() const {

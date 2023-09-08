@@ -15,6 +15,7 @@ public:
 private:
     uint16_t m_nid;
 };
+
 using KeplerInitializerList = std::initializer_list<Kepler>;
 using SetOfKeplers = std::set<Kepler>;
 

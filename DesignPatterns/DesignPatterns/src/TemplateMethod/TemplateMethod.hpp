@@ -4,7 +4,6 @@ namespace TemplateMethod {
 
 // AbstractClass
 // implements a template method defining the skeleton of an algorithm
-
 class AbstractClass {
 public:
     virtual ~AbstractClass() = default;
@@ -20,7 +19,8 @@ public:
         // ...
     }
 
-protected:  // This ensures how primitive operations are used only by the templateMethod.
+protected:
+    // This ensures how primitive operations are used only by the templateMethod.
     virtual void primitiveOperation1() = 0;  // abstract operations MUST be overridden
     virtual void primitiveOperation2() = 0;
     virtual void hookOperation() {}  // hooks MAY be overriden (can be empty)
@@ -30,7 +30,6 @@ protected:  // This ensures how primitive operations are used only by the templa
 // Concrete Class
 // implements the primitive operations to carry out specific steps  of the algorithm,
 // there may be many Concrete classes, each implementing the full set of the required operation
-
 class ConcreteClass : public AbstractClass {
     void primitiveOperation1() override {
         std::cout << "Primitive operation 1\n";
@@ -46,6 +45,7 @@ class ConcreteClass : public AbstractClass {
         std::cout << "Overriden hook operation\n";
         // ...
     }
+
     // ...
 };
 

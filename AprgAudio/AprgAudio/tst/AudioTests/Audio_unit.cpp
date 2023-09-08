@@ -25,6 +25,42 @@ using namespace std;
 
 namespace alba::AprgAudio {
 
+bool writeTest(int const numberOfChannels, int const sampleRate, int const bitDepth, AudioFormat const format) {
+    auto sampleRateAsFloat = static_cast<float>(sampleRate);
+
+    Audio<float> audioFile;
+
+    audioFile.setAudioBufferSize(numberOfChannels, sampleRate * 4);
+
+    for (int bufferIndex = 0; bufferIndex < static_cast<int>(audioFile.getNumberOfSamplesPerChannel()); ++bufferIndex) {
+        auto sample = static_cast<float>(sin(2.0 * getPi() * bufferIndex / sampleRateAsFloat * 440.0));
+
+        for (int channelIndex = 0; channelIndex < static_cast<int>(audioFile.getNumberOfChannels()); ++channelIndex) {
+            audioFile.samples[channelIndex][bufferIndex] = static_cast<float>(sample * 0.5);
+        }
+    }
+
+    audioFile.setSampleRate(sampleRate);
+    audioFile.setBitDepth(bitDepth);
+
+    std::string numberOfChannelsAsString = numberOfChannels == 1 ? "mono" : "stereo";
+    std::string bitDepthAsString = std::to_string(bitDepth);
+    std::string sampleRateAsString = std::to_string(sampleRate);
+
+    if (format == AudioFormat::Wave) {
+        return audioFile.save(
+            APRG_DIR R"(\AprgAudio\FilesForTests\WrittenAudioFiles\)" + numberOfChannelsAsString + "_" +
+            sampleRateAsString + "_" + bitDepthAsString + "bit" + ".wav");
+    }
+    if (format == AudioFormat::Aiff) {
+        return audioFile.save(
+            APRG_DIR R"(\AprgAudio\FilesForTests\WrittenAudioFiles\)" + numberOfChannelsAsString + "_" +
+            sampleRateAsString + "_" + bitDepthAsString + "bit" + ".aif");
+    }
+
+    return false;
+}
+
 TEST(AiffLoadingTests, DISABLED_StereoWith8BitWithSampleRate44100) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
@@ -325,42 +361,6 @@ TEST(WavLoadingTests, DISABLED_MonoWith16BitWithSampleRate48000) {
                 audioFile.samples[channelIndex][bufferIndex], wav_mono_16bit_48000::testBuffer[bufferIndex]));
         }
     }
-}
-
-bool writeTest(int const numberOfChannels, int const sampleRate, int const bitDepth, AudioFormat const format) {
-    auto sampleRateAsFloat = static_cast<float>(sampleRate);
-
-    Audio<float> audioFile;
-
-    audioFile.setAudioBufferSize(numberOfChannels, sampleRate * 4);
-
-    for (int bufferIndex = 0; bufferIndex < static_cast<int>(audioFile.getNumberOfSamplesPerChannel()); ++bufferIndex) {
-        auto sample = static_cast<float>(sin(2.0 * getPi() * bufferIndex / sampleRateAsFloat * 440.0));
-
-        for (int channelIndex = 0; channelIndex < static_cast<int>(audioFile.getNumberOfChannels()); ++channelIndex) {
-            audioFile.samples[channelIndex][bufferIndex] = static_cast<float>(sample * 0.5);
-        }
-    }
-
-    audioFile.setSampleRate(sampleRate);
-    audioFile.setBitDepth(bitDepth);
-
-    std::string numberOfChannelsAsString = numberOfChannels == 1 ? "mono" : "stereo";
-    std::string bitDepthAsString = std::to_string(bitDepth);
-    std::string sampleRateAsString = std::to_string(sampleRate);
-
-    if (format == AudioFormat::Wave) {
-        return audioFile.save(
-            APRG_DIR R"(\AprgAudio\FilesForTests\WrittenAudioFiles\)" + numberOfChannelsAsString + "_" +
-            sampleRateAsString + "_" + bitDepthAsString + "bit" + ".wav");
-    }
-    if (format == AudioFormat::Aiff) {
-        return audioFile.save(
-            APRG_DIR R"(\AprgAudio\FilesForTests\WrittenAudioFiles\)" + numberOfChannelsAsString + "_" +
-            sampleRateAsString + "_" + bitDepthAsString + "bit" + ".aif");
-    }
-
-    return false;
 }
 
 TEST(WritingTest, DISABLED_WriteSineToneToManyFormats) {

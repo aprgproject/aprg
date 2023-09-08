@@ -7,10 +7,8 @@ class SubArraySum {
 public:
     // As the first example, consider a problem where we are given an array of n positive integers and a target sum x,
     // and we want to find a subarray whose sum is x or report that there is no such subarray.
-
     using Index = int;
     using Value = typename Values::value_type;
-
     explicit SubArraySum(Values const& valuesToCheck) : m_valuesToCheck(valuesToCheck) {}
 
     [[nodiscard]] Values getSubArrayWithSum(Value const& targetSum) const {

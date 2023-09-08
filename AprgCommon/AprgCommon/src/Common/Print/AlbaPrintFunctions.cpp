@@ -13,7 +13,6 @@ namespace alba {
 // void printParameter(ostream& out, string_view parameter) {
 //    out << "string view" << quoted(string(parameter));
 // }
-
 void printLogHeader(ostream& out, string_view const fileName, int const lineNumber, string_view const functionName) {
     constexpr int MAX_FILENAME_PREFIX_LENGTH = 0;
     constexpr int MAX_FILENAME_SUFFIX_LENGTH = 30;
@@ -45,7 +44,6 @@ void printStringAndShortenIfPossible(
 }
 
 void printParameter(ostream& out, string const& parameter) { out << quoted(parameter); }
-
 void printParameter(ostream& out, char const* const parameter) { out << quoted(parameter); }
 
 template <>

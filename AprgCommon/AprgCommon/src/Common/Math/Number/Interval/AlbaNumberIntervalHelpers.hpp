@@ -17,7 +17,6 @@ AlbaNumberIntervalEndpoint createEndpoint(bool const isCloseEndpoint, AlbaNumber
 AlbaNumberIntervalEndpoint createPositiveInfinityOpenEndpoint();
 AlbaNumberIntervalEndpoint createNegativeInfinityOpenEndpoint();
 AlbaNumberInterval createAllRealValuesInterval();
-
 AlbaNumbers getNumbersInsideTheInterval(AlbaNumbers const& numbersToCheck, AlbaNumberInterval const& intervalToCheck);
 
 }  // namespace alba

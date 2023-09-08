@@ -11,19 +11,14 @@ using namespace std;
 
 namespace alba::algebra {
 
-constexpr double INITIAL_DELTA_FOR_SLOPE = 1E-6;
-
 NewtonMethod::NewtonMethod(AlbaNumber const& initialValue, Function const& functionToIterate)
     : m_currentValue(initialValue),
       m_positiveDeltaForSlope(INITIAL_DELTA_FOR_SLOPE),
       m_functionToIterate(functionToIterate) {}
 
 bool NewtonMethod::isSolved() const { return m_functionToIterate(m_currentValue) == 0; }
-
 bool NewtonMethod::isFinished() const { return !m_currentValue.isARealFiniteValue() || isSolved(); }
-
 int NewtonMethod::getNumberOfIterationsExecuted() const { return m_numberOfIterationsExecuted; }
-
 AlbaNumber const& NewtonMethod::getCurrentValue() const { return m_currentValue; }
 
 void NewtonMethod::runOneIteration() {

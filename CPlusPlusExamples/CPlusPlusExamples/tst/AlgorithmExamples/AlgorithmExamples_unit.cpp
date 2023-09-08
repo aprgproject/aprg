@@ -115,7 +115,6 @@ TEST(AlgorithmExamplesTest, GatherToACenterWorksByUsingStablePartition) {
 TEST(AlgorithmExamplesTest, PartialSortVsNthElementPlusSort) {
     // Partial sort or nth element + sort?
     // In old implementations (nthElement+sort) used to be better
-
     // sort first four elements
     array input = {2, 8, 1, 9, 3, 5, 7, 4, 6};
 
@@ -155,7 +154,6 @@ TEST(AlgorithmExamplesTest, ProcessConfigurationUpdates) {
 TEST(AlgorithmExamplesTest, GettingTheDifferenceBetweenMaximumAndMinimumWorks) {
     // Given an array of integers find the difference between the minimum and maximum?
     // Note its guaranteed that input is not empty.
-
     array input = {2, 1, 3, 5, 4};
 
     auto [minIterator, maxIterator] = minmax_element(cbegin(input), cend(input));
@@ -171,7 +169,6 @@ TEST(AlgorithmExamplesTest, GettingTheAdjacentDifferentWorksUsingAdjacentDiffere
     // Given an array of coin values help Jon find this minimum.
     // In short, find the minimum difference between two values in a list.
     // Note its guaranteed that input is not empty.
-
     array input = {2, 1, 3, 5, 4};
 
     sort(input.begin(), input.end());
@@ -184,7 +181,6 @@ TEST(AlgorithmExamplesTest, GettingTheAdjacentDifferentWorksUsingAdjacentDiffere
 TEST(AlgorithmExamplesTest, GettingTheAdjacentDifferentWorksUsingAccumulateOrReduce) {
     // Same question as above
     // The current compiler does not have reduce
-
     array input = {2, 1, 3, 5, 4};
     using ValueType = typename decltype(input)::value_type;
 
@@ -201,7 +197,6 @@ TEST(AlgorithmExamplesTest, GettingTheAdjacentDifferentWorksUsingAccumulateOrRed
     // auto output = transform_reduce(
     //     cbegin(input), --cend(input), ++cbegin(input), numeric_limits<int>::max(),
     //     [](auto a, auto b) { return min(a, b); }, minus{});
-
     cout << "Output: " << output << "\n";
 }
 
@@ -210,9 +205,7 @@ TEST(AlgorithmExamplesTest, RootMeanSquaredWorks) {
     // They are hung at 75% mark of the poster.
     // Given Chandler has height of h, how tall a ladder does he need?
     // Note its guaranteed that input is not empty.
-
     // The current compiler does not have transform reduce
-
     array input = {2.0, 1.0, 3.0, 5.0, 4.0};
 
     auto output = sqrt(inner_product(input.begin(), input.end(), input.begin(), 0.0) / input.size());
@@ -220,7 +213,6 @@ TEST(AlgorithmExamplesTest, RootMeanSquaredWorks) {
     // transform_reduce operation
     // auto output =
     //    sqrt(transform_reduce(input.begin(), input.end(), input.begin(), 0.0, plus{}, multiplies{}) / input.size());
-
     cout << "Output: " << output << "\n";
 }
 
@@ -232,7 +224,6 @@ TEST(AlgorithmExamplesTest, TrappingRainWater) {
     // | | | |B|W|W|W|B|B|W|B| |
     // | |B|W|B|B|W|B|B|B|B|B|B|
     // Legend: B is a block, W is water.
-
     array elevations = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
 
     auto highestIterator = max_element(cbegin(elevations), cend(elevations));
@@ -241,7 +232,6 @@ TEST(AlgorithmExamplesTest, TrappingRainWater) {
     // inclusive_scan(begin(elevations), next(highestIterator), begin(aux), max{});
     // inclusive_scan(rbegin(elevations), rev(highestIterator), rbegin(aux), max{});
     // auto output = transform_reduce(cbegin(aux), cend(aux), cbegin(elevations), 0, plus{}, minus{});
-
     // accumulate solution
     auto getTotalWater = [maxHeight = 0](auto totalWater, auto blockHeight) mutable {
         auto waterBlocks = blockHeight < maxHeight ? maxHeight - blockHeight : 0;
@@ -259,7 +249,6 @@ TEST(AlgorithmExamplesTest, TrappingRainWater) {
 TEST(AlgorithmExamplesTest, LongestContiguousSubstring) {
     // Given a string of 1s and 0s, return true if the longest (contiguous)
     // substring of equal elements is greater than or equal to 7
-
     string input = "001001000000010";
 
     auto output = accumulate(

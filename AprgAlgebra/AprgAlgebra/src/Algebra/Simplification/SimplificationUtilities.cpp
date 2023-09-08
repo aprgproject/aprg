@@ -10,6 +10,45 @@ using namespace std;
 
 namespace alba::algebra::Simplification {
 
+bool simplifyToACommonDenominatorForExpressionAndReturnIfAdditionOrSubtractionOfTermsOverTermsOccurred(
+    Expression& expression) {
+    bool isChanged(false);
+    if (expression.getCommonOperatorLevel() == OperatorLevel::AdditionAndSubtraction) {
+        isChanged = tryToAddSubtractTermsOverTermsAndReturnIfChanged(expression);
+    } else {
+        simplifyTermsWithDetailsInExpressionToACommonDenominator(expression);
+    }
+    return isChanged;
+}
+
+bool tryToAddSubtractTermsOverTermsAndReturnIfChanged(Expression& addSubtractExpression) {
+    AdditionAndSubtractionOfTermsOverTerms addSubtractTermsOverTerms;
+    bool isAddSubtractExpressionUpdateNeeded(false);
+    for (TermWithDetails const& addSubtractTermWithDetails :
+         addSubtractExpression.getTermsWithAssociation().getTermsWithDetails()) {
+        Term const& addSubtractTerm(getTermConstReferenceFromUniquePointer(addSubtractTermWithDetails.baseTermPointer));
+        TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(addSubtractTerm));
+        if (!termsOverTerms.getDenominators().empty()) {
+            isAddSubtractExpressionUpdateNeeded = true;
+        }
+        addSubtractTermsOverTerms.putAsAddOrSubtraction(termsOverTerms, addSubtractTermWithDetails.association);
+    }
+    if (isAddSubtractExpressionUpdateNeeded) {
+        addSubtractExpression = addSubtractTermsOverTerms.getCombinedExpression();
+        addSubtractExpression.simplify();
+    }
+    return isAddSubtractExpressionUpdateNeeded;
+}
+
+TermsWithAssociation getTermsWithAssociationAndReverseIfNeeded(
+    Expression const& expression, TermAssociationType const overallAssociation) {
+    TermsWithAssociation termsWithAssociation(expression.getTermsWithAssociation());
+    if (TermAssociationType::Negative == overallAssociation) {
+        termsWithAssociation.reverseTheAssociationOfTheTerms();
+    }
+    return termsWithAssociation;
+}
+
 void simplifyTermToACommonDenominator(Term& term) {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
         SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
@@ -59,36 +98,6 @@ void simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(Term& term) {
 
     term.clearAllInnerSimplifiedFlags();
     term.simplify();
-}
-
-bool simplifyToACommonDenominatorForExpressionAndReturnIfAdditionOrSubtractionOfTermsOverTermsOccurred(
-    Expression& expression) {
-    bool isChanged(false);
-    if (expression.getCommonOperatorLevel() == OperatorLevel::AdditionAndSubtraction) {
-        isChanged = tryToAddSubtractTermsOverTermsAndReturnIfChanged(expression);
-    } else {
-        simplifyTermsWithDetailsInExpressionToACommonDenominator(expression);
-    }
-    return isChanged;
-}
-
-bool tryToAddSubtractTermsOverTermsAndReturnIfChanged(Expression& addSubtractExpression) {
-    AdditionAndSubtractionOfTermsOverTerms addSubtractTermsOverTerms;
-    bool isAddSubtractExpressionUpdateNeeded(false);
-    for (TermWithDetails const& addSubtractTermWithDetails :
-         addSubtractExpression.getTermsWithAssociation().getTermsWithDetails()) {
-        Term const& addSubtractTerm(getTermConstReferenceFromUniquePointer(addSubtractTermWithDetails.baseTermPointer));
-        TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(addSubtractTerm));
-        if (!termsOverTerms.getDenominators().empty()) {
-            isAddSubtractExpressionUpdateNeeded = true;
-        }
-        addSubtractTermsOverTerms.putAsAddOrSubtraction(termsOverTerms, addSubtractTermWithDetails.association);
-    }
-    if (isAddSubtractExpressionUpdateNeeded) {
-        addSubtractExpression = addSubtractTermsOverTerms.getCombinedExpression();
-        addSubtractExpression.simplify();
-    }
-    return isAddSubtractExpressionUpdateNeeded;
 }
 
 void simplifyTermsWithDetailsInExpressionToACommonDenominator(Expression& expression) {
@@ -149,15 +158,6 @@ void simplifyAndCopyTermsFromAnExpressionAndChangeOperatorLevelIfNeeded(
     } else {
         newTermsWithDetails.emplace_back(Term(subExpression), subExpressionAssociation);
     }
-}
-
-TermsWithAssociation getTermsWithAssociationAndReverseIfNeeded(
-    Expression const& expression, TermAssociationType const overallAssociation) {
-    TermsWithAssociation termsWithAssociation(expression.getTermsWithAssociation());
-    if (TermAssociationType::Negative == overallAssociation) {
-        termsWithAssociation.reverseTheAssociationOfTheTerms();
-    }
-    return termsWithAssociation;
 }
 
 }  // namespace alba::algebra::Simplification

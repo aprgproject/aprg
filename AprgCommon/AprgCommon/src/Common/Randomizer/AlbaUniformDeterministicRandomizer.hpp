@@ -11,7 +11,6 @@ class AlbaUniformDeterministicRandomizer {
 public:
     static_assert(typeHelper::isArithmeticType<ValueType>(), "Value should be an arithmetic type");
     static_assert(sizeof(ValueType) != 0, "C++ standard does not allow char-types.");
-
     // Assumption: Lets use the size of ValueType as basis for a better engine (not proven)
     using RandomEngine = typeHelper::ConditionalType<sizeof(ValueType) <= 4, std::mt19937, std::mt19937_64>;
 
@@ -19,13 +18,12 @@ public:
         typeHelper::isIntegralType<ValueType>(), std::uniform_int_distribution<ValueType>,
         std::uniform_real_distribution<ValueType>>;
 
-    // NOLINTNEXTLINE(cert-msc32-c,cert-msc51-cpp)
-    AlbaUniformDeterministicRandomizer() : m_randomEngine(), m_randomNumberDistribution() {}
-
     explicit AlbaUniformDeterministicRandomizer(
         ValueType const minimum, ValueType const maximum, ValueType const customSeed)
         : m_randomEngine(customSeed), m_randomNumberDistribution(minimum, maximum) {}
 
+    // NOLINTNEXTLINE(cert-msc32-c,cert-msc51-cpp)
+    AlbaUniformDeterministicRandomizer() : m_randomEngine(), m_randomNumberDistribution() {}
     ValueType getRandomValue() { return m_randomNumberDistribution(m_randomEngine); }
 
     void setMinimumAndMaximum(ValueType const minimum, ValueType const maximum) {

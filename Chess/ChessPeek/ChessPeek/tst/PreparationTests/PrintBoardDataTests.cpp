@@ -25,7 +25,6 @@ TEST(PrintBoardDataTest, PrintBoardData) {
 }
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

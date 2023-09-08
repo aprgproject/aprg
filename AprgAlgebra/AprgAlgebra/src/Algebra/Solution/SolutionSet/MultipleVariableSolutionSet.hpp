@@ -12,21 +12,16 @@ class MultipleVariableSolutionSet {
 public:
     using VariableNameToSolutionSetMap = std::map<std::string, SolutionSet>;
     using VariableNameToSolutionSetPair = std::pair<std::string, SolutionSet>;
-
     MultipleVariableSolutionSet();
-
     [[nodiscard]] bool isValueAcceptedForVariable(std::string const& variableName, AlbaNumber const& value) const;
     [[nodiscard]] int getNumberOfVariablesWithSolutions() const;
-
     [[nodiscard]] VariableNamesSet getVariableNames() const;
     [[nodiscard]] SolutionSet getSolutionSetForVariable(std::string const& variableName) const;
     [[nodiscard]] VariableNameToSolutionSetMap const& getVariableNameToSolutionSetMap() const;
-
     void addSolutionSetForVariable(std::string const& variableName, SolutionSet const& solutionSet);
 
 private:
     friend std::ostream& operator<<(std::ostream& out, MultipleVariableSolutionSet const& solutionSet);
-
     VariableNameToSolutionSetMap m_variableNameToSolutionSetMap;
 };
 

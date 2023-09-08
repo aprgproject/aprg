@@ -15,9 +15,7 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using AdjacencyList = SetOfVertices;
     using AdjacencyLists = std::array<AdjacencyList, MAX_VERTEX_VALUE>;
-
     DirectedGraphWithArrayOfAdjacencyLists() = default;
-
     [[nodiscard]] bool isEmpty() const override { return m_numberOfEdges == 0; }
 
     [[nodiscard]] bool isDirectlyConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
@@ -26,7 +24,6 @@ public:
     }
 
     [[nodiscard]] int getNumberOfVertices() const override { return getUniqueVertices().size(); }
-
     [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
 
     [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {

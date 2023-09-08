@@ -16,12 +16,10 @@ NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPair(Value c
     // If we use Algorithm 1, the running time is O(n^2), because all cells may contain the same letter, and in this
     // case k = n. Also if we use Algorithm 2, the running time is O(n^2), because all cells may have different letters,
     // and in this case n searches are needed.
-
     // However, we can combine the two algorithms and use different algorithms for different letters depending on how
     // many times each letter appears in the grid. Assume that a letter c appears k times. If k <= sqrt(n), we use
     // Algorithm 1, and if k > sqrt(n), we use Algorithm 2. It turns out that by doing this, the total running time of
     // the algorithm is only O(n*sqrt(n)).
-
     Coordinates coordinatesWithValue(getCoordinatesWithThisValue(value));
     if (static_cast<int>(coordinatesWithValue.size()) <= static_cast<int>(sqrt(m_valueMatrix.getNumberOfCells()))) {
         return getNearestEqualPairByCheckingAllPairs(value);
@@ -32,7 +30,6 @@ NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPair(Value c
 NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPairByCheckingAllPairs(Value const value) const {
     // Algorithm 1: Go through all pairs of cells with letter c, and calculate the minimum distance between such cells.
     // This will take O(k2) time where k is the number of cells with letter c.
-
     CoordinatePair result{};
     Coordinates coordinates(getCoordinatesWithThisValue(value));
     auto twoCoordinatesCombinations(
@@ -61,20 +58,13 @@ NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPairByChecki
 NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPairUsingBfs(Value const value) const {
     // Algorithm 2: Perform a breadth-first search that simultaneously starts at each cell with letter c.
     // The minimum distance between two cells with letter c will be calculated in O(n) time.
-
     Coordinate firstCoordinate(getFirstCoordinateUsingBfs(value));
     return {firstCoordinate, getSecondCoordinateUsingBfs(value, firstCoordinate)};
 }
 
-void NearestEqualCells::initializeGraph() {
-    m_valueMatrix.iterateAllThroughYAndThenX([&](int const x, int const y) {
-        if (m_valueMatrix.isInside(x + 1, y)) {
-            m_coordinateGraph.connect(Coordinate(x, y), Coordinate(x + 1, y));
-        }
-        if (m_valueMatrix.isInside(x, y + 1)) {
-            m_coordinateGraph.connect(Coordinate(x, y), Coordinate(x, y + 1));
-        }
-    });
+int NearestEqualCells::getDistance(Coordinate const& coordinate1, Coordinate const& coordinate2) {
+    return getPositiveDelta(coordinate1.first, coordinate2.first) +
+           getPositiveDelta(coordinate1.second, coordinate2.second);
 }
 
 NearestEqualCells::Coordinates NearestEqualCells::getCoordinatesWithThisValue(Value const value) const {
@@ -120,9 +110,15 @@ NearestEqualCells::Coordinate NearestEqualCells::getCoordinateUsingBfs(
     return result;
 }
 
-int NearestEqualCells::getDistance(Coordinate const& coordinate1, Coordinate const& coordinate2) {
-    return getPositiveDelta(coordinate1.first, coordinate2.first) +
-           getPositiveDelta(coordinate1.second, coordinate2.second);
+void NearestEqualCells::initializeGraph() {
+    m_valueMatrix.iterateAllThroughYAndThenX([&](int const x, int const y) {
+        if (m_valueMatrix.isInside(x + 1, y)) {
+            m_coordinateGraph.connect(Coordinate(x, y), Coordinate(x + 1, y));
+        }
+        if (m_valueMatrix.isInside(x, y + 1)) {
+            m_coordinateGraph.connect(Coordinate(x, y), Coordinate(x, y + 1));
+        }
+    });
 }
 
 }  // namespace alba

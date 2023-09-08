@@ -16,12 +16,10 @@ public:
     using Rectangle = std::pair<Point, Point>;
     using Rectangles = std::vector<Rectangle>;
     using IntervalWithUnit = Interval<Unit>;
+
     enum class EventType { StartOfRectangle = 1, EndOfRectangle = 2 };
+
     struct Event {
-        Unit xLocation;
-        IntervalWithUnit yInterval;
-        Rectangle rectangle;
-        EventType eventType;
         bool operator<(Event const& event) const {
             bool result(false);
             if (xLocation != event.xLocation) {
@@ -31,6 +29,11 @@ public:
             }
             return result;
         }
+
+        Unit xLocation;
+        IntervalWithUnit yInterval;
+        Rectangle rectangle;
+        EventType eventType;
     };
 
     [[nodiscard]] Rectangles getIntersectingRectangles() const {

@@ -6,11 +6,8 @@ namespace Singleton {
 // Singleton
 // has private static variable to hold one instance of the class
 // and method which gives us a way to instantiate the class
-
 class Singleton {
 public:
-    friend std::unique_ptr<Singleton> std::make_unique<Singleton>();
-
     static Singleton& getInstance() {
         // "static variable approach" can be done here
         if (!m_instancePointer) {
@@ -30,8 +27,10 @@ public:
         std::cout << "This is Singleton.\n";
         // ...
     }
-    // ...
 
+    friend std::unique_ptr<Singleton> std::make_unique<Singleton>();
+
+    // ...
 private:
     Singleton() = default;
     static std::unique_ptr<Singleton> m_instancePointer;
@@ -39,7 +38,7 @@ private:
 };
 
 std::unique_ptr<Singleton> Singleton::m_instancePointer;  // this still have problem of static variables (whether they
-                                                          // are initialized when called)
+// are initialized when called)
 
 }  // namespace Singleton
 

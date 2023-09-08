@@ -64,7 +64,6 @@ public:
 
 // Motivation:
 // -> The data can have long run of repeated bits. Simple type of redundancy in a bitstream
-
 // Representation:
 // -> 4-bit counts to represent alternating runs of 0s and 1s:
 // ---> 15 0s, then 7 1s then 7 0s then 11 1s.
@@ -72,9 +71,7 @@ public:
 // ---> We will use 8 bits (but 4 in the example above).
 // -> What to do when run length exceeds max count?
 // ---> If longer than 255, intersperse runs of length 0.
-
 // Applications: JPEG ITU-T T4 Group 3 Fax,
-
 // Application
 // -> Compress a bitmap
 // ---> Observation: Bits are mostly white

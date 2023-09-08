@@ -9,7 +9,6 @@ using namespace std;
 namespace alba::ThreeDimensions {
 
 Sphere::Sphere() : m_radius(0), m_radiusSquared(0) {}
-
 Sphere::Sphere(Point const& center, double const radius)
     : m_center(center), m_radius(radius), m_radiusSquared(radius * radius) {}
 
@@ -26,11 +25,9 @@ bool Sphere::operator<(Sphere const& sphere) const {
     return m_center < sphere.m_center;
 }
 
-Point Sphere::getCenter() const { return m_center; }
-
-double Sphere::getRadius() const { return m_radius; }
-
 bool Sphere::isInside(Point const& point) const { return getDistance(m_center, point) <= m_radius; }
+double Sphere::getRadius() const { return m_radius; }
+Point Sphere::getCenter() const { return m_center; }
 
 optional<double> Sphere::calculateXFromYAndZ(double const y, double const z, double const signOfRoot) const {
     optional<double> result;

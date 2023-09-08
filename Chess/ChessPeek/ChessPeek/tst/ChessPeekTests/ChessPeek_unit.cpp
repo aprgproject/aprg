@@ -10,6 +10,19 @@ namespace chess {
 
 namespace ChessPeek {
 
+// TEST(ChessPeekTest, DISABLED_CalculationDetailsSavedAndCanBeDisplayedLater) {
+//    ChessPeek chessPeek;
+//    ChessPeek::EngineCalculationDetails details1{}, details2{}, details3{};
+//    details1.depthInPlies = 1;
+//    details2.depthInPlies = 2;
+//    details3.depthInPlies = 3;
+//    Sleep(500);
+//    chessPeek.calculationMonitoringCallBackForEngine(details1);
+//    chessPeek.calculationMonitoringCallBackForEngine(details2);
+//    chessPeek.calculationMonitoringCallBackForEngine(details3);
+//    Sleep(500);
+//    chessPeek.displayCalculationDetailsIfNotDisplayedYet();
+//}
 TEST(ChessPeekTest, DISABLED_RunForeverWorks) {
     ChessPeek chessPeek;
 
@@ -49,23 +62,7 @@ TEST(ChessPeekTest, DISABLED_CalculationDetailsAreFilteredByTimer) {
     chessPeek.calculationMonitoringCallBackForEngine(details3);
 }
 
-// TEST(ChessPeekTest, DISABLED_CalculationDetailsSavedAndCanBeDisplayedLater) {
-//    ChessPeek chessPeek;
-//    ChessPeek::EngineCalculationDetails details1{}, details2{}, details3{};
-//    details1.depthInPlies = 1;
-//    details2.depthInPlies = 2;
-//    details3.depthInPlies = 3;
-
-//    Sleep(500);
-//    chessPeek.calculationMonitoringCallBackForEngine(details1);
-//    chessPeek.calculationMonitoringCallBackForEngine(details2);
-//    chessPeek.calculationMonitoringCallBackForEngine(details3);
-//    Sleep(500);
-//    chessPeek.displayCalculationDetailsIfNotDisplayedYet();
-//}
-
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

@@ -33,17 +33,7 @@ public:
                 break;
         }
     }
-    [[nodiscard]] DataBlockType getBlockType() const { return m_blockType; }
-    [[nodiscard]] int getBlockId() const { return m_blockId; }
-    [[nodiscard]] int getNumberOfObjects() const { return m_numberOfObjects; }
-    [[nodiscard]] int getNumberOfObjectsInMemory() const {
-        int numberOfObjectsInMemory(0);
-        if (m_memoryBlockHandler) {
-            numberOfObjectsInMemory = m_memoryBlockHandler->getContainerConstReference().size();
-        }
-        return numberOfObjectsInMemory;
-    }
-    ObjectToSort getLowestObject() const { return m_lowestValue; }
+
     [[nodiscard]] bool isFileStreamOpened() const {
         bool isOpened = false;
         if (m_blockFileHandler) {
@@ -51,6 +41,21 @@ public:
         }
         return isOpened;
     }
+
+    [[nodiscard]] int getBlockId() const { return m_blockId; }
+    [[nodiscard]] int getNumberOfObjects() const { return m_numberOfObjects; }
+
+    [[nodiscard]] int getNumberOfObjectsInMemory() const {
+        int numberOfObjectsInMemory(0);
+        if (m_memoryBlockHandler) {
+            numberOfObjectsInMemory = m_memoryBlockHandler->getContainerConstReference().size();
+        }
+        return numberOfObjectsInMemory;
+    }
+
+    [[nodiscard]] DataBlockType getBlockType() const { return m_blockType; }
+    ObjectToSort getLowestObject() const { return m_lowestValue; }
+
     void add(ObjectToSort const& objectToSort) {
         switch (m_blockType) {
             case DataBlockType::Empty:
@@ -69,12 +74,14 @@ public:
         setLowestObjectIfNeeded(objectToSort);
         ++m_numberOfObjects;
     }
+
     void addAtTheStart(ObjectToSort const& objectToSort) {
         switchToMemoryMode();
         m_memoryBlockHandler->addAtTheStart(objectToSort);
         setLowestObjectIfNeeded(objectToSort);
         ++m_numberOfObjects;
     }
+
     void sortThenDoFunctionThenRelease(std::function<void(ObjectToSort const&)> doFunctionForAllObjects) {
         switchToMemoryMode();
         MemoryContainer& contents(m_memoryBlockHandler->getContainerReference());
@@ -84,6 +91,7 @@ public:
         }
         clearAll();
     }
+
     void nthElementThenDoFunctionThenRelease(
         Indexes const& indexes, std::function<void(ObjectToSort const&)> doFunctionForAllObjects) {
         switchToMemoryMode();
@@ -99,6 +107,7 @@ public:
         }
         clearAll();
     }
+
     void switchToFileMode() {
         createFileHandlerIfNeeded();
         if (m_memoryBlockHandler) {
@@ -110,6 +119,7 @@ public:
         m_memoryBlockHandler.reset();
         m_blockType = DataBlockType::File;
     }
+
     void switchToMemoryMode() {
         createMemoryHandlerIfNeeded();
         if (m_blockFileHandler) {
@@ -122,6 +132,7 @@ public:
         m_blockFileHandler.reset();
         m_blockType = DataBlockType::Memory;
     }
+
     void releaseFileStream() { m_blockFileHandler->releaseFileStream(); }
 
 private:
@@ -130,22 +141,26 @@ private:
             m_memoryBlockHandler.emplace();
         }
     }
+
     void createFileHandlerIfNeeded() {
         if (!m_blockFileHandler) {
             m_blockFileHandler.emplace();
         }
     }
+
     void clearAll() {
         m_memoryBlockHandler.reset();
         m_blockFileHandler.reset();
         m_blockType = DataBlockType::Empty;
         m_numberOfObjects = 0;
     }
+
     void setLowestObjectIfNeeded(ObjectToSort const& objectToSort) {
         if (objectToSort < m_lowestValue || m_numberOfObjects == 0) {
             m_lowestValue = objectToSort;
         }
     }
+
     DataBlockType m_blockType;
     int const m_blockId;
     std::string const m_fileDumpPath;

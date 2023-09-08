@@ -23,8 +23,6 @@ namespace alba {
 
 namespace algebra::Simplification {
 
-SimplificationOfExpression::SimplificationOfExpression() = default;
-
 SimplificationOfExpression::SimplificationOfExpression(Expression const& expression) : m_expression(expression) {}
 
 bool SimplificationOfExpression::shouldSimplifyToACommonDenominator() {
@@ -96,12 +94,85 @@ bool SimplificationOfExpression::isChangeDetected(Expression const& expression1,
     return expression1 != expression2 && !hasNan(expression2);
 }
 
-void SimplificationOfExpression::simplifyExpressionUntilNoChange() {
-    Expression beforeSimplify;
-    do {
-        beforeSimplify = m_expression;
-        simplifyExpression(m_expression);
-    } while (isChangeDetected(beforeSimplify, m_expression));
+bool SimplificationOfExpression::shouldDistributeExponentConstantToEachBase() {
+    return !shouldNotSimplifyByDistributingConstantExponentToEachBase() &&
+           !shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision();
+}
+
+Term SimplificationOfExpression::getCombinedTermAndSimplifyByRationalizingNumeratorOrDenominatorIfNeeded(
+    TermsOverTerms const& termsOverTerms) {
+    Term combinedTerm;
+    if (shouldSimplifyByRationalizingNumerator()) {
+        RationalizeTermOverTerm rationalizeTermOverTerm(
+            termsOverTerms.getCombinedNumerator(), termsOverTerms.getCombinedDenominator());
+        rationalizeTermOverTerm.rationalizeNumerator();
+        combinedTerm = rationalizeTermOverTerm.getCombinedTerm();
+    } else if (shouldSimplifyByRationalizingDenominator()) {
+        RationalizeTermOverTerm rationalizeTermOverTerm(
+            termsOverTerms.getCombinedNumerator(), termsOverTerms.getCombinedDenominator());
+        rationalizeTermOverTerm.rationalizeDenominator();
+        combinedTerm = rationalizeTermOverTerm.getCombinedTerm();
+    } else {
+        combinedTerm = termsOverTerms.getCombinedTerm();
+    }
+    return combinedTerm;
+}
+
+Term SimplificationOfExpression::getCombinedTermUsingTermsRaiseToTerms(TermRaiseToTerms const& termRaiseToTerms) {
+    Term combinedTerm;
+    Term eachBasesRaisedToConstant(getEachBasesRaisedToConstantIfPossible(termRaiseToTerms));
+    if (!eachBasesRaisedToConstant.isEmpty()) {
+        combinedTerm = eachBasesRaisedToConstant;
+    } else {
+        combinedTerm = termRaiseToTerms.getCombinedTerm();
+    }
+    return combinedTerm;
+}
+
+Term SimplificationOfExpression::getEachBasesRaisedToConstantIfPossible(TermRaiseToTerms const& termRaiseToTerms) {
+    Term result;
+    if (shouldDistributeExponentConstantToEachBase()) {
+        Term const& base(termRaiseToTerms.getBase());
+        Term exponent(termRaiseToTerms.getCombinedExponents());
+        if (exponent.isConstant() && !isTheValue(exponent, 1)) {
+            Factorization::ScopeObject scopeObject;
+            scopeObject.setInThisScopeThisConfiguration(getFactorizationConfiguration());
+
+            Terms bases(factorizeTerm(base));
+            if (bases.size() > 1) {
+                TermsRaiseToNumbers termsRaiseToNumbers;
+                termsRaiseToNumbers.putTerms(bases, TermAssociationType::Positive);
+                termsRaiseToNumbers.multiplyToExponents(exponent.getAsNumber());
+                Term combinedTerm(termsRaiseToNumbers.getCombinedTerm());
+                if (!hasDoubleValues(combinedTerm) && !hasNonRealFiniteNumbers(combinedTerm)) {
+                    result = combinedTerm;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+Factorization::ConfigurationDetails SimplificationOfExpression::getFactorizationConfiguration() {
+    Factorization::ConfigurationDetails configurationDetails(
+        Factorization::Configuration::getInstance().getConfigurationDetails());
+    configurationDetails.shouldSimplifyExpressionsToFactors = shouldSimplifyToFactors();
+    configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue =
+        shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue();
+    return configurationDetails;
+}
+
+Expression SimplificationOfExpression::getNewExpressionWithSubstitutedVariableForTerm(
+    Term const& mainExpression, Term const& termToSubstitute) {
+    string variableNameForSubstitution(createVariableNameForSubstitution(termToSubstitute));
+
+    SubstitutionOfTermsToTerms substitutionToVariable{{termToSubstitute, variableNameForSubstitution}};
+    Term termWithNewVariable(substitutionToVariable.performSubstitutionTo(mainExpression));
+
+    SubstitutionOfVariablesToTerms substitutionFromVariable{{variableNameForSubstitution, termToSubstitute}};
+    Term termWithoutNewVariable(substitutionFromVariable.performSubstitutionTo(termWithNewVariable));
+
+    return createOrCopyExpressionFromATerm(termWithoutNewVariable);
 }
 
 void SimplificationOfExpression::simplifyExpression(Expression& expression) {
@@ -113,36 +184,6 @@ void SimplificationOfExpression::simplifyExpression(Expression& expression) {
     // is clearing the expression and then copying simplified terms the most efficient way?
     expression.clear();
     processTermsBaseOnOperatorLevel(expression, newTermsWithDetails, newOperatorLevel);
-}
-
-void SimplificationOfExpression::simplifyExpressionUntilNoChangeInitiallyIfNeeded() {
-    if (shouldSimplifyToACommonDenominator() || shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables()) {
-        convertPolynomialOverPolynomialIfNeeded();
-        simplifyExpressionUntilNoChange();
-    }
-}
-
-void SimplificationOfExpression::simplifyToACommonDenominatorIfNeeded() {
-    if (shouldSimplifyToACommonDenominator()) {
-        simplifyToACommonDenominatorForExpressionAndReturnIfAdditionOrSubtractionOfTermsOverTermsOccurred(m_expression);
-    }
-}
-
-void SimplificationOfExpression::simplifyBySubstitutingExpressionAndFunctionsToVariablesIfNeeded() {
-    if (shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables()) {
-        SimplificationOfExpression::ConfigurationDetails substitutionSimplificationConfigurationDetails(
-            Configuration::getInstance().getConfigurationDetails());
-        substitutionSimplificationConfigurationDetails.shouldSimplifyToACommonDenominator = true;
-        substitutionSimplificationConfigurationDetails.shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables =
-            false;
-
-        SimplificationOfExpression::ScopeObject scopeObject;
-        scopeObject.setInThisScopeThisConfiguration(substitutionSimplificationConfigurationDetails);
-
-        while (tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(m_expression)) {
-            ;
-        }
-    }
 }
 
 void SimplificationOfExpression::processTermsBaseOnOperatorLevel(
@@ -221,74 +262,6 @@ void SimplificationOfExpression::simplifyByCombiningRadicalsInMultiplicationAndD
     }
 }
 
-Term SimplificationOfExpression::getCombinedTermAndSimplifyByRationalizingNumeratorOrDenominatorIfNeeded(
-    TermsOverTerms const& termsOverTerms) {
-    Term combinedTerm;
-    if (shouldSimplifyByRationalizingNumerator()) {
-        RationalizeTermOverTerm rationalizeTermOverTerm(
-            termsOverTerms.getCombinedNumerator(), termsOverTerms.getCombinedDenominator());
-        rationalizeTermOverTerm.rationalizeNumerator();
-        combinedTerm = rationalizeTermOverTerm.getCombinedTerm();
-    } else if (shouldSimplifyByRationalizingDenominator()) {
-        RationalizeTermOverTerm rationalizeTermOverTerm(
-            termsOverTerms.getCombinedNumerator(), termsOverTerms.getCombinedDenominator());
-        rationalizeTermOverTerm.rationalizeDenominator();
-        combinedTerm = rationalizeTermOverTerm.getCombinedTerm();
-    } else {
-        combinedTerm = termsOverTerms.getCombinedTerm();
-    }
-    return combinedTerm;
-}
-
-Term SimplificationOfExpression::getCombinedTermUsingTermsRaiseToTerms(TermRaiseToTerms const& termRaiseToTerms) {
-    Term combinedTerm;
-    Term eachBasesRaisedToConstant(getEachBasesRaisedToConstantIfPossible(termRaiseToTerms));
-    if (!eachBasesRaisedToConstant.isEmpty()) {
-        combinedTerm = eachBasesRaisedToConstant;
-    } else {
-        combinedTerm = termRaiseToTerms.getCombinedTerm();
-    }
-    return combinedTerm;
-}
-
-Term SimplificationOfExpression::getEachBasesRaisedToConstantIfPossible(TermRaiseToTerms const& termRaiseToTerms) {
-    Term result;
-    if (shouldDistributeExponentConstantToEachBase()) {
-        Term const& base(termRaiseToTerms.getBase());
-        Term exponent(termRaiseToTerms.getCombinedExponents());
-        if (exponent.isConstant() && !isTheValue(exponent, 1)) {
-            Factorization::ScopeObject scopeObject;
-            scopeObject.setInThisScopeThisConfiguration(getFactorizationConfiguration());
-
-            Terms bases(factorizeTerm(base));
-            if (bases.size() > 1) {
-                TermsRaiseToNumbers termsRaiseToNumbers;
-                termsRaiseToNumbers.putTerms(bases, TermAssociationType::Positive);
-                termsRaiseToNumbers.multiplyToExponents(exponent.getAsNumber());
-                Term combinedTerm(termsRaiseToNumbers.getCombinedTerm());
-                if (!hasDoubleValues(combinedTerm) && !hasNonRealFiniteNumbers(combinedTerm)) {
-                    result = combinedTerm;
-                }
-            }
-        }
-    }
-    return result;
-}
-
-bool SimplificationOfExpression::shouldDistributeExponentConstantToEachBase() {
-    return !shouldNotSimplifyByDistributingConstantExponentToEachBase() &&
-           !shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision();
-}
-
-Factorization::ConfigurationDetails SimplificationOfExpression::getFactorizationConfiguration() {
-    Factorization::ConfigurationDetails configurationDetails(
-        Factorization::Configuration::getInstance().getConfigurationDetails());
-    configurationDetails.shouldSimplifyExpressionsToFactors = shouldSimplifyToFactors();
-    configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue =
-        shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue();
-    return configurationDetails;
-}
-
 bool SimplificationOfExpression::tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(
     Expression const& expression) {
     bool continueToTryToSubstitute = false;
@@ -308,17 +281,42 @@ bool SimplificationOfExpression::tryToSubstituteSubExpressionOrSubFunctionAndRet
     return continueToTryToSubstitute;
 }
 
-Expression SimplificationOfExpression::getNewExpressionWithSubstitutedVariableForTerm(
-    Term const& mainExpression, Term const& termToSubstitute) {
-    string variableNameForSubstitution(createVariableNameForSubstitution(termToSubstitute));
+void SimplificationOfExpression::simplifyExpressionUntilNoChange() {
+    Expression beforeSimplify;
+    do {
+        beforeSimplify = m_expression;
+        simplifyExpression(m_expression);
+    } while (isChangeDetected(beforeSimplify, m_expression));
+}
 
-    SubstitutionOfTermsToTerms substitutionToVariable{{termToSubstitute, variableNameForSubstitution}};
-    Term termWithNewVariable(substitutionToVariable.performSubstitutionTo(mainExpression));
+void SimplificationOfExpression::simplifyExpressionUntilNoChangeInitiallyIfNeeded() {
+    if (shouldSimplifyToACommonDenominator() || shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables()) {
+        convertPolynomialOverPolynomialIfNeeded();
+        simplifyExpressionUntilNoChange();
+    }
+}
 
-    SubstitutionOfVariablesToTerms substitutionFromVariable{{variableNameForSubstitution, termToSubstitute}};
-    Term termWithoutNewVariable(substitutionFromVariable.performSubstitutionTo(termWithNewVariable));
+void SimplificationOfExpression::simplifyToACommonDenominatorIfNeeded() {
+    if (shouldSimplifyToACommonDenominator()) {
+        simplifyToACommonDenominatorForExpressionAndReturnIfAdditionOrSubtractionOfTermsOverTermsOccurred(m_expression);
+    }
+}
 
-    return createOrCopyExpressionFromATerm(termWithoutNewVariable);
+void SimplificationOfExpression::simplifyBySubstitutingExpressionAndFunctionsToVariablesIfNeeded() {
+    if (shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables()) {
+        SimplificationOfExpression::ConfigurationDetails substitutionSimplificationConfigurationDetails(
+            Configuration::getInstance().getConfigurationDetails());
+        substitutionSimplificationConfigurationDetails.shouldSimplifyToACommonDenominator = true;
+        substitutionSimplificationConfigurationDetails.shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables =
+            false;
+
+        SimplificationOfExpression::ScopeObject scopeObject;
+        scopeObject.setInThisScopeThisConfiguration(substitutionSimplificationConfigurationDetails);
+
+        while (tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(m_expression)) {
+            ;
+        }
+    }
 }
 
 void SimplificationOfExpression::convertPolynomialOverPolynomialIfNeeded() {
@@ -349,6 +347,8 @@ void SimplificationOfExpression::convertPolynomialToPolynomialOverPolynomial(Exp
         convertPolynomialToPolynomialOverPolynomial(term);
     }
 }
+
+SimplificationOfExpression::SimplificationOfExpression() = default;
 
 }  // namespace algebra::Simplification
 

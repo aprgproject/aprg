@@ -1,10 +1,7 @@
 #include "TermsRaiseToNumbers.hpp"
 
 namespace alba::algebra {
-
-TermsRaiseToNumbers::TermsRaiseToNumbers() = default;
-
 TermsRaiseToNumbers::TermsRaiseToNumbers(BaseToExponentMap const& baseToExponentMap)
     : TermsRaiseToNumbersBase(baseToExponentMap) {}
-
+TermsRaiseToNumbers::TermsRaiseToNumbers() = default;
 }  // namespace alba::algebra

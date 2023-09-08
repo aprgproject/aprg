@@ -5,7 +5,6 @@ namespace alba::algebra {
 class BaseSolver {
 public:
     BaseSolver();
-
     [[nodiscard]] bool isSolved() const;
     [[nodiscard]] bool isACompleteSolution() const;
 
@@ -14,7 +13,6 @@ protected:
     // Guideline #4: A base class destructor should be either public and virtual, or protected and nonvirtual.
     // Source: http://www.gotw.ca/publications/mill18.htm
     ~BaseSolver() = default;
-
     void setAsCompleteSolution();
     void setAsIncompleteSolution();
 

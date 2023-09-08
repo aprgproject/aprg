@@ -48,6 +48,9 @@ struct Item {
 };
 
 struct Monster {
+    [[nodiscard]] bool isAggressive() const;
+    [[nodiscard]] bool isMvp() const;
+    [[nodiscard]] bool hasStoneCurseSkill() const;
     unsigned int monsterId;
     std::string name;
     unsigned int hp;
@@ -91,9 +94,6 @@ struct Monster {
     stringHelper::strings modes;
     stringHelper::strings monsterSkills;
     NamesAndRates dropsWithRates;
-    [[nodiscard]] bool isAggressive() const;
-    [[nodiscard]] bool isMvp() const;
-    [[nodiscard]] bool hasStoneCurseSkill() const;
 };
 
 struct RoMap {
@@ -116,7 +116,26 @@ using ItemNameToShopItemDetailMap = std::map<std::string, ShopItemDetail>;
 class RagnarokOnline {
 public:
     RagnarokOnline();
-
+    static std::string getFixedItemName(Item const& item);
+    [[nodiscard]] double getTalonRoBuyingPrice(std::string const& fixedItemName) const;
+    [[nodiscard]] double getTalonRoSellingPrice(std::string const& fixedItemName) const;
+    [[nodiscard]] ItemIdToItemMap const& getItemIdToItemMap() const;
+    [[nodiscard]] MonsterIdToMonsterMap const& getMonsterIdToMonsterMap() const;
+    [[nodiscard]] MapNameToRoMap const& getMapNameToRoMap() const;
+    [[nodiscard]] ItemNameToShopItemDetailMap const& getBuyingItemShops() const;
+    [[nodiscard]] ItemNameToShopItemDetailMap const& getSellingItemShops() const;
+    [[nodiscard]] Item getItem(std::string const& fixedItemName) const;
+    [[nodiscard]] Monster getMonster(std::string const& monsterName) const;
+    void saveItemIdToItemMapToFile(std::string const& outputFilePath) const;
+    void saveMonsterIdToMonsterMapToFile(std::string const& outputFilePath) const;
+    void saveMapNameToRoMapToFile(std::string const& outputFilePath) const;
+    void saveBuyingShopItems(std::string const& outputFilePath) const;
+    void saveSellingShopItems(std::string const& outputFilePath) const;
+    void printItemIdToItemMap() const;
+    void printMonsterIdToMonsterMap() const;
+    void printMapNameToRoMap() const;
+    void printBuyingShopItems() const;
+    void printSellingShopItems() const;
     void retrieveItemDataFromRmsWebpages(std::string const& directoryPathOfWebPages);
     void retrieveItemDataFromRmsWebPage(std::string const& filePathOfWebPage);
     void retrieveMonsterDataFromRmsWebpages(std::string const& directoryPathOfWebPages);
@@ -126,39 +145,13 @@ public:
     void retrieveBuyingShopDataFromTalonRoWebpages(std::string const& directoryPathOfWebPages);
     void retrieveSellingShopDataFromTalonRoWebpages(std::string const& directoryPathOfWebPages);
     void retrieveShopDataFromTalonRoWebPage(std::string const& filePathOfWebPage, ShopType const shopType);
-
     void readItemIdToItemMapFromFile(std::string const& inputFilePath);
     void readMonsterIdToMonsterMapFromFile(std::string const& inputFilePath);
     void readMapNameToRoMapFromFile(std::string const& inputFilePath);
     void readBuyingShopItems(std::string const& inputFilePath);
     void readSellingShopItems(std::string const& inputFilePath);
-
     void buildItemNameToItemId();
     void buildMonsterNameToMonsterId();
-
-    [[nodiscard]] ItemIdToItemMap const& getItemIdToItemMap() const;
-    [[nodiscard]] MonsterIdToMonsterMap const& getMonsterIdToMonsterMap() const;
-    [[nodiscard]] MapNameToRoMap const& getMapNameToRoMap() const;
-    [[nodiscard]] ItemNameToShopItemDetailMap const& getBuyingItemShops() const;
-    [[nodiscard]] ItemNameToShopItemDetailMap const& getSellingItemShops() const;
-
-    [[nodiscard]] Item getItem(std::string const& fixedItemName) const;
-    [[nodiscard]] Monster getMonster(std::string const& monsterName) const;
-    static std::string getFixedItemName(Item const& item);
-    [[nodiscard]] double getTalonRoBuyingPrice(std::string const& fixedItemName) const;
-    [[nodiscard]] double getTalonRoSellingPrice(std::string const& fixedItemName) const;
-
-    void saveItemIdToItemMapToFile(std::string const& outputFilePath) const;
-    void saveMonsterIdToMonsterMapToFile(std::string const& outputFilePath) const;
-    void saveMapNameToRoMapToFile(std::string const& outputFilePath) const;
-    void saveBuyingShopItems(std::string const& outputFilePath) const;
-    void saveSellingShopItems(std::string const& outputFilePath) const;
-
-    void printItemIdToItemMap() const;
-    void printMonsterIdToMonsterMap() const;
-    void printMapNameToRoMap() const;
-    void printBuyingShopItems() const;
-    void printSellingShopItems() const;
 
 private:
     static std::string fixText(std::string const& text);
@@ -181,7 +174,6 @@ std::ostream& operator<<(std::ostream& out, ItemIdToItemMap const& itemIdToItemM
 std::ostream& operator<<(std::ostream& out, MonsterIdToMonsterMap const& monsterIdToMonsterMap);
 std::ostream& operator<<(std::ostream& out, MapNameToRoMap const& mapNameToRoMap);
 std::ostream& operator<<(std::ostream& out, ItemNameToShopItemDetailMap const& itemNameToShopItemDetailMap);
-
 std::istream& operator>>(std::istream& in, NameAndRate& nameAndRate);
 std::istream& operator>>(std::istream& in, MonsterDetailsOnRoMap& monsterDetailsOnRoMap);
 std::istream& operator>>(std::istream& in, Item& item);

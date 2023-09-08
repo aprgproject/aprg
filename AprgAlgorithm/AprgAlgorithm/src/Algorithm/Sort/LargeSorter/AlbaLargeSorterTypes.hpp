@@ -4,7 +4,6 @@
 #include <vector>
 
 namespace alba::algorithm {
-
 template <typename ObjectToSort>
 class DataBlock;
 template <typename ObjectToSort>
@@ -13,7 +12,6 @@ template <typename ObjectToSort>
 using AlbaLargeSorterBlockContainer = std::list<AlbaLargeSorterBlockType<ObjectToSort>>;
 template <typename ObjectToSort>
 using AlbaLargeSorterBlockIterator = typename AlbaLargeSorterBlockContainer<ObjectToSort>::iterator;
-
 template <typename BlockIterator>
 class DataBlockCache;
 template <typename BlockIterator>
@@ -22,7 +20,5 @@ template <typename BlockIterator>
 using AlbaLargeSorterBlockCacheEntry = typename AlbaLargeSorterBlockCache<BlockIterator>::BlockCacheEntry;
 template <typename BlockIterator>
 using AlbaLargeSorterBlockCacheContainer = typename AlbaLargeSorterBlockCache<BlockIterator>::BlockCacheContainer;
-
 using Indexes = std::vector<int>;
-
 }  // namespace alba::algorithm

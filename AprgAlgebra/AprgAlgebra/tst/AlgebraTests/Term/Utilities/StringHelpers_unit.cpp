@@ -32,6 +32,7 @@ TEST(StringHelpersTest, GetOperatorLevelValueWorks) {
     EXPECT_EQ(7, getOperatorPriority("^"));
     EXPECT_EQ(0, getOperatorPriority("operator"));
 }
+
 TEST(StringHelpersTest, GetOperatingStringWorks) {
     EXPECT_TRUE(getOperatingString(OperatorLevel::Unknown, TermAssociationType::Positive).empty());
     EXPECT_TRUE(getOperatingString(OperatorLevel::Unknown, TermAssociationType::Negative).empty());

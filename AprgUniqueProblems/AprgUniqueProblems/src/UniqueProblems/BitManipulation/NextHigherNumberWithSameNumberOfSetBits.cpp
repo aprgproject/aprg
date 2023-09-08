@@ -6,8 +6,6 @@ using namespace std;
 
 namespace alba {
 
-NextHigherNumberWithSameNumberOfSetBits::NextHigherNumberWithSameNumberOfSetBits() = default;
-
 NextHigherNumberWithSameNumberOfSetBits::Value NextHigherNumberWithSameNumberOfSetBits::getNextHigherNumber(
     Value const value) {
     Value result{};
@@ -19,5 +17,7 @@ NextHigherNumberWithSameNumberOfSetBits::Value NextHigherNumberWithSameNumberOfS
     }
     return result;
 }
+
+NextHigherNumberWithSameNumberOfSetBits::NextHigherNumberWithSameNumberOfSetBits() = default;
 
 }  // namespace alba

@@ -10,47 +10,13 @@ using namespace std;
 
 namespace alba {
 
-FibonacciExample::Number FibonacciExample::getNthFibonacciUsingNaiveRecursion(Number const number) const {
-    // Time Complexity: T(n) = T(n-1) + T(n-2) which is exponential.
-    // Extra Space: O(n) if we consider the function call stack size, otherwise O(1).
-
-    // We can observe that this implementation does a lot of repeated work, thus this is a bad implementation for nth
-    // Fibonacci number.
-
-    if (number <= 1) {
-        return number;
-    }
-    return getNthFibonacciUsingNaiveRecursion(number - 1) + getNthFibonacciUsingNaiveRecursion(number - 2);
-}
-
-FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMemoizationDP(Number const number) {
-    // Time Complexity: O(n) // same as iterative DP
-    // Extra Space: O(n)
-
-    // a) Memoization (Top Down):
-    // The memoized program for a problem is similar to the recursive version
-    // with a small modification that it looks into a lookup table before computing solutions.
-    // We initialize a lookup array with all initial values as UNUSED_VALUE.
-    // Whenever we need the solution to a subproblem, we first look into the lookup table.
-    // If the precomputed value is there then we return that value,
-    // otherwise, we calculate the value and put the result in the lookup table so that it can be reused later.
-
-    Number size = max(number + 1, 2);
-    Numbers memoizationData(size, static_cast<int>(UNUSED_VALUE));
-    memoizationData[0] = 0;
-    memoizationData[1] = 1;
-    return getNthFibonacciUsingMemoizationDP(memoizationData, number);
-}
-
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDP(Number const number) {
     // Time Complexity: O(n)
     // Extra Space: O(n)
-
     // b) Tabulation (Bottom Up):
     // The tabulated program for a given problem builds a table in bottom up fashion and returns the last entry from
     // table. For example, for the same Fibonacci number, we first calculate fib(0) then fib(1) then fib(2) then fib(3)
     // and so on. So literally, we are building the solutions of subproblems bottom-up.
-
     Number size = max(number + 1, 2);
     Numbers tabulationData(size);
     tabulationData[0] = 0;
@@ -63,12 +29,10 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDP(Numbe
 
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDPAndSpaceEfficient(Number const number) {
     // NOTE: Same implementation in AprgMath
-
     // Time Complexity: O(n)
     // Extra Space: O(1)
     // -> We can optimize the space used in method 2 by storing the previous two numbers only
     // because that is all we need to get the next Fibonacci number in series.
-
     if (number == 0) {
         return 0;
     }
@@ -84,10 +48,8 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDPAndSpa
 
 FibonacciExample::Number FibonacciExample::getNthFibonacciNumberUsingBinetsFormula(Number const number) {
     // NOTE: Same implementation in AprgMath
-
     // NOTE: The time complexity is constant but it uses double precision so its not that accurate
     // NOTE: The pow() might be logarithmic but its not clearly written on the standard.
-
     // Binets formula:
     double sqrtOf5 = sqrt(5);
     double phi = (1 + sqrtOf5) / 2;
@@ -96,17 +58,14 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciNumberUsingBinetsFormu
 
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMatrixMultiplication(Number const number) {
     // NOTE: Same implementation in AprgMath (Linear Recurrence)
-
     // Time Complexity: O(log(n))  (This is the only logarithmic solution here)
     // Extra Space: O(1)
-
     // This another O(n) which relies on the fact that if we n times multiply the matrix M = {{1,1},{1,0}} to itself
     // (in other words calculate power(M, n)), then we get the (n+1)th Fibonacci number as the element at row and column
     // (0, 0) in the resultant matrix. The matrix representation gives the following closed expression for the Fibonacci
     // numbers:
     //  |f(n-1)|f(n)  |
     //  |f(n)  |f(n+1)|
-
     if (number == 0) {
         return 0;
     }
@@ -121,36 +80,21 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMatrixMultiplicat
 
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMatrixPowerWithLogarithmicTime(Number const number) {
     // NOTE: Same implementation in AprgMath (Linear Recurrence)
-
     // Time Complexity: O(n)
     // Extra Space: O(1)
-
     if (number == 0) {
         return 0;
     }  // Matrix representation:
     // |f(n-1)|f(n)  |
     // |f(n)  |f(n+1)|
-
     NumberMatrix formulaicTransform(2, 2, {0, 1, 1, 1});
 
     NumberMatrix fibonacciMatrix(getMatrixRaiseToScalarPower(formulaicTransform, number - 1));  // logarithmic
     return fibonacciMatrix.getEntry(1, 1);
 }
 
-FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicMemoizationDP(Number const number) {
-    // Time Complexity: O(log(n))
-    // Extra Space: O(n)
-
-    Number size = max(number + 1, 2);
-    Numbers memoizationData(size, static_cast<int>(UNUSED_VALUE));
-    memoizationData[0] = 0;
-    memoizationData[1] = 1;
-    return getNthFibonacciUsingMemoizationDP(memoizationData, number);
-}
-
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicIterativeDP(Number const number) {
     // Derived using matrix power (check notes at header file)
-
     Number result(number);
     if (result > 1) {
         Number size = max(number + 1, 2);
@@ -185,6 +129,44 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicIterat
     return result;
 }
 
+FibonacciExample::Number FibonacciExample::getNthFibonacciUsingNaiveRecursion(Number const number) const {
+    // Time Complexity: T(n) = T(n-1) + T(n-2) which is exponential.
+    // Extra Space: O(n) if we consider the function call stack size, otherwise O(1).
+    // We can observe that this implementation does a lot of repeated work, thus this is a bad implementation for nth
+    // Fibonacci number.
+    if (number <= 1) {
+        return number;
+    }
+    return getNthFibonacciUsingNaiveRecursion(number - 1) + getNthFibonacciUsingNaiveRecursion(number - 2);
+}
+
+FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMemoizationDP(Number const number) {
+    // Time Complexity: O(n) // same as iterative DP
+    // Extra Space: O(n)
+    // a) Memoization (Top Down):
+    // The memoized program for a problem is similar to the recursive version
+    // with a small modification that it looks into a lookup table before computing solutions.
+    // We initialize a lookup array with all initial values as UNUSED_VALUE.
+    // Whenever we need the solution to a subproblem, we first look into the lookup table.
+    // If the precomputed value is there then we return that value,
+    // otherwise, we calculate the value and put the result in the lookup table so that it can be reused later.
+    Number size = max(number + 1, 2);
+    Numbers memoizationData(size, static_cast<int>(UNUSED_VALUE));
+    memoizationData[0] = 0;
+    memoizationData[1] = 1;
+    return getNthFibonacciUsingMemoizationDP(memoizationData, number);
+}
+
+FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicMemoizationDP(Number const number) {
+    // Time Complexity: O(log(n))
+    // Extra Space: O(n)
+    Number size = max(number + 1, 2);
+    Numbers memoizationData(size, static_cast<int>(UNUSED_VALUE));
+    memoizationData[0] = 0;
+    memoizationData[1] = 1;
+    return getNthFibonacciUsingMemoizationDP(memoizationData, number);
+}
+
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMemoizationDP(
     Numbers& memoizationData, Number const number) {
     Number& resultForNumber(memoizationData[number]);
@@ -198,7 +180,6 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMemoizationDP(
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicMemoizationDP(
     Numbers& memoizationData, Number const number) {
     // Derived using matrix power
-
     Number& resultForNumber(memoizationData[number]);
     if (resultForNumber == UNUSED_VALUE) {
         if (mathHelper::isOdd(number)) {

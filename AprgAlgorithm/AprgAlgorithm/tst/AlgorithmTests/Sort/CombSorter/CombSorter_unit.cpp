@@ -43,7 +43,6 @@ TEST(CombSorterTest, SortWorksOnCharactersUsingExample2) {
 }
 
 // CANNOT SORT STD::LIST
-
 TEST(CombSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
     IntegersSorter sorter;
     testSortUsingExample1WithPositiveAndNegativeIntegers<IntegersSorter, Integers>(sorter);

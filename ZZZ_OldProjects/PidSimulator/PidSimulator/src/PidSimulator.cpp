@@ -21,9 +21,22 @@ PidSimulator::PidSimulator(stringHelper::strings const& argumentsInMain)
 
       m_randomizer(0, static_cast<int>(m_conf.amplitudeOfInputDemand)) {}
 
+double PidSimulator::computeFromMachsModel1(
+    double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) {
+    double newDemand = inputDemandSample + adjustedDemand;
+    double machsOutput = min(psuedoMaxTxPower, newDemand);
+    adjustedDemand = max(newDemand - psuedoMaxTxPower, static_cast<double>(0));
+    return machsOutput;
+}
+
+double PidSimulator::computeFromMachsModel2(
+    double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) {
+    adjustedDemand = 0;
+    return min(psuedoMaxTxPower, inputDemandSample);
+}
+
 double PidSimulator::calculatePid(double const input, double const target) const {
     // https://en.wikipedia.org/wiki/PID_controller
-
     static double integral = 0;
     static double derivative = 0;
     static double lastError = 0;
@@ -38,6 +51,17 @@ double PidSimulator::calculatePid(double const input, double const target) const
     lastError = error;
 
     return pwm;
+}
+
+double PidSimulator::computeFromMachsModel(
+    double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) const {
+    double result(0);
+    if ("MachsModel1" == m_conf.machsModelType) {
+        result = computeFromMachsModel1(inputDemandSample, psuedoMaxTxPower, adjustedDemand);
+    } else if ("MachsModel2" == m_conf.machsModelType) {
+        result = computeFromMachsModel2(inputDemandSample, psuedoMaxTxPower, adjustedDemand);
+    }
+    return result;
 }
 
 void PidSimulator::generateInput() {
@@ -117,31 +141,6 @@ void PidSimulator::generateRandomForInput() {
     }
 }
 
-double PidSimulator::computeFromMachsModel(
-    double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) const {
-    double result(0);
-    if ("MachsModel1" == m_conf.machsModelType) {
-        result = computeFromMachsModel1(inputDemandSample, psuedoMaxTxPower, adjustedDemand);
-    } else if ("MachsModel2" == m_conf.machsModelType) {
-        result = computeFromMachsModel2(inputDemandSample, psuedoMaxTxPower, adjustedDemand);
-    }
-    return result;
-}
-
-double PidSimulator::computeFromMachsModel1(
-    double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) {
-    double newDemand = inputDemandSample + adjustedDemand;
-    double machsOutput = min(psuedoMaxTxPower, newDemand);
-    adjustedDemand = max(newDemand - psuedoMaxTxPower, static_cast<double>(0));
-    return machsOutput;
-}
-
-double PidSimulator::computeFromMachsModel2(
-    double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) {
-    adjustedDemand = 0;
-    return min(psuedoMaxTxPower, inputDemandSample);
-}
-
 void PidSimulator::calculateAndGenerateOutputImage() {
     int index = 0;
     int xRightMax = 0;
@@ -209,7 +208,6 @@ void PidSimulator::calculateAndGenerateOutputImage() {
         graph.drawContinuousPoints(pseudoMaxTxPowerSeries, 0x0000FF00);
         graph.drawContinuousPoints(tcomReceivedPowerFromMachsSeries, 0x00FF0000);
         // Remove adjusted demand //graph.drawContinuousPoints(adjustedDemandSeries, 0x00008888);
-
         graph.saveChangesToBitmapFile();
     } else {
         cout << "The default bitmap file was not found. The default file location:  [" << defaultFile.getFullPath()
@@ -231,27 +229,6 @@ void PidSimulator::updateMaxWithBuffer(int& lowerValue, int& higherValue) {
     }
     lowerValue = static_cast<int>(lowerValue - increase);
     higherValue = static_cast<int>(higherValue + increase);
-}
-
-void PidSimulator::calculateMagnificationAndOffset(
-    double const xLeftMax, double const xRightMax, double const yBottomMax, double const yTopMax,
-    double const bitmapSizeInX, double const bitmapSizeInY) {
-    m_xMagnificationToGraph = bitmapSizeInX / (xRightMax - xLeftMax);
-    int xOffsetGraph = static_cast<int>(round(-1 * m_xMagnificationToGraph * xLeftMax));
-    if (xOffsetGraph < 0) {
-        m_xOffsetToGraph = 0;
-    } else {
-        m_xOffsetToGraph = static_cast<unsigned int>(xOffsetGraph);
-    }
-    m_yMagnificationToGraph = bitmapSizeInY / (yTopMax - yBottomMax);
-    int yOffsetGraph = static_cast<int>(round(1 * m_yMagnificationToGraph * yTopMax));
-    if (yOffsetGraph < 0) {
-        m_yOffsetToGraph = 0;
-    } else {
-        m_yOffsetToGraph = static_cast<unsigned int>(yOffsetGraph);
-    }
-    m_xGridInterval = static_cast<double>(pow(10, 2 + round(log10(1 / m_xMagnificationToGraph))));
-    m_yGridInterval = static_cast<double>(pow(10, 2 + round(log10(1 / m_yMagnificationToGraph))));
 }
 
 void PidSimulator::updateMaxPoints(
@@ -288,6 +265,27 @@ void PidSimulator::updateBottomMax(int& yBottomMax, int const yCoordinate) {
     if (yCoordinate >= hardMax && yBottomMax > yCoordinate) {
         yBottomMax = yCoordinate;
     }
+}
+
+void PidSimulator::calculateMagnificationAndOffset(
+    double const xLeftMax, double const xRightMax, double const yBottomMax, double const yTopMax,
+    double const bitmapSizeInX, double const bitmapSizeInY) {
+    m_xMagnificationToGraph = bitmapSizeInX / (xRightMax - xLeftMax);
+    int xOffsetGraph = static_cast<int>(round(-1 * m_xMagnificationToGraph * xLeftMax));
+    if (xOffsetGraph < 0) {
+        m_xOffsetToGraph = 0;
+    } else {
+        m_xOffsetToGraph = static_cast<unsigned int>(xOffsetGraph);
+    }
+    m_yMagnificationToGraph = bitmapSizeInY / (yTopMax - yBottomMax);
+    int yOffsetGraph = static_cast<int>(round(1 * m_yMagnificationToGraph * yTopMax));
+    if (yOffsetGraph < 0) {
+        m_yOffsetToGraph = 0;
+    } else {
+        m_yOffsetToGraph = static_cast<unsigned int>(yOffsetGraph);
+    }
+    m_xGridInterval = static_cast<double>(pow(10, 2 + round(log10(1 / m_xMagnificationToGraph))));
+    m_yGridInterval = static_cast<double>(pow(10, 2 + round(log10(1 / m_yMagnificationToGraph))));
 }
 
 }  // namespace alba

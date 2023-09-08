@@ -16,22 +16,14 @@ public:
     using StatisticsUtilities = DataStatisticsUtilities<DIMENSIONS>;
     using SampleOptional = std::optional<Sample>;
     using DoubleOptional = std::optional<double>;
-
     DataStatistics() = default;
-
     explicit DataStatistics(Samples const& samples) : m_samples(samples) {}
-
-    void clearPreviousCalculations() {
-        m_sum.reset();
-        m_mean.reset();
-        m_sampleVariance.reset();
-        m_sampleStandardDeviation.reset();
-        m_populationVariance.reset();
-        m_populationStandardDeviation.reset();
-        m_dispersionAroundTheCentroid.reset();
-    }
-
     [[nodiscard]] Samples const& getSamples() const { return m_samples; }
+
+    double getDispersionAroundTheCentroid() {
+        calculateDispersionAroundTheCentroidIfNeeded();
+        return m_dispersionAroundTheCentroid.value();
+    }
 
     Sample getSum() {
         calculateSumIfNeeded();
@@ -63,9 +55,14 @@ public:
         return m_populationStandardDeviation.value();
     }
 
-    double getDispersionAroundTheCentroid() {
-        calculateDispersionAroundTheCentroidIfNeeded();
-        return m_dispersionAroundTheCentroid.value();
+    void clearPreviousCalculations() {
+        m_sum.reset();
+        m_mean.reset();
+        m_sampleVariance.reset();
+        m_sampleStandardDeviation.reset();
+        m_populationVariance.reset();
+        m_populationStandardDeviation.reset();
+        m_dispersionAroundTheCentroid.reset();
     }
 
 protected:

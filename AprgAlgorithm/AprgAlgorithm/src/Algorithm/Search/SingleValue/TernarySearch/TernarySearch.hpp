@@ -9,9 +9,8 @@ class TernarySearch {
 public:
     using Index = int;
     using Value = typename Values::value_type;
-    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
-
     explicit TernarySearch(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     [[nodiscard]] Index getIndexOfValue(Value const& target) const {
         Index result(INVALID_INDEX);
@@ -34,7 +33,6 @@ private:
     [[nodiscard]] Index getIndexOfValueWithoutCheck(
         Index const lowIndex, Index const highIndex, Value const& target) const {
         // Based from https://en.wikipedia.org/wiki/Ternary_search#Algorithm
-
         Index result(INVALID_INDEX);
         if (lowIndex < highIndex) {
             Index firstMiddleIndex = getFirstOneThirdIndex(lowIndex, highIndex);
@@ -51,6 +49,7 @@ private:
         }
         return result;
     }
+
     Values const& m_sortedValues;
 };
 

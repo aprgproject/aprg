@@ -59,15 +59,10 @@ TEST(AlbaXYZTest, LessThanOperatorWorks) {
 }
 
 TEST(AlbaXYZTest, PlusUnaryOperatorWorks) { EXPECT_EQ(IntXYZ(1, 2, 3), +IntXYZ(1, 2, 3)); }
-
 TEST(AlbaXYZTest, MinusUnaryOperatorWorks) { EXPECT_EQ(IntXYZ(-1, -2, -3), -IntXYZ(1, 2, 3)); }
-
 TEST(AlbaXYZTest, PlusBinaryOperatorWorks) { EXPECT_EQ(IntXYZ(5, -3, -3), (IntXYZ(1, 2, 3) + IntXYZ(4, -5, -6))); }
-
 TEST(AlbaXYZTest, MinusBinaryOperatorWorks) { EXPECT_EQ(IntXYZ(-3, 7, 9), (IntXYZ(1, 2, 3) - IntXYZ(4, -5, -6))); }
-
 TEST(AlbaXYZTest, MultiplyBinaryOperatorWorks) { EXPECT_EQ(IntXYZ(35, -70, 105), (IntXYZ(5, -10, 15) * 7)); }
-
 TEST(AlbaXYZTest, DivideBinaryOperatorWorks) { EXPECT_EQ(IntXYZ(1, -2, 3), (IntXYZ(5, -10, 15) / 5)); }
 
 TEST(AlbaXYZTest, PlusAssignmentOperatorWorks) {

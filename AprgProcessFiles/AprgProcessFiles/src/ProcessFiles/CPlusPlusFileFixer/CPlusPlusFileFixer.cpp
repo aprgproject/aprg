@@ -112,61 +112,66 @@ void CPlusPlusFileFixer::processFile(string const& path) {
     writeFile(path);
 }
 
-void CPlusPlusFileFixer::clear() {
-    m_linesAfterTheHeader.clear();
-    m_headerListFromAngleBrackets.clear();
-    m_headerListFromQuotations.clear();
-    m_isPragmaOnceFound = false;
+bool CPlusPlusFileFixer::isOtherLibraryHeaders(string const& header) {
+    bool result(false);
+    if (isLinuxHeader(header) || isWindowsHeader(header) || isGtestHeader(header) || isQtHeader(header)) {
+        result = true;
+    }
+    return result;
 }
 
-void CPlusPlusFileFixer::checkFile(string const& path) {
-    readContentsFromFile(path);
-    notifyIfAlbaDebugHeaderExistInProductionCode(path);
-    // notifyIfCAssertHeaderExistInProductionCode(path);
-    // notifyIfIostreamHeaderExistInProductionCode(path);
-    // notifyIfMoreThanLoopsAreCascaded(path);
+bool CPlusPlusFileFixer::isLineWithALoopStart(string const& line) {
+    bool result(false);
+    if (isStringFoundCaseSensitive(line, "for(") || isStringFoundCaseSensitive(line, "while(")) {
+        result = true;
+    }
+    return result;
 }
 
-void CPlusPlusFileFixer::readContentsFromFile(string const& path) {
-    AlbaLocalPathHandler filePathHandler(path);
-    ifstream inputLogFileStream(filePathHandler.getFullPath());
-    AlbaFileReader fileReader(inputLogFileStream);
-    bool isOnHeaderPart(true);
-    while (fileReader.isNotFinished()) {
-        string line(fileReader.getLine());
-        if (isOnHeaderPart) {
-            if (isStringFoundCaseSensitive(line, "#include")) {
-                notifyIfThereAreCommentsInHeader(path, line);
-                readLineWithSharpInclude(line, path);
-            } else if (isStringFoundCaseSensitive(line, "#pragma") && isStringFoundCaseSensitive(line, "once")) {
-                m_isPragmaOnceFound = true;
-            } else if (!isWhiteSpace(line)) {
-                m_linesAfterTheHeader.emplace_back(line);
-                isOnHeaderPart = false;
-            }
-        } else {
-            m_linesAfterTheHeader.emplace_back(line);
+bool CPlusPlusFileFixer::isLineWithALoopEnd(string const& line) {
+    bool result(false);
+    if (isStringFoundCaseSensitive(line, "}") && !isStringFoundCaseSensitive(line, "{")) {
+        result = true;
+    }
+    return result;
+}
+
+bool CPlusPlusFileFixer::isPathIgnored(string const& path) {
+    bool result(false);
+    if (isStringFoundCaseSensitive(path, "ACodeReview") || isStringFoundCaseSensitive(path, "AllCommonCMakeFiles") ||
+        isStringFoundCaseSensitive(path, "CImg") || isStringFoundCaseSensitive(path, "curl-7.38.0") ||
+        isStringFoundCaseSensitive(path, "CurlCpp") || isStringFoundCaseSensitive(path, "gsl1.8") ||
+        isStringFoundCaseSensitive(path, "gtest-1.7.0") || isStringFoundCaseSensitive(path, "plantumlqeditor") ||
+        isStringFoundCaseSensitive(path, "zlib128")) {
+        result = true;
+    }
+    return result;
+}
+
+bool CPlusPlusFileFixer::isCPlusPlusHeader(string const& header) {
+    return listOfCPlusPlusHeaders.find(header) != listOfCPlusPlusHeaders.cend();
+}
+
+bool CPlusPlusFileFixer::isLinuxHeader(string const& header) {
+    return listOfLinuxHeaders.find(header) != listOfLinuxHeaders.cend() || isStringFoundCaseSensitive(header, "sys/");
+}
+
+bool CPlusPlusFileFixer::isWindowsHeader(string const& header) {
+    return listOfWindowsHeaders.find(header) != listOfWindowsHeaders.cend();
+}
+
+bool CPlusPlusFileFixer::isGtestHeader(string const& header) { return isStringFoundCaseSensitive(header, "gtest"); }
+
+bool CPlusPlusFileFixer::isQtHeader(string const& header) {
+    bool result(false);
+    AlbaLocalPathHandler headerFileHandler(header);
+    if (header.length() >= 2) {
+        if ('Q' == header[0] && ('t' == header[1] || isCapitalLetter(header[1])) &&
+            headerFileHandler.getExtension().empty()) {
+            result = true;
         }
     }
-}
-
-void CPlusPlusFileFixer::readLineWithSharpInclude(string const& line, string const& path) {
-    string headerFromAngleBrackets(getStringInBetweenTwoStrings(line, R"(<)", R"(>)"));
-    string headerFromQuotations(getStringInBetweenTwoStrings(line, R"(")", R"(")"));
-    if (!headerFromAngleBrackets.empty()) {
-        AlbaLocalPathHandler filePathHandler(path);
-        AlbaPathHandler headerFromAngleBracketsPathHandler(headerFromAngleBrackets, "/");
-        if (headerFromAngleBracketsPathHandler.getFilenameOnly() == filePathHandler.getFilenameOnly() &&
-            isStringFoundCaseSensitive(filePathHandler.getFullPath(), headerFromAngleBrackets)) {
-            addHeaderFileFromQuotations(filePathHandler.getFile());
-
-        } else {
-            addHeaderFileFromAngleBrackets(headerFromAngleBrackets);
-        }
-    }
-    if (!headerFromQuotations.empty()) {
-        addHeaderFileFromQuotations(headerFromQuotations);
-    }
+    return result;
 }
 
 void CPlusPlusFileFixer::notifyIfThereAreCommentsInHeader(string const& path, string const& line) {
@@ -222,6 +227,86 @@ void CPlusPlusFileFixer::notifyIfMoreThanLoopsAreCascaded(string const& path) co
                 indentionsOfLoops.erase(it);
             }
         }
+    }
+}
+
+void CPlusPlusFileFixer::writeHeadersWithQuotations(ofstream& outputLogFileStream) const {
+    for (string const& header : m_headerListFromQuotations) {
+        if (!header.empty()) {
+            outputLogFileStream << R"(#include ")" << header << R"(")"
+                                << "\n";
+        } else {
+            outputLogFileStream << "\n";
+        }
+    }
+    outputLogFileStream << "\n";
+}
+
+void CPlusPlusFileFixer::writeHeadersWithAngleBrackets(ofstream& outputLogFileStream) const {
+    for (string const& header : m_headerListFromAngleBrackets) {
+        if (!header.empty()) {
+            outputLogFileStream << R"(#include <)" << header << R"(>)"
+                                << "\n";
+        } else {
+            outputLogFileStream << "\n";
+        }
+    }
+}
+
+void CPlusPlusFileFixer::clear() {
+    m_linesAfterTheHeader.clear();
+    m_headerListFromAngleBrackets.clear();
+    m_headerListFromQuotations.clear();
+    m_isPragmaOnceFound = false;
+}
+
+void CPlusPlusFileFixer::checkFile(string const& path) {
+    readContentsFromFile(path);
+    notifyIfAlbaDebugHeaderExistInProductionCode(path);
+    // notifyIfCAssertHeaderExistInProductionCode(path);
+    // notifyIfIostreamHeaderExistInProductionCode(path);
+    // notifyIfMoreThanLoopsAreCascaded(path);
+}
+
+void CPlusPlusFileFixer::readContentsFromFile(string const& path) {
+    AlbaLocalPathHandler filePathHandler(path);
+    ifstream inputLogFileStream(filePathHandler.getFullPath());
+    AlbaFileReader fileReader(inputLogFileStream);
+    bool isOnHeaderPart(true);
+    while (fileReader.isNotFinished()) {
+        string line(fileReader.getLine());
+        if (isOnHeaderPart) {
+            if (isStringFoundCaseSensitive(line, "#include")) {
+                notifyIfThereAreCommentsInHeader(path, line);
+                readLineWithSharpInclude(line, path);
+            } else if (isStringFoundCaseSensitive(line, "#pragma") && isStringFoundCaseSensitive(line, "once")) {
+                m_isPragmaOnceFound = true;
+            } else if (!isWhiteSpace(line)) {
+                m_linesAfterTheHeader.emplace_back(line);
+                isOnHeaderPart = false;
+            }
+        } else {
+            m_linesAfterTheHeader.emplace_back(line);
+        }
+    }
+}
+
+void CPlusPlusFileFixer::readLineWithSharpInclude(string const& line, string const& path) {
+    string headerFromAngleBrackets(getStringInBetweenTwoStrings(line, R"(<)", R"(>)"));
+    string headerFromQuotations(getStringInBetweenTwoStrings(line, R"(")", R"(")"));
+    if (!headerFromAngleBrackets.empty()) {
+        AlbaLocalPathHandler filePathHandler(path);
+        AlbaPathHandler headerFromAngleBracketsPathHandler(headerFromAngleBrackets, "/");
+        if (headerFromAngleBracketsPathHandler.getFilenameOnly() == filePathHandler.getFilenameOnly() &&
+            isStringFoundCaseSensitive(filePathHandler.getFullPath(), headerFromAngleBrackets)) {
+            addHeaderFileFromQuotations(filePathHandler.getFile());
+
+        } else {
+            addHeaderFileFromAngleBrackets(headerFromAngleBrackets);
+        }
+    }
+    if (!headerFromQuotations.empty()) {
+        addHeaderFileFromQuotations(headerFromQuotations);
     }
 }
 
@@ -333,91 +418,6 @@ void CPlusPlusFileFixer::writeFile(string const& path) {
     for (string const& line : m_linesAfterTheHeader) {
         outputLogFileStream << line << "\n";
     }
-}
-
-void CPlusPlusFileFixer::writeHeadersWithQuotations(ofstream& outputLogFileStream) const {
-    for (string const& header : m_headerListFromQuotations) {
-        if (!header.empty()) {
-            outputLogFileStream << R"(#include ")" << header << R"(")"
-                                << "\n";
-        } else {
-            outputLogFileStream << "\n";
-        }
-    }
-    outputLogFileStream << "\n";
-}
-
-void CPlusPlusFileFixer::writeHeadersWithAngleBrackets(ofstream& outputLogFileStream) const {
-    for (string const& header : m_headerListFromAngleBrackets) {
-        if (!header.empty()) {
-            outputLogFileStream << R"(#include <)" << header << R"(>)"
-                                << "\n";
-        } else {
-            outputLogFileStream << "\n";
-        }
-    }
-}
-
-bool CPlusPlusFileFixer::isLineWithALoopStart(string const& line) {
-    bool result(false);
-    if (isStringFoundCaseSensitive(line, "for(") || isStringFoundCaseSensitive(line, "while(")) {
-        result = true;
-    }
-    return result;
-}
-
-bool CPlusPlusFileFixer::isLineWithALoopEnd(string const& line) {
-    bool result(false);
-    if (isStringFoundCaseSensitive(line, "}") && !isStringFoundCaseSensitive(line, "{")) {
-        result = true;
-    }
-    return result;
-}
-
-bool CPlusPlusFileFixer::isPathIgnored(string const& path) {
-    bool result(false);
-    if (isStringFoundCaseSensitive(path, "ACodeReview") || isStringFoundCaseSensitive(path, "AllCommonCMakeFiles") ||
-        isStringFoundCaseSensitive(path, "CImg") || isStringFoundCaseSensitive(path, "curl-7.38.0") ||
-        isStringFoundCaseSensitive(path, "CurlCpp") || isStringFoundCaseSensitive(path, "gsl1.8") ||
-        isStringFoundCaseSensitive(path, "gtest-1.7.0") || isStringFoundCaseSensitive(path, "plantumlqeditor") ||
-        isStringFoundCaseSensitive(path, "zlib128")) {
-        result = true;
-    }
-    return result;
-}
-
-bool CPlusPlusFileFixer::isCPlusPlusHeader(string const& header) {
-    return listOfCPlusPlusHeaders.find(header) != listOfCPlusPlusHeaders.cend();
-}
-
-bool CPlusPlusFileFixer::isLinuxHeader(string const& header) {
-    return listOfLinuxHeaders.find(header) != listOfLinuxHeaders.cend() || isStringFoundCaseSensitive(header, "sys/");
-}
-
-bool CPlusPlusFileFixer::isWindowsHeader(string const& header) {
-    return listOfWindowsHeaders.find(header) != listOfWindowsHeaders.cend();
-}
-
-bool CPlusPlusFileFixer::isGtestHeader(string const& header) { return isStringFoundCaseSensitive(header, "gtest"); }
-
-bool CPlusPlusFileFixer::isQtHeader(string const& header) {
-    bool result(false);
-    AlbaLocalPathHandler headerFileHandler(header);
-    if (header.length() >= 2) {
-        if ('Q' == header[0] && ('t' == header[1] || isCapitalLetter(header[1])) &&
-            headerFileHandler.getExtension().empty()) {
-            result = true;
-        }
-    }
-    return result;
-}
-
-bool CPlusPlusFileFixer::isOtherLibraryHeaders(string const& header) {
-    bool result(false);
-    if (isLinuxHeader(header) || isWindowsHeader(header) || isGtestHeader(header) || isQtHeader(header)) {
-        result = true;
-    }
-    return result;
 }
 
 }  // namespace alba

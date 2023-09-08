@@ -75,7 +75,6 @@ TEST(SequenceOfMovesAnalyzerTest, CanPreMoveWorksOnCheckWithOneWayToBlock) {
 }
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

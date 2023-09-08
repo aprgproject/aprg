@@ -15,9 +15,7 @@ public:
     using Boxes = std::vector<Box>;
     using IndexToIndex = std::vector<Index>;
     using IndexToValue = std::vector<Value>;
-
     explicit BoxStackingProblem(Boxes const& boxes);
-
     [[nodiscard]] Index getMaximumStackedHeight() const;
     [[nodiscard]] Boxes getBoxesWithMaximumStackedHeight() const;
 

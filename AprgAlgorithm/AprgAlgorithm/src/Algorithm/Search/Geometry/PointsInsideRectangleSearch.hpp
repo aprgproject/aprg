@@ -36,7 +36,6 @@ public:
     using Points = std::vector<Point>;
     using TwoDTree = KdTree<Point>;
     using NodeUniquePointer = typename TwoDTree::NodeUniquePointer;
-
     PointsInsideRectangleSearch(Point const& bottomLeft, Point const& topRight)
         : m_twoDTree(), m_rectangleBottomLeft(bottomLeft), m_rectangleTopRight(topRight) {}
 
@@ -52,24 +51,6 @@ public:
     void addPoint(Point const& point) { m_twoDTree.put(point); }
 
 private:
-    void searchForPoints(NodeUniquePointer const& nodePointer, Points& pointsInsideRectangle) const {
-        static int depth = 0;
-        ++depth;
-        if (nodePointer) {
-            Point const& currentPoint(nodePointer->key);
-            if (isInsideRectangle(currentPoint)) {
-                pointsInsideRectangle.emplace_back(currentPoint);
-            }
-            if (shouldGoToLeftChild(currentPoint, depth)) {
-                searchForPoints(nodePointer->left, pointsInsideRectangle);
-            }
-            if (shouldGoToRightChild(currentPoint, depth)) {
-                searchForPoints(nodePointer->right, pointsInsideRectangle);
-            }
-        }
-        --depth;
-    }
-
     [[nodiscard]] inline bool shouldGoToLeftChild(Point const& point, int const depth) const {
         if (mathHelper::isOdd(depth)) {
             return m_rectangleBottomLeft.first < point.first;
@@ -87,6 +68,24 @@ private:
     [[nodiscard]] inline bool isInsideRectangle(Point const& point) const {
         return m_rectangleBottomLeft.first <= point.first && point.first <= m_rectangleTopRight.first &&
                m_rectangleBottomLeft.second <= point.second && point.second <= m_rectangleTopRight.second;
+    }
+
+    void searchForPoints(NodeUniquePointer const& nodePointer, Points& pointsInsideRectangle) const {
+        static int depth = 0;
+        ++depth;
+        if (nodePointer) {
+            Point const& currentPoint(nodePointer->key);
+            if (isInsideRectangle(currentPoint)) {
+                pointsInsideRectangle.emplace_back(currentPoint);
+            }
+            if (shouldGoToLeftChild(currentPoint, depth)) {
+                searchForPoints(nodePointer->left, pointsInsideRectangle);
+            }
+            if (shouldGoToRightChild(currentPoint, depth)) {
+                searchForPoints(nodePointer->right, pointsInsideRectangle);
+            }
+        }
+        --depth;
     }
 
     TwoDTree m_twoDTree;

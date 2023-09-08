@@ -20,15 +20,12 @@ SeriesBasedOnSummation::SeriesBasedOnSummation(Term const& formulaForEachTermInS
 
 bool SeriesBasedOnSummation::isSummationModelValid() const { return m_isSummationModelValid; }
 
-bool SeriesBasedOnSummation::isConvergent() const {
-    bool result(false);
-    if (m_isSummationModelValid) {
-        result = SeriesBasedOnFormula::isConvergent();
-    } else {
-        result = getLimit(m_formulaForEachTermInSummation, m_variableName, ALBA_NUMBER_POSITIVE_INFINITY) == 0;
-    }
-    return result;
+bool SeriesBasedOnSummation::isAbsolutelyConvergent() const {
+    SeriesBasedOnSummation summation(abs(m_formulaForEachTermInSummation), m_variableName);
+    return summation.isConvergent();
 }
+
+bool SeriesBasedOnSummation::isConditionallyConvergent() const { return !isAbsolutelyConvergent() || isConvergent(); }
 
 Term SeriesBasedOnSummation::getValueAtIndex(int const index) const {
     Term result;
@@ -39,13 +36,6 @@ Term SeriesBasedOnSummation::getValueAtIndex(int const index) const {
     }
     return result;
 }
-
-bool SeriesBasedOnSummation::isAbsolutelyConvergent() const {
-    SeriesBasedOnSummation summation(abs(m_formulaForEachTermInSummation), m_variableName);
-    return summation.isConvergent();
-}
-
-bool SeriesBasedOnSummation::isConditionallyConvergent() const { return !isAbsolutelyConvergent() || isConvergent(); }
 
 Term SeriesBasedOnSummation::getTermValueAtIndex(int const index) const {
     SubstitutionOfVariablesToValues substitution{{m_variableName, index}};
@@ -62,6 +52,16 @@ Summation SeriesBasedOnSummation::getSummation(Term const& formulaForEachTermInS
 Term SeriesBasedOnSummation::getFormulaForSummation(
     Term const& formulaForEachTermInSummation, string const& variableName) {
     return getSummation(formulaForEachTermInSummation, variableName).getSummationModelWithKnownConstant(0);
+}
+
+bool SeriesBasedOnSummation::isConvergent() const {
+    bool result(false);
+    if (m_isSummationModelValid) {
+        result = SeriesBasedOnFormula::isConvergent();
+    } else {
+        result = getLimit(m_formulaForEachTermInSummation, m_variableName, ALBA_NUMBER_POSITIVE_INFINITY) == 0;
+    }
+    return result;
 }
 
 }  // namespace alba::algebra

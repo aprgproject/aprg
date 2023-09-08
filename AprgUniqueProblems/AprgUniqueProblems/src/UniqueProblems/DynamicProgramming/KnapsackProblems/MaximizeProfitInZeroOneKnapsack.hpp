@@ -16,10 +16,8 @@ public:
     using Profits = std::vector<Profit>;
     using Items = std::vector<Item>;
     using ProfitMatrix = matrix::AlbaMatrix<Profit>;
-    static constexpr Profit UNUSED_VALUE = std::numeric_limits<Profit>::max();
-
     MaximizeProfitInZeroOneKnapsack(Weight const maximumWeight, Items const& items);
-
+    static constexpr Profit UNUSED_VALUE = std::numeric_limits<Profit>::max();
     [[nodiscard]] Profit getBestProfitUsingNaiveRecursion() const;
     [[nodiscard]] Profit getBestProfitUsingMemoizationDP() const;
     [[nodiscard]] Profit getBestProfitUsingIterativeDP() const;
@@ -28,9 +26,9 @@ public:
 private:
     [[nodiscard]] Profit getBestProfitUsingNaiveRecursion(
         Weight const remainingWeight, ItemIndex const itemIndex) const;
+    [[nodiscard]] Weight getSmallestItemWeight() const;
     Profit getBestProfitUsingMemoizationDP(
         ProfitMatrix& profitMatrix, Weight const remainingWeight, ItemIndex const itemIndex) const;
-    [[nodiscard]] Weight getSmallestItemWeight() const;
     Weight const m_maximumWeight;
     Items const m_items;
 };

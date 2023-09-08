@@ -102,6 +102,7 @@ TEST(AlbaMacrosTest, GetNameWithCountWorks) {
 }
 
 #if defined(__clang__) || defined(__GNUC__) || defined(__GNUG__)
+
 TEST(AlbaMacrosTest, CountArgumentsForIntegerTest) {
     EXPECT_EQ(1, ALBA_MACROS_COUNT_ARGUMENTS(1));
     EXPECT_EQ(3, ALBA_MACROS_COUNT_ARGUMENTS(8237, 23458, 28749));
@@ -113,6 +114,7 @@ TEST(AlbaMacrosTest, CountArgumentsForStringTest) {
     EXPECT_EQ(2, ALBA_MACROS_COUNT_ARGUMENTS("one", "two"));
     EXPECT_EQ(3, ALBA_MACROS_COUNT_ARGUMENTS("one", "two", "three"));
 }
+
 #endif
 
 }  // namespace alba

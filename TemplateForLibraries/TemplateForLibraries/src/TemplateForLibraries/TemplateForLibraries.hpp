@@ -5,7 +5,6 @@ namespace alba {
 class TemplateForLibraries {
 public:
     TemplateForLibraries() = default;
-
     [[nodiscard]] int getSample() const;
 
 private:

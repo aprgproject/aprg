@@ -6,15 +6,7 @@ using namespace std;
 
 namespace alba {
 
-// NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
-mutex AlbaOldRandomizer::m_mutex;
-
 AlbaOldRandomizer::AlbaOldRandomizer() { resetRandomSeed(); }
-
-void AlbaOldRandomizer::resetRandomSeed() {
-    lock_guard<mutex> lock(m_mutex);
-    srand(getCurrentDateTime().getMicroSeconds());  // srand is not thread safe
-}
 
 int AlbaOldRandomizer::getRandomIntegerInUniformDistribution(int const minimum, int const maximum) {
     lock_guard<mutex> lock(m_mutex);
@@ -22,7 +14,6 @@ int AlbaOldRandomizer::getRandomIntegerInUniformDistribution(int const minimum, 
     // NOLINTNEXTLINE(cert-msc30-c,cert-msc50-cpp,concurrency-mt-unsafe)
     double randomValue = static_cast<double>(rand()) / (static_cast<double>(RAND_MAX) + 1);
     return static_cast<int>(minimum + randomValue * deltaInclusive);  // implicit floor conversion from double to int
-
     // randomValue looks like this:
     // | 0-value possibility | 1-value possibility | ... | RAND_MAX-1 value possibility | RAND_MAX value possibility |
     // randomValue with delta inclusive looks like this:
@@ -37,6 +28,14 @@ double AlbaOldRandomizer::getRandomFloatingValueInUniformDistribution(double con
     double randomValue = static_cast<double>(rand()) / static_cast<double>(RAND_MAX);
     return minimum + randomValue * delta;
 }
+
+void AlbaOldRandomizer::resetRandomSeed() {
+    lock_guard<mutex> lock(m_mutex);
+    srand(getCurrentDateTime().getMicroSeconds());  // srand is not thread safe
+}
+
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
+mutex AlbaOldRandomizer::m_mutex;
 
 }  // namespace alba
 

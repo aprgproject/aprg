@@ -19,7 +19,6 @@ public:
     using QueueOfEdges = std::queue<Edge>;
     using StackOfVertices = std::stack<Vertex>;
     using VertexToQueueOfEdgesMap = std::map<Vertex, QueueOfEdges>;
-
     explicit EulerPathSearchForUndirectedGraphUsingDfs(BaseUndirectedGraphWithVertex const& graph)
         : BaseClass(graph), b_graph(BaseClass::m_graph) {}
 
@@ -44,6 +43,31 @@ public:
     }
 
 private:
+    [[nodiscard]] VertexToQueueOfEdgesMap createVertexToQueueOfEdgesMap() const {
+        VertexToQueueOfEdgesMap vertexToQueueOfEdgesMap;
+        for (Vertex const& vertex : b_graph.getVertices()) {
+            auto adjacentVertices(b_graph.getAdjacentVerticesAt(vertex));
+            for (Vertex const& adjacencyVertex : adjacentVertices) {
+                if (vertex < adjacencyVertex) {
+                    vertexToQueueOfEdgesMap[vertex].emplace(Edge(vertex, adjacencyVertex));
+                    vertexToQueueOfEdgesMap[adjacencyVertex].emplace(Edge(vertex, adjacencyVertex));
+                }
+            }
+        }
+        return vertexToQueueOfEdgesMap;
+    }
+
+    [[nodiscard]] Vertex getTheOtherVertex(Edge const& edge, Vertex const& currentVertex) const {
+        Vertex result;
+        auto const& [startVertexOfEdge, endVertexOfEdge] = edge;
+        if (currentVertex == startVertexOfEdge) {
+            result = endVertexOfEdge;
+        } else {
+            result = startVertexOfEdge;
+        }
+        return result;
+    }
+
     void searchForEulerPathUsingDfs(StackOfVertices& eulerPathInStack, Vertex const& startingVertex) const {
         // This is DFS
         VertexToQueueOfEdgesMap vertexToQueueOfEdgesMap(createVertexToQueueOfEdgesMap());
@@ -74,20 +98,6 @@ private:
         }
     }
 
-    [[nodiscard]] VertexToQueueOfEdgesMap createVertexToQueueOfEdgesMap() const {
-        VertexToQueueOfEdgesMap vertexToQueueOfEdgesMap;
-        for (Vertex const& vertex : b_graph.getVertices()) {
-            auto adjacentVertices(b_graph.getAdjacentVerticesAt(vertex));
-            for (Vertex const& adjacencyVertex : adjacentVertices) {
-                if (vertex < adjacencyVertex) {
-                    vertexToQueueOfEdgesMap[vertex].emplace(Edge(vertex, adjacencyVertex));
-                    vertexToQueueOfEdgesMap[adjacencyVertex].emplace(Edge(vertex, adjacencyVertex));
-                }
-            }
-        }
-        return vertexToQueueOfEdgesMap;
-    }
-
     void putStackOfVerticesOnPath(Path& result, StackOfVertices& cycle) const {
         while (!cycle.empty()) {
             result.emplace_back(cycle.top());
@@ -95,16 +105,6 @@ private:
         }
     }
 
-    [[nodiscard]] Vertex getTheOtherVertex(Edge const& edge, Vertex const& currentVertex) const {
-        Vertex result;
-        auto const& [startVertexOfEdge, endVertexOfEdge] = edge;
-        if (currentVertex == startVertexOfEdge) {
-            result = endVertexOfEdge;
-        } else {
-            result = startVertexOfEdge;
-        }
-        return result;
-    }
     BaseUndirectedGraphWithVertex const& b_graph;
 };
 

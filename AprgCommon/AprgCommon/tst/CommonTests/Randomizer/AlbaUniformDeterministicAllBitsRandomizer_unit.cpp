@@ -13,6 +13,8 @@ using IntegerRandomizerForTest = AlbaUniformDeterministicAllBitsRandomizer<int>;
 using FloatingPointRandomizerForTest = AlbaUniformDeterministicAllBitsRandomizer<double>;
 }  // namespace
 
+// Dont test if uniformly distributed because its too large just trust the C++ implementation
+
 TEST(AlbaUniformDeterministicAllBitsRandomizerTest, DefaultConstructorWorks) {
     IntegerRandomizerForTest randomizer;
 
@@ -68,7 +70,5 @@ TEST(AlbaUniformDeterministicAllBitsRandomizerTest, GetRandomFloatingValueWorksA
         ASSERT_EQ(randomizer1.getRandomValue(), randomizer2.getRandomValue());
     }
 }
-
-// Dont test if uniformly distributed because its too large just trust the C++ implementation
 
 }  // namespace alba

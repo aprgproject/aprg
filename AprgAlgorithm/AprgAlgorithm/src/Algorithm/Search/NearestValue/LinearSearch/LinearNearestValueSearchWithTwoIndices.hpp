@@ -10,7 +10,6 @@ class LinearNearestValueSearchWithTwoIndices {
 public:
     using Index = int;
     using Value = typename Values::value_type;
-    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     explicit LinearNearestValueSearchWithTwoIndices(Values const& values)  // values can be unsorted
         : m_startIndex(INVALID_INDEX), m_endIndex(INVALID_INDEX), m_values(values) {
@@ -21,6 +20,8 @@ public:
         : m_startIndex(INVALID_INDEX), m_endIndex(INVALID_INDEX), m_values(sortedValues) {
         setInitialIndexes(lowIndex, highIndex);
     }
+
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     Value getNearestValue(Value const& target) {
         Value result{};

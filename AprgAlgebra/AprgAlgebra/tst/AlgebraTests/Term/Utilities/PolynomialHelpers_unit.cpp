@@ -69,7 +69,6 @@ TEST(PolynomialHelpersTest, GetBinomialCoefficientWorks) {
 TEST(PolynomialHelpersTest, GetMultinomialCoefficientWorks) {
     // The third power of the trinomial a + b + c is given by
     // (a+b+c)^3 = a^3 + b^3 + c^3 + 3*a^2*b + 3*a^2*c + 3*a*b^2 + 3*b^2*c + 3*a*c^2 + 3*b*c^2 + 6*a*b*c
-
     // The coefficient of a^2 * b^0 * c^1 = 3
     EXPECT_EQ(3, getMultinomialCoefficient(3U, {2U, 0U, 1U}));
 

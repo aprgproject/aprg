@@ -11,10 +11,8 @@ public:
     using Value = int64_t;
     using Values = std::vector<Value>;
     using ValueMatrix = matrix::AlbaMatrix<Value>;
-    static constexpr Value UNUSED_VALUE = std::numeric_limits<Value>::max();
-
     BinomialCoefficient(Value const n, Value const k);
-
+    static constexpr Value UNUSED_VALUE = std::numeric_limits<Value>::max();
     [[nodiscard]] Value getBinomialCoefficientUsingNaiveRecursion() const;
     [[nodiscard]] Value getBinomialCoefficientUsingMemoizationDP() const;
     [[nodiscard]] Value getBinomialCoefficientUsingIterativeDP() const;

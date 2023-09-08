@@ -11,10 +11,9 @@ class LinearSearchWithTwoIndices {
 public:
     using Index = int;
     using Value = typename Values::value_type;
-    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
-
     explicit LinearSearchWithTwoIndices(Values const& values)  // values can be unsorted
         : m_values(values) {}
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     [[nodiscard]] Index getIndexOfValue(Value const& target) const {
         Index result(INVALID_INDEX);

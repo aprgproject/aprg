@@ -33,7 +33,6 @@ TEST(UnorderedLinkedListSymbolTableTest, GetSizeWorksWhenNotEmpty) {
 }
 
 TEST(UnorderedLinkedListSymbolTableTest, GetWorks) { testGetWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(UnorderedLinkedListSymbolTableTest, GetRankWorks) { testGetRankWithUnsignedIntAndChar<SymbolTableForTest>(); }
 
 TEST(UnorderedLinkedListSymbolTableTest, GetMinimumWorks) {
@@ -45,7 +44,6 @@ TEST(UnorderedLinkedListSymbolTableTest, GetMaximumWorks) {
 }
 
 TEST(UnorderedLinkedListSymbolTableTest, SelectAtWorks) { testSelectAtWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(UnorderedLinkedListSymbolTableTest, GetFloorWorks) { testGetFloorWithUnsignedIntAndChar<SymbolTableForTest>(); }
 
 TEST(UnorderedLinkedListSymbolTableTest, GetCeilingWorks) {

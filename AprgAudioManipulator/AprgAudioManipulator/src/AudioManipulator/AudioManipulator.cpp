@@ -12,7 +12,6 @@ AudioManipulator::AudioManipulator(std::string const& audioFilePath) : m_filePat
 }
 
 AudioInDouble const& AudioManipulator::getAudio() const { return m_audio; }
-
 AudioInDouble& AudioManipulator::getAudioReference() { return m_audio; }
 
 void AudioManipulator::addSamplesWithValue(double const value) {

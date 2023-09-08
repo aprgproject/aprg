@@ -61,7 +61,6 @@ TEST(LogarithmHelpersTest, GetSuperLogarithmWorks) {
 
 TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTestWorksWithIncreasingInput) {
     // Results: ~330ms
-
     double result(0);
     for (int base = 2; base < 200; ++base) {
         for (int exponent = 1; exponent < 20000; ++exponent) {
@@ -73,7 +72,6 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTestWorksW
 
 TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanceTestWorksWithIncreasingInput) {
     // Results: ~100ms
-
     int result(0);
     for (int base = 2; base < 200; ++base) {
         for (int exponent = 1; exponent < 20000; ++exponent) {
@@ -85,7 +83,6 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanc
 
 TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTestWorksWithRandomInput) {
     // Results: ~850ms
-
     int result(0);
     int minValue(2);
     int maxValue(2000);
@@ -100,7 +97,6 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTestWorksW
 
 TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanceTestWorksWithRandomInput) {
     // Results: ~790ms
-
     int result(0);
     int minValue(2);
     int maxValue(2000);

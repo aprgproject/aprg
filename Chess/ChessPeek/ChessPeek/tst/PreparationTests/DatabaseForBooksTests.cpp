@@ -240,7 +240,6 @@ TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithSicilianDefense) {
 }
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

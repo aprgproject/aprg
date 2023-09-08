@@ -12,7 +12,6 @@ class ApproximateMedian {
 public:
     using Value = typename Values::value_type;
     using SetOfValues = std::multiset<Value>;
-
     ApproximateMedian() = default;
 
     [[nodiscard]] Value getApproximateMedian(Values const& values) const {
@@ -23,14 +22,12 @@ public:
         // ---> Insert then into a set.
         // ---> Sort elements of the set.
         // ---> Return median of the set i.e. (k/2)th element from the set
-
         // Time Complexity:
         // -> We use a set provided by the STL in C++.
         // -> In STL Set, insertion for each element takes O(log k).
         // -> So for k insertions, time taken is O (k log k).
         // -> Now replacing k with c log n
         // -> -> O(c log n (log (clog n))) -> O (log n (log log n))
-
         constexpr int c = 10;
         int numbersOfElementsInSet = std::min(values.size(), c * mathHelper::getLogarithmWithBase2Of(values.size()));
         AlbaUniformNonDeterministicRandomizer<int> randomizer(0, static_cast<int>(values.size()) - 1);

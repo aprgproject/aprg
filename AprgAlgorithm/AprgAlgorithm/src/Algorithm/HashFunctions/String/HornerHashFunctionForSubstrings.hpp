@@ -10,7 +10,6 @@ class HornerHashFunctionForSubstrings {
     // horners rule: continuously mod to keep the value
 public:
     using HashValues = std::vector<HashValue>;
-
     HornerHashFunctionForSubstrings(HashValue const radix, HashValue const largeRandomPrime)
         : m_radix(radix), m_largeRandomPrime(largeRandomPrime) {}
 
@@ -25,7 +24,6 @@ public:
         // (h[b] - (h[a-1] * p[b-a+1])) mod B
         // assuming that a>0.
         // If a=0, the hash value is simply h[b].
-
         HashValue result{};
         if (m_stringToHash.length() > 0) {
             result = getHashCodeOfSubstring(0, m_stringToHash.length() - 1);
@@ -38,7 +36,6 @@ public:
         // (h[b] - (h[a-1] * p[b-a+1])) mod B
         // assuming that a>0.
         // If a=0, the hash value is simply h[b].
-
         HashValue result{};
         if (startIndex < static_cast<int>(m_stringToHash.length()) &&
             endIndex < static_cast<int>(m_stringToHash.length()) && startIndex <= endIndex) {
@@ -68,7 +65,6 @@ private:
     void reinitializeHPartsAndPParts() {
         // Based from formula (check below): h[k] = (h[k-1]*A + s[k]) mod B
         // Based from formula (check below): p[k] = (p[k-1]*A) mod B
-
         m_hParts.reserve(m_stringToHash.length());
         m_pParts.reserve(m_stringToHash.length());
         m_hParts.emplace_back(m_stringToHash.front());
@@ -92,7 +88,6 @@ private:
 // String hashing
 // String hashing is a technique that allows us to efficiently check whether two strings are equal.
 // The idea in string hashing is to compare hash values of strings instead of their individual characters.
-
 // Calculating hash values
 // A hash value of a string is a number that is calculated from the characters of the string.
 // If two strings are the same, their hash values are also the same, which makes it possible to compare strings based on
@@ -102,7 +97,6 @@ private:
 // -> For example, the codes of the characters of ALLEY are:
 // ---> 'A'=65, 'L'=76, 'L'=76, 'E'=69, 'Y'=89,
 // -> Thus, if A=3 and B=97, the hash value of ALLEY is(65*3^4 + 76*3^3 + 76*3^2 + 69*3^1 + 89*3^0) mod 97 = 52.
-
 // Preprocessing
 // Using polynomial hashing, we can calculate the hash value of any substring of a string s in O(1) time after an O(n)
 // time preprocessing. The idea is to construct an array h such that h[k] contains the hash value of the prefix
@@ -117,7 +111,6 @@ private:
 // (h[b] - h[a-1] * p[b-a+1]) mod B
 // assuming that a>0.
 // If a=0, the hash value is simply h[b].
-
 // Using hash values
 // We can efficiently compare strings using hash values.
 // Instead of comparing the individual characters of the strings, the idea is to compare their hash values.
@@ -136,7 +129,6 @@ private:
 // strings in logarithmic time. This can be done by calculating the length of the common prefix of the strings using
 // binary search. Once we know the length of the common prefix, we can just check the next character after the prefix,
 // because this determines the order of the strings.
-
 // Collisions and parameters
 // An evident risk when comparing hash values is a collision, which means that two strings have different contents but
 // equal hash values. In this case, an algorithm that relies on the hash values concludes that the strings are equal,
@@ -146,7 +138,6 @@ private:
 // is to choose random constants near 10^9, for example as follows: A=911382323 and B=972663749 Using such constants,
 // the long long type can be used when calculating hash values, because the products AB and BB will fit in long long.
 // But is it enough to have about 10^9 different hash values?
-
 // Let us consider three scenarios where hashing can be used:
 // -> Scenario 1: Strings x and y are compared with each other.
 // ---> The probability of a collision is 1/B assuming that all hash values are equally probable.
@@ -154,7 +145,6 @@ private:
 // ---> The probability of one or more collisions is 1 - (1-1/B)^n.
 // -> Scenario 3: All pairs of strings x1, x2,..., xn are compared with each other.
 // ---> The probability of one or more collisions is 1 - (B*(B-1)*(B-2)*...*(B-n+1))/(B^n)
-
 // The following table shows the collision probabilities when n = 10^6 and the value of B varies:
 // |constant B|scenario 1|scenario 2|scenario 3
 // |10^3      |0.001000  |1.000000  |1.000000

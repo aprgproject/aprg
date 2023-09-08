@@ -12,16 +12,14 @@ class AlbaWindowsScreenMonitoring {
 public:
     AlbaWindowsScreenMonitoring();
     ~AlbaWindowsScreenMonitoring();
-
     uint32_t getColorAt(int const x, int const y) const;
     void capturePixelsFromScreen();
 
 private:
+    HBITMAP createBitmapHandlerFromScreen(HDC const deviceContextHandler) const;
     void initialize();
     void cleanup();
-
     void initializeScreenParameters();
-    HBITMAP createBitmapHandlerFromScreen(HDC const deviceContextHandler) const;
     void saveBitmapInfo(HDC const screenHandler, HBITMAP const bitmapHandler);
     void savePixelsFromBitmapScreen(HDC const screenHandler, HBITMAP const bitmapHandler, BITMAPINFO& bitmapInfo);
     int m_screenWidth;

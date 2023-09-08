@@ -8,13 +8,10 @@ class EquationOperator {
 public:
     EquationOperator() = default;
     explicit EquationOperator(std::string const& operatingString);
-
     // rule of zero
-
     bool operator==(EquationOperator const& second) const;
     bool operator!=(EquationOperator const& second) const;
     bool operator<(EquationOperator const& second) const;
-
     [[nodiscard]] bool isEqual() const;
     [[nodiscard]] bool isNotEqual() const;
     [[nodiscard]] bool isLessThan() const;
@@ -28,7 +25,6 @@ public:
 
 private:
     friend std::ostream& operator<<(std::ostream& out, EquationOperator const& equationOperator);
-
     std::string m_operatingString;
 };
 

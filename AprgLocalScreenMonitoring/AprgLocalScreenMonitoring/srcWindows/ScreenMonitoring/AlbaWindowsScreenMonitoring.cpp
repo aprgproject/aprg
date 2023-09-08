@@ -51,23 +51,6 @@ void AlbaWindowsScreenMonitoring::initializeScreenParameters() {
     m_screenHandler = GetDC(NULL);
 }
 
-HBITMAP AlbaWindowsScreenMonitoring::createBitmapHandlerFromScreen(HDC const screenHandler) const {
-    // Create compatible DC, create a compatible bitmap and copy the screen using BitBlt()
-    HDC memoryHandler = CreateCompatibleDC(screenHandler);
-    HBITMAP bitmapHandler = CreateCompatibleBitmap(screenHandler, m_screenWidth, m_screenHeight);
-    HGDIOBJ oldHandler = SelectObject(memoryHandler, bitmapHandler);
-    BOOL isOkay = BitBlt(memoryHandler, 0, 0, m_screenWidth, m_screenHeight, screenHandler, 0, 0, SRCCOPY | CAPTUREBLT);
-
-    if (!isOkay) {
-        cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-        cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
-    }
-
-    SelectObject(memoryHandler, oldHandler);  // always select the previously selected object once done
-    DeleteDC(memoryHandler);
-    return bitmapHandler;
-}
-
 void AlbaWindowsScreenMonitoring::saveBitmapInfo(HDC const screenHandler, HBITMAP const bitmapHandler) {
     m_bitmapInfo.bmiHeader.biSize = sizeof(m_bitmapInfo.bmiHeader);
 
@@ -95,6 +78,23 @@ void AlbaWindowsScreenMonitoring::savePixelsFromBitmapScreen(
         cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
         cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
     }
+}
+
+HBITMAP AlbaWindowsScreenMonitoring::createBitmapHandlerFromScreen(HDC const screenHandler) const {
+    // Create compatible DC, create a compatible bitmap and copy the screen using BitBlt()
+    HDC memoryHandler = CreateCompatibleDC(screenHandler);
+    HBITMAP bitmapHandler = CreateCompatibleBitmap(screenHandler, m_screenWidth, m_screenHeight);
+    HGDIOBJ oldHandler = SelectObject(memoryHandler, bitmapHandler);
+    BOOL isOkay = BitBlt(memoryHandler, 0, 0, m_screenWidth, m_screenHeight, screenHandler, 0, 0, SRCCOPY | CAPTUREBLT);
+
+    if (!isOkay) {
+        cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
+        cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
+    }
+
+    SelectObject(memoryHandler, oldHandler);  // always select the previously selected object once done
+    DeleteDC(memoryHandler);
+    return bitmapHandler;
 }
 
 }  // namespace alba

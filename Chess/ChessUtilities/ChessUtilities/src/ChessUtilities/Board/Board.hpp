@@ -15,10 +15,10 @@ namespace alba::chess {
 
 struct Board {
 public:
-    static constexpr int CHESS_SIDE_SIZE = 8;
     // Conflict between std::numeric_limits::max() and the max(a, b) macro defined in minwindef.h included as part of
     // Windows.h.
     static constexpr int MAX_NUMBER_OF_MOVES = (std::numeric_limits<int>::max)();
+    static constexpr int CHESS_SIDE_SIZE = 8;
     using PieceGrid = std::array<Piece, CHESS_SIDE_SIZE * CHESS_SIDE_SIZE>;
     using CoordinateCondition = std::function<bool(Coordinate const&)>;
 
@@ -38,35 +38,13 @@ public:
         int attack;
         int defend;
     };
+
     using AttackDefendCounts = std::vector<AttackDefendCount>;
-
-    Board();
     explicit Board(BoardOrientation const& orientation);
+    Board();
     Board(BoardOrientation const& orientation, PieceGrid const& pieceGrid);
-
     bool operator==(Board const& other) const;
     bool operator!=(Board const& other) const;
-
-    [[nodiscard]] BoardOrientation getOrientation() const;
-    [[nodiscard]] PieceGrid const& getPieceGrid() const;
-
-    [[nodiscard]] Moves getMovesFromThis(Coordinate const& startpoint, int const maxSize = MAX_NUMBER_OF_MOVES) const;
-    [[nodiscard]] Moves getMovesToThis(
-        Coordinate const& endpoint, PieceColor const& moveColor, int const maxSize = MAX_NUMBER_OF_MOVES) const;
-    [[nodiscard]] Moves getAttacksToThis(
-        Coordinate const& endpoint, PieceColor const& moveColor, int const maxSize = MAX_NUMBER_OF_MOVES) const;
-
-    [[nodiscard]] Move getMoveUsingUciNotation(std::string const& text) const;
-    [[nodiscard]] Move getMoveUsingAlgebraicNotation(std::string const& text, PieceColor const moveColor) const;
-    [[nodiscard]] Coordinate getCoordinateFromAlgebraicNotation(std::string const& text) const;
-    [[nodiscard]] Piece getPieceAt(Coordinate const& coordinate) const;
-    [[nodiscard]] Exchange getExchangeAt(Coordinate const& coordinate) const;
-
-    [[nodiscard]] std::string getAlgebraicNotationOfCoordinate(Coordinate const& coordinate) const;
-    [[nodiscard]] std::string getReadableStringOfMove(Move const& move) const;
-    [[nodiscard]] std::string getNotationPartOfFenString() const;
-    [[nodiscard]] std::string getCastlingPartOfFenString() const;
-
     [[nodiscard]] bool isEmptyAt(Coordinate const& coordinate) const;
     [[nodiscard]] bool isACaptureMove(Move const& move) const;
     [[nodiscard]] bool isAPromotionMove(Move const& move) const;
@@ -78,13 +56,94 @@ public:
     [[nodiscard]] bool hasOnlyOneMoveToThis(Coordinate const& endpoint, PieceColor const& moveColor) const;
     [[nodiscard]] int getNumberOfWaysToBlockAttacks(
         Moves const& attacks, int const maxSize = MAX_NUMBER_OF_MOVES) const;
+    [[nodiscard]] BoardOrientation getOrientation() const;
+    [[nodiscard]] PieceGrid const& getPieceGrid() const;
+    [[nodiscard]] Moves getMovesFromThis(Coordinate const& startpoint, int const maxSize = MAX_NUMBER_OF_MOVES) const;
+    [[nodiscard]] Moves getMovesToThis(
+        Coordinate const& endpoint, PieceColor const& moveColor, int const maxSize = MAX_NUMBER_OF_MOVES) const;
+    [[nodiscard]] Moves getAttacksToThis(
+        Coordinate const& endpoint, PieceColor const& moveColor, int const maxSize = MAX_NUMBER_OF_MOVES) const;
+    [[nodiscard]] Move getMoveUsingUciNotation(std::string const& text) const;
+    [[nodiscard]] Move getMoveUsingAlgebraicNotation(std::string const& text, PieceColor const moveColor) const;
+    [[nodiscard]] Coordinate getCoordinateFromAlgebraicNotation(std::string const& text) const;
+    [[nodiscard]] Piece getPieceAt(Coordinate const& coordinate) const;
+    [[nodiscard]] Exchange getExchangeAt(Coordinate const& coordinate) const;
+    [[nodiscard]] std::string getAlgebraicNotationOfCoordinate(Coordinate const& coordinate) const;
+    [[nodiscard]] std::string getReadableStringOfMove(Move const& move) const;
+    [[nodiscard]] std::string getNotationPartOfFenString() const;
+    [[nodiscard]] std::string getCastlingPartOfFenString() const;
     void setOrientation(BoardOrientation const orientation);
     void setPieceAt(Coordinate const& coordinate, Piece const& piece);
     void move(Move const& move);
 
 private:
+    static bool isPieceEmptyOrHasOpposingColors(Piece const& piece, PieceColor const color);
+    static bool isPieceNonEmptyAndHasOpposingColors(Piece const& piece, PieceColor const color);
+    static bool isADiagonalMove(Move const& move);
+    static bool isAStraightMove(Move const& move);
+    static bool isAnLMove(Move const& move);
+    static bool isAOneStepMove(Move const& move);
+    static bool doesAllCellsInBetweenSatisfyTheCondition(
+        Coordinate const& startpoint, Coordinate const& endpoint, CoordinateCondition const& condition);
+    static int getGridIndex(int const x, int const y);
     static PieceGrid getInitialValues(BoardOrientation const& inputType);
+    static Coordinates getLDeltaCoordinates();
+    static Coordinates getDiagonalIncrementDeltaCoordinates();
+    static Coordinates getStraightIncrementDeltaCoordinates();
+    static Coordinates getOneStepDeltaCoordinates();
+    static Coordinate getCoordinateFromGridIndex(int const gridIndex);
+    static CoordinateDataType reverse(CoordinateDataType const value);
+    static CoordinateDataType getOneIncrement(CoordinateDataType const coordinateDataType);
+    static CastleType getCastleTypeWithAlgebraicNotation(std::string const& textInAlgebraicNotation);
 
+    static void updateAttackDefendCount(
+        Board::AttackDefendCount& count, PieceColor const pieceColor, PieceColor const sameColor,
+        PieceColor const oppositeColor);
+
+    [[nodiscard]] bool isPossibleMoveBasedFromPieceType(Move const& move) const;
+    [[nodiscard]] bool isPossiblePawnMove(Move const& move) const;
+    [[nodiscard]] bool isPossibleKnightMove(Move const& move) const;
+    [[nodiscard]] bool isPossibleBishopMove(Move const& move) const;
+    [[nodiscard]] bool isPossibleRookMove(Move const& move) const;
+    [[nodiscard]] bool isPossibleQueenMove(Move const& move) const;
+    [[nodiscard]] bool isPossibleKingMove(Move const& move) const;
+    [[nodiscard]] bool isPossibleOneKingMove(Move const& move) const;
+    [[nodiscard]] bool isPossibleKingCastlingMove(Move const& kingMove) const;
+    [[nodiscard]] bool isAPawnNonCaptureMove(Move const& move) const;
+    [[nodiscard]] bool isAPawnCapture(Move const& move) const;
+    [[nodiscard]] bool isAPawnEnPassantMove(Move const& move) const;
+    [[nodiscard]] bool isCastlingPossible(Move const& kingMove, Move const& rookMove) const;
+    [[nodiscard]] bool isEndpointEmptyOrHaveDifferentColors(Move const& move) const;
+    [[nodiscard]] bool isThereNoPieceInBetween(Move const& move) const;
+    [[nodiscard]] bool isSafeToCastleInBetween(Coordinate const& startpoint, Coordinate const& endpoint) const;
+
+    [[nodiscard]] int getNumberOfWaysToBlockPath(
+        Coordinate const& startpoint, Coordinate const& endpoint, PieceColor const blockingPieceColor,
+        int const maxSize) const;
+
+    [[nodiscard]] Moves getCandidatesMoves(
+        Coordinate const& endpoint, PieceColor const moveColor, PieceType const pieceType) const;
+    [[nodiscard]] NotationDetailsOfMove determineNotationDetailsOfMove(
+        std::string const& textInAlgebraicNotation) const;
+    [[nodiscard]] MovePairs getCastlingKingAndRookMovePairs(PieceColor const moveColor) const;
+    [[nodiscard]] MovePair getMatchingCastlingKingAndRookMovePair(Move const& kingMoveThatShouldMatch) const;
+
+    [[nodiscard]] Move getFirstMoveThatFits(
+        Moves const& possibleMoves, PieceType const pieceType, std::optional<CoordinateDataType> const& xLimitation,
+        std::optional<CoordinateDataType> const& yLimitation) const;
+
+    [[nodiscard]] Move getCastleMove(CastleType const castleType, PieceColor const moveColor) const;
+    [[nodiscard]] Move getNonCastleMoveWithAlgebraicNotation(std::string const& text, PieceColor const moveColor) const;
+    [[nodiscard]] DeltaRange getPawnNonCaptureDeltaRange(
+        Coordinate const& startpoint, PieceColor const moveColor) const;
+    [[nodiscard]] DeltaRange getPawnReverseNonCaptureDeltaRange(
+        Coordinate const& endpoint, PieceColor const moveColor) const;
+    [[nodiscard]] Coordinates getPawnCapturesDeltaCoordinates(PieceColor const moveColor) const;
+    [[nodiscard]] Coordinates getPawnReverseCapturesDeltaCoordinates(PieceColor const moveColor) const;
+    [[nodiscard]] Coordinate getCorrectCoordinateFromAlgebraicNotation(
+        CoordinateDataType const x, CoordinateDataType const y) const;
+    [[nodiscard]] CoordinateDataType getXInCorrectOrientation(CoordinateDataType const x) const;
+    [[nodiscard]] CoordinateDataType getYInCorrectOrientation(CoordinateDataType const y) const;
     void retrieveMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;
     void retrievePawnMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;
     void retrieveKnightMovesThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;
@@ -101,9 +160,6 @@ private:
     void retrieveCastlingMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;
     void retrieveMovesFromThisByIncrementingDelta(
         Moves& result, Coordinate const& startpoint, Coordinate const& delta, int const maxSize) const;
-
-    [[nodiscard]] Moves getCandidatesMoves(
-        Coordinate const& endpoint, PieceColor const moveColor, PieceType const pieceType) const;
     void retrieveMovesToThis(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
     void retrieveAttacksToThis(
@@ -134,69 +190,7 @@ private:
         AttackDefendCount& rookCount, AttackDefendCount& queenCount, Coordinate const& endpoint) const;
     void retrieveQueenAttackDefendCountToThis(AttackDefendCount& count, Coordinate const& endpoint) const;
     void retrieveKingOneStepAttackDefendCountToThis(AttackDefendCount& count, Coordinate const& endpoint) const;
-
-    [[nodiscard]] NotationDetailsOfMove determineNotationDetailsOfMove(
-        std::string const& textInAlgebraicNotation) const;
-    [[nodiscard]] MovePairs getCastlingKingAndRookMovePairs(PieceColor const moveColor) const;
-    [[nodiscard]] MovePair getMatchingCastlingKingAndRookMovePair(Move const& kingMoveThatShouldMatch) const;
-    [[nodiscard]] Move getFirstMoveThatFits(
-        Moves const& possibleMoves, PieceType const pieceType, std::optional<CoordinateDataType> const& xLimitation,
-        std::optional<CoordinateDataType> const& yLimitation) const;
-    [[nodiscard]] Move getCastleMove(CastleType const castleType, PieceColor const moveColor) const;
-    [[nodiscard]] Move getNonCastleMoveWithAlgebraicNotation(std::string const& text, PieceColor const moveColor) const;
-    static Coordinates getLDeltaCoordinates();
-    static Coordinates getDiagonalIncrementDeltaCoordinates();
-    static Coordinates getStraightIncrementDeltaCoordinates();
-    static Coordinates getOneStepDeltaCoordinates();
-    [[nodiscard]] DeltaRange getPawnNonCaptureDeltaRange(
-        Coordinate const& startpoint, PieceColor const moveColor) const;
-    [[nodiscard]] DeltaRange getPawnReverseNonCaptureDeltaRange(
-        Coordinate const& endpoint, PieceColor const moveColor) const;
-    [[nodiscard]] Coordinates getPawnCapturesDeltaCoordinates(PieceColor const moveColor) const;
-    [[nodiscard]] Coordinates getPawnReverseCapturesDeltaCoordinates(PieceColor const moveColor) const;
-    static Coordinate getCoordinateFromGridIndex(int const gridIndex);
-    [[nodiscard]] Coordinate getCorrectCoordinateFromAlgebraicNotation(
-        CoordinateDataType const x, CoordinateDataType const y) const;
-    [[nodiscard]] CoordinateDataType getXInCorrectOrientation(CoordinateDataType const x) const;
-    [[nodiscard]] CoordinateDataType getYInCorrectOrientation(CoordinateDataType const y) const;
-    static CoordinateDataType reverse(CoordinateDataType const value);
-    static CoordinateDataType getOneIncrement(CoordinateDataType const coordinateDataType);
-    static CastleType getCastleTypeWithAlgebraicNotation(std::string const& textInAlgebraicNotation);
-    static int getGridIndex(int const x, int const y);
-    [[nodiscard]] int getNumberOfWaysToBlockPath(
-        Coordinate const& startpoint, Coordinate const& endpoint, PieceColor const blockingPieceColor,
-        int const maxSize) const;
-
-    static bool isPieceEmptyOrHasOpposingColors(Piece const& piece, PieceColor const color);
-    static bool isPieceNonEmptyAndHasOpposingColors(Piece const& piece, PieceColor const color);
-    [[nodiscard]] bool isPossibleMoveBasedFromPieceType(Move const& move) const;
-    [[nodiscard]] bool isPossiblePawnMove(Move const& move) const;
-    [[nodiscard]] bool isPossibleKnightMove(Move const& move) const;
-    [[nodiscard]] bool isPossibleBishopMove(Move const& move) const;
-    [[nodiscard]] bool isPossibleRookMove(Move const& move) const;
-    [[nodiscard]] bool isPossibleQueenMove(Move const& move) const;
-    [[nodiscard]] bool isPossibleKingMove(Move const& move) const;
-    [[nodiscard]] bool isPossibleOneKingMove(Move const& move) const;
-    [[nodiscard]] bool isPossibleKingCastlingMove(Move const& kingMove) const;
-    [[nodiscard]] bool isAPawnNonCaptureMove(Move const& move) const;
-    [[nodiscard]] bool isAPawnCapture(Move const& move) const;
-    [[nodiscard]] bool isAPawnEnPassantMove(Move const& move) const;
-    static bool isADiagonalMove(Move const& move);
-    static bool isAStraightMove(Move const& move);
-    static bool isAnLMove(Move const& move);
-    static bool isAOneStepMove(Move const& move);
-    [[nodiscard]] bool isCastlingPossible(Move const& kingMove, Move const& rookMove) const;
-    [[nodiscard]] bool isEndpointEmptyOrHaveDifferentColors(Move const& move) const;
-    [[nodiscard]] bool isThereNoPieceInBetween(Move const& move) const;
-    [[nodiscard]] bool isSafeToCastleInBetween(Coordinate const& startpoint, Coordinate const& endpoint) const;
-    static bool doesAllCellsInBetweenSatisfyTheCondition(
-        Coordinate const& startpoint, Coordinate const& endpoint, CoordinateCondition const& condition);
-
-    static void updateAttackDefendCount(
-        Board::AttackDefendCount& count, PieceColor const pieceColor, PieceColor const sameColor,
-        PieceColor const oppositeColor);
     void changePieceGridWithMove(Move const& move);
-
     BoardOrientation m_orientation;
     PieceGrid m_pieceGrid;
 };

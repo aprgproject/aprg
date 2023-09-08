@@ -10,8 +10,6 @@ template <typename Index, typename HashValue>
 class RabinKarpSubstringSearchWithRunningHash {
 public:
     using RadixType = int;
-    static constexpr RadixType RADIX = 256;
-    static constexpr HashValue A_LARGE_PRIME = 1229952067;  // hard coded for now (think of an implementation later)
 
     explicit RabinKarpSubstringSearchWithRunningHash(std::string const& query)
         : m_query(query),
@@ -41,6 +39,8 @@ public:
         return result;
     }
 
+    static constexpr RadixType RADIX = 256;
+    static constexpr HashValue A_LARGE_PRIME = 1229952067;  // hard coded for now (think of an implementation later)
 private:
     [[nodiscard]] HashValue getHash(std::string const& key) const {
         return m_hornerHashFunction.getHashCode(key.substr(0, m_queryLength));

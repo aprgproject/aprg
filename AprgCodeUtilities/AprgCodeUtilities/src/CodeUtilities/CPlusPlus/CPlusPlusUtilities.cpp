@@ -13,6 +13,16 @@ using namespace std;
 
 namespace alba::CodeUtilities::CPlusPlusUtilities {
 
+bool isCppFileExtension(string const& extension) {
+    return extension == "cpp" || extension == "c" || extension == "cc" || extension == "hpp" || extension == "h";
+}
+
+bool isHeaderFileExtension(string const& extension) { return extension == "hpp" || extension == "h"; }
+
+bool isImplementationFileExtension(string const& extension) {
+    return extension == "cpp" || extension == "c" || extension == "cc";
+}
+
 Terms getTermsFromFile(string const& path) {
     Terms result;
     CPlusPlusTokenizer tokenizer(result);
@@ -25,14 +35,6 @@ Terms getTermsFromFile(string const& path) {
     }
     tokenizer.processLeftoverCode();
     return result;
-}
-
-void writeAllTerms(string const& path, Terms const& terms) {
-    AlbaLocalPathHandler filePathHandler(path);
-    ofstream outputStream(filePathHandler.getFullPath(), ios::binary);
-    for (Term const& term : terms) {
-        outputStream << term.getContent();
-    }
 }
 
 Terms getTermsFromString(string const& code) {
@@ -88,14 +90,12 @@ string getTextWithoutCommentsWithNewLine(Terms const& terms) {
     return getCombinedContents(revisedTerms);
 }
 
-bool isCppFileExtension(string const& extension) {
-    return extension == "cpp" || extension == "c" || extension == "cc" || extension == "hpp" || extension == "h";
-}
-
-bool isHeaderFileExtension(string const& extension) { return extension == "hpp" || extension == "h"; }
-
-bool isImplementationFileExtension(string const& extension) {
-    return extension == "cpp" || extension == "c" || extension == "cc";
+void writeAllTerms(string const& path, Terms const& terms) {
+    AlbaLocalPathHandler filePathHandler(path);
+    ofstream outputStream(filePathHandler.getFullPath(), ios::binary);
+    for (Term const& term : terms) {
+        outputStream << term.getContent();
+    }
 }
 
 }  // namespace alba::CodeUtilities::CPlusPlusUtilities

@@ -11,7 +11,6 @@ using namespace std;
 namespace alba::algebra {
 
 Monomial createMonomialFromNumber(AlbaNumber const& number) { return {number, {}}; }
-
 Monomial createMonomialFromVariable(Variable const& variable) { return {1, {{variable.getVariableName(), 1}}}; }
 
 Monomial createMonomialIfPossible(Term const& term) {
@@ -54,7 +53,6 @@ Polynomial createPolynomialIfPossible(Term const& term) {
 }
 
 Expression createExpressionInAnExpression(Expression const& expression) { return Expression(Term(expression)); }
-
 Expression createAndWrapExpressionFromATerm(Term const& term) { return Expression(term); }
 
 Expression createOrCopyExpressionFromATerm(Term const& term) {

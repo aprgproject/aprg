@@ -5,29 +5,24 @@
 namespace alba {
 
 struct SampleClassWithStatic {
-    int nonStaticData = 100;
-
-    // static int staticData = 200; // Error: non-const static data member must be initialized out of line
-    static int staticData;  // declaration only (incomplete type and must be defined)
-    static constexpr int staticConstData = 300;
-    static inline int staticInlinedData = 400;  // C++17, this saves the hassle of defining static data
-    static inline std::string staticInlinedString = "500";
-    // mutable static int staticMutableData; // Static data members cannot be mutable.
-
-    [[nodiscard]] int nonStaticFunctionWithClassDeclaration() const;
-
     static int staticFunctionWithClassDeclaration();
-
-    [[nodiscard]] int nonStaticFunctionWithClassDefinition() const { return nonStaticData; }
 
     static int staticFunctionWithClassDefinition() {
         // return this->staticData;
         // Static member functions are not associated with any object.
         // When called, they have no "this" pointer.
-
         return staticData;
     }
 
+    // mutable static int staticMutableData; // Static data members cannot be mutable.
+    [[nodiscard]] int nonStaticFunctionWithClassDeclaration() const;
+    [[nodiscard]] int nonStaticFunctionWithClassDefinition() const { return nonStaticData; }
+    int nonStaticData = 100;
+    // static int staticData = 200; // Error: non-const static data member must be initialized out of line
+    static int staticData;  // declaration only (incomplete type and must be defined)
+    static constexpr int staticConstData = 300;
+    static inline int staticInlinedData = 400;  // C++17, this saves the hassle of defining static data
+    static inline std::string staticInlinedString = "500";
     // static int staticFunctionWithConst() const; // Static member functions cannot be const.
     // static virtual int staticFunctionWithConst(); // Static member functions cannot be const.
     // static int staticFunctionWithConst() volatile; // Static member functions cannot be const.

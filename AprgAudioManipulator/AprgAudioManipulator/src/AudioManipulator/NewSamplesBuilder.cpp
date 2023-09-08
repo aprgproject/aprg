@@ -7,17 +7,7 @@ using namespace std;
 
 namespace alba::AprgAudio {
 
-NewSamplesBuilder::SampleMergingDetails::SampleMergingDetails() = default;
-
 NewSamplesBuilder::NewSamplesBuilder(Samples const& oldSamples) : m_oldSamples(oldSamples) {}
-
-void NewSamplesBuilder::putSamplesBasedOnSearchResultAndSamples(
-    Samples& samplesToChange, SearchResultsDetails const& searchResultDetails, Samples const& searchSamples,
-    bool const alwaysPutNewValue) {
-    SamplesMergingDetails samplesMergingDetails;
-    retrieveSampleMergingDetails(samplesMergingDetails, searchResultDetails, searchSamples);
-    saveToNewSamples(samplesToChange, samplesMergingDetails, alwaysPutNewValue);
-}
 
 void NewSamplesBuilder::retrieveSampleMergingDetails(
     SamplesMergingDetails& samplesMergingDetails, SearchResultsDetails const& details, Samples const& searchSamples) {
@@ -52,6 +42,16 @@ void NewSamplesBuilder::saveToNewSamples(
             }
         }
     }
+}
+
+NewSamplesBuilder::SampleMergingDetails::SampleMergingDetails() = default;
+
+void NewSamplesBuilder::putSamplesBasedOnSearchResultAndSamples(
+    Samples& samplesToChange, SearchResultsDetails const& searchResultDetails, Samples const& searchSamples,
+    bool const alwaysPutNewValue) {
+    SamplesMergingDetails samplesMergingDetails;
+    retrieveSampleMergingDetails(samplesMergingDetails, searchResultDetails, searchSamples);
+    saveToNewSamples(samplesToChange, samplesMergingDetails, alwaysPutNewValue);
 }
 
 }  // namespace alba::AprgAudio

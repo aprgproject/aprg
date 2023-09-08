@@ -9,16 +9,14 @@
 namespace alba::algebra {
 
 struct TermWithDetails {
-    TermWithDetails(BaseTerm const& baseTerm, TermAssociationType const associationParameter);
-    TermWithDetails(BaseTerm&& baseTerm, TermAssociationType const associationParameter);
-
     // rule of five or six
     ~TermWithDetails() = default;
-    TermWithDetails(TermWithDetails const& termWithDetails);
-    TermWithDetails& operator=(TermWithDetails const& termWithDetails);
     TermWithDetails(TermWithDetails&& termWithDetails) = default;
     TermWithDetails& operator=(TermWithDetails&& termWithDetails) = default;
-
+    TermWithDetails(BaseTerm const& baseTerm, TermAssociationType const associationParameter);
+    TermWithDetails(BaseTerm&& baseTerm, TermAssociationType const associationParameter);
+    TermWithDetails(TermWithDetails const& termWithDetails);
+    TermWithDetails& operator=(TermWithDetails const& termWithDetails);
     bool operator==(TermWithDetails const& second) const;
     bool operator!=(TermWithDetails const& second) const;
     bool operator<(TermWithDetails const& second) const;

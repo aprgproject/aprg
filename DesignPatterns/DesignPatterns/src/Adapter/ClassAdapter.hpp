@@ -4,11 +4,9 @@ namespace ClassAdapter {
 
 // Target
 // defines specific interface that Client uses
-
 class Target {
 public:
     virtual ~Target() = default;
-
     virtual void request() = 0;
     // ...
 };
@@ -16,7 +14,6 @@ public:
 // Adaptee
 // all requests get delegated to the Adaptee which defines
 // an existing interface that needs adapting
-
 class Adaptee {
 public:
     static void specificRequest() { std::cout << "specific request\n"; }
@@ -27,7 +24,6 @@ public:
 // implements the Target interface and lets the Adaptee respond
 // to request on a Target by extending both classes
 // ie adapts the interface of Adaptee to the Target interface
-
 class Adapter : public Target, private Adaptee {
     // note the access control
 public:

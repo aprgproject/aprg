@@ -17,7 +17,6 @@ OptimalBinarySearchTree::OptimalBinarySearchTree(ValueAndFrequencyPairs const& v
 OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingNaiveRecursion() const {
     // Time Complexity: Exponential
     // Auxiliary Space: Constant
-
     Cost result(0);
     if (!m_valueAndFrequencyPairs.empty()) {
         result = getMinimumCostUsingNaiveRecursion(1, 0, m_valueAndFrequencyPairs.size() - 1);
@@ -28,7 +27,6 @@ OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingNaiveR
 OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingIterativeDP() const {
     // Time Complexity: O(n^3)
     // Auxiliary Space: O(n^2)
-
     Cost result(0);
     if (!m_valueAndFrequencyPairs.empty()) {
         Index numberOfPairs = m_valueAndFrequencyPairs.size();
@@ -70,6 +68,11 @@ OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingIterat
     return result;
 }
 
+// inline optimization can work here because the usage belongs to same translation unit
+inline OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getCost(Cost const depth, Cost const frequency) {
+    return depth * frequency;
+}
+
 OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingNaiveRecursion(
     Cost const depth, Index const left, Index const right) const {
     Cost result(0);
@@ -89,11 +92,6 @@ OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingNaiveR
         }
     }
     return result;
-}
-
-// inline optimization can work here because the usage belongs to same translation unit
-inline OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getCost(Cost const depth, Cost const frequency) {
-    return depth * frequency;
 }
 
 void OptimalBinarySearchTree::initialize() { sortByValue(); }

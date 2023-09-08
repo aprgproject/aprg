@@ -65,7 +65,6 @@ TEST(BitonicSorterTest, SortWorksOnCharactersUsingExample2) {
 
 // CANNOT SORT STD::LIST
 // Implementation does not work with lists
-
 TEST(BitonicSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
     IntegersSorter sorter;
     Integers valuesToSort{-5, -10, 0, -3, 8, 5, -1, 10};

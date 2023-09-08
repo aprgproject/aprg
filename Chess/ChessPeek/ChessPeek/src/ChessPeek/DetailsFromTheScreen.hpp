@@ -12,8 +12,6 @@ namespace ChessPeek {
 
 class DetailsFromTheScreen {
 public:
-    DetailsFromTheScreen(Configuration const& configuration);
-
     struct CountOfPieces {
         int pieceCount;
         int whiteCountInUpperHalf;
@@ -26,14 +24,13 @@ public:
         Coordinate blackKingCoordinate;
     };
 
+    DetailsFromTheScreen(Configuration const& configuration);
     bool canAnalyzeBoard() const;
     BoardWithContext const& getBoardWithContext() const;
-
     void saveDetailsFromTheScreen();
 
 private:
     bool areKingsValid() const;
-
     Board getBoardAndSaveDetails();
     void saveBoardDetails(Coordinate const& coordinate, Piece const& piece);
     void saveBoardKingDetails(Coordinate const& coordinate, Piece const& piece);
@@ -43,10 +40,8 @@ private:
     void savePlayerColorIfLichessStream();
     void savePlayerColorAndOrientationFromBoardDetails();
     void saveOrientationOnLowerHalfColor(PieceColor const lowerHalfColor);
-
     void savePlayerColor(PieceColor const newColor);
     void saveOrientation(BoardOrientation const orientation);
-
     Configuration const& m_configuration;
     AlbaLocalScreenMonitoring m_screenMonitoring;
     BoardObserver m_boardObserver;
@@ -57,7 +52,6 @@ private:
 };
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

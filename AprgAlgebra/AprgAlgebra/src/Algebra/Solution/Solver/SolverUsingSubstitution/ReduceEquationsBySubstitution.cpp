@@ -11,6 +11,16 @@ using namespace std;
 
 namespace alba::algebra {
 
+VariableNamesSet getVariablesNamesToCheck(Equations const& equations, VariableNamesSet const& variableNamesToIgnore) {
+    VariableNamesRetriever variableNamesRetriever;
+    variableNamesRetriever.retrieveFromEquations(equations);
+    VariableNamesSet variableNamesToCheck(variableNamesRetriever.getVariableNames());
+    for (string const& variableNameToIgnore : variableNamesToIgnore) {
+        variableNamesToCheck.erase(variableNameToIgnore);
+    }
+    return variableNamesToCheck;
+}
+
 void reduceEquationsBySubstitution(Equations& substitutedEquations, VariableNamesSet const& variableNamesToIgnore) {
     VariableNamesRetriever unknownsRetriever;
     unknownsRetriever.retrieveFromEquations(substitutedEquations);
@@ -74,16 +84,6 @@ void removeEquationsWithoutUnknowns(Equations& substitutedEquations) {
             substitutedEquations.begin(), substitutedEquations.end(),
             [](Equation const& equation) { return hasNoVariables(equation); }),
         substitutedEquations.end());
-}
-
-VariableNamesSet getVariablesNamesToCheck(Equations const& equations, VariableNamesSet const& variableNamesToIgnore) {
-    VariableNamesRetriever variableNamesRetriever;
-    variableNamesRetriever.retrieveFromEquations(equations);
-    VariableNamesSet variableNamesToCheck(variableNamesRetriever.getVariableNames());
-    for (string const& variableNameToIgnore : variableNamesToIgnore) {
-        variableNamesToCheck.erase(variableNameToIgnore);
-    }
-    return variableNamesToCheck;
 }
 
 }  // namespace alba::algebra

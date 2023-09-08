@@ -14,6 +14,14 @@ namespace alba::algebra {
 IsolationOfOneVariableOnEqualityEquations::IsolationOfOneVariableOnEqualityEquations(Equations const& equations)
     : m_equations(equations) {}
 
+Term IsolationOfOneVariableOnEqualityEquations::getEquivalentTermByIsolatingAVariable(
+    string const& variableName) const {
+    Term termWithVariable;
+    Term termWithWithoutVariable;
+    isolateTermWithVariable(variableName, termWithVariable, termWithWithoutVariable);
+    return getEquivalentTermByReducingItToAVariable(variableName, termWithVariable, termWithWithoutVariable);
+}
+
 void IsolationOfOneVariableOnEqualityEquations::isolateTermWithVariable(
     string const& variableName, Term& termWithVariable, Term& termWithWithoutVariable) const {
     Equations reducedEquations(m_equations);
@@ -29,14 +37,6 @@ void IsolationOfOneVariableOnEqualityEquations::isolateTermWithVariable(
         IsolationOfOneVariableOnEqualityEquation isolationForVariable(selectedEquation);
         isolationForVariable.isolateTermWithVariable(variableName, termWithVariable, termWithWithoutVariable);
     }
-}
-
-Term IsolationOfOneVariableOnEqualityEquations::getEquivalentTermByIsolatingAVariable(
-    string const& variableName) const {
-    Term termWithVariable;
-    Term termWithWithoutVariable;
-    isolateTermWithVariable(variableName, termWithVariable, termWithWithoutVariable);
-    return getEquivalentTermByReducingItToAVariable(variableName, termWithVariable, termWithWithoutVariable);
 }
 
 void IsolationOfOneVariableOnEqualityEquations::sortEquationsWithVariable(Equations& equationsWithVariable) {

@@ -13,7 +13,6 @@ public:
 
     [[nodiscard]] AlbaNumberIntervals getIntervalsOfConvergence() const;
     [[nodiscard]] AlbaNumber getRadiusOfConvergence() const;
-
     void differentiate();
     void integrate();
 
@@ -21,6 +20,7 @@ protected:
     static Term getFormula(
         Term const& multiplierForEachTerm, std::string const& nName, std::string const& xName,
         AlbaNumber const& aValue);
+
     std::string const m_nName;
     std::string const m_xName;
 };

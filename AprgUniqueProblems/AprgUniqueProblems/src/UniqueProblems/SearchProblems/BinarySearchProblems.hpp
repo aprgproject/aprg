@@ -10,14 +10,12 @@ public:
     using Count = int;
     using Index = int;
     using Value = typename Values::value_type;
-
     BinarySearchProblems() = default;
 
     Value getNearestFloor(Values const& sortedValues, Value const& valueToCheck) {
         // Problem Statement:
         // Given an array of N distinct integers, find floor value of input ‘key’.
         // Say, A = {-1, 2, 3, 5, 6, 8, 9, 10} and key = 7, we should return 6 as outcome.
-
         // We can use the above optimized implementation to find floor value of key.
         // We keep moving the left pointer to right most as long as the invariant holds.
         // Eventually left pointer points an element less than or equal to key (by definition floor value).
@@ -25,7 +23,6 @@ public:
         // —> If all elements in the array are smaller than key, left pointer moves till last element.
         // —> If all elements in the array are greater than key, it is an error condition.
         // —> If all elements in the array equal and <= key, it is worst case input to our implementation.
-
         Value result{};
         if (!sortedValues.empty()) {
             result = sortedValues[getNearestFloorIndex(sortedValues, valueToCheck)];
@@ -45,10 +42,8 @@ public:
         // Problem Statement:
         // Given a sorted array with possible duplicate elements.
         // Find number of occurrences of input ‘key’ in log N time.
-
         // The idea here is finding left and right most occurrences of key in the array using binary search.
         // We can modify floor function to trace right most occurrence and left most occurrence.
-
         auto result(getInvalidIndex<Index>());
         if (!sortedValues.empty()) {
             // reversed
@@ -65,16 +60,13 @@ public:
         // Problem Statement:
         // Given a sorted array of distinct elements, and the array is rotated at an unknown position.
         // Find minimum element in the array.
-
         // Example in {6,7,8,9,10,[1],2,3,4,5} the answer is 5.
-
         // We converge the search space till l and r points single element.
         // If the middle location falls in the first pulse, the condition A[m] < A[r] doesn’t satisfy,
         // we converge our search space to A[m+1 … r].
         // If the middle location falls in the second pulse, the condition A[m] < A[r] satisfied,
         // we converge our search space to A[1 … m].
         // At every iteration we check for search space size, if it is 1, we are done.
-
         auto result(getInvalidIndex<Index>());
         Index lowerIndex(0);
         Index higherIndex(sortedValues.size() - 1);

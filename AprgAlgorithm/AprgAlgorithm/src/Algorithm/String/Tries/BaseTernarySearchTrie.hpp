@@ -14,12 +14,9 @@ public:
     using Strings = typename BaseClass::Strings;
     using Node = NodeTemplateType;
     using NodeUniquePointer = std::unique_ptr<Node>;
-
-    BaseTernarySearchTrie() : m_root(nullptr) {}
-
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     ~BaseTernarySearchTrie() override = default;
-
+    BaseTernarySearchTrie() : m_root(nullptr) {}
     [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 
     [[nodiscard]] bool doesContain(Key const& key) const override {
@@ -28,7 +25,6 @@ public:
     }
 
     [[nodiscard]] int getSize() const override { return getSizeStartingOnThisNode(m_root); }
-
     [[nodiscard]] int getNumberOfNodes() const {
         return getNumberOfNodes(m_root);  // dont count the root pointer
     }
@@ -37,8 +33,6 @@ public:
         int longestPrefixLength(getLengthOfLongestPrefixStartingOnThisNode(m_root, keyToCheck, 0));
         return keyToCheck.substr(0, longestPrefixLength);
     }
-
-    void deleteBasedOnKey(Key const& key) override { deleteBasedOnKeyStartingOnThisNode(m_root, key, 0); }
 
     [[nodiscard]] Strings getKeys() const override {
         Strings result;
@@ -52,15 +46,19 @@ public:
         return result;
     }
 
+    void deleteBasedOnKey(Key const& key) override { deleteBasedOnKeyStartingOnThisNode(m_root, key, 0); }
+
 protected:
     [[nodiscard]] virtual int getSizeStartingOnThisNode(NodeUniquePointer const& currentNodePointer) const = 0;
     [[nodiscard]] virtual int getLengthOfLongestPrefixStartingOnThisNode(
         NodeUniquePointer const& currentNodePointer, Key const& keyToCheck, int const index) const = 0;
     virtual void collectAllKeysAtNode(
         Node const* const currentNodePointer, std::string const& previousPrefix, Strings& collectedKeys) const = 0;
+
     virtual void collectKeysThatMatchAtNode(
         Node const* const currentNodePointer, std::string const& previousPrefix, Key const& patternToMatch,
         Strings& collectedKeys) const = 0;
+
     virtual void deleteBasedOnKeyStartingOnThisNode(
         NodeUniquePointer& currentNodePointer, Key const& key, int const index) = 0;
 

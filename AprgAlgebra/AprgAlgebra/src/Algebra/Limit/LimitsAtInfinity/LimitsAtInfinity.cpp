@@ -29,6 +29,28 @@ Term LimitsAtInfinity::getValueAtInfinity(AlbaNumber const infinityValue) const 
     return substitution.performSubstitutionTo(m_simplifiedTermAtInfinity);
 }
 
+AlbaNumber LimitsAtInfinity::getDegreeToRemove(AlbaNumber const& numeratorDegree, AlbaNumber const& denominatorDegree) {
+    AlbaNumber degreeToRemove;
+    if (numeratorDegree == denominatorDegree) {
+        degreeToRemove = numeratorDegree;
+    } else if (numeratorDegree > denominatorDegree) {
+        degreeToRemove = min(numeratorDegree, denominatorDegree);
+    } else {
+        degreeToRemove = max(numeratorDegree, denominatorDegree);
+    }
+    return degreeToRemove;
+}
+
+AlbaNumber LimitsAtInfinity::getMaxDegree(Term const& term) {
+    Term degreeOnlyTerm(term);
+    m_degreeOnlyMutator.mutateTerm(degreeOnlyTerm);
+    AlbaNumber degree;
+    if (canBeConvertedToMonomial(degreeOnlyTerm)) {
+        degree = getDegree(createMonomialIfPossible(degreeOnlyTerm));
+    }
+    return degree;
+}
+
 void LimitsAtInfinity::simplify() {
     simplifyAsATerm();
     if (!isNan(m_simplifiedTermAtInfinity)) {
@@ -74,28 +96,6 @@ void LimitsAtInfinity::simplifyPolynomialToMaxDegreeMonomialOnly() {
         m_simplifiedTermAtInfinity = Term(newPolynomial);
         m_simplifiedTermAtInfinity.simplify();
     }
-}
-
-AlbaNumber LimitsAtInfinity::getMaxDegree(Term const& term) {
-    Term degreeOnlyTerm(term);
-    m_degreeOnlyMutator.mutateTerm(degreeOnlyTerm);
-    AlbaNumber degree;
-    if (canBeConvertedToMonomial(degreeOnlyTerm)) {
-        degree = getDegree(createMonomialIfPossible(degreeOnlyTerm));
-    }
-    return degree;
-}
-
-AlbaNumber LimitsAtInfinity::getDegreeToRemove(AlbaNumber const& numeratorDegree, AlbaNumber const& denominatorDegree) {
-    AlbaNumber degreeToRemove;
-    if (numeratorDegree == denominatorDegree) {
-        degreeToRemove = numeratorDegree;
-    } else if (numeratorDegree > denominatorDegree) {
-        degreeToRemove = min(numeratorDegree, denominatorDegree);
-    } else {
-        degreeToRemove = max(numeratorDegree, denominatorDegree);
-    }
-    return degreeToRemove;
 }
 
 }  // namespace alba::algebra

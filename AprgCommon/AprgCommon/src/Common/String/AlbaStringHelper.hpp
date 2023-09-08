@@ -16,17 +16,16 @@ using strings = std::vector<std::string>;
 using StringViews = std::vector<std::string_view>;
 using StringPair = std::pair<std::string, std::string>;
 using StringPairs = std::vector<StringPair>;
-
 constexpr auto WHITESPACE_STRING = " \t\n\r";
+
+// Split and combine
+enum class SplitStringType { WithDelimeters, WithoutDelimeters };
 
 inline bool isWhiteSpace(char const character) { return isspace(character) != 0; }
 // inline bool isWhiteSpace(char const character) { return (' ' == character || '\t' == character || '\n' == character
 // || '\r' == character); }
-
 inline bool isNewLine(char const character) { return ('\n' == character || '\r' == character); }
-
 inline bool isNotNpos(int const index) { return static_cast<int>(std::string::npos) != index; }
-
 inline bool isNpos(int const index) { return static_cast<int>(std::string::npos) == index; }
 
 inline bool isValidIndex(int const index, int const stringLength) {
@@ -35,28 +34,20 @@ inline bool isValidIndex(int const index, int const stringLength) {
 
 inline bool isCapitalLetter(char const character) { return isupper(character) != 0; }
 // inline bool isCapitalLetter(char const character) { return ('A' <= character && 'Z' >= character); }
-
 inline bool isLowerCaseLetter(char const character) { return islower(character) != 0; }
 // inline bool isLowerCaseLetter(char const character) { return ('a' <= character && 'z' >= character); }
-
 inline bool isLetter(char const character) { return isalpha(character) != 0; }
 // inline bool isLetter(char const character) { return ('a' <= character && 'z' >= character) || ('A' <= character &&
 // 'Z' >= character); }
-
 inline bool isNumber(char const character) { return isdigit(character) != 0; }
 // inline bool isNumber(char const character) { return ('0' <= character && '9' >= character); }
-
 inline bool isHexDigit(char const character) { return isxdigit(character) != 0; }
 // inline bool isHexDigit(char const character) { return isNumber(character) || ('a' <= character && 'f' >= character)
 // || ('A' <= character && 'F' >= character); }
-
 inline bool isLetterOrNumber(char const character) { return isalnum(character) != 0; }
 // inline bool isLetterOrNumber(char const character) { return isLetter(character) || isNumber(character); }
-
 inline bool isPunctuation(char const character) { return ispunct(character) != 0; }
-
 inline bool isUnderscore(char const character) { return '_' == character; }
-
 inline bool isLetterOrUnderscore(char const character) { return isLetter(character) || isUnderscore(character); }
 
 inline bool isLetterOrNumberOrUnderscore(char const character) {
@@ -64,11 +55,10 @@ inline bool isLetterOrNumberOrUnderscore(char const character) {
 }
 
 inline bool isSlashCharacter(char const character) { return ('\\' == character || '/' == character); }
-
 inline bool isDisplayableCharacter(char const character) { return isprint(character) != 0; }
+
 // true if character is a printable character (i.e., a space or a character that has a visible representation)
 // inline bool isDisplayableCharacter(char const character) { return (' ' <= character && '~' >= character); }
-
 inline bool isNotEmptyLine(std::string_view const str) {
     return isNotNpos(static_cast<int>(str.find_first_not_of(WHITESPACE_STRING)));
 }
@@ -78,15 +68,6 @@ inline bool isPeriodOrDoublePeriod(std::string_view const str) { return ("." == 
 inline bool isLessThanStringLength(std::string_view const str, int const index) {
     return (index < static_cast<int>(str.length()));
 }
-
-int getNumberOfNewLines(std::string_view const str);
-size_t generateUniqueId(std::string_view const str);
-size_t getLevenshteinDistance(std::string_view const otherString, std::string_view const basisString);
-size_t getHammingDistance(std::string_view const string1, std::string_view const string2);
-size_t getNumberOfSubStrings(std::string_view const str);
-size_t getNumberOfSubsequences(std::string_view const str);
-int getRotationValue(std::string_view const str, std::string_view const rotation);
-int getPeriodValue(std::string_view const str, std::string_view const period);
 
 bool isNumber(std::string_view const str);
 bool isWhiteSpace(std::string_view const str);
@@ -108,17 +89,28 @@ bool isStringFoundCaseSensitive(std::string_view const mainText, std::string_vie
 bool isStringFoundCaseSensitive(
     std::string_view const mainText, std::string_view const stringToSearch, int& runningOffset);
 bool isStringFoundNotCaseSensitive(std::string_view const mainText, std::string_view const stringToSearch);
+
 bool isWildcardMatch(
     std::string_view const mainText, std::string_view const wildcard, size_t const mainTextIndex = 0,
     size_t const wildcardIndex = 0);
+
 bool isCamelCase(std::string_view const str);
 bool isPascalCase(std::string_view const str);
 bool isSnakeCase(std::string_view const str);
 bool isKebabCase(std::string_view const str);
 bool isScreamingSnakeCase(std::string_view const str);
-
+// Find and replace
+bool replaceAllAndReturnIfFound(
+    std::string& mainText, std::string_view const targetStr, std::string_view const replacementStr);
+int getNumberOfNewLines(std::string_view const str);
+int getRotationValue(std::string_view const str, std::string_view const rotation);
+int getPeriodValue(std::string_view const str, std::string_view const period);
+size_t generateUniqueId(std::string_view const str);
+size_t getLevenshteinDistance(std::string_view const otherString, std::string_view const basisString);
+size_t getHammingDistance(std::string_view const string1, std::string_view const string2);
+size_t getNumberOfSubStrings(std::string_view const str);
+size_t getNumberOfSubsequences(std::string_view const str);
 // String processing
-
 std::string getStringWithCapitalLetters(std::string_view const str);
 std::string getStringWithFirstNonWhiteSpaceCharacterToCapital(std::string_view const str);
 std::string getStringWithLowerCaseLetters(std::string_view const str);
@@ -136,16 +128,15 @@ std::string getStringWithoutCharAtTheEnd(std::string_view const str, char const 
 std::string getStringWithoutOpeningClosingOperators(
     std::string_view const str, char const openingOperator, char const closingOperator);
 std::string getLongestCommonPrefix(std::string_view const first, std::string_view const second);
-void copyBeforeStringAndAfterString(
-    std::string_view const mainText, std::string_view const stringToSearch, std::string& beforeString,
-    std::string& afterString, size_t const indexToStartTheSearch = 0);
 std::string getStringBeforeThisString(
     std::string_view const mainText, std::string_view const stringToSearch, size_t const indexToStart = 0);
 std::string getStringAfterThisString(
     std::string_view const mainText, std::string_view const stringToSearch, size_t const indexToStart = 0);
+
 std::string getStringInBetweenTwoStrings(
     std::string_view const mainText, std::string_view const firstString, std::string_view const secondString,
     size_t const indexToStart = 0);
+
 std::string getStringBeforeThisCharacters(
     std::string_view const mainText, std::string_view const characters, size_t const indexToStart = 0);
 std::string getStringAndReplaceNonAlphanumericCharactersToUnderScore(std::string_view const path);
@@ -154,22 +145,16 @@ std::string getNumberAfterThisString(std::string_view const mainText, std::strin
 std::string getHexNumberAfterThisString(std::string_view const mainText, std::string_view const stringToSearch);
 std::string getHexEquivalentOfCharacters(std::string_view const stringToCheck);
 std::string getQuotedString(std::string_view const stringToCheck);
-
 // Utilities
-
 std::string constructFileLocator(std::string_view const file, int const lineNumber);
 std::string getRandomAlphaNumericString(size_t const length);
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
 strings getArgumentsToStringInMain(int const argc, char const* const argv[]);
 
-// Find and replace
+void copyBeforeStringAndAfterString(
+    std::string_view const mainText, std::string_view const stringToSearch, std::string& beforeString,
+    std::string& afterString, size_t const indexToStartTheSearch = 0);
 
-bool replaceAllAndReturnIfFound(
-    std::string& mainText, std::string_view const targetStr, std::string_view const replacementStr);
-
-// Split and combine
-
-enum class SplitStringType { WithDelimeters, WithoutDelimeters };
 template <SplitStringType splitStringType>
 void splitToStrings(strings& listOfStrings, std::string_view const mainText, std::string_view const delimiters);
 std::string combineStrings(strings const& strings, std::string_view const delimiters);
@@ -200,17 +185,15 @@ OutputStringType convertToAnotherBasicStringVariant(InputStringType const& input
 }
 
 // Alignments
-
 enum class AlignmentType { Justify, Center, Right, Left };
+
 std::string getStringWithAlignment(
     std::string_view const mainText, size_t const targetLength, AlignmentType const alignmentType);
 std::string getStringWithJustifyAlignment(std::string_view const mainText, size_t const targetLength);
 std::string getStringWithCenterAlignment(std::string_view const mainText, size_t const targetLength);
 std::string getStringWithRightAlignment(std::string_view const mainText, size_t const targetLength);
 std::string getStringWithLeftAlignment(std::string_view const mainText, size_t const targetLength);
-
 // PathHelpers
-
 std::string getCorrectPathWithoutUrlParameters(std::string_view const path);
 std::string getUrlParameters(std::string_view const path);
 std::string getCorrectPathWithReplacedSlashCharacters(
@@ -226,10 +209,8 @@ template <char slashCharacterString>
 std::string getStringBeforeDoublePeriod(std::string_view const path);
 template <char slashCharacterString>
 std::string getImmediateDirectoryName(std::string_view const path);
-
 // string to type converters
 // NOTE: Consider stoul, stoull, stoi, stol, stoll, stof, stod, stold for this conversions
-
 bool convertStringToBool(std::string_view const stringToConvert);
 template <typename NumberType>
 NumberType convertStringToNumber(std::string_view const stringToConvert);
@@ -294,7 +275,6 @@ NumberType convertHexStringToNumber(std::string_view const stringToConvert) {
 
 // type to string converters
 // NOTE: Consider std::to_string for this conversions
-
 std::string convertBoolToString(bool const value);
 
 template <typename AnyType>
@@ -307,6 +287,7 @@ inline std::string convertToString(AnyType const& object) {
 class StringConverterWithFormatting {
 public:
     enum class FloatOutputType { Fixed, Scientific, HexFloat, Default };
+
     // ┌──────────┬────────────┬──────────────────────────┐
     // │  number  │   iomanip  │      representation      │
     // ├──────────┼────────────┼──────────────────────────┤
@@ -325,19 +306,14 @@ public:
     // │ 0.00001  │ hexfloat   │ 0x1.4f8b588e368f1p-17    │
     // │ 0.00001  │ default    │ 1e-05                    │
     // └──────────┴────────────┴──────────────────────────┘
-
     using IntOptional = std::optional<int>;
     using CharOptional = std::optional<char>;
     using UnsignedIntOptional = std::optional<size_t>;
     using FloatOutputTypeOptional = std::optional<FloatOutputType>;
-
     StringConverterWithFormatting() = default;
-
     explicit StringConverterWithFormatting(int const precision) : m_precisionOptional(precision) {}
-
     explicit StringConverterWithFormatting(int const fieldWidth, char const fillCharacter)
         : m_fieldWidthOptional(fieldWidth), m_fillCharacterOptional(fillCharacter) {}
-
     explicit StringConverterWithFormatting(size_t const maximumLength) : m_maximumLengthOptional(maximumLength) {}
 
     explicit StringConverterWithFormatting(

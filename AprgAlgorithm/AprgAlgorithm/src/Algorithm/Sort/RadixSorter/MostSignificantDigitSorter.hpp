@@ -17,9 +17,8 @@ public:
         std::array<int, MAX_NUMBER_OF_DIGIT_VALUES + 2>;  // offset of two for cumulate and copying back
     using GetDigitAtFunction = std::function<DigitValue(Value const&, int const)>;
     using IsDigitFunction = std::function<bool(Value const&, int const)>;
-    static constexpr int CUTOFF_TO_SMALLER_SORT = 0;  // switch to different sort when size is small
-
     MostSignificantDigitSorter() = delete;
+
     MostSignificantDigitSorter(
         GetDigitAtFunction const& getDigitAtFunction, IsDigitFunction const& isDigitInvalidFunction)
         : m_getDigitAtFunction(getDigitAtFunction), m_isDigitInvalidFunction(isDigitInvalidFunction) {}
@@ -36,6 +35,7 @@ public:
         }
     }
 
+    static constexpr int CUTOFF_TO_SMALLER_SORT = 0;  // switch to different sort when size is small
 private:
     void sortStartingAtMostSignificantDigitInternal(
         Values& valuesToSort, int const lowContainerIndex, int const highContainerIndex, int const digitIndex) const {
@@ -61,7 +61,6 @@ private:
         // 2) [0][0][cumulate with a][cumulate with b][cumulate with c]...
         // 3) [0][a count used as increment][b count used as increment][c count used as increment]
         // 4) [a low index][b low index (a high index+1)][c low index (b high index+1)][d low index (c high index+1)]...
-
         ArrayOfCountPerDigitValue newIndexes{};
         bool areAllDigitsInvalid(true);
         saveFrequencyForEachCharacterAt(

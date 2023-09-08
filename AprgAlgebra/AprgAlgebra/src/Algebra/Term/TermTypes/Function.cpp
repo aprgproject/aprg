@@ -58,7 +58,6 @@ bool Function::operator<(Function const& second) const {
 }
 
 bool Function::isSimplified() const { return m_isSimplified; }
-
 string Function::getFunctionName() const { return m_functionName; }
 
 string Function::getDebugString() const {
@@ -95,7 +94,6 @@ void Function::simplify() {
 }
 
 void Function::setAsSimplified() { m_isSimplified = true; }
-
 void Function::clearSimplifiedFlag() { m_isSimplified = false; }
 
 void Function::clearAllInnerSimplifiedFlags() {

@@ -30,6 +30,43 @@ KnightsTour::ChessBoardIndexes KnightsTour::getAClosedKnightsTour() const {
     return result;
 }
 
+bool KnightsTour::isInside(int const x, int const y) const {
+    return x >= 0 && x < static_cast<int>(m_chessBoardX) && y >= 0 && y < static_cast<int>(m_chessBoardY);
+}
+
+int KnightsTour::getNumberOfNeighbors(int const x, int const y) const { return m_neighborMatrix.getEntry(x, y); }
+
+int KnightsTour::countNumberOfNeighbors(int const x, int const y) const {
+    int numberOfNeighbors(0);
+    if (isInside(x - 2, y - 1)) {
+        ++numberOfNeighbors;
+    }
+    if (isInside(x - 2, y + 1)) {
+        ++numberOfNeighbors;
+    }
+    if (isInside(x - 1, y - 2)) {
+        ++numberOfNeighbors;
+    }
+    if (isInside(x - 1, y + 2)) {
+        ++numberOfNeighbors;
+    }
+    if (isInside(x + 1, y - 2)) {
+        ++numberOfNeighbors;
+    }
+    if (isInside(x + 1, y + 2)) {
+        ++numberOfNeighbors;
+    }
+    if (isInside(x + 2, y - 1)) {
+        ++numberOfNeighbors;
+    }
+    if (isInside(x + 2, y + 1)) {
+        ++numberOfNeighbors;
+    }
+    return numberOfNeighbors;
+}
+
+int KnightsTour::getChessBoardIndex(int const x, int const y) const { return static_cast<int>(m_chessBoardX * y + x); }
+
 void KnightsTour::initialize() {
     initializeNeighborMatrix();
     initializeGraph();
@@ -70,49 +107,11 @@ void KnightsTour::connectIfNeeded(int const sourceNeighbors, int const sourceInd
     // -> Using the rule, it is possible to efficiently construct a tour even on a large board.
     // -> The idea is to always move the knight so that it ends up in a square where the number of possible moves is as
     // small as possible.
-
     if (isInside(x, y)) {
         int destinationNeighbors = getNumberOfNeighbors(x, y);
         int destinationIndex = getChessBoardIndex(x, y);
         m_graph.connect({sourceNeighbors, sourceIndex}, {destinationNeighbors, destinationIndex});
     }
 }
-
-bool KnightsTour::isInside(int const x, int const y) const {
-    return x >= 0 && x < static_cast<int>(m_chessBoardX) && y >= 0 && y < static_cast<int>(m_chessBoardY);
-}
-
-int KnightsTour::getNumberOfNeighbors(int const x, int const y) const { return m_neighborMatrix.getEntry(x, y); }
-
-int KnightsTour::countNumberOfNeighbors(int const x, int const y) const {
-    int numberOfNeighbors(0);
-    if (isInside(x - 2, y - 1)) {
-        ++numberOfNeighbors;
-    }
-    if (isInside(x - 2, y + 1)) {
-        ++numberOfNeighbors;
-    }
-    if (isInside(x - 1, y - 2)) {
-        ++numberOfNeighbors;
-    }
-    if (isInside(x - 1, y + 2)) {
-        ++numberOfNeighbors;
-    }
-    if (isInside(x + 1, y - 2)) {
-        ++numberOfNeighbors;
-    }
-    if (isInside(x + 1, y + 2)) {
-        ++numberOfNeighbors;
-    }
-    if (isInside(x + 2, y - 1)) {
-        ++numberOfNeighbors;
-    }
-    if (isInside(x + 2, y + 1)) {
-        ++numberOfNeighbors;
-    }
-    return numberOfNeighbors;
-}
-
-int KnightsTour::getChessBoardIndex(int const x, int const y) const { return static_cast<int>(m_chessBoardX * y + x); }
 
 }  // namespace alba

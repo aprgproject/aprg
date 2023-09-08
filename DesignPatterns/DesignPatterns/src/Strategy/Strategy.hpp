@@ -5,18 +5,15 @@ namespace Strategy {
 
 // Strategy
 // declares an interface common to all supported algorithms
-
 class Strategy {
 public:
     virtual ~Strategy() = default;  // polymorphic destruction
-
     virtual void algorithmInterface() = 0;
     // ...
 };
 
 // Concrete Strategies
 // implement the algorithm using the Strategy interface
-
 class ConcreteStrategyA : public Strategy {
 public:
     void algorithmInterface() override { std::cout << "Concrete Strategy A\n"; }
@@ -37,14 +34,12 @@ public:
 
 // Context
 // maintains a reference to a Strategy object
-
 class Context {
 public:
     explicit Context(std::unique_ptr<Strategy> strategy) : m_strategy(std::move(strategy)) {}
-
     void contextInterface() { m_strategy->algorithmInterface(); }
-    // ...
 
+    // ...
 private:
     std::unique_ptr<Strategy> m_strategy;
     // ...

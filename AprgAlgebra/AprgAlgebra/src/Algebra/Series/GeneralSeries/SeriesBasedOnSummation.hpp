@@ -8,14 +8,11 @@ namespace alba::algebra {
 class SeriesBasedOnSummation : public SeriesBasedOnFormula {
 public:
     SeriesBasedOnSummation(Term const& formulaForEachTermInSummation, std::string const& variableName);
-
     [[nodiscard]] bool isSummationModelValid() const;
     [[nodiscard]] bool isConvergent() const override;
-    [[nodiscard]] Term getValueAtIndex(int const index) const override;
-
     [[nodiscard]] bool isAbsolutelyConvergent() const;
     [[nodiscard]] bool isConditionallyConvergent() const;
-
+    [[nodiscard]] Term getValueAtIndex(int const index) const override;
     [[nodiscard]] Term getTermValueAtIndex(int const index) const;
     [[nodiscard]] Term getFormulaForEachTermInSummation() const;
 

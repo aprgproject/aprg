@@ -14,6 +14,18 @@ namespace ChessPeek {
 SequenceOfMovesAnalyzer::SequenceOfMovesAnalyzer(BoardWithContext const& boardWithContext)
     : m_state(State::NoMove), m_current{boardWithContext, {}}, m_previous{} {}
 
+bool SequenceOfMovesAnalyzer::canPreMove() const {
+    bool result(false);
+    if (State::AnalyzingMove == m_state && isPreviousColorOpposite()) {
+        result = canPreMoveBecauseOfRecapture() || canPreMoveBecauseOfCheck();
+    }
+    return result;
+}
+
+SequenceOfMovesAnalyzer::State SequenceOfMovesAnalyzer::getState() const { return m_state; }
+Board const& SequenceOfMovesAnalyzer::getCurrentBoard() const { return m_current.boardWithContext.getBoard(); }
+PieceColor SequenceOfMovesAnalyzer::getCurrentMoveColor() const { return m_current.boardWithContext.getPlayerColor(); }
+
 void SequenceOfMovesAnalyzer::analyzeMove(Move const& halfMove) {
     if (areCoordinatesValid(halfMove)) {
         m_previous.move = m_current.move;
@@ -29,20 +41,6 @@ void SequenceOfMovesAnalyzer::commitMove() {
     m_current.boardWithContext.move(m_current.move);
     m_state = State::Moved;
 }
-
-bool SequenceOfMovesAnalyzer::canPreMove() const {
-    bool result(false);
-    if (State::AnalyzingMove == m_state && isPreviousColorOpposite()) {
-        result = canPreMoveBecauseOfRecapture() || canPreMoveBecauseOfCheck();
-    }
-    return result;
-}
-
-SequenceOfMovesAnalyzer::State SequenceOfMovesAnalyzer::getState() const { return m_state; }
-
-Board const& SequenceOfMovesAnalyzer::getCurrentBoard() const { return m_current.boardWithContext.getBoard(); }
-
-PieceColor SequenceOfMovesAnalyzer::getCurrentMoveColor() const { return m_current.boardWithContext.getPlayerColor(); }
 
 bool SequenceOfMovesAnalyzer::isPreviousColorOpposite() const {
     return areOpposingColors(m_current.boardWithContext.getPlayerColor(), m_previous.boardWithContext.getPlayerColor());
@@ -83,7 +81,6 @@ bool SequenceOfMovesAnalyzer::isARecapture() const {
 }
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

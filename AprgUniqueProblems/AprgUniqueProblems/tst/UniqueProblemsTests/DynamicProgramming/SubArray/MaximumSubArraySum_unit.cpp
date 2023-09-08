@@ -18,7 +18,6 @@ TEST(MaximumSubArraySumTest, GetMaximumSubArraySumWorksOnExample1) {
 
 TEST(MaximumSubArraySumTest, GetMaximumSubArraySumWorksOnExample2) {
     MaximumSubArraySum queryForTest({-6, -2, -1, -3, -5, -2, -5, -2});  // all negative  numbers
-
     EXPECT_EQ(-1, queryForTest.getMaximumSubArraySum());
 }
 
@@ -34,7 +33,6 @@ TEST(MaximumSubArraySumTest, GetMaximumSubArraySumWithDetailsWorksOnExample1) {
 
 TEST(MaximumSubArraySumTest, GetMaximumSubArraySumWithDetailsWorksOnExample2) {
     MaximumSubArraySum queryForTest({-6, -2, -1, -3, -5, -2, -5, -2});  // all negative  numbers
-
     SubArrayDetails subArrayDetailsToVerify(queryForTest.getMaximumSubArraySumWithDetails());
 
     EXPECT_EQ(2, subArrayDetailsToVerify.lowIndex);

@@ -10,8 +10,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-OneEquationOneVariableNonEqualitySolver::OneEquationOneVariableNonEqualitySolver() = default;
-
 void OneEquationOneVariableNonEqualitySolver::calculateSolution(SolutionSet& solutionSet, Equation const& equation) {
     if (!equation.getEquationOperator().isEqual()) {
         Equation simplifiedEquation(equation);
@@ -61,5 +59,7 @@ void OneEquationOneVariableNonEqualitySolver::addIntervalsToSolutionSetIfNeeded(
         setAsCompleteSolution();
     }
 }
+
+OneEquationOneVariableNonEqualitySolver::OneEquationOneVariableNonEqualitySolver() = default;
 
 }  // namespace alba::algebra

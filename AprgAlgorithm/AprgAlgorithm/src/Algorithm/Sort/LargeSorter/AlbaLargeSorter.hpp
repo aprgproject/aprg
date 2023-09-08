@@ -15,7 +15,6 @@ template <typename ObjectToSort>
 class AlbaLargeSorter {
     using BlockType = AlbaLargeSorterBlockType<ObjectToSort>;
     using BlockIterator = AlbaLargeSorterBlockIterator<ObjectToSort>;
-
     using BlockCache = AlbaLargeSorterBlockCache<BlockIterator>;
     using BlockCacheEntry = AlbaLargeSorterBlockCacheEntry<BlockIterator>;
     using BlockCacheContainer = AlbaLargeSorterBlockCacheContainer<BlockIterator>;
@@ -28,9 +27,12 @@ public:
           m_blocks(m_configuration, m_memoryCache, m_fileStreamOpenedCache) {
         createTempDirectories();
     }
+
     ~AlbaLargeSorter() { deleteTempFilesAndDirectories(); }
     [[nodiscard]] bool isEmpty() const { return 0 == m_size; }
     [[nodiscard]] AlbaLargeSorterConfiguration getConfiguration() const { return m_configuration; }
+    long long getSize() { return m_size; }
+
     void add(ObjectToSort const& objectToSort) {
         auto blockIterator(m_blocks.getNearestBlockIterator(objectToSort));
         m_blocks.addObjectToBlock(blockIterator, objectToSort);
@@ -39,6 +41,7 @@ public:
         limitFileStreams();
         ++m_size;
     }
+
     void addAtTheStart(ObjectToSort const& objectToSort) {
         m_blocks.moveMainInteratorToStart();
         BlockIterator blockIterator(m_blocks.getNearestBlockIterator(objectToSort));
@@ -48,13 +51,23 @@ public:
         limitFileStreams();
         ++m_size;
     }
+
     void sortThenDoFunctionThenReleaseAllObjects(std::function<void(ObjectToSort const&)> doFunctionForAllObjects) {
         m_blocks.sortThenDoFunctionThenReleaseAllObjects(doFunctionForAllObjects);
         m_size = 0;
     }
-    long long getSize() { return m_size; }
 
 private:
+    int calculateTotalMemoryConsumption() {
+        BlockCacheContainer const& memoryLimitCache(m_memoryCache.getContainerReference());
+        int totalMemoryConsumption = accumulate(
+            memoryLimitCache.cbegin(), memoryLimitCache.cend(), 0,
+            [](int const memoryConsumption, BlockCacheEntry const& blockCacheEntry) {
+                return memoryConsumption + blockCacheEntry.m_blockInformation->getNumberOfObjectsInMemory();
+            });
+        return totalMemoryConsumption;
+    }
+
     void splitToSmallestBlocksIfOverflow(BlockIterator const& blockIterator) {
         if (blockIterator->getNumberOfObjects() >= m_configuration.m_maximumNumberOfObjectsPerBlock) {
             splitToSmallestBlocks(blockIterator, DataBlockType::Memory);
@@ -62,30 +75,28 @@ private:
     }
 
     // nth element is not stable
-
     /*void splitToSmallestBlocks(BlockIterator const& blockIterator, DataBlockType const blockTypeForNewBlocks) {
-        BlockIterator iteratorAfterBlockToSplit(blockIterator);
-        iteratorAfterBlockToSplit++;
-        int index = 0, indexOfIndexes = 0;
-        BlockIterator newBlockIterator(iteratorAfterBlockToSplit);
+            BlockIterator iteratorAfterBlockToSplit(blockIterator);
+            iteratorAfterBlockToSplit++;
+            int index = 0, indexOfIndexes = 0;
+            BlockIterator newBlockIterator(iteratorAfterBlockToSplit);
 
-        Indexes indexes;
-        putIndexesWithMultiplesOfNumber(
-            indexes, m_configuration.m_minimumNumberOfObjectsPerBlock, blockIterator->getNumberOfObjects());
+            Indexes indexes;
+            putIndexesWithMultiplesOfNumber(
+                indexes, m_configuration.m_minimumNumberOfObjectsPerBlock, blockIterator->getNumberOfObjects());
 
-        blockIterator->nthElementThenDoFunctionThenRelease(indexes, [&](ObjectToSort const& objectToSort) {
-            if (indexOfIndexes < indexes.size() && index >= indexes[indexOfIndexes]) {
-                m_blocks.createNewBlockBeforeThisIterator(iteratorAfterBlockToSplit, blockTypeForNewBlocks);
-                newBlockIterator = iteratorAfterBlockToSplit;
-                newBlockIterator--;
-                indexOfIndexes++;
-            }
-            m_blocks.addObjectToBlock(newBlockIterator, objectToSort);
-            index++;
-        });
-        m_blocks.deleteBlock(blockIterator);
-    }*/
-
+            blockIterator->nthElementThenDoFunctionThenRelease(indexes, [&](ObjectToSort const& objectToSort) {
+                if (indexOfIndexes < indexes.size() && index >= indexes[indexOfIndexes]) {
+                    m_blocks.createNewBlockBeforeThisIterator(iteratorAfterBlockToSplit, blockTypeForNewBlocks);
+                    newBlockIterator = iteratorAfterBlockToSplit;
+                    newBlockIterator--;
+                    indexOfIndexes++;
+                }
+                m_blocks.addObjectToBlock(newBlockIterator, objectToSort);
+                index++;
+            });
+            m_blocks.deleteBlock(blockIterator);
+        }*/
     // sort implementation
     void splitToSmallestBlocks(BlockIterator const& blockIterator, DataBlockType const blockTypeForNewBlocks) {
         BlockIterator iteratorAfterBlockToSplit(blockIterator);
@@ -112,15 +123,7 @@ private:
         int totalMemoryConsumption = calculateTotalMemoryConsumption();
         transferMemoryBlocksToFileIfNeeded(totalMemoryConsumption);
     }
-    int calculateTotalMemoryConsumption() {
-        BlockCacheContainer const& memoryLimitCache(m_memoryCache.getContainerReference());
-        int totalMemoryConsumption = accumulate(
-            memoryLimitCache.cbegin(), memoryLimitCache.cend(), 0,
-            [](int const memoryConsumption, BlockCacheEntry const& blockCacheEntry) {
-                return memoryConsumption + blockCacheEntry.m_blockInformation->getNumberOfObjectsInMemory();
-            });
-        return totalMemoryConsumption;
-    }
+
     void transferMemoryBlocksToFileIfNeeded(int const totalMemoryConsumption) {
         int memoryConsumption = totalMemoryConsumption;
         while (memoryConsumption > m_configuration.m_maximumNumberOfObjectsInMemory) {
@@ -135,6 +138,7 @@ private:
             }
         }
     }
+
     void limitFileStreams() {
         while (m_configuration.m_maximumFileStreams <
                static_cast<int>(m_fileStreamOpenedCache.getContainerReference().size())) {
@@ -142,20 +146,24 @@ private:
             iteratorOfBlockToReleaseFile->releaseFileStream();
         }
     }
+
     void createTempDirectories() {
         AlbaLocalPathHandler(m_configuration.m_directoryForBlocks).createDirectoriesForNonExisitingDirectories();
     }
+
     void deleteTempFilesAndDirectories() {
         AlbaLocalPathHandler temporaryLocalDirectory(m_configuration.m_directoryForBlocks);
         if (temporaryLocalDirectory.isFoundInLocalSystem()) {
             temporaryLocalDirectory.deleteInnerFilesAndDirectories();
         }
     }
+
     void putIndexesWithMultiplesOfNumber(Indexes& indexes, int const number, int const numberOfObjects) {
         for (int index = 0; index < numberOfObjects; index += number) {
             indexes.emplace_back(index);
         }
     }
+
     long long m_size{0};
     AlbaLargeSorterConfiguration const m_configuration;
     BlockCache m_memoryCache;

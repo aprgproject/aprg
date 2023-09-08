@@ -12,10 +12,8 @@ template <typename Values>
 class RangeQueryWithDynamicSegmentTree {
 public:
     // This supports "selector" and "accumulator" type queries.
-
     // An segment tree is dynamic, which means memory is allocated only for nodes
     // that are actually accessed during the algorithm, which can save a large amount of memory.
-
     using Index = int;
     using Value = typename Values::value_type;
     using Function = std::function<Value(Value const&, Value const&)>;
@@ -28,6 +26,13 @@ public:
         initialize(valuesToCheck);
     }
 
+    virtual void changeValueAtIndex(Index const index, Value const& newValue) {
+        // This has log(N) running time
+        if (index < m_numberOfValues) {
+            changeValueOnIndexFromTopToBottom(index, newValue, m_root, 0, m_maxChildrenIndex);
+        }
+    }
+
     [[nodiscard]] Value getValueOnInterval(Index const start, Index const end) const {
         // This has log(N) running time
         Value result{};
@@ -37,19 +42,11 @@ public:
         return result;
     }
 
-    virtual void changeValueAtIndex(Index const index, Value const& newValue) {
-        // This has log(N) running time
-        if (index < m_numberOfValues) {
-            changeValueOnIndexFromTopToBottom(index, newValue, m_root, 0, m_maxChildrenIndex);
-        }
-    }
-
 private:
     [[nodiscard]] Value getValueOnIntervalFromTopToBottom(
         Index const startInterval, Index const endInterval, NodePointer const& nodePointer, Index const baseLeft,
         Index const baseRight) const {
         // This has log(N) running time
-
         Value result{};
         if (startInterval <= baseLeft && baseRight <= endInterval) {
             result = nodePointer->value;
@@ -98,7 +95,6 @@ private:
     void setValuesFromTopToBottom(
         Values const& values, NodePointer& nodePointer, Index const baseLeft, Index const baseRight) {
         // This has log(N) running time
-
         if (!nodePointer) {
             nodePointer.reset(new Node{Value{}, nullptr, nullptr});
         }
@@ -118,7 +114,6 @@ private:
         Index const index, Value const& newValue, NodePointer& nodePointer, Index const baseLeft,
         Index const baseRight) {
         // This has log(N) running time
-
         if (nodePointer) {
             if (baseLeft == baseRight) {
                 nodePointer->value = newValue;

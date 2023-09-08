@@ -23,7 +23,6 @@ constexpr uint32_t ONE_THEN_ZERO_32_BITS = 0x55555555;
 constexpr uint64_t ONE_THEN_ZERO_64_BITS = 0x55555555'55555555;
 constexpr uint8_t NIBBLE_MASK = 0B00001111;  // digit separator carat ' cannot be used for binary literal
 constexpr uint8_t BIT_MASK = 0B00000001;
-
 // defined in climits
 constexpr std::size_t BYTE_SIZE_IN_BITS = CHAR_BIT;  // 8
 constexpr std::size_t BYTE_MASK = UCHAR_MAX;         // 0xFF or 255

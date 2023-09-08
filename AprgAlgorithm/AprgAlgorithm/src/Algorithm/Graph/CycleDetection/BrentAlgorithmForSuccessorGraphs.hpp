@@ -11,12 +11,9 @@ public:
     using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
     using Walker = WalkInSuccessorGraph<Vertex>;
     using Path = typename GraphTypes<Vertex>::Path;
-
     explicit BrentAlgorithmForSuccessorGraphs(BaseDirectedGraphWithVertex const& graph)
         : m_graph(graph), m_walker(graph) {}
-
     [[nodiscard]] bool hasACycle() const { return m_hasACycle; }
-
     [[nodiscard]] Path getCycle() const { return m_cyclePath; }
 
     void reinitializeStartingFrom(Vertex const& startOfGraph) {
@@ -29,6 +26,8 @@ public:
     }
 
 private:
+    [[nodiscard]] bool isAtTheEnd(Vertex const& vertex) const { return m_walker.isAtTheEnd(vertex); }
+
     int getCycleLength(Vertex const& startOfGraph) {
         // This is actually cyclePath.size()-1.
         // For example the cycle, {4, 5, 6, 4} has a cycle length of 3.
@@ -64,6 +63,9 @@ private:
         return vertex1;  // if equal, then start of cycle is found
     }
 
+    Vertex walkOne(Vertex const& vertex) { return m_walker.walk(vertex, 1); }
+    Vertex walkTwo(Vertex const& vertex) { return m_walker.walk(vertex, 2); }
+
     void saveCycle(Vertex const& startOfCycle, int const cycleLength) {
         Vertex vertex = startOfCycle;
         for (int i = 0; i < cycleLength; ++i) {
@@ -73,12 +75,6 @@ private:
         }
         m_cyclePath.emplace_back(vertex);  // append last/first vertex to demonstrate a cycle
     }
-
-    [[nodiscard]] bool isAtTheEnd(Vertex const& vertex) const { return m_walker.isAtTheEnd(vertex); }
-
-    Vertex walkOne(Vertex const& vertex) { return m_walker.walk(vertex, 1); }
-
-    Vertex walkTwo(Vertex const& vertex) { return m_walker.walk(vertex, 2); }
 
     BaseDirectedGraphWithVertex const& m_graph;
     Walker m_walker;

@@ -37,6 +37,7 @@ private:
             this->relaxAt(vertex);
         }
     }
+
     Graph const& b_graph;
 };
 

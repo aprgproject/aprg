@@ -16,7 +16,6 @@ TEST(ConstExamplesTest, MutationWithConstInPrimitiveTypesDoesNotWork) {
     ++a;
 
     // b++; // Error because "b" is const
-
     if (b > 4) {
         cout << "b is greater than 4\n";
     }
@@ -27,9 +26,7 @@ TEST(ConstExamplesTest, MutationWithConstInPrimitiveTypesDoesNotWork) {
 
     // if(b>>=a) // Error because "b" is const
     //    cout << "b is greater than 4\n";
-
     // a = ? ++b : b; // Error because "b" is const
-
     // Note: You can't modify const data (unless const_cast).
 }
 
@@ -43,7 +40,6 @@ TEST(ConstExamplesTest, MutationWithConstInPointersSometimesWorks) {
     int const* c = a;
     ++c;
     //*c = 20; // Error because "c" is const*
-
     int* const d = a;
     // d++; // Error because "c" is *const
     *d = 20;
@@ -51,7 +47,6 @@ TEST(ConstExamplesTest, MutationWithConstInPointersSometimesWorks) {
     // int const*const e = a;
     // e++; // Error because "e" is const*
     //*e = 20; // Error because "e" is *const
-
     // Note: Notice the difference of "const*", "*const" and "const*const"
 }
 
@@ -61,10 +56,8 @@ TEST(ConstExamplesTest, ConstCanBeAddedOnTopUsingPointers) {
     int const* p2 = p1;  // p2 points to "const"ant int, "const" is added on p2
     // int * p3 = p2; // Error because you cannot remove the "const"ness of p2
     int* const p4 = p1;  // p4 is a "const"ant pointer to int, const added to pointer
-
     int const data2 = 2;
     // int * p5 = p2; // Error because you cannot remove the "const"ness of data2
-
     cout << "To avoid warnings *p2: [" << *p2 << "] *p4: [" << *p4 << "] data2:[" << data2 << "]\n";
 
     // Note: You cant remove "const" from data using pointers.
@@ -77,10 +70,8 @@ TEST(ConstExamplesTest, ConstCanBeAddedOnTopUsingReferences) {
     int const& r2 = r1;  // r2 refers to "const"ant int, "const" is added on r2
     // int & r3 = r2; // Error because you cannot remove the "const"ness of r2
     // int& const r4 = r1; // Error because there is no &const, because address of the reference cannot be moved
-
     int const data2 = 2;
     // int& r5 = r2; // Error because you cannot remove the "const"ness of data2
-
     cout << "To avoid warnings r2: [" << r2 << "] data2:[" << data2 << "]\n";
 
     // Note: You cant remove "const" from data using references.
@@ -95,21 +86,17 @@ TEST(ConstExamplesTest, MutationWithConstInPrimitiveTypesInStructsDoesNotWork) {
     Foo f{};
     f.a++;
     // f.b++; // Error because "b" is const
-
     // Foo const cf{};
     // cf.a++; // Error because "cf" is const
     // cf.b++; // Error because "cf" is const
-
     Foo* ptr_f = &f;
     ptr_f->a++;
     // ptr_f->b++; // Error because "b" is const
     ++ptr_f;  // No error because ptr_f can be moved
-
     Foo const* c_ptr_f = &f;
     // c_ptr_f->a++; // Error because "c_ptr_f" is const*
     // c_ptr_f->b++; // Error because "c_ptr_f" is const*
     ++c_ptr_f;  // No error because c_ptr_f can be moved
-
     // Note: You can't modify the "const members of structures" and "members of const structures".
 }
 
@@ -123,19 +110,15 @@ TEST(ConstExamplesTest, MutationWithConstInPointersInStructsSometimesWorks) {
     Foo f;
     *f.a = 20;
     //*f.b = 20; // Error because "b" is const
-
     Foo const cf;
     *cf.a = 20;  // No error because "a" address is not changed
     //*cf.b = 20; // Error because "b" is const
-
     Foo* ptr_f = &f;
     *ptr_f->a = 20;
     //*ptr_f->b = 20; // Error because "b" is const
-
     Foo const* c_ptr_f = &f;
     *c_ptr_f->a = 20;  // No error because "a" address is not changed
     //*c_ptr_f->b = 20; // Error because "b" is const
-
     // Note: You can't modify the "const members of structures" and "members of const structures".
     // However, you can modify the data on where its members are pointing at (unless its const*).
 }
@@ -150,19 +133,15 @@ TEST(ConstExamplesTest, MutationWithConstInReferencesInStructsSometimesWorks) {
     Foo f;
     f.a = 20;
     // f.b = 20; // Error because "b" is const
-
     Foo const cf;
     cf.a = 20;  // No error because "a" address is not changed
     // cf.b = 20; // Error because "b" is const
-
     Foo& ref_f = f;
     ref_f.a = 20;
     // ref_f.b = 20; // Error because "b" is const
-
     Foo const& c_ref_f = f;
     c_ref_f.a = 20;  // No error because "a" address is not changed
     // c_ref_f.b = 20; // Error because "b" is const
-
     // Note: You can't modify the "const members of structures" and "members of const structures".
     // However, you can modify the data on where its members are refering at (unless its const&).
 }
@@ -182,25 +161,23 @@ TEST(ConstExamplesTest, FunctionMatchingWithWithDifferentParametersWorks) {
 
     function1(ptr_f);  // goes to "function 1"
     // function1(c_ptr_f); // Error because cannot convert to const*
-
     function2(ptr_f);    // goes to "function 2"
     function2(c_ptr_f);  // goes to "function 2" as well
-
     function3(ptr_f);    // goes to "function 3 with *"
     function3(c_ptr_f);  // goes to "function 3 with const*"
-
     // Note: C++ picks the best function based from its function signature.
     // If the "const"ness is removed, then its a compilation error.
 }
+
 }  // namespace FunctionMatchingWithWithDifferentParametersWorks
 
 TEST(ConstExamplesTest, FunctionMatchingWithAndWithoutConstInFunctionSignatureOfAClassWorks) {
     class Foo {
     public:
         // NOLINTNEXTLINE(readability-convert-member-functions-to-static)
-        void myFunction() { cout << "calling non-const\n"; }
-        // NOLINTNEXTLINE(readability-convert-member-functions-to-static)
         void myFunction() const { cout << "calling const\n"; }
+        // NOLINTNEXTLINE(readability-convert-member-functions-to-static)
+        void myFunction() { cout << "calling non-const\n"; }
     };
 
     Foo a;
@@ -208,7 +185,6 @@ TEST(ConstExamplesTest, FunctionMatchingWithAndWithoutConstInFunctionSignatureOf
 
     a.myFunction();  // goes to "non-const"
     b.myFunction();  // goes to "const"
-
     // Note: C++ picks the best function based from its function signature.
     // The signature includes if the function itself is const.
 }
@@ -221,7 +197,6 @@ TEST(ConstExamplesTest, FunctionMatchingWithConstInFunctionSignatureOfAClassWork
 
     Foo::myFunction();  // goes to "const"
     Foo::myFunction();  // goes to "const"
-
     // Note: If the member function is const, then you can use it in non const structures to add "const"ness to the
     // operation.
 }
@@ -234,10 +209,8 @@ TEST(ConstExamplesTest, FunctionMatchingWithoutConstInFunctionSignatureOfAClassW
 
     Foo a;
     // Foo const b(a);
-
     Foo::myFunction();  // goes to "non-const"
     // b.myFunction(); // Error because b is const
-
     // Note: If the member function is non-const, then you cannot use it in const structures.
 }
 
@@ -262,7 +235,6 @@ TEST(ConstExamplesTest, MutabilityOfStructInsideAFunctionWorks) {
     // -> You can't modify const data (unless const_cast).
     // -> For pointers: You can modify the data on where its members are pointing at (unless its const*).
     // -> For references: You can modify the data on where its members are refering at (unless its const&).
-
     // Bitwise const vs Logical const
     // -> Bitwise const
     // ---> A member function is Bitwise const if it doesn't modify any of the bits inside the object
@@ -284,24 +256,26 @@ TEST(ConstExamplesTest, MutabilityOfMutableMembersInAClassWorks) {
     // -> Const functions cannot modify object.
     // -> On these occasions you reach for "mutable", the C+++ wiggle room for const
     // -> "mutable" tells the compiler that the value will change even if the function is const.
-
     struct DataHolder {
     public:
         int getCheckSum() const {
             ++m_numberOfTimesCalled;  // even though function is const, we can change this because its mutable
             return calculateCheckSum();
         }
+
+        int getNumberOfTimesCalled() const { return m_numberOfTimesCalled; }
+
         void addMore(int const& data) {
             // modify the data
             m_data += data;
         }
-        int getNumberOfTimesCalled() const { return m_numberOfTimesCalled; }
 
     private:
         int calculateCheckSum() const {
             // do some processing and return data
             return m_data;
         }
+
         int m_data{0};
         mutable int m_numberOfTimesCalled{0};  // this counter needs to be mutable
     };
@@ -319,12 +293,12 @@ TEST(ConstExamplesTest, MutabilityOfMutableMembersInAClassWorks) {
     // -> Const means data race free
     // ---> If two or more thread access the same memory location without synchronization, and at least one is a writer,
     // you have undefined behavior.
-
     // Note: "mutable" member variables are useful, but can be a nuisance because it breaks const (especially in
     // multithreaded applications)
 }
 
 namespace OptimzationOfConstParametersDoesNotWork {
+
 void logIt(int) {
     // dont change parameter
 }
@@ -337,7 +311,6 @@ void foo(int const& a, int& b) {
     // -> gcc.godbolt.org is a website that generates assembly
     // -> Two loads are needed in foo(a, a);
     // ---> Compilers cannot make assumptions about what happens at function calls
-
     logIt(a);
     modifyIt(b);
     logIt(a);
@@ -351,16 +324,15 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
     // -----> const is still principally uses as a tool that lets human class designer better implement handcrafted
     // optimizations
     // -----> and less so as a tag for omniscient compilers to automatically generate better code"
-
     int a = 10;
     int b = 10;
     foo(a, b);
     foo(a, a);  // Two loads are needed here.
-
     // Note: "const"ness generally does not optimize for faster code (except of constexpr because its compiled
     // beforehand).
     // -> The argument for "const"ness is not performance but rather correctness and maintainability.
 }
+
 }  // namespace OptimzationOfConstParametersDoesNotWork
 
 }  // namespace alba

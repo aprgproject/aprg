@@ -40,17 +40,17 @@ bool ElevatorWeightProblem::isPersonIncluded(PeopleBits const peopleBits, Person
     return (peopleBits & getProductBits(person)) != 0;
 }
 
-ElevatorWeightProblem::Person ElevatorWeightProblem::getNumberOfPeople() const { return m_peopleWeights.size(); }
-
-ElevatorWeightProblem::PeopleBits ElevatorWeightProblem::getNumberOfPeopleSubsets() const {
-    return 1 << getNumberOfPeople();
-}
-
 ElevatorWeightProblem::PeopleBits ElevatorWeightProblem::getProductBits(Person const person) { return 1 << person; }
 
 ElevatorWeightProblem::PeopleBits ElevatorWeightProblem::removePerson(
     PeopleBits const peopleBits, Person const person) {
     return peopleBits & ~(1 << person);
+}
+
+ElevatorWeightProblem::Person ElevatorWeightProblem::getNumberOfPeople() const { return m_peopleWeights.size(); }
+
+ElevatorWeightProblem::PeopleBits ElevatorWeightProblem::getNumberOfPeopleSubsets() const {
+    return 1 << getNumberOfPeople();
 }
 
 }  // namespace alba

@@ -21,7 +21,6 @@ bool hasAMonomialWithDegreeMoreThanOneOrFractional(Polynomial const& polynomial)
 bool isOneMonomial(Polynomial const& polynomial);
 bool isVariableExponentInMonomialFound(Polynomial const& polynomial, Monomial const& monomial);
 bool isPolynomialLinear(Polynomial const& polynomial);
-
 IntegerCoefficient getBinomialCoefficient(IntegerCoefficient const power, IntegerCoefficient const monomialIndex);
 IntegerCoefficient getMultinomialCoefficient(
     IntegerCoefficient const power, IntegerCoefficients const& variableExponents);
@@ -34,10 +33,8 @@ AlbaNumber getRemainderForOneVariablePolynomialDividedByVariableMinusConstantVal
     Polynomial const& polynomial, AlbaNumber const& value);
 AlbaNumber getEvaluatedValueUsingHornersSubstitutionOfOneVariablePolynomial(
     Polynomial const& polynomial, AlbaNumber const& value);
-
 AlbaNumbers getRoots(RootType const rootType, Polynomial const& polynomial);
 Polynomial raiseBinomialToAPowerUsingBinomialExpansion(Polynomial const& binomial, int const power);
-
 void removeEmptyPolynomials(Polynomials& polynomials);
 
 }  // namespace alba::algebra

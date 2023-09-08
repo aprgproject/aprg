@@ -8,14 +8,12 @@ using namespace std;
 
 namespace alba::algebra {
 
-SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms() = default;
-
-SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms(
-    initializer_list<VariableTermPair> const& variablesWithTerms) {
+SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms(VariablesToTermsMap const& variablesWithTerms) {
     putVariablesWithTerms(variablesWithTerms);
 }
 
-SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms(VariablesToTermsMap const& variablesWithTerms) {
+SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms(
+    initializer_list<VariableTermPair> const& variablesWithTerms) {
     putVariablesWithTerms(variablesWithTerms);
 }
 
@@ -158,5 +156,7 @@ void SubstitutionOfVariablesToTerms::performSubstitutionForTermsWithAssociation(
         term = performSubstitutionTo(term);
     }
 }
+
+SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms() = default;
 
 }  // namespace alba::algebra

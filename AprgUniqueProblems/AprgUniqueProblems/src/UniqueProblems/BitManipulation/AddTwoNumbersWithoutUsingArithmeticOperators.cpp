@@ -6,8 +6,6 @@ using namespace std;
 
 namespace alba {
 
-AddTwoNumbersWithoutUsingArithmeticOperators::AddTwoNumbersWithoutUsingArithmeticOperators() = default;
-
 AddTwoNumbersWithoutUsingArithmeticOperators::Value AddTwoNumbersWithoutUsingArithmeticOperators::getSum(
     Value const value1, Value const value2) {
     Value carry = value1 & value2;
@@ -20,5 +18,7 @@ AddTwoNumbersWithoutUsingArithmeticOperators::Value AddTwoNumbersWithoutUsingAri
     }
     return sum;
 }
+
+AddTwoNumbersWithoutUsingArithmeticOperators::AddTwoNumbersWithoutUsingArithmeticOperators() = default;
 
 }  // namespace alba

@@ -14,9 +14,7 @@ public:
     using EndPointPairs = std::vector<EndPointPair>;
     using Dfs = PathSearchUsingDfsWithDistanceCount<Vertex>;
     using VertexToDfs = std::map<Vertex, Dfs>;
-
     explicit LongestPathsInTree(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph) { initializeIfNeeded(); }
-
     [[nodiscard]] EndPointPairs const& getEndPointPairsOfLongestPaths() const { return m_endPointPairsOfLongestPaths; }
 
     int getLongestDistance() {
@@ -44,17 +42,6 @@ public:
     }
 
 private:
-    void initializeIfNeeded() {
-        if (GraphUtilities::isATree(m_graph)) {
-            initialize();
-        }
-    }
-
-    void initialize() {
-        m_allVertices = m_graph.getVertices();
-        m_startVerticesOfLongestPath = getStartVerticesOfLongestPath(m_allVertices);
-    }
-
     Vertices getStartVerticesOfLongestPath(Vertices const& allVertices) {
         Vertices result;
         if (!allVertices.empty()) {
@@ -65,6 +52,27 @@ private:
             }
         }
         return result;  // start vertices are the ones with max distance from arbitiary node
+    }
+
+    Dfs const& getDfs(Vertex const& vertex) {
+        // uses dynamic programming
+        auto it = m_vertexToDfs.find(vertex);
+        if (it != m_vertexToDfs.cend()) {
+            return it->second;
+        }
+        m_vertexToDfs.emplace(vertex, Dfs(m_graph, {vertex}));
+        return m_vertexToDfs.at(vertex);
+    }
+
+    void initializeIfNeeded() {
+        if (GraphUtilities::isATree(m_graph)) {
+            initialize();
+        }
+    }
+
+    void initialize() {
+        m_allVertices = m_graph.getVertices();
+        m_startVerticesOfLongestPath = getStartVerticesOfLongestPath(m_allVertices);
     }
 
     void searchForEndPointPairsAt(Vertex const& startVertex) {
@@ -90,16 +98,6 @@ private:
         } else if (maxDistance == currentDistance) {
             verticesWithMaxDistance.emplace_back(currentVertex);
         }
-    }
-
-    Dfs const& getDfs(Vertex const& vertex) {
-        // uses dynamic programming
-        auto it = m_vertexToDfs.find(vertex);
-        if (it != m_vertexToDfs.cend()) {
-            return it->second;
-        }
-        m_vertexToDfs.emplace(vertex, Dfs(m_graph, {vertex}));
-        return m_vertexToDfs.at(vertex);
     }
 
     BaseUndirectedGraphWithVertex const& m_graph;

@@ -9,10 +9,8 @@ class MinimumNumberOfSquaresWithSumEqualToN {
 public:
     using Count = int;
     using Counts = std::vector<Count>;
-    static constexpr Count MAX_COUNT = std::numeric_limits<Count>::max();
-
     explicit MinimumNumberOfSquaresWithSumEqualToN(Count const sumOfSquares);
-
+    static constexpr Count MAX_COUNT = std::numeric_limits<Count>::max();
     [[nodiscard]] Count getMinimumCountUsingNaiveRecursion() const;
     [[nodiscard]] Count getMinimumCountUsingMemoizationDP() const;
     [[nodiscard]] Count getMinimumCountUsingIterativeDP() const;
@@ -22,7 +20,6 @@ public:
 private:
     [[nodiscard]] Count getMinimumCountUsingNaiveRecursion(Count const sumOfSquares) const;
     Count getMinimumCountUsingMemoizationDP(Counts& savedMinimumCounts, Count const sumOfSquares) const;
-
     Count const m_sumOfSquares;
 };
 

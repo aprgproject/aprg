@@ -13,7 +13,6 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
     const {
     // Time Complexity: Exponential
     // Auxiliary Space: Constant
-
     Count result(0);
     if (!m_inputValues.empty()) {
         result = getNumberOfWaysUsingNaiveRecursion(true, 0, m_inputValues.size() - 1);
@@ -24,7 +23,6 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
 BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberOfWaysForTrueUsingMemoizationDP() const {
     // Time Complexity: O(n^3) (should be same as Iterative DP)
     // Auxiliary Space: O(n^2)
-
     Count result(0);
     if (!m_inputValues.empty()) {
         CountMatrices countMatrices(2, CountMatrix(m_inputValues.size(), m_inputValues.size(), UNUSED_COUNT));
@@ -36,7 +34,6 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
 BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberOfWaysForTrueUsingIterativeDP() const {
     // Time Complexity: O(n^3)
     // Auxiliary Space: O(n^2)
-
     Count result(0);
     if (!m_inputValues.empty()) {
         CountMatrix countsForFalse(m_inputValues.size(), m_inputValues.size());
@@ -83,6 +80,21 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
         result = countsForTrue.getEntry(0, countsForTrue.getNumberOfRows() - 1);
     }
     return result;
+}
+
+inline BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::convertBoolToCount(
+    bool const booleanValue) {
+    return booleanValue ? 1 : 0;
+}
+
+bool BooleanParenthesizationProblem::areSizesCorrect() const { return m_operators.size() + 1 == m_inputValues.size(); }
+
+void BooleanParenthesizationProblem::initialize() {
+    // clear if invalid
+    if (!areSizesCorrect()) {
+        m_inputValues.clear();
+        m_operators.clear();
+    }
 }
 
 BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberOfWaysUsingNaiveRecursion(
@@ -160,21 +172,6 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
         countMatrices[expectedOutputIndex].setEntry(leftParenthesis, rightParenthesis, result);
     }
     return result;
-}
-
-inline BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::convertBoolToCount(
-    bool const booleanValue) {
-    return booleanValue ? 1 : 0;
-}
-
-bool BooleanParenthesizationProblem::areSizesCorrect() const { return m_operators.size() + 1 == m_inputValues.size(); }
-
-void BooleanParenthesizationProblem::initialize() {
-    // clear if invalid
-    if (!areSizesCorrect()) {
-        m_inputValues.clear();
-        m_operators.clear();
-    }
 }
 
 }  // namespace alba

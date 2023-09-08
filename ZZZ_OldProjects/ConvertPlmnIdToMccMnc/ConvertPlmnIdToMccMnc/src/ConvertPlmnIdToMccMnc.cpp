@@ -5,6 +5,7 @@
 using BitManipulator = alba::AlbaBitManipulation<alba::u32>;
 
 namespace alba {
+
 /*
 MccMncPair convertPlmnIdToMccMnc(u32 const plmnId)
 {
@@ -20,7 +21,6 @@ BitManipulator::getNibbleAt<3>(plmnId)); if(BitManipulator::getNibbleAt<0>(mnc) 
     return MccMncPair{mcc, mnc};
 }
 */
-
 MccMncPair convertPlmnIdToMccMnc(u32 const plmnId) {
     constexpr unsigned char fillerDigitValue = 0x0F;
     u16 mcc = BitManipulator::getNibbleAt<2>(plmnId) * 100 + BitManipulator::getNibbleAt<5>(plmnId) * 10 +

@@ -12,10 +12,9 @@ class ExponentialSearch {
 public:
     using Index = int;
     using Value = typename Values::value_type;
-    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
-
     explicit ExponentialSearch(Values const& values)  // values can be unsorted
         : m_sortedValues(values) {}
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     Index getIndexOfValue(Value const& target) {
         Index lowIndex(0);

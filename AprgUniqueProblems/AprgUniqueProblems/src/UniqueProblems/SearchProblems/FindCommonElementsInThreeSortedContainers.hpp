@@ -6,7 +6,6 @@ template <typename Values>
 class FindCommonElementsInThreeSortedContainers {
 public:
     using Value = typename Values::value_type;
-
     FindCommonElementsInThreeSortedContainers() = default;
 
     Values getCommonElements(Values const& values1, Values const& values2, Values const& values3) {

@@ -12,7 +12,6 @@ class QuickSorterForForwardList : public BaseSorter<std::forward_list<Value>> {
 public:
     using Values = std::forward_list<Value>;
     using Iterator = typename Values::iterator;
-
     QuickSorterForForwardList() = default;
 
     void sort(Values& valuesToSort) const override {

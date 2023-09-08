@@ -12,7 +12,6 @@ struct FractionDetails {
     static_assert(typeHelper::isIntegralType<NumberType>(), "NumberType must be an integer");
     static_assert(typeHelper::isUnsignedType<NumberType>(), "NumberType must be a Unsigned Type");
     using SignType = typeHelper::GetSignedType<NumberType>;
-
     SignType sign;
     NumberType numerator;
     NumberType denominator;

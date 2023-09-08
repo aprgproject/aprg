@@ -7,7 +7,6 @@ namespace Composite {
 // Component
 // defines an interface for all objects in the composition
 // both the composite and the leaf nodes
-
 class Component {
 public:
     virtual ~Component() = default;
@@ -23,26 +22,21 @@ public:
         // Make sure that this doesn't break interface segregation principle.
         //...
     }
-
     virtual void removeAtIndex(int const) {
         // principle. (Make sure the method/function makes sense.)
         // Make sure that this doesn't break interface segregation
         //...
     }
-
     virtual void operation() = 0;
 };
 
 // Composite
 // defines behavior of the components having children
 // and store child components
-
 class Composite : public Component {
 public:
     [[nodiscard]] Component const* getChildPointerAt(int const index) const override { return m_children[index].get(); }
-
     void add(std::unique_ptr<Component> component) override { m_children.emplace_back(move(component)); }
-
     void removeAtIndex(int const index) override { m_children.erase(m_children.begin() + index); }
 
     void operation() override {
@@ -58,11 +52,9 @@ private:
 // Leaf
 // defines the behavior for the elements in the composition,
 // it has no children
-
 class Leaf : public Component {
 public:
     explicit Leaf(int const id) : m_id(id) {}
-
     void operation() override { std::cout << "Leaf " << m_id << " operation\n"; }
 
 private:

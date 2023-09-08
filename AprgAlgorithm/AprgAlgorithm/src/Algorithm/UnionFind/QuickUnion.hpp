@@ -11,7 +11,6 @@ template <typename Object, int SIZE>
 class QuickUnion : public BaseUnionFind<Object> {
 public:
     using RootArray = std::array<Object, SIZE>;
-
     QuickUnion() : m_relativeRoots() { initialize(); }
 
     [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
@@ -31,6 +30,8 @@ public:
         return currentRoot;
     }
 
+    [[nodiscard]] RootArray const& getRelativeRootArray() const { return m_relativeRoots; }
+
     void connect(Object const& object1, Object const& object2) override {
         Object root1(getRoot(object1));
         Object root2(getRoot(object2));
@@ -40,8 +41,6 @@ public:
             //(check weighted union find for implementation that consider sizes)
         }
     }
-
-    [[nodiscard]] RootArray const& getRelativeRootArray() const { return m_relativeRoots; }
 
 private:
     void initialize() {

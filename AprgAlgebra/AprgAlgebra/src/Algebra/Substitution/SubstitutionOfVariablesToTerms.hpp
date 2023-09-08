@@ -12,16 +12,14 @@ using VariableTermPair = std::pair<std::string, Term>;
 
 class SubstitutionOfVariablesToTerms {
 public:
+    explicit SubstitutionOfVariablesToTerms(VariablesToTermsMap const& variablesWithTerms);
     SubstitutionOfVariablesToTerms();
     SubstitutionOfVariablesToTerms(std::initializer_list<VariableTermPair> const& variablesWithTerms);
-    explicit SubstitutionOfVariablesToTerms(VariablesToTermsMap const& variablesWithTerms);
-
     [[nodiscard]] bool isEmpty() const;
     [[nodiscard]] bool isVariableFound(std::string const& variable) const;
     [[nodiscard]] int getSize() const;
     [[nodiscard]] Term getTermForVariable(std::string const& variable) const;
     [[nodiscard]] VariablesToTermsMap const& getVariablesToTermsMap() const;
-
     [[nodiscard]] Term performSubstitutionTo(Variable const& variable) const;
     [[nodiscard]] Term performSubstitutionTo(Monomial const& monomial) const;
     [[nodiscard]] Term performSubstitutionTo(Polynomial const& polynomial) const;
@@ -29,12 +27,10 @@ public:
     [[nodiscard]] Term performSubstitutionTo(Function const& functionObject) const;
     [[nodiscard]] Term performSubstitutionTo(Term const& term) const;
     [[nodiscard]] Equation performSubstitutionTo(Equation const& equation) const;
-
     [[nodiscard]] Expression performSubstitutionForMonomial(Monomial const& monomial) const;
     [[nodiscard]] Expression performSubstitutionForPolynomial(Polynomial const& polynomial) const;
     [[nodiscard]] Expression performSubstitutionForExpression(Expression const& expression) const;
     [[nodiscard]] Function performSubstitutionForFunction(Function const& functionObject) const;
-
     void putVariablesWithTerms(std::initializer_list<VariableTermPair> const& variablesWithTerms);
     void putVariablesWithTerms(VariablesToTermsMap const& variablesWithTerms);
     void putVariableWithTerm(std::string const& variable, Term const& term);

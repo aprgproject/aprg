@@ -9,7 +9,6 @@ using namespace std;
 namespace alba::chess {
 
 bool isAToH(char const c) { return 'a' <= c && c <= 'h'; }
-
 bool is1To8(char const c) { return '1' <= c && c <= '8'; }
 
 bool isCoordinateWithinTheBoard(Coordinate const& coordinate) {
@@ -19,7 +18,6 @@ bool isCoordinateWithinTheBoard(Coordinate const& coordinate) {
 }
 
 bool isInUpperHalf(Coordinate const& coordinate) { return coordinate.getY() <= 3; }
-
 bool isInLowerHalf(Coordinate const& coordinate) { return coordinate.getY() >= 4; }
 
 bool areCoordinatesValid(Move const& move) {
@@ -30,16 +28,6 @@ bool areCoordinatesValid(Move const& move) {
 bool areOpposingColors(PieceColor const pieceColor1, PieceColor const pieceColor2) {
     return (PieceColor::White == pieceColor1 && PieceColor::Black == pieceColor2) ||
            (PieceColor::Black == pieceColor1 && PieceColor::White == pieceColor2);
-}
-
-PieceColor getOppositeColor(PieceColor const pieceColor) {
-    PieceColor result(PieceColor::Unknown);
-    if (PieceColor::White == pieceColor) {
-        result = PieceColor::Black;
-    } else if (PieceColor::Black == pieceColor) {
-        result = PieceColor::White;
-    }
-    return result;
 }
 
 int getValueOfPieceType(PieceType const pieceType) {
@@ -72,6 +60,56 @@ int getValueOfPieceType(PieceType const pieceType) {
         default: {
             break;
         }
+    }
+    return result;
+}
+
+char convertToFenCharacter(PieceType const pieceType, PieceColor const pieceColor) {
+    // Source: https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
+    char result{};
+    switch (pieceType) {
+        case PieceType::Empty: {
+            result = ' ';
+            break;
+        }
+        case PieceType::Pawn: {
+            result = 'p';
+            break;
+        }
+        case PieceType::Knight: {
+            result = 'n';
+            break;
+        }
+        case PieceType::Bishop: {
+            result = 'b';
+            break;
+        }
+        case PieceType::Rook: {
+            result = 'r';
+            break;
+        }
+        case PieceType::Queen: {
+            result = 'q';
+            break;
+        }
+        case PieceType::King: {
+            result = 'k';
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+    result = (PieceColor::White == pieceColor) ? toupper(result) : result;
+    return result;
+}
+
+PieceColor getOppositeColor(PieceColor const pieceColor) {
+    PieceColor result(PieceColor::Unknown);
+    if (PieceColor::White == pieceColor) {
+        result = PieceColor::Black;
+    } else if (PieceColor::Black == pieceColor) {
+        result = PieceColor::White;
     }
     return result;
 }
@@ -118,46 +156,6 @@ string getEnumString(PieceColorAndType const pieceColorAndType) {
         default:
             return "default";
     }
-}
-
-char convertToFenCharacter(PieceType const pieceType, PieceColor const pieceColor) {
-    // Source: https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
-    char result{};
-    switch (pieceType) {
-        case PieceType::Empty: {
-            result = ' ';
-            break;
-        }
-        case PieceType::Pawn: {
-            result = 'p';
-            break;
-        }
-        case PieceType::Knight: {
-            result = 'n';
-            break;
-        }
-        case PieceType::Bishop: {
-            result = 'b';
-            break;
-        }
-        case PieceType::Rook: {
-            result = 'r';
-            break;
-        }
-        case PieceType::Queen: {
-            result = 'q';
-            break;
-        }
-        case PieceType::King: {
-            result = 'k';
-            break;
-        }
-        default: {
-            break;
-        }
-    }
-    result = (PieceColor::White == pieceColor) ? toupper(result) : result;
-    return result;
 }
 
 string constructFenString(

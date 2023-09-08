@@ -64,12 +64,12 @@ struct CheckIfInList<Type> {
 // Purpose: Variant type base class
 class BaseVariantDataType {
 public:
+    virtual ~BaseVariantDataType() = default;  // virtual destructor because derived classes need this
     // rule of five or six
     BaseVariantDataType() = default;
-    virtual ~BaseVariantDataType() = default;  // virtual destructor because derived classes need this
     BaseVariantDataType(BaseVariantDataType const &) = delete;
-    BaseVariantDataType &operator=(BaseVariantDataType const &) = delete;
     BaseVariantDataType(BaseVariantDataType &&) = delete;
+    BaseVariantDataType &operator=(BaseVariantDataType const &) = delete;
     BaseVariantDataType &operator=(BaseVariantDataType &&) = delete;
 };
 
@@ -82,6 +82,10 @@ class UniqueVariant {
     using MaxSizeClass = typename detail::MaxSizeType<Types...>::type;
 
 public:
+    UniqueVariant(UniqueVariant const &variant) = delete;
+    UniqueVariant(UniqueVariant &&variant) = delete;
+    UniqueVariant &operator=(UniqueVariant const &variant) = delete;
+    UniqueVariant &operator=(UniqueVariant &&variant) = delete;
     UniqueVariant() { allocate(); }
 
     ~UniqueVariant() {
@@ -91,11 +95,6 @@ public:
             ::operator delete(m_ptr);
         }
     }
-
-    UniqueVariant(UniqueVariant const &variant) = delete;
-    UniqueVariant(UniqueVariant &&variant) = delete;
-    UniqueVariant &operator=(UniqueVariant const &variant) = delete;
-    UniqueVariant &operator=(UniqueVariant &&variant) = delete;
 
     template <class VariantDataType>
     VariantDataType &acquire() {

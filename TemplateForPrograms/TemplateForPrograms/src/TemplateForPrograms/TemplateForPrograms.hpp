@@ -5,7 +5,6 @@ namespace alba {
 class TemplateForPrograms {
 public:
     TemplateForPrograms() = default;
-
     [[nodiscard]] int getSample() const;
 
 private:

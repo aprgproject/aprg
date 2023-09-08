@@ -11,7 +11,6 @@ class RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdate
     : private RangeQueryWithStaticSegmentTree<Values> {
 public:
     // Example for "range query with accumulator" is sum queries
-
     using BaseClass = RangeQueryWithStaticSegmentTree<Values>;
     using Value = typename BaseClass::Value;
     using Index = typename BaseClass::Index;
@@ -53,11 +52,30 @@ public:
     }
 
 private:
+    inline void increment(Value& valueToChange, Index const startIndex, Index const left, Index const right) const {
+        Index numberOfChildren = b_treeValues.size() - b_startOfChildren;
+        Index startInterval = std::min(left, numberOfChildren - 1) - startIndex;
+        Index endInterval = std::min(right, numberOfChildren - 1) - startIndex;
+        valueToChange = b_function(valueToChange, m_incrementFunction(startInterval, endInterval));
+    }
+
+    inline void incrementOrUpdateAtIndex(
+        Index const index, Index const baseLeft, Index const baseRight,
+        PendingUpdateDetail const& startIndexForPendingUpdate) {
+        if (isAParent(index)) {
+            performUpdateAtIndexIfNeeded(index, baseLeft, baseRight);
+            m_startIndexesForPendingUpdates[index] = startIndexForPendingUpdate;  // copy pending update to children
+        } else {
+            increment(b_treeValues[index], startIndexForPendingUpdate.value(), baseLeft, baseRight);
+        }
+    }
+
+    [[nodiscard]] Index isAParent(Index const treeIndex) const { return treeIndex < b_startOfChildren; }
+
     Value getValueOnIntervalFromTopToBottom(
         Index const startInterval, Index const endInterval, Index const currentChild, Index const baseLeft,
         Index const baseRight) {
         // This has log(N) running time
-
         Value result{};
         performUpdateAtIndexIfNeeded(currentChild, baseLeft, baseRight);  // propagate current update before processing
         if (startInterval <= baseLeft && baseRight <= endInterval) {
@@ -88,7 +106,6 @@ private:
         Index const startInterval, Index const endInterval, Index const currentChild, Index const baseLeft,
         Index const baseRight) {
         // This has log(N) running time
-
         // performUpdateAtIndexIfNeeded(currentChild, baseLeft, baseRight); // propagate current update before
         // processing, but I think its not needed
         if (baseLeft == baseRight) {
@@ -132,26 +149,6 @@ private:
             }
         }
     }
-
-    inline void incrementOrUpdateAtIndex(
-        Index const index, Index const baseLeft, Index const baseRight,
-        PendingUpdateDetail const& startIndexForPendingUpdate) {
-        if (isAParent(index)) {
-            performUpdateAtIndexIfNeeded(index, baseLeft, baseRight);
-            m_startIndexesForPendingUpdates[index] = startIndexForPendingUpdate;  // copy pending update to children
-        } else {
-            increment(b_treeValues[index], startIndexForPendingUpdate.value(), baseLeft, baseRight);
-        }
-    }
-
-    inline void increment(Value& valueToChange, Index const startIndex, Index const left, Index const right) const {
-        Index numberOfChildren = b_treeValues.size() - b_startOfChildren;
-        Index startInterval = std::min(left, numberOfChildren - 1) - startIndex;
-        Index endInterval = std::min(right, numberOfChildren - 1) - startIndex;
-        valueToChange = b_function(valueToChange, m_incrementFunction(startInterval, endInterval));
-    }
-
-    [[nodiscard]] Index isAParent(Index const treeIndex) const { return treeIndex < b_startOfChildren; }
 
     Index const b_startOfChildren;
     Values& b_treeValues;

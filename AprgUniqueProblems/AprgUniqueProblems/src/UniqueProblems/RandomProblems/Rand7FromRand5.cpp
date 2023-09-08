@@ -19,7 +19,6 @@ Rand7FromRand5::Value Rand7FromRand5::getRandomFrom0To6() {
     // Note that because we discard values in this approach,
     // we have no guarantee on the number of rand5() calls it may take to return a value.
     // This is what is meant by a nondeterministic number of calls.
-
     while (true) {
         int randomFrom0To24 = 5 * getRandomFrom0To4() + getRandomFrom0To4();
         if (randomFrom0To24 < 21) {

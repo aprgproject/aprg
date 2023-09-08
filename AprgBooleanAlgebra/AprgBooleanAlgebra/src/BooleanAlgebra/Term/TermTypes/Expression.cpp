@@ -16,13 +16,11 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
-Expression::Expression() : m_commonOperatorLevel(OperatorLevel::Unknown), m_isSimplified(false) {}
-
 Expression::Expression(BaseTerm const& baseTerm)
     : m_commonOperatorLevel(OperatorLevel::Unknown), m_wrappedTerms({baseTerm}), m_isSimplified(false) {}
-
 Expression::Expression(BaseTerm&& baseTerm)
     : m_commonOperatorLevel(OperatorLevel::Unknown), m_wrappedTerms({move(baseTerm)}), m_isSimplified(false) {}
+Expression::Expression() : m_commonOperatorLevel(OperatorLevel::Unknown), m_isSimplified(false) {}
 
 Expression::Expression(OperatorLevel const operatorLevel, WrappedTerms const& wrappedTerms)
     : m_commonOperatorLevel(wrappedTerms.empty() ? OperatorLevel::Unknown : operatorLevel),
@@ -58,11 +56,8 @@ Expression Expression::operator~() const {
 }
 
 bool Expression::isEmpty() const { return m_wrappedTerms.empty(); }
-
 bool Expression::isSimplified() const { return m_isSimplified; }
-
 bool Expression::containsOnlyOneTerm() const { return m_wrappedTerms.size() == 1; }
-
 OperatorLevel Expression::getCommonOperatorLevel() const { return m_commonOperatorLevel; }
 
 BaseTerm const& Expression::getFirstTermConstReference() const {
@@ -220,7 +215,6 @@ void Expression::negate() {
 }
 
 void Expression::setAsSimplified() { m_isSimplified = true; }
-
 void Expression::clearSimplifiedFlag() { m_isSimplified = false; }
 
 void Expression::clearAllInnerSimplifiedFlags() {

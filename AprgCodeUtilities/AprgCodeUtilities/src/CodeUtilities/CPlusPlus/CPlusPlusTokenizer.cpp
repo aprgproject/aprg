@@ -80,69 +80,108 @@ void CPlusPlusTokenizer::processLeftoverCode() {
     m_scopes.clear();
 }
 
-void CPlusPlusTokenizer::processCode() {
-    while (m_index < static_cast<int>(m_code.length())) {
-        processScope();
+bool CPlusPlusTokenizer::isNextString(string const& expectedString) const {
+    if (m_index + expectedString.length() <= m_code.length()) {
+        return expectedString == m_code.substr(m_index, expectedString.length());
     }
+    return false;
 }
 
-void CPlusPlusTokenizer::processScope() {
-    switch (getCurrentScope()) {
-        case ScopeType::SingleLineComment:
-            processInSingleLineCommentScope();
-            break;
-        case ScopeType::MultiLineComment:
-            processInMultiLineCommentScope();
-            break;
-        case ScopeType::StringLiteral:
-            processInStringLiteralScope();
-            break;
-        case ScopeType::RawStringLiteral:
-            processInRawStringLiteralScope();
-            break;
-        case ScopeType::CharLiteral:
-            processInCharLiteralScope();
-            break;
-        case ScopeType::Attribute:
-            processInAttributeScope();
-            break;
-        case ScopeType::WhiteSpace:
-            processInWhiteSpaceScope();
-            break;
-        default:
-            processInCodeScope();
-            break;
+bool CPlusPlusTokenizer::isIndentifierStartAt(int const index) const {
+    if (index < static_cast<int>(m_code.length())) {
+        return isLetterOrUnderscore(m_code[index]);
     }
+    return false;
 }
 
-void CPlusPlusTokenizer::processInCodeScope() {
-    // NOLINTBEGIN(bugprone-branch-clone)
-    if (hasProcessedASingleLineComment()) {
-        ;
-    } else if (hasProcessedAMultiLineComment()) {
-        ;
-    } else if (hasProcessedAStringLiteral()) {
-        ;
-    } else if (hasProcessedARawStringLiteral()) {
-        ;
-    } else if (hasProcessedACharLiteral()) {
-        ;
-    } else if (hasProcessedAnAttribute()) {
-        ;
-    } else if (hasProcessedAWhiteSpace()) {
-        ;
-    } else if (hasProcessedAMacro()) {
-        ;
-    } else if (hasProcessedANumber()) {
-        ;
-    } else if (hasProcessedAnIdentifier()) {
-        ;
-    } else if (hasProcessedAnOperator()) {
-        ;
-    } else {
-        m_terms.emplace_back(createUnknown(m_code.substr(m_index++)));
+bool CPlusPlusTokenizer::isNumberAt(int const index) const {
+    if (index < static_cast<int>(m_code.length())) {
+        return isNumber(m_code[index]);
     }
-    // NOLINTEND(bugprone-branch-clone)
+    return false;
+}
+
+bool CPlusPlusTokenizer::isOperatorAt(int const index) const {
+    if (index < static_cast<int>(m_code.length())) {
+        char character = m_code[index];
+        return isDisplayableCharacter(character) && !isLetterOrNumberOrUnderscore(character) &&
+               !isWhiteSpace(character);
+    }
+    return false;
+}
+
+bool CPlusPlusTokenizer::isThreeCharOperatorAt(int const index) const {
+    if (index + 2 < static_cast<int>(m_code.length())) {
+        string possibleOperator = m_code.substr(index, 3);
+        return isRecognizedThreeCharOperators(possibleOperator);
+    }
+    return false;
+}
+
+bool CPlusPlusTokenizer::isTwoCharOperatorAt(int const index) const {
+    if (index + 1 < static_cast<int>(m_code.length())) {
+        string possibleOperator = m_code.substr(index, 2);
+        return isRecognizedTwoCharOperators(possibleOperator);
+    }
+    return false;
+}
+
+bool CPlusPlusTokenizer::isOneCharOperatorAt(int const index) const {
+    if (index < static_cast<int>(m_code.length())) {
+        string possibleOperator = m_code.substr(index, 1);
+        return isRecognizedOneCharOperators(possibleOperator);
+    }
+    return false;
+}
+
+bool CPlusPlusTokenizer::isWhiteSpaceAt(int const index) const {
+    if (index < static_cast<int>(m_code.length())) {
+        return isWhiteSpace(m_code[index]);
+    }
+    return false;
+}
+
+CPlusPlusTokenizer::ScopeType CPlusPlusTokenizer::getCurrentScope() const {
+    return !m_scopes.empty() ? m_scopes.back() : ScopeType::NoScope;
+}
+
+string CPlusPlusTokenizer::getIndentifierAt(int const index) const {
+    string result;
+    if (isLetterOrUnderscore(m_code[index])) {
+        result += m_code[index];
+        result += getAlphaNumericUnderscoreStringAt(index + 1);
+    }
+    return result;
+}
+
+string CPlusPlusTokenizer::getNumberAt(int const index) const {
+    string result;
+    if (isNumber(m_code[index])) {
+        result += m_code[index];
+        result += getContinuousDigitsAt(index + 1);
+    }
+    return result;
+}
+
+string CPlusPlusTokenizer::getAlphaNumericUnderscoreStringAt(int const index) const {
+    string result;
+    for (int identifierIndex = index;
+         identifierIndex < static_cast<int>(m_code.length()) && isLetterOrNumberOrUnderscore(m_code[identifierIndex]);
+         ++identifierIndex) {
+        result += m_code[identifierIndex];
+    }
+    return result;
+}
+
+string CPlusPlusTokenizer::getContinuousDigitsAt(int const index) const {
+    string result;
+    for (int identifierIndex = index;
+         identifierIndex < static_cast<int>(m_code.length()) &&
+         (isLetterOrNumberOrUnderscore(m_code[identifierIndex]) || m_code[identifierIndex] == '\'');
+         ++identifierIndex) {
+        result += m_code[identifierIndex];
+    }
+    return result;
 }
 
 bool CPlusPlusTokenizer::hasProcessedASingleLineComment() {
@@ -275,6 +314,126 @@ bool CPlusPlusTokenizer::hasProcessedAnOperator() {
     return false;
 }
 
+bool CPlusPlusTokenizer::isTerminatedWhileCheckingWhiteSpace() {
+    for (; m_index < static_cast<int>(m_code.length()) && isWhiteSpace(m_code[m_index]); ++m_index) {
+        m_scopeContent += m_code[m_index];
+    }
+    return m_index < static_cast<int>(m_code.length()) && !isWhiteSpace(m_code[m_index]);
+}
+
+bool CPlusPlusTokenizer::isTerminatedWhileCheckingALiteralWithEscape(char const terminatingCharacter) {
+    bool isTerminated(false);
+    int numberSlashes = 0;
+    for (; m_index < static_cast<int>(m_code.length()); ++m_index) {
+        char character = m_code[m_index];
+        if (character == '\\') {
+            ++numberSlashes;
+            if (numberSlashes == 2) {
+                m_scopeContent.append("\\\\");
+                numberSlashes = 0;
+            }
+        } else if (character == terminatingCharacter) {
+            if (numberSlashes == 1) {
+                m_scopeContent += '\\';
+                m_scopeContent += character;
+                numberSlashes = 0;
+            } else {
+                m_scopeContent += character;
+                isTerminated = true;
+                ++m_index;
+                break;
+            }
+        } else {
+            if (numberSlashes == 1) {
+                m_scopeContent += '\\';
+                numberSlashes = 0;
+            }
+            m_scopeContent += character;
+        }
+    }
+    if (numberSlashes == 1) {
+        m_scopeContent += '\\';
+    }
+    return isTerminated;
+}
+
+bool CPlusPlusTokenizer::isTerminatedWhileCheckingTerminatingString(string const& terminatingString) {
+    auto searchIndex = static_cast<int>(m_code.find(terminatingString, m_index));
+    if (isNotNpos(searchIndex)) {
+        m_scopeContent.append(m_code.substr(m_index, searchIndex - m_index));
+        m_index = searchIndex;
+        return true;
+    }
+    m_scopeContent.append(m_code.substr(m_index, m_code.length() - m_index));
+    m_index = static_cast<int>(m_code.length());
+    return false;
+}
+
+void CPlusPlusTokenizer::processCode() {
+    while (m_index < static_cast<int>(m_code.length())) {
+        processScope();
+    }
+}
+
+void CPlusPlusTokenizer::processScope() {
+    switch (getCurrentScope()) {
+        case ScopeType::SingleLineComment:
+            processInSingleLineCommentScope();
+            break;
+        case ScopeType::MultiLineComment:
+            processInMultiLineCommentScope();
+            break;
+        case ScopeType::StringLiteral:
+            processInStringLiteralScope();
+            break;
+        case ScopeType::RawStringLiteral:
+            processInRawStringLiteralScope();
+            break;
+        case ScopeType::CharLiteral:
+            processInCharLiteralScope();
+            break;
+        case ScopeType::Attribute:
+            processInAttributeScope();
+            break;
+        case ScopeType::WhiteSpace:
+            processInWhiteSpaceScope();
+            break;
+        default:
+            processInCodeScope();
+            break;
+    }
+}
+
+void CPlusPlusTokenizer::processInCodeScope() {
+    // NOLINTBEGIN(bugprone-branch-clone)
+    if (hasProcessedASingleLineComment()) {
+        ;
+    } else if (hasProcessedAMultiLineComment()) {
+        ;
+    } else if (hasProcessedAStringLiteral()) {
+        ;
+    } else if (hasProcessedARawStringLiteral()) {
+        ;
+    } else if (hasProcessedACharLiteral()) {
+        ;
+    } else if (hasProcessedAnAttribute()) {
+        ;
+    } else if (hasProcessedAWhiteSpace()) {
+        ;
+    } else if (hasProcessedAMacro()) {
+        ;
+    } else if (hasProcessedANumber()) {
+        ;
+    } else if (hasProcessedAnIdentifier()) {
+        ;
+    } else if (hasProcessedAnOperator()) {
+        ;
+    } else {
+        m_terms.emplace_back(createUnknown(m_code.substr(m_index++)));
+    }
+    // NOLINTEND(bugprone-branch-clone)
+}
+
 void CPlusPlusTokenizer::processInSingleLineCommentScope() {
     if (isTerminatedWhileCheckingTerminatingString("\n")) {
         m_terms.emplace_back(createCommentSingleLine(m_scopeContent));
@@ -335,164 +494,6 @@ void CPlusPlusTokenizer::enterScope(ScopeType const scopeType) { m_scopes.emplac
 void CPlusPlusTokenizer::exitScope() {
     m_scopeContent.clear();
     m_scopes.pop_back();
-}
-
-bool CPlusPlusTokenizer::isTerminatedWhileCheckingWhiteSpace() {
-    for (; m_index < static_cast<int>(m_code.length()) && isWhiteSpace(m_code[m_index]); ++m_index) {
-        m_scopeContent += m_code[m_index];
-    }
-    return m_index < static_cast<int>(m_code.length()) && !isWhiteSpace(m_code[m_index]);
-}
-
-bool CPlusPlusTokenizer::isTerminatedWhileCheckingALiteralWithEscape(char const terminatingCharacter) {
-    bool isTerminated(false);
-    int numberSlashes = 0;
-    for (; m_index < static_cast<int>(m_code.length()); ++m_index) {
-        char character = m_code[m_index];
-        if (character == '\\') {
-            ++numberSlashes;
-            if (numberSlashes == 2) {
-                m_scopeContent.append("\\\\");
-                numberSlashes = 0;
-            }
-        } else if (character == terminatingCharacter) {
-            if (numberSlashes == 1) {
-                m_scopeContent += '\\';
-                m_scopeContent += character;
-                numberSlashes = 0;
-            } else {
-                m_scopeContent += character;
-                isTerminated = true;
-                ++m_index;
-                break;
-            }
-        } else {
-            if (numberSlashes == 1) {
-                m_scopeContent += '\\';
-                numberSlashes = 0;
-            }
-            m_scopeContent += character;
-        }
-    }
-    if (numberSlashes == 1) {
-        m_scopeContent += '\\';
-    }
-    return isTerminated;
-}
-
-bool CPlusPlusTokenizer::isTerminatedWhileCheckingTerminatingString(string const& terminatingString) {
-    auto searchIndex = static_cast<int>(m_code.find(terminatingString, m_index));
-    if (isNotNpos(searchIndex)) {
-        m_scopeContent.append(m_code.substr(m_index, searchIndex - m_index));
-        m_index = searchIndex;
-        return true;
-    }
-    m_scopeContent.append(m_code.substr(m_index, m_code.length() - m_index));
-    m_index = static_cast<int>(m_code.length());
-    return false;
-}
-
-CPlusPlusTokenizer::ScopeType CPlusPlusTokenizer::getCurrentScope() const {
-    return !m_scopes.empty() ? m_scopes.back() : ScopeType::NoScope;
-}
-
-bool CPlusPlusTokenizer::isNextString(string const& expectedString) const {
-    if (m_index + expectedString.length() <= m_code.length()) {
-        return expectedString == m_code.substr(m_index, expectedString.length());
-    }
-    return false;
-}
-bool CPlusPlusTokenizer::isIndentifierStartAt(int const index) const {
-    if (index < static_cast<int>(m_code.length())) {
-        return isLetterOrUnderscore(m_code[index]);
-    }
-    return false;
-}
-
-bool CPlusPlusTokenizer::isNumberAt(int const index) const {
-    if (index < static_cast<int>(m_code.length())) {
-        return isNumber(m_code[index]);
-    }
-    return false;
-}
-
-bool CPlusPlusTokenizer::isOperatorAt(int const index) const {
-    if (index < static_cast<int>(m_code.length())) {
-        char character = m_code[index];
-        return isDisplayableCharacter(character) && !isLetterOrNumberOrUnderscore(character) &&
-               !isWhiteSpace(character);
-    }
-    return false;
-}
-
-bool CPlusPlusTokenizer::isThreeCharOperatorAt(int const index) const {
-    if (index + 2 < static_cast<int>(m_code.length())) {
-        string possibleOperator = m_code.substr(index, 3);
-        return isRecognizedThreeCharOperators(possibleOperator);
-    }
-    return false;
-}
-
-bool CPlusPlusTokenizer::isTwoCharOperatorAt(int const index) const {
-    if (index + 1 < static_cast<int>(m_code.length())) {
-        string possibleOperator = m_code.substr(index, 2);
-        return isRecognizedTwoCharOperators(possibleOperator);
-    }
-    return false;
-}
-
-bool CPlusPlusTokenizer::isOneCharOperatorAt(int const index) const {
-    if (index < static_cast<int>(m_code.length())) {
-        string possibleOperator = m_code.substr(index, 1);
-        return isRecognizedOneCharOperators(possibleOperator);
-    }
-    return false;
-}
-
-bool CPlusPlusTokenizer::isWhiteSpaceAt(int const index) const {
-    if (index < static_cast<int>(m_code.length())) {
-        return isWhiteSpace(m_code[index]);
-    }
-    return false;
-}
-
-string CPlusPlusTokenizer::getIndentifierAt(int const index) const {
-    string result;
-    if (isLetterOrUnderscore(m_code[index])) {
-        result += m_code[index];
-        result += getAlphaNumericUnderscoreStringAt(index + 1);
-    }
-    return result;
-}
-
-string CPlusPlusTokenizer::getNumberAt(int const index) const {
-    string result;
-    if (isNumber(m_code[index])) {
-        result += m_code[index];
-        result += getContinuousDigitsAt(index + 1);
-    }
-    return result;
-}
-
-string CPlusPlusTokenizer::getAlphaNumericUnderscoreStringAt(int const index) const {
-    string result;
-    for (int identifierIndex = index;
-         identifierIndex < static_cast<int>(m_code.length()) && isLetterOrNumberOrUnderscore(m_code[identifierIndex]);
-         ++identifierIndex) {
-        result += m_code[identifierIndex];
-    }
-    return result;
-}
-
-string CPlusPlusTokenizer::getContinuousDigitsAt(int const index) const {
-    string result;
-    for (int identifierIndex = index;
-         identifierIndex < static_cast<int>(m_code.length()) &&
-         (isLetterOrNumberOrUnderscore(m_code[identifierIndex]) || m_code[identifierIndex] == '\'');
-         ++identifierIndex) {
-        result += m_code[identifierIndex];
-    }
-    return result;
 }
 
 }  // namespace alba::CodeUtilities

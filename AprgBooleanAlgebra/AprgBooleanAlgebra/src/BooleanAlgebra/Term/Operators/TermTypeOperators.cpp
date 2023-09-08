@@ -49,7 +49,6 @@ Term createTermWithATermAndAnExpressionUsingOrOperation(Term const& term, Expres
 }  // namespace
 
 // And: a & b
-
 Term operator&(Constant const& constant1, Constant const& constant2) {
     return constant1.getBooleanValue() && constant2.getBooleanValue();
 }
@@ -91,15 +90,11 @@ Term operator&(Expression const& expression1, Expression const& expression2) {
 }
 
 Term operator&(Expression const& expression, Term const& term) { return performAnd(expression, term); }
-
 Term operator&(Term const& term, Constant const& constant) { return performAnd(term, constant); }
-
 Term operator&(Term const& term, VariableTerm const& variableTerm) { return performAnd(term, variableTerm); }
-
 Term operator&(Term const& term, Expression const& expression) { return performAnd(term, expression); }
 
 // Or: a | b
-
 Term operator|(Constant const& constant1, Constant const& constant2) {
     return constant1.getBooleanValue() || constant2.getBooleanValue();
 }
@@ -141,11 +136,8 @@ Term operator|(Expression const& expression1, Expression const& expression2) {
 }
 
 Term operator|(Expression const& expression, Term const& term) { return performOr(expression, term); }
-
 Term operator|(Term const& term, Constant const& constant) { return performOr(term, constant); }
-
 Term operator|(Term const& term, VariableTerm const& variableTerm) { return performOr(term, variableTerm); }
-
 Term operator|(Term const& term, Expression const& expression) { return performOr(term, expression); }
 
 }  // namespace alba::booleanAlgebra

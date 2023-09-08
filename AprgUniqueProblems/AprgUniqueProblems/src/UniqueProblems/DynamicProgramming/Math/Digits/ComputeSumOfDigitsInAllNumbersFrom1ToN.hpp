@@ -9,17 +9,15 @@ class ComputeSumOfDigitsInAllNumbersFrom1ToN {
 public:
     using Value = int;
     using Values = std::vector<Value>;
-    static constexpr Value UNUSED_COUNT = std::numeric_limits<Value>::max();
-
     explicit ComputeSumOfDigitsInAllNumbersFrom1ToN(Value const lastNumber);
-
+    static constexpr Value UNUSED_COUNT = std::numeric_limits<Value>::max();
     [[nodiscard]] Value getValueUsingNaiveSolution() const;
     [[nodiscard]] Value getValueUsingMemoizationDP() const;
     [[nodiscard]] Value getValueUsingSummationValues() const;
 
 private:
-    [[nodiscard]] Value getValueUsingMemoizationDP(Value const number) const;
     static Value getSummationFrom1ToN(Value const number);
+    [[nodiscard]] Value getValueUsingMemoizationDP(Value const number) const;
     Value const m_lastNumber;
 };
 

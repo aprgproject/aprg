@@ -5,7 +5,5 @@
 using namespace std;
 
 namespace alba::booleanAlgebra {
-
 TEST(BaseTermDataTest, ConstructionWorks) { BaseTermData(); }
-
 }  // namespace alba::booleanAlgebra

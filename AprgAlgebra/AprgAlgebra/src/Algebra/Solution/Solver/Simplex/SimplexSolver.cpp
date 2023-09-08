@@ -46,23 +46,6 @@ Equations SimplexSolver::getSolutionEquations() const {
     return result;
 }
 
-void SimplexSolver::intialize(Equations const& constraints, Polynomial const& objectiveFunction) {
-    if (isPolynomialLinear(objectiveFunction)) {
-        Polynomials constraintsInStandardForm;
-        VariableNamesRetriever inputVariablesRetriever;
-        set<int> indicesWithSlackVariables;
-        processConstraints(constraints, constraintsInStandardForm, inputVariablesRetriever, indicesWithSlackVariables);
-        VariableNamesSet const& inputVariableNames(inputVariablesRetriever.getVariableNames());
-
-        saveInputVariables(inputVariableNames);
-
-        initializeSimplexTable(
-            objectiveFunction, constraintsInStandardForm, inputVariableNames, indicesWithSlackVariables);
-    }
-}
-
-void SimplexSolver::solve() { solveSimplexTable(m_simplexTable); }
-
 void SimplexSolver::processConstraints(
     Equations const& constraints, Polynomials& constraintsInStandardForm,
     VariableNamesRetriever& inputVariablesRetriever, set<int>& indicesWithSlackVariables) {
@@ -95,6 +78,23 @@ void SimplexSolver::processConstraints(
         }
     }
 }
+
+void SimplexSolver::intialize(Equations const& constraints, Polynomial const& objectiveFunction) {
+    if (isPolynomialLinear(objectiveFunction)) {
+        Polynomials constraintsInStandardForm;
+        VariableNamesRetriever inputVariablesRetriever;
+        set<int> indicesWithSlackVariables;
+        processConstraints(constraints, constraintsInStandardForm, inputVariablesRetriever, indicesWithSlackVariables);
+        VariableNamesSet const& inputVariableNames(inputVariablesRetriever.getVariableNames());
+
+        saveInputVariables(inputVariableNames);
+
+        initializeSimplexTable(
+            objectiveFunction, constraintsInStandardForm, inputVariableNames, indicesWithSlackVariables);
+    }
+}
+
+void SimplexSolver::solve() { solveSimplexTable(m_simplexTable); }
 
 void SimplexSolver::saveInputVariables(VariableNamesSet const& inputVariableNames) {
     m_inputVariables.reserve(inputVariableNames.size());

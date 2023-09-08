@@ -9,6 +9,7 @@ namespace alba::AprgBitmap {
 class OutwardSnakeLikeTraversal {
 public:
     enum class Direction { Up, Down, Left, Right };
+
     OutwardSnakeLikeTraversal(
         BitmapXY const& currentPoint, Direction const direction, int const lowestLeft, int const highestRight,
         int const lowestTop, int const highestBottom);
@@ -20,6 +21,9 @@ private:
     static BitmapXY fixPoint(
         BitmapXY const& point, int const lowestLeft, int const highestRight, int const lowestTop,
         int const highestBottom);
+
+    [[nodiscard]] bool isPointInCorner() const;
+    [[nodiscard]] bool cannotTeleport() const;
     void gotoNextPoint();
     void move();
     void moveLeft();
@@ -32,8 +36,6 @@ private:
     void teleportToNextOfMostRightAndSwitchDirection();
     void teleportToNextOfMostTopAndSwitchDirection();
     void teleportToNextOfMostBottomAndSwitchDirection();
-    [[nodiscard]] bool isPointInCorner() const;
-    [[nodiscard]] bool cannotTeleport() const;
     BitmapXY m_currentPoint;
     Direction m_direction;
     std::optional<Direction> m_scheduledTeleportDirection;

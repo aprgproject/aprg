@@ -9,6 +9,7 @@ namespace alba::CodeUtilities {
 class CPlusPlusReorganizer {
 public:
     enum class Purpose { Unknown, Reorganize, GatherInformation };
+
     struct ScopeDetail {
         int scopeHeaderStart;
         int openingBraceIndex;
@@ -17,17 +18,27 @@ public:
         std::string name;
         stringHelper::strings items;
     };
+
     struct HeaderInformation {
         stringHelper::strings signatures;
     };
 
     CPlusPlusReorganizer();
-
     void processDirectory(std::string const& directory);
     void processHeaderAndImplementationFile(std::string const& headerFile, std::string const& implementationFile);
     void reorganizeFile(std::string const& file);
 
 private:
+    [[nodiscard]] static bool shouldReorganizeInThisScope(ScopeDetail const& scope);
+    [[nodiscard]] static bool shouldConnectToPreviousItem(Terms const& scopeHeaderTerms);
+    [[nodiscard]] static bool hasEndBrace(std::string const& content);
+    static int getIndexAtClosingString(
+        Terms const& terms, int const openingIndex, std::string const& openingString, std::string const& closingString);
+    [[nodiscard]] int getIndexAtSameLineComment(int const index) const;
+    [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const openingBraceIndex) const;
+    [[nodiscard]] stringHelper::strings getScopeNames() const;
+    [[nodiscard]] stringHelper::strings getSavedSignatures() const;
+    [[nodiscard]] std::string getContents(int const start, int const end) const;
     void gatherInformationFromFile(std::string const& file);
     void processTerms();
     void processMacro(int& lastProcessedIndex, int const macroStartIndex);
@@ -40,17 +51,7 @@ private:
     void processRecognizedItem(int& lastProcessedIndex, int const recognizedItemEndIndex);
     void enterScope(int const scopeHeaderStart, int const openingBraceIndex);
     void exitScope(int& lastProcessedIndex, int const closingBraceIndex, int const endIndex);
-    [[nodiscard]] static bool shouldReorganizeInThisScope(ScopeDetail const& scope);
     void addItemIfNeeded(int const startIndex, int const endIndex);
-    [[nodiscard]] int getIndexAtSameLineComment(int const index) const;
-    static int getIndexAtClosingString(
-        Terms const& terms, int const openingIndex, std::string const& openingString, std::string const& closingString);
-    [[nodiscard]] static bool shouldConnectToPreviousItem(Terms const& scopeHeaderTerms);
-    [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const openingBraceIndex) const;
-    [[nodiscard]] static bool hasEndBrace(std::string const& content);
-    [[nodiscard]] stringHelper::strings getScopeNames() const;
-    [[nodiscard]] stringHelper::strings getSavedSignatures() const;
-    [[nodiscard]] std::string getContents(int const start, int const end) const;
     Purpose m_purpose{Purpose::Unknown};
     std::vector<ScopeDetail> m_scopeDetails;
     HeaderInformation m_headerInformation;

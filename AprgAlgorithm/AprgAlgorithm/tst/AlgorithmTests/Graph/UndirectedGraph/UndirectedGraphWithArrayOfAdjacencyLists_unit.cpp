@@ -76,9 +76,7 @@ TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, GetEdgesWorksWhenNotEmpty) {
 }
 
 TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, ConnectWorks) { testConnectWithVertexAsInt<GraphForTest>(); }
-
 TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, DisconnectWorks) { testDisconnectWithVertexAsInt<GraphForTest>(); }
-
 TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, ClearWorks) { testClearWithVertexAsInt<GraphForTest>(); }
 
 TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, GraphWorksAfterClear) {

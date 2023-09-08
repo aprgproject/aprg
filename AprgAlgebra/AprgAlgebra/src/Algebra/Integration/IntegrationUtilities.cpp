@@ -24,7 +24,6 @@ bool isTheSecondFundamentalTheoremOfCalculusTrue(
     // The second fundamental theorem of calculus
     // Let the function f be continuous on the closed interval [a, b] and let the derivative of g be equal to f for all
     // x in [a, b]. Then the definite integral of f from a to b is equal of g(b)- g(a)
-
     Differentiation differentiation(variableName);
     Integration integration(variableName);
     Term g(integration.integrate(term));
@@ -40,7 +39,6 @@ bool isTheSecondFundamentalTheoremOfCalculusTrue(
 bool isTheIntegralDefinitionForFiniteCalculusIsTrue(
     Term const& term, string const& variableName, AlbaNumber const& a, AlbaNumber const& b) {
     // The fundamental theorem of finite calculus:
-
     // The discrete definite integral from a to b is equal to
     // The summation of terms from a to b-1.
     IntegrationForFiniteCalculus integration(variableName);
@@ -62,7 +60,6 @@ AlbaNumbers getInputForAverageValueInBetweenTwoValues(
     // If the function f is continuous on the closed interval [a, b],
     // there exists a number "average" in [a, b] such that:
     // The definite integral in [a, b] = f("average") * (b-a)
-
     Equation meanValueTheoremEquation(
         term, "=", getAverageValueInBetweenTwoValues(term, {variableName, lowerEndInInterval, higherEndInInterval}));
     OneEquationOneVariableEqualitySolver solver;

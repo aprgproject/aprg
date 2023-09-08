@@ -5,13 +5,12 @@ namespace Command {
 // Receiver
 // knows how to perform the operations associated
 // with carrying out a request
-
 class Receiver {
 public:
     Receiver() = default;
     void action() { std::cout << "Receiver: perform action, someValue: [" << someValue++ << "]\n"; }
-
     void reverseAction() { std::cout << "Receiver: perform reverse action, someValue: [" << someValue-- << "]\n"; }
+
     // ...
 private:
     int someValue{};
@@ -19,15 +18,13 @@ private:
 
 // Command
 // declares an interface for all commands
-
 class Command {
 public:
     virtual ~Command() = default;
-
     virtual void execute() = 0;
     virtual void undo() = 0;
-    // ...
 
+    // ...
 protected:
     Command() = default;
 };
@@ -35,16 +32,13 @@ protected:
 // Concrete Command
 // implements execute by invoking the corresponding
 // operation(s) on Receiver
-
 class ConcreteCommand : public Command {
 public:
     explicit ConcreteCommand(Receiver& receiver) : m_receiver(receiver) {}
-
     void execute() override { m_receiver.action(); }
-
     void undo() override { m_receiver.reverseAction(); }
-    // ...
 
+    // ...
 private:
     Receiver& m_receiver;
     // ...
@@ -52,11 +46,9 @@ private:
 
 // Invoker
 // asks the command to carry out the request
-
 class Invoker {
 public:
     Invoker() = default;
-
     void setCommand(Command* command) { m_command = command; }
 
     void invoke() {
@@ -70,8 +62,8 @@ public:
             m_command->undo();
         }
     }
-    // ...
 
+    // ...
 private:
     Command* m_command{nullptr};  // can be reference if you can but it will need the command on constructor
     // ...

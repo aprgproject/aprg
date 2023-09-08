@@ -10,8 +10,21 @@ class BinaryHeapAdapter {
 public:
     using Object = typename Objects::value_type;
     using Comparator = ComparatorTemplateType<Object>;
-
     explicit BinaryHeapAdapter(Objects& objects) : m_comparator(), m_objects(objects) {}
+    [[nodiscard]] inline int getSize() const { return m_objects.size(); }
+    [[nodiscard]] inline int getTopTreeIndex() const { return 1; }
+    [[nodiscard]] inline int getBottomTreeIndex() const { return m_objects.size(); }
+    [[nodiscard]] inline int getParentIndex(int const treeIndex) const { return treeIndex / NUMBER_OF_CHILDREN; }
+    [[nodiscard]] inline int getFirstChildIndex(int const treeIndex) const { return treeIndex * NUMBER_OF_CHILDREN; }
+
+    [[nodiscard]] inline int getLastChildIndex(int const treeIndex) const {
+        return (treeIndex + 1) * NUMBER_OF_CHILDREN - 1;
+    }
+
+    [[nodiscard]] int getContainerIndex(int const treeIndex) const {
+        // Tree index starts at one (top of the tree)
+        return treeIndex - 1;
+    }
 
     [[nodiscard]] Object const& getObjectOnTree(int const treeIndex) const {
         return m_objects[getContainerIndex(treeIndex)];
@@ -50,25 +63,6 @@ public:
         }
     }
 
-    [[nodiscard]] inline int getSize() const { return m_objects.size(); }
-
-    [[nodiscard]] inline int getTopTreeIndex() const { return 1; }
-
-    [[nodiscard]] inline int getBottomTreeIndex() const { return m_objects.size(); }
-
-    [[nodiscard]] int getContainerIndex(int const treeIndex) const {
-        // Tree index starts at one (top of the tree)
-        return treeIndex - 1;
-    }
-
-    [[nodiscard]] inline int getParentIndex(int const treeIndex) const { return treeIndex / NUMBER_OF_CHILDREN; }
-
-    [[nodiscard]] inline int getFirstChildIndex(int const treeIndex) const { return treeIndex * NUMBER_OF_CHILDREN; }
-
-    [[nodiscard]] inline int getLastChildIndex(int const treeIndex) const {
-        return (treeIndex + 1) * NUMBER_OF_CHILDREN - 1;
-    }
-
 private:
     [[nodiscard]] inline int getChildIndexThatWouldMostBreakTheHeapOrder(
         int const treeIndex, int const treeSize) const {
@@ -90,7 +84,7 @@ private:
     }
 
     Comparator m_comparator;  // Heap order: isInHeapOrder(child, parent) is true,
-                              // so std::less -> MaxPriority and std::greater -> MinPriority
+    // so std::less -> MaxPriority and std::greater -> MinPriority
     Objects& m_objects;
 };
 
@@ -102,7 +96,6 @@ private:
 // -> Children of node k are at 2k and 2k+1 (in the implementation above the number of children per parent can be
 // changed)
 // -> Heap order: isInHeapOrder(child, parent) is true
-
 // There are two kinds of binary heaps:
 // -> max-heaps and min-heaps.
 // In both kinds, the values in the nodes satisfy a heap property, the specifics of which depend on the kind of heap.

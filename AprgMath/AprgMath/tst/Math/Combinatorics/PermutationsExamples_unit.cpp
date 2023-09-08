@@ -72,7 +72,6 @@ TEST(PermutationsExamplesTest, BasicExamplesWorks) {
 
 TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario1Works) {
     // Scenario 1: Each seat can contain at most one person.
-
     // For example, when n=4(seats) and k=2(people), there are 12 solutions:
     // |A|B| | |    Positions{A,B}: {1, 2}
     // |A| |B| |    Positions{A,B}: {1, 3}
@@ -86,14 +85,12 @@ TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario1Works) {
     // |B| | |A|    Positions{A,B}: {4, 1}
     // | |B| |A|    Positions{A,B}: {4, 2}
     // | | |B|A|    Positions{A,B}: {4, 3}
-
     // Solution: Based from the positions, the solution is permutations of 5 taken 2
     EXPECT_EQ(12U, getNumberOfPermutations(4U, 2U));
 }
 
 TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario2Works) {
     // Scenario 2: Each seat can contain multiple people
-
     // For example, when n=3(seats) and k=2(people), there are 10 solutions:
     // |AB|  |  |    Positions{A,B}: {1, 1}    Representation: A B > >
     // |A |B |  |    Positions{A,B}: {1, 2}    Representation: A > B >
@@ -107,9 +104,7 @@ TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario2Works) {
     // |  |B |A |    Positions{A,B}: {3, 2}    Representation: > B > A
     // |  |  |AB|    Positions{A,B}: {3, 3}    Representation: > > A B
     // |  |  |BA|    Positions{A,B}: {3, 3}    Representation: > > B A
-
     // Observation: Based from the positions, there are permutations with repeat values.
-
     // Solution:
     // The process of putting the people in to seats can be represented as a string that consists of symbols of the
     // person and '>'. Initially, assume that we are standing at the leftmost box. The symbol of the person means that
@@ -117,7 +112,6 @@ TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario2Works) {
     // notation, each solution is a string that contains k times the symbol of the people and n-1 times the symbol '>'.
     // This reduces to the problem in scenario 1 when there are k+n-1 seats and k people.
     // Thus, the number of solutions is (k+n-1, k)
-
     // The formula for the solution on this case is permutations of k+n-1 taken k
     // So its permutations of 2+3-1=4 taken 2
     EXPECT_EQ(12U, getNumberOfPermutations(4U, 2U));
@@ -126,7 +120,6 @@ TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario2Works) {
 TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario3WorksWithExample1) {
     // Scenario 3: Each seat can contain at most one person, and in addition, no two adjacent seats may both contain a
     // person.
-
     // For example, when n=5(seats) and k=2(people), there are 12 solutions:
     // |A| |B| | |    Positions{A,B}: {1, 3}    Representation: |A|_|B| | |    |A|B| | |
     // |A| | |B| |    Positions{A,B}: {1, 4}    Representation: |A|_| |B| |    |A| |B| |
@@ -140,22 +133,18 @@ TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario3WorksWithExample1)
     // | |B| | |A|    Positions{A,B}: {5, 2}    Representation: | |B|_| |A|    | |B| |A|
     // | | |A| |B|    Positions{A,B}: {3, 5}    Representation: | | |A|_|B|    | | |A|B|
     // | | |B| |A|    Positions{A,B}: {5, 3}    Representation: | | |B|_|A|    | | |B|A|
-
     // Solution:
     // In this scenario, we can assume that k people are initially placed in seats and there is an empty box between
     // each two adjacent seats. The remaining task is to choose the positions for the remaining empty seats.
-
     // To simplify this problem, adjacent empty seats can be removed on each permutation.
     // When empty seats are removed, this can be reduced to the problem on scenario 1.
     // Thus we need to figure out the new number of seats and new number of people
-
     // Question is how many empty seats can be removed?
     // If there are 2 people, empty seats to remove is 1.
     // If there are 3 people, empty seats to remove is 2.
     // If there are 4 people, empty seats to remove is 3.
     // So the empty seats to remove is k-1.
     // Hence, the new number of seats = old number of seats - empty seats to remove = n-(k-1) = n-k+1
-
     // The formula for the solution on this case is permutations of n-k+1 taken k
     // So its permutations of 5-2+1=4 taken 2
     EXPECT_EQ(12U, getNumberOfPermutations(4U, 2U));
@@ -164,7 +153,6 @@ TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario3WorksWithExample1)
 TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario3WorksWithExample2) {
     // Scenario 3: Each seat can contain at most one person, and in addition, no two adjacent seats may both contain a
     // person.
-
     // For example, when n=6(seats) and k=3(people), there are 24 solutions:
     // |A| |B| |C| |    Positions{A,B,C}: {1, 3, 5}    Representation: |A|_|B|_|C| |    |A|B|C| |
     // |A| |B| | |C|    Positions{A,B,C}: {1, 3, 6}    Representation: |A|_|B|_| |C|    |A|B| |C|
@@ -190,11 +178,9 @@ TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario3WorksWithExample2)
     // | |B| |C| |A|    positions{A,B,C}: {6, 4, 2}    Representation: | |B|_|C|_|A|    | |B|C|A|
     // | |C| |A| |B|    positions{A,B,C}: {4, 6, 2}    Representation: | |C|_|A|_|B|    | |C|A|B|
     // | |C| |B| |A|    positions{A,B,C}: {6, 4, 2}    Representation: | |C|_|B|_|A|    | |C|B|A|
-
     // Solution:
     // As described above, by removing adjacent empty seats this reduces to the problem in scenario 1.
     // Thus there are n-k+1 seats and k people
-
     // The formula for the solution on this case is permutations of n-k+1 taken k
     // So its permutations of 6-3+1=4 taken 3
     EXPECT_EQ(24U, getNumberOfPermutations(4U, 3U));

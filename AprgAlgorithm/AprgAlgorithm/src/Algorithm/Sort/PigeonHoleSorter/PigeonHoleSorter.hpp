@@ -14,7 +14,6 @@ public:
     using Value = typename Values::value_type;
     using Hole = std::vector<Value>;
     using Holes = std::vector<Hole>;
-
     PigeonHoleSorter() = default;
 
     void sort(Values& valuesToSort) const override {

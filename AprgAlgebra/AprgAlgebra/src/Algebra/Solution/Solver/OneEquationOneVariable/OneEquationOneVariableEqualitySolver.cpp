@@ -17,7 +17,32 @@ constexpr int NUMBER_OF_ITERATIONS_IN_NEWTON_METHOD = 1000;
 constexpr double DIFFERENCE_TOLERANCE_FOR_ACCEPTED_VALUE = 1E-11;
 }  // namespace
 
-OneEquationOneVariableEqualitySolver::OneEquationOneVariableEqualitySolver() = default;
+NewtonMethod::Function OneEquationOneVariableEqualitySolver::getFunctionToIterate(
+    Term const& termToCheck, string const& variableNameForSubstitution) {
+    NewtonMethod::Function result = [&](AlbaNumber const& value) {
+        SubstitutionOfVariablesToValues substitution;
+        substitution.putVariableWithValue(variableNameForSubstitution, value);
+        Term substitutedTerm(substitution.performSubstitutionTo(termToCheck));
+        AlbaNumber computedValue;
+        if (substitutedTerm.isConstant()) {
+            computedValue = substitutedTerm.getAsNumber();
+        }
+        return computedValue;
+    };
+    return result;
+}
+
+AlbaNumber OneEquationOneVariableEqualitySolver::getMoreAccurateValueFromNewtonMethod(
+    Term const& termToCheck, string const& variableNameForSubstitution, AlbaNumber const& value) {
+    AlbaNumber result(value);
+    NewtonMethod::Function functionToIterate(getFunctionToIterate(termToCheck, variableNameForSubstitution));
+    NewtonMethod newtonMethod(value, functionToIterate);
+    newtonMethod.runMaxNumberOfIterationsOrUntilFinished(NUMBER_OF_ITERATIONS_IN_NEWTON_METHOD);
+    if (newtonMethod.isSolved()) {
+        result = newtonMethod.getCurrentValue();
+    }
+    return result;
+}
 
 void OneEquationOneVariableEqualitySolver::calculateSolution(SolutionSet& solutionSet, Equation const& equation) {
     if (equation.getEquationOperator().isEqual()) {
@@ -96,31 +121,6 @@ void OneEquationOneVariableEqualitySolver::performNewtonMethodToFindSolution(
     }
 }
 
-NewtonMethod::Function OneEquationOneVariableEqualitySolver::getFunctionToIterate(
-    Term const& termToCheck, string const& variableNameForSubstitution) {
-    NewtonMethod::Function result = [&](AlbaNumber const& value) {
-        SubstitutionOfVariablesToValues substitution;
-        substitution.putVariableWithValue(variableNameForSubstitution, value);
-        Term substitutedTerm(substitution.performSubstitutionTo(termToCheck));
-        AlbaNumber computedValue;
-        if (substitutedTerm.isConstant()) {
-            computedValue = substitutedTerm.getAsNumber();
-        }
-        return computedValue;
-    };
-    return result;
-}
-
-AlbaNumber OneEquationOneVariableEqualitySolver::getMoreAccurateValueFromNewtonMethod(
-    Term const& termToCheck, string const& variableNameForSubstitution, AlbaNumber const& value) {
-    AlbaNumber result(value);
-    NewtonMethod::Function functionToIterate(getFunctionToIterate(termToCheck, variableNameForSubstitution));
-    NewtonMethod newtonMethod(value, functionToIterate);
-    newtonMethod.runMaxNumberOfIterationsOrUntilFinished(NUMBER_OF_ITERATIONS_IN_NEWTON_METHOD);
-    if (newtonMethod.isSolved()) {
-        result = newtonMethod.getCurrentValue();
-    }
-    return result;
-}
+OneEquationOneVariableEqualitySolver::OneEquationOneVariableEqualitySolver() = default;
 
 }  // namespace alba::algebra

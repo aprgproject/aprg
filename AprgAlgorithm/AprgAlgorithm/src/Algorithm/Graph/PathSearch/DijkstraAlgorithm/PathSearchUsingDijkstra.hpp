@@ -15,12 +15,14 @@ public:
     using Graph = EdgeWeightedGraph;
     using BaseClass = BasePathSearchWithRelax<Vertex, Weight, Graph, ComparatorTemplateType>;
     using VertexOrderedByWeight = typename GraphTypesWithWeights<Vertex, Weight>::VertexOrderedByWeight;
+
     template <typename ValueType>
     struct ReverseComparator {
         bool operator()(ValueType const& first, ValueType const& second) const {
             return ComparatorTemplateType<ValueType>()(second, first);
         }
     };
+
     using VertexOrderedByWeightPriorityQueue = std::priority_queue<
         VertexOrderedByWeight, std::deque<VertexOrderedByWeight>, ReverseComparator<VertexOrderedByWeight>>;
 
@@ -48,7 +50,6 @@ private:
             // loops all current best weight vertices and only updates if the weight is better
             // this essentially prims algorithm but here weight is accumulated from the start vertex (Prim just take the
             // closest)
-
             VertexOrderedByWeight vertexWithBestWeight(foundVerticesOrderedByWeight.top());
             foundVerticesOrderedByWeight.pop();
             this->relaxAt(

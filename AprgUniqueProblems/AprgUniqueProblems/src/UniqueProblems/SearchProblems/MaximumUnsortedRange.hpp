@@ -14,9 +14,8 @@ public:
     using Index = int;
     using IndexPair = std::pair<Index, Index>;
     using ValuePair = std::pair<Value, Index>;
-    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
-
     MaximumUnsortedRange() = default;
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     [[nodiscard]] IndexPair getMaximumUnsortedRange(Values const& valuesToSort) const {
         IndexPair result{INVALID_INDEX, INVALID_INDEX};

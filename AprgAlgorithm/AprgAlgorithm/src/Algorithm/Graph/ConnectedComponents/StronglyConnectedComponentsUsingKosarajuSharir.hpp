@@ -30,17 +30,24 @@ public:
     }
 
 private:
+    [[nodiscard]] DirectedGraphWithListOfEdgesWithVertex getGraphWithReversedDirections(
+        BaseDirectedGraphWithVertex const& graph) const {
+        DirectedGraphWithListOfEdgesWithVertex result;
+        for (auto const& [startVertexOfEdge, endVertexOfEdge] : graph.getEdges()) {
+            result.connect(endVertexOfEdge, startVertexOfEdge);
+        }
+        return result;
+    }
+
     void initialize() {
         // Kosaraju Sharir algorithm works on reversing directions and iterating vertices in topological order
         // and iterating that vertices using DFS on the original graph with original directions
-
         // This works because:
         // -> reversing the edges -> reverses the dependency of the vertices in the graph
         // -> traversing the vertices in topological order -> means that vertices in a connected component is traversed
         // only once
         // -> this means contracting each strong component into a single vertex
         // and we can increment the id when one vertex finishes DFS (in the original graph)
-
         b_numberOfComponentIds = 0;
         DirectedGraphWithListOfEdgesWithVertex graphWithReversedDirections(getGraphWithReversedDirections(b_graph));
         VertexOrderingUsingDfs<Vertex> vertexOrdering(graphWithReversedDirections);
@@ -62,15 +69,6 @@ private:
         }
     }
 
-    [[nodiscard]] DirectedGraphWithListOfEdgesWithVertex getGraphWithReversedDirections(
-        BaseDirectedGraphWithVertex const& graph) const {
-        DirectedGraphWithListOfEdgesWithVertex result;
-        for (auto const& [startVertexOfEdge, endVertexOfEdge] : graph.getEdges()) {
-            result.connect(endVertexOfEdge, startVertexOfEdge);
-        }
-        return result;
-    }
-
     BaseDirectedGraphWithVertex const& b_graph;
     int& b_numberOfComponentIds;
     VertexToIntMap& b_vertexToComponentIdMap;
@@ -82,29 +80,23 @@ private:
 // First DFS: Reverse directions of the graph and get topological sort ordered vertices.
 // Second DFS: Perform DFS starting at topological sorted vertices(from first DFS),
 // and add a new component ID every time a new (and unprocessed) start vertex is processed
-
 // Linear time because DFS.
-
 // Strong components in a graph is the same with the graph with reversed directions
 // Contract each strong component into a single vertex
-
 // Simple algorithm for computing strong components.
 // -> Phase 1: run DFS on GR(graph with reversed directions) to compute reverse postorder.
 // -> Phase 2: run DFS on G(original graph), traversing vertices in the order determined in the first phase
-
 // Kosaraju-Sharir algorithm
 // Proposition: Kosaraju-Sharir algorithm computes the strong components of a digraph in time proportional to E+V.
 // Proof:
 // -> running time: bottleneck is running DFS twice
 // -> correctness: tricky
 // -> implementation: easy
-
 // Other discussions:
 // Kosaraju’s algorithm is an efficient method for finding the strongly connected components of a directed graph.
 // The algorithm performs two depth-first searches:
 // the first search constructs a list of nodes according to the structure of the graph,
 // and the second search forms the strongly connected components.
-
 // Other analysis:
 // The time complexity of the algorithm is O(n + m), because the algorithm performs two depth-first searches.
 // Note: n is the number of nodes and m is the number of edges.

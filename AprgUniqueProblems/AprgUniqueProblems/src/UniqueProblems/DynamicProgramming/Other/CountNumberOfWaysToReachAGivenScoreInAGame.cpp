@@ -15,7 +15,6 @@ CountNumberOfWaysToReachAGivenScoreInAGame::Value
 CountNumberOfWaysToReachAGivenScoreInAGame::getMinimumCostUsingIterativeDP() const {
     // Time Complexity: O(n^2)
     // Auxiliary Space: O(1)
-
     constexpr array<Value, 3> moveScores{3, 5, 10};
 
     Values countsPerScore(m_targetScore + 1, 0);
@@ -32,7 +31,6 @@ CountNumberOfWaysToReachAGivenScoreInAGame::Value
 CountNumberOfWaysToReachAGivenScoreInAGame::getMinimumCostUsingCoinProblemSolutions() const {
     // Time Complexity: O(n^2)
     // Auxiliary Space: O(1)
-
     CoinProblem::Coins moveScores{3, 5, 10};
 
     CoinProblem coinProblem(moveScores);

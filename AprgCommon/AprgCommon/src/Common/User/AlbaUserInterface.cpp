@@ -10,8 +10,6 @@ using namespace std;
 
 namespace alba {
 
-AlbaUserInterface::AlbaUserInterface() = default;
-
 string AlbaUserInterface::getUserInput() {
     cin.getline(m_buffer.data(), BUFFER_SIZE);
     return {m_buffer.data()};
@@ -27,6 +25,8 @@ string AlbaUserInterface::getFilePathInput() {
         cout << "File not found\n";
     }
 }
+
+AlbaUserInterface::AlbaUserInterface() = default;
 
 template <typename NumberType>
 NumberType AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(
@@ -52,6 +52,7 @@ NumberType AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(
     cout << "Input your answer: ";
     return convertStringToNumber<NumberType>(getUserInput());
 }
+
 template int AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(
     string_view const question, Choices<int> const& choices);
 

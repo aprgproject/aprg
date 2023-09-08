@@ -6,21 +6,23 @@
 
 namespace alba::StaticOnTranslationUnits {
 
-// constexpr int constInteger = 120;  // Error: redefinition of 'constInteger'
-// static int staticInteger = 220;    // Error: redefinition of 'staticInteger'
-
-// int integer = 320;  // conflicts with TranslationUnit1
-// explicitly extern (external linkage)
-extern int externInteger;  // only a declaration (incomplete type)
 // int externInteger = 420;   // conflicts with TranslationUnit1
 // explicitly extern (external linkage)
 extern const int externConstInteger;  // only a declaration (incomplete type)
+// constexpr int constInteger = 120;  // Error: redefinition of 'constInteger'
+// static int staticInteger = 220;    // Error: redefinition of 'staticInteger'
+// int integer = 320;  // conflicts with TranslationUnit1
+// explicitly extern (external linkage)
+extern int externInteger;  // only a declaration (incomplete type)
 // const int externConstInteger = 520;   // conflicts with TranslationUnit1
-
 // int freeFunction() { return 2; } // conflicts with TranslationUnit1
 int staticFreeFunction() { return 2; }
-// if this is not defined, errors will occur because its used on this translation unit.
 
+TranslationUnitValues getValuesInTranslationUnit2() {
+    return TranslationUnitValues{constInteger, staticInteger, 0, externInteger, externConstInteger};
+}
+
+// if this is not defined, errors will occur because its used on this translation unit.
 // Utilities for tests
 void restoreInitialValuesForTranslationUnit2() {
     // constInteger = 120; // const so cannot change value
@@ -28,10 +30,6 @@ void restoreInitialValuesForTranslationUnit2() {
     // integer = 320; // conflicts with TranslationUnit1
     externInteger = 420;
     // externConstInteger = 520;  // const so cannot change value
-}
-
-TranslationUnitValues getValuesInTranslationUnit2() {
-    return TranslationUnitValues{constInteger, staticInteger, 0, externInteger, externConstInteger};
 }
 
 TEST(StaticOnTranslationUnit2Test, VariableValuesAreCorrect) {
@@ -50,7 +48,6 @@ TEST(StaticOnTranslationUnit2Test, VariableValuesCanBeChanged) {
     // integer = 321; // conflicts with TranslationUnit1
     externInteger = 421;
     // externConstInteger = 521; // const so cannot change value
-
     EXPECT_EQ(100, constInteger);
     EXPECT_EQ(221, staticInteger);
     // EXPECT_EQ(321, integer); // conflicts with TranslationUnit1
@@ -77,7 +74,6 @@ TEST(StaticOnTranslationUnit2Test, VariableValuesAreChangedAndReflectedOnOtherTr
     // integer = 322; // conflicts with TranslationUnit1
     externInteger = 422;
     // externConstInteger = 522; // const so cannot change value
-
     TranslationUnitValues otherTranslationUnitValues(getValuesInTranslationUnit1());
     EXPECT_EQ(100, otherTranslationUnitValues.constInteger);
     EXPECT_EQ(210, otherTranslationUnitValues.staticInteger);

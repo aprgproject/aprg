@@ -9,6 +9,29 @@ using namespace std;
 
 namespace alba {
 
+// print function
+void printPoolingResult(BasebandPoolingResult const& poolingResult) {
+    if (poolingResult.isSuccessful) {
+        cout << "Baseband pooling successful\n";
+    } else {
+        cout << "Baseband pooling NOT successful\n";
+    }
+
+    DisplayTable table;
+    table.setBorders("-", "|");
+    unsigned int previousNid(0);
+    for (KeplerNidToLcgPair const nidToLcgPair : poolingResult.keplerNidToLcgMap) {
+        if ((previousNid & 0xFF00) != (nidToLcgPair.first & 0xFF00)) {
+            table.addRow();
+        }
+        stringstream ss;
+        ss << hex << "0x" << nidToLcgPair.first << "->LCG:" << nidToLcgPair.second;
+        table.getLastRow().addCell(ss.str());
+        previousNid = nidToLcgPair.first;
+    }
+    cout << table;
+}
+
 TEST(KeplerTest, KeplerWorksCorrectly) {
     Kepler kepler1(0x1450);
     Kepler kepler2(0x1460);
@@ -277,29 +300,6 @@ TEST(AsilBasebandPoolingTest, AssignBasebandCardsWithMultipleLcgsIsCorrect) {
     EXPECT_EQ(1U, poolingMap.at(0x1440));
     EXPECT_EQ(2U, poolingMap.at(0x1450));
     EXPECT_EQ(2U, poolingMap.at(0x1460));
-}
-
-// print function
-void printPoolingResult(BasebandPoolingResult const& poolingResult) {
-    if (poolingResult.isSuccessful) {
-        cout << "Baseband pooling successful\n";
-    } else {
-        cout << "Baseband pooling NOT successful\n";
-    }
-
-    DisplayTable table;
-    table.setBorders("-", "|");
-    unsigned int previousNid(0);
-    for (KeplerNidToLcgPair const nidToLcgPair : poolingResult.keplerNidToLcgMap) {
-        if ((previousNid & 0xFF00) != (nidToLcgPair.first & 0xFF00)) {
-            table.addRow();
-        }
-        stringstream ss;
-        ss << hex << "0x" << nidToLcgPair.first << "->LCG:" << nidToLcgPair.second;
-        table.getLastRow().addCell(ss.str());
-        previousNid = nidToLcgPair.first;
-    }
-    cout << table;
 }
 
 TEST(AsilBasebandPoolingTest, PerformBasebandPoolingForAsilIsCorrect) {

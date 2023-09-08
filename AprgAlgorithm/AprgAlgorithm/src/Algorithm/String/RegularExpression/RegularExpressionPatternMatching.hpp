@@ -13,7 +13,6 @@ template <typename Index>
 class RegularExpressionPatternMatching {
 public:
     using Indexes = std::vector<Index>;  // States are indexes
-
     explicit RegularExpressionPatternMatching(std::string const& regularExpression)
         : m_regularExpression(regularExpression) {
         initialize();

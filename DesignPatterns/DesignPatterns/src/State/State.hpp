@@ -6,11 +6,9 @@ namespace State {
 // State
 // defines an interface for encapsulating the behavior associated
 // with a particular state of the Context
-
 class State {
 public:
     virtual ~State() = default;
-
     virtual void handle() = 0;
     // ...
 };
@@ -18,7 +16,6 @@ public:
 // Concrete States
 // each subclass implements a behavior associated with a state
 // of the Context
-
 class ConcreteStateA : public State {
 public:
     void handle() override { std::cout << "State A handled.\n"; }
@@ -33,16 +30,13 @@ public:
 
 // Context
 // defines the interface of interest to clients
-
 class Context {
 public:
     Context() = default;
-
     void setState(std::unique_ptr<State> statePointer) { m_statePointer = move(statePointer); }
-
     void request() { m_statePointer->handle(); }
-    // ...
 
+    // ...
 private:
     std::unique_ptr<State> m_statePointer;
     // ...

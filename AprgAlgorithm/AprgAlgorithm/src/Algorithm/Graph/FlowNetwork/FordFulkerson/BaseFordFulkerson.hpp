@@ -20,24 +20,17 @@ public:
     using VertexToFlowEdgeMap = std::map<Vertex, FlowEdge>;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
     using TraverseFunction = std::function<void(Vertex)>;
-
-    explicit BaseFordFulkerson(SinkSourceFlowNetworkType const& flowNetwork) : m_flowNetwork(flowNetwork) {}
-
     virtual ~BaseFordFulkerson() = default;  // virtual destructor because of virtual functions (vtable exists)
-
+    explicit BaseFordFulkerson(SinkSourceFlowNetworkType const& flowNetwork) : m_flowNetwork(flowNetwork) {}
     [[nodiscard]] FlowDataType getMaxFlowValue() const { return m_maxFlowValue; }
-
     [[nodiscard]] Paths const& getAugmentingPaths() const { return m_augmentingPaths; }
-
     [[nodiscard]] SinkSourceFlowNetworkType const& getFlowNetwork() const { return m_flowNetwork; }
 
     [[nodiscard]] Edges getMinCutEdges() const {
         // Let A be the set of nodes that can be reached from the source using positive-weight edges.
         // The processed vertices have positive-weight edges from source of last iteration.
-
         // Now the minimum cut consists of the edges of the original graph that start at some node in A, end at some
         // node outside A. So we just need to check for edges that isFound and isNotFound in processed vertices
-
         Edges result;
         for (FlowEdge const& flowEdge : m_flowNetwork.getFlowEdges()) {
             if (m_processedVertices.isFound(flowEdge.source) && m_processedVertices.isNotFound(flowEdge.destination)) {
@@ -49,6 +42,20 @@ public:
 
 protected:
     virtual bool findAnAugmentingPathAndReturnIfFound() = 0;
+
+    FlowDataType getBottleNeckFlow() {
+        // find minimum residual capacity in augmenting path
+        FlowDataType bottleNeckFlow{};
+        if (!m_vertexToAugmentingPathEdgeMap.empty()) {
+            Vertex firstVertex(m_vertexToAugmentingPathEdgeMap.cbegin()->first);
+            bottleNeckFlow = m_vertexToAugmentingPathEdgeMap[firstVertex].getResidualCapacityTo(firstVertex);
+            traverseAugmentingPathInReverse([&](Vertex const& vertex) {
+                bottleNeckFlow =
+                    std::min(bottleNeckFlow, m_vertexToAugmentingPathEdgeMap[vertex].getResidualCapacityTo(vertex));
+            });
+        }
+        return bottleNeckFlow;
+    }
 
     void initialize() {
         while (findAnAugmentingPathAndReturnIfFound()) {
@@ -79,20 +86,6 @@ protected:
         }
     }
 
-    FlowDataType getBottleNeckFlow() {
-        // find minimum residual capacity in augmenting path
-        FlowDataType bottleNeckFlow{};
-        if (!m_vertexToAugmentingPathEdgeMap.empty()) {
-            Vertex firstVertex(m_vertexToAugmentingPathEdgeMap.cbegin()->first);
-            bottleNeckFlow = m_vertexToAugmentingPathEdgeMap[firstVertex].getResidualCapacityTo(firstVertex);
-            traverseAugmentingPathInReverse([&](Vertex const& vertex) {
-                bottleNeckFlow =
-                    std::min(bottleNeckFlow, m_vertexToAugmentingPathEdgeMap[vertex].getResidualCapacityTo(vertex));
-            });
-        }
-        return bottleNeckFlow;
-    }
-
     SinkSourceFlowNetworkType m_flowNetwork;
     FlowDataType m_maxFlowValue{};
     Paths m_augmentingPaths{};
@@ -108,19 +101,16 @@ protected:
 // -> Termination: All paths s to t are blocked by either a:
 // ---> full forward edge
 // ---> empty backward edge
-
 // Process:
 // -> Start with 0 flow
 // -> While there exists an augmenting path:
 // ---> Find an augmenting path
 // ---> Compute bottleneck capacity
 // ---> Increase flow on that path by bottleneck capacity.
-
 // How to find an augmenting path? Any graph search will work but BFS works well.
 // If FF terminates, does it always compute a maxflow?
 // Does FF always terminate? If so after how many augmentations?
 // -> yes, provided edge capacities are integers or augmenting paths are chosen carefully
-
 // Ford-Fulkerson algorithm with integer capacities.
 // -> Important special case. Edge capacities are integer between 1 and U.
 // -> Invariant. The flow is integer-valued through Ford-Fulkerson
@@ -131,10 +121,8 @@ protected:
 // ---> Proof: Each augmentation increases the value by at least 1.
 // -> Integrality theorem: There exists an integer value max flow. (and Ford Fulkerson finds it)
 // ---> Proof: Ford-Fulkerson terminates and maxflow that it finds is integer-valued.
-
 // Bad news: Even when edge capacities are integers, number of augmenting paths could be equal to the value of the
 // maxflow. Good news: This case is easily avoided (use shortest/fattest path)
-
 // FF performance depends on choice of augmenting paths.
 // U is value of capacity
 // augmenting path | number of paths | implementation
@@ -143,19 +131,15 @@ protected:
 // random path     | <= E*U          | randomized queue
 // DFS path        | <= E*U          | stack (DFS)
 // Shortest path/BFS is implemented above.
-
 // Other discussions:
-
 // The Ford–Fulkerson algorithm finds the maximum flow in a graph.
 // The algorithm begins with an empty flow, and at each step finds a path from the source to the sink that generates
 // more flow. Finally, when the algorithm cannot increase the flow anymore, the maximum flow has been found.
-
 // Note: This is a different representation compared to implementation above.
 // The algorithm uses a special representation of the graph where each original edge has a reverse edge in another
 // direction. The weight of each edge indicates how much more flow we could route through it. At the beginning of the
 // algorithm, the weight of each original edge equals the capacity of the edge and the weight of each reverse edge is
 // zero.
-
 // Algorithm description
 // Note: This is a different implementation compared to the implementation above.
 // The Ford–Fulkerson algorithm consists of several rounds.
@@ -165,7 +149,6 @@ protected:
 // cancel flow later using the reverse edges of the graph if it turns out that it would be beneficial to route the flow
 // in another way. The algorithm increases the flow as long as there is a path from the source to the sink through
 // positive-weight edges.
-
 // Finding paths
 // The Ford–Fulkerson algorithm does not specify how we should choose the paths that increase the flow.
 // In any case, the algorithm will terminate sooner or later and correctly find the maximum flow.
@@ -183,7 +166,6 @@ protected:
 // -> Initially, the threshold value is some large number, for example the sum of all edge weights of the graph.
 // -> Always when a path cannot be found, the threshold value is divided by 2.
 // -> The time complexity of the algorithm is O(m^2 * logc), where c is the initial threshold value.
-
 // Minimum cuts
 // It turns out that once the Ford–Fulkerson algorithm has found a maximum flow, it has also determined a minimum cut.
 // Let A be the set of nodes that can be reached from the source using positive-weight edges.

@@ -17,7 +17,6 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
     const {
     // Time Complexity: Exponential -> Since there are n calls per iteration:  O(n^n)
     // Auxiliary Space: Constant
-
     return getMinimumCountUsingNaiveRecursion(m_sumOfSquares);
 }
 
@@ -25,7 +24,6 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
     const {
     // Time Complexity: Exponential -> Since there are n calls per iteration:  O(n^n)
     // Auxiliary Space: O(n)
-
     Counts savedMinimumCounts(m_sumOfSquares + 1, MAX_COUNT);  // plus one so no more conversion
     return getMinimumCountUsingMemoizationDP(savedMinimumCounts, m_sumOfSquares);
 }
@@ -34,7 +32,6 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
     const {
     // Time Complexity: O(n^(3/2))
     // Auxiliary Space: O(n)
-
     Counts minimumCounts(m_sumOfSquares + 1, MAX_COUNT);  // plus one so no more conversion
     minimumCounts[0] = 0;
     for (Count previousSumOfSquares = 1; previousSumOfSquares <= m_sumOfSquares; ++previousSumOfSquares) {
@@ -53,7 +50,6 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
 MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualToN::getMinimumCountUsingBfs() const {
     // Time Complexity: O(n^(3/2))
     // Auxiliary Space: O(n)
-
     Count result(MAX_COUNT);
     vector<bool> isProcessed(m_sumOfSquares + 1, false);
     struct NodeDetails {

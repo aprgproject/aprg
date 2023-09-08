@@ -11,7 +11,6 @@ Term operator+(Monomial const& monomial);
 Term operator+(Polynomial const& polynomial);
 Term operator+(Expression const& expression);
 Term operator+(Function const& functionObject);
-
 // Unary minus: -a
 Term operator-(Constant const& constant);
 Term operator-(Variable const& variable);
@@ -19,7 +18,6 @@ Term operator-(Monomial const& monomial);
 Term operator-(Polynomial const& polynomial);
 Term operator-(Expression const& expression);
 Term operator-(Function const& functionObject);
-
 // Addition: a + b
 Term operator+(Constant const& constant1, Constant const& constant2);
 Term operator+(Constant const& constant, Variable const& variable);
@@ -69,7 +67,6 @@ Term operator+(Term const& term, Monomial const& monomial);
 Term operator+(Term const& term, Polynomial const& polynomial);
 Term operator+(Term const& term, Expression const& expression);
 Term operator+(Term const& term, Function const& functionObject);
-
 // Subtraction: a - b
 Term operator-(Constant const& constant1, Constant const& constant2);
 Term operator-(Constant const& constant, Variable const& variable);
@@ -119,7 +116,6 @@ Term operator-(Term const& term, Monomial const& monomial);
 Term operator-(Term const& term, Polynomial const& polynomial);
 Term operator-(Term const& term, Expression const& expression);
 Term operator-(Term const& term, Function const& functionObject);
-
 // Multiplication: a * b
 Term operator*(Constant const& constant1, Constant const& constant2);
 Term operator*(Constant const& constant, Variable const& variable);
@@ -169,7 +165,6 @@ Term operator*(Term const& term, Monomial const& monomial);
 Term operator*(Term const& term, Polynomial const& polynomial);
 Term operator*(Term const& term, Expression const& expression);
 Term operator*(Term const& term, Function const& functionObject);
-
 // Divsion: a / b
 Term operator/(Constant const& constant1, Constant const& constant2);
 Term operator/(Constant const& constant, Variable const& variable);
@@ -219,7 +214,6 @@ Term operator/(Term const& term, Monomial const& monomial);
 Term operator/(Term const& term, Polynomial const& polynomial);
 Term operator/(Term const& term, Expression const& expression);
 Term operator/(Term const& term, Function const& functionObject);
-
 // RaiseToThePower: a ^ b
 Term operator^(Constant const& constant1, Constant const& constant2);
 Term operator^(Constant const& constant, Variable const& variable);

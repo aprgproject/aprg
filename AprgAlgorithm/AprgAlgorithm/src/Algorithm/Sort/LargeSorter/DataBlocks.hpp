@@ -23,6 +23,7 @@ public:
         : m_configuration(configuration), m_memoryCache(memoryCache), m_fileStreamOpenedCache(fileStreamOpenedCache) {
         initializeDataBlocks();
     }
+
     [[nodiscard]] bool isEmpty() const {
         for (BlockType const& block : m_blocks) {
             if (block.getNumberOfObjects() != 0) {
@@ -31,6 +32,7 @@ public:
         }
         return true;
     }
+
     BlockIterator getNearestBlockIterator(ObjectToSort const& objectToSort) {
         if (isLessThanOrEqual(m_mainIterator->getLowestObject(), objectToSort)) {
             while ((m_mainIterator != m_blocks.end()) &&
@@ -45,7 +47,9 @@ public:
         }
         return m_mainIterator;
     }
+
     void moveMainInteratorToStart() { m_mainIterator = m_blocks.begin(); }
+
     void createNewBlockBeforeThisIterator(BlockIterator const& iteratorAfterNewBlock, DataBlockType const blockType) {
         m_blocks.emplace(
             iteratorAfterNewBlock, blockType, m_numberOfBlocks,
@@ -54,6 +58,7 @@ public:
         --newBlockIterator;
         ++m_numberOfBlocks;
     }
+
     void deleteBlock(BlockIterator const& iteratorOfBlockToErase) {
         bool const isMainIteratorDeleted = m_mainIterator == iteratorOfBlockToErase;
         m_memoryCache.deleteBlock(iteratorOfBlockToErase->getBlockId());
@@ -63,14 +68,17 @@ public:
             m_mainIterator = newIterator;
         }
     }
+
     void addObjectToBlock(BlockIterator const& iteratorOfBlock, ObjectToSort const& objectToSort) {
         iteratorOfBlock->add(objectToSort);
         updateAllCaches(iteratorOfBlock);
     }
+
     void addObjectToBlockAtTheStart(BlockIterator const& iteratorOfBlock, ObjectToSort const& objectToSort) {
         iteratorOfBlock->addAtTheStart(objectToSort);
         updateAllCaches(iteratorOfBlock);
     }
+
     void sortThenDoFunctionThenReleaseAllObjects(std::function<void(ObjectToSort const&)> doFunctionForAllObjects) {
         for (BlockType& block : m_blocks) {
             block.sortThenDoFunctionThenRelease(doFunctionForAllObjects);
@@ -78,16 +86,19 @@ public:
         releaseAllBlocks();
         initializeDataBlocks();
     }
+
     void releaseAllBlocks() {
         m_blocks.clear();
         m_memoryCache.clear();
         m_fileStreamOpenedCache.clear();
         m_numberOfBlocks = 0;
     }
+
     void initializeDataBlocks() {
         createNewBlockBeforeThisIterator(m_blocks.begin(), DataBlockType::Memory);
         m_mainIterator = m_blocks.begin();
     }
+
     void updateAllCaches(BlockIterator const& iteratorOfBlock) {
         switch (iteratorOfBlock->getBlockType()) {
             case DataBlockType::File:
@@ -105,6 +116,7 @@ private:
     inline bool isLessThanOrEqual(ObjectToSort const& firstTerm, ObjectToSort const& secondTerm) {
         return (firstTerm < secondTerm) || (firstTerm == secondTerm);
     }
+
     AlbaLargeSorterConfiguration const& m_configuration;
     BlockCache& m_memoryCache;
     BlockCache& m_fileStreamOpenedCache;

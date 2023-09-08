@@ -45,7 +45,238 @@ bool Monster::hasStoneCurseSkill() const {
     return result;
 }
 
-RagnarokOnline::RagnarokOnline() = default;
+string RagnarokOnline::getFixedItemName(Item const& item) {
+    string result(item.name);
+    if (item.slot != 0) {
+        stringstream slotStream;
+        slotStream << " [" << item.slot << "]";
+        result += slotStream.str();
+    }
+    return result;
+}
+
+double RagnarokOnline::getTalonRoBuyingPrice(string const& fixedItemName) const {
+    double result(0);
+    auto it = m_buyingShopItems.find(fixedItemName);
+    if (it != m_buyingShopItems.cend()) {
+        result = it->second.averagePrice;
+    }
+    return result;
+}
+
+double RagnarokOnline::getTalonRoSellingPrice(string const& fixedItemName) const {
+    double result(0);
+    auto it = m_sellingShopItems.find(fixedItemName);
+    if (it != m_sellingShopItems.cend()) {
+        result = it->second.averagePrice;
+    }
+    return result;
+}
+
+ItemIdToItemMap const& RagnarokOnline::getItemIdToItemMap() const { return m_itemIdToItemMap; }
+MonsterIdToMonsterMap const& RagnarokOnline::getMonsterIdToMonsterMap() const { return m_monsterIdToMonsterMap; }
+MapNameToRoMap const& RagnarokOnline::getMapNameToRoMap() const { return m_mapNameToRoMap; }
+ItemNameToShopItemDetailMap const& RagnarokOnline::getBuyingItemShops() const { return m_buyingShopItems; }
+ItemNameToShopItemDetailMap const& RagnarokOnline::getSellingItemShops() const { return m_sellingShopItems; }
+
+Item RagnarokOnline::getItem(string const& fixedItemName) const {
+    Item result{};
+    auto it1 = m_itemNameToItemIdMap.find(fixedItemName);
+    if (it1 != m_itemNameToItemIdMap.cend()) {
+        auto it2 = m_itemIdToItemMap.find(it1->second);
+        if (it2 != m_itemIdToItemMap.cend()) {
+            result = it2->second;
+        } else {
+            // cout << "ITEM ID NOT FOUND! [" << it1->second << "]\n";
+        }
+    } else {
+        // cout << "ITEM NAME NOT FOUND! [" << fixedItemName << "]\n";
+    }
+    return result;
+}
+
+Monster RagnarokOnline::getMonster(string const& monsterName) const {
+    Monster result{};
+    auto it1 = m_monsterNameToMonsterIdMap.find(monsterName);
+    if (it1 != m_monsterNameToMonsterIdMap.cend()) {
+        auto it2 = m_monsterIdToMonsterMap.find(it1->second);
+        if (it2 != m_monsterIdToMonsterMap.cend()) {
+            result = it2->second;
+        } else {
+            cout << "MONSTER ID NOT FOUND! [" << it1->second << "]\n";
+        }
+    } else {
+        cout << "MONSTER NAME NOT FOUND! [" << monsterName << "]\n";
+    }
+    return result;
+}
+
+void RagnarokOnline::saveItemIdToItemMapToFile(string const& outputFilePath) const {
+    ofstream outputStream(outputFilePath);
+    AlbaStreamParameterWriter writer(outputStream);
+    writer.writeMapData<unsigned int, Item>(m_itemIdToItemMap);
+    writer.flush();
+}
+
+void RagnarokOnline::saveMonsterIdToMonsterMapToFile(string const& outputFilePath) const {
+    ofstream outputStream(outputFilePath);
+    AlbaStreamParameterWriter writer(outputStream);
+    writer.writeMapData<unsigned int, Monster>(m_monsterIdToMonsterMap);
+    writer.flush();
+}
+
+void RagnarokOnline::saveMapNameToRoMapToFile(string const& outputFilePath) const {
+    ofstream outputStream(outputFilePath);
+    AlbaStreamParameterWriter writer(outputStream);
+    writer.writeMapData<string, RoMap>(m_mapNameToRoMap);
+    writer.flush();
+}
+
+void RagnarokOnline::saveBuyingShopItems(string const& outputFilePath) const {
+    ofstream outputStream(outputFilePath);
+    AlbaStreamParameterWriter writer(outputStream);
+    writer.writeMapData<string, ShopItemDetail>(m_buyingShopItems);
+    writer.flush();
+}
+
+void RagnarokOnline::saveSellingShopItems(string const& outputFilePath) const {
+    ofstream outputStream(outputFilePath);
+    AlbaStreamParameterWriter writer(outputStream);
+    writer.writeMapData<string, ShopItemDetail>(m_sellingShopItems);
+    writer.flush();
+}
+
+void RagnarokOnline::printItemIdToItemMap() const {
+    for (auto const& itemIdItemPair : m_itemIdToItemMap) {
+        cout << "Item ID: " << itemIdItemPair.first << "\n";
+        Item const& item(itemIdItemPair.second);
+        cout << "Item name: " << item.name << "\n";
+        cout << "Item type: " << item.type << "\n";
+        cout << "Item class: " << item.itemClass << "\n";
+        cout << "Buying price: " << item.buyingPrice << "\n";
+        cout << "Selling price: " << item.sellingPrice << "\n";
+        cout << "Weight: " << item.weight << "\n";
+        cout << "Attack: " << item.attack << "\n";
+        cout << "Defense: " << item.defense << "\n";
+        cout << "Required Level: " << item.requiredLevel << "\n";
+        cout << "Weapon Level: " << item.weaponLevel << "\n";
+        cout << "Slot: " << item.slot << "\n";
+        cout << "Range: " << item.range << "\n";
+        cout << "Property: " << item.property << "\n";
+        cout << "Prefix or Suffix: " << item.prefixOrSuffix << "\n";
+        cout << "Applicable jobs: {";
+        for (string const& applicableJob : item.applicableJobs) {
+            cout << "[" << applicableJob << "], ";
+        }
+        cout << "}\n";
+        cout << "Description: " << item.description << "\n";
+        cout << "Item script: " << item.itemScript << "\n";
+        cout << "Dropped by monsters with rates: {";
+        for (NameAndRate const& droppedByMonsterWithRate : item.droppedByMonstersWithRates) {
+            cout << "[" << droppedByMonsterWithRate.name << "," << droppedByMonsterWithRate.rate << "], ";
+        }
+        cout << "}\n";
+    }
+}
+
+void RagnarokOnline::printMonsterIdToMonsterMap() const {
+    for (auto const& monsterIdMonsterPair : m_monsterIdToMonsterMap) {
+        cout << "Monster ID: " << monsterIdMonsterPair.first << "\n";
+        Monster const& monster(monsterIdMonsterPair.second);
+        cout << "Monster name: " << monster.name << "\n";
+        cout << "HP: " << monster.hp << "\n";
+        cout << "Level: " << monster.level << "\n";
+        cout << "Race: " << monster.race << "\n";
+        cout << "Property: " << monster.property << "\n";
+        cout << "Size: " << monster.size << "\n";
+        cout << "Hit required for 100%: " << monster.hitRequiredFor100Percent << "\n";
+        cout << "Flee required for 95%: " << monster.fleeRequiredFor95Percent << "\n";
+        cout << "Base experience: " << monster.baseExperience << "\n";
+        cout << "Job experience: " << monster.jobExperience << "\n";
+        cout << "Base experience per HP: " << monster.baseExperiencePerHp << "\n";
+        cout << "Job experience per HP: " << monster.jobExperiencePerHp << "\n";
+        cout << "Walk speed: " << monster.walkSpeed << "\n";
+        cout << "Attack delay: " << monster.attackDelay << "\n";
+        cout << "Delay after hit: " << monster.delayAfterHit << "\n";
+        cout << "Lowest attack: " << monster.lowestAttack << "\n";
+        cout << "Highest attack: " << monster.highestAttack << "\n";
+        cout << "Defense: " << monster.defense << "\n";
+        cout << "Magic defense: " << monster.magicDefense << "\n";
+        cout << "Strength: " << monster.strength << "\n";
+        cout << "Intelligence: " << monster.intelligence << "\n";
+        cout << "Agility: " << monster.agility << "\n";
+        cout << "Dexterity: " << monster.dexterity << "\n";
+        cout << "Vitality: " << monster.vitality << "\n";
+        cout << "Luck: " << monster.luck << "\n";
+        cout << "Attack range: " << monster.attackRange << "\n";
+        cout << "Spell range: " << monster.spellRange << "\n";
+        cout << "Sight range: " << monster.sightRange << "\n";
+        cout << "Neutral %: " << monster.neutralPercentage << "\n";
+        cout << "Water %: " << monster.waterPercentage << "\n";
+        cout << "Earth %: " << monster.earthPercentage << "\n";
+        cout << "Fire %: " << monster.firePercentage << "\n";
+        cout << "Wind %: " << monster.windPercentage << "\n";
+        cout << "Poison %: " << monster.poisonPercentage << "\n";
+        cout << "Holy %: " << monster.holyPercentage << "\n";
+        cout << "Shadow %: " << monster.shadowPercentage << "\n";
+        cout << "Ghost %: " << monster.ghostPercentage << "\n";
+        cout << "Undead %: " << monster.undeadPercentage << "\n";
+        cout << "Maps: {";
+        for (string const& map : monster.maps) {
+            cout << "[" << map << "], ";
+        }
+        cout << "}\n";
+        cout << "Modes: {";
+        for (string const& mode : monster.modes) {
+            cout << "[" << mode << "], ";
+        }
+        cout << "}\n";
+        cout << "Monster skills: {";
+        for (string const& monsterSkills : monster.monsterSkills) {
+            cout << "[" << monsterSkills << "], ";
+        }
+        cout << "}\n";
+        cout << "Drops with rates: {";
+        for (NameAndRate const& dropWithRate : monster.dropsWithRates) {
+            cout << "[" << dropWithRate.name << "," << dropWithRate.rate << "], ";
+        }
+        cout << "}\n";
+    }
+}
+
+void RagnarokOnline::printMapNameToRoMap() const {
+    for (auto const& mapNameToRoMap : m_mapNameToRoMap) {
+        cout << "Map name: " << mapNameToRoMap.first << "\n";
+        RoMap const& roMap(mapNameToRoMap.second);
+        cout << "Map full name: " << roMap.fullName << "\n";
+        cout << "Monsters: {";
+        for (MonsterDetailsOnRoMap const& monsterDetailsOnMap : roMap.monstersDetailsOnMap) {
+            cout << "[" << monsterDetailsOnMap.monsterName << "," << monsterDetailsOnMap.spawnCount << ","
+                 << monsterDetailsOnMap.spawnRate << "], ";
+        }
+        cout << "}\n";
+    }
+}
+
+void RagnarokOnline::printBuyingShopItems() const {
+    cout.precision(20);
+    for (auto const& shopItem : m_buyingShopItems) {
+        cout << "Shop item name: " << shopItem.first << "\n";
+        ShopItemDetail const& detail(shopItem.second);
+        cout << "Average price: " << detail.averagePrice << "\n";
+        cout << "Total number: " << detail.totalNumber << "\n";
+    }
+}
+
+void RagnarokOnline::printSellingShopItems() const {
+    cout.precision(20);
+    for (auto const& shopItem : m_sellingShopItems) {
+        cout << "Shop item name: " << shopItem.first << "\n";
+        ShopItemDetail const& detail(shopItem.second);
+        cout << "Average price: " << detail.averagePrice << "\n";
+        cout << "Total number: " << detail.totalNumber << "\n";
+    }
+}
 
 void RagnarokOnline::retrieveItemDataFromRmsWebpages(string const& directoryPathOfWebPages) {
     AlbaLocalPathHandler directoryPathHandler(directoryPathOfWebPages);
@@ -571,243 +802,6 @@ void RagnarokOnline::buildMonsterNameToMonsterId() {
     }
 }
 
-ItemIdToItemMap const& RagnarokOnline::getItemIdToItemMap() const { return m_itemIdToItemMap; }
-
-MonsterIdToMonsterMap const& RagnarokOnline::getMonsterIdToMonsterMap() const { return m_monsterIdToMonsterMap; }
-
-MapNameToRoMap const& RagnarokOnline::getMapNameToRoMap() const { return m_mapNameToRoMap; }
-
-ItemNameToShopItemDetailMap const& RagnarokOnline::getBuyingItemShops() const { return m_buyingShopItems; }
-
-ItemNameToShopItemDetailMap const& RagnarokOnline::getSellingItemShops() const { return m_sellingShopItems; }
-
-Item RagnarokOnline::getItem(string const& fixedItemName) const {
-    Item result{};
-    auto it1 = m_itemNameToItemIdMap.find(fixedItemName);
-    if (it1 != m_itemNameToItemIdMap.cend()) {
-        auto it2 = m_itemIdToItemMap.find(it1->second);
-        if (it2 != m_itemIdToItemMap.cend()) {
-            result = it2->second;
-        } else {
-            // cout << "ITEM ID NOT FOUND! [" << it1->second << "]\n";
-        }
-    } else {
-        // cout << "ITEM NAME NOT FOUND! [" << fixedItemName << "]\n";
-    }
-    return result;
-}
-
-Monster RagnarokOnline::getMonster(string const& monsterName) const {
-    Monster result{};
-    auto it1 = m_monsterNameToMonsterIdMap.find(monsterName);
-    if (it1 != m_monsterNameToMonsterIdMap.cend()) {
-        auto it2 = m_monsterIdToMonsterMap.find(it1->second);
-        if (it2 != m_monsterIdToMonsterMap.cend()) {
-            result = it2->second;
-        } else {
-            cout << "MONSTER ID NOT FOUND! [" << it1->second << "]\n";
-        }
-    } else {
-        cout << "MONSTER NAME NOT FOUND! [" << monsterName << "]\n";
-    }
-    return result;
-}
-
-string RagnarokOnline::getFixedItemName(Item const& item) {
-    string result(item.name);
-    if (item.slot != 0) {
-        stringstream slotStream;
-        slotStream << " [" << item.slot << "]";
-        result += slotStream.str();
-    }
-    return result;
-}
-
-double RagnarokOnline::getTalonRoBuyingPrice(string const& fixedItemName) const {
-    double result(0);
-    auto it = m_buyingShopItems.find(fixedItemName);
-    if (it != m_buyingShopItems.cend()) {
-        result = it->second.averagePrice;
-    }
-    return result;
-}
-
-double RagnarokOnline::getTalonRoSellingPrice(string const& fixedItemName) const {
-    double result(0);
-    auto it = m_sellingShopItems.find(fixedItemName);
-    if (it != m_sellingShopItems.cend()) {
-        result = it->second.averagePrice;
-    }
-    return result;
-}
-
-void RagnarokOnline::saveItemIdToItemMapToFile(string const& outputFilePath) const {
-    ofstream outputStream(outputFilePath);
-    AlbaStreamParameterWriter writer(outputStream);
-    writer.writeMapData<unsigned int, Item>(m_itemIdToItemMap);
-    writer.flush();
-}
-
-void RagnarokOnline::saveMonsterIdToMonsterMapToFile(string const& outputFilePath) const {
-    ofstream outputStream(outputFilePath);
-    AlbaStreamParameterWriter writer(outputStream);
-    writer.writeMapData<unsigned int, Monster>(m_monsterIdToMonsterMap);
-    writer.flush();
-}
-
-void RagnarokOnline::saveMapNameToRoMapToFile(string const& outputFilePath) const {
-    ofstream outputStream(outputFilePath);
-    AlbaStreamParameterWriter writer(outputStream);
-    writer.writeMapData<string, RoMap>(m_mapNameToRoMap);
-    writer.flush();
-}
-
-void RagnarokOnline::saveBuyingShopItems(string const& outputFilePath) const {
-    ofstream outputStream(outputFilePath);
-    AlbaStreamParameterWriter writer(outputStream);
-    writer.writeMapData<string, ShopItemDetail>(m_buyingShopItems);
-    writer.flush();
-}
-
-void RagnarokOnline::saveSellingShopItems(string const& outputFilePath) const {
-    ofstream outputStream(outputFilePath);
-    AlbaStreamParameterWriter writer(outputStream);
-    writer.writeMapData<string, ShopItemDetail>(m_sellingShopItems);
-    writer.flush();
-}
-
-void RagnarokOnline::printItemIdToItemMap() const {
-    for (auto const& itemIdItemPair : m_itemIdToItemMap) {
-        cout << "Item ID: " << itemIdItemPair.first << "\n";
-        Item const& item(itemIdItemPair.second);
-        cout << "Item name: " << item.name << "\n";
-        cout << "Item type: " << item.type << "\n";
-        cout << "Item class: " << item.itemClass << "\n";
-        cout << "Buying price: " << item.buyingPrice << "\n";
-        cout << "Selling price: " << item.sellingPrice << "\n";
-        cout << "Weight: " << item.weight << "\n";
-        cout << "Attack: " << item.attack << "\n";
-        cout << "Defense: " << item.defense << "\n";
-        cout << "Required Level: " << item.requiredLevel << "\n";
-        cout << "Weapon Level: " << item.weaponLevel << "\n";
-        cout << "Slot: " << item.slot << "\n";
-        cout << "Range: " << item.range << "\n";
-        cout << "Property: " << item.property << "\n";
-        cout << "Prefix or Suffix: " << item.prefixOrSuffix << "\n";
-        cout << "Applicable jobs: {";
-        for (string const& applicableJob : item.applicableJobs) {
-            cout << "[" << applicableJob << "], ";
-        }
-        cout << "}\n";
-        cout << "Description: " << item.description << "\n";
-        cout << "Item script: " << item.itemScript << "\n";
-        cout << "Dropped by monsters with rates: {";
-        for (NameAndRate const& droppedByMonsterWithRate : item.droppedByMonstersWithRates) {
-            cout << "[" << droppedByMonsterWithRate.name << "," << droppedByMonsterWithRate.rate << "], ";
-        }
-        cout << "}\n";
-    }
-}
-
-void RagnarokOnline::printMonsterIdToMonsterMap() const {
-    for (auto const& monsterIdMonsterPair : m_monsterIdToMonsterMap) {
-        cout << "Monster ID: " << monsterIdMonsterPair.first << "\n";
-        Monster const& monster(monsterIdMonsterPair.second);
-        cout << "Monster name: " << monster.name << "\n";
-        cout << "HP: " << monster.hp << "\n";
-        cout << "Level: " << monster.level << "\n";
-        cout << "Race: " << monster.race << "\n";
-        cout << "Property: " << monster.property << "\n";
-        cout << "Size: " << monster.size << "\n";
-        cout << "Hit required for 100%: " << monster.hitRequiredFor100Percent << "\n";
-        cout << "Flee required for 95%: " << monster.fleeRequiredFor95Percent << "\n";
-        cout << "Base experience: " << monster.baseExperience << "\n";
-        cout << "Job experience: " << monster.jobExperience << "\n";
-        cout << "Base experience per HP: " << monster.baseExperiencePerHp << "\n";
-        cout << "Job experience per HP: " << monster.jobExperiencePerHp << "\n";
-        cout << "Walk speed: " << monster.walkSpeed << "\n";
-        cout << "Attack delay: " << monster.attackDelay << "\n";
-        cout << "Delay after hit: " << monster.delayAfterHit << "\n";
-        cout << "Lowest attack: " << monster.lowestAttack << "\n";
-        cout << "Highest attack: " << monster.highestAttack << "\n";
-        cout << "Defense: " << monster.defense << "\n";
-        cout << "Magic defense: " << monster.magicDefense << "\n";
-        cout << "Strength: " << monster.strength << "\n";
-        cout << "Intelligence: " << monster.intelligence << "\n";
-        cout << "Agility: " << monster.agility << "\n";
-        cout << "Dexterity: " << monster.dexterity << "\n";
-        cout << "Vitality: " << monster.vitality << "\n";
-        cout << "Luck: " << monster.luck << "\n";
-        cout << "Attack range: " << monster.attackRange << "\n";
-        cout << "Spell range: " << monster.spellRange << "\n";
-        cout << "Sight range: " << monster.sightRange << "\n";
-        cout << "Neutral %: " << monster.neutralPercentage << "\n";
-        cout << "Water %: " << monster.waterPercentage << "\n";
-        cout << "Earth %: " << monster.earthPercentage << "\n";
-        cout << "Fire %: " << monster.firePercentage << "\n";
-        cout << "Wind %: " << monster.windPercentage << "\n";
-        cout << "Poison %: " << monster.poisonPercentage << "\n";
-        cout << "Holy %: " << monster.holyPercentage << "\n";
-        cout << "Shadow %: " << monster.shadowPercentage << "\n";
-        cout << "Ghost %: " << monster.ghostPercentage << "\n";
-        cout << "Undead %: " << monster.undeadPercentage << "\n";
-        cout << "Maps: {";
-        for (string const& map : monster.maps) {
-            cout << "[" << map << "], ";
-        }
-        cout << "}\n";
-        cout << "Modes: {";
-        for (string const& mode : monster.modes) {
-            cout << "[" << mode << "], ";
-        }
-        cout << "}\n";
-        cout << "Monster skills: {";
-        for (string const& monsterSkills : monster.monsterSkills) {
-            cout << "[" << monsterSkills << "], ";
-        }
-        cout << "}\n";
-        cout << "Drops with rates: {";
-        for (NameAndRate const& dropWithRate : monster.dropsWithRates) {
-            cout << "[" << dropWithRate.name << "," << dropWithRate.rate << "], ";
-        }
-        cout << "}\n";
-    }
-}
-
-void RagnarokOnline::printMapNameToRoMap() const {
-    for (auto const& mapNameToRoMap : m_mapNameToRoMap) {
-        cout << "Map name: " << mapNameToRoMap.first << "\n";
-        RoMap const& roMap(mapNameToRoMap.second);
-        cout << "Map full name: " << roMap.fullName << "\n";
-        cout << "Monsters: {";
-        for (MonsterDetailsOnRoMap const& monsterDetailsOnMap : roMap.monstersDetailsOnMap) {
-            cout << "[" << monsterDetailsOnMap.monsterName << "," << monsterDetailsOnMap.spawnCount << ","
-                 << monsterDetailsOnMap.spawnRate << "], ";
-        }
-        cout << "}\n";
-    }
-}
-
-void RagnarokOnline::printBuyingShopItems() const {
-    cout.precision(20);
-    for (auto const& shopItem : m_buyingShopItems) {
-        cout << "Shop item name: " << shopItem.first << "\n";
-        ShopItemDetail const& detail(shopItem.second);
-        cout << "Average price: " << detail.averagePrice << "\n";
-        cout << "Total number: " << detail.totalNumber << "\n";
-    }
-}
-
-void RagnarokOnline::printSellingShopItems() const {
-    cout.precision(20);
-    for (auto const& shopItem : m_sellingShopItems) {
-        cout << "Shop item name: " << shopItem.first << "\n";
-        ShopItemDetail const& detail(shopItem.second);
-        cout << "Average price: " << detail.averagePrice << "\n";
-        cout << "Total number: " << detail.totalNumber << "\n";
-    }
-}
-
 string RagnarokOnline::fixText(string const& text) {
     string fixedText(text);
     replaceAllAndReturnIfFound(fixedText, "<br>", " ");
@@ -1089,5 +1083,7 @@ istream& operator>>(istream& in, ItemNameToShopItemDetailMap& itemNameToShopItem
     reader.readMapData<string, ShopItemDetail>(itemNameToShopItemDetailMap);
     return in;
 }
+
+RagnarokOnline::RagnarokOnline() = default;
 
 }  // namespace alba

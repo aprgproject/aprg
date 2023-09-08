@@ -28,6 +28,9 @@ Differentiation::Differentiation(
     : m_nameOfVariableToDifferentiate(nameOfVariableToDifferentiate),
       m_namesOfDependentVariables(namesOfDependentVariables) {}
 
+Term Differentiation::differentiate(Constant const& constant) { return differentiateConstant(constant); }
+AlbaNumber Differentiation::differentiateConstant(Constant const&) { return 0; }
+
 Term Differentiation::differentiate(Term const& term) const {
     Term result;
     if (term.isConstant()) {
@@ -45,8 +48,6 @@ Term Differentiation::differentiate(Term const& term) const {
     }
     return result;
 }
-
-Term Differentiation::differentiate(Constant const& constant) { return differentiateConstant(constant); }
 
 Term Differentiation::differentiate(Variable const& variable) const {
     Term result(differentiateVariable(variable));
@@ -93,8 +94,6 @@ Equation Differentiation::differentiateMultipleTimes(Equation const& equation, i
     }
     return currentResult;
 }
-
-AlbaNumber Differentiation::differentiateConstant(Constant const&) { return 0; }
 
 Monomial Differentiation::differentiateVariable(Variable const& variable) const {
     Monomial result;
@@ -176,19 +175,97 @@ Term Differentiation::differentiateTwoDividedTerms(Term const& numerator, Term c
     return createExpressionIfPossible({resultNumerator, "/", resultDenominator});
 }
 
-void Differentiation::separateNonChangingAndChangingVariables(
-    Monomial& nonChangingVariablesAndConstant, Monomial& changingVariables, Monomial const& monomial) const {
-    nonChangingVariablesAndConstant = Monomial(monomial.getCoefficient(), {});
-    changingVariables = Monomial(1, {});
-    for (auto const& [variableName, exponent] : monomial.getVariablesToExponentsMap()) {
-        if (exponent != 0) {
-            if (isChangingVariableName(variableName)) {
-                changingVariables.putVariableWithExponent(variableName, exponent);
-            } else {
-                nonChangingVariablesAndConstant.putVariableWithExponent(variableName, exponent);
-            }
-        }
+Term Differentiation::differentiateFunctionOnly(Function const& functionObject) {
+    Term derivativeOfFunction(ALBA_NUMBER_NOT_A_NUMBER);
+    Term const& inputTerm(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
+    if ("abs" == functionObject.getFunctionName()) {
+        derivativeOfFunction = sgn(inputTerm);
+    } else if ("ln" == functionObject.getFunctionName()) {
+        derivativeOfFunction = createExpressionIfPossible({1, "/", inputTerm});
+    } else if ("log" == functionObject.getFunctionName()) {
+        derivativeOfFunction = createExpressionIfPossible({::log(10), "/", inputTerm});
+    } else if ("sin" == functionObject.getFunctionName()) {
+        derivativeOfFunction = cos(inputTerm);
+    } else if ("cos" == functionObject.getFunctionName()) {
+        derivativeOfFunction = createExpressionIfPossible({-1, "*", sin(inputTerm)});
+    } else if ("tan" == functionObject.getFunctionName()) {
+        derivativeOfFunction = createExpressionIfPossible({sec(inputTerm), "^", 2});
+    } else if ("csc" == functionObject.getFunctionName()) {
+        derivativeOfFunction = createExpressionIfPossible({-1, "*", csc(inputTerm), "*", cot(inputTerm)});
+    } else if ("sec" == functionObject.getFunctionName()) {
+        derivativeOfFunction = createExpressionIfPossible({sec(inputTerm), "*", tan(inputTerm)});
+    } else if ("cot" == functionObject.getFunctionName()) {
+        derivativeOfFunction = createExpressionIfPossible({-1, "*", csc(inputTerm), "^", 2});
+    } else if ("arcsin" == functionObject.getFunctionName()) {
+        Term oneMinusInputSquared(createExpressionIfPossible({1, "-", inputTerm, "^", 2}));
+        Term squareRootTerm(createExpressionIfPossible({oneMinusInputSquared, "^", AlbaNumber::createFraction(1, 2)}));
+        derivativeOfFunction = createExpressionIfPossible({1, "/", squareRootTerm});
+    } else if ("arccos" == functionObject.getFunctionName()) {
+        Term oneMinusInputSquared(createExpressionIfPossible({1, "-", inputTerm, "^", 2}));
+        Term squareRootTerm(createExpressionIfPossible({oneMinusInputSquared, "^", AlbaNumber::createFraction(1, 2)}));
+        derivativeOfFunction = createExpressionIfPossible({-1, "/", squareRootTerm});
+    } else if ("arctan" == functionObject.getFunctionName()) {
+        Term onePlusInputSquared(createExpressionIfPossible({1, "+", inputTerm, "^", 2}));
+        derivativeOfFunction = createExpressionIfPossible({1, "/", onePlusInputSquared});
+    } else if ("arccsc" == functionObject.getFunctionName()) {
+        Term inputSquaredMinusOne(createExpressionIfPossible({inputTerm, "^", 2, "-", 1}));
+        Term squareRootTerm(createExpressionIfPossible({inputSquaredMinusOne, "^", AlbaNumber::createFraction(1, 2)}));
+        derivativeOfFunction = createExpressionIfPossible({-1, "/", inputTerm, "/", squareRootTerm});
+    } else if ("arcsec" == functionObject.getFunctionName()) {
+        Term inputSquaredMinusOne(createExpressionIfPossible({inputTerm, "^", 2, "-", 1}));
+        Term squareRootTerm(createExpressionIfPossible({inputSquaredMinusOne, "^", AlbaNumber::createFraction(1, 2)}));
+        derivativeOfFunction = createExpressionIfPossible({1, "/", inputTerm, "/", squareRootTerm});
+    } else if ("arccot" == functionObject.getFunctionName()) {
+        Term onePlusInputSquared(createExpressionIfPossible({1, "+", inputTerm, "^", 2}));
+        derivativeOfFunction = createExpressionIfPossible({-1, "/", onePlusInputSquared});
+    } else if ("sinh" == functionObject.getFunctionName()) {
+        derivativeOfFunction = cosh(inputTerm);
+    } else if ("cosh" == functionObject.getFunctionName()) {
+        derivativeOfFunction = sinh(inputTerm);
+    } else if ("tanh" == functionObject.getFunctionName()) {
+        derivativeOfFunction = createExpressionIfPossible({sech(inputTerm), "^", 2});
+    } else if ("csch" == functionObject.getFunctionName()) {
+        derivativeOfFunction = createExpressionIfPossible({-1, "*", csch(inputTerm), "*", coth(inputTerm)});
+    } else if ("sech" == functionObject.getFunctionName()) {
+        derivativeOfFunction = createExpressionIfPossible({-1, "*", sech(inputTerm), "*", tanh(inputTerm)});
+    } else if ("coth" == functionObject.getFunctionName()) {
+        derivativeOfFunction = createExpressionIfPossible({-1, "*", csch(inputTerm), "^", 2});
     }
+    return derivativeOfFunction;
+}
+
+bool Differentiation::isVariableToDifferentiate(string const& variableName) const {
+    return variableName == m_nameOfVariableToDifferentiate;
+}
+
+bool Differentiation::isDependentVariable(string const& variableName) const {
+    return m_namesOfDependentVariables.find(variableName) != m_namesOfDependentVariables.cend();
+}
+
+bool Differentiation::isDerivativeVariableNameAndAffectedByThisDifferentiation(
+    DerivativeVariableName const& derivativeVariableName) const {
+    return derivativeVariableName.isValid() && isVariableToDifferentiate(derivativeVariableName.getBaseVariable()) &&
+           isDependentVariable(derivativeVariableName.getDependentVariable());
+}
+
+bool Differentiation::isChangingVariableName(string const& variableName) const {
+    bool result(false);
+    if (isVariableToDifferentiate(variableName) || isDependentVariable(variableName)) {
+        result = true;
+    } else {
+        DerivativeVariableName derivativeVariableName(variableName);
+        result = isDerivativeVariableNameAndAffectedByThisDifferentiation(derivativeVariableName);
+    }
+    return result;
+}
+
+bool Differentiation::isChangingTerm(Term const& term) const {
+    VariableNamesRetriever retriever;
+    retriever.retrieveFromTerm(term);
+    VariableNamesSet const& variableNames(retriever.getVariableNames());
+    return any_of(variableNames.cbegin(), variableNames.cend(), [&](string const& variableName) {
+        return isChangingVariableName(variableName);
+    });
 }
 
 Polynomial Differentiation::differentiateMonomialWithChangingVariables(Monomial const& changingVariables) const {
@@ -333,101 +410,23 @@ Term Differentiation::differentiateChangingTermRaiseToNonChangingTerm(Term const
     return createExpressionIfPossible({base, "^", exponent - 1, "*", exponent, "*", derivativeCauseOfChainRule});
 }
 
+void Differentiation::separateNonChangingAndChangingVariables(
+    Monomial& nonChangingVariablesAndConstant, Monomial& changingVariables, Monomial const& monomial) const {
+    nonChangingVariablesAndConstant = Monomial(monomial.getCoefficient(), {});
+    changingVariables = Monomial(1, {});
+    for (auto const& [variableName, exponent] : monomial.getVariablesToExponentsMap()) {
+        if (exponent != 0) {
+            if (isChangingVariableName(variableName)) {
+                changingVariables.putVariableWithExponent(variableName, exponent);
+            } else {
+                nonChangingVariablesAndConstant.putVariableWithExponent(variableName, exponent);
+            }
+        }
+    }
+}
+
 Term Differentiation::differentiateChangingTermRaiseToChangingTerm(Term const&, Term const&) {
     return ALBA_NUMBER_NOT_A_NUMBER;
-}
-
-Term Differentiation::differentiateFunctionOnly(Function const& functionObject) {
-    Term derivativeOfFunction(ALBA_NUMBER_NOT_A_NUMBER);
-    Term const& inputTerm(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
-    if ("abs" == functionObject.getFunctionName()) {
-        derivativeOfFunction = sgn(inputTerm);
-    } else if ("ln" == functionObject.getFunctionName()) {
-        derivativeOfFunction = createExpressionIfPossible({1, "/", inputTerm});
-    } else if ("log" == functionObject.getFunctionName()) {
-        derivativeOfFunction = createExpressionIfPossible({::log(10), "/", inputTerm});
-    } else if ("sin" == functionObject.getFunctionName()) {
-        derivativeOfFunction = cos(inputTerm);
-    } else if ("cos" == functionObject.getFunctionName()) {
-        derivativeOfFunction = createExpressionIfPossible({-1, "*", sin(inputTerm)});
-    } else if ("tan" == functionObject.getFunctionName()) {
-        derivativeOfFunction = createExpressionIfPossible({sec(inputTerm), "^", 2});
-    } else if ("csc" == functionObject.getFunctionName()) {
-        derivativeOfFunction = createExpressionIfPossible({-1, "*", csc(inputTerm), "*", cot(inputTerm)});
-    } else if ("sec" == functionObject.getFunctionName()) {
-        derivativeOfFunction = createExpressionIfPossible({sec(inputTerm), "*", tan(inputTerm)});
-    } else if ("cot" == functionObject.getFunctionName()) {
-        derivativeOfFunction = createExpressionIfPossible({-1, "*", csc(inputTerm), "^", 2});
-    } else if ("arcsin" == functionObject.getFunctionName()) {
-        Term oneMinusInputSquared(createExpressionIfPossible({1, "-", inputTerm, "^", 2}));
-        Term squareRootTerm(createExpressionIfPossible({oneMinusInputSquared, "^", AlbaNumber::createFraction(1, 2)}));
-        derivativeOfFunction = createExpressionIfPossible({1, "/", squareRootTerm});
-    } else if ("arccos" == functionObject.getFunctionName()) {
-        Term oneMinusInputSquared(createExpressionIfPossible({1, "-", inputTerm, "^", 2}));
-        Term squareRootTerm(createExpressionIfPossible({oneMinusInputSquared, "^", AlbaNumber::createFraction(1, 2)}));
-        derivativeOfFunction = createExpressionIfPossible({-1, "/", squareRootTerm});
-    } else if ("arctan" == functionObject.getFunctionName()) {
-        Term onePlusInputSquared(createExpressionIfPossible({1, "+", inputTerm, "^", 2}));
-        derivativeOfFunction = createExpressionIfPossible({1, "/", onePlusInputSquared});
-    } else if ("arccsc" == functionObject.getFunctionName()) {
-        Term inputSquaredMinusOne(createExpressionIfPossible({inputTerm, "^", 2, "-", 1}));
-        Term squareRootTerm(createExpressionIfPossible({inputSquaredMinusOne, "^", AlbaNumber::createFraction(1, 2)}));
-        derivativeOfFunction = createExpressionIfPossible({-1, "/", inputTerm, "/", squareRootTerm});
-    } else if ("arcsec" == functionObject.getFunctionName()) {
-        Term inputSquaredMinusOne(createExpressionIfPossible({inputTerm, "^", 2, "-", 1}));
-        Term squareRootTerm(createExpressionIfPossible({inputSquaredMinusOne, "^", AlbaNumber::createFraction(1, 2)}));
-        derivativeOfFunction = createExpressionIfPossible({1, "/", inputTerm, "/", squareRootTerm});
-    } else if ("arccot" == functionObject.getFunctionName()) {
-        Term onePlusInputSquared(createExpressionIfPossible({1, "+", inputTerm, "^", 2}));
-        derivativeOfFunction = createExpressionIfPossible({-1, "/", onePlusInputSquared});
-    } else if ("sinh" == functionObject.getFunctionName()) {
-        derivativeOfFunction = cosh(inputTerm);
-    } else if ("cosh" == functionObject.getFunctionName()) {
-        derivativeOfFunction = sinh(inputTerm);
-    } else if ("tanh" == functionObject.getFunctionName()) {
-        derivativeOfFunction = createExpressionIfPossible({sech(inputTerm), "^", 2});
-    } else if ("csch" == functionObject.getFunctionName()) {
-        derivativeOfFunction = createExpressionIfPossible({-1, "*", csch(inputTerm), "*", coth(inputTerm)});
-    } else if ("sech" == functionObject.getFunctionName()) {
-        derivativeOfFunction = createExpressionIfPossible({-1, "*", sech(inputTerm), "*", tanh(inputTerm)});
-    } else if ("coth" == functionObject.getFunctionName()) {
-        derivativeOfFunction = createExpressionIfPossible({-1, "*", csch(inputTerm), "^", 2});
-    }
-    return derivativeOfFunction;
-}
-
-bool Differentiation::isVariableToDifferentiate(string const& variableName) const {
-    return variableName == m_nameOfVariableToDifferentiate;
-}
-
-bool Differentiation::isDependentVariable(string const& variableName) const {
-    return m_namesOfDependentVariables.find(variableName) != m_namesOfDependentVariables.cend();
-}
-
-bool Differentiation::isDerivativeVariableNameAndAffectedByThisDifferentiation(
-    DerivativeVariableName const& derivativeVariableName) const {
-    return derivativeVariableName.isValid() && isVariableToDifferentiate(derivativeVariableName.getBaseVariable()) &&
-           isDependentVariable(derivativeVariableName.getDependentVariable());
-}
-
-bool Differentiation::isChangingVariableName(string const& variableName) const {
-    bool result(false);
-    if (isVariableToDifferentiate(variableName) || isDependentVariable(variableName)) {
-        result = true;
-    } else {
-        DerivativeVariableName derivativeVariableName(variableName);
-        result = isDerivativeVariableNameAndAffectedByThisDifferentiation(derivativeVariableName);
-    }
-    return result;
-}
-
-bool Differentiation::isChangingTerm(Term const& term) const {
-    VariableNamesRetriever retriever;
-    retriever.retrieveFromTerm(term);
-    VariableNamesSet const& variableNames(retriever.getVariableNames());
-    return any_of(variableNames.cbegin(), variableNames.cend(), [&](string const& variableName) {
-        return isChangingVariableName(variableName);
-    });
 }
 
 }  // namespace alba::algebra

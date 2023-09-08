@@ -25,7 +25,6 @@ bool isGaussDivergenceTheoremInAPlaneTrue(
     // This is just an example of Gauss Divergence Theorem.
     // Gauss Divergence Theorem relates surface area to divergence of volume
     // This is always true
-
     // Line Integral result
     SubstitutionOfVariablesToTerms substitution;
     for (int i = 0; i < 2; ++i) {
@@ -53,9 +52,7 @@ bool isStokesTheoremInAPlaneTrue(
     DetailsForDefiniteIntegralWithTerms const& areaDetailsInY, ArrayOfTwoStrings const& coordinateVariables) {
     // This is just an example of Stokes Theorem.
     // Stokes Theorem relates line integral to surface area
-
     // This is always true
-
     // Line Integral result
     SubstitutionOfVariablesToTerms substitution;
     for (int i = 0; i < 2; ++i) {
@@ -111,7 +108,6 @@ Term getLineIntegralOfAClosedNonIntersectingPathUsingGreensTheorem(
     DetailsForDefiniteIntegralWithTerms const& yDetailsForLinePath) {
     // Green's Theorem is only usable on a line path that is closed and simple (non intersecting)
     // Green's Theorem relates line integral to area
-
     Term partialDerivativeOfYOnX(getPartialDerivative(vectorField.getValueAt(1), coordinateVariables[0]));
     Term partialDerivativeOfXOnY(getPartialDerivative(vectorField.getValueAt(0), coordinateVariables[1]));
     Term termToIntegrateForArea(partialDerivativeOfYOnX - partialDerivativeOfXOnY);
@@ -123,7 +119,6 @@ Term getAreaOfAClosedNonIntersectingPathUsingGreensTheorem(
     DetailsForDefiniteIntegralWithTerms const& linePathIntegralDetails) {
     // Green's Theorem is only usable on a line path that is closed and simple (non intersecting)
     // Green's Theorem relates area to line integral
-
     MathVectorOfTwoTerms vectorField{coordinateVariables[1] * -1, coordinateVariables[0]};
     return getLineIntegral<2>(vectorField, coordinateVariables, linePath, linePathIntegralDetails) / 2;
 }
@@ -194,12 +189,6 @@ MathVectorOfThreeTerms getCurl(
     return MathVectorOfThreeTerms{xValue, yValue, zValue};
 }
 
-void simplifyForTermInVector(Term& term) {
-    Simplification::simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(term);
-    term.clearAllInnerSimplifiedFlags();
-    term.simplify();
-}
-
 SegregateTermsByConditionInAdditionAndSubtractionRetriever getRetrieverForComparison(
     Term const& termToAnalyze, string const& coordinateVariableName, strings const& processedCoordinates) {
     SegregateTermsByConditionInAdditionAndSubtractionRetriever::ConditionFunction condition =
@@ -220,6 +209,12 @@ SegregateTermsByConditionInAdditionAndSubtractionRetriever getRetrieverForCompar
     SegregateTermsByConditionInAdditionAndSubtractionRetriever retriever(condition);
     retriever.retrieveFromTerm(termToAnalyze);
     return retriever;
+}
+
+void simplifyForTermInVector(Term& term) {
+    Simplification::simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(term);
+    term.clearAllInnerSimplifiedFlags();
+    term.simplify();
 }
 
 void retrieveWithAndWithoutOtherCoordinates(

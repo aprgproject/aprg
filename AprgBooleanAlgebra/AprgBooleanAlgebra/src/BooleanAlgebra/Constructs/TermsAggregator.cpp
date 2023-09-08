@@ -13,49 +13,36 @@ using namespace std;
 namespace alba::booleanAlgebra {
 
 TermsAggregator::TermsAggregator(Terms const& terms) : m_terms(terms) {}
-
 Terms const& TermsAggregator::getTermsConstReference() const { return m_terms; }
-
 void TermsAggregator::buildExpressionFromTerms() { traverse(AggregatorTraverseSteps::BuildExpression); }
-
 void TermsAggregator::simplifyTerms() { traverse(AggregatorTraverseSteps::Simplify); }
 
-void TermsAggregator::traverse(AggregatorTraverseSteps const traverseSteps) {
-    bool continueToCombine(true);
-    while (continueToCombine) {
-        updateStartIndexAndEndIndexAndCheckOpeningAndClosingOperators();
-        bool continueToTraverse(true);
-        while (continueToTraverse) {
-            continueToTraverse =
-                traverseOnOperatorIndexesAndReturnIfContinue(traverseSteps, OperatorInputType::UnaryOperation);
-            if (!continueToTraverse) {
-                continueToTraverse =
-                    traverseOnOperatorIndexesAndReturnIfContinue(traverseSteps, OperatorInputType::BinaryOperation);
-            }
-        }
-        continueToCombine = combineOpeningClosingOperatorsAtStartEndIndexesAndReturnIfCombined();
+bool TermsAggregator::hasNoValueBeforeThisIndex(int const index) const {
+    bool result(false);
+    if (index == 0) {
+        result = true;
+    } else if (index - 1 < static_cast<int>(m_terms.size())) {
+        result = !isNonEmptyOrNonOperatorType(m_terms[index - 1]);
     }
+    return result;
 }
 
-void TermsAggregator::updateStartIndexAndEndIndexAndCheckOpeningAndClosingOperators() {
-    m_startIndex = 0;
-    m_endIndex = 0;
-    if (!m_terms.empty()) {
-        m_endIndex = m_terms.size() - 1;
-    }
-    for (int i = 0; i < static_cast<int>(m_terms.size()); ++i) {
+TermsAggregator::Indexes TermsAggregator::getNextOperatorIndexes(OperatorInputType const operatorInputType) const {
+    Indexes operatorIndexes;
+    multimap<int, int> operatorLevelToIndexMap;
+    for (int i = m_startIndex; i < m_endIndex; ++i) {
         Term const& term(m_terms[i]);
         if (term.isOperator()) {
             Operator const& operatorTerm(term.getOperatorConstReference());
-            if (operatorTerm.isOpeningGroupOperator()) {
-                m_startIndex = i;
-                m_endIndex = i;
-            } else if (operatorTerm.isClosingGroupOperator()) {
-                m_endIndex = i;
-                break;
+            if (operatorTerm.isSameOperatorInputType(operatorInputType)) {
+                operatorLevelToIndexMap.emplace(getOperatorTypeInversePriority(operatorTerm.getOperatorType()), i);
             }
         }
     }
+    for (auto const& [_, index] : operatorLevelToIndexMap) {
+        operatorIndexes.emplace_back(index);
+    }
+    return operatorIndexes;
 }
 
 bool TermsAggregator::combineOpeningClosingOperatorsAtStartEndIndexesAndReturnIfCombined() {
@@ -122,24 +109,6 @@ bool TermsAggregator::performTraverseStepsWithUnaryOperationAndReturnIfContinue(
         continueToTraverse = simplifyUnaryOperationAndReturnIfSimplified(nextOperatorIndex);
     }
     return continueToTraverse;
-}
-
-TermsAggregator::Indexes TermsAggregator::getNextOperatorIndexes(OperatorInputType const operatorInputType) const {
-    Indexes operatorIndexes;
-    multimap<int, int> operatorLevelToIndexMap;
-    for (int i = m_startIndex; i < m_endIndex; ++i) {
-        Term const& term(m_terms[i]);
-        if (term.isOperator()) {
-            Operator const& operatorTerm(term.getOperatorConstReference());
-            if (operatorTerm.isSameOperatorInputType(operatorInputType)) {
-                operatorLevelToIndexMap.emplace(getOperatorTypeInversePriority(operatorTerm.getOperatorType()), i);
-            }
-        }
-    }
-    for (auto const& [_, index] : operatorLevelToIndexMap) {
-        operatorIndexes.emplace_back(index);
-    }
-    return operatorIndexes;
 }
 
 bool TermsAggregator::buildExpressionWithBinaryOperationAndReturnIfBuilt(int const index) {
@@ -210,14 +179,42 @@ bool TermsAggregator::simplifyUnaryOperationAndReturnIfSimplified(int const inde
     return isSimplified;
 }
 
-bool TermsAggregator::hasNoValueBeforeThisIndex(int const index) const {
-    bool result(false);
-    if (index == 0) {
-        result = true;
-    } else if (index - 1 < static_cast<int>(m_terms.size())) {
-        result = !isNonEmptyOrNonOperatorType(m_terms[index - 1]);
+void TermsAggregator::updateStartIndexAndEndIndexAndCheckOpeningAndClosingOperators() {
+    m_startIndex = 0;
+    m_endIndex = 0;
+    if (!m_terms.empty()) {
+        m_endIndex = m_terms.size() - 1;
     }
-    return result;
+    for (int i = 0; i < static_cast<int>(m_terms.size()); ++i) {
+        Term const& term(m_terms[i]);
+        if (term.isOperator()) {
+            Operator const& operatorTerm(term.getOperatorConstReference());
+            if (operatorTerm.isOpeningGroupOperator()) {
+                m_startIndex = i;
+                m_endIndex = i;
+            } else if (operatorTerm.isClosingGroupOperator()) {
+                m_endIndex = i;
+                break;
+            }
+        }
+    }
+}
+
+void TermsAggregator::traverse(AggregatorTraverseSteps const traverseSteps) {
+    bool continueToCombine(true);
+    while (continueToCombine) {
+        updateStartIndexAndEndIndexAndCheckOpeningAndClosingOperators();
+        bool continueToTraverse(true);
+        while (continueToTraverse) {
+            continueToTraverse =
+                traverseOnOperatorIndexesAndReturnIfContinue(traverseSteps, OperatorInputType::UnaryOperation);
+            if (!continueToTraverse) {
+                continueToTraverse =
+                    traverseOnOperatorIndexesAndReturnIfContinue(traverseSteps, OperatorInputType::BinaryOperation);
+            }
+        }
+        continueToCombine = combineOpeningClosingOperatorsAtStartEndIndexesAndReturnIfCombined();
+    }
 }
 
 void TermsAggregator::eraseAndThenInsert(int const firstIndex, int const secondIndex, Term const& term) {

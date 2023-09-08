@@ -97,7 +97,6 @@ IntegerCoefficient getMultinomialCoefficient(
     //  k1+k2+...+km = n.
     // Multinomial coefficients can be seen as a generalization of binomial cofficients;
     // if m=2, the above formula corresponds to the binomial coefficient formula.
-
     IntegerCoefficient numerator(getFactorial(power));
     IntegerCoefficient denominator(1);
     for (IntegerCoefficient const variableExponent : variableExponents) {
@@ -171,7 +170,6 @@ AlbaNumber getRemainderForOneVariablePolynomialDividedByVariableMinusConstantVal
     // In algebra, the polynomial remainder theorem is an application of Euclidean division of polynomials.
     // It states that the remainder of the division of a polynomial f(x) by a linear polynomial x-r is equal to f(r).
     // In particular, x−r is a divisor of f(x) if and only if f(r) = 0, a property known as the factor theorem.
-
     AlbaNumber remainder;
     string singleVariableName = getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(polynomial);
     if (!singleVariableName.empty()) {
@@ -190,7 +188,6 @@ AlbaNumber getEvaluatedValueUsingHornersSubstitutionOfOneVariablePolynomial(
     // https://en.wikipedia.org/wiki/Horner%27s_method
     // The algorithm is based on Horner's rule:
     // // c0 + c1*x + c2*x^2 + c3*x^3 + ... + cn*x^n = c0 + x(c1 + x(c2 + x(c3 +... + x(cn−1 + x*cn ) ... ) ) ).
-
     string singleVariableName = getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(polynomial);
     if (!singleVariableName.empty()) {
         AlbaNumber result;

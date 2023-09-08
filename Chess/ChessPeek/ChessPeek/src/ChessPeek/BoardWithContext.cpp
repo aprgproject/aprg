@@ -17,8 +17,9 @@ BoardWithContext::BoardWithContext(PieceColor const& playerColor, Board const& b
     updateBoardDetails();
 }
 
+bool BoardWithContext::isPlayersKingOnCheck() const { return m_board.canBeCaptured(getPlayerKingCoordinate()); }
+bool BoardWithContext::isOpponentsKingOnCheck() const { return m_board.canBeCaptured(getOpponentsKingCoordinate()); }
 PieceColor BoardWithContext::getPlayerColor() const { return m_playerColor; }
-
 Board const& BoardWithContext::getBoard() const { return m_board; }
 
 string BoardWithContext::getFenString() const {
@@ -44,10 +45,6 @@ Coordinate BoardWithContext::getOpponentsKingCoordinate() const {
     }
     return result;
 }
-
-bool BoardWithContext::isPlayersKingOnCheck() const { return m_board.canBeCaptured(getPlayerKingCoordinate()); }
-
-bool BoardWithContext::isOpponentsKingOnCheck() const { return m_board.canBeCaptured(getOpponentsKingCoordinate()); }
 
 void BoardWithContext::save(PieceColor const& playerColor, Board const& board) {
     m_playerColor = playerColor;
@@ -85,7 +82,6 @@ void BoardWithContext::updateBoardDetails() {
 }
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

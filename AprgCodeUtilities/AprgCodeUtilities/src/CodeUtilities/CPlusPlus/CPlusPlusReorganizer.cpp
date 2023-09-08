@@ -7,6 +7,7 @@
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/Print/AlbaLogPrints.hpp>
 
+#include <algorithm>
 #include <iostream>
 
 using namespace std;
@@ -14,8 +15,6 @@ using namespace alba::CodeUtilities::CPlusPlusUtilities;
 using namespace alba::stringHelper;
 
 namespace alba::CodeUtilities {
-
-CPlusPlusReorganizer::CPlusPlusReorganizer() = default;
 
 void CPlusPlusReorganizer::processDirectory(string const& directory) {
     AlbaLocalPathHandler directoryPathHandler(directory);
@@ -62,6 +61,132 @@ void CPlusPlusReorganizer::reorganizeFile(string const& file) {
     m_terms = getTermsFromFile(filePathHandler.getFullPath());
     processTerms();
     writeAllTerms(filePathHandler.getFullPath(), m_terms);
+}
+
+bool CPlusPlusReorganizer::shouldReorganizeInThisScope(ScopeDetail const& scope) {
+    return scope.scopeType == ScopeType::ClassDeclaration || scope.scopeType == ScopeType::Namespace;
+}
+
+bool CPlusPlusReorganizer::shouldConnectToPreviousItem(Terms const& scopeHeaderTerms) {
+    bool isEmpty(scopeHeaderTerms.empty());
+    bool hasNoInvalidKeyword = all_of(scopeHeaderTerms.cbegin(), scopeHeaderTerms.cend(), [](Term const& term) {
+        return term.getTermType() != TermType::Keyword || term.getContent() == "const_cast" ||
+               term.getContent() == "dynamic_cast" || term.getContent() == "reinterpret_cast" ||
+               term.getContent() == "static_cast";
+    });
+    bool hasCommaAtTheStart = !checkPatternAt(scopeHeaderTerms, 0, Patterns{{M(",")}}).empty();
+    return isEmpty || (hasNoInvalidKeyword && hasCommaAtTheStart);
+}
+
+bool CPlusPlusReorganizer::hasEndBrace(string const& content) {
+    Terms termsToCheck(getTermsFromString(content));
+    Indexes hitIndexes = checkMatcherAtBackwards(termsToCheck, static_cast<int>(termsToCheck.size()) - 1, M("}"));
+    return !hitIndexes.empty();
+}
+
+int CPlusPlusReorganizer::getIndexAtClosingString(
+    Terms const& terms, int const openingIndex, string const& openingString, string const& closingString) {
+    Patterns searchPatterns{{M(openingString)}, {M(closingString)}};
+    int endIndex = openingIndex + 1;
+    int numberOfOpenings = 1;
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForPatternsForwards(terms, endIndex, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            int firstHitIndex = hitIndexes.front();
+            Term const& firstTerm(terms[firstHitIndex]);
+            if (firstTerm.getContent() == openingString) {
+                endIndex = firstHitIndex + 1;
+                ++numberOfOpenings;
+            } else if (firstTerm.getContent() == closingString) {
+                endIndex = firstHitIndex + 1;
+                if (--numberOfOpenings == 0) {
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+    return endIndex;
+}
+
+int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
+    int endIndex = index;
+    Patterns searchPatterns{{M(TermType::WhiteSpace), M(MatcherType::Comment)}, {M(MatcherType::Comment)}};
+    Indexes hitIndexes = checkPatternAt(m_terms, index + 1, searchPatterns);
+    if (!hitIndexes.empty()) {
+        int firstHitIndex = hitIndexes.front();
+        int lastHitIndex = hitIndexes.back();
+        Term const& firstTerm(m_terms[firstHitIndex]);
+        Term const& lastTerm(m_terms[lastHitIndex]);
+        if (firstTerm == M(TermType::WhiteSpace) && lastTerm == M(MatcherType::Comment) && !hasNewLine(firstTerm)) {
+            endIndex = lastHitIndex;
+        }
+        if (firstTerm == M(MatcherType::Comment)) {
+            endIndex = firstHitIndex;
+        }
+    }
+    return endIndex;
+}
+
+CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
+    int const scopeHeaderStart, int const openingBraceIndex) const {
+    string scopeHeader(getContents(scopeHeaderStart, openingBraceIndex - 1));
+    Terms scopeHeaderTerms(getTermsFromString(scopeHeader));
+    ScopeDetail scopeDetail{scopeHeaderStart, openingBraceIndex, 0, ScopeType::Unknown, {}, {}};
+    Patterns searchPatterns{
+        {M("template"), M("<")},
+        {M("namespace"), M(TermType::Identifier)},
+        {M("class"), M(TermType::Identifier)},
+        {M("struct"), M(TermType::Identifier)},
+        {M("union"), M(TermType::Identifier)}};
+    int lastProcessedIndex = 0;
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForPatternsForwards(scopeHeaderTerms, lastProcessedIndex, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            int firstHitIndex = hitIndexes.front();
+            int lastHitIndex = hitIndexes.back();
+            Term const& firstTerm(scopeHeaderTerms[firstHitIndex]);
+            Term const& lastTerm(scopeHeaderTerms[lastHitIndex]);
+            if (firstTerm.getContent() == "namespace") {
+                scopeDetail.scopeType = ScopeType::Namespace;
+                scopeDetail.name = lastTerm.getContent();
+                break;
+            }
+            if (firstTerm.getContent() == "class" || firstTerm.getContent() == "struct" ||
+                firstTerm.getContent() == "union") {
+                scopeDetail.scopeType = ScopeType::ClassDeclaration;
+                scopeDetail.name = lastTerm.getContent();
+                break;
+            }
+            if (firstTerm.getContent() == "template" && lastTerm.getContent() == "<") {
+                lastProcessedIndex = getIndexAtClosingString(scopeHeaderTerms, lastHitIndex, "<", ">");
+            } else {
+                lastProcessedIndex = lastHitIndex + 1;
+            }
+        }
+    }
+    return scopeDetail;
+}
+
+strings CPlusPlusReorganizer::getScopeNames() const {
+    strings result;
+    for (ScopeDetail const& scopeDetail : m_scopeDetails) {
+        if (!scopeDetail.name.empty()) {
+            result.emplace_back(scopeDetail.name);
+        }
+    }
+    return result;
+}
+
+strings CPlusPlusReorganizer::getSavedSignatures() const { return m_headerInformation.signatures; }
+
+string CPlusPlusReorganizer::getContents(int const start, int const end) const {
+    return getStringWithoutStartingAndTrailingWhiteSpace(getCombinedContents(m_terms, start, end));
 }
 
 void CPlusPlusReorganizer::gatherInformationFromFile(string const& file) {
@@ -215,10 +340,6 @@ void CPlusPlusReorganizer::exitScope(int& lastProcessedIndex, int const closingB
     }
 }
 
-bool CPlusPlusReorganizer::shouldReorganizeInThisScope(ScopeDetail const& scope) {
-    return scope.scopeType == ScopeType::ClassDeclaration || scope.scopeType == ScopeType::Namespace;
-}
-
 void CPlusPlusReorganizer::addItemIfNeeded(int const startIndex, int const endIndex) {
     string content = getContents(startIndex, endIndex);
     if (!content.empty() && shouldReorganizeInThisScope(m_scopeDetails.back())) {
@@ -236,126 +357,6 @@ void CPlusPlusReorganizer::addItemIfNeeded(int const startIndex, int const endIn
     }
 }
 
-int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
-    int endIndex = index;
-    Patterns searchPatterns{{M(TermType::WhiteSpace), M(MatcherType::Comment)}, {M(MatcherType::Comment)}};
-    Indexes hitIndexes = checkPatternAt(m_terms, index + 1, searchPatterns);
-    if (!hitIndexes.empty()) {
-        int firstHitIndex = hitIndexes.front();
-        int lastHitIndex = hitIndexes.back();
-        Term const& firstTerm(m_terms[firstHitIndex]);
-        Term const& lastTerm(m_terms[lastHitIndex]);
-        if (firstTerm == M(TermType::WhiteSpace) && lastTerm == M(MatcherType::Comment) && !hasNewLine(firstTerm)) {
-            endIndex = lastHitIndex;
-        }
-        if (firstTerm == M(MatcherType::Comment)) {
-            endIndex = firstHitIndex;
-        }
-    }
-    return endIndex;
-}
-
-int CPlusPlusReorganizer::getIndexAtClosingString(
-    Terms const& terms, int const openingIndex, string const& openingString, string const& closingString) {
-    Patterns searchPatterns{{M(openingString)}, {M(closingString)}};
-    int endIndex = openingIndex + 1;
-    int numberOfOpenings = 1;
-    bool isFound(true);
-    while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(terms, endIndex, searchPatterns);
-        isFound = !hitIndexes.empty();
-        if (isFound) {
-            int firstHitIndex = hitIndexes.front();
-            Term const& firstTerm(terms[firstHitIndex]);
-            if (firstTerm.getContent() == openingString) {
-                endIndex = firstHitIndex + 1;
-                ++numberOfOpenings;
-            } else if (firstTerm.getContent() == closingString) {
-                endIndex = firstHitIndex + 1;
-                if (--numberOfOpenings == 0) {
-                    break;
-                }
-            } else {
-                break;
-            }
-        }
-    }
-    return endIndex;
-}
-
-bool CPlusPlusReorganizer::shouldConnectToPreviousItem(Terms const& scopeHeaderTerms) {
-    bool isEmpty(scopeHeaderTerms.empty());
-    bool hasNoInvalidKeyword = all_of(scopeHeaderTerms.cbegin(), scopeHeaderTerms.cend(), [](Term const& term) {
-        return term.getTermType() != TermType::Keyword || term.getContent() == "const_cast" ||
-               term.getContent() == "dynamic_cast" || term.getContent() == "reinterpret_cast" ||
-               term.getContent() == "static_cast";
-    });
-    bool hasCommaAtTheStart = !checkPatternAt(scopeHeaderTerms, 0, Patterns{{M(",")}}).empty();
-    return isEmpty || (hasNoInvalidKeyword && hasCommaAtTheStart);
-}
-
-CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
-    int const scopeHeaderStart, int const openingBraceIndex) const {
-    string scopeHeader(getContents(scopeHeaderStart, openingBraceIndex - 1));
-    Terms scopeHeaderTerms(getTermsFromString(scopeHeader));
-    ScopeDetail scopeDetail{scopeHeaderStart, openingBraceIndex, 0, ScopeType::Unknown, {}, {}};
-    Patterns searchPatterns{
-        {M("template"), M("<")},
-        {M("namespace"), M(TermType::Identifier)},
-        {M("class"), M(TermType::Identifier)},
-        {M("struct"), M(TermType::Identifier)},
-        {M("union"), M(TermType::Identifier)}};
-    int lastProcessedIndex = 0;
-    bool isFound(true);
-    while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(scopeHeaderTerms, lastProcessedIndex, searchPatterns);
-        isFound = !hitIndexes.empty();
-        if (isFound) {
-            int firstHitIndex = hitIndexes.front();
-            int lastHitIndex = hitIndexes.back();
-            Term const& firstTerm(scopeHeaderTerms[firstHitIndex]);
-            Term const& lastTerm(scopeHeaderTerms[lastHitIndex]);
-            if (firstTerm.getContent() == "namespace") {
-                scopeDetail.scopeType = ScopeType::Namespace;
-                scopeDetail.name = lastTerm.getContent();
-                break;
-            }
-            if (firstTerm.getContent() == "class" || firstTerm.getContent() == "struct" ||
-                firstTerm.getContent() == "union") {
-                scopeDetail.scopeType = ScopeType::ClassDeclaration;
-                scopeDetail.name = lastTerm.getContent();
-                break;
-            }
-            if (firstTerm.getContent() == "template" && lastTerm.getContent() == "<") {
-                lastProcessedIndex = getIndexAtClosingString(scopeHeaderTerms, lastHitIndex, "<", ">");
-            } else {
-                lastProcessedIndex = lastHitIndex + 1;
-            }
-        }
-    }
-    return scopeDetail;
-}
-
-bool CPlusPlusReorganizer::hasEndBrace(string const& content) {
-    Terms termsToCheck(getTermsFromString(content));
-    Indexes hitIndexes = checkMatcherAtBackwards(termsToCheck, static_cast<int>(termsToCheck.size()) - 1, M("}"));
-    return !hitIndexes.empty();
-}
-
-strings CPlusPlusReorganizer::getScopeNames() const {
-    strings result;
-    for (ScopeDetail const& scopeDetail : m_scopeDetails) {
-        if (!scopeDetail.name.empty()) {
-            result.emplace_back(scopeDetail.name);
-        }
-    }
-    return result;
-}
-
-strings CPlusPlusReorganizer::getSavedSignatures() const { return m_headerInformation.signatures; }
-
-string CPlusPlusReorganizer::getContents(int const start, int const end) const {
-    return getStringWithoutStartingAndTrailingWhiteSpace(getCombinedContents(m_terms, start, end));
-}
+CPlusPlusReorganizer::CPlusPlusReorganizer() = default;
 
 }  // namespace alba::CodeUtilities

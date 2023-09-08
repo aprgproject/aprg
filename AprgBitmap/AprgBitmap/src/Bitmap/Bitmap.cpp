@@ -5,7 +5,6 @@ using namespace std;
 namespace alba::AprgBitmap {
 
 Bitmap::Bitmap(string const& path) { m_configuration.readBitmap(path); }
-
 BitmapConfiguration Bitmap::getConfiguration() const { return m_configuration; }
 
 BitmapSnippet Bitmap::createColorFilledSnippetWithSizeOfWholeBitmap(uint8_t const colorByte) const {
@@ -103,6 +102,17 @@ void Bitmap::setSnippetWriteToFile(BitmapSnippet const& snippet) const {
     }
 }
 
+void Bitmap::adjustToTargetLength(int& low, int& high, int const targetLength, int const maxLength) {
+    if (high - low + 1 < targetLength) {
+        int additionalSizeInX = targetLength - (high - low + 1);
+        if ((low - additionalSizeInX) >= 0) {
+            low = low - additionalSizeInX;
+        } else if ((high + additionalSizeInX) < maxLength) {
+            high = high + additionalSizeInX;
+        }
+    }
+}
+
 void Bitmap::calculateNewCornersBasedOnCenterAndNumberOfBytes(
     BitmapXY& topLeftCorner, BitmapXY& bottomRightCorner, BitmapXY const center, int const numberOfBytes) const {
     int side(static_cast<int>(m_configuration.getEstimatedSquareSideInPixels(numberOfBytes)));
@@ -127,17 +137,6 @@ void Bitmap::calculateNewCornersBasedOnCenterAndNumberOfBytes(
     topLeftCorner.setY(top);
     bottomRightCorner.setX(right);
     bottomRightCorner.setY(bottom);
-}
-
-void Bitmap::adjustToTargetLength(int& low, int& high, int const targetLength, int const maxLength) {
-    if (high - low + 1 < targetLength) {
-        int additionalSizeInX = targetLength - (high - low + 1);
-        if ((low - additionalSizeInX) >= 0) {
-            low = low - additionalSizeInX;
-        } else if ((high + additionalSizeInX) < maxLength) {
-            high = high + additionalSizeInX;
-        }
-    }
 }
 
 }  // namespace alba::AprgBitmap

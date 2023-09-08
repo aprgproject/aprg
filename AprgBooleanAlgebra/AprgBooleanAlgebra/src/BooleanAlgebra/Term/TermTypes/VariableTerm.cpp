@@ -10,18 +10,12 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
-VariableTerm::VariableTerm() : m_isNegated(false) {}
-
 VariableTerm::VariableTerm(string const& variableName)
     : m_variableName(getStringWithoutStartingAndTrailingWhiteSpace(variableName)), m_isNegated(false) {
     initializeIfNotEmpty();
 }
 
-VariableTerm VariableTerm::createNegatedVariableTerm(string const& variableName) {
-    VariableTerm result(variableName);
-    result.negate();
-    return result;
-}
+VariableTerm::VariableTerm() : m_isNegated(false) {}
 
 bool VariableTerm::operator==(VariableTerm const& second) const {
     return m_variableName == second.m_variableName && m_isNegated == second.m_isNegated;
@@ -45,12 +39,15 @@ VariableTerm VariableTerm::operator~() const {
     return result;
 }
 
+VariableTerm VariableTerm::createNegatedVariableTerm(string const& variableName) {
+    VariableTerm result(variableName);
+    result.negate();
+    return result;
+}
+
 bool VariableTerm::isNegated() const { return m_isNegated; }
-
 string VariableTerm::getVariableTermName() const { return m_variableName; }
-
 void VariableTerm::setVariableTermName(string const& variableName) { m_variableName = variableName; }
-
 void VariableTerm::negate() { m_isNegated = !m_isNegated; }
 
 void VariableTerm::initializeIfNotEmpty() {

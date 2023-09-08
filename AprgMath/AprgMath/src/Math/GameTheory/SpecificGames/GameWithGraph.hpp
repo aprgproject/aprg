@@ -14,16 +14,13 @@ public:
     using Vertices = std::vector<UnsignedInteger>;
     using Graph = algorithm::BaseDirectedGraph<Vertex>;
     using VertexToGrundyNumberMap = std::map<Vertex, UnsignedInteger>;
-
     explicit GameWithGraph(Graph const& graph);
-
     UnsignedInteger getGrundyNumberAt(Vertex const vertex);
     GameState getGameStateAt(Vertex const vertex);
     Vertex getOptimalNextVertexAt(Vertex const vertex);
 
 private:
     SetOfUnsignedIntegers getNextGrundyNumbers(Vertex const vertex);
-
     Graph const& m_graph;
     VertexToGrundyNumberMap m_vertexToGrundyNumberMap;  // dynamic programming
 };

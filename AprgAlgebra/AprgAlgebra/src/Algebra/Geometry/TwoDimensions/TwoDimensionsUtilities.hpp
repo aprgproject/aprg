@@ -17,7 +17,6 @@ Equation getHyperbolaEquation();
 Equation getLimaconEquation(LimaconTrigonometricFunctionType const type);
 Equation getLineEquation();
 Equation getParabolaEquation(ParabolaOrientation const parabolaOrientation);
-
 Term getSurfaceAreaOfAConicalFrustum();
 Term getVolumeOfAConicalFrustum();
 

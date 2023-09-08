@@ -4,15 +4,14 @@
 #include <vector>
 
 namespace alba {
+
 enum class AngleUnitType { Radians, Degrees };
 
 class AlbaAngle {
 public:
     AlbaAngle();
     AlbaAngle(AngleUnitType const angleUnitType, double const angleValue);
-
     // rule of zero
-
     bool operator==(AlbaAngle const& angle) const;
     bool operator!=(AlbaAngle const& angle) const;
     bool operator<(AlbaAngle const& angle) const;
@@ -28,9 +27,7 @@ public:
 
 private:
     static double calculateAngleValueInDegrees(AngleUnitType const angleInputType, double const angleValue);
-
     friend std::ostream& operator<<(std::ostream& out, AlbaAngle const& angle);
-
     double m_angleValueInDegrees;
 };
 

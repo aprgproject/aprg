@@ -16,18 +16,16 @@ public:
     using Profits = std::vector<Profit>;
     using Rods = std::vector<Rod>;
     using ProfitMatrix = matrix::AlbaMatrix<Profit>;
-    static constexpr Profit UNUSED_PROFIT = std::numeric_limits<Profit>::max();
-
     MaximizeProfitInCuttingARod(Length const length, Rods const& rods);
-
+    static constexpr Profit UNUSED_PROFIT = std::numeric_limits<Profit>::max();
     [[nodiscard]] Profit getBestProfitUsingNaiveRecursion() const;
     [[nodiscard]] Profit getBestProfitUsingMemoizationDP() const;
     [[nodiscard]] Profit getBestProfitUsingIterativeDP() const;
 
 private:
     [[nodiscard]] Profit getBestProfitUsingNaiveRecursion(Length const remainingLength) const;
-    Profit getBestProfitUsingMemoizationDP(Profits& partialProfits, Length const remainingLength) const;
     [[nodiscard]] Length getSmallestItemLength() const;
+    Profit getBestProfitUsingMemoizationDP(Profits& partialProfits, Length const remainingLength) const;
     Length const m_length;
     Rods const m_rods;
 };

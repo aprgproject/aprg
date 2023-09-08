@@ -18,20 +18,16 @@ public:
     };
 
     explicit UciInterpreter(CalculationDetails& calculationDetails);
-
     void updateCalculationDetails(std::string const& stringFromEngine);
 
 private:
-    void processInfoTokens(stringHelper::strings const& infoTokens);
-    void processBestMoveTokens(stringHelper::strings const& tokens);
-
-    InfoDetails createInfoDetailsFromInfoTokens(stringHelper::strings const& tokens);
-    void saveCommonParametersOfBestLine(InfoDetails const& infoDetails);
-    void saveVariation(InfoDetails const& infoDetails);
-
     bool shouldSkipTheEntireInfo(std::string const& token);
     bool isACommonParameter(std::string const& token);
-
+    InfoDetails createInfoDetailsFromInfoTokens(stringHelper::strings const& tokens);
+    void processInfoTokens(stringHelper::strings const& infoTokens);
+    void processBestMoveTokens(stringHelper::strings const& tokens);
+    void saveCommonParametersOfBestLine(InfoDetails const& infoDetails);
+    void saveVariation(InfoDetails const& infoDetails);
     CalculationDetails& m_calculationDetails;
 };
 

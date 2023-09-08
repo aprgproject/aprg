@@ -19,7 +19,6 @@ public:
     using Value = ValueTemplateType;
     using NodeUniquePointer = std::unique_ptr<Node>;
     using ValueUniquePointer = std::unique_ptr<Value>;
-
     TernarySearchTrieSymbolTable() : b_root(BaseClass::m_root) {}
 
     [[nodiscard]] Value get(Key const& key) const override {

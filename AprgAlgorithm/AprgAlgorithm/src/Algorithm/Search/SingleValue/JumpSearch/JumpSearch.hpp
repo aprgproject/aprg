@@ -11,10 +11,9 @@ class JumpSearch {
 public:
     using Index = int;
     using Value = typename Values::value_type;
-    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
-
     explicit JumpSearch(Values const& values)  // values can be unsorted
         : m_blockSize(getOptimalSize(values)), m_sortedValues(values) {}
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     Index getIndexOfValue(Value const& target) {
         // find the block where target is included

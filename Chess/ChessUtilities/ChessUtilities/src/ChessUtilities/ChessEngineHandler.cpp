@@ -36,7 +36,6 @@ DWORD WINAPI engineMonitoringCallbackFunction(LPVOID const lpParam) {
     return 0;
 }
 }  // namespace
-
 ChessEngineHandler::ChessEngineHandler(string const& enginePath)
     : m_enginePath(enginePath),
       m_readMutex(),
@@ -139,6 +138,25 @@ void ChessEngineHandler::setAdditionalStepsInProcessingAStringFromEngine(
     m_additionalStepsInProcessingAStringFromEngine = additionalSteps;
 }
 
+string ChessEngineHandler::getLogHeader(LogType const logtype) const {
+    string result;
+    switch (logtype) {
+        case LogType::FromEngine: {
+            result = "From engine: ";
+            break;
+        }
+        case LogType::ToEngine: {
+            result = "To engine: ";
+            break;
+        }
+        case LogType::HandlerStatus: {
+            result = "HandlerStatus: ";
+            break;
+        }
+    }
+    return result;
+}
+
 void ChessEngineHandler::initializeEngine() {
     SECURITY_DESCRIPTOR securityDescriptor{};  // security information for pipes
     SECURITY_ATTRIBUTES securityAttributes;
@@ -153,7 +171,6 @@ void ChessEngineHandler::initializeEngine() {
 
     securityAttributes.nLength = sizeof(SECURITY_ATTRIBUTES);
     securityAttributes.bInheritHandle = 1;  // allow inheritable handles
-
     if (!CreatePipe(&(m_inputStreamOnEngineThread), &(m_inputStreamOnHandler), &securityAttributes, 0)) {
         log(LogType::HandlerStatus, "Cannot Create Pipe");
     }
@@ -195,25 +212,6 @@ void ChessEngineHandler::log(LogType const logtype, string const& logString) {
         m_logFileStreamOptional.value() << getLogHeader(logtype) << logString << "\n";
         m_logFileStreamOptional.value().flush();
     }
-}
-
-string ChessEngineHandler::getLogHeader(LogType const logtype) const {
-    string result;
-    switch (logtype) {
-        case LogType::FromEngine: {
-            result = "From engine: ";
-            break;
-        }
-        case LogType::ToEngine: {
-            result = "To engine: ";
-            break;
-        }
-        case LogType::HandlerStatus: {
-            result = "HandlerStatus: ";
-            break;
-        }
-    }
-    return result;
 }
 
 }  // namespace chess

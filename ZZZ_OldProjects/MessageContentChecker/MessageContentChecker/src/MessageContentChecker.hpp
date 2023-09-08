@@ -5,7 +5,6 @@ namespace alba {
 class MessageContentChecker {
 public:
     MessageContentChecker() = default;
-
     [[nodiscard]] int getSample() const;
 
 private:

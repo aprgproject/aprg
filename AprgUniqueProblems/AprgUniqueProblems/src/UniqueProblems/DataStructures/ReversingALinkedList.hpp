@@ -7,7 +7,6 @@ namespace alba::ReversingALinkedList {
 struct Node {
     int value;
     std::unique_ptr<Node> nextPointer;
-
     // ~Node(); blows up the stack
 };
 

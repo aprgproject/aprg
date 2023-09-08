@@ -10,19 +10,10 @@ public:
     using Key = typename BaseClass::Key;
     using Node = typename BaseClass::Node;
     using Value = typename BaseClass::Value;
-
     explicit TernarySearchSuffixTrie(Key const& searchSpace) { initialize(searchSpace); }
-
     [[nodiscard]] Value getIndexOfFirstOccurrence(Key const& key) const { return get(key); }
 
 protected:
-    void initialize(Key const& searchSpace) {
-        int length = searchSpace.length();
-        for (int i = 0; i < length; ++i) {
-            TernarySearchSuffixTrie::put(searchSpace.substr(i), i);
-        }
-    }
-
     [[nodiscard]] Value get(Key const& key) const override {
         Value result(-1);  // assign negative one if not found
         Node const* const nodePointer(this->getStartingOnThisNode(b_root, key, 0));
@@ -33,6 +24,13 @@ protected:
             }
         }
         return result;
+    }
+
+    void initialize(Key const& searchSpace) {
+        int length = searchSpace.length();
+        for (int i = 0; i < length; ++i) {
+            TernarySearchSuffixTrie::put(searchSpace.substr(i), i);
+        }
     }
 
     void put(Key const& key, Value const& value) override {

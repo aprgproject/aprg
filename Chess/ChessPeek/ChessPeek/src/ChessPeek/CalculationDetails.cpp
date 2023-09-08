@@ -18,7 +18,6 @@ bool CalculationDetails::operator==(CalculationDetails const& other) const {
 bool CalculationDetails::operator!=(CalculationDetails const& other) const { return !operator==(other); }
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

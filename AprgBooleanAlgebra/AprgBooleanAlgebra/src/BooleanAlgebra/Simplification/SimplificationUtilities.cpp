@@ -102,6 +102,57 @@ OperatorLevel getSubOperatorLevel(Term const& term1, Term const& term2) {
 }
 }  // namespace
 
+Terms createUniqueTerms(WrappedTerms const& terms) {
+    Terms result;
+    result.reserve(terms.size());
+    transform(terms.cbegin(), terms.cend(), back_inserter(result), [](WrappedTerm const& wrappedTerm) {
+        return getTermConstReferenceFromUniquePointer(wrappedTerm.baseTermPointer);
+    });
+    sort(result.begin(), result.end());
+    result.erase(unique(result.begin(), result.end()), result.end());
+    return result;
+}
+
+Term combineTwoTermsByCheckingCommonFactorIfPossible(
+    Term const& term1, Term const& term2, OperatorLevel const operatorLevel) {
+    Term result;
+    bool isOneOfTheTermANonExpression = !term1.isExpression() || !term2.isExpression();
+    bool doesOperatorLevelMatchIfBothExpressions = term1.isExpression() && term2.isExpression() &&
+                                                   term1.getExpressionConstReference().getCommonOperatorLevel() ==
+                                                       term2.getExpressionConstReference().getCommonOperatorLevel();
+    if (isOneOfTheTermANonExpression || doesOperatorLevelMatchIfBothExpressions) {
+        Terms commonFactors;
+        Terms uniqueTerms1(getTermOrSubTerms(term1));
+        Terms uniqueTerms2(getTermOrSubTerms(term2));
+        for (int i1 = 0; i1 < static_cast<int>(uniqueTerms1.size()); ++i1) {
+            for (int i2 = 0; i2 < static_cast<int>(uniqueTerms2.size()); ++i2) {
+                if (uniqueTerms1[i1] == uniqueTerms2[i2]) {
+                    commonFactors.emplace_back(uniqueTerms1[i1]);
+                    uniqueTerms1.erase(uniqueTerms1.begin() + i1);
+                    uniqueTerms2.erase(uniqueTerms2.begin() + i2);
+                    --i1;
+                    break;
+                }
+            }
+        }
+        if (!commonFactors.empty()) {
+            OperatorLevel subOperatorLevel(getSubOperatorLevel(term1, term2));
+            Term uniqueTerm1(getNoEffectValueInOperation(subOperatorLevel));
+            Term uniqueTerm2(getNoEffectValueInOperation(subOperatorLevel));
+            accumulateTerms(uniqueTerm1, uniqueTerms1, subOperatorLevel);
+            accumulateTerms(uniqueTerm2, uniqueTerms2, subOperatorLevel);
+            Term combinedUniqueTerm;
+            accumulateTerms(combinedUniqueTerm, {uniqueTerm1, uniqueTerm2}, operatorLevel);
+            combinedUniqueTerm.simplify();
+            if (!combinedUniqueTerm.isExpression()) {
+                accumulateTerms(result, commonFactors, subOperatorLevel);
+                accumulateTerms(result, {combinedUniqueTerm}, subOperatorLevel);
+            }
+        }
+    }
+    return result;
+}
+
 void simplifyTermWithOuterOrAndInnerAnd(Term& term) {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
         SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
@@ -177,17 +228,6 @@ void simplifyAndCopyTermsAndChangeOperatorLevelIfNeeded(
     }
 }
 
-Terms createUniqueTerms(WrappedTerms const& terms) {
-    Terms result;
-    result.reserve(terms.size());
-    transform(terms.cbegin(), terms.cend(), back_inserter(result), [](WrappedTerm const& wrappedTerm) {
-        return getTermConstReferenceFromUniquePointer(wrappedTerm.baseTermPointer);
-    });
-    sort(result.begin(), result.end());
-    result.erase(unique(result.begin(), result.end()), result.end());
-    return result;
-}
-
 void combineComplementaryTerms(Terms& termsToCombine, OperatorLevel const operatorLevel) {
     // Convert complimentary terms
     // x & x’ = 0
@@ -226,44 +266,17 @@ void combineTermsByCheckingCommonFactor(Terms& termsToCombine, OperatorLevel con
     }
 }
 
-Term combineTwoTermsByCheckingCommonFactorIfPossible(
-    Term const& term1, Term const& term2, OperatorLevel const operatorLevel) {
-    Term result;
-    bool isOneOfTheTermANonExpression = !term1.isExpression() || !term2.isExpression();
-    bool doesOperatorLevelMatchIfBothExpressions = term1.isExpression() && term2.isExpression() &&
-                                                   term1.getExpressionConstReference().getCommonOperatorLevel() ==
-                                                       term2.getExpressionConstReference().getCommonOperatorLevel();
-    if (isOneOfTheTermANonExpression || doesOperatorLevelMatchIfBothExpressions) {
-        Terms commonFactors;
-        Terms uniqueTerms1(getTermOrSubTerms(term1));
-        Terms uniqueTerms2(getTermOrSubTerms(term2));
-        for (int i1 = 0; i1 < static_cast<int>(uniqueTerms1.size()); ++i1) {
-            for (int i2 = 0; i2 < static_cast<int>(uniqueTerms2.size()); ++i2) {
-                if (uniqueTerms1[i1] == uniqueTerms2[i2]) {
-                    commonFactors.emplace_back(uniqueTerms1[i1]);
-                    uniqueTerms1.erase(uniqueTerms1.begin() + i1);
-                    uniqueTerms2.erase(uniqueTerms2.begin() + i2);
-                    --i1;
-                    break;
-                }
-            }
-        }
-        if (!commonFactors.empty()) {
-            OperatorLevel subOperatorLevel(getSubOperatorLevel(term1, term2));
-            Term uniqueTerm1(getNoEffectValueInOperation(subOperatorLevel));
-            Term uniqueTerm2(getNoEffectValueInOperation(subOperatorLevel));
-            accumulateTerms(uniqueTerm1, uniqueTerms1, subOperatorLevel);
-            accumulateTerms(uniqueTerm2, uniqueTerms2, subOperatorLevel);
-            Term combinedUniqueTerm;
-            accumulateTerms(combinedUniqueTerm, {uniqueTerm1, uniqueTerm2}, operatorLevel);
-            combinedUniqueTerm.simplify();
-            if (!combinedUniqueTerm.isExpression()) {
-                accumulateTerms(result, commonFactors, subOperatorLevel);
-                accumulateTerms(result, {combinedUniqueTerm}, subOperatorLevel);
-            }
-        }
+void retrieveTargetOperations(OperatorLevel& targetOuter, OperatorLevel& targetInner) {
+    if (SimplificationOfExpression::shouldSimplifyWithOuterOrAndInnerAnd()) {
+        targetOuter = OperatorLevel::Or;
+        targetInner = OperatorLevel::And;
+    } else if (SimplificationOfExpression::shouldSimplifyWithOuterAndAndInnerOr()) {
+        targetOuter = OperatorLevel::And;
+        targetInner = OperatorLevel::Or;
+    } else {
+        targetOuter = OperatorLevel::Or;
+        targetInner = OperatorLevel::And;
     }
-    return result;
 }
 
 void distributeTermsIfNeeded(
@@ -301,19 +314,6 @@ void distributeTermsIfNeeded(
                     distributeInnerOperation, 0U);
             }
         }
-    }
-}
-
-void retrieveTargetOperations(OperatorLevel& targetOuter, OperatorLevel& targetInner) {
-    if (SimplificationOfExpression::shouldSimplifyWithOuterOrAndInnerAnd()) {
-        targetOuter = OperatorLevel::Or;
-        targetInner = OperatorLevel::And;
-    } else if (SimplificationOfExpression::shouldSimplifyWithOuterAndAndInnerOr()) {
-        targetOuter = OperatorLevel::And;
-        targetInner = OperatorLevel::Or;
-    } else {
-        targetOuter = OperatorLevel::Or;
-        targetInner = OperatorLevel::And;
     }
 }
 

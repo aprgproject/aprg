@@ -11,9 +11,7 @@ template <typename Index, char UNIQUE_DIVIDING_CHARACTER>
 class SubstringSearchUsingZAlgorithm {
 public:
     using Indexes = std::vector<Index>;
-
     explicit SubstringSearchUsingZAlgorithm(std::string const& query) : m_query(query) {}
-
     [[nodiscard]] Index search(std::string const& searchSpace) const { return searchForFirstSubstring(searchSpace); }
 
     [[nodiscard]] Index searchForFirstSubstring(std::string const& searchSpace) const {

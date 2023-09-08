@@ -5,7 +5,6 @@
 namespace alba::algorithm::CommonTestsWithSearch {
 
 // getIndexOfValue
-
 template <typename Search, typename Values>
 void testGetIndexOfValueDoesNotCrashWithEmptyUnsignedInts() {
     Values emptyValues;
@@ -119,7 +118,6 @@ void testGetIndexOfValueWhenValueIsFoundWithSortedUnsignedInts() {
 }
 
 // getIndexOfValue with indices
-
 template <typename Search, typename Values>
 void testGetIndexOfValueWithIndicesWhenValueIsNotFoundWithUnsortedUnsignedInts() {
     Values unsortedValues{43, 96, 53, 25, 95, 72, 6, 84, 14, 64, 33, 97, 51, 93, 13};

@@ -34,7 +34,6 @@ PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathSumUsingMemoizationD
 PathSumInGridInRightOrDownWithDiagonalTraversal::Value
 PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathSumUsingIterativeDP() const {
     // Time Complexity of the DP implementation is O(mn) which is much better than Naive Recursive implementation.
-
     Value pathSum(0);
     if (!m_inputGrid.isEmpty()) {
         Grid partialSumGrid(getPartialSumGridUsingIterativeDP());
@@ -81,7 +80,6 @@ PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathUsingIterativeDP() c
 PathSumInGridInRightOrDownWithDiagonalTraversal::Value
 PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathSumUsingNaiveRecursion(Index const x, Index const y) const {
     // Naive recursion approach
-
     Value result(m_inputGrid.getEntry(x, y));
     if (!(x == 0 && y == 0)) {
         if (x == 0) {

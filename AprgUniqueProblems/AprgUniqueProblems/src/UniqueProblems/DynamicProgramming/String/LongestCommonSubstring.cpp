@@ -122,7 +122,6 @@ LongestCommonSubstring::Count LongestCommonSubstring::getLongestCommonSubstringL
     CountGrid& lengthGrid, Index const index1, Index const index2) const {
     // Time Complexity: O(m x n) because of memoization
     // Auxiliary Space: O(m x n)
-
     Index result = lengthGrid.getEntry(index1, index2);
     if (UNUSED_INDEX == result) {
         result = 0;

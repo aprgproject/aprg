@@ -13,12 +13,10 @@ public:
     using Index = int;
     using Value = typename Values::value_type;
     using FourValues = std::tuple<Value, Value, Value, Value>;
-
     using SumOfPairOfValues = std::tuple<Value, Index, Index>;
     using SumsOfPairOfValues = std::vector<SumOfPairOfValues>;
     using PairOfSumOfPairOfValues = std::pair<SumOfPairOfValues, SumOfPairOfValues>;
     using Comparator = std::function<bool(Index const, Index const)>;
-
     explicit FourSum(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
     [[nodiscard]] FourValues getPossibleDuplicatedFourValuesWithSum(Value const& targetSum) const {

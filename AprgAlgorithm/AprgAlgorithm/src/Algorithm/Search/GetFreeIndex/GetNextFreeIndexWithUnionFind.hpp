@@ -8,7 +8,6 @@ template <typename Index>
 class GetNextFreeIndexWithUnionFind {
 public:
     using UnionFind = UnionFindForFreeIndex<Index>;
-
     explicit GetNextFreeIndexWithUnionFind(Index const numberOfIndexes)
         : m_numberOfIndexes(numberOfIndexes), m_unionFind(numberOfIndexes) {}
 
@@ -28,7 +27,6 @@ public:
 
     void setAsFree(Index const index) {
         // NOTE: This is linear
-
         Index rootOfIndex(m_unionFind.getRoot(index));
         if (index < m_numberOfIndexes && rootOfIndex != index) {
             auto& relativeRoots(m_unionFind.getRelativeRootVectorReference());

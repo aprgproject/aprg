@@ -19,7 +19,6 @@ TEST(UnorderedLinkedListSetTest, IsEmptyWorksWhenNotEmpty) {
 }
 
 TEST(UnorderedLinkedListSetTest, DoesContainWorks) { testDoesContainWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(UnorderedLinkedListSetTest, GetSizeWorksWhenEmpty) { testGetSizeWhenEmptyWithUnsignedIntAndChar<SetForTest>(); }
 
 TEST(UnorderedLinkedListSetTest, GetSizeWorksWhenNotEmpty) {
@@ -27,27 +26,16 @@ TEST(UnorderedLinkedListSetTest, GetSizeWorksWhenNotEmpty) {
 }
 
 TEST(UnorderedLinkedListSetTest, GetWorks) { testGetWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(UnorderedLinkedListSetTest, GetRankWorks) { testGetRankWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(UnorderedLinkedListSetTest, GetMinimumWorks) { testGetMinimumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(UnorderedLinkedListSetTest, GetMaximumWorks) { testGetMaximumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(UnorderedLinkedListSetTest, SelectAtWorks) { testSelectAtWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(UnorderedLinkedListSetTest, GetFloorWorks) { testGetFloorWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(UnorderedLinkedListSetTest, GetCeilingWorks) { testGetCeilingWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(UnorderedLinkedListSetTest, PutWorks) { testPutWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(UnorderedLinkedListSetTest, DeleteBasedOnKeyWorks) { testDeleteBasedOnKeyWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(UnorderedLinkedListSetTest, DeleteMinimumWorks) { testDeleteMinimumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(UnorderedLinkedListSetTest, DeleteMaximumWorks) { testDeleteMaximumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(UnorderedLinkedListSetTest, GetKeys) { testGetKeysWithUnsignedIntAndChar<SetForTest>(); }
 
 TEST(UnorderedLinkedListSetTest, GetKeysInRangeWorks) {

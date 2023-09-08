@@ -10,19 +10,16 @@ namespace alba::algebra {
 
 class Polynomial : public BaseTermData {
 public:
-    Polynomial();
     explicit Polynomial(Monomials const& monomials);
+    Polynomial();
     Polynomial(std::initializer_list<Monomial> const& monomials);
-
     // rule of zero
-
     bool operator==(Polynomial const& second) const;
     bool operator!=(Polynomial const& second) const;
     bool operator<(Polynomial const& second) const;
     [[nodiscard]] bool isEmpty() const;
     [[nodiscard]] bool isSimplified() const;
     [[nodiscard]] Monomials const& getMonomials() const;
-
     Monomials& getMonomialsReference();
     void clear();
     void simplify();
@@ -43,9 +40,7 @@ private:
     void setNan();
     void simplifyContinuouslyIfChanged();
     void simplifyMonomialsAndReAdd();
-
     friend std::ostream& operator<<(std::ostream& out, Polynomial const& polynomial);
-
     Monomials m_monomials;
     bool m_isSimplified;
 };

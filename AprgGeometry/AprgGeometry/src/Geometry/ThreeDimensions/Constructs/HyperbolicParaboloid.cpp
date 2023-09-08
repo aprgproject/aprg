@@ -21,12 +21,8 @@ bool HyperbolicParaboloid::operator!=(HyperbolicParaboloid const& hyperbolicPara
     return !((*this) == hyperbolicParaboloid);
 }
 
-Point HyperbolicParaboloid::getCenter() const { return m_center; }
-
 double HyperbolicParaboloid::getAValue() const { return m_aValue; }
-
 double HyperbolicParaboloid::getBValue() const { return m_bValue; }
-
 double HyperbolicParaboloid::getCValue() const { return m_cValue; }
 
 double HyperbolicParaboloid::calculateXFromYAndZ(double const y, double const z, double const signOfRoot) const {
@@ -45,6 +41,8 @@ double HyperbolicParaboloid::calculateZFromXAndY(double const x, double const y)
     return (pow((y - m_center.getY()) / m_bValue, 2) - pow((x - m_center.getX()) / m_aValue, 2)) * m_cValue +
            m_center.getZ();
 }
+
+Point HyperbolicParaboloid::getCenter() const { return m_center; }
 
 ostream& operator<<(ostream& out, HyperbolicParaboloid const& hyperbolicParaboloid) {
     out << "(center: " << hyperbolicParaboloid.m_center << " a: " << hyperbolicParaboloid.m_aValue

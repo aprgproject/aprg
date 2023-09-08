@@ -19,7 +19,6 @@ bool AlbaWindowsUserAutomation::isKeyPressed(int const key) const {
     // GetAsyncKeyState, and whether the key is currently up or down. If the most significant bit is set, the key is
     // down. If the least significant bit is set, the key was pressed after the previous call to GetAsyncKeyState.
     // However, you should not rely on this last behavior; for more information, see the Remarks.
-
     USHORT status = GetAsyncKeyState(key);
     return (status & 0x8000) >> 15 == 1;  // || (status & 1) == 1;
 }
@@ -31,6 +30,23 @@ MousePosition AlbaWindowsUserAutomation::getMousePosition() const {
     POINT mouse;
     GetCursorPos(&mouse);
     return MousePosition(mouse.x, mouse.y);
+}
+
+string AlbaWindowsUserAutomation::getClassNameOfForegroundWindow() const {
+    int const LENGTH = 1000;
+    char className[LENGTH];
+    GetClassName(GetForegroundWindow(), className, LENGTH);
+    return string(className);
+}
+
+string AlbaWindowsUserAutomation::getStringFromClipboard() const {
+    string stringInClipboard;
+    if (OpenClipboard(NULL)) {
+        HANDLE clipboardData = GetClipboardData(CF_TEXT);
+        stringInClipboard = (char*)clipboardData;
+        CloseClipboard();
+    }
+    return stringInClipboard;
 }
 
 void AlbaWindowsUserAutomation::setMousePosition(MousePosition const& position) const {
@@ -168,13 +184,6 @@ void AlbaWindowsUserAutomation::performKeyCombination(
     }
 }
 
-string AlbaWindowsUserAutomation::getClassNameOfForegroundWindow() const {
-    int const LENGTH = 1000;
-    char className[LENGTH];
-    GetClassName(GetForegroundWindow(), className, LENGTH);
-    return string(className);
-}
-
 void AlbaWindowsUserAutomation::setForegroundWindowWithClassName(string_view const& className) const {
     Sleep(2000);
     int const LENGTH = 1000;
@@ -194,23 +203,12 @@ void AlbaWindowsUserAutomation::setForegroundWindowWithWindowName(string_view co
 }
 
 void AlbaWindowsUserAutomation::sleepWithRealisticDelay() const { Sleep(REALISTIC_DELAY_IN_MILLISECONDS); }
-
 void AlbaWindowsUserAutomation::sleep(int const milliseconds) const { Sleep(milliseconds); }
 
 void AlbaWindowsUserAutomation::saveBitmapOnScreen(string_view const& filePath) const {
     // Note: the difference on partially capturing the screen is negligible
     typeKey(VK_SNAPSHOT);
     saveBitmapFromClipboard(filePath);
-}
-
-string AlbaWindowsUserAutomation::getStringFromClipboard() const {
-    string stringInClipboard;
-    if (OpenClipboard(NULL)) {
-        HANDLE clipboardData = GetClipboardData(CF_TEXT);
-        stringInClipboard = (char*)clipboardData;
-        CloseClipboard();
-    }
-    return stringInClipboard;
 }
 
 void AlbaWindowsUserAutomation::setStringToClipboard(string_view const& clipBoardText) const {

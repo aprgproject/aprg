@@ -8,11 +8,9 @@ class Subject;
 // Observer
 // defines an updating interface for objects that should be notified
 // of changes in a subject
-
 class Observer {
 public:
     virtual ~Observer() = default;
-
     [[nodiscard]] virtual int getState() const = 0;
     virtual void update(Subject const* const subject) = 0;
     // ...
@@ -21,16 +19,13 @@ public:
 // Concrete Observer
 // stores state of interest to ConcreteObserver objects and
 // sends a notification to its observers when its state changes
-
 class ConcreteObserver : public Observer {
 public:
     explicit ConcreteObserver(const int state) : m_observer_state(state) {}
-
     [[nodiscard]] int getState() const override { return m_observer_state; }
-
     void update(Subject const* const subject) override;
-    // ...
 
+    // ...
 private:
     int m_observer_state;
     // ...
@@ -39,13 +34,12 @@ private:
 // Subject
 // knows its observers and provides an interface for attaching
 // and detaching observers
-
 class Subject {
 public:
     virtual ~Subject() = default;
-
+    [[nodiscard]] virtual int getState() const = 0;
+    virtual void setState(const int s) = 0;
     void attach(Observer* observer) { m_observerPointers.emplace_back(observer); }
-
     void detach(const int index) { m_observerPointers.erase(m_observerPointers.begin() + index); }
 
     void notify() {
@@ -54,10 +48,7 @@ public:
         }
     }
 
-    [[nodiscard]] virtual int getState() const = 0;
-    virtual void setState(const int s) = 0;
     // ...
-
 private:
     std::vector<Observer*> m_observerPointers;
     // ...
@@ -65,14 +56,12 @@ private:
 
 // Concrete Subject
 // stores state that should stay consistent with the subject's
-
 class ConcreteSubject : public Subject {
 public:
     [[nodiscard]] int getState() const override { return m_subjectState; }
-
     void setState(int const state) override { m_subjectState = state; }
-    // ...
 
+    // ...
 private:
     int m_subjectState{};
     // ...

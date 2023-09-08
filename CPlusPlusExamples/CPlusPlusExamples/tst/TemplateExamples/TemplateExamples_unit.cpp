@@ -21,12 +21,6 @@ T abs(T const x) {
     return (x >= 0) ? x : -x;
 }
 
-TEST(TemplateExamplesTest, FunctionTemplatesWork) {
-    double (*foo)(double) = abs<double>;  // create a function pointer
-    cout << foo(-42.3) << "\n";
-    cout << abs<int>(-42) << "\n";
-}
-
 // -> Function templates are not functions
 // ---> They are templates for making functions
 // -> "Dont pay for what you don't use" philosophy
@@ -37,6 +31,11 @@ TEST(TemplateExamplesTest, FunctionTemplatesWork) {
 // ---> in order to fiture out its return and so on.
 // -> Sometimes the compiler can deduce abs<Foo> when all you wrote was abs;
 // ---> but well talk about that deduction process in the next tests.
+TEST(TemplateExamplesTest, FunctionTemplatesWork) {
+    double (*foo)(double) = abs<double>;  // create a function pointer
+    cout << foo(-42.3) << "\n";
+    cout << abs<int>(-42) << "\n";
+}
 
 }  // namespace FunctionTemplatesWork
 
@@ -48,13 +47,6 @@ struct mylist {
     mylist<T>* next;
 };
 
-TEST(TemplateExamplesTest, ClassTemplatesWork) {
-    mylist<int> intList{5, nullptr};
-    mylist<double> doubleList{4.5, nullptr};
-    cout << "intList: " << intList.data << "\n";
-    cout << "doubleList: " << doubleList.data << "\n";
-}
-
 // -> Class templates are not classes
 // ---> They are templates for making classes
 // -> "Dont pay for what you don't use" philosophy
@@ -62,6 +54,12 @@ TEST(TemplateExamplesTest, ClassTemplatesWork) {
 // -> The resulting "template classes" follow all the same rules as normal classes.
 // ---> In particular, each static data member must be defined somewhere if you want to use it.
 // ---> Templates are similar to inline
+TEST(TemplateExamplesTest, ClassTemplatesWork) {
+    mylist<int> intList{5, nullptr};
+    mylist<double> doubleList{4.5, nullptr};
+    cout << "intList: " << intList.data << "\n";
+    cout << "doubleList: " << doubleList.data << "\n";
+}
 
 }  // namespace ClassTemplatesWork
 
@@ -75,20 +73,17 @@ struct ST {
 
 template <typename T>
 int ST<T>::intData = 42;  // still fine in header
-
 template <typename T>
 T ST<T>::tData = {};  // still fine in header
-
-TEST(TemplateExamplesTest, TemplateIsSimilarToInline) {
-    cout << "intData: " << ST<int>::intData << "\n";
-    cout << "tData: " << ST<int>::tData << "\n";
-}
-
 // -> Templates are similar to inline
 // ---> How come I can define ST<T>::intData in a header file and #include it all over the place,
 // -----> whereas I get a multiple-definition linker error if I try the same thing with S::intData?
 // -> The same C++ Standard wording that governs inline functions and variables
 // ---> also governs the definitions of templates and their members. (N4606 3.2 [basic.def.odr])
+TEST(TemplateExamplesTest, TemplateIsSimilarToInline) {
+    cout << "intData: " << ST<int>::intData << "\n";
+    cout << "tData: " << ST<int>::tData << "\n";
+}
 
 }  // namespace TemplateIsSimilarToInline
 
@@ -101,7 +96,10 @@ struct isVoidStruct {
 
 template <typename T>
 constexpr bool isVoidVariable = isVoidType<T>();  // variable template
-
+// -> In C++14, variable templates was introduced.
+// -> Variable templates are syntactic sugar
+// ---> A variable template is exactly 100% equivalent to a static data member of class template.
+// ---> In the STL, "_v" variations are available as variable templates.
 TEST(TemplateExamplesTest, VariableTemplatesWork) {
     cout << "isVoidStruct with int: " << isVoidStruct<int>::value << "\n";
     cout << "isVoidStruct with void: " << isVoidStruct<void>::value << "\n";
@@ -109,25 +107,18 @@ TEST(TemplateExamplesTest, VariableTemplatesWork) {
     cout << "isVoidVariable with void: " << isVoidVariable<void> << "\n";
 }
 
-// -> In C++14, variable templates was introduced.
-// -> Variable templates are syntactic sugar
-// ---> A variable template is exactly 100% equivalent to a static data member of class template.
-// ---> In the STL, "_v" variations are available as variable templates.
-
 }  // namespace VariableTemplatesWork
 
 namespace AliasTemplatesWork {
 
 template <typename T>
 using myvec = vector<T>;  // alias template
-
+// -> In C++11, alias templates was introduced.
+// -> Alias templates are literally the same type from its source.
 TEST(TemplateExamplesTest, AliasTemplatesWork) {
     cout << "is alias same with int: " << areSameTypes<myvec<int>, vector<int>>() << "\n";
     cout << "is alias same with double: " << areSameTypes<myvec<double>, vector<double>>() << "\n";
 }
-
-// -> In C++11, alias templates was introduced.
-// -> Alias templates are literally the same type from its source.
 
 }  // namespace AliasTemplatesWork
 
@@ -138,14 +129,13 @@ void foo(T) {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
 }
 
+// -> In C++11, alias templates was introduced.
+// -> Alias templates are literally the same type from its source.
 TEST(TemplateExamplesTest, TemplateTypeDeductionWorksUsingPrettyFunction) {
     foo(4);
     foo(4.2);
     foo("hello");
 }
-
-// -> In C++11, alias templates was introduced.
-// -> Alias templates are literally the same type from its source.
 
 }  // namespace TemplateTypeDeductionWorksUsingPrettyFunction
 
@@ -171,24 +161,6 @@ void fooFunction(R (*)(A)) {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
 }
 
-TEST(TemplateExamplesTest, TemplateTypeDeductionWorks) {
-    f(1, 2);  // [with T = int; U = int]
-    g(1, 2);  // [with T = int]
-    // g(1, 2U); // Error: no matching function for call to 'g' ('int' vs. 'unsigned int')
-
-    foo(array<int, 8>{}, array<double, 4>{}, 0.0);
-    // foo(array<int, 9>{}, array<double, 4>{}, 0.0); // Compilation error
-    // Error: no matching function for call to 'foo'
-    // Note: candidate template ignored: deduced type 'array<[...], sizeof(double) aka 8>' of 1st parameter
-    // does not match adjusted type 'array<[...], 9>' of argument [with T = int, U = double]
-
-    // fooFunction([](double x) { return int(x); }); // Compilation error
-    fooFunction(+[](double const x) { return static_cast<int>(x); });
-    // Captureless lambda types are always implicitly convertible to function pointer type.
-    // But being implicitly convertible to a thing doesn't mean actually being that thing!
-    // Protip: If you absolute need the function-pointer conversion to happen add a unary+.
-}
-
 // -> Type deduction in a nutshell (N4606 14.8.2.1 [temp.deduct.call]):
 // ---> Each function parameter may contribute (or not) to the deduction of each template parameter (or not).
 // ---> All deductions are carried out "in parallel"; they don't cross talk with each other.
@@ -200,6 +172,21 @@ TEST(TemplateExamplesTest, TemplateTypeDeductionWorks) {
 // ---> Furthermore, any function parameter that does contribute to deduction
 // -----> must match its function argument type exactly.
 // -----> No implicit conversions allowed!
+TEST(TemplateExamplesTest, TemplateTypeDeductionWorks) {
+    f(1, 2);  // [with T = int; U = int]
+    g(1, 2);  // [with T = int]
+    // g(1, 2U); // Error: no matching function for call to 'g' ('int' vs. 'unsigned int')
+    foo(array<int, 8>{}, array<double, 4>{}, 0.0);
+    // foo(array<int, 9>{}, array<double, 4>{}, 0.0); // Compilation error
+    // Error: no matching function for call to 'foo'
+    // Note: candidate template ignored: deduced type 'array<[...], sizeof(double) aka 8>' of 1st parameter
+    // does not match adjusted type 'array<[...], 9>' of argument [with T = int, U = double]
+    // fooFunction([](double x) { return int(x); }); // Compilation error
+    fooFunction(+[](double const x) { return static_cast<int>(x); });
+    // Captureless lambda types are always implicitly convertible to function pointer type.
+    // But being implicitly convertible to a thing doesn't mean actually being that thing!
+    // Protip: If you absolute need the function-pointer conversion to happen add a unary+.
+}
 
 }  // namespace TemplateTypeDeductionWorks
 
@@ -210,17 +197,16 @@ void add(T, U) {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
 }
 
+// -> Type deduction in a nutshell (added this line):
+// ---> Any template parameters that were explicitly specified by the caller
+// -----> are fixed as whatever the caller said they were
+// -----> and they dont participate any further in deduction
 TEST(TemplateExamplesTest, CallingTemplateInstanceWithTemplateParametersWorks) {
     add<int, int>('x', 3.0);  // [with T = int; U = int]
     add<int>('x', 3.0);       // [with T = int; U = double]
     add<>('x', 3.0);          // [with T = char; U = double]
     add('x', 3.0);            // [with T = char; U = double]
 }
-
-// -> Type deduction in a nutshell (added this line):
-// ---> Any template parameters that were explicitly specified by the caller
-// -----> are fixed as whatever the caller said they were
-// -----> and they dont participate any further in deduction
 
 }  // namespace CallingTemplateInstanceWithTemplateParametersWorks
 
@@ -231,15 +217,14 @@ void add() {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
 }
 
+// -> Type deduction in a nutshell (added this line):
+// ---> If any template parameter (that wasn't specified by the caller) couldn't be deduced,
+// -----> but has a default value, then it is fixed as its default value.
 TEST(TemplateExamplesTest, TemplateParameterThatCannotBeDeducedFailsWorks) {
     add<int>();  // compiles
     // add<>(); // Compilation error: couldn't infer template argument 'T'
     // add<>(); // Compilation error: couldn't infer template argument 'T'
 }
-
-// -> Type deduction in a nutshell (added this line):
-// ---> If any template parameter (that wasn't specified by the caller) couldn't be deduced,
-// -----> but has a default value, then it is fixed as its default value.
 
 }  // namespace TemplateParameterThatCannotBeDeducedFailsWorks
 
@@ -260,25 +245,6 @@ void fWithDoubleRef(T&&) {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
 }
 
-TEST(TemplateExamplesTest, TemplateTypeDeductionWithAmpersandsWorks) {
-    int i = 3;
-    const int ci = 4;
-
-    f(i);                // [with T = int]
-    fWithRef(i);         // [with T = int]
-    fWithDoubleRef(42);  // [with T = int]
-    fWithDoubleRef(i);   // [with T = int&]
-
-    f(ci);               // [with T = int]
-    fWithRef(ci);        // [with T = const int]
-    fWithDoubleRef(ci);  // [with T = const int&]
-
-    fWithRef(static_cast<int&>(i));  // [with T = int]
-    // fWithRef(static_cast<int&&>(i));     // [with T = int] Error: expects an lvalue for 1st argument
-    fWithRef(static_cast<const int&>(i));   // [with T = const int]
-    fWithRef(static_cast<const int&&>(i));  // [with T = const int&]
-}
-
 // -> T&& is a forwarding reference or ("universal reference" by Scott Meyers)
 // -> Reference collapsing:
 // ---> The rule to remember when dealing with references is that combining two reference types
@@ -293,6 +259,22 @@ TEST(TemplateExamplesTest, TemplateTypeDeductionWithAmpersandsWorks) {
 // -----> The compiler won't insert const qulaifiers into its deduced T just to make the binding come out right.
 // -------> This is why f(static_cast<int&&>(i)) doesn't deduce to T=int.
 // -> (N4606 13.3.3.1.4 [over.ics.ref]/3)
+TEST(TemplateExamplesTest, TemplateTypeDeductionWithAmpersandsWorks) {
+    int i = 3;
+    const int ci = 4;
+
+    f(i);                            // [with T = int]
+    fWithRef(i);                     // [with T = int]
+    fWithDoubleRef(42);              // [with T = int]
+    fWithDoubleRef(i);               // [with T = int&]
+    f(ci);                           // [with T = int]
+    fWithRef(ci);                    // [with T = const int]
+    fWithDoubleRef(ci);              // [with T = const int&]
+    fWithRef(static_cast<int&>(i));  // [with T = int]
+    // fWithRef(static_cast<int&&>(i));     // [with T = int] Error: expects an lvalue for 1st argument
+    fWithRef(static_cast<const int&>(i));   // [with T = const int]
+    fWithRef(static_cast<const int&&>(i));  // [with T = const int&]
+}
 
 }  // namespace TemplateTypeDeductionWithAmpersandsWorks
 
@@ -302,14 +284,13 @@ template <typename T>
 void f(void (*)(T)) {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
 }
-void g(int&&) {}
-
-TEST(TemplateExamplesTest, TemplateTypeDeductionWithDoubleRefRefDeduction) {
-    f(g);  // [with T = int&&]
-}
 
 // -> Although we prefer to deduce T=int rather T=int&& in the forwarding-reference case,
 // ---> there do exists other cases where T=int&& is the only possible deduction.
+void g(int&&) {}
+TEST(TemplateExamplesTest, TemplateTypeDeductionWithDoubleRefRefDeduction) {
+    f(g);  // [with T = int&&]
+}
 
 }  // namespace TemplateTypeDeductionWithDoubleRefRefDeduction
 
@@ -336,6 +317,13 @@ int mySizeOf<void>() {  // has to use <void> to be deduced
     return 1;
 }
 
+// -> Defining a specialization in a nutshell
+// ---> Prefix the definition with template<>, and then write the function definition
+// -----> as if you were USING the specialization that you want to write.
+// ---> For function templates, because of their type deduction rules,
+// -----> this usually means you don't need to write any more angle brackets at all.
+// -----> But when a type can't be deduced or defaulted, you have to write the brackets.
+// -> (N4606 14.7.3 [temp.expl.spec]/1)
 TEST(TemplateExamplesTest, TemplateSpecializationWorks) {
     cout << "isVoidStruct with int: " << isVoidStruct<int>::value << "\n";
     cout << "isVoidStruct with void: " << isVoidStruct<void>::value << "\n";
@@ -344,33 +332,23 @@ TEST(TemplateExamplesTest, TemplateSpecializationWorks) {
     cout << "mySizeOf with void: " << mySizeOf<void>() << "\n";
 }
 
-// -> Defining a specialization in a nutshell
-// ---> Prefix the definition with template<>, and then write the function definition
-// -----> as if you were USING the specialization that you want to write.
-// ---> For function templates, because of their type deduction rules,
-// -----> this usually means you don't need to write any more angle brackets at all.
-// -----> But when a type can't be deduced or defaulted, you have to write the brackets.
-// -> (N4606 14.7.3 [temp.expl.spec]/1)
-
 }  // namespace TemplateSpecializationWorks
 
 namespace AliasTemplatesCannotBeSpecialized {
 
 template <typename T>
 using myvec = vector<T>;  // alias template
-
 template <typename T>
 void foo(myvec<T>&) {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
 }
 
+// -> We can "propagate T through" the definition of myvec to find that foo<T> takes std::vector<T>
+// ---> Because myvec is always a std::vector (specialization is not allowed), the compiler can just substitute it.
 TEST(TemplateExamplesTest, AliasTemplatesCannotBeSpecialized) {
     vector<int> v;
     foo(v);  // Compiles: [with T = int, myvec<T> = std::vector<int>]
 }
-
-// -> We can "propagate T through" the definition of myvec to find that foo<T> takes std::vector<T>
-// ---> Because myvec is always a std::vector (specialization is not allowed), the compiler can just substitute it.
 
 }  // namespace AliasTemplatesCannotBeSpecialized
 
@@ -386,12 +364,11 @@ void foo(typename myvec<T>::type&) {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
 }
 
+// -> We don't know what myvec<T>::type is until we know what T is (because it can be specialized).
 TEST(TemplateExamplesTest, ClassTemplatesCanBeSpecialized) {
     vector<int> v1;
     // foo(v1);  // Error : couldn't infer template argument 'T'
 }
-
-// -> We don't know what myvec<T>::type is until we know what T is (because it can be specialized).
 
 }  // namespace ClassTemplatesCanBeSpecialized
 
@@ -400,25 +377,14 @@ namespace PartialSpecializationWorks {
 // This is the primary template:
 template <typename T>
 constexpr bool isAnArray = false;
-
 // These are the partial specializations:
 template <typename Tp>
 constexpr bool isAnArray<Tp[]> = true;
-
 template <typename Tp, size_t N>
 constexpr bool isAnArray<Tp[N]> = true;
-
 // This is a full specialization
 template <>
 constexpr bool isAnArray<void> = true;
-
-TEST(TemplateExamplesTest, PartialSpecializationWorks) {
-    cout << "isAnArray with int: " << isAnArray<int> << "\n";
-    cout << "isAnArray with int[]: " << isAnArray<int[]> << "\n";
-    cout << "isAnArray with int[5]: " << isAnArray<int[5]> << "\n";
-    cout << "isAnArray with void: " << isAnArray<void> << "\n";
-}
-
 // -> A partial specialization is any specialization that is, itself a template
 // ---> It still requires further "customization" by the user before it can be used.
 // -> The user can explicitly specify values for the original template's template parameters,
@@ -427,6 +393,12 @@ TEST(TemplateExamplesTest, PartialSpecializationWorks) {
 // -> The number of template paramters on the partial specialization is completely unrelated
 // ---> to the number of template parameters on the original template.
 // -> (N4606 14.5.5 [temp.class.spec])
+TEST(TemplateExamplesTest, PartialSpecializationWorks) {
+    cout << "isAnArray with int: " << isAnArray<int> << "\n";
+    cout << "isAnArray with int[]: " << isAnArray<int[]> << "\n";
+    cout << "isAnArray with int[5]: " << isAnArray<int[5]> << "\n";
+    cout << "isAnArray with void: " << isAnArray<void> << "\n";
+}
 
 }  // namespace PartialSpecializationWorks
 
@@ -459,18 +431,17 @@ struct myVectorStruct<Tp**> {
     explicit myVectorStruct() { cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n"; }
 };
 
+// -> Selecting the specialization
+// ---> First, deduce all the template type parameters
+// -----> Then, if they exactly match some full specialization, of course well use that full specialization
+// -----> Otherwise, look for the best-matching partial specialization.
+// -------> If the "best match" is hard to identify (ambiguous), give an error instead.
 TEST(TemplateExamplesTest, SelectingTheSpecializationWorks) {
     myVectorStruct<int> a;     // myVectorStruct<T>::myVectorStruct() [with T = int]
     myVectorStruct<void> b;    // myVectorStruct<void>::myVectorStruct()
     myVectorStruct<int*> c;    // myVectorStruct<Tp*>::myVectorStruct() [with Tp = int]
     myVectorStruct<int***> d;  // myVectorStruct<Tp**>::myVectorStruct() [with Tp = int*]
 }
-
-// -> Selecting the specialization
-// ---> First, deduce all the template type parameters
-// -----> Then, if they exactly match some full specialization, of course well use that full specialization
-// -----> Otherwise, look for the best-matching partial specialization.
-// -------> If the "best match" is hard to identify (ambiguous), give an error instead.
 
 }  // namespace SelectingTheSpecializationWorks
 
@@ -497,20 +468,18 @@ bool isPointer(Tp*) {
     return true;
 }
 
-TEST(TemplateExamplesTest, FunctionTemplatesCannotBePartiallySpecialized) {
-    void* pv = nullptr;
-    bool result = isPointer(pv);  // isPointer(Tp*) [with Tp = void]
-    // [T=void*] specialization is not called, because the other template is a better match.
-
-    cout << "isPointer with void*: " << result << "\n";
-}
-
 // -> This creates a pair of function templates in the same overload set.
 // ---> It may seem to work in this case, but don't get used to it.
 // -----> http://www.gotw.ca/publications/mill17.htm
 // ---> Remember that the syntax for a full specialization always starts with template<>
 // -----> and the syntax for a partial specialization always contains angle brackets after the template-name
 // ------->(isPointer in this example).
+TEST(TemplateExamplesTest, FunctionTemplatesCannotBePartiallySpecialized) {
+    void* pv = nullptr;
+    bool result = isPointer(pv);  // isPointer(Tp*) [with Tp = void]
+    // [T=void*] specialization is not called, because the other template is a better match.
+    cout << "isPointer with void*: " << result << "\n";
+}
 
 }  // namespace FunctionTemplatesCannotBePartiallySpecialized
 
@@ -541,16 +510,14 @@ bool isPointer(T) {
     return isPointerImpl<T>::isPointer();
 }
 
-TEST(TemplateExamplesTest, FunctionTemplatesPartiallySpecializationUsingClasses) {
-    void* pv = nullptr;
-    bool result = isPointer(pv);  // isPointerImpl<Tp*>::isPointer() [with Tp = void]
-
-    cout << "isPointer with void*: " << result << "\n";
-}
-
 // -> If you need partial specialization, then you should delegate all the work to a class template,
 // ---> which can be partially specialized
 // ---> Use the right tool for the job!
+TEST(TemplateExamplesTest, FunctionTemplatesPartiallySpecializationUsingClasses) {
+    void* pv = nullptr;
+    bool result = isPointer(pv);  // isPointerImpl<Tp*>::isPointer() [with Tp = void]
+    cout << "isPointer with void*: " << result << "\n";
+}
 
 }  // namespace FunctionTemplatesPartiallySpecializationUsingClasses
 
@@ -573,15 +540,6 @@ struct InstantiationClass {
     }
 };
 
-TEST(TemplateExamplesTest, TemplateIsOnlyInstantiatedWhenNeeded) {
-    // NoInstantiationClass<int> variable1;  // Compiler error (static_assert failure)
-    NoInstantiationClass<int>* variable2 = nullptr;  // No compiler error.
-
-    InstantiationClass<int> variable3;  // No compiler error.
-    // InstantiationClass<int>::noInstantiationStaticFunction(); // Compiler error (static_assert failure)
-    // variable3.noInstantiationFunction();  // Compiler error (static_assert failure)
-}
-
 // -> When is instantiation needed?
 // ---> A decent rule of thumb is: Never instantiate anything you don't absolutely 100% have to.
 // -----> N4604 14.7.1 [temp.inst]/1
@@ -594,13 +552,19 @@ TEST(TemplateExamplesTest, TemplateIsOnlyInstantiatedWhenNeeded) {
 // -----> N4606 14.7.1 temp.inst/5:
 // -------> Unless a variable template specialization has been explicitly instantiated or explicitly specialized,
 // ---------> the variable template specialization is implicitly instantiated when the specialization is used.
-
 // -> static_assert
 // ---> static_assert(false) makes the program ill-formed
 // ---> static_assert(some-falsely-expression-dependent-on-T) make the program ill-form
 // -----> only if the template is actually instantiated
 // -----> In theory, as of this writing a sufficiently smart compiler might refuse to compile this as well.
 // ---> N4604 dcl.dcl /6, 14.6 temp.res /8.3
+TEST(TemplateExamplesTest, TemplateIsOnlyInstantiatedWhenNeeded) {
+    // NoInstantiationClass<int> variable1;  // Compiler error (static_assert failure)
+    NoInstantiationClass<int>* variable2 = nullptr;  // No compiler error.
+    InstantiationClass<int> variable3;               // No compiler error.
+    // InstantiationClass<int>::noInstantiationStaticFunction(); // Compiler error (static_assert failure)
+    // variable3.noInstantiationFunction();  // Compiler error (static_assert failure)
+}
 
 }  // namespace TemplateIsOnlyInstantiatedWhenNeeded
 
@@ -615,7 +579,6 @@ void foo1(Us...) {
 // void foo2() {
 //     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
 // }
-
 template <typename... Ts, typename U>
 void foo3(U) {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
@@ -641,32 +604,6 @@ void foo7(Ts..., Us...) {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
 }
 
-TEST(TemplateExamplesTest, TemplateTypeDeductionWorksUsingPrettyFunction) {
-    foo1<char>(0, 1, 2);        // [with T = char; Us = {int, int, int}]
-    foo1<char, char>(0, 1, 2);  // [with T = char; Us = {char, int, int}]
-    // foo1<int, char, int>(); // Compiler error: requires 2 arguments, but 0 were provided
-
-    // foo2<int, char, int>();  // Compiler error: couldn't infer template argument 'V'
-
-    foo3<int, char>(3.1);  // [with Ts = {int, char}; U = double]
-
-    foo4<int, char>(0, 0, 3.1);  // [with Ts = {int, char, double}]
-
-    foo5('x', 1, 2);  // [with Ts = {int, int}; U = char]
-
-    // foo6('x', 1, 2);  // Compiler error: requires 1 argument, but 3 were provided
-    // Us... is NOT at the end of function parameter list.
-    // Us... doesnt contribute to deduction, so this fails
-
-    foo6<int, int, int>('x', 1, 2);  // [with T = int; Us = {int, int}]
-    // Us.. doesnt contribute to deduction, but we explicit mention T = int; Us = {int, int} so it works
-
-    foo7<int, int>(1, 2, 3);  // [with Ts = {int, int}; Us = {int}]
-    // -> What does it mean to contribute to deduction?
-    // ---> Clang: claims Ts can't be deduced; compiler error
-    // ---> MSVC/GCC: assumes Ts wont be lengthened Ts=<int, int> Us=<int>
-}
-
 // -> Type deduction in a nutshell (with variadic templates)
 // ---> For variadic templates:
 // -----> As far as explicitly specified template parameters are concerned,
@@ -676,6 +613,24 @@ TEST(TemplateExamplesTest, TemplateTypeDeductionWorksUsingPrettyFunction) {
 // -----> As far as deduction is concern a parameter-pack (Ts... ts) contributes to deduction
 // -------> only if it comes at the VERY END of the function parameter list.
 // -----> Otherwise, it does not contribute to deduction.
+TEST(TemplateExamplesTest, TemplateTypeDeductionWorksUsingPrettyFunction) {
+    foo1<char>(0, 1, 2);        // [with T = char; Us = {int, int, int}]
+    foo1<char, char>(0, 1, 2);  // [with T = char; Us = {char, int, int}]
+    // foo1<int, char, int>(); // Compiler error: requires 2 arguments, but 0 were provided
+    // foo2<int, char, int>();  // Compiler error: couldn't infer template argument 'V'
+    foo3<int, char>(3.1);        // [with Ts = {int, char}; U = double]
+    foo4<int, char>(0, 0, 3.1);  // [with Ts = {int, char, double}]
+    foo5('x', 1, 2);             // [with Ts = {int, int}; U = char]
+    // foo6('x', 1, 2);  // Compiler error: requires 1 argument, but 3 were provided
+    // Us... is NOT at the end of function parameter list.
+    // Us... doesnt contribute to deduction, so this fails
+    foo6<int, int, int>('x', 1, 2);  // [with T = int; Us = {int, int}]
+    // Us.. doesnt contribute to deduction, but we explicit mention T = int; Us = {int, int} so it works
+    foo7<int, int>(1, 2, 3);  // [with Ts = {int, int}; Us = {int}]
+    // -> What does it mean to contribute to deduction?
+    // ---> Clang: claims Ts can't be deduced; compiler error
+    // ---> MSVC/GCC: assumes Ts wont be lengthened Ts=<int, int> Us=<int>
+}
 
 }  // namespace VariadicTemplateParameterDeductionWorks
 
@@ -700,7 +655,6 @@ struct IntegralConstantWithAuto {
 //
 //     // These (IntegralConstantWithoutAuto, IntegralConstantWithAuto) are basically the same.
 // }
-
 }  // namespace TemplateAutoWorks
 
 namespace TemplateTypeDeductionWorksForClassesInCpp17 {
@@ -711,17 +665,10 @@ struct myvec {
     explicit myvec(T*) { cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n"; }
 };
 
-TEST(TemplateExamplesTest, TemplateTypeDeductionWorksForClassesInCpp17) {
-    int integer = 5;
-    myvec v1(integer);   // myvec(T) [with T = int]
-    myvec v2(&integer);  // myvec(T*) [with T = int]
-}
-
 // -> Class templates can do deduction on CPP17
 // ---> Forward works: If T is int, we know that myvec<T>'s constructor takes an int parameter.
 // ---> But what about backward: If myvec<U>'s constructor takes an int parameter determine the value of U.
 // -----> It works as demonstrated above.
-
 // -> How it works?
 // ---> Construct a fictitious set of function overloads
 // -----> matching all the constructor of the myvec class template.
@@ -732,6 +679,11 @@ TEST(TemplateExamplesTest, TemplateTypeDeductionWorksForClassesInCpp17) {
 // -----> Now use overload resolution to resolve make_myvec(1)
 // -------> Deduce T=int. Tada! Result: myvec(T) [with T = int]
 // -> N4606 13.3.1.8 over.match.class.deduct
+TEST(TemplateExamplesTest, TemplateTypeDeductionWorksForClassesInCpp17) {
+    int integer = 5;
+    myvec v1(integer);   // myvec(T) [with T = int]
+    myvec v2(&integer);  // myvec(T*) [with T = int]
+}
 
 }  // namespace TemplateTypeDeductionWorksForClassesInCpp17
 
@@ -742,9 +694,9 @@ struct myvec {
     explicit myvec(int) { cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n"; }
     explicit myvec(double) { cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n"; }
 };
-myvec(int)->myvec<double>;  // deduction guide
-myvec(double)->myvec<int>;  // deduction guide
 
+myvec(int) -> myvec<double>;  // deduction guide
+myvec(double) -> myvec<int>;  // deduction guide
 TEST(TemplateExamplesTest, TemplateDeductionGuidesWorksForCpp17) {
     myvec v1(5);    // myvec(int) [with T = double]
     myvec v2(5.1);  // myvec(double) [with T = int]
@@ -769,13 +721,10 @@ void commonFunctionName(float) {
 TEST(TemplateExamplesTest, FunctionSelectionWorksAsExpected) {
     // perfect match is first
     commonFunctionName(5);  // commonFunctionName(int)
-
     // template specialization is second
     commonFunctionName(5.F);  // commonFunctionName(Type) [with Type = float]
-
     // template instantiation is third
     commonFunctionName(5.0);  // commonFunctionName(Type) [with Type = double]
-
     // implicit conversions is last
     commonFunctionName(5U);  // commonFunctionName(int)
 }

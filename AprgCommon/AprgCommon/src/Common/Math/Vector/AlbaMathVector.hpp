@@ -19,10 +19,8 @@ class AlbaMathVector {
 public:
     using AlbaMathVectorType = AlbaMathVector<DataType, SIZE>;
     using ValuesInArray = std::array<DataType, SIZE>;
-
-    AlbaMathVector() : m_values{} {}
-
     explicit AlbaMathVector(ValuesInArray const& values) : m_values(values) {}
+    AlbaMathVector() : m_values{} {}
 
     AlbaMathVector(std::initializer_list<DataType> const& values) : m_values{} {
         size_t limit = std::min(SIZE, static_cast<size_t>(values.size()));
@@ -30,7 +28,6 @@ public:
     }
 
     // rule of zero
-
     bool operator==(AlbaMathVectorType const& second) const {
         return std::equal(
             m_values.cbegin(), m_values.cend(), second.m_values.cbegin(),

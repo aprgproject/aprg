@@ -12,10 +12,8 @@ public:
     using Values = std::vector<Value>;
     using IndexToIndex = std::vector<Index>;
     using IndexToValue = std::vector<Value>;
-    static constexpr Value UNUSED_VALUE = std::numeric_limits<Value>::max();
-
     explicit LongestIncreasingSubsequenceLinearithmic(Values const& sequence);
-
+    static constexpr Value UNUSED_VALUE = std::numeric_limits<Value>::max();
     [[nodiscard]] Index getLongestLength() const;
     [[nodiscard]] Values getLongestSubsequence() const;
 

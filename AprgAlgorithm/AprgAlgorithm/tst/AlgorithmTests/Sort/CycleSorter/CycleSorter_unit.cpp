@@ -43,7 +43,6 @@ TEST(CycleSorterTest, SortWorksOnCharactersUsingExample2) {
 }
 
 // CANNOT SORT STD::LIST
-
 TEST(CycleSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
     IntegersSorter sorter;
     testSortUsingExample1WithPositiveAndNegativeIntegers<IntegersSorter, Integers>(sorter);

@@ -11,13 +11,12 @@ public:
         Term termToRationalize;
         Term otherTerm;
     };
+
     RationalizeTermOverTerm();
     RationalizeTermOverTerm(Term const& numerator, Term const& denominator);
-
     [[nodiscard]] Term const& getNumerator() const;
     [[nodiscard]] Term const& getDenominator() const;
     [[nodiscard]] Term getCombinedTerm() const;
-
     void rationalizeNumerator();
     void rationalizeDenominator();
 
@@ -35,15 +34,19 @@ private:
         Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial);
     static void retrieveTermsForRationalizationForExpression(
         Term& rationalizedTerm, Term& multiplier, Expression const& expression);
+
     static void retrieveTermsForRationalizationForExpression(
         Term& rationalizedTerm, Term& multiplier, TermWithDetails const& firstTermWithDetails,
         TermWithDetails const& secondTermWithDetails);
+
     static void retrieveTermsForRationalizationForExpressionWhenExponentIsDivisibleByTwo(
         Term& rationalizedTerm, Term& multiplier, TermWithDetails const& firstTermWithDetails,
         TermWithDetails const& secondTermWithDetails);
+
     static void retrieveTermsForRationalizationForExpressionWhenExponentIsDivisibleByThree(
         Term& rationalizedTerm, Term& multiplier, TermWithDetails const& firstTermWithDetails,
         TermWithDetails const& secondTermWithDetails);
+
     Term m_numerator;
     Term m_denominator;
 };

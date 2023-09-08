@@ -14,17 +14,17 @@ namespace alba {
 class StartupLogAnalyzer {
 public:
     StartupLogAnalyzer();
-    void clear();
-    void saveDataToCsv(std::string const& csvPath);
     static void saveDataTimeToCsv(
         std::ofstream& outputCsvFileStream, std::string const& description, std::vector<double> const& data);
+    void clear();
+    void saveDataToCsv(std::string const& csvPath);
     void processFileWithSortedPrints(std::string const& pathOfBtsSortedLog);
 
 private:
-    void analyzeStartupDelays(std::string const& lineInLogs, wcdmaToolsBackend::BtsLogTime& previousNotableTime);
     [[nodiscard]] static double getTotalSeconds(
         wcdmaToolsBackend::BtsLogTime const& beforeTime, wcdmaToolsBackend::BtsLogTime const& afterTime);
     static double getTotalSeconds(wcdmaToolsBackend::BtsLogTime const& btsLogTime);
+    void analyzeStartupDelays(std::string const& lineInLogs, wcdmaToolsBackend::BtsLogTime& previousNotableTime);
     AlbaLocalPathHandler m_btsLogPathHandler;
     wcdmaToolsBackend::BtsLogTime m_firstLogTime;
     double m_processingAndMessagingTotalDelay{0};

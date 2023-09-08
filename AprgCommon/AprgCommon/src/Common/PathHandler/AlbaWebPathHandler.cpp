@@ -11,20 +11,6 @@ using namespace std;
 namespace alba {
 
 AlbaWebPathHandler::AlbaWebPathHandler(string_view const path) : AlbaPathHandler("/") { setPath(path); }
-
-void AlbaWebPathHandler::clear() {
-    AlbaPathHandler::clear();
-    m_protocolWithSymbols.clear();
-    m_urlParameters.clear();
-    m_hasProtocol = false;
-}
-
-string AlbaWebPathHandler::getFullPath() const {
-    return m_protocolWithSymbols + m_directory + m_file + m_urlParameters;
-}
-
-string AlbaWebPathHandler::getDirectory() const { return m_protocolWithSymbols + m_directory; }
-
 bool AlbaWebPathHandler::hasProtocol() const { return m_hasProtocol; }
 
 string AlbaWebPathHandler::getProtocol() const {
@@ -84,5 +70,18 @@ void AlbaWebPathHandler::splitPathToBeforeAndAfterProtocol(
 }
 
 void AlbaWebPathHandler::setUrlParameters(string_view const urlParameters) { m_urlParameters = urlParameters; }
+
+string AlbaWebPathHandler::getFullPath() const {
+    return m_protocolWithSymbols + m_directory + m_file + m_urlParameters;
+}
+
+string AlbaWebPathHandler::getDirectory() const { return m_protocolWithSymbols + m_directory; }
+
+void AlbaWebPathHandler::clear() {
+    AlbaPathHandler::clear();
+    m_protocolWithSymbols.clear();
+    m_urlParameters.clear();
+    m_hasProtocol = false;
+}
 
 }  // namespace alba

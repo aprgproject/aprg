@@ -22,6 +22,10 @@ constexpr uint32_t DAYS_31_IN_MONTH = 31U;
 
 namespace alba::dateTimeHelper {
 
+bool isLeapYear(uint32_t const year) {
+    return (year % YEARS_4 == 0 && year % YEARS_100 != 0) || (year % YEARS_400 == 0);
+}
+
 std::string_view getMonthString(uint32_t const month) {
     switch (month) {
         case JANUARY:
@@ -58,10 +62,6 @@ std::string_view getAmPmSuffix(uint32_t const hours) { return hours < HOURS_12 ?
 
 uint32_t convertTo12HourFormat(uint32_t const hours) {
     return hours > HOURS_12 ? hours - HOURS_12 : (hours == 0 ? HOURS_12 : hours);
-}
-
-bool isLeapYear(uint32_t const year) {
-    return (year % YEARS_4 == 0 && year % YEARS_100 != 0) || (year % YEARS_400 == 0);
 }
 
 uint32_t getNumberOfDaysInAYear(uint32_t const year) {
@@ -184,7 +184,6 @@ DayOfTheWeek getDayOfTheWeek(uint32_t const years, uint32_t const month, uint32_
     // https://en.wikipedia.org/wiki/Determination_of_the_day_of_the_week
     // Based from Sakamoto Methods
     // 1 <= month <= 12,  years > 1752 (in the U.K.)
-
     uint32_t yearValue = years;
     static constexpr array<uint32_t, 12> monthOffset = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
     yearValue -= (month < 3) ? 1 : 0;

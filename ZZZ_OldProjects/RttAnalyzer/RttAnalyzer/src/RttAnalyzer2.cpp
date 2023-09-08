@@ -38,6 +38,33 @@ void RttAnalyzer2::processLine(ofstream& outputFile, string const& line) {
     outputFile << time << "," << rtt << "\n";
 }
 
+void RttAnalyzer2::processFile3(string const& file) {
+    AlbaLocalPathHandler pathHandler(file);
+    ifstream logStream(pathHandler.getFullPath());
+    ofstream outputLogStream(pathHandler.getDirectory() + "PeakPosCx8FromUeLogs.csv");
+    pathHandler.input(pathHandler.getDirectory() + pathHandler.getFilenameOnly() + ".csv");
+    ofstream collectedRttDetails(pathHandler.getFullPath());
+
+    outputLogStream << "peak_pos_cx8\n";
+
+    if (logStream.is_open()) {
+        AlbaFileReader logFileReader(logStream);
+
+        while (logFileReader.isNotFinished()) {
+            string lineInFile(logFileReader.getLineAndIgnoreWhiteSpaces());
+            if (isStringFoundNotCaseSensitive(lineInFile, "peak_pos_cx8")) {
+                processLine3(outputLogStream, lineInFile);
+            }
+        }
+    }
+}
+
+void RttAnalyzer2::processLine3(ofstream& outputFile, string const& line) {
+    static string dateTime;
+    auto peakPosCx8 = convertStringToNumber<unsigned int>(getNumberAfterThisString(line, "peak_pos_cx8 "));
+    outputFile << peakPosCx8 << "\n";
+}
+
 void RttAnalyzer2::saveTitle2() { m_outputLogStream << "fileName,dateTime,maxPos,refPos,difference\n"; }
 
 void RttAnalyzer2::processFile2(string const& file) {
@@ -64,33 +91,6 @@ void RttAnalyzer2::processLine2(string const& fileName, string const& line) {
         int difference = static_cast<int>(maxPos) - static_cast<int>(refPos);
         m_outputLogStream << fileName << "," << dateTime << "," << maxPos << "," << refPos << "," << difference << "\n";
     }
-}
-
-void RttAnalyzer2::processFile3(string const& file) {
-    AlbaLocalPathHandler pathHandler(file);
-    ifstream logStream(pathHandler.getFullPath());
-    ofstream outputLogStream(pathHandler.getDirectory() + "PeakPosCx8FromUeLogs.csv");
-    pathHandler.input(pathHandler.getDirectory() + pathHandler.getFilenameOnly() + ".csv");
-    ofstream collectedRttDetails(pathHandler.getFullPath());
-
-    outputLogStream << "peak_pos_cx8\n";
-
-    if (logStream.is_open()) {
-        AlbaFileReader logFileReader(logStream);
-
-        while (logFileReader.isNotFinished()) {
-            string lineInFile(logFileReader.getLineAndIgnoreWhiteSpaces());
-            if (isStringFoundNotCaseSensitive(lineInFile, "peak_pos_cx8")) {
-                processLine3(outputLogStream, lineInFile);
-            }
-        }
-    }
-}
-
-void RttAnalyzer2::processLine3(ofstream& outputFile, string const& line) {
-    static string dateTime;
-    auto peakPosCx8 = convertStringToNumber<unsigned int>(getNumberAfterThisString(line, "peak_pos_cx8 "));
-    outputFile << peakPosCx8 << "\n";
 }
 
 }  // namespace alba

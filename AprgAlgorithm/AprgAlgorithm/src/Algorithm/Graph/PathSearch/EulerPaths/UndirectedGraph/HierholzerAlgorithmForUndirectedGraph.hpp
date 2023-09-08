@@ -20,11 +20,20 @@ public:
     using Path = typename GraphTypes<Vertex>::Path;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using VertexToSetOfAdjacencyVerticesMap = std::map<Vertex, SetOfVertices>;
-
     explicit HierholzerAlgorithmForUndirectedGraph(BaseUndirectedGraphWithVertex const& graph)
         : BaseClass(graph), b_graph(BaseClass::b_graph) {}
 
 private:
+    [[nodiscard]] VertexToSetOfAdjacencyVerticesMap createVertexToSetOfAdjacencyVerticesMap() const {
+        VertexToSetOfAdjacencyVerticesMap result;
+        Vertices allVertices(b_graph.getVertices());
+        for (Vertex const& vertex : allVertices) {
+            Vertices const& adjacentVertices(b_graph.getAdjacentVerticesAt(vertex));
+            result.emplace(vertex, SetOfVertices(adjacentVertices.cbegin(), adjacentVertices.cend()));
+        }
+        return result;
+    }
+
     void searchForEulerPath(Path& result, Vertex const& startingVertex) const override {
         VertexToSetOfAdjacencyVerticesMap vertexToSetOfAdjacencyVerticesMap(createVertexToSetOfAdjacencyVerticesMap());
 
@@ -50,16 +59,6 @@ private:
             }
         }
         std::reverse(result.begin(), result.end());
-    }
-
-    [[nodiscard]] VertexToSetOfAdjacencyVerticesMap createVertexToSetOfAdjacencyVerticesMap() const {
-        VertexToSetOfAdjacencyVerticesMap result;
-        Vertices allVertices(b_graph.getVertices());
-        for (Vertex const& vertex : allVertices) {
-            Vertices const& adjacentVertices(b_graph.getAdjacentVerticesAt(vertex));
-            result.emplace(vertex, SetOfVertices(adjacentVertices.cbegin(), adjacentVertices.cend()));
-        }
-        return result;
     }
 
     BaseUndirectedGraphWithVertex const& b_graph;

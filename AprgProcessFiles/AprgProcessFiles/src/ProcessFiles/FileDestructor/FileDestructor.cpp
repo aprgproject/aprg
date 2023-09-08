@@ -10,29 +10,6 @@ namespace alba {
 
 FileDestructor::FileDestructor() : m_pathToDestroy(AlbaLocalPathHandler::createPathHandlerForDetectedPath()) {}
 
-void FileDestructor::destroy() const { destroy(m_pathToDestroy.getFullPath()); }
-
-void FileDestructor::destroy(string const& path) const {
-    renameDirectoriesUnderneath(path);
-    destroyFilesAndDirectories(path);
-}
-
-void FileDestructor::renameDirectoriesUnderneath(string const& directoryPath) const {
-    AlbaLocalPathHandler pathHandler(directoryPath);
-    ListOfPaths listOfFiles;
-    ListOfPaths listOfDirectories;
-    pathHandler.findFilesAndDirectoriesOneDepth("*.*", listOfFiles, listOfDirectories);
-    for (string const& directoryFromList : listOfDirectories) {
-        renameDirectory(directoryFromList);
-    }
-    listOfFiles.clear();
-    listOfDirectories.clear();
-    pathHandler.findFilesAndDirectoriesOneDepth("*.*", listOfFiles, listOfDirectories);
-    for (string const& directoryFromList : listOfDirectories) {
-        renameDirectoriesUnderneath(directoryFromList);
-    }
-}
-
 void FileDestructor::destroyFilesAndDirectories(string const& path) {
     cout << "Destroying files in: [" << path << "]\n";
     AlbaLocalPathHandler pathHandler(path);
@@ -81,6 +58,29 @@ void FileDestructor::destroyFile(string const& filePath) {
             cout << "Destroyed File: [" << filePathHandler.getFullPath() << "]\n";
         }
         --retries;
+    }
+}
+
+void FileDestructor::destroy() const { destroy(m_pathToDestroy.getFullPath()); }
+
+void FileDestructor::destroy(string const& path) const {
+    renameDirectoriesUnderneath(path);
+    destroyFilesAndDirectories(path);
+}
+
+void FileDestructor::renameDirectoriesUnderneath(string const& directoryPath) const {
+    AlbaLocalPathHandler pathHandler(directoryPath);
+    ListOfPaths listOfFiles;
+    ListOfPaths listOfDirectories;
+    pathHandler.findFilesAndDirectoriesOneDepth("*.*", listOfFiles, listOfDirectories);
+    for (string const& directoryFromList : listOfDirectories) {
+        renameDirectory(directoryFromList);
+    }
+    listOfFiles.clear();
+    listOfDirectories.clear();
+    pathHandler.findFilesAndDirectoriesOneDepth("*.*", listOfFiles, listOfDirectories);
+    for (string const& directoryFromList : listOfDirectories) {
+        renameDirectoriesUnderneath(directoryFromList);
     }
 }
 

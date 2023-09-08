@@ -38,6 +38,7 @@ NumberType getNumberOfPermutations(NumberType const nValue, NumberType const rVa
     }
     return result;
 }
+
 template <typename NumberType>
 NumberType getNumberOfCombinations(NumberType const nValue, NumberType const rValue) {
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
@@ -48,15 +49,12 @@ NumberType getNumberOfCombinations(NumberType const nValue, NumberType const rVa
     // If x is included in the subset, we have to choose kValue-1 elements from nValue-1 elements,
     // and if x is not included in the subset, we have to choose kValue elements from nValue-1 elements.
     // Note: Formula 1 might be useful in dynamic programming
-
     // Formula 2(factorial formula): (nValue, kValue) = nValue! / (kValue! * (nValue-kValue)!)
     // Idea: There are nValue! permutations of nValue elements.
     // We go through all permutations and always include the first kValue elements of the permutation in the subset.
     // Since the order of the elements in the subset and outside the subset does not matter,
     // the result is divided by kValue! and (nValue-kValue)!
-
     // Formula 2 is the one implemented below:
-
     if (nValue >= rValue) {
         NumberType smallerR = (nValue < 2 * rValue) ? nValue - rValue : rValue;
         NumberType accumulatedNumerator = 1;
@@ -91,7 +89,6 @@ NumberType getNumberOfCombinationsFasterButPossibleOfRange(NumberType const nVal
     //
     // Also, C(nValue, kValue) = C(nValue, nValue-kValue)
     // -> So rValue can be changed to nValue-rValue if (nValue-rValue < rValue) or (nValue < 2*rValue)
-
     if (nValue >= rValue) {
         NumberType smallerR = (nValue < 2 * rValue) ? nValue - rValue : rValue;
         NumberType result(1);
@@ -110,7 +107,6 @@ NumberType getBinomialCoefficient(NumberType const rowIndex, NumberType const co
 
     // The binomial coefficient equals the number of ways we can choose a subset of kValue elements from a set of nValue
     // elements. The binomial coefficient = the number of combinations
-
     return getNumberOfCombinations(rowIndex, columnIndex);
 }
 
@@ -119,7 +115,6 @@ NumberType getValueAtPascalTriangle(NumberType const rowIndex, NumberType const 
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
     // This is same with the number of combinations and binomial coefficient.
-
     return getNumberOfCombinations(rowIndex, columnIndex);
 }
 
@@ -130,10 +125,8 @@ typename std::make_signed<NumberType>::type getStirlingNumberOfTheSecondKind(
 
     // In mathematics, particularly in combinatorics, a Stirling number of the second kind (or Stirling partition
     // number) is the number of ways to partition a set of nValue objects into kValue non-empty subsets
-
     // Stirling numbers of the second kind occur in the field of mathematics called combinatorics and the study of
     // partitions.
-
     using SignedType = typename std::make_signed<NumberType>::type;
 
     SignedType sum(0);

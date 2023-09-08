@@ -7,6 +7,57 @@ using namespace std;
 
 namespace alba::algebra::Factorization {
 
+bool isDifferenceOfSquares(Polynomial const& polynomial) {
+    bool result(false);
+    Monomials monomials(polynomial.getMonomials());
+    if (monomials.size() == 2) {
+        Monomial firstMonomial(monomials[0]);
+        Monomial secondMonomial(monomials[1]);
+        if (firstMonomial.getCoefficient() > 0 && secondMonomial.getCoefficient() < 0) {
+            secondMonomial.multiplyNumber(-1);
+            result = isPerfectSquare(firstMonomial) && isPerfectSquare(secondMonomial);
+        } else if (firstMonomial.getCoefficient() < 0 && secondMonomial.getCoefficient() > 0) {
+            firstMonomial.multiplyNumber(-1);
+            result = isPerfectSquare(firstMonomial) && isPerfectSquare(secondMonomial);
+        }
+    }
+    return result;
+}
+
+bool isDifferenceOfCubes(Polynomial const& polynomial) {
+    bool result(false);
+    Monomials monomials(polynomial.getMonomials());
+    if (monomials.size() == 2) {
+        Monomial firstMonomial(monomials[0]);
+        Monomial secondMonomial(monomials[1]);
+        if (firstMonomial.getCoefficient() > 0 && secondMonomial.getCoefficient() < 0) {
+            secondMonomial.multiplyNumber(-1);
+            result = isPerfectCube(firstMonomial) && isPerfectCube(secondMonomial);
+        } else if (firstMonomial.getCoefficient() < 0 && secondMonomial.getCoefficient() > 0) {
+            firstMonomial.multiplyNumber(-1);
+            result = isPerfectCube(firstMonomial) && isPerfectCube(secondMonomial);
+        }
+    }
+    return result;
+}
+
+bool isSumOfCubes(Polynomial const& polynomial) {
+    bool result(false);
+    Monomials monomials(polynomial.getMonomials());
+    if (monomials.size() == 2) {
+        Monomial firstMonomial(monomials[0]);
+        Monomial secondMonomial(monomials[1]);
+        if (firstMonomial.getCoefficient() > 0 && secondMonomial.getCoefficient() > 0) {
+            result = isPerfectCube(firstMonomial) && isPerfectCube(secondMonomial);
+        } else if (firstMonomial.getCoefficient() < 0 && secondMonomial.getCoefficient() < 0) {
+            firstMonomial.multiplyNumber(-1);
+            secondMonomial.multiplyNumber(-1);
+            result = isPerfectCube(firstMonomial) && isPerfectCube(secondMonomial);
+        }
+    }
+    return result;
+}
+
 Polynomials factorizeUsingPatterns(Polynomial const& polynomial) {
     Polynomials result;
     factorizeUsingPatternsIfPossible(result, polynomial);
@@ -104,57 +155,6 @@ void addFactorsOfSumOfCubes(Polynomials& result, Polynomial const& polynomial) {
     simplifyThenEmplaceBackIfPolynomialIsNotEmpty(result, Polynomial{firstMonomial, secondMonomial});
     simplifyThenEmplaceBackIfPolynomialIsNotEmpty(
         result, Polynomial{firstMonomialSquared, productOfFirstAndSecond, secondMonomialSquared});
-}
-
-bool isDifferenceOfSquares(Polynomial const& polynomial) {
-    bool result(false);
-    Monomials monomials(polynomial.getMonomials());
-    if (monomials.size() == 2) {
-        Monomial firstMonomial(monomials[0]);
-        Monomial secondMonomial(monomials[1]);
-        if (firstMonomial.getCoefficient() > 0 && secondMonomial.getCoefficient() < 0) {
-            secondMonomial.multiplyNumber(-1);
-            result = isPerfectSquare(firstMonomial) && isPerfectSquare(secondMonomial);
-        } else if (firstMonomial.getCoefficient() < 0 && secondMonomial.getCoefficient() > 0) {
-            firstMonomial.multiplyNumber(-1);
-            result = isPerfectSquare(firstMonomial) && isPerfectSquare(secondMonomial);
-        }
-    }
-    return result;
-}
-
-bool isDifferenceOfCubes(Polynomial const& polynomial) {
-    bool result(false);
-    Monomials monomials(polynomial.getMonomials());
-    if (monomials.size() == 2) {
-        Monomial firstMonomial(monomials[0]);
-        Monomial secondMonomial(monomials[1]);
-        if (firstMonomial.getCoefficient() > 0 && secondMonomial.getCoefficient() < 0) {
-            secondMonomial.multiplyNumber(-1);
-            result = isPerfectCube(firstMonomial) && isPerfectCube(secondMonomial);
-        } else if (firstMonomial.getCoefficient() < 0 && secondMonomial.getCoefficient() > 0) {
-            firstMonomial.multiplyNumber(-1);
-            result = isPerfectCube(firstMonomial) && isPerfectCube(secondMonomial);
-        }
-    }
-    return result;
-}
-
-bool isSumOfCubes(Polynomial const& polynomial) {
-    bool result(false);
-    Monomials monomials(polynomial.getMonomials());
-    if (monomials.size() == 2) {
-        Monomial firstMonomial(monomials[0]);
-        Monomial secondMonomial(monomials[1]);
-        if (firstMonomial.getCoefficient() > 0 && secondMonomial.getCoefficient() > 0) {
-            result = isPerfectCube(firstMonomial) && isPerfectCube(secondMonomial);
-        } else if (firstMonomial.getCoefficient() < 0 && secondMonomial.getCoefficient() < 0) {
-            firstMonomial.multiplyNumber(-1);
-            secondMonomial.multiplyNumber(-1);
-            result = isPerfectCube(firstMonomial) && isPerfectCube(secondMonomial);
-        }
-    }
-    return result;
 }
 
 }  // namespace alba::algebra::Factorization

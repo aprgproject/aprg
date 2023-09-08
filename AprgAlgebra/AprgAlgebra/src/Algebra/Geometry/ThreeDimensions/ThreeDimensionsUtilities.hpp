@@ -3,7 +3,6 @@
 #include <Algebra/Equation/Equation.hpp>
 
 namespace alba::algebra::ThreeDimensions {
-
 Equation getEllipsoidEquation();
 Equation getEllipticConeEquation();
 Equation getEllipticHyperboloidEquation(bool const isOneNegative);
@@ -13,5 +12,4 @@ Equations getLineEquations();
 Equation getPlaneEquation();
 Equation getPlaneEquationWithPointCoordinates();
 Equation getSphereEquation();
-
 }  // namespace alba::algebra::ThreeDimensions

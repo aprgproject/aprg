@@ -12,31 +12,32 @@ public:
     using Index = int;
     using Count = int;
     using Counts = std::vector<Count>;
+
     enum class PressType { Unknown, TypeA, CtrlA, CtrlC, CtrlV };
+
     struct CountDetail {
         Count numberInScreen;
         Count numberInBuffer;
         Count numberInSelection;
     };
+
     using CountDetails = std::vector<CountDetail>;
     using CountDetailMatrix = matrix::AlbaMatrix<CountDetail>;
-    static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
-
     explicit PrintMaximumNumberOfAs(Count const numberOfPresses);
-
+    static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
     [[nodiscard]] Count getMaxCountOfAOnScreenUsingNaiveRecursion() const;
     [[nodiscard]] Count getMaxCountOfAOnScreenUsingMemoizationDP() const;
     [[nodiscard]] Count getMaxCountOfAOnScreenUsingIterativeDP() const;
     [[nodiscard]] Count getMaxCountOfAOnScreenUsingIterativeDPAndSpaceEfficient() const;
 
 private:
+    static void updateDetailsBasedOnPressType(CountDetails& previousDetails, PressType const pressType);
     [[nodiscard]] CountDetail getMaxCountOfAOnScreenUsingNaiveRecursion(
         Count const remainingNumberOfPresses, PressType const pressType) const;
     CountDetail getMaxCountOfAOnScreenUsingMemoizationDP(
         CountDetailMatrix& savedCounts, Count const remainingNumberOfPresses, PressType const pressType) const;
     CountDetail getBestDetailBasedOnPreviousDetails(
         CountDetails& previousDetails, Count const remainingNumberOfPresses, PressType const pressType) const;
-    static void updateDetailsBasedOnPressType(CountDetails& previousDetails, PressType const pressType);
     Count const m_numberOfPresses;
 };
 

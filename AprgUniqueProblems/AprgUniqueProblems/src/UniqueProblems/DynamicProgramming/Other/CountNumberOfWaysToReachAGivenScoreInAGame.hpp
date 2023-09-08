@@ -12,9 +12,7 @@ public:
     using Index = int;
     using Value = int;
     using Values = std::vector<Value>;
-
     explicit CountNumberOfWaysToReachAGivenScoreInAGame(Value const targetScore);
-
     [[nodiscard]] Value getMinimumCostUsingIterativeDP() const;
     [[nodiscard]] Value getMinimumCostUsingCoinProblemSolutions() const;
 

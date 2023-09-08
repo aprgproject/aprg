@@ -10,7 +10,6 @@ MaximizeProfitInZeroOneKnapsack::MaximizeProfitInZeroOneKnapsack(Weight const ma
 MaximizeProfitInZeroOneKnapsack::Profit MaximizeProfitInZeroOneKnapsack::getBestProfitUsingNaiveRecursion() const {
     // Time Complexity: O(2^n)
     // Auxiliary Space: O(1)
-
     return getBestProfitUsingNaiveRecursion(m_maximumWeight, 0);
 }
 
@@ -19,7 +18,6 @@ MaximizeProfitInZeroOneKnapsack::Profit MaximizeProfitInZeroOneKnapsack::getBest
     // -> As redundant calculations of states are avoided.
     // Auxiliary Space: O(N*W).
     // -> The use of 2D array data structure for storing intermediate states.
-
     Profit result(0);
     if (!m_items.empty()) {
         ProfitMatrix profitMatrix(m_maximumWeight + 1, m_items.size() + 1, static_cast<Profit>(UNUSED_VALUE));
@@ -33,7 +31,6 @@ MaximizeProfitInZeroOneKnapsack::Profit MaximizeProfitInZeroOneKnapsack::getBest
     // -> where ‘N’ is the number of weight element and ‘W’ is capacity. As for every weight element we traverse through
     // all weight capacities 1<=w<=W. Auxiliary Space: O(N*W).
     // -> The use of 2-D array of size ‘N*W’.
-
     Profit result(0);
     if (!m_items.empty()) {
         Weight const& maximumWeightInIteration(m_maximumWeight + 1);
@@ -60,11 +57,9 @@ MaximizeProfitInZeroOneKnapsack::getBestProfitUsingIterativeDPAndSpaceEfficient(
     // Complexity Analysis:
     // Time Complexity: O(N*W). As redundant calculations of states are avoided.
     // Auxiliary Space: O(W).  As we are using 1-D array instead of 2-D array.
-
     // Space efficiency analysis:
     // Since accessing the previous partial values requires only one row above and previous column is always to the
     // left, we only really need 1 row (not a matrix) to keep track partial values.
-
     Profit result(0);
     if (!m_items.empty()) {
         Profits weightToProfit(m_maximumWeight + 1, 0);
@@ -97,6 +92,14 @@ MaximizeProfitInZeroOneKnapsack::Profit MaximizeProfitInZeroOneKnapsack::getBest
     return result;
 }
 
+MaximizeProfitInZeroOneKnapsack::Weight MaximizeProfitInZeroOneKnapsack::getSmallestItemWeight() const {
+    Weight result(m_items.front().first);
+    for (auto it = m_items.cbegin() + 1; it != m_items.cend(); ++it) {
+        result = min(result, it->first);
+    }
+    return result;
+}
+
 MaximizeProfitInZeroOneKnapsack::Profit MaximizeProfitInZeroOneKnapsack::getBestProfitUsingMemoizationDP(
     ProfitMatrix& profitMatrix, Weight const remainingWeight, ItemIndex const itemIndex) const {
     Profit result = profitMatrix.getEntry(remainingWeight, itemIndex);
@@ -112,14 +115,6 @@ MaximizeProfitInZeroOneKnapsack::Profit MaximizeProfitInZeroOneKnapsack::getBest
             }
         }
         profitMatrix.setEntry(remainingWeight, itemIndex, result);
-    }
-    return result;
-}
-
-MaximizeProfitInZeroOneKnapsack::Weight MaximizeProfitInZeroOneKnapsack::getSmallestItemWeight() const {
-    Weight result(m_items.front().first);
-    for (auto it = m_items.cbegin() + 1; it != m_items.cend(); ++it) {
-        result = min(result, it->first);
     }
     return result;
 }

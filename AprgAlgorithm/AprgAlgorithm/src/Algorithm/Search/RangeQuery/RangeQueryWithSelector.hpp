@@ -12,11 +12,9 @@ class RangeQueryWithSelector {
 public:
     // Example for "range query with selector" is minimum queries
     // Minimum queries are more difficult to process than sum queries.
-
     // Still, there is a quite simple O(nlogn) time preprocessing method after which we can answer any minimum query in
     // O(1) time.
     // Note that since minimum and maximum queries can be processed similarly, we can focus on minimum queries.
-
     using Index = int;
     using Value = typename Values::value_type;
     using ValueMatrix = matrix::AlbaMatrix<Value>;
@@ -47,6 +45,14 @@ public:
     }
 
 private:
+    [[nodiscard]] Index getCeilOfLogarithmWithBase2Of(Index const size) const {
+        return AlbaBitValueUtilities<Index>::getCeilOfLogarithmWithBase2Of(size);
+    }
+
+    [[nodiscard]] Index get2ToThePowerOf(Index const exponent) const {
+        return AlbaBitValueUtilities<Index>::get2ToThePowerOf(exponent);
+    }
+
     void initialize(Values const& valuesToCheck) {
         if (!valuesToCheck.empty()) {
             Index maxExponentOf2(getCeilOfLogarithmWithBase2Of(valuesToCheck.size()));
@@ -73,13 +79,6 @@ private:
         }
     }
 
-    [[nodiscard]] Index getCeilOfLogarithmWithBase2Of(Index const size) const {
-        return AlbaBitValueUtilities<Index>::getCeilOfLogarithmWithBase2Of(size);
-    }
-
-    [[nodiscard]] Index get2ToThePowerOf(Index const exponent) const {
-        return AlbaBitValueUtilities<Index>::get2ToThePowerOf(exponent);
-    }
     ValueMatrix m_selectedValueMatrix;  // index by exponent matrix
     SelectorFunction m_selector;
 };

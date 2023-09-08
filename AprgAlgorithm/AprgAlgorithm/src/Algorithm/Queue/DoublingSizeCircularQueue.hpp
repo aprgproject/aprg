@@ -10,12 +10,8 @@ namespace alba::algorithm {
 template <typename Object>
 class DoublingSizeCircularQueue : public BaseQueue<Object> {
 public:
-    static constexpr int MINUMUM_CONTAINER_SIZE = 1;
-
     DoublingSizeCircularQueue() : m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
-
     ~DoublingSizeCircularQueue() override { deleteAllObjects(); }
-
     [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 
     [[nodiscard]] int getSize() const override {
@@ -25,11 +21,7 @@ public:
         return m_containerSize - m_firstIndex + m_afterLastIndex;
     }
 
-    void enqueue(Object const& object) override {
-        resizeOnEnqueueIfNeeded();
-        moveBackIndexIfNeeded(m_afterLastIndex);
-        m_objects[m_afterLastIndex++] = object;
-    }
+    [[nodiscard]] int getContainerSize() const { return m_containerSize; }
 
     Object dequeue() override {
         // should be not empty
@@ -40,7 +32,13 @@ public:
         return result;
     }
 
-    [[nodiscard]] int getContainerSize() const { return m_containerSize; }
+    void enqueue(Object const& object) override {
+        resizeOnEnqueueIfNeeded();
+        moveBackIndexIfNeeded(m_afterLastIndex);
+        m_objects[m_afterLastIndex++] = object;
+    }
+
+    static constexpr int MINUMUM_CONTAINER_SIZE = 1;
 
 private:
     void deleteAllObjects() {
@@ -70,7 +68,7 @@ private:
                 std::copy(m_objects + m_firstIndex, m_objects + m_containerSize, newObjects);
                 std::copy(m_objects, m_objects + m_afterLastIndex, newObjects + m_containerSize - m_firstIndex);
             }
-            delete[](m_objects);
+            delete[] (m_objects);
         }
         m_afterLastIndex = getSize();
         m_firstIndex = 0;

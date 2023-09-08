@@ -6,14 +6,12 @@ namespace Interpreter {
 
 // Context
 // contains information that's global to the interpreter
-
 class Context {
 public:
+    [[nodiscard]] int getValue(std::string const& variable) const { return m_variableToValueMap.at(variable); }
     void set(std::string const& variable, int const value) { m_variableToValueMap.emplace(variable, value); }
 
-    [[nodiscard]] int getValue(std::string const& variable) const { return m_variableToValueMap.at(variable); }
     // ...
-
 private:
     std::map<std::string, int> m_variableToValueMap;
     // ...
@@ -22,11 +20,9 @@ private:
 // Abstract Expression
 // declares an abstract Interpret operation that is common to all nodes
 // in the abstract syntax tree
-
 class AbstractExpression {
 public:
     virtual ~AbstractExpression() = default;
-
     virtual int interpret(Context const&) = 0;
     // ...
 };
@@ -35,14 +31,12 @@ public:
 // implements an Interpret operation associated with terminal symbols
 // in the grammar (an instance is required for every terminal symbol
 // in a sentence)
-
 class TerminalExpression : public AbstractExpression {
 public:
     explicit TerminalExpression(std::string const& variable) : m_variable(variable) {}
-
     int interpret(Context const& context) override { return context.getValue(m_variable); }
-    // ...
 
+    // ...
 private:
     std::string m_variable;
     // ...
@@ -51,7 +45,6 @@ private:
 // Nonterminal Expression
 // implements an Interpret operation for nonterminal symbols
 // in the grammar (one such class is required for every rule in the grammar)
-
 class NonterminalExpression : public AbstractExpression {
 public:
     NonterminalExpression(
@@ -62,8 +55,8 @@ public:
         // Addition is the interpretation
         return m_leftPointer->interpret(context) + m_rightPointer->interpret(context);
     }
-    // ...
 
+    // ...
 private:
     std::unique_ptr<AbstractExpression> m_leftPointer;
     std::unique_ptr<AbstractExpression> m_rightPointer;

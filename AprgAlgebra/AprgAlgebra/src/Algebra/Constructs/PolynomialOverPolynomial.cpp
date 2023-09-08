@@ -26,10 +26,36 @@ PolynomialOverPolynomial::PolynomialOverPolynomial(Polynomial const& numerator, 
       m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(false) {}
 
 bool PolynomialOverPolynomial::isEmpty() const { return m_numerator.isEmpty() && m_denominator.isEmpty(); }
-
 Polynomial const& PolynomialOverPolynomial::getNumerator() const { return m_numerator; }
-
 Polynomial const& PolynomialOverPolynomial::getDenominator() const { return m_denominator; }
+
+PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::divide() const {
+    Polynomial currentQuotient;
+    Polynomial currentRemainder(m_numerator);
+    while (!isTheValue(currentRemainder, 0) && !isNan(currentRemainder)) {
+        Monomial const& dividendMonomial(getFirstMonomial(currentRemainder));
+        Monomial const& divisorMonomial(getFirstMonomial(m_denominator));
+        Monomial currentQuotientMonomial(dividendMonomial);
+        currentQuotientMonomial.divideMonomial(divisorMonomial);
+        if (!hasNegativeExponents(currentQuotientMonomial)) {
+            currentQuotient.addMonomial(currentQuotientMonomial);
+            Polynomial polynomialToSubtract(m_denominator);
+            polynomialToSubtract.multiplyMonomial(currentQuotientMonomial);
+            polynomialToSubtract.multiplyNumber(-1);
+            currentRemainder.addPolynomial(polynomialToSubtract);
+            currentQuotient.simplify();
+            currentRemainder.simplify();
+        } else {
+            break;
+        }
+    }
+    return QuotientAndRemainder{currentQuotient, currentRemainder};
+}
+
+PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::simplifyAndDivide() {
+    simplify();
+    return divide();
+}
 
 void PolynomialOverPolynomial::setAsShouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(
     bool const shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue) {
@@ -54,32 +80,76 @@ void PolynomialOverPolynomial::simplifyWithoutFactorization() {
     m_denominator.simplify();
 }
 
-PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::simplifyAndDivide() {
-    simplify();
-    return divide();
-}
-
-PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::divide() const {
-    Polynomial currentQuotient;
-    Polynomial currentRemainder(m_numerator);
-    while (!isTheValue(currentRemainder, 0) && !isNan(currentRemainder)) {
-        Monomial const& dividendMonomial(getFirstMonomial(currentRemainder));
-        Monomial const& divisorMonomial(getFirstMonomial(m_denominator));
-        Monomial currentQuotientMonomial(dividendMonomial);
-        currentQuotientMonomial.divideMonomial(divisorMonomial);
-        if (!hasNegativeExponents(currentQuotientMonomial)) {
-            currentQuotient.addMonomial(currentQuotientMonomial);
-            Polynomial polynomialToSubtract(m_denominator);
-            polynomialToSubtract.multiplyMonomial(currentQuotientMonomial);
-            polynomialToSubtract.multiplyNumber(-1);
-            currentRemainder.addPolynomial(polynomialToSubtract);
-            currentQuotient.simplify();
-            currentRemainder.simplify();
-        } else {
-            break;
+bool PolynomialOverPolynomial::removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(
+    Polynomials& numeratorFactors, Polynomials& denominatorFactors) {
+    bool areSomeFactorsRemoved(false);
+    for (auto numeratorIterator = numeratorFactors.begin(); numeratorIterator != numeratorFactors.end();
+         ++numeratorIterator) {
+        for (auto denominatorIterator = denominatorFactors.begin(); denominatorIterator != denominatorFactors.end();
+             ++denominatorIterator) {
+            Polynomial const& numerator(*numeratorIterator);
+            Polynomial const& denominator(*denominatorIterator);
+            if (!(isOneMonomial(numerator) && isOneMonomial(denominator))) {
+                if (numerator == denominator) {
+                    auto nextOffsetInNumerator = distance(numeratorFactors.begin(), numeratorIterator);
+                    auto nextOffsetInDenominator = distance(denominatorFactors.begin(), denominatorIterator);
+                    nextOffsetInNumerator -= nextOffsetInNumerator > 0 ? 1 : 0;
+                    nextOffsetInDenominator -= nextOffsetInDenominator > 0 ? 1 : 0;
+                    numeratorFactors.erase(numeratorIterator);
+                    denominatorFactors.erase(denominatorIterator);
+                    numeratorIterator = next(numeratorFactors.begin(), nextOffsetInNumerator);
+                    denominatorIterator = next(denominatorFactors.begin(), nextOffsetInDenominator);
+                    areSomeFactorsRemoved = true;
+                    if (numeratorFactors.empty() || denominatorFactors.empty()) {
+                        return areSomeFactorsRemoved;
+                    }
+                }
+            }
         }
     }
-    return QuotientAndRemainder{currentQuotient, currentRemainder};
+    return areSomeFactorsRemoved;
+}
+
+int PolynomialOverPolynomial::getLcmForDenominatorCoefficients(Polynomial const& polynomial) {
+    int lcm(1);
+    for (Monomial const& monomial : polynomial.getMonomials()) {
+        AlbaNumber const& coefficient(monomial.getCoefficient());
+        if (coefficient.isFractionType()) {
+            AlbaNumber::FractionData fractionData(coefficient.getFractionData());
+            lcm = getLeastCommonMultiple(lcm, static_cast<int>(fractionData.denominator));
+        }
+    }
+    return lcm;
+}
+
+Monomial PolynomialOverPolynomial::getMonomialWithMaxNegativeExponentsAndConvertItToPositive(
+    Polynomial const& polynomial) {
+    Monomial resultMonomial(1, {});
+    Monomial::VariablesToExponentsMap const& resultVariableMap(resultMonomial.getVariablesToExponentsMap());
+    for (Monomial const& monomial : polynomial.getMonomials()) {
+        for (auto const& [variable, exponent] : monomial.getVariablesToExponentsMap()) {
+            if (exponent < 0) {
+                AlbaNumber existingExponent;
+                if (resultVariableMap.find(variable) != resultVariableMap.end()) {
+                    existingExponent = resultVariableMap.at(variable);
+                }
+                AlbaNumber newPositiveExponent(exponent * -1);
+                if (newPositiveExponent > existingExponent) {
+                    resultMonomial.putVariableWithExponent(variable, newPositiveExponent);
+                }
+            }
+        }
+    }
+    return resultMonomial;
+}
+
+Polynomial PolynomialOverPolynomial::multiplyAndSimplifyFactors(Polynomials const& factors) {
+    Polynomial product{Monomial(1, {})};
+    for (Polynomial const& factor : factors) {
+        product.multiplyPolynomial(factor);
+    }
+    product.simplify();
+    return product;
 }
 
 bool PolynomialOverPolynomial::shouldPerformFactorization() const {
@@ -140,78 +210,6 @@ void PolynomialOverPolynomial::factorizeRemoveCommonFactorsInNumeratorAndDenomin
             m_denominator = multiplyAndSimplifyFactors(denominatorFactors);
         }
     }
-}
-
-int PolynomialOverPolynomial::getLcmForDenominatorCoefficients(Polynomial const& polynomial) {
-    int lcm(1);
-    for (Monomial const& monomial : polynomial.getMonomials()) {
-        AlbaNumber const& coefficient(monomial.getCoefficient());
-        if (coefficient.isFractionType()) {
-            AlbaNumber::FractionData fractionData(coefficient.getFractionData());
-            lcm = getLeastCommonMultiple(lcm, static_cast<int>(fractionData.denominator));
-        }
-    }
-    return lcm;
-}
-
-Monomial PolynomialOverPolynomial::getMonomialWithMaxNegativeExponentsAndConvertItToPositive(
-    Polynomial const& polynomial) {
-    Monomial resultMonomial(1, {});
-    Monomial::VariablesToExponentsMap const& resultVariableMap(resultMonomial.getVariablesToExponentsMap());
-    for (Monomial const& monomial : polynomial.getMonomials()) {
-        for (auto const& [variable, exponent] : monomial.getVariablesToExponentsMap()) {
-            if (exponent < 0) {
-                AlbaNumber existingExponent;
-                if (resultVariableMap.find(variable) != resultVariableMap.end()) {
-                    existingExponent = resultVariableMap.at(variable);
-                }
-                AlbaNumber newPositiveExponent(exponent * -1);
-                if (newPositiveExponent > existingExponent) {
-                    resultMonomial.putVariableWithExponent(variable, newPositiveExponent);
-                }
-            }
-        }
-    }
-    return resultMonomial;
-}
-
-bool PolynomialOverPolynomial::removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(
-    Polynomials& numeratorFactors, Polynomials& denominatorFactors) {
-    bool areSomeFactorsRemoved(false);
-    for (auto numeratorIterator = numeratorFactors.begin(); numeratorIterator != numeratorFactors.end();
-         ++numeratorIterator) {
-        for (auto denominatorIterator = denominatorFactors.begin(); denominatorIterator != denominatorFactors.end();
-             ++denominatorIterator) {
-            Polynomial const& numerator(*numeratorIterator);
-            Polynomial const& denominator(*denominatorIterator);
-            if (!(isOneMonomial(numerator) && isOneMonomial(denominator))) {
-                if (numerator == denominator) {
-                    auto nextOffsetInNumerator = distance(numeratorFactors.begin(), numeratorIterator);
-                    auto nextOffsetInDenominator = distance(denominatorFactors.begin(), denominatorIterator);
-                    nextOffsetInNumerator -= nextOffsetInNumerator > 0 ? 1 : 0;
-                    nextOffsetInDenominator -= nextOffsetInDenominator > 0 ? 1 : 0;
-                    numeratorFactors.erase(numeratorIterator);
-                    denominatorFactors.erase(denominatorIterator);
-                    numeratorIterator = next(numeratorFactors.begin(), nextOffsetInNumerator);
-                    denominatorIterator = next(denominatorFactors.begin(), nextOffsetInDenominator);
-                    areSomeFactorsRemoved = true;
-                    if (numeratorFactors.empty() || denominatorFactors.empty()) {
-                        return areSomeFactorsRemoved;
-                    }
-                }
-            }
-        }
-    }
-    return areSomeFactorsRemoved;
-}
-
-Polynomial PolynomialOverPolynomial::multiplyAndSimplifyFactors(Polynomials const& factors) {
-    Polynomial product{Monomial(1, {})};
-    for (Polynomial const& factor : factors) {
-        product.multiplyPolynomial(factor);
-    }
-    product.simplify();
-    return product;
 }
 
 }  // namespace alba::algebra

@@ -17,31 +17,23 @@ public:
     };
 
     class Configuration : public AlbaConfigurationHolder<ConfigurationDetails> {};
-
     class ScopeObject : public AlbaConfigurationScopeObject<ConfigurationDetails> {};
-
-    SimplificationOfExpression();
     explicit SimplificationOfExpression(Expression const& expression);
-
+    SimplificationOfExpression();
     static bool shouldSimplifyWithOuterOrAndInnerAnd();
     static bool shouldSimplifyWithOuterAndAndInnerOr();
     static bool shouldSimplifyByQuineMcKluskey();
-
     [[nodiscard]] Expression getExpression() const;
-
     void simplify();
 
 private:
     static bool isChangeDetected(Expression const& expression1, Expression const& expression2);
-
-    void simplifyExpressionUntilNoChange();
     static void simplifyExpression(Expression& expression);
-
     static void processTermsBaseOnOperatorLevel(
         Expression& expression, WrappedTerms const& termsToProcess, OperatorLevel const operatorLevel);
     static void processAndSaveTermsForAndOperation(Expression& expression, WrappedTerms const& termsToProcess);
     static void processAndSaveTermsForOrOperation(Expression& expression, WrappedTerms const& termsToProcess);
-
+    void simplifyExpressionUntilNoChange();
     Expression m_expression;
 };
 

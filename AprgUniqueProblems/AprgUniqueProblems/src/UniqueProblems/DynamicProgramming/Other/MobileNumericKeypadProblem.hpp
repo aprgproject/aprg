@@ -13,10 +13,8 @@ public:
     using NumpadValues = std::vector<NumpadValue>;
     using Counts = std::vector<Count>;
     using CountMatrix = matrix::AlbaMatrix<Count>;
-    static constexpr Count UNUSED_VALUE = std::numeric_limits<Count>::max();
-
     explicit MobileNumericKeypadProblem(Count const length);
-
+    static constexpr Count UNUSED_VALUE = std::numeric_limits<Count>::max();
     [[nodiscard]] Count getCountUsingNaiveRecursion() const;
     [[nodiscard]] Count getCountUsingMemoizationDP() const;
     [[nodiscard]] Count getCountUsingIterativeDP() const;

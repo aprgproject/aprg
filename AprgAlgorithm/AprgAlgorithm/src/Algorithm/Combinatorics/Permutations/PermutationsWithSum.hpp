@@ -13,7 +13,6 @@ public:
     using Permutation = std::vector<Value>;
     using Permutations = std::set<Permutation>;
     using VectorOfPermutations = std::vector<Permutations>;
-
     explicit PermutationsWithSum(Values const& values) : m_inputValues(values) {}
 
     Permutations getPermutationsWithSumUsingLoops(Value const total) {

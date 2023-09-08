@@ -9,11 +9,9 @@ class ConcreteElementB;
 // Visitor
 // declares a Visit operation for each class of ConcreteElement
 // in the object structure
-
 class Visitor {
 public:
     virtual ~Visitor() = default;
-
     virtual void visitElementA(ConcreteElementA* const) = 0;
     virtual void visitElementB(ConcreteElementB* const) = 0;
     // ...
@@ -23,11 +21,9 @@ public:
 // implement each operation declared by Visitor, which implement
 // a fragment of the algorithm defined for the corresponding class
 // of object in the structure
-
 class ConcreteVisitor1 : public Visitor {
 public:
     void visitElementA(ConcreteElementA* const) override { std::cout << "Concrete Visitor 1: Element A visited.\n"; }
-
     void visitElementB(ConcreteElementB* const) override { std::cout << "Concrete Visitor 1: Element B visited.\n"; }
     // ...
 };
@@ -35,25 +31,21 @@ public:
 class ConcreteVisitor2 : public Visitor {
 public:
     void visitElementA(ConcreteElementA* const) override { std::cout << "Concrete Visitor 2: Element A visited.\n"; }
-
     void visitElementB(ConcreteElementB* const) override { std::cout << "Concrete Visitor 2: Element B visited.\n"; }
     // ...
 };
 
 // Element
 // defines an accept operation that takes a visitor as an argument
-
 class Element {
 public:
     virtual ~Element() = default;
-
     virtual void accept(Visitor& visitor) = 0;
     // ...
 };
 
 // Concrete Elements
 // implement an accept operation that takes a visitor as an argument
-
 class ConcreteElementA : public Element {
 public:
     void accept(Visitor& visitor) override { visitor.visitElementA(this); }

@@ -33,19 +33,12 @@ TEST(BinarySearchTreeSymbolTableTest, GetSizeWorksWhenNotEmpty) {
 }
 
 TEST(BinarySearchTreeSymbolTableTest, GetWorks) { testGetWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(BinarySearchTreeSymbolTableTest, GetRankWorks) { testGetRankWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(BinarySearchTreeSymbolTableTest, GetMinimumWorks) { testGetMinimumWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(BinarySearchTreeSymbolTableTest, GetMaximumWorks) { testGetMaximumWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(BinarySearchTreeSymbolTableTest, SelectAtWorks) { testSelectAtWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(BinarySearchTreeSymbolTableTest, GetFloorWorks) { testGetFloorWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(BinarySearchTreeSymbolTableTest, GetCeilingWorks) { testGetCeilingWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(BinarySearchTreeSymbolTableTest, PutWorks) { testPutWithUnsignedIntAndChar<SymbolTableForTest>(); }
 
 TEST(BinarySearchTreeSymbolTableTest, DeleteBasedOnKeyWorks) {

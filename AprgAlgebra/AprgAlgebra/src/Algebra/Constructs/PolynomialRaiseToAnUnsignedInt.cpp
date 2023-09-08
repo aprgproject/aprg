@@ -23,31 +23,12 @@ PolynomialRaiseToAnUnsignedInt::PolynomialRaiseToAnUnsignedInt(Polynomial const&
 }
 
 bool PolynomialRaiseToAnUnsignedInt::isExponentOne() const { return m_exponent == 1; }
-
-Polynomial const& PolynomialRaiseToAnUnsignedInt::getBase() const { return m_base; }
-
 int PolynomialRaiseToAnUnsignedInt::getExponent() const { return m_exponent; }
+Polynomial const& PolynomialRaiseToAnUnsignedInt::getBase() const { return m_base; }
 
 bool PolynomialRaiseToAnUnsignedInt::canBeSimplified(int const gcfOfExponents, Monomial const& commonMonomialInBase) {
     return gcfOfExponents != 1 &&
            (!isEven(gcfOfExponents) || (isEven(gcfOfExponents) && !isANegativeMonomial(commonMonomialInBase)));
-}
-
-void PolynomialRaiseToAnUnsignedInt::factorizeAndUpdateCommonMonomialAndFactorsToExponent(
-    Polynomial const& polynomial, PolynomialToNumberMap& factorsToExponent, Monomial& commonMonomialInBase) {
-    Polynomials factors(factorizeAPolynomial(polynomial));
-    for (Polynomial const& factor : factors) {
-        if (isOneMonomial(factor)) {
-            commonMonomialInBase.multiplyMonomial(getFirstMonomial(factor));
-        } else {
-            auto it = factorsToExponent.find(factor);
-            if (it == factorsToExponent.cend()) {
-                factorsToExponent.emplace(factor, 1);
-            } else {
-                (it->second)++;
-            }
-        }
-    }
 }
 
 int PolynomialRaiseToAnUnsignedInt::getGcfOfExponents(PolynomialToNumberMap const& factorsToExponent) {
@@ -75,6 +56,23 @@ Polynomial PolynomialRaiseToAnUnsignedInt::getRemainingBase(
         result.multiplyPolynomial(remainingFactor);
     }
     return result;
+}
+
+void PolynomialRaiseToAnUnsignedInt::factorizeAndUpdateCommonMonomialAndFactorsToExponent(
+    Polynomial const& polynomial, PolynomialToNumberMap& factorsToExponent, Monomial& commonMonomialInBase) {
+    Polynomials factors(factorizeAPolynomial(polynomial));
+    for (Polynomial const& factor : factors) {
+        if (isOneMonomial(factor)) {
+            commonMonomialInBase.multiplyMonomial(getFirstMonomial(factor));
+        } else {
+            auto it = factorsToExponent.find(factor);
+            if (it == factorsToExponent.cend()) {
+                factorsToExponent.emplace(factor, 1);
+            } else {
+                (it->second)++;
+            }
+        }
+    }
 }
 
 }  // namespace alba::algebra

@@ -11,23 +11,24 @@ class SimplexSolver {
 public:
     using SimplexMatrix = matrix::AlbaMatrix<AlbaNumber>;
     using SimplexMatrixData = matrix::AlbaMatrixData<AlbaNumber>;
-
     SimplexSolver(Equations const& constraints, Polynomial const& objectiveFunction);
-
     [[nodiscard]] bool isOptimized() const;
     [[nodiscard]] AlbaNumber getOptimizedObjectiveValue() const;
     [[nodiscard]] Equations getSolutionEquations() const;
 
 private:
-    void intialize(Equations const& constraints, Polynomial const& objectiveFunction);
-    void solve();
     static void processConstraints(
         Equations const& constraints, Polynomials& constraintsInStandardForm,
         VariableNamesRetriever& inputVariablesRetriever, std::set<int>& indicesWithSlackVariables);
+
+    void intialize(Equations const& constraints, Polynomial const& objectiveFunction);
+    void solve();
     void saveInputVariables(VariableNamesSet const& inputVariableNames);
+
     void initializeSimplexTable(
         Polynomial const& objectiveFunction, Polynomials const& constraintsInStandardForm,
         VariableNamesSet const& inputVariableNames, std::set<int> const& indicesWithSlackVariables);
+
     SimplexMatrix m_simplexTable;
     VariableNames m_inputVariables;
 };

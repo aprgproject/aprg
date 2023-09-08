@@ -16,6 +16,12 @@ using CharactersSorter = SortNNumbersFromZeroToNSquaredMinus1<Characters>;
 using SmallIntegerSorter = SortNNumbersFromZeroToNSquaredMinus1<Integers>;
 }  // namespace
 
+// CANNOT SORT STD::LIST, actually it might be possible if we change indexes to iterators
+// CANNOT SORT POSITIVE AND NEGATIVE VALUES
+// CANNOT SORT DOUBLE VALUES
+// CANNOT SORT STRINGS
+// CANNOT SORT STABILITY OBJECTS
+
 TEST(SortNNumbersFromZeroToNSquaredMinus1Test, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
     CharactersSorter sorter;
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
@@ -35,11 +41,5 @@ TEST(SortNNumbersFromZeroToNSquaredMinus1Test, SortWorksOnCharactersUsingExample
     CharactersSorter sorter;
     testSortUsingExample2WithCharacters<CharactersSorter, Characters>(sorter);
 }
-
-// CANNOT SORT STD::LIST, actually it might be possible if we change indexes to iterators
-// CANNOT SORT POSITIVE AND NEGATIVE VALUES
-// CANNOT SORT DOUBLE VALUES
-// CANNOT SORT STRINGS
-// CANNOT SORT STABILITY OBJECTS
 
 }  // namespace alba::algorithm

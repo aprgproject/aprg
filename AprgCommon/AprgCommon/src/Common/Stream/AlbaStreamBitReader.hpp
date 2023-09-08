@@ -14,15 +14,13 @@ namespace alba {
 
 class AlbaStreamBitReader {
 public:
-    explicit AlbaStreamBitReader(std::istream &stream);
     ~AlbaStreamBitReader() = default;
     AlbaStreamBitReader(AlbaStreamBitReader const &bitReader) = delete;
     AlbaStreamBitReader(AlbaStreamBitReader &&bitReader) = delete;
     AlbaStreamBitReader &operator=(AlbaStreamBitReader const &bitReader) = delete;
     AlbaStreamBitReader &operator=(AlbaStreamBitReader &&bitReader) = delete;
-
+    explicit AlbaStreamBitReader(std::istream &stream);
     [[nodiscard]] bool noRemainingBitsInBuffer() const;
-
     bool readBoolData();
     char readCharData();
     std::string readStringData(size_t const numberOfCharacters);
@@ -35,7 +33,6 @@ public:
     TypeToWrite readLittleEndianNumberData();
     template <auto BITSET_SIZE>
     std::bitset<BITSET_SIZE> readBitsetData(size_t const startBitsetIndex, size_t const endBitsetIndex);
-
     std::istream &getInputStream();
 
 private:

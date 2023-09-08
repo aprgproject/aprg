@@ -14,11 +14,25 @@ using wcdmaToolsBackend::BtsLogTime;
 
 namespace alba {
 
-BtsLogAnalyzer::PrintsAvailable::PrintsAvailable()
-
-    = default;
-
 BtsLogAnalyzer::BtsLogAnalyzer() : m_btsLogPathHandler("") {}
+
+void BtsLogAnalyzer::printAllCollectedData() const {
+    cout.precision(20);
+    cout << "Message queueing time minimum: " << m_messageQueueingTime.getMinimum() << " ms\n";
+    cout << "Message queueing time maximum: " << m_messageQueueingTime.getMaximum() << " ms\n";
+    cout << "Message queueing time average: " << m_messageQueueingTime.getAverage() << " ms\n";
+    cout << "Message queueing time samples: " << m_messageQueueingTime.getCount() << "\n";
+
+    cout << "Rl setup time minimum: " << m_rlhRlSetupLatency.getMinimum() / 1000 << " ms\n";
+    cout << "Rl setup time maximum: " << m_rlhRlSetupLatency.getMaximum() / 1000 << " ms\n";
+    cout << "Rl setup time average: " << m_rlhRlSetupLatency.getAverage() / 1000 << " ms\n";
+    cout << "Rl setup time samples: " << m_rlhRlSetupLatency.getCount() << "\n";
+
+    cout << "Rl deletion time minimum: " << m_rlhRlDeletionLatency.getMinimum() / 1000 << " ms\n";
+    cout << "Rl deletion time maximum: " << m_rlhRlDeletionLatency.getMaximum() / 1000 << " ms\n";
+    cout << "Rl deletion time average: " << m_rlhRlDeletionLatency.getAverage() / 1000 << " ms\n";
+    cout << "Rl deletion time samples: " << m_rlhRlDeletionLatency.getCount() << "\n";
+}
 
 void BtsLogAnalyzer::clear() {
     m_messageQueueingTime.clear();
@@ -50,6 +64,44 @@ void BtsLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSor
         saveRlSetupPerSecond(lineInLogs);
         saveDspCapacityInformationInGrm(lineInLogs);
     }
+}
+
+double BtsLogAnalyzer::getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser) {
+    BtsLogTime latency = logTimePairOfTheUser.second.value() - logTimePairOfTheUser.first.value();
+    return getTotalMicroseconds(latency);
+}
+
+double BtsLogAnalyzer::getTotalMicroseconds(BtsLogTime const& btsLogTime) {
+    double result(
+        static_cast<double>(btsLogTime.getMinutes()) * 1000000 * 60 +
+        static_cast<double>(btsLogTime.getSeconds()) * 1000000 + static_cast<double>(btsLogTime.getMicroSeconds()));
+    return result;
+}
+
+void BtsLogAnalyzer::setFirstLogTimeInPair(
+    string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) {
+    LogTimePair& logTimePairOfTheUser(logTimePairs[userIdentifiers]);
+    setLogTimeIfNeeded(lineInLogs, logTimePairOfTheUser.first);
+}
+
+void BtsLogAnalyzer::setSecondLogTimeInPair(
+    string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) {
+    LogTimePair& logTimePairOfTheUser(logTimePairs[userIdentifiers]);
+    setLogTimeIfNeeded(lineInLogs, logTimePairOfTheUser.second);
+}
+
+void BtsLogAnalyzer::saveUserIndentifierAndLatencyToCsvFile(
+    UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, ofstream& csvFileStream) {
+    csvFileStream << userIdentifiers.getCrnccId() << "," << userIdentifiers.getNbccId() << ","
+                  << userIdentifiers.getTransactionId() << "," << latencyInMicroseconds << ",";
+}
+
+void BtsLogAnalyzer::setLogTimeIfNeeded(string const& lineInLogs, LogTime& logTime) {
+    BtsLogPrint logPrint(lineInLogs);
+    // if(!logPrint.getBtsTime().isStartup())
+    //{
+    logTime = logPrint.getBtsTime();
+    //}
 }
 
 void BtsLogAnalyzer::initializeMessageQueueingTimeFileStream() {
@@ -491,18 +543,6 @@ void BtsLogAnalyzer::saveAdditionalPrintsRlSetup(string const& lineInLogs, LogTi
     }
 }
 
-void BtsLogAnalyzer::setFirstLogTimeInPair(
-    string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) {
-    LogTimePair& logTimePairOfTheUser(logTimePairs[userIdentifiers]);
-    setLogTimeIfNeeded(lineInLogs, logTimePairOfTheUser.first);
-}
-
-void BtsLogAnalyzer::setSecondLogTimeInPair(
-    string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) {
-    LogTimePair& logTimePairOfTheUser(logTimePairs[userIdentifiers]);
-    setLogTimeIfNeeded(lineInLogs, logTimePairOfTheUser.second);
-}
-
 void BtsLogAnalyzer::computeRlSetupLatencyAndUpdateIfLogTimePairIsValid(
     UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) {
     LogTimePair& logTimePairOfTheUser(logTimePairs[userIdentifiers]);
@@ -544,12 +584,6 @@ void BtsLogAnalyzer::saveMessageQueueingTimeToCsvFile(
     }
 }
 
-void BtsLogAnalyzer::saveUserIndentifierAndLatencyToCsvFile(
-    UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, ofstream& csvFileStream) {
-    csvFileStream << userIdentifiers.getCrnccId() << "," << userIdentifiers.getNbccId() << ","
-                  << userIdentifiers.getTransactionId() << "," << latencyInMicroseconds << ",";
-}
-
 void BtsLogAnalyzer::savePrintsAvailableToCsvFile(UserIdentifiers const& userIdentifiers, ofstream& csvFileStream) {
     PrintsAvailable& printsAvailable(m_rlSetupPrintsAvailableMap[userIdentifiers]);
     csvFileStream << printsAvailable.hasBB_2_RL_SETUP_REQ_MSG << "," << printsAvailable.hasBB_2_RL_SETUP_ACK_MSG << ","
@@ -557,42 +591,8 @@ void BtsLogAnalyzer::savePrintsAvailableToCsvFile(UserIdentifiers const& userIde
                   << printsAvailable.hasTC_TRANSPORT_BEARER_REGISTER_RESP_MSG << ",";
 }
 
-void BtsLogAnalyzer::setLogTimeIfNeeded(string const& lineInLogs, LogTime& logTime) {
-    BtsLogPrint logPrint(lineInLogs);
-    // if(!logPrint.getBtsTime().isStartup())
-    //{
-    logTime = logPrint.getBtsTime();
-    //}
-}
+BtsLogAnalyzer::PrintsAvailable::PrintsAvailable()
 
-double BtsLogAnalyzer::getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser) {
-    BtsLogTime latency = logTimePairOfTheUser.second.value() - logTimePairOfTheUser.first.value();
-    return getTotalMicroseconds(latency);
-}
-
-double BtsLogAnalyzer::getTotalMicroseconds(BtsLogTime const& btsLogTime) {
-    double result(
-        static_cast<double>(btsLogTime.getMinutes()) * 1000000 * 60 +
-        static_cast<double>(btsLogTime.getSeconds()) * 1000000 + static_cast<double>(btsLogTime.getMicroSeconds()));
-    return result;
-}
-
-void BtsLogAnalyzer::printAllCollectedData() const {
-    cout.precision(20);
-    cout << "Message queueing time minimum: " << m_messageQueueingTime.getMinimum() << " ms\n";
-    cout << "Message queueing time maximum: " << m_messageQueueingTime.getMaximum() << " ms\n";
-    cout << "Message queueing time average: " << m_messageQueueingTime.getAverage() << " ms\n";
-    cout << "Message queueing time samples: " << m_messageQueueingTime.getCount() << "\n";
-
-    cout << "Rl setup time minimum: " << m_rlhRlSetupLatency.getMinimum() / 1000 << " ms\n";
-    cout << "Rl setup time maximum: " << m_rlhRlSetupLatency.getMaximum() / 1000 << " ms\n";
-    cout << "Rl setup time average: " << m_rlhRlSetupLatency.getAverage() / 1000 << " ms\n";
-    cout << "Rl setup time samples: " << m_rlhRlSetupLatency.getCount() << "\n";
-
-    cout << "Rl deletion time minimum: " << m_rlhRlDeletionLatency.getMinimum() / 1000 << " ms\n";
-    cout << "Rl deletion time maximum: " << m_rlhRlDeletionLatency.getMaximum() / 1000 << " ms\n";
-    cout << "Rl deletion time average: " << m_rlhRlDeletionLatency.getAverage() / 1000 << " ms\n";
-    cout << "Rl deletion time samples: " << m_rlhRlDeletionLatency.getCount() << "\n";
-}
+    = default;
 
 }  // namespace alba

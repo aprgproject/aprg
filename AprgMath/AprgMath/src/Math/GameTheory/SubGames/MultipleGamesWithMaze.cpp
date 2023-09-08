@@ -20,7 +20,6 @@ bool MultipleGamesWithMaze::hasNoMoves() const {
 }
 
 UnsignedInteger MultipleGamesWithMaze::getOverallGrundyNumber() { return getCombinedGrundyNumber(); }
-
 GameState MultipleGamesWithMaze::getGameState() { return getGameStateFromGrundyNumber(getOverallGrundyNumber()); }
 
 MultipleGamesWithMaze::GameIndexAndCoordinatePair MultipleGamesWithMaze::getOptimalNextGameAndCoordinate() {

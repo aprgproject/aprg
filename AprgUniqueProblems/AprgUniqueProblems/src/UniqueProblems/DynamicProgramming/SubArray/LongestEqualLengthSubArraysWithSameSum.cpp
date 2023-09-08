@@ -16,7 +16,6 @@ LongestEqualLengthSubArraysWithSameSum::Index
 LongestEqualLengthSubArraysWithSameSum::getLongestTotalLengthOfSubArraysUsingPartialSums() const {
     // Time Complexity: O(n^2)
     // Auxiliary Space: O(n)
-
     Index result(0);
 
     RangeQueryWithAccumulator<Values> partialSumsQuery(m_values, plus<>(), minus<>());
@@ -41,7 +40,6 @@ LongestEqualLengthSubArraysWithSameSum::Index
 LongestEqualLengthSubArraysWithSameSum::getLongestTotalLengthOfSubArraysByAccumulatingSum() const {
     // Time Complexity: O(n^2)
     // Auxiliary Space: O(1)
-
     Index result(0);
     for (Index startOfSubArray2 = 1; startOfSubArray2 < static_cast<Index>(m_values.size()); ++startOfSubArray2) {
         Index endOfSubArray1 = startOfSubArray2 - 1;

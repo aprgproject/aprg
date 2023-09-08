@@ -19,7 +19,6 @@ public:
     }
 
     [[nodiscard]] Index getSize() const { return m_mainStringIndexes.size(); }
-
     [[nodiscard]] Index getIndexOnMainStringOfSuffixAt(Index const index) const { return m_mainStringIndexes[index]; }
 
     [[nodiscard]] Index getRank(std::string_view const key) const {

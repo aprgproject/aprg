@@ -14,8 +14,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-MultiplicationAndDivisionOfRadicals::MultiplicationAndDivisionOfRadicals() = default;
-
 MultiplicationAndDivisionOfRadicals::MultiplicationAndDivisionOfRadicals(TermsWithDetails const& termsWithDetails)
     : m_termsWithDetails(termsWithDetails) {}
 
@@ -77,6 +75,17 @@ bool MultiplicationAndDivisionOfRadicals::isNotANegativeTermWithExponentDenomina
     return result;
 }
 
+AlbaNumber MultiplicationAndDivisionOfRadicals::getGcfOfExponents(RadicalDetails const& radicalDetails) {
+    AlbaNumber gcfOfExponents(1);
+    if (!radicalDetails.empty()) {
+        gcfOfExponents = radicalDetails.front().radical.getExponent();
+        for (auto it = radicalDetails.cbegin() + 1; it != radicalDetails.cend(); ++it) {
+            gcfOfExponents = getGreatestCommonFactor(gcfOfExponents, it->radical.getExponent());
+        }
+    }
+    return gcfOfExponents;
+}
+
 void MultiplicationAndDivisionOfRadicals::gatherDetails(
     RadicalDetails& radicalDetails, Monomial& combinedMonomial, TermsWithDetails& remainingTerms) {
     for (TermWithDetails const& termWithDetails : m_termsWithDetails) {
@@ -96,17 +105,6 @@ void MultiplicationAndDivisionOfRadicals::gatherDetails(
             remainingTerms.emplace_back(termWithDetails);
         }
     }
-}
-
-AlbaNumber MultiplicationAndDivisionOfRadicals::getGcfOfExponents(RadicalDetails const& radicalDetails) {
-    AlbaNumber gcfOfExponents(1);
-    if (!radicalDetails.empty()) {
-        gcfOfExponents = radicalDetails.front().radical.getExponent();
-        for (auto it = radicalDetails.cbegin() + 1; it != radicalDetails.cend(); ++it) {
-            gcfOfExponents = getGreatestCommonFactor(gcfOfExponents, it->radical.getExponent());
-        }
-    }
-    return gcfOfExponents;
 }
 
 void MultiplicationAndDivisionOfRadicals::combineMonomialAndRadicalsAndSave(
@@ -144,5 +142,7 @@ void MultiplicationAndDivisionOfRadicals::saveRemainingTerms(TermsWithDetails co
         m_termsWithDetails.emplace_back(remainingTerm);
     }
 }
+
+MultiplicationAndDivisionOfRadicals::MultiplicationAndDivisionOfRadicals() = default;
 
 }  // namespace alba::algebra

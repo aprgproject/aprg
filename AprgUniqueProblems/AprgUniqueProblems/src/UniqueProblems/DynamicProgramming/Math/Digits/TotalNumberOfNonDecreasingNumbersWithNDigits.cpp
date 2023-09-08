@@ -14,7 +14,6 @@ TotalNumberOfNonDecreasingNumbersWithNDigits::Count
 TotalNumberOfNonDecreasingNumbersWithNDigits::getCountUsingNaiveRecursion() const {
     // Time Complexity: Exponential -> Since there are two calls per iteration:  O(2^n)
     // Auxiliary Space: Constant
-
     Count result(0);
     if (m_numberOfDigits > 0) {
         for (Value digitValue = 0; digitValue <= 9; ++digitValue) {
@@ -28,7 +27,6 @@ TotalNumberOfNonDecreasingNumbersWithNDigits::Count
 TotalNumberOfNonDecreasingNumbersWithNDigits::getCountUsingMemoizationDP() const {
     // Time Complexity: O(numberOfDigits) (same as iterative)
     // Auxiliary Space: O(numberOfDigits)
-
     Count result(0);
     if (m_numberOfDigits > 0) {
         CountMatrix countMatrix(10, m_numberOfDigits, UNUSED_COUNT);
@@ -43,7 +41,6 @@ TotalNumberOfNonDecreasingNumbersWithNDigits::Count
 TotalNumberOfNonDecreasingNumbersWithNDigits::getCountUsingIterativeDP() const {
     // Time Complexity: O(numberOfDigits)
     // Auxiliary Space: O(numberOfDigits)
-
     Count result(0);
     if (m_numberOfDigits > 0) {
         CountMatrix countMatrix(10, m_numberOfDigits);
@@ -71,7 +68,6 @@ TotalNumberOfNonDecreasingNumbersWithNDigits::Count
 TotalNumberOfNonDecreasingNumbersWithNDigits::getCountUsingIterativeDPAndSpaceEfficient() const {
     // Time Complexity: O(numberOfDigits)
     // Auxiliary Space: O(1)
-
     Count result(0);
     if (m_numberOfDigits > 0) {
         Counts digitValueToCount(10, 1);
@@ -99,7 +95,6 @@ TotalNumberOfNonDecreasingNumbersWithNDigits::getCountUsingSummationFormula() co
     // When length=3, then formula=(x+1)*(x+2)/2.
     // When length=4, then formula=(x+1)*(x+2)*(x+3)/2/3.
     // Based from this, we can have this algorithm.
-
     Count result(0);
     if (m_numberOfDigits > 0) {
         result = 1;

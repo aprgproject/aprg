@@ -24,7 +24,6 @@ public:
     }
 
     [[nodiscard]] Vertices const& getVerticesInDfsPreOrder() const { return m_verticesInDfsPreOrder; }
-
     [[nodiscard]] Vertices const& getAccumulatedValuesOfPaths() const { return m_accumulatedValuesOfPaths; }
 
     Vertex getAccumulatedValueOfPathThatStartsAtTopAndEndsAt(Vertex const& vertex) {

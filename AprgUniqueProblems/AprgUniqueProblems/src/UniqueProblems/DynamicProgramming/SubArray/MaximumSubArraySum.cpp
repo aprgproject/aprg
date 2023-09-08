@@ -9,10 +9,8 @@ MaximumSubArraySum::MaximumSubArraySum(Values const& values) : m_values(values) 
 MaximumSubArraySum::Value MaximumSubArraySum::getMaximumSubArraySum() const {
     // Kadane’s algorithm
     // This linear-time algorithm is attributed to J. B. Kadane.
-
     // Time Complexity: O(n)
     // Auxiliary Space: O(1)
-
     Value currentSum(0);
     Value bestSum(MIN_VALUE);
     for (Value const& value : m_values) {

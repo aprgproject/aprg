@@ -20,7 +20,6 @@ public:
     }
 
     [[nodiscard]] Vertices const& getVerticesInDfsPreOrder() const { return m_verticesInDfsPreOrder; }
-
     [[nodiscard]] Counts const& getSubTreeSize() const { return m_subTreeSize; }
 
     Vertices getVerticesOfSubTreeAt(Vertex const& subRoot) {

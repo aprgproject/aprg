@@ -102,7 +102,6 @@ TEST(BookTest, AddLineWorksOnOverwritingAnExistingLineIfGreaterThanTotalNumberOf
 }
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

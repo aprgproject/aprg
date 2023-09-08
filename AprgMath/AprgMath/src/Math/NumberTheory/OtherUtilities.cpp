@@ -60,7 +60,6 @@ bool isALuckyNumber(UnsignedInteger const number) {
     // 4) Continue this process indefinitely......
     // Any number that does NOT get deleted due to above process is called “lucky”.
     // Therefore, set of lucky numbers is 1, 3, 7, 13,.........
-
     UnsignedInteger remainingValue = number;
     UnsignedInteger removedNumber = 2;
     bool result(false);
@@ -82,7 +81,6 @@ bool isALuckyNumber(UnsignedInteger const number) {
 bool isLagrangeTheoremTrue(UnsignedInteger const number) {
     // Lagrange’s theorem states that every positive integer can be represented as a sum of four squares, i.e., a^2 +
     // b^2 + c^2 + d^2. For example, the number 123 can be represented as the sum 8^2 + 5^2 + 5^2 + 3^2.
-
     auto maxElement = static_cast<UnsignedInteger>(pow(number, 0.5));  // max element is square root
     UnsignedIntegers squaredElements;
     squaredElements.reserve(maxElement - 1);
@@ -101,7 +99,6 @@ bool isZeckendorfTheoremTrue(UnsignedInteger const number) {
     // Zeckendorf’s theorem states that every positive integer has a unique representation as a sum of Fibonacci numbers
     // such that no two numbers are equal or consecutive Fibonacci numbers.
     // For example, the number 74 can be represented as the sum 55 + 13 + 5 + 1.
-
     bool result(false);
     UnsignedIntegers fibonaccis(getFibonacciNumbersBelowThisNumber(number));
 
@@ -119,7 +116,6 @@ bool isZeckendorfTheoremTrue(UnsignedInteger const number) {
 
 UnsignedInteger getNthFibonacciNumber(UnsignedInteger const number) {
     // NOTE: The time complexity is linear but its accurate
-
     if (number == 0) {
         return 0;
     }
@@ -136,7 +132,6 @@ UnsignedInteger getNthFibonacciNumber(UnsignedInteger const number) {
 UnsignedInteger getNthFibonacciNumberUsingBinetsFormula(UnsignedInteger const number) {
     // NOTE: The time complexity is constant but it uses double precision so its not that accurate
     // NOTE: The pow() might be logarithmic but its not clearly written on the standard.
-
     // Binets formula:
     double sqrtOf5 = sqrt(5);
     double phi = (1 + sqrtOf5) / 2;
@@ -157,13 +152,11 @@ UnsignedInteger getNthFibonacciNumberUsingRecursion(UnsignedInteger const number
 UnsignedInteger getNthFibonacciUsingMatrixPowerWithLogarithmicTime(UnsignedInteger const number) {
     // NOTE: The time complexity is logarithmic.
     // NOTE: This is discussed in linear recurrence section in Matrix as well
-
     if (number == 0) {
         return 0;
     }  // Matrix representation:
     // |f(n-1)|f(n)  |
     // |f(n)  |f(n+1)|
-
     UnsignedIntegerMatrix formulaicTransform(2, 2, {0, 1, 1, 1});
 
     UnsignedIntegerMatrix fibonacciMatrix(getMatrixRaiseToScalarPower(formulaicTransform, number - 1));  // logarithmic
@@ -172,7 +165,6 @@ UnsignedInteger getNthFibonacciUsingMatrixPowerWithLogarithmicTime(UnsignedInteg
 
 UnsignedInteger getNthFibonacciUsingLogarithmicTabularDP(UnsignedInteger const number) {
     // Derived using matrix power
-
     UnsignedInteger result(number);
     if (number > 1) {
         UnsignedInteger size = max(static_cast<UnsignedInteger>(number + 1), static_cast<UnsignedInteger>(2));

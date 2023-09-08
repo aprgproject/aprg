@@ -50,7 +50,6 @@ void verifyGetChessCellPieceForBlackUpWhiteDown(BoardObserver const& retriever) 
     EXPECT_EQ(Piece(PieceColorAndType::BlackKing), retriever.getPieceFromCell(4U, 0U));
 }
 }  // namespace
-
 TEST(BoardObserverTest, DISABLED_GetChessCellPieceWorksForChessDotComVersus) {
     AlbaLocalPathHandler inputFile(APRG_DIR
                                    R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComVersus\ChessDotComVersus.bmp)");
@@ -106,7 +105,6 @@ TEST(BoardObserverTest, DISABLED_GetChessCellPieceWorksForLichessStream) {
 }
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

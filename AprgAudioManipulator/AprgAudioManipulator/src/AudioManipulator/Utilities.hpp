@@ -7,18 +7,19 @@
 
 namespace alba::AprgAudio {
 
-void retrieveDeltas(Samples& deltaSamples, Samples const& pointerOfSampleToCheck, int const numberOfSamples);
-
 double getSumInRange(Samples const& samples, int const startIndexIncluded, int const endIndexExcluded);
 double getAverageOfSamples(Samples const& samples);
 double getAverageInRange(Samples const& samples, int const startIndexIncluded, int const endIndexExcluded);
 double getCommonMultiplierForDeltaSamples(
     Samples const& samples, int const startIndexIncluded, int const endIndexExcluded);
 double getCommonMultiplierUsingSumAndNumberOfItems(double const sum, int const numberOfItems);
-void multiplyValueToAllSamples(Samples& samples, double const value);
+
 DoubleOptional compareDeltasAndGetDifference(
     Samples const& deltaSamples1, Samples const& deltaSamples2, double const multiplierToSample2,
     int const startOfDeltaSamples1, int const startOfDeltaSamples2, int const numberOfSamples);
+
+void retrieveDeltas(Samples& deltaSamples, Samples const& pointerOfSampleToCheck, int const numberOfSamples);
+void multiplyValueToAllSamples(Samples& samples, double const value);
 
 void searchForBestSampleIndexes(
     SearchResultsDetails& replicateAndSearchIndexes, int const sampleIntervalForReplication,
@@ -33,4 +34,5 @@ void searchAndTryToReplicateSamples(
 void searchAndTryToReplicate(
     std::string const& filePathForAudioToChange, std::string const& filePathForAudioToReplicate,
     std::string const& filePathForAudioToSearch, bool const alwaysPutNewValue);
+
 }  // namespace alba::AprgAudio

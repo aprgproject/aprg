@@ -9,7 +9,6 @@ LongestPalindromicSubstring::LongestPalindromicSubstring(string const& stringPar
 LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLengthUsingNaiveRecursion() const {
     // Time Complexity: Exponential
     // Auxiliary Space: Constant
-
     Index result(0);
     if (!m_string.empty()) {
         result = getLongestLengthUsingNaiveRecursion(0, m_string.length() - 1);
@@ -20,7 +19,6 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
 LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLengthUsingMemoizationDP() const {
     // Time Complexity: O(n^2) (should be same as Iterative DP)
     // Auxiliary Space: O(n^2)
-
     Index result(0);
     if (!m_string.empty()) {
         IndexMatrix lengthMatrix(m_string.length(), m_string.length(), static_cast<Index>(MAX_INDEX));
@@ -34,7 +32,6 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
     // -> Two nested traversals are needed.
     // Auxiliary Space: O(n^2).
     // -> Matrix of size n*n is needed to store the dp array.
-
     Index result(0);
     if (!m_string.empty()) {
         result = 1;
@@ -70,7 +67,6 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
     const {
     // Time complexity: O(n^2).
     // Auxiliary Space: O(1).
-
     Index result(0);
     if (!m_string.empty()) {
         Index const stringLength = m_string.length();
@@ -98,7 +94,6 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
 string LongestPalindromicSubstring::getLongestStringUsingIterativeDPAndSpaceEfficient() const {
     // Time complexity: O(n^2).
     // Auxiliary Space: O(1).
-
     if (!m_string.empty()) {
         Index const stringLength = m_string.length();
         Index maxLength = 1;

@@ -7,11 +7,11 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
-SubstitutionOfTermsToTerms::SubstitutionOfTermsToTerms(initializer_list<TermTermPair> const& variablesWithValues) {
+SubstitutionOfTermsToTerms::SubstitutionOfTermsToTerms(TermToTermMap const& variablesWithValues) {
     putTermsToTermsMapping(variablesWithValues);
 }
 
-SubstitutionOfTermsToTerms::SubstitutionOfTermsToTerms(TermToTermMap const& variablesWithValues) {
+SubstitutionOfTermsToTerms::SubstitutionOfTermsToTerms(initializer_list<TermTermPair> const& variablesWithValues) {
     putTermsToTermsMapping(variablesWithValues);
 }
 

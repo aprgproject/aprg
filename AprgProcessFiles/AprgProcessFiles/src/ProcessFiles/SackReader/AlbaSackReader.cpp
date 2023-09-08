@@ -15,7 +15,6 @@ using namespace std;
 namespace alba {
 
 AlbaSackReader::AlbaSackReader(string const& filePath) : m_inputPathHandler(filePath), m_fileEvaluator(string()) {}
-
 AlbaSackReader::AlbaSackReader(string const& filePath, string const& fileCondition)
     : m_inputPathHandler(filePath), m_fileEvaluator(fileCondition) {}
 
@@ -27,14 +26,6 @@ AlbaSackReaderType AlbaSackReader::getType(string const& typeName) const {
     return type;
 }
 
-void AlbaSackReader::process() {
-    if (m_inputPathHandler.isDirectory()) {
-        processDirectory(m_inputPathHandler.getFullPath());
-    } else {
-        processFile(m_inputPathHandler.getFullPath());
-    }
-}
-
 void AlbaSackReader::printAll() const {
     for (auto const& type : m_types) {
         cout << "Type:" << type.first << "\n";
@@ -43,30 +34,12 @@ void AlbaSackReader::printAll() const {
     }
 }
 
-void AlbaSackReader::processDirectory(string const& path) {
-    set<string> listOfFiles;
-    set<string> listOfDirectories;
-    AlbaLocalPathHandler(path).findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    for (string const& filePath : listOfFiles) {
-        processFile(filePath);
+void AlbaSackReader::process() {
+    if (m_inputPathHandler.isDirectory()) {
+        processDirectory(m_inputPathHandler.getFullPath());
+    } else {
+        processFile(m_inputPathHandler.getFullPath());
     }
-}
-
-void AlbaSackReader::processFile(string const& path) {
-    AlbaLocalPathHandler filePathHandler(path);
-    stringHelper::strings tokens;
-    if (m_fileEvaluator.isInvalid() || m_fileEvaluator.evaluate(filePathHandler.getFile())) {
-        cout << "ProcessFile: " << path << "\n";
-        ifstream inputLogFileStream(filePathHandler.getFullPath());
-        AlbaFileReader fileReader(inputLogFileStream);
-        while (fileReader.isNotFinished()) {
-            string line(fileReader.getLineAndIgnoreWhiteSpaces());
-            tokenize(tokens, line);
-        }
-    }
-    combineWords(tokens);
-    combineArrayOperators(tokens);
-    analyze(tokens);
 }
 
 string AlbaSackReader::getReaderStateString(ReaderState const state) {
@@ -182,6 +155,32 @@ void AlbaSackReader::combineArrayOperators(stringHelper::strings& tokens) {
             }
         }
     }
+}
+
+void AlbaSackReader::processDirectory(string const& path) {
+    set<string> listOfFiles;
+    set<string> listOfDirectories;
+    AlbaLocalPathHandler(path).findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
+    for (string const& filePath : listOfFiles) {
+        processFile(filePath);
+    }
+}
+
+void AlbaSackReader::processFile(string const& path) {
+    AlbaLocalPathHandler filePathHandler(path);
+    stringHelper::strings tokens;
+    if (m_fileEvaluator.isInvalid() || m_fileEvaluator.evaluate(filePathHandler.getFile())) {
+        cout << "ProcessFile: " << path << "\n";
+        ifstream inputLogFileStream(filePathHandler.getFullPath());
+        AlbaFileReader fileReader(inputLogFileStream);
+        while (fileReader.isNotFinished()) {
+            string line(fileReader.getLineAndIgnoreWhiteSpaces());
+            tokenize(tokens, line);
+        }
+    }
+    combineWords(tokens);
+    combineArrayOperators(tokens);
+    analyze(tokens);
 }
 
 template <>
@@ -344,8 +343,7 @@ void AlbaSackReader::analyze(stringHelper::strings const& tokens) {
     transactionData.state = ReaderState::LookingForInitialKeyword;
     for (string const& token : tokens) {
         // cout<<"analyze -> state: "<<getReaderStateString(transactionData.state)<<"
-        // typeName:["<<transactionData.typeName<<"] token:["<<token<<"]\n";
-
+// typeName:["<<transactionData.typeName<<"] token:["<<token<<"]\n";
 #define HANDLE_READER_STATE(en)                           \
     case en:                                              \
         analyzeInReaderState<en>(transactionData, token); \

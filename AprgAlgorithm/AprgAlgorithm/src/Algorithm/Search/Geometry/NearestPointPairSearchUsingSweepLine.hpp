@@ -8,6 +8,7 @@
 #include <set>
 
 namespace alba::algorithm {
+
 // The one on NearestPointSearch class is better(getNearestPointPair()).
 template <typename Unit>
 class NearestPointPairSearchUsingSweepLine {

@@ -12,12 +12,9 @@ using namespace std;
 
 namespace alba {
 
-constexpr unsigned int TCOM_FSP_ADDRESS = 0x1200;
-
-HardwareConfiguration::HardwareConfiguration() = default;
-
+unsigned int HardwareConfiguration::getTcomFspAddress() const { return m_tcomFspAddress; }
+unsigned int HardwareConfiguration::getSharedLcgId() const { return m_sharedLcgId; }
 AddressToDspMap& HardwareConfiguration::getAddressToDspMapReference() { return m_dspAddressToDspMap; }
-
 AddressToFspMap& HardwareConfiguration::getAddressToFspMapReference() { return m_fspAddressToFspMap; }
 
 void HardwareConfiguration::clear() {
@@ -239,10 +236,6 @@ void HardwareConfiguration::changeConfigurationToSharedLcgWithOneDspInMsm() {
                           2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2});
 }
 
-unsigned int HardwareConfiguration::getTcomFspAddress() const { return m_tcomFspAddress; }
-
-unsigned int HardwareConfiguration::getSharedLcgId() const { return m_sharedLcgId; }
-
 void HardwareConfiguration::printDspAllocations(unsigned int const printFlags) {
     if (m_sharedLcgId != 0) {
         cout << "SharedLcg: " << m_sharedLcgId << "\n";
@@ -293,6 +286,15 @@ void HardwareConfiguration::printDspAllocations(unsigned int const printFlags) {
     cout << table;
 }
 
+NyquistType HardwareConfiguration::computeNyquistTypeBasedOnDspAddress(unsigned int const dspAddress) {
+    bool isCpuEven = isEven((dspAddress & 0x00F0) >> 4);
+    return isCpuEven ? NyquistType::TurboNyquist : NyquistType::Nyquist;
+}
+
+SmType HardwareConfiguration::getSmTypeBasedOnAddress(unsigned int const fspAddress) {
+    return ((fspAddress & 0xF000) >> 12 == 1) ? SmType::MSM : SmType::ESM;
+}
+
 void HardwareConfiguration::addFsp(unsigned int const fspAddress) {
     unsigned int correctFspAddress = fspAddress & 0xFF00;
     FspDetails fspDetails;
@@ -329,13 +331,7 @@ void HardwareConfiguration::setLcgIdOfDsps(LcgIds const& lcgIds) {
     }
 }
 
-NyquistType HardwareConfiguration::computeNyquistTypeBasedOnDspAddress(unsigned int const dspAddress) {
-    bool isCpuEven = isEven((dspAddress & 0x00F0) >> 4);
-    return isCpuEven ? NyquistType::TurboNyquist : NyquistType::Nyquist;
-}
-
-SmType HardwareConfiguration::getSmTypeBasedOnAddress(unsigned int const fspAddress) {
-    return ((fspAddress & 0xF000) >> 12 == 1) ? SmType::MSM : SmType::ESM;
-}
+constexpr unsigned int TCOM_FSP_ADDRESS = 0x1200;
+HardwareConfiguration::HardwareConfiguration() = default;
 
 }  // namespace alba

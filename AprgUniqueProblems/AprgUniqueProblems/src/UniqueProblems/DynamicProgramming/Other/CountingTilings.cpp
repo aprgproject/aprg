@@ -36,33 +36,8 @@ CountingTilings::Row CountingTilings::getEmptyRow(Count const length) {
     return Row(length, ' ');
 }
 
-void CountingTilings::searchNextRow(Count const rowIndex, Row const& currentRow) {
-    if (rowIndex < m_numberOfRows - 1) {
-        for (Row const& nextRow : getNextRows(currentRow)) {
-            searchNextRow(rowIndex + 1, nextRow);
-        }
-    } else if (rowIndex == m_numberOfRows - 1) {
-        Row emptyRow(getEmptyRow(currentRow.length()));
-        for (Row const& nextRow : getNextRows(currentRow)) {
-            if (emptyRow == nextRow) {
-                ++m_numberOfSolutions;
-            }
-        }
-    }
-}
-
-CountingTilings::Rows const& CountingTilings::getNextRows(Row const& currentRow) {
-    auto it = m_currentRowToNextRows.find(currentRow);
-    if (it != m_currentRowToNextRows.cend()) {
-        return it->second;
-    }
-    m_currentRowToNextRows[currentRow] = calculateNextRows(currentRow);
-    return m_currentRowToNextRows[currentRow];
-}
-
 CountingTilings::Rows CountingTilings::calculateNextRows(Row const& currentRow) {
     // This is not exactly DP but "complete search".
-
     struct NextDetail {
         Row nextRow;
         Count nextIndex;
@@ -91,9 +66,32 @@ CountingTilings::Rows CountingTilings::calculateNextRows(Row const& currentRow) 
     return result;
 }
 
+CountingTilings::Rows const& CountingTilings::getNextRows(Row const& currentRow) {
+    auto it = m_currentRowToNextRows.find(currentRow);
+    if (it != m_currentRowToNextRows.cend()) {
+        return it->second;
+    }
+    m_currentRowToNextRows[currentRow] = calculateNextRows(currentRow);
+    return m_currentRowToNextRows[currentRow];
+}
+
+void CountingTilings::searchNextRow(Count const rowIndex, Row const& currentRow) {
+    if (rowIndex < m_numberOfRows - 1) {
+        for (Row const& nextRow : getNextRows(currentRow)) {
+            searchNextRow(rowIndex + 1, nextRow);
+        }
+    } else if (rowIndex == m_numberOfRows - 1) {
+        Row emptyRow(getEmptyRow(currentRow.length()));
+        for (Row const& nextRow : getNextRows(currentRow)) {
+            if (emptyRow == nextRow) {
+                ++m_numberOfSolutions;
+            }
+        }
+    }
+}
+
 void CountingTilings::startCompleteSearch() {
     // This is not exactly DP but "complete search".
-
     m_numberOfSolutions = 0;
     m_numberFilledCells = 0;
     m_grid.clearAndResize(m_numberOfColumns, m_numberOfRows);
@@ -103,7 +101,6 @@ void CountingTilings::startCompleteSearch() {
 
 void CountingTilings::doCompleteSearchAt(Count const gridIndex) {
     // This is not exactly DP but "complete search".
-
     if (m_numberFilledCells == m_numberOfCells) {
         ++m_numberOfSolutions;
     } else if (gridIndex < m_numberOfCells) {

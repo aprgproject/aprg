@@ -15,7 +15,6 @@ public:
     using Strings = typename BaseClass::Strings;
     using Node = typename BaseClass::Node;
     using NodeUniquePointer = std::unique_ptr<Node>;
-
     TernarySearchTrieSubstringsSet() : b_root(BaseClass::m_root) {}
 
     [[nodiscard]] Strings getAllKeysWithPrefix(Key const& prefix) const override {

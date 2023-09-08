@@ -4,14 +4,12 @@ using namespace std;
 
 namespace alba {
 
-AlbaGrepStringToken::AlbaGrepStringToken()
-    : m_type(TokenType::Dummy), m_operatorType(AlbaGrepStringOperatorType::Unknown) {}
-
 AlbaGrepStringToken::AlbaGrepStringToken(string const& stringToFind)
     : m_type(TokenType::StringToFind), m_operatorType(AlbaGrepStringOperatorType::Unknown), m_string(stringToFind) {}
-
 AlbaGrepStringToken::AlbaGrepStringToken(AlbaGrepStringOperatorType const operatorType)
     : m_type(TokenType::Operator), m_operatorType(operatorType) {}
+AlbaGrepStringToken::AlbaGrepStringToken()
+    : m_type(TokenType::Dummy), m_operatorType(AlbaGrepStringOperatorType::Unknown) {}
 
 AlbaGrepStringToken::AlbaGrepStringToken(
     AlbaGrepStringOperatorType const operatorType, std::string const& operatorString)
@@ -44,8 +42,29 @@ bool AlbaGrepStringToken::isPrefixOperation() const {
     return AlbaGrepStringOperatorType::NotOperator == m_operatorType;
 }
 
-AlbaGrepStringToken::TokenType AlbaGrepStringToken::getTokenType() const { return m_type; }
+int AlbaGrepStringToken::getOperatorPriority() const {
+    int score(0);
+    switch (m_operatorType) {
+        case AlbaGrepStringOperatorType::NotOperator:
+            score = 3;
+            break;
+        case AlbaGrepStringOperatorType::AndOperator:
+        case AlbaGrepStringOperatorType::OrOperator:
+        case AlbaGrepStringOperatorType::XnorOperator:
+        case AlbaGrepStringOperatorType::XorOperator:
+            score = 2;
+            break;
+        case AlbaGrepStringOperatorType::OpeningParenthesis:
+            score = 1;
+            break;
+        default:
+            score = 0;
+            break;
+    }
+    return score;
+}
 
+AlbaGrepStringToken::TokenType AlbaGrepStringToken::getTokenType() const { return m_type; }
 AlbaGrepStringOperatorType AlbaGrepStringToken::getOperatorType() const { return m_operatorType; }
 
 string AlbaGrepStringToken::getTokenTypeString() const {
@@ -93,28 +112,6 @@ string AlbaGrepStringToken::getStringToFind() const {
         result = m_string;
     }
     return result;
-}
-
-int AlbaGrepStringToken::getOperatorPriority() const {
-    int score(0);
-    switch (m_operatorType) {
-        case AlbaGrepStringOperatorType::NotOperator:
-            score = 3;
-            break;
-        case AlbaGrepStringOperatorType::AndOperator:
-        case AlbaGrepStringOperatorType::OrOperator:
-        case AlbaGrepStringOperatorType::XnorOperator:
-        case AlbaGrepStringOperatorType::XorOperator:
-            score = 2;
-            break;
-        case AlbaGrepStringOperatorType::OpeningParenthesis:
-            score = 1;
-            break;
-        default:
-            score = 0;
-            break;
-    }
-    return score;
 }
 
 void AlbaGrepStringToken::appendToString(char const character) { m_string += character; }

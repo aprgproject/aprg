@@ -6,15 +6,7 @@ using namespace std;
 
 namespace alba {
 
-UserIdentifiers::UserIdentifiers() = default;
-
 UserIdentifiers::UserIdentifiers(std::string const& lineInLogs) { saveUserIndentfiers(lineInLogs); }
-
-void UserIdentifiers::saveUserIndentfiers(std::string const& lineInLogs) {
-    saveNbccId(lineInLogs);
-    saveCrnccId(lineInLogs);
-    saveTransactionId(lineInLogs);
-}
 
 bool UserIdentifiers::operator<(UserIdentifiers const& userIdentifiers) const {
     bool result(true);
@@ -34,6 +26,36 @@ bool UserIdentifiers::operator<(UserIdentifiers const& userIdentifiers) const {
         result = nbccId1 < nbccId2;
     }
     return result;
+}
+
+unsigned int UserIdentifiers::getNbccId() const {
+    unsigned int result(0);
+    if (m_nbccIdOptional) {
+        result = m_nbccIdOptional.value();
+    }
+    return result;
+}
+
+unsigned int UserIdentifiers::getCrnccId() const {
+    unsigned int result(0);
+    if (m_crnccIdOptional) {
+        result = m_crnccIdOptional.value();
+    }
+    return result;
+}
+
+unsigned int UserIdentifiers::getTransactionId() const {
+    unsigned int result(0);
+    if (m_transactionIdOptional) {
+        result = m_transactionIdOptional.value();
+    }
+    return result;
+}
+
+void UserIdentifiers::saveUserIndentfiers(std::string const& lineInLogs) {
+    saveNbccId(lineInLogs);
+    saveCrnccId(lineInLogs);
+    saveTransactionId(lineInLogs);
 }
 
 void UserIdentifiers::saveNbccId(std::string const& lineInLogs) {
@@ -70,28 +92,6 @@ void UserIdentifiers::saveTransactionId(std::string const& lineInLogs) {
     }
 }
 
-unsigned int UserIdentifiers::getNbccId() const {
-    unsigned int result(0);
-    if (m_nbccIdOptional) {
-        result = m_nbccIdOptional.value();
-    }
-    return result;
-}
-
-unsigned int UserIdentifiers::getCrnccId() const {
-    unsigned int result(0);
-    if (m_crnccIdOptional) {
-        result = m_crnccIdOptional.value();
-    }
-    return result;
-}
-
-unsigned int UserIdentifiers::getTransactionId() const {
-    unsigned int result(0);
-    if (m_transactionIdOptional) {
-        result = m_transactionIdOptional.value();
-    }
-    return result;
-}
+UserIdentifiers::UserIdentifiers() = default;
 
 }  // namespace alba

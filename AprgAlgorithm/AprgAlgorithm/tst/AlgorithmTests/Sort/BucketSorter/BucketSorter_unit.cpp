@@ -53,24 +53,20 @@ TEST(BucketSorterTest, SortWorksOnListOfCharactersUsingExample1) {
 
 TEST(BucketSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
     // Input is {-5, -10, 0, -3, 8, 5, -1, 10}
-
     IntegersSorter sorter(-10, 10);
     testSortUsingExample1WithPositiveAndNegativeIntegers<IntegersSorter, Integers>(sorter);
 }
 
 TEST(BucketSorterTest, SortWorksOnDoublesUsingExample1) {
     // Input is {0.897, 0.565, 0.656, 0.1234, 0.665, 0.3434};
-
     DoublesSorter sorter(0, 1);
     testSortUsingExample1WithDoubleValues<DoublesSorter, Doubles>(sorter);
 }
 
 // CANNOT SORT STRINGS
-
 TEST(BucketSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1) {
     // NOT REALLY STABLE
     // Not really stable but samples are too few
-
     StabilityCheckObjectsSorter sorter(StabilityCheckObject('A', 0), StabilityCheckObject('Z', 0));
     testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(sorter);
 }

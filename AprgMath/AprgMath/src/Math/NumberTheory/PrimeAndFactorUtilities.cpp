@@ -26,11 +26,9 @@ bool isNumberOfPrimesInfinite() {
 
 // There are many conjectures involving primes.
 // Most people think that the conjectures are true, but nobody has been able to prove them.
-
 bool isGoldbachConjectureTrue(UnsignedInteger const evenNumber) {
     // Goldbach’s conjecture: Each even integer n > 2 can be represented as a sum n = a+b so that both a and b are
     // primes.
-
     bool result(false);  // set as false when input is wrong
     if (evenNumber > 2 && isEven(evenNumber)) {
         UnsignedIntegers numbers(getPrimesBelowThisNumber(evenNumber));
@@ -44,7 +42,6 @@ bool isGoldbachConjectureTrue(UnsignedInteger const evenNumber) {
 bool isTwinPrimeConjectureTrue(UnsignedInteger const number) {
     // Twin prime conjecture: There is an infinite number of pairs of the form {p, p+2}, where both p and p+2 are
     // primes.
-
     UnsignedIntegers numbers(getPrimesBelowThisNumber(number));
     UnsignedInteger twinPrimeCount = 0;
     for (UnsignedInteger i = 0; i < numbers.size() - 1; ++i) {
@@ -57,7 +54,6 @@ bool isTwinPrimeConjectureTrue(UnsignedInteger const number) {
 
 bool isLegendreConjectureTrue(UnsignedInteger const number) {
     // Legendre’s conjecture: There is always a prime between numbers n^2 and (n+1)^2, where n is any positive integer.
-
     UnsignedInteger start = getRaiseToPowerForIntegers(number, static_cast<UnsignedInteger>(2));
     UnsignedInteger end = getRaiseToPowerForIntegers(number + 1, static_cast<UnsignedInteger>(2));
     bool result(false);
@@ -72,10 +68,8 @@ bool isLegendreConjectureTrue(UnsignedInteger const number) {
 
 bool isWilsonTheoremTrue(UnsignedInteger const number) {
     // Wilson’s theorem states that a number n is prime exactly when (n-1)! mod n = n-1.
-
     // For example, the number 11 is prime, because 10! mod 11 = 10
     // and the number 12 is not prime, because 11! mod 12 = 0 (not equal to 11).
-
     bool result(false);  // false when input is wrong
     if (number >= 2) {
         bool isFormulaSatisfied = getModularFactorial(number - 1, number) == number - 1;
@@ -115,7 +109,6 @@ UnsignedInteger getApproximateDensityOfPrimes(UnsignedInteger const number) {
 
 UnsignedInteger getNumberOfCoPrimesBelowThisNumber(UnsignedInteger const number) {
     // Euler’s totient function phi(n) gives the number of coprime numbers to n between 1 and n.
-
     FactorsToCountMap primeFactorsToCountMap(getPrimeFactorsToCountMap(number));
     UnsignedInteger result(1);
     for (auto const& [primeFactor, count] : primeFactorsToCountMap) {
@@ -131,12 +124,10 @@ UnsignedIntegers getPrimesBelowThisNumber(UnsignedInteger const number) {
     // -> Summation of n/x = n/2 + n/3 + n/4 + ... + n/n = O(n*log(n))
     // In fact, the algorithm is more efficient, because the inner loop will be executed only if the number x is prime.
     // It can be shown that the running time of the  algorithm is only O(n*log(log(n))), a complexity very near to O(n).
-
     // This algorithm produces all primes not greater than n.
     // It includes a common optimization, which is to start enumerating the multiples of each prime i from i^2.
     // The time complexity of this algorithm is O(n log log n), provided the array update is an O(1) operation, as is
     // usually the case.
-
     vector<bool> sieveOfEratosthenes(number, true);
     for (UnsignedInteger candidatePrime = 2; candidatePrime * candidatePrime < number;) {
         for (UnsignedInteger multiple = candidatePrime * candidatePrime; multiple < number;

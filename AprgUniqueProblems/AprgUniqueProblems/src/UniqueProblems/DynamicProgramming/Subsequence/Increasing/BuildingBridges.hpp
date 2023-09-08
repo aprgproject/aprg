@@ -12,9 +12,7 @@ public:
     using Bridges = std::vector<Bridge>;
     using IndexToIndex = std::vector<Index>;
     using IndexToValue = std::vector<Value>;
-
     explicit BuildingBridges(Bridges const& bridges);
-
     [[nodiscard]] Index getNumberOfPossibleBridges() const;
     [[nodiscard]] Bridges getPossibleBridges() const;
 

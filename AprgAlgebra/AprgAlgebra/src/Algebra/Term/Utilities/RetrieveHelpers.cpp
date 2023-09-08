@@ -72,15 +72,6 @@ VariableToValueMap getCoefficientsForVariablesOnly(Polynomial const& polynomial)
     return result;
 }
 
-void retrieveTermsFromTermsWithDetails(Terms& terms, TermsWithDetails const& termsWithDetails) {
-    terms.reserve(terms.size() + termsWithDetails.size());
-    transform(
-        termsWithDetails.cbegin(), termsWithDetails.cend(), back_inserter(terms),
-        [](TermWithDetails const& termWithDetails) {
-            return getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer);
-        });
-}
-
 Terms retrieveSubExpressionsAndSubFunctions(Term const& term) {
     ExpressionAndFunctionsRetriever retriever;
     retriever.retrieveFromTerm(term);
@@ -114,6 +105,15 @@ TermsWithDetails retrieveTermsWithDetailsThatSatisfiesCondition(
         }
     }
     return result;
+}
+
+void retrieveTermsFromTermsWithDetails(Terms& terms, TermsWithDetails const& termsWithDetails) {
+    terms.reserve(terms.size() + termsWithDetails.size());
+    transform(
+        termsWithDetails.cbegin(), termsWithDetails.cend(), back_inserter(terms),
+        [](TermWithDetails const& termWithDetails) {
+            return getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer);
+        });
 }
 
 }  // namespace alba::algebra

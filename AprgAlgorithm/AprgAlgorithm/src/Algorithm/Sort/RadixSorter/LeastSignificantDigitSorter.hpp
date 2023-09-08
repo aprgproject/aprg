@@ -15,8 +15,8 @@ public:
     using ArrayOfCountPerDigitValue = std::array<int, MAX_NUMBER_OF_DIGIT_VALUES + 1>;
     using GetNumberOfDigitsFunction = std::function<int(Values const&)>;
     using GetDigitAtFunction = std::function<DigitValue(Value const&, int const)>;
-
     LeastSignificantDigitSorter() = delete;
+
     LeastSignificantDigitSorter(
         GetNumberOfDigitsFunction const& getNumberOfDigitsFunction, GetDigitAtFunction const& getDigitAtFunction)
         : m_getNumberOfDigitsFunction(getNumberOfDigitsFunction), m_getDigitAtFunction(getDigitAtFunction) {}
@@ -36,7 +36,6 @@ public:
         // 1) [0][a count][b count][c count]...
         // 2) [0][cumulate with a][cumulate with b][cumulate with c]...
         // 3) [a starting index][b starting index][c starting index][d starting index]...
-
         ArrayOfCountPerDigitValue newIndexes{};
         countTheFrequencyForEachCharacterAt(newIndexes, valuesToSort, digitIndex);
         computeCumulatesToGetNewIndexes(newIndexes);
@@ -72,20 +71,16 @@ private:
 
 // Proposition: Key indexed counting uses ~11N+4R array accesses to sort N items whose keys are integers between 0 and
 // R-1 Proposition: Key indexed counting uses extra space proportional to N+R. This is stable
-
 // LSD string (radix) sort
 // -> Consider characters from right to left
 // -> Stably sort using dth character as the key (using key-indexed counting).
-
 // Proposition: LSD sorts fixed length strings in ascending order
 // Proof (by induction):
 // -> After pass i, string are sorted by last i characters
 // ---> If two strings differ on sort key, key indexed sort puts them in proper relative order.
 // ---> If two strings agree on sort key, stability keeps them in proper relative order.
-
 // Interview question: Sort a million 32-bit integers? -> LSD can be better because of fixed width
 // -> Check the other RadixSorter for proof.
-
 // LSD has history with punch cards
 
 }  // namespace alba::algorithm

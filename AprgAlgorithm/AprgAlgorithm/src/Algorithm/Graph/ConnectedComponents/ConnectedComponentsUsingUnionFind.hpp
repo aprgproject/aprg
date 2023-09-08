@@ -46,6 +46,7 @@ private:
         }
         b_numberOfComponentIds = roots.size();
     }
+
     BaseUndirectedGraphWithVertex const& b_graph;
     int& b_numberOfComponentIds;
     VertexToIntMap& b_vertexToComponentIdMap;

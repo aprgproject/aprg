@@ -10,7 +10,6 @@ class OrderedArraySet : public BaseOrderedArray<Key, BaseSet<Key>> {
 public:
     using BaseClass = BaseOrderedArray<Key, BaseSet<Key>>;
     using Keys = typename BaseClass::Keys;
-
     OrderedArraySet() : BaseClass(), b_size(BaseClass::m_size), b_keys(BaseClass::m_keys) {}
 
     void put(Key const& key) override {

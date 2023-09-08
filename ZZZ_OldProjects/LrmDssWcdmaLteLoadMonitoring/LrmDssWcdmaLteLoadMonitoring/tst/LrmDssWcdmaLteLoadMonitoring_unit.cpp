@@ -11,7 +11,6 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, ConsecutiveLowerLoadStateCountIsInitially
     LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 
     // When
-
     // Then
     EXPECT_EQ(0U, loadMonitoring.getConsecutiveLowerLoadStateCount());
 }
@@ -32,7 +31,6 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, CommissioningLoadFactorValuesAreInitially
     LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 
     // When
-
     // Then
     EXPECT_EQ(0U, loadMonitoring.getDchLoadFactor());
     EXPECT_EQ(0U, loadMonitoring.getHsdpaAndHsfachLoadFactor());
@@ -54,7 +52,6 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, CommissioningLoadThresholdValuesAreInitia
     LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 
     // When
-
     // Then
     EXPECT_EQ(0U, loadMonitoring.getMediumLoadThreshold());
     EXPECT_EQ(0U, loadMonitoring.getHighLoadThreshold());
@@ -110,7 +107,6 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, CellLoadIsCalculatedAsZeroWhenThereAreNoU
     LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 
     // When
-
     // Then
     EXPECT_EQ(0U, loadMonitoring.calculateCellLoad(0, 0, false));
 }
@@ -225,7 +221,6 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, NextLowerLoadStateCanBeDetermined) {
     LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 
     // When
-
     // Then
     EXPECT_EQ(EDssWcdmaLoad_Low, loadMonitoring.getNextLowerLoadState(EDssWcdmaLoad_Low));
     EXPECT_EQ(EDssWcdmaLoad_Low, loadMonitoring.getNextLowerLoadState(EDssWcdmaLoad_Medium));
@@ -294,7 +289,6 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, ConversionOfFilterBandwidthToLoadStateWor
     LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 
     // When
-
     // Then
     EXPECT_EQ(EDssWcdmaFilterBandwidth_1200_KHz, loadMonitoring.convertLoadStateToFilterBandwidth(EDssWcdmaLoad_Low));
     EXPECT_EQ(EDssWcdmaFilterBandwidth_600_KHz, loadMonitoring.convertLoadStateToFilterBandwidth(EDssWcdmaLoad_Medium));
@@ -306,7 +300,6 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, ConversionOfLoadStateToFilterBandwidthWor
     LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 
     // When
-
     // Then
     EXPECT_EQ(EDssWcdmaLoad_Low, loadMonitoring.convertFilterBandwidthToLoadState(EDssWcdmaFilterBandwidth_1200_KHz));
     EXPECT_EQ(EDssWcdmaLoad_Medium, loadMonitoring.convertFilterBandwidthToLoadState(EDssWcdmaFilterBandwidth_600_KHz));

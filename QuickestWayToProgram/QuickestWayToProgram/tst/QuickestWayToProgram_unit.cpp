@@ -20,11 +20,6 @@ using namespace std;
 
 namespace alba {
 
-TEST(SampleTest, PrimerTest) {
-    int i = 0;
-    ALBA_INF_PRINT1(cout, i);
-}
-
 /*TEST(SampleTest, PrimerTest) {
     int i = 0;
     double d = NAN;
@@ -1846,5 +1841,10 @@ NRT\1100_MegaPlexer\Ip_10.68.159.157_41786_544_160706_110531.codec.wtbin)");
         }
     }
     */
+
+TEST(SampleTest, PrimerTest) {
+    int i = 0;
+    ALBA_INF_PRINT1(cout, i);
+}
 
 }  // namespace alba

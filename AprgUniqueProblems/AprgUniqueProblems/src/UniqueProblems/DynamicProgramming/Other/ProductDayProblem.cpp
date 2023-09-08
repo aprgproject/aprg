@@ -71,6 +71,39 @@ ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingIterativeDP() co
     return result;
 }
 
+// inline optimization can work here because the usage belongs to same translation unit
+inline bool ProductDayProblem::isProductIncluded(ProductBits const productBits, Product const product) {
+    return (productBits & getProductBits(product)) != 0;
+}
+
+inline ProductDayProblem::ProductBits ProductDayProblem::getProductBits(Product const product) { return 1 << product; }
+
+inline ProductDayProblem::ProductBits ProductDayProblem::addProduct(
+    ProductBits const productBits, Product const product) {
+    return productBits | (1 << product);
+}
+
+inline ProductDayProblem::ProductBits ProductDayProblem::removeProduct(
+    ProductBits const productBits, Product const product) {
+    return productBits & ~(1 << product);
+}
+
+inline ProductDayProblem::Product ProductDayProblem::getNumberOfProducts() const {
+    return m_pricesInDayByProduct.getNumberOfRows();
+}
+
+inline ProductDayProblem::Day ProductDayProblem::getNumberOfDays() const {
+    return m_pricesInDayByProduct.getNumberOfColumns();
+}
+
+inline ProductDayProblem::ProductBits ProductDayProblem::getNumberOfProductsSubsets() const {
+    return 1 << getNumberOfProducts();
+}
+
+inline ProductDayProblem::ProductBits ProductDayProblem::getProductBitsWithAllProducts() const {
+    return AlbaBitValueUtilities<ProductBits>::generateOnesWithNumberOfBits(getNumberOfProducts());
+}
+
 ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingMemoizationDP(
     PriceMatrix& minimumPrices, Day const day, ProductBits const productBits) const {
     if (day >= 0 && day < getNumberOfDays()) {
@@ -95,39 +128,6 @@ ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingMemoizationDP(
         return result;
     }
     return INVALID_PRICE;
-}
-
-// inline optimization can work here because the usage belongs to same translation unit
-inline bool ProductDayProblem::isProductIncluded(ProductBits const productBits, Product const product) {
-    return (productBits & getProductBits(product)) != 0;
-}
-
-inline ProductDayProblem::Product ProductDayProblem::getNumberOfProducts() const {
-    return m_pricesInDayByProduct.getNumberOfRows();
-}
-
-inline ProductDayProblem::Day ProductDayProblem::getNumberOfDays() const {
-    return m_pricesInDayByProduct.getNumberOfColumns();
-}
-
-inline ProductDayProblem::ProductBits ProductDayProblem::getNumberOfProductsSubsets() const {
-    return 1 << getNumberOfProducts();
-}
-
-inline ProductDayProblem::ProductBits ProductDayProblem::getProductBitsWithAllProducts() const {
-    return AlbaBitValueUtilities<ProductBits>::generateOnesWithNumberOfBits(getNumberOfProducts());
-}
-
-inline ProductDayProblem::ProductBits ProductDayProblem::getProductBits(Product const product) { return 1 << product; }
-
-inline ProductDayProblem::ProductBits ProductDayProblem::addProduct(
-    ProductBits const productBits, Product const product) {
-    return productBits | (1 << product);
-}
-
-inline ProductDayProblem::ProductBits ProductDayProblem::removeProduct(
-    ProductBits const productBits, Product const product) {
-    return productBits & ~(1 << product);
 }
 
 }  // namespace alba

@@ -15,25 +15,22 @@ namespace chess {
 class ChessEngineHandler {
 public:
     enum class LogType { FromEngine, ToEngine, HandlerStatus };
-    using ProcessAStringFunction = std::function<void(std::string const&)>;
 
+    using ProcessAStringFunction = std::function<void(std::string const&)>;
     explicit ChessEngineHandler(std::string const& enginePath);
     ~ChessEngineHandler();
-
     void reset();
-
     void sendStringToEngine(std::string const& stringToEngine);
     void processStringFromEngine(std::string const& stringFromEngine);
     void startMonitoringEngineOutput();
-
     void setLogFile(std::string const& logFilePath);
     void setAdditionalStepsInProcessingAStringFromEngine(ProcessAStringFunction const& additionalSteps);
 
 private:
+    std::string getLogHeader(LogType const logtype) const;
     void initializeEngine();
     void shutdownEngine();
     void log(LogType const logtype, std::string const& logString);
-    std::string getLogHeader(LogType const logtype) const;
     std::string m_enginePath;
     std::mutex m_readMutex;
     STARTUPINFO m_startupInfo;

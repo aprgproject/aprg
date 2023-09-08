@@ -14,10 +14,8 @@ using namespace std;
 namespace alba::booleanAlgebra {
 
 Term::Term() : m_type(TermType::Empty), m_isSimplified(false), m_baseTermDataPointer(nullptr) {}
-
 Term::Term(TermType const type, bool const isSimplified, BaseTermDataPointer&& baseTermDataPointer)  // for move
     : m_type(type), m_isSimplified(isSimplified), m_baseTermDataPointer(move(baseTermDataPointer)) {}
-
 Term::Term(bool const boolValue)
     : m_type(TermType::Constant), m_isSimplified(false), m_baseTermDataPointer(make_unique<Constant>(boolValue)) {}
 
@@ -41,7 +39,6 @@ Term::Term(VariableTerm const& variableTerm)
 
 Term::Term(Operator const& operatorTerm)
     : m_type(TermType::Operator), m_isSimplified(false), m_baseTermDataPointer(make_unique<Operator>(operatorTerm)) {}
-
 Term::Term(Expression const& expression)
     : m_type(TermType::Expression), m_isSimplified(false), m_baseTermDataPointer(make_unique<Expression>(expression)) {}
 
@@ -117,15 +114,11 @@ bool Term::isEmpty() const {
 }
 
 bool Term::isConstant() const { return TermType::Constant == m_type; }
-
 bool Term::isVariableTerm() const { return TermType::VariableTerm == m_type; }
-
 bool Term::isOperator() const { return TermType::Operator == m_type; }
-
 bool Term::isExpression() const { return TermType::Expression == m_type; }
-
 bool Term::isSimplified() const { return m_isSimplified; }
-
+bool Term::getBooleanValue() const { return getConstantConstReference().getBooleanValue(); }
 TermType Term::getTermType() const { return m_type; }
 
 Constant const& Term::getConstantConstReference() const {
@@ -151,8 +144,6 @@ Expression const& Term::getExpressionConstReference() const {
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     return *static_cast<Expression const*>(m_baseTermDataPointer.get());
 }
-
-bool Term::getBooleanValue() const { return getConstantConstReference().getBooleanValue(); }
 
 string Term::getDebugString() const {
     stringstream ss;
@@ -253,7 +244,6 @@ void Term::negate() {
 }
 
 void Term::setAsSimplified() { m_isSimplified = true; }
-
 void Term::clearSimplifiedFlag() { m_isSimplified = false; }
 
 void Term::clearAllInnerSimplifiedFlags() {

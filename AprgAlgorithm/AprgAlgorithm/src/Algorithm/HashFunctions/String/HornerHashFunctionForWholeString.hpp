@@ -11,13 +11,11 @@ class HornerHashFunctionForWholeString {
 public:
     HornerHashFunctionForWholeString(HashValue const radix, HashValue const largeRandomPrime)
         : m_radix(radix), m_largeRandomPrime(largeRandomPrime) {}
-
     [[nodiscard]] HashValue getHashCode(std::string const& stringToHash) const { return getFinalHPart(stringToHash); }
 
 private:
     [[nodiscard]] HashValue getFinalHPart(std::string const& stringToHash) const {
         // Based from formula (check substrings file notes): h[k] = (h[k-1]*A + s[k]) mod B
-
         HashValue finalHPart(0);
         // linear time
         for (char const c : stringToHash) {
@@ -29,4 +27,5 @@ private:
     HashValue m_radix;
     HashValue m_largeRandomPrime;
 };
+
 }  // namespace alba::algorithm

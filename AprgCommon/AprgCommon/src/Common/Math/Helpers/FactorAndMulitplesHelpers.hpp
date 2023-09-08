@@ -19,7 +19,6 @@ bool isPrime(NumberType const number) {
     // When a > b, then we can test if divisible until b. Since b < nonPrimeNumber^0.5, then we can test until
     // nonPrimeNumber^0.5. When a < b, then we can test if divisible until a. Since a < nonPrimeNumber^0.5, then we can
     // test until nonPrimeNumber^0.5.
-
     bool result(number >= 2);
     NumberType limit(pow(number, 0.5));
     for (NumberType i = 2; i <= limit; ++i) {
@@ -58,13 +57,11 @@ NumberType getGreatestCommonFactorUsingEuclidAlgorithm(NumberType const firstNum
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
     // Using Euclid’s algorithm
-
     // Euclid’s algorithm provides an efficient way to find the greatest common divisor of two numbers.
     // The algorithm is based on the following formula:
     // gcd(a, b) =
     // -> if b=0: a
     // -> if b!=0: gcd(b, a%b)
-
     NumberType result(0);
     NumberType first(getAbsoluteValue(firstNumber));
     NumberType second(getAbsoluteValue(secondNumber));  // only consider positive
@@ -94,7 +91,6 @@ NumberType getGreatestCommonFactorUsingBinaryGcdAlgorithm(NumberType const first
     // -----> gcd(2u, v) = gcd(u, v), if v is odd (2 is not a common divisor). Similarly, gcd(u, 2v) = gcd(u, v) if u is
     // odd.
     // -----> gcd(u, v) = gcd(|u − v|, min(u, v)), if u and v are both odd.
-
     NumberType first(getAbsoluteValue(firstNumber));
     NumberType second(getAbsoluteValue(secondNumber));  // only consider positive
     if (first == 0) {
@@ -162,7 +158,6 @@ NumberType getLeastCommonMultipleUsingEuclidAlgorithm(NumberType const firstNumb
 
     // Using Euclid’s algorithm
     // lcm(a,b) = ab/gcd(a,b)
-
     NumberType result(0);
     if (firstNumber != 0 && secondNumber != 0) {
         result = firstNumber / getGreatestCommonFactor(firstNumber, secondNumber) * secondNumber;

@@ -25,7 +25,6 @@ WeightedJobScheduling::WeightedJobScheduling(Jobs const& jobs) : m_jobs(jobs) {}
 WeightedJobScheduling::Profit WeightedJobScheduling::getMaxProfitByMonitoringTimeStampsUsingIterativeDP() const {
     // Time Complexity: O(n^2)
     // Auxiliary Space: O(n)
-
     Profit result(0);
     if (!m_jobs.empty()) {
         Times timeStamps;
@@ -64,7 +63,6 @@ WeightedJobScheduling::Profit WeightedJobScheduling::getMaxProfitByMonitoringTim
 WeightedJobScheduling::Profit WeightedJobScheduling::getMaxProfitByMonitoringJobsUsingIterativeDP() const {
     // Time Complexity: O(n*log(n))
     // Auxiliary Space: O(n)
-
     Profit result(0);
     if (!m_jobs.empty()) {
         Jobs jobsSortedByEndTime(m_jobs);

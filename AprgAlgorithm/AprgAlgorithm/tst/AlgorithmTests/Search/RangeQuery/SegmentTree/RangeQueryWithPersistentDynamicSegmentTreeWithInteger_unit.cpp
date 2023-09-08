@@ -134,7 +134,6 @@ TEST(
     sumRangeQuery.changeValueAtIndex(3, 3);  // New values: 1, 3, 4, 3, 6, 1, 4, 2, 9
     sumRangeQuery.changeValueAtIndex(4, 4);  // New values: 1, 3, 4, 3, 4, 1, 4, 2, 9
     sumRangeQuery.changeValueAtIndex(5, 5);  // New values: 1, 3, 4, 3, 4, 5, 4, 2, 9
-
     // On zero previous step (current values), the values are: 1, 3, 4, 3, 4, 5, 4, 2, 9
     EXPECT_EQ(1, sumRangeQuery.getValueOnIntervalOnPreviousTree(0, 0, 0));
     EXPECT_EQ(4, sumRangeQuery.getValueOnIntervalOnPreviousTree(0, 1, 0));

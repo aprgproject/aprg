@@ -190,7 +190,6 @@ TEST(TwoDimensionsUtilitiesTest, GetAreaUsingPicksTheoremWorks) {
     // |1| | | |O| | | |
     // |X|1|2|3|4|5|6|7|
     // Legend: 'O' is for outside, 'I' is for inside
-
     EXPECT_DOUBLE_EQ(8.5, getAreaUsingPicksTheorem(6, 7));
 }
 
@@ -388,7 +387,6 @@ TEST(TwoDimensionsUtilitiesTest, GetRotationDirectionTraversing3PointsWorksOnDet
     // Point location
     // Cross products can be used to test whether a point is located on the left or right side of a line.
     // Assume that the line goes through points s1 and s2, we are looking from s1 to s2 and the point is p.
-
     // The cross product (p-s1)x(p-s2) tells us the location of the point p.
     // If the cross product is positive, p is located on the left side,
     // and if the cross product is negative, p is located on the right side.

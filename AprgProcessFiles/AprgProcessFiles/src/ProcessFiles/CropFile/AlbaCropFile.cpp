@@ -38,6 +38,28 @@ void AlbaCropFile::processFile(string const& inputFilePath, string const& output
     updateAfterOneIteration(100);
 }
 
+AlbaCropFile::LocationsInFile AlbaCropFile::getLocationsInFile(
+    double const foundLocation, double const fileSize) const {
+    LocationsInFile locations{};
+    locations.startLocation = foundLocation - (m_cropSize / 2);
+    locations.endLocation = foundLocation + (m_cropSize / 2);
+    double overFlowOnTheLeft = -locations.startLocation;
+    double overFlowOnTheRight = locations.endLocation - fileSize;
+    if (overFlowOnTheLeft > 0 || overFlowOnTheRight > 0) {
+        if (overFlowOnTheLeft < 0 && overFlowOnTheRight + overFlowOnTheLeft <= 0) {
+            locations.startLocation -= overFlowOnTheRight;
+            locations.endLocation -= overFlowOnTheRight;
+        } else if (overFlowOnTheRight < 0 && overFlowOnTheRight + overFlowOnTheLeft <= 0) {
+            locations.startLocation += overFlowOnTheLeft;
+            locations.endLocation += overFlowOnTheLeft;
+        } else {
+            locations.startLocation = 0;
+            locations.endLocation = fileSize;
+        }
+    }
+    return locations;
+}
+
 double AlbaCropFile::getLocationOfPrioritizedPrint(string const& inputFilePath) {
     double foundLocation(-1);
     ifstream inputFileStream(inputFilePath);
@@ -82,28 +104,6 @@ void AlbaCropFile::performCropForFile(
             updateAfterOneIteration(50 + (currentLocation - locations.startLocation) * 50 / locationDifference);
         }
     }
-}
-
-AlbaCropFile::LocationsInFile AlbaCropFile::getLocationsInFile(
-    double const foundLocation, double const fileSize) const {
-    LocationsInFile locations{};
-    locations.startLocation = foundLocation - (m_cropSize / 2);
-    locations.endLocation = foundLocation + (m_cropSize / 2);
-    double overFlowOnTheLeft = -locations.startLocation;
-    double overFlowOnTheRight = locations.endLocation - fileSize;
-    if (overFlowOnTheLeft > 0 || overFlowOnTheRight > 0) {
-        if (overFlowOnTheLeft < 0 && overFlowOnTheRight + overFlowOnTheLeft <= 0) {
-            locations.startLocation -= overFlowOnTheRight;
-            locations.endLocation -= overFlowOnTheRight;
-        } else if (overFlowOnTheRight < 0 && overFlowOnTheRight + overFlowOnTheLeft <= 0) {
-            locations.startLocation += overFlowOnTheLeft;
-            locations.endLocation += overFlowOnTheLeft;
-        } else {
-            locations.startLocation = 0;
-            locations.endLocation = fileSize;
-        }
-    }
-    return locations;
 }
 
 void AlbaCropFile::updateAfterOneIteration(double const percentage) {

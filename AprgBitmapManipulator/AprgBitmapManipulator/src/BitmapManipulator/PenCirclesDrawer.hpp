@@ -10,22 +10,21 @@ class PenCirclesDrawer {
 public:
     struct ColorDetails {
         ColorDetails();
-        double totalRed{0};
-        double totalGreen{0};
-        double totalBlue{0};
-        double totalWeight{0};
         [[nodiscard]] bool isEmpty() const;
         [[nodiscard]] uint32_t getColor() const;
         void addColor(uint32_t const color, double const weight);
         void clear();
+        double totalRed{0};
+        double totalGreen{0};
+        double totalBlue{0};
+        double totalWeight{0};
     };
+
     using PointToColorMap = std::map<BitmapXY, uint32_t>;
     using PointAndColorPair = std::pair<BitmapXY, uint32_t>;
     using PointToColorDetailsMap = std::map<BitmapXY, ColorDetails>;
     using PointAndColorDetailsPair = std::pair<BitmapXY, ColorDetails>;
-
     PenCirclesDrawer(PenCircles const& penCircles, BitmapSnippet& snippet);
-
     void draw();
     void drawUsingCirclesWithoutOverlay();
     void drawUsingCirclesWithOverlay();

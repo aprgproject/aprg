@@ -5,18 +5,15 @@ namespace Bridge {
 
 // Implementor
 // defines the interface for implementation classes
-
 class Implementor {
 public:
     virtual ~Implementor() = default;
-
     virtual void action() = 0;
     // ...
 };
 
 // Concrete Implementors
 // implement the Implementor interface and define concrete implementations
-
 class ConcreteImplementorA : public Implementor {
 public:
     void action() override { std::cout << "Concrete Implementor A\n"; }
@@ -31,25 +28,21 @@ public:
 
 // Abstraction
 // defines the abstraction's interface
-
 class Abstraction {
 public:
     virtual ~Abstraction() = default;
-
     virtual void operation() = 0;
     // ...
 };
 
 // RefinedAbstraction
 // extends the interface defined by Abstraction
-
 class RefinedAbstraction : public Abstraction {
 public:
     explicit RefinedAbstraction(std::unique_ptr<Implementor> implementor) : m_implementor(std::move(implementor)) {}
-
     void operation() override { m_implementor->action(); }
-    // ...
 
+    // ...
 private:
     std::unique_ptr<Implementor> m_implementor;
 };

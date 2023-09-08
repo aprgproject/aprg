@@ -5,8 +5,6 @@
 #include <vector>
 
 namespace alba::ThreeDimensions {
-
 using Point = AlbaXYZ<double>;
 using Points = std::vector<Point>;
-
 }  // namespace alba::ThreeDimensions

@@ -11,7 +11,6 @@ template <typename Values>
 class QuickSorterWithIterativeApproach : public BaseSorter<Values> {
 public:
     using Value = typename Values::value_type;
-
     explicit QuickSorterWithIterativeApproach(PivotType const pivotType) : m_pivotType(pivotType) {}
 
     void sort(Values& valuesToSort) const override {

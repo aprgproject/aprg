@@ -15,9 +15,7 @@ public:
     using Edge = typename GraphTypes<Vertex>::Edge;
     using Edges = typename GraphTypes<Vertex>::Edges;
     using SetOfEdges = typename GraphTypes<Vertex>::SetOfEdges;
-
     DirectedGraphWithListOfEdges() = default;
-
     [[nodiscard]] bool isEmpty() const override { return m_edges.empty(); }
 
     [[nodiscard]] bool isDirectlyConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
@@ -25,7 +23,6 @@ public:
     }
 
     [[nodiscard]] int getNumberOfVertices() const override { return getUniqueVertices().size(); }
-
     [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
 
     [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
@@ -69,6 +66,15 @@ public:
     }
 
 protected:
+    [[nodiscard]] SetOfVertices getUniqueVertices() const {
+        SetOfVertices uniqueVertices;
+        for (auto const& [startVertexOfEdge, endVertexOfEdge] : m_edges) {
+            uniqueVertices.emplace(startVertexOfEdge);
+            uniqueVertices.emplace(endVertexOfEdge);
+        }
+        return uniqueVertices;
+    }
+
     friend std::ostream& operator<<(std::ostream& out, DirectedGraphWithListOfEdges const& graph) {
         out << "Edges: {";
         for (auto const& edge : graph.m_edges) {
@@ -78,14 +84,6 @@ protected:
         return out;
     }
 
-    [[nodiscard]] SetOfVertices getUniqueVertices() const {
-        SetOfVertices uniqueVertices;
-        for (auto const& [startVertexOfEdge, endVertexOfEdge] : m_edges) {
-            uniqueVertices.emplace(startVertexOfEdge);
-            uniqueVertices.emplace(endVertexOfEdge);
-        }
-        return uniqueVertices;
-    }
     int m_numberOfEdges{0};
     SetOfEdges m_edges;
 };

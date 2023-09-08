@@ -32,14 +32,6 @@ namespace chess {
 
 namespace ChessPeek {
 
-void trackKeyPressForDownloadMovesFromChessDotCom() {
-    AlbaLocalUserAutomation userAutomation;
-    while (shouldStillRun) {
-        shouldStillRun = !userAutomation.isKeyPressed(VK_NUMLOCK);
-        userAutomation.sleep(100);
-    }
-}
-
 struct Paths {
     string url;
     string htmlFile;
@@ -56,46 +48,20 @@ struct MoveInfo {
     string blackWinPercentage;
 };
 
+void trackKeyPressForDownloadMovesFromChessDotCom() {
+    AlbaLocalUserAutomation userAutomation;
+    while (shouldStillRun) {
+        shouldStillRun = !userAutomation.isKeyPressed(VK_NUMLOCK);
+        userAutomation.sleep(100);
+    }
+}
+
 using MoveInfos = std::vector<MoveInfo>;
 
 struct WebPageInfo {
     string nameOfLine;
     MoveInfos moveInfos;
 };
-
-string getOneCharPiece(string const& pieceName) {
-    string result;
-    if ("knight" == pieceName) {
-        result = "N";
-    } else if ("bishop" == pieceName) {
-        result = "B";
-    } else if ("rook" == pieceName) {
-        result = "R";
-    } else if ("queen" == pieceName) {
-        result = "Q";
-    } else if ("king" == pieceName) {
-        result = "K";
-    }
-    return result;
-}
-
-void clickWindow() {
-    AlbaLocalUserAutomation userAutomation;
-    userAutomation.doLeftClickAt(MousePosition(3750, 550));
-}
-
-void gotoWebPage(string const& url) {
-    AlbaLocalUserAutomation userAutomation;
-    userAutomation.performKeyCombination({VK_CONTROL}, {'L'});
-
-    userAutomation.setStringToClipboard(url);
-    userAutomation.sleep(1000);
-
-    userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
-
-    userAutomation.typeKey(VK_RETURN);
-    userAutomation.sleep(500);
-}
 
 bool performMovesAndReturnIfValid(strings const& line) {
     Configuration configuration(Configuration::Type::ChessDotComExplorer);
@@ -149,103 +115,6 @@ bool performMovesAndReturnIfValid(strings const& line) {
     }
 
     return true;
-}
-
-void deleteWebPageUntilItsDeleted(string const& htmlFile) {
-    AlbaLocalPathHandler htmlFileHandler(htmlFile);
-    while (htmlFileHandler.isFoundInLocalSystem()) {
-        if (!shouldStillRun) {
-            exit(0);
-        }
-        htmlFileHandler.deleteFile();
-        Sleep(100);
-        htmlFileHandler.reInput();
-        if (htmlFileHandler.isFoundInLocalSystem()) {
-            cout << "File still not deleted. Deleting again. File: [" << htmlFile << "]" << endl;
-        }
-    }
-}
-
-void saveWebPage(string const& htmlFile) {
-    AlbaLocalUserAutomation userAutomation;
-    userAutomation.performKeyCombination({VK_CONTROL}, {'S'});
-
-    userAutomation.setStringToClipboard(htmlFile);
-    userAutomation.sleep(1000);
-
-    userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
-
-    userAutomation.typeKey(VK_RETURN);
-}
-
-void typeEnter() {
-    AlbaLocalUserAutomation userAutomation;
-    userAutomation.typeKey(VK_RETURN);
-}
-
-void saveWebPageUntilItsDeleted(string const& htmlFile) {
-    AlbaLocalPathHandler htmlFileHandler(htmlFile);
-    while (!htmlFileHandler.isFoundInLocalSystem()) {
-        if (!shouldStillRun) {
-            exit(0);
-        }
-        saveWebPage(htmlFile);
-        clickWindow();
-        typeEnter();
-        Sleep(500);
-        htmlFileHandler.reInput();
-        if (!htmlFileHandler.isFoundInLocalSystem()) {
-            cout << "File still doesnt exist. Saving web page again. File: [" << htmlFile << "]" << endl;
-        }
-    }
-}
-
-void clickReset() {
-    AlbaLocalUserAutomation userAutomation;
-    userAutomation.doLeftClickAt(MousePosition(3426, 952));
-}
-
-string getStringInBetween(
-    string_view const mainString, string_view const firstString, string_view const secondString, int& index) {
-    string result{};
-    int indexToStart = index;
-    int firstIndexOfFirstString = mainString.find(firstString, indexToStart);
-    if (isNotNpos(firstIndexOfFirstString)) {
-        int lastIndexOfFirstString = firstIndexOfFirstString + firstString.length();
-        int firstIndexOfSecondString = mainString.find(secondString, lastIndexOfFirstString);
-        if (isNotNpos(firstIndexOfSecondString)) {
-            result = mainString.substr(lastIndexOfFirstString, firstIndexOfSecondString - lastIndexOfFirstString);
-            index = firstIndexOfSecondString + secondString.length();
-        }
-    }
-    return result;
-}
-
-string getStringInBetween(string_view const mainString, string_view const firstString, string_view const secondString) {
-    int tempIndex = 0;
-    return getStringInBetween(mainString, firstString, secondString, tempIndex);
-}
-
-string removeHtmlTags(string const& mainString) {
-    string withoutTags;
-    string withTags = mainString;
-    int firstIndexOfFirstString = withTags.find("<", 0);
-    while (isNotNpos(firstIndexOfFirstString)) {
-        if (!shouldStillRun) {
-            exit(0);
-        }
-        int lastIndexOfFirstString = firstIndexOfFirstString + 1;
-        int firstIndexOfSecondString = withTags.find(">", lastIndexOfFirstString);
-        if (isNotNpos(firstIndexOfSecondString)) {
-            int lastIndexOfSecondString = firstIndexOfSecondString + 1;
-            withoutTags += withTags.substr(0, firstIndexOfFirstString);
-            withTags = withTags.substr(lastIndexOfSecondString);
-            firstIndexOfFirstString = withTags.find("<", 0);
-        } else {
-            break;
-        }
-    }
-    return withoutTags + withTags;
 }
 
 bool readHtmlFileIfValid(WebPageInfo& pageInfo, string const& htmlFile) {
@@ -321,83 +190,6 @@ bool readHtmlFileIfValid(WebPageInfo& pageInfo, string const& htmlFile) {
     return result;
 }
 
-void savePageInfoToDataFile(strings const& currentLine, string const& dataFile, WebPageInfo const& pageInfo) {
-    ofstream outStream(dataFile, ofstream::app);
-    outStream << "Line: [";
-    for (string const& move : currentLine) {
-        outStream << move << ",";
-    }
-    outStream << "]\n";
-    outStream << "NameOfLine: [" << pageInfo.nameOfLine << "]\n";
-    outStream << "NumberOfNextMoves: [" << pageInfo.moveInfos.size() << "]\n";
-    for (MoveInfo const& moveInfo : pageInfo.moveInfos) {
-        outStream << "NextMove: [" << moveInfo.nextMove << "]\n";
-        outStream << "NumberOfGames: [" << moveInfo.numberOfGames << "]\n";
-        outStream << "WhiteWinPercentage: [" << moveInfo.whiteWinPercentage << "]\n";
-        outStream << "DrawPercentage: [" << moveInfo.drawPercentage << "]\n";
-        outStream << "BlackWinPercentage: [" << moveInfo.blackWinPercentage << "]\n";
-    }
-    outStream.flush();
-}
-
-int getLineNumber(string const& lineNumberFile) {
-    int result{};
-    ifstream inStream(lineNumberFile);
-    inStream >> result;
-    return result;
-}
-
-void setLineNumber(string const& lineNumberFile, int const lineNumber) {
-    ofstream outStream(lineNumberFile);
-    outStream << lineNumber << "\n";
-}
-
-strings getLineOfMoves(string const& lineFile, int const lineNumber) {
-    strings result;
-    ifstream inStream(lineFile);
-    AlbaFileReader fileReader(inStream);
-    int i = 1;
-    while (fileReader.isNotFinished()) {
-        if (!shouldStillRun) {
-            exit(0);
-        }
-        if (i < lineNumber) {
-            fileReader.skipLine();
-            ++i;
-        } else if (i == lineNumber) {
-            string lineString = fileReader.getLineAndIgnoreWhiteSpaces();
-            splitToStrings<SplitStringType::WithoutDelimeters>(result, lineString, ",");
-            break;
-        } else {
-            break;
-        }
-    }
-    return result;
-}
-
-void saveLine(ofstream& outStream, strings const& line) {
-    ostream_iterator<string> outputIterator(outStream, ",");
-    copy(line.cbegin(), line.cend(), outputIterator);
-    outStream << "\n";
-}
-
-void saveNewLinesInPageInfoToLineFile(strings const& currentLine, string const& lineFile, WebPageInfo const& pageInfo) {
-    ofstream outStream(lineFile, ofstream::app);
-    strings newLine(currentLine);
-    for (MoveInfo const& moveInfo : pageInfo.moveInfos) {
-        newLine.emplace_back(moveInfo.nextMove);
-
-        saveLine(outStream, newLine);
-
-        newLine.pop_back();
-    }
-}
-
-void saveSkippedLineAtTheEndOfLineFile(strings const& skippedLine, string const& lineFile) {
-    ofstream outStream(lineFile, ofstream::app);
-    saveLine(outStream, skippedLine);
-}
-
 bool shouldIncludeLine(strings const& currentLine, Book const& book) {
     bool result(false);
     constexpr int MIN_NUMBER_OF_GAMES = 10000;
@@ -432,6 +224,214 @@ bool shouldIncludeLine(strings const& currentLine, Book const& book) {
         }
     }
     return result;
+}
+
+int getLineNumber(string const& lineNumberFile) {
+    int result{};
+    ifstream inStream(lineNumberFile);
+    inStream >> result;
+    return result;
+}
+
+string getOneCharPiece(string const& pieceName) {
+    string result;
+    if ("knight" == pieceName) {
+        result = "N";
+    } else if ("bishop" == pieceName) {
+        result = "B";
+    } else if ("rook" == pieceName) {
+        result = "R";
+    } else if ("queen" == pieceName) {
+        result = "Q";
+    } else if ("king" == pieceName) {
+        result = "K";
+    }
+    return result;
+}
+
+string getStringInBetween(
+    string_view const mainString, string_view const firstString, string_view const secondString, int& index) {
+    string result{};
+    int indexToStart = index;
+    int firstIndexOfFirstString = mainString.find(firstString, indexToStart);
+    if (isNotNpos(firstIndexOfFirstString)) {
+        int lastIndexOfFirstString = firstIndexOfFirstString + firstString.length();
+        int firstIndexOfSecondString = mainString.find(secondString, lastIndexOfFirstString);
+        if (isNotNpos(firstIndexOfSecondString)) {
+            result = mainString.substr(lastIndexOfFirstString, firstIndexOfSecondString - lastIndexOfFirstString);
+            index = firstIndexOfSecondString + secondString.length();
+        }
+    }
+    return result;
+}
+
+string getStringInBetween(string_view const mainString, string_view const firstString, string_view const secondString) {
+    int tempIndex = 0;
+    return getStringInBetween(mainString, firstString, secondString, tempIndex);
+}
+
+string removeHtmlTags(string const& mainString) {
+    string withoutTags;
+    string withTags = mainString;
+    int firstIndexOfFirstString = withTags.find("<", 0);
+    while (isNotNpos(firstIndexOfFirstString)) {
+        if (!shouldStillRun) {
+            exit(0);
+        }
+        int lastIndexOfFirstString = firstIndexOfFirstString + 1;
+        int firstIndexOfSecondString = withTags.find(">", lastIndexOfFirstString);
+        if (isNotNpos(firstIndexOfSecondString)) {
+            int lastIndexOfSecondString = firstIndexOfSecondString + 1;
+            withoutTags += withTags.substr(0, firstIndexOfFirstString);
+            withTags = withTags.substr(lastIndexOfSecondString);
+            firstIndexOfFirstString = withTags.find("<", 0);
+        } else {
+            break;
+        }
+    }
+    return withoutTags + withTags;
+}
+
+strings getLineOfMoves(string const& lineFile, int const lineNumber) {
+    strings result;
+    ifstream inStream(lineFile);
+    AlbaFileReader fileReader(inStream);
+    int i = 1;
+    while (fileReader.isNotFinished()) {
+        if (!shouldStillRun) {
+            exit(0);
+        }
+        if (i < lineNumber) {
+            fileReader.skipLine();
+            ++i;
+        } else if (i == lineNumber) {
+            string lineString = fileReader.getLineAndIgnoreWhiteSpaces();
+            splitToStrings<SplitStringType::WithoutDelimeters>(result, lineString, ",");
+            break;
+        } else {
+            break;
+        }
+    }
+    return result;
+}
+
+void clickWindow() {
+    AlbaLocalUserAutomation userAutomation;
+    userAutomation.doLeftClickAt(MousePosition(3750, 550));
+}
+
+void gotoWebPage(string const& url) {
+    AlbaLocalUserAutomation userAutomation;
+    userAutomation.performKeyCombination({VK_CONTROL}, {'L'});
+
+    userAutomation.setStringToClipboard(url);
+    userAutomation.sleep(1000);
+
+    userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
+
+    userAutomation.typeKey(VK_RETURN);
+    userAutomation.sleep(500);
+}
+
+void deleteWebPageUntilItsDeleted(string const& htmlFile) {
+    AlbaLocalPathHandler htmlFileHandler(htmlFile);
+    while (htmlFileHandler.isFoundInLocalSystem()) {
+        if (!shouldStillRun) {
+            exit(0);
+        }
+        htmlFileHandler.deleteFile();
+        Sleep(100);
+        htmlFileHandler.reInput();
+        if (htmlFileHandler.isFoundInLocalSystem()) {
+            cout << "File still not deleted. Deleting again. File: [" << htmlFile << "]" << endl;
+        }
+    }
+}
+
+void saveWebPage(string const& htmlFile) {
+    AlbaLocalUserAutomation userAutomation;
+    userAutomation.performKeyCombination({VK_CONTROL}, {'S'});
+
+    userAutomation.setStringToClipboard(htmlFile);
+    userAutomation.sleep(1000);
+
+    userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
+
+    userAutomation.typeKey(VK_RETURN);
+}
+
+void typeEnter() {
+    AlbaLocalUserAutomation userAutomation;
+    userAutomation.typeKey(VK_RETURN);
+}
+
+void saveWebPageUntilItsDeleted(string const& htmlFile) {
+    AlbaLocalPathHandler htmlFileHandler(htmlFile);
+    while (!htmlFileHandler.isFoundInLocalSystem()) {
+        if (!shouldStillRun) {
+            exit(0);
+        }
+        saveWebPage(htmlFile);
+        clickWindow();
+        typeEnter();
+        Sleep(500);
+        htmlFileHandler.reInput();
+        if (!htmlFileHandler.isFoundInLocalSystem()) {
+            cout << "File still doesnt exist. Saving web page again. File: [" << htmlFile << "]" << endl;
+        }
+    }
+}
+
+void clickReset() {
+    AlbaLocalUserAutomation userAutomation;
+    userAutomation.doLeftClickAt(MousePosition(3426, 952));
+}
+
+void savePageInfoToDataFile(strings const& currentLine, string const& dataFile, WebPageInfo const& pageInfo) {
+    ofstream outStream(dataFile, ofstream::app);
+    outStream << "Line: [";
+    for (string const& move : currentLine) {
+        outStream << move << ",";
+    }
+    outStream << "]\n";
+    outStream << "NameOfLine: [" << pageInfo.nameOfLine << "]\n";
+    outStream << "NumberOfNextMoves: [" << pageInfo.moveInfos.size() << "]\n";
+    for (MoveInfo const& moveInfo : pageInfo.moveInfos) {
+        outStream << "NextMove: [" << moveInfo.nextMove << "]\n";
+        outStream << "NumberOfGames: [" << moveInfo.numberOfGames << "]\n";
+        outStream << "WhiteWinPercentage: [" << moveInfo.whiteWinPercentage << "]\n";
+        outStream << "DrawPercentage: [" << moveInfo.drawPercentage << "]\n";
+        outStream << "BlackWinPercentage: [" << moveInfo.blackWinPercentage << "]\n";
+    }
+    outStream.flush();
+}
+
+void setLineNumber(string const& lineNumberFile, int const lineNumber) {
+    ofstream outStream(lineNumberFile);
+    outStream << lineNumber << "\n";
+}
+
+void saveLine(ofstream& outStream, strings const& line) {
+    ostream_iterator<string> outputIterator(outStream, ",");
+    copy(line.cbegin(), line.cend(), outputIterator);
+    outStream << "\n";
+}
+
+void saveNewLinesInPageInfoToLineFile(strings const& currentLine, string const& lineFile, WebPageInfo const& pageInfo) {
+    ofstream outStream(lineFile, ofstream::app);
+    strings newLine(currentLine);
+    for (MoveInfo const& moveInfo : pageInfo.moveInfos) {
+        newLine.emplace_back(moveInfo.nextMove);
+
+        saveLine(outStream, newLine);
+
+        newLine.pop_back();
+    }
+}
+
+void saveSkippedLineAtTheEndOfLineFile(strings const& skippedLine, string const& lineFile) {
+    ofstream outStream(lineFile, ofstream::app);
+    saveLine(outStream, skippedLine);
 }
 
 void doOnePage(strings const& currentLine, Paths const& paths) {
@@ -497,7 +497,6 @@ TEST(DownloadMovesFromChessDotComTest, DISABLED_DoAllPagesRecursivelyWorks) {
     // ChessDotComMoves should be deleted or empty
     // ChessDotComLines should be deleted or empty
     // ChessDotComLineNumber has to contain 0
-
     AlbaWebPathHandler explorerUrl(R"(https://www.chess.com/explorer)");
     AlbaLocalPathHandler tempHtmlFile(APRG_DIR R"(\Chess\ChessPeek\Files\ChessDotComAutomation\temp.html)");
     AlbaLocalPathHandler dataFile(APRG_DIR
@@ -512,7 +511,6 @@ TEST(DownloadMovesFromChessDotComTest, DISABLED_DoAllPagesRecursivelyWorks) {
 }
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

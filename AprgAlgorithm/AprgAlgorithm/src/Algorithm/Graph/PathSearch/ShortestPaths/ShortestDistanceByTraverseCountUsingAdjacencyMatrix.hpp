@@ -14,11 +14,9 @@ public:
     // between them that contains exactly n edges.
     // To calculate this, we have to define matrix multiplication in a new way,
     // so that we do not calculate the numbers of paths but minimize the lengths of paths.
-
     using AdjacencyMatrix = matrix::AlbaMatrix<bool>;
     using DistanceEntry = AlbaNumber;
     using DistancetMatrix = matrix::AlbaMatrix<DistanceEntry>;
-
     ShortestDistanceByTraverseCountUsingAdjacencyMatrix(EdgeWeightedGraph const& graph, int const traverseCount)
         : m_shortestDistanceMatrix(createDistanceMatrix(traverseCount, graph)) {}
 
@@ -65,7 +63,6 @@ private:
 
         // For matrix multiplication, so we calculate a minimum instead of a sum, and a sum of elements instead of a
         // product. After this modification, matrix powers correspond to shortest paths in the graph.
-
         DistancetMatrix result(second.getNumberOfColumns(), first.getNumberOfRows());
         DistancetMatrix::ListOfMatrixData rowsOfFirstMatrix;
         DistancetMatrix::ListOfMatrixData columnsOfSecondMatrix;

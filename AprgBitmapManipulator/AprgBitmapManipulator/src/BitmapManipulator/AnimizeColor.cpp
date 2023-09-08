@@ -12,32 +12,19 @@ using namespace std;
 
 namespace alba::AprgBitmap {
 
-void gatherAndSaveDataInAnimizeColor(string const& bitmapPath) {
-    AlbaLocalPathHandler bitmapPathHandler(bitmapPath);
-    AlbaLocalPathHandler colorDataPathHandler(
-        bitmapPathHandler.getDirectory() + R"(\)" + bitmapPathHandler.getFilenameOnly() + R"(_AnimizeColorData.csv)");
-
-    AnimizeColor statistics;
-    statistics.gatherStatistics(bitmapPathHandler.getFullPath());
-    statistics.calculateNewValues();
-    statistics.saveColorData(colorDataPathHandler.getFullPath());
-}
-
-AnimizeColor::AnimizeColor() = default;
-
-uint32_t AnimizeColor::getNewColor(uint32_t const originalColor) const {
-    HueSaturationLightnessData newHslData(convertColorToHueSaturationLightnessData(originalColor));
-    newHslData.lightnessDecimal = getNewLightness(newHslData.lightnessDecimal);
-    newHslData.saturationLightnessDecimal = getNewSaturation(newHslData.saturationLightnessDecimal);
-    return convertHueSaturationLightnessDataToColor(newHslData);
-}
-
 double AnimizeColor::getNewLightness(double const originalValue) const {
     return getNewValue(m_lightnessData, originalValue);
 }
 
 double AnimizeColor::getNewSaturation(double const originalValue) const {
     return getNewValue(m_saturationData, originalValue);
+}
+
+uint32_t AnimizeColor::getNewColor(uint32_t const originalColor) const {
+    HueSaturationLightnessData newHslData(convertColorToHueSaturationLightnessData(originalColor));
+    newHslData.lightnessDecimal = getNewLightness(newHslData.lightnessDecimal);
+    newHslData.saturationLightnessDecimal = getNewSaturation(newHslData.saturationLightnessDecimal);
+    return convertHueSaturationLightnessDataToColor(newHslData);
 }
 
 void AnimizeColor::gatherStatistics(string const& bitmapPath) {
@@ -74,34 +61,6 @@ bool AnimizeColor::isValueIncluded(double const value) const {
     return value >= m_lowestIncludedValue && value <= m_highestIncludedValue;
 }
 
-void AnimizeColor::addCountToValue(ColorDataMap& colorDataMap, double const value) {
-    if (isValueIncluded(value)) {
-        if (colorDataMap.find(value) == colorDataMap.cend()) {
-            ColorDetails details{};
-            details.count = 1;
-            colorDataMap.emplace(value, details);
-        } else {
-            colorDataMap.at(value).count++;
-        }
-    }
-}
-
-void AnimizeColor::calculateNewValues(ColorDataMap& colorDataMap) const {
-    int totalCount = 0;
-    for (auto const& colorDataPair : colorDataMap) {
-        totalCount += colorDataPair.second.count;
-    }
-    int partialCount = 0;
-    double diffOfHighestAndLowestValue = m_highestIncludedValue - m_lowestIncludedValue;
-    for (auto& colorDataPair : colorDataMap) {
-        int currentCount = colorDataPair.second.count;
-        colorDataPair.second.newValue =
-            (((static_cast<double>(currentCount) / 2) + partialCount) / totalCount * diffOfHighestAndLowestValue) +
-            m_lowestIncludedValue;
-        partialCount += currentCount;
-    }
-}
-
 double AnimizeColor::getNewValue(ColorDataMap const& colorDataMap, double const originalValue) const {
     double newValue = originalValue;
     if (isValueIncluded(originalValue)) {
@@ -121,5 +80,46 @@ double AnimizeColor::getNewValue(ColorDataMap const& colorDataMap, double const 
     }
     return newValue;
 }
+
+void AnimizeColor::calculateNewValues(ColorDataMap& colorDataMap) const {
+    int totalCount = 0;
+    for (auto const& colorDataPair : colorDataMap) {
+        totalCount += colorDataPair.second.count;
+    }
+    int partialCount = 0;
+    double diffOfHighestAndLowestValue = m_highestIncludedValue - m_lowestIncludedValue;
+    for (auto& colorDataPair : colorDataMap) {
+        int currentCount = colorDataPair.second.count;
+        colorDataPair.second.newValue =
+            (((static_cast<double>(currentCount) / 2) + partialCount) / totalCount * diffOfHighestAndLowestValue) +
+            m_lowestIncludedValue;
+        partialCount += currentCount;
+    }
+}
+
+void AnimizeColor::addCountToValue(ColorDataMap& colorDataMap, double const value) {
+    if (isValueIncluded(value)) {
+        if (colorDataMap.find(value) == colorDataMap.cend()) {
+            ColorDetails details{};
+            details.count = 1;
+            colorDataMap.emplace(value, details);
+        } else {
+            colorDataMap.at(value).count++;
+        }
+    }
+}
+
+void gatherAndSaveDataInAnimizeColor(string const& bitmapPath) {
+    AlbaLocalPathHandler bitmapPathHandler(bitmapPath);
+    AlbaLocalPathHandler colorDataPathHandler(
+        bitmapPathHandler.getDirectory() + R"(\)" + bitmapPathHandler.getFilenameOnly() + R"(_AnimizeColorData.csv)");
+
+    AnimizeColor statistics;
+    statistics.gatherStatistics(bitmapPathHandler.getFullPath());
+    statistics.calculateNewValues();
+    statistics.saveColorData(colorDataPathHandler.getFullPath());
+}
+
+AnimizeColor::AnimizeColor() = default;
 
 }  // namespace alba::AprgBitmap

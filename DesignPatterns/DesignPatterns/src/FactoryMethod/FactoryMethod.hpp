@@ -6,7 +6,6 @@ namespace FactoryMethod {
 // Product
 // products implement the same interface so that the classes can refer
 // to the interface not the concrete product
-
 class Product {
 public:
     virtual ~Product() = default;
@@ -16,7 +15,6 @@ public:
 
 // Concrete Product
 // define product to be created
-
 class ConcreteProductA : public Product {
 public:
     [[nodiscard]] std::string getName() const override { return "type A"; }
@@ -25,7 +23,6 @@ public:
 
 // Concrete Product
 // define product to be created
-
 class ConcreteProductB : public Product {
 public:
     [[nodiscard]] std::string getName() const override { return "type B"; }
@@ -35,11 +32,9 @@ public:
 // Creator
 // contains the implementation for all of the methods
 // to manipulate products except for the factory method
-
 class Creator {
 public:
     virtual ~Creator() = default;
-
     [[nodiscard]] virtual std::unique_ptr<Product> createProduct() const = 0;
     // ...
 };
@@ -48,12 +43,12 @@ public:
 // implements factory method that is responsible for creating
 // one or more concrete products ie. it is class that has
 // the knowledge of how to create the products
-
 class ConcreteCreatorA : public Creator {
 public:
     [[nodiscard]] std::unique_ptr<Product> createProduct() const override {
         return std::make_unique<ConcreteProductA>();
     }
+
     // ...
 };
 
@@ -62,6 +57,7 @@ public:
     [[nodiscard]] std::unique_ptr<Product> createProduct() const override {
         return std::make_unique<ConcreteProductB>();
     }
+
     // ...
 };
 

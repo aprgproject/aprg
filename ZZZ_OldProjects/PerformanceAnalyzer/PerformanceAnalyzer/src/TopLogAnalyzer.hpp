@@ -22,19 +22,19 @@ public:
     struct DataEntry {
         using ProcessToCpuMemMap = std::map<std::string, CpuMemLoad>;
         using ProcessToCpuMemPair = std::pair<std::string, CpuMemLoad>;
+        [[nodiscard]] bool isEmpty() const;
+        void clear();
         AlbaDateTime timeInTop;
         double totalCpuFromTop{};
         ProcessToCpuMemMap processToCpuMemMap;
-        void clear();
-        [[nodiscard]] bool isEmpty() const;
     };
 
     struct ColumnHeaders {
+        void clear();
+        void set(unsigned int const sizeFromTop, double const cpuIndexFromTop, double const memIndexFromTop);
         unsigned int size;
         unsigned int cpuIndex;
         unsigned int memIndex;
-        void clear();
-        void set(unsigned int const sizeFromTop, double const cpuIndexFromTop, double const memIndexFromTop);
     };
 
     struct CpuMemCollection {
@@ -47,25 +47,25 @@ public:
     void processTopLog(std::string const& pathOfTopLog);
 
 private:
-    void readTopLogsAndSaveToDatabase(std::string const& pathOfTopLog);
-    void generateCpuReport(std::string const& pathOfTopLog);
-    stringHelper::strings getProcessNamesForCpuReport();
-    static void putHeadersInCpuReport(
-        stringHelper::strings const& processNamesInReport, std::ofstream& cpuReportFileStream);
-    void putEntriesInCpuReport(
-        stringHelper::strings const& processNamesInReport, std::ofstream& cpuReportFileStream) const;
-    void generateMemReport(std::string const& pathOfTopLog);
-    stringHelper::strings getProcessNamesForMemReport();
-    static void putHeadersInMemReport(
-        stringHelper::strings const& processNamesInReport, std::ofstream& memReportFileStream);
-    void putEntriesInMemReport(
-        stringHelper::strings const& processNamesInReport, std::ofstream& memReportFileStream) const;
     static bool isTopCommandFirstLine(std::string const& lineInLogs);
     static bool isTopCommandHeaderLine(std::string const& lineInLogs);
-    void saveAndClearCurrentEntry(DataEntry& currentEntry);
+    static void putHeadersInCpuReport(
+        stringHelper::strings const& processNamesInReport, std::ofstream& cpuReportFileStream);
+    static void putHeadersInMemReport(
+        stringHelper::strings const& processNamesInReport, std::ofstream& memReportFileStream);
     static void saveTimeFromTop(std::string const& lineInLogs, DataEntry& currentEntry);
-    void saveDataFromHeaders(std::string const& lineInLogs);
     static void saveOverallCpuData(std::string const& lineInLogs, DataEntry& currentEntry);
+    void putEntriesInCpuReport(
+        stringHelper::strings const& processNamesInReport, std::ofstream& cpuReportFileStream) const;
+    void putEntriesInMemReport(
+        stringHelper::strings const& processNamesInReport, std::ofstream& memReportFileStream) const;
+    stringHelper::strings getProcessNamesForCpuReport();
+    stringHelper::strings getProcessNamesForMemReport();
+    void readTopLogsAndSaveToDatabase(std::string const& pathOfTopLog);
+    void generateCpuReport(std::string const& pathOfTopLog);
+    void generateMemReport(std::string const& pathOfTopLog);
+    void saveAndClearCurrentEntry(DataEntry& currentEntry);
+    void saveDataFromHeaders(std::string const& lineInLogs);
     void saveCpuAndMem(std::string const& lineInLogs, DataEntry& currentEntry);
     TopLogAnalyzerState m_state;
     ColumnHeaders m_columnHeaders{};

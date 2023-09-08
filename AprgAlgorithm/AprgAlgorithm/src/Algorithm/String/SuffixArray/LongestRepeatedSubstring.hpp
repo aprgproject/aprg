@@ -10,8 +10,8 @@ public:
     LongestRepeatedSubstring() = delete;
     ~LongestRepeatedSubstring() = delete;
     LongestRepeatedSubstring(LongestRepeatedSubstring const &) = delete;
-    LongestRepeatedSubstring &operator=(LongestRepeatedSubstring const &) = delete;
     LongestRepeatedSubstring(LongestRepeatedSubstring &&) = delete;
+    LongestRepeatedSubstring &operator=(LongestRepeatedSubstring const &) = delete;
     LongestRepeatedSubstring &operator=(LongestRepeatedSubstring &&) = delete;
 
     static std::string getLongestRepeatedSubstring(std::string const &stringToCheck) {

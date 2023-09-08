@@ -9,11 +9,9 @@
 #include <vector>
 
 namespace alba::algebra {
-
 using TermPair = std::pair<Term, Term>;
 using VariableNames = std::vector<std::string>;
 using VariableNamesSet = std::set<std::string>;
 using FunctionsSet = std::set<Function>;
 using TermSet = std::set<Term>;
-
 }  // namespace alba::algebra

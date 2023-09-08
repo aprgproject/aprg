@@ -14,10 +14,68 @@ using namespace std;
 
 namespace wcdmaToolsBackend {
 
-BtsLogTime::BtsLogTime() = default;
-
 BtsLogTime::BtsLogTime(BtsLogTimeType const logTimeType, string const& timeStampString) {
     setTimeByTimeStamp(logTimeType, timeStampString);
+}
+
+bool BtsLogTime::operator<(BtsLogTime const& btsLogTimeToCompare) const {
+    return m_dateTime < btsLogTimeToCompare.m_dateTime;
+}
+
+bool BtsLogTime::operator>(BtsLogTime const& btsLogTimeToCompare) const {
+    return m_dateTime > btsLogTimeToCompare.m_dateTime;
+}
+
+bool BtsLogTime::operator==(BtsLogTime const& btsLogTimeToCompare) const {
+    return m_dateTime == btsLogTimeToCompare.m_dateTime;
+}
+
+BtsLogTime BtsLogTime::operator+(BtsLogTime const& btsLogTime2) const {
+    BtsLogTime result;
+    BtsLogTime const& btsLogTime1(*this);
+    result.m_dateTime = btsLogTime1.m_dateTime + btsLogTime2.m_dateTime;
+    return result;
+}
+
+BtsLogTime BtsLogTime::operator-(BtsLogTime const& btsLogTime2) const {
+    BtsLogTime result;
+    BtsLogTime const& btsLogTime1(*this);
+    result.m_dateTime = btsLogTime1.m_dateTime - btsLogTime2.m_dateTime;
+    return result;
+}
+
+bool BtsLogTime::isEmpty() const { return m_dateTime.isEmpty(); }
+bool BtsLogTime::isStartup() const { return m_dateTime.getYears() < 2010; }
+unsigned int BtsLogTime::getYears() const { return m_dateTime.getYears(); }
+unsigned int BtsLogTime::getMonths() const { return m_dateTime.getMonths(); }
+unsigned int BtsLogTime::getDays() const { return m_dateTime.getDays(); }
+unsigned int BtsLogTime::getHours() const { return m_dateTime.getHours(); }
+unsigned int BtsLogTime::getMinutes() const { return m_dateTime.getMinutes(); }
+unsigned int BtsLogTime::getSeconds() const { return m_dateTime.getSeconds(); }
+unsigned int BtsLogTime::getTotalSeconds() const { return m_dateTime.getHourMinutesSecond().getTotalSeconds(); }
+unsigned int BtsLogTime::getMicroSeconds() const { return m_dateTime.getMicroSeconds(); }
+
+string BtsLogTime::getPrintableString() const {
+    return convertToString(m_dateTime.getPrintObject<AlbaDateTime::PrintFormat::StandardWithSign>());
+}
+
+string BtsLogTime::getEquivalentStringPcTimeFormat() const {
+    stringstream ss;
+    ss << setw(2) << setfill('0') << getDays() << ".";
+    ss << setw(2) << setfill('0') << getMonths() << " ";
+    ss << setw(2) << setfill('0') << getHours() << ":";
+    ss << setw(2) << setfill('0') << getMinutes() << ":";
+    ss << setw(2) << setfill('0') << getSeconds() << ".";
+    ss << setw(6) << setfill('0') << getMicroSeconds();
+    return ss.str();
+}
+
+string BtsLogTime::getEquivalentStringBtsTimeFormat() const {
+    stringstream ss;
+    ss << "<";
+    ss << m_dateTime.getPrintObject<AlbaDateTime::PrintFormat::Iso8601>();
+    ss << "Z>";
+    return ss.str();
 }
 
 void BtsLogTime::clear() { m_dateTime.clear(); }
@@ -83,76 +141,7 @@ void BtsLogTime::setTimeByTimeStamp(BtsLogTimeType const logTimeType, string con
         static_cast<uint32_t>(microseconds));
 }
 
-bool BtsLogTime::isEmpty() const { return m_dateTime.isEmpty(); }
-
-bool BtsLogTime::isStartup() const { return m_dateTime.getYears() < 2010; }
-
-unsigned int BtsLogTime::getYears() const { return m_dateTime.getYears(); }
-
-unsigned int BtsLogTime::getMonths() const { return m_dateTime.getMonths(); }
-
-unsigned int BtsLogTime::getDays() const { return m_dateTime.getDays(); }
-
-unsigned int BtsLogTime::getHours() const { return m_dateTime.getHours(); }
-
-unsigned int BtsLogTime::getMinutes() const { return m_dateTime.getMinutes(); }
-
-unsigned int BtsLogTime::getSeconds() const { return m_dateTime.getSeconds(); }
-
-unsigned int BtsLogTime::getTotalSeconds() const { return m_dateTime.getHourMinutesSecond().getTotalSeconds(); }
-
-unsigned int BtsLogTime::getMicroSeconds() const { return m_dateTime.getMicroSeconds(); }
-
 void BtsLogTime::clearMicroSeconds() { m_dateTime.getMicroSecondsReference() = 0; }
-
-string BtsLogTime::getPrintableString() const {
-    return convertToString(m_dateTime.getPrintObject<AlbaDateTime::PrintFormat::StandardWithSign>());
-}
-
-string BtsLogTime::getEquivalentStringPcTimeFormat() const {
-    stringstream ss;
-    ss << setw(2) << setfill('0') << getDays() << ".";
-    ss << setw(2) << setfill('0') << getMonths() << " ";
-    ss << setw(2) << setfill('0') << getHours() << ":";
-    ss << setw(2) << setfill('0') << getMinutes() << ":";
-    ss << setw(2) << setfill('0') << getSeconds() << ".";
-    ss << setw(6) << setfill('0') << getMicroSeconds();
-    return ss.str();
-}
-
-string BtsLogTime::getEquivalentStringBtsTimeFormat() const {
-    stringstream ss;
-    ss << "<";
-    ss << m_dateTime.getPrintObject<AlbaDateTime::PrintFormat::Iso8601>();
-    ss << "Z>";
-    return ss.str();
-}
-
-bool BtsLogTime::operator<(BtsLogTime const& btsLogTimeToCompare) const {
-    return m_dateTime < btsLogTimeToCompare.m_dateTime;
-}
-
-bool BtsLogTime::operator>(BtsLogTime const& btsLogTimeToCompare) const {
-    return m_dateTime > btsLogTimeToCompare.m_dateTime;
-}
-
-bool BtsLogTime::operator==(BtsLogTime const& btsLogTimeToCompare) const {
-    return m_dateTime == btsLogTimeToCompare.m_dateTime;
-}
-
-BtsLogTime BtsLogTime::operator+(BtsLogTime const& btsLogTime2) const {
-    BtsLogTime result;
-    BtsLogTime const& btsLogTime1(*this);
-    result.m_dateTime = btsLogTime1.m_dateTime + btsLogTime2.m_dateTime;
-    return result;
-}
-
-BtsLogTime BtsLogTime::operator-(BtsLogTime const& btsLogTime2) const {
-    BtsLogTime result;
-    BtsLogTime const& btsLogTime1(*this);
-    result.m_dateTime = btsLogTime1.m_dateTime - btsLogTime2.m_dateTime;
-    return result;
-}
 
 ostream& operator<<(ostream& out, BtsLogTime const& btsLogTime) {
     AlbaStreamParameterWriter writer(out);
@@ -181,5 +170,7 @@ istream& operator>>(istream& in, BtsLogTime& btsLogTime) {
         static_cast<uint8_t>(hours), static_cast<uint8_t>(minutes), static_cast<uint8_t>(seconds), microseconds);
     return in;
 }
+
+BtsLogTime::BtsLogTime() = default;
 
 }  // namespace wcdmaToolsBackend

@@ -11,7 +11,6 @@ template <typename Object, int SIZE>
 class QuickFind : public BaseUnionFind<Object> {
 public:
     using RootArray = std::array<Object, SIZE>;
-
     QuickFind() : m_roots() { initialize(); }
 
     [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
@@ -19,6 +18,7 @@ public:
     }
 
     [[nodiscard]] Object getRoot(Object const& object) const override { return m_roots[object]; }
+    [[nodiscard]] RootArray const& getRootArray() const { return m_roots; }
 
     void connect(Object const& object1, Object const& object2) override {
         // runs in linear time (too expensive it should take constant/logarithmic time)
@@ -29,8 +29,6 @@ public:
             replaceAllOldRootsWithNewRoot(root2, root1);
         }
     }
-
-    [[nodiscard]] RootArray const& getRootArray() const { return m_roots; }
 
 private:
     void initialize() {

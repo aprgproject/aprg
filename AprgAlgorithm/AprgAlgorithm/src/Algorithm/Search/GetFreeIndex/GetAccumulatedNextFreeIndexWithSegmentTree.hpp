@@ -19,7 +19,6 @@ public:
 
     [[nodiscard]] Index getNextFreeIndexAt(Index const index) const {
         // This has log(N) running time
-
         Index result{};
         if (m_startOfChildren + index < static_cast<Index>(m_treeSums.size())) {
             result = getNextFreeIndexAt(
@@ -29,14 +28,12 @@ public:
     }
 
     void setAsNotFree(Index const index) { m_segmentTree.changeValueAtIndex(index, 0); }
-
     void setAsFree(Index const index) { m_segmentTree.changeValueAtIndex(index, 1); }
 
 private:
     [[nodiscard]] Index getNextFreeIndexAt(
         Index const index, Index const currentChild, Index const baseLeft, Index const baseRight) const {
         // This has log(N) running time
-
         Index result{};
         if (index + 1 == m_treeSums[currentChild] &&
             m_startOfChildren + baseRight < static_cast<Index>(m_treeSums.size()) &&

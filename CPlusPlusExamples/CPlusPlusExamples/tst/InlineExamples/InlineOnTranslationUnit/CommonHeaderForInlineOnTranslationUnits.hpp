@@ -3,34 +3,20 @@
 #include <string>
 
 namespace alba::InlineOnTranslationUnits {
-constexpr int constInteger = 100;              // implicity inline (external linkage)
-inline int inlineIntegerWithDefinition = 200;  // explicitly inline (external linkage)
-inline int inlineIntegerWithDeclaration;       // explicitly inline (external linkage)
-extern inline int externInlineInteger;         // extern so declaration only (incomplete type)
-static inline int staticInlineInteger = 500;   // static overrides inline so it has internal linkage
-inline std::string inlineString{"600"};        // explicitly inline (external linkage)
 
-// same goes for functions (but there are no free const functions)
-constexpr int freeFunction() {
-    // implicity inline (external linkage)
-    return 1;
-}
-inline int inlineFreeFunction();  // explicitly inline (external linkage)
+constexpr int constInteger = 100;  // implicity inline (external linkage)
 // -> Note: Don't do this in production code.
 // ---> Its better to have the definition in the header as well.
 // ---> This is to avoid different definitions of the function (undefined behavior)
 // ---> This is to guarantee that its defined in every translation unit and have same address (otherwise its ill formed)
 // ---> Its nightmare to maintain multiple definitions of the function and make sure its the same
-
 struct SampleClassWithInline {
     SampleClassWithInline& operator=(SampleClassWithInline const&) = delete;  // implicitly inline
     // (can appear in more than one translation unit)
-
     static constexpr int constIntegerInClass = 1000;  // implicity inline (external linkage)
 };
 
 // Utilities for tests
-
 struct TranslationUnitValues {
     int constInteger;
     int inlineIntegerWithDefinition;
@@ -43,10 +29,23 @@ struct TranslationUnitValues {
     int constIntegerInClass;
 };
 
-void restoreInitialValuesForTranslationUnit1();
-void restoreInitialValuesForTranslationUnit2();
+static inline int staticInlineInteger = 500;   // static overrides inline so it has internal linkage
+inline int inlineIntegerWithDefinition = 200;  // explicitly inline (external linkage)
+inline int inlineIntegerWithDeclaration;       // explicitly inline (external linkage)
+extern inline int externInlineInteger;         // extern so declaration only (incomplete type)
+inline std::string inlineString{"600"};        // explicitly inline (external linkage)
+inline int inlineFreeFunction();               // explicitly inline (external linkage)
+
+// same goes for functions (but there are no free const functions)
+constexpr int freeFunction() {
+    // implicity inline (external linkage)
+    return 1;
+}
+
 TranslationUnitValues getValuesInTranslationUnit1();
 TranslationUnitValues getValuesInTranslationUnit2();
+void restoreInitialValuesForTranslationUnit1();
+void restoreInitialValuesForTranslationUnit2();
 
 }  // namespace alba::InlineOnTranslationUnits
 

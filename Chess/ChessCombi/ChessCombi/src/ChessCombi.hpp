@@ -5,7 +5,6 @@ namespace alba {
 class ChessCombi {
 public:
     ChessCombi() = default;
-
     [[nodiscard]] int getSample() const;
 
 private:

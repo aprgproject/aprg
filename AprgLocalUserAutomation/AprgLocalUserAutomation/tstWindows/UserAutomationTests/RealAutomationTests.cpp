@@ -178,7 +178,6 @@ TEST(RealAutomationTest, DISABLED_NormalizeAudioForMp3Files) {
                     userAutomation.sleep(1000);
                     userAutomation.doDoubleLeftClickAt(MousePosition(1074, 687));  // click ok
                     userAutomation.typeKey(VK_RIGHT);                              // type right to avoid stop button
-
                     // wait for export process
                     userAutomation.sleep(15000);
 

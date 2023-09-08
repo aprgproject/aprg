@@ -23,9 +23,7 @@ void NegationMutator::mutateTerm(Term &term) {
 }
 
 void NegationMutator::mutateConstant(Constant &constant) { constant.setNumber(constant.getNumber() * -1); }
-
 void NegationMutator::mutateVariable(Variable &) {}
-
 void NegationMutator::mutateMonomial(Monomial &monomial) { monomial.multiplyNumber(AlbaNumber(-1)); }
 
 void NegationMutator::mutateExpression(Expression &expression) {

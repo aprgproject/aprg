@@ -14,14 +14,10 @@ public:
     };
 
     class Configuration : public AlbaConfigurationHolder<ConfigurationDetails> {};
-
     class ScopeObject : public AlbaConfigurationScopeObject<ConfigurationDetails> {};
-
     SimplificationOfFunctionToTerm();
-
     static bool shouldSimplifyTrigonometricFunctionsToSinAndCos();
     static bool shouldNotSimplifyLogarithmicFunctionsByReducingTheOperatorLevel();
-
     static Term simplifyToTerm(Function const& functionObject);
 
 private:

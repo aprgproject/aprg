@@ -12,14 +12,12 @@ BinomialCoefficient::BinomialCoefficient(Value const n, Value const k) : m_n(n),
 BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingNaiveRecursion() const {
     // Time Complexity: Exponential -> Since there are two calls per iteration:  O(2^n)
     // Auxiliary Space: Constant
-
     return getBinomialCoefficientUsingNaiveRecursion(m_n, m_k);
 }
 
 BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingMemoizationDP() const {
     // Time Complexity: O(n*k) (should be same as Iterative DP)
     // Auxiliary Space: O(n*k)
-
     Value result(0);
     if (m_n >= m_k) {
         ValueMatrix valueMatrix(m_n + 1, m_k + 1, static_cast<Value>(UNUSED_VALUE));
@@ -31,7 +29,6 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingMemoi
 BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingIterativeDP() const {
     // Time Complexity: O(n*k)
     // Auxiliary Space: O(n*k)
-
     Value result(0);
     if (m_n >= m_k) {
         ValueMatrix valueMatrix(m_n + 1, m_k + 1, 0);
@@ -56,11 +53,9 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingItera
 BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingIterativeDPAndSpaceEfficient() const {
     // Time Complexity: O(n*k)
     // Auxiliary Space: O(k)
-
     // Space efficiency analysis:
     // Since accessing the previous partial values requires only one row above,
     // we only really need 1 row (not a matrix) to keep track partial values.
-
     // Explanation of the algorithm:
     // 1==========>> n = 0, C(0,0) = 1
     // 1–1========>> n = 1, C(1,0) = 1, C(1,1) = 1
@@ -74,7 +69,6 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingItera
     // [1][2][1][0][0] += [0][1][2][1][0][0]
     // [1][3][3][1][0] += [0][1][3][3][1][0]
     // [1][4][6][4][1] += [0][1][4][6][4][1]
-
     // At any time, every element of array C will have some value (ZERO or more) and in next iteration,
     // value for those elements comes from previous iteration.
     // In statement:
@@ -82,7 +76,6 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingItera
     // The right-hand side represents the value coming from the previous iteration (a row of Pascal’s triangle depends
     // on the previous row). The left-Hand side represents the value of the current iteration which will be obtained by
     // this statement.
-
     Value result(0);
     if (m_n >= m_k) {
         Values partialValues(m_k + 1, 0);
@@ -98,12 +91,11 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingItera
     }
     return result;
 }
+
 BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingGcf() const {
     // Time Complexity: O(n*log(n))
     // Auxiliary Space: O(1)
-
     // Same as with mathHelper
-
     Value result(0);
     if (m_n >= m_k) {
         Value numerator = m_n;

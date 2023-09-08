@@ -1,9 +1,7 @@
 #pragma once
 
 namespace alba {
-
 namespace algorithm {}
-
 }  // namespace alba
 
 // From AlgorithmNotes.txt

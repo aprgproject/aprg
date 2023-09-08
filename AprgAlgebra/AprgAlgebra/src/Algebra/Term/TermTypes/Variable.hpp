@@ -8,21 +8,17 @@ namespace alba::algebra {
 
 class Variable : public BaseTermData {
 public:
-    Variable();
     explicit Variable(std::string const& variableName);
-
+    Variable();
     // rule of zero
-
     bool operator==(Variable const& second) const;
     bool operator!=(Variable const& second) const;
     bool operator<(Variable const& second) const;
     [[nodiscard]] std::string getVariableName() const;
-
     void setVariableName(std::string const& variableName);
 
 private:
     friend std::ostream& operator<<(std::ostream& out, Variable const& variable);
-
     std::string m_variableName;
 };
 

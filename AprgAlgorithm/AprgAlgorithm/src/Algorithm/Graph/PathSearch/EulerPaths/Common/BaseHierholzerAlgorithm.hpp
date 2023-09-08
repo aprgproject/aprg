@@ -11,11 +11,9 @@ public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Path = typename GraphTypes<Vertex>::Path;
     using VertexToAdjacencyVerticesMap = std::map<Vertex, Vertices>;
-
-    explicit BaseHierholzerAlgorithm(BaseGraphType const& graph) : BaseClass(graph), b_graph(BaseClass::m_graph) {}
-
     // virtual destructor because of virtual functions (vtable exists)
     ~BaseHierholzerAlgorithm() override = default;
+    explicit BaseHierholzerAlgorithm(BaseGraphType const& graph) : BaseClass(graph), b_graph(BaseClass::m_graph) {}
 
     [[nodiscard]] Path getEulerCycle() const override {
         Path result;
@@ -37,7 +35,6 @@ public:
 
 protected:
     virtual void searchForEulerPath(Path& result, Vertex const& startingVertex) const = 0;
-
     BaseGraphType const& b_graph;
 };
 

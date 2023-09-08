@@ -8,7 +8,6 @@ namespace alba::algebra {
 class ExponentsRetriever final : public BaseRetriever {
 public:
     [[nodiscard]] AlbaNumbersSet const& getExponents() const;
-
     void retrieveFromMonomial(Monomial const& monomial) override;
 
 private:

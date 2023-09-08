@@ -18,28 +18,34 @@
 namespace alba::algebra::VectorUtilities {
 
 bool isDivergenceOfCurlZero(MathVectorOfThreeTerms const& termVector, ArrayOfThreeStrings const& coordinateVariables);
+
 bool isGaussDivergenceTheoremInAPlaneTrue(
     MathVectorOfTwoTerms const& vectorField, MathVectorOfTwoTerms const& regionOfLineIntegral,
     MathVectorOfTwoTerms const& unitOutwardNormal, DetailsForDefiniteIntegralWithTerms const& lineIntegralDetails,
     DetailsForDefiniteIntegralWithTerms const& areaDetailsInX,
     DetailsForDefiniteIntegralWithTerms const& areaDetailsInY, ArrayOfTwoStrings const& coordinateVariables);
+
 bool isStokesTheoremInAPlaneTrue(
     MathVectorOfTwoTerms const& vectorField, MathVectorOfTwoTerms const& regionOfLineIntegral,
     MathVectorOfTwoTerms const& unitTangentVector, DetailsForDefiniteIntegralWithTerms const& lineIntegralDetails,
     DetailsForDefiniteIntegralWithTerms const& areaDetailsInX,
     DetailsForDefiniteIntegralWithTerms const& areaDetailsInY, ArrayOfTwoStrings const& coordinateVariables);
+
 Term getDyOverDx(MathVectorOfTwoTerms const& termVector, std::string const& variableName);
 Term getDirectionalDerivativeInTwoDimensions(
     Term const& term, ArrayOfTwoStrings const& coordinateVariables, AlbaAngle const& angleOfDirection);
 Term getDirectionalDerivativeInThreeDimensions(
     Term const& term, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeAngles const& coordinateAngles);
+
 Term getLineIntegralOfAClosedNonIntersectingPathUsingGreensTheorem(
     MathVectorOfTwoTerms const& vectorField, ArrayOfTwoStrings const& coordinateVariables,
     DetailsForDefiniteIntegralWithTerms const& xDetailsForLinePath,
     DetailsForDefiniteIntegralWithTerms const& yDetailsForLinePath);
+
 Term getAreaOfAClosedNonIntersectingPathUsingGreensTheorem(
     ArrayOfTwoStrings const& coordinateVariables, MathVectorOfTwoTerms const& linePath,
     DetailsForDefiniteIntegralWithTerms const& linePathIntegralDetails);
+
 MathVectorOfThreeTerms getNormalOfASurfaceOnAPoint(
     Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
 Equation getTangentPlaneOnAPointOfASurface(
@@ -49,11 +55,13 @@ Equations getPerpendicularLineOnAPointOfASurface(
 MathVectorOfThreeTerms getCurl(
     MathVectorOfThreeTerms const& termVector, ArrayOfThreeStrings const& coordinateVariables);
 
-// utilities function
-void simplifyForTermInVector(Term& term);
 SegregateTermsByConditionInAdditionAndSubtractionRetriever getRetrieverForComparison(
     Term const& termToAnalyze, std::string const& coordinateVariableName,
     stringHelper::strings const& processedCoordinates);
+
+// utilities function
+void simplifyForTermInVector(Term& term);
+
 void retrieveWithAndWithoutOtherCoordinates(
     Term& termWithOtherCoordinates, Term& termWithoutOtherCoordinates, Term const& termToAnalyze,
     std::string const& coordinateVariableName, stringHelper::strings const& allCoordinates);

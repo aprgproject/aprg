@@ -12,7 +12,6 @@ public:
     // Each value in the prefix sum array equals the sum of values in the original array up to that position, i.e., the
     // value at position k is sumq(0,k). The preprocessing of prefix sum array can be constructed in O(n) time. The
     // range query can be done in O(1)/constant time.
-
     using Index = int;
     using Value = typename Values::value_type;
     using AccumulatorFunction = std::function<Value(Value const&, Value const&)>;

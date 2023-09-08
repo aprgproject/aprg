@@ -8,6 +8,15 @@ using namespace std;
 
 namespace alba::ThreeDimensions {
 
+/*
+//Think about this
+TEST(ThreeDimensionsLineTest, LineCanBeComparedForEquality)
+{
+    EXPECT_EQ(Line(1,2,3), Line(10,20,30));
+    EXPECT_NE(Line(1,2,3), Line(2,3,4));
+}
+*/
+
 TEST(ThreeDimensionsLineTest, EmptyLine) {
     Line line;
 
@@ -199,14 +208,5 @@ TEST(ThreeDimensionsLineTest, LineWithSomeZeroCoefficientWorks) {
     EXPECT_TRUE(line.calculateZFromX(1));
     EXPECT_TRUE(line.calculateZFromY(1));
 }
-
-/*
-//Think about this
-TEST(ThreeDimensionsLineTest, LineCanBeComparedForEquality)
-{
-    EXPECT_EQ(Line(1,2,3), Line(10,20,30));
-    EXPECT_NE(Line(1,2,3), Line(2,3,4));
-}
-*/
 
 }  // namespace alba::ThreeDimensions

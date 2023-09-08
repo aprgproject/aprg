@@ -10,10 +10,9 @@ namespace alba {
 class AlbaCombinedEntropySource {
 public:
     enum class EntropySourceType { RandomDevice, Time };
+
     using ValueType = std::random_device::result_type;
-
     AlbaCombinedEntropySource();
-
     ValueType operator()();
     [[nodiscard]] double entropy() const;
 

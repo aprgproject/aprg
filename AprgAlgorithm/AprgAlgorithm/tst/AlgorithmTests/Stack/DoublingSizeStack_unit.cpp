@@ -13,15 +13,10 @@ using StackForTest = DoublingSizeStack<int>;
 }  // namespace
 
 TEST(DoublingSizeStackTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<StackForTest>(); }
-
 TEST(DoublingSizeStackTest, IsEmptyWorksWhenNotEmpty) { testIsEmptyWhenNotEmptyWithInt<StackForTest>(); }
-
 TEST(DoublingSizeStackTest, GetSizeWorksWhenEmpty) { testGetSizeWhenEmptyWithInt<StackForTest>(); }
-
 TEST(DoublingSizeStackTest, GetSizeWorksWhenNotEmpty) { testGetSizeWhenNotEmptyWithInt<StackForTest>(); }
-
 TEST(DoublingSizeStackTest, PushWorks) { testPushWithInt<StackForTest>(); }
-
 TEST(DoublingSizeStackTest, PopWorks) { testPopWithInt<StackForTest>(); }
 
 TEST(DoublingSizeStackTest, GetContainerSizeWorks) {

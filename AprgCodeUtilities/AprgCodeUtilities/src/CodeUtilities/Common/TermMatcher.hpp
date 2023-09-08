@@ -13,7 +13,6 @@ public:
     explicit TermMatcher(std::string const& content);
     explicit TermMatcher(MatcherType const matcherType);
     TermMatcher(TermType const termType, std::string const& content);
-
     friend bool operator==(TermMatcher const& matcher, Term const& term);
     friend bool operator==(Term const& term, TermMatcher const& matcher);
     friend bool operator!=(TermMatcher const& matcher, Term const& term);

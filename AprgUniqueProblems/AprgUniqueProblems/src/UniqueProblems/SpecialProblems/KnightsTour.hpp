@@ -13,27 +13,24 @@ public:
     // A knight’s tour is a sequence of moves of a knight on an n x n chessboard following the rules of chess such that
     // the knight visits each square exactly once. A knight’s tour is called a closed tour if the knight finally returns
     // to the starting square and otherwise it is called an open tour.
-
     using ChessBoardIndexes = std::vector<int>;
     using Coordinate = std::pair<int, int>;
     using CountCoordinatePair = std::pair<int, std::pair<int, int>>;
     using CountToCoordinateMap = std::multimap<int, std::pair<int, int>>;
-
     KnightsTour(int const chessBoardX, int const chessBoardY);
-
     [[nodiscard]] ChessBoardIndexes getAnOpenKnightsTour() const;
     [[nodiscard]] ChessBoardIndexes getAClosedKnightsTour() const;
 
 private:
+    [[nodiscard]] bool isInside(int const x, int const y) const;
+    [[nodiscard]] int getNumberOfNeighbors(int const x, int const y) const;
+    [[nodiscard]] int countNumberOfNeighbors(int const x, int const y) const;
+    [[nodiscard]] int getChessBoardIndex(int const x, int const y) const;
     void initialize();
     void initializeNeighborMatrix();
     void initializeGraph();
     void connectAllAt(int const x, int const y);
     void connectIfNeeded(int const sourceNeighbors, int const sourceIndex, int const x, int const y);
-    [[nodiscard]] bool isInside(int const x, int const y) const;
-    [[nodiscard]] int getNumberOfNeighbors(int const x, int const y) const;
-    [[nodiscard]] int countNumberOfNeighbors(int const x, int const y) const;
-    [[nodiscard]] int getChessBoardIndex(int const x, int const y) const;
     int const m_chessBoardX;
     int const m_chessBoardY;
     algorithm::UndirectedGraphWithListOfEdges<VertexOfKnightsTour> m_graph;

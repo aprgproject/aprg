@@ -10,11 +10,9 @@ class ConcreteAggregate;
 // Aggregate
 // defines an interface for aggregates and it decouples your
 // client from the implementation of your collection of objects
-
 class Aggregate {
 public:
     virtual ~Aggregate() = default;
-
     virtual std::unique_ptr<Iterator> createIterator() = 0;
     // ...
 };
@@ -22,18 +20,13 @@ public:
 // Concrete Aggregate
 // has a collection of objects and implements the method
 // that returns an Iterator for its collection
-
 class ConcreteAggregate : public Aggregate {
 public:
     explicit ConcreteAggregate(int const size) : m_listPointer(std::make_unique<int[]>(size)), m_count(size) {}
-
-    std::unique_ptr<Iterator> createIterator() override;  // defined after Iterator is declared
-
     [[nodiscard]] int size() const { return m_count; }
-
     int getValueAt(int const index) { return m_listPointer[index]; }
+    std::unique_ptr<Iterator> createIterator() override;  // defined after Iterator is declared
     // ...
-
 private:
     std::unique_ptr<int[]> m_listPointer;
     int m_count;
@@ -43,35 +36,28 @@ private:
 // Iterator
 // provides the interface that all iterators must implement and
 // a set of methods for traversing over elements
-
 class Iterator {
 public:
     virtual ~Iterator() = default;
-
-    virtual void gotoFirst() = 0;
-    virtual void gotoNext() = 0;
     [[nodiscard]] virtual bool isDone() const = 0;
     [[nodiscard]] virtual int getCurrentItem() const = 0;
+    virtual void gotoFirst() = 0;
+    virtual void gotoNext() = 0;
     // ...
 };
 
 // Concrete Iterator
 // implements the interface and is responsible for managing
 // the current position of the iterator
-
 class ConcreteIterator : public Iterator {
 public:
     explicit ConcreteIterator(ConcreteAggregate& aggregate) : m_aggregate(aggregate) {}
-
+    [[nodiscard]] bool isDone() const override { return (index >= m_aggregate.size()); }
+    [[nodiscard]] int getCurrentItem() const override { return isDone() ? -1 : m_aggregate.getValueAt(index); }
     void gotoFirst() override { index = 0; }
-
     void gotoNext() override { ++index; }
 
-    [[nodiscard]] bool isDone() const override { return (index >= m_aggregate.size()); }
-
-    [[nodiscard]] int getCurrentItem() const override { return isDone() ? -1 : m_aggregate.getValueAt(index); }
     // ...
-
 private:
     ConcreteAggregate& m_aggregate;
     int index{0};

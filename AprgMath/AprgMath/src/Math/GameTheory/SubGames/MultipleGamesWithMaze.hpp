@@ -15,26 +15,22 @@ public:
     // The game can be played like a nim game by calculating all Grundy numbers for subgames and then their nim sum.
     // As an example, consider a game that consists of three mazes.
     // In this game, on each turn, the player chooses one of the mazes and then moves the figure in the maze.
-
     using Game = GameWithMaze;
     using Games = std::vector<GameWithMaze>;
     using BooleanMatrix = Game::BooleanMatrix;
     using Coordinate = Game::Coordinate;
     using Coordinates = Game::Coordinates;
     using GameIndexAndCoordinatePair = std::pair<UnsignedInteger, Coordinate>;
-
     [[nodiscard]] bool hasNoMoves() const;
     UnsignedInteger getOverallGrundyNumber();
     GameState getGameState();
     GameIndexAndCoordinatePair getOptimalNextGameAndCoordinate();
     std::string getString();
-
     void setCoordinateAtGame(UnsignedInteger const gameIndex, Coordinate const& newCoordinate);
     void addGameWithMaze(BooleanMatrix const& isBlockedMatrix, Coordinate const& startingCoordinate);
 
 private:
     UnsignedInteger getCombinedGrundyNumber();
-
     Games m_games;
     Coordinates m_coordinateInGames;
 };

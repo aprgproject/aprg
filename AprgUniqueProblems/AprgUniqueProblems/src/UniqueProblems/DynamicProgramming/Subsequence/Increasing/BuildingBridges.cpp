@@ -15,7 +15,6 @@ BuildingBridges::BuildingBridges(Bridges const& bridges) : m_bridges(bridges) {}
 BuildingBridges::Index BuildingBridges::getNumberOfPossibleBridges() const {
     // Time Complexity – O(NlogN)
     // Space Complexity – O(N)
-
     Bridges sortedBridges(m_bridges);
     sort(sortedBridges.begin(), sortedBridges.end());
 
@@ -32,7 +31,6 @@ BuildingBridges::Index BuildingBridges::getNumberOfPossibleBridges() const {
 BuildingBridges::Bridges BuildingBridges::getPossibleBridges() const {
     // Time Complexity – O(NlogN)
     // Space Complexity – O(N)
-
     Bridges result;
     if (!m_bridges.empty()) {
         Bridges sortedBridges(m_bridges);

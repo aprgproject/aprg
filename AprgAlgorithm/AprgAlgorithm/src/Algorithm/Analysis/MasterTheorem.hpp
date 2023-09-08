@@ -1,9 +1,7 @@
 #pragma once
 
 namespace alba {
-
 namespace algorithm {}
-
 }  // namespace alba
 
 // Master theorem is too hard to code.

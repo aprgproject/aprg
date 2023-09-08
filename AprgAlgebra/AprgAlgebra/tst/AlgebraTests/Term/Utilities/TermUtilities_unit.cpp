@@ -111,7 +111,6 @@ TEST(TermUtilitiesTest, EvaluateAndGetInputOutputPairWorks) {
 }
 
 TEST(TermUtilitiesTest, GetPiAsTermWorks) { EXPECT_EQ(Term(ALBA_NUMBER_PI), getPiAsATerm()); }
-
 TEST(TermUtilitiesTest, GetEAsTermWorks) { EXPECT_EQ(Term(ALBA_NUMBER_E), getEAsATerm()); }
 
 TEST(TermUtilitiesTest, GetPositiveInfinityAsATermWorks) {

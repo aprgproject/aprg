@@ -43,7 +43,6 @@ TEST(InsertionSorterForForwardListTest, SortWorksOnCharactersUsingExample2) {
 }
 
 // CANNOT SORT STD::LIST
-
 TEST(InsertionSorterForForwardListTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
     IntegersSorter sorter;
     testSortUsingExample1WithPositiveAndNegativeIntegers<IntegersSorter, Integers>(sorter);

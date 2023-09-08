@@ -16,7 +16,6 @@ public:
     AprgGnuPlotBase(AprgGnuPlotBase&& plot) = default;
     AprgGnuPlotBase& operator=(AprgGnuPlotBase const& plot) = default;
     AprgGnuPlotBase& operator=(AprgGnuPlotBase&& plot) = default;
-
     void setTitle(std::string const& title, std::string const& configurationString);
     void setXAxis(std::string const& xAxisName, std::string const& configurationString);
     void setYAxis(std::string const& yAxisName, std::string const& configurationString);

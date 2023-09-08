@@ -9,12 +9,9 @@ namespace alba::algebra {
 class SegregateTermsByConditionInAdditionAndSubtractionRetriever : public BaseRetriever {
 public:
     using ConditionFunction = std::function<bool(Term const&)>;
-
     explicit SegregateTermsByConditionInAdditionAndSubtractionRetriever(ConditionFunction const& condition);
-
     [[nodiscard]] Term const& getTermWithCondition() const;
     [[nodiscard]] Term const& getTermWithoutCondition() const;
-
     void retrieveFromConstant(Constant const& constant) override;
     void retrieveFromVariable(Variable const& variable) override;
     void retrieveFromMonomial(Monomial const& monomial) override;

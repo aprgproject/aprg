@@ -10,14 +10,12 @@ EggDroppingPuzzle::EggDroppingPuzzle(Count const numberOfEggs, Count const numbe
 EggDroppingPuzzle::Count EggDroppingPuzzle::getMinimumNumberOfTrialsUsingNaiveRecursion() const {
     // Time Complexity: Exponential -> Since there are n calls per iteration:  O(m^n)
     // Auxiliary Space: Constant
-
     return getMinimumNumberOfTrialsUsingNaiveRecursion(m_numberOfEggs, m_numberOfFloors);
 }
 
 EggDroppingPuzzle::Count EggDroppingPuzzle::getMinimumNumberOfTrialsUsingMemoizationDP() const {
     // Time Complexity: O(n*k^2) (should be same as Iterative DP)
     // Auxiliary Space: O(n*k)
-
     CountMatrix countMatrix(m_numberOfEggs + 1, m_numberOfFloors + 1, static_cast<Count>(MAX_COUNT));
     return getMinimumNumberOfTrialsUsingMemoizationDP(countMatrix, m_numberOfEggs, m_numberOfFloors);
 }
@@ -27,7 +25,6 @@ EggDroppingPuzzle::Count EggDroppingPuzzle::getMinimumNumberOfTrialsUsingIterati
     // -> Where ‘n’ is the number of eggs and ‘k’ is the number of floors, as we use a nested for loop ‘k^2’ times for
     // each egg Auxiliary Space: O(n*k).
     // -> As a 2-D array of size ‘n*k’ is used for storing elements.
-
     CountMatrix countMatrix(m_numberOfEggs + 1, m_numberOfFloors + 1, 0);
     for (Count remainingEggs = 1; remainingEggs <= m_numberOfEggs; ++remainingEggs) {
         countMatrix.setEntry(remainingEggs, 1, 1);
@@ -55,7 +52,6 @@ EggDroppingPuzzle::Count EggDroppingPuzzle::getMinimumNumberOfTrialsUsingNaiveRe
     if (floorIndexPlusOne <= 1 || remainingEggs == 1) {
         // If there are no floors, then no trials needed.
         // OR if there is one floor, one trial needed.
-
         // We need k trials for one egg and k floors.
         return floorIndexPlusOne;
     }  // Consider all droppings from 1st floor to kth floor and return the minimum of these values plus 1.

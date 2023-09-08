@@ -4,18 +4,17 @@ using namespace std;
 
 namespace alba::algebra {
 
-SingleVariableNameRetriever::SingleVariableNameRetriever() = default;
-
-std::string const& SingleVariableNameRetriever::getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty() const {
-    return m_singleVariableName;
-}
-
 bool SingleVariableNameRetriever::hasNoVariables() const { return !m_hasEncounteredAVariable; }
 
 bool SingleVariableNameRetriever::hasOnlyASingleVariable() const {
     return m_hasEncounteredAVariable && !m_hasMultipleVariables;
 }
+
 bool SingleVariableNameRetriever::hasMultipleVariables() const { return m_hasMultipleVariables; }
+
+std::string const& SingleVariableNameRetriever::getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty() const {
+    return m_singleVariableName;
+}
 
 void SingleVariableNameRetriever::retrieveFromEquations(Equations const& equations) {
     if (!m_hasMultipleVariables) {
@@ -28,14 +27,6 @@ void SingleVariableNameRetriever::retrieveFromEquation(Equation const& equation)
         BaseRetriever::retrieveFromEquation(equation);
     }
 }
-
-void SingleVariableNameRetriever::retrieveFromTerm(Term const& term) {
-    if (!m_hasMultipleVariables) {
-        BaseRetriever::retrieveFromTerm(term);
-    }
-}
-
-void SingleVariableNameRetriever::retrieveFromConstant(Constant const&) {}
 
 void SingleVariableNameRetriever::retrieveFromVariable(Variable const& variable) {
     if (!m_hasMultipleVariables) {
@@ -90,5 +81,15 @@ void SingleVariableNameRetriever::putVariableIfPossible(string const& variableNa
         m_singleVariableName.clear();
     }
 }
+
+SingleVariableNameRetriever::SingleVariableNameRetriever() = default;
+
+void SingleVariableNameRetriever::retrieveFromTerm(Term const& term) {
+    if (!m_hasMultipleVariables) {
+        BaseRetriever::retrieveFromTerm(term);
+    }
+}
+
+void SingleVariableNameRetriever::retrieveFromConstant(Constant const&) {}
 
 }  // namespace alba::algebra

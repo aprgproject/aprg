@@ -9,21 +9,18 @@ public:
     using Node = typename BaseTree::Node;
     using NodeUniquePointer = typename BaseTree::NodeUniquePointer;
     using TraverseFunction = typename BaseTree::TraverseFunction;
-
-    BaseSetWithBaseTree() : b_root(BaseTree::m_root) {}
-
     ~BaseSetWithBaseTree() override = default;  // virtual destructor because of virtual functions (vtable exists)
-
+    BaseSetWithBaseTree() : b_root(BaseTree::m_root) {}
     // overrides in BaseSet
     void put(Key const& key) override { putStartingOnThisNode(b_root, key); }
 
 protected:
+    virtual void putStartingOnThisNode(NodeUniquePointer& nodePointer, Key const& key) = 0;
+
     // overrides in BaseTree
     void copyNodeContents(Node& destinationNode, Node const& sourceNode) const override {
         destinationNode.key = sourceNode.key;
     }
-
-    virtual void putStartingOnThisNode(NodeUniquePointer& nodePointer, Key const& key) = 0;
 
 private:
     NodeUniquePointer& b_root;

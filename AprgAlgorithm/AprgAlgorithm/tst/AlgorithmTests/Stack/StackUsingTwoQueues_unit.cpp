@@ -14,15 +14,10 @@ using StackForTest = StackUsingTwoQueues<int, DoublingSizeCircularQueue<int>>;
 }  // namespace
 
 TEST(StackUsingTwoQueuesTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<StackForTest>(); }
-
 TEST(StackUsingTwoQueuesTest, IsEmptyWorksWhenNotEmpty) { testIsEmptyWhenNotEmptyWithInt<StackForTest>(); }
-
 TEST(StackUsingTwoQueuesTest, GetSizeWorksWhenEmpty) { testGetSizeWhenEmptyWithInt<StackForTest>(); }
-
 TEST(StackUsingTwoQueuesTest, GetSizeWorksWhenNotEmpty) { testGetSizeWhenNotEmptyWithInt<StackForTest>(); }
-
 TEST(StackUsingTwoQueuesTest, PushWorks) { testPushWithInt<StackForTest>(); }
-
 TEST(StackUsingTwoQueuesTest, PopWorks) { testPopWithInt<StackForTest>(); }
 
 // disabled because it takes too long

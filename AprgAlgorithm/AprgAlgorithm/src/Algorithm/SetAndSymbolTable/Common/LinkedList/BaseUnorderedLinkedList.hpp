@@ -16,12 +16,9 @@ public:
     using Keys = std::vector<Key>;
     using TraverseFunctionWithNoChange = std::function<void(Node const&, bool&)>;
     using TraverseFunctionWithChange = std::function<void(Node&, bool&)>;
-
-    BaseUnorderedLinkedList() : m_first(nullptr) {}
-
     ~BaseUnorderedLinkedList() override = default;  // no need for virtual destructor because base destructor is virtual
-                                                    // (similar to other virtual functions)
-
+    BaseUnorderedLinkedList() : m_first(nullptr) {}
+    // (similar to other virtual functions)
     [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
 
     [[nodiscard]] bool doesContain(Key const& key) const override {
@@ -124,6 +121,24 @@ public:
         return ceiling;
     }
 
+    [[nodiscard]] Keys getKeys() const override {
+        Keys result;
+        traverseWithNoChange([&](Node const& node, bool&) { result.emplace_back(node.key); });
+        std::sort(result.begin(), result.end());
+        return result;
+    }
+
+    [[nodiscard]] Keys getKeysInRangeInclusive(Key const& low, Key const& high) const override {
+        Keys result;
+        traverseWithNoChange([&](Node const& node, bool&) {
+            if (node.key >= low && node.key <= high) {
+                result.emplace_back(node.key);
+            }
+        });
+        std::sort(result.begin(), result.end());
+        return result;
+    }
+
     void deleteBasedOnKey(Key const& key) override {
         Node* previousNodePointer(nullptr);
         for (Node* currentNodePointer = m_first.get(); currentNodePointer != nullptr;
@@ -144,26 +159,7 @@ public:
     }
 
     void deleteMinimum() override { deleteBasedOnKey(getMinimum()); }
-
     void deleteMaximum() override { deleteBasedOnKey(getMaximum()); }
-
-    [[nodiscard]] Keys getKeys() const override {
-        Keys result;
-        traverseWithNoChange([&](Node const& node, bool&) { result.emplace_back(node.key); });
-        std::sort(result.begin(), result.end());
-        return result;
-    }
-
-    [[nodiscard]] Keys getKeysInRangeInclusive(Key const& low, Key const& high) const override {
-        Keys result;
-        traverseWithNoChange([&](Node const& node, bool&) {
-            if (node.key >= low && node.key <= high) {
-                result.emplace_back(node.key);
-            }
-        });
-        std::sort(result.begin(), result.end());
-        return result;
-    }
 
 protected:
     void traverseWithNoChange(TraverseFunctionWithNoChange const& traverseFunction) const {

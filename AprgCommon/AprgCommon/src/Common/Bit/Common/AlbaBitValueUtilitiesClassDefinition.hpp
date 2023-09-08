@@ -12,15 +12,13 @@ namespace alba {
 template <typename DataType>
 class AlbaBitValueUtilities {
 public:
-    static_assert(typeHelper::isIntegralType<DataType>(), "DataType must be an integer");
-
     // rule of five or six
     AlbaBitValueUtilities() = delete;
     // disallow allocation on stack, only on heap(but no constructor so not possible as well)
     ~AlbaBitValueUtilities() = delete;
     AlbaBitValueUtilities(AlbaBitValueUtilities const &) = delete;
-    AlbaBitValueUtilities &operator=(AlbaBitValueUtilities const &) = delete;
     AlbaBitValueUtilities(AlbaBitValueUtilities &&) = delete;
+    AlbaBitValueUtilities &operator=(AlbaBitValueUtilities const &) = delete;
     AlbaBitValueUtilities &operator=(AlbaBitValueUtilities &&) = delete;
 
     static constexpr inline bool isPowerOfTwo(DataType const value) {
@@ -54,7 +52,6 @@ public:
         // Therefore for the number to be divisible by,
         // the difference between the count of odd set bits (a+c+e)
         // and even set bits (b+d) should be divisible by 3.
-
         if (value == 0) {
             return true;
         }
@@ -90,7 +87,6 @@ public:
         // This expression can only be an integer if the sub-expression [floor(n/8) – n%8]/9 is an integer.
         // The subexpression can only be an integer if [floor(n/8) – n%8] is a multiple of 9.
         // So the problem reduces to a smaller value which can be written in terms of bitwise operators.
-
         if (value < 0) {
             return isMultipleOfNine(-value);
         }
@@ -111,7 +107,6 @@ public:
     static constexpr inline size_t getNumberOfBits() {
         // Approach based on numeric limits and if its signed
         // return std::numeric_limits<DataType>::digits + (std::numeric_limits<DataType>::is_signed ? 1 : 0);
-
         // Approach based on sizeof
         // -> sizeof: Yields the size in bytes of the object representation of type.
         return sizeof(DataType) * AlbaBitConstants::BYTE_SIZE_IN_BITS;
@@ -132,7 +127,6 @@ public:
     static constexpr inline size_t getHammingDistance(DataType const value1, DataType const value2) {
         // The Hamming distance hamming(a,b) between two bitstrings a and b of equal length is the number of positions
         // where the bitstrings differ.
-
         return getNumberOfOnes(value1 ^ value2);
     }
 
@@ -184,7 +178,6 @@ public:
 
     static constexpr inline DataType getAbsoluteValue(DataType const value) {
         // There is also a different implementation on Math
-
         static_assert(typeHelper::isSignedType<DataType>(), "DataType must be a signed type");
         auto const signedBitMoved = value >> (getNumberOfBits() - 1);
         return (value ^ signedBitMoved) - signedBitMoved;
@@ -194,7 +187,6 @@ public:
     static constexpr inline DataType getSign(DataType const value) {
         // There is also an implementation on Math
         // This is same as the signum function
-
         static_assert(typeHelper::isSignedType<DataType>(), "DataType must be a signed type");
         constexpr auto numberOfBitsMinus1 = (getNumberOfBits() - 1);
         return -(-(value >> numberOfBitsMinus1) | (-value >> numberOfBitsMinus1));
@@ -217,7 +209,6 @@ public:
     }
 
     static constexpr inline DataType getOnesComplement(DataType const value) { return ~value; }
-
     static constexpr inline DataType getTwosComplement(DataType const value) { return value * -1; }
 
     static constexpr inline DataType getGreatestPowerOf2Factor(DataType const value) {
@@ -235,14 +226,12 @@ public:
     static constexpr inline DataType getValueWithLastBitZeroAsOne(DataType const value) {
         // Hackers Delight: Turn on the rightmost 0-bit in a word, producing all 1’s if none
         // (e.g., 10100111 ⇒ 10101111):
-
         return value | (value + 1);
     }
 
     static constexpr inline DataType getValueWithTrailingOnesAsZeros(DataType const value) {
         // Hackers Delight: Turn off the trailing 1’s in a word, producing x if none
         // (e.g., 10100111 ⇒ 10100000):
-
         return value & (value + 1);
     }
 
@@ -250,7 +239,6 @@ public:
         // Hackers Delight: Create a word with a single 1-bit at the position of the rightmost 0-bit in x,
         // producing 0 if none
         // (e.g., 10100111 ⇒ 00001000)
-
         return ~value & (value + 1);
     }
 
@@ -258,7 +246,6 @@ public:
         // Hackers Delight: Create a word with a single 0-bit at the position of the rightmost 1-bit in x,
         // producing all 1’s if none
         // (e.g., 10101000 ⇒ 11110111):
-
         return ~value | (value - 1);
     }
 
@@ -266,7 +253,6 @@ public:
         // Hackers Delight: Create a word with 1’s at the positions of the trailing 0’s in x, and 0’s elsewhere,
         // producing 0 if none
         // (e.g., 01011000 ⇒ 00000111):
-
         return ~value & (value - 1);  // This formula works as well
         // return ~(value | -value); // This formula works as well
         // return (value & -value) -1; // This formula works as well
@@ -276,14 +262,12 @@ public:
         // Hackers Delight: Create a word with 0’s at the positions of the trailing 1’s in x, and 0’s elsewhere,
         // producing all 1’s if none :
         // (e.g., 10100111 ⇒ 11111000):
-
         return ~value & (value + 1);
     }
 
     static constexpr inline DataType getLastBitOneOnly(DataType const value) {
         // Hackers Delight: Isolate the rightmost 1-bit, producing 0 if none
         // (e.g., 01011000 ⇒ 00001000):
-
         return value & -value;
     }
 
@@ -291,7 +275,6 @@ public:
         // Hackers Delight: Create a word with 1’s at the positions of the rightmost 1-bit
         // and the trailing 0’s in x, producing all 1’s if no 1-bit, and the integer 1 if no trailing 0’s
         // (e.g., 01011000 ⇒ 00001111):
-
         return value ^ (value - 1);
     }
 
@@ -299,7 +282,6 @@ public:
         // Hackers Delight: Create a word with 1’s at the positions of the rightmost 0-bit
         // and the trailing 1’s in x, producing all 1’s if no 0-bit, and the integer 1 if no trailing 1’s
         // (e.g., 01010111 ⇒ 00001111):
-
         return value ^ (value + 1);
     }
 
@@ -366,6 +348,8 @@ public:
         // 2) value1 -= value2; value2 += value1; value1 = value2 - value1;
         // 2) value1 = value2 - value1; value2 -= value1; value1 += value2;
     }
+
+    static_assert(typeHelper::isIntegralType<DataType>(), "DataType must be an integer");
 };
 
 }  // namespace alba

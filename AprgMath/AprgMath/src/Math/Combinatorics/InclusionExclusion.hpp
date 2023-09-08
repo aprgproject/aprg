@@ -6,7 +6,6 @@ namespace alba::math {
 
 UnsignedInteger getUnionCountOfTwoSets(
     UnsignedInteger const aSize, UnsignedInteger const bSize, UnsignedInteger const abIntersection);
-
 UnsignedInteger getIntersectionCountOfTwoSets(
     UnsignedInteger const aSize, UnsignedInteger const bSize, UnsignedInteger const abUnion);
 

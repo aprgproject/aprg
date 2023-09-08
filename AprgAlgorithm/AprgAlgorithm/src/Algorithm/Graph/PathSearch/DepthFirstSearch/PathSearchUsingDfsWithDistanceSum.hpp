@@ -14,7 +14,6 @@ public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using InitializeDataFunction = typename BaseBfs::InitializeDataFunction;
     using UpdateDataFunction = typename BaseBfs::UpdateDataFunction;
-
     PathSearchUsingDfsWithDistanceSum(EdgeWeightedGraph const& graph, Vertices const& startVertices)
         : BaseDistanceSum(graph), BaseBfs(graph, startVertices, getInitializeDataFunction(), getUpdateDataFunction()) {}
 

@@ -26,8 +26,8 @@ public:
     CombinationsGeneration() = delete;
     ~CombinationsGeneration() = delete;
     CombinationsGeneration(CombinationsGeneration const&) = delete;
-    CombinationsGeneration& operator=(CombinationsGeneration const&) = delete;
     CombinationsGeneration(CombinationsGeneration&&) = delete;
+    CombinationsGeneration& operator=(CombinationsGeneration const&) = delete;
     CombinationsGeneration& operator=(CombinationsGeneration&&) = delete;
 
     static Combinations generateCombinationsWithLength(Objects const& objects, int const targetCombinationLength) {

@@ -10,7 +10,6 @@ template <typename Object>
 class UnionFindForFreeIndex : public BaseUnionFind<Object> {
 public:
     using RootVector = std::vector<Object>;
-
     explicit UnionFindForFreeIndex(int const maximumSize) : m_relativeRoots() { initialize(maximumSize); }
 
     [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
@@ -27,6 +26,8 @@ public:
         return currentRoot;
     }
 
+    [[nodiscard]] RootVector const& getRelativeRootVector() const { return m_relativeRoots; }
+
     Object getRootWithPathCompression(Object const& object) {
         RootVector relativeRoots;
         Object mainRoot = getRootAndRelativeRoots(object, relativeRoots);
@@ -34,29 +35,17 @@ public:
         return mainRoot;
     }
 
+    RootVector& getRelativeRootVectorReference() { return m_relativeRoots; }
+
     void connect(Object const& source, Object const& destination) override {
         // Path compression
-
         RootVector relativeRoots;
         getRootAndRelativeRoots(source, relativeRoots);
         Object mainRoot = getRootAndRelativeRoots(destination, relativeRoots);
         saveNewRootOnRelativeRoots(mainRoot, relativeRoots);
     }
 
-    [[nodiscard]] RootVector const& getRelativeRootVector() const { return m_relativeRoots; }
-
-    RootVector& getRelativeRootVectorReference() { return m_relativeRoots; }
-
 private:
-    void initialize(int const maximumSize) {
-        // runs in linear time
-        m_relativeRoots.reserve(maximumSize);
-        for (int i = 0; i < maximumSize; ++i) {
-            m_relativeRoots.emplace_back(i);
-        }
-        m_relativeRoots.shrink_to_fit();
-    }
-
     Object getRootAndRelativeRoots(Object const& object, RootVector& relativeRoots) const {
         Object currentRoot(object);
         Object nextRoot(m_relativeRoots[object]);
@@ -67,6 +56,15 @@ private:
             nextRoot = m_relativeRoots[currentRoot];
         }
         return currentRoot;
+    }
+
+    void initialize(int const maximumSize) {
+        // runs in linear time
+        m_relativeRoots.reserve(maximumSize);
+        for (int i = 0; i < maximumSize; ++i) {
+            m_relativeRoots.emplace_back(i);
+        }
+        m_relativeRoots.shrink_to_fit();
     }
 
     void saveNewRootOnRelativeRoots(Object const& newRoot, RootVector const& relativeRoots) {

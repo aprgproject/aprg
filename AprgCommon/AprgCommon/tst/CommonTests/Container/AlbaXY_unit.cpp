@@ -51,15 +51,10 @@ TEST(AlbaXYTest, LessThanOperatorWorks) {
 }
 
 TEST(AlbaXYTest, PlusUnaryOperatorWorks) { EXPECT_EQ(IntXY(1, 2), +IntXY(1, 2)); }
-
 TEST(AlbaXYTest, MinusUnaryOperatorWorks) { EXPECT_EQ(IntXY(-1, -2), -IntXY(1, 2)); }
-
 TEST(AlbaXYTest, PlusBinaryOperatorWorks) { EXPECT_EQ(IntXY(4, -2), (IntXY(1, 2) + IntXY(3, -4))); }
-
 TEST(AlbaXYTest, MinusBinaryOperatorWorks) { EXPECT_EQ(IntXY(-2, 6), (IntXY(1, 2) - IntXY(3, -4))); }
-
 TEST(AlbaXYTest, MultiplyBinaryOperatorWorks) { EXPECT_EQ(IntXY(35, -70), (IntXY(5, -10) * 7)); }
-
 TEST(AlbaXYTest, DivideBinaryOperatorWorks) { EXPECT_EQ(IntXY(1, -2), (IntXY(5, -10) / 5)); }
 
 TEST(AlbaXYTest, PlusAssignmentOperatorWorks) {

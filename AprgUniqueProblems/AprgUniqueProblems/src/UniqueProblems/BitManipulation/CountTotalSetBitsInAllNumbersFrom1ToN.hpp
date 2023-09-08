@@ -9,7 +9,6 @@ class CountTotalSetBitsInAllNumbersFrom1ToN {
 public:
     using Value = uint64_t;
     using Values = std::vector<Value>;
-
     CountTotalSetBitsInAllNumbersFrom1ToN();
     static Value getTotalSetBitsUsingPopcount(Value const endValue);
     static Value getTotalSetBitsUsingPreComputedBitCounts(Value const endValue);

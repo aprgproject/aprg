@@ -16,6 +16,8 @@ using AddressToFspMap = std::map<unsigned int, Fsp>;
 class HardwareConfiguration {
 public:
     HardwareConfiguration();
+    [[nodiscard]] unsigned int getTcomFspAddress() const;
+    [[nodiscard]] unsigned int getSharedLcgId() const;
     AddressToDspMap& getAddressToDspMapReference();
     AddressToFspMap& getAddressToFspMapReference();
     void clear();
@@ -39,16 +41,14 @@ public:
     void changeConfigurationToSixFspThreeLcgEvenDistribution();
     void changeConfigurationToSixFspFourLcgEvenDistribution();
     void changeConfigurationToSharedLcgWithOneDspInMsm();
-    [[nodiscard]] unsigned int getTcomFspAddress() const;
-    [[nodiscard]] unsigned int getSharedLcgId() const;
     void printDspAllocations(unsigned int const printFlags = 0);
 
 private:
+    static NyquistType computeNyquistTypeBasedOnDspAddress(unsigned int const dspAddress);
+    static SmType getSmTypeBasedOnAddress(unsigned int const fspAddress);
     void addFsp(unsigned int const fspAddress);
     void addDsp(unsigned int const dspAddress);
     void setLcgIdOfDsps(LcgIds const& lcgIds);
-    static NyquistType computeNyquistTypeBasedOnDspAddress(unsigned int const dspAddress);
-    static SmType getSmTypeBasedOnAddress(unsigned int const fspAddress);
     unsigned int m_sharedLcgId{0};
     unsigned int m_tcomFspAddress{0};
     AddressToDspMap m_dspAddressToDspMap;

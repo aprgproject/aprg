@@ -15,23 +15,23 @@ namespace wcdmaToolsBackend {
 class BtsLogSorter {
 public:
     explicit BtsLogSorter(BtsLogSorterConfiguration const& configuration);
+    double getTotalSizeToBeRead();
+    double getTotalSizeToBeRead(std::set<std::string> const& listOfFiles);
     void processDirectory(std::string const& directoryPath);
     void processFile(std::string const& filePath);
     void processLineInFile(std::string const& filename, std::string const& lineInFile);
     void saveLogsToOutputFile(std::string const& outputPath);
 
-    double getTotalSizeToBeRead();
-    double getTotalSizeToBeRead(std::set<std::string> const& listOfFiles);
-
 private:
+    static std::string getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
+        std::string const& directory, std::string const& hardwareAddress);
+    static void deleteFilesInDirectory(std::string const& directoryOfLogs);
     void createTempDirectories() const;
     void deleteTempFilesAndDirectoriesOfOneDayOld() const;
     void deleteStartupLog() const;
     void deleteLogsWithoutPcTime() const;
     void saveLogToOutputFileIfAllHavePcTime(std::string const& outputPath);
     void saveLogToOutputFileIfNotAllHavePcTime(std::string const& outputPath);
-    static std::string getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
-        std::string const& directory, std::string const& hardwareAddress);
     void openStartupLogsIfNeeded();
     void addStartupLogsOnSorterWithPcTime();
     void writeLogsWithoutPcTimeToOutputFile(std::ofstream& outputLogFileStream);
@@ -42,7 +42,6 @@ private:
         BtsPrintReaderWithRollback& printReader, BtsLogPrint const& logPrint, std::ofstream& outputLogFileStream);
     void updateOrWriteCurrentPrint(BtsLogPrint const& logPrint, std::ofstream& outputLogFileStream);
     void writeLastPrint(std::ofstream& outputLogFileStream);
-    static void deleteFilesInDirectory(std::string const& directoryOfLogs);
     bool m_isFilterOn;
     alba::AlbaGrepStringEvaluator m_acceptedFilesGrepEvaluator;
     alba::AlbaGrepStringEvaluator m_filterGrepEvaluator;

@@ -12,12 +12,24 @@ public:
     using Values = std::forward_list<Value>;
     using Iterator = typename Values::iterator;
     using ConstIterator = typename Values::const_iterator;
-
     MergeSorterForForwardList() = default;
-
     void sort(Values& valuesToSort) const override { sortFromTheTopDown(valuesToSort); }
 
 private:
+    [[nodiscard]] ConstIterator getBeforeMiddleIterator(Values const& values) const {
+        auto turtoise(values.cbefore_begin());
+        auto hare(values.cbegin());
+        while (hare != values.cend()) {
+            // std::advance with 2 for hare? no, because we need to check if we exceeded
+            ++hare;
+            ++turtoise;
+            if (hare != values.cend()) {
+                ++hare;
+            }
+        }
+        return turtoise;
+    }
+
     void sortFromTheTopDown(Values& values) const {
         // list contains one or empty stop
         if (values.begin() != values.cend() && std::next(values.begin()) != values.cend()) {
@@ -35,23 +47,8 @@ private:
         }
     }
 
-    [[nodiscard]] ConstIterator getBeforeMiddleIterator(Values const& values) const {
-        auto turtoise(values.cbefore_begin());
-        auto hare(values.cbegin());
-        while (hare != values.cend()) {
-            // std::advance with 2 for hare? no, because we need to check if we exceeded
-            ++hare;
-            ++turtoise;
-            if (hare != values.cend()) {
-                ++hare;
-            }
-        }
-        return turtoise;
-    }
-
     void mergeTwoRanges(Values& result, Values& firstPart, Values& secondPart) const {
         // this is similar with std::forward_list::merge
-
         Values merged;
         auto itMerged = merged.cbefore_begin();
         for (; firstPart.cbegin() != firstPart.cend() && secondPart.cbegin() != secondPart.cend(); ++itMerged) {

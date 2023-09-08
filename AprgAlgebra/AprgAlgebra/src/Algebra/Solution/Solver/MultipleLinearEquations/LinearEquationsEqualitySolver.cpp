@@ -12,8 +12,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-LinearEquationsEqualitySolver::LinearEquationsEqualitySolver() = default;
-
 MultipleVariableSolutionSet LinearEquationsEqualitySolver::calculateSolutionAndReturnSolutionSet(
     Equations const& equations) {
     MultipleVariableSolutionSet solutionSet;
@@ -26,41 +24,6 @@ MultipleVariableSolutionSet LinearEquationsEqualitySolver::calculateSolutionAndR
     MultipleVariableSolutionSet solutionSet;
     calculateSolution(solutionSet, polynomials);
     return solutionSet;
-}
-
-void LinearEquationsEqualitySolver::calculateSolution(
-    MultipleVariableSolutionSet& solutionSet, Equations const& equations) {
-    if (doesAllEquationsHaveEqualityOperator(equations)) {
-        Polynomials polynomials;
-        for (Equation const& equation : equations) {
-            Equation simplifiedEquation(equation);
-            simplifiedEquation.simplify();
-            Term const& nonZeroLeftHandTerm(simplifiedEquation.getLeftHandTerm());
-            if (canBeConvertedToPolynomial(nonZeroLeftHandTerm)) {
-                polynomials.emplace_back(createPolynomialIfPossible(nonZeroLeftHandTerm));
-            }
-        }
-        calculateSolution(solutionSet, polynomials);
-    }
-}
-
-void LinearEquationsEqualitySolver::calculateSolution(
-    MultipleVariableSolutionSet& solutionSet, Polynomials const& polynomials) {
-    ExponentsRetriever exponentsRetriever;
-    VariableNamesRetriever variablesRetriever;
-    exponentsRetriever.retrieveFromPolynomials(polynomials);
-    variablesRetriever.retrieveFromPolynomials(polynomials);
-    AlbaNumbersSet const& exponents(exponentsRetriever.getExponents());
-    VariableNamesSet const& variables(variablesRetriever.getVariableNames());
-    if (areExponentsEqualToOneAndZero(exponents) && variables.size() == polynomials.size()) {
-        NumberMatrix coefficientsMatrix(variables.size() + 1, polynomials.size());
-        setMatrixCoefficients(coefficientsMatrix, variables, polynomials);
-        transformToReducedEchelonFormUsingGaussJordanReduction(coefficientsMatrix);
-        if (isReducedRowEchelonForm(coefficientsMatrix)) {
-            saveSolutionSetsFromTheCoefficientMatrix(solutionSet, coefficientsMatrix, variables);
-            setAsCompleteSolution();
-        }
-    }
 }
 
 bool LinearEquationsEqualitySolver::areExponentsEqualToOneAndZero(AlbaNumbersSet const& exponents) {
@@ -100,5 +63,42 @@ void LinearEquationsEqualitySolver::saveSolutionSetsFromTheCoefficientMatrix(
         ++index;
     }
 }
+
+void LinearEquationsEqualitySolver::calculateSolution(
+    MultipleVariableSolutionSet& solutionSet, Equations const& equations) {
+    if (doesAllEquationsHaveEqualityOperator(equations)) {
+        Polynomials polynomials;
+        for (Equation const& equation : equations) {
+            Equation simplifiedEquation(equation);
+            simplifiedEquation.simplify();
+            Term const& nonZeroLeftHandTerm(simplifiedEquation.getLeftHandTerm());
+            if (canBeConvertedToPolynomial(nonZeroLeftHandTerm)) {
+                polynomials.emplace_back(createPolynomialIfPossible(nonZeroLeftHandTerm));
+            }
+        }
+        calculateSolution(solutionSet, polynomials);
+    }
+}
+
+void LinearEquationsEqualitySolver::calculateSolution(
+    MultipleVariableSolutionSet& solutionSet, Polynomials const& polynomials) {
+    ExponentsRetriever exponentsRetriever;
+    VariableNamesRetriever variablesRetriever;
+    exponentsRetriever.retrieveFromPolynomials(polynomials);
+    variablesRetriever.retrieveFromPolynomials(polynomials);
+    AlbaNumbersSet const& exponents(exponentsRetriever.getExponents());
+    VariableNamesSet const& variables(variablesRetriever.getVariableNames());
+    if (areExponentsEqualToOneAndZero(exponents) && variables.size() == polynomials.size()) {
+        NumberMatrix coefficientsMatrix(variables.size() + 1, polynomials.size());
+        setMatrixCoefficients(coefficientsMatrix, variables, polynomials);
+        transformToReducedEchelonFormUsingGaussJordanReduction(coefficientsMatrix);
+        if (isReducedRowEchelonForm(coefficientsMatrix)) {
+            saveSolutionSetsFromTheCoefficientMatrix(solutionSet, coefficientsMatrix, variables);
+            setAsCompleteSolution();
+        }
+    }
+}
+
+LinearEquationsEqualitySolver::LinearEquationsEqualitySolver() = default;
 
 }  // namespace alba::algebra

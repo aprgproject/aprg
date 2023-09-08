@@ -15,17 +15,15 @@ public:
     using Row = std::string;
     using Rows = std::vector<Row>;
     using RowToRowsMap = std::map<Row, Rows>;  // This also can be represented by vector using bitstrings
-
     CountingTilings(Count const numberOfColumns, Count const numberOfRows);
-
     Count getNumberOfSolutionsUsingDynamicProgramming();
     Count getNumberOfSolutionsUsingCompleteSearch();
 
 private:
     static Row getEmptyRow(Count const length);
-    void searchNextRow(Count const rowIndex, Row const& currentRow);
-    Rows const& getNextRows(Row const& currentRow);
     static Rows calculateNextRows(Row const& currentRow);
+    Rows const& getNextRows(Row const& currentRow);
+    void searchNextRow(Count const rowIndex, Row const& currentRow);
     void startCompleteSearch();
     void doCompleteSearchAt(Count const gridIndex);
     Count m_numberOfColumns;

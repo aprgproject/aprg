@@ -11,9 +11,8 @@ template <typename Values>
 class InsertionSorterWithBinarySearch : public BaseSorter<Values> {
 public:
     using Value = typename Values::value_type;
-    static constexpr int INVALID_INDEX = getInvalidIndex<int>();
-
     InsertionSorterWithBinarySearch() = default;
+    static constexpr int INVALID_INDEX = getInvalidIndex<int>();
 
     void sort(Values& valuesToSort) const override {
         for (int insertIndex(1); insertIndex < static_cast<int>(valuesToSort.size()); ++insertIndex) {
@@ -22,16 +21,6 @@ public:
     }
 
 private:
-    void swapDownWithIndexFoundInBinarySearch(Values& valuesToSort, int const insertIndex) const {
-        int indexWithGreaterValue =
-            getIndexWithGreaterValueUsingBinarySearch(valuesToSort, 0, insertIndex - 1, valuesToSort[insertIndex]);
-        if (indexWithGreaterValue != INVALID_INDEX) {
-            for (int swapIndex(insertIndex); swapIndex > indexWithGreaterValue; --swapIndex) {
-                std::swap(valuesToSort[swapIndex - 1], valuesToSort[swapIndex]);
-            }
-        }
-    }
-
     [[nodiscard]] int getIndexWithGreaterValueUsingBinarySearch(
         Values const& valuesToSort, int const lowIndex, int const highIndex, Value const& value) const {
         int result(INVALID_INDEX);
@@ -48,6 +37,16 @@ private:
             }
         }
         return result;
+    }
+
+    void swapDownWithIndexFoundInBinarySearch(Values& valuesToSort, int const insertIndex) const {
+        int indexWithGreaterValue =
+            getIndexWithGreaterValueUsingBinarySearch(valuesToSort, 0, insertIndex - 1, valuesToSort[insertIndex]);
+        if (indexWithGreaterValue != INVALID_INDEX) {
+            for (int swapIndex(insertIndex); swapIndex > indexWithGreaterValue; --swapIndex) {
+                std::swap(valuesToSort[swapIndex - 1], valuesToSort[swapIndex]);
+            }
+        }
     }
 };
 

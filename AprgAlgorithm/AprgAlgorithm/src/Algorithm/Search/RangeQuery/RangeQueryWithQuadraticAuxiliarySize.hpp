@@ -10,7 +10,6 @@ template <typename Values>
 class RangeQueryWithQuadraticAuxiliarySize {
 public:
     // This supports "accumulator" and "selector" type queries.
-
     using Index = int;
     using Value = typename Values::value_type;
     using ValueMatrix = matrix::AlbaMatrix<Value>;
@@ -34,7 +33,6 @@ public:
 private:
     void initialize(Values const& valuesToCheck) {
         // This is on quadratic time
-
         if (!valuesToCheck.empty()) {
             for (Index index = 0; index < static_cast<Index>(valuesToCheck.size()); ++index) {
                 m_partialValueMatrix.setEntry(index, index, valuesToCheck[index]);

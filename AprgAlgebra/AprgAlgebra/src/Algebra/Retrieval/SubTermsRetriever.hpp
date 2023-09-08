@@ -8,7 +8,6 @@ namespace alba::algebra {
 class SubTermsRetriever final : public BaseRetriever {
 public:
     SubTermsRetriever();
-
     [[nodiscard]] TermSet const& getSubTerms() const;
     void retrieveFromConstant(Constant const& constant) override;
     void retrieveFromVariable(Variable const& variable) override;

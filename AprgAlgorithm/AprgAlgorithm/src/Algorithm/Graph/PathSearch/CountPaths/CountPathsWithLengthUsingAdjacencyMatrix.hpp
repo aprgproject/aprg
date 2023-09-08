@@ -10,11 +10,9 @@ public:
     // The powers of an adjacency matrix of a graph have an interesting property.
     // When V is an adjacency matrix of an unweighted graph,
     // the matrix V^n contains the numbers of paths of n edges between the nodes in the graph.
-
     using AdjacencyMatrix = matrix::AlbaMatrix<bool>;
     using Count = int;
     using CountMatrix = matrix::AlbaMatrix<Count>;
-
     CountPathsWithLengthUsingAdjacencyMatrix(int const lengthOfPath, AdjacencyMatrix const& adjacencyMatrix)
         : m_countMatrix(createCountMatrix(lengthOfPath, adjacencyMatrix)) {}
 

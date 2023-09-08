@@ -69,7 +69,6 @@ int getMedianIndexOfLessThanFive(
 template <typename Values>
 int getIndexOfMedianOfMedians(Values const& values, int const lowIndex, int const highIndex) {
     // Based from https://en.wikipedia.org/wiki/Median_of_medians
-
     int result{};
     if (lowIndex <= highIndex) {
         Indexes medianIndexes(highIndex - lowIndex);

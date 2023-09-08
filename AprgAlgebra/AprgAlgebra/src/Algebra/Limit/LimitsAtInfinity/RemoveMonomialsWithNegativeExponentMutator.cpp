@@ -11,6 +11,14 @@ namespace alba::algebra {
 RemoveMonomialsWithNegativeExponentMutator::RemoveMonomialsWithNegativeExponentMutator(string const& variableName)
     : m_variableName(variableName) {}
 
+bool RemoveMonomialsWithNegativeExponentMutator::isMonomialToBeRemoved(Monomial const& monomial) const {
+    bool result(false);
+    if (hasASingleVariable(monomial) && monomial.getExponentForVariable(m_variableName) < 0) {
+        result = true;
+    }
+    return result;
+}
+
 void RemoveMonomialsWithNegativeExponentMutator::mutateTerm(Term& term) {
     BaseMutator::mutateTerm(term);
     term.simplify();
@@ -39,14 +47,6 @@ void RemoveMonomialsWithNegativeExponentMutator::mutateExpression(Expression& ex
 void RemoveMonomialsWithNegativeExponentMutator::mutateFunction(Function& functionObject) {
     BaseMutator::mutateFunction(functionObject);
     functionObject.simplify();
-}
-
-bool RemoveMonomialsWithNegativeExponentMutator::isMonomialToBeRemoved(Monomial const& monomial) const {
-    bool result(false);
-    if (hasASingleVariable(monomial) && monomial.getExponentForVariable(m_variableName) < 0) {
-        result = true;
-    }
-    return result;
 }
 
 }  // namespace alba::algebra

@@ -3,10 +3,7 @@
 namespace alba::algebra {
 
 AlbaNumbersSet const& NumbersRetriever::getNumbers() const { return m_numbers; }
-
 void NumbersRetriever::retrieveFromConstant(Constant const& constant) { m_numbers.emplace(constant.getNumber()); }
-
-void NumbersRetriever::retrieveFromVariable(Variable const&) { m_numbers.emplace(1); }
 
 void NumbersRetriever::retrieveFromMonomial(Monomial const& monomial) {
     m_numbers.emplace(monomial.getCoefficient());
@@ -14,5 +11,7 @@ void NumbersRetriever::retrieveFromMonomial(Monomial const& monomial) {
         m_numbers.emplace(exponent);
     }
 }
+
+void NumbersRetriever::retrieveFromVariable(Variable const&) { m_numbers.emplace(1); }
 
 }  // namespace alba::algebra

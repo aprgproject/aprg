@@ -11,7 +11,6 @@ class KnuthMorrisPrattSubstringSearch {
 public:
     using RadixType = int;
     using Dfa = AlbaDfaUsingMatrix<Index, RadixType>;
-    static constexpr RadixType RADIX = 256;
 
     explicit KnuthMorrisPrattSubstringSearch(std::string const& query)
         : m_query(query), m_nextIndexDfa(query.length(), RADIX) {
@@ -35,6 +34,8 @@ public:
         return result;
     }
 
+    static constexpr RadixType RADIX = 256;
+
 private:
     void initialize() {
         if (!m_query.empty()) {
@@ -48,7 +49,6 @@ private:
             // ---> If in state j and next char c != pattern.charAt(j), then the last j-1 of input are pattern[1 ...
             // j-1], followed by c
             // ---> Reason for this is salvaging previous matches from mismatches only occurs on indexes [1 ... j-1]
-
             for (Index i = 1; i < queryLength; ++i) {
                 for (RadixType c = 0; c < RADIX; ++c) {
                     // assign mismatch state as the "delayedState with inputed c"

@@ -28,17 +28,13 @@ ConditionFunctionForTermsWithDetails const isMergePart = [](TermWithDetails cons
 
 }  // namespace
 
-AdditionAndSubtractionOfExpressions::AdditionAndSubtractionOfExpressions() = default;
-
 AdditionAndSubtractionOfExpressions::AdditionAndSubtractionOfExpressions(TermsWithDetails const& termsWithDetails) {
     putTermsWithDetails(termsWithDetails);
 }
 
-Expressions const& AdditionAndSubtractionOfExpressions::getExpressions() const { return m_expressions; }
-
-TermAssociationTypes const& AdditionAndSubtractionOfExpressions::getAssociations() const { return m_associations; }
-
 int AdditionAndSubtractionOfExpressions::getSize() const { return min(m_expressions.size(), m_associations.size()); }
+Expressions const& AdditionAndSubtractionOfExpressions::getExpressions() const { return m_expressions; }
+TermAssociationTypes const& AdditionAndSubtractionOfExpressions::getAssociations() const { return m_associations; }
 
 TermsWithDetails AdditionAndSubtractionOfExpressions::getAsTermsWithDetails() const {
     TermsWithDetails result;
@@ -88,29 +84,9 @@ void AdditionAndSubtractionOfExpressions::combineExpressionsIfPossible() {
     }
 }
 
-void AdditionAndSubtractionOfExpressions::mergeExpressionsByCheckingTwoTermsAtATime(
-    Terms& mergeParts, Terms& commonParts) {
-    int size = mergeParts.size();
-    for (int i = 0; i < size; ++i) {
-        for (int j = i + 1; j < size; ++j) {
-            // quadratic time: think on how this can be better
-            if (canBeMerged(mergeParts[i], mergeParts[j], commonParts[i], commonParts[j])) {
-                Term mergedTerm(mergeTerms(mergeParts[i], mergeParts[j], m_associations[i], m_associations[j]));
-                Term const& commonPart(commonParts[i]);
-                mergeParts[i] = mergedTerm;
-                m_expressions[i] = createOrCopyExpressionFromATerm(mergedTerm * commonPart);
-                m_associations[i] = TermAssociationType::Positive;
-
-                mergeParts.erase(mergeParts.begin() + j);
-                commonParts.erase(commonParts.begin() + j);
-                m_expressions.erase(m_expressions.begin() + j);
-                m_associations.erase(m_associations.begin() + j);
-
-                size = mergeParts.size();
-                j = i;
-            }
-        }
-    }
+bool AdditionAndSubtractionOfExpressions::canBeMerged(
+    Term const& mergePart1, Term const& mergePart2, Term const& commonPart1, Term const& commonPart2) {
+    return commonPart1 == commonPart2 && canBeMergedInAMonomialByAdditionOrSubtraction(mergePart1, mergePart2);
 }
 
 Term AdditionAndSubtractionOfExpressions::mergeTerms(
@@ -130,20 +106,6 @@ void AdditionAndSubtractionOfExpressions::prepareCommonParts(Terms& commonParts)
         if (commonPart.isExpression()) {
             commonPart.getAsExpressionReference().sort();
         }
-    }
-}
-
-void AdditionAndSubtractionOfExpressions::retrieveMergeParts(Terms& mergeParts) {
-    for (Expression const& expression : m_expressions) {
-        mergeParts.emplace_back();
-        retrieveMergePart(mergeParts.back(), expression);
-    }
-}
-
-void AdditionAndSubtractionOfExpressions::retrieveCommonParts(Terms& commonParts) {
-    for (Expression const& expression : m_expressions) {
-        commonParts.emplace_back();
-        retrieveCommonPart(commonParts.back(), expression);
     }
 }
 
@@ -176,9 +138,43 @@ bool AdditionAndSubtractionOfExpressions::doAllSizesMatch(Terms const& mergePart
            mergeParts.size() == m_associations.size();
 }
 
-bool AdditionAndSubtractionOfExpressions::canBeMerged(
-    Term const& mergePart1, Term const& mergePart2, Term const& commonPart1, Term const& commonPart2) {
-    return commonPart1 == commonPart2 && canBeMergedInAMonomialByAdditionOrSubtraction(mergePart1, mergePart2);
+void AdditionAndSubtractionOfExpressions::mergeExpressionsByCheckingTwoTermsAtATime(
+    Terms& mergeParts, Terms& commonParts) {
+    int size = mergeParts.size();
+    for (int i = 0; i < size; ++i) {
+        for (int j = i + 1; j < size; ++j) {
+            // quadratic time: think on how this can be better
+            if (canBeMerged(mergeParts[i], mergeParts[j], commonParts[i], commonParts[j])) {
+                Term mergedTerm(mergeTerms(mergeParts[i], mergeParts[j], m_associations[i], m_associations[j]));
+                Term const& commonPart(commonParts[i]);
+                mergeParts[i] = mergedTerm;
+                m_expressions[i] = createOrCopyExpressionFromATerm(mergedTerm * commonPart);
+                m_associations[i] = TermAssociationType::Positive;
+
+                mergeParts.erase(mergeParts.begin() + j);
+                commonParts.erase(commonParts.begin() + j);
+                m_expressions.erase(m_expressions.begin() + j);
+                m_associations.erase(m_associations.begin() + j);
+
+                size = mergeParts.size();
+                j = i;
+            }
+        }
+    }
+}
+
+void AdditionAndSubtractionOfExpressions::retrieveMergeParts(Terms& mergeParts) {
+    for (Expression const& expression : m_expressions) {
+        mergeParts.emplace_back();
+        retrieveMergePart(mergeParts.back(), expression);
+    }
+}
+
+void AdditionAndSubtractionOfExpressions::retrieveCommonParts(Terms& commonParts) {
+    for (Expression const& expression : m_expressions) {
+        commonParts.emplace_back();
+        retrieveCommonPart(commonParts.back(), expression);
+    }
 }
 
 void AdditionAndSubtractionOfExpressions::putItem(Expression const& expression, TermAssociationType const association) {
@@ -192,5 +188,7 @@ void AdditionAndSubtractionOfExpressions::putItem(Expression const& expression, 
     m_expressions.emplace_back(correctedExpression);
     m_associations.emplace_back(correctedAssociation);
 }
+
+AdditionAndSubtractionOfExpressions::AdditionAndSubtractionOfExpressions() = default;
 
 }  // namespace alba::algebra

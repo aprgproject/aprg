@@ -7,9 +7,7 @@ using namespace std;
 namespace alba::algebra {
 
 Term operator+(Term const& term) { return performUnaryPlus(term); }
-
 Term operator-(Term const& term) { return performUnaryMinus(term); }
-
 Term operator+(Term const& term1, Term const& term2) { return performAddition(term1, term2); }
 
 Term& operator+=(Term& term1, Term const& term2) {

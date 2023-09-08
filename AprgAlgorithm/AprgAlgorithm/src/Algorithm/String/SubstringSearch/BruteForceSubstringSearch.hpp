@@ -7,7 +7,6 @@ template <int numberOfLoops>
 class BruteForceSubstringSearch {
 public:
     explicit BruteForceSubstringSearch(std::string const& query) : m_query(query) {}
-
     [[nodiscard]] int search(std::string const& searchSpace) const { return searchWithLoops(searchSpace, m_query); }
 
 private:
@@ -59,6 +58,7 @@ private:
         }
         return result;
     }
+
     std::string m_query;
 };
 

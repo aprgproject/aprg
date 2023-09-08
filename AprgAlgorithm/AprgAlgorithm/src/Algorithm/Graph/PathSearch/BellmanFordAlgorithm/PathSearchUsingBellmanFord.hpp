@@ -30,6 +30,16 @@ public:
     }
 
 private:
+    Vertex dequeue() {
+        Vertex result{};
+        if (!m_verticesToProcess.empty()) {
+            result = m_verticesToProcess.front();
+            m_verticesToProcess.pop_front();
+            m_checkableVerticesToProcess.removeVertex(result);
+        }
+        return result;
+    }
+
     void searchForPathUsingAutomaticCycleDetection() {
         int numberOfVertices(b_graph.getNumberOfVertices());
         int numberOfVerticesProcessed(0);
@@ -87,22 +97,11 @@ private:
         m_checkableVerticesToProcess.putVertex(vertex);
     }
 
-    Vertex dequeue() {
-        Vertex result{};
-        if (!m_verticesToProcess.empty()) {
-            result = m_verticesToProcess.front();
-            m_verticesToProcess.pop_front();
-            m_checkableVerticesToProcess.removeVertex(result);
-        }
-        return result;
-    }
-
     void findAPositiveOrNegativeCycle() {
         // A positive cycle is a directed cycle whose sum of edge weight is positive.
         // A negative cycle is a directed cycle whose sum of edge weight is negative.
         // This is a negative cycle check on shortest path.
         // This is a positive cycle check on longest path.
-
         EdgeWeightedGraph bestPathTree;
         for (Vertex const& vertex : b_graph.getVertices()) {
             auto it = b_vertexToEdgeWithBestWeightMap.find(vertex);

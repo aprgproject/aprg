@@ -10,9 +10,7 @@ namespace alba::algebra {
 class EquationBuilder {
 public:
     explicit EquationBuilder(std::string const& equationInString);
-
     // rule of zero
-
     [[nodiscard]] Equation getEquation() const;
     [[nodiscard]] stringHelper::strings const& getTermStrings() const;
     [[nodiscard]] stringHelper::strings const& getEquationOperatorStrings() const;

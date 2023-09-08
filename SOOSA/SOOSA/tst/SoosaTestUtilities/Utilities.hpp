@@ -10,7 +10,6 @@ SoosaConfiguration getSoosaConfiguration();
 InputConfiguration getInputConfigurationForCharityPayWards(std::string const& inputPath);
 InputConfiguration getInputConfigurationForDemObas(std::string const& inputPath);
 InputConfiguration getInputConfigurationForSpecialUnits(std::string const& inputPath);
-
 void checkAnswersForCharityPayWardsPattern1(SOOSA const& soosa);
 void checkAnswersForDemObasPattern1(SOOSA const& soosa);
 void checkAnswersForDemObasPattern2(SOOSA const& soosa);

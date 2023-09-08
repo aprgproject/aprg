@@ -4,8 +4,6 @@ using namespace std;
 
 namespace alba::TwoDimensions {
 
-Rectangle::Rectangle() = default;
-
 Rectangle::Rectangle(Point const& topLeft, Point const& bottomRight)
     : Quadrilateral{
           topLeft, Point(bottomRight.getX(), topLeft.getY()), bottomRight, Point(topLeft.getX(), bottomRight.getY())} {}
@@ -15,5 +13,7 @@ ostream& operator<<(ostream& out, Rectangle const& rectangle) {
         << rectangle.m_vertices[3] << "]";
     return out;
 }
+
+Rectangle::Rectangle() = default;
 
 }  // namespace alba::TwoDimensions

@@ -101,15 +101,6 @@ string GameWithMaze::getString() {
     return ss.str();
 }
 
-SetOfUnsignedIntegers GameWithMaze::getNextGrundyNumbers(Coordinate const& coordinate) {
-    SetOfUnsignedIntegers result;
-    Coordinates nextCoorindates(getNextCoordinates(coordinate));
-    transform(
-        nextCoorindates.cbegin(), nextCoorindates.cend(), inserter(result, result.begin()),
-        [&](Coordinate const& nextCoordinate) { return getGrundyNumberAt(nextCoordinate); });
-    return result;
-}
-
 GameWithMaze::Coordinates GameWithMaze::getNextCoordinates(Coordinate const& coordinate) const {
     Coordinates result;
     if (m_isBlockedMatrix.isInside(coordinate.first, coordinate.second)) {
@@ -139,6 +130,15 @@ void GameWithMaze::retrieveUpCoordinates(Coordinates& retrievedCoordinates, Coor
             break;
         }
     }
+}
+
+SetOfUnsignedIntegers GameWithMaze::getNextGrundyNumbers(Coordinate const& coordinate) {
+    SetOfUnsignedIntegers result;
+    Coordinates nextCoorindates(getNextCoordinates(coordinate));
+    transform(
+        nextCoorindates.cbegin(), nextCoorindates.cend(), inserter(result, result.begin()),
+        [&](Coordinate const& nextCoordinate) { return getGrundyNumberAt(nextCoordinate); });
+    return result;
 }
 
 }  // namespace alba::math

@@ -14,7 +14,6 @@ BoxStackingProblem::BoxStackingProblem(Boxes const& boxes) : m_boxes(boxes) {}
 BoxStackingProblem::Index BoxStackingProblem::getMaximumStackedHeight() const {
     // Time Complexity: O(n^2)
     // Auxiliary Space: O(n)
-
     Value result(0);
     if (!m_boxes.empty()) {
         Boxes possibleBoxes(getAllPossibleBoxes());
@@ -38,7 +37,6 @@ BoxStackingProblem::Index BoxStackingProblem::getMaximumStackedHeight() const {
 BoxStackingProblem::Boxes BoxStackingProblem::getBoxesWithMaximumStackedHeight() const {
     // Time Complexity: O(n^2)
     // Auxiliary Space: O(n)
-
     Boxes result;
     if (!m_boxes.empty()) {
         Boxes possibleBoxes(getAllPossibleBoxes());

@@ -13,7 +13,6 @@ namespace alba::mathHelper {
 //    double difference = getAbsoluteValue(value1-value2);
 //    return difference <= absoluteMaxValue*absoluteScaledDifferenceTolerance;
 //}
-
 AlbaNumber convertIfInfinityToNearestFiniteValue(AlbaNumber const& value) {
     AlbaNumber result(value);
     if (value.isPositiveInfinity()) {

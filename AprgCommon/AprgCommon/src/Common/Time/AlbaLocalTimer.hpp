@@ -11,9 +11,6 @@ namespace alba {
 class AlbaLocalTimer {
 public:
     AlbaLocalTimer();
-    void resetTimer();
-    void stopTimer();
-
     [[nodiscard]] size_t getElapsedTimeInNanoseconds() const;
     [[nodiscard]] size_t getElapsedTimeInMicroseconds() const;
     [[nodiscard]] size_t getElapsedTimeInMilliseconds() const;
@@ -21,6 +18,8 @@ public:
     [[nodiscard]] size_t getElapsedTimeInMinutes() const;
     [[nodiscard]] size_t getElapsedTimeInHours() const;
     [[nodiscard]] AlbaDateTime getDifferenceAsAlbaDateTime() const;
+    void resetTimer();
+    void stopTimer();
 
 private:
     LibrarySteadyTime m_time1;

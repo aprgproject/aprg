@@ -11,7 +11,6 @@ public:
     using Sample = DataSample<DIMENSIONS>;
     using Samples = std::vector<Sample>;
     using LocalStatistics = DataStatistics<DIMENSIONS>;
-
     explicit OutlierStatistics(Samples const& samples) : DataStatistics<DIMENSIONS>(samples) {}
 
     bool isAnOutlierBasedOnChauvenetCriterion(Sample const& sample) {

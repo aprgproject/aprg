@@ -55,7 +55,6 @@ bool TermsWithAssociation::operator<(TermsWithAssociation const& second) const {
 }
 
 bool TermsWithAssociation::isEmpty() const { return m_termsWithDetails.empty(); }
-
 int TermsWithAssociation::getSize() const { return m_termsWithDetails.size(); }
 
 BaseTerm const& TermsWithAssociation::getFirstTerm() const {
@@ -67,9 +66,7 @@ TermAssociationType TermsWithAssociation::getFirstAssociationType() const {
 }
 
 TermsWithDetails const& TermsWithAssociation::getTermsWithDetails() const { return m_termsWithDetails; }
-
 TermsWithDetails& TermsWithAssociation::getTermsWithDetailsReference() { return m_termsWithDetails; }
-
 void TermsWithAssociation::clear() { m_termsWithDetails.clear(); }
 
 void TermsWithAssociation::sort(bool const dontSortFirstItem) {

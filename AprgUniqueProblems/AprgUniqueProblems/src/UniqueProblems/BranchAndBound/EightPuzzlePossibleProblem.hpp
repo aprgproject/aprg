@@ -13,46 +13,46 @@ public:
     using NumberMatrix = matrix::AlbaMatrix<int>;
     using Coordinate = std::pair<int, int>;
     using SearchNodeId = int;
+
     struct PuzzleSnapshot {
         SearchNodeId previousNodeId;
         Coordinate blankTile;
         NumberMatrix numberMatrix;
     };
+
     struct SearchNode {
         SearchNodeId nodeId;
         int differenceFromTarget;
         int searchLevel;
     };
+
     struct CostComparator {
         bool operator()(SearchNode const& left, SearchNode const& right) const {
             return getCost(left) > getCost(right);
         }
     };
+
     using SearchNodeIdToSnapshot = std::vector<PuzzleSnapshot>;
     using MinCostPriorityQueue = std::priority_queue<SearchNode, std::vector<SearchNode>, CostComparator>;
+    EightPuzzlePossibleProblem(NumberMatrix const& startMatrix, NumberMatrix const& targetMatrix);
+    void printStepsToSolve();
     static constexpr std::array<int, 4> X_OFFSETS = {1, 0, -1, 0};
     static constexpr std::array<int, 4> Y_OFFSETS = {0, -1, 0, 1};
     static constexpr SearchNodeId INVALID_NODE_ID = 0;
     static constexpr SearchNodeId START_NODE_ID = 1;
 
-    EightPuzzlePossibleProblem(NumberMatrix const& startMatrix, NumberMatrix const& targetMatrix);
-
-    void printStepsToSolve();
-
 private:
     static int getCost(SearchNode const& node);
-
-    void clearIfInvalid();
-    void clear();
-    SearchNode createNode(SearchNodeId const& currentNodeId, Coordinate const& nextBlankTile, int const searchLevel);
-    SearchNodeId getNextNodeId();
     static void moveTile(NumberMatrix& matrix, Coordinate const& previousBlankTile, Coordinate const& nextBlankTile);
+    static void printMatrix(NumberMatrix const& numberMatrix);
     [[nodiscard]] bool isValidCoordinate(Coordinate const& coordinate) const;
     [[nodiscard]] int countDifference(NumberMatrix const& startMatrix, NumberMatrix const& targetMatrix) const;
     [[nodiscard]] Coordinate getBlankTile(NumberMatrix const& matrix) const;
     void printSteps(SearchNodeId const nodeId) const;
-    static void printMatrix(NumberMatrix const& numberMatrix);
-
+    SearchNode createNode(SearchNodeId const& currentNodeId, Coordinate const& nextBlankTile, int const searchLevel);
+    SearchNodeId getNextNodeId();
+    void clearIfInvalid();
+    void clear();
     NumberMatrix m_startMatrix;
     NumberMatrix m_targetMatrix;
     int m_sideSize;

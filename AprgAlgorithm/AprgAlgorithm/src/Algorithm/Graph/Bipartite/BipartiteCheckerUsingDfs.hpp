@@ -13,9 +13,7 @@ public:
     using Path = typename GraphTypes<Vertex>::Path;
     using VertexToColorMap = std::map<Vertex, bool>;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
-
     explicit BipartiteCheckerUsingDfs(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph) { initialize(); }
-
     [[nodiscard]] bool isBipartite() const { return m_isBipartite; }
 
     [[nodiscard]] bool hasFirstColor(Vertex const& vertex) const {
@@ -47,6 +45,8 @@ private:
         }
         return result;
     }
+
+    bool getTheOtherColor(bool const color) { return !color; }
 
     void initialize() {
         Vertices vertices(m_graph.getVertices());
@@ -81,8 +81,6 @@ private:
         }
     }
 
-    bool getTheOtherColor(bool const color) { return !color; }
-
     BaseUndirectedGraphWithVertex const& m_graph;
     bool m_isBipartite{true};
     CheckableVerticesWithVertex m_processedVertices;
@@ -94,11 +92,9 @@ private:
 // color. The idea is to color the starting node blue, all its neighbors red, all their neighbors blue, and so on. If at
 // some point of the search we notice that two adjacent nodes have the same color, this means that the graph is not
 // bipartite.
-
 // This algorithm always works, because when there are only two colors available,
 // the color of the starting node in a component determines the colors of all other nodes in the component.
 // It does not make any difference whether the starting node is red or blue.
-
 // Other cases:
 // Note that in the general case, it is difficult to find out if the nodes in a graph
 // can be colored using k colors so that no adjacent nodes have the same color.

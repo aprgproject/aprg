@@ -4,23 +4,23 @@
 
 namespace alba::algebra::Simplification {
 
+bool simplifyToACommonDenominatorForExpressionAndReturnIfAdditionOrSubtractionOfTermsOverTermsOccurred(
+    Expression& expression);
+bool tryToAddSubtractTermsOverTermsAndReturnIfChanged(Expression& addSubtractExpression);
+TermsWithAssociation getTermsWithAssociationAndReverseIfNeeded(
+    Expression const& expression, TermAssociationType const overallAssociation);
 void simplifyTermToACommonDenominator(Term& term);
 void simplifyTermByCombiningRadicals(Term& term);
 void simplifyTermByFactoringToNonDoubleFactors(Term& term);
 void simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(Term& term);
-
-bool simplifyToACommonDenominatorForExpressionAndReturnIfAdditionOrSubtractionOfTermsOverTermsOccurred(
-    Expression& expression);
-bool tryToAddSubtractTermsOverTermsAndReturnIfChanged(Expression& addSubtractExpression);
 void simplifyTermsWithDetailsInExpressionToACommonDenominator(Expression& expression);
 
 void simplifyAndCopyTermsAndChangeOperatorLevelIfNeeded(
     TermsWithDetails& newTermsWithDetails, OperatorLevel& mainOperatorLevel,
     TermsWithDetails const& oldTermsWithDetails);
+
 void simplifyAndCopyTermsFromAnExpressionAndChangeOperatorLevelIfNeeded(
     TermsWithDetails& newTermsWithDetails, OperatorLevel& mainOperatorLevel, Expression const& subExpression,
     TermAssociationType const subExpressionAssociation);
-TermsWithAssociation getTermsWithAssociationAndReverseIfNeeded(
-    Expression const& expression, TermAssociationType const overallAssociation);
 
 }  // namespace alba::algebra::Simplification

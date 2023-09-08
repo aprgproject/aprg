@@ -13,7 +13,6 @@ LongestBitonicSubsequence::LongestBitonicSubsequence(Values const& sequence) : m
 LongestBitonicSubsequence::Index LongestBitonicSubsequence::getLongestLength() const {
     // Time Complexity: O(n^2)
     // Auxiliary Space: O(n)
-
     Index result(0);
     if (!m_sequence.empty()) {
         IndexToIndex increasingPartialLengths(m_sequence.size(), 1);
@@ -32,7 +31,6 @@ LongestBitonicSubsequence::Index LongestBitonicSubsequence::getLongestLength() c
 LongestBitonicSubsequence::Values LongestBitonicSubsequence::getLongestSubsequence() const {
     // Time Complexity: O(n^2)
     // Auxiliary Space: O(n)
-
     Values result;
     if (!m_sequence.empty()) {
         IndexToIndex increasingPartialLengths(m_sequence.size(), 1);
@@ -50,6 +48,38 @@ LongestBitonicSubsequence::Values LongestBitonicSubsequence::getLongestSubsequen
             indexToDecreasingPreviousIndex);
     }
     return result;
+}
+
+LongestBitonicSubsequence::Values LongestBitonicSubsequence::getLongestSubsequence(
+    IndexToIndex& increasingPartialLengths, IndexToIndex& decreasingPartialLengths,
+    IndexToIndex& indexToIncreasingPreviousIndex, IndexToIndex& indexToDecreasingPreviousIndex) const {
+    Value maxLength(0);
+    Index indexOfLongestLength(0);
+    for (Index index(0); index < static_cast<Index>(m_sequence.size()); ++index) {
+        Value lengthAtIndex(increasingPartialLengths[index] + decreasingPartialLengths[index] - 1);
+        if (maxLength < lengthAtIndex) {
+            maxLength = lengthAtIndex;
+            indexOfLongestLength = index;
+        }
+    }
+
+    list<Value> sequenceInDeque;
+
+    Index traverseIndex = indexOfLongestLength;
+    for (; traverseIndex != indexToIncreasingPreviousIndex[traverseIndex];
+         traverseIndex = indexToIncreasingPreviousIndex[traverseIndex]) {
+        sequenceInDeque.emplace_front(m_sequence[traverseIndex]);
+    }
+    sequenceInDeque.emplace_front(m_sequence[traverseIndex]);
+
+    traverseIndex = indexToDecreasingPreviousIndex[indexOfLongestLength];
+    for (; traverseIndex != indexToDecreasingPreviousIndex[traverseIndex];
+         traverseIndex = indexToDecreasingPreviousIndex[traverseIndex]) {
+        sequenceInDeque.emplace_back(m_sequence[traverseIndex]);
+    }
+    sequenceInDeque.emplace_back(m_sequence[traverseIndex]);
+
+    return {sequenceInDeque.cbegin(), sequenceInDeque.cend()};
 }
 
 void LongestBitonicSubsequence::computeIncreasingPartialLengths(IndexToIndex& increasingPartialLengths) const {
@@ -102,38 +132,6 @@ void LongestBitonicSubsequence::computeDecreasingPartialLengths(
             }
         }
     }
-}
-
-LongestBitonicSubsequence::Values LongestBitonicSubsequence::getLongestSubsequence(
-    IndexToIndex& increasingPartialLengths, IndexToIndex& decreasingPartialLengths,
-    IndexToIndex& indexToIncreasingPreviousIndex, IndexToIndex& indexToDecreasingPreviousIndex) const {
-    Value maxLength(0);
-    Index indexOfLongestLength(0);
-    for (Index index(0); index < static_cast<Index>(m_sequence.size()); ++index) {
-        Value lengthAtIndex(increasingPartialLengths[index] + decreasingPartialLengths[index] - 1);
-        if (maxLength < lengthAtIndex) {
-            maxLength = lengthAtIndex;
-            indexOfLongestLength = index;
-        }
-    }
-
-    list<Value> sequenceInDeque;
-
-    Index traverseIndex = indexOfLongestLength;
-    for (; traverseIndex != indexToIncreasingPreviousIndex[traverseIndex];
-         traverseIndex = indexToIncreasingPreviousIndex[traverseIndex]) {
-        sequenceInDeque.emplace_front(m_sequence[traverseIndex]);
-    }
-    sequenceInDeque.emplace_front(m_sequence[traverseIndex]);
-
-    traverseIndex = indexToDecreasingPreviousIndex[indexOfLongestLength];
-    for (; traverseIndex != indexToDecreasingPreviousIndex[traverseIndex];
-         traverseIndex = indexToDecreasingPreviousIndex[traverseIndex]) {
-        sequenceInDeque.emplace_back(m_sequence[traverseIndex]);
-    }
-    sequenceInDeque.emplace_back(m_sequence[traverseIndex]);
-
-    return {sequenceInDeque.cbegin(), sequenceInDeque.cend()};
 }
 
 }  // namespace alba

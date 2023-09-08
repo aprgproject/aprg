@@ -29,9 +29,9 @@ public:
     class FrequencyDatabase {
     public:
         FrequencyDatabase(int const numberOfQuestions, int const numberOfChoices);
+        [[nodiscard]] int getFrequencyOfAnswer(int const questionIndex, int const answerIndex) const;
         void initialize();
         void addAnswer(int const questionIndex, int const answerIndex);
-        [[nodiscard]] int getFrequencyOfAnswer(int const questionIndex, int const answerIndex) const;
 
     private:
         int m_numberOfQuestions;
@@ -44,10 +44,10 @@ public:
 
     public:
         static Status getInstance();
+        [[nodiscard]] bool isStatusNoError() const;
         [[nodiscard]] std::string getStatusString() const;
         void setError(std::string const& error);
         void clearErrors();
-        [[nodiscard]] bool isStatusNoError() const;
 
     private:
         alba::stringHelper::strings m_errors;
@@ -81,24 +81,58 @@ public:
     using DequeOfPoints = std::deque<Point>;
     using EndPointIndexes = std::pair<int, int>;
     using CountToEndPointIndexesMultiMap = std::multimap<int, EndPointIndexes>;
-
     SOOSA(SoosaConfiguration const& soosaConfiguration, InputConfiguration const& inputConfiguration);
     [[nodiscard]] int getNumberOfAnswers() const;
     [[nodiscard]] int getAnswerToQuestion(int const questionIndex) const;
     void process();
 
 private:
-    void processDirectory(std::string const& directoryPath);
-    void processFile(std::string const& filePath);
-    void processBitmapFile(Bitmap const& bitmap);
-    void performStepsWhenNumberOfAnswersNotEqualToNumberOfQuestions() const;
-    void saveToFrequencyDatabase();
-
     // find line
     [[nodiscard]] static bool areLinesValid(
         Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine);
     [[nodiscard]] static bool isConsideredHorizontal(double const aCoefficient, double const bCoefficient);
     [[nodiscard]] static bool isConsideredVertical(double const aCoefficient, double const bCoefficient);
+    [[nodiscard]] static int getRetainSizeInLineModel(int const size, double const removalRatio);
+    [[nodiscard]] static double getHeight(TwoDimensionSamples const& barPoints);
+    [[nodiscard]] static OneDimensionSamples getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints);
+    static RangeOfDoubles getMinMaxCriteriaForBar(
+        OneDimensionStatistics& firstGroupStatistics, OneDimensionStatistics& secondGroupStatistics);
+    static OneDimensionKMeans getKMeansForWidths(PointAndWidthPairs const& pointAndWidthPairs);
+    static std::string getPrintableStringForPercentage(double const numerator, double const denominator);
+    static BitmapXY convertToBitmapXY(Point const& point);
+    static BitmapXY convertToBitmapXY(TwoDimensionSample const& sample);
+    static Point convertToPoint(BitmapXY const& bitmapXY);
+    static Point convertToPoint(TwoDimensionSample const& sample);
+    static TwoDimensionSample convertToTwoDimensionSample(Point const& point);
+    static RangeOfDoubles getMinMaxRangeOfSamples(OneDimensionSamples const& samples);
+
+    static void updateSamplesForLineModeling(
+        TwoDimensionSamples& samplesLineModeling, ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap,
+        double const maxAcceptableSquareError);
+
+    static void retrieveBarPointsThatFitAndSaveToKMeans(
+        TwoDimensionKMeans& kMeansForBarPoints, PointAndWidthPairs const& pointAndWidthPairs,
+        RangeOfDoubles const& minMaxCriteriaForBar);
+
+    static void saveQuestionBarCoordinatesFromKMeansWithBarPoints(
+        QuestionBarCoordinates& questionBarCoordinates, TwoDimensionKMeans const& kMeansForBarPoints,
+        int const numberQuestionsInColumn);
+
+    static void removeBarPointsWithFewHeightPointsCount(
+        TwoDimensionKMeans& kMeansForBarPoints, int const numberQuestionsInColumn,
+        CountToEndPointIndexesMultiMap const& countToEndPointsIndexesMultiMap);
+
+    // utilities
+    [[nodiscard]] bool isBlackAt(BitmapSnippet const& snippet, BitmapXY const bitmapXy) const;
+
+    [[nodiscard]] double getShadePercentage(
+        BitmapSnippet const& snippet, Point const& leftPoint, Point const& rightPoint, double const radius,
+        int const choiceIndex) const;
+
+    [[nodiscard]] double getRadiusForChoiceChecking(
+        QuestionBarCoordinate const& leftCoordinate, QuestionBarCoordinate const& rightCoordinate) const;
+    [[nodiscard]] double getMaximumDistanceForBetweenBarHeights(double const previousHeight) const;
+    [[nodiscard]] int getMaximumLineAndBarWidth(BitmapSnippet const& snippet) const;
     [[nodiscard]] Line findLeftLine(BitmapSnippet const& snippet) const;
     [[nodiscard]] Line findRightLine(BitmapSnippet const& snippet) const;
     [[nodiscard]] Line findTopLine(BitmapSnippet const& snippet) const;
@@ -111,73 +145,52 @@ private:
     [[nodiscard]] Line findRightLineUsingStartingLine(BitmapSnippet const& snippet, Line const& startingLine) const;
     [[nodiscard]] Line findVerticalLineUsingStartingLine(
         BitmapSnippet const& snippet, Line const& startingLine, RangeOfInts const& rangeForX) const;
-
     // Line modeling functions
     [[nodiscard]] Line getLeftLineModel(TwoDimensionSamples& samples) const;
     [[nodiscard]] Line getRightLineModel(TwoDimensionSamples& samples) const;
     [[nodiscard]] Line getTopLineModel(TwoDimensionSamples& samples) const;
     [[nodiscard]] Line getBottomLineModel(TwoDimensionSamples& samples) const;
     [[nodiscard]] Line getLineModel(TwoDimensionSamples& samples) const;
-    void removeFurthestSamplesUntilLineOrientationMatch(
-        TwoDimensionSamples& samples, LineOrientation const lineOrientation) const;
-    void removeErroneousSamplesInLine(TwoDimensionSamples& samples) const;
     [[nodiscard]] DoubleCollection getAcceptableSquareErrorCollectionUsingRemovalRatio(
         ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap) const;
-    [[nodiscard]] static int getRetainSizeInLineModel(int const size, double const removalRatio);
-    static void updateSamplesForLineModeling(
-        TwoDimensionSamples& samplesLineModeling, ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap,
-        double const maxAcceptableSquareError);
 
-    // Column functions
-    void processTwoColumns(
-        BitmapSnippet const& globalSnippet, Line const& leftLine, Line const& rightLine, Line const& topLine,
-        Line const& bottomLine);
-    void processOneColumn(
-        BitmapSnippet const& globalSnippet, Line const& leftLine, Line const& rightLine, Line const& topLine,
-        Line const& bottomLine);
-    void processColumn(
-        int& questionNumber, BitmapSnippet const& snippet, Line const& leftLine, Line const& rightLine,
-        Line const& topLine, Line const& bottomLine, int const columnNumber);
-    void processQuestions(
-        int& questionNumber, BitmapSnippet const& snippet, QuestionBarCoordinates const& questionBarsOnTheLeft,
-        QuestionBarCoordinates const& questionsBarsOnTheRight, int const columnNumber,
-        int const numberQuestionsInColumn);
     [[nodiscard]] Answers getAnswersAtQuestion(
         BitmapSnippet const& snippet, QuestionBarCoordinate const& leftCoordinate,
         QuestionBarCoordinate const& rightCoordinate) const;
-    [[nodiscard]] double getShadePercentage(
-        BitmapSnippet const& snippet, Point const& leftPoint, Point const& rightPoint, double const radius,
-        int const choiceIndex) const;
-    [[nodiscard]] double getRadiusForChoiceChecking(
-        QuestionBarCoordinate const& leftCoordinate, QuestionBarCoordinate const& rightCoordinate) const;
+
     [[nodiscard]] Point getCenterOfCircleForChoiceChecking(
         BitmapSnippet const& snippet, Point const& leftPoint, Point const& rightPoint, double const radius,
         int const choiceIndex) const;
+
     [[nodiscard]] QuestionBarCoordinates getQuestionBarCoordinatesFromLine(
         BitmapSnippet const& snippet, Line const& line, Point const& startPoint, Point const& endPoint,
         int const numberQuestionsInColumn) const;
-    static void retrieveBarPointsThatFitAndSaveToKMeans(
-        TwoDimensionKMeans& kMeansForBarPoints, PointAndWidthPairs const& pointAndWidthPairs,
-        RangeOfDoubles const& minMaxCriteriaForBar);
-    static void saveQuestionBarCoordinatesFromKMeansWithBarPoints(
-        QuestionBarCoordinates& questionBarCoordinates, TwoDimensionKMeans const& kMeansForBarPoints,
-        int const numberQuestionsInColumn);
 
     // Widths functions
     [[nodiscard]] RangeOfDoubles getMinMaxCriteriaForBar(PointAndWidthPairs const& pointAndWidthPairs) const;
-    static RangeOfDoubles getMinMaxCriteriaForBar(
-        OneDimensionStatistics& firstGroupStatistics, OneDimensionStatistics& secondGroupStatistics);
-    static OneDimensionKMeans getKMeansForWidths(PointAndWidthPairs const& pointAndWidthPairs);
     [[nodiscard]] PointAndWidthPairs getAcceptablePointAndWidthPairs(
         BitmapSnippet const& snippet, Line const& line, Point const& startPoint, Point const& endPoint) const;
     [[nodiscard]] Point getNearestBlackPointFromLine(
         BitmapSnippet const& snippet, Line const& line, Point const& pointInLine) const;
+
     [[nodiscard]] Point getLeftOrRightMostBlackPoint(
         BitmapSnippet const& snippet, Point const& nearestBlackPoint, Line const& perpendicularLine,
         int const maxLineAndBarWidth, int const sign) const;
+
+    // output related functions
+    [[nodiscard]] std::string getCsvFilePath(std::string const& path) const;
+    [[nodiscard]] std::string getReportHtmlFilePath(std::string const& path) const;
+    CountToEndPointIndexesMultiMap getHeightPointsCountToEndPointIndexesMultimap(
+        TwoDimensionKMeans& kMeansForBarPoints) const;
+    void performStepsWhenNumberOfAnswersNotEqualToNumberOfQuestions() const;
+    void removeFurthestSamplesUntilLineOrientationMatch(
+        TwoDimensionSamples& samples, LineOrientation const lineOrientation) const;
+    void removeErroneousSamplesInLine(TwoDimensionSamples& samples) const;
+
     void addAndRetainWidthsIfPossible(
         OneDimensionKMeans& kMeansForWidths, OneDimensionStatistics& groupStatistics,
         double const acceptableSdOverMeanDeviation) const;
+
     void addPointAndWidthPairIfAcceptable(
         PointAndWidthPairs& pointAndWidthPairs, BitmapSnippet const& snippet, Line const& line,
         Point const& pointInLine) const;
@@ -185,40 +198,41 @@ private:
     // Height functions
     void removeBarPointsWithFewHeightPoints(
         TwoDimensionKMeans& kMeansForBarPoints, int const numberQuestionsInColumn) const;
-    CountToEndPointIndexesMultiMap getHeightPointsCountToEndPointIndexesMultimap(
-        TwoDimensionKMeans& kMeansForBarPoints) const;
-    [[nodiscard]] double getMaximumDistanceForBetweenBarHeights(double const previousHeight) const;
-    static void removeBarPointsWithFewHeightPointsCount(
-        TwoDimensionKMeans& kMeansForBarPoints, int const numberQuestionsInColumn,
-        CountToEndPointIndexesMultiMap const& countToEndPointsIndexesMultiMap);
     void removeBarPointsToGetConsistentHeight(
         TwoDimensionKMeans& kMeansForBarPoints, int const numberQuestionsInColumn) const;
+
     void addAndRetainBarPointsIfPossible(
         TwoDimensionKMeans& kMeansForBarPoints, GroupOfTwoDimensionSamples const& listOfGroupOfBarPoints,
         int const indexToRemove) const;
-    [[nodiscard]] static OneDimensionSamples getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints);
-    [[nodiscard]] static double getHeight(TwoDimensionSamples const& barPoints);
 
-    // output related functions
-    [[nodiscard]] std::string getCsvFilePath(std::string const& path) const;
-    [[nodiscard]] std::string getReportHtmlFilePath(std::string const& path) const;
-    static std::string getPrintableStringForPercentage(double const numerator, double const denominator);
-    void setAnswerToQuestionInColumn(int const columnNumber, int const questionOffsetInColumn, int const answer);
     void saveDataToCsvFile(std::string const& processedFilePath) const;
     void saveHeadersToCsvFile() const;
     void saveOutputHtmlFile(std::string const& processedFilePath) const;
     void saveTableToOutputHtmlFile(std::ofstream& reportHtmlFileStream) const;
+    void processDirectory(std::string const& directoryPath);
+    void processFile(std::string const& filePath);
+    void processBitmapFile(Bitmap const& bitmap);
+    void saveToFrequencyDatabase();
 
-    // utilities
-    [[nodiscard]] bool isBlackAt(BitmapSnippet const& snippet, BitmapXY const bitmapXy) const;
-    [[nodiscard]] int getMaximumLineAndBarWidth(BitmapSnippet const& snippet) const;
-    static BitmapXY convertToBitmapXY(Point const& point);
-    static BitmapXY convertToBitmapXY(TwoDimensionSample const& sample);
-    static Point convertToPoint(BitmapXY const& bitmapXY);
-    static Point convertToPoint(TwoDimensionSample const& sample);
-    static TwoDimensionSample convertToTwoDimensionSample(Point const& point);
-    static RangeOfDoubles getMinMaxRangeOfSamples(OneDimensionSamples const& samples);
+    // Column functions
+    void processTwoColumns(
+        BitmapSnippet const& globalSnippet, Line const& leftLine, Line const& rightLine, Line const& topLine,
+        Line const& bottomLine);
 
+    void processOneColumn(
+        BitmapSnippet const& globalSnippet, Line const& leftLine, Line const& rightLine, Line const& topLine,
+        Line const& bottomLine);
+
+    void processColumn(
+        int& questionNumber, BitmapSnippet const& snippet, Line const& leftLine, Line const& rightLine,
+        Line const& topLine, Line const& bottomLine, int const columnNumber);
+
+    void processQuestions(
+        int& questionNumber, BitmapSnippet const& snippet, QuestionBarCoordinates const& questionBarsOnTheLeft,
+        QuestionBarCoordinates const& questionsBarsOnTheRight, int const columnNumber,
+        int const numberQuestionsInColumn);
+
+    void setAnswerToQuestionInColumn(int const columnNumber, int const questionOffsetInColumn, int const answer);
     SoosaConfiguration m_soosaConfiguration;
     InputConfiguration m_inputConfiguration;
     int m_numberOfRespondents{};

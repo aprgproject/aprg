@@ -3,7 +3,6 @@
 namespace alba::algebra {
 
 TermSet const& ExpressionAndFunctionsRetriever::getExpressionsAndFunctions() const { return m_expressionsAndFunctions; }
-
 void ExpressionAndFunctionsRetriever::retrieveFromPolynomial(Polynomial const&) {}
 
 void ExpressionAndFunctionsRetriever::retrieveFromExpression(Expression const& expression) {

@@ -43,7 +43,6 @@ TEST(QuickSorterWithIterativeApproachTest, SortWorksOnCharactersUsingExample2) {
 }
 
 // CANNOT SORT STD::LIST, actually it might be possible if we change indexes to iterators
-
 TEST(QuickSorterWithIterativeApproachTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
     IntegersSorter sorter(PivotType::LowestIndex);
     testSortUsingExample1WithPositiveAndNegativeIntegers<IntegersSorter, Integers>(sorter);

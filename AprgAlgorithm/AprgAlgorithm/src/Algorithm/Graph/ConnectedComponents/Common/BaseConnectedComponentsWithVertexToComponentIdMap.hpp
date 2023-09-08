@@ -9,13 +9,11 @@ template <typename Vertex, typename Graph>
 class BaseConnectedComponentsWithVertexToComponentIdMap : public BaseConnectedComponents<Vertex> {
 public:
     using VertexToIntMap = typename GraphTypes<Vertex>::VertexToIntMap;
-
-    explicit BaseConnectedComponentsWithVertexToComponentIdMap(Graph const& graph) : m_graph(graph) {}
-
     ~BaseConnectedComponentsWithVertexToComponentIdMap() override =
         default;  // no need for virtual destructor because base destructor is virtual (similar to other virtual
-                  // functions)
+    explicit BaseConnectedComponentsWithVertexToComponentIdMap(Graph const& graph) : m_graph(graph) {}
 
+    // functions)
     [[nodiscard]] bool isConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
         auto it1 = m_vertexToComponentIdMap.find(vertex1);
         auto it2 = m_vertexToComponentIdMap.find(vertex2);

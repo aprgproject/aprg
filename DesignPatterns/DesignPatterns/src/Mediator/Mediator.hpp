@@ -9,17 +9,13 @@ class Mediator;
 // Colleague classes
 // each colleague communicates with its mediator whenever
 // it would have otherwise communicated with another colleague
-
 class Colleague {
 public:
-    Colleague(Mediator& mediator, const int id) : m_mediator(mediator), m_id(id) {}
-
     virtual ~Colleague() = default;
-
-    [[nodiscard]] int getID() const { return m_id; }
-
+    Colleague(Mediator& mediator, const int id) : m_mediator(mediator), m_id(id) {}
     virtual void send(std::string const&) = 0;
     virtual void receive(std::string const&) = 0;
+    [[nodiscard]] int getID() const { return m_id; }
 
 protected:
     Mediator& m_mediator;
@@ -29,18 +25,15 @@ protected:
 class ConcreteColleague : public Colleague {
 public:
     ConcreteColleague(Mediator& mediator, int const id) : Colleague(mediator, id) {}
-
     void send(std::string const& message) override;
     void receive(std::string const& message) override;
 };
 
 // Mediator
 // defines an interface for communicating with Colleague objects
-
 class Mediator {
 public:
     virtual ~Mediator() = default;
-
     virtual void add(Colleague& colleague) = 0;
     virtual void distribute(Colleague const& sender, std::string const& message) = 0;
 
@@ -51,7 +44,6 @@ protected:
 // Concrete Mediator
 // implements cooperative behavior by coordinating Colleague objects
 // and knows its colleagues
-
 class ConcreteMediator : public Mediator {
 public:
     void add(Colleague& colleague) override { m_colleagueReferences.emplace_back(colleague); }

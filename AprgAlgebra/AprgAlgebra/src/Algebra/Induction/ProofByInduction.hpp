@@ -14,7 +14,6 @@ public:
 
     [[nodiscard]] bool isCorrectOnASpecificValue(AlbaNumber const& value) const;
     [[nodiscard]] bool isCorrectOnInductionStep() const;
-
     std::string m_variableName;
     Term m_expressionForEachStep;
     Operator m_accumulateOperator;

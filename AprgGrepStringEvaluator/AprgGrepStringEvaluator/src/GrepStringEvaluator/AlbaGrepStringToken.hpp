@@ -9,14 +9,17 @@ namespace alba {
 class AlbaGrepStringToken {
 public:
     enum class TokenType {
+
         Dummy,
         Operator,
         StringToFind,
         Result,
+
     };
-    AlbaGrepStringToken();
+
     explicit AlbaGrepStringToken(std::string const& stringToFind);
     explicit AlbaGrepStringToken(AlbaGrepStringOperatorType const operatorType);
+    AlbaGrepStringToken();
     AlbaGrepStringToken(AlbaGrepStringOperatorType const operatorType, std::string const& operatorString);
     [[nodiscard]] bool isToBeIgnored() const;
     [[nodiscard]] bool isOperator() const;
@@ -25,11 +28,11 @@ public:
     [[nodiscard]] bool isString() const;
     [[nodiscard]] bool isBiDirectionalOperation() const;
     [[nodiscard]] bool isPrefixOperation() const;
+    [[nodiscard]] int getOperatorPriority() const;
     [[nodiscard]] TokenType getTokenType() const;
     [[nodiscard]] AlbaGrepStringOperatorType getOperatorType() const;
     [[nodiscard]] std::string getTokenTypeString() const;
     [[nodiscard]] std::string getStringToFind() const;
-    [[nodiscard]] int getOperatorPriority() const;
     void appendToString(char const character);
     void setOperatorType(AlbaGrepStringOperatorType const type);
 

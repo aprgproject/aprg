@@ -13,11 +13,9 @@ public:
     // Another problem that can be solved using the two pointers method is the following problem,
     // also known as the 2SUM problem: given an array of n numbers and a target sum x,
     // find two array values such that their sum is x, or report that no such values exist.
-
     using Index = int;
     using Value = typename Values::value_type;
     using ValuePair = std::pair<Value, Value>;
-
     explicit FindAPairInAContainerWithSumClosestToAValue(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
     [[nodiscard]] ValuePair getValuePairWithSumClosestToAValue(Value const& targetSum) const {
@@ -31,7 +29,6 @@ private:
         ValuePair result{};
         if (!m_sortedValues.empty()) {
             // similar to TwoSum
-
             Value minimumDeviation(std::numeric_limits<Value>::max());
             Index lowerIndex = lowestIndex;
             Index higherIndex = highestIndex;

@@ -41,13 +41,9 @@ bool Equation::isEquationSatisfied() const {
 }
 
 EquationOperator const& Equation::getEquationOperator() const { return m_equationOperator; }
-
 Term const& Equation::getLeftHandTerm() const { return m_leftHandTerm; }
-
 Term const& Equation::getRightHandTerm() const { return m_rightHandTerm; }
-
 Term& Equation::getLeftHandTermReference() { return m_leftHandTerm; }
-
 Term& Equation::getRightHandTermReference() { return m_rightHandTerm; }
 
 void Equation::simplify() {

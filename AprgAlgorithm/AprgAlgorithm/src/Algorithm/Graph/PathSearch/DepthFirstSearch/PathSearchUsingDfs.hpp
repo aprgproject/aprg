@@ -70,6 +70,16 @@ private:
     using BaseClass::clear;
     using BaseClass::initializeWithStartVertices;
 
+    static InitializeDataFunction getEmptyInitializeDataFunction() {
+        static InitializeDataFunction emptyInitializeDataFunction = [](Vertices const&) {};
+        return emptyInitializeDataFunction;
+    }
+
+    static UpdateDataFunction getEmptyUpdateDataFunction() {
+        static UpdateDataFunction noUpdateDataFunction = [](Vertex const&, Vertex const&) {};
+        return noUpdateDataFunction;
+    }
+
     void traverseUsingDfs(Vertex const& vertex) {
         b_processedVertices.putVertex(vertex);
         for (Vertex const& adjacentVertex : b_graph.getAdjacentVerticesAt(vertex)) {
@@ -80,16 +90,6 @@ private:
                 traverseUsingDfs(adjacentVertex);
             }
         }
-    }
-
-    static InitializeDataFunction getEmptyInitializeDataFunction() {
-        static InitializeDataFunction emptyInitializeDataFunction = [](Vertices const&) {};
-        return emptyInitializeDataFunction;
-    }
-
-    static UpdateDataFunction getEmptyUpdateDataFunction() {
-        static UpdateDataFunction noUpdateDataFunction = [](Vertex const&, Vertex const&) {};
-        return noUpdateDataFunction;
     }
 
     BaseGraphWithVertex const& b_graph;

@@ -14,10 +14,8 @@ using namespace std;
 namespace alba::algebra {
 
 Term::Term() : m_type(TermType::Empty), m_isSimplified(false), m_baseTermDataPointer(nullptr) {}
-
 Term::Term(TermType const type, bool const isSimplified, BaseTermDataPointer&& baseTermDataPointer)  // for move
     : m_type(type), m_isSimplified(isSimplified), m_baseTermDataPointer(std::move(baseTermDataPointer)) {}
-
 Term::Term(AlbaNumber const& number)
     : m_type(TermType::Constant), m_isSimplified(false), m_baseTermDataPointer(make_unique<Constant>(number)) {}
 
@@ -33,22 +31,16 @@ Term::Term(string const& stringAsParameter)
 
 Term::Term(Constant const& constant)
     : m_type(TermType::Constant), m_isSimplified(false), m_baseTermDataPointer(make_unique<Constant>(constant)) {}
-
 Term::Term(Variable const& variable)
     : m_type(TermType::Variable), m_isSimplified(false), m_baseTermDataPointer(make_unique<Variable>(variable)) {}
-
 Term::Term(Operator const& operatorTerm)
     : m_type(TermType::Operator), m_isSimplified(false), m_baseTermDataPointer(make_unique<Operator>(operatorTerm)) {}
-
 Term::Term(Monomial const& monomial)
     : m_type(TermType::Monomial), m_isSimplified(false), m_baseTermDataPointer(make_unique<Monomial>(monomial)) {}
-
 Term::Term(Polynomial const& polynomial)
     : m_type(TermType::Polynomial), m_isSimplified(false), m_baseTermDataPointer(make_unique<Polynomial>(polynomial)) {}
-
 Term::Term(Expression const& expression)
     : m_type(TermType::Expression), m_isSimplified(false), m_baseTermDataPointer(make_unique<Expression>(expression)) {}
-
 Term::Term(Function const& function)
     : m_type(TermType::Function), m_isSimplified(false), m_baseTermDataPointer(make_unique<Function>(function)) {}
 
@@ -132,21 +124,13 @@ bool Term::isEmpty() const {
 }
 
 bool Term::isConstant() const { return TermType::Constant == m_type; }
-
 bool Term::isVariable() const { return TermType::Variable == m_type; }
-
 bool Term::isOperator() const { return TermType::Operator == m_type; }
-
 bool Term::isMonomial() const { return TermType::Monomial == m_type; }
-
 bool Term::isPolynomial() const { return TermType::Polynomial == m_type; }
-
 bool Term::isExpression() const { return TermType::Expression == m_type; }
-
 bool Term::isFunction() const { return TermType::Function == m_type; }
-
 bool Term::isSimplified() const { return m_isSimplified; }
-
 TermType Term::getTermType() const { return m_type; }
 
 Constant const& Term::getAsConstant() const {
@@ -313,7 +297,6 @@ void Term::sort() {
 }
 
 void Term::setAsSimplified() { m_isSimplified = true; }
-
 void Term::clearSimplifiedFlag() { m_isSimplified = false; }
 
 void Term::clearAllInnerSimplifiedFlags() {

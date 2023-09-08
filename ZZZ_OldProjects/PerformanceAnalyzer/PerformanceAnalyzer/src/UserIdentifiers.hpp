@@ -6,13 +6,13 @@
 namespace alba {
 
 struct UserIdentifiers {
-    UserIdentifiers();
     explicit UserIdentifiers(std::string const& lineInLogs);
-    void saveUserIndentfiers(std::string const& lineInLogs);
+    UserIdentifiers();
     bool operator<(UserIdentifiers const& userIdentifiers) const;
     [[nodiscard]] unsigned int getNbccId() const;
     [[nodiscard]] unsigned int getCrnccId() const;
     [[nodiscard]] unsigned int getTransactionId() const;
+    void saveUserIndentfiers(std::string const& lineInLogs);
 
 private:
     void saveNbccId(std::string const& lineInLogs);

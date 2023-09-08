@@ -13,29 +13,17 @@ using TrieForTest = RWayTrieUsingLinkedArrays<int>;
 }  // namespace
 
 TEST(RWayTrieUsingLinkedArraysTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingLinkedArraysTest, IsEmptyWorksWhenNotEmpty) { testIsEmptyWhenNotEmptyWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingLinkedArraysTest, DoesContainWorks) { testDoesContainWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingLinkedArraysTest, GetSizeWorksWhenEmpty) { testGetSizeWhenEmptyWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingLinkedArraysTest, GetSizeWorksWhenNotEmpty) { testGetSizeWhenNotEmptyWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingLinkedArraysTest, GetWorks) { testGetWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingLinkedArraysTest, GetLongestPrefixWorks) { testGetLongestPrefixOfWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingLinkedArraysTest, PutWorks) { testPutWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingLinkedArraysTest, DeleteBasedOnKeyWorks) { testDeleteBasedOnKeyWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingLinkedArraysTest, GetKeysWorks) { testGetKeysWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingLinkedArraysTest, GetAllKeysWithPrefixWorks) { testGetAllKeysWithPrefixWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingLinkedArraysTest, GetAllKeysThatMatchWorks) { testGetAllKeysThatMatchWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingLinkedArraysTest, Example1Works) { testExample1WithInt<TrieForTest>(); }
 
 TEST(RWayTrieUsingLinkedArraysTest, GetWhenEmptyStringWorks) {

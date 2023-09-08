@@ -13,15 +13,10 @@ using StackForTest = FixedSizeStack<int, 10>;
 }  // namespace
 
 TEST(FixedSizeStackTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<StackForTest>(); }
-
 TEST(FixedSizeStackTest, IsEmptyWorksWhenNotEmpty) { testIsEmptyWhenNotEmptyWithInt<StackForTest>(); }
-
 TEST(FixedSizeStackTest, GetSizeWorksWhenEmpty) { testGetSizeWhenEmptyWithInt<StackForTest>(); }
-
 TEST(FixedSizeStackTest, GetSizeWorksWhenNotEmpty) { testGetSizeWhenNotEmptyWithInt<StackForTest>(); }
-
 TEST(FixedSizeStackTest, PushWorks) { testPushWithInt<StackForTest>(); }
-
 TEST(FixedSizeStackTest, PopWorks) { testPopWithInt<StackForTest>(); }
 
 // disabled because it takes too long

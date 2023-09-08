@@ -7,8 +7,6 @@ using namespace std;
 
 namespace alba::AprgBitmap {
 
-BitmapSnippet::BitmapSnippet() = default;
-
 BitmapSnippet::BitmapSnippet(
     BitmapXY const topLeftCornerPosition, BitmapXY const bottomRightCornerPosition,
     BitmapConfiguration const& configuration)
@@ -18,39 +16,53 @@ BitmapSnippet::BitmapSnippet(
     loadPixelDataFromFileInConfiguration();
 }
 
-BitmapConfiguration BitmapSnippet::getConfiguration() const { return m_configuration; }
-
 bool BitmapSnippet::isPositionInsideTheSnippet(BitmapXY const position) const {
     return m_topLeftCorner.getX() <= position.getX() && m_topLeftCorner.getY() <= position.getY() &&
            m_bottomRightCorner.getX() >= position.getX() && m_bottomRightCorner.getY() >= position.getY();
 }
 
-BitmapXY BitmapSnippet::getTopLeftCorner() const { return m_topLeftCorner; }
-
-BitmapXY BitmapSnippet::getBottomRightCorner() const { return m_bottomRightCorner; }
+bool BitmapSnippet::isBlackAt(BitmapXY const position) const {
+    // this is the only assumption, colors can depend on numberofbits of pixel and color table
+    return (m_configuration.getColorUsingPixelValue(getPixelAt(position)) == 0x00000000);
+}
 
 int BitmapSnippet::getDeltaX() const { return m_bottomRightCorner.getX() - m_topLeftCorner.getX(); }
-
 int BitmapSnippet::getDeltaY() const { return m_bottomRightCorner.getY() - m_topLeftCorner.getY(); }
-
 int BitmapSnippet::getNumberOfPixelsInSnippet() const { return getDeltaX() * getDeltaY(); }
-
 int BitmapSnippet::getPixelDataSize() const { return m_pixelData.getSize(); }
+BitmapConfiguration BitmapSnippet::getConfiguration() const { return m_configuration; }
+BitmapXY BitmapSnippet::getTopLeftCorner() const { return m_topLeftCorner; }
+BitmapXY BitmapSnippet::getBottomRightCorner() const { return m_bottomRightCorner; }
+PixelData const& BitmapSnippet::getPixelDataConstReference() const { return m_pixelData; }
 
-void BitmapSnippet::clear() { m_pixelData.clear(); }
-
-void BitmapSnippet::clearAndPutOneColorOnWholeSnippet(uint8_t const colorByte) {
-    clear();
-
-    int byteOffsetInXForStart =
-        static_cast<int>(m_configuration.convertPixelsToBytesRoundedToFloor(m_topLeftCorner.getX()));
-    int byteOffsetInXForEnd =
-        static_cast<int>(m_configuration.convertPixelsToBytesRoundedToFloor(m_bottomRightCorner.getX()));
-    int numberOfBytesToBeCopiedForX =
-        static_cast<int>(m_configuration.getOneRowSizeInBytesFromBytes(byteOffsetInXForStart, byteOffsetInXForEnd));
-    int yDifference = static_cast<int>(m_bottomRightCorner.getY()) - static_cast<int>(m_topLeftCorner.getY()) + 1;
-    m_pixelData.resize(numberOfBytesToBeCopiedForX * yDifference, colorByte);
+uint32_t BitmapSnippet::getPixelAt(BitmapXY const position) const {
+    uint32_t result(0);
+    if (isPositionInsideTheSnippet(position)) {
+        int index = calculateIndexInPixelData(position);
+        auto const* reader = static_cast<uint8_t const*>(m_pixelData.getConstantBufferPointer());
+        if (m_configuration.getNumberOfBitsPerPixel() < AlbaBitConstants::BYTE_SIZE_IN_BITS) {
+            result = getPixelAtForPixelInAByte(reader, index, position);
+        } else {
+            result = getPixelAtForMultipleBytePixels(reader, index);
+        }
+    }
+    return result;
 }
+
+uint32_t BitmapSnippet::getColorAt(BitmapXY const position) const {
+    return m_configuration.getColorUsingPixelValue(getPixelAt(position));
+}
+
+void BitmapSnippet::traverse(TraverseFunction const& traverseFunction) const {
+    for (int y = m_topLeftCorner.getY(); y <= m_bottomRightCorner.getY(); ++y) {
+        for (int x = m_topLeftCorner.getX(); x <= m_bottomRightCorner.getX(); ++x) {
+            BitmapXY currentPoint(x, y);
+            traverseFunction(currentPoint, getPixelAt(currentPoint));
+        }
+    }
+}
+
+PixelData& BitmapSnippet::getPixelDataReference() { return m_pixelData; }
 
 void BitmapSnippet::loadPixelDataFromFileInConfiguration() {
     if (m_configuration.isPositionWithinTheBitmap(m_topLeftCorner) &&
@@ -80,31 +92,19 @@ void BitmapSnippet::loadPixelDataFromFileInConfiguration() {
     }
 }
 
-PixelData& BitmapSnippet::getPixelDataReference() { return m_pixelData; }
+void BitmapSnippet::clear() { m_pixelData.clear(); }
 
-PixelData const& BitmapSnippet::getPixelDataConstReference() const { return m_pixelData; }
+void BitmapSnippet::clearAndPutOneColorOnWholeSnippet(uint8_t const colorByte) {
+    clear();
 
-uint32_t BitmapSnippet::getPixelAt(BitmapXY const position) const {
-    uint32_t result(0);
-    if (isPositionInsideTheSnippet(position)) {
-        int index = calculateIndexInPixelData(position);
-        auto const* reader = static_cast<uint8_t const*>(m_pixelData.getConstantBufferPointer());
-        if (m_configuration.getNumberOfBitsPerPixel() < AlbaBitConstants::BYTE_SIZE_IN_BITS) {
-            result = getPixelAtForPixelInAByte(reader, index, position);
-        } else {
-            result = getPixelAtForMultipleBytePixels(reader, index);
-        }
-    }
-    return result;
-}
-
-uint32_t BitmapSnippet::getColorAt(BitmapXY const position) const {
-    return m_configuration.getColorUsingPixelValue(getPixelAt(position));
-}
-
-bool BitmapSnippet::isBlackAt(BitmapXY const position) const {
-    // this is the only assumption, colors can depend on numberofbits of pixel and color table
-    return (m_configuration.getColorUsingPixelValue(getPixelAt(position)) == 0x00000000);
+    int byteOffsetInXForStart =
+        static_cast<int>(m_configuration.convertPixelsToBytesRoundedToFloor(m_topLeftCorner.getX()));
+    int byteOffsetInXForEnd =
+        static_cast<int>(m_configuration.convertPixelsToBytesRoundedToFloor(m_bottomRightCorner.getX()));
+    int numberOfBytesToBeCopiedForX =
+        static_cast<int>(m_configuration.getOneRowSizeInBytesFromBytes(byteOffsetInXForStart, byteOffsetInXForEnd));
+    int yDifference = static_cast<int>(m_bottomRightCorner.getY()) - static_cast<int>(m_topLeftCorner.getY()) + 1;
+    m_pixelData.resize(numberOfBytesToBeCopiedForX * yDifference, colorByte);
 }
 
 void BitmapSnippet::setPixelAt(BitmapXY const position, uint32_t const value) {
@@ -115,15 +115,6 @@ void BitmapSnippet::setPixelAt(BitmapXY const position, uint32_t const value) {
             setPixelAtForPixelInAByte(writer, index, position, value);
         } else {
             setPixelAtForMultipleBytePixels(writer, index, value);
-        }
-    }
-}
-
-void BitmapSnippet::traverse(TraverseFunction const& traverseFunction) const {
-    for (int y = m_topLeftCorner.getY(); y <= m_bottomRightCorner.getY(); ++y) {
-        for (int x = m_topLeftCorner.getX(); x <= m_bottomRightCorner.getX(); ++x) {
-            BitmapXY currentPoint(x, y);
-            traverseFunction(currentPoint, getPixelAt(currentPoint));
         }
     }
 }
@@ -204,5 +195,7 @@ void BitmapSnippet::setPixelAtForMultipleBytePixels(uint8_t* writer, int const i
         }
     }
 }
+
+BitmapSnippet::BitmapSnippet() = default;
 
 }  // namespace alba::AprgBitmap

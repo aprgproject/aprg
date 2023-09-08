@@ -10,16 +10,15 @@ namespace alba {
 class PathSumInGridInRightOrDownWithDiagonalTraversal {
 public:
     enum class Type { MinimumSum, MaximumSum };
+
     using Index = int;
     using Value = int;
     using Grid = matrix::AlbaMatrix<Value>;
     using Path = std::vector<Value>;
     using CompareFunction = std::function<bool(Value const&, Value const&)>;
     using MinMaxFunction = std::function<Value(Value const&, Value const&)>;
-    static constexpr Index UNUSED_VALUE = std::numeric_limits<Index>::max();
-
     PathSumInGridInRightOrDownWithDiagonalTraversal(Type const type, Grid const& inputGrid);
-
+    static constexpr Index UNUSED_VALUE = std::numeric_limits<Index>::max();
     [[nodiscard]] Value getBestPathSumUsingNaiveRecursion() const;
     [[nodiscard]] Value getBestPathSumUsingMemoizationDP() const;
     [[nodiscard]] Value getBestPathSumUsingIterativeDP() const;
@@ -27,8 +26,8 @@ public:
 
 private:
     [[nodiscard]] Value getBestPathSumUsingNaiveRecursion(Index const x, Index const y) const;
-    Value getBestPathSumUsingNaiveRecursion(Grid& partialSumGrid, Index const x, Index const y) const;
     [[nodiscard]] Grid getPartialSumGridUsingIterativeDP() const;
+    Value getBestPathSumUsingNaiveRecursion(Grid& partialSumGrid, Index const x, Index const y) const;
     Value getBestPathSumUsingMemoizationDP(Grid& partialSumGrid, Index const x, Index const y) const;
     void initialize(Type const type);
     Grid m_inputGrid;

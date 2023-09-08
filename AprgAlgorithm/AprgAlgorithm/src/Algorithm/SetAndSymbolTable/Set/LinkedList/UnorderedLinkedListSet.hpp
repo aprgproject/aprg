@@ -13,7 +13,6 @@ public:
     using Node = typename BaseClass::Node;
     using NodeUniquePointer = typename BaseClass::NodeUniquePointer;
     using Keys = typename BaseClass::Keys;
-
     UnorderedLinkedListSet() : BaseClass(), b_size(BaseClass::m_size), b_first(BaseClass::m_first) {}
 
     void put(Key const& key) override {

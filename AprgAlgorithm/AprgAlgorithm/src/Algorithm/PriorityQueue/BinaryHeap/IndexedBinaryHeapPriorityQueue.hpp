@@ -18,9 +18,7 @@ public:
     using Indexes = std::vector<int>;
     using Objects = std::vector<Object>;
     using Comparator = ComparatorTemplateType<Object>;
-
     IndexedBinaryHeapPriorityQueue() = default;
-
     [[nodiscard]] bool isEmpty() const { return getSize() == 0; }
 
     [[nodiscard]] bool contains(int const objectIndex) const {
@@ -34,30 +32,15 @@ public:
 
     [[nodiscard]] int getSize() const { return m_size; }
 
-    [[nodiscard]] Objects const& getObjects() const { return m_objects; }
-
-    [[nodiscard]] Indexes const& getTreeIndexToObjectIndex() const { return m_treeIndexToObjectIndex; }
-
-    [[nodiscard]] Indexes const& getObjectIndexToTreeIndex() const { return m_objectIndexToTreeIndex; }
-
     [[nodiscard]] int getIndexOfTopObject() const {
         return m_treeIndexToObjectIndex[IndexedBinaryHeapPriorityQueueConstants::INDEX_OF_TOP_TREE];
     }
 
+    [[nodiscard]] Objects const& getObjects() const { return m_objects; }
+    [[nodiscard]] Indexes const& getTreeIndexToObjectIndex() const { return m_treeIndexToObjectIndex; }
+    [[nodiscard]] Indexes const& getObjectIndexToTreeIndex() const { return m_objectIndexToTreeIndex; }
     [[nodiscard]] Object const& getTopObject() const { return m_objects[getIndexOfTopObject()]; }
-
     [[nodiscard]] Object const& getObjectAt(int const objectIndex) const { return m_objects[objectIndex]; }
-
-    void setNumberOfItems(int const numberOfItems) { resizeToHaveThisIndexIfNeeded(numberOfItems); }
-
-    void insert(int const objectIndex, Object const& object) {
-        ++m_size;
-        resizeToHaveThisIndexIfNeeded(std::max(objectIndex, m_size));
-        m_objectIndexToTreeIndex[objectIndex] = m_size;
-        m_treeIndexToObjectIndex[m_size] = objectIndex;
-        m_objects[objectIndex] = object;
-        swim(m_size);
-    }
 
     Object deleteAndGetTopObject() {
         Object topObject{};
@@ -72,6 +55,17 @@ public:
             m_treeIndexToObjectIndex[m_size + 1] = IndexedBinaryHeapPriorityQueueConstants::VALUE_FOR_UNUSED_INDEX;
         }
         return topObject;
+    }
+
+    void setNumberOfItems(int const numberOfItems) { resizeToHaveThisIndexIfNeeded(numberOfItems); }
+
+    void insert(int const objectIndex, Object const& object) {
+        ++m_size;
+        resizeToHaveThisIndexIfNeeded(std::max(objectIndex, m_size));
+        m_objectIndexToTreeIndex[objectIndex] = m_size;
+        m_treeIndexToObjectIndex[m_size] = objectIndex;
+        m_objects[objectIndex] = object;
+        swim(m_size);
     }
 
     void deleteObjectAt(int const objectIndex) {
@@ -108,8 +102,6 @@ public:
     }
 
 private:
-    bool isInHeapOrder(Object const& child, Object const& parent) { return m_comparator(child, parent); }
-
     [[nodiscard]] int getContainerIndex(int const treeIndex) const {
         // This is not used because size usage is not efficient. No use to make it efficient.
         return treeIndex - 1;
@@ -118,6 +110,8 @@ private:
     [[nodiscard]] Object const& getObjectOnTree(int const treeIndex) const {
         return m_objects[m_treeIndexToObjectIndex[treeIndex]];
     }
+
+    bool isInHeapOrder(Object const& child, Object const& parent) { return m_comparator(child, parent); }
 
     void resizeToHaveThisIndexIfNeeded(int const index) {
         if (m_maxSize <= index) {

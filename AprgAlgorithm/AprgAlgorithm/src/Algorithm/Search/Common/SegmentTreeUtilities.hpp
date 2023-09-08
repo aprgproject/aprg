@@ -13,21 +13,13 @@ public:
     SegmentTreeUtilities() = delete;
     ~SegmentTreeUtilities() = delete;
     SegmentTreeUtilities(SegmentTreeUtilities const &) = delete;
-    SegmentTreeUtilities &operator=(SegmentTreeUtilities const &) = delete;
     SegmentTreeUtilities(SegmentTreeUtilities &&) = delete;
+    SegmentTreeUtilities &operator=(SegmentTreeUtilities const &) = delete;
     SegmentTreeUtilities &operator=(SegmentTreeUtilities &&) = delete;
-
-    static constexpr Index ROOT_PARENT_INDEX = 0;   // the first parent
-    static constexpr Index NUMBER_OF_CHILDREN = 2;  // only 2 children
-
     static inline bool isALeftChild(Index const treeIndex) { return mathHelper::isOdd(treeIndex); }
-
     static inline bool isARightChild(Index const treeIndex) { return mathHelper::isEven(treeIndex); }
-
     static inline Index getParent(Index const treeIndex) { return ((treeIndex + 1) / NUMBER_OF_CHILDREN) - 1; }
-
     static inline Index getLeftChild(Index const parent) { return (parent * NUMBER_OF_CHILDREN) + 1; }
-
     static inline Index getRightChild(Index const parent) { return (parent * NUMBER_OF_CHILDREN) + 2; }
 
     static inline Index getCeilOfLogarithmOfChildren(Index const index) {
@@ -45,6 +37,9 @@ public:
         }
         return result;
     }
+
+    static constexpr Index ROOT_PARENT_INDEX = 0;   // the first parent
+    static constexpr Index NUMBER_OF_CHILDREN = 2;  // only 2 children
 };
 
 }  // namespace alba::algorithm

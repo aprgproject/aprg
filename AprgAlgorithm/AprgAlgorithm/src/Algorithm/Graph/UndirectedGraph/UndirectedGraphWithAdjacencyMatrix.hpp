@@ -12,9 +12,7 @@ public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Edges = typename GraphTypes<Vertex>::Edges;
     using AdjacencyMatrix = matrix::AlbaMatrix<bool>;
-
     UndirectedGraphWithAdjacencyMatrix() : m_adjacencyMatrix(MAX_VERTEX_VALUE, MAX_VERTEX_VALUE) {}
-
     [[nodiscard]] bool isEmpty() const override { return m_numberOfEdges == 0; }
 
     [[nodiscard]] bool hasAnyConnection(Vertex const& vertex) const override {

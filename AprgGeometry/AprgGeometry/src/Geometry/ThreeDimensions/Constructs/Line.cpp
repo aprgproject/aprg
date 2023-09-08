@@ -10,8 +10,6 @@ using namespace std;
 
 namespace alba::ThreeDimensions {
 
-Line::Line() = default;
-
 Line::Line(Point const& first, Point const& second) {
     double deltaX = second.getX() - first.getX();
     double deltaY = second.getY() - first.getY();
@@ -28,11 +26,6 @@ Line::Line(Point const& first, Point const& second) {
     calculateAndSaveInitialValuesIfPossible(first);
 }
 
-Line::Line(double const aCoefficient, double const bCoefficient, double const cCoefficient, Point const& point)
-    : m_aCoefficient(aCoefficient), m_bCoefficient(bCoefficient), m_cCoefficient(cCoefficient) {
-    calculateAndSaveInitialValuesIfPossible(point);
-}
-
 Line::Line(
     double const aCoefficient, double const bCoefficient, double const cCoefficient, double const xInitialValue,
     double const yInitialValue, double const zInitialValue)
@@ -43,6 +36,11 @@ Line::Line(
       m_yInitialValue(yInitialValue),
       m_zInitialValue(zInitialValue) {}
 
+Line::Line(double const aCoefficient, double const bCoefficient, double const cCoefficient, Point const& point)
+    : m_aCoefficient(aCoefficient), m_bCoefficient(bCoefficient), m_cCoefficient(cCoefficient) {
+    calculateAndSaveInitialValuesIfPossible(point);
+}
+
 bool Line::operator==(Line const& line) const {
     return isAlmostEqual(m_aCoefficient, line.m_aCoefficient) && isAlmostEqual(m_bCoefficient, line.m_bCoefficient) &&
            isAlmostEqual(m_cCoefficient, line.m_cCoefficient) && isAlmostEqual(m_xInitialValue, line.m_xInitialValue) &&
@@ -50,19 +48,12 @@ bool Line::operator==(Line const& line) const {
 }
 
 bool Line::operator!=(Line const& line) const { return !((*this) == line); }
-
 bool Line::isInvalid() const { return areAllCoefficientsZero(); }
-
 double Line::getXInitialValue() const { return m_xInitialValue; }
-
 double Line::getYInitialValue() const { return m_yInitialValue; }
-
 double Line::getZInitialValue() const { return m_zInitialValue; }
-
 double Line::getACoefficient() const { return m_aCoefficient; }
-
 double Line::getBCoefficient() const { return m_bCoefficient; }
-
 double Line::getCCoefficient() const { return m_cCoefficient; }
 
 optional<double> Line::calculateXFromY(double const y) const {
@@ -87,6 +78,21 @@ optional<double> Line::calculateZFromX(double const x) const {
 
 optional<double> Line::calculateZFromY(double const y) const {
     return calculateOtherCoordinate(m_zInitialValue, m_cCoefficient, m_yInitialValue, m_bCoefficient, y);
+}
+
+optional<double> Line::calculateOtherCoordinate(
+    double const& initialValue1, double const coefficient1, double const& initialValue2, double const coefficient2,
+    double const coordinate2) {
+    optional<double> result;
+    if (!isAlmostEqual(coefficient2, 0.0)) {
+        result = ((coordinate2 - initialValue2) / coefficient2 * coefficient1) + initialValue1;
+    }
+    return result;
+}
+
+bool Line::areAllCoefficientsZero() const {
+    return isAlmostEqual(m_aCoefficient, 0.0) && isAlmostEqual(m_cCoefficient, 0.0) &&
+           isAlmostEqual(m_cCoefficient, 0.0);
 }
 
 void Line::calculateAndSaveInitialValuesIfPossible(Point const& first) {
@@ -122,25 +128,12 @@ void Line::calculateAndSaveInitialValuesIfPossible(Point const& first) {
     }
 }
 
-optional<double> Line::calculateOtherCoordinate(
-    double const& initialValue1, double const coefficient1, double const& initialValue2, double const coefficient2,
-    double const coordinate2) {
-    optional<double> result;
-    if (!isAlmostEqual(coefficient2, 0.0)) {
-        result = ((coordinate2 - initialValue2) / coefficient2 * coefficient1) + initialValue1;
-    }
-    return result;
-}
-
-bool Line::areAllCoefficientsZero() const {
-    return isAlmostEqual(m_aCoefficient, 0.0) && isAlmostEqual(m_cCoefficient, 0.0) &&
-           isAlmostEqual(m_cCoefficient, 0.0);
-}
-
 ostream& operator<<(ostream& out, Line const& line) {
     out << "(x-" << line.m_xInitialValue << ")/" << line.m_aCoefficient << " = (y-" << line.m_yInitialValue << ")/"
         << line.m_bCoefficient << " = (z-" << line.m_zInitialValue << ")/" << line.m_cCoefficient;
     return out;
 }
+
+Line::Line() = default;
 
 }  // namespace alba::ThreeDimensions

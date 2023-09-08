@@ -10,7 +10,6 @@ namespace alba::matrix {
 // there shoulde be an implementation when used
 template <typename DataType>
 bool isEqualForMathMatrixDataType(DataType const& value1, DataType const& value2);
-
 template <typename DataType>
 bool isSquare(AlbaMatrix<DataType> const& matrix);
 template <typename DataType>
@@ -19,7 +18,6 @@ template <typename DataType>
 bool isIdentityMatrix(AlbaMatrix<DataType> const& matrix);
 template <typename DataType>
 bool isSingular(AlbaMatrix<DataType> const& matrix);
-
 template <typename DataType>
 AlbaMatrix<DataType> getIdentityMatrix(size_t const sideSize);
 
@@ -42,10 +40,8 @@ void doBinaryAssignmentOperationWithSameDimensions(
 
 template <typename DataType>
 AlbaMatrix<DataType> multiplyMatrices(AlbaMatrix<DataType> const& first, AlbaMatrix<DataType> const& second);
-
 template <typename DataType>
 AlbaMatrix<DataType> getMatrixRaiseToScalarPower(AlbaMatrix<DataType> const& base, size_t const scalarExponent);
-
 template <typename DataType>
 void interchangeRows(AlbaMatrix<DataType>& matrix, size_t const yPosition1, size_t const yPosition2);
 

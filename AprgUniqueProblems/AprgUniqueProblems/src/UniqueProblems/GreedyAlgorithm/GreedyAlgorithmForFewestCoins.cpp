@@ -14,7 +14,6 @@ GreedyAlgorithmForFewestCoins::GreedyAlgorithmForFewestCoins(Coins const& availa
 int GreedyAlgorithmForFewestCoins::getFewestNumberOfCoins(Value const value) const {
     // Greedy strategy is to subtract the largest possible coin until value reaches to zero
     // Note: The above approach may not work for all denominations.
-
     int result(0);
     int count(0);
     Value partialValue(value);

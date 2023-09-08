@@ -7,7 +7,6 @@ namespace Flyweight {
 // Flyweight
 // declares an interface through which flyweights can receive
 // and act on extrinsic state
-
 class Flyweight {
 public:
     virtual ~Flyweight() = default;
@@ -17,7 +16,6 @@ public:
 
 // SharedConcreteFlyweight
 // implements the Flyweight interface and adds storage for intrinsic state
-
 class SharedConcreteFlyweight : public Flyweight {
 public:
     explicit SharedConcreteFlyweight(int& intrinsicState) : m_sharedIntrinsicState(intrinsicState) {}
@@ -26,8 +24,8 @@ public:
         std::cout << "Concrete Flyweight with extrinsicState " << extrinsicState
                   << " and sharedIntrinsicState:" << m_sharedIntrinsicState << "\n";
     }
-    // ...
 
+    // ...
 private:
     int& m_sharedIntrinsicState;  // This might be different on the example of the book (we store it as reference).
     // ...
@@ -35,7 +33,6 @@ private:
 
 // UnsharedConcreteFlyweight
 // not all subclasses need to be shared
-
 class UnsharedConcreteFlyweight : public Flyweight {
 public:
     explicit UnsharedConcreteFlyweight(int const intrinsicState) : m_unsharedIntrinsicState(intrinsicState) {}
@@ -44,8 +41,8 @@ public:
         std::cout << "Unshared Flyweight with extrinsicState:" << extrinsicState
                   << " and unsharedIntrinsicState:" << m_unsharedIntrinsicState << "\n";
     }
-    // ...
 
+    // ...
 private:
     int m_unsharedIntrinsicState;
     // ...
@@ -54,9 +51,12 @@ private:
 // FlyweightFactory
 // creates and manages flyweight objects and ensures
 // that flyweights are shared properly
-
 class FlyweightFactory {
 public:
+    static std::unique_ptr<Flyweight> getUnsharedFlyweight(int const value) {
+        return std::make_unique<UnsharedConcreteFlyweight>(value);
+    }
+
     std::unique_ptr<Flyweight> getSharedFlyweight(int const key) {
         auto it = m_keyToSharedValueMap.find(key);
         if (it != m_keyToSharedValueMap.end()) {
@@ -65,11 +65,8 @@ public:
         auto iteratorAndFlagPair = m_keyToSharedValueMap.emplace(key, key);  // use key as value
         return std::make_unique<SharedConcreteFlyweight>(iteratorAndFlagPair.first->second);
     }
-    static std::unique_ptr<Flyweight> getUnsharedFlyweight(int const value) {
-        return std::make_unique<UnsharedConcreteFlyweight>(value);
-    }
-    // ...
 
+    // ...
 private:
     std::map<int, int> m_keyToSharedValueMap;
     // ...

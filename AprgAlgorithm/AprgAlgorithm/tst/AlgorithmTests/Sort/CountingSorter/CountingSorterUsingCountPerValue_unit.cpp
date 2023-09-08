@@ -81,9 +81,7 @@ TEST(CountingSorterUsingCountPerValueTest, SortWorksOnPositiveAndNegativeInteger
 }
 
 // CANNOT SORT DOUBLE VALUES
-
 // CANNOT SORT STRINGS
-
 TEST(CountingSorterUsingCountPerValueTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1) {
     StabilityCheckObjectsSorter sorter(
         stabilityCheckObjectToIndexableValueFunction, indexableValueToStabilityCheckObjectFunction);

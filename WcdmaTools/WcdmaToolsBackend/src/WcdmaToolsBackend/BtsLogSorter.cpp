@@ -97,6 +97,26 @@ void BtsLogSorter::processLineInFile(string const& filename, string const& lineI
     }
 }
 
+void BtsLogSorter::saveLogsToOutputFile(string const& outputPath) {
+    addStartupLogsOnSorterWithPcTime();
+    if (m_sorterWithPcTime.isEmpty()) {
+        saveLogToOutputFileIfAllHavePcTime(outputPath);
+    } else {
+        saveLogToOutputFileIfNotAllHavePcTime(outputPath);
+    }
+    deleteStartupLog();
+}
+
+string BtsLogSorter::getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
+    string const& directory, string const& hardwareAddress) {
+    string filename = hardwareAddress.empty() ? "NoHardwareAddress" : hardwareAddress;
+    return AlbaLocalPathHandler(directory + R"(\)" + filename + R"(.log)").getFullPath();
+}
+
+void BtsLogSorter::deleteFilesInDirectory(string const& directoryOfLogs) {
+    AlbaLocalPathHandler(directoryOfLogs).deleteFilesInDirectory();
+}
+
 void BtsLogSorter::createTempDirectories() const {
     AlbaLocalPathHandler(m_directoryOfLogsWithoutPcTime).createDirectoriesForNonExisitingDirectories();
     AlbaLocalPathHandler(m_pathOfStartupLog).createDirectoriesForNonExisitingDirectories();
@@ -121,18 +141,7 @@ void BtsLogSorter::deleteTempFilesAndDirectoriesOfOneDayOld() const {
 }
 
 void BtsLogSorter::deleteStartupLog() const { deleteFilesInDirectory(m_pathOfStartupLog); }
-
 void BtsLogSorter::deleteLogsWithoutPcTime() const { deleteFilesInDirectory(m_directoryOfLogsWithoutPcTime); }
-
-void BtsLogSorter::saveLogsToOutputFile(string const& outputPath) {
-    addStartupLogsOnSorterWithPcTime();
-    if (m_sorterWithPcTime.isEmpty()) {
-        saveLogToOutputFileIfAllHavePcTime(outputPath);
-    } else {
-        saveLogToOutputFileIfNotAllHavePcTime(outputPath);
-    }
-    deleteStartupLog();
-}
 
 void BtsLogSorter::saveLogToOutputFileIfAllHavePcTime(string const& outputPath) {
     cout << "Save log to output file if all have pc time.\n";
@@ -147,12 +156,6 @@ void BtsLogSorter::saveLogToOutputFileIfNotAllHavePcTime(string const& outputPat
     writeLogsWithPcTimeToOutputFile(outputLogFileStream);
     writeLogsWithoutPcTimeToOutputFile(outputLogFileStream);
     deleteLogsWithoutPcTime();
-}
-
-string BtsLogSorter::getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
-    string const& directory, string const& hardwareAddress) {
-    string filename = hardwareAddress.empty() ? "NoHardwareAddress" : hardwareAddress;
-    return AlbaLocalPathHandler(directory + R"(\)" + filename + R"(.log)").getFullPath();
 }
 
 void BtsLogSorter::openStartupLogsIfNeeded() {
@@ -264,10 +267,6 @@ void BtsLogSorter::updateOrWriteCurrentPrint(BtsLogPrint const& logPrint, ofstre
 void BtsLogSorter::writeLastPrint(ofstream& outputLogFileStream) {
     outputLogFileStream << m_currentPrintToWrite.getPrintWithAllDetails() << "\n";
     m_currentPrintToWrite = BtsLogPrint{};
-}
-
-void BtsLogSorter::deleteFilesInDirectory(string const& directoryOfLogs) {
-    AlbaLocalPathHandler(directoryOfLogs).deleteFilesInDirectory();
 }
 
 }  // namespace wcdmaToolsBackend

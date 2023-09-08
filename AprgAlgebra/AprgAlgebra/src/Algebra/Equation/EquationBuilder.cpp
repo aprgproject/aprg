@@ -25,7 +25,6 @@ Equation EquationBuilder::getEquation() const {
 }
 
 stringHelper::strings const& EquationBuilder::getTermStrings() const { return m_termStrings; }
-
 stringHelper::strings const& EquationBuilder::getEquationOperatorStrings() const { return m_equationOperatorStrings; }
 
 void EquationBuilder::splitAndSaveOperatorAndTermStrings(string const& equationInString) {

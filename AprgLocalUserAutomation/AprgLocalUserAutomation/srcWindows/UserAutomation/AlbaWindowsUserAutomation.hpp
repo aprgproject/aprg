@@ -14,10 +14,11 @@ using MousePosition = AlbaXY<int>;
 
 class AlbaWindowsUserAutomation {
 public:
-    typedef std::function<void(INPUT&)> InputFunction;
     bool isKeyPressed(int const key) const;
     bool isLetterPressed(char const letter) const;
     MousePosition getMousePosition() const;
+    std::string getClassNameOfForegroundWindow() const;
+    std::string getStringFromClipboard() const;
     void setMousePosition(MousePosition const& position) const;
     void pressLeftButtonOnMouse() const;
     void releaseLeftButtonOnMouse() const;
@@ -35,17 +36,14 @@ public:
     void typeCharacter(char const character) const;
     void typeString(std::string_view const& stringToType) const;
     void performKeyCombination(std::vector<uint16_t> const& keys, std::vector<char> const& characters) const;
-    std::string getClassNameOfForegroundWindow() const;
     void setForegroundWindowWithClassName(std::string_view const& className) const;
     void setForegroundWindowWithWindowName(std::string_view const& windowName) const;
     void sleepWithRealisticDelay() const;
     void sleep(int const milliseconds) const;
-
     void saveBitmapOnScreen(std::string_view const& filePath) const;
-
-    std::string getStringFromClipboard() const;
     void setStringToClipboard(std::string_view const& clipBoardText) const;
     void saveBitmapFromClipboard(std::string_view const& filePath) const;
+    typedef std::function<void(INPUT&)> InputFunction;
 
 private:
     uint16_t convertToVirtualKey(char const character) const;

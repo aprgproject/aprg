@@ -7,7 +7,6 @@ namespace alba::algebra {
 class ArithmeticSeries : public SeriesBasedOnFormula {
 public:
     ArithmeticSeries(AlbaNumber const& firstValue, AlbaNumber const& commonDifference);
-
     ArithmeticSeries(
         AlbaNumber const& valueAtIndex1, int const index1, AlbaNumber const& valueAtIndex2, int const index2);
 

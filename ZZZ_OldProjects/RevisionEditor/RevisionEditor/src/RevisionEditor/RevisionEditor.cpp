@@ -26,6 +26,23 @@ namespace alba {
 
 RevisionEditor::RevisionEditor() : m_sixtyRandomizer(1, 59) {}
 
+void RevisionEditor::saveNewRevisionHistory() const {
+    ofstream newGitHistoryStream(R"(F:\Branches\GitMigration\git_old_repo\newGitHistory.txt)");
+    for (RevisionEntry const& revisionEntry : m_revisionEntries) {
+        newGitHistoryStream << START_ENTRY_PATTERN << revisionEntry.revisionHash << END_ENTRY_PATTERN << " ";
+        newGitHistoryStream << START_ENTRY_PATTERN << setfill('0');
+        newGitHistoryStream << setw(4) << revisionEntry.dateTime.getYears() << "-";
+        newGitHistoryStream << setw(2) << revisionEntry.dateTime.getMonths() << "-";
+        newGitHistoryStream << setw(2) << revisionEntry.dateTime.getDays() << "T";
+        newGitHistoryStream << setw(2) << revisionEntry.dateTime.getHours() << ":";
+        newGitHistoryStream << setw(2) << revisionEntry.dateTime.getMinutes() << ":";
+        newGitHistoryStream << setw(2) << revisionEntry.dateTime.getSeconds() << "+08:00";
+        newGitHistoryStream << END_ENTRY_PATTERN << " ";
+        newGitHistoryStream << START_ENTRY_PATTERN << "mevalba <markearvinalba@gmail.com>" << END_ENTRY_PATTERN << " ";
+        newGitHistoryStream << START_ENTRY_PATTERN << revisionEntry.message << END_ENTRY_PATTERN << "\n";
+    }
+}
+
 void RevisionEditor::setRevisionDataFromFile() {
     setDataFromGitHistory();
     setDataOnCommitsPerDay();
@@ -104,23 +121,6 @@ void RevisionEditor::editCommitMessages() {
     }
 }
 
-void RevisionEditor::saveNewRevisionHistory() const {
-    ofstream newGitHistoryStream(R"(F:\Branches\GitMigration\git_old_repo\newGitHistory.txt)");
-    for (RevisionEntry const& revisionEntry : m_revisionEntries) {
-        newGitHistoryStream << START_ENTRY_PATTERN << revisionEntry.revisionHash << END_ENTRY_PATTERN << " ";
-        newGitHistoryStream << START_ENTRY_PATTERN << setfill('0');
-        newGitHistoryStream << setw(4) << revisionEntry.dateTime.getYears() << "-";
-        newGitHistoryStream << setw(2) << revisionEntry.dateTime.getMonths() << "-";
-        newGitHistoryStream << setw(2) << revisionEntry.dateTime.getDays() << "T";
-        newGitHistoryStream << setw(2) << revisionEntry.dateTime.getHours() << ":";
-        newGitHistoryStream << setw(2) << revisionEntry.dateTime.getMinutes() << ":";
-        newGitHistoryStream << setw(2) << revisionEntry.dateTime.getSeconds() << "+08:00";
-        newGitHistoryStream << END_ENTRY_PATTERN << " ";
-        newGitHistoryStream << START_ENTRY_PATTERN << "mevalba <markearvinalba@gmail.com>" << END_ENTRY_PATTERN << " ";
-        newGitHistoryStream << START_ENTRY_PATTERN << revisionEntry.message << END_ENTRY_PATTERN << "\n";
-    }
-}
-
 RevisionEditor::RevisionEntry RevisionEditor::getRevisionEntry(string const& line) {
     int index = 0;
     string revisionHash = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
@@ -155,56 +155,6 @@ RevisionEditor::DaysInterval RevisionEditor::createDaysInterval(
     uint32_t const year1, uint32_t const month1, uint32_t const day1, uint32_t const year2, uint32_t const month2,
     uint32_t const day2) {
     return {AlbaYearMonthDay(year1, month1, day1).getTotalDays(), AlbaYearMonthDay(year2, month2, day2).getTotalDays()};
-}
-
-void RevisionEditor::setDataFromGitHistory() {
-    ifstream revisionHistoryStream(R"(F:\Branches\GitMigration\git_old_repo\formattedGitHistory.txt)");
-    AlbaFileReader revisionHistoryReader(revisionHistoryStream);
-    AlbaYearMonthDay dayToCheck;
-    int numberOfCommitsOnThisDay = 1;
-    int totalNumberOfInstances = 0;
-    bool isFirst = true;
-    while (revisionHistoryReader.isNotFinished()) {
-        string line(revisionHistoryReader.getLineAndIgnoreWhiteSpaces());
-        if (!line.empty()) {
-            m_revisionEntries.emplace_back(getRevisionEntry(line));
-            RevisionEntry const& currentRevision(m_revisionEntries.back());
-            AlbaDateTime const& currentDateTime(currentRevision.dateTime);
-            if (isFirst) {
-                dayToCheck = currentDateTime.getYearMonthDay();
-                isFirst = false;
-            } else if (dayToCheck != currentDateTime.getYearMonthDay()) {
-                if (numberOfCommitsOnThisDay < MAX_NUMBER_COMMITS_PER_DAY) {
-                    ++m_numberInstancesOfEachDayCommitCount[numberOfCommitsOnThisDay];
-                    ++totalNumberOfInstances;
-                } else {
-                    ALBA_INF_PRINT2(cout, currentDateTime, numberOfCommitsOnThisDay);
-                }
-                numberOfCommitsOnThisDay = 1;
-                dayToCheck = currentDateTime.getYearMonthDay();
-            } else {
-                ++numberOfCommitsOnThisDay;
-            }
-            ++m_numberOfCommitsPerHour[currentDateTime.getHours()];
-        }
-    }
-    // add fake data of days with no commits
-    m_numberInstancesOfEachDayCommitCount[0] = totalNumberOfInstances * 0.5;
-    m_revisionRandomizer.setMinimumAndMaximum(m_revisionEntries.empty() ? 0 : 1, m_revisionEntries.size());
-}
-
-void RevisionEditor::setDataOnCommitsPerDay() {
-    int numberOfCommitsOfADay = 0;
-    int totalWeight = 0;
-    int totalNumberOfInstances = 0;
-    for (int const numberOfInstances : m_numberInstancesOfEachDayCommitCount) {
-        totalWeight += numberOfCommitsOfADay * numberOfInstances;
-        totalNumberOfInstances += numberOfInstances;
-        ++numberOfCommitsOfADay;
-    }
-    m_dayInstancesRandomizer.setMinimumAndMaximum(totalNumberOfInstances > 0 ? 1 : 0, totalNumberOfInstances);
-    m_originalAverageCommitPerDay = static_cast<double>(totalWeight) / totalNumberOfInstances;
-    ALBA_INF_PRINT3(cout, totalWeight, totalNumberOfInstances, m_originalAverageCommitPerDay);
 }
 
 void RevisionEditor::saveCommitsPerHourToFile() const {
@@ -257,6 +207,56 @@ int RevisionEditor::getRandomHour() {
         ++hour;
     }
     return 0;
+}
+
+void RevisionEditor::setDataFromGitHistory() {
+    ifstream revisionHistoryStream(R"(F:\Branches\GitMigration\git_old_repo\formattedGitHistory.txt)");
+    AlbaFileReader revisionHistoryReader(revisionHistoryStream);
+    AlbaYearMonthDay dayToCheck;
+    int numberOfCommitsOnThisDay = 1;
+    int totalNumberOfInstances = 0;
+    bool isFirst = true;
+    while (revisionHistoryReader.isNotFinished()) {
+        string line(revisionHistoryReader.getLineAndIgnoreWhiteSpaces());
+        if (!line.empty()) {
+            m_revisionEntries.emplace_back(getRevisionEntry(line));
+            RevisionEntry const& currentRevision(m_revisionEntries.back());
+            AlbaDateTime const& currentDateTime(currentRevision.dateTime);
+            if (isFirst) {
+                dayToCheck = currentDateTime.getYearMonthDay();
+                isFirst = false;
+            } else if (dayToCheck != currentDateTime.getYearMonthDay()) {
+                if (numberOfCommitsOnThisDay < MAX_NUMBER_COMMITS_PER_DAY) {
+                    ++m_numberInstancesOfEachDayCommitCount[numberOfCommitsOnThisDay];
+                    ++totalNumberOfInstances;
+                } else {
+                    ALBA_INF_PRINT2(cout, currentDateTime, numberOfCommitsOnThisDay);
+                }
+                numberOfCommitsOnThisDay = 1;
+                dayToCheck = currentDateTime.getYearMonthDay();
+            } else {
+                ++numberOfCommitsOnThisDay;
+            }
+            ++m_numberOfCommitsPerHour[currentDateTime.getHours()];
+        }
+    }
+    // add fake data of days with no commits
+    m_numberInstancesOfEachDayCommitCount[0] = totalNumberOfInstances * 0.5;
+    m_revisionRandomizer.setMinimumAndMaximum(m_revisionEntries.empty() ? 0 : 1, m_revisionEntries.size());
+}
+
+void RevisionEditor::setDataOnCommitsPerDay() {
+    int numberOfCommitsOfADay = 0;
+    int totalWeight = 0;
+    int totalNumberOfInstances = 0;
+    for (int const numberOfInstances : m_numberInstancesOfEachDayCommitCount) {
+        totalWeight += numberOfCommitsOfADay * numberOfInstances;
+        totalNumberOfInstances += numberOfInstances;
+        ++numberOfCommitsOfADay;
+    }
+    m_dayInstancesRandomizer.setMinimumAndMaximum(totalNumberOfInstances > 0 ? 1 : 0, totalNumberOfInstances);
+    m_originalAverageCommitPerDay = static_cast<double>(totalWeight) / totalNumberOfInstances;
+    ALBA_INF_PRINT3(cout, totalWeight, totalNumberOfInstances, m_originalAverageCommitPerDay);
 }
 
 }  // namespace alba

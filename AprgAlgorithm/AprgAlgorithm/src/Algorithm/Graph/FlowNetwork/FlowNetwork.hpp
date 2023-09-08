@@ -16,17 +16,15 @@ public:
     using FlowDataTypes = std::vector<FlowDataType>;
 
     struct FlowEdgeDetails {
-        FlowDataType capacity;
-        FlowDataType flow;
         bool operator==(FlowEdgeDetails const& second) const {
             return mathHelper::isAlmostEqual(capacity, second.capacity) && mathHelper::isAlmostEqual(flow, second.flow);
         }
+
+        FlowDataType capacity;
+        FlowDataType flow;
     };
+
     struct FlowEdge {
-        Vertex source{};
-        Vertex destination{};
-        FlowDataType capacity{};
-        FlowDataType flow{};
         bool operator==(FlowEdge const& second) const {
             return source == second.source && destination == second.destination &&
                    mathHelper::isAlmostEqual(capacity, second.capacity) && mathHelper::isAlmostEqual(flow, second.flow);
@@ -53,7 +51,13 @@ public:
                 flow += delta;
             }
         }
+
+        Vertex source{};
+        Vertex destination{};
+        FlowDataType capacity{};
+        FlowDataType flow{};
     };
+
     using FlowEdges = std::vector<FlowEdge>;
     using EdgeToFlowEdgeDetailsMap = std::map<Edge, FlowEdgeDetails>;
 
@@ -156,8 +160,6 @@ public:
     }
 
 private:
-    void connect(Vertex const& vertex1, Vertex const& vertex2) override { BaseClass::connect(vertex1, vertex2); }
-
     [[nodiscard]] bool hasNoDuplicateValues(FlowDataTypes const& flowDataTypes) const {
         return std::adjacent_find(flowDataTypes.cbegin(), flowDataTypes.cend()) == flowDataTypes.cend();
     }
@@ -179,6 +181,8 @@ private:
             [&](auto const& edgeAndDetailsPair) { return edgeAndDetailsPair.second.flow; });
         return result;
     }
+
+    void connect(Vertex const& vertex1, Vertex const& vertex2) override { BaseClass::connect(vertex1, vertex2); }
 
     friend std::ostream& operator<<(std::ostream& out, FlowNetwork const& graph) {
         out << static_cast<BaseClass const&>(graph) << "Flow edges: {";

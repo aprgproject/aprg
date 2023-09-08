@@ -32,7 +32,6 @@ PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::
 
 PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::getBestPathSumUsingIterativeDP() const {
     // Time Complexity of the DP implementation is O(mn) which is much better than Naive Recursive implementation.
-
     Value pathSum(0);
     if (!m_inputGrid.isEmpty()) {
         Grid partialSumGrid(getPartialSumGridUsingIterativeDP());
@@ -71,7 +70,6 @@ PathSumInGridInRightOrDownTraversal::Path PathSumInGridInRightOrDownTraversal::g
 PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::getBestPathSumUsingNaiveRecursion(
     Index const x, Index const y) const {
     // Naive recursion approach
-
     Value result(m_inputGrid.getEntry(x, y));
     if (!(x == 0 && y == 0)) {
         if (x == 0) {
@@ -81,6 +79,26 @@ PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::
         } else {
             result += m_minMaxFunction(
                 getBestPathSumUsingNaiveRecursion(x - 1, y), getBestPathSumUsingNaiveRecursion(x, y - 1));
+        }
+    }
+    return result;
+}
+
+PathSumInGridInRightOrDownTraversal::Grid PathSumInGridInRightOrDownTraversal::getPartialSumGridUsingIterativeDP()
+    const {
+    Grid result(m_inputGrid);
+    // first row has only left neighbor
+    for (Index x = 1; x < static_cast<Index>(result.getNumberOfColumns()); ++x) {
+        result.getEntryReference(x, 0) += result.getEntry(x - 1, 0);
+    }
+    // first column has only up neighbors
+    for (Index y = 1; y < static_cast<Index>(result.getNumberOfRows()); ++y) {
+        result.getEntryReference(0, y) += result.getEntry(0, y - 1);
+    }
+    // the rest of the matrix
+    for (Index x = 1; x < static_cast<Index>(result.getNumberOfColumns()); ++x) {
+        for (Index y = 1; y < static_cast<Index>(result.getNumberOfRows()); ++y) {
+            result.getEntryReference(x, y) += m_minMaxFunction(result.getEntry(x - 1, y), result.getEntry(x, y - 1));
         }
     }
     return result;
@@ -103,26 +121,6 @@ PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::
             }
         }
         partialSumGrid.setEntry(x, y, result);
-    }
-    return result;
-}
-
-PathSumInGridInRightOrDownTraversal::Grid PathSumInGridInRightOrDownTraversal::getPartialSumGridUsingIterativeDP()
-    const {
-    Grid result(m_inputGrid);
-    // first row has only left neighbor
-    for (Index x = 1; x < static_cast<Index>(result.getNumberOfColumns()); ++x) {
-        result.getEntryReference(x, 0) += result.getEntry(x - 1, 0);
-    }
-    // first column has only up neighbors
-    for (Index y = 1; y < static_cast<Index>(result.getNumberOfRows()); ++y) {
-        result.getEntryReference(0, y) += result.getEntry(0, y - 1);
-    }
-    // the rest of the matrix
-    for (Index x = 1; x < static_cast<Index>(result.getNumberOfColumns()); ++x) {
-        for (Index y = 1; y < static_cast<Index>(result.getNumberOfRows()); ++y) {
-            result.getEntryReference(x, y) += m_minMaxFunction(result.getEntry(x - 1, y), result.getEntry(x, y - 1));
-        }
     }
     return result;
 }

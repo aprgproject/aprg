@@ -8,17 +8,18 @@ class GridPathSearch {
 public:
     // Calculating the number of paths in an nxn grid from the upper-left corner to the lower-right corner such that the
     // path visits each square exactly once.
-
     using Grid = matrix::AlbaMatrix<bool>;
+
     enum class Movement {
+
         Left,
         Right,
         Up,
         Down,
+
     };
 
     explicit GridPathSearch(int const gridSide);
-
     int countPaths();
 
 private:

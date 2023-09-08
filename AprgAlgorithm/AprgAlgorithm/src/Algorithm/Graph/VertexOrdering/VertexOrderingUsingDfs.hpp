@@ -19,7 +19,6 @@ public:
     using BaseGraphWithVertex = BaseGraph<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
-
     explicit VertexOrderingUsingDfs(BaseGraphWithVertex const& graph) : m_graph(graph) {}
 
     Vertices getVerticesInThisOrder(Vertex const& startVertex, VertexTraversalOrder const traversalOrder) {
@@ -44,7 +43,6 @@ public:
     Vertices getVerticesInTopologicalOrder(Vertex const& startVertex) {
         // Algorithm in short terms: Traverse DFS post order("add vertex after DFS is done for the vertex"), then
         // reverse the order
-
         return getVerticesInThisOrder(startVertex, VertexTraversalOrder::ReversePostOrder);
     }
 
@@ -110,7 +108,6 @@ private:
 
     void traversePreOrderAt(Vertices& traversedVertices, Vertex const& vertex) {
         traversedVertices.emplace_back(vertex);  // add vertex before DFS
-
         m_processedVertices.putVertex(vertex);
         for (Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(vertex)) {
             if (m_processedVertices.isNotFound(adjacentVertex)) {
@@ -160,16 +157,13 @@ private:
 // ---> Thus w was done before v.
 // -> Case 3: dfs(w) has already been called but has not yet returned.
 // ---> Cant happen in a DAG: the function call stack contains path from w to v, so v->w would complete a cycle
-
 // Proposition: A digraph has a topological order iff no directed cycle.
 // Proof:
 // -> If directed cycle, topological order is impossible.
 // -> If no directed cycle, DFS-based algorithm finds a topological order
-
 // Note: In the algorithm above, its possible to have a cycle and vertex ordering will ignore it and will return current
 // ordering.
 // -> So if there are cycles, vertex ordering will depend which vertex was used to start DFS.
-
 // Other discussions:
 // An acyclic graph always has a topological sort.
 // However, if the graph contains a cycle, it is not possible to form a topological sort,

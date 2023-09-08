@@ -28,12 +28,11 @@ public:
         int totalNumberOfGames;
         MoveDetails nextMoves;
     };
-    using LineDetailOptional = std::optional<LineDetail>;
 
+    using LineDetailOptional = std::optional<LineDetail>;
     size_t getSize() const;
     LineDetailOptional getLine(Board const& board) const;
     void saveDatabaseTo(std::string const& path) const;
-
     void clear();
     void addLine(Board const& board, LineDetail const& lineDetail);
     void loadDatabaseFrom(std::string const& path);
@@ -43,7 +42,6 @@ private:
 };
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

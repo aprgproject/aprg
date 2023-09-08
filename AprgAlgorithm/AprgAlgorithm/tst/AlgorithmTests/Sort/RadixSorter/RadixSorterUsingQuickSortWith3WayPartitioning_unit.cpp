@@ -76,14 +76,12 @@ TEST(RadixSorterUsingQuickSortWith3WayPartitioningTest, SortWorksOnCharactersUsi
 }
 
 // CANNOT SORT STD::LIST, actually it might be possible if we change indexes to iterators
-
 TEST(RadixSorterUsingQuickSortWith3WayPartitioningTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
     SmallIntegerSorter sorter(getNibbleAtForSmallInteger, isNibbleDigitValidForSmallInteger);
     testSortUsingExample1WithPositiveAndNegativeIntegers<SmallIntegerSorter, Integers>(sorter);
 }
 
 // CANNOT SORT DOUBLE VALUES
-
 TEST(RadixSorterUsingQuickSortWith3WayPartitioningTest, SortWorksOnStringsUsingExample1) {
     StringsSorter sorter(getCharacterAtForString, isDigitValidForString);
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);

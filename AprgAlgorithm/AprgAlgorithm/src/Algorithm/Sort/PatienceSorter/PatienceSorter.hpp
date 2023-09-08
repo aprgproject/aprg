@@ -29,7 +29,6 @@ public:
 
     using Piles = std::vector<Pile>;
     using PilesIterator = typename Piles::iterator;
-
     PatienceSorter() = default;
 
     void sort(Values& valuesToSort) const override {
@@ -42,19 +41,6 @@ public:
     }
 
 private:
-    void putValuesToPiles(Piles& piles, Values const& valuesToSort) const {
-        for (Value const& value : valuesToSort) {
-            auto selectedIt = std::lower_bound(piles.begin(), piles.end(), value);
-            if (selectedIt == piles.end()) {
-                piles.emplace_back(value);
-            } else {
-                selectedIt->putOnTop(value);
-            }
-        }
-    }
-
-    void mergePilesToOnePile(Piles& piles) const { mergePiles(piles.begin(), std::prev(piles.end())); }
-
     // NOLINTNEXTLINE(modernize-use-nodiscard)
     PilesIterator mergePiles(PilesIterator const itLow, PilesIterator const itHigh) const {
         // https://en.wikipedia.org/wiki/K-way_merge_algorithm
@@ -72,6 +58,19 @@ private:
         }
         return itLow;
     }
+
+    void putValuesToPiles(Piles& piles, Values const& valuesToSort) const {
+        for (Value const& value : valuesToSort) {
+            auto selectedIt = std::lower_bound(piles.begin(), piles.end(), value);
+            if (selectedIt == piles.end()) {
+                piles.emplace_back(value);
+            } else {
+                selectedIt->putOnTop(value);
+            }
+        }
+    }
+
+    void mergePilesToOnePile(Piles& piles) const { mergePiles(piles.begin(), std::prev(piles.end())); }
 
     void copyMergedPileToValues(Values& valuesToSort, Piles const& piles) const {
         auto const& mergedPileValues(piles.front().getValues());

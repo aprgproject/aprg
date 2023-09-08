@@ -16,22 +16,19 @@ public:
     using Operators = std::vector<char>;
     using CountMatrix = matrix::AlbaMatrix<Count>;
     using CountMatrices = std::vector<CountMatrix>;
-    static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
-
     BooleanParenthesizationProblem(Booleans const& inputValues, Operators const& operators);
-
+    static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
     [[nodiscard]] Count getNumberOfWaysForTrueUsingNaiveRecursion() const;
     [[nodiscard]] Count getNumberOfWaysForTrueUsingMemoizationDP() const;
     [[nodiscard]] Count getNumberOfWaysForTrueUsingIterativeDP() const;
 
 private:
+    static Count convertBoolToCount(bool const booleanValue);
+    [[nodiscard]] bool areSizesCorrect() const;
     [[nodiscard]] Count getNumberOfWaysUsingNaiveRecursion(
         bool const expectedOutput, Index const left, Index const right) const;
     Count getNumberOfWaysUsingMemoizationDP(
         CountMatrices& countMatrices, bool const expectedOutput, Index const left, Index const right) const;
-
-    static Count convertBoolToCount(bool const booleanValue);
-    [[nodiscard]] bool areSizesCorrect() const;
     void initialize();
     Booleans m_inputValues;
     Operators m_operators;

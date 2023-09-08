@@ -11,13 +11,6 @@ namespace alba {
 
 AlbaLocalTimer::AlbaLocalTimer() : m_time1(getSteadyTimeNow()), m_time2(m_time1) {}
 
-void AlbaLocalTimer::resetTimer() {
-    m_time1 = getSteadyTimeNow();
-    m_time2 = m_time1;
-}
-
-void AlbaLocalTimer::stopTimer() { m_time2 = getSteadyTimeNow(); }
-
 size_t AlbaLocalTimer::getElapsedTimeInNanoseconds() const {
     return duration_cast<std::chrono::nanoseconds>(m_time2 - m_time1).count();
 }
@@ -47,5 +40,12 @@ AlbaDateTime AlbaLocalTimer::getDifferenceAsAlbaDateTime() const {
     result.reorganizeValues();
     return result;
 }
+
+void AlbaLocalTimer::resetTimer() {
+    m_time1 = getSteadyTimeNow();
+    m_time2 = m_time1;
+}
+
+void AlbaLocalTimer::stopTimer() { m_time2 = getSteadyTimeNow(); }
 
 }  // namespace alba

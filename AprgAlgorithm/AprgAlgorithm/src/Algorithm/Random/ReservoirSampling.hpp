@@ -11,13 +11,11 @@ class ReservoirSampling {
 public:
     using Value = typename Values::value_type;
     using Samples = std::vector<Value>;
-
     ReservoirSampling() = default;
 
     Samples getSamples(int const* const stream, int const sizeOfStream, int const numberOfSamples) {
         // Time Complexity: O(n)
         // Auxiliary Space: O(k)
-
         Samples reservoir;
         int i = 0;
         for (i = 0; i < numberOfSamples; ++i) {

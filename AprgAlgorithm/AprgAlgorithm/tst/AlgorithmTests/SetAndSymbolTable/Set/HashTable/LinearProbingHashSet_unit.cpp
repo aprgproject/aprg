@@ -23,7 +23,6 @@ TEST(LinearProbingHashSetTest, IsEmptyWorksWhenNotEmpty) {
 }
 
 TEST(LinearProbingHashSetTest, DoesContainWorks) { testDoesContainWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(LinearProbingHashSetTest, GetSizeWorksWhenEmpty) { testGetSizeWhenEmptyWithUnsignedIntAndChar<SetForTest>(); }
 
 TEST(LinearProbingHashSetTest, GetSizeWorksWhenNotEmpty) {
@@ -31,29 +30,17 @@ TEST(LinearProbingHashSetTest, GetSizeWorksWhenNotEmpty) {
 }
 
 TEST(LinearProbingHashSetTest, GetWorks) { testGetWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(LinearProbingHashSetTest, GetRankWorks) { testGetRankWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(LinearProbingHashSetTest, GetMinimumWorks) { testGetMinimumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(LinearProbingHashSetTest, GetMaximumWorks) { testGetMaximumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(LinearProbingHashSetTest, SelectAtWorks) { testSelectAtWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(LinearProbingHashSetTest, GetFloorWorks) { testGetFloorWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(LinearProbingHashSetTest, GetCeilingWorks) { testGetCeilingWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(LinearProbingHashSetTest, PutWorks) { testPutWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(LinearProbingHashSetTest, DeleteBasedOnKeyWorks) { testDeleteBasedOnKeyWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(LinearProbingHashSetTest, DeleteMinimumWorks) { testDeleteMinimumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(LinearProbingHashSetTest, DeleteMaximumWorks) { testDeleteMaximumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(LinearProbingHashSetTest, GetKeys) { testGetKeysWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(LinearProbingHashSetTest, GetKeysInRangeWorks) { testGetKeysInRangeInclusiveWithUnsignedIntAndChar<SetForTest>(); }
 
 TEST(LinearProbingHashSetTest, PutWorksWithDoublingHashTableSize) {

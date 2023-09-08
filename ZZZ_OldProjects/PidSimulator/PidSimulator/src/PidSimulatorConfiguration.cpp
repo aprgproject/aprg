@@ -14,26 +14,6 @@ PidSimulatorConfiguration::PidSimulatorConfiguration(stringHelper::strings const
     saveArgumentValues(argumentsToValuesMap);
 }
 
-void PidSimulatorConfiguration::saveArgumentValues(StringToStringMap& argumentsToValuesMap) {
-    kp = stringHelper::convertStringToNumber<double>(argumentsToValuesMap["kp"]);
-    ki = stringHelper::convertStringToNumber<double>(argumentsToValuesMap["ki"]);
-    kd = stringHelper::convertStringToNumber<double>(argumentsToValuesMap["kd"]);
-    numberOfLoopsOfPeriodicInputDemand =
-        stringHelper::convertStringToNumber<unsigned int>(argumentsToValuesMap["numberOfLoopsOfPeriodicInputDemand"]);
-    amplitudeOfInputDemand =
-        stringHelper::convertStringToNumber<unsigned int>(argumentsToValuesMap["amplitudeOfInputDemand"]);
-    numberOfSamplesOfInputDemandInOnePeriod = stringHelper::convertStringToNumber<unsigned int>(
-        argumentsToValuesMap["numberOfSamplesOfInputDemandInOnePeriod"]);
-    addedOffsetOfInputDemand =
-        stringHelper::convertStringToNumber<int>(argumentsToValuesMap["addedOffsetOfInputDemand"]);
-    targetInPidCalculation =
-        stringHelper::convertStringToNumber<double>(argumentsToValuesMap["targetInPidCalculation"]);
-    maxCellTxPower = stringHelper::convertStringToNumber<double>(argumentsToValuesMap["maxCellTxPower"]);
-    inputType = argumentsToValuesMap["inputType"];
-    machsModelType = argumentsToValuesMap["machsModelType"];
-    print();
-}
-
 void PidSimulatorConfiguration::processArgumentsWithEqualDelimeter(
     StringToStringMap& argumentsToValuesMap, stringHelper::strings const& argumentsInMain) {
     for (string const& argumentInMain : argumentsInMain) {
@@ -61,6 +41,26 @@ void PidSimulatorConfiguration::print() const {
     cout << "maxCellTxPower:[" << maxCellTxPower << "]\n";
     cout << "inputType:[" << inputType << "]\n";
     cout << "machsModelType:[" << machsModelType << "]\n";
+}
+
+void PidSimulatorConfiguration::saveArgumentValues(StringToStringMap& argumentsToValuesMap) {
+    kp = stringHelper::convertStringToNumber<double>(argumentsToValuesMap["kp"]);
+    ki = stringHelper::convertStringToNumber<double>(argumentsToValuesMap["ki"]);
+    kd = stringHelper::convertStringToNumber<double>(argumentsToValuesMap["kd"]);
+    numberOfLoopsOfPeriodicInputDemand =
+        stringHelper::convertStringToNumber<unsigned int>(argumentsToValuesMap["numberOfLoopsOfPeriodicInputDemand"]);
+    amplitudeOfInputDemand =
+        stringHelper::convertStringToNumber<unsigned int>(argumentsToValuesMap["amplitudeOfInputDemand"]);
+    numberOfSamplesOfInputDemandInOnePeriod = stringHelper::convertStringToNumber<unsigned int>(
+        argumentsToValuesMap["numberOfSamplesOfInputDemandInOnePeriod"]);
+    addedOffsetOfInputDemand =
+        stringHelper::convertStringToNumber<int>(argumentsToValuesMap["addedOffsetOfInputDemand"]);
+    targetInPidCalculation =
+        stringHelper::convertStringToNumber<double>(argumentsToValuesMap["targetInPidCalculation"]);
+    maxCellTxPower = stringHelper::convertStringToNumber<double>(argumentsToValuesMap["maxCellTxPower"]);
+    inputType = argumentsToValuesMap["inputType"];
+    machsModelType = argumentsToValuesMap["machsModelType"];
+    print();
 }
 
 }  // namespace alba

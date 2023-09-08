@@ -13,39 +13,40 @@ public:
     using Coordinate = std::pair<int, int>;
     using SearchNodeId = int;
     using BoolVector = std::vector<bool>;
+
     struct SearchNodeDetails {
         SearchNodeId previousNodeId;
         int workerId;
         int jobId;
         BoolVector isJobAssigned;
     };
+
     struct SearchNode {
         SearchNodeId nodeId;
         int accumulatedCost;
         int minimumPossibleCost;
     };
+
     struct CostComparator {
         bool operator()(SearchNode const& left, SearchNode const& right) const {
             return left.minimumPossibleCost > right.minimumPossibleCost;
         }
     };
+
     using SearchNodeIdToDetails = std::vector<SearchNodeDetails>;
     using MinCostPriorityQueue = std::priority_queue<SearchNode, std::vector<SearchNode>, CostComparator>;
+    explicit JobAssignmentProblem(CostMatrix const& costMatrix);
+    int getMinimalCostAndPrintAssignments();
     static constexpr SearchNodeId INVALID_NODE_ID = 0;
     static constexpr SearchNodeId START_NODE_ID = 1;
 
-    explicit JobAssignmentProblem(CostMatrix const& costMatrix);
-
-    int getMinimalCostAndPrintAssignments();
-
 private:
-    SearchNode createNode(SearchNode const& currentNode, Coordinate const& nextWorkerAndJob);
     [[nodiscard]] int getAccumulatedCost(int const workerId, int const jobId, SearchNode const& currentNode) const;
     [[nodiscard]] int getMinimumPossibleCost(
         int const workerId, int const jobId, BoolVector const& isJobAssigned) const;
-    SearchNodeId getNextNodeId();
     void printAssignments(SearchNodeId const nodeId) const;
-
+    SearchNode createNode(SearchNode const& currentNode, Coordinate const& nextWorkerAndJob);
+    SearchNodeId getNextNodeId();
     CostMatrix m_costMatrix;
     int m_numberOfWorkers;
     int m_numberOfJobs;

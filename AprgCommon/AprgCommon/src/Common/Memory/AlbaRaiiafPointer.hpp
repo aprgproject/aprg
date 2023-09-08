@@ -8,25 +8,22 @@ namespace alba {
 // RAIIAF
 // Resource Aquisition Is In A Function
 // anti RAII :(
-
 template <typename ContentType>
 class AlbaRaiiafPointer {
 public:
     // rule of five or six
     AlbaRaiiafPointer() = default;
+    AlbaRaiiafPointer(AlbaRaiiafPointer const &) = delete;
+    AlbaRaiiafPointer(AlbaRaiiafPointer &&) = delete;
+    AlbaRaiiafPointer &operator=(AlbaRaiiafPointer const &) = delete;
+    AlbaRaiiafPointer &operator=(AlbaRaiiafPointer &&) = delete;
 
     ~AlbaRaiiafPointer() {
         assert(!hasContent());
         // deAllocate(); // this is Raiiaf so we dont delete here
     }
 
-    AlbaRaiiafPointer(AlbaRaiiafPointer const &) = delete;
-    AlbaRaiiafPointer &operator=(AlbaRaiiafPointer const &) = delete;
-    AlbaRaiiafPointer(AlbaRaiiafPointer &&) = delete;
-    AlbaRaiiafPointer &operator=(AlbaRaiiafPointer &&) = delete;
-
     ContentType get() { return *(static_cast<ContentType *>(m_voidPointer)); }
-
     ContentType &getReference() { return *(static_cast<ContentType *>(m_voidPointer)); }
 
     void deAllocate() {

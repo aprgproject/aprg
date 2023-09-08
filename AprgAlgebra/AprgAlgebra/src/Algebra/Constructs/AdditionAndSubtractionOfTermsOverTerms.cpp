@@ -10,10 +10,7 @@
 
 namespace alba::algebra {
 
-AdditionAndSubtractionOfTermsOverTerms::AdditionAndSubtractionOfTermsOverTerms() = default;
-
 VectorOfTermsOverTerms const& AdditionAndSubtractionOfTermsOverTerms::getItems() const { return m_items; }
-
 TermAssociationTypes const& AdditionAndSubtractionOfTermsOverTerms::getAssociations() const { return m_associations; }
 
 Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpression() const {
@@ -82,6 +79,32 @@ void AdditionAndSubtractionOfTermsOverTerms::putAsAddOrSubtraction(
     putItem(getSimplifiedTermsOverTerms(item), association);
 }
 
+Monomial AdditionAndSubtractionOfTermsOverTerms::getCombinedMonomialMultiplier(Terms const& monomialMultiplierTerms) {
+    Monomials monomialMultipliers;
+    for (Term const& monomialMultiplierTerm : monomialMultiplierTerms) {
+        monomialMultipliers.emplace_back(createMonomialIfPossible(monomialMultiplierTerm));
+    }
+    Monomial monomialMultiplier(getLcmMonomialInMonomials(monomialMultipliers));
+
+    return monomialMultiplier;
+}
+
+Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedDenominatorExpression(Terms const& lcmDenominatorTerms) {
+    Expression combinedDenominator;
+    for (Term const& denominatorTerm : lcmDenominatorTerms) {
+        combinedDenominator.putTermWithMultiplicationIfNeeded(denominatorTerm);
+    }
+    return combinedDenominator;
+}
+
+TermsOverTerms AdditionAndSubtractionOfTermsOverTerms::getSimplifiedTermsOverTerms(
+    TermsOverTerms const& termsOverTerms) {
+    TermsOverTerms termsOverTermsSimplified(termsOverTerms);
+    termsOverTermsSimplified.setAsShouldSimplifyToFactors(true);
+    termsOverTermsSimplified.simplify();
+    return termsOverTermsSimplified;
+}
+
 void AdditionAndSubtractionOfTermsOverTerms::eraseCommonFactorOrAddDistinctFactor(
     Term const& termToCheck, Terms& commonFactors, Terms& outputFactors) {
     auto matchedTermIterator = find(commonFactors.begin(), commonFactors.end(), termToCheck);
@@ -92,14 +115,49 @@ void AdditionAndSubtractionOfTermsOverTerms::eraseCommonFactorOrAddDistinctFacto
     }
 }
 
-Monomial AdditionAndSubtractionOfTermsOverTerms::getCombinedMonomialMultiplier(Terms const& monomialMultiplierTerms) {
-    Monomials monomialMultipliers;
-    for (Term const& monomialMultiplierTerm : monomialMultiplierTerms) {
-        monomialMultipliers.emplace_back(createMonomialIfPossible(monomialMultiplierTerm));
+void AdditionAndSubtractionOfTermsOverTerms::emplaceMonomialMultiplierIfNeeded(
+    Terms& numeratorTerms, Monomial const& monomialMultiplier) {
+    if (!isTheValue(monomialMultiplier, 1)) {
+        numeratorTerms.emplace_back(Term(monomialMultiplier));
     }
-    Monomial monomialMultiplier(getLcmMonomialInMonomials(monomialMultipliers));
+}
 
-    return monomialMultiplier;
+void AdditionAndSubtractionOfTermsOverTerms::emplaceNonMonomialMultipliers(
+    Terms& numeratorTerms, Terms const& nonMonomialMultiplierTerms) {
+    for (Term const& numeratorTerm : nonMonomialMultiplierTerms) {
+        numeratorTerms.emplace_back(numeratorTerm);
+    }
+}
+
+void AdditionAndSubtractionOfTermsOverTerms::combineExpressionAsAddOrSubtract(
+    Expression& combinedExpression, Expression const& expression, TermAssociationType const association) {
+    if (TermAssociationType::Positive == association) {
+        combinedExpression.putTermWithAdditionIfNeeded(Term(expression));
+    } else {
+        combinedExpression.putTermWithSubtractionIfNeeded(Term(expression));
+    }
+}
+
+Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedNumeratorExpression(
+    Terms const& lcmDenominatorTerms) const {
+    Expression combinedNumerator;
+    int numberOfItems = m_items.size();
+    for (int numeratorIndex = 0; numeratorIndex < numberOfItems; ++numeratorIndex) {
+        Expression combinedNumeratorOnIndex(
+            getCombinedExpressionForNumeratorOnIndex(numeratorIndex, lcmDenominatorTerms));
+        combineExpressionAsAddOrSubtract(combinedNumerator, combinedNumeratorOnIndex, m_associations[numeratorIndex]);
+    }
+    return combinedNumerator;
+}
+
+Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpressionForNumeratorOnIndex(
+    int const numeratorIndex, Terms const& lcmDenominatorTerms) const {
+    Expression combinedNumeratorOnIndex(Term(1));
+    Terms numeratorTermsOnIndex(getRevisedNumeratorTermsBasedOnLcmOnIndex(numeratorIndex, lcmDenominatorTerms));
+    for (Term const& numeratorTermOnIndex : numeratorTermsOnIndex) {
+        combinedNumeratorOnIndex.putTermWithMultiplicationIfNeeded(numeratorTermOnIndex);
+    }
+    return combinedNumeratorOnIndex;
 }
 
 void AdditionAndSubtractionOfTermsOverTerms::updateMonomialAndNonMonomialMultipliersBasedOnDenominatorOnIndex(
@@ -124,71 +182,12 @@ void AdditionAndSubtractionOfTermsOverTerms::emplaceExistingNumeratorTerms(
     }
 }
 
-void AdditionAndSubtractionOfTermsOverTerms::emplaceMonomialMultiplierIfNeeded(
-    Terms& numeratorTerms, Monomial const& monomialMultiplier) {
-    if (!isTheValue(monomialMultiplier, 1)) {
-        numeratorTerms.emplace_back(Term(monomialMultiplier));
-    }
-}
-
-void AdditionAndSubtractionOfTermsOverTerms::emplaceNonMonomialMultipliers(
-    Terms& numeratorTerms, Terms const& nonMonomialMultiplierTerms) {
-    for (Term const& numeratorTerm : nonMonomialMultiplierTerms) {
-        numeratorTerms.emplace_back(numeratorTerm);
-    }
-}
-
-Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedNumeratorExpression(
-    Terms const& lcmDenominatorTerms) const {
-    Expression combinedNumerator;
-    int numberOfItems = m_items.size();
-    for (int numeratorIndex = 0; numeratorIndex < numberOfItems; ++numeratorIndex) {
-        Expression combinedNumeratorOnIndex(
-            getCombinedExpressionForNumeratorOnIndex(numeratorIndex, lcmDenominatorTerms));
-        combineExpressionAsAddOrSubtract(combinedNumerator, combinedNumeratorOnIndex, m_associations[numeratorIndex]);
-    }
-    return combinedNumerator;
-}
-
-Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedDenominatorExpression(Terms const& lcmDenominatorTerms) {
-    Expression combinedDenominator;
-    for (Term const& denominatorTerm : lcmDenominatorTerms) {
-        combinedDenominator.putTermWithMultiplicationIfNeeded(denominatorTerm);
-    }
-    return combinedDenominator;
-}
-
-Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpressionForNumeratorOnIndex(
-    int const numeratorIndex, Terms const& lcmDenominatorTerms) const {
-    Expression combinedNumeratorOnIndex(Term(1));
-    Terms numeratorTermsOnIndex(getRevisedNumeratorTermsBasedOnLcmOnIndex(numeratorIndex, lcmDenominatorTerms));
-    for (Term const& numeratorTermOnIndex : numeratorTermsOnIndex) {
-        combinedNumeratorOnIndex.putTermWithMultiplicationIfNeeded(numeratorTermOnIndex);
-    }
-    return combinedNumeratorOnIndex;
-}
-
-void AdditionAndSubtractionOfTermsOverTerms::combineExpressionAsAddOrSubtract(
-    Expression& combinedExpression, Expression const& expression, TermAssociationType const association) {
-    if (TermAssociationType::Positive == association) {
-        combinedExpression.putTermWithAdditionIfNeeded(Term(expression));
-    } else {
-        combinedExpression.putTermWithSubtractionIfNeeded(Term(expression));
-    }
-}
-
-TermsOverTerms AdditionAndSubtractionOfTermsOverTerms::getSimplifiedTermsOverTerms(
-    TermsOverTerms const& termsOverTerms) {
-    TermsOverTerms termsOverTermsSimplified(termsOverTerms);
-    termsOverTermsSimplified.setAsShouldSimplifyToFactors(true);
-    termsOverTermsSimplified.simplify();
-    return termsOverTermsSimplified;
-}
-
 void AdditionAndSubtractionOfTermsOverTerms::putItem(
     TermsOverTerms const& item, TermAssociationType const association) {
     m_items.emplace_back(item);
     m_associations.emplace_back(association);
 }
+
+AdditionAndSubtractionOfTermsOverTerms::AdditionAndSubtractionOfTermsOverTerms() = default;
 
 }  // namespace alba::algebra

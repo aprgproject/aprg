@@ -17,12 +17,11 @@ public:
         Time endTime;
         Profit profit;
     };
+
     using Times = std::vector<Time>;
     using Profits = std::vector<Profit>;
     using Jobs = std::vector<Job>;
-
     explicit WeightedJobScheduling(Jobs const& jobs);
-
     [[nodiscard]] Profit getMaxProfitByMonitoringTimeStampsUsingIterativeDP() const;
     [[nodiscard]] Profit getMaxProfitByMonitoringJobsUsingIterativeDP() const;
 

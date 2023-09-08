@@ -13,8 +13,8 @@ public:
     void mutateExpression(Expression& expression) override;
 
 private:
-    AlbaNumber getMaxDegreeForVariable(Polynomial const& polynomial);
     [[nodiscard]] Monomial getMonomialWithDegree(AlbaNumber const& degree) const;
+    AlbaNumber getMaxDegreeForVariable(Polynomial const& polynomial);
     std::string m_variableName;
 };
 

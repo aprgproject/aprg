@@ -19,7 +19,6 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using SetOfEdges = typename GraphTypes<Vertex>::SetOfEdges;
     using GraphToManipulate = UndirectedGraphWithListOfEdges<Vertex>;
-
     explicit FleuryAlgorithm(BaseUndirectedGraphWithVertex const& graph)
         : BaseClass(graph), b_graph(BaseClass::m_graph) {}
 
@@ -31,7 +30,6 @@ public:
         // two disconnected sets of edges.
         // 3. Add that edge to your circuit, and delete it from the graph.
         // 4. Continue until you’re done.
-
         Path result;
         Edges originalEdges(b_graph.getEdges());
         if (!originalEdges.empty()) {
@@ -110,6 +108,7 @@ private:
             putEulerEdgesOnPath(result, edgesInEulerCycle);
         }
     }
+
     BaseUndirectedGraphWithVertex const& b_graph;
 };
 

@@ -13,7 +13,6 @@ public:
     using RadixSorter = RadixSorterUsingQuickSortWith3WayPartitioning<Integers, Integer>;
     using GetDigitAtFunction = typename RadixSorter::GetDigitAtFunction;
     using IsDigitFunction = typename RadixSorter::IsDigitFunction;
-
     SortNNumbersFromZeroToNSquaredMinus1() = default;
 
     void sort(Integers& valuesToSort) const {

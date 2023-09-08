@@ -11,9 +11,7 @@ namespace ChessPeek {
 class DetailsOnTheEngine {
 public:
     DetailsOnTheEngine();
-
     BoardWithContext const& getBoardWithContext() const;
-
     void save(BoardWithContext const& boardWithContext);
 
 private:
@@ -21,7 +19,6 @@ private:
 };
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

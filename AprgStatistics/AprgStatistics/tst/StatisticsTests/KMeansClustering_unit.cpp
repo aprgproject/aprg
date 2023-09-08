@@ -10,7 +10,6 @@ using LocalKMeans = KMeansClustering<2>;
 using LocalSamples = LocalKMeans::Samples;
 using LocalSample = LocalKMeans::Sample;
 using LocalGroupOfSamples = LocalKMeans::GroupOfSamples;
-
 TEST(KMeansClusteringTestTwoDimensions, KMeansObjectCanbeCreated) { LocalKMeans kMeans; }
 
 TEST(KMeansClusteringTestTwoDimensions, DataSampleCanBeAdded) {

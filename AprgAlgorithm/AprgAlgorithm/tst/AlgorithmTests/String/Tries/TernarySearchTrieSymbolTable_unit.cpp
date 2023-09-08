@@ -13,29 +13,17 @@ using TrieForTest = TernarySearchTrieSymbolTable<int>;
 }  // namespace
 
 TEST(TernarySearchTrieSymbolTableTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<TrieForTest>(); }
-
 TEST(TernarySearchTrieSymbolTableTest, IsEmptyWorksWhenNotEmpty) { testIsEmptyWhenNotEmptyWithInt<TrieForTest>(); }
-
 TEST(TernarySearchTrieSymbolTableTest, DoesContainWorks) { testDoesContainWithInt<TrieForTest>(); }
-
 TEST(TernarySearchTrieSymbolTableTest, GetSizeWorksWhenEmpty) { testGetSizeWhenEmptyWithInt<TrieForTest>(); }
-
 TEST(TernarySearchTrieSymbolTableTest, GetSizeWorksWhenNotEmpty) { testGetSizeWhenNotEmptyWithInt<TrieForTest>(); }
-
 TEST(TernarySearchTrieSymbolTableTest, GetWorks) { testGetWithInt<TrieForTest>(); }
-
 TEST(TernarySearchTrieSymbolTableTest, GetLongestPrefixWorks) { testGetLongestPrefixOfWithInt<TrieForTest>(); }
-
 TEST(TernarySearchTrieSymbolTableTest, PutWorks) { testPutWithInt<TrieForTest>(); }
-
 TEST(TernarySearchTrieSymbolTableTest, DeleteBasedOnKeyWorks) { testDeleteBasedOnKeyWithInt<TrieForTest>(); }
-
 TEST(TernarySearchTrieSymbolTableTest, GetKeysWorks) { testGetKeysWithInt<TrieForTest>(); }
-
 TEST(TernarySearchTrieSymbolTableTest, GetAllKeysWithPrefixWorks) { testGetAllKeysWithPrefixWithInt<TrieForTest>(); }
-
 TEST(TernarySearchTrieSymbolTableTest, GetAllKeysThatMatchWorks) { testGetAllKeysThatMatchWithInt<TrieForTest>(); }
-
 TEST(TernarySearchTrieSymbolTableTest, Example1Works) { testExample1WithInt<TrieForTest>(); }
 
 TEST(TernarySearchTrieSymbolTableTest, GetNumberOfNodesWorksWhenEmpty) {

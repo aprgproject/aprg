@@ -15,6 +15,19 @@ using namespace std;
 
 namespace alba::algebra::DomainAndRange {
 
+bool isOneToOne(string const& variableNameToCheck, Equation const& equation) {
+    bool result(false);
+    SolutionSet domain(calculateDomainForEquation(variableNameToCheck, equation));
+    SolutionSet range(calculateRangeForEquation(variableNameToCheck, equation));
+    AlbaNumberIntervals const& domainIntervals(domain.getAcceptedIntervals());
+    AlbaNumberIntervals const& rangeIntervals(range.getAcceptedIntervals());
+    if (domainIntervals.size() == 1 && rangeIntervals.size() == 1) {
+        result = domainIntervals.front() == createAllRealValuesInterval() &&
+                 rangeIntervals.front() == createAllRealValuesInterval();
+    }
+    return result;
+}
+
 SolutionSet calculateDomainUsingTransitionValues(
     AlbaNumbers const& domainValuesToCheck, FunctionToCheck const& functionToCheck) {
     // This would be better if we have differentiation.
@@ -118,6 +131,30 @@ SolutionSet calculateDomainForEquationWithVariableToSubstitute(
     return domain;
 }
 
+AlbaNumbers getNumbers(AlbaNumbersSet const& collectedValues) {
+    return {collectedValues.cbegin(), collectedValues.cend()};
+}
+
+AlbaNumber getTransitionValue(
+    AlbaNumber const& inputValueYieldsToFiniteValue, AlbaNumber const& inputValueYieldsToNonFiniteValue,
+    FunctionToCheck const& functionToCheck) {
+    AlbaNumber currentValueToRealFiniteValue(inputValueYieldsToFiniteValue);
+    AlbaNumber currentValueToNonRealFiniteValue(inputValueYieldsToNonFiniteValue);
+    AlbaNumber newInputValue(inputValueYieldsToFiniteValue);
+    AlbaNumber previousInputValue(inputValueYieldsToNonFiniteValue);
+    while (previousInputValue != newInputValue) {
+        previousInputValue = newInputValue;
+        newInputValue = getAverage(currentValueToRealFiniteValue, currentValueToNonRealFiniteValue);
+        AlbaNumber newOutputValue(functionToCheck(newInputValue));
+        if (newOutputValue.isARealFiniteValue()) {
+            currentValueToRealFiniteValue = newInputValue;
+        } else {
+            currentValueToNonRealFiniteValue = newInputValue;
+        }
+    }
+    return newInputValue;
+}
+
 void collectAndUniqueValuesAndSort(AlbaNumbersSet& sortedValues, AlbaNumbers const& valuesToCheck) {
     for (AlbaNumber const& valueToCheck : valuesToCheck) {
         sortedValues.emplace(valueToCheck);
@@ -161,30 +198,6 @@ void appendTransitionValues(
     }
 }
 
-AlbaNumbers getNumbers(AlbaNumbersSet const& collectedValues) {
-    return {collectedValues.cbegin(), collectedValues.cend()};
-}
-
-AlbaNumber getTransitionValue(
-    AlbaNumber const& inputValueYieldsToFiniteValue, AlbaNumber const& inputValueYieldsToNonFiniteValue,
-    FunctionToCheck const& functionToCheck) {
-    AlbaNumber currentValueToRealFiniteValue(inputValueYieldsToFiniteValue);
-    AlbaNumber currentValueToNonRealFiniteValue(inputValueYieldsToNonFiniteValue);
-    AlbaNumber newInputValue(inputValueYieldsToFiniteValue);
-    AlbaNumber previousInputValue(inputValueYieldsToNonFiniteValue);
-    while (previousInputValue != newInputValue) {
-        previousInputValue = newInputValue;
-        newInputValue = getAverage(currentValueToRealFiniteValue, currentValueToNonRealFiniteValue);
-        AlbaNumber newOutputValue(functionToCheck(newInputValue));
-        if (newOutputValue.isARealFiniteValue()) {
-            currentValueToRealFiniteValue = newInputValue;
-        } else {
-            currentValueToNonRealFiniteValue = newInputValue;
-        }
-    }
-    return newInputValue;
-}
-
 void retrieveTwoVariableNames(
     string& nameThatMatch, string& nameThatDoesNotMatch, VariableNamesSet const& variableNames,
     string const& variableNameToCheck) {
@@ -200,19 +213,6 @@ void retrieveTwoVariableNames(
             nameThatDoesNotMatch = variableName1;
         }
     }
-}
-
-bool isOneToOne(string const& variableNameToCheck, Equation const& equation) {
-    bool result(false);
-    SolutionSet domain(calculateDomainForEquation(variableNameToCheck, equation));
-    SolutionSet range(calculateRangeForEquation(variableNameToCheck, equation));
-    AlbaNumberIntervals const& domainIntervals(domain.getAcceptedIntervals());
-    AlbaNumberIntervals const& rangeIntervals(range.getAcceptedIntervals());
-    if (domainIntervals.size() == 1 && rangeIntervals.size() == 1) {
-        result = domainIntervals.front() == createAllRealValuesInterval() &&
-                 rangeIntervals.front() == createAllRealValuesInterval();
-    }
-    return result;
 }
 
 }  // namespace alba::algebra::DomainAndRange

@@ -17,14 +17,14 @@ public:
         AlbaLocalPathHandler(m_path).deleteFile();
     }
 
-    std::ofstream& getFileDumpStreamReference() { return m_fileOptional.value(); }
-
     bool isFileStreamOpened() {
         if (m_fileOptional) {
             return m_fileOptional->is_open();
         }
         return false;
     }
+
+    std::ofstream& getFileDumpStreamReference() { return m_fileOptional.value(); }
 
     void openFileIfNeeded(std::string const& path) {
         if (!m_fileOptional) {

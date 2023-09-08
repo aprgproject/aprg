@@ -20,13 +20,13 @@ public:
     using ValueUniquePointer = std::unique_ptr<Value>;
     struct Node;
     using NodeUniquePointer = std::unique_ptr<Node>;
+
     struct Node {
         ValueUniquePointer valueUniquePointer;
         std::array<NodeUniquePointer, RADIX> next;  // costly
     };
 
     RWayTrieUsingLinkedArrays() : m_root(nullptr) {}
-
     [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 
     [[nodiscard]] bool doesContain(Key const& key) const override {
@@ -35,7 +35,6 @@ public:
     }
 
     [[nodiscard]] int getSize() const override { return getSize(m_root); }
-
     [[nodiscard]] int getNumberOfNodes() const { return getNumberOfNodes(m_root); }
 
     [[nodiscard]] Value get(Key const& key) const override {
@@ -55,10 +54,6 @@ public:
         return keyToCheck.substr(0, longestPrefixLength);
     }
 
-    void put(Key const& key, Value const& value) override { put(m_root, key, value, 0); }
-
-    void deleteBasedOnKey(Key const& key) override { deleteBasedOnKeyAndReturnIfDeleted(m_root, key, 0); }
-
     [[nodiscard]] Strings getKeys() const override { return getAllKeysWithPrefix(std::string()); }
 
     [[nodiscard]] Strings getAllKeysWithPrefix(Key const& prefix) const override {
@@ -73,14 +68,10 @@ public:
         return result;
     }
 
-private:
-    bool isEmptyNode(NodeUniquePointer const& currentNodePointer) {
-        return !currentNodePointer->valueUniquePointer &&
-               std::all_of(
-                   currentNodePointer->next.cbegin(), currentNodePointer->next.cend(),
-                   [](NodeUniquePointer const& nodePointer) { return !nodePointer; });
-    }
+    void put(Key const& key, Value const& value) override { put(m_root, key, value, 0); }
+    void deleteBasedOnKey(Key const& key) override { deleteBasedOnKeyAndReturnIfDeleted(m_root, key, 0); }
 
+private:
     [[nodiscard]] int getSize(NodeUniquePointer const& currentNodePointer) const {
         int result(0);
         if (currentNodePointer) {
@@ -168,15 +159,11 @@ private:
         }
     }
 
-    void put(NodeUniquePointer& currentNodePointer, Key const& key, Value const& value, int const index) {
-        if (!currentNodePointer) {
-            currentNodePointer = std::make_unique<Node>();
-        }
-        if (index == static_cast<int>(key.length())) {
-            currentNodePointer->valueUniquePointer = std::make_unique<Value>(value);
-        } else {
-            put(currentNodePointer->next[key[index]], key, value, index + 1);
-        }
+    bool isEmptyNode(NodeUniquePointer const& currentNodePointer) {
+        return !currentNodePointer->valueUniquePointer &&
+               std::all_of(
+                   currentNodePointer->next.cbegin(), currentNodePointer->next.cend(),
+                   [](NodeUniquePointer const& nodePointer) { return !nodePointer; });
     }
 
     bool deleteBasedOnKeyAndReturnIfDeleted(NodeUniquePointer& currentNodePointer, Key const& key, int const index) {
@@ -199,6 +186,17 @@ private:
             }
         }
         return isDeleted;
+    }
+
+    void put(NodeUniquePointer& currentNodePointer, Key const& key, Value const& value, int const index) {
+        if (!currentNodePointer) {
+            currentNodePointer = std::make_unique<Node>();
+        }
+        if (index == static_cast<int>(key.length())) {
+            currentNodePointer->valueUniquePointer = std::make_unique<Value>(value);
+        } else {
+            put(currentNodePointer->next[key[index]], key, value, index + 1);
+        }
     }
 
     NodeUniquePointer m_root;

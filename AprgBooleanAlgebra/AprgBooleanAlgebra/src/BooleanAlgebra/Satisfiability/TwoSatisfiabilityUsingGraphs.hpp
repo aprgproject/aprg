@@ -11,16 +11,13 @@ class TwoSatisfiabilityUsingGraphs {
 public:
     using DirectedGraph = algorithm::DirectedGraphWithListOfEdges<VariableTerm>;
     using ConnectedComponents = algorithm::StronglyConnectedComponentsUsingKosarajuSharir<VariableTerm>;
-
     explicit TwoSatisfiabilityUsingGraphs(SatisfiabilityTerms const& satTerms);
-
     [[nodiscard]] bool hasSolution() const;
     [[nodiscard]] Term getSolution() const;
 
 private:
     static VariableNamesSet createVariableNamesFromSatTerms(SatisfiabilityTerms const& satTerms);
     static DirectedGraph createDirectedGraphBasedFromSatTerms(SatisfiabilityTerms const& satTerms);
-
     VariableNamesSet m_variableNames;
     DirectedGraph m_graph;
     ConnectedComponents m_connectedComponents;

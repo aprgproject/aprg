@@ -49,6 +49,15 @@ StartupLogAnalyzer::StartupLogAnalyzer()
 
 {}
 
+void StartupLogAnalyzer::saveDataTimeToCsv(
+    ofstream& outputCsvFileStream, string const& description, vector<double> const& data) {
+    outputCsvFileStream << description << ",";
+    for (double const value : data) {
+        outputCsvFileStream << value << ",";
+    }
+    outputCsvFileStream << "\n";
+}
+
 void StartupLogAnalyzer::clear() { m_processingAndMessagingTotalDelay = 0; }
 
 void StartupLogAnalyzer::saveDataToCsv(string const& csvPath) {
@@ -98,15 +107,6 @@ void StartupLogAnalyzer::saveDataToCsv(string const& csvPath) {
     saveDataTimeToCsv(outputFileStream, "Processing and messaging total delay:", m_processingAndMessagingTotalDelays);
 }
 
-void StartupLogAnalyzer::saveDataTimeToCsv(
-    ofstream& outputCsvFileStream, string const& description, vector<double> const& data) {
-    outputCsvFileStream << description << ",";
-    for (double const value : data) {
-        outputCsvFileStream << value << ",";
-    }
-    outputCsvFileStream << "\n";
-}
-
 void StartupLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSortedLog) {
     clear();
 
@@ -120,6 +120,18 @@ void StartupLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBt
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         analyzeStartupDelays(lineInLogs, previousNotableTime);
     }
+}
+
+double StartupLogAnalyzer::getTotalSeconds(BtsLogTime const& beforeTime, BtsLogTime const& afterTime) {
+    BtsLogTime latency = afterTime - beforeTime;
+    return getTotalSeconds(latency);
+}
+
+double StartupLogAnalyzer::getTotalSeconds(BtsLogTime const& btsLogTime) {
+    double result(
+        static_cast<double>(btsLogTime.getMinutes()) * 1000000 * 60 +
+        static_cast<double>(btsLogTime.getSeconds()) * 1000000 + static_cast<double>(btsLogTime.getMicroSeconds()));
+    return result / 1000000;
 }
 
 void StartupLogAnalyzer::analyzeStartupDelays(string const& lineInLogs, BtsLogTime& previousNotableTime) {
@@ -467,7 +479,6 @@ void StartupLogAnalyzer::analyzeStartupDelays(string const& lineInLogs, BtsLogTi
             cout << "Log: [" << lineInLogs << "]\n\n";
 
             // print other stuffs:
-
             cout << "Total processing and messaging delay: " << m_processingAndMessagingTotalDelay << "\n";
             m_processingAndMessagingTotalDelays.emplace_back(m_processingAndMessagingTotalDelay);
             cout << "Total time from hardware configuration to cell on air: "
@@ -477,18 +488,6 @@ void StartupLogAnalyzer::analyzeStartupDelays(string const& lineInLogs, BtsLogTi
             state = 1;
         }
     }
-}
-
-double StartupLogAnalyzer::getTotalSeconds(BtsLogTime const& beforeTime, BtsLogTime const& afterTime) {
-    BtsLogTime latency = afterTime - beforeTime;
-    return getTotalSeconds(latency);
-}
-
-double StartupLogAnalyzer::getTotalSeconds(BtsLogTime const& btsLogTime) {
-    double result(
-        static_cast<double>(btsLogTime.getMinutes()) * 1000000 * 60 +
-        static_cast<double>(btsLogTime.getSeconds()) * 1000000 + static_cast<double>(btsLogTime.getMicroSeconds()));
-    return result / 1000000;
 }
 
 }  // namespace alba

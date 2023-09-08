@@ -12,15 +12,8 @@ template <typename Object, typename QueueWithObject>
 class StackUsingTwoQueues : public BaseStack<Object> {
 public:
     StackUsingTwoQueues() = default;
-
     [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
-
     [[nodiscard]] int getSize() const override { return m_queueAtTheTop.getSize() + m_queueAtTheBottom.getSize(); }
-
-    void push(Object const& object) override {
-        m_queueAtTheTop.enqueue(object);
-        balanceSizesAtPushIfNeeded();
-    }
 
     Object pop() override {
         rotateFirstToLast(m_queueAtTheTop);
@@ -29,7 +22,19 @@ public:
         return result;
     }
 
+    void push(Object const& object) override {
+        m_queueAtTheTop.enqueue(object);
+        balanceSizesAtPushIfNeeded();
+    }
+
 private:
+    [[nodiscard]] int getTargetSizeAtTop(int const totalSize) const {
+        // return the logarithmic size
+        return std::max(
+            1, static_cast<int>(
+                   AlbaBitValueUtilities<uint64_t>::getLogarithmWithBase2Of(static_cast<uint64_t>(totalSize))));
+    }
+
     void balanceSizesAtPushIfNeeded() {
         // remove items to make the size logarithmic
         int targetSizeAtTop = getTargetSizeAtTop(getSize());
@@ -50,13 +55,6 @@ private:
             int targetSizeAtTop = getTargetSizeAtTop(m_queueAtTheBottom.getSize());
             moveFromBottomToTop(targetSizeAtTop);
         }
-    }
-
-    [[nodiscard]] int getTargetSizeAtTop(int const totalSize) const {
-        // return the logarithmic size
-        return std::max(
-            1, static_cast<int>(
-                   AlbaBitValueUtilities<uint64_t>::getLogarithmWithBase2Of(static_cast<uint64_t>(totalSize))));
     }
 
     void moveFromBottomToTop(int const numberOfItems) {

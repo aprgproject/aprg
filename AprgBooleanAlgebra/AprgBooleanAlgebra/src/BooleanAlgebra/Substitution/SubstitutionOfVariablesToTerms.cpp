@@ -8,12 +8,12 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
-SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms(
-    initializer_list<VariableTermPair> const& variablesWithTerms) {
+SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms(VariablesToTermsMap const& variablesWithTerms) {
     putVariablesWithTerms(variablesWithTerms);
 }
 
-SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms(VariablesToTermsMap const& variablesWithTerms) {
+SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms(
+    initializer_list<VariableTermPair> const& variablesWithTerms) {
     putVariablesWithTerms(variablesWithTerms);
 }
 

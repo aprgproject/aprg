@@ -75,7 +75,6 @@ private:
 // Algorithm in short terms: Add adjacent edges with current minimum weight in the tree.
 // Since its lazy, adjacent edges are added regardless of weight and are just checked when identifying the one with the
 // minimum weight.
-
 // Prim's algorithm: proof of correctness
 // Proposition: Prim's algorithm computes the MST.(Jarnik 1930, Dijkstra 1957, Prim 1959)
 // Proof: Prims algorithm is a special case of the greedy MST algorithm
@@ -83,14 +82,12 @@ private:
 // -> Cut = set of vertices connected on tree
 // -> No crossing edge is black
 // -> No crossing edge has lower weight
-
 // Running time:
 // Proposition: Lazy Prim's algorithm computes the MST in time proportional to E log E and extra space proportional to
 // E(worst) Proof:
 // -> Time for each part:
 // ---> Deleting the minimum in PQ = E(frequency) * log E(time per operation)
 // ---> Inserting in PQ = E(frequency) * log E(time per operation)
-
 // Other discussions:
 // Difference between eager and lazy?
 // -> Lazy adds (edge) to search regardless of weight

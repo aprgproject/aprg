@@ -8,7 +8,6 @@ template <typename Values>
 class RandomElementAtForwardTraversal {
 public:
     // This can be used to select a random node from a Singly Linked List
-
     using Value = typename Values::value_type;
     RandomElementAtForwardTraversal() = default;
 
@@ -17,7 +16,6 @@ public:
         // Time Complexity: O(n), as we are using a loop to traverse n times.
         // Where n is the number of nodes in the linked list.
         // Auxiliary Space: O(1), as we are not using any extra space.
-
         Value result{};
         int count = 0;
         AlbaUniformNonDeterministicRandomizer<int> randomizer(0, count);

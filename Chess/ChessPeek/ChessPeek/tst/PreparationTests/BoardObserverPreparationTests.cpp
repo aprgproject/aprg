@@ -168,7 +168,6 @@ uint32_t getLabelColor(SetOfPieces const& setOfPieces) {
 }
 
 }  // namespace
-
 TEST(BoardObserverPreparationTest, DISABLED_CheckChessBitValue_ForChessDotComVersus) {
     AlbaLocalPathHandler inputFile(APRG_DIR
                                    R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComVersus\ChessDotComVersus.bmp)");
@@ -402,7 +401,6 @@ TEST(BoardObserverPreparationTest, DISABLED_FindImportantPoints_ForLichessStream
 }
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

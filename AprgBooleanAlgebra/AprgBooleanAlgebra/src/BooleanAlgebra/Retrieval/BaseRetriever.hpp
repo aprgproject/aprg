@@ -9,11 +9,6 @@ template <typename DataType>
 class BaseRetriever {
 public:
     virtual ~BaseRetriever() = default;  // virtual destructor because of virtual functions (vtable exists)
-
-    [[nodiscard]] DataType const& getSavedData() const { return m_savedData; }
-
-    DataType& getSavedDataReference() { return m_savedData; }
-
     virtual void retrieveFromTerm(Term const& term) {
         if (term.isConstant()) {
             retrieveFromConstant(term.getConstantConstReference());
@@ -25,7 +20,6 @@ public:
     }
 
     virtual void retrieveFromConstant(Constant const&) {}
-
     virtual void retrieveFromVariableTerm(VariableTerm const&) {}
 
     virtual void retrieveFromExpression(Expression const& expression) {
@@ -33,6 +27,9 @@ public:
             retrieveFromTerm(getTermConstReferenceFromUniquePointer(wrappedTerm.baseTermPointer));
         }
     }
+
+    [[nodiscard]] DataType const& getSavedData() const { return m_savedData; }
+    DataType& getSavedDataReference() { return m_savedData; }
 
 protected:
     DataType m_savedData;

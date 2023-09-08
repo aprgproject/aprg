@@ -8,14 +8,13 @@
 namespace alba::algorithm {
 
 template <typename Values>  // this should be a non set container to be efficient because std::lower_bound and
-                            // std::upper_bound are used
+// std::upper_bound are used
 class BinarySearchWithCppFunctions {
 public:
     using Index = int;
     using Value = typename Values::value_type;
-    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
-
     explicit BinarySearchWithCppFunctions(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     [[nodiscard]] Index getIndexOfValue(Value const& target) const {
         Index result(INVALID_INDEX);

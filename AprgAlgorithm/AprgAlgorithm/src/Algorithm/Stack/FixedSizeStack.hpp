@@ -11,18 +11,10 @@ template <typename Object, int SIZE>
 class FixedSizeStack : public BaseStack<Object> {
 public:
     using Objects = std::array<Object, SIZE>;
-
     FixedSizeStack() = default;
-
     [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
-
     [[nodiscard]] int getSize() const override { return m_size; }
-
-    void push(Object const& object) override {
-        // runs in constant time and no allocation (faster than linked list)
-        assert(m_size < SIZE);
-        m_objects[m_size++] = object;
-    }
+    [[nodiscard]] Objects const& getObjects() const { return m_objects; }
 
     Object pop() override {
         // runs in constant time and no deallocation (faster than linked list)
@@ -30,7 +22,11 @@ public:
         return m_objects[--m_size];
     }
 
-    [[nodiscard]] Objects const& getObjects() const { return m_objects; }
+    void push(Object const& object) override {
+        // runs in constant time and no allocation (faster than linked list)
+        assert(m_size < SIZE);
+        m_objects[m_size++] = object;
+    }
 
 private:
     int m_size{0};

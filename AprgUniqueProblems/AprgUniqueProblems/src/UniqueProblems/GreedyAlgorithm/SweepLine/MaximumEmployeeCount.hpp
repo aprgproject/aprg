@@ -8,18 +8,16 @@ namespace alba {
 class MaximumEmployeeCount {
 public:
     // sweepline approach
-
     enum class EventType { StartOfDayOfEmployee = 1, EndOfDayOfEmployee = 2 };
 
     struct Event {
+        bool operator<(Event const& event) const;
         int time;
         EventType eventType;
-        bool operator<(Event const& event) const;
     };
 
     [[nodiscard]] int getMaximumCountOfEmployeesAtATime() const;
     void addEmployeeSchedule(int const startTime, int const endTime);  // assumption is every entry is unique
-
 private:
     std::multiset<Event> m_sortedEvents;
 };

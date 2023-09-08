@@ -25,8 +25,8 @@ public:
     PossibilitiesGeneration() = delete;
     ~PossibilitiesGeneration() = delete;
     PossibilitiesGeneration(PossibilitiesGeneration const&) = delete;
-    PossibilitiesGeneration& operator=(PossibilitiesGeneration const&) = delete;
     PossibilitiesGeneration(PossibilitiesGeneration&&) = delete;
+    PossibilitiesGeneration& operator=(PossibilitiesGeneration const&) = delete;
     PossibilitiesGeneration& operator=(PossibilitiesGeneration&&) = delete;
 
     static Possibilities generatePossibilitiesUsingRecursion(Objects const& objects) {

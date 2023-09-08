@@ -12,6 +12,7 @@ void AlbaStreamParameterWriter::writeData(string const& data) const {
 }
 
 void AlbaStreamParameterWriter::writeData(string_view const data) const { writeStringViewData(data); }
+void AlbaStreamParameterWriter::flush() { m_stream.flush(); }
 
 void AlbaStreamParameterWriter::writeStringViewData(string_view const data) const {
     bool isExisting(!data.empty());
@@ -20,7 +21,5 @@ void AlbaStreamParameterWriter::writeStringViewData(string_view const data) cons
         m_stream << data << "\n";
     }
 }
-
-void AlbaStreamParameterWriter::flush() { m_stream.flush(); }
 
 }  // namespace alba

@@ -15,22 +15,19 @@ public:
         double radius;
         uint32_t color;
     };
+
     using PointToPenCircleDetailsMap = std::map<BitmapXY, PenCircleDetails>;
     using PointAndPenCircleDetailsPair = std::pair<BitmapXY, PenCircleDetails>;
     using PointAndPenCircleDetailsPairs = std::vector<PointAndPenCircleDetailsPair>;
     using CircleCenterConnection = std::pair<BitmapXY, BitmapXY>;
     using CircleCenterConnections = std::set<CircleCenterConnection>;
-
     [[nodiscard]] bool isPenCircle(BitmapXY const& point) const;
-
     [[nodiscard]] PenCircleDetails getPenCircleDetails(BitmapXY const& point) const;
     [[nodiscard]] PointToPenCircleDetailsMap const& getPenCircles() const;
     [[nodiscard]] CircleCenterConnections const& getCenterConnections() const;
     [[nodiscard]] PointAndPenCircleDetailsPairs getNearestPenCirclesToAPoint(
         BitmapXY const& point, int const distance) const;
-
     PointToPenCircleDetailsMap& getPenCirclesReference();
-
     void addAsPenCircle(BitmapXY const& point, double const radius, uint32_t const color);
     void removePenCircleAt(BitmapXY const& circleCenter);
     void connectCircles(BitmapXY const& circle1Center, BitmapXY const& circle2Center);

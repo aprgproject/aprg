@@ -16,26 +16,23 @@ public:
     using PriceMatrix = matrix::AlbaMatrix<Price>;
     using ProductAndDayPair = std::pair<Product, Day>;
     using ProductAndDayPairs = std::vector<ProductAndDayPair>;
-    static constexpr Price INVALID_PRICE = std::numeric_limits<Price>::max();
-    static constexpr Price UNUSED_PRICE = INVALID_PRICE - 1;
-
     explicit ProductDayProblem(PriceMatrix const& pricesInDayByProduct);
-
+    static constexpr Price INVALID_PRICE = std::numeric_limits<Price>::max();
     [[nodiscard]] Price getMinimumPriceUsingMemoizationDP() const;
     [[nodiscard]] Price getMinimumPriceUsingIterativeDP() const;
+    static constexpr Price UNUSED_PRICE = INVALID_PRICE - 1;
 
 private:
-    Price getMinimumPriceUsingMemoizationDP(
-        PriceMatrix& minimumPrices, Day const day, ProductBits const productBits) const;
-
     [[nodiscard]] static bool isProductIncluded(ProductBits const productBits, Product const product);
+    static ProductBits getProductBits(Product const product);
+    static ProductBits addProduct(ProductBits const productBits, Product const product);
+    static ProductBits removeProduct(ProductBits const productBits, Product const product);
     [[nodiscard]] Product getNumberOfProducts() const;
     [[nodiscard]] Day getNumberOfDays() const;
     [[nodiscard]] ProductBits getNumberOfProductsSubsets() const;
     [[nodiscard]] ProductBits getProductBitsWithAllProducts() const;
-    static ProductBits getProductBits(Product const product);
-    static ProductBits addProduct(ProductBits const productBits, Product const product);
-    static ProductBits removeProduct(ProductBits const productBits, Product const product);
+    Price getMinimumPriceUsingMemoizationDP(
+        PriceMatrix& minimumPrices, Day const day, ProductBits const productBits) const;
     PriceMatrix m_pricesInDayByProduct;
 };
 

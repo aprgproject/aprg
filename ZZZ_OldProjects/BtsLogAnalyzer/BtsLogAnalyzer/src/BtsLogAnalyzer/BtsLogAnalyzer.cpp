@@ -14,14 +14,48 @@ using namespace wcdmaToolsBackend;
 
 namespace alba {
 
-BtsLogAnalyzer::BtsLogAnalyzer() : m_totalDelay(0), m_count(0) {}
-
 BtsLogAnalyzer::BtsLogAnalyzer(string const& pathOfOutputFile)
     : m_outputStream(pathOfOutputFile), m_totalDelay(0), m_count(0) {
     if (m_outputStream.is_open()) {
         cout << "OutputStream is opened. Saving to output files"
              << "\n";
     }
+}
+
+BtsLogAnalyzer::BtsLogAnalyzer() : m_totalDelay(0), m_count(0) {}
+
+double BtsLogAnalyzer::getWireSharkTime(string const& lineInLogs) {
+    int length(lineInLogs.length());
+    int startIndexOfTime = 0;
+    int endIndexOfTime = 0;
+    int i = 0;
+    for (; i < length && stringHelper::isWhiteSpace(lineInLogs[i]); ++i) {
+    }
+    for (; i < length && stringHelper::isNumber(lineInLogs[i]); ++i) {
+    }
+    startIndexOfTime = i;
+    for (; i < length && stringHelper::isWhiteSpace(lineInLogs[i]); ++i) {
+    }
+    for (; i < length && !stringHelper::isWhiteSpace(lineInLogs[i]); ++i) {
+    }
+    endIndexOfTime = i;
+    return stringHelper::convertStringToNumber<double>(
+        lineInLogs.substr(startIndexOfTime, endIndexOfTime - startIndexOfTime));
+}
+
+string BtsLogAnalyzer::getNumberAfterThisString(string const& mainString, string const& stringToSearch) {
+    string result;
+    int firstIndexOfFirstString = mainString.find(stringToSearch);
+    if (stringHelper::isNotNpos(firstIndexOfFirstString)) {
+        int lastIndexOfFirstString = static_cast<int>(firstIndexOfFirstString + stringToSearch.length());
+        int lastIndexOfNumber = 0;
+        for (lastIndexOfNumber = lastIndexOfFirstString; stringHelper::isNumber(mainString[lastIndexOfNumber]);
+             ++lastIndexOfNumber) {
+            ;
+        }
+        result = mainString.substr(lastIndexOfFirstString, lastIndexOfNumber - lastIndexOfFirstString);
+    }
+    return result;
 }
 
 void BtsLogAnalyzer::processFileForToCountUsersWithTracing(string const& filePath) {
@@ -48,6 +82,180 @@ void BtsLogAnalyzer::processFileForToCountUsersWithTracing(string const& filePat
             }
         }
     }
+}
+
+void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePath) {
+    AlbaLocalPathHandler filePathHandler(filePath);
+    cout << "processFile: " << filePathHandler.getFullPath() << "\n";
+
+    ifstream inputLogFileStream(filePath);
+    AlbaFileReader fileReader(inputLogFileStream);
+
+    ofstream grmFetchFileStream(filePathHandler.getDirectory() + R"(grmFetchFileStream.csv)");
+    ofstream grmProcessFileStream(filePathHandler.getDirectory() + R"(grmProcessFileStream.csv)");
+    ofstream messageDeliveryFileStream(filePathHandler.getDirectory() + R"(messageDeliveryFileStream.csv)");
+    ofstream rlSetupFileStream(filePathHandler.getDirectory() + R"(rlSetupFileStream.csv)");
+    grmFetchFileStream << "crnccId,"
+                       << "nbccId,"
+                       << "transactionId,"
+                       << "difference"
+                       << "\n";
+    grmProcessFileStream << "crnccId,"
+                         << "nbccId,"
+                         << "transactionId,"
+                         << "delay"
+                         << "\n";
+    messageDeliveryFileStream << "crnccId,"
+                              << "nbccId,"
+                              << "transactionId,"
+                              << "delay"
+                              << "\n";
+    rlSetupFileStream << "crnccId,"
+                      << "nbccId,"
+                      << "transactionId,"
+                      << "delay"
+                      << "\n";
+
+    std::map<UniqueId, BtsLogDelay> grmProcessMap;
+    std::map<UniqueId, BtsLogDelay> messageDeliveryMap;
+    std::map<UniqueId, BtsLogDelay> rlSetupMap;
+
+    double grmFetchTotal = 0;
+    int grmFetchCount = 0;
+    double grmProcessTotal = 0;
+    int grmProcessCount = 0;
+    double messageDeliveryTotal = 0;
+    int messageDeliveryCount = 0;
+    double rlSetupTotal = 0;
+    int rlSetupCount = 0;
+
+    while (fileReader.isNotFinished()) {
+        UniqueId uniqueKey;
+        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        if (stringHelper::isStringFoundNotCaseSensitive(
+                lineInLogs, R"(INF/TCOM/G, decodeRadioLinkRequest API_TCOM_RNC_MSG)")) {
+            int crnccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
+            int nbccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
+            int transactionId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
+            unsigned int difference =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "diff in ms: "));
+            if (difference != 0x80000000) {
+                grmFetchTotal += difference * 1000;
+                ++grmFetchCount;
+                grmFetchFileStream << crnccId << "," << nbccId << "," << transactionId << "," << setw(10) << difference
+                                   << "\n";
+            }
+        } else if (stringHelper::isStringFoundNotCaseSensitive(
+                       lineInLogs, R"(INF/TCOM/G, Received API_TCOM_RNC_MSG)")) {
+            uniqueKey.crnccId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
+            uniqueKey.nbccId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
+            uniqueKey.transactionId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
+            BtsLogDelay& processMapInstance = grmProcessMap[uniqueKey];
+            BtsLogPrint logPrint(lineInLogs);
+            if (!logPrint.getBtsTime().isStartup()) {
+                processMapInstance.startTimeOptional = logPrint.getBtsTime();
+            }
+        } else if (stringHelper::isStringFoundNotCaseSensitive(lineInLogs, R"(INF/TCOM/G, Sending API_TCOM_RNC_MSG)")) {
+            uniqueKey.crnccId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
+            uniqueKey.nbccId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
+            uniqueKey.transactionId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
+            BtsLogDelay& processMapInstance = grmProcessMap[uniqueKey];
+            BtsLogDelay& messageDeliveryInstance = messageDeliveryMap[uniqueKey];
+            BtsLogPrint logPrint(lineInLogs);
+            if (!logPrint.getBtsTime().isStartup()) {
+                processMapInstance.endTimeOptional = logPrint.getBtsTime();
+                messageDeliveryInstance.startTimeOptional = logPrint.getBtsTime();
+            }
+        } else if (stringHelper::isStringFoundNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlSetupReq3G)")) {
+            uniqueKey.crnccId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
+            uniqueKey.nbccId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
+            uniqueKey.transactionId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
+            BtsLogDelay& messageDeliveryInstance = messageDeliveryMap[uniqueKey];
+            BtsLogDelay& rlSetupMapInstance = rlSetupMap[uniqueKey];
+            BtsLogPrint logPrint(lineInLogs);
+            if (!logPrint.getBtsTime().isStartup()) {
+                messageDeliveryInstance.endTimeOptional = logPrint.getBtsTime();
+                rlSetupMapInstance.startTimeOptional = logPrint.getBtsTime();
+            }
+        } else if (stringHelper::isStringFoundNotCaseSensitive(lineInLogs, R"(RLH_CTRL_RlSetupResp3G)")) {
+            uniqueKey.crnccId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
+            uniqueKey.nbccId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
+            uniqueKey.transactionId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
+            BtsLogDelay& rlSetupMapInstance = rlSetupMap[uniqueKey];
+            BtsLogPrint logPrint(lineInLogs);
+            if (!logPrint.getBtsTime().isStartup()) {
+                rlSetupMapInstance.endTimeOptional = logPrint.getBtsTime();
+            }
+        }
+
+        BtsLogDelay& processMapInstance = grmProcessMap[uniqueKey];
+        if (processMapInstance.startTimeOptional && processMapInstance.endTimeOptional) {
+            if (processMapInstance.startTimeOptional.value() < processMapInstance.endTimeOptional.value()) {
+                BtsLogTime delayTime =
+                    processMapInstance.endTimeOptional.value() - processMapInstance.startTimeOptional.value();
+                int delay = static_cast<int>(delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000);
+                grmProcessTotal += delay;
+                ++grmProcessCount;
+                grmProcessFileStream << uniqueKey.crnccId << "," << uniqueKey.nbccId << "," << uniqueKey.transactionId
+                                     << "," << setw(10) << delay << "\n";
+            }
+            grmProcessMap.erase(uniqueKey);
+        }
+
+        BtsLogDelay& messageDeliveryInstance = messageDeliveryMap[uniqueKey];
+        if (messageDeliveryInstance.startTimeOptional && messageDeliveryInstance.endTimeOptional) {
+            if (messageDeliveryInstance.startTimeOptional.value() < messageDeliveryInstance.endTimeOptional.value()) {
+                BtsLogTime delayTime =
+                    messageDeliveryInstance.endTimeOptional.value() - messageDeliveryInstance.startTimeOptional.value();
+                int delay = static_cast<int>(delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000);
+                messageDeliveryTotal += delay;
+                ++messageDeliveryCount;
+                messageDeliveryFileStream << uniqueKey.crnccId << "," << uniqueKey.nbccId << ","
+                                          << uniqueKey.transactionId << "," << setw(10) << delay << "\n";
+            }
+            messageDeliveryMap.erase(uniqueKey);
+        }
+
+        BtsLogDelay& rlSetupMapInstance = rlSetupMap[uniqueKey];
+        if (rlSetupMapInstance.startTimeOptional && rlSetupMapInstance.endTimeOptional) {
+            if (rlSetupMapInstance.startTimeOptional.value() < rlSetupMapInstance.endTimeOptional.value()) {
+                BtsLogTime delayTime =
+                    rlSetupMapInstance.endTimeOptional.value() - rlSetupMapInstance.startTimeOptional.value();
+                int delay = static_cast<int>(delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000);
+                rlSetupTotal += delay;
+                ++rlSetupCount;
+                rlSetupFileStream << uniqueKey.crnccId << "," << uniqueKey.nbccId << "," << uniqueKey.transactionId
+                                  << "," << setw(10) << delay << "\n";
+            }
+            rlSetupMap.erase(uniqueKey);
+        }
+    }
+    cout << "grmFetchTotal: " << grmFetchTotal << " count: " << grmFetchCount
+         << " average:" << grmFetchTotal / grmFetchCount << "\n";
+    cout << "grmProcessTotal: " << grmProcessTotal << " count: " << grmProcessCount
+         << " average:" << grmProcessTotal / grmProcessCount << "\n";
+    cout << "messageDeliveryTotal: " << messageDeliveryTotal << " count: " << messageDeliveryCount
+         << " average:" << messageDeliveryTotal / messageDeliveryCount << "\n";
+    cout << "rlSetupTotal: " << rlSetupTotal << " count: " << rlSetupCount << " average:" << rlSetupTotal / rlSetupCount
+         << "\n";
+}
+
+double BtsLogAnalyzer::getComputedAverageDelay() const {
+    cout << "totalDelay: " << m_totalDelay << " count: " << m_count << "\n";
+    return m_totalDelay / m_count;
 }
 
 void BtsLogAnalyzer::processDirectoryForWireSharkDelay(string const& directoryPath) {
@@ -248,175 +456,6 @@ void BtsLogAnalyzer::processFileForBtsDelayForRlDeletion(string const& filePath)
     }
 }
 
-void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePath) {
-    AlbaLocalPathHandler filePathHandler(filePath);
-    cout << "processFile: " << filePathHandler.getFullPath() << "\n";
-
-    ifstream inputLogFileStream(filePath);
-    AlbaFileReader fileReader(inputLogFileStream);
-
-    ofstream grmFetchFileStream(filePathHandler.getDirectory() + R"(grmFetchFileStream.csv)");
-    ofstream grmProcessFileStream(filePathHandler.getDirectory() + R"(grmProcessFileStream.csv)");
-    ofstream messageDeliveryFileStream(filePathHandler.getDirectory() + R"(messageDeliveryFileStream.csv)");
-    ofstream rlSetupFileStream(filePathHandler.getDirectory() + R"(rlSetupFileStream.csv)");
-    grmFetchFileStream << "crnccId,"
-                       << "nbccId,"
-                       << "transactionId,"
-                       << "difference"
-                       << "\n";
-    grmProcessFileStream << "crnccId,"
-                         << "nbccId,"
-                         << "transactionId,"
-                         << "delay"
-                         << "\n";
-    messageDeliveryFileStream << "crnccId,"
-                              << "nbccId,"
-                              << "transactionId,"
-                              << "delay"
-                              << "\n";
-    rlSetupFileStream << "crnccId,"
-                      << "nbccId,"
-                      << "transactionId,"
-                      << "delay"
-                      << "\n";
-
-    std::map<UniqueId, BtsLogDelay> grmProcessMap;
-    std::map<UniqueId, BtsLogDelay> messageDeliveryMap;
-    std::map<UniqueId, BtsLogDelay> rlSetupMap;
-
-    double grmFetchTotal = 0;
-    int grmFetchCount = 0;
-    double grmProcessTotal = 0;
-    int grmProcessCount = 0;
-    double messageDeliveryTotal = 0;
-    int messageDeliveryCount = 0;
-    double rlSetupTotal = 0;
-    int rlSetupCount = 0;
-
-    while (fileReader.isNotFinished()) {
-        UniqueId uniqueKey;
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
-        if (stringHelper::isStringFoundNotCaseSensitive(
-                lineInLogs, R"(INF/TCOM/G, decodeRadioLinkRequest API_TCOM_RNC_MSG)")) {
-            int crnccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
-            int nbccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
-            int transactionId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
-            unsigned int difference =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "diff in ms: "));
-            if (difference != 0x80000000) {
-                grmFetchTotal += difference * 1000;
-                ++grmFetchCount;
-                grmFetchFileStream << crnccId << "," << nbccId << "," << transactionId << "," << setw(10) << difference
-                                   << "\n";
-            }
-        } else if (stringHelper::isStringFoundNotCaseSensitive(
-                       lineInLogs, R"(INF/TCOM/G, Received API_TCOM_RNC_MSG)")) {
-            uniqueKey.crnccId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
-            uniqueKey.nbccId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
-            uniqueKey.transactionId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
-            BtsLogDelay& processMapInstance = grmProcessMap[uniqueKey];
-            BtsLogPrint logPrint(lineInLogs);
-            if (!logPrint.getBtsTime().isStartup()) {
-                processMapInstance.startTimeOptional = logPrint.getBtsTime();
-            }
-        } else if (stringHelper::isStringFoundNotCaseSensitive(lineInLogs, R"(INF/TCOM/G, Sending API_TCOM_RNC_MSG)")) {
-            uniqueKey.crnccId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
-            uniqueKey.nbccId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
-            uniqueKey.transactionId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
-            BtsLogDelay& processMapInstance = grmProcessMap[uniqueKey];
-            BtsLogDelay& messageDeliveryInstance = messageDeliveryMap[uniqueKey];
-            BtsLogPrint logPrint(lineInLogs);
-            if (!logPrint.getBtsTime().isStartup()) {
-                processMapInstance.endTimeOptional = logPrint.getBtsTime();
-                messageDeliveryInstance.startTimeOptional = logPrint.getBtsTime();
-            }
-        } else if (stringHelper::isStringFoundNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlSetupReq3G)")) {
-            uniqueKey.crnccId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
-            uniqueKey.nbccId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
-            uniqueKey.transactionId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
-            BtsLogDelay& messageDeliveryInstance = messageDeliveryMap[uniqueKey];
-            BtsLogDelay& rlSetupMapInstance = rlSetupMap[uniqueKey];
-            BtsLogPrint logPrint(lineInLogs);
-            if (!logPrint.getBtsTime().isStartup()) {
-                messageDeliveryInstance.endTimeOptional = logPrint.getBtsTime();
-                rlSetupMapInstance.startTimeOptional = logPrint.getBtsTime();
-            }
-        } else if (stringHelper::isStringFoundNotCaseSensitive(lineInLogs, R"(RLH_CTRL_RlSetupResp3G)")) {
-            uniqueKey.crnccId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
-            uniqueKey.nbccId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
-            uniqueKey.transactionId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
-            BtsLogDelay& rlSetupMapInstance = rlSetupMap[uniqueKey];
-            BtsLogPrint logPrint(lineInLogs);
-            if (!logPrint.getBtsTime().isStartup()) {
-                rlSetupMapInstance.endTimeOptional = logPrint.getBtsTime();
-            }
-        }
-
-        BtsLogDelay& processMapInstance = grmProcessMap[uniqueKey];
-        if (processMapInstance.startTimeOptional && processMapInstance.endTimeOptional) {
-            if (processMapInstance.startTimeOptional.value() < processMapInstance.endTimeOptional.value()) {
-                BtsLogTime delayTime =
-                    processMapInstance.endTimeOptional.value() - processMapInstance.startTimeOptional.value();
-                int delay = static_cast<int>(delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000);
-                grmProcessTotal += delay;
-                ++grmProcessCount;
-                grmProcessFileStream << uniqueKey.crnccId << "," << uniqueKey.nbccId << "," << uniqueKey.transactionId
-                                     << "," << setw(10) << delay << "\n";
-            }
-            grmProcessMap.erase(uniqueKey);
-        }
-
-        BtsLogDelay& messageDeliveryInstance = messageDeliveryMap[uniqueKey];
-        if (messageDeliveryInstance.startTimeOptional && messageDeliveryInstance.endTimeOptional) {
-            if (messageDeliveryInstance.startTimeOptional.value() < messageDeliveryInstance.endTimeOptional.value()) {
-                BtsLogTime delayTime =
-                    messageDeliveryInstance.endTimeOptional.value() - messageDeliveryInstance.startTimeOptional.value();
-                int delay = static_cast<int>(delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000);
-                messageDeliveryTotal += delay;
-                ++messageDeliveryCount;
-                messageDeliveryFileStream << uniqueKey.crnccId << "," << uniqueKey.nbccId << ","
-                                          << uniqueKey.transactionId << "," << setw(10) << delay << "\n";
-            }
-            messageDeliveryMap.erase(uniqueKey);
-        }
-
-        BtsLogDelay& rlSetupMapInstance = rlSetupMap[uniqueKey];
-        if (rlSetupMapInstance.startTimeOptional && rlSetupMapInstance.endTimeOptional) {
-            if (rlSetupMapInstance.startTimeOptional.value() < rlSetupMapInstance.endTimeOptional.value()) {
-                BtsLogTime delayTime =
-                    rlSetupMapInstance.endTimeOptional.value() - rlSetupMapInstance.startTimeOptional.value();
-                int delay = static_cast<int>(delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000);
-                rlSetupTotal += delay;
-                ++rlSetupCount;
-                rlSetupFileStream << uniqueKey.crnccId << "," << uniqueKey.nbccId << "," << uniqueKey.transactionId
-                                  << "," << setw(10) << delay << "\n";
-            }
-            rlSetupMap.erase(uniqueKey);
-        }
-    }
-    cout << "grmFetchTotal: " << grmFetchTotal << " count: " << grmFetchCount
-         << " average:" << grmFetchTotal / grmFetchCount << "\n";
-    cout << "grmProcessTotal: " << grmProcessTotal << " count: " << grmProcessCount
-         << " average:" << grmProcessTotal / grmProcessCount << "\n";
-    cout << "messageDeliveryTotal: " << messageDeliveryTotal << " count: " << messageDeliveryCount
-         << " average:" << messageDeliveryTotal / messageDeliveryCount << "\n";
-    cout << "rlSetupTotal: " << rlSetupTotal << " count: " << rlSetupCount << " average:" << rlSetupTotal / rlSetupCount
-         << "\n";
-}
-
 void BtsLogAnalyzer::processFileForBtsDelayForGrm(string const& filePath) {
     AlbaLocalPathHandler filePathHandler(filePath);
     cout << "processFile: " << filePathHandler.getFullPath() << "\n";
@@ -473,45 +512,6 @@ void BtsLogAnalyzer::processFileForBtsDelayForGrm(string const& filePath) {
             m_btsLogDelaysGrm.erase(nbccId);
         }*/
     }
-}
-
-double BtsLogAnalyzer::getWireSharkTime(string const& lineInLogs) {
-    int length(lineInLogs.length());
-    int startIndexOfTime = 0;
-    int endIndexOfTime = 0;
-    int i = 0;
-    for (; i < length && stringHelper::isWhiteSpace(lineInLogs[i]); ++i) {
-    }
-    for (; i < length && stringHelper::isNumber(lineInLogs[i]); ++i) {
-    }
-    startIndexOfTime = i;
-    for (; i < length && stringHelper::isWhiteSpace(lineInLogs[i]); ++i) {
-    }
-    for (; i < length && !stringHelper::isWhiteSpace(lineInLogs[i]); ++i) {
-    }
-    endIndexOfTime = i;
-    return stringHelper::convertStringToNumber<double>(
-        lineInLogs.substr(startIndexOfTime, endIndexOfTime - startIndexOfTime));
-}
-
-string BtsLogAnalyzer::getNumberAfterThisString(string const& mainString, string const& stringToSearch) {
-    string result;
-    int firstIndexOfFirstString = mainString.find(stringToSearch);
-    if (stringHelper::isNotNpos(firstIndexOfFirstString)) {
-        int lastIndexOfFirstString = static_cast<int>(firstIndexOfFirstString + stringToSearch.length());
-        int lastIndexOfNumber = 0;
-        for (lastIndexOfNumber = lastIndexOfFirstString; stringHelper::isNumber(mainString[lastIndexOfNumber]);
-             ++lastIndexOfNumber) {
-            ;
-        }
-        result = mainString.substr(lastIndexOfFirstString, lastIndexOfNumber - lastIndexOfFirstString);
-    }
-    return result;
-}
-
-double BtsLogAnalyzer::getComputedAverageDelay() const {
-    cout << "totalDelay: " << m_totalDelay << " count: " << m_count << "\n";
-    return m_totalDelay / m_count;
 }
 
 }  // namespace alba

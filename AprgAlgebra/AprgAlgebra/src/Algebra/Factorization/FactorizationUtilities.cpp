@@ -28,7 +28,6 @@ bool areExponentsDivisible(Monomial const& monomial, int const divisor) {
 }
 
 bool isPerfectSquare(Monomial const& monomial) { return isPerfectNthPower(monomial, 2); }
-
 bool isPerfectCube(Monomial const& monomial) { return isPerfectNthPower(monomial, 3); }
 
 bool isPerfectNthPower(Monomial const& monomial, int const nthPower) {

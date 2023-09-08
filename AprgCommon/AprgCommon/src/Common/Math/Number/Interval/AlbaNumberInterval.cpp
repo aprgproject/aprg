@@ -52,7 +52,6 @@ bool AlbaNumberInterval::isIntervalInsideTheInterval(AlbaNumberInterval const& i
 }
 
 AlbaNumberIntervalEndpoint const& AlbaNumberInterval::getLowerEndpoint() const { return m_lowerEndpoint; }
-
 AlbaNumberIntervalEndpoint const& AlbaNumberInterval::getHigherEndpoint() const { return m_higherEndpoint; }
 
 void AlbaNumberInterval::setNewEndpoint(AlbaNumberIntervalEndpoint const& endpoint) {

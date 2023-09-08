@@ -18,16 +18,35 @@ int numberOfFilesAnalyzedForExtraction;
 
 SnapshotStatistics::SnapshotStatistics() : m_fileExtractor("[.]") { initializeFileGroups(); }
 
-void SnapshotStatistics::addFileSizeForSnapshot(
-    string const& fileName, string const& snapshotName, double const fileSize) {
-    string fileNameWithoutWhiteSpace(stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(fileName));
-    m_fileNameToSnapshotNameToFileSize[fileNameWithoutWhiteSpace][snapshotName] = fileSize;
-    m_snapshotNames.emplace(snapshotName);
+double SnapshotStatistics::convertFileSizeToDouble(string const& fileSizeInString) {
+    auto fileSizeInBytes(stringHelper::convertStringToNumber<double>(fileSizeInString));
+    if (stringHelper::isStringFoundCaseSensitive(fileSizeInString, "K")) {
+        fileSizeInBytes *= 1000;
+    } else if (stringHelper::isStringFoundCaseSensitive(fileSizeInString, "M")) {
+        fileSizeInBytes *= 1000000;
+    }
+    return fileSizeInBytes;
 }
 
 string SnapshotStatistics::getSnapshotDirectory(string const& snapshotPath) {
     AlbaLocalPathHandler snapshotPathHandler(snapshotPath);
     return snapshotPathHandler.getDirectory() + R"(\)" + snapshotPathHandler.getFilenameOnly();
+}
+
+string SnapshotStatistics::getWildcardNameIfFileGroupsIsFound(string const& fileName) const {
+    for (FileGroup const& fileGroup : m_fileGroups) {
+        if (fileGroup.isInFileGroup(fileName)) {
+            return fileGroup.getWildcardName();
+        }
+    }
+    return "";
+}
+
+void SnapshotStatistics::addFileSizeForSnapshot(
+    string const& fileName, string const& snapshotName, double const fileSize) {
+    string fileNameWithoutWhiteSpace(stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(fileName));
+    m_fileNameToSnapshotNameToFileSize[fileNameWithoutWhiteSpace][snapshotName] = fileSize;
+    m_snapshotNames.emplace(snapshotName);
 }
 
 void SnapshotStatistics::extractFilesInSnapshot(string const& snapshotPath) {
@@ -111,15 +130,6 @@ void SnapshotStatistics::saveStatisticsToFile(string const& outputPath) {
     }
 }
 
-string SnapshotStatistics::getWildcardNameIfFileGroupsIsFound(string const& fileName) const {
-    for (FileGroup const& fileGroup : m_fileGroups) {
-        if (fileGroup.isInFileGroup(fileName)) {
-            return fileGroup.getWildcardName();
-        }
-    }
-    return "";
-}
-
 void SnapshotStatistics::processSnapshot(string const& snapshotPath) {
     extractFilesInSnapshot(snapshotPath);
     fetchFileSizesForSnapshot(snapshotPath);
@@ -148,16 +158,6 @@ void SnapshotStatistics::processMemory(string const& memoryFilePath, string cons
             addStatisticForMemory(relativeFilePath, snapshotName, fileSizeInBytes);
         }
     }
-}
-
-double SnapshotStatistics::convertFileSizeToDouble(string const& fileSizeInString) {
-    auto fileSizeInBytes(stringHelper::convertStringToNumber<double>(fileSizeInString));
-    if (stringHelper::isStringFoundCaseSensitive(fileSizeInString, "K")) {
-        fileSizeInBytes *= 1000;
-    } else if (stringHelper::isStringFoundCaseSensitive(fileSizeInString, "M")) {
-        fileSizeInBytes *= 1000000;
-    }
-    return fileSizeInBytes;
 }
 
 void SnapshotStatistics::addStatisticForMemory(

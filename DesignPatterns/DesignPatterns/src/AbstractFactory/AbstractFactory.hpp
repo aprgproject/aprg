@@ -6,18 +6,15 @@ namespace AbstractFactory {
 // Product A
 // products implement the same interface so that the classes can refer
 // to the interface not the concrete product
-
 class ProductA {
 public:
     virtual ~ProductA() = default;
-
     [[nodiscard]] virtual std::string getName() const = 0;
     // ...
 };
 
 // ConcreteProductAX and ConcreteProductAY
 // define objects to be created by concrete factory
-
 class ConcreteProductAX : public ProductA {
 public:
     [[nodiscard]] std::string getName() const override { return "ConcreteProductAX"; }
@@ -33,18 +30,15 @@ public:
 // Product B
 // same as Product A, Product B declares interface for concrete products
 // where each can produce an entire set of products
-
 class ProductB {
 public:
     virtual ~ProductB() = default;
-
     [[nodiscard]] virtual std::string getName() const = 0;
     // ...
 };
 
 // ConcreteProductBX and ConcreteProductBY
 // same as previous concrete product classes
-
 class ConcreteProductBX : public ProductB {
 public:
     [[nodiscard]] std::string getName() const override { return "ConcreteProductBX"; }
@@ -59,11 +53,9 @@ public:
 
 // Abstract Factory
 // provides an abstract interface for creating a family of products
-
 class AbstractFactory {
 public:
     virtual ~AbstractFactory() = default;
-
     [[nodiscard]] virtual std::unique_ptr<ProductA> createProductA() const = 0;
     [[nodiscard]] virtual std::unique_ptr<ProductB> createProductB() const = 0;
 };
@@ -71,15 +63,16 @@ public:
 // Concrete Factory X and Y
 // each concrete factory create a family of products and client uses
 // one of these factories so it never has to instantiate a product object
-
 class ConcreteFactoryX : public AbstractFactory {
 public:
     [[nodiscard]] std::unique_ptr<ProductA> createProductA() const override {
         return std::make_unique<ConcreteProductAX>();
     }
+
     [[nodiscard]] std::unique_ptr<ProductB> createProductB() const override {
         return std::make_unique<ConcreteProductBX>();
     }
+
     // ...
 };
 
@@ -88,9 +81,11 @@ public:
     [[nodiscard]] std::unique_ptr<ProductA> createProductA() const override {
         return std::make_unique<ConcreteProductAY>();
     }
+
     [[nodiscard]] std::unique_ptr<ProductB> createProductB() const override {
         return std::make_unique<ConcreteProductBY>();
     }
+
     // ...
 };
 

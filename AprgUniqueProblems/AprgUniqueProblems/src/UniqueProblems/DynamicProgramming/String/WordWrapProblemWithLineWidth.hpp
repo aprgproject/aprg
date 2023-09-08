@@ -13,25 +13,25 @@ public:
     using Cost = int;
     using Indices = std::vector<Index>;
     using Costs = std::vector<Cost>;
+
     struct RecursionDetails {
         Indices lineLengths;
     };
+
     using ExtraSpacesGrid = matrix::AlbaMatrix<int>;
     using CostGrid = matrix::AlbaMatrix<Cost>;
-    static constexpr Cost MAX_COST = std::numeric_limits<Cost>::max();
-
     WordWrapProblemWithLineWidth(Index const lineWidth, stringHelper::strings const& words);
-
+    static constexpr Cost MAX_COST = std::numeric_limits<Cost>::max();
     [[nodiscard]] Cost getOptimizedCostUsingNaiveRecursion() const;
     [[nodiscard]] Cost getOptimizedCostByTryingAllLengths() const;
     [[nodiscard]] Cost getOptimizedCostByCheckingFirstAndLastWords() const;
 
 private:
+    static Cost getCostFromExtraSpaces(Index const numberOfExtraSpaces);
     [[nodiscard]] Cost getOptimizedCostUsingNaiveRecursion(
         RecursionDetails const& recursionDetails, Index const wordIndex) const;
     [[nodiscard]] Cost getTotalLength() const;
     [[nodiscard]] Cost getTotalCostOfAllLines(Indices const& lengths) const;
-    static Cost getCostFromExtraSpaces(Index const numberOfExtraSpaces);
     Index m_maxLineLength;
     stringHelper::strings m_words;
 };

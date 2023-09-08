@@ -19,8 +19,20 @@ public:
         initializeIfNeeded();
     }
 
-    [[nodiscard]] Vertices const& getVerticesInTreeOrder() const { return m_verticesInTreeOrder; }
+    [[nodiscard]] int getDistanceBetweenVertices(Vertex const& vertex1, Vertex const& vertex2) const {
+        int result{};
+        auto it1 = m_vertexToFirstIndexMap.find(vertex1);
+        auto it2 = m_vertexToFirstIndexMap.find(vertex2);
+        if (it1 != m_vertexToFirstIndexMap.cend() && it2 != m_vertexToFirstIndexMap.cend()) {
+            int vertexIndex1 = it1->second;
+            int vertexIndex2 = it2->second;
+            int lowestCommonAncestorIndex(getLowestCommonAncestorIndex(vertexIndex1, vertexIndex2));
+            result = m_depths[vertexIndex1] + m_depths[vertexIndex2] - 2 * m_depths[lowestCommonAncestorIndex];
+        }
+        return result;
+    }
 
+    [[nodiscard]] Vertices const& getVerticesInTreeOrder() const { return m_verticesInTreeOrder; }
     [[nodiscard]] Depths const& getDepths() const { return m_depths; }
 
     [[nodiscard]] Vertex getLowestCommonAncestor(Vertex const& vertex1, Vertex const& vertex2) const {
@@ -32,19 +44,6 @@ public:
             int vertexIndex2 = it2->second;
             int lowestCommonAncestorIndex(getLowestCommonAncestorIndex(vertexIndex1, vertexIndex2));
             result = m_verticesInTreeOrder[lowestCommonAncestorIndex];
-        }
-        return result;
-    }
-
-    [[nodiscard]] int getDistanceBetweenVertices(Vertex const& vertex1, Vertex const& vertex2) const {
-        int result{};
-        auto it1 = m_vertexToFirstIndexMap.find(vertex1);
-        auto it2 = m_vertexToFirstIndexMap.find(vertex2);
-        if (it1 != m_vertexToFirstIndexMap.cend() && it2 != m_vertexToFirstIndexMap.cend()) {
-            int vertexIndex1 = it1->second;
-            int vertexIndex2 = it2->second;
-            int lowestCommonAncestorIndex(getLowestCommonAncestorIndex(vertexIndex1, vertexIndex2));
-            result = m_depths[vertexIndex1] + m_depths[vertexIndex2] - 2 * m_depths[lowestCommonAncestorIndex];
         }
         return result;
     }
@@ -89,7 +88,6 @@ private:
         // we add each node to the array always when the depth-first search walks through the node, and not only at the
         // first visit. Hence, a node that has k children appears k+1 times in the array and there are a total of 2n-1
         // nodes in the array. Tree order: parent1, child1, grandchild1, child1, parent1,
-
         ++depth;
         m_processedVertices.putVertex(vertex);
         m_vertexToFirstIndexMap[vertex] = index;

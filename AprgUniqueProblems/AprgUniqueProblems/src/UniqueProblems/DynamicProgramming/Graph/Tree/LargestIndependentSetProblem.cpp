@@ -13,7 +13,6 @@ LargestIndependentSetProblem::LargestIndependentSetProblem(Graph const& nAryTree
 LargestIndependentSetProblem::Count LargestIndependentSetProblem::getMaximumCountUsingNaiveRecursion() const {
     // Time Complexity: Exponential
     // Auxiliary Space: Constant
-
     Count result(0);
     if (!m_nAryTreeGraph.isEmpty()) {
         result = getMaximumCountUsingNaiveRecursion(m_rootOfTree);
@@ -24,7 +23,6 @@ LargestIndependentSetProblem::Count LargestIndependentSetProblem::getMaximumCoun
 LargestIndependentSetProblem::Count LargestIndependentSetProblem::getMaximumCountUsingMemoizationDP() const {
     // Time Complexity: O(n) where n is the number of nodes in given Binary tree.
     // Auxiliary Space: O(n)
-
     Count result(0);
     if (!m_nAryTreeGraph.isEmpty()) {
         VertexToCountMap vertexToCountMap;
@@ -36,7 +34,6 @@ LargestIndependentSetProblem::Count LargestIndependentSetProblem::getMaximumCoun
 LargestIndependentSetProblem::SetOfVertices LargestIndependentSetProblem::getMaximumSetUsingMemoizationDP() const {
     // Time Complexity: O(n) where n is the number of nodes in given Binary tree.
     // Auxiliary Space: O(n)
-
     SetOfVertices result;
     if (!m_nAryTreeGraph.isEmpty()) {
         VertexToSetOfVerticesMap vertexToMaximumSetMap;

@@ -19,11 +19,11 @@ struct FspDetails {
 
 class Fsp {
 public:
-    Fsp();
     explicit Fsp(FspDetails const& fspDetails);
-    [[nodiscard]] SmType getSmType() const;
+    Fsp();
     [[nodiscard]] bool isMasterTcom() const;
     [[nodiscard]] unsigned int getAddress() const;
+    [[nodiscard]] SmType getSmType() const;
     [[nodiscard]] DspAddresses const& getDspAddresses() const;
 
 private:

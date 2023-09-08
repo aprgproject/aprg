@@ -50,26 +50,22 @@ bool Line::operator==(Line const& line) const {
 }
 
 bool Line::operator!=(Line const& line) const { return !((*this) == line); }
-
-LineType Line::getType() const { return m_type; }
-
 double Line::getXIntercept() const { return -m_cCoefficient / m_aCoefficient; }
-
 double Line::getYIntercept() const { return -m_cCoefficient / m_bCoefficient; }
-
 double Line::getSlope() const { return -m_aCoefficient / m_bCoefficient; }
-
 double Line::getPerpendicularSlope() const { return m_bCoefficient / m_aCoefficient; }
-
 double Line::getACoefficient() const { return m_aCoefficient; }
-
 double Line::getBCoefficient() const { return m_bCoefficient; }
-
 double Line::getCCoefficient() const { return m_cCoefficient; }
-
 double Line::getAUnitIncreaseInX() const { return m_bCoefficient; }
-
 double Line::getAUnitIncreaseInY() const { return -m_aCoefficient; }
+double Line::calculateYFromX(double const x) const {
+    return -1 * (m_aCoefficient * x + m_cCoefficient) / m_bCoefficient;  // form: y = -(a*x + c)/b
+}
+double Line::calculateXFromY(double const y) const {
+    return -1 * (m_bCoefficient * y + m_cCoefficient) / m_aCoefficient;  // form: x = -(b*y + c)/a
+}
+LineType Line::getType() const { return m_type; }
 
 Point Line::getAPoint() const {
     if (m_type == LineType::Invalid) {
@@ -104,50 +100,73 @@ Points Line::getPointsWithoutLastPoint(Point const& first, Point const& second, 
     return pointsWithoutLastPoint;  // RVO
 }
 
-double Line::calculateYFromX(double const x) const {
-    return -1 * (m_aCoefficient * x + m_cCoefficient) / m_bCoefficient;  // form: y = -(a*x + c)/b
+LineType Line::determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX) {
+    bool isNegativeDeltaY = (deltaY < 0);
+    bool isNegativeDeltaX = (deltaX < 0);
+    LineType lineType(LineType::Invalid);
+    if (isAlmostEqual(deltaY, 0.0) && isAlmostEqual(deltaX, 0.0)) {
+        lineType = LineType::Invalid;
+    } else if (isAlmostEqual(deltaY, 0.0)) {
+        lineType = LineType::Horizontal;
+    } else if (isAlmostEqual(deltaX, 0.0)) {
+        lineType = LineType::Vertical;
+    } else if (isNegativeDeltaY == isNegativeDeltaX) {
+        lineType = LineType::WithPositiveSlope;
+    } else {
+        lineType = LineType::WithNegativeSlope;
+    }
+    return lineType;
 }
 
-double Line::calculateXFromY(double const y) const {
-    return -1 * (m_bCoefficient * y + m_cCoefficient) / m_aCoefficient;  // form: x = -(b*y + c)/a
+LineType Line::determineLineTypeUsingCoefficients(double const aCoefficient, double const bCoefficient) {
+    bool isNegativeA = (aCoefficient < 0);
+    bool isNegativeB = (bCoefficient < 0);
+    LineType lineType(LineType::Invalid);
+    if (isAlmostEqual(aCoefficient, 0.0) && isAlmostEqual(bCoefficient, 0.0)) {
+        lineType = LineType::Invalid;
+    } else if (isAlmostEqual(aCoefficient, 0.0)) {
+        lineType = LineType::Horizontal;
+    } else if (isAlmostEqual(bCoefficient, 0.0)) {
+        lineType = LineType::Vertical;
+    } else if (isNegativeA == isNegativeB) {
+        lineType = LineType::WithNegativeSlope;
+    } else {
+        lineType = LineType::WithPositiveSlope;
+    }
+    return lineType;
 }
 
-void Line::setLineParametersBasedOnDeltas(double const deltaX, double const deltaY, Point const& point) {
-    m_type = determineLineTypeUsingDeltaXandDeltaY(deltaY, deltaX);
-    setCoefficientsUsingLineTypeAndDeltaXandDeltaYAndAPoint(deltaY, deltaX, point);
-}
-
-void Line::setLineParametersBasedOnCoefficients(
-    double const aCoefficient, double const bCoefficient, double const cCoefficient) {
-    m_type = determineLineTypeUsingCoefficients(aCoefficient, bCoefficient);
-    m_aCoefficient = aCoefficient;
-    m_bCoefficient = bCoefficient;
-    m_cCoefficient = cCoefficient;
-}
-
-void Line::setCoefficientsUsingLineTypeAndDeltaXandDeltaYAndAPoint(
-    double const deltaY, double const deltaX, Point const& point) {
-    switch (m_type) {
-        case LineType::Invalid:
-            m_aCoefficient = 0;
-            m_bCoefficient = 0;
-            m_cCoefficient = 0;
-            break;
-        case LineType::Horizontal:
-            m_aCoefficient = 0;
-            m_bCoefficient = -deltaX;
-            m_cCoefficient = point.getY() * deltaX;
-            break;
-        case LineType::Vertical:
-            m_aCoefficient = deltaY;
-            m_bCoefficient = 0;
-            m_cCoefficient = -point.getX() * deltaY;
-            break;
-        default:
-            m_aCoefficient = deltaY;
-            m_bCoefficient = -deltaX;
-            m_cCoefficient = (point.getY() * deltaX) - (point.getX() * deltaY);
-            break;
+void Line::mergePointsFromPointsFromXAndY(
+    Points& points, Points const& pointsFromXCoordinate, Points const& pointsFromYCoordinate,
+    bool const isDirectionAscendingForX) {
+    auto iteratorForX = pointsFromXCoordinate.cbegin();
+    auto iteratorForY = pointsFromYCoordinate.cbegin();
+    while (iteratorForX != pointsFromXCoordinate.cend() || iteratorForY != pointsFromYCoordinate.cend()) {
+        if (iteratorForX != pointsFromXCoordinate.cend() && iteratorForY != pointsFromYCoordinate.cend()) {
+            if (isDirectionAscendingForX) {
+                if (isAlmostEqual(iteratorForX->getX(), iteratorForY->getX())) {
+                    points.emplace_back(*iteratorForX++);
+                    ++iteratorForY;
+                } else if (iteratorForX->getX() < iteratorForY->getX()) {
+                    points.emplace_back(*iteratorForX++);
+                } else {
+                    points.emplace_back(*iteratorForY++);
+                }
+            } else {
+                if (isAlmostEqual(iteratorForX->getX(), iteratorForY->getX())) {
+                    points.emplace_back(*iteratorForX++);
+                    ++iteratorForY;
+                } else if (iteratorForX->getX() > iteratorForY->getX()) {
+                    points.emplace_back(*iteratorForX++);
+                } else {
+                    points.emplace_back(*iteratorForY++);
+                }
+            }
+        } else if (iteratorForX != pointsFromXCoordinate.cend()) {
+            points.emplace_back(*iteratorForX++);
+        } else if (iteratorForY != pointsFromYCoordinate.cend()) {
+            points.emplace_back(*iteratorForY++);
+        }
     }
 }
 
@@ -205,74 +224,43 @@ void Line::getPointsForLineWithSlope(
     }
 }
 
-void Line::mergePointsFromPointsFromXAndY(
-    Points& points, Points const& pointsFromXCoordinate, Points const& pointsFromYCoordinate,
-    bool const isDirectionAscendingForX) {
-    auto iteratorForX = pointsFromXCoordinate.cbegin();
-    auto iteratorForY = pointsFromYCoordinate.cbegin();
-    while (iteratorForX != pointsFromXCoordinate.cend() || iteratorForY != pointsFromYCoordinate.cend()) {
-        if (iteratorForX != pointsFromXCoordinate.cend() && iteratorForY != pointsFromYCoordinate.cend()) {
-            if (isDirectionAscendingForX) {
-                if (isAlmostEqual(iteratorForX->getX(), iteratorForY->getX())) {
-                    points.emplace_back(*iteratorForX++);
-                    ++iteratorForY;
-                } else if (iteratorForX->getX() < iteratorForY->getX()) {
-                    points.emplace_back(*iteratorForX++);
-                } else {
-                    points.emplace_back(*iteratorForY++);
-                }
-            } else {
-                if (isAlmostEqual(iteratorForX->getX(), iteratorForY->getX())) {
-                    points.emplace_back(*iteratorForX++);
-                    ++iteratorForY;
-                } else if (iteratorForX->getX() > iteratorForY->getX()) {
-                    points.emplace_back(*iteratorForX++);
-                } else {
-                    points.emplace_back(*iteratorForY++);
-                }
-            }
-        } else if (iteratorForX != pointsFromXCoordinate.cend()) {
-            points.emplace_back(*iteratorForX++);
-        } else if (iteratorForY != pointsFromYCoordinate.cend()) {
-            points.emplace_back(*iteratorForY++);
-        }
-    }
+void Line::setLineParametersBasedOnDeltas(double const deltaX, double const deltaY, Point const& point) {
+    m_type = determineLineTypeUsingDeltaXandDeltaY(deltaY, deltaX);
+    setCoefficientsUsingLineTypeAndDeltaXandDeltaYAndAPoint(deltaY, deltaX, point);
 }
 
-LineType Line::determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX) {
-    bool isNegativeDeltaY = (deltaY < 0);
-    bool isNegativeDeltaX = (deltaX < 0);
-    LineType lineType(LineType::Invalid);
-    if (isAlmostEqual(deltaY, 0.0) && isAlmostEqual(deltaX, 0.0)) {
-        lineType = LineType::Invalid;
-    } else if (isAlmostEqual(deltaY, 0.0)) {
-        lineType = LineType::Horizontal;
-    } else if (isAlmostEqual(deltaX, 0.0)) {
-        lineType = LineType::Vertical;
-    } else if (isNegativeDeltaY == isNegativeDeltaX) {
-        lineType = LineType::WithPositiveSlope;
-    } else {
-        lineType = LineType::WithNegativeSlope;
-    }
-    return lineType;
+void Line::setLineParametersBasedOnCoefficients(
+    double const aCoefficient, double const bCoefficient, double const cCoefficient) {
+    m_type = determineLineTypeUsingCoefficients(aCoefficient, bCoefficient);
+    m_aCoefficient = aCoefficient;
+    m_bCoefficient = bCoefficient;
+    m_cCoefficient = cCoefficient;
 }
 
-LineType Line::determineLineTypeUsingCoefficients(double const aCoefficient, double const bCoefficient) {
-    bool isNegativeA = (aCoefficient < 0);
-    bool isNegativeB = (bCoefficient < 0);
-    LineType lineType(LineType::Invalid);
-    if (isAlmostEqual(aCoefficient, 0.0) && isAlmostEqual(bCoefficient, 0.0)) {
-        lineType = LineType::Invalid;
-    } else if (isAlmostEqual(aCoefficient, 0.0)) {
-        lineType = LineType::Horizontal;
-    } else if (isAlmostEqual(bCoefficient, 0.0)) {
-        lineType = LineType::Vertical;
-    } else if (isNegativeA == isNegativeB) {
-        lineType = LineType::WithNegativeSlope;
-    } else {
-        lineType = LineType::WithPositiveSlope;
+void Line::setCoefficientsUsingLineTypeAndDeltaXandDeltaYAndAPoint(
+    double const deltaY, double const deltaX, Point const& point) {
+    switch (m_type) {
+        case LineType::Invalid:
+            m_aCoefficient = 0;
+            m_bCoefficient = 0;
+            m_cCoefficient = 0;
+            break;
+        case LineType::Horizontal:
+            m_aCoefficient = 0;
+            m_bCoefficient = -deltaX;
+            m_cCoefficient = point.getY() * deltaX;
+            break;
+        case LineType::Vertical:
+            m_aCoefficient = deltaY;
+            m_bCoefficient = 0;
+            m_cCoefficient = -point.getX() * deltaY;
+            break;
+        default:
+            m_aCoefficient = deltaY;
+            m_bCoefficient = -deltaX;
+            m_cCoefficient = (point.getY() * deltaX) - (point.getX() * deltaY);
+            break;
     }
-    return lineType;
 }
 
 ostream& operator<<(ostream& out, Line const& line) {

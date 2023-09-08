@@ -11,7 +11,6 @@ template <typename Values>
 class CycleSorter : public BaseSorter<Values> {
 public:
     using Value = typename Values::value_type;
-
     CycleSorter() = default;
 
     void sort(Values& valuesToSort) const override {
@@ -51,7 +50,6 @@ private:
         // This is to avoid redundant cycles and even infinite cycles.
         // -> Remember after we swap values, we have to look for a new cycle value.
         // ---> Its redundant to look for the value again.
-
         while (matchingValue == valuesToSort[index]) {
             ++index;
         }

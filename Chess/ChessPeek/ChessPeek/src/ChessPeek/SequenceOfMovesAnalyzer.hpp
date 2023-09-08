@@ -18,14 +18,12 @@ public:
     };
 
     SequenceOfMovesAnalyzer(BoardWithContext const& boardWithContext);
-
-    void analyzeMove(Move const& halfMove);
-    void commitMove();
-
     bool canPreMove() const;
     State getState() const;
     Board const& getCurrentBoard() const;
     PieceColor getCurrentMoveColor() const;
+    void analyzeMove(Move const& halfMove);
+    void commitMove();
 
 private:
     bool isPreviousColorOpposite() const;
@@ -39,7 +37,6 @@ private:
 };
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

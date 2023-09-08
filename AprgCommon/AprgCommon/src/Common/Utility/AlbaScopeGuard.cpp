@@ -5,7 +5,6 @@ using namespace std;
 namespace alba {
 
 AlbaScopeGuard::AlbaScopeGuard(OnExitFunction const& functionParameter) : m_onExitFunction(functionParameter) {}
-
 AlbaScopeGuard::AlbaScopeGuard(OnExitFunction&& functionParameter) : m_onExitFunction(std::move(functionParameter)) {}
 
 AlbaScopeGuard::~AlbaScopeGuard() noexcept {

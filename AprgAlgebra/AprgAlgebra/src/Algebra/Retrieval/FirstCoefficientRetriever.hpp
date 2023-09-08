@@ -8,7 +8,6 @@ namespace alba::algebra {
 class FirstCoefficientRetriever final : public BaseRetriever {
 public:
     FirstCoefficientRetriever();
-
     [[nodiscard]] AlbaNumber const& getFirstCoefficient() const;
     void retrieveFromEquations(Equations const& equations) override;
     void retrieveFromEquation(Equation const& equation) override;

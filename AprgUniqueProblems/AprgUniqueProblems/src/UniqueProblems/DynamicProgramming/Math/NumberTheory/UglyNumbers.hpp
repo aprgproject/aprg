@@ -11,10 +11,8 @@ public:
     using Number = int;
     using Numbers = std::vector<Number>;
     using Booleans = std::vector<bool>;
-    static constexpr Number MAX_NUMBER = std::numeric_limits<Number>::max();
-
     explicit UglyNumbers(Number const nth);
-
+    static constexpr Number MAX_NUMBER = std::numeric_limits<Number>::max();
     [[nodiscard]] Number getNthUglyNumberByCheckingPreviousUglyNumbersUsingIterativeDP() const;
     [[nodiscard]] Number getNthUglyNumberByMultiplesUsingIterativeDP() const;
 

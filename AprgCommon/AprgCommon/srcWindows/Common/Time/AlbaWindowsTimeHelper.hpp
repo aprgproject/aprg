@@ -5,7 +5,5 @@
 #include <windows.h>
 
 namespace alba {
-
 AlbaDateTime convertSystemTimeToAlbaDateTime(SYSTEMTIME const& systemTime);
-
 }  // namespace alba

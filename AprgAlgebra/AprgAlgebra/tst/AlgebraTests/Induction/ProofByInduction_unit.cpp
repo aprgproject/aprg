@@ -10,7 +10,6 @@ namespace alba::algebra {
 
 TEST(ProofByInductionTest, ProveTheSumOfOddIntegers) {
     // Prove that: 1 + 3 + 5 + ... + (2n-1) = n^2
-
     Term expressionForEachStep(Polynomial{Monomial(2, {{"n", 1}}), Monomial(-1, {})});
     Term guessExpression(Monomial(1, {{"n", 2}}));
     ProofByInduction::ManualCalculationFunction manualCalculation = [](AlbaNumber const& n) {
@@ -29,7 +28,6 @@ TEST(ProofByInductionTest, ProveTheSumOfOddIntegers) {
 
 TEST(ProofByInductionTest, ProveTheSumOfSquareOfOddIntegers) {
     // Prove that: 1^2 + 3^2 + 5^2 + ... + (2n-1)^2 = (4n^3 - n)/3
-
     Term expressionForEachStep = Polynomial{Monomial(2, {{"n", 1}}), Monomial(-1, {})} ^ Constant(2);
     Term guessExpression(Polynomial{
         Monomial(AlbaNumber::createFraction(4, 3), {{"n", 3}}),

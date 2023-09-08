@@ -8,7 +8,6 @@ namespace alba::algorithm::GraphUtilities {
 template <typename Vertex>
 int getDiameterOfATree(BaseUndirectedGraph<Vertex> const& graph) {
     // The diameter of a tree is the maximum length of a path between two nodes.
-
     LongestPathsInTree<Vertex> longestPathsInTree(graph);
     longestPathsInTree.searchForAtLeastOneEndPointPair();
     return longestPathsInTree.getLongestDistance();

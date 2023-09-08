@@ -68,9 +68,7 @@ TEST(DirectedGraphWithVertexToAdjacencyListsMapTest, GetEdgesWorksWhenNotEmpty) 
 }
 
 TEST(DirectedGraphWithVertexToAdjacencyListsMapTest, ConnectWorks) { testConnectWithVertexAsInt<GraphForTest>(); }
-
 TEST(DirectedGraphWithVertexToAdjacencyListsMapTest, DisconnectWorks) { testDisconnectWithVertexAsInt<GraphForTest>(); }
-
 TEST(DirectedGraphWithVertexToAdjacencyListsMapTest, ClearWorks) { testClearWithVertexAsInt<GraphForTest>(); }
 
 TEST(DirectedGraphWithVertexToAdjacencyListsMapTest, GraphWorksAfterClear) {

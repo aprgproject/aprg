@@ -11,9 +11,8 @@ using namespace std;
 
 namespace alba::algebra {
 
-Polynomial::Polynomial() : m_isSimplified(false) {}
-
 Polynomial::Polynomial(Monomials const& monomials) : m_monomials(monomials), m_isSimplified(false) {}
+Polynomial::Polynomial() : m_isSimplified(false) {}
 
 Polynomial::Polynomial(initializer_list<Monomial> const& monomials) : m_isSimplified(false) {
     m_monomials.reserve(monomials.size());
@@ -56,9 +55,7 @@ bool Polynomial::operator<(Polynomial const& second) const {
 }
 
 bool Polynomial::isEmpty() const { return m_monomials.empty(); }
-
 bool Polynomial::isSimplified() const { return m_isSimplified; }
-
 Monomials const& Polynomial::getMonomials() const { return m_monomials; }
 
 Monomials& Polynomial::getMonomialsReference() {
@@ -160,7 +157,6 @@ void Polynomial::raiseToUnsignedInteger(int const exponent) {
 }
 
 void Polynomial::setAsSimplified() { m_isSimplified = true; }
-
 void Polynomial::clearSimplifiedFlag() { m_isSimplified = false; }
 
 bool Polynomial::isFurtherSimplificationNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify) {

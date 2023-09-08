@@ -8,7 +8,6 @@ Term getEToTheX(Term const& term);
 Term getEToTheNegativeX(Term const& term);
 Term getEToTheXPlusEToTheNegativeX(Term const& term);
 Term getEToTheXMinusEToTheNegativeX(Term const& term);
-
 Equation getHyperbolicSineDefinition(Term const& term);
 Equation getHyperbolicCosineDefinition(Term const& term);
 Equation getHyperbolicTangentDefinition(Term const& term);
@@ -24,7 +23,6 @@ Term getHyperbolicSineOfDoubledValue(Term const& term);
 Term getHyperbolicCosineOfDoubledValue(Term const& term);
 Term getHyperbolicSineOfHalvedValue(Term const& term, bool const isPositiveRoot);
 Term getHyperbolicCosineOfHalvedValue(Term const& term);
-
 Equation getHyperbolicArcSineDefinition(Term const& term);
 Equation getHyperbolicArcCosineDefinition(Term const& term);
 Equation getHyperbolicArcTangentDefinition(Term const& term);

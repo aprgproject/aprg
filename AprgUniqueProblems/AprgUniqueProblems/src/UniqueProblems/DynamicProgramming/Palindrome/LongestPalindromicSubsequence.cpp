@@ -27,7 +27,6 @@ LongestPalindromicSubsequence::Count LongestPalindromicSubsequence::getLongestLe
 LongestPalindromicSubsequence::Count LongestPalindromicSubsequence::getLongestLengthUsingIterativeDP() const {
     // Time Complexity: O(n^2)
     // Auxiliary Space: O(n^2)
-
     Count result(0);
     if (!m_string.empty()) {
         Index stringLength = m_string.length();
@@ -55,14 +54,11 @@ LongestPalindromicSubsequence::Count LongestPalindromicSubsequence::getLongestLe
 LongestPalindromicSubsequence::Count LongestPalindromicSubsequence::getLongestLengthUsingIterativeDPAndSpaceEfficient()
     const {
     // Note this is same implementation in AlbaStringHelper
-
     // Time Complexity: O(n^2)
     // Auxiliary Space: O(n)
-
     // Space efficiency analysis:
     // Since accessing the previous partial values requires only one column or one row above,
     // we only really need 2 rows (not a matrix) to keep track partial values.
-
     // current and previous are the rows in the dynamic programming solution
     Index stringLength = m_string.length();
     vector<Counts> previousAndCurrentCounts(2, Counts(stringLength, 0));  // set first row to zero

@@ -9,7 +9,6 @@ namespace alba::algebra {
 
 TermWithDetails::TermWithDetails(BaseTerm const& baseTerm, TermAssociationType const associationParameter)
     : baseTermPointer(createBasePointer(baseTerm)), association(associationParameter) {}
-
 TermWithDetails::TermWithDetails(BaseTerm&& baseTerm, TermAssociationType const associationParameter)
     : baseTermPointer(createBasePointer(baseTerm)), association(associationParameter) {}
 
@@ -47,7 +46,6 @@ bool TermWithDetails::operator<(TermWithDetails const& second) const {
 }
 
 bool TermWithDetails::hasPositiveAssociation() const { return TermAssociationType::Positive == association; }
-
 bool TermWithDetails::hasNegativeAssociation() const { return TermAssociationType::Negative == association; }
 int TermWithDetails::getAssociationPriority() const { return algebra::getAssociationPriority(association); }
 

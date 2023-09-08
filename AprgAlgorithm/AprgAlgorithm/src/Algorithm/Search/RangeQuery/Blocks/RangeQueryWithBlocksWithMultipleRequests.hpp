@@ -14,7 +14,6 @@ public:
     // In each query, we are given a range [a,b], and we should calculate a value based on the array elements between
     // positions a and b. Since the array is static, the queries can be processed in any order, and Mo’s algorithm
     // processes the queries in a special order which guarantees that the algorithm works efficiently.
-
     using BaseClass = RangeQueryWithBlocks<Values, BlockValues>;
     using Index = typename BaseClass::Index;
     using Output = typename BaseClass::Output;
@@ -43,12 +42,10 @@ public:
         // the active range by inserting and removing elements. The time complexity of the algorithm is
         // O(n*sqrt(n)*f(n)) where the array contains n elements, there are n queries and each insertion and removal of
         // an element takes O(f(n)) time.
-
         // Thus, all queries whose left endpoints are in a certain block are processed one after another sorted
         // according to their right endpoints. Using this order, the algorithm only performs O(sqrt(n)) operations,
         // because the left endpoint moves O(n) times O(sqrt(n)) steps, and the right endpoint moves O(sqrt(n)) times
         // O(n) steps. Thus, both endpoints move a total of O(n*sqrt(n))) steps during the algorithm.
-
         InputAndOutputPairs result;
         Ranges validRanges(getValidRangesAndSortForMoAlgorithm(inputRanges));
         if (!validRanges.empty()) {
@@ -103,7 +100,6 @@ private:
         // and a query [a1,b1] is processed before a query [a2,b2] if either:
         // -> a1/k < a2/k or
         // -> a1/k = a2/k and b1 < b2.
-
         Index blockSize = this->getBlockSize();
         std::sort(result.begin(), result.end(), [blockSize](Range const& range1, Range const& range2) {
             Index blockIndex1 = range1.first / blockSize;

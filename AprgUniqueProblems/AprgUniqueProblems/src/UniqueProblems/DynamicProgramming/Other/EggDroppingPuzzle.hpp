@@ -11,10 +11,8 @@ public:
     using Count = int;
     using Counts = std::vector<Count>;
     using CountMatrix = matrix::AlbaMatrix<Count>;
-    static constexpr Count MAX_COUNT = std::numeric_limits<Count>::max();
-
     EggDroppingPuzzle(Count const numberOfEggs, Count const numberOfFloors);
-
+    static constexpr Count MAX_COUNT = std::numeric_limits<Count>::max();
     [[nodiscard]] Count getMinimumNumberOfTrialsUsingNaiveRecursion() const;
     [[nodiscard]] Count getMinimumNumberOfTrialsUsingMemoizationDP() const;
     [[nodiscard]] Count getMinimumNumberOfTrialsUsingIterativeDP() const;

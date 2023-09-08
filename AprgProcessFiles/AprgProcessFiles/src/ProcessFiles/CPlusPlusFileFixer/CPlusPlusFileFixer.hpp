@@ -12,29 +12,7 @@ public:
     void processFile(std::string const& path);
 
 private:
-    void clear();
-
-    void checkFile(std::string const& path);
-    void readContentsFromFile(std::string const& path);
-    void readLineWithSharpInclude(std::string const& line, std::string const& path);
-    static void notifyIfThereAreCommentsInHeader(std::string const& path, std::string const& line);
-    void notifyIfAlbaDebugHeaderExistInProductionCode(std::string const& path) const;
-    void notifyIfIostreamHeaderExistInProductionCode(std::string const& path) const;
-    void notifyIfCAssertHeaderExistInProductionCode(std::string const& path) const;
-    void notifyIfMoreThanLoopsAreCascaded(std::string const& path) const;
-
-    void fix(std::string const& path);
-    void fixHeaders(std::string const& path);
-    void removeTrailingLinesInCode();
-    void fixNamespaces();
-    void fixSmallUToCapitalUInNumbers();
-    void addHeaderFileFromAngleBrackets(std::string const& header);
-    void addHeaderFileFromQuotations(std::string const& header);
-
-    void writeFile(std::string const& path);
-    void writeHeadersWithQuotations(std::ofstream& outputLogFileStream) const;
-    void writeHeadersWithAngleBrackets(std::ofstream& outputLogFileStream) const;
-
+    [[nodiscard]] static bool isOtherLibraryHeaders(std::string const& header);
     static bool isLineWithALoopStart(std::string const& line);
     static bool isLineWithALoopEnd(std::string const& line);
     static bool isPathIgnored(std::string const& path);
@@ -43,8 +21,25 @@ private:
     static bool isWindowsHeader(std::string const& header);
     static bool isGtestHeader(std::string const& header);
     static bool isQtHeader(std::string const& header);
-    [[nodiscard]] static bool isOtherLibraryHeaders(std::string const& header);
-
+    static void notifyIfThereAreCommentsInHeader(std::string const& path, std::string const& line);
+    void notifyIfAlbaDebugHeaderExistInProductionCode(std::string const& path) const;
+    void notifyIfIostreamHeaderExistInProductionCode(std::string const& path) const;
+    void notifyIfCAssertHeaderExistInProductionCode(std::string const& path) const;
+    void notifyIfMoreThanLoopsAreCascaded(std::string const& path) const;
+    void writeHeadersWithQuotations(std::ofstream& outputLogFileStream) const;
+    void writeHeadersWithAngleBrackets(std::ofstream& outputLogFileStream) const;
+    void clear();
+    void checkFile(std::string const& path);
+    void readContentsFromFile(std::string const& path);
+    void readLineWithSharpInclude(std::string const& line, std::string const& path);
+    void fix(std::string const& path);
+    void fixHeaders(std::string const& path);
+    void removeTrailingLinesInCode();
+    void fixNamespaces();
+    void fixSmallUToCapitalUInNumbers();
+    void addHeaderFileFromAngleBrackets(std::string const& header);
+    void addHeaderFileFromQuotations(std::string const& header);
+    void writeFile(std::string const& path);
     std::vector<std::string> m_linesAfterTheHeader;
     std::vector<std::string> m_headerListFromAngleBrackets;
     std::set<std::string> m_headerListFromQuotations;

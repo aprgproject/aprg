@@ -10,7 +10,6 @@ template <typename DataType>
 bool areLeadingEntriesInReducedRowEchelonForm(AlbaMatrix<DataType> const& matrix);
 template <typename DataType>
 bool isReducedRowEchelonForm(AlbaMatrix<DataType> const& matrix);
-
 template <typename DataType>
 void transformToReducedEchelonFormUsingGaussJordanReduction(AlbaMatrix<DataType>& matrix);
 

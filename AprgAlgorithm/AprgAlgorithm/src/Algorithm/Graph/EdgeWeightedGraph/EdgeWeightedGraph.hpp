@@ -17,9 +17,7 @@ public:
     using EdgeOrderedByWeight = typename GraphTypesWithWeights<Vertex, Weight>::EdgeOrderedByWeight;
     using EdgesWithWeight = typename GraphTypesWithWeights<Vertex, Weight>::EdgesWithWeight;
     using Weights = std::vector<Weight>;
-
     EdgeWeightedGraph() = default;
-
     [[nodiscard]] bool hasAUniqueMinimumSpanningTree() const { return hasNoDuplicateWeights(getSortedWeights()); }
 
     [[nodiscard]] Weight getWeight(Vertex const& vertex1, Vertex const& vertex2) const {

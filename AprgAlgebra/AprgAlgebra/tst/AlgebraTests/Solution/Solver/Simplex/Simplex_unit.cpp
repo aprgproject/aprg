@@ -89,7 +89,6 @@ TEST(SimplexSolverTest, SimplexWorksOnBrewersProblemWithAdditionalObjectiveFunct
     constraints.emplace_back(Polynomial{Monomial(35, {{"A", 1}}), Monomial(20, {{"B", 1}})}, "<=", 1190);
     Polynomial objectiveFunction{
         Monomial(13, {{"A", 1}}), Monomial(23, {{"B", 1}}), Monomial(1, {{"C", 1}})};  // additional variable C
-
     SimplexSolver solver(constraints, objectiveFunction);
 
     Equations solutionEquations;

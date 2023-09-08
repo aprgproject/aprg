@@ -13,8 +13,6 @@ namespace alba {
 
 namespace algebra::Simplification {
 
-SimplificationOfFunctionToTerm::SimplificationOfFunctionToTerm() = default;
-
 bool SimplificationOfFunctionToTerm::shouldSimplifyTrigonometricFunctionsToSinAndCos() {
     return Configuration::getInstance().getConfigurationDetails().shouldSimplifyTrigonometricFunctionsToSinAndCos;
 }
@@ -99,6 +97,8 @@ Term SimplificationOfFunctionToTerm::getLogarithmicOfTermBasedFromName(Term cons
     }
     return result;
 }
+
+SimplificationOfFunctionToTerm::SimplificationOfFunctionToTerm() = default;
 
 }  // namespace algebra::Simplification
 

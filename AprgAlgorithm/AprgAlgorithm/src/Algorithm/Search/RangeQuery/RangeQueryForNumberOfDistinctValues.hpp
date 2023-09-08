@@ -17,7 +17,6 @@ public:
     // but it depends on the problem how the answer to the query is maintained.
     // In this problem, we can maintain an array count
     // where count[x] indicates the number of times an element x occurs in the active range.
-
     using Index = int;
     using Value = typename Values::value_type;
     using Range = std::pair<Index, Index>;
@@ -25,7 +24,6 @@ public:
     using InputAndOutputPair = std::pair<Range, Value>;
     using InputAndOutputPairs = std::vector<InputAndOutputPair>;
     using FrequencyArray = std::array<Index, MAX_VALUE>;
-
     explicit RangeQueryForNumberOfDistinctValues(Values const& valuesToCheck) : m_values(valuesToCheck) {}
 
     [[nodiscard]] Index getCountOfDistinctValuesOnInterval(Index const start, Index const end) const {
@@ -67,6 +65,33 @@ private:
         return static_cast<Index>(sqrt(numberOfValues));
     }
 
+    [[nodiscard]] Ranges getValidRangesAndSortForMoAlgorithm(Ranges const& ranges) const {
+        Ranges result;
+        result.reserve(ranges.size());
+        for (Range const& range : ranges) {
+            if (isValidRange(range)) {
+                // index must be inside the give values
+                result.emplace_back(range);
+            }
+        }
+
+        // The trick in Mo’s algorithm is the order in which the queries are processed:
+        // The array is divided into blocks of k = O(sqrt(n)) elements,
+        // and a query [a1,b1] is processed before a query [a2,b2] if either:
+        // -> a1/k < a2/k or
+        // -> a1/k = a2/k and b1 < b2.
+        Index blockSize = getSquareRootSize(m_values.size());
+        std::sort(result.begin(), result.end(), [blockSize](Range const& range1, Range const& range2) {
+            Index blockIndex1 = range1.first / blockSize;
+            Index blockIndex2 = range2.first / blockSize;
+            if (blockIndex1 == blockIndex2) {
+                return range1.second < range2.second;
+            }
+            return blockIndex1 < blockIndex2;
+        });
+        return result;
+    }
+
     void moveToTargetRange(
         Index& numberOfDistinct, FrequencyArray& frequencyArray, Range& currentRange, Range const& targetRange) const {
         // After each step, the array count needs to be updated.
@@ -75,7 +100,6 @@ private:
         // Similarly, after removing an element x, we decrease the value of count[x] by 1, and if count[x] = 0 after
         // this, we also decrease the answer to the query by 1. In this problem, the time needed to perform each step is
         // O(1), so the total time complexity of the algorithm is O(sqrt(n)).
-
         while (currentRange.first < targetRange.first) {
             removeValueWithIndex(numberOfDistinct, frequencyArray, currentRange.first++);
         }
@@ -104,34 +128,6 @@ private:
         if (frequency == 0) {
             --numberOfDistinct;
         }
-    }
-
-    [[nodiscard]] Ranges getValidRangesAndSortForMoAlgorithm(Ranges const& ranges) const {
-        Ranges result;
-        result.reserve(ranges.size());
-        for (Range const& range : ranges) {
-            if (isValidRange(range)) {
-                // index must be inside the give values
-                result.emplace_back(range);
-            }
-        }
-
-        // The trick in Mo’s algorithm is the order in which the queries are processed:
-        // The array is divided into blocks of k = O(sqrt(n)) elements,
-        // and a query [a1,b1] is processed before a query [a2,b2] if either:
-        // -> a1/k < a2/k or
-        // -> a1/k = a2/k and b1 < b2.
-
-        Index blockSize = getSquareRootSize(m_values.size());
-        std::sort(result.begin(), result.end(), [blockSize](Range const& range1, Range const& range2) {
-            Index blockIndex1 = range1.first / blockSize;
-            Index blockIndex2 = range2.first / blockSize;
-            if (blockIndex1 == blockIndex2) {
-                return range1.second < range2.second;
-            }
-            return blockIndex1 < blockIndex2;
-        });
-        return result;
     }
 
     Values const& m_values;

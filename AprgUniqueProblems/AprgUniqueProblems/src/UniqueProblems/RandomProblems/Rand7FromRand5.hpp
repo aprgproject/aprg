@@ -8,7 +8,6 @@ class Rand7FromRand5 {
 public:
     using Value = int;
     Rand7FromRand5();
-
     Value getRandomFrom0To6();
     Value getRandomFrom0To4();
 

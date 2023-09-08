@@ -12,21 +12,13 @@ using namespace std;
 
 namespace alba {
 
-MapAnalyzer::MapAnalyzer() = default;
-
-void MapAnalyzer::analyze() {
-    gatherData();
-    selectMaps();
-    sortMaps();
-}
-
-void MapAnalyzer::printResult() const {
-    cout.precision(10);
-    for (MapAnalyzerData const& mapData : m_mapsAnalyzerData) {
-        cout << "Map:[" << mapData.mapName << "] Zeny:[" << mapData.zenyPotential << "] BaseExp:["
-             << mapData.baseExperiencePotential << "] JobExp:[" << mapData.jobExperiencePotential << "] AnnoyanceHp:["
-             << mapData.annoyanceHp << "] MobCount:[" << mapData.mobCount << "]\n";
+double MapAnalyzer::getMultiplierForExperience(string const& mapName) {
+    double multiplier(1);
+    if (isStringFoundCaseSensitive(mapName, "xmas_") || isStringFoundCaseSensitive(mapName, "man_") ||
+        isStringFoundCaseSensitive(mapName, "dic_")) {
+        multiplier = 2;
     }
+    return multiplier;
 }
 
 double MapAnalyzer::getPotentialZenyFromMonster(Monster const& monster) const {
@@ -39,6 +31,15 @@ double MapAnalyzer::getPotentialZenyFromMonster(Monster const& monster) const {
         }
     }
     return potentialZeny;
+}
+
+void MapAnalyzer::printResult() const {
+    cout.precision(10);
+    for (MapAnalyzerData const& mapData : m_mapsAnalyzerData) {
+        cout << "Map:[" << mapData.mapName << "] Zeny:[" << mapData.zenyPotential << "] BaseExp:["
+             << mapData.baseExperiencePotential << "] JobExp:[" << mapData.jobExperiencePotential << "] AnnoyanceHp:["
+             << mapData.annoyanceHp << "] MobCount:[" << mapData.mobCount << "]\n";
+    }
 }
 
 void MapAnalyzer::printPotentialZenyFromMonster(string const& monsterName) const {
@@ -62,13 +63,34 @@ void MapAnalyzer::printPotentialZenyFromMonster(string const& monsterName) const
     cout << "\n";
 }
 
-double MapAnalyzer::getMultiplierForExperience(string const& mapName) {
-    double multiplier(1);
-    if (isStringFoundCaseSensitive(mapName, "xmas_") || isStringFoundCaseSensitive(mapName, "man_") ||
-        isStringFoundCaseSensitive(mapName, "dic_")) {
-        multiplier = 2;
+void MapAnalyzer::analyze() {
+    gatherData();
+    selectMaps();
+    sortMaps();
+}
+
+double MapAnalyzer::getTalonRoDropRate(double const dropRate) {
+    double talonRoDropRate(dropRate * 3);
+    if (talonRoDropRate > 100) {
+        talonRoDropRate = 100;
     }
-    return multiplier;
+    return talonRoDropRate;
+}
+
+double MapAnalyzer::getBestPrice(Item const& item) const {
+    double result = NAN;
+    string fixedItemName(alba::RagnarokOnline::getFixedItemName(item));
+    double npcPrice = item.sellingPrice;
+    double talonRoBuyingPrice = m_ragnarokOnline.getTalonRoBuyingPrice(fixedItemName);
+    double talonRoSellingPrice = m_ragnarokOnline.getTalonRoSellingPrice(fixedItemName);
+    result = npcPrice;
+    if (result < talonRoBuyingPrice) {
+        result = talonRoBuyingPrice;  // remove this if buying shops are ignored
+    }
+    if (result < talonRoSellingPrice) {
+        // result = talonRoSellingPrice; //remove this if selling shops are ignored
+    }
+    return result;
 }
 
 void MapAnalyzer::gatherData() {
@@ -217,38 +239,30 @@ void MapAnalyzer::selectMaps() {
 
     // printPotentialZenyFromMonster("Demon Pungus");
     // printPotentialZenyFromMonster("Sleeper");
-
     // printPotentialZenyFromMonster("Incubus");
     // printPotentialZenyFromMonster("Succubus");
     // printPotentialZenyFromMonster("Violy");
-
     // printPotentialZenyFromMonster("Anolian");
     // printPotentialZenyFromMonster("Drainliar");
     // printPotentialZenyFromMonster("Gargoyle");
-
     // printPotentialZenyFromMonster("Kraben");
     // printPotentialZenyFromMonster("Tamruan");
     // printPotentialZenyFromMonster("Whisper");
-
     // printPotentialZenyFromMonster("Evil Cloud Hermit / Taoist Hermit");
     // printPotentialZenyFromMonster("Wicked Nymph / Evil Nymph");
     // printPotentialZenyFromMonster("Wild Ginseng / Hermit Plant");
-
     // printPotentialZenyFromMonster("Ghoul");
     // printPotentialZenyFromMonster("Zombie Slaughter");
     // printPotentialZenyFromMonster("Ragged Zombie");
     // printPotentialZenyFromMonster("Hell Poodle");
     // printPotentialZenyFromMonster("Banshee");
     // printPotentialZenyFromMonster("Flame Skull");
-
     // printPotentialZenyFromMonster("Zombie Prisoner");
     // printPotentialZenyFromMonster("Injustice");
-
     // printPotentialZenyFromMonster("Cenere (Re-Stats)");
     // printPotentialZenyFromMonster("Antique Book (Re-Stats)");
     // printPotentialZenyFromMonster("Blue Lichtern / Lichtern (Re-Stats)");
     // printPotentialZenyFromMonster("Yellow Lichtern / Lichtern (Re-Stats)");
-
     // printPotentialZenyFromMonster("Blazer");
     // printPotentialZenyFromMonster("Deleter");
     // printPotentialZenyFromMonster("Diabolic");
@@ -277,33 +291,11 @@ void MapAnalyzer::sortMaps() {
         });
 }
 
+MapAnalyzer::MapAnalyzer() = default;
+
 bool MapAnalyzer::isDropRateAcceptable(double const /*dropRate*/) {
     return true;
     // return dropRate >= 1; // This removes hard farming
-}
-
-double MapAnalyzer::getTalonRoDropRate(double const dropRate) {
-    double talonRoDropRate(dropRate * 3);
-    if (talonRoDropRate > 100) {
-        talonRoDropRate = 100;
-    }
-    return talonRoDropRate;
-}
-
-double MapAnalyzer::getBestPrice(Item const& item) const {
-    double result = NAN;
-    string fixedItemName(alba::RagnarokOnline::getFixedItemName(item));
-    double npcPrice = item.sellingPrice;
-    double talonRoBuyingPrice = m_ragnarokOnline.getTalonRoBuyingPrice(fixedItemName);
-    double talonRoSellingPrice = m_ragnarokOnline.getTalonRoSellingPrice(fixedItemName);
-    result = npcPrice;
-    if (result < talonRoBuyingPrice) {
-        result = talonRoBuyingPrice;  // remove this if buying shops are ignored
-    }
-    if (result < talonRoSellingPrice) {
-        // result = talonRoSellingPrice; //remove this if selling shops are ignored
-    }
-    return result;
 }
 
 }  // namespace alba

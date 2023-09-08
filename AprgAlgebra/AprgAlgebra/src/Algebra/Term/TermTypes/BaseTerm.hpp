@@ -6,8 +6,8 @@ namespace alba::algebra {
 
 class BaseTerm {
 public:
-    BaseTerm() = default;
     virtual ~BaseTerm() = default;  // virtual destructor because it needs to be polymorphically deleted
+    BaseTerm() = default;
 };
 
 }  // namespace alba::algebra

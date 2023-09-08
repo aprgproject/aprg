@@ -18,27 +18,21 @@ public:
     using VariableExponentPair = std::pair<std::string, AlbaNumber>;
     using VariableExponentReferencePair = std::pair<std::string&, AlbaNumber&>;
     using ChangeExponentsForVariableFunction = std::function<void(std::string const&, AlbaNumber&)>;
-
     Monomial();
     Monomial(AlbaNumber const& constant, std::initializer_list<VariableExponentPair> const& variablesWithExponents);
     Monomial(AlbaNumber const& constant, VariablesToExponentsMap const& variablesWithExponents);
-
+    bool operator==(Monomial const& second) const;
+    bool operator!=(Monomial const& second) const;
+    bool operator<(Monomial const& second) const;
     // rule of zero
-
     static VariablesToExponentsMap combineVariableExponentMapByMultiplication(
         VariablesToExponentsMap const& variablesMap1, VariablesToExponentsMap const& variablesMap2);
     static VariablesToExponentsMap combineVariableExponentMapByDivision(
         VariablesToExponentsMap const& variablesMap1, VariablesToExponentsMap const& variablesMap2);
-
-    bool operator==(Monomial const& second) const;
-    bool operator!=(Monomial const& second) const;
-    bool operator<(Monomial const& second) const;
     [[nodiscard]] bool isSimplified() const;
-
     [[nodiscard]] AlbaNumber const& getCoefficient() const;
     [[nodiscard]] VariablesToExponentsMap const& getVariablesToExponentsMap() const;
     [[nodiscard]] AlbaNumber getExponentForVariable(std::string const& variableName) const;
-
     void clear();
     void simplify();
     void setConstant(AlbaNumber const& constant);
@@ -50,7 +44,6 @@ public:
     void putVariablesWithExponents(std::initializer_list<VariableExponentPair> const& variablesWithExponents);
     void putVariablesWithExponents(VariablesToExponentsMap const& variablesWithExponents);
     void putVariableWithExponent(std::string const& variable, AlbaNumber const& exponent);
-
     void setAsSimplified();
     void clearSimplifiedFlag();
 
@@ -58,9 +51,7 @@ private:
     static bool isLessThanByComparingVariableNameMaps(Monomial const& monomial1, Monomial const& monomial2);
     void setNanIfNeeded();
     void removeZeroExponents();
-
     friend std::ostream& operator<<(std::ostream& out, Monomial const& monomial);
-
     AlbaNumber m_constant;
     VariablesToExponentsMap m_variablesToExponentsMap;
     bool m_isSimplified;

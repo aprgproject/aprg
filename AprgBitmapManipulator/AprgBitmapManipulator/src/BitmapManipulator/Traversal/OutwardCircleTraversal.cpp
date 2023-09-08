@@ -14,6 +14,10 @@ OutwardCircleTraversal::OutwardCircleTraversal(int const maxRadius) : m_maxRadiu
     constructRadiusToCoordinates();
 }
 
+OutwardCircleTraversal::RadiusToCoordinates const& OutwardCircleTraversal::getRadiusToCoordinates() const {
+    return m_radiusToCoordinates;
+}
+
 void OutwardCircleTraversal::constructRadiusToCoordinates() {
     for (int i = 0; i <= m_maxRadius; ++i) {
         for (int j = i; j <= m_maxRadius; ++j) {
@@ -21,10 +25,6 @@ void OutwardCircleTraversal::constructRadiusToCoordinates() {
             m_radiusToCoordinates.emplace(radius, Coordinate(i, j));
         }
     }
-}
-
-OutwardCircleTraversal::RadiusToCoordinates const& OutwardCircleTraversal::getRadiusToCoordinates() const {
-    return m_radiusToCoordinates;
 }
 
 }  // namespace alba::AprgBitmap

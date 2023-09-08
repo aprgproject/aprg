@@ -8,7 +8,6 @@ using namespace std;
 namespace alba::booleanAlgebra {
 
 Expression createExpressionInAnExpression(Expression const& expression) { return Expression(Term(expression)); }
-
 Expression createAndWrapExpressionFromATerm(Term const& term) { return Expression(term); }
 
 Expression createOrCopyExpressionFromATerm(Term const& term) {

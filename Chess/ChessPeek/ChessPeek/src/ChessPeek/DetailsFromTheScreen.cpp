@@ -162,11 +162,9 @@ void DetailsFromTheScreen::saveOrientationOnLowerHalfColor(PieceColor const lowe
 }
 
 void DetailsFromTheScreen::savePlayerColor(PieceColor const playerColor) { m_savedPlayerColor = playerColor; }
-
 void DetailsFromTheScreen::saveOrientation(BoardOrientation const orientation) { m_savedOrientation = orientation; }
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

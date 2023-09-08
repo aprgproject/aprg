@@ -11,7 +11,6 @@ MaximumSizeSquareSubMatrixWithAllOnes::Unit
 MaximumSizeSquareSubMatrixWithAllOnes::getMaximumSquareAreaUsingMemoizationDP() const {
     // Time Complexity: O(m*n*max(m,n)) (same as iterative DP)
     // Auxiliary Space: O(m*n)
-
     Unit result(0);
     if (!m_booleanMatrix.isEmpty()) {
         UnitMatrix sideMatrix(m_booleanMatrix.getNumberOfColumns(), m_booleanMatrix.getNumberOfRows(), UNUSED_UNIT);
@@ -37,7 +36,6 @@ MaximumSizeSquareSubMatrixWithAllOnes::Unit
 MaximumSizeSquareSubMatrixWithAllOnes::getMaximumSquareAreaUsingIterativeDP() const {
     // Time Complexity: O(m*n*max(m,n))
     // Auxiliary Space: O(m*n)
-
     Unit result(0);
     if (!m_booleanMatrix.isEmpty()) {
         UnitMatrix sideMatrix(m_booleanMatrix.getNumberOfColumns(), m_booleanMatrix.getNumberOfRows());
@@ -79,7 +77,6 @@ MaximumSizeSquareSubMatrixWithAllOnes::Unit
 MaximumSizeSquareSubMatrixWithAllOnes::getMaximumSquareAreaUsingIterativeDPAndTimeEfficient() const {
     // Time Complexity: O(m*n)
     // Auxiliary Space: O(m*n)
-
     Unit result(0);
     if (!m_booleanMatrix.isEmpty()) {
         UnitMatrix sideMatrix(m_booleanMatrix.getNumberOfColumns(), m_booleanMatrix.getNumberOfRows());
@@ -110,6 +107,12 @@ MaximumSizeSquareSubMatrixWithAllOnes::getMaximumSquareAreaUsingIterativeDPAndTi
     return result;
 }
 
+// inline optimization can work here because the usage belongs to same translation unit
+inline MaximumSizeSquareSubMatrixWithAllOnes::Unit MaximumSizeSquareSubMatrixWithAllOnes::getUnitAt(
+    Index const x, Index const y) const {
+    return m_booleanMatrix.getEntry(x, y) ? 1 : 0;
+}
+
 MaximumSizeSquareSubMatrixWithAllOnes::Unit MaximumSizeSquareSubMatrixWithAllOnes::getMaximumSideUsingMemoizationDP(
     UnitMatrix& sideMatrix, Index const x, Index const y) const {
     Unit result(sideMatrix.getEntry(x, y));
@@ -135,12 +138,6 @@ MaximumSizeSquareSubMatrixWithAllOnes::Unit MaximumSizeSquareSubMatrixWithAllOne
         sideMatrix.setEntry(x, y, result);
     }
     return result;
-}
-
-// inline optimization can work here because the usage belongs to same translation unit
-inline MaximumSizeSquareSubMatrixWithAllOnes::Unit MaximumSizeSquareSubMatrixWithAllOnes::getUnitAt(
-    Index const x, Index const y) const {
-    return m_booleanMatrix.getEntry(x, y) ? 1 : 0;
 }
 
 }  // namespace alba

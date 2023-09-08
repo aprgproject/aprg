@@ -18,11 +18,11 @@ struct RttDetails {
 class RttAnalyzer {
 public:
     RttAnalyzer();
+    void saveAllRttDetails(std::ofstream& collectedRttDetails) const;
     void processFile(std::string const& file);
     void processLine(std::string const& line);
     void processTitles(alba::stringHelper::strings const& titles);
     void processValues(std::string const& dateTime, alba::stringHelper::strings const& values);
-    void saveAllRttDetails(std::ofstream& collectedRttDetails) const;
 
 private:
     std::vector<RttDetails> m_allRttDetails;

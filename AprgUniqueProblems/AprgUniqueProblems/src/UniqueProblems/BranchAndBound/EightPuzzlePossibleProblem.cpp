@@ -43,32 +43,6 @@ void EightPuzzlePossibleProblem::printStepsToSolve() {
 
 int EightPuzzlePossibleProblem::getCost(SearchNode const& node) { return node.differenceFromTarget + node.searchLevel; }
 
-void EightPuzzlePossibleProblem::clearIfInvalid() {
-    if (m_startMatrix.getNumberOfColumns() != m_startMatrix.getNumberOfRows() ||
-        m_targetMatrix.getNumberOfColumns() != m_targetMatrix.getNumberOfRows() ||
-        m_startMatrix.getNumberOfColumns() != m_targetMatrix.getNumberOfRows()) {
-        clear();
-    }
-}
-
-void EightPuzzlePossibleProblem::clear() {
-    m_startMatrix.clearAndResize(0, 0, {});
-    m_targetMatrix.clearAndResize(0, 0, {});
-    m_sideSize = 0;
-    m_nodeIdToSnapshot.clear();
-    m_nodeId = 0;
-}
-
-EightPuzzlePossibleProblem::SearchNode EightPuzzlePossibleProblem::createNode(
-    SearchNodeId const& currentNodeId, Coordinate const& nextBlankTile, int const nextSearchLevel) {
-    SearchNodeId nextNodeId = getNextNodeId();
-    m_nodeIdToSnapshot.emplace_back(
-        PuzzleSnapshot{currentNodeId, nextBlankTile, m_nodeIdToSnapshot[currentNodeId].numberMatrix});
-    PuzzleSnapshot& nextSnapshot(m_nodeIdToSnapshot[nextNodeId]);
-    moveTile(nextSnapshot.numberMatrix, m_nodeIdToSnapshot[currentNodeId].blankTile, nextSnapshot.blankTile);
-    return SearchNode{nextNodeId, countDifference(nextSnapshot.numberMatrix, m_targetMatrix), nextSearchLevel};
-}
-
 void EightPuzzlePossibleProblem::moveTile(
     NumberMatrix& matrix, Coordinate const& previousBlankTile, Coordinate const& nextBlankTile) {
     swap(
@@ -76,7 +50,7 @@ void EightPuzzlePossibleProblem::moveTile(
         matrix.getEntryReference(nextBlankTile.first, nextBlankTile.second));
 }
 
-EightPuzzlePossibleProblem::SearchNodeId EightPuzzlePossibleProblem::getNextNodeId() { return m_nodeId++; }
+void EightPuzzlePossibleProblem::printMatrix(NumberMatrix const& numberMatrix) { cout << numberMatrix << "\n"; }
 
 bool EightPuzzlePossibleProblem::isValidCoordinate(Coordinate const& coordinate) const {
     return coordinate.first >= 0 && coordinate.first < m_sideSize && coordinate.second >= 0 &&
@@ -116,6 +90,32 @@ void EightPuzzlePossibleProblem::printSteps(SearchNodeId const nodeId) const {
     }
 }
 
-void EightPuzzlePossibleProblem::printMatrix(NumberMatrix const& numberMatrix) { cout << numberMatrix << "\n"; }
+EightPuzzlePossibleProblem::SearchNode EightPuzzlePossibleProblem::createNode(
+    SearchNodeId const& currentNodeId, Coordinate const& nextBlankTile, int const nextSearchLevel) {
+    SearchNodeId nextNodeId = getNextNodeId();
+    m_nodeIdToSnapshot.emplace_back(
+        PuzzleSnapshot{currentNodeId, nextBlankTile, m_nodeIdToSnapshot[currentNodeId].numberMatrix});
+    PuzzleSnapshot& nextSnapshot(m_nodeIdToSnapshot[nextNodeId]);
+    moveTile(nextSnapshot.numberMatrix, m_nodeIdToSnapshot[currentNodeId].blankTile, nextSnapshot.blankTile);
+    return SearchNode{nextNodeId, countDifference(nextSnapshot.numberMatrix, m_targetMatrix), nextSearchLevel};
+}
+
+EightPuzzlePossibleProblem::SearchNodeId EightPuzzlePossibleProblem::getNextNodeId() { return m_nodeId++; }
+
+void EightPuzzlePossibleProblem::clearIfInvalid() {
+    if (m_startMatrix.getNumberOfColumns() != m_startMatrix.getNumberOfRows() ||
+        m_targetMatrix.getNumberOfColumns() != m_targetMatrix.getNumberOfRows() ||
+        m_startMatrix.getNumberOfColumns() != m_targetMatrix.getNumberOfRows()) {
+        clear();
+    }
+}
+
+void EightPuzzlePossibleProblem::clear() {
+    m_startMatrix.clearAndResize(0, 0, {});
+    m_targetMatrix.clearAndResize(0, 0, {});
+    m_sideSize = 0;
+    m_nodeIdToSnapshot.clear();
+    m_nodeId = 0;
+}
 
 }  // namespace alba

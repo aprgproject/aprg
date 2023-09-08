@@ -38,7 +38,6 @@ void adjustLowerAndUpperIterators(
 }
 
 // Non set
-
 template <typename ValueType, typename ContainerType>
 std::pair<typename ContainerType::const_iterator, typename ContainerType::const_iterator>
 getLowerAndUpperConstIteratorsForNonSet(ContainerType const& sortedContainer, ValueType const& value) {
@@ -78,7 +77,6 @@ ContainerType getItemsInBetweenForNonSet(
 // first) + O(1) comparisons). However, for non-LegacyRandomAccessIterators, the number of iterator increments is
 // linear. Notably, std::set and std::multiset iterators are not random access, and so their member functions
 // std::set::equal_range (resp. std::multiset::equal_range) should be preferred.
-
 template <typename ValueType, typename ContainerType>
 std::pair<typename ContainerType::const_iterator, typename ContainerType::const_iterator>
 getLowerAndUpperConstIteratorsForSet(ContainerType const& setContainer, ValueType const& value) {
@@ -114,7 +112,6 @@ ContainerType getItemsInBetweenForSet(
 }
 
 // map
-
 template <typename KeyType, typename Container, typename Iterator>
 void adjustLowerAndUpperIteratorsInMap(
     Container const& container, KeyType const& keyValue, Iterator& itLower, Iterator& itUpper) {
@@ -178,7 +175,6 @@ typename Adapter::container_type& getUnderlyingContainerReference(Adapter& adapt
 }
 
 // SaveContentsToStream
-
 template <typename ValueType, std::size_t const SIZE, template <typename, std::size_t> class Container>
 void saveContentsToStream(
     std::ostream& outputStream, Container<ValueType, SIZE> const& container, StreamFormat const streamFormat) {

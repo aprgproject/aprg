@@ -35,7 +35,6 @@ TEST(AvlBinarySearchTreeSymbolTableTest, GetSizeWorksWhenNotEmpty) {
 }
 
 TEST(AvlBinarySearchTreeSymbolTableTest, GetWorks) { testGetWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(AvlBinarySearchTreeSymbolTableTest, GetRankWorks) { testGetRankWithUnsignedIntAndChar<SymbolTableForTest>(); }
 
 TEST(AvlBinarySearchTreeSymbolTableTest, GetMinimumWorks) {
@@ -47,7 +46,6 @@ TEST(AvlBinarySearchTreeSymbolTableTest, GetMaximumWorks) {
 }
 
 TEST(AvlBinarySearchTreeSymbolTableTest, SelectAtWorks) { testSelectAtWithUnsignedIntAndChar<SymbolTableForTest>(); }
-
 TEST(AvlBinarySearchTreeSymbolTableTest, GetFloorWorks) { testGetFloorWithUnsignedIntAndChar<SymbolTableForTest>(); }
 
 TEST(AvlBinarySearchTreeSymbolTableTest, GetCeilingWorks) {

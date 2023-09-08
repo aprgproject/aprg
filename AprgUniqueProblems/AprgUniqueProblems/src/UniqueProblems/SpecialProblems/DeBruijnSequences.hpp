@@ -10,9 +10,7 @@ class DeBruijnSequences {
 public:
     // A De Bruijn sequence is a string that contains every string of length n exactly once as a substring, for a fixed
     // alphabet of k characters. The length of such a string is k^n + n - 1 characters.
-
     DeBruijnSequences(int const substringSize, std::string const& alphabet);
-
     [[nodiscard]] std::string getDeBruijnString() const;
 
 private:

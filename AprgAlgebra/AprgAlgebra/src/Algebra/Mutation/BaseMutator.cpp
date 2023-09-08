@@ -26,9 +26,7 @@ void BaseMutator::mutateTerm(Term &term) {
 }
 
 void BaseMutator::mutateConstant(Constant &) {}
-
 void BaseMutator::mutateVariable(Variable &) {}
-
 void BaseMutator::mutateMonomial(Monomial &) {}
 
 void BaseMutator::mutatePolynomial(Polynomial &polynomial) {

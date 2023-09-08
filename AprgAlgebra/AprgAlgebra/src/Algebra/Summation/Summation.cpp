@@ -43,6 +43,14 @@ Term Summation::getSum(Term const& start, Term const& end) const {
     return result;
 }
 
+Term Summation::getSummationModel() const {
+    IntegrationForFiniteCalculus integration(m_variableName);
+    // Put plus one because finite calculus terms are summation up to n-1.
+    Term variablePlusOne(Polynomial{Monomial(1, {{m_variableName, 1}}), Monomial(1, {})});
+    SubstitutionOfVariablesToTerms substitution({{m_variableName, variablePlusOne}});
+    return substitution.performSubstitutionTo(integration.integrate(m_termToSum));
+}
+
 void Summation::calculateSumFromANumberToANumber(
     Term& result, AlbaNumber const& startNumber, AlbaNumber const& endNumber) const {
     if (startNumber.isIntegerType() && endNumber.isIntegerType() && startNumber <= endNumber) {
@@ -92,14 +100,6 @@ void Summation::calculateSumUsingModel(Term& result, AlbaNumber const& startNumb
     Term summationModelWithConstant(getSummationModelWithKnownConstant(startNumber));
     SubstitutionOfVariablesToValues substitution({{m_variableName, endNumber}});
     result = substitution.performSubstitutionTo(summationModelWithConstant);
-}
-
-Term Summation::getSummationModel() const {
-    IntegrationForFiniteCalculus integration(m_variableName);
-    // Put plus one because finite calculus terms are summation up to n-1.
-    Term variablePlusOne(Polynomial{Monomial(1, {{m_variableName, 1}}), Monomial(1, {})});
-    SubstitutionOfVariablesToTerms substitution({{m_variableName, variablePlusOne}});
-    return substitution.performSubstitutionTo(integration.integrate(m_termToSum));
 }
 
 }  // namespace alba::algebra

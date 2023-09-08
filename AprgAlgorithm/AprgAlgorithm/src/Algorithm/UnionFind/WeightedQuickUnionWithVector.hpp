@@ -11,7 +11,6 @@ class WeightedQuickUnionWithVector : public BaseUnionFind<Object> {
 public:
     using RootVector = std::vector<Object>;
     using SizeVector = std::vector<int>;
-
     explicit WeightedQuickUnionWithVector(int const maximumSize) : m_relativeRoots() { initialize(maximumSize); }
 
     [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
@@ -29,6 +28,9 @@ public:
         }
         return currentRoot;
     }
+
+    [[nodiscard]] RootVector const& getRelativeRootVector() const { return m_relativeRoots; }
+    [[nodiscard]] SizeVector const& getSizesOfRootsVector() const { return m_sizesOfRoots; }
 
     Object getRootWithPathCompressionOnePass(Object const& object) {
         // no longer const
@@ -60,6 +62,9 @@ public:
         return currentRoot;
     }
 
+    RootVector& getRelativeRootVectorReference() { return m_relativeRoots; }
+    SizeVector& getSizesOfRootsVectorReference() { return m_sizesOfRoots; }
+
     void connect(Object const& object1, Object const& object2) override {
         // worst case runs in logarithmic time because of getRoot() -> acceptable
         Object root1(getRoot(object1));
@@ -68,14 +73,6 @@ public:
             connectRootsBasedOnSize(root2, root1);
         }
     }
-
-    [[nodiscard]] RootVector const& getRelativeRootVector() const { return m_relativeRoots; }
-
-    [[nodiscard]] SizeVector const& getSizesOfRootsVector() const { return m_sizesOfRoots; }
-
-    RootVector& getRelativeRootVectorReference() { return m_relativeRoots; }
-
-    SizeVector& getSizesOfRootsVectorReference() { return m_sizesOfRoots; }
 
 private:
     void initialize(int const maximumSize) {

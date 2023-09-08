@@ -176,13 +176,9 @@ bool isTheValue(Expression const& expression, AlbaNumber const& number) {
 }
 
 bool isNan(Term const& term) { return isValueSatisfyTheCondition(term, IsNanCondition); }
-
 bool isNan(Constant const& constant) { return isValueSatisfyTheCondition(constant, IsNanCondition); }
-
 bool isNan(Monomial const& monomial) { return isValueSatisfyTheCondition(monomial, IsNanCondition); }
-
 bool isNan(Polynomial const& polynomial) { return isValueSatisfyTheCondition(polynomial, IsNanCondition); }
-
 bool isNan(Expression const& expression) { return isValueSatisfyTheCondition(expression, IsNanCondition); }
 
 bool isPositiveOrNegativeInfinity(Term const& term) {
@@ -220,7 +216,6 @@ bool isANegativeTerm(Term const& term) {
 }
 
 bool isANegativeConstant(Constant const& constant) { return constant.getNumber() < 0; }
-
 bool isANegativeMonomial(Monomial const& monomial) { return monomial.getCoefficient() < 0; }
 
 bool isANegativePolynomial(Polynomial const& polynomial) {
@@ -268,7 +263,6 @@ bool isARealFiniteConstant(Term const& term) {
 }
 
 bool hasDoubleValues(Term const& term) { return doAnyNumbersSatisfyTheCondition(term, IsDoubleCondition); }
-
 bool hasDoubleValues(Monomial const& monomial) { return doAnyNumbersSatisfyTheCondition(monomial, IsDoubleCondition); }
 
 bool hasDoubleValues(Polynomial const& polynomial) {
@@ -280,15 +274,10 @@ bool hasDoubleValues(Expression const& expression) {
 }
 
 bool hasDoubleValues(Function const& function) { return doAnyNumbersSatisfyTheCondition(function, IsDoubleCondition); }
-
 bool hasNan(Term const& term) { return doAnyNumbersSatisfyTheCondition(term, IsNanCondition); }
-
 bool hasNan(Monomial const& monomial) { return doAnyNumbersSatisfyTheCondition(monomial, IsNanCondition); }
-
 bool hasNan(Polynomial const& polynomial) { return doAnyNumbersSatisfyTheCondition(polynomial, IsNanCondition); }
-
 bool hasNan(Expression const& expression) { return doAnyNumbersSatisfyTheCondition(expression, IsNanCondition); }
-
 bool hasNan(Function const& function) { return doAnyNumbersSatisfyTheCondition(function, IsNanCondition); }
 
 bool hasNonRealFiniteNumbers(Term const& term) {

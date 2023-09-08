@@ -13,29 +13,17 @@ using TrieForTest = RWayTrieUsingMatrix<int, 50>;
 }  // namespace
 
 TEST(RWayTrieUsingMatrixTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingMatrixTest, IsEmptyWorksWhenNotEmpty) { testIsEmptyWhenNotEmptyWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingMatrixTest, DoesContainWorks) { testDoesContainWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingMatrixTest, GetSizeWorksWhenEmpty) { testGetSizeWhenEmptyWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingMatrixTest, GetSizeWorksWhenNotEmpty) { testGetSizeWhenNotEmptyWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingMatrixTest, GetWorks) { testGetWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingMatrixTest, GetLongestPrefixWorks) { testGetLongestPrefixOfWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingMatrixTest, PutWorks) { testPutWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingMatrixTest, DeleteBasedOnKeyWorks) { testDeleteBasedOnKeyWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingMatrixTest, GetKeysWorks) { testGetKeysWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingMatrixTest, GetAllKeysWithPrefixWorks) { testGetAllKeysWithPrefixWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingMatrixTest, GetAllKeysThatMatchWorks) { testGetAllKeysThatMatchWithInt<TrieForTest>(); }
-
 TEST(RWayTrieUsingMatrixTest, Example1Works) { testExample1WithInt<TrieForTest>(); }
 
 TEST(RWayTrieUsingMatrixTest, PutWhenEmptyStringHasNoEffect) {

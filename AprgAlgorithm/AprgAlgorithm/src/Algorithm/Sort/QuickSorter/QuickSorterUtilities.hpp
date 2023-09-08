@@ -39,7 +39,6 @@ int partitionAndGetPartitionIndexUsingHoare(
     Values& values, int const lowIndex, int const highIndex, PivotType const pivotType) {
     // This is Hoare partition scheme
     // https://en.wikipedia.org/wiki/Quicksort#Hoare_partition_scheme
-
     int indexWithPivotValue = getPivotIndex(values, lowIndex, highIndex, pivotType);
     auto pivotValue = values[indexWithPivotValue];
     // Put the pivot on low because so it will be first swapped.
@@ -83,7 +82,6 @@ int partitionAndGetPartitionIndexUsingLomuto(
     Values& values, int const lowIndex, int const highIndex, PivotType const pivotType) {
     // This is based from Lomuto partition scheme
     // https://en.wikipedia.org/wiki/Quicksort#Lomuto_partition_scheme
-
     int indexWithPivotValue = getPivotIndex(values, lowIndex, highIndex, pivotType);
     auto pivotValue = values[indexWithPivotValue];
     std::swap(values[highIndex], values[indexWithPivotValue]);
@@ -106,9 +104,7 @@ typename Values::iterator partitionAndGetPartitionIteratorInTwoDirections(
     // same algorithm with index version
     // This is Hoare partition scheme
     // https://en.wikipedia.org/wiki/Quicksort#Hoare_partition_scheme
-
-    auto pivotValue(*itLow);  // pivot value is at itLow
-
+    auto pivotValue(*itLow);                     // pivot value is at itLow
     auto itWithGreaterValue = itLow;             // no minus one because first index is skipped
     auto itWithLesserValue = std::next(itHigh);  // plus one because inner loop has decrement first
     while (true) {
@@ -134,7 +130,6 @@ template <typename Values>
 typename Values::iterator partitionAndGetPartitionIteratorInOneDirection(
     typename Values::iterator const itLow, typename Values::iterator const itHighPlusOne) {
     auto pivotValue(*itLow);  // pivot value is at itLow
-
     auto partitionIt = itLow;
     auto stopIt = itHighPlusOne;
     for (auto compareIt = std::next(itLow); compareIt != stopIt; ++compareIt) {

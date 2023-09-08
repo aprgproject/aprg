@@ -10,14 +10,14 @@ class IsPartialSumPossibleInZeroOneKnapsack {
 public:
     using Index = int;
     using Value = int;
+
     enum class State { Unused, False, True };
+
     using Values = std::vector<Value>;
     using Booleans = std::vector<bool>;
     using BooleanMatrix = matrix::AlbaMatrix<bool>;
     using StateMatrix = matrix::AlbaMatrix<State>;
-
     IsPartialSumPossibleInZeroOneKnapsack(Value const targetSum, Values const& values);
-
     [[nodiscard]] bool isPartialSumPossibleUsingNaiveRecursion() const;
     [[nodiscard]] bool isPartialSumPossibleUsingMemoizationDP() const;
     [[nodiscard]] bool isPartialSumPossibleUsingIterativeDP() const;
@@ -27,7 +27,6 @@ private:
     [[nodiscard]] bool isPartialSumPossibleUsingNaiveRecursion(Value const partialSum, Index const valueIndex) const;
     bool isPartialSumPossibleUsingMemoizationDP(
         StateMatrix& stateMatrix, Value const partialSum, Index const valueIndex) const;
-
     Value m_targetSum;
     Values m_inputValues;
 };

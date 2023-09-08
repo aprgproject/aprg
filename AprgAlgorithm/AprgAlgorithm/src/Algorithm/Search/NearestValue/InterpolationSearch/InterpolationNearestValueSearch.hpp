@@ -11,7 +11,6 @@ class InterpolationNearestValueSearch {
 public:
     using Index = int;
     using Value = typename Values::value_type;
-    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     explicit InterpolationNearestValueSearch(Values const& sortedValues)
         : m_lowIndex(INVALID_INDEX), m_highIndex(INVALID_INDEX), m_sortedValues(sortedValues) {
@@ -22,6 +21,8 @@ public:
         : m_lowIndex(INVALID_INDEX), m_highIndex(INVALID_INDEX), m_sortedValues(sortedValues) {
         setInitialIndexes(lowIndex, highIndex);
     }
+
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     Value getNearestValue(Value const& target) {
         Value result{};
@@ -42,6 +43,9 @@ public:
     }
 
 private:
+    [[nodiscard]] inline Value getLowerValueWithoutCheck() const { return m_sortedValues[m_lowIndex]; }
+    [[nodiscard]] inline Value getHigherValueWithoutCheck() const { return m_sortedValues[m_highIndex]; }
+
     [[nodiscard]] Index getInterpolatedIndexInBetween(Value const& target) const {
         Index result(INVALID_INDEX);
         if (m_lowIndex + 2 == m_highIndex) {
@@ -60,10 +64,6 @@ private:
         }
         return result;
     }
-
-    [[nodiscard]] inline Value getLowerValueWithoutCheck() const { return m_sortedValues[m_lowIndex]; }
-
-    [[nodiscard]] inline Value getHigherValueWithoutCheck() const { return m_sortedValues[m_highIndex]; }
 
     [[nodiscard]] Value getNearestValueFromLowerAndHigherIndices(Value const& target) const {
         Value lowerValue(getLowerValueWithoutCheck());

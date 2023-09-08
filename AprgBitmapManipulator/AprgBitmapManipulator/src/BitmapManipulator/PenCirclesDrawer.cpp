@@ -17,8 +17,6 @@ using namespace std;
 
 namespace alba::AprgBitmap {
 
-PenCirclesDrawer::ColorDetails::ColorDetails() = default;
-
 bool PenCirclesDrawer::ColorDetails::isEmpty() const { return totalWeight == 0; }
 
 uint32_t PenCirclesDrawer::ColorDetails::getColor() const {
@@ -43,11 +41,8 @@ void PenCirclesDrawer::ColorDetails::clear() {
 
 PenCirclesDrawer::PenCirclesDrawer(PenCircles const& penCircles, BitmapSnippet& snippet)
     : m_snippet(snippet), m_snippetTraversal(snippet), m_penCircles(penCircles) {}
-
 void PenCirclesDrawer::draw() { drawUsingCirclesWithOverlay(); }
-
 void PenCirclesDrawer::drawUsingCirclesWithoutOverlay() { writeCirclesWithoutOverlay(); }
-
 void PenCirclesDrawer::drawUsingCirclesWithOverlay() { writeCirclesWithOverlay(); }
 
 void PenCirclesDrawer::drawUsingConnectedCircles() {
@@ -219,5 +214,7 @@ void PenCirclesDrawer::putCircleConnectionsAndRemoveProcessedCircles() {
         m_drawnPoints[pointAndColorDetails.first] = pointAndColorDetails.second.getColor();
     }
 }
+
+PenCirclesDrawer::ColorDetails::ColorDetails() = default;
 
 }  // namespace alba::AprgBitmap

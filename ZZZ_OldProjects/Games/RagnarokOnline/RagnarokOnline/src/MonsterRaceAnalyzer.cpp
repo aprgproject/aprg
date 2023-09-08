@@ -26,7 +26,6 @@ enum class RacePlaceType { Unknown, SingleRace, DualRaceFirstPlace, DualRaceSeco
 namespace alba {
 
 bool operator<(PossibleWinner const& w1, PossibleWinner const& w2) { return w1.discrepancy < w2.discrepancy; }
-
 MonsterRaceAnalyzer::MonsterRaceAnalyzer() { readPreviousRaceDatabase(); }
 
 void MonsterRaceAnalyzer::showNextPossibleWinners(RaceConfiguration const& currentConfiguration) const {
@@ -53,49 +52,17 @@ void MonsterRaceAnalyzer::showNextPossibleWinners(RaceConfiguration const& curre
     cout << "\n";
 }
 
-void MonsterRaceAnalyzer::readPreviousRaceDatabase() {
-    AlbaLocalPathHandler filePathHandler(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\MonsterRacingDatabase.txt)");
-    ifstream fileStream(filePathHandler.getFullPath());
-    AlbaFileReader fileReader(fileStream);
-    PreviousRace previousRace{};
-    RacePlaceType racePlaceType{RacePlaceType::Unknown};
-    while (fileReader.isNotFinished()) {
-        string line(fileReader.getLineAndIgnoreWhiteSpaces());
-        if (isStringFoundCaseSensitive(line, "#HP:")) {
-            strings hpValuesStrings;
-            splitToStrings<SplitStringType::WithoutDelimeters>(
-                hpValuesStrings, getStringAfterThisString(line, "#HP:"), ",");
-            int limit = min(NUMBER_OF_MONSTERS, static_cast<int>(hpValuesStrings.size()));
-            for (int i = 0; i < limit; ++i) {
-                previousRace.raceConfiguration.hp[i] = convertStringToNumber<int>(hpValuesStrings.at(i));
-            }
-        } else if (isStringFoundCaseSensitive(line, "#Luck:")) {
-            strings luckValuesStrings;
-            splitToStrings<SplitStringType::WithoutDelimeters>(
-                luckValuesStrings, getStringAfterThisString(line, "#Luck:"), ",");
-            int limit = min(NUMBER_OF_MONSTERS, static_cast<int>(luckValuesStrings.size()));
-            for (int i = 0; i < limit; ++i) {
-                previousRace.raceConfiguration.luck[i] = convertStringToNumber<int>(luckValuesStrings.at(i));
-            }
-        } else if (isStringFoundCaseSensitive(line, "#Winner:")) {
-            previousRace.winner = convertStringToNumber<int>(getStringAfterThisString(line, "#Winner:"));
-            if (RacePlaceType::SingleRace == racePlaceType) {
-                m_singleRace.emplace_back(previousRace);
-            } else if (RacePlaceType::DualRaceFirstPlace == racePlaceType) {
-                m_dualRaceFirstPlace.emplace_back(previousRace);
-            } else if (RacePlaceType::DualRaceSecondPlace == racePlaceType) {
-                m_dualRaceSecondPlace.emplace_back(previousRace);
-            }
-            previousRace = {};
-        } else if (isStringFoundCaseSensitive(line, "#SingleRace")) {
-            racePlaceType = RacePlaceType::SingleRace;
-        } else if (isStringFoundCaseSensitive(line, "#DualRaceFirstPlace")) {
-            racePlaceType = RacePlaceType::DualRaceFirstPlace;
-        } else if (isStringFoundCaseSensitive(line, "#DualRaceSecondPlace")) {
-            racePlaceType = RacePlaceType::DualRaceSecondPlace;
-        }
+int MonsterRaceAnalyzer::getDiscrepancy(RaceConfiguration const& r1, RaceConfiguration const& r2) {
+    int result = 0;
+    for (int i = 0; i < NUMBER_OF_MONSTERS; ++i) {
+        result += getAbsoluteValue(r1.luck[i] - r2.luck[i]);
+        result += getAbsoluteValue(r1.hp[i] - r2.hp[i]);
+        // result += (r1.luck[i] - r2.luck[i]) * (r1.luck[i] - r2.luck[i]);
+        // result += (r1.hp[i] - r2.hp[i]) * (r1.hp[i] - r2.hp[i]);
     }
+    return result;
 }
+
 void MonsterRaceAnalyzer::retrieveBestWinners(
     RaceConfiguration& bestConfiguration, BestWinners& queueOfWinners, PreviousRaces const& previousRaces,
     RaceConfiguration const& currentConfiguration) {
@@ -167,15 +134,48 @@ void MonsterRaceAnalyzer::showBestConfiguration(
     cout << "\n";
 }
 
-int MonsterRaceAnalyzer::getDiscrepancy(RaceConfiguration const& r1, RaceConfiguration const& r2) {
-    int result = 0;
-    for (int i = 0; i < NUMBER_OF_MONSTERS; ++i) {
-        result += getAbsoluteValue(r1.luck[i] - r2.luck[i]);
-        result += getAbsoluteValue(r1.hp[i] - r2.hp[i]);
-        // result += (r1.luck[i] - r2.luck[i]) * (r1.luck[i] - r2.luck[i]);
-        // result += (r1.hp[i] - r2.hp[i]) * (r1.hp[i] - r2.hp[i]);
+void MonsterRaceAnalyzer::readPreviousRaceDatabase() {
+    AlbaLocalPathHandler filePathHandler(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\MonsterRacingDatabase.txt)");
+    ifstream fileStream(filePathHandler.getFullPath());
+    AlbaFileReader fileReader(fileStream);
+    PreviousRace previousRace{};
+    RacePlaceType racePlaceType{RacePlaceType::Unknown};
+    while (fileReader.isNotFinished()) {
+        string line(fileReader.getLineAndIgnoreWhiteSpaces());
+        if (isStringFoundCaseSensitive(line, "#HP:")) {
+            strings hpValuesStrings;
+            splitToStrings<SplitStringType::WithoutDelimeters>(
+                hpValuesStrings, getStringAfterThisString(line, "#HP:"), ",");
+            int limit = min(NUMBER_OF_MONSTERS, static_cast<int>(hpValuesStrings.size()));
+            for (int i = 0; i < limit; ++i) {
+                previousRace.raceConfiguration.hp[i] = convertStringToNumber<int>(hpValuesStrings.at(i));
+            }
+        } else if (isStringFoundCaseSensitive(line, "#Luck:")) {
+            strings luckValuesStrings;
+            splitToStrings<SplitStringType::WithoutDelimeters>(
+                luckValuesStrings, getStringAfterThisString(line, "#Luck:"), ",");
+            int limit = min(NUMBER_OF_MONSTERS, static_cast<int>(luckValuesStrings.size()));
+            for (int i = 0; i < limit; ++i) {
+                previousRace.raceConfiguration.luck[i] = convertStringToNumber<int>(luckValuesStrings.at(i));
+            }
+        } else if (isStringFoundCaseSensitive(line, "#Winner:")) {
+            previousRace.winner = convertStringToNumber<int>(getStringAfterThisString(line, "#Winner:"));
+            if (RacePlaceType::SingleRace == racePlaceType) {
+                m_singleRace.emplace_back(previousRace);
+            } else if (RacePlaceType::DualRaceFirstPlace == racePlaceType) {
+                m_dualRaceFirstPlace.emplace_back(previousRace);
+            } else if (RacePlaceType::DualRaceSecondPlace == racePlaceType) {
+                m_dualRaceSecondPlace.emplace_back(previousRace);
+            }
+            previousRace = {};
+        } else if (isStringFoundCaseSensitive(line, "#SingleRace")) {
+            racePlaceType = RacePlaceType::SingleRace;
+        } else if (isStringFoundCaseSensitive(line, "#DualRaceFirstPlace")) {
+            racePlaceType = RacePlaceType::DualRaceFirstPlace;
+        } else if (isStringFoundCaseSensitive(line, "#DualRaceSecondPlace")) {
+            racePlaceType = RacePlaceType::DualRaceSecondPlace;
+        }
     }
-    return result;
 }
 
 }  // namespace alba

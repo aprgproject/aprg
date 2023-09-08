@@ -9,16 +9,13 @@ public:
     using Value = int;
     using Values = std::vector<Value>;
     using Booleans = std::vector<bool>;
-
     explicit AllPartialSumsInZeroOneKnapsack(Values const& values);
-
     [[nodiscard]] Values getAllPossiblePartialSums() const;
     [[nodiscard]] Values getAllPossiblePartialSumsBySettingFutureValues() const;
     Values getAllPossiblePartialSumsWithSquareRootAlgorithm();
 
 private:
     static Values getAllPossiblePartialSums(Booleans const& isPartialSumPossible);
-
     Values m_inputValues;
 };
 

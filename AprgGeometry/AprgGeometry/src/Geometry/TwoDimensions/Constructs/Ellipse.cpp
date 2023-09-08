@@ -13,7 +13,6 @@ using namespace std;
 namespace alba::TwoDimensions {
 
 Ellipse::Ellipse() : m_aValue(0), m_bValue(0) {}
-
 Ellipse::Ellipse(Point const& center, double const aCoefficient, double const bCoefficient)
     : m_center(center), m_aValue(aCoefficient), m_bValue(bCoefficient) {}
 
@@ -24,10 +23,25 @@ bool Ellipse::operator==(Ellipse const& ellipse) const {
 
 bool Ellipse::operator!=(Ellipse const& ellipse) const { return !((*this) == ellipse); }
 
-Point Ellipse::getCenter() const { return m_center; }
+/*double Ellipse::getCircumference(int depthOfCalculation) const
+{
+    double h = pow(m_aValue-m_bValue, 2)/pow(m_aValue+m_bValue, 2);
+    double totalFactor = 0;
+    double currentFactor = 1;
+    for(int i = 0; i<depthOfCalculation; i++)
+    {
+        totalFactor += currentFactor;
+        currentFactor = currentFactor*h;
+    }
+    return getPi()*2*m_radius;
+}*/
+bool Ellipse::isInside(Point const& point) const {
+    return (pow((point.getX() - m_center.getX()) / m_aValue, 2)) +
+               (pow((point.getY() - m_center.getY()) / m_bValue, 2)) <=
+           1;
+}
 
 double Ellipse::getAValue() const { return m_aValue; }
-
 double Ellipse::getBValue() const { return m_bValue; }
 
 double Ellipse::getCValue() const {
@@ -70,24 +84,23 @@ double Ellipse::getSemiLatusRectum() const {
 
 double Ellipse::getArea() const { return getPi() * m_aValue * m_bValue; }
 
-/*double Ellipse::getCircumference(int depthOfCalculation) const
-{
-    double h = pow(m_aValue-m_bValue, 2)/pow(m_aValue+m_bValue, 2);
-    double totalFactor = 0;
-    double currentFactor = 1;
-    for(int i = 0; i<depthOfCalculation; i++)
-    {
-        totalFactor += currentFactor;
-        currentFactor = currentFactor*h;
-    }
-    return getPi()*2*m_radius;
-}*/
-
-bool Ellipse::isInside(Point const& point) const {
-    return (pow((point.getX() - m_center.getX()) / m_aValue, 2)) +
-               (pow((point.getY() - m_center.getY()) / m_bValue, 2)) <=
-           1;
+double Ellipse::calculateYFromX(double const x, double const signOfRoot) const {
+    return pow(1 - pow((x - m_center.getX()) / m_aValue, 2), 0.5) * signOfRoot * m_bValue + m_center.getY();
 }
+
+double Ellipse::calculateXFromY(double const y, double const signOfRoot) const {
+    return pow(1 - pow((y - m_center.getY()) / m_bValue, 2), 0.5) * signOfRoot * m_aValue + m_center.getX();
+}
+
+double Ellipse::calculateYFromXWithoutCenter(double const x, double const signOfRoot) const {
+    return pow(1 - pow(x / m_aValue, 2), 0.5) * signOfRoot * m_bValue;
+}
+
+double Ellipse::calculateXFromYWithoutCenter(double const y, double const signOfRoot) const {
+    return pow(1 - pow(y / m_bValue, 2), 0.5) * signOfRoot * m_aValue;
+}
+
+Point Ellipse::getCenter() const { return m_center; }
 
 Points Ellipse::getFoci() const {
     Points foci;
@@ -185,22 +198,6 @@ void Ellipse::traverseArea(double const interval, TraverseOperation const& trave
             }
         }
     }
-}
-
-double Ellipse::calculateYFromX(double const x, double const signOfRoot) const {
-    return pow(1 - pow((x - m_center.getX()) / m_aValue, 2), 0.5) * signOfRoot * m_bValue + m_center.getY();
-}
-
-double Ellipse::calculateXFromY(double const y, double const signOfRoot) const {
-    return pow(1 - pow((y - m_center.getY()) / m_bValue, 2), 0.5) * signOfRoot * m_aValue + m_center.getX();
-}
-
-double Ellipse::calculateYFromXWithoutCenter(double const x, double const signOfRoot) const {
-    return pow(1 - pow(x / m_aValue, 2), 0.5) * signOfRoot * m_bValue;
-}
-
-double Ellipse::calculateXFromYWithoutCenter(double const y, double const signOfRoot) const {
-    return pow(1 - pow(y / m_bValue, 2), 0.5) * signOfRoot * m_aValue;
 }
 
 Points Ellipse::getPointsInTraversingXAndY(double const signOfX, double const signOfY, double const interval) const {

@@ -12,9 +12,7 @@ struct ConfigurationDetails {
 };
 
 class Configuration : public AlbaConfigurationHolder<ConfigurationDetails> {};
-
 class ScopeObject : public AlbaConfigurationScopeObject<ConfigurationDetails> {};
-
 bool shouldSimplifyExpressionsToFactors();
 bool shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue();
 

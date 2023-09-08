@@ -13,7 +13,6 @@ SchedulingEvents::EventNames SchedulingEvents::getAsMuchEventsAsPossible() const
     // -> No, what if early event is a long event and intersects with multiple short events
     // Algorithm 3: The third idea is to always select the next possible event that ends as early as possible.
     // -> Yes!
-
     EventNames result;
 
     if (!m_events.empty()) {

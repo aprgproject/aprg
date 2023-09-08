@@ -14,7 +14,6 @@ using namespace std;
 namespace alba::TwoDimensions {
 
 Hyperbola::Hyperbola() : m_aValue(0), m_bValue(0) {}
-
 Hyperbola::Hyperbola(Point const& center, double const aCoefficient, double const bCoefficient)
     : m_center(center), m_aValue(aCoefficient), m_bValue(bCoefficient) {}
 
@@ -24,18 +23,29 @@ bool Hyperbola::operator==(Hyperbola const& hyperbola) const {
 }
 
 bool Hyperbola::operator!=(Hyperbola const& hyperbola) const { return !((*this) == hyperbola); }
+double Hyperbola::getAValue() const { return m_aValue; }
+double Hyperbola::getBValue() const { return m_bValue; }
+double Hyperbola::getCValue() const { return getSquareRootOfXSquaredPlusYSquared(m_aValue, m_bValue); }
+double Hyperbola::getEccentricity() const { return pow(1 + (pow(m_bValue, 2) / pow(m_aValue, 2)), 0.5); }
+double Hyperbola::getSemiLactusRectum() const { return pow(m_bValue, 2) / m_aValue; }
+
+double Hyperbola::calculateYFromX(double const x, double const signOfRoot) const {
+    return pow(pow((x - m_center.getX()) / m_aValue, 2) - 1, 0.5) * signOfRoot * m_bValue + m_center.getY();
+}
+
+double Hyperbola::calculateXFromY(double const y, double const signOfRoot) const {
+    return pow(1 + pow((y - m_center.getY()) / m_bValue, 2), 0.5) * signOfRoot * m_aValue + m_center.getX();
+}
+
+double Hyperbola::calculateYFromXWithoutCenter(double const x, double const signOfRoot) const {
+    return pow(pow(x / m_aValue, 2) - 1, 0.5) * signOfRoot * m_bValue;
+}
+
+double Hyperbola::calculateXFromYWithoutCenter(double const y, double const signOfRoot) const {
+    return pow(1 + pow(y / m_bValue, 2), 0.5) * signOfRoot * m_aValue;
+}
 
 Point Hyperbola::getCenter() const { return m_center; }
-
-double Hyperbola::getAValue() const { return m_aValue; }
-
-double Hyperbola::getBValue() const { return m_bValue; }
-
-double Hyperbola::getCValue() const { return getSquareRootOfXSquaredPlusYSquared(m_aValue, m_bValue); }
-
-double Hyperbola::getEccentricity() const { return pow(1 + (pow(m_bValue, 2) / pow(m_aValue, 2)), 0.5); }
-
-double Hyperbola::getSemiLactusRectum() const { return pow(m_bValue, 2) / m_aValue; }
 
 Points Hyperbola::getFoci() const {
     Points foci;
@@ -87,22 +97,6 @@ Lines Hyperbola::getAsymptotes() const {
     result.emplace_back(m_bValue, m_aValue, -m_bValue * m_center.getX() - m_aValue * m_center.getY());
     result.emplace_back(m_bValue, -m_aValue, -m_bValue * m_center.getX() + m_aValue * m_center.getY());
     return result;
-}
-
-double Hyperbola::calculateYFromX(double const x, double const signOfRoot) const {
-    return pow(pow((x - m_center.getX()) / m_aValue, 2) - 1, 0.5) * signOfRoot * m_bValue + m_center.getY();
-}
-
-double Hyperbola::calculateXFromY(double const y, double const signOfRoot) const {
-    return pow(1 + pow((y - m_center.getY()) / m_bValue, 2), 0.5) * signOfRoot * m_aValue + m_center.getX();
-}
-
-double Hyperbola::calculateYFromXWithoutCenter(double const x, double const signOfRoot) const {
-    return pow(pow(x / m_aValue, 2) - 1, 0.5) * signOfRoot * m_bValue;
-}
-
-double Hyperbola::calculateXFromYWithoutCenter(double const y, double const signOfRoot) const {
-    return pow(1 + pow(y / m_bValue, 2), 0.5) * signOfRoot * m_aValue;
 }
 
 Points Hyperbola::getPointsInTraversingXAndY(double const signOfX, double const signOfY, double const interval) const {

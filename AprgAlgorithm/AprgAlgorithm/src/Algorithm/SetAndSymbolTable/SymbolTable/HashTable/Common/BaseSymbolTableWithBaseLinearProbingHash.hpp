@@ -9,14 +9,12 @@ public:
     using Entry = typename BaseLinearProbingHash::Entry;
     using EntryUniquePointer = typename BaseLinearProbingHash::EntryUniquePointer;
     using EntryPointers = typename BaseLinearProbingHash::EntryPointers;
-
+    ~BaseSymbolTableWithBaseLinearProbingHash() override =
+        default;  // no need for virtual destructor because base destructor is virtual (similar to other virtual
     BaseSymbolTableWithBaseLinearProbingHash()
         : b_size(BaseLinearProbingHash::m_size), b_entryPointers(BaseLinearProbingHash::m_entryPointers) {}
 
-    ~BaseSymbolTableWithBaseLinearProbingHash() override =
-        default;  // no need for virtual destructor because base destructor is virtual (similar to other virtual
-                  // functions)
-
+    // functions)
     [[nodiscard]] Value get(Key const& key) const override {
         Value result{};
         for (int i(this->getHash(key)); b_entryPointers[i]; this->incrementHashTableIndexWithWrapAround(i)) {

@@ -8,6 +8,7 @@ namespace alba {
 class TowersOfHanoi {
     using Disk = int;
     using Disks = std::stack<Disk>;
+
     struct StackOfDisks {
         std::string name;
         Disks disks;
@@ -19,11 +20,12 @@ public:
 
 private:
     static void initialStartStack(StackOfDisks& startStack, int const numberOfDisks);
+    static void transferOneDisk(StackOfDisks& source, StackOfDisks& destination);
+    static void printStacksContents(StackOfDisks& source, StackOfDisks& destination);
+
     void transferByBulk(
         StackOfDisks& source, StackOfDisks& temporary, StackOfDisks& destination,
         int const numberOfDisksToTransfer) const;
-    static void transferOneDisk(StackOfDisks& source, StackOfDisks& destination);
-    static void printStacksContents(StackOfDisks& source, StackOfDisks& destination);
 };
 
 }  // namespace alba

@@ -19,10 +19,8 @@ public:
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
     using InitializeDataFunction = std::function<void(Vertices const&)>;
     using UpdateDataFunction = std::function<void(Vertex const&, Vertex const&)>;
-
     ~PathSearchUsingBfs() =
         default;  // No need for virtual destructor because this class is not destroyed polymorphically.
-
     PathSearchUsingBfs(BaseGraphWithVertex const& graph, Vertex const& startVertex)
         : BaseClass(graph),
           b_graph(BaseClass::m_graph),
@@ -68,6 +66,16 @@ private:
     using BaseClass::clear;
     using BaseClass::initializeWithStartVertices;
 
+    static InitializeDataFunction getEmptyInitializeDataFunction() {
+        static InitializeDataFunction emptyInitializeDataFunction = [](Vertices const&) {};
+        return emptyInitializeDataFunction;
+    }
+
+    static UpdateDataFunction getEmptyUpdateDataFunction() {
+        static UpdateDataFunction emptyUpdateDataFunction = [](Vertex const&, Vertex const&) {};
+        return emptyUpdateDataFunction;
+    }
+
     void traverseUsingBfs(Vertices const& startVertices) {
         b_processedVertices.putVertices(startVertices);
 
@@ -89,16 +97,6 @@ private:
         }
     }
 
-    static InitializeDataFunction getEmptyInitializeDataFunction() {
-        static InitializeDataFunction emptyInitializeDataFunction = [](Vertices const&) {};
-        return emptyInitializeDataFunction;
-    }
-
-    static UpdateDataFunction getEmptyUpdateDataFunction() {
-        static UpdateDataFunction emptyUpdateDataFunction = [](Vertex const&, Vertex const&) {};
-        return emptyUpdateDataFunction;
-    }
-
     BaseGraphWithVertex const& b_graph;
     CheckableVerticesWithVertex& b_processedVertices;
     VertexToVertexMap& b_vertexToPreviousVertexMap;
@@ -111,12 +109,10 @@ private:
 // by zero or more vertices of distance k+1. In short, vertices with distance 1 are first, and then vertices with
 // distance 2 and then vertices with distance 3 and so on. Proof(running time): Each vertex connected to s is visited
 // once.
-
 // Other analysis:
 // Like in depth-first search, the time complexity of breadth-first search is O(n+m),
 // where n is the number of nodes and m is the number of edges.
 // The algorithm processes each node and edge once.
-
 // -> More details
 // ---> This non-recursive implementation is similar to the non-recursive implementation of depth-first search, but
 // differs from it in two ways:

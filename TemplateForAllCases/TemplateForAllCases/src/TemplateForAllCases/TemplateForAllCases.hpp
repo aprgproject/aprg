@@ -5,7 +5,6 @@ namespace alba {
 class TemplateForAllCases {
 public:
     TemplateForAllCases() = default;
-
     [[nodiscard]] int getSample() const;
 
 private:

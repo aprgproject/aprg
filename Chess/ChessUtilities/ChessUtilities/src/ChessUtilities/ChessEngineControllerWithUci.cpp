@@ -28,8 +28,32 @@ ChessEngineControllerWithUci::ChessEngineControllerWithUci(
     putStringProcessingFunctionAsCallBack();
 }
 
-void ChessEngineControllerWithUci::initialize() { sendUciAndUciOptions(); }
+bool ChessEngineControllerWithUci::waitTillReadyAndReturnIfResetWasPerformed() {
+    log("Sending \"isready\" and waiting for response");
+    forceSend("isready");
+    m_waitingForReadyOkay = true;
 
+    bool shouldReset(false);
+    int countWith100ms(0U);
+    while (m_waitingForReadyOkay) {
+        if (countWith100ms > 10) {
+            // greater than 1 second elapsed so engine is stuck, lets reset
+            shouldReset = true;
+            break;
+        }
+        ++countWith100ms;
+        sleepFor(100);
+    }
+
+    if (shouldReset) {
+        log("Engine is stuck, resetting engine");
+        resetEngine();
+    }
+
+    return shouldReset;
+}
+
+void ChessEngineControllerWithUci::initialize() { sendUciAndUciOptions(); }
 void ChessEngineControllerWithUci::quit() { sendQuit(); }
 
 void ChessEngineControllerWithUci::resetEngine() {
@@ -93,31 +117,6 @@ void ChessEngineControllerWithUci::goInfinite() {
     send(CommandType::Go, "go infinite");
 }
 
-bool ChessEngineControllerWithUci::waitTillReadyAndReturnIfResetWasPerformed() {
-    log("Sending \"isready\" and waiting for response");
-    forceSend("isready");
-    m_waitingForReadyOkay = true;
-
-    bool shouldReset(false);
-    int countWith100ms(0U);
-    while (m_waitingForReadyOkay) {
-        if (countWith100ms > 10) {
-            // greater than 1 second elapsed so engine is stuck, lets reset
-            shouldReset = true;
-            break;
-        }
-        ++countWith100ms;
-        sleepFor(100);
-    }
-
-    if (shouldReset) {
-        log("Engine is stuck, resetting engine");
-        resetEngine();
-    }
-
-    return shouldReset;
-}
-
 void ChessEngineControllerWithUci::stop() { sendStop(); }
 
 void ChessEngineControllerWithUci::setAdditionalStepsInCalculationMonitoring(
@@ -128,6 +127,22 @@ void ChessEngineControllerWithUci::setAdditionalStepsInCalculationMonitoring(
 void ChessEngineControllerWithUci::setLogFile(string const& logFilePath) {
     m_logFileStreamOptional.emplace();
     m_logFileStreamOptional->open(logFilePath);
+}
+
+string ChessEngineControllerWithUci::constructUciOptionCommand(string const& name, string const& value) {
+    return "setoption name " + name + " value " + value;
+}
+
+string ChessEngineControllerWithUci::getEnumString(ControllerState const state) {
+    switch (state) {
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(ChessEngineControllerWithUci::ControllerState::Initializing, "Initializing")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(
+            ChessEngineControllerWithUci::ControllerState::WaitingForUciOkay, "WaitingForUciOkay")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(ChessEngineControllerWithUci::ControllerState::Idle, "Idle")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(ChessEngineControllerWithUci::ControllerState::Calculating, "Calculating")
+        default:
+            return "default";
+    }
 }
 
 void ChessEngineControllerWithUci::resetData() {
@@ -286,22 +301,6 @@ void ChessEngineControllerWithUci::processInCalculating(string const& stringToPr
 
     if (m_additionalStepsInCalculationMonitoring) {
         m_additionalStepsInCalculationMonitoring.value()(m_calculationDetails);
-    }
-}
-
-string ChessEngineControllerWithUci::constructUciOptionCommand(string const& name, string const& value) {
-    return "setoption name " + name + " value " + value;
-}
-
-string ChessEngineControllerWithUci::getEnumString(ControllerState const state) {
-    switch (state) {
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(ChessEngineControllerWithUci::ControllerState::Initializing, "Initializing")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(
-            ChessEngineControllerWithUci::ControllerState::WaitingForUciOkay, "WaitingForUciOkay")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(ChessEngineControllerWithUci::ControllerState::Idle, "Idle")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(ChessEngineControllerWithUci::ControllerState::Calculating, "Calculating")
-        default:
-            return "default";
     }
 }
 

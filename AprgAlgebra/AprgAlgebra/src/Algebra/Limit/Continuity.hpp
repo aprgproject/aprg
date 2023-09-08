@@ -11,10 +11,12 @@
 namespace alba::algebra {
 
 enum class ContinuityType {
+
     Unknown,
     ContinuousAtBothSides,
     DiscontinuousWithRemovableDiscontinuity,
     DiscontinuousWithEssentialDiscontinuity
+
 };
 
 bool isContinuousAt(Term const& term, std::string const& variableName, AlbaNumber const& value);
@@ -36,7 +38,6 @@ bool isIntermediateValueTheoremSatisfied(
     AlbaNumber const& valueToTest);
 
 ContinuityType getContinuityTypeAt(Term const& term, std::string const& variableName, AlbaNumber const& value);
-
 SolutionSet getContinuityDomain(Term const& term);
 
 }  // namespace alba::algebra

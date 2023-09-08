@@ -16,7 +16,6 @@
 namespace alba::matrix {
 
 // constexpr functions:
-
 template <typename DataType>
 constexpr AlbaMatrixData<DataType> getDefaultMatrix(size_t const numberOfColumns, size_t const numberOfRows) {
     if constexpr (typeHelper::isArithmeticType<DataType>()) {
@@ -37,10 +36,8 @@ public:
     using LoopWithValueFunction =
         std::function<void(size_t const xPosition, size_t const yPosition, DataType const& value)>;
     using MatrixIndexRange = AlbaValueRange<size_t>;
-
     // Do we have to make rows and columns as template parameter?
     // No, its better to have this on runtime because matrix can have different dimensions on applications.
-
     AlbaMatrix() : m_numberOfColumns(0), m_numberOfRows(0) {}
 
     AlbaMatrix(size_t const numberOfColumns, size_t const numberOfRows)
@@ -64,7 +61,6 @@ public:
     }
 
     // rule of zero
-
     bool operator==(AlbaMatrix const& secondMatrix) const {
         bool isEqual(true);
         if (m_numberOfColumns != secondMatrix.m_numberOfColumns || m_numberOfRows != secondMatrix.m_numberOfRows) {
@@ -146,9 +142,7 @@ public:
     }
 
     [[nodiscard]] size_t getNumberOfColumns() const { return m_numberOfColumns; }
-
     [[nodiscard]] size_t getNumberOfRows() const { return m_numberOfRows; }
-
     [[nodiscard]] size_t getNumberOfCells() const { return m_numberOfColumns * m_numberOfRows; }
 
     [[nodiscard]] size_t getMatrixIndex(size_t const xPosition, size_t const yPosition) const {
@@ -166,9 +160,6 @@ public:
     }
 
     [[nodiscard]] MatrixData const& getMatrixData() const { return m_matrixData; }
-
-    // Use getMatrixDataReference() only if needed
-    MatrixData& getMatrixDataReference() { return m_matrixData; }
 
     void retrieveColumn(MatrixData& column, size_t const xPosition) const {
         column.reserve(m_numberOfRows);
@@ -202,6 +193,29 @@ public:
         xPosition = index % m_numberOfColumns;
         yPosition = index / m_numberOfColumns;
     }
+
+    void iterateAllThroughYAndThenX(LoopFunction const& loopFunction) const {
+        for (size_t yPosition = 0; yPosition < m_numberOfRows; ++yPosition) {
+            for (size_t xPosition = 0; xPosition < m_numberOfColumns; ++xPosition) {
+                loopFunction(xPosition, yPosition);
+            }
+        }
+    }
+
+    void iterateThroughYAndThenXWithRanges(
+        MatrixIndexRange const& yRange, MatrixIndexRange const& xRange, LoopFunction const& loopFunction) const {
+        yRange.traverse(
+            [&](size_t const yValue) { xRange.traverse([&](size_t const xValue) { loopFunction(xValue, yValue); }); });
+    }
+
+    void iterateThroughXAndThenYWithRanges(
+        MatrixIndexRange const& xRange, MatrixIndexRange const& yRange, LoopFunction const& loopFunction) const {
+        xRange.traverse(
+            [&](size_t const xValue) { yRange.traverse([&](size_t const yValue) { loopFunction(xValue, yValue); }); });
+    }
+
+    // Use getMatrixDataReference() only if needed
+    MatrixData& getMatrixDataReference() { return m_matrixData; }
 
     DataType& getEntryReference(size_t const xPosition, size_t const yPosition) {
         assert(isInside(xPosition, yPosition));
@@ -264,7 +278,6 @@ public:
         // Another formula:
         // Inverse of matrix at[i, j] = cofactor at[j,i] / determinant(matrix)
         // But this is costly because of determinant.
-
         assert(m_numberOfColumns == m_numberOfRows);
         size_t newColumns = m_numberOfColumns * 2;
         AlbaMatrix tempMatrix(newColumns, m_numberOfRows);
@@ -280,26 +293,6 @@ public:
             m_matrixData[getMatrixIndex(xPosition, yPosition)] =
                 tempMatrix.m_matrixData[getMatrixIndex(m_numberOfColumns + xPosition, yPosition, newColumns)];
         });
-    }
-
-    void iterateAllThroughYAndThenX(LoopFunction const& loopFunction) const {
-        for (size_t yPosition = 0; yPosition < m_numberOfRows; ++yPosition) {
-            for (size_t xPosition = 0; xPosition < m_numberOfColumns; ++xPosition) {
-                loopFunction(xPosition, yPosition);
-            }
-        }
-    }
-
-    void iterateThroughYAndThenXWithRanges(
-        MatrixIndexRange const& yRange, MatrixIndexRange const& xRange, LoopFunction const& loopFunction) const {
-        yRange.traverse(
-            [&](size_t const yValue) { xRange.traverse([&](size_t const xValue) { loopFunction(xValue, yValue); }); });
-    }
-
-    void iterateThroughXAndThenYWithRanges(
-        MatrixIndexRange const& xRange, MatrixIndexRange const& yRange, LoopFunction const& loopFunction) const {
-        xRange.traverse(
-            [&](size_t const xValue) { yRange.traverse([&](size_t const yValue) { loopFunction(xValue, yValue); }); });
     }
 
 private:

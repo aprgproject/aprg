@@ -14,10 +14,8 @@ public:
     // We can easily process sum queries on a static array by constructing a prefix sum array.
     // Each value in the prefix sum array equals the sum of values in the original array up to that position, i.e., the
     // value at position k is sumq(0,k).
-
     // A binary indexed tree or a Fenwick tree can be seen as a dynamic variant of a prefix sum array.
     // It supports two O(logn) time operations on an array: processing a range sum query and updating a value.
-
     using Index = int;
     using Value = typename Values::value_type;
     using AccumulatorFunction = std::function<Value(Value const&, Value const&)>;
@@ -81,17 +79,6 @@ public:
     }
 
 private:
-    void initializePartialSums() {
-        // This has N*log(N) running time
-        m_partialTreeSums.reserve(m_values.size());
-        // Indexes here have plus one (for easier end loop conditions)
-        for (Index indexPlusOne = 1; indexPlusOne <= static_cast<Index>(m_values.size()); ++indexPlusOne) {
-            Index powerOf2Factor(getGreatestPowerOf2Factor(indexPlusOne));
-            m_partialTreeSums.emplace_back(getPartialTreeSum(powerOf2Factor, indexPlusOne));
-        }
-        m_partialTreeSums.shrink_to_fit();
-    }
-
     [[nodiscard]] Value getPartialTreeSum(int const powerOf2Factor, int const indexPlusOne) const {
         // This has log(N) running time
         Value result(m_values[indexPlusOne - 1]);
@@ -107,6 +94,17 @@ private:
 
     [[nodiscard]] Index getGreatestPowerOf2Factor(Index const index) const {
         return mathHelper::getGreatestPowerOf2Factor(index);
+    }
+
+    void initializePartialSums() {
+        // This has N*log(N) running time
+        m_partialTreeSums.reserve(m_values.size());
+        // Indexes here have plus one (for easier end loop conditions)
+        for (Index indexPlusOne = 1; indexPlusOne <= static_cast<Index>(m_values.size()); ++indexPlusOne) {
+            Index powerOf2Factor(getGreatestPowerOf2Factor(indexPlusOne));
+            m_partialTreeSums.emplace_back(getPartialTreeSum(powerOf2Factor, indexPlusOne));
+        }
+        m_partialTreeSums.shrink_to_fit();
     }
 
     Values m_values;

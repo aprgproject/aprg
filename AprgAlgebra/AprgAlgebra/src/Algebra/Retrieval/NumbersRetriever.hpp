@@ -8,7 +8,6 @@ namespace alba::algebra {
 class NumbersRetriever final : public BaseRetriever {
 public:
     [[nodiscard]] AlbaNumbersSet const& getNumbers() const;
-
     void retrieveFromConstant(Constant const& constant) override;
     void retrieveFromVariable(Variable const& variable) override;
     void retrieveFromMonomial(Monomial const& monomial) override;

@@ -10,10 +10,6 @@ AlbaRatio::AlbaRatio(double const firstValue, double const secondValue)
     : m_type(determineTypeFrom2Values(firstValue, secondValue)),
       m_ratio(calculateValidRatio(firstValue, secondValue, m_type)) {}
 
-AlbaRatio::Type AlbaRatio::getType() const { return m_type; }
-
-double AlbaRatio::getValidRatioIfPossible() const { return m_ratio; }
-
 bool AlbaRatio::isBothZero() const { return m_type == Type::BothValuesZero; }
 
 bool AlbaRatio::isOnlyOneValueZero() const {
@@ -21,6 +17,16 @@ bool AlbaRatio::isOnlyOneValueZero() const {
 }
 
 bool AlbaRatio::hasValidRatio() const { return m_type == Type::WithValidRatio; }
+double AlbaRatio::getValidRatioIfPossible() const { return m_ratio; }
+AlbaRatio::Type AlbaRatio::getType() const { return m_type; }
+
+double AlbaRatio::calculateValidRatio(double const firstValue, double const secondValue, Type const type) {
+    double validRatio(0);
+    if (type == Type::WithValidRatio) {
+        validRatio = firstValue / secondValue;
+    }
+    return validRatio;
+}
 
 AlbaRatio::Type AlbaRatio::determineTypeFrom2Values(double const firstValue, double const secondValue) {
     Type type{};
@@ -36,14 +42,6 @@ AlbaRatio::Type AlbaRatio::determineTypeFrom2Values(double const firstValue, dou
         type = Type::WithValidRatio;
     }
     return type;
-}
-
-double AlbaRatio::calculateValidRatio(double const firstValue, double const secondValue, Type const type) {
-    double validRatio(0);
-    if (type == Type::WithValidRatio) {
-        validRatio = firstValue / secondValue;
-    }
-    return validRatio;
 }
 
 }  // namespace alba

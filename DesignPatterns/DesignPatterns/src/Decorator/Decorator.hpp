@@ -6,11 +6,9 @@ namespace Decorator {
 // Component
 // defines an interface for objects that can have responsibilities
 // added to them dynamically
-
 class Component {
 public:
     virtual ~Component() = default;
-
     virtual void operation() = 0;
     // ...
 };
@@ -18,7 +16,6 @@ public:
 // Concrete Component
 // defines an object to which additional responsibilities
 // can be attached
-
 class ConcreteComponent : public Component {
 public:
     void operation() override { std::cout << "Concrete Component operation\n"; }
@@ -28,14 +25,12 @@ public:
 // Decorator
 // maintains a reference to a Component object and defines an interface
 // that conforms to Component's interface
-
 class Decorator : public Component {
 public:
     explicit Decorator(std::unique_ptr<Component> componentPointer) : m_componentPointer(std::move(componentPointer)) {}
-
     void operation() override { m_componentPointer->operation(); }
-    // ...
 
+    // ...
 private:
     std::unique_ptr<Component> m_componentPointer;
 };
@@ -43,7 +38,6 @@ private:
 // Concrete Decorators
 // add responsibilities to the component (can extend the state
 // of the component)
-
 class ConcreteDecoratorA : public Decorator {
 public:
     explicit ConcreteDecoratorA(std::unique_ptr<Component> componentPointer) : Decorator(std::move(componentPointer)) {}
@@ -52,6 +46,7 @@ public:
         Decorator::operation();
         std::cout << "Decorator A\n";
     }
+
     // ...
 };
 
@@ -63,6 +58,7 @@ public:
         Decorator::operation();
         std::cout << "Decorator B\n";
     }
+
     // ...
 };
 

@@ -11,12 +11,10 @@ template <typename CoordinateType>
 class AlbaXYZ {
 public:
     AlbaXYZ() : m_x{}, m_y{}, m_z{} {}
-
     AlbaXYZ(CoordinateType const& xValue, CoordinateType const& yValue, CoordinateType const& zValue)
         : m_x(xValue), m_y(yValue), m_z(zValue) {}
 
     // rule of zero
-
     bool operator==(AlbaXYZ const& xyz) const {
         return mathHelper::isAlmostEqual(m_x, xyz.m_x) && mathHelper::isAlmostEqual(m_y, xyz.m_y) &&
                mathHelper::isAlmostEqual(m_z, xyz.m_z);
@@ -33,7 +31,6 @@ public:
     }
 
     AlbaXYZ operator+() const { return *this; }
-
     AlbaXYZ operator-() const { return AlbaXYZ(-m_x, -m_y, -m_z); }
 
     AlbaXYZ operator+(AlbaXYZ const& secondXyz) const {
@@ -71,17 +68,11 @@ public:
     }
 
     [[nodiscard]] CoordinateType getX() const { return m_x; }
-
     [[nodiscard]] CoordinateType getY() const { return m_y; }
-
     [[nodiscard]] CoordinateType getZ() const { return m_z; }
-
     [[nodiscard]] CoordinateType getXTimesYTimesZ() const { return m_x * m_y * m_z; }
-
     void setX(CoordinateType const& xValue) { m_x = xValue; }
-
     void setY(CoordinateType const& yValue) { m_y = yValue; }
-
     void setZ(CoordinateType const& zValue) { m_z = zValue; }
 
     void setXAndYAndZ(CoordinateType const& xValue, CoordinateType const& yValue, CoordinateType const& zValue) {

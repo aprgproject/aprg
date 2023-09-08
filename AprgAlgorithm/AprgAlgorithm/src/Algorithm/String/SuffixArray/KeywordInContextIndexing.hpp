@@ -30,6 +30,7 @@ private:
         return searchSpace.length() >= stringToCheck.length() &&
                searchSpace.substr(0, stringToCheck.length()) == stringToCheck;
     }
+
     std::string m_searchSpace;
     SuffixArray<Index> m_suffixArray;
 };

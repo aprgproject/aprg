@@ -16,7 +16,6 @@ bool MinimumNumberOfPlatformsRequiredForARailwayStation::Event::operator<(Event 
 
 int MinimumNumberOfPlatformsRequiredForARailwayStation::getMinimumNumberOfPlatforms() const {
     // sweep line algorithm
-
     int minimumNumberOfPlatforms(0);
     int numberOfWaitingTrains(0);
     for (Event const& event : m_sortedEvents) {

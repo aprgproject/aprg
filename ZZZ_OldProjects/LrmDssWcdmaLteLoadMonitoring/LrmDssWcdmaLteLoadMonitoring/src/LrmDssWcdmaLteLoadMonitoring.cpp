@@ -2,39 +2,6 @@
 
 namespace alba {
 
-LrmDssWcdmaLteLoadMonitoring::LrmDssWcdmaLteLoadMonitoring()
-
-    = default;
-
-unsigned int LrmDssWcdmaLteLoadMonitoring::getConsecutiveLowerLoadStateCount() const {
-    return m_consecutiveLowerLoadStateCount;
-}
-
-unsigned int LrmDssWcdmaLteLoadMonitoring::getDchLoadFactor() const { return m_dchLoadFactor; }
-
-unsigned int LrmDssWcdmaLteLoadMonitoring::getHsdpaAndHsfachLoadFactor() const { return m_hsdpaAndHsfachLoadFactor; }
-
-unsigned int LrmDssWcdmaLteLoadMonitoring::getMediumLoadThreshold() const { return m_mediumLoadThreshold; }
-
-unsigned int LrmDssWcdmaLteLoadMonitoring::getHighLoadThreshold() const { return m_highLoadThreshold; }
-
-EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::getLoadStateFromCellLoad(unsigned int const cellLoad) const {
-    EDssWcdmaLoad loadState(EDssWcdmaLoad_Low);
-
-    if (cellLoad >= m_highLoadThreshold) {
-        loadState = EDssWcdmaLoad_High;
-    } else if (cellLoad >= m_mediumLoadThreshold) {
-        loadState = EDssWcdmaLoad_Medium;
-    }
-    return loadState;
-}
-
-unsigned int LrmDssWcdmaLteLoadMonitoring::calculateCellLoad(
-    unsigned int const numberOfDchUsers, unsigned int const numberOfHsdpaUsers, bool const hasHsfachInTheCell) const {
-    unsigned const int hsfachLoad = hasHsfachInTheCell ? 1 : 0;
-    return (numberOfDchUsers * m_dchLoadFactor) + ((numberOfHsdpaUsers + hsfachLoad) * m_hsdpaAndHsfachLoadFactor);
-}
-
 EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::getNextLowerLoadState(EDssWcdmaLoad const loadState) {
     EDssWcdmaLoad result(EDssWcdmaLoad_Low);
     unsigned int loadStateValue = static_cast<EDssWcdmaLoad>(loadState);
@@ -79,6 +46,32 @@ EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::convertFilterBandwidthToLoadState(
     return result;
 }
 
+unsigned int LrmDssWcdmaLteLoadMonitoring::getConsecutiveLowerLoadStateCount() const {
+    return m_consecutiveLowerLoadStateCount;
+}
+
+unsigned int LrmDssWcdmaLteLoadMonitoring::getDchLoadFactor() const { return m_dchLoadFactor; }
+unsigned int LrmDssWcdmaLteLoadMonitoring::getHsdpaAndHsfachLoadFactor() const { return m_hsdpaAndHsfachLoadFactor; }
+unsigned int LrmDssWcdmaLteLoadMonitoring::getMediumLoadThreshold() const { return m_mediumLoadThreshold; }
+unsigned int LrmDssWcdmaLteLoadMonitoring::getHighLoadThreshold() const { return m_highLoadThreshold; }
+
+unsigned int LrmDssWcdmaLteLoadMonitoring::calculateCellLoad(
+    unsigned int const numberOfDchUsers, unsigned int const numberOfHsdpaUsers, bool const hasHsfachInTheCell) const {
+    unsigned const int hsfachLoad = hasHsfachInTheCell ? 1 : 0;
+    return (numberOfDchUsers * m_dchLoadFactor) + ((numberOfHsdpaUsers + hsfachLoad) * m_hsdpaAndHsfachLoadFactor);
+}
+
+EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::getLoadStateFromCellLoad(unsigned int const cellLoad) const {
+    EDssWcdmaLoad loadState(EDssWcdmaLoad_Low);
+
+    if (cellLoad >= m_highLoadThreshold) {
+        loadState = EDssWcdmaLoad_High;
+    } else if (cellLoad >= m_mediumLoadThreshold) {
+        loadState = EDssWcdmaLoad_Medium;
+    }
+    return loadState;
+}
+
 EDssWcdmaLoad
 LrmDssWcdmaLteLoadMonitoring::determineLoadStateForTheNextFilterUpdateAndUpdateConsecutiveLowerLoadStateCountIfNeeded(
     EDssWcdmaLoad const currentLoadState, EDssWcdmaLoad const currentLoadStateOfTheAppliedFilter) {
@@ -111,5 +104,9 @@ void LrmDssWcdmaLteLoadMonitoring::setCommissioningLoadThresholdValues(
     m_mediumLoadThreshold = mediumLoadThreshold;
     m_highLoadThreshold = highLoadThreshold;
 }
+
+LrmDssWcdmaLteLoadMonitoring::LrmDssWcdmaLteLoadMonitoring()
+
+    = default;
 
 }  // namespace alba

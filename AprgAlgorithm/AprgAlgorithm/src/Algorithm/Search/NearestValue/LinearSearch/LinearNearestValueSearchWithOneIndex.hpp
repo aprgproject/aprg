@@ -12,7 +12,6 @@ class LinearNearestValueSearchWithOneIndex {
 public:
     using Index = int;
     using Value = typename Values::value_type;
-    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     explicit LinearNearestValueSearchWithOneIndex(Values const& values)  // values can be unsorted
         : m_startIndex(INVALID_INDEX), m_endIndex(INVALID_INDEX), m_values(values) {
@@ -23,6 +22,8 @@ public:
         : m_startIndex(INVALID_INDEX), m_endIndex(INVALID_INDEX), m_values(values) {
         setInitialIndexes(startIndex, endIndex);
     }
+
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     Value getNearestValue(Value const& target) {
         Value result{};

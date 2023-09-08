@@ -10,14 +10,12 @@ template <typename Vertex>
 bool hasHamiltonianPathBecauseItsComplete(BaseGraph<Vertex> const& graph) {
     // A simple observation is that if the graph is complete, i.e., there is an edge between all pairs of nodes, it also
     // contains a Hamiltonian path.
-
     return GraphUtilities::isACompleteGraph(graph);
 }
 
 template <typename Vertex>
 bool hasHamiltonianPathBecauseOfDiracTheorem(BaseGraph<Vertex> const& graph) {
     // Dirac’s theorem: If the degree of each node is at least n/2, the graph contains a Hamiltonian path.
-
     bool result(true);
     for (Vertex const& vertex : graph.getVertices()) {
         result = GraphUtilities::getDegreeAt(graph, vertex) * 2 >= graph.getNumberOfVertices();
@@ -37,7 +35,6 @@ bool hasHamiltonianPathBecauseOfOreTheorem(BaseGraph<Vertex> const& graph) {
     // -> Then, Ore's theorem states that if:
     // ---> deg v + deg w ≥ n for every pair of distinct non-adjacent vertices v and w of G
     // -> then G is Hamiltonian.
-
     std::map<Vertex, int> vertexToDegreeMap;
     for (Vertex const& vertex : graph.getVertices()) {
         vertexToDegreeMap.emplace(vertex, GraphUtilities::getDegreeAt(graph, vertex));

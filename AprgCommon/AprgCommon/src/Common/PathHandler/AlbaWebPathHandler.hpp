@@ -9,13 +9,12 @@ namespace alba {
 class AlbaWebPathHandler : public AlbaPathHandler {
 public:
     explicit AlbaWebPathHandler(std::string_view const path);
-    // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
-
-    void clear() override;
+    [[nodiscard]] bool hasProtocol() const;
     [[nodiscard]] std::string getFullPath() const override;
     [[nodiscard]] std::string getDirectory() const override;
-    [[nodiscard]] bool hasProtocol() const;
     [[nodiscard]] std::string getProtocol() const;
+    // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
+    void clear() override;
     void gotoLink(std::string_view const newPath);
     void setProtocolWithSymbols(std::string_view const protocolWithSymbols);
 

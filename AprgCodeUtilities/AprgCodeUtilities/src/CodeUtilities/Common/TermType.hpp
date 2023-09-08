@@ -3,6 +3,7 @@
 namespace alba::CodeUtilities {
 
 enum class TermType {
+
     Aggregate,
     Attribute,
     Boolean,
@@ -18,6 +19,7 @@ enum class TermType {
     StringLiteral,
     Unknown,
     WhiteSpace
+
 };
 
 }  // namespace alba::CodeUtilities

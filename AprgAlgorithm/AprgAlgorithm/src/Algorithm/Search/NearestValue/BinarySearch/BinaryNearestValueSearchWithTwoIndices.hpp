@@ -10,7 +10,6 @@ class BinaryNearestValueSearchWithTwoIndices {
 public:
     using Index = int;
     using Value = typename Values::value_type;
-    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     explicit BinaryNearestValueSearchWithTwoIndices(Values const& sortedValues)
         : m_lowIndex(INVALID_INDEX), m_highIndex(INVALID_INDEX), m_sortedValues(sortedValues) {
@@ -20,6 +19,26 @@ public:
     BinaryNearestValueSearchWithTwoIndices(Index const lowIndex, Index const highIndex, Values const& sortedValues)
         : m_lowIndex(INVALID_INDEX), m_highIndex(INVALID_INDEX), m_sortedValues(sortedValues) {
         setInitialIndexes(lowIndex, highIndex);
+    }
+
+    [[nodiscard]] inline Index getLowerIndex() const { return m_lowIndex; }
+    [[nodiscard]] inline Index getHigherIndex() const { return m_highIndex; }
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
+
+    [[nodiscard]] Value getLowerValue() const {
+        Value result{};
+        if (!m_sortedValues.empty()) {
+            result = m_sortedValues[m_lowIndex];
+        }
+        return result;
+    }
+
+    [[nodiscard]] Value getHigherValue() const {
+        Value result{};
+        if (!m_sortedValues.empty()) {
+            result = m_sortedValues[m_highIndex];
+        }
+        return result;
     }
 
     Value getNearestValue(Value const& target) {
@@ -36,26 +55,6 @@ public:
         if (!m_sortedValues.empty()) {
             moveCloserUsingIntervalsInsideTarget(target);
             result = getIndexOfNearestValueInBetweenTwoIndices(target);
-        }
-        return result;
-    }
-
-    [[nodiscard]] inline Index getLowerIndex() const { return m_lowIndex; }
-
-    [[nodiscard]] inline Index getHigherIndex() const { return m_highIndex; }
-
-    [[nodiscard]] Value getLowerValue() const {
-        Value result{};
-        if (!m_sortedValues.empty()) {
-            result = m_sortedValues[m_lowIndex];
-        }
-        return result;
-    }
-
-    [[nodiscard]] Value getHigherValue() const {
-        Value result{};
-        if (!m_sortedValues.empty()) {
-            result = m_sortedValues[m_highIndex];
         }
         return result;
     }

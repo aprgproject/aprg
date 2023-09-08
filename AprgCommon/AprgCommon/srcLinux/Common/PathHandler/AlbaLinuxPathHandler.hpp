@@ -15,47 +15,47 @@ class AlbaLinuxPathHandler : public AlbaPathHandler {
 public:
     explicit AlbaLinuxPathHandler(std::string_view const path);
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
-
     static AlbaLinuxPathHandler createPathHandlerForDetectedPath();
-
-    void clear() override;
     [[nodiscard]] bool isFoundInLocalSystem() const;
     [[nodiscard]] bool isRelativePath() const;
     [[nodiscard]] double getFileSizeEstimate() const;
     [[nodiscard]] AlbaDateTime getFileCreationTime() const;
     void createDirectoriesForNonExisitingDirectories() const;
-
-    bool deleteFile();
-    bool deleteDirectoryWithoutFilesAndDirectories();  // do tests
-    void deleteFilesInDirectory();                     // do tests
-    void deleteInnerFilesAndDirectories();             // do tests
-    void deleteDirectoryWithFilesAndDirectories();     // do tests
-    bool copyToNewFile(std::string_view const newFilePath);
-    bool renameFile(std::string_view const newFileName);
-    bool renameImmediateDirectory(std::string_view const newDirectoryName);
-
     void findFilesAndDirectoriesOneDepth(
         std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
+
     void findFilesAndDirectoriesMultipleDepth(
         std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories,
         int const depth) const;
+
     void findFilesAndDirectoriesUnlimitedDepth(
         std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
-
+    bool deleteFile();
+    bool deleteDirectoryWithoutFilesAndDirectories();  // do tests
+    bool copyToNewFile(std::string_view const newFilePath);
+    bool renameFile(std::string_view const newFileName);
+    bool renameImmediateDirectory(std::string_view const newDirectoryName);
+    void clear() override;
+    void deleteFilesInDirectory();                  // do tests
+    void deleteInnerFilesAndDirectories();          // do tests
+    void deleteDirectoryWithFilesAndDirectories();  // do tests
 private:
+    static bool canBeLocated(std::string_view const fullPath);
     static std::string getCurrentDetectedPath();
-    void save(std::string_view const path) override;
-    void setPath(std::string_view const path);
+    [[nodiscard]] bool isPathADirectory(std::string_view const fileOrDirectoryName) const;
+    [[nodiscard]] bool isSlashNeededAtTheEnd(
+        std::string_view const correctedPath, std::string_view const originalPath) const;
+
     void findFilesAndDirectoriesWithDepth(
         std::string_view const currentDirectory, std::string_view const wildCardSearch, ListOfPaths& listOfFiles,
         ListOfPaths& listOfDirectories, int const depth) const;
+
     void loopAllFilesAndDirectoriesInDirectoryStream(
         DIR* directoryStream, std::string_view const currentDirectory, std::string_view const wildCardSearch,
         std::set<std::string>& listOfFiles, std::set<std::string>& listOfDirectories, int const depth) const;
-    [[nodiscard]] bool isPathADirectory(std::string_view const fileOrDirectoryName) const;
-    static bool canBeLocated(std::string_view const fullPath);
-    [[nodiscard]] bool isSlashNeededAtTheEnd(
-        std::string_view const correctedPath, std::string_view const originalPath) const;
+
+    void save(std::string_view const path) override;
+    void setPath(std::string_view const path);
     bool m_foundInLocalSystem{false};
     bool m_relativePath{false};
 };

@@ -10,15 +10,15 @@ namespace alba::algebra {
 class SolverUsingSubstitution : public BaseSolver {
 public:
     SolverUsingSubstitution();
-
     MultipleVariableSolutionSets calculateSolutionAndReturnSolutionSet(Equations const& equations);
 
 private:
-    [[nodiscard]] bool isTheValueAlreadyExisting(std::string const& variableName, AlbaNumber const& value) const;
     static bool isSolutionCorrect(MultipleVariableSolutionSet const& solutionSet, Equations const& equations);
     static SubstitutionOfVariablesToValues getSubstitutionFromSolutionSet(
         MultipleVariableSolutionSet const& solutionSet);
-
+    static void substituteSolutionSetValuesToEquations(
+        Equations& substitutedEquations, MultipleVariableSolutionSet const& multipleVariableSolutionSet);
+    [[nodiscard]] bool isTheValueAlreadyExisting(std::string const& variableName, AlbaNumber const& value) const;
     void clear();
     void calculateSolutions(Equations const& equations);
     void calculateASolutionForAllVariables(
@@ -26,10 +26,9 @@ private:
     void addIfSolutionIsCompleteAndCorrect(MultipleVariableSolutionSet const& solutionSet, Equations const& equations);
     void calculateASolutionForOneVariable(
         MultipleVariableSolutionSet& multipleVariableSolutionSet, Equations const& equations);
-    static void substituteSolutionSetValuesToEquations(
-        Equations& substitutedEquations, MultipleVariableSolutionSet const& multipleVariableSolutionSet);
     void solveForTheFirstOneVariableEquationAndUpdate(
         MultipleVariableSolutionSet& multipleVariableSolutionSet, Equations const& substitutedEquations);
+
     void solveAndUpdate(
         MultipleVariableSolutionSet& solutionSet, Equation const& equationToSolve,
         std::string const& variableNameToSolve);

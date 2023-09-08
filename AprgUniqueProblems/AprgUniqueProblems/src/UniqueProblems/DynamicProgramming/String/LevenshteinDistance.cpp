@@ -13,7 +13,6 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingNaive
     // The time complexity of above solution is exponential.
     // In worst case, we may end up doing O(3m) operations.
     // The worst case happens when none of characters of two strings match.
-
     return getLevenshteinDistanceUsingNaiveRecursion(m_string1.length(), m_string2.length());
 }
 
@@ -25,7 +24,6 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingMemoi
 LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingIterativeDP() const {
     // Time Complexity: O(m x n)
     // Auxiliary Space: O(m x n)
-
     // The allowed editing operations are as follows:
     // -> insert a character (e.g. ABC ! ABCA)
     // -> remove a character (e.g. ABC ! AC)
@@ -43,7 +41,6 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingItera
     // ---------------------
     // Note that first column is for null string and first row is for null string (thats why there is a plus one in
     // column/row size)
-
     CountGrid distanceGrid(m_string1.length() + 1, m_string2.length() + 1);
     distanceGrid.iterateAllThroughYAndThenX([&](Index const x, Index const y) {
         Count entryResult(0);
@@ -67,26 +64,21 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingItera
 
 LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingIterativeDPAndSpaceEfficient() const {
     // Note this is same implementation in AlbaStringHelper
-
     // Time Complexity: O(m x n)
     // Auxiliary Space: O(m)
-
     // Space efficiency analysis:
     // Since accessing the previous partial values requires only one column or one row above,
     // we only really need 2 rows (not a matrix) to keep track partial values.
-
     // Space Complex Solution:
     // In the other solution we require O(m x n) space.
     // This will not be suitable if the length of strings is greater than 2000 as it can only create 2D array of 2000 x
     // 2000. To fill a row in DP array we require only one row the upper row. For example, if we are filling the i = 10
     // rows in DP array we require only values of 9th row. So we simply create a DP array of 2 x str1 length. This
     // approach reduces the space complexity.
-
     // current and previous are the rows in the dynamic programming solution
     vector<Counts> previousAndCurrentCounts(2, Counts(m_string1.length() + 1));  // string1 as basis
     Counts& firstPrevious(previousAndCurrentCounts[0]);
     iota(firstPrevious.begin(), firstPrevious.end(), 0);  // first row
-
     for (Index index2 = 1; index2 <= static_cast<Index>(m_string2.length()); ++index2) {
         Counts& previousCounts(previousAndCurrentCounts[(index2 - 1) % 2]);
         Counts& currentCounts(previousAndCurrentCounts[index2 % 2]);
@@ -124,7 +116,6 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingMemoi
     CountGrid& distanceGrid, Index const index1, Index const index2) const {
     // Time Complexity: O(m x n) because of memoization
     // Auxiliary Space: O(m x n)
-
     Index result = distanceGrid.getEntry(index1, index2);
     if (UNUSED_INDEX == result) {
         if (index1 == 0) {

@@ -29,19 +29,6 @@ void BaseOneEquationOneVariableSolver::calculateWhenEquationIsSometimesSatisfied
     calculateForEquation(solutionSet, equation);
 }
 
-void BaseOneEquationOneVariableSolver::calculateForTermAndCheckAbsoluteValueFunctions(
-    Term const& term, string const& variableName) {
-    FunctionsRetriever absFunctionsRetriever(
-        [](Function const& functionObject) { return functionObject.getFunctionName() == "abs"; });
-    absFunctionsRetriever.retrieveFromTerm(term);
-    FunctionsSet const& absFunctions(absFunctionsRetriever.getFunctions());
-    if (absFunctions.empty()) {
-        calculateForTermAndVariable(term, variableName);
-    } else {
-        calculateAndSubstituteAbsoluteValueFunctions(absFunctions, term, variableName);
-    }
-}
-
 void BaseOneEquationOneVariableSolver::sortAndRemoveDuplicateCalculatedValues() {
     sort(m_calculatedValues.begin(), m_calculatedValues.end());
     m_calculatedValues.erase(unique(m_calculatedValues.begin(), m_calculatedValues.end()), m_calculatedValues.end());
@@ -68,6 +55,19 @@ void BaseOneEquationOneVariableSolver::calculateAndSubstituteAbsoluteValueFuncti
         }
         Term termAfterSubstitution(substitution.performSubstitutionTo(term));
         calculateForTermAndVariable(termAfterSubstitution, variableName);
+    }
+}
+
+void BaseOneEquationOneVariableSolver::calculateForTermAndCheckAbsoluteValueFunctions(
+    Term const& term, string const& variableName) {
+    FunctionsRetriever absFunctionsRetriever(
+        [](Function const& functionObject) { return functionObject.getFunctionName() == "abs"; });
+    absFunctionsRetriever.retrieveFromTerm(term);
+    FunctionsSet const& absFunctions(absFunctionsRetriever.getFunctions());
+    if (absFunctions.empty()) {
+        calculateForTermAndVariable(term, variableName);
+    } else {
+        calculateAndSubstituteAbsoluteValueFunctions(absFunctions, term, variableName);
     }
 }
 

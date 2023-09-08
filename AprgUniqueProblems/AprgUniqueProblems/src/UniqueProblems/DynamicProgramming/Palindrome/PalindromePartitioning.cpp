@@ -9,7 +9,6 @@ PalindromePartitioning::PalindromePartitioning(string const& stringParameter) : 
 PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsingNaiveRecursion() const {
     // Time Complexity: Exponential
     // Auxiliary Space: Constant
-
     Count result(0);
     if (!m_string.empty()) {
         result = getMinimumNumberOfCutsUsingNaiveRecursion(0, m_string.length() - 1);
@@ -20,7 +19,6 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
 PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsingMemoizationDP() const {
     // Time Complexity: O(n^3) (should be same as Iterative DP)
     // Auxiliary Space: O(n^2)
-
     Count result(0);
     if (!m_string.empty()) {
         CountMatrix countMatrix(m_string.length(), m_string.length(), static_cast<Count>(MAX_COUNT));
@@ -32,7 +30,6 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
 PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsingIterativeDP() const {
     // Time Complexity: O(n^3)
     // Auxiliary Space: O(n^2)
-
     Count result(0);
     if (!m_string.empty()) {
         Index stringLength = m_string.length();
@@ -62,7 +59,6 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
 PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsingIterativeDPAndTimeEfficient() const {
     // Time Complexity: O(n^2)
     // Auxiliary Space: O(n^2) (partialCounts is linear, but isSubstrAPalindrome is quadratic)
-
     Count result(0);
     if (!m_string.empty()) {
         Index const stringLength = m_string.length();

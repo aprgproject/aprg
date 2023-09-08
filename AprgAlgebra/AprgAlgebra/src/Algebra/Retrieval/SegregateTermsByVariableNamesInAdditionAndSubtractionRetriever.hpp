@@ -11,13 +11,10 @@ namespace alba::algebra {
 class SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever : public BaseRetriever {
 public:
     using VariableNameToTermMap = std::unordered_map<std::string, Term>;
-
     explicit SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever(stringHelper::strings const& variableNames);
-
     VariableNameToTermMap const& getVariableNameToTermMap() const;
     Term const& getTermWithMultipleVariableNames() const;
     Term const& getRemainingTerm() const;
-
     void retrieveFromConstant(Constant const& constant) override;
     void retrieveFromVariable(Variable const& variable) override;
     void retrieveFromMonomial(Monomial const& monomial) override;

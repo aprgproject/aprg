@@ -14,8 +14,8 @@ public:
     using DigitValue = int;  // this needs to be indexable as its used on CountingSorter
     using GetNumberOfDigitsFunction = std::function<int(Values const&)>;
     using GetDigitAtFunction = std::function<DigitValue(Value const&, int const)>;
-
     RadixSorterUsingCountingSorter() = delete;
+
     RadixSorterUsingCountingSorter(
         GetNumberOfDigitsFunction const& getNumberOfDigitsFunction, GetDigitAtFunction const& getDigitAtFunction)
         : m_getNumberOfDigitsFunction(getNumberOfDigitsFunction), m_getDigitAtFunction(getDigitAtFunction) {}

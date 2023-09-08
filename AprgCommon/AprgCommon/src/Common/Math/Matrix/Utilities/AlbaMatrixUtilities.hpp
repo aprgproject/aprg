@@ -55,7 +55,6 @@ bool isSingular(AlbaMatrix<DataType> const& matrix) {
     // But this is costly because of determinant.
     // Code:
     // return getDeterminant(matrix) != 0;
-
     AlbaMatrix<DataType> inverseOfInverse(matrix);
     inverseOfInverse.invert();
     inverseOfInverse.invert();
@@ -124,7 +123,6 @@ AlbaMatrix<DataType> multiplyMatrices(AlbaMatrix<DataType> const& first, AlbaMat
     // Using a straightforward algorithm, we can calculate the product of two nxn matrices in O(n^3) time.
     // There are also more efficient algorithms for matrix multiplication,
     // but they are mostly of theoretical interest and such algorithms are not practical.
-
     assert(first.getNumberOfColumns() == second.getNumberOfRows());
 
     AlbaMatrix<DataType> result(second.getNumberOfColumns(), first.getNumberOfRows());

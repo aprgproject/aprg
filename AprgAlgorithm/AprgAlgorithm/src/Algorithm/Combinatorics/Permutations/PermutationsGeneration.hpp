@@ -32,15 +32,14 @@ public:
     PermutationsGeneration() = delete;
     ~PermutationsGeneration() = delete;
     PermutationsGeneration(PermutationsGeneration const&) = delete;
-    PermutationsGeneration& operator=(PermutationsGeneration const&) = delete;
     PermutationsGeneration(PermutationsGeneration&&) = delete;
+    PermutationsGeneration& operator=(PermutationsGeneration const&) = delete;
     PermutationsGeneration& operator=(PermutationsGeneration&&) = delete;
 
     static Permutations generatePermutationsUsingCppFunctions(Objects const& objects) {
         // Another method for generating permutations is to begin with the permutation {0,1,...,n-1}
         // and repeatedly use a function that constructs the next permutation in increasing order.
         // The C++ standard library contains the function next_permutation that can be used for this.
-
         Permutations result;
         Permutation currentPermutation(objects);
         do {
@@ -54,11 +53,9 @@ public:
         // The followIndexing function search goes through the permutations of the set {0,1,...,n-1}.
         // The function builds a vector permutation that contains the permutation,
         // and the search begins when the function is called without parameters..
-
         // Each function call adds a new element to permutation.
         // The array "chosen" indicates which elements are already included in the permutation.
         // If the size of permutation equals the size of the set, a permutation has been generated.
-
         Permutations result;
         BuildingRecursionData recursionData(createBuildingRecursionData(result, objects, objects.size()));
         collectPermutationsByBuilding(recursionData);

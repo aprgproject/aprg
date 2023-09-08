@@ -55,6 +55,24 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFro
     saveTerm(Term(monomial), numberOfTimesFound, lastVariableNameFound);
 }
 
+void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::initializeWithVariableNames(
+    strings const& namesInOrder) {
+    for (string const& name : namesInOrder) {
+        m_variableNameToTermMap.emplace(name, Term());
+    }
+}
+
+void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::saveTerm(
+    Term const& term, int const numberOfTimesFound, string const& variableName) {
+    if (numberOfTimesFound == 0) {
+        m_remainingTerm += term;
+    } else if (numberOfTimesFound == 1) {
+        m_variableNameToTermMap[variableName] += term;
+    } else {
+        m_termWithMultipleVariableNames += term;
+    }
+}
+
 void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFromExpression(
     Expression const& expression) {
     if (OperatorLevel::AdditionAndSubtraction == expression.getCommonOperatorLevel()) {
@@ -95,24 +113,6 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFro
         }
     }
     saveTerm(Term(functionObject), numberOfTimesFound, lastVariableNameFound);
-}
-
-void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::initializeWithVariableNames(
-    strings const& namesInOrder) {
-    for (string const& name : namesInOrder) {
-        m_variableNameToTermMap.emplace(name, Term());
-    }
-}
-
-void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::saveTerm(
-    Term const& term, int const numberOfTimesFound, string const& variableName) {
-    if (numberOfTimesFound == 0) {
-        m_remainingTerm += term;
-    } else if (numberOfTimesFound == 1) {
-        m_variableNameToTermMap[variableName] += term;
-    } else {
-        m_termWithMultipleVariableNames += term;
-    }
 }
 
 }  // namespace alba::algebra

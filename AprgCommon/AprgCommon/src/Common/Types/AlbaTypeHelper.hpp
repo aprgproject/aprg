@@ -7,9 +7,7 @@ namespace alba::typeHelper {
 // Source: https://en.cppreference.com/w/cpp/header/type_traits
 // NOTE: Value returning meta functions or "TemplateName_v" are not used in this file to make it more readable.
 // NOTE: Type returning meta functions or "TemplateName_t" are not used in this file to make it more readable.
-
 // Type relationships:
-
 template <typename Type1, typename Type2>
 constexpr bool areSameTypes() {
     return std::is_same<Type1, Type2>::value;
@@ -26,7 +24,6 @@ constexpr bool isBaseOf() {
 }
 
 // Type operations:
-
 template <typename Type>
 constexpr bool negateValueInType() {
     return std::negation<Type>::value;
@@ -43,7 +40,6 @@ constexpr bool orOperateValuesInTypes() {
 }
 
 // Type checks:
-
 template <typename Type>
 constexpr bool isVoidType() {
     return std::is_void<Type>::value;
@@ -132,7 +128,6 @@ constexpr bool isAVolatileType() {
 // -> The library trait is_pod has also been deprecated correspondingly.
 // For simple data types use the is_standard_layout function, for trivial data types (such as simple structs) use the
 // is_trivial function.
-
 template <typename Type>
 constexpr bool isATrivialType() {
     // If T is TrivialType (that is, a scalar type, a trivially copyable class with a trivial default constructor,
@@ -151,7 +146,6 @@ constexpr bool hasStandardLayout() {
     // Note: the standard doesn't define a named requirement with this name.
     // This is a type category defined by the core language.
     // It is included here as a named requirement only for consistency.
-
     // Requirements for standard layout:
     // -> All non-static data members have the same access control
     // -> Has no virtual functions or virtual base classes
@@ -171,7 +165,6 @@ constexpr bool hasStandardLayout() {
     // the first non-static data member of the array element if it has non-union class type,
     // or as any non-static data member of the array element if it has union type,
     // or as the element type of the array element if it has array type, etc.
-
     return std::is_standard_layout<Type>::value;
 }
 
@@ -240,16 +233,17 @@ constexpr bool isAnAggregate() {
 
 // Fundamental operations
 // NOTE: This list does not include all because we are lazy.
-
 // default construction
 template <typename Type>
 constexpr bool isDefaultConstructible() {
     return std::is_default_constructible<Type>::value;
 }
+
 template <typename Type>
 constexpr bool isTriviallyDefaultConstructible() {
     return std::is_trivially_default_constructible<Type>::value;
 }
+
 template <typename Type>
 constexpr bool isNoThrowDefaultConstructible() {
     return std::is_nothrow_default_constructible<Type>::value;
@@ -260,10 +254,12 @@ template <typename Type>
 constexpr bool isDestructible() {
     return std::is_destructible<Type>::value;
 }
+
 template <typename Type>
 constexpr bool isTriviallyDestructible() {
     return std::is_trivially_destructible<Type>::value;
 }
+
 template <typename Type>
 constexpr bool isNoThrowDestructible() {
     return std::is_nothrow_destructible<Type>::value;
@@ -274,10 +270,12 @@ template <typename Type>
 constexpr bool isCopyConstructible() {
     return std::is_copy_constructible<Type>::value;
 }
+
 template <typename Type>
 constexpr bool isTriviallyCopyConstructible() {
     return std::is_trivially_copy_constructible<Type>::value;
 }
+
 template <typename Type>
 constexpr bool isNoThrowCopyConstructible() {
     return std::is_nothrow_copy_constructible<Type>::value;
@@ -288,10 +286,12 @@ template <typename Type>
 constexpr bool isCopyAssignable() {
     return std::is_copy_assignable<Type>::value;
 }
+
 template <typename Type>
 constexpr bool isTriviallyCopyAssignable() {
     return std::is_trivially_copy_assignable<Type>::value;
 }
+
 template <typename Type>
 constexpr bool isNoThrowCopyAssignable() {
     return std::is_nothrow_copy_assignable<Type>::value;
@@ -302,10 +302,12 @@ template <typename Type>
 constexpr bool isMoveConstructible() {
     return std::is_move_constructible<Type>::value;
 }
+
 template <typename Type>
 constexpr bool isTriviallyMoveConstructible() {
     return std::is_trivially_move_constructible<Type>::value;
 }
+
 template <typename Type>
 constexpr bool isNoThrowMoveConstructible() {
     return std::is_nothrow_move_constructible<Type>::value;
@@ -316,67 +318,52 @@ template <typename Type>
 constexpr bool isMoveAssignable() {
     return std::is_move_assignable<Type>::value;
 }
+
 template <typename Type>
 constexpr bool isTriviallyMoveAssignable() {
     return std::is_trivially_move_assignable<Type>::value;
 }
+
 template <typename Type>
 constexpr bool isNoThrowMoveAssignable() {
     return std::is_nothrow_move_assignable<Type>::value;
 }
 
 // Get Types
-
 template <typename Type>
 using GetPlainType = typename std::decay<Type>::type;
-
 template <typename... Types>
 using GetCommonType = typename std::common_type<Types...>::type;
-
 template <typename FunctorType, typename... ArgumentTypes>
 using GetFunctorResultType = typename std::invoke_result<FunctorType, ArgumentTypes...>::type;
-
 template <typename Type>
 using GetTypeWithLValueReference = typename std::add_lvalue_reference<Type>::type;
-
 template <typename Type>
 using GetTypeWithRValueReference = typename std::add_rvalue_reference<Type>::type;
-
 template <typename Type>
 using GetTypeWithPointer = typename std::add_pointer<Type>::type;
-
 template <typename Type>
 using GetTypeWithConstVolatile = typename std::add_cv<Type>::type;
-
 template <typename Type>
 using GetTypeWithConst = typename std::add_const<Type>::type;  // you can also use as_const
-
 template <typename Type>
 using GetTypeWithVolatile = typename std::add_volatile<Type>::type;
-
 template <typename Type>
 using GetTypeWithoutReference = typename std::remove_reference<Type>::type;
-
 template <typename Type>
 using GetTypeWithoutPointer = typename std::remove_pointer<Type>::type;
-
 template <typename Type>
 using GetTypeWithoutConstVolatile = typename std::remove_cv<Type>::type;
-
 template <typename Type>
 using GetTypeWithoutConst = typename std::remove_const<Type>::type;
-
 template <typename Type>
 using GetTypeWithoutVolatile = typename std::remove_volatile<Type>::type;
-
 template <typename Type>
 using GetSignedType = typename std::make_signed<Type>::type;
-
 template <typename Type>
 using GetUnsignedType = typename std::make_unsigned<Type>::type;
 
 // Arrays
-
 template <typename Array>
 constexpr std::size_t getDimensions() {
     return std::rank<Array>::value;
@@ -384,29 +371,22 @@ constexpr std::size_t getDimensions() {
 
 template <typename Array>
 using GetTypeByRemovingOneDimension = typename std::remove_extent<Array>::type;
-
 template <typename Array>
 using GetTypeByRemovingRemovingAllDimensions = typename std::remove_all_extents<Array>::type;
-
 // Conditional types
-
 template <bool condition, typename TypeIfTrue, typename TypeIfFalse>
 using ConditionalType = typename std::conditional<condition, TypeIfTrue, TypeIfFalse>::type;
-
 // Walter E Brown technique
-
 // IsPointer
 template <typename, typename = void>
 struct hasElementType : std::false_type {};
 template <typename T>
 struct hasElementType<T, std::void_t<typename T::element_type>> : std::true_type {};
-
 // IsContainer
 template <typename, typename = void>
 struct hasValueType : std::false_type {};
 template <typename T>
 struct hasValueType<T, std::void_t<typename T::value_type>> : std::true_type {};
-
 // HasContainerType
 // ::c cannot be used because its protected
 // -> template<typename, typename = void>
@@ -417,26 +397,22 @@ template <typename, typename = void>
 struct HasContainerType : std::false_type {};
 template <typename T>
 struct HasContainerType<T, std::void_t<typename T::container_type>> : std::true_type {};
-
 // HasDereferenceOperator
 template <typename, typename = void>
 struct HasDereferenceOperator : std::false_type {};
 template <typename T>
 struct HasDereferenceOperator<T, std::void_t<decltype(*std::declval<T>())>> : std::true_type {};
-
 // HasBegin
 template <typename, typename = void>
 struct HasBegin : std::false_type {};
 template <typename T>
 struct HasBegin<T, std::void_t<decltype(std::declval<T>().begin())>> : std::true_type {};
 // declval adds a reference, this is done to allow types with deleted constructor (see cppreference example)
-
 // HasEnd
 template <typename, typename = void>
 struct HasEnd : std::false_type {};
 template <typename T>
 struct HasEnd<T, std::void_t<decltype(std::declval<T>().end())>> : std::true_type {};
-
 // HasSize
 template <typename, typename = void>
 struct HasSize : std::false_type {};
@@ -447,6 +423,7 @@ template <typename Type>
 constexpr bool isRaiiPointerWithDereference() {
     return hasElementType<Type>::value && HasDereferenceOperator<Type>::value;
 }
+
 template <typename Type>
 constexpr bool isRaiiPointerWithoutDereference() {
     return hasElementType<Type>::value && !HasDereferenceOperator<Type>::value;

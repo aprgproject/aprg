@@ -32,9 +32,11 @@ template <typename Vertex>
 bool areAllDegrees(BaseGraph<Vertex> const& graph, int const degreeThatShouldMatch);
 template <typename Vertex>
 bool isASpanningTree(BaseUndirectedGraph<Vertex> const& mainGraph, BaseUndirectedGraph<Vertex> const& subGraphToCheck);
+
 template <typename Vertex>
 bool isASpanningForest(
     BaseUndirectedGraph<Vertex> const& mainGraph, BaseUndirectedGraph<Vertex> const& subGraphToCheck);
+
 template <typename Vertex>
 bool isGraphConnected(BaseUndirectedGraph<Vertex> const& graph);
 template <typename Vertex>
@@ -45,7 +47,6 @@ template <typename EdgeWeightedGraphType>
 bool isFlowNetwork(EdgeWeightedGraphType const& graph);
 template <typename SinkSourceFlowNetworkType>
 bool isSinkSourceFlowNetworkFeasible(SinkSourceFlowNetworkType const& flowNetwork);
-
 template <typename Vertex>
 int getLengthOfPath(typename GraphTypes<Vertex>::Path const& path);
 template <typename Vertex>
@@ -60,12 +61,10 @@ template <typename Vertex>
 int getNumberOfSelfLoops(BaseGraph<Vertex> const& graph);
 template <typename Vertex>
 int getDiameterOfATree(BaseUndirectedGraph<Vertex> const& graph);
-
 template <typename Vertex>
 std::pair<int, int> getInDegreeAndOutDegreeAt(BaseDirectedGraph<Vertex> const& graph, Vertex const& vertex);
 template <typename Vertex>
 std::map<Vertex, std::pair<int, int>> getAllInDegreesAndOutDegrees(BaseDirectedGraph<Vertex> const& graph);
-
 template <typename Vertex>
 typename GraphTypes<Vertex>::ListOfEdges getEdgesOfMaximalConnectedSubgraphs(BaseUndirectedGraph<Vertex> const& graph);
 

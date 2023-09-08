@@ -5,15 +5,14 @@ namespace Builder {
 
 // Product
 // the final object that will be created using Builder
-
 class Product {
 public:
+    std::string getProduct() { return (m_partA + " " + m_partB + " " + m_partC); }
     void makeA(std::string const& part) { m_partA = part; }
     void makeB(std::string const& part) { m_partB = part; }
     void makeC(std::string const& part) { m_partC = part; }
-    std::string getProduct() { return (m_partA + " " + m_partB + " " + m_partC); }
-    // ...
 
+    // ...
 private:
     std::string m_partA;
     std::string m_partB;
@@ -23,25 +22,21 @@ private:
 
 // Builder
 // abstract interface for creating products
-
 class Builder {
 public:
     virtual ~Builder() = default;
-
-    Product getProduct() { return m_product; }
-
     virtual void buildPartA() = 0;
     virtual void buildPartB() = 0;
     virtual void buildPartC() = 0;
-    // ...
+    Product getProduct() { return m_product; }
 
+    // ...
 protected:
     Product m_product;
 };
 
 // Concrete Builder X and Y
 // create real products and stores them in the composite structure
-
 class ConcreteBuilderX : public Builder {
 public:
     void buildPartA() override { m_product.makeA("A-X"); }
@@ -60,14 +55,11 @@ public:
 
 // Director
 // responsible for managing the correct sequence of object creation
-
 class Director {
 public:
     explicit Director(std::unique_ptr<Builder> builder) : m_builder(move(builder)) {}
-
-    void setBuilder(std::unique_ptr<Builder> builder) { m_builder = move(builder); }
-
     Product getProduct() { return m_builder->getProduct(); }
+    void setBuilder(std::unique_ptr<Builder> builder) { m_builder = move(builder); }
 
     void construct() {
         m_builder->buildPartA();
@@ -75,8 +67,8 @@ public:
         m_builder->buildPartC();
         // ...
     }
-    // ...
 
+    // ...
 private:
     std::unique_ptr<Builder> m_builder;
 };

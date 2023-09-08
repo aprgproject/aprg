@@ -35,42 +35,24 @@ void determineExtrema(
 
 }  // namespace
 
-bool willYieldToAbsoluteMaximumValue(
-    Term const& term, string const& variableName, AlbaNumber const& valueForEvaluation) {
-    // f(c) is said to be the absolute maximum value of the f if c is in the domain of f and if f(c) >= f(x) for all
-    // values of x in the domain of f.
-
-    AlbaNumbers valuesUsedForChecking;
-    putArbitiaryValuesBasedFromDomainOfTerm(valuesUsedForChecking, term);
-    return willYieldToExtremumValue(
-        ExtremumType::Maximum, term, variableName, valueForEvaluation, valuesUsedForChecking);
-}
-
 bool willYieldToAbsoluteMinimumValue(
     Term const& term, string const& variableName, AlbaNumber const& valueForEvaluation) {
     // f(c) is said to be the absolute minimum value of the f if c is in the domain of f and if f(c) <= f(x) for all
     // values of x in the domain of f.
-
     AlbaNumbers valuesUsedForChecking;
     putArbitiaryValuesBasedFromDomainOfTerm(valuesUsedForChecking, term);
     return willYieldToExtremumValue(
         ExtremumType::Minimum, term, variableName, valueForEvaluation, valuesUsedForChecking);
 }
 
-bool willYieldToRelativeMaximumValue(
-    Term const& term, string const& variableName, AlbaNumber const& valueForEvaluation,
-    AlbaNumberInterval const& openInterval) {
-    // The function f is aid to have a relative maximum value at c if there exists an open interval containing c,
-    // on which f is defined such that f(c) >= f(x) for all x in this interval
-
-    bool result(false);
-    if (openInterval.getLowerEndpoint().isOpen() && openInterval.getHigherEndpoint().isOpen()) {
-        AlbaNumbers valuesUsedForChecking;
-        putArbitiaryValuesFromInterval(valuesUsedForChecking, openInterval);
-        result = willYieldToExtremumValue(
-            ExtremumType::Maximum, term, variableName, valueForEvaluation, valuesUsedForChecking);
-    }
-    return result;
+bool willYieldToAbsoluteMaximumValue(
+    Term const& term, string const& variableName, AlbaNumber const& valueForEvaluation) {
+    // f(c) is said to be the absolute maximum value of the f if c is in the domain of f and if f(c) >= f(x) for all
+    // values of x in the domain of f.
+    AlbaNumbers valuesUsedForChecking;
+    putArbitiaryValuesBasedFromDomainOfTerm(valuesUsedForChecking, term);
+    return willYieldToExtremumValue(
+        ExtremumType::Maximum, term, variableName, valueForEvaluation, valuesUsedForChecking);
 }
 
 bool willYieldToRelativeMinimumValue(
@@ -78,13 +60,27 @@ bool willYieldToRelativeMinimumValue(
     AlbaNumberInterval const& openInterval) {
     // The function f is aid to have a relative minimum value at c if there exists an open interval containing c,
     // on which f is defined such that f(c) <= f(x) for all x in this interval
-
     bool result(false);
     if (openInterval.getLowerEndpoint().isOpen() && openInterval.getHigherEndpoint().isOpen()) {
         AlbaNumbers valuesUsedForChecking;
         putArbitiaryValuesFromInterval(valuesUsedForChecking, openInterval);
         return willYieldToExtremumValue(
             ExtremumType::Minimum, term, variableName, valueForEvaluation, valuesUsedForChecking);
+    }
+    return result;
+}
+
+bool willYieldToRelativeMaximumValue(
+    Term const& term, string const& variableName, AlbaNumber const& valueForEvaluation,
+    AlbaNumberInterval const& openInterval) {
+    // The function f is aid to have a relative maximum value at c if there exists an open interval containing c,
+    // on which f is defined such that f(c) >= f(x) for all x in this interval
+    bool result(false);
+    if (openInterval.getLowerEndpoint().isOpen() && openInterval.getHigherEndpoint().isOpen()) {
+        AlbaNumbers valuesUsedForChecking;
+        putArbitiaryValuesFromInterval(valuesUsedForChecking, openInterval);
+        result = willYieldToExtremumValue(
+            ExtremumType::Maximum, term, variableName, valueForEvaluation, valuesUsedForChecking);
     }
     return result;
 }
@@ -120,7 +116,6 @@ bool isDerivativeZeroOnPossibleExtremum(
     AlbaNumberInterval const& interval) {
     // If f(x) exists for all values of x in the open interval (a, b),
     // and if f has a relative extremum at c, where a<c<b and if f'(c) exists, then f'(c) = 0.
-
     Term derivative(
         getDerivativeAtUsingLimit(term, variableName, valueAtPossibleExtremum, LimitAtAValueApproachType::BothSides));
     bool hasRelativeExtremum = willYieldToRelativeMaximumValue(term, variableName, valueAtPossibleExtremum, interval) ||
@@ -180,7 +175,6 @@ bool hasPointOfInflectionAt(Term const& term, string const& variableName, AlbaNu
     // The point (c, f(c)) is a point of inflection of the graph of the function f if the graph has a tangent line
     // there, and if there exists an open interval I containing c such that if x is in I, the either: (i) f''(x) < 0 if
     // x < c, and f''(x) > 0 if x > c, or (ii) f''(x) > 0 if x < c, and f''(x) < 0 if x > c
-
     Differentiation differentiation(variableName);
     Term secondDerivativeTerm(differentiation.differentiateMultipleTimes(term, 2));
     bool result(false);
@@ -202,7 +196,6 @@ bool isRolleTheoremSatisfied(
     // (ii) it is differentiable on the open interval (a, b)
     // (iii) f(a) = 0 and f(b) = 0
     // Then there is a number c in the open interval (a, b) such that f'(c) = 0
-
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue(variableName, a);
     Term fa(substitution.performSubstitutionTo(term));
@@ -237,7 +230,6 @@ AlbaNumbers getInputValuesInIntervalWithSameAsMeanOfInterval(
     // (ii) it is differentiable on the open interval (a, b)
     // (iii) f(a) = 0 and f(b) = 0
     // Then there is a number c in the open interval (a, b) such that f'(c) = (f(b)-f(a))/(b-a)
-
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue(variableName, a);
     Term fa(substitution.performSubstitutionTo(term));
@@ -260,7 +252,6 @@ AlbaNumbers getInputValuesInIntervalWithSameAsMeanOfInterval(
 AlbaNumbers getInputValuesForCauchyMeanValueTheorem(
     Term const& term, string const& variableName, AlbaNumber const& a, AlbaNumber const& b) {
     // Cauchy Mean-Value Theorem
-
     TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(term));
     Term numerator(termsOverTerms.getCombinedNumerator());
     Term denominator(termsOverTerms.getCombinedDenominator());
@@ -294,7 +285,6 @@ Extremum getAbsoluteExtremumBasedOnRelativeExtremaOnInterval(
     // then f(c) is an absolute extremum of f on I. Furthermore,
     // (i) if f(c) is relative maximum value of f on I, then f(c) is an absolute maximum value of f on I.
     // (ii) if f(c) is relative minimum value of f on I, then f(c) is an absolute minimum value of f on I.
-
     int numberOfExtremaFoundInInterval(0);
     Extremum result;
     Extremum extremumInInterval;
@@ -318,7 +308,6 @@ Extremum getAbsoluteExtremumBasedOnRelativeExtremaOnInterval(
 AlbaNumbers getCriticalNumbers(Term const& term, string const& variableName) {
     // If c is a number in the domain of the function f, and if either f'(c) = 0 of f'(c) does not exist,
     // then c is called a critical number of f.
-
     Differentiation differentiation(variableName);
     Term firstDerivative(differentiation.differentiate(term));
     Equation derivativeEqualsZeroEquation(firstDerivative, "=", 0);
@@ -378,13 +367,11 @@ MinimumAndMaximum getMinimumAndMaximumAtClosedInterval(
     // Extreme value theorem
     // If the function f is continuous on the closed interval [a, b],
     // then f has an absolute maximum value and an absolute minimum value on [a, b].
-
     // Procedure:
     // 1. Find the function values at the critical numbers on f on (a, b).
     // 2. Find the values of f(a) and f(b)
     // 3. The largest of the values from steps 1 and 2 is the absolute maximum value,
     // and the smallest of the values is the absolute minimum value.
-
     MinimumAndMaximum result;
     if (closedInterval.getLowerEndpoint().isClose() && closedInterval.getHigherEndpoint().isClose()) {
         AlbaNumbers valuesToCheck(getCriticalNumbers(term, variableName));
@@ -422,7 +409,6 @@ Extrema getRelativeExtrema(Term const& term, string const& variableName) {
     // If f''(c) exists and :
     // (i) if f''(c) < 0, then f has a relative maximum value at c.
     // (ii) if f''(c) > 0, then f has a relative minimum value at c.
-
     Differentiation differentiation(variableName);
     Term firstDerivative(differentiation.differentiate(term));
     Term secondDerivative(differentiation.differentiateMultipleTimes(term, 2));

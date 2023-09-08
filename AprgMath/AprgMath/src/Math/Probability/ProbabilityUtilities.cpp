@@ -16,14 +16,12 @@ bool doesExpectedValuesHaveLinearity(
     // A useful property of expected values is linearity.
     // It means that the sum  E[X1+X2+...+Xn] always equals the sum E[X1]+E[X2]+...+E[Xn].
     // This formula holds even if random variables depend on each other.
-
     // -> Some interesting facts about Linearly of Expectation:
     // ---> Linearity of expectation holds for both dependent and independent events.
     // -----> On the other hand the rule E[R1R2] = E[R1]*E[R2] is true only for independent events.
     // ---> Linearity of expectation holds for any number of random variables on some probability space.
     // -----> Let R1, R2, R3, … Rk be k random variables, then
     // ---> E[R1 + R2 + R3 + … + Rk] = E[R1] + E[R2] + E[R3] + … + E[Rk]
-
     AlbaNumber expectedValueFromSeparated = getExpectedValue(firstSetOfValueAndProbabilityPairsOfX) +
                                             getExpectedValue(secondSetOfValueAndProbabilityPairsOfX);
 
@@ -36,9 +34,9 @@ bool doesExpectedValuesHaveLinearity(
 
     return expectedValueFromSeparated == expectedValueFromCombined;
 }
+
 AlbaNumber getCorrectProbability(AlbaNumber const& probability) {
     // If an event is certain to happen, its probability is 1, and if an event is impossible, its probability is 0.
-
     AlbaNumber result(0);
     if (probability.isAFiniteValue()) {
         if (probability < 0) {
@@ -57,7 +55,6 @@ AlbaNumber getProbability(UnsignedInteger const numberOfDesiredOutcome, Unsigned
     // A probability is a real number between 0 and 1 that indicates how probable an event is.
     // If an event is certain to happen, its probability is 1, and if an event is impossible, its probability is 0.
     // The probability of an event is denoted P(...) where the three dots describe the event.
-
     return getCorrectProbability(
         AlbaNumber::createFraction(static_cast<int>(numberOfDesiredOutcome), static_cast<int>(totalNumberOfOutcomes)));
 }
@@ -65,12 +62,10 @@ AlbaNumber getProbability(UnsignedInteger const numberOfDesiredOutcome, Unsigned
 AlbaNumber getProbabilityOnBinomialDistribution(
     AlbaNumber const& probabilityOfASingleAttempt, UnsignedInteger const xTarget, UnsignedInteger const nTries) {
     // In a binomial distribution, n attempts are made and the probability that a single attempt succeeds is p.
-
     // The random variable X counts the number of successful attempts, and the probability of a value x is
     // P(X=x) = p^x * (1-p)^(n-x) * combinations of (n, x)
     // where p^x and (1-p)^(n-x) correspond to successful and unsuccessful attempts, and nx
     // combinations of (n, x)is the number of ways we can choose the order of the attempts.
-
     AlbaNumber probabilityOfSuccessfulAttempts = probabilityOfASingleAttempt ^ static_cast<int>(xTarget);
     AlbaNumber probabilityOfUnsuccessfulAttempts =
         (AlbaNumber(1) - probabilityOfASingleAttempt) ^ static_cast<int>(nTries - xTarget);
@@ -83,11 +78,9 @@ AlbaNumber getProbabilityOnGeometricDistribution(
     AlbaNumber const& probabilityOfASingleAttempt, UnsignedInteger const xTarget) {
     // In a geometric distribution, the probability that an attempt succeeds is p, and we continue until the first
     // success happens.
-
     // The random variable X counts the number of attempts needed, and the probability of a value x is
     // P(X=x) = (1-p)^(x-1) * p
     // where (1-p)^(x-1) corresponds to the unsuccessful attempts and p corresponds to the first successful attempt.
-
     AlbaNumber probabilityOfUnsuccessfulAttempts =
         (AlbaNumber(1) - probabilityOfASingleAttempt) ^ static_cast<int>(xTarget - 1);
     AlbaNumber probabilityOfFirstSuccessfulAttempt = probabilityOfASingleAttempt;
@@ -97,7 +90,6 @@ AlbaNumber getProbabilityOnGeometricDistribution(
 AlbaNumber getComplementOfProbability(AlbaNumber const& probability) {
     // The complement of A means the probability that "Event A does not happen".
     // Equation: P(A') = 1-P(A)
-
     return getCorrectProbability(AlbaNumber(1) - probability);
 }
 
@@ -106,7 +98,6 @@ AlbaNumber getUnionOfProbabilitiesOfDisjointEvents(
     // The union of A and B means the probability that "Event A OR Event B happen".
     // If events are disjoint, the union of probability is the sum of probabilities of events.
     // Equation if disjoint: P(A∪B) = P(A) + P(B)
-
     return getCorrectProbability(probabilityOfEventA + probabilityOfEventB);
 }
 
@@ -116,7 +107,6 @@ AlbaNumber getUnionOfProbabilities(
     // The union of A and B means the probability that "Event A OR Event B happen".
     // The union of probability is probabilityOfEventA + probabilityOfEventB - probabilityOfEventAAndEventB.
     // General equation: P(A∪B) = P(A) + P(B) - P(A∩B)
-
     return getCorrectProbability(probabilityOfEventA + probabilityOfEventB - probabilityOfEventAAndEventB);
 }
 
@@ -125,10 +115,8 @@ AlbaNumber getIntersectionOfProbabilitiesOfIndependentEvents(
     // The intersection of A and B means the probability that "Event A AND Event B happen".
     // If events are independent, the intersection of probability is the product of probabilities of events.
     // Equation if independent: P(A∩B) = P(A) * P(B)
-
     // Events A and B are independent if P(A|B) = P(A) and P(B|A) = P(B).
     // This means that the fact that B happens does not change the probability of A, and vice versa.
-
     return getCorrectProbability(probabilityOfEventA * probabilityOfEventB);
 }
 
@@ -138,7 +126,6 @@ AlbaNumber getIntersectionOfProbabilities(
     // The intersection of A and B means the probability that "Event A AND Event B happen".
     // The intersection of probability is product of probabilityOfEventA and "conditional probability of event B given
     // A" General equation: P(A∩B) = P(A) * P(B|A)
-
     return getCorrectProbability(
         probabilityOfEventA *
         getConditionalProbabilityOfEventAGivenThatEventBHappened(probabilityOfEventB, probabilityOfEventAAndEventB));
@@ -148,7 +135,6 @@ AlbaNumber getConditionalProbabilityOfEventAGivenThatEventBHappened(
     AlbaNumber const& probabilityOfEventB, AlbaNumber const& probabilityOfEventAAndEventB) {
     // The conditional probability is the probability of A assuming that B happens.
     // Equation: P(A|B) = P(A∩B) / P(B)
-
     return getCorrectProbability(probabilityOfEventAAndEventB / probabilityOfEventB);
 }
 
@@ -156,7 +142,6 @@ AlbaNumber getExpectedValue(ValueAndProbabilityPairs const& allValueAndProbabili
     // The expected value E[X] indicates the average value of a random variable X.
     // The expected value can be calculated as the summation of P(X=x) * x, where x goes through all possible values of
     // X.
-
     AlbaNumber result;
     for (auto const& [value, probability] : allValueAndProbabilityPairsOfX) {
         result += value * probability;
@@ -167,34 +152,28 @@ AlbaNumber getExpectedValue(ValueAndProbabilityPairs const& allValueAndProbabili
 AlbaNumber getExpectedValueInUniformDistribution(AlbaNumber const& lowestValue, AlbaNumber const& highestValue) {
     // In a uniform distribution, the random variable X has n possible values a,a+1,...,b and the probability of each
     // value is 1/n. Equation: E[X] = (a+b)/2
-
     return (lowestValue + highestValue) / 2;
 }
 
 AlbaNumber getExpectedValueInBinomialDistribution(
     AlbaNumber const& probabilityOfASingleAttempt, UnsignedInteger const nTries) {
     // In a binomial distribution, n attempts are made and the probability that a single attempt succeeds is p.
-
     // The expected value of X in a binomial distribution is E[X] = p*n.
     // Equation: E[X] = p*n
-
     return probabilityOfASingleAttempt * AlbaNumber(static_cast<int>(nTries));
 }
 
 AlbaNumber getExpectedValueInGeometricDistribution(AlbaNumber const& probability) {
     // In a geometric distribution, the probability that an attempt succeeds is p, and we continue until the first
     // success happens.
-
     // The expected value of X in a binomial distribution is E[X] = 1/p.
     // Equation: E[X] = 1/p
-
     return AlbaNumber(1) / probability;
 }
 
 AlbaNumber getNumberOfPeopleForTheBirthdayParadoxUsingQuadraticFormula(AlbaNumber const& propbabilityThatMustBeMet) {
     // How many people must here be in a room before there is a 50% chance that two of them were born on the same day of
     // the year?
-
     // -> Let n be the number of days for a year.
     // -> Let k be the number of people in the room.
     // -> The probability that one person has a birthday on a day is 1/n.
@@ -224,7 +203,6 @@ AlbaNumber getNumberOfPeopleForTheBirthdayParadoxUsingQuadraticFormula(AlbaNumbe
     // -----> E[X] = k*(k-1)/2 * 1/n = k(k-1)/2n
     // -----> Probability = (k^2 - k)/2n
     // -----> 0 = k^2 - k - Probability*2n
-
     AlbaNumber result(AlbaMathConstants::POSITIVE_INFINITY_DOUBLE_VALUE);
 
     constexpr auto DAYS_IN_YEAR = 365;
@@ -282,7 +260,6 @@ AlbaNumber getNumberOfPeopleForTheBirthdayParadoxUsingTaylorFormula(AlbaNumber c
     // -----> p(same)  = 1-e^(-(n^2)/(2*365))
     // ---> By taking Log on both sides, we get the reverse formula.
     // -----> n ~ sqrt( 2 * 365 * ln(1 / (1-p(same) )) )
-
     constexpr auto DAYS_IN_YEAR = 365;
     AlbaNumber result(AlbaMathConstants::POSITIVE_INFINITY_DOUBLE_VALUE);
     if (propbabilityThatMustBeMet < 1) {

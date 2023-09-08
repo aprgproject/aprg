@@ -7,13 +7,18 @@ using namespace std;
 
 namespace alba {
 
-AlbaSackReaderType::AlbaSackReaderType() = default;
-
 bool AlbaSackReaderType::isUnion() const { return m_isUnion; }
-
 AlbaSackReaderType::Parameters AlbaSackReaderType::getParameters() const { return m_parameters; }
-
 AlbaSackReaderType::TypeNames AlbaSackReaderType::getOtherTypes() const { return m_otherTypes; }
+
+void AlbaSackReaderType::printAll() const {
+    for (AlbaSackReaderParameter const& parameter : m_parameters) {
+        cout << "Parameter: " << parameter.getTypeName() << " " << parameter.getParameterName() << "\n";
+    }
+    for (string const& otherType : m_otherTypes) {
+        cout << "OtherType: " << otherType << "\n";
+    }
+}
 
 void AlbaSackReaderType::clear() { *this = AlbaSackReaderType(); }
 
@@ -30,16 +35,7 @@ void AlbaSackReaderType::addParameter(AlbaSackReaderParameter const& parameter) 
 }
 
 void AlbaSackReaderType::addOtherTypeName(std::string const& otherTypeName) { m_otherTypes.emplace(otherTypeName); }
-
 void AlbaSackReaderType::setAsUnion() { m_isUnion = true; }
-
-void AlbaSackReaderType::printAll() const {
-    for (AlbaSackReaderParameter const& parameter : m_parameters) {
-        cout << "Parameter: " << parameter.getTypeName() << " " << parameter.getParameterName() << "\n";
-    }
-    for (string const& otherType : m_otherTypes) {
-        cout << "OtherType: " << otherType << "\n";
-    }
-}
+AlbaSackReaderType::AlbaSackReaderType() = default;
 
 }  // namespace alba

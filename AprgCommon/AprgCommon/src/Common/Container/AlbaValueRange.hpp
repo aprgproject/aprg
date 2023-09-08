@@ -15,7 +15,6 @@ class AlbaValueRange {
 public:
     using TerminationCondition = std::function<bool(DataType, DataType)>;
     using TraverseOperation = std::function<void(DataType)>;
-
     AlbaValueRange() : m_startValue(0), m_endValue(0), m_intervalMagnitude(0) {}
 
     AlbaValueRange(DataType const startValue, DataType const endValue, DataType const intervalMagnitude)
@@ -24,7 +23,6 @@ public:
           m_intervalMagnitude(mathHelper::getAbsoluteValue(intervalMagnitude)) {}
 
     // rule of zero
-
     [[nodiscard]] bool isEmpty() const { return m_startValue == 0 && m_endValue == 0 && m_intervalMagnitude == 0; }
 
     [[nodiscard]] bool isValueInsideInclusive(DataType const value) const {
@@ -36,11 +34,8 @@ public:
     }
 
     [[nodiscard]] DataType getStartValue() const { return m_startValue; }
-
     [[nodiscard]] DataType getEndValue() const { return m_endValue; }
-
     [[nodiscard]] DataType getMinimum() const { return std::min(m_startValue, m_endValue); }
-
     [[nodiscard]] DataType getMaximum() const { return std::max(m_startValue, m_endValue); }
 
     [[nodiscard]] AlbaValueRangeType getRangeType() const {
@@ -48,7 +43,6 @@ public:
     }
 
     [[nodiscard]] DataType getInterval() const { return getIntervalWithSign(m_intervalMagnitude, getRangeType()); }
-
     [[nodiscard]] DataType getIntervalMagnitude() const { return m_intervalMagnitude; }
 
     [[nodiscard]] TerminationCondition getTerminationCondition() const {
@@ -61,20 +55,6 @@ public:
     }
 
     [[nodiscard]] DataType getMidpointValue() const { return (m_startValue + m_endValue) / 2; }
-
-    void set(DataType const startValue, DataType const endValue, DataType const intervalMagnitude) {
-        m_startValue = startValue;
-        m_endValue = endValue;
-        m_intervalMagnitude = mathHelper::getAbsoluteValue(intervalMagnitude);
-    }
-
-    void setStartValue(DataType const startValue) { m_startValue = startValue; }
-
-    void setEndValue(DataType const endValue) { m_endValue = endValue; }
-
-    void setIntervalMagnitude(DataType const intervalMagnitude) {
-        m_intervalMagnitude = getAbsoluteValue(intervalMagnitude);
-    }
 
     void traverse(TraverseOperation const& traverseOperation) const {
         if (!isEmpty()) {
@@ -92,6 +72,19 @@ public:
                 }
             }
         }
+    }
+
+    void set(DataType const startValue, DataType const endValue, DataType const intervalMagnitude) {
+        m_startValue = startValue;
+        m_endValue = endValue;
+        m_intervalMagnitude = mathHelper::getAbsoluteValue(intervalMagnitude);
+    }
+
+    void setStartValue(DataType const startValue) { m_startValue = startValue; }
+    void setEndValue(DataType const endValue) { m_endValue = endValue; }
+
+    void setIntervalMagnitude(DataType const intervalMagnitude) {
+        m_intervalMagnitude = getAbsoluteValue(intervalMagnitude);
     }
 
     void clear() {

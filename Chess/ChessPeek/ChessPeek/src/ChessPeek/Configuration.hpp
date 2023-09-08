@@ -15,14 +15,13 @@ public:
 
     Configuration() = delete;
     Configuration(Type const type);
-
+    double getWhiteColorLimit() const;
+    double getBlackColorLimit() const;
     Type getType() const;
     std::string const& getChessEnginePath() const;
     std::string const& getScreenShotPath() const;
     XY getTopLeftOfBoard() const;
     XY getBottomRightOfBoard() const;
-    double getWhiteColorLimit() const;
-    double getBlackColorLimit() const;
     stringHelper::StringPairs const& getUciOptionNamesAndValuePairs() const;
 
 private:
@@ -34,7 +33,6 @@ private:
     void initializeChessDotComExplorer();
     void initializeLichessVersus();
     void initializeLichessStream();
-
     Type m_type;
     std::string m_chessEnginePath;
     stringHelper::StringPairs m_uciOptionNamesAndValuePairs;
@@ -45,7 +43,6 @@ private:
 };
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

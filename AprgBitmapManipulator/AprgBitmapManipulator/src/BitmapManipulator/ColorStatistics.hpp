@@ -7,12 +7,9 @@
 
 namespace alba::AprgBitmap {
 
-void gatherAndSaveColorStatistics(std::string const& bitmapPath);
-
 class AprgColorStatistics {
 public:
     using OneDimensionStatistics = DataStatistics<1>;
-
     void gatherStatistics(std::string const& bitmapPath);
     void saveColorData(std::string const& path);
     void saveColorStatistics(std::string const& path);
@@ -34,5 +31,7 @@ private:
     OneDimensionStatistics::Samples luma601Samples;
     OneDimensionStatistics::Samples luma709Samples;
 };
+
+void gatherAndSaveColorStatistics(std::string const& bitmapPath);
 
 }  // namespace alba::AprgBitmap

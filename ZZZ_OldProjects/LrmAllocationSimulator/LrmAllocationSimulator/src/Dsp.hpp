@@ -6,11 +6,13 @@
 namespace alba {
 
 enum class DspMode {
+
     NyquistMixedChannelDevice,
     NyquistCommonChannelDeviceSmall,
     NyquistCommonChannelDeviceNormal,
     NyquistDedicatedChannelDevice,
     NyquistPicDevice
+
 };
 
 enum class NyquistType { Nyquist, TurboNyquist };
@@ -33,14 +35,12 @@ struct DspDetails {
 
 class Dsp {
 public:
-    Dsp();
     explicit Dsp(DspDetails const& dspDetails);
-    DspDetails& getDspDetailsReference();
-    void setMode(DspMode const mode);
-    void setNumberOfUsers(unsigned int const numberOfUsers);
-    void setLcgId(unsigned int const lcgId);
-    void setDliPool(unsigned int const dliPool);
-    void setIsNbicAllocated(bool const isNbicAllocated);
+    Dsp();
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] bool hasEmergencyCalls() const;
+    [[nodiscard]] bool hasFreeDli() const;
+    [[nodiscard]] bool isNbicAllocated() const;
     [[nodiscard]] unsigned int getAddress() const;
     [[nodiscard]] unsigned int getFspAddress() const;
     [[nodiscard]] unsigned int getLcgId() const;
@@ -55,10 +55,12 @@ public:
     [[nodiscard]] std::string getModeString() const;
     [[nodiscard]] std::string getNbicString() const;
     [[nodiscard]] NyquistType getNyquistType() const;
-    [[nodiscard]] bool isEmpty() const;
-    [[nodiscard]] bool hasEmergencyCalls() const;
-    [[nodiscard]] bool hasFreeDli() const;
-    [[nodiscard]] bool isNbicAllocated() const;
+    DspDetails& getDspDetailsReference();
+    void setMode(DspMode const mode);
+    void setNumberOfUsers(unsigned int const numberOfUsers);
+    void setLcgId(unsigned int const lcgId);
+    void setDliPool(unsigned int const dliPool);
+    void setIsNbicAllocated(bool const isNbicAllocated);
 
 private:
     DspDetails m_dspDetails;

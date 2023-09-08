@@ -23,7 +23,6 @@ TEST(SeparateChainingHashSetTest, IsEmptyWorksWhenNotEmpty) {
 }
 
 TEST(SeparateChainingHashSetTest, DoesContainWorks) { testDoesContainWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(SeparateChainingHashSetTest, GetSizeWorksWhenEmpty) { testGetSizeWhenEmptyWithUnsignedIntAndChar<SetForTest>(); }
 
 TEST(SeparateChainingHashSetTest, GetSizeWorksWhenNotEmpty) {
@@ -31,27 +30,16 @@ TEST(SeparateChainingHashSetTest, GetSizeWorksWhenNotEmpty) {
 }
 
 TEST(SeparateChainingHashSetTest, GetWorks) { testGetWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(SeparateChainingHashSetTest, GetRankWorks) { testGetRankWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(SeparateChainingHashSetTest, GetMinimumWorks) { testGetMinimumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(SeparateChainingHashSetTest, GetMaximumWorks) { testGetMaximumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(SeparateChainingHashSetTest, SelectAtWorks) { testSelectAtWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(SeparateChainingHashSetTest, GetFloorWorks) { testGetFloorWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(SeparateChainingHashSetTest, GetCeilingWorks) { testGetCeilingWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(SeparateChainingHashSetTest, PutWorks) { testPutWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(SeparateChainingHashSetTest, DeleteBasedOnKeyWorks) { testDeleteBasedOnKeyWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(SeparateChainingHashSetTest, DeleteMinimumWorks) { testDeleteMinimumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(SeparateChainingHashSetTest, DeleteMaximumWorks) { testDeleteMaximumWithUnsignedIntAndChar<SetForTest>(); }
-
 TEST(SeparateChainingHashSetTest, GetKeys) { testGetKeysWithUnsignedIntAndChar<SetForTest>(); }
 
 TEST(SeparateChainingHashSetTest, GetKeysInRangeWorks) {

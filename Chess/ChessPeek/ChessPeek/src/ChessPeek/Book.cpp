@@ -81,7 +81,6 @@ void Book::loadDatabaseFrom(std::string const& path) {
 }
 
 }  // namespace ChessPeek
-
 }  // namespace chess
 
 }  // namespace alba

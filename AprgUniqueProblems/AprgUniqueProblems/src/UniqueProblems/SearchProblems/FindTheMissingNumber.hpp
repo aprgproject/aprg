@@ -14,7 +14,6 @@ public:
     using Count = int;
     using Index = int;
     using Value = typename Values::value_type;
-
     FindTheMissingNumber() = default;
 
     Value getTheMissingNumberUsingSum(Values const& values) {

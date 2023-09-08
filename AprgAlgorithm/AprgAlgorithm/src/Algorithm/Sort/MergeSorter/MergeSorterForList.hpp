@@ -12,29 +12,10 @@ public:
     using Values = std::list<Value>;
     using Iterator = typename Values::iterator;
     using ConstIterator = typename Values::const_iterator;
-
     MergeSorterForList() = default;
-
     void sort(Values& valuesToSort) const override { sortFromTheTopDown(valuesToSort); }
 
 private:
-    void sortFromTheTopDown(Values& values) const {
-        // list contains one or empty stop
-        if (values.begin() != values.cend() && std::next(values.begin()) != values.cend()) {
-            // Split to two parts
-            Values& firstPart(values);
-            Values secondPart;
-            auto middle = getMiddleIterator(values);
-
-            secondPart.splice(secondPart.cbegin(), firstPart, middle, firstPart.cend());
-
-            // this is top down merge sort
-            sortFromTheTopDown(firstPart);
-            sortFromTheTopDown(secondPart);
-            mergeTwoRanges(values, firstPart, secondPart);
-        }
-    }
-
     [[nodiscard]] ConstIterator getMiddleIterator(Values const& values) const {
         int halfSize = (values.size() + 1) / 2;
         auto middle = values.cbegin();
@@ -44,29 +25,8 @@ private:
         return middle;
     }
 
-    void mergeTwoRanges(Values& result, Values& firstPart, Values& secondPart) const {
-        // this is similar with std::forward_list::merge
-
-        Values merged;
-
-        for (; firstPart.cbegin() != firstPart.cend() && secondPart.cbegin() != secondPart.cend();) {
-            if (firstPart.front() <= secondPart.front()) {
-                merged.splice(merged.cend(), firstPart, firstPart.cbegin());
-            } else {
-                merged.splice(merged.cend(), secondPart, secondPart.cbegin());
-            }
-        }
-        // copy remaining from first part
-        merged.splice(merged.cend(), firstPart);
-        // copy remaining from second part
-        merged.splice(merged.cend(), secondPart);
-
-        result = std::move(merged);
-    }
-
     [[nodiscard]] Values mergeTwoRanges(Values const& firstPart, Values const& secondPart) const {
         // this is similar with std::list::merge
-
         Values result;
         ConstIterator it1 = firstPart.cbegin();
         ConstIterator it2 = secondPart.cbegin();
@@ -84,6 +44,42 @@ private:
             result.emplace_back(*it2);
         }
         return result;
+    }
+
+    void sortFromTheTopDown(Values& values) const {
+        // list contains one or empty stop
+        if (values.begin() != values.cend() && std::next(values.begin()) != values.cend()) {
+            // Split to two parts
+            Values& firstPart(values);
+            Values secondPart;
+            auto middle = getMiddleIterator(values);
+
+            secondPart.splice(secondPart.cbegin(), firstPart, middle, firstPart.cend());
+
+            // this is top down merge sort
+            sortFromTheTopDown(firstPart);
+            sortFromTheTopDown(secondPart);
+            mergeTwoRanges(values, firstPart, secondPart);
+        }
+    }
+
+    void mergeTwoRanges(Values& result, Values& firstPart, Values& secondPart) const {
+        // this is similar with std::forward_list::merge
+        Values merged;
+
+        for (; firstPart.cbegin() != firstPart.cend() && secondPart.cbegin() != secondPart.cend();) {
+            if (firstPart.front() <= secondPart.front()) {
+                merged.splice(merged.cend(), firstPart, firstPart.cbegin());
+            } else {
+                merged.splice(merged.cend(), secondPart, secondPart.cbegin());
+            }
+        }
+        // copy remaining from first part
+        merged.splice(merged.cend(), firstPart);
+        // copy remaining from second part
+        merged.splice(merged.cend(), secondPart);
+
+        result = std::move(merged);
     }
 };
 

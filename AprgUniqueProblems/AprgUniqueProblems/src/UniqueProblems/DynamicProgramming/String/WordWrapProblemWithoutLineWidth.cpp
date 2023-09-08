@@ -11,7 +11,6 @@ WordWrapProblemWithoutLineWidth::WordWrapProblemWithoutLineWidth(stringHelper::s
 WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimizedCostUsingNaiveRecursion() const {
     // Time Complexity: O(2^numberOfWords) (since there are two tries)
     // Auxiliary Space :O(numberOfWords) (RecursionDetails has allocation on stack)
-
     Cost result(0);
     if (!m_words.empty()) {
         Index firstWordLength = m_words.front().length();
@@ -24,7 +23,6 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
 WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimizedCostByTryingAllLengths() const {
     // Time Complexity: O(totalLength x numberOfWords)
     // Auxiliary Space: O(totalLength)
-
     Cost result(0);
     Index totalLength(getTotalLength());
     if (totalLength > 0) {
@@ -55,6 +53,26 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
         result = *min_element(costsAtLength.cbegin(), costsAtLength.cend());
     }
     return result;
+}
+
+WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getCost(
+    Index const maxLength, Indices const& lengths) {
+    Cost result(0);
+    if (lengths.size() == 1) {
+        result = getCostFromExtraSpaces(lengths.front());
+    } else {
+        for (Index const length : lengths) {
+            result += getCostFromExtraSpaces(maxLength - length);
+        }
+    }
+    return result;
+}
+
+// inline optimization can work here because the usage belongs to same translation unit
+inline WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getCostFromExtraSpaces(
+    Index const numberOfExtraSpaces) {
+    return numberOfExtraSpaces * numberOfExtraSpaces *
+           numberOfExtraSpaces;  // sum of cubes is used for cost to avoid single long lengths
 }
 
 WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimizedCostUsingNaiveRecursion(
@@ -91,26 +109,6 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getTotalL
         }
     }
     return result;
-}
-
-WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getCost(
-    Index const maxLength, Indices const& lengths) {
-    Cost result(0);
-    if (lengths.size() == 1) {
-        result = getCostFromExtraSpaces(lengths.front());
-    } else {
-        for (Index const length : lengths) {
-            result += getCostFromExtraSpaces(maxLength - length);
-        }
-    }
-    return result;
-}
-
-// inline optimization can work here because the usage belongs to same translation unit
-inline WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getCostFromExtraSpaces(
-    Index const numberOfExtraSpaces) {
-    return numberOfExtraSpaces * numberOfExtraSpaces *
-           numberOfExtraSpaces;  // sum of cubes is used for cost to avoid single long lengths
 }
 
 }  // namespace alba

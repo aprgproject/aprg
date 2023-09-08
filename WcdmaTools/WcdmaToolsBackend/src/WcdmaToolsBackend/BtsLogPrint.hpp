@@ -9,6 +9,7 @@ namespace wcdmaToolsBackend {
 namespace BtsLogPrintStateMachine {
 
 enum class State {
+
     UnknownState,
     PcTimeState1_Number,
     PcTimeState2_Period,
@@ -23,12 +24,14 @@ enum class State {
     hardwareAddressState3_Letters,
     BtsTimeState,
     StopCheckingState
+
 };
 
 struct TransactionData {
     TransactionData()
 
         = default;
+
     bool isPcTimeSaved{false};
     bool isHardwareAddressSaved{false};
     bool isBtsTimeSaved{false};
@@ -45,55 +48,63 @@ struct TransactionData {
 
 class BtsLogPrint {
 public:
-    BtsLogPrint();
     explicit BtsLogPrint(std::string const& lineInLogs);
+    BtsLogPrint();
     BtsLogPrint(std::string const& filename, std::string const& lineInLogs);
-    void clear();
+    bool operator<(BtsLogPrint const& btsLogPrintToCompare) const;
+    bool operator>(BtsLogPrint const& btsLogPrintToCompare) const;
+    bool operator==(BtsLogPrint const& btsLogPrintToCompare) const;
     [[nodiscard]] bool isEmpty() const;
     [[nodiscard]] BtsLogTime getBtsTime() const;
     [[nodiscard]] BtsLogTime getPcTime() const;
     [[nodiscard]] std::string getHardwareAddress() const;
     [[nodiscard]] std::string getPrint() const;
     [[nodiscard]] std::string getPrintWithAllDetails() const;
+    void clear();
     void updatePcTimeAndFileNameDetails(BtsLogPrint const& logPrint);
-    bool operator<(BtsLogPrint const& btsLogPrintToCompare) const;
-    bool operator>(BtsLogPrint const& btsLogPrintToCompare) const;
-    bool operator==(BtsLogPrint const& btsLogPrintToCompare) const;
     friend std::ostream& operator<<(std::ostream& out, BtsLogPrint const& btsLogPrint);
     friend std::istream& operator>>(std::istream& in, BtsLogPrint& btsLogPrint);
 
 private:
-    void analyzeLineInLogs(std::string const& lineInLogs);
     static inline void handleUnknownState(
         BtsLogPrintStateMachine::State& state, BtsLogPrintStateMachine::TransactionData& transactionData,
         int const index, char const character);
+
     static inline void handlePcTimeState1(BtsLogPrintStateMachine::State& state, char const character);
     static inline void handlePcTimeState2(BtsLogPrintStateMachine::State& state, char const character);
     static inline void handlePcTimeState3(BtsLogPrintStateMachine::State& state, char const character);
     static inline void handlePcTimeState4(BtsLogPrintStateMachine::State& state, char const character);
     static inline void handlePcTimeState5(BtsLogPrintStateMachine::State& state, char const character);
+
     static inline void handlePcTimeState6(
         BtsLogPrintStateMachine::State& state, BtsLogPrintStateMachine::TransactionData& transactionData,
         int const index, char const character);
+
     static inline void handleHardWareAddressState1_Letters(
         BtsLogPrintStateMachine::State& state, BtsLogPrintStateMachine::TransactionData& transactionData,
         char const character);
+
     static inline void handleHardWareAddressState2_Dash(
         BtsLogPrintStateMachine::State& state, BtsLogPrintStateMachine::TransactionData& transactionData,
         char const character);
+
     static inline void handleHardWareAddressState2_Underscore(
         BtsLogPrintStateMachine::State& state, BtsLogPrintStateMachine::TransactionData& transactionData,
         char const character);
+
     static inline void handleHardWareAddressState3_HexNumbers(
         BtsLogPrintStateMachine::State& state, BtsLogPrintStateMachine::TransactionData& transactionData,
         int const index, char const character);
+
     static inline void handleHardWareAddressState3_Letters(
         BtsLogPrintStateMachine::State& state, BtsLogPrintStateMachine::TransactionData& transactionData,
         int const index, char const character);
+
     static inline void handleBtsTimeState(
         BtsLogPrintStateMachine::State& state, BtsLogPrintStateMachine::TransactionData& transactionData,
         int const index, char const character);
 
+    void analyzeLineInLogs(std::string const& lineInLogs);
     BtsLogTime m_btsTime;
     BtsLogTime m_pcTime;
     std::string m_hardwareAddress;

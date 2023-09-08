@@ -16,18 +16,22 @@ TEST(ValueCategoriesExamplesTest, RValueAssignmentCannotWork) {
     int n = 5;
     // 1 = n; // Error: lvalue required as left operand of assignment
 }
+
 }  // namespace RValueAssignmentCannotWork
 
 namespace LValuesAndRValuesBindToDifferentFunctions {
+
 void foo(string const &) {
     // takes lvalues
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
 }
+
 void foo(string &&) {
     // takes rvalues
     // Here we can steal the guts of the parameter because its a temporary.
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
 }
+
 TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
     string s = "hello";
     foo(s);             // calls foo (with lvalue)
@@ -35,6 +39,7 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
     foo("hi");          // calls foo (with rvalue)
     foo(move(s));       // calls foo (with rvalue)
 }
+
 }  // namespace LValuesAndRValuesBindToDifferentFunctions
 
 }  // namespace alba

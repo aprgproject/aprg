@@ -8,7 +8,6 @@ public:
     using Count = int;
     using Index = int;
     using Value = typename Values::value_type;
-
     GetMinAdjacentSwapsToPutMaxAtFirstAndMinAtLast() = default;
 
     Count getMinAdjacentSwaps(Values const& values) {

@@ -9,6 +9,7 @@
 namespace alba::AprgBitmap {
 
 enum class CompressedMethodType {
+
     RGB,
     RLE8,
     RLE4,
@@ -20,11 +21,14 @@ enum class CompressedMethodType {
     CMYKRLE8,
     CMYKRLE4,
     Unknown
+
 };
 
 class BitmapConfiguration {
 public:
     BitmapConfiguration();
+    static int getCoordinateWithinRange(int const coordinate, int const maxLength);
+    static BitmapXY getUpLeftCornerPoint();
     [[nodiscard]] bool isValid() const;
     [[nodiscard]] bool isSignatureValid() const;
     [[nodiscard]] bool isHeaderValid() const;
@@ -33,24 +37,8 @@ public:
     [[nodiscard]] bool isCompressedMethodSupported() const;
     [[nodiscard]] bool isPositionWithinTheBitmap(BitmapXY const position) const;
     [[nodiscard]] bool isPositionWithinTheBitmap(int const x, int const y) const;
-
-    [[nodiscard]] CompressedMethodType getCompressedMethodType() const;
-    [[nodiscard]] std::string getPath() const;
-    [[nodiscard]] uint32_t getPixelArrayAddress() const;
-    [[nodiscard]] uint32_t getBitmapWidth() const;
-    [[nodiscard]] uint32_t getBitmapHeight() const;
-    [[nodiscard]] uint16_t getNumberOfBitsPerPixel() const;
-    [[nodiscard]] uint32_t getNumberOfBytesPerRowInFile() const;
-    [[nodiscard]] uint32_t getBitMaskForValue() const;
-
-    [[nodiscard]] BitmapXY getPointWithinTheBitmap(int const xCoordinate, int const yCoordinate) const;
     [[nodiscard]] int getXCoordinateWithinTheBitmap(int const coordinate) const;
     [[nodiscard]] int getYCoordinateWithinTheBitmap(int const coordinate) const;
-    static int getCoordinateWithinRange(int const coordinate, int const maxLength);
-    static BitmapXY getUpLeftCornerPoint();
-    [[nodiscard]] BitmapXY getDownRightCornerPoint() const;
-
-    [[nodiscard]] uint32_t getColorUsingPixelValue(uint32_t const pixelValue) const;
     [[nodiscard]] int convertPixelsToBytesRoundedToFloor(int const pixels) const;
     [[nodiscard]] int convertPixelsToBytesRoundedToCeil(int const pixels) const;
     [[nodiscard]] int convertBytesToPixels(int const bytes) const;
@@ -60,17 +48,26 @@ public:
     [[nodiscard]] int getEstimatedSquareSideInPixels(int const numberOfBytesToRead) const;
     [[nodiscard]] int getOneRowSizeInBytesFromPixels(int const leftPixelInclusive, int const rightPixelInclusive) const;
     [[nodiscard]] int getOneRowSizeInBytesFromBytes(int const leftByteInclusive, int const rightByteInclusive) const;
-
+    [[nodiscard]] CompressedMethodType getCompressedMethodType() const;
+    [[nodiscard]] std::string getPath() const;
+    [[nodiscard]] uint32_t getPixelArrayAddress() const;
+    [[nodiscard]] uint32_t getBitmapWidth() const;
+    [[nodiscard]] uint32_t getBitmapHeight() const;
+    [[nodiscard]] uint16_t getNumberOfBitsPerPixel() const;
+    [[nodiscard]] uint32_t getNumberOfBytesPerRowInFile() const;
+    [[nodiscard]] uint32_t getBitMaskForValue() const;
+    [[nodiscard]] BitmapXY getPointWithinTheBitmap(int const xCoordinate, int const yCoordinate) const;
+    [[nodiscard]] BitmapXY getDownRightCornerPoint() const;
+    [[nodiscard]] uint32_t getColorUsingPixelValue(uint32_t const pixelValue) const;
     [[nodiscard]] Colors getColorTable() const;
-
     void readBitmap(std::string const& path);
 
 private:
+    static CompressedMethodType determineCompressedMethodType(uint32_t const compressedMethodValue);
     void readBitmapFileHeader(AlbaFileReader& fileReader);
     void readDibHeader(AlbaFileReader& fileReader);
     void readColors(AlbaFileReader& fileReader);
     void calculateOtherValuesAfterReading();
-    static CompressedMethodType determineCompressedMethodType(uint32_t const compressedMethodValue);
     uint32_t m_fileSize{0};
     uint32_t m_pixelArrayAddress{0};
     uint32_t m_sizeOfHeader{0};

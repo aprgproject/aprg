@@ -14,7 +14,6 @@ CountNumberOfBinaryStringsWithoutConsecutiveOnes::Count
 CountNumberOfBinaryStringsWithoutConsecutiveOnes::getCountUsingNaiveRecursion() const {
     // Time Complexity: Exponential -> Since there are two calls per iteration:  O(2^n)
     // Auxiliary Space: Constant
-
     return getCountUsingNaiveRecursion(false, m_length);
 }
 
@@ -22,7 +21,6 @@ CountNumberOfBinaryStringsWithoutConsecutiveOnes::Count
 CountNumberOfBinaryStringsWithoutConsecutiveOnes::getCountUsingIterativeDP() const {
     // Time Complexity: O(n)
     // Auxiliary Space: O(n)
-
     Count result(0);
     if (m_length > 0) {
         CountMatrix valueMatrix(2, m_length, 0);
@@ -44,7 +42,6 @@ CountNumberOfBinaryStringsWithoutConsecutiveOnes::Count
 CountNumberOfBinaryStringsWithoutConsecutiveOnes::getCountUsingIterativeDPAndSpaceEfficient() const {
     // Time Complexity: O(n)
     // Auxiliary Space: O(1)
-
     Count result(0);
     if (m_length > 0) {
         Count zeroCount = 1;
@@ -63,7 +60,6 @@ CountNumberOfBinaryStringsWithoutConsecutiveOnes::Count
 CountNumberOfBinaryStringsWithoutConsecutiveOnes::getCountUsingFibonacci() const {
     // Time Complexity: O(1) (depends on how fibonacci number is computed)
     // Auxiliary Space: O(1)
-
     Count result(0);
     if (m_length > 0) {
         result = getNthFibonacciNumberUsingBinetsFormula(m_length + 2);

@@ -9,13 +9,11 @@ namespace alba {
 TaskAndDeadlines::TaskNames TaskAndDeadlines::getTasksOrderWithMaximumScore() const {
     // Surprisingly, the optimal solution to the problem does not depend on the deadlines at all,
     // but a correct greedy strategy is to simply perform the tasks sorted by their durations in increasing order.
-
     // Let a and b be the duration
     // If a>b then gives b points less and Y gives a points more, so the total score increases by a-b > 0.
     // In an optimal solution, for any two consecutive tasks, it must hold that the shorter task comes before the longer
     // task.
     // Thus, the tasks must be performed sorted by their durations.
-
     TaskNames result;
 
     Tasks taskToSchedule(m_tasks);

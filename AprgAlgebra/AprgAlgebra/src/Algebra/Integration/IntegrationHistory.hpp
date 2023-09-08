@@ -8,6 +8,7 @@
 namespace alba::algebra {
 
 enum class IntegrationPurpose {
+
     NotSet,
     IntegrationByParts,
     Trigonometric,
@@ -15,6 +16,7 @@ enum class IntegrationPurpose {
     Substitution,
     PartialFraction,
     NoChange
+
 };
 
 using IntegrationPurposes = std::vector<IntegrationPurpose>;
@@ -22,11 +24,10 @@ using IntegrationPurposes = std::vector<IntegrationPurpose>;
 class IntegrationHistory {
 public:
     IntegrationHistory();
+    static std::string getEnumShortString(IntegrationPurpose const purpose);
     [[nodiscard]] bool didThisIntegrationPurposeAlreadyHappened(IntegrationPurpose const purpose) const;
     [[nodiscard]] int getDepth() const;
     [[nodiscard]] IntegrationPurpose getLastIntegrationPurpose() const;
-    static std::string getEnumShortString(IntegrationPurpose const purpose);
-
     void performStepsBeforeIntegration(Term const& input, IntegrationPurpose const purpose);
     void performStepsAfterIntegration(Term const& input, IntegrationPurpose const purpose, Term const& output);
     void clear();

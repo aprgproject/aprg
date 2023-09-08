@@ -12,11 +12,10 @@ public:
         int coordinate1;
         int coordinate2;
     };
+
     using RadiusToCoordinates = std::multimap<double, Coordinate>;
     using RadiusAndCoordinatesPair = std::pair<double, Coordinate>;
-
     explicit OutwardCircleTraversal(int const maxRadius);
-
     [[nodiscard]] RadiusToCoordinates const& getRadiusToCoordinates() const;
 
 private:

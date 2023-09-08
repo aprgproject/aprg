@@ -9,7 +9,6 @@ namespace Interpreter {
 TEST(InterpreterTest, Test1) {
     // An example of very simple expression tree
     // that corresponds to expression (A AND B)
-
     auto a = make_unique<TerminalExpression>("a");
     auto b = make_unique<TerminalExpression>("b");
     auto aPlusB = make_unique<NonterminalExpression>(move(a), move(b));

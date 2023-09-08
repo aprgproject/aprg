@@ -9,12 +9,12 @@ namespace wcdmaToolsBackend {
 class BtsPrintReaderWithRollback {
 public:
     BtsPrintReaderWithRollback();
-    void clear();
     bool isGood() const;
+    double getCurrentLocation();
     BtsLogPrint getPrint();
+    void clear();
     void rollBackPrint();
     void openIfNeeded(std::string const& filePath);
-    double getCurrentLocation();
 
 private:
     bool m_isRollbackActivated{false};

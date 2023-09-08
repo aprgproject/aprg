@@ -11,7 +11,6 @@ class FindThePairWithClosestToSum {
 public:
     using Value = typename Values::value_type;
     using ValuePair = std::pair<Value, Value>;
-
     FindThePairWithClosestToSum() = default;
 
     ValuePair getValuePairThatIsClosestToSum(Values const& values1, Values const& values2, Value const& sumToCheck) {

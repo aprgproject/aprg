@@ -14,15 +14,10 @@ using QueueForTest = QueueUsingTwoStacks<int, DoublingSizeStack<int>>;
 }  // namespace
 
 TEST(QueueUsingTwoStacksTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<QueueForTest>(); }
-
 TEST(QueueUsingTwoStacksTest, IsEmptyWorksWhenNotEmpty) { testIsEmptyWhenNotEmptyWithInt<QueueForTest>(); }
-
 TEST(QueueUsingTwoStacksTest, GetSizeWorksWhenEmpty) { testGetSizeWhenEmptyWithInt<QueueForTest>(); }
-
 TEST(QueueUsingTwoStacksTest, GetSizeWorksWhenNotEmpty) { testGetSizeWhenNotEmptyWithInt<QueueForTest>(); }
-
 TEST(QueueUsingTwoStacksTest, EnqueueWorks) { testEnqueueWithInt<QueueForTest>(); }
-
 TEST(QueueUsingTwoStacksTest, DequeueWorks) { testDequeueWithInt<QueueForTest>(); }
 
 // disabled because it takes too long

@@ -6,49 +6,35 @@ namespace Prototype {
 
 // Prototype
 // declares an interface for cloning itself
-
 class Prototype {
 public:
     virtual ~Prototype() = default;
-
-    virtual std::unique_ptr<Prototype> clone() = 0;
     [[nodiscard]] virtual std::string getType() const = 0;
+    virtual std::unique_ptr<Prototype> clone() = 0;
     // ...
 };
 
 // Concrete Prototype A and B
 // implement an operation for cloning itself
-
 class ConcretePrototypeA : public Prototype {
 public:
-    std::unique_ptr<Prototype> clone() override { return std::make_unique<ConcretePrototypeA>(); }
-
     [[nodiscard]] std::string getType() const override { return "type A"; }
+    std::unique_ptr<Prototype> clone() override { return std::make_unique<ConcretePrototypeA>(); }
     // ...
 };
 
 class ConcretePrototypeB : public Prototype {
 public:
-    std::unique_ptr<Prototype> clone() override { return std::make_unique<ConcretePrototypeB>(); }
-
     [[nodiscard]] std::string getType() const override { return "type B"; }
+    std::unique_ptr<Prototype> clone() override { return std::make_unique<ConcretePrototypeB>(); }
     // ...
 };
 
 // Client
 // creates a new object by asking a prototype to clone itself
-
 class Client {
     // This actually works like a "prototype manager"
 public:
-    static constexpr int NUMBER_OF_TYPES = 2;
-
-    void setPrototypeAt(int const index, std::unique_ptr<Prototype> prototype) {
-        if (index < NUMBER_OF_TYPES) {
-            m_types[index] = move(prototype);
-        }
-    }
-
     std::unique_ptr<Prototype> createBasedFrom(int const index) {
         std::unique_ptr<Prototype> result;
         if (index < NUMBER_OF_TYPES) {
@@ -56,8 +42,16 @@ public:
         }
         return result;
     }
-    // ...
 
+    void setPrototypeAt(int const index, std::unique_ptr<Prototype> prototype) {
+        if (index < NUMBER_OF_TYPES) {
+            m_types[index] = move(prototype);
+        }
+    }
+
+    static constexpr int NUMBER_OF_TYPES = 2;
+
+    // ...
 private:
     std::array<std::unique_ptr<Prototype>, NUMBER_OF_TYPES> m_types;
 };

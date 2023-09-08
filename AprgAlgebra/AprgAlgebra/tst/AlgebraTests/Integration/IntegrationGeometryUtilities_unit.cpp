@@ -63,7 +63,6 @@ TEST(IntegrationGeometryUtilitiesTest, GetVolumeAndSurfaceAreaBasedOnSolidOfRevo
     // getPositiveInfinityAsATerm()}));
     // The surface area is hard to integrate: (((1[x^4] + 1)^(1/2))/1[x^3])
     // This can be solved via integration by parts u = (1+x4)^(1/2), v' = 1/(x^3), check symbolab.com
-
     Term expectedVolume(getPiAsATerm());
     // Term expectedSurfaceArea(getPositiveInfinityAsATerm());
     EXPECT_EQ(expectedVolume, actualVolume);
@@ -207,7 +206,6 @@ TEST(IntegrationGeometryUtilitiesTest, IntegrateInPolarCoordinatesWorks) {
 TEST(IntegrationGeometryUtilitiesTest, GetDoubleIntegralInCartesianCoordinatesWorksOnExample1) {
     // Evaluate the double integral Integral[3y-2*x^2]dA
     // if R is the region consisting of all points (x, y) for which -1<x<2 and 1<y<3
-
     Term termToTest(Polynomial{Monomial(3, {{"y", 1}}), Monomial(-2, {{"x", 2}})});
     DetailsForDefiniteIntegralWithTerms xDetails{"x", -1, 2};
     DetailsForDefiniteIntegralWithTerms yDetails{"y", 1, 3};
@@ -221,7 +219,6 @@ TEST(IntegrationGeometryUtilitiesTest, GetDoubleIntegralInCartesianCoordinatesWo
 TEST(IntegrationGeometryUtilitiesTest, GetDoubleIntegralInCartesianCoordinatesWorksOnExample2) {
     // Find the volume z = 4 - 1/9*x^2 - 1/16*y^2
     // bounded by the surface x=3, y=2 and the three coordinate planes
-
     Term termToTest(Polynomial{
         Monomial(4, {}), Monomial(AlbaNumber::createFraction(-1, 9), {{"x", 2}}),
         Monomial(AlbaNumber::createFraction(-1, 16), {{"y", 2}})});
@@ -352,7 +349,6 @@ TEST(IntegrationGeometryUtilitiesTest, GetDoubleIntegralInPolarCoordinatesWorksO
 
 TEST(IntegrationGeometryUtilitiesTest, DISABLED_GetSurfaceAreaWithZInCartesianCoordinatesWorksOnExample1) {
     // Disabled because integration does not work here (possible trig sub problem)
-
     // Find the area of the surface that is cut from the cylinder x^2 + z^2 = 16 by the planes x=0, x=2, y=0, y=3
     Term insideSquareRoot(Polynomial{Monomial(16, {}), Monomial(-1, {{"x", 2}})});
     Term z(createExpressionIfPossible({insideSquareRoot, "^", AlbaNumber::createFraction(1, 2)}));
@@ -378,7 +374,6 @@ TEST(IntegrationGeometryUtilitiesTest, GetSurfaceAreaWithZInCartesianCoordinates
 TEST(IntegrationGeometryUtilitiesTest, GetTripleIntegralInCartesianCoordinatesWorks) {
     // Find by triple integration the volume of the solid bounded by elliptic paraboloid z = x^2 + 4*y^2 and cylinder
     // x^2 + 4*y^2 = 4
-
     Term termToTest(4);  // because this is done for each quadrant
     DetailsForDefiniteIntegralWithTerms xDetails{"x", 0, 2};
     DetailsForDefiniteIntegralWithTerms yDetails{
@@ -395,7 +390,6 @@ TEST(IntegrationGeometryUtilitiesTest, GetTripleIntegralInCartesianCoordinatesWo
 
 TEST(IntegrationGeometryUtilitiesTest, GetTripleIntegralInCylindricalCoordinatesWorks) {
     // Get volume of cylinder with radius=2 and height=3
-
     Term termToTest(1);
     DetailsForDefiniteIntegralWithTerms radiusDetails{"r", 0, 2};
     DetailsForDefiniteIntegralWithTerms thetaDetails{"theta", 0, getPiAsATerm() * 2};
@@ -409,7 +403,6 @@ TEST(IntegrationGeometryUtilitiesTest, GetTripleIntegralInCylindricalCoordinates
 
 TEST(IntegrationGeometryUtilitiesTest, GetTripleIntegralInSphericalCoordinatesWorks) {
     // Get volume of sphere with raw=2
-
     Term termToTest(8);  // integrate a sphere on each quadrant
     DetailsForDefiniteIntegralWithTerms rawDetails{"raw", 0, 2};
     DetailsForDefiniteIntegralWithTerms thetaDetails{"theta", 0, getPiAsATerm() / 2};

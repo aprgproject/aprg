@@ -17,20 +17,15 @@ public:
     // DIFFERENT size. The player who makes the last move wins the game. Let f(n) be the Grundy number of a heap that
     // contains n sticks. The Grundy number can be calculated by going through all ways to divide the heap into two
     // heaps.
-
     using StickHeaps = std::deque<UnsignedInteger>;
     using SticksToGrundyNumberMap = std::map<UnsignedInteger, UnsignedInteger>;
     using HeapIndexAndFirstPileAndSecondPile = std::tuple<UnsignedInteger, UnsignedInteger, UnsignedInteger>;
-
     explicit GrundyGame(UnsignedInteger const totalNumberOfSticks);
-
     [[nodiscard]] bool hasNoMoves() const;
     [[nodiscard]] StickHeaps const& getStickHeaps() const;
-
     UnsignedInteger getOverallGrundyNumber();
     GameState getGameState();
     HeapIndexAndFirstPileAndSecondPile getOptimalWayToSplit();
-
     void split(HeapIndexAndFirstPileAndSecondPile const& heapIndexAndFirstPileAndSecondPile);
 
 private:

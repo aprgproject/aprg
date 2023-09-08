@@ -19,7 +19,7 @@ class BaseSeparateChainingHashSymbolTable
 public:
     ~BaseSeparateChainingHashSymbolTable() override =
         default;  // no need for virtual destructor because base destructor is virtual (similar to other virtual
-                  // functions)
+    // functions)
 };
 
 }  // namespace alba::algorithm

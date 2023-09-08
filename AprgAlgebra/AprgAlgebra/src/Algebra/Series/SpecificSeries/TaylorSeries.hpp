@@ -7,7 +7,6 @@ namespace alba::algebra {
 class TaylorSeries {
 public:
     TaylorSeries(Term const& formulaForTaylorSeries, std::string const& variableName);
-
     [[nodiscard]] Term getFormulaForTaylorSeries() const;
     [[nodiscard]] Term getValueAtIndex(int const index, Term const& startingValue) const;
     [[nodiscard]] Term getValueForMaclaurinSeriesAtIndex(int const index) const;

@@ -15,8 +15,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-Expression::Expression() : m_commonOperatorLevel(OperatorLevel::Unknown), m_isSimplified(false) {}
-
 Expression::Expression(BaseTerm const& baseTerm)
     : m_commonOperatorLevel(OperatorLevel::Unknown),
       m_termsWithAssociation(TermsWithDetails{{baseTerm, TermAssociationType::Positive}}),
@@ -26,6 +24,8 @@ Expression::Expression(BaseTerm&& baseTerm)
     : m_commonOperatorLevel(OperatorLevel::Unknown),
       m_termsWithAssociation(TermsWithDetails{{std::move(baseTerm), TermAssociationType::Positive}}),
       m_isSimplified(false) {}
+
+Expression::Expression() : m_commonOperatorLevel(OperatorLevel::Unknown), m_isSimplified(false) {}
 
 Expression::Expression(OperatorLevel const operatorLevel, TermsWithDetails const& termsWithDetails)
     : m_commonOperatorLevel(termsWithDetails.empty() ? OperatorLevel::Unknown : operatorLevel),
@@ -62,9 +62,7 @@ bool Expression::containsOnlyOnePositivelyAssociatedTerm() const {
 }
 
 bool Expression::isSimplified() const { return m_isSimplified; }
-
 OperatorLevel Expression::getCommonOperatorLevel() const { return m_commonOperatorLevel; }
-
 BaseTerm const& Expression::getFirstTerm() const { return m_termsWithAssociation.getFirstTerm(); }
 
 TermAssociationType Expression::getFirstAssociationType() const {
@@ -298,7 +296,6 @@ void Expression::sort() {
 }
 
 void Expression::setAsSimplified() { m_isSimplified = true; }
-
 void Expression::clearSimplifiedFlag() { m_isSimplified = false; }
 
 void Expression::clearAllInnerSimplifiedFlags() {

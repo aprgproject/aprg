@@ -12,10 +12,8 @@ public:
     using Count = int;
     using Counts = std::vector<Count>;
     using CountGrid = matrix::AlbaMatrix<Count>;
-    static constexpr Index UNUSED_INDEX = std::numeric_limits<Index>::max();
-
     LevenshteinDistance(std::string const& string1, std::string const& string2);
-
+    static constexpr Index UNUSED_INDEX = std::numeric_limits<Index>::max();
     [[nodiscard]] Count getLevenshteinDistanceUsingNaiveRecursion() const;
     [[nodiscard]] Count getLevenshteinDistanceUsingMemoizationDP() const;
     [[nodiscard]] Count getLevenshteinDistanceUsingIterativeDP() const;

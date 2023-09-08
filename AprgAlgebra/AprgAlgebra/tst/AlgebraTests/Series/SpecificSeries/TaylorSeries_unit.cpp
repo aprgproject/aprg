@@ -27,7 +27,6 @@ TEST(TaylorSeriesTest, GetValueAtIndexWorks) {
     // taylors formula: f(b) = f(a) + f'(a)*(b-a)/1! + f''(a)*(b-a)^2/2! ...
     // Given that "starting value" is 0 and "value to approach" is x, the formula for e^x becomes:
     // e^x = 1 + x + x^2/2! + x^3/3! + x^4/4! + x^5/5! ...
-
     Term formula(createExpressionIfPossible({getEAsATerm(), "^", "x"}));
     TaylorSeries series(formula, "x");
 

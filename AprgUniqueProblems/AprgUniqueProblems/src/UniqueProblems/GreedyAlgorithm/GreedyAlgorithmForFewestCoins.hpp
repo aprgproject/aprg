@@ -9,9 +9,7 @@ public:
     using Coin = int;
     using Coins = std::vector<Coin>;
     using Value = int;
-
     explicit GreedyAlgorithmForFewestCoins(Coins const& availableCoins);
-
     [[nodiscard]] int getFewestNumberOfCoins(Value const value) const;
 
 private:

@@ -15,21 +15,7 @@ inline int externInlineInteger = 410;
 inline int inlineIntegerAtTranslationUnit = 710;
 int nonInlineAtTranslationUnit = 810;
 // constexpr int SampleClassWithInline::constIntegerInClass = 1010; // Error: redefinition of 'constIntegerInClass'
-
 int inlineFreeFunction() { return 1; }
-
-// Utilities for tests
-void restoreInitialValuesForTranslationUnit1() {
-    // constInteger = 110; // const so cannot change value
-    inlineIntegerWithDefinition = 210;
-    inlineIntegerWithDeclaration = 310;
-    externInlineInteger = 410;
-    staticInlineInteger = 510;
-    inlineString = "610";
-    inlineIntegerAtTranslationUnit = 710;
-    nonInlineAtTranslationUnit = 810;
-    // SampleClassWithInline::constIntegerInClass = 1010; // const so cannot change value
-}
 
 TranslationUnitValues getValuesInTranslationUnit1() {
     return TranslationUnitValues{
@@ -42,6 +28,19 @@ TranslationUnitValues getValuesInTranslationUnit1() {
         inlineIntegerAtTranslationUnit,
         nonInlineAtTranslationUnit,
         SampleClassWithInline::constIntegerInClass};
+}
+
+// Utilities for tests
+void restoreInitialValuesForTranslationUnit1() {
+    // constInteger = 110; // const so cannot change value
+    inlineIntegerWithDefinition = 210;
+    inlineIntegerWithDeclaration = 310;
+    externInlineInteger = 410;
+    staticInlineInteger = 510;
+    inlineString = "610";
+    inlineIntegerAtTranslationUnit = 710;
+    nonInlineAtTranslationUnit = 810;
+    // SampleClassWithInline::constIntegerInClass = 1010; // const so cannot change value
 }
 
 TEST(InlineOnTranslationUnit1Test, VariableValuesAreCorrect) {
@@ -68,7 +67,6 @@ TEST(InlineOnTranslationUnit1Test, VariableValuesCanBeChanged) {
     inlineIntegerAtTranslationUnit = 711;
     nonInlineAtTranslationUnit = 811;
     // SampleClassWithInline::constIntegerInClass = 1011; // const so cannot change value
-
     EXPECT_EQ(100, constInteger);
     EXPECT_EQ(211, inlineIntegerWithDefinition);
     EXPECT_EQ(311, inlineIntegerWithDeclaration);
@@ -107,7 +105,6 @@ TEST(InlineOnTranslationUnit1Test, VariableValuesAreChangedAndReflectedOnOtherTr
     inlineIntegerAtTranslationUnit = 712;
     nonInlineAtTranslationUnit = 812;
     // SampleClassWithInline::constIntegerInClass = 1012; // const so cannot change value
-
     TranslationUnitValues otherTranslationUnitValues(getValuesInTranslationUnit2());
     EXPECT_EQ(100, otherTranslationUnitValues.constInteger);
     EXPECT_EQ(212, otherTranslationUnitValues.inlineIntegerWithDefinition);

@@ -13,7 +13,6 @@ public:
     using Combination = std::multiset<Value>;
     using Combinations = std::set<Combination>;
     using VectorOfCombinations = std::vector<Combinations>;
-
     explicit CombinationsWithSum(Values const& values) : m_inputValues(values) {}
 
     Combinations getCombinationsWithSumUsingRecursion(Value const total) {

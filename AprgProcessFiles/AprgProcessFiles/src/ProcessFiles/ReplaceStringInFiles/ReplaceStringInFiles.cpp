@@ -8,6 +8,34 @@ using namespace std;
 
 namespace alba {
 
+string ReplaceStringInFiles::getCPlusPlusStylePrintFromC(string const& inputString) {
+    string result;
+    strings splittedStrings;
+    strings delimeters{R"((")", R"(",)", ");"};
+    splitToStringsUsingASeriesOfDelimeters(splittedStrings, inputString, delimeters);
+
+    if (splittedStrings.size() == 2) {
+        strings delimetersForTwo{R"((")", "\");"};
+        splittedStrings.clear();
+        splitToStringsUsingASeriesOfDelimeters(splittedStrings, inputString, delimetersForTwo);
+        string printFunction(splittedStrings[0]);
+        string newPrintStream(getNewPrintStreamBasedFromOldPrintFunction(printFunction));
+        result += newPrintStream;
+        result += R"( << ")";
+        result += getStringWithoutStartingAndTrailingWhiteSpace(splittedStrings[1]);
+        result += R"(" << flush();)";
+    } else if (splittedStrings.size() >= 3) {
+        string printFunction(getStringWithoutStartingAndTrailingWhiteSpace(splittedStrings[0]));
+        string printString(splittedStrings[1]);
+        strings printParameters;
+        splitToStrings<SplitStringType::WithoutDelimeters>(printParameters, splittedStrings[2], ",");
+        string newPrintStream(getNewPrintStreamBasedFromOldPrintFunction(printFunction));
+        removeStartingAndTrailingWhiteSpaceInPrintParameters(printParameters);
+        result = constructCPlusPlusPrint(newPrintStream, "flush()", printString, printParameters);
+    }
+    return result;
+}
+
 void ReplaceStringInFiles::replaceStringWithStringOnDirectories(
     string const& inputDirectory, string const& outputDirectory, StringPairs const& replacePairs) {
     ListOfPaths files;
@@ -119,54 +147,6 @@ void ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnFile(
     }
 }
 
-string ReplaceStringInFiles::getCPlusPlusStylePrintFromC(string const& inputString) {
-    string result;
-    strings splittedStrings;
-    strings delimeters{R"((")", R"(",)", ");"};
-    splitToStringsUsingASeriesOfDelimeters(splittedStrings, inputString, delimeters);
-
-    if (splittedStrings.size() == 2) {
-        strings delimetersForTwo{R"((")", "\");"};
-        splittedStrings.clear();
-        splitToStringsUsingASeriesOfDelimeters(splittedStrings, inputString, delimetersForTwo);
-        string printFunction(splittedStrings[0]);
-        string newPrintStream(getNewPrintStreamBasedFromOldPrintFunction(printFunction));
-        result += newPrintStream;
-        result += R"( << ")";
-        result += getStringWithoutStartingAndTrailingWhiteSpace(splittedStrings[1]);
-        result += R"(" << flush();)";
-    } else if (splittedStrings.size() >= 3) {
-        string printFunction(getStringWithoutStartingAndTrailingWhiteSpace(splittedStrings[0]));
-        string printString(splittedStrings[1]);
-        strings printParameters;
-        splitToStrings<SplitStringType::WithoutDelimeters>(printParameters, splittedStrings[2], ",");
-        string newPrintStream(getNewPrintStreamBasedFromOldPrintFunction(printFunction));
-        removeStartingAndTrailingWhiteSpaceInPrintParameters(printParameters);
-        result = constructCPlusPlusPrint(newPrintStream, "flush()", printString, printParameters);
-    }
-    return result;
-}
-
-void ReplaceStringInFiles::removeStartingAndTrailingWhiteSpaceInPrintParameters(strings& printParameters) {
-    for (string& printParameter : printParameters) {
-        printParameter = getStringWithoutStartingAndTrailingWhiteSpace(printParameter);
-    }
-}
-
-string ReplaceStringInFiles::getNewPrintStreamBasedFromOldPrintFunction(string const& printFunction) {
-    string newPrintStream;
-    if ("TLH_DEBUG_PRINT" == printFunction) {
-        newPrintStream = "debug()";
-    } else if ("TLH_INFO_PRINT" == printFunction) {
-        newPrintStream = "info()";
-    } else if ("TLH_WARNING_PRINT" == printFunction) {
-        newPrintStream = "warning()";
-    } else if ("TLH_ERROR_PRINT" == printFunction) {
-        newPrintStream = "error()";
-    }
-    return newPrintStream;
-}
-
 string ReplaceStringInFiles::constructCPlusPlusPrint(
     string const& newPrintStream, string const& endPrintStream, string const& printString,
     strings const& printParameters) {
@@ -196,6 +176,37 @@ string ReplaceStringInFiles::constructCPlusPlusPrint(
     return result;
 }
 
+bool ReplaceStringInFiles::isCOrCPlusPlusFile(string const& extension) {
+    return "cpp" == extension || "hpp" == extension || "c" == extension || "h" == extension;
+}
+
+bool ReplaceStringInFiles::hasPrintInLine(string const& line) {
+    return isStringFoundCaseSensitive(line, "TLH_DEBUG_PRINT") || isStringFoundCaseSensitive(line, "TLH_INFO_PRINT") ||
+           isStringFoundCaseSensitive(line, "TLH_WARNING_PRINT") || isStringFoundCaseSensitive(line, "TLH_ERROR_PRINT");
+}
+
+bool ReplaceStringInFiles::hasEndOfPrintInLine(string const& line) { return isStringFoundCaseSensitive(line, ");"); }
+
+string ReplaceStringInFiles::getNewPrintStreamBasedFromOldPrintFunction(string const& printFunction) {
+    string newPrintStream;
+    if ("TLH_DEBUG_PRINT" == printFunction) {
+        newPrintStream = "debug()";
+    } else if ("TLH_INFO_PRINT" == printFunction) {
+        newPrintStream = "info()";
+    } else if ("TLH_WARNING_PRINT" == printFunction) {
+        newPrintStream = "warning()";
+    } else if ("TLH_ERROR_PRINT" == printFunction) {
+        newPrintStream = "error()";
+    }
+    return newPrintStream;
+}
+
+void ReplaceStringInFiles::removeStartingAndTrailingWhiteSpaceInPrintParameters(strings& printParameters) {
+    for (string& printParameter : printParameters) {
+        printParameter = getStringWithoutStartingAndTrailingWhiteSpace(printParameter);
+    }
+}
+
 void ReplaceStringInFiles::appendCharacterToResult(string& result, bool& isOnStringLiteral, char const c) {
     if (isOnStringLiteral) {
         result += c;
@@ -216,16 +227,5 @@ void ReplaceStringInFiles::appendParameterToResult(string& result, bool& isOnStr
     }
     isOnStringLiteral = false;
 }
-
-bool ReplaceStringInFiles::isCOrCPlusPlusFile(string const& extension) {
-    return "cpp" == extension || "hpp" == extension || "c" == extension || "h" == extension;
-}
-
-bool ReplaceStringInFiles::hasPrintInLine(string const& line) {
-    return isStringFoundCaseSensitive(line, "TLH_DEBUG_PRINT") || isStringFoundCaseSensitive(line, "TLH_INFO_PRINT") ||
-           isStringFoundCaseSensitive(line, "TLH_WARNING_PRINT") || isStringFoundCaseSensitive(line, "TLH_ERROR_PRINT");
-}
-
-bool ReplaceStringInFiles::hasEndOfPrintInLine(string const& line) { return isStringFoundCaseSensitive(line, ");"); }
 
 }  // namespace alba

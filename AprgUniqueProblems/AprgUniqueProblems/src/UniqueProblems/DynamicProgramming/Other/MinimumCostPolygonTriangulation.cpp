@@ -14,7 +14,6 @@ MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getMinimu
     const {
     // Time Complexity: Exponential
     // Auxiliary Space: Constant
-
     Cost result(0);
     if (!m_vertices.empty()) {
         result = getMinimumNumberOfOperationsUsingNaiveRecursion(0, m_vertices.size() - 1);
@@ -26,7 +25,6 @@ MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getMinimu
     const {
     // Time Complexity: O(n^3) (should be same as Iterative DP)
     // Auxiliary Space: O(n^2)
-
     Cost result(0);
     if (!m_vertices.empty()) {
         CostMatrix countMatrix(m_vertices.size(), m_vertices.size(), MAX_COUNT);
@@ -39,7 +37,6 @@ MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getMinimu
     const {
     // Time Complexity: O(n^3)
     // Auxiliary Space: O(n^2)
-
     Cost result(0);
     if (!m_vertices.empty()) {
         CostMatrix countMatrix(m_vertices.size(), m_vertices.size(), 0);
@@ -77,6 +74,13 @@ MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getMinimu
     return result;
 }
 
+MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getCostOfThreePoints(
+    Index const index1, Index const index2, Index const index3) const {
+    // cost is perimeter
+    return getDistance(m_vertices[index1], m_vertices[index2]) + getDistance(m_vertices[index2], m_vertices[index3]) +
+           getDistance(m_vertices[index1], m_vertices[index3]);
+}
+
 MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getMinimumNumberOfOperationsUsingMemoizationDP(
     CostMatrix& countMatrix, Index const left, Index const right) const {
     Cost result(countMatrix.getEntry(left, right));
@@ -96,14 +100,6 @@ MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getMinimu
         countMatrix.setEntry(left, right, result);
     }
     return result;
-}
-
-MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getCostOfThreePoints(
-    Index const index1, Index const index2, Index const index3) const {
-    // cost is perimeter
-
-    return getDistance(m_vertices[index1], m_vertices[index2]) + getDistance(m_vertices[index2], m_vertices[index3]) +
-           getDistance(m_vertices[index1], m_vertices[index3]);
 }
 
 }  // namespace alba

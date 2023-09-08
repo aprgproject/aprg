@@ -5,18 +5,16 @@
 namespace alba {
 
 struct FakeCopyableExample {
-    FakeCopyableExample() : value(0) { ++numberOfConstructorExecutions; }
-
     explicit FakeCopyableExample(int const valueAsParameter) : value(valueAsParameter) {
         ++numberOfConstructorExecutions;
     }
 
+    FakeCopyableExample() : value(0) { ++numberOfConstructorExecutions; }
     static int numberOfConstructorExecutions;
     int value;
 };
 
 int FakeCopyableExample::numberOfConstructorExecutions = 0;
-
 using AlbaFakeCopyableForTest = AlbaFakeCopyable<FakeCopyableExample>;
 
 TEST(AlbaFakeCopyableTest, FakeCopyingWorks) {

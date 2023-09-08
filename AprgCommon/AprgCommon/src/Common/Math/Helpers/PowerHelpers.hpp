@@ -54,7 +54,6 @@ inline NumberType get2ToThePowerOf(NumberType const exponent) {
 template <typename NumberType>
 NumberType getRaiseToPowerForIntegers(NumberType const base, NumberType const exponent) {
     // This is always correct and faster than pow (check performance test for comparison)
-
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
     NumberType result(1);
@@ -77,7 +76,6 @@ inline NumberType getRaiseToPowerForIntegersUsingPow(NumberType const base, Numb
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
     // this is slower (by not too much, check performance test)
-
     return static_cast<int>(ceil(pow(base, exponent)));
 }
 
@@ -99,7 +97,6 @@ NumberType getNthRoot(
     int const numberOfIterations) {
     // https://en.wikipedia.org/wiki/Nth_root#Computing_principal_roots
     // This uses Newton method
-
     NumberType current(initialGuess);
     // set previous to an arbitiary value that is not equal to result
     NumberType previous = current - 1;
@@ -168,7 +165,6 @@ NumberType getEToTheX(NumberType const exponent, NumberType const iterations) {
     // Let the sum needs to be calculated for n terms, we can calculate sum using following loop.
     // -> for (i = n - 1, sum = 1; i > 0; --i )
     // ->     sum = 1 + x * sum / i;
-
     NumberType result = 1;
     for (int term = iterations - 1; term > 0; --term) {
         result = 1 + exponent * result / term;

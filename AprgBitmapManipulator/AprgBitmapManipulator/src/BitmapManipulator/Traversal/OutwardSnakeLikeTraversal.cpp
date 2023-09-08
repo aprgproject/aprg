@@ -21,6 +21,14 @@ OutwardSnakeLikeTraversal::OutwardSnakeLikeTraversal(
       m_lastMostTop(m_currentPoint.getY()),
       m_lastMostBottom(m_currentPoint.getY()) {}
 
+bool OutwardSnakeLikeTraversal::isTraversalFinished() const { return m_isFinished; }
+
+BitmapXY OutwardSnakeLikeTraversal::getNextPoint() {
+    BitmapXY result(m_currentPoint);
+    gotoNextPoint();
+    return result;
+}
+
 BitmapXY OutwardSnakeLikeTraversal::fixPoint(
     BitmapXY const& point, int const lowestLeft, int const highestRight, int const lowestTop, int const highestBottom) {
     BitmapXY newPoint(point);
@@ -31,12 +39,14 @@ BitmapXY OutwardSnakeLikeTraversal::fixPoint(
     return newPoint;
 }
 
-bool OutwardSnakeLikeTraversal::isTraversalFinished() const { return m_isFinished; }
+bool OutwardSnakeLikeTraversal::isPointInCorner() const {
+    return (m_currentPoint.getX() == m_lowestLeft || m_currentPoint.getX() == m_highestRight) &&
+           (m_currentPoint.getY() == m_lowestTop || m_currentPoint.getY() == m_highestBottom);
+}
 
-BitmapXY OutwardSnakeLikeTraversal::getNextPoint() {
-    BitmapXY result(m_currentPoint);
-    gotoNextPoint();
-    return result;
+bool OutwardSnakeLikeTraversal::cannotTeleport() const {
+    return m_lowestLeft == m_lastMostLeft && m_highestRight == m_lastMostRight && m_lowestTop == m_lastMostTop &&
+           m_highestBottom == m_lastMostBottom;
 }
 
 void OutwardSnakeLikeTraversal::gotoNextPoint() {
@@ -240,16 +250,6 @@ void OutwardSnakeLikeTraversal::teleportToNextOfMostBottomAndSwitchDirection() {
         }
         m_previousMovementDirection.reset();
     }
-}
-
-bool OutwardSnakeLikeTraversal::isPointInCorner() const {
-    return (m_currentPoint.getX() == m_lowestLeft || m_currentPoint.getX() == m_highestRight) &&
-           (m_currentPoint.getY() == m_lowestTop || m_currentPoint.getY() == m_highestBottom);
-}
-
-bool OutwardSnakeLikeTraversal::cannotTeleport() const {
-    return m_lowestLeft == m_lastMostLeft && m_highestRight == m_lastMostRight && m_lowestTop == m_lastMostTop &&
-           m_highestBottom == m_lastMostBottom;
 }
 
 }  // namespace alba::AprgBitmap

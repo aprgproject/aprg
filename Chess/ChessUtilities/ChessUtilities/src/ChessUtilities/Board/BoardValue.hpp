@@ -11,18 +11,15 @@ class BoardValue {
 public:
     static constexpr int SIZE_OF_DATA = 4;
     using Data = std::array<uint64_t, SIZE_OF_DATA>;
-
-    BoardValue();
     explicit BoardValue(Board const& board);
     explicit BoardValue(Data const& data);
-
+    BoardValue();
+    [[nodiscard]] bool isZero() const;
+    [[nodiscard]] Data const& getData() const;
     friend bool operator<(BoardValue const& bv1, BoardValue const& bv2);
     friend bool operator==(BoardValue const& bv1, BoardValue const& bv2);
     friend std::ostream& operator<<(std::ostream& out, BoardValue const& boardValue);
     friend std::istream& operator>>(std::istream& in, BoardValue& boardValue);
-
-    [[nodiscard]] bool isZero() const;
-    [[nodiscard]] Data const& getData() const;
 
 private:
     static Coordinate getCorrectCoordinate(Board const& board, CoordinateDataType const x, CoordinateDataType const y);

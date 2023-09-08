@@ -10,16 +10,15 @@ namespace alba {
 template <typename DataType>
 class AlbaBitManipulation {
 public:
-    static_assert(typeHelper::isIntegralType<DataType>(), "DataType must be an integer");
-
     // rule of five or six
     AlbaBitManipulation() = delete;
     ~AlbaBitManipulation() = delete;
     // disallow allocation on stack, only on heap(but no constructor so not possible as well)
     AlbaBitManipulation(AlbaBitManipulation const &) = delete;
-    AlbaBitManipulation &operator=(AlbaBitManipulation const &) = delete;
     AlbaBitManipulation(AlbaBitManipulation &&) = delete;
+    AlbaBitManipulation &operator=(AlbaBitManipulation const &) = delete;
     AlbaBitManipulation &operator=(AlbaBitManipulation &&) = delete;
+    static_assert(typeHelper::isIntegralType<DataType>(), "DataType must be an integer");
 
     template <typename ArgumentType, typename... Arguments>
     static constexpr inline DataType concatenateBytes(ArgumentType const currentByte, Arguments const... arguments) {
@@ -192,11 +191,8 @@ public:
     }
 
     static constexpr inline DataType swap(DataType const value) { return swapWithBytes<sizeof(DataType)>(value); }
-
     static constexpr inline DataType swapForTwoBytes(DataType const value) { return swapWithBytes<2>(value); }
-
     static constexpr inline DataType swapForFourBytes(DataType const value) { return swapWithBytes<4>(value); }
-
     static constexpr inline DataType swapForEightBytes(DataType const value) { return swapWithBytes<8>(value); }
 };
 

@@ -18,21 +18,8 @@ public:
     using GroupOfSamples = std::vector<Samples>;
     using SamplesGroupPair = std::pair<Sample, int>;
     using SamplesGroupPairs = std::vector<std::pair<Sample, int>>;
-
     KMeansClustering() = default;
-
-    void clear() { m_samples.clear(); }
-
-    void addSample(Sample const& sample) { m_samples.emplace_back(sample); }
-
-    void addSamples(Samples const& samples) {
-        m_samples.reserve(m_samples.size() + samples.size());
-        std::copy(samples.cbegin(), samples.cend(), std::back_inserter(m_samples));
-    }
-
     [[nodiscard]] Samples getSamples() const { return m_samples; }
-
-    Samples& getSamplesReference() { return m_samples; }
 
     [[nodiscard]] GroupOfSamples getGroupOfSamplesUsingKMeans(int const numberOfGroups) const {
         SamplesGroupPairs samplesGroupPairs(calculateInitialSamplesGroupPairsFromSavedSamples(numberOfGroups));
@@ -59,6 +46,15 @@ public:
             }
         }
         return calculateGroupOfSamplesFromSamplesGroupPairs(samplesGroupPairs, numberOfGroups);
+    }
+
+    Samples& getSamplesReference() { return m_samples; }
+    void clear() { m_samples.clear(); }
+    void addSample(Sample const& sample) { m_samples.emplace_back(sample); }
+
+    void addSamples(Samples const& samples) {
+        m_samples.reserve(m_samples.size() + samples.size());
+        std::copy(samples.cbegin(), samples.cend(), std::back_inserter(m_samples));
     }
 
 private:
@@ -92,6 +88,7 @@ private:
         }
         return meanForEachGroup;
     }
+
     Samples m_samples;
 };
 

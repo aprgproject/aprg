@@ -10,6 +10,7 @@ namespace alba {
 AlbaDateTime convertSystemTimeToAlbaDateTime(struct timespec const& timeSpec) {
     // NOLINTNEXTLINE(concurrency-mt-unsafe)
     struct tm timeInformation = *localtime(&(timeSpec.tv_sec));
+
     return {
         static_cast<uint16_t>(timeInformation.tm_year),
         static_cast<uint8_t>(timeInformation.tm_mon + 1),

@@ -24,7 +24,6 @@ void ChineseRemainderTheorem::solve(UnsignedIntegers const& numbers, UnsignedInt
         // fk = formulaForK = (m1*m2*m3...mn)/mk
         // x = a1*f1*(inverse of f1 with modulo m1) + a2*f2*(inverse of f2 with modulo m2) + ... an*fn*(inverse of fn
         // with modulo mn)
-
         m_productOfModulos =
             std::accumulate(modulos.cbegin(), modulos.cend(), static_cast<UnsignedInteger>(1), std::multiplies<>());
         for (int k = 0; k < static_cast<int>(numbers.size()); ++k) {

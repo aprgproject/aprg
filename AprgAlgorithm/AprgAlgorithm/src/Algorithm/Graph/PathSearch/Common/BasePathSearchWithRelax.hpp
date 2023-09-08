@@ -19,7 +19,6 @@ public:
         typename GraphTypesWithWeights<Vertex, Weight>::VertexToEdgeOrderedByWeightMap;
     using AdditionalRelaxationStepsWithNewWeight = std::function<void(Vertex const&, Vertex const&, Weight const&)>;
     using AdditionalRelaxationSteps = std::function<void(void)>;
-
     BasePathSearchWithRelax(EdgeWeightedGraph const& graph, Vertex const& startVertex)
         : m_graph(graph), m_startVertex(startVertex) {}
 
@@ -62,6 +61,17 @@ protected:
     // Source: http://www.gotw.ca/publications/mill18.htm
     ~BasePathSearchWithRelax() = default;
 
+    static AdditionalRelaxationStepsWithNewWeight getNoStepsWithNewWeight() {
+        static AdditionalRelaxationStepsWithNewWeight noRelaxationSteps = [](Vertex const&, Vertex const&,
+                                                                             Weight const&) {};
+        return noRelaxationSteps;
+    }
+
+    static AdditionalRelaxationSteps getNoSteps() {
+        static AdditionalRelaxationSteps noRelaxationSteps = []() {};
+        return noRelaxationSteps;
+    }
+
     [[nodiscard]] bool hasNoWeightSaved(Vertex const& vertex) const {
         return m_vertexToEdgeWithBestWeightMap.find(vertex) == m_vertexToEdgeWithBestWeightMap.cend();
     }
@@ -99,17 +109,6 @@ protected:
             }
         }
         additionalRelaxationSteps();
-    }
-
-    static AdditionalRelaxationStepsWithNewWeight getNoStepsWithNewWeight() {
-        static AdditionalRelaxationStepsWithNewWeight noRelaxationSteps = [](Vertex const&, Vertex const&,
-                                                                             Weight const&) {};
-        return noRelaxationSteps;
-    }
-
-    static AdditionalRelaxationSteps getNoSteps() {
-        static AdditionalRelaxationSteps noRelaxationSteps = []() {};
-        return noRelaxationSteps;
     }
 
     Graph const& m_graph;

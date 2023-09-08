@@ -35,21 +35,20 @@ public:
     NumberType getData();
     template <typename NumberType>
     NumberType getDataForOneByte();
-    void saveDataToMemoryBuffer(AlbaMemoryBuffer& buffer, size_t const numberOfBytesToRead);
-    void skipLine();
-    std::string getLine();
-    std::string getLineAndIgnoreWhiteSpaces();
-
     [[nodiscard]] size_t getCurrentLocation() const;
     [[nodiscard]] size_t getFileSize() const;
+    [[nodiscard]] size_t getMaxBufferSize() const;
     void moveToTheBeginning() const;
     void moveLocation(size_t const location) const;
+    std::string getLine();
+    std::string getLineAndIgnoreWhiteSpaces();
+    void saveDataToMemoryBuffer(AlbaMemoryBuffer& buffer, size_t const numberOfBytesToRead);
+    void skipLine();
     void setMaxBufferSize(size_t const bufferSize);
-    [[nodiscard]] size_t getMaxBufferSize() const;
 
 private:
-    char* getCharacterBufferPointer();
     [[nodiscard]] static size_t getFileSize(std::ifstream& inputStream);
+    char* getCharacterBufferPointer();
     static constexpr size_t INITIAL_MAX_BUFFER_SIZE = 10000;
     size_t m_fileSize{};
     std::vector<char> m_characterBuffer;

@@ -15,6 +15,7 @@ using namespace std;
 namespace alba {
 
 namespace ClassesWithBasicFunctionWorks {
+
 struct Arg {};
 
 struct S {
@@ -27,6 +28,7 @@ struct S {
     ~S() { cout << "Destruct\n"; }
     S(S const&) { cout << "Copy construct\n"; }
     S(S&&) noexcept { cout << "Move construct\n"; }
+
     S& operator=(S const& rhs) {
         if (this == &rhs) {
             return *this;
@@ -34,6 +36,7 @@ struct S {
         cout << "Copy assign\n";
         return *this;
     }
+
     S& operator=(S&&) noexcept {
         cout << "Move assign\n";
         return *this;
@@ -55,9 +58,11 @@ TEST(InPlaceConstructionExamplesTest, ClassesWithBasicFunctionWorks) {
     s10 = s03;          // Copy assign
     // 10 Destructors called
 }
+
 }  // namespace ClassesWithBasicFunctionWorks
 
 namespace RvoWorks {
+
 using PhoneBook = map<string, int>;
 
 PhoneBook buildPhoneBook() {
@@ -70,15 +75,16 @@ TEST(InPlaceConstructionExamplesTest, RvoWorks) {
     PhoneBook pb = buildPhoneBook();
     // RVO happens in this case
     // RVO is "Return Value Optimization" also known as "Copy Elision".
-
     // If RVO does not happen, this will be a move.
     // If its Microsoft STL, then its move constructor of map must allocate.
     // -> "Move ctor needs to allocate new sentinel node for the source container,
     // -> because the moved from container must still be a container." Billy O' Neal
 }
+
 }  // namespace RvoWorks
 
 namespace NoRvoBecauseNoOpportunity {
+
 string sadFunction(string s) {
     s += "No RVO for you!";
     return s;
@@ -91,9 +97,11 @@ TEST(InPlaceConstructionExamplesTest, NoRvoBecauseNoOpportunity) {
     // -> You can't RVO a variable if you didn't get the chance to construct it in the first place.
     // -> But the compiler will still move it (Since C++11)
 }
+
 }  // namespace NoRvoBecauseNoOpportunity
 
 namespace NoRvoBecauseWrongType {
+
 string sadFunction() {
     string s("No RVO for you!");
     // NOLINTNEXTLINE(clang-diagnostic-pessimizing-move)
@@ -108,9 +116,11 @@ TEST(InPlaceConstructionExamplesTest, NoRvoBecauseNoOpportunity) {
     // -> An rvalue-ref is not the same type
     // ---> Don't return std::move(...) in most cases - you will get a move when you dont have to
 }
+
 }  // namespace NoRvoBecauseWrongType
 
 namespace NoRvoBecauseNotEnoughInfo {
+
 static volatile int happinessValue = 100;
 int getHappiness() { return happinessValue; }
 
@@ -134,13 +144,20 @@ TEST(InPlaceConstructionExamplesTest, NoRvoBecauseNotEnoughInfo) {
     // -> An rvalue-ref is not the same type
     // ---> Don't return std::move(...) in most cases - you will get a move when you dont have to
 }
+
 }  // namespace NoRvoBecauseNotEnoughInfo
 
 namespace MultipleExamplesOfRvo {
 
-string directlyReturnTemporary() { return ("I will RVO!"); }
+struct MoveOnlyConstExprObject {
+    constexpr MoveOnlyConstExprObject() = default;
+    constexpr MoveOnlyConstExprObject(MoveOnlyConstExprObject&&) noexcept : x{1} {}
+    int x{0};
+};
 
+string directlyReturnTemporary() { return ("I will RVO!"); }
 string willThisRvo01() { return ("I will RVO!"); }
+
 string willThisRvo02(bool const condition) {
     if (condition) {
         return ("I will RVO!");
@@ -150,6 +167,7 @@ string willThisRvo02(bool const condition) {
     // This will RVO because returning a temporary works.
     // This will RVO even in debug builds
 }
+
 string willThisRvo03(bool const condition, string prohibitingRvo) {
     if (condition) {
         prohibitingRvo = "I won't RVO";
@@ -158,6 +176,7 @@ string willThisRvo03(bool const condition, string prohibitingRvo) {
 
     // This will NOT RVO because there is no opportunity for construction.
 }
+
 string willThisRvo04(bool const condition) {
     if (condition) {
         return directlyReturnTemporary();
@@ -167,6 +186,7 @@ string willThisRvo04(bool const condition) {
     // This will RVO (can elide multiple copies).
     // This will RVO in both cases because they are temporaries.
 }
+
 string willThisRvo05(bool const condition) {
     if (condition) {
         string s("I can RVO!");
@@ -178,6 +198,7 @@ string willThisRvo05(bool const condition) {
     // -> Clang: Yes
     // -> GCC/MSVC: No
 }
+
 string willThisRvo06(bool const condition) {
     string s("I can't RVO!");
     if (condition) {
@@ -188,6 +209,7 @@ string willThisRvo06(bool const condition) {
     // This will NOT RVO because compiler can't see it.
     // -> Possibly in the future?
 }
+
 string willThisRvo07(bool const condition) {
     string s("I won't RVO!");
     return condition ? s : "I won't RVO as well!";
@@ -197,6 +219,7 @@ string willThisRvo07(bool const condition) {
     // We are NOT returning the right type because the TERNARY operator in this case produces an lvalue reference.
     // -> We CAN'T even move here, we have to copy it.
 }
+
 string willThisRvo08(bool const condition) {
     string s("I will RVO!");
     return condition ? directlyReturnTemporary() : "I will RVO as well!";
@@ -205,6 +228,7 @@ string willThisRvo08(bool const condition) {
     // This will RVO because both sides of TERNARY operator are rvalues, so overall type is an rvalue.
     // -> So we are returning temporary.
 }
+
 string willThisRvo09() {
     string s("I will RVO!");
     s = "I will RVO! But I changed.";
@@ -213,6 +237,7 @@ string willThisRvo09() {
     // This will RVO because we are returning a named variable.
     // This is plain NRVO (Named Return Value Optimization).
 }
+
 string willThisRvo10() {
     string s("I can RVO!");
     return (s);
@@ -224,12 +249,6 @@ string willThisRvo10() {
     // -> Clang/MSVC: Yes
     // -> GCC: No
 }
-
-struct MoveOnlyConstExprObject {
-    constexpr MoveOnlyConstExprObject() = default;
-    constexpr MoveOnlyConstExprObject(MoveOnlyConstExprObject&&) noexcept : x{1} {}
-    int x{0};
-};
 
 MoveOnlyConstExprObject willThisRvo11() {
     MoveOnlyConstExprObject object;
@@ -262,12 +281,13 @@ TEST(InPlaceConstructionExamplesTest, MultipleExamplesOfRvo) {
     string s14(willThisRvo09());                   // RVO is successful
     string s15(willThisRvo10());                   // RVO is successful
     MoveOnlyConstExprObject o01(willThisRvo11());  // It depends
-
     EXPECT_EQ(0, o01.x);
 }
+
 }  // namespace MultipleExamplesOfRvo
 
 namespace VectorPushBackVsEmplaceBack {
+
 TEST(InPlaceConstructionExamplesTest, VectorPushBackVsEmplaceBack) {
     vector<string> v;
     string s("Content1");
@@ -277,7 +297,6 @@ TEST(InPlaceConstructionExamplesTest, VectorPushBackVsEmplaceBack) {
     string sTemp2(s);
     v.emplace_back(move(sTemp2));
     // No difference, except emplace_back returns a reference on the created object by definition
-
     auto carray = "Content2";
     // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
     v.push_back(carray);     // may copy/move from constructed string from carray
@@ -286,16 +305,17 @@ TEST(InPlaceConstructionExamplesTest, VectorPushBackVsEmplaceBack) {
     // ---> "I don't like that view, I don't login to my computer as root."
     // ---> "I like to use the least powerful thing that is available to me."
     // ---> "It helps the reader of my code, theres gonna be a copy here and I can't do anything better."
-
     string& s2 = v.emplace_back();  // first default construct in the vector
     // after emplace_back we can mutate s2
     // emplace_back takes a parameter pack and parameter packs can be empty
     // emplace_back does perfect forwarding. It can call explicit constructors;
     // v.push_back(); // cannot default construct because a parameter needs to be passed
 }
+
 }  // namespace VectorPushBackVsEmplaceBack
 
 namespace CopyingToAVectorFromAnArrayOfCustomArguments {
+
 using Arg = ClassesWithBasicFunctionWorks::Arg;
 using S = ClassesWithBasicFunctionWorks::S;
 
@@ -309,9 +329,11 @@ TEST(InPlaceConstructionExamplesTest, CopyingToAVectorFromAnArrayOfCustomArgumen
     // -> back_inserter is gonna call push_back
     // ---> So each item were gonna get a construct, a move, and a destruct
 }
+
 }  // namespace CopyingToAVectorFromAnArrayOfCustomArguments
 
 namespace CopyingToAVectorFromAnArrayUsingCustomArguments {
+
 using Arg = ClassesWithBasicFunctionWorks::Arg;
 using S = ClassesWithBasicFunctionWorks::S;
 
@@ -322,7 +344,6 @@ TEST(InPlaceConstructionExamplesTest, CopyingToAVectorFromAnArrayOfInts) {
     v.reserve(a.size());
     // copy(a.cbegin(), a.cend(), back_inserter(v));  // compiler failure
     // Compiler is angry at us because push_back does not work on constructors (explicit constructor)
-
     transform(a.cbegin(), a.cend(), back_inserter(v), [](int const i) { return S(i); });
     // -> Does push_back underneath
     // ---> Results to: Construction of temporary, move construction to vector, and destruction of temporary
@@ -330,9 +351,11 @@ TEST(InPlaceConstructionExamplesTest, CopyingToAVectorFromAnArrayOfInts) {
     // -> The library doesn't have back_emplacer.
     // ---> The back_emplacer guarantees that we will have in-place construction.
 }
+
 }  // namespace CopyingToAVectorFromAnArrayUsingCustomArguments
 
 namespace AvoidUnecessaryMovesInConstruction {
+
 TEST(InPlaceConstructionExamplesTest, AvoidUnecessaryMovesInConstruction) {
     vector<string_view> tokens;
 
@@ -341,64 +364,70 @@ TEST(InPlaceConstructionExamplesTest, AvoidUnecessaryMovesInConstruction) {
     // tokens.emplace_back(move(newToken));  // move in unnecessary
     //  move here prevents in-place construction
 }
+
 }  // namespace AvoidUnecessaryMovesInConstruction
 
 namespace AvoidSuperfluousMovesDueToExplicitConstructorCall {
+
 TEST(InPlaceConstructionExamplesTest, AvoidSuperfluousMovesDueToExplicitConstructorCall) {
     vector<string> tokens;
 
     tokens.emplace_back(string(3, 'A'));  // Explicitly calling the string constructor in unnecessary
     // Move is done and NOT in-place construction
-
     tokens.emplace_back(3, 'A');  // Construction arguments in emplace_back results to in-place construction
 }
+
 }  // namespace AvoidSuperfluousMovesDueToExplicitConstructorCall
 
 namespace CreatingAVectorOfPairs {
+
 struct Value {
     Value(int, string const&, double) {}
 };
+
 TEST(InPlaceConstructionExamplesTest, CreatingAVectorOfPairs) {
     vector<pair<int, Value>> v;
 
-    v.emplace_back(1, Value{42, "hello", 3.14});  // This is no good
-
+    v.emplace_back(1, Value{42, "hello", 3.14});             // This is no good
     v.emplace_back(make_pair(1, Value{42, "hello", 3.14}));  // This is no better
-
     // -> piecewise_construct to the rescue
     // ---> pair has a constructor that will handle your multi argument construtor
     // ---> piecewise_construct_t is a tag type
     // ---> forward tuples to emplace_back to ensure in-place construction
-
     v.emplace_back(piecewise_construct, forward_as_tuple(1), forward_as_tuple(42, "hello", 3.14));
     // Perfect forwarding and in-place construction
 }
+
 }  // namespace CreatingAVectorOfPairs
 
 namespace InitializerListHasConstStorageSoWeCantLocalInitializerLists {
+
 template <int... ints>
 auto f() {
     // NOLINTNEXTLINE(clang-diagnostic-return-stack-address)
     return initializer_list<int>{ints...};  // returns a temporary object
 }
+
 void fineFunction() {
     for (int i : {1, 2, 3}) {
         cout << i << ", ";
     }
     cout << "\n";
 }
+
 void fineUntilItExplodesFunction() {
     for (int i : f<1, 2, 3>()) {
         cout << i << ", ";
     }
     cout << "\n";
 }
-TEST(InPlaceConstructionExamplesTest, InitializerListHasConstStorageSoWeCantLocalInitializerLists) {
-    fineFunction();  // Prints 1, 2, 3,
 
+TEST(InPlaceConstructionExamplesTest, InitializerListHasConstStorageSoWeCantLocalInitializerLists) {
+    fineFunction();                 // Prints 1, 2, 3,
     fineUntilItExplodesFunction();  // Prints garbage values
     // It has garbage values because f returns using a temporary object.
 }
+
 }  // namespace InitializerListHasConstStorageSoWeCantLocalInitializerLists
 
 namespace InitializerListHasConstStorageSoWeCantUseMoveOnlyObjects {
@@ -408,6 +437,7 @@ TEST(InPlaceConstructionExamplesTest, InitializerListHasConstStorageSoWeCantUseM
 }  // namespace InitializerListHasConstStorageSoWeCantUseMoveOnlyObjects
 
 namespace InitializerListWithMap {
+
 using Arg = ClassesWithBasicFunctionWorks::Arg;
 using S = ClassesWithBasicFunctionWorks::S;
 
@@ -416,9 +446,11 @@ TEST(InPlaceConstructionExamplesTest, InitializerListWithMap) {
 
     M m{{0, Arg{}}};  // 1 value construction, 1 copy construction, 2 destruction
 }
+
 }  // namespace InitializerListWithMap
 
 namespace PuttingThingsWithMapUsingBracketOperator {
+
 using Arg = ClassesWithBasicFunctionWorks::Arg;
 using S = ClassesWithBasicFunctionWorks::S;
 
@@ -428,9 +460,11 @@ TEST(InPlaceConstructionExamplesTest, PuttingThingsWithMapUsingBracketOperator) 
 
     m[0] = Arg{};  // 1 value construction, 1 default construction, 1 move assignment, 2 destruction
 }
+
 }  // namespace PuttingThingsWithMapUsingBracketOperator
 
 namespace PuttingThingsWithMapUsingInsert {
+
 using Arg = ClassesWithBasicFunctionWorks::Arg;
 using S = ClassesWithBasicFunctionWorks::S;
 
@@ -440,9 +474,11 @@ TEST(InPlaceConstructionExamplesTest, PuttingThingsWithMapUsingInsert) {
 
     m.insert(make_pair(0, Arg{}));  // 1 value construction, 1 destruction
 }
+
 }  // namespace PuttingThingsWithMapUsingInsert
 
 namespace PuttingThingsWithMapUsingEmplace {
+
 using Arg = ClassesWithBasicFunctionWorks::Arg;
 using S = ClassesWithBasicFunctionWorks::S;
 
@@ -452,9 +488,11 @@ TEST(InPlaceConstructionExamplesTest, PuttingThingsWithMapUsingEmplace) {
 
     m.emplace(0, Arg{});  // 1 value construction, 1 destruction
 }
+
 }  // namespace PuttingThingsWithMapUsingEmplace
 
 namespace PuttingThingsWithMapWithDefaultConstruction {
+
 using Arg = ClassesWithBasicFunctionWorks::Arg;
 using S = ClassesWithBasicFunctionWorks::S;
 
@@ -467,12 +505,13 @@ TEST(InPlaceConstructionExamplesTest, PuttingThingsWithMapWithDefaultConstructio
     m.emplace(piecewise_construct, forward_as_tuple(2), forward_as_tuple());
     // 1 default construction, 1 destruction
 }
+
 }  // namespace PuttingThingsWithMapWithDefaultConstruction
 
 namespace PuttingThingsWithMapWithReturnOfAFunctionCall {
+
 using Arg = ClassesWithBasicFunctionWorks::Arg;
 using S = ClassesWithBasicFunctionWorks::S;
-
 S getS() { return S{1}; }
 
 TEST(InPlaceConstructionExamplesTest, PuttingThingsWithMapWithReturnOfAFunctionCall) {
@@ -482,12 +521,13 @@ TEST(InPlaceConstructionExamplesTest, PuttingThingsWithMapWithReturnOfAFunctionC
     m.emplace(0, getS());  // 1 value construction, 1 move construction, 2 destructions, still not good
     m.emplace(piecewise_construct, forward_as_tuple(1), forward_as_tuple(getS()));
     // 1 value construction, 1 move construction, 2 destructions, still not good
-
     // Check Superconstructing super elider, Arthur O' Dwyer
 }
+
 }  // namespace PuttingThingsWithMapWithReturnOfAFunctionCall
 
 namespace OptionalConstruction {
+
 using Arg = ClassesWithBasicFunctionWorks::Arg;
 using S = ClassesWithBasicFunctionWorks::S;
 
@@ -499,9 +539,11 @@ TEST(InPlaceConstructionExamplesTest, OptionalConstruction) {
     OptionalS opt3(in_place, 1);       // 1 value construction, 1 destruction, good
     OptionalS opt4(make_optional(1));  // 1 value construction, 1 destruction, good
 }
+
 }  // namespace OptionalConstruction
 
 namespace OptionalAssignment {
+
 using Arg = ClassesWithBasicFunctionWorks::Arg;
 using S = ClassesWithBasicFunctionWorks::S;
 
@@ -515,9 +557,11 @@ TEST(InPlaceConstructionExamplesTest, OptionalAssignment) {
     opt2 = S{1};      // 1 value construction, 1 move construction, 2 destructions, not good
     opt3.emplace(1);  // 1 value construction, 1 destruction, good
 }
+
 }  // namespace OptionalAssignment
 
 namespace VariantConstruction {
+
 using Arg = ClassesWithBasicFunctionWorks::Arg;
 using S = ClassesWithBasicFunctionWorks::S;
 
@@ -529,9 +573,11 @@ TEST(InPlaceConstructionExamplesTest, VariantConstruction) {
     VariantS opt3(in_place_type<S>, 1);   // 1 value construction, 1 destruction, good
     VariantS opt4(in_place_index<1>, 1);  // 1 value construction, 1 destruction, good
 }
+
 }  // namespace VariantConstruction
 
 namespace VariantAssignment {
+
 using Arg = ClassesWithBasicFunctionWorks::Arg;
 using S = ClassesWithBasicFunctionWorks::S;
 
@@ -546,6 +592,7 @@ TEST(InPlaceConstructionExamplesTest, VariantAssignment) {
     opt3.emplace<S>(1);  // 1 value construction, 1 destruction, good
     opt3.emplace<1>(1);  // 1 value construction, 1 destruction, good
 }
+
 }  // namespace VariantAssignment
 
 }  // namespace alba

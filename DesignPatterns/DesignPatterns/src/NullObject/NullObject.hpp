@@ -6,30 +6,27 @@ namespace NullObject {
 
 // NullObject
 // implements default behavior for the interface common to all classes
-
 class AbstractObject {
 public:
     virtual ~AbstractObject() = default;
-
     virtual void doSomething() = 0;
     // ...
 };
 
 // RealObject
 // defines a concrete subclass of AbstractObject whose instances provide useful behavior that Client expects.
-
 class RealObject : public AbstractObject {
 public:
     void doSomething() override {
         // Do something for a valid object.
         std::cout << "RealObject did something.\n";
     }
+
     // ...
 };
 
 // NullObject
 // provides an interface identical to AbstractObject's so that a null object can be substituted for a real object
-
 class NullObject : public AbstractObject {
 public:
     void doSomething() override {

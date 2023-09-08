@@ -78,6 +78,15 @@ private:
         return m_trieTransitions.getEntry(currentState, character);
     }
 
+    Index getNextStateByArtificialConnection(Index const currentState, Index const character) {
+        Index nextState = m_trieArtificialConnections[currentState];
+        while (isUnusedState(m_trieTransitions.getEntry(nextState, character))) {
+            nextState = m_trieArtificialConnections[nextState];
+        }
+        nextState = m_trieTransitions.getEntry(nextState, character);
+        return nextState;
+    }
+
     void initialize() {
         removeEmptyQueries();
         assert(m_queries.size() < MAX_NUMBER_OF_QUERIES);
@@ -132,15 +141,6 @@ private:
                 nearestStates.emplace_front(nextStateFromStart);
             }
         }
-    }
-
-    Index getNextStateByArtificialConnection(Index const currentState, Index const character) {
-        Index nextState = m_trieArtificialConnections[currentState];
-        while (isUnusedState(m_trieTransitions.getEntry(nextState, character))) {
-            nextState = m_trieArtificialConnections[nextState];
-        }
-        nextState = m_trieTransitions.getEntry(nextState, character);
-        return nextState;
     }
 
     void updateConnectionsAndMatchBitsOfEquivalentStatesThruBfs(DequeOfIndexes& nearestStates) {

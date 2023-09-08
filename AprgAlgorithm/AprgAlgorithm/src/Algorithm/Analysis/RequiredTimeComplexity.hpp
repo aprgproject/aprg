@@ -1,9 +1,7 @@
 #pragma once
 
 namespace alba {
-
 namespace algorithm {}
-
 }  // namespace alba
 
 // Given the input size, we can try to guess the required time complexity of the algorithm that solves the problem.

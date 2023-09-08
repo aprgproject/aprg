@@ -7,7 +7,6 @@
 namespace alba::booleanAlgebra {
 
 using UnaryBooleanFunction = std::function<bool(Term const&)>;
-
 Term getNegation(Term const& term);
 Term getConjunction(Term const& term1, Term const& term2);
 Term getInclusiveDisjunction(Term const& term1, Term const& term2);

@@ -13,15 +13,6 @@ using namespace std;
 
 namespace alba::AprgAudio {
 
-void retrieveDeltas(Samples& deltaSamples, Samples const& pointerOfSampleToCheck, int const numberOfSamples) {
-    deltaSamples.reserve(numberOfSamples);
-    double previousValue(0);
-    for (int i = 0; i < numberOfSamples; ++i) {
-        deltaSamples.emplace_back(pointerOfSampleToCheck[i] - previousValue);
-        previousValue = pointerOfSampleToCheck[i];
-    }
-}
-
 double getSumInRange(Samples const& samples, int const startIndexIncluded, int const endIndexExcluded) {
     return accumulate(samples.cbegin() + startIndexIncluded, samples.cbegin() + endIndexExcluded, 0.0);
 }
@@ -51,12 +42,6 @@ double getCommonMultiplierUsingSumAndNumberOfItems(double const sum, int const n
     return multiplier;
 }
 
-void multiplyValueToAllSamples(Samples& samples, double const value) {
-    for (double& sample : samples) {
-        sample *= value;
-    }
-}
-
 DoubleOptional compareDeltasAndGetDifference(
     Samples const& deltaSamples1, Samples const& deltaSamples2, double const multiplierToSample2,
     int const startOfDeltaSamples1, int const startOfDeltaSamples2, int const numberOfSamples) {
@@ -83,6 +68,21 @@ DoubleOptional compareDeltasAndGetDifference(
         result = totalDifference / numberOfSamples;
     }
     return result;
+}
+
+void retrieveDeltas(Samples& deltaSamples, Samples const& pointerOfSampleToCheck, int const numberOfSamples) {
+    deltaSamples.reserve(numberOfSamples);
+    double previousValue(0);
+    for (int i = 0; i < numberOfSamples; ++i) {
+        deltaSamples.emplace_back(pointerOfSampleToCheck[i] - previousValue);
+        previousValue = pointerOfSampleToCheck[i];
+    }
+}
+
+void multiplyValueToAllSamples(Samples& samples, double const value) {
+    for (double& sample : samples) {
+        sample *= value;
+    }
 }
 
 void searchForBestSampleIndexes(

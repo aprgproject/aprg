@@ -4,6 +4,20 @@ namespace alba::FakeStateMachine {
 
 SampleStateMachine::SampleStateMachine(State const stateIdentifier) : AlbaBaseStateMachine(stateIdentifier) {}
 
+void SampleStateMachine::processStateWithNoValue(Action const action) {
+    switch (action) {
+        case Action::InitializeTo1:
+            saveNextState(State::State1);
+            break;
+        case Action::Increase:
+        case Action::Decrease:
+        case Action::NoAction:
+        case Action::MultiplyBy2:
+            saveNextState(State::StateWithNoValue);
+            break;
+    }
+}
+
 void SampleStateMachine::processInput(Action const& action) {
     switch (m_state) {
         case State::StateWithNoValue:
@@ -23,20 +37,6 @@ void SampleStateMachine::processInput(Action const& action) {
             break;
         default:
             assert(false);
-            break;
-    }
-}
-
-void SampleStateMachine::processStateWithNoValue(Action const action) {
-    switch (action) {
-        case Action::InitializeTo1:
-            saveNextState(State::State1);
-            break;
-        case Action::Increase:
-        case Action::Decrease:
-        case Action::NoAction:
-        case Action::MultiplyBy2:
-            saveNextState(State::StateWithNoValue);
             break;
     }
 }

@@ -7,10 +7,8 @@
 #include <vector>
 
 namespace alba::booleanAlgebra {
-
 using TermPair = std::pair<Term, Term>;
 using VariableNames = std::vector<std::string>;
 using VariableNamesSet = std::set<std::string>;
 using TermSet = std::set<Term>;
-
 }  // namespace alba::booleanAlgebra

@@ -12,9 +12,7 @@ public:
     // ...
     // x = an mod mn
     // This algorithm solves for x.
-
     ChineseRemainderTheorem(UnsignedIntegers const& numbers, UnsignedIntegers const& modulos);
-
     [[nodiscard]] UnsignedInteger getSolutionValue() const;
     [[nodiscard]] UnsignedInteger getAnotherSolutionValue(UnsignedInteger const multiplier) const;
 

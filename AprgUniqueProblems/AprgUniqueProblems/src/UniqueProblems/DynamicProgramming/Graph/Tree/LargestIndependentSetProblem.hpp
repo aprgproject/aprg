@@ -17,10 +17,8 @@ public:
     using ChildrenInTree = algorithm::ChildrenInTree<Vertex>;
     using VertexToCountMap = std::map<Vertex, Count>;
     using VertexToSetOfVerticesMap = std::map<Vertex, SetOfVertices>;
-    static constexpr int UNUSED_COUNT = std::numeric_limits<int>::max();
-
     LargestIndependentSetProblem(Graph const& nAryTreeGraph, Vertex const rootOfTree);
-
+    static constexpr int UNUSED_COUNT = std::numeric_limits<int>::max();
     [[nodiscard]] Count getMaximumCountUsingNaiveRecursion() const;
     [[nodiscard]] Count getMaximumCountUsingMemoizationDP() const;
     [[nodiscard]] SetOfVertices getMaximumSetUsingMemoizationDP() const;
@@ -30,7 +28,6 @@ private:
     Count getMaximumCountUsingMemoizationDP(VertexToCountMap& vertexToCountMap, Vertex const vertex) const;
     SetOfVertices getMaximumSetUsingMemoizationDP(
         VertexToSetOfVerticesMap& vertexToMaximumSetMap, Vertex const vertex) const;
-
     Graph m_nAryTreeGraph;
     Vertex m_rootOfTree;
     ChildrenInTree m_childrenInTree;

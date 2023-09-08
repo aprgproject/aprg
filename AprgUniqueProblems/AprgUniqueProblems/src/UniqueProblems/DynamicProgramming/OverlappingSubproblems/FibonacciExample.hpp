@@ -14,16 +14,15 @@ public:
     using NumberSet = std::set<Number>;
     using NumberMatrix = matrix::AlbaMatrix<Number>;
     static constexpr Number UNUSED_VALUE = std::numeric_limits<Number>::max();
-
-    [[nodiscard]] Number getNthFibonacciUsingNaiveRecursion(Number const number) const;
-    Number getNthFibonacciUsingMemoizationDP(Number const number);
     static Number getNthFibonacciUsingIterativeDP(Number const number);
     static Number getNthFibonacciUsingIterativeDPAndSpaceEfficient(Number const number);
     static Number getNthFibonacciNumberUsingBinetsFormula(Number const number);
     static Number getNthFibonacciUsingMatrixMultiplication(Number const number);
     static Number getNthFibonacciUsingMatrixPowerWithLogarithmicTime(Number const number);
-    Number getNthFibonacciUsingLogarithmicMemoizationDP(Number const number);
     static Number getNthFibonacciUsingLogarithmicIterativeDP(Number const number);
+    [[nodiscard]] Number getNthFibonacciUsingNaiveRecursion(Number const number) const;
+    Number getNthFibonacciUsingMemoizationDP(Number const number);
+    Number getNthFibonacciUsingLogarithmicMemoizationDP(Number const number);
 
 private:
     Number getNthFibonacciUsingMemoizationDP(Numbers& memoizationData, Number const number);

@@ -15,11 +15,9 @@ template <typename Vertex>
 class GeneralPathCover {
 public:
     // Path cover are set of paths that covers nodes.
-
     // A general path cover is a path cover where a node can belong to more than one path.
     // A minimum general path cover may be smaller than a minimum node-disjoint path cover, because a node can be used
     // multiple times in paths.
-
     using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Edge = typename GraphTypes<Vertex>::Edge;
@@ -37,8 +35,15 @@ public:
         SinkSourceFlowNetwork<VertexWithLeftRight, int, DirectedGraphWithListOfEdges<VertexWithLeftRight>>;
     using FordFulkerson = FordFulkersonUsingBfs<FlowNetwork>;
     using TransitiveClosure = TransitiveClosureWithMap<Vertex>;
-
     explicit GeneralPathCover(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}
+
+    [[nodiscard]] int getSizeOfMaximumAntichain(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
+        // Using Dilworth's theorem:
+        // An antichain is a set of nodes of a graph such that there is no path from any node to another node using the
+        // edges of the graph. Dilworth’s theorem states that in a directed acyclic graph, the size of a minimum general
+        // path cover equals the size of a maximum antichain.
+        return getGeneralPathCover(newSourceVertex, newSinkVertex).size();
+    }
 
     [[nodiscard]] Paths getGeneralPathCover(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         VertexPairs vertexPairs(getConnectedVerticesOfGeneralPathCover(newSourceVertex, newSinkVertex));
@@ -52,15 +57,6 @@ public:
             result = getConnectedVerticesOfGeneralPathCoverUsingFordFulkerson(newSourceVertex, newSinkVertex);
         }
         return result;
-    }
-
-    [[nodiscard]] int getSizeOfMaximumAntichain(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
-        // Using Dilworth's theorem:
-        // An antichain is a set of nodes of a graph such that there is no path from any node to another node using the
-        // edges of the graph. Dilworth’s theorem states that in a directed acyclic graph, the size of a minimum general
-        // path cover equals the size of a maximum antichain.
-
-        return getGeneralPathCover(newSourceVertex, newSinkVertex).size();
     }
 
 private:
@@ -154,7 +150,6 @@ private:
         // A minimum general path cover can be found almost like a minimum node-disjoint path cover.
         // It suffices to add some new edges to the matching graph so that there is an edge a->b always
         // when there is a path from a to b in the original graph (possibly through several edges).
-
         VertexWithLeftRight sourceVertexWithLeft{newSourceVertex, false};
         VertexWithLeftRight sinkVertexWithRight{newSinkVertex, true};
         FlowNetwork flowNetwork(sourceVertexWithLeft, sinkVertexWithRight);

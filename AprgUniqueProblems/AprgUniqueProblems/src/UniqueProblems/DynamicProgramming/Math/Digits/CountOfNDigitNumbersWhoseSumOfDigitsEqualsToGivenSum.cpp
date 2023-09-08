@@ -15,7 +15,6 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count
 CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingNaiveRecursion() const {
     // Time Complexity: Exponential -> Since there are two calls per iteration:  O(2^n)
     // Auxiliary Space: Constant
-
     Count result(0);
     if (m_numberOfDigits > 0) {
         result = getCountUsingNaiveRecursion(m_targetSumOfDigits, m_numberOfDigits - 1);
@@ -27,7 +26,6 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count
 CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingMemoizationDP() const {
     // Time Complexity: O(numberOfDigits * sumOfDigits * 9) (same as iterative)
     // Auxiliary Space: O(numberOfDigits * sumOfDigits)
-
     Count result(0);
     if (m_numberOfDigits > 0) {
         CountMatrix countMatrix(m_targetSumOfDigits + 1, m_numberOfDigits, UNUSED_COUNT);
@@ -40,7 +38,6 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count
 CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingIterativeDP() const {
     // Time Complexity: O(numberOfDigits * sumOfDigits * 9)
     // Auxiliary Space: O(numberOfDigits * sumOfDigits)
-
     Count result(0);
     if (m_numberOfDigits > 0) {
         CountMatrix countMatrix(m_targetSumOfDigits + 1, m_numberOfDigits, 0);
@@ -66,7 +63,6 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count
 CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingIterativeDPAndSpaceEfficient() const {
     // Time Complexity: O(numberOfDigits * sumOfDigits * 9)
     // Auxiliary Space: O(sumOfDigits)
-
     Count result(0);
     if (m_numberOfDigits > 0) {
         Counts partialSumToCount(m_targetSumOfDigits + 1);
@@ -90,7 +86,6 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count
 CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountBySearchingValuesWith1And9Increment() const {
     // Time Complexity: O(possible values * numberOfDigits)
     // Auxiliary Space: O(1)
-
     Count result(0);
     if (m_targetSumOfDigits == 0) {
         result = 1;

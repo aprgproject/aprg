@@ -25,8 +25,36 @@ public:
     using MintermToImplicantsMap = std::map<Minterm, Implicants>;
     using InputToOutputMap = std::map<Minterm, LogicalValue>;
     using ComputationalTable = std::map<Minterm, MintermToImplicantsMap>;
-
     QuineMcCluskey() = default;
+
+    [[nodiscard]] bool doImplicantsExistAt(int const numberOfOnes, int const commonalityCount) const {
+        bool result(false);
+        auto numberOfOnesIt = m_computationalTable.find(numberOfOnes);
+        if (numberOfOnesIt != m_computationalTable.end()) {
+            MintermToImplicantsMap const& implicantsMap(numberOfOnesIt->second);
+            result = implicantsMap.find(commonalityCount) != implicantsMap.end();
+        }
+        return result;
+    }
+
+    [[nodiscard]] bool isASubset(std::set<int> const& smaller, std::set<int> const& larger) const {
+        bool result(false);
+        if (smaller.size() <= larger.size()) {
+            result = true;
+            for (auto const& elementOfSmaller : smaller) {
+                auto it = larger.find(elementOfSmaller);
+                if (it == larger.cend()) {
+                    result = false;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    [[nodiscard]] int getNumberOfOnes(Minterm const value) const {
+        return AlbaBitValueUtilities<Minterm>::getNumberOfOnes(value);
+    }
 
     [[nodiscard]] LogicalValue getOutput(Minterm const input) const {
         LogicalValue result(LogicalValue::False);
@@ -35,10 +63,6 @@ public:
             result = it->second;
         }
         return result;
-    }
-
-    [[nodiscard]] int getNumberOfOnes(Minterm const value) const {
-        return AlbaBitValueUtilities<Minterm>::getNumberOfOnes(value);
     }
 
     [[nodiscard]] Implicants getImplicants(int const numberOfOnes, int const commonalityCount) const {
@@ -80,58 +104,6 @@ public:
         return result;
     }
 
-    [[nodiscard]] bool doImplicantsExistAt(int const numberOfOnes, int const commonalityCount) const {
-        bool result(false);
-        auto numberOfOnesIt = m_computationalTable.find(numberOfOnes);
-        if (numberOfOnesIt != m_computationalTable.end()) {
-            MintermToImplicantsMap const& implicantsMap(numberOfOnesIt->second);
-            result = implicantsMap.find(commonalityCount) != implicantsMap.end();
-        }
-        return result;
-    }
-
-    void setInputOutput(Minterm const input, LogicalValue const output) {
-        if (output == LogicalValue::True || output == LogicalValue::DontCare) {
-            m_inputToOutputMap.emplace(input, output);
-        }
-    }
-
-    void findAllCombinations() {
-        int commonalityCount = 0;
-        bool areAllCombinationsFound(false);
-        while (!areAllCombinationsFound) {
-            bool isCombinationFound(false);
-            for (int numberOfOnes = 0; numberOfOnes + 1 < static_cast<int>(m_computationalTable.size());
-                 ++numberOfOnes) {
-                findCombinationOfImplicants(numberOfOnes, commonalityCount);
-                isCombinationFound = isCombinationFound | doImplicantsExistAt(numberOfOnes, commonalityCount + 1);
-            }
-            areAllCombinationsFound = !isCombinationFound;
-            ++commonalityCount;
-        }
-        m_maxCommonalityCount = (commonalityCount > 0) ? commonalityCount - 1 : 0;
-    }
-
-    void fillComputationalTableWithMintermsWithZeroCommonalityCount() {
-        for (auto const& [input, output] : m_inputToOutputMap) {
-            addMintermForZeroCommonalityCount(input);
-        }
-    }
-
-    void findCombinationOfImplicants(int const numberOfOnes, int const commonalityCount) {
-        if (numberOfOnes + 1 < static_cast<int>(m_computationalTable.size())) {
-            Implicants const& implicants1(m_computationalTable[numberOfOnes][commonalityCount]);
-            Implicants const& implicants2(m_computationalTable[numberOfOnes + 1][commonalityCount]);
-            for (Implicant const& implicant1 : implicants1) {
-                for (Implicant const& implicant2 : implicants2) {
-                    if (implicant1.isCompatible(implicant2)) {
-                        m_computationalTable[numberOfOnes][commonalityCount + 1].emplace(implicant1 + implicant2);
-                    }
-                }
-            }
-        }
-    }
-
     [[nodiscard]] std::string getComputationTableString() const {
         std::stringstream ss;
         for (auto const& [numberOfOnes, commonalityCountImplicantsPairs] : m_computationalTable) {
@@ -149,25 +121,9 @@ public:
         return getBestPrimeImplicantsPetricksMethod(primeImplicants);
     }
 
-    [[nodiscard]] bool isASubset(std::set<int> const& smaller, std::set<int> const& larger) const {
-        bool result(false);
-        if (smaller.size() <= larger.size()) {
-            result = true;
-            for (auto const& elementOfSmaller : smaller) {
-                auto it = larger.find(elementOfSmaller);
-                if (it == larger.cend()) {
-                    result = false;
-                    break;
-                }
-            }
-        }
-        return result;
-    }
-
     [[nodiscard]] Implicants getBestPrimeImplicantsPetricksMethod(Implicants const& primeImplicants) const {
         // Based from this: https://en.wikipedia.org/wiki/Petrick%27s_method
         // Remember this simplifications:  X + XY = X and XX = X and X+X=X
-
         using Ids = std::set<int>;
         using InnerTerms = std::vector<Ids>;
         using OuterTerms = std::deque<InnerTerms>;
@@ -354,6 +310,48 @@ public:
             }
         }
         return stringHelper::convertToString(displayTable);
+    }
+
+    void setInputOutput(Minterm const input, LogicalValue const output) {
+        if (output == LogicalValue::True || output == LogicalValue::DontCare) {
+            m_inputToOutputMap.emplace(input, output);
+        }
+    }
+
+    void findAllCombinations() {
+        int commonalityCount = 0;
+        bool areAllCombinationsFound(false);
+        while (!areAllCombinationsFound) {
+            bool isCombinationFound(false);
+            for (int numberOfOnes = 0; numberOfOnes + 1 < static_cast<int>(m_computationalTable.size());
+                 ++numberOfOnes) {
+                findCombinationOfImplicants(numberOfOnes, commonalityCount);
+                isCombinationFound = isCombinationFound | doImplicantsExistAt(numberOfOnes, commonalityCount + 1);
+            }
+            areAllCombinationsFound = !isCombinationFound;
+            ++commonalityCount;
+        }
+        m_maxCommonalityCount = (commonalityCount > 0) ? commonalityCount - 1 : 0;
+    }
+
+    void fillComputationalTableWithMintermsWithZeroCommonalityCount() {
+        for (auto const& [input, output] : m_inputToOutputMap) {
+            addMintermForZeroCommonalityCount(input);
+        }
+    }
+
+    void findCombinationOfImplicants(int const numberOfOnes, int const commonalityCount) {
+        if (numberOfOnes + 1 < static_cast<int>(m_computationalTable.size())) {
+            Implicants const& implicants1(m_computationalTable[numberOfOnes][commonalityCount]);
+            Implicants const& implicants2(m_computationalTable[numberOfOnes + 1][commonalityCount]);
+            for (Implicant const& implicant1 : implicants1) {
+                for (Implicant const& implicant2 : implicants2) {
+                    if (implicant1.isCompatible(implicant2)) {
+                        m_computationalTable[numberOfOnes][commonalityCount + 1].emplace(implicant1 + implicant2);
+                    }
+                }
+            }
+        }
     }
 
 private:

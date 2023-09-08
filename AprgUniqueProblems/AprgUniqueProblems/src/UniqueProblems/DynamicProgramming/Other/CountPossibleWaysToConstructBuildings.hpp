@@ -11,10 +11,8 @@ class CountPossibleWaysToConstructBuildings {
 public:
     using Count = int;
     using Index = int;
-    static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
-
     explicit CountPossibleWaysToConstructBuildings(Count const numberOfSections);
-
+    static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
     [[nodiscard]] Count getNumberOfWaysUsingCountOfBuildingAndSpaces() const;
     [[nodiscard]] Count getNumberOfWaysUsingFibonacciNumber() const;
     [[nodiscard]] Count getNumberOfWaysUsingCombinations() const;

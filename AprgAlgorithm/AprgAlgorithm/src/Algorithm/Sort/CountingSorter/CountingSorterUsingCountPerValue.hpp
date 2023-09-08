@@ -14,8 +14,8 @@ public:
     using ArrayOfCountPerValue = std::array<int, MAX_NUMBER_OF_VALUES>;
     using ValueToIndexableValueFunction = std::function<int(Value const&)>;
     using IndexableValueToValueFunction = std::function<Value(int const)>;
-
     CountingSorterUsingCountPerValue() = delete;
+
     CountingSorterUsingCountPerValue(
         ValueToIndexableValueFunction const& valueToIndexableValueFunction,
         IndexableValueToValueFunction const& indexableValueToValueFunction)

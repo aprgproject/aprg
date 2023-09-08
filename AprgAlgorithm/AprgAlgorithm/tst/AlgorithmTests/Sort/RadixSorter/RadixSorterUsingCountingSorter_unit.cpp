@@ -80,14 +80,12 @@ TEST(RadixSorterUsingCountingSorterTest, SortWorksOnCharactersUsingExample2) {
 }
 
 // CANNOT SORT STD::LIST, because CountingSorterUsingNewPositions is used in RadixSorter
-
 TEST(RadixSorterUsingCountingSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
     SmallIntegerSorter sorter(getNumberOfNibblesForInteger, getNibbleAtForSmallInteger);
     testSortUsingExample1WithPositiveAndNegativeIntegers<SmallIntegerSorter, Integers>(sorter);
 }
 
 // CANNOT SORT DOUBLE VALUES
-
 TEST(RadixSorterUsingCountingSorterTest, SortWorksOnStringsUsingExample1) {
     StringsSorter sorter(getNumberOfCharactersForStrings, getCharacterAtForString);
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);

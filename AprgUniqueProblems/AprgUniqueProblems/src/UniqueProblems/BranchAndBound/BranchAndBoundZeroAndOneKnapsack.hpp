@@ -10,15 +10,16 @@ public:
     using Weight = int;
     using Profit = int;
     using Item = std::pair<Weight, Profit>;
+
     struct Node {
         Index level;
         Profit maxPossibleProfit;
         Profit profit;
         Weight weight;
     };
+
     using Profits = std::vector<Profit>;
     using Items = std::vector<Item>;
-
     [[nodiscard]] static Profit getBestProfit(Weight const maximumWeight, Items const& items);
 
 private:

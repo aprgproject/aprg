@@ -14,7 +14,6 @@ public:
     using Value = typename Values::value_type;
     using Bucket = std::vector<Value>;
     using Buckets = std::array<Bucket, NUMBER_OF_BUCKETS>;
-
     BucketSorter() = delete;
     BucketSorter(Value const& minValue, Value const& maxValue) : m_minValue(minValue), m_maxValue(maxValue) {}
 

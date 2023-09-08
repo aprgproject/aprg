@@ -3,7 +3,6 @@
 #include <Algebra/Term/TermTypes/Term.hpp>
 
 namespace alba::algebra {
-
 Term getSummationOfArithmeticSeries(std::string const& countVariable);
 Term getSummationOfArithmeticSeriesForSquares(std::string const& countVariable);
 Term getSummationOfArithmeticSeriesForCubes(std::string const& countVariable);
@@ -11,5 +10,4 @@ Term getSummationOfFiniteGeometricSeries(std::string const& base, std::string co
 Term getSummationOfInfiniteGeometricSeries(std::string const& base);
 Term getSummationOfHarmonicSeries(std::string const& countVariable);
 Term getSummationOfPowersOfTwo(std::string const& countVariable);
-
 }  // namespace alba::algebra

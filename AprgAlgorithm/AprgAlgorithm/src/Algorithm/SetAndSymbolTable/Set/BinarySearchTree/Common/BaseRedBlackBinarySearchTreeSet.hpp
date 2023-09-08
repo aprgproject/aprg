@@ -13,7 +13,7 @@ class BaseRedBlackBinarySearchTreeSet
     : public BaseSetWithBaseTree<BaseRedBlackBinarySearchTree<Key, Node, BaseSet<Key>>> {
 public:
     ~BaseRedBlackBinarySearchTreeSet() override = default;  // no need for virtual destructor because base destructor is
-                                                            // virtual (similar to other virtual functions)
+    // virtual (similar to other virtual functions)
 };
 
 }  // namespace alba::algorithm

@@ -69,12 +69,10 @@ public:
 // bzip2. It was invented by Michael Burrows and David Wheeler in 1994 while Burrows was working at DEC Systems Research
 // Center in Palo Alto, California. It is based on a previously unpublished transformation discovered by Wheeler in
 // 1983. The algorithm can be implemented efficiently using a suffix array thus reaching linear time complexity.
-
 // When a character string is transformed by the BWT, the transformation permutes the order of the characters.
 // If the original string had several substrings that occurred often,
 // then the transformed string will have several places where a single character is repeated multiple times in a row.
 // The output is easier to compress because it has many repeated characters.
-
 // The transformation works like this:
 // -> 1. Input
 // ^BANANA|
@@ -107,7 +105,6 @@ public:
 // |^BANANA
 // -> 5. Output
 // BNN^AA|A
-
 // The transformation works like this:
 // 1) Add the characters of the encoded string as prefix
 // 2) Sort the strings
@@ -151,7 +148,6 @@ public:
 // ^B
 // |^
 // Continue until length is reached
-
 // To understand why this creates more-easily-compressible data, consider transforming a long English text frequently
 // containing the word "the". Sorting the rotations of this text will group rotations starting with "he " together, and
 // the last character of that rotation (which is also the character before the "he ") will usually be "t", so the result

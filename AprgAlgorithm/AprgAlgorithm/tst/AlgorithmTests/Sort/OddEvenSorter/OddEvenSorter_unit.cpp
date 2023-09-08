@@ -48,7 +48,6 @@ TEST(OddEvenSorterTest, SortWorksOnCharactersUsingExample2) {
 
 // CANNOT SORT STD::LIST
 // The implementation uses indexes so list is not compatible, but this can be changed.
-
 TEST(OddEvenSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
     IntegersSorter sorter;
     testSortUsingExample1WithPositiveAndNegativeIntegers<IntegersSorter, Integers>(sorter);

@@ -78,6 +78,28 @@ void IsolationOfOneVariableOnEqualityEquation::setEquation(Equation const& equat
     }
 }
 
+bool IsolationOfOneVariableOnEqualityEquation::canBeIsolatedBasedOnExponent(
+    AlbaNumber const& identicalExponentForVariable) {
+    return identicalExponentForVariable != 0;
+}
+
+AlbaNumber IsolationOfOneVariableOnEqualityEquation::getIdenticalExponentForVariableIfPossible(
+    string const& variableName, Polynomial const& polynomial) {
+    AlbaNumber exponent;
+    for (Monomial const& monomial : polynomial.getMonomials()) {
+        AlbaNumber currentExponent = monomial.getExponentForVariable(variableName);
+        if (currentExponent != 0) {
+            if (exponent == 0) {
+                exponent = currentExponent;
+            } else if (exponent != currentExponent) {
+                exponent = 0;
+                break;
+            }
+        }
+    }
+    return exponent;
+}
+
 void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
     string const& variableName, Polynomial const& polynomial, Term& termWithVariable, Term& termWithWithoutVariable) {
     AlbaNumber identicalExponentForVariable(getIdenticalExponentForVariableIfPossible(variableName, polynomial));
@@ -128,28 +150,6 @@ void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
             termWithWithoutVariable.simplify();
         }
     }
-}
-
-bool IsolationOfOneVariableOnEqualityEquation::canBeIsolatedBasedOnExponent(
-    AlbaNumber const& identicalExponentForVariable) {
-    return identicalExponentForVariable != 0;
-}
-
-AlbaNumber IsolationOfOneVariableOnEqualityEquation::getIdenticalExponentForVariableIfPossible(
-    string const& variableName, Polynomial const& polynomial) {
-    AlbaNumber exponent;
-    for (Monomial const& monomial : polynomial.getMonomials()) {
-        AlbaNumber currentExponent = monomial.getExponentForVariable(variableName);
-        if (currentExponent != 0) {
-            if (exponent == 0) {
-                exponent = currentExponent;
-            } else if (exponent != currentExponent) {
-                exponent = 0;
-                break;
-            }
-        }
-    }
-    return exponent;
 }
 
 void IsolationOfOneVariableOnEqualityEquation::simplifyForIsolation(Term& term) {

@@ -15,7 +15,6 @@ bool canModuloBeDistributedInPower(
 bool canModuloBeDistributedInEveryIterationOfFactorial(UnsignedInteger const number, UnsignedInteger const modulo);
 bool isFermatTheoremTrue(UnsignedInteger const prime, UnsignedInteger const coPrime);
 bool isEulerTheoremTrue(UnsignedInteger const coPrime1, UnsignedInteger const coPrime2);
-
 UnsignedInteger getModularExponentiation(
     UnsignedInteger const number1, UnsignedInteger const exponent, UnsignedInteger const modulo);
 UnsignedInteger getModularInverseByIteratingPossibleValues(UnsignedInteger const number, UnsignedInteger const modulo);

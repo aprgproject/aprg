@@ -10,10 +10,8 @@ public:
     using Index = int;
     using Value = int;
     using Values = std::vector<Value>;
-    static constexpr Value MIN_VALUE = std::numeric_limits<Value>::min();
-
     explicit LongestEqualLengthSubArraysWithSameSum(Values const& values);
-
+    static constexpr Value MIN_VALUE = std::numeric_limits<Value>::min();
     [[nodiscard]] Index getLongestTotalLengthOfSubArraysUsingPartialSums() const;
     [[nodiscard]] Index getLongestTotalLengthOfSubArraysByAccumulatingSum() const;
 

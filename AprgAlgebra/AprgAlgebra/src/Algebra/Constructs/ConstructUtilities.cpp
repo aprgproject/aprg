@@ -112,6 +112,37 @@ TermRaiseToANumber createTermRaiseToANumberFromExpression(Expression const& expr
     return result;
 }
 
+TermRaiseToTerms createTermRaiseToTermsFromTerm(Term const& term) {
+    TermRaiseToTerms result;
+    if (term.isMonomial()) {
+        TermRaiseToANumber termRaiseToANumber(createTermRaiseToANumberFromMonomial(term.getAsMonomial()));
+        result.setBaseAndExponent(termRaiseToANumber.getBase(), termRaiseToANumber.getExponent());
+    } else if (term.isPolynomial()) {
+        TermRaiseToANumber termRaiseToANumber(createTermRaiseToANumberFromPolynomial(term.getAsPolynomial()));
+        result.setBaseAndExponent(termRaiseToANumber.getBase(), termRaiseToANumber.getExponent());
+    } else if (term.isExpression()) {
+        result = createTermRaiseToTermsFromExpression(term.getAsExpression());
+    }
+    if (result.isEmpty()) {
+        result = TermRaiseToTerms(term, 1);
+    }
+    result.getBaseReference().simplify();
+    return result;
+}
+
+TermRaiseToTerms createTermRaiseToTermsFromExpression(Expression const& expression) {
+    TermRaiseToTerms result;
+    if (OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel()) {
+        createTermRaiseToTermsFromRaiseToPowerExpression(result, expression);
+    } else if (OperatorLevel::MultiplicationAndDivision == expression.getCommonOperatorLevel()) {
+        createTermRaiseToTermsFromMultiplicationAndDivisionExpression(result, expression);
+    }
+    if (result.isEmpty()) {
+        result = TermRaiseToTerms(convertExpressionToSimplestTerm(expression), 1);
+    }
+    return result;
+}
+
 void createTermRaiseToANumberFromRaiseToPowerExpression(TermRaiseToANumber& result, Expression const& expression) {
     TermsWithDetails raiseToPowerTerms(expression.getTermsWithAssociation().getTermsWithDetails());
     if (raiseToPowerTerms.size() == 1) {
@@ -179,37 +210,6 @@ void createTermRaiseToANumberFromMultiplicationAndDivisionExpression(
         termsRaiseToNumbers.getTermWithDetailsInMultiplicationAndDivisionOperation());
     totWithoutCommonExponent.setAsShouldSimplifyToFactors(true);
     result = TermRaiseToANumber(totWithoutCommonExponent.getCombinedTerm(), commonExponent);
-}
-
-TermRaiseToTerms createTermRaiseToTermsFromTerm(Term const& term) {
-    TermRaiseToTerms result;
-    if (term.isMonomial()) {
-        TermRaiseToANumber termRaiseToANumber(createTermRaiseToANumberFromMonomial(term.getAsMonomial()));
-        result.setBaseAndExponent(termRaiseToANumber.getBase(), termRaiseToANumber.getExponent());
-    } else if (term.isPolynomial()) {
-        TermRaiseToANumber termRaiseToANumber(createTermRaiseToANumberFromPolynomial(term.getAsPolynomial()));
-        result.setBaseAndExponent(termRaiseToANumber.getBase(), termRaiseToANumber.getExponent());
-    } else if (term.isExpression()) {
-        result = createTermRaiseToTermsFromExpression(term.getAsExpression());
-    }
-    if (result.isEmpty()) {
-        result = TermRaiseToTerms(term, 1);
-    }
-    result.getBaseReference().simplify();
-    return result;
-}
-
-TermRaiseToTerms createTermRaiseToTermsFromExpression(Expression const& expression) {
-    TermRaiseToTerms result;
-    if (OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel()) {
-        createTermRaiseToTermsFromRaiseToPowerExpression(result, expression);
-    } else if (OperatorLevel::MultiplicationAndDivision == expression.getCommonOperatorLevel()) {
-        createTermRaiseToTermsFromMultiplicationAndDivisionExpression(result, expression);
-    }
-    if (result.isEmpty()) {
-        result = TermRaiseToTerms(convertExpressionToSimplestTerm(expression), 1);
-    }
-    return result;
 }
 
 void createTermRaiseToTermsFromRaiseToPowerExpression(TermRaiseToTerms& result, Expression const& expression) {

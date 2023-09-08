@@ -22,10 +22,12 @@ bool Limacon::operator==(Limacon const& limacon) const {
 }
 
 bool Limacon::operator!=(Limacon const& limacon) const { return !((*this) == limacon); }
-
 double Limacon::getAValue() const { return m_aValue; }
-
 double Limacon::getBValue() const { return m_bValue; }
+
+double Limacon::calculateRadiusFromTheta(AlbaAngle const& theta) const {
+    return m_aValue + m_bValue * performTrigonometricFunction(theta);
+}
 
 LimaconTrigonometricFunctionType Limacon::getTrigonometricFunctionType() const { return m_trigonometricFunctionType; }
 
@@ -55,10 +57,6 @@ Points Limacon::getPointsForShape(AlbaAngle const& angleInterval) const {
         }
     }
     return result;
-}
-
-double Limacon::calculateRadiusFromTheta(AlbaAngle const& theta) const {
-    return m_aValue + m_bValue * performTrigonometricFunction(theta);
 }
 
 AlbaAngle Limacon::calculateThetaFromRadius(double const radius) const {

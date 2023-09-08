@@ -13,8 +13,8 @@ public:
     using Value = typename Values::value_type;
     using GetDigitAtFunction = std::function<DigitValue(Value const&, int const)>;
     using IsDigitFunction = std::function<bool(Value const&, int const)>;
-
     RadixSorterUsingQuickSortWith3WayPartitioning() = delete;
+
     RadixSorterUsingQuickSortWith3WayPartitioning(
         GetDigitAtFunction const& getDigitAtFunction, IsDigitFunction const& isDigitValidFunction)
         : m_getDigitAtFunction(getDigitAtFunction), m_isDigitValidFunction(isDigitValidFunction) {}
@@ -41,7 +41,6 @@ private:
         int i = lowContainerIndex + 1;
         int highIndexWithEqualValue = highContainerIndex;
         Value const& partitionValue(valuesToSort[lowContainerIndex]);  // use first value as partition
-
         DigitValue partitionDigit(m_getDigitAtFunction(partitionValue, digitIndex));
         bool shouldEqualPartProceed(m_isDigitValidFunction(partitionValue, digitIndex));
         while (i <= highIndexWithEqualValue) {
@@ -77,7 +76,6 @@ private:
 // -> Less overhead than R-way partition in MSD string sort
 // -> Does not re-examine character equal to the partitioning char (but does re-examine characters not equal to the
 // partitioning char)
-
 // Standard quicksort vs 3-way string radix sort
 // -> Standard quicksort
 // ---> Uses ~2N ln (N) string compares on average
@@ -85,7 +83,6 @@ private:
 // -> 3-way string radix sort
 // ---> Uses ~2N ln (N) character compares on average for random strings
 // ---> Avoids re-comparing long common prefixes
-
 // MSD string sort vs 3-way string radix sort
 // -> MSD string sort
 // ---> Is cache inefficient

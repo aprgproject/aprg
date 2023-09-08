@@ -11,7 +11,6 @@ namespace alba::AprgBitmap {
 class Bitmap {
 public:
     explicit Bitmap(std::string const& path);
-
     [[nodiscard]] BitmapConfiguration getConfiguration() const;
     [[nodiscard]] BitmapSnippet createColorFilledSnippetWithSizeOfWholeBitmap(
         uint8_t const colorByte) const;                                     // implement UT
@@ -25,9 +24,9 @@ public:
     void setSnippetWriteToFile(BitmapSnippet const& snippet) const;
 
 private:
+    static void adjustToTargetLength(int& low, int& high, int const targetLength, int const maxLength);
     void calculateNewCornersBasedOnCenterAndNumberOfBytes(
         BitmapXY& topLeftCorner, BitmapXY& bottomRightCorner, BitmapXY const center, int const numberOfBytes) const;
-    static void adjustToTargetLength(int& low, int& high, int const targetLength, int const maxLength);
     BitmapConfiguration m_configuration;
 };
 

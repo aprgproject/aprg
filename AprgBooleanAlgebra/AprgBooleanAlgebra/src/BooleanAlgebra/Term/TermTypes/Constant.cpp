@@ -4,12 +4,9 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
-Constant::Constant() : m_booleanValue(false) {}
-
 Constant::Constant(bool const boolValue) : m_booleanValue(boolValue) {}
-
+Constant::Constant() : m_booleanValue(false) {}
 bool Constant::operator==(Constant const& second) const { return m_booleanValue == second.m_booleanValue; }
-
 bool Constant::operator!=(Constant const& second) const { return m_booleanValue != second.m_booleanValue; }
 
 bool Constant::operator<(Constant const& second) const {
@@ -23,9 +20,7 @@ Constant Constant::operator~() const {
 }
 
 bool Constant::getBooleanValue() const { return m_booleanValue; }
-
 void Constant::setValue(bool const boolValue) { m_booleanValue = boolValue; }
-
 void Constant::negate() { m_booleanValue = !m_booleanValue; }
 
 ostream& operator<<(ostream& out, Constant const& constant) {

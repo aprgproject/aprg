@@ -11,12 +11,11 @@ namespace alba {
 class AlbaGrepFile {
 public:
     using UpdateFunctionWithPercentage = std::function<void(double)>;
-
     explicit AlbaGrepFile(std::string const& lineCondition);
     AlbaGrepFile(std::string const& lineCondition, UpdateFunctionWithPercentage const& function);
     [[nodiscard]] bool isOutputFileWritten() const;
-    void processFile(std::string const& inputFilePath, std::string const& outputFilePath);
     AlbaGrepStringEvaluator& getGrepEvaluator();
+    void processFile(std::string const& inputFilePath, std::string const& outputFilePath);
 
 private:
     void updateAfterOneIteration(double const percentage);

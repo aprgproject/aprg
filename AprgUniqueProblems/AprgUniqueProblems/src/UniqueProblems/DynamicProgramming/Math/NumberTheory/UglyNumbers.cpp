@@ -13,7 +13,6 @@ UglyNumbers::Number UglyNumbers::getNthUglyNumberByCheckingPreviousUglyNumbersUs
     // Time Complexity: O(n)
     // Auxiliary Space: O(n)
     // -> where n is the value of the ugly number
-
     Number result(0);
     if (m_nth > 0) {
         Booleans isUglyNumber{true};
@@ -37,7 +36,6 @@ UglyNumbers::Number UglyNumbers::getNthUglyNumberByMultiplesUsingIterativeDP() c
     // Time Complexity: O(n)
     // Auxiliary Space: O(n)
     // -> where n is the value of the count of the ugly number
-
     Number result(0);
     if (m_nth > 0) {
         Numbers uglyNumbers{1};

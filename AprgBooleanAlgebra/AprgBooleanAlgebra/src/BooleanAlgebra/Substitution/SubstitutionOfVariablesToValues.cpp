@@ -8,12 +8,12 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
-SubstitutionOfVariablesToValues::SubstitutionOfVariablesToValues(
-    initializer_list<VariableValuePair> const& variablesWithValues) {
+SubstitutionOfVariablesToValues::SubstitutionOfVariablesToValues(VariablesToValuesMap const& variablesWithValues) {
     putVariablesWithValues(variablesWithValues);
 }
 
-SubstitutionOfVariablesToValues::SubstitutionOfVariablesToValues(VariablesToValuesMap const& variablesWithValues) {
+SubstitutionOfVariablesToValues::SubstitutionOfVariablesToValues(
+    initializer_list<VariableValuePair> const& variablesWithValues) {
     putVariablesWithValues(variablesWithValues);
 }
 
@@ -23,8 +23,6 @@ bool SubstitutionOfVariablesToValues::isVariableFound(string const& variable) co
     return m_variableToValuesMap.find(variable) != m_variableToValuesMap.cend();
 }
 
-int SubstitutionOfVariablesToValues::getSize() const { return m_variableToValuesMap.size(); }
-
 bool SubstitutionOfVariablesToValues::getValueForVariable(string const& variable) const {
     bool result(false);
     if (isVariableFound(variable)) {
@@ -32,6 +30,8 @@ bool SubstitutionOfVariablesToValues::getValueForVariable(string const& variable
     }
     return result;
 }
+
+int SubstitutionOfVariablesToValues::getSize() const { return m_variableToValuesMap.size(); }
 
 VariablesToValuesMap const& SubstitutionOfVariablesToValues::getVariableToValuesMap() const {
     return m_variableToValuesMap;

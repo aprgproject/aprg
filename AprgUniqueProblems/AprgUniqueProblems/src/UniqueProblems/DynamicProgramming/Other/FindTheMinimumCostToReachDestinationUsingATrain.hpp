@@ -13,14 +13,12 @@ public:
     using Value = int;
     using Values = std::vector<Value>;
     using ValueMatrix = matrix::AlbaMatrix<Value>;
-    static constexpr Value UNUSED_VALUE = std::numeric_limits<Value>::max();
-    static constexpr Value MAX_VALUE = UNUSED_VALUE - 1;
-
     explicit FindTheMinimumCostToReachDestinationUsingATrain(ValueMatrix const& prices);
-
+    static constexpr Value UNUSED_VALUE = std::numeric_limits<Value>::max();
     [[nodiscard]] Value getMinimumCostUsingNaiveRecursion() const;
     [[nodiscard]] Value getMinimumCostUsingMemoizationDP() const;
     [[nodiscard]] Value getMinimumCostUsingIterativeDP() const;
+    static constexpr Value MAX_VALUE = UNUSED_VALUE - 1;
 
 private:
     [[nodiscard]] Value getMinimumCostUsingNaiveRecursion(Index const endStation) const;

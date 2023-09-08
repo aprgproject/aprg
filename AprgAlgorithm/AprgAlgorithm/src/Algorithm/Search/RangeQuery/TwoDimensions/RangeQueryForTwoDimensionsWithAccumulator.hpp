@@ -25,7 +25,6 @@ public:
         Index const topLeftX, Index const topLeftY, Index const bottomRightX, Index const bottomRightY) const {
         // This works on constant time.
         // add outer retangle and inner retangle and subtract incomplete rectangles
-
         Value positivePart = m_accumulator(
             getPartialResultAt(bottomRightX, bottomRightY), getPartialResultAt(topLeftX - 1, topLeftY - 1));
         Value negativePart = m_accumulator(
@@ -45,7 +44,6 @@ private:
 
     void initialize(ValueMatrix const& valueMatrix) {
         // Quadratic time because of the second loop.
-
         Value partialResultOnFirstRow{};
         for (int x = 0; x < static_cast<int>(valueMatrix.getNumberOfColumns()); ++x) {
             partialResultOnFirstRow += valueMatrix.getEntryConstReference(x, 0);
