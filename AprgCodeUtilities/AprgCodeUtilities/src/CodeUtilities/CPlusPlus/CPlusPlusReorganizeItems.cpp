@@ -3,6 +3,7 @@
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
 #include <CodeUtilities/Common/TermUtilities.hpp>
 
+#include <algorithm>
 #include <numeric>
 
 using namespace alba::CodeUtilities::CPlusPlusUtilities;
@@ -308,7 +309,7 @@ int CPlusPlusReorganizeItems::getBestHeaderIndex(string const& item) const {
         ++headerIndex;
     }
     if (bestDifference < 10 &&
-        static_cast<double>(bestDifference) / static_cast<double>(itemSignature.length()) < 0.10) {
+        static_cast<double>(bestDifference) / static_cast<double>(itemSignature.length()) < 0.20) {
         return bestHeaderIndex;
     }
     return static_cast<int>(m_headerSignatures.size());

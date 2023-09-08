@@ -3,6 +3,7 @@
 #include <CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.hpp>
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
 #include <CodeUtilities/Common/TermUtilities.hpp>
+#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/Print/AlbaLogPrints.hpp>
 
@@ -156,7 +157,7 @@ void CPlusPlusReorganizer::processOpeningAndClosingBrace(
     int endIndex = getIndexAtSameLineComment(closingBraceSemiColonIndex);
     Terms scopeHeaderTerms(getTermsFromString(getContents(lastProcessedIndex, openingBraceIndex - 1)));
     strings& currentItems(m_scopeDetails.back().items);
-    if (!currentItems.empty() && shouldConnectToPreviousItem(scopeHeaderTerms)) {
+    if (!currentItems.empty() && hasEndBrace(currentItems.back()) && shouldConnectToPreviousItem(scopeHeaderTerms)) {
         currentItems.back() += getCombinedContents(m_terms, lastProcessedIndex, endIndex);
     } else {
         addItemIfNeeded(lastProcessedIndex, endIndex);
@@ -167,13 +168,10 @@ void CPlusPlusReorganizer::processOpeningAndClosingBrace(
 void CPlusPlusReorganizer::processOpeningBrace(int& lastProcessedIndex, int const openingBraceIndex) {
     Terms scopeHeaderTerms(getTermsFromString(getContents(lastProcessedIndex, openingBraceIndex - 1)));
     strings& currentItems(m_scopeDetails.back().items);
-    if (!currentItems.empty() && shouldConnectToPreviousItem(scopeHeaderTerms)) {
-        string const& lastItem(currentItems.back());
-        if (hasBraces(lastItem)) {
-            Terms lastItemTerms = getTermsFromString(lastItem);
-            currentItems.pop_back();
-            lastProcessedIndex -= static_cast<int>(lastItemTerms.size()) + 1;
-        }
+    if (!currentItems.empty() && hasEndBrace(currentItems.back()) && shouldConnectToPreviousItem(scopeHeaderTerms)) {
+        Terms lastItemTerms = getTermsFromString(currentItems.back());
+        currentItems.pop_back();
+        lastProcessedIndex -= static_cast<int>(lastItemTerms.size()) + 1;
     }
     enterScope(lastProcessedIndex, openingBraceIndex);
     lastProcessedIndex = openingBraceIndex + 1;
@@ -286,9 +284,14 @@ int CPlusPlusReorganizer::getIndexAtClosingString(
 }
 
 bool CPlusPlusReorganizer::shouldConnectToPreviousItem(Terms const& scopeHeaderTerms) {
-    return all_of(scopeHeaderTerms.cbegin(), scopeHeaderTerms.cend(), [](Term const& term) {
-        return isCommentOrWhiteSpace(term) || term.getContent() == "," || term.getTermType() == TermType::Identifier;
+    bool isEmpty(scopeHeaderTerms.empty());
+    bool hasNoInvalidKeyword = all_of(scopeHeaderTerms.cbegin(), scopeHeaderTerms.cend(), [](Term const& term) {
+        return term.getTermType() != TermType::Keyword || term.getContent() == "const_cast" ||
+               term.getContent() == "dynamic_cast" || term.getContent() == "reinterpret_cast" ||
+               term.getContent() == "static_cast";
     });
+    bool hasCommaAtTheStart = !checkPatternAt(scopeHeaderTerms, 0, Patterns{{M(",")}}).empty();
+    return isEmpty || (hasNoInvalidKeyword && hasCommaAtTheStart);
 }
 
 CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
@@ -331,6 +334,12 @@ CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
         }
     }
     return scopeDetail;
+}
+
+bool CPlusPlusReorganizer::hasEndBrace(string const& content) {
+    Terms termsToCheck(getTermsFromString(content));
+    Indexes hitIndexes = checkMatcherAtBackwards(termsToCheck, static_cast<int>(termsToCheck.size()) - 1, M("}"));
+    return !hitIndexes.empty();
 }
 
 strings CPlusPlusReorganizer::getScopeNames() const {

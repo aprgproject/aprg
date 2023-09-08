@@ -47,6 +47,7 @@ private:
         Terms const& terms, int const openingIndex, std::string const& openingString, std::string const& closingString);
     [[nodiscard]] static bool shouldConnectToPreviousItem(Terms const& scopeHeaderTerms);
     [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const openingBraceIndex) const;
+    [[nodiscard]] static bool hasEndBrace(std::string const& content);
     [[nodiscard]] stringHelper::strings getScopeNames() const;
     [[nodiscard]] stringHelper::strings getSavedSignatures() const;
     [[nodiscard]] std::string getContents(int const start, int const end) const;

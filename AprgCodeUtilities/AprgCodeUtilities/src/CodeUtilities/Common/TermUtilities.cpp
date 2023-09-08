@@ -3,6 +3,8 @@
 #include <Common/Macros/AlbaMacros.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
+#include <algorithm>
+
 using namespace alba::stringHelper;
 using namespace std;
 
@@ -50,6 +52,21 @@ Indexes checkPatternAt(Terms const& terms, int const termIndex, Patterns const& 
         }
     }
     return {};
+}
+
+Indexes checkMatcherAtBackwards(Terms const& terms, int const termIndex, TermMatcher const& matcher) {
+    Indexes patternIndexes;
+    for (int termIndex2 = termIndex; termIndex2 >= 0; --termIndex2) {
+        Term const& currentTerm(terms[termIndex2]);
+        bool isMatchForThisIndex = currentTerm == matcher;
+        if (isMatchForThisIndex) {
+            patternIndexes.emplace_back(termIndex2);
+        }
+        if (!isCommentOrWhiteSpace(currentTerm) || isMatchForThisIndex) {
+            break;
+        }
+    }
+    return patternIndexes;
 }
 
 void replaceAllForwards(
@@ -203,10 +220,5 @@ bool isWhiteSpaceWithNewLine(Term const& term) {
 }
 
 bool hasNewLine(Term const& term) { return stringHelper::hasNewLine(term.getContent()); }
-
-bool hasBraces(string const& content) {
-    return any_of(
-        content.cbegin(), content.cend(), [](char const character) { return character == '{' || character == '}'; });
-}
 
 }  // namespace alba::CodeUtilities
