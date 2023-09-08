@@ -28,16 +28,16 @@ public:
     template <typename... ArgumentTypes>
     explicit AlbaLocalPathHandler(ArgumentTypes&&... arguments)
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay)
-        : AlbaLinuxPathHandler(std::forward<ArgumentTypes>(arguments)...) {}
+: AlbaLinuxPathHandler(std::forward<ArgumentTypes>(arguments)...) {}
 #elif defined(OS_WINDOWS)
     template <typename... ArgumentTypes>
     explicit AlbaLocalPathHandler(ArgumentTypes&&... arguments)
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay)
-        : AlbaWindowsPathHandler(std::forward<ArgumentTypes>(arguments)...) {}
+: AlbaWindowsPathHandler(std::forward<ArgumentTypes>(arguments)...) {}
 #endif
 
     // rule of zero
-    // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
+// no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
 };
 
 }  // namespace alba

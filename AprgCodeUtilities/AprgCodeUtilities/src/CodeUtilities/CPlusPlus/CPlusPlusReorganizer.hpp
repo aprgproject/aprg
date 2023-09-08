@@ -1,5 +1,6 @@
 #pragma once
 
+#include <CodeUtilities/CPlusPlus/CPlusPlusTypes.hpp>
 #include <CodeUtilities/Common/Term.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
@@ -8,7 +9,6 @@ namespace alba::CodeUtilities {
 class CPlusPlusReorganizer {
 public:
     enum class Purpose { Unknown, Reorganize, GatherInformation };
-    enum class ScopeType { Unknown, TopLevel, ClassDeclaration, Namespace };
     struct ScopeDetail {
         int scopeHeaderStart;
         int openingBraceIndex;
@@ -32,15 +32,19 @@ private:
     void processTerms();
     void processMacro(int& termIndex, int const macroStartIndex);
     void processSemiColon(int& termIndex, int const endIndex);
-    void processOpeningAndClosingBrace(int& termIndex, int const openingBraceIndex, int const endIndex);
+    void processOpeningAndClosingBrace(
+        int& termIndex, int const openingBraceIndex, int const closingBraceSemiColonIndex);
     void processOpeningBrace(int& termIndex, int const openingBraceIndex);
-    void processClosingBrace(int& termIndex, int const closingBraceIndex, int const possibleSemiColonIndex);
+    void processClosingBrace(int& termIndex, int const closingBraceIndex, int const closingBraceSemiColonIndex);
     void processRecognizedItem(int& termIndex, int const recognizedItemEndIndex);
     void enterScope(int const scopeHeaderStart, int const openingBraceIndex);
-    void exitScope(int& termIndex, int const closingBraceIndex, int const possibleSemiColonIndex);
+    void exitScope(int& termIndex, int const closingBraceIndex, int const endIndex);
+    [[nodiscard]] static bool shouldReorganizeInThisScope(ScopeDetail const& scope);
     void addItemIfNeeded(int const startIndex, int const endIndex);
-    void addItemIfNeeded(std::string const& content);
-    static bool shouldConnectToPreviousItem(Terms const& scopeHeaderTerms);
+    [[nodiscard]] int getIndexAtSameLineComment(int const index) const;
+    static int getIndexAtClosing(
+        Terms const& terms, int const openingIndex, std::string const& openingString, std::string const& closingString);
+    [[nodiscard]] static bool shouldConnectToPreviousItem(Terms const& scopeHeaderTerms);
     [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const openingBraceIndex) const;
     [[nodiscard]] stringHelper::strings getScopeNames() const;
     [[nodiscard]] stringHelper::strings getSavedSignatures() const;

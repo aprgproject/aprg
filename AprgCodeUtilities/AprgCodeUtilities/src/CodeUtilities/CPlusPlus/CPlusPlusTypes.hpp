@@ -1,9 +1,6 @@
 #pragma once
 
-#include <vector>
-
 namespace alba::CodeUtilities {
-
-using Indexes = std::vector<int>;
+enum class ScopeType { Unknown, TopLevel, ClassDeclaration, Namespace };
 
 }  // namespace alba::CodeUtilities

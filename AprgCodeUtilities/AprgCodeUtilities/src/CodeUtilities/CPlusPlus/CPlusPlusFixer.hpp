@@ -1,6 +1,6 @@
 #pragma once
 
-#include <CodeUtilities/Common/Pattern.hpp>
+#include <CodeUtilities/Common/CommonTypes.hpp>
 
 namespace alba::CodeUtilities::CPlusPlusFixer {
 

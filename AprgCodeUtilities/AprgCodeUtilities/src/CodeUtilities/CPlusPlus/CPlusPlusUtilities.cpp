@@ -1,8 +1,9 @@
 #include "CPlusPlusUtilities.hpp"
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusTokenizer.hpp>
-#include <CodeUtilities/Common/Pattern.hpp>
+#include <CodeUtilities/Common/CommonTypes.hpp>
 #include <CodeUtilities/Common/TermUtilities.hpp>
+#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
@@ -80,13 +81,20 @@ string getFunctionSignature(string const& functionText) {
     return getCombinedContents(terms);
 }
 
-bool isCppFile(string const& extension) {
+string getTextWithoutCommentsWithNewLine(Terms const& terms) {
+    Terms revisedTerms(terms);
+    Patterns removePatterns{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
+    replaceAllForwards(revisedTerms, 0, removePatterns, {});
+    return getCombinedContents(revisedTerms);
+}
+
+bool isCppFileExtension(string const& extension) {
     return extension == "cpp" || extension == "c" || extension == "cc" || extension == "hpp" || extension == "h";
 }
 
-bool isHeaderFile(string const& extension) { return extension == "hpp" || extension == "h"; }
+bool isHeaderFileExtension(string const& extension) { return extension == "hpp" || extension == "h"; }
 
-bool isImplementationFile(string const& extension) {
+bool isImplementationFileExtension(string const& extension) {
     return extension == "cpp" || extension == "c" || extension == "cc";
 }
 

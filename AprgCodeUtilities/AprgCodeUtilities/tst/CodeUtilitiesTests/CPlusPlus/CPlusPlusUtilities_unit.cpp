@@ -27,4 +27,13 @@ TEST(CPlusPlusUtilitiesTest, GetFunctionSignatureWorks) {
     EXPECT_EQ("AlbaOptional(AlbaOptional<ContentType&> const& optional)", functionSignature);
 }
 
+TEST(CPlusPlusUtilitiesTest, GetTextWithoutCommentsWithNewLineWorks) {
+    string codeWithComments = "Code\n /*MultilineComment*/\n //SingleLineComment\n Code\n";
+    Terms termsWithComments(getTermsFromString(codeWithComments));
+
+    string codeWithoutComments(getTextWithoutCommentsWithNewLine(termsWithComments));
+
+    EXPECT_EQ("Code\n Code\n", codeWithoutComments);
+}
+
 }  // namespace alba::CodeUtilities::CPlusPlusUtilities

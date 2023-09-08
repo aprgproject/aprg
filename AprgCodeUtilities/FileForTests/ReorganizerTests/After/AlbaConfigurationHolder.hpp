@@ -6,10 +6,15 @@
 namespace alba {
 
 template <typename ConfigurationDetails>
+ConfigurationDetails getDefaultConfigurationDetails() {
+    static_assert(
+        sizeof(ConfigurationDetails) == -1,
+        "Default configuration is not defined. This is needed in configuration holder.");
+}
+
+template <typename ConfigurationDetails>
 class AlbaConfigurationHolder : public AlbaSingleton<AlbaConfigurationHolder<ConfigurationDetails>> {
-
 public:
-
 explicit AlbaConfigurationHolder(ConfigurationDetails const& configurationDetails)
         : m_configurationDetails{configurationDetails} {}
 AlbaConfigurationHolder() : m_configurationDetails{getDefaultConfigurationDetails<ConfigurationDetails>()} {}
@@ -24,16 +29,13 @@ void setConfigurationToDefault() {
     }
 
 protected:
-
 ConfigurationDetails m_configurationDetails;
 
 };
 
 template <typename ConfigurationDetails>
 class AlbaConfigurationScopeObject {
-
 public:
-
 AlbaConfigurationScopeObject()
         : m_savedConfigurationDetails(
               AlbaConfigurationHolder<ConfigurationDetails>::getInstance().getConfigurationDetails()),
@@ -44,23 +46,14 @@ void setInThisScopeThisConfiguration(ConfigurationDetails const& configurationDe
     }
 
 private:
-
 void setInThisScopeTheValuesBack() const noexcept {
         // called in scope guard
-        AlbaConfigurationHolder<ConfigurationDetails>::getInstance().setConfigurationDetails(
+AlbaConfigurationHolder<ConfigurationDetails>::getInstance().setConfigurationDetails(
             m_savedConfigurationDetails);
     }
 
 ConfigurationDetails m_savedConfigurationDetails;
 AlbaScopeGuard m_scopeGuard;  // important to be after configuration details (for order of destruction)
-
 };
-
-template <typename ConfigurationDetails>
-ConfigurationDetails getDefaultConfigurationDetails() {
-    static_assert(
-        sizeof(ConfigurationDetails) == -1,
-        "Default configuration is not defined. This is needed in configuration holder.");
-}
 
 }  // namespace alba

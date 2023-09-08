@@ -14,11 +14,9 @@ Unknown, Once, Forward, Backward
 
 template <typename DataType>
 class AlbaValueRange {
-
 public:
-
-using TraverseOperation = std::function<void(DataType)>;
 using TerminationCondition = std::function<bool(DataType, DataType)>;
+using TraverseOperation = std::function<void(DataType)>;
 AlbaValueRange() : m_startValue(0), m_endValue(0), m_intervalMagnitude(0) {}
 
 AlbaValueRange(DataType const startValue, DataType const endValue, DataType const intervalMagnitude)
@@ -27,8 +25,7 @@ AlbaValueRange(DataType const startValue, DataType const endValue, DataType cons
           m_intervalMagnitude(mathHelper::getAbsoluteValue(intervalMagnitude)) {}
 
 // rule of zero
-
-    [[nodiscard]] bool isEmpty() const { return m_startValue == 0 && m_endValue == 0 && m_intervalMagnitude == 0; }
+[[nodiscard]] bool isEmpty() const { return m_startValue == 0 && m_endValue == 0 && m_intervalMagnitude == 0; }
 
 [[nodiscard]] bool isValueInsideInclusive(DataType const value) const {
         return getMinimum() <= value && getMaximum() >= value;
@@ -99,7 +96,6 @@ void clear() {
     }
 
 private:
-
 [[nodiscard]] TerminationCondition getTerminationCondition(AlbaValueRangeType const rangeType) const {
         TerminationCondition terminationCondition;
         switch (rangeType) {

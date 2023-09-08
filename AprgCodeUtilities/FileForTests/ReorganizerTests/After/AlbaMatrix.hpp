@@ -15,22 +15,30 @@
 
 namespace alba::matrix {
 
+// constexpr functions:
+template <typename DataType>
+constexpr AlbaMatrixData<DataType> getDefaultMatrix(size_t const numberOfColumns, size_t const numberOfRows) {
+    if constexpr (typeHelper::isArithmeticType<DataType>()) {
+        // if arithmetic type, initialize it to zero
+return AlbaMatrixData<DataType>(numberOfColumns * numberOfRows, DataType{});
+    } else {
+        // if non arithmetic type, default construct it
+return AlbaMatrixData<DataType>(numberOfColumns * numberOfRows);
+    }
+}
+
 template <typename DataType>
 class AlbaMatrix {
-
 public:
-
+using MatrixData = AlbaMatrixData<DataType>;
+using ListOfMatrixData = ListOfAlbaMatrixData<DataType>;
 using LoopFunction = std::function<void(size_t const xPosition, size_t const yPosition)>;
 using LoopWithValueFunction =
         std::function<void(size_t const xPosition, size_t const yPosition, DataType const& value)>;
-using MatrixData = AlbaMatrixData<DataType>;
-using ListOfMatrixData = ListOfAlbaMatrixData<DataType>;
 using MatrixIndexRange = AlbaValueRange<size_t>;
-
 // Do we have to make rows and columns as template parameter?
-    // No, its better to have this on runtime because matrix can have different dimensions on applications.
-
-    AlbaMatrix() : m_numberOfColumns(0), m_numberOfRows(0) {}
+// No, its better to have this on runtime because matrix can have different dimensions on applications.
+AlbaMatrix() : m_numberOfColumns(0), m_numberOfRows(0) {}
 
 AlbaMatrix(size_t const numberOfColumns, size_t const numberOfRows)
         : m_numberOfColumns(numberOfColumns),
@@ -53,8 +61,7 @@ AlbaMatrix(size_t const numberOfColumns, size_t const numberOfRows, MatrixData c
     }
 
 // rule of zero
-
-    bool operator==(AlbaMatrix const& secondMatrix) const {
+bool operator==(AlbaMatrix const& secondMatrix) const {
         bool isEqual(true);
         if (m_numberOfColumns != secondMatrix.m_numberOfColumns || m_numberOfRows != secondMatrix.m_numberOfRows) {
             isEqual = false;
@@ -86,7 +93,7 @@ AlbaMatrix operator-(AlbaMatrix const& secondMatrix) const {
 
 AlbaMatrix operator*(DataType const& scalarMultiplier) const {
         // scalar multiplication
-        UnaryFunction<DataType> scalarMultiplication = [&scalarMultiplier](DataType const& value) {
+UnaryFunction<DataType> scalarMultiplication = [&scalarMultiplier](DataType const& value) {
             return scalarMultiplier * value;
         };
         return doUnaryOperation(*this, scalarMultiplication);
@@ -94,12 +101,12 @@ AlbaMatrix operator*(DataType const& scalarMultiplier) const {
 
 AlbaMatrix operator*(AlbaMatrix const& secondMatrix) const {
         // matrix multiplication
-        return multiplyMatrices(*this, secondMatrix);
+return multiplyMatrices(*this, secondMatrix);
     }
 
 AlbaMatrix operator^(DataType const& scalarExponent) const {
         // scalar raise to power
-        return getMatrixRaiseToScalarPower(*this, scalarExponent);
+return getMatrixRaiseToScalarPower(*this, scalarExponent);
     }
 
 AlbaMatrix& operator+=(AlbaMatrix const& secondMatrix) {
@@ -128,12 +135,6 @@ AlbaMatrix& operator*=(AlbaMatrix const& secondMatrix) {
         return self;
     }
 
-[[nodiscard]] DataType const& getEntryConstReference(size_t const xPosition, size_t const yPosition) const {
-        assert(isInside(xPosition, yPosition));
-        return m_matrixData[getMatrixIndex(xPosition, yPosition)];
-    }
-
-[[nodiscard]] MatrixData const& getMatrixData() const { return m_matrixData; }
 [[nodiscard]] bool isEmpty() const { return m_matrixData.empty(); }
 
 [[nodiscard]] bool isInside(size_t const xPosition, size_t const yPosition) const {
@@ -152,6 +153,13 @@ AlbaMatrix& operator*=(AlbaMatrix const& secondMatrix) {
         assert(isInside(xPosition, yPosition));
         return m_matrixData[getMatrixIndex(xPosition, yPosition)];
     }
+
+[[nodiscard]] DataType const& getEntryConstReference(size_t const xPosition, size_t const yPosition) const {
+        assert(isInside(xPosition, yPosition));
+        return m_matrixData[getMatrixIndex(xPosition, yPosition)];
+    }
+
+[[nodiscard]] MatrixData const& getMatrixData() const { return m_matrixData; }
 
 void retrieveColumn(MatrixData& column, size_t const xPosition) const {
         column.reserve(m_numberOfRows);
@@ -206,6 +214,14 @@ void iterateThroughXAndThenYWithRanges(
             [&](size_t const xValue) { yRange.traverse([&](size_t const yValue) { loopFunction(xValue, yValue); }); });
     }
 
+// Use getMatrixDataReference() only if needed
+MatrixData& getMatrixDataReference() { return m_matrixData; }
+
+DataType& getEntryReference(size_t const xPosition, size_t const yPosition) {
+        assert(isInside(xPosition, yPosition));
+        return m_matrixData[getMatrixIndex(xPosition, yPosition)];
+    }
+
 void setEntry(size_t const xPosition, size_t const yPosition, DataType const& value) {
         assert(isInside(xPosition, yPosition));
         m_matrixData[getMatrixIndex(xPosition, yPosition)] = value;
@@ -253,17 +269,16 @@ void transpose() {
         MatrixIndexRange xRange(0, oldColumns - 1, 1);
         iterateThroughYAndThenXWithRanges(yRange, xRange, [&](size_t const xPosition, size_t const yPosition) {
             // NOLINTNEXTLINE(readability-suspicious-call-argument)
-            m_matrixData[getMatrixIndex(yPosition, xPosition)] =
+m_matrixData[getMatrixIndex(yPosition, xPosition)] =
                 oldMatrixData[getMatrixIndex(xPosition, yPosition, oldColumns)];
         });
     }
 
 void invert() {
         // Another formula:
-        // Inverse of matrix at[i, j] = cofactor at[j,i] / determinant(matrix)
-        // But this is costly because of determinant.
-
-        assert(m_numberOfColumns == m_numberOfRows);
+// Inverse of matrix at[i, j] = cofactor at[j,i] / determinant(matrix)
+// But this is costly because of determinant.
+assert(m_numberOfColumns == m_numberOfRows);
         size_t newColumns = m_numberOfColumns * 2;
         AlbaMatrix tempMatrix(newColumns, m_numberOfRows);
         iterateAllThroughYAndThenX([&](size_t const xPosition, size_t const yPosition) {
@@ -280,16 +295,7 @@ void invert() {
         });
     }
 
-// Use getMatrixDataReference() only if needed
-    MatrixData& getMatrixDataReference() { return m_matrixData; }
-
-DataType& getEntryReference(size_t const xPosition, size_t const yPosition) {
-        assert(isInside(xPosition, yPosition));
-        return m_matrixData[getMatrixIndex(xPosition, yPosition)];
-    }
-
 private:
-
 [[nodiscard]] size_t getMatrixIndex(
         size_t const xPosition, size_t const yPosition, size_t const numberOfColumns) const {
         return (yPosition * numberOfColumns) + xPosition;
@@ -324,18 +330,5 @@ size_t m_numberOfRows;
 MatrixData m_matrixData;
 
 };
-
-// constexpr functions:
-
-template <typename DataType>
-constexpr AlbaMatrixData<DataType> getDefaultMatrix(size_t const numberOfColumns, size_t const numberOfRows) {
-    if constexpr (typeHelper::isArithmeticType<DataType>()) {
-        // if arithmetic type, initialize it to zero
-        return AlbaMatrixData<DataType>(numberOfColumns * numberOfRows, DataType{});
-    } else {
-        // if non arithmetic type, default construct it
-        return AlbaMatrixData<DataType>(numberOfColumns * numberOfRows);
-    }
-}
 
 }  // namespace alba::matrix

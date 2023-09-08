@@ -45,7 +45,7 @@ void processDirectory(string const& path) {
     directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
     for (auto const& file : files) {
         AlbaLocalPathHandler filePathHandler(file);
-        if (isCppFile(filePathHandler.getExtension())) {
+        if (isCppFileExtension(filePathHandler.getExtension())) {
             processFile(file);
         }
     }

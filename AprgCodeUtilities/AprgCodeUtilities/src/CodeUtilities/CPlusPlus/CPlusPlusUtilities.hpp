@@ -9,8 +9,9 @@ Terms getTermsFromFile(std::string const& path);
 void writeAllTerms(std::string const& path, Terms const& terms);
 Terms getTermsFromString(std::string const& code);
 std::string getFunctionSignature(std::string const& functionText);
-bool isCppFile(std::string const& extension);
-bool isHeaderFile(std::string const& extension);
-bool isImplementationFile(std::string const& extension);
+std::string getTextWithoutCommentsWithNewLine(Terms const& terms);
+bool isCppFileExtension(std::string const& extension);
+bool isHeaderFileExtension(std::string const& extension);
+bool isImplementationFileExtension(std::string const& extension);
 
 }  // namespace alba::CodeUtilities::CPlusPlusUtilities

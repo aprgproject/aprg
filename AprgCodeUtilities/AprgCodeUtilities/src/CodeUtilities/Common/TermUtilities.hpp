@@ -1,7 +1,6 @@
 #pragma once
 
-#include <CodeUtilities/Common/Index.hpp>
-#include <CodeUtilities/Common/Pattern.hpp>
+#include <CodeUtilities/Common/CommonTypes.hpp>
 
 namespace alba::CodeUtilities {
 
@@ -10,6 +9,7 @@ Indexes searchForPatternsBackwards(Terms const& terms, int const startIndex, Pat
 Indexes checkPatternAt(Terms const& terms, int const termIndex, Patterns const& searchPatterns);
 void replaceAllForwards(
     Terms& terms, int const startIndex, Patterns const& searchPatterns, Terms const& replacementTerms);
+void replaceCommentsWithExtraLine(Terms& terms, int const startIndex);
 
 void combineTermsInPlace(Terms& terms, TermType const newTermType, int const startIndex, int const endIndex);
 void changeTerm(Term& term, TermType const newTermType, std::string const& content);
@@ -23,9 +23,9 @@ std::string convertToString(MatcherType const type);
 bool isAllWhiteSpaceOrComment(Terms const& terms);
 bool isAMatch(MatcherType const matcherType, Term const& term);
 bool isComment(Term const& term);
-bool isOperator(Term const& term);
 bool isWhiteSpace(Term const& term);
 bool isCommentOrWhiteSpace(Term const& term);
+bool isWhiteSpaceWithNewLine(Term const& term);
 bool hasNewLine(Term const& term);
 bool hasBraces(std::string const& content);
 

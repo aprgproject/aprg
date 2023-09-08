@@ -13,11 +13,16 @@ using namespace std;
 namespace alba::CodeUtilities {
 
 CPlusPlusReorganizeItems::CPlusPlusReorganizeItems(
-    strings const& items, strings const& scopeNames, strings const& headerSignatures)
-    : m_items(items), m_scopeNames(scopeNames), m_headerSignatures(headerSignatures) {}
+    ScopeType const scopeType, strings const& items, strings const& scopeNames, strings const& headerSignatures)
+    : m_scopeType(scopeType), m_items(items), m_scopeNames(scopeNames), m_headerSignatures(headerSignatures) {
+    fixItemContents();
+}
 
-CPlusPlusReorganizeItems::CPlusPlusReorganizeItems(strings&& items, strings&& scopeNames, strings&& headerSignatures)
-    : m_items(items), m_scopeNames(scopeNames), m_headerSignatures(headerSignatures) {}
+CPlusPlusReorganizeItems::CPlusPlusReorganizeItems(
+    ScopeType const scopeType, strings&& items, strings&& scopeNames, strings&& headerSignatures)
+    : m_scopeType(scopeType), m_items(items), m_scopeNames(scopeNames), m_headerSignatures(headerSignatures) {
+    fixItemContents();
+}
 
 Terms CPlusPlusReorganizeItems::getSortedAggregateTerms() const {
     Terms terms;
@@ -25,12 +30,14 @@ Terms CPlusPlusReorganizeItems::getSortedAggregateTerms() const {
     terms.emplace_back(TermType::WhiteSpace, "\n");
     bool hasMultiline = hasMultilineItem(sortedItems) || sortedItems.size() > 10;
     bool isPreviousAMultilineItem(hasMultiline);
-    bool isPreviousACommentOrWhiteSpace(false);
+    bool isFirst(true);
+    bool isPreviousAnAccessControl(false);
     for (SortItem const& sortItem : sortedItems) {
         string const& item(m_items[sortItem.itemsIndex]);
-
-        bool isMultilineItem = isMultiLine(sortItem.numberOfLines) || (hasMultiline && sortItem.isAccessControl);
-        if ((isMultilineItem || isPreviousAMultilineItem) && !isPreviousACommentOrWhiteSpace) {
+        bool isAccessControl = sortItem.itemType == ItemType::AccessControl;
+        bool isMultilineItem = isMultiLine(sortItem.numberOfLines) || isAccessControl;
+        bool shouldPreventNewLine = (isFirst && isAccessControl) || isPreviousAnAccessControl;
+        if ((isMultilineItem || isPreviousAMultilineItem) && !shouldPreventNewLine) {
             terms.emplace_back(TermType::WhiteSpace, "\n");
         }
 
@@ -42,7 +49,8 @@ Terms CPlusPlusReorganizeItems::getSortedAggregateTerms() const {
 
         terms.emplace_back(TermType::WhiteSpace, "\n");
         isPreviousAMultilineItem = isMultilineItem;
-        isPreviousACommentOrWhiteSpace = sortItem.isCommentOrWhiteSpace;
+        isFirst = false;
+        isPreviousAnAccessControl = isAccessControl;
     }
     if (hasMultiline) {
         terms.emplace_back(TermType::WhiteSpace, "\n");
@@ -61,12 +69,11 @@ CPlusPlusReorganizeItems::SortItems CPlusPlusReorganizeItems::getSortItems() con
     sortItems.reserve(m_items.size());
     int index = 0;
     for (string const& item : m_items) {
-        SortItem sortItem{0, 0, 0, false, false, false, index++};
-        saveDetailsFromItemContent(sortItem, item);
+        SortItem sortItem{0, 0, 0, false, ItemType::Unknown, index++, {}};
+        saveDetailsBasedFromItem(sortItem, item);
         saveDetailsFromHeaderSignatures(sortItem, item);
         sortItems.emplace_back(sortItem);
     }
-    // putAdditionalDetailsOnCommentsAndWhiteSpace(sortItems);
     return sortItems;
 }
 
@@ -84,46 +91,21 @@ void CPlusPlusReorganizeItems::sortByComparingItems(SortItems& sortItems) {
     }
 }
 
-void CPlusPlusReorganizeItems::saveDetailsFromItemContent(SortItem& sortItem, string const& item) const {
-    sortItem.numberOfLines = stringHelper::getNumberOfNewLines(item) + 1;
-    int termIndex = 0;
-    Terms terms(getTermsFromString(item));
-    if (isAllWhiteSpaceOrComment(terms)) {
-        sortItem.isCommentOrWhiteSpace = true;
-    } else {
-        Patterns searchPatterns(getSearchPatterns());
-        bool isFound(true);
-        while (isFound) {
-            Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
-            isFound = !hitIndexes.empty();
-            if (isFound) {
-                if (processAndShouldStop(terms, termIndex, sortItem, hitIndexes)) {
-                    break;
-                }
-            }
-        }
+void CPlusPlusReorganizeItems::fixItemContents() {
+    for (string& item : m_items) {
+        Terms terms(getTermsFromString(item));
+        replaceCommentsWithExtraLine(terms, 0);
+        item = getCombinedContents(terms);
     }
+}
+
+void CPlusPlusReorganizeItems::saveDetailsBasedFromItem(SortItem& sortItem, string const& item) const {
+    Terms terms(getTermsFromString(item));
+    saveDetailsBasedFromItemTerms(sortItem, item, terms);
 }
 
 void CPlusPlusReorganizeItems::saveDetailsFromHeaderSignatures(SortItem& sortItem, string const& item) const {
     sortItem.headerIndex = getBestHeaderIndex(item);
-}
-
-void CPlusPlusReorganizeItems::putAdditionalDetailsOnCommentsAndWhiteSpace(SortItems& sortItems) const {
-    // dont use this code, it obscures+ the meaning
-    int previousHeaderIndex = 0;
-    int previousScore = 0;
-    int previousNumberOfLines = 0;
-    for (auto itItem = sortItems.rbegin(); itItem != sortItems.rend(); ++itItem) {
-        if (itItem->isCommentOrWhiteSpace) {
-            itItem->headerIndex = previousHeaderIndex;
-            itItem->score = previousScore;
-            itItem->numberOfLines = previousNumberOfLines;
-        }
-        previousScore = itItem->score;
-        previousHeaderIndex = itItem->headerIndex;
-        previousNumberOfLines = itItem->numberOfLines;
-    }
 }
 
 Patterns CPlusPlusReorganizeItems::getSearchPatterns() {
@@ -134,6 +116,7 @@ Patterns CPlusPlusReorganizeItems::getSearchPatterns() {
         {M(":")},
         {M("static_assert")},
         {M("using")},
+        {M("namespace")},
         {M("enum")},
         {M("struct")},
         {M("union")},
@@ -145,14 +128,12 @@ Patterns CPlusPlusReorganizeItems::getSearchPatterns() {
         {M("operator")},
         {M("explicit")},
         {M("inline")},
-        {M("static")},
         {M("constexpr")},
+        {M("static")},
         {M("volatile")},
         {M("const")},
         {M("[[nodiscard]]")},
         {M(TermType::Attribute)},
-        {M("bool")},
-        {M("void")},
         {M("friend")},
         {M(TermType::Macro)},
         {M("public"), M(":")},
@@ -160,73 +141,122 @@ Patterns CPlusPlusReorganizeItems::getSearchPatterns() {
         {M("private"), M(":")}};
 }
 
-bool CPlusPlusReorganizeItems::processAndShouldStop(
-    Terms& terms, int& termIndex, SortItem& sortItem, Indexes const& hitIndexes) const {
-    int firstHitIndex = hitIndexes.front();
-    if (terms[firstHitIndex].getContent() == ";" || terms[firstHitIndex].getContent() == "{" ||
-        terms[firstHitIndex].getContent() == ":" || terms[firstHitIndex].getContent() == "static_assert") {
-        return true;
-    }
-    if (terms[firstHitIndex].getContent() == "(") {
-        if (m_scopeNames.back() == getIdentifierBeforeParenthesis(terms, firstHitIndex)) {
-            sortItem.score += 100000;
+void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
+    SortItem& sortItem, string const& item, Terms const& terms) const {
+    int termIndex = 0;
+    Patterns searchPatterns(getSearchPatterns());
+    bool isFound(true);
+    bool isConst(false);
+    sortItem.numberOfLines = stringHelper::getNumberOfNewLines(getTextWithoutCommentsWithNewLine(terms)) + 1;
+    while (isFound) {
+        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            int firstHitIndex = hitIndexes.front();
+            int lastHitIndex = hitIndexes.back();
+            Term const& firstTerm(terms[firstHitIndex]);
+            Term const& lastTerm(terms[lastHitIndex]);
+            if (firstTerm.getContent() == ";" || firstTerm.getContent() == "{" || firstTerm.getContent() == ":") {
+                break;
+            }
+            if (firstTerm.getContent() == "static_assert") {
+                sortItem.itemType = ItemType::Declaration;
+                break;
+            }
+            if (firstTerm.getContent() == "using") {
+                sortItem.itemType = ItemType::Declaration;
+                sortItem.isDivider = true;
+                break;
+            }
+            if (firstTerm.getContent() == "(") {
+                if (m_scopeNames.back() == getIdentifierBeforeParenthesis(terms, firstHitIndex)) {
+                    sortItem.score += 100000;
+                }
+                moveToEndParenthesis(terms, termIndex, firstHitIndex);
+                sortItem.score += 10000000;
+                sortItem.itemType = ItemType::Function;
+            } else {
+                if (firstTerm.getContent() == "namespace") {
+                    sortItem.score += 600000000;
+                    sortItem.itemType = ItemType::Namespace;
+                } else if (firstTerm.getContent() == "enum") {
+                    sortItem.score += 500000000;
+                    sortItem.itemType = ItemType::Declaration;
+                } else if (firstTerm.getContent() == "struct") {
+                    sortItem.score += 400000000;
+                    sortItem.itemType = ItemType::Declaration;
+                } else if (firstTerm.getContent() == "union") {
+                    sortItem.score += 300000000;
+                    sortItem.itemType = ItemType::Declaration;
+                } else if (firstTerm.getContent() == "class") {
+                    sortItem.score += 200000000;
+                    sortItem.itemType = ItemType::Declaration;
+                } else if (firstTerm.getContent() == "template") {
+                    sortItem.itemType = ItemType::Template;
+                    sortItem.isDivider = true;
+                    break;
+                } else if (firstTerm.getContent() == "=" && lastTerm.getContent() == "default") {
+                    sortItem.score += 300000;
+                } else if (firstTerm.getContent() == "=" && lastTerm.getContent() == "delete") {
+                    sortItem.score += 200000;
+                } else if (firstTerm.getContent() == "operator" && lastTerm.getContent() == "=") {
+                    sortItem.score += 20000;
+                } else if (firstTerm.getContent() == "operator") {
+                    sortItem.score += 10000;
+                } else if (firstTerm.getContent() == "explicit") {
+                    sortItem.score += 4000;
+                } else if (firstTerm.getContent() == "inline") {
+                    sortItem.score += 3000;
+                } else if (firstTerm.getContent() == "constexpr") {
+                    sortItem.score += 2000;
+                    isConst = true;
+                } else if (firstTerm.getContent() == "static") {
+                    sortItem.score += 1000;
+                } else if (firstTerm.getContent() == "volatile") {
+                    sortItem.score += 200;
+                } else if (firstTerm.getContent() == "const") {
+                    if (sortItem.itemType == ItemType::Function) {
+                        // check the last const
+                        sortItem.score += 100;
+                    }
+                    isConst = true;
+                } else if (firstTerm.getContent() == "[[nodiscard]]") {
+                    sortItem.score += 20;
+                } else if (firstTerm.getTermType() == TermType::Attribute) {
+                    sortItem.score += 10;
+                } else if (firstTerm.getContent() == "friend") {
+                    sortItem.score += -10000000;
+                } else if (firstTerm.getTermType() == TermType::Macro) {
+                    sortItem.itemType = ItemType::Macro;
+                    sortItem.isDivider = true;
+                    break;
+                } else if (
+                    firstTerm.getContent() == "public" || firstTerm.getContent() == "protected" ||
+                    firstTerm.getContent() == "private") {
+                    sortItem.itemType = ItemType::AccessControl;
+                    sortItem.isDivider = true;
+                    break;
+                }
+                termIndex = lastHitIndex + 1;
+            }
         }
-        moveToEndParenthesis(terms, termIndex, firstHitIndex);
-        sortItem.score += 10000000;
-    } else {
-        if (terms[firstHitIndex].getContent() == "using") {
-            sortItem.score += 600000000;
-        } else if (terms[firstHitIndex].getContent() == "enum") {
-            sortItem.score += 500000000;
-        } else if (terms[firstHitIndex].getContent() == "struct") {
-            sortItem.score += 400000000;
-        } else if (terms[firstHitIndex].getContent() == "union") {
-            sortItem.score += 300000000;
-        } else if (terms[firstHitIndex].getContent() == "class") {
-            sortItem.score += 200000000;
-        } else if (terms[firstHitIndex].getContent() == "template") {
-            sortItem.score += 1000000;
-        } else if (terms[firstHitIndex].getContent() == "=" && terms[hitIndexes.back()].getContent() == "default") {
-            sortItem.score += 300000;
-        } else if (terms[firstHitIndex].getContent() == "=" && terms[hitIndexes.back()].getContent() == "delete") {
-            sortItem.score += 200000;
-        } else if (terms[firstHitIndex].getContent() == "operator" && terms[hitIndexes.back()].getContent() == "=") {
-            sortItem.score += 20000;
-        } else if (terms[firstHitIndex].getContent() == "operator") {
-            sortItem.score += 10000;
-        } else if (terms[firstHitIndex].getContent() == "explicit") {
-            sortItem.score += 3000;
-        } else if (terms[firstHitIndex].getContent() == "inline") {
-            sortItem.score += 2000;
-        } else if (terms[firstHitIndex].getContent() == "static") {
-            sortItem.score += 1000;
-        } else if (terms[firstHitIndex].getContent() == "constexpr") {
-            sortItem.score += 300;
-        } else if (terms[firstHitIndex].getContent() == "volatile") {
-            sortItem.score += 200;
-        } else if (terms[firstHitIndex].getContent() == "const") {
-            sortItem.score += 100;
-        } else if (terms[firstHitIndex].getContent() == "[[nodiscard]]") {
-            sortItem.score += 20;
-        } else if (terms[firstHitIndex].getTermType() == TermType::Attribute) {
-            sortItem.score += 10;
-        } else if (terms[firstHitIndex].getContent() == "void") {
-            sortItem.score += 2;
-        } else if (terms[firstHitIndex].getContent() == "bool") {
-            sortItem.score += 1;
-        } else if (terms[firstHitIndex].getContent() == "friend") {
-            sortItem.score += -10000000;
-        } else if (terms[firstHitIndex].getTermType() == TermType::Macro) {
-            sortItem.isDivider = true;
-        } else if (
-            terms[firstHitIndex].getContent() == "public" || terms[firstHitIndex].getContent() == "protected" ||
-            terms[firstHitIndex].getContent() == "private") {
-            sortItem.isDivider = true;
-            sortItem.isAccessControl = true;
-        }
-        termIndex = hitIndexes.back() + 1;
     }
-    return false;
+    if (sortItem.itemType == ItemType::Function) {
+        sortItem.functionSignature = getFunctionSignature(item);
+        sortItem.score += getScoreAtReturnOfFunctionSignature(sortItem.functionSignature);
+    }
+    if (sortItem.itemType == ItemType::Unknown) {
+        sortItem.itemType = ItemType::Data;
+        if (m_scopeType == ScopeType::Namespace) {
+            if (isConst) {
+                sortItem.score += 700000000;
+            } else {
+                sortItem.score += 100000000;
+            }
+        } else {
+            sortItem.score = 0;
+        }
+    }
 }
 
 void CPlusPlusReorganizeItems::moveToEndParenthesis(Terms const& terms, int& termIndex, int const parenthesisIndex) {
@@ -239,14 +269,15 @@ void CPlusPlusReorganizeItems::moveToEndParenthesis(Terms const& terms, int& ter
         isFound = !hitIndexes.empty();
         if (isFound) {
             int firstHitIndex = hitIndexes.front();
-            if (terms[firstHitIndex].getContent() == ")") {
-                termIndex = hitIndexes.back() + 1;
+            int lastHitIndex = hitIndexes.back();
+            Term const& firstTerm(terms[firstHitIndex]);
+            if (firstTerm.getContent() == ")") {
+                termIndex = lastHitIndex + 1;
                 isCloseParenthesisFound = true;
             }
-            if (terms[firstHitIndex].getContent() == ";" || terms[firstHitIndex].getContent() == "{" ||
-                terms[firstHitIndex].getContent() == ":") {
+            if (firstTerm.getContent() == ";" || firstTerm.getContent() == "{" || firstTerm.getContent() == ":") {
                 if (!isCloseParenthesisFound) {
-                    termIndex = hitIndexes.back();
+                    termIndex = lastHitIndex;
                 }
                 break;
             }
@@ -287,6 +318,31 @@ string CPlusPlusReorganizeItems::getIdentifierBeforeParenthesis(Terms const& ter
         return terms[hitIndexes.front()].getContent();
     }
     return {};
+}
+
+int CPlusPlusReorganizeItems::getScoreAtReturnOfFunctionSignature(string const& functionSignature) {
+    int score = 0;
+    Terms terms(getTermsFromString(functionSignature));
+    Patterns searchPatterns{{M(TermType::PrimitiveType)}, {M(TermType::Identifier)}, {M(TermType::Keyword)}};
+    Indexes hitIndexes = searchForPatternsForwards(terms, 0, searchPatterns);
+    if (!hitIndexes.empty()) {
+        int firstHitIndex = hitIndexes.front();
+        Term const& firstTerm(terms[firstHitIndex]);
+        if (firstTerm.getTermType() == TermType::PrimitiveType) {
+            if (firstTerm.getContent() == "bool") {
+                score = 5;
+            } else if (firstTerm.getContent() == "void") {
+                score = 2;
+            } else {
+                score = 4;
+            }
+        } else if (firstTerm.getTermType() == TermType::Identifier) {
+            score = 3;
+        } else if (firstTerm.getTermType() == TermType::Keyword) {
+            score = 1;
+        }
+    }
+    return score;
 }
 
 int CPlusPlusReorganizeItems::getTotalNumberLines(SortItems const& sortItems) {

@@ -10,10 +10,8 @@ namespace alba {
 template <typename ContentType>
 // class [[deprecated("Use std::optional instead! (needs c++17)")]]
 class AlbaOptional {
-
 // This requires copy constructor and default constructor on ContentType
 public:
-
 AlbaOptional() = default;
 ~AlbaOptional() = default;
 explicit AlbaOptional(ContentType const content) : m_contentPointer(std::make_unique<ContentType>(content)) {}
@@ -44,20 +42,24 @@ AlbaOptional& operator=(AlbaOptional&& optional) noexcept {
 
 explicit operator bool() const { return hasContent(); }
 explicit operator ContentType() const { return get(); }
-
-[[nodiscard]] ContentType const& getConstReference() const {
-        assert(m_contentPointer);  // not allowing any mistakes
-        return *(m_contentPointer);
-    }
-
 [[nodiscard]] bool hasContent() const { return static_cast<bool>(m_contentPointer); }
 
 [[nodiscard]] ContentType get() const {
         assert(m_contentPointer);  // not allowing any mistakes
-        if (m_contentPointer) {
+if (m_contentPointer) {
             return *(m_contentPointer);
         }
         return ContentType();
+    }
+
+[[nodiscard]] ContentType const& getConstReference() const {
+        assert(m_contentPointer);  // not allowing any mistakes
+return *(m_contentPointer);
+    }
+
+ContentType& getReference() {
+        assert(m_contentPointer);  // not allowing any mistakes
+return *(m_contentPointer);
     }
 
 void createObjectUsingDefaultConstructor() { m_contentPointer = std::make_unique<ContentType>(); }
@@ -80,13 +82,7 @@ void setConstReference(ContentType const& content) {
 
 void clear() { m_contentPointer.reset(); }
 
-ContentType& getReference() {
-        assert(m_contentPointer);  // not allowing any mistakes
-        return *(m_contentPointer);
-    }
-
 private:
-
 friend std::ostream& operator<<(std::ostream& out, AlbaOptional const& optional) {
         out << "hasContent: " << optional.hasContent();
         if (optional.hasContent()) {
@@ -103,19 +99,14 @@ template <typename ContentType>
 // class [[deprecated("Check if std::reference_wrapper can be used instead.")]] AlbaOptional
 // lets remove [[deprecated]] to avoid unnecessary warnings
 class AlbaOptional<ContentType&> {
-
 public:
-
 ~AlbaOptional() = default;
 AlbaOptional(AlbaOptional&& optional) = delete;
 AlbaOptional& operator=(AlbaOptional&& optional) = delete;
 // std::addressof should be used because & might be overloaded
-    explicit AlbaOptional(ContentType& content) : m_hasContent(true), m_contentPointer(std::addressof(content)) {}
-
+explicit AlbaOptional(ContentType& content) : m_hasContent(true), m_contentPointer(std::addressof(content)) {}
 // #warning Please make sure that object still exists in the life time of an optional reference object
-
-    AlbaOptional() : m_hasContent(false), m_contentPointer(nullptr) {}
-
+AlbaOptional() : m_hasContent(false), m_contentPointer(nullptr) {}
 AlbaOptional(AlbaOptional<ContentType&> const& optional)
         : m_hasContent(optional.m_hasContent), m_contentPointer(optional.m_contentPointer) {}
 
@@ -162,7 +153,6 @@ void clear() {
     }
 
 private:
-
 [[nodiscard]] inline bool isContentPointerValid() const { return m_contentPointer != nullptr; }
 
 friend std::ostream& operator<<(std::ostream& out, AlbaOptional<ContentType&> const& optional) {
@@ -173,11 +163,10 @@ friend std::ostream& operator<<(std::ostream& out, AlbaOptional<ContentType&> co
         return out;
     }
 
-// NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
-    static ContentType m_empty;  // think of how to remove this
 bool m_hasContent;
 ContentType* m_contentPointer;
-
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
+static ContentType m_empty;  // think of how to remove this
 };
 
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)

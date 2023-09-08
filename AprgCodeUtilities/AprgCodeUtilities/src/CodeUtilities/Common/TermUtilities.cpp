@@ -1,5 +1,6 @@
 #include "TermUtilities.hpp"
 
+#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/Macros/AlbaMacros.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
@@ -66,6 +67,19 @@ void replaceAllForwards(
             } else {
                 termIndex = patternIndexes.front();
             }
+        } else {
+            ++termIndex;
+        }
+    }
+}
+
+void replaceCommentsWithExtraLine(Terms& terms, int const startIndex) {
+    Patterns searchPattern{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
+    for (int termIndex = startIndex; termIndex < static_cast<int>(terms.size());) {
+        Indexes patternIndexes = checkPatternAt(terms, termIndex, searchPattern);
+        if (!patternIndexes.empty()) {
+            terms[patternIndexes.back()] = Term(TermType::WhiteSpace, "\n");
+            termIndex = patternIndexes.back() + 1;
         } else {
             ++termIndex;
         }
@@ -148,6 +162,7 @@ string convertToString(MatcherType const type) {
         ALBA_MACROS_CASE_ENUM_STRING(MatcherType::IdentifierWithSnakeCase)
         ALBA_MACROS_CASE_ENUM_STRING(MatcherType::IdentifierAndNotAScreamingSnakeCase)
         ALBA_MACROS_CASE_ENUM_STRING(MatcherType::NotAWhiteSpace)
+        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::WhiteSpaceWithNewLine)
     }
     return {};
 }
@@ -170,6 +185,8 @@ bool isAMatch(MatcherType const matcherType, Term const& term) {
             return TermType::Identifier == term.getTermType() && !isScreamingSnakeCase(term.getContent());
         case MatcherType::NotAWhiteSpace:
             return !isWhiteSpace(term);
+        case MatcherType::WhiteSpaceWithNewLine:
+            return isWhiteSpaceWithNewLine(term);
     }
     return false;
 }
@@ -178,11 +195,13 @@ bool isComment(Term const& term) {
     return term.getTermType() == TermType::CommentMultiline || term.getTermType() == TermType::CommentSingleLine;
 }
 
-bool isOperator(Term const& term) { return term.getTermType() == TermType::Operator; }
-
 bool isWhiteSpace(Term const& term) { return term.getTermType() == TermType::WhiteSpace; }
 
 bool isCommentOrWhiteSpace(Term const& term) { return isComment(term) || isWhiteSpace(term); }
+
+bool isWhiteSpaceWithNewLine(Term const& term) {
+    return term.getTermType() == TermType::WhiteSpace && stringHelper::hasNewLine(term.getContent());
+}
 
 bool hasNewLine(Term const& term) { return stringHelper::hasNewLine(term.getContent()); }
 

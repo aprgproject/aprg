@@ -1,4 +1,5 @@
 #include <CodeUtilities/CPlusPlus/CPlusPlusReorganizer.hpp>
+#include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
 #include <CodeUtilitiesTests/MtDirectoryConstants.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
@@ -8,8 +9,9 @@
 #include <cstdlib>
 #include <fstream>
 
-using namespace std;
+using namespace alba::CodeUtilities::CPlusPlusUtilities;
 using namespace alba::stringHelper;
+using namespace std;
 
 namespace alba::CodeUtilities {
 
@@ -35,13 +37,14 @@ void runFormatterInDirectory(string const& aprgPath) {
     aprgPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
     for (auto const& file : files) {
         AlbaLocalPathHandler filePathHandler(file);
-        string command(R"(")");
-        command += FORMATTER_APPLICATION_PATH;
-        command += R"(" -style=file -i ")";
-        command += filePathHandler.getFullPath();
-        command += R"(")";
-        cout << "---> command [" << command << "]:\n";
-        system(command.c_str());
+        if (isCppFileExtension(filePathHandler.getExtension())) {
+            string command(FORMATTER_APPLICATION_PATH);
+            command += R"( -style=file -i ")";
+            command += filePathHandler.getFullPath();
+            command += R"(")";
+            cout << "---> command [" << command << "]:\n";
+            system(command.c_str());
+        }
     }
 }
 void copyFile(string const& source, string const& destination) {
@@ -74,9 +77,8 @@ void verifyFile(string const& expectedFile, string const& testFile) {
             cout << "---> EXPECTED: [" << lineInExpectedFile << "]\n";
             cout << "---> ACTUAL:   [" << lineInTestFile << "]\n\n";
             isDifferenceFound = true;
-            string command(R"(")");
-            command += FORMATTER_APPLICATION_PATH;
-            command += R"(" ")";
+            string command(DIFF_APPLICATION_PATH);
+            command += R"( ")";
             command += expectedFilePathHandler.getFullPath();
             command += R"(" ")";
             command += testFilePathHandler.getFullPath();
@@ -95,7 +97,7 @@ void verifyFile(string const& expectedFile, string const& testFile) {
 void clearFile(string const& file) { ofstream expectedFileStream(AlbaLocalPathHandler(file).getFullPath()); }
 }  // namespace
 
-TEST(CPlusPlusReorganizerTest, ActualTest) {
+TEST(CPlusPlusReorganizerTest, DISABLED_ActualTest) {
     CPlusPlusReorganizer reorganizer;
     reorganizer.processDirectory(R"(F:\Branches\aprg_project\aprg_temp\aprg\AprgCommon\AprgCommon)");
     runFormatterInDirectory(R"(F:\Branches\aprg_project\aprg_temp\aprg\AprgCommon\AprgCommon)");
@@ -110,6 +112,19 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaNumberWorks) {
 
     verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaNumber.hpp)", TEST_HEADER_FILE);
     verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaNumber.cpp)", TEST_IMPLEMENTATION_FILE);
+    clearFile(TEST_HEADER_FILE);
+    clearFile(TEST_IMPLEMENTATION_FILE);
+}
+
+TEST(CPlusPlusReorganizerTest, ReorganizeAlbaStringHelperWorks) {
+    CPlusPlusReorganizer reorganizer;
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaStringHelper.hpp)", TEST_HEADER_FILE);
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaStringHelper.cpp)", TEST_IMPLEMENTATION_FILE);
+
+    reorganizer.processHeaderAndImplementationFile(TEST_HEADER_FILE, TEST_IMPLEMENTATION_FILE);
+
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaStringHelper.hpp)", TEST_HEADER_FILE);
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaStringHelper.cpp)", TEST_IMPLEMENTATION_FILE);
     clearFile(TEST_HEADER_FILE);
     clearFile(TEST_IMPLEMENTATION_FILE);
 }
@@ -181,6 +196,49 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaMatrixWorks) {
     reorganizer.reorganizeFile(TEST_HEADER_FILE);
 
     verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaMatrix.hpp)", TEST_HEADER_FILE);
+    clearFile(TEST_HEADER_FILE);
+}
+
+TEST(CPlusPlusReorganizerTest, ReorganizeAlbaBitUtilitiesBuiltInWorks) {
+    CPlusPlusReorganizer reorganizer;
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaBitUtilitiesBuiltIn.hpp)", TEST_HEADER_FILE);
+
+    reorganizer.reorganizeFile(TEST_HEADER_FILE);
+
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaBitUtilitiesBuiltIn.hpp)", TEST_HEADER_FILE);
+    clearFile(TEST_HEADER_FILE);
+}
+
+TEST(CPlusPlusReorganizerTest, ReorganizeAlbaContainerHelperWorks) {
+    CPlusPlusReorganizer reorganizer;
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaContainerHelper.hpp)", TEST_HEADER_FILE);
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaContainerHelper.cpp)", TEST_IMPLEMENTATION_FILE);
+
+    reorganizer.processHeaderAndImplementationFile(TEST_HEADER_FILE, TEST_IMPLEMENTATION_FILE);
+
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaContainerHelper.hpp)", TEST_HEADER_FILE);
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaContainerHelper.cpp)", TEST_IMPLEMENTATION_FILE);
+    clearFile(TEST_HEADER_FILE);
+    clearFile(TEST_IMPLEMENTATION_FILE);
+}
+
+TEST(CPlusPlusReorganizerTest, ReorganizeAlbaXYZWorks) {
+    CPlusPlusReorganizer reorganizer;
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaXYZ.hpp)", TEST_HEADER_FILE);
+
+    reorganizer.reorganizeFile(TEST_HEADER_FILE);
+
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaXYZ.hpp)", TEST_HEADER_FILE);
+    clearFile(TEST_HEADER_FILE);
+}
+
+TEST(CPlusPlusReorganizerTest, ReorganizeAlbaSingletonUnitTestsWorks) {
+    CPlusPlusReorganizer reorganizer;
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaSingleton_unit.hpp)", TEST_HEADER_FILE);
+
+    reorganizer.reorganizeFile(TEST_HEADER_FILE);
+
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaSingleton_unit.hpp)", TEST_HEADER_FILE);
     clearFile(TEST_HEADER_FILE);
 }
 

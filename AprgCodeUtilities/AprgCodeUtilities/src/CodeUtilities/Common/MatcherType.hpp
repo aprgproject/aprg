@@ -8,7 +8,8 @@ enum class MatcherType {
     IdentifierWithPascalCase,
     IdentifierWithSnakeCase,
     IdentifierAndNotAScreamingSnakeCase,
-    NotAWhiteSpace
+    NotAWhiteSpace,
+    WhiteSpaceWithNewLine
 };
 
 }  // namespace alba::CodeUtilities
