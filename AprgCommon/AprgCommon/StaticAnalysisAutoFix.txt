@@ -1,7 +1,9 @@
-StaticAnalysisJobIdentifier: [50]
-2023-09-05T12:07:07
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp:247:67: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp:250:12: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+StaticAnalysisJobIdentifier: [55]
+2023-09-09T14:45:37
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaConfigurationHolder.hpp:22:5: warning: function 'getConfigurationDetails' should be marked [[nodiscard]] [modernize-use-nodiscard]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaConfigurationHolder.hpp:22:5: note: FIX-IT applied suggested code changes
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp:205:67: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp:208:12: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Container/AlbaOptional_unit.cpp:188:22: warning: explicitly assigning value of variable of type 'AlbaOptional<int>' to itself [-Wself-assign-overloaded]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Debug/AlbaDebug.hpp:13:2: warning: ("The class AlbaDebug is used. Please remove after your done debugging.") // GCC extension [clang-diagnostic-#warnings]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Debug/AlbaDebug.hpp:13:2: warning: #warning is a language extension [clang-diagnostic-pedantic]
