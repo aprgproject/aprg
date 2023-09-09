@@ -22,29 +22,29 @@ namespace alba::algebra {
 class Term : public BaseTerm {
 public:
     using BaseTermDataPointer = std::unique_ptr<BaseTermData>;
-    Term();
-    Term(TermType const type, bool const isSimplified, BaseTermDataPointer&& m_baseTermDataPointer);  // for move
     // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
+    Term();
+    // enabled via a type template parameter
+    Term(TermType const type, bool const isSimplified, BaseTermDataPointer&& m_baseTermDataPointer);  // for move
     template <typename ArithmeticType, typename = std::enable_if_t<typeHelper::isArithmeticType<ArithmeticType>()>>
     Term(ArithmeticType const value) : Term(AlbaNumber(value)) {}
-    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
-    // enabled via a type template parameter
     // rule of five or six
     ~Term() override = default;
     Term(Term&& term) = default;
     Term& operator=(Term&& term) = default;
-    explicit Term(AlbaNumber const& number);
-    explicit Term(char const* const characterString);
-    explicit Term(std::string const& stringAsParameter);
-    explicit Term(Constant const& constant);
-    explicit Term(Variable const& variable);
-    explicit Term(Operator const& operatorTerm);
-    explicit Term(Monomial const& monomial);
-    explicit Term(Polynomial const& polynomial);
-    explicit Term(Expression const& expression);
-    explicit Term(Function const& function);
+    Term(AlbaNumber const& number);
+    Term(char const* const characterString);
+    Term(std::string const& stringAsParameter);
+    Term(Constant const& constant);
+    Term(Variable const& variable);
+    Term(Operator const& operatorTerm);
+    Term(Monomial const& monomial);
+    Term(Polynomial const& polynomial);
+    Term(Expression const& expression);
+    Term(Function const& function);
     Term(Term const& term);
     Term& operator=(Term const& term);
+    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
     bool operator==(Term const& second) const;
     bool operator!=(Term const& second) const;
     bool operator<(Term const& second) const;
