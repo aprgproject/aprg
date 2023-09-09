@@ -19,7 +19,7 @@ public:
         : m_configurationDetails{configurationDetails} {}
     AlbaConfigurationHolder() : m_configurationDetails{getDefaultConfigurationDetails<ConfigurationDetails>()} {}
 
-    ConfigurationDetails const& getConfigurationDetails() const { return m_configurationDetails; }
+    [[nodiscard]] ConfigurationDetails const& getConfigurationDetails() const { return m_configurationDetails; }
 
     void setConfigurationDetails(ConfigurationDetails const& configurationDetails) {
         m_configurationDetails = configurationDetails;
