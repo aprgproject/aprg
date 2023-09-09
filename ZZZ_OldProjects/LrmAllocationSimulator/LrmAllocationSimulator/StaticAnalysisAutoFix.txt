@@ -1,9 +1,3 @@
-StaticAnalysisJobIdentifier: [50]
-2023-09-05T19:13:12
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:68:10: style: Unused private function: 'Lrm::sortFspBasedPriorityForMcdSelection2' [unusedPrivateFunction]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:70:10: style: Unused private function: 'Lrm::sortFspBasedPriorityForNbicMcdSelection2' [unusedPrivateFunction]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:79:32: style: Unused private function: 'Lrm::selectFspsForCcdMcd2' [unusedPrivateFunction]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.hpp:93:32: style: Unused private function: 'Lrm::selectFspsForCcdNbicMcd2' [unusedPrivateFunction]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1184:111: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1201:29: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
+StaticAnalysisJobIdentifier: [56]
+2023-09-09T19:15:36
 DONE!
