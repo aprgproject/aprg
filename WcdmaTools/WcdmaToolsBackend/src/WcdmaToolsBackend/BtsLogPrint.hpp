@@ -48,8 +48,8 @@ struct TransactionData {
 
 class BtsLogPrint {
 public:
+    BtsLogPrint() = default;
     explicit BtsLogPrint(std::string const& lineInLogs);
-    BtsLogPrint();
     BtsLogPrint(std::string const& filename, std::string const& lineInLogs);
     bool operator<(BtsLogPrint const& btsLogPrintToCompare) const;
     bool operator>(BtsLogPrint const& btsLogPrintToCompare) const;
@@ -105,6 +105,9 @@ private:
         int const index, char const character);
 
     void analyzeLineInLogs(std::string const& lineInLogs);
+    static constexpr int NUMBER_OF_CHARACTER_FOR_FILE = 25;
+    static constexpr int NUMBER_OF_LETTERS_IN_HARDWARE_TYPE = 3;
+    static constexpr int NUMBER_OF_NUMBERS_IN_HARDWARE_TYPE = 4;
     BtsLogTime m_btsTime;
     BtsLogTime m_pcTime;
     std::string m_hardwareAddress;
