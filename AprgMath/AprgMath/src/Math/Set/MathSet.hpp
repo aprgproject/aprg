@@ -29,15 +29,8 @@ public:
     using RosterLists = std::vector<RosterList>;
     using VoidElementFunction = std::function<void(ElementType const&)>;
     using GenerateFunction = std::function<void(VoidElementFunction const& generateElementFunction)>;
-    MathSet()
-        : m_description("Null set")
-#define NULL_RULE [](ElementType const&) -> bool { return false; }  // need to macro because it affects indentions
-          ,
-          m_ruleToBeInTheSet(NULL_RULE)
-#undef NULL_RULE
-              explicit MathSet(RosterList const& rosterList) {
-        constructSetBasedOnRosterList(rosterList);
-    }
+    explicit MathSet(RosterList const& rosterList) { constructSetBasedOnRosterList(rosterList); }
+    MathSet() : m_description("Null set"), m_ruleToBeInTheSet([](ElementType const&) -> bool { return false; }) {}
 
     MathSet(RosterInitializerList const& initializerList) {
         RosterList rosterList;
@@ -139,8 +132,6 @@ public:
         }
         return result;
     }
-
-    {}
 
 private:
     [[nodiscard]] std::string getDescriptionForRosterList(RosterList const& rosterList) const {
