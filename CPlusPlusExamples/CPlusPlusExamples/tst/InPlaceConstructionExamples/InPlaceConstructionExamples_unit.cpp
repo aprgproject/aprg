@@ -121,7 +121,10 @@ TEST(InPlaceConstructionExamplesTest, NoRvoBecauseNoOpportunity) {
 
 namespace NoRvoBecauseNotEnoughInfo {
 
+namespace {
 static volatile int happinessValue = 100;
+int getHappiness() { return happinessValue; }
+}  // namespace
 
 string undecidedFunction() {
     string happy("Hooray!");
@@ -134,8 +137,6 @@ string undecidedFunction() {
     // -> It has to be decidable at construction time.
     // -> Again, the compiler will still move it (Since C++11)
 }
-
-int getHappiness() { return happinessValue; }
 
 TEST(InPlaceConstructionExamplesTest, NoRvoBecauseNotEnoughInfo) {
     string s(undecidedFunction());
