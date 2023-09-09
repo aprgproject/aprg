@@ -6,13 +6,11 @@
 namespace alba {
 
 enum class DspMode {
-
     NyquistMixedChannelDevice,
     NyquistCommonChannelDeviceSmall,
     NyquistCommonChannelDeviceNormal,
     NyquistDedicatedChannelDevice,
     NyquistPicDevice
-
 };
 
 enum class NyquistType { Nyquist, TurboNyquist };

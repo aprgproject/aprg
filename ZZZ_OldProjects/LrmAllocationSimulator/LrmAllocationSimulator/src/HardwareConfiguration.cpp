@@ -12,6 +12,7 @@ using namespace std;
 
 namespace alba {
 
+constexpr unsigned int TCOM_FSP_ADDRESS = 0x1200;
 unsigned int HardwareConfiguration::getTcomFspAddress() const { return m_tcomFspAddress; }
 unsigned int HardwareConfiguration::getSharedLcgId() const { return m_sharedLcgId; }
 AddressToDspMap& HardwareConfiguration::getAddressToDspMapReference() { return m_dspAddressToDspMap; }
