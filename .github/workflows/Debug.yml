@@ -32,8 +32,8 @@ jobs:
           echo "ninja version: [$(ninja --version)]"
           #echo "boost version: [$(boost --version)]"
           choco search boost
-          choco install boost
-          choco info boost
+          choco install boost-msvc-14.3
+          choco info boost-msvc-14.3
           echo "boost version: [$(boost --version)]"
           echo "clang version: [$(clang --version)]"
           choco search clang
