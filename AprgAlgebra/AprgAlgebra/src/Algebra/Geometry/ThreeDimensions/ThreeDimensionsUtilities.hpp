@@ -8,8 +8,8 @@ Equation getEllipticConeEquation();
 Equation getEllipticHyperboloidEquation(bool const isOneNegative);
 Equation getEllipticParaboloidEquation();
 Equation getHyperbolicParaboloidEquation();
-Equations getLineEquations();
 Equation getPlaneEquation();
 Equation getPlaneEquationWithPointCoordinates();
 Equation getSphereEquation();
+Equations getLineEquations();
 }  // namespace alba::algebra::ThreeDimensions

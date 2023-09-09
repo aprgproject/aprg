@@ -41,8 +41,6 @@ void EightPuzzlePossibleProblem::printStepsToSolve() {
     }
 }
 
-int EightPuzzlePossibleProblem::getCost(SearchNode const& node) { return node.differenceFromTarget + node.searchLevel; }
-
 void EightPuzzlePossibleProblem::moveTile(
     NumberMatrix& matrix, Coordinate const& previousBlankTile, Coordinate const& nextBlankTile) {
     swap(
@@ -51,10 +49,18 @@ void EightPuzzlePossibleProblem::moveTile(
 }
 
 void EightPuzzlePossibleProblem::printMatrix(NumberMatrix const& numberMatrix) { cout << numberMatrix << "\n"; }
+int EightPuzzlePossibleProblem::getCost(SearchNode const& node) { return node.differenceFromTarget + node.searchLevel; }
 
-bool EightPuzzlePossibleProblem::isValidCoordinate(Coordinate const& coordinate) const {
-    return coordinate.first >= 0 && coordinate.first < m_sideSize && coordinate.second >= 0 &&
-           coordinate.second < m_sideSize;
+EightPuzzlePossibleProblem::Coordinate EightPuzzlePossibleProblem::getBlankTile(NumberMatrix const& matrix) const {
+    Coordinate result{};
+    for (int y = 0; y < m_sideSize; ++y) {
+        for (int x = 0; x < m_sideSize; ++x) {
+            if (matrix.getEntry(x, y) == 0) {
+                result = Coordinate{x, y};
+            }
+        }
+    }
+    return result;
 }
 
 int EightPuzzlePossibleProblem::countDifference(
@@ -70,16 +76,9 @@ int EightPuzzlePossibleProblem::countDifference(
     return result;
 }
 
-EightPuzzlePossibleProblem::Coordinate EightPuzzlePossibleProblem::getBlankTile(NumberMatrix const& matrix) const {
-    Coordinate result{};
-    for (int y = 0; y < m_sideSize; ++y) {
-        for (int x = 0; x < m_sideSize; ++x) {
-            if (matrix.getEntry(x, y) == 0) {
-                result = Coordinate{x, y};
-            }
-        }
-    }
-    return result;
+bool EightPuzzlePossibleProblem::isValidCoordinate(Coordinate const& coordinate) const {
+    return coordinate.first >= 0 && coordinate.first < m_sideSize && coordinate.second >= 0 &&
+           coordinate.second < m_sideSize;
 }
 
 void EightPuzzlePossibleProblem::printSteps(SearchNodeId const nodeId) const {
@@ -89,18 +88,6 @@ void EightPuzzlePossibleProblem::printSteps(SearchNodeId const nodeId) const {
         printMatrix(snapshot.numberMatrix);
     }
 }
-
-EightPuzzlePossibleProblem::SearchNode EightPuzzlePossibleProblem::createNode(
-    SearchNodeId const& currentNodeId, Coordinate const& nextBlankTile, int const nextSearchLevel) {
-    SearchNodeId nextNodeId = getNextNodeId();
-    m_nodeIdToSnapshot.emplace_back(
-        PuzzleSnapshot{currentNodeId, nextBlankTile, m_nodeIdToSnapshot[currentNodeId].numberMatrix});
-    PuzzleSnapshot& nextSnapshot(m_nodeIdToSnapshot[nextNodeId]);
-    moveTile(nextSnapshot.numberMatrix, m_nodeIdToSnapshot[currentNodeId].blankTile, nextSnapshot.blankTile);
-    return SearchNode{nextNodeId, countDifference(nextSnapshot.numberMatrix, m_targetMatrix), nextSearchLevel};
-}
-
-EightPuzzlePossibleProblem::SearchNodeId EightPuzzlePossibleProblem::getNextNodeId() { return m_nodeId++; }
 
 void EightPuzzlePossibleProblem::clearIfInvalid() {
     if (m_startMatrix.getNumberOfColumns() != m_startMatrix.getNumberOfRows() ||
@@ -117,5 +104,17 @@ void EightPuzzlePossibleProblem::clear() {
     m_nodeIdToSnapshot.clear();
     m_nodeId = 0;
 }
+
+EightPuzzlePossibleProblem::SearchNode EightPuzzlePossibleProblem::createNode(
+    SearchNodeId const& currentNodeId, Coordinate const& nextBlankTile, int const nextSearchLevel) {
+    SearchNodeId nextNodeId = getNextNodeId();
+    m_nodeIdToSnapshot.emplace_back(
+        PuzzleSnapshot{currentNodeId, nextBlankTile, m_nodeIdToSnapshot[currentNodeId].numberMatrix});
+    PuzzleSnapshot& nextSnapshot(m_nodeIdToSnapshot[nextNodeId]);
+    moveTile(nextSnapshot.numberMatrix, m_nodeIdToSnapshot[currentNodeId].blankTile, nextSnapshot.blankTile);
+    return SearchNode{nextNodeId, countDifference(nextSnapshot.numberMatrix, m_targetMatrix), nextSearchLevel};
+}
+
+EightPuzzlePossibleProblem::SearchNodeId EightPuzzlePossibleProblem::getNextNodeId() { return m_nodeId++; }
 
 }  // namespace alba

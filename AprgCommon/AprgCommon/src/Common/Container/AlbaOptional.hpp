@@ -42,7 +42,6 @@ public:
 
     explicit operator bool() const { return hasContent(); }
     explicit operator ContentType() const { return get(); }
-    [[nodiscard]] bool hasContent() const { return static_cast<bool>(m_contentPointer); }
 
     [[nodiscard]] ContentType get() const {
         assert(m_contentPointer);  // not allowing any mistakes
@@ -57,11 +56,7 @@ public:
         return *(m_contentPointer);
     }
 
-    ContentType& getReference() {
-        assert(m_contentPointer);  // not allowing any mistakes
-        return *(m_contentPointer);
-    }
-
+    [[nodiscard]] bool hasContent() const { return static_cast<bool>(m_contentPointer); }
     void createObjectUsingDefaultConstructor() { m_contentPointer = std::make_unique<ContentType>(); }
 
     void setValue(ContentType const content) {
@@ -81,6 +76,11 @@ public:
     }
 
     void clear() { m_contentPointer.reset(); }
+
+    ContentType& getReference() {
+        assert(m_contentPointer);  // not allowing any mistakes
+        return *(m_contentPointer);
+    }
 
 private:
     friend std::ostream& operator<<(std::ostream& out, AlbaOptional const& optional) {
@@ -126,14 +126,14 @@ public:
         return m_empty;
     }
 
-    [[nodiscard]] bool hasContent() const { return m_hasContent; }
-
     [[nodiscard]] ContentType& get() const {
         if (m_hasContent && isContentPointerValid()) {
             return *m_contentPointer;
         }
         return m_empty;
     }
+
+    [[nodiscard]] bool hasContent() const { return m_hasContent; }
 
     void setValue(ContentType const content) {
         if (m_hasContent && isContentPointerValid()) {

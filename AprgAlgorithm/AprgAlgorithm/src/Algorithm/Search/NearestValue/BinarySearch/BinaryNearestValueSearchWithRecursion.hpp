@@ -13,14 +13,6 @@ public:
     explicit BinaryNearestValueSearchWithRecursion(Values const& sortedValues) : m_sortedValues(sortedValues) {}
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    [[nodiscard]] Value getNearestValue(Value const& target) const {
-        Value result{};
-        if (!m_sortedValues.empty()) {
-            result = m_sortedValues[getIndexUsingIntervalsInsideTarget(0, m_sortedValues.size() - 1, target)];
-        }
-        return result;
-    }
-
     [[nodiscard]] Index getIndexOfNearestValue(Value const& target) const {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
@@ -34,6 +26,14 @@ public:
         if (lowIndex < static_cast<Index>(m_sortedValues.size()) &&
             highIndex < static_cast<Index>(m_sortedValues.size()) && lowIndex <= highIndex) {
             result = getIndexUsingIntervalsInsideTarget(lowIndex, highIndex, target);
+        }
+        return result;
+    }
+
+    [[nodiscard]] Value getNearestValue(Value const& target) const {
+        Value result{};
+        if (!m_sortedValues.empty()) {
+            result = m_sortedValues[getIndexUsingIntervalsInsideTarget(0, m_sortedValues.size() - 1, target)];
         }
         return result;
     }

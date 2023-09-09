@@ -8,6 +8,20 @@ using namespace std;
 
 namespace alba::algebra {
 
+void retrieveInitialValuesForIteratingMethods(AlbaNumbersSet& allValues, Term const& term) {
+    NumbersRetriever retriever;
+    retriever.retrieveFromTerm(term);
+    AlbaNumbersSet const& numbers(retriever.getNumbers());
+    for (AlbaNumber const& number : numbers) {
+        AlbaNumber positiveNumber(getAbsoluteValue(number));
+        AlbaNumber positiveLogarithm(log(positiveNumber.getDouble()));
+        allValues.emplace(positiveNumber * -1);
+        allValues.emplace(positiveLogarithm * -1);
+        allValues.emplace(positiveLogarithm);
+        allValues.emplace(positiveNumber);
+    }
+}
+
 AlbaNumber getPositiveLogarithmOfLargestNumber(Term const& term) {
     NumbersRetriever retriever;
     retriever.retrieveFromTerm(term);
@@ -36,20 +50,6 @@ AlbaNumbers getInitialValuesForIteratingMethods(Equation const& equation) {
     result.reserve(allValues.size());
     copy(allValues.cbegin(), allValues.cend(), back_inserter(result));
     return result;
-}
-
-void retrieveInitialValuesForIteratingMethods(AlbaNumbersSet& allValues, Term const& term) {
-    NumbersRetriever retriever;
-    retriever.retrieveFromTerm(term);
-    AlbaNumbersSet const& numbers(retriever.getNumbers());
-    for (AlbaNumber const& number : numbers) {
-        AlbaNumber positiveNumber(getAbsoluteValue(number));
-        AlbaNumber positiveLogarithm(log(positiveNumber.getDouble()));
-        allValues.emplace(positiveNumber * -1);
-        allValues.emplace(positiveLogarithm * -1);
-        allValues.emplace(positiveLogarithm);
-        allValues.emplace(positiveNumber);
-    }
 }
 
 }  // namespace alba::algebra

@@ -12,9 +12,15 @@ class DoublingSizeStack : public BaseStack<Object> {
 public:
     DoublingSizeStack() : m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
     ~DoublingSizeStack() override { deleteAllObjects(); }
-    [[nodiscard]] bool isEmpty() const override { return m_stackSize == 0; }
     [[nodiscard]] int getSize() const override { return m_stackSize; }
     [[nodiscard]] int getContainerSize() const { return m_containerSize; }
+    [[nodiscard]] bool isEmpty() const override { return m_stackSize == 0; }
+
+    // constant amortized (best case: constant, worst case: linear due to resizing)
+    void push(Object const& object) override {
+        resizeOnPushIfNeeded();
+        m_objects[m_stackSize++] = object;
+    }
 
     // constant amortized (best case: constant, worst case: linear due to resizing)
     Object pop() override {
@@ -22,12 +28,6 @@ public:
         Object result(m_objects[--m_stackSize]);
         resizeOnPopIfNeeded();
         return result;
-    }
-
-    // constant amortized (best case: constant, worst case: linear due to resizing)
-    void push(Object const& object) override {
-        resizeOnPushIfNeeded();
-        m_objects[m_stackSize++] = object;
     }
 
     static constexpr int MINUMUM_CONTAINER_SIZE = 1;

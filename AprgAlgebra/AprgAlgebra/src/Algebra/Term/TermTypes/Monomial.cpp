@@ -68,12 +68,7 @@ Monomial::VariablesToExponentsMap Monomial::combineVariableExponentMapByDivision
     return newVariableMap;
 }
 
-bool Monomial::isSimplified() const { return m_isSimplified; }
 AlbaNumber const& Monomial::getCoefficient() const { return m_constant; }
-
-Monomial::VariablesToExponentsMap const& Monomial::getVariablesToExponentsMap() const {
-    return m_variablesToExponentsMap;
-}
 
 AlbaNumber Monomial::getExponentForVariable(string const& variableName) const {
     AlbaNumber exponent(0);
@@ -82,6 +77,12 @@ AlbaNumber Monomial::getExponentForVariable(string const& variableName) const {
     }
     return exponent;
 }
+
+Monomial::VariablesToExponentsMap const& Monomial::getVariablesToExponentsMap() const {
+    return m_variablesToExponentsMap;
+}
+
+bool Monomial::isSimplified() const { return m_isSimplified; }
 
 void Monomial::clear() {
     m_constant = AlbaNumber(0);

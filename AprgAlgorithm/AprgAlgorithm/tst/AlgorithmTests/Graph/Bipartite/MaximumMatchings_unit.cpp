@@ -12,7 +12,6 @@ using VertexForTest = int;
 using Edges = typename GraphTypes<VertexForTest>::Edges;
 using GraphForTest = UndirectedGraphWithListOfEdges<VertexForTest>;
 using MaximumMatchingsForTest = MaximumMatchings<VertexForTest>;
-
 VertexForTest newSourceVertex = numeric_limits<int>::max();
 VertexForTest newSinkVertex = numeric_limits<int>::max() - 1;
 }  // namespace

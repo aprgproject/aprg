@@ -23,9 +23,6 @@ public:
         // deAllocate(); // this is Raiiaf so we dont delete here
     }
 
-    ContentType get() { return *(static_cast<ContentType *>(m_voidPointer)); }
-    ContentType &getReference() { return *(static_cast<ContentType *>(m_voidPointer)); }
-
     void deAllocate() {
         // Even if it is safe to delete a pointer with nullptr, lets not just do it to remove potential overhead.
         if (hasContent()) {
@@ -39,6 +36,9 @@ public:
         // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         m_voidPointer = new ContentType(reference);
     }
+
+    ContentType get() { return *(static_cast<ContentType *>(m_voidPointer)); }
+    ContentType &getReference() { return *(static_cast<ContentType *>(m_voidPointer)); }
 
 private:
     [[nodiscard]] bool hasContent() const { return m_voidPointer != nullptr; }

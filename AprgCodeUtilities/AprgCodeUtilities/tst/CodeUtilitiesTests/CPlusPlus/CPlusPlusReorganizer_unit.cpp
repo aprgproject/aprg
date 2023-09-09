@@ -16,6 +16,7 @@ using namespace std;
 namespace alba::CodeUtilities {
 
 namespace {
+
 void runFormatterInDirectory(string const& directoryPath) {
     CPlusPlusReorganizer reorganizer;
     AlbaLocalPathHandler directoryPathHandler(directoryPath);
@@ -34,11 +35,13 @@ void runFormatterInDirectory(string const& directoryPath) {
         }
     }
 }
+
 void processDirectory(string const& directoryPath) {
     CPlusPlusReorganizer reorganizer;
     reorganizer.processDirectory(directoryPath);
     runFormatterInDirectory(directoryPath);
 }
+
 void processAprgDirectory(string const& aprgPath) {
     CPlusPlusReorganizer reorganizer;
     AlbaLocalPathHandler aprgPathHandler(aprgPath);
@@ -52,11 +55,13 @@ void processAprgDirectory(string const& aprgPath) {
         }
     }
 }
+
 void copyFile(string const& source, string const& destination) {
     AlbaLocalPathHandler sourcePathHandler(source);
     AlbaLocalPathHandler destinationPathHandler(destination);
     sourcePathHandler.copyToNewFile(destinationPathHandler.getFullPath());
 }
+
 void verifyFile(string const& expectedFile, string const& testFile) {
     AlbaLocalPathHandler expectedFilePathHandler(expectedFile);
     AlbaLocalPathHandler testFilePathHandler(testFile);
@@ -99,7 +104,9 @@ void verifyFile(string const& expectedFile, string const& testFile) {
         EXPECT_FALSE(testFileReader.isNotFinished());
     }
 }
+
 void clearFile(string const& file) { ofstream expectedFileStream(AlbaLocalPathHandler(file).getFullPath()); }
+
 }  // namespace
 
 TEST(CPlusPlusReorganizerTest, DISABLED_ActualProcessAprgDirectoryTest) {

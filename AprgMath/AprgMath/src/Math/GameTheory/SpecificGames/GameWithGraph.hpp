@@ -15,8 +15,8 @@ public:
     using Graph = algorithm::BaseDirectedGraph<Vertex>;
     using VertexToGrundyNumberMap = std::map<Vertex, UnsignedInteger>;
     explicit GameWithGraph(Graph const& graph);
-    UnsignedInteger getGrundyNumberAt(Vertex const vertex);
     GameState getGameStateAt(Vertex const vertex);
+    UnsignedInteger getGrundyNumberAt(Vertex const vertex);
     Vertex getOptimalNextVertexAt(Vertex const vertex);
 
 private:

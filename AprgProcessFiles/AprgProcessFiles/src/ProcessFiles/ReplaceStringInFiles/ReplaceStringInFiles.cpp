@@ -176,31 +176,6 @@ string ReplaceStringInFiles::constructCPlusPlusPrint(
     return result;
 }
 
-bool ReplaceStringInFiles::isCOrCPlusPlusFile(string const& extension) {
-    return "cpp" == extension || "hpp" == extension || "c" == extension || "h" == extension;
-}
-
-bool ReplaceStringInFiles::hasPrintInLine(string const& line) {
-    return isStringFoundCaseSensitive(line, "TLH_DEBUG_PRINT") || isStringFoundCaseSensitive(line, "TLH_INFO_PRINT") ||
-           isStringFoundCaseSensitive(line, "TLH_WARNING_PRINT") || isStringFoundCaseSensitive(line, "TLH_ERROR_PRINT");
-}
-
-bool ReplaceStringInFiles::hasEndOfPrintInLine(string const& line) { return isStringFoundCaseSensitive(line, ");"); }
-
-string ReplaceStringInFiles::getNewPrintStreamBasedFromOldPrintFunction(string const& printFunction) {
-    string newPrintStream;
-    if ("TLH_DEBUG_PRINT" == printFunction) {
-        newPrintStream = "debug()";
-    } else if ("TLH_INFO_PRINT" == printFunction) {
-        newPrintStream = "info()";
-    } else if ("TLH_WARNING_PRINT" == printFunction) {
-        newPrintStream = "warning()";
-    } else if ("TLH_ERROR_PRINT" == printFunction) {
-        newPrintStream = "error()";
-    }
-    return newPrintStream;
-}
-
 void ReplaceStringInFiles::removeStartingAndTrailingWhiteSpaceInPrintParameters(strings& printParameters) {
     for (string& printParameter : printParameters) {
         printParameter = getStringWithoutStartingAndTrailingWhiteSpace(printParameter);
@@ -227,5 +202,30 @@ void ReplaceStringInFiles::appendParameterToResult(string& result, bool& isOnStr
     }
     isOnStringLiteral = false;
 }
+
+string ReplaceStringInFiles::getNewPrintStreamBasedFromOldPrintFunction(string const& printFunction) {
+    string newPrintStream;
+    if ("TLH_DEBUG_PRINT" == printFunction) {
+        newPrintStream = "debug()";
+    } else if ("TLH_INFO_PRINT" == printFunction) {
+        newPrintStream = "info()";
+    } else if ("TLH_WARNING_PRINT" == printFunction) {
+        newPrintStream = "warning()";
+    } else if ("TLH_ERROR_PRINT" == printFunction) {
+        newPrintStream = "error()";
+    }
+    return newPrintStream;
+}
+
+bool ReplaceStringInFiles::isCOrCPlusPlusFile(string const& extension) {
+    return "cpp" == extension || "hpp" == extension || "c" == extension || "h" == extension;
+}
+
+bool ReplaceStringInFiles::hasPrintInLine(string const& line) {
+    return isStringFoundCaseSensitive(line, "TLH_DEBUG_PRINT") || isStringFoundCaseSensitive(line, "TLH_INFO_PRINT") ||
+           isStringFoundCaseSensitive(line, "TLH_WARNING_PRINT") || isStringFoundCaseSensitive(line, "TLH_ERROR_PRINT");
+}
+
+bool ReplaceStringInFiles::hasEndOfPrintInLine(string const& line) { return isStringFoundCaseSensitive(line, ");"); }
 
 }  // namespace alba

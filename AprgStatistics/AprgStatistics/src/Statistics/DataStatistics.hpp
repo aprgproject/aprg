@@ -20,9 +20,14 @@ public:
     explicit DataStatistics(Samples const& samples) : m_samples(samples) {}
     [[nodiscard]] Samples const& getSamples() const { return m_samples; }
 
-    double getDispersionAroundTheCentroid() {
-        calculateDispersionAroundTheCentroidIfNeeded();
-        return m_dispersionAroundTheCentroid.value();
+    void clearPreviousCalculations() {
+        m_sum.reset();
+        m_mean.reset();
+        m_sampleVariance.reset();
+        m_sampleStandardDeviation.reset();
+        m_populationVariance.reset();
+        m_populationStandardDeviation.reset();
+        m_dispersionAroundTheCentroid.reset();
     }
 
     Sample getSum() {
@@ -55,14 +60,9 @@ public:
         return m_populationStandardDeviation.value();
     }
 
-    void clearPreviousCalculations() {
-        m_sum.reset();
-        m_mean.reset();
-        m_sampleVariance.reset();
-        m_sampleStandardDeviation.reset();
-        m_populationVariance.reset();
-        m_populationStandardDeviation.reset();
-        m_dispersionAroundTheCentroid.reset();
+    double getDispersionAroundTheCentroid() {
+        calculateDispersionAroundTheCentroidIfNeeded();
+        return m_dispersionAroundTheCentroid.value();
     }
 
 protected:

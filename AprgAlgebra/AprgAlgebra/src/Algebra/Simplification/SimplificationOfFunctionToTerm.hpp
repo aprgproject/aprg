@@ -16,9 +16,9 @@ public:
     class Configuration : public AlbaConfigurationHolder<ConfigurationDetails> {};
     class ScopeObject : public AlbaConfigurationScopeObject<ConfigurationDetails> {};
     SimplificationOfFunctionToTerm();
+    static Term simplifyToTerm(Function const& functionObject);
     static bool shouldSimplifyTrigonometricFunctionsToSinAndCos();
     static bool shouldNotSimplifyLogarithmicFunctionsByReducingTheOperatorLevel();
-    static Term simplifyToTerm(Function const& functionObject);
 
 private:
     static Term simplifyTrigometricFunctionToExpression(Function const& functionObject);

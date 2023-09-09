@@ -31,27 +31,13 @@ public:
     using Coordinate = std::pair<int, NodeId>;
     using Coordinates = std::vector<Coordinate>;
     RWayTrieUsingMatrix() : m_nodePointerMatrix(RADIX, MAX_NUMBER_IDS) {}
-    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
-
-    [[nodiscard]] bool doesContain(Key const& key) const override {
-        return static_cast<bool>(getValuePointer(0, key, 0));
-    }
-
-    [[nodiscard]] int getSize() const override { return m_size; }
-
-    [[nodiscard]] Value get(Key const& key) const override {
-        Value result{};
-        ValueUniquePointer valueUniquePointer(getValuePointer(0, key, 0));
-        if (valueUniquePointer) {
-            result = *valueUniquePointer;
-        }
-        return result;
-    }
 
     [[nodiscard]] Key getLongestPrefixOf(Key const& keyToCheck) const override {
         int longestPrefixLength(getLengthOfLongestPrefix(0, keyToCheck, 0));
         return keyToCheck.substr(0, longestPrefixLength);
     }
+
+    [[nodiscard]] SetOfNodeIds const& getUnusedNodeIds() const { return m_unusedNodeIds; }
 
     [[nodiscard]] Strings getKeys() const override {
         Strings result;
@@ -80,7 +66,14 @@ public:
         return result;
     }
 
-    [[nodiscard]] SetOfNodeIds const& getUnusedNodeIds() const { return m_unusedNodeIds; }
+    [[nodiscard]] Value get(Key const& key) const override {
+        Value result{};
+        ValueUniquePointer valueUniquePointer(getValuePointer(0, key, 0));
+        if (valueUniquePointer) {
+            result = *valueUniquePointer;
+        }
+        return result;
+    }
 
     [[nodiscard]] std::string getMatrixString() const {
         DisplayTable table;
@@ -111,48 +104,17 @@ public:
         return ss.str();
     }
 
+    [[nodiscard]] int getSize() const override { return m_size; }
+    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
+
+    [[nodiscard]] bool doesContain(Key const& key) const override {
+        return static_cast<bool>(getValuePointer(0, key, 0));
+    }
+
     void put(Key const& key, Value const& value) override { put(0, key, value, 0); }
     void deleteBasedOnKey(Key const& key) override { deleteBasedOnKeyAndReturnIfDeleted(0, key, 0); }
 
 private:
-    [[nodiscard]] bool isValidNodeId(NodeId const nodeId) const {
-        return nodeId < static_cast<NodeId>(m_nodePointerMatrix.getNumberOfRows());
-    }
-
-    [[nodiscard]] bool isNodeEmpty(NodeId const nodeId) const {
-        bool result(true);
-        for (int c = 0; result && c < RADIX; ++c) {
-            NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, nodeId));
-            result = result && !nodePointer;
-        }
-        return result;
-    }
-
-    [[nodiscard]] int getLengthOfLongestPrefix(
-        NodeId const nodeId, Key const& keyToCheck, int const startingIndex) const {
-        int currentLongestLength(0);
-        NodeId currentNodeId(nodeId);
-        for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(keyToCheck.length()); ++keyIndex) {
-            bool isNextNodeFound(false);
-            if (isValidNodeId(currentNodeId)) {
-                char c(keyToCheck[keyIndex]);
-                NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, currentNodeId));
-                if (nodePointer) {
-                    isNextNodeFound = true;
-                    currentNodeId = nodePointer->nextNodeId;
-                    ValueUniquePointer const& valueUniquePointer(nodePointer->valueUniquePointer);
-                    if (valueUniquePointer) {
-                        currentLongestLength = keyIndex + 1;
-                    }
-                }
-            }
-            if (!isNextNodeFound) {
-                break;
-            }
-        }
-        return currentLongestLength;
-    }
-
     [[nodiscard]] Coordinate getCoordinate(NodeId const nodeId, Key const& key, int const startingIndex) const {
         Coordinate result{INVALID_NODE_ID, 0};
         NodeId currentNodeId(nodeId);
@@ -201,6 +163,44 @@ private:
         return result;
     }
 
+    [[nodiscard]] int getLengthOfLongestPrefix(
+        NodeId const nodeId, Key const& keyToCheck, int const startingIndex) const {
+        int currentLongestLength(0);
+        NodeId currentNodeId(nodeId);
+        for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(keyToCheck.length()); ++keyIndex) {
+            bool isNextNodeFound(false);
+            if (isValidNodeId(currentNodeId)) {
+                char c(keyToCheck[keyIndex]);
+                NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, currentNodeId));
+                if (nodePointer) {
+                    isNextNodeFound = true;
+                    currentNodeId = nodePointer->nextNodeId;
+                    ValueUniquePointer const& valueUniquePointer(nodePointer->valueUniquePointer);
+                    if (valueUniquePointer) {
+                        currentLongestLength = keyIndex + 1;
+                    }
+                }
+            }
+            if (!isNextNodeFound) {
+                break;
+            }
+        }
+        return currentLongestLength;
+    }
+
+    [[nodiscard]] bool isValidNodeId(NodeId const nodeId) const {
+        return nodeId < static_cast<NodeId>(m_nodePointerMatrix.getNumberOfRows());
+    }
+
+    [[nodiscard]] bool isNodeEmpty(NodeId const nodeId) const {
+        bool result(true);
+        for (int c = 0; result && c < RADIX; ++c) {
+            NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, nodeId));
+            result = result && !nodePointer;
+        }
+        return result;
+    }
+
     void collectAllKeysAtNode(NodeId const nodeId, std::string const& previousPrefix, Strings& collectedKeys) const {
         if (isValidNodeId(nodeId)) {
             for (int c = 0; c < RADIX; ++c) {
@@ -243,6 +243,49 @@ private:
                 }
             }
         }
+    }
+
+    void put(NodeId const nodeId, Key const& key, Value const& value, int const startingIndex) {
+        NodeId currentNodeId(nodeId);
+        for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); ++keyIndex) {
+            char c(key[keyIndex]);
+            NodePointer& nodePointer(m_nodePointerMatrix.getEntryReference(c, currentNodeId));
+            if (!nodePointer) {
+                nodePointer = std::make_unique<Node>();
+                nodePointer->nextNodeId = INVALID_NODE_ID;
+            }
+            if (keyIndex + 1 == static_cast<NodeId>(key.length())) {
+                ValueUniquePointer& valueUniquePointer(nodePointer->valueUniquePointer);
+                if (valueUniquePointer) {
+                    *valueUniquePointer = value;
+                } else {
+                    ++m_size;
+                    valueUniquePointer = std::make_unique<Value>(value);
+                }
+            } else if (nodePointer->nextNodeId == INVALID_NODE_ID) {
+                nodePointer->nextNodeId = getNextNodeId();
+            }
+            currentNodeId = nodePointer->nextNodeId;
+        }
+    }
+
+    void addToUnusedNodesIfNeeded(NodeId const nodeId, bool const isEmptyNode) {
+        if (isEmptyNode) {
+            m_unusedNodeIds.emplace(nodeId);
+        }
+    }
+
+    NodeId getNextNodeId() {
+        NodeId result{};
+        if (!m_unusedNodeIds.empty()) {
+            auto firstIt = m_unusedNodeIds.cbegin();
+            result = *firstIt;
+            m_unusedNodeIds.erase(firstIt);
+        } else {
+            result = ++m_nextNodeId;
+        }
+        assert(result < MAX_NUMBER_IDS);
+        return result;
     }
 
     bool deleteBasedOnKeyAndReturnIfDeleted(NodeId const nodeId, Key const& key, int const startingIndex) {
@@ -297,49 +340,6 @@ private:
             }
         }
         return isDeleted;
-    }
-
-    NodeId getNextNodeId() {
-        NodeId result{};
-        if (!m_unusedNodeIds.empty()) {
-            auto firstIt = m_unusedNodeIds.cbegin();
-            result = *firstIt;
-            m_unusedNodeIds.erase(firstIt);
-        } else {
-            result = ++m_nextNodeId;
-        }
-        assert(result < MAX_NUMBER_IDS);
-        return result;
-    }
-
-    void put(NodeId const nodeId, Key const& key, Value const& value, int const startingIndex) {
-        NodeId currentNodeId(nodeId);
-        for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); ++keyIndex) {
-            char c(key[keyIndex]);
-            NodePointer& nodePointer(m_nodePointerMatrix.getEntryReference(c, currentNodeId));
-            if (!nodePointer) {
-                nodePointer = std::make_unique<Node>();
-                nodePointer->nextNodeId = INVALID_NODE_ID;
-            }
-            if (keyIndex + 1 == static_cast<NodeId>(key.length())) {
-                ValueUniquePointer& valueUniquePointer(nodePointer->valueUniquePointer);
-                if (valueUniquePointer) {
-                    *valueUniquePointer = value;
-                } else {
-                    ++m_size;
-                    valueUniquePointer = std::make_unique<Value>(value);
-                }
-            } else if (nodePointer->nextNodeId == INVALID_NODE_ID) {
-                nodePointer->nextNodeId = getNextNodeId();
-            }
-            currentNodeId = nodePointer->nextNodeId;
-        }
-    }
-
-    void addToUnusedNodesIfNeeded(NodeId const nodeId, bool const isEmptyNode) {
-        if (isEmptyNode) {
-            m_unusedNodeIds.emplace(nodeId);
-        }
     }
 
     int m_size{0};

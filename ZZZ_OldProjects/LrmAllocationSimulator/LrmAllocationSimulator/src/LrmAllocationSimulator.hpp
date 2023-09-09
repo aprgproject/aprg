@@ -15,9 +15,9 @@ struct Configuration {
 class LrmAllocationSimulator {
 public:
     LrmAllocationSimulator();
+    void addFspInConfiguration(unsigned int const address);
     Configuration createConfigurationForOneFspOneLcg();
     Configuration createConfigurationForTwoFspsOneLcg();
-    void addFspInConfiguration(unsigned int const address);
 
 private:
 };

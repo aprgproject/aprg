@@ -12,6 +12,16 @@ public:
     ~BaseConnectedComponentsWithVertexToComponentIdMap() override =
         default;  // no need for virtual destructor because base destructor is virtual (similar to other virtual
     explicit BaseConnectedComponentsWithVertexToComponentIdMap(Graph const& graph) : m_graph(graph) {}
+    [[nodiscard]] int getNumberOfComponentIds() const override { return m_numberOfComponentIds; }
+
+    [[nodiscard]] int getComponentId(Vertex const& vertex) const override {
+        int result(0);
+        auto it = m_vertexToComponentIdMap.find(vertex);
+        if (it != m_vertexToComponentIdMap.cend()) {
+            result = it->second;
+        }
+        return result;
+    }
 
     // functions)
     [[nodiscard]] bool isConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
@@ -20,17 +30,6 @@ public:
         bool result(false);
         if (it1 != m_vertexToComponentIdMap.cend() && it2 != m_vertexToComponentIdMap.cend()) {
             result = it1->second == it2->second;
-        }
-        return result;
-    }
-
-    [[nodiscard]] int getNumberOfComponentIds() const override { return m_numberOfComponentIds; }
-
-    [[nodiscard]] int getComponentId(Vertex const& vertex) const override {
-        int result(0);
-        auto it = m_vertexToComponentIdMap.find(vertex);
-        if (it != m_vertexToComponentIdMap.cend()) {
-            result = it->second;
         }
         return result;
     }

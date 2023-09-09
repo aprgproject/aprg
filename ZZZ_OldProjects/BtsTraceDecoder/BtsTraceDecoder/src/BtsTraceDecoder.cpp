@@ -11,23 +11,6 @@ using namespace alba::stringHelper;
 
 namespace alba {
 
-std::string BtsTraceDecoder::getNearestLowerSymbol(int const address, int const offset) {
-    string symbol;
-    if (!m_symbolMap.empty()) {
-        int addressWithOffset(address + offset);
-        auto symbolIterator = m_symbolMap.lower_bound(addressWithOffset);
-        if (static_cast<int>(symbolIterator->first) <= addressWithOffset) {
-            symbol = symbolIterator->second;
-        } else {
-            if (symbolIterator != m_symbolMap.begin()) {
-                --symbolIterator;
-                symbol = symbolIterator->second;
-            }
-        }
-    }
-    return symbol;
-}
-
 void BtsTraceDecoder::saveSymbolTableFromObjdump(std::string const& symbolTableFilePath) {
     saveSymbolTable(symbolTableFilePath, SymbolTableFileType::SymbolTableFromObjdump);
 }
@@ -50,6 +33,23 @@ void BtsTraceDecoder::processInputTraceFile(std::string const& inputTraceFilePat
             }
         }
     }
+}
+
+std::string BtsTraceDecoder::getNearestLowerSymbol(int const address, int const offset) {
+    string symbol;
+    if (!m_symbolMap.empty()) {
+        int addressWithOffset(address + offset);
+        auto symbolIterator = m_symbolMap.lower_bound(addressWithOffset);
+        if (static_cast<int>(symbolIterator->first) <= addressWithOffset) {
+            symbol = symbolIterator->second;
+        } else {
+            if (symbolIterator != m_symbolMap.begin()) {
+                --symbolIterator;
+                symbol = symbolIterator->second;
+            }
+        }
+    }
+    return symbol;
 }
 
 int BtsTraceDecoder::getAddressFromLineInFile(string const& lineInFile, SymbolTableFileType const filetype) {

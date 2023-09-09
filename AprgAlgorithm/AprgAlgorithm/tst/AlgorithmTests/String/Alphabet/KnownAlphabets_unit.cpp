@@ -8,19 +8,12 @@ namespace alba::algorithm {
 
 namespace {
 Alphabet<uint8_t> getBinaryAlphabet() { return Alphabet<uint8_t>("01"); }
-
 Alphabet<uint8_t> getDnaAlphabet() { return Alphabet<uint8_t>("ACTG"); }
-
 Alphabet<uint8_t> getOctalAlphabet() { return Alphabet<uint8_t>("01234567"); }
-
 Alphabet<uint8_t> getDecimalAlphabet() { return Alphabet<uint8_t>("0123456789"); }
-
 Alphabet<uint8_t> getHexadecimalAlphabet() { return Alphabet<uint8_t>("0123456789ABCDEF"); }
-
 Alphabet<uint8_t> getProteinAlphabet() { return Alphabet<uint8_t>("ACDEFGHIKLMNPQRSTVWY"); }
-
 Alphabet<uint8_t> getLowerCaseAlphabet() { return Alphabet<uint8_t>("abcdefghijklmnopqrstuvwxyz"); }
-
 Alphabet<uint8_t> getUpperCaseAlphabet() { return Alphabet<uint8_t>("ABCDEFGHIJKLMNOPQRSTUVWXYZ"); }
 }  // namespace
 

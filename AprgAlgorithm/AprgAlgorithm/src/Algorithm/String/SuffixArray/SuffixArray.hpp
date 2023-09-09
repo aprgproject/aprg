@@ -39,13 +39,13 @@ public:
         return low;
     }
 
+    [[nodiscard]] std::string getLongestCommonPrefixOfTwoSuffixes(Index const index1, Index const index2) const {
+        return stringHelper::getLongestCommonPrefix(getSuffixViewAt(index1), getSuffixViewAt(index2));
+    }
+
     [[nodiscard]] std::string_view getSuffixViewAt(Index const index) const {
         Index mainStringIndex = m_mainStringIndexes[index];
         return std::string_view(m_mainString.data() + mainStringIndex, m_mainStringIndexes.size() - mainStringIndex);
-    }
-
-    [[nodiscard]] std::string getLongestCommonPrefixOfTwoSuffixes(Index const index1, Index const index2) const {
-        return stringHelper::getLongestCommonPrefix(getSuffixViewAt(index1), getSuffixViewAt(index2));
     }
 
 private:

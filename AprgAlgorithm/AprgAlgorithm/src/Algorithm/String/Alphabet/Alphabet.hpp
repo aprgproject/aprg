@@ -12,21 +12,6 @@ class Alphabet {
 public:
     using DigitValues = std::vector<DigitValue>;
     explicit Alphabet(std::string const& characters) : m_characters(characters) {}
-    bool contains(char const c) { return stringHelper::isNotNpos(static_cast<int>(m_characters.find_first_of(c))); }
-
-    char getCharacter(DigitValue const& digitValue) {
-        char result{};
-        if (digitValue < m_characters.size()) {
-            result = m_characters[digitValue];
-        }
-        return result;
-    }
-
-    int getRadix() { return m_characters.size(); }
-
-    int getNumbersOfBitsToRepresentCharacters() {
-        return AlbaBitValueUtilities<int>::getLogarithmWithBase2Of(getRadix());
-    }
 
     DigitValue getDigitValue(char const c) {
         DigitValue result{};
@@ -56,6 +41,22 @@ public:
     }
 
     std::string const& getCharacters() { return m_characters; }
+
+    char getCharacter(DigitValue const& digitValue) {
+        char result{};
+        if (digitValue < m_characters.size()) {
+            result = m_characters[digitValue];
+        }
+        return result;
+    }
+
+    int getRadix() { return m_characters.size(); }
+
+    int getNumbersOfBitsToRepresentCharacters() {
+        return AlbaBitValueUtilities<int>::getLogarithmWithBase2Of(getRadix());
+    }
+
+    bool contains(char const c) { return stringHelper::isNotNpos(static_cast<int>(m_characters.find_first_of(c))); }
 
 private:
     std::string m_characters;

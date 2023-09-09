@@ -17,15 +17,6 @@ public:
         AlbaLocalPathHandler(m_path).deleteFile();
     }
 
-    bool isFileStreamOpened() {
-        if (m_fileOptional) {
-            return m_fileOptional->is_open();
-        }
-        return false;
-    }
-
-    std::ofstream& getFileDumpStreamReference() { return m_fileOptional.value(); }
-
     void openFileIfNeeded(std::string const& path) {
         if (!m_fileOptional) {
             AlbaLocalPathHandler filePathHandler(path);
@@ -43,6 +34,15 @@ public:
     void releaseFileStream() {
         // m_fileOptional->close(); // close does not work why?
         m_fileOptional.reset();
+    }
+
+    std::ofstream& getFileDumpStreamReference() { return m_fileOptional.value(); }
+
+    bool isFileStreamOpened() {
+        if (m_fileOptional) {
+            return m_fileOptional->is_open();
+        }
+        return false;
     }
 
 private:

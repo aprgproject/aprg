@@ -54,14 +54,9 @@ bool Polynomial::operator<(Polynomial const& second) const {
     return result;
 }
 
+Monomials const& Polynomial::getMonomials() const { return m_monomials; }
 bool Polynomial::isEmpty() const { return m_monomials.empty(); }
 bool Polynomial::isSimplified() const { return m_isSimplified; }
-Monomials const& Polynomial::getMonomials() const { return m_monomials; }
-
-Monomials& Polynomial::getMonomialsReference() {
-    clearSimplifiedFlag();
-    return m_monomials;
-}
 
 void Polynomial::clear() {
     m_monomials.clear();
@@ -158,6 +153,11 @@ void Polynomial::raiseToUnsignedInteger(int const exponent) {
 
 void Polynomial::setAsSimplified() { m_isSimplified = true; }
 void Polynomial::clearSimplifiedFlag() { m_isSimplified = false; }
+
+Monomials& Polynomial::getMonomialsReference() {
+    clearSimplifiedFlag();
+    return m_monomials;
+}
 
 bool Polynomial::isFurtherSimplificationNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify) {
     return beforeSimplify != afterSimplify && !hasNan(afterSimplify);

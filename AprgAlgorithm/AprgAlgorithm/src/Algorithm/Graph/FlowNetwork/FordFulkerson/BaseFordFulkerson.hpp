@@ -22,9 +22,6 @@ public:
     using TraverseFunction = std::function<void(Vertex)>;
     virtual ~BaseFordFulkerson() = default;  // virtual destructor because of virtual functions (vtable exists)
     explicit BaseFordFulkerson(SinkSourceFlowNetworkType const& flowNetwork) : m_flowNetwork(flowNetwork) {}
-    [[nodiscard]] FlowDataType getMaxFlowValue() const { return m_maxFlowValue; }
-    [[nodiscard]] Paths const& getAugmentingPaths() const { return m_augmentingPaths; }
-    [[nodiscard]] SinkSourceFlowNetworkType const& getFlowNetwork() const { return m_flowNetwork; }
 
     [[nodiscard]] Edges getMinCutEdges() const {
         // Let A be the set of nodes that can be reached from the source using positive-weight edges.
@@ -40,22 +37,12 @@ public:
         return result;
     }
 
+    [[nodiscard]] FlowDataType getMaxFlowValue() const { return m_maxFlowValue; }
+    [[nodiscard]] Paths const& getAugmentingPaths() const { return m_augmentingPaths; }
+    [[nodiscard]] SinkSourceFlowNetworkType const& getFlowNetwork() const { return m_flowNetwork; }
+
 protected:
     virtual bool findAnAugmentingPathAndReturnIfFound() = 0;
-
-    FlowDataType getBottleNeckFlow() {
-        // find minimum residual capacity in augmenting path
-        FlowDataType bottleNeckFlow{};
-        if (!m_vertexToAugmentingPathEdgeMap.empty()) {
-            Vertex firstVertex(m_vertexToAugmentingPathEdgeMap.cbegin()->first);
-            bottleNeckFlow = m_vertexToAugmentingPathEdgeMap[firstVertex].getResidualCapacityTo(firstVertex);
-            traverseAugmentingPathInReverse([&](Vertex const& vertex) {
-                bottleNeckFlow =
-                    std::min(bottleNeckFlow, m_vertexToAugmentingPathEdgeMap[vertex].getResidualCapacityTo(vertex));
-            });
-        }
-        return bottleNeckFlow;
-    }
 
     void initialize() {
         while (findAnAugmentingPathAndReturnIfFound()) {
@@ -84,6 +71,20 @@ protected:
              vertex = m_vertexToAugmentingPathEdgeMap[vertex].getTheOtherVertex(vertex)) {
             function(vertex);
         }
+    }
+
+    FlowDataType getBottleNeckFlow() {
+        // find minimum residual capacity in augmenting path
+        FlowDataType bottleNeckFlow{};
+        if (!m_vertexToAugmentingPathEdgeMap.empty()) {
+            Vertex firstVertex(m_vertexToAugmentingPathEdgeMap.cbegin()->first);
+            bottleNeckFlow = m_vertexToAugmentingPathEdgeMap[firstVertex].getResidualCapacityTo(firstVertex);
+            traverseAugmentingPathInReverse([&](Vertex const& vertex) {
+                bottleNeckFlow =
+                    std::min(bottleNeckFlow, m_vertexToAugmentingPathEdgeMap[vertex].getResidualCapacityTo(vertex));
+            });
+        }
+        return bottleNeckFlow;
     }
 
     SinkSourceFlowNetworkType m_flowNetwork;

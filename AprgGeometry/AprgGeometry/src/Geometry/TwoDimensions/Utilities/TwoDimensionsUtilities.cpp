@@ -14,48 +14,125 @@ using namespace std;
 namespace alba::TwoDimensions::twoDimensionsUtilities {
 
 namespace {
+
 bool isCollinearPointInLineSegment(LineSegment const& segment1, Point const& point) {
     return min(segment1.first.getX(), segment1.second.getX()) <= point.getX() &&
            point.getX() <= max(segment1.first.getX(), segment1.second.getX()) &&
            min(segment1.first.getY(), segment1.second.getY()) <= point.getY() &&
            point.getY() <= max(segment1.first.getY(), segment1.second.getY());
 }
+
 }  // namespace
 
-bool isOrigin(Point const& point) { return point.getX() == 0 && point.getY() == 0; }
-
-bool isInsideTwoPoints(Point const& point, Point const& minimumXAndY, Point const& maximumXAndY) {
-    return (
-        point.getX() >= minimumXAndY.getX() && point.getY() >= minimumXAndY.getY() &&
-        point.getX() <= maximumXAndY.getX() && point.getY() <= maximumXAndY.getY());
+AlbaAngle getAngleOfPointWithRespectToOrigin(Point const& point) {
+    AlbaAngle angle;
+    if (!isOrigin(point)) {
+        Quadrant quadrant(getQuadrantOfAPoint(point));
+        angle = AlbaAngle(
+            AngleUnitType::Radians, acos(getAbsoluteValue(getCosineOfAngleUsing1Delta(point.getX(), point.getY()))));
+        if (Quadrant::IV == quadrant) {
+            angle = AlbaAngle(AngleUnitType::Degrees, 360) - angle;
+        } else if (Quadrant::III == quadrant) {
+            angle = AlbaAngle(AngleUnitType::Degrees, 180) + angle;
+        } else if (Quadrant::II == quadrant) {
+            angle = AlbaAngle(AngleUnitType::Degrees, 180) - angle;
+        }
+    }
+    return angle;
 }
 
-bool isPointInLine(Point const& point, Line const& line) {
-    return isAlmostEqual(point.getY(), line.calculateYFromX(point.getX()));
+AlbaAngle getTheInnerAngleUsingThreePoints(
+    Point const& commonPoint, Point const& firstPoint, Point const& secondPoint) {
+    Point deltaBA(firstPoint - commonPoint);
+    Point deltaCA(secondPoint - commonPoint);
+
+    return {
+        AngleUnitType::Radians, acos(getCosineOfAngleUsing2Deltas(constructVector(deltaBA), constructVector(deltaCA)))};
 }
 
-bool isCongruent(Triangle const& triangle1, Triangle const& triangle2) {
-    AlbaAngles anglesInTriangle1(triangle1.getAnglesAtVertices());
-    AlbaAngles anglesInTriangle2(triangle2.getAnglesAtVertices());
-    sort(anglesInTriangle1.begin(), anglesInTriangle1.end());
-    sort(anglesInTriangle2.begin(), anglesInTriangle2.end());
-    return (anglesInTriangle1[0] == anglesInTriangle2[0]) && (anglesInTriangle1[1] == anglesInTriangle2[1]) &&
-           (anglesInTriangle1[2] == anglesInTriangle2[2]);
+AlbaAngle getTheSmallerAngleBetweenTwoLines(Line const& line1, Line const& line2) {
+    AlbaAngle result;
+    if (areLinesParallel(line1, line2)) {
+        result = AlbaAngle(AngleUnitType::Degrees, 0);
+    } else if (areLinesPerpendicular(line1, line2)) {
+        result = AlbaAngle(AngleUnitType::Degrees, 90);
+    } else {
+        // absolute value is used to ensure lower angle
+        result = AlbaAngle(
+            AngleUnitType::Radians, acos(getAbsoluteValue(getCosineOfAngleUsing2Deltas(
+                                        constructDeltaVector(line1), constructDeltaVector(line2)))));
+    }
+    return result;
 }
 
-bool areLinesParallel(Line const& line1, Line const& line2) {
-    return (line1.getType() == LineType::Horizontal && line2.getType() == LineType::Horizontal) ||
-           (line1.getType() == LineType::Vertical && line2.getType() == LineType::Vertical) ||
-           (isAlmostEqual(line1.getSlope(), line2.getSlope()));
+AlbaAngle getTheLargerAngleBetweenTwoLines(Line const& line1, Line const& line2) {
+    AlbaAngle smallerAngle(getTheSmallerAngleBetweenTwoLines(line1, line2));
+    return {AngleUnitType::Degrees, 180 - smallerAngle.getDegrees()};
 }
 
-bool areLinesPerpendicular(Line const& line1, Line const& line2) {
-    return (line1.getType() == LineType::Horizontal && line2.getType() == LineType::Vertical) ||
-           (line1.getType() == LineType::Vertical && line2.getType() == LineType::Horizontal) ||
-           (isAlmostEqual(line1.getSlope(), line2.getPerpendicularSlope()));
+ConicSectionType getConicSectionBasedOnEccentricity(double const eccentricity) {
+    ConicSectionType result(ConicSectionType::Unknown);
+    if (isAlmostEqual(eccentricity, 0.0)) {
+        result = ConicSectionType::Circle;
+    } else if (isAlmostEqual(eccentricity, 1.0)) {
+        result = ConicSectionType::Parabola;
+    } else if (eccentricity > 0 && eccentricity < 1) {
+        result = ConicSectionType::Ellipse;
+    } else if (eccentricity > 1) {
+        result = ConicSectionType::Hyperbola;
+    }
+    return result;
 }
 
-bool doesTheTwoLineSegmentsIntersect(LineSegment const& segment1, LineSegment const& segment2) {
+ConicSectionType getConicSectionBasedOnGeneralForm(
+    double const a, double const b, double const c, double const d, double const e) {
+    // A*x^2 + B*x*y + C*y^2 + D*x + E*y + C
+    ConicSectionType result(ConicSectionType::Unknown);
+
+    if (isAlmostEqual(b, 0.0)) {
+        if (isAlmostEqual(a, 0.0) && isAlmostEqual(c, 0.0)) {
+            if (isAlmostEqual(d, 0.0) || isAlmostEqual(e, 0.0)) {
+                result = ConicSectionType::Point;
+            } else {
+                result = ConicSectionType::Line;
+            }
+        } else if (
+            (isAlmostEqual(a, 0.0) && !isAlmostEqual(c, 0.0)) || (!isAlmostEqual(a, 0.0) && isAlmostEqual(c, 0.0))) {
+            result = ConicSectionType::Parabola;
+        } else if (isAlmostEqual(a, c)) {
+            result = ConicSectionType::Circle;
+        } else if (a * c > 0) {
+            result = ConicSectionType::Ellipse;
+        } else if (a * c < 0) {
+            result = ConicSectionType::Hyperbola;
+        }
+    }
+    return result;
+}
+
+Point getIntersectionOfTwoLines(Line const& line1, Line const& line2) {
+    Vector abVector1{line1.getACoefficient(), line1.getBCoefficient()};
+    Vector abVector2{line2.getACoefficient(), line2.getBCoefficient()};
+    Vector bcVector1{line1.getBCoefficient(), line1.getCCoefficient()};
+    Vector bcVector2{line2.getBCoefficient(), line2.getCCoefficient()};
+    Vector acVector1{line1.getACoefficient(), line1.getCCoefficient()};
+    Vector acVector2{line2.getACoefficient(), line2.getCCoefficient()};
+    double abCrossProduct = getCrossProduct(abVector1, abVector2);
+
+    double xOfIntersection = getCrossProduct(bcVector1, bcVector2) / abCrossProduct;
+    double yOfIntersection = getCrossProduct(acVector1, acVector2) / -abCrossProduct;
+    return {xOfIntersection, yOfIntersection};
+}
+
+Point getIntersectionOfTwoLineSegment(LineSegment const& segment1, LineSegment const& segment2) {
+    // Next we consider the problem of testing whether two line segments ab and cd intersect.
+    // 1. General Case:
+    // –--> (ab, c) and (ab, d) have different orientations and
+    // –--> (cd, a) and (cd, b) have different orientations.
+    // 2. Special Case
+    // –--> (ab, c), (ab, d), (cd, a)), and (cd, b) are collinear and
+    // –--> the x-projections of (ab) and (cd) intersect
+    // –--> the y-projections of (ab) and (cd) intersect
     RotationDirection direction1 =
         getRotationDirectionTraversing3Points(segment1.first, segment1.second, segment2.first);
     RotationDirection direction2 =
@@ -65,39 +142,95 @@ bool doesTheTwoLineSegmentsIntersect(LineSegment const& segment1, LineSegment co
     RotationDirection direction4 =
         getRotationDirectionTraversing3Points(segment2.first, segment2.second, segment1.second);
 
-    bool result(false);
+    Point result(NAN, NAN);
     if (direction1 != direction2 && direction3 != direction4) {
-        result = true;
+        result =
+            getIntersectionOfTwoLines(Line(segment1.first, segment1.second), Line(segment2.first, segment2.second));
     } else if (RotationDirection::Collinear == direction1 && isCollinearPointInLineSegment(segment1, segment2.first)) {
-        result = true;
+        result = segment2.first;
     } else if (RotationDirection::Collinear == direction2 && isCollinearPointInLineSegment(segment1, segment2.second)) {
-        result = true;
+        result = segment2.second;
     } else if (RotationDirection::Collinear == direction3 && isCollinearPointInLineSegment(segment2, segment1.first)) {
-        result = true;
+        result = segment1.first;
     } else if (RotationDirection::Collinear == direction4 && isCollinearPointInLineSegment(segment2, segment1.second)) {
-        result = true;
+        result = segment1.second;
     }
     return result;
 }
 
-bool isPointInsideTriangle(Triangle const& triangle, Point const& point) {
-    // Let the coordinates of three corners be (x1, y1), (x2, y2) and (x3, y3).
-    // And coordinates of the given point P be (x, y)
-    // ---> Calculate area of the given triangle, i.e., area of the triangle ABC in the above diagram.
-    // ---> Area A = [ x1(y2 – y3) + x2(y3 – y1) + x3(y1-y2)]/2
-    // ---> Calculate area of the triangle PAB. We can use the same formula for this. Let this area be A1.
-    // ---> Calculate area of the triangle PBC. Let this area be A2.
-    // ---> Calculate area of the triangle PAC. Let this area be A3.
-    // ---> If P lies inside the triangle, then A1 + A2 + A3 must be equal to A.
-    Points vertices(triangle.getVertices());
-    double areaOfTriangleOnly = getAreaOfTriangleUsingThreePoints(triangle);
-    double areaWithPoint =
-        getAbsoluteValue(getSignedCounterClockwiseTriangleAreaOf3Points(point, vertices[0], vertices[1])) +
-        getAbsoluteValue(getSignedCounterClockwiseTriangleAreaOf3Points(point, vertices[1], vertices[2])) +
-        getAbsoluteValue(getSignedCounterClockwiseTriangleAreaOf3Points(point, vertices[0], vertices[2]));
-    return areaOfTriangleOnly == areaWithPoint;
+Point getMidpoint(Point const& point1, Point const& point2) {
+    return {(point1.getX() + point2.getX()) / 2, (point1.getY() + point2.getY()) / 2};
 }
 
+Point getPointAlongALineWithDistanceFromAPoint(
+    Line const& line, Point const& referencePoint, double const distance, bool const isIncreasedOnX) {
+    double commonRatioWithDistance =
+        getSquareRootOfXSquaredPlusYSquared(line.getACoefficient(), line.getBCoefficient());
+    // delta x = a*D / (a2+b2)^0.5
+    // delta y = b*D / (a2+b2)^0.5
+    double deltaX = line.getACoefficient() * distance / commonRatioWithDistance;
+    double deltaY = -line.getBCoefficient() * distance / commonRatioWithDistance;
+    if ((isIncreasedOnX && deltaX < 0) || (!isIncreasedOnX && deltaX > 0)) {
+        deltaX *= -1;
+        deltaY *= -1;
+    }
+    Point delta(deltaX, deltaY);
+    return referencePoint + delta;
+}
+
+Quadrant getQuadrantOfAPoint(Point const& point) {
+    Quadrant result(Quadrant::I);
+    bool isXZero = isAlmostEqual(point.getX(), 0.0);
+    bool isYZero = isAlmostEqual(point.getY(), 0.0);
+    double signOfX = getSign(point.getX());
+    double signOfY = getSign(point.getY());
+    if (isXZero) {
+        if (isYZero) {
+            result = Quadrant::Invalid;
+        } else if (signOfY == 1) {
+            result = Quadrant::II;
+        } else {
+            result = Quadrant::IV;
+        }
+    } else if (signOfX == 1) {
+        if (isYZero) {
+            result = Quadrant::I;
+        } else if (signOfY == 1) {
+            result = Quadrant::I;
+        } else {
+            result = Quadrant::IV;
+        }
+    } else {
+        if (isYZero) {
+            result = Quadrant::III;
+        } else if (signOfY == 1) {
+            result = Quadrant::II;
+        } else {
+            result = Quadrant::III;
+        }
+    }
+    return result;
+}
+
+RotationDirection getRotationDirectionTraversing3Points(Point const a, Point const b, Point const c) {
+    // The cross product axb of vectors a = (x1,y1) and b = (x2,y2) is calculated using he formula x1 y2¡x2 y1.
+    // The cross product tells us whether b turns left (positive value),
+    // does not turn (zero) or turns right (negative value) when it is placed directly after a.
+    RotationDirection result(RotationDirection::Collinear);
+    Point deltaBA(b - a);
+    Point deltaCA(c - a);
+
+    double crossProduct = getCrossProduct(constructVector(deltaBA), constructVector(deltaCA));
+    if (crossProduct > 0) {
+        result = RotationDirection::CounterClockWise;
+    } else if (crossProduct < 0) {
+        result = RotationDirection::ClockWise;
+    }
+    return result;
+}
+
+Vector constructVector(AlbaXY<double> const& xy) { return Vector{xy.getX(), xy.getY()}; }
+Vector constructDeltaVector(Line const& line) { return Vector{line.getAUnitIncreaseInX(), line.getAUnitIncreaseInY()}; }
 double getDistance(Point const& point1, Point const& point2) { return getEuclideanDistance(point1, point2); }
 
 double getDistance(Line const& line, Point const& point) {
@@ -256,169 +389,40 @@ double getAreaUsingPicksTheorem(int const numberOfPointsInside, int const number
     return numberOfPointsInside + static_cast<double>(numberOfPointsOnTheBoundary) / 2 - 1;
 }
 
-Vector constructVector(AlbaXY<double> const& xy) { return Vector{xy.getX(), xy.getY()}; }
-Vector constructDeltaVector(Line const& line) { return Vector{line.getAUnitIncreaseInX(), line.getAUnitIncreaseInY()}; }
+bool isOrigin(Point const& point) { return point.getX() == 0 && point.getY() == 0; }
 
-ConicSectionType getConicSectionBasedOnEccentricity(double const eccentricity) {
-    ConicSectionType result(ConicSectionType::Unknown);
-    if (isAlmostEqual(eccentricity, 0.0)) {
-        result = ConicSectionType::Circle;
-    } else if (isAlmostEqual(eccentricity, 1.0)) {
-        result = ConicSectionType::Parabola;
-    } else if (eccentricity > 0 && eccentricity < 1) {
-        result = ConicSectionType::Ellipse;
-    } else if (eccentricity > 1) {
-        result = ConicSectionType::Hyperbola;
-    }
-    return result;
+bool isInsideTwoPoints(Point const& point, Point const& minimumXAndY, Point const& maximumXAndY) {
+    return (
+        point.getX() >= minimumXAndY.getX() && point.getY() >= minimumXAndY.getY() &&
+        point.getX() <= maximumXAndY.getX() && point.getY() <= maximumXAndY.getY());
 }
 
-ConicSectionType getConicSectionBasedOnGeneralForm(
-    double const a, double const b, double const c, double const d, double const e) {
-    // A*x^2 + B*x*y + C*y^2 + D*x + E*y + C
-    ConicSectionType result(ConicSectionType::Unknown);
-
-    if (isAlmostEqual(b, 0.0)) {
-        if (isAlmostEqual(a, 0.0) && isAlmostEqual(c, 0.0)) {
-            if (isAlmostEqual(d, 0.0) || isAlmostEqual(e, 0.0)) {
-                result = ConicSectionType::Point;
-            } else {
-                result = ConicSectionType::Line;
-            }
-        } else if (
-            (isAlmostEqual(a, 0.0) && !isAlmostEqual(c, 0.0)) || (!isAlmostEqual(a, 0.0) && isAlmostEqual(c, 0.0))) {
-            result = ConicSectionType::Parabola;
-        } else if (isAlmostEqual(a, c)) {
-            result = ConicSectionType::Circle;
-        } else if (a * c > 0) {
-            result = ConicSectionType::Ellipse;
-        } else if (a * c < 0) {
-            result = ConicSectionType::Hyperbola;
-        }
-    }
-    return result;
+bool isPointInLine(Point const& point, Line const& line) {
+    return isAlmostEqual(point.getY(), line.calculateYFromX(point.getX()));
 }
 
-Quadrant getQuadrantOfAPoint(Point const& point) {
-    Quadrant result(Quadrant::I);
-    bool isXZero = isAlmostEqual(point.getX(), 0.0);
-    bool isYZero = isAlmostEqual(point.getY(), 0.0);
-    double signOfX = getSign(point.getX());
-    double signOfY = getSign(point.getY());
-    if (isXZero) {
-        if (isYZero) {
-            result = Quadrant::Invalid;
-        } else if (signOfY == 1) {
-            result = Quadrant::II;
-        } else {
-            result = Quadrant::IV;
-        }
-    } else if (signOfX == 1) {
-        if (isYZero) {
-            result = Quadrant::I;
-        } else if (signOfY == 1) {
-            result = Quadrant::I;
-        } else {
-            result = Quadrant::IV;
-        }
-    } else {
-        if (isYZero) {
-            result = Quadrant::III;
-        } else if (signOfY == 1) {
-            result = Quadrant::II;
-        } else {
-            result = Quadrant::III;
-        }
-    }
-    return result;
+bool isCongruent(Triangle const& triangle1, Triangle const& triangle2) {
+    AlbaAngles anglesInTriangle1(triangle1.getAnglesAtVertices());
+    AlbaAngles anglesInTriangle2(triangle2.getAnglesAtVertices());
+    sort(anglesInTriangle1.begin(), anglesInTriangle1.end());
+    sort(anglesInTriangle2.begin(), anglesInTriangle2.end());
+    return (anglesInTriangle1[0] == anglesInTriangle2[0]) && (anglesInTriangle1[1] == anglesInTriangle2[1]) &&
+           (anglesInTriangle1[2] == anglesInTriangle2[2]);
 }
 
-RotationDirection getRotationDirectionTraversing3Points(Point const a, Point const b, Point const c) {
-    // The cross product axb of vectors a = (x1,y1) and b = (x2,y2) is calculated using he formula x1 y2¡x2 y1.
-    // The cross product tells us whether b turns left (positive value),
-    // does not turn (zero) or turns right (negative value) when it is placed directly after a.
-    RotationDirection result(RotationDirection::Collinear);
-    Point deltaBA(b - a);
-    Point deltaCA(c - a);
-
-    double crossProduct = getCrossProduct(constructVector(deltaBA), constructVector(deltaCA));
-    if (crossProduct > 0) {
-        result = RotationDirection::CounterClockWise;
-    } else if (crossProduct < 0) {
-        result = RotationDirection::ClockWise;
-    }
-    return result;
+bool areLinesParallel(Line const& line1, Line const& line2) {
+    return (line1.getType() == LineType::Horizontal && line2.getType() == LineType::Horizontal) ||
+           (line1.getType() == LineType::Vertical && line2.getType() == LineType::Vertical) ||
+           (isAlmostEqual(line1.getSlope(), line2.getSlope()));
 }
 
-AlbaAngle getAngleOfPointWithRespectToOrigin(Point const& point) {
-    AlbaAngle angle;
-    if (!isOrigin(point)) {
-        Quadrant quadrant(getQuadrantOfAPoint(point));
-        angle = AlbaAngle(
-            AngleUnitType::Radians, acos(getAbsoluteValue(getCosineOfAngleUsing1Delta(point.getX(), point.getY()))));
-        if (Quadrant::IV == quadrant) {
-            angle = AlbaAngle(AngleUnitType::Degrees, 360) - angle;
-        } else if (Quadrant::III == quadrant) {
-            angle = AlbaAngle(AngleUnitType::Degrees, 180) + angle;
-        } else if (Quadrant::II == quadrant) {
-            angle = AlbaAngle(AngleUnitType::Degrees, 180) - angle;
-        }
-    }
-    return angle;
+bool areLinesPerpendicular(Line const& line1, Line const& line2) {
+    return (line1.getType() == LineType::Horizontal && line2.getType() == LineType::Vertical) ||
+           (line1.getType() == LineType::Vertical && line2.getType() == LineType::Horizontal) ||
+           (isAlmostEqual(line1.getSlope(), line2.getPerpendicularSlope()));
 }
 
-AlbaAngle getTheInnerAngleUsingThreePoints(
-    Point const& commonPoint, Point const& firstPoint, Point const& secondPoint) {
-    Point deltaBA(firstPoint - commonPoint);
-    Point deltaCA(secondPoint - commonPoint);
-
-    return {
-        AngleUnitType::Radians, acos(getCosineOfAngleUsing2Deltas(constructVector(deltaBA), constructVector(deltaCA)))};
-}
-
-AlbaAngle getTheSmallerAngleBetweenTwoLines(Line const& line1, Line const& line2) {
-    AlbaAngle result;
-    if (areLinesParallel(line1, line2)) {
-        result = AlbaAngle(AngleUnitType::Degrees, 0);
-    } else if (areLinesPerpendicular(line1, line2)) {
-        result = AlbaAngle(AngleUnitType::Degrees, 90);
-    } else {
-        // absolute value is used to ensure lower angle
-        result = AlbaAngle(
-            AngleUnitType::Radians, acos(getAbsoluteValue(getCosineOfAngleUsing2Deltas(
-                                        constructDeltaVector(line1), constructDeltaVector(line2)))));
-    }
-    return result;
-}
-
-AlbaAngle getTheLargerAngleBetweenTwoLines(Line const& line1, Line const& line2) {
-    AlbaAngle smallerAngle(getTheSmallerAngleBetweenTwoLines(line1, line2));
-    return {AngleUnitType::Degrees, 180 - smallerAngle.getDegrees()};
-}
-
-Point getIntersectionOfTwoLines(Line const& line1, Line const& line2) {
-    Vector abVector1{line1.getACoefficient(), line1.getBCoefficient()};
-    Vector abVector2{line2.getACoefficient(), line2.getBCoefficient()};
-    Vector bcVector1{line1.getBCoefficient(), line1.getCCoefficient()};
-    Vector bcVector2{line2.getBCoefficient(), line2.getCCoefficient()};
-    Vector acVector1{line1.getACoefficient(), line1.getCCoefficient()};
-    Vector acVector2{line2.getACoefficient(), line2.getCCoefficient()};
-    double abCrossProduct = getCrossProduct(abVector1, abVector2);
-
-    double xOfIntersection = getCrossProduct(bcVector1, bcVector2) / abCrossProduct;
-    double yOfIntersection = getCrossProduct(acVector1, acVector2) / -abCrossProduct;
-    return {xOfIntersection, yOfIntersection};
-}
-
-Point getIntersectionOfTwoLineSegment(LineSegment const& segment1, LineSegment const& segment2) {
-    // Next we consider the problem of testing whether two line segments ab and cd intersect.
-    // 1. General Case:
-    // –--> (ab, c) and (ab, d) have different orientations and
-    // –--> (cd, a) and (cd, b) have different orientations.
-    // 2. Special Case
-    // –--> (ab, c), (ab, d), (cd, a)), and (cd, b) are collinear and
-    // –--> the x-projections of (ab) and (cd) intersect
-    // –--> the y-projections of (ab) and (cd) intersect
+bool doesTheTwoLineSegmentsIntersect(LineSegment const& segment1, LineSegment const& segment2) {
     RotationDirection direction1 =
         getRotationDirectionTraversing3Points(segment1.first, segment1.second, segment2.first);
     RotationDirection direction2 =
@@ -428,40 +432,37 @@ Point getIntersectionOfTwoLineSegment(LineSegment const& segment1, LineSegment c
     RotationDirection direction4 =
         getRotationDirectionTraversing3Points(segment2.first, segment2.second, segment1.second);
 
-    Point result(NAN, NAN);
+    bool result(false);
     if (direction1 != direction2 && direction3 != direction4) {
-        result =
-            getIntersectionOfTwoLines(Line(segment1.first, segment1.second), Line(segment2.first, segment2.second));
+        result = true;
     } else if (RotationDirection::Collinear == direction1 && isCollinearPointInLineSegment(segment1, segment2.first)) {
-        result = segment2.first;
+        result = true;
     } else if (RotationDirection::Collinear == direction2 && isCollinearPointInLineSegment(segment1, segment2.second)) {
-        result = segment2.second;
+        result = true;
     } else if (RotationDirection::Collinear == direction3 && isCollinearPointInLineSegment(segment2, segment1.first)) {
-        result = segment1.first;
+        result = true;
     } else if (RotationDirection::Collinear == direction4 && isCollinearPointInLineSegment(segment2, segment1.second)) {
-        result = segment1.second;
+        result = true;
     }
     return result;
 }
 
-Point getMidpoint(Point const& point1, Point const& point2) {
-    return {(point1.getX() + point2.getX()) / 2, (point1.getY() + point2.getY()) / 2};
-}
-
-Point getPointAlongALineWithDistanceFromAPoint(
-    Line const& line, Point const& referencePoint, double const distance, bool const isIncreasedOnX) {
-    double commonRatioWithDistance =
-        getSquareRootOfXSquaredPlusYSquared(line.getACoefficient(), line.getBCoefficient());
-    // delta x = a*D / (a2+b2)^0.5
-    // delta y = b*D / (a2+b2)^0.5
-    double deltaX = line.getACoefficient() * distance / commonRatioWithDistance;
-    double deltaY = -line.getBCoefficient() * distance / commonRatioWithDistance;
-    if ((isIncreasedOnX && deltaX < 0) || (!isIncreasedOnX && deltaX > 0)) {
-        deltaX *= -1;
-        deltaY *= -1;
-    }
-    Point delta(deltaX, deltaY);
-    return referencePoint + delta;
+bool isPointInsideTriangle(Triangle const& triangle, Point const& point) {
+    // Let the coordinates of three corners be (x1, y1), (x2, y2) and (x3, y3).
+    // And coordinates of the given point P be (x, y)
+    // ---> Calculate area of the given triangle, i.e., area of the triangle ABC in the above diagram.
+    // ---> Area A = [ x1(y2 – y3) + x2(y3 – y1) + x3(y1-y2)]/2
+    // ---> Calculate area of the triangle PAB. We can use the same formula for this. Let this area be A1.
+    // ---> Calculate area of the triangle PBC. Let this area be A2.
+    // ---> Calculate area of the triangle PAC. Let this area be A3.
+    // ---> If P lies inside the triangle, then A1 + A2 + A3 must be equal to A.
+    Points vertices(triangle.getVertices());
+    double areaOfTriangleOnly = getAreaOfTriangleUsingThreePoints(triangle);
+    double areaWithPoint =
+        getAbsoluteValue(getSignedCounterClockwiseTriangleAreaOf3Points(point, vertices[0], vertices[1])) +
+        getAbsoluteValue(getSignedCounterClockwiseTriangleAreaOf3Points(point, vertices[1], vertices[2])) +
+        getAbsoluteValue(getSignedCounterClockwiseTriangleAreaOf3Points(point, vertices[0], vertices[2]));
+    return areaOfTriangleOnly == areaWithPoint;
 }
 
 template <ParabolaOrientation parabolaOrientation>
@@ -541,6 +542,90 @@ PolarCoordinate convertToPolarCoordinate(Point const& point) {
     polarCoordinate.radius = constructVector(point).getMagnitude();
     polarCoordinate.angle = getAngleOfPointWithRespectToOrigin(point);
     return polarCoordinate;
+}
+
+void addPointIfInsideTwoPoints(
+    Points& pointsAtBorder, Point const& point, Point const& minimumXAndY, Point const& maximumXAndY) {
+    if (isInsideTwoPoints(point, minimumXAndY, maximumXAndY)) {
+        pointsAtBorder.emplace_back(point);
+    }
+}
+
+void savePointsFromTwoPointsUsingALineWithoutLastPoint(
+    Points& points, Point const& previousPoint, Point const& currentPoint, double const interval) {
+    Line line(previousPoint, currentPoint);
+    Points pointsInLine(line.getPointsWithoutLastPoint(previousPoint, currentPoint, interval));
+    points.reserve(pointsInLine.size());
+    copy(pointsInLine.begin(), pointsInLine.end(), back_inserter(points));
+}
+
+void sortPointsInYAndThenX(Points& points) {
+    sort(points.begin(), points.end(), [](Point const& point1, Point const& point2) {
+        bool result(false);
+        if (point1.getY() == point2.getY()) {
+            result = point1.getX() < point2.getX();
+        } else {
+            result = point1.getY() < point2.getY();
+        }
+        return result;
+    });
+}
+
+void traverseCircleAreaBetweenTwoRadius(
+    Point const& center, double const innerRadius, double const outerRadius, double const interval,
+    Circle::TraverseOperation const& traverseOperation) {
+    Circle innerCircle(center, innerRadius);
+    Circle outerCircle(center, outerRadius);
+    for (double y = 0; y < outerRadius; y += interval) {
+        auto xAtInnerCircleOptional(innerCircle.calculateXFromYWithoutCenter(y, 1));
+        auto xAtOuterCircleOptional(outerCircle.calculateXFromYWithoutCenter(y, 1));
+        if (xAtInnerCircleOptional && xAtOuterCircleOptional) {
+            for (double x = xAtInnerCircleOptional.value(); x < xAtOuterCircleOptional.value(); x += interval) {
+                if (x == 0 && y == 0) {
+                    traverseOperation(center);
+                } else if (x == 0) {
+                    traverseOperation(Point(center.getX(), center.getY() + y));
+                    traverseOperation(Point(center.getX(), center.getY() - y));
+                } else if (y == 0) {
+                    traverseOperation(Point(center.getX() + x, center.getY()));
+                    traverseOperation(Point(center.getX() - x, center.getY()));
+                } else {
+                    traverseOperation(Point(center.getX() + x, center.getY() + y));
+                    traverseOperation(Point(center.getX() - x, center.getY() + y));
+                    traverseOperation(Point(center.getX() + x, center.getY() - y));
+                    traverseOperation(Point(center.getX() - x, center.getY() - y));
+                }
+            }
+        }
+    }
+}
+
+Line getLineWithSameSlope(Line const& line, Point const& point) {
+    return {
+        line.getACoefficient(), line.getBCoefficient(),
+        -1 * ((line.getACoefficient() * point.getX()) + (line.getBCoefficient() * point.getY()))};
+}
+
+Line getLineWithPerpendicularSlope(Line const& line, Point const& point) {
+    return {
+        line.getBCoefficient(), -line.getACoefficient(),
+        (line.getACoefficient() * point.getY()) - (line.getBCoefficient() * point.getX())};
+}
+
+Line getTangentLineAt(Circle const& circle, Point const& point) {
+    Point nearestPoint(circle.getNearestPointInCircumference(point));
+    Point center(circle.getCenter());
+    Point deltaNearestPoint(nearestPoint.getX() - center.getX(), nearestPoint.getY() - center.getY());
+    return {deltaNearestPoint.getY(), -1 * deltaNearestPoint.getX(), nearestPoint};
+}
+
+// fix and test this
+Line getTangentLineAt(Ellipse const& ellipse, Point const& point) {
+    return {point.getX() / pow(ellipse.getAValue(), 2), point.getY() / pow(ellipse.getBValue(), 2), -1};
+}
+
+Line getTangentLineAt(Hyperbola const& hyperbola, Point const& point) {
+    return {point.getX() / pow(hyperbola.getAValue(), 2), -point.getY() / pow(hyperbola.getBValue(), 2), -1};
 }
 
 Points getConnectedPointsUsingALine(Points const& inputPoints, double const interval) {
@@ -736,90 +821,6 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points) {
         reverse_copy(underlyingContainer.cbegin(), underlyingContainer.cend(), back_inserter(auxiliary));
     }
     return auxiliary;
-}
-
-Line getLineWithSameSlope(Line const& line, Point const& point) {
-    return {
-        line.getACoefficient(), line.getBCoefficient(),
-        -1 * ((line.getACoefficient() * point.getX()) + (line.getBCoefficient() * point.getY()))};
-}
-
-Line getLineWithPerpendicularSlope(Line const& line, Point const& point) {
-    return {
-        line.getBCoefficient(), -line.getACoefficient(),
-        (line.getACoefficient() * point.getY()) - (line.getBCoefficient() * point.getX())};
-}
-
-Line getTangentLineAt(Circle const& circle, Point const& point) {
-    Point nearestPoint(circle.getNearestPointInCircumference(point));
-    Point center(circle.getCenter());
-    Point deltaNearestPoint(nearestPoint.getX() - center.getX(), nearestPoint.getY() - center.getY());
-    return {deltaNearestPoint.getY(), -1 * deltaNearestPoint.getX(), nearestPoint};
-}
-
-// fix and test this
-Line getTangentLineAt(Ellipse const& ellipse, Point const& point) {
-    return {point.getX() / pow(ellipse.getAValue(), 2), point.getY() / pow(ellipse.getBValue(), 2), -1};
-}
-
-Line getTangentLineAt(Hyperbola const& hyperbola, Point const& point) {
-    return {point.getX() / pow(hyperbola.getAValue(), 2), -point.getY() / pow(hyperbola.getBValue(), 2), -1};
-}
-
-void addPointIfInsideTwoPoints(
-    Points& pointsAtBorder, Point const& point, Point const& minimumXAndY, Point const& maximumXAndY) {
-    if (isInsideTwoPoints(point, minimumXAndY, maximumXAndY)) {
-        pointsAtBorder.emplace_back(point);
-    }
-}
-
-void savePointsFromTwoPointsUsingALineWithoutLastPoint(
-    Points& points, Point const& previousPoint, Point const& currentPoint, double const interval) {
-    Line line(previousPoint, currentPoint);
-    Points pointsInLine(line.getPointsWithoutLastPoint(previousPoint, currentPoint, interval));
-    points.reserve(pointsInLine.size());
-    copy(pointsInLine.begin(), pointsInLine.end(), back_inserter(points));
-}
-
-void sortPointsInYAndThenX(Points& points) {
-    sort(points.begin(), points.end(), [](Point const& point1, Point const& point2) {
-        bool result(false);
-        if (point1.getY() == point2.getY()) {
-            result = point1.getX() < point2.getX();
-        } else {
-            result = point1.getY() < point2.getY();
-        }
-        return result;
-    });
-}
-
-void traverseCircleAreaBetweenTwoRadius(
-    Point const& center, double const innerRadius, double const outerRadius, double const interval,
-    Circle::TraverseOperation const& traverseOperation) {
-    Circle innerCircle(center, innerRadius);
-    Circle outerCircle(center, outerRadius);
-    for (double y = 0; y < outerRadius; y += interval) {
-        auto xAtInnerCircleOptional(innerCircle.calculateXFromYWithoutCenter(y, 1));
-        auto xAtOuterCircleOptional(outerCircle.calculateXFromYWithoutCenter(y, 1));
-        if (xAtInnerCircleOptional && xAtOuterCircleOptional) {
-            for (double x = xAtInnerCircleOptional.value(); x < xAtOuterCircleOptional.value(); x += interval) {
-                if (x == 0 && y == 0) {
-                    traverseOperation(center);
-                } else if (x == 0) {
-                    traverseOperation(Point(center.getX(), center.getY() + y));
-                    traverseOperation(Point(center.getX(), center.getY() - y));
-                } else if (y == 0) {
-                    traverseOperation(Point(center.getX() + x, center.getY()));
-                    traverseOperation(Point(center.getX() - x, center.getY()));
-                } else {
-                    traverseOperation(Point(center.getX() + x, center.getY() + y));
-                    traverseOperation(Point(center.getX() - x, center.getY() + y));
-                    traverseOperation(Point(center.getX() + x, center.getY() - y));
-                    traverseOperation(Point(center.getX() - x, center.getY() - y));
-                }
-            }
-        }
-    }
 }
 
 }  // namespace alba::TwoDimensions::twoDimensionsUtilities

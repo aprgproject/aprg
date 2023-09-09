@@ -19,9 +19,6 @@ namespace alba {
 
 AlbaWindowsPathHandler::AlbaWindowsPathHandler(string_view const path) : AlbaPathHandler(R"(\)") { setPath(path); }
 AlbaWindowsPathHandler AlbaWindowsPathHandler::createPathHandlerForDetectedPath() { return {getCurrentDetectedPath()}; }
-bool AlbaWindowsPathHandler::isFoundInLocalSystem() const { return m_foundInLocalSystem; }
-bool AlbaWindowsPathHandler::isRelativePath() const { return m_relativePath; }
-string AlbaWindowsPathHandler::getDriveOrRoot() const { return m_driveOrRoot; }
 
 void AlbaWindowsPathHandler::createDirectoriesForNonExisitingDirectories() const {
     string fullPath(getFullPath());
@@ -45,6 +42,73 @@ void AlbaWindowsPathHandler::createDirectoriesForNonExisitingDirectories() const
         }
         index = indexWithSlashCharacter + 1;
     }
+}
+
+string AlbaWindowsPathHandler::getDriveOrRoot() const { return m_driveOrRoot; }
+bool AlbaWindowsPathHandler::isFoundInLocalSystem() const { return m_foundInLocalSystem; }
+bool AlbaWindowsPathHandler::isRelativePath() const { return m_relativePath; }
+
+void AlbaWindowsPathHandler::deleteFilesInDirectory() {
+    set<string> listOfFiles;
+    set<string> listOfDirectories;
+    findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
+    for (auto&& file : listOfFiles) {
+        AlbaWindowsPathHandler(file).deleteFile();
+    }
+    reInput();
+}
+
+void AlbaWindowsPathHandler::deleteInnerFilesAndDirectories() {
+    set<string> listOfFiles;
+    set<string> listOfDirectories;
+    findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
+    for (auto&& file : listOfFiles) {
+        AlbaWindowsPathHandler(file).deleteFile();
+    }
+    set<string>::reverse_iterator reverseIterator;
+    for (reverseIterator = listOfDirectories.rbegin(); reverseIterator != listOfDirectories.rend(); ++reverseIterator) {
+        AlbaWindowsPathHandler(*reverseIterator).deleteDirectoryWithoutFilesAndDirectories();
+    }
+    reInput();
+}
+
+void AlbaWindowsPathHandler::deleteDirectoryWithFilesAndDirectories() {
+    deleteInnerFilesAndDirectories();
+    deleteDirectoryWithoutFilesAndDirectories();
+    reInput();
+}
+
+AlbaDateTime AlbaWindowsPathHandler::getFileCreationTime() {
+    AlbaDateTime fileCreationTime;
+    WIN32_FILE_ATTRIBUTE_DATA attributeData;
+    if (GetFileAttributesExW(
+            convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str(), GetFileExInfoStandard,
+            &attributeData)) {
+        SYSTEMTIME fileCreationTimeInSystemTime;
+        FileTimeToSystemTime(&(attributeData.ftCreationTime), &fileCreationTimeInSystemTime);
+        fileCreationTime = convertSystemTimeToAlbaDateTime(fileCreationTimeInSystemTime);
+    } else {
+        cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
+        cout << "Path:" << getFullPath() << "\n";
+        cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
+    }
+    return fileCreationTime;
+}
+
+double AlbaWindowsPathHandler::getFileSizeEstimate() {
+    double fileSizeEstimate(0);
+    WIN32_FILE_ATTRIBUTE_DATA attributeData;
+    if (GetFileAttributesExW(
+            convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str(), GetFileExInfoStandard,
+            &attributeData)) {
+        fileSizeEstimate =
+            static_cast<double>(attributeData.nFileSizeHigh) * 0x100'000'000 + attributeData.nFileSizeLow;
+    } else {
+        cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
+        cout << "Path:" << getFullPath() << "\n";
+        cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
+    }
+    return fileSizeEstimate;
 }
 
 bool AlbaWindowsPathHandler::deleteFile() {
@@ -135,69 +199,6 @@ bool AlbaWindowsPathHandler::renameImmediateDirectory(string_view const newDirec
         }
     }
     return isSuccessful;
-}
-
-double AlbaWindowsPathHandler::getFileSizeEstimate() {
-    double fileSizeEstimate(0);
-    WIN32_FILE_ATTRIBUTE_DATA attributeData;
-    if (GetFileAttributesExW(
-            convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str(), GetFileExInfoStandard,
-            &attributeData)) {
-        fileSizeEstimate =
-            static_cast<double>(attributeData.nFileSizeHigh) * 0x100'000'000 + attributeData.nFileSizeLow;
-    } else {
-        cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-        cout << "Path:" << getFullPath() << "\n";
-        cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
-    }
-    return fileSizeEstimate;
-}
-
-AlbaDateTime AlbaWindowsPathHandler::getFileCreationTime() {
-    AlbaDateTime fileCreationTime;
-    WIN32_FILE_ATTRIBUTE_DATA attributeData;
-    if (GetFileAttributesExW(
-            convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str(), GetFileExInfoStandard,
-            &attributeData)) {
-        SYSTEMTIME fileCreationTimeInSystemTime;
-        FileTimeToSystemTime(&(attributeData.ftCreationTime), &fileCreationTimeInSystemTime);
-        fileCreationTime = convertSystemTimeToAlbaDateTime(fileCreationTimeInSystemTime);
-    } else {
-        cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-        cout << "Path:" << getFullPath() << "\n";
-        cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
-    }
-    return fileCreationTime;
-}
-
-void AlbaWindowsPathHandler::deleteFilesInDirectory() {
-    set<string> listOfFiles;
-    set<string> listOfDirectories;
-    findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    for (auto&& file : listOfFiles) {
-        AlbaWindowsPathHandler(file).deleteFile();
-    }
-    reInput();
-}
-
-void AlbaWindowsPathHandler::deleteInnerFilesAndDirectories() {
-    set<string> listOfFiles;
-    set<string> listOfDirectories;
-    findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    for (auto&& file : listOfFiles) {
-        AlbaWindowsPathHandler(file).deleteFile();
-    }
-    set<string>::reverse_iterator reverseIterator;
-    for (reverseIterator = listOfDirectories.rbegin(); reverseIterator != listOfDirectories.rend(); ++reverseIterator) {
-        AlbaWindowsPathHandler(*reverseIterator).deleteDirectoryWithoutFilesAndDirectories();
-    }
-    reInput();
-}
-
-void AlbaWindowsPathHandler::deleteDirectoryWithFilesAndDirectories() {
-    deleteInnerFilesAndDirectories();
-    deleteDirectoryWithoutFilesAndDirectories();
-    reInput();
 }
 
 string AlbaWindowsPathHandler::getCurrentDetectedPath() {

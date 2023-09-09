@@ -18,6 +18,11 @@ int numberOfFilesAnalyzedForExtraction;
 
 SnapshotStatistics::SnapshotStatistics() : m_fileExtractor("[.]") { initializeFileGroups(); }
 
+string SnapshotStatistics::getSnapshotDirectory(string const& snapshotPath) {
+    AlbaLocalPathHandler snapshotPathHandler(snapshotPath);
+    return snapshotPathHandler.getDirectory() + R"(\)" + snapshotPathHandler.getFilenameOnly();
+}
+
 double SnapshotStatistics::convertFileSizeToDouble(string const& fileSizeInString) {
     auto fileSizeInBytes(stringHelper::convertStringToNumber<double>(fileSizeInString));
     if (stringHelper::isStringFoundCaseSensitive(fileSizeInString, "K")) {
@@ -26,11 +31,6 @@ double SnapshotStatistics::convertFileSizeToDouble(string const& fileSizeInStrin
         fileSizeInBytes *= 1000000;
     }
     return fileSizeInBytes;
-}
-
-string SnapshotStatistics::getSnapshotDirectory(string const& snapshotPath) {
-    AlbaLocalPathHandler snapshotPathHandler(snapshotPath);
-    return snapshotPathHandler.getDirectory() + R"(\)" + snapshotPathHandler.getFilenameOnly();
 }
 
 string SnapshotStatistics::getWildcardNameIfFileGroupsIsFound(string const& fileName) const {

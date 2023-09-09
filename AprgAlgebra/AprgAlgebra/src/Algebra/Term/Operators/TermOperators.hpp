@@ -3,7 +3,6 @@
 #include <Algebra/Term/TermTypes/Term.hpp>
 
 namespace alba::algebra {
-
 // Unary plus: +a
 Term operator+(Term const& term);
 // Unary minus: -a
@@ -23,5 +22,4 @@ Term& operator/=(Term& term1, Term const& term2);
 // RaiseToThePower: a ^ b
 Term operator^(Term const& term1, Term const& term2);
 Term& operator^=(Term& term1, Term const& term2);
-
 }  // namespace alba::algebra

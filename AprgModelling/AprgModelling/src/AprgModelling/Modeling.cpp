@@ -18,44 +18,6 @@ namespace alba {
 unsigned int Modeling::getNumberOfSamples() const { return m_retrievedDataForY.getNumberOfRows(); }
 Modeling::MatrixOfDoubles Modeling::getCoefficients() const { return m_coefficients; }
 
-Modeling::ValidationResult Modeling::validate() {
-    ValidationResult result{};
-    vector<double> calculationDataBuffer;
-
-    unsigned int dataHeight = m_validationDataForY.getNumberOfRows();
-    unsigned int dataWidthForX = m_validationDataForX.getNumberOfColumns();
-
-    for (unsigned int j = 0; j < dataHeight; ++j) {
-        double yPredicted = 0;
-        for (unsigned int i = 0; i < dataWidthForX; ++i) {
-            yPredicted += m_validationDataForX.getEntry(i, j) * m_coefficients.getEntry(i, 0);
-        }
-        calculationDataBuffer.emplace_back(yPredicted);
-    }
-
-    for (unsigned int j = 0; j < dataHeight; ++j) {
-        calculationDataBuffer[j] = m_validationDataForY.getEntry(0, j) - calculationDataBuffer[j];
-    }
-
-    for (unsigned int j = 0; j < dataHeight; ++j) {
-        calculationDataBuffer[j] = pow(calculationDataBuffer[j], 2);
-    }
-
-    double totalSquareError(0);
-    for (unsigned int j = 0; j < dataHeight; ++j) {
-        totalSquareError += calculationDataBuffer[j];
-    }
-
-    double meanSquareError = totalSquareError / calculationDataBuffer.size();
-    double rootMeanSquareError = pow(meanSquareError, 0.5);
-
-    result.totalSquareError = totalSquareError;
-    result.resultSize = calculationDataBuffer.size();
-    result.meanSquareError = meanSquareError;
-    result.rootMeanSquareError = rootMeanSquareError;
-    return result;
-}
-
 void Modeling::retrieveDataFromFileWithFileFormat1(string const& filePath) {
     VectorOfDoubles retrievedDataForX;
     VectorOfDoubles retrievedDataForY;
@@ -169,8 +131,42 @@ void Modeling::printValidationData() {
 
 void Modeling::modelUsingLeastSquares() { calculateCoefficientsUsingLeastSquares(); }
 
-unsigned int Modeling::getIndex(unsigned int const i, unsigned int const j, unsigned int const numberOfColumns) {
-    return (j * numberOfColumns) + i;
+Modeling::ValidationResult Modeling::validate() {
+    ValidationResult result{};
+    vector<double> calculationDataBuffer;
+
+    unsigned int dataHeight = m_validationDataForY.getNumberOfRows();
+    unsigned int dataWidthForX = m_validationDataForX.getNumberOfColumns();
+
+    for (unsigned int j = 0; j < dataHeight; ++j) {
+        double yPredicted = 0;
+        for (unsigned int i = 0; i < dataWidthForX; ++i) {
+            yPredicted += m_validationDataForX.getEntry(i, j) * m_coefficients.getEntry(i, 0);
+        }
+        calculationDataBuffer.emplace_back(yPredicted);
+    }
+
+    for (unsigned int j = 0; j < dataHeight; ++j) {
+        calculationDataBuffer[j] = m_validationDataForY.getEntry(0, j) - calculationDataBuffer[j];
+    }
+
+    for (unsigned int j = 0; j < dataHeight; ++j) {
+        calculationDataBuffer[j] = pow(calculationDataBuffer[j], 2);
+    }
+
+    double totalSquareError(0);
+    for (unsigned int j = 0; j < dataHeight; ++j) {
+        totalSquareError += calculationDataBuffer[j];
+    }
+
+    double meanSquareError = totalSquareError / calculationDataBuffer.size();
+    double rootMeanSquareError = pow(meanSquareError, 0.5);
+
+    result.totalSquareError = totalSquareError;
+    result.resultSize = calculationDataBuffer.size();
+    result.meanSquareError = meanSquareError;
+    result.rootMeanSquareError = rootMeanSquareError;
+    return result;
 }
 
 void Modeling::copyVectorToMatrix(
@@ -197,6 +193,10 @@ void Modeling::printData(MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY)
         }
         cout << "\n";
     }
+}
+
+unsigned int Modeling::getIndex(unsigned int const i, unsigned int const j, unsigned int const numberOfColumns) {
+    return (j * numberOfColumns) + i;
 }
 
 void Modeling::saveRetrievedDataToMatrixRandomly(

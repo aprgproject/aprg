@@ -29,10 +29,10 @@ public:
         VariablesToExponentsMap const& variablesMap1, VariablesToExponentsMap const& variablesMap2);
     static VariablesToExponentsMap combineVariableExponentMapByDivision(
         VariablesToExponentsMap const& variablesMap1, VariablesToExponentsMap const& variablesMap2);
-    [[nodiscard]] bool isSimplified() const;
     [[nodiscard]] AlbaNumber const& getCoefficient() const;
-    [[nodiscard]] VariablesToExponentsMap const& getVariablesToExponentsMap() const;
     [[nodiscard]] AlbaNumber getExponentForVariable(std::string const& variableName) const;
+    [[nodiscard]] VariablesToExponentsMap const& getVariablesToExponentsMap() const;
+    [[nodiscard]] bool isSimplified() const;
     void clear();
     void simplify();
     void setConstant(AlbaNumber const& constant);

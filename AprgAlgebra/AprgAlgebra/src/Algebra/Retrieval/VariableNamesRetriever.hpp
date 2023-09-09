@@ -8,9 +8,9 @@ namespace alba::algebra {
 class VariableNamesRetriever final : public BaseRetriever {
 public:
     [[nodiscard]] VariableNamesSet const& getVariableNames() const;
-    VariableNamesSet& getVariableNamesReference();
     void retrieveFromVariable(Variable const& variable) override;
     void retrieveFromMonomial(Monomial const& monomial) override;
+    VariableNamesSet& getVariableNamesReference();
 
 private:
     VariableNamesSet m_variableNames;

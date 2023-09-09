@@ -30,16 +30,6 @@ public:
     }
 
 private:
-    Vertex dequeue() {
-        Vertex result{};
-        if (!m_verticesToProcess.empty()) {
-            result = m_verticesToProcess.front();
-            m_verticesToProcess.pop_front();
-            m_checkableVerticesToProcess.removeVertex(result);
-        }
-        return result;
-    }
-
     void searchForPathUsingAutomaticCycleDetection() {
         int numberOfVertices(b_graph.getNumberOfVertices());
         int numberOfVerticesProcessed(0);
@@ -112,6 +102,16 @@ private:
         CycleDetectionUsingDfs<Vertex> cycleDetection(bestPathTree);
         // a cycle in best tree means a positive or negative cycle
         m_hasPositiveOrNegativeCycle = !cycleDetection.getOneCycle().empty();
+    }
+
+    Vertex dequeue() {
+        Vertex result{};
+        if (!m_verticesToProcess.empty()) {
+            result = m_verticesToProcess.front();
+            m_verticesToProcess.pop_front();
+            m_checkableVerticesToProcess.removeVertex(result);
+        }
+        return result;
     }
 
     Graph const& b_graph;

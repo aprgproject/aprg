@@ -34,10 +34,6 @@ bool Circle::operator<(Circle const& circle) const {
 }
 
 double Circle::getEccentricity() { return 0; }
-bool Circle::isInside(Point const& point) const { return getDistance(m_center, point) <= m_radius; }
-double Circle::getRadius() const { return m_radius; }
-double Circle::getArea() const { return getPi() * m_radiusSquared; }
-double Circle::getCircumference() const { return getPi() * 2 * m_radius; }
 Point Circle::getCenter() const { return m_center; }
 
 Points Circle::getLocus(double const interval) const {
@@ -100,6 +96,11 @@ optional<double> Circle::calculateXFromYWithoutCenter(double const y, double con
     }
     return result;
 }
+
+double Circle::getRadius() const { return m_radius; }
+double Circle::getArea() const { return getPi() * m_radiusSquared; }
+double Circle::getCircumference() const { return getPi() * 2 * m_radius; }
+bool Circle::isInside(Point const& point) const { return getDistance(m_center, point) <= m_radius; }
 
 void Circle::traverseArea(double const interval, TraverseOperation const& traverseOperation) const {
     for (double y = 0; y <= m_radius; y += interval) {

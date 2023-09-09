@@ -13,6 +13,7 @@ public:
 
 private:
     [[nodiscard]] static bool isOtherLibraryHeaders(std::string const& header);
+    static void notifyIfThereAreCommentsInHeader(std::string const& path, std::string const& line);
     static bool isLineWithALoopStart(std::string const& line);
     static bool isLineWithALoopEnd(std::string const& line);
     static bool isPathIgnored(std::string const& path);
@@ -21,7 +22,6 @@ private:
     static bool isWindowsHeader(std::string const& header);
     static bool isGtestHeader(std::string const& header);
     static bool isQtHeader(std::string const& header);
-    static void notifyIfThereAreCommentsInHeader(std::string const& path, std::string const& line);
     void notifyIfAlbaDebugHeaderExistInProductionCode(std::string const& path) const;
     void notifyIfIostreamHeaderExistInProductionCode(std::string const& path) const;
     void notifyIfCAssertHeaderExistInProductionCode(std::string const& path) const;

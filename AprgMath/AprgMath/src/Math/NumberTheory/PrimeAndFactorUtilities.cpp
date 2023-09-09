@@ -12,68 +12,20 @@ using namespace std;
 
 namespace alba::math {
 
-bool isCoPrime(UnsignedInteger const number1, UnsignedInteger const number2) {
-    return getGreatestCommonFactor(number1, number2) == static_cast<UnsignedInteger>(1);
-}
-
-bool isNumberOfPrimesInfinite() {
-    // It is easy to show that there is an infinite number of primes.
-    // If the number of primes would be finite, we could construct a set P = {p1, p2,..., pn} that would contain all the
-    // primes. However, using P, we could form a new prime == p1p2...pn + 1 that is larger than all elements in P. This
-    // is a contradiction, and the number of primes has to be infinite.
-    return true;
-}
-
-// There are many conjectures involving primes.
-// Most people think that the conjectures are true, but nobody has been able to prove them.
-bool isGoldbachConjectureTrue(UnsignedInteger const evenNumber) {
-    // Goldbach’s conjecture: Each even integer n > 2 can be represented as a sum n = a+b so that both a and b are
-    // primes.
-    bool result(false);  // set as false when input is wrong
-    if (evenNumber > 2 && isEven(evenNumber)) {
-        UnsignedIntegers numbers(getPrimesBelowThisNumber(evenNumber));
-        TwoSum<UnsignedIntegers> twoSum(numbers);
-        auto [firstValue, secondValue] = twoSum.getNonDuplicateTwoValuesWithSum(evenNumber);
-        result = firstValue != 0 && secondValue != 0;
-    }
-    return result;
-}
-
-bool isTwinPrimeConjectureTrue(UnsignedInteger const number) {
-    // Twin prime conjecture: There is an infinite number of pairs of the form {p, p+2}, where both p and p+2 are
-    // primes.
-    UnsignedIntegers numbers(getPrimesBelowThisNumber(number));
-    UnsignedInteger twinPrimeCount = 0;
-    for (UnsignedInteger i = 0; i < numbers.size() - 1; ++i) {
-        if (numbers[i + 1] - numbers[i] == 2) {
-            ++twinPrimeCount;
+FactorsToCountMap getPrimeFactorsToCountMap(UnsignedInteger const number) {
+    FactorsToCountMap result;
+    UnsignedInteger remainingFactor(number);
+    for (UnsignedInteger factor = 2; factor * factor <= remainingFactor; ++factor) {
+        if (remainingFactor % factor == 0) {
+            UnsignedInteger count = 0;
+            for (; remainingFactor % factor == 0; ++count) {
+                remainingFactor /= factor;
+            }
+            result.emplace(factor, count);
         }
     }
-    return twinPrimeCount > 0;  // actually we should check if this is infinite (continuously increasing)
-}
-
-bool isLegendreConjectureTrue(UnsignedInteger const number) {
-    // Legendre’s conjecture: There is always a prime between numbers n^2 and (n+1)^2, where n is any positive integer.
-    UnsignedInteger start = getRaiseToPowerForIntegers(number, static_cast<UnsignedInteger>(2));
-    UnsignedInteger end = getRaiseToPowerForIntegers(number + 1, static_cast<UnsignedInteger>(2));
-    bool result(false);
-    for (UnsignedInteger numberToCheck = start + 1; numberToCheck < end; ++numberToCheck) {
-        if (isPrime(numberToCheck)) {
-            result = true;
-            break;
-        }
-    }
-    return result;
-}
-
-bool isWilsonTheoremTrue(UnsignedInteger const number) {
-    // Wilson’s theorem states that a number n is prime exactly when (n-1)! mod n = n-1.
-    // For example, the number 11 is prime, because 10! mod 11 = 10
-    // and the number 12 is not prime, because 11! mod 12 = 0 (not equal to 11).
-    bool result(false);  // false when input is wrong
-    if (number >= 2) {
-        bool isFormulaSatisfied = getModularFactorial(number - 1, number) == number - 1;
-        result = isFormulaSatisfied == isPrime(number);
+    if (remainingFactor > 1) {
+        result.emplace(remainingFactor, 1);
     }
     return result;
 }
@@ -162,20 +114,68 @@ UnsignedIntegers getPrimeFactorsOfNumber(UnsignedInteger const number) {
     return result;
 }
 
-FactorsToCountMap getPrimeFactorsToCountMap(UnsignedInteger const number) {
-    FactorsToCountMap result;
-    UnsignedInteger remainingFactor(number);
-    for (UnsignedInteger factor = 2; factor * factor <= remainingFactor; ++factor) {
-        if (remainingFactor % factor == 0) {
-            UnsignedInteger count = 0;
-            for (; remainingFactor % factor == 0; ++count) {
-                remainingFactor /= factor;
-            }
-            result.emplace(factor, count);
+bool isCoPrime(UnsignedInteger const number1, UnsignedInteger const number2) {
+    return getGreatestCommonFactor(number1, number2) == static_cast<UnsignedInteger>(1);
+}
+
+bool isNumberOfPrimesInfinite() {
+    // It is easy to show that there is an infinite number of primes.
+    // If the number of primes would be finite, we could construct a set P = {p1, p2,..., pn} that would contain all the
+    // primes. However, using P, we could form a new prime == p1p2...pn + 1 that is larger than all elements in P. This
+    // is a contradiction, and the number of primes has to be infinite.
+    return true;
+}
+
+// There are many conjectures involving primes.
+// Most people think that the conjectures are true, but nobody has been able to prove them.
+bool isGoldbachConjectureTrue(UnsignedInteger const evenNumber) {
+    // Goldbach’s conjecture: Each even integer n > 2 can be represented as a sum n = a+b so that both a and b are
+    // primes.
+    bool result(false);  // set as false when input is wrong
+    if (evenNumber > 2 && isEven(evenNumber)) {
+        UnsignedIntegers numbers(getPrimesBelowThisNumber(evenNumber));
+        TwoSum<UnsignedIntegers> twoSum(numbers);
+        auto [firstValue, secondValue] = twoSum.getNonDuplicateTwoValuesWithSum(evenNumber);
+        result = firstValue != 0 && secondValue != 0;
+    }
+    return result;
+}
+
+bool isTwinPrimeConjectureTrue(UnsignedInteger const number) {
+    // Twin prime conjecture: There is an infinite number of pairs of the form {p, p+2}, where both p and p+2 are
+    // primes.
+    UnsignedIntegers numbers(getPrimesBelowThisNumber(number));
+    UnsignedInteger twinPrimeCount = 0;
+    for (UnsignedInteger i = 0; i < numbers.size() - 1; ++i) {
+        if (numbers[i + 1] - numbers[i] == 2) {
+            ++twinPrimeCount;
         }
     }
-    if (remainingFactor > 1) {
-        result.emplace(remainingFactor, 1);
+    return twinPrimeCount > 0;  // actually we should check if this is infinite (continuously increasing)
+}
+
+bool isLegendreConjectureTrue(UnsignedInteger const number) {
+    // Legendre’s conjecture: There is always a prime between numbers n^2 and (n+1)^2, where n is any positive integer.
+    UnsignedInteger start = getRaiseToPowerForIntegers(number, static_cast<UnsignedInteger>(2));
+    UnsignedInteger end = getRaiseToPowerForIntegers(number + 1, static_cast<UnsignedInteger>(2));
+    bool result(false);
+    for (UnsignedInteger numberToCheck = start + 1; numberToCheck < end; ++numberToCheck) {
+        if (isPrime(numberToCheck)) {
+            result = true;
+            break;
+        }
+    }
+    return result;
+}
+
+bool isWilsonTheoremTrue(UnsignedInteger const number) {
+    // Wilson’s theorem states that a number n is prime exactly when (n-1)! mod n = n-1.
+    // For example, the number 11 is prime, because 10! mod 11 = 10
+    // and the number 12 is not prime, because 11! mod 12 = 0 (not equal to 11).
+    bool result(false);  // false when input is wrong
+    if (number >= 2) {
+        bool isFormulaSatisfied = getModularFactorial(number - 1, number) == number - 1;
+        result = isFormulaSatisfied == isPrime(number);
     }
     return result;
 }

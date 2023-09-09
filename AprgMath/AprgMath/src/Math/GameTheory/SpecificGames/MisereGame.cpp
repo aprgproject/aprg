@@ -56,13 +56,13 @@ NimState MisereGame::getOptimalNextState(NimState const& inputNimState) {
     return result;
 }
 
-UnsignedInteger MisereGame::countNonEmptyHeaps(NimState const& nimState) {
-    return count_if(nimState.cbegin(), nimState.cend(), [](NimHeapSize const nimHeapSize) { return nimHeapSize > 0; });
-}
-
 NimHeapSize MisereGame::getMaxHeapSize(NimState const& nimState) {
     auto&& [_, maxIt] = minmax_element(nimState.cbegin(), nimState.cend());
     return *maxIt;
+}
+
+UnsignedInteger MisereGame::countNonEmptyHeaps(NimState const& nimState) {
+    return count_if(nimState.cbegin(), nimState.cend(), [](NimHeapSize const nimHeapSize) { return nimHeapSize > 0; });
 }
 
 }  // namespace alba::math

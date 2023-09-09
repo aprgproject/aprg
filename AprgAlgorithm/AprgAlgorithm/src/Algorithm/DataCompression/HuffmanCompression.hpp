@@ -85,86 +85,6 @@ public:
     }
 
 private:
-    Characters readAllCharacters(AlbaStreamBitReader& reader) {
-        Characters result;
-        while (true) {
-            char c(reader.readCharData());
-            if (!reader.getInputStream().eof()) {
-                result.emplace_back(c);
-            } else {
-                break;
-            }
-        }
-        return result;
-    }
-
-    FrequencyOfEachCharacter getFrequencyOfEachCharacter(Characters const& charactersInput) {
-        FrequencyOfEachCharacter frequency{};
-        for (Count i = 0; i < static_cast<Count>(charactersInput.size()); ++i) {
-            frequency[charactersInput[i]]++;
-        }
-        return frequency;
-    }
-
-    TrieNodeUniquePointer readTrie(AlbaStreamBitReader& reader) {
-        TrieNodeUniquePointer result;
-        bool bit(reader.readBoolData());
-        if (!reader.getInputStream().eof()) {
-            if (bit) {
-                // this mean its a leaf
-                char c(reader.readCharData());
-                result = std::make_unique<TrieNode>(c, nullptr, nullptr);
-            } else {
-                // keep reading if not leaf
-                // recursively read the left and read the right
-                TrieNodeUniquePointer left(readTrie(reader));
-                TrieNodeUniquePointer right(readTrie(reader));
-                result = std::make_unique<TrieNode>('\0', std::move(left), std::move(right));
-            }
-        }
-        return result;
-    }
-
-    TrieNodeUniquePointer buildTrie(FrequencyOfEachCharacter const& frequency) {
-        // This is quite different from the original huffman algorithm
-        // Here, frequency is not placed on the trie because its not really needed after building the trie.
-        std::priority_queue<CharacterFrequency, std::deque<CharacterFrequency>, std::greater<>>
-            frequenciesInMinimumOrder;
-        std::array<TrieNodeUniquePointer, RADIX> characterNode{};
-        for (Count c = 0; c < RADIX; ++c) {
-            if (frequency[c] > 0) {
-                // This PQ is used to prioritize low frequency characters first
-                frequenciesInMinimumOrder.emplace(static_cast<char>(c), frequency[c], false);
-                // These character nodes are used to build trie later on
-                characterNode[c] = std::make_unique<TrieNode>(static_cast<char>(c), nullptr, nullptr);
-            }
-        }
-
-        // Needs to be 2 or higher because we are popping 2 items per iteration
-        while (frequenciesInMinimumOrder.size() > 1) {
-            // process the frequencies (minimum first) and build the trie by combining two nodes with lowest frequencies
-            CharacterFrequency first(frequenciesInMinimumOrder.top());
-            frequenciesInMinimumOrder.pop();
-            CharacterFrequency second(frequenciesInMinimumOrder.top());
-            frequenciesInMinimumOrder.pop();
-            // use first character to keep track
-            frequenciesInMinimumOrder.emplace(first.character, first.frequency + second.frequency, true);
-            TrieNodeUniquePointer firstNode(std::move(characterNode[first.character]));
-            TrieNodeUniquePointer secondNode(std::move(characterNode[second.character]));
-            // only leafs have characters
-            characterNode[first.character] =
-                std::make_unique<TrieNode>('\0', std::move(firstNode), std::move(secondNode));
-        }
-        CharacterFrequency last(frequenciesInMinimumOrder.top());
-        return std::move(characterNode[last.character]);
-    }
-
-    HuffmanCodeTable buildHuffmanCodeTableFromTrie(TrieNodeUniquePointer const& root) {
-        HuffmanCodeTable result{};
-        buildHuffmanCodeTableFromTrie(result, root, {});
-        return result;
-    }
-
     void writeHuffmanCodes(
         AlbaStreamBitWriter& writer, Characters const& wholeInput, HuffmanCodeTable const& huffmanCodeTable) {
         for (Count i = 0; i < static_cast<Count>(wholeInput.size()); ++i) {
@@ -230,6 +150,86 @@ private:
                 buildHuffmanCodeTableFromTrie(huffmanCodeTable, nodePointer->right, newHuffmanCode);
             }
         }
+    }
+
+    Characters readAllCharacters(AlbaStreamBitReader& reader) {
+        Characters result;
+        while (true) {
+            char c(reader.readCharData());
+            if (!reader.getInputStream().eof()) {
+                result.emplace_back(c);
+            } else {
+                break;
+            }
+        }
+        return result;
+    }
+
+    FrequencyOfEachCharacter getFrequencyOfEachCharacter(Characters const& charactersInput) {
+        FrequencyOfEachCharacter frequency{};
+        for (Count i = 0; i < static_cast<Count>(charactersInput.size()); ++i) {
+            frequency[charactersInput[i]]++;
+        }
+        return frequency;
+    }
+
+    HuffmanCodeTable buildHuffmanCodeTableFromTrie(TrieNodeUniquePointer const& root) {
+        HuffmanCodeTable result{};
+        buildHuffmanCodeTableFromTrie(result, root, {});
+        return result;
+    }
+
+    TrieNodeUniquePointer readTrie(AlbaStreamBitReader& reader) {
+        TrieNodeUniquePointer result;
+        bool bit(reader.readBoolData());
+        if (!reader.getInputStream().eof()) {
+            if (bit) {
+                // this mean its a leaf
+                char c(reader.readCharData());
+                result = std::make_unique<TrieNode>(c, nullptr, nullptr);
+            } else {
+                // keep reading if not leaf
+                // recursively read the left and read the right
+                TrieNodeUniquePointer left(readTrie(reader));
+                TrieNodeUniquePointer right(readTrie(reader));
+                result = std::make_unique<TrieNode>('\0', std::move(left), std::move(right));
+            }
+        }
+        return result;
+    }
+
+    TrieNodeUniquePointer buildTrie(FrequencyOfEachCharacter const& frequency) {
+        // This is quite different from the original huffman algorithm
+        // Here, frequency is not placed on the trie because its not really needed after building the trie.
+        std::priority_queue<CharacterFrequency, std::deque<CharacterFrequency>, std::greater<>>
+            frequenciesInMinimumOrder;
+        std::array<TrieNodeUniquePointer, RADIX> characterNode{};
+        for (Count c = 0; c < RADIX; ++c) {
+            if (frequency[c] > 0) {
+                // This PQ is used to prioritize low frequency characters first
+                frequenciesInMinimumOrder.emplace(static_cast<char>(c), frequency[c], false);
+                // These character nodes are used to build trie later on
+                characterNode[c] = std::make_unique<TrieNode>(static_cast<char>(c), nullptr, nullptr);
+            }
+        }
+
+        // Needs to be 2 or higher because we are popping 2 items per iteration
+        while (frequenciesInMinimumOrder.size() > 1) {
+            // process the frequencies (minimum first) and build the trie by combining two nodes with lowest frequencies
+            CharacterFrequency first(frequenciesInMinimumOrder.top());
+            frequenciesInMinimumOrder.pop();
+            CharacterFrequency second(frequenciesInMinimumOrder.top());
+            frequenciesInMinimumOrder.pop();
+            // use first character to keep track
+            frequenciesInMinimumOrder.emplace(first.character, first.frequency + second.frequency, true);
+            TrieNodeUniquePointer firstNode(std::move(characterNode[first.character]));
+            TrieNodeUniquePointer secondNode(std::move(characterNode[second.character]));
+            // only leafs have characters
+            characterNode[first.character] =
+                std::make_unique<TrieNode>('\0', std::move(firstNode), std::move(secondNode));
+        }
+        CharacterFrequency last(frequenciesInMinimumOrder.top());
+        return std::move(characterNode[last.character]);
     }
 };
 

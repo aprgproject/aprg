@@ -21,53 +21,6 @@ namespace alba::algebra {
 
 SeriesBasedOnFormula::SeriesBasedOnFormula(Term const& formulaForSeries, string const& variableName)
     : m_formulaForSeries(formulaForSeries), m_variableName(variableName) {}
-bool SeriesBasedOnFormula::isConvergent() const { return isARealFiniteConstant(getValueAtInfinity()); }
-
-bool SeriesBasedOnFormula::isIncreasing() const {
-    Term sign(getSignDerivativeForFiniteCalculus());
-    return isTheValue(sign, 1);
-}
-
-bool SeriesBasedOnFormula::isDecreasing() const {
-    Term sign(getSignDerivativeForFiniteCalculus());
-    return isTheValue(sign, -1);
-}
-
-bool SeriesBasedOnFormula::isMonotonic() const {
-    Term sign(getSignDerivativeForFiniteCalculus());
-    return isTheValue(sign, 1) || isTheValue(sign, -1);
-}
-
-bool SeriesBasedOnFormula::isBounded() const {
-    AlbaNumberOptional greatestLowerBound(getGreatestLowerBound());
-    AlbaNumberOptional leastUpperBound(getLeastUpperBound());
-    return greatestLowerBound && leastUpperBound;
-}
-
-Term SeriesBasedOnFormula::getFormulaForSeries() const { return m_formulaForSeries; }
-
-Term SeriesBasedOnFormula::getValueAtIndex(int const index) const {
-    SubstitutionOfVariablesToValues substitution{{m_variableName, index}};
-    return substitution.performSubstitutionTo(m_formulaForSeries);
-}
-
-Term SeriesBasedOnFormula::getSum(int const startingIndex, int const endingIndex) const {
-    Summation summation(m_formulaForSeries, m_variableName);
-    return summation.getSum(startingIndex, endingIndex);
-}
-
-Term SeriesBasedOnFormula::getSumStartingAtIndexAndToInfinity(int const startingIndex) const {
-    Summation summation(m_formulaForSeries, m_variableName);
-    return summation.getSum(startingIndex, ALBA_NUMBER_POSITIVE_INFINITY);
-}
-
-Term SeriesBasedOnFormula::getValueAtInfinity() const {
-    return getLimit(m_formulaForSeries, m_variableName, ALBA_NUMBER_POSITIVE_INFINITY);
-}
-
-Term SeriesBasedOnFormula::getRemainderAtIndex(int const index) const {
-    return getValueAtInfinity() - getValueAtIndex(index);
-}
 
 AlbaNumberOptional SeriesBasedOnFormula::getGreatestLowerBound() const {
     AlbaNumberOptional result;
@@ -102,7 +55,54 @@ AlbaNumberOptional SeriesBasedOnFormula::getLeastUpperBound() const {
     return result;
 }
 
+Term SeriesBasedOnFormula::getFormulaForSeries() const { return m_formulaForSeries; }
+
+Term SeriesBasedOnFormula::getValueAtIndex(int const index) const {
+    SubstitutionOfVariablesToValues substitution{{m_variableName, index}};
+    return substitution.performSubstitutionTo(m_formulaForSeries);
+}
+
+Term SeriesBasedOnFormula::getSum(int const startingIndex, int const endingIndex) const {
+    Summation summation(m_formulaForSeries, m_variableName);
+    return summation.getSum(startingIndex, endingIndex);
+}
+
+Term SeriesBasedOnFormula::getSumStartingAtIndexAndToInfinity(int const startingIndex) const {
+    Summation summation(m_formulaForSeries, m_variableName);
+    return summation.getSum(startingIndex, ALBA_NUMBER_POSITIVE_INFINITY);
+}
+
+Term SeriesBasedOnFormula::getValueAtInfinity() const {
+    return getLimit(m_formulaForSeries, m_variableName, ALBA_NUMBER_POSITIVE_INFINITY);
+}
+
+Term SeriesBasedOnFormula::getRemainderAtIndex(int const index) const {
+    return getValueAtInfinity() - getValueAtIndex(index);
+}
+
 string SeriesBasedOnFormula::getNameForVariableInFormula() const { return m_variableName; }
+bool SeriesBasedOnFormula::isConvergent() const { return isARealFiniteConstant(getValueAtInfinity()); }
+
+bool SeriesBasedOnFormula::isIncreasing() const {
+    Term sign(getSignDerivativeForFiniteCalculus());
+    return isTheValue(sign, 1);
+}
+
+bool SeriesBasedOnFormula::isDecreasing() const {
+    Term sign(getSignDerivativeForFiniteCalculus());
+    return isTheValue(sign, -1);
+}
+
+bool SeriesBasedOnFormula::isMonotonic() const {
+    Term sign(getSignDerivativeForFiniteCalculus());
+    return isTheValue(sign, 1) || isTheValue(sign, -1);
+}
+
+bool SeriesBasedOnFormula::isBounded() const {
+    AlbaNumberOptional greatestLowerBound(getGreatestLowerBound());
+    AlbaNumberOptional leastUpperBound(getLeastUpperBound());
+    return greatestLowerBound && leastUpperBound;
+}
 
 AlbaNumbers SeriesBasedOnFormula::getBoundValues() const {
     DifferentiationForFiniteCalculus differentiation(m_variableName);

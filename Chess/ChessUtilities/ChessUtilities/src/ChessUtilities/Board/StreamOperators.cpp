@@ -10,6 +10,27 @@ using namespace std;
 
 namespace alba::chess {
 
+istream& operator>>(istream& in, Move& move) {
+    int firstX = 0;
+    int firstY = 0;
+    int secondX = 0;
+    int secondY = 0;
+    in >> firstX;
+    in >> firstY;
+    in >> secondX;
+    in >> secondY;
+    move = Move{{firstX, firstY}, {secondX, secondY}};
+    return in;
+}
+
+istream& operator>>(istream& in, BoardValue& boardValue) {
+    in >> boardValue.m_data[0];
+    in >> boardValue.m_data[1];
+    in >> boardValue.m_data[2];
+    in >> boardValue.m_data[3];
+    return in;
+}
+
 ostream& operator<<(ostream& out, PieceColor const pieceColor) {
     out << getEnumString(pieceColor);
     return out;
@@ -43,19 +64,6 @@ ostream& operator<<(ostream& out, Move const& move) {
     return out;
 }
 
-istream& operator>>(istream& in, Move& move) {
-    int firstX = 0;
-    int firstY = 0;
-    int secondX = 0;
-    int secondY = 0;
-    in >> firstX;
-    in >> firstY;
-    in >> secondX;
-    in >> secondY;
-    move = Move{{firstX, firstY}, {secondX, secondY}};
-    return in;
-}
-
 ostream& operator<<(ostream& out, Board const& board) {
     Board::PieceGrid const& pieceGrid(board.getPieceGrid());
     DisplayTable displayTable(Board::CHESS_SIDE_SIZE, Board::CHESS_SIDE_SIZE);
@@ -76,14 +84,6 @@ ostream& operator<<(ostream& out, BoardValue const& boardValue) {
     out << boardValue.m_data[2] << " ";
     out << boardValue.m_data[3];
     return out;
-}
-
-istream& operator>>(istream& in, BoardValue& boardValue) {
-    in >> boardValue.m_data[0];
-    in >> boardValue.m_data[1];
-    in >> boardValue.m_data[2];
-    in >> boardValue.m_data[3];
-    return in;
 }
 
 void printHexValuesInBoard(ostream& out, Board const& board) {

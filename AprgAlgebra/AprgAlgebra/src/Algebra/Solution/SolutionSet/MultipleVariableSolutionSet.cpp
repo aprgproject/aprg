@@ -7,25 +7,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-bool MultipleVariableSolutionSet::isValueAcceptedForVariable(
-    string const& variableName, AlbaNumber const& value) const {
-    SolutionSet solutionSet(getSolutionSetForVariable(variableName));
-    AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
-    return find(acceptedValues.cbegin(), acceptedValues.cend(), value) != acceptedValues.cend();
-}
-
-int MultipleVariableSolutionSet::getNumberOfVariablesWithSolutions() const {
-    return m_variableNameToSolutionSetMap.size();
-}
-
-VariableNamesSet MultipleVariableSolutionSet::getVariableNames() const {
-    VariableNamesSet result;
-    for (auto const& [variableName, solutionSet] : m_variableNameToSolutionSetMap) {
-        result.emplace(variableName);
-    }
-    return result;
-}
-
 SolutionSet MultipleVariableSolutionSet::getSolutionSetForVariable(string const& variableName) const {
     SolutionSet result;
     auto it = m_variableNameToSolutionSetMap.find(variableName);
@@ -38,6 +19,25 @@ SolutionSet MultipleVariableSolutionSet::getSolutionSetForVariable(string const&
 MultipleVariableSolutionSet::VariableNameToSolutionSetMap const&
 MultipleVariableSolutionSet::getVariableNameToSolutionSetMap() const {
     return m_variableNameToSolutionSetMap;
+}
+
+VariableNamesSet MultipleVariableSolutionSet::getVariableNames() const {
+    VariableNamesSet result;
+    for (auto const& [variableName, solutionSet] : m_variableNameToSolutionSetMap) {
+        result.emplace(variableName);
+    }
+    return result;
+}
+
+int MultipleVariableSolutionSet::getNumberOfVariablesWithSolutions() const {
+    return m_variableNameToSolutionSetMap.size();
+}
+
+bool MultipleVariableSolutionSet::isValueAcceptedForVariable(
+    string const& variableName, AlbaNumber const& value) const {
+    SolutionSet solutionSet(getSolutionSetForVariable(variableName));
+    AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
+    return find(acceptedValues.cbegin(), acceptedValues.cend(), value) != acceptedValues.cend();
 }
 
 void MultipleVariableSolutionSet::addSolutionSetForVariable(

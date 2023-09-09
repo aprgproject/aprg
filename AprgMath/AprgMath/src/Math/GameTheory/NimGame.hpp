@@ -18,8 +18,8 @@ public:
     // final state.
     static GameState getGameState(NimState const& nimState);
     static GameState getGameState(NimHeapSize const nimSum);
-    static NimState getOptimalNextState(NimState const& nimState);
     static NimHeapSize getNimSum(NimState const& nimState);
+    static NimState getOptimalNextState(NimState const& nimState);
 };
 
 }  // namespace alba::math

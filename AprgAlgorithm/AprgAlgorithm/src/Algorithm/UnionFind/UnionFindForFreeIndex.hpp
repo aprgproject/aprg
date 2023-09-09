@@ -12,10 +12,6 @@ public:
     using RootVector = std::vector<Object>;
     explicit UnionFindForFreeIndex(int const maximumSize) : m_relativeRoots() { initialize(maximumSize); }
 
-    [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
-        return getRoot(object1) == getRoot(object2);
-    }
-
     [[nodiscard]] Object getRoot(Object const& object) const override {
         Object currentRoot(object);
         Object nextRoot(m_relativeRoots[object]);
@@ -28,14 +24,9 @@ public:
 
     [[nodiscard]] RootVector const& getRelativeRootVector() const { return m_relativeRoots; }
 
-    Object getRootWithPathCompression(Object const& object) {
-        RootVector relativeRoots;
-        Object mainRoot = getRootAndRelativeRoots(object, relativeRoots);
-        saveNewRootOnRelativeRoots(mainRoot, relativeRoots);
-        return mainRoot;
+    [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
+        return getRoot(object1) == getRoot(object2);
     }
-
-    RootVector& getRelativeRootVectorReference() { return m_relativeRoots; }
 
     void connect(Object const& source, Object const& destination) override {
         // Path compression
@@ -44,6 +35,15 @@ public:
         Object mainRoot = getRootAndRelativeRoots(destination, relativeRoots);
         saveNewRootOnRelativeRoots(mainRoot, relativeRoots);
     }
+
+    Object getRootWithPathCompression(Object const& object) {
+        RootVector relativeRoots;
+        Object mainRoot = getRootAndRelativeRoots(object, relativeRoots);
+        saveNewRootOnRelativeRoots(mainRoot, relativeRoots);
+        return mainRoot;
+    }
+
+    RootVector& getRelativeRootVectorReference() { return m_relativeRoots; }
 
 private:
     Object getRootAndRelativeRoots(Object const& object, RootVector& relativeRoots) const {

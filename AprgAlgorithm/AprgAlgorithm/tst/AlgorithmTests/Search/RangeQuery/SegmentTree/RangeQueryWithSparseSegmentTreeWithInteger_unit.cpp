@@ -7,6 +7,7 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 using ValueForTest = int;
 using RangeQueryForTest = RangeQueryWithSparseSegmentTree<ValueForTest>;
 
@@ -19,6 +20,7 @@ RangeQueryForTest::Function maximumFunction = [](ValueForTest const& value1, Val
 };
 
 RangeQueryForTest::Function plusFunction = plus<>();
+
 }  // namespace
 
 TEST(RangeQueryWithSparseSegmentTreeTest, GetValueOnIntervalWithMinimumWorksWithZeroNumberOfValues) {

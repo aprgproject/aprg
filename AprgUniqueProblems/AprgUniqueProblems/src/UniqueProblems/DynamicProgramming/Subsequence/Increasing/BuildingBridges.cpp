@@ -12,22 +12,6 @@ namespace alba {
 
 BuildingBridges::BuildingBridges(Bridges const& bridges) : m_bridges(bridges) {}
 
-BuildingBridges::Index BuildingBridges::getNumberOfPossibleBridges() const {
-    // Time Complexity – O(NlogN)
-    // Space Complexity – O(N)
-    Bridges sortedBridges(m_bridges);
-    sort(sortedBridges.begin(), sortedBridges.end());
-
-    LongestIncreasingSubsequenceLinearithmic::Values secondPoints;
-    secondPoints.reserve(sortedBridges.size());
-    transform(sortedBridges.cbegin(), sortedBridges.cend(), back_inserter(secondPoints), [](auto const& bridge) {
-        return bridge.second;
-    });
-
-    LongestIncreasingSubsequenceLinearithmic lis(secondPoints);
-    return lis.getLongestLength();
-}
-
 BuildingBridges::Bridges BuildingBridges::getPossibleBridges() const {
     // Time Complexity – O(NlogN)
     // Space Complexity – O(N)
@@ -79,6 +63,22 @@ BuildingBridges::Bridges BuildingBridges::getPossibleBridges() const {
         // reverse(result.begin(), result.end()); // no need for reverse
     }
     return result;
+}
+
+BuildingBridges::Index BuildingBridges::getNumberOfPossibleBridges() const {
+    // Time Complexity – O(NlogN)
+    // Space Complexity – O(N)
+    Bridges sortedBridges(m_bridges);
+    sort(sortedBridges.begin(), sortedBridges.end());
+
+    LongestIncreasingSubsequenceLinearithmic::Values secondPoints;
+    secondPoints.reserve(sortedBridges.size());
+    transform(sortedBridges.cbegin(), sortedBridges.cend(), back_inserter(secondPoints), [](auto const& bridge) {
+        return bridge.second;
+    });
+
+    LongestIncreasingSubsequenceLinearithmic lis(secondPoints);
+    return lis.getLongestLength();
 }
 
 }  // namespace alba

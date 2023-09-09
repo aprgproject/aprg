@@ -43,6 +43,17 @@ public:
     }
 
 private:
+    [[nodiscard]] Vertex getTheOtherVertex(Edge const& edge, Vertex const& currentVertex) const {
+        Vertex result;
+        auto const& [startVertexOfEdge, endVertexOfEdge] = edge;
+        if (currentVertex == startVertexOfEdge) {
+            result = endVertexOfEdge;
+        } else {
+            result = startVertexOfEdge;
+        }
+        return result;
+    }
+
     [[nodiscard]] VertexToQueueOfEdgesMap createVertexToQueueOfEdgesMap() const {
         VertexToQueueOfEdgesMap vertexToQueueOfEdgesMap;
         for (Vertex const& vertex : b_graph.getVertices()) {
@@ -55,17 +66,6 @@ private:
             }
         }
         return vertexToQueueOfEdgesMap;
-    }
-
-    [[nodiscard]] Vertex getTheOtherVertex(Edge const& edge, Vertex const& currentVertex) const {
-        Vertex result;
-        auto const& [startVertexOfEdge, endVertexOfEdge] = edge;
-        if (currentVertex == startVertexOfEdge) {
-            result = endVertexOfEdge;
-        } else {
-            result = startVertexOfEdge;
-        }
-        return result;
     }
 
     void searchForEulerPathUsingDfs(StackOfVertices& eulerPathInStack, Vertex const& startingVertex) const {

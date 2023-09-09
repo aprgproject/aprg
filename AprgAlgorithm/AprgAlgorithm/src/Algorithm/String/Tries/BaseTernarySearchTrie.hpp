@@ -17,17 +17,6 @@ public:
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     ~BaseTernarySearchTrie() override = default;
     BaseTernarySearchTrie() : m_root(nullptr) {}
-    [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
-
-    [[nodiscard]] bool doesContain(Key const& key) const override {
-        Node const* const nodePointer(getStartingOnThisNode(m_root, key, 0));
-        return nodePointer != nullptr;
-    }
-
-    [[nodiscard]] int getSize() const override { return getSizeStartingOnThisNode(m_root); }
-    [[nodiscard]] int getNumberOfNodes() const {
-        return getNumberOfNodes(m_root);  // dont count the root pointer
-    }
 
     [[nodiscard]] Key getLongestPrefixOf(Key const& keyToCheck) const override {
         int longestPrefixLength(getLengthOfLongestPrefixStartingOnThisNode(m_root, keyToCheck, 0));
@@ -46,6 +35,17 @@ public:
         return result;
     }
 
+    [[nodiscard]] int getSize() const override { return getSizeStartingOnThisNode(m_root); }
+    [[nodiscard]] int getNumberOfNodes() const {
+        return getNumberOfNodes(m_root);  // dont count the root pointer
+    }
+    [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
+
+    [[nodiscard]] bool doesContain(Key const& key) const override {
+        Node const* const nodePointer(getStartingOnThisNode(m_root, key, 0));
+        return nodePointer != nullptr;
+    }
+
     void deleteBasedOnKey(Key const& key) override { deleteBasedOnKeyStartingOnThisNode(m_root, key, 0); }
 
 protected:
@@ -62,17 +62,6 @@ protected:
     virtual void deleteBasedOnKeyStartingOnThisNode(
         NodeUniquePointer& currentNodePointer, Key const& key, int const index) = 0;
 
-    [[nodiscard]] int getNumberOfNodes(NodeUniquePointer const& currentNodePointer) const {
-        int result(0);
-        if (currentNodePointer) {
-            ++result;
-            result += getNumberOfNodes(currentNodePointer->left);
-            result += getNumberOfNodes(currentNodePointer->right);
-            result += getNumberOfNodes(currentNodePointer->mid);
-        }
-        return result;
-    }
-
     [[nodiscard]] Node const* getStartingOnThisNode(
         NodeUniquePointer const& currentNodePointer, Key const& key, int const index) const {
         Node const* result(nullptr);
@@ -88,6 +77,17 @@ protected:
             } else {
                 result = currentNodePointer.get();
             }
+        }
+        return result;
+    }
+
+    [[nodiscard]] int getNumberOfNodes(NodeUniquePointer const& currentNodePointer) const {
+        int result(0);
+        if (currentNodePointer) {
+            ++result;
+            result += getNumberOfNodes(currentNodePointer->left);
+            result += getNumberOfNodes(currentNodePointer->right);
+            result += getNumberOfNodes(currentNodePointer->mid);
         }
         return result;
     }

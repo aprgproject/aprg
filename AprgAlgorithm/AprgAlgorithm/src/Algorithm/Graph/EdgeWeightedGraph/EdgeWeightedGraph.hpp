@@ -18,7 +18,19 @@ public:
     using EdgesWithWeight = typename GraphTypesWithWeights<Vertex, Weight>::EdgesWithWeight;
     using Weights = std::vector<Weight>;
     EdgeWeightedGraph() = default;
-    [[nodiscard]] bool hasAUniqueMinimumSpanningTree() const { return hasNoDuplicateWeights(getSortedWeights()); }
+    [[nodiscard]] EdgeToWeightMap const& getEdgeToWeightMap() const { return m_edgeToWeightMap; }
+
+    [[nodiscard]] EdgesWithWeight getEdgesWithWeight() const {
+        EdgesWithWeight result;
+        result.reserve(m_edgeToWeightMap.size());
+        std::transform(
+            m_edgeToWeightMap.cbegin(), m_edgeToWeightMap.cend(), std::back_inserter(result),
+            [](auto const& edgeAndWeightPair) {
+                return EdgeOrderedByWeight(
+                    edgeAndWeightPair.first.first, edgeAndWeightPair.first.second, edgeAndWeightPair.second);
+            });
+        return result;
+    }
 
     [[nodiscard]] Weight getWeight(Vertex const& vertex1, Vertex const& vertex2) const {
         Weight result{};
@@ -35,19 +47,7 @@ public:
         return weights;
     }
 
-    [[nodiscard]] EdgeToWeightMap const& getEdgeToWeightMap() const { return m_edgeToWeightMap; }
-
-    [[nodiscard]] EdgesWithWeight getEdgesWithWeight() const {
-        EdgesWithWeight result;
-        result.reserve(m_edgeToWeightMap.size());
-        std::transform(
-            m_edgeToWeightMap.cbegin(), m_edgeToWeightMap.cend(), std::back_inserter(result),
-            [](auto const& edgeAndWeightPair) {
-                return EdgeOrderedByWeight(
-                    edgeAndWeightPair.first.first, edgeAndWeightPair.first.second, edgeAndWeightPair.second);
-            });
-        return result;
-    }
+    [[nodiscard]] bool hasAUniqueMinimumSpanningTree() const { return hasNoDuplicateWeights(getSortedWeights()); }
 
     void connect(Vertex const& vertex1, Vertex const& vertex2, Weight const& weight) {
         BaseClass::connect(vertex1, vertex2);
@@ -61,8 +61,11 @@ public:
 
 private:
     using Graph::connect;  // prevents clang warning about hiding an overloaded virtual function
-    [[nodiscard]] bool hasNoDuplicateWeights(Weights const& sortedWeights) const {
-        return std::adjacent_find(sortedWeights.cbegin(), sortedWeights.cend()) == sortedWeights.cend();
+    [[nodiscard]] Edge createEdgeInMap(Vertex const& vertex1, Vertex const& vertex2) const {
+        if (this->DIRECTION_TYPE == GraphDirectionType::Undirected) {
+            return createSortedEdge<Vertex, Edge>(vertex1, vertex2);
+        }
+        return Edge(vertex1, vertex2);
     }
 
     [[nodiscard]] Weights getAllWeights() const {
@@ -74,11 +77,8 @@ private:
         return result;
     }
 
-    [[nodiscard]] Edge createEdgeInMap(Vertex const& vertex1, Vertex const& vertex2) const {
-        if (this->DIRECTION_TYPE == GraphDirectionType::Undirected) {
-            return createSortedEdge<Vertex, Edge>(vertex1, vertex2);
-        }
-        return Edge(vertex1, vertex2);
+    [[nodiscard]] bool hasNoDuplicateWeights(Weights const& sortedWeights) const {
+        return std::adjacent_find(sortedWeights.cbegin(), sortedWeights.cend()) == sortedWeights.cend();
     }
 
     friend std::ostream& operator<<(std::ostream& out, EdgeWeightedGraph const& graph) {

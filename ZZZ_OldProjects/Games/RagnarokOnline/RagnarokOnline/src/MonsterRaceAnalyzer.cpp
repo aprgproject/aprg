@@ -15,6 +15,7 @@ using namespace alba::stringHelper;
 using namespace std;
 
 namespace {
+
 constexpr int NUMBER_OF_WINNERS_TO_SHOW = 15;
 constexpr int NUMBER_OF_WINNERS_PER_LINE = 5;
 constexpr auto INDENTION = " | ";
@@ -50,17 +51,6 @@ void MonsterRaceAnalyzer::showNextPossibleWinners(RaceConfiguration const& curre
     showBestConfiguration(bestDualRaceSecond, currentConfiguration);
     showWinners(dualRaceSecondWinners);
     cout << "\n";
-}
-
-int MonsterRaceAnalyzer::getDiscrepancy(RaceConfiguration const& r1, RaceConfiguration const& r2) {
-    int result = 0;
-    for (int i = 0; i < NUMBER_OF_MONSTERS; ++i) {
-        result += getAbsoluteValue(r1.luck[i] - r2.luck[i]);
-        result += getAbsoluteValue(r1.hp[i] - r2.hp[i]);
-        // result += (r1.luck[i] - r2.luck[i]) * (r1.luck[i] - r2.luck[i]);
-        // result += (r1.hp[i] - r2.hp[i]) * (r1.hp[i] - r2.hp[i]);
-    }
-    return result;
 }
 
 void MonsterRaceAnalyzer::retrieveBestWinners(
@@ -132,6 +122,17 @@ void MonsterRaceAnalyzer::showBestConfiguration(
         cout << setfill(' ') << setw(3) << bestConfiguration.luck[i] + bestConfiguration.hp[i] << ", ";
     }
     cout << "\n";
+}
+
+int MonsterRaceAnalyzer::getDiscrepancy(RaceConfiguration const& r1, RaceConfiguration const& r2) {
+    int result = 0;
+    for (int i = 0; i < NUMBER_OF_MONSTERS; ++i) {
+        result += getAbsoluteValue(r1.luck[i] - r2.luck[i]);
+        result += getAbsoluteValue(r1.hp[i] - r2.hp[i]);
+        // result += (r1.luck[i] - r2.luck[i]) * (r1.luck[i] - r2.luck[i]);
+        // result += (r1.hp[i] - r2.hp[i]) * (r1.hp[i] - r2.hp[i]);
+    }
+    return result;
 }
 
 void MonsterRaceAnalyzer::readPreviousRaceDatabase() {

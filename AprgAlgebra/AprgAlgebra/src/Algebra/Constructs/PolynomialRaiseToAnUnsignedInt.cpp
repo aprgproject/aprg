@@ -22,41 +22,9 @@ PolynomialRaiseToAnUnsignedInt::PolynomialRaiseToAnUnsignedInt(Polynomial const&
     }
 }
 
-bool PolynomialRaiseToAnUnsignedInt::isExponentOne() const { return m_exponent == 1; }
-int PolynomialRaiseToAnUnsignedInt::getExponent() const { return m_exponent; }
 Polynomial const& PolynomialRaiseToAnUnsignedInt::getBase() const { return m_base; }
-
-bool PolynomialRaiseToAnUnsignedInt::canBeSimplified(int const gcfOfExponents, Monomial const& commonMonomialInBase) {
-    return gcfOfExponents != 1 &&
-           (!isEven(gcfOfExponents) || (isEven(gcfOfExponents) && !isANegativeMonomial(commonMonomialInBase)));
-}
-
-int PolynomialRaiseToAnUnsignedInt::getGcfOfExponents(PolynomialToNumberMap const& factorsToExponent) {
-    int result(1);
-    if (!factorsToExponent.empty()) {
-        auto it = factorsToExponent.cbegin();
-        result = it->second;
-        ++it;
-        for (; it != factorsToExponent.cend(); ++it) {
-            result = getGreatestCommonFactor(result, it->second);
-        }
-    }
-    return result;
-}
-
-Polynomial PolynomialRaiseToAnUnsignedInt::getRemainingBase(
-    PolynomialToNumberMap const& factorsToExponent, Monomial const& commonMonomialInBase, int const gcfOfExponents) {
-    Monomial remainingCommonMonomial(commonMonomialInBase);
-    remainingCommonMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, gcfOfExponents));
-    Polynomial result{remainingCommonMonomial};
-    for (auto const& [factor, exponent] : factorsToExponent) {
-        int remainingExponent(exponent / gcfOfExponents);
-        Polynomial remainingFactor(factor);
-        remainingFactor.raiseToUnsignedInteger(remainingExponent);
-        result.multiplyPolynomial(remainingFactor);
-    }
-    return result;
-}
+int PolynomialRaiseToAnUnsignedInt::getExponent() const { return m_exponent; }
+bool PolynomialRaiseToAnUnsignedInt::isExponentOne() const { return m_exponent == 1; }
 
 void PolynomialRaiseToAnUnsignedInt::factorizeAndUpdateCommonMonomialAndFactorsToExponent(
     Polynomial const& polynomial, PolynomialToNumberMap& factorsToExponent, Monomial& commonMonomialInBase) {
@@ -73,6 +41,38 @@ void PolynomialRaiseToAnUnsignedInt::factorizeAndUpdateCommonMonomialAndFactorsT
             }
         }
     }
+}
+
+Polynomial PolynomialRaiseToAnUnsignedInt::getRemainingBase(
+    PolynomialToNumberMap const& factorsToExponent, Monomial const& commonMonomialInBase, int const gcfOfExponents) {
+    Monomial remainingCommonMonomial(commonMonomialInBase);
+    remainingCommonMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, gcfOfExponents));
+    Polynomial result{remainingCommonMonomial};
+    for (auto const& [factor, exponent] : factorsToExponent) {
+        int remainingExponent(exponent / gcfOfExponents);
+        Polynomial remainingFactor(factor);
+        remainingFactor.raiseToUnsignedInteger(remainingExponent);
+        result.multiplyPolynomial(remainingFactor);
+    }
+    return result;
+}
+
+int PolynomialRaiseToAnUnsignedInt::getGcfOfExponents(PolynomialToNumberMap const& factorsToExponent) {
+    int result(1);
+    if (!factorsToExponent.empty()) {
+        auto it = factorsToExponent.cbegin();
+        result = it->second;
+        ++it;
+        for (; it != factorsToExponent.cend(); ++it) {
+            result = getGreatestCommonFactor(result, it->second);
+        }
+    }
+    return result;
+}
+
+bool PolynomialRaiseToAnUnsignedInt::canBeSimplified(int const gcfOfExponents, Monomial const& commonMonomialInBase) {
+    return gcfOfExponents != 1 &&
+           (!isEven(gcfOfExponents) || (isEven(gcfOfExponents) && !isANegativeMonomial(commonMonomialInBase)));
 }
 
 }  // namespace alba::algebra

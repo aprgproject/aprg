@@ -17,14 +17,6 @@ SubstitutionOfVariablesToValues::SubstitutionOfVariablesToValues(
     putVariablesWithValues(variablesWithValues);
 }
 
-bool SubstitutionOfVariablesToValues::isEmpty() const { return m_variableToValuesMap.empty(); }
-
-bool SubstitutionOfVariablesToValues::isVariableFound(string const& variable) const {
-    return m_variableToValuesMap.find(variable) != m_variableToValuesMap.cend();
-}
-
-int SubstitutionOfVariablesToValues::getSize() const { return m_variableToValuesMap.size(); }
-
 AlbaNumber SubstitutionOfVariablesToValues::getValueForVariable(string const& variable) const {
     AlbaNumber result;
     if (isVariableFound(variable)) {
@@ -33,8 +25,50 @@ AlbaNumber SubstitutionOfVariablesToValues::getValueForVariable(string const& va
     return result;
 }
 
-VariablesToValuesMap const& SubstitutionOfVariablesToValues::getVariableToValuesMap() const {
-    return m_variableToValuesMap;
+Equation SubstitutionOfVariablesToValues::performSubstitutionTo(Equation const& equation) const {
+    Equation simplifiedEquation(
+        performSubstitutionTo(equation.getLeftHandTerm()), equation.getEquationOperator().getOperatorString(),
+        performSubstitutionTo(equation.getRightHandTerm()));
+    simplifiedEquation.simplify();
+    return simplifiedEquation;
+}
+
+Expression SubstitutionOfVariablesToValues::performSubstitutionForExpression(Expression const& expression) const {
+    Expression newExpression(expression);
+    performSubstitutionForTermsWithAssociation(newExpression.getTermsWithAssociationReference());
+    newExpression.simplify();
+    return newExpression;
+}
+
+Function SubstitutionOfVariablesToValues::performSubstitutionForFunction(Function const& functionObject) const {
+    Function newFunction(functionObject);
+    getTermReferenceFromBaseTerm(newFunction.getInputTermReference()) =
+        performSubstitutionTo(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
+    newFunction.simplify();
+    return newFunction;
+}
+
+Monomial SubstitutionOfVariablesToValues::performSubstitutionForMonomial(Monomial const& monomial) const {
+    Monomial newMonomial(createMonomialFromNumber(monomial.getCoefficient()));
+    Monomial::VariablesToExponentsMap previousVariableExponentMap(monomial.getVariablesToExponentsMap());
+    for (auto const& [variableName, exponent] : previousVariableExponentMap) {
+        if (isVariableFound(variableName)) {
+            newMonomial.setConstant(newMonomial.getCoefficient() * (getValueForVariable(variableName) ^ exponent));
+        } else {
+            newMonomial.putVariableWithExponent(variableName, exponent);
+        }
+    }
+    newMonomial.simplify();
+    return newMonomial;
+}
+
+Polynomial SubstitutionOfVariablesToValues::performSubstitutionForPolynomial(Polynomial const& polynomial) const {
+    Polynomial newPolynomial;
+    for (Monomial const& monomial : polynomial.getMonomials()) {
+        newPolynomial.addMonomial(performSubstitutionForMonomial(monomial));
+    }
+    newPolynomial.simplify();
+    return newPolynomial;
 }
 
 Term SubstitutionOfVariablesToValues::performSubstitutionTo(Variable const& variable) const {
@@ -80,50 +114,15 @@ Term SubstitutionOfVariablesToValues::performSubstitutionTo(Term const& term) co
     return newTerm;
 }
 
-Equation SubstitutionOfVariablesToValues::performSubstitutionTo(Equation const& equation) const {
-    Equation simplifiedEquation(
-        performSubstitutionTo(equation.getLeftHandTerm()), equation.getEquationOperator().getOperatorString(),
-        performSubstitutionTo(equation.getRightHandTerm()));
-    simplifiedEquation.simplify();
-    return simplifiedEquation;
+VariablesToValuesMap const& SubstitutionOfVariablesToValues::getVariableToValuesMap() const {
+    return m_variableToValuesMap;
 }
 
-Monomial SubstitutionOfVariablesToValues::performSubstitutionForMonomial(Monomial const& monomial) const {
-    Monomial newMonomial(createMonomialFromNumber(monomial.getCoefficient()));
-    Monomial::VariablesToExponentsMap previousVariableExponentMap(monomial.getVariablesToExponentsMap());
-    for (auto const& [variableName, exponent] : previousVariableExponentMap) {
-        if (isVariableFound(variableName)) {
-            newMonomial.setConstant(newMonomial.getCoefficient() * (getValueForVariable(variableName) ^ exponent));
-        } else {
-            newMonomial.putVariableWithExponent(variableName, exponent);
-        }
-    }
-    newMonomial.simplify();
-    return newMonomial;
-}
+int SubstitutionOfVariablesToValues::getSize() const { return m_variableToValuesMap.size(); }
+bool SubstitutionOfVariablesToValues::isEmpty() const { return m_variableToValuesMap.empty(); }
 
-Polynomial SubstitutionOfVariablesToValues::performSubstitutionForPolynomial(Polynomial const& polynomial) const {
-    Polynomial newPolynomial;
-    for (Monomial const& monomial : polynomial.getMonomials()) {
-        newPolynomial.addMonomial(performSubstitutionForMonomial(monomial));
-    }
-    newPolynomial.simplify();
-    return newPolynomial;
-}
-
-Expression SubstitutionOfVariablesToValues::performSubstitutionForExpression(Expression const& expression) const {
-    Expression newExpression(expression);
-    performSubstitutionForTermsWithAssociation(newExpression.getTermsWithAssociationReference());
-    newExpression.simplify();
-    return newExpression;
-}
-
-Function SubstitutionOfVariablesToValues::performSubstitutionForFunction(Function const& functionObject) const {
-    Function newFunction(functionObject);
-    getTermReferenceFromBaseTerm(newFunction.getInputTermReference()) =
-        performSubstitutionTo(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
-    newFunction.simplify();
-    return newFunction;
+bool SubstitutionOfVariablesToValues::isVariableFound(string const& variable) const {
+    return m_variableToValuesMap.find(variable) != m_variableToValuesMap.cend();
 }
 
 void SubstitutionOfVariablesToValues::putVariablesWithValues(

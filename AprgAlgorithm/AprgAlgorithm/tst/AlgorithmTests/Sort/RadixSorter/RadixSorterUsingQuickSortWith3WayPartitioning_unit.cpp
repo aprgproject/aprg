@@ -10,6 +10,7 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 using Characters = vector<char>;
 using Integers = vector<int>;
 using Strings = vector<string>;
@@ -23,16 +24,10 @@ CharactersSorter::GetDigitAtFunction getNibbleAtForCharacter = [](char const& va
                                                                   int const mostSignificantDigitIndex) -> int {
     return (value >> ((1 - mostSignificantDigitIndex) * 4)) & 0xF;
 };
-CharactersSorter::IsDigitFunction isNibbleDigitValidForCharacter = [](char const&, int const digitIndex) -> bool {
-    return digitIndex < 2;
-};
 
 SmallIntegerSorter::GetDigitAtFunction getNibbleAtForSmallInteger = [](int const& value,
                                                                        int const mostSignificantDigitIndex) -> int {
     return ((value + 10) >> ((7 - mostSignificantDigitIndex) * 4)) & 0xF;
-};
-SmallIntegerSorter::IsDigitFunction isNibbleDigitValidForSmallInteger = [](int const&, int const digitIndex) -> bool {
-    return digitIndex < 8;
 };
 
 StringsSorter::GetDigitAtFunction getCharacterAtForString = [](string const& value,
@@ -43,16 +38,27 @@ StringsSorter::GetDigitAtFunction getCharacterAtForString = [](string const& val
     }
     return digitValue;
 };
-StringsSorter::IsDigitFunction isDigitValidForString = [](string const& value, int const digitIndex) -> bool {
-    return digitIndex < static_cast<int>(value.length());
-};
 
 StabilityCheckObjectsSorter::GetDigitAtFunction getNibbleAtForStabilityCheckObject =
     [](StabilityCheckObject const& value, int const mostSignificantDigitIndex) -> int {
     return (value.getVisiblePart() >> ((1 - mostSignificantDigitIndex) * 4)) & 0xF;
 };
+
+CharactersSorter::IsDigitFunction isNibbleDigitValidForCharacter = [](char const&, int const digitIndex) -> bool {
+    return digitIndex < 2;
+};
+
+SmallIntegerSorter::IsDigitFunction isNibbleDigitValidForSmallInteger = [](int const&, int const digitIndex) -> bool {
+    return digitIndex < 8;
+};
+
+StringsSorter::IsDigitFunction isDigitValidForString = [](string const& value, int const digitIndex) -> bool {
+    return digitIndex < static_cast<int>(value.length());
+};
+
 StabilityCheckObjectsSorter::IsDigitFunction isNibbleDigitValidForStabilityCheckObject =
     [](StabilityCheckObject const&, int const digitIndex) -> bool { return digitIndex < 2; };
+
 }  // namespace
 
 TEST(RadixSorterUsingQuickSortWith3WayPartitioningTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {

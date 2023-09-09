@@ -50,25 +50,17 @@ using DliPools = std::set<unsigned int>;
 class Lrm {
 public:
     explicit Lrm(HardwareConfiguration& hardwareConfiguration);
-    SelectionDspResult allocateMcdForLcgIdAccordingToMark(unsigned int const lcgId);
-    SelectionDspResultForCcdAndMcd allocateCcdMcdForLcgIdAccordingToMark(unsigned int const lcgId);
-    SelectionDspResult allocateNbicMcdForLcgIdAccordingToMark(unsigned int const lcgId);
-    SelectionDspResultForCcdAndMcd allocateCcdNbicMcdForLcgIdAccordingToMark(unsigned int const lcgId);
-    SelectionDspResult allocatePicForLcgIdAccordingToMark(unsigned int const lcgId);
     void setHibernationCommissioned(bool const isHibernationCommissioned);
     void setNumberOfUnallocatedPicPoolsPerLcg(unsigned int const lcgId, unsigned int const numberOfPicPools);
     void clearLcgToUnallocatedPicPools(unsigned int const lcgId);
     void setMaxAmountOfNonDcdsPerFsp(unsigned int const maxAmountOfNonDcdsPerFsp);
+    SelectionDspResult allocateMcdForLcgIdAccordingToMark(unsigned int const lcgId);
+    SelectionDspResult allocateNbicMcdForLcgIdAccordingToMark(unsigned int const lcgId);
+    SelectionDspResult allocatePicForLcgIdAccordingToMark(unsigned int const lcgId);
+    SelectionDspResultForCcdAndMcd allocateCcdMcdForLcgIdAccordingToMark(unsigned int const lcgId);
+    SelectionDspResultForCcdAndMcd allocateCcdNbicMcdForLcgIdAccordingToMark(unsigned int const lcgId);
 
 private:
-    // Common
-    // void saveNeededFspsForCcdOrMcdBasedOnNyquist(UniqueFspAddresses & neededUniqueFspAddresses, unsigned int&
-    // numberOfDspToAllocate, FspAddresses const& fspAddresses, unsigned int const lcgId) const; void
-    // saveNeededFspsForCcdOrMcdBasedOnTurboNyquist(UniqueFspAddresses & neededUniqueFspAddresses, unsigned int&
-    // numberOfDspToAllocate, FspAddresses const& fspAddresses, unsigned int const lcgId) const;
-    static unsigned int getPriorityBasedOnLessUsersAndHsupaCfsForDsp(Dsp const& dsp);
-    static unsigned int getConflictingDliPoolForThisDli(unsigned int const dliPool);
-    static unsigned int getLeastConflictingDliPoolForThisDli(unsigned int const dliPool);
     static void setSelectionDspResult(SelectionDspResult& selectionDspResultReference, unsigned int const fspAddress);
     static void incrementNAndTnCountBasedOnNyquistType(
         NyquistAndTurboNyquistCount& countReference, NyquistType const nyquistType);
@@ -79,15 +71,38 @@ private:
     static void changeMode(Dsp& dspToChange, DspMode const dspMode);
     static void setDliIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic, unsigned int const dliPool);
     static void setAsNbicIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic);
-    [[nodiscard]] bool isThereSpaceForTnForMcdOrCcdConsideringPic(
-        unsigned int const fspAddress, unsigned int const numberOfMcdOrCcd, unsigned int const lcgId) const;
-
-    [[nodiscard]] bool canTnBeAllocatedBasedOnPicAndNumberOfTnToBeAllocated(
-        NyquistAndTurboNyquistCount const& nAndTnCountInMsmOfLcg, unsigned int const numberOfTurboNyquistToBeUsed,
-        unsigned int const lcgId) const;
-
-    [[nodiscard]] bool isSharedLcg(unsigned int const lcgId) const;
-    [[nodiscard]] bool canAFreeDliBeAllocatedInFsp(unsigned int const fspAddress, unsigned int const lcgId) const;
+    // Common
+    // void saveNeededFspsForCcdOrMcdBasedOnNyquist(UniqueFspAddresses & neededUniqueFspAddresses, unsigned int&
+    // numberOfDspToAllocate, FspAddresses const& fspAddresses, unsigned int const lcgId) const; void
+    // saveNeededFspsForCcdOrMcdBasedOnTurboNyquist(UniqueFspAddresses & neededUniqueFspAddresses, unsigned int&
+    // numberOfDspToAllocate, FspAddresses const& fspAddresses, unsigned int const lcgId) const;
+    static unsigned int getPriorityBasedOnLessUsersAndHsupaCfsForDsp(Dsp const& dsp);
+    static unsigned int getConflictingDliPoolForThisDli(unsigned int const dliPool);
+    static unsigned int getLeastConflictingDliPoolForThisDli(unsigned int const dliPool);
+    // CCD+MCD
+    [[nodiscard]] FspAddresses selectFspsForCcdMcd(unsigned int const lcgId) const;
+    [[nodiscard]] FspAddresses selectFspsForCcdMcd2(unsigned int const lcgId) const;
+    // CCD NBIC MCD
+    [[nodiscard]] FspAddresses selectFspsForCcdNbicMcd(unsigned int const lcgId) const;
+    [[nodiscard]] FspAddresses selectFspsForCcdNbicMcd2(unsigned int const lcgId) const;
+    [[nodiscard]] NyquistAndTurboNyquistCount getNumberOfEmptyNAndTnOfFspAndLcg(
+        unsigned int const fspAddress, unsigned int const lcgId) const;
+    [[nodiscard]] NyquistAndTurboNyquistCount getNumberOfNAndTnWithoutCfsOfFspAndLcg(
+        unsigned int const fspAddress, unsigned int const lcgId) const;
+    [[nodiscard]] NyquistAndTurboNyquistCount getNumberOfEmptyNAndTnOfLcg(unsigned int const lcgId) const;
+    [[nodiscard]] NyquistAndTurboNyquistCount getNumberOfEmptyNAndTnInMsmOfLcg(unsigned int const lcgId) const;
+    // MCD
+    [[nodiscard]] SelectionDspResult selectFspForEmptyDspForMcd(unsigned int const lcgId) const;
+    [[nodiscard]] SelectionDspResult selectNonEmptyDspToClearForMcd(unsigned int const lcgId) const;
+    // NBIC MCD
+    [[nodiscard]] SelectionDspResult selectFspForEmptyDspForNbicMcd(unsigned int const lcgId) const;
+    [[nodiscard]] SelectionDspResult selectNonEmptyDspToClearForNbicMcd(unsigned int const lcgId) const;
+    // PIC
+    [[nodiscard]] SelectionDspResult selectFspForPic(unsigned int const lcgId) const;
+    [[nodiscard]] SelectionDspResult selectEmptyDspPriotizingNyquistTypeAndAddressInFsp(
+        unsigned int const lcgId, unsigned int const fspAddress) const;
+    [[nodiscard]] SelectionDspResult selectTnPriotizingLessUsersAndHsupaCfsInFsp(
+        unsigned int const lcgId, unsigned int const fspAddress) const;
     [[nodiscard]] unsigned int getPriorityBasedOnNAndTnCountForFspMcdSelection(
         Fsp const& fsp, unsigned int const lcgId) const;
     [[nodiscard]] unsigned int getPriorityBasedSharedLcgFspMcdSelection(Fsp const& fsp, unsigned int const lcgId) const;
@@ -105,30 +120,15 @@ private:
     [[nodiscard]] unsigned int getPriorityForFspPair(
         FspPairDetails const& fspPairDetails, unsigned int const lcgId) const;
     [[nodiscard]] unsigned int getNumberOfUnallocatedPicPoolsForLcg(unsigned int const lcgId) const;
-    // MCD
-    [[nodiscard]] SelectionDspResult selectFspForEmptyDspForMcd(unsigned int const lcgId) const;
-    [[nodiscard]] SelectionDspResult selectNonEmptyDspToClearForMcd(unsigned int const lcgId) const;
-    // CCD+MCD
-    [[nodiscard]] FspAddresses selectFspsForCcdMcd(unsigned int const lcgId) const;
-    [[nodiscard]] FspAddresses selectFspsForCcdMcd2(unsigned int const lcgId) const;
-    // NBIC MCD
-    [[nodiscard]] SelectionDspResult selectFspForEmptyDspForNbicMcd(unsigned int const lcgId) const;
-    [[nodiscard]] SelectionDspResult selectNonEmptyDspToClearForNbicMcd(unsigned int const lcgId) const;
-    // CCD NBIC MCD
-    [[nodiscard]] FspAddresses selectFspsForCcdNbicMcd(unsigned int const lcgId) const;
-    [[nodiscard]] FspAddresses selectFspsForCcdNbicMcd2(unsigned int const lcgId) const;
-    // PIC
-    [[nodiscard]] SelectionDspResult selectFspForPic(unsigned int const lcgId) const;
-    [[nodiscard]] SelectionDspResult selectEmptyDspPriotizingNyquistTypeAndAddressInFsp(
-        unsigned int const lcgId, unsigned int const fspAddress) const;
-    [[nodiscard]] SelectionDspResult selectTnPriotizingLessUsersAndHsupaCfsInFsp(
-        unsigned int const lcgId, unsigned int const fspAddress) const;
-    [[nodiscard]] NyquistAndTurboNyquistCount getNumberOfEmptyNAndTnOfFspAndLcg(
-        unsigned int const fspAddress, unsigned int const lcgId) const;
-    [[nodiscard]] NyquistAndTurboNyquistCount getNumberOfNAndTnWithoutCfsOfFspAndLcg(
-        unsigned int const fspAddress, unsigned int const lcgId) const;
-    [[nodiscard]] NyquistAndTurboNyquistCount getNumberOfEmptyNAndTnOfLcg(unsigned int const lcgId) const;
-    [[nodiscard]] NyquistAndTurboNyquistCount getNumberOfEmptyNAndTnInMsmOfLcg(unsigned int const lcgId) const;
+    [[nodiscard]] bool isThereSpaceForTnForMcdOrCcdConsideringPic(
+        unsigned int const fspAddress, unsigned int const numberOfMcdOrCcd, unsigned int const lcgId) const;
+
+    [[nodiscard]] bool canTnBeAllocatedBasedOnPicAndNumberOfTnToBeAllocated(
+        NyquistAndTurboNyquistCount const& nAndTnCountInMsmOfLcg, unsigned int const numberOfTurboNyquistToBeUsed,
+        unsigned int const lcgId) const;
+
+    [[nodiscard]] bool isSharedLcg(unsigned int const lcgId) const;
+    [[nodiscard]] bool canAFreeDliBeAllocatedInFsp(unsigned int const fspAddress, unsigned int const lcgId) const;
     void sortFspBasedPriorityForMcdSelection(FspAddresses& fspAddresses, unsigned int const lcgId) const;
     void sortFspBasedPriorityForMcdSelection2(FspAddresses& fspAddresses, unsigned int const lcgId) const;
     void sortFspBasedPriorityForNbicMcdSelection(FspAddresses& fspAddresses, unsigned int const lcgId) const;

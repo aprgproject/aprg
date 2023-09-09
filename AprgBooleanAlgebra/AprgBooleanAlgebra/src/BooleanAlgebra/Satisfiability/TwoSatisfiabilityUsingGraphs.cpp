@@ -13,15 +13,6 @@ TwoSatisfiabilityUsingGraphs::TwoSatisfiabilityUsingGraphs(SatisfiabilityTerms c
       m_graph(createDirectedGraphBasedFromSatTerms(satTerms)),
       m_connectedComponents(m_graph) {}
 
-bool TwoSatisfiabilityUsingGraphs::hasSolution() const {
-    bool isAVariableAndItsNegationConnected =
-        any_of(m_variableNames.cbegin(), m_variableNames.cend(), [&](string const& variableName) {
-            return m_connectedComponents.isConnected(
-                VariableTerm(variableName), VariableTerm::createNegatedVariableTerm(variableName));
-        });
-    return !isAVariableAndItsNegationConnected;
-}
-
 Term TwoSatisfiabilityUsingGraphs::getSolution() const {
     using VertexOrdering = VertexOrderingUsingDfs<VariableTerm>;
     VertexOrdering vertexOrdering(m_graph);
@@ -41,14 +32,13 @@ Term TwoSatisfiabilityUsingGraphs::getSolution() const {
     return convertExpressionToSimplestTerm(result);
 }
 
-VariableNamesSet TwoSatisfiabilityUsingGraphs::createVariableNamesFromSatTerms(SatisfiabilityTerms const& satTerms) {
-    VariableNamesSet result;
-    for (SatisfiabilityTerm const& satTerm : satTerms) {
-        for (VariableTerm const& variableTerm : satTerm) {
-            result.emplace(variableTerm.getVariableTermName());
-        }
-    }
-    return result;
+bool TwoSatisfiabilityUsingGraphs::hasSolution() const {
+    bool isAVariableAndItsNegationConnected =
+        any_of(m_variableNames.cbegin(), m_variableNames.cend(), [&](string const& variableName) {
+            return m_connectedComponents.isConnected(
+                VariableTerm(variableName), VariableTerm::createNegatedVariableTerm(variableName));
+        });
+    return !isAVariableAndItsNegationConnected;
 }
 
 TwoSatisfiabilityUsingGraphs::DirectedGraph TwoSatisfiabilityUsingGraphs::createDirectedGraphBasedFromSatTerms(
@@ -63,6 +53,16 @@ TwoSatisfiabilityUsingGraphs::DirectedGraph TwoSatisfiabilityUsingGraphs::create
                 result.connect(~satTerm[0], satTerm[1]);
                 result.connect(~satTerm[1], satTerm[0]);
             }
+        }
+    }
+    return result;
+}
+
+VariableNamesSet TwoSatisfiabilityUsingGraphs::createVariableNamesFromSatTerms(SatisfiabilityTerms const& satTerms) {
+    VariableNamesSet result;
+    for (SatisfiabilityTerm const& satTerm : satTerms) {
+        for (VariableTerm const& variableTerm : satTerm) {
+            result.emplace(variableTerm.getVariableTermName());
         }
     }
     return result;

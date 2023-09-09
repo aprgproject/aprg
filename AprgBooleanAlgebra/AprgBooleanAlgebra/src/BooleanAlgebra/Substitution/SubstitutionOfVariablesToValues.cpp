@@ -17,24 +17,10 @@ SubstitutionOfVariablesToValues::SubstitutionOfVariablesToValues(
     putVariablesWithValues(variablesWithValues);
 }
 
-bool SubstitutionOfVariablesToValues::isEmpty() const { return m_variableToValuesMap.empty(); }
-
-bool SubstitutionOfVariablesToValues::isVariableFound(string const& variable) const {
-    return m_variableToValuesMap.find(variable) != m_variableToValuesMap.cend();
-}
-
-bool SubstitutionOfVariablesToValues::getValueForVariable(string const& variable) const {
-    bool result(false);
-    if (isVariableFound(variable)) {
-        result = m_variableToValuesMap.at(variable);
-    }
-    return result;
-}
-
-int SubstitutionOfVariablesToValues::getSize() const { return m_variableToValuesMap.size(); }
-
-VariablesToValuesMap const& SubstitutionOfVariablesToValues::getVariableToValuesMap() const {
-    return m_variableToValuesMap;
+Expression SubstitutionOfVariablesToValues::performSubstitutionForExpression(Expression const& expression) const {
+    Expression newExpression(expression);
+    performSubstitutionForWrappedTerms(newExpression.getWrappedTermsReference());
+    return newExpression;
 }
 
 Term SubstitutionOfVariablesToValues::performSubstitutionTo(VariableTerm const& variableTerm) const {
@@ -66,10 +52,23 @@ Term SubstitutionOfVariablesToValues::performSubstitutionTo(Term const& term) co
     return newTerm;
 }
 
-Expression SubstitutionOfVariablesToValues::performSubstitutionForExpression(Expression const& expression) const {
-    Expression newExpression(expression);
-    performSubstitutionForWrappedTerms(newExpression.getWrappedTermsReference());
-    return newExpression;
+VariablesToValuesMap const& SubstitutionOfVariablesToValues::getVariableToValuesMap() const {
+    return m_variableToValuesMap;
+}
+
+int SubstitutionOfVariablesToValues::getSize() const { return m_variableToValuesMap.size(); }
+bool SubstitutionOfVariablesToValues::isEmpty() const { return m_variableToValuesMap.empty(); }
+
+bool SubstitutionOfVariablesToValues::isVariableFound(string const& variable) const {
+    return m_variableToValuesMap.find(variable) != m_variableToValuesMap.cend();
+}
+
+bool SubstitutionOfVariablesToValues::getValueForVariable(string const& variable) const {
+    bool result(false);
+    if (isVariableFound(variable)) {
+        result = m_variableToValuesMap.at(variable);
+    }
+    return result;
 }
 
 void SubstitutionOfVariablesToValues::putVariablesWithValues(

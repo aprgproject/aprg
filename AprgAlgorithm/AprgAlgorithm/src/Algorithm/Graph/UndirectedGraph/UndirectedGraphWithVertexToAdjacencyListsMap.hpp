@@ -17,39 +17,19 @@ public:
     using AdjacencyList = SetOfVertices;
     using AdjacencyLists = std::map<Vertex, AdjacencyList>;
     UndirectedGraphWithVertexToAdjacencyListsMap() = default;
-    [[nodiscard]] bool isEmpty() const override { return m_adjacencyLists.empty(); }
 
-    [[nodiscard]] bool hasAnyConnection(Vertex const& vertex) const override {
-        bool result(false);
-        auto it = m_adjacencyLists.find(vertex);
-        if (it != m_adjacencyLists.cend()) {
-            AdjacencyList const& adjacencyList(it->second);
-            result = !adjacencyList.empty();
-        }
-        return result;
-    }
-
-    [[nodiscard]] bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
-        bool result(false);
-        auto it = m_adjacencyLists.find(vertex1);
-        if (it != m_adjacencyLists.cend()) {
-            AdjacencyList const& adjacencyList(it->second);
-            result = adjacencyList.find(vertex2) != adjacencyList.cend();
-        }
-        return result;
-    }
-
-    [[nodiscard]] int getNumberOfVertices() const override {
-        int result(0);
+    [[nodiscard]] Edges getEdges() const override {
+        Edges result;
         for (auto const& [vertex, adjacencyList] : m_adjacencyLists) {
+            auto const& vertex1(vertex);  // structured bindings with lambda does not work with clang
             if (!adjacencyList.empty()) {
-                ++result;
+                std::for_each(adjacencyList.lower_bound(vertex1), adjacencyList.cend(), [&](Vertex const& vertex2) {
+                    result.emplace_back(vertex1, vertex2);
+                });
             }
         }
         return result;
     }
-
-    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
 
     [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
         Vertices result(false);
@@ -72,15 +52,35 @@ public:
         return result;
     }
 
-    [[nodiscard]] Edges getEdges() const override {
-        Edges result;
+    [[nodiscard]] int getNumberOfVertices() const override {
+        int result(0);
         for (auto const& [vertex, adjacencyList] : m_adjacencyLists) {
-            auto const& vertex1(vertex);  // structured bindings with lambda does not work with clang
             if (!adjacencyList.empty()) {
-                std::for_each(adjacencyList.lower_bound(vertex1), adjacencyList.cend(), [&](Vertex const& vertex2) {
-                    result.emplace_back(vertex1, vertex2);
-                });
+                ++result;
             }
+        }
+        return result;
+    }
+
+    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
+    [[nodiscard]] bool isEmpty() const override { return m_adjacencyLists.empty(); }
+
+    [[nodiscard]] bool hasAnyConnection(Vertex const& vertex) const override {
+        bool result(false);
+        auto it = m_adjacencyLists.find(vertex);
+        if (it != m_adjacencyLists.cend()) {
+            AdjacencyList const& adjacencyList(it->second);
+            result = !adjacencyList.empty();
+        }
+        return result;
+    }
+
+    [[nodiscard]] bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
+        bool result(false);
+        auto it = m_adjacencyLists.find(vertex1);
+        if (it != m_adjacencyLists.cend()) {
+            AdjacencyList const& adjacencyList(it->second);
+            result = adjacencyList.find(vertex2) != adjacencyList.cend();
         }
         return result;
     }

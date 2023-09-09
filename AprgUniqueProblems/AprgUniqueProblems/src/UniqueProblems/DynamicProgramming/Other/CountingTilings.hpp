@@ -22,10 +22,10 @@ public:
 private:
     static Row getEmptyRow(Count const length);
     static Rows calculateNextRows(Row const& currentRow);
-    Rows const& getNextRows(Row const& currentRow);
     void searchNextRow(Count const rowIndex, Row const& currentRow);
     void startCompleteSearch();
     void doCompleteSearchAt(Count const gridIndex);
+    Rows const& getNextRows(Row const& currentRow);
     Count m_numberOfColumns;
     Count m_numberOfRows;
     Count const m_numberOfCells;

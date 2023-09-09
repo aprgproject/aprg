@@ -9,39 +9,6 @@ int GridPathSearch::countPaths() {
     return m_numberOfCompletePaths;
 }
 
-bool GridPathSearch::isLowerRightCorner(int const x, int const y) {
-    // lower-right corner
-    return x == static_cast<int>(m_grid.getNumberOfColumns()) - 1 &&
-           y == static_cast<int>(m_grid.getNumberOfRows()) - 1;
-}
-
-bool GridPathSearch::canTraverse(int const x, int const y) { return m_grid.isInside(x, y) && !m_grid.getEntry(x, y); }
-
-bool GridPathSearch::shouldStop(int const x, int const y, Movement const previousMovement) {
-    // Optimization 3: If the path touches a wall and can turn either left or right, the grid splits into two parts that
-    // contain unvisited squares. Optimization 4: The idea of Optimization 3 can be generalized: if the path cannot
-    // continue forward but can turn either left or right, the grid splits into two parts that both contain unvisited
-    // squares.
-    if (Movement::Left == previousMovement) {
-        if (!canTraverse(x - 1, y) && canTraverse(x, y - 1) && canTraverse(x, y + 1)) {
-            return true;
-        }
-    } else if (Movement::Right == previousMovement) {
-        if (!canTraverse(x + 1, y) && canTraverse(x, y - 1) && canTraverse(x, y + 1)) {
-            return true;
-        }
-    } else if (Movement::Up == previousMovement) {
-        if (!canTraverse(x, y - 1) && canTraverse(x - 1, y) && canTraverse(x + 1, y)) {
-            return true;
-        }
-    } else if (Movement::Down == previousMovement) {
-        if (!canTraverse(x, y + 1) && canTraverse(x - 1, y) && canTraverse(x + 1, y)) {
-            return true;
-        }
-    }
-    return false;
-}
-
 void GridPathSearch::startSearch() {
     // Optimization 1: In any solution, we first move one step down or right.
     // There are always two paths that are symmetric about the diagonal of the grid after the first step.
@@ -83,6 +50,39 @@ void GridPathSearch::searchNextCoordinate(int const x, int const y, Movement con
         m_grid.setEntry(x, y, false);
         --m_numberTraversedCells;
     }
+}
+
+bool GridPathSearch::isLowerRightCorner(int const x, int const y) {
+    // lower-right corner
+    return x == static_cast<int>(m_grid.getNumberOfColumns()) - 1 &&
+           y == static_cast<int>(m_grid.getNumberOfRows()) - 1;
+}
+
+bool GridPathSearch::canTraverse(int const x, int const y) { return m_grid.isInside(x, y) && !m_grid.getEntry(x, y); }
+
+bool GridPathSearch::shouldStop(int const x, int const y, Movement const previousMovement) {
+    // Optimization 3: If the path touches a wall and can turn either left or right, the grid splits into two parts that
+    // contain unvisited squares. Optimization 4: The idea of Optimization 3 can be generalized: if the path cannot
+    // continue forward but can turn either left or right, the grid splits into two parts that both contain unvisited
+    // squares.
+    if (Movement::Left == previousMovement) {
+        if (!canTraverse(x - 1, y) && canTraverse(x, y - 1) && canTraverse(x, y + 1)) {
+            return true;
+        }
+    } else if (Movement::Right == previousMovement) {
+        if (!canTraverse(x + 1, y) && canTraverse(x, y - 1) && canTraverse(x, y + 1)) {
+            return true;
+        }
+    } else if (Movement::Up == previousMovement) {
+        if (!canTraverse(x, y - 1) && canTraverse(x - 1, y) && canTraverse(x + 1, y)) {
+            return true;
+        }
+    } else if (Movement::Down == previousMovement) {
+        if (!canTraverse(x, y + 1) && canTraverse(x - 1, y) && canTraverse(x + 1, y)) {
+            return true;
+        }
+    }
+    return false;
 }
 
 }  // namespace alba

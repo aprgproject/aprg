@@ -27,44 +27,6 @@ public:
     using ComputationalTable = std::map<Minterm, MintermToImplicantsMap>;
     QuineMcCluskey() = default;
 
-    [[nodiscard]] bool doImplicantsExistAt(int const numberOfOnes, int const commonalityCount) const {
-        bool result(false);
-        auto numberOfOnesIt = m_computationalTable.find(numberOfOnes);
-        if (numberOfOnesIt != m_computationalTable.end()) {
-            MintermToImplicantsMap const& implicantsMap(numberOfOnesIt->second);
-            result = implicantsMap.find(commonalityCount) != implicantsMap.end();
-        }
-        return result;
-    }
-
-    [[nodiscard]] bool isASubset(std::set<int> const& smaller, std::set<int> const& larger) const {
-        bool result(false);
-        if (smaller.size() <= larger.size()) {
-            result = true;
-            for (auto const& elementOfSmaller : smaller) {
-                auto it = larger.find(elementOfSmaller);
-                if (it == larger.cend()) {
-                    result = false;
-                    break;
-                }
-            }
-        }
-        return result;
-    }
-
-    [[nodiscard]] int getNumberOfOnes(Minterm const value) const {
-        return AlbaBitValueUtilities<Minterm>::getNumberOfOnes(value);
-    }
-
-    [[nodiscard]] LogicalValue getOutput(Minterm const input) const {
-        LogicalValue result(LogicalValue::False);
-        auto it = m_inputToOutputMap.find(input);
-        if (it != m_inputToOutputMap.end()) {
-            result = it->second;
-        }
-        return result;
-    }
-
     [[nodiscard]] Implicants getImplicants(int const numberOfOnes, int const commonalityCount) const {
         Implicants result;
         auto numberOfOnesIt = m_computationalTable.find(numberOfOnes);
@@ -102,19 +64,6 @@ public:
             }
         }
         return result;
-    }
-
-    [[nodiscard]] std::string getComputationTableString() const {
-        std::stringstream ss;
-        for (auto const& [numberOfOnes, commonalityCountImplicantsPairs] : m_computationalTable) {
-            ss << "Number of ones = " << numberOfOnes << "\n";
-            for (auto const& [commonalityCount, implicants] : commonalityCountImplicantsPairs) {
-                ss << "Commonality count = " << commonalityCount << " with ";
-                printParameterWithName(ss, "Implicants", implicants);
-                ss << "\n";
-            }
-        }
-        return ss.str();
     }
 
     [[nodiscard]] Implicants getBestPrimeImplicants(Implicants const& primeImplicants) const {
@@ -286,6 +235,28 @@ public:
         return result;
     }
 
+    [[nodiscard]] LogicalValue getOutput(Minterm const input) const {
+        LogicalValue result(LogicalValue::False);
+        auto it = m_inputToOutputMap.find(input);
+        if (it != m_inputToOutputMap.end()) {
+            result = it->second;
+        }
+        return result;
+    }
+
+    [[nodiscard]] std::string getComputationTableString() const {
+        std::stringstream ss;
+        for (auto const& [numberOfOnes, commonalityCountImplicantsPairs] : m_computationalTable) {
+            ss << "Number of ones = " << numberOfOnes << "\n";
+            for (auto const& [commonalityCount, implicants] : commonalityCountImplicantsPairs) {
+                ss << "Commonality count = " << commonalityCount << " with ";
+                printParameterWithName(ss, "Implicants", implicants);
+                ss << "\n";
+            }
+        }
+        return ss.str();
+    }
+
     [[nodiscard]] std::string getOutputTable(Implicants const& primeImplicants) const {
         Minterms inputsWithTrue(getInputMintermsWithTrue());
         DisplayTable displayTable;
@@ -310,6 +281,35 @@ public:
             }
         }
         return stringHelper::convertToString(displayTable);
+    }
+
+    [[nodiscard]] int getNumberOfOnes(Minterm const value) const {
+        return AlbaBitValueUtilities<Minterm>::getNumberOfOnes(value);
+    }
+
+    [[nodiscard]] bool doImplicantsExistAt(int const numberOfOnes, int const commonalityCount) const {
+        bool result(false);
+        auto numberOfOnesIt = m_computationalTable.find(numberOfOnes);
+        if (numberOfOnesIt != m_computationalTable.end()) {
+            MintermToImplicantsMap const& implicantsMap(numberOfOnesIt->second);
+            result = implicantsMap.find(commonalityCount) != implicantsMap.end();
+        }
+        return result;
+    }
+
+    [[nodiscard]] bool isASubset(std::set<int> const& smaller, std::set<int> const& larger) const {
+        bool result(false);
+        if (smaller.size() <= larger.size()) {
+            result = true;
+            for (auto const& elementOfSmaller : smaller) {
+                auto it = larger.find(elementOfSmaller);
+                if (it == larger.cend()) {
+                    result = false;
+                    break;
+                }
+            }
+        }
+        return result;
     }
 
     void setInputOutput(Minterm const input, LogicalValue const output) {

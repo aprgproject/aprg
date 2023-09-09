@@ -14,9 +14,9 @@ class AlbaFileReader {
 public:
     explicit AlbaFileReader(std::ifstream& stream);
     explicit AlbaFileReader(std::ifstream& stream, size_t const size);
-    bool isNotFinished();
     char getCharacter();
     char* getCharacters(size_t& numberOfCharacters);
+    bool isNotFinished();
     template <typename NumberType>
     NumberType getOneByteData();
     template <typename NumberType>
@@ -40,11 +40,11 @@ public:
     [[nodiscard]] size_t getMaxBufferSize() const;
     void moveToTheBeginning() const;
     void moveLocation(size_t const location) const;
-    std::string getLine();
-    std::string getLineAndIgnoreWhiteSpaces();
     void saveDataToMemoryBuffer(AlbaMemoryBuffer& buffer, size_t const numberOfBytesToRead);
     void skipLine();
     void setMaxBufferSize(size_t const bufferSize);
+    std::string getLine();
+    std::string getLineAndIgnoreWhiteSpaces();
 
 private:
     [[nodiscard]] static size_t getFileSize(std::ifstream& inputStream);

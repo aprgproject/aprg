@@ -17,6 +17,11 @@ public:
         double const bCoefficient);  // ((x-center.x)^2/aCoefficient^2) - ((y-center.y)^2/bCoefficient^2) = 1
     bool operator==(Hyperbola const& hyperbola) const;
     bool operator!=(Hyperbola const& hyperbola) const;
+    [[nodiscard]] Lines getAsymptotes() const;
+    [[nodiscard]] Point getCenter() const;
+    [[nodiscard]] Points getFoci() const;
+    [[nodiscard]] Points getVertices() const;
+    [[nodiscard]] Points getPointsForShape(double const interval) const;
     [[nodiscard]] double getAValue() const;
     [[nodiscard]] double getBValue() const;
     [[nodiscard]] double getCValue() const;
@@ -26,11 +31,6 @@ public:
     [[nodiscard]] double calculateXFromY(double const y, double const signOfRoot) const;
     [[nodiscard]] double calculateYFromXWithoutCenter(double const x, double const signOfRoot) const;
     [[nodiscard]] double calculateXFromYWithoutCenter(double const y, double const signOfRoot) const;
-    [[nodiscard]] Point getCenter() const;
-    [[nodiscard]] Points getFoci() const;
-    [[nodiscard]] Points getVertices() const;
-    [[nodiscard]] Points getPointsForShape(double const interval) const;
-    [[nodiscard]] Lines getAsymptotes() const;
 
 private:
     [[nodiscard]] Points getPointsInTraversingXAndY(

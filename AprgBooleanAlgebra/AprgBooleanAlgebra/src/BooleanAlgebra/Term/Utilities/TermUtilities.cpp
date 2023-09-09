@@ -9,6 +9,22 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
+Term getTermFromVariableAndPrimeValue(string const& variableName, char const primeValue) {
+    Term result;
+    if ('0' == primeValue) {
+        result = Term(VariableTerm::createNegatedVariableTerm(variableName));
+    } else if ('1' == primeValue) {
+        result = Term(variableName);
+    }
+    return result;
+}
+
+VariableNamesSet getVariableNames(Term const& term) {
+    VariableNamesRetriever retriever;
+    retriever.retrieveFromTerm(term);
+    return retriever.getSavedData();
+}
+
 bool isNonEmptyOrNonOperatorType(Term const& term) {
     TermType termType(term.getTermType());
     return TermType::Empty != termType && TermType::Operator != termType;
@@ -23,22 +39,6 @@ bool getNoEffectValueInOperation(OperatorLevel const operatorLevel) { return Ope
 
 bool getShortCircuitValueEffectInOperation(OperatorLevel const operatorLevel) {
     return OperatorLevel::Or == operatorLevel;
-}
-
-VariableNamesSet getVariableNames(Term const& term) {
-    VariableNamesRetriever retriever;
-    retriever.retrieveFromTerm(term);
-    return retriever.getSavedData();
-}
-
-Term getTermFromVariableAndPrimeValue(string const& variableName, char const primeValue) {
-    Term result;
-    if ('0' == primeValue) {
-        result = Term(VariableTerm::createNegatedVariableTerm(variableName));
-    } else if ('1' == primeValue) {
-        result = Term(variableName);
-    }
-    return result;
 }
 
 }  // namespace alba::booleanAlgebra

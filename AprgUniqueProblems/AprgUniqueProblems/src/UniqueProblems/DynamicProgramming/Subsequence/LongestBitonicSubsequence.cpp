@@ -50,38 +50,6 @@ LongestBitonicSubsequence::Values LongestBitonicSubsequence::getLongestSubsequen
     return result;
 }
 
-LongestBitonicSubsequence::Values LongestBitonicSubsequence::getLongestSubsequence(
-    IndexToIndex& increasingPartialLengths, IndexToIndex& decreasingPartialLengths,
-    IndexToIndex& indexToIncreasingPreviousIndex, IndexToIndex& indexToDecreasingPreviousIndex) const {
-    Value maxLength(0);
-    Index indexOfLongestLength(0);
-    for (Index index(0); index < static_cast<Index>(m_sequence.size()); ++index) {
-        Value lengthAtIndex(increasingPartialLengths[index] + decreasingPartialLengths[index] - 1);
-        if (maxLength < lengthAtIndex) {
-            maxLength = lengthAtIndex;
-            indexOfLongestLength = index;
-        }
-    }
-
-    list<Value> sequenceInDeque;
-
-    Index traverseIndex = indexOfLongestLength;
-    for (; traverseIndex != indexToIncreasingPreviousIndex[traverseIndex];
-         traverseIndex = indexToIncreasingPreviousIndex[traverseIndex]) {
-        sequenceInDeque.emplace_front(m_sequence[traverseIndex]);
-    }
-    sequenceInDeque.emplace_front(m_sequence[traverseIndex]);
-
-    traverseIndex = indexToDecreasingPreviousIndex[indexOfLongestLength];
-    for (; traverseIndex != indexToDecreasingPreviousIndex[traverseIndex];
-         traverseIndex = indexToDecreasingPreviousIndex[traverseIndex]) {
-        sequenceInDeque.emplace_back(m_sequence[traverseIndex]);
-    }
-    sequenceInDeque.emplace_back(m_sequence[traverseIndex]);
-
-    return {sequenceInDeque.cbegin(), sequenceInDeque.cend()};
-}
-
 void LongestBitonicSubsequence::computeIncreasingPartialLengths(IndexToIndex& increasingPartialLengths) const {
     for (Index index(0); index < static_cast<Index>(m_sequence.size()); ++index) {
         Value& subIncreasingLength(increasingPartialLengths[index]);
@@ -132,6 +100,38 @@ void LongestBitonicSubsequence::computeDecreasingPartialLengths(
             }
         }
     }
+}
+
+LongestBitonicSubsequence::Values LongestBitonicSubsequence::getLongestSubsequence(
+    IndexToIndex& increasingPartialLengths, IndexToIndex& decreasingPartialLengths,
+    IndexToIndex& indexToIncreasingPreviousIndex, IndexToIndex& indexToDecreasingPreviousIndex) const {
+    Value maxLength(0);
+    Index indexOfLongestLength(0);
+    for (Index index(0); index < static_cast<Index>(m_sequence.size()); ++index) {
+        Value lengthAtIndex(increasingPartialLengths[index] + decreasingPartialLengths[index] - 1);
+        if (maxLength < lengthAtIndex) {
+            maxLength = lengthAtIndex;
+            indexOfLongestLength = index;
+        }
+    }
+
+    list<Value> sequenceInDeque;
+
+    Index traverseIndex = indexOfLongestLength;
+    for (; traverseIndex != indexToIncreasingPreviousIndex[traverseIndex];
+         traverseIndex = indexToIncreasingPreviousIndex[traverseIndex]) {
+        sequenceInDeque.emplace_front(m_sequence[traverseIndex]);
+    }
+    sequenceInDeque.emplace_front(m_sequence[traverseIndex]);
+
+    traverseIndex = indexToDecreasingPreviousIndex[indexOfLongestLength];
+    for (; traverseIndex != indexToDecreasingPreviousIndex[traverseIndex];
+         traverseIndex = indexToDecreasingPreviousIndex[traverseIndex]) {
+        sequenceInDeque.emplace_back(m_sequence[traverseIndex]);
+    }
+    sequenceInDeque.emplace_back(m_sequence[traverseIndex]);
+
+    return {sequenceInDeque.cbegin(), sequenceInDeque.cend()};
 }
 
 }  // namespace alba

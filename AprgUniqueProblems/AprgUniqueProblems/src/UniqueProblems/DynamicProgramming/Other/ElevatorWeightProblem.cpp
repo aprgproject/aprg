@@ -47,10 +47,10 @@ ElevatorWeightProblem::PeopleBits ElevatorWeightProblem::removePerson(
     return peopleBits & ~(1 << person);
 }
 
-ElevatorWeightProblem::Person ElevatorWeightProblem::getNumberOfPeople() const { return m_peopleWeights.size(); }
-
 ElevatorWeightProblem::PeopleBits ElevatorWeightProblem::getNumberOfPeopleSubsets() const {
     return 1 << getNumberOfPeople();
 }
+
+ElevatorWeightProblem::Person ElevatorWeightProblem::getNumberOfPeople() const { return m_peopleWeights.size(); }
 
 }  // namespace alba

@@ -17,69 +17,6 @@ SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms(
     putVariablesWithTerms(variablesWithTerms);
 }
 
-bool SubstitutionOfVariablesToTerms::isEmpty() const { return m_variableToTermsMap.empty(); }
-
-bool SubstitutionOfVariablesToTerms::isVariableFound(string const& variable) const {
-    return m_variableToTermsMap.find(variable) != m_variableToTermsMap.cend();
-}
-
-int SubstitutionOfVariablesToTerms::getSize() const { return m_variableToTermsMap.size(); }
-
-Term SubstitutionOfVariablesToTerms::getTermForVariable(string const& variable) const {
-    Term result;
-    if (isVariableFound(variable)) {
-        result = m_variableToTermsMap.at(variable);
-    }
-    return result;
-}
-
-VariablesToTermsMap const& SubstitutionOfVariablesToTerms::getVariablesToTermsMap() const {
-    return m_variableToTermsMap;
-}
-
-Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Variable const& variable) const {
-    Term result;
-    string variableName(variable.getVariableName());
-    if (isVariableFound(variableName)) {
-        result = getTermForVariable(variableName);
-    } else {
-        result = Term(variable);
-    }
-    return result;
-}
-
-Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Monomial const& monomial) const {
-    return simplifyAndConvertExpressionToSimplestTerm(performSubstitutionForMonomial(monomial));
-}
-
-Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Polynomial const& polynomial) const {
-    return simplifyAndConvertExpressionToSimplestTerm(performSubstitutionForPolynomial(polynomial));
-}
-
-Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Expression const& expression) const {
-    return simplifyAndConvertExpressionToSimplestTerm(performSubstitutionForExpression(expression));
-}
-
-Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Function const& functionObject) const {
-    return simplifyAndConvertFunctionToSimplestTerm(performSubstitutionForFunction(functionObject));
-}
-
-Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Term const& term) const {
-    Term newTerm(term);
-    if (term.isVariable()) {
-        newTerm = performSubstitutionTo(term.getAsVariable());
-    } else if (term.isMonomial()) {
-        newTerm = performSubstitutionTo(term.getAsMonomial());
-    } else if (term.isPolynomial()) {
-        newTerm = performSubstitutionTo(term.getAsPolynomial());
-    } else if (term.isExpression()) {
-        newTerm = performSubstitutionTo(term.getAsExpression());
-    } else if (term.isFunction()) {
-        newTerm = performSubstitutionTo(term.getAsFunction());
-    }
-    return newTerm;
-}
-
 Equation SubstitutionOfVariablesToTerms::performSubstitutionTo(Equation const& equation) const {
     Equation simplifiedEquation(
         performSubstitutionTo(equation.getLeftHandTerm()), equation.getEquationOperator().getOperatorString(),
@@ -129,6 +66,68 @@ Function SubstitutionOfVariablesToTerms::performSubstitutionForFunction(Function
         performSubstitutionTo(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
     newFunction.simplify();
     return newFunction;
+}
+
+Term SubstitutionOfVariablesToTerms::getTermForVariable(string const& variable) const {
+    Term result;
+    if (isVariableFound(variable)) {
+        result = m_variableToTermsMap.at(variable);
+    }
+    return result;
+}
+
+Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Variable const& variable) const {
+    Term result;
+    string variableName(variable.getVariableName());
+    if (isVariableFound(variableName)) {
+        result = getTermForVariable(variableName);
+    } else {
+        result = Term(variable);
+    }
+    return result;
+}
+
+Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Monomial const& monomial) const {
+    return simplifyAndConvertExpressionToSimplestTerm(performSubstitutionForMonomial(monomial));
+}
+
+Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Polynomial const& polynomial) const {
+    return simplifyAndConvertExpressionToSimplestTerm(performSubstitutionForPolynomial(polynomial));
+}
+
+Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Expression const& expression) const {
+    return simplifyAndConvertExpressionToSimplestTerm(performSubstitutionForExpression(expression));
+}
+
+Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Function const& functionObject) const {
+    return simplifyAndConvertFunctionToSimplestTerm(performSubstitutionForFunction(functionObject));
+}
+
+Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Term const& term) const {
+    Term newTerm(term);
+    if (term.isVariable()) {
+        newTerm = performSubstitutionTo(term.getAsVariable());
+    } else if (term.isMonomial()) {
+        newTerm = performSubstitutionTo(term.getAsMonomial());
+    } else if (term.isPolynomial()) {
+        newTerm = performSubstitutionTo(term.getAsPolynomial());
+    } else if (term.isExpression()) {
+        newTerm = performSubstitutionTo(term.getAsExpression());
+    } else if (term.isFunction()) {
+        newTerm = performSubstitutionTo(term.getAsFunction());
+    }
+    return newTerm;
+}
+
+VariablesToTermsMap const& SubstitutionOfVariablesToTerms::getVariablesToTermsMap() const {
+    return m_variableToTermsMap;
+}
+
+int SubstitutionOfVariablesToTerms::getSize() const { return m_variableToTermsMap.size(); }
+bool SubstitutionOfVariablesToTerms::isEmpty() const { return m_variableToTermsMap.empty(); }
+
+bool SubstitutionOfVariablesToTerms::isVariableFound(string const& variable) const {
+    return m_variableToTermsMap.find(variable) != m_variableToTermsMap.cend();
 }
 
 void SubstitutionOfVariablesToTerms::putVariablesWithTerms(

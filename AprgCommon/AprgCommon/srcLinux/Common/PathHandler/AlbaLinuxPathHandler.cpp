@@ -29,21 +29,6 @@ AlbaLinuxPathHandler AlbaLinuxPathHandler::createPathHandlerForDetectedPath() {
     return AlbaLinuxPathHandler(getCurrentDetectedPath());
 }
 
-bool AlbaLinuxPathHandler::isFoundInLocalSystem() const { return m_foundInLocalSystem; }
-bool AlbaLinuxPathHandler::isRelativePath() const { return m_relativePath; }
-
-double AlbaLinuxPathHandler::getFileSizeEstimate() const {
-    struct stat fileStatus {};
-    double fileSize(0);
-    if (0 == stat(getFullPath().c_str(), &fileStatus)) {
-        fileSize = static_cast<double>(fileStatus.st_size);
-    } else if (errno != 0) {
-        cout << "Error in AlbaLinuxPathHandler::getFileSizeEstimate() path:[" << getFullPath()
-             << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
-    }
-    return fileSize;
-}
-
 AlbaDateTime AlbaLinuxPathHandler::getFileCreationTime() const {
     struct stat fileStatus {};
     AlbaDateTime fileCreationTime;
@@ -57,6 +42,21 @@ AlbaDateTime AlbaLinuxPathHandler::getFileCreationTime() const {
     }
     return fileCreationTime;
 }
+
+double AlbaLinuxPathHandler::getFileSizeEstimate() const {
+    struct stat fileStatus {};
+    double fileSize(0);
+    if (0 == stat(getFullPath().c_str(), &fileStatus)) {
+        fileSize = static_cast<double>(fileStatus.st_size);
+    } else if (errno != 0) {
+        cout << "Error in AlbaLinuxPathHandler::getFileSizeEstimate() path:[" << getFullPath()
+             << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
+    }
+    return fileSize;
+}
+
+bool AlbaLinuxPathHandler::isFoundInLocalSystem() const { return m_foundInLocalSystem; }
+bool AlbaLinuxPathHandler::isRelativePath() const { return m_relativePath; }
 
 void AlbaLinuxPathHandler::createDirectoriesForNonExisitingDirectories() const {
     string fullPath(getFullPath());
@@ -74,6 +74,36 @@ void AlbaLinuxPathHandler::createDirectoriesForNonExisitingDirectories() const {
         }
         index = indexWithSlashCharacter + 1;
     }
+}
+
+void AlbaLinuxPathHandler::deleteFilesInDirectory() {
+    set<string> listOfFiles;
+    set<string> listOfDirectories;
+    findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
+    for (auto&& file : listOfFiles) {
+        AlbaLinuxPathHandler(file).deleteFile();
+    }
+    reInput();
+}
+
+void AlbaLinuxPathHandler::deleteInnerFilesAndDirectories() {
+    set<string> listOfFiles;
+    set<string> listOfDirectories;
+    findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
+    for (auto&& file : listOfFiles) {
+        AlbaLinuxPathHandler(file).deleteFile();
+    }
+    set<string>::reverse_iterator reverseIterator;
+    for (reverseIterator = listOfDirectories.rbegin(); reverseIterator != listOfDirectories.rend(); ++reverseIterator) {
+        AlbaLinuxPathHandler(*reverseIterator).deleteDirectoryWithoutFilesAndDirectories();
+    }
+    reInput();
+}
+
+void AlbaLinuxPathHandler::deleteDirectoryWithFilesAndDirectories() {
+    deleteInnerFilesAndDirectories();
+    deleteDirectoryWithoutFilesAndDirectories();
+    reInput();
 }
 
 bool AlbaLinuxPathHandler::deleteFile() {
@@ -173,41 +203,6 @@ bool AlbaLinuxPathHandler::renameImmediateDirectory(string_view const newDirecto
     return isSuccessful;
 }
 
-void AlbaLinuxPathHandler::deleteFilesInDirectory() {
-    set<string> listOfFiles;
-    set<string> listOfDirectories;
-    findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    for (auto&& file : listOfFiles) {
-        AlbaLinuxPathHandler(file).deleteFile();
-    }
-    reInput();
-}
-
-void AlbaLinuxPathHandler::deleteInnerFilesAndDirectories() {
-    set<string> listOfFiles;
-    set<string> listOfDirectories;
-    findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    for (auto&& file : listOfFiles) {
-        AlbaLinuxPathHandler(file).deleteFile();
-    }
-    set<string>::reverse_iterator reverseIterator;
-    for (reverseIterator = listOfDirectories.rbegin(); reverseIterator != listOfDirectories.rend(); ++reverseIterator) {
-        AlbaLinuxPathHandler(*reverseIterator).deleteDirectoryWithoutFilesAndDirectories();
-    }
-    reInput();
-}
-
-void AlbaLinuxPathHandler::deleteDirectoryWithFilesAndDirectories() {
-    deleteInnerFilesAndDirectories();
-    deleteDirectoryWithoutFilesAndDirectories();
-    reInput();
-}
-
-bool AlbaLinuxPathHandler::canBeLocated(string_view const fullPath) {
-    struct stat statBuffer {};
-    return stat(fullPath.data(), &statBuffer) == 0;
-}
-
 string AlbaLinuxPathHandler::getCurrentDetectedPath() {
     constexpr size_t MAX_ARGUMENT_LENGTH = 50;
     constexpr size_t MAX_PATH = 1000;
@@ -220,6 +215,11 @@ string AlbaLinuxPathHandler::getCurrentDetectedPath() {
     length = (length == 0) ? 1 : length;
     detectedLocalPath[length] = '\0';
     return {detectedLocalPath.cbegin(), detectedLocalPath.cend()};
+}
+
+bool AlbaLinuxPathHandler::canBeLocated(string_view const fullPath) {
+    struct stat statBuffer {};
+    return stat(fullPath.data(), &statBuffer) == 0;
 }
 
 bool AlbaLinuxPathHandler::isPathADirectory(string_view const fileOrDirectoryName) const {

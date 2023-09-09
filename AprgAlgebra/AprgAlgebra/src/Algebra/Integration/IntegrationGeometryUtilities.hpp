@@ -9,6 +9,7 @@
 
 namespace alba::algebra {
 
+void sortIntegralsDetailsToEvaluate(DetailsForDefiniteIntegralsWithTerms& integrals);
 Term getAreaInBetweenTwoTermsInAnInterval(
     Term const& lowerTerm, Term const& higherTerm, DetailsForDefiniteIntegralWithValues const& integralDetails);
 Term getVolumeUsingOnCrossSectionalArea(
@@ -29,9 +30,6 @@ Term getTotalMassOfARod(Term const& term, DetailsForDefiniteIntegralWithTerms co
 Term getMomentOfMassOfARod(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails);
 Term getCenterOfMassOfARod(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails);
 Term getTotalMassOfALamina(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails);
-TermPair getMomentOfMassOfALamina(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails);
-TermPair getCenterOfMassOfALamina(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails);
-TermPair getCentroid(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails);
 Term getWork(Term const& force, DetailsForDefiniteIntegralWithTerms const& integralDetails);
 
 Term getLiquidPressure(
@@ -54,10 +52,6 @@ Term getMomentOfMassOfALaminaWithRespectToXAxis(
     DetailsForDefiniteIntegralWithTerms const& yDetails);
 
 Term getMomentOfMassOfALaminaWithRespectToYAxis(
-    Term const& areaDensityAtPointInXAndY, DetailsForDefiniteIntegralWithTerms const& xDetails,
-    DetailsForDefiniteIntegralWithTerms const& yDetails);
-
-TermPair getCenterOfMassOfALamina(
     Term const& areaDensityAtPointInXAndY, DetailsForDefiniteIntegralWithTerms const& xDetails,
     DetailsForDefiniteIntegralWithTerms const& yDetails);
 
@@ -96,6 +90,12 @@ Term getTripleIntegralInSphericalCoordinates(
     DetailsForDefiniteIntegralWithTerms const& thetaDetails, DetailsForDefiniteIntegralWithTerms const& phiDetails);
 
 Term integrateWithCoordinateDetails(Term const& term, DetailsForDefiniteIntegralsWithTerms const& integralsDetails);
-void sortIntegralsDetailsToEvaluate(DetailsForDefiniteIntegralsWithTerms& integrals);
+TermPair getMomentOfMassOfALamina(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails);
+TermPair getCenterOfMassOfALamina(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails);
+TermPair getCentroid(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails);
+
+TermPair getCenterOfMassOfALamina(
+    Term const& areaDensityAtPointInXAndY, DetailsForDefiniteIntegralWithTerms const& xDetails,
+    DetailsForDefiniteIntegralWithTerms const& yDetails);
 
 }  // namespace alba::algebra

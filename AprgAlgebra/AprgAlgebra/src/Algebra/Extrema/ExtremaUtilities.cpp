@@ -26,14 +26,243 @@ namespace {
 void putArbitiaryValuesFromInterval(AlbaNumbers& arbitiaryValues, AlbaNumberInterval const& interval);
 void putArbitiaryValuesBasedFromDomainOfTerm(AlbaNumbers& arbitiaryValues, Term const& term);
 void retrieveSecondDerivatives(Terms& secondDerivatives, Term const& term, strings const& variableNames);
+
 void retrieveSubstitutionsFromCriticalNumbers(
     SubstitutionsOfVariablesToValues& substitutions,
     VariableNameToCriticalNumbersMap const& variableNameToCriticalNumbersMap);
+
 void determineExtrema(
     ExtremaWithMultipleVariables& extrema, Terms const& secondDerivatives,
     SubstitutionsOfVariablesToValues const& substitutions);
 
 }  // namespace
+
+AlbaNumbers getInputValuesInIntervalWithSameAsMeanOfInterval(
+    Term const& term, string const& variableName, AlbaNumber const& a, AlbaNumber const& b) {
+    // Mean-Value theorem:
+    // Let f be a function such that:
+    // (i) it is continuous on the closed interval [a, b]
+    // (ii) it is differentiable on the open interval (a, b)
+    // (iii) f(a) = 0 and f(b) = 0
+    // Then there is a number c in the open interval (a, b) such that f'(c) = (f(b)-f(a))/(b-a)
+    SubstitutionOfVariablesToValues substitution;
+    substitution.putVariableWithValue(variableName, a);
+    Term fa(substitution.performSubstitutionTo(term));
+    substitution.putVariableWithValue(variableName, b);
+    Term fb(substitution.performSubstitutionTo(term));
+    AlbaNumbers result;
+    if (fa.isConstant() && fb.isConstant()) {
+        AlbaNumber mean = (fb.getAsNumber() - fa.getAsNumber()) / (b - a);
+        Differentiation differentiation(variableName);
+        Term fPrime(differentiation.differentiate(term));
+        Equation derivativeEqualsMeanEquation(fPrime, "=", mean);
+        OneEquationOneVariableEqualitySolver solver;
+        SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(derivativeEqualsMeanEquation));
+        AlbaNumberInterval abOpenInterval(createOpenEndpoint(a), createOpenEndpoint(b));
+        result = getNumbersInsideTheInterval(solutionSet.getAcceptedValues(), abOpenInterval);
+    }
+    return result;
+}
+
+AlbaNumbers getInputValuesForCauchyMeanValueTheorem(
+    Term const& term, string const& variableName, AlbaNumber const& a, AlbaNumber const& b) {
+    // Cauchy Mean-Value Theorem
+    TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(term));
+    Term numerator(termsOverTerms.getCombinedNumerator());
+    Term denominator(termsOverTerms.getCombinedDenominator());
+    SubstitutionOfVariablesToValues substitution;
+    substitution.putVariableWithValue(variableName, a);
+    Term fa(substitution.performSubstitutionTo(numerator));
+    Term ga(substitution.performSubstitutionTo(denominator));
+    substitution.putVariableWithValue(variableName, b);
+    Term fb(substitution.performSubstitutionTo(numerator));
+    Term gb(substitution.performSubstitutionTo(denominator));
+    AlbaNumbers result;
+    if (fa.isConstant() && fb.isConstant()) {
+        AlbaNumber cauchyValue = (fb.getAsNumber() - fa.getAsNumber()) / (gb.getAsNumber() - ga.getAsNumber());
+        Differentiation differentiation(variableName);
+        Term fPrime(differentiation.differentiate(numerator));
+        Term gPrime(differentiation.differentiate(denominator));
+        Term cauchyExpression(fPrime / gPrime);
+        Equation cauchyEquation(cauchyExpression, "=", cauchyValue);
+        OneEquationOneVariableEqualitySolver solver;
+        SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(cauchyEquation));
+        AlbaNumberInterval abOpenInterval(createOpenEndpoint(a), createOpenEndpoint(b));
+        result = getNumbersInsideTheInterval(solutionSet.getAcceptedValues(), abOpenInterval);
+    }
+    return result;
+}
+
+AlbaNumbers getCriticalNumbers(Term const& term, string const& variableName) {
+    // If c is a number in the domain of the function f, and if either f'(c) = 0 of f'(c) does not exist,
+    // then c is called a critical number of f.
+    Differentiation differentiation(variableName);
+    Term firstDerivative(differentiation.differentiate(term));
+    Equation derivativeEqualsZeroEquation(firstDerivative, "=", 0);
+    OneEquationOneVariableEqualitySolver solver;
+    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(derivativeEqualsZeroEquation));
+    AlbaNumbers result;
+    AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
+    AlbaNumbers const& rejectedValues(solutionSet.getRejectedValues());
+    result.reserve(acceptedValues.size() + rejectedValues.size());
+    copy(acceptedValues.cbegin(), acceptedValues.cend(), back_inserter(result));
+    copy(rejectedValues.cbegin(), rejectedValues.cend(), back_inserter(result));
+    return result;
+}
+
+AlbaNumbers getInputValuesAtPointsOfInflection(Term const& term, string const& variableName) {
+    Differentiation differentiation(variableName);
+    Term secondDerivative(differentiation.differentiateMultipleTimes(term, 2));
+    AlbaNumbers result;
+    if (!secondDerivative.isConstant()) {
+        Equation derivativeEqualsZeroEquation(secondDerivative, "=", 0);
+        OneEquationOneVariableEqualitySolver solver;
+        SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(derivativeEqualsZeroEquation));
+        AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
+        AlbaNumbers const& rejectedValues(solutionSet.getRejectedValues());
+        result.reserve(acceptedValues.size() + rejectedValues.size());
+        copy(acceptedValues.cbegin(), acceptedValues.cend(), back_inserter(result));
+        copy(rejectedValues.cbegin(), rejectedValues.cend(), back_inserter(result));
+    }
+    return result;
+}
+
+Extrema getRelativeExtrema(Term const& term, string const& variableName) {
+    // Let c be a critical number of a function f at which f'(c) = 0, and let f exist for all values of x in some open
+    // interval containing c.
+    // If f''(c) exists and :
+    // (i) if f''(c) < 0, then f has a relative maximum value at c.
+    // (ii) if f''(c) > 0, then f has a relative minimum value at c.
+    Differentiation differentiation(variableName);
+    Term firstDerivative(differentiation.differentiate(term));
+    Term secondDerivative(differentiation.differentiateMultipleTimes(term, 2));
+    Equation firstDerivativeEqualsZeroEquation(firstDerivative, "=", 0);
+    OneEquationOneVariableEqualitySolver solver;
+    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(firstDerivativeEqualsZeroEquation));
+    AlbaNumbers const& valuesWhenFirstDerivativeIsZero(solutionSet.getAcceptedValues());
+    Extrema result;
+    for (AlbaNumber const& valueWhenFirstDerivativeIsZero : valuesWhenFirstDerivativeIsZero) {
+        SubstitutionOfVariablesToValues substitution({{variableName, valueWhenFirstDerivativeIsZero}});
+        Term secondDerivativeTermAtCriticalValue(substitution.performSubstitutionTo(secondDerivative));
+        Term evaluatedTerm(substitution.performSubstitutionTo(term));
+        if (secondDerivativeTermAtCriticalValue.isConstant() && evaluatedTerm.isConstant()) {
+            AlbaNumber secondDerivativeValueAtCriticalValue(secondDerivativeTermAtCriticalValue.getAsNumber());
+            if (secondDerivativeValueAtCriticalValue.isAFiniteValue()) {
+                if (secondDerivativeValueAtCriticalValue < 0) {
+                    result.emplace_back(
+                        Extremum{ExtremumType::Maximum, {valueWhenFirstDerivativeIsZero, evaluatedTerm.getAsNumber()}});
+                } else if (secondDerivativeValueAtCriticalValue > 0) {
+                    result.emplace_back(
+                        Extremum{ExtremumType::Minimum, {valueWhenFirstDerivativeIsZero, evaluatedTerm.getAsNumber()}});
+                }
+            }
+        }
+    }
+    return result;
+}
+
+ExtremaWithMultipleVariables getRelativeExtremaWithMultipleVariables(Term const& term, strings const& coordinateNames) {
+    ExtremaWithMultipleVariables result;
+    VariableNameToCriticalNumbersMap variableNameToCriticalNumbersMap(
+        getCriticalNumbersWithMultipleVariables(term, coordinateNames));
+    Terms secondDerivatives;
+    retrieveSecondDerivatives(secondDerivatives, term, coordinateNames);
+    SubstitutionsOfVariablesToValues substitutions;
+    retrieveSubstitutionsFromCriticalNumbers(substitutions, variableNameToCriticalNumbersMap);
+    determineExtrema(result, secondDerivatives, substitutions);
+    return result;
+}
+
+Extremum getAbsoluteExtremumBasedOnRelativeExtremaOnInterval(
+    Extrema const& relativeExtrema, AlbaNumberInterval const& interval) {
+    // Let the function f be continuous on the interval I containing the number c.
+    // If f(c) is a relative extremum of f on I and c is the ONLY in I for which f has a relative extermum,
+    // then f(c) is an absolute extremum of f on I. Furthermore,
+    // (i) if f(c) is relative maximum value of f on I, then f(c) is an absolute maximum value of f on I.
+    // (ii) if f(c) is relative minimum value of f on I, then f(c) is an absolute minimum value of f on I.
+    int numberOfExtremaFoundInInterval(0);
+    Extremum result;
+    Extremum extremumInInterval;
+    for (Extremum const& extremum : relativeExtrema) {
+        auto const& [inputValue, outputValue] = extremum.inputOutputValues;
+        if (interval.isValueInsideTheInterval(inputValue)) {
+            extremumInInterval = extremum;
+            ++numberOfExtremaFoundInInterval;
+            if (numberOfExtremaFoundInInterval > 1) {
+                break;
+            }
+        }
+    }
+    if (numberOfExtremaFoundInInterval == 1) {
+        // if its the only extrema in interval then its absolute
+        result = extremumInInterval;
+    }
+    return result;
+}
+
+MinimumAndMaximum getMinimumAndMaximumAtClosedInterval(
+    Term const& term, string const& variableName, AlbaNumberInterval const& closedInterval) {
+    // Extreme value theorem
+    // If the function f is continuous on the closed interval [a, b],
+    // then f has an absolute maximum value and an absolute minimum value on [a, b].
+    // Procedure:
+    // 1. Find the function values at the critical numbers on f on (a, b).
+    // 2. Find the values of f(a) and f(b)
+    // 3. The largest of the values from steps 1 and 2 is the absolute maximum value,
+    // and the smallest of the values is the absolute minimum value.
+    MinimumAndMaximum result;
+    if (closedInterval.getLowerEndpoint().isClose() && closedInterval.getHigherEndpoint().isClose()) {
+        AlbaNumbers valuesToCheck(getCriticalNumbers(term, variableName));
+        valuesToCheck.emplace_back(closedInterval.getLowerEndpoint().getValue());
+        valuesToCheck.emplace_back(closedInterval.getHigherEndpoint().getValue());
+        SubstitutionOfVariablesToValues substitution;
+        bool isFirst(true);
+        for (AlbaNumber const& valueToCheck : valuesToCheck) {
+            substitution.putVariableWithValue(variableName, valueToCheck);
+            Term evaluatedTerm(substitution.performSubstitutionTo(term));
+            if (evaluatedTerm.isConstant()) {
+                AlbaNumber evaluatedValue(evaluatedTerm.getAsNumber());
+                if (isFirst) {
+                    result.minimumInputOutputValues.first = valueToCheck;
+                    result.minimumInputOutputValues.second = evaluatedValue;
+                    result.maximumInputOutputValues.first = valueToCheck;
+                    result.maximumInputOutputValues.second = evaluatedValue;
+                    isFirst = false;
+                } else if (result.minimumInputOutputValues.second > evaluatedValue) {
+                    result.minimumInputOutputValues.first = valueToCheck;
+                    result.minimumInputOutputValues.second = evaluatedValue;
+                } else if (result.maximumInputOutputValues.second < evaluatedValue) {
+                    result.maximumInputOutputValues.first = valueToCheck;
+                    result.maximumInputOutputValues.second = evaluatedValue;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+VariableNameToCriticalNumbersMap getCriticalNumbersWithMultipleVariables(
+    Term const& term, strings const& coordinateNames) {
+    VariableNameToCriticalNumbersMap result;
+    Equations equationsWithPartialDerivatives;
+    for (string const& variableName : coordinateNames) {
+        equationsWithPartialDerivatives.emplace_back(getPartialDerivative(term, variableName), "=", 0);
+    }
+    SolverUsingSubstitution solver;
+    MultipleVariableSolutionSets solutionSets(
+        solver.calculateSolutionAndReturnSolutionSet(equationsWithPartialDerivatives));
+    for (MultipleVariableSolutionSet const& solutionSet : solutionSets) {
+        for (auto const& [variableName, solutionSetInMap] : solutionSet.getVariableNameToSolutionSetMap()) {
+            AlbaNumbers& criticalNumbers(result[variableName]);
+            AlbaNumbers const& acceptedValues(solutionSetInMap.getAcceptedValues());
+            AlbaNumbers const& rejectedValues(solutionSetInMap.getRejectedValues());
+            criticalNumbers.reserve(acceptedValues.size() + rejectedValues.size());
+            copy(acceptedValues.cbegin(), acceptedValues.cend(), back_inserter(criticalNumbers));
+            copy(rejectedValues.cbegin(), rejectedValues.cend(), back_inserter(criticalNumbers));
+        }
+    }
+    return result;
+}
 
 bool willYieldToAbsoluteMinimumValue(
     Term const& term, string const& variableName, AlbaNumber const& valueForEvaluation) {
@@ -219,233 +448,6 @@ bool isRolleTheoremSatisfied(
             result = fPrimeC.isConstant() && AlbaNumber(0) == fPrimeC.getAsNumber();
         }
     }
-    return result;
-}
-
-AlbaNumbers getInputValuesInIntervalWithSameAsMeanOfInterval(
-    Term const& term, string const& variableName, AlbaNumber const& a, AlbaNumber const& b) {
-    // Mean-Value theorem:
-    // Let f be a function such that:
-    // (i) it is continuous on the closed interval [a, b]
-    // (ii) it is differentiable on the open interval (a, b)
-    // (iii) f(a) = 0 and f(b) = 0
-    // Then there is a number c in the open interval (a, b) such that f'(c) = (f(b)-f(a))/(b-a)
-    SubstitutionOfVariablesToValues substitution;
-    substitution.putVariableWithValue(variableName, a);
-    Term fa(substitution.performSubstitutionTo(term));
-    substitution.putVariableWithValue(variableName, b);
-    Term fb(substitution.performSubstitutionTo(term));
-    AlbaNumbers result;
-    if (fa.isConstant() && fb.isConstant()) {
-        AlbaNumber mean = (fb.getAsNumber() - fa.getAsNumber()) / (b - a);
-        Differentiation differentiation(variableName);
-        Term fPrime(differentiation.differentiate(term));
-        Equation derivativeEqualsMeanEquation(fPrime, "=", mean);
-        OneEquationOneVariableEqualitySolver solver;
-        SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(derivativeEqualsMeanEquation));
-        AlbaNumberInterval abOpenInterval(createOpenEndpoint(a), createOpenEndpoint(b));
-        result = getNumbersInsideTheInterval(solutionSet.getAcceptedValues(), abOpenInterval);
-    }
-    return result;
-}
-
-AlbaNumbers getInputValuesForCauchyMeanValueTheorem(
-    Term const& term, string const& variableName, AlbaNumber const& a, AlbaNumber const& b) {
-    // Cauchy Mean-Value Theorem
-    TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(term));
-    Term numerator(termsOverTerms.getCombinedNumerator());
-    Term denominator(termsOverTerms.getCombinedDenominator());
-    SubstitutionOfVariablesToValues substitution;
-    substitution.putVariableWithValue(variableName, a);
-    Term fa(substitution.performSubstitutionTo(numerator));
-    Term ga(substitution.performSubstitutionTo(denominator));
-    substitution.putVariableWithValue(variableName, b);
-    Term fb(substitution.performSubstitutionTo(numerator));
-    Term gb(substitution.performSubstitutionTo(denominator));
-    AlbaNumbers result;
-    if (fa.isConstant() && fb.isConstant()) {
-        AlbaNumber cauchyValue = (fb.getAsNumber() - fa.getAsNumber()) / (gb.getAsNumber() - ga.getAsNumber());
-        Differentiation differentiation(variableName);
-        Term fPrime(differentiation.differentiate(numerator));
-        Term gPrime(differentiation.differentiate(denominator));
-        Term cauchyExpression(fPrime / gPrime);
-        Equation cauchyEquation(cauchyExpression, "=", cauchyValue);
-        OneEquationOneVariableEqualitySolver solver;
-        SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(cauchyEquation));
-        AlbaNumberInterval abOpenInterval(createOpenEndpoint(a), createOpenEndpoint(b));
-        result = getNumbersInsideTheInterval(solutionSet.getAcceptedValues(), abOpenInterval);
-    }
-    return result;
-}
-
-Extremum getAbsoluteExtremumBasedOnRelativeExtremaOnInterval(
-    Extrema const& relativeExtrema, AlbaNumberInterval const& interval) {
-    // Let the function f be continuous on the interval I containing the number c.
-    // If f(c) is a relative extremum of f on I and c is the ONLY in I for which f has a relative extermum,
-    // then f(c) is an absolute extremum of f on I. Furthermore,
-    // (i) if f(c) is relative maximum value of f on I, then f(c) is an absolute maximum value of f on I.
-    // (ii) if f(c) is relative minimum value of f on I, then f(c) is an absolute minimum value of f on I.
-    int numberOfExtremaFoundInInterval(0);
-    Extremum result;
-    Extremum extremumInInterval;
-    for (Extremum const& extremum : relativeExtrema) {
-        auto const& [inputValue, outputValue] = extremum.inputOutputValues;
-        if (interval.isValueInsideTheInterval(inputValue)) {
-            extremumInInterval = extremum;
-            ++numberOfExtremaFoundInInterval;
-            if (numberOfExtremaFoundInInterval > 1) {
-                break;
-            }
-        }
-    }
-    if (numberOfExtremaFoundInInterval == 1) {
-        // if its the only extrema in interval then its absolute
-        result = extremumInInterval;
-    }
-    return result;
-}
-
-AlbaNumbers getCriticalNumbers(Term const& term, string const& variableName) {
-    // If c is a number in the domain of the function f, and if either f'(c) = 0 of f'(c) does not exist,
-    // then c is called a critical number of f.
-    Differentiation differentiation(variableName);
-    Term firstDerivative(differentiation.differentiate(term));
-    Equation derivativeEqualsZeroEquation(firstDerivative, "=", 0);
-    OneEquationOneVariableEqualitySolver solver;
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(derivativeEqualsZeroEquation));
-    AlbaNumbers result;
-    AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
-    AlbaNumbers const& rejectedValues(solutionSet.getRejectedValues());
-    result.reserve(acceptedValues.size() + rejectedValues.size());
-    copy(acceptedValues.cbegin(), acceptedValues.cend(), back_inserter(result));
-    copy(rejectedValues.cbegin(), rejectedValues.cend(), back_inserter(result));
-    return result;
-}
-
-VariableNameToCriticalNumbersMap getCriticalNumbersWithMultipleVariables(
-    Term const& term, strings const& coordinateNames) {
-    VariableNameToCriticalNumbersMap result;
-    Equations equationsWithPartialDerivatives;
-    for (string const& variableName : coordinateNames) {
-        equationsWithPartialDerivatives.emplace_back(getPartialDerivative(term, variableName), "=", 0);
-    }
-    SolverUsingSubstitution solver;
-    MultipleVariableSolutionSets solutionSets(
-        solver.calculateSolutionAndReturnSolutionSet(equationsWithPartialDerivatives));
-    for (MultipleVariableSolutionSet const& solutionSet : solutionSets) {
-        for (auto const& [variableName, solutionSetInMap] : solutionSet.getVariableNameToSolutionSetMap()) {
-            AlbaNumbers& criticalNumbers(result[variableName]);
-            AlbaNumbers const& acceptedValues(solutionSetInMap.getAcceptedValues());
-            AlbaNumbers const& rejectedValues(solutionSetInMap.getRejectedValues());
-            criticalNumbers.reserve(acceptedValues.size() + rejectedValues.size());
-            copy(acceptedValues.cbegin(), acceptedValues.cend(), back_inserter(criticalNumbers));
-            copy(rejectedValues.cbegin(), rejectedValues.cend(), back_inserter(criticalNumbers));
-        }
-    }
-    return result;
-}
-
-AlbaNumbers getInputValuesAtPointsOfInflection(Term const& term, string const& variableName) {
-    Differentiation differentiation(variableName);
-    Term secondDerivative(differentiation.differentiateMultipleTimes(term, 2));
-    AlbaNumbers result;
-    if (!secondDerivative.isConstant()) {
-        Equation derivativeEqualsZeroEquation(secondDerivative, "=", 0);
-        OneEquationOneVariableEqualitySolver solver;
-        SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(derivativeEqualsZeroEquation));
-        AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
-        AlbaNumbers const& rejectedValues(solutionSet.getRejectedValues());
-        result.reserve(acceptedValues.size() + rejectedValues.size());
-        copy(acceptedValues.cbegin(), acceptedValues.cend(), back_inserter(result));
-        copy(rejectedValues.cbegin(), rejectedValues.cend(), back_inserter(result));
-    }
-    return result;
-}
-
-MinimumAndMaximum getMinimumAndMaximumAtClosedInterval(
-    Term const& term, string const& variableName, AlbaNumberInterval const& closedInterval) {
-    // Extreme value theorem
-    // If the function f is continuous on the closed interval [a, b],
-    // then f has an absolute maximum value and an absolute minimum value on [a, b].
-    // Procedure:
-    // 1. Find the function values at the critical numbers on f on (a, b).
-    // 2. Find the values of f(a) and f(b)
-    // 3. The largest of the values from steps 1 and 2 is the absolute maximum value,
-    // and the smallest of the values is the absolute minimum value.
-    MinimumAndMaximum result;
-    if (closedInterval.getLowerEndpoint().isClose() && closedInterval.getHigherEndpoint().isClose()) {
-        AlbaNumbers valuesToCheck(getCriticalNumbers(term, variableName));
-        valuesToCheck.emplace_back(closedInterval.getLowerEndpoint().getValue());
-        valuesToCheck.emplace_back(closedInterval.getHigherEndpoint().getValue());
-        SubstitutionOfVariablesToValues substitution;
-        bool isFirst(true);
-        for (AlbaNumber const& valueToCheck : valuesToCheck) {
-            substitution.putVariableWithValue(variableName, valueToCheck);
-            Term evaluatedTerm(substitution.performSubstitutionTo(term));
-            if (evaluatedTerm.isConstant()) {
-                AlbaNumber evaluatedValue(evaluatedTerm.getAsNumber());
-                if (isFirst) {
-                    result.minimumInputOutputValues.first = valueToCheck;
-                    result.minimumInputOutputValues.second = evaluatedValue;
-                    result.maximumInputOutputValues.first = valueToCheck;
-                    result.maximumInputOutputValues.second = evaluatedValue;
-                    isFirst = false;
-                } else if (result.minimumInputOutputValues.second > evaluatedValue) {
-                    result.minimumInputOutputValues.first = valueToCheck;
-                    result.minimumInputOutputValues.second = evaluatedValue;
-                } else if (result.maximumInputOutputValues.second < evaluatedValue) {
-                    result.maximumInputOutputValues.first = valueToCheck;
-                    result.maximumInputOutputValues.second = evaluatedValue;
-                }
-            }
-        }
-    }
-    return result;
-}
-
-Extrema getRelativeExtrema(Term const& term, string const& variableName) {
-    // Let c be a critical number of a function f at which f'(c) = 0, and let f exist for all values of x in some open
-    // interval containing c.
-    // If f''(c) exists and :
-    // (i) if f''(c) < 0, then f has a relative maximum value at c.
-    // (ii) if f''(c) > 0, then f has a relative minimum value at c.
-    Differentiation differentiation(variableName);
-    Term firstDerivative(differentiation.differentiate(term));
-    Term secondDerivative(differentiation.differentiateMultipleTimes(term, 2));
-    Equation firstDerivativeEqualsZeroEquation(firstDerivative, "=", 0);
-    OneEquationOneVariableEqualitySolver solver;
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(firstDerivativeEqualsZeroEquation));
-    AlbaNumbers const& valuesWhenFirstDerivativeIsZero(solutionSet.getAcceptedValues());
-    Extrema result;
-    for (AlbaNumber const& valueWhenFirstDerivativeIsZero : valuesWhenFirstDerivativeIsZero) {
-        SubstitutionOfVariablesToValues substitution({{variableName, valueWhenFirstDerivativeIsZero}});
-        Term secondDerivativeTermAtCriticalValue(substitution.performSubstitutionTo(secondDerivative));
-        Term evaluatedTerm(substitution.performSubstitutionTo(term));
-        if (secondDerivativeTermAtCriticalValue.isConstant() && evaluatedTerm.isConstant()) {
-            AlbaNumber secondDerivativeValueAtCriticalValue(secondDerivativeTermAtCriticalValue.getAsNumber());
-            if (secondDerivativeValueAtCriticalValue.isAFiniteValue()) {
-                if (secondDerivativeValueAtCriticalValue < 0) {
-                    result.emplace_back(
-                        Extremum{ExtremumType::Maximum, {valueWhenFirstDerivativeIsZero, evaluatedTerm.getAsNumber()}});
-                } else if (secondDerivativeValueAtCriticalValue > 0) {
-                    result.emplace_back(
-                        Extremum{ExtremumType::Minimum, {valueWhenFirstDerivativeIsZero, evaluatedTerm.getAsNumber()}});
-                }
-            }
-        }
-    }
-    return result;
-}
-
-ExtremaWithMultipleVariables getRelativeExtremaWithMultipleVariables(Term const& term, strings const& coordinateNames) {
-    ExtremaWithMultipleVariables result;
-    VariableNameToCriticalNumbersMap variableNameToCriticalNumbersMap(
-        getCriticalNumbersWithMultipleVariables(term, coordinateNames));
-    Terms secondDerivatives;
-    retrieveSecondDerivatives(secondDerivatives, term, coordinateNames);
-    SubstitutionsOfVariablesToValues substitutions;
-    retrieveSubstitutionsFromCriticalNumbers(substitutions, variableNameToCriticalNumbersMap);
-    determineExtrema(result, secondDerivatives, substitutions);
     return result;
 }
 

@@ -21,18 +21,6 @@ public:
     using ValueUniquePointer = std::unique_ptr<Value>;
     TernarySearchTrieSymbolTable() : b_root(BaseClass::m_root) {}
 
-    [[nodiscard]] Value get(Key const& key) const override {
-        Value result{};
-        Node const* const nodePointer(this->getStartingOnThisNode(b_root, key, 0));
-        if (nodePointer != nullptr) {
-            ValueUniquePointer const& valueUniquePointer(nodePointer->valueUniquePointer);
-            if (valueUniquePointer) {
-                result = *valueUniquePointer;
-            }
-        }
-        return result;
-    }
-
     [[nodiscard]] Strings getAllKeysWithPrefix(Key const& prefix) const override {
         Strings result;
         Node const* const firstNode(this->getStartingOnThisNode(b_root, prefix, 0));
@@ -42,6 +30,18 @@ public:
                 result.emplace_back(prefix);
             }
             collectAllKeysAtNode(firstNode->mid.get(), std::string(prefix), result);
+        }
+        return result;
+    }
+
+    [[nodiscard]] Value get(Key const& key) const override {
+        Value result{};
+        Node const* const nodePointer(this->getStartingOnThisNode(b_root, key, 0));
+        if (nodePointer != nullptr) {
+            ValueUniquePointer const& valueUniquePointer(nodePointer->valueUniquePointer);
+            if (valueUniquePointer) {
+                result = *valueUniquePointer;
+            }
         }
         return result;
     }

@@ -41,30 +41,18 @@ public:
     // ax2 + bx + c = y or ay2 + by + c = x
     Parabola(double const aCoefficient, double const bCoefficient, double const cCoefficient)
         : ParabolaParent{aCoefficient, bCoefficient, cCoefficient} {}
-    [[nodiscard]] double getA() const { return ParabolaParent::m_coefficients[2]; }
-    [[nodiscard]] double getB() const { return ParabolaParent::m_coefficients[1]; }
-    [[nodiscard]] double getC() const { return ParabolaParent::m_coefficients[0]; }
 
-    [[nodiscard]] double getP() const {
-        //(x-xt)^2 = 4p*(y-yt)
-        return 1 / (getA() * 4);
-    }
-
-    [[nodiscard]] double getTranslationInX() const {
-        //(x-xt)^2 = 4p*(y-yt)
-        return -2 * getB() * getP();
-    }
-
-    [[nodiscard]] double getTranslationInY() const {
-        //(x-xt)^2 = 4p*(y-yt)
-        return getC() - (pow(getTranslationInX(), 2) / (4 * getP()));
-    }
-
-    [[nodiscard]] double getEccentricity() const { return 1; }
-
-    [[nodiscard]] double getLengthOfLatusRectum() const {
-        // The horizontal chord through the focus is called the latus rectum; one half of it is the semi-latus rectum.
-        return mathHelper::getAbsoluteValue<double>(4 * getP());
+    [[nodiscard]] Line getDirectrix() const {
+        double p(getP());
+        double xt(getTranslationInX());
+        double yt(getTranslationInY());
+        Line directrix;
+        if (ParabolaOrientation::PolynomialX == parabolaOrientation) {
+            directrix = Line(Point(0, yt - p), Point(1, yt - p));
+        } else {
+            directrix = Line(Point(xt - p, 0), Point(xt - p, 1));
+        }
+        return directrix;
     }
 
     [[nodiscard]] Point getVertex() const {
@@ -95,17 +83,30 @@ public:
         return focus;
     }
 
-    [[nodiscard]] Line getDirectrix() const {
-        double p(getP());
-        double xt(getTranslationInX());
-        double yt(getTranslationInY());
-        Line directrix;
-        if (ParabolaOrientation::PolynomialX == parabolaOrientation) {
-            directrix = Line(Point(0, yt - p), Point(1, yt - p));
-        } else {
-            directrix = Line(Point(xt - p, 0), Point(xt - p, 1));
-        }
-        return directrix;
+    [[nodiscard]] double getA() const { return ParabolaParent::m_coefficients[2]; }
+    [[nodiscard]] double getB() const { return ParabolaParent::m_coefficients[1]; }
+    [[nodiscard]] double getC() const { return ParabolaParent::m_coefficients[0]; }
+
+    [[nodiscard]] double getP() const {
+        //(x-xt)^2 = 4p*(y-yt)
+        return 1 / (getA() * 4);
+    }
+
+    [[nodiscard]] double getTranslationInX() const {
+        //(x-xt)^2 = 4p*(y-yt)
+        return -2 * getB() * getP();
+    }
+
+    [[nodiscard]] double getTranslationInY() const {
+        //(x-xt)^2 = 4p*(y-yt)
+        return getC() - (pow(getTranslationInX(), 2) / (4 * getP()));
+    }
+
+    [[nodiscard]] double getEccentricity() const { return 1; }
+
+    [[nodiscard]] double getLengthOfLatusRectum() const {
+        // The horizontal chord through the focus is called the latus rectum; one half of it is the semi-latus rectum.
+        return mathHelper::getAbsoluteValue<double>(4 * getP());
     }
 
     friend std::ostream& operator<<(std::ostream& out, Parabola<parabolaOrientation> const& parabola) {

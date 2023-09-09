@@ -23,27 +23,6 @@ using Implicants = QuineMcCluskey::Implicants;
 
 // utilties functions for this file
 namespace {
-Implicants getBestPrimeImplicantsUsingQuineMcCluskey(Term const& term, VariableNamesSet const& variableNames) {
-    int numberOfBits = variableNames.size();
-    QuineMcCluskey qmc;
-    SubstitutionOfVariablesToValues substitution;
-    for (Minterm minterm = 0; minterm < static_cast<Minterm>(1) << static_cast<Minterm>(numberOfBits); ++minterm) {
-        int i = 0;
-        for (string const& variableName : variableNames) {
-            bool value = (minterm & (1 << i++)) > 0;
-            substitution.putVariableWithValue(variableName, value);
-        }
-        Term output(substitution.performSubstitutionTo(term));
-        if (output.isConstant()) {
-            qmc.setInputOutput(minterm, getLogicalValue(output.getBooleanValue()));
-        }
-    }
-    qmc.fillComputationalTableWithMintermsWithZeroCommonalityCount();
-    qmc.findAllCombinations();
-    Implicants primeImplicants(qmc.getAllPrimeImplicants());
-    Implicants bestPrimeImplicants(qmc.getBestPrimeImplicants(primeImplicants));
-    return bestPrimeImplicants;
-}
 
 void simplifyAndCopyTermsFromAnExpressionAndChangeOperatorLevelIfNeeded(
     WrappedTerms& newWrappedTerms, OperatorLevel& mainOperatorLevel, Expression const& subExpression) {
@@ -79,6 +58,38 @@ void distributeTermsWithRecursion(
     }
 }
 
+Implicants getBestPrimeImplicantsUsingQuineMcCluskey(Term const& term, VariableNamesSet const& variableNames) {
+    int numberOfBits = variableNames.size();
+    QuineMcCluskey qmc;
+    SubstitutionOfVariablesToValues substitution;
+    for (Minterm minterm = 0; minterm < static_cast<Minterm>(1) << static_cast<Minterm>(numberOfBits); ++minterm) {
+        int i = 0;
+        for (string const& variableName : variableNames) {
+            bool value = (minterm & (1 << i++)) > 0;
+            substitution.putVariableWithValue(variableName, value);
+        }
+        Term output(substitution.performSubstitutionTo(term));
+        if (output.isConstant()) {
+            qmc.setInputOutput(minterm, getLogicalValue(output.getBooleanValue()));
+        }
+    }
+    qmc.fillComputationalTableWithMintermsWithZeroCommonalityCount();
+    qmc.findAllCombinations();
+    Implicants primeImplicants(qmc.getAllPrimeImplicants());
+    Implicants bestPrimeImplicants(qmc.getBestPrimeImplicants(primeImplicants));
+    return bestPrimeImplicants;
+}
+
+OperatorLevel getSubOperatorLevel(Term const& term1, Term const& term2) {
+    OperatorLevel result(OperatorLevel::Unknown);
+    if (term1.isExpression()) {
+        result = term1.getExpressionConstReference().getCommonOperatorLevel();
+    } else if (term2.isExpression()) {
+        result = term2.getExpressionConstReference().getCommonOperatorLevel();
+    }
+    return result;
+}
+
 Terms getTermOrSubTerms(Term const& term) {
     Terms terms;
     if (term.isExpression()) {
@@ -91,67 +102,7 @@ Terms getTermOrSubTerms(Term const& term) {
     return terms;
 }
 
-OperatorLevel getSubOperatorLevel(Term const& term1, Term const& term2) {
-    OperatorLevel result(OperatorLevel::Unknown);
-    if (term1.isExpression()) {
-        result = term1.getExpressionConstReference().getCommonOperatorLevel();
-    } else if (term2.isExpression()) {
-        result = term2.getExpressionConstReference().getCommonOperatorLevel();
-    }
-    return result;
-}
 }  // namespace
-
-Terms createUniqueTerms(WrappedTerms const& terms) {
-    Terms result;
-    result.reserve(terms.size());
-    transform(terms.cbegin(), terms.cend(), back_inserter(result), [](WrappedTerm const& wrappedTerm) {
-        return getTermConstReferenceFromUniquePointer(wrappedTerm.baseTermPointer);
-    });
-    sort(result.begin(), result.end());
-    result.erase(unique(result.begin(), result.end()), result.end());
-    return result;
-}
-
-Term combineTwoTermsByCheckingCommonFactorIfPossible(
-    Term const& term1, Term const& term2, OperatorLevel const operatorLevel) {
-    Term result;
-    bool isOneOfTheTermANonExpression = !term1.isExpression() || !term2.isExpression();
-    bool doesOperatorLevelMatchIfBothExpressions = term1.isExpression() && term2.isExpression() &&
-                                                   term1.getExpressionConstReference().getCommonOperatorLevel() ==
-                                                       term2.getExpressionConstReference().getCommonOperatorLevel();
-    if (isOneOfTheTermANonExpression || doesOperatorLevelMatchIfBothExpressions) {
-        Terms commonFactors;
-        Terms uniqueTerms1(getTermOrSubTerms(term1));
-        Terms uniqueTerms2(getTermOrSubTerms(term2));
-        for (int i1 = 0; i1 < static_cast<int>(uniqueTerms1.size()); ++i1) {
-            for (int i2 = 0; i2 < static_cast<int>(uniqueTerms2.size()); ++i2) {
-                if (uniqueTerms1[i1] == uniqueTerms2[i2]) {
-                    commonFactors.emplace_back(uniqueTerms1[i1]);
-                    uniqueTerms1.erase(uniqueTerms1.begin() + i1);
-                    uniqueTerms2.erase(uniqueTerms2.begin() + i2);
-                    --i1;
-                    break;
-                }
-            }
-        }
-        if (!commonFactors.empty()) {
-            OperatorLevel subOperatorLevel(getSubOperatorLevel(term1, term2));
-            Term uniqueTerm1(getNoEffectValueInOperation(subOperatorLevel));
-            Term uniqueTerm2(getNoEffectValueInOperation(subOperatorLevel));
-            accumulateTerms(uniqueTerm1, uniqueTerms1, subOperatorLevel);
-            accumulateTerms(uniqueTerm2, uniqueTerms2, subOperatorLevel);
-            Term combinedUniqueTerm;
-            accumulateTerms(combinedUniqueTerm, {uniqueTerm1, uniqueTerm2}, operatorLevel);
-            combinedUniqueTerm.simplify();
-            if (!combinedUniqueTerm.isExpression()) {
-                accumulateTerms(result, commonFactors, subOperatorLevel);
-                accumulateTerms(result, {combinedUniqueTerm}, subOperatorLevel);
-            }
-        }
-    }
-    return result;
-}
 
 void simplifyTermWithOuterOrAndInnerAnd(Term& term) {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
@@ -277,6 +228,57 @@ void retrieveTargetOperations(OperatorLevel& targetOuter, OperatorLevel& targetI
         targetOuter = OperatorLevel::Or;
         targetInner = OperatorLevel::And;
     }
+}
+
+Term combineTwoTermsByCheckingCommonFactorIfPossible(
+    Term const& term1, Term const& term2, OperatorLevel const operatorLevel) {
+    Term result;
+    bool isOneOfTheTermANonExpression = !term1.isExpression() || !term2.isExpression();
+    bool doesOperatorLevelMatchIfBothExpressions = term1.isExpression() && term2.isExpression() &&
+                                                   term1.getExpressionConstReference().getCommonOperatorLevel() ==
+                                                       term2.getExpressionConstReference().getCommonOperatorLevel();
+    if (isOneOfTheTermANonExpression || doesOperatorLevelMatchIfBothExpressions) {
+        Terms commonFactors;
+        Terms uniqueTerms1(getTermOrSubTerms(term1));
+        Terms uniqueTerms2(getTermOrSubTerms(term2));
+        for (int i1 = 0; i1 < static_cast<int>(uniqueTerms1.size()); ++i1) {
+            for (int i2 = 0; i2 < static_cast<int>(uniqueTerms2.size()); ++i2) {
+                if (uniqueTerms1[i1] == uniqueTerms2[i2]) {
+                    commonFactors.emplace_back(uniqueTerms1[i1]);
+                    uniqueTerms1.erase(uniqueTerms1.begin() + i1);
+                    uniqueTerms2.erase(uniqueTerms2.begin() + i2);
+                    --i1;
+                    break;
+                }
+            }
+        }
+        if (!commonFactors.empty()) {
+            OperatorLevel subOperatorLevel(getSubOperatorLevel(term1, term2));
+            Term uniqueTerm1(getNoEffectValueInOperation(subOperatorLevel));
+            Term uniqueTerm2(getNoEffectValueInOperation(subOperatorLevel));
+            accumulateTerms(uniqueTerm1, uniqueTerms1, subOperatorLevel);
+            accumulateTerms(uniqueTerm2, uniqueTerms2, subOperatorLevel);
+            Term combinedUniqueTerm;
+            accumulateTerms(combinedUniqueTerm, {uniqueTerm1, uniqueTerm2}, operatorLevel);
+            combinedUniqueTerm.simplify();
+            if (!combinedUniqueTerm.isExpression()) {
+                accumulateTerms(result, commonFactors, subOperatorLevel);
+                accumulateTerms(result, {combinedUniqueTerm}, subOperatorLevel);
+            }
+        }
+    }
+    return result;
+}
+
+Terms createUniqueTerms(WrappedTerms const& terms) {
+    Terms result;
+    result.reserve(terms.size());
+    transform(terms.cbegin(), terms.cend(), back_inserter(result), [](WrappedTerm const& wrappedTerm) {
+        return getTermConstReferenceFromUniquePointer(wrappedTerm.baseTermPointer);
+    });
+    sort(result.begin(), result.end());
+    result.erase(unique(result.begin(), result.end()), result.end());
+    return result;
 }
 
 void distributeTermsIfNeeded(

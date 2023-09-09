@@ -19,14 +19,6 @@ public:
     using Minterms = std::set<Minterm>;
     ImplicantTemplate() = default;
     ImplicantTemplate(MintermsInitializerList const& minterms) : m_minterms(minterms) {}
-    bool operator==(ImplicantTemplate const& second) const { return m_minterms == second.m_minterms; }
-
-    bool operator!=(ImplicantTemplate const& second) const {
-        ImplicantTemplate const& first(*this);
-        return !(first == second);
-    }
-
-    bool operator<(ImplicantTemplate const& second) const { return m_minterms < second.m_minterms; }
 
     ImplicantTemplate operator+(ImplicantTemplate const& implicant) const {
         ImplicantTemplate result;
@@ -35,6 +27,54 @@ public:
             implicant.m_minterms.cbegin(), implicant.m_minterms.cend(),
             std::inserter(result.m_minterms, result.m_minterms.begin()));
         return result;
+    }
+
+    bool operator==(ImplicantTemplate const& second) const { return m_minterms == second.m_minterms; }
+
+    bool operator!=(ImplicantTemplate const& second) const {
+        ImplicantTemplate const& first(*this);
+        return !(first == second);
+    }
+
+    bool operator<(ImplicantTemplate const& second) const { return m_minterms < second.m_minterms; }
+    [[nodiscard]] Minterms const& getMinterms() const { return m_minterms; }
+
+    [[nodiscard]] std::string getEquivalentString() const {
+        return getEquivalentString(getMaxLengthOfEquivalentString());
+    }
+
+    [[nodiscard]] std::string getEquivalentString(int const length) const {
+        std::string booleanEquivalent;
+        if (!m_minterms.empty() && length > 0) {
+            constexpr int NUMBER_OF_BITS(AlbaBitValueUtilities<Minterm>::getNumberOfBits());
+            std::bitset<NUMBER_OF_BITS> xorBits(performAndOperationOfAllMinterms() ^ performOrOperationOfAllMinterms());
+            std::bitset<NUMBER_OF_BITS> displayBits(getFirstMinterm());
+            for (int i = 0; i < length; ++i) {
+                int bitIndex = length - i - 1;
+                if (xorBits[bitIndex]) {
+                    booleanEquivalent.push_back('-');
+                } else if (displayBits[bitIndex]) {
+                    booleanEquivalent.push_back('1');
+                } else {
+                    booleanEquivalent.push_back('0');
+                }
+            }
+        }
+        return booleanEquivalent;
+    }
+
+    [[nodiscard]] std::string getMintermString() const {
+        std::stringstream result;
+        for (Minterm const& minterm : m_minterms) {
+            result << minterm << "|";
+        }
+        return result.str();
+    }
+
+    [[nodiscard]] int getMaxLengthOfEquivalentString() const {
+        Minterm orResult(performOrOperationOfAllMinterms());
+        return AlbaBitValueUtilities<Minterm>::getNumberOfBits() -
+               AlbaBitValueUtilities<Minterm>::getNumberOfConsecutiveZerosFromMsb(orResult);
     }
 
     [[nodiscard]] bool isCompatible(ImplicantTemplate const& implicant) const {
@@ -96,46 +136,6 @@ public:
             result = it != m_minterms.end();
         }
         return result;
-    }
-
-    [[nodiscard]] int getMaxLengthOfEquivalentString() const {
-        Minterm orResult(performOrOperationOfAllMinterms());
-        return AlbaBitValueUtilities<Minterm>::getNumberOfBits() -
-               AlbaBitValueUtilities<Minterm>::getNumberOfConsecutiveZerosFromMsb(orResult);
-    }
-
-    [[nodiscard]] Minterms const& getMinterms() const { return m_minterms; }
-
-    [[nodiscard]] std::string getEquivalentString() const {
-        return getEquivalentString(getMaxLengthOfEquivalentString());
-    }
-
-    [[nodiscard]] std::string getEquivalentString(int const length) const {
-        std::string booleanEquivalent;
-        if (!m_minterms.empty() && length > 0) {
-            constexpr int NUMBER_OF_BITS(AlbaBitValueUtilities<Minterm>::getNumberOfBits());
-            std::bitset<NUMBER_OF_BITS> xorBits(performAndOperationOfAllMinterms() ^ performOrOperationOfAllMinterms());
-            std::bitset<NUMBER_OF_BITS> displayBits(getFirstMinterm());
-            for (int i = 0; i < length; ++i) {
-                int bitIndex = length - i - 1;
-                if (xorBits[bitIndex]) {
-                    booleanEquivalent.push_back('-');
-                } else if (displayBits[bitIndex]) {
-                    booleanEquivalent.push_back('1');
-                } else {
-                    booleanEquivalent.push_back('0');
-                }
-            }
-        }
-        return booleanEquivalent;
-    }
-
-    [[nodiscard]] std::string getMintermString() const {
-        std::stringstream result;
-        for (Minterm const& minterm : m_minterms) {
-            result << minterm << "|";
-        }
-        return result.str();
     }
 
     void addMinterm(Minterm const& minterm) { m_minterms.emplace(minterm); }

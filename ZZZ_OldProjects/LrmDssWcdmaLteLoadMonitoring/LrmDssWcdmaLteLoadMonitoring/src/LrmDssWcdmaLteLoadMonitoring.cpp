@@ -2,16 +2,6 @@
 
 namespace alba {
 
-EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::getNextLowerLoadState(EDssWcdmaLoad const loadState) {
-    EDssWcdmaLoad result(EDssWcdmaLoad_Low);
-    unsigned int loadStateValue = static_cast<EDssWcdmaLoad>(loadState);
-    constexpr unsigned int lowLoadStateValue = static_cast<EDssWcdmaLoad>(EDssWcdmaLoad_Low);
-    if (loadStateValue > lowLoadStateValue) {
-        result = static_cast<EDssWcdmaLoad>(loadStateValue - 1);
-    }
-    return result;
-}
-
 EDssWcdmaFilterBandwidth LrmDssWcdmaLteLoadMonitoring::convertLoadStateToFilterBandwidth(
     EDssWcdmaLoad const loadState) {
     EDssWcdmaFilterBandwidth result(EDssWcdmaFilterBandwidth_0_KHz);
@@ -25,6 +15,16 @@ EDssWcdmaFilterBandwidth LrmDssWcdmaLteLoadMonitoring::convertLoadStateToFilterB
         case EDssWcdmaLoad_High:
             result = EDssWcdmaFilterBandwidth_0_KHz;
             break;
+    }
+    return result;
+}
+
+EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::getNextLowerLoadState(EDssWcdmaLoad const loadState) {
+    EDssWcdmaLoad result(EDssWcdmaLoad_Low);
+    unsigned int loadStateValue = static_cast<EDssWcdmaLoad>(loadState);
+    constexpr unsigned int lowLoadStateValue = static_cast<EDssWcdmaLoad>(EDssWcdmaLoad_Low);
+    if (loadStateValue > lowLoadStateValue) {
+        result = static_cast<EDssWcdmaLoad>(loadStateValue - 1);
     }
     return result;
 }
@@ -46,6 +46,17 @@ EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::convertFilterBandwidthToLoadState(
     return result;
 }
 
+EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::getLoadStateFromCellLoad(unsigned int const cellLoad) const {
+    EDssWcdmaLoad loadState(EDssWcdmaLoad_Low);
+
+    if (cellLoad >= m_highLoadThreshold) {
+        loadState = EDssWcdmaLoad_High;
+    } else if (cellLoad >= m_mediumLoadThreshold) {
+        loadState = EDssWcdmaLoad_Medium;
+    }
+    return loadState;
+}
+
 unsigned int LrmDssWcdmaLteLoadMonitoring::getConsecutiveLowerLoadStateCount() const {
     return m_consecutiveLowerLoadStateCount;
 }
@@ -61,15 +72,20 @@ unsigned int LrmDssWcdmaLteLoadMonitoring::calculateCellLoad(
     return (numberOfDchUsers * m_dchLoadFactor) + ((numberOfHsdpaUsers + hsfachLoad) * m_hsdpaAndHsfachLoadFactor);
 }
 
-EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::getLoadStateFromCellLoad(unsigned int const cellLoad) const {
-    EDssWcdmaLoad loadState(EDssWcdmaLoad_Low);
+void LrmDssWcdmaLteLoadMonitoring::setConsecutiveLowerLoadStateCount(unsigned int const count) {
+    m_consecutiveLowerLoadStateCount = count;
+}
 
-    if (cellLoad >= m_highLoadThreshold) {
-        loadState = EDssWcdmaLoad_High;
-    } else if (cellLoad >= m_mediumLoadThreshold) {
-        loadState = EDssWcdmaLoad_Medium;
-    }
-    return loadState;
+void LrmDssWcdmaLteLoadMonitoring::setCommissioningLoadFactorValues(
+    unsigned int const dchLoadFactor, unsigned int const hsdpaAndHsfachLoadFactor) {
+    m_dchLoadFactor = dchLoadFactor;
+    m_hsdpaAndHsfachLoadFactor = hsdpaAndHsfachLoadFactor;
+}
+
+void LrmDssWcdmaLteLoadMonitoring::setCommissioningLoadThresholdValues(
+    unsigned int const mediumLoadThreshold, unsigned int const highLoadThreshold) {
+    m_mediumLoadThreshold = mediumLoadThreshold;
+    m_highLoadThreshold = highLoadThreshold;
 }
 
 EDssWcdmaLoad
@@ -87,22 +103,6 @@ LrmDssWcdmaLteLoadMonitoring::determineLoadStateForTheNextFilterUpdateAndUpdateC
         m_consecutiveLowerLoadStateCount = 0;
     }
     return result;
-}
-
-void LrmDssWcdmaLteLoadMonitoring::setConsecutiveLowerLoadStateCount(unsigned int const count) {
-    m_consecutiveLowerLoadStateCount = count;
-}
-
-void LrmDssWcdmaLteLoadMonitoring::setCommissioningLoadFactorValues(
-    unsigned int const dchLoadFactor, unsigned int const hsdpaAndHsfachLoadFactor) {
-    m_dchLoadFactor = dchLoadFactor;
-    m_hsdpaAndHsfachLoadFactor = hsdpaAndHsfachLoadFactor;
-}
-
-void LrmDssWcdmaLteLoadMonitoring::setCommissioningLoadThresholdValues(
-    unsigned int const mediumLoadThreshold, unsigned int const highLoadThreshold) {
-    m_mediumLoadThreshold = mediumLoadThreshold;
-    m_highLoadThreshold = highLoadThreshold;
 }
 
 LrmDssWcdmaLteLoadMonitoring::LrmDssWcdmaLteLoadMonitoring()

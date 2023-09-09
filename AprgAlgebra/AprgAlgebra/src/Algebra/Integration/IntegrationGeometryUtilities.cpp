@@ -15,6 +15,21 @@ using namespace std;
 
 namespace alba::algebra {
 
+void sortIntegralsDetailsToEvaluate(DetailsForDefiniteIntegralsWithTerms& integralsDetails) {
+    stable_sort(
+        integralsDetails.begin(), integralsDetails.end(),
+        [](DetailsForDefiniteIntegralWithTerms const& integral1, DetailsForDefiniteIntegralWithTerms const& integral2) {
+            VariableNamesRetriever retriever1;
+            VariableNamesRetriever retriever2;
+            retriever1.retrieveFromTerm(integral1.lowerEnd);
+            retriever1.retrieveFromTerm(integral1.higherEnd);
+            retriever2.retrieveFromTerm(integral2.lowerEnd);
+            retriever2.retrieveFromTerm(integral2.higherEnd);
+
+            return retriever1.getVariableNames().size() > retriever2.getVariableNames().size();
+        });
+}
+
 Term getAreaInBetweenTwoTermsInAnInterval(
     Term const& lowerTerm, Term const& higherTerm, DetailsForDefiniteIntegralWithValues const& integralDetails) {
     Integration integration(integralDetails.variableName);
@@ -131,35 +146,6 @@ Term getTotalMassOfALamina(Term const& term, DetailsForDefiniteIntegralWithTerms
     return integration.integrateAtDefiniteTerms(term, integralDetails.lowerEnd, integralDetails.higherEnd);
 }
 
-TermPair getMomentOfMassOfALamina(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails) {
-    Integration integration(integralDetails.variableName);
-    Term termToIntegrateInX = (term ^ 2) * AlbaNumber::createFraction(1, 2);
-    Term termToIntegrateInY = integralDetails.variableName * term;
-    TermPair xyPair;
-    xyPair.first =
-        integration.integrateAtDefiniteTerms(termToIntegrateInX, integralDetails.lowerEnd, integralDetails.higherEnd);
-    xyPair.second =
-        integration.integrateAtDefiniteTerms(termToIntegrateInY, integralDetails.lowerEnd, integralDetails.higherEnd);
-    return xyPair;
-}
-
-TermPair getCenterOfMassOfALamina(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails) {
-    Term totalMass(getTotalMassOfALamina(term, integralDetails));
-    TermPair xyPair(getMomentOfMassOfALamina(term, integralDetails));
-    xyPair.first = xyPair.first / totalMass;
-    xyPair.second = xyPair.second / totalMass;
-    return xyPair;
-}
-
-TermPair getCentroid(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails) {
-    Integration integration(integralDetails.variableName);
-    Term area(integration.integrateAtDefiniteTerms(term, integralDetails.lowerEnd, integralDetails.higherEnd));
-    TermPair xyPair(getMomentOfMassOfALamina(term, integralDetails));
-    xyPair.first = xyPair.first / area;
-    xyPair.second = xyPair.second / area;
-    return xyPair;
-}
-
 Term getWork(Term const& force, DetailsForDefiniteIntegralWithTerms const& integralDetails) {
     Integration integration(integralDetails.variableName);
     return integration.integrateAtDefiniteTerms(force, integralDetails.lowerEnd, integralDetails.higherEnd);
@@ -205,17 +191,6 @@ Term getMomentOfMassOfALaminaWithRespectToYAxis(
     DetailsForDefiniteIntegralWithTerms const& yDetails) {
     Term termToIntegrate(areaDensityAtPointInXAndY * xDetails.variableName);
     return getDoubleIntegralInCartesianCoordinates(termToIntegrate, xDetails, yDetails);
-}
-
-TermPair getCenterOfMassOfALamina(
-    Term const& areaDensityAtPointInXAndY, DetailsForDefiniteIntegralWithTerms const& xDetails,
-    DetailsForDefiniteIntegralWithTerms const& yDetails) {
-    Term totalMass = getTotalMassOfALamina(areaDensityAtPointInXAndY, xDetails, yDetails);
-    Term centerOfMassInX =
-        getMomentOfMassOfALaminaWithRespectToYAxis(areaDensityAtPointInXAndY, xDetails, yDetails) / totalMass;
-    Term centerOfMassInY =
-        getMomentOfMassOfALaminaWithRespectToXAxis(areaDensityAtPointInXAndY, xDetails, yDetails) / totalMass;
-    return TermPair{centerOfMassInX, centerOfMassInY};
 }
 
 Term getMomentOfInertiaAboutTheXAxis(
@@ -295,19 +270,44 @@ Term integrateWithCoordinateDetails(Term const& term, DetailsForDefiniteIntegral
     return result;
 }
 
-void sortIntegralsDetailsToEvaluate(DetailsForDefiniteIntegralsWithTerms& integralsDetails) {
-    stable_sort(
-        integralsDetails.begin(), integralsDetails.end(),
-        [](DetailsForDefiniteIntegralWithTerms const& integral1, DetailsForDefiniteIntegralWithTerms const& integral2) {
-            VariableNamesRetriever retriever1;
-            VariableNamesRetriever retriever2;
-            retriever1.retrieveFromTerm(integral1.lowerEnd);
-            retriever1.retrieveFromTerm(integral1.higherEnd);
-            retriever2.retrieveFromTerm(integral2.lowerEnd);
-            retriever2.retrieveFromTerm(integral2.higherEnd);
+TermPair getMomentOfMassOfALamina(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails) {
+    Integration integration(integralDetails.variableName);
+    Term termToIntegrateInX = (term ^ 2) * AlbaNumber::createFraction(1, 2);
+    Term termToIntegrateInY = integralDetails.variableName * term;
+    TermPair xyPair;
+    xyPair.first =
+        integration.integrateAtDefiniteTerms(termToIntegrateInX, integralDetails.lowerEnd, integralDetails.higherEnd);
+    xyPair.second =
+        integration.integrateAtDefiniteTerms(termToIntegrateInY, integralDetails.lowerEnd, integralDetails.higherEnd);
+    return xyPair;
+}
 
-            return retriever1.getVariableNames().size() > retriever2.getVariableNames().size();
-        });
+TermPair getCenterOfMassOfALamina(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails) {
+    Term totalMass(getTotalMassOfALamina(term, integralDetails));
+    TermPair xyPair(getMomentOfMassOfALamina(term, integralDetails));
+    xyPair.first = xyPair.first / totalMass;
+    xyPair.second = xyPair.second / totalMass;
+    return xyPair;
+}
+
+TermPair getCentroid(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails) {
+    Integration integration(integralDetails.variableName);
+    Term area(integration.integrateAtDefiniteTerms(term, integralDetails.lowerEnd, integralDetails.higherEnd));
+    TermPair xyPair(getMomentOfMassOfALamina(term, integralDetails));
+    xyPair.first = xyPair.first / area;
+    xyPair.second = xyPair.second / area;
+    return xyPair;
+}
+
+TermPair getCenterOfMassOfALamina(
+    Term const& areaDensityAtPointInXAndY, DetailsForDefiniteIntegralWithTerms const& xDetails,
+    DetailsForDefiniteIntegralWithTerms const& yDetails) {
+    Term totalMass = getTotalMassOfALamina(areaDensityAtPointInXAndY, xDetails, yDetails);
+    Term centerOfMassInX =
+        getMomentOfMassOfALaminaWithRespectToYAxis(areaDensityAtPointInXAndY, xDetails, yDetails) / totalMass;
+    Term centerOfMassInY =
+        getMomentOfMassOfALaminaWithRespectToXAxis(areaDensityAtPointInXAndY, xDetails, yDetails) / totalMass;
+    return TermPair{centerOfMassInX, centerOfMassInY};
 }
 
 }  // namespace alba::algebra

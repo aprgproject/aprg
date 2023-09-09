@@ -46,6 +46,14 @@ MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUs
     return result;
 }
 
+MaximizeProfitInCuttingARod::Length MaximizeProfitInCuttingARod::getSmallestItemLength() const {
+    Length result(m_rods.front().first);
+    for (auto it = m_rods.cbegin() + 1; it != m_rods.cend(); ++it) {
+        result = min(result, it->first);
+    }
+    return result;
+}
+
 MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUsingNaiveRecursion(
     Length const remainingLength) const {
     Profit result(0);
@@ -53,14 +61,6 @@ MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUs
         if (remainingLength >= rodLength) {
             result = max(result, rodProfit + getBestProfitUsingNaiveRecursion(remainingLength - rodLength));
         }
-    }
-    return result;
-}
-
-MaximizeProfitInCuttingARod::Length MaximizeProfitInCuttingARod::getSmallestItemLength() const {
-    Length result(m_rods.front().first);
-    for (auto it = m_rods.cbegin() + 1; it != m_rods.cend(); ++it) {
-        result = min(result, it->first);
     }
     return result;
 }

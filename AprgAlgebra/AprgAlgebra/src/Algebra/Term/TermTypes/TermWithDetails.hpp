@@ -20,9 +20,9 @@ struct TermWithDetails {
     bool operator==(TermWithDetails const& second) const;
     bool operator!=(TermWithDetails const& second) const;
     bool operator<(TermWithDetails const& second) const;
+    [[nodiscard]] int getAssociationPriority() const;
     [[nodiscard]] bool hasPositiveAssociation() const;
     [[nodiscard]] bool hasNegativeAssociation() const;
-    [[nodiscard]] int getAssociationPriority() const;
     void clear();
     void reverseAssociation();
     BaseTermUniquePointer baseTermPointer;

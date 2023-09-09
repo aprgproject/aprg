@@ -15,13 +15,14 @@ using namespace std;
 
 namespace alba::algebra {
 
+AlbaNumberIntervals const& SolutionSet::getAcceptedIntervals() const { return m_acceptedIntervals; }
+AlbaNumbers const& SolutionSet::getAcceptedValues() const { return m_acceptedValues; }
+AlbaNumbers const& SolutionSet::getRejectedValues() const { return m_rejectedValues; }
+
 bool SolutionSet::isEmpty() const {
     return m_acceptedValues.empty() && m_rejectedValues.empty() && m_acceptedIntervals.empty();
 }
 
-AlbaNumbers const& SolutionSet::getAcceptedValues() const { return m_acceptedValues; }
-AlbaNumbers const& SolutionSet::getRejectedValues() const { return m_rejectedValues; }
-AlbaNumberIntervals const& SolutionSet::getAcceptedIntervals() const { return m_acceptedIntervals; }
 void SolutionSet::addAcceptedValue(AlbaNumber const& value) { m_acceptedValues.emplace_back(value); }
 void SolutionSet::addRejectedValue(AlbaNumber const& value) { m_rejectedValues.emplace_back(value); }
 

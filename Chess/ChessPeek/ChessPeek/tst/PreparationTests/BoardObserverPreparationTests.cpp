@@ -17,6 +17,7 @@ namespace chess {
 namespace ChessPeek {
 
 namespace {
+
 using SetOfPieces = std::set<PieceColorAndType>;
 using PointToSetOfPiecesMap = std::map<XY, SetOfPieces>;
 
@@ -149,14 +150,6 @@ void printChessBitValuesWithBlackUpWhiteDown(BoardObserver const& retriever) {
     cout << "Black king:   [" << retriever.getBitValueFromCell(4U, 0U).to_string() << "]\n";
 }
 
-int getLabelBasedOnSetOfPieces(SetOfPieces const& setOfPieces) {
-    int result(0U);
-    for (PieceColorAndType const piece : setOfPieces) {
-        result += static_cast<int>(piece) * 13U;
-    }
-    return result;
-}
-
 uint32_t getLabelColor(int const label) {
     int digits = getNumberOfBase10Digits(label);
     double newValue = (static_cast<double>(1) / label) * pow(10, digits + 8);
@@ -165,6 +158,14 @@ uint32_t getLabelColor(int const label) {
 
 uint32_t getLabelColor(SetOfPieces const& setOfPieces) {
     return getLabelColor(getLabelBasedOnSetOfPieces(setOfPieces));
+}
+
+int getLabelBasedOnSetOfPieces(SetOfPieces const& setOfPieces) {
+    int result(0U);
+    for (PieceColorAndType const piece : setOfPieces) {
+        result += static_cast<int>(piece) * 13U;
+    }
+    return result;
 }
 
 }  // namespace

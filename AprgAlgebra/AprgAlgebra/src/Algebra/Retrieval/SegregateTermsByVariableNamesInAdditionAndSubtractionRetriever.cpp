@@ -14,17 +14,17 @@ SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::
     initializeWithVariableNames(variableNames);
 }
 
-SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::VariableNameToTermMap const&
-SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::getVariableNameToTermMap() const {
-    return m_variableNameToTermMap;
-}
-
 Term const& SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::getTermWithMultipleVariableNames() const {
     return m_termWithMultipleVariableNames;
 }
 
 Term const& SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::getRemainingTerm() const {
     return m_remainingTerm;
+}
+
+SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::VariableNameToTermMap const&
+SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::getVariableNameToTermMap() const {
+    return m_variableNameToTermMap;
 }
 
 void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFromConstant(Constant const& constant) {

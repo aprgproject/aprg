@@ -15,8 +15,13 @@ public:
     void simplifyTerms();
 
 private:
-    [[nodiscard]] bool hasNoValueBeforeThisIndex(int const index) const;
     [[nodiscard]] Indexes getNextOperatorIndexes(OperatorInputType const operatorInputType) const;
+    [[nodiscard]] bool hasNoValueBeforeThisIndex(int const index) const;
+    void updateStartIndexAndEndIndexAndCheckOpeningAndClosingOperators();
+    void traverse(AggregatorTraverseSteps const traverseSteps);
+    void eraseAndThenInsert(int const firstIndex, int const secondIndex, Term const& term);
+    void eraseTermsInclusive(int const firstIndex, int const secondIndex);
+    void insertTerm(int const index, Term const& term);
     bool combineOpeningClosingOperatorsAtStartEndIndexesAndReturnIfCombined();
     bool traverseOnOperatorIndexesAndReturnIfContinue(
         AggregatorTraverseSteps const traverseSteps, OperatorInputType const operatorInputType);
@@ -33,11 +38,6 @@ private:
     bool buildExpressionWithUnaryOperationAndReturnIfBuilt(int const index);
     bool simplifyBinaryOperationAndReturnIfSimplified(int const index);
     bool simplifyUnaryOperationAndReturnIfSimplified(int const index);
-    void updateStartIndexAndEndIndexAndCheckOpeningAndClosingOperators();
-    void traverse(AggregatorTraverseSteps const traverseSteps);
-    void eraseAndThenInsert(int const firstIndex, int const secondIndex, Term const& term);
-    void eraseTermsInclusive(int const firstIndex, int const secondIndex);
-    void insertTerm(int const index, Term const& term);
     int m_startIndex{0};
     int m_endIndex{0};
     Terms m_terms;

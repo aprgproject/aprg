@@ -44,17 +44,6 @@ void TopLogAnalyzer::processTopLog(std::string const& pathOfTopLog) {
     generateMemReport(pathOfTopLog);
 }
 
-bool TopLogAnalyzer::isTopCommandFirstLine(string const& lineInLogs) {
-    return stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "top - ");
-}
-
-bool TopLogAnalyzer::isTopCommandHeaderLine(string const& lineInLogs) {
-    return stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "PID") &&
-           stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "%CPU") &&
-           stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "%MEM") &&
-           stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "COMMAND");
-}
-
 void TopLogAnalyzer::putHeadersInCpuReport(
     stringHelper::strings const& processNamesInReport, ofstream& cpuReportFileStream) {
     cpuReportFileStream << "Time,TotalCpuFromTop,TotalCpuCalculated,";
@@ -91,6 +80,17 @@ void TopLogAnalyzer::saveOverallCpuData(string const& lineInLogs, DataEntry& cur
         currentEntry.totalCpuFromTop =
             stringHelper::convertStringToNumber<double>(lineInLogs.substr(bracketCpuIndexInLine - 3, 3));
     }
+}
+
+bool TopLogAnalyzer::isTopCommandFirstLine(string const& lineInLogs) {
+    return stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "top - ");
+}
+
+bool TopLogAnalyzer::isTopCommandHeaderLine(string const& lineInLogs) {
+    return stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "PID") &&
+           stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "%CPU") &&
+           stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "%MEM") &&
+           stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "COMMAND");
 }
 
 void TopLogAnalyzer::putEntriesInCpuReport(
@@ -134,82 +134,6 @@ void TopLogAnalyzer::putEntriesInMemReport(
         }
         memReportFileStream << "\n";
     }
-}
-
-stringHelper::strings TopLogAnalyzer::getProcessNamesForCpuReport() {
-    stringHelper::strings processNamesInReport;
-    for (auto const& processToCpuMemCollectionPair : m_processToCpuMemCollectionMap) {
-        if (processToCpuMemCollectionPair.second.cpu.getMaximum() != 0) {
-            processNamesInReport.emplace_back(processToCpuMemCollectionPair.first);
-        }
-    }
-
-    sort(
-        processNamesInReport.begin(), processNamesInReport.end(),
-        [&](string const& firstProcessName, string const& secondProcessName) {
-            bool result(false);
-            bool isTcomTupcOnFirstProcess(
-                stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "TCOM") ||
-                stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "Conman") ||
-                stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "Aalman"));
-            bool isTcomTupcOnSecondProcess(
-                stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "TCOM") ||
-                stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "Conman") ||
-                stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "Aalman"));
-            double firstProcessCpuBasis(0);
-            double secondProcessCpuBasis(0);
-            if (m_processToCpuMemCollectionMap.find(firstProcessName) != m_processToCpuMemCollectionMap.end()) {
-                firstProcessCpuBasis = m_processToCpuMemCollectionMap.at(firstProcessName).cpu.getAverage();
-            }
-            if (m_processToCpuMemCollectionMap.find(secondProcessName) != m_processToCpuMemCollectionMap.end()) {
-                secondProcessCpuBasis = m_processToCpuMemCollectionMap.at(secondProcessName).cpu.getAverage();
-            }
-
-            result = (isTcomTupcOnFirstProcess && !isTcomTupcOnSecondProcess) ? true
-                     : (!isTcomTupcOnFirstProcess && isTcomTupcOnSecondProcess)
-                         ? false
-                         : firstProcessCpuBasis > secondProcessCpuBasis;
-            return result;
-        });
-    return processNamesInReport;
-}
-
-stringHelper::strings TopLogAnalyzer::getProcessNamesForMemReport() {
-    stringHelper::strings processNamesInReport;
-    for (auto const& processToCpuMemCollectionPair : m_processToCpuMemCollectionMap) {
-        if (processToCpuMemCollectionPair.second.cpu.getMaximum() != 0) {
-            processNamesInReport.emplace_back(processToCpuMemCollectionPair.first);
-        }
-    }
-
-    sort(
-        processNamesInReport.begin(), processNamesInReport.end(),
-        [&](string const& firstProcessName, string const& secondProcessName) {
-            bool result(false);
-            bool isTcomTupcOnFirstProcess(
-                stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "TCOM") ||
-                stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "Conman") ||
-                stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "Aalman"));
-            bool isTcomTupcOnSecondProcess(
-                stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "TCOM") ||
-                stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "Conman") ||
-                stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "Aalman"));
-            double firstProcessMemBasis(0);
-            double secondProcessMemBasis(0);
-            if (m_processToCpuMemCollectionMap.find(firstProcessName) != m_processToCpuMemCollectionMap.end()) {
-                firstProcessMemBasis = m_processToCpuMemCollectionMap.at(firstProcessName).mem.getAverage();
-            }
-            if (m_processToCpuMemCollectionMap.find(secondProcessName) != m_processToCpuMemCollectionMap.end()) {
-                secondProcessMemBasis = m_processToCpuMemCollectionMap.at(secondProcessName).mem.getAverage();
-            }
-
-            result = (isTcomTupcOnFirstProcess && !isTcomTupcOnSecondProcess) ? true
-                     : (!isTcomTupcOnFirstProcess && isTcomTupcOnSecondProcess)
-                         ? false
-                         : firstProcessMemBasis > secondProcessMemBasis;
-            return result;
-        });
-    return processNamesInReport;
 }
 
 void TopLogAnalyzer::readTopLogsAndSaveToDatabase(std::string const& pathOfTopLog) {
@@ -297,6 +221,82 @@ void TopLogAnalyzer::saveCpuAndMem(string const& lineInLogs, DataEntry& currentE
             m_processToCpuMemCollectionMap[processName].mem.addData(memLoad);
         }
     }
+}
+
+stringHelper::strings TopLogAnalyzer::getProcessNamesForCpuReport() {
+    stringHelper::strings processNamesInReport;
+    for (auto const& processToCpuMemCollectionPair : m_processToCpuMemCollectionMap) {
+        if (processToCpuMemCollectionPair.second.cpu.getMaximum() != 0) {
+            processNamesInReport.emplace_back(processToCpuMemCollectionPair.first);
+        }
+    }
+
+    sort(
+        processNamesInReport.begin(), processNamesInReport.end(),
+        [&](string const& firstProcessName, string const& secondProcessName) {
+            bool result(false);
+            bool isTcomTupcOnFirstProcess(
+                stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "TCOM") ||
+                stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "Conman") ||
+                stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "Aalman"));
+            bool isTcomTupcOnSecondProcess(
+                stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "TCOM") ||
+                stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "Conman") ||
+                stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "Aalman"));
+            double firstProcessCpuBasis(0);
+            double secondProcessCpuBasis(0);
+            if (m_processToCpuMemCollectionMap.find(firstProcessName) != m_processToCpuMemCollectionMap.end()) {
+                firstProcessCpuBasis = m_processToCpuMemCollectionMap.at(firstProcessName).cpu.getAverage();
+            }
+            if (m_processToCpuMemCollectionMap.find(secondProcessName) != m_processToCpuMemCollectionMap.end()) {
+                secondProcessCpuBasis = m_processToCpuMemCollectionMap.at(secondProcessName).cpu.getAverage();
+            }
+
+            result = (isTcomTupcOnFirstProcess && !isTcomTupcOnSecondProcess) ? true
+                     : (!isTcomTupcOnFirstProcess && isTcomTupcOnSecondProcess)
+                         ? false
+                         : firstProcessCpuBasis > secondProcessCpuBasis;
+            return result;
+        });
+    return processNamesInReport;
+}
+
+stringHelper::strings TopLogAnalyzer::getProcessNamesForMemReport() {
+    stringHelper::strings processNamesInReport;
+    for (auto const& processToCpuMemCollectionPair : m_processToCpuMemCollectionMap) {
+        if (processToCpuMemCollectionPair.second.cpu.getMaximum() != 0) {
+            processNamesInReport.emplace_back(processToCpuMemCollectionPair.first);
+        }
+    }
+
+    sort(
+        processNamesInReport.begin(), processNamesInReport.end(),
+        [&](string const& firstProcessName, string const& secondProcessName) {
+            bool result(false);
+            bool isTcomTupcOnFirstProcess(
+                stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "TCOM") ||
+                stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "Conman") ||
+                stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "Aalman"));
+            bool isTcomTupcOnSecondProcess(
+                stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "TCOM") ||
+                stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "Conman") ||
+                stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "Aalman"));
+            double firstProcessMemBasis(0);
+            double secondProcessMemBasis(0);
+            if (m_processToCpuMemCollectionMap.find(firstProcessName) != m_processToCpuMemCollectionMap.end()) {
+                firstProcessMemBasis = m_processToCpuMemCollectionMap.at(firstProcessName).mem.getAverage();
+            }
+            if (m_processToCpuMemCollectionMap.find(secondProcessName) != m_processToCpuMemCollectionMap.end()) {
+                secondProcessMemBasis = m_processToCpuMemCollectionMap.at(secondProcessName).mem.getAverage();
+            }
+
+            result = (isTcomTupcOnFirstProcess && !isTcomTupcOnSecondProcess) ? true
+                     : (!isTcomTupcOnFirstProcess && isTcomTupcOnSecondProcess)
+                         ? false
+                         : firstProcessMemBasis > secondProcessMemBasis;
+            return result;
+        });
+    return processNamesInReport;
 }
 
 TopLogAnalyzer::TopLogAnalyzer() = default;

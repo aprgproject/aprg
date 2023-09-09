@@ -66,18 +66,6 @@ void BtsLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSor
     }
 }
 
-double BtsLogAnalyzer::getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser) {
-    BtsLogTime latency = logTimePairOfTheUser.second.value() - logTimePairOfTheUser.first.value();
-    return getTotalMicroseconds(latency);
-}
-
-double BtsLogAnalyzer::getTotalMicroseconds(BtsLogTime const& btsLogTime) {
-    double result(
-        static_cast<double>(btsLogTime.getMinutes()) * 1000000 * 60 +
-        static_cast<double>(btsLogTime.getSeconds()) * 1000000 + static_cast<double>(btsLogTime.getMicroSeconds()));
-    return result;
-}
-
 void BtsLogAnalyzer::setFirstLogTimeInPair(
     string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) {
     LogTimePair& logTimePairOfTheUser(logTimePairs[userIdentifiers]);
@@ -102,6 +90,18 @@ void BtsLogAnalyzer::setLogTimeIfNeeded(string const& lineInLogs, LogTime& logTi
     //{
     logTime = logPrint.getBtsTime();
     //}
+}
+
+double BtsLogAnalyzer::getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser) {
+    BtsLogTime latency = logTimePairOfTheUser.second.value() - logTimePairOfTheUser.first.value();
+    return getTotalMicroseconds(latency);
+}
+
+double BtsLogAnalyzer::getTotalMicroseconds(BtsLogTime const& btsLogTime) {
+    double result(
+        static_cast<double>(btsLogTime.getMinutes()) * 1000000 * 60 +
+        static_cast<double>(btsLogTime.getSeconds()) * 1000000 + static_cast<double>(btsLogTime.getMicroSeconds()));
+    return result;
 }
 
 void BtsLogAnalyzer::initializeMessageQueueingTimeFileStream() {

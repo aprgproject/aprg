@@ -23,6 +23,7 @@ using namespace alba::stringHelper;
 using namespace std;
 
 namespace {
+
 bool shouldStillRun = true;
 
 string getOneCharPiece(string const& pieceName) {
@@ -122,199 +123,6 @@ struct WebPageInfo {
     string nameOfLine;
     MoveInfos moveInfos;
 };
-
-bool performMovesAndReturnIfValid(strings const& line) {
-    Configuration configuration(Configuration::Type::ChessDotComExplorer);
-    DetailsFromTheScreen detailsFromScreen(configuration);
-    AlbaLocalUserAutomation userAutomation;
-
-    MousePosition topLeft(2245, 101);
-    MousePosition bottomRight(3124, 980);
-    Board updatedBoard(BoardOrientation::BlackUpWhiteDown);
-    PieceColor currentColor = PieceColor::White;
-    double deltaX = (bottomRight.getX() - topLeft.getX()) / 8;
-    double deltaY = (bottomRight.getY() - topLeft.getY()) / 8;
-    for (string const& moveString : line) {
-        if (!shouldStillRun) {
-            exit(0);
-        }
-        Move move = updatedBoard.getMoveUsingAlgebraicNotation(moveString, currentColor);
-        if (areCoordinatesValid(move)) {
-            int startX = round(topLeft.getX() + (move.first.getX() + 0.5) * deltaX);
-            int startY = round(topLeft.getY() + (move.first.getY() + 0.5) * deltaY);
-            int endX = round(topLeft.getX() + (move.second.getX() + 0.5) * deltaX);
-            int endY = round(topLeft.getY() + (move.second.getY() + 0.5) * deltaY);
-
-            userAutomation.setMousePosition(MousePosition(startX, startY));
-            userAutomation.pressLeftButtonOnMouse();
-            userAutomation.sleep(200);
-            userAutomation.setMousePosition(MousePosition(endX, endY));
-            userAutomation.sleep(200);
-            userAutomation.releaseLeftButtonOnMouse();
-            userAutomation.sleep(600);
-
-            updatedBoard.move(move);
-            currentColor = getOppositeColor(currentColor);
-
-            detailsFromScreen.saveDetailsFromTheScreen();
-            Board const& boardFromScreen(detailsFromScreen.getBoardWithContext().getBoard());
-            if (boardFromScreen != updatedBoard) {
-                cout << "Move does not match on the screen. Move: [" << moveString;
-                cout << "] translated to: [" << move << "]" << endl;
-                cout << "Expected board:" << endl;
-                cout << updatedBoard << endl;
-                cout << "Board on the screen:" << endl;
-                cout << boardFromScreen << endl;
-                return false;
-            }
-        } else {
-            cout << "Invalid move found: [" << moveString;
-            cout << "] translated to: [" << move << "]" << endl;
-            return false;
-        }
-    }
-
-    return true;
-}
-
-bool readHtmlFileIfValid(WebPageInfo& pageInfo, string const& htmlFile) {
-    bool result(false);
-    ifstream inStream(htmlFile);
-    AlbaFileReader fileReader(inStream);
-    fileReader.setMaxBufferSize(100000);
-
-    while (fileReader.isNotFinished()) {
-        if (!shouldStillRun) {
-            exit(0);
-        }
-        string line(fileReader.getLineAndIgnoreWhiteSpaces());
-        int index = line.find(R"("eco-classifier-component sidebar-game-opening")");
-        if (isNotNpos(index)) {
-            result = true;
-            int previousIndex{};
-            pageInfo.nameOfLine =
-                getStringInBetween(line, R"(<span class="eco-classifier-label"><!----> <span>)", R"(</span>)", index);
-            do {
-                if (!shouldStillRun) {
-                    exit(0);
-                }
-                previousIndex = index;
-                MoveInfo moveInfo{};
-                moveInfo.nextMove = getStringInBetween(line, R"(<span class="move-san-san">)", R"(</span>)", index);
-                if (moveInfo.nextMove.empty()) {
-                    string prefix =
-                        getStringInBetween(line, R"(<span class="move-san-figurine icon-font-chess )", R"(-)", index);
-                    string suffix =
-                        getStringInBetween(line, R"(<span class="move-san-afterfigurine">)", R"(</span>)", index);
-                    moveInfo.nextMove = getOneCharPiece(prefix) + suffix;
-                }
-                moveInfo.numberOfGames = removeHtmlTags(
-                    getStringInBetween(line, R"(<p class="suggested-moves-total-games">)", R"(</p>)", index));
-                if (!moveInfo.numberOfGames.empty()) {
-                    string moveList = getStringInBetween(
-                        line, R"(<div class="suggested-moves-suggested-moves-list">)", R"(</div></li>)", index);
-                    int moveListIndex = 0;
-                    if (isStringFoundCaseSensitive(moveList, R"("suggested-moves-suggested-white")")) {
-                        moveInfo.whiteWinPercentage = getStringInBetween(
-                            moveList, R"(<span class="suggested-moves-percent-label">)", R"(</span>)", moveListIndex);
-                    }
-                    if (isStringFoundCaseSensitive(moveList, R"("suggested-moves-suggested-draw")")) {
-                        moveInfo.drawPercentage = getStringInBetween(
-                            moveList, R"(<span class="suggested-moves-percent-label">)", R"(</span>)", moveListIndex);
-                    }
-                    if (isStringFoundCaseSensitive(moveList, R"("suggested-moves-suggested-black")")) {
-                        moveInfo.blackWinPercentage = getStringInBetween(
-                            moveList, R"(<span class="suggested-moves-percent-label">)", R"(</span>)", moveListIndex);
-                    }
-                } else {
-                    moveInfo.numberOfGames = "1";
-                    string moveList = getStringInBetween(
-                        line, R"(<div class="suggested-moves-suggested-moves-list">)", R"(</div></li>)", index);
-                    string oneMatch = getStringInBetween(
-                        moveList, R"(<div class="suggested-moves-result suggested-moves-suggested-)", R"(</div>)");
-                    if (oneMatch == R"(white">1-0)") {
-                        moveInfo.whiteWinPercentage = "100%";
-                    } else if (oneMatch == R"(black">0-1)") {
-                        moveInfo.blackWinPercentage = "100%";
-                    } else if (oneMatch == R"(draw">½-½)") {
-                        moveInfo.drawPercentage = "100%";
-                    }
-                }
-
-                if (!moveInfo.nextMove.empty()) {
-                    pageInfo.moveInfos.emplace_back(moveInfo);
-                }
-            } while (previousIndex != index);
-        }
-    }
-    return result;
-}
-
-bool shouldIncludeLine(strings const& currentLine, Book const& book) {
-    bool result(false);
-    constexpr int MIN_NUMBER_OF_GAMES = 10000;
-
-    Board updatedBoard(BoardOrientation::BlackUpWhiteDown);
-    PieceColor currentColor = PieceColor::White;
-    int size = currentLine.size();
-    int index{};
-    for (string const& moveString : currentLine) {
-        if (index != size - 1) {
-            Move move = updatedBoard.getMoveUsingAlgebraicNotation(moveString, currentColor);
-            if (areCoordinatesValid(move)) {
-                updatedBoard.move(move);
-                currentColor = getOppositeColor(currentColor);
-            } else {
-                cout << "Logic error. Not a valid move in [shouldIncludeLine()]. Move: [" << moveString;
-                cout << "] translated to: [" << move << "]" << endl;
-                cout << "Exiting." << endl;
-                exit(0);
-            }
-        }
-        ++index;
-    }
-    auto lineDetailOptional = book.getLine(updatedBoard);
-    if (lineDetailOptional) {
-        auto const& lineDetail(lineDetailOptional.value());
-        if (lineDetail.totalNumberOfGames > MIN_NUMBER_OF_GAMES) {
-            result = true;
-        } else {
-            cout << "Skip this line because the number of games(" << lineDetail.totalNumberOfGames;
-            cout << ") is less than the minimum(" << MIN_NUMBER_OF_GAMES << ")" << endl;
-        }
-    }
-    return result;
-}
-
-int getLineNumber(string const& lineNumberFile) {
-    int result{};
-    ifstream inStream(lineNumberFile);
-    inStream >> result;
-    return result;
-}
-
-strings getLineOfMoves(string const& lineFile, int const lineNumber) {
-    strings result;
-    ifstream inStream(lineFile);
-    AlbaFileReader fileReader(inStream);
-    int i = 1;
-    while (fileReader.isNotFinished()) {
-        if (!shouldStillRun) {
-            exit(0);
-        }
-        if (i < lineNumber) {
-            fileReader.skipLine();
-            ++i;
-        } else if (i == lineNumber) {
-            string lineString = fileReader.getLineAndIgnoreWhiteSpaces();
-            splitToStrings<SplitStringType::WithoutDelimeters>(result, lineString, ",");
-            break;
-        } else {
-            break;
-        }
-    }
-    return result;
-}
 
 void clickWindow() {
     AlbaLocalUserAutomation userAutomation;
@@ -491,6 +299,199 @@ void doAllPagesRecursively(Paths const& paths) {
     }
 
     trackKeyPressForDownloadMovesFromChessDotComThread.join();
+}
+
+strings getLineOfMoves(string const& lineFile, int const lineNumber) {
+    strings result;
+    ifstream inStream(lineFile);
+    AlbaFileReader fileReader(inStream);
+    int i = 1;
+    while (fileReader.isNotFinished()) {
+        if (!shouldStillRun) {
+            exit(0);
+        }
+        if (i < lineNumber) {
+            fileReader.skipLine();
+            ++i;
+        } else if (i == lineNumber) {
+            string lineString = fileReader.getLineAndIgnoreWhiteSpaces();
+            splitToStrings<SplitStringType::WithoutDelimeters>(result, lineString, ",");
+            break;
+        } else {
+            break;
+        }
+    }
+    return result;
+}
+
+int getLineNumber(string const& lineNumberFile) {
+    int result{};
+    ifstream inStream(lineNumberFile);
+    inStream >> result;
+    return result;
+}
+
+bool performMovesAndReturnIfValid(strings const& line) {
+    Configuration configuration(Configuration::Type::ChessDotComExplorer);
+    DetailsFromTheScreen detailsFromScreen(configuration);
+    AlbaLocalUserAutomation userAutomation;
+
+    MousePosition topLeft(2245, 101);
+    MousePosition bottomRight(3124, 980);
+    Board updatedBoard(BoardOrientation::BlackUpWhiteDown);
+    PieceColor currentColor = PieceColor::White;
+    double deltaX = (bottomRight.getX() - topLeft.getX()) / 8;
+    double deltaY = (bottomRight.getY() - topLeft.getY()) / 8;
+    for (string const& moveString : line) {
+        if (!shouldStillRun) {
+            exit(0);
+        }
+        Move move = updatedBoard.getMoveUsingAlgebraicNotation(moveString, currentColor);
+        if (areCoordinatesValid(move)) {
+            int startX = round(topLeft.getX() + (move.first.getX() + 0.5) * deltaX);
+            int startY = round(topLeft.getY() + (move.first.getY() + 0.5) * deltaY);
+            int endX = round(topLeft.getX() + (move.second.getX() + 0.5) * deltaX);
+            int endY = round(topLeft.getY() + (move.second.getY() + 0.5) * deltaY);
+
+            userAutomation.setMousePosition(MousePosition(startX, startY));
+            userAutomation.pressLeftButtonOnMouse();
+            userAutomation.sleep(200);
+            userAutomation.setMousePosition(MousePosition(endX, endY));
+            userAutomation.sleep(200);
+            userAutomation.releaseLeftButtonOnMouse();
+            userAutomation.sleep(600);
+
+            updatedBoard.move(move);
+            currentColor = getOppositeColor(currentColor);
+
+            detailsFromScreen.saveDetailsFromTheScreen();
+            Board const& boardFromScreen(detailsFromScreen.getBoardWithContext().getBoard());
+            if (boardFromScreen != updatedBoard) {
+                cout << "Move does not match on the screen. Move: [" << moveString;
+                cout << "] translated to: [" << move << "]" << endl;
+                cout << "Expected board:" << endl;
+                cout << updatedBoard << endl;
+                cout << "Board on the screen:" << endl;
+                cout << boardFromScreen << endl;
+                return false;
+            }
+        } else {
+            cout << "Invalid move found: [" << moveString;
+            cout << "] translated to: [" << move << "]" << endl;
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool readHtmlFileIfValid(WebPageInfo& pageInfo, string const& htmlFile) {
+    bool result(false);
+    ifstream inStream(htmlFile);
+    AlbaFileReader fileReader(inStream);
+    fileReader.setMaxBufferSize(100000);
+
+    while (fileReader.isNotFinished()) {
+        if (!shouldStillRun) {
+            exit(0);
+        }
+        string line(fileReader.getLineAndIgnoreWhiteSpaces());
+        int index = line.find(R"("eco-classifier-component sidebar-game-opening")");
+        if (isNotNpos(index)) {
+            result = true;
+            int previousIndex{};
+            pageInfo.nameOfLine =
+                getStringInBetween(line, R"(<span class="eco-classifier-label"><!----> <span>)", R"(</span>)", index);
+            do {
+                if (!shouldStillRun) {
+                    exit(0);
+                }
+                previousIndex = index;
+                MoveInfo moveInfo{};
+                moveInfo.nextMove = getStringInBetween(line, R"(<span class="move-san-san">)", R"(</span>)", index);
+                if (moveInfo.nextMove.empty()) {
+                    string prefix =
+                        getStringInBetween(line, R"(<span class="move-san-figurine icon-font-chess )", R"(-)", index);
+                    string suffix =
+                        getStringInBetween(line, R"(<span class="move-san-afterfigurine">)", R"(</span>)", index);
+                    moveInfo.nextMove = getOneCharPiece(prefix) + suffix;
+                }
+                moveInfo.numberOfGames = removeHtmlTags(
+                    getStringInBetween(line, R"(<p class="suggested-moves-total-games">)", R"(</p>)", index));
+                if (!moveInfo.numberOfGames.empty()) {
+                    string moveList = getStringInBetween(
+                        line, R"(<div class="suggested-moves-suggested-moves-list">)", R"(</div></li>)", index);
+                    int moveListIndex = 0;
+                    if (isStringFoundCaseSensitive(moveList, R"("suggested-moves-suggested-white")")) {
+                        moveInfo.whiteWinPercentage = getStringInBetween(
+                            moveList, R"(<span class="suggested-moves-percent-label">)", R"(</span>)", moveListIndex);
+                    }
+                    if (isStringFoundCaseSensitive(moveList, R"("suggested-moves-suggested-draw")")) {
+                        moveInfo.drawPercentage = getStringInBetween(
+                            moveList, R"(<span class="suggested-moves-percent-label">)", R"(</span>)", moveListIndex);
+                    }
+                    if (isStringFoundCaseSensitive(moveList, R"("suggested-moves-suggested-black")")) {
+                        moveInfo.blackWinPercentage = getStringInBetween(
+                            moveList, R"(<span class="suggested-moves-percent-label">)", R"(</span>)", moveListIndex);
+                    }
+                } else {
+                    moveInfo.numberOfGames = "1";
+                    string moveList = getStringInBetween(
+                        line, R"(<div class="suggested-moves-suggested-moves-list">)", R"(</div></li>)", index);
+                    string oneMatch = getStringInBetween(
+                        moveList, R"(<div class="suggested-moves-result suggested-moves-suggested-)", R"(</div>)");
+                    if (oneMatch == R"(white">1-0)") {
+                        moveInfo.whiteWinPercentage = "100%";
+                    } else if (oneMatch == R"(black">0-1)") {
+                        moveInfo.blackWinPercentage = "100%";
+                    } else if (oneMatch == R"(draw">½-½)") {
+                        moveInfo.drawPercentage = "100%";
+                    }
+                }
+
+                if (!moveInfo.nextMove.empty()) {
+                    pageInfo.moveInfos.emplace_back(moveInfo);
+                }
+            } while (previousIndex != index);
+        }
+    }
+    return result;
+}
+
+bool shouldIncludeLine(strings const& currentLine, Book const& book) {
+    bool result(false);
+    constexpr int MIN_NUMBER_OF_GAMES = 10000;
+
+    Board updatedBoard(BoardOrientation::BlackUpWhiteDown);
+    PieceColor currentColor = PieceColor::White;
+    int size = currentLine.size();
+    int index{};
+    for (string const& moveString : currentLine) {
+        if (index != size - 1) {
+            Move move = updatedBoard.getMoveUsingAlgebraicNotation(moveString, currentColor);
+            if (areCoordinatesValid(move)) {
+                updatedBoard.move(move);
+                currentColor = getOppositeColor(currentColor);
+            } else {
+                cout << "Logic error. Not a valid move in [shouldIncludeLine()]. Move: [" << moveString;
+                cout << "] translated to: [" << move << "]" << endl;
+                cout << "Exiting." << endl;
+                exit(0);
+            }
+        }
+        ++index;
+    }
+    auto lineDetailOptional = book.getLine(updatedBoard);
+    if (lineDetailOptional) {
+        auto const& lineDetail(lineDetailOptional.value());
+        if (lineDetail.totalNumberOfGames > MIN_NUMBER_OF_GAMES) {
+            result = true;
+        } else {
+            cout << "Skip this line because the number of games(" << lineDetail.totalNumberOfGames;
+            cout << ") is less than the minimum(" << MIN_NUMBER_OF_GAMES << ")" << endl;
+        }
+    }
+    return result;
 }
 
 TEST(DownloadMovesFromChessDotComTest, DISABLED_DoAllPagesRecursivelyWorks) {

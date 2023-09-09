@@ -32,6 +32,12 @@ Expression::Expression(OperatorLevel const operatorLevel, WrappedTerms&& wrapped
       m_wrappedTerms(move(wrappedTerms)),
       m_isSimplified(false) {}
 
+Expression Expression::operator~() const {
+    Expression result(*this);
+    result.negate();
+    return result;
+}
+
 bool Expression::operator==(Expression const& second) const {
     return m_commonOperatorLevel == second.m_commonOperatorLevel && m_wrappedTerms == second.m_wrappedTerms;
 }
@@ -49,21 +55,11 @@ bool Expression::operator<(Expression const& second) const {
     return result;
 }
 
-Expression Expression::operator~() const {
-    Expression result(*this);
-    result.negate();
-    return result;
-}
-
-bool Expression::isEmpty() const { return m_wrappedTerms.empty(); }
-bool Expression::isSimplified() const { return m_isSimplified; }
-bool Expression::containsOnlyOneTerm() const { return m_wrappedTerms.size() == 1; }
-OperatorLevel Expression::getCommonOperatorLevel() const { return m_commonOperatorLevel; }
-
 BaseTerm const& Expression::getFirstTermConstReference() const {
     return getBaseTermReferenceFromUniquePointer(m_wrappedTerms.front().baseTermPointer);
 }
 
+OperatorLevel Expression::getCommonOperatorLevel() const { return m_commonOperatorLevel; }
 WrappedTerms const& Expression::getWrappedTerms() const { return m_wrappedTerms; }
 
 string Expression::getDebugString() const {
@@ -77,10 +73,9 @@ string Expression::getDebugString() const {
     return result.str();
 }
 
-WrappedTerms& Expression::getWrappedTermsReference() {
-    clearSimplifiedFlag();
-    return m_wrappedTerms;
-}
+bool Expression::isEmpty() const { return m_wrappedTerms.empty(); }
+bool Expression::isSimplified() const { return m_isSimplified; }
+bool Expression::containsOnlyOneTerm() const { return m_wrappedTerms.size() == 1; }
 
 void Expression::clear() {
     m_commonOperatorLevel = OperatorLevel::Unknown;
@@ -223,6 +218,11 @@ void Expression::clearAllInnerSimplifiedFlags() {
         term.clearAllInnerSimplifiedFlags();
     }
     clearSimplifiedFlag();
+}
+
+WrappedTerms& Expression::getWrappedTermsReference() {
+    clearSimplifiedFlag();
+    return m_wrappedTerms;
 }
 
 void Expression::putTermWithAndOperation(BaseTerm const& baseTerm) {

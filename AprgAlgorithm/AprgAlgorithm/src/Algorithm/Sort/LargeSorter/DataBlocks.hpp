@@ -33,21 +33,6 @@ public:
         return true;
     }
 
-    BlockIterator getNearestBlockIterator(ObjectToSort const& objectToSort) {
-        if (isLessThanOrEqual(m_mainIterator->getLowestObject(), objectToSort)) {
-            while ((m_mainIterator != m_blocks.end()) &&
-                   isLessThanOrEqual(m_mainIterator->getLowestObject(), objectToSort)) {
-                ++m_mainIterator;
-            }
-            --m_mainIterator;
-        } else if (objectToSort < m_mainIterator->getLowestObject()) {
-            while ((m_mainIterator != m_blocks.begin()) && (objectToSort < m_mainIterator->getLowestObject())) {
-                --m_mainIterator;
-            }
-        }
-        return m_mainIterator;
-    }
-
     void moveMainInteratorToStart() { m_mainIterator = m_blocks.begin(); }
 
     void createNewBlockBeforeThisIterator(BlockIterator const& iteratorAfterNewBlock, DataBlockType const blockType) {
@@ -110,6 +95,21 @@ public:
             case DataBlockType::Empty:
                 break;
         }
+    }
+
+    BlockIterator getNearestBlockIterator(ObjectToSort const& objectToSort) {
+        if (isLessThanOrEqual(m_mainIterator->getLowestObject(), objectToSort)) {
+            while ((m_mainIterator != m_blocks.end()) &&
+                   isLessThanOrEqual(m_mainIterator->getLowestObject(), objectToSort)) {
+                ++m_mainIterator;
+            }
+            --m_mainIterator;
+        } else if (objectToSort < m_mainIterator->getLowestObject()) {
+            while ((m_mainIterator != m_blocks.begin()) && (objectToSort < m_mainIterator->getLowestObject())) {
+                --m_mainIterator;
+            }
+        }
+        return m_mainIterator;
     }
 
 private:

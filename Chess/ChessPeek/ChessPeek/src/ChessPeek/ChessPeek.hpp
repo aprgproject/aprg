@@ -26,10 +26,10 @@ public:
     void calculationMonitoringCallBackForEngine(EngineCalculationDetails const& engineCalculationDetails);
 
 private:
+    Move getPerformedMove() const;
     bool shouldAnalyzeBoard() const;
     bool didPlayerChange() const;
     bool didBoardChange() const;
-    Move getPerformedMove() const;
     void initialize();
     void saveCalculationDetails(EngineCalculationDetails const& engineCalculationDetails);
     void printCalculationDetailsWithFiltering();

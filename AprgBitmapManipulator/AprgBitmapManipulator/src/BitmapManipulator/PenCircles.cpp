@@ -10,7 +10,7 @@ namespace alba::AprgBitmap {
 PenCircles::PenCircleDetails::PenCircleDetails() : radius(0), color(0U) {}
 PenCircles::PenCircleDetails::PenCircleDetails(double const radiusParameter, uint32_t const colorParameter)
     : radius(radiusParameter), color(colorParameter) {}
-bool PenCircles::isPenCircle(BitmapXY const& point) const { return m_penCircles.find(point) != m_penCircles.cend(); }
+PenCircles::CircleCenterConnections const& PenCircles::getCenterConnections() const { return m_centerConnections; }
 
 PenCircles::PenCircleDetails PenCircles::getPenCircleDetails(BitmapXY const& point) const {
     PenCircleDetails penCircleDetails;
@@ -20,9 +20,6 @@ PenCircles::PenCircleDetails PenCircles::getPenCircleDetails(BitmapXY const& poi
     }
     return penCircleDetails;
 }
-
-PenCircles::PointToPenCircleDetailsMap const& PenCircles::getPenCircles() const { return m_penCircles; }
-PenCircles::CircleCenterConnections const& PenCircles::getCenterConnections() const { return m_centerConnections; }
 
 PenCircles::PointAndPenCircleDetailsPairs PenCircles::getNearestPenCirclesToAPoint(
     BitmapXY const& point, int const distance) const {
@@ -41,7 +38,8 @@ PenCircles::PointAndPenCircleDetailsPairs PenCircles::getNearestPenCirclesToAPoi
     return result;
 }
 
-PenCircles::PointToPenCircleDetailsMap& PenCircles::getPenCirclesReference() { return m_penCircles; }
+PenCircles::PointToPenCircleDetailsMap const& PenCircles::getPenCircles() const { return m_penCircles; }
+bool PenCircles::isPenCircle(BitmapXY const& point) const { return m_penCircles.find(point) != m_penCircles.cend(); }
 
 void PenCircles::addAsPenCircle(BitmapXY const& point, double const radius, uint32_t const color) {
     m_penCircles[point] = PenCircleDetails(radius, color);
@@ -58,5 +56,6 @@ void PenCircles::connectCircles(BitmapXY const& circle1Center, BitmapXY const& c
 }
 
 void PenCircles::clear() { m_penCircles.clear(); }
+PenCircles::PointToPenCircleDetailsMap& PenCircles::getPenCirclesReference() { return m_penCircles; }
 
 }  // namespace alba::AprgBitmap

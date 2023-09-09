@@ -22,14 +22,14 @@ public:
         std::string_view const displayText, HorizontalAlignment const horizontalAlignment,
         VerticalAlignment const verticalAlignment);
 
-    // rule of zero
-    [[nodiscard]] std::string getText() const;
     [[nodiscard]] HorizontalAlignment getHorizontalAlignment() const;
     [[nodiscard]] VerticalAlignment getVerticalAlignment() const;
-    std::string& getTextReference();
+    // rule of zero
+    [[nodiscard]] std::string getText() const;
     void setText(std::string_view const text);
     void setHorizontalAlignment(HorizontalAlignment const horizontalAlignment);
     void setVerticalAlignment(VerticalAlignment const verticalAlignment);
+    std::string& getTextReference();
 
 private:
     std::string m_displayText;
@@ -43,18 +43,19 @@ class DisplayTableRow {
 public:
     DisplayTableRow() = default;
     explicit DisplayTableRow(int const numberOfCells);
+    [[nodiscard]] DisplayTableCell const& getCellAt(int const columnIndex) const;
+    [[nodiscard]] DisplayTableCells const& getCells() const;
     // rule of zero
     [[nodiscard]] int getNumberOfColumns() const;
-    [[nodiscard]] DisplayTableCells const& getCells() const;
-    [[nodiscard]] DisplayTableCell const& getCellAt(int const columnIndex) const;
-    DisplayTableCells& getCellsReference();
-    DisplayTableCell& getCellReferenceAt(int const columnIndex);
     void addCell(std::string_view const text);
     void addCell(std::string_view const displayText, HorizontalAlignment const horizontalAlignment);
 
     void addCell(
         std::string_view const displayText, HorizontalAlignment const horizontalAlignment,
         VerticalAlignment const verticalAlignment);
+
+    DisplayTableCell& getCellReferenceAt(int const columnIndex);
+    DisplayTableCells& getCellsReference();
 
 private:
     DisplayTableCells m_cells;
@@ -66,21 +67,21 @@ class DisplayTable {
 public:
     DisplayTable() = default;
     DisplayTable(int const numberOfColumns, int const numberOfRows);
+    [[nodiscard]] DisplayTableCell const& getCellAt(int const columnIndex, int const rowIndex) const;
+    [[nodiscard]] DisplayTableRow const& getRowAt(int const rowIndex) const;
+    [[nodiscard]] DisplayTableRows const& getRows() const;
+    [[nodiscard]] std::string getHorizontalBorder() const;
+    [[nodiscard]] std::string getVerticalBorder() const;
     // rule of zero
     [[nodiscard]] int getNumberOfRows() const;
     [[nodiscard]] int getMaxNumberOfColumns() const;
-    [[nodiscard]] DisplayTableRows const& getRows() const;
-    [[nodiscard]] DisplayTableRow const& getRowAt(int const rowIndex) const;
-    [[nodiscard]] DisplayTableCell const& getCellAt(int const columnIndex, int const rowIndex) const;
-    [[nodiscard]] std::string getHorizontalBorder() const;
-    [[nodiscard]] std::string getVerticalBorder() const;
-    DisplayTableRow& getLastRow();
-    DisplayTableRow& getRowReferenceAt(int const rowIndex);
-    DisplayTableCell& getCellReferenceAt(int const columnIndex, int const rowIndex);
     void addRow();
     void setBorders(std::string_view const horizontalBorder, std::string_view const verticalBorder);
     void setHorizontalBorder(std::string_view const horizontalBorder);
     void setVerticalBorder(std::string_view const verticalBorder);
+    DisplayTableCell& getCellReferenceAt(int const columnIndex, int const rowIndex);
+    DisplayTableRow& getLastRow();
+    DisplayTableRow& getRowReferenceAt(int const rowIndex);
 
 private:
     friend std::ostream& operator<<(std::ostream& out, DisplayTable const& displayTable);
@@ -115,11 +116,11 @@ private:
         VerticalAlignment const alignment, int const lineIndexAtRow, int const numberOfLinesAtRow,
         Lines const& linesAtCell);
 
-    [[nodiscard]] bool shouldBePrintedAtThisRow() const;
-    [[nodiscard]] int getVerticalBorderLength() const;
-    [[nodiscard]] int getHorizontalBorderLength() const;
     [[nodiscard]] std::string getHorizontalBorderLine() const;
     [[nodiscard]] std::string getVerticalBorderPoint() const;
+    [[nodiscard]] int getVerticalBorderLength() const;
+    [[nodiscard]] int getHorizontalBorderLength() const;
+    [[nodiscard]] bool shouldBePrintedAtThisRow() const;
     void saveTableInformation(DisplayTable const& displayTable);
     Rows m_rows{};
     std::vector<int> m_maxLengthAtColumn;

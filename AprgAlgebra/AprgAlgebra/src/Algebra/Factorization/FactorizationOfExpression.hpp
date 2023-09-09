@@ -6,25 +6,6 @@
 
 namespace alba::algebra::Factorization {
 
-bool dontFactorizeBaseBecauseBaseIsARaiseToPowerExpression(Term const& base);
-bool dontFactorizeBecauseThereIsSquareRootOfNegativeNumber(Term const& base, AlbaNumber const& exponent);
-Terms factorizeAnExpression(Expression const& expression);
-Terms factorizeAnExpressionWithConfigurationChanged(Expression const& expression);
-TermsRaiseToNumbers factorizeToTermsRaiseToNumbers(Expression const& expression);
-TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForAdditionAndSubtraction(Expression const& expression);
-TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForMultiplicationAndDivision(Expression const& expression);
-TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForRaiseToPower(Expression const& expression);
-AlbaNumber getGcfOfConstants(AlbaNumbers const& constantFactorsPerAddends);
-
-TermsRaiseToNumbers getFactorizedItemsForAdditionAndSubtraction(
-    Expression const& expression, AlbaNumbers const& constantFactorsPerAddends,
-    std::vector<TermsRaiseToNumbers> const& nonConstantFactorsPerAddends, AlbaNumber const& constantGcf,
-    TermsRaiseToNumbers const& commonNonConstantFactors);
-
-TermsRaiseToNumbers getFactorizedItemsBasedFromCollectedData(
-    AlbaNumber const& constantGcf, TermsRaiseToNumbers const& commonNonConstantFactors,
-    TermsWithDetails const& outerAddends);
-
 void retrieveConstantAndNonConstantFactors(
     std::vector<TermsRaiseToNumbers>& nonConstantFactorsPerAddends, AlbaNumbers& constantFactors,
     TermsWithDetails const& originalTermsWithDetails);
@@ -43,5 +24,24 @@ void putRemainingNonConstantFactorsAsInnerMultipliers(
 
 void putRemainingInnerMultipliersAsOuterAddend(
     TermsWithDetails& outerAddends, TermsWithDetails const& innerMultipliers, TermWithDetails const& originalAddend);
+AlbaNumber getGcfOfConstants(AlbaNumbers const& constantFactorsPerAddends);
+Terms factorizeAnExpression(Expression const& expression);
+Terms factorizeAnExpressionWithConfigurationChanged(Expression const& expression);
+TermsRaiseToNumbers factorizeToTermsRaiseToNumbers(Expression const& expression);
+TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForAdditionAndSubtraction(Expression const& expression);
+TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForMultiplicationAndDivision(Expression const& expression);
+TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForRaiseToPower(Expression const& expression);
+
+TermsRaiseToNumbers getFactorizedItemsForAdditionAndSubtraction(
+    Expression const& expression, AlbaNumbers const& constantFactorsPerAddends,
+    std::vector<TermsRaiseToNumbers> const& nonConstantFactorsPerAddends, AlbaNumber const& constantGcf,
+    TermsRaiseToNumbers const& commonNonConstantFactors);
+
+TermsRaiseToNumbers getFactorizedItemsBasedFromCollectedData(
+    AlbaNumber const& constantGcf, TermsRaiseToNumbers const& commonNonConstantFactors,
+    TermsWithDetails const& outerAddends);
+
+bool dontFactorizeBaseBecauseBaseIsARaiseToPowerExpression(Term const& base);
+bool dontFactorizeBecauseThereIsSquareRootOfNegativeNumber(Term const& base, AlbaNumber const& exponent);
 
 }  // namespace alba::algebra::Factorization

@@ -7,9 +7,9 @@ using namespace std;
 
 namespace alba {
 
-bool AlbaSackReaderType::isUnion() const { return m_isUnion; }
 AlbaSackReaderType::Parameters AlbaSackReaderType::getParameters() const { return m_parameters; }
 AlbaSackReaderType::TypeNames AlbaSackReaderType::getOtherTypes() const { return m_otherTypes; }
+bool AlbaSackReaderType::isUnion() const { return m_isUnion; }
 
 void AlbaSackReaderType::printAll() const {
     for (AlbaSackReaderParameter const& parameter : m_parameters) {

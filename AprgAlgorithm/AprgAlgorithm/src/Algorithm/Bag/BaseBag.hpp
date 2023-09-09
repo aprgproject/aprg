@@ -10,8 +10,8 @@ class BaseBag {
 public:
     using TraverseFunction = std::function<void(Object const& object)>;
     virtual ~BaseBag() = default;  // virtual destructor because of virtual functions (vtable exists)
-    [[nodiscard]] virtual bool isEmpty() const = 0;
     [[nodiscard]] virtual int getSize() const = 0;
+    [[nodiscard]] virtual bool isEmpty() const = 0;
     virtual void add(Object const& object) = 0;
     virtual void traverse(TraverseFunction const& traverseFunction) = 0;
 };

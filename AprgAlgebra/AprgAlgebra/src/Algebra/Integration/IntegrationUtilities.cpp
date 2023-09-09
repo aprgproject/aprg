@@ -19,40 +19,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-bool isTheSecondFundamentalTheoremOfCalculusTrue(
-    Term const& term, string const& variableName, AlbaNumber const& a, AlbaNumber const& b) {
-    // The second fundamental theorem of calculus
-    // Let the function f be continuous on the closed interval [a, b] and let the derivative of g be equal to f for all
-    // x in [a, b]. Then the definite integral of f from a to b is equal of g(b)- g(a)
-    Differentiation differentiation(variableName);
-    Integration integration(variableName);
-    Term g(integration.integrate(term));
-    Term gPrime(differentiation.differentiate(g));
-    Term simplifiedTerm(term);
-    simplifiedTerm.simplify();
-    bool isGPrimeEqualToF = gPrime == simplifiedTerm;
-    bool isDefiniteIntegralEqualToDifference =
-        integration.integrateAtDefiniteValues(term, a, b) == evaluateValuesAndGetDifference(g, variableName, a, b);
-    return isGPrimeEqualToF && isDefiniteIntegralEqualToDifference;
-}
-
-bool isTheIntegralDefinitionForFiniteCalculusIsTrue(
-    Term const& term, string const& variableName, AlbaNumber const& a, AlbaNumber const& b) {
-    // The fundamental theorem of finite calculus:
-    // The discrete definite integral from a to b is equal to
-    // The summation of terms from a to b-1.
-    IntegrationForFiniteCalculus integration(variableName);
-    Summation summation(term, variableName);
-    return integration.integrateAtDefiniteValues(term, a, b) == summation.getSum(a, b - 1);
-}
-
-bool isAreaUnderTheCurveEqualToDefiniteIntegral(
-    Term const& term, string const& variableName, AlbaNumber const& a, AlbaNumber const& b) {
-    Integration integration(variableName);
-    return integration.integrateAtDefiniteValues(term, a, b) ==
-           getAreaUnderACurveUsingReimannSums(term, variableName, a, b);
-}
-
 AlbaNumbers getInputForAverageValueInBetweenTwoValues(
     Term const& term, string const& variableName, AlbaNumber const& lowerEndInInterval,
     AlbaNumber const& higherEndInInterval) {
@@ -66,6 +32,19 @@ AlbaNumbers getInputForAverageValueInBetweenTwoValues(
     SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(meanValueTheoremEquation));
     AlbaNumberInterval openInterval(createOpenEndpoint(lowerEndInInterval), createOpenEndpoint(higherEndInInterval));
     return getNumbersInsideTheInterval(solutionSet.getAcceptedValues(), openInterval);
+}
+
+LowerAndHigherValues getApproximateValuesForDefiniteIntegral(
+    Term const& term, string const& variableName, AlbaNumber const& lowerEndInInterval,
+    AlbaNumber const& higherEndInInterval) {
+    AlbaNumberInterval closedInterval(
+        createCloseEndpoint(lowerEndInInterval), createCloseEndpoint(higherEndInInterval));
+    MinimumAndMaximum minMaxValues(getMinimumAndMaximumAtClosedInterval(term, variableName, closedInterval));
+    AlbaNumber delta(higherEndInInterval - lowerEndInInterval);
+    LowerAndHigherValues result;
+    result.higherValue = minMaxValues.maximumInputOutputValues.second * delta;
+    result.lowerValue = minMaxValues.minimumInputOutputValues.second * delta;
+    return result;
 }
 
 Term getAverageValueInBetweenTwoValues(Term const& term, DetailsForDefiniteIntegralWithValues const& integralDetails) {
@@ -117,17 +96,38 @@ Term getAreaUnderACurveUsingReimannSums(
     return limits.getValueAtInfinity(ALBA_NUMBER_POSITIVE_INFINITY);  // Let number of rectangles approach infinity
 }
 
-LowerAndHigherValues getApproximateValuesForDefiniteIntegral(
-    Term const& term, string const& variableName, AlbaNumber const& lowerEndInInterval,
-    AlbaNumber const& higherEndInInterval) {
-    AlbaNumberInterval closedInterval(
-        createCloseEndpoint(lowerEndInInterval), createCloseEndpoint(higherEndInInterval));
-    MinimumAndMaximum minMaxValues(getMinimumAndMaximumAtClosedInterval(term, variableName, closedInterval));
-    AlbaNumber delta(higherEndInInterval - lowerEndInInterval);
-    LowerAndHigherValues result;
-    result.higherValue = minMaxValues.maximumInputOutputValues.second * delta;
-    result.lowerValue = minMaxValues.minimumInputOutputValues.second * delta;
-    return result;
+bool isTheSecondFundamentalTheoremOfCalculusTrue(
+    Term const& term, string const& variableName, AlbaNumber const& a, AlbaNumber const& b) {
+    // The second fundamental theorem of calculus
+    // Let the function f be continuous on the closed interval [a, b] and let the derivative of g be equal to f for all
+    // x in [a, b]. Then the definite integral of f from a to b is equal of g(b)- g(a)
+    Differentiation differentiation(variableName);
+    Integration integration(variableName);
+    Term g(integration.integrate(term));
+    Term gPrime(differentiation.differentiate(g));
+    Term simplifiedTerm(term);
+    simplifiedTerm.simplify();
+    bool isGPrimeEqualToF = gPrime == simplifiedTerm;
+    bool isDefiniteIntegralEqualToDifference =
+        integration.integrateAtDefiniteValues(term, a, b) == evaluateValuesAndGetDifference(g, variableName, a, b);
+    return isGPrimeEqualToF && isDefiniteIntegralEqualToDifference;
+}
+
+bool isTheIntegralDefinitionForFiniteCalculusIsTrue(
+    Term const& term, string const& variableName, AlbaNumber const& a, AlbaNumber const& b) {
+    // The fundamental theorem of finite calculus:
+    // The discrete definite integral from a to b is equal to
+    // The summation of terms from a to b-1.
+    IntegrationForFiniteCalculus integration(variableName);
+    Summation summation(term, variableName);
+    return integration.integrateAtDefiniteValues(term, a, b) == summation.getSum(a, b - 1);
+}
+
+bool isAreaUnderTheCurveEqualToDefiniteIntegral(
+    Term const& term, string const& variableName, AlbaNumber const& a, AlbaNumber const& b) {
+    Integration integration(variableName);
+    return integration.integrateAtDefiniteValues(term, a, b) ==
+           getAreaUnderACurveUsingReimannSums(term, variableName, a, b);
 }
 
 }  // namespace alba::algebra

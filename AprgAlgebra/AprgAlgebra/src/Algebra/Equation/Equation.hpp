@@ -16,14 +16,14 @@ public:
     bool operator==(Equation const& second) const;
     bool operator!=(Equation const& second) const;
     bool operator<(Equation const& second) const;
-    [[nodiscard]] bool isEmpty() const;
-    [[nodiscard]] bool isEquationSatisfied() const;
     [[nodiscard]] EquationOperator const& getEquationOperator() const;
     [[nodiscard]] Term const& getLeftHandTerm() const;
     [[nodiscard]] Term const& getRightHandTerm() const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] bool isEquationSatisfied() const;
+    void simplify();
     Term& getLeftHandTermReference();
     Term& getRightHandTermReference();
-    void simplify();
 
 private:
     friend std::ostream& operator<<(std::ostream& out, Equation const& equation);

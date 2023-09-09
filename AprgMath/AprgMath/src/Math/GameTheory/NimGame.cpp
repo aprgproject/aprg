@@ -17,6 +17,14 @@ GameState NimGame::getGameState(NimHeapSize const nimSum) {
     return GameState::Losing;
 }
 
+NimHeapSize NimGame::getNimSum(NimState const& nimState) {
+    // It turns out that we can easily classify any nim state by calculating the nim sum s = x1 ^ x2 ^ ... ^ xn, where ^
+    // is the xor operation.
+    return accumulate(
+        nimState.cbegin(), nimState.cend(), 0U,
+        [](NimHeapSize const nimHeapSize1, NimHeapSize const nimHeapSize2) { return nimHeapSize1 ^ nimHeapSize2; });
+}
+
 NimState NimGame::getOptimalNextState(NimState const& nimState) {
     NimState result(nimState);
     NimHeapSize nimSum(getNimSum(nimState));
@@ -46,14 +54,6 @@ NimState NimGame::getOptimalNextState(NimState const& nimState) {
         }
     }
     return result;
-}
-
-NimHeapSize NimGame::getNimSum(NimState const& nimState) {
-    // It turns out that we can easily classify any nim state by calculating the nim sum s = x1 ^ x2 ^ ... ^ xn, where ^
-    // is the xor operation.
-    return accumulate(
-        nimState.cbegin(), nimState.cend(), 0U,
-        [](NimHeapSize const nimHeapSize1, NimHeapSize const nimHeapSize2) { return nimHeapSize1 ^ nimHeapSize2; });
 }
 
 }  // namespace alba::math

@@ -35,18 +35,18 @@ public:
 class Client {
     // This actually works like a "prototype manager"
 public:
+    void setPrototypeAt(int const index, std::unique_ptr<Prototype> prototype) {
+        if (index < NUMBER_OF_TYPES) {
+            m_types[index] = move(prototype);
+        }
+    }
+
     std::unique_ptr<Prototype> createBasedFrom(int const index) {
         std::unique_ptr<Prototype> result;
         if (index < NUMBER_OF_TYPES) {
             result = m_types[index]->clone();
         }
         return result;
-    }
-
-    void setPrototypeAt(int const index, std::unique_ptr<Prototype> prototype) {
-        if (index < NUMBER_OF_TYPES) {
-            m_types[index] = move(prototype);
-        }
     }
 
     static constexpr int NUMBER_OF_TYPES = 2;

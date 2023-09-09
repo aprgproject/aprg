@@ -18,100 +18,11 @@ using namespace std;
 
 namespace alba::algebra {
 
-bool doesThePolynomialHaveOnlyOneConstant(Polynomial const& polynomial) {
-    bool result(false);
-    if (isOneMonomial(polynomial)) {
-        result = isConstantOnly(getFirstMonomial(polynomial));
-    }
-    return result;
-}
-
-bool doesThePolynomialHaveDoubleValue(Polynomial const& polynomial) {
-    bool result(false);
-    NumbersRetriever retriever;
-    retriever.retrieveFromPolynomial(polynomial);
-    AlbaNumbersSet const& numbers(retriever.getNumbers());
-    result = any_of(numbers.cbegin(), numbers.cend(), [](AlbaNumber const& number) { return number.isDoubleType(); });
-    return result;
-}
-
-bool doesOnePolynomialHaveADoubleValue(Polynomials const& polynomials) {
-    return any_of(polynomials.cbegin(), polynomials.cend(), [](Polynomial const& polynomial) {
-        return doesThePolynomialHaveDoubleValue(polynomial);
-    });
-}
-
-bool hasAMonomialWithMultipleVariables(Polynomial const& polynomial) {
-    bool result(false);
-    for (Monomial const& monomial : polynomial.getMonomials()) {
-        if (monomial.getVariablesToExponentsMap().size() >= 2) {
-            result = true;
-            break;
-        }
-    }
-    return result;
-}
-
-bool hasAMonomialWithDegreeMoreThanOneOrFractional(Polynomial const& polynomial) {
-    bool result(false);
-    for (Monomial const& monomial : polynomial.getMonomials()) {
-        AlbaNumber degree(getDegree(monomial));
-        if (degree > 1 || !degree.isIntegerType()) {
-            result = true;
-            break;
-        }
-    }
-    return result;
-}
-
-bool isOneMonomial(Polynomial const& polynomial) { return polynomial.getMonomials().size() == 1; }
-
-bool isVariableExponentInMonomialFound(Polynomial const& polynomial, Monomial const& monomial) {
-    bool result(false);
-    for (Monomial const& monomialInternal : polynomial.getMonomials()) {
-        if (monomial.getVariablesToExponentsMap() == monomialInternal.getVariablesToExponentsMap()) {
-            result = true;
-            break;
-        }
-    }
-    return result;
-}
-
-bool isPolynomialLinear(Polynomial const& polynomial) {
-    ExponentsRetriever exponentsRetriever;
-    exponentsRetriever.retrieveFromPolynomial(polynomial);
-    AlbaNumbersSet const& exponents(exponentsRetriever.getExponents());
-    return all_of(exponents.cbegin(), exponents.cend(), [](AlbaNumber const& exponent) {
-        return exponent == 0 || exponent == 1;
-    });
-}
-
-IntegerCoefficient getBinomialCoefficient(IntegerCoefficient const power, IntegerCoefficient const monomialIndex) {
-    return mathHelper::getBinomialCoefficient(power, monomialIndex);
-}
-
-IntegerCoefficient getMultinomialCoefficient(
-    IntegerCoefficient const power, IntegerCoefficients const& variableExponents) {
-    // The multinomial coefficient is n! / (k1! * k2! * k3! *... * km!)
-    //  This is equals the number of ways we can divide n elements into subsets of sizes k1,k2,...,km, where
-    //  k1+k2+...+km = n.
-    // Multinomial coefficients can be seen as a generalization of binomial cofficients;
-    // if m=2, the above formula corresponds to the binomial coefficient formula.
-    IntegerCoefficient numerator(getFactorial(power));
-    IntegerCoefficient denominator(1);
-    for (IntegerCoefficient const variableExponent : variableExponents) {
-        denominator *= getFactorial(variableExponent);
-    }
-    return numerator / denominator;
-}
-
-Monomial getFirstMonomial(Polynomial const& polynomial) {
-    Monomial result;
-    Monomials const& monomials(polynomial.getMonomials());
-    if (!monomials.empty()) {
-        result = monomials.front();
-    }
-    return result;
+void removeEmptyPolynomials(Polynomials& polynomials) {
+    polynomials.erase(
+        remove_if(
+            polynomials.begin(), polynomials.end(), [](Polynomial const& polynomial) { return polynomial.isEmpty(); }),
+        polynomials.end());
 }
 
 AlbaNumber getMaxDegree(Polynomial const& polynomial) {
@@ -124,21 +35,6 @@ AlbaNumber getMaxDegree(Polynomial const& polynomial) {
         }
     }
     return maxDegree;
-}
-
-pair<AlbaNumber, AlbaNumber> getMinmaxDegree(Polynomial const& polynomial) {
-    pair<AlbaNumber, AlbaNumber> result;
-    Monomials const& monomials(polynomial.getMonomials());
-    if (!monomials.empty()) {
-        result.first = getDegree(monomials.front());
-        result.second = result.first;
-        for (auto it = monomials.cbegin() + 1; it != monomials.cend(); ++it) {
-            AlbaNumber degree = getDegree(*it);
-            result.first = min(result.first, degree);
-            result.second = max(result.second, degree);
-        }
-    }
-    return result;
 }
 
 AlbaNumber getDegreeForVariable(Polynomial const& polynomial, string const& variableName) {
@@ -247,6 +143,34 @@ AlbaNumbers getRoots(RootType const rootType, Polynomial const& polynomial) {
     return result;
 }
 
+IntegerCoefficient getBinomialCoefficient(IntegerCoefficient const power, IntegerCoefficient const monomialIndex) {
+    return mathHelper::getBinomialCoefficient(power, monomialIndex);
+}
+
+IntegerCoefficient getMultinomialCoefficient(
+    IntegerCoefficient const power, IntegerCoefficients const& variableExponents) {
+    // The multinomial coefficient is n! / (k1! * k2! * k3! *... * km!)
+    //  This is equals the number of ways we can divide n elements into subsets of sizes k1,k2,...,km, where
+    //  k1+k2+...+km = n.
+    // Multinomial coefficients can be seen as a generalization of binomial cofficients;
+    // if m=2, the above formula corresponds to the binomial coefficient formula.
+    IntegerCoefficient numerator(getFactorial(power));
+    IntegerCoefficient denominator(1);
+    for (IntegerCoefficient const variableExponent : variableExponents) {
+        denominator *= getFactorial(variableExponent);
+    }
+    return numerator / denominator;
+}
+
+Monomial getFirstMonomial(Polynomial const& polynomial) {
+    Monomial result;
+    Monomials const& monomials(polynomial.getMonomials());
+    if (!monomials.empty()) {
+        result = monomials.front();
+    }
+    return result;
+}
+
 Polynomial raiseBinomialToAPowerUsingBinomialExpansion(Polynomial const& binomial, int const power) {
     Polynomial result;
     Monomials const& monomials(binomial.getMonomials());
@@ -270,11 +194,87 @@ Polynomial raiseBinomialToAPowerUsingBinomialExpansion(Polynomial const& binomia
     return result;
 }
 
-void removeEmptyPolynomials(Polynomials& polynomials) {
-    polynomials.erase(
-        remove_if(
-            polynomials.begin(), polynomials.end(), [](Polynomial const& polynomial) { return polynomial.isEmpty(); }),
-        polynomials.end());
+pair<AlbaNumber, AlbaNumber> getMinmaxDegree(Polynomial const& polynomial) {
+    pair<AlbaNumber, AlbaNumber> result;
+    Monomials const& monomials(polynomial.getMonomials());
+    if (!monomials.empty()) {
+        result.first = getDegree(monomials.front());
+        result.second = result.first;
+        for (auto it = monomials.cbegin() + 1; it != monomials.cend(); ++it) {
+            AlbaNumber degree = getDegree(*it);
+            result.first = min(result.first, degree);
+            result.second = max(result.second, degree);
+        }
+    }
+    return result;
+}
+
+bool doesThePolynomialHaveOnlyOneConstant(Polynomial const& polynomial) {
+    bool result(false);
+    if (isOneMonomial(polynomial)) {
+        result = isConstantOnly(getFirstMonomial(polynomial));
+    }
+    return result;
+}
+
+bool doesThePolynomialHaveDoubleValue(Polynomial const& polynomial) {
+    bool result(false);
+    NumbersRetriever retriever;
+    retriever.retrieveFromPolynomial(polynomial);
+    AlbaNumbersSet const& numbers(retriever.getNumbers());
+    result = any_of(numbers.cbegin(), numbers.cend(), [](AlbaNumber const& number) { return number.isDoubleType(); });
+    return result;
+}
+
+bool doesOnePolynomialHaveADoubleValue(Polynomials const& polynomials) {
+    return any_of(polynomials.cbegin(), polynomials.cend(), [](Polynomial const& polynomial) {
+        return doesThePolynomialHaveDoubleValue(polynomial);
+    });
+}
+
+bool hasAMonomialWithMultipleVariables(Polynomial const& polynomial) {
+    bool result(false);
+    for (Monomial const& monomial : polynomial.getMonomials()) {
+        if (monomial.getVariablesToExponentsMap().size() >= 2) {
+            result = true;
+            break;
+        }
+    }
+    return result;
+}
+
+bool hasAMonomialWithDegreeMoreThanOneOrFractional(Polynomial const& polynomial) {
+    bool result(false);
+    for (Monomial const& monomial : polynomial.getMonomials()) {
+        AlbaNumber degree(getDegree(monomial));
+        if (degree > 1 || !degree.isIntegerType()) {
+            result = true;
+            break;
+        }
+    }
+    return result;
+}
+
+bool isOneMonomial(Polynomial const& polynomial) { return polynomial.getMonomials().size() == 1; }
+
+bool isVariableExponentInMonomialFound(Polynomial const& polynomial, Monomial const& monomial) {
+    bool result(false);
+    for (Monomial const& monomialInternal : polynomial.getMonomials()) {
+        if (monomial.getVariablesToExponentsMap() == monomialInternal.getVariablesToExponentsMap()) {
+            result = true;
+            break;
+        }
+    }
+    return result;
+}
+
+bool isPolynomialLinear(Polynomial const& polynomial) {
+    ExponentsRetriever exponentsRetriever;
+    exponentsRetriever.retrieveFromPolynomial(polynomial);
+    AlbaNumbersSet const& exponents(exponentsRetriever.getExponents());
+    return all_of(exponents.cbegin(), exponents.cend(), [](AlbaNumber const& exponent) {
+        return exponent == 0 || exponent == 1;
+    });
 }
 
 }  // namespace alba::algebra

@@ -10,6 +10,7 @@ public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using VertexToWeightMap = typename GraphTypesWithWeights<Vertex, Weight>::VertexToWeightMap;
     explicit BasePathSearchWithDistanceSum(EdgeWeightedGraph const& graph) : m_graph(graph) {}
+    [[nodiscard]] VertexToWeightMap const& getEndVertexToDistanceSumMap() const { return m_endVertexToDistanceSumMap; }
 
     [[nodiscard]] Weight getDistanceTo(Vertex const& endVertex) const {
         Weight result(0);
@@ -19,8 +20,6 @@ public:
         }
         return result;
     }
-
-    [[nodiscard]] VertexToWeightMap const& getEndVertexToDistanceSumMap() const { return m_endVertexToDistanceSumMap; }
 
     void initializeDistances(Vertices const& vertices) {
         for (Vertex const& vertex : vertices) {

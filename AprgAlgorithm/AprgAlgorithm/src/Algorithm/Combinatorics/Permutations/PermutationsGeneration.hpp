@@ -88,17 +88,6 @@ public:
     }
 
 private:
-    static BuildingRecursionData createBuildingRecursionData(
-        Permutations& permutations, Objects const& objects, int const length) {
-        return BuildingRecursionData{
-            permutations, Permutation(), BooleanVector(objects.size(), false), objects, length};
-    }
-
-    static SwappingRecursionData createSwappingRecursionData(
-        Permutations& permutations, Objects const& objects, int const lowIndex, int const highIndex) {
-        return SwappingRecursionData{permutations, objects, lowIndex, highIndex};
-    }
-
     static void collectPermutationsByBuilding(BuildingRecursionData& recursionData) {
         if (static_cast<int>(recursionData.currentPermutation.size()) == recursionData.targetPermutationLength) {
             recursionData.permutations.emplace_back(recursionData.currentPermutation);
@@ -136,6 +125,17 @@ private:
                 std::swap(currentPermutation[recursionData.lowIndex], currentPermutation[swapIndex]);
             }
         }
+    }
+
+    static BuildingRecursionData createBuildingRecursionData(
+        Permutations& permutations, Objects const& objects, int const length) {
+        return BuildingRecursionData{
+            permutations, Permutation(), BooleanVector(objects.size(), false), objects, length};
+    }
+
+    static SwappingRecursionData createSwappingRecursionData(
+        Permutations& permutations, Objects const& objects, int const lowIndex, int const highIndex) {
+        return SwappingRecursionData{permutations, objects, lowIndex, highIndex};
     }
 };
 

@@ -15,14 +15,6 @@ class MonteCarloSimulationOfPerculation {
 public:
     MonteCarloSimulationOfPerculation() : m_unionFindOfIndexes(), m_randomizer(0, getDimensionsSquared() - 1) {}
 
-    [[nodiscard]] bool isPercolated() const {
-        return m_unionFindOfIndexes.isConnected(getVirtualTopIndex(), getVirtualBottomIndex());
-    }
-
-    [[nodiscard]] double getPercolationProbability() const {
-        return static_cast<double>(m_numberOfOpenSites) / getDimensionsSquared();
-    }
-
     [[nodiscard]] std::string getSitesToDisplay() const {
         DisplayTable displayTable;
         for (int y = 0; y < DIMENSION; ++y) {
@@ -34,6 +26,14 @@ public:
         }
         displayTable.setBorders("-", "|");
         return stringHelper::convertToString(displayTable);
+    }
+
+    [[nodiscard]] double getPercolationProbability() const {
+        return static_cast<double>(m_numberOfOpenSites) / getDimensionsSquared();
+    }
+
+    [[nodiscard]] bool isPercolated() const {
+        return m_unionFindOfIndexes.isConnected(getVirtualTopIndex(), getVirtualBottomIndex());
     }
 
     void addOpenSitesUntilItPercolates() {
@@ -63,17 +63,14 @@ private:
 
     static constexpr int getVirtualTopIndex() { return getDimensionsSquared(); }
     static constexpr int getVirtualBottomIndex() { return getDimensionsSquared() + 1; }
-    [[nodiscard]] bool isSiteOpen(int const index) const { return m_sites[index]; }
     [[nodiscard]] int getIndex(int const x, int const y) const { return y * DIMENSION + x; }
+    [[nodiscard]] bool isSiteOpen(int const index) const { return m_sites[index]; }
 
     void retrieveCoordinates(int const index, int& x, int& y) const {
         x = index % DIMENSION;
         y = index / DIMENSION;
     }
 
-    std::array<bool, getDimensionsSquared()> m_sites{};
-    WeightedQuickUnionWithArray<int, getDimensionsSquared() + 2>
-        m_unionFindOfIndexes;  //+2 because of virtual top site and bottom site
     void connectNeighboringSitesAt(int const index) {
         int x = 0;
         int y = 0;
@@ -109,6 +106,9 @@ private:
         }
     }
 
+    WeightedQuickUnionWithArray<int, getDimensionsSquared() + 2>
+        m_unionFindOfIndexes;  //+2 because of virtual top site and bottom site
+    std::array<bool, getDimensionsSquared()> m_sites{};
     int m_numberOfOpenSites{0};
     AlbaUniformNonDeterministicRandomizer<int> m_randomizer;
 };

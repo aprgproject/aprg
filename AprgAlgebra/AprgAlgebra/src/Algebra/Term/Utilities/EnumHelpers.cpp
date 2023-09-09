@@ -6,6 +6,52 @@ using namespace std;
 
 namespace alba::algebra {
 
+TermAssociationType getReversedAssociationType(TermAssociationType const associationType) {
+    TermAssociationType reversedAssociationType(TermAssociationType::Positive);
+    if (TermAssociationType::Positive == associationType) {
+        reversedAssociationType = TermAssociationType::Negative;
+    } else {
+        // if(TermAssociationType::Negative == associationType)
+        reversedAssociationType = TermAssociationType::Positive;
+    }
+    return reversedAssociationType;
+}
+
+string getEnumShortString(TermType const termType) {
+    switch (termType) {
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Empty, "Empty")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Constant, "Constant")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Variable, "Variable")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Operator, "Operator")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Monomial, "Monomial")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Polynomial, "Polynomial")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Expression, "Expression")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Function, "Function")
+        default:
+            return "default";
+    }
+}
+
+string getEnumShortString(TermAssociationType const association) {
+    switch (association) {
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermAssociationType::Positive, "{POS}")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermAssociationType::Negative, "{NEG}")
+        default:
+            return "default";
+    }
+}
+
+string getEnumShortString(OperatorLevel const operatorLevel) {
+    switch (operatorLevel) {
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(OperatorLevel::Unknown, "{?}")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(OperatorLevel::AdditionAndSubtraction, "{+-}")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(OperatorLevel::MultiplicationAndDivision, "{*/}")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(OperatorLevel::RaiseToPower, "{^}")
+        default:
+            return "default";
+    }
+}
+
 int getAssociationPriority(TermAssociationType const association) {
     int result(0);
     switch (association) {
@@ -67,52 +113,6 @@ int getTermTypePriorityValue(TermType const termType) {
             break;
     }
     return result;
-}
-
-TermAssociationType getReversedAssociationType(TermAssociationType const associationType) {
-    TermAssociationType reversedAssociationType(TermAssociationType::Positive);
-    if (TermAssociationType::Positive == associationType) {
-        reversedAssociationType = TermAssociationType::Negative;
-    } else {
-        // if(TermAssociationType::Negative == associationType)
-        reversedAssociationType = TermAssociationType::Positive;
-    }
-    return reversedAssociationType;
-}
-
-string getEnumShortString(TermType const termType) {
-    switch (termType) {
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Empty, "Empty")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Constant, "Constant")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Variable, "Variable")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Operator, "Operator")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Monomial, "Monomial")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Polynomial, "Polynomial")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Expression, "Expression")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Function, "Function")
-        default:
-            return "default";
-    }
-}
-
-string getEnumShortString(TermAssociationType const association) {
-    switch (association) {
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermAssociationType::Positive, "{POS}")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermAssociationType::Negative, "{NEG}")
-        default:
-            return "default";
-    }
-}
-
-string getEnumShortString(OperatorLevel const operatorLevel) {
-    switch (operatorLevel) {
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(OperatorLevel::Unknown, "{?}")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(OperatorLevel::AdditionAndSubtraction, "{+-}")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(OperatorLevel::MultiplicationAndDivision, "{*/}")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(OperatorLevel::RaiseToPower, "{^}")
-        default:
-            return "default";
-    }
 }
 
 }  // namespace alba::algebra

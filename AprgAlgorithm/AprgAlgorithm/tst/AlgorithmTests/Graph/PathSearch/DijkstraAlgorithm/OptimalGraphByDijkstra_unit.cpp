@@ -21,7 +21,6 @@ using EdgeWeightedDirectedGraphForTest = EdgeWeightedGraph<VertexForTest, Weight
 using EdgeWeightedUndirectedGraphForTest = EdgeWeightedGraph<VertexForTest, WeightForTest, UndirectedGraphForTest>;
 using ShortestPathSearchForTest =
     PathSearchUsingDijkstra<VertexForTest, WeightForTest, EdgeWeightedUndirectedGraphForTest, less>;
-
 }  // namespace
 
 TEST(OptimalGraphByDijkstraTest, GetOptimalDirectedGraphWithUndirectedToOptimizedDirectedWorksOnExample1) {

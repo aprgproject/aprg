@@ -18,13 +18,11 @@ public:
     enum class ControllerState { Initializing, WaitingForUciOkay, Calculating, Idle, Quitted };
 
     enum class CommandType {
-
         Uci,
         UciOption,
         Position,
         Go,
         Stop,
-
     };
 
     struct Command {
@@ -35,7 +33,6 @@ public:
     using StepsInCalculationMonitoring = std::function<void(CalculationDetails const&)>;
     explicit ChessEngineControllerWithUci(
         ChessEngineHandler& engineHandler, stringHelper::StringPairs const& uciOptionNamesAndValuePairs = {});
-    bool waitTillReadyAndReturnIfResetWasPerformed();
     void initialize();
     void quit();
     void resetEngine();
@@ -50,6 +47,7 @@ public:
     void stop();
     void setAdditionalStepsInCalculationMonitoring(StepsInCalculationMonitoring const& additionalSteps);
     void setLogFile(std::string const& logFilePath);
+    bool waitTillReadyAndReturnIfResetWasPerformed();
 
 private:
     static std::string constructUciOptionCommand(std::string const& name, std::string const& value);

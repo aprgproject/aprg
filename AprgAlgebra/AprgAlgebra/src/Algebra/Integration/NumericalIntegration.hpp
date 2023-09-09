@@ -7,6 +7,8 @@
 
 namespace alba::algebra {
 
+AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(AlbaNumber const& input, int const numberOfSamples);
+AlbaNumber getAnApproximateOfNaturalLogarithmUsingSimpsonRule(AlbaNumber const& input, int const numberOfSamples);
 Term getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(
     Term const& term, DetailsForDefiniteIntegralWithValues const& integralDetails, int const numberOfSamples);
 Term getAnApproximateOfDefiniteIntegralUsingSimpsonRule(
@@ -23,8 +25,5 @@ Term getAnApproximateOfTruncationErrorInTrapezoidalRuleAt(
 Term getAnApproximateOfTruncationErrorInSimpsonRuleAt(
     Term const& term, DetailsForDefiniteIntegralWithValues const& integralDetails, AlbaNumber const& valueToCheckAt,
     AlbaNumber const& deltaX);
-
-AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(AlbaNumber const& input, int const numberOfSamples);
-AlbaNumber getAnApproximateOfNaturalLogarithmUsingSimpsonRule(AlbaNumber const& input, int const numberOfSamples);
 
 }  // namespace alba::algebra

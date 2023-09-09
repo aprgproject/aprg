@@ -17,13 +17,13 @@ using namespace std;
 
 namespace alba::AprgBitmap {
 
-bool PenCirclesDrawer::ColorDetails::isEmpty() const { return totalWeight == 0; }
-
 uint32_t PenCirclesDrawer::ColorDetails::getColor() const {
     return combineRgbToColor(
         static_cast<uint8_t>(round(totalRed / totalWeight)), static_cast<uint8_t>(round(totalGreen / totalWeight)),
         static_cast<uint8_t>(round(totalBlue / totalWeight)));
 }
+
+bool PenCirclesDrawer::ColorDetails::isEmpty() const { return totalWeight == 0; }
 
 void PenCirclesDrawer::ColorDetails::addColor(uint32_t const color, double const weight) {
     totalRed += extractRed(color) * weight;

@@ -48,20 +48,6 @@ TermsOverTerms::TermsOverTerms(Terms const& numerators, Terms const& denominator
       m_shouldSimplifyToFactors(false),
       m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails()) {}
 
-Terms const& TermsOverTerms::getNumerators() const { return m_numerators; }
-Terms const& TermsOverTerms::getDenominators() const { return m_denominators; }
-
-TermsWithDetails TermsOverTerms::getNumeratorAndDenominatorAsTermWithDetails() const {
-    TermsWithDetails result;
-    for (Term const& numerator : m_numerators) {
-        result.emplace_back(numerator, TermAssociationType::Positive);
-    }
-    for (Term const& denominator : m_denominators) {
-        result.emplace_back(denominator, TermAssociationType::Negative);
-    }
-    return result;
-}
-
 Term TermsOverTerms::getCombinedTerm() const {
     Term combinedTerm(1);
     if (m_shouldSimplifyToFactors) {
@@ -101,6 +87,9 @@ Term TermsOverTerms::getCombinedDenominator() const {
     return combinedTerm;
 }
 
+Terms const& TermsOverTerms::getNumerators() const { return m_numerators; }
+Terms const& TermsOverTerms::getDenominators() const { return m_denominators; }
+
 TermsRaiseToNumbers TermsOverTerms::getTermsRaiseToNumbers() const {
     TermsRaiseToNumbers result;
     Terms factorizedNumerators(factorizeTerms(m_numerators));
@@ -118,6 +107,17 @@ TermsRaiseToTerms TermsOverTerms::getTermsRaiseToTerms() const {
 
     result.putTerms(factorizedNumerators, TermAssociationType::Positive);
     result.putTerms(factorizedDenominators, TermAssociationType::Negative);
+    return result;
+}
+
+TermsWithDetails TermsOverTerms::getNumeratorAndDenominatorAsTermWithDetails() const {
+    TermsWithDetails result;
+    for (Term const& numerator : m_numerators) {
+        result.emplace_back(numerator, TermAssociationType::Positive);
+    }
+    for (Term const& denominator : m_denominators) {
+        result.emplace_back(denominator, TermAssociationType::Negative);
+    }
     return result;
 }
 
@@ -151,16 +151,6 @@ void TermsOverTerms::simplify() {
     } else {
         continueToSimplifyAndCombineFactors(newNumerators, newDenominators);
     }
-}
-
-Polynomial TermsOverTerms::multiplyPolynomialTerms(Terms const& polynomialTerms) {
-    Polynomial polynomialResult(createPolynomialFromNumber(1));
-    for (Term const& polynomialTerm : polynomialTerms) {
-        if (canBeConvertedToPolynomial(polynomialTerm)) {
-            polynomialResult.multiplyPolynomial(createPolynomialIfPossible(polynomialTerm));
-        }
-    }
-    return polynomialResult;
 }
 
 void TermsOverTerms::clearTermsThenEmplacePolynomialAndRemainingTerms(
@@ -275,6 +265,16 @@ void TermsOverTerms::simplifyPolynomialNumeratorAndPolynomialDenominator(
     polynomialDenominator = numeratorAndDenominator.getDenominator();
 }
 
+Polynomial TermsOverTerms::multiplyPolynomialTerms(Terms const& polynomialTerms) {
+    Polynomial polynomialResult(createPolynomialFromNumber(1));
+    for (Term const& polynomialTerm : polynomialTerms) {
+        if (canBeConvertedToPolynomial(polynomialTerm)) {
+            polynomialResult.multiplyPolynomial(createPolynomialIfPossible(polynomialTerm));
+        }
+    }
+    return polynomialResult;
+}
+
 Terms TermsOverTerms::factorizeIfNeeded(Terms const& terms) const {
     if (m_shouldSimplifyToFactors || !(m_numerators.empty() && m_denominators.empty())) {
         return factorize(terms);
@@ -332,19 +332,6 @@ void TermsOverTerms::putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToNumbe
     }
 }
 
-bool TermsOverTerms::removeTermsIfNeededAndReturnIfSomeTermsAreRemoved(Terms& numerators, Terms& denominators) {
-    int previousNumberOfNumerators = numerators.size();
-    int previousNumberOfDenominators = denominators.size();
-
-    handleZerosInNumeratorOrDenominator(denominators, numerators);
-    removeTermsThatHaveNoEffect(numerators);
-    removeTermsThatHaveNoEffect(denominators);
-    calculateBasesAndExponentsAndPutThatToNumeratorsAndDenominators(numerators, denominators);
-
-    return previousNumberOfNumerators != static_cast<int>(numerators.size()) ||
-           previousNumberOfDenominators != static_cast<int>(denominators.size());
-}
-
 void TermsOverTerms::continueToSimplifyToFactors(Terms& factorizedNumerators, Terms& factorizedDenominators) {
     removeTermsIfNeededAndReturnIfSomeTermsAreRemoved(factorizedNumerators, factorizedDenominators);
     m_numerators = factorizedNumerators;
@@ -400,6 +387,19 @@ void TermsOverTerms::simplifyPolynomialsToPolynomialOverPolynomial() {
     simplifyPolynomialNumeratorAndPolynomialDenominator(polynomialNumerator, polynomialDenominator);
     clearTermsThenEmplacePolynomialAndRemainingTerms(polynomialNumerator, nonPolynomialNumerators, m_numerators);
     clearTermsThenEmplacePolynomialAndRemainingTerms(polynomialDenominator, nonPolynomialDenominators, m_denominators);
+}
+
+bool TermsOverTerms::removeTermsIfNeededAndReturnIfSomeTermsAreRemoved(Terms& numerators, Terms& denominators) {
+    int previousNumberOfNumerators = numerators.size();
+    int previousNumberOfDenominators = denominators.size();
+
+    handleZerosInNumeratorOrDenominator(denominators, numerators);
+    removeTermsThatHaveNoEffect(numerators);
+    removeTermsThatHaveNoEffect(denominators);
+    calculateBasesAndExponentsAndPutThatToNumeratorsAndDenominators(numerators, denominators);
+
+    return previousNumberOfNumerators != static_cast<int>(numerators.size()) ||
+           previousNumberOfDenominators != static_cast<int>(denominators.size());
 }
 
 ostream& operator<<(ostream& out, TermsOverTerms const& termsOverTerms) {

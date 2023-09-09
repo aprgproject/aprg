@@ -20,17 +20,17 @@ public:
         LimaconTrigonometricFunctionType const trigonometricFunction);  // a + b*(cos or sin)(theta) = r
     bool operator==(Limacon const& limacon) const;
     bool operator!=(Limacon const& limacon) const;
-    [[nodiscard]] double getAValue() const;
-    [[nodiscard]] double getBValue() const;
-    [[nodiscard]] double calculateRadiusFromTheta(AlbaAngle const& theta) const;
+    [[nodiscard]] AlbaAngle calculateThetaFromRadius(double const radius) const;
     [[nodiscard]] LimaconTrigonometricFunctionType getTrigonometricFunctionType() const;
     [[nodiscard]] LimaconType getLimaconType() const;
     [[nodiscard]] Points getPointsForShape(AlbaAngle const& angleInterval) const;
-    [[nodiscard]] AlbaAngle calculateThetaFromRadius(double const radius) const;
+    [[nodiscard]] double getAValue() const;
+    [[nodiscard]] double getBValue() const;
+    [[nodiscard]] double calculateRadiusFromTheta(AlbaAngle const& theta) const;
 
 private:
-    [[nodiscard]] double performTrigonometricFunction(AlbaAngle const& theta) const;
     [[nodiscard]] AlbaAngle performInverseTrigonometricFunction(double const ratio) const;
+    [[nodiscard]] double performTrigonometricFunction(AlbaAngle const& theta) const;
     friend std::ostream& operator<<(std::ostream& out, Limacon const& limacon);
     double m_aValue{0};
     double m_bValue{0};

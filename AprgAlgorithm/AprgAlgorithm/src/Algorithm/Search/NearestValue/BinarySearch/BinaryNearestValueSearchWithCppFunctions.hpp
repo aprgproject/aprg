@@ -17,18 +17,18 @@ public:
     explicit BinaryNearestValueSearchWithCppFunctions(Values const& sortedValues) : m_sortedValues(sortedValues) {}
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    [[nodiscard]] Value getNearestValue(Value const& target) const {
-        Value result{};
-        if (!m_sortedValues.empty()) {
-            result = getNearestValueUsingEqualRange(target);
-        }
-        return result;
-    }
-
     [[nodiscard]] Index getIndexOfNearestValue(Value const& target) const {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
             result = getIndexOfNearestValueUsingEqualRange(target);
+        }
+        return result;
+    }
+
+    [[nodiscard]] Value getNearestValue(Value const& target) const {
+        Value result{};
+        if (!m_sortedValues.empty()) {
+            result = getNearestValueUsingEqualRange(target);
         }
         return result;
     }
@@ -52,15 +52,6 @@ public:
     }
 
 private:
-    [[nodiscard]] Value getNearestValueUsingEqualRange(Value const& target) const {
-        // assumption is non set
-        auto&& [lowerBoundValue, higherBoundValue] =
-            containerHelper::getLowerAndUpperValuesForNonSet(m_sortedValues, target);
-        Value deviationFromLower(mathHelper::getPositiveDelta(target, lowerBoundValue));
-        Value deviationFromHigher(mathHelper::getPositiveDelta(target, higherBoundValue));
-        return (deviationFromLower <= deviationFromHigher) ? lowerBoundValue : higherBoundValue;
-    }
-
     [[nodiscard]] Index getIndexOfNearestValueUsingEqualRange(Value const& target) const {
         // assumption is non set
         auto&& [lowerIt, upperIt] = containerHelper::getLowerAndUpperConstIteratorsForNonSet(m_sortedValues, target);
@@ -70,6 +61,15 @@ private:
         Value deviationFromHigher(mathHelper::getPositiveDelta(target, higherBoundValue));
         return (deviationFromLower <= deviationFromHigher) ? std::distance(m_sortedValues.cbegin(), lowerIt)
                                                            : std::distance(m_sortedValues.cbegin(), upperIt);
+    }
+
+    [[nodiscard]] Value getNearestValueUsingEqualRange(Value const& target) const {
+        // assumption is non set
+        auto&& [lowerBoundValue, higherBoundValue] =
+            containerHelper::getLowerAndUpperValuesForNonSet(m_sortedValues, target);
+        Value deviationFromLower(mathHelper::getPositiveDelta(target, lowerBoundValue));
+        Value deviationFromHigher(mathHelper::getPositiveDelta(target, higherBoundValue));
+        return (deviationFromLower <= deviationFromHigher) ? lowerBoundValue : higherBoundValue;
     }
 
     Values const& m_sortedValues;

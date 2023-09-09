@@ -12,13 +12,12 @@ class QuickFind : public BaseUnionFind<Object> {
 public:
     using RootArray = std::array<Object, SIZE>;
     QuickFind() : m_roots() { initialize(); }
+    [[nodiscard]] Object getRoot(Object const& object) const override { return m_roots[object]; }
+    [[nodiscard]] RootArray const& getRootArray() const { return m_roots; }
 
     [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
         return getRoot(object1) == getRoot(object2);
     }
-
-    [[nodiscard]] Object getRoot(Object const& object) const override { return m_roots[object]; }
-    [[nodiscard]] RootArray const& getRootArray() const { return m_roots; }
 
     void connect(Object const& object1, Object const& object2) override {
         // runs in linear time (too expensive it should take constant/logarithmic time)

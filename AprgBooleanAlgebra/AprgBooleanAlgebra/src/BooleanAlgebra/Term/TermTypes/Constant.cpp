@@ -6,17 +6,18 @@ namespace alba::booleanAlgebra {
 
 Constant::Constant(bool const boolValue) : m_booleanValue(boolValue) {}
 Constant::Constant() : m_booleanValue(false) {}
-bool Constant::operator==(Constant const& second) const { return m_booleanValue == second.m_booleanValue; }
-bool Constant::operator!=(Constant const& second) const { return m_booleanValue != second.m_booleanValue; }
-
-bool Constant::operator<(Constant const& second) const {
-    return static_cast<int>(m_booleanValue) < static_cast<int>(second.m_booleanValue);
-}
 
 Constant Constant::operator~() const {
     Constant result(*this);
     result.negate();
     return result;
+}
+
+bool Constant::operator==(Constant const& second) const { return m_booleanValue == second.m_booleanValue; }
+bool Constant::operator!=(Constant const& second) const { return m_booleanValue != second.m_booleanValue; }
+
+bool Constant::operator<(Constant const& second) const {
+    return static_cast<int>(m_booleanValue) < static_cast<int>(second.m_booleanValue);
 }
 
 bool Constant::getBooleanValue() const { return m_booleanValue; }

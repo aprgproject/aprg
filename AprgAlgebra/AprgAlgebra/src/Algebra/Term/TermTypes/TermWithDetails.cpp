@@ -45,9 +45,9 @@ bool TermWithDetails::operator<(TermWithDetails const& second) const {
     return result;
 }
 
+int TermWithDetails::getAssociationPriority() const { return algebra::getAssociationPriority(association); }
 bool TermWithDetails::hasPositiveAssociation() const { return TermAssociationType::Positive == association; }
 bool TermWithDetails::hasNegativeAssociation() const { return TermAssociationType::Negative == association; }
-int TermWithDetails::getAssociationPriority() const { return algebra::getAssociationPriority(association); }
 
 void TermWithDetails::clear() {
     baseTermPointer.reset();

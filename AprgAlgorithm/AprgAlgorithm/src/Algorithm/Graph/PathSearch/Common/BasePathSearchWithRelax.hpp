@@ -22,10 +22,6 @@ public:
     BasePathSearchWithRelax(EdgeWeightedGraph const& graph, Vertex const& startVertex)
         : m_graph(graph), m_startVertex(startVertex) {}
 
-    [[nodiscard]] bool hasPathTo(Vertex const& endVertex) const {
-        return m_vertexToEdgeWithBestWeightMap.find(endVertex) != m_vertexToEdgeWithBestWeightMap.cend();
-    }
-
     [[nodiscard]] Path getPathTo(Vertex const& endVertex) const {
         Path reversedPath;
         bool shouldAddStartVertexAndReverse(endVertex != m_startVertex);
@@ -55,25 +51,25 @@ public:
         return m_vertexToEdgeWithBestWeightMap;
     }
 
+    [[nodiscard]] bool hasPathTo(Vertex const& endVertex) const {
+        return m_vertexToEdgeWithBestWeightMap.find(endVertex) != m_vertexToEdgeWithBestWeightMap.cend();
+    }
+
 protected:
     // No need for virtual destructor because this class is not destroyed polymorphically.
     // Guideline #4: A base class destructor should be either public and virtual, or protected and nonvirtual.
     // Source: http://www.gotw.ca/publications/mill18.htm
     ~BasePathSearchWithRelax() = default;
 
-    static AdditionalRelaxationStepsWithNewWeight getNoStepsWithNewWeight() {
-        static AdditionalRelaxationStepsWithNewWeight noRelaxationSteps = [](Vertex const&, Vertex const&,
-                                                                             Weight const&) {};
-        return noRelaxationSteps;
-    }
-
     static AdditionalRelaxationSteps getNoSteps() {
         static AdditionalRelaxationSteps noRelaxationSteps = []() {};
         return noRelaxationSteps;
     }
 
-    [[nodiscard]] bool hasNoWeightSaved(Vertex const& vertex) const {
-        return m_vertexToEdgeWithBestWeightMap.find(vertex) == m_vertexToEdgeWithBestWeightMap.cend();
+    static AdditionalRelaxationStepsWithNewWeight getNoStepsWithNewWeight() {
+        static AdditionalRelaxationStepsWithNewWeight noRelaxationSteps = [](Vertex const&, Vertex const&,
+                                                                             Weight const&) {};
+        return noRelaxationSteps;
     }
 
     [[nodiscard]] Weight getSavedWeightAt(Vertex const& vertex) const {
@@ -83,6 +79,10 @@ protected:
             result = it->second.weight;
         }
         return result;
+    }
+
+    [[nodiscard]] bool hasNoWeightSaved(Vertex const& vertex) const {
+        return m_vertexToEdgeWithBestWeightMap.find(vertex) == m_vertexToEdgeWithBestWeightMap.cend();
     }
 
     void setStartVertexWeightToZero() {

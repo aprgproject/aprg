@@ -13,23 +13,6 @@ public:
     AlbaXYZ() : m_x{}, m_y{}, m_z{} {}
     AlbaXYZ(CoordinateType const& xValue, CoordinateType const& yValue, CoordinateType const& zValue)
         : m_x(xValue), m_y(yValue), m_z(zValue) {}
-
-    // rule of zero
-    bool operator==(AlbaXYZ const& xyz) const {
-        return mathHelper::isAlmostEqual(m_x, xyz.m_x) && mathHelper::isAlmostEqual(m_y, xyz.m_y) &&
-               mathHelper::isAlmostEqual(m_z, xyz.m_z);
-    }
-
-    bool operator!=(AlbaXYZ const& secondXyz) const {
-        AlbaXYZ const& firstXyz(*this);
-        return !(firstXyz == secondXyz);
-    }
-
-    bool operator<(AlbaXYZ const& xyz) const {
-        // this is added so it can be used in map
-        return std::tie(m_x, m_y, m_z) < std::tie(xyz.m_x, xyz.m_y, xyz.m_z);
-    }
-
     AlbaXYZ operator+() const { return *this; }
     AlbaXYZ operator-() const { return AlbaXYZ(-m_x, -m_y, -m_z); }
 
@@ -49,6 +32,22 @@ public:
         return AlbaXYZ(m_x / divisor, m_y / divisor, m_z / divisor);
     }
 
+    // rule of zero
+    bool operator==(AlbaXYZ const& xyz) const {
+        return mathHelper::isAlmostEqual(m_x, xyz.m_x) && mathHelper::isAlmostEqual(m_y, xyz.m_y) &&
+               mathHelper::isAlmostEqual(m_z, xyz.m_z);
+    }
+
+    bool operator!=(AlbaXYZ const& secondXyz) const {
+        AlbaXYZ const& firstXyz(*this);
+        return !(firstXyz == secondXyz);
+    }
+
+    bool operator<(AlbaXYZ const& xyz) const {
+        // this is added so it can be used in map
+        return std::tie(m_x, m_y, m_z) < std::tie(xyz.m_x, xyz.m_y, xyz.m_z);
+    }
+
     AlbaXYZ& operator+=(AlbaXYZ const& secondXyz) {
         m_x += secondXyz.m_x;
         m_y += secondXyz.m_y;
@@ -63,14 +62,15 @@ public:
         return *this;
     }
 
-    [[nodiscard]] bool isEmpty() const {
-        return CoordinateType{} == m_x && CoordinateType{} == m_y && CoordinateType{} == m_z;
-    }
-
     [[nodiscard]] CoordinateType getX() const { return m_x; }
     [[nodiscard]] CoordinateType getY() const { return m_y; }
     [[nodiscard]] CoordinateType getZ() const { return m_z; }
     [[nodiscard]] CoordinateType getXTimesYTimesZ() const { return m_x * m_y * m_z; }
+
+    [[nodiscard]] bool isEmpty() const {
+        return CoordinateType{} == m_x && CoordinateType{} == m_y && CoordinateType{} == m_z;
+    }
+
     void setX(CoordinateType const& xValue) { m_x = xValue; }
     void setY(CoordinateType const& yValue) { m_y = yValue; }
     void setZ(CoordinateType const& zValue) { m_z = zValue; }

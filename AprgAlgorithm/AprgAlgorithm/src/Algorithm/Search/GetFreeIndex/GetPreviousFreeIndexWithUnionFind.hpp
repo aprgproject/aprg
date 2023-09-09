@@ -11,14 +11,6 @@ public:
     explicit GetPreviousFreeIndexWithUnionFind(Index const numberOfIndexes)
         : m_numberOfIndexes(numberOfIndexes), m_unionFind(numberOfIndexes) {}
 
-    Index getPreviousFreeIndexAt(Index const index) {
-        Index result{};
-        if (index < m_numberOfIndexes) {
-            result = m_unionFind.getRootWithPathCompression(index);
-        }
-        return result;
-    }
-
     void setAsNotFree(Index const index) {
         if (index > 0 && index < m_numberOfIndexes) {
             m_unionFind.connect(index, index - 1);
@@ -38,6 +30,14 @@ public:
                 }
             }
         }
+    }
+
+    Index getPreviousFreeIndexAt(Index const index) {
+        Index result{};
+        if (index < m_numberOfIndexes) {
+            result = m_unionFind.getRootWithPathCompression(index);
+        }
+        return result;
     }
 
 private:

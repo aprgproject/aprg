@@ -13,10 +13,6 @@ public:
     using RootArray = std::array<Object, SIZE>;
     QuickUnion() : m_relativeRoots() { initialize(); }
 
-    [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
-        return getRoot(object1) == getRoot(object2);
-    }
-
     [[nodiscard]] Object getRoot(Object const& object) const override {
         // worst case (tall tree) runs in linear time (too expensive it should take constant/logarithmic time)
         // this is a lazy approach (every getRoot() -> check relative roots until main root is found)
@@ -31,6 +27,10 @@ public:
     }
 
     [[nodiscard]] RootArray const& getRelativeRootArray() const { return m_relativeRoots; }
+
+    [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
+        return getRoot(object1) == getRoot(object2);
+    }
 
     void connect(Object const& object1, Object const& object2) override {
         Object root1(getRoot(object1));

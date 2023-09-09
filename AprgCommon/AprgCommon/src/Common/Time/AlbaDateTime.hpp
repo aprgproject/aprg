@@ -23,12 +23,12 @@ public:
     bool operator>=(AlbaYearMonthDay const& second) const;
     // rule of zero
     static AlbaYearMonthDay createFromTotalDays(uint32_t const totalDays);
-    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] AlbaDateTimeConstants::DayOfTheWeek getDayOfTheWeek() const;
     [[nodiscard]] uint32_t getYears() const;
     [[nodiscard]] uint32_t getMonths() const;
     [[nodiscard]] uint32_t getDays() const;
     [[nodiscard]] uint32_t getTotalDays() const;
-    [[nodiscard]] AlbaDateTimeConstants::DayOfTheWeek getDayOfTheWeek() const;
+    [[nodiscard]] bool isEmpty() const;
     void clear();
     void setTime(uint32_t const totalDays);
     void setTime(uint16_t const years, uint8_t const month, uint8_t const days);
@@ -55,11 +55,11 @@ public:
     bool operator>=(AlbaHourMinuteSecond const& second) const;
     // rule of zero
     static AlbaHourMinuteSecond createFromTotalSeconds(uint32_t const totalSeconds);
-    [[nodiscard]] bool isEmpty() const;
     [[nodiscard]] uint32_t getHours() const;
     [[nodiscard]] uint32_t getMinutes() const;
     [[nodiscard]] uint32_t getSeconds() const;
     [[nodiscard]] uint32_t getTotalSeconds() const;
+    [[nodiscard]] bool isEmpty() const;
     void clear();
     void setTime(uint32_t const totalSeconds);
     void setTime(uint8_t const hours, uint8_t const minutes, uint8_t const seconds);
@@ -106,16 +106,17 @@ public:
           m_hourMinuteSecond(hours, minutes, seconds),
           m_microseconds(microseconds) {}
 
+    AlbaDateTime operator+(AlbaDateTime const& secondDateTime) const;
+    AlbaDateTime operator-(AlbaDateTime const& secondDateTime) const;
     bool operator<(AlbaDateTime const& secondDateTime) const;
     bool operator>(AlbaDateTime const& secondDateTime) const;
     bool operator==(AlbaDateTime const& secondDateTime) const;
     bool operator!=(AlbaDateTime const& secondDateTime) const;
-    AlbaDateTime operator+(AlbaDateTime const& secondDateTime) const;
-    AlbaDateTime operator-(AlbaDateTime const& secondDateTime) const;
     // rule of zero
     static AlbaDateTime createFromTotalDaysAndSecondsAndMicroSeconds(
         uint32_t const totalDays, uint32_t const totalSeconds, uint32_t const totalMicroseconds);
-    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] AlbaHourMinuteSecond const& getHourMinutesSecond() const;
+    [[nodiscard]] AlbaYearMonthDay const& getYearMonthDay() const;
     [[nodiscard]] uint32_t getYears() const;
     [[nodiscard]] uint32_t getMonths() const;
     [[nodiscard]] uint32_t getDays() const;
@@ -123,11 +124,7 @@ public:
     [[nodiscard]] uint32_t getMinutes() const;
     [[nodiscard]] uint32_t getSeconds() const;
     [[nodiscard]] uint32_t getMicroSeconds() const;
-    [[nodiscard]] AlbaYearMonthDay const& getYearMonthDay() const;
-    [[nodiscard]] AlbaHourMinuteSecond const& getHourMinutesSecond() const;
-    AlbaYearMonthDay& getYearMonthDayReference();
-    AlbaHourMinuteSecond& getHourMinutesSecondReference();
-    uint32_t& getMicroSecondsReference();
+    [[nodiscard]] bool isEmpty() const;
     void clear();
     void negate();
 
@@ -136,6 +133,10 @@ public:
         uint8_t const seconds, uint32_t const microseconds);
 
     void reorganizeValues();  // NOTE: AlbaDateTime class needs to be manually reorganized (if needed) since the
+    AlbaHourMinuteSecond& getHourMinutesSecondReference();
+    AlbaYearMonthDay& getYearMonthDayReference();
+    uint32_t& getMicroSecondsReference();
+
     // constructor is constexpr.
     template <PrintFormat printFormat>
     [[nodiscard]] PrintObject<printFormat> getPrintObject() const {
@@ -143,13 +144,13 @@ public:
     }
 
 private:
-    static bool isLessThanInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
-    static bool isGreaterThanInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
-    static bool isEqualInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
     static AlbaDateTime addDateTimeMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
     static AlbaDateTime subtractDateTimeMagnitude(
         AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
     static AlbaDateTime executeAddOrSubtract(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
+    static bool isLessThanInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
+    static bool isGreaterThanInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
+    static bool isEqualInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
     template <PrintFormat printFormat>
     friend std::ostream& operator<<(std::ostream& out, AlbaDateTime::PrintObject<printFormat> const&);
     friend std::ostream& operator<<(std::ostream& out, AlbaDateTime const& dateTime);

@@ -9,26 +9,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-Term getEToTheX(Term const& term) {
-    // e^x
-    return {createExpressionIfPossible({getEAsATerm(), "^", term})};
-}
-
-Term getEToTheNegativeX(Term const& term) {
-    // e^(-x)
-    return {createExpressionIfPossible({getEAsATerm(), "^", negateTerm(term)})};
-}
-
-Term getEToTheXPlusEToTheNegativeX(Term const& term) {
-    // e^x + e^(-x)
-    return {createExpressionIfPossible({getEToTheX(term), "+", getEToTheNegativeX(term)})};
-}
-
-Term getEToTheXMinusEToTheNegativeX(Term const& term) {
-    // e^x - e^(-x)
-    return {createExpressionIfPossible({getEToTheX(term), "-", getEToTheNegativeX(term)})};
-}
-
 Equation getHyperbolicSineDefinition(Term const& term) {
     // sinh(x) = (e^x - e^(-x)) / 2
     Term leftSideTerm(sinh(term));
@@ -93,6 +73,64 @@ Equation getEToTheNegativeXFromHyperbolicFunctionsEquation(Term const& term) {
     return {leftSideTerm, "=", rightSideTerm};
 }
 
+Equation getHyperbolicArcSineDefinition(Term const& term) {
+    Term leftSideTerm(arcsinh(term));
+    Term insideSquareRoot(createExpressionIfPossible({term, "^", 2, "+", 1}));
+    Term squareRootTerm(createExpressionIfPossible({insideSquareRoot, "^", AlbaNumber::createFraction(1, 2)}));
+    Term insideLogarithm(createExpressionIfPossible({term, "+", squareRootTerm}));
+    Term rightSideTerm(ln(insideLogarithm));
+    return {leftSideTerm, "=", rightSideTerm};
+}
+
+Equation getHyperbolicArcCosineDefinition(Term const& term) {
+    Term leftSideTerm(arccosh(term));
+    Term insideSquareRoot(createExpressionIfPossible({term, "^", 2, "-", 1}));
+    Term squareRootTerm(createExpressionIfPossible({insideSquareRoot, "^", AlbaNumber::createFraction(1, 2)}));
+    Term insideLogarithm(createExpressionIfPossible({term, "+", squareRootTerm}));
+    Term rightSideTerm(ln(insideLogarithm));
+    return {leftSideTerm, "=", rightSideTerm};
+}
+
+Equation getHyperbolicArcTangentDefinition(Term const& term) {
+    Term leftSideTerm(arctanh(term));
+    Term oneMinusTerm(createExpressionIfPossible({1, "-", term}));
+    Term onePlusTerm(createExpressionIfPossible({1, "+", term}));
+    Term insideLogarithm(createExpressionIfPossible({oneMinusTerm, "/", onePlusTerm}));
+    Term logarithmTerm(ln(insideLogarithm));
+    Term rightSideTerm(createExpressionIfPossible({AlbaNumber::createFraction(1, 2), "*", logarithmTerm}));
+    return {leftSideTerm, "=", rightSideTerm};
+}
+
+Equation getHyperbolicArcCotangentDefinition(Term const& term) {
+    Term leftSideTerm(arccoth(term));
+    Term termPlusOne(createExpressionIfPossible({term, "+", 1}));
+    Term termMinusOne(createExpressionIfPossible({term, "-", 1}));
+    Term insideLogarithm(createExpressionIfPossible({termPlusOne, "/", termMinusOne}));
+    Term logarithmTerm(ln(insideLogarithm));
+    Term rightSideTerm(createExpressionIfPossible({AlbaNumber::createFraction(1, 2), "*", logarithmTerm}));
+    return {leftSideTerm, "=", rightSideTerm};
+}
+
+Term getEToTheX(Term const& term) {
+    // e^x
+    return {createExpressionIfPossible({getEAsATerm(), "^", term})};
+}
+
+Term getEToTheNegativeX(Term const& term) {
+    // e^(-x)
+    return {createExpressionIfPossible({getEAsATerm(), "^", negateTerm(term)})};
+}
+
+Term getEToTheXPlusEToTheNegativeX(Term const& term) {
+    // e^x + e^(-x)
+    return {createExpressionIfPossible({getEToTheX(term), "+", getEToTheNegativeX(term)})};
+}
+
+Term getEToTheXMinusEToTheNegativeX(Term const& term) {
+    // e^x - e^(-x)
+    return {createExpressionIfPossible({getEToTheX(term), "-", getEToTheNegativeX(term)})};
+}
+
 Term getHyperbolicSineOfSumOfTwoTerms(Term const& term1, Term const& term2) {
     // sinh(x + y) =  sinh(x)*cosh(y) + cosh(x)*sinh(y)
     Term firstPart(createExpressionIfPossible({sinh(term1), "*", cosh(term2)}));
@@ -134,44 +172,6 @@ Term getHyperbolicCosineOfHalvedValue(Term const& term) {
     Term insideSquareRoot(createExpressionIfPossible({numerator, "/", 2}));
     Term result(createExpressionIfPossible({insideSquareRoot, "^", AlbaNumber::createFraction(1, 2)}));
     return result;
-}
-
-Equation getHyperbolicArcSineDefinition(Term const& term) {
-    Term leftSideTerm(arcsinh(term));
-    Term insideSquareRoot(createExpressionIfPossible({term, "^", 2, "+", 1}));
-    Term squareRootTerm(createExpressionIfPossible({insideSquareRoot, "^", AlbaNumber::createFraction(1, 2)}));
-    Term insideLogarithm(createExpressionIfPossible({term, "+", squareRootTerm}));
-    Term rightSideTerm(ln(insideLogarithm));
-    return {leftSideTerm, "=", rightSideTerm};
-}
-
-Equation getHyperbolicArcCosineDefinition(Term const& term) {
-    Term leftSideTerm(arccosh(term));
-    Term insideSquareRoot(createExpressionIfPossible({term, "^", 2, "-", 1}));
-    Term squareRootTerm(createExpressionIfPossible({insideSquareRoot, "^", AlbaNumber::createFraction(1, 2)}));
-    Term insideLogarithm(createExpressionIfPossible({term, "+", squareRootTerm}));
-    Term rightSideTerm(ln(insideLogarithm));
-    return {leftSideTerm, "=", rightSideTerm};
-}
-
-Equation getHyperbolicArcTangentDefinition(Term const& term) {
-    Term leftSideTerm(arctanh(term));
-    Term oneMinusTerm(createExpressionIfPossible({1, "-", term}));
-    Term onePlusTerm(createExpressionIfPossible({1, "+", term}));
-    Term insideLogarithm(createExpressionIfPossible({oneMinusTerm, "/", onePlusTerm}));
-    Term logarithmTerm(ln(insideLogarithm));
-    Term rightSideTerm(createExpressionIfPossible({AlbaNumber::createFraction(1, 2), "*", logarithmTerm}));
-    return {leftSideTerm, "=", rightSideTerm};
-}
-
-Equation getHyperbolicArcCotangentDefinition(Term const& term) {
-    Term leftSideTerm(arccoth(term));
-    Term termPlusOne(createExpressionIfPossible({term, "+", 1}));
-    Term termMinusOne(createExpressionIfPossible({term, "-", 1}));
-    Term insideLogarithm(createExpressionIfPossible({termPlusOne, "/", termMinusOne}));
-    Term logarithmTerm(ln(insideLogarithm));
-    Term rightSideTerm(createExpressionIfPossible({AlbaNumber::createFraction(1, 2), "*", logarithmTerm}));
-    return {leftSideTerm, "=", rightSideTerm};
 }
 
 }  // namespace alba::algebra

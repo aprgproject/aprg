@@ -16,6 +16,9 @@ bool AlbaNumberInterval::operator==(AlbaNumberInterval const& second) const {
     return m_lowerEndpoint == second.m_lowerEndpoint && m_higherEndpoint == second.m_higherEndpoint;
 }
 
+AlbaNumberIntervalEndpoint const& AlbaNumberInterval::getLowerEndpoint() const { return m_lowerEndpoint; }
+AlbaNumberIntervalEndpoint const& AlbaNumberInterval::getHigherEndpoint() const { return m_higherEndpoint; }
+
 bool AlbaNumberInterval::isValueInsideTheInterval(AlbaNumber const& value) const {
     AlbaNumber const& lowerEndpointValue(m_lowerEndpoint.getValue());
     AlbaNumber const& higherEndpointValue(m_higherEndpoint.getValue());
@@ -50,9 +53,6 @@ bool AlbaNumberInterval::isIntervalInsideTheInterval(AlbaNumberInterval const& i
     return isEndpointInsideTheInterval(interval.getLowerEndpoint()) &&
            isEndpointInsideTheInterval(interval.getHigherEndpoint());
 }
-
-AlbaNumberIntervalEndpoint const& AlbaNumberInterval::getLowerEndpoint() const { return m_lowerEndpoint; }
-AlbaNumberIntervalEndpoint const& AlbaNumberInterval::getHigherEndpoint() const { return m_higherEndpoint; }
 
 void AlbaNumberInterval::setNewEndpoint(AlbaNumberIntervalEndpoint const& endpoint) {
     if (endpoint.getValue() < m_lowerEndpoint.getValue()) {

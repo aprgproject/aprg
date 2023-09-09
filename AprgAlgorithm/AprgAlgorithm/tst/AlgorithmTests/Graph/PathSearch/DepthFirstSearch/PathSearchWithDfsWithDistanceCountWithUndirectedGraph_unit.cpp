@@ -6,6 +6,7 @@
 namespace alba::algorithm {
 
 namespace {
+
 using VertexForTest = int;
 using ContentMapForTest = GraphTypes<VertexForTest>::VertexToIntMap;
 using GraphForTest = UndirectedGraphWithListOfEdges<VertexForTest>;
@@ -21,6 +22,7 @@ void putConnectionsForTest(GraphForTest& graph) {
     graph.connect(3, 4);
     graph.connect(3, 5);
 }
+
 }  // namespace
 
 TEST(PathSearchUsingDfsWithDistanceCountTest, GetDistanceToWorksWithUndirectedGraph) {

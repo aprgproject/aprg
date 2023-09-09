@@ -23,22 +23,88 @@ bool Ellipse::operator==(Ellipse const& ellipse) const {
 
 bool Ellipse::operator!=(Ellipse const& ellipse) const { return !((*this) == ellipse); }
 
-/*double Ellipse::getCircumference(int depthOfCalculation) const
-{
-    double h = pow(m_aValue-m_bValue, 2)/pow(m_aValue+m_bValue, 2);
-    double totalFactor = 0;
-    double currentFactor = 1;
-    for(int i = 0; i<depthOfCalculation; i++)
-    {
-        totalFactor += currentFactor;
-        currentFactor = currentFactor*h;
+Line Ellipse::getMajorAxis() const {
+    Line result;
+    Points vertices(getMajorVertices());
+    if (2 == vertices.size()) {
+        result = Line(vertices[0], vertices[1]);
     }
-    return getPi()*2*m_radius;
-}*/
-bool Ellipse::isInside(Point const& point) const {
-    return (pow((point.getX() - m_center.getX()) / m_aValue, 2)) +
-               (pow((point.getY() - m_center.getY()) / m_bValue, 2)) <=
-           1;
+    return result;
+}
+
+Line Ellipse::getMinorAxis() const {
+    Line result;
+    Points vertices(getMinorVertices());
+    if (2 == vertices.size()) {
+        result = Line(vertices[0], vertices[1]);
+    }
+    return result;
+}
+
+Point Ellipse::getCenter() const { return m_center; }
+
+Points Ellipse::getFoci() const {
+    Points foci;
+    double a(m_aValue);
+    double b(m_bValue);
+    if (isAlmostEqual(a, b)) {
+        foci.emplace_back(m_center);
+    } else if (a > b) {
+        double c(getCValue());
+        foci.emplace_back(m_center + Point(c, 0));
+        foci.emplace_back(m_center - Point(c, 0));
+    } else if (a < b) {
+        double c(getCValue());
+        foci.emplace_back(m_center + Point(0, c));
+        foci.emplace_back(m_center - Point(0, c));
+    }
+    return foci;
+}
+
+Points Ellipse::getMajorVertices() const {
+    Points principalVertices;
+    if (!isAlmostEqual(m_aValue, m_bValue)) {
+        if (m_aValue > m_bValue) {
+            principalVertices.emplace_back(m_center + Point(m_aValue, 0));
+            principalVertices.emplace_back(m_center - Point(m_aValue, 0));
+        } else if (m_aValue < m_bValue) {
+            principalVertices.emplace_back(m_center + Point(0, m_bValue));
+            principalVertices.emplace_back(m_center - Point(0, m_bValue));
+        }
+    }
+    return principalVertices;
+}
+
+Points Ellipse::getMinorVertices() const {
+    Points minorVertices;
+    if (!isAlmostEqual(m_aValue, m_bValue)) {
+        if (m_aValue > m_bValue) {
+            minorVertices.emplace_back(m_center + Point(0, m_bValue));
+            minorVertices.emplace_back(m_center - Point(0, m_bValue));
+        } else if (m_aValue < m_bValue) {
+            minorVertices.emplace_back(m_center + Point(m_aValue, 0));
+            minorVertices.emplace_back(m_center - Point(m_aValue, 0));
+        }
+    }
+    return minorVertices;
+}
+
+Points Ellipse::getPointsForCircumference(double const interval) const {
+    Points result;
+    if (!isAlmostEqual(m_aValue, 0.0) && !isAlmostEqual(m_bValue, 0.0)) {
+        Points pointsInFirstQuarter(getPointsInTraversingXAndY(1, 1, interval));
+        Points pointsInSecondQuarter(getPointsInTraversingXAndY(-1, 1, interval));
+        Points pointsInThirdQuarter(getPointsInTraversingXAndY(-1, -1, interval));
+        Points pointsInFourthQuarter(getPointsInTraversingXAndY(1, -1, interval));
+        result.reserve(
+            pointsInFirstQuarter.size() + pointsInSecondQuarter.size() + pointsInThirdQuarter.size() +
+            pointsInFourthQuarter.size());
+        copy(pointsInFirstQuarter.cbegin(), pointsInFirstQuarter.cend() - 1, back_inserter(result));
+        copy(pointsInSecondQuarter.cbegin(), pointsInSecondQuarter.cend() - 1, back_inserter(result));
+        copy(pointsInThirdQuarter.cbegin(), pointsInThirdQuarter.cend() - 1, back_inserter(result));
+        copy(pointsInFourthQuarter.cbegin(), pointsInFourthQuarter.cend() - 1, back_inserter(result));
+    }
+    return result;
 }
 
 double Ellipse::getAValue() const { return m_aValue; }
@@ -100,88 +166,22 @@ double Ellipse::calculateXFromYWithoutCenter(double const y, double const signOf
     return pow(1 - pow(y / m_bValue, 2), 0.5) * signOfRoot * m_aValue;
 }
 
-Point Ellipse::getCenter() const { return m_center; }
-
-Points Ellipse::getFoci() const {
-    Points foci;
-    double a(m_aValue);
-    double b(m_bValue);
-    if (isAlmostEqual(a, b)) {
-        foci.emplace_back(m_center);
-    } else if (a > b) {
-        double c(getCValue());
-        foci.emplace_back(m_center + Point(c, 0));
-        foci.emplace_back(m_center - Point(c, 0));
-    } else if (a < b) {
-        double c(getCValue());
-        foci.emplace_back(m_center + Point(0, c));
-        foci.emplace_back(m_center - Point(0, c));
+/*double Ellipse::getCircumference(int depthOfCalculation) const
+{
+    double h = pow(m_aValue-m_bValue, 2)/pow(m_aValue+m_bValue, 2);
+    double totalFactor = 0;
+    double currentFactor = 1;
+    for(int i = 0; i<depthOfCalculation; i++)
+    {
+        totalFactor += currentFactor;
+        currentFactor = currentFactor*h;
     }
-    return foci;
-}
-
-Points Ellipse::getMajorVertices() const {
-    Points principalVertices;
-    if (!isAlmostEqual(m_aValue, m_bValue)) {
-        if (m_aValue > m_bValue) {
-            principalVertices.emplace_back(m_center + Point(m_aValue, 0));
-            principalVertices.emplace_back(m_center - Point(m_aValue, 0));
-        } else if (m_aValue < m_bValue) {
-            principalVertices.emplace_back(m_center + Point(0, m_bValue));
-            principalVertices.emplace_back(m_center - Point(0, m_bValue));
-        }
-    }
-    return principalVertices;
-}
-
-Points Ellipse::getMinorVertices() const {
-    Points minorVertices;
-    if (!isAlmostEqual(m_aValue, m_bValue)) {
-        if (m_aValue > m_bValue) {
-            minorVertices.emplace_back(m_center + Point(0, m_bValue));
-            minorVertices.emplace_back(m_center - Point(0, m_bValue));
-        } else if (m_aValue < m_bValue) {
-            minorVertices.emplace_back(m_center + Point(m_aValue, 0));
-            minorVertices.emplace_back(m_center - Point(m_aValue, 0));
-        }
-    }
-    return minorVertices;
-}
-
-Line Ellipse::getMajorAxis() const {
-    Line result;
-    Points vertices(getMajorVertices());
-    if (2 == vertices.size()) {
-        result = Line(vertices[0], vertices[1]);
-    }
-    return result;
-}
-
-Line Ellipse::getMinorAxis() const {
-    Line result;
-    Points vertices(getMinorVertices());
-    if (2 == vertices.size()) {
-        result = Line(vertices[0], vertices[1]);
-    }
-    return result;
-}
-
-Points Ellipse::getPointsForCircumference(double const interval) const {
-    Points result;
-    if (!isAlmostEqual(m_aValue, 0.0) && !isAlmostEqual(m_bValue, 0.0)) {
-        Points pointsInFirstQuarter(getPointsInTraversingXAndY(1, 1, interval));
-        Points pointsInSecondQuarter(getPointsInTraversingXAndY(-1, 1, interval));
-        Points pointsInThirdQuarter(getPointsInTraversingXAndY(-1, -1, interval));
-        Points pointsInFourthQuarter(getPointsInTraversingXAndY(1, -1, interval));
-        result.reserve(
-            pointsInFirstQuarter.size() + pointsInSecondQuarter.size() + pointsInThirdQuarter.size() +
-            pointsInFourthQuarter.size());
-        copy(pointsInFirstQuarter.cbegin(), pointsInFirstQuarter.cend() - 1, back_inserter(result));
-        copy(pointsInSecondQuarter.cbegin(), pointsInSecondQuarter.cend() - 1, back_inserter(result));
-        copy(pointsInThirdQuarter.cbegin(), pointsInThirdQuarter.cend() - 1, back_inserter(result));
-        copy(pointsInFourthQuarter.cbegin(), pointsInFourthQuarter.cend() - 1, back_inserter(result));
-    }
-    return result;
+    return getPi()*2*m_radius;
+}*/
+bool Ellipse::isInside(Point const& point) const {
+    return (pow((point.getX() - m_center.getX()) / m_aValue, 2)) +
+               (pow((point.getY() - m_center.getY()) / m_bValue, 2)) <=
+           1;
 }
 
 void Ellipse::traverseArea(double const interval, TraverseOperation const& traverseOperation) const {

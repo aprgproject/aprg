@@ -12,33 +12,40 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
-bool isConstant(string const& stringObject) {
-    string allCapital(getStringWithCapitalLetters(stringObject));
-    return "TRUE" == allCapital || "FALSE" == allCapital ||
-           std::all_of(stringObject.cbegin(), stringObject.cend(), [](char const c) { return isNumber(c); });
+void addValueTermIfNotEmpty(Terms& terms, string const& valueString) {
+    if (!valueString.empty()) {
+        terms.emplace_back(Term(valueString));
+    }
 }
 
-bool isOperator(string const& stringObject) {
-    return "~" == stringObject || "&" == stringObject || "|" == stringObject || "(" == stringObject ||
-           ")" == stringObject;
-}
-
-bool isPrime(char const character) { return '\'' == character; }
-
-int getOperatorPriority(string const& operatorString) {
-    int result = 0;
-    if ("(" == operatorString) {
-        result = 1;
-    } else if (")" == operatorString) {
-        result = 2;
-    } else if ("~" == operatorString) {
-        result = 3;
-    } else if ("&" == operatorString) {
-        result = 4;
-    } else if ("|" == operatorString) {
-        result = 5;
+Term buildTermIfPossible(string const& termString) {
+    Term result;
+    TermsAggregator aggregator(tokenizeToTerms(termString));
+    aggregator.simplifyTerms();
+    Terms const& simplifiedTerms(aggregator.getTermsConstReference());
+    if (simplifiedTerms.size() == 1) {
+        result = simplifiedTerms[0];
     }
     return result;
+}
+
+Terms tokenizeToTerms(string const& inputString) {
+    Terms tokenizedTerms;
+    string valueString;
+    for (char const c : inputString) {
+        if (!isWhiteSpace(c)) {
+            string characterString(1, c);
+            if (isOperator(characterString)) {
+                addValueTermIfNotEmpty(tokenizedTerms, valueString);
+                valueString.clear();
+                tokenizedTerms.emplace_back(characterString);
+            } else {
+                valueString += characterString;
+            }
+        }
+    }
+    addValueTermIfNotEmpty(tokenizedTerms, valueString);
+    return tokenizedTerms;
 }
 
 string getString(OperatorType const operatorType) {
@@ -91,40 +98,33 @@ string createVariableTermNameForSubstitution(Term const& term) {
     return ss.str();
 }
 
-Term buildTermIfPossible(string const& termString) {
-    Term result;
-    TermsAggregator aggregator(tokenizeToTerms(termString));
-    aggregator.simplifyTerms();
-    Terms const& simplifiedTerms(aggregator.getTermsConstReference());
-    if (simplifiedTerms.size() == 1) {
-        result = simplifiedTerms[0];
+int getOperatorPriority(string const& operatorString) {
+    int result = 0;
+    if ("(" == operatorString) {
+        result = 1;
+    } else if (")" == operatorString) {
+        result = 2;
+    } else if ("~" == operatorString) {
+        result = 3;
+    } else if ("&" == operatorString) {
+        result = 4;
+    } else if ("|" == operatorString) {
+        result = 5;
     }
     return result;
 }
 
-Terms tokenizeToTerms(string const& inputString) {
-    Terms tokenizedTerms;
-    string valueString;
-    for (char const c : inputString) {
-        if (!isWhiteSpace(c)) {
-            string characterString(1, c);
-            if (isOperator(characterString)) {
-                addValueTermIfNotEmpty(tokenizedTerms, valueString);
-                valueString.clear();
-                tokenizedTerms.emplace_back(characterString);
-            } else {
-                valueString += characterString;
-            }
-        }
-    }
-    addValueTermIfNotEmpty(tokenizedTerms, valueString);
-    return tokenizedTerms;
+bool isConstant(string const& stringObject) {
+    string allCapital(getStringWithCapitalLetters(stringObject));
+    return "TRUE" == allCapital || "FALSE" == allCapital ||
+           std::all_of(stringObject.cbegin(), stringObject.cend(), [](char const c) { return isNumber(c); });
 }
 
-void addValueTermIfNotEmpty(Terms& terms, string const& valueString) {
-    if (!valueString.empty()) {
-        terms.emplace_back(Term(valueString));
-    }
+bool isOperator(string const& stringObject) {
+    return "~" == stringObject || "&" == stringObject || "|" == stringObject || "(" == stringObject ||
+           ")" == stringObject;
 }
+
+bool isPrime(char const character) { return '\'' == character; }
 
 }  // namespace alba::booleanAlgebra

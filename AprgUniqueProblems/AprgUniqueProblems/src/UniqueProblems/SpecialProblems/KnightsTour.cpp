@@ -30,10 +30,6 @@ KnightsTour::ChessBoardIndexes KnightsTour::getAClosedKnightsTour() const {
     return result;
 }
 
-bool KnightsTour::isInside(int const x, int const y) const {
-    return x >= 0 && x < static_cast<int>(m_chessBoardX) && y >= 0 && y < static_cast<int>(m_chessBoardY);
-}
-
 int KnightsTour::getNumberOfNeighbors(int const x, int const y) const { return m_neighborMatrix.getEntry(x, y); }
 
 int KnightsTour::countNumberOfNeighbors(int const x, int const y) const {
@@ -66,6 +62,10 @@ int KnightsTour::countNumberOfNeighbors(int const x, int const y) const {
 }
 
 int KnightsTour::getChessBoardIndex(int const x, int const y) const { return static_cast<int>(m_chessBoardX * y + x); }
+
+bool KnightsTour::isInside(int const x, int const y) const {
+    return x >= 0 && x < static_cast<int>(m_chessBoardX) && y >= 0 && y < static_cast<int>(m_chessBoardY);
+}
 
 void KnightsTour::initialize() {
     initializeNeighborMatrix();

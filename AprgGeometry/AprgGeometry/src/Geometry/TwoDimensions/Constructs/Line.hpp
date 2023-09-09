@@ -17,6 +17,11 @@ public:
     Line(double const aCoefficient, double const bCoefficient, Point const& point);         // ax+by+c=0
     bool operator==(Line const& line) const;
     bool operator!=(Line const& line) const;
+    [[nodiscard]] LineType getType() const;
+    [[nodiscard]] Point getAPoint() const;
+    [[nodiscard]] Points getPoints(Point const& first, Point const& second, double const interval) const;
+    [[nodiscard]] Points getPointsWithoutLastPoint(
+        Point const& first, Point const& second, double const interval) const;
     [[nodiscard]] double getXIntercept() const;  // form: a*(x-x0) + b*(y-y0) = 0
     [[nodiscard]] double getYIntercept() const;  // form: a*(x-x0) + b*(y-y0) = 0
     [[nodiscard]] double getSlope() const;
@@ -28,20 +33,14 @@ public:
     [[nodiscard]] double getAUnitIncreaseInY() const;
     [[nodiscard]] double calculateYFromX(double const x) const;
     [[nodiscard]] double calculateXFromY(double const y) const;
-    [[nodiscard]] LineType getType() const;
-    [[nodiscard]] Point getAPoint() const;
-    [[nodiscard]] Points getPoints(Point const& first, Point const& second, double const interval) const;
-    [[nodiscard]] Points getPointsWithoutLastPoint(
-        Point const& first, Point const& second, double const interval) const;
 
 private:
-    static LineType determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX);
-    static LineType determineLineTypeUsingCoefficients(double const aCoefficient, double const bCoefficient);
-
     static void mergePointsFromPointsFromXAndY(
         Points& points, Points const& pointsFromXCoordinate, Points const& pointsFromYCoordinate,
         bool const isDirectionAscendingForX);
 
+    static LineType determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX);
+    static LineType determineLineTypeUsingCoefficients(double const aCoefficient, double const bCoefficient);
     void getPointsForVerticalLine(Points& points, Point const& first, Point const& second, double const interval) const;
     void getPointsForHorizontalLine(
         Points& points, Point const& first, Point const& second, double const interval) const;

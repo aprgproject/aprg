@@ -60,23 +60,6 @@ public:
         m_matrixData.shrink_to_fit();
     }
 
-    // rule of zero
-    bool operator==(AlbaMatrix const& secondMatrix) const {
-        bool isEqual(true);
-        if (m_numberOfColumns != secondMatrix.m_numberOfColumns || m_numberOfRows != secondMatrix.m_numberOfRows) {
-            isEqual = false;
-        } else if (m_matrixData != secondMatrix.m_matrixData) {
-            isEqual = std::equal(
-                m_matrixData.cbegin(), m_matrixData.cend(), secondMatrix.m_matrixData.cbegin(),
-                secondMatrix.m_matrixData.cend(), [](DataType const& first, DataType const& second) {
-                    return isEqualForMathMatrixDataType(first, second);
-                });
-        }
-        return isEqual;
-    }
-
-    bool operator!=(AlbaMatrix const& secondMatrix) const { return !operator==(secondMatrix); }
-
     AlbaMatrix operator+(AlbaMatrix const& secondMatrix) const {
         assert(
             (m_numberOfColumns == secondMatrix.m_numberOfColumns) && (m_numberOfRows == secondMatrix.m_numberOfRows));
@@ -109,6 +92,23 @@ public:
         return getMatrixRaiseToScalarPower(*this, scalarExponent);
     }
 
+    // rule of zero
+    bool operator==(AlbaMatrix const& secondMatrix) const {
+        bool isEqual(true);
+        if (m_numberOfColumns != secondMatrix.m_numberOfColumns || m_numberOfRows != secondMatrix.m_numberOfRows) {
+            isEqual = false;
+        } else if (m_matrixData != secondMatrix.m_matrixData) {
+            isEqual = std::equal(
+                m_matrixData.cbegin(), m_matrixData.cend(), secondMatrix.m_matrixData.cbegin(),
+                secondMatrix.m_matrixData.cend(), [](DataType const& first, DataType const& second) {
+                    return isEqualForMathMatrixDataType(first, second);
+                });
+        }
+        return isEqual;
+    }
+
+    bool operator!=(AlbaMatrix const& secondMatrix) const { return !operator==(secondMatrix); }
+
     AlbaMatrix& operator+=(AlbaMatrix const& secondMatrix) {
         doBinaryAssignmentOperationWithSameDimensions(
             *this, secondMatrix, BinaryFunction<DataType>(std::plus<DataType>()));
@@ -135,20 +135,6 @@ public:
         return self;
     }
 
-    [[nodiscard]] bool isEmpty() const { return m_matrixData.empty(); }
-
-    [[nodiscard]] bool isInside(size_t const xPosition, size_t const yPosition) const {
-        return xPosition < m_numberOfColumns && yPosition < m_numberOfRows;
-    }
-
-    [[nodiscard]] size_t getNumberOfColumns() const { return m_numberOfColumns; }
-    [[nodiscard]] size_t getNumberOfRows() const { return m_numberOfRows; }
-    [[nodiscard]] size_t getNumberOfCells() const { return m_numberOfColumns * m_numberOfRows; }
-
-    [[nodiscard]] size_t getMatrixIndex(size_t const xPosition, size_t const yPosition) const {
-        return getMatrixIndex(xPosition, yPosition, m_numberOfColumns);
-    }
-
     [[nodiscard]] DataType getEntry(size_t const xPosition, size_t const yPosition) const {
         assert(isInside(xPosition, yPosition));
         return m_matrixData[getMatrixIndex(xPosition, yPosition)];
@@ -160,6 +146,19 @@ public:
     }
 
     [[nodiscard]] MatrixData const& getMatrixData() const { return m_matrixData; }
+    [[nodiscard]] size_t getNumberOfColumns() const { return m_numberOfColumns; }
+    [[nodiscard]] size_t getNumberOfRows() const { return m_numberOfRows; }
+    [[nodiscard]] size_t getNumberOfCells() const { return m_numberOfColumns * m_numberOfRows; }
+
+    [[nodiscard]] size_t getMatrixIndex(size_t const xPosition, size_t const yPosition) const {
+        return getMatrixIndex(xPosition, yPosition, m_numberOfColumns);
+    }
+
+    [[nodiscard]] bool isEmpty() const { return m_matrixData.empty(); }
+
+    [[nodiscard]] bool isInside(size_t const xPosition, size_t const yPosition) const {
+        return xPosition < m_numberOfColumns && yPosition < m_numberOfRows;
+    }
 
     void retrieveColumn(MatrixData& column, size_t const xPosition) const {
         column.reserve(m_numberOfRows);
@@ -212,14 +211,6 @@ public:
         MatrixIndexRange const& xRange, MatrixIndexRange const& yRange, LoopFunction const& loopFunction) const {
         xRange.traverse(
             [&](size_t const xValue) { yRange.traverse([&](size_t const yValue) { loopFunction(xValue, yValue); }); });
-    }
-
-    // Use getMatrixDataReference() only if needed
-    MatrixData& getMatrixDataReference() { return m_matrixData; }
-
-    DataType& getEntryReference(size_t const xPosition, size_t const yPosition) {
-        assert(isInside(xPosition, yPosition));
-        return m_matrixData[getMatrixIndex(xPosition, yPosition)];
     }
 
     void setEntry(size_t const xPosition, size_t const yPosition, DataType const& value) {
@@ -294,6 +285,14 @@ public:
                 tempMatrix.m_matrixData[getMatrixIndex(m_numberOfColumns + xPosition, yPosition, newColumns)];
         });
     }
+
+    DataType& getEntryReference(size_t const xPosition, size_t const yPosition) {
+        assert(isInside(xPosition, yPosition));
+        return m_matrixData[getMatrixIndex(xPosition, yPosition)];
+    }
+
+    // Use getMatrixDataReference() only if needed
+    MatrixData& getMatrixDataReference() { return m_matrixData; }
 
 private:
     [[nodiscard]] size_t getMatrixIndex(

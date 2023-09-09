@@ -111,56 +111,12 @@ bool Term::operator<(Term const& second) const {
     return result;
 }
 
-bool Term::isEmpty() const {
-    bool result(false);
-    if (m_type == TermType::Empty) {
-        result = true;
-    } else if (m_type == TermType::Polynomial) {
-        result = getAsPolynomial().isEmpty();
-    } else if (m_type == TermType::Expression) {
-        result = getAsExpression().isEmpty();
-    }
-    return result;
-}
-
-bool Term::isConstant() const { return TermType::Constant == m_type; }
-bool Term::isVariable() const { return TermType::Variable == m_type; }
-bool Term::isOperator() const { return TermType::Operator == m_type; }
-bool Term::isMonomial() const { return TermType::Monomial == m_type; }
-bool Term::isPolynomial() const { return TermType::Polynomial == m_type; }
-bool Term::isExpression() const { return TermType::Expression == m_type; }
-bool Term::isFunction() const { return TermType::Function == m_type; }
-bool Term::isSimplified() const { return m_isSimplified; }
-TermType Term::getTermType() const { return m_type; }
+AlbaNumber const& Term::getAsNumber() const { return getAsConstant().getNumber(); }
 
 Constant const& Term::getAsConstant() const {
     assert(m_type == TermType::Constant);
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     return *static_cast<Constant const*>(m_baseTermDataPointer.get());
-}
-
-Variable const& Term::getAsVariable() const {
-    assert(m_type == TermType::Variable);
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<Variable const*>(m_baseTermDataPointer.get());
-}
-
-Operator const& Term::getAsOperator() const {
-    assert(m_type == TermType::Operator);
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<Operator const*>(m_baseTermDataPointer.get());
-}
-
-Monomial const& Term::getAsMonomial() const {
-    assert(m_type == TermType::Monomial);
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<Monomial const*>(m_baseTermDataPointer.get());
-}
-
-Polynomial const& Term::getAsPolynomial() const {
-    assert(m_type == TermType::Polynomial);
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<Polynomial const*>(m_baseTermDataPointer.get());
 }
 
 Expression const& Term::getAsExpression() const {
@@ -175,7 +131,31 @@ Function const& Term::getAsFunction() const {
     return *static_cast<Function const*>(m_baseTermDataPointer.get());
 }
 
-AlbaNumber const& Term::getAsNumber() const { return getAsConstant().getNumber(); }
+Monomial const& Term::getAsMonomial() const {
+    assert(m_type == TermType::Monomial);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return *static_cast<Monomial const*>(m_baseTermDataPointer.get());
+}
+
+Operator const& Term::getAsOperator() const {
+    assert(m_type == TermType::Operator);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return *static_cast<Operator const*>(m_baseTermDataPointer.get());
+}
+
+Polynomial const& Term::getAsPolynomial() const {
+    assert(m_type == TermType::Polynomial);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return *static_cast<Polynomial const*>(m_baseTermDataPointer.get());
+}
+
+TermType Term::getTermType() const { return m_type; }
+
+Variable const& Term::getAsVariable() const {
+    assert(m_type == TermType::Variable);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return *static_cast<Variable const*>(m_baseTermDataPointer.get());
+}
 
 string Term::getDebugString() const {
     stringstream ss;
@@ -212,59 +192,26 @@ string Term::getDebugString() const {
     return ss.str();
 }
 
-Constant& Term::getAsConstantReference() {
-    clearSimplifiedFlag();
-    assert(m_type == TermType::Constant);
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<Constant*>(m_baseTermDataPointer.get());
+bool Term::isEmpty() const {
+    bool result(false);
+    if (m_type == TermType::Empty) {
+        result = true;
+    } else if (m_type == TermType::Polynomial) {
+        result = getAsPolynomial().isEmpty();
+    } else if (m_type == TermType::Expression) {
+        result = getAsExpression().isEmpty();
+    }
+    return result;
 }
 
-Variable& Term::getAsVariableReference() {
-    clearSimplifiedFlag();
-    assert(m_type == TermType::Variable);
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<Variable*>(m_baseTermDataPointer.get());
-}
-
-Operator& Term::getAsOperatorReference() {
-    clearSimplifiedFlag();
-    assert(m_type == TermType::Operator);
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<Operator*>(m_baseTermDataPointer.get());
-}
-
-Monomial& Term::getAsMonomialReference() {
-    clearSimplifiedFlag();
-    assert(m_type == TermType::Monomial);
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<Monomial*>(m_baseTermDataPointer.get());
-}
-
-Polynomial& Term::getAsPolynomialReference() {
-    clearSimplifiedFlag();
-    assert(m_type == TermType::Polynomial);
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<Polynomial*>(m_baseTermDataPointer.get());
-}
-
-Expression& Term::getAsExpressionReference() {
-    clearSimplifiedFlag();
-    assert((m_type == TermType::Expression));
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<Expression*>(m_baseTermDataPointer.get());
-}
-
-Function& Term::getAsFunctionReference() {
-    clearSimplifiedFlag();
-    assert((m_type == TermType::Function));
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<Function*>(m_baseTermDataPointer.get());
-}
-
-BaseTermUniquePointer Term::createBasePointerByMove() {
-    return static_cast<BaseTermUniquePointer>(
-        make_unique<Term>(m_type, m_isSimplified, std::move(m_baseTermDataPointer)));
-}
+bool Term::isConstant() const { return TermType::Constant == m_type; }
+bool Term::isVariable() const { return TermType::Variable == m_type; }
+bool Term::isOperator() const { return TermType::Operator == m_type; }
+bool Term::isMonomial() const { return TermType::Monomial == m_type; }
+bool Term::isPolynomial() const { return TermType::Polynomial == m_type; }
+bool Term::isExpression() const { return TermType::Expression == m_type; }
+bool Term::isFunction() const { return TermType::Function == m_type; }
+bool Term::isSimplified() const { return m_isSimplified; }
 
 void Term::clear() {
     m_type = TermType::Empty;
@@ -310,6 +257,60 @@ void Term::clearAllInnerSimplifiedFlags() {
         getAsFunctionReference().clearAllInnerSimplifiedFlags();
     }
     clearSimplifiedFlag();
+}
+
+BaseTermUniquePointer Term::createBasePointerByMove() {
+    return static_cast<BaseTermUniquePointer>(
+        make_unique<Term>(m_type, m_isSimplified, std::move(m_baseTermDataPointer)));
+}
+
+Constant& Term::getAsConstantReference() {
+    clearSimplifiedFlag();
+    assert(m_type == TermType::Constant);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return *static_cast<Constant*>(m_baseTermDataPointer.get());
+}
+
+Expression& Term::getAsExpressionReference() {
+    clearSimplifiedFlag();
+    assert((m_type == TermType::Expression));
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return *static_cast<Expression*>(m_baseTermDataPointer.get());
+}
+
+Function& Term::getAsFunctionReference() {
+    clearSimplifiedFlag();
+    assert((m_type == TermType::Function));
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return *static_cast<Function*>(m_baseTermDataPointer.get());
+}
+
+Monomial& Term::getAsMonomialReference() {
+    clearSimplifiedFlag();
+    assert(m_type == TermType::Monomial);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return *static_cast<Monomial*>(m_baseTermDataPointer.get());
+}
+
+Operator& Term::getAsOperatorReference() {
+    clearSimplifiedFlag();
+    assert(m_type == TermType::Operator);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return *static_cast<Operator*>(m_baseTermDataPointer.get());
+}
+
+Polynomial& Term::getAsPolynomialReference() {
+    clearSimplifiedFlag();
+    assert(m_type == TermType::Polynomial);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return *static_cast<Polynomial*>(m_baseTermDataPointer.get());
+}
+
+Variable& Term::getAsVariableReference() {
+    clearSimplifiedFlag();
+    assert(m_type == TermType::Variable);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return *static_cast<Variable*>(m_baseTermDataPointer.get());
 }
 
 Term::BaseTermDataPointer Term::createANewDataPointerFrom(Term const& term) {

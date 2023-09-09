@@ -37,18 +37,6 @@ public:
     }
 
 private:
-    [[nodiscard]] SumsOfPairOfValues getSumsOfPairOfValuesWithPossibleDuplicates() const {
-        SumsOfPairOfValues result;
-        Index size = m_sortedValues.size();
-        result.reserve(size * size);  // reserve this much
-        for (Index i = 0; i < size; ++i) {
-            for (Index j = i; j < size; ++j) {
-                result.emplace_back(m_sortedValues[i] + m_sortedValues[j], i, j);
-            }
-        }
-        return result;
-    }
-
     [[nodiscard]] PairOfSumOfPairOfValues getTwoValuesWithSum(
         Value const& targetSum, SumsOfPairOfValues const& sumOfPairOfValues, Comparator const& shouldContinue) const {
         PairOfSumOfPairOfValues result{};
@@ -66,6 +54,18 @@ private:
                 } else if (currentSum < targetSum) {
                     ++lowIndex;
                 }
+            }
+        }
+        return result;
+    }
+
+    [[nodiscard]] SumsOfPairOfValues getSumsOfPairOfValuesWithPossibleDuplicates() const {
+        SumsOfPairOfValues result;
+        Index size = m_sortedValues.size();
+        result.reserve(size * size);  // reserve this much
+        for (Index i = 0; i < size; ++i) {
+            for (Index j = i; j < size; ++j) {
+                result.emplace_back(m_sortedValues[i] + m_sortedValues[j], i, j);
             }
         }
         return result;

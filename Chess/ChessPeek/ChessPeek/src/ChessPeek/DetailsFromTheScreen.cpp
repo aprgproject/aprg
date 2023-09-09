@@ -20,11 +20,11 @@ DetailsFromTheScreen::DetailsFromTheScreen(Configuration const& configuration)
       m_savedOrientation{},
       m_countOfPieces{} {}
 
+BoardWithContext const& DetailsFromTheScreen::getBoardWithContext() const { return m_boardWithContext; }
+
 bool DetailsFromTheScreen::canAnalyzeBoard() const {
     return areKingsValid() && !m_boardWithContext.isOpponentsKingOnCheck();
 }
-
-BoardWithContext const& DetailsFromTheScreen::getBoardWithContext() const { return m_boardWithContext; }
 
 void DetailsFromTheScreen::saveDetailsFromTheScreen() {
     m_screenMonitoring.capturePixelsFromScreen();
@@ -38,22 +38,6 @@ void DetailsFromTheScreen::saveDetailsFromTheScreen() {
 
 bool DetailsFromTheScreen::areKingsValid() const {
     return m_countOfPieces.numberOfWhiteKings == 1 && m_countOfPieces.numberOfBlackKings == 1;
-}
-
-Board DetailsFromTheScreen::getBoardAndSaveDetails() {
-    Board board;
-    m_countOfPieces = {};
-    for (int j = 0; j < Board::CHESS_SIDE_SIZE; ++j) {
-        for (int i = 0; i < Board::CHESS_SIDE_SIZE; ++i) {
-            Coordinate coordinate(i, j);
-            Piece piece(m_boardObserver.getPieceFromCell(i, j));
-            board.setPieceAt(coordinate, piece);
-            if (!piece.isEmpty()) {
-                saveBoardDetails(coordinate, piece);
-            }
-        }
-    }
-    return board;
 }
 
 void DetailsFromTheScreen::saveBoardDetails(Coordinate const& coordinate, Piece const& piece) {
@@ -163,6 +147,22 @@ void DetailsFromTheScreen::saveOrientationOnLowerHalfColor(PieceColor const lowe
 
 void DetailsFromTheScreen::savePlayerColor(PieceColor const playerColor) { m_savedPlayerColor = playerColor; }
 void DetailsFromTheScreen::saveOrientation(BoardOrientation const orientation) { m_savedOrientation = orientation; }
+
+Board DetailsFromTheScreen::getBoardAndSaveDetails() {
+    Board board;
+    m_countOfPieces = {};
+    for (int j = 0; j < Board::CHESS_SIDE_SIZE; ++j) {
+        for (int i = 0; i < Board::CHESS_SIDE_SIZE; ++i) {
+            Coordinate coordinate(i, j);
+            Piece piece(m_boardObserver.getPieceFromCell(i, j));
+            board.setPieceAt(coordinate, piece);
+            if (!piece.isEmpty()) {
+                saveBoardDetails(coordinate, piece);
+            }
+        }
+    }
+    return board;
+}
 
 }  // namespace ChessPeek
 }  // namespace chess

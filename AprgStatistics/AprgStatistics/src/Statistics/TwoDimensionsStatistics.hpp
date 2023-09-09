@@ -22,8 +22,8 @@ struct LineModel {
     double cCoefficient;
 };
 
-double calculateSquareError(Sample const& sample, LineModel const& lineModel);
 LineModel calculateLineModelUsingLeastSquares(Samples const& samples);
 ValueToSampleMultimap getSquareErrorToSampleMultimap(Samples& samples, LineModel const& lineModel);
+double calculateSquareError(Sample const& sample, LineModel const& lineModel);
 
 }  // namespace alba::TwoDimensionsStatistics

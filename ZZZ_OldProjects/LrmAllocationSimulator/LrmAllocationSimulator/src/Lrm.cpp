@@ -17,6 +17,20 @@ Lrm::Lrm(HardwareConfiguration& hardwareConfiguration)
       m_addressToDspMap(m_hardwareConfigurationReference.getAddressToDspMapReference()),
       m_addressToFspMap(m_hardwareConfigurationReference.getAddressToFspMapReference()) {}
 
+void Lrm::setHibernationCommissioned(bool const isHibernationCommissioned) {
+    m_isHibernationCommissioned = isHibernationCommissioned;
+}
+
+void Lrm::setNumberOfUnallocatedPicPoolsPerLcg(unsigned int const lcgId, unsigned int const numberOfPicPools) {
+    m_lcgToUnallocatedPicPools[lcgId] = (numberOfPicPools != 0U);
+}
+
+void Lrm::clearLcgToUnallocatedPicPools(unsigned int const lcgId) { m_lcgToUnallocatedPicPools.erase(lcgId); }
+
+void Lrm::setMaxAmountOfNonDcdsPerFsp(unsigned int const maxAmountOfNonDcdsPerFsp) {
+    m_maxAmountOfNonDcdsPerFsp = maxAmountOfNonDcdsPerFsp;
+}
+
 SelectionDspResult Lrm::allocateMcdForLcgIdAccordingToMark(unsigned int const lcgId) {
     SelectionDspResult result;
     SelectionDspResult fspSelectionResult = selectFspForEmptyDspForMcd(lcgId);
@@ -35,6 +49,55 @@ SelectionDspResult Lrm::allocateMcdForLcgIdAccordingToMark(unsigned int const lc
             result.isSelectionSuccessful = true;
             result.address = dspSelectionResult.address;
             changeModeAndUpdateDspDetails(result, DspMode::NyquistMixedChannelDevice);
+        }
+    }
+    return result;
+}
+
+SelectionDspResult Lrm::allocateNbicMcdForLcgIdAccordingToMark(unsigned int const lcgId) {
+    SelectionDspResult result;
+    SelectionDspResult fspSelectionResult = selectFspForEmptyDspForNbicMcd(lcgId);
+    if (fspSelectionResult.isSelectionSuccessful) {
+        SelectionDspResult dspSelectionResult =
+            selectEmptyDspPriotizingNyquistTypeAndAddressInFsp(lcgId, fspSelectionResult.address);
+        if (dspSelectionResult.isSelectionSuccessful) {
+            result.dliPool = getFreeDliToAllocateForDsp(dspSelectionResult.address);
+            if (result.dliPool != 0) {
+                result.isSelectionSuccessful = true;
+                result.address = dspSelectionResult.address;
+                result.isNbicAllocated = true;
+                changeModeAndUpdateDspDetails(result, DspMode::NyquistMixedChannelDevice);
+            }
+        }
+    }
+    if (!result.isSelectionSuccessful) {
+        SelectionDspResult dspSelectionResult = selectNonEmptyDspToClearForNbicMcd(lcgId);
+        if (dspSelectionResult.isSelectionSuccessful) {
+            result.dliPool = getFreeDliToAllocateForDsp(dspSelectionResult.address);
+            if (result.dliPool != 0) {
+                result.isSelectionSuccessful = true;
+                result.address = dspSelectionResult.address;
+                result.isNbicAllocated = true;
+                changeModeAndUpdateDspDetails(result, DspMode::NyquistMixedChannelDevice);
+            }
+        }
+    }
+    return result;
+}
+
+SelectionDspResult Lrm::allocatePicForLcgIdAccordingToMark(unsigned int const lcgId) {
+    SelectionDspResult result;
+    SelectionDspResult fspSelectionResult = selectFspForPic(lcgId);
+    if (fspSelectionResult.isSelectionSuccessful) {
+        SelectionDspResult dspSelectionResult =
+            selectTnPriotizingLessUsersAndHsupaCfsInFsp(lcgId, fspSelectionResult.address);
+        if (dspSelectionResult.isSelectionSuccessful) {
+            result.dliPool = getFreeDliToAllocateForDsp(dspSelectionResult.address);
+            if (result.dliPool != 0) {
+                result.isSelectionSuccessful = true;
+                result.address = dspSelectionResult.address;
+                changeModeAndUpdateDspDetails(result, DspMode::NyquistPicDevice);
+            }
         }
     }
     return result;
@@ -70,37 +133,6 @@ SelectionDspResultForCcdAndMcd Lrm::allocateCcdMcdForLcgIdAccordingToMark(unsign
         }
     }
     return ccdMcdAddress;
-}
-
-SelectionDspResult Lrm::allocateNbicMcdForLcgIdAccordingToMark(unsigned int const lcgId) {
-    SelectionDspResult result;
-    SelectionDspResult fspSelectionResult = selectFspForEmptyDspForNbicMcd(lcgId);
-    if (fspSelectionResult.isSelectionSuccessful) {
-        SelectionDspResult dspSelectionResult =
-            selectEmptyDspPriotizingNyquistTypeAndAddressInFsp(lcgId, fspSelectionResult.address);
-        if (dspSelectionResult.isSelectionSuccessful) {
-            result.dliPool = getFreeDliToAllocateForDsp(dspSelectionResult.address);
-            if (result.dliPool != 0) {
-                result.isSelectionSuccessful = true;
-                result.address = dspSelectionResult.address;
-                result.isNbicAllocated = true;
-                changeModeAndUpdateDspDetails(result, DspMode::NyquistMixedChannelDevice);
-            }
-        }
-    }
-    if (!result.isSelectionSuccessful) {
-        SelectionDspResult dspSelectionResult = selectNonEmptyDspToClearForNbicMcd(lcgId);
-        if (dspSelectionResult.isSelectionSuccessful) {
-            result.dliPool = getFreeDliToAllocateForDsp(dspSelectionResult.address);
-            if (result.dliPool != 0) {
-                result.isSelectionSuccessful = true;
-                result.address = dspSelectionResult.address;
-                result.isNbicAllocated = true;
-                changeModeAndUpdateDspDetails(result, DspMode::NyquistMixedChannelDevice);
-            }
-        }
-    }
-    return result;
 }
 
 SelectionDspResultForCcdAndMcd Lrm::allocateCcdNbicMcdForLcgIdAccordingToMark(unsigned int const lcgId) {
@@ -144,36 +176,49 @@ SelectionDspResultForCcdAndMcd Lrm::allocateCcdNbicMcdForLcgIdAccordingToMark(un
     return ccdMcdAddress;
 }
 
-SelectionDspResult Lrm::allocatePicForLcgIdAccordingToMark(unsigned int const lcgId) {
-    SelectionDspResult result;
-    SelectionDspResult fspSelectionResult = selectFspForPic(lcgId);
-    if (fspSelectionResult.isSelectionSuccessful) {
-        SelectionDspResult dspSelectionResult =
-            selectTnPriotizingLessUsersAndHsupaCfsInFsp(lcgId, fspSelectionResult.address);
-        if (dspSelectionResult.isSelectionSuccessful) {
-            result.dliPool = getFreeDliToAllocateForDsp(dspSelectionResult.address);
-            if (result.dliPool != 0) {
-                result.isSelectionSuccessful = true;
-                result.address = dspSelectionResult.address;
-                changeModeAndUpdateDspDetails(result, DspMode::NyquistPicDevice);
-            }
-        }
+void Lrm::setSelectionDspResult(SelectionDspResult& selectionDspResultReference, unsigned int const fspAddress) {
+    selectionDspResultReference.isSelectionSuccessful = true;
+    selectionDspResultReference.address = fspAddress;
+}
+
+void Lrm::incrementNAndTnCountBasedOnNyquistType(
+    NyquistAndTurboNyquistCount& countReference, NyquistType const nyquistType) {
+    if (nyquistType == NyquistType::Nyquist) {
+        countReference.numberOfNyquists++;
+    } else {
+        countReference.numberOfTurboNyquists++;
     }
-    return result;
 }
 
-void Lrm::setHibernationCommissioned(bool const isHibernationCommissioned) {
-    m_isHibernationCommissioned = isHibernationCommissioned;
+void Lrm::sortFspPairsBasedOnCondition(
+    FspPairsDetails& fspPairsDetails, FspPairDetailsComparisonCondition const& condition) {
+    stable_sort(
+        fspPairsDetails.begin(), fspPairsDetails.end(),
+        [&](FspPairDetails const& fspPairDetails1, FspPairDetails const& fspPairDetails2) {
+            return condition(fspPairDetails1, fspPairDetails2);
+        });
 }
 
-void Lrm::setNumberOfUnallocatedPicPoolsPerLcg(unsigned int const lcgId, unsigned int const numberOfPicPools) {
-    m_lcgToUnallocatedPicPools[lcgId] = (numberOfPicPools != 0U);
+void Lrm::removeFspPairsBasedOnCondition(FspPairsDetails& fspPairsDetails, FspPairDetailsCondition const& condition) {
+    fspPairsDetails.erase(
+        remove_if(
+            fspPairsDetails.begin(), fspPairsDetails.end(),
+            [&](FspPairDetails const& fspPairDetails) { return condition(fspPairDetails); }),
+        fspPairsDetails.end());
 }
 
-void Lrm::clearLcgToUnallocatedPicPools(unsigned int const lcgId) { m_lcgToUnallocatedPicPools.erase(lcgId); }
+void Lrm::changeMode(Dsp& dspToChange, DspMode const dspMode) { dspToChange.setMode(dspMode); }
 
-void Lrm::setMaxAmountOfNonDcdsPerFsp(unsigned int const maxAmountOfNonDcdsPerFsp) {
-    m_maxAmountOfNonDcdsPerFsp = maxAmountOfNonDcdsPerFsp;
+void Lrm::setDliIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic, unsigned int const dliPool) {
+    if (dspMode == DspMode::NyquistPicDevice || (dspMode == DspMode::NyquistMixedChannelDevice && isNbic)) {
+        dspToChange.setDliPool(dliPool);
+    }
+}
+
+void Lrm::setAsNbicIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic) {
+    if (dspMode == DspMode::NyquistMixedChannelDevice && isNbic) {
+        dspToChange.setIsNbicAllocated(isNbic);
+    }
 }
 
 /*
@@ -270,105 +315,287 @@ unsigned int Lrm::getLeastConflictingDliPoolForThisDli(unsigned int const dliPoo
     return leastConflictPool;
 }
 
-void Lrm::setSelectionDspResult(SelectionDspResult& selectionDspResultReference, unsigned int const fspAddress) {
-    selectionDspResultReference.isSelectionSuccessful = true;
-    selectionDspResultReference.address = fspAddress;
+FspAddresses Lrm::selectFspsForCcdMcd(unsigned int const lcgId) const {
+    FspAddresses fspAddresses;
+    copyFspWithAtLeastThisNumberOfEmptyNAndTnAndBelowMaxAmountOfNonDcds(fspAddresses, 1, lcgId);
+    sortFspBasedPriorityForCcdMcdSelection(fspAddresses, lcgId);
+    removeNotNeededFspsForCcdMcd(fspAddresses, lcgId);
+    return fspAddresses;
 }
 
-void Lrm::incrementNAndTnCountBasedOnNyquistType(
-    NyquistAndTurboNyquistCount& countReference, NyquistType const nyquistType) {
-    if (nyquistType == NyquistType::Nyquist) {
-        countReference.numberOfNyquists++;
-    } else {
-        countReference.numberOfTurboNyquists++;
+FspAddresses Lrm::selectFspsForCcdMcd2(unsigned int const lcgId) const {
+    FspAddresses fspAddresses;
+    FspPairsDetails fspPairsDetails;
+    copyAllFspPairs(fspPairsDetails);
+    updatePriorityForAllFspPairs(fspPairsDetails, lcgId);
+    sortFspPairsForCcdMcdSelection(fspPairsDetails);
+    removeFspPairsForCcdMcdSelection(fspPairsDetails, lcgId);
+    if (!fspPairsDetails.empty()) {
+        FspPairDetails const& mostPrioritizedPair(fspPairsDetails.front());
+        fspAddresses.emplace_back(mostPrioritizedPair.firstFspAddress);
+        fspAddresses.emplace_back(mostPrioritizedPair.secondFspAddress);
     }
+    return fspAddresses;
 }
 
-void Lrm::sortFspPairsBasedOnCondition(
-    FspPairsDetails& fspPairsDetails, FspPairDetailsComparisonCondition const& condition) {
-    stable_sort(
-        fspPairsDetails.begin(), fspPairsDetails.end(),
-        [&](FspPairDetails const& fspPairDetails1, FspPairDetails const& fspPairDetails2) {
-            return condition(fspPairDetails1, fspPairDetails2);
-        });
+FspAddresses Lrm::selectFspsForCcdNbicMcd(unsigned int const lcgId) const {
+    FspAddresses fspAddresses;
+    copyFspWithAtLeastThisNumberOfEmptyNAndTnAndBelowMaxAmountOfNonDcds(fspAddresses, 1, lcgId);
+    sortFspBasedPriorityForCcdMcdSelection(fspAddresses, lcgId);
+    removeNotNeededFspsForCcdNbicMcd(fspAddresses, lcgId);
+    return fspAddresses;
 }
 
-void Lrm::removeFspPairsBasedOnCondition(FspPairsDetails& fspPairsDetails, FspPairDetailsCondition const& condition) {
-    fspPairsDetails.erase(
-        remove_if(
-            fspPairsDetails.begin(), fspPairsDetails.end(),
-            [&](FspPairDetails const& fspPairDetails) { return condition(fspPairDetails); }),
-        fspPairsDetails.end());
-}
-
-void Lrm::changeMode(Dsp& dspToChange, DspMode const dspMode) { dspToChange.setMode(dspMode); }
-
-void Lrm::setDliIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic, unsigned int const dliPool) {
-    if (dspMode == DspMode::NyquistPicDevice || (dspMode == DspMode::NyquistMixedChannelDevice && isNbic)) {
-        dspToChange.setDliPool(dliPool);
+FspAddresses Lrm::selectFspsForCcdNbicMcd2(unsigned int const lcgId) const {
+    FspAddresses fspAddresses;
+    FspPairsDetails fspPairsDetails;
+    copyAllFspPairs(fspPairsDetails);
+    updatePriorityForAllFspPairs(fspPairsDetails, lcgId);
+    sortFspPairsForCcdMcdSelection(fspPairsDetails);
+    removeFspPairsForCcdNbicMcdSelection(fspPairsDetails, lcgId);
+    if (!fspPairsDetails.empty()) {
+        FspPairDetails const& mostPrioritizedPair(fspPairsDetails.front());
+        fspAddresses.emplace_back(mostPrioritizedPair.firstFspAddress);
+        fspAddresses.emplace_back(mostPrioritizedPair.secondFspAddress);
+        fixFspsForNbic(fspAddresses, lcgId);
     }
+    return fspAddresses;
 }
 
-void Lrm::setAsNbicIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic) {
-    if (dspMode == DspMode::NyquistMixedChannelDevice && isNbic) {
-        dspToChange.setIsNbicAllocated(isNbic);
-    }
-}
-
-bool Lrm::isThereSpaceForTnForMcdOrCcdConsideringPic(
-    unsigned int const fspAddress, unsigned int const numberOfMcdOrCcd, unsigned int const lcgId) const {
+NyquistAndTurboNyquistCount Lrm::getNumberOfEmptyNAndTnOfFspAndLcg(
+    unsigned int const fspAddress, unsigned int const lcgId) const {
+    NyquistAndTurboNyquistCount result{0, 0};
     Fsp const& fsp(m_addressToFspMap.at(fspAddress));
-    bool isThereSpace(false);
-    if (isSharedLcg(lcgId)) {
-        if (fsp.getSmType() == SmType::MSM) {
-            NyquistAndTurboNyquistCount emptyNAndTnCountInMsmOfLcg = getNumberOfEmptyNAndTnInMsmOfLcg(lcgId);
-            isThereSpace = canTnBeAllocatedBasedOnPicAndNumberOfTnToBeAllocated(
-                emptyNAndTnCountInMsmOfLcg, numberOfMcdOrCcd, lcgId);
+    DspAddresses const& dspAddresses(fsp.getDspAddresses());
+    for (unsigned int const dspAddress : dspAddresses) {
+        Dsp& currentDsp(m_addressToDspMap.at(dspAddress));
+        if (currentDsp.getLcgId() == lcgId && currentDsp.isEmpty()) {
+            incrementNAndTnCountBasedOnNyquistType(result, currentDsp.getNyquistType());
+        }
+    }
+    return result;
+}
+
+NyquistAndTurboNyquistCount Lrm::getNumberOfNAndTnWithoutCfsOfFspAndLcg(
+    unsigned int const fspAddress, unsigned int const lcgId) const {
+    NyquistAndTurboNyquistCount result{0, 0};
+    Fsp const& fsp(m_addressToFspMap.at(fspAddress));
+    DspAddresses const& dspAddresses(fsp.getDspAddresses());
+    for (unsigned int const dspAddress : dspAddresses) {
+        Dsp& currentDsp(m_addressToDspMap.at(dspAddress));
+        if (currentDsp.getLcgId() == lcgId && currentDsp.getNumberOfHsupaCfs() == 0 &&
+            currentDsp.getNumberOfHsRachCfs() == 0) {
+            incrementNAndTnCountBasedOnNyquistType(result, currentDsp.getNyquistType());
+        }
+    }
+    return result;
+}
+
+NyquistAndTurboNyquistCount Lrm::getNumberOfEmptyNAndTnOfLcg(unsigned int const lcgId) const {
+    NyquistAndTurboNyquistCount result{0, 0};
+    for (auto const& addressToDspPair : m_addressToDspMap) {
+        Dsp const& currentDsp(addressToDspPair.second);
+        if (currentDsp.getLcgId() == lcgId && currentDsp.isEmpty()) {
+            incrementNAndTnCountBasedOnNyquistType(result, currentDsp.getNyquistType());
+        }
+    }
+    return result;
+}
+
+NyquistAndTurboNyquistCount Lrm::getNumberOfEmptyNAndTnInMsmOfLcg(unsigned int const lcgId) const {
+    NyquistAndTurboNyquistCount result{0, 0};
+    for (auto const& addressToDspPair : m_addressToDspMap) {
+        Dsp const& currentDsp(addressToDspPair.second);
+        Fsp const& currentFsp(m_addressToFspMap.at(currentDsp.getFspAddress()));
+        if (currentDsp.getLcgId() == lcgId && currentDsp.isEmpty() && currentFsp.getSmType() == SmType::MSM) {
+            incrementNAndTnCountBasedOnNyquistType(result, currentDsp.getNyquistType());
+        }
+    }
+    return result;
+}
+
+SelectionDspResult Lrm::selectFspForEmptyDspForMcd(unsigned int const lcgId) const {
+    SelectionDspResult result;
+    FspAddresses fspAddresses;
+    copyFspWithAtLeastThisNumberOfEmptyNAndTnAndBelowMaxAmountOfNonDcds(fspAddresses, 1, lcgId);
+    sortFspBasedPriorityForMcdSelection(fspAddresses, lcgId);
+    removeNotNeededFspsForMcd(fspAddresses, lcgId);
+    if (!fspAddresses.empty()) {
+        setSelectionDspResult(result, fspAddresses.front());
+    }
+    return result;
+}
+
+SelectionDspResult Lrm::selectNonEmptyDspToClearForMcd(unsigned int const lcgId) const {
+    SelectionDspResult result;
+    DspAddresses dspAddresses;
+    copyDspAddressesThatSatisfiesThisCondition(dspAddresses, [&](Dsp const& currentDsp) {
+        return currentDsp.getLcgId() == lcgId &&
+               (currentDsp.getMode() == DspMode::NyquistDedicatedChannelDevice ||
+                currentDsp.getMode() == DspMode::NyquistPicDevice) &&
+               !currentDsp.hasEmergencyCalls() && currentDsp.getNumberOfHsRachCfs() == 0;
+    });
+    sortDspAddressesBasedOnCondition(dspAddresses, [&](Dsp const& dsp1, Dsp const& dsp2) {
+        unsigned int priorityBasedOnModeForDsp1 = (dsp1.getMode() == DspMode::NyquistDedicatedChannelDevice) ? 2 : 1;
+        unsigned int priorityBasedOnModeForDsp2 = (dsp2.getMode() == DspMode::NyquistDedicatedChannelDevice) ? 2 : 1;
+        unsigned int priorityBasedOnHsupaCfsExistenceForDsp1 = (dsp1.getNumberOfHsupaCfs() == 0) ? 2 : 1;
+        unsigned int priorityBasedOnHsupaCfsExistenceForDsp2 = (dsp2.getNumberOfHsupaCfs() == 0) ? 2 : 1;
+        unsigned int numberOfNonDcdsOnFspOfDsp1(getNumberOfNonDcdsInFsp(dsp1.getFspAddress()));
+        unsigned int numberOfNonDcdsOnFspOfDsp2(getNumberOfNonDcdsInFsp(dsp2.getFspAddress()));
+        unsigned int priorityOfNumberOfDchUsersForDsp1 =
+            (dsp1.getNumberOfHsupaCfs() == 0) ? dsp1.getNumberOfDchUsers() : 0;
+        unsigned int priorityOfNumberOfDchUsersForDsp2 =
+            (dsp2.getNumberOfHsupaCfs() == 0) ? dsp2.getNumberOfDchUsers() : 0;
+        unsigned int priorityOrderCountForHsupaCfsForDsp1 = dsp1.getOrderCountOfCfAllocation();
+        unsigned int priorityOrderCountForHsupaCfsForDsp2 = dsp2.getOrderCountOfCfAllocation();
+        unsigned int numberOfPrereservedHsupaCfsForDsp1 = dsp1.getNumberOfPreservedHsupaCfs();
+        unsigned int numberOfPrereservedHsupaCfsForDsp2 = dsp2.getNumberOfPreservedHsupaCfs();
+        bool result(false);
+        if (priorityBasedOnModeForDsp1 != priorityBasedOnModeForDsp2) {
+            result = priorityBasedOnModeForDsp1 > priorityBasedOnModeForDsp2;
+        } else if (priorityBasedOnHsupaCfsExistenceForDsp1 != priorityBasedOnHsupaCfsExistenceForDsp2) {
+            result = priorityBasedOnHsupaCfsExistenceForDsp1 > priorityBasedOnHsupaCfsExistenceForDsp2;
+        } else if (m_isHibernationCommissioned && numberOfNonDcdsOnFspOfDsp1 != numberOfNonDcdsOnFspOfDsp2) {
+            result = numberOfNonDcdsOnFspOfDsp1 < numberOfNonDcdsOnFspOfDsp2;
+        } else if (priorityOfNumberOfDchUsersForDsp1 != priorityOfNumberOfDchUsersForDsp2) {
+            result = priorityOfNumberOfDchUsersForDsp1 < priorityOfNumberOfDchUsersForDsp2;
+        } else if (priorityOrderCountForHsupaCfsForDsp1 != priorityOrderCountForHsupaCfsForDsp2) {
+            result = priorityOrderCountForHsupaCfsForDsp1 > priorityOrderCountForHsupaCfsForDsp2;
+        } else if (numberOfPrereservedHsupaCfsForDsp1 != numberOfPrereservedHsupaCfsForDsp2) {
+            result = numberOfPrereservedHsupaCfsForDsp1 < numberOfPrereservedHsupaCfsForDsp2;
         } else {
-            isThereSpace = true;
+            result = dsp1.getAddress() < dsp2.getAddress();
         }
-    } else {
-        NyquistAndTurboNyquistCount emptyNAndTnCountOfLcg = getNumberOfEmptyNAndTnOfLcg(lcgId);
-        isThereSpace =
-            canTnBeAllocatedBasedOnPicAndNumberOfTnToBeAllocated(emptyNAndTnCountOfLcg, numberOfMcdOrCcd, lcgId);
+        return result;
+    });
+    if (!dspAddresses.empty()) {
+        setSelectionDspResult(result, dspAddresses.front());
     }
-    return isThereSpace;
+    return result;
 }
 
-bool Lrm::canTnBeAllocatedBasedOnPicAndNumberOfTnToBeAllocated(
-    NyquistAndTurboNyquistCount const& nAndTnCountInMsmOfLcg, unsigned int const numberOfTurboNyquistToBeUsed,
-    unsigned int const lcgId) const {
-    return (getNumberOfUnallocatedPicPoolsForLcg(lcgId) + numberOfTurboNyquistToBeUsed) <=
-           nAndTnCountInMsmOfLcg.numberOfTurboNyquists;
+SelectionDspResult Lrm::selectFspForEmptyDspForNbicMcd(unsigned int const lcgId) const {
+    SelectionDspResult result;
+    FspAddresses fspAddresses;
+    copyFspWithAtLeastThisNumberOfEmptyNAndTnWithDliRestrictions(fspAddresses, 1, lcgId);
+    sortFspBasedPriorityForNbicMcdSelection(fspAddresses, lcgId);
+    removeNotNeededFspsForNbicMcd(fspAddresses, lcgId);
+    if (!fspAddresses.empty()) {
+        setSelectionDspResult(result, fspAddresses.front());
+    }
+    return result;
 }
 
-bool Lrm::isSharedLcg(unsigned int const lcgId) const {
-    return lcgId == m_hardwareConfigurationReference.getSharedLcgId();
-}
-
-bool Lrm::canAFreeDliBeAllocatedInFsp(unsigned int const fspAddress, unsigned int const lcgId) const {
-    DliPools freeDliPools;
-    copyFreeDliPools(freeDliPools);
-    DliPools usedDliPools;
-    copyUsedDliPoolsOnFsp(usedDliPools, fspAddress);
-    bool result(false);
-    bool isSharedLcgId(isSharedLcg(lcgId));
-    Fsp const& fsp(m_addressToFspMap.at(fspAddress));
-    if (!isSharedLcgId || fsp.getSmType() == SmType::MSM) {
-        for (unsigned int const freeDliToBeAllocated : freeDliPools) {
-            unsigned int conflictingDliPoolForThisDli(getConflictingDliPoolForThisDli(freeDliToBeAllocated));
-            bool canBeAllocated(true);
-            for (unsigned int currentUsedDli : usedDliPools) {
-                if (freeDliToBeAllocated == currentUsedDli || conflictingDliPoolForThisDli == currentUsedDli) {
-                    canBeAllocated = false;
-                    break;
-                }
-            }
-            if (canBeAllocated) {
-                result = true;
-                break;
-            }
+SelectionDspResult Lrm::selectNonEmptyDspToClearForNbicMcd(unsigned int const lcgId) const {
+    SelectionDspResult result;
+    DspAddresses dspAddresses;
+    copyDspAddressesThatSatisfiesThisCondition(dspAddresses, [&](Dsp const& currentDsp) {
+        return currentDsp.getLcgId() == lcgId && currentDsp.getMode() == DspMode::NyquistDedicatedChannelDevice &&
+               !currentDsp.hasEmergencyCalls() && currentDsp.getNumberOfHsRachCfs() == 0 &&
+               canAFreeDliBeAllocatedInFsp(currentDsp.getFspAddress(), lcgId) &&
+               (currentDsp.getNyquistType() == NyquistType::Nyquist ||
+                (currentDsp.getNyquistType() == NyquistType::TurboNyquist &&
+                 isThereSpaceForTnForMcdOrCcdConsideringPic(currentDsp.getFspAddress(), 1, lcgId)));
+    });
+    sortDspAddressesBasedOnCondition(dspAddresses, [&](Dsp const& dsp1, Dsp const& dsp2) {
+        unsigned int priorityBasedOnHsupaCfsExistenceForDsp1 = (dsp1.getNumberOfHsupaCfs() == 0) ? 2 : 1;
+        unsigned int priorityBasedOnHsupaCfsExistenceForDsp2 = (dsp2.getNumberOfHsupaCfs() == 0) ? 2 : 1;
+        unsigned int numberOfNonDcdsOnFspOfDsp1(getNumberOfNonDcdsInFsp(dsp1.getFspAddress()));
+        unsigned int numberOfNonDcdsOnFspOfDsp2(getNumberOfNonDcdsInFsp(dsp2.getFspAddress()));
+        unsigned int priorityOfNumberOfDchUsersForDsp1 =
+            (dsp1.getNumberOfHsupaCfs() == 0) ? dsp1.getNumberOfDchUsers() : 0;
+        unsigned int priorityOfNumberOfDchUsersForDsp2 =
+            (dsp2.getNumberOfHsupaCfs() == 0) ? dsp2.getNumberOfDchUsers() : 0;
+        unsigned int priorityOrderCountForHsupaCfsForDsp1 = dsp1.getOrderCountOfCfAllocation();
+        unsigned int priorityOrderCountForHsupaCfsForDsp2 = dsp2.getOrderCountOfCfAllocation();
+        unsigned int numberOfPrereservedHsupaCfsForDsp1 = dsp1.getNumberOfPreservedHsupaCfs();
+        unsigned int numberOfPrereservedHsupaCfsForDsp2 = dsp2.getNumberOfPreservedHsupaCfs();
+        bool result(false);
+        if (priorityBasedOnHsupaCfsExistenceForDsp1 != priorityBasedOnHsupaCfsExistenceForDsp2) {
+            result = priorityBasedOnHsupaCfsExistenceForDsp1 > priorityBasedOnHsupaCfsExistenceForDsp2;
+        } else if (m_isHibernationCommissioned && numberOfNonDcdsOnFspOfDsp1 != numberOfNonDcdsOnFspOfDsp2) {
+            result = numberOfNonDcdsOnFspOfDsp1 < numberOfNonDcdsOnFspOfDsp2;
+        } else if (priorityOfNumberOfDchUsersForDsp1 != priorityOfNumberOfDchUsersForDsp2) {
+            result = priorityOfNumberOfDchUsersForDsp1 < priorityOfNumberOfDchUsersForDsp2;
+        } else if (priorityOrderCountForHsupaCfsForDsp1 != priorityOrderCountForHsupaCfsForDsp2) {
+            result = priorityOrderCountForHsupaCfsForDsp1 > priorityOrderCountForHsupaCfsForDsp2;
+        } else if (numberOfPrereservedHsupaCfsForDsp1 != numberOfPrereservedHsupaCfsForDsp2) {
+            result = numberOfPrereservedHsupaCfsForDsp1 < numberOfPrereservedHsupaCfsForDsp2;
+        } else {
+            result = dsp1.getAddress() < dsp2.getAddress();
         }
+        return result;
+    });
+    if (!dspAddresses.empty()) {
+        setSelectionDspResult(result, dspAddresses.front());
+    }
+    return result;
+}
+
+SelectionDspResult Lrm::selectFspForPic(unsigned int const lcgId) const {
+    SelectionDspResult result;
+    FspAddresses fspAddresses;
+    copyFspWithAtLeastThisNumberOfTnDcdsWithoutHsRachCfsWithDliRestrictions(fspAddresses, lcgId);
+    sortFspBasedPriorityForPicSelection(fspAddresses, lcgId);
+    if (!fspAddresses.empty()) {
+        setSelectionDspResult(result, fspAddresses.front());
+    }
+    return result;
+}
+
+SelectionDspResult Lrm::selectEmptyDspPriotizingNyquistTypeAndAddressInFsp(
+    unsigned int const lcgId, unsigned int const fspAddress) const {
+    SelectionDspResult result;
+    DspAddresses dspAddressesForLcgInFsp;
+    copyDspAddressesInFspThatSatisfiesThisCondition(dspAddressesForLcgInFsp, fspAddress, [&](Dsp const& currentDsp) {
+        return currentDsp.getLcgId() == lcgId && currentDsp.isEmpty();
+    });
+    sortDspAddressesBasedOnCondition(dspAddressesForLcgInFsp, [&](Dsp const& dsp1, Dsp const& dsp2) {
+        unsigned int dsp1NyquistValue = (dsp1.getNyquistType() == NyquistType::Nyquist) ? 0 : 1;
+        unsigned int dsp2NyquistValue = (dsp2.getNyquistType() == NyquistType::Nyquist) ? 0 : 1;
+        bool result(false);
+        if (dsp1NyquistValue != dsp2NyquistValue) {
+            result = dsp1NyquistValue < dsp2NyquistValue;
+        } else {
+            result = dsp1.getAddress() < dsp2.getAddress();
+        }
+        return result;
+    });
+    if (!dspAddressesForLcgInFsp.empty()) {
+        setSelectionDspResult(result, dspAddressesForLcgInFsp.front());
+    }
+    return result;
+}
+
+SelectionDspResult Lrm::selectTnPriotizingLessUsersAndHsupaCfsInFsp(
+    unsigned int const lcgId, unsigned int const fspAddress) const {
+    SelectionDspResult result;
+    DspAddresses dspAddressesForLcgInFsp;
+    copyDspAddressesInFspThatSatisfiesThisCondition(dspAddressesForLcgInFsp, fspAddress, [&](Dsp const& currentDsp) {
+        return currentDsp.getLcgId() == lcgId && currentDsp.getNyquistType() == NyquistType::TurboNyquist &&
+               currentDsp.getMode() == DspMode::NyquistDedicatedChannelDevice && currentDsp.getNumberOfHsRachCfs() == 0;
+    });
+    sortDspAddressesBasedOnCondition(dspAddressesForLcgInFsp, [&](Dsp const& dsp1, Dsp const& dsp2) {
+        unsigned int priorityForDsp1 = getPriorityBasedOnLessUsersAndHsupaCfsForDsp(dsp1);
+        unsigned int priorityForDsp2 = getPriorityBasedOnLessUsersAndHsupaCfsForDsp(dsp2);
+        unsigned int dchUsersForDsp1 = dsp1.getNumberOfDchUsers();
+        unsigned int dchUsersForDsp2 = dsp2.getNumberOfDchUsers();
+        unsigned int hsupaCfsForDsp1 = dsp1.getNumberOfHsupaCfs();
+        unsigned int hsupaCfsForDsp2 = dsp2.getNumberOfHsupaCfs();
+        bool result(false);
+        if (priorityForDsp1 != priorityForDsp2) {
+            result = priorityForDsp1 > priorityForDsp2;
+        } else if (dchUsersForDsp1 != dchUsersForDsp2) {
+            result = dchUsersForDsp1 < dchUsersForDsp2;
+        } else if (hsupaCfsForDsp1 != hsupaCfsForDsp2) {
+            result = hsupaCfsForDsp1 < hsupaCfsForDsp2;
+        } else {
+            result = dsp1.getAddress() < dsp2.getAddress();
+        }
+        return result;
+    });
+    if (!dspAddressesForLcgInFsp.empty()) {
+        setSelectionDspResult(result, dspAddressesForLcgInFsp.front());
     }
     return result;
 }
@@ -603,286 +830,59 @@ unsigned int Lrm::getNumberOfUnallocatedPicPoolsForLcg(unsigned int const lcgId)
     return m_lcgToUnallocatedPicPools.contains(lcgId) ? static_cast<int>(m_lcgToUnallocatedPicPools.at(lcgId)) : 0;
 }
 
-SelectionDspResult Lrm::selectFspForEmptyDspForMcd(unsigned int const lcgId) const {
-    SelectionDspResult result;
-    FspAddresses fspAddresses;
-    copyFspWithAtLeastThisNumberOfEmptyNAndTnAndBelowMaxAmountOfNonDcds(fspAddresses, 1, lcgId);
-    sortFspBasedPriorityForMcdSelection(fspAddresses, lcgId);
-    removeNotNeededFspsForMcd(fspAddresses, lcgId);
-    if (!fspAddresses.empty()) {
-        setSelectionDspResult(result, fspAddresses.front());
-    }
-    return result;
-}
-
-SelectionDspResult Lrm::selectNonEmptyDspToClearForMcd(unsigned int const lcgId) const {
-    SelectionDspResult result;
-    DspAddresses dspAddresses;
-    copyDspAddressesThatSatisfiesThisCondition(dspAddresses, [&](Dsp const& currentDsp) {
-        return currentDsp.getLcgId() == lcgId &&
-               (currentDsp.getMode() == DspMode::NyquistDedicatedChannelDevice ||
-                currentDsp.getMode() == DspMode::NyquistPicDevice) &&
-               !currentDsp.hasEmergencyCalls() && currentDsp.getNumberOfHsRachCfs() == 0;
-    });
-    sortDspAddressesBasedOnCondition(dspAddresses, [&](Dsp const& dsp1, Dsp const& dsp2) {
-        unsigned int priorityBasedOnModeForDsp1 = (dsp1.getMode() == DspMode::NyquistDedicatedChannelDevice) ? 2 : 1;
-        unsigned int priorityBasedOnModeForDsp2 = (dsp2.getMode() == DspMode::NyquistDedicatedChannelDevice) ? 2 : 1;
-        unsigned int priorityBasedOnHsupaCfsExistenceForDsp1 = (dsp1.getNumberOfHsupaCfs() == 0) ? 2 : 1;
-        unsigned int priorityBasedOnHsupaCfsExistenceForDsp2 = (dsp2.getNumberOfHsupaCfs() == 0) ? 2 : 1;
-        unsigned int numberOfNonDcdsOnFspOfDsp1(getNumberOfNonDcdsInFsp(dsp1.getFspAddress()));
-        unsigned int numberOfNonDcdsOnFspOfDsp2(getNumberOfNonDcdsInFsp(dsp2.getFspAddress()));
-        unsigned int priorityOfNumberOfDchUsersForDsp1 =
-            (dsp1.getNumberOfHsupaCfs() == 0) ? dsp1.getNumberOfDchUsers() : 0;
-        unsigned int priorityOfNumberOfDchUsersForDsp2 =
-            (dsp2.getNumberOfHsupaCfs() == 0) ? dsp2.getNumberOfDchUsers() : 0;
-        unsigned int priorityOrderCountForHsupaCfsForDsp1 = dsp1.getOrderCountOfCfAllocation();
-        unsigned int priorityOrderCountForHsupaCfsForDsp2 = dsp2.getOrderCountOfCfAllocation();
-        unsigned int numberOfPrereservedHsupaCfsForDsp1 = dsp1.getNumberOfPreservedHsupaCfs();
-        unsigned int numberOfPrereservedHsupaCfsForDsp2 = dsp2.getNumberOfPreservedHsupaCfs();
-        bool result(false);
-        if (priorityBasedOnModeForDsp1 != priorityBasedOnModeForDsp2) {
-            result = priorityBasedOnModeForDsp1 > priorityBasedOnModeForDsp2;
-        } else if (priorityBasedOnHsupaCfsExistenceForDsp1 != priorityBasedOnHsupaCfsExistenceForDsp2) {
-            result = priorityBasedOnHsupaCfsExistenceForDsp1 > priorityBasedOnHsupaCfsExistenceForDsp2;
-        } else if (m_isHibernationCommissioned && numberOfNonDcdsOnFspOfDsp1 != numberOfNonDcdsOnFspOfDsp2) {
-            result = numberOfNonDcdsOnFspOfDsp1 < numberOfNonDcdsOnFspOfDsp2;
-        } else if (priorityOfNumberOfDchUsersForDsp1 != priorityOfNumberOfDchUsersForDsp2) {
-            result = priorityOfNumberOfDchUsersForDsp1 < priorityOfNumberOfDchUsersForDsp2;
-        } else if (priorityOrderCountForHsupaCfsForDsp1 != priorityOrderCountForHsupaCfsForDsp2) {
-            result = priorityOrderCountForHsupaCfsForDsp1 > priorityOrderCountForHsupaCfsForDsp2;
-        } else if (numberOfPrereservedHsupaCfsForDsp1 != numberOfPrereservedHsupaCfsForDsp2) {
-            result = numberOfPrereservedHsupaCfsForDsp1 < numberOfPrereservedHsupaCfsForDsp2;
-        } else {
-            result = dsp1.getAddress() < dsp2.getAddress();
-        }
-        return result;
-    });
-    if (!dspAddresses.empty()) {
-        setSelectionDspResult(result, dspAddresses.front());
-    }
-    return result;
-}
-
-FspAddresses Lrm::selectFspsForCcdMcd(unsigned int const lcgId) const {
-    FspAddresses fspAddresses;
-    copyFspWithAtLeastThisNumberOfEmptyNAndTnAndBelowMaxAmountOfNonDcds(fspAddresses, 1, lcgId);
-    sortFspBasedPriorityForCcdMcdSelection(fspAddresses, lcgId);
-    removeNotNeededFspsForCcdMcd(fspAddresses, lcgId);
-    return fspAddresses;
-}
-
-FspAddresses Lrm::selectFspsForCcdMcd2(unsigned int const lcgId) const {
-    FspAddresses fspAddresses;
-    FspPairsDetails fspPairsDetails;
-    copyAllFspPairs(fspPairsDetails);
-    updatePriorityForAllFspPairs(fspPairsDetails, lcgId);
-    sortFspPairsForCcdMcdSelection(fspPairsDetails);
-    removeFspPairsForCcdMcdSelection(fspPairsDetails, lcgId);
-    if (!fspPairsDetails.empty()) {
-        FspPairDetails const& mostPrioritizedPair(fspPairsDetails.front());
-        fspAddresses.emplace_back(mostPrioritizedPair.firstFspAddress);
-        fspAddresses.emplace_back(mostPrioritizedPair.secondFspAddress);
-    }
-    return fspAddresses;
-}
-
-SelectionDspResult Lrm::selectFspForEmptyDspForNbicMcd(unsigned int const lcgId) const {
-    SelectionDspResult result;
-    FspAddresses fspAddresses;
-    copyFspWithAtLeastThisNumberOfEmptyNAndTnWithDliRestrictions(fspAddresses, 1, lcgId);
-    sortFspBasedPriorityForNbicMcdSelection(fspAddresses, lcgId);
-    removeNotNeededFspsForNbicMcd(fspAddresses, lcgId);
-    if (!fspAddresses.empty()) {
-        setSelectionDspResult(result, fspAddresses.front());
-    }
-    return result;
-}
-
-SelectionDspResult Lrm::selectNonEmptyDspToClearForNbicMcd(unsigned int const lcgId) const {
-    SelectionDspResult result;
-    DspAddresses dspAddresses;
-    copyDspAddressesThatSatisfiesThisCondition(dspAddresses, [&](Dsp const& currentDsp) {
-        return currentDsp.getLcgId() == lcgId && currentDsp.getMode() == DspMode::NyquistDedicatedChannelDevice &&
-               !currentDsp.hasEmergencyCalls() && currentDsp.getNumberOfHsRachCfs() == 0 &&
-               canAFreeDliBeAllocatedInFsp(currentDsp.getFspAddress(), lcgId) &&
-               (currentDsp.getNyquistType() == NyquistType::Nyquist ||
-                (currentDsp.getNyquistType() == NyquistType::TurboNyquist &&
-                 isThereSpaceForTnForMcdOrCcdConsideringPic(currentDsp.getFspAddress(), 1, lcgId)));
-    });
-    sortDspAddressesBasedOnCondition(dspAddresses, [&](Dsp const& dsp1, Dsp const& dsp2) {
-        unsigned int priorityBasedOnHsupaCfsExistenceForDsp1 = (dsp1.getNumberOfHsupaCfs() == 0) ? 2 : 1;
-        unsigned int priorityBasedOnHsupaCfsExistenceForDsp2 = (dsp2.getNumberOfHsupaCfs() == 0) ? 2 : 1;
-        unsigned int numberOfNonDcdsOnFspOfDsp1(getNumberOfNonDcdsInFsp(dsp1.getFspAddress()));
-        unsigned int numberOfNonDcdsOnFspOfDsp2(getNumberOfNonDcdsInFsp(dsp2.getFspAddress()));
-        unsigned int priorityOfNumberOfDchUsersForDsp1 =
-            (dsp1.getNumberOfHsupaCfs() == 0) ? dsp1.getNumberOfDchUsers() : 0;
-        unsigned int priorityOfNumberOfDchUsersForDsp2 =
-            (dsp2.getNumberOfHsupaCfs() == 0) ? dsp2.getNumberOfDchUsers() : 0;
-        unsigned int priorityOrderCountForHsupaCfsForDsp1 = dsp1.getOrderCountOfCfAllocation();
-        unsigned int priorityOrderCountForHsupaCfsForDsp2 = dsp2.getOrderCountOfCfAllocation();
-        unsigned int numberOfPrereservedHsupaCfsForDsp1 = dsp1.getNumberOfPreservedHsupaCfs();
-        unsigned int numberOfPrereservedHsupaCfsForDsp2 = dsp2.getNumberOfPreservedHsupaCfs();
-        bool result(false);
-        if (priorityBasedOnHsupaCfsExistenceForDsp1 != priorityBasedOnHsupaCfsExistenceForDsp2) {
-            result = priorityBasedOnHsupaCfsExistenceForDsp1 > priorityBasedOnHsupaCfsExistenceForDsp2;
-        } else if (m_isHibernationCommissioned && numberOfNonDcdsOnFspOfDsp1 != numberOfNonDcdsOnFspOfDsp2) {
-            result = numberOfNonDcdsOnFspOfDsp1 < numberOfNonDcdsOnFspOfDsp2;
-        } else if (priorityOfNumberOfDchUsersForDsp1 != priorityOfNumberOfDchUsersForDsp2) {
-            result = priorityOfNumberOfDchUsersForDsp1 < priorityOfNumberOfDchUsersForDsp2;
-        } else if (priorityOrderCountForHsupaCfsForDsp1 != priorityOrderCountForHsupaCfsForDsp2) {
-            result = priorityOrderCountForHsupaCfsForDsp1 > priorityOrderCountForHsupaCfsForDsp2;
-        } else if (numberOfPrereservedHsupaCfsForDsp1 != numberOfPrereservedHsupaCfsForDsp2) {
-            result = numberOfPrereservedHsupaCfsForDsp1 < numberOfPrereservedHsupaCfsForDsp2;
-        } else {
-            result = dsp1.getAddress() < dsp2.getAddress();
-        }
-        return result;
-    });
-    if (!dspAddresses.empty()) {
-        setSelectionDspResult(result, dspAddresses.front());
-    }
-    return result;
-}
-
-FspAddresses Lrm::selectFspsForCcdNbicMcd(unsigned int const lcgId) const {
-    FspAddresses fspAddresses;
-    copyFspWithAtLeastThisNumberOfEmptyNAndTnAndBelowMaxAmountOfNonDcds(fspAddresses, 1, lcgId);
-    sortFspBasedPriorityForCcdMcdSelection(fspAddresses, lcgId);
-    removeNotNeededFspsForCcdNbicMcd(fspAddresses, lcgId);
-    return fspAddresses;
-}
-
-FspAddresses Lrm::selectFspsForCcdNbicMcd2(unsigned int const lcgId) const {
-    FspAddresses fspAddresses;
-    FspPairsDetails fspPairsDetails;
-    copyAllFspPairs(fspPairsDetails);
-    updatePriorityForAllFspPairs(fspPairsDetails, lcgId);
-    sortFspPairsForCcdMcdSelection(fspPairsDetails);
-    removeFspPairsForCcdNbicMcdSelection(fspPairsDetails, lcgId);
-    if (!fspPairsDetails.empty()) {
-        FspPairDetails const& mostPrioritizedPair(fspPairsDetails.front());
-        fspAddresses.emplace_back(mostPrioritizedPair.firstFspAddress);
-        fspAddresses.emplace_back(mostPrioritizedPair.secondFspAddress);
-        fixFspsForNbic(fspAddresses, lcgId);
-    }
-    return fspAddresses;
-}
-
-SelectionDspResult Lrm::selectFspForPic(unsigned int const lcgId) const {
-    SelectionDspResult result;
-    FspAddresses fspAddresses;
-    copyFspWithAtLeastThisNumberOfTnDcdsWithoutHsRachCfsWithDliRestrictions(fspAddresses, lcgId);
-    sortFspBasedPriorityForPicSelection(fspAddresses, lcgId);
-    if (!fspAddresses.empty()) {
-        setSelectionDspResult(result, fspAddresses.front());
-    }
-    return result;
-}
-
-SelectionDspResult Lrm::selectEmptyDspPriotizingNyquistTypeAndAddressInFsp(
-    unsigned int const lcgId, unsigned int const fspAddress) const {
-    SelectionDspResult result;
-    DspAddresses dspAddressesForLcgInFsp;
-    copyDspAddressesInFspThatSatisfiesThisCondition(dspAddressesForLcgInFsp, fspAddress, [&](Dsp const& currentDsp) {
-        return currentDsp.getLcgId() == lcgId && currentDsp.isEmpty();
-    });
-    sortDspAddressesBasedOnCondition(dspAddressesForLcgInFsp, [&](Dsp const& dsp1, Dsp const& dsp2) {
-        unsigned int dsp1NyquistValue = (dsp1.getNyquistType() == NyquistType::Nyquist) ? 0 : 1;
-        unsigned int dsp2NyquistValue = (dsp2.getNyquistType() == NyquistType::Nyquist) ? 0 : 1;
-        bool result(false);
-        if (dsp1NyquistValue != dsp2NyquistValue) {
-            result = dsp1NyquistValue < dsp2NyquistValue;
-        } else {
-            result = dsp1.getAddress() < dsp2.getAddress();
-        }
-        return result;
-    });
-    if (!dspAddressesForLcgInFsp.empty()) {
-        setSelectionDspResult(result, dspAddressesForLcgInFsp.front());
-    }
-    return result;
-}
-
-SelectionDspResult Lrm::selectTnPriotizingLessUsersAndHsupaCfsInFsp(
-    unsigned int const lcgId, unsigned int const fspAddress) const {
-    SelectionDspResult result;
-    DspAddresses dspAddressesForLcgInFsp;
-    copyDspAddressesInFspThatSatisfiesThisCondition(dspAddressesForLcgInFsp, fspAddress, [&](Dsp const& currentDsp) {
-        return currentDsp.getLcgId() == lcgId && currentDsp.getNyquistType() == NyquistType::TurboNyquist &&
-               currentDsp.getMode() == DspMode::NyquistDedicatedChannelDevice && currentDsp.getNumberOfHsRachCfs() == 0;
-    });
-    sortDspAddressesBasedOnCondition(dspAddressesForLcgInFsp, [&](Dsp const& dsp1, Dsp const& dsp2) {
-        unsigned int priorityForDsp1 = getPriorityBasedOnLessUsersAndHsupaCfsForDsp(dsp1);
-        unsigned int priorityForDsp2 = getPriorityBasedOnLessUsersAndHsupaCfsForDsp(dsp2);
-        unsigned int dchUsersForDsp1 = dsp1.getNumberOfDchUsers();
-        unsigned int dchUsersForDsp2 = dsp2.getNumberOfDchUsers();
-        unsigned int hsupaCfsForDsp1 = dsp1.getNumberOfHsupaCfs();
-        unsigned int hsupaCfsForDsp2 = dsp2.getNumberOfHsupaCfs();
-        bool result(false);
-        if (priorityForDsp1 != priorityForDsp2) {
-            result = priorityForDsp1 > priorityForDsp2;
-        } else if (dchUsersForDsp1 != dchUsersForDsp2) {
-            result = dchUsersForDsp1 < dchUsersForDsp2;
-        } else if (hsupaCfsForDsp1 != hsupaCfsForDsp2) {
-            result = hsupaCfsForDsp1 < hsupaCfsForDsp2;
-        } else {
-            result = dsp1.getAddress() < dsp2.getAddress();
-        }
-        return result;
-    });
-    if (!dspAddressesForLcgInFsp.empty()) {
-        setSelectionDspResult(result, dspAddressesForLcgInFsp.front());
-    }
-    return result;
-}
-
-NyquistAndTurboNyquistCount Lrm::getNumberOfEmptyNAndTnOfFspAndLcg(
-    unsigned int const fspAddress, unsigned int const lcgId) const {
-    NyquistAndTurboNyquistCount result{0, 0};
+bool Lrm::isThereSpaceForTnForMcdOrCcdConsideringPic(
+    unsigned int const fspAddress, unsigned int const numberOfMcdOrCcd, unsigned int const lcgId) const {
     Fsp const& fsp(m_addressToFspMap.at(fspAddress));
-    DspAddresses const& dspAddresses(fsp.getDspAddresses());
-    for (unsigned int const dspAddress : dspAddresses) {
-        Dsp& currentDsp(m_addressToDspMap.at(dspAddress));
-        if (currentDsp.getLcgId() == lcgId && currentDsp.isEmpty()) {
-            incrementNAndTnCountBasedOnNyquistType(result, currentDsp.getNyquistType());
+    bool isThereSpace(false);
+    if (isSharedLcg(lcgId)) {
+        if (fsp.getSmType() == SmType::MSM) {
+            NyquistAndTurboNyquistCount emptyNAndTnCountInMsmOfLcg = getNumberOfEmptyNAndTnInMsmOfLcg(lcgId);
+            isThereSpace = canTnBeAllocatedBasedOnPicAndNumberOfTnToBeAllocated(
+                emptyNAndTnCountInMsmOfLcg, numberOfMcdOrCcd, lcgId);
+        } else {
+            isThereSpace = true;
         }
+    } else {
+        NyquistAndTurboNyquistCount emptyNAndTnCountOfLcg = getNumberOfEmptyNAndTnOfLcg(lcgId);
+        isThereSpace =
+            canTnBeAllocatedBasedOnPicAndNumberOfTnToBeAllocated(emptyNAndTnCountOfLcg, numberOfMcdOrCcd, lcgId);
     }
-    return result;
+    return isThereSpace;
 }
 
-NyquistAndTurboNyquistCount Lrm::getNumberOfNAndTnWithoutCfsOfFspAndLcg(
-    unsigned int const fspAddress, unsigned int const lcgId) const {
-    NyquistAndTurboNyquistCount result{0, 0};
+bool Lrm::canTnBeAllocatedBasedOnPicAndNumberOfTnToBeAllocated(
+    NyquistAndTurboNyquistCount const& nAndTnCountInMsmOfLcg, unsigned int const numberOfTurboNyquistToBeUsed,
+    unsigned int const lcgId) const {
+    return (getNumberOfUnallocatedPicPoolsForLcg(lcgId) + numberOfTurboNyquistToBeUsed) <=
+           nAndTnCountInMsmOfLcg.numberOfTurboNyquists;
+}
+
+bool Lrm::isSharedLcg(unsigned int const lcgId) const {
+    return lcgId == m_hardwareConfigurationReference.getSharedLcgId();
+}
+
+bool Lrm::canAFreeDliBeAllocatedInFsp(unsigned int const fspAddress, unsigned int const lcgId) const {
+    DliPools freeDliPools;
+    copyFreeDliPools(freeDliPools);
+    DliPools usedDliPools;
+    copyUsedDliPoolsOnFsp(usedDliPools, fspAddress);
+    bool result(false);
+    bool isSharedLcgId(isSharedLcg(lcgId));
     Fsp const& fsp(m_addressToFspMap.at(fspAddress));
-    DspAddresses const& dspAddresses(fsp.getDspAddresses());
-    for (unsigned int const dspAddress : dspAddresses) {
-        Dsp& currentDsp(m_addressToDspMap.at(dspAddress));
-        if (currentDsp.getLcgId() == lcgId && currentDsp.getNumberOfHsupaCfs() == 0 &&
-            currentDsp.getNumberOfHsRachCfs() == 0) {
-            incrementNAndTnCountBasedOnNyquistType(result, currentDsp.getNyquistType());
-        }
-    }
-    return result;
-}
-
-NyquistAndTurboNyquistCount Lrm::getNumberOfEmptyNAndTnOfLcg(unsigned int const lcgId) const {
-    NyquistAndTurboNyquistCount result{0, 0};
-    for (auto const& addressToDspPair : m_addressToDspMap) {
-        Dsp const& currentDsp(addressToDspPair.second);
-        if (currentDsp.getLcgId() == lcgId && currentDsp.isEmpty()) {
-            incrementNAndTnCountBasedOnNyquistType(result, currentDsp.getNyquistType());
-        }
-    }
-    return result;
-}
-
-NyquistAndTurboNyquistCount Lrm::getNumberOfEmptyNAndTnInMsmOfLcg(unsigned int const lcgId) const {
-    NyquistAndTurboNyquistCount result{0, 0};
-    for (auto const& addressToDspPair : m_addressToDspMap) {
-        Dsp const& currentDsp(addressToDspPair.second);
-        Fsp const& currentFsp(m_addressToFspMap.at(currentDsp.getFspAddress()));
-        if (currentDsp.getLcgId() == lcgId && currentDsp.isEmpty() && currentFsp.getSmType() == SmType::MSM) {
-            incrementNAndTnCountBasedOnNyquistType(result, currentDsp.getNyquistType());
+    if (!isSharedLcgId || fsp.getSmType() == SmType::MSM) {
+        for (unsigned int const freeDliToBeAllocated : freeDliPools) {
+            unsigned int conflictingDliPoolForThisDli(getConflictingDliPoolForThisDli(freeDliToBeAllocated));
+            bool canBeAllocated(true);
+            for (unsigned int currentUsedDli : usedDliPools) {
+                if (freeDliToBeAllocated == currentUsedDli || conflictingDliPoolForThisDli == currentUsedDli) {
+                    canBeAllocated = false;
+                    break;
+                }
+            }
+            if (canBeAllocated) {
+                result = true;
+                break;
+            }
         }
     }
     return result;

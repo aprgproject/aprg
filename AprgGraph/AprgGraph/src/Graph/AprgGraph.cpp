@@ -211,24 +211,6 @@ string AprgGraph::getBitmapFilePathOfCharacter(char const character) {
 #endif
 }
 
-double AprgGraph::getLowestInterval() const { return min(1 / m_magnification.getX(), 1 / m_magnification.getY()); }
-
-int AprgGraph::convertRealXCoordinateToBitmapXCoordinate(double const xCoordinate) const {
-    return static_cast<int>(round((xCoordinate * m_magnification.getX()) + m_originInBitmap.getX()));
-}
-
-int AprgGraph::convertRealYCoordinateToBitmapYCoordinate(double const yCoordinate) const {
-    return static_cast<int>(round((-1 * yCoordinate * m_magnification.getY()) + m_originInBitmap.getY()));
-}
-
-double AprgGraph::convertBitmapXCoordinateToRealXCoordinate(double const xCoordinate) const {
-    return (xCoordinate - m_originInBitmap.getX()) / m_magnification.getX();
-}
-
-double AprgGraph::convertBitmapYCoordinateToRealYCoordinate(double const yCoordinate) const {
-    return (yCoordinate - m_originInBitmap.getY()) / (m_magnification.getY() * -1);
-}
-
 Point AprgGraph::convertBitmapXYToRealPoint(BitmapXY const& bitmapPosition) const {
     double xPosition = convertBitmapXCoordinateToRealXCoordinate(bitmapPosition.getX());
     double yPosition = convertBitmapYCoordinateToRealYCoordinate(bitmapPosition.getY());
@@ -241,10 +223,22 @@ Point AprgGraph::convertRealPointToBitmapPoint(Point const& realPosition) const 
     return {xPosition, yPosition};
 }
 
-bool AprgGraph::isBitmapPointInTheBitmap(Point const& bitmapPoint) {
-    int bitmapPointInX = static_cast<int>(round(bitmapPoint.getX()));
-    int bitmapPointInY = static_cast<int>(round(bitmapPoint.getY()));
-    return m_bitmap.getConfiguration().isPositionWithinTheBitmap(bitmapPointInX, bitmapPointInY);
+double AprgGraph::getLowestInterval() const { return min(1 / m_magnification.getX(), 1 / m_magnification.getY()); }
+
+double AprgGraph::convertBitmapXCoordinateToRealXCoordinate(double const xCoordinate) const {
+    return (xCoordinate - m_originInBitmap.getX()) / m_magnification.getX();
+}
+
+double AprgGraph::convertBitmapYCoordinateToRealYCoordinate(double const yCoordinate) const {
+    return (yCoordinate - m_originInBitmap.getY()) / (m_magnification.getY() * -1);
+}
+
+int AprgGraph::convertRealXCoordinateToBitmapXCoordinate(double const xCoordinate) const {
+    return static_cast<int>(round((xCoordinate * m_magnification.getX()) + m_originInBitmap.getX()));
+}
+
+int AprgGraph::convertRealYCoordinateToBitmapYCoordinate(double const yCoordinate) const {
+    return static_cast<int>(round((-1 * yCoordinate * m_magnification.getY()) + m_originInBitmap.getY()));
 }
 
 void AprgGraph::drawBitmapPointIfPossible(Point const& bitmapPoint, uint32_t const color) {
@@ -322,6 +316,12 @@ void AprgGraph::drawEquationWithYSubstitution(Equation const& equation, uint32_t
         }
     });
     drawDiscontinuousPoints(points, color);
+}
+
+bool AprgGraph::isBitmapPointInTheBitmap(Point const& bitmapPoint) {
+    int bitmapPointInX = static_cast<int>(round(bitmapPoint.getX()));
+    int bitmapPointInY = static_cast<int>(round(bitmapPoint.getY()));
+    return m_bitmap.getConfiguration().isPositionWithinTheBitmap(bitmapPointInX, bitmapPointInY);
 }
 
 }  // namespace alba

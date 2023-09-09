@@ -22,6 +22,28 @@ public:
           m_endValue(endValue),
           m_intervalMagnitude(mathHelper::getAbsoluteValue(intervalMagnitude)) {}
 
+    [[nodiscard]] AlbaValueRangeType getRangeType() const {
+        return getRangeTypeFromStartAndEnd(m_startValue, m_endValue);
+    }
+
+    [[nodiscard]] DataType getStartValue() const { return m_startValue; }
+    [[nodiscard]] DataType getEndValue() const { return m_endValue; }
+    [[nodiscard]] DataType getMinimum() const { return std::min(m_startValue, m_endValue); }
+    [[nodiscard]] DataType getMaximum() const { return std::max(m_startValue, m_endValue); }
+    [[nodiscard]] DataType getInterval() const { return getIntervalWithSign(m_intervalMagnitude, getRangeType()); }
+    [[nodiscard]] DataType getIntervalMagnitude() const { return m_intervalMagnitude; }
+
+    [[nodiscard]] DataType getDelta() const {
+        DataType delta(m_endValue - m_startValue);
+        return (delta < 0) ? delta * -1 : delta;
+    }
+
+    [[nodiscard]] DataType getMidpointValue() const { return (m_startValue + m_endValue) / 2; }
+
+    [[nodiscard]] TerminationCondition getTerminationCondition() const {
+        return getTerminationCondition(getRangeType());
+    }
+
     // rule of zero
     [[nodiscard]] bool isEmpty() const { return m_startValue == 0 && m_endValue == 0 && m_intervalMagnitude == 0; }
 
@@ -32,29 +54,6 @@ public:
     [[nodiscard]] bool isValueInsideExclusive(DataType const value) const {
         return getMinimum() < value && getMaximum() > value;
     }
-
-    [[nodiscard]] DataType getStartValue() const { return m_startValue; }
-    [[nodiscard]] DataType getEndValue() const { return m_endValue; }
-    [[nodiscard]] DataType getMinimum() const { return std::min(m_startValue, m_endValue); }
-    [[nodiscard]] DataType getMaximum() const { return std::max(m_startValue, m_endValue); }
-
-    [[nodiscard]] AlbaValueRangeType getRangeType() const {
-        return getRangeTypeFromStartAndEnd(m_startValue, m_endValue);
-    }
-
-    [[nodiscard]] DataType getInterval() const { return getIntervalWithSign(m_intervalMagnitude, getRangeType()); }
-    [[nodiscard]] DataType getIntervalMagnitude() const { return m_intervalMagnitude; }
-
-    [[nodiscard]] TerminationCondition getTerminationCondition() const {
-        return getTerminationCondition(getRangeType());
-    }
-
-    [[nodiscard]] DataType getDelta() const {
-        DataType delta(m_endValue - m_startValue);
-        return (delta < 0) ? delta * -1 : delta;
-    }
-
-    [[nodiscard]] DataType getMidpointValue() const { return (m_startValue + m_endValue) / 2; }
 
     void traverse(TraverseOperation const& traverseOperation) const {
         if (!isEmpty()) {
@@ -94,20 +93,17 @@ public:
     }
 
 private:
-    [[nodiscard]] TerminationCondition getTerminationCondition(AlbaValueRangeType const rangeType) const {
-        TerminationCondition terminationCondition;
-        switch (rangeType) {
-            case AlbaValueRangeType::Forward:
-                terminationCondition = std::less_equal<DataType>();
-                break;
-            case AlbaValueRangeType::Backward:
-                terminationCondition = std::greater_equal<DataType>();
-                break;
-            default:
-                terminationCondition = [](DataType, DataType) -> bool { return false; };
-                break;
+    [[nodiscard]] AlbaValueRangeType getRangeTypeFromStartAndEnd(
+        DataType const startValue, DataType const endValue) const {
+        AlbaValueRangeType rangeType(AlbaValueRangeType::Unknown);
+        if (startValue == endValue) {
+            rangeType = AlbaValueRangeType::Once;
+        } else if (startValue < endValue) {
+            rangeType = AlbaValueRangeType::Forward;
+        } else {
+            rangeType = AlbaValueRangeType::Backward;
         }
-        return terminationCondition;
+        return rangeType;
     }
 
     [[nodiscard]] DataType getIntervalWithSign(DataType const interval, AlbaValueRangeType const rangeType) const {
@@ -126,17 +122,20 @@ private:
         return intervalWithSign;
     }
 
-    [[nodiscard]] AlbaValueRangeType getRangeTypeFromStartAndEnd(
-        DataType const startValue, DataType const endValue) const {
-        AlbaValueRangeType rangeType(AlbaValueRangeType::Unknown);
-        if (startValue == endValue) {
-            rangeType = AlbaValueRangeType::Once;
-        } else if (startValue < endValue) {
-            rangeType = AlbaValueRangeType::Forward;
-        } else {
-            rangeType = AlbaValueRangeType::Backward;
+    [[nodiscard]] TerminationCondition getTerminationCondition(AlbaValueRangeType const rangeType) const {
+        TerminationCondition terminationCondition;
+        switch (rangeType) {
+            case AlbaValueRangeType::Forward:
+                terminationCondition = std::less_equal<DataType>();
+                break;
+            case AlbaValueRangeType::Backward:
+                terminationCondition = std::greater_equal<DataType>();
+                break;
+            default:
+                terminationCondition = [](DataType, DataType) -> bool { return false; };
+                break;
         }
-        return rangeType;
+        return terminationCondition;
     }
 
     friend std::ostream& operator<<(std::ostream& out, AlbaValueRange<DataType> const& valueRange) {

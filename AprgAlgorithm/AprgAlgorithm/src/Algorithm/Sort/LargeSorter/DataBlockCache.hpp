@@ -20,17 +20,6 @@ public:
 
     using BlockCacheContainer = std::deque<BlockCacheEntry>;
 
-    BlockInformation popTheEarliestAddedBlock() {
-        if (!m_blocksInformationCache.empty()) {
-            BlockInformation lastAddedBlock(m_blocksInformationCache.back().m_blockInformation);
-            m_blocksInformationCache.pop_back();
-            return lastAddedBlock;
-        }
-        return BlockInformation();
-    }
-
-    BlockCacheContainer& getContainerReference() { return m_blocksInformationCache; }
-
     void addBlock(int const blockId, BlockInformation const& iterator) {
         if (m_blocksInformationCache.empty() || m_blocksInformationCache.front().m_blockId != blockId) {
             deleteBlock(blockId);
@@ -47,6 +36,16 @@ public:
     }
 
     void clear() { m_blocksInformationCache.clear(); }
+    BlockCacheContainer& getContainerReference() { return m_blocksInformationCache; }
+
+    BlockInformation popTheEarliestAddedBlock() {
+        if (!m_blocksInformationCache.empty()) {
+            BlockInformation lastAddedBlock(m_blocksInformationCache.back().m_blockInformation);
+            m_blocksInformationCache.pop_back();
+            return lastAddedBlock;
+        }
+        return BlockInformation();
+    }
 
 private:
     BlockCacheContainer m_blocksInformationCache;

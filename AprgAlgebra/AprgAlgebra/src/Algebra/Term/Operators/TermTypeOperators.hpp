@@ -3,7 +3,6 @@
 #include <Algebra/Term/TermTypes/Term.hpp>
 
 namespace alba::algebra {
-
 // Unary plus: +a
 Term operator+(Constant const& constant);
 Term operator+(Variable const& variable);
@@ -263,5 +262,4 @@ Term operator^(Term const& term, Monomial const& monomial);
 Term operator^(Term const& term, Polynomial const& polynomial);
 Term operator^(Term const& term, Expression const& expression);
 Term operator^(Term const& term, Function const& functionObject);
-
 }  // namespace alba::algebra

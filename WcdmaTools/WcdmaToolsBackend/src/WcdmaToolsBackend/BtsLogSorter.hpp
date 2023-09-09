@@ -15,17 +15,17 @@ namespace wcdmaToolsBackend {
 class BtsLogSorter {
 public:
     explicit BtsLogSorter(BtsLogSorterConfiguration const& configuration);
-    double getTotalSizeToBeRead();
-    double getTotalSizeToBeRead(std::set<std::string> const& listOfFiles);
     void processDirectory(std::string const& directoryPath);
     void processFile(std::string const& filePath);
     void processLineInFile(std::string const& filename, std::string const& lineInFile);
     void saveLogsToOutputFile(std::string const& outputPath);
+    double getTotalSizeToBeRead();
+    double getTotalSizeToBeRead(std::set<std::string> const& listOfFiles);
 
 private:
+    static void deleteFilesInDirectory(std::string const& directoryOfLogs);
     static std::string getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
         std::string const& directory, std::string const& hardwareAddress);
-    static void deleteFilesInDirectory(std::string const& directoryOfLogs);
     void createTempDirectories() const;
     void deleteTempFilesAndDirectoriesOfOneDayOld() const;
     void deleteStartupLog() const;

@@ -15,6 +15,10 @@ struct TranslationUnitValues {
 
 static int staticInteger = 200;   // explicitly static (internal linkage)
 static int staticFreeFunction();  // explicitly static
+void restoreInitialValuesForTranslationUnit1();
+void restoreInitialValuesForTranslationUnit2();
+TranslationUnitValues getValuesInTranslationUnit1();
+TranslationUnitValues getValuesInTranslationUnit2();
 // Linking failure if we include things with external linkage in the header:
 // -> int integer; // extern(external linkage) by default
 // ---> Linking error: multiple definition of `alba::integer'
@@ -22,10 +26,6 @@ static int staticFreeFunction();  // explicitly static
 // ---> Linking error: undefined reference to `alba::externConstInteger'
 // same goes for functions (but there are no free const functions)
 int freeFunction();  // extern by default
-TranslationUnitValues getValuesInTranslationUnit1();
-TranslationUnitValues getValuesInTranslationUnit2();
-void restoreInitialValuesForTranslationUnit1();
-void restoreInitialValuesForTranslationUnit2();
 
 }  // namespace alba::StaticOnTranslationUnits
 

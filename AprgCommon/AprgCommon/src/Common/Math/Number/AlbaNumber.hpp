@@ -110,13 +110,6 @@ public:
     constexpr AlbaNumber(FractionData const& fractionData) : m_type(Type::Fraction), m_data(fractionData) {}
     constexpr AlbaNumber(ComplexNumberData const& complexNumberData)
         : m_type(Type::ComplexNumber), m_data(complexNumberData) {}
-    // This should be constexpr as well but a lot of coding is needed
-    bool operator==(AlbaNumber const& second) const;
-    bool operator!=(AlbaNumber const& second) const;
-    bool operator<=(AlbaNumber const& second) const;
-    bool operator>=(AlbaNumber const& second) const;
-    bool operator<(AlbaNumber const& second) const;
-    bool operator>(AlbaNumber const& second) const;
     AlbaNumber operator+() const;
     AlbaNumber operator-() const;
     AlbaNumber operator+(AlbaNumber const& second) const;
@@ -124,10 +117,22 @@ public:
     AlbaNumber operator*(AlbaNumber const& second) const;
     AlbaNumber operator/(AlbaNumber const& second) const;
     AlbaNumber operator^(AlbaNumber const& second) const;
+    // This should be constexpr as well but a lot of coding is needed
+    bool operator==(AlbaNumber const& second) const;
+    bool operator!=(AlbaNumber const& second) const;
+    bool operator<=(AlbaNumber const& second) const;
+    bool operator>=(AlbaNumber const& second) const;
+    bool operator<(AlbaNumber const& second) const;
+    bool operator>(AlbaNumber const& second) const;
     AlbaNumber& operator+=(AlbaNumber const& second);
     AlbaNumber& operator-=(AlbaNumber const& second);
     AlbaNumber& operator*=(AlbaNumber const& second);
     AlbaNumber& operator/=(AlbaNumber const& second);
+    [[nodiscard]] ComplexNumberData getComplexNumberData() const;
+    [[nodiscard]] FractionData getFractionData() const;
+    [[nodiscard]] IntDataType getInteger() const;
+    [[nodiscard]] Type getType() const;
+    [[nodiscard]] double getDouble() const;
     [[nodiscard]] bool isIntegerType() const;
     [[nodiscard]] bool isDoubleType() const;
     [[nodiscard]] bool isFractionType() const;
@@ -139,21 +144,16 @@ public:
     [[nodiscard]] bool isNotANumber() const;
     [[nodiscard]] bool isAFiniteValue() const;
     [[nodiscard]] bool isARealFiniteValue() const;
-    [[nodiscard]] double getDouble() const;
-    [[nodiscard]] Type getType() const;
-    [[nodiscard]] IntDataType getInteger() const;
-    [[nodiscard]] FractionData getFractionData() const;
-    [[nodiscard]] ComplexNumberData getComplexNumberData() const;
     void convertToInteger();
     void convertToFraction();
 
 private:
+    static void correctPowerResult(double& powerResult, double const base, double const exponent);
+    static ComplexFloat createComplexFloat(ComplexNumberData const& data);
     // static functions
     static double getComparisonTolerance();
     static double getFloatAdjustmentTolerance();
     static double adjustFloatValue(float const value);
-    static ComplexFloat createComplexFloat(ComplexNumberData const& data);
-    static void correctPowerResult(double& powerResult, double const base, double const exponent);
     template <typename NumberType1, typename NumberType2>
     void constructBasedFromComplexNumberDetails(NumberType1 const realPart, NumberType2 const imaginaryPart);
     static AlbaNumber addBothIntegersAndReturnNumber(IntDataType const integerValue1, IntDataType const integerValue2);

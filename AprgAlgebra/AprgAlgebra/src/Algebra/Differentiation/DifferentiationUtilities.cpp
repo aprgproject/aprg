@@ -25,73 +25,99 @@ using namespace alba::stringHelper;
 using namespace std;
 
 namespace {
-
 constexpr char const* const X_NAME = "x";
 constexpr char const* const DELTA_X_NAME = "deltaX";
-
 }  // namespace
 
 namespace alba::algebra {
 
-bool isTheFirstFundamentalTheoremOfCalculusTrue(Term const& term, string const& variableName) {
-    // The first fundamental theorem of calculus
-    // Let the function f be continuous on the closed interval [a, b] and let x be any number in [a, b].
-    // If F is the definite integral of f from a to x then the derivative of F at x is equal to f at x.
-    Integration integration(variableName);
-    Differentiation differentiation(variableName);
-    Term capitalF(integration.integrate(term));
-    Term derivativeOfCapitalF(differentiation.differentiate(capitalF));
-    Term simplifiedTerm(term);
-    simplifiedTerm.simplify();
-    return derivativeOfCapitalF == simplifiedTerm;
+void simplifyDerivativeByDefinition(Term& term) {
+    SimplificationOfExpression::ConfigurationDetails rationalizeConfigurationDetails(
+        SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
+    rationalizeConfigurationDetails.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = true;
+    rationalizeConfigurationDetails.shouldSimplifyByRationalizingNumerator = true;
+    rationalizeConfigurationDetails.shouldSimplifyToFactors = true;
+    SimplificationOfExpression::ScopeObject scopeObject;
+    scopeObject.setInThisScopeThisConfiguration(rationalizeConfigurationDetails);
+
+    term.simplify();
 }
 
-bool isDifferentiableAt(Term const& term, string const& variableName, AlbaNumber const& value) {
-    bool result(false);
+void simplifyForDifferentiation(Term& term) {
+    term.simplify();
+    simplifyTermByFactoringToNonDoubleFactors(term);
+}
+
+Equation getRelationshipOfDerivativeOfTheInverseAndTheDerivative(
+    Term const& term, string const& variableName, string const& variableForNonInverse,
+    string const& variableForInverse) {
+    // Suppose the function f is continuous and monotonic on a closed interval [a, b] containing the number c, and let
+    // f(c) = d. If f'(c) exists and f'(c) != 0, then (f-1)'(d) exists then: The relationship of the derivatives is
+    // (f-1)'(d) = 1/f'(c)
     Differentiation differentiation(variableName);
+    Term inverseOfTerm(invertTerm(term, variableName));
     Term derivative(differentiation.differentiate(term));
-    SubstitutionOfVariablesToValues substitution{{"x", value}};
-    Term derivativeValue(substitution.performSubstitutionTo(derivative));
-    if (derivativeValue.isConstant()) {
-        result = derivativeValue.getAsNumber().isARealFiniteValue();
+    Term derivativeOfInverse(differentiation.differentiate(inverseOfTerm));
+    SubstitutionOfVariablesToTerms substitution{{variableName, variableForNonInverse}};
+    Term derivativeWithNewVariable(substitution.performSubstitutionTo(derivative));
+    substitution.putVariableWithTerm(variableName, variableForInverse);
+    Term derivativeOfInverseWithNewVariable(substitution.performSubstitutionTo(derivativeOfInverse));
+    Term oneOverDerivativeWithNewVariable(createExpressionIfPossible({1, "/", derivativeWithNewVariable}));
+    derivativeOfInverseWithNewVariable.simplify();
+    oneOverDerivativeWithNewVariable.simplify();
+    return {derivativeOfInverseWithNewVariable, "=", oneOverDerivativeWithNewVariable};
+}
+
+Equation getIntegralEquationForFirstOrderDifferentialEquation(
+    Equation const& equation, string const& xVariableName, string const& yVariableName) {
+    Equation result;
+    DerivativeVariableName derivativeVariableName(1, xVariableName, yVariableName);
+    string derivativeName(derivativeVariableName.getNameInLeibnizNotation());
+    IsolationOfOneVariableOnEqualityEquation isolation(equation);
+    Term termWithDerivative;
+    Term termWithoutDerivative;
+    isolation.isolateTermWithVariable(derivativeName, termWithDerivative, termWithoutDerivative);
+    SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever retriever({derivativeName, yVariableName});
+    retriever.retrieveFromTerm(termWithoutDerivative);
+    SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::VariableNameToTermMap const& variableNameToTermMap(
+        retriever.getVariableNameToTermMap());
+    Term dyOverDx = termWithDerivative;
+    Term p = negateTerm(variableNameToTermMap.at(yVariableName));
+    Term q = retriever.getTermWithMultipleVariableNames() + retriever.getRemainingTerm();
+
+    dyOverDx.simplify();
+    p.simplify();
+    q.simplify();
+    if (isFirstOrderDifferentialEquation(dyOverDx, p, q, xVariableName, yVariableName)) {
+        result = getIntegralEquationForFirstOrderDifferentialEquation(p, q, xVariableName, yVariableName);
     }
     return result;
 }
 
-bool isDifferentiableAtUsingDerivativeDefinition(
-    Term const& term, string const& variableName, AlbaNumber const& value) {
-    bool result(false);
-    Term derivative(getDerivativeAtUsingLimit(term, variableName, "x", LimitAtAValueApproachType::BothSides));
-    SubstitutionOfVariablesToValues substitution{{"x", value}};
-    Term derivativeValue(substitution.performSubstitutionTo(derivative));
-    if (derivativeValue.isConstant()) {
-        result = derivativeValue.getAsNumber().isARealFiniteValue();
-    }
-    return result;
-}
-
-bool isFirstOrderDifferentialEquation(
-    Term const& dyOverDx, Term const& p, Term const& q, string const& xVariableName, string const& yVariableName) {
+Equation getIntegralEquationForFirstOrderDifferentialEquation(
+    Term const& p, Term const& q, string const& xVariableName, string const& yVariableName) {
     // First order differential equation should follow this:
     // dy/dx = P(x)*y + Q(x)
-    bool result(false);
-    DerivativeVariableName derivativeVariableName(1, xVariableName, yVariableName);
-    Term remainingTermWithoutDyOverDx = dyOverDx / derivativeVariableName.getNameInLeibnizNotation();
-    remainingTermWithoutDyOverDx.simplify();
-    if (Term(1) == remainingTermWithoutDyOverDx) {
-        VariableNamesRetriever retriever1;
-        retriever1.retrieveFromTerm(p);
-        VariableNamesSet const& namesFromP(retriever1.getVariableNames());
-        if (namesFromP.find(yVariableName) != namesFromP.cend()) {
-            VariableNamesRetriever retriever2;
-            retriever2.retrieveFromTerm(q);
-            VariableNamesSet const& namesFromQ(retriever2.getVariableNames());
-            if (namesFromQ.find(xVariableName) != namesFromQ.cend()) {
-                result = true;
-            }
-        }
-    }
-    return result;
+    Integration integration(xVariableName);
+    Term integralOfP(integration.integrate(p));
+    Term eToTheIntegralOfP(createExpressionIfPossible({getEAsATerm(), "^", integralOfP}));
+    Term eToTheNegativeIntegralOfP(createExpressionIfPossible({getEAsATerm(), "^", -integralOfP}));
+    Term qWithoutY(q / yVariableName);
+    Term qExpression(createExpressionIfPossible({qWithoutY, "*", eToTheIntegralOfP}));
+    Term cExpression(createExpressionIfPossible({getEAsATerm(), "*", eToTheNegativeIntegralOfP}));
+    Term integralOfQExpression(integration.integrate(qExpression));
+    Term qcExpression(createExpressionIfPossible({integralOfQExpression, "+", cExpression}));
+    Term pqcExpression(createExpressionIfPossible({eToTheNegativeIntegralOfP, "*", qcExpression}));
+    return {yVariableName, "=", pqcExpression};
+}
+
+SolutionSet getDifferentiabilityDomain(Term const& term, string const& variableName) {
+    // This code is not accurate.
+    // How about piecewise function?
+    // How about absolute value function?
+    Differentiation differentiation(variableName);
+    Term derivativeTerm(differentiation.differentiate(term));
+    return calculateDomainForTermWithOneVariable(derivativeTerm);
 }
 
 Term evaluateAtDefiniteValue(Term const& term, string const& variableName, AlbaNumber const& value) {
@@ -252,93 +278,65 @@ Term getPartialDerivative(Term const& term, string const& variableName) {
     return differentiation.differentiate(term);
 }
 
-SolutionSet getDifferentiabilityDomain(Term const& term, string const& variableName) {
-    // This code is not accurate.
-    // How about piecewise function?
-    // How about absolute value function?
+bool isTheFirstFundamentalTheoremOfCalculusTrue(Term const& term, string const& variableName) {
+    // The first fundamental theorem of calculus
+    // Let the function f be continuous on the closed interval [a, b] and let x be any number in [a, b].
+    // If F is the definite integral of f from a to x then the derivative of F at x is equal to f at x.
+    Integration integration(variableName);
     Differentiation differentiation(variableName);
-    Term derivativeTerm(differentiation.differentiate(term));
-    return calculateDomainForTermWithOneVariable(derivativeTerm);
+    Term capitalF(integration.integrate(term));
+    Term derivativeOfCapitalF(differentiation.differentiate(capitalF));
+    Term simplifiedTerm(term);
+    simplifiedTerm.simplify();
+    return derivativeOfCapitalF == simplifiedTerm;
 }
 
-Equation getRelationshipOfDerivativeOfTheInverseAndTheDerivative(
-    Term const& term, string const& variableName, string const& variableForNonInverse,
-    string const& variableForInverse) {
-    // Suppose the function f is continuous and monotonic on a closed interval [a, b] containing the number c, and let
-    // f(c) = d. If f'(c) exists and f'(c) != 0, then (f-1)'(d) exists then: The relationship of the derivatives is
-    // (f-1)'(d) = 1/f'(c)
+bool isDifferentiableAt(Term const& term, string const& variableName, AlbaNumber const& value) {
+    bool result(false);
     Differentiation differentiation(variableName);
-    Term inverseOfTerm(invertTerm(term, variableName));
     Term derivative(differentiation.differentiate(term));
-    Term derivativeOfInverse(differentiation.differentiate(inverseOfTerm));
-    SubstitutionOfVariablesToTerms substitution{{variableName, variableForNonInverse}};
-    Term derivativeWithNewVariable(substitution.performSubstitutionTo(derivative));
-    substitution.putVariableWithTerm(variableName, variableForInverse);
-    Term derivativeOfInverseWithNewVariable(substitution.performSubstitutionTo(derivativeOfInverse));
-    Term oneOverDerivativeWithNewVariable(createExpressionIfPossible({1, "/", derivativeWithNewVariable}));
-    derivativeOfInverseWithNewVariable.simplify();
-    oneOverDerivativeWithNewVariable.simplify();
-    return {derivativeOfInverseWithNewVariable, "=", oneOverDerivativeWithNewVariable};
-}
-
-Equation getIntegralEquationForFirstOrderDifferentialEquation(
-    Equation const& equation, string const& xVariableName, string const& yVariableName) {
-    Equation result;
-    DerivativeVariableName derivativeVariableName(1, xVariableName, yVariableName);
-    string derivativeName(derivativeVariableName.getNameInLeibnizNotation());
-    IsolationOfOneVariableOnEqualityEquation isolation(equation);
-    Term termWithDerivative;
-    Term termWithoutDerivative;
-    isolation.isolateTermWithVariable(derivativeName, termWithDerivative, termWithoutDerivative);
-    SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever retriever({derivativeName, yVariableName});
-    retriever.retrieveFromTerm(termWithoutDerivative);
-    SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::VariableNameToTermMap const& variableNameToTermMap(
-        retriever.getVariableNameToTermMap());
-    Term dyOverDx = termWithDerivative;
-    Term p = negateTerm(variableNameToTermMap.at(yVariableName));
-    Term q = retriever.getTermWithMultipleVariableNames() + retriever.getRemainingTerm();
-
-    dyOverDx.simplify();
-    p.simplify();
-    q.simplify();
-    if (isFirstOrderDifferentialEquation(dyOverDx, p, q, xVariableName, yVariableName)) {
-        result = getIntegralEquationForFirstOrderDifferentialEquation(p, q, xVariableName, yVariableName);
+    SubstitutionOfVariablesToValues substitution{{"x", value}};
+    Term derivativeValue(substitution.performSubstitutionTo(derivative));
+    if (derivativeValue.isConstant()) {
+        result = derivativeValue.getAsNumber().isARealFiniteValue();
     }
     return result;
 }
 
-Equation getIntegralEquationForFirstOrderDifferentialEquation(
-    Term const& p, Term const& q, string const& xVariableName, string const& yVariableName) {
+bool isDifferentiableAtUsingDerivativeDefinition(
+    Term const& term, string const& variableName, AlbaNumber const& value) {
+    bool result(false);
+    Term derivative(getDerivativeAtUsingLimit(term, variableName, "x", LimitAtAValueApproachType::BothSides));
+    SubstitutionOfVariablesToValues substitution{{"x", value}};
+    Term derivativeValue(substitution.performSubstitutionTo(derivative));
+    if (derivativeValue.isConstant()) {
+        result = derivativeValue.getAsNumber().isARealFiniteValue();
+    }
+    return result;
+}
+
+bool isFirstOrderDifferentialEquation(
+    Term const& dyOverDx, Term const& p, Term const& q, string const& xVariableName, string const& yVariableName) {
     // First order differential equation should follow this:
     // dy/dx = P(x)*y + Q(x)
-    Integration integration(xVariableName);
-    Term integralOfP(integration.integrate(p));
-    Term eToTheIntegralOfP(createExpressionIfPossible({getEAsATerm(), "^", integralOfP}));
-    Term eToTheNegativeIntegralOfP(createExpressionIfPossible({getEAsATerm(), "^", -integralOfP}));
-    Term qWithoutY(q / yVariableName);
-    Term qExpression(createExpressionIfPossible({qWithoutY, "*", eToTheIntegralOfP}));
-    Term cExpression(createExpressionIfPossible({getEAsATerm(), "*", eToTheNegativeIntegralOfP}));
-    Term integralOfQExpression(integration.integrate(qExpression));
-    Term qcExpression(createExpressionIfPossible({integralOfQExpression, "+", cExpression}));
-    Term pqcExpression(createExpressionIfPossible({eToTheNegativeIntegralOfP, "*", qcExpression}));
-    return {yVariableName, "=", pqcExpression};
-}
-
-void simplifyDerivativeByDefinition(Term& term) {
-    SimplificationOfExpression::ConfigurationDetails rationalizeConfigurationDetails(
-        SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
-    rationalizeConfigurationDetails.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = true;
-    rationalizeConfigurationDetails.shouldSimplifyByRationalizingNumerator = true;
-    rationalizeConfigurationDetails.shouldSimplifyToFactors = true;
-    SimplificationOfExpression::ScopeObject scopeObject;
-    scopeObject.setInThisScopeThisConfiguration(rationalizeConfigurationDetails);
-
-    term.simplify();
-}
-
-void simplifyForDifferentiation(Term& term) {
-    term.simplify();
-    simplifyTermByFactoringToNonDoubleFactors(term);
+    bool result(false);
+    DerivativeVariableName derivativeVariableName(1, xVariableName, yVariableName);
+    Term remainingTermWithoutDyOverDx = dyOverDx / derivativeVariableName.getNameInLeibnizNotation();
+    remainingTermWithoutDyOverDx.simplify();
+    if (Term(1) == remainingTermWithoutDyOverDx) {
+        VariableNamesRetriever retriever1;
+        retriever1.retrieveFromTerm(p);
+        VariableNamesSet const& namesFromP(retriever1.getVariableNames());
+        if (namesFromP.find(yVariableName) != namesFromP.cend()) {
+            VariableNamesRetriever retriever2;
+            retriever2.retrieveFromTerm(q);
+            VariableNamesSet const& namesFromQ(retriever2.getVariableNames());
+            if (namesFromQ.find(xVariableName) != namesFromQ.cend()) {
+                result = true;
+            }
+        }
+    }
+    return result;
 }
 
 }  // namespace alba::algebra

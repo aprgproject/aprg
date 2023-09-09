@@ -12,7 +12,6 @@ Terms allFalseTerms{false, false, false};
 Terms allTrueTerms{true, true, true};
 Terms oneTrueTerm{false, true, "x"};
 Terms twoTrueTerms{false, true, "x", true};
-
 UnaryBooleanFunction isExactlyTrue = [](Term const& term) { return term == Term(true); };
 }  // namespace
 

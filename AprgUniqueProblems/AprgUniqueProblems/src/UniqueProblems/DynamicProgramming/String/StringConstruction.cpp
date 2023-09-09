@@ -33,6 +33,32 @@ int StringConstruction::getCountSquareRootAlgorithm() {
     return result;
 }
 
+void StringConstruction::initialize() {
+    removeEmptySubstrings();
+    removeDuplicateSubstrings();
+    saveHashOfAllSubstrings();
+}
+
+void StringConstruction::removeEmptySubstrings() {
+    m_subStrings.erase(
+        remove_if(m_subStrings.begin(), m_subStrings.end(), [](string const& subString) { return subString.empty(); }),
+        m_subStrings.end());
+}
+
+void StringConstruction::removeDuplicateSubstrings() {
+    sort(m_subStrings.begin(), m_subStrings.end());
+    m_subStrings.erase(unique(m_subStrings.begin(), m_subStrings.end()), m_subStrings.end());
+    // Note since that duplicate are removed so substrings are distinct.
+}
+
+void StringConstruction::saveHashOfAllSubstrings() {
+    HornerHashFunctionForWholeString<HashValue> hashFunction(RADIX, A_LARGE_PRIME);
+    m_subStringHash.reserve(m_subStrings.size());
+    for (string const& subString : m_subStrings) {
+        m_subStringHash.emplace_back(hashFunction.getHashCode(subString));
+    }
+}
+
 int StringConstruction::getCount(int const prefixLength) {
     if (UNUSED_VALUE == m_prefixLengthToCount[prefixLength]) {
         m_prefixLengthToCount[prefixLength] = count(prefixLength);
@@ -92,32 +118,6 @@ int StringConstruction::countSquareRootAlgorithm(int const prefixLength) {
         }
     }
     return result;
-}
-
-void StringConstruction::initialize() {
-    removeEmptySubstrings();
-    removeDuplicateSubstrings();
-    saveHashOfAllSubstrings();
-}
-
-void StringConstruction::removeEmptySubstrings() {
-    m_subStrings.erase(
-        remove_if(m_subStrings.begin(), m_subStrings.end(), [](string const& subString) { return subString.empty(); }),
-        m_subStrings.end());
-}
-
-void StringConstruction::removeDuplicateSubstrings() {
-    sort(m_subStrings.begin(), m_subStrings.end());
-    m_subStrings.erase(unique(m_subStrings.begin(), m_subStrings.end()), m_subStrings.end());
-    // Note since that duplicate are removed so substrings are distinct.
-}
-
-void StringConstruction::saveHashOfAllSubstrings() {
-    HornerHashFunctionForWholeString<HashValue> hashFunction(RADIX, A_LARGE_PRIME);
-    m_subStringHash.reserve(m_subStrings.size());
-    for (string const& subString : m_subStrings) {
-        m_subStringHash.emplace_back(hashFunction.getHashCode(subString));
-    }
 }
 
 }  // namespace alba

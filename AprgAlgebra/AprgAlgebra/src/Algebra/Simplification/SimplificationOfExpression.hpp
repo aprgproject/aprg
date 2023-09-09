@@ -46,17 +46,6 @@ public:
     void simplify();
 
 private:
-    static bool isChangeDetected(Expression const& expression1, Expression const& expression2);
-    // other functions
-    static bool shouldDistributeExponentConstantToEachBase();
-    static Term getCombinedTermAndSimplifyByRationalizingNumeratorOrDenominatorIfNeeded(
-        TermsOverTerms const& termsOverTerms);
-    // functions for raise to power
-    static Term getCombinedTermUsingTermsRaiseToTerms(TermRaiseToTerms const& termRaiseToTerms);
-    static Term getEachBasesRaisedToConstantIfPossible(TermRaiseToTerms const& termRaiseToTerms);
-    static Factorization::ConfigurationDetails getFactorizationConfiguration();
-    static Expression getNewExpressionWithSubstitutedVariableForTerm(
-        Term const& mainExpression, Term const& termToSubstitute);
     static void simplifyExpression(Expression& expression);
     static void processTermsBaseOnOperatorLevel(
         Expression& expression, TermsWithDetails const& termsToProcess, OperatorLevel const operatorLevel);
@@ -70,7 +59,17 @@ private:
     // functions for multiplication/division
     static void simplifyByCombiningRadicalsInMultiplicationAndDivisionIfNeeded(
         TermsWithDetails& termsInMultiplicationAndDivision);
-    bool tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(Expression const& expression);
+    static Factorization::ConfigurationDetails getFactorizationConfiguration();
+    static Expression getNewExpressionWithSubstitutedVariableForTerm(
+        Term const& mainExpression, Term const& termToSubstitute);
+    static Term getCombinedTermAndSimplifyByRationalizingNumeratorOrDenominatorIfNeeded(
+        TermsOverTerms const& termsOverTerms);
+    // functions for raise to power
+    static Term getCombinedTermUsingTermsRaiseToTerms(TermRaiseToTerms const& termRaiseToTerms);
+    static Term getEachBasesRaisedToConstantIfPossible(TermRaiseToTerms const& termRaiseToTerms);
+    static bool isChangeDetected(Expression const& expression1, Expression const& expression2);
+    // other functions
+    static bool shouldDistributeExponentConstantToEachBase();
     void simplifyExpressionUntilNoChange();
     void simplifyExpressionUntilNoChangeInitiallyIfNeeded();
     void simplifyToACommonDenominatorIfNeeded();
@@ -78,6 +77,7 @@ private:
     void convertPolynomialOverPolynomialIfNeeded();
     void convertPolynomialToPolynomialOverPolynomial(Term& term);
     void convertPolynomialToPolynomialOverPolynomial(Expression& expression);
+    bool tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(Expression const& expression);
     Expression m_expression;
 };
 

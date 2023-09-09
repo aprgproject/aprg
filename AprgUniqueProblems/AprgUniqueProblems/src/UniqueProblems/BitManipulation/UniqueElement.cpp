@@ -12,6 +12,13 @@ UniqueElement::Value UniqueElement::getAUniqueElementOnTwoDuplicatedValues(Value
     return getXorResult(values);
 }
 
+UniqueElement::Value UniqueElement::getAnElementOccuringOddNumberOfTimes(Values const& values) {
+    // Given an array of positive integers.
+    // All numbers occur an even number of times except one number which occurs an odd number of times.
+    // Find the number in O(n) time & constant space.
+    return getXorResult(values);
+}
+
 UniqueElement::ValuePairs UniqueElement::getTwoUniqueElementsOnTwoDuplicatedValues(Values const& values) {
     // Given an array in which all numbers except two are repeated once.
     // (i.e. we have 2n+2 numbers and n numbers are occurring twice and remaining two have occurred once).
@@ -29,13 +36,6 @@ UniqueElement::ValuePairs UniqueElement::getTwoUniqueElementsOnTwoDuplicatedValu
         }
     }
     return ValuePairs{valueWithOne, valueWithZero};
-}
-
-UniqueElement::Value UniqueElement::getAnElementOccuringOddNumberOfTimes(Values const& values) {
-    // Given an array of positive integers.
-    // All numbers occur an even number of times except one number which occurs an odd number of times.
-    // Find the number in O(n) time & constant space.
-    return getXorResult(values);
 }
 
 UniqueElement::Value UniqueElement::getAUniqueElementOnThreeDuplicatedValues(Values const& values) {

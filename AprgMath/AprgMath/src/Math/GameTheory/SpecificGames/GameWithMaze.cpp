@@ -23,24 +23,6 @@ bool GameWithMaze::hasNoMoves(Coordinate const& coordinate) const {
     return isLeftNotAllowed && isUpAllowed;
 }
 
-UnsignedInteger GameWithMaze::getGrundyNumberAt(Coordinate const& coordinate) {
-    UnsignedInteger result{};
-    if (!m_isBlockedMatrix.getEntry(coordinate.first, coordinate.second)) {
-        GrundyNumberEntry grundyNumberEntry = m_grundyNumberMatrix.getEntry(coordinate.first, coordinate.second);
-        if (grundyNumberEntry != INVALID_GRUNDY_NUMBER) {
-            result = static_cast<UnsignedInteger>(grundyNumberEntry);
-        } else {
-            result = getGrundyNumber(getNextGrundyNumbers(coordinate));
-            m_grundyNumberMatrix.setEntry(coordinate.first, coordinate.second, static_cast<GrundyNumberEntry>(result));
-        }
-    }
-    return result;
-}
-
-GameState GameWithMaze::getGameStateAt(Coordinate const& coordinate) {
-    return getGameStateFromGrundyNumber(getGrundyNumberAt(coordinate));
-}
-
 GameWithMaze::Coordinate GameWithMaze::getOptimalNextCoordinateAt(Coordinate const& coordinate) {
     Coordinate result{};
     GameState gameState = getGameStateFromGrundyNumber(getGrundyNumberAt(coordinate));
@@ -76,6 +58,24 @@ GameWithMaze::Coordinate GameWithMaze::getNextCoordinateWithGrundyNumber(
         if (targetGrundyNumber == getGrundyNumberAt(nextCoordinate)) {
             result = nextCoordinate;
             break;
+        }
+    }
+    return result;
+}
+
+GameState GameWithMaze::getGameStateAt(Coordinate const& coordinate) {
+    return getGameStateFromGrundyNumber(getGrundyNumberAt(coordinate));
+}
+
+UnsignedInteger GameWithMaze::getGrundyNumberAt(Coordinate const& coordinate) {
+    UnsignedInteger result{};
+    if (!m_isBlockedMatrix.getEntry(coordinate.first, coordinate.second)) {
+        GrundyNumberEntry grundyNumberEntry = m_grundyNumberMatrix.getEntry(coordinate.first, coordinate.second);
+        if (grundyNumberEntry != INVALID_GRUNDY_NUMBER) {
+            result = static_cast<UnsignedInteger>(grundyNumberEntry);
+        } else {
+            result = getGrundyNumber(getNextGrundyNumbers(coordinate));
+            m_grundyNumberMatrix.setEntry(coordinate.first, coordinate.second, static_cast<GrundyNumberEntry>(result));
         }
     }
     return result;

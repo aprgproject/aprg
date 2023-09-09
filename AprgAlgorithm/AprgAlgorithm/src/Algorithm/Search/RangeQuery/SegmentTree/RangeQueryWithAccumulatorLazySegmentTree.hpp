@@ -44,17 +44,6 @@ public:
         // only parent have pending updates
     }
 
-    Value getValueOnInterval(Index const start, Index const end) {
-        // This has log(N) running time
-        Value result{};
-        if (start <= end && (b_startOfChildren + start) < static_cast<Index>(b_treeValues.size()) &&
-            (b_startOfChildren + end) < static_cast<Index>(b_treeValues.size())) {
-            result = getValueOnIntervalFromTopToBottom(
-                start, end, Utilities::ROOT_PARENT_INDEX, 0, b_startOfChildren);  // startOfChildren is size of base too
-        }
-        return result;
-    }
-
     void increaseAtRange(Index const start, Index const end, Value const& incrementValue) {
         if (start <= end && (b_startOfChildren + start) < static_cast<Index>(b_treeValues.size()) &&
             (b_startOfChildren + end) < static_cast<Index>(b_treeValues.size())) {
@@ -72,6 +61,17 @@ public:
                 index, index,
                 m_inverseFunction(newValue, b_treeValues[childIndex]));  // startOfChildren is size of base too
         }
+    }
+
+    Value getValueOnInterval(Index const start, Index const end) {
+        // This has log(N) running time
+        Value result{};
+        if (start <= end && (b_startOfChildren + start) < static_cast<Index>(b_treeValues.size()) &&
+            (b_startOfChildren + end) < static_cast<Index>(b_treeValues.size())) {
+            result = getValueOnIntervalFromTopToBottom(
+                start, end, Utilities::ROOT_PARENT_INDEX, 0, b_startOfChildren);  // startOfChildren is size of base too
+        }
+        return result;
     }
 
 private:
@@ -101,39 +101,6 @@ private:
                 --remainingNumberOfTimes;
             }
         }
-    }
-
-    Value getValueOnIntervalFromTopToBottom(
-        Index const startInterval, Index const endInterval, Index const currentChild, Index const baseLeft,
-        Index const baseRight) {
-        // This has log(N) running time
-        // We also calculate the sum of elements in a range [a,b] by walking in the tree from top to bottom.
-        // If the range [x, y] of a node completely belongs to [a,b], we add the s value of the node to the sum.
-        // Otherwise, we continue the search recursively downwards in the tree.
-        Value result{};
-        performUpdateAtIndexIfNeeded(currentChild, baseLeft, baseRight);  // propagate current update before processing
-        if (startInterval <= baseLeft && baseRight <= endInterval) {
-            result = b_treeValues[currentChild];
-        } else {
-            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
-            bool doesLeftPartIntersect = !(endInterval < baseLeft || baseMidPoint < startInterval);
-            bool doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
-            if (doesLeftPartIntersect && doesRightPartIntersect) {
-                result = b_function(
-                    getValueOnIntervalFromTopToBottom(
-                        startInterval, endInterval, Utilities::getLeftChild(currentChild), baseLeft, baseMidPoint),
-                    getValueOnIntervalFromTopToBottom(
-                        startInterval, endInterval, Utilities::getRightChild(currentChild), baseMidPoint + 1,
-                        baseRight));
-            } else if (doesLeftPartIntersect) {
-                result = getValueOnIntervalFromTopToBottom(
-                    startInterval, endInterval, Utilities::getLeftChild(currentChild), baseLeft, baseMidPoint);
-            } else if (doesRightPartIntersect) {
-                result = getValueOnIntervalFromTopToBottom(
-                    startInterval, endInterval, Utilities::getRightChild(currentChild), baseMidPoint + 1, baseRight);
-            }
-        }
-        return result;
     }
 
     void increaseAtRangeFromTopToBottom(
@@ -197,6 +164,39 @@ private:
                 pendingUpdate = m_identityValue;
             }
         }
+    }
+
+    Value getValueOnIntervalFromTopToBottom(
+        Index const startInterval, Index const endInterval, Index const currentChild, Index const baseLeft,
+        Index const baseRight) {
+        // This has log(N) running time
+        // We also calculate the sum of elements in a range [a,b] by walking in the tree from top to bottom.
+        // If the range [x, y] of a node completely belongs to [a,b], we add the s value of the node to the sum.
+        // Otherwise, we continue the search recursively downwards in the tree.
+        Value result{};
+        performUpdateAtIndexIfNeeded(currentChild, baseLeft, baseRight);  // propagate current update before processing
+        if (startInterval <= baseLeft && baseRight <= endInterval) {
+            result = b_treeValues[currentChild];
+        } else {
+            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
+            bool doesLeftPartIntersect = !(endInterval < baseLeft || baseMidPoint < startInterval);
+            bool doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
+            if (doesLeftPartIntersect && doesRightPartIntersect) {
+                result = b_function(
+                    getValueOnIntervalFromTopToBottom(
+                        startInterval, endInterval, Utilities::getLeftChild(currentChild), baseLeft, baseMidPoint),
+                    getValueOnIntervalFromTopToBottom(
+                        startInterval, endInterval, Utilities::getRightChild(currentChild), baseMidPoint + 1,
+                        baseRight));
+            } else if (doesLeftPartIntersect) {
+                result = getValueOnIntervalFromTopToBottom(
+                    startInterval, endInterval, Utilities::getLeftChild(currentChild), baseLeft, baseMidPoint);
+            } else if (doesRightPartIntersect) {
+                result = getValueOnIntervalFromTopToBottom(
+                    startInterval, endInterval, Utilities::getRightChild(currentChild), baseMidPoint + 1, baseRight);
+            }
+        }
+        return result;
     }
 
     Index const b_startOfChildren;

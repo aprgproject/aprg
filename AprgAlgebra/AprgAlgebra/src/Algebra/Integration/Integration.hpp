@@ -54,7 +54,8 @@ public:
     using InputTermToTrigonometryFunctionExponentsMap = std::map<Term, TrigonometryFunctionExponents>;
     using Configurations = std::vector<Configuration>;
     explicit Integration(std::string const& nameOfVariableToIntegrate);
-    bool isConvergent(Term const& term, AlbaNumber const& lowerEnd, AlbaNumber const& higherEnd);
+    Monomial integrateConstant(Constant const& constant);
+    Monomial integrateVariable(Variable const& variable);
     Term integrate(Term const& term);
     Term integrate(Constant const& constant);
     Term integrate(Variable const& variable);
@@ -65,44 +66,13 @@ public:
     Term integrateWithPlusC(Term const& term);
     Term integrateAtDefiniteValues(Term const& term, AlbaNumber const& lowerEnd, AlbaNumber const& higherEnd);
     Term integrateAtDefiniteTerms(Term const& term, Term const& lowerEnd, Term const& higherEnd);
-    Monomial integrateConstant(Constant const& constant);
-    Monomial integrateVariable(Variable const& variable);
     Term integrateMonomial(Monomial const& monomial);
     Term integratePolynomial(Polynomial const& polynomial);
     Term integrateExpression(Expression const& expression);
     Term integrateFunction(Function const& functionObject);
+    bool isConvergent(Term const& term, AlbaNumber const& lowerEnd, AlbaNumber const& higherEnd);
 
 private:
-    static bool areExponentsSame(
-        TrigonometryFunctionExponents const& exponents1, TrigonometryFunctionExponents const& exponents2);
-    static bool isTrigonometricSubstitutionAllowed();
-    static Term substituteBackToOldVariable(
-        Term const& mainTerm, std::string const& newVariableName, Term const& termForNewVariable);
-
-    static TrigonometricSubstitutionDetails calculateTrigonometricSubstitutionDetails(
-        Term const& a, Term const& u, std::string const& aSquaredAndUSquaredName, Term const& aSquaredAndUSquared,
-        bool const isANegative, bool const isUNegative);
-
-    static Term substituteFromTrigonometricFunctionsBackToNormal(
-        Term const& mainTerm, TrigonometricSubstitutionDetails const& details);
-
-    static Polynomial getTotalNumeratorWithNewVariables(
-        Polynomial const& originalDenominator, Polynomials const& partialNumerators,
-        Polynomials const& partialDenominators);
-
-    static VariableNamesSet getNamesOfNewVariablesForPartialFraction(
-        std::string const& originalVariableName, Polynomial const& numeratorWithNewVariables);
-    static AlbaNumbersSet getExponentsForPartialFraction(
-        std::string const& originalVariableName, Polynomial const& numeratorWithNewVariables);
-    static Polynomial getPartialNumeratorForPartialFractions(int const degree, std::string const& variableName);
-    static std::string getNewVariableNameForPartialFractions();
-    static TrigonometryFunctionExponents getTrigonometricExponentsSuitableForIntegration(
-        TrigonometryFunctionExponents const& oldExponents);
-    // Integration configurations
-    static Configuration getConfigurationWithFactors();
-    static Configuration getConfigurationWithCommonDenominator();
-    static Configuration getConfigurationWithoutFactors();
-    static Configuration getConfigurationWithCombiningRadicals();
     static void integrateChangingTermRaiseToChangingTerm(Term& result, Term const& firstTerm, Term const& secondTerm);
 
     static void retrieveImportantTermsForTrigonometricSubstitutionInExpression(
@@ -159,6 +129,44 @@ private:
         TermsRaiseToNumbers& newTerms, Term const& inputTerm, TrigonometryFunctionExponents const& exponents);
     // Initialize and Finalize steps
     static void finalizeTermForIntegration(Term& term);
+    static AlbaNumbersSet getExponentsForPartialFraction(
+        std::string const& originalVariableName, Polynomial const& numeratorWithNewVariables);
+    // Integration configurations
+    static Configuration getConfigurationWithFactors();
+    static Configuration getConfigurationWithCommonDenominator();
+    static Configuration getConfigurationWithoutFactors();
+    static Configuration getConfigurationWithCombiningRadicals();
+
+    static Polynomial getTotalNumeratorWithNewVariables(
+        Polynomial const& originalDenominator, Polynomials const& partialNumerators,
+        Polynomials const& partialDenominators);
+
+    static Polynomial getPartialNumeratorForPartialFractions(int const degree, std::string const& variableName);
+    static Term substituteBackToOldVariable(
+        Term const& mainTerm, std::string const& newVariableName, Term const& termForNewVariable);
+    static Term substituteFromTrigonometricFunctionsBackToNormal(
+        Term const& mainTerm, TrigonometricSubstitutionDetails const& details);
+
+    static TrigonometricSubstitutionDetails calculateTrigonometricSubstitutionDetails(
+        Term const& a, Term const& u, std::string const& aSquaredAndUSquaredName, Term const& aSquaredAndUSquared,
+        bool const isANegative, bool const isUNegative);
+
+    static TrigonometryFunctionExponents getTrigonometricExponentsSuitableForIntegration(
+        TrigonometryFunctionExponents const& oldExponents);
+    static VariableNamesSet getNamesOfNewVariablesForPartialFraction(
+        std::string const& originalVariableName, Polynomial const& numeratorWithNewVariables);
+    static std::string getNewVariableNameForPartialFractions();
+    static bool areExponentsSame(
+        TrigonometryFunctionExponents const& exponents1, TrigonometryFunctionExponents const& exponents2);
+    static bool isTrigonometricSubstitutionAllowed();
+    [[nodiscard]] Monomial integrateMonomialWhenExponentIsNotNegativeOne(Monomial const& monomial) const;
+    // For Monomial
+    [[nodiscard]] Term integrateMonomialWhenExponentIsNegativeOne(Monomial const& monomial) const;
+    [[nodiscard]] Term substituteToNewVariable(Term const& mainTerm, Term const& termForNewVariable) const;
+    [[nodiscard]] Term substituteToTrigonometricFunctions(
+        Term const& mainTerm, TrigonometricSubstitutionDetails const& details) const;
+    [[nodiscard]] Term divideFirstTermAndDerivativeOfSecondTerm(Term const& firstTerm, Term const& secondTerm) const;
+    [[nodiscard]] std::string getCurrentVariableToIntegrate() const;
     // Miscellaneous
     [[nodiscard]] bool isVariableToIntegrate(std::string const& variableName) const;
     [[nodiscard]] bool isChangingTerm(Term const& term) const;
@@ -167,14 +175,6 @@ private:
     [[nodiscard]] bool isIntegrationUsingSubstitutionAllowed(Term const& term) const;
     [[nodiscard]] bool isIntegrationByPartsAllowed(Term const& term) const;
     [[nodiscard]] bool isIntegrationByPartialFractionAllowed() const;
-    // For Monomial
-    [[nodiscard]] Term integrateMonomialWhenExponentIsNegativeOne(Monomial const& monomial) const;
-    [[nodiscard]] Monomial integrateMonomialWhenExponentIsNotNegativeOne(Monomial const& monomial) const;
-    [[nodiscard]] Term substituteToNewVariable(Term const& mainTerm, Term const& termForNewVariable) const;
-    [[nodiscard]] Term substituteToTrigonometricFunctions(
-        Term const& mainTerm, TrigonometricSubstitutionDetails const& details) const;
-    [[nodiscard]] Term divideFirstTermAndDerivativeOfSecondTerm(Term const& firstTerm, Term const& secondTerm) const;
-    [[nodiscard]] std::string getCurrentVariableToIntegrate() const;
     void integrateFunctionOnly(Term& result, Function const& functionObject) const;
     void integrateRecognizedFunctionsSquared(Term& result, Term const& functionTerm) const;
 
@@ -183,15 +183,6 @@ private:
         TermsWithDetails& changingTerms) const;
 
     void findInnerAndOuterTermForChainRule(Term& innerTerm, Term& outerTerm) const;
-    // Internal integration
-    Term integrateIntenally(Term const& term);
-    Term integrateInternallyWithPurpose(Term const& term, IntegrationPurpose const purpose);
-    Term integrateIntenallyWithNewVariable(
-        Term const& term, IntegrationPurpose const purpose, std::string const& newVariable);
-    // For Expression
-    Term integrateAsTermOrExpressionIfNeeded(Expression const& expression);
-    // For Function
-    Term integrateFunctionInternally(Function const& functionObject);
     void integrateSimplifiedExpressionOnly(
         Term& result, Expression const& expression, Configuration const& configuration);
     void integrateTermsInAdditionOrSubtraction(Term& result, Expression const& expression);
@@ -269,6 +260,15 @@ private:
         Term& result, Term const& functionInputTerm, int const cscExponent, int const cotExponent);
     void integrateSecAndTanCombinationWithExponentsGreaterThanOne(
         Term& result, Term const& functionInputTerm, int const secExponent, int const tanExponent);
+    // Internal integration
+    Term integrateIntenally(Term const& term);
+    Term integrateInternallyWithPurpose(Term const& term, IntegrationPurpose const purpose);
+    Term integrateIntenallyWithNewVariable(
+        Term const& term, IntegrationPurpose const purpose, std::string const& newVariable);
+    // For Expression
+    Term integrateAsTermOrExpressionIfNeeded(Expression const& expression);
+    // For Function
+    Term integrateFunctionInternally(Function const& functionObject);
     stringHelper::strings m_variablesToIntegrate;
     IntegrationHistory m_history;
 };

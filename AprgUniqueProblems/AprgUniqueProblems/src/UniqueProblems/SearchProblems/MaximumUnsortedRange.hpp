@@ -53,13 +53,6 @@ private:
         return static_cast<Index>(endIndex);
     }
 
-    [[nodiscard]] ValuePair getMinMaxPairInUnsorted(
-        Values const& valuesToSort, Index const startIndex, Index const endIndex) const {
-        auto&& [minIt, maxIt] =
-            std::minmax_element(valuesToSort.cbegin() + startIndex, valuesToSort.cbegin() + endIndex + 1);
-        return ValuePair(*minIt, *maxIt);
-    }
-
     [[nodiscard]] Index getAdjustedStartIndex(
         Values const& valuesToSort, Index const startIndex, Value const& minimum) const {
         int adjustedStartIndex = static_cast<int>(startIndex);
@@ -77,6 +70,13 @@ private:
             ++adjustedEndIndex;
         }
         return adjustedEndIndex;
+    }
+
+    [[nodiscard]] ValuePair getMinMaxPairInUnsorted(
+        Values const& valuesToSort, Index const startIndex, Index const endIndex) const {
+        auto&& [minIt, maxIt] =
+            std::minmax_element(valuesToSort.cbegin() + startIndex, valuesToSort.cbegin() + endIndex + 1);
+        return ValuePair(*minIt, *maxIt);
     }
 };
 

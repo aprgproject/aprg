@@ -12,19 +12,19 @@ using namespace std;
 
 namespace alba::AprgBitmap {
 
+uint32_t AnimizeColor::getNewColor(uint32_t const originalColor) const {
+    HueSaturationLightnessData newHslData(convertColorToHueSaturationLightnessData(originalColor));
+    newHslData.lightnessDecimal = getNewLightness(newHslData.lightnessDecimal);
+    newHslData.saturationLightnessDecimal = getNewSaturation(newHslData.saturationLightnessDecimal);
+    return convertHueSaturationLightnessDataToColor(newHslData);
+}
+
 double AnimizeColor::getNewLightness(double const originalValue) const {
     return getNewValue(m_lightnessData, originalValue);
 }
 
 double AnimizeColor::getNewSaturation(double const originalValue) const {
     return getNewValue(m_saturationData, originalValue);
-}
-
-uint32_t AnimizeColor::getNewColor(uint32_t const originalColor) const {
-    HueSaturationLightnessData newHslData(convertColorToHueSaturationLightnessData(originalColor));
-    newHslData.lightnessDecimal = getNewLightness(newHslData.lightnessDecimal);
-    newHslData.saturationLightnessDecimal = getNewSaturation(newHslData.saturationLightnessDecimal);
-    return convertHueSaturationLightnessDataToColor(newHslData);
 }
 
 void AnimizeColor::gatherStatistics(string const& bitmapPath) {
@@ -57,10 +57,6 @@ void AnimizeColor::saveColorData(string const& path) {
     }
 }
 
-bool AnimizeColor::isValueIncluded(double const value) const {
-    return value >= m_lowestIncludedValue && value <= m_highestIncludedValue;
-}
-
 double AnimizeColor::getNewValue(ColorDataMap const& colorDataMap, double const originalValue) const {
     double newValue = originalValue;
     if (isValueIncluded(originalValue)) {
@@ -79,6 +75,10 @@ double AnimizeColor::getNewValue(ColorDataMap const& colorDataMap, double const 
         }
     }
     return newValue;
+}
+
+bool AnimizeColor::isValueIncluded(double const value) const {
+    return value >= m_lowestIncludedValue && value <= m_highestIncludedValue;
 }
 
 void AnimizeColor::calculateNewValues(ColorDataMap& colorDataMap) const {

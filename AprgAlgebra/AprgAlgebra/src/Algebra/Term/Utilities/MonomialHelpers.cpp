@@ -9,92 +9,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-bool canBeMergedInAMonomialByAdditionOrSubtraction(Term const& term1, Term const& term2) {
-    bool result(false);
-    if (term1.isConstant() && term2.isConstant()) {
-        result = true;
-    } else if (term1.isVariable() && term2.isVariable()) {
-        result = canBeMergedInAMonomialByAdditionOrSubtraction(term1.getAsVariable(), term2.getAsVariable());
-    } else if (term1.isMonomial() && term2.isMonomial()) {
-        result = canBeMergedInAMonomialByAdditionOrSubtraction(term1.getAsMonomial(), term2.getAsMonomial());
-    } else if (term1.isMonomial() && term2.isVariable()) {
-        result = canBeMergedInAMonomialByAdditionOrSubtraction(term1.getAsMonomial(), term2.getAsVariable());
-    } else if (term1.isVariable() && term2.isMonomial()) {
-        result = canBeMergedInAMonomialByAdditionOrSubtraction(term2.getAsMonomial(), term1.getAsVariable());
-    }
-    return result;
-}
-
-bool canBeMergedInAMonomialByAdditionOrSubtraction(Monomial const& monomial1, Monomial const& monomial2) {
-    Monomial::VariablesToExponentsMap const& variablesMap1(monomial1.getVariablesToExponentsMap());
-    Monomial::VariablesToExponentsMap const& variablesMap2(monomial2.getVariablesToExponentsMap());
-    bool result(false);
-    if (variablesMap1.size() == variablesMap2.size()) {
-        using MapConstIterator = Monomial::VariablesToExponentsMap::const_iterator;
-        using MismatchResultType = pair<MapConstIterator, MapConstIterator>;
-        MismatchResultType mismatchResult =
-            mismatch(variablesMap1.cbegin(), variablesMap1.end(), variablesMap2.cbegin());
-        result = mismatchResult.first == variablesMap1.cend();
-    }
-    return result;
-}
-
-bool canBeMergedInAMonomialByAdditionOrSubtraction(Monomial const& monomial, Variable const& variable) {
-    Monomial::VariablesToExponentsMap const& variablesMap(monomial.getVariablesToExponentsMap());
-    string variableName(variable.getVariableName());
-    bool result(false);
-    if (variablesMap.size() == 1) {
-        if (variablesMap.find(variableName) != variablesMap.cend()) {
-            result = variablesMap.at(variableName) == 1;
-        }
-    }
-    return result;
-}
-
-bool canBeMergedInAMonomialByAdditionOrSubtraction(Variable const& variable1, Variable const& variable2) {
-    return variable1 == variable2;
-}
-
-bool doesCoefficientsHaveSameSign(Monomial const& monomial1, Monomial const& monomial2) {
-    return getSign(monomial1.getCoefficient()) == getSign(monomial2.getCoefficient());
-}
-
-bool hasNegativeExponents(Monomial const& monomial) {
-    bool result(false);
-    for (auto const& [_, exponent] : monomial.getVariablesToExponentsMap()) {
-        if (exponent < 0) {
-            result = true;
-            break;
-        }
-    }
-    return result;
-}
-
-bool isConstantOnly(Monomial const& monomial) {
-    Monomial::VariablesToExponentsMap const& variableToExponentMap(monomial.getVariablesToExponentsMap());
-    return variableToExponentMap.empty();
-}
-
-bool isVariableOnly(Monomial const& monomial) {
-    Monomial::VariablesToExponentsMap const& variableToExponentMap(monomial.getVariablesToExponentsMap());
-    return monomial.getCoefficient() == 1 && variableToExponentMap.size() == 1 &&
-           (variableToExponentMap.cbegin())->second == 1;
-}
-
-bool hasASingleVariable(Monomial const& monomial) {
-    Monomial::VariablesToExponentsMap const& variableToExponentMap(monomial.getVariablesToExponentsMap());
-    return variableToExponentMap.size() == 1;
-}
-
-string getFirstVariableName(Monomial const& monomial) {
-    Monomial::VariablesToExponentsMap const& variableToExponentMap(monomial.getVariablesToExponentsMap());
-    string variableName;
-    if (!variableToExponentMap.empty()) {
-        variableName = (variableToExponentMap.cbegin())->first;
-    }
-    return variableName;
-}
-
 AlbaNumber getDegree(Monomial const& monomial) {
     AlbaNumber degree;
     for (auto const& [_, exponent] : monomial.getVariablesToExponentsMap()) {
@@ -255,6 +169,92 @@ Monomial getMonomialWithMaximumExponentsInMonomials(Monomials const& monomials) 
         monomialWithMaximumExponents.simplify();
     }
     return monomialWithMaximumExponents;
+}
+
+string getFirstVariableName(Monomial const& monomial) {
+    Monomial::VariablesToExponentsMap const& variableToExponentMap(monomial.getVariablesToExponentsMap());
+    string variableName;
+    if (!variableToExponentMap.empty()) {
+        variableName = (variableToExponentMap.cbegin())->first;
+    }
+    return variableName;
+}
+
+bool canBeMergedInAMonomialByAdditionOrSubtraction(Term const& term1, Term const& term2) {
+    bool result(false);
+    if (term1.isConstant() && term2.isConstant()) {
+        result = true;
+    } else if (term1.isVariable() && term2.isVariable()) {
+        result = canBeMergedInAMonomialByAdditionOrSubtraction(term1.getAsVariable(), term2.getAsVariable());
+    } else if (term1.isMonomial() && term2.isMonomial()) {
+        result = canBeMergedInAMonomialByAdditionOrSubtraction(term1.getAsMonomial(), term2.getAsMonomial());
+    } else if (term1.isMonomial() && term2.isVariable()) {
+        result = canBeMergedInAMonomialByAdditionOrSubtraction(term1.getAsMonomial(), term2.getAsVariable());
+    } else if (term1.isVariable() && term2.isMonomial()) {
+        result = canBeMergedInAMonomialByAdditionOrSubtraction(term2.getAsMonomial(), term1.getAsVariable());
+    }
+    return result;
+}
+
+bool canBeMergedInAMonomialByAdditionOrSubtraction(Monomial const& monomial1, Monomial const& monomial2) {
+    Monomial::VariablesToExponentsMap const& variablesMap1(monomial1.getVariablesToExponentsMap());
+    Monomial::VariablesToExponentsMap const& variablesMap2(monomial2.getVariablesToExponentsMap());
+    bool result(false);
+    if (variablesMap1.size() == variablesMap2.size()) {
+        using MapConstIterator = Monomial::VariablesToExponentsMap::const_iterator;
+        using MismatchResultType = pair<MapConstIterator, MapConstIterator>;
+        MismatchResultType mismatchResult =
+            mismatch(variablesMap1.cbegin(), variablesMap1.end(), variablesMap2.cbegin());
+        result = mismatchResult.first == variablesMap1.cend();
+    }
+    return result;
+}
+
+bool canBeMergedInAMonomialByAdditionOrSubtraction(Monomial const& monomial, Variable const& variable) {
+    Monomial::VariablesToExponentsMap const& variablesMap(monomial.getVariablesToExponentsMap());
+    string variableName(variable.getVariableName());
+    bool result(false);
+    if (variablesMap.size() == 1) {
+        if (variablesMap.find(variableName) != variablesMap.cend()) {
+            result = variablesMap.at(variableName) == 1;
+        }
+    }
+    return result;
+}
+
+bool canBeMergedInAMonomialByAdditionOrSubtraction(Variable const& variable1, Variable const& variable2) {
+    return variable1 == variable2;
+}
+
+bool doesCoefficientsHaveSameSign(Monomial const& monomial1, Monomial const& monomial2) {
+    return getSign(monomial1.getCoefficient()) == getSign(monomial2.getCoefficient());
+}
+
+bool hasNegativeExponents(Monomial const& monomial) {
+    bool result(false);
+    for (auto const& [_, exponent] : monomial.getVariablesToExponentsMap()) {
+        if (exponent < 0) {
+            result = true;
+            break;
+        }
+    }
+    return result;
+}
+
+bool isConstantOnly(Monomial const& monomial) {
+    Monomial::VariablesToExponentsMap const& variableToExponentMap(monomial.getVariablesToExponentsMap());
+    return variableToExponentMap.empty();
+}
+
+bool isVariableOnly(Monomial const& monomial) {
+    Monomial::VariablesToExponentsMap const& variableToExponentMap(monomial.getVariablesToExponentsMap());
+    return monomial.getCoefficient() == 1 && variableToExponentMap.size() == 1 &&
+           (variableToExponentMap.cbegin())->second == 1;
+}
+
+bool hasASingleVariable(Monomial const& monomial) {
+    Monomial::VariablesToExponentsMap const& variableToExponentMap(monomial.getVariablesToExponentsMap());
+    return variableToExponentMap.size() == 1;
 }
 
 }  // namespace alba::algebra

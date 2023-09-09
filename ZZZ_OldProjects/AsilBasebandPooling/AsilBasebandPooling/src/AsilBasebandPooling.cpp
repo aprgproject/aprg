@@ -13,14 +13,6 @@ AsilBasebandPooling::AsilBasebandPooling(
     copy(basebandCards.begin(), basebandCards.end(), inserter(m_basebandCards, m_basebandCards.cbegin()));
 }
 
-bool AsilBasebandPooling::canMultipleLcgsBePutOnBasebandCard(BasebandCard const& basebandCard) {
-    return getMaxNumberOfLcgsInBasebandCard(basebandCard) > 1;
-}
-
-unsigned int AsilBasebandPooling::getMaxNumberOfLcgsInBasebandCard(BasebandCard const& basebandCard) {
-    return basebandCard.getKeplers().size() / 2;
-}
-
 void AsilBasebandPooling::sortAndPrioritizeBasebandCards(VectorOfBasebandCards& basebandCardsWithPrioritization) {
     stable_sort(
         basebandCardsWithPrioritization.begin(), basebandCardsWithPrioritization.end(),
@@ -86,20 +78,29 @@ void AsilBasebandPooling::assignBasebandCardsWithMultipleLcgs(
     lcgsInPriorityOrder.erase(lcgsInPriorityOrder.cbegin(), lcgsIterator);
 }
 
-bool AsilBasebandPooling::areLcgAndBasebandCardsValid() const {
-    return getMaxNumberOfLcgsInAllBasebandCards() >= m_lcgs.size();
+unsigned int AsilBasebandPooling::getMaxNumberOfLcgsInBasebandCard(BasebandCard const& basebandCard) {
+    return basebandCard.getKeplers().size() / 2;
 }
 
-unsigned int AsilBasebandPooling::getNumberBasebandCardsWithMultipleLcgs() const {
-    return m_lcgs.size() - m_basebandCards.size();
+bool AsilBasebandPooling::canMultipleLcgsBePutOnBasebandCard(BasebandCard const& basebandCard) {
+    return getMaxNumberOfLcgsInBasebandCard(basebandCard) > 1;
 }
 
-unsigned int AsilBasebandPooling::getMaxNumberOfLcgsInAllBasebandCards() const {
-    unsigned int result(0);
-    for (BasebandCard const& basebandCard : m_basebandCards) {
-        result += getMaxNumberOfLcgsInBasebandCard(basebandCard);
+BasebandCardsSplitBasedOnNumberOfLcgs AsilBasebandPooling::getBasebandCardsSplitBetweenOneLcgAndMultipleLcgs(
+    unsigned int const numberOfBasebandCardsWithMultipleLcgs) const {
+    unsigned int numberOfBasebandCardRemaining(numberOfBasebandCardsWithMultipleLcgs);
+    BasebandCardsSplitBasedOnNumberOfLcgs basebandCards;
+    auto reverseTraversal = m_basebandCards.crbegin();
+    while (reverseTraversal != m_basebandCards.crend()) {
+        if (numberOfBasebandCardRemaining > 0 && canMultipleLcgsBePutOnBasebandCard(*reverseTraversal)) {
+            basebandCards.basebandCardsWithMultipleLcgs.emplace(*reverseTraversal);
+            --numberOfBasebandCardRemaining;
+        } else {
+            basebandCards.basebandCardsWithOneLcg.emplace(*reverseTraversal);
+        }
+        ++reverseTraversal;
     }
-    return result;
+    return basebandCards;
 }
 
 BasebandPoolingResult AsilBasebandPooling::performBasebandPoolingForAsil() const {
@@ -127,21 +128,20 @@ VectorOfLcgs AsilBasebandPooling::getLcgsInPriorityOrder() const {
     return lcgsInPriorityOrder;
 }
 
-BasebandCardsSplitBasedOnNumberOfLcgs AsilBasebandPooling::getBasebandCardsSplitBetweenOneLcgAndMultipleLcgs(
-    unsigned int const numberOfBasebandCardsWithMultipleLcgs) const {
-    unsigned int numberOfBasebandCardRemaining(numberOfBasebandCardsWithMultipleLcgs);
-    BasebandCardsSplitBasedOnNumberOfLcgs basebandCards;
-    auto reverseTraversal = m_basebandCards.crbegin();
-    while (reverseTraversal != m_basebandCards.crend()) {
-        if (numberOfBasebandCardRemaining > 0 && canMultipleLcgsBePutOnBasebandCard(*reverseTraversal)) {
-            basebandCards.basebandCardsWithMultipleLcgs.emplace(*reverseTraversal);
-            --numberOfBasebandCardRemaining;
-        } else {
-            basebandCards.basebandCardsWithOneLcg.emplace(*reverseTraversal);
-        }
-        ++reverseTraversal;
+unsigned int AsilBasebandPooling::getNumberBasebandCardsWithMultipleLcgs() const {
+    return m_lcgs.size() - m_basebandCards.size();
+}
+
+unsigned int AsilBasebandPooling::getMaxNumberOfLcgsInAllBasebandCards() const {
+    unsigned int result(0);
+    for (BasebandCard const& basebandCard : m_basebandCards) {
+        result += getMaxNumberOfLcgsInBasebandCard(basebandCard);
     }
-    return basebandCards;
+    return result;
+}
+
+bool AsilBasebandPooling::areLcgAndBasebandCardsValid() const {
+    return getMaxNumberOfLcgsInAllBasebandCards() >= m_lcgs.size();
 }
 
 AsilBasebandPooling::AsilBasebandPooling() = default;

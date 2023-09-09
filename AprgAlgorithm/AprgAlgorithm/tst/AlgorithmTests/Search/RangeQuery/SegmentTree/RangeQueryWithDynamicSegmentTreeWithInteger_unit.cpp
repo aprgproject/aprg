@@ -7,6 +7,7 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 using ValuesForTest = vector<int>;
 using RangeQueryForTest = RangeQueryWithDynamicSegmentTree<ValuesForTest>;
 using ValueForTest = RangeQueryForTest::Value;
@@ -20,6 +21,7 @@ RangeQueryForTest::Function maximumFunction = [](ValueForTest const& value1, Val
 };
 
 RangeQueryForTest::Function plusFunction = plus<>();
+
 }  // namespace
 
 TEST(RangeQueryWithDynamicSegmentTreeTest, GetValueOnIntervalWithMinimumWorksWithEmptySetOfValues) {

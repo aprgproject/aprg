@@ -11,10 +11,10 @@ class BtsTraceDecoder {
 public:
     using SymbolMapType = std::map<unsigned int, std::string>;
     BtsTraceDecoder();
-    std::string getNearestLowerSymbol(int const address, int const offset = 0);
     void saveSymbolTableFromObjdump(std::string const& symbolTableFilePath);
     void saveSymbolTableFromMappedFile(std::string const& symbolTableFilePath);
     void processInputTraceFile(std::string const& inputTraceFilePath);
+    std::string getNearestLowerSymbol(int const address, int const offset = 0);
 
 private:
     static int getAddressFromLineInFile(std::string const& lineInFile, SymbolTableFileType const filetype);

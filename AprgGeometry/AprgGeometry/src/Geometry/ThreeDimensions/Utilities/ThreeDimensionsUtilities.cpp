@@ -13,6 +13,8 @@ using namespace std;
 namespace alba::ThreeDimensions::threeDimensionsUtilities {
 
 namespace {
+
+// end of internal functions
 // Internal functions
 double calculateMultiplierForIntersection(
     double const firstCoordinateCoefficientLine1, double const firstCoordinateCoefficientLine2,
@@ -25,6 +27,18 @@ double calculateMultiplierForIntersection(
     double numerator =
         ((firstCoordinateInitialValueLine1 - firstCoordinateInitialValueLine2) * secondCoordinateCoefficientLine1) -
         ((secondCoordinateInitialValueLine1 - secondCoordinateInitialValueLine2) * firstCoordinateCoefficientLine1);
+    return numerator / denominator;
+}
+
+double getCoordinateinLineIntersection(
+    double const coefficientOfCommonCoordinate1, double const coefficientOfCommonCoordinate2,
+    double const coefficientOfCoordinateToDetermine1, double const coefficientOfCoordinateToDetermine2,
+    double const dCoefficient1, double const dCoefficient2) {
+    // yCoordinateIntersection calculation is (a1d2-a2d1)/(a2b1-a1b2)
+    double numerator =
+        (coefficientOfCommonCoordinate1 * dCoefficient2) - (coefficientOfCommonCoordinate2 * dCoefficient1);
+    double denominator = (coefficientOfCommonCoordinate2 * coefficientOfCoordinateToDetermine1) -
+                         (coefficientOfCommonCoordinate1 * coefficientOfCoordinateToDetermine2);
     return numerator / denominator;
 }
 
@@ -56,125 +70,7 @@ bool isCoordinateValuesInPlaneEqual(
     return result;
 }
 
-double getCoordinateinLineIntersection(
-    double const coefficientOfCommonCoordinate1, double const coefficientOfCommonCoordinate2,
-    double const coefficientOfCoordinateToDetermine1, double const coefficientOfCoordinateToDetermine2,
-    double const dCoefficient1, double const dCoefficient2) {
-    // yCoordinateIntersection calculation is (a1d2-a2d1)/(a2b1-a1b2)
-    double numerator =
-        (coefficientOfCommonCoordinate1 * dCoefficient2) - (coefficientOfCommonCoordinate2 * dCoefficient1);
-    double denominator = (coefficientOfCommonCoordinate2 * coefficientOfCoordinateToDetermine1) -
-                         (coefficientOfCommonCoordinate1 * coefficientOfCoordinateToDetermine2);
-    return numerator / denominator;
-}
-
-// end of internal functions
 }  // namespace
-
-// external functions
-bool isPointInLine(Point const& point, Line const& line) {
-    return isCoordinateValuesInLineEqual(
-               point.getX(), line.calculateXFromY(point.getY()), point.getY(), line.getYInitialValue(),
-               line.calculateXFromZ(point.getZ()), point.getZ(), line.getZInitialValue()) &&
-           isCoordinateValuesInLineEqual(
-               point.getY(), line.calculateYFromX(point.getX()), point.getX(), line.getXInitialValue(),
-               line.calculateYFromZ(point.getZ()), point.getZ(), line.getZInitialValue()) &&
-           isCoordinateValuesInLineEqual(
-               point.getZ(), line.calculateZFromX(point.getX()), point.getX(), line.getXInitialValue(),
-               line.calculateZFromY(point.getY()), point.getY(), line.getYInitialValue());
-}
-
-bool isPointInPlane(Point const& point, Plane const& plane) {
-    return isCoordinateValuesInPlaneEqual(point.getX(), plane.calculateXFromYAndZ(point.getY(), point.getZ())) &&
-           isCoordinateValuesInPlaneEqual(point.getY(), plane.calculateYFromXAndZ(point.getX(), point.getZ())) &&
-           isCoordinateValuesInPlaneEqual(point.getZ(), plane.calculateZFromXAndY(point.getX(), point.getY()));
-}
-
-bool isLineInPlane(Line const& line, Plane const& plane) {
-    Point point1(line.getXInitialValue(), line.getYInitialValue(), line.getZInitialValue());
-    Point point2(point1 + Point(line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient()));
-    return isPointInPlane(point1, plane) && isPointInPlane(point2, plane);
-}
-
-bool areLinesParallel(Line const& line1, Line const& line2) {
-    return areVectorsParallel(constructDeltaVector(line1), constructDeltaVector(line2));
-}
-
-bool arePlanesParallel(Plane const& plane1, Plane const& plane2) {
-    return areVectorsParallel(constructNormalVector(plane1), constructNormalVector(plane2));
-}
-
-bool areLinesPerpendicular(Line const& line1, Line const& line2) {
-    return areVectorsPerpendicular(constructDeltaVector(line1), constructDeltaVector(line2));
-}
-
-bool arePlanesPerpendicular(Plane const& plane1, Plane const& plane2) {
-    return areVectorsPerpendicular(constructNormalVector(plane1), constructNormalVector(plane2));
-}
-
-double getDistance(Point const& point1, Point const& point2) {
-    Point delta(point2 - point1);
-    return getSquareRootOfXSquaredPlusYSquaredPlusZSquared<double>(delta.getX(), delta.getY(), delta.getZ());
-}
-
-double getDistance(Line const& line, Point const& point) {
-    Plane perpendicularPlane(getPerpendicularPlaneOfALineAndUsingAPointInThePlane(line, point));
-    Point nearestPoint(getPointOfIntersectionOfAPlaneAndALine(perpendicularPlane, line));
-    return getDistance(point, nearestPoint);
-}
-
-double getDistance(Line const& line1, Line const& line2) {
-    double distance(0);
-    if (areLinesParallel(line1, line2)) {
-        Point pointInLine1(line1.getXInitialValue(), line1.getYInitialValue(), line1.getZInitialValue());
-        Plane perpendicularPlane = getPerpendicularPlaneOfALineAndUsingAPointInThePlane(line1, pointInLine1);
-        Point pointInLine2 = getPointOfIntersectionOfAPlaneAndALine(perpendicularPlane, line2);
-        distance = getDistance(pointInLine1, pointInLine2);
-    } else {
-        Vector perpendicularVector(getCrossProduct(constructDeltaVector(line1), constructDeltaVector(line2)));
-        Point pointInLine1(line1.getXInitialValue(), line1.getYInitialValue(), line1.getZInitialValue());
-        Point pointInLine2(line2.getXInitialValue(), line2.getYInitialValue(), line2.getZInitialValue());
-
-        Plane plane1(
-            perpendicularVector.getValueAt(0), perpendicularVector.getValueAt(1), perpendicularVector.getValueAt(2),
-            pointInLine1);
-        Plane plane2(
-            perpendicularVector.getValueAt(0), perpendicularVector.getValueAt(1), perpendicularVector.getValueAt(2),
-            pointInLine2);
-
-        distance = getDistance(plane1, plane2);
-    }
-    return distance;
-}
-
-double getDistance(Plane const& plane1, Plane const& plane2) {
-    double distance(0);
-    if (arePlanesParallel(plane1, plane2)) {
-        Line perpendicularLine(
-            plane1.getACoefficient(), plane1.getBCoefficient(), plane1.getCCoefficient(), Point(0, 0, 0));
-        Point point1(getPointOfIntersectionOfAPlaneAndALine(plane1, perpendicularLine));
-        Point point2(getPointOfIntersectionOfAPlaneAndALine(plane2, perpendicularLine));
-        distance = getDistance(point1, point2);
-    }
-    return distance;
-}
-
-double getCosineOfAngleUsing2Deltas(Vector const& deltaVector1, Vector const& deltaVector2) {
-    // from cos theta = (dotproduct of coefficients v1 and v2)/(magnitude of v1 * magnitude of v2)
-    double numeratorPart = getDotProduct(deltaVector1, deltaVector2);
-    double denominatorPart = deltaVector1.getMagnitude() * deltaVector2.getMagnitude();
-    return numeratorPart / denominatorPart;
-}
-
-Vector constructVector(AlbaXYZ<double> const& xyz) { return Vector{xyz.getX(), xyz.getY(), xyz.getZ()}; }
-
-Vector constructDeltaVector(Line const& line) {
-    return Vector{line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient()};
-}
-
-Vector constructNormalVector(Plane const& plane) {
-    return Vector{plane.getACoefficient(), plane.getBCoefficient(), plane.getCCoefficient()};
-}
 
 AlbaAngle getTheInnerAngleUsingThreePoints(Point const& pointA, Point const& pointB, Point const& pointC) {
     Point deltaBA(pointB - pointA);
@@ -217,45 +113,6 @@ AlbaAngle getTheSmallerDihedralAngleBetweenTwoPlanes(Plane const& plane1, Plane 
 AlbaAngle getTheLargerDihedralAngleBetweenTwoPlanes(Plane const& plane1, Plane const& plane2) {
     AlbaAngle smallerAngle(getTheSmallerDihedralAngleBetweenTwoPlanes(plane1, plane2));
     return {AngleUnitType::Degrees, 180 - smallerAngle.getDegrees()};
-}
-
-Point getMidpoint(Point const& point1, Point const& point2) {
-    return {
-        (point1.getX() + point2.getX()) / 2, (point1.getY() + point2.getY()) / 2, (point1.getZ() + point2.getZ()) / 2};
-}
-
-Point getPointOfIntersectionOfTwoLines(Line const& line1, Line const& line2) {
-    double multiplier1 = calculateMultiplierForIntersection(
-        line1.getACoefficient(), line2.getACoefficient(), line1.getBCoefficient(), line2.getBCoefficient(),
-        line1.getXInitialValue(), line2.getXInitialValue(), line1.getYInitialValue(), line2.getYInitialValue());
-    // double multiplier2 = calculateMultiplierForIntersection(line1.getACoefficient(), line2.getACoefficient(),
-    // line1.getCCoefficient(), line2.getCCoefficient(), line1.getXInitialValue(), line2.getXInitialValue(),
-    // line1.getZInitialValue(), line2.getZInitialValue()); double multiplier3 =
-    // calculateMultiplierForIntersection(line1.getCCoefficient(), line2.getCCoefficient(), line1.getACoefficient(),
-    // line2.getACoefficient(), line1.getZInitialValue(), line2.getZInitialValue(), line1.getXInitialValue(),
-    // line2.getXInitialValue()); assert(isAlmostEqual(multiplier1, multiplier2)); assert(isAlmostEqual(multiplier1,
-    // multiplier3)); assert(isAlmostEqual(multiplier2, multiplier3));
-    return {
-        Point(line1.getXInitialValue(), line1.getYInitialValue(), line1.getZInitialValue()) +
-        Point(
-            multiplier1 * line1.getACoefficient(), multiplier1 * line1.getBCoefficient(),
-            multiplier1 * line1.getCCoefficient())};
-}
-
-Point getPointOfIntersectionOfAPlaneAndALine(Plane const& plane, Line const& line) {
-    assert(!isLineInPlane(line, plane));
-    // aplane(xinitial+aline*mult) + bplane(yinitial+bline*mult) + cplane(zinitial+cline*mult) + dplane = 0
-    double multiplierInLineNumeratorPart = plane.getACoefficient() * line.getXInitialValue() +
-                                           plane.getBCoefficient() * line.getYInitialValue() +
-                                           plane.getCCoefficient() * line.getZInitialValue() + plane.getDCoefficient();
-    double multiplierInLineDenominatorPart = plane.getACoefficient() * line.getACoefficient() +
-                                             plane.getBCoefficient() * line.getBCoefficient() +
-                                             plane.getCCoefficient() * line.getCCoefficient();
-    double multiplier = multiplierInLineNumeratorPart / multiplierInLineDenominatorPart;
-    return Point(line.getXInitialValue(), line.getYInitialValue(), line.getZInitialValue()) -
-           Point(
-               multiplier * line.getACoefficient(), multiplier * line.getBCoefficient(),
-               multiplier * line.getCCoefficient());
 }
 
 Line getLineWithSameSlope(Line const& line, Point const& point) {
@@ -325,6 +182,150 @@ Plane getPlaneOfTwoDifferentLinesWithSameSlope(Line const& line1, Line const& li
 
 Plane getPerpendicularPlaneOfALineAndUsingAPointInThePlane(Line const& line, Point const& pointInPerpendicularPlane) {
     return {line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient(), pointInPerpendicularPlane};
+}
+
+Point getMidpoint(Point const& point1, Point const& point2) {
+    return {
+        (point1.getX() + point2.getX()) / 2, (point1.getY() + point2.getY()) / 2, (point1.getZ() + point2.getZ()) / 2};
+}
+
+Point getPointOfIntersectionOfTwoLines(Line const& line1, Line const& line2) {
+    double multiplier1 = calculateMultiplierForIntersection(
+        line1.getACoefficient(), line2.getACoefficient(), line1.getBCoefficient(), line2.getBCoefficient(),
+        line1.getXInitialValue(), line2.getXInitialValue(), line1.getYInitialValue(), line2.getYInitialValue());
+    // double multiplier2 = calculateMultiplierForIntersection(line1.getACoefficient(), line2.getACoefficient(),
+    // line1.getCCoefficient(), line2.getCCoefficient(), line1.getXInitialValue(), line2.getXInitialValue(),
+    // line1.getZInitialValue(), line2.getZInitialValue()); double multiplier3 =
+    // calculateMultiplierForIntersection(line1.getCCoefficient(), line2.getCCoefficient(), line1.getACoefficient(),
+    // line2.getACoefficient(), line1.getZInitialValue(), line2.getZInitialValue(), line1.getXInitialValue(),
+    // line2.getXInitialValue()); assert(isAlmostEqual(multiplier1, multiplier2)); assert(isAlmostEqual(multiplier1,
+    // multiplier3)); assert(isAlmostEqual(multiplier2, multiplier3));
+    return {
+        Point(line1.getXInitialValue(), line1.getYInitialValue(), line1.getZInitialValue()) +
+        Point(
+            multiplier1 * line1.getACoefficient(), multiplier1 * line1.getBCoefficient(),
+            multiplier1 * line1.getCCoefficient())};
+}
+
+Point getPointOfIntersectionOfAPlaneAndALine(Plane const& plane, Line const& line) {
+    assert(!isLineInPlane(line, plane));
+    // aplane(xinitial+aline*mult) + bplane(yinitial+bline*mult) + cplane(zinitial+cline*mult) + dplane = 0
+    double multiplierInLineNumeratorPart = plane.getACoefficient() * line.getXInitialValue() +
+                                           plane.getBCoefficient() * line.getYInitialValue() +
+                                           plane.getCCoefficient() * line.getZInitialValue() + plane.getDCoefficient();
+    double multiplierInLineDenominatorPart = plane.getACoefficient() * line.getACoefficient() +
+                                             plane.getBCoefficient() * line.getBCoefficient() +
+                                             plane.getCCoefficient() * line.getCCoefficient();
+    double multiplier = multiplierInLineNumeratorPart / multiplierInLineDenominatorPart;
+    return Point(line.getXInitialValue(), line.getYInitialValue(), line.getZInitialValue()) -
+           Point(
+               multiplier * line.getACoefficient(), multiplier * line.getBCoefficient(),
+               multiplier * line.getCCoefficient());
+}
+
+Vector constructVector(AlbaXYZ<double> const& xyz) { return Vector{xyz.getX(), xyz.getY(), xyz.getZ()}; }
+
+Vector constructDeltaVector(Line const& line) {
+    return Vector{line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient()};
+}
+
+Vector constructNormalVector(Plane const& plane) {
+    return Vector{plane.getACoefficient(), plane.getBCoefficient(), plane.getCCoefficient()};
+}
+
+double getDistance(Point const& point1, Point const& point2) {
+    Point delta(point2 - point1);
+    return getSquareRootOfXSquaredPlusYSquaredPlusZSquared<double>(delta.getX(), delta.getY(), delta.getZ());
+}
+
+double getDistance(Line const& line, Point const& point) {
+    Plane perpendicularPlane(getPerpendicularPlaneOfALineAndUsingAPointInThePlane(line, point));
+    Point nearestPoint(getPointOfIntersectionOfAPlaneAndALine(perpendicularPlane, line));
+    return getDistance(point, nearestPoint);
+}
+
+double getDistance(Line const& line1, Line const& line2) {
+    double distance(0);
+    if (areLinesParallel(line1, line2)) {
+        Point pointInLine1(line1.getXInitialValue(), line1.getYInitialValue(), line1.getZInitialValue());
+        Plane perpendicularPlane = getPerpendicularPlaneOfALineAndUsingAPointInThePlane(line1, pointInLine1);
+        Point pointInLine2 = getPointOfIntersectionOfAPlaneAndALine(perpendicularPlane, line2);
+        distance = getDistance(pointInLine1, pointInLine2);
+    } else {
+        Vector perpendicularVector(getCrossProduct(constructDeltaVector(line1), constructDeltaVector(line2)));
+        Point pointInLine1(line1.getXInitialValue(), line1.getYInitialValue(), line1.getZInitialValue());
+        Point pointInLine2(line2.getXInitialValue(), line2.getYInitialValue(), line2.getZInitialValue());
+
+        Plane plane1(
+            perpendicularVector.getValueAt(0), perpendicularVector.getValueAt(1), perpendicularVector.getValueAt(2),
+            pointInLine1);
+        Plane plane2(
+            perpendicularVector.getValueAt(0), perpendicularVector.getValueAt(1), perpendicularVector.getValueAt(2),
+            pointInLine2);
+
+        distance = getDistance(plane1, plane2);
+    }
+    return distance;
+}
+
+double getDistance(Plane const& plane1, Plane const& plane2) {
+    double distance(0);
+    if (arePlanesParallel(plane1, plane2)) {
+        Line perpendicularLine(
+            plane1.getACoefficient(), plane1.getBCoefficient(), plane1.getCCoefficient(), Point(0, 0, 0));
+        Point point1(getPointOfIntersectionOfAPlaneAndALine(plane1, perpendicularLine));
+        Point point2(getPointOfIntersectionOfAPlaneAndALine(plane2, perpendicularLine));
+        distance = getDistance(point1, point2);
+    }
+    return distance;
+}
+
+double getCosineOfAngleUsing2Deltas(Vector const& deltaVector1, Vector const& deltaVector2) {
+    // from cos theta = (dotproduct of coefficients v1 and v2)/(magnitude of v1 * magnitude of v2)
+    double numeratorPart = getDotProduct(deltaVector1, deltaVector2);
+    double denominatorPart = deltaVector1.getMagnitude() * deltaVector2.getMagnitude();
+    return numeratorPart / denominatorPart;
+}
+
+// external functions
+bool isPointInLine(Point const& point, Line const& line) {
+    return isCoordinateValuesInLineEqual(
+               point.getX(), line.calculateXFromY(point.getY()), point.getY(), line.getYInitialValue(),
+               line.calculateXFromZ(point.getZ()), point.getZ(), line.getZInitialValue()) &&
+           isCoordinateValuesInLineEqual(
+               point.getY(), line.calculateYFromX(point.getX()), point.getX(), line.getXInitialValue(),
+               line.calculateYFromZ(point.getZ()), point.getZ(), line.getZInitialValue()) &&
+           isCoordinateValuesInLineEqual(
+               point.getZ(), line.calculateZFromX(point.getX()), point.getX(), line.getXInitialValue(),
+               line.calculateZFromY(point.getY()), point.getY(), line.getYInitialValue());
+}
+
+bool isPointInPlane(Point const& point, Plane const& plane) {
+    return isCoordinateValuesInPlaneEqual(point.getX(), plane.calculateXFromYAndZ(point.getY(), point.getZ())) &&
+           isCoordinateValuesInPlaneEqual(point.getY(), plane.calculateYFromXAndZ(point.getX(), point.getZ())) &&
+           isCoordinateValuesInPlaneEqual(point.getZ(), plane.calculateZFromXAndY(point.getX(), point.getY()));
+}
+
+bool isLineInPlane(Line const& line, Plane const& plane) {
+    Point point1(line.getXInitialValue(), line.getYInitialValue(), line.getZInitialValue());
+    Point point2(point1 + Point(line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient()));
+    return isPointInPlane(point1, plane) && isPointInPlane(point2, plane);
+}
+
+bool areLinesParallel(Line const& line1, Line const& line2) {
+    return areVectorsParallel(constructDeltaVector(line1), constructDeltaVector(line2));
+}
+
+bool arePlanesParallel(Plane const& plane1, Plane const& plane2) {
+    return areVectorsParallel(constructNormalVector(plane1), constructNormalVector(plane2));
+}
+
+bool areLinesPerpendicular(Line const& line1, Line const& line2) {
+    return areVectorsPerpendicular(constructDeltaVector(line1), constructDeltaVector(line2));
+}
+
+bool arePlanesPerpendicular(Plane const& plane1, Plane const& plane2) {
+    return areVectorsPerpendicular(constructNormalVector(plane1), constructNormalVector(plane2));
 }
 
 }  // namespace alba::ThreeDimensions::threeDimensionsUtilities

@@ -18,10 +18,10 @@ public:
 
 private:
     static Term getTermForMutationOfFunction(Function const& functionObject);
-    Term getTermForMutationOfVariable(Variable const& variable);
     void mutateExpressionWithAdditionAndSubtraction(Expression& expression);
     void mutateExpressionWithMultiplicationAndDivision(Expression& expression);
     void mutateExpressionWithRaiseToPower(Expression& expression);
+    Term getTermForMutationOfVariable(Variable const& variable);
     SubstitutionOfVariablesToValues m_substitution;
 };
 

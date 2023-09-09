@@ -8,20 +8,6 @@ using namespace std;
 
 namespace alba::math {
 
-bool isPythagoreanTriple(PythagoreanTriple const& triple) {
-    // A Pythagorean triple is a triple (a,b, c) that satisfies the Pythagorean theorem a^2 + b^2 = c^2,
-    // which means that there is a right triangle with side lengths a, b and c.
-    return get<0>(triple) * get<0>(triple) + get<1>(triple) * get<1>(triple) == get<2>(triple) * get<2>(triple);
-}
-
-bool isPrimitive(PythagoreanTriple const& triple) {
-    // A Pythagorean triple is primitive if a, b and c are coprime,
-    // and all Pythagorean triples can be constructed from primitive triples using a multiplier k.
-    UnsignedInteger gcfOfABC =
-        getGreatestCommonFactor(getGreatestCommonFactor(get<0>(triple), get<1>(triple)), get<2>(triple));
-    return gcfOfABC == 1;
-}
-
 PythagoreanTriple getNewPythagoreanTripleUsingMultiplier(
     PythagoreanTriple const& triple, UnsignedInteger const multiplier) {
     // If (a,b,c) is a Pythagorean triple, all triples of the form (ka,kb,kc) are also Pythagorean triples where k > 1.
@@ -49,6 +35,20 @@ PythagoreanTriple getPrimitivePythagoreanTripleUsingEuclidFormula(
         result = PythagoreanTriple{nSquared - mSquared, 2 * seedValueN * seedValueM, nSquared + mSquared};
     }
     return result;
+}
+
+bool isPythagoreanTriple(PythagoreanTriple const& triple) {
+    // A Pythagorean triple is a triple (a,b, c) that satisfies the Pythagorean theorem a^2 + b^2 = c^2,
+    // which means that there is a right triangle with side lengths a, b and c.
+    return get<0>(triple) * get<0>(triple) + get<1>(triple) * get<1>(triple) == get<2>(triple) * get<2>(triple);
+}
+
+bool isPrimitive(PythagoreanTriple const& triple) {
+    // A Pythagorean triple is primitive if a, b and c are coprime,
+    // and all Pythagorean triples can be constructed from primitive triples using a multiplier k.
+    UnsignedInteger gcfOfABC =
+        getGreatestCommonFactor(getGreatestCommonFactor(get<0>(triple), get<1>(triple)), get<2>(triple));
+    return gcfOfABC == 1;
 }
 
 }  // namespace alba::math

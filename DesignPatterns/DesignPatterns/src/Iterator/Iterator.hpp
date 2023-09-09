@@ -24,8 +24,9 @@ class ConcreteAggregate : public Aggregate {
 public:
     explicit ConcreteAggregate(int const size) : m_listPointer(std::make_unique<int[]>(size)), m_count(size) {}
     [[nodiscard]] int size() const { return m_count; }
-    int getValueAt(int const index) { return m_listPointer[index]; }
     std::unique_ptr<Iterator> createIterator() override;  // defined after Iterator is declared
+    int getValueAt(int const index) { return m_listPointer[index]; }
+
     // ...
 private:
     std::unique_ptr<int[]> m_listPointer;
@@ -39,8 +40,8 @@ private:
 class Iterator {
 public:
     virtual ~Iterator() = default;
-    [[nodiscard]] virtual bool isDone() const = 0;
     [[nodiscard]] virtual int getCurrentItem() const = 0;
+    [[nodiscard]] virtual bool isDone() const = 0;
     virtual void gotoFirst() = 0;
     virtual void gotoNext() = 0;
     // ...
@@ -52,8 +53,8 @@ public:
 class ConcreteIterator : public Iterator {
 public:
     explicit ConcreteIterator(ConcreteAggregate& aggregate) : m_aggregate(aggregate) {}
-    [[nodiscard]] bool isDone() const override { return (index >= m_aggregate.size()); }
     [[nodiscard]] int getCurrentItem() const override { return isDone() ? -1 : m_aggregate.getValueAt(index); }
+    [[nodiscard]] bool isDone() const override { return (index >= m_aggregate.size()); }
     void gotoFirst() override { index = 0; }
     void gotoNext() override { ++index; }
 

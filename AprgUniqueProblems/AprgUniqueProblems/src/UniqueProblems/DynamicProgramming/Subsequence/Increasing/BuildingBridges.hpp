@@ -13,8 +13,8 @@ public:
     using IndexToIndex = std::vector<Index>;
     using IndexToValue = std::vector<Value>;
     explicit BuildingBridges(Bridges const& bridges);
-    [[nodiscard]] Index getNumberOfPossibleBridges() const;
     [[nodiscard]] Bridges getPossibleBridges() const;
+    [[nodiscard]] Index getNumberOfPossibleBridges() const;
 
 private:
     Bridges m_bridges;

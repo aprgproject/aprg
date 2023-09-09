@@ -13,8 +13,8 @@ public:
     using Path = typename GraphTypes<Vertex>::Path;
     explicit FloydAlgorithmForSuccessorGraphs(BaseDirectedGraphWithVertex const& graph)
         : m_graph(graph), m_walker(graph) {}
-    [[nodiscard]] bool hasACycle() const { return m_hasACycle; }
     [[nodiscard]] Path getCycle() const { return m_cyclePath; }
+    [[nodiscard]] bool hasACycle() const { return m_hasACycle; }
 
     void reinitializeStartingFrom(Vertex const& startOfGraph) {
         Vertex meetingVertex(getMeetingVertexAndCheckForACycle(startOfGraph));
@@ -26,6 +26,16 @@ public:
 
 private:
     [[nodiscard]] bool isAtTheEnd(Vertex const& vertex) const { return m_walker.isAtTheEnd(vertex); }
+
+    void saveCycle(Vertex const startOfCycle) {
+        m_cyclePath.emplace_back(startOfCycle);
+        Vertex vertex = walkOne(startOfCycle);  // vertex traverses the cycle
+        while (startOfCycle != vertex) {
+            m_cyclePath.emplace_back(vertex);  // vertex traverses the cycle
+            vertex = walkOne(vertex);
+        }
+        m_cyclePath.emplace_back(vertex);
+    }
 
     Vertex getMeetingVertexAndCheckForACycle(Vertex const& startOfGraph) {
         Vertex turtoise(walkOne(startOfGraph));
@@ -53,17 +63,6 @@ private:
 
     Vertex walkOne(Vertex const& vertex) { return m_walker.walk(vertex, 1); }
     Vertex walkTwo(Vertex const& vertex) { return m_walker.walk(vertex, 2); }
-
-    void saveCycle(Vertex const startOfCycle) {
-        m_cyclePath.emplace_back(startOfCycle);
-        Vertex vertex = walkOne(startOfCycle);  // vertex traverses the cycle
-        while (startOfCycle != vertex) {
-            m_cyclePath.emplace_back(vertex);  // vertex traverses the cycle
-            vertex = walkOne(vertex);
-        }
-        m_cyclePath.emplace_back(vertex);
-    }
-
     BaseDirectedGraphWithVertex const& m_graph;
     Walker m_walker;
     bool m_hasACycle{false};

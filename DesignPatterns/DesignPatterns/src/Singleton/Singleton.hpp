@@ -8,14 +8,6 @@ namespace Singleton {
 // and method which gives us a way to instantiate the class
 class Singleton {
 public:
-    static Singleton& getInstance() {
-        // "static variable approach" can be done here
-        if (!m_instancePointer) {
-            m_instancePointer = std::make_unique<Singleton>();
-        }
-        return *m_instancePointer;
-    }
-
     static void restartInstance() {
         // "static variable approach" has no restart
         if (m_instancePointer) {
@@ -26,6 +18,14 @@ public:
     static void tellSomething() {
         std::cout << "This is Singleton.\n";
         // ...
+    }
+
+    static Singleton& getInstance() {
+        // "static variable approach" can be done here
+        if (!m_instancePointer) {
+            m_instancePointer = std::make_unique<Singleton>();
+        }
+        return *m_instancePointer;
     }
 
     friend std::unique_ptr<Singleton> std::make_unique<Singleton>();

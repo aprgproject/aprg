@@ -9,12 +9,41 @@ namespace alba::algebra {
 
 DifferentiationForFiniteCalculus::DifferentiationForFiniteCalculus(string const& nameOfVariableToDifferentiate)
     : m_nameOfVariableToDifferentiate(nameOfVariableToDifferentiate) {}
+AlbaNumber DifferentiationForFiniteCalculus::differentiateConstant(Constant const&) { return 0; }
 
 Term DifferentiationForFiniteCalculus::differentiate(Constant const& constant) {
     return {differentiateConstant(constant)};
 }
 
-AlbaNumber DifferentiationForFiniteCalculus::differentiateConstant(Constant const&) { return 0; }
+Equation DifferentiationForFiniteCalculus::differentiate(Equation const& equation) const {
+    return differentiateEquation(equation);
+}
+
+Equation DifferentiationForFiniteCalculus::differentiateMultipleTimes(
+    Equation const& equation, int const numberOfTimes) const {
+    Equation currentResult(equation);
+    for (int i = 0; i < numberOfTimes; ++i) {
+        currentResult = differentiate(currentResult);
+    }
+    return currentResult;
+}
+
+Equation DifferentiationForFiniteCalculus::differentiateEquation(Equation const& equation) const {
+    Equation result(
+        differentiate(equation.getLeftHandTerm()), equation.getEquationOperator().getOperatorString(),
+        differentiate(equation.getRightHandTerm()));
+    result.simplify();
+    return result;
+}
+
+Polynomial DifferentiationForFiniteCalculus::differentiateVariable(Variable const& variable) const {
+    Polynomial result(createPolynomialFromNumber(0));
+    if (isVariableToDifferentiate(variable.getVariableName())) {
+        result = Polynomial{Monomial(1, {{m_nameOfVariableToDifferentiate, 1}}), Monomial(1, {})};
+    }
+    return result;
+}
+
 Term DifferentiationForFiniteCalculus::differentiate(Term const& term) const { return differentiateTerm(term); }
 
 Term DifferentiationForFiniteCalculus::differentiate(Variable const& variable) const {
@@ -43,21 +72,8 @@ Term DifferentiationForFiniteCalculus::differentiate(Function const& functionObj
     return differentiateFunction(functionObject);
 }
 
-Equation DifferentiationForFiniteCalculus::differentiate(Equation const& equation) const {
-    return differentiateEquation(equation);
-}
-
 Term DifferentiationForFiniteCalculus::differentiateMultipleTimes(Term const& term, int const numberOfTimes) const {
     Term currentResult(term);
-    for (int i = 0; i < numberOfTimes; ++i) {
-        currentResult = differentiate(currentResult);
-    }
-    return currentResult;
-}
-
-Equation DifferentiationForFiniteCalculus::differentiateMultipleTimes(
-    Equation const& equation, int const numberOfTimes) const {
-    Equation currentResult(equation);
     for (int i = 0; i < numberOfTimes; ++i) {
         currentResult = differentiate(currentResult);
     }
@@ -82,14 +98,6 @@ Term DifferentiationForFiniteCalculus::differentiateTerm(Term const& term) const
     return result;
 }
 
-Polynomial DifferentiationForFiniteCalculus::differentiateVariable(Variable const& variable) const {
-    Polynomial result(createPolynomialFromNumber(0));
-    if (isVariableToDifferentiate(variable.getVariableName())) {
-        result = Polynomial{Monomial(1, {{m_nameOfVariableToDifferentiate, 1}}), Monomial(1, {})};
-    }
-    return result;
-}
-
 Term DifferentiationForFiniteCalculus::differentiateMonomial(Monomial const& monomial) const {
     return {getDerivativeDefinitionForFiniteCalculus(Term(monomial), m_nameOfVariableToDifferentiate)};
 }
@@ -104,14 +112,6 @@ Term DifferentiationForFiniteCalculus::differentiateExpression(Expression const&
 
 Term DifferentiationForFiniteCalculus::differentiateFunction(Function const& functionObject) const {
     return {getDerivativeDefinitionForFiniteCalculus(Term(functionObject), m_nameOfVariableToDifferentiate)};
-}
-
-Equation DifferentiationForFiniteCalculus::differentiateEquation(Equation const& equation) const {
-    Equation result(
-        differentiate(equation.getLeftHandTerm()), equation.getEquationOperator().getOperatorString(),
-        differentiate(equation.getRightHandTerm()));
-    result.simplify();
-    return result;
 }
 
 bool DifferentiationForFiniteCalculus::isVariableToDifferentiate(string const& variableName) const {

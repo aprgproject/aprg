@@ -55,30 +55,6 @@ string RagnarokOnline::getFixedItemName(Item const& item) {
     return result;
 }
 
-double RagnarokOnline::getTalonRoBuyingPrice(string const& fixedItemName) const {
-    double result(0);
-    auto it = m_buyingShopItems.find(fixedItemName);
-    if (it != m_buyingShopItems.cend()) {
-        result = it->second.averagePrice;
-    }
-    return result;
-}
-
-double RagnarokOnline::getTalonRoSellingPrice(string const& fixedItemName) const {
-    double result(0);
-    auto it = m_sellingShopItems.find(fixedItemName);
-    if (it != m_sellingShopItems.cend()) {
-        result = it->second.averagePrice;
-    }
-    return result;
-}
-
-ItemIdToItemMap const& RagnarokOnline::getItemIdToItemMap() const { return m_itemIdToItemMap; }
-MonsterIdToMonsterMap const& RagnarokOnline::getMonsterIdToMonsterMap() const { return m_monsterIdToMonsterMap; }
-MapNameToRoMap const& RagnarokOnline::getMapNameToRoMap() const { return m_mapNameToRoMap; }
-ItemNameToShopItemDetailMap const& RagnarokOnline::getBuyingItemShops() const { return m_buyingShopItems; }
-ItemNameToShopItemDetailMap const& RagnarokOnline::getSellingItemShops() const { return m_sellingShopItems; }
-
 Item RagnarokOnline::getItem(string const& fixedItemName) const {
     Item result{};
     auto it1 = m_itemNameToItemIdMap.find(fixedItemName);
@@ -95,6 +71,11 @@ Item RagnarokOnline::getItem(string const& fixedItemName) const {
     return result;
 }
 
+ItemIdToItemMap const& RagnarokOnline::getItemIdToItemMap() const { return m_itemIdToItemMap; }
+ItemNameToShopItemDetailMap const& RagnarokOnline::getBuyingItemShops() const { return m_buyingShopItems; }
+ItemNameToShopItemDetailMap const& RagnarokOnline::getSellingItemShops() const { return m_sellingShopItems; }
+MapNameToRoMap const& RagnarokOnline::getMapNameToRoMap() const { return m_mapNameToRoMap; }
+
 Monster RagnarokOnline::getMonster(string const& monsterName) const {
     Monster result{};
     auto it1 = m_monsterNameToMonsterIdMap.find(monsterName);
@@ -107,6 +88,26 @@ Monster RagnarokOnline::getMonster(string const& monsterName) const {
         }
     } else {
         cout << "MONSTER NAME NOT FOUND! [" << monsterName << "]\n";
+    }
+    return result;
+}
+
+MonsterIdToMonsterMap const& RagnarokOnline::getMonsterIdToMonsterMap() const { return m_monsterIdToMonsterMap; }
+
+double RagnarokOnline::getTalonRoBuyingPrice(string const& fixedItemName) const {
+    double result(0);
+    auto it = m_buyingShopItems.find(fixedItemName);
+    if (it != m_buyingShopItems.cend()) {
+        result = it->second.averagePrice;
+    }
+    return result;
+}
+
+double RagnarokOnline::getTalonRoSellingPrice(string const& fixedItemName) const {
+    double result(0);
+    auto it = m_sellingShopItems.find(fixedItemName);
+    if (it != m_sellingShopItems.cend()) {
+        result = it->second.averagePrice;
     }
     return result;
 }
@@ -816,6 +817,135 @@ string RagnarokOnline::fixText(string const& text) {
     return getStringWithoutStartingAndTrailingWhiteSpace(getStringWithoutRedundantWhiteSpace(fixedText));
 }
 
+istream& operator>>(istream& in, NameAndRate& nameAndRate) {
+    in.precision(20);
+    AlbaStreamParameterReader reader(in);
+    nameAndRate.name = reader.readData<string>();
+    nameAndRate.rate = reader.readData<double>();
+    return in;
+}
+
+istream& operator>>(istream& in, MonsterDetailsOnRoMap& monsterDetailsOnRoMap) {
+    AlbaStreamParameterReader reader(in);
+    monsterDetailsOnRoMap.monsterName = reader.readData<string>();
+    monsterDetailsOnRoMap.spawnCount = reader.readData<unsigned int>();
+    monsterDetailsOnRoMap.spawnRate = reader.readData<string>();
+    return in;
+}
+
+istream& operator>>(istream& in, Item& item) {
+    AlbaStreamParameterReader reader(in);
+    item.itemId = reader.readData<unsigned int>();
+    item.name = reader.readData<string>();
+    item.type = reader.readData<string>();
+    item.itemClass = reader.readData<string>();
+    item.buyingPrice = reader.readData<unsigned int>();
+    item.sellingPrice = reader.readData<unsigned int>();
+    item.weight = reader.readData<unsigned int>();
+    item.attack = reader.readData<unsigned int>();
+    item.defense = reader.readData<unsigned int>();
+    item.requiredLevel = reader.readData<unsigned int>();
+    item.weaponLevel = reader.readData<unsigned int>();
+    item.slot = reader.readData<unsigned int>();
+    item.range = reader.readData<unsigned int>();
+    item.property = reader.readData<string>();
+    item.prefixOrSuffix = reader.readData<string>();
+    reader.readVectorData<string>(item.applicableJobs);
+    item.description = reader.readData<string>();
+    item.itemScript = reader.readData<string>();
+    reader.readVectorData<NameAndRate>(item.droppedByMonstersWithRates);
+    return in;
+}
+
+istream& operator>>(istream& in, Monster& monster) {
+    AlbaStreamParameterReader reader(in);
+    monster.monsterId = reader.readData<unsigned int>();
+    monster.name = reader.readData<string>();
+    monster.hp = reader.readData<unsigned int>();
+    monster.level = reader.readData<unsigned int>();
+    monster.race = reader.readData<string>();
+    monster.property = reader.readData<string>();
+    monster.size = reader.readData<string>();
+    monster.hitRequiredFor100Percent = reader.readData<unsigned int>();
+    monster.fleeRequiredFor95Percent = reader.readData<unsigned int>();
+    monster.baseExperience = reader.readData<unsigned int>();
+    monster.jobExperience = reader.readData<unsigned int>();
+    monster.baseExperiencePerHp = reader.readData<string>();
+    monster.jobExperiencePerHp = reader.readData<string>();
+    monster.walkSpeed = reader.readData<string>();
+    monster.attackDelay = reader.readData<string>();
+    monster.delayAfterHit = reader.readData<string>();
+    monster.lowestAttack = reader.readData<unsigned int>();
+    monster.highestAttack = reader.readData<unsigned int>();
+    monster.defense = reader.readData<unsigned int>();
+    monster.magicDefense = reader.readData<unsigned int>();
+    monster.strength = reader.readData<unsigned int>();
+    monster.intelligence = reader.readData<unsigned int>();
+    monster.agility = reader.readData<unsigned int>();
+    monster.dexterity = reader.readData<unsigned int>();
+    monster.vitality = reader.readData<unsigned int>();
+    monster.luck = reader.readData<unsigned int>();
+    monster.attackRange = reader.readData<unsigned int>();
+    monster.spellRange = reader.readData<unsigned int>();
+    monster.sightRange = reader.readData<unsigned int>();
+    monster.neutralPercentage = reader.readData<int>();
+    monster.waterPercentage = reader.readData<int>();
+    monster.earthPercentage = reader.readData<int>();
+    monster.firePercentage = reader.readData<int>();
+    monster.windPercentage = reader.readData<int>();
+    monster.poisonPercentage = reader.readData<int>();
+    monster.holyPercentage = reader.readData<int>();
+    monster.shadowPercentage = reader.readData<int>();
+    monster.ghostPercentage = reader.readData<int>();
+    monster.undeadPercentage = reader.readData<int>();
+    reader.readVectorData<string>(monster.maps);
+    reader.readVectorData<string>(monster.modes);
+    reader.readVectorData<string>(monster.monsterSkills);
+    reader.readVectorData<NameAndRate>(monster.dropsWithRates);
+    return in;
+}
+
+istream& operator>>(istream& in, ShopItemDetail& shopItemDetail) {
+    in.precision(20);
+    AlbaStreamParameterReader reader(in);
+    shopItemDetail.itemName = reader.readData<string>();
+    shopItemDetail.averagePrice = reader.readData<double>();
+    shopItemDetail.totalNumber = reader.readData<unsigned int>();
+    return in;
+}
+
+istream& operator>>(istream& in, RoMap& roMap) {
+    AlbaStreamParameterReader reader(in);
+    roMap.name = reader.readData<string>();
+    roMap.fullName = reader.readData<string>();
+    reader.readVectorData<MonsterDetailsOnRoMap>(roMap.monstersDetailsOnMap);
+    return in;
+}
+
+istream& operator>>(istream& in, ItemIdToItemMap& itemIdToItemMap) {
+    AlbaStreamParameterReader reader(in);
+    reader.readMapData<unsigned int, Item>(itemIdToItemMap);
+    return in;
+}
+
+istream& operator>>(istream& in, MonsterIdToMonsterMap& monsterIdToMonsterMap) {
+    AlbaStreamParameterReader reader(in);
+    reader.readMapData<unsigned int, Monster>(monsterIdToMonsterMap);
+    return in;
+}
+
+istream& operator>>(istream& in, MapNameToRoMap& mapNameToRoMap) {
+    AlbaStreamParameterReader reader(in);
+    reader.readMapData<string, RoMap>(mapNameToRoMap);
+    return in;
+}
+
+istream& operator>>(istream& in, ItemNameToShopItemDetailMap& itemNameToShopItemDetailMap) {
+    AlbaStreamParameterReader reader(in);
+    reader.readMapData<string, ShopItemDetail>(itemNameToShopItemDetailMap);
+    return in;
+}
+
 ostream& operator<<(ostream& out, NameAndRate const& nameAndRate) {
     out.precision(20);
     AlbaStreamParameterWriter writer(out);
@@ -953,135 +1083,6 @@ ostream& operator<<(ostream& out, ItemNameToShopItemDetailMap const& itemNameToS
     writer.writeMapData<string, ShopItemDetail>(itemNameToShopItemDetailMap);
     writer.flush();
     return out;
-}
-
-istream& operator>>(istream& in, NameAndRate& nameAndRate) {
-    in.precision(20);
-    AlbaStreamParameterReader reader(in);
-    nameAndRate.name = reader.readData<string>();
-    nameAndRate.rate = reader.readData<double>();
-    return in;
-}
-
-istream& operator>>(istream& in, MonsterDetailsOnRoMap& monsterDetailsOnRoMap) {
-    AlbaStreamParameterReader reader(in);
-    monsterDetailsOnRoMap.monsterName = reader.readData<string>();
-    monsterDetailsOnRoMap.spawnCount = reader.readData<unsigned int>();
-    monsterDetailsOnRoMap.spawnRate = reader.readData<string>();
-    return in;
-}
-
-istream& operator>>(istream& in, Item& item) {
-    AlbaStreamParameterReader reader(in);
-    item.itemId = reader.readData<unsigned int>();
-    item.name = reader.readData<string>();
-    item.type = reader.readData<string>();
-    item.itemClass = reader.readData<string>();
-    item.buyingPrice = reader.readData<unsigned int>();
-    item.sellingPrice = reader.readData<unsigned int>();
-    item.weight = reader.readData<unsigned int>();
-    item.attack = reader.readData<unsigned int>();
-    item.defense = reader.readData<unsigned int>();
-    item.requiredLevel = reader.readData<unsigned int>();
-    item.weaponLevel = reader.readData<unsigned int>();
-    item.slot = reader.readData<unsigned int>();
-    item.range = reader.readData<unsigned int>();
-    item.property = reader.readData<string>();
-    item.prefixOrSuffix = reader.readData<string>();
-    reader.readVectorData<string>(item.applicableJobs);
-    item.description = reader.readData<string>();
-    item.itemScript = reader.readData<string>();
-    reader.readVectorData<NameAndRate>(item.droppedByMonstersWithRates);
-    return in;
-}
-
-istream& operator>>(istream& in, Monster& monster) {
-    AlbaStreamParameterReader reader(in);
-    monster.monsterId = reader.readData<unsigned int>();
-    monster.name = reader.readData<string>();
-    monster.hp = reader.readData<unsigned int>();
-    monster.level = reader.readData<unsigned int>();
-    monster.race = reader.readData<string>();
-    monster.property = reader.readData<string>();
-    monster.size = reader.readData<string>();
-    monster.hitRequiredFor100Percent = reader.readData<unsigned int>();
-    monster.fleeRequiredFor95Percent = reader.readData<unsigned int>();
-    monster.baseExperience = reader.readData<unsigned int>();
-    monster.jobExperience = reader.readData<unsigned int>();
-    monster.baseExperiencePerHp = reader.readData<string>();
-    monster.jobExperiencePerHp = reader.readData<string>();
-    monster.walkSpeed = reader.readData<string>();
-    monster.attackDelay = reader.readData<string>();
-    monster.delayAfterHit = reader.readData<string>();
-    monster.lowestAttack = reader.readData<unsigned int>();
-    monster.highestAttack = reader.readData<unsigned int>();
-    monster.defense = reader.readData<unsigned int>();
-    monster.magicDefense = reader.readData<unsigned int>();
-    monster.strength = reader.readData<unsigned int>();
-    monster.intelligence = reader.readData<unsigned int>();
-    monster.agility = reader.readData<unsigned int>();
-    monster.dexterity = reader.readData<unsigned int>();
-    monster.vitality = reader.readData<unsigned int>();
-    monster.luck = reader.readData<unsigned int>();
-    monster.attackRange = reader.readData<unsigned int>();
-    monster.spellRange = reader.readData<unsigned int>();
-    monster.sightRange = reader.readData<unsigned int>();
-    monster.neutralPercentage = reader.readData<int>();
-    monster.waterPercentage = reader.readData<int>();
-    monster.earthPercentage = reader.readData<int>();
-    monster.firePercentage = reader.readData<int>();
-    monster.windPercentage = reader.readData<int>();
-    monster.poisonPercentage = reader.readData<int>();
-    monster.holyPercentage = reader.readData<int>();
-    monster.shadowPercentage = reader.readData<int>();
-    monster.ghostPercentage = reader.readData<int>();
-    monster.undeadPercentage = reader.readData<int>();
-    reader.readVectorData<string>(monster.maps);
-    reader.readVectorData<string>(monster.modes);
-    reader.readVectorData<string>(monster.monsterSkills);
-    reader.readVectorData<NameAndRate>(monster.dropsWithRates);
-    return in;
-}
-
-istream& operator>>(istream& in, ShopItemDetail& shopItemDetail) {
-    in.precision(20);
-    AlbaStreamParameterReader reader(in);
-    shopItemDetail.itemName = reader.readData<string>();
-    shopItemDetail.averagePrice = reader.readData<double>();
-    shopItemDetail.totalNumber = reader.readData<unsigned int>();
-    return in;
-}
-
-istream& operator>>(istream& in, RoMap& roMap) {
-    AlbaStreamParameterReader reader(in);
-    roMap.name = reader.readData<string>();
-    roMap.fullName = reader.readData<string>();
-    reader.readVectorData<MonsterDetailsOnRoMap>(roMap.monstersDetailsOnMap);
-    return in;
-}
-
-istream& operator>>(istream& in, ItemIdToItemMap& itemIdToItemMap) {
-    AlbaStreamParameterReader reader(in);
-    reader.readMapData<unsigned int, Item>(itemIdToItemMap);
-    return in;
-}
-
-istream& operator>>(istream& in, MonsterIdToMonsterMap& monsterIdToMonsterMap) {
-    AlbaStreamParameterReader reader(in);
-    reader.readMapData<unsigned int, Monster>(monsterIdToMonsterMap);
-    return in;
-}
-
-istream& operator>>(istream& in, MapNameToRoMap& mapNameToRoMap) {
-    AlbaStreamParameterReader reader(in);
-    reader.readMapData<string, RoMap>(mapNameToRoMap);
-    return in;
-}
-
-istream& operator>>(istream& in, ItemNameToShopItemDetailMap& itemNameToShopItemDetailMap) {
-    AlbaStreamParameterReader reader(in);
-    reader.readMapData<string, ShopItemDetail>(itemNameToShopItemDetailMap);
-    return in;
 }
 
 RagnarokOnline::RagnarokOnline() = default;

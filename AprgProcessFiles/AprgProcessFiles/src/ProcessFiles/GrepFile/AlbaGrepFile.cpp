@@ -18,7 +18,6 @@ AlbaGrepFile::AlbaGrepFile(string const& lineCondition, UpdateFunctionWithPercen
       m_updateFunctionAfterOneIterationOptional(function) {}
 
 bool AlbaGrepFile::isOutputFileWritten() const { return m_isOutputFileWritten; }
-AlbaGrepStringEvaluator& AlbaGrepFile::getGrepEvaluator() { return m_lineGrepEvaluator; }
 
 void AlbaGrepFile::processFile(string const& inputFilePath, string const& outputFilePath) {
     m_isOutputFileWritten = false;
@@ -40,6 +39,8 @@ void AlbaGrepFile::processFile(string const& inputFilePath, string const& output
     }
     updateAfterOneIteration(100);
 }
+
+AlbaGrepStringEvaluator& AlbaGrepFile::getGrepEvaluator() { return m_lineGrepEvaluator; }
 
 void AlbaGrepFile::updateAfterOneIteration(double const percentage) {
     if (m_updateFunctionAfterOneIterationOptional) {

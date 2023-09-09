@@ -15,6 +15,7 @@ namespace chess {
 namespace ChessPeek {
 
 namespace {
+
 void verifyGetChessCellPieceForBlackUpWhiteDown(BoardObserver const& retriever) {
     EXPECT_EQ(Piece(PieceColorAndType::WhitePawn), retriever.getPieceFromCell(0U, 6U));
     EXPECT_EQ(Piece(PieceColorAndType::WhitePawn), retriever.getPieceFromCell(1U, 6U));
@@ -49,6 +50,7 @@ void verifyGetChessCellPieceForBlackUpWhiteDown(BoardObserver const& retriever) 
     EXPECT_EQ(Piece(PieceColorAndType::BlackQueen), retriever.getPieceFromCell(3U, 0U));
     EXPECT_EQ(Piece(PieceColorAndType::BlackKing), retriever.getPieceFromCell(4U, 0U));
 }
+
 }  // namespace
 TEST(BoardObserverTest, DISABLED_GetChessCellPieceWorksForChessDotComVersus) {
     AlbaLocalPathHandler inputFile(APRG_DIR

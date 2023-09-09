@@ -23,11 +23,6 @@ public:
         std::copy(dataSampleValues.begin(), dataSampleValues.begin() + limit, m_data.begin());
     }
 
-    bool operator==(Sample const& value) const {
-        return std::equal(m_data.cbegin(), m_data.cend(), value.m_data.cbegin());
-    }
-
-    bool operator!=(Sample const& value) const { return !(*this == value); }
     Sample operator+(Sample const& value) const { return performDataTypeAndDataTypeFunction(value, std::plus<>()); }
     Sample operator-(Sample const& value) const { return performDataTypeAndDataTypeFunction(value, std::minus<>()); }
 
@@ -44,8 +39,28 @@ public:
     }
 
     Sample operator/(double const value) const { return performDataTypeAndConstantFunction(value, std::divides<>()); }
-    [[nodiscard]] bool isIndexValid(int const index) const { return index >= 0 && index < DIMENSIONS; }
-    [[nodiscard]] int getSize() const { return m_data.size(); }
+
+    bool operator==(Sample const& value) const {
+        return std::equal(m_data.cbegin(), m_data.cend(), value.m_data.cbegin());
+    }
+
+    bool operator!=(Sample const& value) const { return !(*this == value); }
+
+    [[nodiscard]] Sample calculateAbsoluteValue() const {
+        return performDataTypeFunction(
+            [](double const value) -> double { return mathHelper::getAbsoluteValue<double>(value); });
+    }
+
+    [[nodiscard]] Sample calculateRaiseToPower(double const value) const {
+        return performDataTypeAndConstantFunction(
+            value, [](double const value1, double const value2) -> double { return pow(value1, value2); });
+    }
+
+    [[nodiscard]] Sample calculateRaiseToInversePower(double const value) const {
+        return performDataTypeAndConstantFunction(value, [](double const value1, double const value2) -> double {
+            return pow(value1, static_cast<double>(1) / value2);
+        });
+    }
 
     [[nodiscard]] double getValueAt(int const index) const {
         double result(0);
@@ -63,21 +78,8 @@ public:
         return result;
     }
 
-    [[nodiscard]] Sample calculateAbsoluteValue() const {
-        return performDataTypeFunction(
-            [](double const value) -> double { return mathHelper::getAbsoluteValue<double>(value); });
-    }
-
-    [[nodiscard]] Sample calculateRaiseToPower(double const value) const {
-        return performDataTypeAndConstantFunction(
-            value, [](double const value1, double const value2) -> double { return pow(value1, value2); });
-    }
-
-    [[nodiscard]] Sample calculateRaiseToInversePower(double const value) const {
-        return performDataTypeAndConstantFunction(value, [](double const value1, double const value2) -> double {
-            return pow(value1, static_cast<double>(1) / value2);
-        });
-    }
+    [[nodiscard]] int getSize() const { return m_data.size(); }
+    [[nodiscard]] bool isIndexValid(int const index) const { return index >= 0 && index < DIMENSIONS; }
 
     Sample performDataTypeAndDataTypeFunction(
         Sample const& value, std::function<double(double, double)> binaryFunction) const {

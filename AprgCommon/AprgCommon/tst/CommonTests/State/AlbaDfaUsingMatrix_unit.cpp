@@ -7,13 +7,16 @@ using namespace std;
 namespace alba {
 
 namespace {
+
 enum class State { Unknown, First, Second, Third, Fourth, Fifth, MAX };
+
 using DfaForTest = AlbaDfaUsingMatrix<State, int>;
 
 std::ostream& operator<<(std::ostream& out, State const state) {
     out << "State" << static_cast<int>(state);
     return out;
 }
+
 }  // namespace
 
 TEST(AlbaDfaUsingMatrixTest, GetNextStateTest) {

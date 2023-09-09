@@ -5,7 +5,6 @@
 
 namespace alba::algebra {
 
-VariableNamesSet getVariablesNamesToCheck(Equations const& equations, VariableNamesSet const& variableNamesToIgnore);
 void reduceEquationsBySubstitution(Equations& substitutedEquations, VariableNamesSet const& variableNamesToIgnore);
 
 void selectVariableNameAndEquationNumber(
@@ -17,5 +16,6 @@ void substituteEquationForSelectedEquationIndex(
     int const selectedEquationIndex);
 
 void removeEquationsWithoutUnknowns(Equations& substitutedEquations);
+VariableNamesSet getVariablesNamesToCheck(Equations const& equations, VariableNamesSet const& variableNamesToIgnore);
 
 }  // namespace alba::algebra

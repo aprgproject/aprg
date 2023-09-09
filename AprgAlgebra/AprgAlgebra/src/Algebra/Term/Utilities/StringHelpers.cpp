@@ -10,31 +10,40 @@ using namespace std;
 
 namespace alba::algebra {
 
-bool isOperator(string const& stringObject) {
-    return "+" == stringObject || "-" == stringObject || "*" == stringObject || "/" == stringObject ||
-           "^" == stringObject || "(" == stringObject || ")" == stringObject;
+void addValueTermIfNotEmpty(Terms& terms, string const& valueString) {
+    if (!valueString.empty()) {
+        terms.emplace_back(Term(valueString));
+    }
 }
 
-bool isFunction(string const& stringObject) { return "abs" == stringObject; }
-
-int getOperatorPriority(string const& operatorString) {
-    int result = 0;
-    if ("(" == operatorString) {
-        result = 1;
-    } else if (")" == operatorString) {
-        result = 2;
-    } else if ("+" == operatorString) {
-        result = 3;
-    } else if ("-" == operatorString) {
-        result = 4;
-    } else if ("*" == operatorString) {
-        result = 5;
-    } else if ("/" == operatorString) {
-        result = 6;
-    } else if ("^" == operatorString) {
-        result = 7;
+Term buildTermIfPossible(string const& termString) {
+    Term result;
+    TermsAggregator aggregator(tokenizeToTerms(termString));
+    aggregator.simplifyTerms();
+    Terms const& simplifiedTerms(aggregator.getTermsConstReference());
+    if (simplifiedTerms.size() == 1) {
+        result = simplifiedTerms[0];
     }
     return result;
+}
+
+Terms tokenizeToTerms(string const& inputString) {
+    Terms tokenizedTerms;
+    string valueString;
+    for (char const c : inputString) {
+        if (!isWhiteSpace(c)) {
+            string characterString(1, c);
+            if (isOperator(characterString)) {
+                addValueTermIfNotEmpty(tokenizedTerms, valueString);
+                valueString.clear();
+                tokenizedTerms.emplace_back(characterString);
+            } else {
+                valueString += characterString;
+            }
+        }
+    }
+    addValueTermIfNotEmpty(tokenizedTerms, valueString);
+    return tokenizedTerms;
 }
 
 string getOperatingString(OperatorLevel const operatorLevel, TermAssociationType const association) {
@@ -86,40 +95,31 @@ string createVariableNameForSubstitution(Term const& term) {
     return ss.str();
 }
 
-Term buildTermIfPossible(string const& termString) {
-    Term result;
-    TermsAggregator aggregator(tokenizeToTerms(termString));
-    aggregator.simplifyTerms();
-    Terms const& simplifiedTerms(aggregator.getTermsConstReference());
-    if (simplifiedTerms.size() == 1) {
-        result = simplifiedTerms[0];
+int getOperatorPriority(string const& operatorString) {
+    int result = 0;
+    if ("(" == operatorString) {
+        result = 1;
+    } else if (")" == operatorString) {
+        result = 2;
+    } else if ("+" == operatorString) {
+        result = 3;
+    } else if ("-" == operatorString) {
+        result = 4;
+    } else if ("*" == operatorString) {
+        result = 5;
+    } else if ("/" == operatorString) {
+        result = 6;
+    } else if ("^" == operatorString) {
+        result = 7;
     }
     return result;
 }
 
-Terms tokenizeToTerms(string const& inputString) {
-    Terms tokenizedTerms;
-    string valueString;
-    for (char const c : inputString) {
-        if (!isWhiteSpace(c)) {
-            string characterString(1, c);
-            if (isOperator(characterString)) {
-                addValueTermIfNotEmpty(tokenizedTerms, valueString);
-                valueString.clear();
-                tokenizedTerms.emplace_back(characterString);
-            } else {
-                valueString += characterString;
-            }
-        }
-    }
-    addValueTermIfNotEmpty(tokenizedTerms, valueString);
-    return tokenizedTerms;
+bool isOperator(string const& stringObject) {
+    return "+" == stringObject || "-" == stringObject || "*" == stringObject || "/" == stringObject ||
+           "^" == stringObject || "(" == stringObject || ")" == stringObject;
 }
 
-void addValueTermIfNotEmpty(Terms& terms, string const& valueString) {
-    if (!valueString.empty()) {
-        terms.emplace_back(Term(valueString));
-    }
-}
+bool isFunction(string const& stringObject) { return "abs" == stringObject; }
 
 }  // namespace alba::algebra

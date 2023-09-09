@@ -27,27 +27,6 @@ public:
     };
 
     RWayTrieUsingLinkedArrays() : m_root(nullptr) {}
-    [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
-
-    [[nodiscard]] bool doesContain(Key const& key) const override {
-        Node const* const nodePointer(get(m_root, key, 0));
-        return nodePointer != nullptr;
-    }
-
-    [[nodiscard]] int getSize() const override { return getSize(m_root); }
-    [[nodiscard]] int getNumberOfNodes() const { return getNumberOfNodes(m_root); }
-
-    [[nodiscard]] Value get(Key const& key) const override {
-        Value result{};
-        Node const* const nodePointer(get(m_root, key, 0));
-        if (nodePointer != nullptr) {
-            ValueUniquePointer const& valueUniquePointer(nodePointer->valueUniquePointer);
-            if (valueUniquePointer) {
-                result = *valueUniquePointer;
-            }
-        }
-        return result;
-    }
 
     [[nodiscard]] Key getLongestPrefixOf(Key const& keyToCheck) const override {
         int longestPrefixLength(getLengthOfLongestPrefix(m_root.get(), keyToCheck, 0, 0));
@@ -68,10 +47,43 @@ public:
         return result;
     }
 
+    [[nodiscard]] Value get(Key const& key) const override {
+        Value result{};
+        Node const* const nodePointer(get(m_root, key, 0));
+        if (nodePointer != nullptr) {
+            ValueUniquePointer const& valueUniquePointer(nodePointer->valueUniquePointer);
+            if (valueUniquePointer) {
+                result = *valueUniquePointer;
+            }
+        }
+        return result;
+    }
+
+    [[nodiscard]] int getSize() const override { return getSize(m_root); }
+    [[nodiscard]] int getNumberOfNodes() const { return getNumberOfNodes(m_root); }
+    [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
+
+    [[nodiscard]] bool doesContain(Key const& key) const override {
+        Node const* const nodePointer(get(m_root, key, 0));
+        return nodePointer != nullptr;
+    }
+
     void put(Key const& key, Value const& value) override { put(m_root, key, value, 0); }
     void deleteBasedOnKey(Key const& key) override { deleteBasedOnKeyAndReturnIfDeleted(m_root, key, 0); }
 
 private:
+    [[nodiscard]] Node const* get(NodeUniquePointer const& currentNodePointer, Key const& key, int const index) const {
+        Node const* result(nullptr);
+        if (currentNodePointer) {
+            if (index == static_cast<int>(key.length())) {
+                result = currentNodePointer.get();
+            } else {
+                result = get(currentNodePointer->next[key[index]], key, index + 1);
+            }
+        }
+        return result;
+    }
+
     [[nodiscard]] int getSize(NodeUniquePointer const& currentNodePointer) const {
         int result(0);
         if (currentNodePointer) {
@@ -95,34 +107,6 @@ private:
             }
         }
         return result;
-    }
-
-    [[nodiscard]] Node const* get(NodeUniquePointer const& currentNodePointer, Key const& key, int const index) const {
-        Node const* result(nullptr);
-        if (currentNodePointer) {
-            if (index == static_cast<int>(key.length())) {
-                result = currentNodePointer.get();
-            } else {
-                result = get(currentNodePointer->next[key[index]], key, index + 1);
-            }
-        }
-        return result;
-    }
-
-    int getLengthOfLongestPrefix(
-        Node const* const currentNodePointer, Key const& keyToCheck, int const index, int const length) const {
-        int currentLongestLength(length);
-        if (currentNodePointer != nullptr) {
-            if (currentNodePointer->valueUniquePointer) {
-                currentLongestLength = index;
-            }
-            if (index < static_cast<int>(keyToCheck.length())) {
-                char c = keyToCheck[index];
-                currentLongestLength = getLengthOfLongestPrefix(
-                    currentNodePointer->next[c].get(), keyToCheck, index + 1, currentLongestLength);
-            }
-        }
-        return currentLongestLength;
     }
 
     void collectAllKeysAtNode(
@@ -159,6 +143,33 @@ private:
         }
     }
 
+    int getLengthOfLongestPrefix(
+        Node const* const currentNodePointer, Key const& keyToCheck, int const index, int const length) const {
+        int currentLongestLength(length);
+        if (currentNodePointer != nullptr) {
+            if (currentNodePointer->valueUniquePointer) {
+                currentLongestLength = index;
+            }
+            if (index < static_cast<int>(keyToCheck.length())) {
+                char c = keyToCheck[index];
+                currentLongestLength = getLengthOfLongestPrefix(
+                    currentNodePointer->next[c].get(), keyToCheck, index + 1, currentLongestLength);
+            }
+        }
+        return currentLongestLength;
+    }
+
+    void put(NodeUniquePointer& currentNodePointer, Key const& key, Value const& value, int const index) {
+        if (!currentNodePointer) {
+            currentNodePointer = std::make_unique<Node>();
+        }
+        if (index == static_cast<int>(key.length())) {
+            currentNodePointer->valueUniquePointer = std::make_unique<Value>(value);
+        } else {
+            put(currentNodePointer->next[key[index]], key, value, index + 1);
+        }
+    }
+
     bool isEmptyNode(NodeUniquePointer const& currentNodePointer) {
         return !currentNodePointer->valueUniquePointer &&
                std::all_of(
@@ -186,17 +197,6 @@ private:
             }
         }
         return isDeleted;
-    }
-
-    void put(NodeUniquePointer& currentNodePointer, Key const& key, Value const& value, int const index) {
-        if (!currentNodePointer) {
-            currentNodePointer = std::make_unique<Node>();
-        }
-        if (index == static_cast<int>(key.length())) {
-            currentNodePointer->valueUniquePointer = std::make_unique<Value>(value);
-        } else {
-            put(currentNodePointer->next[key[index]], key, value, index + 1);
-        }
     }
 
     NodeUniquePointer m_root;

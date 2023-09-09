@@ -3,7 +3,6 @@
 #include <string>
 
 namespace alba::algebra {
-
 constexpr const char* a = "a";
 constexpr const char* b = "b";
 constexpr const char* c = "c";
@@ -20,5 +19,4 @@ constexpr const char* x0 = "x0";
 constexpr const char* y0 = "y0";
 constexpr const char* z0 = "z0";
 constexpr const char* theta = "theta";
-
 }  // namespace alba::algebra

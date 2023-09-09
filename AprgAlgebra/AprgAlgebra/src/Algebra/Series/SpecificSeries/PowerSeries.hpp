@@ -11,8 +11,8 @@ public:
         Term const& multiplierForEachTerm, std::string const& nName, std::string const& xName,
         AlbaNumber const& aValue);
 
-    [[nodiscard]] AlbaNumberIntervals getIntervalsOfConvergence() const;
     [[nodiscard]] AlbaNumber getRadiusOfConvergence() const;
+    [[nodiscard]] AlbaNumberIntervals getIntervalsOfConvergence() const;
     void differentiate();
     void integrate();
 

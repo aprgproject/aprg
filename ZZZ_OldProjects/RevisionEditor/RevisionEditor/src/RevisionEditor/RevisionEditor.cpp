@@ -121,19 +121,6 @@ void RevisionEditor::editCommitMessages() {
     }
 }
 
-RevisionEditor::RevisionEntry RevisionEditor::getRevisionEntry(string const& line) {
-    int index = 0;
-    string revisionHash = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
-    index = line.find(END_ENTRY_PATTERN, index) + 3;
-    string date = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
-    index = line.find(END_ENTRY_PATTERN, index) + 3;
-    string author = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
-    index = line.find(END_ENTRY_PATTERN, index) + 3;
-    string message = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
-    // ALBA_PRINT4(revisionHash, date, author, message);
-    return {revisionHash, getDateTime(date), author, message};
-}
-
 AlbaDateTime RevisionEditor::getDateTime(string const& date) {
     int index = 0;
     auto year = convertStringToNumber<uint16_t>(getStringBeforeThisString(date, "-", index));
@@ -155,6 +142,19 @@ RevisionEditor::DaysInterval RevisionEditor::createDaysInterval(
     uint32_t const year1, uint32_t const month1, uint32_t const day1, uint32_t const year2, uint32_t const month2,
     uint32_t const day2) {
     return {AlbaYearMonthDay(year1, month1, day1).getTotalDays(), AlbaYearMonthDay(year2, month2, day2).getTotalDays()};
+}
+
+RevisionEditor::RevisionEntry RevisionEditor::getRevisionEntry(string const& line) {
+    int index = 0;
+    string revisionHash = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
+    index = line.find(END_ENTRY_PATTERN, index) + 3;
+    string date = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
+    index = line.find(END_ENTRY_PATTERN, index) + 3;
+    string author = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
+    index = line.find(END_ENTRY_PATTERN, index) + 3;
+    string message = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
+    // ALBA_PRINT4(revisionHash, date, author, message);
+    return {revisionHash, getDateTime(date), author, message};
 }
 
 void RevisionEditor::saveCommitsPerHourToFile() const {
@@ -180,33 +180,6 @@ void RevisionEditor::saveCommitMessagesToFile() const {
     for (RevisionEntry const& revisionEntry : m_revisionEntries) {
         commitMessagesStream << revisionEntry.message << "\n";
     }
-}
-
-int RevisionEditor::getRandomCommitsOfADay(double const targetAverageCommitOfADay) {
-    int remainingNumberOfInstances = m_dayInstancesRandomizer.getRandomValue();
-    int numberOfCommitsPerDay = 0;
-    for (int const numberOfInstances : m_numberInstancesOfEachDayCommitCount) {
-        if (remainingNumberOfInstances <= numberOfInstances) {
-            return getIntegerAfterRoundingADoubleValue<int>(
-                numberOfCommitsPerDay * targetAverageCommitOfADay / m_originalAverageCommitPerDay);
-        }
-        remainingNumberOfInstances -= numberOfInstances;
-        ++numberOfCommitsPerDay;
-    }
-    return 0;
-}
-
-int RevisionEditor::getRandomHour() {
-    int remainingRevisionCount = m_revisionRandomizer.getRandomValue();
-    int hour = 0;
-    for (int const numberOfCommitsAtThisHour : m_numberOfCommitsPerHour) {
-        if (remainingRevisionCount <= numberOfCommitsAtThisHour) {
-            return hour;
-        }
-        remainingRevisionCount -= numberOfCommitsAtThisHour;
-        ++hour;
-    }
-    return 0;
 }
 
 void RevisionEditor::setDataFromGitHistory() {
@@ -257,6 +230,33 @@ void RevisionEditor::setDataOnCommitsPerDay() {
     m_dayInstancesRandomizer.setMinimumAndMaximum(totalNumberOfInstances > 0 ? 1 : 0, totalNumberOfInstances);
     m_originalAverageCommitPerDay = static_cast<double>(totalWeight) / totalNumberOfInstances;
     ALBA_INF_PRINT3(cout, totalWeight, totalNumberOfInstances, m_originalAverageCommitPerDay);
+}
+
+int RevisionEditor::getRandomCommitsOfADay(double const targetAverageCommitOfADay) {
+    int remainingNumberOfInstances = m_dayInstancesRandomizer.getRandomValue();
+    int numberOfCommitsPerDay = 0;
+    for (int const numberOfInstances : m_numberInstancesOfEachDayCommitCount) {
+        if (remainingNumberOfInstances <= numberOfInstances) {
+            return getIntegerAfterRoundingADoubleValue<int>(
+                numberOfCommitsPerDay * targetAverageCommitOfADay / m_originalAverageCommitPerDay);
+        }
+        remainingNumberOfInstances -= numberOfInstances;
+        ++numberOfCommitsPerDay;
+    }
+    return 0;
+}
+
+int RevisionEditor::getRandomHour() {
+    int remainingRevisionCount = m_revisionRandomizer.getRandomValue();
+    int hour = 0;
+    for (int const numberOfCommitsAtThisHour : m_numberOfCommitsPerHour) {
+        if (remainingRevisionCount <= numberOfCommitsAtThisHour) {
+            return hour;
+        }
+        remainingRevisionCount -= numberOfCommitsAtThisHour;
+        ++hour;
+    }
+    return 0;
 }
 
 }  // namespace alba

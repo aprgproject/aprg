@@ -19,8 +19,14 @@ public:
     };
 
     LinkedListQueue() : m_first(nullptr), m_nextOfLastDoublePointer(&m_first) {}
-    [[nodiscard]] bool isEmpty() const override { return m_first == nullptr; }
     [[nodiscard]] int getSize() const override { return m_size; }
+    [[nodiscard]] bool isEmpty() const override { return m_first == nullptr; }
+
+    void enqueue(Object const& object) override {
+        m_nextOfLastDoublePointer->reset(new Node{object, nullptr});
+        m_nextOfLastDoublePointer = &((*m_nextOfLastDoublePointer)->next);
+        ++m_size;
+    }
 
     Object dequeue() override {
         assert(m_first);
@@ -34,12 +40,6 @@ public:
             }
         }
         return result;
-    }
-
-    void enqueue(Object const& object) override {
-        m_nextOfLastDoublePointer->reset(new Node{object, nullptr});
-        m_nextOfLastDoublePointer = &((*m_nextOfLastDoublePointer)->next);
-        ++m_size;
     }
 
 private:

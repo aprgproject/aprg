@@ -3,7 +3,6 @@
 #include <CodeUtilities/Common/CommonTypes.hpp>
 
 namespace alba::CodeUtilities::CPlusPlusFixer {
-
 void processAprgDirectory(std::string const& aprgPath);
 void processPath(std::string const& path);
 void processDirectory(std::string const& path);
@@ -25,5 +24,4 @@ void findTermsAndSwapAt(Terms& terms, Patterns const& searchPatterns, int const 
 void findTermsAndCheckForLoopAndSwapAt(
     Terms& terms, Patterns const& searchPatterns, int const index1, int const index2);
 void combinePrimitiveTypes(Terms& terms);
-
 }  // namespace alba::CodeUtilities::CPlusPlusFixer

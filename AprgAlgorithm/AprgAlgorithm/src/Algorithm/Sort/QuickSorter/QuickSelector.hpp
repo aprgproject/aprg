@@ -10,11 +10,6 @@ public:
     using Value = typename Values::value_type;
     explicit QuickSelector(PivotType const pivotType) : m_pivotType(pivotType) {}
 
-    Value getNthSelect(Values& valuesToSelect, int const selectionIndex) const {
-        doNthElement(valuesToSelect, selectionIndex);
-        return valuesToSelect[selectionIndex];
-    }
-
     void doNthElement(Values& valuesToSelect, int const selectionIndex) const {
         // Iterative approach
         int lowest = 0;
@@ -31,6 +26,11 @@ public:
                 break;
             }
         }
+    }
+
+    Value getNthSelect(Values& valuesToSelect, int const selectionIndex) const {
+        doNthElement(valuesToSelect, selectionIndex);
+        return valuesToSelect[selectionIndex];
     }
 
 private:

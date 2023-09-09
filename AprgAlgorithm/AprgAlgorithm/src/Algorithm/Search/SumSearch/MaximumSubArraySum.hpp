@@ -21,6 +21,27 @@ public:
 
     explicit MaximumSubArraySum(Values const& valuesToCheck) : m_valuesToCheck(valuesToCheck) {}
 
+    SubArrayDetails getMaximumSubArraySumWithDetails() {
+        SubArrayDetails currentSubArray{};
+        SubArrayDetails bestSubArray{};
+        int index(0);
+        for (Value const& value : m_valuesToCheck) {
+            if (value > currentSubArray.sum + value) {
+                // new sub array contains only value
+                currentSubArray = {index, index, value};
+            } else {
+                // add value to current sub array
+                currentSubArray.highIndex = index;
+                currentSubArray.sum += value;
+            }
+            if (bestSubArray.sum < currentSubArray.sum) {
+                bestSubArray = currentSubArray;
+            }
+            ++index;
+        }
+        return bestSubArray;
+    }
+
     Value getMaximumSubArraySum() {
         // Surprisingly, it is possible to solve the problem in O(n) time, which means that just one loop is enough.
         // The idea is to calculate, for each array position, the maximum sum of a subarray that ends at that position.
@@ -41,27 +62,6 @@ public:
             bestSum = std::max(bestSum, currentSum);
         }
         return bestSum;
-    }
-
-    SubArrayDetails getMaximumSubArraySumWithDetails() {
-        SubArrayDetails currentSubArray{};
-        SubArrayDetails bestSubArray{};
-        int index(0);
-        for (Value const& value : m_valuesToCheck) {
-            if (value > currentSubArray.sum + value) {
-                // new sub array contains only value
-                currentSubArray = {index, index, value};
-            } else {
-                // add value to current sub array
-                currentSubArray.highIndex = index;
-                currentSubArray.sum += value;
-            }
-            if (bestSubArray.sum < currentSubArray.sum) {
-                bestSubArray = currentSubArray;
-            }
-            ++index;
-        }
-        return bestSubArray;
     }
 
 private:

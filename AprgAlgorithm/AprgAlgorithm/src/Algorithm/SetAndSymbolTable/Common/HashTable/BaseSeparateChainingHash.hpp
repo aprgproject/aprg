@@ -21,20 +21,6 @@ public:
     using HashTable = std::array<UnorderedLinkedList, HASH_TABLE_SIZE>;
     BaseSeparateChainingHash() = default;
     ~BaseSeparateChainingHash() override = default;  // no need for virtual destructor because base destructor is
-    // virtual (similar to other virtual functions)
-    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
-
-    [[nodiscard]] bool doesContain(Key const& key) const override {
-        return m_smallerSymbolTables[getHash(key)].doesContain(key);
-    }
-
-    [[nodiscard]] int getSize() const override { return m_size; }
-
-    [[nodiscard]] int getRank(Key const& key) const override {
-        Keys keys(getKeys());
-        return OrderedArray::getRank(key, keys);
-    }
-
     [[nodiscard]] Key getMinimum() const override {
         Key result{};
         bool isFirst(true);
@@ -100,6 +86,20 @@ public:
             }
         }
         return result;
+    }
+
+    [[nodiscard]] int getSize() const override { return m_size; }
+
+    [[nodiscard]] int getRank(Key const& key) const override {
+        Keys keys(getKeys());
+        return OrderedArray::getRank(key, keys);
+    }
+
+    // virtual (similar to other virtual functions)
+    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
+
+    [[nodiscard]] bool doesContain(Key const& key) const override {
+        return m_smallerSymbolTables[getHash(key)].doesContain(key);
     }
 
     void deleteBasedOnKey(Key const& key) override {

@@ -33,10 +33,16 @@ public:
     Term(Expression const& expression);
     Term(Term const& term);
     Term& operator=(Term const& term);
+    Term operator~() const;
     bool operator==(Term const& second) const;
     bool operator!=(Term const& second) const;
     bool operator<(Term const& second) const;
-    Term operator~() const;
+    [[nodiscard]] Constant const& getConstantConstReference() const;
+    [[nodiscard]] Expression const& getExpressionConstReference() const;
+    [[nodiscard]] Operator const& getOperatorConstReference() const;
+    [[nodiscard]] TermType getTermType() const;
+    [[nodiscard]] VariableTerm const& getVariableTermConstReference() const;
+    [[nodiscard]] std::string getDebugString() const;
     [[nodiscard]] bool isEmpty() const;
     [[nodiscard]] bool isConstant() const;
     [[nodiscard]] bool isVariableTerm() const;
@@ -44,17 +50,6 @@ public:
     [[nodiscard]] bool isExpression() const;
     [[nodiscard]] bool isSimplified() const;
     [[nodiscard]] bool getBooleanValue() const;
-    [[nodiscard]] TermType getTermType() const;
-    [[nodiscard]] Constant const& getConstantConstReference() const;
-    [[nodiscard]] VariableTerm const& getVariableTermConstReference() const;
-    [[nodiscard]] Operator const& getOperatorConstReference() const;
-    [[nodiscard]] Expression const& getExpressionConstReference() const;
-    [[nodiscard]] std::string getDebugString() const;
-    Constant& getConstantReference();
-    VariableTerm& getVariableTermReference();
-    Operator& getOperatorReference();
-    Expression& getExpressionReference();
-    BaseTermUniquePointer createBasePointerByMove();
     void clear();
     void simplify();
     void sort();
@@ -62,6 +57,11 @@ public:
     void setAsSimplified();
     void clearSimplifiedFlag();
     void clearAllInnerSimplifiedFlags();
+    BaseTermUniquePointer createBasePointerByMove();
+    Constant& getConstantReference();
+    Expression& getExpressionReference();
+    Operator& getOperatorReference();
+    VariableTerm& getVariableTermReference();
 
 private:
     static BaseTermDataPointer createANewPointerFrom(Term const& term);

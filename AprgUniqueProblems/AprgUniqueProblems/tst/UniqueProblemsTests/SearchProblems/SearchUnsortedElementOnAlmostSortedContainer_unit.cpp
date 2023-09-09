@@ -10,7 +10,6 @@ namespace {
 using ValuesForTest = vector<int>;
 using SearchForTest = SearchUnsortedElementOnAlmostSortedContainer<ValuesForTest>;
 constexpr SearchForTest::Index INVALID_INDEX = SearchForTest::INVALID_INDEX;
-
 }  // namespace
 
 TEST(SearchUnsortedElementOnAlmostSortedContainerTest, GetIndexOfNearestValueWorksAndDoesNotCrashWhenEmpty) {

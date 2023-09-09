@@ -45,10 +45,6 @@ void SimplificationOfExpression::simplify() {
     }
 }
 
-bool SimplificationOfExpression::isChangeDetected(Expression const& expression1, Expression const& expression2) {
-    return expression1 != expression2;
-}
-
 void SimplificationOfExpression::simplifyExpression(Expression& expression) {
     WrappedTerms newWrappedTerms;
     OperatorLevel newOperatorLevel(expression.getCommonOperatorLevel());
@@ -101,6 +97,10 @@ void SimplificationOfExpression::processAndSaveTermsForOrOperation(
         accumulateTermsWithOrOperation(combinedTerm, newTerms);
     }
     expression.setTerm(combinedTerm);
+}
+
+bool SimplificationOfExpression::isChangeDetected(Expression const& expression1, Expression const& expression2) {
+    return expression1 != expression2;
 }
 
 void SimplificationOfExpression::simplifyExpressionUntilNoChange() {

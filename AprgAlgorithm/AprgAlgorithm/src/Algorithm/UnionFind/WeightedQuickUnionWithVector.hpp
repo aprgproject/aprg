@@ -13,10 +13,6 @@ public:
     using SizeVector = std::vector<int>;
     explicit WeightedQuickUnionWithVector(int const maximumSize) : m_relativeRoots() { initialize(maximumSize); }
 
-    [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
-        return getRoot(object1) == getRoot(object2);
-    }
-
     [[nodiscard]] Object getRoot(Object const& object) const override {
         // worst case runs in logarithmic time (base 2 log) -> acceptable
         // Continuously find relative root until its equal to the previous root
@@ -31,6 +27,19 @@ public:
 
     [[nodiscard]] RootVector const& getRelativeRootVector() const { return m_relativeRoots; }
     [[nodiscard]] SizeVector const& getSizesOfRootsVector() const { return m_sizesOfRoots; }
+
+    [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
+        return getRoot(object1) == getRoot(object2);
+    }
+
+    void connect(Object const& object1, Object const& object2) override {
+        // worst case runs in logarithmic time because of getRoot() -> acceptable
+        Object root1(getRoot(object1));
+        Object root2(getRoot(object2));
+        if (root1 != root2) {
+            connectRootsBasedOnSize(root2, root1);
+        }
+    }
 
     Object getRootWithPathCompressionOnePass(Object const& object) {
         // no longer const
@@ -64,15 +73,6 @@ public:
 
     RootVector& getRelativeRootVectorReference() { return m_relativeRoots; }
     SizeVector& getSizesOfRootsVectorReference() { return m_sizesOfRoots; }
-
-    void connect(Object const& object1, Object const& object2) override {
-        // worst case runs in logarithmic time because of getRoot() -> acceptable
-        Object root1(getRoot(object1));
-        Object root2(getRoot(object2));
-        if (root1 != root2) {
-            connectRootsBasedOnSize(root2, root1);
-        }
-    }
 
 private:
     void initialize(int const maximumSize) {

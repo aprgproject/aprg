@@ -21,10 +21,10 @@ class Fsp {
 public:
     explicit Fsp(FspDetails const& fspDetails);
     Fsp();
-    [[nodiscard]] bool isMasterTcom() const;
-    [[nodiscard]] unsigned int getAddress() const;
-    [[nodiscard]] SmType getSmType() const;
     [[nodiscard]] DspAddresses const& getDspAddresses() const;
+    [[nodiscard]] SmType getSmType() const;
+    [[nodiscard]] unsigned int getAddress() const;
+    [[nodiscard]] bool isMasterTcom() const;
 
 private:
     FspDetails m_fspDetails;

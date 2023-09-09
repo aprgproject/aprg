@@ -8,6 +8,10 @@ namespace alba::math {
 
 GameWithGraph::GameWithGraph(Graph const& graph) : m_graph(graph) {}
 
+GameState GameWithGraph::getGameStateAt(Vertex const vertex) {
+    return getGameStateFromGrundyNumber(getGrundyNumberAt(vertex));
+}
+
 UnsignedInteger GameWithGraph::getGrundyNumberAt(Vertex const vertex) {
     UnsignedInteger result{};
     auto it = m_vertexToGrundyNumberMap.find(vertex);
@@ -19,10 +23,6 @@ UnsignedInteger GameWithGraph::getGrundyNumberAt(Vertex const vertex) {
         m_vertexToGrundyNumberMap[vertex] = result;
     }
     return result;
-}
-
-GameState GameWithGraph::getGameStateAt(Vertex const vertex) {
-    return getGameStateFromGrundyNumber(getGrundyNumberAt(vertex));
 }
 
 GameWithGraph::Vertex GameWithGraph::getOptimalNextVertexAt(Vertex const vertex) {

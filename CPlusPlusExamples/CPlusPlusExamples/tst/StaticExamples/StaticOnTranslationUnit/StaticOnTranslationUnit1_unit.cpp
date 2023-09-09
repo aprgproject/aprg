@@ -15,12 +15,6 @@ int integer = 310;  // extern (external linkage) by default
 // explicitly extern (external linkage)
 extern int externInteger;  // only a declaration (incomplete type)
 int externInteger = 410;   // definition (complete type)
-int freeFunction() { return 1; }
-int staticFreeFunction() { return 1; }
-
-TranslationUnitValues getValuesInTranslationUnit1() {
-    return TranslationUnitValues{constInteger, staticInteger, integer, externInteger, externConstInteger};
-}
 
 // Utilities for tests
 void restoreInitialValuesForTranslationUnit1() {
@@ -30,6 +24,13 @@ void restoreInitialValuesForTranslationUnit1() {
     externInteger = 410;
     // externConstInteger = 510;  // const so cannot change value
 }
+
+TranslationUnitValues getValuesInTranslationUnit1() {
+    return TranslationUnitValues{constInteger, staticInteger, integer, externInteger, externConstInteger};
+}
+
+int freeFunction() { return 1; }
+int staticFreeFunction() { return 1; }
 
 TEST(StaticOnTranslationUnit1Test, VariableValuesAreCorrect) {
     restoreInitialValuesForTranslationUnit1();

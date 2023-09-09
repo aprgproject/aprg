@@ -36,6 +36,25 @@ void UserInterface::askUserForFormDetails() {
     saveFormDetailsFromFormDetailPath(askUserForPathOfFormDetailToRead(formDetailsDirectoryPath.getFullPath()));
 }
 
+void UserInterface::saveFormDetailsFromFormDetailPath(string const& formDetailsFilePath) {
+    ifstream formDetailsStream(formDetailsFilePath);
+    AlbaFileReader fileReader(formDetailsStream);
+
+    m_savedConfiguration.setFormDetailsTitle(fileReader.getLineAndIgnoreWhiteSpaces());
+
+    int columnNumber = 0;
+    while (fileReader.isNotFinished()) {
+        string line(fileReader.getLineAndIgnoreWhiteSpaces());
+        if (!line.empty()) {
+            if (line == "NEW_COLUMN") {
+                ++columnNumber;
+            } else {
+                m_savedConfiguration.addQuestion(columnNumber, line);
+            }
+        }
+    }
+}
+
 string UserInterface::askUserForPathOfFormDetailToRead(string const& formDetailsDirectoryPath) {
     AlbaLocalPathHandler formDetailsPathHandler(formDetailsDirectoryPath);
 
@@ -54,25 +73,6 @@ string UserInterface::askUserForPathOfFormDetailToRead(string const& formDetails
     cout << "Chosen choice: " << chosenChoice << "\n";
 
     return choices[chosenChoice];
-}
-
-void UserInterface::saveFormDetailsFromFormDetailPath(string const& formDetailsFilePath) {
-    ifstream formDetailsStream(formDetailsFilePath);
-    AlbaFileReader fileReader(formDetailsStream);
-
-    m_savedConfiguration.setFormDetailsTitle(fileReader.getLineAndIgnoreWhiteSpaces());
-
-    int columnNumber = 0;
-    while (fileReader.isNotFinished()) {
-        string line(fileReader.getLineAndIgnoreWhiteSpaces());
-        if (!line.empty()) {
-            if (line == "NEW_COLUMN") {
-                ++columnNumber;
-            } else {
-                m_savedConfiguration.addQuestion(columnNumber, line);
-            }
-        }
-    }
 }
 
 }  // namespace alba::soosa

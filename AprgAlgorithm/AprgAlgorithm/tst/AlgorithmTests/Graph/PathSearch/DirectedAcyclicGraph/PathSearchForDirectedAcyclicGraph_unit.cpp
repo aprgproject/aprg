@@ -9,6 +9,7 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 using VertexForTest = int;
 using WeightForTest = double;
 using PathForTest = GraphTypes<VertexForTest>::Path;
@@ -38,6 +39,7 @@ void putConnectionsWithNoCyclesForTest(EdgeWeightedDirectedGraphForTest& graph) 
     graph.connect(5, 7, 0.28);
     graph.connect(7, 3, 0.39);
 }
+
 }  // namespace
 
 TEST(PathSearchForDirectedAcyclicGraphTest, DoesNotProcessWhenThereAreCycles) {

@@ -16,10 +16,10 @@ NewtonMethod::NewtonMethod(AlbaNumber const& initialValue, Function const& funct
       m_positiveDeltaForSlope(INITIAL_DELTA_FOR_SLOPE),
       m_functionToIterate(functionToIterate) {}
 
+AlbaNumber const& NewtonMethod::getCurrentValue() const { return m_currentValue; }
+int NewtonMethod::getNumberOfIterationsExecuted() const { return m_numberOfIterationsExecuted; }
 bool NewtonMethod::isSolved() const { return m_functionToIterate(m_currentValue) == 0; }
 bool NewtonMethod::isFinished() const { return !m_currentValue.isARealFiniteValue() || isSolved(); }
-int NewtonMethod::getNumberOfIterationsExecuted() const { return m_numberOfIterationsExecuted; }
-AlbaNumber const& NewtonMethod::getCurrentValue() const { return m_currentValue; }
 
 void NewtonMethod::runOneIteration() {
     AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;

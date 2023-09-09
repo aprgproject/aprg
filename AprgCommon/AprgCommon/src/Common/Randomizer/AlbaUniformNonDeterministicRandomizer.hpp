@@ -28,13 +28,13 @@ public:
         : m_randomEngine(m_entropySeedSource()), m_randomNumberDistribution(minimum, maximum) {}
     // NOLINTNEXTLINE(cert-msc32-c,cert-msc51-cpp)
     AlbaUniformNonDeterministicRandomizer() : m_randomEngine(), m_randomNumberDistribution() {}
-    ValueType getRandomValue() { return m_randomNumberDistribution(m_randomEngine); }
 
     void setMinimumAndMaximum(ValueType const minimum, ValueType const maximum) {
         m_randomNumberDistribution = Distribution(minimum, maximum);
     }
 
     void resetRandomSeed() { m_randomEngine.seed(m_entropySeedSource()); }
+    ValueType getRandomValue() { return m_randomNumberDistribution(m_randomEngine); }
 
 private:
     EntropySeedSource m_entropySeedSource;

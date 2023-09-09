@@ -35,7 +35,19 @@ public:
     }
 
     [[nodiscard]] Index getStartOfChildren() const { return m_startOfChildren; }
-    [[nodiscard]] Values const& getTreeValues() const { return m_treeValues; }
+
+    [[nodiscard]] Index getIndexWithTargetValue(
+        Index const start, Value const targetValue, Function const& inverseFunction) const {
+        Index result(-1);
+        Index startTreeIndex = m_startOfChildren + start;
+        if (startTreeIndex < static_cast<Index>(m_treeValues.size())) {
+            result = getIndexWithTargetValueInternal(startTreeIndex, targetValue, inverseFunction);
+            if (result >= m_startOfChildren) {
+                result -= m_startOfChildren;
+            }
+        }
+        return result;
+    }
 
     [[nodiscard]] Value getValueOnInterval(Index const start, Index const end) const {
         // bottom to top approach
@@ -55,18 +67,7 @@ public:
         return result;
     }
 
-    [[nodiscard]] Index getIndexWithTargetValue(
-        Index const start, Value const targetValue, Function const& inverseFunction) const {
-        Index result(-1);
-        Index startTreeIndex = m_startOfChildren + start;
-        if (startTreeIndex < static_cast<Index>(m_treeValues.size())) {
-            result = getIndexWithTargetValueInternal(startTreeIndex, targetValue, inverseFunction);
-            if (result >= m_startOfChildren) {
-                result -= m_startOfChildren;
-            }
-        }
-        return result;
-    }
+    [[nodiscard]] Values const& getTreeValues() const { return m_treeValues; }
 
     void changeValueAtIndex(Index const index, Value const& newValue) {
         // This has log(N) running time
@@ -74,6 +75,45 @@ public:
     }
 
 protected:
+    [[nodiscard]] Index getIndexWithTargetValueInternal(
+        Index const treeIndex, Value const targetValue, Function const& inverseFunction) const {
+        Index result(-1);
+        Index parent = Utilities::getParent(treeIndex);
+        Index leftChild = Utilities::getLeftChild(treeIndex);
+        Index rightChild = Utilities::getRightChild(treeIndex);
+        if (targetValue == m_treeValues[treeIndex]) {
+            if (leftChild < static_cast<int>(m_treeValues.size()) && targetValue == m_treeValues[leftChild]) {
+                return getIndexWithTargetValueInternal(leftChild, targetValue, inverseFunction);
+            }
+            if (rightChild < static_cast<int>(m_treeValues.size())) {
+                return getIndexWithTargetValueInternal(
+                    rightChild, inverseFunction(targetValue, m_treeValues[leftChild]), inverseFunction);
+            }
+            if (leftChild < static_cast<int>(m_treeValues.size())) {
+                return getIndexWithTargetValueInternal(leftChild, targetValue, inverseFunction);
+            }
+            return treeIndex;
+        }
+        if (leftChild < static_cast<int>(m_treeValues.size()) && targetValue <= m_treeValues[leftChild]) {
+            return getIndexWithTargetValueInternal(leftChild, targetValue, inverseFunction);
+        }
+        if (rightChild < static_cast<int>(m_treeValues.size()) &&
+            targetValue <= m_treeValues[leftChild] + m_treeValues[rightChild]) {
+            return getIndexWithTargetValueInternal(
+                rightChild, inverseFunction(targetValue, m_treeValues[leftChild]), inverseFunction);
+        }
+        if (targetValue <= m_treeValues[treeIndex]) {
+            // do nothing
+        } else if (treeIndex > 0) {
+            if (Utilities::isALeftChild(treeIndex)) {
+                return getIndexWithTargetValueInternal(parent, targetValue, inverseFunction);
+            }
+            return getIndexWithTargetValueInternal(
+                parent, m_function(m_treeValues[Utilities::getLeftChild(parent)], targetValue), inverseFunction);
+        }
+        return result;
+    }
+
     [[nodiscard]] Value getValueOnIntervalFromBottomToTop(Index const start, Index const end) const {
         // This has log(N) running time
         Value result{};
@@ -134,45 +174,6 @@ protected:
                 result = getValueOnIntervalFromTopToBottom(
                     startInterval, endInterval, Utilities::getRightChild(currentChild), baseMidPoint + 1, baseRight);
             }
-        }
-        return result;
-    }
-
-    [[nodiscard]] Index getIndexWithTargetValueInternal(
-        Index const treeIndex, Value const targetValue, Function const& inverseFunction) const {
-        Index result(-1);
-        Index parent = Utilities::getParent(treeIndex);
-        Index leftChild = Utilities::getLeftChild(treeIndex);
-        Index rightChild = Utilities::getRightChild(treeIndex);
-        if (targetValue == m_treeValues[treeIndex]) {
-            if (leftChild < static_cast<int>(m_treeValues.size()) && targetValue == m_treeValues[leftChild]) {
-                return getIndexWithTargetValueInternal(leftChild, targetValue, inverseFunction);
-            }
-            if (rightChild < static_cast<int>(m_treeValues.size())) {
-                return getIndexWithTargetValueInternal(
-                    rightChild, inverseFunction(targetValue, m_treeValues[leftChild]), inverseFunction);
-            }
-            if (leftChild < static_cast<int>(m_treeValues.size())) {
-                return getIndexWithTargetValueInternal(leftChild, targetValue, inverseFunction);
-            }
-            return treeIndex;
-        }
-        if (leftChild < static_cast<int>(m_treeValues.size()) && targetValue <= m_treeValues[leftChild]) {
-            return getIndexWithTargetValueInternal(leftChild, targetValue, inverseFunction);
-        }
-        if (rightChild < static_cast<int>(m_treeValues.size()) &&
-            targetValue <= m_treeValues[leftChild] + m_treeValues[rightChild]) {
-            return getIndexWithTargetValueInternal(
-                rightChild, inverseFunction(targetValue, m_treeValues[leftChild]), inverseFunction);
-        }
-        if (targetValue <= m_treeValues[treeIndex]) {
-            // do nothing
-        } else if (treeIndex > 0) {
-            if (Utilities::isALeftChild(treeIndex)) {
-                return getIndexWithTargetValueInternal(parent, targetValue, inverseFunction);
-            }
-            return getIndexWithTargetValueInternal(
-                parent, m_function(m_treeValues[Utilities::getLeftChild(parent)], targetValue), inverseFunction);
         }
         return result;
     }

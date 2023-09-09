@@ -16,25 +16,15 @@ public:
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 
     enum class SearchType {
-
         Unknown,
         AllHamiltonianPaths,
         OneHamiltonianPath,
         AllHamiltonianCycles,
         OneHamiltonianCycle,
-
     };
 
     explicit HamiltonianPathSearchWithDfs(BaseGraphWithVertex const& graph)
         : m_graph(graph), m_numberOfVertices(m_graph.getNumberOfVertices()), m_searchType(SearchType::Unknown) {}
-
-    Paths getAllHamiltonianPaths() {
-        // A Hamiltonian path also visits every vertex once with no repeats
-        clear();
-        m_searchType = SearchType::AllHamiltonianPaths;
-        searchForHamiltonianPaths();
-        return m_savedPaths;
-    }
 
     Path getOneHamiltonianPath() {
         Path result;
@@ -47,14 +37,6 @@ public:
         return result;
     }
 
-    Paths getAllHamiltonianCycles() {
-        // A Hamiltonian path also visits every vertex once with no repeats
-        clear();
-        m_searchType = SearchType::AllHamiltonianCycles;
-        searchForHamiltonianPaths();
-        return m_savedPaths;
-    }
-
     Path getOneHamiltonianCycle() {
         Path result;
         clear();
@@ -64,6 +46,22 @@ public:
             result = m_savedPaths.front();
         }
         return result;
+    }
+
+    Paths getAllHamiltonianPaths() {
+        // A Hamiltonian path also visits every vertex once with no repeats
+        clear();
+        m_searchType = SearchType::AllHamiltonianPaths;
+        searchForHamiltonianPaths();
+        return m_savedPaths;
+    }
+
+    Paths getAllHamiltonianCycles() {
+        // A Hamiltonian path also visits every vertex once with no repeats
+        clear();
+        m_searchType = SearchType::AllHamiltonianCycles;
+        searchForHamiltonianPaths();
+        return m_savedPaths;
     }
 
 protected:

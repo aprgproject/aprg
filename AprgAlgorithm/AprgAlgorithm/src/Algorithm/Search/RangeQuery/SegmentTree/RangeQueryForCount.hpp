@@ -47,16 +47,6 @@ public:
     }
 
 private:
-    [[nodiscard]] ValueToCountMaps getValueToCountMaps(Values const& valuesToCheck) const {
-        ValueToCountMaps result;
-        result.reserve(valuesToCheck.size());
-        std::transform(
-            valuesToCheck.cbegin(), valuesToCheck.cend(), std::back_inserter(result), [](Value const& value) {
-                return ValueToCountMap{{value, 1}};
-            });
-        return result;
-    }
-
     [[nodiscard]] Function getFunctionForSegmentTree() const {
         return [](ValueToCountMap const& map1, ValueToCountMap const& map2) {
             ValueToCountMap result(map1);
@@ -70,6 +60,16 @@ private:
             }
             return result;
         };
+    }
+
+    [[nodiscard]] ValueToCountMaps getValueToCountMaps(Values const& valuesToCheck) const {
+        ValueToCountMaps result;
+        result.reserve(valuesToCheck.size());
+        std::transform(
+            valuesToCheck.cbegin(), valuesToCheck.cend(), std::back_inserter(result), [](Value const& value) {
+                return ValueToCountMap{{value, 1}};
+            });
+        return result;
     }
 
     SegmentTree m_valueToCountMapSegmentTree;

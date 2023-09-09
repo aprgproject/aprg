@@ -55,15 +55,8 @@ bool Expression::operator<(Expression const& second) const {
     return result;
 }
 
-bool Expression::isEmpty() const { return m_termsWithAssociation.isEmpty(); }
-
-bool Expression::containsOnlyOnePositivelyAssociatedTerm() const {
-    return 1 == m_termsWithAssociation.getSize() && getFirstAssociationType() == TermAssociationType::Positive;
-}
-
-bool Expression::isSimplified() const { return m_isSimplified; }
-OperatorLevel Expression::getCommonOperatorLevel() const { return m_commonOperatorLevel; }
 BaseTerm const& Expression::getFirstTerm() const { return m_termsWithAssociation.getFirstTerm(); }
+OperatorLevel Expression::getCommonOperatorLevel() const { return m_commonOperatorLevel; }
 
 TermAssociationType Expression::getFirstAssociationType() const {
     return m_termsWithAssociation.getFirstAssociationType();
@@ -91,10 +84,13 @@ string Expression::getDebugString() const {
     return ss.str();
 }
 
-TermsWithAssociation& Expression::getTermsWithAssociationReference() {
-    clearSimplifiedFlag();
-    return m_termsWithAssociation;
+bool Expression::isEmpty() const { return m_termsWithAssociation.isEmpty(); }
+
+bool Expression::containsOnlyOnePositivelyAssociatedTerm() const {
+    return 1 == m_termsWithAssociation.getSize() && getFirstAssociationType() == TermAssociationType::Positive;
 }
+
+bool Expression::isSimplified() const { return m_isSimplified; }
 
 void Expression::clear() {
     m_commonOperatorLevel = OperatorLevel::Unknown;
@@ -304,6 +300,11 @@ void Expression::clearAllInnerSimplifiedFlags() {
         term.clearAllInnerSimplifiedFlags();
     }
     clearSimplifiedFlag();
+}
+
+TermsWithAssociation& Expression::getTermsWithAssociationReference() {
+    clearSimplifiedFlag();
+    return m_termsWithAssociation;
 }
 
 void Expression::putTermWithAddition(BaseTerm const& baseTerm) {

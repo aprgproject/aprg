@@ -100,6 +100,21 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
     return result;
 }
 
+PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsingNaiveRecursion(
+    Index const left, Index const right) const {
+    Count result(0);
+    if (left < right && !isPalindrome(left, right)) {
+        Count minimumCuts(MAX_COUNT);
+        for (Index cutMatrix(left); cutMatrix < right; ++cutMatrix) {
+            minimumCuts =
+                min(minimumCuts, getMinimumNumberOfCutsUsingNaiveRecursion(left, cutMatrix) +
+                                     getMinimumNumberOfCutsUsingNaiveRecursion(cutMatrix + 1, right));
+        }
+        result = minimumCuts + 1;  // plus one because its cut in cutMatrix
+    }
+    return result;
+}
+
 bool PalindromePartitioning::isPalindrome(Index const left, Index const right) const {
     bool result(false);
     if (!m_string.empty()) {
@@ -112,21 +127,6 @@ bool PalindromePartitioning::isPalindrome(Index const left, Index const right) c
                 break;
             }
         }
-    }
-    return result;
-}
-
-PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsingNaiveRecursion(
-    Index const left, Index const right) const {
-    Count result(0);
-    if (left < right && !isPalindrome(left, right)) {
-        Count minimumCuts(MAX_COUNT);
-        for (Index cutMatrix(left); cutMatrix < right; ++cutMatrix) {
-            minimumCuts =
-                min(minimumCuts, getMinimumNumberOfCutsUsingNaiveRecursion(left, cutMatrix) +
-                                     getMinimumNumberOfCutsUsingNaiveRecursion(cutMatrix + 1, right));
-        }
-        result = minimumCuts + 1;  // plus one because its cut in cutMatrix
     }
     return result;
 }

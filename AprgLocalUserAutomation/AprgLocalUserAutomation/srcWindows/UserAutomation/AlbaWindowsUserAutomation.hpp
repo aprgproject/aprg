@@ -14,11 +14,6 @@ using MousePosition = AlbaXY<int>;
 
 class AlbaWindowsUserAutomation {
 public:
-    bool isKeyPressed(int const key) const;
-    bool isLetterPressed(char const letter) const;
-    MousePosition getMousePosition() const;
-    std::string getClassNameOfForegroundWindow() const;
-    std::string getStringFromClipboard() const;
     void setMousePosition(MousePosition const& position) const;
     void pressLeftButtonOnMouse() const;
     void releaseLeftButtonOnMouse() const;
@@ -43,12 +38,17 @@ public:
     void saveBitmapOnScreen(std::string_view const& filePath) const;
     void setStringToClipboard(std::string_view const& clipBoardText) const;
     void saveBitmapFromClipboard(std::string_view const& filePath) const;
+    MousePosition getMousePosition() const;
+    std::string getClassNameOfForegroundWindow() const;
+    std::string getStringFromClipboard() const;
+    bool isKeyPressed(int const key) const;
+    bool isLetterPressed(char const letter) const;
     typedef std::function<void(INPUT&)> InputFunction;
 
 private:
-    uint16_t convertToVirtualKey(char const character) const;
     void setForegroundWindowWithWindowHandle(HWND const windowHandle) const;
     void doOperation(InputFunction const& inputFunction) const;
+    uint16_t convertToVirtualKey(char const character) const;
     static constexpr int REALISTIC_DELAY_IN_MILLISECONDS = 100;
 };
 

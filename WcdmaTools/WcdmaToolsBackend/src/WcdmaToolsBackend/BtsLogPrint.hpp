@@ -49,16 +49,16 @@ public:
     bool operator<(BtsLogPrint const& btsLogPrintToCompare) const;
     bool operator>(BtsLogPrint const& btsLogPrintToCompare) const;
     bool operator==(BtsLogPrint const& btsLogPrintToCompare) const;
-    [[nodiscard]] bool isEmpty() const;
     [[nodiscard]] BtsLogTime getBtsTime() const;
     [[nodiscard]] BtsLogTime getPcTime() const;
     [[nodiscard]] std::string getHardwareAddress() const;
     [[nodiscard]] std::string getPrint() const;
     [[nodiscard]] std::string getPrintWithAllDetails() const;
+    [[nodiscard]] bool isEmpty() const;
     void clear();
     void updatePcTimeAndFileNameDetails(BtsLogPrint const& logPrint);
-    friend std::ostream& operator<<(std::ostream& out, BtsLogPrint const& btsLogPrint);
     friend std::istream& operator>>(std::istream& in, BtsLogPrint& btsLogPrint);
+    friend std::ostream& operator<<(std::ostream& out, BtsLogPrint const& btsLogPrint);
 
 private:
     static inline void handleUnknownState(

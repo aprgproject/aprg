@@ -12,10 +12,7 @@ public:
     using ConnectionMap =
         std::map<Object, Object>;  // you are using map, so log N but this should to be near constant (boo!)
     UnionFindUsingMap() = default;
-
-    [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
-        return getRoot(object1) == getRoot(object2);
-    }
+    [[nodiscard]] ConnectionMap const& getConnectionMap() const { return m_connectionMap; }
 
     [[nodiscard]] Object getRoot(Object const& object) const override {
         // Is it log(N) * log(N) * log(N)...?
@@ -33,7 +30,9 @@ public:
         return currentObject;
     }
 
-    [[nodiscard]] ConnectionMap const& getConnectionMap() const { return m_connectionMap; }
+    [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
+        return getRoot(object1) == getRoot(object2);
+    }
 
     void connect(Object const& object1, Object const& object2) override {
         initializeToConnectionMapIfNeeded(object1);

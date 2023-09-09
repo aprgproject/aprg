@@ -14,8 +14,19 @@ inline int externInlineInteger = 410;
 // inline std::string inlineString{"610"}; // Error: redefinition of 'inlineString'
 inline int inlineIntegerAtTranslationUnit = 710;
 int nonInlineAtTranslationUnit = 810;
-// constexpr int SampleClassWithInline::constIntegerInClass = 1010; // Error: redefinition of 'constIntegerInClass'
-int inlineFreeFunction() { return 1; }
+
+// Utilities for tests
+void restoreInitialValuesForTranslationUnit1() {
+    // constInteger = 110; // const so cannot change value
+    inlineIntegerWithDefinition = 210;
+    inlineIntegerWithDeclaration = 310;
+    externInlineInteger = 410;
+    staticInlineInteger = 510;
+    inlineString = "610";
+    inlineIntegerAtTranslationUnit = 710;
+    nonInlineAtTranslationUnit = 810;
+    // SampleClassWithInline::constIntegerInClass = 1010; // const so cannot change value
+}
 
 TranslationUnitValues getValuesInTranslationUnit1() {
     return TranslationUnitValues{
@@ -30,18 +41,8 @@ TranslationUnitValues getValuesInTranslationUnit1() {
         SampleClassWithInline::constIntegerInClass};
 }
 
-// Utilities for tests
-void restoreInitialValuesForTranslationUnit1() {
-    // constInteger = 110; // const so cannot change value
-    inlineIntegerWithDefinition = 210;
-    inlineIntegerWithDeclaration = 310;
-    externInlineInteger = 410;
-    staticInlineInteger = 510;
-    inlineString = "610";
-    inlineIntegerAtTranslationUnit = 710;
-    nonInlineAtTranslationUnit = 810;
-    // SampleClassWithInline::constIntegerInClass = 1010; // const so cannot change value
-}
+// constexpr int SampleClassWithInline::constIntegerInClass = 1010; // Error: redefinition of 'constIntegerInClass'
+int inlineFreeFunction() { return 1; }
 
 TEST(InlineOnTranslationUnit1Test, VariableValuesAreCorrect) {
     restoreInitialValuesForTranslationUnit1();

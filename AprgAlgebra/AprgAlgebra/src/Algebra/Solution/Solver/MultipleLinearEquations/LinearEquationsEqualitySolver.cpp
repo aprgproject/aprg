@@ -26,12 +26,6 @@ MultipleVariableSolutionSet LinearEquationsEqualitySolver::calculateSolutionAndR
     return solutionSet;
 }
 
-bool LinearEquationsEqualitySolver::areExponentsEqualToOneAndZero(AlbaNumbersSet const& exponents) {
-    return all_of(exponents.cbegin(), exponents.cend(), [](AlbaNumber const& exponent) {
-        return exponent == 1 || exponent == 0;
-    });
-}
-
 void LinearEquationsEqualitySolver::setMatrixCoefficients(
     NumberMatrix& coefficientsMatrix, VariableNamesSet const& variableNames, Polynomials const& polynomials) {
     int rowIndex = 0;
@@ -62,6 +56,12 @@ void LinearEquationsEqualitySolver::saveSolutionSetsFromTheCoefficientMatrix(
         }
         ++index;
     }
+}
+
+bool LinearEquationsEqualitySolver::areExponentsEqualToOneAndZero(AlbaNumbersSet const& exponents) {
+    return all_of(exponents.cbegin(), exponents.cend(), [](AlbaNumber const& exponent) {
+        return exponent == 1 || exponent == 0;
+    });
 }
 
 void LinearEquationsEqualitySolver::calculateSolution(

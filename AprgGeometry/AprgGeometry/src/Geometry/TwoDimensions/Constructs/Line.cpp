@@ -50,21 +50,6 @@ bool Line::operator==(Line const& line) const {
 }
 
 bool Line::operator!=(Line const& line) const { return !((*this) == line); }
-double Line::getXIntercept() const { return -m_cCoefficient / m_aCoefficient; }
-double Line::getYIntercept() const { return -m_cCoefficient / m_bCoefficient; }
-double Line::getSlope() const { return -m_aCoefficient / m_bCoefficient; }
-double Line::getPerpendicularSlope() const { return m_bCoefficient / m_aCoefficient; }
-double Line::getACoefficient() const { return m_aCoefficient; }
-double Line::getBCoefficient() const { return m_bCoefficient; }
-double Line::getCCoefficient() const { return m_cCoefficient; }
-double Line::getAUnitIncreaseInX() const { return m_bCoefficient; }
-double Line::getAUnitIncreaseInY() const { return -m_aCoefficient; }
-double Line::calculateYFromX(double const x) const {
-    return -1 * (m_aCoefficient * x + m_cCoefficient) / m_bCoefficient;  // form: y = -(a*x + c)/b
-}
-double Line::calculateXFromY(double const y) const {
-    return -1 * (m_bCoefficient * y + m_cCoefficient) / m_aCoefficient;  // form: x = -(b*y + c)/a
-}
 LineType Line::getType() const { return m_type; }
 
 Point Line::getAPoint() const {
@@ -98,6 +83,56 @@ Points Line::getPointsWithoutLastPoint(Point const& first, Point const& second, 
         pointsWithoutLastPoint.pop_back();
     }
     return pointsWithoutLastPoint;  // RVO
+}
+
+double Line::getXIntercept() const { return -m_cCoefficient / m_aCoefficient; }
+double Line::getYIntercept() const { return -m_cCoefficient / m_bCoefficient; }
+double Line::getSlope() const { return -m_aCoefficient / m_bCoefficient; }
+double Line::getPerpendicularSlope() const { return m_bCoefficient / m_aCoefficient; }
+double Line::getACoefficient() const { return m_aCoefficient; }
+double Line::getBCoefficient() const { return m_bCoefficient; }
+double Line::getCCoefficient() const { return m_cCoefficient; }
+double Line::getAUnitIncreaseInX() const { return m_bCoefficient; }
+double Line::getAUnitIncreaseInY() const { return -m_aCoefficient; }
+double Line::calculateYFromX(double const x) const {
+    return -1 * (m_aCoefficient * x + m_cCoefficient) / m_bCoefficient;  // form: y = -(a*x + c)/b
+}
+double Line::calculateXFromY(double const y) const {
+    return -1 * (m_bCoefficient * y + m_cCoefficient) / m_aCoefficient;  // form: x = -(b*y + c)/a
+}
+
+void Line::mergePointsFromPointsFromXAndY(
+    Points& points, Points const& pointsFromXCoordinate, Points const& pointsFromYCoordinate,
+    bool const isDirectionAscendingForX) {
+    auto iteratorForX = pointsFromXCoordinate.cbegin();
+    auto iteratorForY = pointsFromYCoordinate.cbegin();
+    while (iteratorForX != pointsFromXCoordinate.cend() || iteratorForY != pointsFromYCoordinate.cend()) {
+        if (iteratorForX != pointsFromXCoordinate.cend() && iteratorForY != pointsFromYCoordinate.cend()) {
+            if (isDirectionAscendingForX) {
+                if (isAlmostEqual(iteratorForX->getX(), iteratorForY->getX())) {
+                    points.emplace_back(*iteratorForX++);
+                    ++iteratorForY;
+                } else if (iteratorForX->getX() < iteratorForY->getX()) {
+                    points.emplace_back(*iteratorForX++);
+                } else {
+                    points.emplace_back(*iteratorForY++);
+                }
+            } else {
+                if (isAlmostEqual(iteratorForX->getX(), iteratorForY->getX())) {
+                    points.emplace_back(*iteratorForX++);
+                    ++iteratorForY;
+                } else if (iteratorForX->getX() > iteratorForY->getX()) {
+                    points.emplace_back(*iteratorForX++);
+                } else {
+                    points.emplace_back(*iteratorForY++);
+                }
+            }
+        } else if (iteratorForX != pointsFromXCoordinate.cend()) {
+            points.emplace_back(*iteratorForX++);
+        } else if (iteratorForY != pointsFromYCoordinate.cend()) {
+            points.emplace_back(*iteratorForY++);
+        }
+    }
 }
 
 LineType Line::determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX) {
@@ -134,40 +169,6 @@ LineType Line::determineLineTypeUsingCoefficients(double const aCoefficient, dou
         lineType = LineType::WithPositiveSlope;
     }
     return lineType;
-}
-
-void Line::mergePointsFromPointsFromXAndY(
-    Points& points, Points const& pointsFromXCoordinate, Points const& pointsFromYCoordinate,
-    bool const isDirectionAscendingForX) {
-    auto iteratorForX = pointsFromXCoordinate.cbegin();
-    auto iteratorForY = pointsFromYCoordinate.cbegin();
-    while (iteratorForX != pointsFromXCoordinate.cend() || iteratorForY != pointsFromYCoordinate.cend()) {
-        if (iteratorForX != pointsFromXCoordinate.cend() && iteratorForY != pointsFromYCoordinate.cend()) {
-            if (isDirectionAscendingForX) {
-                if (isAlmostEqual(iteratorForX->getX(), iteratorForY->getX())) {
-                    points.emplace_back(*iteratorForX++);
-                    ++iteratorForY;
-                } else if (iteratorForX->getX() < iteratorForY->getX()) {
-                    points.emplace_back(*iteratorForX++);
-                } else {
-                    points.emplace_back(*iteratorForY++);
-                }
-            } else {
-                if (isAlmostEqual(iteratorForX->getX(), iteratorForY->getX())) {
-                    points.emplace_back(*iteratorForX++);
-                    ++iteratorForY;
-                } else if (iteratorForX->getX() > iteratorForY->getX()) {
-                    points.emplace_back(*iteratorForX++);
-                } else {
-                    points.emplace_back(*iteratorForY++);
-                }
-            }
-        } else if (iteratorForX != pointsFromXCoordinate.cend()) {
-            points.emplace_back(*iteratorForX++);
-        } else if (iteratorForY != pointsFromYCoordinate.cend()) {
-            points.emplace_back(*iteratorForY++);
-        }
-    }
 }
 
 void Line::getPointsForVerticalLine(

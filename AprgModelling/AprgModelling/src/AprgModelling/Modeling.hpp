@@ -21,7 +21,6 @@ public:
     Modeling();
     [[nodiscard]] unsigned int getNumberOfSamples [[nodiscard]] () const;
     [[nodiscard]] MatrixOfDoubles getCoefficients() const;
-    ValidationResult validate();
     void retrieveDataFromFileWithFileFormat1(std::string const& filePath);
     void retrieveDataFromFileWithFileFormat2(std::string const& filePath);
 
@@ -37,15 +36,15 @@ public:
     void printModelingData();
     void printValidationData();
     void modelUsingLeastSquares();
+    ValidationResult validate();
 
 private:
-    static unsigned int getIndex(unsigned int const i, unsigned int const j, unsigned int const numberOfColumns);
-
     static void copyVectorToMatrix(
         unsigned int const numberOfColumns, unsigned int const numberOfRows, VectorOfDoubles const& retrievedDataForX,
         MatrixOfDoubles& matrixOfDoubles);
 
     static void printData(MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY);
+    static unsigned int getIndex(unsigned int const i, unsigned int const j, unsigned int const numberOfColumns);
     void saveRetrievedDataToMatrixRandomly(
         MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int const numberOfSamples);
     void saveRetrievedDataToMatrix(

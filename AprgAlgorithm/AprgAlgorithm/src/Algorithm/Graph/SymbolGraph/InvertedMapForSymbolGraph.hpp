@@ -15,6 +15,19 @@ public:
     [[nodiscard]] ObjectToVertexMap const& getObjectToVertexMap() const { return m_invertedMap; }
     [[nodiscard]] Vertices const& getUnusedVertices() const { return m_unusedVertices; }
 
+    void removeObject(Object const& object) {
+        auto it = m_invertedMap.find(object);
+        if (it != m_invertedMap.cend()) {
+            m_unusedVertices.emplace_back(it->second);
+            m_invertedMap.erase(object);
+        }
+    }
+
+    void clear() {
+        m_invertedMap.clear();
+        m_unusedVertices.clear();
+    }
+
     Vertex const& getVertexIdentifierAndAddObjectIfNeeded(Object const& object) {
         auto it = m_invertedMap.find(object);
         if (it == m_invertedMap.cend()) {
@@ -27,19 +40,6 @@ public:
             it = m_invertedMap.find(object);
         }
         return it->second;
-    }
-
-    void removeObject(Object const& object) {
-        auto it = m_invertedMap.find(object);
-        if (it != m_invertedMap.cend()) {
-            m_unusedVertices.emplace_back(it->second);
-            m_invertedMap.erase(object);
-        }
-    }
-
-    void clear() {
-        m_invertedMap.clear();
-        m_unusedVertices.clear();
     }
 
 private:

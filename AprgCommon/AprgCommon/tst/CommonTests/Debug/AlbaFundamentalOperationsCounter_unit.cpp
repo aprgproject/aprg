@@ -43,10 +43,12 @@ using CountsForSampleClass = AlbaFundamentalOperationsCounts<original::SampleCla
 }  // namespace withCounter
 
 namespace {
+
 SampleClass getRValue() {
     SampleClass namedReturnedObject(5678);
     return namedReturnedObject;
 }
+
 }  // namespace
 
 TEST(AlbaFundamentalOperationsCounterTest, UserConstructionIsCounted) {

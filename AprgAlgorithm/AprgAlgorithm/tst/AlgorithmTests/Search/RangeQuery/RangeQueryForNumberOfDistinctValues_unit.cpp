@@ -12,7 +12,6 @@ using ValuesForTest = vector<int>;
 using RangeQueryForTest = RangeQueryForNumberOfDistinctValues<ValuesForTest, MAX_VALUE>;
 using RangesForTest = typename RangeQueryForTest::Ranges;
 using InputAndOutputPairsForTest = typename RangeQueryForTest::InputAndOutputPairs;
-
 }  // namespace
 
 TEST(RangeQueryForNumberOfDistinctValuesTest, GetCountOfDistinctValuesOnIntervalWorksOnExample1) {

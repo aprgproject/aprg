@@ -3,7 +3,6 @@
 #include <Algebra/Term/TermTypes/Term.hpp>
 
 namespace alba::algebra::Functions {
-
 Function abs(Term const& term);
 Function greatestIntegerFunction(Term const& term);
 Function sgn(Term const& term);
@@ -37,5 +36,4 @@ Function arcsech(Term const& term);
 Function arccoth(Term const& term);
 Function sinHarmonic(
     Term const& term, AlbaNumber const& amplitude, AlbaNumber const& period, AlbaNumber const& phaseDifference);
-
 }  // namespace alba::algebra::Functions

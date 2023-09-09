@@ -16,19 +16,18 @@ public:
     Expression();
     Expression(OperatorLevel const operatorLevel, WrappedTerms const& wrappedTerms);
     Expression(OperatorLevel const operatorLevel, WrappedTerms&& wrappedTerms);
+    Expression operator~() const;
     // rule of zero
     bool operator==(Expression const& second) const;
     bool operator!=(Expression const& second) const;
     bool operator<(Expression const& second) const;
-    Expression operator~() const;
+    [[nodiscard]] BaseTerm const& getFirstTermConstReference() const;
+    [[nodiscard]] OperatorLevel getCommonOperatorLevel() const;
+    [[nodiscard]] WrappedTerms const& getWrappedTerms() const;
+    [[nodiscard]] std::string getDebugString() const;
     [[nodiscard]] bool isEmpty() const;
     [[nodiscard]] bool isSimplified() const;
     [[nodiscard]] bool containsOnlyOneTerm() const;
-    [[nodiscard]] OperatorLevel getCommonOperatorLevel() const;
-    [[nodiscard]] BaseTerm const& getFirstTermConstReference() const;
-    [[nodiscard]] WrappedTerms const& getWrappedTerms() const;
-    [[nodiscard]] std::string getDebugString() const;
-    WrappedTerms& getWrappedTermsReference();
     void clear();
     void clearAndPutTermInWrappedTerms(BaseTerm const& baseTerm);
     void putTerm(BaseTerm const& baseTerm);
@@ -47,6 +46,7 @@ public:
     void setAsSimplified();
     void clearSimplifiedFlag();
     void clearAllInnerSimplifiedFlags();
+    WrappedTerms& getWrappedTermsReference();
 
 private:
     // put functions

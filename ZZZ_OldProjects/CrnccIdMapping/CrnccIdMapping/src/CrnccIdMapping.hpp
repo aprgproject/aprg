@@ -21,8 +21,8 @@ constexpr unsigned int MAX_USERS_IN_NODEB = 2500;
 
 class CrnccIdMapping {
 public:
-    static TNbccId get(TCRNCCommunicationContextId const crnccId);
     static void set(TCRNCCommunicationContextId const crnccId, TNbccId const nbccId);
+    static TNbccId get(TCRNCCommunicationContextId const crnccId);
 
 private:
     static std::array<TCRNCCommunicationContextId, MAX_USERS_IN_NODEB + 1> m_crnccIdMapping;

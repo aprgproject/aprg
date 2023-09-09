@@ -26,10 +26,9 @@ DisplayTableCell::DisplayTableCell(
     VerticalAlignment const verticalAlignment)
     : m_displayText(displayText), m_horizontalAlignment(horizontalAlignment), m_verticalAlignment(verticalAlignment) {}
 
-string DisplayTableCell::getText() const { return m_displayText; }
 HorizontalAlignment DisplayTableCell::getHorizontalAlignment() const { return m_horizontalAlignment; }
 VerticalAlignment DisplayTableCell::getVerticalAlignment() const { return m_verticalAlignment; }
-string& DisplayTableCell::getTextReference() { return m_displayText; }
+string DisplayTableCell::getText() const { return m_displayText; }
 void DisplayTableCell::setText(string_view const text) { m_displayText = text; }
 
 void DisplayTableCell::setHorizontalAlignment(HorizontalAlignment const horizontalAlignment) {
@@ -40,12 +39,11 @@ void DisplayTableCell::setVerticalAlignment(VerticalAlignment const verticalAlig
     m_verticalAlignment = verticalAlignment;
 }
 
+string& DisplayTableCell::getTextReference() { return m_displayText; }
 DisplayTableRow::DisplayTableRow(int const numberOfCells) : m_cells(numberOfCells) {}
-int DisplayTableRow::getNumberOfColumns() const { return static_cast<int>(m_cells.size()); }
-DisplayTableCells const& DisplayTableRow::getCells() const { return m_cells; }
 DisplayTableCell const& DisplayTableRow::getCellAt(int const columnIndex) const { return m_cells[columnIndex]; }
-DisplayTableCells& DisplayTableRow::getCellsReference() { return m_cells; }
-DisplayTableCell& DisplayTableRow::getCellReferenceAt(int const columnIndex) { return m_cells[columnIndex]; }
+DisplayTableCells const& DisplayTableRow::getCells() const { return m_cells; }
+int DisplayTableRow::getNumberOfColumns() const { return static_cast<int>(m_cells.size()); }
 void DisplayTableRow::addCell(string_view const text) { m_cells.emplace_back(text); }
 
 void DisplayTableRow::addCell(string_view const displayText, HorizontalAlignment const horizontalAlignment) {
@@ -58,8 +56,19 @@ void DisplayTableRow::addCell(
     m_cells.emplace_back(displayText, horizontalAlignment, verticalAlignment);
 }
 
+DisplayTableCell& DisplayTableRow::getCellReferenceAt(int const columnIndex) { return m_cells[columnIndex]; }
+DisplayTableCells& DisplayTableRow::getCellsReference() { return m_cells; }
 DisplayTable::DisplayTable(int const numberOfColumns, int const numberOfRows)
     : m_rows(numberOfRows, DisplayTableRow(numberOfColumns)) {}
+
+DisplayTableCell const& DisplayTable::getCellAt(int const columnIndex, int const rowIndex) const {
+    return m_rows[rowIndex].getCellAt(columnIndex);
+}
+
+DisplayTableRow const& DisplayTable::getRowAt(int const rowIndex) const { return m_rows[rowIndex]; }
+DisplayTableRows const& DisplayTable::getRows() const { return m_rows; }
+std::string DisplayTable::getHorizontalBorder() const { return m_horizontalBorder; }
+std::string DisplayTable::getVerticalBorder() const { return m_verticalBorder; }
 int DisplayTable::getNumberOfRows() const { return static_cast<int>(m_rows.size()); }
 
 int DisplayTable::getMaxNumberOfColumns() const {
@@ -68,22 +77,6 @@ int DisplayTable::getMaxNumberOfColumns() const {
         maxColumns = max(maxColumns, row.getNumberOfColumns());
     }
     return maxColumns;
-}
-
-DisplayTableRows const& DisplayTable::getRows() const { return m_rows; }
-DisplayTableRow const& DisplayTable::getRowAt(int const rowIndex) const { return m_rows[rowIndex]; }
-
-DisplayTableCell const& DisplayTable::getCellAt(int const columnIndex, int const rowIndex) const {
-    return m_rows[rowIndex].getCellAt(columnIndex);
-}
-
-std::string DisplayTable::getHorizontalBorder() const { return m_horizontalBorder; }
-std::string DisplayTable::getVerticalBorder() const { return m_verticalBorder; }
-DisplayTableRow& DisplayTable::getLastRow() { return m_rows.back(); }
-DisplayTableRow& DisplayTable::getRowReferenceAt(int const rowIndex) { return m_rows[rowIndex]; }
-
-DisplayTableCell& DisplayTable::getCellReferenceAt(int const columnIndex, int const rowIndex) {
-    return m_rows[rowIndex].getCellReferenceAt(columnIndex);
 }
 
 void DisplayTable::addRow() { m_rows.emplace_back(); }
@@ -98,6 +91,13 @@ void DisplayTable::setHorizontalBorder(std::string_view const horizontalBorder) 
 }
 
 void DisplayTable::setVerticalBorder(std::string_view const verticalBorder) { m_verticalBorder = verticalBorder; }
+
+DisplayTableCell& DisplayTable::getCellReferenceAt(int const columnIndex, int const rowIndex) {
+    return m_rows[rowIndex].getCellReferenceAt(columnIndex);
+}
+
+DisplayTableRow& DisplayTable::getLastRow() { return m_rows.back(); }
+DisplayTableRow& DisplayTable::getRowReferenceAt(int const rowIndex) { return m_rows[rowIndex]; }
 
 ostream& operator<<(ostream& out, DisplayTable const& displayTable) {
     DisplayTablePrinter printer(displayTable);
@@ -193,12 +193,6 @@ string DisplayTablePrinter::getTextBasedOnVerticalAlignment(
     return {};
 }
 
-int DisplayTablePrinter::getVerticalBorderLength() const { return m_verticalBorder.length(); }
-
-int DisplayTablePrinter::getHorizontalBorderLength() const {
-    return ((m_maxLengthAtColumn.size() + 1) * getVerticalBorderLength()) + m_totalColumnLength;
-}
-
 string DisplayTablePrinter::getHorizontalBorderLine() const {
     string result;
     if (!m_horizontalBorder.empty()) {
@@ -208,6 +202,11 @@ string DisplayTablePrinter::getHorizontalBorderLine() const {
 }
 
 string DisplayTablePrinter::getVerticalBorderPoint() const { return m_verticalBorder; }
+int DisplayTablePrinter::getVerticalBorderLength() const { return m_verticalBorder.length(); }
+
+int DisplayTablePrinter::getHorizontalBorderLength() const {
+    return ((m_maxLengthAtColumn.size() + 1) * getVerticalBorderLength()) + m_totalColumnLength;
+}
 
 void DisplayTablePrinter::saveTableInformation(DisplayTable const& displayTable) {
     int rowIndex = 0;

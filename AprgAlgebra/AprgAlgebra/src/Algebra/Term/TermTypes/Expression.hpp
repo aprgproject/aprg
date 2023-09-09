@@ -21,15 +21,14 @@ public:
     bool operator==(Expression const& second) const;
     bool operator!=(Expression const& second) const;
     bool operator<(Expression const& second) const;
-    [[nodiscard]] bool isEmpty() const;
-    [[nodiscard]] bool containsOnlyOnePositivelyAssociatedTerm() const;
-    [[nodiscard]] bool isSimplified() const;
-    [[nodiscard]] OperatorLevel getCommonOperatorLevel() const;
     [[nodiscard]] BaseTerm const& getFirstTerm() const;
+    [[nodiscard]] OperatorLevel getCommonOperatorLevel() const;
     [[nodiscard]] TermAssociationType getFirstAssociationType() const;
     [[nodiscard]] TermsWithAssociation const& getTermsWithAssociation() const;
     [[nodiscard]] std::string getDebugString() const;
-    TermsWithAssociation& getTermsWithAssociationReference();
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] bool containsOnlyOnePositivelyAssociatedTerm() const;
+    [[nodiscard]] bool isSimplified() const;
     void clear();
     void clearAndPutTermInTermsWithAssociation(BaseTerm const& baseTerm);
     void putTermWithAdditionIfNeeded(BaseTerm const& baseTerm);
@@ -53,6 +52,7 @@ public:
     void setAsSimplified();
     void clearSimplifiedFlag();
     void clearAllInnerSimplifiedFlags();
+    TermsWithAssociation& getTermsWithAssociationReference();
 
 private:
     // put functions

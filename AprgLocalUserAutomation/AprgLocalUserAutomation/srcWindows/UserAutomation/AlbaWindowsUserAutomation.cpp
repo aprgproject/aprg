@@ -13,42 +13,6 @@ using namespace std;
 
 namespace alba {
 
-bool AlbaWindowsUserAutomation::isKeyPressed(int const key) const {
-    // https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getasynckeystate
-    // If the function succeeds, the return value specifies whether the key was pressed since the last call to
-    // GetAsyncKeyState, and whether the key is currently up or down. If the most significant bit is set, the key is
-    // down. If the least significant bit is set, the key was pressed after the previous call to GetAsyncKeyState.
-    // However, you should not rely on this last behavior; for more information, see the Remarks.
-    USHORT status = GetAsyncKeyState(key);
-    return (status & 0x8000) >> 15 == 1;  // || (status & 1) == 1;
-}
-
-bool AlbaWindowsUserAutomation::isLetterPressed(char const letter) const { return isKeyPressed(::toupper(letter)); }
-
-MousePosition AlbaWindowsUserAutomation::getMousePosition() const {
-    MousePosition position;
-    POINT mouse;
-    GetCursorPos(&mouse);
-    return MousePosition(mouse.x, mouse.y);
-}
-
-string AlbaWindowsUserAutomation::getClassNameOfForegroundWindow() const {
-    int const LENGTH = 1000;
-    char className[LENGTH];
-    GetClassName(GetForegroundWindow(), className, LENGTH);
-    return string(className);
-}
-
-string AlbaWindowsUserAutomation::getStringFromClipboard() const {
-    string stringInClipboard;
-    if (OpenClipboard(NULL)) {
-        HANDLE clipboardData = GetClipboardData(CF_TEXT);
-        stringInClipboard = (char*)clipboardData;
-        CloseClipboard();
-    }
-    return stringInClipboard;
-}
-
 void AlbaWindowsUserAutomation::setMousePosition(MousePosition const& position) const {
     long screenWidth = GetSystemMetrics(SM_CXSCREEN) - 1;
     long screenHeight = GetSystemMetrics(SM_CYSCREEN) - 1;
@@ -260,15 +224,41 @@ void AlbaWindowsUserAutomation::saveBitmapFromClipboard(string_view const& fileP
     }
 }
 
-uint16_t AlbaWindowsUserAutomation::convertToVirtualKey(char const character) const {
-    int virtualKey = character;
-    if (stringHelper::isLetter(character)) {
-        virtualKey = ::toupper(character);
-    } else if ('.' == character) {
-        virtualKey = VK_OEM_PERIOD;
-    }
-    return virtualKey;
+MousePosition AlbaWindowsUserAutomation::getMousePosition() const {
+    MousePosition position;
+    POINT mouse;
+    GetCursorPos(&mouse);
+    return MousePosition(mouse.x, mouse.y);
 }
+
+string AlbaWindowsUserAutomation::getClassNameOfForegroundWindow() const {
+    int const LENGTH = 1000;
+    char className[LENGTH];
+    GetClassName(GetForegroundWindow(), className, LENGTH);
+    return string(className);
+}
+
+string AlbaWindowsUserAutomation::getStringFromClipboard() const {
+    string stringInClipboard;
+    if (OpenClipboard(NULL)) {
+        HANDLE clipboardData = GetClipboardData(CF_TEXT);
+        stringInClipboard = (char*)clipboardData;
+        CloseClipboard();
+    }
+    return stringInClipboard;
+}
+
+bool AlbaWindowsUserAutomation::isKeyPressed(int const key) const {
+    // https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getasynckeystate
+    // If the function succeeds, the return value specifies whether the key was pressed since the last call to
+    // GetAsyncKeyState, and whether the key is currently up or down. If the most significant bit is set, the key is
+    // down. If the least significant bit is set, the key was pressed after the previous call to GetAsyncKeyState.
+    // However, you should not rely on this last behavior; for more information, see the Remarks.
+    USHORT status = GetAsyncKeyState(key);
+    return (status & 0x8000) >> 15 == 1;  // || (status & 1) == 1;
+}
+
+bool AlbaWindowsUserAutomation::isLetterPressed(char const letter) const { return isKeyPressed(::toupper(letter)); }
 
 void AlbaWindowsUserAutomation::setForegroundWindowWithWindowHandle(HWND const windowHandle) const {
     bool isSuccessful(false);
@@ -294,6 +284,16 @@ void AlbaWindowsUserAutomation::doOperation(AlbaWindowsUserAutomation::InputFunc
     memset(&input, 0, sizeof(INPUT));
     inputFunction(input);
     SendInput(1, &input, sizeof(INPUT));
+}
+
+uint16_t AlbaWindowsUserAutomation::convertToVirtualKey(char const character) const {
+    int virtualKey = character;
+    if (stringHelper::isLetter(character)) {
+        virtualKey = ::toupper(character);
+    } else if ('.' == character) {
+        virtualKey = VK_OEM_PERIOD;
+    }
+    return virtualKey;
 }
 
 }  // namespace alba

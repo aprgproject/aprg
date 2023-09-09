@@ -11,6 +11,32 @@ using namespace std;
 
 namespace alba::algebra {
 
+AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(AlbaNumber const& input, int const numberOfSamples) {
+    AlbaNumber result;
+    if (input > 0) {
+        Term oneOverX(Monomial(1, {{"x", -1}}));
+        Term approximateValue(getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(
+            oneOverX, {"x", AlbaNumber(1), input}, numberOfSamples));
+        if (approximateValue.isConstant()) {
+            result = approximateValue.getAsNumber();
+        }
+    }
+    return result;
+}
+
+AlbaNumber getAnApproximateOfNaturalLogarithmUsingSimpsonRule(AlbaNumber const& input, int const numberOfSamples) {
+    AlbaNumber result;
+    if (input > 0) {
+        Term oneOverX(Monomial(1, {{"x", -1}}));
+        Term approximateValue(
+            getAnApproximateOfDefiniteIntegralUsingSimpsonRule(oneOverX, {"x", AlbaNumber(1), input}, numberOfSamples));
+        if (approximateValue.isConstant()) {
+            result = approximateValue.getAsNumber();
+        }
+    }
+    return result;
+}
+
 Term getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(
     Term const& term, DetailsForDefiniteIntegralWithValues const& integralDetails, int const numberOfSamples) {
     // The Trapozoidal Rule
@@ -87,32 +113,6 @@ Term getAnApproximateOfTruncationErrorInSimpsonRuleAt(
     Term termDoublePrimeValue(substitution.performSubstitutionTo(termDoublePrime));
     AlbaNumber lengthOfInterval(integralDetails.higherEnd - integralDetails.lowerEnd);
     return termDoublePrimeValue * lengthOfInterval / -180 * (deltaX ^ 2);
-}
-
-AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(AlbaNumber const& input, int const numberOfSamples) {
-    AlbaNumber result;
-    if (input > 0) {
-        Term oneOverX(Monomial(1, {{"x", -1}}));
-        Term approximateValue(getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(
-            oneOverX, {"x", AlbaNumber(1), input}, numberOfSamples));
-        if (approximateValue.isConstant()) {
-            result = approximateValue.getAsNumber();
-        }
-    }
-    return result;
-}
-
-AlbaNumber getAnApproximateOfNaturalLogarithmUsingSimpsonRule(AlbaNumber const& input, int const numberOfSamples) {
-    AlbaNumber result;
-    if (input > 0) {
-        Term oneOverX(Monomial(1, {{"x", -1}}));
-        Term approximateValue(
-            getAnApproximateOfDefiniteIntegralUsingSimpsonRule(oneOverX, {"x", AlbaNumber(1), input}, numberOfSamples));
-        if (approximateValue.isConstant()) {
-            result = approximateValue.getAsNumber();
-        }
-    }
-    return result;
 }
 
 }  // namespace alba::algebra

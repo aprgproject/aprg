@@ -40,8 +40,8 @@ public:
         initialize(valuesToCheck, suggestedNumberOfBlocks);
     }
 
-    [[nodiscard]] Index getBlockSize() const { return m_blockSize; }
     [[nodiscard]] BlockValues const& getBlocks() const { return m_blocks; }
+    [[nodiscard]] Index getBlockSize() const { return m_blockSize; }
 
     [[nodiscard]] Output getResultOnInterval(Index const start, Index const end) const {
         // This is max(O(k), O(n/k)) time.

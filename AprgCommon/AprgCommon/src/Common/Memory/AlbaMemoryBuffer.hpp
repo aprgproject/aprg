@@ -19,11 +19,11 @@ public:
     explicit operator bool() const;  // not explicit
     ByteType operator[](size_t const index) const;
     ByteType& operator[](size_t const index);
+    [[nodiscard]] void const* getConstantBufferPointer() const;
+    [[nodiscard]] size_t getSize() const;
     // If a class has a subscript operator, it usually should define two versions:
     // one that returns a plain reference and the other that is a const member and returns a reference to const.
     [[nodiscard]] bool hasContent() const;
-    [[nodiscard]] size_t getSize() const;
-    [[nodiscard]] void const* getConstantBufferPointer() const;
     void* getBufferPointer();
     void clear();
     void clearAndSetNewData(void* sourcePointer, size_t const size);

@@ -5,9 +5,6 @@
 
 namespace alba::algebra::Factorization {
 
-Polynomials factorizeBySplittingToSmallerPolynomials(Polynomial const& polynomial);
-Polynomial getNewPolynomialWithNewVariables(
-    SubstitutionOfVariablesToTerms& variableSubstitution, Polynomials const& smallerPolynomials);
 void factorizeBySplittingToSmallerPolynomialsIfPossible(Polynomials& result, Polynomial const& polynomial);
 void factorizeIfPossibleBySplittingByPolynomialDegree(Polynomials& result, Polynomial const& polynomial);
 void factorizeIfPossibleBySplittingByDivisibilityOfExponents(Polynomials& result, Polynomial const& polynomial);
@@ -30,5 +27,8 @@ void getPolynomialsWithRemovedCommonFactors(
 void updateToGetSubsetOfFactors(Polynomials& commonFactors, Polynomials const& commonFactorsOfAPolynomial);
 void combinePolynomialsByAdditionThenEmplaceFactoredPolynomialIfNeeded(
     Polynomials& result, Polynomials const& smallerPolynomials);
+Polynomial getNewPolynomialWithNewVariables(
+    SubstitutionOfVariablesToTerms& variableSubstitution, Polynomials const& smallerPolynomials);
+Polynomials factorizeBySplittingToSmallerPolynomials(Polynomial const& polynomial);
 
 }  // namespace alba::algebra::Factorization

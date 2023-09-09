@@ -50,6 +50,14 @@ public:
     }
 
 private:
+    [[nodiscard]] GraphToManipulate createGraphToManipulate(Edges const& originalEdges) const {
+        GraphToManipulate graphToManipulate;
+        for (Edge const& originalEdge : originalEdges) {
+            graphToManipulate.connect(originalEdge.first, originalEdge.second);
+        }
+        return graphToManipulate;
+    }
+
     [[nodiscard]] bool isStillConnectedAfterRemovingThisEdge(
         GraphToManipulate const& graph, Edge const& edgeToDelete) const {
         // THIS IS COSTLY!
@@ -58,14 +66,6 @@ private:
         ConnectedComponentsUsingDfs<Vertex> connectedComponents(graphWithDeletedEdge);
         return connectedComponents.getNumberOfComponentIds() <= 1               // graph is still connected
                && connectedComponents.getComponentId(edgeToDelete.second) > 0;  // destination is still connected
-    }
-
-    [[nodiscard]] GraphToManipulate createGraphToManipulate(Edges const& originalEdges) const {
-        GraphToManipulate graphToManipulate;
-        for (Edge const& originalEdge : originalEdges) {
-            graphToManipulate.connect(originalEdge.first, originalEdge.second);
-        }
-        return graphToManipulate;
     }
 
     void putEulerEdgesOnPath(Path& result, Edges const& edgesInEulerCycle) const {

@@ -34,11 +34,11 @@ private:
     [[nodiscard]] static bool hasEndBrace(std::string const& content);
     static int getIndexAtClosingString(
         Terms const& terms, int const openingIndex, std::string const& openingString, std::string const& closingString);
-    [[nodiscard]] int getIndexAtSameLineComment(int const index) const;
     [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const openingBraceIndex) const;
+    [[nodiscard]] std::string getContents(int const start, int const end) const;
     [[nodiscard]] stringHelper::strings getScopeNames() const;
     [[nodiscard]] stringHelper::strings getSavedSignatures() const;
-    [[nodiscard]] std::string getContents(int const start, int const end) const;
+    [[nodiscard]] int getIndexAtSameLineComment(int const index) const;
     void gatherInformationFromFile(std::string const& file);
     void processTerms();
     void processMacro(int& lastProcessedIndex, int const macroStartIndex);

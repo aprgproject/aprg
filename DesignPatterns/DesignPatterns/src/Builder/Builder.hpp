@@ -7,10 +7,10 @@ namespace Builder {
 // the final object that will be created using Builder
 class Product {
 public:
-    std::string getProduct() { return (m_partA + " " + m_partB + " " + m_partC); }
     void makeA(std::string const& part) { m_partA = part; }
     void makeB(std::string const& part) { m_partB = part; }
     void makeC(std::string const& part) { m_partC = part; }
+    std::string getProduct() { return (m_partA + " " + m_partB + " " + m_partC); }
 
     // ...
 private:
@@ -58,7 +58,6 @@ public:
 class Director {
 public:
     explicit Director(std::unique_ptr<Builder> builder) : m_builder(move(builder)) {}
-    Product getProduct() { return m_builder->getProduct(); }
     void setBuilder(std::unique_ptr<Builder> builder) { m_builder = move(builder); }
 
     void construct() {
@@ -67,6 +66,8 @@ public:
         m_builder->buildPartC();
         // ...
     }
+
+    Product getProduct() { return m_builder->getProduct(); }
 
     // ...
 private:

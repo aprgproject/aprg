@@ -12,15 +12,6 @@ using namespace std;
 
 namespace alba::AprgBitmap {
 
-string getNewFilePath(string const& inputFilePath, int const step, string const& description) {
-    AlbaLocalPathHandler inputFilePathHandler(inputFilePath);
-    stringstream ss;
-    ss << inputFilePathHandler.getDirectory() << inputFilePathHandler.getFilenameOnly() << "_Step" << step << "_("
-       << stringHelper::getStringAndReplaceNonAlphanumericCharactersToUnderScore(description) << ")."
-       << inputFilePathHandler.getExtension();
-    return ss.str();
-}
-
 void animize(string const& inputFile, string const& outputFile) {
     AlbaLocalTimer localTimer;
     AlbaLocalPathHandler inputFilePathHandler(inputFile);
@@ -109,6 +100,15 @@ void doStuffsAfterSteps(
     bitmapFilters.saveSnippetIntoFileWithFullFilePath(snippet, getNewFilePath(inputFilePath, ++step, description));
     cout << localTimer.getDifferenceAsAlbaDateTime() << ": " << description << "\n";
     localTimer.resetTimer();
+}
+
+string getNewFilePath(string const& inputFilePath, int const step, string const& description) {
+    AlbaLocalPathHandler inputFilePathHandler(inputFilePath);
+    stringstream ss;
+    ss << inputFilePathHandler.getDirectory() << inputFilePathHandler.getFilenameOnly() << "_Step" << step << "_("
+       << stringHelper::getStringAndReplaceNonAlphanumericCharactersToUnderScore(description) << ")."
+       << inputFilePathHandler.getExtension();
+    return ss.str();
 }
 
 }  // namespace alba::AprgBitmap

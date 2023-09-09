@@ -27,10 +27,10 @@ public:
 
 private:
     [[nodiscard]] LocationsInFile getLocationsInFile(double const foundLocation, double const fileSize) const;
-    double getLocationOfPrioritizedPrint(std::string const& inputFilePath);
     void performCropForFile(
         std::string const& inputFilePath, std::string const& outputFilePath, double const foundLocation);
     void updateAfterOneIteration(double const percentage);
+    double getLocationOfPrioritizedPrint(std::string const& inputFilePath);
     bool m_isOutputFileWritten;
     double m_cropSize;
     AlbaGrepStringEvaluator m_prioritizedLineEvaluator;

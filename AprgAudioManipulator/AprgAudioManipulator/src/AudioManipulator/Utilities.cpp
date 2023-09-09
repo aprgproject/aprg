@@ -13,63 +13,6 @@ using namespace std;
 
 namespace alba::AprgAudio {
 
-double getSumInRange(Samples const& samples, int const startIndexIncluded, int const endIndexExcluded) {
-    return accumulate(samples.cbegin() + startIndexIncluded, samples.cbegin() + endIndexExcluded, 0.0);
-}
-
-double getAverageOfSamples(Samples const& samples) {
-    return accumulate(samples.cbegin(), samples.cend(), 0.0) / samples.size();
-}
-
-double getAverageInRange(Samples const& samples, int const startIndexIncluded, int const endIndexExcluded) {
-    return accumulate(samples.cbegin() + startIndexIncluded, samples.cbegin() + endIndexExcluded, 0.0) / samples.size();
-}
-
-double getCommonMultiplierForDeltaSamples(
-    Samples const& samples, int const startIndexIncluded, int const endIndexExcluded) {
-    double multiplier = getAverageInRange(samples, startIndexIncluded, endIndexExcluded);
-    if (isAlmostEqual(multiplier, 0.0)) {
-        multiplier = 1;
-    }
-    return multiplier;
-}
-
-double getCommonMultiplierUsingSumAndNumberOfItems(double const sum, int const numberOfItems) {
-    double multiplier = sum / numberOfItems;
-    if (isAlmostEqual(multiplier, 0.0)) {
-        multiplier = 1;
-    }
-    return multiplier;
-}
-
-DoubleOptional compareDeltasAndGetDifference(
-    Samples const& deltaSamples1, Samples const& deltaSamples2, double const multiplierToSample2,
-    int const startOfDeltaSamples1, int const startOfDeltaSamples2, int const numberOfSamples) {
-    constexpr double limitOfOneDifference = 2;
-    DoubleOptional result;
-    double currentValue1(0);
-    double currentValue2(0);
-    double totalDifference(0);
-    bool hasLimitExceeded(false);
-
-    for (int i = 0; i < numberOfSamples; i += 1) {
-        double deltaSample1 = deltaSamples1[startOfDeltaSamples1 + i];
-        double deltaSample2 = deltaSamples2[startOfDeltaSamples2 + i];
-        currentValue1 += deltaSample1;
-        currentValue2 += (deltaSample2 * multiplierToSample2);
-        double currentPositiveDifference = getAbsoluteValue(currentValue1 - currentValue2);
-        if (limitOfOneDifference < currentPositiveDifference) {
-            hasLimitExceeded = true;
-            break;
-        }
-        totalDifference += currentPositiveDifference;
-    }
-    if (!hasLimitExceeded) {
-        result = totalDifference / numberOfSamples;
-    }
-    return result;
-}
-
 void retrieveDeltas(Samples& deltaSamples, Samples const& pointerOfSampleToCheck, int const numberOfSamples) {
     deltaSamples.reserve(numberOfSamples);
     double previousValue(0);
@@ -167,6 +110,63 @@ void searchAndTryToReplicate(
             clampHigherBound(i, audioToSearch.getNumberOfChannels()), alwaysPutNewValue);
     }
     audioToChangeManipulator.saveAudioIntoCurrentFile();
+}
+
+DoubleOptional compareDeltasAndGetDifference(
+    Samples const& deltaSamples1, Samples const& deltaSamples2, double const multiplierToSample2,
+    int const startOfDeltaSamples1, int const startOfDeltaSamples2, int const numberOfSamples) {
+    constexpr double limitOfOneDifference = 2;
+    DoubleOptional result;
+    double currentValue1(0);
+    double currentValue2(0);
+    double totalDifference(0);
+    bool hasLimitExceeded(false);
+
+    for (int i = 0; i < numberOfSamples; i += 1) {
+        double deltaSample1 = deltaSamples1[startOfDeltaSamples1 + i];
+        double deltaSample2 = deltaSamples2[startOfDeltaSamples2 + i];
+        currentValue1 += deltaSample1;
+        currentValue2 += (deltaSample2 * multiplierToSample2);
+        double currentPositiveDifference = getAbsoluteValue(currentValue1 - currentValue2);
+        if (limitOfOneDifference < currentPositiveDifference) {
+            hasLimitExceeded = true;
+            break;
+        }
+        totalDifference += currentPositiveDifference;
+    }
+    if (!hasLimitExceeded) {
+        result = totalDifference / numberOfSamples;
+    }
+    return result;
+}
+
+double getSumInRange(Samples const& samples, int const startIndexIncluded, int const endIndexExcluded) {
+    return accumulate(samples.cbegin() + startIndexIncluded, samples.cbegin() + endIndexExcluded, 0.0);
+}
+
+double getAverageOfSamples(Samples const& samples) {
+    return accumulate(samples.cbegin(), samples.cend(), 0.0) / samples.size();
+}
+
+double getAverageInRange(Samples const& samples, int const startIndexIncluded, int const endIndexExcluded) {
+    return accumulate(samples.cbegin() + startIndexIncluded, samples.cbegin() + endIndexExcluded, 0.0) / samples.size();
+}
+
+double getCommonMultiplierForDeltaSamples(
+    Samples const& samples, int const startIndexIncluded, int const endIndexExcluded) {
+    double multiplier = getAverageInRange(samples, startIndexIncluded, endIndexExcluded);
+    if (isAlmostEqual(multiplier, 0.0)) {
+        multiplier = 1;
+    }
+    return multiplier;
+}
+
+double getCommonMultiplierUsingSumAndNumberOfItems(double const sum, int const numberOfItems) {
+    double multiplier = sum / numberOfItems;
+    if (isAlmostEqual(multiplier, 0.0)) {
+        multiplier = 1;
+    }
+    return multiplier;
 }
 
 }  // namespace alba::AprgAudio

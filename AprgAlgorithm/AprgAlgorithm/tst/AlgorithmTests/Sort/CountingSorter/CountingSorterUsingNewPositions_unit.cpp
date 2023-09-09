@@ -10,6 +10,7 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 constexpr int MAX_NUMBER_OF_CHARACTERS = 256;
 constexpr int MAX_NUMBER_OF_SMALL_INTS = 21;
 using Characters = vector<char>;
@@ -18,7 +19,6 @@ using StabilityCheckObjects = vector<StabilityCheckObject>;
 using CharactersSorter = CountingSorterUsingNewPositions<Characters, MAX_NUMBER_OF_CHARACTERS>;
 using SmallIntegerSorter = CountingSorterUsingNewPositions<Integers, MAX_NUMBER_OF_SMALL_INTS>;
 using StabilityCheckObjectsSorter = CountingSorterUsingNewPositions<StabilityCheckObjects, MAX_NUMBER_OF_CHARACTERS>;
-
 CharactersSorter::ValueToIndexableValueFunction characterToIndexableValueFunction = [](char const& value) -> int {
     return value & 0xFF;  // already converts to integer
 };
@@ -32,6 +32,7 @@ StabilityCheckObjectsSorter::ValueToIndexableValueFunction stabilityCheckObjectT
     [](StabilityCheckObject const& value) -> int {
     return value.getVisiblePart() & 0xFF;  // there is some splicing here
 };
+
 }  // namespace
 
 TEST(CountingSorterUsingNewPositionsTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {

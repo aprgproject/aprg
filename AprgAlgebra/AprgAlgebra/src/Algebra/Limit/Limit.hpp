@@ -9,18 +9,9 @@
 
 namespace alba::algebra {
 
-bool isAlmostEqualForLimitIteration(AlbaNumber const& value1, AlbaNumber const& value2);
-bool isAlmostEqualForLimitChecking(AlbaNumber const& value1, AlbaNumber const& value2);
-bool hasVerticalAsymptoteAtValue(Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
-bool hasHorizontalAsymptoteAtValue(
-    Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
-
-bool isSqueezeTheoremSatisfied(
-    Term const& alwaysLowerTermAtInterval, Term const& termInBetweenAtInterval, Term const& alwaysHigherTermAtInterval,
-    std::string const& variableName, AlbaNumber const& valueToApproach);
-
-bool continueToDifferentiateForLhopitalsRule(
-    Term const& numerator, Term const& denominator, Term const& numeratorValue, Term const& denominatorValue);
+void calculateTermAndLimitUsingLhopitalsRule(
+    Term& newTerm, Term& limitValue, Term const& term, std::string const& variableName,
+    AlbaNumber const& valueToApproach);
 
 AlbaNumber getLimitAtAValueByApproachType(
     Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach,
@@ -65,9 +56,17 @@ Term simplifyAndGetLimitAtAValue(
 
 Term getLimitAtInfinity(Term const& term, std::string const& variableName, AlbaNumber const infinityValue);
 Term getObliqueAsymptote(Term const& term);
+bool isAlmostEqualForLimitIteration(AlbaNumber const& value1, AlbaNumber const& value2);
+bool isAlmostEqualForLimitChecking(AlbaNumber const& value1, AlbaNumber const& value2);
+bool hasVerticalAsymptoteAtValue(Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
+bool hasHorizontalAsymptoteAtValue(
+    Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
 
-void calculateTermAndLimitUsingLhopitalsRule(
-    Term& newTerm, Term& limitValue, Term const& term, std::string const& variableName,
-    AlbaNumber const& valueToApproach);
+bool isSqueezeTheoremSatisfied(
+    Term const& alwaysLowerTermAtInterval, Term const& termInBetweenAtInterval, Term const& alwaysHigherTermAtInterval,
+    std::string const& variableName, AlbaNumber const& valueToApproach);
+
+bool continueToDifferentiateForLhopitalsRule(
+    Term const& numerator, Term const& denominator, Term const& numeratorValue, Term const& denominatorValue);
 
 }  // namespace alba::algebra

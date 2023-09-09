@@ -24,13 +24,13 @@ public:
 
     // NOLINTNEXTLINE(cert-msc32-c,cert-msc51-cpp)
     AlbaUniformDeterministicRandomizer() : m_randomEngine(), m_randomNumberDistribution() {}
-    ValueType getRandomValue() { return m_randomNumberDistribution(m_randomEngine); }
 
     void setMinimumAndMaximum(ValueType const minimum, ValueType const maximum) {
         m_randomNumberDistribution = Distribution(minimum, maximum);
     }
 
     void setRandomSeed(ValueType const customSeed) { m_randomEngine.seed(customSeed); }
+    ValueType getRandomValue() { return m_randomNumberDistribution(m_randomEngine); }
 
 private:
     RandomEngine m_randomEngine;

@@ -23,6 +23,10 @@ public:
         return m_probabilityMatrix.getEntry(currentState, nextState);
     }
 
+    void setProbability(int const currentState, int const nextState, AlbaNumber const& probability) {
+        m_probabilityMatrix.setEntry(currentState, nextState, probability);
+    }
+
     ProbabilityDistribution getNextProbabilityDistribution(ProbabilityDistribution const& current) {
         // The probability distribution of a Markov chain is a vector [p1, p2,..., pn],
         // where pk is the probability that the current state is k.
@@ -45,10 +49,6 @@ public:
             result = getNextProbabilityDistribution(result);
         }
         return result;
-    }
-
-    void setProbability(int const currentState, int const nextState, AlbaNumber const& probability) {
-        m_probabilityMatrix.setEntry(currentState, nextState, probability);
     }
 
 private:

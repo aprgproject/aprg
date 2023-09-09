@@ -9,6 +9,7 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 using ValuesForTest = vector<int>;
 using BlockValuesForTest = vector<int>;
 using RangeQueryForTest = RangeQueryWithBlocks<ValuesForTest, BlockValuesForTest>;

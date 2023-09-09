@@ -8,11 +8,22 @@ using namespace std;
 
 namespace alba {
 
-int FrequencyStatistics::calculateNumberOfSamples(FrequencySamples const& samples) {
-    return accumulate(
-        samples.cbegin(), samples.cend(), 0, [](int const partialResult, FrequencyPair const& frequencyPair) {
-            return partialResult + (static_cast<int>(frequencyPair.second));
+FrequencyStatistics::MultipleValues FrequencyStatistics::calculateMode(FrequencySamples const& samples) {
+    MultipleValues result;
+    auto iteratorForMaxFrequency = max_element(
+        samples.cbegin(), samples.cend(), [](FrequencyPair const& frequencyPair1, FrequencyPair const& frequencyPair2) {
+            return frequencyPair1.second < frequencyPair2.second;
         });
+    if (iteratorForMaxFrequency != samples.cend()) {
+        int maxFrequency = iteratorForMaxFrequency->second;
+
+        for_each(samples.cbegin(), samples.cend(), [&](FrequencyPair const& frequencyPair) {
+            if (maxFrequency == frequencyPair.second) {
+                result.push_back(frequencyPair.first);
+            }
+        });
+    }
+    return result;
 }
 
 double FrequencyStatistics::calculateSum(FrequencySamples const& samples) {
@@ -60,22 +71,11 @@ double FrequencyStatistics::calculateMedian(FrequencySamples const& samples) {
     return result;
 }
 
-FrequencyStatistics::MultipleValues FrequencyStatistics::calculateMode(FrequencySamples const& samples) {
-    MultipleValues result;
-    auto iteratorForMaxFrequency = max_element(
-        samples.cbegin(), samples.cend(), [](FrequencyPair const& frequencyPair1, FrequencyPair const& frequencyPair2) {
-            return frequencyPair1.second < frequencyPair2.second;
+int FrequencyStatistics::calculateNumberOfSamples(FrequencySamples const& samples) {
+    return accumulate(
+        samples.cbegin(), samples.cend(), 0, [](int const partialResult, FrequencyPair const& frequencyPair) {
+            return partialResult + (static_cast<int>(frequencyPair.second));
         });
-    if (iteratorForMaxFrequency != samples.cend()) {
-        int maxFrequency = iteratorForMaxFrequency->second;
-
-        for_each(samples.cbegin(), samples.cend(), [&](FrequencyPair const& frequencyPair) {
-            if (maxFrequency == frequencyPair.second) {
-                result.push_back(frequencyPair.first);
-            }
-        });
-    }
-    return result;
 }
 
 }  // namespace alba

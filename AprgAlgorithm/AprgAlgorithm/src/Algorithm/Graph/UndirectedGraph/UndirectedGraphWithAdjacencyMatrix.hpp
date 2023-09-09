@@ -13,36 +13,21 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using AdjacencyMatrix = matrix::AlbaMatrix<bool>;
     UndirectedGraphWithAdjacencyMatrix() : m_adjacencyMatrix(MAX_VERTEX_VALUE, MAX_VERTEX_VALUE) {}
-    [[nodiscard]] bool isEmpty() const override { return m_numberOfEdges == 0; }
+    [[nodiscard]] AdjacencyMatrix const& getAdjacencyMatrix() const { return m_adjacencyMatrix; }
 
-    [[nodiscard]] bool hasAnyConnection(Vertex const& vertex) const override {
-        bool result(false);
-        int numberOfRows(m_adjacencyMatrix.getNumberOfRows());
-        for (Vertex adjacentVertex = 0; adjacentVertex < numberOfRows; ++adjacentVertex) {
-            if (isDirectlyConnected(vertex, adjacentVertex)) {
-                result = true;
-                break;
-            }
-        }
-        return result;
-    }
-
-    [[nodiscard]] bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
-        return m_adjacencyMatrix.getEntry(vertex1, vertex2);
-    }
-
-    [[nodiscard]] int getNumberOfVertices() const override {
-        int result(0);
+    [[nodiscard]] Edges getEdges() const override {
+        Edges result;
         int numberOfColumns(m_adjacencyMatrix.getNumberOfColumns());
-        for (Vertex vertex = 0; vertex < numberOfColumns; ++vertex) {
-            if (hasAnyConnection(vertex)) {
-                ++result;
+        int numberOfRows(m_adjacencyMatrix.getNumberOfRows());
+        for (Vertex vertex1 = 0; vertex1 < numberOfColumns; ++vertex1) {
+            for (Vertex vertex2 = vertex1; vertex2 < numberOfRows; ++vertex2) {
+                if (isDirectlyConnected(vertex1, vertex2)) {
+                    result.emplace_back(vertex1, vertex2);
+                }
             }
         }
         return result;
     }
-
-    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
 
     [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
         Vertices result;
@@ -66,21 +51,35 @@ public:
         return result;
     }
 
-    [[nodiscard]] Edges getEdges() const override {
-        Edges result;
+    [[nodiscard]] int getNumberOfVertices() const override {
+        int result(0);
         int numberOfColumns(m_adjacencyMatrix.getNumberOfColumns());
-        int numberOfRows(m_adjacencyMatrix.getNumberOfRows());
-        for (Vertex vertex1 = 0; vertex1 < numberOfColumns; ++vertex1) {
-            for (Vertex vertex2 = vertex1; vertex2 < numberOfRows; ++vertex2) {
-                if (isDirectlyConnected(vertex1, vertex2)) {
-                    result.emplace_back(vertex1, vertex2);
-                }
+        for (Vertex vertex = 0; vertex < numberOfColumns; ++vertex) {
+            if (hasAnyConnection(vertex)) {
+                ++result;
             }
         }
         return result;
     }
 
-    [[nodiscard]] AdjacencyMatrix const& getAdjacencyMatrix() const { return m_adjacencyMatrix; }
+    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
+    [[nodiscard]] bool isEmpty() const override { return m_numberOfEdges == 0; }
+
+    [[nodiscard]] bool hasAnyConnection(Vertex const& vertex) const override {
+        bool result(false);
+        int numberOfRows(m_adjacencyMatrix.getNumberOfRows());
+        for (Vertex adjacentVertex = 0; adjacentVertex < numberOfRows; ++adjacentVertex) {
+            if (isDirectlyConnected(vertex, adjacentVertex)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
+    [[nodiscard]] bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
+        return m_adjacencyMatrix.getEntry(vertex1, vertex2);
+    }
 
     void connect(Vertex const& vertex1, Vertex const& vertex2) override {
         if (!isDirectlyConnected(vertex1, vertex2)) {

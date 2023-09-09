@@ -17,13 +17,11 @@ SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms(
     putVariablesWithTerms(variablesWithTerms);
 }
 
-bool SubstitutionOfVariablesToTerms::isEmpty() const { return m_variableToTermsMap.empty(); }
-
-bool SubstitutionOfVariablesToTerms::isVariableFound(string const& variable) const {
-    return m_variableToTermsMap.find(variable) != m_variableToTermsMap.cend();
+Expression SubstitutionOfVariablesToTerms::performSubstitutionForExpression(Expression const& expression) const {
+    Expression newExpression(expression);
+    performSubstitutionForWrappedTerms(newExpression.getWrappedTermsReference());
+    return newExpression;
 }
-
-int SubstitutionOfVariablesToTerms::getSize() const { return m_variableToTermsMap.size(); }
 
 Term SubstitutionOfVariablesToTerms::getTermForVariable(string const& variable) const {
     Term result;
@@ -31,10 +29,6 @@ Term SubstitutionOfVariablesToTerms::getTermForVariable(string const& variable) 
         result = m_variableToTermsMap.at(variable);
     }
     return result;
-}
-
-VariablesToTermsMap const& SubstitutionOfVariablesToTerms::getVariablesToTermsMap() const {
-    return m_variableToTermsMap;
 }
 
 Term SubstitutionOfVariablesToTerms::performSubstitutionTo(VariableTerm const& variableTerm) const {
@@ -66,10 +60,15 @@ Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Term const& term) con
     return newTerm;
 }
 
-Expression SubstitutionOfVariablesToTerms::performSubstitutionForExpression(Expression const& expression) const {
-    Expression newExpression(expression);
-    performSubstitutionForWrappedTerms(newExpression.getWrappedTermsReference());
-    return newExpression;
+VariablesToTermsMap const& SubstitutionOfVariablesToTerms::getVariablesToTermsMap() const {
+    return m_variableToTermsMap;
+}
+
+int SubstitutionOfVariablesToTerms::getSize() const { return m_variableToTermsMap.size(); }
+bool SubstitutionOfVariablesToTerms::isEmpty() const { return m_variableToTermsMap.empty(); }
+
+bool SubstitutionOfVariablesToTerms::isVariableFound(string const& variable) const {
+    return m_variableToTermsMap.find(variable) != m_variableToTermsMap.cend();
 }
 
 void SubstitutionOfVariablesToTerms::putVariablesWithTerms(

@@ -11,14 +11,14 @@ class VariableTerm : public BaseTermData {
 public:
     explicit VariableTerm(std::string const& variableName);
     VariableTerm();
+    VariableTerm operator~() const;
     bool operator==(VariableTerm const& second) const;
     bool operator!=(VariableTerm const& second) const;
     bool operator<(VariableTerm const& second) const;
-    VariableTerm operator~() const;
     // rule of zero
     static VariableTerm createNegatedVariableTerm(std::string const& variableName);
-    [[nodiscard]] bool isNegated() const;
     [[nodiscard]] std::string getVariableTermName() const;
+    [[nodiscard]] bool isNegated() const;
     void setVariableTermName(std::string const& variableName);
     void negate();
 

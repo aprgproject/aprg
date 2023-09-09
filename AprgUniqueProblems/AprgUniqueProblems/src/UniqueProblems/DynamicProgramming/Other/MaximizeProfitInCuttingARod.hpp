@@ -23,8 +23,8 @@ public:
     [[nodiscard]] Profit getBestProfitUsingIterativeDP() const;
 
 private:
-    [[nodiscard]] Profit getBestProfitUsingNaiveRecursion(Length const remainingLength) const;
     [[nodiscard]] Length getSmallestItemLength() const;
+    [[nodiscard]] Profit getBestProfitUsingNaiveRecursion(Length const remainingLength) const;
     Profit getBestProfitUsingMemoizationDP(Profits& partialProfits, Length const remainingLength) const;
     Length const m_length;
     Rods const m_rods;

@@ -44,12 +44,12 @@ public:
     }
 
 private:
-    [[nodiscard]] std::string createStringForZAlgorithm(std::string const& searchSpace) const {
-        return m_query + UNIQUE_DIVIDING_CHARACTER + searchSpace;
-    }
-
     [[nodiscard]] Indexes calculatePrefixLengths(std::string const& stringForZAlgorithm) const {
         return ZAlgorithm<Index>::getPrefixLengthsUsingTheZAlgorithm(stringForZAlgorithm);
+    }
+
+    [[nodiscard]] std::string createStringForZAlgorithm(std::string const& searchSpace) const {
+        return m_query + UNIQUE_DIVIDING_CHARACTER + searchSpace;
     }
 
     std::string m_query;

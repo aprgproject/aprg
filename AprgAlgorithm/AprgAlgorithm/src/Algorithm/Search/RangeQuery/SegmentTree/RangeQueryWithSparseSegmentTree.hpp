@@ -35,6 +35,13 @@ public:
         initialize();
     }
 
+    void setValueOnIndex(Index const index, Value const& valueToSet) {
+        // This has log(N) running time
+        if (index < m_numberOfValues) {
+            setValueOnIndexFromTopToBottom(index, valueToSet, m_root, 0, m_maxChildrenIndex);
+        }
+    }
+
     Value getValueOnInterval(Index const start, Index const end) {
         // This has log(N) running time
         Value result{};
@@ -42,13 +49,6 @@ public:
             result = getValueOnIntervalFromTopToBottom(start, end, m_root, 0, m_maxChildrenIndex);
         }
         return result;
-    }
-
-    void setValueOnIndex(Index const index, Value const& valueToSet) {
-        // This has log(N) running time
-        if (index < m_numberOfValues) {
-            setValueOnIndexFromTopToBottom(index, valueToSet, m_root, 0, m_maxChildrenIndex);
-        }
     }
 
 protected:
@@ -62,6 +62,30 @@ protected:
             result = m_function(m_defaultValue, nodePointer->rightChildPointer->value);
         }
         return result;
+    }
+
+    void initialize() { m_maxChildrenIndex = Utilities::getMinimumNumberOfParents(m_numberOfValues); }
+
+    void setValueOnIndexFromTopToBottom(
+        Index const index, Value const& valueToSet, NodePointer& nodePointer, Index const baseLeft,
+        Index const baseRight) {
+        // This has log(N) running time
+        if (!nodePointer) {
+            nodePointer.reset(new Node{m_defaultValue, nullptr, nullptr});
+        }
+        if (baseLeft == baseRight) {
+            nodePointer->value = valueToSet;
+        } else {
+            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
+            if (index <= baseMidPoint) {
+                setValueOnIndexFromTopToBottom(
+                    index, valueToSet, nodePointer->leftChildPointer, baseLeft, baseMidPoint);
+            } else {
+                setValueOnIndexFromTopToBottom(
+                    index, valueToSet, nodePointer->rightChildPointer, baseMidPoint + 1, baseRight);
+            }
+            nodePointer->value = getCombinedValueBasedFromChildren(nodePointer);
+        }
     }
 
     Value getValueOnIntervalFromTopToBottom(
@@ -93,30 +117,6 @@ protected:
             }
         }
         return result;
-    }
-
-    void initialize() { m_maxChildrenIndex = Utilities::getMinimumNumberOfParents(m_numberOfValues); }
-
-    void setValueOnIndexFromTopToBottom(
-        Index const index, Value const& valueToSet, NodePointer& nodePointer, Index const baseLeft,
-        Index const baseRight) {
-        // This has log(N) running time
-        if (!nodePointer) {
-            nodePointer.reset(new Node{m_defaultValue, nullptr, nullptr});
-        }
-        if (baseLeft == baseRight) {
-            nodePointer->value = valueToSet;
-        } else {
-            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
-            if (index <= baseMidPoint) {
-                setValueOnIndexFromTopToBottom(
-                    index, valueToSet, nodePointer->leftChildPointer, baseLeft, baseMidPoint);
-            } else {
-                setValueOnIndexFromTopToBottom(
-                    index, valueToSet, nodePointer->rightChildPointer, baseMidPoint + 1, baseRight);
-            }
-            nodePointer->value = getCombinedValueBasedFromChildren(nodePointer);
-        }
     }
 
     Index m_maxChildrenIndex{0};

@@ -5,7 +5,6 @@
 #include <functional>
 
 namespace alba::booleanAlgebra {
-
 using UnaryBooleanFunction = std::function<bool(Term const&)>;
 Term getNegation(Term const& term);
 Term getConjunction(Term const& term1, Term const& term2);
@@ -18,5 +17,4 @@ Term getExistentialQuantification(Terms const& terms, UnaryBooleanFunction const
 Term getUniquenessQuantification(Terms const& terms, UnaryBooleanFunction const& unaryBooleanFunction);
 UnaryBooleanFunction getTautology();
 UnaryBooleanFunction getContradiction();
-
 }  // namespace alba::booleanAlgebra

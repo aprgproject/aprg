@@ -122,7 +122,6 @@ TEST(InPlaceConstructionExamplesTest, NoRvoBecauseNoOpportunity) {
 namespace NoRvoBecauseNotEnoughInfo {
 
 static volatile int happinessValue = 100;
-int getHappiness() { return happinessValue; }
 
 string undecidedFunction() {
     string happy("Hooray!");
@@ -135,6 +134,8 @@ string undecidedFunction() {
     // -> It has to be decidable at construction time.
     // -> Again, the compiler will still move it (Since C++11)
 }
+
+int getHappiness() { return happinessValue; }
 
 TEST(InPlaceConstructionExamplesTest, NoRvoBecauseNotEnoughInfo) {
     string s(undecidedFunction());
@@ -154,6 +155,20 @@ struct MoveOnlyConstExprObject {
     constexpr MoveOnlyConstExprObject(MoveOnlyConstExprObject&&) noexcept : x{1} {}
     int x{0};
 };
+
+MoveOnlyConstExprObject willThisRvo11() {
+    MoveOnlyConstExprObject object;
+    return object;
+
+    // It depends.
+    // -> The standards says you wont get copy elision on constexpr context.
+    // ---> Possibly might be changed int the future.
+    // -> It depends on how aggressive the compiler will be on putting it on constexpr context.
+    // ---> GCC: Is aggressive on constexpr, and will always get the move here.
+    // ---> Clang: Clang is less aggressive.
+    // -----> if you make the named variable constexpr -> move will happen
+    // -----> if you make the named variable auto -> copy elision will happen
+}
 
 string directlyReturnTemporary() { return ("I will RVO!"); }
 string willThisRvo01() { return ("I will RVO!"); }
@@ -248,20 +263,6 @@ string willThisRvo10() {
     // This depends on your compiler.
     // -> Clang/MSVC: Yes
     // -> GCC: No
-}
-
-MoveOnlyConstExprObject willThisRvo11() {
-    MoveOnlyConstExprObject object;
-    return object;
-
-    // It depends.
-    // -> The standards says you wont get copy elision on constexpr context.
-    // ---> Possibly might be changed int the future.
-    // -> It depends on how aggressive the compiler will be on putting it on constexpr context.
-    // ---> GCC: Is aggressive on constexpr, and will always get the move here.
-    // ---> Clang: Clang is less aggressive.
-    // -----> if you make the named variable constexpr -> move will happen
-    // -----> if you make the named variable auto -> copy elision will happen
 }
 
 TEST(InPlaceConstructionExamplesTest, MultipleExamplesOfRvo) {

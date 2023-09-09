@@ -48,7 +48,6 @@ Terms CPlusPlusReorganizeItems::getSortedAggregateTerms() const {
         //                                     stringHelper::convertToString(sortItem.itemsIndex) + ")*/");
         terms.emplace_back(TermType::Aggregate, item);
         // terms.emplace_back(TermType::CommentMultiline, "/*END ADD*/");
-
         terms.emplace_back(TermType::WhiteSpace, "\n");
         isPreviousAMultilineItem = isMultilineItem;
         isFirst = false;
@@ -58,20 +57,6 @@ Terms CPlusPlusReorganizeItems::getSortedAggregateTerms() const {
         terms.emplace_back(TermType::WhiteSpace, "\n");
     }
     return terms;
-}
-
-bool CPlusPlusReorganizeItems::hasMultilineItem(SortItems const& sortItems) {
-    return any_of(sortItems.cbegin(), sortItems.cend(), [&](SortItem const& sortItem) {
-        return isMultiLine(sortItem.numberOfLines);
-    });
-}
-
-bool CPlusPlusReorganizeItems::isMultiLine(int const numberOfLines) { return numberOfLines > 2; }
-
-int CPlusPlusReorganizeItems::getTotalNumberLines(SortItems const& sortItems) {
-    return accumulate(sortItems.cbegin(), sortItems.cend(), 0, [](int const partialResult, SortItem const& sortItem) {
-        return partialResult + sortItem.numberOfLines;
-    });
 }
 
 Patterns CPlusPlusReorganizeItems::getSearchPatterns() {
@@ -118,36 +103,19 @@ string CPlusPlusReorganizeItems::getIdentifierBeforeParenthesis(Terms const& ter
     return {};
 }
 
-void CPlusPlusReorganizeItems::saveDetailsBasedFromFunctionSignature(
-    SortItem& sortItem, string const& functionSignature) {
-    Terms terms(getTermsFromString(functionSignature));
-    Patterns searchPatterns{{M(TermType::PrimitiveType)}, {M(TermType::Identifier)}, {M(TermType::Keyword)}};
-    Indexes hitIndexes = searchForPatternsForwards(terms, 0, searchPatterns);
-    if (!hitIndexes.empty()) {
-        int firstHitIndex = hitIndexes.front();
-        Term const& firstTerm(terms[firstHitIndex]);
-        if (firstTerm.getTermType() == TermType::PrimitiveType) {
-            if (firstTerm.getContent() == "bool") {
-                sortItem.score += 3;
-            } else if (firstTerm.getContent() == "void") {
-                sortItem.score += 6;
-            } else {
-                sortItem.score += 4;
-            }
-        } else if (firstTerm.getTermType() == TermType::Identifier) {
-            if (firstTerm.getContent() == "TEST" || firstTerm.getContent() == "TEST_F") {
-                sortItem.score += 2;
-            } else if (firstTerm.getContent() == "size_t") {
-                sortItem.score += 4;  // same level as integer primitive types
-            } else {
-                sortItem.score += 5;
-            }
-        } else if (firstTerm.getTermType() == TermType::Keyword) {
-            sortItem.score += 1;
-        }
-        sortItem.functionReturnTypeName = firstTerm.getContent();
-    }
+int CPlusPlusReorganizeItems::getTotalNumberLines(SortItems const& sortItems) {
+    return accumulate(sortItems.cbegin(), sortItems.cend(), 0, [](int const partialResult, SortItem const& sortItem) {
+        return partialResult + sortItem.numberOfLines;
+    });
 }
+
+bool CPlusPlusReorganizeItems::hasMultilineItem(SortItems const& sortItems) {
+    return any_of(sortItems.cbegin(), sortItems.cend(), [&](SortItem const& sortItem) {
+        return isMultiLine(sortItem.numberOfLines);
+    });
+}
+
+bool CPlusPlusReorganizeItems::isMultiLine(int const numberOfLines) { return numberOfLines > 2; }
 
 void CPlusPlusReorganizeItems::sortByComparingItems(SortItems& sortItems) {
     int start = 0;
@@ -189,6 +157,56 @@ void CPlusPlusReorganizeItems::moveToEndParenthesis(Terms const& terms, int& ter
     }
 }
 
+void CPlusPlusReorganizeItems::saveDetailsBasedFromFunctionSignature(
+    SortItem& sortItem, string const& functionSignature) {
+    Terms terms(getTermsFromString(functionSignature));
+    Patterns searchPatterns{{M(TermType::PrimitiveType)}, {M(TermType::Identifier)}, {M(TermType::Keyword)}};
+    Indexes hitIndexes = searchForPatternsForwards(terms, 0, searchPatterns);
+    if (!hitIndexes.empty()) {
+        int firstHitIndex = hitIndexes.front();
+        Term const& firstTerm(terms[firstHitIndex]);
+        if (firstTerm.getTermType() == TermType::PrimitiveType) {
+            if (firstTerm.getContent() == "bool") {
+                sortItem.score += 3;
+            } else if (firstTerm.getContent() == "void") {
+                sortItem.score += 6;
+            } else {
+                sortItem.score += 4;
+            }
+        } else if (firstTerm.getTermType() == TermType::Identifier) {
+            if (firstTerm.getContent() == "TEST" || firstTerm.getContent() == "TEST_F") {
+                sortItem.score += 2;
+            } else if (firstTerm.getContent() == "size_t") {
+                sortItem.score += 4;  // same level as integer primitive types
+            } else {
+                sortItem.score += 5;
+            }
+        } else if (firstTerm.getTermType() == TermType::Keyword) {
+            sortItem.score += 1;
+        }
+        sortItem.functionReturnTypeName = firstTerm.getContent();
+    }
+}
+
+CPlusPlusReorganizeItems::SortItems CPlusPlusReorganizeItems::getSortedItems() const {
+    SortItems sortItems(getSortItems());
+    sortByComparingItems(sortItems);
+    return sortItems;
+}
+
+CPlusPlusReorganizeItems::SortItems CPlusPlusReorganizeItems::getSortItems() const {
+    SortItems sortItems;
+    sortItems.reserve(m_items.size());
+    int index = 0;
+    for (string const& item : m_items) {
+        SortItem sortItem{0, 0, 0, false, ItemType::Unknown, index++, {}};
+        saveDetailsFromHeaderSignatures(sortItem, item);
+        saveDetailsBasedFromItem(sortItem, item);
+        sortItems.emplace_back(sortItem);
+    }
+    return sortItems;
+}
+
 int CPlusPlusReorganizeItems::getBestHeaderIndex(string const& item) const {
     string itemSignature = getFunctionSignature(item);
     int bestDifference = static_cast<int>(itemSignature.size());
@@ -212,25 +230,6 @@ int CPlusPlusReorganizeItems::getBestHeaderIndex(string const& item) const {
         return bestHeaderIndex;
     }
     return static_cast<int>(m_headerSignatures.size());
-}
-
-CPlusPlusReorganizeItems::SortItems CPlusPlusReorganizeItems::getSortedItems() const {
-    SortItems sortItems(getSortItems());
-    sortByComparingItems(sortItems);
-    return sortItems;
-}
-
-CPlusPlusReorganizeItems::SortItems CPlusPlusReorganizeItems::getSortItems() const {
-    SortItems sortItems;
-    sortItems.reserve(m_items.size());
-    int index = 0;
-    for (string const& item : m_items) {
-        SortItem sortItem{0, 0, 0, false, ItemType::Unknown, index++, {}};
-        saveDetailsFromHeaderSignatures(sortItem, item);
-        saveDetailsBasedFromItem(sortItem, item);
-        sortItems.emplace_back(sortItem);
-    }
-    return sortItems;
 }
 
 void CPlusPlusReorganizeItems::saveDetailsFromHeaderSignatures(SortItem& sortItem, string const& item) const {

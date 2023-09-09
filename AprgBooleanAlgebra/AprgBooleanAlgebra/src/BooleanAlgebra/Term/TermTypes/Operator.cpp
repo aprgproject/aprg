@@ -14,6 +14,19 @@ bool Operator::operator<(Operator const& second) const {
     return getOperatorPriority(m_operatingString) < getOperatorPriority(second.m_operatingString);
 }
 
+OperatorType Operator::getOperatorType() const {
+    OperatorType result(OperatorType::Unknown);
+    if (isNot()) {
+        result = OperatorType::Not;
+    } else if (isAnd()) {
+        result = OperatorType::And;
+    } else if (isOr()) {
+        result = OperatorType::Or;
+    }
+    return result;
+}
+
+string Operator::getOperatorString() const { return m_operatingString; }
 bool Operator::isNot() const { return "~" == m_operatingString; }
 bool Operator::isAnd() const { return "&" == m_operatingString; }
 bool Operator::isOr() const { return "|" == m_operatingString; }
@@ -33,19 +46,6 @@ bool Operator::isSameOperatorInputType(OperatorInputType const operatorInputType
     return result;
 }
 
-OperatorType Operator::getOperatorType() const {
-    OperatorType result(OperatorType::Unknown);
-    if (isNot()) {
-        result = OperatorType::Not;
-    } else if (isAnd()) {
-        result = OperatorType::And;
-    } else if (isOr()) {
-        result = OperatorType::Or;
-    }
-    return result;
-}
-
-string Operator::getOperatorString() const { return m_operatingString; }
 void Operator::setOperatorString(string const& operatingString) { m_operatingString = operatingString; }
 
 ostream& operator<<(ostream& out, Operator const& operatorObject) {

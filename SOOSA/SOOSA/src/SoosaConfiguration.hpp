@@ -9,16 +9,12 @@ class SoosaConfiguration {
 public:
     using BufferMap = std::map<std::string, std::string>;
     SoosaConfiguration();
-    // Line model parameters
-    [[nodiscard]] int getAcceptableLineDeviationForLineModelInPixels() const;
     [[nodiscard]] double getRemovalRatioForLineModel() const;
-    [[nodiscard]] int getMinimumLineSamples() const;
     // Line and bar parameters
     [[nodiscard]] double getBitmapWidthToBarWidthMultiplier() const;
     [[nodiscard]] double getLineBarWidthSearchInitialBlackPointsValue() const;
     [[nodiscard]] double getLineBarWidthSearchAcceptedRunningBlackRatio() const;
     [[nodiscard]] double getAcceptableDistanceOverWidthRatioFromWidthMidpoint() const;
-    [[nodiscard]] int getAcceptableMinimumDistanceFromWidthMidpoint() const;
     [[nodiscard]] double getAcceptableSdOverMeanDeviationForLine() const;
     [[nodiscard]] double getAcceptableSdOverMeanDeviationForBar() const;
     [[nodiscard]] double getRemovalRatioForLineAndBar() const;
@@ -26,11 +22,15 @@ public:
     [[nodiscard]] double getMultiplierForMaximumDistanceBetweenBarHeights() const;
     [[nodiscard]] double getAcceptableSdOverMeanDeviationForBarHeight() const;
     [[nodiscard]] double getRemovalRatioForBarHeight() const;
+    [[nodiscard]] double getBarHeightToDiameterMultiplier() const;
+    [[nodiscard]] double getMinimumPercentageOfBlackPixelsForAFilledCircle() const;
+    // Line model parameters
+    [[nodiscard]] int getAcceptableLineDeviationForLineModelInPixels() const;
+    [[nodiscard]] int getMinimumLineSamples() const;
+    [[nodiscard]] int getAcceptableMinimumDistanceFromWidthMidpoint() const;
     // Choices related parameters
     [[nodiscard]] int getNumberOfChoices() const;
     [[nodiscard]] int getColorIntensityForWhite() const;
-    [[nodiscard]] double getBarHeightToDiameterMultiplier() const;
-    [[nodiscard]] double getMinimumPercentageOfBlackPixelsForAFilledCircle() const;
     void loadConfigurationFromFile(std::string const& filePath);
     void bufferNameAndValueString(std::string const& nameOfParameter, std::string const& valueString);
     void update();

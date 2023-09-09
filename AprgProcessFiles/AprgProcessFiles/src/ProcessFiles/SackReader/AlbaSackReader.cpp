@@ -42,30 +42,6 @@ void AlbaSackReader::process() {
     }
 }
 
-string AlbaSackReader::getReaderStateString(ReaderState const state) {
-#define GET_ENUM_STRING(en) \
-    case en:                \
-        return #en;
-
-    switch (state) {
-        GET_ENUM_STRING(ReaderState::LookingForInitialKeyword)
-        GET_ENUM_STRING(ReaderState::ClassStateLookingForClassName)
-        GET_ENUM_STRING(ReaderState::ClassStateLookingForOpeningBraceOrSemiColon)
-        GET_ENUM_STRING(ReaderState::ClassStateLookingForParameters)
-        GET_ENUM_STRING(ReaderState::TypedefStateLookingForTypeName)
-        GET_ENUM_STRING(ReaderState::TypedefStateLookingForSecondType)
-        GET_ENUM_STRING(ReaderState::TypedefStateLookingForSemicolon)
-        GET_ENUM_STRING(ReaderState::TypedefStructStateLookingForNameOrOpeningBraceOrSecondType)
-        GET_ENUM_STRING(ReaderState::TypedefStructStateLookingForParameters)
-        GET_ENUM_STRING(ReaderState::TypedefStructStateLookingForSecondType)
-        GET_ENUM_STRING(ReaderState::TypedefEnumStateLookingForOpeningBrace)
-        GET_ENUM_STRING(ReaderState::TypedefEnumStateLookingForClosingBrace)
-        GET_ENUM_STRING(ReaderState::TypedefEnumStateLookingForType)
-    }
-    return {};
-#undef GET_ENUM_STRING
-}
-
 void AlbaSackReader::tokenize(stringHelper::strings& tokens, string const& line) {
     stringHelper::strings tokensInLine;
     stringHelper::splitToStrings<stringHelper::SplitStringType::WithDelimeters>(tokensInLine, line, " \t\n\r;{}[]");
@@ -155,6 +131,30 @@ void AlbaSackReader::combineArrayOperators(stringHelper::strings& tokens) {
             }
         }
     }
+}
+
+string AlbaSackReader::getReaderStateString(ReaderState const state) {
+#define GET_ENUM_STRING(en) \
+    case en:                \
+        return #en;
+
+    switch (state) {
+        GET_ENUM_STRING(ReaderState::LookingForInitialKeyword)
+        GET_ENUM_STRING(ReaderState::ClassStateLookingForClassName)
+        GET_ENUM_STRING(ReaderState::ClassStateLookingForOpeningBraceOrSemiColon)
+        GET_ENUM_STRING(ReaderState::ClassStateLookingForParameters)
+        GET_ENUM_STRING(ReaderState::TypedefStateLookingForTypeName)
+        GET_ENUM_STRING(ReaderState::TypedefStateLookingForSecondType)
+        GET_ENUM_STRING(ReaderState::TypedefStateLookingForSemicolon)
+        GET_ENUM_STRING(ReaderState::TypedefStructStateLookingForNameOrOpeningBraceOrSecondType)
+        GET_ENUM_STRING(ReaderState::TypedefStructStateLookingForParameters)
+        GET_ENUM_STRING(ReaderState::TypedefStructStateLookingForSecondType)
+        GET_ENUM_STRING(ReaderState::TypedefEnumStateLookingForOpeningBrace)
+        GET_ENUM_STRING(ReaderState::TypedefEnumStateLookingForClosingBrace)
+        GET_ENUM_STRING(ReaderState::TypedefEnumStateLookingForType)
+    }
+    return {};
+#undef GET_ENUM_STRING
 }
 
 void AlbaSackReader::processDirectory(string const& path) {

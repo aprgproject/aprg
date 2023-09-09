@@ -8,24 +8,24 @@ namespace alba::algebra {
 class DifferentiationForFiniteCalculus {
 public:
     explicit DifferentiationForFiniteCalculus(std::string const& nameOfVariableToDifferentiate);
-    static Term differentiate(Constant const& constant);
     static AlbaNumber differentiateConstant(Constant const&);
+    static Term differentiate(Constant const& constant);
+    [[nodiscard]] Equation differentiate(Equation const& equation) const;
+    [[nodiscard]] Equation differentiateMultipleTimes(Equation const& equation, int const numberOfTimes) const;
+    [[nodiscard]] Equation differentiateEquation(Equation const& equation) const;
+    [[nodiscard]] Polynomial differentiateVariable(Variable const& variable) const;
     [[nodiscard]] Term differentiate(Term const& term) const;
     [[nodiscard]] Term differentiate(Variable const& variable) const;
     [[nodiscard]] Term differentiate(Monomial const& monomial) const;
     [[nodiscard]] Term differentiate(Polynomial const& polynomial) const;
     [[nodiscard]] Term differentiate(Expression const& expression) const;
     [[nodiscard]] Term differentiate(Function const& functionObject) const;
-    [[nodiscard]] Equation differentiate(Equation const& equation) const;
     [[nodiscard]] Term differentiateMultipleTimes(Term const& term, int const numberOfTimes) const;
-    [[nodiscard]] Equation differentiateMultipleTimes(Equation const& equation, int const numberOfTimes) const;
     [[nodiscard]] Term differentiateTerm(Term const& term) const;
-    [[nodiscard]] Polynomial differentiateVariable(Variable const& variable) const;
     [[nodiscard]] Term differentiateMonomial(Monomial const& monomial) const;
     [[nodiscard]] Term differentiatePolynomial(Polynomial const& polynomial) const;
     [[nodiscard]] Term differentiateExpression(Expression const& expression) const;
     [[nodiscard]] Term differentiateFunction(Function const& functionObject) const;
-    [[nodiscard]] Equation differentiateEquation(Equation const& equation) const;
 
 private:
     [[nodiscard]] bool isVariableToDifferentiate(std::string const& variableName) const;

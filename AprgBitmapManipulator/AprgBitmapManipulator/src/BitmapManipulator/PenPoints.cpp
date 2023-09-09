@@ -2,8 +2,8 @@
 
 namespace alba::AprgBitmap {
 
-bool PenPoints::isPenPoint(BitmapXY const& penPoint) const { return m_penPoints.find(penPoint) != m_penPoints.cend(); }
 PenPoints::PenPointsSet const& PenPoints::getPenPoints() const { return m_penPoints; }
+bool PenPoints::isPenPoint(BitmapXY const& penPoint) const { return m_penPoints.find(penPoint) != m_penPoints.cend(); }
 void PenPoints::addAsPenPoint(BitmapXY const& penPoint) { m_penPoints.emplace(penPoint); }
 
 void PenPoints::addAsPenPoints(BitmapXYs const& bitmapPoints) {

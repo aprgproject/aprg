@@ -9,6 +9,7 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 using ValuesForTest = vector<int>;
 using BlockValuesForTest = vector<int>;
 using RangeQueryForTest = RangeQueryWithBlocksWithMultipleRequests<ValuesForTest, BlockValuesForTest>;
@@ -16,7 +17,6 @@ using ValueForTest = typename RangeQueryForTest::Value;
 using BlockValueForTest = typename RangeQueryForTest::BlockValue;
 using RangesForTest = typename RangeQueryForTest::Ranges;
 using InputAndOutputPairsForTest = typename RangeQueryForTest::InputAndOutputPairs;
-
 RangeQueryForTest::TwoBlocksFunction plusForAPairOfBlockValues = plus<>();
 RangeQueryForTest::TwoBlocksFunction minusForPairOfBlockValues = minus<>();
 
@@ -29,6 +29,7 @@ RangeQueryForTest::ValuesFunction plusForARangeOfBlockValues = [](BlockValuesFor
                                                                   BlockValuesForTest::const_iterator const itEnd) {
     return std::accumulate(itStart + 1, itEnd, *itStart, plus<>());
 };
+
 }  // namespace
 
 TEST(RangeQueryWithBlocksWithMultipleRequestsTest, GetInputAndOutputPairsUsingMoAlgorithmWithSumWorksOnExample1) {

@@ -15,14 +15,14 @@ public:
 
     Configuration() = delete;
     Configuration(Type const type);
-    double getWhiteColorLimit() const;
-    double getBlackColorLimit() const;
+    stringHelper::StringPairs const& getUciOptionNamesAndValuePairs() const;
     Type getType() const;
-    std::string const& getChessEnginePath() const;
-    std::string const& getScreenShotPath() const;
     XY getTopLeftOfBoard() const;
     XY getBottomRightOfBoard() const;
-    stringHelper::StringPairs const& getUciOptionNamesAndValuePairs() const;
+    std::string const& getChessEnginePath() const;
+    std::string const& getScreenShotPath() const;
+    double getWhiteColorLimit() const;
+    double getBlackColorLimit() const;
 
 private:
     void initialize();

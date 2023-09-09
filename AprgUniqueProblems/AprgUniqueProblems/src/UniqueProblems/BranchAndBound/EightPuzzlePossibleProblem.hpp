@@ -42,17 +42,17 @@ public:
     static constexpr SearchNodeId START_NODE_ID = 1;
 
 private:
-    static int getCost(SearchNode const& node);
     static void moveTile(NumberMatrix& matrix, Coordinate const& previousBlankTile, Coordinate const& nextBlankTile);
     static void printMatrix(NumberMatrix const& numberMatrix);
-    [[nodiscard]] bool isValidCoordinate(Coordinate const& coordinate) const;
-    [[nodiscard]] int countDifference(NumberMatrix const& startMatrix, NumberMatrix const& targetMatrix) const;
+    static int getCost(SearchNode const& node);
     [[nodiscard]] Coordinate getBlankTile(NumberMatrix const& matrix) const;
+    [[nodiscard]] int countDifference(NumberMatrix const& startMatrix, NumberMatrix const& targetMatrix) const;
+    [[nodiscard]] bool isValidCoordinate(Coordinate const& coordinate) const;
     void printSteps(SearchNodeId const nodeId) const;
-    SearchNode createNode(SearchNodeId const& currentNodeId, Coordinate const& nextBlankTile, int const searchLevel);
-    SearchNodeId getNextNodeId();
     void clearIfInvalid();
     void clear();
+    SearchNode createNode(SearchNodeId const& currentNodeId, Coordinate const& nextBlankTile, int const searchLevel);
+    SearchNodeId getNextNodeId();
     NumberMatrix m_startMatrix;
     NumberMatrix m_targetMatrix;
     int m_sideSize;

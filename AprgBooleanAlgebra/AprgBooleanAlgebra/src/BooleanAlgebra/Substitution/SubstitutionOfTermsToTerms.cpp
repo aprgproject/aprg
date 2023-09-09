@@ -15,13 +15,12 @@ SubstitutionOfTermsToTerms::SubstitutionOfTermsToTerms(initializer_list<TermTerm
     putTermsToTermsMapping(variablesWithValues);
 }
 
-bool SubstitutionOfTermsToTerms::isEmpty() const { return m_termsToTermsMap.empty(); }
-
-bool SubstitutionOfTermsToTerms::isTermFound(Term const& term) const {
-    return m_termsToTermsMap.find(term) != m_termsToTermsMap.cend();
+Expression SubstitutionOfTermsToTerms::performSubstitutionForExpression(Expression const& expression) const {
+    Expression newExpression(expression);
+    performSubstitutionForWrappedTerms(newExpression.getWrappedTermsReference());
+    newExpression.simplify();
+    return newExpression;
 }
-
-int SubstitutionOfTermsToTerms::getSize() const { return m_termsToTermsMap.size(); }
 
 Term SubstitutionOfTermsToTerms::getTermForTerm(Term const& term) const {
     Term result;
@@ -52,11 +51,11 @@ Term SubstitutionOfTermsToTerms::performSubstitutionTo(Term const& term) const {
     return newTerm;
 }
 
-Expression SubstitutionOfTermsToTerms::performSubstitutionForExpression(Expression const& expression) const {
-    Expression newExpression(expression);
-    performSubstitutionForWrappedTerms(newExpression.getWrappedTermsReference());
-    newExpression.simplify();
-    return newExpression;
+int SubstitutionOfTermsToTerms::getSize() const { return m_termsToTermsMap.size(); }
+bool SubstitutionOfTermsToTerms::isEmpty() const { return m_termsToTermsMap.empty(); }
+
+bool SubstitutionOfTermsToTerms::isTermFound(Term const& term) const {
+    return m_termsToTermsMap.find(term) != m_termsToTermsMap.cend();
 }
 
 void SubstitutionOfTermsToTerms::putTermsToTermsMapping(initializer_list<TermTermPair> const& variablesWithValues) {

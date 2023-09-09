@@ -17,6 +17,12 @@ VariableTerm::VariableTerm(string const& variableName)
 
 VariableTerm::VariableTerm() : m_isNegated(false) {}
 
+VariableTerm VariableTerm::operator~() const {
+    VariableTerm result(*this);
+    result.negate();
+    return result;
+}
+
 bool VariableTerm::operator==(VariableTerm const& second) const {
     return m_variableName == second.m_variableName && m_isNegated == second.m_isNegated;
 }
@@ -33,20 +39,14 @@ bool VariableTerm::operator<(VariableTerm const& second) const {
     return result;
 }
 
-VariableTerm VariableTerm::operator~() const {
-    VariableTerm result(*this);
-    result.negate();
-    return result;
-}
-
 VariableTerm VariableTerm::createNegatedVariableTerm(string const& variableName) {
     VariableTerm result(variableName);
     result.negate();
     return result;
 }
 
-bool VariableTerm::isNegated() const { return m_isNegated; }
 string VariableTerm::getVariableTermName() const { return m_variableName; }
+bool VariableTerm::isNegated() const { return m_isNegated; }
 void VariableTerm::setVariableTermName(string const& variableName) { m_variableName = variableName; }
 void VariableTerm::negate() { m_isNegated = !m_isNegated; }
 

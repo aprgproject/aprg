@@ -11,8 +11,6 @@ class AlbaComplexNumber {
 public:
     AlbaComplexNumber();
     AlbaComplexNumber(DataType const realPart, DataType const imaginaryPart);
-    // rule of zero
-    bool operator==(AlbaComplexNumber const& second) const;
     AlbaComplexNumber<DataType> operator+(AlbaComplexNumber<DataType> const& second) const;
     AlbaComplexNumber<DataType> operator-(AlbaComplexNumber<DataType> const& second) const;
     AlbaComplexNumber<DataType> operator+() const;
@@ -20,19 +18,21 @@ public:
     AlbaComplexNumber<DataType> operator*(AlbaComplexNumber<DataType> const& second) const;
     AlbaComplexNumber<DataType> operator/(AlbaComplexNumber<DataType> const& second) const;
     AlbaComplexNumber<DataType> operator^(DataType const exponent) const;
+    // rule of zero
+    bool operator==(AlbaComplexNumber const& second) const;
     AlbaComplexNumber<DataType>& operator+=(AlbaComplexNumber<DataType> const& second);
     AlbaComplexNumber<DataType>& operator-=(AlbaComplexNumber<DataType> const& second);
     AlbaComplexNumber<DataType>& operator*=(AlbaComplexNumber<DataType> const& second);
     AlbaComplexNumber<DataType>& operator/=(AlbaComplexNumber<DataType> const& second);
-    [[nodiscard]] double getAngleInRadians() const;
-    [[nodiscard]] double getBestAngleInRaiseToPowerInRadians(DataType const exponent) const;
+    [[nodiscard]] AlbaComplexNumber<DataType> getConjugate() const;
+    [[nodiscard]] AlbaComplexNumber<DataType> getNthRoot(size_t const rootIndex, size_t const rootDegree) const;
     [[nodiscard]] DataType getRealPart() const;
     [[nodiscard]] DataType getImaginaryPart() const;
     [[nodiscard]] DataType getModulus() const;
     [[nodiscard]] DataType getModulusWithSignOfRealPart() const;
     [[nodiscard]] DataType getModulusSquared() const;
-    [[nodiscard]] AlbaComplexNumber<DataType> getConjugate() const;
-    [[nodiscard]] AlbaComplexNumber<DataType> getNthRoot(size_t const rootIndex, size_t const rootDegree) const;
+    [[nodiscard]] double getAngleInRadians() const;
+    [[nodiscard]] double getBestAngleInRaiseToPowerInRadians(DataType const exponent) const;
     static_assert(typeHelper::isArithmeticType<DataType>(), "DataType should be an arithmetic type.");
 
 private:

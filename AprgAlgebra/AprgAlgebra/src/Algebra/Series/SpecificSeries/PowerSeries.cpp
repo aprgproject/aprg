@@ -21,15 +21,6 @@ PowerSeries::PowerSeries(
       m_nName(nName),
       m_xName(xName) {}
 
-AlbaNumberIntervals PowerSeries::getIntervalsOfConvergence() const {
-    Term limitForRatioTest(
-        getLimitForRatioTest(static_cast<SeriesBasedOnSummation const&>(*this), getNameForVariableInFormula()));
-    Term limitWithAbsoluteValue(abs(limitForRatioTest));
-    OneEquationOneVariableNonEqualitySolver solver;
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(limitWithAbsoluteValue, "<", 1)));
-    return solutionSet.getAcceptedIntervals();
-}
-
 AlbaNumber PowerSeries::getRadiusOfConvergence() const {
     AlbaNumberIntervals intervals(getIntervalsOfConvergence());
     AlbaNumber result = accumulate(
@@ -41,6 +32,15 @@ AlbaNumber PowerSeries::getRadiusOfConvergence() const {
         });
     result = result / static_cast<int64_t>(intervals.size()) / 2;
     return result;
+}
+
+AlbaNumberIntervals PowerSeries::getIntervalsOfConvergence() const {
+    Term limitForRatioTest(
+        getLimitForRatioTest(static_cast<SeriesBasedOnSummation const&>(*this), getNameForVariableInFormula()));
+    Term limitWithAbsoluteValue(abs(limitForRatioTest));
+    OneEquationOneVariableNonEqualitySolver solver;
+    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(limitWithAbsoluteValue, "<", 1)));
+    return solutionSet.getAcceptedIntervals();
 }
 
 void PowerSeries::differentiate() {

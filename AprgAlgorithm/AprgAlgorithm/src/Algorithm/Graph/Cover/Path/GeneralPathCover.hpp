@@ -37,14 +37,6 @@ public:
     using TransitiveClosure = TransitiveClosureWithMap<Vertex>;
     explicit GeneralPathCover(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}
 
-    [[nodiscard]] int getSizeOfMaximumAntichain(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
-        // Using Dilworth's theorem:
-        // An antichain is a set of nodes of a graph such that there is no path from any node to another node using the
-        // edges of the graph. Dilworth’s theorem states that in a directed acyclic graph, the size of a minimum general
-        // path cover equals the size of a maximum antichain.
-        return getGeneralPathCover(newSourceVertex, newSinkVertex).size();
-    }
-
     [[nodiscard]] Paths getGeneralPathCover(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         VertexPairs vertexPairs(getConnectedVerticesOfGeneralPathCover(newSourceVertex, newSinkVertex));
         return getGeneralPathCover(vertexPairs);
@@ -59,7 +51,39 @@ public:
         return result;
     }
 
+    [[nodiscard]] int getSizeOfMaximumAntichain(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
+        // Using Dilworth's theorem:
+        // An antichain is a set of nodes of a graph such that there is no path from any node to another node using the
+        // edges of the graph. Dilworth’s theorem states that in a directed acyclic graph, the size of a minimum general
+        // path cover equals the size of a maximum antichain.
+        return getGeneralPathCover(newSourceVertex, newSinkVertex).size();
+    }
+
 private:
+    [[nodiscard]] FlowNetwork getFlowNetwork(
+        BaseDirectedGraphWithVertex const& graph, Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
+        // A minimum general path cover can be found almost like a minimum node-disjoint path cover.
+        // It suffices to add some new edges to the matching graph so that there is an edge a->b always
+        // when there is a path from a to b in the original graph (possibly through several edges).
+        VertexWithLeftRight sourceVertexWithLeft{newSourceVertex, false};
+        VertexWithLeftRight sinkVertexWithRight{newSinkVertex, true};
+        FlowNetwork flowNetwork(sourceVertexWithLeft, sinkVertexWithRight);
+        Vertices vertices(graph.getVertices());
+        for (Vertex const& vertex : vertices) {
+            flowNetwork.connect(sourceVertexWithLeft, {vertex, false}, 1, 0);
+            flowNetwork.connect({vertex, true}, sinkVertexWithRight, 1, 0);
+        }
+        TransitiveClosure transitiveClosure(m_graph);
+        for (Vertex const& vertex1 : vertices) {
+            for (Vertex const& vertex2 : vertices) {
+                if (transitiveClosure.isReachable(vertex1, vertex2) && vertex1 != vertex2) {
+                    flowNetwork.connect({vertex1, false}, {vertex2, true}, 1, 0);
+                }
+            }
+        }
+        return flowNetwork;
+    }
+
     [[nodiscard]] Paths getGeneralPathCover(VertexPairs const& vertexPairs) const {
         Paths result;
         Edges allEdges(m_graph.getEdges());
@@ -143,30 +167,6 @@ private:
             }
         }
         return result;
-    }
-
-    [[nodiscard]] FlowNetwork getFlowNetwork(
-        BaseDirectedGraphWithVertex const& graph, Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
-        // A minimum general path cover can be found almost like a minimum node-disjoint path cover.
-        // It suffices to add some new edges to the matching graph so that there is an edge a->b always
-        // when there is a path from a to b in the original graph (possibly through several edges).
-        VertexWithLeftRight sourceVertexWithLeft{newSourceVertex, false};
-        VertexWithLeftRight sinkVertexWithRight{newSinkVertex, true};
-        FlowNetwork flowNetwork(sourceVertexWithLeft, sinkVertexWithRight);
-        Vertices vertices(graph.getVertices());
-        for (Vertex const& vertex : vertices) {
-            flowNetwork.connect(sourceVertexWithLeft, {vertex, false}, 1, 0);
-            flowNetwork.connect({vertex, true}, sinkVertexWithRight, 1, 0);
-        }
-        TransitiveClosure transitiveClosure(m_graph);
-        for (Vertex const& vertex1 : vertices) {
-            for (Vertex const& vertex2 : vertices) {
-                if (transitiveClosure.isReachable(vertex1, vertex2) && vertex1 != vertex2) {
-                    flowNetwork.connect({vertex1, false}, {vertex2, true}, 1, 0);
-                }
-            }
-        }
-        return flowNetwork;
     }
 
     BaseDirectedGraphWithVertex const& m_graph;

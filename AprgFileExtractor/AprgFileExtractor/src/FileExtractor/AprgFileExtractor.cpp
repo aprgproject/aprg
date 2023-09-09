@@ -54,6 +54,30 @@ bool AprgFileExtractor::isRecognizedCompressedFile(string const& extension) {
            stringHelper::isEqualNotCaseSensitive("gz", extension);
 }
 
+void AprgFileExtractor::copyRelativeFilePathsFromCompressedFile(
+    string const& filePathOfCompressedFile, SetOfFilePaths& files) const {
+    AlbaLocalPathHandler filePathHandler(filePathOfCompressedFile);
+    string command = string(R"(")") + m_pathOf7zExecutable + R"(" l -slt ")" + filePathHandler.getFullPath() +
+                     R"(" > ")" + m_pathOf7zTempFile + R"(")";
+    runInConsole(command);
+
+    ifstream tempFile(m_pathOf7zTempFile);
+    string path;
+    AlbaFileReader fileReader(tempFile);
+    while (fileReader.isNotFinished()) {
+        string lineInFile(fileReader.getLine());
+        if (stringHelper::isStringFoundCaseSensitive(lineInFile, "Path = ")) {
+            path = stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(
+                stringHelper::getStringAfterThisString(lineInFile, "Path = "));
+        } else if (stringHelper::isStringFoundCaseSensitive(lineInFile, "Attributes = ")) {
+            if (!stringHelper::isStringFoundCaseSensitive(
+                    stringHelper::getStringAfterThisString(lineInFile, "Attributes = "), "D")) {
+                files.emplace(path);
+            }
+        }
+    }
+}
+
 string AprgFileExtractor::extractOnceForAllFiles(string const& filePathOfCompressedFile) const {
     AlbaLocalPathHandler compressedFilePathHandler(filePathOfCompressedFile);
     AlbaLocalPathHandler outputPathHandler(
@@ -80,30 +104,6 @@ string AprgFileExtractor::extractOneFile(
     return outputPathHandler.getFullPath();
 }
 
-void AprgFileExtractor::copyRelativeFilePathsFromCompressedFile(
-    string const& filePathOfCompressedFile, SetOfFilePaths& files) const {
-    AlbaLocalPathHandler filePathHandler(filePathOfCompressedFile);
-    string command = string(R"(")") + m_pathOf7zExecutable + R"(" l -slt ")" + filePathHandler.getFullPath() +
-                     R"(" > ")" + m_pathOf7zTempFile + R"(")";
-    runInConsole(command);
-
-    ifstream tempFile(m_pathOf7zTempFile);
-    string path;
-    AlbaFileReader fileReader(tempFile);
-    while (fileReader.isNotFinished()) {
-        string lineInFile(fileReader.getLine());
-        if (stringHelper::isStringFoundCaseSensitive(lineInFile, "Path = ")) {
-            path = stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(
-                stringHelper::getStringAfterThisString(lineInFile, "Path = "));
-        } else if (stringHelper::isStringFoundCaseSensitive(lineInFile, "Attributes = ")) {
-            if (!stringHelper::isStringFoundCaseSensitive(
-                    stringHelper::getStringAfterThisString(lineInFile, "Attributes = "), "D")) {
-                files.emplace(path);
-            }
-        }
-    }
-}
-
 void AprgFileExtractor::extractAllRelevantFiles(string const& pathOfFileOrDirectory) {
     AlbaLocalPathHandler fileOrDirectoryPathHandler(pathOfFileOrDirectory);
     if (!fileOrDirectoryPathHandler.isFoundInLocalSystem()) {
@@ -116,12 +116,6 @@ void AprgFileExtractor::extractAllRelevantFiles(string const& pathOfFileOrDirect
     }
 }
 
-bool AprgFileExtractor::isTheExtensionXzOrGzOrTar(string const& extension) {
-    return stringHelper::isEqualNotCaseSensitive("xz", extension) ||
-           stringHelper::isEqualNotCaseSensitive("gz", extension) ||
-           stringHelper::isEqualNotCaseSensitive("tar", extension);
-}
-
 void AprgFileExtractor::runInConsole(string const& command) {
 #if defined(OS_LINUX)
     ALBA_INF_PRINT1(cout, command);
@@ -131,6 +125,12 @@ void AprgFileExtractor::runInConsole(string const& command) {
     ALBA_INF_PRINT1(cout, revisedCommand);
     system(revisedCommand.c_str());
 #endif
+}
+
+bool AprgFileExtractor::isTheExtensionXzOrGzOrTar(string const& extension) {
+    return stringHelper::isEqualNotCaseSensitive("xz", extension) ||
+           stringHelper::isEqualNotCaseSensitive("gz", extension) ||
+           stringHelper::isEqualNotCaseSensitive("tar", extension);
 }
 
 void AprgFileExtractor::extractAllRelevantFilesInThisDirectory(string const& directoryPath) {

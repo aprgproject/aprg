@@ -57,6 +57,17 @@ void MultiplicationAndDivisionOfRadicals::simplify() {
     }
 }
 
+AlbaNumber MultiplicationAndDivisionOfRadicals::getGcfOfExponents(RadicalDetails const& radicalDetails) {
+    AlbaNumber gcfOfExponents(1);
+    if (!radicalDetails.empty()) {
+        gcfOfExponents = radicalDetails.front().radical.getExponent();
+        for (auto it = radicalDetails.cbegin() + 1; it != radicalDetails.cend(); ++it) {
+            gcfOfExponents = getGreatestCommonFactor(gcfOfExponents, it->radical.getExponent());
+        }
+    }
+    return gcfOfExponents;
+}
+
 bool MultiplicationAndDivisionOfRadicals::shouldBeCombined(
     RadicalDetails const& radicalDetails, Monomial const& combinedMonomial, AlbaNumber const& gcfOfExponents) {
     return gcfOfExponents != 1 && !radicalDetails.empty() &&
@@ -73,17 +84,6 @@ bool MultiplicationAndDivisionOfRadicals::isNotANegativeTermWithExponentDenomina
         }
     }
     return result;
-}
-
-AlbaNumber MultiplicationAndDivisionOfRadicals::getGcfOfExponents(RadicalDetails const& radicalDetails) {
-    AlbaNumber gcfOfExponents(1);
-    if (!radicalDetails.empty()) {
-        gcfOfExponents = radicalDetails.front().radical.getExponent();
-        for (auto it = radicalDetails.cbegin() + 1; it != radicalDetails.cend(); ++it) {
-            gcfOfExponents = getGreatestCommonFactor(gcfOfExponents, it->radical.getExponent());
-        }
-    }
-    return gcfOfExponents;
 }
 
 void MultiplicationAndDivisionOfRadicals::gatherDetails(

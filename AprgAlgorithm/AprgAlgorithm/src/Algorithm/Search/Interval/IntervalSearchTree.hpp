@@ -52,17 +52,6 @@ protected:
         return maxDeltaEndpoints <= sumOfDeltas;
     }
 
-    IntervalUnit getMaxValueBasedFromLeftAndRight(Node& node) const {
-        IntervalUnit maxIntervalValueInSubtree(node.key.end);
-        if (node.left) {
-            maxIntervalValueInSubtree = std::max(maxIntervalValueInSubtree, node.left->key.end);
-        }
-        if (node.right) {
-            maxIntervalValueInSubtree = std::max(maxIntervalValueInSubtree, node.right->key.end);
-        }
-        return maxIntervalValueInSubtree;
-    }
-
     void updateTreeNodeDetails(Node& node) const override {
         node.sizeOfThisSubTree = this->calculateSizeOfThisSubTree(node);
         node.maxIntervalValueInSubtree = getMaxValueBasedFromLeftAndRight(node);
@@ -87,6 +76,17 @@ protected:
                 searchForIntersectingIntervals(intersectingIntervals, nodePointer->right, intervalToCheck);
             }
         }
+    }
+
+    IntervalUnit getMaxValueBasedFromLeftAndRight(Node& node) const {
+        IntervalUnit maxIntervalValueInSubtree(node.key.end);
+        if (node.left) {
+            maxIntervalValueInSubtree = std::max(maxIntervalValueInSubtree, node.left->key.end);
+        }
+        if (node.right) {
+            maxIntervalValueInSubtree = std::max(maxIntervalValueInSubtree, node.right->key.end);
+        }
+        return maxIntervalValueInSubtree;
     }
 
     void putStartingOnThisNode(NodeUniquePointer& nodePointer, Key const& key) override {

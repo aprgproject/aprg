@@ -12,35 +12,48 @@ using namespace std;
 
 namespace alba::AprgBitmap {
 
+BitmapXY BitmapConfiguration::getUpLeftCornerPoint() { return {0, 0}; }
+
 int BitmapConfiguration::getCoordinateWithinRange(int const coordinate, int const maxLength) {
     return (coordinate < 0 || maxLength <= 0) ? 0 : (coordinate >= maxLength) ? maxLength - 1 : coordinate;
 }
 
-BitmapXY BitmapConfiguration::getUpLeftCornerPoint() { return {0, 0}; }
-
-bool BitmapConfiguration::isValid() const {
-    return isSignatureValid() && isHeaderValid() && isNumberOfColorPlanesValid() && isNumberOfBitsPerPixelValid();
+BitmapXY BitmapConfiguration::getPointWithinTheBitmap(int const xCoordinate, int const yCoordinate) const {
+    return {getXCoordinateWithinTheBitmap(xCoordinate), getYCoordinateWithinTheBitmap(yCoordinate)};
 }
 
-bool BitmapConfiguration::isSignatureValid() const { return (m_signature == "BM"); }
-bool BitmapConfiguration::isHeaderValid() const { return (m_sizeOfHeader == 40); }
-bool BitmapConfiguration::isNumberOfColorPlanesValid() const { return (m_numberOfColorPlanes == 1); }
-
-bool BitmapConfiguration::isNumberOfBitsPerPixelValid() const {
-    return (m_numberOfBitsPerPixel == 1) || (m_numberOfBitsPerPixel == 4) || (m_numberOfBitsPerPixel == 8) ||
-           (m_numberOfBitsPerPixel == 16) || (m_numberOfBitsPerPixel == 24) || (m_numberOfBitsPerPixel == 32);
+BitmapXY BitmapConfiguration::getDownRightCornerPoint() const {
+    int maxX = m_bitmapWidth == 0 ? 0 : m_bitmapWidth - 1;
+    int maxY = m_bitmapHeight == 0 ? 0 : m_bitmapHeight - 1;
+    return {maxX, maxY};
 }
 
-bool BitmapConfiguration::isCompressedMethodSupported() const {
-    return (m_compressionMethodType == CompressedMethodType::RGB);
-}
+Colors BitmapConfiguration::getColorTable() const { return m_colors; }
+CompressedMethodType BitmapConfiguration::getCompressedMethodType() const { return m_compressionMethodType; }
+std::string BitmapConfiguration::getPath() const { return m_path; }
+uint16_t BitmapConfiguration::getNumberOfBitsPerPixel() const { return m_numberOfBitsPerPixel; }
+uint32_t BitmapConfiguration::getPixelArrayAddress() const { return m_pixelArrayAddress; }
+uint32_t BitmapConfiguration::getBitmapWidth() const { return m_bitmapWidth; }
+uint32_t BitmapConfiguration::getBitmapHeight() const { return m_bitmapHeight; }
+uint32_t BitmapConfiguration::getNumberOfBytesPerRowInFile() const { return m_numberOfBytesPerRowInFile; }
+uint32_t BitmapConfiguration::getBitMaskForValue() const { return m_bitMaskForValue; }
 
-bool BitmapConfiguration::isPositionWithinTheBitmap(BitmapXY const position) const {
-    return position.getX() < static_cast<int>(m_bitmapWidth) && position.getY() < static_cast<int>(m_bitmapHeight);
-}
-
-bool BitmapConfiguration::isPositionWithinTheBitmap(int const x, int const y) const {
-    return x < static_cast<int>(m_bitmapWidth) && y < static_cast<int>(m_bitmapHeight) && x >= 0 && y >= 0;
+uint32_t BitmapConfiguration::getColorUsingPixelValue(uint32_t const pixelValue) const {
+    uint32_t color(0);
+    switch (m_numberOfBitsPerPixel) {
+        case 1:
+        case 2:
+        case 4:
+        case 8:
+            if (pixelValue < m_colors.size()) {
+                color = m_colors[pixelValue];
+            }
+            break;
+        default:
+            color = pixelValue;
+            break;
+    }
+    return color;
 }
 
 int BitmapConfiguration::getXCoordinateWithinTheBitmap(int const coordinate) const {
@@ -103,44 +116,30 @@ int BitmapConfiguration::getOneRowSizeInBytesFromBytes(
     return rightByteInclusive - leftByteInclusive + getMinimumNumberOfBytesForOnePixel();
 }
 
-CompressedMethodType BitmapConfiguration::getCompressedMethodType() const { return m_compressionMethodType; }
-std::string BitmapConfiguration::getPath() const { return m_path; }
-uint32_t BitmapConfiguration::getPixelArrayAddress() const { return m_pixelArrayAddress; }
-uint32_t BitmapConfiguration::getBitmapWidth() const { return m_bitmapWidth; }
-uint32_t BitmapConfiguration::getBitmapHeight() const { return m_bitmapHeight; }
-uint16_t BitmapConfiguration::getNumberOfBitsPerPixel() const { return m_numberOfBitsPerPixel; }
-uint32_t BitmapConfiguration::getNumberOfBytesPerRowInFile() const { return m_numberOfBytesPerRowInFile; }
-uint32_t BitmapConfiguration::getBitMaskForValue() const { return m_bitMaskForValue; }
-
-BitmapXY BitmapConfiguration::getPointWithinTheBitmap(int const xCoordinate, int const yCoordinate) const {
-    return {getXCoordinateWithinTheBitmap(xCoordinate), getYCoordinateWithinTheBitmap(yCoordinate)};
+bool BitmapConfiguration::isValid() const {
+    return isSignatureValid() && isHeaderValid() && isNumberOfColorPlanesValid() && isNumberOfBitsPerPixelValid();
 }
 
-BitmapXY BitmapConfiguration::getDownRightCornerPoint() const {
-    int maxX = m_bitmapWidth == 0 ? 0 : m_bitmapWidth - 1;
-    int maxY = m_bitmapHeight == 0 ? 0 : m_bitmapHeight - 1;
-    return {maxX, maxY};
+bool BitmapConfiguration::isSignatureValid() const { return (m_signature == "BM"); }
+bool BitmapConfiguration::isHeaderValid() const { return (m_sizeOfHeader == 40); }
+bool BitmapConfiguration::isNumberOfColorPlanesValid() const { return (m_numberOfColorPlanes == 1); }
+
+bool BitmapConfiguration::isNumberOfBitsPerPixelValid() const {
+    return (m_numberOfBitsPerPixel == 1) || (m_numberOfBitsPerPixel == 4) || (m_numberOfBitsPerPixel == 8) ||
+           (m_numberOfBitsPerPixel == 16) || (m_numberOfBitsPerPixel == 24) || (m_numberOfBitsPerPixel == 32);
 }
 
-uint32_t BitmapConfiguration::getColorUsingPixelValue(uint32_t const pixelValue) const {
-    uint32_t color(0);
-    switch (m_numberOfBitsPerPixel) {
-        case 1:
-        case 2:
-        case 4:
-        case 8:
-            if (pixelValue < m_colors.size()) {
-                color = m_colors[pixelValue];
-            }
-            break;
-        default:
-            color = pixelValue;
-            break;
-    }
-    return color;
+bool BitmapConfiguration::isCompressedMethodSupported() const {
+    return (m_compressionMethodType == CompressedMethodType::RGB);
 }
 
-Colors BitmapConfiguration::getColorTable() const { return m_colors; }
+bool BitmapConfiguration::isPositionWithinTheBitmap(BitmapXY const position) const {
+    return position.getX() < static_cast<int>(m_bitmapWidth) && position.getY() < static_cast<int>(m_bitmapHeight);
+}
+
+bool BitmapConfiguration::isPositionWithinTheBitmap(int const x, int const y) const {
+    return x < static_cast<int>(m_bitmapWidth) && y < static_cast<int>(m_bitmapHeight) && x >= 0 && y >= 0;
+}
 
 void BitmapConfiguration::readBitmap(string const& path) {
     // https://en.wikipedia.org/wiki/BMP_file_format

@@ -12,10 +12,10 @@ class SolutionSet {
 public:
     using FunctionForCheckingValues = std::function<bool(AlbaNumber const&)>;
     SolutionSet();
-    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] AlbaNumberIntervals const& getAcceptedIntervals() const;
     [[nodiscard]] AlbaNumbers const& getAcceptedValues() const;
     [[nodiscard]] AlbaNumbers const& getRejectedValues() const;
-    [[nodiscard]] AlbaNumberIntervals const& getAcceptedIntervals() const;
+    [[nodiscard]] bool isEmpty() const;
     void addAcceptedValue(AlbaNumber const& value);
     void addRejectedValue(AlbaNumber const& value);
     void addAcceptedValues(AlbaNumbers const& values);

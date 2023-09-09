@@ -40,9 +40,19 @@ namespace alba::algebra {
 Integration::Integration(string const& nameOfVariableToIntegrate)
     : m_variablesToIntegrate({nameOfVariableToIntegrate}) {}
 
-bool Integration::isConvergent(Term const& term, AlbaNumber const& lowerEnd, AlbaNumber const& higherEnd) {
-    Term integratedTerm(integrateAtDefiniteValues(term, lowerEnd, higherEnd));
-    return isARealFiniteConstant(integratedTerm);
+Monomial Integration::integrateConstant(Constant const& constant) {
+    return {constant.getNumber(), {{getCurrentVariableToIntegrate(), 1}}};
+}
+
+Monomial Integration::integrateVariable(Variable const& variable) {
+    Monomial result;
+    string const& nameOfVariable(variable.getVariableName());
+    if (isVariableToIntegrate(nameOfVariable)) {
+        result = Monomial(AlbaNumber::createFraction(1, 2), {{variable.getVariableName(), 2}});
+    } else {
+        result = Monomial(1, {{variable.getVariableName(), 1}, {getCurrentVariableToIntegrate(), 1}});
+    }
+    return result;
 }
 
 Term Integration::integrate(Term const& term) { return integrateIntenally(term); }
@@ -85,21 +95,6 @@ Term Integration::integrateAtDefiniteTerms(Term const& term, Term const& lowerEn
         integrateIntenally(term), getCurrentVariableToIntegrate(), lowerEnd, higherEnd);
 }
 
-Monomial Integration::integrateConstant(Constant const& constant) {
-    return {constant.getNumber(), {{getCurrentVariableToIntegrate(), 1}}};
-}
-
-Monomial Integration::integrateVariable(Variable const& variable) {
-    Monomial result;
-    string const& nameOfVariable(variable.getVariableName());
-    if (isVariableToIntegrate(nameOfVariable)) {
-        result = Monomial(AlbaNumber::createFraction(1, 2), {{variable.getVariableName(), 2}});
-    } else {
-        result = Monomial(1, {{variable.getVariableName(), 1}, {getCurrentVariableToIntegrate(), 1}});
-    }
-    return result;
-}
-
 Term Integration::integrateMonomial(Monomial const& monomial) {
     Term result;
     AlbaNumber exponentForVariable = monomial.getExponentForVariable(getCurrentVariableToIntegrate());
@@ -133,235 +128,9 @@ Term Integration::integrateFunction(Function const& functionObject) {
     return result;
 }
 
-bool Integration::areExponentsSame(
-    TrigonometryFunctionExponents const& exponents1, TrigonometryFunctionExponents const& exponents2) {
-    return exponents1.sinExponent == exponents2.sinExponent && exponents1.cosExponent == exponents2.cosExponent &&
-           exponents1.tanExponent == exponents2.tanExponent && exponents1.cscExponent == exponents2.cscExponent &&
-           exponents1.secExponent == exponents2.secExponent && exponents1.cotExponent == exponents2.cotExponent;
-}
-
-bool Integration::isTrigonometricSubstitutionAllowed() { return true; }
-
-Term Integration::substituteBackToOldVariable(
-    Term const& mainTerm, string const& newVariableName, Term const& termForNewVariable) {
-    SubstitutionOfVariablesToTerms substitutionVariableToTerm({{newVariableName, termForNewVariable}});
-    return substitutionVariableToTerm.performSubstitutionTo(mainTerm);
-}
-
-Integration::TrigonometricSubstitutionDetails Integration::calculateTrigonometricSubstitutionDetails(
-    Term const& a, Term const& u, string const& aSquaredAndUSquaredName, Term const& aSquaredAndUSquared,
-    bool const isANegative, bool const isUNegative) {
-    TrigonometricSubstitutionDetails result;
-    result.a = a;
-    result.u = u;
-    result.aSquaredAndUSquaredName = aSquaredAndUSquaredName;
-    result.aSquaredAndUSquared = aSquaredAndUSquared;
-    result.thetaName = createVariableNameForSubstitution(u);
-    result.theta = result.thetaName;
-    if (!isANegative && !isUNegative) {
-        // use tan
-        result.isTrigonometricSubstitutionPossible = true;
-        result.uEquivalent = createExpressionIfPossible({a, "*", tan(result.theta)});
-        result.aSquaredAndUSquaredEquivalent = createExpressionIfPossible({a, "^", 2, "*", sec(result.theta), "^", 2});
-        result.thetaEquivalent = arctan(u / a);
-        result.opposite = u;
-        result.adjacent = a;
-        Term hypotenuseSquared(createExpressionIfPossible({a, "^", 2, "+", u, "^", 2}));
-        result.hypotenuse = createExpressionIfPossible({hypotenuseSquared, "^", AlbaNumber::createFraction(1, 2)});
-    } else if (!isANegative && isUNegative) {
-        // use sin
-        result.isTrigonometricSubstitutionPossible = true;
-        result.uEquivalent = createExpressionIfPossible({a, "*", sin(result.theta)});
-        result.aSquaredAndUSquaredEquivalent = createExpressionIfPossible({a, "^", 2, "*", cos(result.theta), "^", 2});
-        result.thetaEquivalent = arcsin(u / a);
-        result.opposite = u;
-        Term adjacentSquared(createExpressionIfPossible({a, "^", 2, "-", u, "^", 2}));
-        result.adjacent = createExpressionIfPossible({adjacentSquared, "^", AlbaNumber::createFraction(1, 2)});
-        result.hypotenuse = a;
-    } else if (isANegative && !isUNegative) {
-        // use sec
-        result.isTrigonometricSubstitutionPossible = true;
-        result.uEquivalent = createExpressionIfPossible({a, "*", sec(result.theta)});
-        result.aSquaredAndUSquaredEquivalent = createExpressionIfPossible({a, "^", 2, "*", tan(result.theta), "^", 2});
-        result.thetaEquivalent = arcsec(u / a);
-        Term oppositeSquared(createExpressionIfPossible({u, "^", 2, "-", a, "^", 2}));
-        result.opposite = createExpressionIfPossible({oppositeSquared, "^", AlbaNumber::createFraction(1, 2)});
-        result.adjacent = a;
-        result.hypotenuse = u;
-    } else {
-        result.isTrigonometricSubstitutionPossible = false;
-    }
-    return result;
-}
-
-Term Integration::substituteFromTrigonometricFunctionsBackToNormal(
-    Term const& mainTerm, TrigonometricSubstitutionDetails const& details) {
-    SubstitutionOfTermsToTerms substitutionThetaToUForTermToTerm;
-    substitutionThetaToUForTermToTerm.putTermToTermMapping(sin(details.theta), details.opposite / details.hypotenuse);
-    substitutionThetaToUForTermToTerm.putTermToTermMapping(cos(details.theta), details.adjacent / details.hypotenuse);
-    substitutionThetaToUForTermToTerm.putTermToTermMapping(tan(details.theta), details.opposite / details.adjacent);
-    substitutionThetaToUForTermToTerm.putTermToTermMapping(csc(details.theta), details.hypotenuse / details.opposite);
-    substitutionThetaToUForTermToTerm.putTermToTermMapping(sec(details.theta), details.hypotenuse / details.adjacent);
-    substitutionThetaToUForTermToTerm.putTermToTermMapping(cot(details.theta), details.adjacent / details.opposite);
-    SubstitutionOfVariablesToTerms substitutionThetaToUForVariableToTerm(
-        {{details.thetaName, details.thetaEquivalent}});
-    return substitutionThetaToUForVariableToTerm.performSubstitutionTo(
-        substitutionThetaToUForTermToTerm.performSubstitutionTo(mainTerm));
-}
-
-Polynomial Integration::getTotalNumeratorWithNewVariables(
-    Polynomial const& originalDenominator, Polynomials const& partialNumerators,
-    Polynomials const& partialDenominators) {
-    Polynomial numeratorWithNewVariables;
-    for (int i = 0; i < static_cast<int>(partialDenominators.size()); ++i) {
-        Term currentNumeratorTerm = originalDenominator / partialDenominators[i] * partialNumerators[i];
-        currentNumeratorTerm.simplify();
-        if (canBeConvertedToPolynomial(currentNumeratorTerm)) {
-            numeratorWithNewVariables.addPolynomial(createPolynomialIfPossible(currentNumeratorTerm));
-        }
-    }
-    numeratorWithNewVariables.simplify();
-    return numeratorWithNewVariables;
-}
-
-VariableNamesSet Integration::getNamesOfNewVariablesForPartialFraction(
-    string const& originalVariableName, Polynomial const& numeratorWithNewVariables) {
-    VariableNamesRetriever namesRetriever;
-    namesRetriever.retrieveFromPolynomial(numeratorWithNewVariables);
-    VariableNamesSet newVariableNames(namesRetriever.getVariableNames());
-    auto itToRemove = newVariableNames.find(originalVariableName);
-    if (itToRemove != newVariableNames.end()) {
-        newVariableNames.erase(itToRemove);
-    }
-    return newVariableNames;
-}
-
-AlbaNumbersSet Integration::getExponentsForPartialFraction(
-    string const& originalVariableName, Polynomial const& numeratorWithNewVariables) {
-    AlbaNumbersSet exponents;
-    for (Monomial const& monomialWithNewVariable : numeratorWithNewVariables.getMonomials()) {
-        exponents.emplace(monomialWithNewVariable.getExponentForVariable(originalVariableName));
-    }
-    return exponents;
-}
-
-Polynomial Integration::getPartialNumeratorForPartialFractions(int const degree, string const& variableName) {
-    Polynomial result;
-    for (int i = 0; i < degree; ++i) {
-        result.addMonomial(Monomial(1, {{variableName, i}, {getNewVariableNameForPartialFractions(), 1}}));
-    }
-    result.simplify();
-    return result;
-}
-
-string Integration::getNewVariableNameForPartialFractions() {
-    constexpr int MAX_NUMBER_OF_VARIABLES = 1000;
-    static int variableCount(0);
-    ++variableCount;
-    if (variableCount > MAX_NUMBER_OF_VARIABLES) {
-        variableCount = 0;
-    }
-
-    static StringConverterWithFormatting converter(3, '0');
-    return string("v") + converter.convertToString(variableCount);
-}
-
-Integration::TrigonometryFunctionExponents Integration::getTrigonometricExponentsSuitableForIntegration(
-    TrigonometryFunctionExponents const& oldExponents) {
-    TrigonometryFunctionExponents newExponents;
-    TrigonometryFunctionExponents exponents;
-
-    exponents.sinExponent = oldExponents.sinExponent;
-    exponents.cosExponent = oldExponents.cosExponent;
-
-    // tan change to sin and cos
-    exponents.sinExponent += oldExponents.tanExponent;
-    exponents.cosExponent += oldExponents.tanExponent * -1;
-    exponents.tanExponent = 0;
-
-    // csc change to sin and cos
-    exponents.sinExponent += oldExponents.cscExponent * -1;
-    exponents.cscExponent = 0;
-
-    // sec change to sin and cos
-    exponents.cosExponent += oldExponents.secExponent * -1;
-    exponents.secExponent = 0;
-
-    // cot change to sin and cos
-    exponents.sinExponent += oldExponents.cotExponent * -1;
-    exponents.cosExponent += oldExponents.cotExponent;
-    exponents.cotExponent = 0;
-
-    if (exponents.sinExponent >= 0 && exponents.cosExponent <= 0) {
-        AlbaNumber cosPositiveExponents(getAbsoluteValue(exponents.cosExponent));
-        if (exponents.sinExponent <= cosPositiveExponents) {
-            exponents.secExponent = cosPositiveExponents - exponents.sinExponent;
-            exponents.tanExponent = exponents.sinExponent;
-            exponents.sinExponent = 0;
-            exponents.cosExponent = 0;
-            exponents.cscExponent = 0;
-            exponents.cotExponent = 0;
-        }
-        newExponents = exponents;
-    } else if (exponents.sinExponent <= 0 && exponents.cosExponent >= 0) {
-        AlbaNumber sinPositiveExponents(getAbsoluteValue(exponents.sinExponent));
-        if (exponents.cosExponent <= sinPositiveExponents) {
-            exponents.cscExponent = sinPositiveExponents - exponents.cosExponent;
-            exponents.cotExponent = exponents.cosExponent;
-            exponents.sinExponent = 0;
-            exponents.cosExponent = 0;
-            exponents.tanExponent = 0;
-            exponents.secExponent = 0;
-        }
-        newExponents = exponents;
-    } else {
-        newExponents = oldExponents;
-    }
-    return newExponents;
-}
-
-Integration::Configuration Integration::getConfigurationWithFactors() {
-    Configuration configuration{};
-    configuration.shouldFixTrigonometricFunctions = true;
-    configuration.expressionSimplification =
-        SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails();
-    configuration.expressionSimplification.shouldSimplifyToFactors = true;
-    configuration.expressionSimplification.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
-    return configuration;
-}
-
-Integration::Configuration Integration::getConfigurationWithCommonDenominator() {
-    Configuration configuration{};
-    configuration.shouldFixTrigonometricFunctions = true;
-    configuration.expressionSimplification =
-        SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails();
-    configuration.expressionSimplification.shouldSimplifyToFactors = true;
-    configuration.expressionSimplification.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
-    configuration.expressionSimplification.shouldSimplifyToACommonDenominator = true;
-    return configuration;
-}
-
-Integration::Configuration Integration::getConfigurationWithoutFactors() {
-    Configuration configuration{};
-    configuration.shouldFixTrigonometricFunctions = true;
-    configuration.expressionSimplification =
-        SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails();
-    configuration.expressionSimplification.shouldSimplifyToFactors = false;
-    configuration.expressionSimplification.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
-    configuration.expressionSimplification.shouldSimplifyToACommonDenominator = false;
-    return configuration;
-}
-
-Integration::Configuration Integration::getConfigurationWithCombiningRadicals() {
-    Configuration configuration{};
-    configuration.shouldFixTrigonometricFunctions = true;
-    configuration.expressionSimplification =
-        SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails();
-    configuration.expressionSimplification.shouldSimplifyToFactors = false;
-    configuration.expressionSimplification.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
-    configuration.expressionSimplification.shouldSimplifyToACommonDenominator = false;
-    configuration.expressionSimplification.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = true;
-    return configuration;
+bool Integration::isConvergent(Term const& term, AlbaNumber const& lowerEnd, AlbaNumber const& higherEnd) {
+    Term integratedTerm(integrateAtDefiniteValues(term, lowerEnd, higherEnd));
+    return isARealFiniteConstant(integratedTerm);
 }
 
 void Integration::retrieveImportantTermsForTrigonometricSubstitutionInExpression(
@@ -648,69 +417,236 @@ void Integration::finalizeTermForIntegration(Term& term) {
     simplifyForIntegration(term, getConfigurationWithFactors());
 }
 
-bool Integration::isVariableToIntegrate(string const& variableName) const {
-    return variableName == getCurrentVariableToIntegrate();
+AlbaNumbersSet Integration::getExponentsForPartialFraction(
+    string const& originalVariableName, Polynomial const& numeratorWithNewVariables) {
+    AlbaNumbersSet exponents;
+    for (Monomial const& monomialWithNewVariable : numeratorWithNewVariables.getMonomials()) {
+        exponents.emplace(monomialWithNewVariable.getExponentForVariable(originalVariableName));
+    }
+    return exponents;
 }
 
-bool Integration::isChangingTerm(Term const& term) const {
-    VariableNamesRetriever retriever;
-    retriever.retrieveFromTerm(term);
-    VariableNamesSet const& variableNames(retriever.getVariableNames());
-    return any_of(variableNames.cbegin(), variableNames.cend(), [&](string const& variableName) {
-        return isVariableToIntegrate(variableName);
-    });
+Integration::Configuration Integration::getConfigurationWithFactors() {
+    Configuration configuration{};
+    configuration.shouldFixTrigonometricFunctions = true;
+    configuration.expressionSimplification =
+        SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails();
+    configuration.expressionSimplification.shouldSimplifyToFactors = true;
+    configuration.expressionSimplification.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
+    return configuration;
 }
 
-bool Integration::hasNonChangingTermRaiseToChangingTerm(Term const& term) const {
-    SubTermsRetriever retriever;
-    retriever.retrieveFromTerm(term);
-    bool result(false);
-    for (Term const& retrievedTerm : retriever.getSubTerms()) {
-        if (retrievedTerm.isExpression()) {
-            Expression const& expression(retrievedTerm.getAsExpression());
-            if (OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel()) {
-                TermRaiseToTerms termRaiseToTerms(expression.getTermsWithAssociation().getTermsWithDetails());
-                result = !isChangingTerm(termRaiseToTerms.getBase()) &&
-                         isChangingTerm(termRaiseToTerms.getCombinedExponents());
-                break;
-            }
+Integration::Configuration Integration::getConfigurationWithCommonDenominator() {
+    Configuration configuration{};
+    configuration.shouldFixTrigonometricFunctions = true;
+    configuration.expressionSimplification =
+        SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails();
+    configuration.expressionSimplification.shouldSimplifyToFactors = true;
+    configuration.expressionSimplification.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
+    configuration.expressionSimplification.shouldSimplifyToACommonDenominator = true;
+    return configuration;
+}
+
+Integration::Configuration Integration::getConfigurationWithoutFactors() {
+    Configuration configuration{};
+    configuration.shouldFixTrigonometricFunctions = true;
+    configuration.expressionSimplification =
+        SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails();
+    configuration.expressionSimplification.shouldSimplifyToFactors = false;
+    configuration.expressionSimplification.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
+    configuration.expressionSimplification.shouldSimplifyToACommonDenominator = false;
+    return configuration;
+}
+
+Integration::Configuration Integration::getConfigurationWithCombiningRadicals() {
+    Configuration configuration{};
+    configuration.shouldFixTrigonometricFunctions = true;
+    configuration.expressionSimplification =
+        SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails();
+    configuration.expressionSimplification.shouldSimplifyToFactors = false;
+    configuration.expressionSimplification.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
+    configuration.expressionSimplification.shouldSimplifyToACommonDenominator = false;
+    configuration.expressionSimplification.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = true;
+    return configuration;
+}
+
+Polynomial Integration::getTotalNumeratorWithNewVariables(
+    Polynomial const& originalDenominator, Polynomials const& partialNumerators,
+    Polynomials const& partialDenominators) {
+    Polynomial numeratorWithNewVariables;
+    for (int i = 0; i < static_cast<int>(partialDenominators.size()); ++i) {
+        Term currentNumeratorTerm = originalDenominator / partialDenominators[i] * partialNumerators[i];
+        currentNumeratorTerm.simplify();
+        if (canBeConvertedToPolynomial(currentNumeratorTerm)) {
+            numeratorWithNewVariables.addPolynomial(createPolynomialIfPossible(currentNumeratorTerm));
         }
     }
+    numeratorWithNewVariables.simplify();
+    return numeratorWithNewVariables;
+}
+
+Polynomial Integration::getPartialNumeratorForPartialFractions(int const degree, string const& variableName) {
+    Polynomial result;
+    for (int i = 0; i < degree; ++i) {
+        result.addMonomial(Monomial(1, {{variableName, i}, {getNewVariableNameForPartialFractions(), 1}}));
+    }
+    result.simplify();
     return result;
 }
 
-bool Integration::wouldDifferentiationYieldToAConstant(Term const& term) const {
-    bool result(false);
-    if (term.isVariable() && isVariableToIntegrate(term.getAsVariable().getVariableName())) {
-        result = true;
-    } else if (term.isMonomial()) {
-        result = term.getAsMonomial().getExponentForVariable(getCurrentVariableToIntegrate()) == 1;
-    } else if (term.isPolynomial()) {
-        result = getDegreeForVariable(term.getAsPolynomial(), getCurrentVariableToIntegrate()) == 1;
+Term Integration::substituteBackToOldVariable(
+    Term const& mainTerm, string const& newVariableName, Term const& termForNewVariable) {
+    SubstitutionOfVariablesToTerms substitutionVariableToTerm({{newVariableName, termForNewVariable}});
+    return substitutionVariableToTerm.performSubstitutionTo(mainTerm);
+}
+
+Term Integration::substituteFromTrigonometricFunctionsBackToNormal(
+    Term const& mainTerm, TrigonometricSubstitutionDetails const& details) {
+    SubstitutionOfTermsToTerms substitutionThetaToUForTermToTerm;
+    substitutionThetaToUForTermToTerm.putTermToTermMapping(sin(details.theta), details.opposite / details.hypotenuse);
+    substitutionThetaToUForTermToTerm.putTermToTermMapping(cos(details.theta), details.adjacent / details.hypotenuse);
+    substitutionThetaToUForTermToTerm.putTermToTermMapping(tan(details.theta), details.opposite / details.adjacent);
+    substitutionThetaToUForTermToTerm.putTermToTermMapping(csc(details.theta), details.hypotenuse / details.opposite);
+    substitutionThetaToUForTermToTerm.putTermToTermMapping(sec(details.theta), details.hypotenuse / details.adjacent);
+    substitutionThetaToUForTermToTerm.putTermToTermMapping(cot(details.theta), details.adjacent / details.opposite);
+    SubstitutionOfVariablesToTerms substitutionThetaToUForVariableToTerm(
+        {{details.thetaName, details.thetaEquivalent}});
+    return substitutionThetaToUForVariableToTerm.performSubstitutionTo(
+        substitutionThetaToUForTermToTerm.performSubstitutionTo(mainTerm));
+}
+
+Integration::TrigonometricSubstitutionDetails Integration::calculateTrigonometricSubstitutionDetails(
+    Term const& a, Term const& u, string const& aSquaredAndUSquaredName, Term const& aSquaredAndUSquared,
+    bool const isANegative, bool const isUNegative) {
+    TrigonometricSubstitutionDetails result;
+    result.a = a;
+    result.u = u;
+    result.aSquaredAndUSquaredName = aSquaredAndUSquaredName;
+    result.aSquaredAndUSquared = aSquaredAndUSquared;
+    result.thetaName = createVariableNameForSubstitution(u);
+    result.theta = result.thetaName;
+    if (!isANegative && !isUNegative) {
+        // use tan
+        result.isTrigonometricSubstitutionPossible = true;
+        result.uEquivalent = createExpressionIfPossible({a, "*", tan(result.theta)});
+        result.aSquaredAndUSquaredEquivalent = createExpressionIfPossible({a, "^", 2, "*", sec(result.theta), "^", 2});
+        result.thetaEquivalent = arctan(u / a);
+        result.opposite = u;
+        result.adjacent = a;
+        Term hypotenuseSquared(createExpressionIfPossible({a, "^", 2, "+", u, "^", 2}));
+        result.hypotenuse = createExpressionIfPossible({hypotenuseSquared, "^", AlbaNumber::createFraction(1, 2)});
+    } else if (!isANegative && isUNegative) {
+        // use sin
+        result.isTrigonometricSubstitutionPossible = true;
+        result.uEquivalent = createExpressionIfPossible({a, "*", sin(result.theta)});
+        result.aSquaredAndUSquaredEquivalent = createExpressionIfPossible({a, "^", 2, "*", cos(result.theta), "^", 2});
+        result.thetaEquivalent = arcsin(u / a);
+        result.opposite = u;
+        Term adjacentSquared(createExpressionIfPossible({a, "^", 2, "-", u, "^", 2}));
+        result.adjacent = createExpressionIfPossible({adjacentSquared, "^", AlbaNumber::createFraction(1, 2)});
+        result.hypotenuse = a;
+    } else if (isANegative && !isUNegative) {
+        // use sec
+        result.isTrigonometricSubstitutionPossible = true;
+        result.uEquivalent = createExpressionIfPossible({a, "*", sec(result.theta)});
+        result.aSquaredAndUSquaredEquivalent = createExpressionIfPossible({a, "^", 2, "*", tan(result.theta), "^", 2});
+        result.thetaEquivalent = arcsec(u / a);
+        Term oppositeSquared(createExpressionIfPossible({u, "^", 2, "-", a, "^", 2}));
+        result.opposite = createExpressionIfPossible({oppositeSquared, "^", AlbaNumber::createFraction(1, 2)});
+        result.adjacent = a;
+        result.hypotenuse = u;
+    } else {
+        result.isTrigonometricSubstitutionPossible = false;
     }
     return result;
 }
 
-bool Integration::isIntegrationUsingSubstitutionAllowed(Term const& term) const {
-    return IntegrationPurpose::Substitution != m_history.getLastIntegrationPurpose() ||
-           hasAnyTrigonometricFunctions(term);
+Integration::TrigonometryFunctionExponents Integration::getTrigonometricExponentsSuitableForIntegration(
+    TrigonometryFunctionExponents const& oldExponents) {
+    TrigonometryFunctionExponents newExponents;
+    TrigonometryFunctionExponents exponents;
+
+    exponents.sinExponent = oldExponents.sinExponent;
+    exponents.cosExponent = oldExponents.cosExponent;
+
+    // tan change to sin and cos
+    exponents.sinExponent += oldExponents.tanExponent;
+    exponents.cosExponent += oldExponents.tanExponent * -1;
+    exponents.tanExponent = 0;
+
+    // csc change to sin and cos
+    exponents.sinExponent += oldExponents.cscExponent * -1;
+    exponents.cscExponent = 0;
+
+    // sec change to sin and cos
+    exponents.cosExponent += oldExponents.secExponent * -1;
+    exponents.secExponent = 0;
+
+    // cot change to sin and cos
+    exponents.sinExponent += oldExponents.cotExponent * -1;
+    exponents.cosExponent += oldExponents.cotExponent;
+    exponents.cotExponent = 0;
+
+    if (exponents.sinExponent >= 0 && exponents.cosExponent <= 0) {
+        AlbaNumber cosPositiveExponents(getAbsoluteValue(exponents.cosExponent));
+        if (exponents.sinExponent <= cosPositiveExponents) {
+            exponents.secExponent = cosPositiveExponents - exponents.sinExponent;
+            exponents.tanExponent = exponents.sinExponent;
+            exponents.sinExponent = 0;
+            exponents.cosExponent = 0;
+            exponents.cscExponent = 0;
+            exponents.cotExponent = 0;
+        }
+        newExponents = exponents;
+    } else if (exponents.sinExponent <= 0 && exponents.cosExponent >= 0) {
+        AlbaNumber sinPositiveExponents(getAbsoluteValue(exponents.sinExponent));
+        if (exponents.cosExponent <= sinPositiveExponents) {
+            exponents.cscExponent = sinPositiveExponents - exponents.cosExponent;
+            exponents.cotExponent = exponents.cosExponent;
+            exponents.sinExponent = 0;
+            exponents.cosExponent = 0;
+            exponents.tanExponent = 0;
+            exponents.secExponent = 0;
+        }
+        newExponents = exponents;
+    } else {
+        newExponents = oldExponents;
+    }
+    return newExponents;
 }
 
-bool Integration::isIntegrationByPartsAllowed(Term const& term) const {
-    return IntegrationPurpose::Substitution != m_history.getLastIntegrationPurpose() ||
-           hasAnyTrigonometricFunctions(term);
+VariableNamesSet Integration::getNamesOfNewVariablesForPartialFraction(
+    string const& originalVariableName, Polynomial const& numeratorWithNewVariables) {
+    VariableNamesRetriever namesRetriever;
+    namesRetriever.retrieveFromPolynomial(numeratorWithNewVariables);
+    VariableNamesSet newVariableNames(namesRetriever.getVariableNames());
+    auto itToRemove = newVariableNames.find(originalVariableName);
+    if (itToRemove != newVariableNames.end()) {
+        newVariableNames.erase(itToRemove);
+    }
+    return newVariableNames;
 }
 
-bool Integration::isIntegrationByPartialFractionAllowed() const {
-    return IntegrationPurpose::PartialFraction != m_history.getLastIntegrationPurpose();
+string Integration::getNewVariableNameForPartialFractions() {
+    constexpr int MAX_NUMBER_OF_VARIABLES = 1000;
+    static int variableCount(0);
+    ++variableCount;
+    if (variableCount > MAX_NUMBER_OF_VARIABLES) {
+        variableCount = 0;
+    }
+
+    static StringConverterWithFormatting converter(3, '0');
+    return string("v") + converter.convertToString(variableCount);
 }
 
-Term Integration::integrateMonomialWhenExponentIsNegativeOne(Monomial const& monomial) const {
-    Monomial retainedMonomial(monomial);
-    retainedMonomial.putVariableWithExponent(getCurrentVariableToIntegrate(), 0);
-    Term result = retainedMonomial * getNaturalLogarithmOfTheAbsoluteValueOfTerm(getCurrentVariableToIntegrate());
-    return result;
+bool Integration::areExponentsSame(
+    TrigonometryFunctionExponents const& exponents1, TrigonometryFunctionExponents const& exponents2) {
+    return exponents1.sinExponent == exponents2.sinExponent && exponents1.cosExponent == exponents2.cosExponent &&
+           exponents1.tanExponent == exponents2.tanExponent && exponents1.cscExponent == exponents2.cscExponent &&
+           exponents1.secExponent == exponents2.secExponent && exponents1.cotExponent == exponents2.cotExponent;
 }
+
+bool Integration::isTrigonometricSubstitutionAllowed() { return true; }
 
 Monomial Integration::integrateMonomialWhenExponentIsNotNegativeOne(Monomial const& monomial) const {
     Monomial result(monomial);
@@ -725,6 +661,13 @@ Monomial Integration::integrateMonomialWhenExponentIsNotNegativeOne(Monomial con
     if (!hasVariabletoIntegrate) {
         result.putVariableWithExponent(getCurrentVariableToIntegrate(), 1);
     }
+    return result;
+}
+
+Term Integration::integrateMonomialWhenExponentIsNegativeOne(Monomial const& monomial) const {
+    Monomial retainedMonomial(monomial);
+    retainedMonomial.putVariableWithExponent(getCurrentVariableToIntegrate(), 0);
+    Term result = retainedMonomial * getNaturalLogarithmOfTheAbsoluteValueOfTerm(getCurrentVariableToIntegrate());
     return result;
 }
 
@@ -799,6 +742,63 @@ string Integration::getCurrentVariableToIntegrate() const {
         result = m_variablesToIntegrate.back();
     }
     return result;
+}
+
+bool Integration::isVariableToIntegrate(string const& variableName) const {
+    return variableName == getCurrentVariableToIntegrate();
+}
+
+bool Integration::isChangingTerm(Term const& term) const {
+    VariableNamesRetriever retriever;
+    retriever.retrieveFromTerm(term);
+    VariableNamesSet const& variableNames(retriever.getVariableNames());
+    return any_of(variableNames.cbegin(), variableNames.cend(), [&](string const& variableName) {
+        return isVariableToIntegrate(variableName);
+    });
+}
+
+bool Integration::hasNonChangingTermRaiseToChangingTerm(Term const& term) const {
+    SubTermsRetriever retriever;
+    retriever.retrieveFromTerm(term);
+    bool result(false);
+    for (Term const& retrievedTerm : retriever.getSubTerms()) {
+        if (retrievedTerm.isExpression()) {
+            Expression const& expression(retrievedTerm.getAsExpression());
+            if (OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel()) {
+                TermRaiseToTerms termRaiseToTerms(expression.getTermsWithAssociation().getTermsWithDetails());
+                result = !isChangingTerm(termRaiseToTerms.getBase()) &&
+                         isChangingTerm(termRaiseToTerms.getCombinedExponents());
+                break;
+            }
+        }
+    }
+    return result;
+}
+
+bool Integration::wouldDifferentiationYieldToAConstant(Term const& term) const {
+    bool result(false);
+    if (term.isVariable() && isVariableToIntegrate(term.getAsVariable().getVariableName())) {
+        result = true;
+    } else if (term.isMonomial()) {
+        result = term.getAsMonomial().getExponentForVariable(getCurrentVariableToIntegrate()) == 1;
+    } else if (term.isPolynomial()) {
+        result = getDegreeForVariable(term.getAsPolynomial(), getCurrentVariableToIntegrate()) == 1;
+    }
+    return result;
+}
+
+bool Integration::isIntegrationUsingSubstitutionAllowed(Term const& term) const {
+    return IntegrationPurpose::Substitution != m_history.getLastIntegrationPurpose() ||
+           hasAnyTrigonometricFunctions(term);
+}
+
+bool Integration::isIntegrationByPartsAllowed(Term const& term) const {
+    return IntegrationPurpose::Substitution != m_history.getLastIntegrationPurpose() ||
+           hasAnyTrigonometricFunctions(term);
+}
+
+bool Integration::isIntegrationByPartialFractionAllowed() const {
+    return IntegrationPurpose::PartialFraction != m_history.getLastIntegrationPurpose();
 }
 
 void Integration::integrateFunctionOnly(Term& result, Function const& functionObject) const {
@@ -885,76 +885,6 @@ void Integration::findInnerAndOuterTermForChainRule(Term& innerTerm, Term& outer
             }
         }
     }
-}
-
-Term Integration::integrateIntenally(Term const& term) {
-    Term result;
-    if (term.isConstant()) {
-        result = integrate(term.getAsConstant());
-    } else if (term.isVariable()) {
-        result = integrate(term.getAsVariable());
-    } else if (term.isMonomial()) {
-        result = integrate(term.getAsMonomial());
-    } else if (term.isPolynomial()) {
-        result = integrate(term.getAsPolynomial());
-    } else if (term.isExpression()) {
-        result = integrate(term.getAsExpression());
-    } else if (term.isFunction()) {
-        result = integrate(term.getAsFunction());
-    }
-    return result;
-}
-
-Term Integration::integrateInternallyWithPurpose(Term const& term, IntegrationPurpose const purpose) {
-    m_history.performStepsBeforeIntegration(term, purpose);
-    Term integratedTerm(integrateIntenally(term));
-    m_history.performStepsAfterIntegration(term, purpose, integratedTerm);
-    return integratedTerm;
-}
-
-Term Integration::integrateIntenallyWithNewVariable(
-    Term const& term, IntegrationPurpose const purpose, string const& newVariable) {
-    m_variablesToIntegrate.emplace_back(newVariable);
-    Term integratedTerm(integrateInternallyWithPurpose(term, purpose));
-    m_variablesToIntegrate.pop_back();
-    return integratedTerm;
-}
-
-Term Integration::integrateAsTermOrExpressionIfNeeded(Expression const& expression) {
-    Term result;
-    Configurations configurations{
-        getConfigurationWithFactors(), getConfigurationWithCommonDenominator(), getConfigurationWithoutFactors()};
-    for (Configuration const& configuration : configurations) {
-        Term simplifiedTerm(expression);
-        simplifyForIntegration(simplifiedTerm, configuration);
-        if (simplifiedTerm.isExpression()) {
-            integrateSimplifiedExpressionOnly(result, simplifiedTerm.getAsExpression(), configuration);
-        } else {
-            result = integrateInternallyWithPurpose(simplifiedTerm, IntegrationPurpose::NoChange);
-        }
-        if (!result.isEmpty()) {
-            break;
-        }
-    }
-    if (result.isEmpty()) {
-        result = ALBA_NUMBER_NOT_A_NUMBER;
-    }
-    return result;
-}
-
-Term Integration::integrateFunctionInternally(Function const& functionObject) {
-    Term result;
-    integrateFunctionOnly(result, functionObject);
-    if (result.isEmpty()) {
-        integrateTermUsingSubstitutionWithMaxDepth(result, functionObject, getConfigurationWithFactors());
-    }
-    if (result.isEmpty()) {
-        integrateByTryingIntegrationByParts(result, functionObject);
-    }
-    if (result.isEmpty()) {
-        result = ALBA_NUMBER_NOT_A_NUMBER;
-    }
-    return result;
 }
 
 void Integration::integrateSimplifiedExpressionOnly(
@@ -1634,6 +1564,76 @@ void Integration::integrateSecAndTanCombinationWithExponentsGreaterThanOne(
         result = integrateInternallyWithPurpose(termToIntegrate, IntegrationPurpose::Trigonometric);
         // what if tanExponent is even, then squareroot will happen, this is still not solved
     }
+}
+
+Term Integration::integrateIntenally(Term const& term) {
+    Term result;
+    if (term.isConstant()) {
+        result = integrate(term.getAsConstant());
+    } else if (term.isVariable()) {
+        result = integrate(term.getAsVariable());
+    } else if (term.isMonomial()) {
+        result = integrate(term.getAsMonomial());
+    } else if (term.isPolynomial()) {
+        result = integrate(term.getAsPolynomial());
+    } else if (term.isExpression()) {
+        result = integrate(term.getAsExpression());
+    } else if (term.isFunction()) {
+        result = integrate(term.getAsFunction());
+    }
+    return result;
+}
+
+Term Integration::integrateInternallyWithPurpose(Term const& term, IntegrationPurpose const purpose) {
+    m_history.performStepsBeforeIntegration(term, purpose);
+    Term integratedTerm(integrateIntenally(term));
+    m_history.performStepsAfterIntegration(term, purpose, integratedTerm);
+    return integratedTerm;
+}
+
+Term Integration::integrateIntenallyWithNewVariable(
+    Term const& term, IntegrationPurpose const purpose, string const& newVariable) {
+    m_variablesToIntegrate.emplace_back(newVariable);
+    Term integratedTerm(integrateInternallyWithPurpose(term, purpose));
+    m_variablesToIntegrate.pop_back();
+    return integratedTerm;
+}
+
+Term Integration::integrateAsTermOrExpressionIfNeeded(Expression const& expression) {
+    Term result;
+    Configurations configurations{
+        getConfigurationWithFactors(), getConfigurationWithCommonDenominator(), getConfigurationWithoutFactors()};
+    for (Configuration const& configuration : configurations) {
+        Term simplifiedTerm(expression);
+        simplifyForIntegration(simplifiedTerm, configuration);
+        if (simplifiedTerm.isExpression()) {
+            integrateSimplifiedExpressionOnly(result, simplifiedTerm.getAsExpression(), configuration);
+        } else {
+            result = integrateInternallyWithPurpose(simplifiedTerm, IntegrationPurpose::NoChange);
+        }
+        if (!result.isEmpty()) {
+            break;
+        }
+    }
+    if (result.isEmpty()) {
+        result = ALBA_NUMBER_NOT_A_NUMBER;
+    }
+    return result;
+}
+
+Term Integration::integrateFunctionInternally(Function const& functionObject) {
+    Term result;
+    integrateFunctionOnly(result, functionObject);
+    if (result.isEmpty()) {
+        integrateTermUsingSubstitutionWithMaxDepth(result, functionObject, getConfigurationWithFactors());
+    }
+    if (result.isEmpty()) {
+        integrateByTryingIntegrationByParts(result, functionObject);
+    }
+    if (result.isEmpty()) {
+        result = ALBA_NUMBER_NOT_A_NUMBER;
+    }
+    return result;
 }
 
 void Integration::integrateChangingTermRaiseToChangingTerm(Term& result, Term const&, Term const&) {

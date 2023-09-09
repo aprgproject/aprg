@@ -7,6 +7,7 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 using ValuesForTest = vector<int>;
 using RangeQueryForTest = RangeQueryWithSelector<ValuesForTest>;
 using ValueForTest = RangeQueryForTest::Value;
@@ -18,6 +19,7 @@ RangeQueryForTest::SelectorFunction minimumSelector = [](ValueForTest const& val
 RangeQueryForTest::SelectorFunction maximumSelector = [](ValueForTest const& value1, ValueForTest const& value2) {
     return max(value1, value2);
 };
+
 }  // namespace
 
 TEST(RangeQueryWithSelectorTest, GetSelectedValueOnIntervalWithMinimumWorksWithEmptySetOfValues) {

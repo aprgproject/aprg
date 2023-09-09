@@ -40,52 +40,6 @@ public:
     }
 
     MathSet(std::string const& description, Rule const& rule) : m_description(description), m_ruleToBeInTheSet(rule) {}
-    [[nodiscard]] bool contains(ElementType const& elementToCheck) const { return m_ruleToBeInTheSet(elementToCheck); }
-    [[nodiscard]] bool doesNotContain(ElementType const& elementToCheck) const { return !contains(elementToCheck); }
-
-    [[nodiscard]] bool isASubsetOf(MathSet const& mathSet2, GenerateFunction const& generateFunction) const {
-        bool result(true);
-        generateFunction([&](ElementType const& element) {
-            if (contains(element) && mathSet2.doesNotContain(element)) {
-                result = false;
-            }
-        });
-        return result;
-    }
-
-    [[nodiscard]] bool isASupersetOf(MathSet const& mathSet2, GenerateFunction const& generateFunction) const {
-        bool result(true);
-        generateFunction([&](ElementType const& element) {
-            if (mathSet2.contains(element) && doesNotContain(element)) {
-                result = false;
-            }
-        });
-        return result;
-    }
-
-    [[nodiscard]] bool isDisjointWith(MathSet const& mathSet2, GenerateFunction const& generateFunction) const {
-        bool result(true);
-        generateFunction([&](ElementType const& element) {
-            if (contains(element) && mathSet2.contains(element)) {
-                result = false;
-            }
-        });
-        return result;
-    }
-
-    [[nodiscard]] std::string getDescription() const { return std::string("{") + m_description + "}"; }
-
-    [[nodiscard]] std::string getGeneratedRosterString(GenerateFunction const& generateFunction) const {
-        std::stringstream descriptionStream;
-        int index = 0;
-        generateFunction([&](ElementType const& element) {
-            if (contains(element)) {
-                enumerateElement(descriptionStream, element, index);
-                ++index;
-            }
-        });
-        return std::string("{... ") + descriptionStream.str() + " ...}";
-    }
 
     [[nodiscard]] MathSet getComplement() const {
         Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
@@ -130,6 +84,53 @@ public:
         for (RosterList const& subsetRoster : subsetsRoster) {
             result.emplace_back(subsetRoster);
         }
+        return result;
+    }
+
+    [[nodiscard]] std::string getDescription() const { return std::string("{") + m_description + "}"; }
+
+    [[nodiscard]] std::string getGeneratedRosterString(GenerateFunction const& generateFunction) const {
+        std::stringstream descriptionStream;
+        int index = 0;
+        generateFunction([&](ElementType const& element) {
+            if (contains(element)) {
+                enumerateElement(descriptionStream, element, index);
+                ++index;
+            }
+        });
+        return std::string("{... ") + descriptionStream.str() + " ...}";
+    }
+
+    [[nodiscard]] bool contains(ElementType const& elementToCheck) const { return m_ruleToBeInTheSet(elementToCheck); }
+    [[nodiscard]] bool doesNotContain(ElementType const& elementToCheck) const { return !contains(elementToCheck); }
+
+    [[nodiscard]] bool isASubsetOf(MathSet const& mathSet2, GenerateFunction const& generateFunction) const {
+        bool result(true);
+        generateFunction([&](ElementType const& element) {
+            if (contains(element) && mathSet2.doesNotContain(element)) {
+                result = false;
+            }
+        });
+        return result;
+    }
+
+    [[nodiscard]] bool isASupersetOf(MathSet const& mathSet2, GenerateFunction const& generateFunction) const {
+        bool result(true);
+        generateFunction([&](ElementType const& element) {
+            if (mathSet2.contains(element) && doesNotContain(element)) {
+                result = false;
+            }
+        });
+        return result;
+    }
+
+    [[nodiscard]] bool isDisjointWith(MathSet const& mathSet2, GenerateFunction const& generateFunction) const {
+        bool result(true);
+        generateFunction([&](ElementType const& element) {
+            if (contains(element) && mathSet2.contains(element)) {
+                result = false;
+            }
+        });
         return result;
     }
 

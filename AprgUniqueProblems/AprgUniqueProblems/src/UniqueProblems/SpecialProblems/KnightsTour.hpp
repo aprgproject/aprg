@@ -22,10 +22,10 @@ public:
     [[nodiscard]] ChessBoardIndexes getAClosedKnightsTour() const;
 
 private:
-    [[nodiscard]] bool isInside(int const x, int const y) const;
     [[nodiscard]] int getNumberOfNeighbors(int const x, int const y) const;
     [[nodiscard]] int countNumberOfNeighbors(int const x, int const y) const;
     [[nodiscard]] int getChessBoardIndex(int const x, int const y) const;
+    [[nodiscard]] bool isInside(int const x, int const y) const;
     void initialize();
     void initializeNeighborMatrix();
     void initializeGraph();

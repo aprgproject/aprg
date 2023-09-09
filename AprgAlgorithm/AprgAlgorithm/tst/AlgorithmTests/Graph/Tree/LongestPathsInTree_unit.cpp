@@ -6,6 +6,7 @@
 namespace alba::algorithm {
 
 namespace {
+
 using VertexForTest = int;
 using PathForTest = GraphTypes<VertexForTest>::Path;
 using GraphForTest = UndirectedGraphWithListOfEdges<VertexForTest>;
@@ -20,6 +21,7 @@ void putConnectionsForTest(GraphForTest& graph) {
     graph.connect(2, 6);
     graph.connect(4, 7);
 }
+
 }  // namespace
 
 TEST(LongestPathsInTreeTest, GetEndPointPairsOfLongestPathsWorks) {

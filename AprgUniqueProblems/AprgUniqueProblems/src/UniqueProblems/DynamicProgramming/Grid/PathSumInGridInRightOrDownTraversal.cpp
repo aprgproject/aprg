@@ -9,6 +9,32 @@ PathSumInGridInRightOrDownTraversal::PathSumInGridInRightOrDownTraversal(Type co
     initialize(type);
 }
 
+PathSumInGridInRightOrDownTraversal::Path PathSumInGridInRightOrDownTraversal::getBestPathUsingIterativeDP() const {
+    Path path;
+    if (!m_inputGrid.isEmpty()) {
+        Grid partialSumGrid(getPartialSumGridUsingIterativeDP());
+        Index x = partialSumGrid.getNumberOfColumns() - 1;
+        Index y = partialSumGrid.getNumberOfRows() - 1;
+        path = {m_inputGrid.getEntry(x, y)};
+        while (true) {
+            if (x == 0 && y == 0) {
+                break;
+            }
+            if (x == 0) {
+                path.emplace_back(m_inputGrid.getEntry(x, --y));
+            } else if (y == 0) {
+                path.emplace_back(m_inputGrid.getEntry(--x, y));
+            } else if (m_compareFunction(partialSumGrid.getEntry(x - 1, y), partialSumGrid.getEntry(x, y - 1))) {
+                path.emplace_back(m_inputGrid.getEntry(--x, y));
+            } else {
+                path.emplace_back(m_inputGrid.getEntry(x, --y));
+            }
+        }
+        reverse(path.begin(), path.end());
+    }
+    return path;
+}
+
 PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::getBestPathSumUsingNaiveRecursion()
     const {
     Value pathSum(0);
@@ -41,49 +67,6 @@ PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::
     return pathSum;
 }
 
-PathSumInGridInRightOrDownTraversal::Path PathSumInGridInRightOrDownTraversal::getBestPathUsingIterativeDP() const {
-    Path path;
-    if (!m_inputGrid.isEmpty()) {
-        Grid partialSumGrid(getPartialSumGridUsingIterativeDP());
-        Index x = partialSumGrid.getNumberOfColumns() - 1;
-        Index y = partialSumGrid.getNumberOfRows() - 1;
-        path = {m_inputGrid.getEntry(x, y)};
-        while (true) {
-            if (x == 0 && y == 0) {
-                break;
-            }
-            if (x == 0) {
-                path.emplace_back(m_inputGrid.getEntry(x, --y));
-            } else if (y == 0) {
-                path.emplace_back(m_inputGrid.getEntry(--x, y));
-            } else if (m_compareFunction(partialSumGrid.getEntry(x - 1, y), partialSumGrid.getEntry(x, y - 1))) {
-                path.emplace_back(m_inputGrid.getEntry(--x, y));
-            } else {
-                path.emplace_back(m_inputGrid.getEntry(x, --y));
-            }
-        }
-        reverse(path.begin(), path.end());
-    }
-    return path;
-}
-
-PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::getBestPathSumUsingNaiveRecursion(
-    Index const x, Index const y) const {
-    // Naive recursion approach
-    Value result(m_inputGrid.getEntry(x, y));
-    if (!(x == 0 && y == 0)) {
-        if (x == 0) {
-            result += getBestPathSumUsingNaiveRecursion(x, y - 1);
-        } else if (y == 0) {
-            result += getBestPathSumUsingNaiveRecursion(x - 1, y);
-        } else {
-            result += m_minMaxFunction(
-                getBestPathSumUsingNaiveRecursion(x - 1, y), getBestPathSumUsingNaiveRecursion(x, y - 1));
-        }
-    }
-    return result;
-}
-
 PathSumInGridInRightOrDownTraversal::Grid PathSumInGridInRightOrDownTraversal::getPartialSumGridUsingIterativeDP()
     const {
     Grid result(m_inputGrid);
@@ -99,6 +82,23 @@ PathSumInGridInRightOrDownTraversal::Grid PathSumInGridInRightOrDownTraversal::g
     for (Index x = 1; x < static_cast<Index>(result.getNumberOfColumns()); ++x) {
         for (Index y = 1; y < static_cast<Index>(result.getNumberOfRows()); ++y) {
             result.getEntryReference(x, y) += m_minMaxFunction(result.getEntry(x - 1, y), result.getEntry(x, y - 1));
+        }
+    }
+    return result;
+}
+
+PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::getBestPathSumUsingNaiveRecursion(
+    Index const x, Index const y) const {
+    // Naive recursion approach
+    Value result(m_inputGrid.getEntry(x, y));
+    if (!(x == 0 && y == 0)) {
+        if (x == 0) {
+            result += getBestPathSumUsingNaiveRecursion(x, y - 1);
+        } else if (y == 0) {
+            result += getBestPathSumUsingNaiveRecursion(x - 1, y);
+        } else {
+            result += m_minMaxFunction(
+                getBestPathSumUsingNaiveRecursion(x - 1, y), getBestPathSumUsingNaiveRecursion(x, y - 1));
         }
     }
     return result;

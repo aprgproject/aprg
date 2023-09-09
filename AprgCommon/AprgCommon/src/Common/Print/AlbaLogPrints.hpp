@@ -3,7 +3,6 @@
 #include <Common/Print/AlbaPrintMacros.hpp>
 
 namespace alba {
-
 // INF(Information) print macros to use
 #define ALBA_INF_HEADER(out) out << "[INF] ";
 #define ALBA_INF_PRINT1(out, p1) ALBA_INF_HEADER(out) ALBA_PRINT1(out, p1)
@@ -39,5 +38,4 @@ namespace alba {
 #define ALBA_WRN_PRINT(out, ...) ALBA_WRN_HEADER(out) ALBA_PRINT_ALL(out, __VA_ARGS__)
 #define ALBA_ERR_PRINT(out, ...) ALBA_ERR_HEADER(out) ALBA_PRINT_ALL(out, __VA_ARGS__)
 #endif
-
 }  // namespace alba

@@ -7,11 +7,11 @@
 #include <string>
 
 namespace alba::booleanAlgebra {
-int getOperatorTypeInversePriority(OperatorType const operatorType);
-int getOperatorLevelInversePriority(OperatorLevel const operatorLevel);
-int getTermTypePriorityValue(TermType const termType);
 OperatorLevel getDualOperatorLevel(OperatorLevel const operatorLevel);
 std::string getEnumShortString(TermType const termType);
 std::string getEnumShortString(OperatorType const operatorType);
 std::string getEnumShortString(OperatorLevel const operatorLevel);
+int getOperatorTypeInversePriority(OperatorType const operatorType);
+int getOperatorLevelInversePriority(OperatorLevel const operatorLevel);
+int getTermTypePriorityValue(TermType const termType);
 }  // namespace alba::booleanAlgebra

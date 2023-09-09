@@ -42,10 +42,6 @@ bool Plane::operator==(Plane const& plane) const {
 }
 
 bool Plane::operator!=(Plane const& plane) const { return !((*this) == plane); }
-double Plane::getACoefficient() const { return m_aCoefficient; }
-double Plane::getBCoefficient() const { return m_bCoefficient; }
-double Plane::getCCoefficient() const { return m_cCoefficient; }
-double Plane::getDCoefficient() const { return m_dCoefficient; }
 
 optional<double> Plane::getXIntercept() const {
     optional<double> xIntercept;
@@ -94,6 +90,11 @@ optional<double> Plane::calculateZFromXAndY(double const x, double const y) cons
     }
     return result;
 }
+
+double Plane::getACoefficient() const { return m_aCoefficient; }
+double Plane::getBCoefficient() const { return m_bCoefficient; }
+double Plane::getCCoefficient() const { return m_cCoefficient; }
+double Plane::getDCoefficient() const { return m_dCoefficient; }
 
 void Plane::calculateDCoefficientUsingCoefficientsABCAndAPoint(Point const& first) {
     m_dCoefficient =

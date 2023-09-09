@@ -54,9 +54,6 @@ bool TermsWithAssociation::operator<(TermsWithAssociation const& second) const {
     return result;
 }
 
-bool TermsWithAssociation::isEmpty() const { return m_termsWithDetails.empty(); }
-int TermsWithAssociation::getSize() const { return m_termsWithDetails.size(); }
-
 BaseTerm const& TermsWithAssociation::getFirstTerm() const {
     return getBaseTermConstReferenceFromUniquePointer(m_termsWithDetails.front().baseTermPointer);
 }
@@ -66,7 +63,8 @@ TermAssociationType TermsWithAssociation::getFirstAssociationType() const {
 }
 
 TermsWithDetails const& TermsWithAssociation::getTermsWithDetails() const { return m_termsWithDetails; }
-TermsWithDetails& TermsWithAssociation::getTermsWithDetailsReference() { return m_termsWithDetails; }
+int TermsWithAssociation::getSize() const { return m_termsWithDetails.size(); }
+bool TermsWithAssociation::isEmpty() const { return m_termsWithDetails.empty(); }
 void TermsWithAssociation::clear() { m_termsWithDetails.clear(); }
 
 void TermsWithAssociation::sort(bool const dontSortFirstItem) {
@@ -115,5 +113,7 @@ void TermsWithAssociation::reverseTheAssociationOfTheTerms() {
         termWithDetails.reverseAssociation();
     }
 }
+
+TermsWithDetails& TermsWithAssociation::getTermsWithDetailsReference() { return m_termsWithDetails; }
 
 }  // namespace alba::algebra

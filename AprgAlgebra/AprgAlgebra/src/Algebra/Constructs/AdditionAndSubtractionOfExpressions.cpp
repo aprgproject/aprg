@@ -32,7 +32,6 @@ AdditionAndSubtractionOfExpressions::AdditionAndSubtractionOfExpressions(TermsWi
     putTermsWithDetails(termsWithDetails);
 }
 
-int AdditionAndSubtractionOfExpressions::getSize() const { return min(m_expressions.size(), m_associations.size()); }
 Expressions const& AdditionAndSubtractionOfExpressions::getExpressions() const { return m_expressions; }
 TermAssociationTypes const& AdditionAndSubtractionOfExpressions::getAssociations() const { return m_associations; }
 
@@ -45,12 +44,7 @@ TermsWithDetails AdditionAndSubtractionOfExpressions::getAsTermsWithDetails() co
     return result;
 }
 
-Term AdditionAndSubtractionOfExpressions::getCombinedTerm() {
-    Term combinedTerm;
-    combineExpressionsIfPossible();
-    accumulateTermsForAdditionAndSubtraction(combinedTerm, getAsTermsWithDetails());
-    return combinedTerm;
-}
+int AdditionAndSubtractionOfExpressions::getSize() const { return min(m_expressions.size(), m_associations.size()); }
 
 void AdditionAndSubtractionOfExpressions::putAsAddition(Expression const& expression) {
     putItem(expression, TermAssociationType::Positive);
@@ -84,20 +78,11 @@ void AdditionAndSubtractionOfExpressions::combineExpressionsIfPossible() {
     }
 }
 
-bool AdditionAndSubtractionOfExpressions::canBeMerged(
-    Term const& mergePart1, Term const& mergePart2, Term const& commonPart1, Term const& commonPart2) {
-    return commonPart1 == commonPart2 && canBeMergedInAMonomialByAdditionOrSubtraction(mergePart1, mergePart2);
-}
-
-Term AdditionAndSubtractionOfExpressions::mergeTerms(
-    Term const& mergePart1, Term const& mergePart2, TermAssociationType const association1,
-    TermAssociationType const association2) {
-    Term result;
-    TermsWithDetails termsWithDetailsToMerge;
-    termsWithDetailsToMerge.emplace_back(mergePart1, association1);
-    termsWithDetailsToMerge.emplace_back(mergePart2, association2);
-    accumulateTermsForAdditionAndSubtraction(result, termsWithDetailsToMerge);
-    return result;
+Term AdditionAndSubtractionOfExpressions::getCombinedTerm() {
+    Term combinedTerm;
+    combineExpressionsIfPossible();
+    accumulateTermsForAdditionAndSubtraction(combinedTerm, getAsTermsWithDetails());
+    return combinedTerm;
 }
 
 void AdditionAndSubtractionOfExpressions::prepareCommonParts(Terms& commonParts) {
@@ -131,6 +116,22 @@ void AdditionAndSubtractionOfExpressions::retrieveCommonPart(Term& commonPart, E
     } else {
         commonPart = convertExpressionToSimplestTerm(expression);
     }
+}
+
+Term AdditionAndSubtractionOfExpressions::mergeTerms(
+    Term const& mergePart1, Term const& mergePart2, TermAssociationType const association1,
+    TermAssociationType const association2) {
+    Term result;
+    TermsWithDetails termsWithDetailsToMerge;
+    termsWithDetailsToMerge.emplace_back(mergePart1, association1);
+    termsWithDetailsToMerge.emplace_back(mergePart2, association2);
+    accumulateTermsForAdditionAndSubtraction(result, termsWithDetailsToMerge);
+    return result;
+}
+
+bool AdditionAndSubtractionOfExpressions::canBeMerged(
+    Term const& mergePart1, Term const& mergePart2, Term const& commonPart1, Term const& commonPart2) {
+    return commonPart1 == commonPart2 && canBeMergedInAMonomialByAdditionOrSubtraction(mergePart1, mergePart2);
 }
 
 bool AdditionAndSubtractionOfExpressions::doAllSizesMatch(Terms const& mergeParts, Terms const& commonParts) const {

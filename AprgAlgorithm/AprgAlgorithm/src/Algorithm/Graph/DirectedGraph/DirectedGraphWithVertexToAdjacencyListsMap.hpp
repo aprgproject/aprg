@@ -17,20 +17,16 @@ public:
     using AdjacencyList = SetOfVertices;
     using AdjacencyLists = std::map<Vertex, AdjacencyList>;
     DirectedGraphWithVertexToAdjacencyListsMap() = default;
-    [[nodiscard]] bool isEmpty() const override { return m_adjacencyLists.empty(); }
 
-    [[nodiscard]] bool isDirectlyConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
-        bool result(false);
-        auto it = m_adjacencyLists.find(sourceVertex);
-        if (it != m_adjacencyLists.cend()) {
-            AdjacencyList const& adjacencyList(it->second);
-            result = adjacencyList.find(destinationVertex) != adjacencyList.cend();
+    [[nodiscard]] Edges getEdges() const override {
+        Edges result;
+        for (auto const& [sourceVertex, adjacencyList] : m_adjacencyLists) {
+            for (Vertex const& destinationVertex : adjacencyList) {
+                result.emplace_back(sourceVertex, destinationVertex);
+            }
         }
         return result;
     }
-
-    [[nodiscard]] int getNumberOfVertices() const override { return getUniqueVertices().size(); }
-    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
 
     [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
         Vertices result(false);
@@ -48,12 +44,16 @@ public:
         return Vertices(uniqueVertices.cbegin(), uniqueVertices.cend());
     }
 
-    [[nodiscard]] Edges getEdges() const override {
-        Edges result;
-        for (auto const& [sourceVertex, adjacencyList] : m_adjacencyLists) {
-            for (Vertex const& destinationVertex : adjacencyList) {
-                result.emplace_back(sourceVertex, destinationVertex);
-            }
+    [[nodiscard]] int getNumberOfVertices() const override { return getUniqueVertices().size(); }
+    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
+    [[nodiscard]] bool isEmpty() const override { return m_adjacencyLists.empty(); }
+
+    [[nodiscard]] bool isDirectlyConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
+        bool result(false);
+        auto it = m_adjacencyLists.find(sourceVertex);
+        if (it != m_adjacencyLists.cend()) {
+            AdjacencyList const& adjacencyList(it->second);
+            result = adjacencyList.find(destinationVertex) != adjacencyList.cend();
         }
         return result;
     }

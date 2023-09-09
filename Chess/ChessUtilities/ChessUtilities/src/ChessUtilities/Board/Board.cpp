@@ -37,70 +37,7 @@ bool Board::operator==(Board const& other) const {
 }
 
 bool Board::operator!=(Board const& other) const { return !operator==(other); }
-bool Board::isEmptyAt(Coordinate const& coordinate) const { return getPieceAt(coordinate).isEmpty(); }
-bool Board::isACaptureMove(Move const& move) const { return !isEmptyAt(move.second); }
-
-bool Board::isAPromotionMove(Move const& move) const {
-    return PieceType::Pawn == getPieceAt(move.first).getType() && (move.second.getY() == 0 || move.second.getY() == 7);
-}
-
-bool Board::isACastlingMove(Move const& move) const {
-    MovePair kingAndRookCastlingMovePair(getMatchingCastlingKingAndRookMovePair(move));
-    return kingAndRookCastlingMovePair.first == move;
-}
-
-bool Board::isAPossibleMove(Move const& move) const { return isPossibleMoveBasedFromPieceType(move); }
-
-bool Board::canBeCaptured(Coordinate const& endpoint) const {
-    Piece pieceAtEnd(getPieceAt(endpoint));
-    bool result(false);
-    if (!pieceAtEnd.isEmpty()) {
-        PieceColor opponentsColor(getOppositeColor(pieceAtEnd.getColor()));
-        result = areThereAnyAttacksToThis(endpoint, opponentsColor);
-    }
-    return result;
-}
-
-bool Board::areThereAnyMovesToThis(Coordinate const& endpoint, PieceColor const& moveColor) const {
-    return !getMovesToThis(endpoint, moveColor, 1U).empty();
-}
-
-bool Board::areThereAnyAttacksToThis(Coordinate const& endpoint, PieceColor const& moveColor) const {
-    return !getAttacksToThis(endpoint, moveColor, 1U).empty();
-}
-
-bool Board::hasOnlyOneMoveToThis(Coordinate const& endpoint, PieceColor const& moveColor) const {
-    auto numberOfMoves = getMovesToThis(endpoint, moveColor, 2U).size();
-    return numberOfMoves == 1;
-}
-
 BoardOrientation Board::getOrientation() const { return m_orientation; }
-Board::PieceGrid const& Board::getPieceGrid() const { return m_pieceGrid; }
-
-Move Board::getMoveUsingUciNotation(string const& text) const {
-    // Source: https://en.wikipedia.org/wiki/Universal_Chess_Interface
-    Move result{};
-    if (text.size() == 4 || text.size() == 5) {
-        // 5 is for promotion
-        result = {
-            getCoordinateFromAlgebraicNotation(text.substr(0, 2)),
-            getCoordinateFromAlgebraicNotation(text.substr(2, 2))};
-    }
-    return result;
-}
-
-Move Board::getMoveUsingAlgebraicNotation(string const& text, PieceColor const moveColor) const {
-    // Source: https://en.wikipedia.org/wiki/Algebraic_text_(chess)
-    Move result{};
-
-    CastleType castleType(getCastleTypeWithAlgebraicNotation(text));
-    if (CastleType::KingSideCastle == castleType || CastleType::QueenSideCastle == castleType) {
-        result = getCastleMove(castleType, moveColor);
-    } else {
-        result = getNonCastleMoveWithAlgebraicNotation(text, moveColor);
-    }
-    return result;
-}
 
 Coordinate Board::getCoordinateFromAlgebraicNotation(string const& text) const {
     Coordinate result{};
@@ -110,14 +47,6 @@ Coordinate Board::getCoordinateFromAlgebraicNotation(string const& text) const {
         if (isAToH(letterChar) && is1To8(numberChar)) {
             result = getCorrectCoordinateFromAlgebraicNotation(letterChar - 'a', numberChar - '1');
         }
-    }
-    return result;
-}
-
-Piece Board::getPieceAt(Coordinate const& coordinate) const {
-    Piece result;
-    if ((isCoordinateWithinTheBoard(coordinate))) {
-        result = m_pieceGrid[getGridIndex(coordinate.getX(), coordinate.getY())];
     }
     return result;
 }
@@ -199,6 +128,41 @@ Exchange Board::getExchangeAt(Coordinate const& coordinate) const {
     }
     return {exchangeValue, exchangeCount};
 }
+
+Move Board::getMoveUsingUciNotation(string const& text) const {
+    // Source: https://en.wikipedia.org/wiki/Universal_Chess_Interface
+    Move result{};
+    if (text.size() == 4 || text.size() == 5) {
+        // 5 is for promotion
+        result = {
+            getCoordinateFromAlgebraicNotation(text.substr(0, 2)),
+            getCoordinateFromAlgebraicNotation(text.substr(2, 2))};
+    }
+    return result;
+}
+
+Move Board::getMoveUsingAlgebraicNotation(string const& text, PieceColor const moveColor) const {
+    // Source: https://en.wikipedia.org/wiki/Algebraic_text_(chess)
+    Move result{};
+
+    CastleType castleType(getCastleTypeWithAlgebraicNotation(text));
+    if (CastleType::KingSideCastle == castleType || CastleType::QueenSideCastle == castleType) {
+        result = getCastleMove(castleType, moveColor);
+    } else {
+        result = getNonCastleMoveWithAlgebraicNotation(text, moveColor);
+    }
+    return result;
+}
+
+Piece Board::getPieceAt(Coordinate const& coordinate) const {
+    Piece result;
+    if ((isCoordinateWithinTheBoard(coordinate))) {
+        result = m_pieceGrid[getGridIndex(coordinate.getX(), coordinate.getY())];
+    }
+    return result;
+}
+
+Board::PieceGrid const& Board::getPieceGrid() const { return m_pieceGrid; }
 
 string Board::getAlgebraicNotationOfCoordinate(Coordinate const& coordinate) const {
     string result;
@@ -314,6 +278,43 @@ string Board::getCastlingPartOfFenString() const {
     return result;
 }
 
+bool Board::isEmptyAt(Coordinate const& coordinate) const { return getPieceAt(coordinate).isEmpty(); }
+bool Board::isACaptureMove(Move const& move) const { return !isEmptyAt(move.second); }
+
+bool Board::isAPromotionMove(Move const& move) const {
+    return PieceType::Pawn == getPieceAt(move.first).getType() && (move.second.getY() == 0 || move.second.getY() == 7);
+}
+
+bool Board::isACastlingMove(Move const& move) const {
+    MovePair kingAndRookCastlingMovePair(getMatchingCastlingKingAndRookMovePair(move));
+    return kingAndRookCastlingMovePair.first == move;
+}
+
+bool Board::isAPossibleMove(Move const& move) const { return isPossibleMoveBasedFromPieceType(move); }
+
+bool Board::canBeCaptured(Coordinate const& endpoint) const {
+    Piece pieceAtEnd(getPieceAt(endpoint));
+    bool result(false);
+    if (!pieceAtEnd.isEmpty()) {
+        PieceColor opponentsColor(getOppositeColor(pieceAtEnd.getColor()));
+        result = areThereAnyAttacksToThis(endpoint, opponentsColor);
+    }
+    return result;
+}
+
+bool Board::areThereAnyMovesToThis(Coordinate const& endpoint, PieceColor const& moveColor) const {
+    return !getMovesToThis(endpoint, moveColor, 1U).empty();
+}
+
+bool Board::areThereAnyAttacksToThis(Coordinate const& endpoint, PieceColor const& moveColor) const {
+    return !getAttacksToThis(endpoint, moveColor, 1U).empty();
+}
+
+bool Board::hasOnlyOneMoveToThis(Coordinate const& endpoint, PieceColor const& moveColor) const {
+    auto numberOfMoves = getMovesToThis(endpoint, moveColor, 2U).size();
+    return numberOfMoves == 1;
+}
+
 void Board::setOrientation(BoardOrientation const orientation) { m_orientation = orientation; }
 
 void Board::setPieceAt(Coordinate const& coordinate, Piece const& piece) {
@@ -336,6 +337,57 @@ void Board::move(Move const& move) {
         changePieceGridWithMove(move);
     }
 }
+
+void Board::updateAttackDefendCount(
+    Board::AttackDefendCount& count, PieceColor const pieceColor, PieceColor const sameColor,
+    PieceColor const oppositeColor) {
+    if (sameColor == pieceColor) {
+        count.defend++;
+    } else if (oppositeColor == pieceColor) {
+        count.attack++;
+    }
+}
+
+Board::CastleType Board::getCastleTypeWithAlgebraicNotation(string const& textInAlgebraicNotation) {
+    return textInAlgebraicNotation == "O-O"     ? CastleType::KingSideCastle
+           : textInAlgebraicNotation == "O-O-O" ? CastleType::QueenSideCastle
+                                                : CastleType::NotACastle;
+}
+
+Coordinate Board::getCoordinateFromGridIndex(int const gridIndex) {
+    return Coordinate{gridIndex % CHESS_SIDE_SIZE, gridIndex / CHESS_SIDE_SIZE};
+}
+
+CoordinateDataType Board::reverse(CoordinateDataType const value) { return 7 - value; }
+
+CoordinateDataType Board::getOneIncrement(CoordinateDataType const coordinateDataType) {
+    return coordinateDataType > 0 ? 1 : coordinateDataType < 0 ? -1 : 0;
+}
+
+Coordinates Board::getLDeltaCoordinates() {
+    return Coordinates{{-2, -1}, {-2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}, {2, -1}, {2, 1}};
+}
+
+Coordinates Board::getDiagonalIncrementDeltaCoordinates() { return Coordinates{{-1, -1}, {-1, 1}, {1, -1}, {1, 1}}; }
+Coordinates Board::getStraightIncrementDeltaCoordinates() { return Coordinates{{0, -1}, {0, 1}, {-1, 0}, {1, 0}}; }
+
+Coordinates Board::getOneStepDeltaCoordinates() {
+    return Coordinates{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
+}
+
+Board::PieceGrid Board::getInitialValues(BoardOrientation const& inputType) {
+    if (BoardOrientation::BlackUpWhiteDown == inputType) {
+        return {12, 10, 11, 13, 14, 11, 10, 12, 9, 9, 9, 9, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 4, 2, 3, 5, 6, 3, 2, 4};
+    }
+    if (BoardOrientation::WhiteUpBlackDown == inputType) {
+        return {4, 2, 3, 6, 5, 3, 2, 4, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 9, 9, 9, 9, 9, 9, 9, 12, 10, 11, 14, 13, 11, 10, 12};
+    }
+    return {};
+}
+
+int Board::getGridIndex(int const x, int const y) { return (y * CHESS_SIDE_SIZE) + x; }
 
 bool Board::isPieceEmptyOrHasOpposingColors(Piece const& piece, PieceColor const color) {
     return piece.isEmpty() || areOpposingColors(color, piece.getColor());
@@ -378,55 +430,406 @@ bool Board::doesAllCellsInBetweenSatisfyTheCondition(
     return cellInBetween == endpoint;
 }
 
-int Board::getGridIndex(int const x, int const y) { return (y * CHESS_SIDE_SIZE) + x; }
-
-Board::PieceGrid Board::getInitialValues(BoardOrientation const& inputType) {
-    if (BoardOrientation::BlackUpWhiteDown == inputType) {
-        return {12, 10, 11, 13, 14, 11, 10, 12, 9, 9, 9, 9, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 4, 2, 3, 5, 6, 3, 2, 4};
+Coordinate Board::getCorrectCoordinateFromAlgebraicNotation(
+    CoordinateDataType const x, CoordinateDataType const y) const {
+    Coordinate result{};
+    if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
+        result = Coordinate(x, reverse(y));
+    } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
+        result = Coordinate(reverse(x), y);
     }
-    if (BoardOrientation::WhiteUpBlackDown == inputType) {
-        return {4, 2, 3, 6, 5, 3, 2, 4, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 9, 9, 9, 9, 9, 9, 9, 12, 10, 11, 14, 13, 11, 10, 12};
+    return result;
+}
+
+CoordinateDataType Board::getXInCorrectOrientation(CoordinateDataType const x) const {
+    CoordinateDataType result{};
+    if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
+        result = x;
+    } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
+        result = reverse(x);
+    }
+    return result;
+}
+
+CoordinateDataType Board::getYInCorrectOrientation(CoordinateDataType const y) const {
+    CoordinateDataType result{};
+    if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
+        result = reverse(y);
+    } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
+        result = y;
+    }
+    return result;
+}
+
+Coordinates Board::getPawnCapturesDeltaCoordinates(PieceColor const moveColor) const {
+    Coordinates result;
+    if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
+        if (PieceColor::White == moveColor) {
+            result.emplace_back(-1, -1);
+            result.emplace_back(1, -1);
+        } else if (PieceColor::Black == moveColor) {
+            result.emplace_back(-1, 1);
+            result.emplace_back(1, 1);
+        }
+    } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
+        if (PieceColor::White == moveColor) {
+            result.emplace_back(-1, 1);
+            result.emplace_back(1, 1);
+        } else if (PieceColor::Black == moveColor) {
+            result.emplace_back(-1, -1);
+            result.emplace_back(1, -1);
+        }
+    }
+    return result;
+}
+
+Coordinates Board::getPawnReverseCapturesDeltaCoordinates(PieceColor const moveColor) const {
+    Coordinates result;
+    if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
+        if (PieceColor::White == moveColor) {
+            result.emplace_back(-1, 1);
+            result.emplace_back(1, 1);
+        } else if (PieceColor::Black == moveColor) {
+            result.emplace_back(-1, -1);
+            result.emplace_back(1, -1);
+        }
+    } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
+        if (PieceColor::White == moveColor) {
+            result.emplace_back(-1, -1);
+            result.emplace_back(1, -1);
+        } else if (PieceColor::Black == moveColor) {
+            result.emplace_back(-1, 1);
+            result.emplace_back(1, 1);
+        }
+    }
+    return result;
+}
+
+Board::DeltaRange Board::getPawnNonCaptureDeltaRange(Coordinate const& startpoint, PieceColor const moveColor) const {
+    if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
+        if (PieceColor::White == moveColor) {
+            if (6 == startpoint.getY()) {
+                return DeltaRange{-1, -3};
+            }
+            return DeltaRange{-1, -2};
+        }
+        if (PieceColor::Black == moveColor) {
+            if (1 == startpoint.getY()) {
+                return DeltaRange{1, 3};
+            }
+            return DeltaRange{1, 2};
+        }
+    } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
+        if (PieceColor::White == moveColor) {
+            if (1 == startpoint.getY()) {
+                return DeltaRange{1, 3};
+            }
+            return DeltaRange{1, 2};
+        }
+        if (PieceColor::Black == moveColor) {
+            if (6 == startpoint.getY()) {
+                return DeltaRange{-1, -3};
+            }
+            return DeltaRange{-1, -2};
+        }
     }
     return {};
 }
 
-Coordinates Board::getLDeltaCoordinates() {
-    return Coordinates{{-2, -1}, {-2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}, {2, -1}, {2, 1}};
-}
-
-Coordinates Board::getDiagonalIncrementDeltaCoordinates() { return Coordinates{{-1, -1}, {-1, 1}, {1, -1}, {1, 1}}; }
-Coordinates Board::getStraightIncrementDeltaCoordinates() { return Coordinates{{0, -1}, {0, 1}, {-1, 0}, {1, 0}}; }
-
-Coordinates Board::getOneStepDeltaCoordinates() {
-    return Coordinates{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
-}
-
-Coordinate Board::getCoordinateFromGridIndex(int const gridIndex) {
-    return Coordinate{gridIndex % CHESS_SIDE_SIZE, gridIndex / CHESS_SIDE_SIZE};
-}
-
-CoordinateDataType Board::reverse(CoordinateDataType const value) { return 7 - value; }
-
-CoordinateDataType Board::getOneIncrement(CoordinateDataType const coordinateDataType) {
-    return coordinateDataType > 0 ? 1 : coordinateDataType < 0 ? -1 : 0;
-}
-
-Board::CastleType Board::getCastleTypeWithAlgebraicNotation(string const& textInAlgebraicNotation) {
-    return textInAlgebraicNotation == "O-O"     ? CastleType::KingSideCastle
-           : textInAlgebraicNotation == "O-O-O" ? CastleType::QueenSideCastle
-                                                : CastleType::NotACastle;
-}
-
-void Board::updateAttackDefendCount(
-    Board::AttackDefendCount& count, PieceColor const pieceColor, PieceColor const sameColor,
-    PieceColor const oppositeColor) {
-    if (sameColor == pieceColor) {
-        count.defend++;
-    } else if (oppositeColor == pieceColor) {
-        count.attack++;
+Board::DeltaRange Board::getPawnReverseNonCaptureDeltaRange(
+    Coordinate const& endpoint, PieceColor const moveColor) const {
+    if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
+        if (PieceColor::White == moveColor) {
+            if (4 == endpoint.getY()) {
+                return DeltaRange{1, 3};
+            }
+            return DeltaRange{1, 2};
+        }
+        if (PieceColor::Black == moveColor) {
+            if (3 == endpoint.getY()) {
+                return DeltaRange{-1, -3};
+            }
+            return DeltaRange{-1, -2};
+        }
+    } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
+        if (PieceColor::White == moveColor) {
+            if (3 == endpoint.getY()) {
+                return DeltaRange{-1, -3};
+            }
+            return DeltaRange{-1, -2};
+        }
+        if (PieceColor::Black == moveColor) {
+            if (4 == endpoint.getY()) {
+                return DeltaRange{1, 3};
+            }
+            return DeltaRange{1, 2};
+        }
     }
+    return {};
+}
+
+Move Board::getFirstMoveThatFits(
+    Moves const& possibleMoves, PieceType const pieceType, optional<CoordinateDataType> const& xLimitation,
+    optional<CoordinateDataType> const& yLimitation) const {
+    Move result{};
+    for (Move const& possibleMove : possibleMoves) {
+        Piece pieceAtStart(getPieceAt(possibleMove.first));
+        if (pieceType == pieceAtStart.getType()) {
+            if (xLimitation) {
+                if (xLimitation.value() == possibleMove.first.getX()) {
+                    result = possibleMove;
+                    break;
+                }
+            } else if (yLimitation) {
+                if (yLimitation.value() == possibleMove.first.getY()) {
+                    result = possibleMove;
+                    break;
+                }
+            } else {
+                result = possibleMove;
+                break;
+            }
+        }
+    }
+    return result;
+}
+
+Move Board::getCastleMove(CastleType const castleType, PieceColor const moveColor) const {
+    Move result{};
+    CoordinateDataType rookMoveDistance = CastleType::KingSideCastle == castleType    ? 2
+                                          : CastleType::QueenSideCastle == castleType ? 3
+                                                                                      : 0;
+    MovePairs castlingPairs(getCastlingKingAndRookMovePairs(moveColor));
+    for (MovePair const& castlingPair : castlingPairs) {
+        Move const& kingMove(castlingPair.first);
+        Move const& rookMove(castlingPair.second);
+        if (getPositiveDelta(rookMove.first.getX(), rookMove.second.getX()) == rookMoveDistance) {
+            result = kingMove;
+        }
+    }
+    return result;
+}
+
+MovePair Board::getMatchingCastlingKingAndRookMovePair(Move const& kingMoveThatShouldMatch) const {
+    MovePair result{};
+    Piece pieceAtKing(getPieceAt(kingMoveThatShouldMatch.first));
+    MovePairs kingAndRookMovePairs(getCastlingKingAndRookMovePairs(pieceAtKing.getColor()));
+    auto it = find_if(
+        kingAndRookMovePairs.cbegin(), kingAndRookMovePairs.cend(),
+        [&kingMoveThatShouldMatch](MovePair const& kingAndRookMovePair) {
+            return kingAndRookMovePair.first == kingMoveThatShouldMatch;
+        });
+    if (it != kingAndRookMovePairs.cend()) {
+        result = *it;
+    }
+    return result;
+}
+
+MovePairs Board::getCastlingKingAndRookMovePairs(PieceColor const moveColor) const {
+    MovePairs result;
+    if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
+        if (PieceColor::Black == moveColor) {
+            Piece pieceAtKing(getPieceAt(Coordinate(4, 0)));
+            Piece pieceAtQueenSideRook(getPieceAt(Coordinate(0, 0)));
+            Piece pieceAtKingSideRook(getPieceAt(Coordinate(7, 0)));
+            if (PieceColorAndType::BlackKing == pieceAtKing.getColorAndType() &&
+                PieceColorAndType::BlackRook == pieceAtQueenSideRook.getColorAndType()) {
+                result.emplace_back(Move{{4, 0}, {2, 0}}, Move{{0, 0}, {3, 0}});
+            }
+            if (PieceColorAndType::BlackKing == pieceAtKing.getColorAndType() &&
+                PieceColorAndType::BlackRook == pieceAtKingSideRook.getColorAndType()) {
+                result.emplace_back(Move{{4, 0}, {6, 0}}, Move{{7, 0}, {5, 0}});
+            }
+        } else if (PieceColor::White == moveColor) {
+            Piece pieceAtKing(getPieceAt(Coordinate(4, 7)));
+            Piece pieceAtQueenSideRook(getPieceAt(Coordinate(0, 7)));
+            Piece pieceAtKingSideRook(getPieceAt(Coordinate(7, 7)));
+            if (PieceColorAndType::WhiteKing == pieceAtKing.getColorAndType() &&
+                PieceColorAndType::WhiteRook == pieceAtQueenSideRook.getColorAndType()) {
+                result.emplace_back(Move{{4, 7}, {2, 7}}, Move{{0, 7}, {3, 7}});
+            }
+            if (PieceColorAndType::WhiteKing == pieceAtKing.getColorAndType() &&
+                PieceColorAndType::WhiteRook == pieceAtKingSideRook.getColorAndType()) {
+                result.emplace_back(Move{{4, 7}, {6, 7}}, Move{{7, 7}, {5, 7}});
+            }
+        }
+    } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
+        if (PieceColor::White == moveColor) {
+            Piece pieceAtKing(getPieceAt(Coordinate(3, 0)));
+            Piece pieceAtQueenSideRook(getPieceAt(Coordinate(0, 0)));
+            Piece pieceAtKingSideRook(getPieceAt(Coordinate(7, 0)));
+            if (PieceColorAndType::WhiteKing == pieceAtKing.getColorAndType() &&
+                PieceColorAndType::WhiteRook == pieceAtQueenSideRook.getColorAndType()) {
+                result.emplace_back(Move{{3, 0}, {1, 0}}, Move{{0, 0}, {2, 0}});
+            }
+            if (PieceColorAndType::WhiteKing == pieceAtKing.getColorAndType() &&
+                PieceColorAndType::WhiteRook == pieceAtKingSideRook.getColorAndType()) {
+                result.emplace_back(Move{{3, 0}, {5, 0}}, Move{{7, 0}, {4, 0}});
+            }
+        } else if (PieceColor::Black == moveColor) {
+            Piece pieceAtKing(getPieceAt(Coordinate(3, 7)));
+            Piece pieceAtQueenSideRook(getPieceAt(Coordinate(0, 7)));
+            Piece pieceAtKingSideRook(getPieceAt(Coordinate(7, 7)));
+            if (PieceColorAndType::BlackKing == pieceAtKing.getColorAndType() &&
+                PieceColorAndType::BlackRook == pieceAtQueenSideRook.getColorAndType()) {
+                result.emplace_back(Move{{3, 7}, {1, 7}}, Move{{0, 7}, {2, 7}});
+            }
+            if (PieceColorAndType::BlackKing == pieceAtKing.getColorAndType() &&
+                PieceColorAndType::BlackRook == pieceAtKingSideRook.getColorAndType()) {
+                result.emplace_back(Move{{3, 7}, {5, 7}}, Move{{7, 7}, {4, 7}});
+            }
+        }
+    }
+    return result;
+}
+
+Moves Board::getCandidatesMoves(
+    Coordinate const& endpoint, PieceColor const moveColor, PieceType const pieceType) const {
+    Moves result;
+    Piece pieceAtEnd(getPieceAt(endpoint));
+    switch (pieceType) {
+        case PieceType::Pawn: {
+            if (pieceAtEnd.isEmpty()) {
+                retrievePawnReverseNonCapturesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
+                retrievePawnEnPassantReverseToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
+            } else if (areOpposingColors(moveColor, pieceAtEnd.getColor())) {  // capture only
+                retrievePawnReverseCapturesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
+            }
+            break;
+        }
+        case PieceType::Knight: {
+            if (isPieceEmptyOrHasOpposingColors(pieceAtEnd, moveColor)) {  // non capture and capture
+                retrieveKnightMovesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
+            }
+            break;
+        }
+        case PieceType::Bishop: {
+            if (isPieceEmptyOrHasOpposingColors(pieceAtEnd, moveColor)) {  // non capture and capture
+                retrieveDiagonalMovesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
+            }
+            break;
+        }
+        case PieceType::Rook: {
+            if (isPieceEmptyOrHasOpposingColors(pieceAtEnd, moveColor)) {  // non capture and capture
+                retrieveStraightMovesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
+            }
+            break;
+        }
+        case PieceType::Queen: {
+            if (isPieceEmptyOrHasOpposingColors(pieceAtEnd, moveColor)) {  // non capture and capture
+                retrieveDiagonalMovesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
+                retrieveStraightMovesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
+            }
+            break;
+        }
+        case PieceType::King: {
+            if (isPieceEmptyOrHasOpposingColors(pieceAtEnd, moveColor)) {  // non capture and capture
+                retrieveKingOneStepMovesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
+            }
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+    return result;
+}
+
+Board::NotationDetailsOfMove Board::determineNotationDetailsOfMove(string const& textInAlgebraicNotation) const {
+    NotationDetailsOfMove result{};
+    enum class State { LastY, LastX, Capture, FirstY, FirstX, PiecePart, Finish };
+
+    State state(State::LastY);
+    for (auto it = textInAlgebraicNotation.crbegin(); it != textInAlgebraicNotation.crend();) {
+        char c = *it;
+        switch (state) {
+            case State::LastY: {
+                if (is1To8(c)) {
+                    result.lastY = getYInCorrectOrientation(c - '1');
+                    state = State::LastX;
+                }
+                ++it;
+                break;
+            }
+            case State::LastX: {
+                if (isAToH(c)) {
+                    result.lastX = getXInCorrectOrientation(c - 'a');
+                    ++it;
+                }
+                state = State::Capture;
+                break;
+            }
+            case State::Capture: {
+                if (c == 'x') {
+                    ++it;
+                }
+                state = State::FirstY;
+                break;
+            }
+            case State::FirstY: {
+                if (is1To8(c)) {
+                    result.firstY = getYInCorrectOrientation(c - '1');
+                    ++it;
+                }
+                state = State::FirstX;
+                break;
+            }
+            case State::FirstX: {
+                if (isAToH(c)) {
+                    result.firstX = getXInCorrectOrientation(c - 'a');
+                    ++it;
+                }
+                state = State::PiecePart;
+                break;
+            }
+            case State::PiecePart: {
+                switch (c) {
+                    case 'N':
+                        result.pieceType = PieceType::Knight;
+                        break;
+                    case 'B':
+                        result.pieceType = PieceType::Bishop;
+                        break;
+                    case 'R':
+                        result.pieceType = PieceType::Rook;
+                        break;
+                    case 'Q':
+                        result.pieceType = PieceType::Queen;
+                        break;
+                    case 'K':
+                        result.pieceType = PieceType::King;
+                        break;
+                    default:
+                        result.pieceType = PieceType::Pawn;
+                        break;
+                }
+                state = State::Finish;
+                break;
+            }
+            case State::Finish: {
+                it = textInAlgebraicNotation.crend();
+                break;
+            }
+        }
+    }
+    if (result.pieceType == PieceType::Empty) {
+        result.pieceType = PieceType::Pawn;
+    }
+    return result;
+}
+
+int Board::getNumberOfWaysToBlockPath(
+    Coordinate const& startpoint, Coordinate const& endpoint, PieceColor const blockingPieceColor,
+    int const maxSize) const {
+    int result{};
+    Coordinate moveDelta = endpoint - startpoint;
+    Coordinate oneIncrementDelta(getOneIncrement(moveDelta.getX()), getOneIncrement(moveDelta.getY()));
+    Coordinate cellInBetween = startpoint + oneIncrementDelta;
+    while (isCoordinateWithinTheBoard(cellInBetween) && endpoint != cellInBetween) {
+        cellInBetween += oneIncrementDelta;
+        result += getMovesToThis(cellInBetween, blockingPieceColor, maxSize - result).size();
+    }
+    return result;
 }
 
 bool Board::isPossibleMoveBasedFromPieceType(Move const& move) const {
@@ -589,408 +992,6 @@ bool Board::isSafeToCastleInBetween(Coordinate const& startpoint, Coordinate con
     return doesAllCellsInBetweenSatisfyTheCondition(startpoint, endpoint, [&](Coordinate const& cellInBetween) {
         return getPieceAt(cellInBetween).isEmpty() && !areThereAnyAttacksToThis(cellInBetween, opponentsColor);
     });
-}
-
-int Board::getNumberOfWaysToBlockPath(
-    Coordinate const& startpoint, Coordinate const& endpoint, PieceColor const blockingPieceColor,
-    int const maxSize) const {
-    int result{};
-    Coordinate moveDelta = endpoint - startpoint;
-    Coordinate oneIncrementDelta(getOneIncrement(moveDelta.getX()), getOneIncrement(moveDelta.getY()));
-    Coordinate cellInBetween = startpoint + oneIncrementDelta;
-    while (isCoordinateWithinTheBoard(cellInBetween) && endpoint != cellInBetween) {
-        cellInBetween += oneIncrementDelta;
-        result += getMovesToThis(cellInBetween, blockingPieceColor, maxSize - result).size();
-    }
-    return result;
-}
-
-Moves Board::getCandidatesMoves(
-    Coordinate const& endpoint, PieceColor const moveColor, PieceType const pieceType) const {
-    Moves result;
-    Piece pieceAtEnd(getPieceAt(endpoint));
-    switch (pieceType) {
-        case PieceType::Pawn: {
-            if (pieceAtEnd.isEmpty()) {
-                retrievePawnReverseNonCapturesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
-                retrievePawnEnPassantReverseToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
-            } else if (areOpposingColors(moveColor, pieceAtEnd.getColor())) {  // capture only
-                retrievePawnReverseCapturesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
-            }
-            break;
-        }
-        case PieceType::Knight: {
-            if (isPieceEmptyOrHasOpposingColors(pieceAtEnd, moveColor)) {  // non capture and capture
-                retrieveKnightMovesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
-            }
-            break;
-        }
-        case PieceType::Bishop: {
-            if (isPieceEmptyOrHasOpposingColors(pieceAtEnd, moveColor)) {  // non capture and capture
-                retrieveDiagonalMovesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
-            }
-            break;
-        }
-        case PieceType::Rook: {
-            if (isPieceEmptyOrHasOpposingColors(pieceAtEnd, moveColor)) {  // non capture and capture
-                retrieveStraightMovesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
-            }
-            break;
-        }
-        case PieceType::Queen: {
-            if (isPieceEmptyOrHasOpposingColors(pieceAtEnd, moveColor)) {  // non capture and capture
-                retrieveDiagonalMovesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
-                retrieveStraightMovesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
-            }
-            break;
-        }
-        case PieceType::King: {
-            if (isPieceEmptyOrHasOpposingColors(pieceAtEnd, moveColor)) {  // non capture and capture
-                retrieveKingOneStepMovesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
-            }
-            break;
-        }
-        default: {
-            break;
-        }
-    }
-    return result;
-}
-
-Board::NotationDetailsOfMove Board::determineNotationDetailsOfMove(string const& textInAlgebraicNotation) const {
-    NotationDetailsOfMove result{};
-    enum class State { LastY, LastX, Capture, FirstY, FirstX, PiecePart, Finish };
-
-    State state(State::LastY);
-    for (auto it = textInAlgebraicNotation.crbegin(); it != textInAlgebraicNotation.crend();) {
-        char c = *it;
-        switch (state) {
-            case State::LastY: {
-                if (is1To8(c)) {
-                    result.lastY = getYInCorrectOrientation(c - '1');
-                    state = State::LastX;
-                }
-                ++it;
-                break;
-            }
-            case State::LastX: {
-                if (isAToH(c)) {
-                    result.lastX = getXInCorrectOrientation(c - 'a');
-                    ++it;
-                }
-                state = State::Capture;
-                break;
-            }
-            case State::Capture: {
-                if (c == 'x') {
-                    ++it;
-                }
-                state = State::FirstY;
-                break;
-            }
-            case State::FirstY: {
-                if (is1To8(c)) {
-                    result.firstY = getYInCorrectOrientation(c - '1');
-                    ++it;
-                }
-                state = State::FirstX;
-                break;
-            }
-            case State::FirstX: {
-                if (isAToH(c)) {
-                    result.firstX = getXInCorrectOrientation(c - 'a');
-                    ++it;
-                }
-                state = State::PiecePart;
-                break;
-            }
-            case State::PiecePart: {
-                switch (c) {
-                    case 'N':
-                        result.pieceType = PieceType::Knight;
-                        break;
-                    case 'B':
-                        result.pieceType = PieceType::Bishop;
-                        break;
-                    case 'R':
-                        result.pieceType = PieceType::Rook;
-                        break;
-                    case 'Q':
-                        result.pieceType = PieceType::Queen;
-                        break;
-                    case 'K':
-                        result.pieceType = PieceType::King;
-                        break;
-                    default:
-                        result.pieceType = PieceType::Pawn;
-                        break;
-                }
-                state = State::Finish;
-                break;
-            }
-            case State::Finish: {
-                it = textInAlgebraicNotation.crend();
-                break;
-            }
-        }
-    }
-    if (result.pieceType == PieceType::Empty) {
-        result.pieceType = PieceType::Pawn;
-    }
-    return result;
-}
-
-MovePairs Board::getCastlingKingAndRookMovePairs(PieceColor const moveColor) const {
-    MovePairs result;
-    if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
-        if (PieceColor::Black == moveColor) {
-            Piece pieceAtKing(getPieceAt(Coordinate(4, 0)));
-            Piece pieceAtQueenSideRook(getPieceAt(Coordinate(0, 0)));
-            Piece pieceAtKingSideRook(getPieceAt(Coordinate(7, 0)));
-            if (PieceColorAndType::BlackKing == pieceAtKing.getColorAndType() &&
-                PieceColorAndType::BlackRook == pieceAtQueenSideRook.getColorAndType()) {
-                result.emplace_back(Move{{4, 0}, {2, 0}}, Move{{0, 0}, {3, 0}});
-            }
-            if (PieceColorAndType::BlackKing == pieceAtKing.getColorAndType() &&
-                PieceColorAndType::BlackRook == pieceAtKingSideRook.getColorAndType()) {
-                result.emplace_back(Move{{4, 0}, {6, 0}}, Move{{7, 0}, {5, 0}});
-            }
-        } else if (PieceColor::White == moveColor) {
-            Piece pieceAtKing(getPieceAt(Coordinate(4, 7)));
-            Piece pieceAtQueenSideRook(getPieceAt(Coordinate(0, 7)));
-            Piece pieceAtKingSideRook(getPieceAt(Coordinate(7, 7)));
-            if (PieceColorAndType::WhiteKing == pieceAtKing.getColorAndType() &&
-                PieceColorAndType::WhiteRook == pieceAtQueenSideRook.getColorAndType()) {
-                result.emplace_back(Move{{4, 7}, {2, 7}}, Move{{0, 7}, {3, 7}});
-            }
-            if (PieceColorAndType::WhiteKing == pieceAtKing.getColorAndType() &&
-                PieceColorAndType::WhiteRook == pieceAtKingSideRook.getColorAndType()) {
-                result.emplace_back(Move{{4, 7}, {6, 7}}, Move{{7, 7}, {5, 7}});
-            }
-        }
-    } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
-        if (PieceColor::White == moveColor) {
-            Piece pieceAtKing(getPieceAt(Coordinate(3, 0)));
-            Piece pieceAtQueenSideRook(getPieceAt(Coordinate(0, 0)));
-            Piece pieceAtKingSideRook(getPieceAt(Coordinate(7, 0)));
-            if (PieceColorAndType::WhiteKing == pieceAtKing.getColorAndType() &&
-                PieceColorAndType::WhiteRook == pieceAtQueenSideRook.getColorAndType()) {
-                result.emplace_back(Move{{3, 0}, {1, 0}}, Move{{0, 0}, {2, 0}});
-            }
-            if (PieceColorAndType::WhiteKing == pieceAtKing.getColorAndType() &&
-                PieceColorAndType::WhiteRook == pieceAtKingSideRook.getColorAndType()) {
-                result.emplace_back(Move{{3, 0}, {5, 0}}, Move{{7, 0}, {4, 0}});
-            }
-        } else if (PieceColor::Black == moveColor) {
-            Piece pieceAtKing(getPieceAt(Coordinate(3, 7)));
-            Piece pieceAtQueenSideRook(getPieceAt(Coordinate(0, 7)));
-            Piece pieceAtKingSideRook(getPieceAt(Coordinate(7, 7)));
-            if (PieceColorAndType::BlackKing == pieceAtKing.getColorAndType() &&
-                PieceColorAndType::BlackRook == pieceAtQueenSideRook.getColorAndType()) {
-                result.emplace_back(Move{{3, 7}, {1, 7}}, Move{{0, 7}, {2, 7}});
-            }
-            if (PieceColorAndType::BlackKing == pieceAtKing.getColorAndType() &&
-                PieceColorAndType::BlackRook == pieceAtKingSideRook.getColorAndType()) {
-                result.emplace_back(Move{{3, 7}, {5, 7}}, Move{{7, 7}, {4, 7}});
-            }
-        }
-    }
-    return result;
-}
-
-MovePair Board::getMatchingCastlingKingAndRookMovePair(Move const& kingMoveThatShouldMatch) const {
-    MovePair result{};
-    Piece pieceAtKing(getPieceAt(kingMoveThatShouldMatch.first));
-    MovePairs kingAndRookMovePairs(getCastlingKingAndRookMovePairs(pieceAtKing.getColor()));
-    auto it = find_if(
-        kingAndRookMovePairs.cbegin(), kingAndRookMovePairs.cend(),
-        [&kingMoveThatShouldMatch](MovePair const& kingAndRookMovePair) {
-            return kingAndRookMovePair.first == kingMoveThatShouldMatch;
-        });
-    if (it != kingAndRookMovePairs.cend()) {
-        result = *it;
-    }
-    return result;
-}
-
-Move Board::getFirstMoveThatFits(
-    Moves const& possibleMoves, PieceType const pieceType, optional<CoordinateDataType> const& xLimitation,
-    optional<CoordinateDataType> const& yLimitation) const {
-    Move result{};
-    for (Move const& possibleMove : possibleMoves) {
-        Piece pieceAtStart(getPieceAt(possibleMove.first));
-        if (pieceType == pieceAtStart.getType()) {
-            if (xLimitation) {
-                if (xLimitation.value() == possibleMove.first.getX()) {
-                    result = possibleMove;
-                    break;
-                }
-            } else if (yLimitation) {
-                if (yLimitation.value() == possibleMove.first.getY()) {
-                    result = possibleMove;
-                    break;
-                }
-            } else {
-                result = possibleMove;
-                break;
-            }
-        }
-    }
-    return result;
-}
-
-Move Board::getCastleMove(CastleType const castleType, PieceColor const moveColor) const {
-    Move result{};
-    CoordinateDataType rookMoveDistance = CastleType::KingSideCastle == castleType    ? 2
-                                          : CastleType::QueenSideCastle == castleType ? 3
-                                                                                      : 0;
-    MovePairs castlingPairs(getCastlingKingAndRookMovePairs(moveColor));
-    for (MovePair const& castlingPair : castlingPairs) {
-        Move const& kingMove(castlingPair.first);
-        Move const& rookMove(castlingPair.second);
-        if (getPositiveDelta(rookMove.first.getX(), rookMove.second.getX()) == rookMoveDistance) {
-            result = kingMove;
-        }
-    }
-    return result;
-}
-
-Board::DeltaRange Board::getPawnNonCaptureDeltaRange(Coordinate const& startpoint, PieceColor const moveColor) const {
-    if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
-        if (PieceColor::White == moveColor) {
-            if (6 == startpoint.getY()) {
-                return DeltaRange{-1, -3};
-            }
-            return DeltaRange{-1, -2};
-        }
-        if (PieceColor::Black == moveColor) {
-            if (1 == startpoint.getY()) {
-                return DeltaRange{1, 3};
-            }
-            return DeltaRange{1, 2};
-        }
-    } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
-        if (PieceColor::White == moveColor) {
-            if (1 == startpoint.getY()) {
-                return DeltaRange{1, 3};
-            }
-            return DeltaRange{1, 2};
-        }
-        if (PieceColor::Black == moveColor) {
-            if (6 == startpoint.getY()) {
-                return DeltaRange{-1, -3};
-            }
-            return DeltaRange{-1, -2};
-        }
-    }
-    return {};
-}
-
-Board::DeltaRange Board::getPawnReverseNonCaptureDeltaRange(
-    Coordinate const& endpoint, PieceColor const moveColor) const {
-    if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
-        if (PieceColor::White == moveColor) {
-            if (4 == endpoint.getY()) {
-                return DeltaRange{1, 3};
-            }
-            return DeltaRange{1, 2};
-        }
-        if (PieceColor::Black == moveColor) {
-            if (3 == endpoint.getY()) {
-                return DeltaRange{-1, -3};
-            }
-            return DeltaRange{-1, -2};
-        }
-    } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
-        if (PieceColor::White == moveColor) {
-            if (3 == endpoint.getY()) {
-                return DeltaRange{-1, -3};
-            }
-            return DeltaRange{-1, -2};
-        }
-        if (PieceColor::Black == moveColor) {
-            if (4 == endpoint.getY()) {
-                return DeltaRange{1, 3};
-            }
-            return DeltaRange{1, 2};
-        }
-    }
-    return {};
-}
-
-Coordinates Board::getPawnCapturesDeltaCoordinates(PieceColor const moveColor) const {
-    Coordinates result;
-    if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
-        if (PieceColor::White == moveColor) {
-            result.emplace_back(-1, -1);
-            result.emplace_back(1, -1);
-        } else if (PieceColor::Black == moveColor) {
-            result.emplace_back(-1, 1);
-            result.emplace_back(1, 1);
-        }
-    } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
-        if (PieceColor::White == moveColor) {
-            result.emplace_back(-1, 1);
-            result.emplace_back(1, 1);
-        } else if (PieceColor::Black == moveColor) {
-            result.emplace_back(-1, -1);
-            result.emplace_back(1, -1);
-        }
-    }
-    return result;
-}
-
-Coordinates Board::getPawnReverseCapturesDeltaCoordinates(PieceColor const moveColor) const {
-    Coordinates result;
-    if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
-        if (PieceColor::White == moveColor) {
-            result.emplace_back(-1, 1);
-            result.emplace_back(1, 1);
-        } else if (PieceColor::Black == moveColor) {
-            result.emplace_back(-1, -1);
-            result.emplace_back(1, -1);
-        }
-    } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
-        if (PieceColor::White == moveColor) {
-            result.emplace_back(-1, -1);
-            result.emplace_back(1, -1);
-        } else if (PieceColor::Black == moveColor) {
-            result.emplace_back(-1, 1);
-            result.emplace_back(1, 1);
-        }
-    }
-    return result;
-}
-
-Coordinate Board::getCorrectCoordinateFromAlgebraicNotation(
-    CoordinateDataType const x, CoordinateDataType const y) const {
-    Coordinate result{};
-    if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
-        result = Coordinate(x, reverse(y));
-    } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
-        result = Coordinate(reverse(x), y);
-    }
-    return result;
-}
-
-CoordinateDataType Board::getXInCorrectOrientation(CoordinateDataType const x) const {
-    CoordinateDataType result{};
-    if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
-        result = x;
-    } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
-        result = reverse(x);
-    }
-    return result;
-}
-
-CoordinateDataType Board::getYInCorrectOrientation(CoordinateDataType const y) const {
-    CoordinateDataType result{};
-    if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
-        result = reverse(y);
-    } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
-        result = y;
-    }
-    return result;
 }
 
 void Board::retrieveMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const {
@@ -1476,15 +1477,21 @@ void Board::changePieceGridWithMove(Move const& move) {
     setPieceAt(move.first, {});
 }
 
-int Board::getNumberOfWaysToBlockAttacks(Moves const& attacks, int const maxSize) const {
-    int result{};
-    if (attacks.size() == 1) {  // multiple attacks cannot be blocked (think about it)
-        Move attack = attacks.back();
-        Piece attackingPiece = getPieceAt(attack.first);
-        if (PieceType::Bishop == attackingPiece.getType() || PieceType::Rook == attackingPiece.getType() ||
-            PieceType::Queen == attackingPiece.getType()) {
-            PieceColor opponentsColor = getOppositeColor(getPieceAt(attack.first).getColor());
-            result = getNumberOfWaysToBlockPath(attack.first, attack.second, opponentsColor, maxSize);
+Move Board::getNonCastleMoveWithAlgebraicNotation(
+    string const& textInAlgebraicNotation, PieceColor const moveColor) const {
+    Move result{};
+    NotationDetailsOfMove details(determineNotationDetailsOfMove(textInAlgebraicNotation));
+    if (details.lastX && details.lastY) {
+        // last are prioritized because its reversed
+        Coordinate endpoint(details.lastX.value(), details.lastY.value());
+        if (details.firstX && details.firstY) {
+            Move candidateMove{{details.firstX.value(), details.firstY.value()}, endpoint};
+            if (isAPossibleMove(candidateMove)) {
+                result = candidateMove;
+            }
+        } else {
+            Moves candidateMoves(getCandidatesMoves(endpoint, moveColor, details.pieceType));
+            result = getFirstMoveThatFits(candidateMoves, details.pieceType, details.firstX, details.firstY);
         }
     }
     return result;
@@ -1508,21 +1515,15 @@ Moves Board::getAttacksToThis(Coordinate const& endpoint, PieceColor const& move
     return result;
 }
 
-Move Board::getNonCastleMoveWithAlgebraicNotation(
-    string const& textInAlgebraicNotation, PieceColor const moveColor) const {
-    Move result{};
-    NotationDetailsOfMove details(determineNotationDetailsOfMove(textInAlgebraicNotation));
-    if (details.lastX && details.lastY) {
-        // last are prioritized because its reversed
-        Coordinate endpoint(details.lastX.value(), details.lastY.value());
-        if (details.firstX && details.firstY) {
-            Move candidateMove{{details.firstX.value(), details.firstY.value()}, endpoint};
-            if (isAPossibleMove(candidateMove)) {
-                result = candidateMove;
-            }
-        } else {
-            Moves candidateMoves(getCandidatesMoves(endpoint, moveColor, details.pieceType));
-            result = getFirstMoveThatFits(candidateMoves, details.pieceType, details.firstX, details.firstY);
+int Board::getNumberOfWaysToBlockAttacks(Moves const& attacks, int const maxSize) const {
+    int result{};
+    if (attacks.size() == 1) {  // multiple attacks cannot be blocked (think about it)
+        Move attack = attacks.back();
+        Piece attackingPiece = getPieceAt(attack.first);
+        if (PieceType::Bishop == attackingPiece.getType() || PieceType::Rook == attackingPiece.getType() ||
+            PieceType::Queen == attackingPiece.getType()) {
+            PieceColor opponentsColor = getOppositeColor(getPieceAt(attack.first).getColor());
+            result = getNumberOfWaysToBlockPath(attack.first, attack.second, opponentsColor, maxSize);
         }
     }
     return result;

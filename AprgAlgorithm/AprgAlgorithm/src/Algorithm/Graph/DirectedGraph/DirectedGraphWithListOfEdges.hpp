@@ -16,14 +16,14 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using SetOfEdges = typename GraphTypes<Vertex>::SetOfEdges;
     DirectedGraphWithListOfEdges() = default;
-    [[nodiscard]] bool isEmpty() const override { return m_edges.empty(); }
 
-    [[nodiscard]] bool isDirectlyConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
-        return m_edges.find({sourceVertex, destinationVertex}) != m_edges.cend();
+    [[nodiscard]] Edges getEdges() const override {
+        Edges result;
+        result.reserve(m_edges.size());
+        std::transform(
+            m_edges.cbegin(), m_edges.cend(), std::back_inserter(result), [](Edge const& edge) { return edge; });
+        return result;
     }
-
-    [[nodiscard]] int getNumberOfVertices() const override { return getUniqueVertices().size(); }
-    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
 
     [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
         Vertices result;
@@ -38,12 +38,12 @@ public:
         return Vertices(uniqueVertices.cbegin(), uniqueVertices.cend());
     }
 
-    [[nodiscard]] Edges getEdges() const override {
-        Edges result;
-        result.reserve(m_edges.size());
-        std::transform(
-            m_edges.cbegin(), m_edges.cend(), std::back_inserter(result), [](Edge const& edge) { return edge; });
-        return result;
+    [[nodiscard]] int getNumberOfVertices() const override { return getUniqueVertices().size(); }
+    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
+    [[nodiscard]] bool isEmpty() const override { return m_edges.empty(); }
+
+    [[nodiscard]] bool isDirectlyConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
+        return m_edges.find({sourceVertex, destinationVertex}) != m_edges.cend();
     }
 
     void connect(Vertex const& sourceVertex, Vertex const& destinationVertex) override {

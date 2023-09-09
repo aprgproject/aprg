@@ -16,20 +16,6 @@ BitmapSnippet::BitmapSnippet(
     loadPixelDataFromFileInConfiguration();
 }
 
-bool BitmapSnippet::isPositionInsideTheSnippet(BitmapXY const position) const {
-    return m_topLeftCorner.getX() <= position.getX() && m_topLeftCorner.getY() <= position.getY() &&
-           m_bottomRightCorner.getX() >= position.getX() && m_bottomRightCorner.getY() >= position.getY();
-}
-
-bool BitmapSnippet::isBlackAt(BitmapXY const position) const {
-    // this is the only assumption, colors can depend on numberofbits of pixel and color table
-    return (m_configuration.getColorUsingPixelValue(getPixelAt(position)) == 0x00000000);
-}
-
-int BitmapSnippet::getDeltaX() const { return m_bottomRightCorner.getX() - m_topLeftCorner.getX(); }
-int BitmapSnippet::getDeltaY() const { return m_bottomRightCorner.getY() - m_topLeftCorner.getY(); }
-int BitmapSnippet::getNumberOfPixelsInSnippet() const { return getDeltaX() * getDeltaY(); }
-int BitmapSnippet::getPixelDataSize() const { return m_pixelData.getSize(); }
 BitmapConfiguration BitmapSnippet::getConfiguration() const { return m_configuration; }
 BitmapXY BitmapSnippet::getTopLeftCorner() const { return m_topLeftCorner; }
 BitmapXY BitmapSnippet::getBottomRightCorner() const { return m_bottomRightCorner; }
@@ -53,6 +39,21 @@ uint32_t BitmapSnippet::getColorAt(BitmapXY const position) const {
     return m_configuration.getColorUsingPixelValue(getPixelAt(position));
 }
 
+int BitmapSnippet::getDeltaX() const { return m_bottomRightCorner.getX() - m_topLeftCorner.getX(); }
+int BitmapSnippet::getDeltaY() const { return m_bottomRightCorner.getY() - m_topLeftCorner.getY(); }
+int BitmapSnippet::getNumberOfPixelsInSnippet() const { return getDeltaX() * getDeltaY(); }
+int BitmapSnippet::getPixelDataSize() const { return m_pixelData.getSize(); }
+
+bool BitmapSnippet::isPositionInsideTheSnippet(BitmapXY const position) const {
+    return m_topLeftCorner.getX() <= position.getX() && m_topLeftCorner.getY() <= position.getY() &&
+           m_bottomRightCorner.getX() >= position.getX() && m_bottomRightCorner.getY() >= position.getY();
+}
+
+bool BitmapSnippet::isBlackAt(BitmapXY const position) const {
+    // this is the only assumption, colors can depend on numberofbits of pixel and color table
+    return (m_configuration.getColorUsingPixelValue(getPixelAt(position)) == 0x00000000);
+}
+
 void BitmapSnippet::traverse(TraverseFunction const& traverseFunction) const {
     for (int y = m_topLeftCorner.getY(); y <= m_bottomRightCorner.getY(); ++y) {
         for (int x = m_topLeftCorner.getX(); x <= m_bottomRightCorner.getX(); ++x) {
@@ -61,8 +62,6 @@ void BitmapSnippet::traverse(TraverseFunction const& traverseFunction) const {
         }
     }
 }
-
-PixelData& BitmapSnippet::getPixelDataReference() { return m_pixelData; }
 
 void BitmapSnippet::loadPixelDataFromFileInConfiguration() {
     if (m_configuration.isPositionWithinTheBitmap(m_topLeftCorner) &&
@@ -129,6 +128,8 @@ void BitmapSnippet::traverseAndUpdate(TraverseAndUpdateFunction const& traverseA
         }
     }
 }
+
+PixelData& BitmapSnippet::getPixelDataReference() { return m_pixelData; }
 
 int BitmapSnippet::calculateShiftValue(BitmapXY const position) const {
     int numberOfPixelsInOneByte = m_configuration.getNumberOfPixelsForOneByte();

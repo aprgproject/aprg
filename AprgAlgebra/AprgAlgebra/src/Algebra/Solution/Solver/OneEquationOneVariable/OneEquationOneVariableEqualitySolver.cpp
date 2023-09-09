@@ -17,6 +17,18 @@ constexpr int NUMBER_OF_ITERATIONS_IN_NEWTON_METHOD = 1000;
 constexpr double DIFFERENCE_TOLERANCE_FOR_ACCEPTED_VALUE = 1E-11;
 }  // namespace
 
+AlbaNumber OneEquationOneVariableEqualitySolver::getMoreAccurateValueFromNewtonMethod(
+    Term const& termToCheck, string const& variableNameForSubstitution, AlbaNumber const& value) {
+    AlbaNumber result(value);
+    NewtonMethod::Function functionToIterate(getFunctionToIterate(termToCheck, variableNameForSubstitution));
+    NewtonMethod newtonMethod(value, functionToIterate);
+    newtonMethod.runMaxNumberOfIterationsOrUntilFinished(NUMBER_OF_ITERATIONS_IN_NEWTON_METHOD);
+    if (newtonMethod.isSolved()) {
+        result = newtonMethod.getCurrentValue();
+    }
+    return result;
+}
+
 NewtonMethod::Function OneEquationOneVariableEqualitySolver::getFunctionToIterate(
     Term const& termToCheck, string const& variableNameForSubstitution) {
     NewtonMethod::Function result = [&](AlbaNumber const& value) {
@@ -29,18 +41,6 @@ NewtonMethod::Function OneEquationOneVariableEqualitySolver::getFunctionToIterat
         }
         return computedValue;
     };
-    return result;
-}
-
-AlbaNumber OneEquationOneVariableEqualitySolver::getMoreAccurateValueFromNewtonMethod(
-    Term const& termToCheck, string const& variableNameForSubstitution, AlbaNumber const& value) {
-    AlbaNumber result(value);
-    NewtonMethod::Function functionToIterate(getFunctionToIterate(termToCheck, variableNameForSubstitution));
-    NewtonMethod newtonMethod(value, functionToIterate);
-    newtonMethod.runMaxNumberOfIterationsOrUntilFinished(NUMBER_OF_ITERATIONS_IN_NEWTON_METHOD);
-    if (newtonMethod.isSolved()) {
-        result = newtonMethod.getCurrentValue();
-    }
     return result;
 }
 

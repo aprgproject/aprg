@@ -13,6 +13,60 @@ using namespace std;
 
 namespace alba::algebra {
 
+void segregateEquationsWithAndWithoutVariable(
+    Equations const& equationsToSegregate, string const& variableName, Equations& equationsWithVariable,
+    Equations& equationsWithoutVariable) {
+    for (Equation const& equationToSegregate : equationsToSegregate) {
+        VariableNamesRetriever namesRetriever;
+        namesRetriever.retrieveFromEquation(equationToSegregate);
+        VariableNamesSet const& names(namesRetriever.getVariableNames());
+        if (names.find(variableName) != names.cend()) {
+            equationsWithVariable.emplace_back(equationToSegregate);
+        } else {
+            equationsWithoutVariable.emplace_back(equationToSegregate);
+        }
+    }
+}
+
+AlbaNumber getDegree(Equation const& equation) {
+    return max(getDegree(equation.getLeftHandTerm()), getDegree(equation.getRightHandTerm()));
+}
+
+Equation buildEquationIfPossible(string const& equationString) {
+    EquationBuilder builder(equationString);
+    return builder.getEquation();
+}
+
+Term getEquivalentTermByReducingItToAVariable(
+    string const& variableName, Term const& termWithVariable, Term const& termWithWithoutVariable) {
+    Term result;
+    if (termWithVariable.isVariable()) {
+        result = termWithWithoutVariable;
+    } else if (termWithVariable.isMonomial()) {
+        Monomial const& monomialWithVariable(termWithVariable.getAsMonomial());
+        AlbaNumber exponent(monomialWithVariable.getExponentForVariable(variableName));
+        exponent = exponent ^ (-1);
+        result = termWithWithoutVariable ^ exponent;
+    }
+    return result;
+}
+
+string getEquationOperatorCharacters() { return "!=<>"; }
+
+string getReverseEquationOperatorString(string const& equationOperatorString) {
+    string result(equationOperatorString);
+    if ("<" == equationOperatorString) {
+        result = ">";
+    } else if (">" == equationOperatorString) {
+        result = "<";
+    } else if ("<=" == equationOperatorString) {
+        result = ">=";
+    } else if (">=" == equationOperatorString) {
+        result = "<=";
+    }
+    return result;
+}
+
 bool isEquationOperatorString(string const& stringToCheck) {
     return "=" == stringToCheck || "==" == stringToCheck || "!=" == stringToCheck || "<" == stringToCheck ||
            ">" == stringToCheck || "<=" == stringToCheck || ">=" == stringToCheck;
@@ -94,60 +148,6 @@ bool doesAllEquationsHaveEqualityOperator(Equations const& equations) {
     return all_of(equations.cbegin(), equations.cend(), [](Equation const& equation) {
         return equation.getEquationOperator().isEqual();
     });
-}
-
-AlbaNumber getDegree(Equation const& equation) {
-    return max(getDegree(equation.getLeftHandTerm()), getDegree(equation.getRightHandTerm()));
-}
-
-string getEquationOperatorCharacters() { return "!=<>"; }
-
-string getReverseEquationOperatorString(string const& equationOperatorString) {
-    string result(equationOperatorString);
-    if ("<" == equationOperatorString) {
-        result = ">";
-    } else if (">" == equationOperatorString) {
-        result = "<";
-    } else if ("<=" == equationOperatorString) {
-        result = ">=";
-    } else if (">=" == equationOperatorString) {
-        result = "<=";
-    }
-    return result;
-}
-
-Term getEquivalentTermByReducingItToAVariable(
-    string const& variableName, Term const& termWithVariable, Term const& termWithWithoutVariable) {
-    Term result;
-    if (termWithVariable.isVariable()) {
-        result = termWithWithoutVariable;
-    } else if (termWithVariable.isMonomial()) {
-        Monomial const& monomialWithVariable(termWithVariable.getAsMonomial());
-        AlbaNumber exponent(monomialWithVariable.getExponentForVariable(variableName));
-        exponent = exponent ^ (-1);
-        result = termWithWithoutVariable ^ exponent;
-    }
-    return result;
-}
-
-Equation buildEquationIfPossible(string const& equationString) {
-    EquationBuilder builder(equationString);
-    return builder.getEquation();
-}
-
-void segregateEquationsWithAndWithoutVariable(
-    Equations const& equationsToSegregate, string const& variableName, Equations& equationsWithVariable,
-    Equations& equationsWithoutVariable) {
-    for (Equation const& equationToSegregate : equationsToSegregate) {
-        VariableNamesRetriever namesRetriever;
-        namesRetriever.retrieveFromEquation(equationToSegregate);
-        VariableNamesSet const& names(namesRetriever.getVariableNames());
-        if (names.find(variableName) != names.cend()) {
-            equationsWithVariable.emplace_back(equationToSegregate);
-        } else {
-            equationsWithoutVariable.emplace_back(equationToSegregate);
-        }
-    }
 }
 
 }  // namespace alba::algebra

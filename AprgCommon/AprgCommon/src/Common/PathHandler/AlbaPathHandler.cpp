@@ -27,9 +27,7 @@ void AlbaPathHandler::clear() {
     m_extension.clear();
 }
 
-bool AlbaPathHandler::isDirectory() const { return m_pathType == PathType::Directory; }
-bool AlbaPathHandler::isFile() const { return m_pathType == PathType::File; }
-bool AlbaPathHandler::isEmpty() const { return m_pathType == PathType::Empty; }
+PathType AlbaPathHandler::getPathType() const { return m_pathType; }
 
 string AlbaPathHandler::getImmediateDirectoryName() const {
     return stringHelper::getImmediateDirectoryName(m_directory, m_slashCharacterString);
@@ -46,7 +44,9 @@ string AlbaPathHandler::getFilenameOnly() const {
 }
 
 string AlbaPathHandler::getExtension() const { return m_extension; }
-PathType AlbaPathHandler::getPathType() const { return m_pathType; }
+bool AlbaPathHandler::isDirectory() const { return m_pathType == PathType::Directory; }
+bool AlbaPathHandler::isFile() const { return m_pathType == PathType::File; }
+bool AlbaPathHandler::isEmpty() const { return m_pathType == PathType::Empty; }
 
 void AlbaPathHandler::input(string_view const path) {
     clear();

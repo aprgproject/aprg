@@ -21,10 +21,10 @@ public:
     AlbaStreamBitReader &operator=(AlbaStreamBitReader &&bitReader) = delete;
     explicit AlbaStreamBitReader(std::istream &stream);
     [[nodiscard]] bool noRemainingBitsInBuffer() const;
-    bool readBoolData();
-    char readCharData();
     std::string readStringData(size_t const numberOfCharacters);
     std::string readWholeStreamAsStringData();
+    char readCharData();
+    bool readBoolData();
     template <typename TypeToWrite>
     TypeToWrite readNumberData(AlbaStreamBitEndianType const endianType);
     template <typename TypeToWrite>

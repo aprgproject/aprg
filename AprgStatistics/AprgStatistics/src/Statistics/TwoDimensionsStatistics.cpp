@@ -5,13 +5,6 @@
 
 namespace alba {
 
-double TwoDimensionsStatistics::calculateSquareError(Sample const& sample, LineModel const& lineModel) {
-    return pow(
-        lineModel.aCoefficient * sample.getValueAt(0) + lineModel.bCoefficient * sample.getValueAt(1) +
-            lineModel.cCoefficient,
-        2);
-}
-
 TwoDimensionsStatistics::LineModel TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(
     Samples const& samples) {
     bool areAllDifferenceForXZero(true);
@@ -63,6 +56,13 @@ TwoDimensionsStatistics::ValueToSampleMultimap TwoDimensionsStatistics::getSquar
         squareErrorAndSampleMultimap.emplace(calculateSquareError(sample, lineModel), sample);
     }
     return squareErrorAndSampleMultimap;
+}
+
+double TwoDimensionsStatistics::calculateSquareError(Sample const& sample, LineModel const& lineModel) {
+    return pow(
+        lineModel.aCoefficient * sample.getValueAt(0) + lineModel.bCoefficient * sample.getValueAt(1) +
+            lineModel.cCoefficient,
+        2);
 }
 
 }  // namespace alba

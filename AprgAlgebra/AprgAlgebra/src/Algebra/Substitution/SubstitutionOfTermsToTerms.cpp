@@ -15,13 +15,28 @@ SubstitutionOfTermsToTerms::SubstitutionOfTermsToTerms(initializer_list<TermTerm
     putTermsToTermsMapping(variablesWithValues);
 }
 
-bool SubstitutionOfTermsToTerms::isEmpty() const { return m_termsToTermsMap.empty(); }
-
-bool SubstitutionOfTermsToTerms::isTermFound(Term const& term) const {
-    return m_termsToTermsMap.find(term) != m_termsToTermsMap.cend();
+Equation SubstitutionOfTermsToTerms::performSubstitutionTo(Equation const& equation) const {
+    Equation simplifiedEquation(
+        performSubstitutionTo(equation.getLeftHandTerm()), equation.getEquationOperator().getOperatorString(),
+        performSubstitutionTo(equation.getRightHandTerm()));
+    simplifiedEquation.simplify();
+    return simplifiedEquation;
 }
 
-int SubstitutionOfTermsToTerms::getSize() const { return m_termsToTermsMap.size(); }
+Expression SubstitutionOfTermsToTerms::performSubstitutionForExpression(Expression const& expression) const {
+    Expression newExpression(expression);
+    performSubstitutionForTermsWithAssociation(newExpression.getTermsWithAssociationReference());
+    newExpression.simplify();
+    return newExpression;
+}
+
+Function SubstitutionOfTermsToTerms::performSubstitutionForFunction(Function const& functionObject) const {
+    Function newFunction(functionObject);
+    getTermReferenceFromBaseTerm(newFunction.getInputTermReference()) =
+        performSubstitutionTo(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
+    newFunction.simplify();
+    return newFunction;
+}
 
 Term SubstitutionOfTermsToTerms::getTermForTerm(Term const& term) const {
     Term result;
@@ -65,27 +80,11 @@ Term SubstitutionOfTermsToTerms::performSubstitutionTo(Term const& term) const {
     return newTerm;
 }
 
-Equation SubstitutionOfTermsToTerms::performSubstitutionTo(Equation const& equation) const {
-    Equation simplifiedEquation(
-        performSubstitutionTo(equation.getLeftHandTerm()), equation.getEquationOperator().getOperatorString(),
-        performSubstitutionTo(equation.getRightHandTerm()));
-    simplifiedEquation.simplify();
-    return simplifiedEquation;
-}
+int SubstitutionOfTermsToTerms::getSize() const { return m_termsToTermsMap.size(); }
+bool SubstitutionOfTermsToTerms::isEmpty() const { return m_termsToTermsMap.empty(); }
 
-Expression SubstitutionOfTermsToTerms::performSubstitutionForExpression(Expression const& expression) const {
-    Expression newExpression(expression);
-    performSubstitutionForTermsWithAssociation(newExpression.getTermsWithAssociationReference());
-    newExpression.simplify();
-    return newExpression;
-}
-
-Function SubstitutionOfTermsToTerms::performSubstitutionForFunction(Function const& functionObject) const {
-    Function newFunction(functionObject);
-    getTermReferenceFromBaseTerm(newFunction.getInputTermReference()) =
-        performSubstitutionTo(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
-    newFunction.simplify();
-    return newFunction;
+bool SubstitutionOfTermsToTerms::isTermFound(Term const& term) const {
+    return m_termsToTermsMap.find(term) != m_termsToTermsMap.cend();
 }
 
 void SubstitutionOfTermsToTerms::putTermsToTermsMapping(initializer_list<TermTermPair> const& variablesWithValues) {

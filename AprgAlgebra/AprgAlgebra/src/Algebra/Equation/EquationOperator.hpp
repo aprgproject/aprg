@@ -12,6 +12,7 @@ public:
     bool operator==(EquationOperator const& second) const;
     bool operator!=(EquationOperator const& second) const;
     bool operator<(EquationOperator const& second) const;
+    [[nodiscard]] std::string getOperatorString() const;
     [[nodiscard]] bool isEqual() const;
     [[nodiscard]] bool isNotEqual() const;
     [[nodiscard]] bool isLessThan() const;
@@ -21,7 +22,6 @@ public:
     [[nodiscard]] bool isAnEqualityVariant() const;
     [[nodiscard]] bool isALessThanVariant() const;
     [[nodiscard]] bool isAGreaterThanVariant() const;
-    [[nodiscard]] std::string getOperatorString() const;
 
 private:
     friend std::ostream& operator<<(std::ostream& out, EquationOperator const& equationOperator);

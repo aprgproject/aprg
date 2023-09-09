@@ -5,7 +5,6 @@
 namespace alba {
 
 enum class AlbaGrepStringOperatorType {
-
     Unknown,
     AndOperator,
     ClosingParenthesis,
@@ -15,7 +14,6 @@ enum class AlbaGrepStringOperatorType {
     OrOperator,
     XorOperator,
     XnorOperator,
-
 };
 
 }  // namespace alba

@@ -22,8 +22,8 @@ public:
     [[nodiscard]] Count getMinimumNumberOfCutsUsingIterativeDPAndTimeEfficient() const;
 
 private:
-    [[nodiscard]] bool isPalindrome(Index const left, Index const right) const;
     [[nodiscard]] Count getMinimumNumberOfCutsUsingNaiveRecursion(Index const left, Index const right) const;
+    [[nodiscard]] bool isPalindrome(Index const left, Index const right) const;
     Count getMinimumNumberOfCutsUsingMemoizationDP(CountMatrix& countMatrix, Index const left, Index const right) const;
     std::string m_string;
 };

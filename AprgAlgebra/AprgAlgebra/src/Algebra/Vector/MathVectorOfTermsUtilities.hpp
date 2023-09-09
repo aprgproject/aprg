@@ -17,19 +17,25 @@
 
 namespace alba::algebra::VectorUtilities {
 
-bool isDivergenceOfCurlZero(MathVectorOfThreeTerms const& termVector, ArrayOfThreeStrings const& coordinateVariables);
+// utilities function
+void simplifyForTermInVector(Term& term);
 
-bool isGaussDivergenceTheoremInAPlaneTrue(
-    MathVectorOfTwoTerms const& vectorField, MathVectorOfTwoTerms const& regionOfLineIntegral,
-    MathVectorOfTwoTerms const& unitOutwardNormal, DetailsForDefiniteIntegralWithTerms const& lineIntegralDetails,
-    DetailsForDefiniteIntegralWithTerms const& areaDetailsInX,
-    DetailsForDefiniteIntegralWithTerms const& areaDetailsInY, ArrayOfTwoStrings const& coordinateVariables);
+void retrieveWithAndWithoutOtherCoordinates(
+    Term& termWithOtherCoordinates, Term& termWithoutOtherCoordinates, Term const& termToAnalyze,
+    std::string const& coordinateVariableName, stringHelper::strings const& allCoordinates);
 
-bool isStokesTheoremInAPlaneTrue(
-    MathVectorOfTwoTerms const& vectorField, MathVectorOfTwoTerms const& regionOfLineIntegral,
-    MathVectorOfTwoTerms const& unitTangentVector, DetailsForDefiniteIntegralWithTerms const& lineIntegralDetails,
-    DetailsForDefiniteIntegralWithTerms const& areaDetailsInX,
-    DetailsForDefiniteIntegralWithTerms const& areaDetailsInY, ArrayOfTwoStrings const& coordinateVariables);
+Equation getTangentPlaneOnAPointOfASurface(
+    Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
+Equations getPerpendicularLineOnAPointOfASurface(
+    Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
+MathVectorOfThreeTerms getNormalOfASurfaceOnAPoint(
+    Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
+MathVectorOfThreeTerms getCurl(
+    MathVectorOfThreeTerms const& termVector, ArrayOfThreeStrings const& coordinateVariables);
+
+SegregateTermsByConditionInAdditionAndSubtractionRetriever getRetrieverForComparison(
+    Term const& termToAnalyze, std::string const& coordinateVariableName,
+    stringHelper::strings const& processedCoordinates);
 
 Term getDyOverDx(MathVectorOfTwoTerms const& termVector, std::string const& variableName);
 Term getDirectionalDerivativeInTwoDimensions(
@@ -46,25 +52,19 @@ Term getAreaOfAClosedNonIntersectingPathUsingGreensTheorem(
     ArrayOfTwoStrings const& coordinateVariables, MathVectorOfTwoTerms const& linePath,
     DetailsForDefiniteIntegralWithTerms const& linePathIntegralDetails);
 
-MathVectorOfThreeTerms getNormalOfASurfaceOnAPoint(
-    Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
-Equation getTangentPlaneOnAPointOfASurface(
-    Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
-Equations getPerpendicularLineOnAPointOfASurface(
-    Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
-MathVectorOfThreeTerms getCurl(
-    MathVectorOfThreeTerms const& termVector, ArrayOfThreeStrings const& coordinateVariables);
+bool isDivergenceOfCurlZero(MathVectorOfThreeTerms const& termVector, ArrayOfThreeStrings const& coordinateVariables);
 
-SegregateTermsByConditionInAdditionAndSubtractionRetriever getRetrieverForComparison(
-    Term const& termToAnalyze, std::string const& coordinateVariableName,
-    stringHelper::strings const& processedCoordinates);
+bool isGaussDivergenceTheoremInAPlaneTrue(
+    MathVectorOfTwoTerms const& vectorField, MathVectorOfTwoTerms const& regionOfLineIntegral,
+    MathVectorOfTwoTerms const& unitOutwardNormal, DetailsForDefiniteIntegralWithTerms const& lineIntegralDetails,
+    DetailsForDefiniteIntegralWithTerms const& areaDetailsInX,
+    DetailsForDefiniteIntegralWithTerms const& areaDetailsInY, ArrayOfTwoStrings const& coordinateVariables);
 
-// utilities function
-void simplifyForTermInVector(Term& term);
-
-void retrieveWithAndWithoutOtherCoordinates(
-    Term& termWithOtherCoordinates, Term& termWithoutOtherCoordinates, Term const& termToAnalyze,
-    std::string const& coordinateVariableName, stringHelper::strings const& allCoordinates);
+bool isStokesTheoremInAPlaneTrue(
+    MathVectorOfTwoTerms const& vectorField, MathVectorOfTwoTerms const& regionOfLineIntegral,
+    MathVectorOfTwoTerms const& unitTangentVector, DetailsForDefiniteIntegralWithTerms const& lineIntegralDetails,
+    DetailsForDefiniteIntegralWithTerms const& areaDetailsInX,
+    DetailsForDefiniteIntegralWithTerms const& areaDetailsInY, ArrayOfTwoStrings const& coordinateVariables);
 
 template <size_t SIZE>
 bool isContinuousAt(

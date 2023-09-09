@@ -25,6 +25,19 @@ public:
     }
 
 private:
+    DistanceEntry transformOneSetOfValues(
+        DistancetMatrix::MatrixData const& first, DistancetMatrix::MatrixData const& second) {
+        DistanceEntry result(AlbaNumberConstants::ALBA_NUMBER_POSITIVE_INFINITY);
+        int minSize = std::min(first.size(), second.size());
+        for (int i = 0; i < minSize; ++i) {
+            AlbaNumber currentValue = first[i] + second[i];
+            if (currentValue < result) {
+                result = currentValue;
+            }
+        }
+        return result;
+    }
+
     DistancetMatrix createDistanceMatrix(int const traverseCount, EdgeWeightedGraph const& graph) {
         AdjacencyMatrix const& adjacencyMatrix(graph.getAdjacencyMatrix());
         DistancetMatrix initialDistanceMatrix(adjacencyMatrix.getNumberOfColumns(), adjacencyMatrix.getNumberOfRows());
@@ -76,19 +89,6 @@ private:
                 ++x;
             }
             ++y;
-        }
-        return result;
-    }
-
-    DistanceEntry transformOneSetOfValues(
-        DistancetMatrix::MatrixData const& first, DistancetMatrix::MatrixData const& second) {
-        DistanceEntry result(AlbaNumberConstants::ALBA_NUMBER_POSITIVE_INFINITY);
-        int minSize = std::min(first.size(), second.size());
-        for (int i = 0; i < minSize; ++i) {
-            AlbaNumber currentValue = first[i] + second[i];
-            if (currentValue < result) {
-                result = currentValue;
-            }
         }
         return result;
     }

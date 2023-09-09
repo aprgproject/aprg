@@ -14,10 +14,8 @@ bool AlbaNumberIntervalEndpoint::operator==(AlbaNumberIntervalEndpoint const& se
     return m_type == second.m_type && m_value == second.m_value;
 }
 
-bool AlbaNumberIntervalEndpoint::isOpen() const { return Type::Open == m_type; }
-bool AlbaNumberIntervalEndpoint::isClose() const { return Type::Close == m_type; }
-AlbaNumberIntervalEndpoint::Type AlbaNumberIntervalEndpoint::getType() const { return m_type; }
 AlbaNumber const& AlbaNumberIntervalEndpoint::getValue() const { return m_value; }
+AlbaNumberIntervalEndpoint::Type AlbaNumberIntervalEndpoint::getType() const { return m_type; }
 
 string AlbaNumberIntervalEndpoint::getTypeString() const {
     switch (m_type) {
@@ -28,6 +26,8 @@ string AlbaNumberIntervalEndpoint::getTypeString() const {
     }
 }
 
+bool AlbaNumberIntervalEndpoint::isOpen() const { return Type::Open == m_type; }
+bool AlbaNumberIntervalEndpoint::isClose() const { return Type::Close == m_type; }
 void AlbaNumberIntervalEndpoint::setType(Type const type) { m_type = type; }
 
 ostream& operator<<(ostream& out, AlbaNumberIntervalEndpoint const& endpoint) {

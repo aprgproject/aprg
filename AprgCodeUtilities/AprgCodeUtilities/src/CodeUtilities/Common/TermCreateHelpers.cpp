@@ -3,7 +3,6 @@
 using namespace std;
 
 namespace alba::CodeUtilities {
-
 Term createAttribute(string const& content) { return {TermType::Attribute, content}; }
 Term createBoolean(string const& content) { return {TermType::Boolean, content}; }
 Term createCharacterLiteral(string const& content) { return {TermType::CharacterLiteral, content}; }
@@ -18,5 +17,4 @@ Term createPrimitiveType(string const& content) { return {TermType::PrimitiveTyp
 Term createStringLiteral(string const& content) { return {TermType::StringLiteral, content}; }
 Term createUnknown(string const& content) { return {TermType::Unknown, content}; }
 Term createWhiteSpace(string const& content) { return {TermType::WhiteSpace, content}; }
-
 }  // namespace alba::CodeUtilities

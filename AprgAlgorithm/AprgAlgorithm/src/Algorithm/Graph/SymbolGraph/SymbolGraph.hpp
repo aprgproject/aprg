@@ -14,14 +14,6 @@ class SymbolGraph {
 public:
     using SymbolTable = std::map<Vertex, Object>;
 
-    [[nodiscard]] bool contains(Object const& object) const {
-        return m_symbolTable.find(getUniqueVertexIdentifier<Vertex, Object>(object)) != m_symbolTable.cend();
-    }
-
-    [[nodiscard]] Vertex getVertex(Object const& object) const {
-        return getUniqueVertexIdentifier<Vertex, Object>(object);
-    }
-
     [[nodiscard]] Object getObject(Vertex const& key) const {
         Object result{};
         auto it = m_symbolTable.find(key);
@@ -31,8 +23,13 @@ public:
         return result;
     }
 
-    Graph const& getGraph() { return m_graph; }
-    SymbolTable const& getSymbolTable() { return m_symbolTable; }
+    [[nodiscard]] Vertex getVertex(Object const& object) const {
+        return getUniqueVertexIdentifier<Vertex, Object>(object);
+    }
+
+    [[nodiscard]] bool contains(Object const& object) const {
+        return m_symbolTable.find(getUniqueVertexIdentifier<Vertex, Object>(object)) != m_symbolTable.cend();
+    }
 
     void connect(Object const& object1, Object const& object2) {
         Vertex id1(getUniqueVertexIdentifier<Vertex, Object>(object1));
@@ -55,6 +52,9 @@ public:
             removeUniqueVertexIdentifierIfNeeded<Vertex, Object>(object2);
         }
     }
+
+    Graph const& getGraph() { return m_graph; }
+    SymbolTable const& getSymbolTable() { return m_symbolTable; }
 
 private:
     Graph m_graph;

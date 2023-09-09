@@ -15,7 +15,6 @@ public:
     using VertexToIntMap = typename GraphTypes<Vertex>::VertexToIntMap;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
     explicit BasePathSearchWithBfsAndDfs(BaseGraphWithVertex const& graph) : m_graph(graph) {}
-    [[nodiscard]] bool hasPathTo(Vertex const& endVertex) const { return m_processedVertices.isFound(endVertex); }
 
     [[nodiscard]] Path getPathTo(Vertex const& endVertex) const {
         Path reversedPath;
@@ -51,6 +50,7 @@ public:
     }
 
     [[nodiscard]] VertexToVertexMap const& getVertexToPreviousVertexMap() const { return m_vertexToPreviousVertexMap; }
+    [[nodiscard]] bool hasPathTo(Vertex const& endVertex) const { return m_processedVertices.isFound(endVertex); }
 
 protected:
     // No need for virtual destructor because this class is not destroyed polymorphically.

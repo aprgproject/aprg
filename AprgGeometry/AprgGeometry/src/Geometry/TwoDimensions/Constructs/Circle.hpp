@@ -17,17 +17,17 @@ public:
     bool operator!=(Circle const& circle) const;
     bool operator<(Circle const& circle) const;
     static double getEccentricity();
-    [[nodiscard]] bool isInside(Point const& point) const;
-    [[nodiscard]] double getRadius() const;
-    [[nodiscard]] double getArea() const;
-    [[nodiscard]] double getCircumference() const;
     [[nodiscard]] Point getCenter() const;
+    [[nodiscard]] Point getNearestPointInCircumference(Point const& pointNotCircumference) const;
     [[nodiscard]] Points getLocus(double const interval) const;
     [[nodiscard]] std::optional<double> calculateYFromX(double const x, double const signOfRoot) const;
     [[nodiscard]] std::optional<double> calculateXFromY(double const y, double const signOfRoot) const;
     [[nodiscard]] std::optional<double> calculateYFromXWithoutCenter(double const x, double const signOfRoot) const;
     [[nodiscard]] std::optional<double> calculateXFromYWithoutCenter(double const y, double const signOfRoot) const;
-    [[nodiscard]] Point getNearestPointInCircumference(Point const& pointNotCircumference) const;
+    [[nodiscard]] double getRadius() const;
+    [[nodiscard]] double getArea() const;
+    [[nodiscard]] double getCircumference() const;
+    [[nodiscard]] bool isInside(Point const& point) const;
     void traverseArea(double const interval, TraverseOperation const& traverseOperation) const;
     Point getPointAtAngle(double const angleInRadians);
 

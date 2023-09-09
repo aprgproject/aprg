@@ -19,8 +19,15 @@ public:
     };
 
     LinkedListStack() : m_first(nullptr) {}
-    [[nodiscard]] bool isEmpty() const override { return m_first == nullptr; }
     [[nodiscard]] int getSize() const override { return m_size; }
+    [[nodiscard]] bool isEmpty() const override { return m_first == nullptr; }
+
+    void push(Object const& object) override {
+        // runs in constant time, but array is still faster because here there is allocation
+        NodeUniquePointer next(std::move(m_first));        // previous first is the new next
+        m_first.reset(new Node{object, std::move(next)});  // create a new node at first
+        ++m_size;
+    }
 
     Object pop() override {
         // runs in constant time, but array is still faster because here there is to deallocation
@@ -32,13 +39,6 @@ public:
             --m_size;
         }
         return result;
-    }
-
-    void push(Object const& object) override {
-        // runs in constant time, but array is still faster because here there is allocation
-        NodeUniquePointer next(std::move(m_first));        // previous first is the new next
-        m_first.reset(new Node{object, std::move(next)});  // create a new node at first
-        ++m_size;
     }
 
 private:

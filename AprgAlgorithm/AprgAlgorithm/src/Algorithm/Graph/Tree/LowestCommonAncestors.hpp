@@ -19,20 +19,6 @@ public:
         initializeIfNeeded();
     }
 
-    [[nodiscard]] int getDistanceBetweenVertices(Vertex const& vertex1, Vertex const& vertex2) const {
-        int result{};
-        auto it1 = m_vertexToFirstIndexMap.find(vertex1);
-        auto it2 = m_vertexToFirstIndexMap.find(vertex2);
-        if (it1 != m_vertexToFirstIndexMap.cend() && it2 != m_vertexToFirstIndexMap.cend()) {
-            int vertexIndex1 = it1->second;
-            int vertexIndex2 = it2->second;
-            int lowestCommonAncestorIndex(getLowestCommonAncestorIndex(vertexIndex1, vertexIndex2));
-            result = m_depths[vertexIndex1] + m_depths[vertexIndex2] - 2 * m_depths[lowestCommonAncestorIndex];
-        }
-        return result;
-    }
-
-    [[nodiscard]] Vertices const& getVerticesInTreeOrder() const { return m_verticesInTreeOrder; }
     [[nodiscard]] Depths const& getDepths() const { return m_depths; }
 
     [[nodiscard]] Vertex getLowestCommonAncestor(Vertex const& vertex1, Vertex const& vertex2) const {
@@ -44,6 +30,21 @@ public:
             int vertexIndex2 = it2->second;
             int lowestCommonAncestorIndex(getLowestCommonAncestorIndex(vertexIndex1, vertexIndex2));
             result = m_verticesInTreeOrder[lowestCommonAncestorIndex];
+        }
+        return result;
+    }
+
+    [[nodiscard]] Vertices const& getVerticesInTreeOrder() const { return m_verticesInTreeOrder; }
+
+    [[nodiscard]] int getDistanceBetweenVertices(Vertex const& vertex1, Vertex const& vertex2) const {
+        int result{};
+        auto it1 = m_vertexToFirstIndexMap.find(vertex1);
+        auto it2 = m_vertexToFirstIndexMap.find(vertex2);
+        if (it1 != m_vertexToFirstIndexMap.cend() && it2 != m_vertexToFirstIndexMap.cend()) {
+            int vertexIndex1 = it1->second;
+            int vertexIndex2 = it2->second;
+            int lowestCommonAncestorIndex(getLowestCommonAncestorIndex(vertexIndex1, vertexIndex2));
+            result = m_depths[vertexIndex1] + m_depths[vertexIndex2] - 2 * m_depths[lowestCommonAncestorIndex];
         }
         return result;
     }

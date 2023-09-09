@@ -41,79 +41,6 @@ void findDistinctNonConsecutiveFibonacciNumbersForSum(
 
 }  // namespace
 
-bool isAFibonacciNumber(UnsignedInteger const number) {
-    // https://en.wikipedia.org/wiki/Fibonacci_number#Identification
-    // Binet's formula provides a proof that a positive integer x is a Fibonacci number if and only if at least one of
-    // 5*x^2 + 4 or 5*x^2 + 4 is a perfect square.
-    return isPerfectSquare(5 * number * number + 4) || isPerfectSquare(5 * number * number - 4);
-}
-
-bool isALuckyNumber(UnsignedInteger const number) {
-    // Lucky numbers are a subset of integers.
-    // Rather than going into much theory, let us see the process of arriving at lucky numbers:
-    // 1) Take the set of integers:
-    // -> 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,......
-    // 2) First, delete every second number, we get following reduced set.
-    // -> 1,3,5,7,9,11,13,15,17,19,............
-    // 3) Now, delete every third number, we get
-    // -> 1, 3, 7, 9, 13, 15, 19,........
-    // 4) Continue this process indefinitely......
-    // Any number that does NOT get deleted due to above process is called “lucky”.
-    // Therefore, set of lucky numbers is 1, 3, 7, 13,.........
-    UnsignedInteger remainingValue = number;
-    UnsignedInteger removedNumber = 2;
-    bool result(false);
-    while (true) {
-        if (removedNumber > 2) {
-            result = true;
-            break;
-        }
-        if (number % removedNumber == 0) {
-            result = false;
-            break;
-        }
-        remainingValue = remainingValue - (remainingValue / removedNumber);
-        ++removedNumber;
-    }
-    return result;
-}
-
-bool isLagrangeTheoremTrue(UnsignedInteger const number) {
-    // Lagrange’s theorem states that every positive integer can be represented as a sum of four squares, i.e., a^2 +
-    // b^2 + c^2 + d^2. For example, the number 123 can be represented as the sum 8^2 + 5^2 + 5^2 + 3^2.
-    auto maxElement = static_cast<UnsignedInteger>(pow(number, 0.5));  // max element is square root
-    UnsignedIntegers squaredElements;
-    squaredElements.reserve(maxElement - 1);
-    for (UnsignedInteger i = 1; i < maxElement; ++i) {
-        squaredElements.emplace_back(i * i);
-    }
-
-    FourSum<UnsignedIntegers> fourSum(squaredElements);
-    auto fourValues = fourSum.getPossibleDuplicatedFourValuesWithSum(number);
-    UnsignedInteger sumOfSquares = get<0>(fourValues) + get<1>(fourValues) + get<2>(fourValues) + get<3>(fourValues);
-
-    return sumOfSquares == number;
-}
-
-bool isZeckendorfTheoremTrue(UnsignedInteger const number) {
-    // Zeckendorf’s theorem states that every positive integer has a unique representation as a sum of Fibonacci numbers
-    // such that no two numbers are equal or consecutive Fibonacci numbers.
-    // For example, the number 74 can be represented as the sum 55 + 13 + 5 + 1.
-    bool result(false);
-    UnsignedIntegers fibonaccis(getFibonacciNumbersBelowThisNumber(number));
-
-    bool isComplete(false);
-    UnsignedIntegers fibonaccisForSum;
-    findDistinctNonConsecutiveFibonacciNumbersForSum(isComplete, fibonaccisForSum, fibonaccis, number, 0);
-
-    if (isComplete) {
-        UnsignedInteger sumOfFibonaccis =
-            accumulate(fibonaccisForSum.cbegin(), fibonaccisForSum.cend(), 0, std::plus<>());
-        result = sumOfFibonaccis == number;
-    }
-    return result;
-}
-
 UnsignedInteger getNthFibonacciNumber(UnsignedInteger const number) {
     // NOTE: The time complexity is linear but its accurate
     if (number == 0) {
@@ -208,6 +135,79 @@ UnsignedIntegers getFibonacciNumbersBelowThisNumber(UnsignedInteger const number
         UnsignedInteger nextFibonacci = currentFibonacci + previousFibonacci;
         previousFibonacci = currentFibonacci;
         currentFibonacci = nextFibonacci;
+    }
+    return result;
+}
+
+bool isAFibonacciNumber(UnsignedInteger const number) {
+    // https://en.wikipedia.org/wiki/Fibonacci_number#Identification
+    // Binet's formula provides a proof that a positive integer x is a Fibonacci number if and only if at least one of
+    // 5*x^2 + 4 or 5*x^2 + 4 is a perfect square.
+    return isPerfectSquare(5 * number * number + 4) || isPerfectSquare(5 * number * number - 4);
+}
+
+bool isALuckyNumber(UnsignedInteger const number) {
+    // Lucky numbers are a subset of integers.
+    // Rather than going into much theory, let us see the process of arriving at lucky numbers:
+    // 1) Take the set of integers:
+    // -> 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,......
+    // 2) First, delete every second number, we get following reduced set.
+    // -> 1,3,5,7,9,11,13,15,17,19,............
+    // 3) Now, delete every third number, we get
+    // -> 1, 3, 7, 9, 13, 15, 19,........
+    // 4) Continue this process indefinitely......
+    // Any number that does NOT get deleted due to above process is called “lucky”.
+    // Therefore, set of lucky numbers is 1, 3, 7, 13,.........
+    UnsignedInteger remainingValue = number;
+    UnsignedInteger removedNumber = 2;
+    bool result(false);
+    while (true) {
+        if (removedNumber > 2) {
+            result = true;
+            break;
+        }
+        if (number % removedNumber == 0) {
+            result = false;
+            break;
+        }
+        remainingValue = remainingValue - (remainingValue / removedNumber);
+        ++removedNumber;
+    }
+    return result;
+}
+
+bool isLagrangeTheoremTrue(UnsignedInteger const number) {
+    // Lagrange’s theorem states that every positive integer can be represented as a sum of four squares, i.e., a^2 +
+    // b^2 + c^2 + d^2. For example, the number 123 can be represented as the sum 8^2 + 5^2 + 5^2 + 3^2.
+    auto maxElement = static_cast<UnsignedInteger>(pow(number, 0.5));  // max element is square root
+    UnsignedIntegers squaredElements;
+    squaredElements.reserve(maxElement - 1);
+    for (UnsignedInteger i = 1; i < maxElement; ++i) {
+        squaredElements.emplace_back(i * i);
+    }
+
+    FourSum<UnsignedIntegers> fourSum(squaredElements);
+    auto fourValues = fourSum.getPossibleDuplicatedFourValuesWithSum(number);
+    UnsignedInteger sumOfSquares = get<0>(fourValues) + get<1>(fourValues) + get<2>(fourValues) + get<3>(fourValues);
+
+    return sumOfSquares == number;
+}
+
+bool isZeckendorfTheoremTrue(UnsignedInteger const number) {
+    // Zeckendorf’s theorem states that every positive integer has a unique representation as a sum of Fibonacci numbers
+    // such that no two numbers are equal or consecutive Fibonacci numbers.
+    // For example, the number 74 can be represented as the sum 55 + 13 + 5 + 1.
+    bool result(false);
+    UnsignedIntegers fibonaccis(getFibonacciNumbersBelowThisNumber(number));
+
+    bool isComplete(false);
+    UnsignedIntegers fibonaccisForSum;
+    findDistinctNonConsecutiveFibonacciNumbersForSum(isComplete, fibonaccisForSum, fibonaccis, number, 0);
+
+    if (isComplete) {
+        UnsignedInteger sumOfFibonaccis =
+            accumulate(fibonaccisForSum.cbegin(), fibonaccisForSum.cend(), 0, std::plus<>());
+        result = sumOfFibonaccis == number;
     }
     return result;
 }

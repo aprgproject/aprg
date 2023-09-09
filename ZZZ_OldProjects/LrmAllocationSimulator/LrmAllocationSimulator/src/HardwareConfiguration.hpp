@@ -18,8 +18,6 @@ public:
     HardwareConfiguration() = default;
     [[nodiscard]] unsigned int getTcomFspAddress() const;
     [[nodiscard]] unsigned int getSharedLcgId() const;
-    AddressToDspMap& getAddressToDspMapReference();
-    AddressToFspMap& getAddressToFspMapReference();
     void clear();
     void changeConfigurationToOneFspOneLcgEvenDistribution();
     void changeConfigurationToOneFspTwoLcgEvenDistribution();
@@ -42,6 +40,8 @@ public:
     void changeConfigurationToSixFspFourLcgEvenDistribution();
     void changeConfigurationToSharedLcgWithOneDspInMsm();
     void printDspAllocations(unsigned int const printFlags = 0);
+    AddressToDspMap& getAddressToDspMapReference();
+    AddressToFspMap& getAddressToFspMapReference();
 
 private:
     static NyquistType computeNyquistTypeBasedOnDspAddress(unsigned int const dspAddress);

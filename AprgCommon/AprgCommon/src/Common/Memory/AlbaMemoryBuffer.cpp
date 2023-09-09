@@ -12,9 +12,9 @@ AlbaMemoryBuffer::AlbaMemoryBuffer(void const* sourcePointer, size_t const size)
 AlbaMemoryBuffer::operator bool() const { return hasContent(); }
 AlbaMemoryBuffer::ByteType AlbaMemoryBuffer::operator[](size_t const index) const { return m_buffer[index]; }
 AlbaMemoryBuffer::ByteType& AlbaMemoryBuffer::operator[](size_t const index) { return m_buffer[index]; }
-bool AlbaMemoryBuffer::hasContent() const { return !m_buffer.empty(); }
-size_t AlbaMemoryBuffer::getSize() const { return m_buffer.size(); }
 void const* AlbaMemoryBuffer::getConstantBufferPointer() const { return static_cast<void const*>(m_buffer.data()); }
+size_t AlbaMemoryBuffer::getSize() const { return m_buffer.size(); }
+bool AlbaMemoryBuffer::hasContent() const { return !m_buffer.empty(); }
 void* AlbaMemoryBuffer::getBufferPointer() { return static_cast<void*>(m_buffer.data()); }
 void AlbaMemoryBuffer::clear() { m_buffer.clear(); }
 

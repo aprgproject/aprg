@@ -45,10 +45,6 @@ public:
     }
 
 private:
-    static RecursionData createRecursionData(Possibilities& possibilities, Objects const& objects, int const length) {
-        return RecursionData{possibilities, Possibility(), 0, objects, length};
-    }
-
     static void collectPossibilitiesUsingRecursion(RecursionData& recursionData) {
         if (static_cast<int>(recursionData.currentPossibility.size()) == recursionData.targetPossibilityLength) {
             recursionData.possibilities.emplace_back(recursionData.currentPossibility);
@@ -62,6 +58,10 @@ private:
                 currentPossibility.pop_back();
             }
         }
+    }
+
+    static RecursionData createRecursionData(Possibilities& possibilities, Objects const& objects, int const length) {
+        return RecursionData{possibilities, Possibility(), 0, objects, length};
     }
 };
 

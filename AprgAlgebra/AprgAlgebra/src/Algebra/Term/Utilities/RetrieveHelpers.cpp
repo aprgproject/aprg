@@ -13,24 +13,13 @@ using namespace std;
 
 namespace alba::algebra {
 
-bool hasAnyFunctions(Term const& term) {
-    FunctionsRetriever functionsRetriever([](Function const&) { return true; });
-    functionsRetriever.retrieveFromTerm(term);
-    return !functionsRetriever.getFunctions().empty();
-}
-
-bool hasAnyTrigonometricFunctions(Term const& term) {
-    FunctionsRetriever functionsRetriever(
-        [](Function const& functionObject) { return isTrigonometricFunction(functionObject); });
-    functionsRetriever.retrieveFromTerm(term);
-    return !functionsRetriever.getFunctions().empty();
-}
-
-bool isVariableFoundInTerm(Term const& term, string const& variableName) {
-    VariableNamesRetriever retriever;
-    retriever.retrieveFromTerm(term);
-    VariableNamesSet const& variableNames(retriever.getVariableNames());
-    return variableNames.find(variableName) != variableNames.cend();
+void retrieveTermsFromTermsWithDetails(Terms& terms, TermsWithDetails const& termsWithDetails) {
+    terms.reserve(terms.size() + termsWithDetails.size());
+    transform(
+        termsWithDetails.cbegin(), termsWithDetails.cend(), back_inserter(terms),
+        [](TermWithDetails const& termWithDetails) {
+            return getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer);
+        });
 }
 
 AlbaNumber getCoefficientOfMonomialWithNoVariables(Polynomial const& polynomial) {
@@ -58,18 +47,6 @@ AlbaNumber getCoefficientOfMonomialWithVariableOnly(Polynomial const& polynomial
         }
     }
     return coefficientValue;
-}
-
-VariableToValueMap getCoefficientsForVariablesOnly(Polynomial const& polynomial) {
-    VariableToValueMap result;
-    for (Monomial const& monomial : polynomial.getMonomials()) {
-        Monomial::VariablesToExponentsMap const& variableToExponentMap(monomial.getVariablesToExponentsMap());
-        if (variableToExponentMap.size() == 1) {
-            auto const& [variableNameFromMap, exponentFromMap] = *(variableToExponentMap.cbegin());
-            result.emplace(variableNameFromMap, monomial.getCoefficient());
-        }
-    }
-    return result;
 }
 
 Terms retrieveSubExpressionsAndSubFunctions(Term const& term) {
@@ -107,13 +84,36 @@ TermsWithDetails retrieveTermsWithDetailsThatSatisfiesCondition(
     return result;
 }
 
-void retrieveTermsFromTermsWithDetails(Terms& terms, TermsWithDetails const& termsWithDetails) {
-    terms.reserve(terms.size() + termsWithDetails.size());
-    transform(
-        termsWithDetails.cbegin(), termsWithDetails.cend(), back_inserter(terms),
-        [](TermWithDetails const& termWithDetails) {
-            return getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer);
-        });
+VariableToValueMap getCoefficientsForVariablesOnly(Polynomial const& polynomial) {
+    VariableToValueMap result;
+    for (Monomial const& monomial : polynomial.getMonomials()) {
+        Monomial::VariablesToExponentsMap const& variableToExponentMap(monomial.getVariablesToExponentsMap());
+        if (variableToExponentMap.size() == 1) {
+            auto const& [variableNameFromMap, exponentFromMap] = *(variableToExponentMap.cbegin());
+            result.emplace(variableNameFromMap, monomial.getCoefficient());
+        }
+    }
+    return result;
+}
+
+bool hasAnyFunctions(Term const& term) {
+    FunctionsRetriever functionsRetriever([](Function const&) { return true; });
+    functionsRetriever.retrieveFromTerm(term);
+    return !functionsRetriever.getFunctions().empty();
+}
+
+bool hasAnyTrigonometricFunctions(Term const& term) {
+    FunctionsRetriever functionsRetriever(
+        [](Function const& functionObject) { return isTrigonometricFunction(functionObject); });
+    functionsRetriever.retrieveFromTerm(term);
+    return !functionsRetriever.getFunctions().empty();
+}
+
+bool isVariableFoundInTerm(Term const& term, string const& variableName) {
+    VariableNamesRetriever retriever;
+    retriever.retrieveFromTerm(term);
+    VariableNamesSet const& variableNames(retriever.getVariableNames());
+    return variableNames.find(variableName) != variableNames.cend();
 }
 
 }  // namespace alba::algebra

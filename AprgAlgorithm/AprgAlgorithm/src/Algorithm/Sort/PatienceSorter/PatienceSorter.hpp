@@ -18,8 +18,8 @@ public:
         using Container = std::forward_list<Value>;
         explicit Pile(Value const& value) : m_values({value}) {}
         bool operator<(Value const& valueToCheck) const { return getTop() < valueToCheck; }
-        [[nodiscard]] Value const& getTop() const { return m_values.front(); }
         [[nodiscard]] Container const& getValues() const { return m_values; }
+        [[nodiscard]] Value const& getTop() const { return m_values.front(); }
         void putOnTop(Value const& value) { m_values.emplace_front(value); }
         void mergeWith(Pile& pile) { m_values.merge(pile.m_values); }
 
@@ -41,24 +41,6 @@ public:
     }
 
 private:
-    // NOLINTNEXTLINE(modernize-use-nodiscard)
-    PilesIterator mergePiles(PilesIterator const itLow, PilesIterator const itHigh) const {
-        // https://en.wikipedia.org/wiki/K-way_merge_algorithm
-        int numberOfPiles = std::distance(itLow, itHigh) + 1;
-        if (numberOfPiles == 2) {
-            itLow->mergeWith(*itHigh);
-            return itLow;
-        }
-        if (numberOfPiles > 2) {
-            auto middleIt = std::next(itLow, numberOfPiles / 2);
-            auto itFirstPart = mergePiles(itLow, middleIt);
-            auto itSecondPart = mergePiles(std::next(middleIt), itHigh);
-            itFirstPart->mergeWith(*itSecondPart);
-            return itFirstPart;
-        }
-        return itLow;
-    }
-
     void putValuesToPiles(Piles& piles, Values const& valuesToSort) const {
         for (Value const& value : valuesToSort) {
             auto selectedIt = std::lower_bound(piles.begin(), piles.end(), value);
@@ -75,6 +57,24 @@ private:
     void copyMergedPileToValues(Values& valuesToSort, Piles const& piles) const {
         auto const& mergedPileValues(piles.front().getValues());
         std::copy(mergedPileValues.cbegin(), mergedPileValues.cend(), valuesToSort.begin());
+    }
+
+    // NOLINTNEXTLINE(modernize-use-nodiscard)
+    PilesIterator mergePiles(PilesIterator const itLow, PilesIterator const itHigh) const {
+        // https://en.wikipedia.org/wiki/K-way_merge_algorithm
+        int numberOfPiles = std::distance(itLow, itHigh) + 1;
+        if (numberOfPiles == 2) {
+            itLow->mergeWith(*itHigh);
+            return itLow;
+        }
+        if (numberOfPiles > 2) {
+            auto middleIt = std::next(itLow, numberOfPiles / 2);
+            auto itFirstPart = mergePiles(itLow, middleIt);
+            auto itSecondPart = mergePiles(std::next(middleIt), itHigh);
+            itFirstPart->mergeWith(*itSecondPart);
+            return itFirstPart;
+        }
+        return itLow;
     }
 };
 

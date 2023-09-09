@@ -9,14 +9,6 @@ namespace alba::booleanAlgebra {
 using SatisfiabilityTerm = VariableTerms;
 using SatisfiabilityTerms = std::vector<VariableTerms>;
 
-int getSatisfiabilityLevel(SatisfiabilityTerms const& satTerms) {
-    int result(0);
-    for (SatisfiabilityTerm const& satTerm : satTerms) {
-        result = max(result, static_cast<int>(satTerm.size()));
-    }
-    return result;
-}
-
 SatisfiabilityTerms getSatisfiabilityTerms(Term const& term) {
     SatisfiabilityTerms result;
     if (term.isVariableTerm()) {
@@ -61,6 +53,14 @@ SatisfiabilityTerms getSatisfiabilityTerms(Expression const& expression) {
                 break;
             }
         }
+    }
+    return result;
+}
+
+int getSatisfiabilityLevel(SatisfiabilityTerms const& satTerms) {
+    int result(0);
+    for (SatisfiabilityTerm const& satTerm : satTerms) {
+        result = max(result, static_cast<int>(satTerm.size()));
     }
     return result;
 }

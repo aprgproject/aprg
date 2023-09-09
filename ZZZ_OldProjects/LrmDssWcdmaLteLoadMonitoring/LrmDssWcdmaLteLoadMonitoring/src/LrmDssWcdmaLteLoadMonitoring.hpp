@@ -16,9 +16,10 @@ using EDssWcdmaLoad = enum EDssWcdmaLoad { EDssWcdmaLoad_Low = 0, EDssWcdmaLoad_
 class LrmDssWcdmaLteLoadMonitoring {
 public:
     LrmDssWcdmaLteLoadMonitoring();
-    static EDssWcdmaLoad getNextLowerLoadState(EDssWcdmaLoad const loadState);
     static EDssWcdmaFilterBandwidth convertLoadStateToFilterBandwidth(EDssWcdmaLoad const loadState);
+    static EDssWcdmaLoad getNextLowerLoadState(EDssWcdmaLoad const loadState);
     static EDssWcdmaLoad convertFilterBandwidthToLoadState(EDssWcdmaFilterBandwidth const filterBandwidth);
+    [[nodiscard]] EDssWcdmaLoad getLoadStateFromCellLoad(unsigned int const cellLoad) const;
     [[nodiscard]] unsigned int getConsecutiveLowerLoadStateCount() const;
     [[nodiscard]] unsigned int getDchLoadFactor() const;
     [[nodiscard]] unsigned int getHsdpaAndHsfachLoadFactor() const;
@@ -29,14 +30,13 @@ public:
         unsigned int const numberOfDchUsers, unsigned int const numberOfHsdpaUsers,
         bool const hasHsfachInTheCell) const;
 
-    [[nodiscard]] EDssWcdmaLoad getLoadStateFromCellLoad(unsigned int const cellLoad) const;
-    EDssWcdmaLoad determineLoadStateForTheNextFilterUpdateAndUpdateConsecutiveLowerLoadStateCountIfNeeded(
-        EDssWcdmaLoad const currentLoadState, EDssWcdmaLoad const currentLoadStateOfTheAppliedFilter);
     void setConsecutiveLowerLoadStateCount(unsigned int const count);
     void setCommissioningLoadFactorValues(
         unsigned int const dchLoadFactor, unsigned int const hsdpaAndHsfachLoadFactor);
     void setCommissioningLoadThresholdValues(
         unsigned int const mediumLoadThreshold, unsigned int const highLoadThreshold);
+    EDssWcdmaLoad determineLoadStateForTheNextFilterUpdateAndUpdateConsecutiveLowerLoadStateCountIfNeeded(
+        EDssWcdmaLoad const currentLoadState, EDssWcdmaLoad const currentLoadStateOfTheAppliedFilter);
 
 private:
     unsigned int m_consecutiveLowerLoadStateCount{0};

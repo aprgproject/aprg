@@ -10,10 +10,10 @@ namespace alba::algebra {
 class SingleVariableNameRetriever final : public BaseRetriever {
 public:
     SingleVariableNameRetriever();
+    [[nodiscard]] std::string const& getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty() const;
     [[nodiscard]] bool hasNoVariables() const;
     [[nodiscard]] bool hasOnlyASingleVariable() const;
     [[nodiscard]] bool hasMultipleVariables() const;
-    [[nodiscard]] std::string const& getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty() const;
     void retrieveFromEquations(Equations const& equations) override;
     void retrieveFromEquation(Equation const& equation) override;
     void retrieveFromTerm(Term const& term) override;

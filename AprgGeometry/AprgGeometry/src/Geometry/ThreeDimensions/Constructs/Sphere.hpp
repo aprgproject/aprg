@@ -13,8 +13,6 @@ public:
     bool operator==(Sphere const& sphere) const;
     bool operator!=(Sphere const& sphere) const;
     bool operator<(Sphere const& sphere) const;
-    [[nodiscard]] bool isInside(Point const& point) const;
-    [[nodiscard]] double getRadius() const;
     [[nodiscard]] Point getCenter() const;
     [[nodiscard]] std::optional<double> calculateXFromYAndZ(
         double const y, double const z, double const signOfRoot) const;
@@ -22,6 +20,8 @@ public:
         double const x, double const z, double const signOfRoot) const;
     [[nodiscard]] std::optional<double> calculateZFromXAndY(
         double const x, double const y, double const signOfRoot) const;
+    [[nodiscard]] double getRadius() const;
+    [[nodiscard]] bool isInside(Point const& point) const;
 
 private:
     friend std::ostream& operator<<(std::ostream& out, Sphere const& sphere);

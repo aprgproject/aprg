@@ -12,19 +12,19 @@ template <typename Object, typename QueueWithObject>
 class StackUsingTwoQueues : public BaseStack<Object> {
 public:
     StackUsingTwoQueues() = default;
-    [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
     [[nodiscard]] int getSize() const override { return m_queueAtTheTop.getSize() + m_queueAtTheBottom.getSize(); }
+    [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
+
+    void push(Object const& object) override {
+        m_queueAtTheTop.enqueue(object);
+        balanceSizesAtPushIfNeeded();
+    }
 
     Object pop() override {
         rotateFirstToLast(m_queueAtTheTop);
         auto result(m_queueAtTheTop.dequeue());
         balanceSizesAtPopIfNeeded();
         return result;
-    }
-
-    void push(Object const& object) override {
-        m_queueAtTheTop.enqueue(object);
-        balanceSizesAtPushIfNeeded();
     }
 
 private:

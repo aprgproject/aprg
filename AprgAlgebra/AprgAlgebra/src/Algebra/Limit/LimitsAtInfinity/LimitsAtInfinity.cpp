@@ -41,16 +41,6 @@ AlbaNumber LimitsAtInfinity::getDegreeToRemove(AlbaNumber const& numeratorDegree
     return degreeToRemove;
 }
 
-AlbaNumber LimitsAtInfinity::getMaxDegree(Term const& term) {
-    Term degreeOnlyTerm(term);
-    m_degreeOnlyMutator.mutateTerm(degreeOnlyTerm);
-    AlbaNumber degree;
-    if (canBeConvertedToMonomial(degreeOnlyTerm)) {
-        degree = getDegree(createMonomialIfPossible(degreeOnlyTerm));
-    }
-    return degree;
-}
-
 void LimitsAtInfinity::simplify() {
     simplifyAsATerm();
     if (!isNan(m_simplifiedTermAtInfinity)) {
@@ -96,6 +86,16 @@ void LimitsAtInfinity::simplifyPolynomialToMaxDegreeMonomialOnly() {
         m_simplifiedTermAtInfinity = Term(newPolynomial);
         m_simplifiedTermAtInfinity.simplify();
     }
+}
+
+AlbaNumber LimitsAtInfinity::getMaxDegree(Term const& term) {
+    Term degreeOnlyTerm(term);
+    m_degreeOnlyMutator.mutateTerm(degreeOnlyTerm);
+    AlbaNumber degree;
+    if (canBeConvertedToMonomial(degreeOnlyTerm)) {
+        degree = getDegree(createMonomialIfPossible(degreeOnlyTerm));
+    }
+    return degree;
 }
 
 }  // namespace alba::algebra

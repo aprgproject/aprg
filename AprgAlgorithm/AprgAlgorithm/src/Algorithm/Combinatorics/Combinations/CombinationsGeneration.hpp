@@ -39,10 +39,6 @@ public:
     }
 
 private:
-    static RecursionData createRecursionData(Combinations& combinations, Objects const& objects, int const length) {
-        return RecursionData{combinations, Combination(), 0, objects, length};
-    }
-
     static void collectCombinationsUsingRecursion(RecursionData& recursionData) {
         if (static_cast<int>(recursionData.currentCombination.size()) == recursionData.targetCombinationLength) {
             recursionData.combinations.emplace_back(recursionData.currentCombination);
@@ -57,6 +53,10 @@ private:
                 currentCombination.pop_back();
             }
         }
+    }
+
+    static RecursionData createRecursionData(Combinations& combinations, Objects const& objects, int const length) {
+        return RecursionData{combinations, Combination(), 0, objects, length};
     }
 };
 

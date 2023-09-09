@@ -46,16 +46,6 @@ bool FesterRobot::isRunningInClipboardData(string const& clipboardData) {
     return stringHelper::isStringFoundCaseSensitive(clipboardData, "running iteration");
 }
 
-bool FesterRobot::isRunningFinishedInClipboardData(string const& clipboardData) const {
-    string freqBandStringInLog(stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(
-        stringHelper::getStringWithoutRedundantWhiteSpace(stringHelper::getStringAfterThisString(
-            stringHelper::getStringInBetweenTwoStrings(clipboardData, "freqBand", "filCoef"), "="))));
-    string frequenciesStringForExcel(getFrequenciesStringForExcel());
-    cout << "freqBandStringInLog: [" << freqBandStringInLog << "]\n";
-    cout << "frequenciesStringForExcel: [" << frequenciesStringForExcel << "]\n";
-    return freqBandStringInLog == frequenciesStringForExcel;
-}
-
 string FesterRobot::getClipboardFormattedData() const {
     string clipboardData(m_userAutomation.getStringFromClipboard());
     stringHelper::replaceAllAndReturnIfFound(clipboardData, "\r", "");
@@ -72,6 +62,16 @@ string FesterRobot::getFrequenciesStringForExcel() const {
         frequencyString = frequencyString.substr(0, frequencyString.length() - 1);
     }
     return frequencyString;
+}
+
+bool FesterRobot::isRunningFinishedInClipboardData(string const& clipboardData) const {
+    string freqBandStringInLog(stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(
+        stringHelper::getStringWithoutRedundantWhiteSpace(stringHelper::getStringAfterThisString(
+            stringHelper::getStringInBetweenTwoStrings(clipboardData, "freqBand", "filCoef"), "="))));
+    string frequenciesStringForExcel(getFrequenciesStringForExcel());
+    cout << "freqBandStringInLog: [" << freqBandStringInLog << "]\n";
+    cout << "frequenciesStringForExcel: [" << frequenciesStringForExcel << "]\n";
+    return freqBandStringInLog == frequenciesStringForExcel;
 }
 
 void FesterRobot::exitIfSpecialKeyIsPressed() {

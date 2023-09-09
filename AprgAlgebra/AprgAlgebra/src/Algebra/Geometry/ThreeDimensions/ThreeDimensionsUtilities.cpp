@@ -79,19 +79,6 @@ Equation getHyperbolicParaboloidEquation() {
     return {leftHandSide, "=", rightHandSide};
 }
 
-Equations getLineEquations() {
-    Equations result;
-    Term xMinusX0(createExpressionIfPossible({x, "-", x0}));
-    Term yMinusY0(createExpressionIfPossible({y, "-", y0}));
-    Term zMinusZ0(createExpressionIfPossible({z, "-", z0}));
-    Term xSide(createExpressionIfPossible({xMinusX0, "/", a}));
-    Term ySide(createExpressionIfPossible({yMinusY0, "/", b}));
-    Term zSide(createExpressionIfPossible({zMinusZ0, "/", c}));
-    result.emplace_back(xSide, "=", ySide);
-    result.emplace_back(xSide, "=", zSide);
-    return result;
-}
-
 Equation getPlaneEquation() {
     Term leftHandSide(createExpressionIfPossible({a, "*", x, "+", b, "*", y, "+", c, "*", z, "+", d}));
     return {leftHandSide, "=", 0};
@@ -116,6 +103,19 @@ Equation getSphereEquation() {
     Term leftHandSide(createExpressionIfPossible({xSquared, "+", ySquared, "+", zSquared}));
     Term const& rightHandSide(rSquared);
     return {leftHandSide, "=", rightHandSide};
+}
+
+Equations getLineEquations() {
+    Equations result;
+    Term xMinusX0(createExpressionIfPossible({x, "-", x0}));
+    Term yMinusY0(createExpressionIfPossible({y, "-", y0}));
+    Term zMinusZ0(createExpressionIfPossible({z, "-", z0}));
+    Term xSide(createExpressionIfPossible({xMinusX0, "/", a}));
+    Term ySide(createExpressionIfPossible({yMinusY0, "/", b}));
+    Term zSide(createExpressionIfPossible({zMinusZ0, "/", c}));
+    result.emplace_back(xSide, "=", ySide);
+    result.emplace_back(xSide, "=", zSide);
+    return result;
 }
 
 }  // namespace alba::algebra::ThreeDimensions

@@ -47,20 +47,20 @@ public:
 
 private:
     static std::string getBitmapFilePathOfCharacter(char const character);
-    [[nodiscard]] double getLowestInterval() const;
-    [[nodiscard]] int convertRealXCoordinateToBitmapXCoordinate(double const xCoordinate) const;
-    [[nodiscard]] int convertRealYCoordinateToBitmapYCoordinate(double const yCoordinate) const;
-    [[nodiscard]] double convertBitmapXCoordinateToRealXCoordinate(double const xCoordinate) const;
-    [[nodiscard]] double convertBitmapYCoordinateToRealYCoordinate(double const yCoordinate) const;
     [[nodiscard]] TwoDimensions::Point convertBitmapXYToRealPoint(AprgBitmap::BitmapXY const& bitmapPosition) const;
     [[nodiscard]] TwoDimensions::Point convertRealPointToBitmapPoint(TwoDimensions::Point const& realPosition) const;
-    bool isBitmapPointInTheBitmap(TwoDimensions::Point const& bitmapPoint);
+    [[nodiscard]] double getLowestInterval() const;
+    [[nodiscard]] double convertBitmapXCoordinateToRealXCoordinate(double const xCoordinate) const;
+    [[nodiscard]] double convertBitmapYCoordinateToRealYCoordinate(double const yCoordinate) const;
+    [[nodiscard]] int convertRealXCoordinateToBitmapXCoordinate(double const xCoordinate) const;
+    [[nodiscard]] int convertRealYCoordinateToBitmapYCoordinate(double const yCoordinate) const;
     void drawBitmapPointIfPossible(TwoDimensions::Point const& bitmapPoint, uint32_t const color);
     void drawConnectedBitmapPointsIfPossible(TwoDimensions::Points const& bitmapPoints, uint32_t const color);
     void drawTermWithXSubstitution(algebra::Term const& term, uint32_t const color);
     void drawTermWithYSubstitution(algebra::Term const& term, uint32_t const color);
     void drawEquationWithXSubstitution(algebra::Equation const& equation, uint32_t const color);
     void drawEquationWithYSubstitution(algebra::Equation const& equation, uint32_t const color);
+    bool isBitmapPointInTheBitmap(TwoDimensions::Point const& bitmapPoint);
     AprgBitmap::Bitmap m_bitmap;
     AprgBitmap::BitmapSnippet m_bitmapSnippet;
     AprgBitmap::BitmapXY m_originInBitmap;

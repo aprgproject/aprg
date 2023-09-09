@@ -4,7 +4,10 @@
 #include <BooleanAlgebra/Term/TermTypes/Term.hpp>
 
 namespace alba::booleanAlgebra {
-
+BaseTerm const& getBaseTermConstReferenceFromTerm(Term const& term);
+BaseTerm const& getBaseTermConstReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer);
+BaseTerm& getBaseTermReferenceFromTerm(Term& term);
+BaseTerm& getBaseTermReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer);
 BaseTermUniquePointer createBasePointer(BaseTerm const& baseTerm);
 BaseTermUniquePointer createBasePointer(BaseTerm&& baseTerm);
 BaseTermUniquePointer duplicateUniquePointer(BaseTermUniquePointer const& uniquePointer);
@@ -13,9 +16,4 @@ Term const& getTermConstReferenceFromUniquePointer(BaseTermUniquePointer const& 
 Term&& getTermRValueReferenceFromBaseTerm(BaseTerm&& baseTerm);
 Term& getTermReferenceFromBaseTerm(BaseTerm& baseTerm);
 Term& getTermReferenceFromUniquePointer(BaseTermUniquePointer& uniquePointer);
-BaseTerm const& getBaseTermConstReferenceFromTerm(Term const& term);
-BaseTerm const& getBaseTermConstReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer);
-BaseTerm& getBaseTermReferenceFromTerm(Term& term);
-BaseTerm& getBaseTermReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer);
-
 }  // namespace alba::booleanAlgebra

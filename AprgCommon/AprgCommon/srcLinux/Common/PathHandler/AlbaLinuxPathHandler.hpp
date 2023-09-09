@@ -16,10 +16,10 @@ public:
     explicit AlbaLinuxPathHandler(std::string_view const path);
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     static AlbaLinuxPathHandler createPathHandlerForDetectedPath();
+    [[nodiscard]] AlbaDateTime getFileCreationTime() const;
+    [[nodiscard]] double getFileSizeEstimate() const;
     [[nodiscard]] bool isFoundInLocalSystem() const;
     [[nodiscard]] bool isRelativePath() const;
-    [[nodiscard]] double getFileSizeEstimate() const;
-    [[nodiscard]] AlbaDateTime getFileCreationTime() const;
     void createDirectoriesForNonExisitingDirectories() const;
     void findFilesAndDirectoriesOneDepth(
         std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
@@ -30,18 +30,19 @@ public:
 
     void findFilesAndDirectoriesUnlimitedDepth(
         std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
+    void clear() override;
+    void deleteFilesInDirectory();                  // do tests
+    void deleteInnerFilesAndDirectories();          // do tests
+    void deleteDirectoryWithFilesAndDirectories();  // do tests
     bool deleteFile();
     bool deleteDirectoryWithoutFilesAndDirectories();  // do tests
     bool copyToNewFile(std::string_view const newFilePath);
     bool renameFile(std::string_view const newFileName);
     bool renameImmediateDirectory(std::string_view const newDirectoryName);
-    void clear() override;
-    void deleteFilesInDirectory();                  // do tests
-    void deleteInnerFilesAndDirectories();          // do tests
-    void deleteDirectoryWithFilesAndDirectories();  // do tests
+
 private:
-    static bool canBeLocated(std::string_view const fullPath);
     static std::string getCurrentDetectedPath();
+    static bool canBeLocated(std::string_view const fullPath);
     [[nodiscard]] bool isPathADirectory(std::string_view const fileOrDirectoryName) const;
     [[nodiscard]] bool isSlashNeededAtTheEnd(
         std::string_view const correctedPath, std::string_view const originalPath) const;

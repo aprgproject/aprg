@@ -42,17 +42,6 @@ BtsLogSorter::BtsLogSorter(BtsLogSorterConfiguration const& configuration)
     createTempDirectories();
 }
 
-double BtsLogSorter::getTotalSizeToBeRead(set<string> const& listOfFiles) {
-    double totalFileSize(0);
-    for (string const& filePath : listOfFiles) {
-        AlbaLocalPathHandler filePathHandler(filePath);
-        if (m_acceptedFilesGrepEvaluator.evaluate(filePathHandler.getFile())) {
-            totalFileSize += filePathHandler.getFileSizeEstimate();
-        }
-    }
-    return totalFileSize;
-}
-
 void BtsLogSorter::processDirectory(string const& directoryPath) {
     cout << "processDirectory: " << directoryPath << "\n";
     set<string> listOfFiles;
@@ -107,14 +96,25 @@ void BtsLogSorter::saveLogsToOutputFile(string const& outputPath) {
     deleteStartupLog();
 }
 
-string BtsLogSorter::getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
-    string const& directory, string const& hardwareAddress) {
-    string filename = hardwareAddress.empty() ? "NoHardwareAddress" : hardwareAddress;
-    return AlbaLocalPathHandler(directory + R"(\)" + filename + R"(.log)").getFullPath();
+double BtsLogSorter::getTotalSizeToBeRead(set<string> const& listOfFiles) {
+    double totalFileSize(0);
+    for (string const& filePath : listOfFiles) {
+        AlbaLocalPathHandler filePathHandler(filePath);
+        if (m_acceptedFilesGrepEvaluator.evaluate(filePathHandler.getFile())) {
+            totalFileSize += filePathHandler.getFileSizeEstimate();
+        }
+    }
+    return totalFileSize;
 }
 
 void BtsLogSorter::deleteFilesInDirectory(string const& directoryOfLogs) {
     AlbaLocalPathHandler(directoryOfLogs).deleteFilesInDirectory();
+}
+
+string BtsLogSorter::getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
+    string const& directory, string const& hardwareAddress) {
+    string filename = hardwareAddress.empty() ? "NoHardwareAddress" : hardwareAddress;
+    return AlbaLocalPathHandler(directory + R"(\)" + filename + R"(.log)").getFullPath();
 }
 
 void BtsLogSorter::createTempDirectories() const {

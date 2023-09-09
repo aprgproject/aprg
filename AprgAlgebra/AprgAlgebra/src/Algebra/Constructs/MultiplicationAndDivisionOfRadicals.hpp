@@ -21,11 +21,11 @@ public:
     void simplify();
 
 private:
+    static AlbaNumber getGcfOfExponents(RadicalDetails const& radicalDetails);
     static bool shouldBeCombined(
         RadicalDetails const& radicalDetails, Monomial const& combinedMonomial, AlbaNumber const& gcfOfExponents);
     static bool isNotANegativeTermWithExponentDenominatorEven(
         Monomial const& combinedMonomial, AlbaNumber const& gcfOfExponents);
-    static AlbaNumber getGcfOfExponents(RadicalDetails const& radicalDetails);
     void gatherDetails(RadicalDetails& radicalDetails, Monomial& combinedMonomial, TermsWithDetails& remainingTerms);
     void combineMonomialAndRadicalsAndSave(
         RadicalDetails const& radicalDetails, Monomial const& combinedMonomial, AlbaNumber const& gcfOfExponents);

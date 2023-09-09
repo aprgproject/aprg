@@ -10,8 +10,8 @@ using namespace std::this_thread;
 
 namespace alba {
 
-LibrarySteadyTime getSteadyTimeNow() { return steady_clock::now(); }
-LibrarySystemTime getSystemTimeNow() { return system_clock::now(); }
+void sleepFor(size_t const milliSeconds) { sleep_for(chrono::milliseconds(milliSeconds)); }
+void sleepUntil(AlbaDateTime const& awakeTime) { sleep_until(convertAlbaDateTimeToSystemTime(awakeTime)); }
 
 AlbaDateTime convertSystemTimeToAlbaDateTime(LibrarySystemTime const& inputTime) {
     // No std::chrono::year_month_day yet (its in C++20), so let use time_t
@@ -28,6 +28,10 @@ AlbaDateTime convertSystemTimeToAlbaDateTime(LibrarySystemTime const& inputTime)
     result.reorganizeValues();
     return result;
 }
+
+AlbaDateTime getCurrentDateTime() { return convertSystemTimeToAlbaDateTime(getSystemTimeNow()); }
+LibrarySteadyTime getSteadyTimeNow() { return steady_clock::now(); }
+LibrarySystemTime getSystemTimeNow() { return system_clock::now(); }
 
 LibrarySystemTime convertAlbaDateTimeToSystemTime(AlbaDateTime const& inputTime) {
     constexpr int YEAR_OFFSET = 1900;
@@ -49,9 +53,5 @@ LibrarySystemTime convertAlbaDateTimeToSystemTime(AlbaDateTime const& inputTime)
     }
     return result;
 }
-
-AlbaDateTime getCurrentDateTime() { return convertSystemTimeToAlbaDateTime(getSystemTimeNow()); }
-void sleepFor(size_t const milliSeconds) { sleep_for(chrono::milliseconds(milliSeconds)); }
-void sleepUntil(AlbaDateTime const& awakeTime) { sleep_until(convertAlbaDateTimeToSystemTime(awakeTime)); }
 
 }  // namespace alba

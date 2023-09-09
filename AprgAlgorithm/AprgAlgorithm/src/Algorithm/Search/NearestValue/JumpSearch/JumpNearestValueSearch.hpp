@@ -16,15 +16,6 @@ public:
         : m_blockSize(getOptimalSize(values)), m_sortedValues(values) {}
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    Value getNearestValue(Value const& target) {
-        Value result{};
-        Index selectedIndex(getIndexOfNearestValue(target));
-        if (selectedIndex != INVALID_INDEX) {
-            result = m_sortedValues[selectedIndex];
-        }
-        return result;
-    }
-
     Index getIndexOfNearestValue(Value const& target) {
         Index previousSearchIndex(0);
         Index searchIndex(0);
@@ -37,6 +28,15 @@ public:
         LinearNearestValueSearchWithOneIndex<Values> linearSearch(
             previousSearchIndex, std::min(searchIndex, static_cast<int>(m_sortedValues.size()) - 1), m_sortedValues);
         return linearSearch.getIndexOfNearestValue(target);
+    }
+
+    Value getNearestValue(Value const& target) {
+        Value result{};
+        Index selectedIndex(getIndexOfNearestValue(target));
+        if (selectedIndex != INVALID_INDEX) {
+            result = m_sortedValues[selectedIndex];
+        }
+        return result;
     }
 
 private:

@@ -58,8 +58,6 @@ public:
     void processFileWithSortedPrints(std::string const& pathOfBtsSortedLog);
 
 private:
-    static double getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser);
-    static double getTotalMicroseconds(wcdmaToolsBackend::BtsLogTime const& btsLogTime);
     static void setFirstLogTimeInPair(
         std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs);
     static void setSecondLogTimeInPair(
@@ -67,6 +65,8 @@ private:
     static void saveUserIndentifierAndLatencyToCsvFile(
         UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, std::ofstream& csvFileStream);
     static void setLogTimeIfNeeded(std::string const& lineInLogs, LogTime& logTime);
+    static double getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser);
+    static double getTotalMicroseconds(wcdmaToolsBackend::BtsLogTime const& btsLogTime);
     void initializeMessageQueueingTimeFileStream();
     void initializeRlSetupTimeFileStream();
     void initializeRlDeletionTimeFileStream();

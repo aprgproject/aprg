@@ -13,20 +13,88 @@ using namespace std;
 
 namespace alba::algebra::Factorization {
 
-bool dontFactorizeBaseBecauseBaseIsARaiseToPowerExpression(Term const& base) {
-    bool result(false);
-    if (base.isExpression()) {
-        result = OperatorLevel::RaiseToPower == base.getAsExpression().getCommonOperatorLevel();
+void retrieveConstantAndNonConstantFactors(
+    vector<TermsRaiseToNumbers>& nonConstantFactorsPerAddends, AlbaNumbers& constantFactors,
+    TermsWithDetails const& originalTermsWithDetails) {
+    for (TermWithDetails const& originalTermWithDetails : originalTermsWithDetails) {
+        Term const& term(getTermConstReferenceFromUniquePointer(originalTermWithDetails.baseTermPointer));
+        Terms factors(factorizeTerm(term));
+
+        AlbaNumber constantFactor(1);
+        TermsRaiseToNumbers nonConstantRaiseToExponent;
+        for (Term const& factor : factors) {
+            if (factor.isConstant()) {
+                constantFactor *= factor.getAsNumber();
+            } else {
+                nonConstantRaiseToExponent.putTerm(factor, TermAssociationType::Positive);
+            }
+        }
+        constantFactors.emplace_back(constantFactor);
+        nonConstantFactorsPerAddends.emplace_back(nonConstantRaiseToExponent);
     }
-    return result;
 }
 
-bool dontFactorizeBecauseThereIsSquareRootOfNegativeNumber(Term const& base, AlbaNumber const& exponent) {
-    bool hasEvenDenominatorExponents(false);
-    if (exponent.isFractionType()) {
-        hasEvenDenominatorExponents = isEven(exponent.getFractionData().denominator);
+void retrieveCommonNonConstantFactors(
+    TermsRaiseToNumbers& commonNonConstantFactors, vector<TermsRaiseToNumbers> const& nonConstantFactorsPerAddends) {
+    if (!nonConstantFactorsPerAddends.empty()) {
+        commonNonConstantFactors = nonConstantFactorsPerAddends.front();
+        for (auto it = nonConstantFactorsPerAddends.cbegin() + 1; it != nonConstantFactorsPerAddends.cend(); ++it) {
+            for (auto const& [base, exponentAtCommonFactor] : commonNonConstantFactors.getBaseToExponentMap()) {
+                AlbaNumber exponentAtAddend(it->getExponentOfBase(base));
+                if (exponentAtAddend > 0) {
+                    commonNonConstantFactors.setBaseAndExponent(base, min(exponentAtCommonFactor, exponentAtAddend));
+                } else if (exponentAtAddend < 0) {
+                    commonNonConstantFactors.setBaseAndExponent(base, max(exponentAtCommonFactor, exponentAtAddend));
+                } else {
+                    commonNonConstantFactors.setBaseAndExponent(base, 0);
+                }
+            }
+            commonNonConstantFactors.simplify();
+            if (commonNonConstantFactors.getBaseToExponentMap().empty()) {
+                break;
+            }
+        }
     }
-    return hasEvenDenominatorExponents && isANegativeTerm(base);
+}
+
+void putRemainingConstantFactorAsAnInnerMultiplier(
+    TermsWithDetails& innerMultipliers, AlbaNumber const& constantFactorOfOriginalAddend,
+    AlbaNumber const& constantGcf) {
+    AlbaNumber remainingConstant(constantFactorOfOriginalAddend / constantGcf);
+    if (remainingConstant != 1) {
+        innerMultipliers.emplace_back(Term(remainingConstant), TermAssociationType::Positive);
+    }
+}
+
+void putRemainingNonConstantFactorsAsInnerMultipliers(
+    TermsWithDetails& innerMultipliers, TermsRaiseToNumbers const& nonConstantFactorsOfOriginalAddend,
+    TermsRaiseToNumbers const& commonNonConstantFactors) {
+    TermsRaiseToNumbers remainingNonConstantFactors(nonConstantFactorsOfOriginalAddend);
+    remainingNonConstantFactors.subtractExponents(commonNonConstantFactors);
+    remainingNonConstantFactors.simplify();
+    TermsWithDetails remainingNonConstantFactorsWithDetails(
+        remainingNonConstantFactors.getTermWithDetailsInMultiplicationAndDivisionOperation());
+    innerMultipliers.reserve(innerMultipliers.size() + remainingNonConstantFactorsWithDetails.size());
+    copy(
+        remainingNonConstantFactorsWithDetails.cbegin(), remainingNonConstantFactorsWithDetails.cend(),
+        back_inserter(innerMultipliers));
+}
+
+void putRemainingInnerMultipliersAsOuterAddend(
+    TermsWithDetails& outerAddends, TermsWithDetails const& innerMultipliers, TermWithDetails const& originalAddend) {
+    Term combinedInnerTerm(createTermWithMultiplicationAndDivisionTermsWithDetails(innerMultipliers));
+    outerAddends.emplace_back(combinedInnerTerm, originalAddend.association);
+}
+
+AlbaNumber getGcfOfConstants(AlbaNumbers const& constantFactorsPerAddends) {
+    AlbaNumber constantGcf;
+    if (!constantFactorsPerAddends.empty()) {
+        constantGcf = constantFactorsPerAddends.front();
+        for (auto it = constantFactorsPerAddends.cbegin() + 1; it != constantFactorsPerAddends.cend(); ++it) {
+            constantGcf = getGreatestCommonFactor(constantGcf, *it);
+        }
+    }
+    return constantGcf;
 }
 
 Terms factorizeAnExpression(Expression const& expression) {
@@ -103,17 +171,6 @@ TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForRaiseToPower(Expression con
     return result;
 }
 
-AlbaNumber getGcfOfConstants(AlbaNumbers const& constantFactorsPerAddends) {
-    AlbaNumber constantGcf;
-    if (!constantFactorsPerAddends.empty()) {
-        constantGcf = constantFactorsPerAddends.front();
-        for (auto it = constantFactorsPerAddends.cbegin() + 1; it != constantFactorsPerAddends.cend(); ++it) {
-            constantGcf = getGreatestCommonFactor(constantGcf, *it);
-        }
-    }
-    return constantGcf;
-}
-
 TermsRaiseToNumbers getFactorizedItemsForAdditionAndSubtraction(
     Expression const& expression, AlbaNumbers const& constantFactorsPerAddends,
     vector<TermsRaiseToNumbers> const& nonConstantFactorsPerAddends, AlbaNumber const& constantGcf,
@@ -149,77 +206,20 @@ TermsRaiseToNumbers getFactorizedItemsBasedFromCollectedData(
     return result;
 }
 
-void retrieveConstantAndNonConstantFactors(
-    vector<TermsRaiseToNumbers>& nonConstantFactorsPerAddends, AlbaNumbers& constantFactors,
-    TermsWithDetails const& originalTermsWithDetails) {
-    for (TermWithDetails const& originalTermWithDetails : originalTermsWithDetails) {
-        Term const& term(getTermConstReferenceFromUniquePointer(originalTermWithDetails.baseTermPointer));
-        Terms factors(factorizeTerm(term));
-
-        AlbaNumber constantFactor(1);
-        TermsRaiseToNumbers nonConstantRaiseToExponent;
-        for (Term const& factor : factors) {
-            if (factor.isConstant()) {
-                constantFactor *= factor.getAsNumber();
-            } else {
-                nonConstantRaiseToExponent.putTerm(factor, TermAssociationType::Positive);
-            }
-        }
-        constantFactors.emplace_back(constantFactor);
-        nonConstantFactorsPerAddends.emplace_back(nonConstantRaiseToExponent);
+bool dontFactorizeBaseBecauseBaseIsARaiseToPowerExpression(Term const& base) {
+    bool result(false);
+    if (base.isExpression()) {
+        result = OperatorLevel::RaiseToPower == base.getAsExpression().getCommonOperatorLevel();
     }
+    return result;
 }
 
-void retrieveCommonNonConstantFactors(
-    TermsRaiseToNumbers& commonNonConstantFactors, vector<TermsRaiseToNumbers> const& nonConstantFactorsPerAddends) {
-    if (!nonConstantFactorsPerAddends.empty()) {
-        commonNonConstantFactors = nonConstantFactorsPerAddends.front();
-        for (auto it = nonConstantFactorsPerAddends.cbegin() + 1; it != nonConstantFactorsPerAddends.cend(); ++it) {
-            for (auto const& [base, exponentAtCommonFactor] : commonNonConstantFactors.getBaseToExponentMap()) {
-                AlbaNumber exponentAtAddend(it->getExponentOfBase(base));
-                if (exponentAtAddend > 0) {
-                    commonNonConstantFactors.setBaseAndExponent(base, min(exponentAtCommonFactor, exponentAtAddend));
-                } else if (exponentAtAddend < 0) {
-                    commonNonConstantFactors.setBaseAndExponent(base, max(exponentAtCommonFactor, exponentAtAddend));
-                } else {
-                    commonNonConstantFactors.setBaseAndExponent(base, 0);
-                }
-            }
-            commonNonConstantFactors.simplify();
-            if (commonNonConstantFactors.getBaseToExponentMap().empty()) {
-                break;
-            }
-        }
+bool dontFactorizeBecauseThereIsSquareRootOfNegativeNumber(Term const& base, AlbaNumber const& exponent) {
+    bool hasEvenDenominatorExponents(false);
+    if (exponent.isFractionType()) {
+        hasEvenDenominatorExponents = isEven(exponent.getFractionData().denominator);
     }
-}
-
-void putRemainingConstantFactorAsAnInnerMultiplier(
-    TermsWithDetails& innerMultipliers, AlbaNumber const& constantFactorOfOriginalAddend,
-    AlbaNumber const& constantGcf) {
-    AlbaNumber remainingConstant(constantFactorOfOriginalAddend / constantGcf);
-    if (remainingConstant != 1) {
-        innerMultipliers.emplace_back(Term(remainingConstant), TermAssociationType::Positive);
-    }
-}
-
-void putRemainingNonConstantFactorsAsInnerMultipliers(
-    TermsWithDetails& innerMultipliers, TermsRaiseToNumbers const& nonConstantFactorsOfOriginalAddend,
-    TermsRaiseToNumbers const& commonNonConstantFactors) {
-    TermsRaiseToNumbers remainingNonConstantFactors(nonConstantFactorsOfOriginalAddend);
-    remainingNonConstantFactors.subtractExponents(commonNonConstantFactors);
-    remainingNonConstantFactors.simplify();
-    TermsWithDetails remainingNonConstantFactorsWithDetails(
-        remainingNonConstantFactors.getTermWithDetailsInMultiplicationAndDivisionOperation());
-    innerMultipliers.reserve(innerMultipliers.size() + remainingNonConstantFactorsWithDetails.size());
-    copy(
-        remainingNonConstantFactorsWithDetails.cbegin(), remainingNonConstantFactorsWithDetails.cend(),
-        back_inserter(innerMultipliers));
-}
-
-void putRemainingInnerMultipliersAsOuterAddend(
-    TermsWithDetails& outerAddends, TermsWithDetails const& innerMultipliers, TermWithDetails const& originalAddend) {
-    Term combinedInnerTerm(createTermWithMultiplicationAndDivisionTermsWithDetails(innerMultipliers));
-    outerAddends.emplace_back(combinedInnerTerm, originalAddend.association);
+    return hasEvenDenominatorExponents && isANegativeTerm(base);
 }
 
 }  // namespace alba::algebra::Factorization

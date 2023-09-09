@@ -13,17 +13,17 @@ class LabelForPoints {
 public:
     using PixelsToLabelsMap = std::map<BitmapXY, int>;
     using PixelAndLabelPair = std::pair<BitmapXY, int>;
-    [[nodiscard]] int getLabel(BitmapXY const& point) const;
     [[nodiscard]] PixelsToLabelsMap const& getPixelsToLabels() const;
+    [[nodiscard]] int getLabel(BitmapXY const& point) const;
     void setLabel(BitmapXY const& point, int const label);
 
 private:
     PixelsToLabelsMap m_pixelsTolabelsMap;
 };
 
+uint32_t getLabelColor(int const label);
 bool isInitialLabel(int const label);
 bool isInvalidLabel(int const label);
 bool isInitialOrInvalidLabel(int const label);
-uint32_t getLabelColor(int const label);
 
 }  // namespace alba::AprgBitmap

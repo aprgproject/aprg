@@ -13,7 +13,6 @@ namespace alba {
 class AlbaSackReader {
 public:
     enum class ReaderState {
-
         LookingForInitialKeyword,
         ClassStateLookingForClassName,
         ClassStateLookingForOpeningBraceOrSemiColon,
@@ -27,7 +26,6 @@ public:
         TypedefEnumStateLookingForOpeningBrace,
         TypedefEnumStateLookingForClosingBrace,
         TypedefEnumStateLookingForType
-
     };
 
     struct ReaderTransactionData {
@@ -45,10 +43,10 @@ public:
     void process();
 
 private:
-    static std::string getReaderStateString(ReaderState const state);
     static void tokenize(stringHelper::strings& tokens, std::string const& line);
     static void combineWords(stringHelper::strings& tokens);
     static void combineArrayOperators(stringHelper::strings& tokens);
+    static std::string getReaderStateString(ReaderState const state);
     void processDirectory(std::string const& path);
     void processFile(std::string const& path);
     void analyze(stringHelper::strings const& tokens);

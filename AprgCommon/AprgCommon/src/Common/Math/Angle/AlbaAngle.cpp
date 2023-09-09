@@ -15,13 +15,6 @@ AlbaAngle::AlbaAngle() : m_angleValueInDegrees(0) {}
 AlbaAngle::AlbaAngle(AngleUnitType const angleUnitType, double const angleValue)
     : m_angleValueInDegrees(calculateAngleValueInDegrees(angleUnitType, angleValue)) {}
 
-bool AlbaAngle::operator==(AlbaAngle const& angle) const {
-    return isAlmostEqual(m_angleValueInDegrees, angle.m_angleValueInDegrees);
-}
-
-bool AlbaAngle::operator!=(AlbaAngle const& angle) const { return !((*this) == angle); }
-bool AlbaAngle::operator<(AlbaAngle const& angle) const { return m_angleValueInDegrees < angle.m_angleValueInDegrees; }
-
 AlbaAngle AlbaAngle::operator+(AlbaAngle const& secondAngle) const {
     return {AngleUnitType::Degrees, m_angleValueInDegrees + secondAngle.m_angleValueInDegrees};
 }
@@ -32,6 +25,13 @@ AlbaAngle AlbaAngle::operator-(AlbaAngle const& secondAngle) const {
 
 AlbaAngle AlbaAngle::operator+() const { return *this; }
 AlbaAngle AlbaAngle::operator-() const { return {AngleUnitType::Degrees, -m_angleValueInDegrees}; }
+
+bool AlbaAngle::operator==(AlbaAngle const& angle) const {
+    return isAlmostEqual(m_angleValueInDegrees, angle.m_angleValueInDegrees);
+}
+
+bool AlbaAngle::operator!=(AlbaAngle const& angle) const { return !((*this) == angle); }
+bool AlbaAngle::operator<(AlbaAngle const& angle) const { return m_angleValueInDegrees < angle.m_angleValueInDegrees; }
 
 AlbaAngle& AlbaAngle::operator+=(AlbaAngle const& secondAngle) {
     m_angleValueInDegrees += secondAngle.m_angleValueInDegrees;

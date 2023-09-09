@@ -22,8 +22,8 @@ public:
     explicit AlbaUniformDeterministicAllBitsRandomizer(ValueType const customSeed) : m_randomEngine(customSeed) {}
     // NOLINTNEXTLINE(cert-msc32-c,cert-msc51-cpp)
     AlbaUniformDeterministicAllBitsRandomizer() : m_randomEngine() {}
-    ValueType getRandomValue() { return m_randomEngine(); }
     void setRandomSeed(ValueType const customSeed) { m_randomEngine.seed(customSeed); }
+    ValueType getRandomValue() { return m_randomEngine(); }
 
 private:
     RandomEngine m_randomEngine;

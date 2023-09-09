@@ -10,73 +10,6 @@ using namespace std;
 
 namespace alba::math {
 
-// These formulas are true.
-bool canModuloBeDistributedInAddition(
-    UnsignedInteger const number1, UnsignedInteger const number2, UnsignedInteger const modulo) {
-    // (a + b) mod m = (a mod m + b mod m) mod m
-    UnsignedInteger undistributed = (number1 + number2) % modulo;
-    UnsignedInteger distributed = (number1 % modulo + number2 % modulo) % modulo;
-    return undistributed == distributed;
-}
-
-bool canModuloBeDistributedInSubtraction(
-    UnsignedInteger const number1, UnsignedInteger const number2, UnsignedInteger const modulo) {
-    // (a - b) mod m = (a mod m - b mod m) mod m
-    UnsignedInteger undistributed = (number1 - number2) % modulo;
-    UnsignedInteger distributed = (number1 % modulo - number2 % modulo) % modulo;
-    return undistributed == distributed;
-}
-
-bool canModuloBeDistributedInMultiplication(
-    UnsignedInteger const number1, UnsignedInteger const number2, UnsignedInteger const modulo) {
-    // (a * b) mod m = ((a mod m) * (b mod m)) mod m
-    UnsignedInteger undistributed = (number1 * number2) % modulo;
-    UnsignedInteger distributed = (number1 % modulo * number2 % modulo) % modulo;
-    return undistributed == distributed;
-}
-
-bool canModuloBeDistributedInPower(
-    UnsignedInteger const number, UnsignedInteger const exponent, UnsignedInteger const modulo) {
-    // x^n mod m = ((x mod m)^n) mod m
-    UnsignedInteger undistributed = getRaiseToPowerForIntegers(number, exponent) % modulo;
-    UnsignedInteger distributed = getRaiseToPowerForIntegers(number % modulo, exponent) % modulo;
-    return undistributed == distributed;
-}
-
-bool canModuloBeDistributedInEveryIterationOfFactorial(UnsignedInteger const number, UnsignedInteger const modulo) {
-    // n! mod m = ((n mod m) * (n-1 mod m) * (n-2 mod m) ... (1 mod m)) mod m
-    UnsignedInteger undistributed = getFactorial(number) % modulo;
-    UnsignedInteger distributed = 1;
-    for (int i = 2; i <= static_cast<int>(number); ++i) {
-        distributed = (distributed * i) % modulo;
-    }
-    distributed %= modulo;
-    return undistributed == distributed;
-}
-
-bool isFermatTheoremTrue(UnsignedInteger const prime, UnsignedInteger const coPrime) {
-    // Fermat's theorem states that: (x^(m-1)) mod m = 1
-    // where m is prime and x and m are coprime.
-    bool result(false);
-    if (isPrime(prime) && isCoPrime(prime, coPrime)) {
-        UnsignedInteger formula = getRaiseToPowerForIntegers(prime, coPrime - 1) % coPrime;
-        result = formula == static_cast<UnsignedInteger>(1);
-    }
-    return result;
-}
-
-bool isEulerTheoremTrue(UnsignedInteger const coPrime1, UnsignedInteger const coPrime2) {
-    // Fermat's theorem states that: (x^(phi(m))) mod m = 1
-    // where x and m are coprime.
-    bool result(false);
-    if (isCoPrime(coPrime1, coPrime2)) {
-        UnsignedInteger formula =
-            getRaiseToPowerForIntegers(coPrime1, getNumberOfCoPrimesBelowThisNumber(coPrime2)) % coPrime2;
-        result = formula == static_cast<UnsignedInteger>(1);
-    }
-    return result;
-}
-
 UnsignedInteger getModularExponentiation(
     UnsignedInteger const number, UnsignedInteger const exponent, UnsignedInteger const modulo) {
     // x^n mod m is equal to this
@@ -175,6 +108,73 @@ UnsignedInteger getModularFactorial(UnsignedInteger const number, UnsignedIntege
         result = (result * i) % modulo;
     }
     result %= modulo;
+    return result;
+}
+
+// These formulas are true.
+bool canModuloBeDistributedInAddition(
+    UnsignedInteger const number1, UnsignedInteger const number2, UnsignedInteger const modulo) {
+    // (a + b) mod m = (a mod m + b mod m) mod m
+    UnsignedInteger undistributed = (number1 + number2) % modulo;
+    UnsignedInteger distributed = (number1 % modulo + number2 % modulo) % modulo;
+    return undistributed == distributed;
+}
+
+bool canModuloBeDistributedInSubtraction(
+    UnsignedInteger const number1, UnsignedInteger const number2, UnsignedInteger const modulo) {
+    // (a - b) mod m = (a mod m - b mod m) mod m
+    UnsignedInteger undistributed = (number1 - number2) % modulo;
+    UnsignedInteger distributed = (number1 % modulo - number2 % modulo) % modulo;
+    return undistributed == distributed;
+}
+
+bool canModuloBeDistributedInMultiplication(
+    UnsignedInteger const number1, UnsignedInteger const number2, UnsignedInteger const modulo) {
+    // (a * b) mod m = ((a mod m) * (b mod m)) mod m
+    UnsignedInteger undistributed = (number1 * number2) % modulo;
+    UnsignedInteger distributed = (number1 % modulo * number2 % modulo) % modulo;
+    return undistributed == distributed;
+}
+
+bool canModuloBeDistributedInPower(
+    UnsignedInteger const number, UnsignedInteger const exponent, UnsignedInteger const modulo) {
+    // x^n mod m = ((x mod m)^n) mod m
+    UnsignedInteger undistributed = getRaiseToPowerForIntegers(number, exponent) % modulo;
+    UnsignedInteger distributed = getRaiseToPowerForIntegers(number % modulo, exponent) % modulo;
+    return undistributed == distributed;
+}
+
+bool canModuloBeDistributedInEveryIterationOfFactorial(UnsignedInteger const number, UnsignedInteger const modulo) {
+    // n! mod m = ((n mod m) * (n-1 mod m) * (n-2 mod m) ... (1 mod m)) mod m
+    UnsignedInteger undistributed = getFactorial(number) % modulo;
+    UnsignedInteger distributed = 1;
+    for (int i = 2; i <= static_cast<int>(number); ++i) {
+        distributed = (distributed * i) % modulo;
+    }
+    distributed %= modulo;
+    return undistributed == distributed;
+}
+
+bool isFermatTheoremTrue(UnsignedInteger const prime, UnsignedInteger const coPrime) {
+    // Fermat's theorem states that: (x^(m-1)) mod m = 1
+    // where m is prime and x and m are coprime.
+    bool result(false);
+    if (isPrime(prime) && isCoPrime(prime, coPrime)) {
+        UnsignedInteger formula = getRaiseToPowerForIntegers(prime, coPrime - 1) % coPrime;
+        result = formula == static_cast<UnsignedInteger>(1);
+    }
+    return result;
+}
+
+bool isEulerTheoremTrue(UnsignedInteger const coPrime1, UnsignedInteger const coPrime2) {
+    // Fermat's theorem states that: (x^(phi(m))) mod m = 1
+    // where x and m are coprime.
+    bool result(false);
+    if (isCoPrime(coPrime1, coPrime2)) {
+        UnsignedInteger formula =
+            getRaiseToPowerForIntegers(coPrime1, getNumberOfCoPrimesBelowThisNumber(coPrime2)) % coPrime2;
+        result = formula == static_cast<UnsignedInteger>(1);
+    }
     return result;
 }
 

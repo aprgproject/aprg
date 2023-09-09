@@ -18,10 +18,10 @@ public:
     };
 
     SequenceOfMovesAnalyzer(BoardWithContext const& boardWithContext);
-    bool canPreMove() const;
-    State getState() const;
     Board const& getCurrentBoard() const;
     PieceColor getCurrentMoveColor() const;
+    State getState() const;
+    bool canPreMove() const;
     void analyzeMove(Move const& halfMove);
     void commitMove();
 

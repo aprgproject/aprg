@@ -14,7 +14,6 @@ using FloatingPointRandomizerForTest = AlbaUniformDeterministicAllBitsRandomizer
 }  // namespace
 
 // Dont test if uniformly distributed because its too large just trust the C++ implementation
-
 TEST(AlbaUniformDeterministicAllBitsRandomizerTest, DefaultConstructorWorks) {
     IntegerRandomizerForTest randomizer;
 

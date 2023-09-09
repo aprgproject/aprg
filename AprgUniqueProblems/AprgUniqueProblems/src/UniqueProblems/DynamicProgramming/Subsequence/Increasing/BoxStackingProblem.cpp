@@ -11,29 +11,6 @@ namespace alba {
 
 BoxStackingProblem::BoxStackingProblem(Boxes const& boxes) : m_boxes(boxes) {}
 
-BoxStackingProblem::Index BoxStackingProblem::getMaximumStackedHeight() const {
-    // Time Complexity: O(n^2)
-    // Auxiliary Space: O(n)
-    Value result(0);
-    if (!m_boxes.empty()) {
-        Boxes possibleBoxes(getAllPossibleBoxes());
-        Values partialHeights(possibleBoxes.size(), 0);
-        for (Index index(0); index < static_cast<Index>(possibleBoxes.size()); ++index) {
-            Box const& rightBox(possibleBoxes[index]);
-            Value& partialHeight(partialHeights[index]);
-            for (Index lowerIndex = 0; lowerIndex < index; ++lowerIndex) {
-                Box const& leftBox(possibleBoxes[lowerIndex]);
-                if (leftBox.getX() < rightBox.getX() && leftBox.getY() < rightBox.getY()) {
-                    partialHeight = max(partialHeight, partialHeights[lowerIndex]);
-                }
-            }
-            partialHeight += possibleBoxes[index].getZ();
-        }
-        result = *max_element(partialHeights.cbegin(), partialHeights.cend());
-    }
-    return result;
-}
-
 BoxStackingProblem::Boxes BoxStackingProblem::getBoxesWithMaximumStackedHeight() const {
     // Time Complexity: O(n^2)
     // Auxiliary Space: O(n)
@@ -70,6 +47,29 @@ BoxStackingProblem::Boxes BoxStackingProblem::getBoxesWithMaximumStackedHeight()
         }
         result.emplace_back(possibleBoxes[traverseIndex]);
         reverse(result.begin(), result.end());
+    }
+    return result;
+}
+
+BoxStackingProblem::Index BoxStackingProblem::getMaximumStackedHeight() const {
+    // Time Complexity: O(n^2)
+    // Auxiliary Space: O(n)
+    Value result(0);
+    if (!m_boxes.empty()) {
+        Boxes possibleBoxes(getAllPossibleBoxes());
+        Values partialHeights(possibleBoxes.size(), 0);
+        for (Index index(0); index < static_cast<Index>(possibleBoxes.size()); ++index) {
+            Box const& rightBox(possibleBoxes[index]);
+            Value& partialHeight(partialHeights[index]);
+            for (Index lowerIndex = 0; lowerIndex < index; ++lowerIndex) {
+                Box const& leftBox(possibleBoxes[lowerIndex]);
+                if (leftBox.getX() < rightBox.getX() && leftBox.getY() < rightBox.getY()) {
+                    partialHeight = max(partialHeight, partialHeights[lowerIndex]);
+                }
+            }
+            partialHeight += possibleBoxes[index].getZ();
+        }
+        result = *max_element(partialHeights.cbegin(), partialHeights.cend());
     }
     return result;
 }

@@ -17,9 +17,9 @@ public:
 
 private:
     static bool isRunningInClipboardData(std::string const& clipboardData);
-    bool isRunningFinishedInClipboardData(std::string const& clipboardData) const;
     std::string getClipboardFormattedData() const;
     std::string getFrequenciesStringForExcel() const;
+    bool isRunningFinishedInClipboardData(std::string const& clipboardData) const;
     void exitIfSpecialKeyIsPressed();
     void updateExcelFile(unsigned int const freqUsageBits);
     void setupFesterEnvironmentInMatlab();

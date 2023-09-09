@@ -66,15 +66,6 @@ CountingTilings::Rows CountingTilings::calculateNextRows(Row const& currentRow) 
     return result;
 }
 
-CountingTilings::Rows const& CountingTilings::getNextRows(Row const& currentRow) {
-    auto it = m_currentRowToNextRows.find(currentRow);
-    if (it != m_currentRowToNextRows.cend()) {
-        return it->second;
-    }
-    m_currentRowToNextRows[currentRow] = calculateNextRows(currentRow);
-    return m_currentRowToNextRows[currentRow];
-}
-
 void CountingTilings::searchNextRow(Count const rowIndex, Row const& currentRow) {
     if (rowIndex < m_numberOfRows - 1) {
         for (Row const& nextRow : getNextRows(currentRow)) {
@@ -130,6 +121,15 @@ void CountingTilings::doCompleteSearchAt(Count const gridIndex) {
             doCompleteSearchAt(gridIndex + 1);
         }
     }
+}
+
+CountingTilings::Rows const& CountingTilings::getNextRows(Row const& currentRow) {
+    auto it = m_currentRowToNextRows.find(currentRow);
+    if (it != m_currentRowToNextRows.cend()) {
+        return it->second;
+    }
+    m_currentRowToNextRows[currentRow] = calculateNextRows(currentRow);
+    return m_currentRowToNextRows[currentRow];
 }
 
 }  // namespace alba

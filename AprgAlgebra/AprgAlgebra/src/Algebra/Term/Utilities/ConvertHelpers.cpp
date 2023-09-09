@@ -10,26 +10,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-bool canBeConvertedToConstant(Polynomial const& polynomial) {
-    return polynomial.isEmpty() || (isOneMonomial(polynomial) && isConstantOnly(getFirstMonomial(polynomial)));
-}
-
-bool canBeConvertedToMonomial(Term const& term) {
-    TermType termType(term.getTermType());
-    bool isPolynomialWithOneMonomial(false);
-    if (term.isPolynomial()) {
-        isPolynomialWithOneMonomial = isOneMonomial(term.getAsPolynomial());
-    }
-    return TermType::Constant == termType || TermType::Variable == termType || TermType::Monomial == termType ||
-           isPolynomialWithOneMonomial;
-}
-
-bool canBeConvertedToPolynomial(Term const& term) {
-    TermType termType(term.getTermType());
-    return TermType::Constant == termType || TermType::Variable == termType || TermType::Monomial == termType ||
-           TermType::Polynomial == termType;
-}
-
 Operator reverse(Operator const& operatorToReverse) {
     if (operatorToReverse.isAddition()) {
         return {"-"};
@@ -108,6 +88,26 @@ Term convertExpressionToSimplestTerm(Expression const& expression) {
 Term convertFunctionToSimplestTerm(Function const& functionObject) {
     SimplificationOfFunctionToTerm simplification;
     return alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(functionObject);
+}
+
+bool canBeConvertedToConstant(Polynomial const& polynomial) {
+    return polynomial.isEmpty() || (isOneMonomial(polynomial) && isConstantOnly(getFirstMonomial(polynomial)));
+}
+
+bool canBeConvertedToMonomial(Term const& term) {
+    TermType termType(term.getTermType());
+    bool isPolynomialWithOneMonomial(false);
+    if (term.isPolynomial()) {
+        isPolynomialWithOneMonomial = isOneMonomial(term.getAsPolynomial());
+    }
+    return TermType::Constant == termType || TermType::Variable == termType || TermType::Monomial == termType ||
+           isPolynomialWithOneMonomial;
+}
+
+bool canBeConvertedToPolynomial(Term const& term) {
+    TermType termType(term.getTermType());
+    return TermType::Constant == termType || TermType::Variable == termType || TermType::Monomial == termType ||
+           TermType::Polynomial == termType;
 }
 
 }  // namespace alba::algebra

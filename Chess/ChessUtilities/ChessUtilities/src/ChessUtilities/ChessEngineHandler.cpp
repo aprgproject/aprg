@@ -19,14 +19,10 @@ namespace {
 
 typedef struct _mydata {
     ChessEngineHandler* epointer;
-} CallBackData, *PointerToCallBackData;
-
-int IsWinNT() {
-    OSVERSIONINFO osv{};
-    osv.dwOSVersionInfoSize = sizeof(osv);
-    GetVersionEx(&osv);
-    return (osv.dwPlatformId == VER_PLATFORM_WIN32_NT);
 }
+
+CallBackData,
+    *PointerToCallBackData;
 
 DWORD WINAPI engineMonitoringCallbackFunction(LPVOID const lpParam) {
     PointerToCallBackData pointerToCallBackData = (PointerToCallBackData)lpParam;
@@ -35,6 +31,14 @@ DWORD WINAPI engineMonitoringCallbackFunction(LPVOID const lpParam) {
     chessEngineHandlerPointer->startMonitoringEngineOutput();
     return 0;
 }
+
+int IsWinNT() {
+    OSVERSIONINFO osv{};
+    osv.dwOSVersionInfoSize = sizeof(osv);
+    GetVersionEx(&osv);
+    return (osv.dwPlatformId == VER_PLATFORM_WIN32_NT);
+}
+
 }  // namespace
 ChessEngineHandler::ChessEngineHandler(string const& enginePath)
     : m_enginePath(enginePath),

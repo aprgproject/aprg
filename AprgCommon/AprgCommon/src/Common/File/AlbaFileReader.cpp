@@ -19,11 +19,6 @@ AlbaFileReader::AlbaFileReader(ifstream& stream, size_t const size)
     setMaxBufferSize(size);
 }
 
-bool AlbaFileReader::isNotFinished() {
-    // return !m_stream.eof() && m_stream.peek()!=EOF;
-    return getCurrentLocation() < m_fileSize && !m_stream.eof();
-}
-
 char AlbaFileReader::getCharacter() {
     char tempChar(0);
     m_stream.get(tempChar);
@@ -39,6 +34,11 @@ char* AlbaFileReader::getCharacters(size_t& numberOfCharacters) {
     numberOfCharacters = static_cast<size_t>(m_stream.gcount());
     m_characterBuffer[numberOfCharacters] = '\0';
     return getCharacterBufferPointer();
+}
+
+bool AlbaFileReader::isNotFinished() {
+    // return !m_stream.eof() && m_stream.peek()!=EOF;
+    return getCurrentLocation() < m_fileSize && !m_stream.eof();
 }
 
 size_t AlbaFileReader::getCurrentLocation() const {
@@ -60,6 +60,26 @@ void AlbaFileReader::moveToTheBeginning() const { m_stream.seekg(0, ifstream::be
 
 void AlbaFileReader::moveLocation(size_t const location) const {
     m_stream.seekg(static_cast<ifstream::off_type>(location), ifstream::beg);
+}
+
+void AlbaFileReader::saveDataToMemoryBuffer(AlbaMemoryBuffer& buffer, size_t const numberOfBytesToRead) {
+    char* writer =
+        static_cast<char*>(buffer.resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(numberOfBytesToRead));
+    m_stream.read(writer, static_cast<streamsize>(numberOfBytesToRead));
+}
+
+void AlbaFileReader::skipLine() {
+    if (isNotFinished()) {
+        m_stream.clear();
+        m_stream.getline(getCharacterBufferPointer(), static_cast<streamsize>(m_characterBuffer.size()));
+    }
+}
+
+void AlbaFileReader::setMaxBufferSize(size_t const bufferSize) {
+    // This is ensuring that buffer always contains one.
+    // 1) This is for "front()".
+    // 2) This is for null terminator.
+    m_characterBuffer.resize(bufferSize + 1);
 }
 
 string AlbaFileReader::getLine() {
@@ -84,26 +104,6 @@ string AlbaFileReader::getLineAndIgnoreWhiteSpaces() {
         }
     }
     return result;
-}
-
-void AlbaFileReader::saveDataToMemoryBuffer(AlbaMemoryBuffer& buffer, size_t const numberOfBytesToRead) {
-    char* writer =
-        static_cast<char*>(buffer.resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(numberOfBytesToRead));
-    m_stream.read(writer, static_cast<streamsize>(numberOfBytesToRead));
-}
-
-void AlbaFileReader::skipLine() {
-    if (isNotFinished()) {
-        m_stream.clear();
-        m_stream.getline(getCharacterBufferPointer(), static_cast<streamsize>(m_characterBuffer.size()));
-    }
-}
-
-void AlbaFileReader::setMaxBufferSize(size_t const bufferSize) {
-    // This is ensuring that buffer always contains one.
-    // 1) This is for "front()".
-    // 2) This is for null terminator.
-    m_characterBuffer.resize(bufferSize + 1);
 }
 
 size_t AlbaFileReader::getFileSize(ifstream& inputStream) {

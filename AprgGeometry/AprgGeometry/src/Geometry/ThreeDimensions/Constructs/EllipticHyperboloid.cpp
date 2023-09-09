@@ -26,13 +26,7 @@ bool EllipticHyperboloid::operator!=(EllipticHyperboloid const& ellipticHyperbol
     return !((*this) == ellipticHyperboloid);
 }
 
-bool EllipticHyperboloid::isInside(Point const& point) const {
-    return (pow((point.getX() - m_center.getX()) / m_aValue, 2)) +
-               (pow((point.getY() - m_center.getY()) / m_bValue, 2)) -
-               (pow((point.getZ() - m_center.getZ()) / m_cValue, 2)) <=
-           m_oneWithSign;
-}
-
+Point EllipticHyperboloid::getCenter() const { return m_center; }
 double EllipticHyperboloid::getAValue() const { return m_aValue; }
 double EllipticHyperboloid::getBValue() const { return m_bValue; }
 double EllipticHyperboloid::getCValue() const { return m_cValue; }
@@ -58,7 +52,12 @@ double EllipticHyperboloid::calculateZFromXAndY(double const x, double const y, 
            m_center.getZ();
 }
 
-Point EllipticHyperboloid::getCenter() const { return m_center; }
+bool EllipticHyperboloid::isInside(Point const& point) const {
+    return (pow((point.getX() - m_center.getX()) / m_aValue, 2)) +
+               (pow((point.getY() - m_center.getY()) / m_bValue, 2)) -
+               (pow((point.getZ() - m_center.getZ()) / m_cValue, 2)) <=
+           m_oneWithSign;
+}
 
 ostream& operator<<(ostream& out, EllipticHyperboloid const& ellipticHyperboloid) {
     out << "(center: " << ellipticHyperboloid.m_center << " a: " << ellipticHyperboloid.m_aValue

@@ -24,8 +24,6 @@ DerivativeVariableName::DerivativeVariableName(
       m_baseVariable(baseVariable),
       m_dependentVariable(dependentVariable) {}
 
-bool DerivativeVariableName::isValid() const { return m_isValid; }
-int DerivativeVariableName::getDifferentiationLevel() const { return m_differentiationLevel; }
 string const& DerivativeVariableName::getBaseVariable() const { return m_baseVariable; }
 string const& DerivativeVariableName::getDependentVariable() const { return m_dependentVariable; }
 
@@ -45,6 +43,8 @@ string DerivativeVariableName::getNameInLeibnizNotation() const {
     return ss.str();
 }
 
+int DerivativeVariableName::getDifferentiationLevel() const { return m_differentiationLevel; }
+bool DerivativeVariableName::isValid() const { return m_isValid; }
 void DerivativeVariableName::differentiate() { ++m_differentiationLevel; }
 
 void DerivativeVariableName::processNumerator(string const& numerator) {

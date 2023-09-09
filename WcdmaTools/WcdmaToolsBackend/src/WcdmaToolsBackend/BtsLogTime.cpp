@@ -18,18 +18,6 @@ BtsLogTime::BtsLogTime(BtsLogTimeType const logTimeType, string const& timeStamp
     setTimeByTimeStamp(logTimeType, timeStampString);
 }
 
-bool BtsLogTime::operator<(BtsLogTime const& btsLogTimeToCompare) const {
-    return m_dateTime < btsLogTimeToCompare.m_dateTime;
-}
-
-bool BtsLogTime::operator>(BtsLogTime const& btsLogTimeToCompare) const {
-    return m_dateTime > btsLogTimeToCompare.m_dateTime;
-}
-
-bool BtsLogTime::operator==(BtsLogTime const& btsLogTimeToCompare) const {
-    return m_dateTime == btsLogTimeToCompare.m_dateTime;
-}
-
 BtsLogTime BtsLogTime::operator+(BtsLogTime const& btsLogTime2) const {
     BtsLogTime result;
     BtsLogTime const& btsLogTime1(*this);
@@ -44,16 +32,17 @@ BtsLogTime BtsLogTime::operator-(BtsLogTime const& btsLogTime2) const {
     return result;
 }
 
-bool BtsLogTime::isEmpty() const { return m_dateTime.isEmpty(); }
-bool BtsLogTime::isStartup() const { return m_dateTime.getYears() < 2010; }
-unsigned int BtsLogTime::getYears() const { return m_dateTime.getYears(); }
-unsigned int BtsLogTime::getMonths() const { return m_dateTime.getMonths(); }
-unsigned int BtsLogTime::getDays() const { return m_dateTime.getDays(); }
-unsigned int BtsLogTime::getHours() const { return m_dateTime.getHours(); }
-unsigned int BtsLogTime::getMinutes() const { return m_dateTime.getMinutes(); }
-unsigned int BtsLogTime::getSeconds() const { return m_dateTime.getSeconds(); }
-unsigned int BtsLogTime::getTotalSeconds() const { return m_dateTime.getHourMinutesSecond().getTotalSeconds(); }
-unsigned int BtsLogTime::getMicroSeconds() const { return m_dateTime.getMicroSeconds(); }
+bool BtsLogTime::operator<(BtsLogTime const& btsLogTimeToCompare) const {
+    return m_dateTime < btsLogTimeToCompare.m_dateTime;
+}
+
+bool BtsLogTime::operator>(BtsLogTime const& btsLogTimeToCompare) const {
+    return m_dateTime > btsLogTimeToCompare.m_dateTime;
+}
+
+bool BtsLogTime::operator==(BtsLogTime const& btsLogTimeToCompare) const {
+    return m_dateTime == btsLogTimeToCompare.m_dateTime;
+}
 
 string BtsLogTime::getPrintableString() const {
     return convertToString(m_dateTime.getPrintObject<AlbaDateTime::PrintFormat::StandardWithSign>());
@@ -78,6 +67,16 @@ string BtsLogTime::getEquivalentStringBtsTimeFormat() const {
     return ss.str();
 }
 
+unsigned int BtsLogTime::getYears() const { return m_dateTime.getYears(); }
+unsigned int BtsLogTime::getMonths() const { return m_dateTime.getMonths(); }
+unsigned int BtsLogTime::getDays() const { return m_dateTime.getDays(); }
+unsigned int BtsLogTime::getHours() const { return m_dateTime.getHours(); }
+unsigned int BtsLogTime::getMinutes() const { return m_dateTime.getMinutes(); }
+unsigned int BtsLogTime::getSeconds() const { return m_dateTime.getSeconds(); }
+unsigned int BtsLogTime::getTotalSeconds() const { return m_dateTime.getHourMinutesSecond().getTotalSeconds(); }
+unsigned int BtsLogTime::getMicroSeconds() const { return m_dateTime.getMicroSeconds(); }
+bool BtsLogTime::isEmpty() const { return m_dateTime.isEmpty(); }
+bool BtsLogTime::isStartup() const { return m_dateTime.getYears() < 2010; }
 void BtsLogTime::clear() { m_dateTime.clear(); }
 
 void BtsLogTime::setTimeByTimeStamp(BtsLogTimeType const logTimeType, string const& timeStampString) {
@@ -143,19 +142,6 @@ void BtsLogTime::setTimeByTimeStamp(BtsLogTimeType const logTimeType, string con
 
 void BtsLogTime::clearMicroSeconds() { m_dateTime.getMicroSecondsReference() = 0; }
 
-ostream& operator<<(ostream& out, BtsLogTime const& btsLogTime) {
-    AlbaStreamParameterWriter writer(out);
-    writer.writeData<unsigned int>(btsLogTime.getYears());
-    writer.writeData<unsigned int>(btsLogTime.getMonths());
-    writer.writeData<unsigned int>(btsLogTime.getDays());
-    writer.writeData<unsigned int>(btsLogTime.getHours());
-    writer.writeData<unsigned int>(btsLogTime.getMinutes());
-    writer.writeData<unsigned int>(btsLogTime.getSeconds());
-    writer.writeData<unsigned int>(btsLogTime.getMicroSeconds());
-    writer.flush();
-    return out;
-}
-
 istream& operator>>(istream& in, BtsLogTime& btsLogTime) {
     AlbaStreamParameterReader reader(in);
     auto years(reader.readData<unsigned int>());
@@ -169,6 +155,19 @@ istream& operator>>(istream& in, BtsLogTime& btsLogTime) {
         static_cast<unsigned short int>(years), static_cast<uint8_t>(months), static_cast<uint8_t>(days),
         static_cast<uint8_t>(hours), static_cast<uint8_t>(minutes), static_cast<uint8_t>(seconds), microseconds);
     return in;
+}
+
+ostream& operator<<(ostream& out, BtsLogTime const& btsLogTime) {
+    AlbaStreamParameterWriter writer(out);
+    writer.writeData<unsigned int>(btsLogTime.getYears());
+    writer.writeData<unsigned int>(btsLogTime.getMonths());
+    writer.writeData<unsigned int>(btsLogTime.getDays());
+    writer.writeData<unsigned int>(btsLogTime.getHours());
+    writer.writeData<unsigned int>(btsLogTime.getMinutes());
+    writer.writeData<unsigned int>(btsLogTime.getSeconds());
+    writer.writeData<unsigned int>(btsLogTime.getMicroSeconds());
+    writer.flush();
+    return out;
 }
 
 BtsLogTime::BtsLogTime() = default;

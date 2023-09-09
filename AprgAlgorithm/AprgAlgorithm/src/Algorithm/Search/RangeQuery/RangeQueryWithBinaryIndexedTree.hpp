@@ -79,6 +79,10 @@ public:
     }
 
 private:
+    [[nodiscard]] Index getGreatestPowerOf2Factor(Index const index) const {
+        return mathHelper::getGreatestPowerOf2Factor(index);
+    }
+
     [[nodiscard]] Value getPartialTreeSum(int const powerOf2Factor, int const indexPlusOne) const {
         // This has log(N) running time
         Value result(m_values[indexPlusOne - 1]);
@@ -90,10 +94,6 @@ private:
             result = m_accumulator(result, m_partialTreeSums[indexPlusOneForPartialSum - 1]);
         }
         return result;
-    }
-
-    [[nodiscard]] Index getGreatestPowerOf2Factor(Index const index) const {
-        return mathHelper::getGreatestPowerOf2Factor(index);
     }
 
     void initializePartialSums() {

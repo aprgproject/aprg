@@ -8,12 +8,7 @@ using namespace std;
 
 namespace alba::soosa {
 
-int SoosaConfiguration::getAcceptableLineDeviationForLineModelInPixels() const {
-    return m_acceptableLineDeviationForLineModelInPixels;
-}
-
 double SoosaConfiguration::getRemovalRatioForLineModel() const { return m_removalRatioForLineModel; }
-int SoosaConfiguration::getMinimumLineSamples() const { return m_minimumLineSamples; }
 double SoosaConfiguration::getBitmapWidthToBarWidthMultiplier() const { return m_bitmapWidthToBarWidthMultiplier; }
 
 double SoosaConfiguration::getLineBarWidthSearchInitialBlackPointsValue() const {
@@ -26,10 +21,6 @@ double SoosaConfiguration::getLineBarWidthSearchAcceptedRunningBlackRatio() cons
 
 double SoosaConfiguration::getAcceptableDistanceOverWidthRatioFromWidthMidpoint() const {
     return m_acceptableDistanceOverWidthRatioFromWidthMidpoint;
-}
-
-int SoosaConfiguration::getAcceptableMinimumDistanceFromWidthMidpoint() const {
-    return m_acceptableMinimumDistanceFromWidthMidpoint;
 }
 
 double SoosaConfiguration::getAcceptableSdOverMeanDeviationForLine() const {
@@ -55,13 +46,24 @@ double SoosaConfiguration::getAcceptableSdOverMeanDeviationForBarHeight() const 
 }
 
 double SoosaConfiguration::getRemovalRatioForBarHeight() const { return m_removalRatioForBarHeight; }
-int SoosaConfiguration::getNumberOfChoices() const { return m_numberOfChoices; }
-int SoosaConfiguration::getColorIntensityForWhite() const { return m_colorIntensityForWhite; }
 double SoosaConfiguration::getBarHeightToDiameterMultiplier() const { return m_barHeightToDiameterMultiplier; }
 
 double SoosaConfiguration::getMinimumPercentageOfBlackPixelsForAFilledCircle() const {
     return m_minimumPercentageOfBlackPixelsForAFilledCircle;
 }
+
+int SoosaConfiguration::getAcceptableLineDeviationForLineModelInPixels() const {
+    return m_acceptableLineDeviationForLineModelInPixels;
+}
+
+int SoosaConfiguration::getMinimumLineSamples() const { return m_minimumLineSamples; }
+
+int SoosaConfiguration::getAcceptableMinimumDistanceFromWidthMidpoint() const {
+    return m_acceptableMinimumDistanceFromWidthMidpoint;
+}
+
+int SoosaConfiguration::getNumberOfChoices() const { return m_numberOfChoices; }
+int SoosaConfiguration::getColorIntensityForWhite() const { return m_colorIntensityForWhite; }
 
 void SoosaConfiguration::loadConfigurationFromFile(string const& filePath) {
     readNamesAndValuesFromFile(filePath);

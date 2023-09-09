@@ -7,6 +7,7 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 using ValuesForTest = vector<int>;
 using RangeQueryForTest = RangeQueryWithQuadraticAuxiliarySize<ValuesForTest>;
 using ValueForTest = RangeQueryForTest::Value;
@@ -18,8 +19,10 @@ RangeQueryForTest::Function minimumSelector = [](ValueForTest const& value1, Val
 RangeQueryForTest::Function maximumSelector = [](ValueForTest const& value1, ValueForTest const& value2) {
     return max(value1, value2);
 };
+
 RangeQueryForTest::Function plusAccumulator = plus<>();
 RangeQueryForTest::Function multipliesAccumulator = multiplies<>();
+
 }  // namespace
 
 TEST(RangeQueryWithQuadraticAuxiliarySizeTest, GetValueOnIntervalWithMinimumWorksWithEmptySetOfValues) {

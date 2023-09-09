@@ -10,31 +10,6 @@ using namespace std;
 
 namespace alba::math {
 
-bool doesExpectedValuesHaveLinearity(
-    ValueAndProbabilityPairs const& firstSetOfValueAndProbabilityPairsOfX,
-    ValueAndProbabilityPairs const& secondSetOfValueAndProbabilityPairsOfX) {
-    // A useful property of expected values is linearity.
-    // It means that the sum  E[X1+X2+...+Xn] always equals the sum E[X1]+E[X2]+...+E[Xn].
-    // This formula holds even if random variables depend on each other.
-    // -> Some interesting facts about Linearly of Expectation:
-    // ---> Linearity of expectation holds for both dependent and independent events.
-    // -----> On the other hand the rule E[R1R2] = E[R1]*E[R2] is true only for independent events.
-    // ---> Linearity of expectation holds for any number of random variables on some probability space.
-    // -----> Let R1, R2, R3, … Rk be k random variables, then
-    // ---> E[R1 + R2 + R3 + … + Rk] = E[R1] + E[R2] + E[R3] + … + E[Rk]
-    AlbaNumber expectedValueFromSeparated = getExpectedValue(firstSetOfValueAndProbabilityPairsOfX) +
-                                            getExpectedValue(secondSetOfValueAndProbabilityPairsOfX);
-
-    ValueAndProbabilityPairs all(firstSetOfValueAndProbabilityPairsOfX);
-    all.reserve(all.size() + secondSetOfValueAndProbabilityPairsOfX.size());
-    copy(
-        secondSetOfValueAndProbabilityPairsOfX.cbegin(), secondSetOfValueAndProbabilityPairsOfX.cend(),
-        back_inserter(all));
-    AlbaNumber expectedValueFromCombined = getExpectedValue(all);
-
-    return expectedValueFromSeparated == expectedValueFromCombined;
-}
-
 AlbaNumber getCorrectProbability(AlbaNumber const& probability) {
     // If an event is certain to happen, its probability is 1, and if an event is impossible, its probability is 0.
     AlbaNumber result(0);
@@ -267,6 +242,31 @@ AlbaNumber getNumberOfPeopleForTheBirthdayParadoxUsingTaylorFormula(AlbaNumber c
             sqrt(2 * DAYS_IN_YEAR * log(1 / (1 - propbabilityThatMustBeMet.getDouble()))));
     }
     return result;
+}
+
+bool doesExpectedValuesHaveLinearity(
+    ValueAndProbabilityPairs const& firstSetOfValueAndProbabilityPairsOfX,
+    ValueAndProbabilityPairs const& secondSetOfValueAndProbabilityPairsOfX) {
+    // A useful property of expected values is linearity.
+    // It means that the sum  E[X1+X2+...+Xn] always equals the sum E[X1]+E[X2]+...+E[Xn].
+    // This formula holds even if random variables depend on each other.
+    // -> Some interesting facts about Linearly of Expectation:
+    // ---> Linearity of expectation holds for both dependent and independent events.
+    // -----> On the other hand the rule E[R1R2] = E[R1]*E[R2] is true only for independent events.
+    // ---> Linearity of expectation holds for any number of random variables on some probability space.
+    // -----> Let R1, R2, R3, … Rk be k random variables, then
+    // ---> E[R1 + R2 + R3 + … + Rk] = E[R1] + E[R2] + E[R3] + … + E[Rk]
+    AlbaNumber expectedValueFromSeparated = getExpectedValue(firstSetOfValueAndProbabilityPairsOfX) +
+                                            getExpectedValue(secondSetOfValueAndProbabilityPairsOfX);
+
+    ValueAndProbabilityPairs all(firstSetOfValueAndProbabilityPairsOfX);
+    all.reserve(all.size() + secondSetOfValueAndProbabilityPairsOfX.size());
+    copy(
+        secondSetOfValueAndProbabilityPairsOfX.cbegin(), secondSetOfValueAndProbabilityPairsOfX.cend(),
+        back_inserter(all));
+    AlbaNumber expectedValueFromCombined = getExpectedValue(all);
+
+    return expectedValueFromSeparated == expectedValueFromCombined;
 }
 
 }  // namespace alba::math

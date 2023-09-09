@@ -11,6 +11,7 @@ using namespace alba::stringHelper;
 using namespace std;
 
 namespace {
+
 using RecognizedItems = vector<string>;
 RecognizedItems const recognizedKeywords{CPLUSPLUS_KEYWORDS, KEYWORD_OPERATORS};
 RecognizedItems const recognizedPrimitiveTypes{PRIMITIVE_TYPES};
@@ -41,6 +42,7 @@ bool isRecognizedTwoCharOperators(string const& searchString) {
 bool isRecognizedOneCharOperators(string const& searchString) {
     return isRecognized(recognizedOneCharOperators, searchString);
 }
+
 }  // namespace
 
 namespace alba::CodeUtilities {
@@ -78,6 +80,49 @@ void CPlusPlusTokenizer::processLeftoverCode() {
     }
     m_scopeContent.clear();
     m_scopes.clear();
+}
+
+CPlusPlusTokenizer::ScopeType CPlusPlusTokenizer::getCurrentScope() const {
+    return !m_scopes.empty() ? m_scopes.back() : ScopeType::NoScope;
+}
+
+string CPlusPlusTokenizer::getIndentifierAt(int const index) const {
+    string result;
+    if (isLetterOrUnderscore(m_code[index])) {
+        result += m_code[index];
+        result += getAlphaNumericUnderscoreStringAt(index + 1);
+    }
+    return result;
+}
+
+string CPlusPlusTokenizer::getNumberAt(int const index) const {
+    string result;
+    if (isNumber(m_code[index])) {
+        result += m_code[index];
+        result += getContinuousDigitsAt(index + 1);
+    }
+    return result;
+}
+
+string CPlusPlusTokenizer::getAlphaNumericUnderscoreStringAt(int const index) const {
+    string result;
+    for (int identifierIndex = index;
+         identifierIndex < static_cast<int>(m_code.length()) && isLetterOrNumberOrUnderscore(m_code[identifierIndex]);
+         ++identifierIndex) {
+        result += m_code[identifierIndex];
+    }
+    return result;
+}
+
+string CPlusPlusTokenizer::getContinuousDigitsAt(int const index) const {
+    string result;
+    for (int identifierIndex = index;
+         identifierIndex < static_cast<int>(m_code.length()) &&
+         (isLetterOrNumberOrUnderscore(m_code[identifierIndex]) || m_code[identifierIndex] == '\'');
+         ++identifierIndex) {
+        result += m_code[identifierIndex];
+    }
+    return result;
 }
 
 bool CPlusPlusTokenizer::isNextString(string const& expectedString) const {
@@ -141,47 +186,131 @@ bool CPlusPlusTokenizer::isWhiteSpaceAt(int const index) const {
     return false;
 }
 
-CPlusPlusTokenizer::ScopeType CPlusPlusTokenizer::getCurrentScope() const {
-    return !m_scopes.empty() ? m_scopes.back() : ScopeType::NoScope;
+void CPlusPlusTokenizer::processCode() {
+    while (m_index < static_cast<int>(m_code.length())) {
+        processScope();
+    }
 }
 
-string CPlusPlusTokenizer::getIndentifierAt(int const index) const {
-    string result;
-    if (isLetterOrUnderscore(m_code[index])) {
-        result += m_code[index];
-        result += getAlphaNumericUnderscoreStringAt(index + 1);
+void CPlusPlusTokenizer::processScope() {
+    switch (getCurrentScope()) {
+        case ScopeType::SingleLineComment:
+            processInSingleLineCommentScope();
+            break;
+        case ScopeType::MultiLineComment:
+            processInMultiLineCommentScope();
+            break;
+        case ScopeType::StringLiteral:
+            processInStringLiteralScope();
+            break;
+        case ScopeType::RawStringLiteral:
+            processInRawStringLiteralScope();
+            break;
+        case ScopeType::CharLiteral:
+            processInCharLiteralScope();
+            break;
+        case ScopeType::Attribute:
+            processInAttributeScope();
+            break;
+        case ScopeType::WhiteSpace:
+            processInWhiteSpaceScope();
+            break;
+        default:
+            processInCodeScope();
+            break;
     }
-    return result;
 }
 
-string CPlusPlusTokenizer::getNumberAt(int const index) const {
-    string result;
-    if (isNumber(m_code[index])) {
-        result += m_code[index];
-        result += getContinuousDigitsAt(index + 1);
+void CPlusPlusTokenizer::processInCodeScope() {
+    // NOLINTBEGIN(bugprone-branch-clone)
+    if (hasProcessedASingleLineComment()) {
+        ;
+    } else if (hasProcessedAMultiLineComment()) {
+        ;
+    } else if (hasProcessedAStringLiteral()) {
+        ;
+    } else if (hasProcessedARawStringLiteral()) {
+        ;
+    } else if (hasProcessedACharLiteral()) {
+        ;
+    } else if (hasProcessedAnAttribute()) {
+        ;
+    } else if (hasProcessedAWhiteSpace()) {
+        ;
+    } else if (hasProcessedAMacro()) {
+        ;
+    } else if (hasProcessedANumber()) {
+        ;
+    } else if (hasProcessedAnIdentifier()) {
+        ;
+    } else if (hasProcessedAnOperator()) {
+        ;
+    } else {
+        m_terms.emplace_back(createUnknown(m_code.substr(m_index++)));
     }
-    return result;
+    // NOLINTEND(bugprone-branch-clone)
 }
 
-string CPlusPlusTokenizer::getAlphaNumericUnderscoreStringAt(int const index) const {
-    string result;
-    for (int identifierIndex = index;
-         identifierIndex < static_cast<int>(m_code.length()) && isLetterOrNumberOrUnderscore(m_code[identifierIndex]);
-         ++identifierIndex) {
-        result += m_code[identifierIndex];
+void CPlusPlusTokenizer::processInSingleLineCommentScope() {
+    if (isTerminatedWhileCheckingTerminatingString("\n")) {
+        m_terms.emplace_back(createCommentSingleLine(m_scopeContent));
+        exitScope();
     }
-    return result;
 }
 
-string CPlusPlusTokenizer::getContinuousDigitsAt(int const index) const {
-    string result;
-    for (int identifierIndex = index;
-         identifierIndex < static_cast<int>(m_code.length()) &&
-         (isLetterOrNumberOrUnderscore(m_code[identifierIndex]) || m_code[identifierIndex] == '\'');
-         ++identifierIndex) {
-        result += m_code[identifierIndex];
+void CPlusPlusTokenizer::processInMultiLineCommentScope() {
+    if (isTerminatedWhileCheckingTerminatingString("*/")) {
+        m_scopeContent.append("*/");
+        m_index += 2;
+        m_terms.emplace_back(createCommentMultiLine(m_scopeContent));
+        exitScope();
     }
-    return result;
+}
+
+void CPlusPlusTokenizer::processInStringLiteralScope() {
+    if (isTerminatedWhileCheckingALiteralWithEscape('\"')) {
+        m_terms.emplace_back(createStringLiteral(m_scopeContent));
+        exitScope();
+    }
+}
+
+void CPlusPlusTokenizer::processInRawStringLiteralScope() {
+    if (isTerminatedWhileCheckingTerminatingString(")\"")) {
+        m_scopeContent.append(")\"");
+        m_index += 2;
+        m_terms.emplace_back(createStringLiteral(m_scopeContent));
+        exitScope();
+    }
+}
+
+void CPlusPlusTokenizer::processInCharLiteralScope() {
+    if (isTerminatedWhileCheckingALiteralWithEscape('\'')) {
+        m_terms.emplace_back(createCharacterLiteral(m_scopeContent));
+        exitScope();
+    }
+}
+
+void CPlusPlusTokenizer::processInAttributeScope() {
+    if (isTerminatedWhileCheckingTerminatingString("]]")) {
+        m_scopeContent.append("]]");
+        m_index += 2;
+        m_terms.emplace_back(createAttribute(m_scopeContent));
+        exitScope();
+    }
+}
+
+void CPlusPlusTokenizer::processInWhiteSpaceScope() {
+    if (isTerminatedWhileCheckingWhiteSpace()) {
+        m_terms.emplace_back(createWhiteSpace(m_scopeContent));
+        exitScope();
+    }
+}
+
+void CPlusPlusTokenizer::enterScope(ScopeType const scopeType) { m_scopes.emplace_back(scopeType); }
+
+void CPlusPlusTokenizer::exitScope() {
+    m_scopeContent.clear();
+    m_scopes.pop_back();
 }
 
 bool CPlusPlusTokenizer::hasProcessedASingleLineComment() {
@@ -367,133 +496,6 @@ bool CPlusPlusTokenizer::isTerminatedWhileCheckingTerminatingString(string const
     m_scopeContent.append(m_code.substr(m_index, m_code.length() - m_index));
     m_index = static_cast<int>(m_code.length());
     return false;
-}
-
-void CPlusPlusTokenizer::processCode() {
-    while (m_index < static_cast<int>(m_code.length())) {
-        processScope();
-    }
-}
-
-void CPlusPlusTokenizer::processScope() {
-    switch (getCurrentScope()) {
-        case ScopeType::SingleLineComment:
-            processInSingleLineCommentScope();
-            break;
-        case ScopeType::MultiLineComment:
-            processInMultiLineCommentScope();
-            break;
-        case ScopeType::StringLiteral:
-            processInStringLiteralScope();
-            break;
-        case ScopeType::RawStringLiteral:
-            processInRawStringLiteralScope();
-            break;
-        case ScopeType::CharLiteral:
-            processInCharLiteralScope();
-            break;
-        case ScopeType::Attribute:
-            processInAttributeScope();
-            break;
-        case ScopeType::WhiteSpace:
-            processInWhiteSpaceScope();
-            break;
-        default:
-            processInCodeScope();
-            break;
-    }
-}
-
-void CPlusPlusTokenizer::processInCodeScope() {
-    // NOLINTBEGIN(bugprone-branch-clone)
-    if (hasProcessedASingleLineComment()) {
-        ;
-    } else if (hasProcessedAMultiLineComment()) {
-        ;
-    } else if (hasProcessedAStringLiteral()) {
-        ;
-    } else if (hasProcessedARawStringLiteral()) {
-        ;
-    } else if (hasProcessedACharLiteral()) {
-        ;
-    } else if (hasProcessedAnAttribute()) {
-        ;
-    } else if (hasProcessedAWhiteSpace()) {
-        ;
-    } else if (hasProcessedAMacro()) {
-        ;
-    } else if (hasProcessedANumber()) {
-        ;
-    } else if (hasProcessedAnIdentifier()) {
-        ;
-    } else if (hasProcessedAnOperator()) {
-        ;
-    } else {
-        m_terms.emplace_back(createUnknown(m_code.substr(m_index++)));
-    }
-    // NOLINTEND(bugprone-branch-clone)
-}
-
-void CPlusPlusTokenizer::processInSingleLineCommentScope() {
-    if (isTerminatedWhileCheckingTerminatingString("\n")) {
-        m_terms.emplace_back(createCommentSingleLine(m_scopeContent));
-        exitScope();
-    }
-}
-
-void CPlusPlusTokenizer::processInMultiLineCommentScope() {
-    if (isTerminatedWhileCheckingTerminatingString("*/")) {
-        m_scopeContent.append("*/");
-        m_index += 2;
-        m_terms.emplace_back(createCommentMultiLine(m_scopeContent));
-        exitScope();
-    }
-}
-
-void CPlusPlusTokenizer::processInStringLiteralScope() {
-    if (isTerminatedWhileCheckingALiteralWithEscape('\"')) {
-        m_terms.emplace_back(createStringLiteral(m_scopeContent));
-        exitScope();
-    }
-}
-
-void CPlusPlusTokenizer::processInRawStringLiteralScope() {
-    if (isTerminatedWhileCheckingTerminatingString(")\"")) {
-        m_scopeContent.append(")\"");
-        m_index += 2;
-        m_terms.emplace_back(createStringLiteral(m_scopeContent));
-        exitScope();
-    }
-}
-
-void CPlusPlusTokenizer::processInCharLiteralScope() {
-    if (isTerminatedWhileCheckingALiteralWithEscape('\'')) {
-        m_terms.emplace_back(createCharacterLiteral(m_scopeContent));
-        exitScope();
-    }
-}
-
-void CPlusPlusTokenizer::processInAttributeScope() {
-    if (isTerminatedWhileCheckingTerminatingString("]]")) {
-        m_scopeContent.append("]]");
-        m_index += 2;
-        m_terms.emplace_back(createAttribute(m_scopeContent));
-        exitScope();
-    }
-}
-
-void CPlusPlusTokenizer::processInWhiteSpaceScope() {
-    if (isTerminatedWhileCheckingWhiteSpace()) {
-        m_terms.emplace_back(createWhiteSpace(m_scopeContent));
-        exitScope();
-    }
-}
-
-void CPlusPlusTokenizer::enterScope(ScopeType const scopeType) { m_scopes.emplace_back(scopeType); }
-
-void CPlusPlusTokenizer::exitScope() {
-    m_scopeContent.clear();
-    m_scopes.pop_back();
 }
 
 }  // namespace alba::CodeUtilities

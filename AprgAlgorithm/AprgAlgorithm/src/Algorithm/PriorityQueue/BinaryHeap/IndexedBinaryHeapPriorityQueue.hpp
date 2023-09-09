@@ -19,6 +19,17 @@ public:
     using Objects = std::vector<Object>;
     using Comparator = ComparatorTemplateType<Object>;
     IndexedBinaryHeapPriorityQueue() = default;
+    [[nodiscard]] Indexes const& getTreeIndexToObjectIndex() const { return m_treeIndexToObjectIndex; }
+    [[nodiscard]] Indexes const& getObjectIndexToTreeIndex() const { return m_objectIndexToTreeIndex; }
+    [[nodiscard]] Object const& getTopObject() const { return m_objects[getIndexOfTopObject()]; }
+    [[nodiscard]] Object const& getObjectAt(int const objectIndex) const { return m_objects[objectIndex]; }
+    [[nodiscard]] Objects const& getObjects() const { return m_objects; }
+    [[nodiscard]] int getSize() const { return m_size; }
+
+    [[nodiscard]] int getIndexOfTopObject() const {
+        return m_treeIndexToObjectIndex[IndexedBinaryHeapPriorityQueueConstants::INDEX_OF_TOP_TREE];
+    }
+
     [[nodiscard]] bool isEmpty() const { return getSize() == 0; }
 
     [[nodiscard]] bool contains(int const objectIndex) const {
@@ -28,33 +39,6 @@ public:
                      IndexedBinaryHeapPriorityQueueConstants::VALUE_FOR_UNUSED_INDEX;
         }
         return result;
-    }
-
-    [[nodiscard]] int getSize() const { return m_size; }
-
-    [[nodiscard]] int getIndexOfTopObject() const {
-        return m_treeIndexToObjectIndex[IndexedBinaryHeapPriorityQueueConstants::INDEX_OF_TOP_TREE];
-    }
-
-    [[nodiscard]] Objects const& getObjects() const { return m_objects; }
-    [[nodiscard]] Indexes const& getTreeIndexToObjectIndex() const { return m_treeIndexToObjectIndex; }
-    [[nodiscard]] Indexes const& getObjectIndexToTreeIndex() const { return m_objectIndexToTreeIndex; }
-    [[nodiscard]] Object const& getTopObject() const { return m_objects[getIndexOfTopObject()]; }
-    [[nodiscard]] Object const& getObjectAt(int const objectIndex) const { return m_objects[objectIndex]; }
-
-    Object deleteAndGetTopObject() {
-        Object topObject{};
-        if (!isEmpty()) {
-            topObject = getTopObject();
-            int objectIndexOfTopObject = getIndexOfTopObject();
-            swapIndexes(IndexedBinaryHeapPriorityQueueConstants::INDEX_OF_TOP_TREE, m_size--);
-            sink(IndexedBinaryHeapPriorityQueueConstants::INDEX_OF_TOP_TREE);
-            m_objectIndexToTreeIndex[objectIndexOfTopObject] =
-                IndexedBinaryHeapPriorityQueueConstants::VALUE_FOR_UNUSED_INDEX;
-            m_objects[objectIndexOfTopObject] = Object{};
-            m_treeIndexToObjectIndex[m_size + 1] = IndexedBinaryHeapPriorityQueueConstants::VALUE_FOR_UNUSED_INDEX;
-        }
-        return topObject;
     }
 
     void setNumberOfItems(int const numberOfItems) { resizeToHaveThisIndexIfNeeded(numberOfItems); }
@@ -101,17 +85,30 @@ public:
         }
     }
 
-private:
-    [[nodiscard]] int getContainerIndex(int const treeIndex) const {
-        // This is not used because size usage is not efficient. No use to make it efficient.
-        return treeIndex - 1;
+    Object deleteAndGetTopObject() {
+        Object topObject{};
+        if (!isEmpty()) {
+            topObject = getTopObject();
+            int objectIndexOfTopObject = getIndexOfTopObject();
+            swapIndexes(IndexedBinaryHeapPriorityQueueConstants::INDEX_OF_TOP_TREE, m_size--);
+            sink(IndexedBinaryHeapPriorityQueueConstants::INDEX_OF_TOP_TREE);
+            m_objectIndexToTreeIndex[objectIndexOfTopObject] =
+                IndexedBinaryHeapPriorityQueueConstants::VALUE_FOR_UNUSED_INDEX;
+            m_objects[objectIndexOfTopObject] = Object{};
+            m_treeIndexToObjectIndex[m_size + 1] = IndexedBinaryHeapPriorityQueueConstants::VALUE_FOR_UNUSED_INDEX;
+        }
+        return topObject;
     }
 
+private:
     [[nodiscard]] Object const& getObjectOnTree(int const treeIndex) const {
         return m_objects[m_treeIndexToObjectIndex[treeIndex]];
     }
 
-    bool isInHeapOrder(Object const& child, Object const& parent) { return m_comparator(child, parent); }
+    [[nodiscard]] int getContainerIndex(int const treeIndex) const {
+        // This is not used because size usage is not efficient. No use to make it efficient.
+        return treeIndex - 1;
+    }
 
     void resizeToHaveThisIndexIfNeeded(int const index) {
         if (m_maxSize <= index) {
@@ -166,6 +163,7 @@ private:
         m_objectIndexToTreeIndex[m_treeIndexToObjectIndex[treeIndex2]] = treeIndex2;
     }
 
+    bool isInHeapOrder(Object const& child, Object const& parent) { return m_comparator(child, parent); }
     int m_size{0};
     int m_maxSize{0};
     Comparator m_comparator;

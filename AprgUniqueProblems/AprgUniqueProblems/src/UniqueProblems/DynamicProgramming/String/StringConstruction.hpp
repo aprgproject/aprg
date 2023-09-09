@@ -27,14 +27,14 @@ public:
     static constexpr HashValue A_LARGE_PRIME = 1229952067;
 
 private:
-    int getCount(int const prefixLength);
-    int getCountSquareRootAlgorithm(int const prefixLength);
-    int count(int const prefixLength);
-    int countSquareRootAlgorithm(int const prefixLength);
     void initialize();
     void removeEmptySubstrings();
     void removeDuplicateSubstrings();
     void saveHashOfAllSubstrings();
+    int getCount(int const prefixLength);
+    int getCountSquareRootAlgorithm(int const prefixLength);
+    int count(int const prefixLength);
+    int countSquareRootAlgorithm(int const prefixLength);
     std::string m_stringToConstruct;
     stringHelper::strings m_subStrings;
     HashValues m_subStringHash;

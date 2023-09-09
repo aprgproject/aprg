@@ -18,15 +18,6 @@ SeriesBasedOnSummation::SeriesBasedOnSummation(Term const& formulaForEachTermInS
       m_summation(getSummation(formulaForEachTermInSummation, variableName)),
       m_isSummationModelValid(!isNan(getFormulaForSeries())) {}
 
-bool SeriesBasedOnSummation::isSummationModelValid() const { return m_isSummationModelValid; }
-
-bool SeriesBasedOnSummation::isAbsolutelyConvergent() const {
-    SeriesBasedOnSummation summation(abs(m_formulaForEachTermInSummation), m_variableName);
-    return summation.isConvergent();
-}
-
-bool SeriesBasedOnSummation::isConditionallyConvergent() const { return !isAbsolutelyConvergent() || isConvergent(); }
-
 Term SeriesBasedOnSummation::getValueAtIndex(int const index) const {
     Term result;
     if (m_isSummationModelValid) {
@@ -43,6 +34,14 @@ Term SeriesBasedOnSummation::getTermValueAtIndex(int const index) const {
 }
 
 Term SeriesBasedOnSummation::getFormulaForEachTermInSummation() const { return m_formulaForEachTermInSummation; }
+bool SeriesBasedOnSummation::isSummationModelValid() const { return m_isSummationModelValid; }
+
+bool SeriesBasedOnSummation::isAbsolutelyConvergent() const {
+    SeriesBasedOnSummation summation(abs(m_formulaForEachTermInSummation), m_variableName);
+    return summation.isConvergent();
+}
+
+bool SeriesBasedOnSummation::isConditionallyConvergent() const { return !isAbsolutelyConvergent() || isConvergent(); }
 
 Summation SeriesBasedOnSummation::getSummation(Term const& formulaForEachTermInSummation, string const& variableName) {
     Summation summation(formulaForEachTermInSummation, variableName);

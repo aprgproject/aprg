@@ -11,14 +11,14 @@ class AlbaAngle {
 public:
     AlbaAngle();
     AlbaAngle(AngleUnitType const angleUnitType, double const angleValue);
-    // rule of zero
-    bool operator==(AlbaAngle const& angle) const;
-    bool operator!=(AlbaAngle const& angle) const;
-    bool operator<(AlbaAngle const& angle) const;
     AlbaAngle operator+(AlbaAngle const& secondAngle) const;
     AlbaAngle operator-(AlbaAngle const& secondAngle) const;
     AlbaAngle operator+() const;
     AlbaAngle operator-() const;
+    // rule of zero
+    bool operator==(AlbaAngle const& angle) const;
+    bool operator!=(AlbaAngle const& angle) const;
+    bool operator<(AlbaAngle const& angle) const;
     AlbaAngle& operator+=(AlbaAngle const& secondAngle);
     AlbaAngle& operator-=(AlbaAngle const& secondAngle);
     [[nodiscard]] double getDegrees() const;

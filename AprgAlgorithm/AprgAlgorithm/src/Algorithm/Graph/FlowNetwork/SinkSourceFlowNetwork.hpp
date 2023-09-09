@@ -15,15 +15,14 @@ public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     // An ST-flow network has two identified vertices, a source "s" and a sink "t";
     SinkSourceFlowNetwork(Vertex const& source, Vertex const& sink) : BaseClass(), m_source(source), m_sink(sink) {}
+    [[nodiscard]] Vertex getSourceVertex() const { return m_source; }
+    [[nodiscard]] Vertex getSinkVertex() const { return m_sink; }
 
     [[nodiscard]] bool isAnStCut(Vertices const& partWithSource, Vertices const& partWithSink) const {
         // An st-cut is a cut that places vertex "source" in one of this its sets and vertex "sink" in the other
         return std::find(partWithSource.cbegin(), partWithSource.cend(), m_source) != partWithSource.cend() &&
                std::find(partWithSink.cbegin(), partWithSink.cend(), m_sink) != partWithSink.cend();
     }
-
-    [[nodiscard]] Vertex getSourceVertex() const { return m_source; }
-    [[nodiscard]] Vertex getSinkVertex() const { return m_sink; }
 
 private:
     Vertex m_source;

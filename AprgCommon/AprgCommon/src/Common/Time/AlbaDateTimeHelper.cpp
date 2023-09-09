@@ -22,8 +22,42 @@ constexpr uint32_t DAYS_31_IN_MONTH = 31U;
 
 namespace alba::dateTimeHelper {
 
-bool isLeapYear(uint32_t const year) {
-    return (year % YEARS_4 == 0 && year % YEARS_100 != 0) || (year % YEARS_400 == 0);
+void reorganizeOverflowValues(uint32_t& totalDays, uint32_t& totalSeconds, uint32_t& totalMicroSeconds) {
+    totalSeconds += totalMicroSeconds / NUMBER_OF_MICROSECONDS_IN_A_SECOND;
+    totalMicroSeconds = totalMicroSeconds % NUMBER_OF_MICROSECONDS_IN_A_SECOND;
+    totalDays += totalSeconds / NUMBER_OF_SECONDS_IN_A_DAY;
+    totalSeconds = totalSeconds % NUMBER_OF_SECONDS_IN_A_DAY;
+}
+
+void reorganizeUnderflowValues(int32_t& totalDays, int32_t& totalSeconds, int32_t& totalMicroSeconds) {
+    if (totalMicroSeconds < 0) {
+        int32_t neededSeconds = (static_cast<int32_t>(totalMicroSeconds) * -1 +
+                                 static_cast<int32_t>(NUMBER_OF_MICROSECONDS_IN_A_SECOND) - 1) /
+                                static_cast<int32_t>(NUMBER_OF_MICROSECONDS_IN_A_SECOND);
+        totalSeconds -= neededSeconds;
+        totalMicroSeconds +=
+            static_cast<int32_t>(neededSeconds) * static_cast<int32_t>(NUMBER_OF_MICROSECONDS_IN_A_SECOND);
+    }
+    if (totalSeconds < 0) {
+        int32_t neededDays = (totalSeconds * -1 + static_cast<int32_t>(NUMBER_OF_SECONDS_IN_A_DAY) - 1) /
+                             static_cast<int32_t>(NUMBER_OF_SECONDS_IN_A_DAY);
+        totalDays -= neededDays;
+        totalSeconds += neededDays * static_cast<int32_t>(NUMBER_OF_SECONDS_IN_A_DAY);
+    }
+}
+
+DayOfTheWeek getDayOfTheWeek(uint32_t const years, uint32_t const month, uint32_t const days) {
+    // https://en.wikipedia.org/wiki/Determination_of_the_day_of_the_week
+    // Based from Sakamoto Methods
+    // 1 <= month <= 12,  years > 1752 (in the U.K.)
+    uint32_t yearValue = years;
+    static constexpr array<uint32_t, 12> monthOffset = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
+    yearValue -= (month < 3) ? 1 : 0;
+    return static_cast<DayOfTheWeek>(
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
+        (yearValue + yearValue / YEARS_4 - yearValue / YEARS_100 + yearValue / YEARS_400 + monthOffset[month - 1] +
+         days) %
+        7);
 }
 
 std::string_view getMonthString(uint32_t const month) {
@@ -180,20 +214,6 @@ uint32_t getTotalSeconds(uint32_t const hours, uint32_t const minutes, uint32_t 
     return (hours * NUMBER_OF_SECONDS_IN_AN_HOUR) + (minutes * NUMBER_OF_SECONDS_IN_A_MINUTE) + seconds;
 }
 
-DayOfTheWeek getDayOfTheWeek(uint32_t const years, uint32_t const month, uint32_t const days) {
-    // https://en.wikipedia.org/wiki/Determination_of_the_day_of_the_week
-    // Based from Sakamoto Methods
-    // 1 <= month <= 12,  years > 1752 (in the U.K.)
-    uint32_t yearValue = years;
-    static constexpr array<uint32_t, 12> monthOffset = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
-    yearValue -= (month < 3) ? 1 : 0;
-    return static_cast<DayOfTheWeek>(
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
-        (yearValue + yearValue / YEARS_4 - yearValue / YEARS_100 + yearValue / YEARS_400 + monthOffset[month - 1] +
-         days) %
-        7);
-}
-
 uint32_t getAndRemoveYearsFromNumberOfDays(uint32_t& remainingDays) {
     uint32_t years(remainingDays / NUMBER_OF_DAYS_IN_NON_LEAP_YEAR);
     int32_t remainingDaysTemp =
@@ -224,28 +244,8 @@ uint32_t getAndRemoveMinutesFromNumberOfSeconds(uint32_t& remainingSeconds) {
     return minutes;
 }
 
-void reorganizeOverflowValues(uint32_t& totalDays, uint32_t& totalSeconds, uint32_t& totalMicroSeconds) {
-    totalSeconds += totalMicroSeconds / NUMBER_OF_MICROSECONDS_IN_A_SECOND;
-    totalMicroSeconds = totalMicroSeconds % NUMBER_OF_MICROSECONDS_IN_A_SECOND;
-    totalDays += totalSeconds / NUMBER_OF_SECONDS_IN_A_DAY;
-    totalSeconds = totalSeconds % NUMBER_OF_SECONDS_IN_A_DAY;
-}
-
-void reorganizeUnderflowValues(int32_t& totalDays, int32_t& totalSeconds, int32_t& totalMicroSeconds) {
-    if (totalMicroSeconds < 0) {
-        int32_t neededSeconds = (static_cast<int32_t>(totalMicroSeconds) * -1 +
-                                 static_cast<int32_t>(NUMBER_OF_MICROSECONDS_IN_A_SECOND) - 1) /
-                                static_cast<int32_t>(NUMBER_OF_MICROSECONDS_IN_A_SECOND);
-        totalSeconds -= neededSeconds;
-        totalMicroSeconds +=
-            static_cast<int32_t>(neededSeconds) * static_cast<int32_t>(NUMBER_OF_MICROSECONDS_IN_A_SECOND);
-    }
-    if (totalSeconds < 0) {
-        int32_t neededDays = (totalSeconds * -1 + static_cast<int32_t>(NUMBER_OF_SECONDS_IN_A_DAY) - 1) /
-                             static_cast<int32_t>(NUMBER_OF_SECONDS_IN_A_DAY);
-        totalDays -= neededDays;
-        totalSeconds += neededDays * static_cast<int32_t>(NUMBER_OF_SECONDS_IN_A_DAY);
-    }
+bool isLeapYear(uint32_t const year) {
+    return (year % YEARS_4 == 0 && year % YEARS_100 != 0) || (year % YEARS_400 == 0);
 }
 
 }  // namespace alba::dateTimeHelper

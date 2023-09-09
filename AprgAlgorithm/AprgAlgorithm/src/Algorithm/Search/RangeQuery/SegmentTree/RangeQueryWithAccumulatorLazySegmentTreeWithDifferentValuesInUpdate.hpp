@@ -32,6 +32,14 @@ public:
         // only parent have pending updates
     }
 
+    void increaseAtRange(Index const start, Index const end) {
+        if (start <= end && (b_startOfChildren + start) < static_cast<Index>(b_treeValues.size()) &&
+            (b_startOfChildren + end) < static_cast<Index>(b_treeValues.size())) {
+            increaseAtRangeFromTopToBottom(
+                start, end, Utilities::ROOT_PARENT_INDEX, 0, b_startOfChildren);  // startOfChildren is size of base too
+        }
+    }
+
     Value getValueOnInterval(Index const start, Index const end) {
         // This has log(N) running time
         Value result{};
@@ -41,14 +49,6 @@ public:
                 start, end, Utilities::ROOT_PARENT_INDEX, 0, b_startOfChildren);  // startOfChildren is size of base too
         }
         return result;
-    }
-
-    void increaseAtRange(Index const start, Index const end) {
-        if (start <= end && (b_startOfChildren + start) < static_cast<Index>(b_treeValues.size()) &&
-            (b_startOfChildren + end) < static_cast<Index>(b_treeValues.size())) {
-            increaseAtRangeFromTopToBottom(
-                start, end, Utilities::ROOT_PARENT_INDEX, 0, b_startOfChildren);  // startOfChildren is size of base too
-        }
     }
 
 private:
@@ -71,36 +71,6 @@ private:
     }
 
     [[nodiscard]] Index isAParent(Index const treeIndex) const { return treeIndex < b_startOfChildren; }
-
-    Value getValueOnIntervalFromTopToBottom(
-        Index const startInterval, Index const endInterval, Index const currentChild, Index const baseLeft,
-        Index const baseRight) {
-        // This has log(N) running time
-        Value result{};
-        performUpdateAtIndexIfNeeded(currentChild, baseLeft, baseRight);  // propagate current update before processing
-        if (startInterval <= baseLeft && baseRight <= endInterval) {
-            result = b_treeValues[currentChild];
-        } else {
-            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
-            bool doesLeftPartIntersect = !(endInterval < baseLeft || baseMidPoint < startInterval);
-            bool doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
-            if (doesLeftPartIntersect && doesRightPartIntersect) {
-                result = b_function(
-                    getValueOnIntervalFromTopToBottom(
-                        startInterval, endInterval, Utilities::getLeftChild(currentChild), baseLeft, baseMidPoint),
-                    getValueOnIntervalFromTopToBottom(
-                        startInterval, endInterval, Utilities::getRightChild(currentChild), baseMidPoint + 1,
-                        baseRight));
-            } else if (doesLeftPartIntersect) {
-                result = getValueOnIntervalFromTopToBottom(
-                    startInterval, endInterval, Utilities::getLeftChild(currentChild), baseLeft, baseMidPoint);
-            } else if (doesRightPartIntersect) {
-                result = getValueOnIntervalFromTopToBottom(
-                    startInterval, endInterval, Utilities::getRightChild(currentChild), baseMidPoint + 1, baseRight);
-            }
-        }
-        return result;
-    }
 
     void increaseAtRangeFromTopToBottom(
         Index const startInterval, Index const endInterval, Index const currentChild, Index const baseLeft,
@@ -148,6 +118,36 @@ private:
                 startIndexForPendingUpdate.reset();
             }
         }
+    }
+
+    Value getValueOnIntervalFromTopToBottom(
+        Index const startInterval, Index const endInterval, Index const currentChild, Index const baseLeft,
+        Index const baseRight) {
+        // This has log(N) running time
+        Value result{};
+        performUpdateAtIndexIfNeeded(currentChild, baseLeft, baseRight);  // propagate current update before processing
+        if (startInterval <= baseLeft && baseRight <= endInterval) {
+            result = b_treeValues[currentChild];
+        } else {
+            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
+            bool doesLeftPartIntersect = !(endInterval < baseLeft || baseMidPoint < startInterval);
+            bool doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
+            if (doesLeftPartIntersect && doesRightPartIntersect) {
+                result = b_function(
+                    getValueOnIntervalFromTopToBottom(
+                        startInterval, endInterval, Utilities::getLeftChild(currentChild), baseLeft, baseMidPoint),
+                    getValueOnIntervalFromTopToBottom(
+                        startInterval, endInterval, Utilities::getRightChild(currentChild), baseMidPoint + 1,
+                        baseRight));
+            } else if (doesLeftPartIntersect) {
+                result = getValueOnIntervalFromTopToBottom(
+                    startInterval, endInterval, Utilities::getLeftChild(currentChild), baseLeft, baseMidPoint);
+            } else if (doesRightPartIntersect) {
+                result = getValueOnIntervalFromTopToBottom(
+                    startInterval, endInterval, Utilities::getRightChild(currentChild), baseMidPoint + 1, baseRight);
+            }
+        }
+        return result;
     }
 
     Index const b_startOfChildren;

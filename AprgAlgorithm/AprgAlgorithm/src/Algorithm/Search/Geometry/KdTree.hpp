@@ -23,45 +23,6 @@ public:
     KdTree() = default;
 
 protected:
-    [[nodiscard]] bool doesContainStartingOnThisNode(
-        NodeUniquePointer const& nodePointer, Key const& key) const override {
-        static int depth = 0;
-        ++depth;
-        bool result(false);
-        if (nodePointer) {
-            Key const& currentKey(nodePointer->key);
-            if (isLessThanWithDepth(key, currentKey, depth)) {
-                result = doesContainStartingOnThisNode(nodePointer->left, key);
-            } else if (isGreaterThanWithDepth(key, currentKey, depth)) {
-                result = doesContainStartingOnThisNode(nodePointer->right, key);
-            } else {
-                result = true;
-            }
-        }
-        --depth;
-        return result;
-    }
-
-    [[nodiscard]] int getRankStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const override {
-        static int depth = 0;
-        ++depth;
-        int result(0);
-        if (nodePointer) {
-            Key const& currentKey(nodePointer->key);
-            if (isLessThanWithDepth(key, currentKey, depth)) {
-                result = getRankStartingOnThisNode(nodePointer->left, key);  // recursively check rank on the right side
-            } else if (isGreaterThanWithDepth(key, currentKey, depth)) {
-                // get size of left, add one node for this node, and add the rank on the right side
-                result = 1 + this->getSizeOfThisSubTree(nodePointer->left) +
-                         getRankStartingOnThisNode(nodePointer->right, key);
-            } else {
-                result = this->getSizeOfThisSubTree(nodePointer->left);  // if equal, just get size of the subtree
-            }
-        }
-        --depth;
-        return result;
-    }
-
     [[nodiscard]] Node const* getNodeWithFloorStartingOnThisNode(
         NodeUniquePointer const& nodePointer, Key const& key) const override {
         static int depth = 0;
@@ -108,6 +69,45 @@ protected:
                 } else {
                     result = nodePointer.get();
                 }
+            }
+        }
+        --depth;
+        return result;
+    }
+
+    [[nodiscard]] int getRankStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const override {
+        static int depth = 0;
+        ++depth;
+        int result(0);
+        if (nodePointer) {
+            Key const& currentKey(nodePointer->key);
+            if (isLessThanWithDepth(key, currentKey, depth)) {
+                result = getRankStartingOnThisNode(nodePointer->left, key);  // recursively check rank on the right side
+            } else if (isGreaterThanWithDepth(key, currentKey, depth)) {
+                // get size of left, add one node for this node, and add the rank on the right side
+                result = 1 + this->getSizeOfThisSubTree(nodePointer->left) +
+                         getRankStartingOnThisNode(nodePointer->right, key);
+            } else {
+                result = this->getSizeOfThisSubTree(nodePointer->left);  // if equal, just get size of the subtree
+            }
+        }
+        --depth;
+        return result;
+    }
+
+    [[nodiscard]] bool doesContainStartingOnThisNode(
+        NodeUniquePointer const& nodePointer, Key const& key) const override {
+        static int depth = 0;
+        ++depth;
+        bool result(false);
+        if (nodePointer) {
+            Key const& currentKey(nodePointer->key);
+            if (isLessThanWithDepth(key, currentKey, depth)) {
+                result = doesContainStartingOnThisNode(nodePointer->left, key);
+            } else if (isGreaterThanWithDepth(key, currentKey, depth)) {
+                result = doesContainStartingOnThisNode(nodePointer->right, key);
+            } else {
+                result = true;
             }
         }
         --depth;

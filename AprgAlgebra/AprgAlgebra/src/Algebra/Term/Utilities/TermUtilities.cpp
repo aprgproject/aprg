@@ -21,38 +21,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-bool isTermSimpler(Term const& supposeToBeComplicatedTerm, Term const& supposeToBeSimpleTerm) {
-    return getNumberOfTerms(supposeToBeComplicatedTerm) > getNumberOfTerms(supposeToBeSimpleTerm);
-}
-
-bool isNegatedTermSimpler(Term const& term, Term const& negatedTerm) {
-    FirstCoefficientRetriever firstCoefficientRetrieverForTerm;
-    firstCoefficientRetrieverForTerm.retrieveFromTerm(term);
-
-    return isTermSimpler(term, negatedTerm) || firstCoefficientRetrieverForTerm.getFirstCoefficient() < 0;
-}
-
-bool isNonEmptyOrNonOperatorType(Term const& term) {
-    TermType termType(term.getTermType());
-    return TermType::Empty != termType && TermType::Operator != termType;
-}
-
-bool isNonEmptyOrNonOperatorOrNonExpressionType(Term const& term) {
-    TermType termType(term.getTermType());
-    return TermType::Empty != termType && TermType::Operator != termType && TermType::Expression != termType;
-}
-
-bool isARadicalTerm(Term const& term) {
-    TermRaiseToANumber termRaiseToANumber(createTermRaiseToANumberFromTerm(term));
-    return termRaiseToANumber.isRadical();
-}
-
-int getNumberOfTerms(Term const& term) {
-    NumberOfTermsRetriever retriever;
-    retriever.retrieveFromTerm(term);
-    return retriever.getNumberOfTerms();
-}
-
 AlbaNumber getConstantFactor(Term const& term) {
     AlbaNumber result(1);
     if (term.isConstant()) {
@@ -125,6 +93,13 @@ AlbaNumberPairs evaluateAndGetInputOutputPair(
     return result;
 }
 
+Expression negateExpression(Expression const& expression) {
+    NegationMutator negationMutator;
+    Expression negatedExpression(expression);
+    negationMutator.mutateExpression(negatedExpression);
+    return negatedExpression;
+}
+
 Term getPiAsATerm() { return ALBA_NUMBER_PI; }
 Term getEAsATerm() { return ALBA_NUMBER_E; }
 Term getPositiveInfinityAsATerm() { return ALBA_NUMBER_POSITIVE_INFINITY; }
@@ -173,11 +148,36 @@ Term invertTerm(Term const& term, string const& variableName) {
     return substitution.performSubstitutionTo(isolation.getEquivalentTermByIsolatingAVariable(variableName));
 }
 
-Expression negateExpression(Expression const& expression) {
-    NegationMutator negationMutator;
-    Expression negatedExpression(expression);
-    negationMutator.mutateExpression(negatedExpression);
-    return negatedExpression;
+int getNumberOfTerms(Term const& term) {
+    NumberOfTermsRetriever retriever;
+    retriever.retrieveFromTerm(term);
+    return retriever.getNumberOfTerms();
+}
+
+bool isTermSimpler(Term const& supposeToBeComplicatedTerm, Term const& supposeToBeSimpleTerm) {
+    return getNumberOfTerms(supposeToBeComplicatedTerm) > getNumberOfTerms(supposeToBeSimpleTerm);
+}
+
+bool isNegatedTermSimpler(Term const& term, Term const& negatedTerm) {
+    FirstCoefficientRetriever firstCoefficientRetrieverForTerm;
+    firstCoefficientRetrieverForTerm.retrieveFromTerm(term);
+
+    return isTermSimpler(term, negatedTerm) || firstCoefficientRetrieverForTerm.getFirstCoefficient() < 0;
+}
+
+bool isNonEmptyOrNonOperatorType(Term const& term) {
+    TermType termType(term.getTermType());
+    return TermType::Empty != termType && TermType::Operator != termType;
+}
+
+bool isNonEmptyOrNonOperatorOrNonExpressionType(Term const& term) {
+    TermType termType(term.getTermType());
+    return TermType::Empty != termType && TermType::Operator != termType && TermType::Expression != termType;
+}
+
+bool isARadicalTerm(Term const& term) {
+    TermRaiseToANumber termRaiseToANumber(createTermRaiseToANumberFromTerm(term));
+    return termRaiseToANumber.isRadical();
 }
 
 }  // namespace alba::algebra

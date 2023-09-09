@@ -18,31 +18,6 @@ public:
     using TraverseFunctionWithChange = std::function<void(Node&, bool&)>;
     ~BaseUnorderedLinkedList() override = default;  // no need for virtual destructor because base destructor is virtual
     BaseUnorderedLinkedList() : m_first(nullptr) {}
-    // (similar to other virtual functions)
-    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
-
-    [[nodiscard]] bool doesContain(Key const& key) const override {
-        bool result(false);
-        traverseWithNoChange([&](Node const& node, bool& shouldBreak) {
-            if (key == node.key) {
-                result = true;
-                shouldBreak = true;
-            }
-        });
-        return result;
-    }
-
-    [[nodiscard]] int getSize() const override { return m_size; }
-
-    [[nodiscard]] int getRank(Key const& key) const override {
-        int result(0);
-        traverseWithNoChange([&](Node const& node, bool&) {
-            if (key > node.key) {
-                ++result;
-            }
-        });
-        return result;
-    }
 
     [[nodiscard]] Key getMinimum() const override {
         Key result{};
@@ -136,6 +111,32 @@ public:
             }
         });
         std::sort(result.begin(), result.end());
+        return result;
+    }
+
+    [[nodiscard]] int getSize() const override { return m_size; }
+
+    [[nodiscard]] int getRank(Key const& key) const override {
+        int result(0);
+        traverseWithNoChange([&](Node const& node, bool&) {
+            if (key > node.key) {
+                ++result;
+            }
+        });
+        return result;
+    }
+
+    // (similar to other virtual functions)
+    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
+
+    [[nodiscard]] bool doesContain(Key const& key) const override {
+        bool result(false);
+        traverseWithNoChange([&](Node const& node, bool& shouldBreak) {
+            if (key == node.key) {
+                result = true;
+                shouldBreak = true;
+            }
+        });
         return result;
     }
 

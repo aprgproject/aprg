@@ -22,11 +22,9 @@ bool Limacon::operator==(Limacon const& limacon) const {
 }
 
 bool Limacon::operator!=(Limacon const& limacon) const { return !((*this) == limacon); }
-double Limacon::getAValue() const { return m_aValue; }
-double Limacon::getBValue() const { return m_bValue; }
 
-double Limacon::calculateRadiusFromTheta(AlbaAngle const& theta) const {
-    return m_aValue + m_bValue * performTrigonometricFunction(theta);
+AlbaAngle Limacon::calculateThetaFromRadius(double const radius) const {
+    return performInverseTrigonometricFunction((radius - m_aValue) / m_bValue);
 }
 
 LimaconTrigonometricFunctionType Limacon::getTrigonometricFunctionType() const { return m_trigonometricFunctionType; }
@@ -59,18 +57,11 @@ Points Limacon::getPointsForShape(AlbaAngle const& angleInterval) const {
     return result;
 }
 
-AlbaAngle Limacon::calculateThetaFromRadius(double const radius) const {
-    return performInverseTrigonometricFunction((radius - m_aValue) / m_bValue);
-}
+double Limacon::getAValue() const { return m_aValue; }
+double Limacon::getBValue() const { return m_bValue; }
 
-double Limacon::performTrigonometricFunction(AlbaAngle const& theta) const {
-    double result(0);
-    if (LimaconTrigonometricFunctionType::Sine == m_trigonometricFunctionType) {
-        result = sin(theta.getRadians());
-    } else if (LimaconTrigonometricFunctionType::Cosine == m_trigonometricFunctionType) {
-        result = cos(theta.getRadians());
-    }
-    return result;
+double Limacon::calculateRadiusFromTheta(AlbaAngle const& theta) const {
+    return m_aValue + m_bValue * performTrigonometricFunction(theta);
 }
 
 AlbaAngle Limacon::performInverseTrigonometricFunction(double const ratio) const {
@@ -79,6 +70,16 @@ AlbaAngle Limacon::performInverseTrigonometricFunction(double const ratio) const
         result = AlbaAngle(AngleUnitType::Radians, asin(ratio));
     } else if (LimaconTrigonometricFunctionType::Cosine == m_trigonometricFunctionType) {
         result = AlbaAngle(AngleUnitType::Radians, acos(ratio));
+    }
+    return result;
+}
+
+double Limacon::performTrigonometricFunction(AlbaAngle const& theta) const {
+    double result(0);
+    if (LimaconTrigonometricFunctionType::Sine == m_trigonometricFunctionType) {
+        result = sin(theta.getRadians());
+    } else if (LimaconTrigonometricFunctionType::Cosine == m_trigonometricFunctionType) {
+        result = cos(theta.getRadians());
     }
     return result;
 }

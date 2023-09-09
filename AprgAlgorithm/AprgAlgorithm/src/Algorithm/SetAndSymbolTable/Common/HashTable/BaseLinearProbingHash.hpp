@@ -22,28 +22,6 @@ public:
     BaseLinearProbingHash() : m_entryPointers(nullptr) { initialize(INITIAL_HASH_TABLE_SIZE); }
     // virtual destructor because of virtual functions (vtable exists)
     ~BaseLinearProbingHash() override { deleteAllEntries(); }
-    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
-
-    [[nodiscard]] bool doesContain(Key const& key) const override {
-        bool result(false);
-        for (int i(getHash(key)); m_entryPointers[i]; incrementHashTableIndexWithWrapAround(i)) {
-            EntryUniquePointer const& entryPointer(m_entryPointers[i]);
-            if (key == entryPointer->key) {
-                result = true;
-                break;
-            }
-        }
-        return result;
-    }
-
-    [[nodiscard]] int getSize() const override { return m_size; }
-
-    [[nodiscard]] int getRank(Key const& key) const override {
-        Keys keys(getKeys());
-        return OrderedArray::getRank(key, keys);
-    }
-
-    [[nodiscard]] int getHashTableSize() const { return m_hashTableSize; }
 
     [[nodiscard]] Key getMinimum() const override {
         Key result{};
@@ -118,6 +96,28 @@ public:
             }
         }
         std::sort(result.begin(), result.end());
+        return result;
+    }
+
+    [[nodiscard]] int getSize() const override { return m_size; }
+
+    [[nodiscard]] int getRank(Key const& key) const override {
+        Keys keys(getKeys());
+        return OrderedArray::getRank(key, keys);
+    }
+
+    [[nodiscard]] int getHashTableSize() const { return m_hashTableSize; }
+    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
+
+    [[nodiscard]] bool doesContain(Key const& key) const override {
+        bool result(false);
+        for (int i(getHash(key)); m_entryPointers[i]; incrementHashTableIndexWithWrapAround(i)) {
+            EntryUniquePointer const& entryPointer(m_entryPointers[i]);
+            if (key == entryPointer->key) {
+                result = true;
+                break;
+            }
+        }
         return result;
     }
 

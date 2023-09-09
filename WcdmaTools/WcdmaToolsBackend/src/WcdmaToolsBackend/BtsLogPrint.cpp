@@ -60,7 +60,6 @@ bool BtsLogPrint::operator==(BtsLogPrint const& btsLogPrintToCompare) const {
     return m_btsTime == btsLogPrintToCompare.m_btsTime && m_print == btsLogPrintToCompare.m_print;
 }
 
-bool BtsLogPrint::isEmpty() const { return m_btsTime.isEmpty() && m_pcTime.isEmpty(); }
 BtsLogTime BtsLogPrint::getBtsTime() const { return m_btsTime; }
 BtsLogTime BtsLogPrint::getPcTime() const { return m_pcTime; }
 string BtsLogPrint::getHardwareAddress() const { return m_hardwareAddress; }
@@ -73,6 +72,8 @@ string BtsLogPrint::getPrintWithAllDetails() const {
     return m_fileName + "|" + m_pcTime.getEquivalentStringPcTimeFormat() + " " + m_print;
     // return m_fileName + "|" + m_print;
 }
+
+bool BtsLogPrint::isEmpty() const { return m_btsTime.isEmpty() && m_pcTime.isEmpty(); }
 
 void BtsLogPrint::clear() {
     m_btsTime.clear();
@@ -89,6 +90,16 @@ void BtsLogPrint::updatePcTimeAndFileNameDetails(BtsLogPrint const& logPrint) {
     }
 }
 
+istream& operator>>(istream& in, BtsLogPrint& btsLogPrint) {
+    AlbaStreamParameterReader reader(in);
+    btsLogPrint.m_btsTime = reader.readData<BtsLogTime>();
+    btsLogPrint.m_pcTime = reader.readData<BtsLogTime>();
+    btsLogPrint.m_hardwareAddress = reader.readData<string>();
+    btsLogPrint.m_print = reader.readData<string>();
+    btsLogPrint.m_fileName = reader.readData<string>();
+    return in;
+}
+
 ostream& operator<<(ostream& out, BtsLogPrint const& btsLogPrint) {
     AlbaStreamParameterWriter writer(out);
     writer.writeData<BtsLogTime>(btsLogPrint.m_btsTime);
@@ -98,16 +109,6 @@ ostream& operator<<(ostream& out, BtsLogPrint const& btsLogPrint) {
     writer.writeData<string>(btsLogPrint.m_fileName);
     writer.flush();
     return out;
-}
-
-istream& operator>>(istream& in, BtsLogPrint& btsLogPrint) {
-    AlbaStreamParameterReader reader(in);
-    btsLogPrint.m_btsTime = reader.readData<BtsLogTime>();
-    btsLogPrint.m_pcTime = reader.readData<BtsLogTime>();
-    btsLogPrint.m_hardwareAddress = reader.readData<string>();
-    btsLogPrint.m_print = reader.readData<string>();
-    btsLogPrint.m_fileName = reader.readData<string>();
-    return in;
 }
 
 void BtsLogPrint::handleUnknownState(

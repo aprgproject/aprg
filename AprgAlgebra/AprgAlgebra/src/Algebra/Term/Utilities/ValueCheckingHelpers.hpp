@@ -3,7 +3,6 @@
 #include <Algebra/Term/TermTypes/Term.hpp>
 
 namespace alba::algebra {
-
 using NumberCheckingCondition = std::function<bool(AlbaNumber const& number)>;
 bool isValueSatisfyTheCondition(Term const& term, NumberCheckingCondition const& condition);
 bool isValueSatisfyTheCondition(Constant const& constant, NumberCheckingCondition const& condition);
@@ -59,5 +58,4 @@ bool hasNonRealFiniteNumbers(Expression const& expression);
 bool hasNonRealFiniteNumbers(Function const& function);
 bool hasZero(Terms const& terms);
 bool hasNegativeExponentsWithVariable(Polynomial const& polynomial, std::string const& variableName);
-
 }  // namespace alba::algebra

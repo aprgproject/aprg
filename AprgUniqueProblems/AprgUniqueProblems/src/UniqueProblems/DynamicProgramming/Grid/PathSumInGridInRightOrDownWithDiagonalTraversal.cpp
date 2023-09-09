@@ -10,39 +10,6 @@ PathSumInGridInRightOrDownWithDiagonalTraversal::PathSumInGridInRightOrDownWithD
     initialize(type);
 }
 
-PathSumInGridInRightOrDownWithDiagonalTraversal::Value
-PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathSumUsingNaiveRecursion() const {
-    Value pathSum(0);
-    if (!m_inputGrid.isEmpty()) {
-        pathSum =
-            getBestPathSumUsingNaiveRecursion(m_inputGrid.getNumberOfColumns() - 1, m_inputGrid.getNumberOfRows() - 1);
-    }
-    return pathSum;
-}
-
-PathSumInGridInRightOrDownWithDiagonalTraversal::Value
-PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathSumUsingMemoizationDP() const {
-    Value pathSum(0);
-    if (!m_inputGrid.isEmpty()) {
-        Grid partialSumGrid(m_inputGrid.getNumberOfColumns(), m_inputGrid.getNumberOfRows(), UNUSED_VALUE);
-        pathSum = getBestPathSumUsingMemoizationDP(
-            partialSumGrid, m_inputGrid.getNumberOfColumns() - 1, m_inputGrid.getNumberOfRows() - 1);
-    }
-    return pathSum;
-}
-
-PathSumInGridInRightOrDownWithDiagonalTraversal::Value
-PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathSumUsingIterativeDP() const {
-    // Time Complexity of the DP implementation is O(mn) which is much better than Naive Recursive implementation.
-    Value pathSum(0);
-    if (!m_inputGrid.isEmpty()) {
-        Grid partialSumGrid(getPartialSumGridUsingIterativeDP());
-        pathSum =
-            partialSumGrid.getEntry(partialSumGrid.getNumberOfColumns() - 1, partialSumGrid.getNumberOfRows() - 1);
-    }
-    return pathSum;
-}
-
 PathSumInGridInRightOrDownWithDiagonalTraversal::Path
 PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathUsingIterativeDP() const {
     Path path;
@@ -78,23 +45,36 @@ PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathUsingIterativeDP() c
 }
 
 PathSumInGridInRightOrDownWithDiagonalTraversal::Value
-PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathSumUsingNaiveRecursion(Index const x, Index const y) const {
-    // Naive recursion approach
-    Value result(m_inputGrid.getEntry(x, y));
-    if (!(x == 0 && y == 0)) {
-        if (x == 0) {
-            result += getBestPathSumUsingNaiveRecursion(x, y - 1);
-        } else if (y == 0) {
-            result += getBestPathSumUsingNaiveRecursion(x - 1, y);
-        } else {
-            // diagonal is included
-            result += m_minMaxFunction(
-                m_minMaxFunction(
-                    getBestPathSumUsingNaiveRecursion(x - 1, y), getBestPathSumUsingNaiveRecursion(x, y - 1)),
-                getBestPathSumUsingNaiveRecursion(x - 1, y - 1));
-        }
+PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathSumUsingNaiveRecursion() const {
+    Value pathSum(0);
+    if (!m_inputGrid.isEmpty()) {
+        pathSum =
+            getBestPathSumUsingNaiveRecursion(m_inputGrid.getNumberOfColumns() - 1, m_inputGrid.getNumberOfRows() - 1);
     }
-    return result;
+    return pathSum;
+}
+
+PathSumInGridInRightOrDownWithDiagonalTraversal::Value
+PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathSumUsingMemoizationDP() const {
+    Value pathSum(0);
+    if (!m_inputGrid.isEmpty()) {
+        Grid partialSumGrid(m_inputGrid.getNumberOfColumns(), m_inputGrid.getNumberOfRows(), UNUSED_VALUE);
+        pathSum = getBestPathSumUsingMemoizationDP(
+            partialSumGrid, m_inputGrid.getNumberOfColumns() - 1, m_inputGrid.getNumberOfRows() - 1);
+    }
+    return pathSum;
+}
+
+PathSumInGridInRightOrDownWithDiagonalTraversal::Value
+PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathSumUsingIterativeDP() const {
+    // Time Complexity of the DP implementation is O(mn) which is much better than Naive Recursive implementation.
+    Value pathSum(0);
+    if (!m_inputGrid.isEmpty()) {
+        Grid partialSumGrid(getPartialSumGridUsingIterativeDP());
+        pathSum =
+            partialSumGrid.getEntry(partialSumGrid.getNumberOfColumns() - 1, partialSumGrid.getNumberOfRows() - 1);
+    }
+    return pathSum;
 }
 
 PathSumInGridInRightOrDownWithDiagonalTraversal::Grid
@@ -114,6 +94,26 @@ PathSumInGridInRightOrDownWithDiagonalTraversal::getPartialSumGridUsingIterative
             // diagonal is included
             result.getEntryReference(x, y) += m_minMaxFunction(
                 m_minMaxFunction(result.getEntry(x - 1, y), result.getEntry(x, y - 1)), result.getEntry(x - 1, y - 1));
+        }
+    }
+    return result;
+}
+
+PathSumInGridInRightOrDownWithDiagonalTraversal::Value
+PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathSumUsingNaiveRecursion(Index const x, Index const y) const {
+    // Naive recursion approach
+    Value result(m_inputGrid.getEntry(x, y));
+    if (!(x == 0 && y == 0)) {
+        if (x == 0) {
+            result += getBestPathSumUsingNaiveRecursion(x, y - 1);
+        } else if (y == 0) {
+            result += getBestPathSumUsingNaiveRecursion(x - 1, y);
+        } else {
+            // diagonal is included
+            result += m_minMaxFunction(
+                m_minMaxFunction(
+                    getBestPathSumUsingNaiveRecursion(x - 1, y), getBestPathSumUsingNaiveRecursion(x, y - 1)),
+                getBestPathSumUsingNaiveRecursion(x - 1, y - 1));
         }
     }
     return result;

@@ -46,8 +46,6 @@ private:
         return result;
     }
 
-    bool getTheOtherColor(bool const color) { return !color; }
-
     void initialize() {
         Vertices vertices(m_graph.getVertices());
         for (Vertex const& vertex : vertices) {
@@ -81,6 +79,7 @@ private:
         }
     }
 
+    bool getTheOtherColor(bool const color) { return !color; }
     BaseUndirectedGraphWithVertex const& m_graph;
     bool m_isBipartite{true};
     CheckableVerticesWithVertex m_processedVertices;

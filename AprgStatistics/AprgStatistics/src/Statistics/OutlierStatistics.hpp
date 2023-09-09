@@ -13,6 +13,11 @@ public:
     using LocalStatistics = DataStatistics<DIMENSIONS>;
     explicit OutlierStatistics(Samples const& samples) : DataStatistics<DIMENSIONS>(samples) {}
 
+    double calculateAcceptableDeviationBasedOnChauvenetCriterion(int const sampleSize) {
+        return mathHelper::getAbsoluteValue(mathHelper::getInverseCumulativeStandardDistributionApproximation(
+            1 / (static_cast<double>(4) * sampleSize), 20));
+    }
+
     bool isAnOutlierBasedOnChauvenetCriterion(Sample const& sample) {
         LocalStatistics::calculateMeanIfNeeded();
         LocalStatistics::calculateSampleStandardDeviationIfNeeded();
@@ -28,11 +33,6 @@ public:
             }
         }
         return isAnOutlier;
-    }
-
-    double calculateAcceptableDeviationBasedOnChauvenetCriterion(int const sampleSize) {
-        return mathHelper::getAbsoluteValue(mathHelper::getInverseCumulativeStandardDistributionApproximation(
-            1 / (static_cast<double>(4) * sampleSize), 20));
     }
 };
 

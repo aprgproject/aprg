@@ -39,6 +39,12 @@ public:
     using CoinCombinationsPerValue = std::vector<CoinCombinations>;
     explicit CoinProblem(Coins const& availableCoins);
     static constexpr int UNUSED_COUNT = std::numeric_limits<int>::max();
+    [[nodiscard]] CoinCombinations getCoinCombinationsUsingMemoizationDP(Value const total) const;
+    [[nodiscard]] CoinCombinations getCoinCombinationsUsingIterativeDP(Value const total) const;
+    [[nodiscard]] CoinPermutations getCoinPermutationsUsingMemoizationDP(Value const total) const;
+    [[nodiscard]] CoinPermutations getCoinPermutationsUsingIterativeDP(Value const total) const;
+    [[nodiscard]] Coins getFewestCoinsUsingMemoizationDP(Value const total) const;
+    [[nodiscard]] Coins getFewestCoinsUsingIterativeDP(Value const total) const;
     // fewest coins
     [[nodiscard]] int getNumberOfFewestCoinsUsingMemoizationDP(Value const total) const;
     [[nodiscard]] int getNumberOfFewestCoinsIterativeDP(Value const total) const;
@@ -49,16 +55,15 @@ public:
     [[nodiscard]] int getNumberOfCoinCombinationsUsingMemoizationDP(Value const total) const;
     [[nodiscard]] int getNumberOfCoinCombinationsUsingIterativeDP(Value const total) const;
     [[nodiscard]] int getNumberOfCoinCombinationsUsingIterativeDPAndSpaceEfficient(Value const total) const;
-    [[nodiscard]] Coins getFewestCoinsUsingMemoizationDP(Value const total) const;
-    [[nodiscard]] Coins getFewestCoinsUsingIterativeDP(Value const total) const;
-    [[nodiscard]] CoinPermutations getCoinPermutationsUsingMemoizationDP(Value const total) const;
-    [[nodiscard]] CoinPermutations getCoinPermutationsUsingIterativeDP(Value const total) const;
-    [[nodiscard]] CoinCombinations getCoinCombinationsUsingMemoizationDP(Value const total) const;
-    [[nodiscard]] CoinCombinations getCoinCombinationsUsingIterativeDP(Value const total) const;
 
 private:
     [[nodiscard]] Value getMaxAvailableCoin() const;
     [[nodiscard]] Value getMaxOfTotalAndMaxCoinPlusOne(Value const total) const;
+    CoinCombinations getCoinCombinationsUsingMemoizationDPInternal(
+        CoinCombinationsPerValue& coinCombinationsPerValue, Value const total) const;
+    CoinPermutations getCoinPermutationsUsingMemoizationDPInternal(
+        CoinPermutationsPerValue& coinPermutationsPerValue, Value const total) const;
+    Coins getFewestCoinsUsingMemoizationDPInternal(VectorOfCoins& fewestCoins, Value const total) const;
     // fewest coins
     int getNumberOfFewestCoinsUsingMemoizationDPInternal(CountPerValue& countPerValue, Value const total) const;
     // permutations
@@ -66,11 +71,6 @@ private:
     // combinations
     int getNumberOfCoinCombinationsUsingMemoizationDPInternal(
         CountMatrix& countByValueByCoin, Value const total, int const coinIndex) const;
-    Coins getFewestCoinsUsingMemoizationDPInternal(VectorOfCoins& fewestCoins, Value const total) const;
-    CoinPermutations getCoinPermutationsUsingMemoizationDPInternal(
-        CoinPermutationsPerValue& coinPermutationsPerValue, Value const total) const;
-    CoinCombinations getCoinCombinationsUsingMemoizationDPInternal(
-        CoinCombinationsPerValue& coinCombinationsPerValue, Value const total) const;
     Coins m_availableCoins;
 };
 

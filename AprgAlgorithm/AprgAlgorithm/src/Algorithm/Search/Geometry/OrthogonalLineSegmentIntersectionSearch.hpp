@@ -14,11 +14,9 @@ public:
     using Points = std::vector<Point>;
 
     enum class EventType {
-
         StartOfHorizontalLineSegment = 1,
         CheckVerticalLineSegment = 2,
         EndOfHorizontalLineSegment = 3
-
     };
 
     struct Event {

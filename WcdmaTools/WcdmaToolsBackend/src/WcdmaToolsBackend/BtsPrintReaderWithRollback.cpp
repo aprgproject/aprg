@@ -7,19 +7,6 @@ using namespace std;
 namespace wcdmaToolsBackend {
 
 bool BtsPrintReaderWithRollback::isGood() const { return m_inputStream.good(); }
-double BtsPrintReaderWithRollback::getCurrentLocation() { return m_inputStream.tellg(); }
-
-BtsLogPrint BtsPrintReaderWithRollback::getPrint() {
-    if (isGood()) {
-        if (m_isRollbackActivated) {
-            m_isRollbackActivated = false;
-            return m_previousPrint;
-        }
-        m_inputStream >> m_previousPrint;
-        return m_previousPrint;
-    }
-    return BtsLogPrint{};
-}
 
 void BtsPrintReaderWithRollback::clear() {
     m_isRollbackActivated = false;
@@ -40,6 +27,19 @@ void BtsPrintReaderWithRollback::openIfNeeded(string const& filePath) {
     }
 }
 
+BtsLogPrint BtsPrintReaderWithRollback::getPrint() {
+    if (isGood()) {
+        if (m_isRollbackActivated) {
+            m_isRollbackActivated = false;
+            return m_previousPrint;
+        }
+        m_inputStream >> m_previousPrint;
+        return m_previousPrint;
+    }
+    return BtsLogPrint{};
+}
+
+double BtsPrintReaderWithRollback::getCurrentLocation() { return m_inputStream.tellg(); }
 BtsPrintReaderWithRollback::BtsPrintReaderWithRollback() = default;
 
 }  // namespace wcdmaToolsBackend

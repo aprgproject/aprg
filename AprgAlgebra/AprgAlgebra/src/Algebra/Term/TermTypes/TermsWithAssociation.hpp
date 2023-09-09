@@ -15,12 +15,11 @@ public:
     bool operator==(TermsWithAssociation const& second) const;
     bool operator!=(TermsWithAssociation const& second) const;
     bool operator<(TermsWithAssociation const& second) const;
-    [[nodiscard]] bool isEmpty() const;
-    [[nodiscard]] int getSize() const;
     [[nodiscard]] BaseTerm const& getFirstTerm() const;
     [[nodiscard]] TermAssociationType getFirstAssociationType() const;
     [[nodiscard]] TermsWithDetails const& getTermsWithDetails() const;
-    TermsWithDetails& getTermsWithDetailsReference();
+    [[nodiscard]] int getSize() const;
+    [[nodiscard]] bool isEmpty() const;
     void clear();
     void sort(bool const dontSortFirstItem);
     void putTermWithDetails(TermWithDetails const& termWithDetails);
@@ -30,6 +29,7 @@ public:
     void putTermWithPositiveAssociation(BaseTerm const& baseTerm);
     void putTermWithNegativeAssociation(BaseTerm const& baseTerm);
     void reverseTheAssociationOfTheTerms();
+    TermsWithDetails& getTermsWithDetailsReference();
 
 private:
     TermsWithDetails m_termsWithDetails;

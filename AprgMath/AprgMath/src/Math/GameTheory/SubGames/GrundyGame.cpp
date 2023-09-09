@@ -7,6 +7,7 @@ using namespace std;
 namespace alba::math {
 
 GrundyGame::GrundyGame(UnsignedInteger const totalNumberOfSticks) : m_stickHeaps{totalNumberOfSticks} {}
+GrundyGame::StickHeaps const& GrundyGame::getStickHeaps() const { return m_stickHeaps; }
 
 bool GrundyGame::hasNoMoves() const {
     return all_of(m_stickHeaps.cbegin(), m_stickHeaps.cend(), [](UnsignedInteger const stickHeap) {
@@ -14,14 +15,17 @@ bool GrundyGame::hasNoMoves() const {
     });
 }
 
-GrundyGame::StickHeaps const& GrundyGame::getStickHeaps() const { return m_stickHeaps; }
-
-UnsignedInteger GrundyGame::getOverallGrundyNumber() {
-    UnsignedInteger result(0U);
-    for (UnsignedInteger const& stickHeap : m_stickHeaps) {
-        result = getCombinedGrundyNumber(result, getGrundyNumberWithNumberOfSticks(stickHeap));
+void GrundyGame::split(HeapIndexAndFirstPileAndSecondPile const& heapIndexAndFirstPileAndSecondPile) {
+    UnsignedInteger index = get<0>(heapIndexAndFirstPileAndSecondPile);
+    if (index < m_stickHeaps.size()) {
+        UnsignedInteger firstPile = get<1>(heapIndexAndFirstPileAndSecondPile);
+        UnsignedInteger secondPile = get<2>(heapIndexAndFirstPileAndSecondPile);
+        if (m_stickHeaps[index] == firstPile + secondPile) {
+            m_stickHeaps.erase(m_stickHeaps.begin() + index);
+            m_stickHeaps.emplace(m_stickHeaps.begin() + index, secondPile);
+            m_stickHeaps.emplace(m_stickHeaps.begin() + index, firstPile);
+        }
     }
-    return result;
 }
 
 GameState GrundyGame::getGameState() { return getGameStateFromGrundyNumber(getOverallGrundyNumber()); }
@@ -59,28 +63,10 @@ GrundyGame::HeapIndexAndFirstPileAndSecondPile GrundyGame::getOptimalWayToSplit(
     return result;
 }
 
-void GrundyGame::split(HeapIndexAndFirstPileAndSecondPile const& heapIndexAndFirstPileAndSecondPile) {
-    UnsignedInteger index = get<0>(heapIndexAndFirstPileAndSecondPile);
-    if (index < m_stickHeaps.size()) {
-        UnsignedInteger firstPile = get<1>(heapIndexAndFirstPileAndSecondPile);
-        UnsignedInteger secondPile = get<2>(heapIndexAndFirstPileAndSecondPile);
-        if (m_stickHeaps[index] == firstPile + secondPile) {
-            m_stickHeaps.erase(m_stickHeaps.begin() + index);
-            m_stickHeaps.emplace(m_stickHeaps.begin() + index, secondPile);
-            m_stickHeaps.emplace(m_stickHeaps.begin() + index, firstPile);
-        }
-    }
-}
-
-UnsignedInteger GrundyGame::getGrundyNumberWithNumberOfSticks(UnsignedInteger const numberOfSticks) {
-    UnsignedInteger result{};
-    auto it = m_sticksToGrundyNumberMap.find(numberOfSticks);
-    if (it != m_sticksToGrundyNumberMap.cend()) {
-        result = it->second;
-    } else {
-        // possible infinite recursion for cycles
-        result = getGrundyNumber(getNextGrundyNumbersWithNumberOfSticks(numberOfSticks));
-        m_sticksToGrundyNumberMap[numberOfSticks] = result;
+UnsignedInteger GrundyGame::getOverallGrundyNumber() {
+    UnsignedInteger result(0U);
+    for (UnsignedInteger const& stickHeap : m_stickHeaps) {
+        result = getCombinedGrundyNumber(result, getGrundyNumberWithNumberOfSticks(stickHeap));
     }
     return result;
 }
@@ -93,6 +79,19 @@ SetOfUnsignedIntegers GrundyGame::getNextGrundyNumbersWithNumberOfSticks(Unsigne
         int b = numberOfSticks - a;
         result.emplace(
             getCombinedGrundyNumber(getGrundyNumberWithNumberOfSticks(a), getGrundyNumberWithNumberOfSticks(b)));
+    }
+    return result;
+}
+
+UnsignedInteger GrundyGame::getGrundyNumberWithNumberOfSticks(UnsignedInteger const numberOfSticks) {
+    UnsignedInteger result{};
+    auto it = m_sticksToGrundyNumberMap.find(numberOfSticks);
+    if (it != m_sticksToGrundyNumberMap.cend()) {
+        result = it->second;
+    } else {
+        // possible infinite recursion for cycles
+        result = getGrundyNumber(getNextGrundyNumbersWithNumberOfSticks(numberOfSticks));
+        m_sticksToGrundyNumberMap[numberOfSticks] = result;
     }
     return result;
 }

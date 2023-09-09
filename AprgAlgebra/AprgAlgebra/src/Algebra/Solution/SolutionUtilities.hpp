@@ -6,8 +6,8 @@
 #include <Common/Math/Number/AlbaNumberTypes.hpp>
 
 namespace alba::algebra {
+void retrieveInitialValuesForIteratingMethods(AlbaNumbersSet& allValues, Term const& term);
 AlbaNumber getPositiveLogarithmOfLargestNumber(Term const& term);
 AlbaNumbers getInitialValuesForIteratingMethods(Term const& term);
 AlbaNumbers getInitialValuesForIteratingMethods(Equation const& equation);
-void retrieveInitialValuesForIteratingMethods(AlbaNumbersSet& allValues, Term const& term);
 }  // namespace alba::algebra

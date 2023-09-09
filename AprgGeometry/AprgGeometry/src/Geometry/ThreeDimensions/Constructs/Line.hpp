@@ -19,19 +19,19 @@ public:
     Line(double const aCoefficient, double const bCoefficient, double const cCoefficient, Point const& point);
     bool operator==(Line const& line) const;
     bool operator!=(Line const& line) const;
-    [[nodiscard]] bool isInvalid() const;
-    [[nodiscard]] double getXInitialValue() const;
-    [[nodiscard]] double getYInitialValue() const;
-    [[nodiscard]] double getZInitialValue() const;
-    [[nodiscard]] double getACoefficient() const;
-    [[nodiscard]] double getBCoefficient() const;
-    [[nodiscard]] double getCCoefficient() const;
     [[nodiscard]] std::optional<double> calculateXFromY(double const y) const;
     [[nodiscard]] std::optional<double> calculateXFromZ(double const z) const;
     [[nodiscard]] std::optional<double> calculateYFromX(double const x) const;
     [[nodiscard]] std::optional<double> calculateYFromZ(double const z) const;
     [[nodiscard]] std::optional<double> calculateZFromX(double const x) const;
     [[nodiscard]] std::optional<double> calculateZFromY(double const y) const;
+    [[nodiscard]] double getXInitialValue() const;
+    [[nodiscard]] double getYInitialValue() const;
+    [[nodiscard]] double getZInitialValue() const;
+    [[nodiscard]] double getACoefficient() const;
+    [[nodiscard]] double getBCoefficient() const;
+    [[nodiscard]] double getCCoefficient() const;
+    [[nodiscard]] bool isInvalid() const;
 
 private:
     static std::optional<double> calculateOtherCoordinate(

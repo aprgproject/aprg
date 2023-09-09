@@ -32,24 +32,13 @@ struct TestObject {
     bool operator<(TestObject const& testObject) const { return valueInteger < testObject.valueInteger; }
     bool operator>(TestObject const& testObject) const { return valueInteger > testObject.valueInteger; }
     bool operator==(TestObject const& testObject) const { return valueInteger == testObject.valueInteger; }
-    friend ostream& operator<<(ostream& out, TestObject const& testObject);
     friend istream& operator>>(istream& in, TestObject& testObject);
+    friend ostream& operator<<(ostream& out, TestObject const& testObject);
     int valueInteger;
     double valueDouble;
     char valueCharacter;
     string valueString;
 };
-
-ostream& operator<<(ostream& out, TestObject const& testObject) {
-    out << testObject.valueInteger << "\n";
-    out << testObject.valueDouble << "\n";
-    out << testObject.valueCharacter << "\n";
-    out << testObject.valueString.empty() << "\n";
-    if (!testObject.valueString.empty()) {
-        out << testObject.valueString;
-    }
-    return out;
-}
 
 istream& operator>>(istream& in, TestObject& testObject) {
     bool isEmpty(true);
@@ -61,6 +50,17 @@ istream& operator>>(istream& in, TestObject& testObject) {
         in >> testObject.valueString;
     }
     return in;
+}
+
+ostream& operator<<(ostream& out, TestObject const& testObject) {
+    out << testObject.valueInteger << "\n";
+    out << testObject.valueDouble << "\n";
+    out << testObject.valueCharacter << "\n";
+    out << testObject.valueString.empty() << "\n";
+    if (!testObject.valueString.empty()) {
+        out << testObject.valueString;
+    }
+    return out;
 }
 
 TEST(AlbaLargeSorterTest, ObjectsCanBeSavedAndLoadFromFile) {

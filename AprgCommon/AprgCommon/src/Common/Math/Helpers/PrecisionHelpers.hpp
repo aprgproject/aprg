@@ -76,16 +76,16 @@ inline NumberType getIntegerPartOfDoubleValue(double const doubleValue) {
     return static_cast<NumberType>(doubleValue);
 }
 
+inline double getFractionalPartInDouble(double const doubleValue) {
+    return doubleValue - static_cast<double>(getIntegerPartOfDoubleValue<int64_t>(doubleValue));
+}
+
 inline bool isAlmostEqual(double const value1, double const value2, double const differenceTolerance) {
     return value1 == value2 || getAbsoluteValue(value1 - value2) <= differenceTolerance;
 }
 
 inline bool isAlmostAnInteger(double const value, double const differenceTolerance) {
     return isAlmostEqual(value, round(value), differenceTolerance);
-}
-
-inline double getFractionalPartInDouble(double const doubleValue) {
-    return doubleValue - static_cast<double>(getIntegerPartOfDoubleValue<int64_t>(doubleValue));
 }
 
 AlbaNumber convertIfInfinityToNearestFiniteValue(AlbaNumber const& value);

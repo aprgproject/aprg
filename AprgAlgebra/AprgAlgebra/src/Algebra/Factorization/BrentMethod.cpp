@@ -23,15 +23,10 @@ constexpr double BRENT_METHOD_TOLERANCE_TO_ZERO_FOR_A_AND_B = 1E-11;
 }  // namespace
 
 BrentMethod::BrentMethod(AlbaNumbers const& coefficients) : m_coefficients(coefficients), m_values{} {}
-bool BrentMethod::isFinished() const { return m_values.solutionOptional.has_value(); }
-int BrentMethod::getNumberOfIterationsExecuted() const { return m_numberOfIterationsExecuted; }
 AlbaNumbers const& BrentMethod::getCoefficients() const { return m_coefficients; }
 BrentMethod::CalculationValues const& BrentMethod::getCalculationValues() const { return m_values; }
-
-AlbaNumberOptional const& BrentMethod::getSolution() {
-    convertSolutionToIntegerIfNeeded();
-    return m_values.solutionOptional;
-}
+int BrentMethod::getNumberOfIterationsExecuted() const { return m_numberOfIterationsExecuted; }
+bool BrentMethod::isFinished() const { return m_values.solutionOptional.has_value(); }
 
 void BrentMethod::resetCalculation(AlbaNumber const& start, AlbaNumber const& end) {
     m_numberOfIterationsExecuted = 0;
@@ -112,6 +107,13 @@ void BrentMethod::runMaxNumberOfIterationsOrUntilFinished(int const maxIteration
     }
 }
 
+AlbaNumberOptional const& BrentMethod::getSolution() {
+    convertSolutionToIntegerIfNeeded();
+    return m_values.solutionOptional;
+}
+
+AlbaNumber BrentMethod::calculateBiSectionMethod(AlbaNumber const& a, AlbaNumber const& b) { return (a + b) / 2; }
+
 bool BrentMethod::isAlmostEqualForBrentMethod(AlbaNumber const& value1, AlbaNumber const& value2) {
     return isAlmostEqual(value1.getDouble(), value2.getDouble(), BRENT_METHOD_COMPARISON_TOLERANCE);
 }
@@ -135,8 +137,6 @@ bool BrentMethod::isBisectionMethodNeeded(
     bool isConditionFive = !mflag && getAbsoluteValue(c - d) < getAbsoluteValue(gamma);
     return isConditionOne || isConditionTwo || isConditionThree || isConditionFour || isConditionFive;
 }
-
-AlbaNumber BrentMethod::calculateBiSectionMethod(AlbaNumber const& a, AlbaNumber const& b) { return (a + b) / 2; }
 
 AlbaNumber BrentMethod::calculate(AlbaNumber const& inputValue) const {
     AlbaNumber result;

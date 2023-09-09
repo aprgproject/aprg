@@ -13,29 +13,6 @@ public:
     using Keys = std::vector<Key>;
     BaseOrderedArray() = default;
     ~BaseOrderedArray() override = default;  // no need for virtual destructor because base destructor is virtual
-    static int getRank(Key const& key, Keys const& keys) {
-        // this is binary search
-        int result(0);
-        int lowIndex = 0;
-        int highIndex = keys.size() - 1;
-        while (lowIndex <= highIndex) {
-            int middleIndex = getMidpointOfIndexes(lowIndex, highIndex);
-            Key const& keyAtMiddleIndex(keys[middleIndex]);
-            if (key < keyAtMiddleIndex) {
-                highIndex = middleIndex - 1;
-            } else if (key > keyAtMiddleIndex) {
-                lowIndex = middleIndex + 1;
-            } else {
-                result = middleIndex;
-                break;
-            }
-        }
-        if (result == 0) {
-            result = lowIndex;
-        }
-        return result;
-    }
-
     static Key selectAt(int const index, Keys const& keys) {
         Key result{};
         if (index < static_cast<int>(keys.size())) {
@@ -64,22 +41,28 @@ public:
         return result;
     }
 
-    // (similar to other virtual functions)
-    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
-
-    [[nodiscard]] bool doesContain(Key const& key) const override {
-        bool result(false);
-        if (!isEmpty()) {
-            int rank(getRank(key));
-            if (rank < m_size && m_keys[rank] == key) {
-                result = true;
+    static int getRank(Key const& key, Keys const& keys) {
+        // this is binary search
+        int result(0);
+        int lowIndex = 0;
+        int highIndex = keys.size() - 1;
+        while (lowIndex <= highIndex) {
+            int middleIndex = getMidpointOfIndexes(lowIndex, highIndex);
+            Key const& keyAtMiddleIndex(keys[middleIndex]);
+            if (key < keyAtMiddleIndex) {
+                highIndex = middleIndex - 1;
+            } else if (key > keyAtMiddleIndex) {
+                lowIndex = middleIndex + 1;
+            } else {
+                result = middleIndex;
+                break;
             }
+        }
+        if (result == 0) {
+            result = lowIndex;
         }
         return result;
     }
-
-    [[nodiscard]] int getSize() const override { return m_size; }
-    [[nodiscard]] int getRank(Key const& key) const override { return getRank(key, m_keys); }
 
     [[nodiscard]] Key getMinimum() const override {
         Key result{};
@@ -107,6 +90,22 @@ public:
         for (Key const& currentKey : m_keys) {
             if (currentKey >= low && currentKey <= high) {
                 result.emplace_back(currentKey);
+            }
+        }
+        return result;
+    }
+
+    [[nodiscard]] int getSize() const override { return m_size; }
+    [[nodiscard]] int getRank(Key const& key) const override { return getRank(key, m_keys); }
+    // (similar to other virtual functions)
+    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
+
+    [[nodiscard]] bool doesContain(Key const& key) const override {
+        bool result(false);
+        if (!isEmpty()) {
+            int rank(getRank(key));
+            if (rank < m_size && m_keys[rank] == key) {
+                result = true;
             }
         }
         return result;

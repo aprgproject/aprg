@@ -23,6 +23,20 @@ MultipleVariableSolutionSets SolverUsingSubstitution::calculateSolutionAndReturn
     return m_solutionsWithAllVariables;
 }
 
+SubstitutionOfVariablesToValues SolverUsingSubstitution::getSubstitutionFromSolutionSet(
+    MultipleVariableSolutionSet const& solutionSet) {
+    MultipleVariableSolutionSet::VariableNameToSolutionSetMap const& variableNameToSolutionSetMap(
+        solutionSet.getVariableNameToSolutionSetMap());
+    SubstitutionOfVariablesToValues substitution;
+    for (auto const& variableNameToSolutionSet : variableNameToSolutionSetMap) {
+        AlbaNumbers const& acceptedValues(variableNameToSolutionSet.second.getAcceptedValues());
+        if (!acceptedValues.empty()) {
+            substitution.putVariableWithValue(variableNameToSolutionSet.first, acceptedValues.front());
+        }
+    }
+    return substitution;
+}
+
 bool SolverUsingSubstitution::isSolutionCorrect(
     MultipleVariableSolutionSet const& solutionSet, Equations const& equations) {
     bool result(true);
@@ -37,20 +51,6 @@ bool SolverUsingSubstitution::isSolutionCorrect(
         }
     }
     return result;
-}
-
-SubstitutionOfVariablesToValues SolverUsingSubstitution::getSubstitutionFromSolutionSet(
-    MultipleVariableSolutionSet const& solutionSet) {
-    MultipleVariableSolutionSet::VariableNameToSolutionSetMap const& variableNameToSolutionSetMap(
-        solutionSet.getVariableNameToSolutionSetMap());
-    SubstitutionOfVariablesToValues substitution;
-    for (auto const& variableNameToSolutionSet : variableNameToSolutionSetMap) {
-        AlbaNumbers const& acceptedValues(variableNameToSolutionSet.second.getAcceptedValues());
-        if (!acceptedValues.empty()) {
-            substitution.putVariableWithValue(variableNameToSolutionSet.first, acceptedValues.front());
-        }
-    }
-    return substitution;
 }
 
 bool SolverUsingSubstitution::isTheValueAlreadyExisting(string const& variableName, AlbaNumber const& value) const {

@@ -10,48 +10,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-Monomial createMonomialFromNumber(AlbaNumber const& number) { return {number, {}}; }
-Monomial createMonomialFromVariable(Variable const& variable) { return {1, {{variable.getVariableName(), 1}}}; }
-
-Monomial createMonomialIfPossible(Term const& term) {
-    Monomial result;
-    if (term.isConstant()) {
-        result = createMonomialFromNumber(term.getAsNumber());
-    } else if (term.isVariable()) {
-        result = createMonomialFromVariable(term.getAsVariable());
-    } else if (term.isMonomial()) {
-        result = term.getAsMonomial();
-    } else if (term.isPolynomial()) {
-        Polynomial const& polynomial(term.getAsPolynomial());
-        if (isOneMonomial(polynomial)) {
-            result = getFirstMonomial(polynomial);
-        }
-    }
-    return result;
-}
-
-Polynomial createPolynomialFromNumber(AlbaNumber const& number) { return Polynomial{createMonomialFromNumber(number)}; }
-
-Polynomial createPolynomialFromVariable(Variable const& variable) {
-    return Polynomial{createMonomialFromVariable(variable)};
-}
-
-Polynomial createPolynomialFromMonomial(Monomial const& monomial) { return Polynomial{monomial}; }
-
-Polynomial createPolynomialIfPossible(Term const& term) {
-    Polynomial result;
-    if (term.isConstant()) {
-        result = createPolynomialFromNumber(term.getAsNumber());
-    } else if (term.isVariable()) {
-        result = createPolynomialFromVariable(term.getAsVariable());
-    } else if (term.isMonomial()) {
-        result = createPolynomialFromMonomial(term.getAsMonomial());
-    } else if (term.isPolynomial()) {
-        result = term.getAsPolynomial();
-    }
-    return result;
-}
-
 Expression createExpressionInAnExpression(Expression const& expression) { return Expression(Term(expression)); }
 Expression createAndWrapExpressionFromATerm(Term const& term) { return Expression(term); }
 
@@ -99,6 +57,48 @@ Function createFunctionWithEmptyInputExpression(string const& functionName) {
 
 Function createFunctionInAnFunction(Function const& functionObject) {
     return {functionObject.getFunctionName(), Term(functionObject), functionObject.getEvaluationFunction()};
+}
+
+Monomial createMonomialFromNumber(AlbaNumber const& number) { return {number, {}}; }
+Monomial createMonomialFromVariable(Variable const& variable) { return {1, {{variable.getVariableName(), 1}}}; }
+
+Monomial createMonomialIfPossible(Term const& term) {
+    Monomial result;
+    if (term.isConstant()) {
+        result = createMonomialFromNumber(term.getAsNumber());
+    } else if (term.isVariable()) {
+        result = createMonomialFromVariable(term.getAsVariable());
+    } else if (term.isMonomial()) {
+        result = term.getAsMonomial();
+    } else if (term.isPolynomial()) {
+        Polynomial const& polynomial(term.getAsPolynomial());
+        if (isOneMonomial(polynomial)) {
+            result = getFirstMonomial(polynomial);
+        }
+    }
+    return result;
+}
+
+Polynomial createPolynomialFromNumber(AlbaNumber const& number) { return Polynomial{createMonomialFromNumber(number)}; }
+
+Polynomial createPolynomialFromVariable(Variable const& variable) {
+    return Polynomial{createMonomialFromVariable(variable)};
+}
+
+Polynomial createPolynomialFromMonomial(Monomial const& monomial) { return Polynomial{monomial}; }
+
+Polynomial createPolynomialIfPossible(Term const& term) {
+    Polynomial result;
+    if (term.isConstant()) {
+        result = createPolynomialFromNumber(term.getAsNumber());
+    } else if (term.isVariable()) {
+        result = createPolynomialFromVariable(term.getAsVariable());
+    } else if (term.isMonomial()) {
+        result = createPolynomialFromMonomial(term.getAsMonomial());
+    } else if (term.isPolynomial()) {
+        result = term.getAsPolynomial();
+    }
+    return result;
 }
 
 Term createTermWithAnExpressionWithATermWithAnExpression(Expression const& expression) {

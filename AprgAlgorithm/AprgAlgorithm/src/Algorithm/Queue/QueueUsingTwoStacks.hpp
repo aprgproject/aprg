@@ -11,21 +11,17 @@ template <typename Object, typename StackWithObject>
 class QueueUsingTwoStacks : public BaseQueue<Object> {
 public:
     QueueUsingTwoStacks() = default;
-    [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
     [[nodiscard]] int getSize() const override { return m_stackFromEnqueue.getSize() + m_stackToDequeue.getSize(); }
-    Object dequeue() override { return dequeueInAmortizedConstantTime(); }
+    [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 
     void enqueue(Object const& object) override {
         enqueueInConstantTime(object);
         // enqueueInAmortizedConstantTime(object);
     }
 
-private:
-    Object dequeueInAmortizedConstantTime() {
-        transferAllIfPossible();
-        return m_stackToDequeue.pop();
-    }
+    Object dequeue() override { return dequeueInAmortizedConstantTime(); }
 
+private:
     void enqueueInConstantTime(Object const& object) { m_stackFromEnqueue.push(object); }
 
     void enqueueInAmortizedConstantTime(Object const& object) {
@@ -44,6 +40,11 @@ private:
                 m_stackToDequeue.push(m_stackFromEnqueue.pop());
             }
         }
+    }
+
+    Object dequeueInAmortizedConstantTime() {
+        transferAllIfPossible();
+        return m_stackToDequeue.pop();
     }
 
     StackWithObject m_stackFromEnqueue;

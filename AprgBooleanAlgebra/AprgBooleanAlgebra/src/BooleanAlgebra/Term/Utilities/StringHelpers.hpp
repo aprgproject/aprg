@@ -5,17 +5,15 @@
 #include <string>
 
 namespace alba::booleanAlgebra {
-
-bool isConstant(std::string const& stringObject);
-bool isOperator(std::string const& stringObject);
-bool isPrime(char const character);
-int getOperatorPriority(std::string const& operatorString);
+void addValueTermIfNotEmpty(Terms& terms, std::string const& valueString);
+Term buildTermIfPossible(std::string const& termString);
+Terms tokenizeToTerms(std::string const& inputString);
 std::string getString(OperatorType const operatorType);
 std::string getString(OperatorLevel const operatorLevel);
 std::string getString(WrappedTerms const& wrappedTerms);
 std::string createVariableTermNameForSubstitution(Term const& term);
-Term buildTermIfPossible(std::string const& termString);
-Terms tokenizeToTerms(std::string const& inputString);
-void addValueTermIfNotEmpty(Terms& terms, std::string const& valueString);
-
+int getOperatorPriority(std::string const& operatorString);
+bool isConstant(std::string const& stringObject);
+bool isOperator(std::string const& stringObject);
+bool isPrime(char const character);
 }  // namespace alba::booleanAlgebra

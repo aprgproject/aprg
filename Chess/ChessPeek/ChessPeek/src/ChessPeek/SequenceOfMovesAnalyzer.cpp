@@ -13,6 +13,9 @@ namespace ChessPeek {
 
 SequenceOfMovesAnalyzer::SequenceOfMovesAnalyzer(BoardWithContext const& boardWithContext)
     : m_state(State::NoMove), m_current{boardWithContext, {}}, m_previous{} {}
+Board const& SequenceOfMovesAnalyzer::getCurrentBoard() const { return m_current.boardWithContext.getBoard(); }
+PieceColor SequenceOfMovesAnalyzer::getCurrentMoveColor() const { return m_current.boardWithContext.getPlayerColor(); }
+SequenceOfMovesAnalyzer::State SequenceOfMovesAnalyzer::getState() const { return m_state; }
 
 bool SequenceOfMovesAnalyzer::canPreMove() const {
     bool result(false);
@@ -21,10 +24,6 @@ bool SequenceOfMovesAnalyzer::canPreMove() const {
     }
     return result;
 }
-
-SequenceOfMovesAnalyzer::State SequenceOfMovesAnalyzer::getState() const { return m_state; }
-Board const& SequenceOfMovesAnalyzer::getCurrentBoard() const { return m_current.boardWithContext.getBoard(); }
-PieceColor SequenceOfMovesAnalyzer::getCurrentMoveColor() const { return m_current.boardWithContext.getPlayerColor(); }
 
 void SequenceOfMovesAnalyzer::analyzeMove(Move const& halfMove) {
     if (areCoordinatesValid(halfMove)) {

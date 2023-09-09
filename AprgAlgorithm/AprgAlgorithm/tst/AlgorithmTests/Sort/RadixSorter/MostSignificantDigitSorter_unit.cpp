@@ -10,6 +10,7 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 constexpr int MAX_NUMBER_OF_NIBBLES = 16;
 constexpr int MAX_NUMBER_OF_CHARACTERS = 256;
 using Characters = vector<char>;
@@ -25,16 +26,10 @@ CharactersSorter::GetDigitAtFunction getNibbleAtForCharacter = [](char const& va
                                                                   int const mostSignificantDigitIndex) -> int {
     return (value >> ((1 - mostSignificantDigitIndex) * 4)) & 0xF;
 };
-CharactersSorter::IsDigitFunction isNibbleDigitInvalidForCharacter = [](char const&, int const digitIndex) -> bool {
-    return digitIndex >= 2;
-};
 
 SmallIntegerSorter::GetDigitAtFunction getNibbleAtForSmallInteger = [](int const& value,
                                                                        int const mostSignificantDigitIndex) -> int {
     return ((value + 10) >> ((7 - mostSignificantDigitIndex) * 4)) & 0xF;
-};
-SmallIntegerSorter::IsDigitFunction isNibbleDigitInvalidForSmallInteger = [](int const&, int const digitIndex) -> bool {
-    return digitIndex >= 8;
 };
 
 StringsSorter::GetDigitAtFunction getCharacterAtForString = [](string const& value,
@@ -45,16 +40,27 @@ StringsSorter::GetDigitAtFunction getCharacterAtForString = [](string const& val
     }
     return digitValue;
 };
-StringsSorter::IsDigitFunction isDigitInvalidForString = [](string const& value, int const digitIndex) -> bool {
-    return digitIndex >= static_cast<int>(value.length());
-};
 
 StabilityCheckObjectsSorter::GetDigitAtFunction getNibbleAtForStabilityCheckObject =
     [](StabilityCheckObject const& value, int const mostSignificantDigitIndex) -> int {
     return (value.getVisiblePart() >> ((1 - mostSignificantDigitIndex) * 4)) & 0xF;
 };
+
+CharactersSorter::IsDigitFunction isNibbleDigitInvalidForCharacter = [](char const&, int const digitIndex) -> bool {
+    return digitIndex >= 2;
+};
+
+SmallIntegerSorter::IsDigitFunction isNibbleDigitInvalidForSmallInteger = [](int const&, int const digitIndex) -> bool {
+    return digitIndex >= 8;
+};
+
+StringsSorter::IsDigitFunction isDigitInvalidForString = [](string const& value, int const digitIndex) -> bool {
+    return digitIndex >= static_cast<int>(value.length());
+};
+
 StabilityCheckObjectsSorter::IsDigitFunction isNibbleDigitInvalidForStabilityCheckObject =
     [](StabilityCheckObject const&, int const digitIndex) -> bool { return digitIndex >= 2; };
+
 }  // namespace
 
 TEST(MostSignificantDigitSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {

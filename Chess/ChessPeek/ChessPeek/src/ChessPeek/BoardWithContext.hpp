@@ -17,13 +17,13 @@ public:
 
     BoardWithContext();
     BoardWithContext(PieceColor const& playerColor, Board const& board);
-    bool isPlayersKingOnCheck() const;
-    bool isOpponentsKingOnCheck() const;
-    PieceColor getPlayerColor() const;
     Board const& getBoard() const;
-    std::string getFenString() const;
     Coordinate getPlayerKingCoordinate() const;
     Coordinate getOpponentsKingCoordinate() const;
+    PieceColor getPlayerColor() const;
+    std::string getFenString() const;
+    bool isPlayersKingOnCheck() const;
+    bool isOpponentsKingOnCheck() const;
     void save(PieceColor const& playerColor, Board const& board);
     void setPlayerColor(PieceColor const& playerColor);
     void move(Move const& move);

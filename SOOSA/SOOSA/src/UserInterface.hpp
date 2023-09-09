@@ -15,8 +15,8 @@ public:
     void askUserForFormDetails();
 
 private:
-    std::string askUserForPathOfFormDetailToRead(std::string const& formDetailsDirectoryPath);
     void saveFormDetailsFromFormDetailPath(std::string const& formDetailsFilePath);
+    std::string askUserForPathOfFormDetailToRead(std::string const& formDetailsDirectoryPath);
     InputConfiguration m_savedConfiguration;
     AlbaUserInterface m_userInterface;
 };

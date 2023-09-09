@@ -48,13 +48,6 @@ bool Line::operator==(Line const& line) const {
 }
 
 bool Line::operator!=(Line const& line) const { return !((*this) == line); }
-bool Line::isInvalid() const { return areAllCoefficientsZero(); }
-double Line::getXInitialValue() const { return m_xInitialValue; }
-double Line::getYInitialValue() const { return m_yInitialValue; }
-double Line::getZInitialValue() const { return m_zInitialValue; }
-double Line::getACoefficient() const { return m_aCoefficient; }
-double Line::getBCoefficient() const { return m_bCoefficient; }
-double Line::getCCoefficient() const { return m_cCoefficient; }
 
 optional<double> Line::calculateXFromY(double const y) const {
     return calculateOtherCoordinate(m_xInitialValue, m_aCoefficient, m_yInitialValue, m_bCoefficient, y);
@@ -79,6 +72,14 @@ optional<double> Line::calculateZFromX(double const x) const {
 optional<double> Line::calculateZFromY(double const y) const {
     return calculateOtherCoordinate(m_zInitialValue, m_cCoefficient, m_yInitialValue, m_bCoefficient, y);
 }
+
+double Line::getXInitialValue() const { return m_xInitialValue; }
+double Line::getYInitialValue() const { return m_yInitialValue; }
+double Line::getZInitialValue() const { return m_zInitialValue; }
+double Line::getACoefficient() const { return m_aCoefficient; }
+double Line::getBCoefficient() const { return m_bCoefficient; }
+double Line::getCCoefficient() const { return m_cCoefficient; }
+bool Line::isInvalid() const { return areAllCoefficientsZero(); }
 
 optional<double> Line::calculateOtherCoordinate(
     double const& initialValue1, double const coefficient1, double const& initialValue2, double const coefficient2,

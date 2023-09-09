@@ -9,7 +9,6 @@ namespace alba::algorithm {
 namespace {
 using VertexForTest = int;
 constexpr VertexForTest MAX_VERTEX_VALUE = 7;
-
 using UndirectedGraphForTest = UndirectedGraphWithAdjacencyMatrix<VertexForTest, MAX_VERTEX_VALUE>;
 using DirectedGraphForTest = DirectedGraphWithAdjacencyMatrix<VertexForTest, MAX_VERTEX_VALUE>;
 using CountPathsForTest = CountPathsWithLengthUsingAdjacencyMatrix<VertexForTest>;

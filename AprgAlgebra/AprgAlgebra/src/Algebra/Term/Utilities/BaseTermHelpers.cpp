@@ -4,6 +4,18 @@ using namespace std;
 
 namespace alba::algebra {
 
+BaseTerm const& getBaseTermConstReferenceFromTerm(Term const& term) { return static_cast<BaseTerm const&>(term); }
+
+BaseTerm const& getBaseTermConstReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer) {
+    return static_cast<BaseTerm const&>(*uniquePointer.get());
+}
+
+BaseTerm& getBaseTermReferenceFromTerm(Term& term) { return static_cast<BaseTerm&>(term); }
+
+BaseTerm& getBaseTermReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer) {
+    return static_cast<BaseTerm&>(*uniquePointer.get());
+}
+
 BaseTermUniquePointer createBasePointer(BaseTerm const& baseTerm) {
     return static_cast<BaseTermUniquePointer>(make_unique<Term>(getTermConstReferenceFromBaseTerm(baseTerm)));
 }
@@ -39,18 +51,6 @@ Term& getTermReferenceFromBaseTerm(BaseTerm& baseTerm) {
 Term& getTermReferenceFromUniquePointer(BaseTermUniquePointer& uniquePointer) {
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     return *static_cast<Term*>(uniquePointer.get());
-}
-
-BaseTerm const& getBaseTermConstReferenceFromTerm(Term const& term) { return static_cast<BaseTerm const&>(term); }
-
-BaseTerm const& getBaseTermConstReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer) {
-    return static_cast<BaseTerm const&>(*uniquePointer.get());
-}
-
-BaseTerm& getBaseTermReferenceFromTerm(Term& term) { return static_cast<BaseTerm&>(term); }
-
-BaseTerm& getBaseTermReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer) {
-    return static_cast<BaseTerm&>(*uniquePointer.get());
 }
 
 }  // namespace alba::algebra

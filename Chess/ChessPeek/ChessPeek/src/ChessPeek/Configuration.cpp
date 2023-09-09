@@ -22,16 +22,16 @@ Configuration::Configuration(Type const type)
     initialize();
 }
 
-double Configuration::getWhiteColorLimit() const { return m_whiteColorLimit; }
-double Configuration::getBlackColorLimit() const { return m_blackColorLimit; }
-Configuration::Type Configuration::getType() const { return m_type; }
-string const& Configuration::getChessEnginePath() const { return m_chessEnginePath; }
-XY Configuration::getTopLeftOfBoard() const { return m_boardTopLeft; }
-XY Configuration::getBottomRightOfBoard() const { return m_boardBottomRight; }
-
 stringHelper::StringPairs const& Configuration::getUciOptionNamesAndValuePairs() const {
     return m_uciOptionNamesAndValuePairs;
 }
+
+Configuration::Type Configuration::getType() const { return m_type; }
+XY Configuration::getTopLeftOfBoard() const { return m_boardTopLeft; }
+XY Configuration::getBottomRightOfBoard() const { return m_boardBottomRight; }
+string const& Configuration::getChessEnginePath() const { return m_chessEnginePath; }
+double Configuration::getWhiteColorLimit() const { return m_whiteColorLimit; }
+double Configuration::getBlackColorLimit() const { return m_blackColorLimit; }
 
 void Configuration::initialize() {
     initializeCommonParameters();

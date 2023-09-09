@@ -7,7 +7,6 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
-
 using IntervalForTest = Interval<int>;
 using SearchTreeForTest = IntervalSearchTree<int>;
 }  // namespace

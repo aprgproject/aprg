@@ -19,8 +19,8 @@ public:
     using FileNameToSnapshotNameToFileSizePair = std::pair<std::string, SnapshotNameToFileSizeMap>;
     using WildcardNameToSampleSizesMap = std::map<std::string, SampleSizes>;
     using WildcardNameToSampleSizesPair = std::pair<std::string, SampleSizes>;
-    static double convertFileSizeToDouble(std::string const& fileSizeInString);
     static std::string getSnapshotDirectory(std::string const& snapshotPath);
+    static double convertFileSizeToDouble(std::string const& fileSizeInString);
     [[nodiscard]] std::string getWildcardNameIfFileGroupsIsFound(std::string const& fileName) const;
     void addFileSizeForSnapshot(std::string const& fileName, std::string const& snapshotName, double const fileSize);
     void extractFilesInSnapshot(std::string const& snapshotPath);

@@ -30,9 +30,9 @@ public:
     };
 
     using LineDetailOptional = std::optional<LineDetail>;
-    size_t getSize() const;
-    LineDetailOptional getLine(Board const& board) const;
     void saveDatabaseTo(std::string const& path) const;
+    LineDetailOptional getLine(Board const& board) const;
+    size_t getSize() const;
     void clear();
     void addLine(Board const& board, LineDetail const& lineDetail);
     void loadDatabaseFrom(std::string const& path);

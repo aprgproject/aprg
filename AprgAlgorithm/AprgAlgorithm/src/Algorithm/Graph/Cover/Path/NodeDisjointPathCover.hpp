@@ -30,11 +30,6 @@ public:
     using FordFulkerson = FordFulkersonUsingBfs<FlowNetwork>;
     explicit NodeDisjointPathCover(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}
 
-    [[nodiscard]] Paths getNodeDisjointPathCover(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
-        Edges edges(getEdgesOfNodeDisjointPathCover(newSourceVertex, newSinkVertex));
-        return getNodeDisjointPathCover(edges);
-    }
-
     [[nodiscard]] Edges getEdgesOfNodeDisjointPathCover(
         Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         // A path cover is a set of paths in a graph such that each node of the graph belongs to at least one path.
@@ -48,7 +43,47 @@ public:
         return result;
     }
 
+    [[nodiscard]] Paths getNodeDisjointPathCover(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
+        Edges edges(getEdgesOfNodeDisjointPathCover(newSourceVertex, newSinkVertex));
+        return getNodeDisjointPathCover(edges);
+    }
+
 private:
+    [[nodiscard]] Edges getEdgesOfNodeDisjointPathCoverUsingFordFulkerson(
+        Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
+        Edges result;
+        FordFulkerson fordFulkerson(getFlowNetwork(m_graph, newSourceVertex, newSinkVertex));
+        auto const& flowNetwork(fordFulkerson.getFlowNetwork());
+        VertexWithLeftRight source(flowNetwork.getSourceVertex());
+        VertexWithLeftRight sink(flowNetwork.getSinkVertex());
+        for (auto const& flowEdge : flowNetwork.getFlowEdges()) {
+            if (1 == flowEdge.flow && source != flowEdge.source && sink != flowEdge.destination) {
+                result.emplace_back(flowEdge.source.first, flowEdge.destination.first);
+            }
+        }
+        return result;
+    }
+
+    [[nodiscard]] FlowNetwork getFlowNetwork(
+        BaseDirectedGraphWithVertex const& graph, Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
+        // We can find a minimum node-disjoint path cover by constructing a matching graph
+        // where each node of the original graph is represented by two nodes: a left node and a right node.
+        // There is an edge from a left node to a right node if there is such an edge in the original graph.
+        // In addition, the matching graph contains a source and a sink, and there are edges from the source to all left
+        // nodes and from all right nodes to the sink.
+        VertexWithLeftRight sourceVertexWithLeft{newSourceVertex, false};
+        VertexWithLeftRight sinkVertexWithRight{newSinkVertex, true};
+        FlowNetwork flowNetwork(sourceVertexWithLeft, sinkVertexWithRight);
+        for (Vertex const& vertex : graph.getVertices()) {
+            flowNetwork.connect(sourceVertexWithLeft, {vertex, false}, 1, 0);
+            flowNetwork.connect({vertex, true}, sinkVertexWithRight, 1, 0);
+        }
+        for (Edge const& edge : graph.getEdges()) {
+            flowNetwork.connect({edge.first, false}, {edge.second, true}, 1, 0);
+        }
+        return flowNetwork;
+    }
+
     [[nodiscard]] Paths getNodeDisjointPathCover(Edges const& edges) const {
         Paths result;
         DequeOfEdges detectedEdges(edges.cbegin(), edges.cend());
@@ -91,41 +126,6 @@ private:
             result.emplace_back(pathInDeque.begin(), pathInDeque.cend());
         }
         return result;
-    }
-
-    [[nodiscard]] Edges getEdgesOfNodeDisjointPathCoverUsingFordFulkerson(
-        Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
-        Edges result;
-        FordFulkerson fordFulkerson(getFlowNetwork(m_graph, newSourceVertex, newSinkVertex));
-        auto const& flowNetwork(fordFulkerson.getFlowNetwork());
-        VertexWithLeftRight source(flowNetwork.getSourceVertex());
-        VertexWithLeftRight sink(flowNetwork.getSinkVertex());
-        for (auto const& flowEdge : flowNetwork.getFlowEdges()) {
-            if (1 == flowEdge.flow && source != flowEdge.source && sink != flowEdge.destination) {
-                result.emplace_back(flowEdge.source.first, flowEdge.destination.first);
-            }
-        }
-        return result;
-    }
-
-    [[nodiscard]] FlowNetwork getFlowNetwork(
-        BaseDirectedGraphWithVertex const& graph, Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
-        // We can find a minimum node-disjoint path cover by constructing a matching graph
-        // where each node of the original graph is represented by two nodes: a left node and a right node.
-        // There is an edge from a left node to a right node if there is such an edge in the original graph.
-        // In addition, the matching graph contains a source and a sink, and there are edges from the source to all left
-        // nodes and from all right nodes to the sink.
-        VertexWithLeftRight sourceVertexWithLeft{newSourceVertex, false};
-        VertexWithLeftRight sinkVertexWithRight{newSinkVertex, true};
-        FlowNetwork flowNetwork(sourceVertexWithLeft, sinkVertexWithRight);
-        for (Vertex const& vertex : graph.getVertices()) {
-            flowNetwork.connect(sourceVertexWithLeft, {vertex, false}, 1, 0);
-            flowNetwork.connect({vertex, true}, sinkVertexWithRight, 1, 0);
-        }
-        for (Edge const& edge : graph.getEdges()) {
-            flowNetwork.connect({edge.first, false}, {edge.second, true}, 1, 0);
-        }
-        return flowNetwork;
     }
 
     BaseDirectedGraphWithVertex const& m_graph;

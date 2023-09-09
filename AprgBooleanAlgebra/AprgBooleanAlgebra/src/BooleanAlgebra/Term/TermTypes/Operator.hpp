@@ -15,6 +15,8 @@ public:
     bool operator==(Operator const& second) const;
     bool operator!=(Operator const& second) const;
     bool operator<(Operator const& second) const;
+    [[nodiscard]] OperatorType getOperatorType() const;
+    [[nodiscard]] std::string getOperatorString() const;
     [[nodiscard]] bool isNot() const;
     [[nodiscard]] bool isAnd() const;
     [[nodiscard]] bool isOr() const;
@@ -24,8 +26,6 @@ public:
     [[nodiscard]] bool isUnaryOperator() const;
     [[nodiscard]] bool isBinaryOperator() const;
     [[nodiscard]] bool isSameOperatorInputType(OperatorInputType const operatorInputType) const;
-    [[nodiscard]] OperatorType getOperatorType() const;
-    [[nodiscard]] std::string getOperatorString() const;
     void setOperatorString(std::string const& operatingString);
 
 private:

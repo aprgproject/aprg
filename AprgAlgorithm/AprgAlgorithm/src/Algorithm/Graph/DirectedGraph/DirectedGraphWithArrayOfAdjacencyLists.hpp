@@ -16,15 +16,17 @@ public:
     using AdjacencyList = SetOfVertices;
     using AdjacencyLists = std::array<AdjacencyList, MAX_VERTEX_VALUE>;
     DirectedGraphWithArrayOfAdjacencyLists() = default;
-    [[nodiscard]] bool isEmpty() const override { return m_numberOfEdges == 0; }
 
-    [[nodiscard]] bool isDirectlyConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
-        AdjacencyList const& adjacencyList(m_adjacencyLists[sourceVertex]);
-        return adjacencyList.find(destinationVertex) != adjacencyList.cend();
+    [[nodiscard]] Edges getEdges() const override {
+        Edges result;
+        for (Vertex vertex1 = 0; vertex1 < static_cast<Vertex>(m_adjacencyLists.size()); ++vertex1) {
+            AdjacencyList const& adjacencyList(m_adjacencyLists[vertex1]);
+            for (Vertex const& vertex2 : adjacencyList) {
+                result.emplace_back(vertex1, vertex2);
+            }
+        }
+        return result;
     }
-
-    [[nodiscard]] int getNumberOfVertices() const override { return getUniqueVertices().size(); }
-    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
 
     [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
         AdjacencyList const& adjacencyList(m_adjacencyLists[vertex]);
@@ -36,15 +38,13 @@ public:
         return Vertices(uniqueVertices.cbegin(), uniqueVertices.cend());
     }
 
-    [[nodiscard]] Edges getEdges() const override {
-        Edges result;
-        for (Vertex vertex1 = 0; vertex1 < static_cast<Vertex>(m_adjacencyLists.size()); ++vertex1) {
-            AdjacencyList const& adjacencyList(m_adjacencyLists[vertex1]);
-            for (Vertex const& vertex2 : adjacencyList) {
-                result.emplace_back(vertex1, vertex2);
-            }
-        }
-        return result;
+    [[nodiscard]] int getNumberOfVertices() const override { return getUniqueVertices().size(); }
+    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
+    [[nodiscard]] bool isEmpty() const override { return m_numberOfEdges == 0; }
+
+    [[nodiscard]] bool isDirectlyConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
+        AdjacencyList const& adjacencyList(m_adjacencyLists[sourceVertex]);
+        return adjacencyList.find(destinationVertex) != adjacencyList.cend();
     }
 
     void connect(Vertex const& sourceVertex, Vertex const& destinationVertex) override {

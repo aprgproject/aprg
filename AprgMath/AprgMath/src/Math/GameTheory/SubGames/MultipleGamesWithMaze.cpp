@@ -19,8 +19,17 @@ bool MultipleGamesWithMaze::hasNoMoves() const {
     return result;
 }
 
-UnsignedInteger MultipleGamesWithMaze::getOverallGrundyNumber() { return getCombinedGrundyNumber(); }
-GameState MultipleGamesWithMaze::getGameState() { return getGameStateFromGrundyNumber(getOverallGrundyNumber()); }
+void MultipleGamesWithMaze::setCoordinateAtGame(UnsignedInteger const gameIndex, Coordinate const& newCoordinate) {
+    if (gameIndex < m_games.size()) {
+        m_coordinateInGames[gameIndex] = newCoordinate;
+    }
+}
+
+void MultipleGamesWithMaze::addGameWithMaze(
+    BooleanMatrix const& isBlockedMatrix, Coordinate const& startingCoordinate) {
+    m_games.emplace_back(isBlockedMatrix);
+    m_coordinateInGames.emplace_back(startingCoordinate);
+}
 
 MultipleGamesWithMaze::GameIndexAndCoordinatePair MultipleGamesWithMaze::getOptimalNextGameAndCoordinate() {
     GameIndexAndCoordinatePair result{};
@@ -50,6 +59,9 @@ MultipleGamesWithMaze::GameIndexAndCoordinatePair MultipleGamesWithMaze::getOpti
     return result;
 }
 
+GameState MultipleGamesWithMaze::getGameState() { return getGameStateFromGrundyNumber(getOverallGrundyNumber()); }
+UnsignedInteger MultipleGamesWithMaze::getOverallGrundyNumber() { return getCombinedGrundyNumber(); }
+
 string MultipleGamesWithMaze::getString() {
     stringstream result;
     for (UnsignedInteger gameIndex = 0; gameIndex < m_games.size(); ++gameIndex) {
@@ -57,18 +69,6 @@ string MultipleGamesWithMaze::getString() {
         result << m_games[gameIndex].getString();
     }
     return result.str();
-}
-
-void MultipleGamesWithMaze::setCoordinateAtGame(UnsignedInteger const gameIndex, Coordinate const& newCoordinate) {
-    if (gameIndex < m_games.size()) {
-        m_coordinateInGames[gameIndex] = newCoordinate;
-    }
-}
-
-void MultipleGamesWithMaze::addGameWithMaze(
-    BooleanMatrix const& isBlockedMatrix, Coordinate const& startingCoordinate) {
-    m_games.emplace_back(isBlockedMatrix);
-    m_coordinateInGames.emplace_back(startingCoordinate);
 }
 
 UnsignedInteger MultipleGamesWithMaze::getCombinedGrundyNumber() {

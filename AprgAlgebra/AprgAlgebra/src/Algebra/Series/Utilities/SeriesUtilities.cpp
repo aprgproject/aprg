@@ -19,6 +19,97 @@ using namespace std;
 
 namespace alba::algebra {
 
+void performLimitComparisonTest(
+    bool& isConvergent, bool& isDivergent, SeriesBasedOnSummation const& series1, SeriesBasedOnSummation const& series2,
+    string const& variableName) {
+    Term formula1(series1.getFormulaForEachTermInSummation());
+    Term formula2(series2.getFormulaForEachTermInSummation());
+    Term termForLimitChecking(formula1 / formula2);
+    Term limit(getLimit(termForLimitChecking, variableName, ALBA_NUMBER_POSITIVE_INFINITY));
+    if (isTheValue(limit, 0)) {
+        if (series2.isConvergent()) {
+            isConvergent = true;
+        }
+    } else if (isTheValue(limit, ALBA_NUMBER_POSITIVE_INFINITY)) {
+        if (!series2.isConvergent()) {
+            isDivergent = true;
+        }
+    }
+}
+
+void performIntegralTest(
+    bool& isConvergent, bool& isDivergent, SeriesBasedOnSummation const& series, string const& variableName) {
+    Integration integration(variableName);
+    Term integratedTerm(integration.integrateAtDefiniteTerms(
+        series.getFormulaForEachTermInSummation(), 1, ALBA_NUMBER_POSITIVE_INFINITY));
+    if (isTheValue(integratedTerm, ALBA_NUMBER_POSITIVE_INFINITY)) {
+        isDivergent = true;
+    } else if (!isNan(integratedTerm)) {
+        isConvergent = true;
+    }
+}
+
+void performRatioTest(
+    bool& isConvergent, bool& isDivergent, SeriesBasedOnSummation const& series, string const& variableName) {
+    Term limitTerm(getLimitForRatioTest(series, variableName));
+    if (limitTerm.isConstant()) {
+        AlbaNumber limitValue(limitTerm.getAsNumber());
+        if (limitValue < 1) {
+            isConvergent = true;
+        } else if (limitValue > 1) {
+            isDivergent = true;
+        }
+    }
+}
+
+void performRootTest(
+    bool& isConvergent, bool& isDivergent, SeriesBasedOnSummation const& series, string const& variableName) {
+    Term formulaForEachTerm(series.getFormulaForEachTermInSummation());
+    TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(formulaForEachTerm));
+    TermsRaiseToTerms termsRaiseToTerms(termsOverTerms.getTermsRaiseToTerms());
+    termsRaiseToTerms.multiplyToExponents(Monomial(1, {{variableName, -1}}));
+    Term termForLimit(termsRaiseToTerms.getCombinedTerm());
+    Term limitTerm(getLimit(termForLimit, variableName, ALBA_NUMBER_POSITIVE_INFINITY));
+    if (limitTerm.isConstant()) {
+        AlbaNumber limitValue(limitTerm.getAsNumber());
+        if (limitValue < 1) {
+            isConvergent = true;
+        } else if (limitValue > 1) {
+            isDivergent = true;
+        }
+    }
+}
+
+PowerSeries getEToTheXPowerSeries() {
+    Term formula(convertExpressionToSimplestTerm(createExpressionIfPossible({1, "/", factorial(n)})));
+    return {formula, n, x, 0};
+}
+
+Term getLimitForRatioTest(SeriesBasedOnSummation const& series, string const& variableName) {
+    SubstitutionOfVariablesToTerms substitution{
+        {variableName, Polynomial{Monomial(1, {{variableName, 1}}), Monomial(1, {})}}};
+    Term formulaForEachTerm(series.getFormulaForEachTermInSummation());
+    Term formulaForEachTermWithPlusOne(substitution.performSubstitutionTo(formulaForEachTerm));
+    Term termForLimit(
+        convertPositiveTermIfNegative(formulaForEachTermWithPlusOne) /
+        convertPositiveTermIfNegative(formulaForEachTerm));
+    return getLimit(termForLimit, variableName, ALBA_NUMBER_POSITIVE_INFINITY);
+}
+
+Term getSumOfArithmeticSeriesUsingFirstAndLastTerm(Term const& firstTerm, Term const& lastTerm, Term const& count) {
+    return (firstTerm + lastTerm) * count / 2;
+}
+
+Term getSumOfGeometricSeriesUsingFirstValueAndCommonMultiplier(
+    Term const& firstValue, Term const& commonMultiplier, int const count) {
+    return firstValue * (1 - (commonMultiplier ^ count)) / (1 - commonMultiplier);
+}
+
+Term getInfiniteSumOfGeometricSeriesIfCommonMultiplierIsFractional(
+    Term const& firstValue, Term const& commonMultiplier) {
+    return firstValue / (1 - commonMultiplier);
+}
+
 bool isAxiomOfCompletenessTrue(SeriesBasedOnFormula const& series) {
     // Axiom of completeness
     // Every non empty set of real numbers that has a lower bound has a greatest lower bound.
@@ -87,97 +178,6 @@ bool hasLinearity(
     termWithInnerMultiplier.simplify();
     termWithOuterMultiplier.simplify();
     return termWithInnerMultiplier == termWithOuterMultiplier;
-}
-
-Term getLimitForRatioTest(SeriesBasedOnSummation const& series, string const& variableName) {
-    SubstitutionOfVariablesToTerms substitution{
-        {variableName, Polynomial{Monomial(1, {{variableName, 1}}), Monomial(1, {})}}};
-    Term formulaForEachTerm(series.getFormulaForEachTermInSummation());
-    Term formulaForEachTermWithPlusOne(substitution.performSubstitutionTo(formulaForEachTerm));
-    Term termForLimit(
-        convertPositiveTermIfNegative(formulaForEachTermWithPlusOne) /
-        convertPositiveTermIfNegative(formulaForEachTerm));
-    return getLimit(termForLimit, variableName, ALBA_NUMBER_POSITIVE_INFINITY);
-}
-
-Term getSumOfArithmeticSeriesUsingFirstAndLastTerm(Term const& firstTerm, Term const& lastTerm, Term const& count) {
-    return (firstTerm + lastTerm) * count / 2;
-}
-
-Term getSumOfGeometricSeriesUsingFirstValueAndCommonMultiplier(
-    Term const& firstValue, Term const& commonMultiplier, int const count) {
-    return firstValue * (1 - (commonMultiplier ^ count)) / (1 - commonMultiplier);
-}
-
-Term getInfiniteSumOfGeometricSeriesIfCommonMultiplierIsFractional(
-    Term const& firstValue, Term const& commonMultiplier) {
-    return firstValue / (1 - commonMultiplier);
-}
-
-PowerSeries getEToTheXPowerSeries() {
-    Term formula(convertExpressionToSimplestTerm(createExpressionIfPossible({1, "/", factorial(n)})));
-    return {formula, n, x, 0};
-}
-
-void performLimitComparisonTest(
-    bool& isConvergent, bool& isDivergent, SeriesBasedOnSummation const& series1, SeriesBasedOnSummation const& series2,
-    string const& variableName) {
-    Term formula1(series1.getFormulaForEachTermInSummation());
-    Term formula2(series2.getFormulaForEachTermInSummation());
-    Term termForLimitChecking(formula1 / formula2);
-    Term limit(getLimit(termForLimitChecking, variableName, ALBA_NUMBER_POSITIVE_INFINITY));
-    if (isTheValue(limit, 0)) {
-        if (series2.isConvergent()) {
-            isConvergent = true;
-        }
-    } else if (isTheValue(limit, ALBA_NUMBER_POSITIVE_INFINITY)) {
-        if (!series2.isConvergent()) {
-            isDivergent = true;
-        }
-    }
-}
-
-void performIntegralTest(
-    bool& isConvergent, bool& isDivergent, SeriesBasedOnSummation const& series, string const& variableName) {
-    Integration integration(variableName);
-    Term integratedTerm(integration.integrateAtDefiniteTerms(
-        series.getFormulaForEachTermInSummation(), 1, ALBA_NUMBER_POSITIVE_INFINITY));
-    if (isTheValue(integratedTerm, ALBA_NUMBER_POSITIVE_INFINITY)) {
-        isDivergent = true;
-    } else if (!isNan(integratedTerm)) {
-        isConvergent = true;
-    }
-}
-
-void performRatioTest(
-    bool& isConvergent, bool& isDivergent, SeriesBasedOnSummation const& series, string const& variableName) {
-    Term limitTerm(getLimitForRatioTest(series, variableName));
-    if (limitTerm.isConstant()) {
-        AlbaNumber limitValue(limitTerm.getAsNumber());
-        if (limitValue < 1) {
-            isConvergent = true;
-        } else if (limitValue > 1) {
-            isDivergent = true;
-        }
-    }
-}
-
-void performRootTest(
-    bool& isConvergent, bool& isDivergent, SeriesBasedOnSummation const& series, string const& variableName) {
-    Term formulaForEachTerm(series.getFormulaForEachTermInSummation());
-    TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(formulaForEachTerm));
-    TermsRaiseToTerms termsRaiseToTerms(termsOverTerms.getTermsRaiseToTerms());
-    termsRaiseToTerms.multiplyToExponents(Monomial(1, {{variableName, -1}}));
-    Term termForLimit(termsRaiseToTerms.getCombinedTerm());
-    Term limitTerm(getLimit(termForLimit, variableName, ALBA_NUMBER_POSITIVE_INFINITY));
-    if (limitTerm.isConstant()) {
-        AlbaNumber limitValue(limitTerm.getAsNumber());
-        if (limitValue < 1) {
-            isConvergent = true;
-        } else if (limitValue > 1) {
-            isDivergent = true;
-        }
-    }
 }
 
 }  // namespace alba::algebra

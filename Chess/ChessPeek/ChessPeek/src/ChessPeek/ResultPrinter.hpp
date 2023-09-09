@@ -65,30 +65,6 @@ private:
     void setNextMovesOnGrid(
         DisplayTable& grid, GenericMoves const& genericMoves, int const startIndex, int const rowSize) const;
 
-    int getNumberOfColumnsOfGrid(int const numberOfBoards) const;
-    int getHorizontalBorderSize(int const numberOfBoards) const;
-    int getRowSizeForHalfMoves(int const numberOfHalfMoves) const;
-    int getRowSizeForFullMoves(int const numberOfFullMoves) const;
-    BookMoves getMovesFromBook() const;
-    BookMove createBookMove(
-        Move const& move, Book::LineDetail const& lineDetail, Book::MoveDetail const& bookMoveDetail) const;
-    std::string getNameOfBookMove(Move const& move, Book::LineDetail const& lineDetail) const;
-    NextMoves getNextMovesFromCalculation() const;
-    NextMove createNextMove(Move const& move, Variation const& variation) const;
-    MovesSequence getMovesSequenceFromMoveString(std::string const& moveString) const;
-    stringHelper::strings getNextMovesString(NextMoves const& nextMoves, int const startIndex) const;
-    stringHelper::strings getBookMovesString(BookMoves const& bookMoves) const;
-    std::string getDisplayableString(NextMove const& nextMove) const;
-    std::string getDisplayableString(BookMove const& bookMove) const;
-    std::string getDisplayableString(MovesSequence const& movesSequence) const;
-    std::string getDisplayableString(
-        int const mateValue, int const engineScore, HumanScoreGenerator::Score const humanScore) const;
-    std::string getDisplayableString(int const mateValue, int const engineScore) const;
-    std::string formatToHeaderString(std::string const& content) const;
-    std::string getDisplayableStringForABoardCell(
-        Piece const& piece, int const moveNumber, std::optional<char> const& firstChar) const;
-    std::optional<char> getFirstCharOfABoardCell(bool const isCertainPreMove, bool const isPossiblePreMove) const;
-    ScorePair getBestAndWorstScores(Variations const& variations) const;
     void printARowOfMovesSequence(MovesSequence const& movesSequence) const;
     void setMovesSequenceOnGrid(DisplayTable& grid, MovesSequence const& movesSequence, int const rowSize) const;
     void printHeadersForNextMoves(
@@ -114,6 +90,30 @@ private:
     void sortForMoreHumanMoves(NextMoves& nextMoves) const;
     void removeTooManyPawnMoves(NextMoves& nextMoves) const;
     void fillMovesSequenceFromVariation(MovesSequence& result, Variation const& variation) const;
+    BookMove createBookMove(
+        Move const& move, Book::LineDetail const& lineDetail, Book::MoveDetail const& bookMoveDetail) const;
+    BookMoves getMovesFromBook() const;
+    MovesSequence getMovesSequenceFromMoveString(std::string const& moveString) const;
+    NextMove createNextMove(Move const& move, Variation const& variation) const;
+    NextMoves getNextMovesFromCalculation() const;
+    ScorePair getBestAndWorstScores(Variations const& variations) const;
+    std::optional<char> getFirstCharOfABoardCell(bool const isCertainPreMove, bool const isPossiblePreMove) const;
+    std::string getNameOfBookMove(Move const& move, Book::LineDetail const& lineDetail) const;
+    std::string getDisplayableString(NextMove const& nextMove) const;
+    std::string getDisplayableString(BookMove const& bookMove) const;
+    std::string getDisplayableString(MovesSequence const& movesSequence) const;
+    std::string getDisplayableString(
+        int const mateValue, int const engineScore, HumanScoreGenerator::Score const humanScore) const;
+    std::string getDisplayableString(int const mateValue, int const engineScore) const;
+    std::string formatToHeaderString(std::string const& content) const;
+    std::string getDisplayableStringForABoardCell(
+        Piece const& piece, int const moveNumber, std::optional<char> const& firstChar) const;
+    stringHelper::strings getNextMovesString(NextMoves const& nextMoves, int const startIndex) const;
+    stringHelper::strings getBookMovesString(BookMoves const& bookMoves) const;
+    int getNumberOfColumnsOfGrid(int const numberOfBoards) const;
+    int getHorizontalBorderSize(int const numberOfBoards) const;
+    int getRowSizeForHalfMoves(int const numberOfHalfMoves) const;
+    int getRowSizeForFullMoves(int const numberOfFullMoves) const;
     CalculationDetails const& m_calculationDetails;
     BoardWithContext const& m_engineBoardWithContext;
     Book const& m_book;

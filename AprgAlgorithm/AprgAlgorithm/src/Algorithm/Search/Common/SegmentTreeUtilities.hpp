@@ -16,8 +16,6 @@ public:
     SegmentTreeUtilities(SegmentTreeUtilities &&) = delete;
     SegmentTreeUtilities &operator=(SegmentTreeUtilities const &) = delete;
     SegmentTreeUtilities &operator=(SegmentTreeUtilities &&) = delete;
-    static inline bool isALeftChild(Index const treeIndex) { return mathHelper::isOdd(treeIndex); }
-    static inline bool isARightChild(Index const treeIndex) { return mathHelper::isEven(treeIndex); }
     static inline Index getParent(Index const treeIndex) { return ((treeIndex + 1) / NUMBER_OF_CHILDREN) - 1; }
     static inline Index getLeftChild(Index const parent) { return (parent * NUMBER_OF_CHILDREN) + 1; }
     static inline Index getRightChild(Index const parent) { return (parent * NUMBER_OF_CHILDREN) + 2; }
@@ -38,6 +36,8 @@ public:
         return result;
     }
 
+    static inline bool isALeftChild(Index const treeIndex) { return mathHelper::isOdd(treeIndex); }
+    static inline bool isARightChild(Index const treeIndex) { return mathHelper::isEven(treeIndex); }
     static constexpr Index ROOT_PARENT_INDEX = 0;   // the first parent
     static constexpr Index NUMBER_OF_CHILDREN = 2;  // only 2 children
 };

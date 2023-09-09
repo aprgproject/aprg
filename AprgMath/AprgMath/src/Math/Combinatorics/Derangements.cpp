@@ -10,10 +10,6 @@ using namespace std;
 
 namespace alba::math {
 
-double getDerangementsProbability(UnsignedInteger const n) {
-    return static_cast<double>(getNumberOfDerangements(n)) / getNumberOfPermutations(n, n);
-}
-
 UnsignedInteger getNumberOfDerangements(UnsignedInteger const n) {
     // As an example, let us count the number of derangements of elements {1,2,...,n},
     // i.e., permutations where no element remains in its original place.
@@ -170,6 +166,10 @@ UnsignedInteger getNumberOfDerangementsApproximation(UnsignedInteger const n) {
     // !n = n! * (1/e)
     // !n = n!/e
     return getIntegerAfterRoundingADoubleValue<UnsignedInteger>(getNumberOfPermutations(n, n) / E_DOUBLE_VALUE);
+}
+
+double getDerangementsProbability(UnsignedInteger const n) {
+    return static_cast<double>(getNumberOfDerangements(n)) / getNumberOfPermutations(n, n);
 }
 
 }  // namespace alba::math

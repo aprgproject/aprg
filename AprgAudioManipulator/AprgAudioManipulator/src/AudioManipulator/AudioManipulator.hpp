@@ -10,7 +10,6 @@ class AudioManipulator {
 public:
     explicit AudioManipulator(std::string const& audioFilePath);
     [[nodiscard]] AudioInDouble const& getAudio() const;
-    AudioInDouble& getAudioReference();
     void addSamplesWithValue(double const value);
     void addSamplesAtChannelWithValue(int const channelIndex, double const value);
     void multiplySamplesWithValue(double const value);
@@ -18,6 +17,7 @@ public:
     void saveAudioIntoCurrentFile();
     void saveAudioIntoFileInTheSameDirectory(std::string const& filename);
     void saveAudioIntoFileWithFullFilePath(std::string const& newFilePath);
+    AudioInDouble& getAudioReference();
 
 private:
     AlbaLocalPathHandler m_filePathHandler;

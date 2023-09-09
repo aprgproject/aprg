@@ -7,6 +7,7 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 using ValuesForTest = vector<int>;
 using RangeQueryForTest = RangeQueryWithStaticSegmentTree<ValuesForTest>;
 using ValueForTest = RangeQueryForTest::Value;
@@ -21,6 +22,7 @@ RangeQueryForTest::Function maximumFunction = [](ValueForTest const& value1, Val
 
 RangeQueryForTest::Function plusFunction = plus<>();
 RangeQueryForTest::Function minusFunction = minus<>();
+
 }  // namespace
 
 TEST(RangeQueryWithStaticSegmentTreeTest, GetStartOfChildrenWithMinimumWorksOnExample1) {

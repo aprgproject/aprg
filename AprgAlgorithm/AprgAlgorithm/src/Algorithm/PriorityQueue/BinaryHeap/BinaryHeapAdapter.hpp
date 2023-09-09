@@ -21,16 +21,14 @@ public:
         return (treeIndex + 1) * NUMBER_OF_CHILDREN - 1;
     }
 
-    [[nodiscard]] int getContainerIndex(int const treeIndex) const {
-        // Tree index starts at one (top of the tree)
-        return treeIndex - 1;
-    }
-
     [[nodiscard]] Object const& getObjectOnTree(int const treeIndex) const {
         return m_objects[getContainerIndex(treeIndex)];
     }
 
-    Object& getObjectReferenceOnTree(int const treeIndex) { return m_objects[getContainerIndex(treeIndex)]; }
+    [[nodiscard]] int getContainerIndex(int const treeIndex) const {
+        // Tree index starts at one (top of the tree)
+        return treeIndex - 1;
+    }
 
     void swim(int const startTreeIndex) {
         // Swim is "bottom up reheapify" -> it swims up to the top of the tree
@@ -62,6 +60,8 @@ public:
             treeIndex = significantChildIndex;
         }
     }
+
+    Object& getObjectReferenceOnTree(int const treeIndex) { return m_objects[getContainerIndex(treeIndex)]; }
 
 private:
     [[nodiscard]] inline int getChildIndexThatWouldMostBreakTheHeapOrder(

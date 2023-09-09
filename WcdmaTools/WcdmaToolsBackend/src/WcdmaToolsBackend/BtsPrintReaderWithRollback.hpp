@@ -10,11 +10,11 @@ class BtsPrintReaderWithRollback {
 public:
     BtsPrintReaderWithRollback();
     bool isGood() const;
-    double getCurrentLocation();
-    BtsLogPrint getPrint();
     void clear();
     void rollBackPrint();
     void openIfNeeded(std::string const& filePath);
+    BtsLogPrint getPrint();
+    double getCurrentLocation();
 
 private:
     bool m_isRollbackActivated{false};

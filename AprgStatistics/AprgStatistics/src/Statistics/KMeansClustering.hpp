@@ -19,7 +19,6 @@ public:
     using SamplesGroupPair = std::pair<Sample, int>;
     using SamplesGroupPairs = std::vector<std::pair<Sample, int>>;
     KMeansClustering() = default;
-    [[nodiscard]] Samples getSamples() const { return m_samples; }
 
     [[nodiscard]] GroupOfSamples getGroupOfSamplesUsingKMeans(int const numberOfGroups) const {
         SamplesGroupPairs samplesGroupPairs(calculateInitialSamplesGroupPairsFromSavedSamples(numberOfGroups));
@@ -48,7 +47,7 @@ public:
         return calculateGroupOfSamplesFromSamplesGroupPairs(samplesGroupPairs, numberOfGroups);
     }
 
-    Samples& getSamplesReference() { return m_samples; }
+    [[nodiscard]] Samples getSamples() const { return m_samples; }
     void clear() { m_samples.clear(); }
     void addSample(Sample const& sample) { m_samples.emplace_back(sample); }
 
@@ -56,6 +55,8 @@ public:
         m_samples.reserve(m_samples.size() + samples.size());
         std::copy(samples.cbegin(), samples.cend(), std::back_inserter(m_samples));
     }
+
+    Samples& getSamplesReference() { return m_samples; }
 
 private:
     [[nodiscard]] GroupOfSamples calculateGroupOfSamplesFromSamplesGroupPairs(
@@ -70,6 +71,15 @@ private:
         return result;
     }
 
+    [[nodiscard]] Samples calculateMeanForEachGroup(GroupOfSamples const& groupOfSamples) const {
+        Samples meanForEachGroup;
+        for (int groupIndex = 0; groupIndex < static_cast<int>(groupOfSamples.size()); ++groupIndex) {
+            Statistics statistics(groupOfSamples[groupIndex]);
+            meanForEachGroup.emplace_back(statistics.getMean());
+        }
+        return meanForEachGroup;
+    }
+
     [[nodiscard]] SamplesGroupPairs calculateInitialSamplesGroupPairsFromSavedSamples(int const numberOfGroups) const {
         SamplesGroupPairs result;
         int count(0);
@@ -78,15 +88,6 @@ private:
             result.emplace_back(sample, count++ / numberSamplesPerGroup);
         }
         return result;
-    }
-
-    [[nodiscard]] Samples calculateMeanForEachGroup(GroupOfSamples const& groupOfSamples) const {
-        Samples meanForEachGroup;
-        for (int groupIndex = 0; groupIndex < static_cast<int>(groupOfSamples.size()); ++groupIndex) {
-            Statistics statistics(groupOfSamples[groupIndex]);
-            meanForEachGroup.emplace_back(statistics.getMean());
-        }
-        return meanForEachGroup;
     }
 
     Samples m_samples;

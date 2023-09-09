@@ -25,17 +25,17 @@ public:
     bool operator==(Function const& second) const;
     bool operator!=(Function const& second) const;
     bool operator<(Function const& second) const;
-    [[nodiscard]] bool isSimplified() const;
-    [[nodiscard]] std::string getFunctionName() const;
-    [[nodiscard]] std::string getDebugString() const;
     [[nodiscard]] AlbaNumber performFunctionAndReturnResultIfPossible() const;
     [[nodiscard]] BaseTerm const& getInputTerm() const;
     [[nodiscard]] EvaluationFunction const& getEvaluationFunction() const;
-    BaseTerm& getInputTermReference();
+    [[nodiscard]] std::string getFunctionName() const;
+    [[nodiscard]] std::string getDebugString() const;
+    [[nodiscard]] bool isSimplified() const;
     void simplify();
     void setAsSimplified();
     void clearSimplifiedFlag();
     void clearAllInnerSimplifiedFlags();
+    BaseTerm& getInputTermReference();
 
 private:
     friend std::ostream& operator<<(std::ostream& out, Function const& functionObject);

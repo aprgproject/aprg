@@ -10,9 +10,11 @@ using namespace std;
 namespace alba::math {
 
 namespace {
+
 using CharSet = MathSet<char>;
 using IntegerSet = MathSet<int>;
 using IntegerSets = IntegerSet::MathSets;
+
 IntegerSet::GenerateFunction generateNumbersFromZeroToTen = [](IntegerSet::VoidElementFunction const& elementFunction) {
     for (int i = 0; i <= 10; ++i) {
         elementFunction(i);
@@ -25,6 +27,7 @@ CharSet::GenerateFunction generateCharactersFromSmallAToSmallZ =
             elementFunction(c);
         }
     };
+
 }  // namespace
 
 TEST(MathSetTest, NullSetWorks) {

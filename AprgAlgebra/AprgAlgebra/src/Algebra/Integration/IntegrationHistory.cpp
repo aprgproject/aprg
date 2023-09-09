@@ -22,19 +22,19 @@ string IntegrationHistory::getEnumShortString(IntegrationPurpose const purpose) 
     }
 }
 
-bool IntegrationHistory::didThisIntegrationPurposeAlreadyHappened(IntegrationPurpose const purpose) const {
-    return find(m_recordOfIntegrationPurposes.cbegin(), m_recordOfIntegrationPurposes.cend(), purpose) !=
-           m_recordOfIntegrationPurposes.cend();
-}
-
-int IntegrationHistory::getDepth() const { return m_recordOfIntegrationPurposes.size(); }
-
 IntegrationPurpose IntegrationHistory::getLastIntegrationPurpose() const {
     IntegrationPurpose result(IntegrationPurpose::NotSet);
     if (!m_recordOfIntegrationPurposes.empty()) {
         result = m_recordOfIntegrationPurposes.back();
     }
     return result;
+}
+
+int IntegrationHistory::getDepth() const { return m_recordOfIntegrationPurposes.size(); }
+
+bool IntegrationHistory::didThisIntegrationPurposeAlreadyHappened(IntegrationPurpose const purpose) const {
+    return find(m_recordOfIntegrationPurposes.cbegin(), m_recordOfIntegrationPurposes.cend(), purpose) !=
+           m_recordOfIntegrationPurposes.cend();
 }
 
 void IntegrationHistory::performStepsBeforeIntegration(Term const& input, IntegrationPurpose const purpose) {

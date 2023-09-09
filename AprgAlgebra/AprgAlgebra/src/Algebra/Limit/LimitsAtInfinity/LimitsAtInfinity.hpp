@@ -16,11 +16,11 @@ public:
 
 private:
     static AlbaNumber getDegreeToRemove(AlbaNumber const& numeratorDegree, AlbaNumber const& denominatorDegree);
-    AlbaNumber getMaxDegree(Term const& term);
     void simplify();
     void simplifyAsATerm();
     void simplifyAsTermsOverTermsIfPossible();
     void simplifyPolynomialToMaxDegreeMonomialOnly();
+    AlbaNumber getMaxDegree(Term const& term);
     Term m_simplifiedTermAtInfinity;
     std::string m_variableName;
     DegreeOnlyMutator m_degreeOnlyMutator;

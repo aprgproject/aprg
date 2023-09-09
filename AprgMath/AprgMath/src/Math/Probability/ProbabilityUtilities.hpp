@@ -9,11 +9,6 @@ namespace alba::math {
 
 using ValueAndProbabilityPair = std::pair<AlbaNumber, AlbaNumber>;
 using ValueAndProbabilityPairs = std::vector<ValueAndProbabilityPair>;
-
-bool doesExpectedValuesHaveLinearity(
-    ValueAndProbabilityPairs const& firstSetOfValueAndProbabilityPairsOfX,
-    ValueAndProbabilityPairs const& secondSetOfValueAndProbabilityPairsOfX);
-
 AlbaNumber getCorrectProbability(AlbaNumber const& probability);
 AlbaNumber getProbability(UnsignedInteger const numberOfDesiredOutcome, UnsignedInteger const totalNumberOfOutcomes);
 AlbaNumber getProbabilityOnBinomialDistribution(
@@ -44,5 +39,9 @@ AlbaNumber getExpectedValueInBinomialDistribution(
 AlbaNumber getExpectedValueInGeometricDistribution(AlbaNumber const& probability);
 AlbaNumber getNumberOfPeopleForTheBirthdayParadoxUsingQuadraticFormula(AlbaNumber const& propbabilityThatMustBeMet);
 AlbaNumber getNumberOfPeopleForTheBirthdayParadoxUsingTaylorFormula(AlbaNumber const& propbabilityThatMustBeMet);
+
+bool doesExpectedValuesHaveLinearity(
+    ValueAndProbabilityPairs const& firstSetOfValueAndProbabilityPairsOfX,
+    ValueAndProbabilityPairs const& secondSetOfValueAndProbabilityPairsOfX);
 
 }  // namespace alba::math

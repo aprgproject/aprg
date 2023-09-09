@@ -9,6 +9,7 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 template <typename Object>
 class MaxItemsSaver {
 public:
@@ -16,19 +17,19 @@ public:
     using Objects = vector<Object>;
     explicit MaxItemsSaver(int const numberOfItemsToSave) : m_numberOfItemsToSave(numberOfItemsToSave) {}
 
+    void save(Object const& object) {
+        m_minimumPriorityQueue.insert(object);
+        while (m_minimumPriorityQueue.getSize() > m_numberOfItemsToSave) {
+            m_minimumPriorityQueue.deleteAndGetTopObject();
+        }
+    }
+
     Objects getMaxItemsAndClear() {
         Objects result;
         while (!m_minimumPriorityQueue.isEmpty()) {
             result.emplace_back(m_minimumPriorityQueue.deleteAndGetTopObject());
         }
         return result;
-    }
-
-    void save(Object const& object) {
-        m_minimumPriorityQueue.insert(object);
-        while (m_minimumPriorityQueue.getSize() > m_numberOfItemsToSave) {
-            m_minimumPriorityQueue.deleteAndGetTopObject();
-        }
     }
 
 private:

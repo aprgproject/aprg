@@ -11,7 +11,6 @@ using namespace std;
 namespace alba {
 
 AlbaWebPathHandler::AlbaWebPathHandler(string_view const path) : AlbaPathHandler("/") { setPath(path); }
-bool AlbaWebPathHandler::hasProtocol() const { return m_hasProtocol; }
 
 string AlbaWebPathHandler::getProtocol() const {
     string protocol;
@@ -22,6 +21,8 @@ string AlbaWebPathHandler::getProtocol() const {
     }
     return protocol;
 }
+
+bool AlbaWebPathHandler::hasProtocol() const { return m_hasProtocol; }
 
 void AlbaWebPathHandler::gotoLink(string_view const newPath) {
     AlbaWebPathHandler newPathHandler(newPath);

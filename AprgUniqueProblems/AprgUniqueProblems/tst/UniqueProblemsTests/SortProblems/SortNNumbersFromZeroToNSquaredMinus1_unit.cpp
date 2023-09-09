@@ -21,7 +21,6 @@ using SmallIntegerSorter = SortNNumbersFromZeroToNSquaredMinus1<Integers>;
 // CANNOT SORT DOUBLE VALUES
 // CANNOT SORT STRINGS
 // CANNOT SORT STABILITY OBJECTS
-
 TEST(SortNNumbersFromZeroToNSquaredMinus1Test, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
     CharactersSorter sorter;
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);

@@ -13,7 +13,6 @@ using Paths = typename GraphTypes<VertexForTest>::Paths;
 using GraphForTest = DirectedGraphWithListOfEdges<VertexForTest>;
 using GeneralPathCoverForTest = GeneralPathCover<VertexForTest>;
 using VertexPairs = typename GeneralPathCoverForTest::VertexPairs;
-
 VertexForTest newSourceVertex = numeric_limits<int>::max();
 VertexForTest newSinkVertex = numeric_limits<int>::max() - 1;
 }  // namespace

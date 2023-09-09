@@ -10,15 +10,6 @@ namespace alba {
 AlbaStreamBitReader::AlbaStreamBitReader(istream& stream) : m_stream(stream) {}
 bool AlbaStreamBitReader::noRemainingBitsInBuffer() const { return m_bitBuffer.empty(); }
 
-bool AlbaStreamBitReader::readBoolData() {
-    readIfNeeded(1U);
-    bool result(m_bitBuffer.front());
-    eraseBitsInBitBuffer(1U);
-    return result;
-}
-
-char AlbaStreamBitReader::readCharData() { return AlbaStreamBitReader::readBigEndianNumberData<char>(); }
-
 string AlbaStreamBitReader::readStringData(size_t const numberOfCharacters) {
     string result;
     for (size_t i = 0; i < numberOfCharacters; ++i) {
@@ -42,6 +33,15 @@ string AlbaStreamBitReader::readWholeStreamAsStringData() {
             break;
         }
     }
+    return result;
+}
+
+char AlbaStreamBitReader::readCharData() { return AlbaStreamBitReader::readBigEndianNumberData<char>(); }
+
+bool AlbaStreamBitReader::readBoolData() {
+    readIfNeeded(1U);
+    bool result(m_bitBuffer.front());
+    eraseBitsInBitBuffer(1U);
     return result;
 }
 

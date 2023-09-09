@@ -28,14 +28,6 @@ public:
         searchForBestPaths();
     }
 
-    [[nodiscard]] bool hasPathTo(Vertex const& startVertex, Vertex const& endVertex) const {
-        bool result(false);
-        if (m_pathDetailsMatrix.isInside(startVertex, endVertex)) {
-            result = m_pathDetailsMatrix.getEntryConstReference(startVertex, endVertex).hasAPath;
-        }
-        return result;
-    }
-
     [[nodiscard]] Path getPathTo(Vertex const& startVertex, Vertex const& endVertex) const {
         Path result;
         if (startVertex != endVertex && m_pathDetailsMatrix.isInside(startVertex, endVertex)) {
@@ -46,6 +38,14 @@ public:
                 result.reserve(pathInList.size());
                 std::copy(pathInList.cbegin(), pathInList.cend(), std::back_inserter(result));
             }
+        }
+        return result;
+    }
+
+    [[nodiscard]] bool hasPathTo(Vertex const& startVertex, Vertex const& endVertex) const {
+        bool result(false);
+        if (m_pathDetailsMatrix.isInside(startVertex, endVertex)) {
+            result = m_pathDetailsMatrix.getEntryConstReference(startVertex, endVertex).hasAPath;
         }
         return result;
     }

@@ -11,6 +11,37 @@ using namespace std;
 
 namespace alba::algebra {
 
+ContinuityType getContinuityTypeAt(Term const& term, string const& variableName, AlbaNumber const& value) {
+    ContinuityType result(ContinuityType::Unknown);
+    SubstitutionOfVariablesToValues substitution{{variableName, value}};
+    Term substitutedResult(substitution.performSubstitutionTo(term));
+    if (substitutedResult.isConstant()) {
+        AlbaNumber limitAtValueInPositiveSide(getLimitAtAValueInThePositiveSide(term, variableName, value));
+        AlbaNumber limitAtValueInNegativeSide(getLimitAtAValueInTheNegativeSide(term, variableName, value));
+        if (isAlmostEqualForLimitChecking(limitAtValueInPositiveSide, limitAtValueInNegativeSide)) {
+            AlbaNumber const& substitutedResultValue(substitutedResult.getAsNumber());
+            if (isAlmostEqualForLimitChecking(limitAtValueInPositiveSide, substitutedResultValue)) {
+                result = ContinuityType::ContinuousAtBothSides;
+            } else {
+                result = ContinuityType::DiscontinuousWithRemovableDiscontinuity;
+            }
+        } else {
+            result = ContinuityType::DiscontinuousWithEssentialDiscontinuity;
+        }
+    }
+    return result;
+}
+
+SolutionSet getContinuityDomain(Term const& term) {
+    // Calculus Theorem:  A polynomial function is continuous at every number.
+    // Calculus Theorem:  A rational function (polynomial over polynomial) is continuous at every number in its domain.
+    // Calculus Observation:  A radical function is continuous at every number in its domain.
+    // Calculus Theorem:  A sine function is continuous at every number.
+    // Calculus Theorem:  A cosine function is continuous at every number.
+    // This code is not accurate. How about piecewise function?
+    return calculateDomainForTermWithOneVariable(term);
+}
+
 bool isContinuousAtWithMultipleVariablesWithDifferentApproaches(
     Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
     SubstitutionsOfVariablesToTerms const& substitutionsForApproaches) {
@@ -50,37 +81,6 @@ bool isIntermediateValueTheoremSatisfied(
                  isValueToTestBetweenFirstAndSecond;
     }
     return result;
-}
-
-ContinuityType getContinuityTypeAt(Term const& term, string const& variableName, AlbaNumber const& value) {
-    ContinuityType result(ContinuityType::Unknown);
-    SubstitutionOfVariablesToValues substitution{{variableName, value}};
-    Term substitutedResult(substitution.performSubstitutionTo(term));
-    if (substitutedResult.isConstant()) {
-        AlbaNumber limitAtValueInPositiveSide(getLimitAtAValueInThePositiveSide(term, variableName, value));
-        AlbaNumber limitAtValueInNegativeSide(getLimitAtAValueInTheNegativeSide(term, variableName, value));
-        if (isAlmostEqualForLimitChecking(limitAtValueInPositiveSide, limitAtValueInNegativeSide)) {
-            AlbaNumber const& substitutedResultValue(substitutedResult.getAsNumber());
-            if (isAlmostEqualForLimitChecking(limitAtValueInPositiveSide, substitutedResultValue)) {
-                result = ContinuityType::ContinuousAtBothSides;
-            } else {
-                result = ContinuityType::DiscontinuousWithRemovableDiscontinuity;
-            }
-        } else {
-            result = ContinuityType::DiscontinuousWithEssentialDiscontinuity;
-        }
-    }
-    return result;
-}
-
-SolutionSet getContinuityDomain(Term const& term) {
-    // Calculus Theorem:  A polynomial function is continuous at every number.
-    // Calculus Theorem:  A rational function (polynomial over polynomial) is continuous at every number in its domain.
-    // Calculus Observation:  A radical function is continuous at every number in its domain.
-    // Calculus Theorem:  A sine function is continuous at every number.
-    // Calculus Theorem:  A cosine function is continuous at every number.
-    // This code is not accurate. How about piecewise function?
-    return calculateDomainForTermWithOneVariable(term);
 }
 
 bool isContinuousAt(Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {

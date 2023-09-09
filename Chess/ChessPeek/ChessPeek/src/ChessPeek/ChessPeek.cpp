@@ -10,9 +10,11 @@
 using namespace std;
 
 namespace {
+
 static atomic_bool currentlyCopying = false;
 static atomic_bool currentlyPrinting = false;
 bool shouldStillRun = true;  // USE ESCAPE KEY TO CLEANLY SHUTDOWN
+
 void trackKeyPress() {
     alba::AlbaLocalUserAutomation userAutomation;
     while (shouldStillRun) {
@@ -20,6 +22,7 @@ void trackKeyPress() {
         Sleep(100);
     }
 }
+
 }  // namespace
 
 namespace alba {
@@ -85,20 +88,6 @@ void ChessPeek::calculationMonitoringCallBackForEngine(EngineCalculationDetails 
     }
 }
 
-bool ChessPeek::shouldAnalyzeBoard() const {
-    return m_detailsFromTheScreen.canAnalyzeBoard() && (m_engineWasJustReset || didBoardChange());
-}
-
-bool ChessPeek::didPlayerChange() const {
-    return m_detailsFromTheScreen.getBoardWithContext().getPlayerColor() !=
-           m_detailsOnTheEngine.getBoardWithContext().getPlayerColor();
-}
-
-bool ChessPeek::didBoardChange() const {
-    return m_detailsFromTheScreen.getBoardWithContext().getBoard() !=
-           m_detailsOnTheEngine.getBoardWithContext().getBoard();
-}
-
 Move ChessPeek::getPerformedMove() const {
     // this is a bad idea, still cant detect if the pieces are moved manually (by a human)
     Move result{};
@@ -131,6 +120,20 @@ Move ChessPeek::getPerformedMove() const {
         }
     }
     return result;
+}
+
+bool ChessPeek::shouldAnalyzeBoard() const {
+    return m_detailsFromTheScreen.canAnalyzeBoard() && (m_engineWasJustReset || didBoardChange());
+}
+
+bool ChessPeek::didPlayerChange() const {
+    return m_detailsFromTheScreen.getBoardWithContext().getPlayerColor() !=
+           m_detailsOnTheEngine.getBoardWithContext().getPlayerColor();
+}
+
+bool ChessPeek::didBoardChange() const {
+    return m_detailsFromTheScreen.getBoardWithContext().getBoard() !=
+           m_detailsOnTheEngine.getBoardWithContext().getBoard();
 }
 
 void ChessPeek::initialize() {

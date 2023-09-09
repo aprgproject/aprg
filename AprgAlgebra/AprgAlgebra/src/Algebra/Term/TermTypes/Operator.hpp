@@ -17,6 +17,8 @@ public:
     bool operator==(Operator const& second) const;
     bool operator!=(Operator const& second) const;
     bool operator<(Operator const& second) const;
+    [[nodiscard]] OperatorLevel getOperatorLevel() const;
+    [[nodiscard]] std::string getOperatorString() const;
     [[nodiscard]] bool isAddition() const;
     [[nodiscard]] bool isSubtraction() const;
     [[nodiscard]] bool isMultiplication() const;
@@ -26,8 +28,6 @@ public:
     [[nodiscard]] bool isOpeningGroupOperator() const;
     [[nodiscard]] bool isClosingGroupOperator() const;
     [[nodiscard]] bool isSameOperatorInputType(OperatorInputType const operatorInputType) const;
-    [[nodiscard]] OperatorLevel getOperatorLevel() const;
-    [[nodiscard]] std::string getOperatorString() const;
     void setOperatorString(std::string const& operatingString);
 
 private:

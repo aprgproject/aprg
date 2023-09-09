@@ -10,42 +10,55 @@ using namespace std;
 
 namespace alba::CodeUtilities {
 
-bool isAllWhiteSpaceOrComment(Terms const& terms) {
-    return all_of(terms.cbegin(), terms.cend(), [](Term const& term) { return isCommentOrWhiteSpace(term); });
-}
-
-bool isAMatch(MatcherType const matcherType, Term const& term) {
-    switch (matcherType) {
-        case MatcherType::Comment:
-            return isComment(term);
-        case MatcherType::HasNewLine:
-            return hasNewLine(term);
-        case MatcherType::IdentifierWithPascalCase:
-            return TermType::Identifier == term.getTermType() && isPascalCase(term.getContent());
-        case MatcherType::IdentifierWithSnakeCase:
-            return TermType::Identifier == term.getTermType() && isSnakeCase(term.getContent());
-        case MatcherType::IdentifierAndNotAScreamingSnakeCase:
-            return TermType::Identifier == term.getTermType() && !isScreamingSnakeCase(term.getContent());
-        case MatcherType::NotAWhiteSpace:
-            return !isWhiteSpace(term);
-        case MatcherType::WhiteSpaceWithNewLine:
-            return isWhiteSpaceWithNewLine(term);
+void replaceAllForwards(
+    Terms& terms, int const startIndex, Patterns const& searchPatterns, Terms const& replacementTerms) {
+    for (int termIndex = startIndex; termIndex < static_cast<int>(terms.size());) {
+        Indexes patternIndexes = checkPatternAt(terms, termIndex, searchPatterns);
+        if (!patternIndexes.empty()) {
+            terms.erase(terms.cbegin() + patternIndexes.front(), terms.cbegin() + patternIndexes.back() + 1);
+            terms.insert(terms.cbegin() + patternIndexes.front(), replacementTerms.cbegin(), replacementTerms.cend());
+            int sizeDifference =
+                static_cast<int>(replacementTerms.size()) - (patternIndexes.back() + 1 - patternIndexes.front());
+            if (sizeDifference == 0) {
+                termIndex = patternIndexes.front() + 1;
+            } else {
+                termIndex = patternIndexes.front();
+            }
+        } else {
+            ++termIndex;
+        }
     }
-    return false;
 }
 
-bool isComment(Term const& term) {
-    return term.getTermType() == TermType::CommentMultiline || term.getTermType() == TermType::CommentSingleLine;
+void replaceCommentsWithExtraLine(Terms& terms, int const startIndex) {
+    Patterns searchPattern{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
+    for (int termIndex = startIndex; termIndex < static_cast<int>(terms.size());) {
+        Indexes patternIndexes = checkPatternAt(terms, termIndex, searchPattern);
+        if (!patternIndexes.empty()) {
+            terms[patternIndexes.back()] = Term(TermType::WhiteSpace, "\n");
+            termIndex = patternIndexes.back() + 1;
+        } else {
+            ++termIndex;
+        }
+    }
 }
 
-bool isWhiteSpace(Term const& term) { return term.getTermType() == TermType::WhiteSpace; }
-bool isCommentOrWhiteSpace(Term const& term) { return isComment(term) || isWhiteSpace(term); }
-
-bool isWhiteSpaceWithNewLine(Term const& term) {
-    return term.getTermType() == TermType::WhiteSpace && stringHelper::hasNewLine(term.getContent());
+void combineTermsInPlace(Terms& terms, TermType const newTermType, int const startIndex, int const endIndex) {
+    if (startIndex < endIndex) {
+        string combinedContent;
+        for (int termIndex = startIndex; termIndex <= endIndex; ++termIndex) {
+            combinedContent += terms[termIndex].getContent();
+        }
+        Term& firstTerm(terms[startIndex]);
+        changeTerm(firstTerm, newTermType, combinedContent);
+        terms.erase(terms.begin() + startIndex + 1, terms.begin() + endIndex + 1);
+    }
 }
 
-bool hasNewLine(Term const& term) { return stringHelper::hasNewLine(term.getContent()); }
+void changeTerm(Term& term, TermType const newTermType, string const& content) {
+    term.setTermType(newTermType);
+    term.setContent(content);
+}
 
 Indexes searchForPatternsForwards(Terms const& terms, int const startIndex, Patterns const& searchPatterns) {
     for (int termIndex = startIndex; termIndex < static_cast<int>(terms.size()); ++termIndex) {
@@ -170,54 +183,41 @@ string convertToString(MatcherType const type) {
     return {};
 }
 
-void replaceAllForwards(
-    Terms& terms, int const startIndex, Patterns const& searchPatterns, Terms const& replacementTerms) {
-    for (int termIndex = startIndex; termIndex < static_cast<int>(terms.size());) {
-        Indexes patternIndexes = checkPatternAt(terms, termIndex, searchPatterns);
-        if (!patternIndexes.empty()) {
-            terms.erase(terms.cbegin() + patternIndexes.front(), terms.cbegin() + patternIndexes.back() + 1);
-            terms.insert(terms.cbegin() + patternIndexes.front(), replacementTerms.cbegin(), replacementTerms.cend());
-            int sizeDifference =
-                static_cast<int>(replacementTerms.size()) - (patternIndexes.back() + 1 - patternIndexes.front());
-            if (sizeDifference == 0) {
-                termIndex = patternIndexes.front() + 1;
-            } else {
-                termIndex = patternIndexes.front();
-            }
-        } else {
-            ++termIndex;
-        }
-    }
+bool isAllWhiteSpaceOrComment(Terms const& terms) {
+    return all_of(terms.cbegin(), terms.cend(), [](Term const& term) { return isCommentOrWhiteSpace(term); });
 }
 
-void replaceCommentsWithExtraLine(Terms& terms, int const startIndex) {
-    Patterns searchPattern{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
-    for (int termIndex = startIndex; termIndex < static_cast<int>(terms.size());) {
-        Indexes patternIndexes = checkPatternAt(terms, termIndex, searchPattern);
-        if (!patternIndexes.empty()) {
-            terms[patternIndexes.back()] = Term(TermType::WhiteSpace, "\n");
-            termIndex = patternIndexes.back() + 1;
-        } else {
-            ++termIndex;
-        }
+bool isAMatch(MatcherType const matcherType, Term const& term) {
+    switch (matcherType) {
+        case MatcherType::Comment:
+            return isComment(term);
+        case MatcherType::HasNewLine:
+            return hasNewLine(term);
+        case MatcherType::IdentifierWithPascalCase:
+            return TermType::Identifier == term.getTermType() && isPascalCase(term.getContent());
+        case MatcherType::IdentifierWithSnakeCase:
+            return TermType::Identifier == term.getTermType() && isSnakeCase(term.getContent());
+        case MatcherType::IdentifierAndNotAScreamingSnakeCase:
+            return TermType::Identifier == term.getTermType() && !isScreamingSnakeCase(term.getContent());
+        case MatcherType::NotAWhiteSpace:
+            return !isWhiteSpace(term);
+        case MatcherType::WhiteSpaceWithNewLine:
+            return isWhiteSpaceWithNewLine(term);
     }
+    return false;
 }
 
-void combineTermsInPlace(Terms& terms, TermType const newTermType, int const startIndex, int const endIndex) {
-    if (startIndex < endIndex) {
-        string combinedContent;
-        for (int termIndex = startIndex; termIndex <= endIndex; ++termIndex) {
-            combinedContent += terms[termIndex].getContent();
-        }
-        Term& firstTerm(terms[startIndex]);
-        changeTerm(firstTerm, newTermType, combinedContent);
-        terms.erase(terms.begin() + startIndex + 1, terms.begin() + endIndex + 1);
-    }
+bool isComment(Term const& term) {
+    return term.getTermType() == TermType::CommentMultiline || term.getTermType() == TermType::CommentSingleLine;
 }
 
-void changeTerm(Term& term, TermType const newTermType, string const& content) {
-    term.setTermType(newTermType);
-    term.setContent(content);
+bool isWhiteSpace(Term const& term) { return term.getTermType() == TermType::WhiteSpace; }
+bool isCommentOrWhiteSpace(Term const& term) { return isComment(term) || isWhiteSpace(term); }
+
+bool isWhiteSpaceWithNewLine(Term const& term) {
+    return term.getTermType() == TermType::WhiteSpace && stringHelper::hasNewLine(term.getContent());
 }
+
+bool hasNewLine(Term const& term) { return stringHelper::hasNewLine(term.getContent()); }
 
 }  // namespace alba::CodeUtilities

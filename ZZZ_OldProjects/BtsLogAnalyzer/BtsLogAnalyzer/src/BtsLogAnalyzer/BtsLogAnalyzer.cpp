@@ -24,40 +24,6 @@ BtsLogAnalyzer::BtsLogAnalyzer(string const& pathOfOutputFile)
 
 BtsLogAnalyzer::BtsLogAnalyzer() : m_totalDelay(0), m_count(0) {}
 
-double BtsLogAnalyzer::getWireSharkTime(string const& lineInLogs) {
-    int length(lineInLogs.length());
-    int startIndexOfTime = 0;
-    int endIndexOfTime = 0;
-    int i = 0;
-    for (; i < length && stringHelper::isWhiteSpace(lineInLogs[i]); ++i) {
-    }
-    for (; i < length && stringHelper::isNumber(lineInLogs[i]); ++i) {
-    }
-    startIndexOfTime = i;
-    for (; i < length && stringHelper::isWhiteSpace(lineInLogs[i]); ++i) {
-    }
-    for (; i < length && !stringHelper::isWhiteSpace(lineInLogs[i]); ++i) {
-    }
-    endIndexOfTime = i;
-    return stringHelper::convertStringToNumber<double>(
-        lineInLogs.substr(startIndexOfTime, endIndexOfTime - startIndexOfTime));
-}
-
-string BtsLogAnalyzer::getNumberAfterThisString(string const& mainString, string const& stringToSearch) {
-    string result;
-    int firstIndexOfFirstString = mainString.find(stringToSearch);
-    if (stringHelper::isNotNpos(firstIndexOfFirstString)) {
-        int lastIndexOfFirstString = static_cast<int>(firstIndexOfFirstString + stringToSearch.length());
-        int lastIndexOfNumber = 0;
-        for (lastIndexOfNumber = lastIndexOfFirstString; stringHelper::isNumber(mainString[lastIndexOfNumber]);
-             ++lastIndexOfNumber) {
-            ;
-        }
-        result = mainString.substr(lastIndexOfFirstString, lastIndexOfNumber - lastIndexOfFirstString);
-    }
-    return result;
-}
-
 void BtsLogAnalyzer::processFileForToCountUsersWithTracing(string const& filePath) {
     AlbaLocalPathHandler filePathHandler(filePath);
     cout << "processFile: " << filePathHandler.getFullPath() << "\n";
@@ -251,6 +217,40 @@ void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePat
          << " average:" << messageDeliveryTotal / messageDeliveryCount << "\n";
     cout << "rlSetupTotal: " << rlSetupTotal << " count: " << rlSetupCount << " average:" << rlSetupTotal / rlSetupCount
          << "\n";
+}
+
+string BtsLogAnalyzer::getNumberAfterThisString(string const& mainString, string const& stringToSearch) {
+    string result;
+    int firstIndexOfFirstString = mainString.find(stringToSearch);
+    if (stringHelper::isNotNpos(firstIndexOfFirstString)) {
+        int lastIndexOfFirstString = static_cast<int>(firstIndexOfFirstString + stringToSearch.length());
+        int lastIndexOfNumber = 0;
+        for (lastIndexOfNumber = lastIndexOfFirstString; stringHelper::isNumber(mainString[lastIndexOfNumber]);
+             ++lastIndexOfNumber) {
+            ;
+        }
+        result = mainString.substr(lastIndexOfFirstString, lastIndexOfNumber - lastIndexOfFirstString);
+    }
+    return result;
+}
+
+double BtsLogAnalyzer::getWireSharkTime(string const& lineInLogs) {
+    int length(lineInLogs.length());
+    int startIndexOfTime = 0;
+    int endIndexOfTime = 0;
+    int i = 0;
+    for (; i < length && stringHelper::isWhiteSpace(lineInLogs[i]); ++i) {
+    }
+    for (; i < length && stringHelper::isNumber(lineInLogs[i]); ++i) {
+    }
+    startIndexOfTime = i;
+    for (; i < length && stringHelper::isWhiteSpace(lineInLogs[i]); ++i) {
+    }
+    for (; i < length && !stringHelper::isWhiteSpace(lineInLogs[i]); ++i) {
+    }
+    endIndexOfTime = i;
+    return stringHelper::convertStringToNumber<double>(
+        lineInLogs.substr(startIndexOfTime, endIndexOfTime - startIndexOfTime));
 }
 
 double BtsLogAnalyzer::getComputedAverageDelay() const {

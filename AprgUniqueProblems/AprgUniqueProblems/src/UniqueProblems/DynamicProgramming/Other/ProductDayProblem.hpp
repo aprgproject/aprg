@@ -27,8 +27,8 @@ private:
     static ProductBits getProductBits(Product const product);
     static ProductBits addProduct(ProductBits const productBits, Product const product);
     static ProductBits removeProduct(ProductBits const productBits, Product const product);
-    [[nodiscard]] Product getNumberOfProducts() const;
     [[nodiscard]] Day getNumberOfDays() const;
+    [[nodiscard]] Product getNumberOfProducts() const;
     [[nodiscard]] ProductBits getNumberOfProductsSubsets() const;
     [[nodiscard]] ProductBits getProductBitsWithAllProducts() const;
     Price getMinimumPriceUsingMemoizationDP(

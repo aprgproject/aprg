@@ -44,8 +44,8 @@ public:
 
     public:
         static Status getInstance();
-        [[nodiscard]] bool isStatusNoError() const;
         [[nodiscard]] std::string getStatusString() const;
+        [[nodiscard]] bool isStatusNoError() const;
         void setError(std::string const& error);
         void clearErrors();
 
@@ -87,24 +87,14 @@ public:
     void process();
 
 private:
+    [[nodiscard]] static OneDimensionSamples getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints);
+    [[nodiscard]] static double getHeight(TwoDimensionSamples const& barPoints);
+    [[nodiscard]] static int getRetainSizeInLineModel(int const size, double const removalRatio);
     // find line
     [[nodiscard]] static bool areLinesValid(
         Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine);
     [[nodiscard]] static bool isConsideredHorizontal(double const aCoefficient, double const bCoefficient);
     [[nodiscard]] static bool isConsideredVertical(double const aCoefficient, double const bCoefficient);
-    [[nodiscard]] static int getRetainSizeInLineModel(int const size, double const removalRatio);
-    [[nodiscard]] static double getHeight(TwoDimensionSamples const& barPoints);
-    [[nodiscard]] static OneDimensionSamples getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints);
-    static RangeOfDoubles getMinMaxCriteriaForBar(
-        OneDimensionStatistics& firstGroupStatistics, OneDimensionStatistics& secondGroupStatistics);
-    static OneDimensionKMeans getKMeansForWidths(PointAndWidthPairs const& pointAndWidthPairs);
-    static std::string getPrintableStringForPercentage(double const numerator, double const denominator);
-    static BitmapXY convertToBitmapXY(Point const& point);
-    static BitmapXY convertToBitmapXY(TwoDimensionSample const& sample);
-    static Point convertToPoint(BitmapXY const& bitmapXY);
-    static Point convertToPoint(TwoDimensionSample const& sample);
-    static TwoDimensionSample convertToTwoDimensionSample(Point const& point);
-    static RangeOfDoubles getMinMaxRangeOfSamples(OneDimensionSamples const& samples);
 
     static void updateSamplesForLineModeling(
         TwoDimensionSamples& samplesLineModeling, ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap,
@@ -122,25 +112,27 @@ private:
         TwoDimensionKMeans& kMeansForBarPoints, int const numberQuestionsInColumn,
         CountToEndPointIndexesMultiMap const& countToEndPointsIndexesMultiMap);
 
-    // utilities
-    [[nodiscard]] bool isBlackAt(BitmapSnippet const& snippet, BitmapXY const bitmapXy) const;
+    static BitmapXY convertToBitmapXY(Point const& point);
+    static BitmapXY convertToBitmapXY(TwoDimensionSample const& sample);
+    static OneDimensionKMeans getKMeansForWidths(PointAndWidthPairs const& pointAndWidthPairs);
+    static Point convertToPoint(BitmapXY const& bitmapXY);
+    static Point convertToPoint(TwoDimensionSample const& sample);
+    static RangeOfDoubles getMinMaxCriteriaForBar(
+        OneDimensionStatistics& firstGroupStatistics, OneDimensionStatistics& secondGroupStatistics);
+    static RangeOfDoubles getMinMaxRangeOfSamples(OneDimensionSamples const& samples);
+    static TwoDimensionSample convertToTwoDimensionSample(Point const& point);
+    static std::string getPrintableStringForPercentage(double const numerator, double const denominator);
 
-    [[nodiscard]] double getShadePercentage(
-        BitmapSnippet const& snippet, Point const& leftPoint, Point const& rightPoint, double const radius,
-        int const choiceIndex) const;
+    [[nodiscard]] Answers getAnswersAtQuestion(
+        BitmapSnippet const& snippet, QuestionBarCoordinate const& leftCoordinate,
+        QuestionBarCoordinate const& rightCoordinate) const;
 
-    [[nodiscard]] double getRadiusForChoiceChecking(
-        QuestionBarCoordinate const& leftCoordinate, QuestionBarCoordinate const& rightCoordinate) const;
-    [[nodiscard]] double getMaximumDistanceForBetweenBarHeights(double const previousHeight) const;
-    [[nodiscard]] int getMaximumLineAndBarWidth(BitmapSnippet const& snippet) const;
+    [[nodiscard]] DoubleCollection getAcceptableSquareErrorCollectionUsingRemovalRatio(
+        ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap) const;
     [[nodiscard]] Line findLeftLine(BitmapSnippet const& snippet) const;
     [[nodiscard]] Line findRightLine(BitmapSnippet const& snippet) const;
     [[nodiscard]] Line findTopLine(BitmapSnippet const& snippet) const;
     [[nodiscard]] Line findBottomLine(BitmapSnippet const& snippet) const;
-    [[nodiscard]] TwoDimensionSamples getSamplesInVerticalLine(
-        BitmapSnippet const& snippet, RangeOfInts const& range) const;
-    [[nodiscard]] TwoDimensionSamples getSamplesInHorizontalLine(
-        BitmapSnippet const& snippet, RangeOfInts const& range) const;
     [[nodiscard]] Line findLeftLineUsingStartingLine(BitmapSnippet const& snippet, Line const& startingLine) const;
     [[nodiscard]] Line findRightLineUsingStartingLine(BitmapSnippet const& snippet, Line const& startingLine) const;
     [[nodiscard]] Line findVerticalLineUsingStartingLine(
@@ -151,25 +143,11 @@ private:
     [[nodiscard]] Line getTopLineModel(TwoDimensionSamples& samples) const;
     [[nodiscard]] Line getBottomLineModel(TwoDimensionSamples& samples) const;
     [[nodiscard]] Line getLineModel(TwoDimensionSamples& samples) const;
-    [[nodiscard]] DoubleCollection getAcceptableSquareErrorCollectionUsingRemovalRatio(
-        ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap) const;
-
-    [[nodiscard]] Answers getAnswersAtQuestion(
-        BitmapSnippet const& snippet, QuestionBarCoordinate const& leftCoordinate,
-        QuestionBarCoordinate const& rightCoordinate) const;
 
     [[nodiscard]] Point getCenterOfCircleForChoiceChecking(
         BitmapSnippet const& snippet, Point const& leftPoint, Point const& rightPoint, double const radius,
         int const choiceIndex) const;
 
-    [[nodiscard]] QuestionBarCoordinates getQuestionBarCoordinatesFromLine(
-        BitmapSnippet const& snippet, Line const& line, Point const& startPoint, Point const& endPoint,
-        int const numberQuestionsInColumn) const;
-
-    // Widths functions
-    [[nodiscard]] RangeOfDoubles getMinMaxCriteriaForBar(PointAndWidthPairs const& pointAndWidthPairs) const;
-    [[nodiscard]] PointAndWidthPairs getAcceptablePointAndWidthPairs(
-        BitmapSnippet const& snippet, Line const& line, Point const& startPoint, Point const& endPoint) const;
     [[nodiscard]] Point getNearestBlackPointFromLine(
         BitmapSnippet const& snippet, Line const& line, Point const& pointInLine) const;
 
@@ -177,11 +155,33 @@ private:
         BitmapSnippet const& snippet, Point const& nearestBlackPoint, Line const& perpendicularLine,
         int const maxLineAndBarWidth, int const sign) const;
 
+    [[nodiscard]] PointAndWidthPairs getAcceptablePointAndWidthPairs(
+        BitmapSnippet const& snippet, Line const& line, Point const& startPoint, Point const& endPoint) const;
+
+    [[nodiscard]] QuestionBarCoordinates getQuestionBarCoordinatesFromLine(
+        BitmapSnippet const& snippet, Line const& line, Point const& startPoint, Point const& endPoint,
+        int const numberQuestionsInColumn) const;
+
+    // Widths functions
+    [[nodiscard]] RangeOfDoubles getMinMaxCriteriaForBar(PointAndWidthPairs const& pointAndWidthPairs) const;
+    [[nodiscard]] TwoDimensionSamples getSamplesInVerticalLine(
+        BitmapSnippet const& snippet, RangeOfInts const& range) const;
+    [[nodiscard]] TwoDimensionSamples getSamplesInHorizontalLine(
+        BitmapSnippet const& snippet, RangeOfInts const& range) const;
     // output related functions
     [[nodiscard]] std::string getCsvFilePath(std::string const& path) const;
     [[nodiscard]] std::string getReportHtmlFilePath(std::string const& path) const;
-    CountToEndPointIndexesMultiMap getHeightPointsCountToEndPointIndexesMultimap(
-        TwoDimensionKMeans& kMeansForBarPoints) const;
+
+    [[nodiscard]] double getShadePercentage(
+        BitmapSnippet const& snippet, Point const& leftPoint, Point const& rightPoint, double const radius,
+        int const choiceIndex) const;
+
+    [[nodiscard]] double getRadiusForChoiceChecking(
+        QuestionBarCoordinate const& leftCoordinate, QuestionBarCoordinate const& rightCoordinate) const;
+    [[nodiscard]] double getMaximumDistanceForBetweenBarHeights(double const previousHeight) const;
+    [[nodiscard]] int getMaximumLineAndBarWidth(BitmapSnippet const& snippet) const;
+    // utilities
+    [[nodiscard]] bool isBlackAt(BitmapSnippet const& snippet, BitmapXY const bitmapXy) const;
     void performStepsWhenNumberOfAnswersNotEqualToNumberOfQuestions() const;
     void removeFurthestSamplesUntilLineOrientationMatch(
         TwoDimensionSamples& samples, LineOrientation const lineOrientation) const;
@@ -209,6 +209,8 @@ private:
     void saveHeadersToCsvFile() const;
     void saveOutputHtmlFile(std::string const& processedFilePath) const;
     void saveTableToOutputHtmlFile(std::ofstream& reportHtmlFileStream) const;
+    CountToEndPointIndexesMultiMap getHeightPointsCountToEndPointIndexesMultimap(
+        TwoDimensionKMeans& kMeansForBarPoints) const;
     void processDirectory(std::string const& directoryPath);
     void processFile(std::string const& filePath);
     void processBitmapFile(Bitmap const& bitmap);

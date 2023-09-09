@@ -14,11 +14,17 @@ inline int externInlineInteger = 420;
 // inline std::string inlineString{"620"}; // Error: redefinition of 'inlineString'
 inline int inlineIntegerAtTranslationUnit = 720;
 
-// int nonInlineAtTranslationUnit = 820; // conflicts with TranslationUnit1
-// constexpr int SampleClassWithInline::constIntegerInClass = 1020; // Error: redefinition of 'constIntegerInClass'
-int inlineFreeFunction() {
-    // inline int sampleVariable=100; // Error: inline declaration of 'sampleVariable' not allowed in block scope
-    return 2;
+// Utilities for tests
+void restoreInitialValuesForTranslationUnit2() {
+    // constInteger = 120; // const so cannot change value
+    inlineIntegerWithDefinition = 220;
+    inlineIntegerWithDeclaration = 320;
+    externInlineInteger = 420;
+    staticInlineInteger = 520;
+    inlineString = "620";
+    inlineIntegerAtTranslationUnit = 720;
+    // nonInlineAtTranslationUnit = 820; // conflicts with TranslationUnit1
+    // SampleClassWithInline::constIntegerInClass = 1020; // const so cannot change value
 }
 
 TranslationUnitValues getValuesInTranslationUnit2() {
@@ -34,17 +40,11 @@ TranslationUnitValues getValuesInTranslationUnit2() {
         SampleClassWithInline::constIntegerInClass};
 }
 
-// Utilities for tests
-void restoreInitialValuesForTranslationUnit2() {
-    // constInteger = 120; // const so cannot change value
-    inlineIntegerWithDefinition = 220;
-    inlineIntegerWithDeclaration = 320;
-    externInlineInteger = 420;
-    staticInlineInteger = 520;
-    inlineString = "620";
-    inlineIntegerAtTranslationUnit = 720;
-    // nonInlineAtTranslationUnit = 820; // conflicts with TranslationUnit1
-    // SampleClassWithInline::constIntegerInClass = 1020; // const so cannot change value
+// int nonInlineAtTranslationUnit = 820; // conflicts with TranslationUnit1
+// constexpr int SampleClassWithInline::constIntegerInClass = 1020; // Error: redefinition of 'constIntegerInClass'
+int inlineFreeFunction() {
+    // inline int sampleVariable=100; // Error: inline declaration of 'sampleVariable' not allowed in block scope
+    return 2;
 }
 
 TEST(InlineOnTranslationUnit2Test, VariableValuesAreCorrect) {

@@ -58,15 +58,15 @@ public:
           m_operatorSyntaxType(operatorSyntaxValue),
           m_operatorPriority(operatorPriority) {}
 
+    [[nodiscard]] OperatorTemplateType getOperator() const { return m_operator; }
+    [[nodiscard]] ValueTemplateType getValue() const { return m_value; }
+    [[nodiscard]] int getOperatorPriority() const { return m_operatorPriority; }
     [[nodiscard]] bool isOperator() const { return m_termType == TermType::Operator; }
     [[nodiscard]] bool isValue() const { return m_termType == TermType::Value; }
     [[nodiscard]] bool isStartGroupOperator() const { return m_operatorSyntaxType == OperatorSyntaxType::StartGroup; }
     [[nodiscard]] bool isEndGroupOperator() const { return m_operatorSyntaxType == OperatorSyntaxType::EndGroup; }
     [[nodiscard]] bool isPrefixUnaryOperator() const { return m_operatorSyntaxType == OperatorSyntaxType::PrefixUnary; }
     [[nodiscard]] bool isBinaryOperator() const { return m_operatorSyntaxType == OperatorSyntaxType::Binary; }
-    [[nodiscard]] int getOperatorPriority() const { return m_operatorPriority; }
-    [[nodiscard]] ValueTemplateType getValue() const { return m_value; }
-    [[nodiscard]] OperatorTemplateType getOperator() const { return m_operator; }
     ValueTemplateType& getReferenceOfValue() { return m_value; }
 
 private:
@@ -85,6 +85,8 @@ public:
     using ValueStack = std::stack<ValueTemplateType>;
     using OperatorStack = std::stack<Term>;
     [[nodiscard]] Terms getTerms() const { return m_terms; }
+    void addTerm(Term const& term) { m_terms.emplace_back(term); }
+    Terms& getTermsReference() { return m_terms; }
 
     ValueTemplateType evaluate() {
         ValueTemplateType result{};
@@ -99,9 +101,6 @@ public:
         }
         return result;
     }
-
-    Terms& getTermsReference() { return m_terms; }
-    void addTerm(Term const& term) { m_terms.emplace_back(term); }
 
 private:
     friend class ExpressionEvaluatorConverter<ValueTemplateType, OperatorTemplateType>;
@@ -156,6 +155,7 @@ public:
     using Term = ExpressionEvaluatorTerm<ValueTemplateType, OperatorTemplateType>;
     using Terms = std::vector<Term>;
     using ValueStack = std::stack<ValueTemplateType>;
+    [[nodiscard]] Terms getTerms() const { return m_terms; }
 
     [[nodiscard]] bool isEvaluationPossible() const {
         int resultStackSize(0);
@@ -176,7 +176,8 @@ public:
         return resultStackSize == 1;
     }
 
-    [[nodiscard]] Terms getTerms() const { return m_terms; }
+    void addTerm(Term const& term) { m_terms.emplace_back(term); }
+    Terms& getTermsReference() { return m_terms; }
 
     ValueTemplateType evaluate() {
         ValueTemplateType result{};
@@ -187,9 +188,6 @@ public:
         }
         return result;
     }
-
-    Terms& getTermsReference() { return m_terms; }
-    void addTerm(Term const& term) { m_terms.emplace_back(term); }
 
 private:
     friend class ExpressionEvaluatorConverter<ValueTemplateType, OperatorTemplateType>;
@@ -238,35 +236,6 @@ public:
     ExpressionEvaluatorConverter& operator=(ExpressionEvaluatorConverter const&) = delete;
     ExpressionEvaluatorConverter& operator=(ExpressionEvaluatorConverter&&) = delete;
 
-    static PostfixEvaluator convertInfixToPostfix(InfixEvaluator const& infixEvaluator) {
-        PostfixEvaluator postfixEvaluator;
-        Terms const& termsInInfix(infixEvaluator.m_terms);
-        Terms& termsInPostfix(postfixEvaluator.m_terms);
-        TermStack operatorStack;
-        for (Term const& term : termsInInfix) {
-            if (term.isStartGroupOperator()) {
-                operatorStack.push(term);
-            } else if (term.isEndGroupOperator()) {
-                transferTermStackToTerms(operatorStack, termsInPostfix, [term](TermStack& termStack) {
-                    return !termStack.top().isStartGroupOperator();
-                });
-                if (!operatorStack.empty()) {
-                    operatorStack.pop();
-                }
-            } else if (term.isOperator()) {
-                transferTermStackToTerms(operatorStack, termsInPostfix, [term](TermStack& termStack) {
-                    return term.getOperatorPriority() <= termStack.top().getOperatorPriority() &&
-                           !termStack.top().isStartGroupOperator();
-                });
-                operatorStack.push(term);
-            } else {
-                termsInPostfix.push_back(term);
-            }
-        }
-        transferTermStackToTerms(operatorStack, termsInPostfix, [](TermStack&) { return true; });
-        return postfixEvaluator;
-    }
-
     static InfixEvaluator convertPostfixToInfix(PostfixEvaluator const& postfixEvaluator) {
         InfixEvaluator infixEvaluator;
         Terms const& termsInPostfix(postfixEvaluator.m_terms);
@@ -301,16 +270,36 @@ public:
         return infixEvaluator;
     }
 
-private:
-    static Terms popTermsStackAndReturnTopValue(TermsStack& termsStack) {
-        Terms terms;
-        if (!termsStack.empty()) {
-            terms = termsStack.top();
-            termsStack.pop();
+    static PostfixEvaluator convertInfixToPostfix(InfixEvaluator const& infixEvaluator) {
+        PostfixEvaluator postfixEvaluator;
+        Terms const& termsInInfix(infixEvaluator.m_terms);
+        Terms& termsInPostfix(postfixEvaluator.m_terms);
+        TermStack operatorStack;
+        for (Term const& term : termsInInfix) {
+            if (term.isStartGroupOperator()) {
+                operatorStack.push(term);
+            } else if (term.isEndGroupOperator()) {
+                transferTermStackToTerms(operatorStack, termsInPostfix, [term](TermStack& termStack) {
+                    return !termStack.top().isStartGroupOperator();
+                });
+                if (!operatorStack.empty()) {
+                    operatorStack.pop();
+                }
+            } else if (term.isOperator()) {
+                transferTermStackToTerms(operatorStack, termsInPostfix, [term](TermStack& termStack) {
+                    return term.getOperatorPriority() <= termStack.top().getOperatorPriority() &&
+                           !termStack.top().isStartGroupOperator();
+                });
+                operatorStack.push(term);
+            } else {
+                termsInPostfix.push_back(term);
+            }
         }
-        return terms;
+        transferTermStackToTerms(operatorStack, termsInPostfix, [](TermStack&) { return true; });
+        return postfixEvaluator;
     }
 
+private:
     static void transferTermStackToTerms(
         TermStack& termStack, Terms& terms, std::function<bool(TermStack&)> loopCondition) {
         while (!termStack.empty() && loopCondition(termStack)) {
@@ -329,6 +318,15 @@ private:
         if (areGroupOperatorsNeeded) {
             outputTerms.emplace_back(Term::OperatorSyntaxType::EndGroup);
         }
+    }
+
+    static Terms popTermsStackAndReturnTopValue(TermsStack& termsStack) {
+        Terms terms;
+        if (!termsStack.empty()) {
+            terms = termsStack.top();
+            termsStack.pop();
+        }
+        return terms;
     }
 };
 

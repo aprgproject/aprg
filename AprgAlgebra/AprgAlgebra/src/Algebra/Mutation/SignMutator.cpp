@@ -42,14 +42,6 @@ Term SignMutator::getTermForMutationOfFunction(Function const& functionObject) {
     return result;
 }
 
-Term SignMutator::getTermForMutationOfVariable(Variable const& variable) {
-    Term result(m_substitution.performSubstitutionTo(variable));
-    if (!isTheValue(result, 1) && !isTheValue(result, -1)) {
-        result = ALBA_NUMBER_NOT_A_NUMBER;
-    }
-    return result;
-}
-
 void SignMutator::mutateExpressionWithAdditionAndSubtraction(Expression& expression) {
     bool areAllTheValuesOne(true);
     bool areAllTheValuesNegativeOne(true);
@@ -103,6 +95,14 @@ void SignMutator::mutateExpressionWithRaiseToPower(Expression& expression) {
     if (!isExpressionSignKnown) {
         expression = createOrCopyExpressionFromATerm(ALBA_NUMBER_NOT_A_NUMBER);
     }
+}
+
+Term SignMutator::getTermForMutationOfVariable(Variable const& variable) {
+    Term result(m_substitution.performSubstitutionTo(variable));
+    if (!isTheValue(result, 1) && !isTheValue(result, -1)) {
+        result = ALBA_NUMBER_NOT_A_NUMBER;
+    }
+    return result;
 }
 
 void SignMutator::mutateTerm(Term& term) {

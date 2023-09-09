@@ -27,29 +27,6 @@ public:
         std::copy(begin(values), begin(values) + limit, begin(m_values));
     }
 
-    // rule of zero
-    bool operator==(AlbaMathVectorType const& second) const {
-        return std::equal(
-            m_values.cbegin(), m_values.cend(), second.m_values.cbegin(),
-            [](DataType const first, DataType const second) { return isEqualForMathVectorDataType(first, second); });
-    }
-
-    bool operator!=(AlbaMathVectorType const& second) const {
-        AlbaMathVectorType const& first(*this);
-        return !(first == second);
-    }
-
-    bool operator<(AlbaMathVectorType const& second) const {
-        // this is added so it can be used in map
-        bool result(false);
-        auto [firstMismatchIt, secondMismatchIt] =
-            std::mismatch(m_values.cbegin(), m_values.cend(), second.m_values.cbegin());
-        if (firstMismatchIt != m_values.cend()) {
-            result = *firstMismatchIt < *secondMismatchIt;
-        }
-        return result;
-    }
-
     AlbaMathVectorType operator+(AlbaMathVectorType const& second) const {
         AlbaMathVectorType result;
         ValuesInArray const& firstValues(m_values);
@@ -97,6 +74,29 @@ public:
         return result;
     }
 
+    // rule of zero
+    bool operator==(AlbaMathVectorType const& second) const {
+        return std::equal(
+            m_values.cbegin(), m_values.cend(), second.m_values.cbegin(),
+            [](DataType const first, DataType const second) { return isEqualForMathVectorDataType(first, second); });
+    }
+
+    bool operator!=(AlbaMathVectorType const& second) const {
+        AlbaMathVectorType const& first(*this);
+        return !(first == second);
+    }
+
+    bool operator<(AlbaMathVectorType const& second) const {
+        // this is added so it can be used in map
+        bool result(false);
+        auto [firstMismatchIt, secondMismatchIt] =
+            std::mismatch(m_values.cbegin(), m_values.cend(), second.m_values.cbegin());
+        if (firstMismatchIt != m_values.cend()) {
+            result = *firstMismatchIt < *secondMismatchIt;
+        }
+        return result;
+    }
+
     AlbaMathVectorType& operator+=(AlbaMathVectorType const& second) {
         ValuesInArray const& secondValues(second.m_values);
         std::transform(begin(m_values), end(m_values), begin(secondValues), begin(m_values), std::plus<DataType>());
@@ -121,8 +121,6 @@ public:
         return *this;
     }
 
-    [[nodiscard]] size_t getSize() const { return SIZE; }
-
     [[nodiscard]] DataType const& getValueAt(size_t const index) const {
         assert(index < SIZE);
         return m_values[index];
@@ -141,6 +139,7 @@ public:
     }
 
     [[nodiscard]] ValuesInArray const& getValues() const { return m_values; }
+    [[nodiscard]] size_t getSize() const { return SIZE; }
 
     DataType& getValueReferenceAt(size_t const index) {
         assert(index < SIZE);

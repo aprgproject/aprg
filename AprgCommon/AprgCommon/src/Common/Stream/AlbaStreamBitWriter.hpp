@@ -36,8 +36,8 @@ public:
     void writeBitsetData(
         std::bitset<BITSET_SIZE> const& data, size_t const startBitsetIndex, size_t const endBitsetIndex);
 
-    std::ostream& getOutputStream();
     void flush();
+    std::ostream& getOutputStream();
 
 private:
     template <typename TypeToWrite>

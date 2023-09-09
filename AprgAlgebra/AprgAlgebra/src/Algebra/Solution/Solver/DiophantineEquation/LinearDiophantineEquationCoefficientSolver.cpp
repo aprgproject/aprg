@@ -12,13 +12,6 @@ LinearDiophantineEquationCoefficientSolver::LinearDiophantineEquationCoefficient
     solve(a, b, c);
 }
 
-bool LinearDiophantineEquationCoefficientSolver::isSolved() const { return SolutionStatus::Solved == m_solutionStatus; }
-
-LinearDiophantineEquationCoefficientSolver::SolutionStatus
-LinearDiophantineEquationCoefficientSolver::getSolutionStatus() const {
-    return m_solutionStatus;
-}
-
 LinearDiophantineEquationCoefficientSolver::Integer LinearDiophantineEquationCoefficientSolver::getX() const {
     return m_x;
 }
@@ -36,6 +29,13 @@ LinearDiophantineEquationCoefficientSolver::Integer LinearDiophantineEquationCoe
     Integer const muliplier) const {
     return m_y - (muliplier * m_a / m_gcfOfAAndB);
 }
+
+LinearDiophantineEquationCoefficientSolver::SolutionStatus
+LinearDiophantineEquationCoefficientSolver::getSolutionStatus() const {
+    return m_solutionStatus;
+}
+
+bool LinearDiophantineEquationCoefficientSolver::isSolved() const { return SolutionStatus::Solved == m_solutionStatus; }
 
 void LinearDiophantineEquationCoefficientSolver::solve(
     AlbaNumber const& aNumber, AlbaNumber const& bNumber, AlbaNumber const& cNumber) {

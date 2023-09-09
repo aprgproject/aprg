@@ -69,47 +69,10 @@ inline bool isLessThanStringLength(std::string_view const str, int const index) 
     return (index < static_cast<int>(str.length()));
 }
 
-bool isNumber(std::string_view const str);
-bool isWhiteSpace(std::string_view const str);
-bool isNewLine(std::string_view const str);
-bool hasNewLine(std::string_view const str);
-bool isIdentifier(std::string_view const str);
-bool isOneWord(std::string_view const str);
-bool isPalindrome(std::string_view const str);
-bool isSubstring(std::string_view const mainText, std::string_view const subString);
-bool isSubsequence(std::string_view const mainText, std::string_view const subsequence);
-bool isPrefix(std::string_view const mainText, std::string_view const prefix);
-bool isSuffix(std::string_view const mainText, std::string_view const suffix);
-bool isRotation(std::string_view const mainText, std::string_view const rotation);
-bool isPeriod(std::string_view const mainText, std::string_view const period);
-bool isBorder(std::string_view const mainText, std::string_view const border);
-bool isEqualNotCaseSensitive(std::string_view const str1, std::string_view const str2);
-bool isEqualWithLowestCommonLength(std::string_view const str1, std::string_view const str2);
-bool isStringFoundCaseSensitive(std::string_view const mainText, std::string_view const stringToSearch);
-bool isStringFoundCaseSensitive(
-    std::string_view const mainText, std::string_view const stringToSearch, int& runningOffset);
-bool isStringFoundNotCaseSensitive(std::string_view const mainText, std::string_view const stringToSearch);
+void copyBeforeStringAndAfterString(
+    std::string_view const mainText, std::string_view const stringToSearch, std::string& beforeString,
+    std::string& afterString, size_t const indexToStartTheSearch = 0);
 
-bool isWildcardMatch(
-    std::string_view const mainText, std::string_view const wildcard, size_t const mainTextIndex = 0,
-    size_t const wildcardIndex = 0);
-
-bool isCamelCase(std::string_view const str);
-bool isPascalCase(std::string_view const str);
-bool isSnakeCase(std::string_view const str);
-bool isKebabCase(std::string_view const str);
-bool isScreamingSnakeCase(std::string_view const str);
-// Find and replace
-bool replaceAllAndReturnIfFound(
-    std::string& mainText, std::string_view const targetStr, std::string_view const replacementStr);
-int getNumberOfNewLines(std::string_view const str);
-int getRotationValue(std::string_view const str, std::string_view const rotation);
-int getPeriodValue(std::string_view const str, std::string_view const period);
-size_t generateUniqueId(std::string_view const str);
-size_t getLevenshteinDistance(std::string_view const otherString, std::string_view const basisString);
-size_t getHammingDistance(std::string_view const string1, std::string_view const string2);
-size_t getNumberOfSubStrings(std::string_view const str);
-size_t getNumberOfSubsequences(std::string_view const str);
 // String processing
 std::string getStringWithCapitalLetters(std::string_view const str);
 std::string getStringWithFirstNonWhiteSpaceCharacterToCapital(std::string_view const str);
@@ -150,18 +113,54 @@ std::string constructFileLocator(std::string_view const file, int const lineNumb
 std::string getRandomAlphaNumericString(size_t const length);
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
 strings getArgumentsToStringInMain(int const argc, char const* const argv[]);
+int getNumberOfNewLines(std::string_view const str);
+int getRotationValue(std::string_view const str, std::string_view const rotation);
+int getPeriodValue(std::string_view const str, std::string_view const period);
+size_t generateUniqueId(std::string_view const str);
+size_t getLevenshteinDistance(std::string_view const otherString, std::string_view const basisString);
+size_t getHammingDistance(std::string_view const string1, std::string_view const string2);
+size_t getNumberOfSubStrings(std::string_view const str);
+size_t getNumberOfSubsequences(std::string_view const str);
+bool isNumber(std::string_view const str);
+bool isWhiteSpace(std::string_view const str);
+bool isNewLine(std::string_view const str);
+bool hasNewLine(std::string_view const str);
+bool isIdentifier(std::string_view const str);
+bool isOneWord(std::string_view const str);
+bool isPalindrome(std::string_view const str);
+bool isSubstring(std::string_view const mainText, std::string_view const subString);
+bool isSubsequence(std::string_view const mainText, std::string_view const subsequence);
+bool isPrefix(std::string_view const mainText, std::string_view const prefix);
+bool isSuffix(std::string_view const mainText, std::string_view const suffix);
+bool isRotation(std::string_view const mainText, std::string_view const rotation);
+bool isPeriod(std::string_view const mainText, std::string_view const period);
+bool isBorder(std::string_view const mainText, std::string_view const border);
+bool isEqualNotCaseSensitive(std::string_view const str1, std::string_view const str2);
+bool isEqualWithLowestCommonLength(std::string_view const str1, std::string_view const str2);
+bool isStringFoundCaseSensitive(std::string_view const mainText, std::string_view const stringToSearch);
+bool isStringFoundCaseSensitive(
+    std::string_view const mainText, std::string_view const stringToSearch, int& runningOffset);
+bool isStringFoundNotCaseSensitive(std::string_view const mainText, std::string_view const stringToSearch);
 
-void copyBeforeStringAndAfterString(
-    std::string_view const mainText, std::string_view const stringToSearch, std::string& beforeString,
-    std::string& afterString, size_t const indexToStartTheSearch = 0);
+bool isWildcardMatch(
+    std::string_view const mainText, std::string_view const wildcard, size_t const mainTextIndex = 0,
+    size_t const wildcardIndex = 0);
 
+bool isCamelCase(std::string_view const str);
+bool isPascalCase(std::string_view const str);
+bool isSnakeCase(std::string_view const str);
+bool isKebabCase(std::string_view const str);
+bool isScreamingSnakeCase(std::string_view const str);
+// Find and replace
+bool replaceAllAndReturnIfFound(
+    std::string& mainText, std::string_view const targetStr, std::string_view const replacementStr);
 template <SplitStringType splitStringType>
 void splitToStrings(strings& listOfStrings, std::string_view const mainText, std::string_view const delimiters);
-std::string combineStrings(strings const& strings, std::string_view const delimiters);
 void splitLinesToAchieveTargetLength(
     strings& listOfStrings, std::string_view const mainText, size_t const targetLength);
 void splitToStringsUsingASeriesOfDelimeters(
     strings& listOfStrings, std::string_view const mainText, strings const& seriesOfDelimiters);
+std::string combineStrings(strings const& strings, std::string_view const delimiters);
 
 // basic_string variants
 template <typename StringType>

@@ -77,11 +77,6 @@ public:
     }
 
 private:
-    Code readOneCodeword(AlbaStreamBitReader& reader) {
-        std::bitset<CODE_WORD_WIDTH> bitsetCodeword(reader.readBitsetData<CODE_WORD_WIDTH>(CODE_WORD_WIDTH - 1, 0));
-        return static_cast<Code>(bitsetCodeword.to_ullong());
-    }
-
     void initializeCodeTableWithAllSingleCharacters(SymbolTableUsingTrie& codeTrie) {
         for (Code c = 0; c < RADIX; ++c) {
             codeTrie.put(std::string() + static_cast<char>(c), c);
@@ -98,6 +93,11 @@ private:
     void writeCode(AlbaStreamBitWriter& writer, Code const& code) {
         std::bitset<CODE_WORD_WIDTH> bitsetToWrite(code);
         writer.writeBitsetData<CODE_WORD_WIDTH>(bitsetToWrite, CODE_WORD_WIDTH - 1, 0);
+    }
+
+    Code readOneCodeword(AlbaStreamBitReader& reader) {
+        std::bitset<CODE_WORD_WIDTH> bitsetCodeword(reader.readBitsetData<CODE_WORD_WIDTH>(CODE_WORD_WIDTH - 1, 0));
+        return static_cast<Code>(bitsetCodeword.to_ullong());
     }
 };
 

@@ -17,6 +17,7 @@ bool EllipticCone::operator==(EllipticCone const& ellipticCone) const {
 }
 
 bool EllipticCone::operator!=(EllipticCone const& ellipticCone) const { return !((*this) == ellipticCone); }
+Point EllipticCone::getCenter() const { return m_center; }
 double EllipticCone::getAValue() const { return m_aValue; }
 double EllipticCone::getBValue() const { return m_bValue; }
 double EllipticCone::getCValue() const { return m_cValue; }
@@ -38,8 +39,6 @@ double EllipticCone::calculateZFromXAndY(double const x, double const y, double 
                m_cValue +
            m_center.getZ();
 }
-
-Point EllipticCone::getCenter() const { return m_center; }
 
 ostream& operator<<(ostream& out, EllipticCone const& ellipticCone) {
     out << "(center: " << ellipticCone.m_center << " a: " << ellipticCone.m_aValue << " b: " << ellipticCone.m_bValue

@@ -34,14 +34,7 @@ public:
         }
     }
 
-    [[nodiscard]] bool isFileStreamOpened() const {
-        bool isOpened = false;
-        if (m_blockFileHandler) {
-            isOpened = m_blockFileHandler->isFileStreamOpened();
-        }
-        return isOpened;
-    }
-
+    [[nodiscard]] DataBlockType getBlockType() const { return m_blockType; }
     [[nodiscard]] int getBlockId() const { return m_blockId; }
     [[nodiscard]] int getNumberOfObjects() const { return m_numberOfObjects; }
 
@@ -53,7 +46,14 @@ public:
         return numberOfObjectsInMemory;
     }
 
-    [[nodiscard]] DataBlockType getBlockType() const { return m_blockType; }
+    [[nodiscard]] bool isFileStreamOpened() const {
+        bool isOpened = false;
+        if (m_blockFileHandler) {
+            isOpened = m_blockFileHandler->isFileStreamOpened();
+        }
+        return isOpened;
+    }
+
     ObjectToSort getLowestObject() const { return m_lowestValue; }
 
     void add(ObjectToSort const& objectToSort) {

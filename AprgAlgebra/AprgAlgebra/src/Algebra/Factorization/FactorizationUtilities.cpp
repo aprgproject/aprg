@@ -16,6 +16,24 @@ using namespace std;
 
 namespace alba::algebra::Factorization {
 
+void simplifyThenEmplaceBackIfPolynomialIsNotEmpty(Polynomials& polynomials, Polynomial const& polynomial) {
+    Polynomial simplifiedPolynomial(polynomial);
+    simplifiedPolynomial.simplify();
+    emplaceBackIfPolynomialIsNotEmpty(polynomials, simplifiedPolynomial);
+}
+
+void emplaceBackIfPolynomialIsNotEmpty(Polynomials& polynomials, Polynomial const& polynomial) {
+    if (!polynomial.isEmpty()) {
+        polynomials.emplace_back(polynomial);
+    }
+}
+
+void simplifyAndEmplaceBackPolynomialIfListIsEmpty(Polynomials& existingPolynomials, Polynomial const& polynomial) {
+    if (existingPolynomials.empty()) {
+        simplifyThenEmplaceBackIfPolynomialIsNotEmpty(existingPolynomials, polynomial);
+    }
+}
+
 bool areExponentsDivisible(Monomial const& monomial, int const divisor) {
     bool result(true);
     for (auto const& [variableName, exponent] : monomial.getVariablesToExponentsMap()) {
@@ -82,24 +100,6 @@ bool IsEmptyOrContainConstantsOrOneNonConstant(Polynomials const& polynomials) {
         }
     }
     return result;
-}
-
-void simplifyThenEmplaceBackIfPolynomialIsNotEmpty(Polynomials& polynomials, Polynomial const& polynomial) {
-    Polynomial simplifiedPolynomial(polynomial);
-    simplifiedPolynomial.simplify();
-    emplaceBackIfPolynomialIsNotEmpty(polynomials, simplifiedPolynomial);
-}
-
-void emplaceBackIfPolynomialIsNotEmpty(Polynomials& polynomials, Polynomial const& polynomial) {
-    if (!polynomial.isEmpty()) {
-        polynomials.emplace_back(polynomial);
-    }
-}
-
-void simplifyAndEmplaceBackPolynomialIfListIsEmpty(Polynomials& existingPolynomials, Polynomial const& polynomial) {
-    if (existingPolynomials.empty()) {
-        simplifyThenEmplaceBackIfPolynomialIsNotEmpty(existingPolynomials, polynomial);
-    }
 }
 
 }  // namespace alba::algebra::Factorization

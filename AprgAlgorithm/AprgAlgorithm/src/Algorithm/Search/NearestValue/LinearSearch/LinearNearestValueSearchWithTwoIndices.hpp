@@ -23,15 +23,6 @@ public:
 
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    Value getNearestValue(Value const& target) {
-        Value result{};
-        Index selectedIndex(getIndexOfNearestValue(target));
-        if (selectedIndex != INVALID_INDEX) {
-            result = m_values[selectedIndex];
-        }
-        return result;
-    }
-
     Index getIndexOfNearestValue(Value const& target) {
         Index result(INVALID_INDEX);
         if (!m_values.empty()) {
@@ -61,6 +52,15 @@ public:
                     break;
                 }
             }
+        }
+        return result;
+    }
+
+    Value getNearestValue(Value const& target) {
+        Value result{};
+        Index selectedIndex(getIndexOfNearestValue(target));
+        if (selectedIndex != INVALID_INDEX) {
+            result = m_values[selectedIndex];
         }
         return result;
     }

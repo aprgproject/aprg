@@ -55,6 +55,7 @@ TEST(AlbaDebugTest, ManipulateOutputStreamsWorks) {
 }
 
 namespace {
+
 class SampleClass {
 public:
     SampleClass(int const parameter1, int const parameter2) : m_parameter1(parameter1), m_parameter2(parameter2) {}
@@ -69,6 +70,7 @@ private:
     int m_parameter1;
     int m_parameter2;
 };
+
 }  // namespace
 
 TEST(AlbaDebugTest, DebugClassOutputOperatorsWorks) {

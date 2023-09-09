@@ -10,30 +10,6 @@ StabilityCheckObject::StabilityCheckObject() : m_visiblePart(0), m_notVisiblePar
 StabilityCheckObject::StabilityCheckObject(char const visiblePart, int const notVisiblePart)
     : m_visiblePart(visiblePart), m_notVisiblePart(notVisiblePart) {}
 
-bool StabilityCheckObject::operator==(StabilityCheckObject const& object) const {
-    return m_visiblePart == object.m_visiblePart;
-}
-
-bool StabilityCheckObject::operator!=(StabilityCheckObject const& object) const { return !operator==(object); }
-
-bool StabilityCheckObject::operator<(StabilityCheckObject const& object) const {
-    return m_visiblePart < object.m_visiblePart;
-}
-
-bool StabilityCheckObject::operator>(StabilityCheckObject const& object) const {
-    return m_visiblePart > object.m_visiblePart;
-}
-
-bool StabilityCheckObject::operator<=(StabilityCheckObject const& object) const {
-    return m_visiblePart <= object.m_visiblePart;
-}
-
-bool StabilityCheckObject::operator>=(StabilityCheckObject const& object) const {
-    return m_visiblePart >= object.m_visiblePart;
-}
-
-double StabilityCheckObject::operator*(double const multiplier) const { return m_visiblePart * multiplier; }
-
 StabilityCheckObject StabilityCheckObject::operator+(StabilityCheckObject const& second) const {
     return {static_cast<char>(m_visiblePart + second.m_visiblePart), 0};
 }
@@ -66,16 +42,40 @@ StabilityCheckObject StabilityCheckObject::operator/(int const second) const {
     return {static_cast<char>(m_visiblePart / second), m_notVisiblePart};
 }
 
+double StabilityCheckObject::operator*(double const multiplier) const { return m_visiblePart * multiplier; }
+
+bool StabilityCheckObject::operator==(StabilityCheckObject const& object) const {
+    return m_visiblePart == object.m_visiblePart;
+}
+
+bool StabilityCheckObject::operator!=(StabilityCheckObject const& object) const { return !operator==(object); }
+
+bool StabilityCheckObject::operator<(StabilityCheckObject const& object) const {
+    return m_visiblePart < object.m_visiblePart;
+}
+
+bool StabilityCheckObject::operator>(StabilityCheckObject const& object) const {
+    return m_visiblePart > object.m_visiblePart;
+}
+
+bool StabilityCheckObject::operator<=(StabilityCheckObject const& object) const {
+    return m_visiblePart <= object.m_visiblePart;
+}
+
+bool StabilityCheckObject::operator>=(StabilityCheckObject const& object) const {
+    return m_visiblePart >= object.m_visiblePart;
+}
+
 char StabilityCheckObject::getVisiblePart() const { return m_visiblePart; }
 int StabilityCheckObject::getNotVisiblePart() const { return m_notVisiblePart; }
-
-double operator/(double const dividend, StabilityCheckObject const& divisor) {
-    return dividend / divisor.m_visiblePart;
-}
 
 ostream& operator<<(ostream& out, StabilityCheckObject const& object) {
     out << "(" << object.m_visiblePart << object.m_notVisiblePart << ")";
     return out;
+}
+
+double operator/(double const dividend, StabilityCheckObject const& divisor) {
+    return dividend / divisor.m_visiblePart;
 }
 
 bool areObjectsEqualOnVisibleAndNotVisiblePart(

@@ -22,12 +22,12 @@ public:
     using Coordinates = Game::Coordinates;
     using GameIndexAndCoordinatePair = std::pair<UnsignedInteger, Coordinate>;
     [[nodiscard]] bool hasNoMoves() const;
-    UnsignedInteger getOverallGrundyNumber();
-    GameState getGameState();
-    GameIndexAndCoordinatePair getOptimalNextGameAndCoordinate();
-    std::string getString();
     void setCoordinateAtGame(UnsignedInteger const gameIndex, Coordinate const& newCoordinate);
     void addGameWithMaze(BooleanMatrix const& isBlockedMatrix, Coordinate const& startingCoordinate);
+    GameIndexAndCoordinatePair getOptimalNextGameAndCoordinate();
+    GameState getGameState();
+    UnsignedInteger getOverallGrundyNumber();
+    std::string getString();
 
 private:
     UnsignedInteger getCombinedGrundyNumber();

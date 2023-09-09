@@ -57,13 +57,6 @@ bool Function::operator<(Function const& second) const {
     return result;
 }
 
-bool Function::isSimplified() const { return m_isSimplified; }
-string Function::getFunctionName() const { return m_functionName; }
-
-string Function::getDebugString() const {
-    return m_functionName + "(" + getTermConstReferenceFromBaseTerm(getInputTerm()).getDebugString() + ")";
-}
-
 AlbaNumber Function::performFunctionAndReturnResultIfPossible() const {
     AlbaNumber result;
     Term const& term(getTermConstReferenceFromBaseTerm(getInputTerm()));
@@ -78,11 +71,13 @@ BaseTerm const& Function::getInputTerm() const {
 }
 
 Function::EvaluationFunction const& Function::getEvaluationFunction() const { return m_evaluationFunction; }
+string Function::getFunctionName() const { return m_functionName; }
 
-BaseTerm& Function::getInputTermReference() {
-    clearSimplifiedFlag();
-    return getBaseTermReferenceFromUniquePointer(m_inputTermPointer);
+string Function::getDebugString() const {
+    return m_functionName + "(" + getTermConstReferenceFromBaseTerm(getInputTerm()).getDebugString() + ")";
 }
+
+bool Function::isSimplified() const { return m_isSimplified; }
 
 void Function::simplify() {
     if (!m_isSimplified) {
@@ -100,6 +95,11 @@ void Function::clearAllInnerSimplifiedFlags() {
     Term& term(getTermReferenceFromUniquePointer(m_inputTermPointer));
     term.clearAllInnerSimplifiedFlags();
     clearSimplifiedFlag();
+}
+
+BaseTerm& Function::getInputTermReference() {
+    clearSimplifiedFlag();
+    return getBaseTermReferenceFromUniquePointer(m_inputTermPointer);
 }
 
 ostream& operator<<(ostream& out, Function const& functionObject) {

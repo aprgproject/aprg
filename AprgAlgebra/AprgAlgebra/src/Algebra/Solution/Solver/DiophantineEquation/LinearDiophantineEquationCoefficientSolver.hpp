@@ -12,12 +12,12 @@ public:
     enum class SolutionStatus { Unknown, CannotBeSolved, InfiniteSolutions, NoSolution, Solved };
 
     LinearDiophantineEquationCoefficientSolver(AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c);
-    [[nodiscard]] bool isSolved() const;
-    [[nodiscard]] SolutionStatus getSolutionStatus() const;
     [[nodiscard]] Integer getX() const;
     [[nodiscard]] Integer getY() const;
     [[nodiscard]] Integer getAnotherXValue(Integer const muliplier) const;
     [[nodiscard]] Integer getAnotherYValue(Integer const muliplier) const;
+    [[nodiscard]] SolutionStatus getSolutionStatus() const;
+    [[nodiscard]] bool isSolved() const;
 
 private:
     void solve(AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c);

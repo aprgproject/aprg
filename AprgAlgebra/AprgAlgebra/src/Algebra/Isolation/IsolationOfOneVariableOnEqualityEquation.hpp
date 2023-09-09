@@ -7,20 +7,16 @@ namespace alba::algebra {
 class IsolationOfOneVariableOnEqualityEquation {
 public:
     explicit IsolationOfOneVariableOnEqualityEquation(Equation const& equation);
-    [[nodiscard]] bool canBeIsolated(std::string const& variableName) const;
     [[nodiscard]] AlbaNumber getIdenticalExponentForVariableIfPossible(std::string const& variableName) const;
-    [[nodiscard]] Term getEquivalentTermByIsolatingAVariable(std::string const& variableName) const;
     [[nodiscard]] Equation isolateTermWithVariableOnLeftSideOfEquation(std::string const& variableName) const;
     [[nodiscard]] Equation isolateTermWithVariableOnRightSideOfEquation(std::string const& variableName) const;
+    [[nodiscard]] Term getEquivalentTermByIsolatingAVariable(std::string const& variableName) const;
+    [[nodiscard]] bool canBeIsolated(std::string const& variableName) const;
     void isolateTermWithVariable(
         std::string const& variableName, Term& termWithVariable, Term& termWithWithoutVariable) const;
     void setEquation(Equation const& equation);
 
 private:
-    static bool canBeIsolatedBasedOnExponent(AlbaNumber const& identicalExponentForVariable);
-    static AlbaNumber getIdenticalExponentForVariableIfPossible(
-        std::string const& variableName, Polynomial const& polynomial);
-
     static void isolateTermWithVariable(
         std::string const& variableName, Polynomial const& polynomial, Term& termWithVariable,
         Term& termWithWithoutVariable);
@@ -31,6 +27,9 @@ private:
 
     static void simplifyForIsolation(Term& term);
     static void simplifyForIsolation(Expression& expression);
+    static AlbaNumber getIdenticalExponentForVariableIfPossible(
+        std::string const& variableName, Polynomial const& polynomial);
+    static bool canBeIsolatedBasedOnExponent(AlbaNumber const& identicalExponentForVariable);
     Term m_simplifiedLeftSideTerm;
 };
 

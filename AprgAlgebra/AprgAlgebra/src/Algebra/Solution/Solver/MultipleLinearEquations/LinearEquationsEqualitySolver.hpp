@@ -14,7 +14,6 @@ public:
     MultipleVariableSolutionSet calculateSolutionAndReturnSolutionSet(Polynomials const& polynomials);
 
 private:
-    static bool areExponentsEqualToOneAndZero(AlbaNumbersSet const& exponents);
     static void setMatrixCoefficients(
         NumberMatrix& coefficientsMatrix, VariableNamesSet const& variableNames, Polynomials const& polynomials);
 
@@ -22,6 +21,7 @@ private:
         MultipleVariableSolutionSet& solutionSet, NumberMatrix const& coefficientsMatrix,
         VariableNamesSet const& variables);
 
+    static bool areExponentsEqualToOneAndZero(AlbaNumbersSet const& exponents);
     void calculateSolution(MultipleVariableSolutionSet& solutionSet, Equations const& equations);
     void calculateSolution(MultipleVariableSolutionSet& solutionSet, Polynomials const& polynomials);
 };

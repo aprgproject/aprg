@@ -35,10 +35,10 @@ class Dsp {
 public:
     explicit Dsp(DspDetails const& dspDetails);
     Dsp();
-    [[nodiscard]] bool isEmpty() const;
-    [[nodiscard]] bool hasEmergencyCalls() const;
-    [[nodiscard]] bool hasFreeDli() const;
-    [[nodiscard]] bool isNbicAllocated() const;
+    [[nodiscard]] DspMode getMode() const;
+    [[nodiscard]] NyquistType getNyquistType() const;
+    [[nodiscard]] std::string getModeString() const;
+    [[nodiscard]] std::string getNbicString() const;
     [[nodiscard]] unsigned int getAddress() const;
     [[nodiscard]] unsigned int getFspAddress() const;
     [[nodiscard]] unsigned int getLcgId() const;
@@ -49,16 +49,16 @@ public:
     [[nodiscard]] unsigned int getNumberOfHsRachCfs() const;
     [[nodiscard]] unsigned int getOrderCountOfCfAllocation() const;
     [[nodiscard]] unsigned int getDliPool() const;
-    [[nodiscard]] DspMode getMode() const;
-    [[nodiscard]] std::string getModeString() const;
-    [[nodiscard]] std::string getNbicString() const;
-    [[nodiscard]] NyquistType getNyquistType() const;
-    DspDetails& getDspDetailsReference();
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] bool hasEmergencyCalls() const;
+    [[nodiscard]] bool hasFreeDli() const;
+    [[nodiscard]] bool isNbicAllocated() const;
     void setMode(DspMode const mode);
     void setNumberOfUsers(unsigned int const numberOfUsers);
     void setLcgId(unsigned int const lcgId);
     void setDliPool(unsigned int const dliPool);
     void setIsNbicAllocated(bool const isNbicAllocated);
+    DspDetails& getDspDetailsReference();
 
 private:
     DspDetails m_dspDetails;

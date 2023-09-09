@@ -9,8 +9,8 @@ namespace alba::AprgBitmap {
 class PenPoints {
 public:
     using PenPointsSet = std::set<BitmapXY>;
-    [[nodiscard]] bool isPenPoint(BitmapXY const& penPoint) const;
     [[nodiscard]] PenPointsSet const& getPenPoints() const;
+    [[nodiscard]] bool isPenPoint(BitmapXY const& penPoint) const;
     void addAsPenPoint(BitmapXY const& penPoint);
     void addAsPenPoints(BitmapXYs const& bitmapPoints);
     void removePenPoint(BitmapXY const& penPoint);

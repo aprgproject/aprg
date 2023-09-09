@@ -60,26 +60,6 @@ AlbaCropFile::LocationsInFile AlbaCropFile::getLocationsInFile(
     return locations;
 }
 
-double AlbaCropFile::getLocationOfPrioritizedPrint(string const& inputFilePath) {
-    double foundLocation(-1);
-    ifstream inputFileStream(inputFilePath);
-    AlbaFileReader fileReader(inputFileStream);
-    double sizeOfFile = fileReader.getFileSize();
-    while (fileReader.isNotFinished()) {
-        double currentLocation = fileReader.getCurrentLocation();
-        string lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
-        if (m_prioritizedLineEvaluator.evaluate(lineInFile)) {
-            cout << "CropFile: Found the prioritized line in input file. Line: " << lineInFile << "\n";
-            foundLocation = currentLocation;
-            break;
-        }
-        if (fileReader.isNotFinished()) {
-            updateAfterOneIteration(fileReader.getCurrentLocation() * 50 / sizeOfFile);
-        }
-    }
-    return foundLocation;
-}
-
 void AlbaCropFile::performCropForFile(
     string const& inputFilePath, string const& outputFilePath, double const foundLocation) {
     ifstream inputFileStream(inputFilePath);
@@ -110,6 +90,26 @@ void AlbaCropFile::updateAfterOneIteration(double const percentage) {
     if (m_updateFunctionAfterOneIterationOptional) {
         m_updateFunctionAfterOneIterationOptional.value()(percentage);
     }
+}
+
+double AlbaCropFile::getLocationOfPrioritizedPrint(string const& inputFilePath) {
+    double foundLocation(-1);
+    ifstream inputFileStream(inputFilePath);
+    AlbaFileReader fileReader(inputFileStream);
+    double sizeOfFile = fileReader.getFileSize();
+    while (fileReader.isNotFinished()) {
+        double currentLocation = fileReader.getCurrentLocation();
+        string lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
+        if (m_prioritizedLineEvaluator.evaluate(lineInFile)) {
+            cout << "CropFile: Found the prioritized line in input file. Line: " << lineInFile << "\n";
+            foundLocation = currentLocation;
+            break;
+        }
+        if (fileReader.isNotFinished()) {
+            updateAfterOneIteration(fileReader.getCurrentLocation() * 50 / sizeOfFile);
+        }
+    }
+    return foundLocation;
 }
 
 }  // namespace alba

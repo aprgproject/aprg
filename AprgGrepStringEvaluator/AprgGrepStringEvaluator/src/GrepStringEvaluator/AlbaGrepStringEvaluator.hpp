@@ -26,14 +26,14 @@ class AlbaGrepStringEvaluator {
 
 public:
     explicit AlbaGrepStringEvaluator(std::string const& condition);
-    [[nodiscard]] bool isInvalid() const;
     [[nodiscard]] std::string getErrorMessage() const;
+    [[nodiscard]] bool isInvalid() const;
     bool evaluate(std::string const& stringToEvaluate);
 
 private:
+    static char convertTildeToExclamationPointIfNeeded(char const character);
     static bool isOperator(char const character);
     static bool isParenthesis(char const character);
-    static char convertTildeToExclamationPointIfNeeded(char const character);
     [[nodiscard]] bool isEvaluationPossible() const;
     void extractTokens(std::string const& condition);
     void extractTokensWhileOnString(bool& isOnString, std::string& stringToBuild, char const& currentCharacter);

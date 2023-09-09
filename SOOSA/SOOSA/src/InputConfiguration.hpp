@@ -17,17 +17,17 @@ struct FormDetails {
 class InputConfiguration {
 public:
     InputConfiguration();
-    [[nodiscard]] int getNumberOfColumns() const;
-    [[nodiscard]] int getNumberOfQuestions() const;
-    [[nodiscard]] int getNumberOfQuestionsAtColumn(int const column) const;
-    [[nodiscard]] int getQuestionIndexInColumn(int const columnNumber, int const questionOffsetInColumn) const;
-    [[nodiscard]] int getMinimumSatisfactoryScore() const;
-    [[nodiscard]] double getDischarge() const;
     [[nodiscard]] std::string getQuestionAt(int const questionIndex) const;
     [[nodiscard]] std::string getFormDetailsTitle() const;
     [[nodiscard]] std::string getPath() const;
     [[nodiscard]] std::string getArea() const;
     [[nodiscard]] std::string getPeriod() const;
+    [[nodiscard]] double getDischarge() const;
+    [[nodiscard]] int getNumberOfColumns() const;
+    [[nodiscard]] int getNumberOfQuestions() const;
+    [[nodiscard]] int getNumberOfQuestionsAtColumn(int const column) const;
+    [[nodiscard]] int getQuestionIndexInColumn(int const columnNumber, int const questionOffsetInColumn) const;
+    [[nodiscard]] int getMinimumSatisfactoryScore() const;
     void setPath(std::string const& path);
     void setMainParameters(
         std::string const& area, std::string const& period, double const discharge, int const minimumSatisfactoryScore);

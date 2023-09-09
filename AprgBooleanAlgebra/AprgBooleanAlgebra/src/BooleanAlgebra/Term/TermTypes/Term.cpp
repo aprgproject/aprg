@@ -57,6 +57,12 @@ Term& Term::operator=(Term const& term) {
     return *this;
 }
 
+Term Term::operator~() const {
+    Term result(*this);
+    result.negate();
+    return result;
+}
+
 bool Term::operator==(Term const& second) const {
     bool result(false);
     if (m_type == second.m_type) {
@@ -97,40 +103,16 @@ bool Term::operator<(Term const& second) const {
     return result;
 }
 
-Term Term::operator~() const {
-    Term result(*this);
-    result.negate();
-    return result;
-}
-
-bool Term::isEmpty() const {
-    bool result(false);
-    if (m_type == TermType::Empty) {
-        result = true;
-    } else if (m_type == TermType::Expression) {
-        result = getExpressionConstReference().isEmpty();
-    }
-    return result;
-}
-
-bool Term::isConstant() const { return TermType::Constant == m_type; }
-bool Term::isVariableTerm() const { return TermType::VariableTerm == m_type; }
-bool Term::isOperator() const { return TermType::Operator == m_type; }
-bool Term::isExpression() const { return TermType::Expression == m_type; }
-bool Term::isSimplified() const { return m_isSimplified; }
-bool Term::getBooleanValue() const { return getConstantConstReference().getBooleanValue(); }
-TermType Term::getTermType() const { return m_type; }
-
 Constant const& Term::getConstantConstReference() const {
     assert(m_type == TermType::Constant);
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     return *static_cast<Constant const*>(m_baseTermDataPointer.get());
 }
 
-VariableTerm const& Term::getVariableTermConstReference() const {
-    assert(m_type == TermType::VariableTerm);
+Expression const& Term::getExpressionConstReference() const {
+    assert((m_type == TermType::Expression));
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<VariableTerm const*>(m_baseTermDataPointer.get());
+    return *static_cast<Expression const*>(m_baseTermDataPointer.get());
 }
 
 Operator const& Term::getOperatorConstReference() const {
@@ -139,10 +121,12 @@ Operator const& Term::getOperatorConstReference() const {
     return *static_cast<Operator const*>(m_baseTermDataPointer.get());
 }
 
-Expression const& Term::getExpressionConstReference() const {
-    assert((m_type == TermType::Expression));
+TermType Term::getTermType() const { return m_type; }
+
+VariableTerm const& Term::getVariableTermConstReference() const {
+    assert(m_type == TermType::VariableTerm);
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<Expression const*>(m_baseTermDataPointer.get());
+    return *static_cast<VariableTerm const*>(m_baseTermDataPointer.get());
 }
 
 string Term::getDebugString() const {
@@ -170,37 +154,22 @@ string Term::getDebugString() const {
     return ss.str();
 }
 
-Constant& Term::getConstantReference() {
-    clearSimplifiedFlag();
-    assert(m_type == TermType::Constant);
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<Constant*>(m_baseTermDataPointer.get());
+bool Term::isEmpty() const {
+    bool result(false);
+    if (m_type == TermType::Empty) {
+        result = true;
+    } else if (m_type == TermType::Expression) {
+        result = getExpressionConstReference().isEmpty();
+    }
+    return result;
 }
 
-VariableTerm& Term::getVariableTermReference() {
-    clearSimplifiedFlag();
-    assert(m_type == TermType::VariableTerm);
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<VariableTerm*>(m_baseTermDataPointer.get());
-}
-
-Operator& Term::getOperatorReference() {
-    clearSimplifiedFlag();
-    assert(m_type == TermType::Operator);
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<Operator*>(m_baseTermDataPointer.get());
-}
-
-Expression& Term::getExpressionReference() {
-    clearSimplifiedFlag();
-    assert((m_type == TermType::Expression));
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return *static_cast<Expression*>(m_baseTermDataPointer.get());
-}
-
-BaseTermUniquePointer Term::createBasePointerByMove() {
-    return static_cast<BaseTermUniquePointer>(make_unique<Term>(m_type, m_isSimplified, move(m_baseTermDataPointer)));
-}
+bool Term::isConstant() const { return TermType::Constant == m_type; }
+bool Term::isVariableTerm() const { return TermType::VariableTerm == m_type; }
+bool Term::isOperator() const { return TermType::Operator == m_type; }
+bool Term::isExpression() const { return TermType::Expression == m_type; }
+bool Term::isSimplified() const { return m_isSimplified; }
+bool Term::getBooleanValue() const { return getConstantConstReference().getBooleanValue(); }
 
 void Term::clear() {
     m_type = TermType::Empty;
@@ -251,6 +220,38 @@ void Term::clearAllInnerSimplifiedFlags() {
         getExpressionReference().clearAllInnerSimplifiedFlags();
     }
     clearSimplifiedFlag();
+}
+
+BaseTermUniquePointer Term::createBasePointerByMove() {
+    return static_cast<BaseTermUniquePointer>(make_unique<Term>(m_type, m_isSimplified, move(m_baseTermDataPointer)));
+}
+
+Constant& Term::getConstantReference() {
+    clearSimplifiedFlag();
+    assert(m_type == TermType::Constant);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return *static_cast<Constant*>(m_baseTermDataPointer.get());
+}
+
+Expression& Term::getExpressionReference() {
+    clearSimplifiedFlag();
+    assert((m_type == TermType::Expression));
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return *static_cast<Expression*>(m_baseTermDataPointer.get());
+}
+
+Operator& Term::getOperatorReference() {
+    clearSimplifiedFlag();
+    assert(m_type == TermType::Operator);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return *static_cast<Operator*>(m_baseTermDataPointer.get());
+}
+
+VariableTerm& Term::getVariableTermReference() {
+    clearSimplifiedFlag();
+    assert(m_type == TermType::VariableTerm);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    return *static_cast<VariableTerm*>(m_baseTermDataPointer.get());
 }
 
 Term::BaseTermDataPointer Term::createANewPointerFrom(Term const& term) {

@@ -21,16 +21,16 @@ public:
     using SticksToGrundyNumberMap = std::map<UnsignedInteger, UnsignedInteger>;
     using HeapIndexAndFirstPileAndSecondPile = std::tuple<UnsignedInteger, UnsignedInteger, UnsignedInteger>;
     explicit GrundyGame(UnsignedInteger const totalNumberOfSticks);
-    [[nodiscard]] bool hasNoMoves() const;
     [[nodiscard]] StickHeaps const& getStickHeaps() const;
-    UnsignedInteger getOverallGrundyNumber();
+    [[nodiscard]] bool hasNoMoves() const;
+    void split(HeapIndexAndFirstPileAndSecondPile const& heapIndexAndFirstPileAndSecondPile);
     GameState getGameState();
     HeapIndexAndFirstPileAndSecondPile getOptimalWayToSplit();
-    void split(HeapIndexAndFirstPileAndSecondPile const& heapIndexAndFirstPileAndSecondPile);
+    UnsignedInteger getOverallGrundyNumber();
 
 private:
-    UnsignedInteger getGrundyNumberWithNumberOfSticks(UnsignedInteger const numberOfSticks);
     SetOfUnsignedIntegers getNextGrundyNumbersWithNumberOfSticks(UnsignedInteger const numberOfSticks);
+    UnsignedInteger getGrundyNumberWithNumberOfSticks(UnsignedInteger const numberOfSticks);
     StickHeaps m_stickHeaps;
     SticksToGrundyNumberMap m_sticksToGrundyNumberMap;  // dynamic programming
 };

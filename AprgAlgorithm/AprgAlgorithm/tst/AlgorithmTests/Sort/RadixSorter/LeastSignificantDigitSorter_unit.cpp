@@ -10,6 +10,7 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 constexpr int MAX_NUMBER_OF_NIBBLES = 16;
 constexpr int MAX_NUMBER_OF_CHARACTERS = 256;
 using Characters = vector<char>;
@@ -21,25 +22,16 @@ using SmallIntegerSorter = LeastSignificantDigitSorter<Integers, MAX_NUMBER_OF_N
 using StringsSorter = LeastSignificantDigitSorter<Strings, MAX_NUMBER_OF_CHARACTERS>;
 using StabilityCheckObjectsSorter = LeastSignificantDigitSorter<StabilityCheckObjects, MAX_NUMBER_OF_NIBBLES>;
 
-CharactersSorter::GetNumberOfDigitsFunction getNumberOfNibblesForCharacter = [](Characters const&) -> int { return 2; };
 CharactersSorter::GetDigitAtFunction getNibbleAtForCharacter = [](char const& value,
                                                                   int const mostSignificantDigitIndex) -> int {
     return (value >> ((1 - mostSignificantDigitIndex) * 4)) & 0xF;
 };
 
-SmallIntegerSorter::GetNumberOfDigitsFunction getNumberOfNibblesForInteger = [](Integers const&) -> int { return 8; };
 SmallIntegerSorter::GetDigitAtFunction getNibbleAtForSmallInteger = [](int const& value,
                                                                        int const mostSignificantDigitIndex) -> int {
     return ((value + 10) >> ((7 - mostSignificantDigitIndex) * 4)) & 0xF;
 };
 
-StringsSorter::GetNumberOfDigitsFunction getNumberOfCharactersForStrings = [](Strings const& strings) -> int {
-    int maxNumberOfCharacters(0);
-    for (string const& stringObject : strings) {
-        maxNumberOfCharacters = max(maxNumberOfCharacters, static_cast<int>(stringObject.length()));
-    }
-    return maxNumberOfCharacters;
-};
 StringsSorter::GetDigitAtFunction getCharacterAtForString = [](string const& value,
                                                                int const mostSignificantDigitIndex) -> int {
     int digitValue{};
@@ -49,12 +41,25 @@ StringsSorter::GetDigitAtFunction getCharacterAtForString = [](string const& val
     return digitValue;
 };
 
-StabilityCheckObjectsSorter::GetNumberOfDigitsFunction getNumberOfNibblesForStabilityCheckObject =
-    [](StabilityCheckObjects const&) -> int { return 2; };
 StabilityCheckObjectsSorter::GetDigitAtFunction getNibbleAtForStabilityCheckObject =
     [](StabilityCheckObject const& value, int const mostSignificantDigitIndex) -> int {
     return (value.getVisiblePart() >> ((1 - mostSignificantDigitIndex) * 4)) & 0xF;
 };
+
+CharactersSorter::GetNumberOfDigitsFunction getNumberOfNibblesForCharacter = [](Characters const&) -> int { return 2; };
+SmallIntegerSorter::GetNumberOfDigitsFunction getNumberOfNibblesForInteger = [](Integers const&) -> int { return 8; };
+
+StringsSorter::GetNumberOfDigitsFunction getNumberOfCharactersForStrings = [](Strings const& strings) -> int {
+    int maxNumberOfCharacters(0);
+    for (string const& stringObject : strings) {
+        maxNumberOfCharacters = max(maxNumberOfCharacters, static_cast<int>(stringObject.length()));
+    }
+    return maxNumberOfCharacters;
+};
+
+StabilityCheckObjectsSorter::GetNumberOfDigitsFunction getNumberOfNibblesForStabilityCheckObject =
+    [](StabilityCheckObjects const&) -> int { return 2; };
+
 }  // namespace
 
 TEST(LeastSignificantDigitSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {

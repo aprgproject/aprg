@@ -10,6 +10,7 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 constexpr int MAX_NUMBER_OF_NIBBLES = 16;
 constexpr int MAX_NUMBER_OF_CHARACTERS = 256;
 using Characters = vector<char>;
@@ -20,25 +21,16 @@ using CharactersSorter = RadixSorterUsingCountingSorter<Characters, MAX_NUMBER_O
 using SmallIntegerSorter = RadixSorterUsingCountingSorter<Integers, MAX_NUMBER_OF_NIBBLES>;
 using StringsSorter = RadixSorterUsingCountingSorter<Strings, MAX_NUMBER_OF_CHARACTERS>;
 using StabilityCheckObjectsSorter = RadixSorterUsingCountingSorter<StabilityCheckObjects, MAX_NUMBER_OF_NIBBLES>;
+int s_maxNumberOfCharacters{};
 
-CharactersSorter::GetNumberOfDigitsFunction getNumberOfNibblesForCharacter = [](Characters const&) -> int { return 2; };
 CharactersSorter::GetDigitAtFunction getNibbleAtForCharacter = [](char const& value, int const digitIndex) -> int {
     return (value >> (digitIndex * 4)) & 0xF;
 };
 
-SmallIntegerSorter::GetNumberOfDigitsFunction getNumberOfNibblesForInteger = [](Integers const&) -> int { return 8; };
 SmallIntegerSorter::GetDigitAtFunction getNibbleAtForSmallInteger = [](int const& value, int const digitIndex) -> int {
     return ((value + 10) >> (digitIndex * 4)) & 0xF;
 };
 
-int s_maxNumberOfCharacters{};
-StringsSorter::GetNumberOfDigitsFunction getNumberOfCharactersForStrings = [](Strings const& strings) -> int {
-    s_maxNumberOfCharacters = 0;
-    for (string const& stringObject : strings) {
-        s_maxNumberOfCharacters = max(s_maxNumberOfCharacters, static_cast<int>(stringObject.length()));
-    }
-    return s_maxNumberOfCharacters;
-};
 StringsSorter::GetDigitAtFunction getCharacterAtForString = [](string const& value,
                                                                int const leastSignificantDigitIndex) -> int {
     int digitValue{};
@@ -51,12 +43,25 @@ StringsSorter::GetDigitAtFunction getCharacterAtForString = [](string const& val
     return digitValue;
 };
 
-StabilityCheckObjectsSorter::GetNumberOfDigitsFunction getNumberOfNibblesForStabilityCheckObject =
-    [](StabilityCheckObjects const&) -> int { return 2; };
 StabilityCheckObjectsSorter::GetDigitAtFunction getNibbleAtForStabilityCheckObject =
     [](StabilityCheckObject const& value, int const digitIndex) -> int {
     return (value.getVisiblePart() >> (digitIndex * 4)) & 0xF;
 };
+
+CharactersSorter::GetNumberOfDigitsFunction getNumberOfNibblesForCharacter = [](Characters const&) -> int { return 2; };
+SmallIntegerSorter::GetNumberOfDigitsFunction getNumberOfNibblesForInteger = [](Integers const&) -> int { return 8; };
+
+StringsSorter::GetNumberOfDigitsFunction getNumberOfCharactersForStrings = [](Strings const& strings) -> int {
+    s_maxNumberOfCharacters = 0;
+    for (string const& stringObject : strings) {
+        s_maxNumberOfCharacters = max(s_maxNumberOfCharacters, static_cast<int>(stringObject.length()));
+    }
+    return s_maxNumberOfCharacters;
+};
+
+StabilityCheckObjectsSorter::GetNumberOfDigitsFunction getNumberOfNibblesForStabilityCheckObject =
+    [](StabilityCheckObjects const&) -> int { return 2; };
+
 }  // namespace
 
 TEST(RadixSorterUsingCountingSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {

@@ -19,14 +19,14 @@ public:
     using MinMaxFunction = std::function<Value(Value const&, Value const&)>;
     PathSumInGridInRightOrDownWithDiagonalTraversal(Type const type, Grid const& inputGrid);
     static constexpr Index UNUSED_VALUE = std::numeric_limits<Index>::max();
+    [[nodiscard]] Path getBestPathUsingIterativeDP() const;
     [[nodiscard]] Value getBestPathSumUsingNaiveRecursion() const;
     [[nodiscard]] Value getBestPathSumUsingMemoizationDP() const;
     [[nodiscard]] Value getBestPathSumUsingIterativeDP() const;
-    [[nodiscard]] Path getBestPathUsingIterativeDP() const;
 
 private:
-    [[nodiscard]] Value getBestPathSumUsingNaiveRecursion(Index const x, Index const y) const;
     [[nodiscard]] Grid getPartialSumGridUsingIterativeDP() const;
+    [[nodiscard]] Value getBestPathSumUsingNaiveRecursion(Index const x, Index const y) const;
     Value getBestPathSumUsingNaiveRecursion(Grid& partialSumGrid, Index const x, Index const y) const;
     Value getBestPathSumUsingMemoizationDP(Grid& partialSumGrid, Index const x, Index const y) const;
     void initialize(Type const type);

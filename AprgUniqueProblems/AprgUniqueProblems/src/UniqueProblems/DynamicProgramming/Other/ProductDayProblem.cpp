@@ -88,12 +88,12 @@ inline ProductDayProblem::ProductBits ProductDayProblem::removeProduct(
     return productBits & ~(1 << product);
 }
 
-inline ProductDayProblem::Product ProductDayProblem::getNumberOfProducts() const {
-    return m_pricesInDayByProduct.getNumberOfRows();
-}
-
 inline ProductDayProblem::Day ProductDayProblem::getNumberOfDays() const {
     return m_pricesInDayByProduct.getNumberOfColumns();
+}
+
+inline ProductDayProblem::Product ProductDayProblem::getNumberOfProducts() const {
+    return m_pricesInDayByProduct.getNumberOfRows();
 }
 
 inline ProductDayProblem::ProductBits ProductDayProblem::getNumberOfProductsSubsets() const {

@@ -10,6 +10,22 @@ using namespace std;
 
 namespace alba::algebra::Functions {
 
+AlbaNumberPairs evaluateAndGetInputOutputPair(
+    AlbaNumbers const& numbers, string const& variableName, Function const& functionObject) {
+    AlbaNumberPairs result;
+    SubstitutionOfVariablesToValues substitution;
+    for (AlbaNumber const& number : numbers) {
+        substitution.putVariableWithValue(variableName, number);
+        Term substituteTerm(substitution.performSubstitutionTo(functionObject));
+        if (substituteTerm.isConstant()) {
+            result.emplace_back(number, substituteTerm.getAsNumber());
+        }
+    }
+    return result;
+}
+
+Term getNaturalLogarithmOfTheAbsoluteValueOfTerm(Term const& term) { return ln(abs(term)); }
+
 bool isFunctionContinuous(Function const& functionObject) {
     strings continuousFunctionNames{"abs", "sin", "cos"};
     return isFunctionNameFoundOnAList(functionObject, continuousFunctionNames);
@@ -34,21 +50,5 @@ bool isFunctionNameFoundOnAList(Function const& functionObject, strings const& n
     return any_of(
         names.cbegin(), names.cend(), [&](string const& name) { return name == functionObject.getFunctionName(); });
 }
-
-AlbaNumberPairs evaluateAndGetInputOutputPair(
-    AlbaNumbers const& numbers, string const& variableName, Function const& functionObject) {
-    AlbaNumberPairs result;
-    SubstitutionOfVariablesToValues substitution;
-    for (AlbaNumber const& number : numbers) {
-        substitution.putVariableWithValue(variableName, number);
-        Term substituteTerm(substitution.performSubstitutionTo(functionObject));
-        if (substituteTerm.isConstant()) {
-            result.emplace_back(number, substituteTerm.getAsNumber());
-        }
-    }
-    return result;
-}
-
-Term getNaturalLogarithmOfTheAbsoluteValueOfTerm(Term const& term) { return ln(abs(term)); }
 
 }  // namespace alba::algebra::Functions

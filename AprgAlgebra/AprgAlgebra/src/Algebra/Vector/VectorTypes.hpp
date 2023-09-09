@@ -7,7 +7,6 @@
 #include <Common/Math/Vector/AlbaMathVector.hpp>
 
 namespace alba::algebra {
-
 template <int SIZE>
 using MathVectorOfNumbers = AlbaMathVector<AlbaNumber, SIZE>;
 using MathVectorOfTwoNumbers = MathVectorOfNumbers<2>;
@@ -24,5 +23,4 @@ template <int SIZE>
 using MathVectorOfTerms = AlbaMathVector<Term, SIZE>;
 using MathVectorOfTwoTerms = MathVectorOfTerms<2>;
 using MathVectorOfThreeTerms = MathVectorOfTerms<3>;
-
 }  // namespace alba::algebra

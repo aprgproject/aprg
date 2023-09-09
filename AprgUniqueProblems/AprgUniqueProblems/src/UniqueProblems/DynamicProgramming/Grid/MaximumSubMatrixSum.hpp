@@ -23,8 +23,8 @@ public:
     using ValueMatrix = matrix::AlbaMatrix<Value>;
     explicit MaximumSubMatrixSum(ValueMatrix const& valueMatrix);
     static constexpr Value MIN_VALUE = std::numeric_limits<Value>::min();
-    [[nodiscard]] Value getMaximumSubMatrixSum() const;
     [[nodiscard]] SubArrayDetails getMaximumSubMatrixSumWithDetails() const;
+    [[nodiscard]] Value getMaximumSubMatrixSum() const;
 
 private:
     ValueMatrix const m_valueMatrix;

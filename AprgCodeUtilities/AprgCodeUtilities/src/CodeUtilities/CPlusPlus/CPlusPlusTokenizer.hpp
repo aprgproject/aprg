@@ -7,7 +7,6 @@ namespace alba::CodeUtilities {
 class CPlusPlusTokenizer {
 public:
     enum class ScopeType {
-
         NoScope,
         SingleLineComment,
         MultiLineComment,
@@ -16,7 +15,6 @@ public:
         CharLiteral,
         Attribute,
         WhiteSpace
-
     };
 
     explicit CPlusPlusTokenizer(Terms& terms);
@@ -24,6 +22,11 @@ public:
     void processLeftoverCode();
 
 private:
+    [[nodiscard]] ScopeType getCurrentScope() const;
+    [[nodiscard]] std::string getIndentifierAt(int const index) const;
+    [[nodiscard]] std::string getNumberAt(int const index) const;
+    [[nodiscard]] std::string getAlphaNumericUnderscoreStringAt(int const index) const;
+    [[nodiscard]] std::string getContinuousDigitsAt(int const index) const;
     [[nodiscard]] bool isNextString(std::string const& expectedString) const;
     [[nodiscard]] bool isIndentifierStartAt(int const index) const;
     [[nodiscard]] bool isNumberAt(int const index) const;
@@ -32,11 +35,18 @@ private:
     [[nodiscard]] bool isTwoCharOperatorAt(int const index) const;
     [[nodiscard]] bool isOneCharOperatorAt(int const index) const;
     [[nodiscard]] bool isWhiteSpaceAt(int const index) const;
-    [[nodiscard]] ScopeType getCurrentScope() const;
-    [[nodiscard]] std::string getIndentifierAt(int const index) const;
-    [[nodiscard]] std::string getNumberAt(int const index) const;
-    [[nodiscard]] std::string getAlphaNumericUnderscoreStringAt(int const index) const;
-    [[nodiscard]] std::string getContinuousDigitsAt(int const index) const;
+    void processCode();
+    void processScope();
+    void processInCodeScope();
+    void processInSingleLineCommentScope();
+    void processInMultiLineCommentScope();
+    void processInStringLiteralScope();
+    void processInRawStringLiteralScope();
+    void processInCharLiteralScope();
+    void processInAttributeScope();
+    void processInWhiteSpaceScope();
+    void enterScope(ScopeType const scopeType);
+    void exitScope();
     bool hasProcessedASingleLineComment();
     bool hasProcessedAMultiLineComment();
     bool hasProcessedAStringLiteral();
@@ -51,18 +61,6 @@ private:
     bool isTerminatedWhileCheckingWhiteSpace();
     bool isTerminatedWhileCheckingALiteralWithEscape(char const terminatingCharacter);
     bool isTerminatedWhileCheckingTerminatingString(std::string const& terminatingString);
-    void processCode();
-    void processScope();
-    void processInCodeScope();
-    void processInSingleLineCommentScope();
-    void processInMultiLineCommentScope();
-    void processInStringLiteralScope();
-    void processInRawStringLiteralScope();
-    void processInCharLiteralScope();
-    void processInAttributeScope();
-    void processInWhiteSpaceScope();
-    void enterScope(ScopeType const scopeType);
-    void exitScope();
     Terms& m_terms;
     int m_index{};
     std::string m_code;

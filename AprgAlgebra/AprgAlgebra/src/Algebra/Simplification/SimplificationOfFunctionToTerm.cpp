@@ -13,16 +13,6 @@ namespace alba {
 
 namespace algebra::Simplification {
 
-bool SimplificationOfFunctionToTerm::shouldSimplifyTrigonometricFunctionsToSinAndCos() {
-    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyTrigonometricFunctionsToSinAndCos;
-}
-
-bool SimplificationOfFunctionToTerm::shouldNotSimplifyLogarithmicFunctionsByReducingTheOperatorLevel() {
-    return Configuration::getInstance()
-        .getConfigurationDetails()
-        .shouldNotSimplifyLogarithmicFunctionsByReducingTheOperatorLevel;
-}
-
 Term SimplificationOfFunctionToTerm::simplifyToTerm(Function const& functionObject) {
     Term result;
     Term const& inputTerm(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
@@ -40,6 +30,16 @@ Term SimplificationOfFunctionToTerm::simplifyToTerm(Function const& functionObje
         result = Term(functionObject);
     }
     return result;
+}
+
+bool SimplificationOfFunctionToTerm::shouldSimplifyTrigonometricFunctionsToSinAndCos() {
+    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyTrigonometricFunctionsToSinAndCos;
+}
+
+bool SimplificationOfFunctionToTerm::shouldNotSimplifyLogarithmicFunctionsByReducingTheOperatorLevel() {
+    return Configuration::getInstance()
+        .getConfigurationDetails()
+        .shouldNotSimplifyLogarithmicFunctionsByReducingTheOperatorLevel;
 }
 
 Term SimplificationOfFunctionToTerm::simplifyTrigometricFunctionToExpression(Function const& functionObject) {

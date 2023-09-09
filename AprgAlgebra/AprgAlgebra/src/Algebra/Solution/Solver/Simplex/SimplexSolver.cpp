@@ -18,8 +18,6 @@ SimplexSolver::SimplexSolver(Equations const& constraints, Polynomial const& obj
     solve();
 }
 
-bool SimplexSolver::isOptimized() const { return isOptimal(m_simplexTable); }
-
 AlbaNumber SimplexSolver::getOptimizedObjectiveValue() const {
     return m_simplexTable.getEntry(m_simplexTable.getNumberOfColumns() - 1, m_simplexTable.getNumberOfRows() - 1) * -1;
 }
@@ -45,6 +43,8 @@ Equations SimplexSolver::getSolutionEquations() const {
     }
     return result;
 }
+
+bool SimplexSolver::isOptimized() const { return isOptimal(m_simplexTable); }
 
 void SimplexSolver::processConstraints(
     Equations const& constraints, Polynomials& constraintsInStandardForm,

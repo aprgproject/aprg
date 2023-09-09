@@ -12,9 +12,9 @@ public:
     using SimplexMatrix = matrix::AlbaMatrix<AlbaNumber>;
     using SimplexMatrixData = matrix::AlbaMatrixData<AlbaNumber>;
     SimplexSolver(Equations const& constraints, Polynomial const& objectiveFunction);
-    [[nodiscard]] bool isOptimized() const;
     [[nodiscard]] AlbaNumber getOptimizedObjectiveValue() const;
     [[nodiscard]] Equations getSolutionEquations() const;
+    [[nodiscard]] bool isOptimized() const;
 
 private:
     static void processConstraints(

@@ -17,14 +17,7 @@ BoardWithContext::BoardWithContext(PieceColor const& playerColor, Board const& b
     updateBoardDetails();
 }
 
-bool BoardWithContext::isPlayersKingOnCheck() const { return m_board.canBeCaptured(getPlayerKingCoordinate()); }
-bool BoardWithContext::isOpponentsKingOnCheck() const { return m_board.canBeCaptured(getOpponentsKingCoordinate()); }
-PieceColor BoardWithContext::getPlayerColor() const { return m_playerColor; }
 Board const& BoardWithContext::getBoard() const { return m_board; }
-
-string BoardWithContext::getFenString() const {
-    return constructFenString(m_board, m_playerColor, m_board.getCastlingPartOfFenString(), "-", 0, 1);
-}
 
 Coordinate BoardWithContext::getPlayerKingCoordinate() const {
     Coordinate result = {};
@@ -45,6 +38,15 @@ Coordinate BoardWithContext::getOpponentsKingCoordinate() const {
     }
     return result;
 }
+
+PieceColor BoardWithContext::getPlayerColor() const { return m_playerColor; }
+
+string BoardWithContext::getFenString() const {
+    return constructFenString(m_board, m_playerColor, m_board.getCastlingPartOfFenString(), "-", 0, 1);
+}
+
+bool BoardWithContext::isPlayersKingOnCheck() const { return m_board.canBeCaptured(getPlayerKingCoordinate()); }
+bool BoardWithContext::isOpponentsKingOnCheck() const { return m_board.canBeCaptured(getOpponentsKingCoordinate()); }
 
 void BoardWithContext::save(PieceColor const& playerColor, Board const& board) {
     m_playerColor = playerColor;

@@ -17,41 +17,6 @@ using namespace std;
 
 namespace alba::algebra::Factorization {
 
-bool isFactorizeUsingPatternsNeeded(Polynomial const& polynomial) {
-    return polynomial.getMonomials().size() == 2 && hasAMonomialWithDegreeMoreThanOneOrFractional(polynomial);
-}
-
-bool isFactorizeIncreasingAndDecreasingExponentsFormNeeded(Polynomial const& polynomial) {
-    return hasAMonomialWithDegreeMoreThanOneOrFractional(polynomial);
-}
-
-bool isFactorizeBySplittingToSmallerPolynomialsNeeded(Polynomial const& polynomial) {
-    return polynomial.getMonomials().size() >= 4 && hasAMonomialWithMultipleVariables(polynomial);
-}
-
-int getDeltaSize(Polynomials const& polynomials, int const originalSize) {
-    return static_cast<int>(polynomials.size()) - originalSize;
-}
-
-Polynomials factorizeAPolynomial(Polynomial const& polynomial) {
-    Polynomials result;
-    factorizePolynomialsAndPutToResult(result, {polynomial});
-    return result;
-}
-
-Polynomials factorizePolynomials(Polynomials const& polynomials) {
-    Polynomials result;
-    factorizePolynomialsAndPutToResult(result, polynomials);
-    return result;
-}
-
-Polynomials factorizeCommonMonomial(Polynomial const& polynomial) {
-    Polynomials result;
-    factorizeCommonMonomialIfPossible(result, polynomial);
-    simplifyAndEmplaceBackPolynomialIfListIsEmpty(result, polynomial);
-    return result;
-}
-
 void factorizeCommonMonomialIfPossible(Polynomials& result, Polynomial const& polynomial) {
     if (!isOneMonomial(polynomial)) {
         Monomial gcfMonomial(getGcfMonomialInMonomials(polynomial.getMonomials()));
@@ -154,6 +119,41 @@ void tryToFactorizeBySplittingToSmallerPolynomials(
         putFactorizedPolynomialsIfPossible(polynomialsToFactorize, factorizedPolynomials);
         deltaSize = polynomialsToFactorize.size() - originalSize;
     }
+}
+
+Polynomials factorizeAPolynomial(Polynomial const& polynomial) {
+    Polynomials result;
+    factorizePolynomialsAndPutToResult(result, {polynomial});
+    return result;
+}
+
+Polynomials factorizePolynomials(Polynomials const& polynomials) {
+    Polynomials result;
+    factorizePolynomialsAndPutToResult(result, polynomials);
+    return result;
+}
+
+Polynomials factorizeCommonMonomial(Polynomial const& polynomial) {
+    Polynomials result;
+    factorizeCommonMonomialIfPossible(result, polynomial);
+    simplifyAndEmplaceBackPolynomialIfListIsEmpty(result, polynomial);
+    return result;
+}
+
+int getDeltaSize(Polynomials const& polynomials, int const originalSize) {
+    return static_cast<int>(polynomials.size()) - originalSize;
+}
+
+bool isFactorizeUsingPatternsNeeded(Polynomial const& polynomial) {
+    return polynomial.getMonomials().size() == 2 && hasAMonomialWithDegreeMoreThanOneOrFractional(polynomial);
+}
+
+bool isFactorizeIncreasingAndDecreasingExponentsFormNeeded(Polynomial const& polynomial) {
+    return hasAMonomialWithDegreeMoreThanOneOrFractional(polynomial);
+}
+
+bool isFactorizeBySplittingToSmallerPolynomialsNeeded(Polynomial const& polynomial) {
+    return polynomial.getMonomials().size() >= 4 && hasAMonomialWithMultipleVariables(polynomial);
 }
 
 }  // namespace alba::algebra::Factorization

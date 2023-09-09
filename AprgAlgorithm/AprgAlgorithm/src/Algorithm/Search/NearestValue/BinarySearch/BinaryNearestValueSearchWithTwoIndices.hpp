@@ -41,20 +41,20 @@ public:
         return result;
     }
 
-    Value getNearestValue(Value const& target) {
-        Value result{};
-        if (!m_sortedValues.empty()) {
-            moveCloserUsingIntervalsInsideTarget(target);
-            result = m_sortedValues[getIndexOfNearestValueInBetweenTwoIndices(target)];
-        }
-        return result;
-    }
-
     Index getIndexOfNearestValue(Value const& target) {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
             moveCloserUsingIntervalsInsideTarget(target);
             result = getIndexOfNearestValueInBetweenTwoIndices(target);
+        }
+        return result;
+    }
+
+    Value getNearestValue(Value const& target) {
+        Value result{};
+        if (!m_sortedValues.empty()) {
+            moveCloserUsingIntervalsInsideTarget(target);
+            result = m_sortedValues[getIndexOfNearestValueInBetweenTwoIndices(target)];
         }
         return result;
     }

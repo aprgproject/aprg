@@ -47,6 +47,11 @@ private:
 // is responsible for the memento's safe keeping
 class CareTaker {
 public:
+    void save(Originator const& originator) {
+        std::cout << "In CareTaker, save state.\n";
+        m_history.emplace_back(originator.createMemento());
+    }
+
     Originator undoAndGetLastOriginator() {
         Originator result;
         if (!m_history.empty()) {
@@ -57,11 +62,6 @@ public:
             std::cout << "In CareTaker, Unable to undo state.\n";
         }
         return result;
-    }
-
-    void save(Originator const& originator) {
-        std::cout << "In CareTaker, save state.\n";
-        m_history.emplace_back(originator.createMemento());
     }
 
     // ...

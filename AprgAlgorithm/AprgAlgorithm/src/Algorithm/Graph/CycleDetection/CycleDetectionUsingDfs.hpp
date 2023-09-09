@@ -21,13 +21,6 @@ public:
     explicit CycleDetectionUsingDfs(BaseGraphWithVertex const& graph)
         : m_graph(graph), m_searchType(SearchType::Unknown) {}
 
-    Paths getAllCycles() {
-        initialize();
-        m_searchType = SearchType::AllCycles;
-        search();
-        return m_pathsWithCycle;
-    }
-
     Path getOneCycle() {
         initialize();
         m_searchType = SearchType::OneCycle;
@@ -39,9 +32,14 @@ public:
         return result;
     }
 
-private:
-    [[nodiscard]] bool hasACycle() const { return !m_pathsWithCycle.empty(); }
+    Paths getAllCycles() {
+        initialize();
+        m_searchType = SearchType::AllCycles;
+        search();
+        return m_pathsWithCycle;
+    }
 
+private:
     [[nodiscard]] Path getPathWithCycle(Vertex const& secondToTheLastVertex, Vertex const& lastVertex) const {
         bool isSuccessful(true);
         Path reversedPath{lastVertex};
@@ -64,6 +62,8 @@ private:
         }
         return result;
     }
+
+    [[nodiscard]] bool hasACycle() const { return !m_pathsWithCycle.empty(); }
 
     void initialize() {
         m_searchType = SearchType::Unknown;

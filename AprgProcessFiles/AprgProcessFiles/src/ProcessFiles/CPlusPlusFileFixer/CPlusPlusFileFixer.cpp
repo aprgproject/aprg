@@ -120,6 +120,12 @@ bool CPlusPlusFileFixer::isOtherLibraryHeaders(string const& header) {
     return result;
 }
 
+void CPlusPlusFileFixer::notifyIfThereAreCommentsInHeader(string const& path, string const& line) {
+    if (isStringFoundCaseSensitive(line, "//")) {
+        cout << "CHECK THIS: Header comments on:[" << path << "] in line:[" << line << "]\n";
+    }
+}
+
 bool CPlusPlusFileFixer::isLineWithALoopStart(string const& line) {
     bool result(false);
     if (isStringFoundCaseSensitive(line, "for(") || isStringFoundCaseSensitive(line, "while(")) {
@@ -172,12 +178,6 @@ bool CPlusPlusFileFixer::isQtHeader(string const& header) {
         }
     }
     return result;
-}
-
-void CPlusPlusFileFixer::notifyIfThereAreCommentsInHeader(string const& path, string const& line) {
-    if (isStringFoundCaseSensitive(line, "//")) {
-        cout << "CHECK THIS: Header comments on:[" << path << "] in line:[" << line << "]\n";
-    }
 }
 
 void CPlusPlusFileFixer::notifyIfAlbaDebugHeaderExistInProductionCode(string const& path) const {

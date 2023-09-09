@@ -17,23 +17,17 @@ class Audio {
 public:
     using AudioBuffer = std::vector<std::vector<DataType>>;
     Audio();
-    [[nodiscard]] bool isMono() const;
-    [[nodiscard]] bool isStereo() const;
+    [[nodiscard]] std::vector<DataType> const& getSamplesAtChannel(int const channelIndex) const;
+    // @Returns the length in seconds of the audio file based on the number of samples and sample rate
+    [[nodiscard]] double getLengthInSeconds() const;
     [[nodiscard]] int getSampleRate() const;
     [[nodiscard]] int getNumberOfChannels() const;
     [[nodiscard]] int getBitDepth() const;
     [[nodiscard]] int getNumberOfSamplesPerChannel() const;
-    // @Returns the length in seconds of the audio file based on the number of samples and sample rate
-    [[nodiscard]] double getLengthInSeconds() const;
-    [[nodiscard]] std::vector<DataType> const& getSamplesAtChannel(int const channelIndex) const;
+    [[nodiscard]] bool isMono() const;
+    [[nodiscard]] bool isStereo() const;
     // Prints a summary of the audio file to the console
     void printSummary() const;
-    bool load(std::string const& filePath);
-    bool save(std::string const& filePath, AudioFormat format = AudioFormat::Wave);
-    // Set the audio buffer for this Audio by copying samples from another buffer.
-    // @Returns true if the buffer was copied successfully.
-    bool setAudioBuffer(AudioBuffer& newBuffer);
-    std::vector<DataType>& getSamplesReferenceAtChannel(int const channelIndex);
     // Sets the audio buffer to a given number of channels and number of samples per channel. This will try to preserve
     // the existing audio, adding zeros to any new channels or new samples in a given channel.
     void setAudioBufferSize(int const numberOfChannels, int const numberOfSamples);
@@ -46,6 +40,12 @@ public:
     void setBitDepth(int const numberOfBitsPerSample);
     // Sets the sample rate for the audio file. If you use the save() function, this sample rate will be used
     void setSampleRate(int const newSampleRate);
+    std::vector<DataType>& getSamplesReferenceAtChannel(int const channelIndex);
+    bool load(std::string const& filePath);
+    bool save(std::string const& filePath, AudioFormat format = AudioFormat::Wave);
+    // Set the audio buffer for this Audio by copying samples from another buffer.
+    // @Returns true if the buffer was copied successfully.
+    bool setAudioBuffer(AudioBuffer& newBuffer);
     // A vector of vectors holding the audio samples for the Audio. You can
     // access the samples by channel and then by sample index, i.e:
     //      samples[channel][sampleIndex]
@@ -54,24 +54,6 @@ public:
 private:
     enum class Endianness { LittleEndian, BigEndian };
 
-    bool decodeWaveFile(std::vector<uint8_t>& dataBuffer);
-    bool decodeAiffFile(std::vector<uint8_t>& dataBuffer);
-    bool saveToWaveFile(std::string const& filePath);
-    bool saveToAiffFile(std::string const& filePath);
-    bool tenByteMatch(std::vector<uint8_t>& v1, int const startIndex1, std::vector<uint8_t>& v2, int const startIndex2);
-    bool writeDataToFile(std::vector<uint8_t>& dataBuffer, std::string const& filePath);
-    int getIndexOfString(std::vector<uint8_t> const& source, std::string const& s);
-    int getAiffSampleRate(std::vector<uint8_t>& dataBuffer, int const sampleRateStartIndex);
-    AudioFormat determineAudioFormat(std::vector<uint8_t>& dataBuffer);
-    int32_t fourBytesToInt(
-        std::vector<uint8_t> const& source, int const startIndex, Endianness endianness = Endianness::LittleEndian);
-    int16_t twoBytesToInt(
-        std::vector<uint8_t> const& source, int const startIndex, Endianness endianness = Endianness::LittleEndian);
-    DataType sixteenBitIntToSample(int16_t const sample);
-    int16_t sampleToSixteenBitInt(DataType const sample);
-    uint8_t sampleToSingleByte(DataType const sample);
-    DataType singleByteToSample(uint8_t const sample);
-    DataType clamp(DataType const value, DataType const minValue, DataType const maxValue);
     void clearAudioBuffer();
     void addSampleRateToAiffData(std::vector<uint8_t>& dataBuffer, int const sampleRate);
     void addStringToFileData(std::vector<uint8_t>& dataBuffer, std::string const& stringToCopy);
@@ -84,6 +66,24 @@ private:
         std::vector<uint8_t>& dataBuffer, int16_t const integerToCopy,
         Endianness endianness = Endianness::LittleEndian);
 
+    AudioFormat determineAudioFormat(std::vector<uint8_t>& dataBuffer);
+    DataType sixteenBitIntToSample(int16_t const sample);
+    DataType singleByteToSample(uint8_t const sample);
+    DataType clamp(DataType const value, DataType const minValue, DataType const maxValue);
+    int16_t twoBytesToInt(
+        std::vector<uint8_t> const& source, int const startIndex, Endianness endianness = Endianness::LittleEndian);
+    int16_t sampleToSixteenBitInt(DataType const sample);
+    int32_t fourBytesToInt(
+        std::vector<uint8_t> const& source, int const startIndex, Endianness endianness = Endianness::LittleEndian);
+    uint8_t sampleToSingleByte(DataType const sample);
+    int getIndexOfString(std::vector<uint8_t> const& source, std::string const& s);
+    int getAiffSampleRate(std::vector<uint8_t>& dataBuffer, int const sampleRateStartIndex);
+    bool decodeWaveFile(std::vector<uint8_t>& dataBuffer);
+    bool decodeAiffFile(std::vector<uint8_t>& dataBuffer);
+    bool saveToWaveFile(std::string const& filePath);
+    bool saveToAiffFile(std::string const& filePath);
+    bool tenByteMatch(std::vector<uint8_t>& v1, int const startIndex1, std::vector<uint8_t>& v2, int const startIndex2);
+    bool writeDataToFile(std::vector<uint8_t>& dataBuffer, std::string const& filePath);
     AudioFormat audioFileFormat{AudioFormat::NotLoaded};
     int sampleRate{44100};
     int bitDepth{16};

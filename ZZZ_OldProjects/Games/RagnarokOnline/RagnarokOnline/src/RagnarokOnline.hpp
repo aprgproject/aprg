@@ -117,15 +117,15 @@ class RagnarokOnline {
 public:
     RagnarokOnline();
     static std::string getFixedItemName(Item const& item);
-    [[nodiscard]] double getTalonRoBuyingPrice(std::string const& fixedItemName) const;
-    [[nodiscard]] double getTalonRoSellingPrice(std::string const& fixedItemName) const;
+    [[nodiscard]] Item getItem(std::string const& fixedItemName) const;
     [[nodiscard]] ItemIdToItemMap const& getItemIdToItemMap() const;
-    [[nodiscard]] MonsterIdToMonsterMap const& getMonsterIdToMonsterMap() const;
-    [[nodiscard]] MapNameToRoMap const& getMapNameToRoMap() const;
     [[nodiscard]] ItemNameToShopItemDetailMap const& getBuyingItemShops() const;
     [[nodiscard]] ItemNameToShopItemDetailMap const& getSellingItemShops() const;
-    [[nodiscard]] Item getItem(std::string const& fixedItemName) const;
+    [[nodiscard]] MapNameToRoMap const& getMapNameToRoMap() const;
     [[nodiscard]] Monster getMonster(std::string const& monsterName) const;
+    [[nodiscard]] MonsterIdToMonsterMap const& getMonsterIdToMonsterMap() const;
+    [[nodiscard]] double getTalonRoBuyingPrice(std::string const& fixedItemName) const;
+    [[nodiscard]] double getTalonRoSellingPrice(std::string const& fixedItemName) const;
     void saveItemIdToItemMapToFile(std::string const& outputFilePath) const;
     void saveMonsterIdToMonsterMapToFile(std::string const& outputFilePath) const;
     void saveMapNameToRoMapToFile(std::string const& outputFilePath) const;
@@ -164,16 +164,6 @@ private:
     ItemNameToShopItemDetailMap m_sellingShopItems;
 };
 
-std::ostream& operator<<(std::ostream& out, NameAndRate const& nameAndRate);
-std::ostream& operator<<(std::ostream& out, MonsterDetailsOnRoMap const& monsterDetailsOnRoMap);
-std::ostream& operator<<(std::ostream& out, Item const& item);
-std::ostream& operator<<(std::ostream& out, Monster const& monster);
-std::ostream& operator<<(std::ostream& out, ShopItemDetail const& shopItemDetail);
-std::ostream& operator<<(std::ostream& out, RoMap const& roMap);
-std::ostream& operator<<(std::ostream& out, ItemIdToItemMap const& itemIdToItemMap);
-std::ostream& operator<<(std::ostream& out, MonsterIdToMonsterMap const& monsterIdToMonsterMap);
-std::ostream& operator<<(std::ostream& out, MapNameToRoMap const& mapNameToRoMap);
-std::ostream& operator<<(std::ostream& out, ItemNameToShopItemDetailMap const& itemNameToShopItemDetailMap);
 std::istream& operator>>(std::istream& in, NameAndRate& nameAndRate);
 std::istream& operator>>(std::istream& in, MonsterDetailsOnRoMap& monsterDetailsOnRoMap);
 std::istream& operator>>(std::istream& in, Item& item);
@@ -184,5 +174,15 @@ std::istream& operator>>(std::istream& in, ItemIdToItemMap& itemIdToItemMap);
 std::istream& operator>>(std::istream& in, MonsterIdToMonsterMap& monsterIdToMonsterMap);
 std::istream& operator>>(std::istream& in, MapNameToRoMap& mapNameToRoMap);
 std::istream& operator>>(std::istream& in, ItemNameToShopItemDetailMap& itemNameToShopItemDetailMap);
+std::ostream& operator<<(std::ostream& out, NameAndRate const& nameAndRate);
+std::ostream& operator<<(std::ostream& out, MonsterDetailsOnRoMap const& monsterDetailsOnRoMap);
+std::ostream& operator<<(std::ostream& out, Item const& item);
+std::ostream& operator<<(std::ostream& out, Monster const& monster);
+std::ostream& operator<<(std::ostream& out, ShopItemDetail const& shopItemDetail);
+std::ostream& operator<<(std::ostream& out, RoMap const& roMap);
+std::ostream& operator<<(std::ostream& out, ItemIdToItemMap const& itemIdToItemMap);
+std::ostream& operator<<(std::ostream& out, MonsterIdToMonsterMap const& monsterIdToMonsterMap);
+std::ostream& operator<<(std::ostream& out, MapNameToRoMap const& mapNameToRoMap);
+std::ostream& operator<<(std::ostream& out, ItemNameToShopItemDetailMap const& itemNameToShopItemDetailMap);
 
 }  // namespace alba

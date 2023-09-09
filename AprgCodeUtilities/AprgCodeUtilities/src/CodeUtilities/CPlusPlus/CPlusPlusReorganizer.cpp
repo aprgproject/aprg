@@ -112,25 +112,6 @@ int CPlusPlusReorganizer::getIndexAtClosingString(
     return endIndex;
 }
 
-int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
-    int endIndex = index;
-    Patterns searchPatterns{{M(TermType::WhiteSpace), M(MatcherType::Comment)}, {M(MatcherType::Comment)}};
-    Indexes hitIndexes = checkPatternAt(m_terms, index + 1, searchPatterns);
-    if (!hitIndexes.empty()) {
-        int firstHitIndex = hitIndexes.front();
-        int lastHitIndex = hitIndexes.back();
-        Term const& firstTerm(m_terms[firstHitIndex]);
-        Term const& lastTerm(m_terms[lastHitIndex]);
-        if (firstTerm == M(TermType::WhiteSpace) && lastTerm == M(MatcherType::Comment) && !hasNewLine(firstTerm)) {
-            endIndex = lastHitIndex;
-        }
-        if (firstTerm == M(MatcherType::Comment)) {
-            endIndex = firstHitIndex;
-        }
-    }
-    return endIndex;
-}
-
 CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
     int const scopeHeaderStart, int const openingBraceIndex) const {
     string scopeHeader(getContents(scopeHeaderStart, openingBraceIndex));
@@ -187,6 +168,10 @@ CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
     return scopeDetail;
 }
 
+string CPlusPlusReorganizer::getContents(int const start, int const end) const {
+    return getStringWithoutStartingAndTrailingWhiteSpace(getCombinedContents(m_terms, start, end));
+}
+
 strings CPlusPlusReorganizer::getScopeNames() const {
     strings result;
     for (ScopeDetail const& scopeDetail : m_scopeDetails) {
@@ -199,8 +184,23 @@ strings CPlusPlusReorganizer::getScopeNames() const {
 
 strings CPlusPlusReorganizer::getSavedSignatures() const { return m_headerInformation.signatures; }
 
-string CPlusPlusReorganizer::getContents(int const start, int const end) const {
-    return getStringWithoutStartingAndTrailingWhiteSpace(getCombinedContents(m_terms, start, end));
+int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
+    int endIndex = index;
+    Patterns searchPatterns{{M(TermType::WhiteSpace), M(MatcherType::Comment)}, {M(MatcherType::Comment)}};
+    Indexes hitIndexes = checkPatternAt(m_terms, index + 1, searchPatterns);
+    if (!hitIndexes.empty()) {
+        int firstHitIndex = hitIndexes.front();
+        int lastHitIndex = hitIndexes.back();
+        Term const& firstTerm(m_terms[firstHitIndex]);
+        Term const& lastTerm(m_terms[lastHitIndex]);
+        if (firstTerm == M(TermType::WhiteSpace) && lastTerm == M(MatcherType::Comment) && !hasNewLine(firstTerm)) {
+            endIndex = lastHitIndex;
+        }
+        if (firstTerm == M(MatcherType::Comment)) {
+            endIndex = firstHitIndex;
+        }
+    }
+    return endIndex;
 }
 
 void CPlusPlusReorganizer::gatherInformationFromFile(string const& file) {

@@ -18,7 +18,6 @@ public:
     explicit AlbaConfigurationHolder(ConfigurationDetails const& configurationDetails)
         : m_configurationDetails{configurationDetails} {}
     AlbaConfigurationHolder() : m_configurationDetails{getDefaultConfigurationDetails<ConfigurationDetails>()} {}
-    ConfigurationDetails const& getConfigurationDetails() { return m_configurationDetails; }
 
     void setConfigurationDetails(ConfigurationDetails const& configurationDetails) {
         m_configurationDetails = configurationDetails;
@@ -27,6 +26,8 @@ public:
     void setConfigurationToDefault() {
         setConfigurationDetails(getDefaultConfigurationDetails<ConfigurationDetails>());
     }
+
+    ConfigurationDetails const& getConfigurationDetails() { return m_configurationDetails; }
 
 protected:
     ConfigurationDetails m_configurationDetails;

@@ -15,23 +15,16 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using SetOfEdges = typename GraphTypes<Vertex>::SetOfEdges;
     UndirectedGraphWithListOfEdges() = default;
-    [[nodiscard]] bool isEmpty() const override { return m_edges.empty(); }
 
-    [[nodiscard]] bool hasAnyConnection(Vertex const& vertex) const override {
-        bool result(false);
-        auto itLower = m_edges.lower_bound({vertex, Vertex{}});
-        if (itLower != m_edges.cend()) {
-            result = itLower->first == vertex;
+    [[nodiscard]] Edges getEdges() const override {
+        Edges result;
+        for (auto const& edge : m_edges) {
+            if (edge.first <= edge.second) {
+                result.emplace_back(edge);
+            }
         }
         return result;
     }
-
-    [[nodiscard]] bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
-        return m_edges.find({vertex1, vertex2}) != m_edges.cend();
-    }
-
-    [[nodiscard]] int getNumberOfVertices() const override { return getVertices().size(); }
-    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
 
     [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
         Vertices result;
@@ -51,17 +44,22 @@ public:
         return result;
     }
 
-    [[nodiscard]] Edges getEdges() const override {
-        Edges result;
-        for (auto const& edge : m_edges) {
-            if (edge.first <= edge.second) {
-                result.emplace_back(edge);
-            }
+    [[nodiscard]] int getNumberOfVertices() const override { return getVertices().size(); }
+    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
+    [[nodiscard]] bool isEmpty() const override { return m_edges.empty(); }
+
+    [[nodiscard]] bool hasAnyConnection(Vertex const& vertex) const override {
+        bool result(false);
+        auto itLower = m_edges.lower_bound({vertex, Vertex{}});
+        if (itLower != m_edges.cend()) {
+            result = itLower->first == vertex;
         }
         return result;
     }
 
-    SetOfEdges& getSetOfEdgesReference() { return m_edges; }
+    [[nodiscard]] bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
+        return m_edges.find({vertex1, vertex2}) != m_edges.cend();
+    }
 
     void connect(Vertex const& vertex1, Vertex const& vertex2) override {
         if (!isDirectlyConnected(vertex1, vertex2)) {
@@ -83,6 +81,8 @@ public:
         m_numberOfEdges = 0;
         m_edges.clear();
     }
+
+    SetOfEdges& getSetOfEdgesReference() { return m_edges; }
 
 protected:
     friend std::ostream& operator<<(std::ostream& out, UndirectedGraphWithListOfEdges const& graph) {

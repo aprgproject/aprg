@@ -12,7 +12,6 @@ AudioManipulator::AudioManipulator(std::string const& audioFilePath) : m_filePat
 }
 
 AudioInDouble const& AudioManipulator::getAudio() const { return m_audio; }
-AudioInDouble& AudioManipulator::getAudioReference() { return m_audio; }
 
 void AudioManipulator::addSamplesWithValue(double const value) {
     for (int i = 0; i < m_audio.getNumberOfChannels(); ++i) {
@@ -57,5 +56,7 @@ void AudioManipulator::saveAudioIntoFileWithFullFilePath(string const& newFilePa
         m_audio.save(newFilePathHandler.getFullPath(), AudioFormat::Aiff);
     }
 }
+
+AudioInDouble& AudioManipulator::getAudioReference() { return m_audio; }
 
 }  // namespace alba::AprgAudio

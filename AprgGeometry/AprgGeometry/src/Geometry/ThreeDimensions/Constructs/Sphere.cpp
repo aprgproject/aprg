@@ -25,8 +25,6 @@ bool Sphere::operator<(Sphere const& sphere) const {
     return m_center < sphere.m_center;
 }
 
-bool Sphere::isInside(Point const& point) const { return getDistance(m_center, point) <= m_radius; }
-double Sphere::getRadius() const { return m_radius; }
 Point Sphere::getCenter() const { return m_center; }
 
 optional<double> Sphere::calculateXFromYAndZ(double const y, double const z, double const signOfRoot) const {
@@ -55,6 +53,9 @@ optional<double> Sphere::calculateZFromXAndY(double const x, double const y, dou
     }
     return result;
 }
+
+double Sphere::getRadius() const { return m_radius; }
+bool Sphere::isInside(Point const& point) const { return getDistance(m_center, point) <= m_radius; }
 
 ostream& operator<<(ostream& out, Sphere const& sphere) {
     out << "(center: " << sphere.m_center << " radius: " << sphere.m_radius << ")";

@@ -17,8 +17,13 @@ public:
         double const bCoefficient);  // ((x-center.x)^2/aCoefficient^2) + ((y-center.y)^2/bCoefficient^2) = 1
     bool operator==(Ellipse const& ellipse) const;
     bool operator!=(Ellipse const& ellipse) const;
-    // double getCircumference() const;
-    [[nodiscard]] bool isInside(Point const& point) const;
+    [[nodiscard]] Line getMajorAxis() const;
+    [[nodiscard]] Line getMinorAxis() const;
+    [[nodiscard]] Point getCenter() const;
+    [[nodiscard]] Points getFoci() const;
+    [[nodiscard]] Points getMajorVertices() const;
+    [[nodiscard]] Points getMinorVertices() const;
+    [[nodiscard]] Points getPointsForCircumference(double const interval) const;
     [[nodiscard]] double getAValue() const;
     [[nodiscard]] double getBValue() const;
     [[nodiscard]] double getCValue() const;
@@ -29,13 +34,8 @@ public:
     [[nodiscard]] double calculateXFromY(double const y, double const signOfRoot) const;
     [[nodiscard]] double calculateYFromXWithoutCenter(double const x, double const signOfRoot) const;
     [[nodiscard]] double calculateXFromYWithoutCenter(double const y, double const signOfRoot) const;
-    [[nodiscard]] Point getCenter() const;
-    [[nodiscard]] Points getFoci() const;
-    [[nodiscard]] Points getMajorVertices() const;
-    [[nodiscard]] Points getMinorVertices() const;
-    [[nodiscard]] Line getMajorAxis() const;
-    [[nodiscard]] Line getMinorAxis() const;
-    [[nodiscard]] Points getPointsForCircumference(double const interval) const;
+    // double getCircumference() const;
+    [[nodiscard]] bool isInside(Point const& point) const;
     void traverseArea(double const interval, TraverseOperation const& traverseOperation) const;
 
 private:

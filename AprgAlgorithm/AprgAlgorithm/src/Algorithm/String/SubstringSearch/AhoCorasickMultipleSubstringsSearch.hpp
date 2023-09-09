@@ -49,6 +49,16 @@ private:
             [](Index const partialLength, std::string const& query) { return partialLength + query.length(); });
     }
 
+    [[nodiscard]] Index getNextState(Index const state, char const character) const {
+        // Use failure transition if next transition is not defined
+        Index currentState = state;
+        while (isUnusedState(m_trieTransitions.getEntry(currentState, character)) &&
+               isUsedState(m_trieArtificialConnections[currentState])) {
+            currentState = m_trieArtificialConnections[currentState];
+        }
+        return m_trieTransitions.getEntry(currentState, character);
+    }
+
     [[nodiscard]] SearchResult searchUsingTransitions(std::string const& searchSpace) const {
         SearchResult result;
         Index currentState = START_STATE_ZERO;
@@ -66,25 +76,6 @@ private:
             }
         }
         return result;
-    }
-
-    [[nodiscard]] Index getNextState(Index const state, char const character) const {
-        // Use failure transition if next transition is not defined
-        Index currentState = state;
-        while (isUnusedState(m_trieTransitions.getEntry(currentState, character)) &&
-               isUsedState(m_trieArtificialConnections[currentState])) {
-            currentState = m_trieArtificialConnections[currentState];
-        }
-        return m_trieTransitions.getEntry(currentState, character);
-    }
-
-    Index getNextStateByArtificialConnection(Index const currentState, Index const character) {
-        Index nextState = m_trieArtificialConnections[currentState];
-        while (isUnusedState(m_trieTransitions.getEntry(nextState, character))) {
-            nextState = m_trieArtificialConnections[nextState];
-        }
-        nextState = m_trieTransitions.getEntry(nextState, character);
-        return nextState;
     }
 
     void initialize() {
@@ -159,6 +150,15 @@ private:
                 }
             }
         }
+    }
+
+    Index getNextStateByArtificialConnection(Index const currentState, Index const character) {
+        Index nextState = m_trieArtificialConnections[currentState];
+        while (isUnusedState(m_trieTransitions.getEntry(nextState, character))) {
+            nextState = m_trieArtificialConnections[nextState];
+        }
+        nextState = m_trieTransitions.getEntry(nextState, character);
+        return nextState;
     }
 
     Strings m_queries;

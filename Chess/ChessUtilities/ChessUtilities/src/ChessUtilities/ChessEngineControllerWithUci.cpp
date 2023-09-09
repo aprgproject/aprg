@@ -28,31 +28,6 @@ ChessEngineControllerWithUci::ChessEngineControllerWithUci(
     putStringProcessingFunctionAsCallBack();
 }
 
-bool ChessEngineControllerWithUci::waitTillReadyAndReturnIfResetWasPerformed() {
-    log("Sending \"isready\" and waiting for response");
-    forceSend("isready");
-    m_waitingForReadyOkay = true;
-
-    bool shouldReset(false);
-    int countWith100ms(0U);
-    while (m_waitingForReadyOkay) {
-        if (countWith100ms > 10) {
-            // greater than 1 second elapsed so engine is stuck, lets reset
-            shouldReset = true;
-            break;
-        }
-        ++countWith100ms;
-        sleepFor(100);
-    }
-
-    if (shouldReset) {
-        log("Engine is stuck, resetting engine");
-        resetEngine();
-    }
-
-    return shouldReset;
-}
-
 void ChessEngineControllerWithUci::initialize() { sendUciAndUciOptions(); }
 void ChessEngineControllerWithUci::quit() { sendQuit(); }
 
@@ -127,6 +102,31 @@ void ChessEngineControllerWithUci::setAdditionalStepsInCalculationMonitoring(
 void ChessEngineControllerWithUci::setLogFile(string const& logFilePath) {
     m_logFileStreamOptional.emplace();
     m_logFileStreamOptional->open(logFilePath);
+}
+
+bool ChessEngineControllerWithUci::waitTillReadyAndReturnIfResetWasPerformed() {
+    log("Sending \"isready\" and waiting for response");
+    forceSend("isready");
+    m_waitingForReadyOkay = true;
+
+    bool shouldReset(false);
+    int countWith100ms(0U);
+    while (m_waitingForReadyOkay) {
+        if (countWith100ms > 10) {
+            // greater than 1 second elapsed so engine is stuck, lets reset
+            shouldReset = true;
+            break;
+        }
+        ++countWith100ms;
+        sleepFor(100);
+    }
+
+    if (shouldReset) {
+        log("Engine is stuck, resetting engine");
+        resetEngine();
+    }
+
+    return shouldReset;
 }
 
 string ChessEngineControllerWithUci::constructUciOptionCommand(string const& name, string const& value) {

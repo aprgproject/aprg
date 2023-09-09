@@ -42,10 +42,10 @@ constexpr int freeFunction() {
     return 1;
 }
 
-TranslationUnitValues getValuesInTranslationUnit1();
-TranslationUnitValues getValuesInTranslationUnit2();
 void restoreInitialValuesForTranslationUnit1();
 void restoreInitialValuesForTranslationUnit2();
+TranslationUnitValues getValuesInTranslationUnit1();
+TranslationUnitValues getValuesInTranslationUnit2();
 
 }  // namespace alba::InlineOnTranslationUnits
 

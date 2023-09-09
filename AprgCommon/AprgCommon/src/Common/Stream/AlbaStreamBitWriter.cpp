@@ -38,8 +38,8 @@ void AlbaStreamBitWriter::writeHexDigitData(string_view const hexDigitsData) {
     transferBytesAsMuchAsPossibleToStream();
 }
 
-ostream& AlbaStreamBitWriter::getOutputStream() { return m_stream; }
 void AlbaStreamBitWriter::flush() { transferAllToStream(); }
+ostream& AlbaStreamBitWriter::getOutputStream() { return m_stream; }
 void AlbaStreamBitWriter::putBoolDataToBuffer(bool const boolValue) { m_bitBuffer.emplace_back(boolValue); }
 void AlbaStreamBitWriter::putCharDataToBuffer(char const data) { putBigEndianNumberDataInBuffer<char>(data); }
 

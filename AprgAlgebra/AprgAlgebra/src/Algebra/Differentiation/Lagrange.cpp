@@ -9,6 +9,27 @@ using namespace std;
 
 namespace alba::algebra {
 
+void calculateLagrangeEquations(
+    Equations& lagrangeEquations, Term const& termWithLagrangeFunctions, strings const& coordinateNames,
+    strings const& lagrangeMultiplierNames) {
+    for (string const& coordinateName : coordinateNames) {
+        lagrangeEquations.emplace_back(getPartialDerivative(termWithLagrangeFunctions, coordinateName), "=", 0);
+    }
+    for (string const& lagrangeMultiplierName : lagrangeMultiplierNames) {
+        lagrangeEquations.emplace_back(getPartialDerivative(termWithLagrangeFunctions, lagrangeMultiplierName), "=", 0);
+    }
+}
+
+Term getTermWithLagrangeFunctions(
+    Term const& term, Terms const& lagrangeFunctions, strings const& lagrangeMultiplierNames) {
+    int size(min(lagrangeFunctions.size(), lagrangeMultiplierNames.size()));
+    Term result(term);
+    for (int i = 0; i < size; ++i) {
+        result += lagrangeFunctions[i] * Term(lagrangeMultiplierNames[i]);
+    }
+    return result;
+}
+
 Terms getLagrangeMultipliers(Term const& term, strings const& coordinateNames, Terms const& lagrangeFunctions) {
     strings lagrangeMultiplierNames(getLagrangeMultiplierNames(lagrangeFunctions.size()));
     Term termWithLagrangeFunctions(getTermWithLagrangeFunctions(term, lagrangeFunctions, lagrangeMultiplierNames));
@@ -23,14 +44,9 @@ Terms getLagrangeMultipliers(Term const& term, strings const& coordinateNames, T
     return result;
 }
 
-Term getTermWithLagrangeFunctions(
-    Term const& term, Terms const& lagrangeFunctions, strings const& lagrangeMultiplierNames) {
-    int size(min(lagrangeFunctions.size(), lagrangeMultiplierNames.size()));
-    Term result(term);
-    for (int i = 0; i < size; ++i) {
-        result += lagrangeFunctions[i] * Term(lagrangeMultiplierNames[i]);
-    }
-    return result;
+string getLagrangeMultiplierName(int const index) {
+    static StringConverterWithFormatting converter(3, '0');
+    return "multiplier" + converter.convertToString(index);
 }
 
 strings getLagrangeMultiplierNames(int const size) {
@@ -39,22 +55,6 @@ strings getLagrangeMultiplierNames(int const size) {
         result.emplace_back(getLagrangeMultiplierName(i));
     }
     return result;
-}
-
-string getLagrangeMultiplierName(int const index) {
-    static StringConverterWithFormatting converter(3, '0');
-    return "multiplier" + converter.convertToString(index);
-}
-
-void calculateLagrangeEquations(
-    Equations& lagrangeEquations, Term const& termWithLagrangeFunctions, strings const& coordinateNames,
-    strings const& lagrangeMultiplierNames) {
-    for (string const& coordinateName : coordinateNames) {
-        lagrangeEquations.emplace_back(getPartialDerivative(termWithLagrangeFunctions, coordinateName), "=", 0);
-    }
-    for (string const& lagrangeMultiplierName : lagrangeMultiplierNames) {
-        lagrangeEquations.emplace_back(getPartialDerivative(termWithLagrangeFunctions, lagrangeMultiplierName), "=", 0);
-    }
 }
 
 }  // namespace alba::algebra

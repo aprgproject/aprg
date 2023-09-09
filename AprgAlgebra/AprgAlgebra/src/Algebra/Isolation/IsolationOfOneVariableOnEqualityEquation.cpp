@@ -17,15 +17,6 @@ IsolationOfOneVariableOnEqualityEquation::IsolationOfOneVariableOnEqualityEquati
     setEquation(equation);
 }
 
-bool IsolationOfOneVariableOnEqualityEquation::canBeIsolated(string const& variableName) const {
-    bool result(false);
-    if (canBeConvertedToPolynomial(m_simplifiedLeftSideTerm)) {
-        Polynomial polynomial(createPolynomialIfPossible(m_simplifiedLeftSideTerm));
-        result = canBeIsolatedBasedOnExponent(getIdenticalExponentForVariableIfPossible(variableName, polynomial));
-    }
-    return result;
-}
-
 AlbaNumber IsolationOfOneVariableOnEqualityEquation::getIdenticalExponentForVariableIfPossible(
     string const& variableName) const {
     AlbaNumber exponent(0);
@@ -34,13 +25,6 @@ AlbaNumber IsolationOfOneVariableOnEqualityEquation::getIdenticalExponentForVari
         exponent = getIdenticalExponentForVariableIfPossible(variableName, polynomial);
     }
     return exponent;
-}
-
-Term IsolationOfOneVariableOnEqualityEquation::getEquivalentTermByIsolatingAVariable(string const& variableName) const {
-    Term termWithVariable;
-    Term termWithWithoutVariable;
-    isolateTermWithVariable(variableName, termWithVariable, termWithWithoutVariable);
-    return getEquivalentTermByReducingItToAVariable(variableName, termWithVariable, termWithWithoutVariable);
 }
 
 Equation IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariableOnLeftSideOfEquation(
@@ -57,6 +41,22 @@ Equation IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariableOnRigh
     Term termWithWithoutVariable;
     isolateTermWithVariable(variableName, termWithVariable, termWithWithoutVariable);
     return {termWithWithoutVariable, "=", termWithVariable};
+}
+
+Term IsolationOfOneVariableOnEqualityEquation::getEquivalentTermByIsolatingAVariable(string const& variableName) const {
+    Term termWithVariable;
+    Term termWithWithoutVariable;
+    isolateTermWithVariable(variableName, termWithVariable, termWithWithoutVariable);
+    return getEquivalentTermByReducingItToAVariable(variableName, termWithVariable, termWithWithoutVariable);
+}
+
+bool IsolationOfOneVariableOnEqualityEquation::canBeIsolated(string const& variableName) const {
+    bool result(false);
+    if (canBeConvertedToPolynomial(m_simplifiedLeftSideTerm)) {
+        Polynomial polynomial(createPolynomialIfPossible(m_simplifiedLeftSideTerm));
+        result = canBeIsolatedBasedOnExponent(getIdenticalExponentForVariableIfPossible(variableName, polynomial));
+    }
+    return result;
 }
 
 void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
@@ -76,28 +76,6 @@ void IsolationOfOneVariableOnEqualityEquation::setEquation(Equation const& equat
         simplifiedEquation.simplify();
         m_simplifiedLeftSideTerm = simplifiedEquation.getLeftHandTerm();
     }
-}
-
-bool IsolationOfOneVariableOnEqualityEquation::canBeIsolatedBasedOnExponent(
-    AlbaNumber const& identicalExponentForVariable) {
-    return identicalExponentForVariable != 0;
-}
-
-AlbaNumber IsolationOfOneVariableOnEqualityEquation::getIdenticalExponentForVariableIfPossible(
-    string const& variableName, Polynomial const& polynomial) {
-    AlbaNumber exponent;
-    for (Monomial const& monomial : polynomial.getMonomials()) {
-        AlbaNumber currentExponent = monomial.getExponentForVariable(variableName);
-        if (currentExponent != 0) {
-            if (exponent == 0) {
-                exponent = currentExponent;
-            } else if (exponent != currentExponent) {
-                exponent = 0;
-                break;
-            }
-        }
-    }
-    return exponent;
 }
 
 void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
@@ -182,6 +160,28 @@ void IsolationOfOneVariableOnEqualityEquation::simplifyForIsolation(Expression& 
 
         expression.simplify();
     }
+}
+
+AlbaNumber IsolationOfOneVariableOnEqualityEquation::getIdenticalExponentForVariableIfPossible(
+    string const& variableName, Polynomial const& polynomial) {
+    AlbaNumber exponent;
+    for (Monomial const& monomial : polynomial.getMonomials()) {
+        AlbaNumber currentExponent = monomial.getExponentForVariable(variableName);
+        if (currentExponent != 0) {
+            if (exponent == 0) {
+                exponent = currentExponent;
+            } else if (exponent != currentExponent) {
+                exponent = 0;
+                break;
+            }
+        }
+    }
+    return exponent;
+}
+
+bool IsolationOfOneVariableOnEqualityEquation::canBeIsolatedBasedOnExponent(
+    AlbaNumber const& identicalExponentForVariable) {
+    return identicalExponentForVariable != 0;
 }
 
 }  // namespace alba::algebra

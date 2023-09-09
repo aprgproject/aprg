@@ -33,8 +33,6 @@ public:
     void showNextPossibleWinners(RaceConfiguration const& currentConfiguration) const;
 
 private:
-    static int getDiscrepancy(RaceConfiguration const& r1, RaceConfiguration const& r2);
-
     static void retrieveBestWinners(
         RaceConfiguration& bestConfiguration, BestWinners& queueOfWinners, PreviousRaces const& previousRaces,
         RaceConfiguration const& currentConfiguration);
@@ -42,6 +40,7 @@ private:
     static void showWinners(BestWinners& queueOfWinners);
     static void showBestConfiguration(
         RaceConfiguration const& bestConfiguration, RaceConfiguration const& currentConfiguration);
+    static int getDiscrepancy(RaceConfiguration const& r1, RaceConfiguration const& r2);
     void readPreviousRaceDatabase();
     PreviousRaces m_singleRace;
     PreviousRaces m_dualRaceFirstPlace;

@@ -29,6 +29,15 @@ public:
     using FordFulkerson = FordFulkersonUsingBfs<FlowNetwork>;
     explicit MaximumMatchings(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph), m_bipartiteChecker(graph) {}
 
+    [[nodiscard]] Edges getMaximumMatchings(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
+        Edges result;
+        if (m_bipartiteChecker.isBipartite()) {
+            FordFulkerson fordFulkerson(getFlowNetwork(m_graph, newSourceVertex, newSinkVertex));
+            result = getMaximumMatchings(fordFulkerson, newSourceVertex, newSinkVertex);
+        }
+        return result;
+    }
+
     [[nodiscard]] bool doesHavePerfectMatchingByCheckingASubset(Vertices const& subsetWithFirstColor) const {
         // Using Hall's theorem
         // Hall’s theorem can be used to find out whether a bipartite graph has a matching that contains all left or
@@ -56,15 +65,6 @@ public:
             if (doAllVerticesInTheSubsetHaveFirstColor) {
                 result = subsetWithFirstColor.size() <= neighborVertices.size();
             }
-        }
-        return result;
-    }
-
-    [[nodiscard]] Edges getMaximumMatchings(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
-        Edges result;
-        if (m_bipartiteChecker.isBipartite()) {
-            FordFulkerson fordFulkerson(getFlowNetwork(m_graph, newSourceVertex, newSinkVertex));
-            result = getMaximumMatchings(fordFulkerson, newSourceVertex, newSinkVertex);
         }
         return result;
     }

@@ -21,7 +21,6 @@ void removeUniqueVertexIdentifierIfNeeded<uint64_t, double>(double const&) {
 namespace {
 using GraphForTest = UndirectedGraphWithListOfEdges<uint64_t>;
 using SymbolGraphForTest = SymbolGraph<uint64_t, double, GraphForTest>;
-
 constexpr uint64_t vertexFor12 = 0x3FF3333333333333LL;
 constexpr uint64_t vertexFor13 = 0x3FF4CCCCCCCCCCCDULL;
 constexpr uint64_t vertexFor23 = 0x4002666666666666LL;

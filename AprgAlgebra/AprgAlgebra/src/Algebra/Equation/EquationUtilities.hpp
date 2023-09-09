@@ -8,6 +8,16 @@
 
 namespace alba::algebra {
 
+void segregateEquationsWithAndWithoutVariable(
+    Equations const& equationsToSegregate, std::string const& variableName, Equations& equationsWithVariable,
+    Equations& equationsWithoutVariable);
+
+AlbaNumber getDegree(Equation const& equation);
+Equation buildEquationIfPossible(std::string const& equationString);
+Term getEquivalentTermByReducingItToAVariable(
+    std::string const& variableName, Term const& termWithVariable, Term const& termWithWithoutVariable);
+std::string getEquationOperatorCharacters();
+std::string getReverseEquationOperatorString(std::string const& equationOperatorString);
 bool isEquationOperatorString(std::string const& stringToCheck);
 bool isEquationOperatorCharacterString(std::string const& stringToCheck);
 bool doesNegativeVariableSubstitutionYieldsToTheSameEquation(
@@ -23,15 +33,5 @@ bool isLessThanOrEqual(Term const& leftTerm, Term const& rightTerm);
 bool isGreaterThanOrEqual(Term const& leftTerm, Term const& rightTerm);
 bool isEquationOperationSatisfied(EquationOperator const& operatorObject, Term const& leftTerm, Term const& rightTerm);
 bool doesAllEquationsHaveEqualityOperator(Equations const& equations);
-AlbaNumber getDegree(Equation const& equation);
-std::string getEquationOperatorCharacters();
-std::string getReverseEquationOperatorString(std::string const& equationOperatorString);
-Term getEquivalentTermByReducingItToAVariable(
-    std::string const& variableName, Term const& termWithVariable, Term const& termWithWithoutVariable);
-Equation buildEquationIfPossible(std::string const& equationString);
-
-void segregateEquationsWithAndWithoutVariable(
-    Equations const& equationsToSegregate, std::string const& variableName, Equations& equationsWithVariable,
-    Equations& equationsWithoutVariable);
 
 }  // namespace alba::algebra

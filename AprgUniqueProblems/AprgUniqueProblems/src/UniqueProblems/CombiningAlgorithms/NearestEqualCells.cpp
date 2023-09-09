@@ -67,16 +67,6 @@ int NearestEqualCells::getDistance(Coordinate const& coordinate1, Coordinate con
            getPositiveDelta(coordinate1.second, coordinate2.second);
 }
 
-NearestEqualCells::Coordinates NearestEqualCells::getCoordinatesWithThisValue(Value const value) const {
-    Coordinates result;
-    m_valueMatrix.iterateAllThroughYAndThenX([&](int const x, int const y) {
-        if (m_valueMatrix.getEntry(x, y) == value) {
-            result.emplace_back(x, y);
-        }
-    });
-    return result;
-}
-
 NearestEqualCells::Coordinate NearestEqualCells::getFirstCoordinateUsingBfs(Value const value) const {
     Coordinates coordinates(getCoordinatesWithThisValue(value));
     Bfs bfs(m_coordinateGraph, coordinates);
@@ -88,6 +78,16 @@ NearestEqualCells::Coordinate NearestEqualCells::getSecondCoordinateUsingBfs(
     Value const value, Coordinate const& firstCoordinate) const {
     Bfs bfs(m_coordinateGraph, {firstCoordinate});
     return getCoordinateUsingBfs(value, firstCoordinate, bfs);
+}
+
+NearestEqualCells::Coordinates NearestEqualCells::getCoordinatesWithThisValue(Value const value) const {
+    Coordinates result;
+    m_valueMatrix.iterateAllThroughYAndThenX([&](int const x, int const y) {
+        if (m_valueMatrix.getEntry(x, y) == value) {
+            result.emplace_back(x, y);
+        }
+    });
+    return result;
 }
 
 NearestEqualCells::Coordinate NearestEqualCells::getCoordinateUsingBfs(

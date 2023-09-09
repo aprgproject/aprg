@@ -12,32 +12,6 @@ public:
     using Value = typename Values::value_type;
     BinarySearchProblems() = default;
 
-    Value getNearestFloor(Values const& sortedValues, Value const& valueToCheck) {
-        // Problem Statement:
-        // Given an array of N distinct integers, find floor value of input ‘key’.
-        // Say, A = {-1, 2, 3, 5, 6, 8, 9, 10} and key = 7, we should return 6 as outcome.
-        // We can use the above optimized implementation to find floor value of key.
-        // We keep moving the left pointer to right most as long as the invariant holds.
-        // Eventually left pointer points an element less than or equal to key (by definition floor value).
-        // The following are possible corner cases:
-        // —> If all elements in the array are smaller than key, left pointer moves till last element.
-        // —> If all elements in the array are greater than key, it is an error condition.
-        // —> If all elements in the array equal and <= key, it is worst case input to our implementation.
-        Value result{};
-        if (!sortedValues.empty()) {
-            result = sortedValues[getNearestFloorIndex(sortedValues, valueToCheck)];
-        }
-        return result;
-    }
-
-    Value getNearestCeil(Values const& sortedValues, Value const& valueToCheck) {
-        Value result{};
-        if (!sortedValues.empty()) {
-            result = sortedValues[getNearestCielIndex(sortedValues, valueToCheck)];
-        }
-        return result;
-    }
-
     Index getNumberOfDuplicates(Values const& sortedValues, Value const& valueToCheck) {
         // Problem Statement:
         // Given a sorted array with possible duplicate elements.
@@ -85,6 +59,32 @@ public:
                     lowerIndex = middleIndex + 1;
                 }
             }
+        }
+        return result;
+    }
+
+    Value getNearestFloor(Values const& sortedValues, Value const& valueToCheck) {
+        // Problem Statement:
+        // Given an array of N distinct integers, find floor value of input ‘key’.
+        // Say, A = {-1, 2, 3, 5, 6, 8, 9, 10} and key = 7, we should return 6 as outcome.
+        // We can use the above optimized implementation to find floor value of key.
+        // We keep moving the left pointer to right most as long as the invariant holds.
+        // Eventually left pointer points an element less than or equal to key (by definition floor value).
+        // The following are possible corner cases:
+        // —> If all elements in the array are smaller than key, left pointer moves till last element.
+        // —> If all elements in the array are greater than key, it is an error condition.
+        // —> If all elements in the array equal and <= key, it is worst case input to our implementation.
+        Value result{};
+        if (!sortedValues.empty()) {
+            result = sortedValues[getNearestFloorIndex(sortedValues, valueToCheck)];
+        }
+        return result;
+    }
+
+    Value getNearestCeil(Values const& sortedValues, Value const& valueToCheck) {
+        Value result{};
+        if (!sortedValues.empty()) {
+            result = sortedValues[getNearestCielIndex(sortedValues, valueToCheck)];
         }
         return result;
     }

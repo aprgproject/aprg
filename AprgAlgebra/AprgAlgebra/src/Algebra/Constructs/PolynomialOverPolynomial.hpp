@@ -16,22 +16,22 @@ public:
 
     PolynomialOverPolynomial();
     PolynomialOverPolynomial(Polynomial const& numerator, Polynomial const& denominator);
-    [[nodiscard]] bool isEmpty() const;
     [[nodiscard]] Polynomial const& getNumerator() const;
     [[nodiscard]] Polynomial const& getDenominator() const;
     [[nodiscard]] QuotientAndRemainder divide() const;
-    QuotientAndRemainder simplifyAndDivide();
+    [[nodiscard]] bool isEmpty() const;
     void setAsShouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(
         bool const shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue);
     void simplify();
     void simplifyWithoutFactorization();
+    QuotientAndRemainder simplifyAndDivide();
 
 private:
-    static bool removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(
-        Polynomials& numeratorFactors, Polynomials& denominatorFactors);
-    static int getLcmForDenominatorCoefficients(Polynomial const& polynomial);
     static Monomial getMonomialWithMaxNegativeExponentsAndConvertItToPositive(Polynomial const& polynomial);
     static Polynomial multiplyAndSimplifyFactors(Polynomials const& factors);
+    static int getLcmForDenominatorCoefficients(Polynomial const& polynomial);
+    static bool removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(
+        Polynomials& numeratorFactors, Polynomials& denominatorFactors);
     [[nodiscard]] bool shouldPerformFactorization() const;
     void convertFractionCoefficientsToInteger();
     void convertNegativeExponentsToPositive();

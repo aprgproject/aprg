@@ -7,6 +7,7 @@
 namespace alba::algorithm {
 
 namespace {
+
 using VertexForTest = int;
 using WeightForTest = double;
 using ContentMapForTest = GraphTypesWithWeights<VertexForTest, WeightForTest>::VertexToWeightMap;
@@ -25,6 +26,7 @@ void putConnectionsForTest(EdgeWeightedUndirectedGraphForTest& graph) {
     graph.connect(3, 4, 0.35);
     graph.connect(3, 5, 0.40);
 }
+
 }  // namespace
 
 TEST(PathSearchUsingDfsWithDistanceSumTest, GetDistanceToWorksWithUndirectedGraph) {

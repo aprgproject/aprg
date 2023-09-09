@@ -50,19 +50,19 @@ public:
     static constexpr int SCORE_LEVEL_DISTANCE_WHEN_LOSING = 90;
 
 private:
+    DataFromExchanges getDataFromExchanges(Move const& move) const;
+    Score getScoreLevelPart(MoveDetail const& moveDetail) const;
+    Score getMoveTypePart(Move const& move) const;
+    Score getDistanceToKingPart(Move const& move) const;
+    Score getPiecePart(Move const& move) const;
+    Score getHumanScoreOfPiece(PieceType const pieceType) const;
+    int getDistanceToKing(Coordinate const& coordinate) const;
+    int getScoreLevelDistance() const;
     bool isACaptureMove(Piece const pieceAtStart, Piece const pieceAtEnd) const;
     bool isSameValueExchange(Piece const pieceAtStart, Piece const pieceAtEnd) const;
     bool isDevelopingMove(Piece const pieceAtStart, Move const& move) const;
     bool isCastlingMove(Piece const pieceAtStart, Move const& move) const;
     bool isCheck(Piece const pieceAtEnd) const;
-    int getDistanceToKing(Coordinate const& coordinate) const;
-    int getScoreLevelDistance() const;
-    Score getScoreLevelPart(MoveDetail const& moveDetail) const;
-    DataFromExchanges getDataFromExchanges(Move const& move) const;
-    Score getMoveTypePart(Move const& move) const;
-    Score getDistanceToKingPart(Move const& move) const;
-    Score getPiecePart(Move const& move) const;
-    Score getHumanScoreOfPiece(PieceType const pieceType) const;
     BoardWithContext const& m_boardWithContext;
     int m_worstScore;
     int m_bestScore;

@@ -17,10 +17,9 @@ public:
     bool operator==(Polynomial const& second) const;
     bool operator!=(Polynomial const& second) const;
     bool operator<(Polynomial const& second) const;
+    [[nodiscard]] Monomials const& getMonomials() const;
     [[nodiscard]] bool isEmpty() const;
     [[nodiscard]] bool isSimplified() const;
-    [[nodiscard]] Monomials const& getMonomials() const;
-    Monomials& getMonomialsReference();
     void clear();
     void simplify();
     void sortMonomialsWithInversePriority();
@@ -34,6 +33,7 @@ public:
     void raiseToUnsignedInteger(int const exponent);
     void setAsSimplified();
     void clearSimplifiedFlag();
+    Monomials& getMonomialsReference();
 
 private:
     static bool isFurtherSimplificationNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify);

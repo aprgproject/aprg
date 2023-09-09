@@ -18,13 +18,6 @@ public:
         matrix::solveSimplexTable(m_simplexTable);
     }
 
-    [[nodiscard]] bool isOptimized() const { return matrix::isOptimal(m_simplexTable); }
-
-    [[nodiscard]] Value getOptimizedObjectiveValue() const {
-        return m_simplexTable.getEntry(m_simplexTable.getNumberOfColumns() - 1, m_simplexTable.getNumberOfRows() - 1) *
-               -1;
-    }
-
     [[nodiscard]] Matrix getSolution() const {
         int numberOfRows = m_simplexTable.getNumberOfRows() - 1;
         int numberOfColumns = m_simplexTable.getNumberOfColumns() - numberOfRows;
@@ -40,6 +33,13 @@ public:
         });
         return result;
     }
+
+    [[nodiscard]] Value getOptimizedObjectiveValue() const {
+        return m_simplexTable.getEntry(m_simplexTable.getNumberOfColumns() - 1, m_simplexTable.getNumberOfRows() - 1) *
+               -1;
+    }
+
+    [[nodiscard]] bool isOptimized() const { return matrix::isOptimal(m_simplexTable); }
 
 private:
     Matrix m_simplexTable;

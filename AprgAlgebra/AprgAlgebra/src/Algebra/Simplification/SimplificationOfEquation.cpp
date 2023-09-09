@@ -45,23 +45,6 @@ void SimplificationOfEquation::simplify() {
     m_equation = Equation(newLeftHandSide, equationOperatorString, 0);
 }
 
-bool SimplificationOfEquation::areTheSignsOfTwoTermsDifferent(
-    TermWithDetails const& firstTerm, TermWithDetails const& secondTerm) {
-    return firstTerm.hasNegativeAssociation() ^ secondTerm.hasNegativeAssociation();
-}
-
-Term SimplificationOfEquation::getNewCombinedTerm(Term const& leftHandSide, Term const& rightHandSide) {
-    Term combinedTerm;
-    if (isTheValue(leftHandSide, AlbaNumber(0))) {
-        combinedTerm = rightHandSide;
-    } else if (isTheValue(rightHandSide, AlbaNumber(0))) {
-        combinedTerm = leftHandSide;
-    } else {
-        combinedTerm = Term(createExpressionIfPossible(Terms{leftHandSide, "-", rightHandSide}));
-    }
-    return combinedTerm;
-}
-
 void SimplificationOfEquation::simplifyLeftHandSideAndRightHandSide(Term& leftHandSide, Term& rightHandSide) {
     raiseLeftHandSideAndRightHandSideToPowerIfLogarithmic(leftHandSide, rightHandSide);
 }
@@ -169,5 +152,22 @@ void SimplificationOfEquation::removeCommonConstant(Term& leftHandSide) {
 }
 
 void SimplificationOfEquation::simplifyLeftHandSide(Term& term) { simplifyTermToACommonDenominator(term); }
+
+Term SimplificationOfEquation::getNewCombinedTerm(Term const& leftHandSide, Term const& rightHandSide) {
+    Term combinedTerm;
+    if (isTheValue(leftHandSide, AlbaNumber(0))) {
+        combinedTerm = rightHandSide;
+    } else if (isTheValue(rightHandSide, AlbaNumber(0))) {
+        combinedTerm = leftHandSide;
+    } else {
+        combinedTerm = Term(createExpressionIfPossible(Terms{leftHandSide, "-", rightHandSide}));
+    }
+    return combinedTerm;
+}
+
+bool SimplificationOfEquation::areTheSignsOfTwoTermsDifferent(
+    TermWithDetails const& firstTerm, TermWithDetails const& secondTerm) {
+    return firstTerm.hasNegativeAssociation() ^ secondTerm.hasNegativeAssociation();
+}
 
 }  // namespace alba::algebra::Simplification

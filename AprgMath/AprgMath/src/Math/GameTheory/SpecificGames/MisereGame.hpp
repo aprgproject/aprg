@@ -20,8 +20,8 @@ public:
     static NimState getOptimalNextState(NimState const& nimState);
 
 private:
-    static UnsignedInteger countNonEmptyHeaps(NimState const& nimState);
     static NimHeapSize getMaxHeapSize(NimState const& nimState);
+    static UnsignedInteger countNonEmptyHeaps(NimState const& nimState);
 };
 
 }  // namespace alba::math

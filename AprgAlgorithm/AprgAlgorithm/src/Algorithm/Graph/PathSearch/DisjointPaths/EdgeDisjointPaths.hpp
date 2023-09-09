@@ -22,8 +22,8 @@ public:
     using FordFulkerson = FordFulkersonUsingBfs<FlowNetwork>;
     EdgeDisjointPaths(BaseDirectedGraphWithVertex const& graph, Vertex const& startVertex, Vertex const& endVertex)
         : m_fordFulkerson(getFlowNetwork(graph, startVertex, endVertex)) {}
-    [[nodiscard]] int getNumberOfEdgeDisjointPaths() const { return m_fordFulkerson.getMaxFlowValue(); }
     [[nodiscard]] Paths getEdgeDisjointPaths() const { return m_fordFulkerson.getAugmentingPaths(); }
+    [[nodiscard]] int getNumberOfEdgeDisjointPaths() const { return m_fordFulkerson.getMaxFlowValue(); }
 
 private:
     [[nodiscard]] FlowNetwork getFlowNetwork(

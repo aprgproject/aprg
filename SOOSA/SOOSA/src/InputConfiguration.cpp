@@ -10,6 +10,20 @@ using namespace std;
 namespace alba::soosa {
 
 InputConfiguration::InputConfiguration() : m_formDetails{} {}
+
+string InputConfiguration::getQuestionAt(int const questionIndex) const {
+    string question;
+    if (questionIndex < static_cast<int>(m_formDetails.questions.size())) {
+        question = m_formDetails.questions[questionIndex];
+    }
+    return question;
+}
+
+string InputConfiguration::getFormDetailsTitle() const { return m_formDetails.title; }
+string InputConfiguration::getPath() const { return m_path; }
+string InputConfiguration::getArea() const { return m_area; }
+string InputConfiguration::getPeriod() const { return m_period; }
+double InputConfiguration::getDischarge() const { return m_discharge; }
 int InputConfiguration::getNumberOfColumns() const { return m_formDetails.columnToNumberOfQuestionsMap.size(); }
 int InputConfiguration::getNumberOfQuestions() const { return m_formDetails.questions.size(); }
 
@@ -40,20 +54,6 @@ int InputConfiguration::getQuestionIndexInColumn(int const columnNumber, int con
 }
 
 int InputConfiguration::getMinimumSatisfactoryScore() const { return m_minimumSatisfactoryScore; }
-double InputConfiguration::getDischarge() const { return m_discharge; }
-
-string InputConfiguration::getQuestionAt(int const questionIndex) const {
-    string question;
-    if (questionIndex < static_cast<int>(m_formDetails.questions.size())) {
-        question = m_formDetails.questions[questionIndex];
-    }
-    return question;
-}
-
-string InputConfiguration::getFormDetailsTitle() const { return m_formDetails.title; }
-string InputConfiguration::getPath() const { return m_path; }
-string InputConfiguration::getArea() const { return m_area; }
-string InputConfiguration::getPeriod() const { return m_period; }
 void InputConfiguration::setPath(string const& path) { m_path = path; }
 
 void InputConfiguration::setMainParameters(

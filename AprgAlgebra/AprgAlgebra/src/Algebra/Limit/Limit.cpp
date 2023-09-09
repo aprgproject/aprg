@@ -23,79 +23,41 @@ using namespace std;
 namespace alba::algebra {
 
 namespace {
-
 constexpr double COMPARISON_TOLERANCE_FOR_LIMIT_ITERATION = 1E-15;
 constexpr double COMPARISON_TOLERANCE_FOR_LIMIT_CHECKING = 1E-5;
 constexpr int MAX_NUMBER_OF_ITERATIONS = 100;
 constexpr double POSITIVE_DELTA_FOR_INITIAL_VALUE = 1E-3;
-
 }  // namespace
 
-bool isAlmostEqualForLimitIteration(AlbaNumber const& value1, AlbaNumber const& value2) {
-    return isAlmostEqual(value1.getDouble(), value2.getDouble(), COMPARISON_TOLERANCE_FOR_LIMIT_ITERATION);
-}
-
-bool isAlmostEqualForLimitChecking(AlbaNumber const& value1, AlbaNumber const& value2) {
-    return isAlmostEqual(value1.getDouble(), value2.getDouble(), COMPARISON_TOLERANCE_FOR_LIMIT_CHECKING);
-}
-
-bool hasVerticalAsymptoteAtValue(Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
-    return getLimitAtAValueInThePositiveSide(term, variableName, valueToApproach).isPositiveOrNegativeInfinity() ||
-           getLimitAtAValueInTheNegativeSide(term, variableName, valueToApproach).isPositiveOrNegativeInfinity();
-}
-
-bool hasHorizontalAsymptoteAtValue(Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
-    bool result(false);
-    Term limitAtPositiveInfinity(getLimitAtInfinity(term, variableName, ALBA_NUMBER_POSITIVE_INFINITY));
-    Term limitAtNegativeInfinity(getLimitAtInfinity(term, variableName, ALBA_NUMBER_NEGATIVE_INFINITY));
-    if (limitAtPositiveInfinity.isConstant() && limitAtNegativeInfinity.isConstant()) {
-        result = limitAtPositiveInfinity.getAsNumber() == valueToApproach ||
-                 limitAtNegativeInfinity.getAsNumber() == valueToApproach;
+void calculateTermAndLimitUsingLhopitalsRule(
+    Term& newTerm, Term& limitValue, Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
+    Differentiation differentiation(variableName);
+    newTerm = term;
+    simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(newTerm);
+    TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(newTerm));
+    Term numerator(termsOverTerms.getCombinedNumerator());
+    Term denominator(termsOverTerms.getCombinedDenominator());
+    SubstitutionOfVariablesToValues substitution{{variableName, valueToApproach}};
+    Term numeratorValue(substitution.performSubstitutionTo(numerator));
+    Term denominatorValue(substitution.performSubstitutionTo(denominator));
+    while (continueToDifferentiateForLhopitalsRule(numerator, denominator, numeratorValue, denominatorValue)) {
+        numerator = differentiation.differentiate(numerator);
+        denominator = differentiation.differentiate(denominator);
+        newTerm = (numerator / denominator);
+        simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(newTerm);
+        TermsOverTerms newTermsOverTerms(createTermsOverTermsFromTerm(newTerm));
+        numerator = newTermsOverTerms.getCombinedNumerator();
+        denominator = newTermsOverTerms.getCombinedDenominator();
+        numeratorValue = substitution.performSubstitutionTo(numerator);
+        denominatorValue = substitution.performSubstitutionTo(denominator);
     }
-    return result;
-}
-
-bool isSqueezeTheoremSatisfied(
-    Term const& alwaysLowerTermAtInterval, Term const& termInBetweenAtInterval, Term const& alwaysHigherTermAtInterval,
-    string const& variableName, AlbaNumber const& valueToApproach) {
-    // Theorem: Suppose that the functions f, g, and h are defined on some open interval I containing A except
-    // possibly A itself, and that f(x) <= g(x) <= h(x) for all x in I for which x != A. Also that the limit for
-    // f(x) as it approaches A and limit for h(x) as it approaches A, both exists and are both equal to L
-    // Then, the limit of g(x) exists and equal to L as well.
-    bool result(false);
-    Term limitAtLower(simplifyAndGetLimitAtAValue(
-        alwaysLowerTermAtInterval, variableName, valueToApproach, LimitAtAValueApproachType::BothSides));
-    Term limitAtTermInBetween(simplifyAndGetLimitAtAValue(
-        termInBetweenAtInterval, variableName, valueToApproach, LimitAtAValueApproachType::BothSides));
-    Term limitAtHigher(simplifyAndGetLimitAtAValue(
-        alwaysHigherTermAtInterval, variableName, valueToApproach, LimitAtAValueApproachType::BothSides));
-
-    if (limitAtLower == limitAtHigher) {
-        // double check if limit really exists
-        result = limitAtTermInBetween == limitAtLower;
+    Term outputValue(substitution.performSubstitutionTo(newTerm));
+    if (isNan(outputValue) ||
+        (isPositiveOrNegativeInfinity(numeratorValue) && isPositiveOrNegativeInfinity(denominatorValue))) {
+        limitValue = getLimitAtAValueOrInfinity(newTerm, variableName, valueToApproach);
+    } else {
+        limitValue = outputValue;
     }
-    return result;
-}
-
-bool continueToDifferentiateForLhopitalsRule(
-    Term const& numerator, Term const& denominator, Term const& numeratorValue, Term const& denominatorValue) {
-    AlbaNumber numeratorDegree(getDegree(numerator));
-    AlbaNumber denominatorDegree(getDegree(denominator));
-
-    bool areBothDegreesZero = numeratorDegree == 0 && denominatorDegree == 0;
-    bool areDegreesEitherZeroOrNonZero =
-        (numeratorDegree == 0 && denominatorDegree != 0) || (numeratorDegree != 0 && denominatorDegree == 0);
-    bool areDegreesEitherNonZeroOrInfinite =
-        (numeratorDegree != 0 && denominatorDegree.isPositiveOrNegativeInfinity()) ||
-        (numeratorDegree.isPositiveOrNegativeInfinity() && denominatorDegree != 0);
-    bool continueBasedOnDegrees =
-        areBothDegreesZero || areDegreesEitherZeroOrNonZero || areDegreesEitherNonZeroOrInfinite;
-
-    bool areBothValuesZero = isTheValue(numeratorValue, 0) && isTheValue(denominatorValue, 0);
-    bool areBothValuesInfinite =
-        isPositiveOrNegativeInfinity(numeratorValue) && isPositiveOrNegativeInfinity(denominatorValue);
-    bool continueBasedOnValues = areBothValuesZero || areBothValuesInfinite;
-    return continueBasedOnDegrees && continueBasedOnValues;
 }
 
 AlbaNumber getLimitAtAValueByApproachType(
@@ -307,35 +269,71 @@ Term getObliqueAsymptote(Term const& term) {
     return result;
 }
 
-void calculateTermAndLimitUsingLhopitalsRule(
-    Term& newTerm, Term& limitValue, Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
-    Differentiation differentiation(variableName);
-    newTerm = term;
-    simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(newTerm);
-    TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(newTerm));
-    Term numerator(termsOverTerms.getCombinedNumerator());
-    Term denominator(termsOverTerms.getCombinedDenominator());
-    SubstitutionOfVariablesToValues substitution{{variableName, valueToApproach}};
-    Term numeratorValue(substitution.performSubstitutionTo(numerator));
-    Term denominatorValue(substitution.performSubstitutionTo(denominator));
-    while (continueToDifferentiateForLhopitalsRule(numerator, denominator, numeratorValue, denominatorValue)) {
-        numerator = differentiation.differentiate(numerator);
-        denominator = differentiation.differentiate(denominator);
-        newTerm = (numerator / denominator);
-        simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(newTerm);
-        TermsOverTerms newTermsOverTerms(createTermsOverTermsFromTerm(newTerm));
-        numerator = newTermsOverTerms.getCombinedNumerator();
-        denominator = newTermsOverTerms.getCombinedDenominator();
-        numeratorValue = substitution.performSubstitutionTo(numerator);
-        denominatorValue = substitution.performSubstitutionTo(denominator);
+bool isAlmostEqualForLimitIteration(AlbaNumber const& value1, AlbaNumber const& value2) {
+    return isAlmostEqual(value1.getDouble(), value2.getDouble(), COMPARISON_TOLERANCE_FOR_LIMIT_ITERATION);
+}
+
+bool isAlmostEqualForLimitChecking(AlbaNumber const& value1, AlbaNumber const& value2) {
+    return isAlmostEqual(value1.getDouble(), value2.getDouble(), COMPARISON_TOLERANCE_FOR_LIMIT_CHECKING);
+}
+
+bool hasVerticalAsymptoteAtValue(Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
+    return getLimitAtAValueInThePositiveSide(term, variableName, valueToApproach).isPositiveOrNegativeInfinity() ||
+           getLimitAtAValueInTheNegativeSide(term, variableName, valueToApproach).isPositiveOrNegativeInfinity();
+}
+
+bool hasHorizontalAsymptoteAtValue(Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
+    bool result(false);
+    Term limitAtPositiveInfinity(getLimitAtInfinity(term, variableName, ALBA_NUMBER_POSITIVE_INFINITY));
+    Term limitAtNegativeInfinity(getLimitAtInfinity(term, variableName, ALBA_NUMBER_NEGATIVE_INFINITY));
+    if (limitAtPositiveInfinity.isConstant() && limitAtNegativeInfinity.isConstant()) {
+        result = limitAtPositiveInfinity.getAsNumber() == valueToApproach ||
+                 limitAtNegativeInfinity.getAsNumber() == valueToApproach;
     }
-    Term outputValue(substitution.performSubstitutionTo(newTerm));
-    if (isNan(outputValue) ||
-        (isPositiveOrNegativeInfinity(numeratorValue) && isPositiveOrNegativeInfinity(denominatorValue))) {
-        limitValue = getLimitAtAValueOrInfinity(newTerm, variableName, valueToApproach);
-    } else {
-        limitValue = outputValue;
+    return result;
+}
+
+bool isSqueezeTheoremSatisfied(
+    Term const& alwaysLowerTermAtInterval, Term const& termInBetweenAtInterval, Term const& alwaysHigherTermAtInterval,
+    string const& variableName, AlbaNumber const& valueToApproach) {
+    // Theorem: Suppose that the functions f, g, and h are defined on some open interval I containing A except
+    // possibly A itself, and that f(x) <= g(x) <= h(x) for all x in I for which x != A. Also that the limit for
+    // f(x) as it approaches A and limit for h(x) as it approaches A, both exists and are both equal to L
+    // Then, the limit of g(x) exists and equal to L as well.
+    bool result(false);
+    Term limitAtLower(simplifyAndGetLimitAtAValue(
+        alwaysLowerTermAtInterval, variableName, valueToApproach, LimitAtAValueApproachType::BothSides));
+    Term limitAtTermInBetween(simplifyAndGetLimitAtAValue(
+        termInBetweenAtInterval, variableName, valueToApproach, LimitAtAValueApproachType::BothSides));
+    Term limitAtHigher(simplifyAndGetLimitAtAValue(
+        alwaysHigherTermAtInterval, variableName, valueToApproach, LimitAtAValueApproachType::BothSides));
+
+    if (limitAtLower == limitAtHigher) {
+        // double check if limit really exists
+        result = limitAtTermInBetween == limitAtLower;
     }
+    return result;
+}
+
+bool continueToDifferentiateForLhopitalsRule(
+    Term const& numerator, Term const& denominator, Term const& numeratorValue, Term const& denominatorValue) {
+    AlbaNumber numeratorDegree(getDegree(numerator));
+    AlbaNumber denominatorDegree(getDegree(denominator));
+
+    bool areBothDegreesZero = numeratorDegree == 0 && denominatorDegree == 0;
+    bool areDegreesEitherZeroOrNonZero =
+        (numeratorDegree == 0 && denominatorDegree != 0) || (numeratorDegree != 0 && denominatorDegree == 0);
+    bool areDegreesEitherNonZeroOrInfinite =
+        (numeratorDegree != 0 && denominatorDegree.isPositiveOrNegativeInfinity()) ||
+        (numeratorDegree.isPositiveOrNegativeInfinity() && denominatorDegree != 0);
+    bool continueBasedOnDegrees =
+        areBothDegreesZero || areDegreesEitherZeroOrNonZero || areDegreesEitherNonZeroOrInfinite;
+
+    bool areBothValuesZero = isTheValue(numeratorValue, 0) && isTheValue(denominatorValue, 0);
+    bool areBothValuesInfinite =
+        isPositiveOrNegativeInfinity(numeratorValue) && isPositiveOrNegativeInfinity(denominatorValue);
+    bool continueBasedOnValues = areBothValuesZero || areBothValuesInfinite;
+    return continueBasedOnDegrees && continueBasedOnValues;
 }
 
 Term getLimitAtAValue(

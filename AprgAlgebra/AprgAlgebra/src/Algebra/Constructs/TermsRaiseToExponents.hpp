@@ -15,9 +15,9 @@ public:
     TermsRaiseToExponents();
     [[nodiscard]] BaseToExponentMap const& getBaseToExponentMap() const;
     [[nodiscard]] ExponentType getExponentOfBase(Term const& base) const;
+    [[nodiscard]] Term getCombinedTerm() const;
     [[nodiscard]] Terms getTermsInMultiplicationOperation() const;
     [[nodiscard]] TermsWithDetails getTermWithDetailsInMultiplicationAndDivisionOperation() const;
-    [[nodiscard]] Term getCombinedTerm() const;
     void addExponents(TermsRaiseToExponents const& termsRaiseToNumbers);
     void subtractExponents(TermsRaiseToExponents const& termsRaiseToNumbers);
     void multiplyToExponents(ExponentType const& exponent);
@@ -29,8 +29,8 @@ public:
     void simplify();
 
 protected:
-    [[nodiscard]] bool isNegative(ExponentType const& exponent) const;
     [[nodiscard]] Term convertToTerm(Term const& base, ExponentType const& exponent) const;
+    [[nodiscard]] bool isNegative(ExponentType const& exponent) const;
     void removeItemsWithExponentsZero();
     void putTermUsingBaseToExponentType(Term const& term, int const sign);
     BaseToExponentMap m_baseToExponentMap;

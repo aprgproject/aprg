@@ -57,10 +57,6 @@ public:
     }
 
 private:
-    [[nodiscard]] bool isValidRange(Range const& range) const {
-        return range.first < static_cast<Index>(m_values.size()) && range.second < static_cast<Index>(m_values.size());
-    }
-
     [[nodiscard]] Index getSquareRootSize(Index const numberOfValues) const {
         return static_cast<Index>(sqrt(numberOfValues));
     }
@@ -90,6 +86,10 @@ private:
             return blockIndex1 < blockIndex2;
         });
         return result;
+    }
+
+    [[nodiscard]] bool isValidRange(Range const& range) const {
+        return range.first < static_cast<Index>(m_values.size()) && range.second < static_cast<Index>(m_values.size());
     }
 
     void moveToTargetRange(

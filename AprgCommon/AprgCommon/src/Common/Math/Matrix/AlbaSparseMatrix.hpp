@@ -31,25 +31,6 @@ public:
         setEntries(matrixData);
     }
 
-    // rule of zero
-    bool operator==(AlbaSparseMatrix const& secondMatrix) const {
-        bool isEqual(true);
-        if (m_numberOfColumns != secondMatrix.m_numberOfColumns || m_numberOfRows != secondMatrix.m_numberOfRows) {
-            isEqual = false;
-        } else if (m_matrixData != secondMatrix.m_matrixData) {
-            UniqueIndexes allIndexes(getAllIndexes(m_matrixData, secondMatrix.m_matrixData));
-            for (size_t const index : allIndexes) {
-                if (getEntry(index) != secondMatrix.getEntry(index)) {
-                    isEqual = false;
-                    break;
-                }
-            }
-        }
-        return isEqual;
-    }
-
-    bool operator!=(AlbaSparseMatrix const& secondMatrix) const { return !operator==(secondMatrix); }
-
     AlbaSparseMatrix operator+(AlbaSparseMatrix const& secondMatrix) const {
         assert(
             (m_numberOfColumns == secondMatrix.m_numberOfColumns) && (m_numberOfRows == secondMatrix.m_numberOfRows));
@@ -82,6 +63,24 @@ public:
         return result;
     }
 
+    // rule of zero
+    bool operator==(AlbaSparseMatrix const& secondMatrix) const {
+        bool isEqual(true);
+        if (m_numberOfColumns != secondMatrix.m_numberOfColumns || m_numberOfRows != secondMatrix.m_numberOfRows) {
+            isEqual = false;
+        } else if (m_matrixData != secondMatrix.m_matrixData) {
+            UniqueIndexes allIndexes(getAllIndexes(m_matrixData, secondMatrix.m_matrixData));
+            for (size_t const index : allIndexes) {
+                if (getEntry(index) != secondMatrix.getEntry(index)) {
+                    isEqual = false;
+                    break;
+                }
+            }
+        }
+        return isEqual;
+    }
+
+    bool operator!=(AlbaSparseMatrix const& secondMatrix) const { return !operator==(secondMatrix); }
     [[nodiscard]] size_t getNumberOfColumns() const { return m_numberOfColumns; }
     [[nodiscard]] size_t getNumberOfRows() const { return m_numberOfRows; }
 
@@ -95,11 +94,6 @@ public:
     }
 
     MatrixData const& getMatrixData() const { return m_matrixData; }
-
-    DataType& getEntryReference(size_t const xPosition, size_t const yPosition) {
-        assert((xPosition < m_numberOfColumns) && (yPosition < m_numberOfRows));
-        return m_matrixData[getMatrixIndex(xPosition, yPosition)];
-    }
 
     void setEntry(size_t const xPosition, size_t const yPosition, DataType const& value) {
         assert((xPosition < m_numberOfColumns) && (yPosition < m_numberOfRows));
@@ -136,6 +130,11 @@ public:
         m_matrixData = newMatrixData;
     }
 
+    DataType& getEntryReference(size_t const xPosition, size_t const yPosition) {
+        assert((xPosition < m_numberOfColumns) && (yPosition < m_numberOfRows));
+        return m_matrixData[getMatrixIndex(xPosition, yPosition)];
+    }
+
 private:
     [[nodiscard]] size_t getMatrixIndex(
         size_t const xPosition, size_t const yPosition, size_t const numberOfColumns) const {
@@ -144,26 +143,6 @@ private:
 
     [[nodiscard]] size_t getTranposeIndex(size_t const index) const {
         return getMatrixIndex(index / m_numberOfColumns, index % m_numberOfColumns, m_numberOfRows);
-    }
-
-    DataType getEntry(size_t const index) const {
-        DataType result{};
-        auto matrixIt = m_matrixData.find(index);
-        if (matrixIt != m_matrixData.cend()) {
-            result = matrixIt->second;
-        }
-        return result;
-    }
-
-    UniqueIndexes getAllIndexes(MatrixData const& data1, MatrixData const& data2) const {
-        UniqueIndexes result;
-        for (auto const& [index, value] : data1) {
-            result.emplace(index);
-        }
-        for (auto const& [index, value] : data2) {
-            result.emplace(index);
-        }
-        return result;
     }
 
     AlbaSparseMatrix doUnaryOperation(AlbaSparseMatrix const& inputMatrix, UnaryFunction const& unaryFunction) const {
@@ -187,6 +166,26 @@ private:
                 binaryFunction(firstMatrix.getEntry(index), secondMatrix.getEntry(index));
         }
         return resultMatrix;
+    }
+
+    DataType getEntry(size_t const index) const {
+        DataType result{};
+        auto matrixIt = m_matrixData.find(index);
+        if (matrixIt != m_matrixData.cend()) {
+            result = matrixIt->second;
+        }
+        return result;
+    }
+
+    UniqueIndexes getAllIndexes(MatrixData const& data1, MatrixData const& data2) const {
+        UniqueIndexes result;
+        for (auto const& [index, value] : data1) {
+            result.emplace(index);
+        }
+        for (auto const& [index, value] : data2) {
+            result.emplace(index);
+        }
+        return result;
     }
 
     friend std::ostream& operator<<(std::ostream& out, AlbaSparseMatrix<DataType> const& matrix) {

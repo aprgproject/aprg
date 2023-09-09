@@ -18,14 +18,14 @@ public:
     [[nodiscard]] virtual std::string getFullPath() const;
     [[nodiscard]] virtual std::string getDirectory() const;
     virtual void clear();
-    [[nodiscard]] bool isDirectory() const;
-    [[nodiscard]] bool isFile() const;
-    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] PathType getPathType() const;
     [[nodiscard]] std::string getImmediateDirectoryName() const;
     [[nodiscard]] std::string getFile() const;
     [[nodiscard]] std::string getFilenameOnly() const;
     [[nodiscard]] std::string getExtension() const;
-    [[nodiscard]] PathType getPathType() const;
+    [[nodiscard]] bool isDirectory() const;
+    [[nodiscard]] bool isFile() const;
+    [[nodiscard]] bool isEmpty() const;
     void input(std::string_view const path);
     void reInput();
     void goUp();

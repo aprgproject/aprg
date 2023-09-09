@@ -28,8 +28,8 @@ public:
     void analyze();
 
 private:
-    static bool isDropRateAcceptable(double const dropRate);
     static double getTalonRoDropRate(double const dropRate);
+    static bool isDropRateAcceptable(double const dropRate);
     [[nodiscard]] double getBestPrice(Item const& item) const;
     void gatherData();
     void selectMaps();

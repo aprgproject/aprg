@@ -24,20 +24,20 @@ public:
 
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    Value getNearestValue(Value const& target) {
-        Value result{};
-        if (!m_sortedValues.empty()) {
-            moveIndexesUntilCloseToValue(target);
-            result = getNearestValueFromLowerAndHigherIndices(target);
-        }
-        return result;
-    }
-
     Index getIndexOfNearestValue(Value const& target) {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
             moveIndexesUntilCloseToValue(target);
             result = getIndexNearestValueFromLowerAndHigherIndices(target);
+        }
+        return result;
+    }
+
+    Value getNearestValue(Value const& target) {
+        Value result{};
+        if (!m_sortedValues.empty()) {
+            moveIndexesUntilCloseToValue(target);
+            result = getNearestValueFromLowerAndHigherIndices(target);
         }
         return result;
     }
@@ -65,20 +65,20 @@ private:
         return result;
     }
 
-    [[nodiscard]] Value getNearestValueFromLowerAndHigherIndices(Value const& target) const {
-        Value lowerValue(getLowerValueWithoutCheck());
-        Value higherValue(getHigherValueWithoutCheck());
-        Value deviationFromLower(mathHelper::getPositiveDelta(target, lowerValue));
-        Value deviationFromHigher(mathHelper::getPositiveDelta(target, higherValue));
-        return (deviationFromLower <= deviationFromHigher) ? lowerValue : higherValue;
-    }
-
     [[nodiscard]] Index getIndexNearestValueFromLowerAndHigherIndices(Value const& target) const {
         Value lowerValue(getLowerValueWithoutCheck());
         Value higherValue(getHigherValueWithoutCheck());
         Value deviationFromLower(mathHelper::getPositiveDelta(target, lowerValue));
         Value deviationFromHigher(mathHelper::getPositiveDelta(target, higherValue));
         return (deviationFromLower <= deviationFromHigher) ? m_lowIndex : m_highIndex;
+    }
+
+    [[nodiscard]] Value getNearestValueFromLowerAndHigherIndices(Value const& target) const {
+        Value lowerValue(getLowerValueWithoutCheck());
+        Value higherValue(getHigherValueWithoutCheck());
+        Value deviationFromLower(mathHelper::getPositiveDelta(target, lowerValue));
+        Value deviationFromHigher(mathHelper::getPositiveDelta(target, higherValue));
+        return (deviationFromLower <= deviationFromHigher) ? lowerValue : higherValue;
     }
 
     void setInitialIndexes() {

@@ -12,6 +12,7 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 constexpr int MAX_NUMBER_OF_CHARACTERS = 256;
 constexpr int MAX_NUMBER_OF_SMALL_INTS = 21;
 using Characters = vector<char>;
@@ -22,30 +23,32 @@ using CharactersSorter = CountingSorterUsingCountPerValue<Characters, MAX_NUMBER
 using ListOfCharactersSorter = CountingSorterUsingCountPerValue<ListOfCharacters, MAX_NUMBER_OF_CHARACTERS>;
 using SmallIntegerSorter = CountingSorterUsingCountPerValue<Integers, MAX_NUMBER_OF_SMALL_INTS>;
 using StabilityCheckObjectsSorter = CountingSorterUsingCountPerValue<StabilityCheckObjects, MAX_NUMBER_OF_CHARACTERS>;
-
-CharactersSorter::ValueToIndexableValueFunction characterToIndexableValueFunction = [](char const& value) -> int {
-    return value & 0xFF;  // already converts to integer
-};
 CharactersSorter::IndexableValueToValueFunction indexableValueToCharacterFunction =
     [](int const indexableValue) -> char { return static_cast<char>(indexableValue & 0xFF); };
 
-SmallIntegerSorter::ValueToIndexableValueFunction smallIntToIndexableValueFunction = [](int const& value) -> int {
-    // Input: {-5, -10, 0, -3, 8, 5, -1, 10}
-    return 10 + value;
-};
 SmallIntegerSorter::IndexableValueToValueFunction indexableValueToSmallIntFunction =
     [](int const indexableValue) -> int {
     // Input: {-5, -10, 0, -3, 8, 5, -1, 10}
     return indexableValue - 10;
 };
 
-StabilityCheckObjectsSorter::ValueToIndexableValueFunction stabilityCheckObjectToIndexableValueFunction =
-    [](StabilityCheckObject const& value) -> int {
-    return value.getVisiblePart() & 0xFF;  // there is some splicing here
-};
 StabilityCheckObjectsSorter::IndexableValueToValueFunction indexableValueToStabilityCheckObjectFunction =
     [](int const indexableValue) -> StabilityCheckObject {
     return {static_cast<char>(indexableValue & 0xFF), 0};
+};
+
+CharactersSorter::ValueToIndexableValueFunction characterToIndexableValueFunction = [](char const& value) -> int {
+    return value & 0xFF;  // already converts to integer
+};
+
+SmallIntegerSorter::ValueToIndexableValueFunction smallIntToIndexableValueFunction = [](int const& value) -> int {
+    // Input: {-5, -10, 0, -3, 8, 5, -1, 10}
+    return 10 + value;
+};
+
+StabilityCheckObjectsSorter::ValueToIndexableValueFunction stabilityCheckObjectToIndexableValueFunction =
+    [](StabilityCheckObject const& value) -> int {
+    return value.getVisiblePart() & 0xFF;  // there is some splicing here
 };
 
 }  // namespace

@@ -16,16 +16,17 @@ public:
     [[nodiscard]] Values getLongestSubsequence() const;
 
 private:
-    Values getLongestSubsequence(
-        IndexToIndex& increasingPartialLengths, IndexToIndex& decreasingPartialLengths,
-        IndexToIndex& indexToIncreasingPreviousIndex, IndexToIndex& indexToDecreasingPreviousIndex) const;
-
     void computeIncreasingPartialLengths(IndexToIndex& increasingPartialLengths) const;
     void computeDecreasingPartialLengths(IndexToIndex& decreasingPartialLengths) const;
     void computeIncreasingPartialLengths(
         IndexToIndex& increasingPartialLengths, IndexToIndex& indexToIncreasingPreviousIndex) const;
     void computeDecreasingPartialLengths(
         IndexToIndex& decreasingPartialLengths, IndexToIndex& indexToDecreasingPreviousIndex) const;
+
+    Values getLongestSubsequence(
+        IndexToIndex& increasingPartialLengths, IndexToIndex& decreasingPartialLengths,
+        IndexToIndex& indexToIncreasingPreviousIndex, IndexToIndex& indexToDecreasingPreviousIndex) const;
+
     Values m_sequence;
 };
 

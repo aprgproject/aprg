@@ -4,7 +4,6 @@
 #include <limits>
 
 namespace alba::AlbaMathConstants {
-
 // Check C++ Primer for minimum number of significant digits
 // minimum number of significant digits for float is 6 (normally its ~7.2)
 // minimum number of significant digits for double is 10 (normally its ~15.9)
@@ -24,7 +23,6 @@ constexpr double POSITIVE_INFINITY_DOUBLE_VALUE = static_cast<double>(INFINITY);
 constexpr double NEGATIVE_INFINITY_DOUBLE_VALUE = static_cast<double>(-INFINITY);
 constexpr double NAN_DOUBLE_VALUE = static_cast<double>(NAN);
 constexpr double DOUBLE_EPSILON = std::numeric_limits<double>::epsilon();
-
 }  // namespace alba::AlbaMathConstants
 
 // From: https://en.wikipedia.org/wiki/Floating-point_arithmetic#Internal_representation

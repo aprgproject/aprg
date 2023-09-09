@@ -4,6 +4,10 @@ using namespace std;
 
 namespace alba::algebra {
 
+std::string const& SingleVariableNameRetriever::getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty() const {
+    return m_singleVariableName;
+}
+
 bool SingleVariableNameRetriever::hasNoVariables() const { return !m_hasEncounteredAVariable; }
 
 bool SingleVariableNameRetriever::hasOnlyASingleVariable() const {
@@ -11,10 +15,6 @@ bool SingleVariableNameRetriever::hasOnlyASingleVariable() const {
 }
 
 bool SingleVariableNameRetriever::hasMultipleVariables() const { return m_hasMultipleVariables; }
-
-std::string const& SingleVariableNameRetriever::getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty() const {
-    return m_singleVariableName;
-}
 
 void SingleVariableNameRetriever::retrieveFromEquations(Equations const& equations) {
     if (!m_hasMultipleVariables) {

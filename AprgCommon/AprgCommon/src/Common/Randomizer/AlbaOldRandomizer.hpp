@@ -7,9 +7,9 @@ namespace alba {
 class AlbaOldRandomizer {
 public:
     AlbaOldRandomizer();
-    static int getRandomIntegerInUniformDistribution(int const minimum, int const maximum);
-    static double getRandomFloatingValueInUniformDistribution(double const minimum, double const maximum);
     static void resetRandomSeed();
+    static double getRandomFloatingValueInUniformDistribution(double const minimum, double const maximum);
+    static int getRandomIntegerInUniformDistribution(int const minimum, int const maximum);
 
 private:
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)

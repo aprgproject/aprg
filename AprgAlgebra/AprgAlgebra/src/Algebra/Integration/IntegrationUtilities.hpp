@@ -10,14 +10,11 @@
 
 namespace alba::algebra {
 
-bool isTheSecondFundamentalTheoremOfCalculusTrue(
-    Term const& term, std::string const& variableName, AlbaNumber const& a, AlbaNumber const& b);
-bool isTheIntegralDefinitionForFiniteCalculusIsTrue(
-    Term const& term, std::string const& variableName, AlbaNumber const& a, AlbaNumber const& b);
-bool isAreaUnderTheCurveEqualToDefiniteIntegral(
-    Term const& term, std::string const& variableName, AlbaNumber const& a, AlbaNumber const& b);
-
 AlbaNumbers getInputForAverageValueInBetweenTwoValues(
+    Term const& term, std::string const& variableName, AlbaNumber const& lowerEndInInterval,
+    AlbaNumber const& higherEndInInterval);
+
+LowerAndHigherValues getApproximateValuesForDefiniteIntegral(
     Term const& term, std::string const& variableName, AlbaNumber const& lowerEndInInterval,
     AlbaNumber const& higherEndInInterval);
 
@@ -32,8 +29,11 @@ Term getAreaUnderACurveUsingReimannSums(
     Term const& term, std::string const& variableName, AlbaNumber const& lowerEndInInterval,
     AlbaNumber const& higherEndInInterval);
 
-LowerAndHigherValues getApproximateValuesForDefiniteIntegral(
-    Term const& term, std::string const& variableName, AlbaNumber const& lowerEndInInterval,
-    AlbaNumber const& higherEndInInterval);
+bool isTheSecondFundamentalTheoremOfCalculusTrue(
+    Term const& term, std::string const& variableName, AlbaNumber const& a, AlbaNumber const& b);
+bool isTheIntegralDefinitionForFiniteCalculusIsTrue(
+    Term const& term, std::string const& variableName, AlbaNumber const& a, AlbaNumber const& b);
+bool isAreaUnderTheCurveEqualToDefiniteIntegral(
+    Term const& term, std::string const& variableName, AlbaNumber const& a, AlbaNumber const& b);
 
 }  // namespace alba::algebra

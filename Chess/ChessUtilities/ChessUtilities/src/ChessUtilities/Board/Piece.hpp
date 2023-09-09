@@ -20,16 +20,16 @@ public:
     bool operator==(Piece const& piece) const;
     bool operator!=(Piece const& piece) const;
     static PieceColor extractColor(uint8_t const data);
-    static PieceType extractType(uint8_t const data);
     static PieceColorAndType extractColorAndType(uint8_t const data);
+    static PieceType extractType(uint8_t const data);
     static uint8_t getDataFromColorAndType(PieceColorAndType const pieceColorAndType);
     static uint8_t getDataFromColorAndType(PieceColor const color, PieceType const type);
-    [[nodiscard]] bool isEmpty() const;
-    [[nodiscard]] char getFenCharacter() const;
     [[nodiscard]] PieceColor getColor() const;
-    [[nodiscard]] PieceType getType() const;
     [[nodiscard]] PieceColorAndType getColorAndType() const;
+    [[nodiscard]] PieceType getType() const;
     [[nodiscard]] uint8_t getData() const;
+    [[nodiscard]] char getFenCharacter() const;
+    [[nodiscard]] bool isEmpty() const;
 
 private:
     uint8_t m_data;

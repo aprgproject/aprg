@@ -10,6 +10,7 @@ public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using VertexToIntMap = typename GraphTypes<Vertex>::VertexToIntMap;
     BasePathSearchWithDistanceCount() = default;
+    [[nodiscard]] VertexToIntMap const& getEndVertexToDistanceCountMap() const { return m_endVertexToDistanceCountMap; }
 
     [[nodiscard]] int getDistanceTo(Vertex const& endVertex) const {
         int result(0);
@@ -19,8 +20,6 @@ public:
         }
         return result;
     }
-
-    [[nodiscard]] VertexToIntMap const& getEndVertexToDistanceCountMap() const { return m_endVertexToDistanceCountMap; }
 
     void initializeDistances(Vertices const& vertices) {
         for (Vertex const& vertex : vertices) {

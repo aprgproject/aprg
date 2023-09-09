@@ -15,57 +15,8 @@ AlbaGrepStringToken::AlbaGrepStringToken(
     AlbaGrepStringOperatorType const operatorType, std::string const& operatorString)
     : m_type(TokenType::Operator), m_operatorType(operatorType), m_string(operatorString) {}
 
-bool AlbaGrepStringToken::isToBeIgnored() const {
-    return TokenType::Dummy == m_type || AlbaGrepStringOperatorType::IgnoreOperator == m_operatorType;
-}
-
-bool AlbaGrepStringToken::isOperator() const { return TokenType::Operator == m_type; }
-
-bool AlbaGrepStringToken::isClosingParenthesis() const {
-    return AlbaGrepStringOperatorType::ClosingParenthesis == m_operatorType;
-}
-
-bool AlbaGrepStringToken::isOpeningParenthesis() const {
-    return AlbaGrepStringOperatorType::OpeningParenthesis == m_operatorType;
-}
-
-bool AlbaGrepStringToken::isString() const { return TokenType::StringToFind == m_type; }
-
-bool AlbaGrepStringToken::isBiDirectionalOperation() const {
-    return AlbaGrepStringOperatorType::AndOperator == m_operatorType ||
-           AlbaGrepStringOperatorType::OrOperator == m_operatorType ||
-           AlbaGrepStringOperatorType::XnorOperator == m_operatorType ||
-           AlbaGrepStringOperatorType::XorOperator == m_operatorType;
-}
-
-bool AlbaGrepStringToken::isPrefixOperation() const {
-    return AlbaGrepStringOperatorType::NotOperator == m_operatorType;
-}
-
-int AlbaGrepStringToken::getOperatorPriority() const {
-    int score(0);
-    switch (m_operatorType) {
-        case AlbaGrepStringOperatorType::NotOperator:
-            score = 3;
-            break;
-        case AlbaGrepStringOperatorType::AndOperator:
-        case AlbaGrepStringOperatorType::OrOperator:
-        case AlbaGrepStringOperatorType::XnorOperator:
-        case AlbaGrepStringOperatorType::XorOperator:
-            score = 2;
-            break;
-        case AlbaGrepStringOperatorType::OpeningParenthesis:
-            score = 1;
-            break;
-        default:
-            score = 0;
-            break;
-    }
-    return score;
-}
-
-AlbaGrepStringToken::TokenType AlbaGrepStringToken::getTokenType() const { return m_type; }
 AlbaGrepStringOperatorType AlbaGrepStringToken::getOperatorType() const { return m_operatorType; }
+AlbaGrepStringToken::TokenType AlbaGrepStringToken::getTokenType() const { return m_type; }
 
 string AlbaGrepStringToken::getTokenTypeString() const {
     string result;
@@ -112,6 +63,55 @@ string AlbaGrepStringToken::getStringToFind() const {
         result = m_string;
     }
     return result;
+}
+
+int AlbaGrepStringToken::getOperatorPriority() const {
+    int score(0);
+    switch (m_operatorType) {
+        case AlbaGrepStringOperatorType::NotOperator:
+            score = 3;
+            break;
+        case AlbaGrepStringOperatorType::AndOperator:
+        case AlbaGrepStringOperatorType::OrOperator:
+        case AlbaGrepStringOperatorType::XnorOperator:
+        case AlbaGrepStringOperatorType::XorOperator:
+            score = 2;
+            break;
+        case AlbaGrepStringOperatorType::OpeningParenthesis:
+            score = 1;
+            break;
+        default:
+            score = 0;
+            break;
+    }
+    return score;
+}
+
+bool AlbaGrepStringToken::isToBeIgnored() const {
+    return TokenType::Dummy == m_type || AlbaGrepStringOperatorType::IgnoreOperator == m_operatorType;
+}
+
+bool AlbaGrepStringToken::isOperator() const { return TokenType::Operator == m_type; }
+
+bool AlbaGrepStringToken::isClosingParenthesis() const {
+    return AlbaGrepStringOperatorType::ClosingParenthesis == m_operatorType;
+}
+
+bool AlbaGrepStringToken::isOpeningParenthesis() const {
+    return AlbaGrepStringOperatorType::OpeningParenthesis == m_operatorType;
+}
+
+bool AlbaGrepStringToken::isString() const { return TokenType::StringToFind == m_type; }
+
+bool AlbaGrepStringToken::isBiDirectionalOperation() const {
+    return AlbaGrepStringOperatorType::AndOperator == m_operatorType ||
+           AlbaGrepStringOperatorType::OrOperator == m_operatorType ||
+           AlbaGrepStringOperatorType::XnorOperator == m_operatorType ||
+           AlbaGrepStringOperatorType::XorOperator == m_operatorType;
+}
+
+bool AlbaGrepStringToken::isPrefixOperation() const {
+    return AlbaGrepStringOperatorType::NotOperator == m_operatorType;
 }
 
 void AlbaGrepStringToken::appendToString(char const character) { m_string += character; }

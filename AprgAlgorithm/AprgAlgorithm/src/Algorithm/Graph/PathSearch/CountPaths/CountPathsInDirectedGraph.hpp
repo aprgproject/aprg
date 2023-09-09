@@ -20,6 +20,18 @@ public:
     int getCount(Vertex const& start, Vertex const& end) { return getCountInternal(start, end); }
 
 private:
+    void initialize() {
+        Vertices verticesInOrder(VertexOrderingUsingDfs<Vertex>(m_graph).getVerticesInTopologicalOrder());
+        int index(0);
+        for (Vertex const& vertexInOrder : verticesInOrder) {
+            m_vertexToTopologicalIndex[vertexInOrder] = index++;
+        }
+
+        for (auto const& [startVertexOfEdge, endVertexOfEdge] : m_graph.getEdges()) {
+            m_vertexToDependentVertices[endVertexOfEdge].emplace(startVertexOfEdge);
+        }
+    }
+
     int getCountInternal(Vertex const& start, Vertex const& end) {
         int result(1);  // if start and end are equal, then return one count
         if (start != end) {
@@ -54,18 +66,6 @@ private:
             }
         }
         return result;
-    }
-
-    void initialize() {
-        Vertices verticesInOrder(VertexOrderingUsingDfs<Vertex>(m_graph).getVerticesInTopologicalOrder());
-        int index(0);
-        for (Vertex const& vertexInOrder : verticesInOrder) {
-            m_vertexToTopologicalIndex[vertexInOrder] = index++;
-        }
-
-        for (auto const& [startVertexOfEdge, endVertexOfEdge] : m_graph.getEdges()) {
-            m_vertexToDependentVertices[endVertexOfEdge].emplace(startVertexOfEdge);
-        }
     }
 
     BaseDirectedGraphWithVertex const& m_graph;
