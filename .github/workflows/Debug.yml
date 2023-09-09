@@ -12,8 +12,8 @@ on:
 jobs:
 
   debugBuild:
-    name: Perform linting
-    runs-on: ubuntu-latest
+    name: Debug job
+    runs-on: windows-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -25,4 +25,6 @@ jobs:
           echo "cmake version: [$(cmake --version)]"
           choco info ninja
           echo "ninja version: [$(ninja --version)]"
+          choco search boost
+          choco search clang
           
