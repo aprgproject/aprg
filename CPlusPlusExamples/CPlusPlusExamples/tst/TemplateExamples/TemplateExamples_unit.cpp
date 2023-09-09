@@ -385,6 +385,7 @@ constexpr bool isAnArray<Tp[N]> = true;
 // This is a full specialization
 template <>
 constexpr bool isAnArray<void> = true;
+
 // -> A partial specialization is any specialization that is, itself a template
 // ---> It still requires further "customization" by the user before it can be used.
 // -> The user can explicitly specify values for the original template's template parameters,

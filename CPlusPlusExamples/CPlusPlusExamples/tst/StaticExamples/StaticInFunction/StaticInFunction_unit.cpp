@@ -3,14 +3,17 @@
 namespace alba {
 
 namespace {
+
 int sampleFunctionWhichIsNonInitializedAndIncrementsOne() {
     static int value;
     return value++;
 }
+
 int sampleFunctionWhichIsInitializedAndIncrementsOne() {
     static int value = 100;
     return value++;
 }
+
 }  // namespace
 
 TEST(StaticInFunctionTest, StaticValuesAreInitializedCorrectlyAndCanBeChanged) {
