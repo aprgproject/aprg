@@ -24,7 +24,67 @@ using namespace std;
 
 namespace {
 bool shouldStillRun = true;
+
+string getOneCharPiece(string const& pieceName) {
+    string result;
+    if ("knight" == pieceName) {
+        result = "N";
+    } else if ("bishop" == pieceName) {
+        result = "B";
+    } else if ("rook" == pieceName) {
+        result = "R";
+    } else if ("queen" == pieceName) {
+        result = "Q";
+    } else if ("king" == pieceName) {
+        result = "K";
+    }
+    return result;
 }
+
+string removeHtmlTags(string const& mainString) {
+    string withoutTags;
+    string withTags = mainString;
+    int firstIndexOfFirstString = withTags.find("<", 0);
+    while (isNotNpos(firstIndexOfFirstString)) {
+        if (!shouldStillRun) {
+            exit(0);
+        }
+        int lastIndexOfFirstString = firstIndexOfFirstString + 1;
+        int firstIndexOfSecondString = withTags.find(">", lastIndexOfFirstString);
+        if (isNotNpos(firstIndexOfSecondString)) {
+            int lastIndexOfSecondString = firstIndexOfSecondString + 1;
+            withoutTags += withTags.substr(0, firstIndexOfFirstString);
+            withTags = withTags.substr(lastIndexOfSecondString);
+            firstIndexOfFirstString = withTags.find("<", 0);
+        } else {
+            break;
+        }
+    }
+    return withoutTags + withTags;
+}
+
+string getStringInBetween(
+    string_view const mainString, string_view const firstString, string_view const secondString, int& index) {
+    string result{};
+    int indexToStart = index;
+    int firstIndexOfFirstString = mainString.find(firstString, indexToStart);
+    if (isNotNpos(firstIndexOfFirstString)) {
+        int lastIndexOfFirstString = firstIndexOfFirstString + firstString.length();
+        int firstIndexOfSecondString = mainString.find(secondString, lastIndexOfFirstString);
+        if (isNotNpos(firstIndexOfSecondString)) {
+            result = mainString.substr(lastIndexOfFirstString, firstIndexOfSecondString - lastIndexOfFirstString);
+            index = firstIndexOfSecondString + secondString.length();
+        }
+    }
+    return result;
+}
+
+string getStringInBetween(string_view const mainString, string_view const firstString, string_view const secondString) {
+    int tempIndex = 0;
+    return getStringInBetween(mainString, firstString, secondString, tempIndex);
+}
+
+}  // namespace
 
 namespace alba {
 
@@ -231,65 +291,6 @@ int getLineNumber(string const& lineNumberFile) {
     ifstream inStream(lineNumberFile);
     inStream >> result;
     return result;
-}
-
-string getOneCharPiece(string const& pieceName) {
-    string result;
-    if ("knight" == pieceName) {
-        result = "N";
-    } else if ("bishop" == pieceName) {
-        result = "B";
-    } else if ("rook" == pieceName) {
-        result = "R";
-    } else if ("queen" == pieceName) {
-        result = "Q";
-    } else if ("king" == pieceName) {
-        result = "K";
-    }
-    return result;
-}
-
-string getStringInBetween(
-    string_view const mainString, string_view const firstString, string_view const secondString, int& index) {
-    string result{};
-    int indexToStart = index;
-    int firstIndexOfFirstString = mainString.find(firstString, indexToStart);
-    if (isNotNpos(firstIndexOfFirstString)) {
-        int lastIndexOfFirstString = firstIndexOfFirstString + firstString.length();
-        int firstIndexOfSecondString = mainString.find(secondString, lastIndexOfFirstString);
-        if (isNotNpos(firstIndexOfSecondString)) {
-            result = mainString.substr(lastIndexOfFirstString, firstIndexOfSecondString - lastIndexOfFirstString);
-            index = firstIndexOfSecondString + secondString.length();
-        }
-    }
-    return result;
-}
-
-string getStringInBetween(string_view const mainString, string_view const firstString, string_view const secondString) {
-    int tempIndex = 0;
-    return getStringInBetween(mainString, firstString, secondString, tempIndex);
-}
-
-string removeHtmlTags(string const& mainString) {
-    string withoutTags;
-    string withTags = mainString;
-    int firstIndexOfFirstString = withTags.find("<", 0);
-    while (isNotNpos(firstIndexOfFirstString)) {
-        if (!shouldStillRun) {
-            exit(0);
-        }
-        int lastIndexOfFirstString = firstIndexOfFirstString + 1;
-        int firstIndexOfSecondString = withTags.find(">", lastIndexOfFirstString);
-        if (isNotNpos(firstIndexOfSecondString)) {
-            int lastIndexOfSecondString = firstIndexOfSecondString + 1;
-            withoutTags += withTags.substr(0, firstIndexOfFirstString);
-            withTags = withTags.substr(lastIndexOfSecondString);
-            firstIndexOfFirstString = withTags.find("<", 0);
-        } else {
-            break;
-        }
-    }
-    return withoutTags + withTags;
 }
 
 strings getLineOfMoves(string const& lineFile, int const lineNumber) {

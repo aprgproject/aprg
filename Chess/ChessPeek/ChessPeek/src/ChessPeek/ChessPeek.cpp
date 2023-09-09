@@ -10,11 +10,16 @@
 using namespace std;
 
 namespace {
-
 static atomic_bool currentlyCopying = false;
 static atomic_bool currentlyPrinting = false;
 bool shouldStillRun = true;  // USE ESCAPE KEY TO CLEANLY SHUTDOWN
-
+void trackKeyPress() {
+    alba::AlbaLocalUserAutomation userAutomation;
+    while (shouldStillRun) {
+        shouldStillRun = !userAutomation.isKeyPressed(VK_ESCAPE);
+        Sleep(100);
+    }
+}
 }  // namespace
 
 namespace alba {
@@ -181,14 +186,6 @@ void ChessPeek::printCalculationDetails() {
         currentlyPrinting = false;
     } else {
         m_hasPendingPrintAction = true;
-    }
-}
-
-void trackKeyPress() {
-    AlbaLocalUserAutomation userAutomation;
-    while (shouldStillRun) {
-        shouldStillRun = !userAutomation.isKeyPressed(VK_ESCAPE);
-        Sleep(100);
     }
 }
 
