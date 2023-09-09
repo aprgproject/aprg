@@ -17,6 +17,7 @@ using namespace std;
 
 namespace alba::AprgBitmap {
 
+constexpr int MAX_PEN_CIRCLE_RADIUS_COORDINATE = 5;
 BitmapFilters::BitmapFilters(string const& path) : m_bitmap(path) {}
 
 optional<Circle> BitmapFilters::getPossiblePenCircle(
@@ -554,7 +555,5 @@ void BitmapFilters::determineConnectedComponentsUsingTwoPassInSecondPass(
         }
     });
 }
-
-constexpr int MAX_PEN_CIRCLE_RADIUS_COORDINATE = 5;
 
 }  // namespace alba::AprgBitmap
