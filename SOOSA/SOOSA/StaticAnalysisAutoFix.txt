@@ -1,33 +1,3 @@
-StaticAnalysisJobIdentifier: [50]
-2023-09-05T17:31:21
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/InputConfiguration.cpp:14:61: warning: narrowing conversion from 'std::map<int, int>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/InputConfiguration.cpp:16:63: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:116:48: warning: narrowing conversion from 'std::map<int, int>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:219:13: warning: method 'areLinesValid' can be made static [readability-convert-member-functions-to-static]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:220:95: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.hpp:98:19: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.hpp:99:99: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:404:51: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:431:30: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:443:9: warning: narrowing conversion from 'std::multimap<double, alba::DataSample<2>>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:454:12: warning: method 'getRetainSizeInLineModel' can be made static [readability-convert-member-functions-to-static]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:454:80: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.hpp:124:19: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.hpp:124:91: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:646:31: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:713:30: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:782:22: warning: narrowing conversion from 'double' to 'int' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:836:13: warning: narrowing conversion from 'std::multimap<double, double>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:946:34: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:977:42: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:1152:12: warning: narrowing conversion from 'double' to 'int' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.hpp:106:5: warning: function 'getSamplesInVerticalLine' should be marked [[nodiscard]] [modernize-use-nodiscard]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.hpp:106:5: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.hpp:107:5: warning: function 'getSamplesInHorizontalLine' should be marked [[nodiscard]] [modernize-use-nodiscard]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.hpp:107:5: note: FIX-IT applied suggested code changes
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:173:9: warning: Call to temporary is a no-op: alba::soosa::SOOSA::Status::setError [-Wclazy-writing-to-temporary]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:392:9: warning: Call to temporary is a no-op: alba::soosa::SOOSA::Status::setError [-Wclazy-writing-to-temporary]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:526:9: warning: Call to temporary is a no-op: alba::soosa::SOOSA::Status::setError [-Wclazy-writing-to-temporary]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SOOSA.cpp:555:13: warning: Call to temporary is a no-op: alba::soosa::SOOSA::Status::setError [-Wclazy-writing-to-temporary]
-/home/runner/work/aprg/aprg/SOOSA/SOOSA/src/SoosaConfiguration.cpp:36:12: warning: narrowing conversion from 'double' to 'int' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+StaticAnalysisJobIdentifier: [56]
+2023-09-09T18:36:45
 DONE!
