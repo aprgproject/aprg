@@ -16,7 +16,6 @@ TEST(ThreeDimensionsLineTest, LineCanBeComparedForEquality)
     EXPECT_NE(Line(1,2,3), Line(2,3,4));
 }
 */
-
 TEST(ThreeDimensionsLineTest, EmptyLine) {
     Line line;
 

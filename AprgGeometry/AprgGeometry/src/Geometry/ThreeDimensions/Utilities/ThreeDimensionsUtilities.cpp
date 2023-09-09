@@ -12,7 +12,65 @@ using namespace std;
 
 namespace alba::ThreeDimensions::threeDimensionsUtilities {
 
+namespace {
+// Internal functions
+double calculateMultiplierForIntersection(
+    double const firstCoordinateCoefficientLine1, double const firstCoordinateCoefficientLine2,
+    double const secondCoordinateCoefficientLine1, double const secondCoordinateCoefficientLine2,
+    double const firstCoordinateInitialValueLine1, double const firstCoordinateInitialValueLine2,
+    double const secondCoordinateInitialValueLine1, double const secondCoordinateInitialValueLine2) {
+    // put math here
+    double denominator = (firstCoordinateCoefficientLine2 * secondCoordinateCoefficientLine1) -
+                         (firstCoordinateCoefficientLine1 * secondCoordinateCoefficientLine2);
+    double numerator =
+        ((firstCoordinateInitialValueLine1 - firstCoordinateInitialValueLine2) * secondCoordinateCoefficientLine1) -
+        ((secondCoordinateInitialValueLine1 - secondCoordinateInitialValueLine2) * firstCoordinateCoefficientLine1);
+    return numerator / denominator;
+}
+
+bool isCoordinateValuesInLineEqual(
+    double const coordinateValueToCompare, optional<double> const& coordinateOptionalToCompare1,
+    double const coordinate2Value, double const coordinate2InitialValue,
+    optional<double> const& coordinateOptionalToCompare2, double const coordinate3Value,
+    double const coordinate3InitialValue) {
+    bool result(false);
+    if (coordinateOptionalToCompare1) {
+        result = isAlmostEqual(coordinateValueToCompare, coordinateOptionalToCompare1.value());
+    } else if (coordinateOptionalToCompare2) {
+        result = isAlmostEqual(coordinateValueToCompare, coordinateOptionalToCompare2.value());
+    } else {
+        result = isAlmostEqual(coordinate2Value, coordinate2InitialValue) &&
+                 isAlmostEqual(coordinate3Value, coordinate3InitialValue);
+    }
+    return result;
+}
+
+bool isCoordinateValuesInPlaneEqual(
+    double const coordinateValueToCompare, optional<double> const& coordinateOptionalToCompare) {
+    bool result(false);
+    if (coordinateOptionalToCompare) {
+        result = isAlmostEqual(coordinateValueToCompare, coordinateOptionalToCompare.value());
+    } else {
+        result = true;
+    }
+    return result;
+}
+
+double getCoordinateinLineIntersection(
+    double const coefficientOfCommonCoordinate1, double const coefficientOfCommonCoordinate2,
+    double const coefficientOfCoordinateToDetermine1, double const coefficientOfCoordinateToDetermine2,
+    double const dCoefficient1, double const dCoefficient2) {
+    // yCoordinateIntersection calculation is (a1d2-a2d1)/(a2b1-a1b2)
+    double numerator =
+        (coefficientOfCommonCoordinate1 * dCoefficient2) - (coefficientOfCommonCoordinate2 * dCoefficient1);
+    double denominator = (coefficientOfCommonCoordinate2 * coefficientOfCoordinateToDetermine1) -
+                         (coefficientOfCommonCoordinate1 * coefficientOfCoordinateToDetermine2);
+    return numerator / denominator;
+}
+
 // end of internal functions
+}  // namespace
+
 // external functions
 bool isPointInLine(Point const& point, Line const& line) {
     return isCoordinateValuesInLineEqual(
@@ -267,61 +325,6 @@ Plane getPlaneOfTwoDifferentLinesWithSameSlope(Line const& line1, Line const& li
 
 Plane getPerpendicularPlaneOfALineAndUsingAPointInThePlane(Line const& line, Point const& pointInPerpendicularPlane) {
     return {line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient(), pointInPerpendicularPlane};
-}
-
-bool isCoordinateValuesInLineEqual(
-    double const coordinateValueToCompare, optional<double> const& coordinateOptionalToCompare1,
-    double const coordinate2Value, double const coordinate2InitialValue,
-    optional<double> const& coordinateOptionalToCompare2, double const coordinate3Value,
-    double const coordinate3InitialValue) {
-    bool result(false);
-    if (coordinateOptionalToCompare1) {
-        result = isAlmostEqual(coordinateValueToCompare, coordinateOptionalToCompare1.value());
-    } else if (coordinateOptionalToCompare2) {
-        result = isAlmostEqual(coordinateValueToCompare, coordinateOptionalToCompare2.value());
-    } else {
-        result = isAlmostEqual(coordinate2Value, coordinate2InitialValue) &&
-                 isAlmostEqual(coordinate3Value, coordinate3InitialValue);
-    }
-    return result;
-}
-
-bool isCoordinateValuesInPlaneEqual(
-    double const coordinateValueToCompare, optional<double> const& coordinateOptionalToCompare) {
-    bool result(false);
-    if (coordinateOptionalToCompare) {
-        result = isAlmostEqual(coordinateValueToCompare, coordinateOptionalToCompare.value());
-    } else {
-        result = true;
-    }
-    return result;
-}
-
-// Internal functions
-double calculateMultiplierForIntersection(
-    double const firstCoordinateCoefficientLine1, double const firstCoordinateCoefficientLine2,
-    double const secondCoordinateCoefficientLine1, double const secondCoordinateCoefficientLine2,
-    double const firstCoordinateInitialValueLine1, double const firstCoordinateInitialValueLine2,
-    double const secondCoordinateInitialValueLine1, double const secondCoordinateInitialValueLine2) {
-    // put math here
-    double denominator = (firstCoordinateCoefficientLine2 * secondCoordinateCoefficientLine1) -
-                         (firstCoordinateCoefficientLine1 * secondCoordinateCoefficientLine2);
-    double numerator =
-        ((firstCoordinateInitialValueLine1 - firstCoordinateInitialValueLine2) * secondCoordinateCoefficientLine1) -
-        ((secondCoordinateInitialValueLine1 - secondCoordinateInitialValueLine2) * firstCoordinateCoefficientLine1);
-    return numerator / denominator;
-}
-
-double getCoordinateinLineIntersection(
-    double const coefficientOfCommonCoordinate1, double const coefficientOfCommonCoordinate2,
-    double const coefficientOfCoordinateToDetermine1, double const coefficientOfCoordinateToDetermine2,
-    double const dCoefficient1, double const dCoefficient2) {
-    // yCoordinateIntersection calculation is (a1d2-a2d1)/(a2b1-a1b2)
-    double numerator =
-        (coefficientOfCommonCoordinate1 * dCoefficient2) - (coefficientOfCommonCoordinate2 * dCoefficient1);
-    double denominator = (coefficientOfCommonCoordinate2 * coefficientOfCoordinateToDetermine1) -
-                         (coefficientOfCommonCoordinate1 * coefficientOfCoordinateToDetermine2);
-    return numerator / denominator;
 }
 
 }  // namespace alba::ThreeDimensions::threeDimensionsUtilities
