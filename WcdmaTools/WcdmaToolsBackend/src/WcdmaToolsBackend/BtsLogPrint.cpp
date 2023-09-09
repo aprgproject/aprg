@@ -12,6 +12,9 @@ using namespace std;
 namespace wcdmaToolsBackend {
 
 using namespace BtsLogPrintStateMachine;
+constexpr int NUMBER_OF_CHARACTER_FOR_FILE = 25;
+constexpr int NUMBER_OF_LETTERS_IN_HARDWARE_TYPE = 3;
+constexpr int NUMBER_OF_NUMBERS_IN_HARDWARE_TYPE = 4;
 BtsLogPrint::BtsLogPrint(string const& lineInLogs) { analyzeLineInLogs(lineInLogs); }
 
 BtsLogPrint::BtsLogPrint(string const& filename, string const& lineInLogs) : m_fileName(filename) {

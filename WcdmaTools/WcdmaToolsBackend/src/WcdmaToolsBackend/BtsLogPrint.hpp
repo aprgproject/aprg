@@ -9,7 +9,6 @@ namespace wcdmaToolsBackend {
 namespace BtsLogPrintStateMachine {
 
 enum class State {
-
     UnknownState,
     PcTimeState1_Number,
     PcTimeState2_Period,
@@ -24,14 +23,10 @@ enum class State {
     hardwareAddressState3_Letters,
     BtsTimeState,
     StopCheckingState
-
 };
 
 struct TransactionData {
-    TransactionData()
-
-        = default;
-
+    TransactionData() = default;
     bool isPcTimeSaved{false};
     bool isHardwareAddressSaved{false};
     bool isBtsTimeSaved{false};
@@ -105,9 +100,6 @@ private:
         int const index, char const character);
 
     void analyzeLineInLogs(std::string const& lineInLogs);
-    static constexpr int NUMBER_OF_CHARACTER_FOR_FILE = 25;
-    static constexpr int NUMBER_OF_LETTERS_IN_HARDWARE_TYPE = 3;
-    static constexpr int NUMBER_OF_NUMBERS_IN_HARDWARE_TYPE = 4;
     BtsLogTime m_btsTime;
     BtsLogTime m_pcTime;
     std::string m_hardwareAddress;
