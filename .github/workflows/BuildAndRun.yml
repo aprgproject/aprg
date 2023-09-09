@@ -15,7 +15,7 @@ on:
       cppBuildConfigurations:
         description: 'Build Configurations'
         required: true
-        default: '["WindowsLatestMsvc", "WindowsLatestMingw", "UbuntuLatestGcc", "UbuntuLatestClang"]'  #"MacOSLatestClang"
+        default: '["WindowsLatestMsvc", "WindowsLatestMingw", "WindowsLatestClang", "UbuntuLatestGcc", "UbuntuLatestClang"]'  #"MacOSLatestClang"
       cppCMakeBuildType:
         description: 'Build Type to use for C/C++ Project'
         type: choice
@@ -167,7 +167,7 @@ jobs:
       fail-fast: false
       matrix:
         project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
-        configurationName: ${{ fromJSON(inputs.cppBuildConfigurations != '' && inputs.cppBuildConfigurations || '["WindowsLatestMsvc", "WindowsLatestMingw", "UbuntuLatestGcc", "UbuntuLatestClang"]') }}  # ternary operator
+        configurationName: ${{ fromJSON(inputs.cppBuildConfigurations != '' && inputs.cppBuildConfigurations || '["WindowsLatestMsvc", "WindowsLatestMingw", "WindowsLatestClang", "UbuntuLatestGcc", "UbuntuLatestClang"]') }}  # ternary operator
         exclude: ${{ fromJSON(needs.determineCppProjects.outputs.excludedConfigurations) }}
         
     steps:
@@ -266,13 +266,23 @@ jobs:
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          "$buildAndRunScriptPath" cleanAndConfigureWithDefaultCompiler "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          echo "gcc version: [$(gcc --version)]"
+          "$buildAndRunScriptPath" cleanAndConfigureWithGcc "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+            
+      - name: Configure for Windows/Clang
+        if: matrix.configurationName == 'WindowsLatestClang'
+        shell: bash
+        working-directory: ${{ matrix.project }}
+        run: |
+          echo "clang version: [$(clang --version)]"
+          "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
       - name: Configure for Ubuntu/Gcc
         if: matrix.configurationName == 'UbuntuLatestGcc'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
+          echo "gcc version: [$(gcc --version)]"
           "$buildAndRunScriptPath" cleanAndConfigureWithGcc "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
       - name: Configure for Ubuntu/Clang
@@ -280,6 +290,7 @@ jobs:
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
+          echo "clang version: [$(clang --version)]"
           "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
       - name: Build
