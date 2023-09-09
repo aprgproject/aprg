@@ -11,8 +11,8 @@ scriptOption="$1"
 buildDirectoryName="$2"
 argument1="$3"
 argument2="$4"
-cCompilerLocation=""
-cppCompilerLocation=""
+cmakeCCompiler=""
+cmakeCppCompiler=""
 lsCommand="ls -la --color=auto"
 
 # Source needed scripts
@@ -50,18 +50,18 @@ getArgumentsForBuild() {
 }
 
 getGccCompilers() {
-    cCompilerLocation="$(command -v gcc)"
-    cppCompilerLocation="$(command -v g++)"
+    cmakeCCompiler="gcc"
+    cmakeCppCompiler="g++"
 }
 
 getClangCompilers() {
-    cCompilerLocation="$(command -v clang)"
-    cppCompilerLocation="$(command -v clang++)"
+    cmakeCCompiler="clang"
+    cmakeCppCompiler="clang++"
 }
 
 getClangAndClazyCompiler() {
-    cCompilerLocation="$(command -v clang)"
-    cppCompilerLocation="$(command -v clazy)" # Use clazy as static analyzer
+    cmakeCCompiler="clang"
+    cmakeCppCompiler="clazy" # Use clazy as static analyzer
 }
 
 printBuildPathAndLsCommand() {
@@ -71,11 +71,11 @@ printBuildPathAndLsCommand() {
 
 printConfigureParameters() {
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType] and cmakeGenerator is [$cmakeGenerator]."
-    if [[ -n $cCompilerLocation ]]; then
-        scriptPrint "$scriptName" "$LINENO" "The cCompilerLocation is [$cCompilerLocation]."
+    if [[ -n $cmakeCCompiler ]]; then
+        scriptPrint "$scriptName" "$LINENO" "The cmakeCCompiler is [$cmakeCCompiler]."
     fi
-    if [[ -n $cppCompilerLocation ]]; then
-        scriptPrint "$scriptName" "$LINENO" "The cppCompilerLocation is [$cppCompilerLocation]."
+    if [[ -n $cmakeCppCompiler ]]; then
+        scriptPrint "$scriptName" "$LINENO" "The cmakeCppCompiler is [$cmakeCppCompiler]."
     fi
     printBuildPathAndLsCommand
 }
@@ -160,31 +160,31 @@ elif [ "$scriptOption" == "cleanAndConfigureWithGcc" ]; then
     getArgumentsForConfigure
     getGccCompilers
     printConfigureParameters
-    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "cleanAndConfigureWithClang" ]; then
     performClean
     getArgumentsForConfigure
     getClangCompilers
     printConfigureParameters
-    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "cleanAndConfigureWithClangWithAsan" ]; then
     performClean
     getArgumentsForConfigure
     getClangCompilers
     printConfigureParameters
-    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" -DCMAKE_C_FLAGS:STRING="-g --coverage -fsanitize=address -fno-omit-frame-pointer" -DCMAKE_CXX_FLAGS:STRING="-g -fsanitize=address -fno-omit-frame-pointer" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" -DCMAKE_C_FLAGS:STRING="-g --coverage -fsanitize=address -fno-omit-frame-pointer" -DCMAKE_CXX_FLAGS:STRING="-g -fsanitize=address -fno-omit-frame-pointer" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "cleanAndConfigureWithClangAndStaticAnalyzers" ]; then
     performClean
     getArgumentsForConfigure
     getClangAndClazyCompiler
     printConfigureParameters
-    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "cleanAndConfigureWithStaticAnalyzersWithAutoFix" ]; then
     performClean
     getArgumentsForConfigure
-    getClangAndClazyCompiler
+    getClangCompilers
     printConfigureParameters
-    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "-DAPRG_ENABLE_STATIC_ANALYZERS_AUTO_FIX=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "-DAPRG_ENABLE_STATIC_ANALYZERS_AUTO_FIX=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "generateCompileCommandsJsonFile" ]; then
     performGenerateCompileCommandsJsonFile
 elif [ "$scriptOption" == "build" ]; then
