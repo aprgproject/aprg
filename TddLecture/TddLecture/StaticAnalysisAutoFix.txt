@@ -1,7 +1,3 @@
-StaticAnalysisJobIdentifier: [50]
-2023-09-05T17:41:24
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:9:53: warning: unused variable 'entity' [clang-diagnostic-unused-variable]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:12:16: warning: unused variable 'entity' [clang-diagnostic-unused-variable]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:9:53: warning: unused variable 'entity' [-Wunused-variable]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:12:16: warning: unused variable 'entity' [-Wunused-variable]
+StaticAnalysisJobIdentifier: [56]
+2023-09-09T18:39:18
 DONE!
