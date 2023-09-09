@@ -20,11 +20,24 @@ jobs:
         
       - name: Debug Prints
         run: |
-          choco install cmake ninja
+          echo "cmake version: [$(cmake --version)]"
+          choco search cmake
+          choco install cmake
           choco info cmake
           echo "cmake version: [$(cmake --version)]"
+          echo "ninja version: [$(ninja --version)]"
+          choco search ninja
+          choco install ninja
           choco info ninja
           echo "ninja version: [$(ninja --version)]"
+          echo "boost version: [$(boost --version)]"
           choco search boost
+          choco install boost
+          choco info boost
+          echo "boost version: [$(boost --version)]"
+          echo "clang version: [$(clang --version)]"
           choco search clang
+          choco install clang
+          choco info clang
+          echo "clang version: [$(clang --version)]"
           
