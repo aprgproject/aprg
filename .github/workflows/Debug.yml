@@ -1,0 +1,28 @@
+name: Debug Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      staticAnalysisJobId:
+        description: 'Job Identifier'
+        type: number
+        required: true
+        default: 0
+
+jobs:
+
+  debugBuild:
+    name: Perform linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Debug Prints
+        run: |
+          choco install cmake ninja
+          choco info cmake
+          echo "cmake version: [$(cmake --version)]"
+          choco info ninja
+          echo "ninja version: [$(ninja --version)]"
+          
