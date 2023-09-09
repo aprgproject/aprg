@@ -1,16 +1,3 @@
-StaticAnalysisJobIdentifier: [50]
-2023-09-05T19:03:50
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MapAnalyzer.cpp:197:73: warning: narrowing conversion from 'std::map<std::basic_string<char>, MonsterData>::size_type' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:305:49: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:307:47: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:309:47: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:311:46: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:313:46: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:315:48: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:317:46: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:319:48: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:321:47: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:323:48: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:18:35: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:29:33: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
+StaticAnalysisJobIdentifier: [56]
+2023-09-09T19:13:00
 DONE!
