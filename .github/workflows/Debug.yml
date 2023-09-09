@@ -31,7 +31,7 @@ jobs:
           choco info ninja
           echo "ninja version: [$(ninja --version)]"
           echo "clang version: [$(clang --version)]"
-          echo "gsl version: [$(gsl --version)]"
+          #echo "gsl version: [$(gsl --version)]"
           choco search gsl
           choco install gsl
           choco info gsl
