@@ -331,7 +331,4 @@ void HardwareConfiguration::setLcgIdOfDsps(LcgIds const& lcgIds) {
     }
 }
 
-constexpr unsigned int TCOM_FSP_ADDRESS = 0x1200;
-HardwareConfiguration::HardwareConfiguration() = default;
-
 }  // namespace alba

@@ -15,7 +15,7 @@ using AddressToFspMap = std::map<unsigned int, Fsp>;
 
 class HardwareConfiguration {
 public:
-    HardwareConfiguration();
+    HardwareConfiguration() = default;
     [[nodiscard]] unsigned int getTcomFspAddress() const;
     [[nodiscard]] unsigned int getSharedLcgId() const;
     AddressToDspMap& getAddressToDspMapReference();
@@ -49,6 +49,7 @@ private:
     void addFsp(unsigned int const fspAddress);
     void addDsp(unsigned int const dspAddress);
     void setLcgIdOfDsps(LcgIds const& lcgIds);
+    static constexpr unsigned int TCOM_FSP_ADDRESS = 0x1200;
     unsigned int m_sharedLcgId{0};
     unsigned int m_tcomFspAddress{0};
     AddressToDspMap m_dspAddressToDspMap;
