@@ -48,6 +48,16 @@ TermRaiseToTerms::TermRaiseToTerms(Term const& base, Term const& exponent)
       m_shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt(false),
       m_shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase(false) {}
 
+Term TermRaiseToTerms::getCombinedTerm() const { return getCombinedBaseAndExponents(); }
+
+Term TermRaiseToTerms::getCombinedExponents() const {
+    Term exponentCombinedTerm;
+    accumulateTermsForMultiplicationAndDivision(exponentCombinedTerm, m_exponents);
+    return exponentCombinedTerm;
+}
+
+Term const& TermRaiseToTerms::getBase() const { return m_base; }
+TermsWithDetails const& TermRaiseToTerms::getExponents() const { return m_exponents; }
 bool TermRaiseToTerms::isEmpty() const { return m_base.isEmpty(); }
 
 bool TermRaiseToTerms::doesEvenExponentCancellationHappen() const {
@@ -72,17 +82,6 @@ bool TermRaiseToTerms::doesEvenExponentCancellationHappen() const {
     return result;
 }
 
-Term TermRaiseToTerms::getCombinedTerm() const { return getCombinedBaseAndExponents(); }
-
-Term TermRaiseToTerms::getCombinedExponents() const {
-    Term exponentCombinedTerm;
-    accumulateTermsForMultiplicationAndDivision(exponentCombinedTerm, m_exponents);
-    return exponentCombinedTerm;
-}
-
-Term const& TermRaiseToTerms::getBase() const { return m_base; }
-TermsWithDetails const& TermRaiseToTerms::getExponents() const { return m_exponents; }
-Term& TermRaiseToTerms::getBaseReference() { return m_base; }
 void TermRaiseToTerms::setBase(Term const& base) { m_base = base; }
 
 void TermRaiseToTerms::setBaseAndExponent(Term const& base, Term const& exponent) {
@@ -109,6 +108,8 @@ void TermRaiseToTerms::simplify() {
     simplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBaseIfNeeded();
     simplifyBaseAndExponents();
 }
+
+Term& TermRaiseToTerms::getBaseReference() { return m_base; }
 
 void TermRaiseToTerms::simplifyConstantRaiseToFunction(
     Term& base, TermsWithDetails& exponents, Term const& exponentCombinedTerm) {

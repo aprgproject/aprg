@@ -105,13 +105,6 @@ constexpr AlbaNumber() : m_type(Type::Integer) {}
 constexpr AlbaNumber(FractionData const& fractionData) : m_type(Type::Fraction), m_data(fractionData) {}
 constexpr AlbaNumber(ComplexNumberData const& complexNumberData)
         : m_type(Type::ComplexNumber), m_data(complexNumberData) {}
-// This should be constexpr as well but a lot of coding is needed
-bool operator==(AlbaNumber const& second) const;
-bool operator!=(AlbaNumber const& second) const;
-bool operator<=(AlbaNumber const& second) const;
-bool operator>=(AlbaNumber const& second) const;
-bool operator<(AlbaNumber const& second) const;
-bool operator>(AlbaNumber const& second) const;
 AlbaNumber operator+() const;
 AlbaNumber operator-() const;
 AlbaNumber operator+(AlbaNumber const& second) const;
@@ -119,6 +112,13 @@ AlbaNumber operator-(AlbaNumber const& second) const;
 AlbaNumber operator*(AlbaNumber const& second) const;
 AlbaNumber operator/(AlbaNumber const& second) const;
 AlbaNumber operator^(AlbaNumber const& second) const;
+// This should be constexpr as well but a lot of coding is needed
+bool operator==(AlbaNumber const& second) const;
+bool operator!=(AlbaNumber const& second) const;
+bool operator<=(AlbaNumber const& second) const;
+bool operator>=(AlbaNumber const& second) const;
+bool operator<(AlbaNumber const& second) const;
+bool operator>(AlbaNumber const& second) const;
 AlbaNumber& operator+=(AlbaNumber const& second);
 AlbaNumber& operator-=(AlbaNumber const& second);
 AlbaNumber& operator*=(AlbaNumber const& second);
@@ -128,6 +128,11 @@ static AlbaNumber createNumberFromDoubleAndRoundIfNeeded(double const doubleValu
 static AlbaNumber createFraction(NumeratorDataType const numerator, NumeratorDataType const denominator);
 static AlbaNumber createFraction(NumeratorDataType const numerator, DenominatorDataType const denominator);
 static AlbaNumber createComplexNumber(ComplexFloat const& complexNumber);
+[[nodiscard]] ComplexNumberData getComplexNumberData() const;
+[[nodiscard]] FractionData getFractionData() const;
+[[nodiscard]] IntDataType getInteger() const;
+[[nodiscard]] Type getType() const;
+[[nodiscard]] double getDouble() const;
 [[nodiscard]] bool isIntegerType() const;
 [[nodiscard]] bool isDoubleType() const;
 [[nodiscard]] bool isFractionType() const;
@@ -139,11 +144,6 @@ static AlbaNumber createComplexNumber(ComplexFloat const& complexNumber);
 [[nodiscard]] bool isNotANumber() const;
 [[nodiscard]] bool isAFiniteValue() const;
 [[nodiscard]] bool isARealFiniteValue() const;
-[[nodiscard]] double getDouble() const;
-[[nodiscard]] Type getType() const;
-[[nodiscard]] IntDataType getInteger() const;
-[[nodiscard]] FractionData getFractionData() const;
-[[nodiscard]] ComplexNumberData getComplexNumberData() const;
 void convertToInteger();
 void convertToFraction();
 static constexpr double ADJUSTMENT_FLOAT_TOLERANCE = 1E-15;
@@ -151,11 +151,7 @@ static constexpr double ADJUSTMENT_FLOAT_TOLERANCE = 1E-15;
 private:
 template <typename NumberType1, typename NumberType2>
     void constructBasedFromComplexNumberDetails(NumberType1 const realPart, NumberType2 const imaginaryPart);
-// static functions
-static double getComparisonTolerance();
-static double getFloatAdjustmentTolerance();
-static double adjustFloatValue(float const value);
-static ComplexFloat createComplexFloat(ComplexNumberData const& data);
+static void correctPowerResult(double& powerResult, double const base, double const exponent);
 static AlbaNumber addBothIntegersAndReturnNumber(IntDataType const integerValue1, IntDataType const integerValue2);
 static AlbaNumber addBothDoubleAndReturnNumber(double const doubleValue1, double const doubleValue2);
 static AlbaNumber addBothFractionsAndReturnNumber(
@@ -185,7 +181,11 @@ static AlbaNumber divideBothFractionsAndReturnNumber(
 static AlbaNumber raisePowerOfBothIntegersAndReturnNumber(IntDataType const base, IntDataType const exponent);
 static AlbaNumber raisePowerOfFractionsAndIntegerAndReturnNumber(
         FractionData const& baseFractionData, IntDataType const exponent);
-static void correctPowerResult(double& powerResult, double const base, double const exponent);
+static ComplexFloat createComplexFloat(ComplexNumberData const& data);
+// static functions
+static double getComparisonTolerance();
+static double getFloatAdjustmentTolerance();
+static double adjustFloatValue(float const value);
 friend std::ostream& operator<<(std::ostream& out, AlbaNumber const& number);
 Type m_type;
 // Hotness: Type is much hotter.

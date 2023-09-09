@@ -28,30 +28,33 @@ Terms CPlusPlusReorganizeItems::getSortedAggregateTerms() const {
     Terms terms;
     SortItems sortedItems(getSortedItems());
     terms.emplace_back(TermType::WhiteSpace, "\n");
-    bool hasMultiline = hasMultilineItem(sortedItems) || sortedItems.size() > 10;
-    bool isPreviousAMultilineItem(hasMultiline);
+    bool isMultilineScope = hasMultilineItem(sortedItems) && m_scopeType != ScopeType::EnumClass;
+    bool isPreviousAMultilineItem(isMultilineScope);
     bool isFirst(true);
     bool isPreviousAnAccessControl(false);
     for (SortItem const& sortItem : sortedItems) {
         string const& item(m_items[sortItem.itemsIndex]);
         bool isAccessControl = sortItem.itemType == ItemType::AccessControl;
         bool isMultilineItem = isMultiLine(sortItem.numberOfLines) || isAccessControl;
-        bool shouldPreventNewLine = (isFirst && isAccessControl) || isPreviousAnAccessControl;
+        bool shouldPreventNewLine =
+            (isFirst && isAccessControl) || isPreviousAnAccessControl || m_scopeType == ScopeType::EnumClass;
         if ((isMultilineItem || isPreviousAMultilineItem) && !shouldPreventNewLine) {
             terms.emplace_back(TermType::WhiteSpace, "\n");
         }
 
         // terms.emplace_back(
-        //     TermType::CommentMultiline, "/*BEGIN ADD (" + stringHelper::convertToString(sortItem.score) + "," +
+        //     TermType::CommentMultiline, "/*BEGIN ADD (" + stringHelper::convertToString(sortItem.headerIndex) + "," +
+        //                                     stringHelper::convertToString(sortItem.score) + "," +
         //                                     stringHelper::convertToString(sortItem.itemsIndex) + ")*/");
         terms.emplace_back(TermType::Aggregate, item);
         // terms.emplace_back(TermType::CommentMultiline, "/*END ADD*/");
+
         terms.emplace_back(TermType::WhiteSpace, "\n");
         isPreviousAMultilineItem = isMultilineItem;
         isFirst = false;
         isPreviousAnAccessControl = isAccessControl;
     }
-    if (hasMultiline) {
+    if (isMultilineScope) {
         terms.emplace_back(TermType::WhiteSpace, "\n");
     }
     return terms;
@@ -115,8 +118,8 @@ string CPlusPlusReorganizeItems::getIdentifierBeforeParenthesis(Terms const& ter
     return {};
 }
 
-int CPlusPlusReorganizeItems::getScoreAtReturnOfFunctionSignature(string const& functionSignature) {
-    int score = 0;
+void CPlusPlusReorganizeItems::saveDetailsBasedFromFunctionSignature(
+    SortItem& sortItem, string const& functionSignature) {
     Terms terms(getTermsFromString(functionSignature));
     Patterns searchPatterns{{M(TermType::PrimitiveType)}, {M(TermType::Identifier)}, {M(TermType::Keyword)}};
     Indexes hitIndexes = searchForPatternsForwards(terms, 0, searchPatterns);
@@ -125,23 +128,25 @@ int CPlusPlusReorganizeItems::getScoreAtReturnOfFunctionSignature(string const& 
         Term const& firstTerm(terms[firstHitIndex]);
         if (firstTerm.getTermType() == TermType::PrimitiveType) {
             if (firstTerm.getContent() == "bool") {
-                score = 6;
+                sortItem.score += 3;
             } else if (firstTerm.getContent() == "void") {
-                score = 3;
+                sortItem.score += 6;
             } else {
-                score = 5;
+                sortItem.score += 4;
             }
         } else if (firstTerm.getTermType() == TermType::Identifier) {
             if (firstTerm.getContent() == "TEST" || firstTerm.getContent() == "TEST_F") {
-                score = 2;
+                sortItem.score += 2;
+            } else if (firstTerm.getContent() == "size_t") {
+                sortItem.score += 4;  // same level as integer primitive types
             } else {
-                score = 4;
+                sortItem.score += 5;
             }
         } else if (firstTerm.getTermType() == TermType::Keyword) {
-            score = 1;
+            sortItem.score += 1;
         }
+        sortItem.functionReturnTypeName = firstTerm.getContent();
     }
-    return score;
 }
 
 void CPlusPlusReorganizeItems::sortByComparingItems(SortItems& sortItems) {
@@ -221,20 +226,20 @@ CPlusPlusReorganizeItems::SortItems CPlusPlusReorganizeItems::getSortItems() con
     int index = 0;
     for (string const& item : m_items) {
         SortItem sortItem{0, 0, 0, false, ItemType::Unknown, index++, {}};
-        saveDetailsBasedFromItem(sortItem, item);
         saveDetailsFromHeaderSignatures(sortItem, item);
+        saveDetailsBasedFromItem(sortItem, item);
         sortItems.emplace_back(sortItem);
     }
     return sortItems;
 }
 
+void CPlusPlusReorganizeItems::saveDetailsFromHeaderSignatures(SortItem& sortItem, string const& item) const {
+    sortItem.headerIndex = getBestHeaderIndex(item);
+}
+
 void CPlusPlusReorganizeItems::saveDetailsBasedFromItem(SortItem& sortItem, string const& item) const {
     Terms terms(getTermsFromString(item));
     saveDetailsBasedFromItemTerms(sortItem, item, terms);
-}
-
-void CPlusPlusReorganizeItems::saveDetailsFromHeaderSignatures(SortItem& sortItem, string const& item) const {
-    sortItem.headerIndex = getBestHeaderIndex(item);
 }
 
 void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
@@ -342,14 +347,13 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
         }
     }
     if (sortItem.itemType == ItemType::Function) {
-        sortItem.functionSignature = getFunctionSignature(item);
-        sortItem.score += getScoreAtReturnOfFunctionSignature(sortItem.functionSignature);
-    }
-    if (sortItem.itemType == ItemType::Unknown) {
+        saveDetailsBasedFromFunctionSignature(sortItem, getFunctionSignature(item));
+    } else if (sortItem.itemType == ItemType::Unknown) {
         sortItem.itemType = ItemType::Data;
         if (m_scopeType == ScopeType::Namespace) {
             if (isConst) {
                 sortItem.score += 700000000;
+                sortItem.headerIndex = 0;
             } else {
                 sortItem.score += 100000000;
             }
@@ -370,7 +374,10 @@ void CPlusPlusReorganizeItems::fixItemContents() {
 bool operator<(CPlusPlusReorganizeItems::SortItem const& item1, CPlusPlusReorganizeItems::SortItem const& item2) {
     if (item1.headerIndex == item2.headerIndex) {
         if (item1.score == item2.score) {
-            return item1.itemsIndex < item2.itemsIndex;
+            if (item1.functionReturnTypeName == item2.functionReturnTypeName) {
+                return item1.itemsIndex < item2.itemsIndex;
+            }
+            return item1.functionReturnTypeName < item2.functionReturnTypeName;
         }
         return item1.score > item2.score;
     }

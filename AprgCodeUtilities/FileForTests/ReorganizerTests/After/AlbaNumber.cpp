@@ -84,22 +84,6 @@ template AlbaNumber AlbaNumber::createComplexNumber<AlbaNumber::NumeratorDataTyp
     NumeratorDataType const realPart, NumeratorDataType const imaginaryPart);
 template AlbaNumber AlbaNumber::createComplexNumber<float>(float const realPart, float const imaginaryPart);
 template AlbaNumber AlbaNumber::createComplexNumber<double>(double const realPart, double const imaginaryPart);
-
-bool AlbaNumber::operator==(AlbaNumber const& second) const {
-    bool result(false);
-    if (!isComplexNumberType() && !second.isComplexNumberType()) {
-        result = isAlmostEqual(getDouble(), second.getDouble(), getComparisonTolerance());
-    } else if (isComplexNumberType() && second.isComplexNumberType()) {
-        result = createComplexFloat(m_data.complexNumberData) == createComplexFloat(second.m_data.complexNumberData);
-    }
-    return result;
-}
-
-bool AlbaNumber::operator!=(AlbaNumber const& second) const { return !operator==(second); }
-bool AlbaNumber::operator<=(AlbaNumber const& second) const { return getDouble() <= second.getDouble(); }
-bool AlbaNumber::operator>=(AlbaNumber const& second) const { return getDouble() >= second.getDouble(); }
-bool AlbaNumber::operator<(AlbaNumber const& second) const { return getDouble() < second.getDouble(); }
-bool AlbaNumber::operator>(AlbaNumber const& second) const { return getDouble() > second.getDouble(); }
 AlbaNumber AlbaNumber::operator+() const { return *this; }
 
 AlbaNumber AlbaNumber::operator-() const {
@@ -316,6 +300,22 @@ correctPowerResult(powerResultInDouble, baseInDouble, exponentInDouble);
     return result;
 }
 
+bool AlbaNumber::operator==(AlbaNumber const& second) const {
+    bool result(false);
+    if (!isComplexNumberType() && !second.isComplexNumberType()) {
+        result = isAlmostEqual(getDouble(), second.getDouble(), getComparisonTolerance());
+    } else if (isComplexNumberType() && second.isComplexNumberType()) {
+        result = createComplexFloat(m_data.complexNumberData) == createComplexFloat(second.m_data.complexNumberData);
+    }
+    return result;
+}
+
+bool AlbaNumber::operator!=(AlbaNumber const& second) const { return !operator==(second); }
+bool AlbaNumber::operator<=(AlbaNumber const& second) const { return getDouble() <= second.getDouble(); }
+bool AlbaNumber::operator>=(AlbaNumber const& second) const { return getDouble() >= second.getDouble(); }
+bool AlbaNumber::operator<(AlbaNumber const& second) const { return getDouble() < second.getDouble(); }
+bool AlbaNumber::operator>(AlbaNumber const& second) const { return getDouble() > second.getDouble(); }
+
 AlbaNumber& AlbaNumber::operator+=(AlbaNumber const& second) {
     AlbaNumber& thisReference(*this);
     thisReference = thisReference + second;
@@ -344,47 +344,20 @@ AlbaNumber AlbaNumber::createComplexNumber(ComplexFloat const& complexNumber) {
     return createComplexNumber(complexNumber.getRealPart(), complexNumber.getImaginaryPart());
 }
 
-bool AlbaNumber::isIntegerType() const { return m_type == Type::Integer; }
-bool AlbaNumber::isDoubleType() const { return m_type == Type::Double; }
-bool AlbaNumber::isFractionType() const { return m_type == Type::Fraction; }
-bool AlbaNumber::isComplexNumberType() const { return m_type == Type::ComplexNumber; }
-bool AlbaNumber::isIntegerOrFractionType() const { return isIntegerType() || isFractionType(); }
-bool AlbaNumber::isPositiveInfinity() const { return getDouble() == POSITIVE_INFINITY_DOUBLE_VALUE; }
-bool AlbaNumber::isNegativeInfinity() const { return getDouble() == NEGATIVE_INFINITY_DOUBLE_VALUE; }
-bool AlbaNumber::isPositiveOrNegativeInfinity() const { return isinf(getDouble()); }
-bool AlbaNumber::isNotANumber() const { return isnan(getDouble()); }
-bool AlbaNumber::isAFiniteValue() const { return isfinite(getDouble()); }
-bool AlbaNumber::isARealFiniteValue() const { return isAFiniteValue() && !isComplexNumberType(); }
-
-double AlbaNumber::getDouble() const {
-    double result(0);
+AlbaNumber::ComplexNumberData AlbaNumber::getComplexNumberData() const {
+    ComplexNumberData result{0, 0};
     if (m_type == Type::Integer) {
-        result = static_cast<double>(m_data.intData);
+        result.realPart = static_cast<float>(m_data.intData);
+        result.imaginaryPart = 0U;
     } else if (m_type == Type::Double) {
-        result = m_data.doubleData;
+        result.realPart = static_cast<float>(m_data.doubleData);
+        result.imaginaryPart = 0U;
     } else if (m_type == Type::Fraction) {
-        result =
-            static_cast<double>(static_cast<double>(m_data.fractionData.numerator) / m_data.fractionData.denominator);
+        result.realPart =
+            static_cast<float>(m_data.fractionData.numerator) / static_cast<float>(m_data.fractionData.denominator);
+        result.imaginaryPart = 0U;
     } else if (m_type == Type::ComplexNumber) {
-        result = createComplexFloat(m_data.complexNumberData).getModulusWithSignOfRealPart();
-    }
-    return result;
-}
-
-AlbaNumber::Type AlbaNumber::getType() const { return m_type; }
-
-AlbaNumber::IntDataType AlbaNumber::getInteger() const {
-    IntDataType result(0);
-    if (m_type == Type::Integer) {
-        result = m_data.intData;
-    } else if (m_type == Type::Double) {
-        result = getIntegerAfterRoundingADoubleValue<IntDataType>(m_data.doubleData);
-    } else if (m_type == Type::Fraction) {
-        result = getIntegerAfterRoundingADoubleValue<IntDataType>(
-            static_cast<double>(m_data.fractionData.numerator) / m_data.fractionData.denominator);
-    } else if (m_type == Type::ComplexNumber) {
-        result = getIntegerAfterRoundingADoubleValue<IntDataType>(
-            createComplexFloat(m_data.complexNumberData).getModulusWithSignOfRealPart());
+        result = m_data.complexNumberData;
     }
     return result;
 }
@@ -411,24 +384,50 @@ FractionDetails bestFractionDetails(
     return result;
 }
 
-AlbaNumber::ComplexNumberData AlbaNumber::getComplexNumberData() const {
-    ComplexNumberData result{0, 0};
+AlbaNumber::IntDataType AlbaNumber::getInteger() const {
+    IntDataType result(0);
     if (m_type == Type::Integer) {
-        result.realPart = static_cast<float>(m_data.intData);
-        result.imaginaryPart = 0U;
+        result = m_data.intData;
     } else if (m_type == Type::Double) {
-        result.realPart = static_cast<float>(m_data.doubleData);
-        result.imaginaryPart = 0U;
+        result = getIntegerAfterRoundingADoubleValue<IntDataType>(m_data.doubleData);
     } else if (m_type == Type::Fraction) {
-        result.realPart =
-            static_cast<float>(m_data.fractionData.numerator) / static_cast<float>(m_data.fractionData.denominator);
-        result.imaginaryPart = 0U;
+        result = getIntegerAfterRoundingADoubleValue<IntDataType>(
+            static_cast<double>(m_data.fractionData.numerator) / m_data.fractionData.denominator);
     } else if (m_type == Type::ComplexNumber) {
-        result = m_data.complexNumberData;
+        result = getIntegerAfterRoundingADoubleValue<IntDataType>(
+            createComplexFloat(m_data.complexNumberData).getModulusWithSignOfRealPart());
     }
     return result;
 }
 
+AlbaNumber::Type AlbaNumber::getType() const { return m_type; }
+
+double AlbaNumber::getDouble() const {
+    double result(0);
+    if (m_type == Type::Integer) {
+        result = static_cast<double>(m_data.intData);
+    } else if (m_type == Type::Double) {
+        result = m_data.doubleData;
+    } else if (m_type == Type::Fraction) {
+        result =
+            static_cast<double>(static_cast<double>(m_data.fractionData.numerator) / m_data.fractionData.denominator);
+    } else if (m_type == Type::ComplexNumber) {
+        result = createComplexFloat(m_data.complexNumberData).getModulusWithSignOfRealPart();
+    }
+    return result;
+}
+
+bool AlbaNumber::isIntegerType() const { return m_type == Type::Integer; }
+bool AlbaNumber::isDoubleType() const { return m_type == Type::Double; }
+bool AlbaNumber::isFractionType() const { return m_type == Type::Fraction; }
+bool AlbaNumber::isComplexNumberType() const { return m_type == Type::ComplexNumber; }
+bool AlbaNumber::isIntegerOrFractionType() const { return isIntegerType() || isFractionType(); }
+bool AlbaNumber::isPositiveInfinity() const { return getDouble() == POSITIVE_INFINITY_DOUBLE_VALUE; }
+bool AlbaNumber::isNegativeInfinity() const { return getDouble() == NEGATIVE_INFINITY_DOUBLE_VALUE; }
+bool AlbaNumber::isPositiveOrNegativeInfinity() const { return isinf(getDouble()); }
+bool AlbaNumber::isNotANumber() const { return isnan(getDouble()); }
+bool AlbaNumber::isAFiniteValue() const { return isfinite(getDouble()); }
+bool AlbaNumber::isARealFiniteValue() const { return isAFiniteValue() && !isComplexNumberType(); }
 void AlbaNumber::convertToInteger() { *this = AlbaNumber(getInteger()); }
 
 void AlbaNumber::convertToFraction() {
@@ -436,24 +435,10 @@ void AlbaNumber::convertToFraction() {
     *this = AlbaNumber::createFraction(fractionData.numerator, fractionData.denominator);
 }
 
-inline double AlbaNumber::getComparisonTolerance() {
-    return Configuration::getInstance().getConfigurationDetails().comparisonTolerance;
-}
-
-inline double AlbaNumber::getFloatAdjustmentTolerance() {
-    return Configuration::getInstance().getConfigurationDetails().floatAdjustmentTolerance;
-}
-
-double AlbaNumber::adjustFloatValue(float const value) {
-    double result(value);
-    if (isAlmostAnInteger(value, getFloatAdjustmentTolerance())) {
-        result = round(value);
+void AlbaNumber::correctPowerResult(double& powerResult, double const base, double const exponent) {
+    if (base < 0 && exponent == POSITIVE_INFINITY_DOUBLE_VALUE) {
+        powerResult = NAN;
     }
-    return result;
-}
-
-AlbaNumber::ComplexFloat AlbaNumber::createComplexFloat(ComplexNumberData const& data) {
-    return {data.realPart, data.imaginaryPart};
 }
 
 AlbaNumber AlbaNumber::addBothIntegersAndReturnNumber(
@@ -627,10 +612,24 @@ AlbaNumber AlbaNumber::raisePowerOfFractionsAndIntegerAndReturnNumber(
         pow(static_cast<double>(baseFractionData.numerator) / baseFractionData.denominator, exponent));
 }
 
-void AlbaNumber::correctPowerResult(double& powerResult, double const base, double const exponent) {
-    if (base < 0 && exponent == POSITIVE_INFINITY_DOUBLE_VALUE) {
-        powerResult = NAN;
+AlbaNumber::ComplexFloat AlbaNumber::createComplexFloat(ComplexNumberData const& data) {
+    return {data.realPart, data.imaginaryPart};
+}
+
+inline double AlbaNumber::getComparisonTolerance() {
+    return Configuration::getInstance().getConfigurationDetails().comparisonTolerance;
+}
+
+inline double AlbaNumber::getFloatAdjustmentTolerance() {
+    return Configuration::getInstance().getConfigurationDetails().floatAdjustmentTolerance;
+}
+
+double AlbaNumber::adjustFloatValue(float const value) {
+    double result(value);
+    if (isAlmostAnInteger(value, getFloatAdjustmentTolerance())) {
+        result = round(value);
     }
+    return result;
 }
 
 ostream& operator<<(ostream& out, AlbaNumber const& number) {

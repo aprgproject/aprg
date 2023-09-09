@@ -10,19 +10,19 @@ explicit TermRaiseToTerms(TermsWithDetails const& termsInRaiseToPowerExpression)
 TermRaiseToTerms();
 TermRaiseToTerms(Term const& base, Terms const& exponents);
 TermRaiseToTerms(Term const& base, Term const& exponent);
-[[nodiscard]] bool isEmpty() const;
-[[nodiscard]] bool doesEvenExponentCancellationHappen() const;
 [[nodiscard]] Term getCombinedTerm() const;
 [[nodiscard]] Term getCombinedExponents() const;
 [[nodiscard]] Term const& getBase() const;
 [[nodiscard]] TermsWithDetails const& getExponents() const;
-Term& getBaseReference();
+[[nodiscard]] bool isEmpty() const;
+[[nodiscard]] bool doesEvenExponentCancellationHappen() const;
 void setBase(Term const& base);
 void setBaseAndExponent(Term const& base, Term const& exponent);
 void setAsShouldSimplifyToFactors(bool const shouldSimplifyToFactors);
 void setAsShouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt(bool const shouldSimplify);
 void setAsShouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase(bool const shouldSimplify);
 void simplify();
+Term& getBaseReference();
 
 private:
 static void simplifyConstantRaiseToFunction(
@@ -45,7 +45,6 @@ TermsWithDetails m_exponents;
 bool m_shouldSimplifyToFactors;
 bool m_shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt;
 bool m_shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase;
-
 };
 
 }  // namespace alba::algebra

@@ -3,7 +3,6 @@
 #include <CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.hpp>
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
 #include <CodeUtilities/Common/TermUtilities.hpp>
-#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/Print/AlbaLogPrints.hpp>
 
@@ -64,7 +63,8 @@ void CPlusPlusReorganizer::reorganizeFile(string const& file) {
 }
 
 bool CPlusPlusReorganizer::shouldReorganizeInThisScope(ScopeDetail const& scope) {
-    return scope.scopeType == ScopeType::ClassDeclaration || scope.scopeType == ScopeType::Namespace;
+    return scope.scopeType == ScopeType::Namespace || scope.scopeType == ScopeType::ClassDeclaration ||
+           scope.scopeType == ScopeType::EnumClass;
 }
 
 bool CPlusPlusReorganizer::shouldConnectToPreviousItem(Terms const& scopeHeaderTerms) {
@@ -133,12 +133,14 @@ int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
 
 CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
     int const scopeHeaderStart, int const openingBraceIndex) const {
-    string scopeHeader(getContents(scopeHeaderStart, openingBraceIndex - 1));
+    string scopeHeader(getContents(scopeHeaderStart, openingBraceIndex));
     Terms scopeHeaderTerms(getTermsFromString(scopeHeader));
     ScopeDetail scopeDetail{scopeHeaderStart, openingBraceIndex, 0, ScopeType::Unknown, {}, {}};
     Patterns searchPatterns{
         {M("template"), M("<")},
         {M("namespace"), M(TermType::Identifier)},
+        {M("namespace"), M("{")},
+        {M("enum"), M("class"), M(TermType::Identifier)},
         {M("class"), M(TermType::Identifier)},
         {M("struct"), M(TermType::Identifier)},
         {M("union"), M(TermType::Identifier)}};
@@ -152,13 +154,25 @@ CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
             int lastHitIndex = hitIndexes.back();
             Term const& firstTerm(scopeHeaderTerms[firstHitIndex]);
             Term const& lastTerm(scopeHeaderTerms[lastHitIndex]);
-            if (firstTerm.getContent() == "namespace") {
+            if (firstTerm.getContent() == "namespace" && lastTerm.getTermType() == TermType::Identifier) {
                 scopeDetail.scopeType = ScopeType::Namespace;
                 scopeDetail.name = lastTerm.getContent();
                 break;
             }
-            if (firstTerm.getContent() == "class" || firstTerm.getContent() == "struct" ||
-                firstTerm.getContent() == "union") {
+            if (firstTerm.getContent() == "namespace" && lastTerm.getContent() == "{") {
+                scopeDetail.scopeType = ScopeType::Namespace;
+                scopeDetail.name.clear();
+                break;
+            }
+            if (firstTerm.getContent() == "enum" && scopeHeaderTerms[hitIndexes[1]].getContent() == "class" &&
+                lastTerm.getTermType() == TermType::Identifier) {
+                scopeDetail.scopeType = ScopeType::EnumClass;
+                scopeDetail.name = lastTerm.getContent();
+                break;
+            }
+            if ((firstTerm.getContent() == "class" || firstTerm.getContent() == "struct" ||
+                 firstTerm.getContent() == "union") &&
+                lastTerm.getTermType() == TermType::Identifier) {
                 scopeDetail.scopeType = ScopeType::ClassDeclaration;
                 scopeDetail.name = lastTerm.getContent();
                 break;

@@ -17,7 +17,7 @@ public:
         bool isDivider;
         ItemType itemType;
         int itemsIndex;
-        std::string functionSignature;
+        std::string functionReturnTypeName;
     };
 
     using SortItems = std::vector<SortItem>;
@@ -38,14 +38,14 @@ private:
     [[nodiscard]] static int getTotalNumberLines(SortItems const& sortItems);
     [[nodiscard]] static Patterns getSearchPatterns();
     [[nodiscard]] static std::string getIdentifierBeforeParenthesis(Terms const& terms, int const parenthesisIndex);
-    static int getScoreAtReturnOfFunctionSignature(std::string const& functionSignature);
     static void sortByComparingItems(SortItems& sortItems);
     static void moveToEndParenthesis(Terms const& terms, int& termIndex, int const parenthesisIndex);
+    static void saveDetailsBasedFromFunctionSignature(SortItem& sortItem, std::string const& functionSignature);
     [[nodiscard]] int getBestHeaderIndex(std::string const& item) const;
     [[nodiscard]] SortItems getSortedItems() const;
     [[nodiscard]] SortItems getSortItems() const;
-    void saveDetailsBasedFromItem(SortItem& sortItem, std::string const& item) const;
     void saveDetailsFromHeaderSignatures(SortItem& sortItem, std::string const& item) const;
+    void saveDetailsBasedFromItem(SortItem& sortItem, std::string const& item) const;
     void saveDetailsBasedFromItemTerms(SortItem& sortItem, std::string const& item, Terms const& terms) const;
     void fixItemContents();
     ScopeType m_scopeType;
