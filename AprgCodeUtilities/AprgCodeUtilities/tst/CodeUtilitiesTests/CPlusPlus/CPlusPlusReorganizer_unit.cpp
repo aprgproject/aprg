@@ -149,6 +149,19 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaStringHelperWorks) {
     clearFile(TEST_IMPLEMENTATION_FILE);
 }
 
+TEST(CPlusPlusReorganizerTest, ReorganizeCPlusPlusTokenizerWorks) {
+    CPlusPlusReorganizer reorganizer;
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/CPlusPlusTokenizer.hpp)", TEST_HEADER_FILE);
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/CPlusPlusTokenizer.cpp)", TEST_IMPLEMENTATION_FILE);
+
+    reorganizer.processHeaderAndImplementationFile(TEST_HEADER_FILE, TEST_IMPLEMENTATION_FILE);
+
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/CPlusPlusTokenizer.hpp)", TEST_HEADER_FILE);
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/CPlusPlusTokenizer.cpp)", TEST_IMPLEMENTATION_FILE);
+    clearFile(TEST_HEADER_FILE);
+    clearFile(TEST_IMPLEMENTATION_FILE);
+}
+
 TEST(CPlusPlusReorganizerTest, ReorganizeBtsLogPrintWorks) {
     CPlusPlusReorganizer reorganizer;
     copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/BtsLogPrint.hpp)", TEST_HEADER_FILE);

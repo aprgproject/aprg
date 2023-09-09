@@ -275,7 +275,8 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
                 break;
             }
             if (firstTerm.getContent() == "(") {
-                if (m_scopeNames.back() == getIdentifierBeforeParenthesis(terms, firstHitIndex)) {
+                if (!m_scopeNames.empty() &&
+                    m_scopeNames.back() == getIdentifierBeforeParenthesis(terms, firstHitIndex)) {
                     sortItem.score += 100000;
                 }
                 moveToEndParenthesis(terms, termIndex, firstHitIndex);
