@@ -1,4 +1,3 @@
-StaticAnalysisJobIdentifier: [50]
-2023-09-05T20:46:02
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/SnapshotStatistics/SnapshotStatistics/src/SnapshotStatistics.cpp:116:48: style: Consider using std::find_if algorithm instead of a raw loop. [useStlAlgorithm]
+StaticAnalysisJobIdentifier: [56]
+2023-09-09T19:37:15
 DONE!
