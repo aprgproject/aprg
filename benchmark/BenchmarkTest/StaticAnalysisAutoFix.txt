@@ -1,11 +1,3 @@
-StaticAnalysisJobIdentifier: [50]
-2023-09-05T15:53:32
-/home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:120:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:121:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:122:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:123:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:124:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:125:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:126:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:127:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
+StaticAnalysisJobIdentifier: [56]
+2023-09-09T18:06:55
 DONE!
