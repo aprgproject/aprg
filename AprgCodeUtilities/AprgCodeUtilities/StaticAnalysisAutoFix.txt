@@ -1,9 +1,11 @@
-StaticAnalysisJobIdentifier: [50]
-2023-09-05T11:57:01
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.hpp:58:24: style: Unused private function: 'CPlusPlusTokenizer::isOneCharOperatorAt' [unusedPrivateFunction]
+StaticAnalysisJobIdentifier: [55]
+2023-09-09T14:37:03
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.hpp:38:30: style: Unused private function: 'CPlusPlusReorganizeItems::getTotalNumberLines' [unusedPrivateFunction]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.hpp:36:24: style: Unused private function: 'CPlusPlusTokenizer::isOneCharOperatorAt' [unusedPrivateFunction]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:16:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:17:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:18:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:19:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:20:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:21:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:22:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:23:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:24:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermUtilities_unit.cpp:91:64: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 DONE!
