@@ -198,7 +198,8 @@ void updateToGetSubsetOfFactors(Polynomials& commonFactors, Polynomials const& c
                     {getFirstMonomial(previousCommonFactor), getFirstMonomial(currentCommonFactor)}));
                 gcfMonomial.simplify();
                 if (!isTheValue(gcfMonomial, 1)) {
-                    commonFactors.emplace_back(gcfMonomial);
+                    Polynomial gcfPolynomial{gcfMonomial};
+                    commonFactors.emplace_back(gcfPolynomial);
                     isFound = true;
                 }
             } else if (previousCommonFactor == currentCommonFactor) {

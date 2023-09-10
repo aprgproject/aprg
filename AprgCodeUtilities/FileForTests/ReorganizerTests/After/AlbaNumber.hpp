@@ -57,10 +57,10 @@ ComplexNumberData complexNumberData;
 class Configuration : public AlbaConfigurationHolder<ConfigurationDetails> {
 public:
 using BaseConfigurationHolder = AlbaConfigurationHolder<ConfigurationDetails>;
-static ConfigurationDetails getConfigurationDetailsWithZeroTolerance();
 void setConfigurationTolerancesToZero();
 void setComparisonTolerance(double const comparisonTolerance);
 void setFloatAdjustmentTolerance(double const comparisonTolerance);
+static ConfigurationDetails getConfigurationDetailsWithZeroTolerance();
 };
 
 class ScopeConfigurationObject : public AlbaConfigurationScopeObject<ConfigurationDetails> {
@@ -123,11 +123,6 @@ AlbaNumber& operator+=(AlbaNumber const& second);
 AlbaNumber& operator-=(AlbaNumber const& second);
 AlbaNumber& operator*=(AlbaNumber const& second);
 AlbaNumber& operator/=(AlbaNumber const& second);
-// static functions
-static AlbaNumber createNumberFromDoubleAndRoundIfNeeded(double const doubleValue);
-static AlbaNumber createFraction(NumeratorDataType const numerator, NumeratorDataType const denominator);
-static AlbaNumber createFraction(NumeratorDataType const numerator, DenominatorDataType const denominator);
-static AlbaNumber createComplexNumber(ComplexFloat const& complexNumber);
 [[nodiscard]] ComplexNumberData getComplexNumberData() const;
 [[nodiscard]] FractionData getFractionData() const;
 [[nodiscard]] IntDataType getInteger() const;
@@ -146,6 +141,11 @@ static AlbaNumber createComplexNumber(ComplexFloat const& complexNumber);
 [[nodiscard]] bool isARealFiniteValue() const;
 void convertToInteger();
 void convertToFraction();
+// static functions
+static AlbaNumber createNumberFromDoubleAndRoundIfNeeded(double const doubleValue);
+static AlbaNumber createFraction(NumeratorDataType const numerator, NumeratorDataType const denominator);
+static AlbaNumber createFraction(NumeratorDataType const numerator, DenominatorDataType const denominator);
+static AlbaNumber createComplexNumber(ComplexFloat const& complexNumber);
 static constexpr double ADJUSTMENT_FLOAT_TOLERANCE = 1E-15;
 
 private:

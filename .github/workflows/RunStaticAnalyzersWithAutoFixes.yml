@@ -13,11 +13,6 @@ on:
         type: number
         required: true
         default: 0
-      forceWindowsStaticAnalysis:
-        description: 'Force to build in Windows Static Analysis'
-        type: boolean
-        required: true
-        default: false
   
 env:
   determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
@@ -67,7 +62,7 @@ jobs:
   runStaticAnalyzersOnCppProjects:
     name: JobId[${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}] on ${{ matrix.project }} | Run Static Analyzers with Auto Fixes
     needs: determineCppProjects
-    runs-on: ${{ inputs.forceWindowsStaticAnalysis && 'windows-latest' || contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), matrix.project) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
+    runs-on: 'windows-latest' #${{ contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), matrix.project) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
     strategy:
       fail-fast: false
       matrix:
