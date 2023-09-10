@@ -29,6 +29,7 @@ jobs:
     outputs:
       staticAnalysisJobId: ${{ steps.idOfGetJobIdStep.outputs.STATIC_ANALYSIS_JOB_ID }}
       projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_CPP_DIRECTORIES }}
+      projectsWithWindowsStaticAnalysis: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_WINDOWS_STATIC_ANALYSIS }}
     steps:
       - name: Checkout code for changes checking
         id: idOfCheckout
@@ -57,9 +58,13 @@ jobs:
           
           
   runStaticAnalyzersOnCppProjects:
-    name: JobId[${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}] Run Static Analyzers with Report
+    name: JobId[${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}] Run Static Analyzers with Auto Fixes
     needs: determineCppProjects
-    runs-on: ubuntu-latest
+    runs-on: ${{ !contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), matrix.projectToBuild) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
+    strategy:
+      fail-fast: false
+      matrix:
+        projectToBuild: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
     permissions:
       contents: write
     steps:
@@ -69,6 +74,9 @@ jobs:
           echo "github.event_name: [${{ github.event_name }}]"
           echo "github.event.action: [${{ github.event.action }}]"
           echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
+          echo "c/c++ next project: [${{ matrix.projectToBuild }}]"
+          echo "projects with windows static analysis: [${{ needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis }}]"
+          echo "operating system: [${{ runner.os }}]"
           echo "staticAnalysisFilename: [${{ env.staticAnalysisFilename }}]"
           echo "staticAnalysisJobId: [${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}]"
           
@@ -83,6 +91,8 @@ jobs:
         run: |
           git config user.name "aprgproject"
           git config user.email "aprgproject@gmail.com"
+          git config core.autocrlf input
+          git config core.eol lf
           # set origin (fetch)
           git remote set-url origin https://$WORKFLOW_TOKEN@github.com/aprgproject/aprg
           # set origin (push)
@@ -95,8 +105,22 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
+          
+      - name: Install dependencies on Windows
+        if: runner.os == 'Windows'
+        run: |
+          choco install cmake ninja
+          choco info cmake
+          echo "cmake version: [$(cmake --version)]"
+          choco info ninja
+          echo "ninja version: [$(ninja --version)]"
+          # Not needed to run environment script
+          # echo "Executing visual studio environment script..."
+          # cmd "${{ env.windowsEnvironmentScript }}"
+          # echo "Finished visual studio environment script."
 
-      - name: Install dependencies
+      - name: Install dependencies on Linux
+        if: runner.os == 'Linux'
         run: |
           sudo apt update
           sudo apt install ninja-build cmake
@@ -113,6 +137,10 @@ jobs:
           echo "clang-tidy version: [$(clang-tidy --version)]"
           echo "cppcheck version: [$(cppcheck --version)]"
           echo "clazy version: [$(clazy --version)]"
+          sudo apt install clang-format
+          echo "clang-format version: [$(clang-format --version)]"
+          sudo apt-get install dos2unix
+          echo "dos2unix version: [$(dos2unix --version)]"
             
       - name: Build and Run with Static Analyzers with Report
         shell: bash
@@ -122,7 +150,7 @@ jobs:
           echo "staticAnalysisScriptPath: [$(staticAnalysisScriptPath)]"
           chmod +x "$staticAnalysisScriptPath"
           # 19800 seconds translates to 5 hours and 30 minutes
-          timeout 19800 "$staticAnalysisScriptPath" "${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}" "${{ env.staticAnalysisFilename }}" "${{ needs.determineCppProjects.outputs.projectsToBuild }}" 
+          timeout 19800 "$staticAnalysisScriptPath" "${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}" "${{ env.staticAnalysisFilename }}" "${{ matrix.projectToBuild }}" 
         
       - name: Commit and Push Reports
         run: |

@@ -20,8 +20,8 @@ if [ -z "$staticAnalysisFilename" ]; then
 fi
 
 # Process input remove formatting because of JSON format
-cppProjects=${cppProjects#\[}
-cppProjects=${cppProjects%\]}
+#cppProjects=${cppProjects#\[}
+#cppProjects=${cppProjects%\]}
 cppProjects=$(echo "$cppProjects" | tr -d ' ')
 if [ -z "$cppProjects" ]; then
     scriptPrint "$scriptName" "$LINENO" "There are no C/C++ projects to process, cppProjects: [$cppProjects]"
@@ -40,9 +40,13 @@ runStaticAnalyzersInDirectory() {
 
     echo "StaticAnalysisJobIdentifier: [$jobIdentifier]" > "$staticAnalysisFilename"
     date +%Y-%m-%dT%H:%M:%S >> "$staticAnalysisFilename"
+    scriptPrint "$scriptName" "$LINENO" "Configuring in cmake..."
     "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "StaticAnalyzersBuild" "Debug" "Ninja"
+    scriptPrint "$scriptName" "$LINENO" "Configure step done"
     set +e
+    scriptPrint "$scriptName" "$LINENO" "Building..."
     "$buildAndRunScriptPath" build "StaticAnalyzersBuild" "Debug" | grep -P "^.*$directoryPath.* (style|warning|error): .*$" | tee -a "$staticAnalysisFilename"
+    scriptPrint "$scriptName" "$LINENO" "Building step done"
     set -e
 
     echo "DONE!" >> "$staticAnalysisFilename"

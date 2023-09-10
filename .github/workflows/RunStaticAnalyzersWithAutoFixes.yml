@@ -91,6 +91,8 @@ jobs:
         run: |
           git config user.name "aprgproject"
           git config user.email "aprgproject@gmail.com"
+          git config core.autocrlf input
+          git config core.eol lf
           # set origin (fetch)
           git remote set-url origin https://$WORKFLOW_TOKEN@github.com/aprgproject/aprg
           # set origin (push)
@@ -143,7 +145,7 @@ jobs:
           echo "staticAnalysisScriptPath: [$(staticAnalysisScriptPath)]"
           chmod +x "$staticAnalysisScriptPath"
           # 19800 seconds translates to 5 hours and 30 minutes
-          timeout 19800 "$staticAnalysisScriptPath" "${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}" "${{ env.staticAnalysisFilename }}" "${{ needs.determineCppProjects.outputs.projectsToBuild }}" 
+          timeout 19800 "$staticAnalysisScriptPath" "${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}" "${{ env.staticAnalysisFilename }}" "${{ matrix.projectToBuild }}" 
             
       - name: Run clang format
         shell: bash
