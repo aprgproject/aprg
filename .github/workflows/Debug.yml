@@ -74,6 +74,25 @@ jobs:
           echo "staticAnalysisFilename: [${{ env.staticAnalysisFilename }}]"
           echo "staticAnalysisJobId: [${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}]"
           
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false 
+          # use the personal access token (without this setting, the GITHUB_TOKEN is used)
+          # this is needed to trigger BuildAndRun github workflow after commit
+        
+      - name: Set up Git
+        run: |
+          git config user.name "aprgproject"
+          git config user.email "aprgproject@gmail.com"
+          # set origin (fetch)
+          git remote set-url origin https://$WORKFLOW_TOKEN@github.com/aprgproject/aprg
+          # set origin (push)
+          git remote set-url --push origin https://$WORKFLOW_TOKEN@github.com/aprgproject/aprg
+          # git remote -v
+        env:
+          WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+          
       - name: Install dependencies on Windows
         if: runner.os == 'Windows'
         run: |
