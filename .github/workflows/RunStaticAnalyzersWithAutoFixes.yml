@@ -60,7 +60,7 @@ jobs:
   runStaticAnalyzersOnCppProjects:
     name: JobId[${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}] on ${{ matrix.project }} | Run Static Analyzers with Auto Fixes
     needs: determineCppProjects
-    runs-on: ${{ !contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), matrix.project) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
+    runs-on: ${{ contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), matrix.project) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
     strategy:
       fail-fast: false
       matrix:
@@ -88,6 +88,7 @@ jobs:
           # this is needed to trigger BuildAndRun github workflow after commit
         
       - name: Set up Git
+        shell: bash
         run: |
           git config user.name "aprgproject"
           git config user.email "aprgproject@gmail.com"
