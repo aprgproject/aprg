@@ -2,8 +2,8 @@
 # -> Notes: 
 # ---> The check misc-const-correctness flags too much errors (but its nice to have in the future).
 # ---> The check cppcoreguidelines-virtual-class-destructor conflicts with hicpp-use-override and modernize-use-override
-# ---> The checks llvm-qualified-auto,readability-qualified-auto wants to change iterators to pointers
-# ---> The checks cppcoreguidelines-avoid-magic-numbers is disabled, but readability-magic-numbers is enabled.
+# ---> The check llvm-qualified-auto,readability-qualified-auto wants to change iterators to pointers
+# ---> The check cppcoreguidelines-avoid-magic-numbers is disabled, but readability-magic-numbers is enabled.
 Checks: '
   *,
   -altera-struct-pack-align,

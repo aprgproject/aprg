@@ -1,5 +1,4 @@
 # -> Standard checkers
-# ---> start of checkers for avoiding warnings in tests is on -cert-err58-cpp,
 # -> Notes: 
 # ---> The check misc-const-correctness flags too much errors (but its nice to have in the future).
 # ---> The check cppcoreguidelines-virtual-class-destructor conflicts with hicpp-use-override and modernize-use-override
@@ -36,22 +35,7 @@ Checks: '
   -readability-avoid-const-params-in-decls,
   -readability-isolate-declaration,
   -readability-named-parameter,
-  -readability-qualified-auto,
-  -cert-err58-cpp,
-  -cppcoreguidelines-avoid-magic-numbers,
-  -cppcoreguidelines-owning-memory,
-  -cppcoreguidelines-pro-type-reinterpret-cast,
-  -cppcoreguidelines-pro-type-vararg,
-  -cppcoreguidelines-avoid-non-const-global-variables,
-  -fuchsia-statically-constructed-objects,
-  -google-runtime-int,
-  -hicpp-vararg,
-  -readability-magic-numbers,
-  -readability-function-cognitive-complexity,
-  -misc-non-private-member-variables-in-classes,
-  -readability-magic-numbers,
-  -readability-identifier-length,
-  -hicpp-signed-bitwise
+  -readability-qualified-auto
 '
 # -> Noisy checks
 #  -readability-magic-numbers,
