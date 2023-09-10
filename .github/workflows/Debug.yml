@@ -51,7 +51,7 @@ jobs:
       fail-fast: false
       matrix:
         projectToBuild: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild)[0] }}
-        operatingSystem: ${{ contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), env.projectToBuild) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
+        operatingSystem: ${{ contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), matrix.projectToBuild) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
     runs-on: matrix.operatingSystem 
     permissions:
       contents: write
