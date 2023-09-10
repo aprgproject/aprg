@@ -1,4 +1,4 @@
-StaticAnalysisJobIdentifier: [10]
+StaticAnalysisJobIdentifier: [9]
 2023-09-10T19:56:22
 [35m2023-09-10T19:57:29[0m | [33mBuildAndRun.sh:28[0m | The current path is [/d/a/aprg/aprg/AprgAlgebra/AprgAlgebra].
 [35m2023-09-10T19:57:29[0m | [33mBuildAndRun.sh:29[0m | The scriptPath is [/d/a/aprg/aprg/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh].
