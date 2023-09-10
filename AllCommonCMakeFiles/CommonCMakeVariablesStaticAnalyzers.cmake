@@ -1,7 +1,10 @@
 # Assign common cmake static analyzer variables
 
 if(APRG_ENABLE_STATIC_ANALYZERS)
-
+    if(NOT APRG_STATIC_ANALYZERS_TYPE)
+        set(APRG_STATIC_ANALYZERS_TYPE "ReportWithoutClazy")
+    endif()
+	
     find_program(CPPCHECK_PROGRAM "cppcheck")
     print_variable(CPPCHECK_PROGRAM)
     if(CPPCHECK_PROGRAM)
@@ -22,7 +25,7 @@ if(APRG_ENABLE_STATIC_ANALYZERS)
         print_variable(CLANG_TIDY_HEADER_REGEX)
 
         # additional flags: --fix --warnings-as-errors=*;
-        if(APRG_ENABLE_STATIC_ANALYZERS_AUTO_FIX)
+        if(APRG_STATIC_ANALYZERS_TYPE STREQUAL "AutoFix")
             # auto fix
             set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY_PROGRAM} --fix "--header-filter=${CLANG_TIDY_HEADER_REGEX}"
                                    "--config-file=${APRG_DIR}/Clang/ClangTidyFiles/autofix.clang-tidy")
@@ -38,7 +41,7 @@ if(APRG_ENABLE_STATIC_ANALYZERS)
         print_variable(CMAKE_CXX_CLANG_TIDY)
     endif()
 
-    if(NOT APRG_ENABLE_STATIC_ANALYZERS_AUTO_FIX)
+    if(APRG_STATIC_ANALYZERS_TYPE STREQUAL "ReportWithClazy")
         find_program(CLAZY_PROGRAM "clazy")
         print_variable(CLAZY_PROGRAM)
         if(CLAZY_PROGRAM)

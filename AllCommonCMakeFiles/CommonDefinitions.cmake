@@ -1,9 +1,9 @@
 # Assign common definitions
 
 # NOTE: CMAKE_BUILD_TYPE is set as Debug in AllCommonSteps.cmake if its empty
-if(CMAKE_BUILD_TYPE MATCHES Debug)
+if(CMAKE_BUILD_TYPE STREQUAL Debug)
     set(COMMON_DEFINITIONS ${COMMON_DEFINITIONS} -DAPRG_DEBUG)
-elseif(CMAKE_BUILD_TYPE MATCHES Release)
+elseif(CMAKE_BUILD_TYPE STREQUAL Release)
     set(COMMON_DEFINITIONS ${COMMON_DEFINITIONS} -DAPRG_RELEASE)
 endif()
 

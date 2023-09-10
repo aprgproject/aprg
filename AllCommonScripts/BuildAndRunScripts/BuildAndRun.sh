@@ -176,15 +176,23 @@ elif [ "$scriptOption" == "cleanAndConfigureWithClangWithAsan" ]; then
 elif [ "$scriptOption" == "cleanAndConfigureWithClangAndStaticAnalyzers" ]; then
     performClean
     getArgumentsForConfigure
-    getClangAndClazyCompiler
+    aprgStaticAnalyzersType=""
+    if command -v clazy >/dev/null 2>&1; then
+        getClangAndClazyCompiler
+        aprgStaticAnalyzersType="-DAPRG_STATIC_ANALYZERS_TYPE=ReportWithClazy"
+    else
+        getClangCompilers
+        aprgStaticAnalyzersType="-DAPRG_STATIC_ANALYZERS_TYPE=ReportWithoutClazy"
+    fi
     printConfigureParameters
-    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "$aprgStaticAnalyzersType" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "cleanAndConfigureWithStaticAnalyzersWithAutoFix" ]; then
     performClean
     getArgumentsForConfigure
     getClangCompilers
+    aprgStaticAnalyzersType="-DAPRG_STATIC_ANALYZERS_TYPE=AutoFix"
     printConfigureParameters
-    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "-DAPRG_ENABLE_STATIC_ANALYZERS_AUTO_FIX=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "$aprgStaticAnalyzersType" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "generateCompileCommandsJsonFile" ]; then
     performGenerateCompileCommandsJsonFile
 elif [ "$scriptOption" == "build" ]; then
