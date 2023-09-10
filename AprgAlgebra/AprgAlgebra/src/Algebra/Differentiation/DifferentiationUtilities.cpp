@@ -37,7 +37,7 @@ void simplifyDerivativeByDefinition(Term& term) {
     rationalizeConfigurationDetails.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = true;
     rationalizeConfigurationDetails.shouldSimplifyByRationalizingNumerator = true;
     rationalizeConfigurationDetails.shouldSimplifyToFactors = true;
-    SimplificationOfExpression::ScopeObject scopeObject;
+    SimplificationOfExpression::ScopeObject const scopeObject;
     scopeObject.setInThisScopeThisConfiguration(rationalizeConfigurationDetails);
 
     term.simplify();
@@ -54,12 +54,12 @@ Equation getRelationshipOfDerivativeOfTheInverseAndTheDerivative(
     // Suppose the function f is continuous and monotonic on a closed interval [a, b] containing the number c, and let
     // f(c) = d. If f'(c) exists and f'(c) != 0, then (f-1)'(d) exists then: The relationship of the derivatives is
     // (f-1)'(d) = 1/f'(c)
-    Differentiation differentiation(variableName);
-    Term inverseOfTerm(invertTerm(term, variableName));
-    Term derivative(differentiation.differentiate(term));
-    Term derivativeOfInverse(differentiation.differentiate(inverseOfTerm));
+    Differentiation const differentiation(variableName);
+    Term const inverseOfTerm(invertTerm(term, variableName));
+    Term const derivative(differentiation.differentiate(term));
+    Term const derivativeOfInverse(differentiation.differentiate(inverseOfTerm));
     SubstitutionOfVariablesToTerms substitution{{variableName, variableForNonInverse}};
-    Term derivativeWithNewVariable(substitution.performSubstitutionTo(derivative));
+    Term const derivativeWithNewVariable(substitution.performSubstitutionTo(derivative));
     substitution.putVariableWithTerm(variableName, variableForInverse);
     Term derivativeOfInverseWithNewVariable(substitution.performSubstitutionTo(derivativeOfInverse));
     Term oneOverDerivativeWithNewVariable(createExpressionIfPossible({1, "/", derivativeWithNewVariable}));
@@ -71,9 +71,9 @@ Equation getRelationshipOfDerivativeOfTheInverseAndTheDerivative(
 Equation getIntegralEquationForFirstOrderDifferentialEquation(
     Equation const& equation, string const& xVariableName, string const& yVariableName) {
     Equation result;
-    DerivativeVariableName derivativeVariableName(1, xVariableName, yVariableName);
-    string derivativeName(derivativeVariableName.getNameInLeibnizNotation());
-    IsolationOfOneVariableOnEqualityEquation isolation(equation);
+    DerivativeVariableName const derivativeVariableName(1, xVariableName, yVariableName);
+    string const derivativeName(derivativeVariableName.getNameInLeibnizNotation());
+    IsolationOfOneVariableOnEqualityEquation const isolation(equation);
     Term termWithDerivative;
     Term termWithoutDerivative;
     isolation.isolateTermWithVariable(derivativeName, termWithDerivative, termWithoutDerivative);
@@ -99,15 +99,15 @@ Equation getIntegralEquationForFirstOrderDifferentialEquation(
     // First order differential equation should follow this:
     // dy/dx = P(x)*y + Q(x)
     Integration integration(xVariableName);
-    Term integralOfP(integration.integrate(p));
-    Term eToTheIntegralOfP(createExpressionIfPossible({getEAsATerm(), "^", integralOfP}));
-    Term eToTheNegativeIntegralOfP(createExpressionIfPossible({getEAsATerm(), "^", -integralOfP}));
-    Term qWithoutY(q / yVariableName);
-    Term qExpression(createExpressionIfPossible({qWithoutY, "*", eToTheIntegralOfP}));
-    Term cExpression(createExpressionIfPossible({getEAsATerm(), "*", eToTheNegativeIntegralOfP}));
-    Term integralOfQExpression(integration.integrate(qExpression));
-    Term qcExpression(createExpressionIfPossible({integralOfQExpression, "+", cExpression}));
-    Term pqcExpression(createExpressionIfPossible({eToTheNegativeIntegralOfP, "*", qcExpression}));
+    Term const integralOfP(integration.integrate(p));
+    Term const eToTheIntegralOfP(createExpressionIfPossible({getEAsATerm(), "^", integralOfP}));
+    Term const eToTheNegativeIntegralOfP(createExpressionIfPossible({getEAsATerm(), "^", -integralOfP}));
+    Term const qWithoutY(q / yVariableName);
+    Term const qExpression(createExpressionIfPossible({qWithoutY, "*", eToTheIntegralOfP}));
+    Term const cExpression(createExpressionIfPossible({getEAsATerm(), "*", eToTheNegativeIntegralOfP}));
+    Term const integralOfQExpression(integration.integrate(qExpression));
+    Term const qcExpression(createExpressionIfPossible({integralOfQExpression, "+", cExpression}));
+    Term const pqcExpression(createExpressionIfPossible({eToTheNegativeIntegralOfP, "*", qcExpression}));
     return {yVariableName, "=", pqcExpression};
 }
 
@@ -115,29 +115,29 @@ SolutionSet getDifferentiabilityDomain(Term const& term, string const& variableN
     // This code is not accurate.
     // How about piecewise function?
     // How about absolute value function?
-    Differentiation differentiation(variableName);
-    Term derivativeTerm(differentiation.differentiate(term));
+    Differentiation const differentiation(variableName);
+    Term const derivativeTerm(differentiation.differentiate(term));
     return calculateDomainForTermWithOneVariable(derivativeTerm);
 }
 
 Term evaluateAtDefiniteValue(Term const& term, string const& variableName, AlbaNumber const& value) {
-    SubstitutionOfVariablesToValues substitution{{variableName, value}};
+    SubstitutionOfVariablesToValues const substitution{{variableName, value}};
     return substitution.performSubstitutionTo(term);
 }
 
 Term evaluateAtDefiniteTerm(Term const& term, string const& variableName, Term const& valueTerm) {
-    SubstitutionOfVariablesToTerms substitution{{variableName, valueTerm}};
+    SubstitutionOfVariablesToTerms const substitution{{variableName, valueTerm}};
     return substitution.performSubstitutionTo(term);
 }
 
 Term getDerivativeDefinition(Term const& term, string const& variableName) {
-    Term x(X_NAME);
-    Term deltaX(DELTA_X_NAME);
+    Term const x(X_NAME);
+    Term const deltaX(DELTA_X_NAME);
     Term xPlusDeltaX(createExpressionIfPossible({x, "+", deltaX}));
     SubstitutionOfVariablesToTerms substitution{{variableName, xPlusDeltaX}};
-    Term fOfXPlusDeltaX(substitution.performSubstitutionTo(term));
+    Term const fOfXPlusDeltaX(substitution.performSubstitutionTo(term));
     substitution.putVariableWithTerm(variableName, x);
-    Term fOfX(substitution.performSubstitutionTo(term));
+    Term const fOfX(substitution.performSubstitutionTo(term));
     Term derivativeDefinition(createExpressionIfPossible({"(", fOfXPlusDeltaX, "-", fOfX, ")", "/", deltaX}));
     simplifyDerivativeByDefinition(derivativeDefinition);
 
@@ -148,16 +148,16 @@ Term getDerivativeAtUsingLimit(
     Term const& term, string const& variableName, Term const& termSubstituteToBack,
     LimitAtAValueApproachType const approachType) {
     string const& deltaXName(DELTA_X_NAME);
-    Term derivativeDefinition(getDerivativeDefinition(term, variableName));
-    SubstitutionOfVariablesToTerms substitution{{X_NAME, termSubstituteToBack}};
-    Term derivativeAfterSubstitution(substitution.performSubstitutionTo(derivativeDefinition));
+    Term const derivativeDefinition(getDerivativeDefinition(term, variableName));
+    SubstitutionOfVariablesToTerms const substitution{{X_NAME, termSubstituteToBack}};
+    Term const derivativeAfterSubstitution(substitution.performSubstitutionTo(derivativeDefinition));
     return simplifyAndGetLimitAtAValue(derivativeAfterSubstitution, deltaXName, 0, approachType);
 }
 
 Term getDerivativeDefinitionForFiniteCalculus(Term const& term, string const& variableName) {
     // Discrete derivative
     Polynomial variableNamePlusOne{Monomial(1, {{variableName, 1}}), Monomial(1, {})};
-    SubstitutionOfVariablesToTerms substitution{{variableName, variableNamePlusOne}};
+    SubstitutionOfVariablesToTerms const substitution{{variableName, variableNamePlusOne}};
     Term discreteDerivativeDefinition(
         createExpressionIfPossible({substitution.performSubstitutionTo(term), "-", term}));
     discreteDerivativeDefinition.simplify();
@@ -175,11 +175,12 @@ Term getLogarithmicDifferentiationToYieldDyOverDx(
     // dy/dx = f(x) * Dx(ln|f(x)|)
     // if domain is inside positive, then absolute value can be removed
     Term result;
-    SolutionSet solutionSet(calculateDomainForEquation(xVariableName, Equation(yVariableName, "=", yInTermsOfX)));
+    SolutionSet const solutionSet(calculateDomainForEquation(xVariableName, Equation(yVariableName, "=", yInTermsOfX)));
     AlbaNumberIntervals const& domainOfX(solutionSet.getAcceptedIntervals());
-    AlbaNumberInterval allPositiveNumbers(createCloseEndpoint(AlbaNumber(0)), createPositiveInfinityOpenEndpoint());
+    AlbaNumberInterval const allPositiveNumbers(
+        createCloseEndpoint(AlbaNumber(0)), createPositiveInfinityOpenEndpoint());
     if (areTheIntervalsInsideTheInterval(domainOfX, allPositiveNumbers)) {
-        Differentiation differentiation(xVariableName);
+        Differentiation const differentiation(xVariableName);
         Term logarithm(ln(yInTermsOfX));
         logarithm.simplify();
         result = yInTermsOfX * differentiation.differentiate(logarithm);
@@ -190,13 +191,14 @@ Term getLogarithmicDifferentiationToYieldDyOverDx(
 
 Term getCartesianDerivativeOfTermInPolarCoordinates(Term const& radiusInTermsOfTheta, string const& thetaName) {
     // dy/dx = (dr/dt*sin(t) + r(t)*cos(t)) / (dr/dt*cos(t) - r(t)*sin(t))
-    Term theta(thetaName);
-    Differentiation differentiation(thetaName);
-    Term drOverDTheta(differentiation.differentiate(radiusInTermsOfTheta));
-    Term sinTheta(sin(theta));
-    Term cosTheta(cos(theta));
-    Term numerator(createExpressionIfPossible({drOverDTheta, "*", sinTheta, "+", radiusInTermsOfTheta, "*", cosTheta}));
-    Term denominator(
+    Term const theta(thetaName);
+    Differentiation const differentiation(thetaName);
+    Term const drOverDTheta(differentiation.differentiate(radiusInTermsOfTheta));
+    Term const sinTheta(sin(theta));
+    Term const cosTheta(cos(theta));
+    Term const numerator(
+        createExpressionIfPossible({drOverDTheta, "*", sinTheta, "+", radiusInTermsOfTheta, "*", cosTheta}));
+    Term const denominator(
         createExpressionIfPossible({drOverDTheta, "*", cosTheta, "-", radiusInTermsOfTheta, "*", sinTheta}));
     Term result(createExpressionIfPossible({numerator, "/", denominator}));
     result.simplify();
@@ -205,8 +207,8 @@ Term getCartesianDerivativeOfTermInPolarCoordinates(Term const& radiusInTermsOfT
 
 Term getSlopeOfTermInPolarCoordinates(
     Term const& radiusInTermsOfTheta, string const& thetaName, AlbaNumber const& thetaValue) {
-    Term dyOverDx(getCartesianDerivativeOfTermInPolarCoordinates(radiusInTermsOfTheta, thetaName));
-    SubstitutionOfVariablesToValues substitution{{thetaName, thetaValue}};
+    Term const dyOverDx(getCartesianDerivativeOfTermInPolarCoordinates(radiusInTermsOfTheta, thetaName));
+    SubstitutionOfVariablesToValues const substitution{{thetaName, thetaValue}};
     return substitution.performSubstitutionTo(dyOverDx);
 }
 
@@ -215,8 +217,8 @@ Term getApproximationUsingTaylorsFormula(
     int const numberOfTimes) {
     // taylors formula:
     // f(b) = f(a) + f'(a)*(b-a)/1! + f''(a)*(b-a)^2/2! ...
-    Differentiation differentiation(variableName);
-    Term difference(valueToApproach - startingValue);
+    Differentiation const differentiation(variableName);
+    Term const difference(valueToApproach - startingValue);
     Term currentDerivative(term);
     Term differenceRaiseToPower(1);
     AlbaNumber factorialValue(1);
@@ -225,8 +227,8 @@ Term getApproximationUsingTaylorsFormula(
         currentDerivative = differentiation.differentiate(currentDerivative);
         differenceRaiseToPower *= difference;
         factorialValue *= n;
-        Term currentDerivativeValue(evaluateAtDefiniteTerm(currentDerivative, variableName, startingValue));
-        Term currentTerm(currentDerivativeValue * differenceRaiseToPower / factorialValue);
+        Term const currentDerivativeValue(evaluateAtDefiniteTerm(currentDerivative, variableName, startingValue));
+        Term const currentTerm(currentDerivativeValue * differenceRaiseToPower / factorialValue);
         result += currentTerm;
     }
     result.simplify();
@@ -239,13 +241,13 @@ Term getApproximationOfErrorUsingTaylorsRemainder(
     // taylors formula:
     // R(x) = f(n+1)(E) * (x-a)^(n+1) / (n+1)!
     // E or valueForEstimation should be between startingValue and valueToApproach
-    Differentiation differentiation(variableName);
-    Term difference(valueToApproach - startingValue);
-    int nPlusOne = numberOfTimes + 1;
-    Term derivative(differentiation.differentiateMultipleTimes(term, nPlusOne));
-    Term derivativeValue(evaluateAtDefiniteTerm(derivative, variableName, valueForEstimation));
-    Term differenceRaiseToPower(difference ^ (nPlusOne));
-    Term factorialValue(getFactorial(nPlusOne));
+    Differentiation const differentiation(variableName);
+    Term const difference(valueToApproach - startingValue);
+    int const nPlusOne = numberOfTimes + 1;
+    Term const derivative(differentiation.differentiateMultipleTimes(term, nPlusOne));
+    Term const derivativeValue(evaluateAtDefiniteTerm(derivative, variableName, valueForEstimation));
+    Term const differenceRaiseToPower(difference ^ (nPlusOne));
+    Term const factorialValue(getFactorial(nPlusOne));
     Term result(derivativeValue * differenceRaiseToPower / factorialValue);
     result.simplify();
     return result;
@@ -254,7 +256,7 @@ Term getApproximationOfErrorUsingTaylorsRemainder(
 Term getTotalDerivativeWithInnerTermsUsingChainRule(
     Term const& term, SubstitutionOfVariablesToTerms const& substitution, string const& commonVariable) {
     Term result;
-    Differentiation commonVariableDifferentiation(commonVariable);
+    Differentiation const commonVariableDifferentiation(commonVariable);
     for (auto const& [innerVariableName, innerTerm] : substitution.getVariablesToTermsMap()) {
         result += substitution.performSubstitutionTo(getPartialDerivative(term, innerVariableName)) *
                   commonVariableDifferentiation.differentiate(innerTerm);
@@ -266,7 +268,7 @@ Term getTotalDerivativeWithInnerTermsUsingChainRule(
 Term getTotalDerivative(Term const& term, strings const& variableNames) {
     Term result;
     for (string const& variableName : variableNames) {
-        DerivativeVariableName derivativeOfVariable(1, "", variableName);
+        DerivativeVariableName const derivativeOfVariable(1, "", variableName);
         result += getPartialDerivative(term, variableName) * derivativeOfVariable.getNameInLeibnizNotation();
     }
     simplifyForDifferentiation(result);
@@ -274,7 +276,7 @@ Term getTotalDerivative(Term const& term, strings const& variableNames) {
 }
 
 Term getPartialDerivative(Term const& term, string const& variableName) {
-    Differentiation differentiation(variableName);
+    Differentiation const differentiation(variableName);
     return differentiation.differentiate(term);
 }
 
@@ -283,9 +285,9 @@ bool isTheFirstFundamentalTheoremOfCalculusTrue(Term const& term, string const& 
     // Let the function f be continuous on the closed interval [a, b] and let x be any number in [a, b].
     // If F is the definite integral of f from a to x then the derivative of F at x is equal to f at x.
     Integration integration(variableName);
-    Differentiation differentiation(variableName);
-    Term capitalF(integration.integrate(term));
-    Term derivativeOfCapitalF(differentiation.differentiate(capitalF));
+    Differentiation const differentiation(variableName);
+    Term const capitalF(integration.integrate(term));
+    Term const derivativeOfCapitalF(differentiation.differentiate(capitalF));
     Term simplifiedTerm(term);
     simplifiedTerm.simplify();
     return derivativeOfCapitalF == simplifiedTerm;
@@ -293,10 +295,10 @@ bool isTheFirstFundamentalTheoremOfCalculusTrue(Term const& term, string const& 
 
 bool isDifferentiableAt(Term const& term, string const& variableName, AlbaNumber const& value) {
     bool result(false);
-    Differentiation differentiation(variableName);
-    Term derivative(differentiation.differentiate(term));
-    SubstitutionOfVariablesToValues substitution{{"x", value}};
-    Term derivativeValue(substitution.performSubstitutionTo(derivative));
+    Differentiation const differentiation(variableName);
+    Term const derivative(differentiation.differentiate(term));
+    SubstitutionOfVariablesToValues const substitution{{"x", value}};
+    Term const derivativeValue(substitution.performSubstitutionTo(derivative));
     if (derivativeValue.isConstant()) {
         result = derivativeValue.getAsNumber().isARealFiniteValue();
     }
@@ -306,9 +308,9 @@ bool isDifferentiableAt(Term const& term, string const& variableName, AlbaNumber
 bool isDifferentiableAtUsingDerivativeDefinition(
     Term const& term, string const& variableName, AlbaNumber const& value) {
     bool result(false);
-    Term derivative(getDerivativeAtUsingLimit(term, variableName, "x", LimitAtAValueApproachType::BothSides));
-    SubstitutionOfVariablesToValues substitution{{"x", value}};
-    Term derivativeValue(substitution.performSubstitutionTo(derivative));
+    Term const derivative(getDerivativeAtUsingLimit(term, variableName, "x", LimitAtAValueApproachType::BothSides));
+    SubstitutionOfVariablesToValues const substitution{{"x", value}};
+    Term const derivativeValue(substitution.performSubstitutionTo(derivative));
     if (derivativeValue.isConstant()) {
         result = derivativeValue.getAsNumber().isARealFiniteValue();
     }
@@ -320,7 +322,7 @@ bool isFirstOrderDifferentialEquation(
     // First order differential equation should follow this:
     // dy/dx = P(x)*y + Q(x)
     bool result(false);
-    DerivativeVariableName derivativeVariableName(1, xVariableName, yVariableName);
+    DerivativeVariableName const derivativeVariableName(1, xVariableName, yVariableName);
     Term remainingTermWithoutDyOverDx = dyOverDx / derivativeVariableName.getNameInLeibnizNotation();
     remainingTermWithoutDyOverDx.simplify();
     if (Term(1) == remainingTermWithoutDyOverDx) {

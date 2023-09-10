@@ -15,7 +15,7 @@ PolynomialRaiseToAnUnsignedInt::PolynomialRaiseToAnUnsignedInt(Polynomial const&
     PolynomialToNumberMap factorsToExponent;
     Monomial commonMonomialInBase(1, {});
     factorizeAndUpdateCommonMonomialAndFactorsToExponent(polynomial, factorsToExponent, commonMonomialInBase);
-    int gcfOfExponents(getGcfOfExponents(factorsToExponent));
+    int const gcfOfExponents(getGcfOfExponents(factorsToExponent));
     if (canBeSimplified(gcfOfExponents, commonMonomialInBase)) {
         m_base = getRemainingBase(factorsToExponent, commonMonomialInBase, gcfOfExponents);
         m_exponent = gcfOfExponents;
@@ -28,7 +28,7 @@ bool PolynomialRaiseToAnUnsignedInt::isExponentOne() const { return m_exponent =
 
 void PolynomialRaiseToAnUnsignedInt::factorizeAndUpdateCommonMonomialAndFactorsToExponent(
     Polynomial const& polynomial, PolynomialToNumberMap& factorsToExponent, Monomial& commonMonomialInBase) {
-    Polynomials factors(factorizeAPolynomial(polynomial));
+    Polynomials const factors(factorizeAPolynomial(polynomial));
     for (Polynomial const& factor : factors) {
         if (isOneMonomial(factor)) {
             commonMonomialInBase.multiplyMonomial(getFirstMonomial(factor));
@@ -49,7 +49,7 @@ Polynomial PolynomialRaiseToAnUnsignedInt::getRemainingBase(
     remainingCommonMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, gcfOfExponents));
     Polynomial result{remainingCommonMonomial};
     for (auto const& [factor, exponent] : factorsToExponent) {
-        int remainingExponent(exponent / gcfOfExponents);
+        int const remainingExponent(exponent / gcfOfExponents);
         Polynomial remainingFactor(factor);
         remainingFactor.raiseToUnsignedInteger(remainingExponent);
         result.multiplyPolynomial(remainingFactor);

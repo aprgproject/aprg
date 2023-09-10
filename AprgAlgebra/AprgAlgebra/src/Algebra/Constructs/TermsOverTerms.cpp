@@ -92,8 +92,8 @@ Terms const& TermsOverTerms::getDenominators() const { return m_denominators; }
 
 TermsRaiseToNumbers TermsOverTerms::getTermsRaiseToNumbers() const {
     TermsRaiseToNumbers result;
-    Terms factorizedNumerators(factorizeTerms(m_numerators));
-    Terms factorizedDenominators(factorizeTerms(m_denominators));
+    Terms const factorizedNumerators(factorizeTerms(m_numerators));
+    Terms const factorizedDenominators(factorizeTerms(m_denominators));
 
     result.putTerms(factorizedNumerators, TermAssociationType::Positive);
     result.putTerms(factorizedDenominators, TermAssociationType::Negative);
@@ -102,8 +102,8 @@ TermsRaiseToNumbers TermsOverTerms::getTermsRaiseToNumbers() const {
 
 TermsRaiseToTerms TermsOverTerms::getTermsRaiseToTerms() const {
     TermsRaiseToTerms result;
-    Terms factorizedNumerators(factorizeTerms(m_numerators));
-    Terms factorizedDenominators(factorizeTerms(m_denominators));
+    Terms const factorizedNumerators(factorizeTerms(m_numerators));
+    Terms const factorizedDenominators(factorizeTerms(m_denominators));
 
     result.putTerms(factorizedNumerators, TermAssociationType::Positive);
     result.putTerms(factorizedDenominators, TermAssociationType::Negative);
@@ -182,8 +182,8 @@ void TermsOverTerms::retrievePolynomialAndNonPolynomialsTerms(
 }
 
 void TermsOverTerms::handleZerosInNumeratorOrDenominator(Terms& denominators, Terms& numerators) {
-    bool hasZeroOnNumerators(hasZero(numerators));
-    bool hasZeroOnDenominators(hasZero(denominators));
+    bool const hasZeroOnNumerators(hasZero(numerators));
+    bool const hasZeroOnDenominators(hasZero(denominators));
     if (hasZeroOnNumerators && hasZeroOnDenominators) {
         numerators.clear();
         denominators.clear();
@@ -199,7 +199,7 @@ void TermsOverTerms::handleZerosInNumeratorOrDenominator(Terms& denominators, Te
 }
 
 void TermsOverTerms::populateTermsWithBase(Terms& termsToUpdate, Term const& base, AlbaNumber const& exponent) {
-    int exponentCount = static_cast<int>(getAbsoluteValue(exponent).getInteger());
+    int const exponentCount = static_cast<int>(getAbsoluteValue(exponent).getInteger());
     for (int i = 0; i < exponentCount; ++i) {
         termsToUpdate.emplace_back(base);
     }
@@ -283,7 +283,7 @@ Terms TermsOverTerms::factorizeIfNeeded(Terms const& terms) const {
 }
 
 Terms TermsOverTerms::factorize(Terms const& terms) const {
-    ScopeObject scopeObject;
+    ScopeObject const scopeObject;
     scopeObject.setInThisScopeThisConfiguration(m_factorizationConfiguration);
 
     return factorizeTerms(terms);
@@ -294,10 +294,10 @@ void TermsOverTerms::putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToTerms
     for (auto const& [base, exponent] : termsRaiseToTerms.getBaseToExponentMap()) {
         if (!isIntegerConstant(exponent) || m_shouldSimplifyToFactors) {
             if (isANegativeTerm(exponent)) {
-                TermRaiseToTerms termRaiseToTerms(base, exponent * -1);
+                TermRaiseToTerms const termRaiseToTerms(base, exponent * -1);
                 denominatorTerms.emplace_back(termRaiseToTerms.getCombinedTerm());
             } else if (!isTheValue(exponent, 0)) {
-                TermRaiseToTerms termRaiseToTerms(base, exponent);
+                TermRaiseToTerms const termRaiseToTerms(base, exponent);
                 numeratorTerms.emplace_back(termRaiseToTerms.getCombinedTerm());
             }
         } else {
@@ -316,10 +316,10 @@ void TermsOverTerms::putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToNumbe
     for (auto const& [base, exponent] : termsRaiseToNumbers.getBaseToExponentMap()) {
         if (!exponent.isIntegerType() || m_shouldSimplifyToFactors) {
             if (exponent > 0) {
-                TermRaiseToANumber termRaiseToANumber(base, exponent);
+                TermRaiseToANumber const termRaiseToANumber(base, exponent);
                 numeratorTerms.emplace_back(termRaiseToANumber.getCombinedTerm());
             } else if (exponent < 0) {
-                TermRaiseToANumber termRaiseToANumber(base, exponent * -1);
+                TermRaiseToANumber const termRaiseToANumber(base, exponent * -1);
                 denominatorTerms.emplace_back(termRaiseToANumber.getCombinedTerm());
             }
         } else {
@@ -340,7 +340,7 @@ void TermsOverTerms::continueToSimplifyToFactors(Terms& factorizedNumerators, Te
 }
 
 void TermsOverTerms::continueToSimplifyAndCombineFactors(Terms& factorizedNumerators, Terms& factorizedDenominators) {
-    bool areSomeFactorsRemoved(
+    bool const areSomeFactorsRemoved(
         removeTermsIfNeededAndReturnIfSomeTermsAreRemoved(factorizedNumerators, factorizedDenominators));
     if (areSomeFactorsRemoved) {
         m_numerators = factorizedNumerators;
@@ -390,8 +390,8 @@ void TermsOverTerms::simplifyPolynomialsToPolynomialOverPolynomial() {
 }
 
 bool TermsOverTerms::removeTermsIfNeededAndReturnIfSomeTermsAreRemoved(Terms& numerators, Terms& denominators) {
-    int previousNumberOfNumerators = numerators.size();
-    int previousNumberOfDenominators = denominators.size();
+    int const previousNumberOfNumerators = numerators.size();
+    int const previousNumberOfDenominators = denominators.size();
 
     handleZerosInNumeratorOrDenominator(denominators, numerators);
     removeTermsThatHaveNoEffect(numerators);

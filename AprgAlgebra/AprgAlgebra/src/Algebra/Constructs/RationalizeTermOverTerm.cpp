@@ -44,7 +44,7 @@ void RationalizeTermOverTerm::simplifyForRationalize(Term& term) {
     rationalizeConfigurationDetails.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = true;
     rationalizeConfigurationDetails.shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt = true;
 
-    SimplificationOfExpression::ScopeObject scopeObject;
+    SimplificationOfExpression::ScopeObject const scopeObject;
     scopeObject.setInThisScopeThisConfiguration(rationalizeConfigurationDetails);
     term.simplify();
 }
@@ -70,10 +70,10 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomial(
 
 void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomial(
     Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial) {
-    AlbaNumber gcfOfExponents = getGreatestCommonFactor(
+    AlbaNumber const gcfOfExponents = getGreatestCommonFactor(
         getGcfOfExponentsInMonomial(firstMonomial), getGcfOfExponentsInMonomial(secondMonomial));
     if (gcfOfExponents.isFractionType()) {
-        AlbaNumber::FractionData exponentFraction(gcfOfExponents.getFractionData());
+        AlbaNumber::FractionData const exponentFraction(gcfOfExponents.getFractionData());
         if (isDivisible(exponentFraction.denominator, 2U)) {
             retrieveTermsForRationalizationForPolynomialWhenExponentIsDivisibleByTwo(
                 rationalizedTerm, multiplier, firstMonomial, secondMonomial);
@@ -134,13 +134,13 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpression(
     TermWithDetails const& secondTermWithDetails) {
     Term const& firstTerm(getTermConstReferenceFromUniquePointer(firstTermWithDetails.baseTermPointer));
     Term const& secondTerm(getTermConstReferenceFromUniquePointer(secondTermWithDetails.baseTermPointer));
-    TermRaiseToANumber firstTermRaiseToANumber(createTermRaiseToANumberFromTerm(firstTerm));
-    TermRaiseToANumber secondTermRaiseToANumber(createTermRaiseToANumberFromTerm(secondTerm));
+    TermRaiseToANumber const firstTermRaiseToANumber(createTermRaiseToANumberFromTerm(firstTerm));
+    TermRaiseToANumber const secondTermRaiseToANumber(createTermRaiseToANumberFromTerm(secondTerm));
 
-    AlbaNumber gcfOfExponents =
+    AlbaNumber const gcfOfExponents =
         getGreatestCommonFactor(firstTermRaiseToANumber.getExponent(), secondTermRaiseToANumber.getExponent());
     if (gcfOfExponents.isFractionType()) {
-        AlbaNumber::FractionData exponentFraction(gcfOfExponents.getFractionData());
+        AlbaNumber::FractionData const exponentFraction(gcfOfExponents.getFractionData());
         if (isDivisible(exponentFraction.denominator, 2U)) {
             retrieveTermsForRationalizationForExpressionWhenExponentIsDivisibleByTwo(
                 rationalizedTerm, multiplier, firstTermWithDetails, secondTermWithDetails);
@@ -160,14 +160,14 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpressionWhenEx
     TermWithDetails secondMultiplierTerm(secondTermWithDetails);
     secondMultiplierTerm.association =
         secondTermWithDetails.hasPositiveAssociation() ? TermAssociationType::Negative : TermAssociationType::Positive;
-    TermsWithDetails multiplierTermsWithDetails{firstTermWithDetails, secondMultiplierTerm};
+    TermsWithDetails const multiplierTermsWithDetails{firstTermWithDetails, secondMultiplierTerm};
     multiplier = createTermWithAdditionAndSubtractionTermsWithDetails(multiplierTermsWithDetails);
 
-    Term firstRationalizedTerm(firstTerm ^ 2);
-    Term secondRationalizedTerm(secondTerm ^ 2);
-    TermWithDetails firstRationalizedTermWithDetails(firstRationalizedTerm, TermAssociationType::Positive);
-    TermWithDetails secondRationalizedTermTermWithDetails(secondRationalizedTerm, TermAssociationType::Negative);
-    TermsWithDetails rationalizedTermsWithDetails{
+    Term const firstRationalizedTerm(firstTerm ^ 2);
+    Term const secondRationalizedTerm(secondTerm ^ 2);
+    TermWithDetails const firstRationalizedTermWithDetails(firstRationalizedTerm, TermAssociationType::Positive);
+    TermWithDetails const secondRationalizedTermTermWithDetails(secondRationalizedTerm, TermAssociationType::Negative);
+    TermsWithDetails const rationalizedTermsWithDetails{
         firstRationalizedTermWithDetails, secondRationalizedTermTermWithDetails};
     rationalizedTerm = createTermWithAdditionAndSubtractionTermsWithDetails(rationalizedTermsWithDetails);
 }
@@ -178,23 +178,24 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpressionWhenEx
     Term const& firstTerm(getTermConstReferenceFromUniquePointer(firstTermWithDetails.baseTermPointer));
     Term const& secondTerm(getTermConstReferenceFromUniquePointer(secondTermWithDetails.baseTermPointer));
 
-    Term firstMultiplierTerm(firstTerm ^ 2);
-    Term secondMultiplierTerm(firstTerm * secondTerm);
-    Term thirdMultiplierTerm(secondTerm ^ 2);
-    TermAssociationType newSecondAssociationType =
+    Term const firstMultiplierTerm(firstTerm ^ 2);
+    Term const secondMultiplierTerm(firstTerm * secondTerm);
+    Term const thirdMultiplierTerm(secondTerm ^ 2);
+    TermAssociationType const newSecondAssociationType =
         secondTermWithDetails.hasPositiveAssociation() ? TermAssociationType::Negative : TermAssociationType::Positive;
-    TermWithDetails firstMultiplierTermWithDetails(firstMultiplierTerm, TermAssociationType::Positive);
-    TermWithDetails secondMultiplierTermWithDetails(secondMultiplierTerm, newSecondAssociationType);
-    TermWithDetails thirdMultiplierTermWithDetails(thirdMultiplierTerm, TermAssociationType::Positive);
-    TermsWithDetails multiplierTermsWithDetails{
+    TermWithDetails const firstMultiplierTermWithDetails(firstMultiplierTerm, TermAssociationType::Positive);
+    TermWithDetails const secondMultiplierTermWithDetails(secondMultiplierTerm, newSecondAssociationType);
+    TermWithDetails const thirdMultiplierTermWithDetails(thirdMultiplierTerm, TermAssociationType::Positive);
+    TermsWithDetails const multiplierTermsWithDetails{
         firstMultiplierTermWithDetails, secondMultiplierTermWithDetails, thirdMultiplierTermWithDetails};
     multiplier = createTermWithAdditionAndSubtractionTermsWithDetails(multiplierTermsWithDetails);
 
-    Term firstRationalizedTerm(firstTerm ^ 3);
-    Term secondRationalizedTerm(secondTerm ^ 3);
-    TermWithDetails firstRationalizedTermWithDetails(firstRationalizedTerm, firstTermWithDetails.association);
-    TermWithDetails secondRationalizedTermTermWithDetails(secondRationalizedTerm, secondTermWithDetails.association);
-    TermsWithDetails rationalizedTermsWithDetails{
+    Term const firstRationalizedTerm(firstTerm ^ 3);
+    Term const secondRationalizedTerm(secondTerm ^ 3);
+    TermWithDetails const firstRationalizedTermWithDetails(firstRationalizedTerm, firstTermWithDetails.association);
+    TermWithDetails const secondRationalizedTermTermWithDetails(
+        secondRationalizedTerm, secondTermWithDetails.association);
+    TermsWithDetails const rationalizedTermsWithDetails{
         firstRationalizedTermWithDetails, secondRationalizedTermTermWithDetails};
     rationalizedTerm = createTermWithAdditionAndSubtractionTermsWithDetails(rationalizedTermsWithDetails);
 }

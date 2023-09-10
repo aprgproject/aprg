@@ -15,8 +15,8 @@ EquationBuilder::EquationBuilder(string const& equationInString) {
 Equation EquationBuilder::getEquation() const {
     Equation result;
     if (m_termStrings.size() == 2 && m_equationOperatorStrings.size() == 1) {
-        Term firstTerm(buildTermIfPossible(m_termStrings[0]));
-        Term secondTerm(buildTermIfPossible(m_termStrings[1]));
+        Term const firstTerm(buildTermIfPossible(m_termStrings[0]));
+        Term const secondTerm(buildTermIfPossible(m_termStrings[1]));
         if (!firstTerm.isEmpty() && !secondTerm.isEmpty()) {
             result = Equation(firstTerm, m_equationOperatorStrings[0], secondTerm);
         }
@@ -36,7 +36,7 @@ void EquationBuilder::splitAndSaveOperatorAndTermStrings(string const& equationI
             if (tempString.empty()) {
                 tempString = splittedString;
             } else {
-                string twoCharacterString = tempString + splittedString;
+                string const twoCharacterString = tempString + splittedString;
                 if (isEquationOperatorString(twoCharacterString)) {
                     m_equationOperatorStrings.emplace_back(twoCharacterString);
                     tempString.clear();

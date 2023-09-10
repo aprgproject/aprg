@@ -22,7 +22,7 @@ void calculateLagrangeEquations(
 
 Term getTermWithLagrangeFunctions(
     Term const& term, Terms const& lagrangeFunctions, strings const& lagrangeMultiplierNames) {
-    int size(min(lagrangeFunctions.size(), lagrangeMultiplierNames.size()));
+    int const size(min(lagrangeFunctions.size(), lagrangeMultiplierNames.size()));
     Term result(term);
     for (int i = 0; i < size; ++i) {
         result += lagrangeFunctions[i] * Term(lagrangeMultiplierNames[i]);
@@ -31,13 +31,14 @@ Term getTermWithLagrangeFunctions(
 }
 
 Terms getLagrangeMultipliers(Term const& term, strings const& coordinateNames, Terms const& lagrangeFunctions) {
-    strings lagrangeMultiplierNames(getLagrangeMultiplierNames(lagrangeFunctions.size()));
-    Term termWithLagrangeFunctions(getTermWithLagrangeFunctions(term, lagrangeFunctions, lagrangeMultiplierNames));
+    strings const lagrangeMultiplierNames(getLagrangeMultiplierNames(lagrangeFunctions.size()));
+    Term const termWithLagrangeFunctions(
+        getTermWithLagrangeFunctions(term, lagrangeFunctions, lagrangeMultiplierNames));
     Equations lagrangeEquations;
     calculateLagrangeEquations(lagrangeEquations, termWithLagrangeFunctions, coordinateNames, lagrangeMultiplierNames);
 
     Terms result;
-    IsolationOfOneVariableOnEqualityEquations isolation(lagrangeEquations);
+    IsolationOfOneVariableOnEqualityEquations const isolation(lagrangeEquations);
     for (string const& lagrangeMultiplierName : lagrangeMultiplierNames) {
         result.emplace_back(isolation.getEquivalentTermByIsolatingAVariable(lagrangeMultiplierName));
     }
@@ -45,7 +46,7 @@ Terms getLagrangeMultipliers(Term const& term, strings const& coordinateNames, T
 }
 
 string getLagrangeMultiplierName(int const index) {
-    static StringConverterWithFormatting converter(3, '0');
+    static StringConverterWithFormatting const converter(3, '0');
     return "multiplier" + converter.convertToString(index);
 }
 

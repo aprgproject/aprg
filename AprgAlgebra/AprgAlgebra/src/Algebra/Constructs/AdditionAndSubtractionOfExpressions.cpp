@@ -37,7 +37,7 @@ TermAssociationTypes const& AdditionAndSubtractionOfExpressions::getAssociations
 
 TermsWithDetails AdditionAndSubtractionOfExpressions::getAsTermsWithDetails() const {
     TermsWithDetails result;
-    int size = getSize();
+    int const size = getSize();
     for (int index = 0; index < size; ++index) {
         result.emplace_back(convertExpressionToSimplestTerm(m_expressions[index]), m_associations[index]);
     }
@@ -97,7 +97,7 @@ void AdditionAndSubtractionOfExpressions::prepareCommonParts(Terms& commonParts)
 void AdditionAndSubtractionOfExpressions::retrieveMergePart(Term& mergePart, Expression const& expression) {
     if (OperatorLevel::MultiplicationAndDivision == expression.getCommonOperatorLevel()) {
         mergePart = 1;
-        TermsWithDetails termsToBeMerged = retrieveTermsWithDetailsThatSatisfiesCondition(
+        TermsWithDetails const termsToBeMerged = retrieveTermsWithDetailsThatSatisfiesCondition(
             expression.getTermsWithAssociation().getTermsWithDetails(), isMergePart);
 
         accumulateTermsForMultiplicationAndDivision(mergePart, termsToBeMerged);
@@ -109,7 +109,7 @@ void AdditionAndSubtractionOfExpressions::retrieveMergePart(Term& mergePart, Exp
 void AdditionAndSubtractionOfExpressions::retrieveCommonPart(Term& commonPart, Expression const& expression) {
     if (OperatorLevel::MultiplicationAndDivision == expression.getCommonOperatorLevel()) {
         commonPart = 1;
-        TermsWithDetails termsToBeMerged = retrieveTermsWithDetailsThatSatisfiesCondition(
+        TermsWithDetails const termsToBeMerged = retrieveTermsWithDetailsThatSatisfiesCondition(
             expression.getTermsWithAssociation().getTermsWithDetails(), isCommonPart);
 
         accumulateTermsForMultiplicationAndDivision(commonPart, termsToBeMerged);
@@ -146,7 +146,7 @@ void AdditionAndSubtractionOfExpressions::mergeExpressionsByCheckingTwoTermsAtAT
         for (int j = i + 1; j < size; ++j) {
             // quadratic time: think on how this can be better
             if (canBeMerged(mergeParts[i], mergeParts[j], commonParts[i], commonParts[j])) {
-                Term mergedTerm(mergeTerms(mergeParts[i], mergeParts[j], m_associations[i], m_associations[j]));
+                Term const mergedTerm(mergeTerms(mergeParts[i], mergeParts[j], m_associations[i], m_associations[j]));
                 Term const& commonPart(commonParts[i]);
                 mergeParts[i] = mergedTerm;
                 m_expressions[i] = createOrCopyExpressionFromATerm(mergedTerm * commonPart);

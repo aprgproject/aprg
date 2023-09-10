@@ -47,7 +47,7 @@ void splitPolynomialsByPolynomialDegree(Polynomials& result, Polynomial const& p
     if (!monomials.empty()) {
         AlbaNumber previousDegree(getDegree(monomials.front()));
         for (Monomial const& monomial : monomials) {
-            AlbaNumber monomialDegree(getDegree(monomial));
+            AlbaNumber const monomialDegree(getDegree(monomial));
             if (previousDegree != monomialDegree) {
                 previousDegree = monomialDegree;
                 result.emplace_back(partialPolynomial);
@@ -61,7 +61,7 @@ void splitPolynomialsByPolynomialDegree(Polynomials& result, Polynomial const& p
 
 void splitPolynomialsByDivisibilityOfExponents(Polynomials& result, Polynomial const& polynomial) {
     Polynomials collectedPolynomials;
-    AlbaNumber polynomialDegree(getMaxDegree(polynomial));
+    AlbaNumber const polynomialDegree(getMaxDegree(polynomial));
     if (polynomialDegree.isIntegerType() && polynomialDegree > 0) {
         Monomials remainingMonomials = polynomial.getMonomials();
         int64_t degree = polynomialDegree.getInteger();
@@ -86,12 +86,12 @@ void splitPolynomialsByDivisibilityOfExponents(Polynomials& result, Polynomial c
 }
 
 void splitPolynomialsByFirstVariable(Polynomials& result, Polynomial const& polynomial) {
-    Monomials monomials(polynomial.getMonomials());
+    Monomials const monomials(polynomial.getMonomials());
     Polynomial partialPolynomial;
     string firstVariableName;
     bool isFirst(true);
     for (Monomial const& monomial : monomials) {
-        string monomialFirstVariableName(getFirstVariableName(monomial));
+        string const monomialFirstVariableName(getFirstVariableName(monomial));
         if (!monomialFirstVariableName.empty()) {
             if (isFirst) {
                 firstVariableName = monomialFirstVariableName;
@@ -135,7 +135,7 @@ void factorizeSmallerPolynomialsBySubstitutingCommonFactorsToNewVariables(
     Polynomials& result, Polynomials const& smallerPolynomials) {
     SubstitutionOfVariablesToTerms variableSubstitution;
     if (smallerPolynomials.size() > 1) {
-        Polynomial newPolynomialWithVariables(
+        Polynomial const newPolynomialWithVariables(
             getNewPolynomialWithNewVariables(variableSubstitution, smallerPolynomials));
         if (!variableSubstitution.isEmpty()) {
             factorizePolynomialWithNewVariables(result, newPolynomialWithVariables, variableSubstitution);
@@ -149,10 +149,10 @@ void factorizeSmallerPolynomialsBySubstitutingCommonFactorsToNewVariables(
 void factorizePolynomialWithNewVariables(
     Polynomials& result, Polynomial const& newPolynomialWithVariables,
     SubstitutionOfVariablesToTerms const& variableSubstitution) {
-    Polynomials factorizedPolynomialsWithVariables(factorizeAPolynomial(newPolynomialWithVariables));
+    Polynomials const factorizedPolynomialsWithVariables(factorizeAPolynomial(newPolynomialWithVariables));
     if (factorizedPolynomialsWithVariables.size() > 1) {
         for (Polynomial const& factorizedPolynomialWithVariables : factorizedPolynomialsWithVariables) {
-            Polynomial finalPolynomial(createPolynomialIfPossible(
+            Polynomial const finalPolynomial(createPolynomialIfPossible(
                 variableSubstitution.performSubstitutionTo(factorizedPolynomialWithVariables)));
             simplifyThenEmplaceBackIfPolynomialIsNotEmpty(result, finalPolynomial);
         }
@@ -163,7 +163,7 @@ void getCommonFactorsInThesePolynomials(Polynomials& commonFactors, Polynomials 
     if (!smallerPolynomials.empty()) {
         commonFactors = factorizeAPolynomial(smallerPolynomials.front());
         for (auto it = smallerPolynomials.cbegin() + 1; it != smallerPolynomials.cend(); ++it) {
-            Polynomials commonFactorsOfAPolynomial(factorizeAPolynomial(*it));
+            Polynomials const commonFactorsOfAPolynomial(factorizeAPolynomial(*it));
             updateToGetSubsetOfFactors(commonFactors, commonFactorsOfAPolynomial);
         }
     }
@@ -174,8 +174,8 @@ void getPolynomialsWithRemovedCommonFactors(
     for (Polynomial const& polynomialWithCommonFactors : polynomialsWithCommonFactors) {
         Polynomial resultPolynomial(polynomialWithCommonFactors);
         for (Polynomial const& commonFactor : commonFactors) {
-            PolynomialOverPolynomial divideProcess(resultPolynomial, commonFactor);
-            PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(divideProcess.divide());
+            PolynomialOverPolynomial const divideProcess(resultPolynomial, commonFactor);
+            PolynomialOverPolynomial::QuotientAndRemainder const quotientAndRemainder(divideProcess.divide());
             if (isTheValue(quotientAndRemainder.remainder, 0)) {
                 resultPolynomial = quotientAndRemainder.quotient;
             }
@@ -198,7 +198,7 @@ void updateToGetSubsetOfFactors(Polynomials& commonFactors, Polynomials const& c
                     {getFirstMonomial(previousCommonFactor), getFirstMonomial(currentCommonFactor)}));
                 gcfMonomial.simplify();
                 if (!isTheValue(gcfMonomial, 1)) {
-                    commonFactors.emplace_back(Polynomial{gcfMonomial});
+                    commonFactors.emplace_back(gcfMonomial);
                     isFound = true;
                 }
             } else if (previousCommonFactor == currentCommonFactor) {
@@ -231,12 +231,12 @@ Polynomial getNewPolynomialWithNewVariables(
     Polynomial newPolynomialWithVariables;
     for (Polynomial const& smallerPolynomial : smallerPolynomials) {
         Polynomial newSmallerPolynomialWithVariables(createPolynomialFromNumber(1));
-        Polynomials factors(factorizeAPolynomial(smallerPolynomial));
+        Polynomials const factors(factorizeAPolynomial(smallerPolynomial));
         for (Polynomial const& factor : factors) {
             if (isOneMonomial(factor)) {
                 newSmallerPolynomialWithVariables.multiplyMonomial(getFirstMonomial(factor));
             } else {
-                string variableNameForSubstitution(createVariableNameForSubstitution(Term(factor)));
+                string const variableNameForSubstitution(createVariableNameForSubstitution(Term(factor)));
                 variableSubstitution.putVariableWithTerm(variableNameForSubstitution, factor);
                 newSmallerPolynomialWithVariables.multiplyMonomial(
                     createMonomialFromVariable(Variable(variableNameForSubstitution)));

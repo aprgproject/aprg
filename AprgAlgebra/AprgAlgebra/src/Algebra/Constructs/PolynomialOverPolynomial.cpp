@@ -92,7 +92,7 @@ Monomial PolynomialOverPolynomial::getMonomialWithMaxNegativeExponentsAndConvert
                 if (resultVariableMap.find(variable) != resultVariableMap.end()) {
                     existingExponent = resultVariableMap.at(variable);
                 }
-                AlbaNumber newPositiveExponent(exponent * -1);
+                AlbaNumber const newPositiveExponent(exponent * -1);
                 if (newPositiveExponent > existingExponent) {
                     resultMonomial.putVariableWithExponent(variable, newPositiveExponent);
                 }
@@ -116,7 +116,7 @@ int PolynomialOverPolynomial::getLcmForDenominatorCoefficients(Polynomial const&
     for (Monomial const& monomial : polynomial.getMonomials()) {
         AlbaNumber const& coefficient(monomial.getCoefficient());
         if (coefficient.isFractionType()) {
-            AlbaNumber::FractionData fractionData(coefficient.getFractionData());
+            AlbaNumber::FractionData const fractionData(coefficient.getFractionData());
             lcm = getLeastCommonMultiple(lcm, static_cast<int>(fractionData.denominator));
         }
     }
@@ -158,17 +158,18 @@ bool PolynomialOverPolynomial::shouldPerformFactorization() const {
 }
 
 void PolynomialOverPolynomial::convertFractionCoefficientsToInteger() {
-    int numeratorMultiplier(getLcmForDenominatorCoefficients(m_numerator));
+    int const numeratorMultiplier(getLcmForDenominatorCoefficients(m_numerator));
     m_numerator.multiplyNumber(numeratorMultiplier);
     m_denominator.multiplyNumber(numeratorMultiplier);
-    int denominatorMultiplier(getLcmForDenominatorCoefficients(m_denominator));
+    int const denominatorMultiplier(getLcmForDenominatorCoefficients(m_denominator));
     m_numerator.multiplyNumber(denominatorMultiplier);
     m_denominator.multiplyNumber(denominatorMultiplier);
 }
 
 void PolynomialOverPolynomial::convertNegativeExponentsToPositive() {
-    Monomial monomialExponentNumerator(getMonomialWithMaxNegativeExponentsAndConvertItToPositive(m_numerator));
-    Monomial monomialExponentDenominator(getMonomialWithMaxNegativeExponentsAndConvertItToPositive(m_denominator));
+    Monomial const monomialExponentNumerator(getMonomialWithMaxNegativeExponentsAndConvertItToPositive(m_numerator));
+    Monomial const monomialExponentDenominator(
+        getMonomialWithMaxNegativeExponentsAndConvertItToPositive(m_denominator));
     m_numerator.multiplyMonomial(monomialExponentNumerator);
     m_numerator.multiplyMonomial(monomialExponentDenominator);
     m_denominator.multiplyMonomial(monomialExponentNumerator);
@@ -182,11 +183,11 @@ void PolynomialOverPolynomial::removeCommonMonomialOnAllMonomialsInNumeratorAndD
     numeratorAndDenominatorMonomials.reserve(numeratorMonomials.size() + denominatorMonomials.size());
     copy(numeratorMonomials.cbegin(), numeratorMonomials.cend(), back_inserter(numeratorAndDenominatorMonomials));
     copy(denominatorMonomials.cbegin(), denominatorMonomials.cend(), back_inserter(numeratorAndDenominatorMonomials));
-    Monomial gcfMonomial(getGcfMonomialInMonomials(numeratorAndDenominatorMonomials));
+    Monomial const gcfMonomial(getGcfMonomialInMonomials(numeratorAndDenominatorMonomials));
     if (!isTheValue(gcfMonomial, 0)) {
         m_numerator.divideMonomial(gcfMonomial);
         m_denominator.divideMonomial(gcfMonomial);
-        bool isDenominatorHasNegativeSign = getCommonSignInMonomials(m_denominator.getMonomials()) == -1;
+        bool const isDenominatorHasNegativeSign = getCommonSignInMonomials(m_denominator.getMonomials()) == -1;
         if (isDenominatorHasNegativeSign) {
             m_numerator.divideMonomial(createMonomialFromNumber(-1));
             m_denominator.divideMonomial(createMonomialFromNumber(-1));
@@ -198,13 +199,13 @@ void PolynomialOverPolynomial::factorizeRemoveCommonFactorsInNumeratorAndDenomin
     ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue =
         m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue;
-    ScopeObject scopeObject;
+    ScopeObject const scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
     if (shouldPerformFactorization()) {
         Polynomials numeratorFactors(factorizeAPolynomial(m_numerator));
         Polynomials denominatorFactors(factorizeAPolynomial(m_denominator));
-        bool areSomeFactorsRemoved(
+        bool const areSomeFactorsRemoved(
             removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(numeratorFactors, denominatorFactors));
         if (areSomeFactorsRemoved) {
             m_numerator = multiplyAndSimplifyFactors(numeratorFactors);

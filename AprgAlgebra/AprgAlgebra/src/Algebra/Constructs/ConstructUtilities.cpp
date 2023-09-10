@@ -101,7 +101,7 @@ void createTermRaiseToTermsFromMultiplicationAndDivisionExpression(
 
     TermsOverTerms originalTot(createTermsOverTermsFromTerm(Term(expression)));
     originalTot.setAsShouldSimplifyToFactors(true);
-    TermsRaiseToTerms originalTermsRaiseToTerms(originalTot.getTermsRaiseToTerms());
+    TermsRaiseToTerms const originalTermsRaiseToTerms(originalTot.getTermsRaiseToTerms());
 
     AlbaNumbers originalConstants;
     TermsWithDetails originalExponentsWithDetails;
@@ -115,7 +115,7 @@ void createTermRaiseToTermsFromMultiplicationAndDivisionExpression(
     }
     retrieveConstantAndNonConstantFactors(
         nonConstantFactorsOfExponents, constantFactorsOfExponents, originalExponentsWithDetails);
-    bool areAllConstantFactorsNegative(all_of(
+    bool const areAllConstantFactorsNegative(all_of(
         constantFactorsOfExponents.cbegin(), constantFactorsOfExponents.cend(),
         [](AlbaNumber const& constantFactor) { return constantFactor < 0; }));
     AlbaNumber constantGcf(getGcfOfConstants(constantFactorsOfExponents));
@@ -132,7 +132,7 @@ void createTermRaiseToTermsFromMultiplicationAndDivisionExpression(
     bool shouldContinueToGetCommonExponent(true);
     TermsWithDetails finalBasesWithDetails;
     for (AlbaNumber const& originalConstant : originalConstants) {
-        AlbaNumber newConstantBase(originalConstant ^ (AlbaNumber(1) / constantGcf));
+        AlbaNumber const newConstantBase(originalConstant ^ (AlbaNumber(1) / constantGcf));
         if (newConstantBase.isIntegerType()) {
             finalBasesWithDetails.emplace_back(Term(newConstantBase), TermAssociationType::Positive);
         } else {
@@ -145,13 +145,13 @@ void createTermRaiseToTermsFromMultiplicationAndDivisionExpression(
              i < static_cast<int>(constantFactorsOfExponents.size()) &&
              i < static_cast<int>(nonConstantFactorsOfExponents.size()) && i < static_cast<int>(originalBases.size());
              ++i) {
-            AlbaNumber uniqueConstantExponent(constantFactorsOfExponents[i] / constantGcf);
+            AlbaNumber const uniqueConstantExponent(constantFactorsOfExponents[i] / constantGcf);
             TermsRaiseToNumbers remainingNonConstantFactors(nonConstantFactorsOfExponents[i]);
             remainingNonConstantFactors.subtractExponents(commonNonConstantFactorsOfExponents);
             remainingNonConstantFactors.simplify();
             Term uniqueExponent(Term(uniqueConstantExponent) * remainingNonConstantFactors.getCombinedTerm());
             uniqueExponent.simplify();
-            TermRaiseToTerms originalBaseToUniqueExponent(originalBases[i], uniqueExponent);
+            TermRaiseToTerms const originalBaseToUniqueExponent(originalBases[i], uniqueExponent);
             finalBasesWithDetails.emplace_back(
                 originalBaseToUniqueExponent.getCombinedTerm(), TermAssociationType::Positive);
         }
@@ -219,14 +219,14 @@ TermRaiseToANumber createTermRaiseToANumberFromTerm(Term const& term) {
 TermRaiseToANumber createTermRaiseToANumberFromMonomial(Monomial const& monomial) {
     Monomial newMonomial(monomial);
     Monomial::VariablesToExponentsMap const& variablesToExponentsMap(newMonomial.getVariablesToExponentsMap());
-    AlbaNumber exponent = (variablesToExponentsMap.size() == 1) ? (variablesToExponentsMap.cbegin())->second
-                                                                : getGcfOfExponentsInMonomial(newMonomial);
+    AlbaNumber const exponent = (variablesToExponentsMap.size() == 1) ? (variablesToExponentsMap.cbegin())->second
+                                                                      : getGcfOfExponentsInMonomial(newMonomial);
     newMonomial.raiseToPowerNumber(AlbaNumber(1) / exponent);
     return {Term(newMonomial), exponent};
 }
 
 TermRaiseToANumber createTermRaiseToANumberFromPolynomial(Polynomial const& polynomial) {
-    PolynomialRaiseToAnUnsignedInt polynomialRaiseToAnUnsignedInt(polynomial);
+    PolynomialRaiseToAnUnsignedInt const polynomialRaiseToAnUnsignedInt(polynomial);
     return {Term(polynomialRaiseToAnUnsignedInt.getBase()), polynomialRaiseToAnUnsignedInt.getExponent()};
 }
 
@@ -246,10 +246,10 @@ TermRaiseToANumber createTermRaiseToANumberFromExpression(Expression const& expr
 TermRaiseToTerms createTermRaiseToTermsFromTerm(Term const& term) {
     TermRaiseToTerms result;
     if (term.isMonomial()) {
-        TermRaiseToANumber termRaiseToANumber(createTermRaiseToANumberFromMonomial(term.getAsMonomial()));
+        TermRaiseToANumber const termRaiseToANumber(createTermRaiseToANumberFromMonomial(term.getAsMonomial()));
         result.setBaseAndExponent(termRaiseToANumber.getBase(), termRaiseToANumber.getExponent());
     } else if (term.isPolynomial()) {
-        TermRaiseToANumber termRaiseToANumber(createTermRaiseToANumberFromPolynomial(term.getAsPolynomial()));
+        TermRaiseToANumber const termRaiseToANumber(createTermRaiseToANumberFromPolynomial(term.getAsPolynomial()));
         result.setBaseAndExponent(termRaiseToANumber.getBase(), termRaiseToANumber.getExponent());
     } else if (term.isExpression()) {
         result = createTermRaiseToTermsFromExpression(term.getAsExpression());

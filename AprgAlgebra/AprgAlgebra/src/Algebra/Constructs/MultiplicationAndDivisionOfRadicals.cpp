@@ -22,7 +22,7 @@ Term MultiplicationAndDivisionOfRadicals::getCombinedTerm() const {
         SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
     radicalSimplificationConfigurationDetails.shouldNotSimplifyByDistributingConstantExponentToEachBase = true;
 
-    SimplificationOfExpression::ScopeObject scopeObject;
+    SimplificationOfExpression::ScopeObject const scopeObject;
     scopeObject.setInThisScopeThisConfiguration(radicalSimplificationConfigurationDetails);
 
     Expression combinedExpression;
@@ -40,7 +40,7 @@ void MultiplicationAndDivisionOfRadicals::simplify() {
         SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
     radicalSimplificationConfigurationDetails.shouldNotSimplifyByDistributingConstantExponentToEachBase = true;
 
-    SimplificationOfExpression::ScopeObject scopeObject;
+    SimplificationOfExpression::ScopeObject const scopeObject;
     scopeObject.setInThisScopeThisConfiguration(radicalSimplificationConfigurationDetails);
 
     Monomial combinedMonomial(createMonomialFromNumber(1));
@@ -48,7 +48,7 @@ void MultiplicationAndDivisionOfRadicals::simplify() {
     TermsWithDetails remainingTerms;
     gatherDetails(radicalDetails, combinedMonomial, remainingTerms);
 
-    AlbaNumber gcfOfExponents(getGcfOfExponents(radicalDetails));
+    AlbaNumber const gcfOfExponents(getGcfOfExponents(radicalDetails));
 
     if (shouldBeCombined(radicalDetails, combinedMonomial, gcfOfExponents)) {
         m_termsWithDetails.clear();
@@ -78,7 +78,7 @@ bool MultiplicationAndDivisionOfRadicals::isNotANegativeTermWithExponentDenomina
     Monomial const& combinedMonomial, AlbaNumber const& gcfOfExponents) {
     bool result(true);
     if (gcfOfExponents.isIntegerOrFractionType()) {
-        AlbaNumber::FractionData fractionData(gcfOfExponents.getFractionData());
+        AlbaNumber::FractionData const fractionData(gcfOfExponents.getFractionData());
         if (isEven(static_cast<int>(getAbsoluteValue<int>(fractionData.denominator)))) {
             result = !isANegativeMonomial(combinedMonomial);
         }
@@ -90,12 +90,12 @@ void MultiplicationAndDivisionOfRadicals::gatherDetails(
     RadicalDetails& radicalDetails, Monomial& combinedMonomial, TermsWithDetails& remainingTerms) {
     for (TermWithDetails const& termWithDetails : m_termsWithDetails) {
         Term const& term(getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer));
-        TermRaiseToANumber termRaiseToANumber(createTermRaiseToANumberFromTerm(term));
+        TermRaiseToANumber const termRaiseToANumber(createTermRaiseToANumberFromTerm(term));
 
         if (termRaiseToANumber.isRadical()) {
             radicalDetails.emplace_back(RadicalDetail{termRaiseToANumber, termWithDetails.association});
         } else if (canBeConvertedToMonomial(term)) {
-            Monomial monomial(createMonomialIfPossible(term));
+            Monomial const monomial(createMonomialIfPossible(term));
             if (termWithDetails.hasPositiveAssociation()) {
                 combinedMonomial.multiplyMonomial(monomial);
             } else {
@@ -115,9 +115,9 @@ void MultiplicationAndDivisionOfRadicals::combineMonomialAndRadicalsAndSave(
     for (RadicalDetail const& radicalDetail : radicalDetails) {
         TermRaiseToANumber newRadicalBaseAndExponent(radicalDetail.radical);
         newRadicalBaseAndExponent.setExponent(newRadicalBaseAndExponent.getExponent() / gcfOfExponents);
-        Term newRadical(newRadicalBaseAndExponent.getCombinedTerm());
+        Term const newRadical(newRadicalBaseAndExponent.getCombinedTerm());
         if (canBeConvertedToMonomial(newRadical)) {
-            Monomial newRadicalMonomial(createMonomialIfPossible(newRadical));
+            Monomial const newRadicalMonomial(createMonomialIfPossible(newRadical));
             if (radicalDetail.association == TermAssociationType::Positive) {
                 newMonomial.multiplyMonomial(newRadicalMonomial);
             } else {

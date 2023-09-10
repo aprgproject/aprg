@@ -33,7 +33,7 @@ AlbaNumber getDegree(Equation const& equation) {
 }
 
 Equation buildEquationIfPossible(string const& equationString) {
-    EquationBuilder builder(equationString);
+    EquationBuilder const builder(equationString);
     return builder.getEquation();
 }
 
@@ -83,7 +83,7 @@ bool doesNegativeVariableSubstitutionYieldsToTheSameEquation(Equation const& equ
     for (string const& variableName : variableNames) {
         substitution.putVariableWithTerm(variableName, Monomial(-1, {{variableName, 1}}));
     }
-    Equation equation2(substitution.performSubstitutionTo(equation1));
+    Equation const equation2(substitution.performSubstitutionTo(equation1));
     return equation1 == equation2;
 }
 

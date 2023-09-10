@@ -83,13 +83,13 @@ void TermsAggregator::traverse(AggregatorTraverseSteps const traverseSteps) {
 
 void TermsAggregator::eraseAndThenInsert(int const firstIndex, int const secondIndex, Term const& term) {
     // NOLINTNEXTLINE(performance-unnecessary-copy-initialization)
-    Term newTerm(term);
+    Term const newTerm(term);
     eraseTermsInclusive(firstIndex, secondIndex);
     insertTerm(firstIndex, newTerm);
 }
 
 void TermsAggregator::eraseTermsInclusive(int const firstIndex, int const secondIndex) {
-    bool isOutsideStartAndEndIndex(m_startIndex > firstIndex || m_endIndex < secondIndex);
+    bool const isOutsideStartAndEndIndex(m_startIndex > firstIndex || m_endIndex < secondIndex);
     m_terms.erase(m_terms.cbegin() + firstIndex, m_terms.cbegin() + secondIndex + 1);
     if (isOutsideStartAndEndIndex) {
         updateStartIndexAndEndIndexAndCheckOpeningAndClosingOperators();
@@ -99,7 +99,7 @@ void TermsAggregator::eraseTermsInclusive(int const firstIndex, int const second
 }
 
 void TermsAggregator::insertTerm(int const index, Term const& term) {
-    bool isOutsideStartAndEndIndex(m_startIndex > index || m_endIndex < index);
+    bool const isOutsideStartAndEndIndex(m_startIndex > index || m_endIndex < index);
     m_terms.emplace(m_terms.cbegin() + index, term);
     if (isOutsideStartAndEndIndex) {
         updateStartIndexAndEndIndexAndCheckOpeningAndClosingOperators();
@@ -138,7 +138,7 @@ bool TermsAggregator::combineOpeningClosingOperatorsAtStartEndIndexesAndReturnIf
 bool TermsAggregator::traverseOnOperatorIndexesAndReturnIfContinue(
     AggregatorTraverseSteps const traverseSteps, OperatorInputType const operatorInputType) {
     bool continueToTraverse(false);
-    Indexes nextOperatorIndexes(getNextOperatorIndexes(operatorInputType));
+    Indexes const nextOperatorIndexes(getNextOperatorIndexes(operatorInputType));
     for (int const nextOperatorIndex : nextOperatorIndexes) {
         continueToTraverse =
             performTraverseStepsAndReturnIfContinue(traverseSteps, nextOperatorIndex, operatorInputType);
@@ -217,7 +217,7 @@ bool TermsAggregator::buildExpressionWithUnaryOperationAndReturnIfBuilt(int cons
     if (index + 1 < static_cast<int>(m_terms.size())) {
         Term const& term1(m_terms[index]);
         Term const& term2(m_terms[index + 1]);
-        bool haveNoFirstValue(hasNoValueBeforeThisIndex(index));
+        bool const haveNoFirstValue(hasNoValueBeforeThisIndex(index));
         if (haveNoFirstValue && term1.isOperator() && isNonEmptyOrNonOperatorType(term2) &&
             OperatorLevel::AdditionAndSubtraction == term1.getAsOperator().getOperatorLevel()) {
             Expression newExpression;
@@ -241,7 +241,7 @@ bool TermsAggregator::simplifyBinaryOperationAndReturnIfSimplified(int const ind
         Term const& term2(m_terms[index]);
         Term const& term3(m_terms[index + 1]);
         if (isNonEmptyOrNonOperatorType(term1) && term2.isOperator() && isNonEmptyOrNonOperatorType(term3)) {
-            Term newTerm(performOperation(term2.getAsOperator(), term1, term3));
+            Term const newTerm(performOperation(term2.getAsOperator(), term1, term3));
             eraseAndThenInsert(index - 1, index + 1, newTerm);
             isSimplified = true;
         }
@@ -254,10 +254,10 @@ bool TermsAggregator::simplifyUnaryOperationAndReturnIfSimplified(int const inde
     if (index + 1 < static_cast<int>(m_terms.size())) {
         Term const& term1(m_terms[index]);
         Term const& term2(m_terms[index + 1]);
-        bool haveNoFirstValue(hasNoValueBeforeThisIndex(index));
+        bool const haveNoFirstValue(hasNoValueBeforeThisIndex(index));
         if (haveNoFirstValue && term1.isOperator() && isNonEmptyOrNonOperatorType(term2) &&
             OperatorLevel::AdditionAndSubtraction == term1.getAsOperator().getOperatorLevel()) {
-            Term newTerm(performOperation(term1.getAsOperator(), term2));
+            Term const newTerm(performOperation(term1.getAsOperator(), term2));
             eraseAndThenInsert(index, index + 1, newTerm);
             isSimplified = true;
         }

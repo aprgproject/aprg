@@ -74,7 +74,7 @@ bool TermRaiseToTerms::doesEvenExponentCancellationHappen() const {
     bool hasAnyNumeratorEven(false);
     bool hasAnyDenominatorEven(false);
     for (AlbaNumber const& exponentValue : exponentValues) {
-        AlbaNumber::FractionData fractionData(exponentValue.getFractionData());
+        AlbaNumber::FractionData const fractionData(exponentValue.getFractionData());
         hasAnyNumeratorEven = hasAnyNumeratorEven || isEven(getAbsoluteValue<int>(fractionData.numerator));
         hasAnyDenominatorEven = hasAnyDenominatorEven || isEven(fractionData.denominator);
     }
@@ -139,7 +139,7 @@ void TermRaiseToTerms::simplifyPolynomialRaiseToPositiveInteger(
 void TermRaiseToTerms::simplifyAdditionAndSubtractionExpressionRaiseToPositiveInteger(
     Term& base, Expression const& expressionBase, int const exponent) {
     Term result(1);
-    Term termToMultiply(expressionBase);
+    Term const termToMultiply(expressionBase);
     for (int i = 0; i < exponent; ++i) {
         result = result * termToMultiply;
     }
@@ -172,7 +172,7 @@ Term TermRaiseToTerms::getCombinedBaseAndExponents() const {
     if (m_exponents.empty()) {
         combinedTerm = m_base;
     } else {
-        Term exponent(getCombinedExponents());
+        Term const exponent(getCombinedExponents());
         combinedTerm = convertExpressionToSimplestTerm(createExpressionIfPossible({m_base, "^", exponent}));
         if ((m_base.isConstant() || m_base.isVariable() || m_base.isMonomial()) && exponent.isConstant()) {
             combinedTerm.simplify();
@@ -183,7 +183,7 @@ Term TermRaiseToTerms::getCombinedBaseAndExponents() const {
 
 void TermRaiseToTerms::simplifyByCheckingPolynomialRaiseToAnUnsignedIntIfNeeded() {
     if (m_shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt && canBeConvertedToPolynomial(m_base)) {
-        PolynomialRaiseToAnUnsignedInt polynomialRaiseToAnUnsignedInt(createPolynomialIfPossible(m_base));
+        PolynomialRaiseToAnUnsignedInt const polynomialRaiseToAnUnsignedInt(createPolynomialIfPossible(m_base));
         if (!polynomialRaiseToAnUnsignedInt.isExponentOne()) {
             m_base = polynomialRaiseToAnUnsignedInt.getBase();
             m_exponents.emplace(
@@ -216,12 +216,12 @@ void TermRaiseToTerms::simplifyBaseAndExponents() {
     } else if (canBeConvertedToMonomial(m_base) && exponentCombinedTerm.isConstant()) {
         simplifyMonomialRaiseToConstant(m_base, createMonomialIfPossible(m_base), exponentCombinedTerm.getAsNumber());
     } else if (m_base.isPolynomial() && !m_shouldSimplifyToFactors && isPositiveIntegerConstant(exponentCombinedTerm)) {
-        int exponent = static_cast<int>(exponentCombinedTerm.getAsNumber().getInteger());
+        int const exponent = static_cast<int>(exponentCombinedTerm.getAsNumber().getInteger());
         simplifyPolynomialRaiseToPositiveInteger(m_base, createPolynomialIfPossible(m_base), exponent);
     } else if (
         !m_shouldSimplifyToFactors && isPositiveIntegerConstant(exponentCombinedTerm) && m_base.isExpression() &&
         OperatorLevel::AdditionAndSubtraction == m_base.getAsExpression().getCommonOperatorLevel()) {
-        int exponent = static_cast<int>(exponentCombinedTerm.getAsNumber().getInteger());
+        int const exponent = static_cast<int>(exponentCombinedTerm.getAsNumber().getInteger());
         simplifyAdditionAndSubtractionExpressionRaiseToPositiveInteger(m_base, m_base.getAsExpression(), exponent);
     } else if (
         m_base.isConstant() && exponentCombinedTerm.isExpression() &&

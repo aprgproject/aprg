@@ -22,13 +22,13 @@ void TermsRaiseToExponents<ExponentType, BaseRaiseToExponentType>::putTermUsingB
 template <>
 void TermsRaiseToExponents<AlbaNumber, TermRaiseToANumber>::putTermUsingBaseToExponentType(
     Term const& term, int const sign) {
-    TermRaiseToANumber termRaiseToExponent(createTermRaiseToANumberFromTerm(term));
+    TermRaiseToANumber const termRaiseToExponent(createTermRaiseToANumberFromTerm(term));
     m_baseToExponentMap[termRaiseToExponent.getBase()] += termRaiseToExponent.getExponent() * sign;
 }
 
 template <>
 void TermsRaiseToExponents<Term, TermRaiseToTerms>::putTermUsingBaseToExponentType(Term const& term, int const sign) {
-    TermRaiseToTerms termRaiseToExponent(createTermRaiseToTermsFromTerm(term));
+    TermRaiseToTerms const termRaiseToExponent(createTermRaiseToTermsFromTerm(term));
     m_baseToExponentMap[termRaiseToExponent.getBase()] += Term(termRaiseToExponent.getCombinedExponents() * sign);
 }
 
@@ -168,13 +168,13 @@ template void TermsRaiseToExponents<Term, TermRaiseToTerms>::multiplyToExponents
 template <typename ExponentType, typename BaseRaiseToExponentType>
 void TermsRaiseToExponents<ExponentType, BaseRaiseToExponentType>::putTerm(
     Term const& term, TermAssociationType const association) {
-    int sign = (association == TermAssociationType::Positive) ? 1 : -1;
+    int const sign = (association == TermAssociationType::Positive) ? 1 : -1;
     if (canBeConvertedToMonomial(term)) {
-        Monomial monomial(createMonomialIfPossible(term));
+        Monomial const monomial(createMonomialIfPossible(term));
         AlbaNumber const& constant(monomial.getCoefficient());
         if (constant != 1) {
             if (constant.isFractionType()) {
-                AlbaNumber::FractionData fractionData(constant.getFractionData());
+                AlbaNumber::FractionData const fractionData(constant.getFractionData());
                 if (fractionData.numerator != 1) {
                     m_baseToExponentMap[Term(fractionData.numerator)] += ExponentType(sign);
                 }
