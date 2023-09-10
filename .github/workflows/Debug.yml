@@ -10,7 +10,61 @@ on:
         default: 0
 
 jobs:
-
+  determineCppProjects:
+    name: Determine CPP Projects
+    runs-on: ubuntu-latest
+    outputs:
+      staticAnalysisJobId: ${{ steps.idOfGetJobIdStep.outputs.STATIC_ANALYSIS_JOB_ID }}
+      projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_CPP_DIRECTORIES }}
+      projectsWithWindowsStaticAnalysis: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_WINDOWS_STATIC_ANALYSIS }}
+    steps:
+      - name: Checkout code for changes checking
+        id: idOfCheckout
+        uses: actions/checkout@v3
+          
+      - name: Get Static Analysis Job Id from Git Or from User Input
+        id: idOfGetJobIdStep
+        run: |
+          staticAnalysisJobId="${{ inputs.staticAnalysisJobId }}" 
+          if [[ -z $staticAnalysisJobId ]]; then
+            lastCommitMessage=$(git log -1 --pretty=%B)
+            echo "lastCommitMessage: [$lastCommitMessage]"
+            staticAnalysisJobId=$(echo "$lastCommitMessage" | sed -nE "s|^.*JobId\[(.*)\].*$|\1|p")
+          fi
+          echo "staticAnalysisJobId: [$staticAnalysisJobId]"
+          echo "staticAnalysisJobId=$staticAnalysisJobId" >> "$GITHUB_ENV"
+          echo "STATIC_ANALYSIS_JOB_ID=$staticAnalysisJobId" >> "$GITHUB_OUTPUT"
+        
+      - name: Get C/C++ Projects for Static Analysis
+        id: idOfGetCppProjectStep
+        run: |
+          determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
+          echo "determineCppProjectsPath: [$determineCppProjectsPath]"
+          chmod +x "$determineCppProjectsPath"
+          "$determineCppProjectsPath" checkStaticAnalysisFiles "$staticAnalysisJobId" "${{ env.staticAnalysisFilename }}"
+          
+          
+  runStaticAnalyzersOnCppProjects:
+    name: JobId[${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}] Run Static Analyzers with Auto Fixes
+    needs: determineCppProjects
+    env:
+      projectToBuild: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild)[0] }}
+      operatingSystem: ${{ contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), env.projectToBuild) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
+    runs-on: env.operatingSystem 
+    permissions:
+      contents: write
+    steps:
+          
+      - name: Print Job Details
+        run: |
+          echo "github.event_name: [${{ github.event_name }}]"
+          echo "github.event.action: [${{ github.event.action }}]"
+          echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
+          echo "c/c++ next project: [${{ env.projectToBuild }}]"
+          echo "operating system: [${{ env.operatingSystem }}]"
+          echo "staticAnalysisFilename: [${{ env.staticAnalysisFilename }}]"
+          echo "staticAnalysisJobId: [${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}]"
+          
   debugBuild:
     name: Debug job
     runs-on: windows-latest

@@ -20,6 +20,8 @@ projectsWithGsl=""
 source "$scriptDirectory/ProjectsWithGsl.sh"
 projectsWith7Zip=""
 source "$scriptDirectory/ProjectsWith7Zip.sh"
+projectsWithWindowsStaticAnalysis=""
+source "$scriptDirectory/ProjectsWithWindowsStaticAnalysis.sh"
 
 scriptPrint "$scriptName" "$LINENO" "The scriptOption is: [$scriptOption]"
 
@@ -72,3 +74,7 @@ echo "APRG_PROJECTS_WITH_GSL=[$projectsWithGsl]" >> "$GITHUB_OUTPUT"
 scriptPrint "$scriptName" "$LINENO" "The projectsWith7Zip are: [$projectsWith7Zip]"
 # shellcheck disable=SC2154
 echo "APRG_PROJECTS_WITH_7ZIP=[$projectsWith7Zip]" >> "$GITHUB_OUTPUT"
+
+scriptPrint "$scriptName" "$LINENO" "The projectsWithWindowsStaticAnalysis are: [$projectsWithWindowsStaticAnalysis]"
+# shellcheck disable=SC2154
+echo "APRG_PROJECTS_WITH_WINDOWS_STATIC_ANALYSIS=[$projectsWithWindowsStaticAnalysis]" >> "$GITHUB_OUTPUT"

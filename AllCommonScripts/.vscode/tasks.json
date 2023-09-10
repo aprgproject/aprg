@@ -13,6 +13,21 @@
 			},
 			"group": "test",
 			"problemMatcher": []
+		},
+		{
+			"label": "Run locally",
+			"type": "shell",
+			"command": "${workspaceFolder}/${relativeFileDirname}/${fileBasename}",
+			"args": [],
+			"options": {
+				"cwd": "${workspaceFolder}/${relativeFileDirname}"
+			},
+			"group": "test",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			},
+			"problemMatcher": []
 		}
 	]
 }

@@ -25,6 +25,28 @@
                 "reveal": "always",
                 "panel": "shared"
             },
+        },
+        {
+            "name": "Run locally",
+            "type": "node",
+            "request": "launch",
+            "program": "${fileBasename}",
+            "args": [],
+            "cwd": "${workspaceFolder}/${relativeFileDirname}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "runtimeExecutable": "wsl",
+            "runtimeArgs": [
+                "bash"
+            ],
+            "env": {},
+            "stopOnEntry": true,
+            "outFiles": [],
+            "sourceMaps": false,
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
         }
     ]
 }
