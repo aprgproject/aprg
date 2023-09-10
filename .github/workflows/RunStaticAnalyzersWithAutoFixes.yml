@@ -58,13 +58,13 @@ jobs:
           
           
   runStaticAnalyzersOnCppProjects:
-    name: JobId[${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}] Run Static Analyzers with Auto Fixes
+    name: JobId[${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}] on ${{ matrix.project }} | Run Static Analyzers with Auto Fixes
     needs: determineCppProjects
-    runs-on: ${{ !contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), matrix.projectToBuild) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
+    runs-on: ${{ !contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), matrix.project) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
     strategy:
       fail-fast: false
       matrix:
-        projectToBuild: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
+        project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
     permissions:
       contents: write
     steps:
@@ -74,7 +74,7 @@ jobs:
           echo "github.event_name: [${{ github.event_name }}]"
           echo "github.event.action: [${{ github.event.action }}]"
           echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
-          echo "c/c++ next project: [${{ matrix.projectToBuild }}]"
+          echo "c/c++ next project: [${{ matrix.project }}]"
           echo "projects with windows static analysis: [${{ needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis }}]"
           echo "operating system: [${{ runner.os }}]"
           echo "staticAnalysisFilename: [${{ env.staticAnalysisFilename }}]"
@@ -145,7 +145,7 @@ jobs:
           echo "staticAnalysisScriptPath: [$staticAnalysisScriptPath]"
           chmod +x "$staticAnalysisScriptPath"
           # 19800 seconds translates to 5 hours and 30 minutes
-          timeout 19800 "$staticAnalysisScriptPath" "${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}" "${{ env.staticAnalysisFilename }}" "${{ matrix.projectToBuild }}" 
+          timeout 19800 "$staticAnalysisScriptPath" "${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}" "${{ env.staticAnalysisFilename }}" "${{ matrix.project }}" 
             
       - name: Run clang format
         shell: bash
