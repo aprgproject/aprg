@@ -21,5 +21,6 @@ $copyUsingLocatorFile ".*" "$cppSkipPathRegex" CppProjects/.vscode/settings.json
 $copyUsingLocatorFile ".*" "$cppSkipPathRegex" CppProjects/.vscode/tasks.json
 $copyUsingLocatorFile ".*" "$cppSkipPathRegex" CppProjects/.vscode/locateAprgDirectory.sh
 $copyUsingLocatorFile ".*" "$cppSkipPathRegex" CppProjects/.vscode/runWslCommonScript.sh
+$copyUsingLocatorFile ".*" "$cppSkipPathRegex" CppProjects/.vscode/viewStaticAnalysisReport.sh
 $copyUsingLocatorFile ".*" "$cppSkipPathRegex" CppProjects/CMakePresets.json
 scriptPrint "$scriptName" "$LINENO" "The copying of files for cpp projects is finished."
