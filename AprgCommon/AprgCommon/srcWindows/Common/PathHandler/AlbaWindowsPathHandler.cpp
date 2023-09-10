@@ -25,7 +25,7 @@ AlbaWindowsPathHandler AlbaWindowsPathHandler::createPathHandlerForDetectedPath(
 void AlbaWindowsPathHandler::createDirectoriesForNonExisitingDirectories() const {
     string const fullPath(getFullPath());
     int index = 0;
-    int length = fullPath.length();
+    int const length = fullPath.length();
     while (index < length) {
         int const indexWithSlashCharacter = fullPath.find_first_of(m_slashCharacterString, index);
         if (isNpos(indexWithSlashCharacter)) {
@@ -208,7 +208,7 @@ string AlbaWindowsPathHandler::getCurrentDetectedPath() {
     string result;
     constexpr size_t MAXIMUM_CHARACTERS_PATH = 1000;
     WCHAR currentPathFromWindowsWideCharArray[MAXIMUM_CHARACTERS_PATH];
-    if (GetModuleFileNameW(nullptr, currentPathFromWindowsWideCharArray, MAX_PATH) != 0u) {
+    if (GetModuleFileNameW(nullptr, currentPathFromWindowsWideCharArray, MAX_PATH) != 0U) {
         result = convertToAnotherBasicStringVariant<wstring, string>(wstring(currentPathFromWindowsWideCharArray));
     } else {
         cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
@@ -234,7 +234,7 @@ bool AlbaWindowsPathHandler::isSlashNeededAtTheEnd(
                 GetFileAttributesW(convertToAnotherBasicStringVariant<string_view, wstring>(correctedPath).c_str());
             bool const isFoundInWindows(INVALID_FILE_ATTRIBUTES != attributes);
             if (isFoundInWindows) {
-                bool const isDirectoryInWindows((attributes & FILE_ATTRIBUTE_DIRECTORY) != 0u);
+                bool const isDirectoryInWindows((attributes & FILE_ATTRIBUTE_DIRECTORY) != 0U);
                 if (isDirectoryInWindows) {
                     result = true;
                 }
@@ -307,7 +307,7 @@ void AlbaWindowsPathHandler::findFilesAndDirectoriesWithDepth(
     while (bContinue) {
         string const fileOrDirectoryName(convertToAnotherBasicStringVariant<wstring, string>(wstring(data.cFileName)));
         if (!isPeriodOrDoublePeriod(fileOrDirectoryName)) {
-            if ((data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0u) {
+            if ((data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0U) {
                 string const newDirectory(currentDirectoryString + fileOrDirectoryName + '\\');
                 listOfDirectories.emplace(newDirectory);
                 findFilesAndDirectoriesWithDepth(

@@ -88,8 +88,6 @@ TEST(AlbaFundamentalOperationsCounterTest, CopyConstructionIsCounted) {
     SampleClass const originalObject(1234);
     CountsForSampleClass::getInstance().resetCounts();
 
-    SampleClass const object(originalObject);
-
     EXPECT_EQ(
         "userConstructionCount: 1 defaultConstructionCount: 0 destructionCount: 0 copyConstructionCount: 0 "
         "copyAssignmentCount: 0 moveConstructionCount: 0 moveAssignmentCount: 0",

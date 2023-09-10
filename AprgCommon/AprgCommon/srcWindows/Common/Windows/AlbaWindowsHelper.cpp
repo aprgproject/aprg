@@ -16,13 +16,13 @@ string getLastFormattedErrorMessage() {
     stringstream lastErrorStream;
     auto errorCode = GetLastError();
     lastErrorStream << "No message from windows. Error code: " << errorCode;
-    if (errorCode != 0u) {
+    if (errorCode != 0U) {
         LPVOID lpMessageBuffer = nullptr;
         DWORD const bufferLength = FormatMessage(
             FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr,
             errorCode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), reinterpret_cast<LPTSTR>(&lpMessageBuffer), 0,
             nullptr);
-        if (bufferLength != 0u) {
+        if (bufferLength != 0U) {
             auto lpMessageString = static_cast<LPCSTR>(lpMessageBuffer);
             string const errorMessageFromWindows(
                 getStringWithoutRedundantWhiteSpace(string(lpMessageString, lpMessageString + bufferLength)));
