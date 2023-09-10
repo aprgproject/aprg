@@ -56,6 +56,7 @@ jobs:
         uses: actions/checkout@v3
         
       - name: Prepare for linting
+        shell: bash
         run: |
           sudo apt update
           pip install --upgrade pip
@@ -144,6 +145,7 @@ jobs:
           fetch-depth: 2
           
       - name: Get C/C++ Projects from Git Diff and User Input
+        shell: bash
         id: idOfGetCppProjectStep
         run: |
           determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
@@ -172,6 +174,7 @@ jobs:
         
     steps:
       - name: Print Job Details
+        shell: bash
         run: |
           echo "github.event_name: [${{ github.event_name }}]"
           echo "github.event.action: [${{ github.event.action }}]"
@@ -184,6 +187,7 @@ jobs:
         uses: actions/checkout@v3
           
       - name: Install dependencies on Windows
+        shell: bash
         if: startsWith(matrix.configurationName, 'Windows')
         run: |
           choco install cmake ninja
@@ -197,11 +201,13 @@ jobs:
           # echo "Finished visual studio environment script."
 
       - name: Update APT for dependencies in Ubuntu
+        shell: bash
         if: startsWith(matrix.configurationName, 'Ubuntu')
         run: |
           sudo apt update
 
       - name: Install dependencies on Ubuntu/Gcc
+        shell: bash
         if: matrix.configurationName == 'UbuntuLatestGcc'
         run: |
           sudo apt install cmake ninja-build
@@ -210,6 +216,7 @@ jobs:
           echo "gcc version: [$(gcc --version)]"
 
       - name: Install dependencies on Ubuntu/Clang
+        shell: bash
         if: matrix.configurationName == 'UbuntuLatestClang'
         run: |
           sudo apt install ninja-build cmake
@@ -226,18 +233,21 @@ jobs:
 #          cmake --version
 
       - name: Install Boost on Ubuntu
+        shell: bash
         if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWithBoost), matrix.project)
         run: |
           sudo apt install libboost-all-dev
           echo "libboost-all-dev version (dpkg): [$(dpkg -l | grep libboost-all-dev | tr -s ' ')]"
 
       - name: Install GSL on Ubuntu
+        shell: bash
         if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWithGsl), matrix.project)
         run: |
           sudo apt install libgsl-dev
           echo "libgsl-dev version (dpkg): [$(dpkg -l | grep libgsl-dev | tr -s ' ')]"
 
       - name: Install 7zip
+        shell: bash
         if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWith7Zip), matrix.project)
         run: |
           sudo apt install p7zip-full
@@ -255,39 +265,39 @@ jobs:
           echo "unquotedProject=$unquotedProject" >> "$GITHUB_ENV"
             
       - name: Configure for Windows/MSVC
-        if: matrix.configurationName == 'WindowsLatestMsvc'
         shell: bash
+        if: matrix.configurationName == 'WindowsLatestMsvc'
         working-directory: ${{ matrix.project }}
         run: |
           "$buildAndRunScriptPath" cleanAndConfigureWithDefaultCompiler "${{ env.buildDirectory }}" "${{ env.buildType }}" "Visual Studio 17 2022"
             
       - name: Configure for Windows/Mingw
-        if: matrix.configurationName == 'WindowsLatestMingw'
         shell: bash
+        if: matrix.configurationName == 'WindowsLatestMingw'
         working-directory: ${{ matrix.project }}
         run: |
           echo "gcc version: [$(gcc --version)]"
           "$buildAndRunScriptPath" cleanAndConfigureWithGcc "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
       - name: Configure for Windows/Clang
-        if: matrix.configurationName == 'WindowsLatestClang'
         shell: bash
+        if: matrix.configurationName == 'WindowsLatestClang'
         working-directory: ${{ matrix.project }}
         run: |
           echo "clang version: [$(clang --version)]"
           "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
       - name: Configure for Ubuntu/Gcc
-        if: matrix.configurationName == 'UbuntuLatestGcc'
         shell: bash
+        if: matrix.configurationName == 'UbuntuLatestGcc'
         working-directory: ${{ matrix.project }}
         run: |
           echo "gcc version: [$(gcc --version)]"
           "$buildAndRunScriptPath" cleanAndConfigureWithGcc "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
       - name: Configure for Ubuntu/Clang
-        if: matrix.configurationName == 'UbuntuLatestClang'
         shell: bash
+        if: matrix.configurationName == 'UbuntuLatestClang'
         working-directory: ${{ matrix.project }}
         run: |
           echo "clang version: [$(clang --version)]"
@@ -312,8 +322,8 @@ jobs:
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
             
       - name: Build and Run with Address Sanitizer
-        if: matrix.configurationName == 'UbuntuLatestClang' && inputs.enableAsan
         shell: bash
+        if: matrix.configurationName == 'UbuntuLatestClang' && inputs.enableAsan
         working-directory: ${{ matrix.project }}
         run: |
           "$buildAndRunScriptPath" clean ${{ env.buildDirectory }}
@@ -323,8 +333,8 @@ jobs:
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
             
       - name: Build and Run with Static Analyzers
-        if: matrix.configurationName == 'UbuntuLatestClang' && inputs.enableStaticAnalyzers
         shell: bash
+        if: matrix.configurationName == 'UbuntuLatestClang' && inputs.enableStaticAnalyzers
         working-directory: ${{ matrix.project }}
         run: |
           sudo apt install clang-tidy cppcheck clazy
