@@ -11,7 +11,7 @@ namespace alba {
 
 class AlbaWindowsPathHandler : public AlbaPathHandler {
 public:
-    AlbaWindowsPathHandler(std::string_view const path);
+    explicit AlbaWindowsPathHandler(std::string_view const path);
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     static AlbaWindowsPathHandler createPathHandlerForDetectedPath();
     void createDirectoriesForNonExisitingDirectories() const;
@@ -24,9 +24,9 @@ public:
 
     void findFilesAndDirectoriesUnlimitedDepth(
         std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
-    std::string getDriveOrRoot() const;
-    bool isFoundInLocalSystem() const;
-    bool isRelativePath() const;
+    [[nodiscard]] std::string getDriveOrRoot() const;
+    [[nodiscard]] bool isFoundInLocalSystem() const;
+    [[nodiscard]] bool isRelativePath() const;
     void clear() override;
     void deleteFilesInDirectory();                  // do tests
     void deleteInnerFilesAndDirectories();          // do tests
@@ -46,8 +46,8 @@ private:
         std::string_view const currentDirectory, std::string_view const wildCardSearch, ListOfPaths& listOfFiles,
         ListOfPaths& listOfDirectories, int const depth) const;
 
-    bool canBeLocated(std::string_view const fullPath) const;
-    bool isSlashNeededAtTheEnd(std::string_view const correctedPath, std::string_view const originalPath) const;
+    [[nodiscard]] bool canBeLocated(std::string_view const fullPath) const;
+    [[nodiscard]] bool isSlashNeededAtTheEnd(std::string_view const correctedPath, std::string_view const originalPath) const;
     void save(std::string_view const path) override;
     void setPath(std::string_view const path);
     void setDriveOrRoot();
