@@ -51,8 +51,7 @@ jobs:
       fail-fast: false
       matrix:
         projectToBuild: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild)[0] }}
-        operatingSystem: ${{ contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), matrix.projectToBuild) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
-    runs-on: matrix.operatingSystem 
+    runs-on: ${{ contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), matrix.projectToBuild) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
     permissions:
       contents: write
     steps:
@@ -62,8 +61,8 @@ jobs:
           echo "github.event_name: [${{ github.event_name }}]"
           echo "github.event.action: [${{ github.event.action }}]"
           echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
-          echo "c/c++ next project: [${{ env.projectToBuild }}]"
-          echo "operating system: [${{ env.operatingSystem }}]"
+          echo "c/c++ next project: [${{ matrix.projectToBuild }}]"
+          echo "operating system: [${{ runner.os }}]"
           echo "staticAnalysisFilename: [${{ env.staticAnalysisFilename }}]"
           echo "staticAnalysisJobId: [${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}]"
           
