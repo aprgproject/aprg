@@ -146,5 +146,5 @@ jobs:
           gitAddCommitPushScriptPath=$(realpath "$(pwd)/${{ env.gitAddCommitPushScriptRelativePath }}")
           echo "gitAddCommitPushScriptPath: [$(gitAddCommitPushScriptPath)]"
           chmod +x "$gitAddCommitPushScriptPath"
-          "$gitAddCommitPushScriptPath" "${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}"  "WORKFLOW COMMIT: Automatic fixes from Static Analyzers."
+          "$gitAddCommitPushScriptPath" ${{ needs.determineCppProjects.outputs.staticAnalysisJobId }} "WORKFLOW COMMIT: Automatic fixes from Static Analyzers."
           
