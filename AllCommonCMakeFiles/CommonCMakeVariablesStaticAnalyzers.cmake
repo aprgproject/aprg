@@ -33,8 +33,10 @@ if(APRG_ENABLE_STATIC_ANALYZERS)
                                      "--config-file=${APRG_DIR}/Clang/ClangTidyFiles/autofix.clang-tidy")
         else()
             # check only
-            set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY_PROGRAM} "--header-filter=${CLANG_TIDY_HEADER_REGEX}")
-            set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_PROGRAM} "--header-filter=${CLANG_TIDY_HEADER_REGEX}")
+            set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY_PROGRAM} --fix "--header-filter=${CLANG_TIDY_HEADER_REGEX}"
+                                   "--config-file=${APRG_DIR}/Clang/ClangTidyFiles/report.clang-tidy")
+            set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_PROGRAM} --fix "--header-filter=${CLANG_TIDY_HEADER_REGEX}"
+                                     "--config-file=${APRG_DIR}/Clang/ClangTidyFiles/report.clang-tidy")
         endif()
 
         print_variable(CMAKE_C_CLANG_TIDY)
