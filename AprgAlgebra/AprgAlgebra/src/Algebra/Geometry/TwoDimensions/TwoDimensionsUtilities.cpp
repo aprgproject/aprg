@@ -11,35 +11,35 @@ using namespace alba::algebra::Functions;
 namespace alba::algebra::TwoDimensions {
 
 Equation getCircleEquation() {
-    Term xMinusX0(createExpressionIfPossible({x, "-", x0}));
-    Term yMinusY0(createExpressionIfPossible({y, "-", y0}));
-    Term xSquared(createExpressionIfPossible({xMinusX0, "^", 2}));
-    Term ySquared(createExpressionIfPossible({yMinusY0, "^", 2}));
-    Term rSquared(createExpressionIfPossible({r, "^", 2}));
-    Term leftHandSide(createExpressionIfPossible({xSquared, "+", ySquared}));
+    Term const xMinusX0(createExpressionIfPossible({x, "-", x0}));
+    Term const yMinusY0(createExpressionIfPossible({y, "-", y0}));
+    Term const xSquared(createExpressionIfPossible({xMinusX0, "^", 2}));
+    Term const ySquared(createExpressionIfPossible({yMinusY0, "^", 2}));
+    Term const rSquared(createExpressionIfPossible({r, "^", 2}));
+    Term const leftHandSide(createExpressionIfPossible({xSquared, "+", ySquared}));
     Term const& rightHandSide(rSquared);
     return {leftHandSide, "=", rightHandSide};
 }
 
 Equation getEllipseEquation() {
-    Term xMinusX0(createExpressionIfPossible({x, "-", x0}));
-    Term yMinusY0(createExpressionIfPossible({y, "-", y0}));
-    Term xSquared(createExpressionIfPossible({xMinusX0, "^", 2}));
-    Term ySquared(createExpressionIfPossible({yMinusY0, "^", 2}));
-    Term aSquared(createExpressionIfPossible({a, "^", 2}));
-    Term bSquared(createExpressionIfPossible({b, "^", 2}));
-    Term leftHandSide(createExpressionIfPossible({xSquared, "/", aSquared, "+", ySquared, "/", bSquared}));
+    Term const xMinusX0(createExpressionIfPossible({x, "-", x0}));
+    Term const yMinusY0(createExpressionIfPossible({y, "-", y0}));
+    Term const xSquared(createExpressionIfPossible({xMinusX0, "^", 2}));
+    Term const ySquared(createExpressionIfPossible({yMinusY0, "^", 2}));
+    Term const aSquared(createExpressionIfPossible({a, "^", 2}));
+    Term const bSquared(createExpressionIfPossible({b, "^", 2}));
+    Term const leftHandSide(createExpressionIfPossible({xSquared, "/", aSquared, "+", ySquared, "/", bSquared}));
     return {leftHandSide, "=", 1};
 }
 
 Equation getHyperbolaEquation() {
-    Term xMinusX0(createExpressionIfPossible({x, "-", x0}));
-    Term yMinusY0(createExpressionIfPossible({y, "-", y0}));
-    Term xSquared(createExpressionIfPossible({xMinusX0, "^", 2}));
-    Term ySquared(createExpressionIfPossible({yMinusY0, "^", 2}));
-    Term aSquared(createExpressionIfPossible({a, "^", 2}));
-    Term bSquared(createExpressionIfPossible({b, "^", 2}));
-    Term leftHandSide(createExpressionIfPossible({xSquared, "/", aSquared, "-", ySquared, "/", bSquared}));
+    Term const xMinusX0(createExpressionIfPossible({x, "-", x0}));
+    Term const yMinusY0(createExpressionIfPossible({y, "-", y0}));
+    Term const xSquared(createExpressionIfPossible({xMinusX0, "^", 2}));
+    Term const ySquared(createExpressionIfPossible({yMinusY0, "^", 2}));
+    Term const aSquared(createExpressionIfPossible({a, "^", 2}));
+    Term const bSquared(createExpressionIfPossible({b, "^", 2}));
+    Term const leftHandSide(createExpressionIfPossible({xSquared, "/", aSquared, "-", ySquared, "/", bSquared}));
     return {leftHandSide, "=", 1};
 }
 
@@ -50,27 +50,27 @@ Equation getLimaconEquation(LimaconTrigonometricFunctionType const type) {
     } else if (LimaconTrigonometricFunctionType::Sine == type) {
         trigPart = sin(theta);
     }
-    Term leftHandSide(createExpressionIfPossible({a, "+", b, "*", trigPart}));
-    Term rightHandSide(r);
+    Term const leftHandSide(createExpressionIfPossible({a, "+", b, "*", trigPart}));
+    Term const rightHandSide(r);
     return {leftHandSide, "=", rightHandSide};
 }
 
 Equation getLineEquation() {
-    Term leftHandSide(createExpressionIfPossible({a, "*", x, "+", b, "*", y, "+", c}));
+    Term const leftHandSide(createExpressionIfPossible({a, "*", x, "+", b, "*", y, "+", c}));
     return {leftHandSide, "=", 0};
 }
 
 Equation getParabolaEquation(ParabolaOrientation const parabolaOrientation) {
     Equation result;
     if (ParabolaOrientation::PolynomialX == parabolaOrientation) {
-        Term xSquared(createExpressionIfPossible({x, "^", 2}));
-        Term leftHandSide(createExpressionIfPossible({a, "*", xSquared, "+", b, "*", x, "+", c}));
-        Term rightHandSide(y);
+        Term const xSquared(createExpressionIfPossible({x, "^", 2}));
+        Term const leftHandSide(createExpressionIfPossible({a, "*", xSquared, "+", b, "*", x, "+", c}));
+        Term const rightHandSide(y);
         result = Equation(leftHandSide, "=", rightHandSide);
     } else if (ParabolaOrientation::PolynomialY == parabolaOrientation) {
-        Term ySquared(createExpressionIfPossible({y, "^", 2}));
-        Term leftHandSide(createExpressionIfPossible({a, "*", ySquared, "+", b, "*", y, "+", c}));
-        Term rightHandSide(x);
+        Term const ySquared(createExpressionIfPossible({y, "^", 2}));
+        Term const leftHandSide(createExpressionIfPossible({a, "*", ySquared, "+", b, "*", y, "+", c}));
+        Term const rightHandSide(x);
         result = Equation(leftHandSide, "=", rightHandSide);
     }
     return result;
@@ -79,9 +79,9 @@ Equation getParabolaEquation(ParabolaOrientation const parabolaOrientation) {
 // A conical frustum is a frustum created by slicing the top off a cone (with the cut made parallel to the base).
 // For a right circular cone, let h be height, rb as bottom radius and rt as bottom radius.
 Term getSurfaceAreaOfAConicalFrustum() {
-    Term topCircleArea(createExpressionIfPossible({getPiAsATerm(), "*", "rt", "^", 2}));
-    Term bottomCircleArea(createExpressionIfPossible({getPiAsATerm(), "*", "rb", "^", 2}));
-    Term sideArea(createExpressionIfPossible(
+    Term const topCircleArea(createExpressionIfPossible({getPiAsATerm(), "*", "rt", "^", 2}));
+    Term const bottomCircleArea(createExpressionIfPossible({getPiAsATerm(), "*", "rb", "^", 2}));
+    Term const sideArea(createExpressionIfPossible(
         {getPiAsATerm(),
          "*",
          "(",
@@ -110,7 +110,7 @@ Term getSurfaceAreaOfAConicalFrustum() {
 }
 
 Term getVolumeOfAConicalFrustum() {
-    Term radiusPart(createExpressionIfPossible({"rt", "^", 2, "+", "rt", "*", "rb", "+", "rb", "^", 2}));
+    Term const radiusPart(createExpressionIfPossible({"rt", "^", 2, "+", "rt", "*", "rb", "+", "rb", "^", 2}));
     return Term(
         createExpressionIfPossible({AlbaNumber::createFraction(1, 3), "*", getPiAsATerm(), "*", "h", "*", radiusPart}));
 }

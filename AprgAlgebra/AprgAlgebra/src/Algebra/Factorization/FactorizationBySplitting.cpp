@@ -86,7 +86,7 @@ void splitPolynomialsByDivisibilityOfExponents(Polynomials& result, Polynomial c
 }
 
 void splitPolynomialsByFirstVariable(Polynomials& result, Polynomial const& polynomial) {
-    Monomials const monomials(polynomial.getMonomials());
+    Monomials const& monomials(polynomial.getMonomials());
     Polynomial partialPolynomial;
     string firstVariableName;
     bool isFirst(true);
@@ -198,7 +198,7 @@ void updateToGetSubsetOfFactors(Polynomials& commonFactors, Polynomials const& c
                     {getFirstMonomial(previousCommonFactor), getFirstMonomial(currentCommonFactor)}));
                 gcfMonomial.simplify();
                 if (!isTheValue(gcfMonomial, 1)) {
-                    Polynomial gcfPolynomial{gcfMonomial};
+                    Polynomial const gcfPolynomial{gcfMonomial};
                     commonFactors.emplace_back(gcfPolynomial);
                     isFound = true;
                 }

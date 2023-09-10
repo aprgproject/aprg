@@ -19,10 +19,10 @@ ProofByInduction::ProofByInduction(
       m_manualCalculation(manualCalculation) {}
 
 bool ProofByInduction::isCorrectOnASpecificValue(AlbaNumber const& value) const {
-    AlbaNumber valueFromManual(m_manualCalculation(value));
+    AlbaNumber const valueFromManual(m_manualCalculation(value));
     AlbaNumber valueFromGuess;
-    SubstitutionOfVariablesToValues substitution{{m_variableName, value}};
-    Term guessTerm(substitution.performSubstitutionTo(m_guessExpression));
+    SubstitutionOfVariablesToValues const substitution{{m_variableName, value}};
+    Term const guessTerm(substitution.performSubstitutionTo(m_guessExpression));
     if (guessTerm.isConstant()) {
         valueFromGuess = guessTerm.getAsNumber();
     }
@@ -30,15 +30,15 @@ bool ProofByInduction::isCorrectOnASpecificValue(AlbaNumber const& value) const 
 }
 
 bool ProofByInduction::isCorrectOnInductionStep() const {
-    SubstitutionOfVariablesToTerms substitutionForNextStep{
+    SubstitutionOfVariablesToTerms const substitutionForNextStep{
         {m_variableName, Polynomial{Monomial(1, {{m_variableName, 1}}), Monomial(1, {})}}};
     Term expectedDelta = substitutionForNextStep.performSubstitutionTo(m_expressionForEachStep);
     expectedDelta.simplify();
 
     Term initialValue(Monomial(1, {{m_variableName, 1}}));
     Term nextValue(Polynomial{Monomial(1, {{m_variableName, 1}}), Monomial(1, {})});
-    SubstitutionOfVariablesToTerms substitutionOfInitialValue{{m_variableName, initialValue}};
-    SubstitutionOfVariablesToTerms substitutionOfNextValue{{m_variableName, nextValue}};
+    SubstitutionOfVariablesToTerms const substitutionOfInitialValue{{m_variableName, initialValue}};
+    SubstitutionOfVariablesToTerms const substitutionOfNextValue{{m_variableName, nextValue}};
     Term deltaFromGuess(createExpressionIfPossible(
         {substitutionOfNextValue.performSubstitutionTo(m_guessExpression), reverse(m_accumulateOperator),
          substitutionOfInitialValue.performSubstitutionTo(m_guessExpression)}));

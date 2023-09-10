@@ -18,7 +18,7 @@ void retrieveConstantAndNonConstantFactors(
     TermsWithDetails const& originalTermsWithDetails) {
     for (TermWithDetails const& originalTermWithDetails : originalTermsWithDetails) {
         Term const& term(getTermConstReferenceFromUniquePointer(originalTermWithDetails.baseTermPointer));
-        Terms factors(factorizeTerm(term));
+        Terms const factors(factorizeTerm(term));
 
         AlbaNumber constantFactor(1);
         TermsRaiseToNumbers nonConstantRaiseToExponent;
@@ -40,7 +40,7 @@ void retrieveCommonNonConstantFactors(
         commonNonConstantFactors = nonConstantFactorsPerAddends.front();
         for (auto it = nonConstantFactorsPerAddends.cbegin() + 1; it != nonConstantFactorsPerAddends.cend(); ++it) {
             for (auto const& [base, exponentAtCommonFactor] : commonNonConstantFactors.getBaseToExponentMap()) {
-                AlbaNumber exponentAtAddend(it->getExponentOfBase(base));
+                AlbaNumber const exponentAtAddend(it->getExponentOfBase(base));
                 if (exponentAtAddend > 0) {
                     commonNonConstantFactors.setBaseAndExponent(base, min(exponentAtCommonFactor, exponentAtAddend));
                 } else if (exponentAtAddend < 0) {
@@ -60,7 +60,7 @@ void retrieveCommonNonConstantFactors(
 void putRemainingConstantFactorAsAnInnerMultiplier(
     TermsWithDetails& innerMultipliers, AlbaNumber const& constantFactorOfOriginalAddend,
     AlbaNumber const& constantGcf) {
-    AlbaNumber remainingConstant(constantFactorOfOriginalAddend / constantGcf);
+    AlbaNumber const remainingConstant(constantFactorOfOriginalAddend / constantGcf);
     if (remainingConstant != 1) {
         innerMultipliers.emplace_back(Term(remainingConstant), TermAssociationType::Positive);
     }
@@ -72,7 +72,7 @@ void putRemainingNonConstantFactorsAsInnerMultipliers(
     TermsRaiseToNumbers remainingNonConstantFactors(nonConstantFactorsOfOriginalAddend);
     remainingNonConstantFactors.subtractExponents(commonNonConstantFactors);
     remainingNonConstantFactors.simplify();
-    TermsWithDetails remainingNonConstantFactorsWithDetails(
+    TermsWithDetails const remainingNonConstantFactorsWithDetails(
         remainingNonConstantFactors.getTermWithDetailsInMultiplicationAndDivisionOperation());
     innerMultipliers.reserve(innerMultipliers.size() + remainingNonConstantFactorsWithDetails.size());
     copy(
@@ -82,7 +82,7 @@ void putRemainingNonConstantFactorsAsInnerMultipliers(
 
 void putRemainingInnerMultipliersAsOuterAddend(
     TermsWithDetails& outerAddends, TermsWithDetails const& innerMultipliers, TermWithDetails const& originalAddend) {
-    Term combinedInnerTerm(createTermWithMultiplicationAndDivisionTermsWithDetails(innerMultipliers));
+    Term const combinedInnerTerm(createTermWithMultiplicationAndDivisionTermsWithDetails(innerMultipliers));
     outerAddends.emplace_back(combinedInnerTerm, originalAddend.association);
 }
 
@@ -98,14 +98,14 @@ AlbaNumber getGcfOfConstants(AlbaNumbers const& constantFactorsPerAddends) {
 }
 
 Terms factorizeAnExpression(Expression const& expression) {
-    TermsRaiseToNumbers termsRaiseToNumbers(factorizeToTermsRaiseToNumbers(expression));
+    TermsRaiseToNumbers const termsRaiseToNumbers(factorizeToTermsRaiseToNumbers(expression));
     return termsRaiseToNumbers.getTermsInMultiplicationOperation();
 }
 
 Terms factorizeAnExpressionWithConfigurationChanged(Expression const& expression) {
     ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyExpressionsToFactors = true;
-    ScopeObject scopeObject;
+    ScopeObject const scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
     return factorizeAnExpression(expression);
@@ -133,7 +133,7 @@ TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForAdditionAndSubtraction(Expr
     retrieveConstantAndNonConstantFactors(
         nonConstantFactorsPerAddends, constantFactorsPerAddends, originalTermsWithDetails);
 
-    AlbaNumber constantGcf(getGcfOfConstants(constantFactorsPerAddends));
+    AlbaNumber const constantGcf(getGcfOfConstants(constantFactorsPerAddends));
 
     TermsRaiseToNumbers commonNonConstantFactors;
     retrieveCommonNonConstantFactors(commonNonConstantFactors, nonConstantFactorsPerAddends);
@@ -148,7 +148,7 @@ TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForMultiplicationAndDivision(E
     TermsRaiseToNumbers result;
     for (TermWithDetails const& termWithDetails : expression.getTermsWithAssociation().getTermsWithDetails()) {
         Term const& term(getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer));
-        Terms factorizedTerms(factorizeTerm(term));
+        Terms const factorizedTerms(factorizeTerm(term));
         result.putTerms(factorizedTerms, termWithDetails.association);
     }
     return result;
@@ -156,7 +156,7 @@ TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForMultiplicationAndDivision(E
 
 TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForRaiseToPower(Expression const& expression) {
     TermsRaiseToNumbers result;
-    TermRaiseToANumber mainBaseToExponent(createTermRaiseToANumberFromExpression(expression));
+    TermRaiseToANumber const mainBaseToExponent(createTermRaiseToANumberFromExpression(expression));
     Term const& base(mainBaseToExponent.getBase());
     AlbaNumber const& exponent(mainBaseToExponent.getExponent());
 
@@ -164,7 +164,7 @@ TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForRaiseToPower(Expression con
         dontFactorizeBecauseThereIsSquareRootOfNegativeNumber(base, exponent)) {
         result.setBaseAndExponent(base, mainBaseToExponent.getExponent());
     } else {
-        Terms factorizedBases(factorizeTerm(base));
+        Terms const factorizedBases(factorizeTerm(base));
         result.putTerms(factorizedBases, TermAssociationType::Positive);
         result.multiplyToExponents(mainBaseToExponent.getExponent());
     }

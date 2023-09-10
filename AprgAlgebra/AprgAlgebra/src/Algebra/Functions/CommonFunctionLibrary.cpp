@@ -54,7 +54,7 @@ Function harmonicNumber(Term const& term) {
     return {"harmonicNumber", term, [](AlbaNumber const& number) -> AlbaNumber {
                 AlbaNumber result;
                 if ((number.getInteger() != 0) && number > 0) {
-                    int lastNumber = static_cast<int>(number.getInteger());
+                    int const lastNumber = static_cast<int>(number.getInteger());
                     for (int i = 1; i <= lastNumber; ++i) {
                         result = result + AlbaNumber::createFraction(1, i);
                     }
@@ -163,9 +163,9 @@ Function arccoth(Term const& term) {
 
 Function sinHarmonic(
     Term const& term, AlbaNumber const& amplitude, AlbaNumber const& period, AlbaNumber const& phaseDifference) {
-    AlbaNumber amplitudeCopy(amplitude);
-    AlbaNumber periodCopy(period);
-    AlbaNumber phaseDifferenceCopy(phaseDifference);
+    AlbaNumber const amplitudeCopy(amplitude);
+    AlbaNumber const periodCopy(period);
+    AlbaNumber const phaseDifferenceCopy(phaseDifference);
     return {"sinHarmonic", term, [=](AlbaNumber const& number) -> AlbaNumber {
                 return amplitudeCopy * ::sin((periodCopy * number + phaseDifferenceCopy).getDouble());
             }};

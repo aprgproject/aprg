@@ -477,7 +477,7 @@ void putArbitiaryValuesFromInterval(AlbaNumbers& arbitiaryValues, AlbaNumberInte
 
 void putArbitiaryValuesBasedFromDomainOfTerm(AlbaNumbers& arbitiaryValues, Term const& term) {
     SolutionSet const domainSolutionSet = calculateDomainForTermWithOneVariable(term);
-    AlbaNumberIntervals const domains(domainSolutionSet.getAcceptedIntervals());
+    AlbaNumberIntervals const& domains(domainSolutionSet.getAcceptedIntervals());
     for (AlbaNumberInterval const domain : domains) {
         putArbitiaryValuesFromInterval(arbitiaryValues, domain);
     }

@@ -49,7 +49,7 @@ bool isPerfectSquare(Monomial const& monomial) { return isPerfectNthPower(monomi
 bool isPerfectCube(Monomial const& monomial) { return isPerfectNthPower(monomial, 3); }
 
 bool isPerfectNthPower(Monomial const& monomial, int const nthPower) {
-    AlbaNumber constant(monomial.getCoefficient());
+    AlbaNumber const constant(monomial.getCoefficient());
     bool result(false);
     if (constant.isIntegerType() && mathHelper::isPerfectNthPower(constant, nthPower)) {
         result = areExponentsDivisible(monomial, nthPower);
@@ -65,16 +65,16 @@ bool doesNotNeedToBeFactorized(Polynomial const& polynomial) {
     } else if (monomials.size() == 2) {
         Monomial const& first(monomials[0]);
         Monomial const& second(monomials[1]);
-        bool areBothConstantIntegers =
+        bool const areBothConstantIntegers =
             first.getCoefficient().isIntegerType() && second.getCoefficient().isIntegerType();
-        bool areEitherConstantOne = first.getCoefficient() == 1 || second.getCoefficient() == 1;
+        bool const areEitherConstantOne = first.getCoefficient() == 1 || second.getCoefficient() == 1;
         ExponentsRetriever retriever;
         retriever.retrieveFromPolynomial(polynomial);
         AlbaNumbersSet const& exponents(retriever.getExponents());
-        bool areAllExponentsOneOrZero = all_of(exponents.cbegin(), exponents.cend(), [](AlbaNumber const& exponent) {
-            return exponent == 0 || exponent == 1;
-        });
-        bool areBothDegreeLessThanOne = getDegree(first) <= 1 && getDegree(second) <= 1;
+        bool const areAllExponentsOneOrZero = all_of(
+            exponents.cbegin(), exponents.cend(),
+            [](AlbaNumber const& exponent) { return exponent == 0 || exponent == 1; });
+        bool const areBothDegreeLessThanOne = getDegree(first) <= 1 && getDegree(second) <= 1;
         result =
             areBothConstantIntegers && areEitherConstantOne && areAllExponentsOneOrZero && areBothDegreeLessThanOne;
     }

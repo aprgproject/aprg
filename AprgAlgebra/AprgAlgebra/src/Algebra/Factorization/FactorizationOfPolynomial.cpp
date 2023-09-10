@@ -19,7 +19,7 @@ namespace alba::algebra::Factorization {
 
 void factorizeCommonMonomialIfPossible(Polynomials& result, Polynomial const& polynomial) {
     if (!isOneMonomial(polynomial)) {
-        Monomial gcfMonomial(getGcfMonomialInMonomials(polynomial.getMonomials()));
+        Monomial const gcfMonomial(getGcfMonomialInMonomials(polynomial.getMonomials()));
         if (!isTheValue(gcfMonomial, 1)) {
             Polynomial reducedPolynomial(polynomial);
             reducedPolynomial.divideMonomial(gcfMonomial);
@@ -58,7 +58,7 @@ void factorizePolynomialsAndPutToResult(Polynomials& result, Polynomials const& 
 }
 
 void putFactorizedPolynomialsIfPossible(Polynomials& result, Polynomials const& factorizedPolynomials) {
-    bool shouldPutFactorizedPolynomials =
+    bool const shouldPutFactorizedPolynomials =
         !(shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue() &&
           doesOnePolynomialHaveADoubleValue(factorizedPolynomials));
     if (shouldPutFactorizedPolynomials) {

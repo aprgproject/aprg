@@ -16,7 +16,7 @@ AlbaNumberPairs evaluateAndGetInputOutputPair(
     SubstitutionOfVariablesToValues substitution;
     for (AlbaNumber const& number : numbers) {
         substitution.putVariableWithValue(variableName, number);
-        Term substituteTerm(substitution.performSubstitutionTo(functionObject));
+        Term const substituteTerm(substitution.performSubstitutionTo(functionObject));
         if (substituteTerm.isConstant()) {
             result.emplace_back(number, substituteTerm.getAsNumber());
         }
@@ -27,22 +27,22 @@ AlbaNumberPairs evaluateAndGetInputOutputPair(
 Term getNaturalLogarithmOfTheAbsoluteValueOfTerm(Term const& term) { return ln(abs(term)); }
 
 bool isFunctionContinuous(Function const& functionObject) {
-    strings continuousFunctionNames{"abs", "sin", "cos"};
+    strings const continuousFunctionNames{"abs", "sin", "cos"};
     return isFunctionNameFoundOnAList(functionObject, continuousFunctionNames);
 }
 
 bool isTrigonometricFunction(Function const& functionObject) {
-    strings continuousFunctionNames{"sin", "cos", "tan", "csc", "sec", "cot"};
+    strings const continuousFunctionNames{"sin", "cos", "tan", "csc", "sec", "cot"};
     return isFunctionNameFoundOnAList(functionObject, continuousFunctionNames);
 }
 
 bool isInverseTrigonometricFunction(Function const& functionObject) {
-    strings continuousFunctionNames{"arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot"};
+    strings const continuousFunctionNames{"arcsin", "arccos", "arctan", "arccsc", "arcsec", "arccot"};
     return isFunctionNameFoundOnAList(functionObject, continuousFunctionNames);
 }
 
 bool isLogarithmicFunction(Function const& functionObject) {
-    strings continuousFunctionNames{"ln", "log"};
+    strings const continuousFunctionNames{"ln", "log"};
     return isFunctionNameFoundOnAList(functionObject, continuousFunctionNames);
 }
 
