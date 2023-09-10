@@ -85,8 +85,11 @@ TEST(AlbaFundamentalOperationsCounterTest, DestructionIsCounted) {
 }
 
 TEST(AlbaFundamentalOperationsCounterTest, CopyConstructionIsCounted) {
-    SampleClass const originalObject(1234);
+    // NOLINTNEXTLINE(misc-const-correctness)
+    SampleClass originalObject(1234);
     CountsForSampleClass::getInstance().resetCounts();
+
+    SampleClass const object(originalObject);
 
     EXPECT_EQ(
         "userConstructionCount: 1 defaultConstructionCount: 0 destructionCount: 0 copyConstructionCount: 0 "
