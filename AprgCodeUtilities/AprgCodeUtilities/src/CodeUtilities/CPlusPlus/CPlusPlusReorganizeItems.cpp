@@ -4,6 +4,7 @@
 #include <CodeUtilities/Common/TermUtilities.hpp>
 
 #include <algorithm>
+#include <iostream>
 #include <numeric>
 #include <sstream>
 
@@ -87,8 +88,8 @@ Patterns CPlusPlusReorganizeItems::getSearchPatterns() {
         {M("inline")},
         {M("explicit")},
         {M("virtual")},
-        {M("static")},
         {M("override")},
+        {M("static")},
         {M("[[nodiscard]]")},
         {M(TermType::Attribute)},
         {M("volatile")},
@@ -343,10 +344,10 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
                     sortItem.score += 0x600;  // class:explicit
                 } else if (firstTerm.getContent() == "virtual") {
                     sortItem.score += 0x500;  // class:virtual
-                } else if (firstTerm.getContent() == "static") {
-                    isStatic = true;
                 } else if (firstTerm.getContent() == "override") {
                     sortItem.score += 0x400;  // class:override
+                } else if (firstTerm.getContent() == "static") {
+                    isStatic = true;
                 } else if (firstTerm.getContent() == "[[nodiscard]]") {
                     sortItem.score += 0x40;  // qualifier:nodiscard
                 } else if (firstTerm.getTermType() == TermType::Attribute) {
@@ -373,9 +374,12 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
         saveDetailsBasedFromFunctionSignature(sortItem, getFunctionSignature(item));
         sortItem.score += isAFriend ? 0x100 : isStatic ? 0x200 : 0x300;  // class:friend,static
     } else if (sortItem.itemType == ItemType::Data) {
-        if (m_scopeType == ScopeType::Namespace) {
+        if (m_scopeType == ScopeType::AnonymousNamespace || m_scopeType == ScopeType::NamedNamespace) {
             sortItem.score += isConst ? 0x800'0000 : 0x200'0000;  // type:namespace (const) data
             sortItem.headerIndex = 0;
+            if (m_scopeType == ScopeType::NamedNamespace && !isConst) {
+                cout << "warning: Data not wrapped in anonymous namespace. Item: [" << item << "]\n";
+            }
         } else if (m_scopeType == ScopeType::ClassDeclaration) {
             // do not move class member data
             sortItem.score = (isStatic || isConst) ? sortItem.score : 0;

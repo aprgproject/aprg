@@ -63,8 +63,8 @@ void CPlusPlusReorganizer::reorganizeFile(string const& file) {
 }
 
 bool CPlusPlusReorganizer::shouldReorganizeInThisScope(ScopeDetail const& scope) {
-    return scope.scopeType == ScopeType::Namespace || scope.scopeType == ScopeType::ClassDeclaration ||
-           scope.scopeType == ScopeType::EnumClass;
+    return scope.scopeType == ScopeType::NamedNamespace || scope.scopeType == ScopeType::AnonymousNamespace ||
+           scope.scopeType == ScopeType::ClassDeclaration || scope.scopeType == ScopeType::EnumClass;
 }
 
 bool CPlusPlusReorganizer::shouldConnectToPreviousItem(Terms const& scopeHeaderTerms) {
@@ -136,12 +136,12 @@ CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
             Term const& firstTerm(scopeHeaderTerms[firstHitIndex]);
             Term const& lastTerm(scopeHeaderTerms[lastHitIndex]);
             if (firstTerm.getContent() == "namespace" && lastTerm.getTermType() == TermType::Identifier) {
-                scopeDetail.scopeType = ScopeType::Namespace;
+                scopeDetail.scopeType = ScopeType::NamedNamespace;
                 scopeDetail.name = lastTerm.getContent();
                 break;
             }
             if (firstTerm.getContent() == "namespace" && lastTerm.getContent() == "{") {
-                scopeDetail.scopeType = ScopeType::Namespace;
+                scopeDetail.scopeType = ScopeType::AnonymousNamespace;
                 scopeDetail.name.clear();
                 break;
             }

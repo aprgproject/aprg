@@ -2,6 +2,6 @@
 
 namespace alba::CodeUtilities {
 
-enum class ScopeType { Unknown, TopLevel, Namespace, ClassDeclaration, EnumClass };
+enum class ScopeType { Unknown, TopLevel, NamedNamespace, AnonymousNamespace, ClassDeclaration, EnumClass };
 
 }  // namespace alba::CodeUtilities
