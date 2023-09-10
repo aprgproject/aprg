@@ -10,8 +10,6 @@ staticAnalysisJobIdentifier="$1"
 staticAnalysisFilename="$2"
 cppProjects="$3"
 
-scriptPrint "$scriptName" "$LINENO" "cppProjects: [$cppProjects]"
-
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 
