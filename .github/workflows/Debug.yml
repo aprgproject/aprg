@@ -47,10 +47,12 @@ jobs:
   runStaticAnalyzersOnCppProjects:
     name: JobId[${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}] Run Static Analyzers with Auto Fixes
     needs: determineCppProjects
-    env:
-      projectToBuild: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild)[0] }}
-      operatingSystem: ${{ contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), env.projectToBuild) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
-    runs-on: env.operatingSystem 
+    strategy:
+      fail-fast: false
+      matrix:
+        projectToBuild: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild)[0] }}
+        operatingSystem: ${{ contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), env.projectToBuild) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
+    runs-on: matrix.operatingSystem 
     permissions:
       contents: write
     steps:
