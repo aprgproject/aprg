@@ -18,7 +18,9 @@ using namespace std;
 namespace alba {
 
 AlbaWindowsPathHandler::AlbaWindowsPathHandler(string_view const path) : AlbaPathHandler(R"(\)") { setPath(path); }
-AlbaWindowsPathHandler AlbaWindowsPathHandler::createPathHandlerForDetectedPath() { return {getCurrentDetectedPath()}; }
+AlbaWindowsPathHandler AlbaWindowsPathHandler::createPathHandlerForDetectedPath() {
+    return AlbaWindowsPathHandler{getCurrentDetectedPath()};
+}
 
 void AlbaWindowsPathHandler::createDirectoriesForNonExisitingDirectories() const {
     string fullPath(getFullPath());

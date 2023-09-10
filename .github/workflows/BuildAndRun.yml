@@ -25,12 +25,12 @@ on:
         - Debug
         - Release
       enableAsan:
-        description: 'Enable Address Sanitizer for Ubuntu/Clang'
+        description: 'Enable Address Sanitizer for Clang Builds'
         type: boolean
         required: true
         default: false
       enableStaticAnalyzers:
-        description: 'Enable Static Analyzers for Ubuntu/Clang'
+        description: 'Enable Static Analyzers for Clang Builds'
         type: boolean
         required: true
         default: false
@@ -323,7 +323,7 @@ jobs:
             
       - name: Build and Run with Address Sanitizer
         shell: bash
-        if: matrix.configurationName == 'UbuntuLatestClang' && inputs.enableAsan
+        if: contains(matrix.configurationName, 'Clang') && inputs.enableAsan
         working-directory: ${{ matrix.project }}
         run: |
           "$buildAndRunScriptPath" clean ${{ env.buildDirectory }}
@@ -334,13 +334,9 @@ jobs:
             
       - name: Build and Run with Static Analyzers
         shell: bash
-        if: matrix.configurationName == 'UbuntuLatestClang' && inputs.enableStaticAnalyzers
+        if: contains(matrix.configurationName, 'Clang') && inputs.enableStaticAnalyzers
         working-directory: ${{ matrix.project }}
         run: |
-          sudo apt install clang-tidy cppcheck clazy
-          echo "clang-tidy version: [$(clang-tidy --version)]"
-          echo "cppcheck version: [$(cppcheck --version)]"
-          echo "clazy version: [$(clazy --version)]"
           currentDirectory="$(pwd)"
           "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
           echo "Running Static Analysis..."

@@ -14,21 +14,18 @@ public:
     CycleSorter() = default;
 
     void sort(Values& valuesToSort) const override {
-        int numberOfWrites(0);
         for (int incorrectIndex = 0; incorrectIndex + 2 <= static_cast<int>(valuesToSort.size()); ++incorrectIndex) {
             Value cycleValue = valuesToSort[incorrectIndex];  // get cycle value from incorrect index
             int correctIndex = getCorrectIndexForValue(valuesToSort, cycleValue, incorrectIndex);
             if (correctIndex != incorrectIndex) {  // check first unsorted
                 moveForwardUntilValueIsDifferent(valuesToSort, cycleValue, correctIndex);
                 std::swap(cycleValue, valuesToSort[correctIndex]);
-                ++numberOfWrites;
                 while (correctIndex != incorrectIndex) {
                     // continue to fix cycles until cycle ends (cycle ends if it returned to original index)
                     correctIndex = getCorrectIndexForValue(valuesToSort, cycleValue, incorrectIndex);
                     moveForwardUntilValueIsDifferent(valuesToSort, cycleValue, correctIndex);
                     if (cycleValue != valuesToSort[correctIndex]) {
                         std::swap(cycleValue, valuesToSort[correctIndex]);
-                        ++numberOfWrites;
                     }
                 }
             }
