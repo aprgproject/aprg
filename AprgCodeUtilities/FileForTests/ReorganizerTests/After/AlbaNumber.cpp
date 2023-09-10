@@ -16,10 +16,6 @@ using namespace std;
 // NOLINTBEGIN(cppcoreguidelines-pro-type-union-access)
 namespace alba {
 
-AlbaNumber::ConfigurationDetails AlbaNumber::Configuration::getConfigurationDetailsWithZeroTolerance() {
-    return ConfigurationDetails{0.0, 0.0};
-}
-
 void AlbaNumber::Configuration::setConfigurationTolerancesToZero() {
     setConfigurationDetails(getConfigurationDetailsWithZeroTolerance());
 }
@@ -30,6 +26,10 @@ void AlbaNumber::Configuration::setComparisonTolerance(double const comparisonTo
 
 void AlbaNumber::Configuration::setFloatAdjustmentTolerance(double const comparisonTolerance) {
     m_configurationDetails.floatAdjustmentTolerance = comparisonTolerance;
+}
+
+AlbaNumber::ConfigurationDetails AlbaNumber::Configuration::getConfigurationDetailsWithZeroTolerance() {
+    return ConfigurationDetails{0.0, 0.0};
 }
 
 void AlbaNumber::ScopeConfigurationObject::setInThisScopeTheTolerancesToZero() {
@@ -340,10 +340,6 @@ AlbaNumber& AlbaNumber::operator/=(AlbaNumber const& second) {
     return thisReference;
 }
 
-AlbaNumber AlbaNumber::createComplexNumber(ComplexFloat const& complexNumber) {
-    return createComplexNumber(complexNumber.getRealPart(), complexNumber.getImaginaryPart());
-}
-
 AlbaNumber::ComplexNumberData AlbaNumber::getComplexNumberData() const {
     ComplexNumberData result{0, 0};
     if (m_type == Type::Integer) {
@@ -433,6 +429,10 @@ void AlbaNumber::convertToInteger() { *this = AlbaNumber(getInteger()); }
 void AlbaNumber::convertToFraction() {
     FractionData fractionData(getFractionData());
     *this = AlbaNumber::createFraction(fractionData.numerator, fractionData.denominator);
+}
+
+AlbaNumber AlbaNumber::createComplexNumber(ComplexFloat const& complexNumber) {
+    return createComplexNumber(complexNumber.getRealPart(), complexNumber.getImaginaryPart());
 }
 
 void AlbaNumber::correctPowerResult(double& powerResult, double const base, double const exponent) {

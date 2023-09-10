@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <numeric>
+#include <sstream>
 
 using namespace alba::CodeUtilities::CPlusPlusUtilities;
 using namespace alba::stringHelper;
@@ -42,10 +43,10 @@ Terms CPlusPlusReorganizeItems::getSortedAggregateTerms() const {
             terms.emplace_back(TermType::WhiteSpace, "\n");
         }
 
-        // terms.emplace_back(
-        //     TermType::CommentMultiline, "/*BEGIN ADD (" + stringHelper::convertToString(sortItem.headerIndex) + "," +
-        //                                     stringHelper::convertToString(sortItem.score) + "," +
-        //                                     stringHelper::convertToString(sortItem.itemsIndex) + ")*/");
+        // stringstream commentStream;
+        // commentStream << "/*BEGIN ADD (" << sortItem.headerIndex << ",0x" << hex << sortItem.score << "," << dec
+        //               << sortItem.itemsIndex << ")*/";
+        // terms.emplace_back(TermType::CommentMultiline, commentStream.str());
         terms.emplace_back(TermType::Aggregate, item);
         // terms.emplace_back(TermType::CommentMultiline, "/*END ADD*/");
         terms.emplace_back(TermType::WhiteSpace, "\n");
@@ -68,29 +69,31 @@ Patterns CPlusPlusReorganizeItems::getSearchPatterns() {
         {M("static_assert")},
         {M("namespace")},
         {M("using")},
+        {M("template")},
+        {M(TermType::Macro)},
+        {M("public"), M(":")},
+        {M("protected"), M(":")},
+        {M("private"), M(":")},
+        {M("enum"), M("class")},
         {M("enum")},
         {M("struct")},
         {M("union")},
         {M("class")},
-        {M("template")},
         {M("="), M("default")},
         {M("="), M("delete")},
         {M("operator"), M("=")},
         {M("operator")},
-        {M("explicit")},
-        {M("inline")},
-        {M("virtual")},
         {M("constexpr")},
+        {M("inline")},
+        {M("explicit")},
+        {M("virtual")},
         {M("static")},
-        {M("volatile")},
-        {M("const")},
+        {M("override")},
         {M("[[nodiscard]]")},
         {M(TermType::Attribute)},
-        {M("friend")},
-        {M(TermType::Macro)},
-        {M("public"), M(":")},
-        {M("protected"), M(":")},
-        {M("private"), M(":")}};
+        {M("volatile")},
+        {M("const")},
+        {M("friend")}};
 }
 
 string CPlusPlusReorganizeItems::getIdentifierBeforeParenthesis(Terms const& terms, int const parenthesisIndex) {
@@ -167,22 +170,22 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromFunctionSignature(
         Term const& firstTerm(terms[firstHitIndex]);
         if (firstTerm.getTermType() == TermType::PrimitiveType) {
             if (firstTerm.getContent() == "bool") {
-                sortItem.score += 3;
+                sortItem.score += 0x2;  // returnType: bool
             } else if (firstTerm.getContent() == "void") {
-                sortItem.score += 6;
+                sortItem.score += 0x5;  // returnType: void
             } else {
-                sortItem.score += 4;
+                sortItem.score += 0x3;  // returnType: primitive type
             }
         } else if (firstTerm.getTermType() == TermType::Identifier) {
             if (firstTerm.getContent() == "TEST" || firstTerm.getContent() == "TEST_F") {
-                sortItem.score += 2;
+                sortItem.score += 0x1;  // returnType: gtest tests
             } else if (firstTerm.getContent() == "size_t") {
-                sortItem.score += 4;  // same level as integer primitive types
+                sortItem.score += 0x3;  // returnType: same level as primitive type
             } else {
-                sortItem.score += 5;
+                sortItem.score += 0x4;  // returnType: user type
             }
         } else if (firstTerm.getTermType() == TermType::Keyword) {
-            sortItem.score += 1;
+            sortItem.score += 0x6;
         }
         sortItem.functionReturnTypeName = firstTerm.getContent();
     }
@@ -247,6 +250,8 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
     Patterns searchPatterns(getSearchPatterns());
     bool isFound(true);
     bool isConst(false);
+    bool isStatic(false);
+    bool isAFriend(false);
     sortItem.numberOfLines = stringHelper::getNumberOfNewLines(getTextWithoutCommentsWithNewLine(terms)) + 1;
     while (isFound) {
         Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
@@ -273,92 +278,107 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
                 sortItem.isDivider = true;
                 break;
             }
+            if (firstTerm.getContent() == "template") {
+                sortItem.itemType = ItemType::Template;
+                sortItem.isDivider = true;
+                break;
+            }
+            if (firstTerm.getTermType() == TermType::Macro) {
+                sortItem.itemType = ItemType::Macro;
+                sortItem.isDivider = true;
+                break;
+            }
+            if (firstTerm.getContent() == "public" || firstTerm.getContent() == "protected" ||
+                firstTerm.getContent() == "private") {
+                sortItem.itemType = ItemType::AccessControl;
+                sortItem.isDivider = true;
+                break;
+            }
+            // Score: 0x-TAI'HCQR
+            // R - return type
+            // Q - qualifiers and attributes (const, volatile)
+            // C - class specific (explicit, virtual, override, static, friend)
+            // H - header specific (constexpr, inline)
+            // I - important functions (constructors/etc, operators)
+            // A - automatic (default, delete)
+            // T - type (namespace const data, declarations, namespace data, functions, data)
             if (firstTerm.getContent() == "(") {
                 if (!m_scopeNames.empty() &&
                     m_scopeNames.back() == getIdentifierBeforeParenthesis(terms, firstHitIndex)) {
-                    sortItem.score += 100000;
+                    sortItem.score += 0x3'0000;  // impt:constructors, etc
                 }
                 moveToEndParenthesis(terms, termIndex, firstHitIndex);
-                sortItem.score += 10000000;
+                sortItem.score += 0x100'0000;  // type:function
                 sortItem.itemType = ItemType::Function;
             } else {
-                if (firstTerm.getContent() == "enum") {
-                    sortItem.score += 500000000;
+                if (firstTerm.getContent() == "enum" && lastTerm.getContent() == "class") {
+                    sortItem.score += 0x700'0000;  // type:enum
+                    sortItem.itemType = ItemType::Declaration;
+                } else if (firstTerm.getContent() == "enum") {
+                    sortItem.score += 0x600'0000;  // type:enum
                     sortItem.itemType = ItemType::Declaration;
                 } else if (firstTerm.getContent() == "struct") {
-                    sortItem.score += 400000000;
+                    sortItem.score += 0x500'0000;  // type:struct
                     sortItem.itemType = ItemType::Declaration;
                 } else if (firstTerm.getContent() == "union") {
-                    sortItem.score += 300000000;
+                    sortItem.score += 0x400'0000;  // type:union
                     sortItem.itemType = ItemType::Declaration;
                 } else if (firstTerm.getContent() == "class") {
-                    sortItem.score += 200000000;
+                    sortItem.score += 0x300'0000;  // type:class
                     sortItem.itemType = ItemType::Declaration;
-                } else if (firstTerm.getContent() == "template") {
-                    sortItem.itemType = ItemType::Template;
-                    sortItem.isDivider = true;
-                    break;
                 } else if (firstTerm.getContent() == "=" && lastTerm.getContent() == "default") {
-                    sortItem.score += 300000;
+                    sortItem.score += 0x20'0000;  // auto:default
                 } else if (firstTerm.getContent() == "=" && lastTerm.getContent() == "delete") {
-                    sortItem.score += 200000;
-                } else if (firstTerm.getContent() == "operator" && lastTerm.getContent() == "=") {
-                    sortItem.score += 30000;
-                } else if (firstTerm.getContent() == "operator") {
-                    sortItem.score += 20000;
-                } else if (firstTerm.getContent() == "explicit") {
-                    sortItem.score += 5000;
-                } else if (firstTerm.getContent() == "inline") {
-                    sortItem.score += 4000;
-                } else if (firstTerm.getContent() == "virtual") {
-                    sortItem.score += 3000;
+                    sortItem.score += 0x10'0000;  // auto:delete
+                } else if (!isAFriend && firstTerm.getContent() == "operator" && lastTerm.getContent() == "=") {
+                    sortItem.score += 0x2'0000;  // impt:assignment
+                } else if (!isAFriend && firstTerm.getContent() == "operator") {
+                    sortItem.score += 0x1'0000;  // impt:other operator
                 } else if (firstTerm.getContent() == "constexpr") {
-                    sortItem.score += 2000;
+                    sortItem.score += 0x2000;  // header:constexpr
                     isConst = true;
+                } else if (firstTerm.getContent() == "inline") {
+                    sortItem.score += 0x1000;  // header:inline
+                } else if (firstTerm.getContent() == "explicit") {
+                    sortItem.score += 0x600;  // class:explicit
+                } else if (firstTerm.getContent() == "virtual") {
+                    sortItem.score += 0x500;  // class:virtual
                 } else if (firstTerm.getContent() == "static") {
-                    sortItem.score += 1000;
+                    isStatic = true;
+                } else if (firstTerm.getContent() == "override") {
+                    sortItem.score += 0x400;  // class:override
+                } else if (firstTerm.getContent() == "[[nodiscard]]") {
+                    sortItem.score += 0x40;  // qualifier:nodiscard
+                } else if (firstTerm.getTermType() == TermType::Attribute) {
+                    sortItem.score += 0x30;  // qualifier:attribute
                 } else if (firstTerm.getContent() == "volatile") {
-                    sortItem.score += 200;
+                    sortItem.score += 0x20;  // qualifier:volatile
                 } else if (firstTerm.getContent() == "const") {
                     if (sortItem.itemType == ItemType::Function) {
-                        // check the last const
-                        sortItem.score += 100;
+                        // check the const after parenthesis
+                        sortItem.score += 0x10;  // qualifier:const
                     }
                     isConst = true;
-                } else if (firstTerm.getContent() == "[[nodiscard]]") {
-                    sortItem.score += 20;
-                } else if (firstTerm.getTermType() == TermType::Attribute) {
-                    sortItem.score += 10;
                 } else if (firstTerm.getContent() == "friend") {
-                    sortItem.score += -10000000;
-                } else if (firstTerm.getTermType() == TermType::Macro) {
-                    sortItem.itemType = ItemType::Macro;
-                    sortItem.isDivider = true;
-                    break;
-                } else if (
-                    firstTerm.getContent() == "public" || firstTerm.getContent() == "protected" ||
-                    firstTerm.getContent() == "private") {
-                    sortItem.itemType = ItemType::AccessControl;
-                    sortItem.isDivider = true;
-                    break;
+                    isAFriend = true;
                 }
                 termIndex = lastHitIndex + 1;
             }
         }
     }
+    if (sortItem.itemType == ItemType::Unknown) {
+        sortItem.itemType = ItemType::Data;
+    }
     if (sortItem.itemType == ItemType::Function) {
         saveDetailsBasedFromFunctionSignature(sortItem, getFunctionSignature(item));
-    } else if (sortItem.itemType == ItemType::Unknown) {
-        sortItem.itemType = ItemType::Data;
+        sortItem.score += isAFriend ? 0x100 : isStatic ? 0x200 : 0x300;  // class:friend,static
+    } else if (sortItem.itemType == ItemType::Data) {
         if (m_scopeType == ScopeType::Namespace) {
-            if (isConst) {
-                sortItem.score += 700000000;
-                sortItem.headerIndex = 0;
-            } else {
-                sortItem.score += 100000000;
-            }
-        } else {
-            sortItem.score = 0;
+            sortItem.score += isConst ? 0x800'0000 : 0x200'0000;  // type:namespace (const) data
+            sortItem.headerIndex = 0;
+        } else if (m_scopeType == ScopeType::ClassDeclaration) {
+            // do not move class member data
+            sortItem.score = (isStatic || isConst) ? sortItem.score : 0;
         }
     }
 }
