@@ -147,15 +147,16 @@ jobs:
         continue-on-error: true
         run: |
           staticAnalysisScriptPath=$(realpath "$(pwd)/${{ env.staticAnalysisScriptRelativePath }}")
-          echo "staticAnalysisScriptPath: [$(staticAnalysisScriptPath)]"
+          echo "staticAnalysisScriptPath: [$staticAnalysisScriptPath]"
           chmod +x "$staticAnalysisScriptPath"
           # 19800 seconds translates to 5 hours and 30 minutes
           timeout 19800 "$staticAnalysisScriptPath" "${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}" "${{ env.staticAnalysisFilename }}" "${{ matrix.projectToBuild }}" 
         
       - name: Commit and Push Reports
+        shell: bash
         run: |
           gitAddCommitPushScriptPath=$(realpath "$(pwd)/${{ env.gitAddCommitPushScriptRelativePath }}")
-          echo "gitAddCommitPushScriptPath: [$(gitAddCommitPushScriptPath)]"
+          echo "gitAddCommitPushScriptPath: [$gitAddCommitPushScriptPath]"
           chmod +x "$gitAddCommitPushScriptPath"
           "$gitAddCommitPushScriptPath" "${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}" "WORKFLOW COMMIT: Report from Static Analyzers."
             
@@ -163,7 +164,7 @@ jobs:
         shell: bash
         run: |
           generateReportScriptPath=$(realpath "$(pwd)/${{ env.generateReportScriptRelativePath }}")
-          echo "generateReportScriptPath: [$(generateReportScriptPath)]"
+          echo "generateReportScriptPath: [$generateReportScriptPath]"
           chmod +x "$generateReportScriptPath"
           echo "Generating report using python script: [$generateReportScriptPath]"
           python3 "$generateReportScriptPath" "${{ env.staticAnalysisFilename }}"

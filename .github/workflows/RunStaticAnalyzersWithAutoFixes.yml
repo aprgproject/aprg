@@ -142,7 +142,7 @@ jobs:
         continue-on-error: true
         run: |
           staticAnalysisScriptPath=$(realpath "$(pwd)/${{ env.staticAnalysisScriptRelativePath }}")
-          echo "staticAnalysisScriptPath: [$(staticAnalysisScriptPath)]"
+          echo "staticAnalysisScriptPath: [$staticAnalysisScriptPath]"
           chmod +x "$staticAnalysisScriptPath"
           # 19800 seconds translates to 5 hours and 30 minutes
           timeout 19800 "$staticAnalysisScriptPath" "${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}" "${{ env.staticAnalysisFilename }}" "${{ matrix.projectToBuild }}" 
@@ -151,13 +151,14 @@ jobs:
         shell: bash
         run: |
           formatCppFilesScriptPath=$(realpath "$(pwd)/${{ env.formatCppFilesRelativePath }}")
-          echo "formatCppFilesScriptPath: [$(formatCppFilesScriptPath)]"
+          echo "formatCppFilesScriptPath: [$formatCppFilesScriptPath]"
           chmod +x "$formatCppFilesScriptPath"
           "$formatCppFilesScriptPath"
         
       - name: Commit and Push Changes
+        shell: bash
         run: |
           gitAddCommitPushScriptPath=$(realpath "$(pwd)/${{ env.gitAddCommitPushScriptRelativePath }}")
-          echo "gitAddCommitPushScriptPath: [$(gitAddCommitPushScriptPath)]"
+          echo "gitAddCommitPushScriptPath: [$gitAddCommitPushScriptPath]"
           chmod +x "$gitAddCommitPushScriptPath"
           "$gitAddCommitPushScriptPath" "${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}"  "WORKFLOW COMMIT: Automatic fixes from Static Analyzers."
