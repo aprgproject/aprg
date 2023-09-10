@@ -3,11 +3,7 @@
 # 1) add -fno-rtti in flags because we dont want to depend on type checking on runtime.
 # 2) No need to put -fno-exceptions. We allow exceptions, we just dont catch them.
 set(APRG_COMPILER_COMMON_FLAGS "-Wall -Wextra -pedantic")
-if(WIN32 AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    set(APRG_COMPILER_COMMON_C_FLAGS "-std=c2x")
-else()
-    set(APRG_COMPILER_COMMON_C_FLAGS "-std=c20")
-endif()
+set(APRG_COMPILER_COMMON_C_FLAGS "-std=c2x")
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     set(APRG_COMPILER_COMMON_FLAGS "${APRG_COMPILER_COMMON_FLAGS} -fcolor-diagnostics")
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")

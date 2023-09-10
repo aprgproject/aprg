@@ -1,7 +1,6 @@
 #!/bin/bash
 
 projectsWithWindowsStaticAnalysis='
-"AprgAlgebra/AprgAlgebra",
 "AprgCommon/AprgCommon",
 "AprgLocalScreenMonitoring/AprgLocalScreenMonitoring",
 "AprgLocalUserAutomation/AprgLocalUserAutomation",

@@ -46,7 +46,7 @@ runStaticAnalyzersInDirectory() {
     set +e
     # "note" is added in the grep to cover "FIX-IT"
     scriptPrint "$scriptName" "$LINENO" "Building..."
-    "$buildAndRunScriptPath" buildOnOneCore "StaticAnalyzersBuild" "Debug" | grep -P "^.*$directoryPath.* (note|style|warning|error): .*$" | tee -a "$staticAnalysisFilename"
+    "$buildAndRunScriptPath" buildOnOneCore "StaticAnalyzersBuild" "Debug" | tee -a "$staticAnalysisFilename"
     scriptPrint "$scriptName" "$LINENO" "Building step done"
     set -e
     

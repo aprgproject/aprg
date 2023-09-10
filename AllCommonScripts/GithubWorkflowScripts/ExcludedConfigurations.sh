@@ -3,8 +3,10 @@
 excludedConfigurations='
 {"project": "boost/BoostTest", "configurationName": "WindowsLatestMsvc"},
 {"project": "boost/BoostTest", "configurationName": "WindowsLatestMingw"},
+{"project": "AprgGnuPlot/AprgGnuPlot", "configurationName": "WindowsLatestClang"},
 {"project": "AprgGnuPlot/AprgGnuPlot", "configurationName": "WindowsLatestMsvc"},
 {"project": "AprgGnuPlot/AprgGnuPlot", "configurationName": "WindowsLatestMingw"},
+{"project": "AprgGnuPlot/AprgGnuPlot", "configurationName": "WindowsLatestClang"},
 {"project": "Chess/ChessPeek/ChessPeek", "configurationName": "UbuntuLatestGcc"},
 {"project": "Chess/ChessPeek/ChessPeek", "configurationName": "UbuntuLatestClang"},
 {"project": "Chess/ChessUtilities/ChessUtilities", "configurationName": "UbuntuLatestGcc"},
