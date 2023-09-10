@@ -54,6 +54,6 @@ findCppProjectsForStaticAnalysis() {
     done < <(find "$aprgDirectory" -depth -type f -wholename "$searchCondition" | sort -f)
     
     scriptPrint "$scriptName" "$LINENO" "The cppProjectsFound are: [$cppProjectsFound]"
-    cppProjectsFound="AprgCommon/AprgCommon"
+    cppProjectsFound='"AprgCommon/AprgCommon"'
     export cppProjectsFound
 }
