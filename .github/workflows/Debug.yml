@@ -96,6 +96,7 @@ jobs:
           WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
         
       - name: Commit and Push Changes
+        shell: bash
         run: |
           gitAddCommitPushScriptPath=$(realpath "$(pwd)/${{ env.gitAddCommitPushScriptRelativePath }}")
           echo "gitAddCommitPushScriptPath: [$(gitAddCommitPushScriptPath)]"
