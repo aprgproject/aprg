@@ -54,11 +54,11 @@ jobs:
   runStaticAnalyzersOnCppProjects:
     name: JobId[${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}] Run Static Analyzers with Auto Fixes
     needs: determineCppProjects
+    runs-on: ${{ contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), matrix.projectToBuild) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
     strategy:
       fail-fast: false
       matrix:
-        projectToBuild: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild)[0] }}
-    runs-on: ${{ contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), matrix.projectToBuild) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
+        projectToBuild: [${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild)[0] }}]
     permissions:
       contents: write
     steps:
@@ -73,34 +73,34 @@ jobs:
           echo "staticAnalysisFilename: [${{ env.staticAnalysisFilename }}]"
           echo "staticAnalysisJobId: [${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}]"
           
-  debugBuild:
-    name: Debug job
-    runs-on: windows-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        
-      - name: Debug Prints
-        run: |
-          echo "cmake version: [$(cmake --version)]"
-          choco search cmake
-          choco install cmake
-          choco info cmake
-          echo "cmake version: [$(cmake --version)]"
-          echo "ninja version: [$(ninja --version)]"
-          choco search ninja
-          choco install ninja
-          choco info ninja
-          echo "ninja version: [$(ninja --version)]"
-          echo "clang version: [$(clang --version)]"
-          #echo "gsl version: [$(gsl --version)]"
-          choco search gsl
-          choco install gsl
-          choco info gsl
-          echo "gsl gsl: [$(gsl --version)]"
-          #echo "boost version: [$(boost --version)]"
-          choco search boost
-          choco install boost-msvc-14.3
-          choco info boost-msvc-14.3
-          echo "boost version: [$(boost-msvc-14.3 --version)]"
+#  debugBuild:
+#    name: Debug job
+#    runs-on: windows-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v3
+#        
+#      - name: Debug Prints
+#        run: |
+#          echo "cmake version: [$(cmake --version)]"
+#          choco search cmake
+#          choco install cmake
+#          choco info cmake
+#          echo "cmake version: [$(cmake --version)]"
+#          echo "ninja version: [$(ninja --version)]"
+#          choco search ninja
+#          choco install ninja
+#          choco info ninja
+#          echo "ninja version: [$(ninja --version)]"
+#          echo "clang version: [$(clang --version)]"
+#          #echo "gsl version: [$(gsl --version)]"
+#          choco search gsl
+#          choco install gsl
+#          choco info gsl
+#          echo "gsl gsl: [$(gsl --version)]"
+#          #echo "boost version: [$(boost --version)]"
+#          choco search boost
+#          choco install boost-msvc-14.3
+#          choco info boost-msvc-14.3
+#          echo "boost version: [$(boost-msvc-14.3 --version)]"
           
