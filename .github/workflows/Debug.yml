@@ -58,7 +58,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        projectToBuild: "[${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild)[0] }}]"
+        projectToBuild: "${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild)[0] }}"
     permissions:
       contents: write
     steps:
@@ -69,6 +69,7 @@ jobs:
           echo "github.event.action: [${{ github.event.action }}]"
           echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
           echo "c/c++ next project: [${{ matrix.projectToBuild }}]"
+          echo "projects with windows static analysis: [${{ needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis }}]"
           echo "operating system: [${{ runner.os }}]"
           echo "staticAnalysisFilename: [${{ env.staticAnalysisFilename }}]"
           echo "staticAnalysisJobId: [${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}]"
