@@ -132,7 +132,7 @@ typename std::make_signed<NumberType>::type getStirlingNumberOfTheSecondKind(
     SignedType sum(0);
     bool isDivisibleByTwo(true);
     for (NumberType i = 0; i <= kValue; ++i) {
-        SignedType sign = isDivisibleByTwo ? 1 : -1;
+        SignedType const sign = isDivisibleByTwo ? 1 : -1;
         sum += sign * getNumberOfCombinations(kValue, i) * getRaiseToPowerForIntegersUsingPow(kValue - i, nValue);
         isDivisibleByTwo = !isDivisibleByTwo;
     }

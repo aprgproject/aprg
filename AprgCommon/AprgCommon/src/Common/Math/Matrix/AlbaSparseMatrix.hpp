@@ -49,7 +49,7 @@ public:
 
     AlbaSparseMatrix operator*(AlbaSparseMatrix const& secondMatrix) const {  // matrix multiplication
         assert(m_numberOfColumns == secondMatrix.m_numberOfRows);
-        size_t size(std::min(m_numberOfColumns, secondMatrix.m_numberOfRows));
+        size_t const size(std::min(m_numberOfColumns, secondMatrix.m_numberOfRows));
         AlbaSparseMatrix result(m_numberOfRows, secondMatrix.m_numberOfColumns);
         for (size_t yPosition = 0; yPosition < m_numberOfRows; ++yPosition) {
             for (size_t xPosition = 0; xPosition < secondMatrix.m_numberOfColumns; ++xPosition) {
@@ -69,7 +69,7 @@ public:
         if (m_numberOfColumns != secondMatrix.m_numberOfColumns || m_numberOfRows != secondMatrix.m_numberOfRows) {
             isEqual = false;
         } else if (m_matrixData != secondMatrix.m_matrixData) {
-            UniqueIndexes allIndexes(getAllIndexes(m_matrixData, secondMatrix.m_matrixData));
+            UniqueIndexes const allIndexes(getAllIndexes(m_matrixData, secondMatrix.m_matrixData));
             for (size_t const index : allIndexes) {
                 if (getEntry(index) != secondMatrix.getEntry(index)) {
                     isEqual = false;
@@ -88,12 +88,12 @@ public:
         return getMatrixIndex(xPosition, yPosition, m_numberOfColumns);
     }
 
-    DataType getEntry(size_t const xPosition, size_t const yPosition) const {
+    [[nodiscard]] DataType getEntry(size_t const xPosition, size_t const yPosition) const {
         assert((xPosition < m_numberOfColumns) && (yPosition < m_numberOfRows));
         return getEntry(getMatrixIndex(xPosition, yPosition));
     }
 
-    MatrixData const& getMatrixData() const { return m_matrixData; }
+    [[nodiscard]] MatrixData const& getMatrixData() const { return m_matrixData; }
 
     void setEntry(size_t const xPosition, size_t const yPosition, DataType const& value) {
         assert((xPosition < m_numberOfColumns) && (yPosition < m_numberOfRows));
@@ -101,7 +101,7 @@ public:
     }
 
     void setEntries(ListedMatrixData const& dataSampleValues) {
-        size_t limit = std::min<size_t>(dataSampleValues.size(), m_numberOfColumns * m_numberOfRows);
+        size_t const limit = std::min<size_t>(dataSampleValues.size(), m_numberOfColumns * m_numberOfRows);
         for (size_t i = 0; i < limit; ++i) {
             if (!isEqualForMathMatrixDataType(dataSampleValues[i], static_cast<DataType>(0))) {
                 m_matrixData[i] = dataSampleValues[i];
@@ -145,7 +145,8 @@ private:
         return getMatrixIndex(index / m_numberOfColumns, index % m_numberOfColumns, m_numberOfRows);
     }
 
-    AlbaSparseMatrix doUnaryOperation(AlbaSparseMatrix const& inputMatrix, UnaryFunction const& unaryFunction) const {
+    [[nodiscard]] AlbaSparseMatrix doUnaryOperation(
+        AlbaSparseMatrix const& inputMatrix, UnaryFunction const& unaryFunction) const {
         AlbaSparseMatrix resultMatrix(inputMatrix.getNumberOfColumns(), inputMatrix.getNumberOfRows());
         for (auto const& [index, value] : m_matrixData) {
             resultMatrix.m_matrixData[index] = unaryFunction(value);
@@ -153,14 +154,14 @@ private:
         return resultMatrix;
     }
 
-    AlbaSparseMatrix doBinaryOperation(
+    [[nodiscard]] AlbaSparseMatrix doBinaryOperation(
         AlbaSparseMatrix const& firstMatrix, AlbaSparseMatrix const& secondMatrix,
         BinaryFunction const& binaryFunction) const {
         assert(
             (firstMatrix.getNumberOfColumns() == secondMatrix.getNumberOfColumns()) &&
             (firstMatrix.getNumberOfRows() == secondMatrix.getNumberOfRows()));
         AlbaSparseMatrix resultMatrix(firstMatrix.getNumberOfColumns(), firstMatrix.getNumberOfRows());
-        UniqueIndexes allIndexes(getAllIndexes(m_matrixData, secondMatrix.m_matrixData));
+        UniqueIndexes const allIndexes(getAllIndexes(m_matrixData, secondMatrix.m_matrixData));
         for (size_t const index : allIndexes) {
             resultMatrix.m_matrixData[index] =
                 binaryFunction(firstMatrix.getEntry(index), secondMatrix.getEntry(index));
@@ -168,7 +169,7 @@ private:
         return resultMatrix;
     }
 
-    DataType getEntry(size_t const index) const {
+    [[nodiscard]] DataType getEntry(size_t const index) const {
         DataType result{};
         auto matrixIt = m_matrixData.find(index);
         if (matrixIt != m_matrixData.cend()) {
@@ -177,7 +178,7 @@ private:
         return result;
     }
 
-    UniqueIndexes getAllIndexes(MatrixData const& data1, MatrixData const& data2) const {
+    [[nodiscard]] UniqueIndexes getAllIndexes(MatrixData const& data1, MatrixData const& data2) const {
         UniqueIndexes result;
         for (auto const& [index, value] : data1) {
             result.emplace(index);

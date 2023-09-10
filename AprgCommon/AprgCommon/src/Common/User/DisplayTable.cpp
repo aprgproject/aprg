@@ -100,7 +100,7 @@ DisplayTableRow& DisplayTable::getLastRow() { return m_rows.back(); }
 DisplayTableRow& DisplayTable::getRowReferenceAt(int const rowIndex) { return m_rows[rowIndex]; }
 
 ostream& operator<<(ostream& out, DisplayTable const& displayTable) {
-    DisplayTablePrinter printer(displayTable);
+    DisplayTablePrinter const printer(displayTable);
     printer.print(out);
     return out;
 }
@@ -119,16 +119,16 @@ void DisplayTablePrinter::print(std::ostream& out) const {
     out << horizontalLine;
     int rowIndex = 0;
     for (Row const& row : m_rows) {
-        int numberOfLinesAtRow = m_maxWidthAtRow[rowIndex];
+        int const numberOfLinesAtRow = m_maxWidthAtRow[rowIndex];
         for (int lineIndexAtRow = 0; lineIndexAtRow < numberOfLinesAtRow; ++lineIndexAtRow) {
             out << verticalBorderPoint;
             int columnIndex = 0;
             for (Cell const& cell : row.cells) {
                 Lines const& lines(cell.lines);
-                int targetLength = m_maxLengthAtColumn[columnIndex];
-                string textOnVerticalAlignment =
+                int const targetLength = m_maxLengthAtColumn[columnIndex];
+                string const textOnVerticalAlignment =
                     getTextBasedOnVerticalAlignment(cell.verticalAlignment, lineIndexAtRow, numberOfLinesAtRow, lines);
-                string cellTextLine =
+                string const cellTextLine =
                     textOnVerticalAlignment.empty()
                         ? string(targetLength, ' ')
                         : getStringWithAlignment(textOnVerticalAlignment, targetLength, cell.horizontalAlignment);
@@ -146,21 +146,21 @@ void DisplayTablePrinter::print(std::ostream& out) const {
 string DisplayTablePrinter::getTextBasedOnVerticalAlignment(
     VerticalAlignment const alignment, int const lineIndexAtRow, int const numberOfLinesAtRow,
     Lines const& linesAtCell) {
-    int numberOfLinesAtCell = static_cast<int>(linesAtCell.size());
+    int const numberOfLinesAtCell = static_cast<int>(linesAtCell.size());
     switch (alignment) {
         case VerticalAlignment::Justify: {
-            int numberOfEmptyLines = numberOfLinesAtRow - numberOfLinesAtCell;
-            int numberOfGapLines = (numberOfLinesAtCell <= 1) ? 0
-                                   : (numberOfEmptyLines >= numberOfLinesAtCell + 1)
-                                       ? numberOfEmptyLines / (numberOfLinesAtCell + 1)
-                                       : numberOfEmptyLines / (numberOfLinesAtCell - 1);
-            int remainingWidthAtTheEnds = numberOfEmptyLines - (numberOfGapLines * (numberOfLinesAtCell - 1));
-            int start = remainingWidthAtTheEnds / 2;
+            int const numberOfEmptyLines = numberOfLinesAtRow - numberOfLinesAtCell;
+            int const numberOfGapLines = (numberOfLinesAtCell <= 1) ? 0
+                                         : (numberOfEmptyLines >= numberOfLinesAtCell + 1)
+                                             ? numberOfEmptyLines / (numberOfLinesAtCell + 1)
+                                             : numberOfEmptyLines / (numberOfLinesAtCell - 1);
+            int const remainingWidthAtTheEnds = numberOfEmptyLines - (numberOfGapLines * (numberOfLinesAtCell - 1));
+            int const start = remainingWidthAtTheEnds / 2;
             if (lineIndexAtRow >= start) {
-                int indexAtStart = lineIndexAtRow - start;
-                int interval = numberOfGapLines + 1;
+                int const indexAtStart = lineIndexAtRow - start;
+                int const interval = numberOfGapLines + 1;
                 if (indexAtStart % interval == 0) {
-                    int indexAtLinesAtCell = indexAtStart / interval;
+                    int const indexAtLinesAtCell = indexAtStart / interval;
                     if (indexAtLinesAtCell < numberOfLinesAtCell) {
                         return linesAtCell[indexAtLinesAtCell];
                     }
@@ -169,8 +169,8 @@ string DisplayTablePrinter::getTextBasedOnVerticalAlignment(
             break;
         }
         case VerticalAlignment::Center: {
-            int middleStart = (numberOfLinesAtRow - numberOfLinesAtCell) / 2;
-            int middleEnd = middleStart + numberOfLinesAtCell;
+            int const middleStart = (numberOfLinesAtRow - numberOfLinesAtCell) / 2;
+            int const middleEnd = middleStart + numberOfLinesAtCell;
             if (lineIndexAtRow >= middleStart && lineIndexAtRow < middleEnd) {
                 return linesAtCell[lineIndexAtRow - middleStart];
             }
@@ -183,7 +183,7 @@ string DisplayTablePrinter::getTextBasedOnVerticalAlignment(
             break;
         }
         case VerticalAlignment::Bottom: {
-            int bottomStart = numberOfLinesAtRow - numberOfLinesAtCell;
+            int const bottomStart = numberOfLinesAtRow - numberOfLinesAtCell;
             if (lineIndexAtRow >= bottomStart) {
                 return linesAtCell[lineIndexAtRow - bottomStart];
             }

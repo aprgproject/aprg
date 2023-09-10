@@ -13,6 +13,8 @@ string AlbaWindowsPathHandlerTest::convertToSimplestPath(string_view const path)
     return getCorrectPathWithoutDoublePeriod<'\\'>(getCorrectPathWithReplacedSlashCharacters<'\\'>(path));
 }
 
-string AlbaWindowsPathHandlerTest::getDriveOfAprgDir() { return getStringBeforeThisString(pathOfAprgDirectory, ":"); }
+string AlbaWindowsPathHandlerTest::getDriveOfAprgDir() const {
+    return getStringBeforeThisString(pathOfAprgDirectory, ":");
+}
 
 }  // namespace alba

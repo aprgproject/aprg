@@ -29,7 +29,7 @@ void printLogHeader(ostream& out, string_view const fileName, int const lineNumb
 }
 
 void printCurrentDateTime(ostream& out) {
-    AlbaDateTime currentTime(convertSystemTimeToAlbaDateTime(getSystemTimeNow()));
+    AlbaDateTime const currentTime(convertSystemTimeToAlbaDateTime(getSystemTimeNow()));
     out << currentTime.getPrintObject<AlbaDateTime::PrintFormat::Standard>();
 }
 

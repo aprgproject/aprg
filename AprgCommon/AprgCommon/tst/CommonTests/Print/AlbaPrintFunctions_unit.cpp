@@ -49,7 +49,7 @@ TEST(AlbaPrintFunctionsTest, PrintStringAndShortenIfPossibleWorks) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithItemsThatCanPrint) {
     stringstream ssToVerify;
-    int integerToTest = 500;
+    int const integerToTest = 500;
 
     printParameterWithName(ssToVerify, "name", integerToTest);
 
@@ -58,7 +58,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithItemsThatCanPrint) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithStrings) {
     stringstream ssToVerify;
-    string stringToTest = "std::string to test";
+    string const stringToTest = "std::string to test";
 
     printParameterWithName(ssToVerify, "name1", stringToTest);
     printParameterWithName(ssToVerify, "no name", "string literal to test");
@@ -85,7 +85,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithCharacterLiteral) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithUniquePointer) {
     stringstream ssToVerify;
-    unique_ptr<int> pointerToTest(make_unique<int>(500));
+    unique_ptr<int> const pointerToTest(make_unique<int>(500));
 
     printParameterWithName(ssToVerify, "name", pointerToTest);
 
@@ -94,7 +94,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithUniquePointer) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithSharedPointer) {
     stringstream ssToVerify;
-    shared_ptr<int> pointerToTest(make_shared<int>(500));
+    shared_ptr<int> const pointerToTest(make_shared<int>(500));
 
     printParameterWithName(ssToVerify, "name", pointerToTest);
 
@@ -103,8 +103,8 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithSharedPointer) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithWeakPointer) {
     stringstream ssToVerify;
-    shared_ptr<int> sharedPointer(make_shared<int>(500));
-    weak_ptr<int> pointerToTest(sharedPointer);
+    shared_ptr<int> const sharedPointer(make_shared<int>(500));
+    weak_ptr<int> const pointerToTest(sharedPointer);
 
     printParameterWithName(ssToVerify, "name", pointerToTest);
 
@@ -113,8 +113,8 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithWeakPointer) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithOptional) {
     stringstream ssToVerify;
-    optional<int> emptyOptional;
-    optional<int> nonEmptyOptional(300);
+    optional<int> const emptyOptional;
+    optional<int> const nonEmptyOptional(300);
 
     printParameterWithName(ssToVerify, "name1", emptyOptional);
     ssToVerify << ", ";
@@ -125,7 +125,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithOptional) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithPair) {
     stringstream ssToVerify;
-    pair<int, char> pairToTest{300, 'A'};
+    pair<int, char> const pairToTest{300, 'A'};
 
     printParameterWithName(ssToVerify, "name", pairToTest);
 
@@ -134,7 +134,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithPair) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithTuple) {
     stringstream ssToVerify;
-    tuple<int, string, char> pairToTest{300, "hello", 'A'};
+    tuple<int, string, char> const pairToTest{300, "hello", 'A'};
 
     printParameterWithName(ssToVerify, "name", pairToTest);
 
@@ -143,7 +143,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithTuple) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithArray) {
     stringstream ssToVerify;
-    array<int, 5> arrayToTest{500, 501, 502, 503, 504};
+    array<int, 5> const arrayToTest{500, 501, 502, 503, 504};
 
     printParameterWithName(ssToVerify, "name", arrayToTest);
 
@@ -152,7 +152,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithArray) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithVector) {
     stringstream ssToVerify;
-    vector<int> vectorToTest{500, 501, 502, 503, 504};
+    vector<int> const vectorToTest{500, 501, 502, 503, 504};
 
     printParameterWithName(ssToVerify, "name", vectorToTest);
 
@@ -161,7 +161,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithVector) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithDeque) {
     stringstream ssToVerify;
-    deque<int> vectorToTest{500, 501, 502, 503, 504};
+    deque<int> const vectorToTest{500, 501, 502, 503, 504};
 
     printParameterWithName(ssToVerify, "name", vectorToTest);
 
@@ -170,7 +170,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithDeque) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithSet) {
     stringstream ssToVerify;
-    set<int> vectorToTest{500, 501, 502, 503, 504};
+    set<int> const vectorToTest{500, 501, 502, 503, 504};
 
     printParameterWithName(ssToVerify, "name", vectorToTest);
 
@@ -179,7 +179,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithSet) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithMap) {
     stringstream ssToVerify;
-    map<int, char> vectorToTest{{500, 'A'}, {501, 'B'}, {502, 'C'}, {503, 'D'}, {504, 'E'}};
+    map<int, char> const vectorToTest{{500, 'A'}, {501, 'B'}, {502, 'C'}, {503, 'D'}, {504, 'E'}};
 
     printParameterWithName(ssToVerify, "name", vectorToTest);
 
@@ -188,11 +188,11 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithMap) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithUnorderedSet) {
     stringstream ssToVerify;
-    unordered_set<int> vectorToTest{500, 501, 502, 503, 504};
+    unordered_set<int> const vectorToTest{500, 501, 502, 503, 504};
 
     printParameterWithName(ssToVerify, "name", vectorToTest);
 
-    string actualPrintString(ssToVerify.str());
+    string const actualPrintString(ssToVerify.str());
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "size: 5 "));
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "500"));
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "501"));
@@ -203,11 +203,11 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithUnorderedSet) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithUnorderedMap) {
     stringstream ssToVerify;
-    unordered_map<int, char> vectorToTest{{500, 'A'}, {501, 'B'}, {502, 'C'}, {503, 'D'}, {504, 'E'}};
+    unordered_map<int, char> const vectorToTest{{500, 'A'}, {501, 'B'}, {502, 'C'}, {503, 'D'}, {504, 'E'}};
 
     printParameterWithName(ssToVerify, "name", vectorToTest);
 
-    string actualPrintString(ssToVerify.str());
+    string const actualPrintString(ssToVerify.str());
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "size: 5 "));
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "(500, A)"));
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "(501, B)"));
@@ -218,7 +218,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithUnorderedMap) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithStack) {
     stringstream ssToVerify;
-    stack<int> adapter({1, 2, 3});
+    stack<int> const adapter({1, 2, 3});
 
     printParameterWithName(ssToVerify, "name", adapter);
 
@@ -227,7 +227,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithStack) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithQueue) {
     stringstream ssToVerify;
-    queue<int> adapter({1, 2, 3});
+    queue<int> const adapter({1, 2, 3});
 
     printParameterWithName(ssToVerify, "name", adapter);
 
@@ -248,7 +248,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithPriorityQueue) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithForwardList) {
     stringstream ssToVerify;
-    forward_list<int> vectorToTest{500, 501, 502, 503, 504};
+    forward_list<int> const vectorToTest{500, 501, 502, 503, 504};
 
     printParameterWithName(ssToVerify, "name", vectorToTest);
 

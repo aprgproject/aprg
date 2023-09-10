@@ -22,9 +22,9 @@ AlbaNumberIntervalEndpoint const& AlbaNumberInterval::getHigherEndpoint() const 
 bool AlbaNumberInterval::isValueInsideTheInterval(AlbaNumber const& value) const {
     AlbaNumber const& lowerEndpointValue(m_lowerEndpoint.getValue());
     AlbaNumber const& higherEndpointValue(m_higherEndpoint.getValue());
-    bool isInsideTheInterval = lowerEndpointValue < value && value < higherEndpointValue;
-    bool isEqualToLowerCloseEndpoint = m_lowerEndpoint.isClose() && lowerEndpointValue == value;
-    bool isEqualToHigherCloseEndpoint = m_higherEndpoint.isClose() && higherEndpointValue == value;
+    bool const isInsideTheInterval = lowerEndpointValue < value && value < higherEndpointValue;
+    bool const isEqualToLowerCloseEndpoint = m_lowerEndpoint.isClose() && lowerEndpointValue == value;
+    bool const isEqualToHigherCloseEndpoint = m_higherEndpoint.isClose() && higherEndpointValue == value;
     return isInsideTheInterval || isEqualToLowerCloseEndpoint || isEqualToHigherCloseEndpoint;
 }
 
@@ -68,8 +68,8 @@ void AlbaNumberInterval::setNewEndpoint(AlbaNumberIntervalEndpoint const& endpoi
 }
 
 ostream& operator<<(ostream& out, AlbaNumberInterval const& interval) {
-    char startPrefix = interval.m_lowerEndpoint.isOpen() ? '(' : '[';
-    char endPostfix = interval.m_higherEndpoint.isOpen() ? ')' : ']';
+    char const startPrefix = interval.m_lowerEndpoint.isOpen() ? '(' : '[';
+    char const endPostfix = interval.m_higherEndpoint.isOpen() ? ')' : ']';
     out << startPrefix << interval.m_lowerEndpoint.getValue() << ", " << interval.m_higherEndpoint.getValue()
         << endPostfix;
     return out;

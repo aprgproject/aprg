@@ -57,75 +57,75 @@ TEST(AlbaMathVectorUtilitiesTest, CreateZeroVectorWorks) {
 TEST(AlbaMathVectorUtilitiesTest, GetUnitVectorWorks) {
     EXPECT_EQ((VectorTwoElements{0, 1}), (getUnitVector(VectorTwoElements{0, 5})));
     EXPECT_EQ((VectorTwoElements{1, 0}), (getUnitVector(VectorTwoElements{10, 0})));
-    double squareRootOf2Over2 = sqrt(static_cast<double>(2)) / 2;
+    double const squareRootOf2Over2 = sqrt(static_cast<double>(2)) / 2;
     EXPECT_EQ((VectorTwoElements{squareRootOf2Over2, squareRootOf2Over2}), (getUnitVector(VectorTwoElements{10, 10})));
 }
 
 TEST(AlbaMathVectorUtilitiesTest, GetVectorProjectionWorks) {
-    VectorTwoElements vectorToProjectTo{10, 10};
-    VectorTwoElements vectorToProjectFrom{0, 5};
+    VectorTwoElements const vectorToProjectTo{10, 10};
+    VectorTwoElements const vectorToProjectFrom{0, 5};
 
-    VectorTwoElements vectorToExpect{2.5, 2.5};
+    VectorTwoElements const vectorToExpect{2.5, 2.5};
     EXPECT_EQ(vectorToExpect, getVectorProjection(vectorToProjectTo, vectorToProjectFrom));
 }
 
 TEST(AlbaMathVectorUtilitiesTest, GetVectorProjectionWorksForThreeDimensions) {
-    VectorThreeElements vectorToProjectTo{6, -3, 2};
-    VectorThreeElements vectorToProjectFrom{2, 1, -3};
+    VectorThreeElements const vectorToProjectTo{6, -3, 2};
+    VectorThreeElements const vectorToProjectFrom{2, 1, -3};
 
-    VectorThreeElements vectorToExpect{
+    VectorThreeElements const vectorToExpect{
         static_cast<double>(18) / 49, static_cast<double>(-9) / 49, static_cast<double>(6) / 49};
     EXPECT_EQ(vectorToExpect, getVectorProjection(vectorToProjectTo, vectorToProjectFrom));
 }
 
 TEST(AlbaMathVectorUtilitiesTest, GetDotProductWorks) {
-    VectorTwoElements mathVector1{2, 4};
-    VectorTwoElements mathVector2{-1, 2};
+    VectorTwoElements const mathVector1{2, 4};
+    VectorTwoElements const mathVector2{-1, 2};
 
     EXPECT_DOUBLE_EQ(6, getDotProduct(mathVector1, mathVector2));
 }
 
 TEST(AlbaMathVectorUtilitiesTest, GetCrossProductWorksForTwoDimensions) {
-    VectorTwoElements mathVector1{2, 1};
-    VectorTwoElements mathVector2{3, -1};
+    VectorTwoElements const mathVector1{2, 1};
+    VectorTwoElements const mathVector2{3, -1};
 
     EXPECT_DOUBLE_EQ(-5, getCrossProduct(mathVector1, mathVector2));
 }
 
 TEST(AlbaMathVectorUtilitiesTest, GetCrossProductWorksForThreeDimensions) {
-    VectorThreeElements mathVector1{2, 1, -3};
-    VectorThreeElements mathVector2{3, -1, 4};
+    VectorThreeElements const mathVector1{2, 1, -3};
+    VectorThreeElements const mathVector2{3, -1, 4};
 
-    VectorThreeElements vectorToExpect{1, -17, -5};
+    VectorThreeElements const vectorToExpect{1, -17, -5};
     EXPECT_EQ(vectorToExpect, getCrossProduct(mathVector1, mathVector2));
 }
 
 TEST(AlbaMathVectorUtilitiesTest, GetAngleBetweenTwoVectorsWorks) {
-    VectorTwoElements mathVector1{0, 4};
-    VectorTwoElements mathVector2{10, 0};
+    VectorTwoElements const mathVector1{0, 4};
+    VectorTwoElements const mathVector2{10, 0};
 
-    AlbaAngle expectedAngle(AngleUnitType::Radians, getPi() / 2);
+    AlbaAngle const expectedAngle(AngleUnitType::Radians, getPi() / 2);
     EXPECT_EQ(expectedAngle, getAngleBetweenTwoVectors(mathVector1, mathVector2));
 }
 
 TEST(AlbaMathVectorUtilitiesTest, GetScalarProjectionWorks) {
-    VectorTwoElements vectorToProjectTo{0, 5};
-    VectorTwoElements vectorToProjectFrom{10, 10};
+    VectorTwoElements const vectorToProjectTo{0, 5};
+    VectorTwoElements const vectorToProjectFrom{10, 10};
 
     EXPECT_DOUBLE_EQ(10, getScalarProjection(vectorToProjectTo, vectorToProjectFrom));
 }
 
 TEST(AlbaMathVectorUtilitiesTest, GetScalarProjectionWorksForThreeDimensions) {
-    VectorThreeElements vectorToProjectTo{6, -3, 2};
-    VectorThreeElements vectorToProjectFrom{2, 1, -3};
+    VectorThreeElements const vectorToProjectTo{6, -3, 2};
+    VectorThreeElements const vectorToProjectFrom{2, 1, -3};
 
     EXPECT_DOUBLE_EQ(0.42857142857142855, getScalarProjection(vectorToProjectTo, vectorToProjectFrom));
 }
 
 TEST(AlbaMathVectorUtilitiesTest, RotateVectorCounterClockwiseWorks) {
-    VectorTwoElements mathVector{3, 4};
+    VectorTwoElements const mathVector{3, 4};
 
-    VectorTwoElements expectedMathVector{-4, 3};
+    VectorTwoElements const expectedMathVector{-4, 3};
     EXPECT_EQ(expectedMathVector, rotateVectorCounterClockwise(mathVector, AlbaAngle(AngleUnitType::Degrees, 90)));
 }
 

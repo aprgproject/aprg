@@ -14,7 +14,7 @@ void verifyResultsOfAction(State const initialState, Action const actionToBePerf
 }
 
 TEST(SampleStateMachineTest, InitialValuesAreCorrect) {
-    SampleStateMachine stateMachine(State::StateWithNoValue);
+    SampleStateMachine const stateMachine(State::StateWithNoValue);
     EXPECT_EQ(State::StateWithNoValue, stateMachine.getState());
 }
 

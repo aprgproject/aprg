@@ -10,11 +10,11 @@ namespace alba::matrix {
 
 template <typename DataType>
 bool areRowsWithAllZerosInTheBottom(AlbaMatrix<DataType> const& matrix) {
-    size_t numberOfRows(matrix.getNumberOfRows());
-    size_t numberOfColumns(matrix.getNumberOfColumns());
+    size_t const numberOfRows(matrix.getNumberOfRows());
+    size_t const numberOfColumns(matrix.getNumberOfColumns());
     bool isRowWithNonZeroEncountered(false);
     for (size_t yPlusOne = numberOfRows; yPlusOne > 0; --yPlusOne) {
-        size_t yPosition(yPlusOne - 1);
+        size_t const yPosition(yPlusOne - 1);
         bool isRowWithAllZero(true);
         for (size_t xPosition = 0; xPosition < numberOfColumns; ++xPosition) {
             if (isRowWithAllZero &&
@@ -36,8 +36,8 @@ bool areRowsWithAllZerosInTheBottom(AlbaMatrix<DataType> const& matrix) {
 
 template <typename DataType>
 bool areLeadingEntriesInReducedRowEchelonForm(AlbaMatrix<DataType> const& matrix) {
-    size_t numberOfRows(matrix.getNumberOfRows());
-    size_t numberOfColumns(matrix.getNumberOfColumns());
+    size_t const numberOfRows(matrix.getNumberOfRows());
+    size_t const numberOfColumns(matrix.getNumberOfColumns());
     int currentLeadingEntryColumn(-1);
     for (size_t yPosition = 0; yPosition < numberOfRows; ++yPosition) {
         for (size_t xPosition = 0; xPosition < numberOfColumns; ++xPosition) {
@@ -77,8 +77,8 @@ bool isReducedRowEchelonForm(AlbaMatrix<DataType> const& matrix) {
 
 template <typename DataType>
 void transformToReducedEchelonFormUsingGaussJordanReduction(AlbaMatrix<DataType>& matrix) {
-    size_t numberOfRows(matrix.getNumberOfRows());
-    size_t numberOfColumns(matrix.getNumberOfColumns());
+    size_t const numberOfRows(matrix.getNumberOfRows());
+    size_t const numberOfColumns(matrix.getNumberOfColumns());
     size_t yWithLeadingEntry = 0;
     for (size_t xPosition = 0; xPosition < numberOfColumns; ++xPosition) {
         for (size_t yPosition = yWithLeadingEntry; yPosition < numberOfRows; ++yPosition) {

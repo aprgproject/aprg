@@ -8,7 +8,7 @@ namespace alba {
 
 TEST(AlbaOptionalTest, OptionalCanBeContructedByConstructorWithContentType) {
     // Given
-    AlbaOptional<int> integerOptional1(1111);
+    AlbaOptional<int> const integerOptional1(1111);
 
     // When
     // Then
@@ -45,7 +45,7 @@ TEST(AlbaOptionalTest, OptionalSetConstReferenceWorks) {
     EXPECT_FALSE(static_cast<bool>(integerOptional1));
 
     // When
-    int newValue1(2222);
+    int const newValue1(2222);
     integerOptional1.setConstReference(newValue1);
 
     // Then
@@ -54,7 +54,7 @@ TEST(AlbaOptionalTest, OptionalSetConstReferenceWorks) {
     EXPECT_EQ(2222, integerOptional1.get());
 
     // When
-    int newValue2(222222);
+    int const newValue2(222222);
     integerOptional1.setConstReference(newValue2);
 
     // Then
@@ -135,7 +135,7 @@ TEST(AlbaOptionalTest, OptionalCanBeConstructedByDefault) {
 
 TEST(AlbaOptionalTest, OptionalCanBeCopied) {
     // Given
-    AlbaOptional<int> integerOptional1(1111);
+    AlbaOptional<int> const integerOptional1(1111);
     AlbaOptional<int> const& integerOptional2(integerOptional1);
 
     // When
@@ -149,7 +149,7 @@ TEST(AlbaOptionalTest, OptionalCanBeCopied) {
 TEST(AlbaOptionalTest, OptionalReferenceCanBeCopied) {
     // Given
     AlbaOptional<int> integerOptional1(1111);
-    AlbaOptional<int&> integerOptional2(integerOptional1.getReference());
+    AlbaOptional<int&> const integerOptional2(integerOptional1.getReference());
     AlbaOptional<int&> integerOptional3(integerOptional2);
 
     // When
@@ -166,7 +166,7 @@ TEST(AlbaOptionalTest, OptionalReferenceCanBeCopied) {
 
 TEST(AlbaOptionalTest, OptionalCanBeAssigned) {
     // Given
-    AlbaOptional<int> integerOptional1(1111);
+    AlbaOptional<int> const integerOptional1(1111);
     AlbaOptional<int> integerOptional2;
 
     // When
@@ -195,7 +195,7 @@ TEST(AlbaOptionalTest, OptionalCanBeSelfAssigned) {
 TEST(AlbaOptionalTest, OptionalReferenceCanBeAssigned) {
     // Given
     AlbaOptional<int> integerOptional1(1111);
-    AlbaOptional<int&> integerOptional2(integerOptional1.getReference());
+    AlbaOptional<int&> const integerOptional2(integerOptional1.getReference());
     AlbaOptional<int&> integerOptional3;
 
     // When
@@ -250,7 +250,7 @@ TEST(AlbaOptionalTest, OptionalCanBeMovedByMoveContructor) {
     EXPECT_TRUE(static_cast<bool>(integerOptional1));
 
     // When
-    AlbaOptional<int> integerOptional2(std::move(integerOptional1));
+    AlbaOptional<int> const integerOptional2(std::move(integerOptional1));
 
     // Then
     // NOLINTNEXTLINE(bugprone-use-after-move,hicpp-invalid-access-moved)
@@ -261,7 +261,7 @@ TEST(AlbaOptionalTest, OptionalCanBeMovedByMoveContructor) {
 
 TEST(AlbaOptionalTest, OutputStreamOperatorWorks) {
     stringstream testStream;
-    AlbaOptional<int> integerOptional(1111);
+    AlbaOptional<int> const integerOptional(1111);
 
     testStream << integerOptional;
 

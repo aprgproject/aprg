@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(AlbaNumberIntervalHelpersTest, IsValueInsideTheIntervalsWorks) {
-    AlbaNumberIntervals intervals{
+    AlbaNumberIntervals const intervals{
         AlbaNumberInterval(createOpenEndpoint(3), createOpenEndpoint(5)),
         AlbaNumberInterval(createCloseEndpoint(7), createCloseEndpoint(9))};
 
@@ -23,7 +23,7 @@ TEST(AlbaNumberIntervalHelpersTest, IsValueInsideTheIntervalsWorks) {
 }
 
 TEST(AlbaNumberIntervalHelpersTest, IsIntervalInsideTheIntervalsWorks) {
-    AlbaNumberIntervals intervals{
+    AlbaNumberIntervals const intervals{
         AlbaNumberInterval(createOpenEndpoint(3), createOpenEndpoint(5)),
         AlbaNumberInterval(createCloseEndpoint(7), createCloseEndpoint(9))};
 
@@ -46,7 +46,7 @@ TEST(AlbaNumberIntervalHelpersTest, IsIntervalInsideTheIntervalsWorks) {
 }
 
 TEST(AlbaNumberIntervalHelpersTest, AreTheIntervalsInsideTheIntervalWorks) {
-    AlbaNumberIntervals intervals{
+    AlbaNumberIntervals const intervals{
         AlbaNumberInterval(createOpenEndpoint(3), createOpenEndpoint(5)),
         AlbaNumberInterval(createOpenEndpoint(7), createOpenEndpoint(9))};
 
@@ -64,22 +64,22 @@ TEST(AlbaNumberIntervalHelpersTest, GetEndpointTypeWithCheckingIfItsClosedWorks)
 }
 
 TEST(AlbaNumberIntervalHelpersTest, CreateOpenEndpointWorks) {
-    AlbaNumberIntervalEndpoint endpoint(createOpenEndpoint(645));
+    AlbaNumberIntervalEndpoint const endpoint(createOpenEndpoint(645));
 
     EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Open, endpoint.getType());
     EXPECT_EQ(645, endpoint.getValue().getInteger());
 }
 
 TEST(AlbaNumberIntervalHelpersTest, CreateCloseEndpointWorks) {
-    AlbaNumberIntervalEndpoint endpoint(createCloseEndpoint(784));
+    AlbaNumberIntervalEndpoint const endpoint(createCloseEndpoint(784));
 
     EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Close, endpoint.getType());
     EXPECT_EQ(784, endpoint.getValue().getInteger());
 }
 
 TEST(AlbaNumberIntervalHelpersTest, CreateEndpointWorks) {
-    AlbaNumberIntervalEndpoint closeEndpoint(createEndpoint(true, 6541));
-    AlbaNumberIntervalEndpoint openEndpoint(createEndpoint(false, 5416));
+    AlbaNumberIntervalEndpoint const closeEndpoint(createEndpoint(true, 6541));
+    AlbaNumberIntervalEndpoint const openEndpoint(createEndpoint(false, 5416));
 
     EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Close, closeEndpoint.getType());
     EXPECT_EQ(6541, closeEndpoint.getValue().getInteger());
@@ -88,29 +88,29 @@ TEST(AlbaNumberIntervalHelpersTest, CreateEndpointWorks) {
 }
 
 TEST(AlbaNumberIntervalHelpersTest, CreatePositiveInfinityOpenEndpointWorks) {
-    AlbaNumberIntervalEndpoint endpoint(createPositiveInfinityOpenEndpoint());
+    AlbaNumberIntervalEndpoint const endpoint(createPositiveInfinityOpenEndpoint());
 
     EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Open, endpoint.getType());
     EXPECT_TRUE(endpoint.getValue().isPositiveInfinity());
 }
 
 TEST(AlbaNumberIntervalHelpersTest, CreateNegativeInfinityOpenEndpointWorks) {
-    AlbaNumberIntervalEndpoint endpoint(createNegativeInfinityOpenEndpoint());
+    AlbaNumberIntervalEndpoint const endpoint(createNegativeInfinityOpenEndpoint());
 
     EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Open, endpoint.getType());
     EXPECT_TRUE(endpoint.getValue().isNegativeInfinity());
 }
 
 TEST(AlbaNumberIntervalTest, CreateAllRealValuesIntervalWorks) {
-    AlbaNumberInterval interval(createAllRealValuesInterval());
+    AlbaNumberInterval const interval(createAllRealValuesInterval());
 
     EXPECT_EQ(createNegativeInfinityOpenEndpoint(), interval.getLowerEndpoint());
     EXPECT_EQ(createPositiveInfinityOpenEndpoint(), interval.getHigherEndpoint());
 }
 
 TEST(AlbaNumberIntervalTest, GetNumbersInsideTheIntervalWorks) {
-    AlbaNumbers numbers{1, 2, 3, 4, 5};
-    AlbaNumberInterval interval(createCloseEndpoint(2), createCloseEndpoint(4));
+    AlbaNumbers const numbers{1, 2, 3, 4, 5};
+    AlbaNumberInterval const interval(createCloseEndpoint(2), createCloseEndpoint(4));
 
     AlbaNumbers numbersToVerify(getNumbersInsideTheInterval(numbers, interval));
     ASSERT_EQ(3U, numbersToVerify.size());

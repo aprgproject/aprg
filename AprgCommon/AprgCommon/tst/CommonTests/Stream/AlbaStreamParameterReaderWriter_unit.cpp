@@ -21,7 +21,7 @@ TEST_F(AlbaStreamParameterReaderTest, EmptyFileTest) {
 
     ifstream testFileReadStream(testFilePathHandler.getFullPath());
     ASSERT_TRUE(testFileReadStream.is_open());
-    AlbaStreamParameterReader reader(testFileReadStream);
+    AlbaStreamParameterReader const reader(testFileReadStream);
     ASSERT_TRUE(testFileReadStream.good());
     ASSERT_FALSE(testFileReadStream.eof());
 
@@ -42,7 +42,7 @@ TEST_F(AlbaStreamParameterReaderTest, SingleParameterTest) {
 
     ifstream testFileReadStream(testFilePathHandler.getFullPath());
     ASSERT_TRUE(testFileReadStream.is_open());
-    AlbaStreamParameterReader reader(testFileReadStream);
+    AlbaStreamParameterReader const reader(testFileReadStream);
     ASSERT_TRUE(testFileReadStream.good());
     ASSERT_FALSE(testFileReadStream.eof());
 
@@ -53,7 +53,7 @@ TEST_F(AlbaStreamParameterReaderTest, SingleParameterTest) {
 }
 
 TEST_F(AlbaStreamParameterReaderTest, VectorTest) {
-    vector<int> sampleVector{1, 2, 3, 4, 5};
+    vector<int> const sampleVector{1, 2, 3, 4, 5};
     AlbaStreamParameterWriter writer(testFileWriteStream);
     writer.writeVectorData(sampleVector);
     writer.flush();
@@ -61,7 +61,7 @@ TEST_F(AlbaStreamParameterReaderTest, VectorTest) {
 
     ifstream testFileReadStream(testFilePathHandler.getFullPath());
     ASSERT_TRUE(testFileReadStream.is_open());
-    AlbaStreamParameterReader reader(testFileReadStream);
+    AlbaStreamParameterReader const reader(testFileReadStream);
     ASSERT_TRUE(testFileReadStream.good());
     ASSERT_FALSE(testFileReadStream.eof());
 
@@ -71,7 +71,7 @@ TEST_F(AlbaStreamParameterReaderTest, VectorTest) {
 }
 
 TEST_F(AlbaStreamParameterReaderTest, MapTest) {
-    map<int, string> sampleMap{{1, "one"}, {2, "two"}, {3, "three"}};
+    map<int, string> const sampleMap{{1, "one"}, {2, "two"}, {3, "three"}};
     AlbaStreamParameterWriter writer(testFileWriteStream);
     writer.writeMapData(sampleMap);
     writer.flush();
@@ -79,7 +79,7 @@ TEST_F(AlbaStreamParameterReaderTest, MapTest) {
 
     ifstream testFileReadStream(testFilePathHandler.getFullPath());
     ASSERT_TRUE(testFileReadStream.is_open());
-    AlbaStreamParameterReader reader(testFileReadStream);
+    AlbaStreamParameterReader const reader(testFileReadStream);
     ASSERT_TRUE(testFileReadStream.good());
     ASSERT_FALSE(testFileReadStream.eof());
 

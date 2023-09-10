@@ -23,8 +23,8 @@ SampleConfigurationDetails getDefaultConfigurationDetails<SampleConfigurationDet
 }
 
 TEST(AlbaConfigurationHolderTest, ConfigurationWorks) {
-    SampleConfigurationHolder configurationHolder1;
-    SampleConfigurationHolder configurationHolder2(SampleConfigurationDetails{75842});
+    SampleConfigurationHolder const configurationHolder1;
+    SampleConfigurationHolder const configurationHolder2(SampleConfigurationDetails{75842});
 
     EXPECT_EQ(0U, configurationHolder1.getConfigurationDetails().valueToTest);
     EXPECT_EQ(75842U, configurationHolder2.getConfigurationDetails().valueToTest);
@@ -58,7 +58,7 @@ TEST(AlbaConfigurationScopeObjectTest, SetInThisScopeThisConfigurationWorksAtDef
     EXPECT_EQ(0U, SampleConfigurationHolder::getInstance().getConfigurationDetails().valueToTest);
 
     {
-        SampleConfigurationScopeObject scopeObject;
+        SampleConfigurationScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(SampleConfigurationDetails{1255U});
 
         EXPECT_EQ(1255U, SampleConfigurationHolder::getInstance().getConfigurationDetails().valueToTest);

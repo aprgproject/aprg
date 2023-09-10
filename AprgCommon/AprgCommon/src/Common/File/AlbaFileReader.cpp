@@ -26,7 +26,7 @@ char AlbaFileReader::getCharacter() {
 }
 
 char* AlbaFileReader::getCharacters(size_t& numberOfCharacters) {
-    size_t bufferSize = m_characterBuffer.size();
+    size_t const bufferSize = m_characterBuffer.size();
     if (bufferSize <= numberOfCharacters) {
         numberOfCharacters = bufferSize - 1;
     }
@@ -97,7 +97,7 @@ string AlbaFileReader::getLineAndIgnoreWhiteSpaces() {
     while (isNotFinished()) {
         m_stream.clear();
         m_stream.getline(getCharacterBufferPointer(), static_cast<streamsize>(m_characterBuffer.size()));
-        string stringFromBuffer(getCharacterBufferPointer());
+        string const stringFromBuffer(getCharacterBufferPointer());
         result = getStringWithoutStartingAndTrailingWhiteSpace(stringFromBuffer);
         if (!result.empty()) {
             break;
@@ -109,7 +109,7 @@ string AlbaFileReader::getLineAndIgnoreWhiteSpaces() {
 size_t AlbaFileReader::getFileSize(ifstream& inputStream) {
     inputStream.seekg(0, ifstream::end);
     auto tellgOutput = inputStream.tellg();
-    size_t fileSize = tellgOutput > 0 ? static_cast<size_t>(tellgOutput) : 0U;
+    size_t const fileSize = tellgOutput > 0 ? static_cast<size_t>(tellgOutput) : 0U;
     inputStream.seekg(0, ifstream::beg);
     return fileSize;
 }

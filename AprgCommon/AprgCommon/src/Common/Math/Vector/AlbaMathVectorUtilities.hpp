@@ -131,8 +131,8 @@ DataType getScalarProjection(
 template <typename DataType>
 AlbaMathVector<DataType, 2U> rotateVectorCounterClockwise(
     AlbaMathVector<DataType, 2U> const& vectorToBeRotated, AlbaAngle const& angle) {
-    double magnitude = vectorToBeRotated.getMagnitude();
-    double newAngleInRadians = angle.getRadians() + acos(vectorToBeRotated.getValueAt(0) / magnitude);
+    double const magnitude = vectorToBeRotated.getMagnitude();
+    double const newAngleInRadians = angle.getRadians() + acos(vectorToBeRotated.getValueAt(0) / magnitude);
     return AlbaMathVector<DataType, 2U>{magnitude * cos(newAngleInRadians), magnitude * sin(newAngleInRadians)};
 }
 

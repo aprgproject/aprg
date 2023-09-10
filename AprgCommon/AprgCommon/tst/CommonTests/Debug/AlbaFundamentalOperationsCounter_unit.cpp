@@ -54,7 +54,7 @@ SampleClass getRValue() {
 TEST(AlbaFundamentalOperationsCounterTest, UserConstructionIsCounted) {
     CountsForSampleClass::getInstance().resetCounts();
 
-    SampleClass object(1234);
+    SampleClass const object(1234);
 
     EXPECT_EQ(
         "userConstructionCount: 1 defaultConstructionCount: 0 destructionCount: 0 copyConstructionCount: 0 "
@@ -65,7 +65,7 @@ TEST(AlbaFundamentalOperationsCounterTest, UserConstructionIsCounted) {
 TEST(AlbaFundamentalOperationsCounterTest, DefaultConstructionIsCounted) {
     CountsForSampleClass::getInstance().resetCounts();
 
-    SampleClass object;
+    SampleClass const object;
 
     EXPECT_EQ(
         "userConstructionCount: 0 defaultConstructionCount: 1 destructionCount: 0 copyConstructionCount: 0 "
@@ -76,7 +76,7 @@ TEST(AlbaFundamentalOperationsCounterTest, DefaultConstructionIsCounted) {
 TEST(AlbaFundamentalOperationsCounterTest, DestructionIsCounted) {
     CountsForSampleClass::getInstance().resetCounts();
 
-    { SampleClass object; }
+    { SampleClass const object; }
 
     EXPECT_EQ(
         "userConstructionCount: 0 defaultConstructionCount: 1 destructionCount: 1 copyConstructionCount: 0 "
@@ -85,10 +85,10 @@ TEST(AlbaFundamentalOperationsCounterTest, DestructionIsCounted) {
 }
 
 TEST(AlbaFundamentalOperationsCounterTest, CopyConstructionIsCounted) {
-    SampleClass originalObject(1234);
+    SampleClass const originalObject(1234);
     CountsForSampleClass::getInstance().resetCounts();
 
-    SampleClass object(originalObject);
+    SampleClass const object(originalObject);
 
     EXPECT_EQ(
         "userConstructionCount: 1 defaultConstructionCount: 0 destructionCount: 0 copyConstructionCount: 0 "
@@ -97,7 +97,7 @@ TEST(AlbaFundamentalOperationsCounterTest, CopyConstructionIsCounted) {
 }
 
 TEST(AlbaFundamentalOperationsCounterTest, CopyAssignmentIsCounted) {
-    SampleClass originalObject(1234);
+    SampleClass const originalObject(1234);
     SampleClass object(5678);
     CountsForSampleClass::getInstance().resetCounts();
 
@@ -112,7 +112,7 @@ TEST(AlbaFundamentalOperationsCounterTest, CopyAssignmentIsCounted) {
 TEST(AlbaFundamentalOperationsCounterTest, MoveConstructionIsCounted) {
     CountsForSampleClass::getInstance().resetCounts();
 
-    SampleClass object(getRValue());
+    SampleClass const object(getRValue());
 
     EXPECT_EQ(
         "userConstructionCount: 1 defaultConstructionCount: 0 destructionCount: 0 copyConstructionCount: 0 "
@@ -121,7 +121,7 @@ TEST(AlbaFundamentalOperationsCounterTest, MoveConstructionIsCounted) {
 }
 
 TEST(AlbaFundamentalOperationsCounterTest, MoveAssignmentIsCounted) {
-    SampleClass originalObject(1234);
+    SampleClass const originalObject(1234);
     SampleClass object(5678);
     CountsForSampleClass::getInstance().resetCounts();
 
@@ -136,7 +136,7 @@ TEST(AlbaFundamentalOperationsCounterTest, MoveAssignmentIsCounted) {
 TEST(AlbaFundamentalOperationsCounterTest, ObjectIsConstructedOnceDueToRvo) {
     CountsForSampleClass::getInstance().resetCounts();
 
-    SampleClass object(getRValue());
+    SampleClass const object(getRValue());
 
     EXPECT_EQ(
         "userConstructionCount: 1 defaultConstructionCount: 0 destructionCount: 0 copyConstructionCount: 0 "

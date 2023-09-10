@@ -14,7 +14,7 @@ using namespace std;
 namespace alba {
 
 TEST(AlbaNumberTest, GetDefaultConfigurationDetailsWorks) {
-    AlbaNumber::ConfigurationDetails configurationDetails(
+    AlbaNumber::ConfigurationDetails const configurationDetails(
         getDefaultConfigurationDetails<AlbaNumber::ConfigurationDetails>());
 
     EXPECT_DOUBLE_EQ(COMPARISON_TOLERANCE_FOR_DOUBLE, configurationDetails.comparisonTolerance);
@@ -42,8 +42,8 @@ TEST(AlbaNumberConfigurationTest, FloatAdjustmentToleranceIsCorrectlyAtDefault) 
 }
 
 TEST(AlbaNumberTest, SettingTolerancesReflectsInAlbaNumber) {
-    AlbaNumber number1(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
-    AlbaNumber number2(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
+    AlbaNumber const number1(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
+    AlbaNumber const number2(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
     EXPECT_TRUE(number1.isDoubleType());
     EXPECT_DOUBLE_EQ(3.01, number1.getDouble());
     EXPECT_TRUE(number2.isIntegerType());
@@ -52,8 +52,8 @@ TEST(AlbaNumberTest, SettingTolerancesReflectsInAlbaNumber) {
     AlbaNumber::Configuration::getInstance().setConfigurationDetails(
         AlbaNumber::Configuration::getConfigurationDetailsWithZeroTolerance());
 
-    AlbaNumber number3(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
-    AlbaNumber number4(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
+    AlbaNumber const number3(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
+    AlbaNumber const number4(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
     EXPECT_TRUE(number3.isDoubleType());
     EXPECT_DOUBLE_EQ(3.01, number3.getDouble());
     EXPECT_TRUE(number4.isDoubleType());
@@ -61,8 +61,8 @@ TEST(AlbaNumberTest, SettingTolerancesReflectsInAlbaNumber) {
 
     AlbaNumber::Configuration::getInstance().setConfigurationToDefault();
 
-    AlbaNumber number5(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
-    AlbaNumber number6(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
+    AlbaNumber const number5(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
+    AlbaNumber const number6(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
     EXPECT_TRUE(number5.isDoubleType());
     EXPECT_DOUBLE_EQ(3.01, number5.getDouble());
     EXPECT_TRUE(number6.isIntegerType());
@@ -70,27 +70,27 @@ TEST(AlbaNumberTest, SettingTolerancesReflectsInAlbaNumber) {
 }
 
 TEST(AlbaNumberScopeObjectTest, SetInThisScopeThisConfigurationWorksAtDefaultValuesAndValuesAreSetBack) {
-    AlbaNumber number1(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
-    AlbaNumber number2(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
+    AlbaNumber const number1(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
+    AlbaNumber const number2(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
     EXPECT_TRUE(number1.isDoubleType());
     EXPECT_DOUBLE_EQ(3.01, number1.getDouble());
     EXPECT_TRUE(number2.isIntegerType());
     EXPECT_EQ(3, number2.getInteger());
 
     {
-        AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
+        AlbaNumber::ScopeConfigurationObject const scopeConfigurationObject;
         scopeConfigurationObject.setInThisScopeThisConfiguration(AlbaNumber::ConfigurationDetails{0.1, 0.1});
 
-        AlbaNumber number3(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
-        AlbaNumber number4(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
+        AlbaNumber const number3(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
+        AlbaNumber const number4(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
         EXPECT_TRUE(number3.isIntegerType());
         EXPECT_EQ(3, number3.getInteger());
         EXPECT_TRUE(number4.isIntegerType());
         EXPECT_EQ(3, number4.getInteger());
     }
 
-    AlbaNumber number5(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
-    AlbaNumber number6(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
+    AlbaNumber const number5(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
+    AlbaNumber const number6(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
     EXPECT_TRUE(number5.isDoubleType());
     EXPECT_DOUBLE_EQ(3.01, number5.getDouble());
     EXPECT_TRUE(number6.isIntegerType());
@@ -98,27 +98,27 @@ TEST(AlbaNumberScopeObjectTest, SetInThisScopeThisConfigurationWorksAtDefaultVal
 }
 
 TEST(AlbaNumberScopeObjectTest, SetInThisScopeTheTolerancesToZeroWorksAtDefaultValuesAndValuesAreSetBack) {
-    AlbaNumber number1(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
-    AlbaNumber number2(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
+    AlbaNumber const number1(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
+    AlbaNumber const number2(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
     EXPECT_TRUE(number1.isDoubleType());
     EXPECT_DOUBLE_EQ(3.01, number1.getDouble());
     EXPECT_TRUE(number2.isIntegerType());
     EXPECT_EQ(3, number2.getInteger());
 
     {
-        AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
+        AlbaNumber::ScopeConfigurationObject const scopeConfigurationObject;
         AlbaNumber::ScopeConfigurationObject::setInThisScopeTheTolerancesToZero();
 
-        AlbaNumber number3(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
-        AlbaNumber number4(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
+        AlbaNumber const number3(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
+        AlbaNumber const number4(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
         EXPECT_TRUE(number3.isDoubleType());
         EXPECT_DOUBLE_EQ(3.01, number3.getDouble());
         EXPECT_TRUE(number4.isDoubleType());
         EXPECT_DOUBLE_EQ(3.0000000000001, number4.getDouble());
     }
 
-    AlbaNumber number5(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
-    AlbaNumber number6(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
+    AlbaNumber const number5(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
+    AlbaNumber const number6(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
     EXPECT_TRUE(number5.isDoubleType());
     EXPECT_DOUBLE_EQ(3.01, number5.getDouble());
     EXPECT_TRUE(number6.isIntegerType());
@@ -131,27 +131,27 @@ TEST(AlbaNumberScopeObjectTest, SetInThisScopeTheTolerancesToZeroWorksWhenValues
     configurationDetailsInThisOutsideScope.comparisonTolerance = 1E-1;
     AlbaNumber::Configuration::getInstance().setConfigurationDetails(configurationDetailsInThisOutsideScope);
 
-    AlbaNumber number1(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
-    AlbaNumber number2(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
+    AlbaNumber const number1(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
+    AlbaNumber const number2(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
     EXPECT_TRUE(number1.isIntegerType());
     EXPECT_EQ(3, number1.getInteger());
     EXPECT_TRUE(number2.isIntegerType());
     EXPECT_EQ(3, number2.getInteger());
 
     {
-        AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
+        AlbaNumber::ScopeConfigurationObject const scopeConfigurationObject;
         AlbaNumber::ScopeConfigurationObject::setInThisScopeTheTolerancesToZero();
 
-        AlbaNumber number3(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
-        AlbaNumber number4(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
+        AlbaNumber const number3(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
+        AlbaNumber const number4(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
         EXPECT_TRUE(number3.isDoubleType());
         EXPECT_DOUBLE_EQ(3.01, number3.getDouble());
         EXPECT_TRUE(number4.isDoubleType());
         EXPECT_DOUBLE_EQ(3.0000000000001, number4.getDouble());
     }
 
-    AlbaNumber number5(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
-    AlbaNumber number6(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
+    AlbaNumber const number5(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
+    AlbaNumber const number6(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
     EXPECT_TRUE(number5.isIntegerType());
     EXPECT_EQ(3, number5.getInteger());
     EXPECT_TRUE(number6.isIntegerType());
@@ -162,19 +162,19 @@ TEST(AlbaNumberScopeObjectTest, SetInThisScopeTheTolerancesToZeroWorksWhenValues
 }
 
 TEST(AlbaNumberTest, ConstructionWorksWithDefaultConstructor) {
-    AlbaNumber number1;
+    AlbaNumber const number1;
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(0, number1.getInteger());
 }
 
 TEST(AlbaNumberTest, ConstructionWorksWithValue) {
-    AlbaNumber number1;
-    AlbaNumber number2(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number3(ALBA_NUMBER_NEGATIVE_INFINITY);
-    AlbaNumber number4(ALBA_NUMBER_NOT_A_NUMBER);
-    AlbaNumber number5(ALBA_NUMBER_PI);
-    AlbaNumber number6(ALBA_NUMBER_E);
+    AlbaNumber const number1;
+    AlbaNumber const number2(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number3(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number4(ALBA_NUMBER_NOT_A_NUMBER);
+    AlbaNumber const number5(ALBA_NUMBER_PI);
+    AlbaNumber const number6(ALBA_NUMBER_E);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_DOUBLE_EQ(0, number1.getInteger());
@@ -191,11 +191,11 @@ TEST(AlbaNumberTest, ConstructionWorksWithValue) {
 }
 
 TEST(AlbaNumberTest, CreateNumberFromDoubleAndRoundIfNeededWorks) {
-    AlbaNumber number1(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
-    AlbaNumber number2(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
-    AlbaNumber number3(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(POSITIVE_INFINITY_DOUBLE_VALUE));
-    AlbaNumber number4(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(NEGATIVE_INFINITY_DOUBLE_VALUE));
-    AlbaNumber number5(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(NAN_DOUBLE_VALUE));
+    AlbaNumber const number1(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
+    AlbaNumber const number2(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
+    AlbaNumber const number3(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(POSITIVE_INFINITY_DOUBLE_VALUE));
+    AlbaNumber const number4(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(NEGATIVE_INFINITY_DOUBLE_VALUE));
+    AlbaNumber const number5(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(NAN_DOUBLE_VALUE));
 
     EXPECT_EQ(AlbaNumber::Type::Double, number1.getType());
     EXPECT_EQ(3.01, number1.getDouble());
@@ -210,12 +210,12 @@ TEST(AlbaNumberTest, CreateNumberFromDoubleAndRoundIfNeededWorks) {
 }
 
 TEST(AlbaNumberTest, CreateFractionWorks) {
-    AlbaNumber number1(AlbaNumber::createFraction(-87408, -9802));
-    AlbaNumber number2(AlbaNumber::createFraction(-100, 10));
-    AlbaNumber number3(AlbaNumber::createFraction(-100, -10));
+    AlbaNumber const number1(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber const number2(AlbaNumber::createFraction(-100, 10));
+    AlbaNumber const number3(AlbaNumber::createFraction(-100, -10));
 
     EXPECT_EQ(AlbaNumber::Type::Fraction, number1.getType());
-    AlbaNumber::FractionData fractionData(number1.getFractionData());
+    AlbaNumber::FractionData const fractionData(number1.getFractionData());
     EXPECT_EQ(43704, fractionData.numerator);
     EXPECT_EQ(4901U, fractionData.denominator);
     EXPECT_EQ(AlbaNumber::Type::Integer, number2.getType());
@@ -225,17 +225,17 @@ TEST(AlbaNumberTest, CreateFractionWorks) {
 }
 
 TEST(AlbaNumberTest, CreateComplexNumberWorks) {
-    AlbaNumber number1(AlbaNumber::createComplexNumber(-4, 3));
-    AlbaNumber number2(AlbaNumber::createComplexNumber(-4.5, 3.5));
-    AlbaNumber number3(AlbaNumber::createComplexNumber(-4.0, 0.0));
-    AlbaNumber number4(AlbaNumber::createComplexNumber(-4.5, 0.0));
+    AlbaNumber const number1(AlbaNumber::createComplexNumber(-4, 3));
+    AlbaNumber const number2(AlbaNumber::createComplexNumber(-4.5, 3.5));
+    AlbaNumber const number3(AlbaNumber::createComplexNumber(-4.0, 0.0));
+    AlbaNumber const number4(AlbaNumber::createComplexNumber(-4.5, 0.0));
 
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number1.getType());
-    AlbaNumber::ComplexNumberData complexNumberData1(number1.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData1(number1.getComplexNumberData());
     EXPECT_FLOAT_EQ(-4, complexNumberData1.realPart);
     EXPECT_FLOAT_EQ(3, complexNumberData1.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number2.getType());
-    AlbaNumber::ComplexNumberData complexNumberData2(number2.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData2(number2.getComplexNumberData());
     EXPECT_FLOAT_EQ(-4.5, complexNumberData2.realPart);
     EXPECT_FLOAT_EQ(3.5, complexNumberData2.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::Integer, number3.getType());
@@ -245,16 +245,16 @@ TEST(AlbaNumberTest, CreateComplexNumberWorks) {
 }
 
 TEST(AlbaNumberTest, ConstructionWorks) {
-    AlbaNumber number6(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number7(ALBA_NUMBER_NEGATIVE_INFINITY);
-    AlbaNumber number8(ALBA_NUMBER_NOT_A_NUMBER);
-    AlbaNumber number9(AlbaNumber::createFraction(-87408, -9802));
-    AlbaNumber number10(AlbaNumber::createFraction(-100, 10));
-    AlbaNumber number11(AlbaNumber::createFraction(-100, -10));
-    AlbaNumber number12(AlbaNumber::createComplexNumber(-4, 3));
-    AlbaNumber number13(AlbaNumber::createComplexNumber(-4.5, 3.5));
-    AlbaNumber number14(AlbaNumber::createComplexNumber(-4.0, 0.0));
-    AlbaNumber number15(AlbaNumber::createComplexNumber(-4.5, 0.0));
+    AlbaNumber const number6(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number7(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number8(ALBA_NUMBER_NOT_A_NUMBER);
+    AlbaNumber const number9(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber const number10(AlbaNumber::createFraction(-100, 10));
+    AlbaNumber const number11(AlbaNumber::createFraction(-100, -10));
+    AlbaNumber const number12(AlbaNumber::createComplexNumber(-4, 3));
+    AlbaNumber const number13(AlbaNumber::createComplexNumber(-4.5, 3.5));
+    AlbaNumber const number14(AlbaNumber::createComplexNumber(-4.0, 0.0));
+    AlbaNumber const number15(AlbaNumber::createComplexNumber(-4.5, 0.0));
 
     EXPECT_EQ(AlbaNumber::Type::Double, number6.getType());
     EXPECT_DOUBLE_EQ(INFINITY, number6.getDouble());
@@ -263,7 +263,7 @@ TEST(AlbaNumberTest, ConstructionWorks) {
     EXPECT_EQ(AlbaNumber::Type::Double, number8.getType());
     EXPECT_TRUE(isnan(number8.getDouble()));
     EXPECT_EQ(AlbaNumber::Type::Fraction, number9.getType());
-    AlbaNumber::FractionData fractionData(number9.getFractionData());
+    AlbaNumber::FractionData const fractionData(number9.getFractionData());
     EXPECT_EQ(43704, fractionData.numerator);
     EXPECT_EQ(4901U, fractionData.denominator);
     EXPECT_EQ(AlbaNumber::Type::Integer, number10.getType());
@@ -271,11 +271,11 @@ TEST(AlbaNumberTest, ConstructionWorks) {
     EXPECT_EQ(AlbaNumber::Type::Integer, number11.getType());
     EXPECT_EQ(10, number11.getInteger());
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number12.getType());
-    AlbaNumber::ComplexNumberData complexNumberData1(number12.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData1(number12.getComplexNumberData());
     EXPECT_FLOAT_EQ(-4, complexNumberData1.realPart);
     EXPECT_FLOAT_EQ(3, complexNumberData1.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number13.getType());
-    AlbaNumber::ComplexNumberData complexNumberData2(number13.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData2(number13.getComplexNumberData());
     EXPECT_FLOAT_EQ(-4.5, complexNumberData2.realPart);
     EXPECT_FLOAT_EQ(3.5, complexNumberData2.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::Integer, number14.getType());
@@ -285,15 +285,15 @@ TEST(AlbaNumberTest, ConstructionWorks) {
 }
 
 TEST(AlbaNumberTest, EqualityWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(-81237);
-    AlbaNumber number4(static_cast<double>(1) / 3);
-    AlbaNumber number5(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number6(ALBA_NUMBER_NEGATIVE_INFINITY);
-    AlbaNumber number7(AlbaNumber::createFraction(1, 3));
-    AlbaNumber number8(AlbaNumber::createComplexNumber(static_cast<double>(1) / 3, 0.0));
-    AlbaNumber number9(AlbaNumber::createComplexNumber(-81237, -81237));
+    AlbaNumber const number1;
+    AlbaNumber const number2(-81237);
+    AlbaNumber const number3(-81237);
+    AlbaNumber const number4(static_cast<double>(1) / 3);
+    AlbaNumber const number5(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number6(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number7(AlbaNumber::createFraction(1, 3));
+    AlbaNumber const number8(AlbaNumber::createComplexNumber(static_cast<double>(1) / 3, 0.0));
+    AlbaNumber const number9(AlbaNumber::createComplexNumber(-81237, -81237));
 
     EXPECT_TRUE(number1 == number1);
     EXPECT_TRUE(number2 == number2);
@@ -318,15 +318,15 @@ TEST(AlbaNumberTest, EqualityWorks) {
 }
 
 TEST(AlbaNumberTest, InequalityWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(-81237);
-    AlbaNumber number4(static_cast<double>(1) / 3);
-    AlbaNumber number5(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number6(ALBA_NUMBER_NEGATIVE_INFINITY);
-    AlbaNumber number7(AlbaNumber::createFraction(1, 3));
-    AlbaNumber number8(AlbaNumber::createComplexNumber(static_cast<double>(1) / 3, 0.0));
-    AlbaNumber number9(AlbaNumber::createComplexNumber(-81237, -81237));
+    AlbaNumber const number1;
+    AlbaNumber const number2(-81237);
+    AlbaNumber const number3(-81237);
+    AlbaNumber const number4(static_cast<double>(1) / 3);
+    AlbaNumber const number5(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number6(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number7(AlbaNumber::createFraction(1, 3));
+    AlbaNumber const number8(AlbaNumber::createComplexNumber(static_cast<double>(1) / 3, 0.0));
+    AlbaNumber const number9(AlbaNumber::createComplexNumber(-81237, -81237));
 
     EXPECT_FALSE(number1 != number1);
     EXPECT_FALSE(number2 != number2);
@@ -351,12 +351,12 @@ TEST(AlbaNumberTest, InequalityWorks) {
 }
 
 TEST(AlbaNumberTest, LessThanWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(AlbaNumber::createFraction(1, 3));
-    AlbaNumber number3(AlbaNumber::createComplexNumber(0.25, 0.25));
-    AlbaNumber number4(0.5);
-    AlbaNumber number5(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number6(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number1;
+    AlbaNumber const number2(AlbaNumber::createFraction(1, 3));
+    AlbaNumber const number3(AlbaNumber::createComplexNumber(0.25, 0.25));
+    AlbaNumber const number4(0.5);
+    AlbaNumber const number5(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number6(ALBA_NUMBER_NEGATIVE_INFINITY);
 
     EXPECT_FALSE(number1 < number1);
     EXPECT_FALSE(number2 < number2);
@@ -378,12 +378,12 @@ TEST(AlbaNumberTest, LessThanWorks) {
 }
 
 TEST(AlbaNumberTest, LessThanOrEqualWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(AlbaNumber::createFraction(1, 3));
-    AlbaNumber number3(AlbaNumber::createComplexNumber(0.25, 0.25));
-    AlbaNumber number4(0.5);
-    AlbaNumber number5(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number6(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number1;
+    AlbaNumber const number2(AlbaNumber::createFraction(1, 3));
+    AlbaNumber const number3(AlbaNumber::createComplexNumber(0.25, 0.25));
+    AlbaNumber const number4(0.5);
+    AlbaNumber const number5(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number6(ALBA_NUMBER_NEGATIVE_INFINITY);
 
     EXPECT_TRUE(number1 <= number1);
     EXPECT_TRUE(number2 <= number2);
@@ -405,12 +405,12 @@ TEST(AlbaNumberTest, LessThanOrEqualWorks) {
 }
 
 TEST(AlbaNumberTest, GreaterThanWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(AlbaNumber::createFraction(1, 3));
-    AlbaNumber number3(AlbaNumber::createComplexNumber(0.25, 0.25));
-    AlbaNumber number4(0.5);
-    AlbaNumber number5(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number6(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number1;
+    AlbaNumber const number2(AlbaNumber::createFraction(1, 3));
+    AlbaNumber const number3(AlbaNumber::createComplexNumber(0.25, 0.25));
+    AlbaNumber const number4(0.5);
+    AlbaNumber const number5(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number6(ALBA_NUMBER_NEGATIVE_INFINITY);
 
     EXPECT_FALSE(number1 > number1);
     EXPECT_FALSE(number2 > number2);
@@ -432,12 +432,12 @@ TEST(AlbaNumberTest, GreaterThanWorks) {
 }
 
 TEST(AlbaNumberTest, GreaterThanOrEqualWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(AlbaNumber::createFraction(1, 3));
-    AlbaNumber number3(AlbaNumber::createComplexNumber(0.25, 0.25));
-    AlbaNumber number4(0.5);
-    AlbaNumber number5(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number6(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number1;
+    AlbaNumber const number2(AlbaNumber::createFraction(1, 3));
+    AlbaNumber const number3(AlbaNumber::createComplexNumber(0.25, 0.25));
+    AlbaNumber const number4(0.5);
+    AlbaNumber const number5(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number6(ALBA_NUMBER_NEGATIVE_INFINITY);
 
     EXPECT_TRUE(number1 >= number1);
     EXPECT_TRUE(number2 >= number2);
@@ -459,12 +459,12 @@ TEST(AlbaNumberTest, GreaterThanOrEqualWorks) {
 }
 
 TEST(AlbaNumberTest, UnaryPlusWorksOnDifferentTypes) {
-    AlbaNumber number1 = +AlbaNumber();
-    AlbaNumber number2 = +AlbaNumber(-81237);
-    AlbaNumber number3 = +AlbaNumber(34095093U);
-    AlbaNumber number4 = +AlbaNumber(4564.38794);
-    AlbaNumber number5 = +AlbaNumber::createFraction(-87408, -9802);
-    AlbaNumber number6 = +AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number1 = +AlbaNumber();
+    AlbaNumber const number2 = +AlbaNumber(-81237);
+    AlbaNumber const number3 = +AlbaNumber(34095093U);
+    AlbaNumber const number4 = +AlbaNumber(4564.38794);
+    AlbaNumber const number5 = +AlbaNumber::createFraction(-87408, -9802);
+    AlbaNumber const number6 = +AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(0, number1.getInteger());
@@ -475,22 +475,22 @@ TEST(AlbaNumberTest, UnaryPlusWorksOnDifferentTypes) {
     EXPECT_EQ(AlbaNumber::Type::Double, number4.getType());
     EXPECT_DOUBLE_EQ(4564.38794, number4.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number5.getType());
-    AlbaNumber::FractionData fractionData(number5.getFractionData());
+    AlbaNumber::FractionData const fractionData(number5.getFractionData());
     EXPECT_EQ(43704, fractionData.numerator);
     EXPECT_EQ(4901U, fractionData.denominator);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number6.getType());
-    AlbaNumber::ComplexNumberData complexNumberData(number6.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData(number6.getComplexNumberData());
     EXPECT_FLOAT_EQ(-4.5, complexNumberData.realPart);
     EXPECT_FLOAT_EQ(-3.5, complexNumberData.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, UnaryMinusWorksOnDifferentTypes) {
-    AlbaNumber number1 = -AlbaNumber();
-    AlbaNumber number2 = -AlbaNumber(-81237);
-    AlbaNumber number3 = -AlbaNumber(34095093U);
-    AlbaNumber number4 = -AlbaNumber(4564.38794);
-    AlbaNumber number5 = -AlbaNumber::createFraction(-87408, -9802);
-    AlbaNumber number6 = -AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number1 = -AlbaNumber();
+    AlbaNumber const number2 = -AlbaNumber(-81237);
+    AlbaNumber const number3 = -AlbaNumber(34095093U);
+    AlbaNumber const number4 = -AlbaNumber(4564.38794);
+    AlbaNumber const number5 = -AlbaNumber::createFraction(-87408, -9802);
+    AlbaNumber const number6 = -AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(0, number1.getInteger());
@@ -501,23 +501,23 @@ TEST(AlbaNumberTest, UnaryMinusWorksOnDifferentTypes) {
     EXPECT_EQ(AlbaNumber::Type::Double, number4.getType());
     EXPECT_DOUBLE_EQ(-4564.38794, number4.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number5.getType());
-    AlbaNumber::FractionData fractionData(number5.getFractionData());
+    AlbaNumber::FractionData const fractionData(number5.getFractionData());
     EXPECT_EQ(-43704, fractionData.numerator);
     EXPECT_EQ(4901U, fractionData.denominator);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number6.getType());
-    AlbaNumber::ComplexNumberData complexNumberData(number6.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData(number6.getComplexNumberData());
     EXPECT_FLOAT_EQ(4.5, complexNumberData.realPart);
     EXPECT_FLOAT_EQ(3.5, complexNumberData.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromInteger) {
-    AlbaNumber number1 = AlbaNumber() + AlbaNumber();
-    AlbaNumber number2 = AlbaNumber(100) + 10;
-    AlbaNumber number3 = AlbaNumber(100) + 23.24897;
-    AlbaNumber number4 = AlbaNumber(1234567891) + AlbaNumber(1234567891);
-    AlbaNumber number5 = AlbaNumber(9223372036854775807LL) + AlbaNumber(9223372036854775807LL);
-    AlbaNumber number6 = AlbaNumber(100) + AlbaNumber::createFraction(10, 3);
-    AlbaNumber number7 = AlbaNumber(100) + AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number1 = AlbaNumber() + AlbaNumber();
+    AlbaNumber const number2 = AlbaNumber(100) + 10;
+    AlbaNumber const number3 = AlbaNumber(100) + 23.24897;
+    AlbaNumber const number4 = AlbaNumber(1234567891) + AlbaNumber(1234567891);
+    AlbaNumber const number5 = AlbaNumber(9223372036854775807LL) + AlbaNumber(9223372036854775807LL);
+    AlbaNumber const number6 = AlbaNumber(100) + AlbaNumber::createFraction(10, 3);
+    AlbaNumber const number7 = AlbaNumber(100) + AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(0, number1.getInteger());
@@ -530,22 +530,22 @@ TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromInteger) {
     EXPECT_EQ(AlbaNumber::Type::Double, number5.getType());
     EXPECT_DOUBLE_EQ(1.8446744073709552e+019, number5.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number6.getType());
-    AlbaNumber::FractionData fractionData(number6.getFractionData());
+    AlbaNumber::FractionData const fractionData(number6.getFractionData());
     EXPECT_EQ(310, fractionData.numerator);
     EXPECT_EQ(3U, fractionData.denominator);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number7.getType());
-    AlbaNumber::ComplexNumberData complexNumberData(number7.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData(number7.getComplexNumberData());
     EXPECT_FLOAT_EQ(95.5, complexNumberData.realPart);
     EXPECT_FLOAT_EQ(-3.5, complexNumberData.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromDouble) {
-    AlbaNumber number1 = AlbaNumber(0.1) + AlbaNumber(0);
-    AlbaNumber number2 = AlbaNumber(10.5) + 5;
-    AlbaNumber number3 = AlbaNumber(10.5) + 23.24897;
-    AlbaNumber number4 = AlbaNumber(1234567891.1) + AlbaNumber(1234567891);
-    AlbaNumber number5 = AlbaNumber(10.5) + AlbaNumber::createFraction(10, 7);
-    AlbaNumber number6 = AlbaNumber(10.5) + AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number1 = AlbaNumber(0.1) + AlbaNumber(0);
+    AlbaNumber const number2 = AlbaNumber(10.5) + 5;
+    AlbaNumber const number3 = AlbaNumber(10.5) + 23.24897;
+    AlbaNumber const number4 = AlbaNumber(1234567891.1) + AlbaNumber(1234567891);
+    AlbaNumber const number5 = AlbaNumber(10.5) + AlbaNumber::createFraction(10, 7);
+    AlbaNumber const number6 = AlbaNumber(10.5) + AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::Double, number1.getType());
     EXPECT_DOUBLE_EQ(0.1, number1.getDouble());
@@ -558,31 +558,31 @@ TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromDouble) {
     EXPECT_EQ(AlbaNumber::Type::Double, number5.getType());
     EXPECT_DOUBLE_EQ(11.928571428571429, number5.getDouble());
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number6.getType());
-    AlbaNumber::ComplexNumberData complexNumberData(number6.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData(number6.getComplexNumberData());
     EXPECT_FLOAT_EQ(6.0, complexNumberData.realPart);
     EXPECT_FLOAT_EQ(-3.5, complexNumberData.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromFraction) {
-    AlbaNumber number1 = AlbaNumber::createFraction(0, 1) + AlbaNumber::createFraction(0, 1);
-    AlbaNumber number2 = AlbaNumber::createFraction(100, 6) + 5;
-    AlbaNumber number3 = AlbaNumber::createFraction(100, 6) + AlbaNumber::createFraction(10, 7);
-    AlbaNumber number4 = AlbaNumber::createFraction(100, 6) + AlbaNumber::createFraction(10, 3);
-    AlbaNumber number5 = AlbaNumber::createFraction(100, 6) + 23.24897;
-    AlbaNumber number6 = AlbaNumber::createFraction(1234567890, 1234567891) + AlbaNumber(1234567891);
-    AlbaNumber number7 = AlbaNumber(1234567891) + AlbaNumber::createFraction(1234567890, 1234567891);
-    AlbaNumber number8 =
+    AlbaNumber const number1 = AlbaNumber::createFraction(0, 1) + AlbaNumber::createFraction(0, 1);
+    AlbaNumber const number2 = AlbaNumber::createFraction(100, 6) + 5;
+    AlbaNumber const number3 = AlbaNumber::createFraction(100, 6) + AlbaNumber::createFraction(10, 7);
+    AlbaNumber const number4 = AlbaNumber::createFraction(100, 6) + AlbaNumber::createFraction(10, 3);
+    AlbaNumber const number5 = AlbaNumber::createFraction(100, 6) + 23.24897;
+    AlbaNumber const number6 = AlbaNumber::createFraction(1234567890, 1234567891) + AlbaNumber(1234567891);
+    AlbaNumber const number7 = AlbaNumber(1234567891) + AlbaNumber::createFraction(1234567890, 1234567891);
+    AlbaNumber const number8 =
         AlbaNumber::createFraction(1234567890, 1234567891) + AlbaNumber::createFraction(1234567890, 1234567893);
-    AlbaNumber number9 = AlbaNumber::createFraction(23, 4) + AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number9 = AlbaNumber::createFraction(23, 4) + AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(0, number1.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
-    AlbaNumber::FractionData fractionData2(number2.getFractionData());
+    AlbaNumber::FractionData const fractionData2(number2.getFractionData());
     EXPECT_EQ(65, fractionData2.numerator);
     EXPECT_EQ(3U, fractionData2.denominator);
     EXPECT_EQ(AlbaNumber::Type::Fraction, number3.getType());
-    AlbaNumber::FractionData fractionData3(number3.getFractionData());
+    AlbaNumber::FractionData const fractionData3(number3.getFractionData());
     EXPECT_EQ(380, fractionData3.numerator);
     EXPECT_EQ(21U, fractionData3.denominator);
     EXPECT_EQ(AlbaNumber::Type::Integer, number4.getType());
@@ -596,43 +596,43 @@ TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromFraction) {
     EXPECT_EQ(AlbaNumber::Type::Double, number8.getType());
     EXPECT_DOUBLE_EQ(1.9999999967600002, number8.getDouble());
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number9.getType());
-    AlbaNumber::ComplexNumberData complexNumberData(number9.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData(number9.getComplexNumberData());
     EXPECT_FLOAT_EQ(1.25, complexNumberData.realPart);
     EXPECT_FLOAT_EQ(-3.5, complexNumberData.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromComplexNumber) {
-    AlbaNumber number1 = AlbaNumber::createComplexNumber(8.5, 9.5) + 5;
-    AlbaNumber number2 = AlbaNumber::createComplexNumber(8.5, 9.5) + 23.24897;
-    AlbaNumber number3 = AlbaNumber::createComplexNumber(8.5, 9.5) + AlbaNumber::createFraction(63, 4);
-    AlbaNumber number4 = AlbaNumber::createComplexNumber(8.5, 9.5) + AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number1 = AlbaNumber::createComplexNumber(8.5, 9.5) + 5;
+    AlbaNumber const number2 = AlbaNumber::createComplexNumber(8.5, 9.5) + 23.24897;
+    AlbaNumber const number3 = AlbaNumber::createComplexNumber(8.5, 9.5) + AlbaNumber::createFraction(63, 4);
+    AlbaNumber const number4 = AlbaNumber::createComplexNumber(8.5, 9.5) + AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number1.getType());
-    AlbaNumber::ComplexNumberData complexNumberData1(number1.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData1(number1.getComplexNumberData());
     EXPECT_FLOAT_EQ(13.5, complexNumberData1.realPart);
     EXPECT_FLOAT_EQ(9.5, complexNumberData1.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number2.getType());
-    AlbaNumber::ComplexNumberData complexNumberData2(number2.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData2(number2.getComplexNumberData());
     EXPECT_FLOAT_EQ(31.74897, complexNumberData2.realPart);
     EXPECT_FLOAT_EQ(9.5, complexNumberData2.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number3.getType());
-    AlbaNumber::ComplexNumberData complexNumberData3(number3.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData3(number3.getComplexNumberData());
     EXPECT_FLOAT_EQ(24.25, complexNumberData3.realPart);
     EXPECT_FLOAT_EQ(9.5, complexNumberData3.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number4.getType());
-    AlbaNumber::ComplexNumberData complexNumberData4(number4.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData4(number4.getComplexNumberData());
     EXPECT_FLOAT_EQ(4, complexNumberData4.realPart);
     EXPECT_FLOAT_EQ(6, complexNumberData4.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromInteger) {
-    AlbaNumber number1 = AlbaNumber() - AlbaNumber();
-    AlbaNumber number2 = AlbaNumber(100) - 10;
-    AlbaNumber number3 = AlbaNumber(100) - 23.24897;
-    AlbaNumber number4 = AlbaNumber(1234567891) - AlbaNumber(1234567891);
-    AlbaNumber number5 = AlbaNumber(9223372036854775807LL) - AlbaNumber(9223372036854775807LL);
-    AlbaNumber number6 = AlbaNumber(100) - AlbaNumber::createFraction(10, 3);
-    AlbaNumber number7 = AlbaNumber(100) - AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number1 = AlbaNumber() - AlbaNumber();
+    AlbaNumber const number2 = AlbaNumber(100) - 10;
+    AlbaNumber const number3 = AlbaNumber(100) - 23.24897;
+    AlbaNumber const number4 = AlbaNumber(1234567891) - AlbaNumber(1234567891);
+    AlbaNumber const number5 = AlbaNumber(9223372036854775807LL) - AlbaNumber(9223372036854775807LL);
+    AlbaNumber const number6 = AlbaNumber(100) - AlbaNumber::createFraction(10, 3);
+    AlbaNumber const number7 = AlbaNumber(100) - AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(0, number1.getInteger());
@@ -645,22 +645,22 @@ TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromInteger) {
     EXPECT_EQ(AlbaNumber::Type::Integer, number5.getType());
     EXPECT_EQ(0, number5.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number6.getType());
-    AlbaNumber::FractionData fractionData(number6.getFractionData());
+    AlbaNumber::FractionData const fractionData(number6.getFractionData());
     EXPECT_EQ(290, fractionData.numerator);
     EXPECT_EQ(3U, fractionData.denominator);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number7.getType());
-    AlbaNumber::ComplexNumberData complexNumberData(number7.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData(number7.getComplexNumberData());
     EXPECT_FLOAT_EQ(104.5, complexNumberData.realPart);
     EXPECT_FLOAT_EQ(3.5, complexNumberData.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromDouble) {
-    AlbaNumber number1 = AlbaNumber(0.1) - AlbaNumber(0);
-    AlbaNumber number2 = AlbaNumber(10.5) - 5;
-    AlbaNumber number3 = AlbaNumber(10.5) - 23.24897;
-    AlbaNumber number4 = AlbaNumber(1234567891.1) - AlbaNumber(1234567891);
-    AlbaNumber number5 = AlbaNumber(10.5) - AlbaNumber::createFraction(10, 7);
-    AlbaNumber number6 = AlbaNumber(10.5) - AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number1 = AlbaNumber(0.1) - AlbaNumber(0);
+    AlbaNumber const number2 = AlbaNumber(10.5) - 5;
+    AlbaNumber const number3 = AlbaNumber(10.5) - 23.24897;
+    AlbaNumber const number4 = AlbaNumber(1234567891.1) - AlbaNumber(1234567891);
+    AlbaNumber const number5 = AlbaNumber(10.5) - AlbaNumber::createFraction(10, 7);
+    AlbaNumber const number6 = AlbaNumber(10.5) - AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::Double, number1.getType());
     EXPECT_DOUBLE_EQ(0.1, number1.getDouble());
@@ -673,36 +673,36 @@ TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromDouble) {
     EXPECT_EQ(AlbaNumber::Type::Double, number5.getType());
     EXPECT_DOUBLE_EQ(9.0714285714285712, number5.getDouble());
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number6.getType());
-    AlbaNumber::ComplexNumberData complexNumberData(number6.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData(number6.getComplexNumberData());
     EXPECT_FLOAT_EQ(15.0, complexNumberData.realPart);
     EXPECT_FLOAT_EQ(3.5, complexNumberData.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromFraction) {
-    AlbaNumber number1 = AlbaNumber::createFraction(0, 1) - AlbaNumber::createFraction(0, 1);
-    AlbaNumber number2 = AlbaNumber::createFraction(100, 6) - 5;
-    AlbaNumber number3 = AlbaNumber::createFraction(100, 6) - AlbaNumber::createFraction(10, 7);
-    AlbaNumber number4 = AlbaNumber::createFraction(100, 6) - AlbaNumber::createFraction(10, 3);
-    AlbaNumber number5 = AlbaNumber::createFraction(100, 6) - 23.24897;
-    AlbaNumber number6 = AlbaNumber::createFraction(1234567890, 1234567891) - AlbaNumber(1234567891);
-    AlbaNumber number7 = AlbaNumber(1234567891) - AlbaNumber::createFraction(1234567890, 1234567891);
-    AlbaNumber number8 =
+    AlbaNumber const number1 = AlbaNumber::createFraction(0, 1) - AlbaNumber::createFraction(0, 1);
+    AlbaNumber const number2 = AlbaNumber::createFraction(100, 6) - 5;
+    AlbaNumber const number3 = AlbaNumber::createFraction(100, 6) - AlbaNumber::createFraction(10, 7);
+    AlbaNumber const number4 = AlbaNumber::createFraction(100, 6) - AlbaNumber::createFraction(10, 3);
+    AlbaNumber const number5 = AlbaNumber::createFraction(100, 6) - 23.24897;
+    AlbaNumber const number6 = AlbaNumber::createFraction(1234567890, 1234567891) - AlbaNumber(1234567891);
+    AlbaNumber const number7 = AlbaNumber(1234567891) - AlbaNumber::createFraction(1234567890, 1234567891);
+    AlbaNumber const number8 =
         AlbaNumber::createFraction(1234567890, 1234567891) - AlbaNumber::createFraction(1234567890, 1234567893);
-    AlbaNumber number9 = AlbaNumber::createFraction(169, 65536) - AlbaNumber::createFraction(1, 262144);
-    AlbaNumber number10 = AlbaNumber::createFraction(23, 4) - AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number9 = AlbaNumber::createFraction(169, 65536) - AlbaNumber::createFraction(1, 262144);
+    AlbaNumber const number10 = AlbaNumber::createFraction(23, 4) - AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(0, number1.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
-    AlbaNumber::FractionData fractionData2(number2.getFractionData());
+    AlbaNumber::FractionData const fractionData2(number2.getFractionData());
     EXPECT_EQ(35, fractionData2.numerator);
     EXPECT_EQ(3U, fractionData2.denominator);
     EXPECT_EQ(AlbaNumber::Type::Fraction, number3.getType());
-    AlbaNumber::FractionData fractionData3(number3.getFractionData());
+    AlbaNumber::FractionData const fractionData3(number3.getFractionData());
     EXPECT_EQ(320, fractionData3.numerator);
     EXPECT_EQ(21U, fractionData3.denominator);
     EXPECT_EQ(AlbaNumber::Type::Fraction, number4.getType());
-    AlbaNumber::FractionData fractionData4(number4.getFractionData());
+    AlbaNumber::FractionData const fractionData4(number4.getFractionData());
     EXPECT_EQ(40, fractionData4.numerator);
     EXPECT_EQ(3U, fractionData4.denominator);
     EXPECT_EQ(AlbaNumber::Type::Double, number5.getType());
@@ -714,47 +714,47 @@ TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromFraction) {
     EXPECT_EQ(AlbaNumber::Type::Double, number8.getType());
     EXPECT_DOUBLE_EQ(1.6199998819472964e-009, number8.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number9.getType());
-    AlbaNumber::FractionData fractionData9(number9.getFractionData());
+    AlbaNumber::FractionData const fractionData9(number9.getFractionData());
     EXPECT_EQ(675, fractionData9.numerator);
     EXPECT_EQ(262144U, fractionData9.denominator);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number10.getType());
-    AlbaNumber::ComplexNumberData complexNumberData(number10.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData(number10.getComplexNumberData());
     EXPECT_FLOAT_EQ(10.25, complexNumberData.realPart);
     EXPECT_FLOAT_EQ(3.5, complexNumberData.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromComplexNumber) {
-    AlbaNumber number1 = AlbaNumber::createComplexNumber(8.5, 9.5) - 5;
-    AlbaNumber number2 = AlbaNumber::createComplexNumber(8.5, 9.5) - 23.24897;
-    AlbaNumber number3 = AlbaNumber::createComplexNumber(8.5, 9.5) - AlbaNumber::createFraction(63, 4);
-    AlbaNumber number4 = AlbaNumber::createComplexNumber(8.5, 9.5) - AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number1 = AlbaNumber::createComplexNumber(8.5, 9.5) - 5;
+    AlbaNumber const number2 = AlbaNumber::createComplexNumber(8.5, 9.5) - 23.24897;
+    AlbaNumber const number3 = AlbaNumber::createComplexNumber(8.5, 9.5) - AlbaNumber::createFraction(63, 4);
+    AlbaNumber const number4 = AlbaNumber::createComplexNumber(8.5, 9.5) - AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number1.getType());
-    AlbaNumber::ComplexNumberData complexNumberData1(number1.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData1(number1.getComplexNumberData());
     EXPECT_FLOAT_EQ(3.5, complexNumberData1.realPart);
     EXPECT_FLOAT_EQ(9.5, complexNumberData1.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number2.getType());
-    AlbaNumber::ComplexNumberData complexNumberData2(number2.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData2(number2.getComplexNumberData());
     EXPECT_FLOAT_EQ(-14.74897, complexNumberData2.realPart);
     EXPECT_FLOAT_EQ(9.5, complexNumberData2.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number3.getType());
-    AlbaNumber::ComplexNumberData complexNumberData3(number3.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData3(number3.getComplexNumberData());
     EXPECT_FLOAT_EQ(-7.25, complexNumberData3.realPart);
     EXPECT_FLOAT_EQ(9.5, complexNumberData3.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number4.getType());
-    AlbaNumber::ComplexNumberData complexNumberData4(number4.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData4(number4.getComplexNumberData());
     EXPECT_FLOAT_EQ(13, complexNumberData4.realPart);
     EXPECT_FLOAT_EQ(13, complexNumberData4.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromInteger) {
-    AlbaNumber number1 = AlbaNumber() * AlbaNumber();
-    AlbaNumber number2 = AlbaNumber(100) * 10;
-    AlbaNumber number3 = AlbaNumber(100) * 23.24897;
-    AlbaNumber number4 = AlbaNumber(1234567891) * AlbaNumber(1234567891);
-    AlbaNumber number5 = AlbaNumber(9223372036854775807LL) * AlbaNumber(9223372036854775807LL);
-    AlbaNumber number6 = AlbaNumber(100) * AlbaNumber::createFraction(10, 3);
-    AlbaNumber number7 = AlbaNumber(100) * AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number1 = AlbaNumber() * AlbaNumber();
+    AlbaNumber const number2 = AlbaNumber(100) * 10;
+    AlbaNumber const number3 = AlbaNumber(100) * 23.24897;
+    AlbaNumber const number4 = AlbaNumber(1234567891) * AlbaNumber(1234567891);
+    AlbaNumber const number5 = AlbaNumber(9223372036854775807LL) * AlbaNumber(9223372036854775807LL);
+    AlbaNumber const number6 = AlbaNumber(100) * AlbaNumber::createFraction(10, 3);
+    AlbaNumber const number7 = AlbaNumber(100) * AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(0, number1.getInteger());
@@ -767,23 +767,23 @@ TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromInteger) {
     EXPECT_EQ(AlbaNumber::Type::Double, number5.getType());
     EXPECT_DOUBLE_EQ(8.5070591730234616e+037, number5.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number6.getType());
-    AlbaNumber::FractionData fractionData(number6.getFractionData());
+    AlbaNumber::FractionData const fractionData(number6.getFractionData());
     EXPECT_EQ(1000, fractionData.numerator);
     EXPECT_EQ(3U, fractionData.denominator);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number7.getType());
-    AlbaNumber::ComplexNumberData complexNumberData(number7.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData(number7.getComplexNumberData());
     EXPECT_FLOAT_EQ(-450, complexNumberData.realPart);
     EXPECT_FLOAT_EQ(-350, complexNumberData.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromDouble) {
-    AlbaNumber number1 = AlbaNumber(0.1) * AlbaNumber(0);
-    AlbaNumber number2 = AlbaNumber(10.5) * 5;
-    AlbaNumber number3 = AlbaNumber(10.5) * AlbaNumber::createFraction(10, 7);
-    AlbaNumber number4 = AlbaNumber(10.5) * 23.24897;
-    AlbaNumber number5 = AlbaNumber(1234567891.1) * AlbaNumber(1234567891);
-    AlbaNumber number6 = AlbaNumber(-5878) * AlbaNumber(16769025);
-    AlbaNumber number7 = AlbaNumber(10.5) * AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number1 = AlbaNumber(0.1) * AlbaNumber(0);
+    AlbaNumber const number2 = AlbaNumber(10.5) * 5;
+    AlbaNumber const number3 = AlbaNumber(10.5) * AlbaNumber::createFraction(10, 7);
+    AlbaNumber const number4 = AlbaNumber(10.5) * 23.24897;
+    AlbaNumber const number5 = AlbaNumber(1234567891.1) * AlbaNumber(1234567891);
+    AlbaNumber const number6 = AlbaNumber(-5878) * AlbaNumber(16769025);
+    AlbaNumber const number7 = AlbaNumber(10.5) * AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(0, number1.getInteger());
@@ -798,36 +798,36 @@ TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromDouble) {
     EXPECT_EQ(AlbaNumber::Type::Integer, number6.getType());
     EXPECT_EQ(-98568328950, number6.getInteger());
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number7.getType());
-    AlbaNumber::ComplexNumberData complexNumberData(number7.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData(number7.getComplexNumberData());
     EXPECT_FLOAT_EQ(-47.25, complexNumberData.realPart);
     EXPECT_FLOAT_EQ(-36.75, complexNumberData.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromFraction) {
-    AlbaNumber number1 = AlbaNumber::createFraction(0, 1) * AlbaNumber::createFraction(0, 1);
-    AlbaNumber number2 = AlbaNumber::createFraction(100, 6) * 5;
-    AlbaNumber number3 = AlbaNumber::createFraction(100, 6) * AlbaNumber::createFraction(10, 7);
-    AlbaNumber number4 = AlbaNumber::createFraction(100, 6) * 23.24897;
-    AlbaNumber number5 = AlbaNumber::createFraction(-2005875, -79507) * AlbaNumber::createFraction(-688, -27);
-    AlbaNumber number6 = AlbaNumber::createFraction(1234567890, 1234567891) * AlbaNumber(1234567891);
-    AlbaNumber number7 = AlbaNumber(1234567891) * AlbaNumber::createFraction(1234567890, 1234567891);
-    AlbaNumber number8 =
+    AlbaNumber const number1 = AlbaNumber::createFraction(0, 1) * AlbaNumber::createFraction(0, 1);
+    AlbaNumber const number2 = AlbaNumber::createFraction(100, 6) * 5;
+    AlbaNumber const number3 = AlbaNumber::createFraction(100, 6) * AlbaNumber::createFraction(10, 7);
+    AlbaNumber const number4 = AlbaNumber::createFraction(100, 6) * 23.24897;
+    AlbaNumber const number5 = AlbaNumber::createFraction(-2005875, -79507) * AlbaNumber::createFraction(-688, -27);
+    AlbaNumber const number6 = AlbaNumber::createFraction(1234567890, 1234567891) * AlbaNumber(1234567891);
+    AlbaNumber const number7 = AlbaNumber(1234567891) * AlbaNumber::createFraction(1234567890, 1234567891);
+    AlbaNumber const number8 =
         AlbaNumber::createFraction(1234567890, 1234567891) * AlbaNumber::createFraction(1234567890, 1234567893);
-    AlbaNumber number9 = AlbaNumber::createFraction(23, 4) * AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number9 = AlbaNumber::createFraction(23, 4) * AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(0, number1.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
-    AlbaNumber::FractionData fractionData2(number2.getFractionData());
+    AlbaNumber::FractionData const fractionData2(number2.getFractionData());
     EXPECT_EQ(250, fractionData2.numerator);
     EXPECT_EQ(3U, fractionData2.denominator);
     EXPECT_EQ(AlbaNumber::Type::Fraction, number3.getType());
-    AlbaNumber::FractionData fractionData3(number3.getFractionData());
+    AlbaNumber::FractionData const fractionData3(number3.getFractionData());
     EXPECT_EQ(500, fractionData3.numerator);
     EXPECT_EQ(21U, fractionData3.denominator);
     EXPECT_EQ(AlbaNumber::Type::Double, number4.getType());
     EXPECT_DOUBLE_EQ(387.48283333333336, number4.getDouble());
-    AlbaNumber::FractionData fractionData5(number5.getFractionData());
+    AlbaNumber::FractionData const fractionData5(number5.getFractionData());
     EXPECT_EQ(3566000, fractionData5.numerator);
     EXPECT_EQ(5547U, fractionData5.denominator);
     EXPECT_EQ(AlbaNumber::Type::Integer, number6.getType());
@@ -837,44 +837,44 @@ TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromFraction) {
     EXPECT_EQ(AlbaNumber::Type::Double, number8.getType());
     EXPECT_DOUBLE_EQ(0.99999999676000006, number8.getDouble());
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number9.getType());
-    AlbaNumber::ComplexNumberData complexNumberData(number9.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData(number9.getComplexNumberData());
     EXPECT_FLOAT_EQ(-25.875, complexNumberData.realPart);
     EXPECT_FLOAT_EQ(-20.125, complexNumberData.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromComplexNumber) {
-    AlbaNumber number1 = AlbaNumber::createComplexNumber(8.5, 9.5) * 5;
-    AlbaNumber number2 = AlbaNumber::createComplexNumber(8.5, 9.5) * 23.24897;
-    AlbaNumber number3 = AlbaNumber::createComplexNumber(8.5, 9.5) * AlbaNumber::createFraction(63, 4);
-    AlbaNumber number4 = AlbaNumber::createComplexNumber(8.5, 9.5) * AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number1 = AlbaNumber::createComplexNumber(8.5, 9.5) * 5;
+    AlbaNumber const number2 = AlbaNumber::createComplexNumber(8.5, 9.5) * 23.24897;
+    AlbaNumber const number3 = AlbaNumber::createComplexNumber(8.5, 9.5) * AlbaNumber::createFraction(63, 4);
+    AlbaNumber const number4 = AlbaNumber::createComplexNumber(8.5, 9.5) * AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number1.getType());
-    AlbaNumber::ComplexNumberData complexNumberData1(number1.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData1(number1.getComplexNumberData());
     EXPECT_FLOAT_EQ(42.5, complexNumberData1.realPart);
     EXPECT_FLOAT_EQ(47.5, complexNumberData1.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number2.getType());
-    AlbaNumber::ComplexNumberData complexNumberData2(number2.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData2(number2.getComplexNumberData());
     EXPECT_FLOAT_EQ(197.61624, complexNumberData2.realPart);
     EXPECT_FLOAT_EQ(220.86522, complexNumberData2.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number3.getType());
-    AlbaNumber::ComplexNumberData complexNumberData3(number3.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData3(number3.getComplexNumberData());
     EXPECT_FLOAT_EQ(133.875, complexNumberData3.realPart);
     EXPECT_FLOAT_EQ(149.625, complexNumberData3.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number4.getType());
-    AlbaNumber::ComplexNumberData complexNumberData4(number4.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData4(number4.getComplexNumberData());
     EXPECT_FLOAT_EQ(-5, complexNumberData4.realPart);
     EXPECT_FLOAT_EQ(-72.5, complexNumberData4.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromInteger) {
-    AlbaNumber number1 = AlbaNumber() / AlbaNumber(1);
-    AlbaNumber number2 = AlbaNumber(100) / 10;
-    AlbaNumber number3 = AlbaNumber(100) / 23.24897;
-    AlbaNumber number4 = AlbaNumber(1234567893) / AlbaNumber(1234567891);
-    AlbaNumber number5 = AlbaNumber(-40) / AlbaNumber(800);
-    AlbaNumber number6 = AlbaNumber(9223372036854775807LL) / AlbaNumber(9223372036854775807LL);
-    AlbaNumber number7 = AlbaNumber(100) / AlbaNumber::createFraction(11, 3);
-    AlbaNumber number8 = AlbaNumber(100) / AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number1 = AlbaNumber() / AlbaNumber(1);
+    AlbaNumber const number2 = AlbaNumber(100) / 10;
+    AlbaNumber const number3 = AlbaNumber(100) / 23.24897;
+    AlbaNumber const number4 = AlbaNumber(1234567893) / AlbaNumber(1234567891);
+    AlbaNumber const number5 = AlbaNumber(-40) / AlbaNumber(800);
+    AlbaNumber const number6 = AlbaNumber(9223372036854775807LL) / AlbaNumber(9223372036854775807LL);
+    AlbaNumber const number7 = AlbaNumber(100) / AlbaNumber::createFraction(11, 3);
+    AlbaNumber const number8 = AlbaNumber(100) / AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(0, number1.getInteger());
@@ -883,31 +883,31 @@ TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromInteger) {
     EXPECT_EQ(AlbaNumber::Type::Double, number3.getType());
     EXPECT_DOUBLE_EQ(4.3012658195180258, number3.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number4.getType());
-    AlbaNumber::FractionData fractionData1(number4.getFractionData());
+    AlbaNumber::FractionData const fractionData1(number4.getFractionData());
     EXPECT_EQ(1234567893, fractionData1.numerator);
     EXPECT_EQ(1234567891U, fractionData1.denominator);
-    AlbaNumber::FractionData fractionData2(number5.getFractionData());
+    AlbaNumber::FractionData const fractionData2(number5.getFractionData());
     EXPECT_EQ(-1, fractionData2.numerator);
     EXPECT_EQ(20U, fractionData2.denominator);
     EXPECT_EQ(AlbaNumber::Type::Integer, number6.getType());
     EXPECT_EQ(1, number6.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number7.getType());
-    AlbaNumber::FractionData fractionData(number7.getFractionData());
+    AlbaNumber::FractionData const fractionData(number7.getFractionData());
     EXPECT_EQ(300, fractionData.numerator);
     EXPECT_EQ(11U, fractionData.denominator);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number8.getType());
-    AlbaNumber::ComplexNumberData complexNumberData(number8.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData(number8.getComplexNumberData());
     EXPECT_FLOAT_EQ(-13.846154, complexNumberData.realPart);
     EXPECT_FLOAT_EQ(10.769231, complexNumberData.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromDouble) {
-    AlbaNumber number1 = AlbaNumber(0.1) / AlbaNumber(1);
-    AlbaNumber number2 = AlbaNumber(10.5) / 5;
-    AlbaNumber number3 = AlbaNumber(10.5) / 23.24897;
-    AlbaNumber number4 = AlbaNumber(1234567891.1) / AlbaNumber(1234567891);
-    AlbaNumber number5 = AlbaNumber(10.5) / AlbaNumber::createFraction(10, 7);
-    AlbaNumber number6 = AlbaNumber(10.5) / AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number1 = AlbaNumber(0.1) / AlbaNumber(1);
+    AlbaNumber const number2 = AlbaNumber(10.5) / 5;
+    AlbaNumber const number3 = AlbaNumber(10.5) / 23.24897;
+    AlbaNumber const number4 = AlbaNumber(1234567891.1) / AlbaNumber(1234567891);
+    AlbaNumber const number5 = AlbaNumber(10.5) / AlbaNumber::createFraction(10, 7);
+    AlbaNumber const number6 = AlbaNumber(10.5) / AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::Double, number1.getType());
     EXPECT_DOUBLE_EQ(0.10000000000000001, number1.getDouble());
@@ -920,39 +920,40 @@ TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromDouble) {
     EXPECT_EQ(AlbaNumber::Type::Double, number5.getType());
     EXPECT_DOUBLE_EQ(7.3499999999999996, number5.getDouble());
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number6.getType());
-    AlbaNumber::ComplexNumberData complexNumberData(number6.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData(number6.getComplexNumberData());
     EXPECT_FLOAT_EQ(-1.4538461, complexNumberData.realPart);
     EXPECT_FLOAT_EQ(1.1307693, complexNumberData.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromFraction) {
-    AlbaNumber number1 = AlbaNumber::createFraction(0, 1) / AlbaNumber::createFraction(1, 1);
-    AlbaNumber number2 = AlbaNumber::createFraction(100, 6) / 5;
-    AlbaNumber number3 = AlbaNumber::createFraction(100, 6) / AlbaNumber::createFraction(10, 7);
-    AlbaNumber number4 = AlbaNumber::createFraction(100, 6) / 23.24897;
-    AlbaNumber number5 = AlbaNumber::createFraction(-946400, -2146689) / AlbaNumber::createFraction(-3566000, -5547);
-    AlbaNumber number6 = AlbaNumber::createFraction(1234567890, 1234567891) / AlbaNumber(1234567891);
-    AlbaNumber number7 = AlbaNumber(1234567891) / AlbaNumber::createFraction(1234567890, 1234567893);
-    AlbaNumber number8 =
+    AlbaNumber const number1 = AlbaNumber::createFraction(0, 1) / AlbaNumber::createFraction(1, 1);
+    AlbaNumber const number2 = AlbaNumber::createFraction(100, 6) / 5;
+    AlbaNumber const number3 = AlbaNumber::createFraction(100, 6) / AlbaNumber::createFraction(10, 7);
+    AlbaNumber const number4 = AlbaNumber::createFraction(100, 6) / 23.24897;
+    AlbaNumber const number5 =
+        AlbaNumber::createFraction(-946400, -2146689) / AlbaNumber::createFraction(-3566000, -5547);
+    AlbaNumber const number6 = AlbaNumber::createFraction(1234567890, 1234567891) / AlbaNumber(1234567891);
+    AlbaNumber const number7 = AlbaNumber(1234567891) / AlbaNumber::createFraction(1234567890, 1234567893);
+    AlbaNumber const number8 =
         AlbaNumber::createFraction(1234567890, 1234567891) / AlbaNumber::createFraction(1234567890, 1234567893);
-    AlbaNumber number9 =
+    AlbaNumber const number9 =
         AlbaNumber::createFraction(2147483647, 4294967295U) / AlbaNumber::createFraction(2147483646, 4294967294U);
-    AlbaNumber number10 = AlbaNumber::createFraction(23, 4) / AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number10 = AlbaNumber::createFraction(23, 4) / AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(0, number1.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
-    AlbaNumber::FractionData fractionData2(number2.getFractionData());
+    AlbaNumber::FractionData const fractionData2(number2.getFractionData());
     EXPECT_EQ(10, fractionData2.numerator);
     EXPECT_EQ(3U, fractionData2.denominator);
     EXPECT_EQ(AlbaNumber::Type::Fraction, number3.getType());
-    AlbaNumber::FractionData fractionData3(number3.getFractionData());
+    AlbaNumber::FractionData const fractionData3(number3.getFractionData());
     EXPECT_EQ(35, fractionData3.numerator);
     EXPECT_EQ(3U, fractionData3.denominator);
     EXPECT_EQ(AlbaNumber::Type::Double, number4.getType());
     EXPECT_DOUBLE_EQ(0.71687763658633763, number4.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number5.getType());
-    AlbaNumber::FractionData fractionData5(number5.getFractionData());
+    AlbaNumber::FractionData const fractionData5(number5.getFractionData());
     EXPECT_EQ(2366, fractionData5.numerator);
     EXPECT_EQ(3450105U, fractionData5.denominator);
     EXPECT_EQ(AlbaNumber::Type::Double, number6.getType());
@@ -960,51 +961,51 @@ TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromFraction) {
     EXPECT_EQ(AlbaNumber::Type::Integer, number7.getType());
     EXPECT_DOUBLE_EQ(1234567894, number7.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number8.getType());
-    AlbaNumber::FractionData fractionData8(number8.getFractionData());
+    AlbaNumber::FractionData const fractionData8(number8.getFractionData());
     EXPECT_EQ(1234567893, fractionData8.numerator);
     EXPECT_EQ(1234567891U, fractionData8.denominator);
     EXPECT_EQ(AlbaNumber::Type::Double, number9.getType());
     EXPECT_DOUBLE_EQ(1.0000000002328306, number9.getDouble());
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number10.getType());
-    AlbaNumber::ComplexNumberData complexNumberData(number10.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData(number10.getComplexNumberData());
     EXPECT_FLOAT_EQ(-0.79615384, complexNumberData.realPart);
     EXPECT_FLOAT_EQ(0.61923075, complexNumberData.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromComplexNumber) {
-    AlbaNumber number1 = AlbaNumber::createComplexNumber(8.5, 9.5) / 5;
-    AlbaNumber number2 = AlbaNumber::createComplexNumber(8.5, 9.5) / 23.24897;
-    AlbaNumber number3 = AlbaNumber::createComplexNumber(8.5, 9.5) / AlbaNumber::createFraction(63, 4);
-    AlbaNumber number4 = AlbaNumber::createComplexNumber(8.5, 9.5) / AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number1 = AlbaNumber::createComplexNumber(8.5, 9.5) / 5;
+    AlbaNumber const number2 = AlbaNumber::createComplexNumber(8.5, 9.5) / 23.24897;
+    AlbaNumber const number3 = AlbaNumber::createComplexNumber(8.5, 9.5) / AlbaNumber::createFraction(63, 4);
+    AlbaNumber const number4 = AlbaNumber::createComplexNumber(8.5, 9.5) / AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number1.getType());
-    AlbaNumber::ComplexNumberData complexNumberData1(number1.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData1(number1.getComplexNumberData());
     EXPECT_FLOAT_EQ(1.7, complexNumberData1.realPart);
     EXPECT_FLOAT_EQ(1.9, complexNumberData1.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number2.getType());
-    AlbaNumber::ComplexNumberData complexNumberData2(number2.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData2(number2.getComplexNumberData());
     EXPECT_FLOAT_EQ(0.36560762, complexNumberData2.realPart);
     EXPECT_FLOAT_EQ(0.40862027, complexNumberData2.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number3.getType());
-    AlbaNumber::ComplexNumberData complexNumberData3(number3.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData3(number3.getComplexNumberData());
     EXPECT_FLOAT_EQ(0.53968257, complexNumberData3.realPart);
     EXPECT_FLOAT_EQ(0.60317463, complexNumberData3.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number4.getType());
-    AlbaNumber::ComplexNumberData complexNumberData4(number4.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData4(number4.getComplexNumberData());
     EXPECT_FLOAT_EQ(-2.2, complexNumberData4.realPart);
     EXPECT_FLOAT_EQ(-0.40000001, complexNumberData4.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromInteger) {
-    AlbaNumber number1 = AlbaNumber() ^ AlbaNumber(1);
-    AlbaNumber number2 = AlbaNumber(-10) ^ 5;
-    AlbaNumber number3 = AlbaNumber(10) ^ 2.324897;
-    AlbaNumber number4 = AlbaNumber(1234567891) ^ AlbaNumber(3);
-    AlbaNumber number5 = AlbaNumber(9223372036854775807LL) ^ AlbaNumber(5);
-    AlbaNumber number6 = AlbaNumber(-256) ^ AlbaNumber(-256);
-    AlbaNumber number7 = AlbaNumber(10) ^ AlbaNumber::createFraction(11, 3);
-    AlbaNumber number8 = AlbaNumber(10) ^ AlbaNumber::createComplexNumber(-4.5, -3.5);  // This is wrong
-    AlbaNumber number9 = AlbaNumber(-1) ^ ALBA_NUMBER_POSITIVE_INFINITY;
+    AlbaNumber const number1 = AlbaNumber() ^ AlbaNumber(1);
+    AlbaNumber const number2 = AlbaNumber(-10) ^ 5;
+    AlbaNumber const number3 = AlbaNumber(10) ^ 2.324897;
+    AlbaNumber const number4 = AlbaNumber(1234567891) ^ AlbaNumber(3);
+    AlbaNumber const number5 = AlbaNumber(9223372036854775807LL) ^ AlbaNumber(5);
+    AlbaNumber const number6 = AlbaNumber(-256) ^ AlbaNumber(-256);
+    AlbaNumber const number7 = AlbaNumber(10) ^ AlbaNumber::createFraction(11, 3);
+    AlbaNumber const number8 = AlbaNumber(10) ^ AlbaNumber::createComplexNumber(-4.5, -3.5);  // This is wrong
+    AlbaNumber const number9 = AlbaNumber(-1) ^ ALBA_NUMBER_POSITIVE_INFINITY;
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(0, number1.getInteger());
@@ -1027,15 +1028,15 @@ TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromInteger) {
 }
 
 TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromDouble) {
-    AlbaNumber number1 = AlbaNumber(0.1) ^ AlbaNumber(1);
-    AlbaNumber number2 = AlbaNumber(10.5) ^ 5;
-    AlbaNumber number3 = AlbaNumber(10.5) ^ 2.324897;
-    AlbaNumber number4 = AlbaNumber(1234567891.1) ^ AlbaNumber(3);
-    AlbaNumber number5 = AlbaNumber(256.000001) ^ AlbaNumber(256.000001);
-    AlbaNumber number6 = AlbaNumber(-256.000001) ^ AlbaNumber(-256.000001);
-    AlbaNumber number7 = AlbaNumber(10.5) ^ AlbaNumber::createFraction(10, 7);
-    AlbaNumber number8 = AlbaNumber(100.5) ^ AlbaNumber::createComplexNumber(-4.5, -3.5);
-    AlbaNumber number9 = AlbaNumber(-100.5) ^ ALBA_NUMBER_POSITIVE_INFINITY;
+    AlbaNumber const number1 = AlbaNumber(0.1) ^ AlbaNumber(1);
+    AlbaNumber const number2 = AlbaNumber(10.5) ^ 5;
+    AlbaNumber const number3 = AlbaNumber(10.5) ^ 2.324897;
+    AlbaNumber const number4 = AlbaNumber(1234567891.1) ^ AlbaNumber(3);
+    AlbaNumber const number5 = AlbaNumber(256.000001) ^ AlbaNumber(256.000001);
+    AlbaNumber const number6 = AlbaNumber(-256.000001) ^ AlbaNumber(-256.000001);
+    AlbaNumber const number7 = AlbaNumber(10.5) ^ AlbaNumber::createFraction(10, 7);
+    AlbaNumber const number8 = AlbaNumber(100.5) ^ AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number9 = AlbaNumber(-100.5) ^ ALBA_NUMBER_POSITIVE_INFINITY;
 
     EXPECT_EQ(AlbaNumber::Type::Double, number1.getType());
     EXPECT_DOUBLE_EQ(0.10000000000000001, number1.getDouble());
@@ -1058,22 +1059,22 @@ TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromDouble) {
 }
 
 TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromFraction) {
-    AlbaNumber number1 = AlbaNumber::createFraction(0, 1) ^ AlbaNumber::createFraction(1, 1);
-    AlbaNumber number2 = AlbaNumber::createFraction(10, 6) ^ 5;
-    AlbaNumber number3 = AlbaNumber::createFraction(10, 6) ^ AlbaNumber::createFraction(10, 7);
-    AlbaNumber number4 = AlbaNumber::createFraction(10, 6) ^ 2.324897;
-    AlbaNumber number5 = AlbaNumber::createFraction(12345, 12346) ^ AlbaNumber(1234);
-    AlbaNumber number6 = AlbaNumber::createFraction(1234567890, 1234567891) ^ AlbaNumber(3);
-    AlbaNumber number7 = AlbaNumber(1234567891) ^ AlbaNumber::createFraction(1234567890, 1234567891);
-    AlbaNumber number8 =
+    AlbaNumber const number1 = AlbaNumber::createFraction(0, 1) ^ AlbaNumber::createFraction(1, 1);
+    AlbaNumber const number2 = AlbaNumber::createFraction(10, 6) ^ 5;
+    AlbaNumber const number3 = AlbaNumber::createFraction(10, 6) ^ AlbaNumber::createFraction(10, 7);
+    AlbaNumber const number4 = AlbaNumber::createFraction(10, 6) ^ 2.324897;
+    AlbaNumber const number5 = AlbaNumber::createFraction(12345, 12346) ^ AlbaNumber(1234);
+    AlbaNumber const number6 = AlbaNumber::createFraction(1234567890, 1234567891) ^ AlbaNumber(3);
+    AlbaNumber const number7 = AlbaNumber(1234567891) ^ AlbaNumber::createFraction(1234567890, 1234567891);
+    AlbaNumber const number8 =
         AlbaNumber::createFraction(1234567890, 1234567891) ^ AlbaNumber::createFraction(1234567890, 1234567893);
-    AlbaNumber number9 = AlbaNumber::createFraction(23, 4) ^ AlbaNumber::createComplexNumber(-4.5, -3.5);
-    AlbaNumber number10 = AlbaNumber::createFraction(23, 4) ^ ALBA_NUMBER_POSITIVE_INFINITY;
+    AlbaNumber const number9 = AlbaNumber::createFraction(23, 4) ^ AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number10 = AlbaNumber::createFraction(23, 4) ^ ALBA_NUMBER_POSITIVE_INFINITY;
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(0, number1.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
-    AlbaNumber::FractionData fractionData2(number2.getFractionData());
+    AlbaNumber::FractionData const fractionData2(number2.getFractionData());
     EXPECT_EQ(3125, fractionData2.numerator);
     EXPECT_EQ(243U, fractionData2.denominator);
     EXPECT_EQ(AlbaNumber::Type::Double, number3.getType());
@@ -1095,26 +1096,26 @@ TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromFraction) {
 }
 
 TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromComplexNumber) {
-    AlbaNumber number1 = AlbaNumber::createComplexNumber(8.5, 9.5) ^ 5;
-    AlbaNumber number2 = AlbaNumber::createComplexNumber(8.5, 9.5) ^ 23.24897;
-    AlbaNumber number3 = AlbaNumber::createComplexNumber(8.5, 9.5) ^ AlbaNumber::createFraction(63, 4);
-    AlbaNumber number4 = AlbaNumber::createComplexNumber(8.5, 9.5) ^ AlbaNumber::createComplexNumber(-4.5, -3.5);
-    AlbaNumber number5 = AlbaNumber::createComplexNumber(8.5, 9.5) ^ ALBA_NUMBER_POSITIVE_INFINITY;
+    AlbaNumber const number1 = AlbaNumber::createComplexNumber(8.5, 9.5) ^ 5;
+    AlbaNumber const number2 = AlbaNumber::createComplexNumber(8.5, 9.5) ^ 23.24897;
+    AlbaNumber const number3 = AlbaNumber::createComplexNumber(8.5, 9.5) ^ AlbaNumber::createFraction(63, 4);
+    AlbaNumber const number4 = AlbaNumber::createComplexNumber(8.5, 9.5) ^ AlbaNumber::createComplexNumber(-4.5, -3.5);
+    AlbaNumber const number5 = AlbaNumber::createComplexNumber(8.5, 9.5) ^ ALBA_NUMBER_POSITIVE_INFINITY;
 
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number1.getType());
-    AlbaNumber::ComplexNumberData complexNumberData1(number1.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData1(number1.getComplexNumberData());
     EXPECT_FLOAT_EQ(-163712.14, complexNumberData1.realPart);
     EXPECT_FLOAT_EQ(-294122.41, complexNumberData1.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number2.getType());
-    AlbaNumber::ComplexNumberData complexNumberData2(number2.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData2(number2.getComplexNumberData());
     EXPECT_FLOAT_EQ(-5.0012564e+025, complexNumberData2.realPart);
     EXPECT_FLOAT_EQ(-3.3166986e+024, complexNumberData2.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number3.getType());
-    AlbaNumber::ComplexNumberData complexNumberData3(number3.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData3(number3.getComplexNumberData());
     EXPECT_FLOAT_EQ(-2.0044679e+017, complexNumberData3.realPart);
     EXPECT_FLOAT_EQ(-1.6134964e+017, complexNumberData3.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number4.getType());
-    AlbaNumber::ComplexNumberData complexNumberData4(number4.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData4(number4.getComplexNumberData());
     EXPECT_FLOAT_EQ(-4.9898603e-007, complexNumberData4.realPart);
     EXPECT_FLOAT_EQ(-3.3563614e-009, complexNumberData4.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::Double, number5.getType());
@@ -1216,7 +1217,7 @@ TEST(AlbaNumberTest, OperatorDivisionAssignmentWorks) {
     EXPECT_EQ(AlbaNumber::Type::Integer, number3.getType());
     EXPECT_EQ(1502, number3.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number4.getType());
-    AlbaNumber::FractionData fractionData(number4.getFractionData());
+    AlbaNumber::FractionData const fractionData(number4.getFractionData());
     EXPECT_EQ(2253, fractionData.numerator);
     EXPECT_EQ(5000U, fractionData.denominator);
     EXPECT_EQ(AlbaNumber::Type::Double, number5.getType());
@@ -1224,15 +1225,15 @@ TEST(AlbaNumberTest, OperatorDivisionAssignmentWorks) {
 }
 
 TEST(AlbaNumberTest, IsIntegerTypeWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(34095093U);
-    AlbaNumber number4(1000000000000000000LL);
-    AlbaNumber number5(4564.38794);
-    AlbaNumber number6(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number7(AlbaNumber::createFraction(-87408, -9802));
-    AlbaNumber number8(AlbaNumber::createFraction(-100, 10));
-    AlbaNumber number9(AlbaNumber::createComplexNumber(-4.5, 3.5));
+    AlbaNumber const number1;
+    AlbaNumber const number2(-81237);
+    AlbaNumber const number3(34095093U);
+    AlbaNumber const number4(1000000000000000000LL);
+    AlbaNumber const number5(4564.38794);
+    AlbaNumber const number6(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number7(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber const number8(AlbaNumber::createFraction(-100, 10));
+    AlbaNumber const number9(AlbaNumber::createComplexNumber(-4.5, 3.5));
 
     EXPECT_TRUE(number1.isIntegerType());
     EXPECT_TRUE(number2.isIntegerType());
@@ -1246,15 +1247,15 @@ TEST(AlbaNumberTest, IsIntegerTypeWorks) {
 }
 
 TEST(AlbaNumberTest, IsDoubleTypeWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(34095093U);
-    AlbaNumber number4(1000000000000000000LL);
-    AlbaNumber number5(4564.38794);
-    AlbaNumber number6(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number7(AlbaNumber::createFraction(-87408, -9802));
-    AlbaNumber number8(AlbaNumber::createFraction(-100, 10));
-    AlbaNumber number9(AlbaNumber::createComplexNumber(-4.5, 3.5));
+    AlbaNumber const number1;
+    AlbaNumber const number2(-81237);
+    AlbaNumber const number3(34095093U);
+    AlbaNumber const number4(1000000000000000000LL);
+    AlbaNumber const number5(4564.38794);
+    AlbaNumber const number6(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number7(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber const number8(AlbaNumber::createFraction(-100, 10));
+    AlbaNumber const number9(AlbaNumber::createComplexNumber(-4.5, 3.5));
 
     EXPECT_FALSE(number1.isDoubleType());
     EXPECT_FALSE(number2.isDoubleType());
@@ -1268,15 +1269,15 @@ TEST(AlbaNumberTest, IsDoubleTypeWorks) {
 }
 
 TEST(AlbaNumberTest, IsFractionTypeWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(34095093U);
-    AlbaNumber number4(1000000000000000000LL);
-    AlbaNumber number5(4564.38794);
-    AlbaNumber number6(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number7(AlbaNumber::createFraction(-87408, -9802));
-    AlbaNumber number8(AlbaNumber::createFraction(-100, 10));
-    AlbaNumber number9(AlbaNumber::createComplexNumber(-4.5, 3.5));
+    AlbaNumber const number1;
+    AlbaNumber const number2(-81237);
+    AlbaNumber const number3(34095093U);
+    AlbaNumber const number4(1000000000000000000LL);
+    AlbaNumber const number5(4564.38794);
+    AlbaNumber const number6(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number7(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber const number8(AlbaNumber::createFraction(-100, 10));
+    AlbaNumber const number9(AlbaNumber::createComplexNumber(-4.5, 3.5));
 
     EXPECT_FALSE(number1.isFractionType());
     EXPECT_FALSE(number2.isFractionType());
@@ -1290,15 +1291,15 @@ TEST(AlbaNumberTest, IsFractionTypeWorks) {
 }
 
 TEST(AlbaNumberTest, IsComplexNumberTypeWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(34095093U);
-    AlbaNumber number4(1000000000000000000LL);
-    AlbaNumber number5(4564.38794);
-    AlbaNumber number6(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number7(AlbaNumber::createFraction(-87408, -9802));
-    AlbaNumber number8(AlbaNumber::createFraction(-100, 10));
-    AlbaNumber number9(AlbaNumber::createComplexNumber(-4.5, 3.5));
+    AlbaNumber const number1;
+    AlbaNumber const number2(-81237);
+    AlbaNumber const number3(34095093U);
+    AlbaNumber const number4(1000000000000000000LL);
+    AlbaNumber const number5(4564.38794);
+    AlbaNumber const number6(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number7(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber const number8(AlbaNumber::createFraction(-100, 10));
+    AlbaNumber const number9(AlbaNumber::createComplexNumber(-4.5, 3.5));
 
     EXPECT_FALSE(number1.isComplexNumberType());
     EXPECT_FALSE(number2.isComplexNumberType());
@@ -1312,15 +1313,15 @@ TEST(AlbaNumberTest, IsComplexNumberTypeWorks) {
 }
 
 TEST(AlbaNumberTest, IsIntegerOrFractionTypeWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(34095093U);
-    AlbaNumber number4(1000000000000000000LL);
-    AlbaNumber number5(4564.38794);
-    AlbaNumber number6(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number7(AlbaNumber::createFraction(-87408, -9802));
-    AlbaNumber number8(AlbaNumber::createFraction(-100, 10));
-    AlbaNumber number9(AlbaNumber::createComplexNumber(-4.5, 3.5));
+    AlbaNumber const number1;
+    AlbaNumber const number2(-81237);
+    AlbaNumber const number3(34095093U);
+    AlbaNumber const number4(1000000000000000000LL);
+    AlbaNumber const number5(4564.38794);
+    AlbaNumber const number6(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number7(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber const number8(AlbaNumber::createFraction(-100, 10));
+    AlbaNumber const number9(AlbaNumber::createComplexNumber(-4.5, 3.5));
 
     EXPECT_TRUE(number1.isIntegerOrFractionType());
     EXPECT_TRUE(number2.isIntegerOrFractionType());
@@ -1334,19 +1335,19 @@ TEST(AlbaNumberTest, IsIntegerOrFractionTypeWorks) {
 }
 
 TEST(AlbaNumberTest, IsPositiveInfinityWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(34095093U);
-    AlbaNumber number4(1000000000000000000LL);
-    AlbaNumber number5(4564.38794);
-    AlbaNumber number6(AlbaNumber::createFraction(-87408, -9802));
-    AlbaNumber number7(AlbaNumber::createFraction(-100, 10));
-    AlbaNumber number8(AlbaNumber::createComplexNumber(-4.5, 3.5));
-    AlbaNumber number9(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number10(ALBA_NUMBER_NEGATIVE_INFINITY);
-    AlbaNumber number11(AlbaNumber::createFraction(100, 0));
-    AlbaNumber number12(AlbaNumber::createFraction(-100, 0));
-    AlbaNumber number13(ALBA_NUMBER_NOT_A_NUMBER);
+    AlbaNumber const number1;
+    AlbaNumber const number2(-81237);
+    AlbaNumber const number3(34095093U);
+    AlbaNumber const number4(1000000000000000000LL);
+    AlbaNumber const number5(4564.38794);
+    AlbaNumber const number6(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber const number7(AlbaNumber::createFraction(-100, 10));
+    AlbaNumber const number8(AlbaNumber::createComplexNumber(-4.5, 3.5));
+    AlbaNumber const number9(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number10(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number11(AlbaNumber::createFraction(100, 0));
+    AlbaNumber const number12(AlbaNumber::createFraction(-100, 0));
+    AlbaNumber const number13(ALBA_NUMBER_NOT_A_NUMBER);
 
     EXPECT_FALSE(number1.isPositiveInfinity());
     EXPECT_FALSE(number2.isPositiveInfinity());
@@ -1364,19 +1365,19 @@ TEST(AlbaNumberTest, IsPositiveInfinityWorks) {
 }
 
 TEST(AlbaNumberTest, IsNegativeInfinityWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(34095093U);
-    AlbaNumber number4(1000000000000000000LL);
-    AlbaNumber number5(4564.38794);
-    AlbaNumber number6(AlbaNumber::createFraction(-87408, -9802));
-    AlbaNumber number7(AlbaNumber::createFraction(-100, 10));
-    AlbaNumber number8(AlbaNumber::createComplexNumber(-4.5, 3.5));
-    AlbaNumber number9(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number10(ALBA_NUMBER_NEGATIVE_INFINITY);
-    AlbaNumber number11(AlbaNumber::createFraction(100, 0));
-    AlbaNumber number12(AlbaNumber::createFraction(-100, 0));
-    AlbaNumber number13(ALBA_NUMBER_NOT_A_NUMBER);
+    AlbaNumber const number1;
+    AlbaNumber const number2(-81237);
+    AlbaNumber const number3(34095093U);
+    AlbaNumber const number4(1000000000000000000LL);
+    AlbaNumber const number5(4564.38794);
+    AlbaNumber const number6(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber const number7(AlbaNumber::createFraction(-100, 10));
+    AlbaNumber const number8(AlbaNumber::createComplexNumber(-4.5, 3.5));
+    AlbaNumber const number9(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number10(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number11(AlbaNumber::createFraction(100, 0));
+    AlbaNumber const number12(AlbaNumber::createFraction(-100, 0));
+    AlbaNumber const number13(ALBA_NUMBER_NOT_A_NUMBER);
 
     EXPECT_FALSE(number1.isNegativeInfinity());
     EXPECT_FALSE(number2.isNegativeInfinity());
@@ -1394,19 +1395,19 @@ TEST(AlbaNumberTest, IsNegativeInfinityWorks) {
 }
 
 TEST(AlbaNumberTest, IsPositiveOrNegativeInfinityWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(34095093U);
-    AlbaNumber number4(1000000000000000000LL);
-    AlbaNumber number5(4564.38794);
-    AlbaNumber number6(AlbaNumber::createFraction(-87408, -9802));
-    AlbaNumber number7(AlbaNumber::createFraction(-100, 10));
-    AlbaNumber number8(AlbaNumber::createComplexNumber(-4.5, 3.5));
-    AlbaNumber number9(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number10(ALBA_NUMBER_NEGATIVE_INFINITY);
-    AlbaNumber number11(AlbaNumber::createFraction(100, 0));
-    AlbaNumber number12(AlbaNumber::createFraction(-100, 0));
-    AlbaNumber number13(ALBA_NUMBER_NOT_A_NUMBER);
+    AlbaNumber const number1;
+    AlbaNumber const number2(-81237);
+    AlbaNumber const number3(34095093U);
+    AlbaNumber const number4(1000000000000000000LL);
+    AlbaNumber const number5(4564.38794);
+    AlbaNumber const number6(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber const number7(AlbaNumber::createFraction(-100, 10));
+    AlbaNumber const number8(AlbaNumber::createComplexNumber(-4.5, 3.5));
+    AlbaNumber const number9(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number10(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number11(AlbaNumber::createFraction(100, 0));
+    AlbaNumber const number12(AlbaNumber::createFraction(-100, 0));
+    AlbaNumber const number13(ALBA_NUMBER_NOT_A_NUMBER);
 
     EXPECT_FALSE(number1.isPositiveOrNegativeInfinity());
     EXPECT_FALSE(number2.isPositiveOrNegativeInfinity());
@@ -1424,19 +1425,19 @@ TEST(AlbaNumberTest, IsPositiveOrNegativeInfinityWorks) {
 }
 
 TEST(AlbaNumberTest, IsNotANumberWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(34095093U);
-    AlbaNumber number4(1000000000000000000LL);
-    AlbaNumber number5(4564.38794);
-    AlbaNumber number6(AlbaNumber::createFraction(-87408, -9802));
-    AlbaNumber number7(AlbaNumber::createFraction(-100, 10));
-    AlbaNumber number8(AlbaNumber::createComplexNumber(-4.5, 3.5));
-    AlbaNumber number9(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number10(ALBA_NUMBER_NEGATIVE_INFINITY);
-    AlbaNumber number11(AlbaNumber::createFraction(100, 0));
-    AlbaNumber number12(AlbaNumber::createFraction(-100, 0));
-    AlbaNumber number13(ALBA_NUMBER_NOT_A_NUMBER);
+    AlbaNumber const number1;
+    AlbaNumber const number2(-81237);
+    AlbaNumber const number3(34095093U);
+    AlbaNumber const number4(1000000000000000000LL);
+    AlbaNumber const number5(4564.38794);
+    AlbaNumber const number6(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber const number7(AlbaNumber::createFraction(-100, 10));
+    AlbaNumber const number8(AlbaNumber::createComplexNumber(-4.5, 3.5));
+    AlbaNumber const number9(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number10(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number11(AlbaNumber::createFraction(100, 0));
+    AlbaNumber const number12(AlbaNumber::createFraction(-100, 0));
+    AlbaNumber const number13(ALBA_NUMBER_NOT_A_NUMBER);
 
     EXPECT_FALSE(number1.isNotANumber());
     EXPECT_FALSE(number2.isNotANumber());
@@ -1454,19 +1455,19 @@ TEST(AlbaNumberTest, IsNotANumberWorks) {
 }
 
 TEST(AlbaNumberTest, IsAFiniteValueWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(34095093U);
-    AlbaNumber number4(1000000000000000000LL);
-    AlbaNumber number5(4564.38794);
-    AlbaNumber number6(AlbaNumber::createFraction(-87408, -9802));
-    AlbaNumber number7(AlbaNumber::createFraction(-100, 10));
-    AlbaNumber number8(AlbaNumber::createComplexNumber(-4.5, 3.5));
-    AlbaNumber number9(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number10(ALBA_NUMBER_NEGATIVE_INFINITY);
-    AlbaNumber number11(AlbaNumber::createFraction(100, 0));
-    AlbaNumber number12(AlbaNumber::createFraction(-100, 0));
-    AlbaNumber number13(ALBA_NUMBER_NOT_A_NUMBER);
+    AlbaNumber const number1;
+    AlbaNumber const number2(-81237);
+    AlbaNumber const number3(34095093U);
+    AlbaNumber const number4(1000000000000000000LL);
+    AlbaNumber const number5(4564.38794);
+    AlbaNumber const number6(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber const number7(AlbaNumber::createFraction(-100, 10));
+    AlbaNumber const number8(AlbaNumber::createComplexNumber(-4.5, 3.5));
+    AlbaNumber const number9(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number10(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number11(AlbaNumber::createFraction(100, 0));
+    AlbaNumber const number12(AlbaNumber::createFraction(-100, 0));
+    AlbaNumber const number13(ALBA_NUMBER_NOT_A_NUMBER);
 
     EXPECT_TRUE(number1.isAFiniteValue());
     EXPECT_TRUE(number2.isAFiniteValue());
@@ -1484,16 +1485,16 @@ TEST(AlbaNumberTest, IsAFiniteValueWorks) {
 }
 
 TEST(AlbaNumberTest, GetIntegerWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(34095093U);
-    AlbaNumber number4(1000000000000000000LL);
-    AlbaNumber number5(4564.38794);
-    AlbaNumber number6(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number7(ALBA_NUMBER_NEGATIVE_INFINITY);
-    AlbaNumber number8(ALBA_NUMBER_NOT_A_NUMBER);
-    AlbaNumber number9(AlbaNumber::createFraction(-87408, -9802));
-    AlbaNumber number10(AlbaNumber::createComplexNumber(-4.5, 3.5));
+    AlbaNumber const number1;
+    AlbaNumber const number2(-81237);
+    AlbaNumber const number3(34095093U);
+    AlbaNumber const number4(1000000000000000000LL);
+    AlbaNumber const number5(4564.38794);
+    AlbaNumber const number6(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number7(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number8(ALBA_NUMBER_NOT_A_NUMBER);
+    AlbaNumber const number9(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber const number10(AlbaNumber::createComplexNumber(-4.5, 3.5));
 
     EXPECT_EQ(0, number1.getInteger());
     EXPECT_EQ(-81237, number2.getInteger());
@@ -1508,16 +1509,16 @@ TEST(AlbaNumberTest, GetIntegerWorks) {
 }
 
 TEST(AlbaNumberTest, GetDoubleWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(34095093U);
-    AlbaNumber number4(1000000000000000000LL);
-    AlbaNumber number5(4564.38794);
-    AlbaNumber number6(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number7(ALBA_NUMBER_NEGATIVE_INFINITY);
-    AlbaNumber number8(ALBA_NUMBER_NOT_A_NUMBER);
-    AlbaNumber number9(AlbaNumber::createFraction(-87408, -9802));
-    AlbaNumber number10(AlbaNumber::createComplexNumber(-4.5, 3.5));
+    AlbaNumber const number1;
+    AlbaNumber const number2(-81237);
+    AlbaNumber const number3(34095093U);
+    AlbaNumber const number4(1000000000000000000LL);
+    AlbaNumber const number5(4564.38794);
+    AlbaNumber const number6(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number7(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number8(ALBA_NUMBER_NOT_A_NUMBER);
+    AlbaNumber const number9(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber const number10(AlbaNumber::createComplexNumber(-4.5, 3.5));
 
     EXPECT_DOUBLE_EQ(0, number1.getDouble());
     EXPECT_DOUBLE_EQ(-81237, number2.getDouble());
@@ -1532,89 +1533,89 @@ TEST(AlbaNumberTest, GetDoubleWorks) {
 }
 
 TEST(AlbaNumberTest, GetFractionDataWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(34095093U);
-    AlbaNumber number4(1000000000000000000LL);
-    AlbaNumber number5(4564.38794);
-    AlbaNumber number6(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number7(ALBA_NUMBER_NEGATIVE_INFINITY);
-    AlbaNumber number8(ALBA_NUMBER_NOT_A_NUMBER);
-    AlbaNumber number9(AlbaNumber::createFraction(-87408, -9802));
-    AlbaNumber number10(AlbaNumber::createComplexNumber(-4.5, 3.5));
+    AlbaNumber const number1;
+    AlbaNumber const number2(-81237);
+    AlbaNumber const number3(34095093U);
+    AlbaNumber const number4(1000000000000000000LL);
+    AlbaNumber const number5(4564.38794);
+    AlbaNumber const number6(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number7(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number8(ALBA_NUMBER_NOT_A_NUMBER);
+    AlbaNumber const number9(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber const number10(AlbaNumber::createComplexNumber(-4.5, 3.5));
 
-    AlbaNumber::FractionData fractionData1(number1.getFractionData());
+    AlbaNumber::FractionData const fractionData1(number1.getFractionData());
     EXPECT_EQ(0, fractionData1.numerator);
     EXPECT_EQ(1U, fractionData1.denominator);
-    AlbaNumber::FractionData fractionData2(number2.getFractionData());
+    AlbaNumber::FractionData const fractionData2(number2.getFractionData());
     EXPECT_EQ(-81237, fractionData2.numerator);
     EXPECT_EQ(1U, fractionData2.denominator);
-    AlbaNumber::FractionData fractionData3(number3.getFractionData());
+    AlbaNumber::FractionData const fractionData3(number3.getFractionData());
     EXPECT_EQ(34095093, fractionData3.numerator);
     EXPECT_EQ(1U, fractionData3.denominator);
-    AlbaNumber::FractionData fractionData4(number4.getFractionData());
+    AlbaNumber::FractionData const fractionData4(number4.getFractionData());
     EXPECT_EQ(-1486618624, fractionData4.numerator);
     EXPECT_EQ(1U, fractionData4.denominator);
-    AlbaNumber::FractionData fractionData5(number5.getFractionData());
+    AlbaNumber::FractionData const fractionData5(number5.getFractionData());
     EXPECT_EQ(228219397, fractionData5.numerator);
     EXPECT_EQ(50000U, fractionData5.denominator);
-    AlbaNumber::FractionData fractionData6(number6.getFractionData());
+    AlbaNumber::FractionData const fractionData6(number6.getFractionData());
     EXPECT_EQ(1, fractionData6.numerator);
     EXPECT_EQ(0U, fractionData6.denominator);
-    AlbaNumber::FractionData fractionData7(number7.getFractionData());
+    AlbaNumber::FractionData const fractionData7(number7.getFractionData());
     EXPECT_EQ(-1, fractionData7.numerator);
     EXPECT_EQ(0U, fractionData7.denominator);
-    AlbaNumber::FractionData fractionData8(number8.getFractionData());
+    AlbaNumber::FractionData const fractionData8(number8.getFractionData());
     EXPECT_EQ(0, fractionData8.numerator);
     EXPECT_EQ(1U, fractionData8.denominator);
-    AlbaNumber::FractionData fractionData9(number9.getFractionData());
+    AlbaNumber::FractionData const fractionData9(number9.getFractionData());
     EXPECT_EQ(43704, fractionData9.numerator);
     EXPECT_EQ(4901U, fractionData9.denominator);
-    AlbaNumber::FractionData fractionData10(number10.getFractionData());
+    AlbaNumber::FractionData const fractionData10(number10.getFractionData());
     EXPECT_EQ(-5977803, fractionData10.numerator);
     EXPECT_EQ(1048576U, fractionData10.denominator);
 }
 
 TEST(AlbaNumberTest, GetComplexNumberDataWorks) {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(34095093U);
-    AlbaNumber number4(1000000000000000000LL);
-    AlbaNumber number5(4564.38794);
-    AlbaNumber number6(ALBA_NUMBER_POSITIVE_INFINITY);
-    AlbaNumber number7(ALBA_NUMBER_NEGATIVE_INFINITY);
-    AlbaNumber number8(ALBA_NUMBER_NOT_A_NUMBER);
-    AlbaNumber number9(AlbaNumber::createFraction(-87408, -9802));
-    AlbaNumber number10(AlbaNumber::createComplexNumber(-4.5, 3.5));
+    AlbaNumber const number1;
+    AlbaNumber const number2(-81237);
+    AlbaNumber const number3(34095093U);
+    AlbaNumber const number4(1000000000000000000LL);
+    AlbaNumber const number5(4564.38794);
+    AlbaNumber const number6(ALBA_NUMBER_POSITIVE_INFINITY);
+    AlbaNumber const number7(ALBA_NUMBER_NEGATIVE_INFINITY);
+    AlbaNumber const number8(ALBA_NUMBER_NOT_A_NUMBER);
+    AlbaNumber const number9(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber const number10(AlbaNumber::createComplexNumber(-4.5, 3.5));
 
-    AlbaNumber::ComplexNumberData complexNumberData1(number1.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData1(number1.getComplexNumberData());
     EXPECT_FLOAT_EQ(0, complexNumberData1.realPart);
     EXPECT_FLOAT_EQ(0, complexNumberData1.imaginaryPart);
-    AlbaNumber::ComplexNumberData complexNumberData2(number2.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData2(number2.getComplexNumberData());
     EXPECT_FLOAT_EQ(-81237, complexNumberData2.realPart);
     EXPECT_FLOAT_EQ(0, complexNumberData2.imaginaryPart);
-    AlbaNumber::ComplexNumberData complexNumberData3(number3.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData3(number3.getComplexNumberData());
     EXPECT_FLOAT_EQ(34095092, complexNumberData3.realPart);
     EXPECT_FLOAT_EQ(0, complexNumberData3.imaginaryPart);
-    AlbaNumber::ComplexNumberData complexNumberData4(number4.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData4(number4.getComplexNumberData());
     EXPECT_FLOAT_EQ(9.9999998e+017, complexNumberData4.realPart);
     EXPECT_FLOAT_EQ(0, complexNumberData4.imaginaryPart);
-    AlbaNumber::ComplexNumberData complexNumberData5(number5.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData5(number5.getComplexNumberData());
     EXPECT_FLOAT_EQ(4564.3882, complexNumberData5.realPart);
     EXPECT_FLOAT_EQ(0, complexNumberData5.imaginaryPart);
-    AlbaNumber::ComplexNumberData complexNumberData6(number6.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData6(number6.getComplexNumberData());
     EXPECT_FLOAT_EQ(INFINITY, complexNumberData6.realPart);
     EXPECT_FLOAT_EQ(0, complexNumberData6.imaginaryPart);
-    AlbaNumber::ComplexNumberData complexNumberData7(number7.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData7(number7.getComplexNumberData());
     EXPECT_FLOAT_EQ(-INFINITY, complexNumberData7.realPart);
     EXPECT_FLOAT_EQ(0, complexNumberData7.imaginaryPart);
-    AlbaNumber::ComplexNumberData complexNumberData8(number8.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData8(number8.getComplexNumberData());
     EXPECT_TRUE(isnan(complexNumberData8.realPart));
     EXPECT_FLOAT_EQ(0, complexNumberData8.imaginaryPart);
-    AlbaNumber::ComplexNumberData complexNumberData9(number9.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData9(number9.getComplexNumberData());
     EXPECT_FLOAT_EQ(8.9173641, complexNumberData9.realPart);
     EXPECT_FLOAT_EQ(0, complexNumberData9.imaginaryPart);
-    AlbaNumber::ComplexNumberData complexNumberData10(number10.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData10(number10.getComplexNumberData());
     EXPECT_FLOAT_EQ(-4.5, complexNumberData10.realPart);
     EXPECT_FLOAT_EQ(3.5, complexNumberData10.imaginaryPart);
 }
@@ -1662,15 +1663,15 @@ TEST(AlbaNumberTest, ConvertToFractionWorks) {
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(-1561, number1.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
-    AlbaNumber::FractionData fractionData2(number2.getFractionData());
+    AlbaNumber::FractionData const fractionData2(number2.getFractionData());
     EXPECT_EQ(-341, fractionData2.numerator);
     EXPECT_EQ(4U, fractionData2.denominator);
     EXPECT_EQ(AlbaNumber::Type::Fraction, number3.getType());
-    AlbaNumber::FractionData fractionData3(number3.getFractionData());
+    AlbaNumber::FractionData const fractionData3(number3.getFractionData());
     EXPECT_EQ(-415, fractionData3.numerator);
     EXPECT_EQ(41U, fractionData3.denominator);
     EXPECT_EQ(AlbaNumber::Type::Fraction, number4.getType());
-    AlbaNumber::FractionData fractionData4(number4.getFractionData());
+    AlbaNumber::FractionData const fractionData4(number4.getFractionData());
     EXPECT_EQ(12409133, fractionData4.numerator);
     EXPECT_EQ(1048576U, fractionData4.denominator);
 }
@@ -1678,7 +1679,7 @@ TEST(AlbaNumberTest, ConvertToFractionWorks) {
 TEST(AlbaNumberTest, DivisionOfAValueByZeroWorks) {
     AlbaNumber number1(5);
     AlbaNumber number2(1.25);
-    AlbaNumber number3(AlbaNumber::createFraction(5, 0));
+    AlbaNumber const number3(AlbaNumber::createFraction(5, 0));
     AlbaNumber number4(AlbaNumber::createComplexNumber(8.9, 7.8));
 
     number1 = number1 / 0;
@@ -1698,7 +1699,7 @@ TEST(AlbaNumberTest, DivisionOfAValueByZeroWorks) {
 TEST(AlbaNumberTest, DivisionOfZeroByZeroWorks) {
     AlbaNumber number1(0);
     AlbaNumber number2(static_cast<double>(0));
-    AlbaNumber number3(AlbaNumber::createFraction(0, 0));
+    AlbaNumber const number3(AlbaNumber::createFraction(0, 0));
     AlbaNumber number4(AlbaNumber::createComplexNumber(8.9, 7.8));
 
     number1 = number1 / 0;
@@ -1716,28 +1717,28 @@ TEST(AlbaNumberTest, DivisionOfZeroByZeroWorks) {
 }
 
 TEST(AlbaNumberTest, SquareRootOfNegativeNumberWorks) {
-    AlbaNumber numberToVerify1 = AlbaNumber(-8) ^ AlbaNumber::createFraction(1, 3);
-    AlbaNumber numberToVerify2 = AlbaNumber(-1) ^ AlbaNumber::createFraction(1, 2);
-    AlbaNumber numberToVerify3 = AlbaNumber(-5) ^ AlbaNumber::createFraction(1, 2);
+    AlbaNumber const numberToVerify1 = AlbaNumber(-8) ^ AlbaNumber::createFraction(1, 3);
+    AlbaNumber const numberToVerify2 = AlbaNumber(-1) ^ AlbaNumber::createFraction(1, 2);
+    AlbaNumber const numberToVerify3 = AlbaNumber(-5) ^ AlbaNumber::createFraction(1, 2);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, numberToVerify1.getType());
     EXPECT_DOUBLE_EQ(-2, numberToVerify1.getInteger());
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, numberToVerify2.getType());
-    AlbaNumber::ComplexNumberData complexNumberData2(numberToVerify2.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData2(numberToVerify2.getComplexNumberData());
     EXPECT_FLOAT_EQ(0, complexNumberData2.realPart);
     EXPECT_FLOAT_EQ(1, complexNumberData2.imaginaryPart);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, numberToVerify3.getType());
-    AlbaNumber::ComplexNumberData complexNumberData3(numberToVerify3.getComplexNumberData());
+    AlbaNumber::ComplexNumberData const complexNumberData3(numberToVerify3.getComplexNumberData());
     EXPECT_FLOAT_EQ(0, complexNumberData3.realPart);
     EXPECT_FLOAT_EQ(2.236068, complexNumberData3.imaginaryPart);
 }
 
 TEST(AlbaNumberTest, PrecisionWorksOnSquareRootAndPolynomialCalculation) {
-    AlbaNumber valueToTest(3.99999999999636202119290828705);
+    AlbaNumber const valueToTest(3.99999999999636202119290828705);
 
-    AlbaNumber numerator = (valueToTest ^ AlbaNumber::createFraction(1, 2)) - 2;
-    AlbaNumber denominator = valueToTest - 4;
-    AlbaNumber numberToVerify = numerator / denominator;
+    AlbaNumber const numerator = (valueToTest ^ AlbaNumber::createFraction(1, 2)) - 2;
+    AlbaNumber const denominator = valueToTest - 4;
+    AlbaNumber const numberToVerify = numerator / denominator;
 
     EXPECT_EQ(AlbaNumber::Type::Integer, numerator.getType());
     EXPECT_EQ(0, numerator.getInteger());
@@ -1748,9 +1749,9 @@ TEST(AlbaNumberTest, PrecisionWorksOnSquareRootAndPolynomialCalculation) {
 }
 
 TEST(AlbaNumberTest, UserDefinedLiteralForAlbaNumberWorks) {
-    stringstream testStream;
-    AlbaNumber number1 = 3484_AS_ALBA_NUMBER;
-    AlbaNumber number2 = -85.45631_AS_ALBA_NUMBER;
+    stringstream const testStream;
+    AlbaNumber const number1 = 3484_AS_ALBA_NUMBER;
+    AlbaNumber const number2 = -85.45631_AS_ALBA_NUMBER;
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(3484, number1.getInteger());
@@ -1759,17 +1760,17 @@ TEST(AlbaNumberTest, UserDefinedLiteralForAlbaNumberWorks) {
 }
 
 TEST(AlbaNumberTest, SumPrecisionTestWorks) {
-    AlbaNumber number1 = AlbaNumber::createFraction(2140452409, 32000U);
-    AlbaNumber number2 = AlbaNumber::createFraction(63710026, 64000U);
-    AlbaNumber sum = number1 + number2;
+    AlbaNumber const number1 = AlbaNumber::createFraction(2140452409, 32000U);
+    AlbaNumber const number2 = AlbaNumber::createFraction(63710026, 64000U);
+    AlbaNumber const sum = number1 + number2;
 
     EXPECT_EQ(AlbaNumber::Type::Double, sum.getType());
     EXPECT_DOUBLE_EQ(67884.606937499993, sum.getDouble());
 }
 
 TEST(AlbaNumberTest, ProductPrecisionTestWorks) {
-    AlbaNumber number = AlbaNumber::createFraction(-1807971431, 3538944000U);
-    AlbaNumber product = number * number;
+    AlbaNumber const number = AlbaNumber::createFraction(-1807971431, 3538944000U);
+    AlbaNumber const product = number * number;
 
     EXPECT_EQ(AlbaNumber::Type::Double, product.getType());
     EXPECT_DOUBLE_EQ(0.26099713876543457, product.getDouble());
@@ -1777,14 +1778,14 @@ TEST(AlbaNumberTest, ProductPrecisionTestWorks) {
 
 TEST(AlbaNumberTest, OutputStreamOperatorWorks) {
     stringstream testStream;
-    AlbaNumber number1;
-    AlbaNumber number2(3484);
-    AlbaNumber number3(-1561);
-    AlbaNumber number4(-85.45631);
-    AlbaNumber number5(ALBA_NUMBER_PI);
-    AlbaNumber number6(ALBA_NUMBER_E);
-    AlbaNumber number7(AlbaNumber::createFraction(-415, 41745));
-    AlbaNumber number8(AlbaNumber::createComplexNumber(8.9, 7.8));
+    AlbaNumber const number1;
+    AlbaNumber const number2(3484);
+    AlbaNumber const number3(-1561);
+    AlbaNumber const number4(-85.45631);
+    AlbaNumber const number5(ALBA_NUMBER_PI);
+    AlbaNumber const number6(ALBA_NUMBER_E);
+    AlbaNumber const number7(AlbaNumber::createFraction(-415, 41745));
+    AlbaNumber const number8(AlbaNumber::createComplexNumber(8.9, 7.8));
 
     testStream << number1 << "," << number2 << "," << number3 << "," << number4 << "," << number5 << "," << number6
                << "," << number7 << "," << number8;

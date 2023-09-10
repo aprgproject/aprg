@@ -5,8 +5,8 @@
 namespace alba {
 
 TEST(AlbaSingleBitFieldTest, BitFieldWithOneBitWorks) {
-    AlbaSingleBitField<uint8_t, 1> bitField0{0};
-    AlbaSingleBitField<uint8_t, 1> bitField1{1};
+    AlbaSingleBitField<uint8_t, 1> const bitField0{0};
+    AlbaSingleBitField<uint8_t, 1> const bitField1{1};
 
     EXPECT_EQ(1U, sizeof(AlbaSingleBitField<uint8_t, 1>));
     EXPECT_EQ(0U, bitField0.value);
@@ -14,8 +14,8 @@ TEST(AlbaSingleBitFieldTest, BitFieldWithOneBitWorks) {
 }
 
 TEST(AlbaSingleBitFieldTest, BitFieldWithTwoBitsWorks) {
-    AlbaSingleBitField<uint8_t, 2> bitField0{0};
-    AlbaSingleBitField<uint8_t, 2> bitField1{3};
+    AlbaSingleBitField<uint8_t, 2> const bitField0{0};
+    AlbaSingleBitField<uint8_t, 2> const bitField1{3};
 
     EXPECT_EQ(1U, sizeof(AlbaSingleBitField<uint8_t, 1>));
     EXPECT_EQ(0U, bitField0.value);
@@ -23,8 +23,8 @@ TEST(AlbaSingleBitFieldTest, BitFieldWithTwoBitsWorks) {
 }
 
 TEST(AlbaSingleBitFieldTest, BitFieldWithThreeBitsWorks) {
-    AlbaSingleBitField<uint8_t, 3> bitField0{0};
-    AlbaSingleBitField<uint8_t, 3> bitField1{7};
+    AlbaSingleBitField<uint8_t, 3> const bitField0{0};
+    AlbaSingleBitField<uint8_t, 3> const bitField1{7};
 
     EXPECT_EQ(1U, sizeof(AlbaSingleBitField<uint8_t, 1>));
     EXPECT_EQ(0U, bitField0.value);
@@ -32,8 +32,8 @@ TEST(AlbaSingleBitFieldTest, BitFieldWithThreeBitsWorks) {
 }
 
 TEST(AlbaSingleBitFieldTest, BitFieldWith28BitsWorks) {
-    AlbaSingleBitField<uint32_t, 28> bitField0{0};
-    AlbaSingleBitField<uint32_t, 28> bitField1{268435455};
+    AlbaSingleBitField<uint32_t, 28> const bitField0{0};
+    AlbaSingleBitField<uint32_t, 28> const bitField1{268435455};
 
     EXPECT_EQ(4U, sizeof(AlbaSingleBitField<uint32_t, 28>));
     EXPECT_EQ(0U, bitField0.value);

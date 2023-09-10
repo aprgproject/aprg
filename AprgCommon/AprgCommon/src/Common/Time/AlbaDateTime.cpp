@@ -38,8 +38,8 @@ bool AlbaYearMonthDay::operator>=(AlbaYearMonthDay const& second) const {
 
 AlbaYearMonthDay AlbaYearMonthDay::createFromTotalDays(uint32_t const totalDays) {
     uint32_t remainingDays(totalDays);
-    uint32_t years(getAndRemoveYearsFromNumberOfDays(remainingDays));
-    uint32_t month(getAndRemoveMonthsFromNumberOfDays(remainingDays, years));
+    uint32_t const years(getAndRemoveYearsFromNumberOfDays(remainingDays));
+    uint32_t const month(getAndRemoveMonthsFromNumberOfDays(remainingDays, years));
     return {static_cast<uint16_t>(years), static_cast<uint8_t>(month), static_cast<uint8_t>(remainingDays)};
 }
 
@@ -81,8 +81,8 @@ void AlbaDateTime::clear() {
 
 void AlbaYearMonthDay::setTime(uint32_t const totalDays) {
     uint32_t remainingDays(totalDays);
-    uint32_t years(getAndRemoveYearsFromNumberOfDays(remainingDays));
-    uint32_t month(getAndRemoveMonthsFromNumberOfDays(remainingDays, years));
+    uint32_t const years(getAndRemoveYearsFromNumberOfDays(remainingDays));
+    uint32_t const month(getAndRemoveMonthsFromNumberOfDays(remainingDays, years));
     setTime(static_cast<uint16_t>(years), static_cast<uint8_t>(month), static_cast<uint8_t>(remainingDays));
 }
 
@@ -116,8 +116,8 @@ bool AlbaHourMinuteSecond::operator>=(AlbaHourMinuteSecond const& second) const 
 
 AlbaHourMinuteSecond AlbaHourMinuteSecond::createFromTotalSeconds(uint32_t const totalSeconds) {
     uint32_t remainingSeconds(totalSeconds);
-    uint32_t hours(getAndRemoveHoursFromNumberOfSeconds(remainingSeconds));
-    uint32_t minutes(getAndRemoveMinutesFromNumberOfSeconds(remainingSeconds));
+    uint32_t const hours(getAndRemoveHoursFromNumberOfSeconds(remainingSeconds));
+    uint32_t const minutes(getAndRemoveMinutesFromNumberOfSeconds(remainingSeconds));
     return {static_cast<uint8_t>(hours), static_cast<uint8_t>(minutes), static_cast<uint8_t>(remainingSeconds)};
 }
 
@@ -134,8 +134,8 @@ uint32_t AlbaHourMinuteSecond::getTotalSeconds() const {
 
 void AlbaHourMinuteSecond::setTime(uint32_t const totalSeconds) {
     uint32_t remainingSeconds(totalSeconds);
-    uint32_t hours(getAndRemoveHoursFromNumberOfSeconds(remainingSeconds));
-    uint32_t minutes(getAndRemoveMinutesFromNumberOfSeconds(remainingSeconds));
+    uint32_t const hours(getAndRemoveHoursFromNumberOfSeconds(remainingSeconds));
+    uint32_t const minutes(getAndRemoveMinutesFromNumberOfSeconds(remainingSeconds));
     setTime(static_cast<uint8_t>(hours), static_cast<uint8_t>(minutes), static_cast<uint8_t>(remainingSeconds));
 }
 

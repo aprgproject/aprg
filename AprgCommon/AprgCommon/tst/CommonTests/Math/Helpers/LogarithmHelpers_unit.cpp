@@ -84,12 +84,12 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanc
 TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTestWorksWithRandomInput) {
     // Results: ~850ms
     int result(0);
-    int minValue(2);
-    int maxValue(2000);
+    int const minValue(2);
+    int const maxValue(2000);
     AlbaUniformNonDeterministicRandomizer<int> randomizer(minValue, maxValue);
     for (int iterations = 1; iterations < 10000000LL; ++iterations) {
-        int base = randomizer.getRandomValue();
-        int exponent = randomizer.getRandomValue();
+        int const base = randomizer.getRandomValue();
+        int const exponent = randomizer.getRandomValue();
         result = max(result, getLogarithmForIntegers(base, exponent));
     }
     EXPECT_LT(0LL, result);
@@ -98,12 +98,12 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTestWorksW
 TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanceTestWorksWithRandomInput) {
     // Results: ~790ms
     int result(0);
-    int minValue(2);
-    int maxValue(2000);
+    int const minValue(2);
+    int const maxValue(2000);
     AlbaUniformNonDeterministicRandomizer<int> randomizer(minValue, maxValue);
     for (int iterations = 1; iterations < 10000000LL; ++iterations) {
-        int base = randomizer.getRandomValue();
-        int exponent = randomizer.getRandomValue();
+        int const base = randomizer.getRandomValue();
+        int const exponent = randomizer.getRandomValue();
         result = max(result, getLogarithmForIntegers(base, exponent));
     }
     EXPECT_LT(0LL, result);

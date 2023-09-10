@@ -36,7 +36,7 @@ string AlbaPathHandler::getImmediateDirectoryName() const {
 string AlbaPathHandler::getFile() const { return m_file; }
 
 string AlbaPathHandler::getFilenameOnly() const {
-    int indexOfSlashOrPeriod = static_cast<int>(m_file.find_last_of('.'));
+    int const indexOfSlashOrPeriod = static_cast<int>(m_file.find_last_of('.'));
     if (isNotNpos(indexOfSlashOrPeriod)) {
         return m_file.substr(0, static_cast<string::size_type>(indexOfSlashOrPeriod));
     }
@@ -60,8 +60,8 @@ void AlbaPathHandler::reInput() {
 }
 
 void AlbaPathHandler::goUp() {
-    string directoryWithoutSlash(getStringWithoutCharAtTheEnd(m_directory, m_slashCharacterString[0]));
-    int indexOfSlash = static_cast<int>(directoryWithoutSlash.find_last_of(m_slashCharacterString));
+    string const directoryWithoutSlash(getStringWithoutCharAtTheEnd(m_directory, m_slashCharacterString[0]));
+    int const indexOfSlash = static_cast<int>(directoryWithoutSlash.find_last_of(m_slashCharacterString));
     if (isNotNpos(indexOfSlash)) {
         input(directoryWithoutSlash.substr(0, static_cast<string::size_type>(indexOfSlash) + 1));
     }
@@ -70,21 +70,21 @@ void AlbaPathHandler::goUp() {
 void AlbaPathHandler::save(string_view const path) { setPath(path); }
 
 void AlbaPathHandler::setPath(string_view const path) {
-    string correctPath(getCorrectPathWithReplacedSlashCharacters(path, m_slashCharacterString));
+    string const correctPath(getCorrectPathWithReplacedSlashCharacters(path, m_slashCharacterString));
     setExtensionFromPath(correctPath);
     setDirectoryAndFileFromPath(correctPath);
     setFileType();
 }
 
 void AlbaPathHandler::setExtensionFromPath(string_view const path) {
-    int indexOfSlashOrPeriod = static_cast<int>(path.find_last_of(m_slashCharacterString + "."));
+    int const indexOfSlashOrPeriod = static_cast<int>(path.find_last_of(m_slashCharacterString + "."));
     if (isNotNpos(indexOfSlashOrPeriod) && path[static_cast<string::size_type>(indexOfSlashOrPeriod)] == '.') {
         m_extension = path.substr(static_cast<string::size_type>(indexOfSlashOrPeriod) + 1);
     }
 }
 
 void AlbaPathHandler::setDirectoryAndFileFromPath(string_view const path) {
-    int indexOfSlash = static_cast<int>(path.find_last_of(m_slashCharacterString));
+    int const indexOfSlash = static_cast<int>(path.find_last_of(m_slashCharacterString));
     if (isNotNpos(indexOfSlash)) {
         m_directory = path.substr(0, static_cast<string::size_type>(indexOfSlash) + 1);
         m_file = path.substr(static_cast<string::size_type>(indexOfSlash) + 1);

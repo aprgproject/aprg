@@ -9,7 +9,7 @@ using namespace std;
 namespace alba {
 
 TEST(AlbaMemoryBufferTest, DefaultConstructorWorks) {
-    AlbaMemoryBuffer buffer;
+    AlbaMemoryBuffer const buffer;
 
     EXPECT_FALSE(buffer);
     EXPECT_EQ(0U, buffer.getSize());
@@ -20,7 +20,7 @@ TEST(AlbaMemoryBufferTest, ConstructorWithPointerAndSizeWorks) {
 
     AlbaMemoryBuffer buffer(static_cast<void*>(&input), sizeof(input));
 
-    int output = *reinterpret_cast<int*>(buffer.getBufferPointer());
+    int const output = *reinterpret_cast<int*>(buffer.getBufferPointer());
     EXPECT_TRUE(buffer);
     EXPECT_EQ(4U, buffer.getSize());
     EXPECT_EQ(input, output);
@@ -28,11 +28,11 @@ TEST(AlbaMemoryBufferTest, ConstructorWithPointerAndSizeWorks) {
 
 TEST(AlbaMemoryBufferTest, CopyConstructorWorks) {
     int input = 11111111;
-    AlbaMemoryBuffer buffer1(static_cast<void*>(&input), sizeof(input));
+    AlbaMemoryBuffer const buffer1(static_cast<void*>(&input), sizeof(input));
 
     AlbaMemoryBuffer buffer2(buffer1);
 
-    int output = *reinterpret_cast<int*>(buffer2.getBufferPointer());
+    int const output = *reinterpret_cast<int*>(buffer2.getBufferPointer());
     EXPECT_TRUE(buffer2);
     EXPECT_EQ(4U, buffer2.getSize());
     EXPECT_EQ(input, output);
@@ -40,12 +40,12 @@ TEST(AlbaMemoryBufferTest, CopyConstructorWorks) {
 
 TEST(AlbaMemoryBufferTest, CopyAssignmentWorks) {
     int input = 11111111;
-    AlbaMemoryBuffer buffer1(static_cast<void*>(&input), sizeof(input));
+    AlbaMemoryBuffer const buffer1(static_cast<void*>(&input), sizeof(input));
     AlbaMemoryBuffer buffer2;
 
     buffer2 = buffer1;
 
-    int output = *reinterpret_cast<int*>(buffer2.getBufferPointer());
+    int const output = *reinterpret_cast<int*>(buffer2.getBufferPointer());
     EXPECT_TRUE(buffer2);
     EXPECT_EQ(4U, buffer2.getSize());
     EXPECT_EQ(input, output);
@@ -59,7 +59,7 @@ TEST(AlbaMemoryBufferTest, MoveConstructorWorks) {
 
     // NOLINTNEXTLINE(clang-analyzer-cplusplus.Move,bugprone-use-after-move,hicpp-invalid-access-moved)
     EXPECT_EQ(0U, buffer1.getSize());
-    int output2 = *reinterpret_cast<int*>(buffer2.getBufferPointer());
+    int const output2 = *reinterpret_cast<int*>(buffer2.getBufferPointer());
     EXPECT_TRUE(buffer2);
     EXPECT_EQ(4U, buffer2.getSize());
     EXPECT_EQ(input, output2);
@@ -74,7 +74,7 @@ TEST(AlbaMemoryBufferTest, MoveAssignmentWorks) {
 
     // NOLINTNEXTLINE(clang-analyzer-cplusplus.Move,bugprone-use-after-move,hicpp-invalid-access-moved)
     EXPECT_EQ(0U, buffer1.getSize());
-    int output2 = *reinterpret_cast<int*>(buffer2.getBufferPointer());
+    int const output2 = *reinterpret_cast<int*>(buffer2.getBufferPointer());
     EXPECT_TRUE(buffer2);
     EXPECT_EQ(4U, buffer2.getSize());
     EXPECT_EQ(input, output2);
@@ -82,8 +82,8 @@ TEST(AlbaMemoryBufferTest, MoveAssignmentWorks) {
 
 TEST(AlbaMemoryBufferTest, OperatorBoolWorks) {
     int input = 11111111;
-    AlbaMemoryBuffer buffer1(static_cast<void*>(&input), sizeof(input));
-    AlbaMemoryBuffer buffer2;
+    AlbaMemoryBuffer const buffer1(static_cast<void*>(&input), sizeof(input));
+    AlbaMemoryBuffer const buffer2;
 
     EXPECT_TRUE(buffer1);
     EXPECT_FALSE(buffer2);
@@ -119,7 +119,7 @@ TEST(AlbaMemoryBufferTest, ResizeWorksOnMakingTheBufferLarger) {
 
     buffer.resize(8);
 
-    int output = *reinterpret_cast<int*>(buffer.getBufferPointer());
+    int const output = *reinterpret_cast<int*>(buffer.getBufferPointer());
     EXPECT_TRUE(buffer);
     EXPECT_EQ(8U, buffer.getSize());
     EXPECT_EQ(input, output);
@@ -146,7 +146,7 @@ TEST(AlbaMemoryBufferTest, ClearAndSetNewDataWorks) {
     buffer.clearAndSetNewData(static_cast<void*>(&input), sizeof(input));
     buffer.clearAndSetNewData(static_cast<void*>(&input2), sizeof(input2));
 
-    int output = *reinterpret_cast<int*>(buffer.getBufferPointer());
+    int const output = *reinterpret_cast<int*>(buffer.getBufferPointer());
     EXPECT_TRUE(buffer);
     EXPECT_EQ(4U, buffer.getSize());
     EXPECT_EQ(input2, output);
@@ -178,7 +178,7 @@ TEST(AlbaMemoryBufferTest, AddDataWorksOnPrimitiveTypes) {
 
     buffer.addData(static_cast<void*>(&input), sizeof(input));
 
-    int output = *reinterpret_cast<int*>(buffer.getBufferPointer());
+    int const output = *reinterpret_cast<int*>(buffer.getBufferPointer());
     EXPECT_TRUE(buffer);
     EXPECT_EQ(4U, buffer.getSize());
     EXPECT_EQ(input, output);
@@ -198,7 +198,7 @@ TEST(AlbaMemoryBufferTest, AddDataWorksOnPodStructure) {
 
     buffer.addData(static_cast<void*>(&input), sizeof(input));
 
-    Sample output = *reinterpret_cast<Sample*>(buffer.getBufferPointer());
+    Sample const output = *reinterpret_cast<Sample*>(buffer.getBufferPointer());
     EXPECT_TRUE(buffer);
     EXPECT_EQ(sizeof(Sample), buffer.getSize());
     EXPECT_EQ(input.param1, output.param1);
@@ -208,11 +208,11 @@ TEST(AlbaMemoryBufferTest, AddDataWorksOnPodStructure) {
 
 TEST(AlbaMemoryBufferTest, SaveObjectWorksOnPrimitiveTypes) {
     AlbaMemoryBuffer buffer;
-    int input = 0x12345678;
+    int const input = 0x12345678;
 
     buffer.saveObject<int>(input);
 
-    int& output(buffer.retrieveObjectAsReference<int>());
+    int const& output(buffer.retrieveObjectAsReference<int>());
     EXPECT_EQ(input, buffer.retrieveObjectAsConstReference<int>());
     EXPECT_EQ(input, output);
 }
@@ -239,7 +239,7 @@ TEST(AlbaMemoryBufferTest, SaveObjectWorksOnStandardLayoutTypes) {
 
 TEST(AlbaMemoryBufferTest, OutputStreamOperatorWorks) {
     int input = 0x12345678;
-    AlbaMemoryBuffer buffer(static_cast<void*>(&input), sizeof(input));
+    AlbaMemoryBuffer const buffer(static_cast<void*>(&input), sizeof(input));
     stringstream testStream;
 
     testStream << buffer;

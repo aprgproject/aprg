@@ -11,19 +11,19 @@ using namespace std;
 namespace alba {
 
 TEST(TwoDimensionsLineTest, EmptyAngle) {
-    AlbaAngle angle;
+    AlbaAngle const angle;
     EXPECT_EQ(0, angle.getDegrees());
     EXPECT_EQ(0, angle.getRadians());
 }
 
 TEST(TwoDimensionsLineTest, ConstructionUsingDegreesWorks) {
-    AlbaAngle angle(AngleUnitType::Degrees, 45);
+    AlbaAngle const angle(AngleUnitType::Degrees, 45);
     EXPECT_DOUBLE_EQ(45, angle.getDegrees());
     EXPECT_DOUBLE_EQ(getPi() / 4, angle.getRadians());
 }
 
 TEST(TwoDimensionsLineTest, ConstructionUsingRadiansWorks) {
-    AlbaAngle angle(AngleUnitType::Radians, getPi() / 4);
+    AlbaAngle const angle(AngleUnitType::Radians, getPi() / 4);
     EXPECT_DOUBLE_EQ(45, angle.getDegrees());
     EXPECT_DOUBLE_EQ(getPi() / 4, angle.getRadians());
 }

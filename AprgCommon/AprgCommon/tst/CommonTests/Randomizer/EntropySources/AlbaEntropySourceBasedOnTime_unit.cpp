@@ -10,8 +10,8 @@ namespace alba {
 
 TEST(AlbaEntropySourceBasedOnTimeTest, DISABLED_OperatorWorksAsNonDeterministic) {
     // This does not work because checking source1 and source2 are too close to be different.
-    AlbaEntropySourceBasedOnTime source1;
-    AlbaEntropySourceBasedOnTime source2;
+    AlbaEntropySourceBasedOnTime const source1;
+    AlbaEntropySourceBasedOnTime const source2;
     int const iterations(1000);
     int const allowedDeviationCount(iterations / 10);
 
@@ -24,7 +24,7 @@ TEST(AlbaEntropySourceBasedOnTimeTest, DISABLED_OperatorWorksAsNonDeterministic)
 }
 
 TEST(AlbaEntropySourceBasedOnTimeTest, EntropyIsNotZero) {
-    AlbaEntropySourceBasedOnTime source;
+    AlbaEntropySourceBasedOnTime const source;
 
     EXPECT_NE(0U, source.operator()());
 }

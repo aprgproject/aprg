@@ -60,7 +60,7 @@ public:
             if (AlbaValueRangeType::Once == getRangeType()) {
                 traverseOperation(m_startValue);
             } else {
-                TerminationCondition terminationCondition(getTerminationCondition());
+                TerminationCondition const terminationCondition(getTerminationCondition());
                 DataType interval(getInterval());
                 DataType traverseValue = m_startValue;
                 for (; terminationCondition(traverseValue, m_endValue); traverseValue += interval) {

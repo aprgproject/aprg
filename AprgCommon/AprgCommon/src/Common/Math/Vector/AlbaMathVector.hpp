@@ -23,7 +23,7 @@ public:
     AlbaMathVector() : m_values{} {}
 
     AlbaMathVector(std::initializer_list<DataType> const& values) : m_values{} {
-        size_t limit = std::min(SIZE, static_cast<size_t>(values.size()));
+        size_t const limit = std::min(SIZE, static_cast<size_t>(values.size()));
         std::copy(begin(values), begin(values) + limit, begin(m_values));
     }
 

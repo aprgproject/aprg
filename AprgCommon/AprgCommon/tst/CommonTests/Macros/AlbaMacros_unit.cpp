@@ -22,7 +22,7 @@ TEST(AlbaMacrosTest, StandardPredefinedMacrosWorks) {
 
 TEST(AlbaMacrosTest, CompilerPredefinedMacrosWorks) {
     EXPECT_FALSE(string(static_cast<const char*>(ALBA_MACROS_GET_FUNCTION)).empty());
-    string actualPrettyFunction(static_cast<const char*>(ALBA_MACROS_GET_PRETTY_FUNCTION));
+    string const actualPrettyFunction(static_cast<const char*>(ALBA_MACROS_GET_PRETTY_FUNCTION));
     int runningIndex = 0;
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrettyFunction, "AlbaMacrosTest", runningIndex));
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrettyFunction, "CompilerPredefinedMacrosWorks", runningIndex));
@@ -60,10 +60,10 @@ TEST(AlbaMacrosTest, CaseEnumStringWorks) {
             }
         }
     };
-    SampleEnumClass enumValue1 = SampleEnumClass::Type1;
-    SampleEnumClass enumValue2 = SampleEnumClass::Type2;
+    SampleEnumClass const enumValue1 = SampleEnumClass::Type1;
+    SampleEnumClass const enumValue2 = SampleEnumClass::Type2;
 
-    SampleClass sampleObject;
+    SampleClass const sampleObject;
     EXPECT_EQ("SampleEnumClass::Type1", sampleObject.getString(enumValue1));
     EXPECT_EQ("SampleEnumClass::Type2", sampleObject.getString(enumValue2));
 }
@@ -80,10 +80,10 @@ TEST(AlbaMacrosTest, CaseEnumShortStringWorks) {
             }
         }
     };
-    SampleEnumClass enumValue1 = SampleEnumClass::Type1;
-    SampleEnumClass enumValue2 = SampleEnumClass::Type2;
+    SampleEnumClass const enumValue1 = SampleEnumClass::Type1;
+    SampleEnumClass const enumValue2 = SampleEnumClass::Type2;
 
-    SampleClass sampleObject;
+    SampleClass const sampleObject;
     EXPECT_EQ("Type1", sampleObject.getString(enumValue1));
     EXPECT_EQ("Type2", sampleObject.getString(enumValue2));
 }

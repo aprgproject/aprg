@@ -17,8 +17,8 @@ string AlbaUserInterface::getUserInput() {
 
 string AlbaUserInterface::getFilePathInput() {
     while (true) {
-        string pathString(getUserInput());
-        AlbaLocalPathHandler filePath(pathString);
+        string const pathString(getUserInput());
+        AlbaLocalPathHandler const filePath(pathString);
         if (filePath.isFoundInLocalSystem() && filePath.isFile()) {
             return filePath.getFullPath();
         }
@@ -33,7 +33,7 @@ NumberType AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(
     string_view const question, Choices<NumberType> const& choices) {
     cout << question << "\n";
 
-    StringConverterWithFormatting converter(5, ' ');
+    StringConverterWithFormatting const converter(5, ' ');
 
     DisplayTable table;
     table.addRow();

@@ -10,7 +10,7 @@ using namespace std;
 namespace alba {
 
 TEST(AlbaWebPathHandlerTest, EmptyPathWorks) {
-    AlbaWebPathHandler pathHandler("");
+    AlbaWebPathHandler const pathHandler("");
     EXPECT_TRUE(pathHandler.getFullPath().empty());
     EXPECT_FALSE(pathHandler.hasProtocol());
     EXPECT_TRUE(pathHandler.getProtocol().empty());
@@ -22,7 +22,7 @@ TEST(AlbaWebPathHandlerTest, EmptyPathWorks) {
 }
 
 TEST(AlbaWebPathHandlerTest, DirectoryWithColonAndFileGivenAndNoProtocol) {
-    AlbaWebPathHandler pathHandler(R"(\\::://directory!@#$%12345\\\\/\\\\/file.txt)");
+    AlbaWebPathHandler const pathHandler(R"(\\::://directory!@#$%12345\\\\/\\\\/file.txt)");
     EXPECT_FALSE(pathHandler.hasProtocol());
     EXPECT_TRUE(pathHandler.getProtocol().empty());
     EXPECT_EQ(R"(\\::://directory!@#$%12345/file.txt)", pathHandler.getFullPath());
@@ -34,7 +34,7 @@ TEST(AlbaWebPathHandlerTest, DirectoryWithColonAndFileGivenAndNoProtocol) {
 }
 
 TEST(AlbaWebPathHandlerTest, FullPathWithOnlyDirectoryGivenHttpStyleInput) {
-    AlbaWebPathHandler pathHandler(R"(hTTp://www.google.com\\\\/\\\\/!@#$%12345\\///)");
+    AlbaWebPathHandler const pathHandler(R"(hTTp://www.google.com\\\\/\\\\/!@#$%12345\\///)");
     EXPECT_TRUE(pathHandler.hasProtocol());
     EXPECT_EQ("http", pathHandler.getProtocol());
     EXPECT_EQ("hTTp://www.google.com/!@#$%12345/", pathHandler.getFullPath());
@@ -46,7 +46,7 @@ TEST(AlbaWebPathHandlerTest, FullPathWithOnlyDirectoryGivenHttpStyleInput) {
 }
 
 TEST(AlbaWebPathHandlerTest, FullPathWithQuestionMark) {
-    AlbaWebPathHandler pathHandler("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg?v=1354256522");
+    AlbaWebPathHandler const pathHandler("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg?v=1354256522");
     EXPECT_TRUE(pathHandler.hasProtocol());
     EXPECT_EQ("http", pathHandler.getProtocol());
     EXPECT_EQ("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg?v=1354256522", pathHandler.getFullPath());

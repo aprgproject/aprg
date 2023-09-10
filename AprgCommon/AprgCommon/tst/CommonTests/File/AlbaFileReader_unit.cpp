@@ -43,9 +43,9 @@ TEST_F(AlbaFileReaderTest, ConstructorsWorks) {
     ifstream testFileReadStream(testFilePathHandler.getFullPath());
     ASSERT_TRUE(testFileReadStream.is_open());
 
-    AlbaFileReader fileReader1(testFileReadStream);
+    AlbaFileReader const fileReader1(testFileReadStream);
     EXPECT_EQ(10000U, fileReader1.getMaxBufferSize());
-    AlbaFileReader fileReader2(testFileReadStream, 200);
+    AlbaFileReader const fileReader2(testFileReadStream, 200);
     EXPECT_EQ(200U, fileReader2.getMaxBufferSize());
 }
 
@@ -141,7 +141,7 @@ TEST_F(AlbaFileReaderTest, GetLineAndIgnoreWhiteSpacesWorksUsingVariousCharacter
 }
 
 TEST_F(AlbaFileReaderTest, ReadLineWithSizeLimit) {
-    AlbaLocalPathHandler commonSizeTestFileToRead(ALBA_COMMON_SIZE_TEST_FILE);
+    AlbaLocalPathHandler const commonSizeTestFileToRead(ALBA_COMMON_SIZE_TEST_FILE);
     ifstream testFileReadStream(commonSizeTestFileToRead.getFullPath());
     ASSERT_TRUE(testFileReadStream.is_open());
 

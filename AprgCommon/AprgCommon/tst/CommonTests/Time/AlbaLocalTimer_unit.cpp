@@ -65,7 +65,7 @@ TEST(AlbaLocalTimerTest, DISABLED_GetDifferenceAsAlbaDateTimeWorks) {
     AlbaLocalTimer timer;
     sleepFor(4321);
     timer.stopTimer();
-    AlbaDateTime expectedTime(0U, 0U, 0U, 0U, 0U, 4U, 320919U);
+    AlbaDateTime const expectedTime(0U, 0U, 0U, 0U, 0U, 4U, 320919U);
 
     EXPECT_EQ(expectedTime, timer.getDifferenceAsAlbaDateTime());
 }

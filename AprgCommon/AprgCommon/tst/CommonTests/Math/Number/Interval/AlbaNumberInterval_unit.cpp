@@ -8,8 +8,8 @@ using namespace std;
 namespace alba {
 
 TEST(AlbaNumberIntervalTest, ConstructionForIntervalWorks) {
-    AlbaNumberInterval interval1(createOpenEndpoint(645), createCloseEndpoint(784));
-    AlbaNumberInterval interval2(createCloseEndpoint(784), createOpenEndpoint(645));
+    AlbaNumberInterval const interval1(createOpenEndpoint(645), createCloseEndpoint(784));
+    AlbaNumberInterval const interval2(createCloseEndpoint(784), createOpenEndpoint(645));
 
     EXPECT_EQ(createOpenEndpoint(645), interval1.getLowerEndpoint());
     EXPECT_EQ(createCloseEndpoint(784), interval1.getHigherEndpoint());
@@ -18,11 +18,11 @@ TEST(AlbaNumberIntervalTest, ConstructionForIntervalWorks) {
 }
 
 TEST(AlbaNumberIntervalTest, EqualityForIntervalsWorks) {
-    AlbaNumberInterval interval1(createOpenEndpoint(451), createOpenEndpoint(658));
-    AlbaNumberInterval interval2(createOpenEndpoint(451), createOpenEndpoint(658));
-    AlbaNumberInterval interval3(createOpenEndpoint(999), createOpenEndpoint(658));
-    AlbaNumberInterval interval4(createOpenEndpoint(451), createOpenEndpoint(999));
-    AlbaNumberInterval interval5(createOpenEndpoint(999), createOpenEndpoint(999));
+    AlbaNumberInterval const interval1(createOpenEndpoint(451), createOpenEndpoint(658));
+    AlbaNumberInterval const interval2(createOpenEndpoint(451), createOpenEndpoint(658));
+    AlbaNumberInterval const interval3(createOpenEndpoint(999), createOpenEndpoint(658));
+    AlbaNumberInterval const interval4(createOpenEndpoint(451), createOpenEndpoint(999));
+    AlbaNumberInterval const interval5(createOpenEndpoint(999), createOpenEndpoint(999));
 
     EXPECT_TRUE(interval1 == interval2);
     EXPECT_FALSE(interval1 == interval3);
@@ -31,8 +31,8 @@ TEST(AlbaNumberIntervalTest, EqualityForIntervalsWorks) {
 }
 
 TEST(AlbaNumberIntervalTest, IsValueInsideTheIntervalWorks) {
-    AlbaNumberInterval openInterval(createOpenEndpoint(3), createOpenEndpoint(5));
-    AlbaNumberInterval closeInterval(createCloseEndpoint(3), createCloseEndpoint(5));
+    AlbaNumberInterval const openInterval(createOpenEndpoint(3), createOpenEndpoint(5));
+    AlbaNumberInterval const closeInterval(createCloseEndpoint(3), createCloseEndpoint(5));
 
     EXPECT_FALSE(openInterval.isValueInsideTheInterval(2));
     EXPECT_FALSE(openInterval.isValueInsideTheInterval(3));
@@ -47,8 +47,8 @@ TEST(AlbaNumberIntervalTest, IsValueInsideTheIntervalWorks) {
 }
 
 TEST(AlbaNumberIntervalTest, IsValueInsideTheIntervalExceptAtTheEndpointsWorks) {
-    AlbaNumberInterval openInterval(createOpenEndpoint(3), createOpenEndpoint(5));
-    AlbaNumberInterval closeInterval(createCloseEndpoint(3), createCloseEndpoint(5));
+    AlbaNumberInterval const openInterval(createOpenEndpoint(3), createOpenEndpoint(5));
+    AlbaNumberInterval const closeInterval(createCloseEndpoint(3), createCloseEndpoint(5));
 
     EXPECT_FALSE(openInterval.isValueInsideTheIntervalExceptAtTheEndpoints(2));
     EXPECT_FALSE(openInterval.isValueInsideTheIntervalExceptAtTheEndpoints(3));
@@ -63,8 +63,8 @@ TEST(AlbaNumberIntervalTest, IsValueInsideTheIntervalExceptAtTheEndpointsWorks) 
 }
 
 TEST(AlbaNumberIntervalTest, IsEndpointInsideTheIntervalWorks) {
-    AlbaNumberInterval openInterval(createOpenEndpoint(3), createOpenEndpoint(5));
-    AlbaNumberInterval closeInterval(createCloseEndpoint(3), createCloseEndpoint(5));
+    AlbaNumberInterval const openInterval(createOpenEndpoint(3), createOpenEndpoint(5));
+    AlbaNumberInterval const closeInterval(createCloseEndpoint(3), createCloseEndpoint(5));
 
     EXPECT_FALSE(openInterval.isEndpointInsideTheInterval(createOpenEndpoint(2)));
     EXPECT_TRUE(openInterval.isEndpointInsideTheInterval(createOpenEndpoint(3)));
@@ -89,16 +89,16 @@ TEST(AlbaNumberIntervalTest, IsEndpointInsideTheIntervalWorks) {
 }
 
 TEST(AlbaNumberIntervalTest, IsIntervalInsideTheIntervalWorks) {
-    AlbaNumberInterval openInterval(createOpenEndpoint(3), createOpenEndpoint(5));
-    AlbaNumberInterval closeInterval(createCloseEndpoint(3), createCloseEndpoint(5));
-    AlbaNumberInterval intervalToTest1(createOpenEndpoint(3), createOpenEndpoint(5));
-    AlbaNumberInterval intervalToTest2(createCloseEndpoint(3), createCloseEndpoint(5));
-    AlbaNumberInterval intervalToTest3(createOpenEndpoint(3), createOpenEndpoint(4));
-    AlbaNumberInterval intervalToTest4(createCloseEndpoint(3), createCloseEndpoint(4));
-    AlbaNumberInterval intervalToTest5(createOpenEndpoint(4), createOpenEndpoint(5));
-    AlbaNumberInterval intervalToTest6(createCloseEndpoint(4), createCloseEndpoint(5));
-    AlbaNumberInterval intervalToTest7(createOpenEndpoint(2), createOpenEndpoint(4));
-    AlbaNumberInterval intervalToTest8(createOpenEndpoint(4), createOpenEndpoint(6));
+    AlbaNumberInterval const openInterval(createOpenEndpoint(3), createOpenEndpoint(5));
+    AlbaNumberInterval const closeInterval(createCloseEndpoint(3), createCloseEndpoint(5));
+    AlbaNumberInterval const intervalToTest1(createOpenEndpoint(3), createOpenEndpoint(5));
+    AlbaNumberInterval const intervalToTest2(createCloseEndpoint(3), createCloseEndpoint(5));
+    AlbaNumberInterval const intervalToTest3(createOpenEndpoint(3), createOpenEndpoint(4));
+    AlbaNumberInterval const intervalToTest4(createCloseEndpoint(3), createCloseEndpoint(4));
+    AlbaNumberInterval const intervalToTest5(createOpenEndpoint(4), createOpenEndpoint(5));
+    AlbaNumberInterval const intervalToTest6(createCloseEndpoint(4), createCloseEndpoint(5));
+    AlbaNumberInterval const intervalToTest7(createOpenEndpoint(2), createOpenEndpoint(4));
+    AlbaNumberInterval const intervalToTest8(createOpenEndpoint(4), createOpenEndpoint(6));
 
     EXPECT_TRUE(openInterval.isIntervalInsideTheInterval(intervalToTest1));
     EXPECT_TRUE(closeInterval.isIntervalInsideTheInterval(intervalToTest1));
@@ -119,14 +119,14 @@ TEST(AlbaNumberIntervalTest, IsIntervalInsideTheIntervalWorks) {
 }
 
 TEST(AlbaNumberIntervalTest, GetLowerEndpointWorks) {
-    AlbaNumberInterval interval(createOpenEndpoint(645), createCloseEndpoint(784));
+    AlbaNumberInterval const interval(createOpenEndpoint(645), createCloseEndpoint(784));
 
     EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Open, interval.getLowerEndpoint().getType());
     EXPECT_EQ(645, interval.getLowerEndpoint().getValue().getInteger());
 }
 
 TEST(AlbaNumberIntervalTest, GetHigherEndpointWorks) {
-    AlbaNumberInterval interval(createOpenEndpoint(645), createCloseEndpoint(784));
+    AlbaNumberInterval const interval(createOpenEndpoint(645), createCloseEndpoint(784));
 
     EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Close, interval.getHigherEndpoint().getType());
     EXPECT_EQ(784, interval.getHigherEndpoint().getValue().getInteger());
@@ -155,7 +155,7 @@ TEST(AlbaNumberIntervalTest, SetNewEndpointWorks) {
 
 TEST(AlbaNumberIntervalTest, OutputStreamOperatorWorks) {
     stringstream testStream;
-    AlbaNumberInterval interval(createOpenEndpoint(645), createCloseEndpoint(784));
+    AlbaNumberInterval const interval(createOpenEndpoint(645), createCloseEndpoint(784));
 
     testStream << interval;
 

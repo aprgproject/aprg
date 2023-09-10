@@ -90,7 +90,7 @@ TEST(AlbaBitManipulationTest, ConcatenationBytesWorksWithArgumentsSizeLessThanRe
     const uint8_t byte2 = 0xBA;
 
     // When
-    uint32_t result = AlbaBitManipulation<uint32_t>::concatenateBytes(byte1, byte2);
+    uint32_t const result = AlbaBitManipulation<uint32_t>::concatenateBytes(byte1, byte2);
 
     // Then
     EXPECT_EQ(0xA1BAU, result);
@@ -102,7 +102,7 @@ TEST(AlbaBitManipulationTest, ConcatenationBytesWorksWithArgumentsSameSizeAsResu
     const uint8_t byte2 = 0xBA;
 
     // When
-    uint32_t result = AlbaBitManipulation<uint32_t>::concatenateBytes(byte1, byte2, byte1, byte2);
+    uint32_t const result = AlbaBitManipulation<uint32_t>::concatenateBytes(byte1, byte2, byte1, byte2);
 
     // Then
     EXPECT_EQ(0xA1BAA1BAU, result);
@@ -114,7 +114,7 @@ TEST(AlbaBitManipulationTest, ConcatenationNibblesWorksWithArgumentsSizeLessThan
     const uint8_t byte2 = 0xBA;
 
     // When
-    uint32_t result = AlbaBitManipulation<uint32_t>::concatenateNibbles(byte1, byte2);
+    uint32_t const result = AlbaBitManipulation<uint32_t>::concatenateNibbles(byte1, byte2);
 
     // Then
     EXPECT_EQ(0x1AU, result);
@@ -126,7 +126,7 @@ TEST(AlbaBitManipulationTest, ConcatenationNibblesWorksWithArgumentsSameSizeAsRe
     const uint8_t byte2 = 0xBA;
 
     // When
-    uint32_t result =
+    uint32_t const result =
         AlbaBitManipulation<uint32_t>::concatenateNibbles(byte1, byte2, byte1, byte2, byte1, byte2, byte1, byte2);
 
     // Then

@@ -47,7 +47,7 @@ double AlbaAngle::getDegrees() const { return m_angleValueInDegrees; }
 double AlbaAngle::getRadians() const { return convertDegreesToRadians(m_angleValueInDegrees); }
 
 void AlbaAngle::setAngleValueInDegreesNearestToZero() {
-    double nearestPositiveAngleValueInDegrees(fmod(m_angleValueInDegrees, 360));
+    double const nearestPositiveAngleValueInDegrees(fmod(m_angleValueInDegrees, 360));
     m_angleValueInDegrees = nearestPositiveAngleValueInDegrees <= 180 ? nearestPositiveAngleValueInDegrees
                                                                       : nearestPositiveAngleValueInDegrees - 360;
 }

@@ -76,7 +76,7 @@ public:
 
     AlbaMatrix operator*(DataType const& scalarMultiplier) const {
         // scalar multiplication
-        UnaryFunction<DataType> scalarMultiplication = [&scalarMultiplier](DataType const& value) {
+        UnaryFunction<DataType> const scalarMultiplication = [&scalarMultiplier](DataType const& value) {
             return scalarMultiplier * value;
         };
         return doUnaryOperation(*this, scalarMultiplication);
@@ -122,7 +122,7 @@ public:
     }
 
     AlbaMatrix& operator*=(DataType const& scalarMultiplier) {
-        UnaryFunction<DataType> scalarMultiplication = [&scalarMultiplier](DataType const& value) {
+        UnaryFunction<DataType> const scalarMultiplication = [&scalarMultiplier](DataType const& value) {
             return scalarMultiplier * value;
         };
         doUnaryAssignmentOperation(*this, scalarMultiplication);
@@ -219,19 +219,19 @@ public:
     }
 
     void setEntries(MatrixData const& dataSampleValues) {
-        size_t limit = std::min(m_matrixData.size(), dataSampleValues.size());
+        size_t const limit = std::min(m_matrixData.size(), dataSampleValues.size());
         std::copy(begin(dataSampleValues), begin(dataSampleValues) + limit, begin(m_matrixData));
     }
 
     void setColumn(size_t const columnIndex, MatrixData const& dataSampleValues) {
-        size_t limit = std::min(m_numberOfRows, static_cast<size_t>(dataSampleValues.size()));
+        size_t const limit = std::min(m_numberOfRows, static_cast<size_t>(dataSampleValues.size()));
         for (size_t yPosition = 0; yPosition < limit; ++yPosition) {
             setEntry(columnIndex, yPosition, dataSampleValues[yPosition]);
         }
     }
 
     void setRow(size_t const rowIndex, MatrixData const& dataSampleValues) {
-        size_t limit = std::min(m_numberOfColumns, static_cast<size_t>(dataSampleValues.size()));
+        size_t const limit = std::min(m_numberOfColumns, static_cast<size_t>(dataSampleValues.size()));
         for (size_t xPosition = 0; xPosition < limit; ++xPosition) {
             setEntry(xPosition, rowIndex, dataSampleValues[xPosition]);
         }
@@ -253,11 +253,11 @@ public:
 
     void transpose() {
         size_t oldColumns(m_numberOfColumns);
-        size_t oldRows(m_numberOfRows);
+        size_t const oldRows(m_numberOfRows);
         MatrixData oldMatrixData(m_matrixData);
         clearAndResize(oldRows, oldColumns);
-        MatrixIndexRange yRange(0, oldRows - 1, 1);
-        MatrixIndexRange xRange(0, oldColumns - 1, 1);
+        MatrixIndexRange const yRange(0, oldRows - 1, 1);
+        MatrixIndexRange const xRange(0, oldColumns - 1, 1);
         iterateThroughYAndThenXWithRanges(yRange, xRange, [&](size_t const xPosition, size_t const yPosition) {
             // NOLINTNEXTLINE(readability-suspicious-call-argument)
             m_matrixData[getMatrixIndex(yPosition, xPosition)] =
@@ -275,7 +275,7 @@ public:
         iterateAllThroughYAndThenX([&](size_t const xPosition, size_t const yPosition) {
             tempMatrix.m_matrixData[getMatrixIndex(xPosition, yPosition, newColumns)] = getEntry(xPosition, yPosition);
         });
-        size_t diagonalLimit = std::min(m_numberOfColumns, m_numberOfRows);
+        size_t const diagonalLimit = std::min(m_numberOfColumns, m_numberOfRows);
         for (size_t diagonalCount = 0; diagonalCount < diagonalLimit; ++diagonalCount) {
             tempMatrix.m_matrixData[getMatrixIndex(m_numberOfColumns + diagonalCount, diagonalCount, newColumns)] = 1;
         }
@@ -301,9 +301,9 @@ private:
     }
 
     void fillRemainingEntriesToZeroIfNeeded(size_t const numberOfColumns, size_t const numberOfRows) {
-        size_t targetSize = numberOfColumns * numberOfRows;
+        size_t const targetSize = numberOfColumns * numberOfRows;
         if (m_matrixData.size() != targetSize) {
-            size_t originalSize = m_matrixData.size();
+            size_t const originalSize = m_matrixData.size();
             m_matrixData.resize(targetSize);
             std::fill(begin(m_matrixData) + originalSize, end(m_matrixData), DataType{});
         }

@@ -32,8 +32,8 @@ bool isZeroMatrix(AlbaMatrix<DataType> const& matrix) {
 
 template <typename DataType>
 bool isIdentityMatrix(AlbaMatrix<DataType> const& matrix) {
-    size_t numberOfRows(matrix.getNumberOfRows());
-    size_t numberOfColumns(matrix.getNumberOfColumns());
+    size_t const numberOfRows(matrix.getNumberOfRows());
+    size_t const numberOfColumns(matrix.getNumberOfColumns());
     bool isIdentityMatrix(numberOfRows == numberOfColumns);
     for (size_t yPosition = 0; isIdentityMatrix && yPosition < numberOfRows; ++yPosition) {
         for (size_t xPosition = 0; isIdentityMatrix && xPosition < numberOfColumns; ++xPosition) {
@@ -172,7 +172,7 @@ void interchangeRows(AlbaMatrix<DataType>& matrix, size_t const yPosition1, size
 template <typename DataType>
 void addTwoRowsAndPutSumInAnotherRow(
     AlbaMatrix<DataType>& matrix, size_t const yInput1, size_t const yInput2, size_t const yOutput) {
-    size_t numberOfRows(matrix.getNumberOfRows());
+    size_t const numberOfRows(matrix.getNumberOfRows());
     assert((yInput1 < numberOfRows) && (yInput2 < numberOfRows) && (yOutput < numberOfRows));
     traverseWithBinaryOperationForDifferentRows(
         matrix, yInput1, yInput2, yOutput, BinaryFunction<DataType>(std::plus<DataType>()));
@@ -181,7 +181,7 @@ void addTwoRowsAndPutSumInAnotherRow(
 template <typename DataType>
 DataType multiplyEachItemAndGetSum(AlbaMatrixData<DataType> const& first, AlbaMatrixData<DataType> const& second) {
     DataType result{};
-    size_t minSize = std::min(first.size(), second.size());
+    size_t const minSize = std::min(first.size(), second.size());
     for (size_t index = 0; index < minSize; ++index) {
         result += first[index] * second[index];
     }
@@ -195,7 +195,7 @@ size_t getIndexWithHighestSatisfiedCount(
     size_t bestIndex = 0;
     size_t highestCount = 0;
     for (auto const& rowOrColumn : rowsOrColumns) {
-        size_t count = std::count_if(rowOrColumn.cbegin(), rowOrColumn.cend(), condition);
+        size_t const count = std::count_if(rowOrColumn.cbegin(), rowOrColumn.cend(), condition);
         if (highestCount < count) {
             highestCount = count;
             bestIndex = index;

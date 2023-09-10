@@ -26,7 +26,7 @@ TEST(AlbaContainerHelperTest, GetDelimeterBasedOnFormatWorks) {
 }
 
 TEST(AlbaContainerHelperTest, GetLowerAndUpperConstIteratorsForNonSetWorks) {
-    vector<int> sortedVector{-10, -5, 1, 2, 4, 5, 23, 50};
+    vector<int> const sortedVector{-10, -5, 1, 2, 4, 5, 23, 50};
 
     auto iteratorPairToVerify(getLowerAndUpperConstIteratorsForNonSet(sortedVector, 7));
 
@@ -35,7 +35,7 @@ TEST(AlbaContainerHelperTest, GetLowerAndUpperConstIteratorsForNonSetWorks) {
 }
 
 TEST(AlbaContainerHelperTest, GetLowerAndUpperValuesForNonSetWorks) {
-    vector<int> sortedVector{-10, -5, 1, 2, 4, 5, 23, 50};
+    vector<int> const sortedVector{-10, -5, 1, 2, 4, 5, 23, 50};
 
     EXPECT_EQ((pair<int, int>(-10, -10)), getLowerAndUpperValuesForNonSet(sortedVector, -100));
     EXPECT_EQ((pair<int, int>(-10, -10)), getLowerAndUpperValuesForNonSet(sortedVector, -10));
@@ -46,7 +46,7 @@ TEST(AlbaContainerHelperTest, GetLowerAndUpperValuesForNonSetWorks) {
 }
 
 TEST(AlbaContainerHelperTest, CountItemsInBetweenForNonSetWorks) {
-    vector<char> sortedVector{'A', 'C', 'E', 'H', 'M', 'R', 'S', 'X'};
+    vector<char> const sortedVector{'A', 'C', 'E', 'H', 'M', 'R', 'S', 'X'};
 
     EXPECT_EQ(5U, countItemsInBetweenForNonSet(sortedVector, 'E', 'S'));
     EXPECT_EQ(5U, countItemsInBetweenForNonSet(sortedVector, 'E', 'T'));
@@ -54,18 +54,18 @@ TEST(AlbaContainerHelperTest, CountItemsInBetweenForNonSetWorks) {
 }
 
 TEST(AlbaContainerHelperTest, GetItemsInBetweenForNonSetWorks) {
-    vector<char> sortedVector{'A', 'C', 'E', 'H', 'M', 'R', 'S', 'X'};
+    vector<char> const sortedVector{'A', 'C', 'E', 'H', 'M', 'R', 'S', 'X'};
 
-    vector<char> expectedVector1{'E', 'H', 'M', 'R', 'S'};
-    vector<char> expectedVector2{'E', 'H', 'M', 'R', 'S'};
-    vector<char> expectedVector3{'H', 'M', 'R', 'S'};
+    vector<char> const expectedVector1{'E', 'H', 'M', 'R', 'S'};
+    vector<char> const expectedVector2{'E', 'H', 'M', 'R', 'S'};
+    vector<char> const expectedVector3{'H', 'M', 'R', 'S'};
     EXPECT_EQ(expectedVector1, getItemsInBetweenForNonSet(sortedVector, 'E', 'S'));
     EXPECT_EQ(expectedVector2, getItemsInBetweenForNonSet(sortedVector, 'E', 'T'));
     EXPECT_EQ(expectedVector3, getItemsInBetweenForNonSet(sortedVector, 'F', 'T'));
 }
 
 TEST(AlbaContainerHelperTest, GetLowerAndUpperConstIteratorsForSetWorks) {
-    set<int> sampleSet{-10, -5, 1, 2, 4, 5, 23, 50};
+    set<int> const sampleSet{-10, -5, 1, 2, 4, 5, 23, 50};
 
     auto iteratorPairToVerify(getLowerAndUpperConstIteratorsForNonSet(sampleSet, 7));
 
@@ -74,7 +74,7 @@ TEST(AlbaContainerHelperTest, GetLowerAndUpperConstIteratorsForSetWorks) {
 }
 
 TEST(AlbaContainerHelperTest, GetLowerAndUpperValuesForSetWorks) {
-    set<int> sampleSet{-10, -5, 1, 2, 4, 5, 23, 50};
+    set<int> const sampleSet{-10, -5, 1, 2, 4, 5, 23, 50};
 
     EXPECT_EQ((pair<int, int>(-10, -10)), getLowerAndUpperValuesForNonSet(sampleSet, -100));
     EXPECT_EQ((pair<int, int>(-10, -10)), getLowerAndUpperValuesForNonSet(sampleSet, -10));
@@ -85,7 +85,7 @@ TEST(AlbaContainerHelperTest, GetLowerAndUpperValuesForSetWorks) {
 }
 
 TEST(AlbaContainerHelperTest, CountItemsInBetweenForSetWorks) {
-    set<char> sampleSet{'A', 'C', 'E', 'H', 'M', 'R', 'S', 'X'};
+    set<char> const sampleSet{'A', 'C', 'E', 'H', 'M', 'R', 'S', 'X'};
 
     EXPECT_EQ(5U, countItemsInBetweenForNonSet(sampleSet, 'E', 'S'));
     EXPECT_EQ(5U, countItemsInBetweenForNonSet(sampleSet, 'E', 'T'));
@@ -93,11 +93,11 @@ TEST(AlbaContainerHelperTest, CountItemsInBetweenForSetWorks) {
 }
 
 TEST(AlbaContainerHelperTest, GetItemsInBetweenForSetWorks) {
-    set<char> sampleSet{'A', 'C', 'E', 'H', 'M', 'R', 'S', 'X'};
+    set<char> const sampleSet{'A', 'C', 'E', 'H', 'M', 'R', 'S', 'X'};
 
-    set<char> expectedSet1{'E', 'H', 'M', 'R', 'S'};
-    set<char> expectedSet2{'E', 'H', 'M', 'R', 'S'};
-    set<char> expectedSet3{'H', 'M', 'R', 'S'};
+    set<char> const expectedSet1{'E', 'H', 'M', 'R', 'S'};
+    set<char> const expectedSet2{'E', 'H', 'M', 'R', 'S'};
+    set<char> const expectedSet3{'H', 'M', 'R', 'S'};
     EXPECT_EQ(expectedSet1, getItemsInBetweenForNonSet(sampleSet, 'E', 'S'));
     EXPECT_EQ(expectedSet2, getItemsInBetweenForNonSet(sampleSet, 'E', 'T'));
     EXPECT_EQ(expectedSet3, getItemsInBetweenForNonSet(sampleSet, 'F', 'T'));
@@ -111,22 +111,22 @@ TEST(AlbaContainerHelperTest, GetLowerAndUpperConstIteratorsInMapWorks) {
     auto firstIterator = sampleMap.find(1);
     auto secondIterator = sampleMap.find(3);
     auto thirdIterator = sampleMap.find(5);
-    PairOfIterators iteratorsToVerify1(getLowerAndUpperConstIteratorsInMap(sampleMap, 0));
+    PairOfIterators const iteratorsToVerify1(getLowerAndUpperConstIteratorsInMap(sampleMap, 0));
     EXPECT_EQ(firstIterator, iteratorsToVerify1.first);
     EXPECT_EQ(firstIterator, iteratorsToVerify1.second);
-    PairOfIterators iteratorsToVerify2(getLowerAndUpperConstIteratorsInMap(sampleMap, 6));
+    PairOfIterators const iteratorsToVerify2(getLowerAndUpperConstIteratorsInMap(sampleMap, 6));
     EXPECT_EQ(thirdIterator, iteratorsToVerify2.first);
     EXPECT_EQ(thirdIterator, iteratorsToVerify2.second);
-    PairOfIterators iteratorsToVerify3(getLowerAndUpperConstIteratorsInMap(sampleMap, 1));
+    PairOfIterators const iteratorsToVerify3(getLowerAndUpperConstIteratorsInMap(sampleMap, 1));
     EXPECT_EQ(firstIterator, iteratorsToVerify3.first);
     EXPECT_EQ(firstIterator, iteratorsToVerify3.second);
-    PairOfIterators iteratorsToVerify4(getLowerAndUpperConstIteratorsInMap(sampleMap, 5));
+    PairOfIterators const iteratorsToVerify4(getLowerAndUpperConstIteratorsInMap(sampleMap, 5));
     EXPECT_EQ(thirdIterator, iteratorsToVerify4.first);
     EXPECT_EQ(thirdIterator, iteratorsToVerify4.second);
-    PairOfIterators iteratorsToVerify5(getLowerAndUpperConstIteratorsInMap(sampleMap, 4));
+    PairOfIterators const iteratorsToVerify5(getLowerAndUpperConstIteratorsInMap(sampleMap, 4));
     EXPECT_EQ(secondIterator, iteratorsToVerify5.first);
     EXPECT_EQ(thirdIterator, iteratorsToVerify5.second);
-    PairOfIterators iteratorsToVerify6(getLowerAndUpperConstIteratorsInMap(sampleMap, 3));
+    PairOfIterators const iteratorsToVerify6(getLowerAndUpperConstIteratorsInMap(sampleMap, 3));
     EXPECT_EQ(secondIterator, iteratorsToVerify6.first);
     EXPECT_EQ(secondIterator, iteratorsToVerify6.second);
 }
@@ -139,22 +139,22 @@ TEST(AlbaContainerHelperTest, GetLowerAndUpperIteratorsInMapWorks) {
     auto firstIterator = sampleMap.find(1);
     auto secondIterator = sampleMap.find(3);
     auto thirdIterator = sampleMap.find(5);
-    PairOfIterators iteratorsToVerify1(getLowerAndUpperIteratorsInMap(sampleMap, 0));
+    PairOfIterators const iteratorsToVerify1(getLowerAndUpperIteratorsInMap(sampleMap, 0));
     EXPECT_EQ(firstIterator, iteratorsToVerify1.first);
     EXPECT_EQ(firstIterator, iteratorsToVerify1.second);
-    PairOfIterators iteratorsToVerify2(getLowerAndUpperIteratorsInMap(sampleMap, 6));
+    PairOfIterators const iteratorsToVerify2(getLowerAndUpperIteratorsInMap(sampleMap, 6));
     EXPECT_EQ(thirdIterator, iteratorsToVerify2.first);
     EXPECT_EQ(thirdIterator, iteratorsToVerify2.second);
-    PairOfIterators iteratorsToVerify3(getLowerAndUpperIteratorsInMap(sampleMap, 1));
+    PairOfIterators const iteratorsToVerify3(getLowerAndUpperIteratorsInMap(sampleMap, 1));
     EXPECT_EQ(firstIterator, iteratorsToVerify3.first);
     EXPECT_EQ(firstIterator, iteratorsToVerify3.second);
-    PairOfIterators iteratorsToVerify4(getLowerAndUpperIteratorsInMap(sampleMap, 5));
+    PairOfIterators const iteratorsToVerify4(getLowerAndUpperIteratorsInMap(sampleMap, 5));
     EXPECT_EQ(thirdIterator, iteratorsToVerify4.first);
     EXPECT_EQ(thirdIterator, iteratorsToVerify4.second);
-    PairOfIterators iteratorsToVerify5(getLowerAndUpperIteratorsInMap(sampleMap, 4));
+    PairOfIterators const iteratorsToVerify5(getLowerAndUpperIteratorsInMap(sampleMap, 4));
     EXPECT_EQ(secondIterator, iteratorsToVerify5.first);
     EXPECT_EQ(thirdIterator, iteratorsToVerify5.second);
-    PairOfIterators iteratorsToVerify6(getLowerAndUpperIteratorsInMap(sampleMap, 3));
+    PairOfIterators const iteratorsToVerify6(getLowerAndUpperIteratorsInMap(sampleMap, 3));
     EXPECT_EQ(secondIterator, iteratorsToVerify6.first);
     EXPECT_EQ(secondIterator, iteratorsToVerify6.second);
 }
@@ -175,22 +175,22 @@ TEST(AlbaContainerHelperTest, GetLowerAndUpperConstIteratorsInMapWorksOnMultiMap
     ++fifthIterator;
     auto sixthIterator = fifthIterator;
     ++sixthIterator;
-    PairOfIterators iteratorsToVerify1(getLowerAndUpperConstIteratorsInMap(sampleMap, 0));
+    PairOfIterators const iteratorsToVerify1(getLowerAndUpperConstIteratorsInMap(sampleMap, 0));
     EXPECT_EQ(firstIterator, iteratorsToVerify1.first);
     EXPECT_EQ(firstIterator, iteratorsToVerify1.second);
-    PairOfIterators iteratorsToVerify2(getLowerAndUpperConstIteratorsInMap(sampleMap, 6));
+    PairOfIterators const iteratorsToVerify2(getLowerAndUpperConstIteratorsInMap(sampleMap, 6));
     EXPECT_EQ(sixthIterator, iteratorsToVerify2.first);
     EXPECT_EQ(sixthIterator, iteratorsToVerify2.second);
-    PairOfIterators iteratorsToVerify3(getLowerAndUpperConstIteratorsInMap(sampleMap, 1));
+    PairOfIterators const iteratorsToVerify3(getLowerAndUpperConstIteratorsInMap(sampleMap, 1));
     EXPECT_EQ(firstIterator, iteratorsToVerify3.first);
     EXPECT_EQ(secondIterator, iteratorsToVerify3.second);
-    PairOfIterators iteratorsToVerify4(getLowerAndUpperConstIteratorsInMap(sampleMap, 5));
+    PairOfIterators const iteratorsToVerify4(getLowerAndUpperConstIteratorsInMap(sampleMap, 5));
     EXPECT_EQ(fifthIterator, iteratorsToVerify4.first);
     EXPECT_EQ(sixthIterator, iteratorsToVerify4.second);
-    PairOfIterators iteratorsToVerify5(getLowerAndUpperConstIteratorsInMap(sampleMap, 4));
+    PairOfIterators const iteratorsToVerify5(getLowerAndUpperConstIteratorsInMap(sampleMap, 4));
     EXPECT_EQ(fourthIterator, iteratorsToVerify5.first);
     EXPECT_EQ(fifthIterator, iteratorsToVerify5.second);
-    PairOfIterators iteratorsToVerify6(getLowerAndUpperConstIteratorsInMap(sampleMap, 3));
+    PairOfIterators const iteratorsToVerify6(getLowerAndUpperConstIteratorsInMap(sampleMap, 3));
     EXPECT_EQ(thirdIterator, iteratorsToVerify6.first);
     EXPECT_EQ(fourthIterator, iteratorsToVerify6.second);
 }
@@ -211,33 +211,33 @@ TEST(AlbaContainerHelperTest, GetLowerAndUpperIteratorsInMapWorksOnMultiMap) {
     ++fifthIterator;
     auto sixthIterator = fifthIterator;
     ++sixthIterator;
-    PairOfIterators iteratorsToVerify1(getLowerAndUpperIteratorsInMap(sampleMap, 0));
+    PairOfIterators const iteratorsToVerify1(getLowerAndUpperIteratorsInMap(sampleMap, 0));
     EXPECT_EQ(firstIterator, iteratorsToVerify1.first);
     EXPECT_EQ(firstIterator, iteratorsToVerify1.second);
-    PairOfIterators iteratorsToVerify2(getLowerAndUpperIteratorsInMap(sampleMap, 6));
+    PairOfIterators const iteratorsToVerify2(getLowerAndUpperIteratorsInMap(sampleMap, 6));
     EXPECT_EQ(sixthIterator, iteratorsToVerify2.first);
     EXPECT_EQ(sixthIterator, iteratorsToVerify2.second);
-    PairOfIterators iteratorsToVerify3(getLowerAndUpperIteratorsInMap(sampleMap, 1));
+    PairOfIterators const iteratorsToVerify3(getLowerAndUpperIteratorsInMap(sampleMap, 1));
     EXPECT_EQ(firstIterator, iteratorsToVerify3.first);
     EXPECT_EQ(secondIterator, iteratorsToVerify3.second);
-    PairOfIterators iteratorsToVerify4(getLowerAndUpperIteratorsInMap(sampleMap, 5));
+    PairOfIterators const iteratorsToVerify4(getLowerAndUpperIteratorsInMap(sampleMap, 5));
     EXPECT_EQ(fifthIterator, iteratorsToVerify4.first);
     EXPECT_EQ(sixthIterator, iteratorsToVerify4.second);
-    PairOfIterators iteratorsToVerify5(getLowerAndUpperIteratorsInMap(sampleMap, 4));
+    PairOfIterators const iteratorsToVerify5(getLowerAndUpperIteratorsInMap(sampleMap, 4));
     EXPECT_EQ(fourthIterator, iteratorsToVerify5.first);
     EXPECT_EQ(fifthIterator, iteratorsToVerify5.second);
-    PairOfIterators iteratorsToVerify6(getLowerAndUpperIteratorsInMap(sampleMap, 3));
+    PairOfIterators const iteratorsToVerify6(getLowerAndUpperIteratorsInMap(sampleMap, 3));
     EXPECT_EQ(thirdIterator, iteratorsToVerify6.first);
     EXPECT_EQ(fourthIterator, iteratorsToVerify6.second);
 }
 
 TEST(AlbaContainerHelperTest, GetUnderlyingContainerWorksOnStack) {
     using Adapter = std::stack<int>;
-    Adapter adapter({1, 2, 3});
+    Adapter const adapter({1, 2, 3});
 
     Adapter::container_type const& containerToVerify(getUnderlyingContainer(adapter));
 
-    Adapter::container_type containerToExpect{1, 2, 3};
+    Adapter::container_type const containerToExpect{1, 2, 3};
     EXPECT_EQ(containerToExpect, containerToVerify);
 }
 
@@ -261,17 +261,17 @@ TEST(AlbaContainerHelperTest, GetUnderlyingContainerReferenceWorksOnStack) {
 }
 
 TEST(AlbaContainerHelperTest, GetStringFromContentsOfArrayWorks) {
-    array<int, 4> temporaryArray{23, -345, 5324, 1};
+    array<int, 4> const temporaryArray{23, -345, 5324, 1};
     EXPECT_EQ("23, -345, 5324, 1, ", getStringFromContents(temporaryArray));
 }
 
 TEST(AlbaContainerHelperTest, GetStringFromContentsOfVectorWorks) {
-    vector<int> temporaryVector{23, -345, 5324, 1};
+    vector<int> const temporaryVector{23, -345, 5324, 1};
     EXPECT_EQ("23, -345, 5324, 1, ", getStringFromContents(temporaryVector));
 }
 
 TEST(AlbaContainerHelperTest, GetStringFromContentsOfSetWorks) {
-    set<int> temporarySet{23, -345, 5324, 1};
+    set<int> const temporarySet{23, -345, 5324, 1};
     EXPECT_EQ("-345, 1, 23, 5324, ", getStringFromContents(temporarySet));
 }
 
@@ -284,14 +284,14 @@ TEST(AlbaContainerHelperTest, GetStringFromContentsOfMapWorks) {
 }
 
 TEST(AlbaContainerHelperTest, GetStringFromContentsWithNumberFormatWorks) {
-    vector<int> temporaryVector{23, -345, 5324, 1};
+    vector<int> const temporaryVector{23, -345, 5324, 1};
     EXPECT_EQ(
         "Decimal values: {23, -345, 5324, 1, }\nHexadecimal values: {17, fffffea7, 14cc, 1, }\n",
         getStringInDecimalAndHexadecimalFormat(temporaryVector));
 }
 
 TEST_F(AlbaContainerHelperReaderTest, SaveContentsToStreamWorksForAVectorOfIntegersToFile) {
-    array<int, 6> temporaryArray{0, -23, 4, 379, -482, 37};
+    array<int, 6> const temporaryArray{0, -23, 4, 379, -482, 37};
 
     saveContentsToStream(testFileWriteStream, temporaryArray, StreamFormat::File);
     testFileWriteStream.close();
@@ -313,7 +313,7 @@ TEST_F(AlbaContainerHelperReaderTest, SaveContentsToStreamWorksForAVectorOfInteg
 }
 
 TEST_F(AlbaContainerHelperReaderTest, SaveContentsToStreamWorksForAnArrayOfIntegersToFile) {
-    vector<int> temporaryVector{0, -23, 4, 379, -482, 37};
+    vector<int> const temporaryVector{0, -23, 4, 379, -482, 37};
 
     saveContentsToStream(testFileWriteStream, temporaryVector, StreamFormat::File);
     testFileWriteStream.close();
@@ -335,7 +335,7 @@ TEST_F(AlbaContainerHelperReaderTest, SaveContentsToStreamWorksForAnArrayOfInteg
 }
 
 TEST_F(AlbaContainerHelperReaderTest, SaveContentsToStreamWorksForASetOfIntegersToFile) {
-    set<int> temporarySet{0, -23, 4, 379, -482, 37};
+    set<int> const temporarySet{0, -23, 4, 379, -482, 37};
 
     saveContentsToStream(testFileWriteStream, temporarySet, StreamFormat::File);
     testFileWriteStream.close();

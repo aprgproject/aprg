@@ -9,7 +9,7 @@ using namespace std;
 namespace alba::matrix {
 
 TEST(AlbaMatrixTest, AlbaMatrixCanBeCreatedByDefaultConstructor) {
-    AlbaMatrix<int> matrix;
+    AlbaMatrix<int> const matrix;
 
     EXPECT_EQ(0U, matrix.getNumberOfColumns());
     EXPECT_EQ(0U, matrix.getNumberOfRows());
@@ -18,7 +18,7 @@ TEST(AlbaMatrixTest, AlbaMatrixCanBeCreatedByDefaultConstructor) {
 }
 
 TEST(AlbaMatrixTest, AlbaMatrixCanBeCreatedWithSize) {
-    AlbaMatrix<int> matrix(2, 3);
+    AlbaMatrix<int> const matrix(2, 3);
 
     EXPECT_EQ(2U, matrix.getNumberOfColumns());
     EXPECT_EQ(3U, matrix.getNumberOfRows());
@@ -33,7 +33,7 @@ TEST(AlbaMatrixTest, AlbaMatrixCanBeCreatedWithSize) {
 }
 
 TEST(AlbaMatrixTest, AlbaMatrixCanBeCreatedWithUniquePointers) {
-    AlbaMatrix<unique_ptr<int>> matrix(2, 3);
+    AlbaMatrix<unique_ptr<int>> const matrix(2, 3);
 
     EXPECT_EQ(2U, matrix.getNumberOfColumns());
     EXPECT_EQ(3U, matrix.getNumberOfRows());
@@ -48,7 +48,7 @@ TEST(AlbaMatrixTest, AlbaMatrixCanBeCreatedWithUniquePointers) {
 }
 
 TEST(AlbaMatrixTest, AlbaMatrixCanBeCreatedWithSizeAndInitialValue) {
-    AlbaMatrix<int> matrix(2, 3, 55);
+    AlbaMatrix<int> const matrix(2, 3, 55);
 
     EXPECT_EQ(2U, matrix.getNumberOfColumns());
     EXPECT_EQ(3U, matrix.getNumberOfRows());
@@ -63,7 +63,7 @@ TEST(AlbaMatrixTest, AlbaMatrixCanBeCreatedWithSizeAndInitialValue) {
 }
 
 TEST(AlbaMatrixTest, AlbaMatrixCanBeCreatedWithMatrixDataWithSameSize) {
-    AlbaMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
 
     EXPECT_EQ(2U, matrix.getNumberOfColumns());
     EXPECT_EQ(3U, matrix.getNumberOfRows());
@@ -78,7 +78,7 @@ TEST(AlbaMatrixTest, AlbaMatrixCanBeCreatedWithMatrixDataWithSameSize) {
 }
 
 TEST(AlbaMatrixTest, AlbaMatrixCanBeCreatedWithMatrixDataWithLesserSize) {
-    AlbaMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5});
+    AlbaMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5});
 
     EXPECT_EQ(2U, matrix.getNumberOfColumns());
     EXPECT_EQ(3U, matrix.getNumberOfRows());
@@ -93,7 +93,7 @@ TEST(AlbaMatrixTest, AlbaMatrixCanBeCreatedWithMatrixDataWithLesserSize) {
 }
 
 TEST(AlbaMatrixTest, AlbaMatrixCanBeCreatedWithMatrixDataWithGreaterSize) {
-    AlbaMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6, 7});
+    AlbaMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6, 7});
 
     EXPECT_EQ(2U, matrix.getNumberOfColumns());
     EXPECT_EQ(3U, matrix.getNumberOfRows());
@@ -108,30 +108,30 @@ TEST(AlbaMatrixTest, AlbaMatrixCanBeCreatedWithMatrixDataWithGreaterSize) {
 }
 
 TEST(AlbaMatrixTest, MatrixCanBeCopyConstructed) {
-    AlbaMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
     AlbaMatrix<int> copyConstructedMatrix;
 
     copyConstructedMatrix = matrix;
 
-    AlbaMatrix<int> expectedMatrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const expectedMatrix(2, 3, {1, 2, 3, 4, 5, 6});
     EXPECT_EQ(expectedMatrix, copyConstructedMatrix);
 }
 
 TEST(AlbaMatrixTest, MatrixCanBeCopyAssigned) {
-    AlbaMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
     AlbaMatrix<int> copyAssignedMatrix;
 
     copyAssignedMatrix = matrix;
 
-    AlbaMatrix<int> expectedMatrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const expectedMatrix(2, 3, {1, 2, 3, 4, 5, 6});
     EXPECT_EQ(expectedMatrix, copyAssignedMatrix);
 }
 
 TEST(AlbaMatrixTest, OperatorEqualWorks) {
-    AlbaMatrix<int> matrix1(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const matrix1(2, 3, {1, 2, 3, 4, 5, 6});
     AlbaMatrix<int> matrix2(2, 3);
-    AlbaMatrix<int> matrix3(3, 3);
-    AlbaMatrix<int> matrix4(2, 4);
+    AlbaMatrix<int> const matrix3(3, 3);
+    AlbaMatrix<int> const matrix4(2, 4);
     AlbaMatrix<int> matrix5(2, 3);
     matrix2 = matrix1;
     matrix5.setEntry(1, 1, 2);
@@ -144,40 +144,40 @@ TEST(AlbaMatrixTest, OperatorEqualWorks) {
 }
 
 TEST(AlbaMatrixTest, OperatorPlusWorks) {
-    AlbaMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
 
-    AlbaMatrix<int> matrixToVerify(matrix + matrix);
+    AlbaMatrix<int> const matrixToVerify(matrix + matrix);
 
-    AlbaMatrix<int> expectedMatrix(2, 3, {2, 4, 6, 8, 10, 12});
+    AlbaMatrix<int> const expectedMatrix(2, 3, {2, 4, 6, 8, 10, 12});
     EXPECT_EQ(expectedMatrix, matrixToVerify);
 }
 
 TEST(AlbaMatrixTest, OperatorMinusWorks) {
-    AlbaMatrix<int> matrix1(2, 3, {100, 200, 300, 400, 500, 600});
-    AlbaMatrix<int> matrix2(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const matrix1(2, 3, {100, 200, 300, 400, 500, 600});
+    AlbaMatrix<int> const matrix2(2, 3, {1, 2, 3, 4, 5, 6});
 
-    AlbaMatrix<int> matrixToVerify(matrix1 - matrix2);
+    AlbaMatrix<int> const matrixToVerify(matrix1 - matrix2);
 
-    AlbaMatrix<int> expectedMatrix(2, 3, {99, 198, 297, 396, 495, 594});
+    AlbaMatrix<int> const expectedMatrix(2, 3, {99, 198, 297, 396, 495, 594});
     EXPECT_EQ(expectedMatrix, matrixToVerify);
 }
 
 TEST(AlbaMatrixTest, OperatorMultiplyWorksWithMatrixAndConstant) {
-    AlbaMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
 
-    AlbaMatrix<int> matrixToVerify(matrix * 2);
+    AlbaMatrix<int> const matrixToVerify(matrix * 2);
 
-    AlbaMatrix<int> expectedMatrix(2, 3, {2, 4, 6, 8, 10, 12});
+    AlbaMatrix<int> const expectedMatrix(2, 3, {2, 4, 6, 8, 10, 12});
     EXPECT_EQ(expectedMatrix, matrixToVerify);
 }
 
 TEST(AlbaMatrixTest, OperatorMultiplyWorksWithMatrixAndMatrix) {
-    AlbaMatrix<int> matrix1(3, 2, {1, 2, 3, 4, 5, 6});
-    AlbaMatrix<int> matrix2(4, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12});
+    AlbaMatrix<int> const matrix1(3, 2, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const matrix2(4, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12});
 
-    AlbaMatrix<int> matrixToVerify(matrix1 * matrix2);
+    AlbaMatrix<int> const matrixToVerify(matrix1 * matrix2);
 
-    AlbaMatrix<int> expectedMatrix(4, 2, {38, 44, 50, 56, 83, 98, 113, 128});
+    AlbaMatrix<int> const expectedMatrix(4, 2, {38, 44, 50, 56, 83, 98, 113, 128});
     EXPECT_EQ(expectedMatrix, matrixToVerify);
 }
 
@@ -186,17 +186,17 @@ TEST(AlbaMatrixTest, OperatorPlusAssignmentWorks) {
 
     matrix += matrix;
 
-    AlbaMatrix<int> expectedMatrix(2, 3, {2, 4, 6, 8, 10, 12});
+    AlbaMatrix<int> const expectedMatrix(2, 3, {2, 4, 6, 8, 10, 12});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
 TEST(AlbaMatrixTest, OperatorMinusAssignmentWorks) {
     AlbaMatrix<int> matrix1(2, 3, {100, 200, 300, 400, 500, 600});
-    AlbaMatrix<int> matrix2(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const matrix2(2, 3, {1, 2, 3, 4, 5, 6});
 
     matrix1 -= matrix2;
 
-    AlbaMatrix<int> expectedMatrix(2, 3, {99, 198, 297, 396, 495, 594});
+    AlbaMatrix<int> const expectedMatrix(2, 3, {99, 198, 297, 396, 495, 594});
     EXPECT_EQ(expectedMatrix, matrix1);
 }
 
@@ -205,30 +205,30 @@ TEST(AlbaMatrixTest, OperatorMultiplyAssignmentWorksWithMatrixAndConstant) {
 
     matrix *= 2;
 
-    AlbaMatrix<int> expectedMatrix(2, 3, {2, 4, 6, 8, 10, 12});
+    AlbaMatrix<int> const expectedMatrix(2, 3, {2, 4, 6, 8, 10, 12});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
 TEST(AlbaMatrixTest, OperatorMultiplyAssignmentWorksWithMatrixAndMatrix) {
     AlbaMatrix<int> matrix1(3, 2, {1, 2, 3, 4, 5, 6});
-    AlbaMatrix<int> matrix2(4, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12});
+    AlbaMatrix<int> const matrix2(4, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12});
 
     matrix1 *= matrix2;
 
-    AlbaMatrix<int> expectedMatrix(4, 2, {38, 44, 50, 56, 83, 98, 113, 128});
+    AlbaMatrix<int> const expectedMatrix(4, 2, {38, 44, 50, 56, 83, 98, 113, 128});
     EXPECT_EQ(expectedMatrix, matrix1);
 }
 
 TEST(AlbaMatrixTest, IsEmptyWorks) {
-    AlbaMatrix<int> emptyMatrix;
-    AlbaMatrix<int> nonEmptyMatrix(14, 6);
+    AlbaMatrix<int> const emptyMatrix;
+    AlbaMatrix<int> const nonEmptyMatrix(14, 6);
 
     EXPECT_TRUE(emptyMatrix.isEmpty());
     EXPECT_FALSE(nonEmptyMatrix.isEmpty());
 }
 
 TEST(AlbaMatrixTest, IsInsideTheMatrixWorks) {
-    AlbaMatrix<int> matrix(14, 6);
+    AlbaMatrix<int> const matrix(14, 6);
 
     EXPECT_FALSE(matrix.isInside(14, 6));
     EXPECT_FALSE(matrix.isInside(14, 5));
@@ -237,25 +237,25 @@ TEST(AlbaMatrixTest, IsInsideTheMatrixWorks) {
 }
 
 TEST(AlbaMatrixTest, GetColumnsWorks) {
-    AlbaMatrix<int> matrix(14, 6);
+    AlbaMatrix<int> const matrix(14, 6);
 
     EXPECT_EQ(14U, matrix.getNumberOfColumns());
 }
 
 TEST(AlbaMatrixTest, GetRowsWorks) {
-    AlbaMatrix<int> matrix(14, 6);
+    AlbaMatrix<int> const matrix(14, 6);
 
     EXPECT_EQ(6U, matrix.getNumberOfRows());
 }
 
 TEST(AlbaMatrixTest, GetNumberOfCellsWorks) {
-    AlbaMatrix<int> matrix(14, 6);
+    AlbaMatrix<int> const matrix(14, 6);
 
     EXPECT_EQ(84U, matrix.getNumberOfCells());
 }
 
 TEST(AlbaMatrixTest, GetMatrixIndexWorks) {
-    AlbaMatrix<int> matrix(14, 6);
+    AlbaMatrix<int> const matrix(14, 6);
 
     EXPECT_EQ(45U, matrix.getMatrixIndex(3, 3));
     EXPECT_EQ(73U, matrix.getMatrixIndex(3, 5));
@@ -264,7 +264,7 @@ TEST(AlbaMatrixTest, GetMatrixIndexWorks) {
 }
 
 TEST(AlbaMatrixTest, GetEntryWorksAsValueCanBeFetchedFromEmptyVector) {
-    AlbaMatrix<int> matrix(2, 3);
+    AlbaMatrix<int> const matrix(2, 3);
 
     EXPECT_EQ(0, matrix.getEntry(0, 0));
     EXPECT_EQ(0, matrix.getEntry(1, 0));
@@ -275,7 +275,7 @@ TEST(AlbaMatrixTest, GetEntryWorksAsValueCanBeFetchedFromEmptyVector) {
 }
 
 TEST(AlbaMatrixTest, GetEntryWorksAsValueCanBeFetchedFromNonEmptyVector) {
-    AlbaMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
 
     EXPECT_EQ(1, matrix.getEntry(0, 0));
     EXPECT_EQ(2, matrix.getEntry(1, 0));
@@ -286,7 +286,7 @@ TEST(AlbaMatrixTest, GetEntryWorksAsValueCanBeFetchedFromNonEmptyVector) {
 }
 
 TEST(AlbaMatrixTest, GetMatrixDataWorks) {
-    AlbaMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
 
     AlbaMatrix<int>::MatrixData const& matrixData(matrix.getMatrixData());
 
@@ -300,7 +300,7 @@ TEST(AlbaMatrixTest, GetMatrixDataWorks) {
 }
 
 TEST(AlbaMatrixTest, RetrieveColumnWorks) {
-    AlbaMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
 
     AlbaMatrix<int>::MatrixData secondColumn;
     matrix.retrieveColumn(secondColumn, 1);
@@ -312,7 +312,7 @@ TEST(AlbaMatrixTest, RetrieveColumnWorks) {
 }
 
 TEST(AlbaMatrixTest, RetrieveRowWorks) {
-    AlbaMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
 
     AlbaMatrix<int>::MatrixData secondRow;
     matrix.retrieveRow(secondRow, 1);
@@ -323,7 +323,7 @@ TEST(AlbaMatrixTest, RetrieveRowWorks) {
 }
 
 TEST(AlbaMatrixTest, RetrieveColumnsWorks) {
-    AlbaMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
 
     AlbaMatrix<int>::ListOfMatrixData columns;
     matrix.retrieveColumns(columns);
@@ -340,7 +340,7 @@ TEST(AlbaMatrixTest, RetrieveColumnsWorks) {
 }
 
 TEST(AlbaMatrixTest, RetrieveRowsWorks) {
-    AlbaMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
 
     AlbaMatrix<int>::ListOfMatrixData rows;
     matrix.retrieveRows(rows);
@@ -358,7 +358,7 @@ TEST(AlbaMatrixTest, RetrieveRowsWorks) {
 }
 
 TEST(AlbaMatrixTest, RetrieveXAndYFromIndexWorks) {
-    AlbaMatrix<int> matrix(14, 6);
+    AlbaMatrix<int> const matrix(14, 6);
 
     size_t xValue{};
     size_t yValue{};
@@ -378,7 +378,7 @@ TEST(AlbaMatrixTest, SetEntryWorksAsValueCanSavedInTheMatrix) {
     matrix.setEntry(0, 2, 5);
     matrix.setEntry(1, 2, 6);
 
-    AlbaMatrix<int> expectedMatrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const expectedMatrix(2, 3, {1, 2, 3, 4, 5, 6});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
@@ -387,7 +387,7 @@ TEST(AlbaMatrixTest, SetEntriesWorksAsMultipleValuesCanSavedInTheMatrix) {
 
     matrix.setEntries({1, 2, 3, 4, 5, 6});
 
-    AlbaMatrix<int> expectedMatrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const expectedMatrix(2, 3, {1, 2, 3, 4, 5, 6});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
@@ -396,7 +396,7 @@ TEST(AlbaMatrixTest, SetEntriesWorksAsOverwritesExistingValuesAndDoesNotChangeOt
 
     matrix.setEntries({9, 8, 7});
 
-    AlbaMatrix<int> expectedMatrix(2, 3, {9, 8, 7, 4, 5, 6});
+    AlbaMatrix<int> const expectedMatrix(2, 3, {9, 8, 7, 4, 5, 6});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
@@ -405,7 +405,7 @@ TEST(AlbaMatrixTest, SetColumnWorks) {
 
     matrix.setColumn(1, {9, 8, 7});
 
-    AlbaMatrix<int> expectedMatrix(2, 3, {1, 9, 3, 8, 5, 7});
+    AlbaMatrix<int> const expectedMatrix(2, 3, {1, 9, 3, 8, 5, 7});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
@@ -414,7 +414,7 @@ TEST(AlbaMatrixTest, SetRowWorks) {
 
     matrix.setRow(1, {9, 8});
 
-    AlbaMatrix<int> expectedMatrix(2, 3, {1, 2, 9, 8, 5, 6});
+    AlbaMatrix<int> const expectedMatrix(2, 3, {1, 2, 9, 8, 5, 6});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
@@ -423,7 +423,7 @@ TEST(AlbaMatrixTest, ClearAndResizeWorks) {
 
     matrix.clearAndResize(3, 2);
 
-    AlbaMatrix<int> expectedMatrix(3, 2, {0, 0, 0, 0, 0, 0});
+    AlbaMatrix<int> const expectedMatrix(3, 2, {0, 0, 0, 0, 0, 0});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
@@ -432,7 +432,7 @@ TEST(AlbaMatrixTest, ClearAndResizeWorksWithInitialValue) {
 
     matrix.clearAndResize(3, 2, 55);
 
-    AlbaMatrix<int> expectedMatrix(3, 2, {55, 55, 55, 55, 55, 55});
+    AlbaMatrix<int> const expectedMatrix(3, 2, {55, 55, 55, 55, 55, 55});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
@@ -441,7 +441,7 @@ TEST(AlbaMatrixTest, NegateWorks) {
 
     matrix.negate();
 
-    AlbaMatrix<int> expectedMatrix(2, 3, {-1, -2, -3, -4, -5, -6});
+    AlbaMatrix<int> const expectedMatrix(2, 3, {-1, -2, -3, -4, -5, -6});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
@@ -450,7 +450,7 @@ TEST(AlbaMatrixTest, TransposeWorks) {
 
     matrix.transpose();
 
-    AlbaMatrix<int> expectedMatrix(3, 2, {1, 3, 5, 2, 4, 6});
+    AlbaMatrix<int> const expectedMatrix(3, 2, {1, 3, 5, 2, 4, 6});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
@@ -459,12 +459,12 @@ TEST(AlbaMatrixTest, InvertWorks) {
 
     matrix.invert();
 
-    AlbaMatrix<double> expectedMatrix(3, 3, {1.625, -0.5, -0.125, -1.875, 0.5, 0.375, 1.25, 0.0, -0.25});
+    AlbaMatrix<double> const expectedMatrix(3, 3, {1.625, -0.5, -0.125, -1.875, 0.5, 0.375, 1.25, 0.0, -0.25});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
 TEST(AlbaMatrixTest, IterateAllThroughYAndThenXWorks) {
-    AlbaMatrix<int> matrix(3, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9});
+    AlbaMatrix<int> const matrix(3, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9});
 
     using PairOfNumbers = pair<int, int>;
     vector<PairOfNumbers> xyPairsToVerify;
@@ -484,9 +484,9 @@ TEST(AlbaMatrixTest, IterateAllThroughYAndThenXWorks) {
 }
 
 TEST(AlbaMatrixTest, IterateThroughYAndThenXWithRangesWorks) {
-    AlbaMatrix<int> matrix(3, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9});
-    AlbaMatrix<int>::MatrixIndexRange xRange(0, 1, 1);
-    AlbaMatrix<int>::MatrixIndexRange yRange(1, 2, 1);
+    AlbaMatrix<int> const matrix(3, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9});
+    AlbaMatrix<int>::MatrixIndexRange const xRange(0, 1, 1);
+    AlbaMatrix<int>::MatrixIndexRange const yRange(1, 2, 1);
 
     using PairOfNumbers = pair<int, int>;
     vector<PairOfNumbers> xyPairsToVerify;
@@ -501,9 +501,9 @@ TEST(AlbaMatrixTest, IterateThroughYAndThenXWithRangesWorks) {
 }
 
 TEST(AlbaMatrixTest, IterateThroughXAndThenYWithRangesWorks) {
-    AlbaMatrix<int> matrix(3, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9});
-    AlbaMatrix<int>::MatrixIndexRange xRange(0, 1, 1);
-    AlbaMatrix<int>::MatrixIndexRange yRange(1, 2, 1);
+    AlbaMatrix<int> const matrix(3, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9});
+    AlbaMatrix<int>::MatrixIndexRange const xRange(0, 1, 1);
+    AlbaMatrix<int>::MatrixIndexRange const yRange(1, 2, 1);
 
     using PairOfNumbers = pair<int, int>;
     vector<PairOfNumbers> xyPairsToVerify;
@@ -518,7 +518,7 @@ TEST(AlbaMatrixTest, IterateThroughXAndThenYWithRangesWorks) {
 }
 
 TEST(AlbaMatrixTest, OutputStreamOperatorWorks) {
-    AlbaMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
 
     EXPECT_EQ("Matrix output:\n-----\n|1|2|\n-----\n|3|4|\n-----\n|5|6|\n-----\n", convertToString(matrix));
 }

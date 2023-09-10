@@ -11,7 +11,7 @@ using IntXYZ = AlbaXYZ<int>;
 }  // namespace
 
 TEST(AlbaXYZTest, DefaultValuesAreZero) {
-    IntXYZ xyz;
+    IntXYZ const xyz;
 
     EXPECT_EQ(0, xyz.getX());
     EXPECT_EQ(0, xyz.getY());
@@ -19,7 +19,7 @@ TEST(AlbaXYZTest, DefaultValuesAreZero) {
 }
 
 TEST(AlbaXYZTest, ValuesAreSetAtConstruction) {
-    IntXYZ xyz(-5, 5, 10);
+    IntXYZ const xyz(-5, 5, 10);
 
     EXPECT_EQ(-5, xyz.getX());
     EXPECT_EQ(5, xyz.getY());
@@ -27,7 +27,7 @@ TEST(AlbaXYZTest, ValuesAreSetAtConstruction) {
 }
 
 TEST(AlbaXYZTest, EqualityOperatorWorks) {
-    IntXYZ xyz(-5, 5, 10);
+    IntXYZ const xyz(-5, 5, 10);
 
     EXPECT_FALSE(IntXYZ(-5, -5, 10) == xyz);
     EXPECT_FALSE(IntXYZ(-5, 5, 20) == xyz);
@@ -37,7 +37,7 @@ TEST(AlbaXYZTest, EqualityOperatorWorks) {
 }
 
 TEST(AlbaXYZTest, NonEqualityOperatorWorks) {
-    IntXYZ xyz(-5, 5, 10);
+    IntXYZ const xyz(-5, 5, 10);
 
     EXPECT_TRUE(IntXYZ(-5, -5, 10) != xyz);
     EXPECT_TRUE(IntXYZ(-5, 5, 20) != xyz);
@@ -47,7 +47,7 @@ TEST(AlbaXYZTest, NonEqualityOperatorWorks) {
 }
 
 TEST(AlbaXYZTest, LessThanOperatorWorks) {
-    IntXYZ xyz(-5, 5, 10);
+    IntXYZ const xyz(-5, 5, 10);
 
     EXPECT_FALSE(IntXYZ(-5, 5, 10) < xyz);
     EXPECT_TRUE(IntXYZ(-6, 5, 10) < xyz);
@@ -87,25 +87,25 @@ TEST(AlbaXYZTest, IsEmptyWorks) {
 }
 
 TEST(AlbaXYZTest, GetXWorks) {
-    IntXYZ xyz(-5, 5, 10);
+    IntXYZ const xyz(-5, 5, 10);
 
     EXPECT_EQ(-5, xyz.getX());
 }
 
 TEST(AlbaXYZTest, GetYWorks) {
-    IntXYZ xyz(-5, 5, 10);
+    IntXYZ const xyz(-5, 5, 10);
 
     EXPECT_EQ(5, xyz.getY());
 }
 
 TEST(AlbaXYZTest, GetZWorks) {
-    IntXYZ xyz(-5, 5, 10);
+    IntXYZ const xyz(-5, 5, 10);
 
     EXPECT_EQ(10, xyz.getZ());
 }
 
 TEST(AlbaXYZTest, GetXTimesYTimesZWorks) {
-    IntXYZ xyz(-5, 5, 10);
+    IntXYZ const xyz(-5, 5, 10);
 
     EXPECT_EQ(-250, xyz.getXTimesYTimesZ());
 }
@@ -166,7 +166,7 @@ TEST(AlbaXYZTest, SaveMaximumXAndYAndZWorks) {
 
 TEST(AlbaXYZTest, OutputStreamOperatorWorks) {
     stringstream testStream;
-    IntXYZ xyz(-5, 5, 10);
+    IntXYZ const xyz(-5, 5, 10);
 
     testStream << xyz;
 

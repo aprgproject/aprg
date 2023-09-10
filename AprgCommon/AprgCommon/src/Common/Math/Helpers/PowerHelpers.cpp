@@ -14,7 +14,7 @@ bool isPerfectNthPower(AlbaNumber const& number, size_t const nthPower) {
         auto integerValue(static_cast<int64_t>(number.getInteger()));
         result = integerValue >= 0 && isPerfectNthPower(static_cast<size_t>(integerValue), nthPower);
     } else if (number.isFractionType()) {
-        AlbaNumber::FractionData fractionData(number.getFractionData());
+        AlbaNumber::FractionData const fractionData(number.getFractionData());
         result = fractionData.numerator >= 0 &&
                  isPerfectNthPower(static_cast<size_t>(fractionData.numerator), nthPower) &&
                  isPerfectNthPower(fractionData.denominator, nthPower);

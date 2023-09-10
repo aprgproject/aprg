@@ -35,16 +35,16 @@ TEST(AlbaDebugTest, DebugPrintingWorks) {
 TEST(AlbaDebugTest, ManipulateOutputStreamsWorks) {
     s_debugStringStream.str(string());
     s_debugStringStream.clear();
-    int singleParameter1 = 12;
-    int singleParameter2 = 345;
-    int singleParameter3 = 6789;
+    int const singleParameter1 = 12;
+    int const singleParameter2 = 345;
+    int const singleParameter3 = 6789;
 
     ALBA_DBG_PRINT_MANIPULATE_OUTPUT(uppercase);
     ALBA_DBG_PRINT_MANIPULATE_OUTPUT(hex);
     ALBA_DBG_PRINT3(singleParameter1, singleParameter2, singleParameter3);
     ALBA_DBG_PRINT_MANIPULATE_OUTPUT(dec);
 
-    string actualPrintString(s_debugStringStream.str());
+    string const actualPrintString(s_debugStringStream.str());
     int runningIndex = 0;
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "singleParameter1", runningIndex));
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "C", runningIndex));
@@ -77,11 +77,11 @@ TEST(AlbaDebugTest, DebugClassOutputOperatorsWorks) {
     s_debugStringStream.str(string());
     s_debugStringStream.clear();
 
-    SampleClass object(1234, 7777);
+    SampleClass const object(1234, 7777);
 
     ALBA_DBG_PRINT1(object);
 
-    string actualPrintString(s_debugStringStream.str());
+    string const actualPrintString(s_debugStringStream.str());
     int runningIndex = 0;
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "parameter1", runningIndex));
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "1234", runningIndex));

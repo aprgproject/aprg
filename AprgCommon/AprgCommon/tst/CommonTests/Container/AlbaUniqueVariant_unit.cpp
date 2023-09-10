@@ -93,7 +93,7 @@ TEST(AlbaUniqueVariantTest, PolymorphismIsSupportedByUniqueVariant) {
 
     // When
     UniqueVariant<Derived> variant;
-    Base& baseRef = variant.acquire<Derived>();
+    Base const& baseRef = variant.acquire<Derived>();
 
     // Then
     EXPECT_EQ(valueFromTest, baseRef.getValue());

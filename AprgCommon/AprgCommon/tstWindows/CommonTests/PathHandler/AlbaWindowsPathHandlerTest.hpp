@@ -6,8 +6,8 @@ namespace alba {
 
 struct AlbaWindowsPathHandlerTest : public testing::Test {
     AlbaWindowsPathHandlerTest();
-    std::string convertToSimplestPath(std::string_view const path);
-    std::string getDriveOfAprgDir();
+    static std::string convertToSimplestPath(std::string_view const path);
+    [[nodiscard]] std::string getDriveOfAprgDir() const;
     std::string pathOfAprgDirectory;
 };
 

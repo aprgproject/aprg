@@ -9,7 +9,7 @@ using namespace std;
 namespace alba::matrix {
 
 TEST(AlbaSparseMatrixTest, AlbaSparseMatrixCanBeCreatedByDefaultConstructor) {
-    AlbaSparseMatrix<int> matrix;
+    AlbaSparseMatrix<int> const matrix;
 
     EXPECT_EQ(0U, matrix.getNumberOfColumns());
     EXPECT_EQ(0U, matrix.getNumberOfRows());
@@ -18,7 +18,7 @@ TEST(AlbaSparseMatrixTest, AlbaSparseMatrixCanBeCreatedByDefaultConstructor) {
 }
 
 TEST(AlbaSparseMatrixTest, AlbaSparseMatrixCanBeCreatedWithSize) {
-    AlbaSparseMatrix<int> matrix(2, 3);
+    AlbaSparseMatrix<int> const matrix(2, 3);
 
     EXPECT_EQ(2U, matrix.getNumberOfColumns());
     EXPECT_EQ(3U, matrix.getNumberOfRows());
@@ -27,7 +27,7 @@ TEST(AlbaSparseMatrixTest, AlbaSparseMatrixCanBeCreatedWithSize) {
 }
 
 TEST(AlbaSparseMatrixTest, AlbaSparseMatrixCanBeCreatedWithMatrixDataWithSameSize) {
-    AlbaSparseMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaSparseMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
 
     EXPECT_EQ(2U, matrix.getNumberOfColumns());
     EXPECT_EQ(3U, matrix.getNumberOfRows());
@@ -42,7 +42,7 @@ TEST(AlbaSparseMatrixTest, AlbaSparseMatrixCanBeCreatedWithMatrixDataWithSameSiz
 }
 
 TEST(AlbaSparseMatrixTest, AlbaSparseMatrixCanBeCreatedWithMatrixDataWithLesserSize) {
-    AlbaSparseMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5});
+    AlbaSparseMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5});
 
     EXPECT_EQ(2U, matrix.getNumberOfColumns());
     EXPECT_EQ(3U, matrix.getNumberOfRows());
@@ -56,7 +56,7 @@ TEST(AlbaSparseMatrixTest, AlbaSparseMatrixCanBeCreatedWithMatrixDataWithLesserS
 }
 
 TEST(AlbaSparseMatrixTest, AlbaSparseMatrixCanBeCreatedWithMatrixDataWithGreaterSize) {
-    AlbaSparseMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6, 7});
+    AlbaSparseMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6, 7});
 
     EXPECT_EQ(2U, matrix.getNumberOfColumns());
     EXPECT_EQ(3U, matrix.getNumberOfRows());
@@ -71,30 +71,30 @@ TEST(AlbaSparseMatrixTest, AlbaSparseMatrixCanBeCreatedWithMatrixDataWithGreater
 }
 
 TEST(AlbaSparseMatrixTest, MatrixCanBeCopyConstructed) {
-    AlbaSparseMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaSparseMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
     AlbaSparseMatrix<int> copyConstructedMatrix;
 
     copyConstructedMatrix = matrix;
 
-    AlbaSparseMatrix<int> expectedMatrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaSparseMatrix<int> const expectedMatrix(2, 3, {1, 2, 3, 4, 5, 6});
     EXPECT_EQ(expectedMatrix, copyConstructedMatrix);
 }
 
 TEST(AlbaSparseMatrixTest, MatrixCanBeCopyAssigned) {
-    AlbaSparseMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaSparseMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
     AlbaSparseMatrix<int> copyAssignedMatrix;
 
     copyAssignedMatrix = matrix;
 
-    AlbaSparseMatrix<int> expectedMatrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaSparseMatrix<int> const expectedMatrix(2, 3, {1, 2, 3, 4, 5, 6});
     EXPECT_EQ(expectedMatrix, copyAssignedMatrix);
 }
 
 TEST(AlbaSparseMatrixTest, OperatorEqualWorks) {
-    AlbaSparseMatrix<int> matrix1(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaSparseMatrix<int> const matrix1(2, 3, {1, 2, 3, 4, 5, 6});
     AlbaSparseMatrix<int> matrix2(2, 3);
-    AlbaSparseMatrix<int> matrix3(3, 3);
-    AlbaSparseMatrix<int> matrix4(2, 4);
+    AlbaSparseMatrix<int> const matrix3(3, 3);
+    AlbaSparseMatrix<int> const matrix4(2, 4);
     AlbaSparseMatrix<int> matrix5(2, 3);
     matrix2 = matrix1;
     matrix5.setEntry(1, 1, 2);
@@ -107,67 +107,67 @@ TEST(AlbaSparseMatrixTest, OperatorEqualWorks) {
 }
 
 TEST(AlbaSparseMatrixTest, OperatorPlusWorks) {
-    AlbaSparseMatrix<int> matrix1(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaSparseMatrix<int> const matrix1(2, 3, {1, 2, 3, 4, 5, 6});
 
-    AlbaSparseMatrix<int> matrixToVerify(matrix1 + matrix1);
+    AlbaSparseMatrix<int> const matrixToVerify(matrix1 + matrix1);
 
-    AlbaSparseMatrix<int> expectedMatrix(2, 3, {2, 4, 6, 8, 10, 12});
+    AlbaSparseMatrix<int> const expectedMatrix(2, 3, {2, 4, 6, 8, 10, 12});
     EXPECT_EQ(expectedMatrix, matrixToVerify);
 }
 
 TEST(AlbaSparseMatrixTest, OperatorMinusWorks) {
-    AlbaSparseMatrix<int> matrix1(2, 3, {100, 200, 300, 400, 500, 600});
-    AlbaSparseMatrix<int> matrix2(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaSparseMatrix<int> const matrix1(2, 3, {100, 200, 300, 400, 500, 600});
+    AlbaSparseMatrix<int> const matrix2(2, 3, {1, 2, 3, 4, 5, 6});
 
-    AlbaSparseMatrix<int> matrixToVerify(matrix1 - matrix2);
+    AlbaSparseMatrix<int> const matrixToVerify(matrix1 - matrix2);
 
-    AlbaSparseMatrix<int> expectedMatrix(2, 3, {99, 198, 297, 396, 495, 594});
+    AlbaSparseMatrix<int> const expectedMatrix(2, 3, {99, 198, 297, 396, 495, 594});
     EXPECT_EQ(expectedMatrix, matrixToVerify);
 }
 
 TEST(AlbaSparseMatrixTest, OperatorMultiplyWorksAsMatrixCanBeMultipliedWithConstantValue) {
-    AlbaSparseMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaSparseMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
 
-    AlbaSparseMatrix<int> matrixToVerify(matrix * 2);
+    AlbaSparseMatrix<int> const matrixToVerify(matrix * 2);
 
-    AlbaSparseMatrix<int> expectedMatrix(2, 3, {2, 4, 6, 8, 10, 12});
+    AlbaSparseMatrix<int> const expectedMatrix(2, 3, {2, 4, 6, 8, 10, 12});
     EXPECT_EQ(expectedMatrix, matrixToVerify);
 }
 
 TEST(AlbaSparseMatrixTest, OperatorMultiplyWorksAsMatrixCanBeMultipliedWithAnotherMatrix) {
-    AlbaSparseMatrix<int> matrix1(3, 2, {1, 2, -1, 3, 1, 4});
-    AlbaSparseMatrix<int> matrix2(2, 3, {-2, 5, 4, -3, 2, 1});
+    AlbaSparseMatrix<int> const matrix1(3, 2, {1, 2, -1, 3, 1, 4});
+    AlbaSparseMatrix<int> const matrix2(2, 3, {-2, 5, 4, -3, 2, 1});
 
-    AlbaSparseMatrix<int> matrixToVerify(matrix1 * matrix2);
+    AlbaSparseMatrix<int> const matrixToVerify(matrix1 * matrix2);
 
-    AlbaSparseMatrix<int> expectedMatrix(2, 2, {4, -2, 6, 16});
+    AlbaSparseMatrix<int> const expectedMatrix(2, 2, {4, -2, 6, 16});
     EXPECT_EQ(expectedMatrix, matrixToVerify);
 }
 
 TEST(AlbaSparseMatrixTest, OperatorMultiplyWorksWithExample1) {
-    AlbaSparseMatrix<int> matrix1(2, 2, {2, 3, 4, 5});
-    AlbaSparseMatrix<int> matrix2(2, 2, {1, 2, 7, 0});
+    AlbaSparseMatrix<int> const matrix1(2, 2, {2, 3, 4, 5});
+    AlbaSparseMatrix<int> const matrix2(2, 2, {1, 2, 7, 0});
 
-    AlbaSparseMatrix<int> matrixToVerify(matrix1 * matrix2);
+    AlbaSparseMatrix<int> const matrixToVerify(matrix1 * matrix2);
 
-    AlbaSparseMatrix<int> expectedMatrix(2, 2, {23, 4, 39, 8});
+    AlbaSparseMatrix<int> const expectedMatrix(2, 2, {23, 4, 39, 8});
     EXPECT_EQ(expectedMatrix, matrixToVerify);
 }
 
 TEST(AlbaSparseMatrixTest, GetColumnsWorks) {
-    AlbaSparseMatrix<int> matrix(14, 6);
+    AlbaSparseMatrix<int> const matrix(14, 6);
 
     EXPECT_EQ(14U, matrix.getNumberOfColumns());
 }
 
 TEST(AlbaSparseMatrixTest, GetRowsWorks) {
-    AlbaSparseMatrix<int> matrix(14, 6);
+    AlbaSparseMatrix<int> const matrix(14, 6);
 
     EXPECT_EQ(6U, matrix.getNumberOfRows());
 }
 
 TEST(AlbaSparseMatrixTest, GetMatrixIndexWorks) {
-    AlbaSparseMatrix<int> matrix(14, 6);
+    AlbaSparseMatrix<int> const matrix(14, 6);
 
     EXPECT_EQ(45U, matrix.getMatrixIndex(3, 3));
     EXPECT_EQ(73U, matrix.getMatrixIndex(3, 5));
@@ -176,7 +176,7 @@ TEST(AlbaSparseMatrixTest, GetMatrixIndexWorks) {
 }
 
 TEST(AlbaSparseMatrixTest, GetEntryWorksAsValueCanBeFetchedFromEmptyVector) {
-    AlbaSparseMatrix<int> matrix(2, 3);
+    AlbaSparseMatrix<int> const matrix(2, 3);
 
     EXPECT_EQ(0, matrix.getEntry(0, 0));
     EXPECT_EQ(0, matrix.getEntry(1, 0));
@@ -187,7 +187,7 @@ TEST(AlbaSparseMatrixTest, GetEntryWorksAsValueCanBeFetchedFromEmptyVector) {
 }
 
 TEST(AlbaSparseMatrixTest, GetEntryWorksAsValueCanBeFetchedFromNonEmptyVector) {
-    AlbaSparseMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaSparseMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
 
     EXPECT_EQ(1, matrix.getEntry(0, 0));
     EXPECT_EQ(2, matrix.getEntry(1, 0));
@@ -198,7 +198,7 @@ TEST(AlbaSparseMatrixTest, GetEntryWorksAsValueCanBeFetchedFromNonEmptyVector) {
 }
 
 TEST(AlbaSparseMatrixTest, GetMatrixDataWorks) {
-    AlbaSparseMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaSparseMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
 
     AlbaSparseMatrix<int>::MatrixData const& matrixData(matrix.getMatrixData());
 
@@ -212,7 +212,7 @@ TEST(AlbaSparseMatrixTest, GetMatrixDataWorks) {
 }
 
 TEST(AlbaSparseMatrixTest, GetStringWorks) {
-    AlbaSparseMatrix<int> matrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaSparseMatrix<int> const matrix(2, 3, {1, 2, 3, 4, 5, 6});
 
     EXPECT_EQ("Matrix output:\n-----\n|1|2|\n-----\n|3|4|\n-----\n|5|6|\n-----\n", convertToString(matrix));
 }
@@ -227,7 +227,7 @@ TEST(AlbaSparseMatrixTest, SetEntryWorksAsValueCanSavedInTheMatrix) {
     matrix.setEntry(0, 2, 5);
     matrix.setEntry(1, 2, 6);
 
-    AlbaSparseMatrix<int> expectedMatrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaSparseMatrix<int> const expectedMatrix(2, 3, {1, 2, 3, 4, 5, 6});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
@@ -236,7 +236,7 @@ TEST(AlbaSparseMatrixTest, SetEntriesWorksAsMultipleValuesCanSavedInTheMatrix) {
 
     matrix.setEntries({1, 2, 3, 4, 5, 6});
 
-    AlbaSparseMatrix<int> expectedMatrix(2, 3, {1, 2, 3, 4, 5, 6});
+    AlbaSparseMatrix<int> const expectedMatrix(2, 3, {1, 2, 3, 4, 5, 6});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
@@ -245,7 +245,7 @@ TEST(AlbaSparseMatrixTest, SetEntriesWorksAsOverwritesExistingValuesAndDoesNotCh
 
     matrix.setEntries({9, 8, 7});
 
-    AlbaSparseMatrix<int> expectedMatrix(2, 3, {9, 8, 7, 4, 5, 6});
+    AlbaSparseMatrix<int> const expectedMatrix(2, 3, {9, 8, 7, 4, 5, 6});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
@@ -254,7 +254,7 @@ TEST(AlbaSparseMatrixTest, ClearAndResizeWorks) {
 
     matrix.clearAndResize(3, 2);
 
-    AlbaSparseMatrix<int> expectedMatrix(3, 2, {0, 0, 0, 0, 0, 0});
+    AlbaSparseMatrix<int> const expectedMatrix(3, 2, {0, 0, 0, 0, 0, 0});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
@@ -263,7 +263,7 @@ TEST(AlbaSparseMatrixTest, NegateWorks) {
 
     matrix.negate();
 
-    AlbaSparseMatrix<int> expectedMatrix(2, 3, {-1, -2, -3, -4, -5, -6});
+    AlbaSparseMatrix<int> const expectedMatrix(2, 3, {-1, -2, -3, -4, -5, -6});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
@@ -272,7 +272,7 @@ TEST(AlbaSparseMatrixTest, TransposeWorks) {
 
     matrix.transpose();
 
-    AlbaSparseMatrix<int> expectedMatrix(3, 2, {1, 3, 5, 2, 4, 6});
+    AlbaSparseMatrix<int> const expectedMatrix(3, 2, {1, 3, 5, 2, 4, 6});
     EXPECT_EQ(expectedMatrix, matrix);
 }
 

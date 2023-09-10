@@ -70,7 +70,7 @@ TypeToWrite AlbaStreamBitReader::readLittleEndianNumberData() {
     constexpr size_t numberOfBits(AlbaBitValueUtilities<TypeToWrite>::getNumberOfBits());
     readIfNeeded(numberOfBits);
     std::bitset<numberOfBits> dataBitset;
-    size_t byteSize = round(static_cast<double>(numberOfBits) / AlbaBitConstants::BYTE_SIZE_IN_BITS);
+    size_t const byteSize = round(static_cast<double>(numberOfBits) / AlbaBitConstants::BYTE_SIZE_IN_BITS);
     size_t bitBufferIndex = 0;
     for (size_t byteIndex = 1; byteIndex <= byteSize; ++byteIndex) {
         for (size_t i = 0; i < AlbaBitConstants::BYTE_SIZE_IN_BITS; ++i) {
@@ -87,7 +87,7 @@ std::bitset<BITSET_SIZE> AlbaStreamBitReader::readBitsetData(
     std::bitset<BITSET_SIZE> result;
     size_t const numberOfBitsToRead = std::min(endBitsetIndex - startBitsetIndex + 1, static_cast<size_t>(BITSET_SIZE));
     readIfNeeded(numberOfBitsToRead);
-    AlbaValueRange<int> bitsetRange(static_cast<int>(startBitsetIndex), static_cast<int>(endBitsetIndex), 1U);
+    AlbaValueRange<int> const bitsetRange(static_cast<int>(startBitsetIndex), static_cast<int>(endBitsetIndex), 1U);
     size_t bitBufferIndex = 0;
     bitsetRange.traverse([&](int const bitsetIndex) { result.set(bitsetIndex, m_bitBuffer[bitBufferIndex++]); });
     eraseBitsInBitBuffer(numberOfBitsToRead);

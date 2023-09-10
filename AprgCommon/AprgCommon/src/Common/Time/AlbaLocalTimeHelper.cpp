@@ -18,9 +18,9 @@ AlbaDateTime convertSystemTimeToAlbaDateTime(LibrarySystemTime const& inputTime)
     constexpr size_t YEAR_OFFSET = 1900;
     constexpr size_t MONTH_OFFSET = 1;
 
-    time_t currentTimeT = system_clock::to_time_t(inputTime);
+    time_t const currentTimeT = system_clock::to_time_t(inputTime);
     // NOLINTNEXTLINE(concurrency-mt-unsafe)
-    struct tm localTime = *localtime(&currentTimeT);
+    struct tm const localTime = *localtime(&currentTimeT);
     AlbaDateTime result(
         localTime.tm_year + YEAR_OFFSET, localTime.tm_mon + MONTH_OFFSET, localTime.tm_mday, localTime.tm_hour,
         localTime.tm_min, localTime.tm_sec,
@@ -46,7 +46,7 @@ LibrarySystemTime convertAlbaDateTimeToSystemTime(AlbaDateTime const& inputTime)
     timeInformation.tm_mon = static_cast<int>(inputTime.getMonths()) - MONTH_OFFSET;
     timeInformation.tm_year = static_cast<int>(inputTime.getYears()) - YEAR_OFFSET;
 
-    time_t timeWithoutMicroSeconds = mktime(&timeInformation);
+    time_t const timeWithoutMicroSeconds = mktime(&timeInformation);
     if (timeWithoutMicroSeconds != -1) {
         // mktime returns -1 if cannot be represented
         result = system_clock::from_time_t(timeWithoutMicroSeconds) + microseconds(inputTime.getMicroSeconds());

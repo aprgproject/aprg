@@ -9,7 +9,7 @@ using namespace std;
 namespace alba {
 
 TEST(AlbaValueRangeTest, TraverseIsNotInfiniteWhenRangeIsEmpty) {
-    AlbaValueRange<int> range;
+    AlbaValueRange<int> const range;
     vector<int> traversedValues;
     range.traverse([&](int const traverseValue) { traversedValues.emplace_back(traverseValue); });
 
@@ -28,7 +28,7 @@ TEST(AlbaValueRangeTest, TraverseIsNotInfiniteWhenRangeIsEmpty) {
 }
 
 TEST(AlbaValueRangeTest, OnceTraversalWorks) {
-    AlbaValueRange<int> range(3, 3, -1);
+    AlbaValueRange<int> const range(3, 3, -1);
     vector<int> traversedValues;
     range.traverse([&](int const traverseValue) { traversedValues.emplace_back(traverseValue); });
 
@@ -49,7 +49,7 @@ TEST(AlbaValueRangeTest, OnceTraversalWorks) {
 }
 
 TEST(AlbaValueRangeTest, ForwardTraversalWorks) {
-    AlbaValueRange<int> range(1, 10, -1);
+    AlbaValueRange<int> const range(1, 10, -1);
     vector<int> traversedValues;
     range.traverse([&](int const traverseValue) { traversedValues.emplace_back(traverseValue); });
 
@@ -79,7 +79,7 @@ TEST(AlbaValueRangeTest, ForwardTraversalWorks) {
 }
 
 TEST(AlbaValueRangeTest, BackwardTraversalWorks) {
-    AlbaValueRange<int> range(5, -5, -1);
+    AlbaValueRange<int> const range(5, -5, -1);
     vector<int> traversedValues;
     range.traverse([&](int const traverseValue) { traversedValues.emplace_back(traverseValue); });
 
@@ -143,7 +143,7 @@ TEST(AlbaValueRangeTest, RangeCanBeChangedAfterCreation) {
 }
 
 TEST(AlbaValueRangeTest, MidpointCanBeCalculated) {
-    AlbaValueRange<int> range(0, 10, 1);
+    AlbaValueRange<int> const range(0, 10, 1);
 
     EXPECT_EQ(5, range.getMidpointValue());
 }

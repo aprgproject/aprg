@@ -21,9 +21,9 @@ AlbaMatrix<DataType> constructSimplexTableWithLessThanConstraints(
     //*    1   *|    c   |        0        | 0 |
     assert(constraintsCoefficients.getNumberOfColumns() == objectiveFunctionCoefficients.size());
     assert(constraintsCoefficients.getNumberOfRows() == constraintsValues.size());
-    size_t numberOfColumns =
+    size_t const numberOfColumns =
         constraintsCoefficients.getNumberOfColumns() + constraintsCoefficients.getNumberOfRows() + 1;
-    size_t numberOfRows = constraintsCoefficients.getNumberOfRows() + 1;
+    size_t const numberOfRows = constraintsCoefficients.getNumberOfRows() + 1;
 
     AlbaMatrix<DataType> result(numberOfColumns, numberOfRows);
     constraintsCoefficients.iterateAllThroughYAndThenX([&](size_t const xPosition, size_t const yPosition) {
@@ -43,9 +43,9 @@ void solveSimplexTable(AlbaMatrix<DataType>& simplexTable) {
     bool didPivot(true);
     while (didPivot) {
         didPivot = false;
-        size_t pivotingColumn(getPivotingColumnUsingBlandsRule(simplexTable));
+        size_t const pivotingColumn(getPivotingColumnUsingBlandsRule(simplexTable));
         if (pivotingColumn < simplexTable.getNumberOfColumns()) {
-            size_t pivotingRow(getPivotingRowUsingMinRatioRule(simplexTable, pivotingColumn));
+            size_t const pivotingRow(getPivotingRowUsingMinRatioRule(simplexTable, pivotingColumn));
             if (pivotingRow < simplexTable.getNumberOfRows()) {
                 // if no pivoting row then its unbounded
                 pivotAt(simplexTable, pivotingColumn, pivotingRow);
@@ -58,7 +58,7 @@ void solveSimplexTable(AlbaMatrix<DataType>& simplexTable) {
 
 template <typename DataType>
 bool isOptimal(AlbaMatrix<DataType> const& simplexTable) {
-    size_t lastY(simplexTable.getNumberOfRows() - 1);
+    size_t const lastY(simplexTable.getNumberOfRows() - 1);
     bool result(true);
     for (size_t xPosition = 0; xPosition < simplexTable.getNumberOfColumns(); ++xPosition) {
         if (simplexTable.getEntry(xPosition, lastY) > 0) {
@@ -71,7 +71,7 @@ bool isOptimal(AlbaMatrix<DataType> const& simplexTable) {
 template <typename DataType>
 size_t getPivotingColumnUsingBlandsRule(AlbaMatrix<DataType> const& simplexTable) {
     // Finding entry q using Bland's rule: index of first column whose objective function coefficient is positive
-    size_t lastY(simplexTable.getNumberOfRows() - 1);
+    size_t const lastY(simplexTable.getNumberOfRows() - 1);
     size_t xPosition = 0;
     for (; xPosition < simplexTable.getNumberOfColumns(); ++xPosition) {
         if (simplexTable.getEntry(xPosition, lastY) > 0) {
@@ -86,7 +86,7 @@ size_t getPivotingRowUsingMinRatioRule(AlbaMatrix<DataType> const& simplexTable,
     bool isFirst(true);
     size_t pivotingRow = 0;
     DataType pivotingRatio{};
-    size_t lastX(simplexTable.getNumberOfColumns() - 1);
+    size_t const lastX(simplexTable.getNumberOfColumns() - 1);
     for (size_t yPosition = 0; yPosition < simplexTable.getNumberOfRows() - 1; ++yPosition) {
         // pivoting row does not include the last row (because last row contains the objective function)
         if (simplexTable.getEntry(pivotingColumn, yPosition) > 0) {

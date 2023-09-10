@@ -64,7 +64,7 @@ NumeratorType getPartialNumerator(
     double const doubleValue, double& fractionalPart, double& doubleValueForNextIteration) {
     static_assert(typeHelper::isIntegralType<NumeratorType>(), "Number type must be an integer");
 
-    double absoluteValueOfDouble = getAbsoluteValue(doubleValue);
+    double const absoluteValueOfDouble = getAbsoluteValue(doubleValue);
     fractionalPart = getFractionalPartInDouble(absoluteValueOfDouble);
     doubleValueForNextIteration = 1 / fractionalPart;
     return static_cast<NumeratorType>(absoluteValueOfDouble);
@@ -80,7 +80,7 @@ FractionDetails<NumberType> getFractionFromPartialNumerators(
         denominator = 1;
         for (auto itPartialNumerator = calculatedPartialNumerators.crbegin() + 1;
              itPartialNumerator != calculatedPartialNumerators.crend(); ++itPartialNumerator) {
-            double previousNumerator = numerator;
+            double const previousNumerator = numerator;
             numerator = (*itPartialNumerator * numerator) + denominator;
             denominator = previousNumerator;
             isBeyondUnsignedIntegerLimits =

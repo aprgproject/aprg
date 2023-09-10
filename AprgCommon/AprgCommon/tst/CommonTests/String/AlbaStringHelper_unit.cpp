@@ -244,10 +244,10 @@ TEST(IntegerStringTest, GetNumberOfNewLinesWorks) {
 }
 
 TEST(IntegerStringTest, GenerateUniqueIdWorks) {
-    string string1("Mark is the no#1 guy in the world. Mark is also the nicest guy.");
-    string string2("MARK is the no#1 programmer in the world. MARK is also the nicest programmer.");
-    size_t uniqueId1 = generateUniqueId(string1);
-    size_t uniqueId2 = generateUniqueId(string2);
+    string const string1("Mark is the no#1 guy in the world. Mark is also the nicest guy.");
+    string const string2("MARK is the no#1 programmer in the world. MARK is also the nicest programmer.");
+    size_t const uniqueId1 = generateUniqueId(string1);
+    size_t const uniqueId2 = generateUniqueId(string2);
     EXPECT_EQ(10144150177413483293ULL, uniqueId1);
     EXPECT_EQ(14490909308098778163ULL, uniqueId2);
 }
@@ -299,97 +299,97 @@ TEST(IntegerStringTest, GetPeriodValueWorks) {
 }
 
 TEST(ConvertCaseFromStringTest, ConvertToCapitalLettersUsingAllLetters) {
-    string testString("AbCDEFghIjKlMnopQRstUvWxYz");
-    string capitalLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    string const testString("AbCDEFghIjKlMnopQRstUvWxYz");
+    string const capitalLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
     EXPECT_EQ(capitalLetters, getStringWithCapitalLetters(testString));
 }
 
 TEST(ConvertCaseFromStringTest, ConvertToCapitalLettersUsingAllLettersWithSpecialCharacters) {
-    string testString("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
-    string capitalLetters("1234567890!@#$%^&*( )ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    string const testString("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
+    string const capitalLetters("1234567890!@#$%^&*( )ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
     EXPECT_EQ(capitalLetters, getStringWithCapitalLetters(testString));
 }
 
 TEST(ConvertCaseFromStringTest, ConvertToFirstNonWhiteSpaceCharacterToCapitalWithFirstLetter) {
-    string testString("abCDEFghIjKlMnopQRstUvWxYz");
-    string capitalLetters("AbCDEFghIjKlMnopQRstUvWxYz");
+    string const testString("abCDEFghIjKlMnopQRstUvWxYz");
+    string const capitalLetters("AbCDEFghIjKlMnopQRstUvWxYz");
 
     EXPECT_EQ(capitalLetters, getStringWithFirstNonWhiteSpaceCharacterToCapital(testString));
 }
 
 TEST(ConvertCaseFromStringTest, ConvertToFirstNonWhiteSpaceCharacterToCapitalWithFirstWhiteSpaceCharacter) {
-    string testString("     abCDEFghIjKlMnopQRstUvWxYz");
-    string capitalLetters("     AbCDEFghIjKlMnopQRstUvWxYz");
+    string const testString("     abCDEFghIjKlMnopQRstUvWxYz");
+    string const capitalLetters("     AbCDEFghIjKlMnopQRstUvWxYz");
 
     EXPECT_EQ(capitalLetters, getStringWithFirstNonWhiteSpaceCharacterToCapital(testString));
 }
 
 TEST(ConvertCaseFromStringTest, ConvertToFirstNonWhiteSpaceCharacterToCapitalWithFirstNumber) {
-    string testString("1abCDEFghIjKlMnopQRstUvWxYz");
-    string capitalLetters("1abCDEFghIjKlMnopQRstUvWxYz");
+    string const testString("1abCDEFghIjKlMnopQRstUvWxYz");
+    string const capitalLetters("1abCDEFghIjKlMnopQRstUvWxYz");
 
     EXPECT_EQ(capitalLetters, getStringWithFirstNonWhiteSpaceCharacterToCapital(testString));
 }
 
 TEST(ConvertCaseFromStringTest, ConvertToLowerCaseLettersUsingAllLettersWithSpecialCharacters) {
-    string testString("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
-    string lowerCaseLetters("1234567890!@#$%^&*( )abcdefghijklmnopqrstuvwxyz");
+    string const testString("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
+    string const lowerCaseLetters("1234567890!@#$%^&*( )abcdefghijklmnopqrstuvwxyz");
 
     EXPECT_EQ(lowerCaseLetters, getStringWithLowerCaseLetters(testString));
 }
 
 TEST(ConvertUrlFromStringTest, DecodeUrlString) {
-    string testString("https%3A%2F%2Fmywebsite%2Fdocs%2Fenglish%2Fsite%2Fmybook.do%3Frequest_type");
-    string decodedUrl("https://mywebsite/docs/english/site/mybook.do?request_type");
+    string const testString("https%3A%2F%2Fmywebsite%2Fdocs%2Fenglish%2Fsite%2Fmybook.do%3Frequest_type");
+    string const decodedUrl("https://mywebsite/docs/english/site/mybook.do?request_type");
 
     EXPECT_EQ(decodedUrl, getStringWithUrlDecodedString(testString));
 }
 
 TEST(ConvertUrlFromStringTest, DecodeUrlString2) {
-    string testString("Last+Week+Tonight+with+John+Oliver-+The+IRS+%28HBO%29");
-    string decodedUrl("Last+Week+Tonight+with+John+Oliver-+The+IRS+(HBO)");
+    string const testString("Last+Week+Tonight+with+John+Oliver-+The+IRS+%28HBO%29");
+    string const decodedUrl("Last+Week+Tonight+with+John+Oliver-+The+IRS+(HBO)");
 
     EXPECT_EQ(decodedUrl, getStringWithUrlDecodedString(testString));
 }
 
 TEST(GetPartialStringFromStringTest, GetStringThatContainsWhiteSpaceIndention) {
-    string testString(
+    string const testString(
         "     \n\n1 2 3 4 5 6   7 8 9 0!@#$%^&*( )a   b   c d e f g   h i j k l m  n o   p q r\n\n\ns t u v w x y z   "
         " ");
-    string whiteSpaceIndention("     \n\n");
+    string const whiteSpaceIndention("     \n\n");
 
     EXPECT_EQ(whiteSpaceIndention, getStringThatContainsWhiteSpaceIndention(testString));
 }
 
 TEST(GetPartialStringFromStringTest, GetWithoutStartingAndTrailingWhiteSpaceUsingWhiteSpaceOnly) {
-    string testString("     \n\n    \t\t\t   ");
+    string const testString("     \n\n    \t\t\t   ");
     EXPECT_TRUE(getStringWithoutStartingAndTrailingWhiteSpace(testString).empty());
 }
 
 TEST(GetPartialStringFromStringTest, GetWithoutStartingAndTrailingWhiteSpaceUsingAllLettersWithSpecialCharacters) {
-    string testString(
+    string const testString(
         "     \n\n1 2 3 4 5 6   7 8 9 0!@#$%^&*( )a   b   c d e f g   h i j k l m  n o   p q r\n\n\ns t u v w x y z   "
         " ");
-    string withoutStartingAndTrailingWhiteSpace(
+    string const withoutStartingAndTrailingWhiteSpace(
         "1 2 3 4 5 6   7 8 9 0!@#$%^&*( )a   b   c d e f g   h i j k l m  n o   p q r\n\n\ns t u v w x y z");
 
     EXPECT_EQ(withoutStartingAndTrailingWhiteSpace, getStringWithoutStartingAndTrailingWhiteSpace(testString));
 }
 
 TEST(GetPartialStringFromStringTest, GetWithoutRedundantWhiteSpaceUsingAllLettersWithSpecialCharacters) {
-    string testString(
+    string const testString(
         "     \n\n1 2 3 4 5 6   7 8 9 0!@#$%^&*( )a   b   c d e f g   h i j k l m  n o   p q r\n\n\ns t u v w x y z   "
         " ");
-    string withoutRedundantWhiteSpace(
+    string const withoutRedundantWhiteSpace(
         "1 2 3 4 5 6 7 8 9 0!@#$%^&*( )a b c d e f g h i j k l m n o p q r s t u v w x y z");
 
     EXPECT_EQ(withoutRedundantWhiteSpace, getStringWithoutRedundantWhiteSpace(testString));
 }
 
 TEST(GetPartialStringFromStringTest, GetWithoutRedundantWhiteSpaceWithTabsAndNewLine) {
-    string correctOutput("Mark is the no#1 guy in the world");
+    string const correctOutput("Mark is the no#1 guy in the world");
     EXPECT_EQ(correctOutput, getStringWithoutRedundantWhiteSpace("Mark is the no#1 guy in the world"));
     EXPECT_EQ(correctOutput, getStringWithoutRedundantWhiteSpace("    Mark    is the no#1 guy  in the     world    "));
     EXPECT_EQ(
@@ -397,44 +397,44 @@ TEST(GetPartialStringFromStringTest, GetWithoutRedundantWhiteSpaceWithTabsAndNew
 }
 
 TEST(GetPartialStringFromStringTest, GetStringWithoutQuotationsUsingAllLettersWithSpecialCharacters) {
-    string testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
-    string withoutQuotations("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
+    string const testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
+    string const withoutQuotations("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
 
     EXPECT_EQ(withoutQuotations, getStringWithoutQuotations(testString));
 }
 
 TEST(GetPartialStringFromStringTest, GetStringWithoutCharacterAtTheStartUsingAllLetters) {
-    string testString("_AbCDEFghIjKlMnopQRstUvWxYz");
-    string withoutUnderscore("AbCDEFghIjKlMnopQRstUvWxYz");
+    string const testString("_AbCDEFghIjKlMnopQRstUvWxYz");
+    string const withoutUnderscore("AbCDEFghIjKlMnopQRstUvWxYz");
 
     EXPECT_EQ(withoutUnderscore, getStringWithoutCharAtTheStart(testString, '_'));
 }
 
 TEST(GetPartialStringFromStringTest, GetStringWithoutCharacterAtTheEndUsingAllLetters) {
-    string testString("AbCDEFghIjKlMnopQRstUvWxYz_");
-    string withoutUnderscore("AbCDEFghIjKlMnopQRstUvWxYz");
+    string const testString("AbCDEFghIjKlMnopQRstUvWxYz_");
+    string const withoutUnderscore("AbCDEFghIjKlMnopQRstUvWxYz");
 
     EXPECT_EQ(withoutUnderscore, getStringWithoutCharAtTheEnd(testString, '_'));
 }
 
 TEST(GetPartialStringFromStringTest, GetStringWithoutCharacterAtTheStartAndEndUsingAllLetters) {
-    string testString("_AbCDEFghIjKlMnopQRstUvWxYz_");
-    string withoutUnderscore("AbCDEFghIjKlMnopQRstUvWxYz");
+    string const testString("_AbCDEFghIjKlMnopQRstUvWxYz_");
+    string const withoutUnderscore("AbCDEFghIjKlMnopQRstUvWxYz");
 
     EXPECT_EQ(withoutUnderscore, getStringWithoutCharAtTheStartAndEnd(testString, '_'));
 }
 
 TEST(GetPartialStringFromStringTest, GetLongestCommonPrefixWorks) {
-    string testString1("adjustedforever");
-    string testString2("adjustedforevah");
+    string const testString1("adjustedforever");
+    string const testString2("adjustedforevah");
 
     EXPECT_EQ("adjustedforev", getLongestCommonPrefix(testString1, testString2));
 }
 
 TEST(GetPartialStringFromStringTest, CopyBeforeStringAndAfterStringWhenStringIsFound) {
-    string testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
-    string expectedBeforeString(R"("1234567890!@#$%^&*( ))");
-    string expectedAfterString(R"(EFghIjKlMnopQRstUvWxYz")");
+    string const testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
+    string const expectedBeforeString(R"("1234567890!@#$%^&*( ))");
+    string const expectedAfterString(R"(EFghIjKlMnopQRstUvWxYz")");
     string actualBeforeString;
     string actualAfterString;
 
@@ -444,7 +444,7 @@ TEST(GetPartialStringFromStringTest, CopyBeforeStringAndAfterStringWhenStringIsF
 }
 
 TEST(GetPartialStringFromStringTest, CopyBeforeStringAndAfterStringWhenStringIsNotFound) {
-    string testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
+    string const testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
     string actualBeforeString;
     string actualAfterString;
 
@@ -454,19 +454,20 @@ TEST(GetPartialStringFromStringTest, CopyBeforeStringAndAfterStringWhenStringIsN
 }
 
 TEST(GetPartialStringFromStringTest, GetStringBeforeThisStringWithCharactersAfterQuestionMarkIsRemoved) {
-    string testString("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg?v=1354256522");
-    string withCharactersAfterQuestionMarkRemoved("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg");
-    string withIndexStart("tore/manga/12114/001.0/compressed/r049.jpg");
-    string questionMarkString("?");
+    string const testString("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg?v=1354256522");
+    string const withCharactersAfterQuestionMarkRemoved(
+        "http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg");
+    string const withIndexStart("tore/manga/12114/001.0/compressed/r049.jpg");
+    string const questionMarkString("?");
 
     EXPECT_EQ(withCharactersAfterQuestionMarkRemoved, getStringBeforeThisString(testString, questionMarkString));
     EXPECT_EQ(withIndexStart, getStringBeforeThisString(testString, questionMarkString, 20));
 }
 
 TEST(GetPartialStringFromStringTest, GetStringAfterThisStringUsingAllLettersWithSpecialCharacters) {
-    string testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
-    string stringInBetweenAtTheStart(R"(567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
-    string stringInBetweenInTheMiddle(R"(^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
+    string const testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
+    string const stringInBetweenAtTheStart(R"(567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
+    string const stringInBetweenInTheMiddle(R"(^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
 
     EXPECT_EQ(stringInBetweenAtTheStart, getStringAfterThisString(testString, R"("1234)"));
     EXPECT_EQ(stringInBetweenInTheMiddle, getStringAfterThisString(testString, "@#$%"));
@@ -474,10 +475,10 @@ TEST(GetPartialStringFromStringTest, GetStringAfterThisStringUsingAllLettersWith
 }
 
 TEST(GetPartialStringFromStringTest, GetStringInBetweenTwoStringsUsingAllLettersWithSpecialCharacters) {
-    string testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
-    string firstString("1234567890");
-    string secondString("AbCDEFghIjKlMnopQRstUvWxYz");
-    string stringInBetween("!@#$%^&*( )");
+    string const testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
+    string const firstString("1234567890");
+    string const secondString("AbCDEFghIjKlMnopQRstUvWxYz");
+    string const stringInBetween("!@#$%^&*( )");
 
     EXPECT_EQ(stringInBetween, getStringInBetweenTwoStrings(testString, firstString, secondString));
     EXPECT_TRUE(getStringInBetweenTwoStrings(testString, secondString, firstString).empty());
@@ -485,7 +486,7 @@ TEST(GetPartialStringFromStringTest, GetStringInBetweenTwoStringsUsingAllLetters
 }
 
 TEST(GetPartialStringFromStringTest, GetStringBeforeThisCharacters) {
-    string testString("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
+    string const testString("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
 
     EXPECT_EQ("1234567890", getStringBeforeThisCharacters(testString, "$#^%@&!*"));
     EXPECT_EQ("1234567890!@#$%^&*(", getStringBeforeThisCharacters(testString, " "));
@@ -493,8 +494,8 @@ TEST(GetPartialStringFromStringTest, GetStringBeforeThisCharacters) {
 }
 
 TEST(GetNewStringFromStringTest, GetStringReplacingSpecialCharactersWithUnderscore) {
-    string testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
-    string withoutSpecialCharacters("_1234567890_AbCDEFghIjKlMnopQRstUvWxYz_");
+    string const testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
+    string const withoutSpecialCharacters("_1234567890_AbCDEFghIjKlMnopQRstUvWxYz_");
 
     EXPECT_EQ(withoutSpecialCharacters, getStringAndReplaceNonAlphanumericCharactersToUnderScore(testString));
 }
@@ -507,8 +508,8 @@ TEST(GetNewStringFromStringTest, GetStringByRepeatingUntilDesiredLength) {
 }
 
 TEST(GetNewStringFromStringTest, GetStringReplacingSpacesWithUnderscore) {
-    string testString(R"( Mark Earvin Alba 1234567890 ")");
-    string withoutSpecialCharacters("_Mark_Earvin_Alba_1234567890_");
+    string const testString(R"( Mark Earvin Alba 1234567890 ")");
+    string const withoutSpecialCharacters("_Mark_Earvin_Alba_1234567890_");
 
     EXPECT_EQ(withoutSpecialCharacters, getStringAndReplaceNonAlphanumericCharactersToUnderScore(testString));
 }
@@ -542,7 +543,7 @@ TEST(GetStringFromStringTest, GetQuotedString) {
 TEST(UtilitiesStringTest, ConstructFileLocator) { EXPECT_FALSE(constructFileLocator(__FILE__, __LINE__).empty()); }
 
 TEST(UtilitiesStringTest, RandomString100Characters) {
-    size_t length(100);
+    size_t const length(100);
     EXPECT_EQ(length, getRandomAlphaNumericString(length).length());
 }
 
@@ -573,35 +574,35 @@ TEST(GetNewStringFromStringTest, FindAndReplaceStringsWithRedundantStrings) {
 }
 
 TEST(SplitStringTest, SplitBySpaces) {
-    string string1("   Mark is the no#1      guy in the  world.    Mark is also the nicest guy.    ");
+    string const string1("   Mark is the no#1      guy in the  world.    Mark is also the nicest guy.    ");
     strings expectedStrings{"Mark",   "is",   "the", "no#1", "guy", "in",     "the",
                             "world.", "Mark", "is",  "also", "the", "nicest", "guy."};
     strings actualStrings;
     splitToStrings<SplitStringType::WithoutDelimeters>(actualStrings, string1, " ");
 
     EXPECT_EQ(expectedStrings.size(), actualStrings.size());
-    size_t size = min(expectedStrings.size(), actualStrings.size());
+    size_t const size = min(expectedStrings.size(), actualStrings.size());
     for (size_t i = 0; i < size; ++i) {
         EXPECT_EQ(expectedStrings[i], actualStrings[i]);
     }
 }
 
 TEST(SplitStringTest, SplitBySpacesWithDelimeters) {
-    string string1("   Mark is the no#1      guy in the  world.   ");
+    string const string1("   Mark is the no#1      guy in the  world.   ");
     strings expectedStrings{" ", " ", " ",   "Mark", " ",  "is", " ",   "the", " ", "no#1",   " ", " ", " ", " ",
                             " ", " ", "guy", " ",    "in", " ",  "the", " ",   " ", "world.", " ", " ", " "};
     strings actualStrings;
     splitToStrings<SplitStringType::WithDelimeters>(actualStrings, string1, " ");
 
     EXPECT_EQ(expectedStrings.size(), actualStrings.size());
-    size_t size = min(expectedStrings.size(), actualStrings.size());
+    size_t const size = min(expectedStrings.size(), actualStrings.size());
     for (size_t i = 0; i < size; ++i) {
         EXPECT_EQ(expectedStrings[i], actualStrings[i]);
     }
 }
 
 TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksWithLargeTargetLength) {
-    string string1("   Mark is the no#1      guy in the  world.   ThisIsALongString");
+    string const string1("   Mark is the no#1      guy in the  world.   ThisIsALongString");
     strings expectedStrings{"   Mark is", " the no#1 ", "     guy ", "in the  ", "world.   ", "ThisIsALongString"};
     strings actualStrings;
     const int targetLength = 10;
@@ -609,14 +610,14 @@ TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksWithLargeTargetLength)
     splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
 
     EXPECT_EQ(expectedStrings.size(), actualStrings.size());
-    size_t size = min(expectedStrings.size(), actualStrings.size());
+    size_t const size = min(expectedStrings.size(), actualStrings.size());
     for (size_t i = 0; i < size; ++i) {
         EXPECT_EQ(expectedStrings[i], actualStrings[i]);
     }
 }
 
 TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksLastLineIsIncluded) {
-    string string1("TupcIlm starts when its deployed on board 0x1011 (same with legacy Aalman)");
+    string const string1("TupcIlm starts when its deployed on board 0x1011 (same with legacy Aalman)");
     strings expectedStrings{"TupcIlm starts when its deployed", " on board 0x1011 (same with ", "legacy Aalman)"};
     strings actualStrings;
     const int targetLength = 30;
@@ -624,14 +625,14 @@ TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksLastLineIsIncluded) {
     splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
 
     EXPECT_EQ(expectedStrings.size(), actualStrings.size());
-    size_t size = min(expectedStrings.size(), actualStrings.size());
+    size_t const size = min(expectedStrings.size(), actualStrings.size());
     for (size_t i = 0; i < size; ++i) {
         EXPECT_EQ(expectedStrings[i], actualStrings[i]);
     }
 }
 
 TEST(SplitStringTest, SplitLinesToAchieveTargetLengthCanBeSplitPerCharacter) {
-    string string1("   Mark is the no#1      ");
+    string const string1("   Mark is the no#1      ");
     strings expectedStrings{" ", " ", " ", "Mark", " ", "is", " ", "the", " ", "no#1", " ", " ", " ", " ", " ", " "};
     strings actualStrings;
     const int targetLength = 1;
@@ -639,22 +640,22 @@ TEST(SplitStringTest, SplitLinesToAchieveTargetLengthCanBeSplitPerCharacter) {
     splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
 
     EXPECT_EQ(expectedStrings.size(), actualStrings.size());
-    size_t size = min(expectedStrings.size(), actualStrings.size());
+    size_t const size = min(expectedStrings.size(), actualStrings.size());
     for (size_t i = 0; i < size; ++i) {
         EXPECT_EQ(expectedStrings[i], actualStrings[i]);
     }
 }
 
 TEST(SplitStringTest, SplitToStringsUsingASeriesOfDelimetersWorks) {
-    string string1(R"(TLH_DEBUG_PRINT("Creating new licence entry in DB for featureCode: %d.", featureCode);)");
-    strings delimeters{R"((")", R"(",)", ");"};
+    string const string1(R"(TLH_DEBUG_PRINT("Creating new licence entry in DB for featureCode: %d.", featureCode);)");
+    strings const delimeters{R"((")", R"(",)", ");"};
     strings expectedStrings{
         "TLH_DEBUG_PRINT", R"(Creating new licence entry in DB for featureCode: %d.)", " featureCode"};
     strings actualStrings;
     splitToStringsUsingASeriesOfDelimeters(actualStrings, string1, delimeters);
 
     EXPECT_EQ(expectedStrings.size(), actualStrings.size());
-    size_t size = min(expectedStrings.size(), actualStrings.size());
+    size_t const size = min(expectedStrings.size(), actualStrings.size());
     for (size_t i = 0; i < size; ++i) {
         EXPECT_EQ(expectedStrings[i], actualStrings[i]);
     }
@@ -699,10 +700,10 @@ TEST(BasicStringVariantTest, ConvertToAnotherBasicStringVariantWorks) {
 }
 
 TEST(CombineStringTest, CombinedStringsWithComma) {
-    strings stringsToCombine{"Mark",   "is",   "the", "no#1", "guy", "in",     "the",
-                             "world.", "Mark", "is",  "also", "the", "nicest", "guy."};
-    string expectedString("Mark,is,the,no#1,guy,in,the,world.,Mark,is,also,the,nicest,guy.");
-    string actualString(combineStrings(stringsToCombine, ","));
+    strings const stringsToCombine{"Mark",   "is",   "the", "no#1", "guy", "in",     "the",
+                                   "world.", "Mark", "is",  "also", "the", "nicest", "guy."};
+    string const expectedString("Mark,is,the,no#1,guy,in,the,world.,Mark,is,also,the,nicest,guy.");
+    string const actualString(combineStrings(stringsToCombine, ","));
 
     EXPECT_EQ(expectedString, actualString);
 }
@@ -767,51 +768,51 @@ TEST(GetStringWithAlignmentFromStringTest, GetStringWithLeftAlignment) {
 }
 
 TEST(GetNewStringFromStringTest, GetStringWithoutRedundantSlashesUsingAllLettersWithSpecialCharacters) {
-    string testString(R"(////DIR1\\/\\/\\/DIR2\\\\DIR3///DIR4\\\\//DIR5////\\\\)");
-    string withoutRedundantSlashes(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
+    string const testString(R"(////DIR1\\/\\/\\/DIR2\\\\DIR3///DIR4\\\\//DIR5////\\\\)");
+    string const withoutRedundantSlashes(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
 
     EXPECT_EQ(withoutRedundantSlashes, getCorrectPathWithReplacedSlashCharacters(testString, R"(\)"));
 }
 
 TEST(GetNewStringFromStringTest, GetStringWithoutRedundantPeriodInPathUsingAllLettersWithSpecialCharacters) {
-    string testString(R"(\DIR1\DIR2\..\DIR3\DIR4\..\..\DIR5\)");
-    string withoutRedundantPeriodInPath(R"(\DIR1\DIR5\)");
+    string const testString(R"(\DIR1\DIR2\..\DIR3\DIR4\..\..\DIR5\)");
+    string const withoutRedundantPeriodInPath(R"(\DIR1\DIR5\)");
 
     EXPECT_EQ(withoutRedundantPeriodInPath, getCorrectPathWithoutDoublePeriod(testString, R"(\)"));
 }
 
 TEST(GetNewStringFromStringTest, GetStringBeforeDoublePeriodInPathUsingAllLettersWithSpecialCharacters) {
-    string testString(R"(\DIR1\DIR2\..\DIR3\DIR4\..\..\DIR5\)");
-    string beforeDoublePeriod(R"(DIR5\)");
+    string const testString(R"(\DIR1\DIR2\..\DIR3\DIR4\..\..\DIR5\)");
+    string const beforeDoublePeriod(R"(DIR5\)");
 
     EXPECT_EQ(beforeDoublePeriod, getStringBeforeDoublePeriod(testString, R"(\)"));
 }
 
 TEST(GetNewStringFromStringTest, GetStringBeforeDoublePeriodInPathUsingNoDoublePeriodInput) {
-    string testString(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
-    string beforeDoublePeriod(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
+    string const testString(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
+    string const beforeDoublePeriod(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
 
     EXPECT_EQ(beforeDoublePeriod, getStringBeforeDoublePeriod(testString, R"(\)"));
 }
 
 TEST(GetNewStringFromStringTest, GetImmediateDirectoryNameUsingLastCharacterIsSlash) {
-    string testString(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
-    string immediateDirectoryName("DIR5");
+    string const testString(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
+    string const immediateDirectoryName("DIR5");
 
     EXPECT_EQ(immediateDirectoryName, getImmediateDirectoryName(testString, R"(\)"));
 }
 
 TEST(GetNewStringFromStringTest, GetImmediateDirectoryNameUsingLastCharacterIsNotSlash) {
-    string testString(R"(\DIR1\DIR2\DIR3\DIR4\DIR5)");
-    string immediateDirectoryName("DIR5");
+    string const testString(R"(\DIR1\DIR2\DIR3\DIR4\DIR5)");
+    string const immediateDirectoryName("DIR5");
 
     EXPECT_EQ(immediateDirectoryName, getImmediateDirectoryName(testString, R"(\)"));
 }
 
 TEST(BooleanStringTest, IsNumberTest) {
-    string testString1("AbCDEFghIjKlMnopQRstUvWxYz");
-    string testString2("AbCD1234567890!@#$%^&*( )");
-    string testString3("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
+    string const testString1("AbCDEFghIjKlMnopQRstUvWxYz");
+    string const testString2("AbCD1234567890!@#$%^&*( )");
+    string const testString3("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
 
     EXPECT_FALSE(isNumber(testString1));
     EXPECT_TRUE(isNumber(testString2));
@@ -819,9 +820,9 @@ TEST(BooleanStringTest, IsNumberTest) {
 }
 
 TEST(BooleanStringTest, IsWhiteSpaceTest) {
-    string testString1("   AbCDEFghIjKlMnopQRstUvWxYz  ");
-    string testString2("       ");
-    string testString3("   \n\n    \t\t\t\t");
+    string const testString1("   AbCDEFghIjKlMnopQRstUvWxYz  ");
+    string const testString2("       ");
+    string const testString3("   \n\n    \t\t\t\t");
 
     EXPECT_FALSE(isWhiteSpace(testString1));
     EXPECT_TRUE(isWhiteSpace(testString2));
@@ -829,11 +830,11 @@ TEST(BooleanStringTest, IsWhiteSpaceTest) {
 }
 
 TEST(BooleanStringTest, IsIdentifierTest) {
-    string testString1("   AbCDEFghIjKlMnopQRstUvWxYz  ");
-    string testString2("   \n\n    \t\t\t\t");
-    string testString3("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
-    string testString4("abc1234");
-    string testString5("_abc1234");
+    string const testString1("   AbCDEFghIjKlMnopQRstUvWxYz  ");
+    string const testString2("   \n\n    \t\t\t\t");
+    string const testString3("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
+    string const testString4("abc1234");
+    string const testString5("_abc1234");
 
     EXPECT_FALSE(isIdentifier(testString1));
     EXPECT_FALSE(isIdentifier(testString2));
@@ -843,11 +844,11 @@ TEST(BooleanStringTest, IsIdentifierTest) {
 }
 
 TEST(BooleanStringTest, IsOneWordTest) {
-    string testString1("   AbCDEFghIjKlMnopQRstUvWxYz  ");
-    string testString2("   \n\n    \t\t\t\t");
-    string testString3("AbCDE FghIj KlM nopQR stU vWx Yz");
-    string testString4("AbCDEFghIjKlMnopQRstUvWxYz1234567890!@#$%^&*()");
-    string testString5;
+    string const testString1("   AbCDEFghIjKlMnopQRstUvWxYz  ");
+    string const testString2("   \n\n    \t\t\t\t");
+    string const testString3("AbCDE FghIj KlM nopQR stU vWx Yz");
+    string const testString4("AbCDEFghIjKlMnopQRstUvWxYz1234567890!@#$%^&*()");
+    string const testString5;
 
     EXPECT_FALSE(isOneWord(testString1));
     EXPECT_FALSE(isOneWord(testString2));
@@ -954,43 +955,43 @@ TEST(IntegerStringTest, IsBorderWorks) {
 }
 
 TEST(BooleanStringTest, StringCompareNotCaseSensitive) {
-    string testString("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
-    string capitalLetters("1234567890!@#$%^&*( )abcdEFghijklMnOPQRstUvWxYz");
+    string const testString("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
+    string const capitalLetters("1234567890!@#$%^&*( )abcdEFghijklMnOPQRstUvWxYz");
 
     EXPECT_TRUE(isEqualNotCaseSensitive(testString, capitalLetters));
 }
 
 TEST(BooleanStringTest, StringCompareWithLowestCommonLength) {
-    string testString1("1234567890!@#$%^&*( )AbCD");
-    string testString2("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
+    string const testString1("1234567890!@#$%^&*( )AbCD");
+    string const testString2("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
 
     EXPECT_TRUE(isEqualWithLowestCommonLength(testString1, testString2));
     EXPECT_TRUE(isEqualWithLowestCommonLength(testString2, testString1));
 }
 
 TEST(BooleanStringTest, isStringFoundCaseSensitiveWithLettersOnly) {
-    string longString("Mark is the no#1 guy in the world");
+    string const longString("Mark is the no#1 guy in the world");
 
     EXPECT_FALSE(isStringFoundCaseSensitive(longString, "mark"));
     EXPECT_TRUE(isStringFoundCaseSensitive(longString, "Mark"));
 }
 
 TEST(BooleanStringTest, isStringFoundCaseSensitiveWithLettersAndNumbersAndSpecialCharacters) {
-    string longString("Mark is the no#1 guy in the world");
+    string const longString("Mark is the no#1 guy in the world");
 
     EXPECT_FALSE(isStringFoundCaseSensitive(longString, "nO#1"));
     EXPECT_TRUE(isStringFoundCaseSensitive(longString, "no#1"));
 }
 
 TEST(BooleanStringTest, isStringFoundCaseSensitiveWithSameLength) {
-    string longString("Attribute = ");
+    string const longString("Attribute = ");
 
     EXPECT_FALSE(isStringFoundCaseSensitive(longString, "aTTRIBUTE = "));
     EXPECT_TRUE(isStringFoundCaseSensitive(longString, "Attribute = "));
 }
 
 TEST(BooleanStringTest, isStringFoundCaseSensitiveWithRunningIndex) {
-    string longString("Mark is the no#1 guy in the world");
+    string const longString("Mark is the no#1 guy in the world");
 
     int runningIndex = 0;
     EXPECT_TRUE(isStringFoundCaseSensitive(longString, "Mark", runningIndex));
@@ -1003,14 +1004,14 @@ TEST(BooleanStringTest, isStringFoundCaseSensitiveWithRunningIndex) {
 }
 
 TEST(BooleanStringTest, isStringFoundNotCaseSensitiveWithLettersOnly) {
-    string longString("Mark is the no#1 guy in the world");
+    string const longString("Mark is the no#1 guy in the world");
 
     EXPECT_TRUE(isStringFoundNotCaseSensitive(longString, "mark"));
     EXPECT_TRUE(isStringFoundNotCaseSensitive(longString, "Mark"));
 }
 
 TEST(BooleanStringTest, isStringFoundNotCaseSensitiveWithLettersAndNumbersAndSpecialCharacters) {
-    string longString("Mark is the no#1 guy in the world");
+    string const longString("Mark is the no#1 guy in the world");
 
     EXPECT_TRUE(isStringFoundNotCaseSensitive(longString, "nO#1"));
     EXPECT_TRUE(isStringFoundNotCaseSensitive(longString, "no#1"));
@@ -1028,11 +1029,11 @@ TEST(BooleanStringTest, IsWildcardMatchTest) {
 }
 
 TEST(BooleanStringTest, IsCamelCaseTest) {
-    string testString1("calculateTotalAmount");
-    string testString2("CalculateTotalAmount");
-    string testString3("calculate_total_amount");
-    string testString4("calculate-total-amount");
-    string testString5("MAX_VALUE");
+    string const testString1("calculateTotalAmount");
+    string const testString2("CalculateTotalAmount");
+    string const testString3("calculate_total_amount");
+    string const testString4("calculate-total-amount");
+    string const testString5("MAX_VALUE");
 
     EXPECT_TRUE(isCamelCase(testString1));
     EXPECT_FALSE(isCamelCase(testString2));
@@ -1042,11 +1043,11 @@ TEST(BooleanStringTest, IsCamelCaseTest) {
 }
 
 TEST(BooleanStringTest, IsPascalCaseTest) {
-    string testString1("calculateTotalAmount");
-    string testString2("CalculateTotalAmount");
-    string testString3("calculate_total_amount");
-    string testString4("calculate-total-amount");
-    string testString5("MAX_VALUE");
+    string const testString1("calculateTotalAmount");
+    string const testString2("CalculateTotalAmount");
+    string const testString3("calculate_total_amount");
+    string const testString4("calculate-total-amount");
+    string const testString5("MAX_VALUE");
 
     EXPECT_FALSE(isPascalCase(testString1));
     EXPECT_TRUE(isPascalCase(testString2));
@@ -1056,11 +1057,11 @@ TEST(BooleanStringTest, IsPascalCaseTest) {
 }
 
 TEST(BooleanStringTest, IsSnakeCaseTest) {
-    string testString1("calculateTotalAmount");
-    string testString2("CalculateTotalAmount");
-    string testString3("calculate_total_amount");
-    string testString4("calculate-total-amount");
-    string testString5("MAX_VALUE");
+    string const testString1("calculateTotalAmount");
+    string const testString2("CalculateTotalAmount");
+    string const testString3("calculate_total_amount");
+    string const testString4("calculate-total-amount");
+    string const testString5("MAX_VALUE");
 
     EXPECT_FALSE(isSnakeCase(testString1));
     EXPECT_FALSE(isSnakeCase(testString2));
@@ -1070,11 +1071,11 @@ TEST(BooleanStringTest, IsSnakeCaseTest) {
 }
 
 TEST(BooleanStringTest, IsKebabCaseTest) {
-    string testString1("calculateTotalAmount");
-    string testString2("CalculateTotalAmount");
-    string testString3("calculate_total_amount");
-    string testString4("calculate-total-amount");
-    string testString5("MAX_VALUE");
+    string const testString1("calculateTotalAmount");
+    string const testString2("CalculateTotalAmount");
+    string const testString3("calculate_total_amount");
+    string const testString4("calculate-total-amount");
+    string const testString5("MAX_VALUE");
 
     EXPECT_FALSE(isKebabCase(testString1));
     EXPECT_FALSE(isKebabCase(testString2));
@@ -1084,11 +1085,11 @@ TEST(BooleanStringTest, IsKebabCaseTest) {
 }
 
 TEST(BooleanStringTest, IsScreamingSnakeCaseTest) {
-    string testString1("calculateTotalAmount");
-    string testString2("CalculateTotalAmount");
-    string testString3("calculate_total_amount");
-    string testString4("calculate-total-amount");
-    string testString5("MAX_VALUE");
+    string const testString1("calculateTotalAmount");
+    string const testString2("CalculateTotalAmount");
+    string const testString3("calculate_total_amount");
+    string const testString4("calculate-total-amount");
+    string const testString5("MAX_VALUE");
 
     EXPECT_FALSE(isScreamingSnakeCase(testString1));
     EXPECT_FALSE(isScreamingSnakeCase(testString2));
@@ -1151,8 +1152,8 @@ TEST(ConvertFromStringTest, HexConvertStringToIntegerWithNumbersOnly) {
 }
 
 TEST(ConvertFromStringTest, ConvertStringToDoubleWithAlbaNumber) {
-    AlbaNumber numberToVerify1(convertStringToAlbaNumber("12345"));
-    AlbaNumber numberToVerify2(convertStringToAlbaNumber("12345.6789"));
+    AlbaNumber const numberToVerify1(convertStringToAlbaNumber("12345"));
+    AlbaNumber const numberToVerify2(convertStringToAlbaNumber("12345.6789"));
 
     EXPECT_EQ(AlbaNumber::Type::Integer, numberToVerify1.getType());
     EXPECT_EQ(12345, numberToVerify1.getInteger());
@@ -1173,7 +1174,7 @@ TEST(ConvertToStringTest, ConvertNumberToString) {
 }
 
 TEST(StringConverterWithFormattingTest, ConvertNumberToStringWithDefaultParameters) {
-    StringConverterWithFormatting converter;
+    StringConverterWithFormatting const converter;
 
     EXPECT_EQ("12345", converter.convertToString(12345));
     EXPECT_EQ("12345.7", converter.convertToString(12345.6789));

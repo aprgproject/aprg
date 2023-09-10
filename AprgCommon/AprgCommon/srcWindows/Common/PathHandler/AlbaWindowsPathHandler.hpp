@@ -46,14 +46,15 @@ private:
         std::string_view const currentDirectory, std::string_view const wildCardSearch, ListOfPaths& listOfFiles,
         ListOfPaths& listOfDirectories, int const depth) const;
 
-    [[nodiscard]] bool canBeLocated(std::string_view const fullPath) const;
-    [[nodiscard]] bool isSlashNeededAtTheEnd(std::string_view const correctedPath, std::string_view const originalPath) const;
+    [[nodiscard]] static bool canBeLocated(std::string_view const fullPath);
+    [[nodiscard]] bool isSlashNeededAtTheEnd(
+        std::string_view const correctedPath, std::string_view const originalPath) const;
     void save(std::string_view const path) override;
     void setPath(std::string_view const path);
     void setDriveOrRoot();
     std::string m_driveOrRoot;
-    bool m_foundInLocalSystem;
-    bool m_relativePath;
+    bool m_foundInLocalSystem{};
+    bool m_relativePath{};
 };
 
 }  // namespace alba

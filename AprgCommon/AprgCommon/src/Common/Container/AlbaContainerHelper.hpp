@@ -179,8 +179,8 @@ template <typename ValueType, std::size_t const SIZE, template <typename, std::s
 void saveContentsToStream(
     std::ostream& outputStream, Container<ValueType, SIZE> const& container, StreamFormat const streamFormat) {
     // tested on array
-    std::string delimeter(getDelimeterBasedOnFormat(streamFormat));
-    std::ostream_iterator<ValueType> outputIterator(outputStream, delimeter.c_str());
+    std::string const delimeter(getDelimeterBasedOnFormat(streamFormat));
+    std::ostream_iterator<ValueType> const outputIterator(outputStream, delimeter.c_str());
     std::copy(container.cbegin(), container.cend(), outputIterator);
 }
 
@@ -188,8 +188,8 @@ template <typename ValueType, typename AllocatorType, template <typename, typena
 void saveContentsToStream(
     std::ostream& outputStream, Container<ValueType, AllocatorType> const& container, StreamFormat const streamFormat) {
     // tested on vector
-    std::string delimeter(getDelimeterBasedOnFormat(streamFormat));
-    std::ostream_iterator<ValueType> outputIterator(outputStream, delimeter.c_str());
+    std::string const delimeter(getDelimeterBasedOnFormat(streamFormat));
+    std::ostream_iterator<ValueType> const outputIterator(outputStream, delimeter.c_str());
     std::copy(container.cbegin(), container.cend(), outputIterator);
 }
 
@@ -200,8 +200,8 @@ void saveContentsToStream(
     std::ostream& outputStream, Container<ValueType, CompareType, AllocatorType> const& container,
     StreamFormat const streamFormat) {
     // tested on set
-    std::string delimeter(getDelimeterBasedOnFormat(streamFormat));
-    std::ostream_iterator<ValueType> outputIterator(outputStream, delimeter.c_str());
+    std::string const delimeter(getDelimeterBasedOnFormat(streamFormat));
+    std::ostream_iterator<ValueType> const outputIterator(outputStream, delimeter.c_str());
     std::copy(container.cbegin(), container.cend(), outputIterator);
 }
 
@@ -212,7 +212,7 @@ void saveContentsToStream(
     std::ostream& outputStream, Container<KeyType, ValueType, CompareType, AllocatorType> const& container,
     StreamFormat const streamFormat) {
     // tested on map
-    std::string delimeter(getDelimeterBasedOnFormat(streamFormat));
+    std::string const delimeter(getDelimeterBasedOnFormat(streamFormat));
     if (StreamFormat::String == streamFormat) {
         for (auto const& [key, value] : container) {
             // C++17, structured bindings
@@ -228,8 +228,8 @@ void saveContentsToStream(
 
 template <typename ContainerWithType, typename DisplayType = typename ContainerWithType::value_type>
 void saveContentsInDecimalAndHexadecimalFormat(std::ostream& outputStream, ContainerWithType const& container) {
-    std::string delimeter = getDelimeterBasedOnFormat(StreamFormat::String);
-    std::ostream_iterator<DisplayType> outputIterator(outputStream, delimeter.c_str());
+    std::string const delimeter = getDelimeterBasedOnFormat(StreamFormat::String);
+    std::ostream_iterator<DisplayType> const outputIterator(outputStream, delimeter.c_str());
 
     outputStream << "Decimal values: {" << std::dec;
     std::copy(container.cbegin(), container.cend(), outputIterator);
@@ -244,16 +244,16 @@ void saveContentsInDecimalAndHexadecimalFormat(std::ostream& outputStream, Conta
 template <typename ValueType, std::size_t const SIZE, template <typename, std::size_t> class Container>
 void retrieveContentsFromStream(std::istream& inputStream, Container<ValueType, SIZE>& container) {
     // tested on array
-    std::istream_iterator<ValueType> inputIterator(inputStream);
-    std::istream_iterator<ValueType> inputIteratorEnd;
+    std::istream_iterator<ValueType> const inputIterator(inputStream);
+    std::istream_iterator<ValueType> const inputIteratorEnd;
     std::copy(inputIterator, inputIteratorEnd, begin(container));
 }
 
 template <typename ValueType, typename AllocatorType, template <typename, typename> class Container>
 void retrieveContentsFromStream(std::istream& inputStream, Container<ValueType, AllocatorType>& container) {
     // tested on vector
-    std::istream_iterator<ValueType> inputIterator(inputStream);
-    std::istream_iterator<ValueType> inputIteratorEnd;
+    std::istream_iterator<ValueType> const inputIterator(inputStream);
+    std::istream_iterator<ValueType> const inputIteratorEnd;
     std::copy(inputIterator, inputIteratorEnd, std::inserter(container, end(container)));
 }
 
@@ -263,8 +263,8 @@ template <
 void retrieveContentsFromStream(
     std::istream& inputStream, Container<ValueType, CompareType, AllocatorType>& container) {
     // tested on set
-    std::istream_iterator<ValueType> inputIterator(inputStream);
-    std::istream_iterator<ValueType> inputIteratorEnd;
+    std::istream_iterator<ValueType> const inputIterator(inputStream);
+    std::istream_iterator<ValueType> const inputIteratorEnd;
     std::copy(inputIterator, inputIteratorEnd, std::inserter(container, end(container)));
 }
 

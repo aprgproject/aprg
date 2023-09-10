@@ -12,7 +12,7 @@ using namespace std;
 namespace alba {
 
 TEST_F(AlbaWindowsPathHandlerTest, EmptyPathWorks) {
-    AlbaWindowsPathHandler pathHandler("");
+    AlbaWindowsPathHandler const pathHandler("");
     EXPECT_TRUE(pathHandler.getDriveOrRoot().empty());
     EXPECT_TRUE(pathHandler.getDirectory().empty());
     EXPECT_TRUE(pathHandler.getFile().empty());
@@ -22,7 +22,7 @@ TEST_F(AlbaWindowsPathHandlerTest, EmptyPathWorks) {
 }
 
 TEST_F(AlbaWindowsPathHandlerTest, FullPathWithOnlyDirectoryGiven_WindowsStyleInput) {
-    AlbaWindowsPathHandler pathHandler(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\)");
+    AlbaWindowsPathHandler const pathHandler(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\)");
     EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());
     EXPECT_EQ(convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
@@ -32,7 +32,7 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithOnlyDirectoryGiven_WindowsStyleIn
 }
 
 TEST_F(AlbaWindowsPathHandlerTest, FullPathWithOnlyDirectoryGiven_JumbledSlashes) {
-    AlbaWindowsPathHandler pathHandler(pathOfAprgDirectory + R"(////AprgCommon\\\\\FilesForTests\)");
+    AlbaWindowsPathHandler const pathHandler(pathOfAprgDirectory + R"(////AprgCommon\\\\\FilesForTests\)");
     EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());
     EXPECT_EQ(convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
@@ -42,7 +42,7 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithOnlyDirectoryGiven_JumbledSlashes
 }
 
 TEST_F(AlbaWindowsPathHandlerTest, FullPathWithOnlyDirectoryGiven_JumbledSlashesWithDirectoryDoesNotExists) {
-    AlbaWindowsPathHandler pathHandler(APRG_DIR R"(\////AprgCommon\\\\/AprgCommon/tst\DirectoryDoesNotExists\)");
+    AlbaWindowsPathHandler const pathHandler(APRG_DIR R"(\////AprgCommon\\\\/AprgCommon/tst\DirectoryDoesNotExists\)");
     EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());
     EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\AprgCommon\tst\DirectoryDoesNotExists\)"),
@@ -54,7 +54,7 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithOnlyDirectoryGiven_JumbledSlashes
 }
 
 TEST_F(AlbaWindowsPathHandlerTest, FullPathWithOnlyDirectoryGiven_WithNumbersAndSpecialCharacters) {
-    AlbaWindowsPathHandler pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\)");
+    AlbaWindowsPathHandler const pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\)");
     EXPECT_EQ("APRG_DRIVE", pathHandler.getDriveOrRoot());
     EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\)", pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
@@ -64,7 +64,8 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithOnlyDirectoryGiven_WithNumbersAnd
 }
 
 TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectoryAndFileGiven_WithNumbersAndSpecialCharacters) {
-    AlbaWindowsPathHandler pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\zxcvbnm12345.txt)");
+    AlbaWindowsPathHandler const pathHandler(
+        R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\zxcvbnm12345.txt)");
     EXPECT_EQ("APRG_DRIVE", pathHandler.getDriveOrRoot());
     EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\)", pathHandler.getDirectory());
     EXPECT_EQ("zxcvbnm12345.txt", pathHandler.getFile());
@@ -74,7 +75,7 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectoryAndFileGiven_WithNumbers
 }
 
 TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectoryAndFileNoFileExtensionGiven_WithNumbersAndSpecialCharacters) {
-    AlbaWindowsPathHandler pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\zxcvbnm12345.)");
+    AlbaWindowsPathHandler const pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\zxcvbnm12345.)");
     EXPECT_EQ("APRG_DRIVE", pathHandler.getDriveOrRoot());
     EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\)", pathHandler.getDirectory());
     EXPECT_EQ("zxcvbnm12345.", pathHandler.getFile());
@@ -84,7 +85,7 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectoryAndFileNoFileExtensionGi
 }
 
 TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectoryAndFileExtensionOnlyGiven_WithNumbersAndSpecialCharacters) {
-    AlbaWindowsPathHandler pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\.zxcvbnm12345)");
+    AlbaWindowsPathHandler const pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\.zxcvbnm12345)");
     EXPECT_EQ("APRG_DRIVE", pathHandler.getDriveOrRoot());
     EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\)", pathHandler.getDirectory());
     EXPECT_EQ(".zxcvbnm12345", pathHandler.getFile());
@@ -316,7 +317,7 @@ TEST_F(AlbaWindowsPathHandlerTest, ReInputDirectoryThatIsToBeRenamed_ActualLocal
 }
 
 TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryOneDepth) {
-    AlbaWindowsPathHandler pathHandler(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\)");
+    AlbaWindowsPathHandler const pathHandler(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\)");
     EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
     ASSERT_TRUE(pathHandler.isFoundInLocalSystem());
 
@@ -362,7 +363,7 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryOne
 }
 
 TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryMultipleDepthTwo) {
-    AlbaWindowsPathHandler pathHandler(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\)");
+    AlbaWindowsPathHandler const pathHandler(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\)");
     EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
     ASSERT_TRUE(pathHandler.isFoundInLocalSystem());
 
@@ -426,7 +427,7 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryMul
 }
 
 TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryUnlimitedDepth) {
-    AlbaWindowsPathHandler pathHandler(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\)");
+    AlbaWindowsPathHandler const pathHandler(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\)");
     EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
     ASSERT_TRUE(pathHandler.isFoundInLocalSystem());
 
@@ -493,7 +494,7 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryUnl
 }
 
 TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryUnlimitedDepthWithWildCard) {
-    AlbaWindowsPathHandler pathHandler(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\)");
+    AlbaWindowsPathHandler const pathHandler(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\)");
     EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
     ASSERT_TRUE(pathHandler.isFoundInLocalSystem());
 
@@ -525,7 +526,7 @@ TEST_F(AlbaWindowsPathHandlerTest, FileSizeTest_FileIsExisting) {
 }
 
 TEST_F(AlbaWindowsPathHandlerTest, CreatePathWithInitialValueWorks) {
-    AlbaWindowsPathHandler pathHandler(AlbaWindowsPathHandler::createPathHandlerForDetectedPath());
+    AlbaWindowsPathHandler const pathHandler(AlbaWindowsPathHandler::createPathHandlerForDetectedPath());
 
     EXPECT_EQ(PathType::File, pathHandler.getPathType());
     ASSERT_TRUE(pathHandler.isFoundInLocalSystem());

@@ -24,11 +24,11 @@ TEST(AlbaPrintMacrosTest, PrintingWorks) {
 
 TEST(AlbaPrintMacrosTest, PrintingStringsWorks) {
     stringstream ssToVerify;
-    string stringToTest = "std::string to test";
+    string const stringToTest = "std::string to test";
 
     ALBA_PRINT2(ssToVerify, stringToTest, "string literal to test");
 
-    string actualPrintString(ssToVerify.str());
+    string const actualPrintString(ssToVerify.str());
     int runningIndex = 0;
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "stringToTest", runningIndex));
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "std::string to test", runningIndex));
@@ -37,13 +37,13 @@ TEST(AlbaPrintMacrosTest, PrintingStringsWorks) {
 
 TEST(AlbaPrintMacrosTest, PrintingPointersWorks) {
     stringstream ssToVerify;
-    unique_ptr<int> uniquePointer(make_unique<int>(695));
+    unique_ptr<int> const uniquePointer(make_unique<int>(695));
     int const* nullPointer = nullptr;
     int const* rawPointer = uniquePointer.get();
 
     ALBA_PRINT3(ssToVerify, nullPointer, rawPointer, uniquePointer);
 
-    string actualPrintString(ssToVerify.str());
+    string const actualPrintString(ssToVerify.str());
     int runningIndex = 0;
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "nullPointer", runningIndex));
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "nullptr", runningIndex));
@@ -55,12 +55,12 @@ TEST(AlbaPrintMacrosTest, PrintingPointersWorks) {
 
 TEST(AlbaPrintMacrosTest, PrintingContainersWorks) {
     stringstream ssToVerify;
-    vector<int> container1{454, 6, 512, 315};
-    map<int, char> container2{{1, 'A'}, {5, 'E'}, {7, 'G'}};
+    vector<int> const container1{454, 6, 512, 315};
+    map<int, char> const container2{{1, 'A'}, {5, 'E'}, {7, 'G'}};
 
     ALBA_PRINT2(ssToVerify, container1, container2);
 
-    string actualPrintString(ssToVerify.str());
+    string const actualPrintString(ssToVerify.str());
     int runningIndex = 0;
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "container1", runningIndex));
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "454, 6, 512, 315,", runningIndex));

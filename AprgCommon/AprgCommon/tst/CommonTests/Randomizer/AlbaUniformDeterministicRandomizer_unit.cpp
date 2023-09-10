@@ -80,7 +80,7 @@ TEST(AlbaUniformDeterministicRandomizerTest, GetRandomIntegerWorksAsUniformlyDis
     constexpr int maximumValue(9);
     constexpr int customSeed(5);
     IntegerRandomizerForTest randomizer(minimumValue, maximumValue, customSeed);
-    int numberOfRandomValues(maximumValue - minimumValue + 1);
+    int const numberOfRandomValues(maximumValue - minimumValue + 1);
     int const iterations(1000);
     int const allowedDeviationCount(iterations / 10);
     vector<int> hitsForEachValue(numberOfRandomValues, 0);
@@ -92,7 +92,7 @@ TEST(AlbaUniformDeterministicRandomizerTest, GetRandomIntegerWorksAsUniformlyDis
 
     ASSERT_FALSE(hitsForEachValue.empty());
     auto&& [minIterator, maxIterator] = std::minmax_element(hitsForEachValue.cbegin(), hitsForEachValue.cend());
-    int deviationCount(*maxIterator - *minIterator);
+    int const deviationCount(*maxIterator - *minIterator);
     EXPECT_LT(deviationCount, allowedDeviationCount);
 }
 
@@ -127,7 +127,7 @@ TEST(AlbaUniformDeterministicRandomizerTest, GetRandomFloatingValueWorksAsUnifor
     constexpr double customSeed(10);
     FloatingPointRandomizerForTest randomizer(
         static_cast<double>(minimumValue), static_cast<double>(maximumValue), customSeed);
-    int numberOfRandomValues(maximumValue - minimumValue);  // number of integer values for floating point
+    int const numberOfRandomValues(maximumValue - minimumValue);  // number of integer values for floating point
     int const iterations(1000);
     int const allowedDeviationCount(iterations / 10);
     vector<int> hitsForEachValue(numberOfRandomValues, 0);
@@ -138,7 +138,7 @@ TEST(AlbaUniformDeterministicRandomizerTest, GetRandomFloatingValueWorksAsUnifor
 
     ASSERT_FALSE(hitsForEachValue.empty());
     auto&& [minIterator, maxIterator] = std::minmax_element(hitsForEachValue.cbegin(), hitsForEachValue.cend());
-    int deviationCount(*maxIterator - *minIterator);
+    int const deviationCount(*maxIterator - *minIterator);
     EXPECT_LT(deviationCount, allowedDeviationCount);
 }
 

@@ -11,19 +11,19 @@ using IntXY = AlbaXY<int>;
 }  // namespace
 
 TEST(AlbaXYTest, DefaultValuesAreZero) {
-    IntXY xyValues;
+    IntXY const xyValues;
     EXPECT_EQ(0, xyValues.getX());
     EXPECT_EQ(0, xyValues.getY());
 }
 
 TEST(AlbaXYTest, ValuesAreSetAtConstruction) {
-    IntXY xyValues(-5, 5);
+    IntXY const xyValues(-5, 5);
     EXPECT_EQ(-5, xyValues.getX());
     EXPECT_EQ(5, xyValues.getY());
 }
 
 TEST(AlbaXYTest, EqualityOperatorWorks) {
-    IntXY xyValues(-5, 5);
+    IntXY const xyValues(-5, 5);
 
     EXPECT_TRUE(IntXY(-5, 5) == xyValues);
     EXPECT_FALSE(IntXY(-5, -5) == xyValues);
@@ -32,7 +32,7 @@ TEST(AlbaXYTest, EqualityOperatorWorks) {
 }
 
 TEST(AlbaXYTest, NonEqualityOperatorWorks) {
-    IntXY xyValues(-5, 5);
+    IntXY const xyValues(-5, 5);
 
     EXPECT_FALSE(IntXY(-5, 5) != xyValues);
     EXPECT_TRUE(IntXY(-5, -5) != xyValues);
@@ -41,7 +41,7 @@ TEST(AlbaXYTest, NonEqualityOperatorWorks) {
 }
 
 TEST(AlbaXYTest, LessThanOperatorWorks) {
-    IntXY xyValues(-5, 5);
+    IntXY const xyValues(-5, 5);
 
     EXPECT_FALSE(IntXY(-5, 5) < xyValues);
     EXPECT_TRUE(IntXY(-6, 5) < xyValues);
@@ -79,19 +79,19 @@ TEST(AlbaXYTest, IsEmptyWorks) {
 }
 
 TEST(AlbaXYTest, GetXWorks) {
-    IntXY xyValues(-5, 5);
+    IntXY const xyValues(-5, 5);
 
     EXPECT_EQ(-5, xyValues.getX());
 }
 
 TEST(AlbaXYTest, GetYWorks) {
-    IntXY xyValues(-5, 5);
+    IntXY const xyValues(-5, 5);
 
     EXPECT_EQ(5, xyValues.getY());
 }
 
 TEST(AlbaXYTest, GetXTimesYWorks) {
-    IntXY xyValues(-5, 5);
+    IntXY const xyValues(-5, 5);
 
     EXPECT_EQ(-25, xyValues.getXTimesY());
 }
@@ -144,7 +144,7 @@ TEST(AlbaXYTest, SaveMaximumXAndYWorks) {
 
 TEST(AlbaXYTest, OutputStreamOperatorWorks) {
     stringstream testStream;
-    IntXY xyValues(-5, 5);
+    IntXY const xyValues(-5, 5);
 
     testStream << xyValues;
 

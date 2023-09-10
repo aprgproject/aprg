@@ -31,16 +31,16 @@ void reorganizeOverflowValues(uint32_t& totalDays, uint32_t& totalSeconds, uint3
 
 void reorganizeUnderflowValues(int32_t& totalDays, int32_t& totalSeconds, int32_t& totalMicroSeconds) {
     if (totalMicroSeconds < 0) {
-        int32_t neededSeconds = (static_cast<int32_t>(totalMicroSeconds) * -1 +
-                                 static_cast<int32_t>(NUMBER_OF_MICROSECONDS_IN_A_SECOND) - 1) /
-                                static_cast<int32_t>(NUMBER_OF_MICROSECONDS_IN_A_SECOND);
+        int32_t const neededSeconds = (static_cast<int32_t>(totalMicroSeconds) * -1 +
+                                       static_cast<int32_t>(NUMBER_OF_MICROSECONDS_IN_A_SECOND) - 1) /
+                                      static_cast<int32_t>(NUMBER_OF_MICROSECONDS_IN_A_SECOND);
         totalSeconds -= neededSeconds;
         totalMicroSeconds +=
             static_cast<int32_t>(neededSeconds) * static_cast<int32_t>(NUMBER_OF_MICROSECONDS_IN_A_SECOND);
     }
     if (totalSeconds < 0) {
-        int32_t neededDays = (totalSeconds * -1 + static_cast<int32_t>(NUMBER_OF_SECONDS_IN_A_DAY) - 1) /
-                             static_cast<int32_t>(NUMBER_OF_SECONDS_IN_A_DAY);
+        int32_t const neededDays = (totalSeconds * -1 + static_cast<int32_t>(NUMBER_OF_SECONDS_IN_A_DAY) - 1) /
+                                   static_cast<int32_t>(NUMBER_OF_SECONDS_IN_A_DAY);
         totalDays -= neededDays;
         totalSeconds += neededDays * static_cast<int32_t>(NUMBER_OF_SECONDS_IN_A_DAY);
     }
@@ -227,19 +227,19 @@ uint32_t getAndRemoveYearsFromNumberOfDays(uint32_t& remainingDays) {
 }
 
 uint32_t getAndRemoveMonthsFromNumberOfDays(uint32_t& remainingDays, uint32_t const year) {
-    uint32_t month(getMonthFromNumberOfDays(remainingDays, year));
+    uint32_t const month(getMonthFromNumberOfDays(remainingDays, year));
     remainingDays -= getNumberOfDaysInTheYearBeforeThisMonth(month, year);
     return month;
 }
 
 uint32_t getAndRemoveHoursFromNumberOfSeconds(uint32_t& remainingSeconds) {
-    uint32_t hours = remainingSeconds / NUMBER_OF_SECONDS_IN_AN_HOUR;
+    uint32_t const hours = remainingSeconds / NUMBER_OF_SECONDS_IN_AN_HOUR;
     remainingSeconds = remainingSeconds % NUMBER_OF_SECONDS_IN_AN_HOUR;
     return hours;
 }
 
 uint32_t getAndRemoveMinutesFromNumberOfSeconds(uint32_t& remainingSeconds) {
-    uint32_t minutes = remainingSeconds / NUMBER_OF_SECONDS_IN_A_MINUTE;
+    uint32_t const minutes = remainingSeconds / NUMBER_OF_SECONDS_IN_A_MINUTE;
     remainingSeconds = remainingSeconds % NUMBER_OF_SECONDS_IN_A_MINUTE;
     return minutes;
 }

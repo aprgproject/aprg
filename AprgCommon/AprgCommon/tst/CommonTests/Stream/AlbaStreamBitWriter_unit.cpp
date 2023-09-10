@@ -86,7 +86,7 @@ TEST(AlbaStreamBitWriterTest, WriteLittleEndianNumberDataWorks) {
 TEST(AlbaStreamBitWriterTest, WriteBitsetDataWorks) {
     stringstream testStream;
     AlbaStreamBitWriter writer(testStream);
-    bitset<32U> bitsetToWrite(0x1234'5678);
+    bitset<32U> const bitsetToWrite(0x1234'5678);
 
     writer.writeBitsetData<32U>(bitsetToWrite, 15U, 22U);
 

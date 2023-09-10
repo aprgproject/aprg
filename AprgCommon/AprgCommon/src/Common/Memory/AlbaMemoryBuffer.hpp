@@ -36,7 +36,7 @@ public:
     void saveObject(ObjectType const& object) {
         // Herb Sutter: Dont xray objects. Me: It has standard layout so it can be xray-ed.
         static_assert(typeHelper::hasStandardLayout<ObjectType>(), "ObjectType needs to have standard layout.");
-        size_t objectSize = sizeof(object);
+        size_t const objectSize = sizeof(object);
         resize(objectSize);
         void const* sourcePointer = static_cast<void const*>(&object);
         void* destinationVoidPointer = getBufferPointer();

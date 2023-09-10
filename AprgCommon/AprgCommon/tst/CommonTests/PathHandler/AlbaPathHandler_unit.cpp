@@ -10,7 +10,7 @@ using namespace std;
 namespace alba {
 
 TEST(AlbaPathHandlerTest, EmptyPathWorks) {
-    AlbaPathHandler pathHandler("");
+    AlbaPathHandler const pathHandler("");
     EXPECT_TRUE(pathHandler.getDirectory().empty());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
@@ -19,7 +19,7 @@ TEST(AlbaPathHandlerTest, EmptyPathWorks) {
 }
 
 TEST(AlbaPathHandlerTest, FullPathWithDirectoryAndFileGiven) {
-    AlbaPathHandler pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\76543.txt)", R"(\)");
+    AlbaPathHandler const pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\76543.txt)", R"(\)");
     EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\)", pathHandler.getDirectory());
     EXPECT_EQ("76543.txt", pathHandler.getFile());
     EXPECT_EQ("76543", pathHandler.getFilenameOnly());
@@ -29,7 +29,7 @@ TEST(AlbaPathHandlerTest, FullPathWithDirectoryAndFileGiven) {
 }
 
 TEST(AlbaPathHandlerTest, FileOnly) {
-    AlbaPathHandler pathHandler("src", R"(\)");
+    AlbaPathHandler const pathHandler("src", R"(\)");
     EXPECT_TRUE(pathHandler.getDirectory().empty());
     EXPECT_EQ("src", pathHandler.getFile());
     EXPECT_EQ("src", pathHandler.getFilenameOnly());

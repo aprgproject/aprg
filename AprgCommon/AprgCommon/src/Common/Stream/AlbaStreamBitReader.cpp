@@ -13,7 +13,7 @@ bool AlbaStreamBitReader::noRemainingBitsInBuffer() const { return m_bitBuffer.e
 string AlbaStreamBitReader::readStringData(size_t const numberOfCharacters) {
     string result;
     for (size_t i = 0; i < numberOfCharacters; ++i) {
-        char character(readCharData());
+        char const character(readCharData());
         if (!m_stream.eof()) {
             result += character;
         } else {
@@ -26,7 +26,7 @@ string AlbaStreamBitReader::readStringData(size_t const numberOfCharacters) {
 string AlbaStreamBitReader::readWholeStreamAsStringData() {
     string result;
     while (true) {
-        char character(readCharData());
+        char const character(readCharData());
         if (!m_stream.eof()) {
             result += character;
         } else {
@@ -40,7 +40,7 @@ char AlbaStreamBitReader::readCharData() { return AlbaStreamBitReader::readBigEn
 
 bool AlbaStreamBitReader::readBoolData() {
     readIfNeeded(1U);
-    bool result(m_bitBuffer.front());
+    bool const result(m_bitBuffer.front());
     eraseBitsInBitBuffer(1U);
     return result;
 }

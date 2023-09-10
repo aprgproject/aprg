@@ -21,9 +21,9 @@ void copyBeforeStringAndAfterString(
     size_t const indexToStartTheSearch) {
     beforeString.clear();
     afterString.clear();
-    size_t firstIndexOfFirstString = mainText.find(stringToSearch, indexToStartTheSearch);
+    size_t const firstIndexOfFirstString = mainText.find(stringToSearch, indexToStartTheSearch);
     if (isNotNpos(static_cast<int>(firstIndexOfFirstString))) {
-        size_t lastIndexOfFirstString = firstIndexOfFirstString + stringToSearch.length();
+        size_t const lastIndexOfFirstString = firstIndexOfFirstString + stringToSearch.length();
         beforeString = mainText.substr(0, firstIndexOfFirstString);
         afterString = mainText.substr(lastIndexOfFirstString);
     }
@@ -38,7 +38,7 @@ string getStringWithCapitalLetters(string_view const str) {
 
 string getStringWithFirstNonWhiteSpaceCharacterToCapital(string_view const str) {
     string result(str);
-    size_t resultLength = result.length();
+    size_t const resultLength = result.length();
     for (size_t index1 = 0; index1 < resultLength; ++index1) {
         if (!isWhiteSpace(result[index1])) {
             result[index1] = static_cast<char>(::toupper(result[index1]));
@@ -58,7 +58,7 @@ string getStringWithLowerCaseLetters(string_view const str) {
 string getStringWithUrlDecodedString(string_view const str) {
     string result;
     size_t index = 0;
-    size_t length = str.length();
+    size_t const length = str.length();
     while (index < length) {
         if (str[index] == '%' && (static_cast<int>(index) < static_cast<int>(length) - 2) &&
             isHexDigit(str[index + 1]) && isHexDigit(str[index + 2])) {
@@ -73,7 +73,7 @@ string getStringWithUrlDecodedString(string_view const str) {
 
 string getStringThatContainsWhiteSpaceIndention(string_view const str) {
     string result;
-    size_t firstIndexOfNotOfCharacters(str.find_first_not_of(WHITESPACE_STRING));
+    size_t const firstIndexOfNotOfCharacters(str.find_first_not_of(WHITESPACE_STRING));
     if (isNotNpos(static_cast<int>(firstIndexOfNotOfCharacters))) {
         result = str.substr(0, firstIndexOfNotOfCharacters);
     }
@@ -82,10 +82,10 @@ string getStringThatContainsWhiteSpaceIndention(string_view const str) {
 
 string getStringWithoutStartingAndTrailingCharacters(string_view const str, string_view const characters) {
     string result(str);
-    size_t firstIndexOfNotOfCharacters(result.find_first_not_of(characters));
+    size_t const firstIndexOfNotOfCharacters(result.find_first_not_of(characters));
     if (isNotNpos(static_cast<int>(firstIndexOfNotOfCharacters))) {
         result.erase(0, firstIndexOfNotOfCharacters);
-        size_t lastIndexOfOfNotOfCharacters(result.find_last_not_of(characters));
+        size_t const lastIndexOfOfNotOfCharacters(result.find_last_not_of(characters));
         if (isNotNpos(static_cast<int>(lastIndexOfOfNotOfCharacters))) {
             result.erase(lastIndexOfOfNotOfCharacters + 1);
         }
@@ -102,7 +102,7 @@ string getStringWithoutStartingAndTrailingWhiteSpace(string_view const str) {
 string getStringWithoutWhiteSpace(string_view const str) {
     string result;
     size_t index = 0;
-    size_t length = str.length();
+    size_t const length = str.length();
     while (index < length) {
         if (!isWhiteSpace(str[index])) {
             result += str[index];
@@ -115,13 +115,13 @@ string getStringWithoutWhiteSpace(string_view const str) {
 string getStringWithoutRedundantWhiteSpace(string_view const str) {
     string result;
     size_t index = 0;
-    size_t length = str.length();
+    size_t const length = str.length();
     while (index < length) {
-        size_t indexNotWhiteSpace = str.find_first_not_of(WHITESPACE_STRING, index);
+        size_t const indexNotWhiteSpace = str.find_first_not_of(WHITESPACE_STRING, index);
         if (isNpos(static_cast<int>(indexNotWhiteSpace))) {
             break;
         }
-        size_t indexWhiteSpace = str.find_first_of(WHITESPACE_STRING, indexNotWhiteSpace);
+        size_t const indexWhiteSpace = str.find_first_of(WHITESPACE_STRING, indexNotWhiteSpace);
         index = (isNotNpos(static_cast<int>(indexWhiteSpace))) ? indexWhiteSpace : length;
         result += (!result.empty()) ? " "s : string();
         result += str.substr(indexNotWhiteSpace, index - indexNotWhiteSpace);
@@ -130,7 +130,7 @@ string getStringWithoutRedundantWhiteSpace(string_view const str) {
 }
 
 string getStringWithoutQuotations(string_view const str) {
-    size_t length = str.length();
+    size_t const length = str.length();
     if (length > 2 && str[0] == '\"' && str[length - 1] == '\"') {
         return string(str.substr(1, length - 2));
     }
@@ -142,22 +142,22 @@ string getStringWithoutCharAtTheStartAndEnd(string_view const str, char const ch
 }
 
 string getStringWithoutCharAtTheStart(string_view const str, char const char1) {
-    size_t length = str.length();
-    size_t start = (str[0] == char1) ? 1 : 0;
+    size_t const length = str.length();
+    size_t const start = (str[0] == char1) ? 1 : 0;
     return string(str.substr(start, length - start));
 }
 
 string getStringWithoutCharAtTheEnd(string_view const str, char const char1) {
-    size_t length = str.length();
-    size_t end = (length == 0) ? 0 : (str[length - 1] == char1) ? length - 1 : length;
+    size_t const length = str.length();
+    size_t const end = (length == 0) ? 0 : (str[length - 1] == char1) ? length - 1 : length;
     return string(str.substr(0, end));
 }
 
 string getStringWithoutOpeningClosingOperators(
     string_view const str, char const openingOperator, char const closingOperator) {
-    size_t length = str.length();
-    size_t start = (str[0] == openingOperator) ? 1 : 0;
-    size_t end = (length == 0) ? 0 : (str[length - 1] == closingOperator) ? length - 1 : length;
+    size_t const length = str.length();
+    size_t const start = (str[0] == openingOperator) ? 1 : 0;
+    size_t const end = (length == 0) ? 0 : (str[length - 1] == closingOperator) ? length - 1 : length;
     return string(str.substr(start, end - start));
 }
 
@@ -174,7 +174,7 @@ string getLongestCommonPrefix(string_view const first, string_view const second)
 string getStringBeforeThisString(
     string_view const mainText, string_view const stringToSearch, size_t const indexToStart) {
     string result;
-    size_t firstIndexOfFirstString = mainText.find(stringToSearch, indexToStart);
+    size_t const firstIndexOfFirstString = mainText.find(stringToSearch, indexToStart);
     if (isNotNpos(static_cast<int>(firstIndexOfFirstString))) {
         result = mainText.substr(indexToStart, firstIndexOfFirstString - indexToStart);
     }
@@ -184,9 +184,9 @@ string getStringBeforeThisString(
 string getStringAfterThisString(
     string_view const mainText, string_view const stringToSearch, size_t const indexToStart) {
     string result;
-    size_t firstIndexOfFirstString = mainText.find(stringToSearch, indexToStart);
+    size_t const firstIndexOfFirstString = mainText.find(stringToSearch, indexToStart);
     if (isNotNpos(static_cast<int>(firstIndexOfFirstString))) {
-        size_t lastIndexOfFirstString = firstIndexOfFirstString + stringToSearch.length();
+        size_t const lastIndexOfFirstString = firstIndexOfFirstString + stringToSearch.length();
         result = mainText.substr(lastIndexOfFirstString);
     }
     return result;
@@ -196,10 +196,10 @@ string getStringInBetweenTwoStrings(
     string_view const mainText, string_view const firstString, string_view const secondString,
     size_t const indexToStart) {
     string result;
-    size_t firstIndexOfFirstString = mainText.find(firstString, indexToStart);
+    size_t const firstIndexOfFirstString = mainText.find(firstString, indexToStart);
     if (isNotNpos(static_cast<int>(firstIndexOfFirstString))) {
-        size_t lastIndexOfFirstString = firstIndexOfFirstString + firstString.length();
-        size_t firstIndexOfSecondString = mainText.find(secondString, lastIndexOfFirstString);
+        size_t const lastIndexOfFirstString = firstIndexOfFirstString + firstString.length();
+        size_t const firstIndexOfSecondString = mainText.find(secondString, lastIndexOfFirstString);
         if (isNotNpos(static_cast<int>(firstIndexOfSecondString))) {
             result = mainText.substr(lastIndexOfFirstString, firstIndexOfSecondString - lastIndexOfFirstString);
         }
@@ -210,7 +210,7 @@ string getStringInBetweenTwoStrings(
 string getStringBeforeThisCharacters(
     string_view const mainText, string_view const characters, size_t const indexToStart) {
     string result;
-    size_t firstIndexOfNotOfCharacters(mainText.find_first_of(characters, indexToStart));
+    size_t const firstIndexOfNotOfCharacters(mainText.find_first_of(characters, indexToStart));
     if (isNotNpos(static_cast<int>(firstIndexOfNotOfCharacters))) {
         result = mainText.substr(indexToStart, firstIndexOfNotOfCharacters - indexToStart);
     }
@@ -239,7 +239,7 @@ string getStringAndReplaceNonAlphanumericCharactersToUnderScore(string_view cons
 string getStringByRepeatingUntilDesiredLength(string_view const stringToRepeat, size_t const desiredLength) {
     string result;
     if (!stringToRepeat.empty()) {
-        size_t stringToRepeatLength = stringToRepeat.length();
+        size_t const stringToRepeatLength = stringToRepeat.length();
         for (size_t index = 0; index <= desiredLength; index += stringToRepeatLength) {
             result += stringToRepeat;
         }
@@ -250,9 +250,9 @@ string getStringByRepeatingUntilDesiredLength(string_view const stringToRepeat, 
 
 string getNumberAfterThisString(string_view const mainText, string_view const stringToSearch) {
     string result;
-    size_t firstIndexOfFirstString = mainText.find(stringToSearch);
+    size_t const firstIndexOfFirstString = mainText.find(stringToSearch);
     if (isNotNpos(static_cast<int>(firstIndexOfFirstString))) {
-        size_t lastIndexOfFirstString = firstIndexOfFirstString + stringToSearch.length();
+        size_t const lastIndexOfFirstString = firstIndexOfFirstString + stringToSearch.length();
         size_t lastIndexOfNumber(lastIndexOfFirstString);
         for (; lastIndexOfNumber < mainText.length() && isNumber(mainText[lastIndexOfNumber]); ++lastIndexOfNumber) {
         }
@@ -263,9 +263,9 @@ string getNumberAfterThisString(string_view const mainText, string_view const st
 
 string getHexNumberAfterThisString(string_view const mainText, string_view const stringToSearch) {
     string result;
-    size_t firstIndexOfFirstString = mainText.find(stringToSearch);
+    size_t const firstIndexOfFirstString = mainText.find(stringToSearch);
     if (isNotNpos(static_cast<int>(firstIndexOfFirstString))) {
-        size_t lastIndexOfFirstString = firstIndexOfFirstString + stringToSearch.length();
+        size_t const lastIndexOfFirstString = firstIndexOfFirstString + stringToSearch.length();
         size_t lastIndexOfNumber(lastIndexOfFirstString);
         for (; lastIndexOfNumber < mainText.length() && isHexDigit(mainText[lastIndexOfNumber]); ++lastIndexOfNumber) {
         }
@@ -379,7 +379,7 @@ size_t getLevenshteinDistance(string_view const otherString, string_view const b
 
         currentCounts[0] = otherIndex;  // first column
         for (size_t basisIndex = 1; basisIndex <= basisString.length(); ++basisIndex) {
-            size_t cost = basisString[basisIndex - 1] == otherString[otherIndex - 1] ? 0 : 1;
+            size_t const cost = basisString[basisIndex - 1] == otherString[otherIndex - 1] ? 0 : 1;
             currentCounts[basisIndex] =
                 min(min(currentCounts[basisIndex - 1] + 1, previousCounts[basisIndex] + 1),
                     previousCounts[basisIndex - 1] + cost);
@@ -394,7 +394,7 @@ size_t getHammingDistance(string_view const string1, string_view const string2) 
     // The Hamming distance hamming(a,b) between two strings a and b of equal length is the number of positions where
     // the strings differ.
     size_t result(0);
-    size_t commonLength = min(string1.length(), string2.length());
+    size_t const commonLength = min(string1.length(), string2.length());
     for (size_t index1 = 0; index1 < commonLength; ++index1) {
         if (string1[index1] != string2[index1]) {
             ++result;
@@ -405,7 +405,7 @@ size_t getHammingDistance(string_view const string1, string_view const string2) 
 
 size_t getNumberOfSubStrings(string_view const str) {
     // A string of length n has n(n+1)/2 substrings.
-    size_t length = str.length();
+    size_t const length = str.length();
     return length * (length + 1) / 2;
 }
 
@@ -433,7 +433,7 @@ bool hasNewLine(string_view const str) {
 bool isIdentifier(string_view const str) {
     bool isIdentifier(false);
     if (!str.empty()) {
-        char firstCharacter = str.front();
+        char const firstCharacter = str.front();
         isIdentifier = isLetter(firstCharacter) || isUnderscore(firstCharacter);
     }
     return isIdentifier;
@@ -530,9 +530,9 @@ bool isEqualNotCaseSensitive(string_view const str1, string_view const str2) {
 }
 
 bool isEqualWithLowestCommonLength(string_view const str1, string_view const str2) {
-    size_t length1 = str1.length();
-    size_t length2 = str2.length();
-    size_t lowestLength = (length1 > length2) ? length2 : length1;
+    size_t const length1 = str1.length();
+    size_t const length2 = str2.length();
+    size_t const lowestLength = (length1 > length2) ? length2 : length1;
     return str1.substr(0, lowestLength) == str2.substr(0, lowestLength);
 }
 
@@ -541,8 +541,8 @@ bool isStringFoundCaseSensitive(string_view const mainText, string_view const st
 }
 
 bool isStringFoundCaseSensitive(string_view const mainText, string_view const stringToSearch, int& runningOffset) {
-    int foundIndex = static_cast<int>(mainText.find(stringToSearch, runningOffset));
-    bool isFound = isNotNpos(foundIndex);
+    int const foundIndex = static_cast<int>(mainText.find(stringToSearch, runningOffset));
+    bool const isFound = isNotNpos(foundIndex);
     if (isFound) {
         runningOffset = foundIndex + static_cast<int>(stringToSearch.length());
     }
@@ -557,14 +557,14 @@ bool isStringFoundNotCaseSensitive(string_view const mainText, string_view const
 bool isWildcardMatch(
     string_view const mainText, string_view const wildcard, size_t const mainTextIndex, size_t const wildcardIndex) {
     bool result(false);
-    bool isMainStringDone = mainTextIndex >= mainText.size();
-    bool isWildcardDone = wildcardIndex >= wildcard.size();
+    bool const isMainStringDone = mainTextIndex >= mainText.size();
+    bool const isWildcardDone = wildcardIndex >= wildcard.size();
     if (isMainStringDone && isWildcardDone) {
         result = true;
     } else if (isWildcardDone) {
         result = false;
     } else if (isMainStringDone) {
-        bool isWildcardDoneOnNextIndex = wildcardIndex + 1 >= wildcard.size();
+        bool const isWildcardDoneOnNextIndex = wildcardIndex + 1 >= wildcard.size();
         result = wildcard[wildcardIndex] == '*' && isWildcardDoneOnNextIndex;
     } else if (wildcard[wildcardIndex] == mainText[mainTextIndex]) {
         result = isWildcardMatch(mainText, wildcard, mainTextIndex + 1, wildcardIndex + 1);
@@ -623,8 +623,8 @@ bool isScreamingSnakeCase(string_view const str) {
 
 bool replaceAllAndReturnIfFound(string& mainText, string_view const targetStr, string_view const replacementStr) {
     bool found = false;
-    size_t targetStrLength = targetStr.length();
-    size_t replacementStrLength = replacementStr.length();
+    size_t const targetStrLength = targetStr.length();
+    size_t const replacementStrLength = replacementStr.length();
     size_t index = mainText.find(targetStr);
     while (isNotNpos(static_cast<int>(index))) {
         found = true;
@@ -638,8 +638,8 @@ template <SplitStringType splitStringType>
 void splitToStrings(strings& listOfStrings, string_view const mainText, string_view const delimiters) {
     size_t startingIndexOfFind(0);
     size_t delimiterIndex = mainText.find_first_of(delimiters);
-    size_t delimeterLength = 1;
-    size_t mainTextLength = mainText.length();
+    size_t const delimeterLength = 1;
+    size_t const mainTextLength = mainText.length();
     while (isNotNpos(static_cast<int>(delimiterIndex))) {
         if (startingIndexOfFind != delimiterIndex) {
             listOfStrings.emplace_back(mainText.substr(startingIndexOfFind, delimiterIndex - startingIndexOfFind));
@@ -662,11 +662,11 @@ template void splitToStrings<SplitStringType::WithDelimeters>(
 
 void splitLinesToAchieveTargetLength(strings& strings, string_view const mainText, size_t const targetLength) {
     set<size_t> transitionIndexes;
-    size_t mainTextLength = mainText.length();
+    size_t const mainTextLength = mainText.length();
     bool isPreviousCharacterAWhitespace(false);
     transitionIndexes.emplace(0);
     for (size_t index1 = 0; index1 < mainTextLength; ++index1) {
-        char currentCharacter = mainText[index1];
+        char const currentCharacter = mainText[index1];
         if (isPreviousCharacterAWhitespace && !isWhiteSpace(currentCharacter)) {
             transitionIndexes.emplace(index1 - 1);
         } else if (!isPreviousCharacterAWhitespace && isWhiteSpace(currentCharacter)) {
@@ -678,17 +678,17 @@ void splitLinesToAchieveTargetLength(strings& strings, string_view const mainTex
 
     size_t previousSplittingIndex = 0;
     for (size_t splittingIndex = targetLength; splittingIndex < mainTextLength; splittingIndex += targetLength) {
-        char currentCharacter = mainText[splittingIndex];
+        char const currentCharacter = mainText[splittingIndex];
 
         if (!isWhiteSpace(currentCharacter)) {
             auto [lowerTransitionIndex, upperTransitionIndex] =
                 containerHelper::getLowerAndUpperValuesForSet(transitionIndexes, splittingIndex);
             ++lowerTransitionIndex;
-            int lowerDelta = static_cast<int>(splittingIndex - lowerTransitionIndex);
-            int upperDelta = static_cast<int>(upperTransitionIndex - splittingIndex);
+            int const lowerDelta = static_cast<int>(splittingIndex - lowerTransitionIndex);
+            int const upperDelta = static_cast<int>(upperTransitionIndex - splittingIndex);
 
-            bool isUpperValid(upperDelta >= 0);
-            bool isLowerValid(lowerDelta >= 0 && lowerTransitionIndex != previousSplittingIndex);
+            bool const isUpperValid(upperDelta >= 0);
+            bool const isLowerValid(lowerDelta >= 0 && lowerTransitionIndex != previousSplittingIndex);
             if (isUpperValid && isLowerValid) {
                 if (upperDelta < lowerDelta) {
                     splittingIndex = upperTransitionIndex;
@@ -713,9 +713,9 @@ void splitToStringsUsingASeriesOfDelimeters(
     strings& listOfStrings, string_view const mainText, strings const& seriesOfDelimiters) {
     if (!seriesOfDelimiters.empty()) {
         size_t startingIndexOfFind(0);
-        size_t mainTextLength = mainText.length();
+        size_t const mainTextLength = mainText.length();
         for (auto&& delimeter : seriesOfDelimiters) {
-            size_t delimiterIndex = mainText.find(delimeter, startingIndexOfFind);
+            size_t const delimiterIndex = mainText.find(delimeter, startingIndexOfFind);
             if (isNpos(static_cast<int>(delimiterIndex))) {
                 break;
             }
@@ -762,21 +762,22 @@ string getStringWithAlignment(
 string getStringWithJustifyAlignment(string_view const mainText, size_t const targetLength) {
     string result;
     result.reserve(targetLength);
-    string noRedundantWhiteSpace(getStringWithoutRedundantWhiteSpace(mainText));
+    string const noRedundantWhiteSpace(getStringWithoutRedundantWhiteSpace(mainText));
     string noWhiteSpace(getStringWithoutWhiteSpace(mainText));
     if (mainText.empty()) {
-        string gap(targetLength, ' ');
+        string const gap(targetLength, ' ');
         result = gap;
     } else if (noRedundantWhiteSpace.length() >= targetLength) {
         result = noRedundantWhiteSpace;
     } else if (isOneWord(mainText)) {
-        size_t noWhiteSpaceLength = noWhiteSpace.length();
-        size_t numberOfSpaces = targetLength - noWhiteSpaceLength;
-        size_t gapLength = (noWhiteSpaceLength <= 1)                    ? 0
-                           : (numberOfSpaces >= noWhiteSpaceLength + 1) ? numberOfSpaces / (noWhiteSpaceLength + 1)
-                                                                        : numberOfSpaces / (noWhiteSpaceLength - 1);
-        size_t remainingLengthAtTheEnds = numberOfSpaces - (gapLength * (noWhiteSpaceLength - 1));
-        string gap(gapLength, ' ');
+        size_t const noWhiteSpaceLength = noWhiteSpace.length();
+        size_t const numberOfSpaces = targetLength - noWhiteSpaceLength;
+        size_t const gapLength = (noWhiteSpaceLength <= 1) ? 0
+                                 : (numberOfSpaces >= noWhiteSpaceLength + 1)
+                                     ? numberOfSpaces / (noWhiteSpaceLength + 1)
+                                     : numberOfSpaces / (noWhiteSpaceLength - 1);
+        size_t const remainingLengthAtTheEnds = numberOfSpaces - (gapLength * (noWhiteSpaceLength - 1));
+        string const gap(gapLength, ' ');
         result += string(remainingLengthAtTheEnds / 2, ' ');
         for (size_t index = 0; index + 1 < noWhiteSpaceLength; ++index) {
             result += noWhiteSpace[index];
@@ -787,14 +788,14 @@ string getStringWithJustifyAlignment(string_view const mainText, size_t const ta
     } else {
         strings actualStrings;
         splitToStrings<SplitStringType::WithoutDelimeters>(actualStrings, noRedundantWhiteSpace, WHITESPACE_STRING);
-        size_t numberOfStrings = actualStrings.size();
-        size_t noWhiteSpaceLength = noWhiteSpace.length();
-        size_t numberOfSpaces = targetLength - noWhiteSpaceLength;
-        size_t gapLength = (numberOfStrings <= 1)                    ? 0
-                           : (numberOfSpaces >= numberOfStrings + 1) ? numberOfSpaces / (numberOfStrings + 1)
-                                                                     : numberOfSpaces / (numberOfStrings - 1);
-        size_t remainingLengthAtTheEnds = numberOfSpaces - (gapLength * (numberOfStrings - 1));
-        string gap(gapLength, ' ');
+        size_t const numberOfStrings = actualStrings.size();
+        size_t const noWhiteSpaceLength = noWhiteSpace.length();
+        size_t const numberOfSpaces = targetLength - noWhiteSpaceLength;
+        size_t const gapLength = (numberOfStrings <= 1)                    ? 0
+                                 : (numberOfSpaces >= numberOfStrings + 1) ? numberOfSpaces / (numberOfStrings + 1)
+                                                                           : numberOfSpaces / (numberOfStrings - 1);
+        size_t const remainingLengthAtTheEnds = numberOfSpaces - (gapLength * (numberOfStrings - 1));
+        string const gap(gapLength, ' ');
         result += string(remainingLengthAtTheEnds / 2, ' ');
         for (size_t index = 0; index + 1 < numberOfStrings; ++index) {
             result += actualStrings[index];
@@ -808,14 +809,14 @@ string getStringWithJustifyAlignment(string_view const mainText, size_t const ta
 
 string getStringWithCenterAlignment(string_view const mainText, size_t const targetLength) {
     string result;
-    string noRedundantWhiteSpace(getStringWithoutRedundantWhiteSpace(mainText));
+    string const noRedundantWhiteSpace(getStringWithoutRedundantWhiteSpace(mainText));
     if (mainText.empty()) {
-        string gap(targetLength, ' ');
+        string const gap(targetLength, ' ');
         result = gap;
     } else if (noRedundantWhiteSpace.length() >= targetLength) {
         result = noRedundantWhiteSpace;
     } else {
-        size_t gapLength = (targetLength - noRedundantWhiteSpace.length()) / 2;
+        size_t const gapLength = (targetLength - noRedundantWhiteSpace.length()) / 2;
         result += string(gapLength, ' ');
         result += noRedundantWhiteSpace;
         result += string(targetLength - result.length(), ' ');
@@ -825,14 +826,14 @@ string getStringWithCenterAlignment(string_view const mainText, size_t const tar
 
 string getStringWithRightAlignment(string_view const mainText, size_t const targetLength) {
     string result;
-    string noRedundantWhiteSpace(getStringWithoutRedundantWhiteSpace(mainText));
+    string const noRedundantWhiteSpace(getStringWithoutRedundantWhiteSpace(mainText));
     if (mainText.empty()) {
-        string gap(targetLength, ' ');
+        string const gap(targetLength, ' ');
         result = gap;
     } else if (noRedundantWhiteSpace.length() >= targetLength) {
         result = noRedundantWhiteSpace;
     } else {
-        size_t gapLength = (targetLength - noRedundantWhiteSpace.length());
+        size_t const gapLength = (targetLength - noRedundantWhiteSpace.length());
         result += string(gapLength, ' ');
         result += noRedundantWhiteSpace;
     }
@@ -841,14 +842,14 @@ string getStringWithRightAlignment(string_view const mainText, size_t const targ
 
 string getStringWithLeftAlignment(string_view const mainText, size_t const targetLength) {
     string result;
-    string noRedundantWhiteSpace(getStringWithoutRedundantWhiteSpace(mainText));
+    string const noRedundantWhiteSpace(getStringWithoutRedundantWhiteSpace(mainText));
     if (mainText.empty()) {
-        string gap(targetLength, ' ');
+        string const gap(targetLength, ' ');
         result = gap;
     } else if (noRedundantWhiteSpace.length() >= targetLength) {
         result = noRedundantWhiteSpace;
     } else {
-        size_t gapLength = (targetLength - noRedundantWhiteSpace.length());
+        size_t const gapLength = (targetLength - noRedundantWhiteSpace.length());
         result += noRedundantWhiteSpace;
         result += string(gapLength, ' ');
     }
@@ -857,7 +858,7 @@ string getStringWithLeftAlignment(string_view const mainText, size_t const targe
 
 string getCorrectPathWithoutUrlParameters(string_view const path) {
     string correctPathWithoutUrlParameters(path);
-    size_t indexOfQuestionMark = path.find_first_of('?');
+    size_t const indexOfQuestionMark = path.find_first_of('?');
     if (isNotNpos(static_cast<int>(indexOfQuestionMark))) {
         correctPathWithoutUrlParameters = path.substr(0, indexOfQuestionMark);
     }
@@ -866,7 +867,7 @@ string getCorrectPathWithoutUrlParameters(string_view const path) {
 
 string getUrlParameters(string_view const path) {
     string urlParameters;
-    size_t indexOfQuestionMark = path.find_first_of('?');
+    size_t const indexOfQuestionMark = path.find_first_of('?');
     if (isNotNpos(static_cast<int>(indexOfQuestionMark))) {
         urlParameters = path.substr(indexOfQuestionMark);
     }
@@ -900,9 +901,9 @@ string getCorrectPathWithoutDoublePeriod(string_view const path, string_view con
         string stringToFind(slashCharacterString);
         stringToFind += ".."s;
         stringToFind += slashCharacterString;
-        size_t indexOfDoublePeriod = correctPath.find(stringToFind);
+        size_t const indexOfDoublePeriod = correctPath.find(stringToFind);
         if (isNotNpos(static_cast<int>(indexOfDoublePeriod))) {
-            size_t indexOfNearestSlash = correctPath.find_last_of(slashCharacterString, indexOfDoublePeriod - 1);
+            size_t const indexOfNearestSlash = correctPath.find_last_of(slashCharacterString, indexOfDoublePeriod - 1);
             if (isNotNpos(static_cast<int>(indexOfNearestSlash))) {
                 isDirectoryChanged = true;
                 correctPath.erase(indexOfNearestSlash, indexOfDoublePeriod + 3 - indexOfNearestSlash);
@@ -913,7 +914,7 @@ string getCorrectPathWithoutDoublePeriod(string_view const path, string_view con
 }
 
 string getStringBeforeDoublePeriod(string_view const path, string_view const slashCharacterString) {
-    size_t indexOfLastDoublePeriod = path.rfind(".."s + string(slashCharacterString));
+    size_t const indexOfLastDoublePeriod = path.rfind(".."s + string(slashCharacterString));
     if (isNotNpos(static_cast<int>(indexOfLastDoublePeriod))) {
         return string(path.substr(indexOfLastDoublePeriod + 3));
     }
@@ -924,7 +925,7 @@ string getImmediateDirectoryName(string_view const path, string_view const slash
     size_t indexLastCharacterToSearch = path.length();
     string result;
     while (result.empty()) {
-        size_t indexOfLastSlashString = path.find_last_of(slashCharacterString, indexLastCharacterToSearch);
+        size_t const indexOfLastSlashString = path.find_last_of(slashCharacterString, indexLastCharacterToSearch);
         if (isNpos(static_cast<int>(indexOfLastSlashString))) {
             break;
         }
@@ -967,7 +968,7 @@ template string getImmediateDirectoryName<'\\'>(string_view const path);
 template string getImmediateDirectoryName<'/'>(string_view const path);
 
 bool convertStringToBool(string_view const stringToConvert) {
-    string allCapital(getStringWithCapitalLetters(stringToConvert));
+    string const allCapital(getStringWithCapitalLetters(stringToConvert));
     bool result(false);
     if ("TRUE" == allCapital) {
         result = true;

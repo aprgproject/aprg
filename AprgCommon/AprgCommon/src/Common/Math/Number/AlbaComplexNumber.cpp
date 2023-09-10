@@ -90,10 +90,10 @@ template AlbaComplexNumber<double> AlbaComplexNumber<double>::operator/(AlbaComp
 
 template <typename DataType>
 AlbaComplexNumber<DataType> AlbaComplexNumber<DataType>::operator^(DataType const exponent) const {
-    double modulusPart = pow(static_cast<double>(getModulus()), static_cast<double>(exponent));
-    double angleToBeUsed = getBestAngleInRaiseToPowerInRadians(exponent);
-    double realPart = modulusPart * cos(angleToBeUsed);
-    double imaginaryPart = modulusPart * sin(angleToBeUsed);
+    double const modulusPart = pow(static_cast<double>(getModulus()), static_cast<double>(exponent));
+    double const angleToBeUsed = getBestAngleInRaiseToPowerInRadians(exponent);
+    double const realPart = modulusPart * cos(angleToBeUsed);
+    double const imaginaryPart = modulusPart * sin(angleToBeUsed);
     return AlbaComplexNumber<DataType>(static_cast<DataType>(realPart), static_cast<DataType>(imaginaryPart));
 }
 
@@ -190,10 +190,10 @@ template double AlbaComplexNumber<double>::getAngleInRadians() const;
 
 template <typename DataType>
 double AlbaComplexNumber<DataType>::getBestAngleInRaiseToPowerInRadians(DataType const exponent) const {
-    double angleWithoutPi(getAngleInRadians() / getPi());
-    FractionDetails exponentFraction(getBestFractionDetailsForDoubleValue<size_t>(static_cast<double>(exponent)));
+    double const angleWithoutPi(getAngleInRadians() / getPi());
+    FractionDetails const exponentFraction(getBestFractionDetailsForDoubleValue<size_t>(static_cast<double>(exponent)));
     constexpr size_t MINIMUM_ROOTS = 100;
-    size_t numberRootsToProcess = min(MINIMUM_ROOTS, exponentFraction.denominator);
+    size_t const numberRootsToProcess = min(MINIMUM_ROOTS, exponentFraction.denominator);
 
     bool isFirst(true);
     double bestAngleWithoutPi(0);
@@ -201,7 +201,7 @@ double AlbaComplexNumber<DataType>::getBestAngleInRaiseToPowerInRadians(DataType
     for (size_t rootIndex = 0; rootIndex < numberRootsToProcess; ++rootIndex) {
         auto possibleAngleWithoutPi =
             (angleWithoutPi + 2.0 * static_cast<double>(rootIndex)) * static_cast<double>(exponent);
-        double deltaFromNearestInteger = getPositiveDelta(possibleAngleWithoutPi, round(possibleAngleWithoutPi));
+        double const deltaFromNearestInteger = getPositiveDelta(possibleAngleWithoutPi, round(possibleAngleWithoutPi));
         if (isFirst || deltaFromNearestInteger < minDeltaFromNearestInteger) {
             minDeltaFromNearestInteger = deltaFromNearestInteger;
             bestAngleWithoutPi = possibleAngleWithoutPi;
@@ -230,11 +230,11 @@ template <typename DataType>
 AlbaComplexNumber<DataType> AlbaComplexNumber<DataType>::getNthRoot(
     size_t const rootIndex, size_t const rootDegree) const {
     assert(rootIndex < rootDegree);
-    double modulusPart =
+    double const modulusPart =
         pow(static_cast<double>(getModulus()), static_cast<double>(1) / static_cast<double>(rootDegree));
-    double angleToBeUsed = (getAngleInRadians() + getPi() * 2 * static_cast<double>(rootIndex)) / rootDegree;
-    double realPart = modulusPart * cos(angleToBeUsed);
-    double imaginaryPart = modulusPart * sin(angleToBeUsed);
+    double const angleToBeUsed = (getAngleInRadians() + getPi() * 2 * static_cast<double>(rootIndex)) / rootDegree;
+    double const realPart = modulusPart * cos(angleToBeUsed);
+    double const imaginaryPart = modulusPart * sin(angleToBeUsed);
     return AlbaComplexNumber<DataType>(static_cast<DataType>(realPart), static_cast<DataType>(imaginaryPart));
 }
 

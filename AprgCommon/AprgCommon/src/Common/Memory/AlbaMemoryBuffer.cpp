@@ -33,7 +33,7 @@ std::ostream& operator<<(std::ostream& out, AlbaMemoryBuffer const& memoryBuffer
 }
 
 void* AlbaMemoryBuffer::resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(size_t const additionalSize) {
-    int oldSize = static_cast<int>(m_buffer.size());
+    int const oldSize = static_cast<int>(m_buffer.size());
     m_buffer.resize(oldSize + additionalSize);
     return static_cast<void*>((m_buffer.begin() + oldSize).operator->());
 }
