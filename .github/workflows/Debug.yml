@@ -58,7 +58,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        projectToBuild: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild)[0] }} #"[${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild)[0] }}]"
+        projectToBuild: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }} #"[${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild)[0] }}]"
     permissions:
       contents: write
     steps:
