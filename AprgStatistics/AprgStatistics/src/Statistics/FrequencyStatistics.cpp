@@ -36,7 +36,7 @@ double FrequencyStatistics::calculateSum(FrequencySamples const& samples) {
 
 double FrequencyStatistics::calculateMean(FrequencySamples const& samples) {
     double result(0);
-    int numberOfSamples = calculateNumberOfSamples(samples);
+    int const numberOfSamples = calculateNumberOfSamples(samples);
     if (numberOfSamples > 0) {
         result = calculateSum(samples) / numberOfSamples;
     }
@@ -44,14 +44,14 @@ double FrequencyStatistics::calculateMean(FrequencySamples const& samples) {
 }
 
 double FrequencyStatistics::calculateMedian(FrequencySamples const& samples) {
-    int numberOfSamples = calculateNumberOfSamples(samples);
-    double medianLocation = (static_cast<double>(numberOfSamples) + 1) / 2;
+    int const numberOfSamples = calculateNumberOfSamples(samples);
+    double const medianLocation = (static_cast<double>(numberOfSamples) + 1) / 2;
     int rangeOffsetForCurrentValue = 0;
     int previousMinimumValue = 0;
     double previousValue = 0;
     double result(0);
     for (auto const& frequencyPair : samples) {
-        int minimumValueOffset = (frequencyPair.second > 0) ? 1 : 0;
+        int const minimumValueOffset = (frequencyPair.second > 0) ? 1 : 0;
         if (rangeOffsetForCurrentValue + minimumValueOffset <= medianLocation &&
             medianLocation <= rangeOffsetForCurrentValue + frequencyPair.second) {
             result = frequencyPair.first;

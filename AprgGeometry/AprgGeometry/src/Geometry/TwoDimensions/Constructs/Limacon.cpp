@@ -31,7 +31,7 @@ LimaconTrigonometricFunctionType Limacon::getTrigonometricFunctionType() const {
 
 LimaconType Limacon::getLimaconType() const {
     LimaconType result(LimaconType::Unknown);
-    double ratio(getAbsoluteValue(m_aValue / m_bValue));
+    double const ratio(getAbsoluteValue(m_aValue / m_bValue));
     if (ratio >= 2) {
         result = LimaconType::Convex;
     } else if (isAlmostEqual(ratio, 1.0)) {
@@ -49,7 +49,7 @@ LimaconType Limacon::getLimaconType() const {
 Points Limacon::getPointsForShape(AlbaAngle const& angleInterval) const {
     Points result;
     if (!isAlmostEqual(m_aValue, 0.0) && !isAlmostEqual(m_bValue, 0.0)) {
-        AlbaAngle limit(AngleUnitType::Degrees, 360);
+        AlbaAngle const limit(AngleUnitType::Degrees, 360);
         for (AlbaAngle theta(AngleUnitType::Degrees, 0); theta < limit; theta += angleInterval) {
             result.emplace_back(convertFromPolarCoordinates(PolarCoordinate{calculateRadiusFromTheta(theta), theta}));
         }

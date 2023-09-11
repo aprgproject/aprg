@@ -11,12 +11,13 @@ using namespace std;
 namespace alba::ThreeDimensions {
 
 Line::Line(Point const& first, Point const& second) {
-    double deltaX = second.getX() - first.getX();
-    double deltaY = second.getY() - first.getY();
-    double deltaZ = second.getZ() - first.getZ();
+    double const deltaX = second.getX() - first.getX();
+    double const deltaY = second.getY() - first.getY();
+    double const deltaZ = second.getZ() - first.getZ();
     double sign = 1;
-    vector<double> deltas = {deltaX, deltaY, deltaZ};
-    int negativeNumbers = std::count_if(deltas.cbegin(), deltas.cend(), [&](double const delta) { return delta < 0; });
+    vector<double> const deltas = {deltaX, deltaY, deltaZ};
+    int const negativeNumbers =
+        std::count_if(deltas.cbegin(), deltas.cend(), [&](double const delta) { return delta < 0; });
     if (negativeNumbers > 1) {
         sign = -1;
     }

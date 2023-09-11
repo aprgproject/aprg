@@ -28,10 +28,10 @@ double AnimizeColor::getNewSaturation(double const originalValue) const {
 }
 
 void AnimizeColor::gatherStatistics(string const& bitmapPath) {
-    Bitmap bitmap(bitmapPath);
-    BitmapSnippet canvas(bitmap.getSnippetReadFromFileWholeBitmap());
+    Bitmap const bitmap(bitmapPath);
+    BitmapSnippet const canvas(bitmap.getSnippetReadFromFileWholeBitmap());
     canvas.traverse([&](BitmapXY const&, int const color) {
-        HueSaturationLightnessData hslData(convertColorToHueSaturationLightnessData(color));
+        HueSaturationLightnessData const hslData(convertColorToHueSaturationLightnessData(color));
         addCountToValue(m_lightnessData, hslData.lightnessDecimal);
         addCountToValue(m_saturationData, hslData.saturationLightnessDecimal);
     });
@@ -63,14 +63,14 @@ double AnimizeColor::getNewValue(ColorDataMap const& colorDataMap, double const 
         if (colorDataMap.find(originalValue) != colorDataMap.cend()) {
             newValue = colorDataMap.at(originalValue).newValue;
         } else {
-            pair<ColorDataMap::const_iterator, ColorDataMap::const_iterator> iterators =
+            pair<ColorDataMap::const_iterator, ColorDataMap::const_iterator> const iterators =
                 containerHelper::getLowerAndUpperConstIteratorsInMap(colorDataMap, originalValue);
             auto itLower(iterators.first);
             auto itUpper(iterators.second);
-            double deltaX = itUpper->first - itLower->first;
-            double deltaY = itUpper->second.newValue - itLower->second.newValue;
-            double deltaXToInterpolate = originalValue - itLower->first;
-            double deltaYInterpolated = deltaXToInterpolate / deltaX * deltaY;
+            double const deltaX = itUpper->first - itLower->first;
+            double const deltaY = itUpper->second.newValue - itLower->second.newValue;
+            double const deltaXToInterpolate = originalValue - itLower->first;
+            double const deltaYInterpolated = deltaXToInterpolate / deltaX * deltaY;
             newValue = itLower->second.newValue + deltaYInterpolated;
         }
     }
@@ -87,9 +87,9 @@ void AnimizeColor::calculateNewValues(ColorDataMap& colorDataMap) const {
         totalCount += colorDataPair.second.count;
     }
     int partialCount = 0;
-    double diffOfHighestAndLowestValue = m_highestIncludedValue - m_lowestIncludedValue;
+    double const diffOfHighestAndLowestValue = m_highestIncludedValue - m_lowestIncludedValue;
     for (auto& colorDataPair : colorDataMap) {
-        int currentCount = colorDataPair.second.count;
+        int const currentCount = colorDataPair.second.count;
         colorDataPair.second.newValue =
             (((static_cast<double>(currentCount) / 2) + partialCount) / totalCount * diffOfHighestAndLowestValue) +
             m_lowestIncludedValue;
@@ -110,8 +110,8 @@ void AnimizeColor::addCountToValue(ColorDataMap& colorDataMap, double const valu
 }
 
 void gatherAndSaveDataInAnimizeColor(string const& bitmapPath) {
-    AlbaLocalPathHandler bitmapPathHandler(bitmapPath);
-    AlbaLocalPathHandler colorDataPathHandler(
+    AlbaLocalPathHandler const bitmapPathHandler(bitmapPath);
+    AlbaLocalPathHandler const colorDataPathHandler(
         bitmapPathHandler.getDirectory() + R"(\)" + bitmapPathHandler.getFilenameOnly() + R"(_AnimizeColorData.csv)");
 
     AnimizeColor statistics;

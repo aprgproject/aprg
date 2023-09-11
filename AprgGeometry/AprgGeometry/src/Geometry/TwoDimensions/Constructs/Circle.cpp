@@ -39,10 +39,10 @@ Point Circle::getCenter() const { return m_center; }
 Points Circle::getLocus(double const interval) const {
     // points for circumference
     Points result;
-    Points pointsInFirstQuarter(getPointsInTraversingXAndY(1, 1, interval));
-    Points pointsInSecondQuarter(getPointsInTraversingXAndY(-1, 1, interval));
-    Points pointsInThirdQuarter(getPointsInTraversingXAndY(-1, -1, interval));
-    Points pointsInFourthQuarter(getPointsInTraversingXAndY(1, -1, interval));
+    Points const pointsInFirstQuarter(getPointsInTraversingXAndY(1, 1, interval));
+    Points const pointsInSecondQuarter(getPointsInTraversingXAndY(-1, 1, interval));
+    Points const pointsInThirdQuarter(getPointsInTraversingXAndY(-1, -1, interval));
+    Points const pointsInFourthQuarter(getPointsInTraversingXAndY(1, -1, interval));
     result.reserve(
         pointsInFirstQuarter.size() + pointsInSecondQuarter.size() + pointsInThirdQuarter.size() +
         pointsInFourthQuarter.size());
@@ -63,7 +63,7 @@ Points Circle::getLocus(double const interval) const {
 
 optional<double> Circle::calculateYFromX(double const x, double const signOfRoot) const {
     optional<double> result;
-    double discriminant = m_radiusSquared - pow(x - m_center.getX(), 2);
+    double const discriminant = m_radiusSquared - pow(x - m_center.getX(), 2);
     if (discriminant > 0) {
         result = pow(discriminant, 0.5) * signOfRoot + m_center.getY();
     }
@@ -72,7 +72,7 @@ optional<double> Circle::calculateYFromX(double const x, double const signOfRoot
 
 optional<double> Circle::calculateXFromY(double const y, double const signOfRoot) const {
     optional<double> result;
-    double discriminant = m_radiusSquared - pow(y - m_center.getY(), 2);
+    double const discriminant = m_radiusSquared - pow(y - m_center.getY(), 2);
     if (discriminant > 0) {
         result = pow(discriminant, 0.5) * signOfRoot + m_center.getX();
     }
@@ -81,7 +81,7 @@ optional<double> Circle::calculateXFromY(double const y, double const signOfRoot
 
 optional<double> Circle::calculateYFromXWithoutCenter(double const x, double const signOfRoot) const {
     optional<double> result;
-    double discriminant = m_radiusSquared - pow(x, 2);
+    double const discriminant = m_radiusSquared - pow(x, 2);
     if (discriminant > 0) {
         result = pow(discriminant, 0.5) * signOfRoot;
     }
@@ -90,7 +90,7 @@ optional<double> Circle::calculateYFromXWithoutCenter(double const x, double con
 
 optional<double> Circle::calculateXFromYWithoutCenter(double const y, double const signOfRoot) const {
     optional<double> result;
-    double discriminant = m_radiusSquared - pow(y, 2);
+    double const discriminant = m_radiusSquared - pow(y, 2);
     if (discriminant >= 0) {
         result = pow(discriminant, 0.5) * signOfRoot;
     }
@@ -127,15 +127,15 @@ void Circle::traverseArea(double const interval, TraverseOperation const& traver
 }
 
 Point Circle::getPointAtAngle(double const angleInRadians) {
-    double deltaX = cos(angleInRadians) * m_radius;
-    double deltaY = sin(angleInRadians) * m_radius;
+    double const deltaX = cos(angleInRadians) * m_radius;
+    double const deltaY = sin(angleInRadians) * m_radius;
     return {m_center.getX() + deltaX, m_center.getY() + deltaY};
 }
 
 Points Circle::getPointsInTraversingXAndY(double const signOfX, double const signOfY, double const interval) const {
     Points result;
-    Points pointsFromTraversingX(getPointsInTraversingX(signOfX, signOfY, interval));
-    Points pointsFromTraversingY(getPointsInTraversingY(signOfX, signOfY, interval));
+    Points const pointsFromTraversingX(getPointsInTraversingX(signOfX, signOfY, interval));
+    Points const pointsFromTraversingY(getPointsInTraversingY(signOfX, signOfY, interval));
     if (signOfX > 0 && signOfY > 0) {
         result = getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
     } else if (signOfX < 0 && signOfY > 0) {
@@ -150,7 +150,7 @@ Points Circle::getPointsInTraversingXAndY(double const signOfX, double const sig
 
 Points Circle::getPointsInTraversingY(double const signOfX, double const signOfY, double const interval) const {
     Points result;
-    AlbaValueRange<double> yRange(m_center.getY(), m_center.getY() + (m_radius * signOfY), interval);
+    AlbaValueRange<double> const yRange(m_center.getY(), m_center.getY() + (m_radius * signOfY), interval);
     yRange.traverse([&](double const yValue) {
         optional<double> xCoordinate = calculateXFromY(yValue, signOfX);
         if (xCoordinate) {
@@ -162,7 +162,7 @@ Points Circle::getPointsInTraversingY(double const signOfX, double const signOfY
 
 Points Circle::getPointsInTraversingX(double const signOfX, double const signOfY, double const interval) const {
     Points result;
-    AlbaValueRange<double> xRange(m_center.getX(), m_center.getX() + (m_radius * signOfX), interval);
+    AlbaValueRange<double> const xRange(m_center.getX(), m_center.getX() + (m_radius * signOfX), interval);
     xRange.traverse([&](double const xValue) {
         optional<double> yCoordinate = calculateYFromX(xValue, signOfY);
         if (yCoordinate) {
@@ -174,8 +174,8 @@ Points Circle::getPointsInTraversingX(double const signOfX, double const signOfY
 
 void Circle::determineAndSaveCenterAndRadiusFromCoefficients(
     double const a, double const d, double const e, double const f) {
-    double xPart = d / a / 2;
-    double yPart = e / a / 2;
+    double const xPart = d / a / 2;
+    double const yPart = e / a / 2;
     m_center = Point(-xPart, -yPart);
     m_radius = -(f / a) - pow(xPart, 2) - pow(yPart, 2);
     m_radiusSquared = pow(m_radius, 2);
@@ -187,10 +187,10 @@ ostream& operator<<(ostream& out, Circle const& circle) {
 }
 
 Point Circle::getNearestPointInCircumference(Point const& point) const {
-    Point deltaPoint(point.getX() - m_center.getX(), point.getY() - m_center.getY());
-    double angle = atan(deltaPoint.getY() / deltaPoint.getX());
-    double nearestDeltaPointX = cos(angle) * m_radius * getSign(deltaPoint.getX());
-    double nearestDeltaPointY = sin(angle) * m_radius * getSign(deltaPoint.getY());
+    Point const deltaPoint(point.getX() - m_center.getX(), point.getY() - m_center.getY());
+    double const angle = atan(deltaPoint.getY() / deltaPoint.getX());
+    double const nearestDeltaPointX = cos(angle) * m_radius * getSign(deltaPoint.getX());
+    double const nearestDeltaPointY = sin(angle) * m_radius * getSign(deltaPoint.getY());
     return {m_center.getX() + nearestDeltaPointX, m_center.getY() + nearestDeltaPointY};
 }
 

@@ -36,11 +36,11 @@ Point Hyperbola::getCenter() const { return m_center; }
 Points Hyperbola::getFoci() const {
     Points foci;
     if (m_aValue > 0) {
-        double c(getCValue());
+        double const c(getCValue());
         foci.emplace_back(m_center + Point(c, 0));
         foci.emplace_back(m_center - Point(c, 0));
     } else {
-        double c(getCValue());
+        double const c(getCValue());
         foci.emplace_back(m_center + Point(0, c));
         foci.emplace_back(m_center - Point(0, c));
     }
@@ -53,7 +53,7 @@ Points Hyperbola::getVertices() const {
         vertices.emplace_back(m_center + Point(m_aValue, 0));
         vertices.emplace_back(m_center - Point(m_aValue, 0));
     } else {
-        double bPositive = getAbsoluteValue(m_bValue);
+        double const bPositive = getAbsoluteValue(m_bValue);
         vertices.emplace_back(m_center + Point(0, bPositive));
         vertices.emplace_back(m_center - Point(0, bPositive));
     }
@@ -63,10 +63,10 @@ Points Hyperbola::getVertices() const {
 Points Hyperbola::getPointsForShape(double const interval) const {
     Points result;
     if (m_aValue != 0 && m_bValue != 0) {
-        Points pointsInFirstQuarter(getPointsInTraversingXAndY(1, 1, interval));
-        Points pointsInFourthQuarter(getPointsInTraversingXAndY(1, -1, interval));
-        Points pointsInSecondQuarter(getPointsInTraversingXAndY(-1, 1, interval));
-        Points pointsInThirdQuarter(getPointsInTraversingXAndY(-1, -1, interval));
+        Points const pointsInFirstQuarter(getPointsInTraversingXAndY(1, 1, interval));
+        Points const pointsInFourthQuarter(getPointsInTraversingXAndY(1, -1, interval));
+        Points const pointsInSecondQuarter(getPointsInTraversingXAndY(-1, 1, interval));
+        Points const pointsInThirdQuarter(getPointsInTraversingXAndY(-1, -1, interval));
         result.reserve(
             pointsInFirstQuarter.size() + pointsInSecondQuarter.size() + pointsInThirdQuarter.size() +
             pointsInFourthQuarter.size());
@@ -102,8 +102,8 @@ double Hyperbola::calculateXFromYWithoutCenter(double const y, double const sign
 
 Points Hyperbola::getPointsInTraversingXAndY(double const signOfX, double const signOfY, double const interval) const {
     Points result;
-    Points pointsFromTraversingX(getPointsInTraversingX(signOfX, signOfY, interval));
-    Points pointsFromTraversingY(getPointsInTraversingY(signOfX, signOfY, interval));
+    Points const pointsFromTraversingX(getPointsInTraversingX(signOfX, signOfY, interval));
+    Points const pointsFromTraversingY(getPointsInTraversingY(signOfX, signOfY, interval));
     if (signOfX > 0 && signOfY > 0) {
         // first quarter
         result = getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
@@ -122,15 +122,15 @@ Points Hyperbola::getPointsInTraversingXAndY(double const signOfX, double const 
 
 Points Hyperbola::getPointsInTraversingY(double const signOfX, double const signOfY, double const interval) const {
     Points result;
-    AlbaValueRange<double> yRange(m_center.getY(), m_center.getY() + (m_bValue * signOfY), interval);
+    AlbaValueRange<double> const yRange(m_center.getY(), m_center.getY() + (m_bValue * signOfY), interval);
     yRange.traverse([&](double const yValue) { result.emplace_back(calculateXFromY(yValue, signOfX), yValue); });
     return result;
 }
 
 Points Hyperbola::getPointsInTraversingX(double const signOfX, double const signOfY, double const interval) const {
     Points result;
-    double stepValue(m_aValue * signOfX);
-    AlbaValueRange<double> xRange(
+    double const stepValue(m_aValue * signOfX);
+    AlbaValueRange<double> const xRange(
         m_center.getX() + stepValue, m_center.getX() + 2 * stepValue,
         interval);  // whats with the 2 step value? it should configurable
     xRange.traverse([&](double const xValue) { result.emplace_back(xValue, calculateYFromX(xValue, signOfY)); });

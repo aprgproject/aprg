@@ -16,7 +16,7 @@ Plane::Plane() : m_aCoefficient(0), m_bCoefficient(0), m_cCoefficient(0), m_dCoe
 
 Plane::Plane(Point const& first, Point const& second, Point const& third)
     : m_aCoefficient(0), m_bCoefficient(0), m_cCoefficient(0), m_dCoefficient(0) {
-    Vector perpendicularVector(getCrossProduct(
+    Vector const perpendicularVector(getCrossProduct(
         Vector{first.getX() - second.getX(), first.getY() - second.getY(), first.getZ() - second.getZ()},
         Vector{first.getX() - third.getX(), first.getY() - third.getY(), first.getZ() - third.getZ()}));
     m_aCoefficient = perpendicularVector.getValueAt(0);

@@ -11,30 +11,30 @@ using namespace std;
 namespace alba::AprgBitmap {
 
 void AprgColorStatistics::gatherStatistics(string const& bitmapPath) {
-    Bitmap bitmap(bitmapPath);
-    BitmapSnippet canvas(bitmap.getSnippetReadFromFileWholeBitmap());
+    Bitmap const bitmap(bitmapPath);
+    BitmapSnippet const canvas(bitmap.getSnippetReadFromFileWholeBitmap());
     canvas.traverse([&](BitmapXY const&, uint32_t const color) {
-        double colorIntensity(calculateColorIntensityDecimal(color));
-        double luma601(calculateLuma601Decimal(color));
-        double luma709(calculateLuma709Decimal(color));
+        double const colorIntensity(calculateColorIntensityDecimal(color));
+        double const luma601(calculateLuma601Decimal(color));
+        double const luma709(calculateLuma709Decimal(color));
         colorIntensitySet.emplace(colorIntensity);
         luma601Set.emplace(luma601);
         luma709Set.emplace(luma709);
-        HueSaturationLightnessData hslData(convertColorToHueSaturationLightnessData(color));
-        HueSaturationValueData hsvData(convertColorToHueSaturationValueData(color));
+        HueSaturationLightnessData const hslData(convertColorToHueSaturationLightnessData(color));
+        HueSaturationValueData const hsvData(convertColorToHueSaturationValueData(color));
         hueDegreesSet.emplace(hslData.hueDegrees);
         saturationLightnessSet.emplace(hslData.saturationLightnessDecimal);
         lightnessSet.emplace(hslData.lightnessDecimal);
         saturationValueSet.emplace(hsvData.saturationValueDecimal);
         valueSet.emplace(hsvData.valueDecimalOfColorMax);
 
-        colorIntensitySamples.emplace_back(OneDimensionStatistics::Sample{colorIntensity});
-        saturationLightnessSamples.emplace_back(OneDimensionStatistics::Sample{hslData.saturationLightnessDecimal});
-        lightnessSamples.emplace_back(OneDimensionStatistics::Sample{hslData.lightnessDecimal});
-        saturationValueSamples.emplace_back(OneDimensionStatistics::Sample{hsvData.saturationValueDecimal});
-        valueSamples.emplace_back(OneDimensionStatistics::Sample{hsvData.valueDecimalOfColorMax});
-        luma601Samples.emplace_back(OneDimensionStatistics::Sample{luma601});
-        luma709Samples.emplace_back(OneDimensionStatistics::Sample{luma709});
+        colorIntensitySamples.emplace_back(colorIntensity);
+        saturationLightnessSamples.emplace_back(hslData.saturationLightnessDecimal);
+        lightnessSamples.emplace_back(hslData.lightnessDecimal);
+        saturationValueSamples.emplace_back(hsvData.saturationValueDecimal);
+        valueSamples.emplace_back(hsvData.valueDecimalOfColorMax);
+        luma601Samples.emplace_back(luma601);
+        luma709Samples.emplace_back(luma709);
     });
 }
 
@@ -59,7 +59,7 @@ void AprgColorStatistics::saveColorData(string const& path) {
                         << "luma709"
                         << "\n";
     int count = 0;
-    int size = min(
+    int const size = min(
         colorIntensitySet.size(),
         min(hueDegreesSet.size(),
             min(saturationLightnessSet.size(),
@@ -101,10 +101,10 @@ void AprgColorStatistics::saveColorStatistics(string const& path) {
 }
 
 void gatherAndSaveColorStatistics(string const& bitmapPath) {
-    AlbaLocalPathHandler bitmapPathHandler(bitmapPath);
-    AlbaLocalPathHandler colorDataPathHandler(
+    AlbaLocalPathHandler const bitmapPathHandler(bitmapPath);
+    AlbaLocalPathHandler const colorDataPathHandler(
         bitmapPathHandler.getDirectory() + R"(\)" + bitmapPathHandler.getFilenameOnly() + R"(_SortedColorData.csv)");
-    AlbaLocalPathHandler colorStatisticsPathHandler(
+    AlbaLocalPathHandler const colorStatisticsPathHandler(
         bitmapPathHandler.getDirectory() + R"(\)" + bitmapPathHandler.getFilenameOnly() + R"(_Statistics.txt)");
 
     AprgColorStatistics statistics;

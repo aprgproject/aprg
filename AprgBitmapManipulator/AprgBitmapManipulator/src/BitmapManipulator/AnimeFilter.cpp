@@ -14,8 +14,8 @@ namespace alba::AprgBitmap {
 
 void animize(string const& inputFile, string const& outputFile) {
     AlbaLocalTimer localTimer;
-    AlbaLocalPathHandler inputFilePathHandler(inputFile);
-    AlbaLocalPathHandler outputFilePathHandler(outputFile);
+    AlbaLocalPathHandler const inputFilePathHandler(inputFile);
+    AlbaLocalPathHandler const outputFilePathHandler(outputFile);
     BitmapFilters bitmapFilters(inputFilePathHandler.getFullPath());
     BitmapSnippet tempSnippet(bitmapFilters.getWholeBitmapSnippet());
     BitmapSnippet outputSnippet(bitmapFilters.getBlankSnippetWithBackground());
@@ -103,7 +103,7 @@ void doStuffsAfterSteps(
 }
 
 string getNewFilePath(string const& inputFilePath, int const step, string const& description) {
-    AlbaLocalPathHandler inputFilePathHandler(inputFilePath);
+    AlbaLocalPathHandler const inputFilePathHandler(inputFilePath);
     stringstream ss;
     ss << inputFilePathHandler.getDirectory() << inputFilePathHandler.getFilenameOnly() << "_Step" << step << "_("
        << stringHelper::getStringAndReplaceNonAlphanumericCharactersToUnderScore(description) << ")."

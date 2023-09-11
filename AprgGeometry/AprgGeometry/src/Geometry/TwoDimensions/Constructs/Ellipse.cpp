@@ -45,16 +45,16 @@ Point Ellipse::getCenter() const { return m_center; }
 
 Points Ellipse::getFoci() const {
     Points foci;
-    double a(m_aValue);
-    double b(m_bValue);
+    double const a(m_aValue);
+    double const b(m_bValue);
     if (isAlmostEqual(a, b)) {
         foci.emplace_back(m_center);
     } else if (a > b) {
-        double c(getCValue());
+        double const c(getCValue());
         foci.emplace_back(m_center + Point(c, 0));
         foci.emplace_back(m_center - Point(c, 0));
     } else if (a < b) {
-        double c(getCValue());
+        double const c(getCValue());
         foci.emplace_back(m_center + Point(0, c));
         foci.emplace_back(m_center - Point(0, c));
     }
@@ -92,10 +92,10 @@ Points Ellipse::getMinorVertices() const {
 Points Ellipse::getPointsForCircumference(double const interval) const {
     Points result;
     if (!isAlmostEqual(m_aValue, 0.0) && !isAlmostEqual(m_bValue, 0.0)) {
-        Points pointsInFirstQuarter(getPointsInTraversingXAndY(1, 1, interval));
-        Points pointsInSecondQuarter(getPointsInTraversingXAndY(-1, 1, interval));
-        Points pointsInThirdQuarter(getPointsInTraversingXAndY(-1, -1, interval));
-        Points pointsInFourthQuarter(getPointsInTraversingXAndY(1, -1, interval));
+        Points const pointsInFirstQuarter(getPointsInTraversingXAndY(1, 1, interval));
+        Points const pointsInSecondQuarter(getPointsInTraversingXAndY(-1, 1, interval));
+        Points const pointsInThirdQuarter(getPointsInTraversingXAndY(-1, -1, interval));
+        Points const pointsInFourthQuarter(getPointsInTraversingXAndY(1, -1, interval));
         result.reserve(
             pointsInFirstQuarter.size() + pointsInSecondQuarter.size() + pointsInThirdQuarter.size() +
             pointsInFourthQuarter.size());
@@ -114,8 +114,8 @@ double Ellipse::getCValue() const {
     // This is linear eccentricity
     // This is the distance from the center to a focus.
     double c = 0;
-    double aSquared(pow(m_aValue, 2));
-    double bSquared(pow(m_bValue, 2));
+    double const aSquared(pow(m_aValue, 2));
+    double const bSquared(pow(m_bValue, 2));
     if (isAlmostEqual(aSquared, bSquared)) {
         c = 1;
     }
@@ -131,7 +131,7 @@ double Ellipse::getEccentricity() const {
     // In mathematics, the eccentricity of a conic section is a non-negative real number that uniquely characterizes its
     // shape.
     double eccentricity = 0;
-    double c(getCValue());
+    double const c(getCValue());
     if (isAlmostEqual(m_aValue, m_bValue)) {
         eccentricity = 1;
     }
@@ -186,7 +186,7 @@ bool Ellipse::isInside(Point const& point) const {
 
 void Ellipse::traverseArea(double const interval, TraverseOperation const& traverseOperation) const {
     for (double y = 0; y <= m_bValue; y += interval) {
-        double xAtTheEdgeOfEllipse(calculateXFromYWithoutCenter(y, 1));
+        double const xAtTheEdgeOfEllipse(calculateXFromYWithoutCenter(y, 1));
         for (double x = 0; x <= xAtTheEdgeOfEllipse; x += interval) {
             if (isAlmostEqual(x, 0.0) && isAlmostEqual(y, 0.0)) {
                 traverseOperation(m_center);
@@ -202,8 +202,8 @@ void Ellipse::traverseArea(double const interval, TraverseOperation const& trave
 
 Points Ellipse::getPointsInTraversingXAndY(double const signOfX, double const signOfY, double const interval) const {
     Points result;
-    Points pointsFromTraversingX(getPointsInTraversingX(signOfX, signOfY, interval));
-    Points pointsFromTraversingY(getPointsInTraversingY(signOfX, signOfY, interval));
+    Points const pointsFromTraversingX(getPointsInTraversingX(signOfX, signOfY, interval));
+    Points const pointsFromTraversingY(getPointsInTraversingY(signOfX, signOfY, interval));
     if (signOfX > 0 && signOfY > 0) {
         result = getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
     } else if (signOfX < 0 && signOfY > 0) {
@@ -218,14 +218,14 @@ Points Ellipse::getPointsInTraversingXAndY(double const signOfX, double const si
 
 Points Ellipse::getPointsInTraversingY(double const signOfX, double const signOfY, double const interval) const {
     Points result;
-    AlbaValueRange<double> yRange(m_center.getY(), m_center.getY() + (m_bValue * signOfY), interval);
+    AlbaValueRange<double> const yRange(m_center.getY(), m_center.getY() + (m_bValue * signOfY), interval);
     yRange.traverse([&](double const yValue) { result.emplace_back(calculateXFromY(yValue, signOfX), yValue); });
     return result;
 }
 
 Points Ellipse::getPointsInTraversingX(double const signOfX, double const signOfY, double const interval) const {
     Points result;
-    AlbaValueRange<double> xRange(m_center.getX(), m_center.getX() + (m_aValue * signOfX), interval);
+    AlbaValueRange<double> const xRange(m_center.getX(), m_center.getX() + (m_aValue * signOfX), interval);
     xRange.traverse([&](double const xValue) { result.emplace_back(xValue, calculateYFromX(xValue, signOfY)); });
     return result;
 }

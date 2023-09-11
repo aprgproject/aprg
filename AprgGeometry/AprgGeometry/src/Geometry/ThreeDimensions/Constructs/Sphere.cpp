@@ -29,7 +29,7 @@ Point Sphere::getCenter() const { return m_center; }
 
 optional<double> Sphere::calculateXFromYAndZ(double const y, double const z, double const signOfRoot) const {
     optional<double> result;
-    double discriminant = m_radiusSquared - pow(y - m_center.getY(), 2) - pow(z - m_center.getZ(), 2);
+    double const discriminant = m_radiusSquared - pow(y - m_center.getY(), 2) - pow(z - m_center.getZ(), 2);
     if (discriminant > 0) {
         result = pow(discriminant, 0.5) * signOfRoot + m_center.getX();
     }
@@ -38,7 +38,7 @@ optional<double> Sphere::calculateXFromYAndZ(double const y, double const z, dou
 
 optional<double> Sphere::calculateYFromXAndZ(double const x, double const z, double const signOfRoot) const {
     optional<double> result;
-    double discriminant = m_radiusSquared - pow(x - m_center.getX(), 2) - pow(z - m_center.getZ(), 2);
+    double const discriminant = m_radiusSquared - pow(x - m_center.getX(), 2) - pow(z - m_center.getZ(), 2);
     if (discriminant > 0) {
         result = pow(discriminant, 0.5) * signOfRoot + m_center.getY();
     }
@@ -47,7 +47,7 @@ optional<double> Sphere::calculateYFromXAndZ(double const x, double const z, dou
 
 optional<double> Sphere::calculateZFromXAndY(double const x, double const y, double const signOfRoot) const {
     optional<double> result;
-    double discriminant = m_radiusSquared - pow(x - m_center.getX(), 2) - pow(y - m_center.getY(), 2);
+    double const discriminant = m_radiusSquared - pow(x - m_center.getX(), 2) - pow(y - m_center.getY(), 2);
     if (discriminant > 0) {
         result = pow(discriminant, 0.5) * signOfRoot + m_center.getZ();
     }

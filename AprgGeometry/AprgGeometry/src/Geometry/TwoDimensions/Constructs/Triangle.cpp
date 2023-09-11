@@ -18,7 +18,7 @@ bool Triangle::isIsoceles() const {
 }
 
 bool Triangle::isRightTriangle() const {
-    AlbaAngles anglesAtVertices(getAnglesAtVertices());
+    AlbaAngles const anglesAtVertices(getAnglesAtVertices());
     return any_of(anglesAtVertices.cbegin(), anglesAtVertices.cend(), [](AlbaAngle const& angleAtVertex) {
         return isAlmostEqual(angleAtVertex.getDegrees(), static_cast<double>(90));
     });

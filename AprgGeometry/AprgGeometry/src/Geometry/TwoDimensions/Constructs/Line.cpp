@@ -17,8 +17,8 @@ Line::Line() : m_type(LineType::Invalid), m_aCoefficient(0), m_bCoefficient(0), 
 
 Line::Line(Point const& first, Point const& second)
     : m_type(LineType::Invalid), m_aCoefficient(0), m_bCoefficient(0), m_cCoefficient(0) {
-    double deltaY = second.getY() - first.getY();
-    double deltaX = second.getX() - first.getX();
+    double const deltaY = second.getY() - first.getY();
+    double const deltaX = second.getX() - first.getX();
     setLineParametersBasedOnDeltas(deltaX, deltaY, first);
 }
 
@@ -29,20 +29,20 @@ Line::Line(double const aCoefficient, double const bCoefficient, double const cC
 
 Line::Line(double const aCoefficient, double const bCoefficient, Point const& point)
     : m_type(LineType::Invalid), m_aCoefficient(0), m_bCoefficient(0), m_cCoefficient(0) {
-    double deltaX = aCoefficient;
-    double deltaY = bCoefficient;
+    double const deltaX = aCoefficient;
+    double const deltaY = bCoefficient;
     setLineParametersBasedOnDeltas(deltaX, deltaY, point);
 }
 
 bool Line::operator==(Line const& line) const {
-    double commonFactor1 = (m_aCoefficient != 0)   ? m_aCoefficient
-                           : (m_bCoefficient != 0) ? m_bCoefficient
-                           : (m_cCoefficient != 0) ? m_cCoefficient
-                                                   : 1;
-    double commonFactor2 = (line.m_aCoefficient != 0)   ? line.m_aCoefficient
-                           : (line.m_bCoefficient != 0) ? line.m_bCoefficient
-                           : (line.m_cCoefficient != 0) ? line.m_cCoefficient
-                                                        : 1;
+    double const commonFactor1 = (m_aCoefficient != 0)   ? m_aCoefficient
+                                 : (m_bCoefficient != 0) ? m_bCoefficient
+                                 : (m_cCoefficient != 0) ? m_cCoefficient
+                                                         : 1;
+    double const commonFactor2 = (line.m_aCoefficient != 0)   ? line.m_aCoefficient
+                                 : (line.m_bCoefficient != 0) ? line.m_bCoefficient
+                                 : (line.m_cCoefficient != 0) ? line.m_cCoefficient
+                                                              : 1;
     return (m_type == line.m_type) &&
            isAlmostEqual(m_aCoefficient / commonFactor1, line.m_aCoefficient / commonFactor2) &&
            isAlmostEqual(m_bCoefficient / commonFactor1, line.m_bCoefficient / commonFactor2) &&
@@ -136,8 +136,8 @@ void Line::mergePointsFromPointsFromXAndY(
 }
 
 LineType Line::determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX) {
-    bool isNegativeDeltaY = (deltaY < 0);
-    bool isNegativeDeltaX = (deltaX < 0);
+    bool const isNegativeDeltaY = (deltaY < 0);
+    bool const isNegativeDeltaX = (deltaX < 0);
     LineType lineType(LineType::Invalid);
     if (isAlmostEqual(deltaY, 0.0) && isAlmostEqual(deltaX, 0.0)) {
         lineType = LineType::Invalid;
@@ -154,8 +154,8 @@ LineType Line::determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double
 }
 
 LineType Line::determineLineTypeUsingCoefficients(double const aCoefficient, double const bCoefficient) {
-    bool isNegativeA = (aCoefficient < 0);
-    bool isNegativeB = (bCoefficient < 0);
+    bool const isNegativeA = (aCoefficient < 0);
+    bool const isNegativeB = (bCoefficient < 0);
     LineType lineType(LineType::Invalid);
     if (isAlmostEqual(aCoefficient, 0.0) && isAlmostEqual(bCoefficient, 0.0)) {
         lineType = LineType::Invalid;
@@ -173,14 +173,14 @@ LineType Line::determineLineTypeUsingCoefficients(double const aCoefficient, dou
 
 void Line::getPointsForVerticalLine(
     Points& points, Point const& first, Point const& second, double const interval) const {
-    AlbaValueRange<double> range(first.getY(), second.getY(), interval);
+    AlbaValueRange<double> const range(first.getY(), second.getY(), interval);
     double xIntercept(getXIntercept());
     range.traverse([&](double const traverseValue) { points.emplace_back(xIntercept, traverseValue); });
 }
 
 void Line::getPointsForHorizontalLine(
     Points& points, Point const& first, Point const& second, double const interval) const {
-    AlbaValueRange<double> range(first.getX(), second.getX(), interval);
+    AlbaValueRange<double> const range(first.getX(), second.getX(), interval);
     double yIntercept(getYIntercept());
     range.traverse([&](double const traverseValue) { points.emplace_back(traverseValue, yIntercept); });
 }
@@ -201,18 +201,18 @@ void Line::getPointsForLineWithSlope(
     addPointIfInsideTwoPoints(
         pointsAtBorder, Point(calculateXFromY(second.getY()), second.getY()), minimumXAndY, maximumXAndY);
     if (pointsAtBorder.size() >= 2) {
-        Point startingPoint(popNearestPoint(pointsAtBorder, first));
-        Point endPoint(popNearestPoint(pointsAtBorder, second));
-        bool isDirectionAscendingForX = startingPoint.getX() <= endPoint.getX();
+        Point const startingPoint(popNearestPoint(pointsAtBorder, first));
+        Point const endPoint(popNearestPoint(pointsAtBorder, second));
+        bool const isDirectionAscendingForX = startingPoint.getX() <= endPoint.getX();
 
         Points pointsFromXCoordinate;
-        AlbaValueRange<double> rangeForX(startingPoint.getX(), endPoint.getX(), interval);
+        AlbaValueRange<double> const rangeForX(startingPoint.getX(), endPoint.getX(), interval);
         rangeForX.traverse([&](double const traverseValueOfX) {
             pointsFromXCoordinate.emplace_back(traverseValueOfX, calculateYFromX(traverseValueOfX));
         });
 
         Points pointsFromYCoordinate;
-        AlbaValueRange<double> rangeForY(startingPoint.getY(), endPoint.getY(), interval);
+        AlbaValueRange<double> const rangeForY(startingPoint.getY(), endPoint.getY(), interval);
         rangeForY.traverse([&](double const traverseValueOfY) {
             pointsFromYCoordinate.emplace_back(calculateXFromY(traverseValueOfY), traverseValueOfY);
         });

@@ -27,7 +27,7 @@ bool isCollinearPointInLineSegment(LineSegment const& segment1, Point const& poi
 AlbaAngle getAngleOfPointWithRespectToOrigin(Point const& point) {
     AlbaAngle angle;
     if (!isOrigin(point)) {
-        Quadrant quadrant(getQuadrantOfAPoint(point));
+        Quadrant const quadrant(getQuadrantOfAPoint(point));
         angle = AlbaAngle(
             AngleUnitType::Radians, acos(getAbsoluteValue(getCosineOfAngleUsing1Delta(point.getX(), point.getY()))));
         if (Quadrant::IV == quadrant) {
@@ -43,8 +43,8 @@ AlbaAngle getAngleOfPointWithRespectToOrigin(Point const& point) {
 
 AlbaAngle getTheInnerAngleUsingThreePoints(
     Point const& commonPoint, Point const& firstPoint, Point const& secondPoint) {
-    Point deltaBA(firstPoint - commonPoint);
-    Point deltaCA(secondPoint - commonPoint);
+    Point const deltaBA(firstPoint - commonPoint);
+    Point const deltaCA(secondPoint - commonPoint);
 
     return {
         AngleUnitType::Radians, acos(getCosineOfAngleUsing2Deltas(constructVector(deltaBA), constructVector(deltaCA)))};
@@ -66,7 +66,7 @@ AlbaAngle getTheSmallerAngleBetweenTwoLines(Line const& line1, Line const& line2
 }
 
 AlbaAngle getTheLargerAngleBetweenTwoLines(Line const& line1, Line const& line2) {
-    AlbaAngle smallerAngle(getTheSmallerAngleBetweenTwoLines(line1, line2));
+    AlbaAngle const smallerAngle(getTheSmallerAngleBetweenTwoLines(line1, line2));
     return {AngleUnitType::Degrees, 180 - smallerAngle.getDegrees()};
 }
 
@@ -111,16 +111,16 @@ ConicSectionType getConicSectionBasedOnGeneralForm(
 }
 
 Point getIntersectionOfTwoLines(Line const& line1, Line const& line2) {
-    Vector abVector1{line1.getACoefficient(), line1.getBCoefficient()};
-    Vector abVector2{line2.getACoefficient(), line2.getBCoefficient()};
-    Vector bcVector1{line1.getBCoefficient(), line1.getCCoefficient()};
-    Vector bcVector2{line2.getBCoefficient(), line2.getCCoefficient()};
-    Vector acVector1{line1.getACoefficient(), line1.getCCoefficient()};
-    Vector acVector2{line2.getACoefficient(), line2.getCCoefficient()};
-    double abCrossProduct = getCrossProduct(abVector1, abVector2);
+    Vector const abVector1{line1.getACoefficient(), line1.getBCoefficient()};
+    Vector const abVector2{line2.getACoefficient(), line2.getBCoefficient()};
+    Vector const bcVector1{line1.getBCoefficient(), line1.getCCoefficient()};
+    Vector const bcVector2{line2.getBCoefficient(), line2.getCCoefficient()};
+    Vector const acVector1{line1.getACoefficient(), line1.getCCoefficient()};
+    Vector const acVector2{line2.getACoefficient(), line2.getCCoefficient()};
+    double const abCrossProduct = getCrossProduct(abVector1, abVector2);
 
-    double xOfIntersection = getCrossProduct(bcVector1, bcVector2) / abCrossProduct;
-    double yOfIntersection = getCrossProduct(acVector1, acVector2) / -abCrossProduct;
+    double const xOfIntersection = getCrossProduct(bcVector1, bcVector2) / abCrossProduct;
+    double const yOfIntersection = getCrossProduct(acVector1, acVector2) / -abCrossProduct;
     return {xOfIntersection, yOfIntersection};
 }
 
@@ -133,13 +133,13 @@ Point getIntersectionOfTwoLineSegment(LineSegment const& segment1, LineSegment c
     // –--> (ab, c), (ab, d), (cd, a)), and (cd, b) are collinear and
     // –--> the x-projections of (ab) and (cd) intersect
     // –--> the y-projections of (ab) and (cd) intersect
-    RotationDirection direction1 =
+    RotationDirection const direction1 =
         getRotationDirectionTraversing3Points(segment1.first, segment1.second, segment2.first);
-    RotationDirection direction2 =
+    RotationDirection const direction2 =
         getRotationDirectionTraversing3Points(segment1.first, segment1.second, segment2.second);
-    RotationDirection direction3 =
+    RotationDirection const direction3 =
         getRotationDirectionTraversing3Points(segment2.first, segment2.second, segment1.first);
-    RotationDirection direction4 =
+    RotationDirection const direction4 =
         getRotationDirectionTraversing3Points(segment2.first, segment2.second, segment1.second);
 
     Point result(NAN, NAN);
@@ -164,7 +164,7 @@ Point getMidpoint(Point const& point1, Point const& point2) {
 
 Point getPointAlongALineWithDistanceFromAPoint(
     Line const& line, Point const& referencePoint, double const distance, bool const isIncreasedOnX) {
-    double commonRatioWithDistance =
+    double const commonRatioWithDistance =
         getSquareRootOfXSquaredPlusYSquared(line.getACoefficient(), line.getBCoefficient());
     // delta x = a*D / (a2+b2)^0.5
     // delta y = b*D / (a2+b2)^0.5
@@ -174,16 +174,16 @@ Point getPointAlongALineWithDistanceFromAPoint(
         deltaX *= -1;
         deltaY *= -1;
     }
-    Point delta(deltaX, deltaY);
+    Point const delta(deltaX, deltaY);
     return referencePoint + delta;
 }
 
 Quadrant getQuadrantOfAPoint(Point const& point) {
     Quadrant result(Quadrant::I);
-    bool isXZero = isAlmostEqual(point.getX(), 0.0);
-    bool isYZero = isAlmostEqual(point.getY(), 0.0);
-    double signOfX = getSign(point.getX());
-    double signOfY = getSign(point.getY());
+    bool const isXZero = isAlmostEqual(point.getX(), 0.0);
+    bool const isYZero = isAlmostEqual(point.getY(), 0.0);
+    double const signOfX = getSign(point.getX());
+    double const signOfY = getSign(point.getY());
     if (isXZero) {
         if (isYZero) {
             result = Quadrant::Invalid;
@@ -217,10 +217,10 @@ RotationDirection getRotationDirectionTraversing3Points(Point const a, Point con
     // The cross product tells us whether b turns left (positive value),
     // does not turn (zero) or turns right (negative value) when it is placed directly after a.
     RotationDirection result(RotationDirection::Collinear);
-    Point deltaBA(b - a);
-    Point deltaCA(c - a);
+    Point const deltaBA(b - a);
+    Point const deltaCA(c - a);
 
-    double crossProduct = getCrossProduct(constructVector(deltaBA), constructVector(deltaCA));
+    double const crossProduct = getCrossProduct(constructVector(deltaBA), constructVector(deltaCA));
     if (crossProduct > 0) {
         result = RotationDirection::CounterClockWise;
     } else if (crossProduct < 0) {
@@ -234,8 +234,8 @@ Vector constructDeltaVector(Line const& line) { return Vector{line.getAUnitIncre
 double getDistance(Point const& point1, Point const& point2) { return getEuclideanDistance(point1, point2); }
 
 double getDistance(Line const& line, Point const& point) {
-    Point pointInLine1(line.getAPoint());
-    Point pointInLine2(pointInLine1 + Point(line.getAUnitIncreaseInX(), line.getAUnitIncreaseInY()));
+    Point const pointInLine1(line.getAPoint());
+    Point const pointInLine2(pointInLine1 + Point(line.getAUnitIncreaseInX(), line.getAUnitIncreaseInY()));
 
     return getDistance(LineSegment{pointInLine1, pointInLine2}, point);
 }
@@ -251,9 +251,9 @@ double getDistance(LineSegment const& lineSegment, Point const& point) {
     // The area of the triangle whose vertices are s1, s2 and p can be calculated in two ways:
     // -> it is both |s2-s1|*d/2 or ((s1-p)x(s2-p))/2.
     // Thus, the shortest distance is d = (s1-p)x(s2-p) / |s2-s1|
-    Point deltaS1AndP = lineSegment.first - point;
-    Point deltaS2AndP = lineSegment.second - point;
-    Point deltaS1AndS2 = lineSegment.second - lineSegment.first;
+    Point const deltaS1AndP = lineSegment.first - point;
+    Point const deltaS2AndP = lineSegment.second - point;
+    Point const deltaS1AndS2 = lineSegment.second - lineSegment.first;
 
     return getAbsoluteValue(getCrossProduct(constructVector(deltaS1AndP), constructVector(deltaS2AndP))) /
            constructVector(deltaS1AndS2).getMagnitude();
@@ -262,9 +262,9 @@ double getDistance(LineSegment const& lineSegment, Point const& point) {
 double getDistance(Line const& line1, Line const& line2) {
     double distance(0);
     if (!areLinesParallel(line1, line2)) {
-        Line perpendicularLine(getLineWithPerpendicularSlope(line1, Point(0, 0)));
-        Point pointOfIntersectionInLine1(getIntersectionOfTwoLines(perpendicularLine, line1));
-        Point pointOfIntersectionInLine2(getIntersectionOfTwoLines(perpendicularLine, line2));
+        Line const perpendicularLine(getLineWithPerpendicularSlope(line1, Point(0, 0)));
+        Point const pointOfIntersectionInLine1(getIntersectionOfTwoLines(perpendicularLine, line1));
+        Point const pointOfIntersectionInLine2(getIntersectionOfTwoLines(perpendicularLine, line2));
         distance = getDistance(pointOfIntersectionInLine1, pointOfIntersectionInLine2);
     }
     return distance;
@@ -273,14 +273,14 @@ double getDistance(Line const& line1, Line const& line2) {
 double getEuclideanDistance(Point const& point1, Point const& point2) {
     // The usual distance function is the Euclidean distance where the distance between points (x1, y1) and (x2, y2) is
     // euclidean distance = sqrt((x2-x1)^2+(y2-y1)^2).
-    Point delta = point2 - point1;
+    Point const delta = point2 - point1;
     return constructVector(delta).getMagnitude();
 }
 
 double getManhattanDistance(Point const& point1, Point const& point2) {
     // An alternative distance function is the Manhattan distance where the distance between points (x1, y1) and (x2,
     // y2) is manhattan distance = |x1-x2| + |y1-y2|.
-    Point delta = point2 - point1;
+    Point const delta = point2 - point1;
     return getAbsoluteValue(delta.getX()) + getAbsoluteValue(delta.getY());
 }
 
@@ -290,9 +290,9 @@ double getManhattanDistanceWithAlternateWay(Point const& point1, Point const& po
     // p2'=(x2',y2') Now there are two ways to express the Manhattan distance between p1 and p2: |x1-x2|+|y1-y2| =
     // max(|x1'-x2'|,|y1'-y2'|)
     // Note that "addition operation" transforms to "maximum operation"
-    Point point1Rotated(point1.getX() + point1.getY(), point1.getY() - point1.getX());
-    Point point2Rotated(point2.getX() + point2.getY(), point2.getY() - point2.getX());
-    Point deltaRotated = point1Rotated - point2Rotated;
+    Point const point1Rotated(point1.getX() + point1.getY(), point1.getY() - point1.getX());
+    Point const point2Rotated(point2.getX() + point2.getY(), point2.getY() - point2.getX());
+    Point const deltaRotated = point1Rotated - point2Rotated;
     return max(getAbsoluteValue(deltaRotated.getX()), getAbsoluteValue(deltaRotated.getY()));
 }
 
@@ -319,15 +319,15 @@ double getMaximumManhattanDistanceOfTwoPoints(Points const& points) {
 
 double getCosineOfAngleUsing1Delta(double const deltaX1, double const deltaY1) {
     // cos theta = adjacent/hypotenuse
-    double adjacent = deltaX1;
-    double hypotenuse = getSquareRootOfXSquaredPlusYSquared(deltaX1, deltaY1);
+    double const adjacent = deltaX1;
+    double const hypotenuse = getSquareRootOfXSquaredPlusYSquared(deltaX1, deltaY1);
     return adjacent / hypotenuse;
 }
 
 double getCosineOfAngleUsing2Deltas(Vector const& deltaVector1, Vector const& deltaVector2) {
     // from cos theta = (dotproduct of coefficients v1 and v2)/(magnitude of v1 * magnitude of v2)
-    double numeratorPart = getDotProduct(deltaVector1, deltaVector2);
-    double denominatorPart = deltaVector1.getMagnitude() * deltaVector2.getMagnitude();
+    double const numeratorPart = getDotProduct(deltaVector1, deltaVector2);
+    double const denominatorPart = deltaVector1.getMagnitude() * deltaVector2.getMagnitude();
     return numeratorPart / denominatorPart;
 }
 
@@ -343,8 +343,8 @@ double getSignedCounterClockwiseDoubleTriangleAreaOfOriginAnd2Points(Point const
 }
 
 double getSignedCounterClockwiseTriangleAreaOf3Points(Point const& a, Point const& b, Point const& c) {
-    Point deltaBA(b - a);
-    Point deltaCA(c - a);
+    Point const deltaBA(b - a);
+    Point const deltaCA(c - a);
 
     return getCrossProduct(constructVector(deltaBA), constructVector(deltaCA)) / 2;
     // This is the same:
@@ -366,7 +366,7 @@ double getAreaOfTriangleUsingHeronsFormula(Triangle const& triangle) {
     // area = sqrt(s(s-a)(s-b)(s-c)),
     // where a, b and c are the lengths of the triangle’s sides and s = (a+b+c)/2.
     auto sides(triangle.getLengthOfSides());
-    double s = (sides[0] + sides[1] + sides[2]) / 2;
+    double const s = (sides[0] + sides[1] + sides[2]) / 2;
     return sqrt(s * (s - sides[0]) * (s - sides[1]) * (s - sides[2]));
 }
 
@@ -423,13 +423,13 @@ bool areLinesPerpendicular(Line const& line1, Line const& line2) {
 }
 
 bool doesTheTwoLineSegmentsIntersect(LineSegment const& segment1, LineSegment const& segment2) {
-    RotationDirection direction1 =
+    RotationDirection const direction1 =
         getRotationDirectionTraversing3Points(segment1.first, segment1.second, segment2.first);
-    RotationDirection direction2 =
+    RotationDirection const direction2 =
         getRotationDirectionTraversing3Points(segment1.first, segment1.second, segment2.second);
-    RotationDirection direction3 =
+    RotationDirection const direction3 =
         getRotationDirectionTraversing3Points(segment2.first, segment2.second, segment1.first);
-    RotationDirection direction4 =
+    RotationDirection const direction4 =
         getRotationDirectionTraversing3Points(segment2.first, segment2.second, segment1.second);
 
     bool result(false);
@@ -457,8 +457,8 @@ bool isPointInsideTriangle(Triangle const& triangle, Point const& point) {
     // ---> Calculate area of the triangle PAC. Let this area be A3.
     // ---> If P lies inside the triangle, then A1 + A2 + A3 must be equal to A.
     Points vertices(triangle.getVertices());
-    double areaOfTriangleOnly = getAreaOfTriangleUsingThreePoints(triangle);
-    double areaWithPoint =
+    double const areaOfTriangleOnly = getAreaOfTriangleUsingThreePoints(triangle);
+    double const areaWithPoint =
         getAbsoluteValue(getSignedCounterClockwiseTriangleAreaOf3Points(point, vertices[0], vertices[1])) +
         getAbsoluteValue(getSignedCounterClockwiseTriangleAreaOf3Points(point, vertices[1], vertices[2])) +
         getAbsoluteValue(getSignedCounterClockwiseTriangleAreaOf3Points(point, vertices[0], vertices[2]));
@@ -473,10 +473,10 @@ Points getIntersectionsOfParabolaAndLine(Parabola<parabolaOrientation> const&, L
 template <>
 Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::PolynomialX> const& parabola, Line const& line) {
     Points result;
-    double newA = parabola.getA() * line.getBCoefficient();
-    double newB = (parabola.getB() * line.getBCoefficient()) + line.getACoefficient();
-    double newC = (parabola.getC() * line.getBCoefficient()) + line.getCCoefficient();
-    AlbaNumbers xValues(
+    double const newA = parabola.getA() * line.getBCoefficient();
+    double const newB = (parabola.getB() * line.getBCoefficient()) + line.getACoefficient();
+    double const newC = (parabola.getC() * line.getBCoefficient()) + line.getCCoefficient();
+    AlbaNumbers const xValues(
         getQuadraticRoots(RootType::RealRootsOnly, AlbaNumber(newA), AlbaNumber(newB), AlbaNumber(newC)));
     for (AlbaNumber const& xValue : xValues) {
         result.emplace_back(xValue.getDouble(), line.calculateYFromX(xValue.getDouble()));
@@ -487,10 +487,10 @@ Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::Polynomia
 template <>
 Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::PolynomialY> const& parabola, Line const& line) {
     Points result;
-    double newA = parabola.getA() * line.getACoefficient();
-    double newB = (parabola.getB() * line.getACoefficient()) + line.getBCoefficient();
-    double newC = (parabola.getC() * line.getACoefficient()) + line.getCCoefficient();
-    AlbaNumbers yValues(
+    double const newA = parabola.getA() * line.getACoefficient();
+    double const newB = (parabola.getB() * line.getACoefficient()) + line.getBCoefficient();
+    double const newC = (parabola.getC() * line.getACoefficient()) + line.getCCoefficient();
+    AlbaNumbers const yValues(
         getQuadraticRoots(RootType::RealRootsOnly, AlbaNumber(newA), AlbaNumber(newB), AlbaNumber(newC)));
     for (AlbaNumber const& yValue : yValues) {
         result.emplace_back(line.calculateXFromY(yValue.getDouble()), yValue.getDouble());
@@ -504,7 +504,7 @@ Point popNearestPoint(Points& points, Point const& point) {
         double nearestDistance = getDistance(points.front(), point);
         auto nearestPointIterator = points.begin();
         for (auto it = points.begin() + 1; it != points.end(); ++it) {
-            double currentDistance(getDistance(*it, point));
+            double const currentDistance(getDistance(*it, point));
             if (nearestDistance > currentDistance) {
                 nearestDistance = currentDistance;
                 nearestPointIterator = it;
@@ -517,18 +517,18 @@ Point popNearestPoint(Points& points, Point const& point) {
 }
 
 Point rotateAxisByAngle(Point const& point, AlbaAngle const& angle) {
-    double sinTheta = sin(angle.getRadians());
-    double cosTheta = cos(angle.getRadians());
-    double newX = point.getX() * cosTheta + point.getY() * sinTheta;
-    double newY = -point.getX() * sinTheta + point.getY() * cosTheta;
+    double const sinTheta = sin(angle.getRadians());
+    double const cosTheta = cos(angle.getRadians());
+    double const newX = point.getX() * cosTheta + point.getY() * sinTheta;
+    double const newY = -point.getX() * sinTheta + point.getY() * cosTheta;
     return {newX, newY};
 }
 
 Point rotateAxisBackByAngle(Point const& point, AlbaAngle const& angle) {
-    double sinTheta = sin(angle.getRadians());
-    double cosTheta = cos(angle.getRadians());
-    double newX = point.getX() * cosTheta - point.getY() * sinTheta;
-    double newY = point.getX() * sinTheta + point.getY() * cosTheta;
+    double const sinTheta = sin(angle.getRadians());
+    double const cosTheta = cos(angle.getRadians());
+    double const newX = point.getX() * cosTheta - point.getY() * sinTheta;
+    double const newY = point.getX() * sinTheta + point.getY() * cosTheta;
     return {newX, newY};
 }
 
@@ -553,7 +553,7 @@ void addPointIfInsideTwoPoints(
 
 void savePointsFromTwoPointsUsingALineWithoutLastPoint(
     Points& points, Point const& previousPoint, Point const& currentPoint, double const interval) {
-    Line line(previousPoint, currentPoint);
+    Line const line(previousPoint, currentPoint);
     Points pointsInLine(line.getPointsWithoutLastPoint(previousPoint, currentPoint, interval));
     points.reserve(pointsInLine.size());
     copy(pointsInLine.begin(), pointsInLine.end(), back_inserter(points));
@@ -574,8 +574,8 @@ void sortPointsInYAndThenX(Points& points) {
 void traverseCircleAreaBetweenTwoRadius(
     Point const& center, double const innerRadius, double const outerRadius, double const interval,
     Circle::TraverseOperation const& traverseOperation) {
-    Circle innerCircle(center, innerRadius);
-    Circle outerCircle(center, outerRadius);
+    Circle const innerCircle(center, innerRadius);
+    Circle const outerCircle(center, outerRadius);
     for (double y = 0; y < outerRadius; y += interval) {
         auto xAtInnerCircleOptional(innerCircle.calculateXFromYWithoutCenter(y, 1));
         auto xAtOuterCircleOptional(outerCircle.calculateXFromYWithoutCenter(y, 1));
@@ -613,9 +613,9 @@ Line getLineWithPerpendicularSlope(Line const& line, Point const& point) {
 }
 
 Line getTangentLineAt(Circle const& circle, Point const& point) {
-    Point nearestPoint(circle.getNearestPointInCircumference(point));
-    Point center(circle.getCenter());
-    Point deltaNearestPoint(nearestPoint.getX() - center.getX(), nearestPoint.getY() - center.getY());
+    Point const nearestPoint(circle.getNearestPointInCircumference(point));
+    Point const center(circle.getCenter());
+    Point const deltaNearestPoint(nearestPoint.getX() - center.getX(), nearestPoint.getY() - center.getY());
     return {deltaNearestPoint.getY(), -1 * deltaNearestPoint.getX(), nearestPoint};
 }
 
@@ -646,8 +646,8 @@ Points getConnectedPointsUsingALine(Points const& inputPoints, double const inte
 
 Points getMergedPointsInIncreasingX(Points const& firstPointsToBeMerged, Points const& secondPointsToBeMerged) {
     Points result;
-    Points firstPoints(getPointsInSortedIncreasingX(firstPointsToBeMerged));
-    Points secondPoints(getPointsInSortedIncreasingX(secondPointsToBeMerged));
+    Points const firstPoints(getPointsInSortedIncreasingX(firstPointsToBeMerged));
+    Points const secondPoints(getPointsInSortedIncreasingX(secondPointsToBeMerged));
     auto iteratorForX = firstPoints.cbegin();
     auto iteratorForY = secondPoints.cbegin();
     while (iteratorForX != firstPoints.cend() || iteratorForY != secondPoints.cend()) {
@@ -671,8 +671,8 @@ Points getMergedPointsInIncreasingX(Points const& firstPointsToBeMerged, Points 
 
 Points getMergedPointsInDecreasingX(Points const& firstPointsToBeMerged, Points const& secondPointsToBeMerged) {
     Points result;
-    Points firstPoints(getPointsInSortedDecreasingX(firstPointsToBeMerged));
-    Points secondPoints(getPointsInSortedDecreasingX(secondPointsToBeMerged));
+    Points const firstPoints(getPointsInSortedDecreasingX(firstPointsToBeMerged));
+    Points const secondPoints(getPointsInSortedDecreasingX(secondPointsToBeMerged));
     auto iteratorForX = firstPoints.cbegin();
     auto iteratorForY = secondPoints.cbegin();
     while (iteratorForX != firstPoints.cend() || iteratorForY != secondPoints.cend()) {
@@ -758,7 +758,7 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points) {
     // Farthest point pair problem
     assert(points.size() >= 3);
     Points auxiliary = points;
-    int auxiliarySize = auxiliary.size();
+    int const auxiliarySize = auxiliary.size();
 
     // Find bottom most left point
     auto&& [minIt, maxIt] =
@@ -773,7 +773,7 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points) {
 
     // sort such that the points are in counter clockwise order
     sort(next(auxiliary.begin()), auxiliary.end(), [firstPoint](Point const& point1, Point const& point2) {
-        RotationDirection direction = getRotationDirectionTraversing3Points(firstPoint, point1, point2);
+        RotationDirection const direction = getRotationDirectionTraversing3Points(firstPoint, point1, point2);
         if (RotationDirection::Collinear == direction) {
             return getDistance(firstPoint, point1) <= getDistance(firstPoint, point2);
         }
