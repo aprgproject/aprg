@@ -49,7 +49,8 @@ private:
         // -> this means contracting each strong component into a single vertex
         // and we can increment the id when one vertex finishes DFS (in the original graph)
         b_numberOfComponentIds = 0;
-        DirectedGraphWithListOfEdgesWithVertex graphWithReversedDirections(getGraphWithReversedDirections(b_graph));
+        DirectedGraphWithListOfEdgesWithVertex const graphWithReversedDirections(
+            getGraphWithReversedDirections(b_graph));
         VertexOrderingUsingDfs<Vertex> vertexOrdering(graphWithReversedDirections);
         for (Vertex const& vertex : vertexOrdering.getVerticesInTopologicalOrder()) {
             if (m_processedVertices.isNotFound(vertex)) {

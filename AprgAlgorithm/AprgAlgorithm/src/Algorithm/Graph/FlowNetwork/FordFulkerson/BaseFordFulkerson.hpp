@@ -77,7 +77,7 @@ protected:
         // find minimum residual capacity in augmenting path
         FlowDataType bottleNeckFlow{};
         if (!m_vertexToAugmentingPathEdgeMap.empty()) {
-            Vertex firstVertex(m_vertexToAugmentingPathEdgeMap.cbegin()->first);
+            Vertex const firstVertex(m_vertexToAugmentingPathEdgeMap.cbegin()->first);
             bottleNeckFlow = m_vertexToAugmentingPathEdgeMap[firstVertex].getResidualCapacityTo(firstVertex);
             traverseAugmentingPathInReverse([&](Vertex const& vertex) {
                 bottleNeckFlow =

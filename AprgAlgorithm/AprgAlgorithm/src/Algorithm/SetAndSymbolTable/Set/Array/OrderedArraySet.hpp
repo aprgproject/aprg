@@ -13,8 +13,8 @@ public:
     OrderedArraySet() : BaseClass(), b_size(BaseClass::m_size), b_keys(BaseClass::m_keys) {}
 
     void put(Key const& key) override {
-        int rank(this->getRank(key));
-        bool isKeyFound = rank < b_size && b_keys[rank] == key;
+        int const rank(this->getRank(key));
+        bool const isKeyFound = rank < b_size && b_keys[rank] == key;
         if (!isKeyFound) {
             b_keys.emplace_back();
             for (int i = b_size; i > rank; --i) {
@@ -26,7 +26,7 @@ public:
     }
 
     void deleteBasedOnKey(Key const& key) override {
-        int rank(this->getRank(key));
+        int const rank(this->getRank(key));
         if (rank < b_size && b_keys[rank] == key) {
             if (b_size >= 2) {
                 for (int i = rank; i < b_size - 1; ++i) {

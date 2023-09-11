@@ -38,8 +38,8 @@ private:
         Index result(INVALID_INDEX);
         for (auto itLower = m_values.cbegin() + startIndex, itHigher = m_values.cbegin() + endIndex;
              itLower <= itHigher; ++itLower, --itHigher) {
-            Value valueAtLower = *itLower;
-            Value valueAtHigher = *itHigher;
+            Value const valueAtLower = *itLower;
+            Value const valueAtHigher = *itHigher;
             if (valueAtLower == target) {
                 result = std::distance(m_values.cbegin(), itLower);
                 break;

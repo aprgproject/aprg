@@ -47,7 +47,7 @@ private:
             Index iLow = lowIndex;
             Index iHigh = highIndex;
             while (shouldContinue(iLow, iHigh)) {
-                Value currentSum(m_sortedValues[iLow] + m_sortedValues[iHigh]);
+                Value const currentSum(m_sortedValues[iLow] + m_sortedValues[iHigh]);
                 if (currentSum == targetSum) {
                     result = {m_sortedValues[iLow], m_sortedValues[iHigh]};
                     break;

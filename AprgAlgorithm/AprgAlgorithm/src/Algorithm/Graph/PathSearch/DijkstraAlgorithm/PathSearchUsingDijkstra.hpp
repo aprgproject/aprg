@@ -33,7 +33,7 @@ public:
 
 private:
     [[nodiscard]] bool isComparisonLessThan() const {
-        ComparatorTemplateType<int> comparisonInUnsignedInt;
+        ComparatorTemplateType<int> const comparisonInUnsignedInt;
         return (comparisonInUnsignedInt(1, 2) && !comparisonInUnsignedInt(1, 1));
     }
 
@@ -50,7 +50,7 @@ private:
             // loops all current best weight vertices and only updates if the weight is better
             // this essentially prims algorithm but here weight is accumulated from the start vertex (Prim just take the
             // closest)
-            VertexOrderedByWeight vertexWithBestWeight(foundVerticesOrderedByWeight.top());
+            VertexOrderedByWeight const vertexWithBestWeight(foundVerticesOrderedByWeight.top());
             foundVerticesOrderedByWeight.pop();
             this->relaxAt(
                 vertexWithBestWeight.vertex,

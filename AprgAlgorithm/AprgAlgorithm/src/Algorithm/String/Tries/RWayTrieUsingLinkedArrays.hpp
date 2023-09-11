@@ -29,7 +29,7 @@ public:
     RWayTrieUsingLinkedArrays() : m_root(nullptr) {}
 
     [[nodiscard]] Key getLongestPrefixOf(Key const& keyToCheck) const override {
-        int longestPrefixLength(getLengthOfLongestPrefix(m_root.get(), keyToCheck, 0, 0));
+        int const longestPrefixLength(getLengthOfLongestPrefix(m_root.get(), keyToCheck, 0, 0));
         return keyToCheck.substr(0, longestPrefixLength);
     }
 
@@ -127,11 +127,11 @@ private:
         Node const* const currentNodePointer, std::string const& previousPrefix, Key const& patternToMatch,
         Strings& collectedKeys) const {
         if (currentNodePointer != nullptr) {
-            int prefixLength = previousPrefix.length();
+            int const prefixLength = previousPrefix.length();
             if (prefixLength == static_cast<int>(patternToMatch.length()) && currentNodePointer->valueUniquePointer) {
                 collectedKeys.emplace_back(previousPrefix);
             } else if (prefixLength < static_cast<int>(patternToMatch.length())) {
-                char charToMatch = patternToMatch[prefixLength];
+                char const charToMatch = patternToMatch[prefixLength];
                 for (int c = 0; c < RADIX; ++c) {
                     if ('.' == charToMatch || charToMatch == static_cast<char>(c)) {
                         collectKeysThatMatchAtNode(
@@ -151,7 +151,7 @@ private:
                 currentLongestLength = index;
             }
             if (index < static_cast<int>(keyToCheck.length())) {
-                char c = keyToCheck[index];
+                char const c = keyToCheck[index];
                 currentLongestLength = getLengthOfLongestPrefix(
                     currentNodePointer->next[c].get(), keyToCheck, index + 1, currentLongestLength);
             }
@@ -188,7 +188,7 @@ private:
                     isDeleted = true;
                 }
             } else {
-                bool isASingleNextDeleted =
+                bool const isASingleNextDeleted =
                     deleteBasedOnKeyAndReturnIfDeleted(currentNodePointer->next[key[index]], key, index + 1);
                 if (isASingleNextDeleted && isEmptyNode(currentNodePointer)) {
                     currentNodePointer.reset();

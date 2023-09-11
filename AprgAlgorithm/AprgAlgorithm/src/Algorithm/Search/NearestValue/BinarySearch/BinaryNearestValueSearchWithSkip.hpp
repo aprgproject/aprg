@@ -31,13 +31,13 @@ public:
 
 private:
     [[nodiscard]] Index getIndexOfNearestValueWithoutCheck(Value const& target) const {
-        Index lowIndex(getNearestLowerBoundIndex(target));
+        Index const lowIndex(getNearestLowerBoundIndex(target));
         return getIndexOfNearestValueFromLowerIndex(target, lowIndex);
     }
 
     [[nodiscard]] Index getNearestLowerBoundIndex(Value const& target) const {
         Index result(0);
-        Index size(m_sortedValues.size());
+        Index const size(m_sortedValues.size());
         // forward skip start from half of size, then quarter of size, then eighth of size and so on
         for (Index forwardSkip = size / 2; forwardSkip >= 1; forwardSkip /= 2) {
             result += forwardSkip;  // move to next position
@@ -50,10 +50,10 @@ private:
     }
 
     [[nodiscard]] Index getIndexOfNearestValueFromLowerIndex(Value const& target, Index const lowIndex) const {
-        Value lowerBoundValue(m_sortedValues[lowIndex]);
-        Value highIndex(getHigherIndex(lowIndex));
-        Value deviationFromLower(mathHelper::getPositiveDelta(target, lowerBoundValue));
-        Value deviationFromHigher(mathHelper::getPositiveDelta(target, m_sortedValues[highIndex]));
+        Value const lowerBoundValue(m_sortedValues[lowIndex]);
+        Value const highIndex(getHigherIndex(lowIndex));
+        Value const deviationFromLower(mathHelper::getPositiveDelta(target, lowerBoundValue));
+        Value const deviationFromHigher(mathHelper::getPositiveDelta(target, m_sortedValues[highIndex]));
         return (deviationFromLower <= deviationFromHigher) ? lowIndex : highIndex;
     }
 

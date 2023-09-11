@@ -62,13 +62,13 @@ protected:
     ~BasePathSearchWithRelax() = default;
 
     static AdditionalRelaxationSteps getNoSteps() {
-        static AdditionalRelaxationSteps noRelaxationSteps = []() {};
+        static AdditionalRelaxationSteps const noRelaxationSteps = []() {};
         return noRelaxationSteps;
     }
 
     static AdditionalRelaxationStepsWithNewWeight getNoStepsWithNewWeight() {
-        static AdditionalRelaxationStepsWithNewWeight noRelaxationSteps = [](Vertex const&, Vertex const&,
-                                                                             Weight const&) {};
+        static AdditionalRelaxationStepsWithNewWeight const noRelaxationSteps = [](Vertex const&, Vertex const&,
+                                                                                   Weight const&) {};
         return noRelaxationSteps;
     }
 

@@ -11,7 +11,7 @@ using SimplexForTest = SimplexAlgorithm<double>;
 }  // namespace
 
 TEST(SimplexAlgorithmTest, SimplexWorksOnBrewersProblem) {
-    SimplexForTest::Matrix constraintsCoefficients(
+    SimplexForTest::Matrix const constraintsCoefficients(
         2, 3,
         {
             5,
@@ -21,11 +21,11 @@ TEST(SimplexAlgorithmTest, SimplexWorksOnBrewersProblem) {
             35,
             20,
         });
-    SimplexForTest::MatrixData constraintsValues{480, 160, 1190};
-    SimplexForTest::MatrixData objectiveFunctionCoefficients{13, 23};
-    SimplexForTest simplex(constraintsCoefficients, constraintsValues, objectiveFunctionCoefficients);
+    SimplexForTest::MatrixData const constraintsValues{480, 160, 1190};
+    SimplexForTest::MatrixData const objectiveFunctionCoefficients{13, 23};
+    SimplexForTest const simplex(constraintsCoefficients, constraintsValues, objectiveFunctionCoefficients);
 
-    SimplexForTest::Matrix expectedSolution(3, 3, {0.0, 0.0, 210.0, 0.0, 1.0, 28.0, 1.0, 0.0, 12.0});
+    SimplexForTest::Matrix const expectedSolution(3, 3, {0.0, 0.0, 210.0, 0.0, 1.0, 28.0, 1.0, 0.0, 12.0});
     EXPECT_TRUE(simplex.isOptimized());
     EXPECT_DOUBLE_EQ(800, simplex.getOptimizedObjectiveValue());
     EXPECT_EQ(expectedSolution, simplex.getSolution());

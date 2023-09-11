@@ -22,7 +22,7 @@ public:
 private:
     void sort(Values& valuesToSort, int const lowIndex, int const highIndex) const {
         if (lowIndex < highIndex) {
-            int partitionIndex = partitionAndGetPartitionIndex(valuesToSort, lowIndex, highIndex, m_pivotType);
+            int const partitionIndex = partitionAndGetPartitionIndex(valuesToSort, lowIndex, highIndex, m_pivotType);
             sort(valuesToSort, lowIndex, partitionIndex - 1);
             sort(valuesToSort, partitionIndex + 1, highIndex);
         }
@@ -30,9 +30,9 @@ private:
 
     void sortInTailRecursive(Values& valuesToSort, int const lowIndex, int const highIndex) const {
         int iLow(lowIndex);
-        int iHigh(highIndex);
+        int const iHigh(highIndex);
         while (iLow < iHigh) {
-            int partitionIndex = partitionAndGetPartitionIndex(valuesToSort, iLow, iHigh, m_pivotType);
+            int const partitionIndex = partitionAndGetPartitionIndex(valuesToSort, iLow, iHigh, m_pivotType);
             sort(valuesToSort, iLow, iHigh - 1);  // only one recursive call
             iLow = partitionIndex + 1;
         }

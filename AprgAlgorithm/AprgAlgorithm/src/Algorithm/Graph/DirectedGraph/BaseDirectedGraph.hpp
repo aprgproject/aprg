@@ -13,7 +13,7 @@ public:
     [[nodiscard]] GraphDirectionType getGraphDirectionType() const override { return DIRECTION_TYPE; }
 
     void reverseDirections() {
-        Edges originalEdges(this->getEdges());
+        Edges const originalEdges(this->getEdges());
         this->clear();
         for (auto const& [startVertexOfEdge, endVertexOfEdge] : originalEdges) {
             this->connect(endVertexOfEdge, startVertexOfEdge);

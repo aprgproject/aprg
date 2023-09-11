@@ -50,7 +50,7 @@ private:
             // continue to grow the MST by processing the current nearest edge and only adding only edges with minimum
             // weight Since this is eager algorithm (nearest vertices are kept),
             // -> we know the vertex to check if not yet included in tree (since its an adjacent vertex previously)
-            VertexOrderedByWeight nearestVertex(m_nearestVerticesToTree.top());
+            VertexOrderedByWeight const nearestVertex(m_nearestVerticesToTree.top());
             m_nearestVerticesToTree.pop();
             checkAdjacentVerticesWithLowestWeightOfVertex(nearestVertex.vertex);
         }

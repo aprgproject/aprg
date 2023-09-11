@@ -58,17 +58,17 @@ public:
     }
 
     [[nodiscard]] Key selectAt(int const index) const override {
-        Keys keys(getKeys());
+        Keys const keys(getKeys());
         return OrderedArray::selectAt(index, keys);
     }
 
     [[nodiscard]] Key getFloor(Key const& key) const override {
-        Keys keys(getKeys());
+        Keys const keys(getKeys());
         return OrderedArray::getFloor(key, keys);
     }
 
     [[nodiscard]] Key getCeiling(Key const& key) const override {
-        Keys keys(getKeys());
+        Keys const keys(getKeys());
         return OrderedArray::getCeiling(key, keys);
     }
 
@@ -102,7 +102,7 @@ public:
     [[nodiscard]] int getSize() const override { return m_size; }
 
     [[nodiscard]] int getRank(Key const& key) const override {
-        Keys keys(getKeys());
+        Keys const keys(getKeys());
         return OrderedArray::getRank(key, keys);
     }
 
@@ -130,7 +130,7 @@ public:
             deleteEntryOnIndex(i);
             incrementHashTableIndexWithWrapAround(i);
             while (m_entryPointers[i]) {
-                Entry entryToReInput(*(m_entryPointers[i]));
+                Entry const entryToReInput(*(m_entryPointers[i]));
                 deleteEntryOnIndex(i);
                 putEntry(entryToReInput);
                 incrementHashTableIndexWithWrapAround(i);
@@ -166,7 +166,7 @@ protected:
 
     void resize(int const newHashTableSize) {
         EntryPointers oldEntryPointers = m_entryPointers;
-        int oldHashTableSize = m_hashTableSize;
+        int const oldHashTableSize = m_hashTableSize;
         m_size = 0;
         m_entryPointers = new EntryUniquePointer[newHashTableSize]();
         m_hashTableSize = newHashTableSize;

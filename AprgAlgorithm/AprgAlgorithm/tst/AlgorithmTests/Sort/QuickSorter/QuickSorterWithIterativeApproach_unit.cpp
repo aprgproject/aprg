@@ -23,64 +23,64 @@ using StabilityCheckObjectsSorter = QuickSorterWithIterativeApproach<StabilityCh
 }  // namespace
 
 TEST(QuickSorterWithIterativeApproachTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
-    CharactersSorter sorter(PivotType::LowestIndex);
+    CharactersSorter const sorter(PivotType::LowestIndex);
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(QuickSorterWithIterativeApproachTest, SortWorksOnCharactersUsingOneValueExample) {
-    CharactersSorter sorter(PivotType::LowestIndex);
+    CharactersSorter const sorter(PivotType::LowestIndex);
     testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(QuickSorterWithIterativeApproachTest, SortWorksOnCharactersUsingExample1) {
-    CharactersSorter sorter(PivotType::LowestIndex);
+    CharactersSorter const sorter(PivotType::LowestIndex);
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(QuickSorterWithIterativeApproachTest, SortWorksOnCharactersUsingExample2) {
-    CharactersSorter sorter(PivotType::LowestIndex);
+    CharactersSorter const sorter(PivotType::LowestIndex);
     testSortUsingExample2WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 // CANNOT SORT STD::LIST, actually it might be possible if we change indexes to iterators
 TEST(QuickSorterWithIterativeApproachTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
-    IntegersSorter sorter(PivotType::LowestIndex);
+    IntegersSorter const sorter(PivotType::LowestIndex);
     testSortUsingExample1WithPositiveAndNegativeIntegers<IntegersSorter, Integers>(sorter);
 }
 
 TEST(QuickSorterWithIterativeApproachTest, SortWorksOnDoublesUsingExample1) {
-    DoublesSorter sorter(PivotType::LowestIndex);
+    DoublesSorter const sorter(PivotType::LowestIndex);
     testSortUsingExample1WithDoubleValues<DoublesSorter, Doubles>(sorter);
 }
 
 TEST(QuickSorterWithIterativeApproachTest, SortWorksOnStringsUsingExample1) {
-    StringsSorter sorter(PivotType::LowestIndex);
+    StringsSorter const sorter(PivotType::LowestIndex);
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);
 }
 
 TEST(QuickSorterWithIterativeApproachTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1) {
-    StabilityCheckObjectsSorter sorter(PivotType::LowestIndex);
+    StabilityCheckObjectsSorter const sorter(PivotType::LowestIndex);
     testSortAsNotStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(
         sorter);
 }
 
 TEST(QuickSorterWithIterativeApproachTest, SortWorksOnCharactersUsingExample1WithPivotWithValueAtLowestIndex) {
-    CharactersSorter sorter(PivotType::LowestIndex);
+    CharactersSorter const sorter(PivotType::LowestIndex);
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(QuickSorterWithIterativeApproachTest, SortWorksOnCharactersUsingExample1WithPivotWithValueAtHighestIndex) {
-    CharactersSorter sorter(PivotType::HighestIndex);
+    CharactersSorter const sorter(PivotType::HighestIndex);
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(QuickSorterWithIterativeApproachTest, SortWorksOnCharactersUsingExample1WithPivotWithValueAtRandomIndex) {
-    CharactersSorter sorter(PivotType::RandomIndex);
+    CharactersSorter const sorter(PivotType::RandomIndex);
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(QuickSorterWithIterativeApproachTest, SortWorksOnCharactersUsingExample1WithPivotWithValueAtMedianOfMedians) {
-    CharactersSorter sorter(PivotType::MedianOfMedians);
+    CharactersSorter const sorter(PivotType::MedianOfMedians);
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 

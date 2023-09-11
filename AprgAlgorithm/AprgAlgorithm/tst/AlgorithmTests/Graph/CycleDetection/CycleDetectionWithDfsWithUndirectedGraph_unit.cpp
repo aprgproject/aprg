@@ -14,7 +14,7 @@ using CycleDetectionForTest = CycleDetectionUsingDfs<VertexForTest>;
 }  // namespace
 
 TEST(CycleDetectionUsingDfsTest, CycleDetectionWorksWhenGraphIsEmptyWithUndirectedGraph) {
-    GraphForTest graph;
+    GraphForTest const graph;
     CycleDetectionForTest cycleDetection(graph);
 
     EXPECT_TRUE(cycleDetection.getOneCycle().empty());
@@ -39,8 +39,8 @@ TEST(CycleDetectionUsingDfsTest, CycleDetectionWorksUsingExample1WithUndirectedG
     graph.connect(2, 0);
     CycleDetectionForTest cycleDetection(graph);
 
-    PathForTest expectedOneCycle{0, 1, 2, 0};
-    PathsForTest expectedCycles{{0, 1, 2, 0}};
+    PathForTest const expectedOneCycle{0, 1, 2, 0};
+    PathsForTest const expectedCycles{{0, 1, 2, 0}};
     EXPECT_EQ(expectedOneCycle, cycleDetection.getOneCycle());
     EXPECT_EQ(expectedCycles, cycleDetection.getAllCycles());
 }
@@ -62,8 +62,8 @@ TEST(CycleDetectionUsingDfsTest, CycleDetectionWorksUsingExample2WithUndirectedG
     graph.connect(5, 3);
     CycleDetectionForTest cycleDetection(graph);
 
-    PathForTest expectedOneCycle{5, 3, 4, 5};
-    PathsForTest expectedCycles{{5, 3, 4, 5}, {0, 5, 3, 4, 6, 0}, {9, 11, 12, 9}};
+    PathForTest const expectedOneCycle{5, 3, 4, 5};
+    PathsForTest const expectedCycles{{5, 3, 4, 5}, {0, 5, 3, 4, 6, 0}, {9, 11, 12, 9}};
     EXPECT_EQ(expectedOneCycle, cycleDetection.getOneCycle());
     EXPECT_EQ(expectedCycles, cycleDetection.getAllCycles());
 }
@@ -77,8 +77,8 @@ TEST(CycleDetectionUsingDfsTest, CycleDetectionWorksUsingExample3WithUndirectedG
     graph.connect(4, 0);
     CycleDetectionForTest cycleDetection(graph);
 
-    PathForTest expectedOneCycle{0, 1, 2, 3, 4, 0};
-    PathsForTest expectedCycles{{0, 1, 2, 3, 4, 0}};
+    PathForTest const expectedOneCycle{0, 1, 2, 3, 4, 0};
+    PathsForTest const expectedCycles{{0, 1, 2, 3, 4, 0}};
     EXPECT_EQ(expectedOneCycle, cycleDetection.getOneCycle());
     EXPECT_EQ(expectedCycles, cycleDetection.getAllCycles());
 }

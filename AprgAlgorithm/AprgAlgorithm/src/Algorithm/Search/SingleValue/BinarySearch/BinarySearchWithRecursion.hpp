@@ -33,8 +33,8 @@ private:
     [[nodiscard]] Index getIndexUsingInterval(Index const lowIndex, Index const highIndex, Value const& target) const {
         Index result(INVALID_INDEX);
         if (lowIndex <= highIndex) {
-            Index middleIndex = getMidpointOfIndexes(lowIndex, highIndex);
-            Value middleValue(m_sortedValues[middleIndex]);
+            Index const middleIndex = getMidpointOfIndexes(lowIndex, highIndex);
+            Value const middleValue(m_sortedValues[middleIndex]);
             if (middleValue < target) {
                 result = getIndexUsingInterval(middleIndex + 1, highIndex, target);
             } else if (target < middleValue) {

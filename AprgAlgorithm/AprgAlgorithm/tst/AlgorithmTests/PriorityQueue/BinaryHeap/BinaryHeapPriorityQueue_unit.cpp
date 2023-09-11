@@ -12,7 +12,7 @@ using MaxPriorityQueueForTest =
 }  // namespace
 
 TEST(BinaryHeapPriorityQueueTest, IsEmptyWorks) {
-    MaxPriorityQueueForTest queue1;
+    MaxPriorityQueueForTest const queue1;
     MaxPriorityQueueForTest queue2;
     queue2.insert('A');
 
@@ -21,7 +21,7 @@ TEST(BinaryHeapPriorityQueueTest, IsEmptyWorks) {
 }
 
 TEST(BinaryHeapPriorityQueueTest, GetSizeWorks) {
-    MaxPriorityQueueForTest queue1;
+    MaxPriorityQueueForTest const queue1;
     MaxPriorityQueueForTest queue2;
     queue2.insert('P');
     queue2.insert('Q');
@@ -90,7 +90,7 @@ TEST(BinaryHeapPriorityQueueTest, DeleteAndGetTopObjectWorksOnExample1) {
     queue.insert('Q');
     queue.insert('E');
 
-    char objectToVerify(queue.deleteAndGetTopObject());
+    char const objectToVerify(queue.deleteAndGetTopObject());
 
     EXPECT_EQ('Q', objectToVerify);
     MaxPriorityQueueForTest::Objects const& objectsToVerify(queue.getObjects());
@@ -112,7 +112,7 @@ TEST(BinaryHeapPriorityQueueTest, DeleteAndGetTopObjectWorksOnExample2) {
     queue.insert('G');
     queue.insert('H');
 
-    char objectToVerify(queue.deleteAndGetTopObject());
+    char const objectToVerify(queue.deleteAndGetTopObject());
 
     EXPECT_EQ('T', objectToVerify);
     MaxPriorityQueueForTest::Objects const& objectsToVerify(queue.getObjects());

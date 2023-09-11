@@ -27,7 +27,7 @@ TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexWorksWithLowestIndex
     auto partitionIndex =
         partitionAndGetPartitionIndex(valuesToSort, 0, valuesToSort.size() - 1, PivotType::LowestIndex);
 
-    Characters valuesToExpect{'E', 'O', 'R', 'L', 'E', 'P', 'A', 'M', 'S', 'T', 'X'};
+    Characters const valuesToExpect{'E', 'O', 'R', 'L', 'E', 'P', 'A', 'M', 'S', 'T', 'X'};
     EXPECT_EQ(valuesToExpect, valuesToSort);
     EXPECT_EQ(8, partitionIndex);
 }
@@ -38,7 +38,7 @@ TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexWorksWithHighestInde
     auto partitionIndex =
         partitionAndGetPartitionIndex(valuesToSort, 0, valuesToSort.size() - 1, PivotType::HighestIndex);
 
-    Characters valuesToExpect{'A', 'E', 'E', 'T', 'O', 'X', 'R', 'M', 'P', 'L', 'S'};
+    Characters const valuesToExpect{'A', 'E', 'E', 'T', 'O', 'X', 'R', 'M', 'P', 'L', 'S'};
     EXPECT_EQ(valuesToExpect, valuesToSort);
     EXPECT_EQ(2, partitionIndex);
 }
@@ -49,7 +49,7 @@ TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexWorksWithMedianOfLow
     auto partitionIndex =
         partitionAndGetPartitionIndex(valuesToSort, 0, valuesToSort.size() - 1, PivotType::MedianOfLowMidHighIndexes);
 
-    Characters valuesToExpect{'E', 'O', 'R', 'L', 'E', 'P', 'A', 'M', 'S', 'T', 'X'};
+    Characters const valuesToExpect{'E', 'O', 'R', 'L', 'E', 'P', 'A', 'M', 'S', 'T', 'X'};
     EXPECT_EQ(valuesToExpect, valuesToSort);
     EXPECT_EQ(8, partitionIndex);
 }
@@ -60,7 +60,7 @@ TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexWorksWithMedianNinth
     auto partitionIndex =
         partitionAndGetPartitionIndex(valuesToSort, 0, valuesToSort.size() - 1, PivotType::MedianNinther);
 
-    Characters valuesToExpect{'E', 'O', 'L', 'P', 'E', 'M', 'A', 'R', 'T', 'S', 'X'};
+    Characters const valuesToExpect{'E', 'O', 'L', 'P', 'E', 'M', 'A', 'R', 'T', 'S', 'X'};
     EXPECT_EQ(valuesToExpect, valuesToSort);
     EXPECT_EQ(7, partitionIndex);
 }
@@ -71,7 +71,7 @@ TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexWorksWithMedianOfMed
     auto partitionIndex =
         partitionAndGetPartitionIndex(valuesToSort, 0, valuesToSort.size() - 1, PivotType::MedianOfMedians);
 
-    Characters valuesToExpect{'E', 'L', 'A', 'E', 'M', 'X', 'R', 'S', 'P', 'O', 'T'};
+    Characters const valuesToExpect{'E', 'L', 'A', 'E', 'M', 'X', 'R', 'S', 'P', 'O', 'T'};
     EXPECT_EQ(valuesToExpect, valuesToSort);
     EXPECT_EQ(4, partitionIndex);
 }
@@ -82,7 +82,7 @@ TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexUsingLomutoWorks) {
     auto partitionIndex =
         partitionAndGetPartitionIndexUsingLomuto(valuesToSort, 0, valuesToSort.size() - 1, PivotType::MedianOfMedians);
 
-    Characters valuesToExpect{'E', 'A', 'E', 'L', 'M', 'X', 'O', 'R', 'P', 'T', 'S'};
+    Characters const valuesToExpect{'E', 'A', 'E', 'L', 'M', 'X', 'O', 'R', 'P', 'T', 'S'};
     EXPECT_EQ(valuesToExpect, valuesToSort);
     EXPECT_EQ(4, partitionIndex);
 }
@@ -93,7 +93,7 @@ TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIteratorInTwoDirectionsWo
     auto partitionIterator =
         partitionAndGetPartitionIteratorInTwoDirections<Characters>(valuesToSort.begin(), prev(valuesToSort.end()));
 
-    Characters valuesToExpect{'P', 'O', 'R', 'E', 'E', 'L', 'A', 'M', 'S', 'X', 'T'};
+    Characters const valuesToExpect{'P', 'O', 'R', 'E', 'E', 'L', 'A', 'M', 'S', 'X', 'T'};
     EXPECT_EQ(valuesToExpect, valuesToSort);
     EXPECT_EQ('S', *partitionIterator);
 }
@@ -104,7 +104,7 @@ TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIteratorInOneDirectionWor
     auto partitionIterator =
         partitionAndGetPartitionIteratorInOneDirection<Characters>(valuesToSort.begin(), valuesToSort.end());
 
-    Characters valuesToExpect{'E', 'O', 'R', 'E', 'A', 'M', 'P', 'L', 'S', 'X', 'T'};
+    Characters const valuesToExpect{'E', 'O', 'R', 'E', 'A', 'M', 'P', 'L', 'S', 'X', 'T'};
     EXPECT_EQ(valuesToExpect, valuesToSort);
     EXPECT_EQ('S', *partitionIterator);
 }

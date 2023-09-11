@@ -42,7 +42,7 @@ int getIndexOfMedianNinther(Values const& values, int const lowIndex, int const 
     // https://en.wikipedia.org/wiki/Median#The_sample_median
     Indexes indexes;
     indexes.reserve(9);
-    int deltaSize = highIndex - lowIndex;
+    int const deltaSize = highIndex - lowIndex;
     for (int i = 0; i <= 8; ++i) {
         indexes.emplace_back(lowIndex + i * deltaSize / 8);
     }
@@ -78,8 +78,9 @@ int getIndexOfMedianOfMedians(Values const& values, int const lowIndex, int cons
         while (medianIndexesSize > 1) {
             int medianIndex = 0;
             for (int lowOfFive = 0; lowOfFive < medianIndexesSize; lowOfFive += 5) {
-                int highOfFive = std::min(lowOfFive + 4, medianIndexesSize - 1);
-                int medianIndexOfFive = getMedianIndexOfLessThanFive(values, medianIndexes, lowOfFive, highOfFive);
+                int const highOfFive = std::min(lowOfFive + 4, medianIndexesSize - 1);
+                int const medianIndexOfFive =
+                    getMedianIndexOfLessThanFive(values, medianIndexes, lowOfFive, highOfFive);
                 std::swap(medianIndexes[medianIndex++], medianIndexes[medianIndexOfFive]);
             }
             medianIndexesSize = medianIndex;

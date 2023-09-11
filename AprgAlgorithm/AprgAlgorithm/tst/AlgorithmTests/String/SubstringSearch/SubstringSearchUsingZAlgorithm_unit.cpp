@@ -16,10 +16,10 @@ using Indexes = SubstringSearchForTest::Indexes;
 
 TEST(SubstringSearchUsingZAlgorithmTest, SearchWorksUsingEmptyStringsAndDoesNotCrash) {
     // SubstringSearchUsingZAlgorithm has unique results of handling empty strings
-    string emptyString;
-    string nonEmptyString("NonEmptyString");
-    SubstringSearchForTest emptyStringSearch(emptyString);
-    SubstringSearchForTest nonEmptyStringSearch(nonEmptyString);
+    string const emptyString;
+    string const nonEmptyString("NonEmptyString");
+    SubstringSearchForTest const emptyStringSearch(emptyString);
+    SubstringSearchForTest const nonEmptyStringSearch(nonEmptyString);
 
     EXPECT_EQ(Index(string::npos), emptyStringSearch.search(emptyString));
     EXPECT_EQ(Index(string::npos), emptyStringSearch.search(nonEmptyString));
@@ -36,15 +36,15 @@ TEST(SubstringSearchUsingZAlgorithmTest, SearchWorksUsingExample2) {
 }
 
 TEST(SubstringSearchUsingZAlgorithmTest, SearchForFirstSubstringWorksUsingExample1) {
-    SubstringSearchForTest substringSearch("ATT");
-    string searchSpace("HATTIVATTI");
+    SubstringSearchForTest const substringSearch("ATT");
+    string const searchSpace("HATTIVATTI");
 
     EXPECT_EQ(Index(1), substringSearch.searchForFirstSubstring(searchSpace));
 }
 
 TEST(SubstringSearchUsingZAlgorithmTest, SearchForAllSubstringsWorksUsingExample1) {
-    SubstringSearchForTest substringSearch("ATT");
-    string searchSpace("HATTIVATTI");
+    SubstringSearchForTest const substringSearch("ATT");
+    string const searchSpace("HATTIVATTI");
 
     EXPECT_EQ((Indexes{1, 6}), substringSearch.searchForAllSubstrings(searchSpace));
 }

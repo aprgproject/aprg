@@ -23,22 +23,22 @@ RangeQueryForTest::SelectorFunction maximumSelector = [](ValueForTest const& val
 }  // namespace
 
 TEST(RangeQueryWithSelectorTest, GetSelectedValueOnIntervalWithMinimumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
-    RangeQueryForTest minimumRangeQuery(values, minimumSelector);
+    ValuesForTest const values;
+    RangeQueryForTest const minimumRangeQuery(values, minimumSelector);
 
     EXPECT_EQ(0, minimumRangeQuery.getSelectedValueOnInterval(0, 0));
 }
 
 TEST(RangeQueryWithSelectorTest, GetSelectedValueOnIntervalWithMinimumWorksWithOneValue) {
-    ValuesForTest values{5};
-    RangeQueryForTest minimumRangeQuery(values, minimumSelector);
+    ValuesForTest const values{5};
+    RangeQueryForTest const minimumRangeQuery(values, minimumSelector);
 
     EXPECT_EQ(5, minimumRangeQuery.getSelectedValueOnInterval(0, 0));
 }
 
 TEST(RangeQueryWithSelectorTest, GetSelectedValueOnIntervalWithMinimumWorksWithTwoValues) {
-    ValuesForTest values{5, 9};
-    RangeQueryForTest minimumRangeQuery(values, minimumSelector);
+    ValuesForTest const values{5, 9};
+    RangeQueryForTest const minimumRangeQuery(values, minimumSelector);
 
     EXPECT_EQ(5, minimumRangeQuery.getSelectedValueOnInterval(0, 0));
     EXPECT_EQ(5, minimumRangeQuery.getSelectedValueOnInterval(0, 1));
@@ -46,8 +46,8 @@ TEST(RangeQueryWithSelectorTest, GetSelectedValueOnIntervalWithMinimumWorksWithT
 }
 
 TEST(RangeQueryWithSelectorTest, GetSelectedValueOnIntervalWithMinimumWorksOnExample1) {
-    ValuesForTest values{5, 9, 4, 8, 6, 1, 4, 2, 0};
-    RangeQueryForTest minimumRangeQuery(values, minimumSelector);
+    ValuesForTest const values{5, 9, 4, 8, 6, 1, 4, 2, 0};
+    RangeQueryForTest const minimumRangeQuery(values, minimumSelector);
 
     EXPECT_EQ(5, minimumRangeQuery.getSelectedValueOnInterval(0, 0));
     EXPECT_EQ(5, minimumRangeQuery.getSelectedValueOnInterval(0, 1));
@@ -64,8 +64,8 @@ TEST(RangeQueryWithSelectorTest, GetSelectedValueOnIntervalWithMinimumWorksOnExa
 }
 
 TEST(RangeQueryWithSelectorTest, GetSelectedValueOnIntervalWithMaximumWorksOnExample1) {
-    ValuesForTest values{5, 9, 4, 8, 6, 1, 4, 2, 10};
-    RangeQueryForTest maximumRangeQuery(values, maximumSelector);
+    ValuesForTest const values{5, 9, 4, 8, 6, 1, 4, 2, 10};
+    RangeQueryForTest const maximumRangeQuery(values, maximumSelector);
 
     EXPECT_EQ(5, maximumRangeQuery.getSelectedValueOnInterval(0, 0));
     EXPECT_EQ(9, maximumRangeQuery.getSelectedValueOnInterval(0, 1));

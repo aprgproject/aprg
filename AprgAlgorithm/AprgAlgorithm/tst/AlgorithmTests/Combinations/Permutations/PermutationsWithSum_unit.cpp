@@ -13,12 +13,12 @@ using Permutations = GenerationForTest::Permutations;
 }  // namespace
 
 TEST(PermutationsWithSumTest, GetPermutationsWithSumUsingLoopsWorks) {
-    Values inputValues{1, 2, 3, 4};
+    Values const inputValues{1, 2, 3, 4};
     GenerationForTest generation(inputValues);
 
-    Permutations actualPermutations(generation.getPermutationsWithSumUsingLoops(4));
+    Permutations const actualPermutations(generation.getPermutationsWithSumUsingLoops(4));
 
-    Permutations expectedPermutations{{1, 1, 1, 1}, {1, 1, 2}, {1, 2, 1}, {1, 3}, {2, 1, 1}, {2, 2}, {3, 1}, {4}};
+    Permutations const expectedPermutations{{1, 1, 1, 1}, {1, 1, 2}, {1, 2, 1}, {1, 3}, {2, 1, 1}, {2, 2}, {3, 1}, {4}};
     EXPECT_EQ(expectedPermutations, actualPermutations);
 }
 

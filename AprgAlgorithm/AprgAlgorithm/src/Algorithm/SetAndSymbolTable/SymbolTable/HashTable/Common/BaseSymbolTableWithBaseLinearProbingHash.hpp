@@ -32,7 +32,7 @@ public:
         bool isFound(false);
         int i(this->getHash(key));
         for (; b_entryPointers[i]; this->incrementHashTableIndexWithWrapAround(i)) {
-            EntryUniquePointer& entryPointer(b_entryPointers[i]);
+            EntryUniquePointer const& entryPointer(b_entryPointers[i]);
             if (key == entryPointer->key) {
                 entryPointer->value = value;
                 isFound = true;

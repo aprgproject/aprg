@@ -62,7 +62,7 @@ private:
     // NOLINTNEXTLINE(modernize-use-nodiscard)
     PilesIterator mergePiles(PilesIterator const itLow, PilesIterator const itHigh) const {
         // https://en.wikipedia.org/wiki/K-way_merge_algorithm
-        int numberOfPiles = std::distance(itLow, itHigh) + 1;
+        int const numberOfPiles = std::distance(itLow, itHigh) + 1;
         if (numberOfPiles == 2) {
             itLow->mergeWith(*itHigh);
             return itLow;

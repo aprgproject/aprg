@@ -15,7 +15,7 @@ public:
     [[nodiscard]] Index getIndexOfValue(Value const& target) const {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
-            Index possibleIndex(getIndexUsingForwardSkip(target));
+            Index const possibleIndex(getIndexUsingForwardSkip(target));
             if (m_sortedValues[possibleIndex] == target) {
                 result = possibleIndex;
             }
@@ -26,7 +26,7 @@ public:
 private:
     [[nodiscard]] Index getIndexUsingForwardSkip(Value const& target) const {
         Index result(0);
-        Index size(m_sortedValues.size());
+        Index const size(m_sortedValues.size());
         // forward skip start from half of size, then quarter of size, then eighth of size and so on
         for (Index forwardSkip = size / 2; forwardSkip >= 1; forwardSkip /= 2) {
             result += forwardSkip;  // move to next position

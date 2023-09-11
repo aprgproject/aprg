@@ -19,8 +19,8 @@ public:
     }
 
     [[nodiscard]] Matrix getSolution() const {
-        int numberOfRows = m_simplexTable.getNumberOfRows() - 1;
-        int numberOfColumns = m_simplexTable.getNumberOfColumns() - numberOfRows;
+        int const numberOfRows = m_simplexTable.getNumberOfRows() - 1;
+        int const numberOfColumns = m_simplexTable.getNumberOfColumns() - numberOfRows;
         Matrix result(numberOfColumns, numberOfRows);
         int lastXInSimplex(m_simplexTable.getNumberOfColumns() - 1);
         int lastXInResult(result.getNumberOfColumns() - 1);

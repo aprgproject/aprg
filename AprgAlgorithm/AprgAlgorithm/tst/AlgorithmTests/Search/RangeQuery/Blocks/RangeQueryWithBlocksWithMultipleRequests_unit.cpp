@@ -33,16 +33,16 @@ RangeQueryForTest::ValuesFunction plusForARangeOfBlockValues = [](BlockValuesFor
 }  // namespace
 
 TEST(RangeQueryWithBlocksWithMultipleRequestsTest, GetInputAndOutputPairsUsingMoAlgorithmWithSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
-    RangeQueryForTest sumRangeQuery(
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    RangeQueryForTest const sumRangeQuery(
         values, plusForARangeOfValues, plusForARangeOfBlockValues, plusForAPairOfBlockValues,
         minusForPairOfBlockValues);
-    RangesForTest inputRanges{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6},
-                              {0, 7}, {0, 8}, {0, 9}, {1, 6}, {2, 5}, {3, 4}, {4, 4}};
+    RangesForTest const inputRanges{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6},
+                                    {0, 7}, {0, 8}, {0, 9}, {1, 6}, {2, 5}, {3, 4}, {4, 4}};
 
-    InputAndOutputPairsForTest expectedPairs{{{0, 0}, 1},  {{0, 1}, 4},  {{0, 2}, 8},  {{0, 3}, 16}, {{0, 4}, 22},
-                                             {{0, 5}, 23}, {{2, 5}, 19}, {{0, 6}, 27}, {{1, 6}, 26}, {{0, 7}, 29},
-                                             {{0, 8}, 38}, {{3, 4}, 14}, {{4, 4}, 6}};
+    InputAndOutputPairsForTest const expectedPairs{{{0, 0}, 1},  {{0, 1}, 4},  {{0, 2}, 8},  {{0, 3}, 16}, {{0, 4}, 22},
+                                                   {{0, 5}, 23}, {{2, 5}, 19}, {{0, 6}, 27}, {{1, 6}, 26}, {{0, 7}, 29},
+                                                   {{0, 8}, 38}, {{3, 4}, 14}, {{4, 4}, 6}};
     EXPECT_EQ(expectedPairs, sumRangeQuery.getInputAndOutputPairsUsingMoAlgorithm(inputRanges));
 }
 

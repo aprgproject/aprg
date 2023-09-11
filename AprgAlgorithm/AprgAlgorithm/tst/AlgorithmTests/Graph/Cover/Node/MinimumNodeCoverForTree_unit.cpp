@@ -21,7 +21,7 @@ TEST(MinimumNodeCoverForTreeTest, GetMinimumNodeCoverWorksOnExample1) {
     graph.connect(30, 60);
     graph.connect(50, 70);
     graph.connect(50, 80);
-    MinimumNodeCoverForTreeForTest minimumNodeCover(graph, 10);
+    MinimumNodeCoverForTreeForTest const minimumNodeCover(graph, 10);
 
     EXPECT_EQ(3, minimumNodeCover.getMinimumNodeCoverSize());
     EXPECT_EQ((SetOfVertices{20, 30, 50}), minimumNodeCover.getMinimumNodeCover());
@@ -36,7 +36,7 @@ TEST(MinimumNodeCoverForTreeTest, GetMinimumNodeCoverWorksOnExample2) {
     graph.connect(4, 3);
     graph.connect(4, 7);
     graph.connect(7, 8);
-    MinimumNodeCoverForTreeForTest minimumNodeCover(graph, 1);
+    MinimumNodeCoverForTreeForTest const minimumNodeCover(graph, 1);
 
     EXPECT_EQ(4, minimumNodeCover.getMinimumNodeCoverSize());
     EXPECT_EQ((SetOfVertices{1, 2, 4, 7}), minimumNodeCover.getMinimumNodeCover());

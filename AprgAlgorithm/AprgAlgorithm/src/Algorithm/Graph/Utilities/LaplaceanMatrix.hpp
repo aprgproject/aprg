@@ -27,10 +27,10 @@ LaplaceanMatrix createLaplaceanMatrix(BaseGraph<Vertex> const& graph) {
         vertexToIndexArray[vertex] = i++;
     }
 
-    bool isUndirectedGraph = GraphDirectionType::Undirected == graph.getGraphDirectionType();
+    bool const isUndirectedGraph = GraphDirectionType::Undirected == graph.getGraphDirectionType();
     for (Edge const& edge : graph.getEdges()) {
-        int index1 = vertexToIndexArray[edge.first];
-        int index2 = vertexToIndexArray[edge.second];
+        int const index1 = vertexToIndexArray[edge.first];
+        int const index2 = vertexToIndexArray[edge.second];
         result.setEntry(index1, index2, -1);
         if (isUndirectedGraph) {
             result.setEntry(index2, index1, -1);

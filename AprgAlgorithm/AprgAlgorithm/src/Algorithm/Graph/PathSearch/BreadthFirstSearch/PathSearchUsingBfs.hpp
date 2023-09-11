@@ -67,12 +67,12 @@ private:
     using BaseClass::initializeWithStartVertices;
 
     static InitializeDataFunction getEmptyInitializeDataFunction() {
-        static InitializeDataFunction emptyInitializeDataFunction = [](Vertices const&) {};
+        static InitializeDataFunction const emptyInitializeDataFunction = [](Vertices const&) {};
         return emptyInitializeDataFunction;
     }
 
     static UpdateDataFunction getEmptyUpdateDataFunction() {
-        static UpdateDataFunction emptyUpdateDataFunction = [](Vertex const&, Vertex const&) {};
+        static UpdateDataFunction const emptyUpdateDataFunction = [](Vertex const&, Vertex const&) {};
         return emptyUpdateDataFunction;
     }
 

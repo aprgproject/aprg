@@ -23,43 +23,43 @@ using StabilityCheckObjectsSorter = ShellSorter<StabilityCheckObjects>;
 }  // namespace
 
 TEST(ShellSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(ShellSorterTest, SortWorksOnCharactersUsingOneValueExample) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(ShellSorterTest, SortWorksOnCharactersUsingExample1) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(ShellSorterTest, SortWorksOnCharactersUsingExample2) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingExample2WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 // CANNOT SORT STD::LIST
 TEST(ShellSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
-    IntegersSorter sorter;
+    IntegersSorter const sorter;
     testSortUsingExample1WithPositiveAndNegativeIntegers<IntegersSorter, Integers>(sorter);
 }
 
 TEST(ShellSorterTest, SortWorksOnDoublesUsingExample1) {
-    DoublesSorter sorter;
+    DoublesSorter const sorter;
     testSortUsingExample1WithDoubleValues<DoublesSorter, Doubles>(sorter);
 }
 
 TEST(ShellSorterTest, SortWorksOnStringsUsingExample1) {
-    StringsSorter sorter;
+    StringsSorter const sorter;
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);
 }
 
 TEST(ShellSorterTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1) {
-    StabilityCheckObjectsSorter sorter;
+    StabilityCheckObjectsSorter const sorter;
     testSortAsNotStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(
         sorter);
 }

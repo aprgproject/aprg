@@ -27,7 +27,7 @@ public:
             Indexes nextStatesFromAMatch;
             for (Index const nullTransitionState : nullTransitionStates) {
                 if (nullTransitionState < lengthOfRE) {
-                    char charInRE(m_regularExpression[nullTransitionState]);
+                    char const charInRE(m_regularExpression[nullTransitionState]);
                     if (charInRE == stringToCheck[checkIndex] || charInRE == '.') {
                         // if there is a match
                         nextStatesFromAMatch.emplace_back(
@@ -55,7 +55,7 @@ public:
 private:
     [[nodiscard]] Indexes getNullTransitionsStates(Indexes const statesFromAMatch) const {
         Indexes result;
-        PathSearchUsingDfs<Index> nullTransitionPathSearch(m_nullTransitionsGraph, statesFromAMatch);
+        PathSearchUsingDfs<Index> const nullTransitionPathSearch(m_nullTransitionsGraph, statesFromAMatch);
         for (Index const state : m_nullTransitionsGraph.getVertices()) {
             if (nullTransitionPathSearch.hasPathTo(state)) {
                 result.emplace_back(state);

@@ -55,7 +55,7 @@ public:
 
     void changeValueAtIndex(Index const index, Value const& newValue) {
         // This has log(N) running time
-        Index childIndex = b_startOfChildren + index;
+        Index const childIndex = b_startOfChildren + index;
         if (childIndex < static_cast<Index>(b_treeValues.size())) {
             increaseAtRange(
                 index, index,
@@ -123,14 +123,14 @@ private:
         } else if (startInterval <= baseLeft && baseRight <= endInterval) {
             increment(m_pendingUpdates[currentChild], incrementValue);
         } else {
-            Index intersectionLeft = std::max(startInterval, baseLeft);
-            Index intersectionRight = std::min(endInterval, baseRight);
-            Index intersectionLength = intersectionRight + 1 - intersectionLeft;
+            Index const intersectionLeft = std::max(startInterval, baseLeft);
+            Index const intersectionRight = std::min(endInterval, baseRight);
+            Index const intersectionLength = intersectionRight + 1 - intersectionLeft;
             incrementMultipleTimes(b_treeValues[currentChild], incrementValue, intersectionLength);
 
-            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
-            bool doesLeftPartIntersect = !(endInterval < baseLeft || startInterval > baseMidPoint);
-            bool doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || startInterval > baseRight);
+            Index const baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
+            bool const doesLeftPartIntersect = !(endInterval < baseLeft || startInterval > baseMidPoint);
+            bool const doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || startInterval > baseRight);
             if (doesLeftPartIntersect && doesRightPartIntersect) {
                 increaseAtRangeFromTopToBottom(
                     startInterval, endInterval, Utilities::getLeftChild(currentChild), baseLeft, baseMidPoint,
@@ -178,9 +178,9 @@ private:
         if (startInterval <= baseLeft && baseRight <= endInterval) {
             result = b_treeValues[currentChild];
         } else {
-            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
-            bool doesLeftPartIntersect = !(endInterval < baseLeft || baseMidPoint < startInterval);
-            bool doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
+            Index const baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
+            bool const doesLeftPartIntersect = !(endInterval < baseLeft || baseMidPoint < startInterval);
+            bool const doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
             if (doesLeftPartIntersect && doesRightPartIntersect) {
                 result = b_function(
                     getValueOnIntervalFromTopToBottom(

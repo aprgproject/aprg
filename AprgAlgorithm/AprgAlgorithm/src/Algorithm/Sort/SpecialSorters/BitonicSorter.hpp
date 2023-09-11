@@ -15,7 +15,7 @@ public:
         for (unsigned int k = 2; k <= valuesToSort.size(); k *= 2) {
             for (unsigned int j = k / 2; j > 0; j /= 2) {
                 for (unsigned int i = 0; i < valuesToSort.size(); ++i) {
-                    unsigned int l = i ^ j;
+                    unsigned int const l = i ^ j;
                     if (l > i && l < valuesToSort.size()) {
                         if (((i & k) == 0 && valuesToSort[i] > valuesToSort[l]) ||
                             ((i & k) != 0 && valuesToSort[i] < valuesToSort[l])) {

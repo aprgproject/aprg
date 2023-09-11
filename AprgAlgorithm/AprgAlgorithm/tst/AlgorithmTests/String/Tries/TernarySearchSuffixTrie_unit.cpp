@@ -11,7 +11,7 @@ using TrieForTest = TernarySearchSuffixTrie;
 }  // namespace
 
 TEST(TernarySearchSuffixTrieTest, GetIndexOfFirstOccurrenceWorks) {
-    TrieForTest trie("ABCDEF");
+    TrieForTest const trie("ABCDEF");
 
     EXPECT_EQ(0, trie.getIndexOfFirstOccurrence("ABCDEF"));
     EXPECT_EQ(1, trie.getIndexOfFirstOccurrence("BCDEF"));

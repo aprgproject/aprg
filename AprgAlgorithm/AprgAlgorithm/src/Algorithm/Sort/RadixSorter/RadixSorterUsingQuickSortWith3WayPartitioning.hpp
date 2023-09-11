@@ -42,7 +42,7 @@ private:
         int highIndexWithEqualValue = highContainerIndex;
         Value const& partitionValue(valuesToSort[lowContainerIndex]);  // use first value as partition
         DigitValue partitionDigit(m_getDigitAtFunction(partitionValue, digitIndex));
-        bool shouldEqualPartProceed(m_isDigitValidFunction(partitionValue, digitIndex));
+        bool const shouldEqualPartProceed(m_isDigitValidFunction(partitionValue, digitIndex));
         while (i <= highIndexWithEqualValue) {
             DigitValue currentDigit(m_getDigitAtFunction(valuesToSort[i], digitIndex));
             if (currentDigit < partitionDigit) {

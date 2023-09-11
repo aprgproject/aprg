@@ -28,9 +28,9 @@ private:
     DistanceEntry transformOneSetOfValues(
         DistancetMatrix::MatrixData const& first, DistancetMatrix::MatrixData const& second) {
         DistanceEntry result(AlbaNumberConstants::ALBA_NUMBER_POSITIVE_INFINITY);
-        int minSize = std::min(first.size(), second.size());
+        int const minSize = std::min(first.size(), second.size());
         for (int i = 0; i < minSize; ++i) {
-            AlbaNumber currentValue = first[i] + second[i];
+            AlbaNumber const currentValue = first[i] + second[i];
             if (currentValue < result) {
                 result = currentValue;
             }
@@ -44,8 +44,9 @@ private:
         adjacencyMatrix.iterateAllThroughYAndThenX([&](int const x, int const y) {
             // Let us construct an adjacency matrix where INFINITY means that an edge does not exist, and other values
             // correspond to edge weights.
-            AlbaNumber entryValue = adjacencyMatrix.getEntry(x, y) ? AlbaNumber(graph.getWeight(x, y))
-                                                                   : AlbaNumberConstants::ALBA_NUMBER_POSITIVE_INFINITY;
+            AlbaNumber const entryValue = adjacencyMatrix.getEntry(x, y)
+                                              ? AlbaNumber(graph.getWeight(x, y))
+                                              : AlbaNumberConstants::ALBA_NUMBER_POSITIVE_INFINITY;
             initialDistanceMatrix.setEntry(x, y, entryValue);
         });
         return transformMultipleTimes(initialDistanceMatrix, traverseCount);

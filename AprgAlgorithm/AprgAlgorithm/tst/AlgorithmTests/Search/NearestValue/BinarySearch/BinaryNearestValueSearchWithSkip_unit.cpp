@@ -46,8 +46,8 @@ TEST(BinaryNearestValueSearchWithSkipTest, GetIndexOfNearestValueWorksWhenThereI
 }
 
 TEST(BinaryNearestValueSearchWithSkipTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
-    ValuesForTest duplicateValues{0, 0, 0, 0, 0};
-    SearchForTest search(duplicateValues);
+    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
+    SearchForTest const search(duplicateValues);
 
     EXPECT_EQ(4, search.getIndexOfNearestValue(33));
 }

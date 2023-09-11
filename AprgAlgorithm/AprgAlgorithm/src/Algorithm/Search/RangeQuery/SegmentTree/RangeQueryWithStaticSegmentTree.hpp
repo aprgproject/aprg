@@ -39,7 +39,7 @@ public:
     [[nodiscard]] Index getIndexWithTargetValue(
         Index const start, Value const targetValue, Function const& inverseFunction) const {
         Index result(-1);
-        Index startTreeIndex = m_startOfChildren + start;
+        Index const startTreeIndex = m_startOfChildren + start;
         if (startTreeIndex < static_cast<Index>(m_treeValues.size())) {
             result = getIndexWithTargetValueInternal(startTreeIndex, targetValue, inverseFunction);
             if (result >= m_startOfChildren) {
@@ -77,10 +77,10 @@ public:
 protected:
     [[nodiscard]] Index getIndexWithTargetValueInternal(
         Index const treeIndex, Value const targetValue, Function const& inverseFunction) const {
-        Index result(-1);
-        Index parent = Utilities::getParent(treeIndex);
-        Index leftChild = Utilities::getLeftChild(treeIndex);
-        Index rightChild = Utilities::getRightChild(treeIndex);
+        Index const result(-1);
+        Index const parent = Utilities::getParent(treeIndex);
+        Index const leftChild = Utilities::getLeftChild(treeIndex);
+        Index const rightChild = Utilities::getRightChild(treeIndex);
         if (targetValue == m_treeValues[treeIndex]) {
             if (leftChild < static_cast<int>(m_treeValues.size()) && targetValue == m_treeValues[leftChild]) {
                 return getIndexWithTargetValueInternal(leftChild, targetValue, inverseFunction);
@@ -157,9 +157,9 @@ protected:
         if (startInterval <= baseLeft && baseRight <= endInterval) {
             result = m_treeValues[currentChild];
         } else {
-            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
-            bool doesLeftPartIntersect = !(endInterval < baseLeft || baseMidPoint < startInterval);
-            bool doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
+            Index const baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
+            bool const doesLeftPartIntersect = !(endInterval < baseLeft || baseMidPoint < startInterval);
+            bool const doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
             if (doesLeftPartIntersect && doesRightPartIntersect) {
                 result = m_function(
                     getValueOnIntervalFromTopToBottom(
@@ -181,7 +181,7 @@ protected:
     void initialize(Values const& valuesToCheck) {
         if (!valuesToCheck.empty()) {
             m_startOfChildren = Utilities::getMinimumNumberOfParents(valuesToCheck.size());
-            Index totalSize = m_startOfChildren + valuesToCheck.size();
+            Index const totalSize = m_startOfChildren + valuesToCheck.size();
 
             m_treeValues.resize(totalSize);
             m_treeValues.shrink_to_fit();
@@ -218,7 +218,7 @@ protected:
             m_treeValues[treeIndex] = newValue;
             if (m_treeValues.size() > 2) {
                 while (treeIndex > 0) {
-                    Index parentIndex(Utilities::getParent(treeIndex));
+                    Index const parentIndex(Utilities::getParent(treeIndex));
                     if (Utilities::isALeftChild(treeIndex)) {
                         if (treeIndex + 1 < static_cast<int>(m_treeValues.size())) {
                             m_treeValues[parentIndex] =

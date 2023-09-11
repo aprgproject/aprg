@@ -42,8 +42,8 @@ TEST(FlowNetworkTest, GetFlowEdgeDetailsWorks) {
     graph.connect(0, 1, 15.25, 3.5);
     graph.connect(0, 2, 16.25, 4.5);
 
-    FlowNetworkForTest::FlowEdgeDetails expectedDetails1{15.25, 3.5};
-    FlowNetworkForTest::FlowEdgeDetails expectedDetails2{16.25, 4.5};
+    FlowNetworkForTest::FlowEdgeDetails const expectedDetails1{15.25, 3.5};
+    FlowNetworkForTest::FlowEdgeDetails const expectedDetails2{16.25, 4.5};
     EXPECT_EQ(expectedDetails1, graph.getFlowEdgeDetails(0, 1));
     EXPECT_EQ(expectedDetails2, graph.getFlowEdgeDetails(0, 2));
 }
@@ -63,7 +63,7 @@ TEST(FlowNetworkTest, GetSortedCapacitiesWorks) {
     graph.connect(0, 1, 15.25, 3.5);
     graph.connect(0, 2, 16.25, 4.5);
 
-    FlowNetworkForTest::FlowDataTypes expectedCapacities{15.25, 16.25};
+    FlowNetworkForTest::FlowDataTypes const expectedCapacities{15.25, 16.25};
     EXPECT_EQ(expectedCapacities, graph.getSortedCapacities());
 }
 
@@ -72,7 +72,7 @@ TEST(FlowNetworkTest, GetSortedFlowsWorks) {
     graph.connect(0, 1, 15.25, 3.5);
     graph.connect(0, 2, 16.25, 4.5);
 
-    FlowNetworkForTest::FlowDataTypes expectedFlows{3.5, 4.5};
+    FlowNetworkForTest::FlowDataTypes const expectedFlows{3.5, 4.5};
     EXPECT_EQ(expectedFlows, graph.getSortedFlows());
 }
 
@@ -81,7 +81,7 @@ TEST(FlowNetworkTest, GetSortedWeightsWorks) {
     graph.connect(0, 1, 15.25, 3.5);
     graph.connect(0, 2, 16.25, 4.5);
 
-    FlowNetworkForTest::FlowDataTypes expectedWeights{15.25, 16.25};
+    FlowNetworkForTest::FlowDataTypes const expectedWeights{15.25, 16.25};
     EXPECT_EQ(expectedWeights, graph.getSortedWeights());
 }
 
@@ -90,7 +90,8 @@ TEST(FlowNetworkTest, GetEdgeToFlowEdgeDetailsMapWorks) {
     graph.connect(0, 1, 15.25, 3.5);
     graph.connect(0, 2, 16.25, 4.5);
 
-    FlowNetworkForTest::EdgeToFlowEdgeDetailsMap expectedEdgesToDetails{{{0, 1}, {15.25, 3.5}}, {{0, 2}, {16.25, 4.5}}};
+    FlowNetworkForTest::EdgeToFlowEdgeDetailsMap const expectedEdgesToDetails{
+        {{0, 1}, {15.25, 3.5}}, {{0, 2}, {16.25, 4.5}}};
     EXPECT_EQ(expectedEdgesToDetails, graph.getEdgeToFlowEdgeDetailsMap());
 }
 
@@ -99,7 +100,7 @@ TEST(FlowNetworkTest, GetFlowEdgesWorks) {
     graph.connect(0, 1, 15.25, 3.5);
     graph.connect(0, 2, 16.25, 4.5);
 
-    FlowNetworkForTest::FlowEdges expectedEdgesWithWeight{{0, 1, 15.25, 3.5}, {0, 2, 16.25, 4.5}};
+    FlowNetworkForTest::FlowEdges const expectedEdgesWithWeight{{0, 1, 15.25, 3.5}, {0, 2, 16.25, 4.5}};
     EXPECT_EQ(expectedEdgesWithWeight, graph.getFlowEdges());
 }
 
@@ -110,8 +111,9 @@ TEST(FlowNetworkTest, ConnectWorks) {
 
     EXPECT_EQ(3, graph.getNumberOfVertices());
     EXPECT_EQ(2, graph.getNumberOfEdges());
-    Edges edgesToExpect{{0, 1}, {0, 2}};
-    FlowNetworkForTest::EdgeToFlowEdgeDetailsMap expectedEdgesToDetails{{{0, 1}, {15.25, 3.5}}, {{0, 2}, {16.25, 4.5}}};
+    Edges const edgesToExpect{{0, 1}, {0, 2}};
+    FlowNetworkForTest::EdgeToFlowEdgeDetailsMap const expectedEdgesToDetails{
+        {{0, 1}, {15.25, 3.5}}, {{0, 2}, {16.25, 4.5}}};
     EXPECT_EQ(edgesToExpect, graph.getEdges());
     EXPECT_EQ(expectedEdgesToDetails, graph.getEdgeToFlowEdgeDetailsMap());
 }
@@ -125,8 +127,8 @@ TEST(FlowNetworkTest, DisconnectWorks) {
 
     EXPECT_EQ(2, graph.getNumberOfVertices());
     EXPECT_EQ(1, graph.getNumberOfEdges());
-    Edges edgesToExpect{{0, 2}};
-    FlowNetworkForTest::EdgeToFlowEdgeDetailsMap expectedEdgesToDetails{{{0, 2}, {16.25, 4.5}}};
+    Edges const edgesToExpect{{0, 2}};
+    FlowNetworkForTest::EdgeToFlowEdgeDetailsMap const expectedEdgesToDetails{{{0, 2}, {16.25, 4.5}}};
     EXPECT_EQ(edgesToExpect, graph.getEdges());
     EXPECT_EQ(expectedEdgesToDetails, graph.getEdgeToFlowEdgeDetailsMap());
 }

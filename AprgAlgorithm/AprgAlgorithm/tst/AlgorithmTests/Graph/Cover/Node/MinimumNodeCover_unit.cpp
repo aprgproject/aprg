@@ -24,7 +24,7 @@ TEST(MinimumNodeCoverTest, GetMinimumNodeCoverSizeWorksOnExample1) {
     graph.connect(3, 6);
     graph.connect(3, 8);
     graph.connect(4, 7);
-    MinimumNodeCoverForTest minimumNodeCover(graph);
+    MinimumNodeCoverForTest const minimumNodeCover(graph);
 
     EXPECT_EQ(3, minimumNodeCover.getMinimumNodeCoverSize(newSourceVertex, newSinkVertex));
 }
@@ -37,7 +37,7 @@ TEST(MinimumNodeCoverTest, GetMaximumIndependentSetSizeWorksOnExample1) {
     graph.connect(3, 6);
     graph.connect(3, 8);
     graph.connect(4, 7);
-    MinimumNodeCoverForTest minimumNodeCover(graph);
+    MinimumNodeCoverForTest const minimumNodeCover(graph);
 
     EXPECT_EQ(5, minimumNodeCover.getMaximumIndependentSetSize(newSourceVertex, newSinkVertex));
 }

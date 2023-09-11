@@ -28,7 +28,7 @@ void putConnectionsForTest(GraphForTest& graph) {
 TEST(PathSearchUsingDfsWithDistanceCountTest, GetDistanceToWorksWithUndirectedGraph) {
     GraphForTest graph;
     putConnectionsForTest(graph);
-    PathSearchForTest pathSearch(graph, {0});
+    PathSearchForTest const pathSearch(graph, {0});
 
     EXPECT_EQ(0, pathSearch.getDistanceTo(0));
     EXPECT_EQ(1, pathSearch.getDistanceTo(1));
@@ -42,9 +42,9 @@ TEST(PathSearchUsingDfsWithDistanceCountTest, GetDistanceToWorksWithUndirectedGr
 TEST(PathSearchUsingDfsWithDistanceCountTest, GetEndVertexToDistanceCountMapWorksWithUndirectedGraph) {
     GraphForTest graph;
     putConnectionsForTest(graph);
-    PathSearchForTest pathSearch(graph, {0});
+    PathSearchForTest const pathSearch(graph, {0});
 
-    ContentMapForTest expectedMap{{0, 0}, {1, 1}, {2, 2}, {3, 3}, {4, 4}, {5, 4}};
+    ContentMapForTest const expectedMap{{0, 0}, {1, 1}, {2, 2}, {3, 3}, {4, 4}, {5, 4}};
     EXPECT_EQ(expectedMap, pathSearch.getEndVertexToDistanceCountMap());
 }
 

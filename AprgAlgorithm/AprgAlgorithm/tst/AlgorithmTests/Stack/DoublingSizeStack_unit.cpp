@@ -20,7 +20,7 @@ TEST(DoublingSizeStackTest, PushWorks) { testPushWithInt<StackForTest>(); }
 TEST(DoublingSizeStackTest, PopWorks) { testPopWithInt<StackForTest>(); }
 
 TEST(DoublingSizeStackTest, GetContainerSizeWorks) {
-    StackForTest stack1;
+    StackForTest const stack1;
     StackForTest stack2;
     stack2.push(10);
     stack2.push(5);

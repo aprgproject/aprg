@@ -24,9 +24,9 @@ TEST(MaximumMatchingsTest, GetMaximumMatchingsWorksOnExample1) {
     graph.connect(3, 6);
     graph.connect(3, 8);
     graph.connect(4, 7);
-    MaximumMatchingsForTest maximumMatchings(graph);
+    MaximumMatchingsForTest const maximumMatchings(graph);
 
-    Edges expectedMatchings{{1, 5}, {2, 7}, {3, 6}};
+    Edges const expectedMatchings{{1, 5}, {2, 7}, {3, 6}};
     EXPECT_EQ(expectedMatchings, maximumMatchings.getMaximumMatchings(newSourceVertex, newSinkVertex));
 }
 
@@ -38,7 +38,7 @@ TEST(MaximumMatchingsTest, DoesHavePerfectMatchingByCheckingASubsetWorksOnExampl
     graph.connect(3, 6);
     graph.connect(3, 8);
     graph.connect(4, 7);
-    MaximumMatchingsForTest maximumMatchings(graph);
+    MaximumMatchingsForTest const maximumMatchings(graph);
 
     EXPECT_TRUE(maximumMatchings.doesHavePerfectMatchingByCheckingASubset({1, 3}));
     EXPECT_FALSE(maximumMatchings.doesHavePerfectMatchingByCheckingASubset({2, 4}));

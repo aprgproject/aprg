@@ -25,9 +25,9 @@ TEST(SubTreeQueryTest, Example1Works) {
     graph.connect(4, 9);
     SubTreeQueryForTest subTreeQuery(graph, 1);
 
-    VerticesForTest expectedVertices{1, 2, 6, 3, 4, 7, 8, 9, 5};
-    CountsForTest expectedSizes{9, 2, 1, 1, 4, 1, 1, 1, 1};
-    VerticesForTest expectedVerticesOfSubTreeAt4{4, 7, 8, 9};
+    VerticesForTest const expectedVertices{1, 2, 6, 3, 4, 7, 8, 9, 5};
+    CountsForTest const expectedSizes{9, 2, 1, 1, 4, 1, 1, 1, 1};
+    VerticesForTest const expectedVerticesOfSubTreeAt4{4, 7, 8, 9};
     EXPECT_EQ(expectedVertices, subTreeQuery.getVerticesInDfsPreOrder());
     EXPECT_EQ(expectedSizes, subTreeQuery.getSubTreeSize());
     EXPECT_EQ(expectedVerticesOfSubTreeAt4, subTreeQuery.getVerticesOfSubTreeAt(4));

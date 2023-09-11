@@ -23,10 +23,10 @@ TEST(LowestCommonAncestorsTest, Example1Works) {
     graph.connect(4, 7);
     graph.connect(4, 8);
     graph.connect(4, 9);
-    LowestCommonAncestorsForTest lowestCommonAncestors(graph, 1);
+    LowestCommonAncestorsForTest const lowestCommonAncestors(graph, 1);
 
-    VerticesForTest expectedVertices{1, 2, 6, 2, 1, 3, 1, 4, 7, 4, 8, 4, 9, 4, 1, 5, 1};
-    DepthsForTest expectedDepth{1, 2, 3, 2, 1, 2, 1, 2, 3, 2, 3, 2, 3, 2, 1, 2, 1};
+    VerticesForTest const expectedVertices{1, 2, 6, 2, 1, 3, 1, 4, 7, 4, 8, 4, 9, 4, 1, 5, 1};
+    DepthsForTest const expectedDepth{1, 2, 3, 2, 1, 2, 1, 2, 3, 2, 3, 2, 3, 2, 1, 2, 1};
     EXPECT_EQ(expectedVertices, lowestCommonAncestors.getVerticesInTreeOrder());
     EXPECT_EQ(expectedDepth, lowestCommonAncestors.getDepths());
     EXPECT_EQ(1, lowestCommonAncestors.getLowestCommonAncestor(6, 8));
@@ -44,10 +44,10 @@ TEST(LowestCommonAncestorsTest, Example2Works) {
     graph.connect(2, 6);
     graph.connect(4, 7);
     graph.connect(6, 8);
-    LowestCommonAncestorsForTest lowestCommonAncestors(graph, 1);
+    LowestCommonAncestorsForTest const lowestCommonAncestors(graph, 1);
 
-    VerticesForTest expectedVertices{1, 2, 5, 2, 6, 8, 6, 2, 1, 3, 1, 4, 7, 4, 1};
-    DepthsForTest expectedDepth{1, 2, 3, 2, 3, 4, 3, 2, 1, 2, 1, 2, 3, 2, 1};
+    VerticesForTest const expectedVertices{1, 2, 5, 2, 6, 8, 6, 2, 1, 3, 1, 4, 7, 4, 1};
+    DepthsForTest const expectedDepth{1, 2, 3, 2, 3, 4, 3, 2, 1, 2, 1, 2, 3, 2, 1};
     EXPECT_EQ(expectedVertices, lowestCommonAncestors.getVerticesInTreeOrder());
     EXPECT_EQ(expectedDepth, lowestCommonAncestors.getDepths());
     EXPECT_EQ(1, lowestCommonAncestors.getLowestCommonAncestor(5, 7));

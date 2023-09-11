@@ -39,7 +39,7 @@ TEST(StronglyConnectedComponentsUsingKosarajuSharirTest, GetComponentIdWorks) {
     graph.connect(5, 4);
     graph.connect(6, 7);
     graph.connect(7, 6);
-    ConnectedComponentsForTest connectedComponents(graph);
+    ConnectedComponentsForTest const connectedComponents(graph);
 
     EXPECT_EQ(3, connectedComponents.getComponentId(0));
     EXPECT_EQ(3, connectedComponents.getComponentId(1));

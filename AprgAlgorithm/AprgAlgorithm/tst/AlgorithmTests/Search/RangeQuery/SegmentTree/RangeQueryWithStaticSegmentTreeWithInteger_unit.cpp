@@ -26,30 +26,30 @@ RangeQueryForTest::Function minusFunction = minus<>();
 }  // namespace
 
 TEST(RangeQueryWithStaticSegmentTreeTest, GetStartOfChildrenWithMinimumWorksOnExample1) {
-    ValuesForTest values{5, 9, 4, 8, 6, 1, 4, 2, 0};
-    RangeQueryForTest minimumRangeQuery(values, minimumFunction);
+    ValuesForTest const values{5, 9, 4, 8, 6, 1, 4, 2, 0};
+    RangeQueryForTest const minimumRangeQuery(values, minimumFunction);
 
     EXPECT_EQ(15, minimumRangeQuery.getStartOfChildren());
 }
 
 TEST(RangeQueryWithStaticSegmentTreeTest, GetTreeValuesWithMinimumWorksOnExample1) {
-    ValuesForTest values{5, 9, 4, 8, 6, 1, 4, 2, 0};
-    RangeQueryForTest minimumRangeQuery(values, minimumFunction);
+    ValuesForTest const values{5, 9, 4, 8, 6, 1, 4, 2, 0};
+    RangeQueryForTest const minimumRangeQuery(values, minimumFunction);
 
-    ValuesForTest expectedTreeValues{0, 1, 0, 4, 1, 0, 0, 5, 4, 1, 2, 0, 0, 0, 0, 5, 9, 4, 8, 6, 1, 4, 2, 0};
+    ValuesForTest const expectedTreeValues{0, 1, 0, 4, 1, 0, 0, 5, 4, 1, 2, 0, 0, 0, 0, 5, 9, 4, 8, 6, 1, 4, 2, 0};
     EXPECT_EQ(expectedTreeValues, minimumRangeQuery.getTreeValues());
 }
 
 TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalWithMinimumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
-    RangeQueryForTest minimumRangeQuery(values, minimumFunction);
+    ValuesForTest const values;
+    RangeQueryForTest const minimumRangeQuery(values, minimumFunction);
 
     EXPECT_EQ(0, minimumRangeQuery.getValueOnInterval(0, 0));
 }
 
 TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalWithMinimumWorksOnExample1) {
-    ValuesForTest values{5, 9, 4, 8, 6, 1, 4, 2, 0};
-    RangeQueryForTest minimumRangeQuery(values, minimumFunction);
+    ValuesForTest const values{5, 9, 4, 8, 6, 1, 4, 2, 0};
+    RangeQueryForTest const minimumRangeQuery(values, minimumFunction);
 
     EXPECT_EQ(5, minimumRangeQuery.getValueOnInterval(0, 0));
     EXPECT_EQ(5, minimumRangeQuery.getValueOnInterval(0, 1));
@@ -66,8 +66,8 @@ TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalWithMinimumWorksOnEx
 }
 
 TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalWithMaximumWorksOnExample1) {
-    ValuesForTest values{5, 9, 4, 8, 6, 1, 4, 2, 10};
-    RangeQueryForTest maximumRangeQuery(values, maximumFunction);
+    ValuesForTest const values{5, 9, 4, 8, 6, 1, 4, 2, 10};
+    RangeQueryForTest const maximumRangeQuery(values, maximumFunction);
 
     EXPECT_EQ(5, maximumRangeQuery.getValueOnInterval(0, 0));
     EXPECT_EQ(9, maximumRangeQuery.getValueOnInterval(0, 1));
@@ -84,8 +84,8 @@ TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalWithMaximumWorksOnEx
 }
 
 TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalWithSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
-    RangeQueryForTest sumRangeQuery(values, plusFunction);
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    RangeQueryForTest const sumRangeQuery(values, plusFunction);
 
     EXPECT_EQ(1, sumRangeQuery.getValueOnInterval(0, 0));
     EXPECT_EQ(4, sumRangeQuery.getValueOnInterval(0, 1));
@@ -104,8 +104,8 @@ TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalWithSumWorksOnExampl
 }
 
 TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalFromTopToBottomWithMinimumWorksOnExample1) {
-    ValuesForTest values{5, 9, 4, 8, 6, 1, 4, 2, 0};
-    RangeQueryForTest minimumRangeQuery(values, minimumFunction);
+    ValuesForTest const values{5, 9, 4, 8, 6, 1, 4, 2, 0};
+    RangeQueryForTest const minimumRangeQuery(values, minimumFunction);
 
     EXPECT_EQ(5, minimumRangeQuery.getValueOnIntervalFromTopToBottom(0, 0));
     EXPECT_EQ(5, minimumRangeQuery.getValueOnIntervalFromTopToBottom(0, 1));
@@ -122,8 +122,8 @@ TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalFromTopToBottomWithM
 }
 
 TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalFromTopToBottomWithMaximumWorksOnExample1) {
-    ValuesForTest values{5, 9, 4, 8, 6, 1, 4, 2, 10};
-    RangeQueryForTest maximumRangeQuery(values, maximumFunction);
+    ValuesForTest const values{5, 9, 4, 8, 6, 1, 4, 2, 10};
+    RangeQueryForTest const maximumRangeQuery(values, maximumFunction);
 
     EXPECT_EQ(5, maximumRangeQuery.getValueOnIntervalFromTopToBottom(0, 0));
     EXPECT_EQ(9, maximumRangeQuery.getValueOnIntervalFromTopToBottom(0, 1));
@@ -140,8 +140,8 @@ TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalFromTopToBottomWithM
 }
 
 TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalFromTopToBottomWithSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
-    RangeQueryForTest sumRangeQuery(values, plusFunction);
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    RangeQueryForTest const sumRangeQuery(values, plusFunction);
 
     EXPECT_EQ(1, sumRangeQuery.getValueOnIntervalFromTopToBottom(0, 0));
     EXPECT_EQ(4, sumRangeQuery.getValueOnIntervalFromTopToBottom(0, 1));
@@ -160,7 +160,7 @@ TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalFromTopToBottomWithS
 }
 
 TEST(RangeQueryWithStaticSegmentTreeTest, ChangeValueAtIndexWithSumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
+    ValuesForTest const values;
     RangeQueryForTest sumRangeQuery(values, plusFunction);
 
     sumRangeQuery.changeValueAtIndex(0, 0);
@@ -169,7 +169,7 @@ TEST(RangeQueryWithStaticSegmentTreeTest, ChangeValueAtIndexWithSumWorksWithEmpt
 }
 
 TEST(RangeQueryWithStaticSegmentTreeTest, ChangeValueAtIndexWithSumWorksWithOneValue) {
-    ValuesForTest values{5};
+    ValuesForTest const values{5};
     RangeQueryForTest sumRangeQuery(values, plusFunction);
 
     sumRangeQuery.changeValueAtIndex(0, 3);
@@ -178,7 +178,7 @@ TEST(RangeQueryWithStaticSegmentTreeTest, ChangeValueAtIndexWithSumWorksWithOneV
 }
 
 TEST(RangeQueryWithStaticSegmentTreeTest, ChangeValueAtIndexWithSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
     RangeQueryForTest sumRangeQuery(values, plusFunction);
 
     sumRangeQuery.changeValueAtIndex(3, 3);
@@ -200,7 +200,7 @@ TEST(RangeQueryWithStaticSegmentTreeTest, ChangeValueAtIndexWithSumWorksOnExampl
 }
 
 TEST(RangeQueryWithStaticSegmentTreeTest, ChangeValueAtIndexWithSumWorksOnExample2) {
-    ValuesForTest values{1, 0, 0, 1, 1, 0, 1};
+    ValuesForTest const values{1, 0, 0, 1, 1, 0, 1};
     RangeQueryForTest sumRangeQuery(values, plusFunction);
 
     sumRangeQuery.changeValueAtIndex(6, 0);
@@ -217,8 +217,8 @@ TEST(RangeQueryWithStaticSegmentTreeTest, ChangeValueAtIndexWithSumWorksOnExampl
 }
 
 TEST(RangeQueryWithStaticSegmentTreeTest, GetIndexWithTargetValueWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
-    RangeQueryForTest sumRangeQuery(values, plusFunction);
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    RangeQueryForTest const sumRangeQuery(values, plusFunction);
 
     EXPECT_EQ(-1, sumRangeQuery.getIndexWithTargetValue(0, 0, minusFunction));
     EXPECT_EQ(0, sumRangeQuery.getIndexWithTargetValue(0, 1, minusFunction));
@@ -229,15 +229,15 @@ TEST(RangeQueryWithStaticSegmentTreeTest, GetIndexWithTargetValueWorksOnExample1
 }
 
 TEST(RangeQueryWithStaticSegmentTreeTest, GetIndexWithTargetValueWorksOnExample2) {
-    ValuesForTest values{1, 0, 1, 0, 1, 1, 0, 0, 1};
-    RangeQueryForTest sumRangeQuery(values, plusFunction);
+    ValuesForTest const values{1, 0, 1, 0, 1, 1, 0, 0, 1};
+    RangeQueryForTest const sumRangeQuery(values, plusFunction);
 
     EXPECT_EQ(8, sumRangeQuery.getIndexWithTargetValue(2, 4, minusFunction));
 }
 
 TEST(RangeQueryWithStaticSegmentTreeTest, GetIndexWithTargetValueWorksOnExample3) {
-    ValuesForTest values{1, 0, 0, 1, 1, 0, 0};
-    RangeQueryForTest sumRangeQuery(values, plusFunction);
+    ValuesForTest const values{1, 0, 0, 1, 1, 0, 0};
+    RangeQueryForTest const sumRangeQuery(values, plusFunction);
 
     EXPECT_EQ(4, sumRangeQuery.getIndexWithTargetValue(0, 3, minusFunction));
 }

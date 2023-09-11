@@ -32,7 +32,7 @@ public:
 
     Value getNearestValue(Value const& target) {
         Value result{};
-        Index selectedIndex(getIndexOfNearestValue(target));
+        Index const selectedIndex(getIndexOfNearestValue(target));
         if (selectedIndex != INVALID_INDEX) {
             result = m_sortedValues[selectedIndex];
         }

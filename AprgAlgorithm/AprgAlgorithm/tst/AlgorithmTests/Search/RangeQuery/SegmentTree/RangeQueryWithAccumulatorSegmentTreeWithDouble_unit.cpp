@@ -15,14 +15,14 @@ RangeQueryForTest::Function dividesFunction = divides<>();
 }  // namespace
 
 TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, GetValueOnIntervalWithGeometricSumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
+    ValuesForTest const values;
     RangeQueryForTest geometricSumRangeQuery(values, multipliesFunction, dividesFunction, 1);
 
     EXPECT_DOUBLE_EQ(0, geometricSumRangeQuery.getValueOnInterval(0, 0));
 }
 
 TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, GetValueOnIntervalWithGeometricSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
     RangeQueryForTest geometricSumRangeQuery(values, multipliesFunction, dividesFunction, 1);
 
     EXPECT_DOUBLE_EQ(1, geometricSumRangeQuery.getValueOnInterval(0, 0));
@@ -42,7 +42,7 @@ TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, GetValueOnIntervalWithGeometr
 }
 
 TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, IncreaseAtRangeWithGeometricSumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
+    ValuesForTest const values;
     RangeQueryForTest geometricSumRangeQuery(values, multipliesFunction, dividesFunction, 1);
 
     geometricSumRangeQuery.increaseAtRange(0, 5, 4);
@@ -51,7 +51,7 @@ TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, IncreaseAtRangeWithGeometricS
 }
 
 TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, IncreaseAtRangeWithGeometricSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
     RangeQueryForTest geometricSumRangeQuery(values, multipliesFunction, dividesFunction, 1);
 
     geometricSumRangeQuery.increaseAtRange(0, 5, 4);
@@ -74,7 +74,7 @@ TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, IncreaseAtRangeWithGeometricS
 }
 
 TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, ChangeValueAtIndexWithGeometricSumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
+    ValuesForTest const values;
     RangeQueryForTest geometricSumRangeQuery(values, multipliesFunction, dividesFunction, 1);
 
     geometricSumRangeQuery.changeValueAtIndex(3, 3);
@@ -83,7 +83,7 @@ TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, ChangeValueAtIndexWithGeometr
 }
 
 TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, ChangeValueAtIndexWithGeometricSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
     RangeQueryForTest geometricSumRangeQuery(values, multipliesFunction, dividesFunction, 1);
 
     geometricSumRangeQuery.changeValueAtIndex(3, 3);

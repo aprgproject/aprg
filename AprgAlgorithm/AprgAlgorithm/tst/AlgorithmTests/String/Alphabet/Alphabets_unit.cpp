@@ -55,13 +55,13 @@ TEST(AlphabetsTest, GetRadixWorks) {
 TEST(AlphabetsTest, ConvertStringToDigitValuesWorks) {
     AlphabetForTest alphabet("ABCDEF");
 
-    AlphabetForTest::DigitValues values{1, 1, 0, 0, 5, 3, 3, 0, 4};
+    AlphabetForTest::DigitValues const values{1, 1, 0, 0, 5, 3, 3, 0, 4};
     EXPECT_EQ(values, alphabet.convertStringToDigitValues("BBAGFDDGE"));
 }
 
 TEST(AlphabetsTest, ConvertDigitValuesToStringWorks) {
     AlphabetForTest alphabet("ABCDEF");
-    AlphabetForTest::DigitValues values{1, 1, 0, 5, 3, 4};
+    AlphabetForTest::DigitValues const values{1, 1, 0, 5, 3, 4};
 
     EXPECT_EQ("BBAFDE", alphabet.convertDigitValuesToString(values));
 }

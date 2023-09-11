@@ -46,8 +46,8 @@ TEST(BinaryNearestValueSearchWithRecursionTest, GetIndexOfNearestValueWorksWhenT
 }
 
 TEST(BinaryNearestValueSearchWithRecursionTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
-    ValuesForTest duplicateValues{0, 0, 0, 0, 0};
-    SearchForTest search(duplicateValues);
+    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
+    SearchForTest const search(duplicateValues);
 
     EXPECT_EQ(3, search.getIndexOfNearestValue(33));
 }
@@ -67,8 +67,8 @@ TEST(BinaryNearestValueSearchWithRecursionTest, GetIndexOfNearestValueWorksWhenN
 TEST(
     BinaryNearestValueSearchWithRecursionTest,
     GetIndexOfNearestValueWorksWithIndexesWhenDistanceFromLowerToHigherIsOne) {
-    ValuesForTest sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
-    SearchForTest search(sortedValues);
+    ValuesForTest const sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
+    SearchForTest const search(sortedValues);
 
     EXPECT_EQ(5, search.getIndexOfNearestValue(5, 6, 33));
 }
@@ -76,8 +76,8 @@ TEST(
 TEST(
     BinaryNearestValueSearchWithRecursionTest,
     GetIndexOfNearestValueWorksWithIndexesWhenDistanceFromLowerToHigherIsTwo) {
-    ValuesForTest sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
-    SearchForTest search(sortedValues);
+    ValuesForTest const sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
+    SearchForTest const search(sortedValues);
 
     EXPECT_EQ(4, search.getIndexOfNearestValue(3, 5, 33));
 }
@@ -85,8 +85,8 @@ TEST(
 TEST(
     BinaryNearestValueSearchWithRecursionTest,
     GetIndexOfNearestValueWorksWithndexesWhenDistanceFromLowerToHigherIsOdd) {
-    ValuesForTest sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
-    SearchForTest search(sortedValues);
+    ValuesForTest const sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
+    SearchForTest const search(sortedValues);
 
     EXPECT_EQ(4, search.getIndexOfNearestValue(1, 8, 33));
 }

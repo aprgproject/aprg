@@ -32,7 +32,7 @@ void putConnectionsForTest(EdgeWeightedDirectedGraphForTest& graph) {
 TEST(PathSearchUsingDfsWithDistanceSumTest, GetDistanceToWorksWithDirectedGraph) {
     EdgeWeightedDirectedGraphForTest graph;
     putConnectionsForTest(graph);
-    PathSearchForTest pathSearch(graph, {0});
+    PathSearchForTest const pathSearch(graph, {0});
 
     EXPECT_DOUBLE_EQ(0, pathSearch.getDistanceTo(0));
     EXPECT_DOUBLE_EQ(0.05, pathSearch.getDistanceTo(1));
@@ -46,9 +46,9 @@ TEST(PathSearchUsingDfsWithDistanceSumTest, GetDistanceToWorksWithDirectedGraph)
 TEST(PathSearchUsingDfsWithDistanceSumTest, GetEndVertexToDistanceSumMapWorksWithDirectedGraph) {
     EdgeWeightedDirectedGraphForTest graph;
     putConnectionsForTest(graph);
-    PathSearchForTest pathSearch(graph, {0});
+    PathSearchForTest const pathSearch(graph, {0});
 
-    ContentMapForTest expectedMap{{0, 0.0}, {1, 0.05}, {2, 0.25}, {3, 0.5}, {4, 0.85}, {5, 0.9}};
+    ContentMapForTest const expectedMap{{0, 0.0}, {1, 0.05}, {2, 0.25}, {3, 0.5}, {4, 0.85}, {5, 0.9}};
     EXPECT_EQ(expectedMap, pathSearch.getEndVertexToDistanceSumMap());
 }
 

@@ -162,7 +162,7 @@ private:
                     searchDetails.nearestPoint = currentPoint;
                     searchDetails.nearestDistance = currentDistance;
                 }
-                SearchAction searchAction(getSearchAction(nodePointer, searchDetails.pointToCheck, depth));
+                SearchAction const searchAction(getSearchAction(nodePointer, searchDetails.pointToCheck, depth));
                 if (SearchAction::GoToLeftChild == searchAction || SearchAction::GoToBoth == searchAction) {
                     searchNearestPoint(nodePointer->left, searchDetails);
                 }

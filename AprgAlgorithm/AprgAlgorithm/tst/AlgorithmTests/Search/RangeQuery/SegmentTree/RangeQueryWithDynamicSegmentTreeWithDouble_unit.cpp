@@ -14,15 +14,15 @@ RangeQueryForTest::Function multipliesFunction = multiplies<>();
 }  // namespace
 
 TEST(RangeQueryWithDynamicSegmentTreeTest, GetValueOnIntervalWithGeometricSumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
-    RangeQueryForTest geometricSumRangeQuery(values, multipliesFunction);
+    ValuesForTest const values;
+    RangeQueryForTest const geometricSumRangeQuery(values, multipliesFunction);
 
     EXPECT_DOUBLE_EQ(0, geometricSumRangeQuery.getValueOnInterval(0, 0));
 }
 
 TEST(RangeQueryWithDynamicSegmentTreeTest, GetValueOnIntervalWithGeometricSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
-    RangeQueryForTest geometricSumRangeQuery(values, multipliesFunction);
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    RangeQueryForTest const geometricSumRangeQuery(values, multipliesFunction);
 
     EXPECT_DOUBLE_EQ(1, geometricSumRangeQuery.getValueOnInterval(0, 0));
     EXPECT_DOUBLE_EQ(3, geometricSumRangeQuery.getValueOnInterval(0, 1));
@@ -41,7 +41,7 @@ TEST(RangeQueryWithDynamicSegmentTreeTest, GetValueOnIntervalWithGeometricSumWor
 }
 
 TEST(RangeQueryWithDynamicSegmentTreeTest, ChangeValueAtIndexWithGeometricSumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
+    ValuesForTest const values;
     RangeQueryForTest geometricSumRangeQuery(values, multipliesFunction);
 
     geometricSumRangeQuery.changeValueAtIndex(3, 3);
@@ -50,7 +50,7 @@ TEST(RangeQueryWithDynamicSegmentTreeTest, ChangeValueAtIndexWithGeometricSumWor
 }
 
 TEST(RangeQueryWithDynamicSegmentTreeTest, ChangeValueAtIndexWithGeometricSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
     RangeQueryForTest geometricSumRangeQuery(values, multipliesFunction);
 
     geometricSumRangeQuery.changeValueAtIndex(3, 3);

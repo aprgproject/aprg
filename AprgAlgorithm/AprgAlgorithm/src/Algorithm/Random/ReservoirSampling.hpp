@@ -25,7 +25,7 @@ public:
         AlbaUniformNonDeterministicRandomizer<int> randomizer;
         for (; i < sizeOfStream; ++i) {
             randomizer.setMinimumAndMaximum(0, i);
-            int randomIndex = randomizer.getRandomValue();
+            int const randomIndex = randomizer.getRandomValue();
             if (randomIndex < numberOfSamples) {
                 reservoir[randomIndex] = stream[i];
             }

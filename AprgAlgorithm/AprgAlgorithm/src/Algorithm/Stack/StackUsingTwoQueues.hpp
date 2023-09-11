@@ -37,8 +37,8 @@ private:
 
     void balanceSizesAtPushIfNeeded() {
         // remove items to make the size logarithmic
-        int targetSizeAtTop = getTargetSizeAtTop(getSize());
-        int limitSizeAtTop = targetSizeAtTop * 2;
+        int const targetSizeAtTop = getTargetSizeAtTop(getSize());
+        int const limitSizeAtTop = targetSizeAtTop * 2;
         if (m_queueAtTheTop.getSize() > limitSizeAtTop) {
             // put all at the bottom
             while (!m_queueAtTheTop.isEmpty()) {
@@ -52,7 +52,7 @@ private:
     void balanceSizesAtPopIfNeeded() {
         // add items to make size logarithmic
         if (m_queueAtTheTop.isEmpty()) {
-            int targetSizeAtTop = getTargetSizeAtTop(m_queueAtTheBottom.getSize());
+            int const targetSizeAtTop = getTargetSizeAtTop(m_queueAtTheBottom.getSize());
             moveFromBottomToTop(targetSizeAtTop);
         }
     }

@@ -27,7 +27,7 @@ TEST(TernarySearchTrieSymbolTableTest, GetAllKeysThatMatchWorks) { testGetAllKey
 TEST(TernarySearchTrieSymbolTableTest, Example1Works) { testExample1WithInt<TrieForTest>(); }
 
 TEST(TernarySearchTrieSymbolTableTest, GetNumberOfNodesWorksWhenEmpty) {
-    TrieForTest trie;
+    TrieForTest const trie;
 
     EXPECT_EQ(0, trie.getNumberOfNodes());
 }

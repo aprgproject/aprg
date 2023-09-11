@@ -54,7 +54,7 @@ public:
 
     void deleteObjectAt(int const objectIndex) {
         if (objectIndex < static_cast<int>(m_objects.size())) {
-            int treeIndex(m_objectIndexToTreeIndex[objectIndex]);
+            int const treeIndex(m_objectIndexToTreeIndex[objectIndex]);
             if (treeIndex != IndexedBinaryHeapPriorityQueueConstants::VALUE_FOR_UNUSED_INDEX) {
                 swapIndexes(treeIndex, m_size--);
                 swim(treeIndex);
@@ -89,7 +89,7 @@ public:
         Object topObject{};
         if (!isEmpty()) {
             topObject = getTopObject();
-            int objectIndexOfTopObject = getIndexOfTopObject();
+            int const objectIndexOfTopObject = getIndexOfTopObject();
             swapIndexes(IndexedBinaryHeapPriorityQueueConstants::INDEX_OF_TOP_TREE, m_size--);
             sink(IndexedBinaryHeapPriorityQueueConstants::INDEX_OF_TOP_TREE);
             m_objectIndexToTreeIndex[objectIndexOfTopObject] =

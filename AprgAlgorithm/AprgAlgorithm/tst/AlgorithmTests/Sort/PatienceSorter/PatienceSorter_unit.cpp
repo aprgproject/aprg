@@ -27,48 +27,48 @@ using StabilityCheckObjectsSorter = PatienceSorter<StabilityCheckObjects>;
 }  // namespace
 
 TEST(PatienceSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(PatienceSorterTest, SortWorksOnCharactersUsingOneValueExample) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(PatienceSorterTest, SortWorksOnCharactersUsingExample1) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(PatienceSorterTest, SortWorksOnCharactersUsingExample2) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingExample2WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(PatienceSorterTest, SortWorksOnListOfCharactersUsingExample1) {
-    ListOfCharactersSorter sorter;
+    ListOfCharactersSorter const sorter;
     testSortUsingExample1WithCharacters<ListOfCharactersSorter, ListOfCharacters>(sorter);
 }
 
 TEST(PatienceSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
-    IntegersSorter sorter;
+    IntegersSorter const sorter;
     testSortUsingExample1WithPositiveAndNegativeIntegers<IntegersSorter, Integers>(sorter);
 }
 
 TEST(PatienceSorterTest, SortWorksOnDoublesUsingExample1) {
-    DoublesSorter sorter;
+    DoublesSorter const sorter;
     testSortUsingExample1WithDoubleValues<DoublesSorter, Doubles>(sorter);
 }
 
 TEST(PatienceSorterTest, SortWorksOnStringsUsingExample1) {
-    StringsSorter sorter;
+    StringsSorter const sorter;
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);
 }
 
 TEST(PatienceSorterTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1) {
     // not stable because of priority queue underneath
-    StabilityCheckObjectsSorter sorter;
+    StabilityCheckObjectsSorter const sorter;
     testSortAsNotStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(
         sorter);
 }

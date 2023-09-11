@@ -25,10 +25,10 @@ TEST(NodeDisjointPathCoverTest, GetNodeDisjointPathCoverWorksOnExample1) {
     graph.connect(5, 6);
     graph.connect(6, 3);
     graph.connect(6, 7);
-    NodeDisjointPathCoverForTest nodeDisjointPathCover(graph);
+    NodeDisjointPathCoverForTest const nodeDisjointPathCover(graph);
 
-    Paths expectedPaths{{1, 5}, {2, 6, 3, 4}, {7}};
-    Edges expectedEdges{{1, 5}, {2, 6}, {3, 4}, {6, 3}};
+    Paths const expectedPaths{{1, 5}, {2, 6, 3, 4}, {7}};
+    Edges const expectedEdges{{1, 5}, {2, 6}, {3, 4}, {6, 3}};
     EXPECT_EQ(expectedPaths, nodeDisjointPathCover.getNodeDisjointPathCover(newSourceVertex, newSinkVertex));
     EXPECT_EQ(expectedEdges, nodeDisjointPathCover.getEdgesOfNodeDisjointPathCover(newSourceVertex, newSinkVertex));
 }
@@ -49,10 +49,10 @@ TEST(NodeDisjointPathCoverTest, GetNodeDisjointPathCoverWorksOnExample2) {
     graph.connect(3, 7);
     graph.connect(4, 5);
     graph.connect(7, 5);
-    NodeDisjointPathCoverForTest nodeDisjointPathCover(graph);
+    NodeDisjointPathCoverForTest const nodeDisjointPathCover(graph);
 
-    Paths expectedPaths{{2, 1, 4, 5}, {3, 6}, {7}};
-    Edges expectedEdges{{1, 4}, {2, 1}, {3, 6}, {4, 5}};
+    Paths const expectedPaths{{2, 1, 4, 5}, {3, 6}, {7}};
+    Edges const expectedEdges{{1, 4}, {2, 1}, {3, 6}, {4, 5}};
     EXPECT_EQ(expectedPaths, nodeDisjointPathCover.getNodeDisjointPathCover(newSourceVertex, newSinkVertex));
     EXPECT_EQ(expectedEdges, nodeDisjointPathCover.getEdgesOfNodeDisjointPathCover(newSourceVertex, newSinkVertex));
 }

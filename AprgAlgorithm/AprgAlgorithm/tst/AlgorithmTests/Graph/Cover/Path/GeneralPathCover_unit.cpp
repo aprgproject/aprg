@@ -25,10 +25,10 @@ TEST(GeneralPathCoverTest, GetGeneralPathCoverWorksOnExample1) {
     graph.connect(5, 6);
     graph.connect(6, 3);
     graph.connect(6, 7);
-    GeneralPathCoverForTest generalPathCover(graph);
+    GeneralPathCoverForTest const generalPathCover(graph);
 
-    Paths expectedPaths{{1, 5, 6, 7}, {2, 6, 3, 4}};
-    VertexPairs expectedVertexPairs{{1, 5}, {2, 3}, {3, 4}, {5, 6}, {6, 7}};
+    Paths const expectedPaths{{1, 5, 6, 7}, {2, 6, 3, 4}};
+    VertexPairs const expectedVertexPairs{{1, 5}, {2, 3}, {3, 4}, {5, 6}, {6, 7}};
     EXPECT_EQ(
         expectedVertexPairs, generalPathCover.getConnectedVerticesOfGeneralPathCover(newSourceVertex, newSinkVertex));
     EXPECT_EQ(expectedPaths, generalPathCover.getGeneralPathCover(newSourceVertex, newSinkVertex));
@@ -42,7 +42,7 @@ TEST(GeneralPathCoverTest, GetSizeOfMaximumAntichainOnExample1) {
     graph.connect(5, 6);
     graph.connect(6, 3);
     graph.connect(6, 7);
-    GeneralPathCoverForTest generalPathCover(graph);
+    GeneralPathCoverForTest const generalPathCover(graph);
 
     EXPECT_EQ(2, generalPathCover.getSizeOfMaximumAntichain(newSourceVertex, newSinkVertex));
 }

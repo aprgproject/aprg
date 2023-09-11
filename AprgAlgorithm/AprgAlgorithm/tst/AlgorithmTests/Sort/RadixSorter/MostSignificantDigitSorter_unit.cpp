@@ -64,75 +64,76 @@ StabilityCheckObjectsSorter::IsDigitFunction isNibbleDigitInvalidForStabilityChe
 }  // namespace
 
 TEST(MostSignificantDigitSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
-    CharactersSorter sorter(getNibbleAtForCharacter, isNibbleDigitInvalidForCharacter);
+    CharactersSorter const sorter(getNibbleAtForCharacter, isNibbleDigitInvalidForCharacter);
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(MostSignificantDigitSorterTest, SortWorksOnCharactersUsingOneValueExample) {
-    CharactersSorter sorter(getNibbleAtForCharacter, isNibbleDigitInvalidForCharacter);
+    CharactersSorter const sorter(getNibbleAtForCharacter, isNibbleDigitInvalidForCharacter);
     testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(MostSignificantDigitSorterTest, SortWorksOnCharactersUsingExample1) {
-    CharactersSorter sorter(getNibbleAtForCharacter, isNibbleDigitInvalidForCharacter);
+    CharactersSorter const sorter(getNibbleAtForCharacter, isNibbleDigitInvalidForCharacter);
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(MostSignificantDigitSorterTest, SortWorksOnCharactersUsingExample2) {
-    CharactersSorter sorter(getNibbleAtForCharacter, isNibbleDigitInvalidForCharacter);
+    CharactersSorter const sorter(getNibbleAtForCharacter, isNibbleDigitInvalidForCharacter);
     testSortUsingExample2WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 // CANNOT SORT STD::LIST
 TEST(MostSignificantDigitSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
-    SmallIntegerSorter sorter(getNibbleAtForSmallInteger, isNibbleDigitInvalidForSmallInteger);
+    SmallIntegerSorter const sorter(getNibbleAtForSmallInteger, isNibbleDigitInvalidForSmallInteger);
     testSortUsingExample1WithPositiveAndNegativeIntegers<SmallIntegerSorter, Integers>(sorter);
 }
 
 // CANNOT SORT DOUBLE VALUES
 TEST(MostSignificantDigitSorterTest, SortWorksOnStringsUsingExample1) {
-    StringsSorter sorter(getCharacterAtForString, isDigitInvalidForString);
+    StringsSorter const sorter(getCharacterAtForString, isDigitInvalidForString);
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);
 }
 
 TEST(MostSignificantDigitSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1) {
-    StabilityCheckObjectsSorter sorter(getNibbleAtForStabilityCheckObject, isNibbleDigitInvalidForStabilityCheckObject);
+    StabilityCheckObjectsSorter const sorter(
+        getNibbleAtForStabilityCheckObject, isNibbleDigitInvalidForStabilityCheckObject);
     testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(sorter);
 }
 
 TEST(MostSignificantDigitSorterTest, SortStartingAtMostSignificantDigitWorksWithDigitThatExistsInAllStrings) {
-    StringsSorter sorter(getCharacterAtForString, isDigitInvalidForString);
+    StringsSorter const sorter(getCharacterAtForString, isDigitInvalidForString);
     Strings stringsToTest{"spongebob", "patrick", "mr. crabs", "squidward", "sandy",
                           "ms. puff",  "pearl",   "larry",     "plankton"};
 
     sorter.sortStartingAtMostSignificantDigit(stringsToTest, 2, 5, 1);
 
-    Strings expectedStrings{"spongebob", "patrick", "sandy", "squidward", "mr. crabs",
-                            "ms. puff",  "pearl",   "larry", "plankton"};
+    Strings const expectedStrings{"spongebob", "patrick", "sandy", "squidward", "mr. crabs",
+                                  "ms. puff",  "pearl",   "larry", "plankton"};
     EXPECT_EQ(expectedStrings, stringsToTest);
 }
 
 TEST(MostSignificantDigitSorterTest, SortStartingAtMostSignificantDigitWorksWithDigitThatExistsInSomeOfTheStrings) {
-    StringsSorter sorter(getCharacterAtForString, isDigitInvalidForString);
+    StringsSorter const sorter(getCharacterAtForString, isDigitInvalidForString);
     Strings stringsToTest{"spongebob", "patrick", "mr. crabs", "squidward", "sandy",
                           "ms. puff",  "pearl",   "larry",     "plankton"};
 
     sorter.sortStartingAtMostSignificantDigit(stringsToTest, 2, 5, 6);
 
-    Strings expectedStrings{"spongebob", "patrick", "sandy", "mr. crabs", "squidward",
-                            "ms. puff",  "pearl",   "larry", "plankton"};
+    Strings const expectedStrings{"spongebob", "patrick", "sandy", "mr. crabs", "squidward",
+                                  "ms. puff",  "pearl",   "larry", "plankton"};
     EXPECT_EQ(expectedStrings, stringsToTest);
 }
 
 TEST(MostSignificantDigitSorterTest, SortStartingAtMostSignificantDigitWorksWithDigitThatDoesNotExistInOfTheStrings) {
-    StringsSorter sorter(getCharacterAtForString, isDigitInvalidForString);
+    StringsSorter const sorter(getCharacterAtForString, isDigitInvalidForString);
     Strings stringsToTest{"spongebob", "patrick", "mr. crabs", "squidward", "sandy",
                           "ms. puff",  "pearl",   "larry",     "plankton"};
 
     sorter.sortStartingAtMostSignificantDigit(stringsToTest, 2, 5, 9);
 
-    Strings expectedStrings{"spongebob", "patrick", "mr. crabs", "squidward", "sandy",
-                            "ms. puff",  "pearl",   "larry",     "plankton"};
+    Strings const expectedStrings{"spongebob", "patrick", "mr. crabs", "squidward", "sandy",
+                                  "ms. puff",  "pearl",   "larry",     "plankton"};
     EXPECT_EQ(expectedStrings, stringsToTest);
 }
 

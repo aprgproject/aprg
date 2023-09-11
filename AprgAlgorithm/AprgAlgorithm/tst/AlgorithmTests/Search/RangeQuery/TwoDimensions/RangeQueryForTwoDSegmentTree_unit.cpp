@@ -15,8 +15,8 @@ Function plusFunction = plus<>();
 }  // namespace
 
 TEST(RangeQueryForTwoDSegmentTreeTest, GetValueOn2DIntervalWorksOnExample1) {
-    ValueMatrixForTest valueMatrix(4, 4, {7, 6, 1, 6, 8, 7, 5, 2, 3, 9, 7, 1, 8, 5, 3, 8});
-    RangeQueryForTest sumRangeQuery(valueMatrix, plusFunction);
+    ValueMatrixForTest const valueMatrix(4, 4, {7, 6, 1, 6, 8, 7, 5, 2, 3, 9, 7, 1, 8, 5, 3, 8});
+    RangeQueryForTest const sumRangeQuery(valueMatrix, plusFunction);
 
     // starts with (0,0)
     EXPECT_EQ(7, sumRangeQuery.getValueOn2DInterval(0, 0, 0, 0));
@@ -44,7 +44,7 @@ TEST(RangeQueryForTwoDSegmentTreeTest, GetValueOn2DIntervalWorksOnExample1) {
 }
 
 TEST(RangeQueryForTwoDSegmentTreeTest, ChangeValueAtWorksOnExample1) {
-    ValueMatrixForTest valueMatrix(4, 4, {7, 6, 1, 6, 8, 7, 5, 2, 3, 9, 7, 1, 8, 5, 3, 8});
+    ValueMatrixForTest const valueMatrix(4, 4, {7, 6, 1, 6, 8, 7, 5, 2, 3, 9, 7, 1, 8, 5, 3, 8});
     RangeQueryForTest sumRangeQuery(valueMatrix, plusFunction);
 
     sumRangeQuery.changeValueAt(0, 0, 14);

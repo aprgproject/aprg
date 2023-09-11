@@ -32,7 +32,7 @@ TEST(NearestPointPairSearchUsingSweepLineTest, GetNearestPointPairWorks) {
 
     auto pointPairToVerify(search.getNearestPointPair());
 
-    PointPairForTest pointPairToExpect{{-1, 3}, {-2, 2}};
+    PointPairForTest const pointPairToExpect{{-1, 3}, {-2, 2}};
     EXPECT_EQ(pointPairToExpect, pointPairToVerify);
 }
 

@@ -19,7 +19,7 @@ public:
     BaseTernarySearchTrie() : m_root(nullptr) {}
 
     [[nodiscard]] Key getLongestPrefixOf(Key const& keyToCheck) const override {
-        int longestPrefixLength(getLengthOfLongestPrefixStartingOnThisNode(m_root, keyToCheck, 0));
+        int const longestPrefixLength(getLengthOfLongestPrefixStartingOnThisNode(m_root, keyToCheck, 0));
         return keyToCheck.substr(0, longestPrefixLength);
     }
 
@@ -66,7 +66,7 @@ protected:
         NodeUniquePointer const& currentNodePointer, Key const& key, int const index) const {
         Node const* result(nullptr);
         if (currentNodePointer && index < static_cast<int>(key.length())) {
-            char c(key[index]);
+            char const c(key[index]);
             if (c < currentNodePointer->c) {
                 result = getStartingOnThisNode(currentNodePointer->left, key, index);  // search left
             } else if (c > currentNodePointer->c) {

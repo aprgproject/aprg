@@ -302,7 +302,7 @@ TEST(ExpressionEvaluatorConverterTest, PostfixInfixToConvertionWorks) {
     postfixEvaluator.addTerm(InfixEvaluatorForTest::Term("*", InfixEvaluatorForTest::Term::OperatorSyntaxType::Binary));
     postfixEvaluator.addTerm(InfixEvaluatorForTest::Term("+", InfixEvaluatorForTest::Term::OperatorSyntaxType::Binary));
 
-    InfixEvaluatorForTest infixEvaluator(EvaluatorConverterForTest::convertPostfixToInfix(postfixEvaluator));
+    InfixEvaluatorForTest const infixEvaluator(EvaluatorConverterForTest::convertPostfixToInfix(postfixEvaluator));
     InfixEvaluatorForTest::Terms terms(infixEvaluator.getTerms());
 
     //((5*4)*(3+2))+1

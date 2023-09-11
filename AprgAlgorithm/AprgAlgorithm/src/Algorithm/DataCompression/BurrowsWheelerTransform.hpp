@@ -21,7 +21,7 @@ public:
         std::string wholeInputString(reader.readWholeStreamAsStringData());
         wholeInputString += END_CHARACTER;  // put end character for decoding
         std::string stringOutput;
-        SuffixArray<Index> suffixArray(wholeInputString);
+        SuffixArray<Index> const suffixArray(wholeInputString);
         for (Index i = 0; i < static_cast<Index>(suffixArray.getSize()); ++i) {
             Index deltaLength(wholeInputString.length() - suffixArray.getSuffixViewAt(i).length());
             if (deltaLength > 0) {
@@ -39,7 +39,7 @@ public:
         AlbaStreamBitReader reader(input);
         AlbaStreamBitWriter writer(output);
 
-        std::string wholeInputString(reader.readWholeStreamAsStringData());
+        std::string const wholeInputString(reader.readWholeStreamAsStringData());
         if (!wholeInputString.empty()) {
             alba::stringHelper::strings prefix;
             for (char const c : wholeInputString) {

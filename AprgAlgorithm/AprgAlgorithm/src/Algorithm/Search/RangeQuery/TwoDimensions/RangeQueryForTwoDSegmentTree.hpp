@@ -65,7 +65,7 @@ private:
             Values newValues;
             Values const& treeValues1(tree1.getTreeValues());
             Values const& treeValues2(tree2.getTreeValues());
-            Index estimatedSize = std::min(
+            Index const estimatedSize = std::min(
                 treeValues1.size() - tree1.getStartOfChildren(), treeValues2.size() - tree2.getStartOfChildren());
             newValues.reserve(estimatedSize);
             for (Index i1 = tree1.getStartOfChildren(), i2 = tree2.getStartOfChildren();

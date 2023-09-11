@@ -23,7 +23,7 @@ public:
 private:
     void sort(Values& valuesToSort, int const lowIndex, int const highIndex) const {
         if (lowIndex < highIndex) {
-            int indexWithPivotValue = getPivotIndex(valuesToSort, lowIndex, highIndex, m_pivotType);
+            int const indexWithPivotValue = getPivotIndex(valuesToSort, lowIndex, highIndex, m_pivotType);
             auto pivotValue = valuesToSort[indexWithPivotValue];
 
             int boundaryIndexForLessThan = lowIndex;

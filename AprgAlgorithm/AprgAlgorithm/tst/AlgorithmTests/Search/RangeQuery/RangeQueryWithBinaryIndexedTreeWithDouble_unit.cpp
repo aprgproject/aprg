@@ -15,15 +15,15 @@ RangeQueryForTest::AccumulatorFunction dividesAccumulator = divides<>();
 }  // namespace
 
 TEST(RangeQueryWithBinaryIndexedTreeTest, GetAccumulatedValueOnIntervalWithGeometricSumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
-    RangeQueryForTest geometricSumRangeQuery(values, multipliesAccumulator, dividesAccumulator);
+    ValuesForTest const values;
+    RangeQueryForTest const geometricSumRangeQuery(values, multipliesAccumulator, dividesAccumulator);
 
     EXPECT_DOUBLE_EQ(0, geometricSumRangeQuery.getAccumulatedValueOnInterval(0, 0));
 }
 
 TEST(RangeQueryWithBinaryIndexedTreeTest, GetAccumulatedValueOnIntervalWithGeometricSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
-    RangeQueryForTest geometricSumRangeQuery(values, multipliesAccumulator, dividesAccumulator);
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    RangeQueryForTest const geometricSumRangeQuery(values, multipliesAccumulator, dividesAccumulator);
 
     EXPECT_DOUBLE_EQ(1, geometricSumRangeQuery.getAccumulatedValueOnInterval(0, 0));
     EXPECT_DOUBLE_EQ(3, geometricSumRangeQuery.getAccumulatedValueOnInterval(0, 1));
@@ -42,15 +42,15 @@ TEST(RangeQueryWithBinaryIndexedTreeTest, GetAccumulatedValueOnIntervalWithGeome
 }
 
 TEST(RangeQueryWithBinaryIndexedTreeTest, GetSumFrom0ToIndexWithGeometricSumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
-    RangeQueryForTest geometricSumRangeQuery(values, multipliesAccumulator, dividesAccumulator);
+    ValuesForTest const values;
+    RangeQueryForTest const geometricSumRangeQuery(values, multipliesAccumulator, dividesAccumulator);
 
     EXPECT_DOUBLE_EQ(0, geometricSumRangeQuery.getAccumulatedValueFrom0ToIndex(0));
 }
 
 TEST(RangeQueryWithBinaryIndexedTreeTest, GetSumFrom0ToIndexWithGeometricSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
-    RangeQueryForTest geometricSumRangeQuery(values, multipliesAccumulator, dividesAccumulator);
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    RangeQueryForTest const geometricSumRangeQuery(values, multipliesAccumulator, dividesAccumulator);
 
     EXPECT_DOUBLE_EQ(1, geometricSumRangeQuery.getAccumulatedValueFrom0ToIndex(0));
     EXPECT_DOUBLE_EQ(3, geometricSumRangeQuery.getAccumulatedValueFrom0ToIndex(1));
@@ -65,7 +65,7 @@ TEST(RangeQueryWithBinaryIndexedTreeTest, GetSumFrom0ToIndexWithGeometricSumWork
 }
 
 TEST(RangeQueryWithBinaryIndexedTreeTest, ChangeValueAtIndexWithGeometricSumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
+    ValuesForTest const values;
     RangeQueryForTest geometricSumRangeQuery(values, multipliesAccumulator, dividesAccumulator);
 
     geometricSumRangeQuery.changeValueAtIndex(0, 0);
@@ -74,7 +74,7 @@ TEST(RangeQueryWithBinaryIndexedTreeTest, ChangeValueAtIndexWithGeometricSumWork
 }
 
 TEST(RangeQueryWithBinaryIndexedTreeTest, ChangeValueAtIndexWithGeometricSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
     RangeQueryForTest geometricSumRangeQuery(values, multipliesAccumulator, dividesAccumulator);
 
     geometricSumRangeQuery.changeValueAtIndex(3, 3);

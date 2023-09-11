@@ -37,7 +37,7 @@ TEST(ConnectedComponentsUsingUnionFindTest, GetComponentIdWorks) {
     graph.connect(0, 3);
     graph.connect(4, 5);
     graph.connect(6, 7);
-    ConnectedComponentsForTest connectedComponents(graph);
+    ConnectedComponentsForTest const connectedComponents(graph);
 
     EXPECT_EQ(1, connectedComponents.getComponentId(0));
     EXPECT_EQ(1, connectedComponents.getComponentId(1));

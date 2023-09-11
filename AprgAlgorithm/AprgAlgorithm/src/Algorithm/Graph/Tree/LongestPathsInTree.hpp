@@ -68,7 +68,7 @@ private:
 
     void updateIfMaxDistance(
         Vertices& verticesWithMaxDistance, int& maxDistance, Dfs const& dfs, Vertex const& currentVertex) {
-        int currentDistance(dfs.getDistanceTo(currentVertex));
+        int const currentDistance(dfs.getDistanceTo(currentVertex));
         if (maxDistance < currentDistance) {
             verticesWithMaxDistance.clear();
             maxDistance = currentDistance;

@@ -23,43 +23,43 @@ using StabilityCheckObjectsSorter = QuickSorterForForwardList<StabilityCheckObje
 }  // namespace
 
 TEST(QuickSorterForForwardListTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(QuickSorterForForwardListTest, SortWorksOnCharactersUsingOneValueExample) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(QuickSorterForForwardListTest, SortWorksOnCharactersUsingExample1) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(QuickSorterForForwardListTest, SortWorksOnCharactersUsingExample2) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingExample2WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 // CANNOT SORT STD::LIST
 TEST(QuickSorterForForwardListTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
-    IntegersSorter sorter;
+    IntegersSorter const sorter;
     testSortUsingExample1WithPositiveAndNegativeIntegers<IntegersSorter, Integers>(sorter);
 }
 
 TEST(QuickSorterForForwardListTest, SortWorksOnDoublesUsingExample1) {
-    DoublesSorter sorter;
+    DoublesSorter const sorter;
     testSortUsingExample1WithDoubleValues<DoublesSorter, Doubles>(sorter);
 }
 
 TEST(QuickSorterForForwardListTest, SortWorksOnStringsUsingExample1) {
-    StringsSorter sorter;
+    StringsSorter const sorter;
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);
 }
 
 TEST(QuickSorterForForwardListTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1) {
-    StabilityCheckObjectsSorter sorter;
+    StabilityCheckObjectsSorter const sorter;
     testSortAsNotStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(
         sorter);
 }

@@ -44,7 +44,8 @@ private:
             Index lowIndex = 0;
             Index highIndex = sumOfPairOfValues.size() - 1;
             while (shouldContinue(lowIndex, highIndex)) {
-                Value currentSum(std::get<0>(sumOfPairOfValues[lowIndex]) + std::get<0>(sumOfPairOfValues[highIndex]));
+                Value const currentSum(
+                    std::get<0>(sumOfPairOfValues[lowIndex]) + std::get<0>(sumOfPairOfValues[highIndex]));
                 if (currentSum == targetSum) {
                     result = {sumOfPairOfValues[lowIndex], sumOfPairOfValues[highIndex]};
                     break;
@@ -61,7 +62,7 @@ private:
 
     [[nodiscard]] SumsOfPairOfValues getSumsOfPairOfValuesWithPossibleDuplicates() const {
         SumsOfPairOfValues result;
-        Index size = m_sortedValues.size();
+        Index const size = m_sortedValues.size();
         result.reserve(size * size);  // reserve this much
         for (Index i = 0; i < size; ++i) {
             for (Index j = i; j < size; ++j) {

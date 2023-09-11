@@ -21,7 +21,7 @@ TEST(ChildrenInTreeTest, GetChildrenWorks) {
     graph.connect(4, 3);
     graph.connect(4, 7);
     graph.connect(7, 8);
-    QueryForTest query(graph, 1);
+    QueryForTest const query(graph, 1);
 
     EXPECT_EQ((VerticesForTest{2, 4, 5}), query.getChildren(1));
     EXPECT_EQ((VerticesForTest{6}), query.getChildren(2));

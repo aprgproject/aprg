@@ -17,7 +17,7 @@ public:
     [[nodiscard]] bool hasACycle() const { return m_hasACycle; }
 
     void reinitializeStartingFrom(Vertex const& startOfGraph) {
-        int cycleLength(getCycleLength(startOfGraph));
+        int const cycleLength(getCycleLength(startOfGraph));
         m_hasACycle = cycleLength > 1;  // we dont consider self loops as cycles
         m_cyclePath.clear();
         if (m_hasACycle) {

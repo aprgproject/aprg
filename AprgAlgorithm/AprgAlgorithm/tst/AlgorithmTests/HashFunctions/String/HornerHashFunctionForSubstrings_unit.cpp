@@ -14,7 +14,7 @@ constexpr HashValue A_LARGE_PRIME = 1229952067;
 }  // namespace
 
 TEST(HornerHashFunctionForSubstringsTest, Example1Works) {
-    HashFunctionForTest hashFunction(RADIX, A_LARGE_PRIME, "ALLEY");
+    HashFunctionForTest const hashFunction(RADIX, A_LARGE_PRIME, "ALLEY");
 
     EXPECT_EQ(23869869ULL, hashFunction.getHashCodeOfWholeString());
 
@@ -34,7 +34,7 @@ TEST(HornerHashFunctionForSubstringsTest, Example1Works) {
 }
 
 TEST(HornerHashFunctionForSubstringsTest, Example2Works) {
-    HashFunctionForTest hashFunction(RADIX, A_LARGE_PRIME, "AACAA");
+    HashFunctionForTest const hashFunction(RADIX, A_LARGE_PRIME, "AACAA");
 
     EXPECT_EQ(1068681688ULL, hashFunction.getHashCodeOfWholeString());
 
@@ -47,7 +47,7 @@ TEST(HornerHashFunctionForSubstringsTest, Example2Works) {
 }
 
 TEST(HornerHashFunctionForSubstringsTest, Example3Works) {
-    HashFunctionForTest hashFunction(RADIX, A_LARGE_PRIME, "AABRAACADABRAACAADABRA");
+    HashFunctionForTest const hashFunction(RADIX, A_LARGE_PRIME, "AABRAACADABRAACAADABRA");
 
     EXPECT_EQ(1085070900ULL, hashFunction.getHashCodeOfWholeString());
     EXPECT_EQ(1085070900ULL, hashFunction.getHashCodeOfSubstring(0, 21));

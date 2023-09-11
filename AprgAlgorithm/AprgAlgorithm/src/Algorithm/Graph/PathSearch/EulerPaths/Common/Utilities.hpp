@@ -52,8 +52,8 @@ bool hasAtLeastOneLesserAndGreaterInAndOutDegrees(BaseDirectedGraph<Vertex> cons
     bool result(true);
     for (auto const& [vertex, degrees] : vertexToDegreesPairMap) {
         auto const& [inDegree, outDegree] = degrees;
-        bool lesserByOne = inDegree + 1 == outDegree;
-        bool greaterByOne = inDegree == outDegree + 1;
+        bool const lesserByOne = inDegree + 1 == outDegree;
+        bool const greaterByOne = inDegree == outDegree + 1;
         numberOfLesser += lesserByOne ? 1 : 0;
         numberOfGreater += greaterByOne ? 1 : 0;
         result =

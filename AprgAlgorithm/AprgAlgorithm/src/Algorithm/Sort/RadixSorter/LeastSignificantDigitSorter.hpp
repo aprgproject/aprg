@@ -51,7 +51,7 @@ private:
     }
 
     void computeCumulatesToGetNewIndexes(ArrayOfCountPerDigitValue& newIndexes) const {
-        int newIndexesSize = newIndexes.size();
+        int const newIndexesSize = newIndexes.size();
         for (int i = 0; i + 1 < static_cast<int>(newIndexesSize); ++i) {
             newIndexes[i + 1] += newIndexes[i];
         }

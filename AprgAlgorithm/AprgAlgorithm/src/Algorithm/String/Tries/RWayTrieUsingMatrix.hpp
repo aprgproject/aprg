@@ -33,7 +33,7 @@ public:
     RWayTrieUsingMatrix() : m_nodePointerMatrix(RADIX, MAX_NUMBER_IDS) {}
 
     [[nodiscard]] Key getLongestPrefixOf(Key const& keyToCheck) const override {
-        int longestPrefixLength(getLengthOfLongestPrefix(0, keyToCheck, 0));
+        int const longestPrefixLength(getLengthOfLongestPrefix(0, keyToCheck, 0));
         return keyToCheck.substr(0, longestPrefixLength);
     }
 
@@ -47,7 +47,7 @@ public:
 
     [[nodiscard]] Strings getAllKeysWithPrefix(Key const& prefix) const override {
         Strings result;
-        Coordinate coordinateOfPrefix(getCoordinate(0, prefix, 0));
+        Coordinate const coordinateOfPrefix(getCoordinate(0, prefix, 0));
         NodePointer const& nodePointerOfPrefix(
             m_nodePointerMatrix.getEntryConstReference(coordinateOfPrefix.first, coordinateOfPrefix.second));
         if (nodePointerOfPrefix) {
@@ -68,7 +68,7 @@ public:
 
     [[nodiscard]] Value get(Key const& key) const override {
         Value result{};
-        ValueUniquePointer valueUniquePointer(getValuePointer(0, key, 0));
+        ValueUniquePointer const valueUniquePointer(getValuePointer(0, key, 0));
         if (valueUniquePointer) {
             result = *valueUniquePointer;
         }
@@ -121,7 +121,7 @@ private:
         for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); ++keyIndex) {
             bool isNextNodeFound(false);
             if (isValidNodeId(currentNodeId)) {
-                char c(key[keyIndex]);
+                char const c(key[keyIndex]);
                 NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, currentNodeId));
                 if (nodePointer) {
                     isNextNodeFound = true;
@@ -145,7 +145,7 @@ private:
         for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); ++keyIndex) {
             bool isNextNodeFound(false);
             if (isValidNodeId(currentNodeId)) {
-                char c(key[keyIndex]);
+                char const c(key[keyIndex]);
                 NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, currentNodeId));
                 if (nodePointer) {
                     isNextNodeFound = true;
@@ -170,7 +170,7 @@ private:
         for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(keyToCheck.length()); ++keyIndex) {
             bool isNextNodeFound(false);
             if (isValidNodeId(currentNodeId)) {
-                char c(keyToCheck[keyIndex]);
+                char const c(keyToCheck[keyIndex]);
                 NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, currentNodeId));
                 if (nodePointer) {
                     isNextNodeFound = true;
@@ -206,7 +206,7 @@ private:
             for (int c = 0; c < RADIX; ++c) {
                 NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, nodeId));
                 if (nodePointer) {
-                    std::string newPrefix(previousPrefix + static_cast<char>(c));
+                    std::string const newPrefix(previousPrefix + static_cast<char>(c));
                     ValueUniquePointer const& valueUniquePointer(nodePointer->valueUniquePointer);
                     if (valueUniquePointer) {
                         collectedKeys.emplace_back(newPrefix);
@@ -221,14 +221,14 @@ private:
         NodeId const nodeId, std::string const& previousPrefix, Key const& patternToMatch,
         Strings& collectedKeys) const {
         if (isValidNodeId(nodeId)) {
-            int prefixLength = previousPrefix.length();
+            int const prefixLength = previousPrefix.length();
             if (prefixLength < static_cast<NodeId>(patternToMatch.length())) {
-                char charToMatch = patternToMatch[prefixLength];
+                char const charToMatch = patternToMatch[prefixLength];
                 for (int c = 0; c < RADIX; ++c) {
                     if ('.' == charToMatch || charToMatch == static_cast<char>(c)) {
                         NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, nodeId));
                         if (nodePointer) {
-                            std::string newPrefix(previousPrefix + static_cast<char>(c));
+                            std::string const newPrefix(previousPrefix + static_cast<char>(c));
                             if (newPrefix.length() == patternToMatch.length()) {
                                 ValueUniquePointer const& valueUniquePointer(nodePointer->valueUniquePointer);
                                 if (valueUniquePointer) {
@@ -248,7 +248,7 @@ private:
     void put(NodeId const nodeId, Key const& key, Value const& value, int const startingIndex) {
         NodeId currentNodeId(nodeId);
         for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); ++keyIndex) {
-            char c(key[keyIndex]);
+            char const c(key[keyIndex]);
             NodePointer& nodePointer(m_nodePointerMatrix.getEntryReference(c, currentNodeId));
             if (!nodePointer) {
                 nodePointer = std::make_unique<Node>();
@@ -296,9 +296,9 @@ private:
         for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); ++keyIndex) {
             bool isNextNodeFound(false);
             if (isValidNodeId(currentNodeId)) {
-                char c(key[keyIndex]);
+                char const c(key[keyIndex]);
                 NodePointer& nodePointer(m_nodePointerMatrix.getEntryReference(c, currentNodeId));
-                traversedCoordinates.emplace_back(Coordinate{c, currentNodeId});
+                traversedCoordinates.emplace_back(c, currentNodeId);
                 if (nodePointer) {
                     isNextNodeFound = true;
                     currentNodeId = nodePointer->nextNodeId;

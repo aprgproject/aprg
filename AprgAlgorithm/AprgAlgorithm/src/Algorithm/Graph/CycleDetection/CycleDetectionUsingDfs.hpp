@@ -102,7 +102,7 @@ private:
     void searchUsingDfsWithDirectedGraph(Vertex const& startVertex) {
         m_vertexStatesMap[startVertex] = VertexState::Processing;
         for (Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(startVertex)) {
-            VertexState adjacentVertexState = m_vertexStatesMap[adjacentVertex];
+            VertexState const adjacentVertexState = m_vertexStatesMap[adjacentVertex];
             if (SearchType::OneCycle == m_searchType && hasACycle()) {
                 // this check is needed to prune all recursion instances once cycle has been detected
                 break;
@@ -121,7 +121,7 @@ private:
     void searchUsingDfsWithUndirectedGraph(Vertex const& startVertex, Vertex const& previousVertex) {
         m_vertexStatesMap[startVertex] = VertexState::Processing;
         for (Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(startVertex)) {
-            VertexState adjacentVertexState = m_vertexStatesMap[adjacentVertex];
+            VertexState const adjacentVertexState = m_vertexStatesMap[adjacentVertex];
             if (SearchType::OneCycle == m_searchType && hasACycle()) {
                 // this check is needed to end all recursion instances once cycle has been detected
                 break;

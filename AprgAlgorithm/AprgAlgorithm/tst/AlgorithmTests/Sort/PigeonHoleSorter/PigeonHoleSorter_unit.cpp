@@ -27,49 +27,49 @@ using StabilityCheckObjectsSorter = PigeonHoleSorter<StabilityCheckObjects>;
 }  // namespace
 
 TEST(PigeonHoleSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(PigeonHoleSorterTest, SortWorksOnCharactersUsingOneValueExample) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(PigeonHoleSorterTest, SortWorksOnCharactersUsingExample1) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(PigeonHoleSorterTest, SortWorksOnCharactersUsingExample2) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingExample2WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(PigeonHoleSorterTest, SortWorksOnListOfCharactersUsingExample1) {
-    ListOfCharactersSorter sorter;
+    ListOfCharactersSorter const sorter;
     testSortUsingExample1WithCharacters<ListOfCharactersSorter, ListOfCharacters>(sorter);
 }
 
 TEST(PigeonHoleSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
-    IntegersSorter sorter;
+    IntegersSorter const sorter;
     testSortUsingExample1WithPositiveAndNegativeIntegers<IntegersSorter, Integers>(sorter);
 }
 
 // CANNOT SORT DOUBLE VALUES
 // CANNOT SORT STRINGS
 TEST(PigeonHoleSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1) {
-    StabilityCheckObjectsSorter sorter;
+    StabilityCheckObjectsSorter const sorter;
     testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(sorter);
 }
 
 TEST(PigeonHoleSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingOneValueExample) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     Characters oneCharacter{'J'};
 
     sorter.sort(oneCharacter);
 
-    Characters expectedOneCharacter{'J'};
+    Characters const expectedOneCharacter{'J'};
     EXPECT_EQ(expectedOneCharacter, oneCharacter);
 }
 

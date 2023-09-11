@@ -29,7 +29,8 @@ public:
         // -> Now replacing k with c log n
         // -> -> O(c log n (log (clog n))) -> O (log n (log log n))
         constexpr int c = 10;
-        int numbersOfElementsInSet = std::min(values.size(), c * mathHelper::getLogarithmWithBase2Of(values.size()));
+        int const numbersOfElementsInSet =
+            std::min(values.size(), c * mathHelper::getLogarithmWithBase2Of(values.size()));
         AlbaUniformNonDeterministicRandomizer<int> randomizer(0, static_cast<int>(values.size()) - 1);
         SetOfValues orderedValues;
         for (int i = 0; i < numbersOfElementsInSet; ++i) {

@@ -21,11 +21,11 @@ public:
         : m_getNumberOfDigitsFunction(getNumberOfDigitsFunction), m_getDigitAtFunction(getDigitAtFunction) {}
 
     void sort(Values& valuesToSort) const override {
-        int numberOfDigits(m_getNumberOfDigitsFunction(valuesToSort));
+        int const numberOfDigits(m_getNumberOfDigitsFunction(valuesToSort));
         for (int digitIndex = 0; digitIndex < numberOfDigits; ++digitIndex) {
             // start at least significant digit
             auto getDigitFunction = [&](Value const& value) { return m_getDigitAtFunction(value, digitIndex); };
-            CountingSorterUsingNewPositions<Values, MAX_NUMBER_OF_DIGIT_VALUES> countingSorter(getDigitFunction);
+            CountingSorterUsingNewPositions<Values, MAX_NUMBER_OF_DIGIT_VALUES> const countingSorter(getDigitFunction);
             countingSorter.sort(valuesToSort);
         }
     }

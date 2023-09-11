@@ -22,12 +22,12 @@ TEST(BipartiteCheckerUsingDfsTest, IsBipartiteWorksforNonBarpartiteGraph) {
     nonBipartiteGraph.connect(4, 5);
     Vertices verticesWithFirstColor;
     Vertices verticesWithSecondColor;
-    BipartiteCheckerForTest bipartiteChecker(nonBipartiteGraph);
+    BipartiteCheckerForTest const bipartiteChecker(nonBipartiteGraph);
 
     bipartiteChecker.retrieveVerticesWithColor(verticesWithFirstColor, verticesWithSecondColor);
 
-    Vertices expectedWithFirstColor{0, 4};
-    Vertices expectedWithSecondColor{1, 2, 3, 5};
+    Vertices const expectedWithFirstColor{0, 4};
+    Vertices const expectedWithSecondColor{1, 2, 3, 5};
     EXPECT_FALSE(bipartiteChecker.isBipartite());
     EXPECT_TRUE(bipartiteChecker.hasFirstColor(0));
     EXPECT_FALSE(bipartiteChecker.hasFirstColor(1));
@@ -50,12 +50,12 @@ TEST(BipartiteCheckerUsingDfsTest, IsBipartiteWorksforBarpartiteGraph) {
     bipartiteGraph.connect(5, 6);
     Vertices verticesWithFirstColor;
     Vertices verticesWithSecondColor;
-    BipartiteCheckerForTest bipartiteChecker(bipartiteGraph);
+    BipartiteCheckerForTest const bipartiteChecker(bipartiteGraph);
 
     bipartiteChecker.retrieveVerticesWithColor(verticesWithFirstColor, verticesWithSecondColor);
 
-    Vertices expectedWithFirstColor{0, 4, 6};
-    Vertices expectedWithSecondColor{1, 2, 3, 5};
+    Vertices const expectedWithFirstColor{0, 4, 6};
+    Vertices const expectedWithSecondColor{1, 2, 3, 5};
     EXPECT_TRUE(bipartiteChecker.isBipartite());
     EXPECT_TRUE(bipartiteChecker.hasFirstColor(0));
     EXPECT_FALSE(bipartiteChecker.hasFirstColor(1));

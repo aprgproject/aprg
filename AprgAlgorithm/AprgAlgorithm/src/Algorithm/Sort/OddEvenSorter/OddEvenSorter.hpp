@@ -17,7 +17,7 @@ public:
         bool didSwapHappened(true);
         while (didSwapHappened) {
             didSwapHappened = false;
-            int lastIndex(valuesToSort.size() - 1);
+            int const lastIndex(valuesToSort.size() - 1);
             for (int i = 1; i < lastIndex; i += 2) {
                 if (valuesToSort[i] > valuesToSort[i + 1]) {
                     std::swap(valuesToSort[i], valuesToSort[i + 1]);

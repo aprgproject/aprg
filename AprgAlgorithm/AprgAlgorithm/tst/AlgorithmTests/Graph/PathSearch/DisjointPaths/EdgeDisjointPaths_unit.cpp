@@ -23,9 +23,9 @@ TEST(EdgeDisjointPathsTest, Example1Works) {
     graph.connect(4, 3);
     graph.connect(4, 5);
     graph.connect(5, 6);
-    PathSearchForTest pathSearch(graph, 1, 6);
+    PathSearchForTest const pathSearch(graph, 1, 6);
 
-    PathsForTest expectedEdgeDisjointPaths{{1, 4, 3, 6}, {1, 2, 4, 5, 6}};
+    PathsForTest const expectedEdgeDisjointPaths{{1, 4, 3, 6}, {1, 2, 4, 5, 6}};
     EXPECT_EQ(2, pathSearch.getNumberOfEdgeDisjointPaths());
     EXPECT_EQ(expectedEdgeDisjointPaths, pathSearch.getEdgeDisjointPaths());
 }

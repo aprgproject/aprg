@@ -54,7 +54,7 @@ public:
         return isOpened;
     }
 
-    ObjectToSort getLowestObject() const { return m_lowestValue; }
+    [[nodiscard]] ObjectToSort getLowestObject() const { return m_lowestValue; }
 
     void add(ObjectToSort const& objectToSort) {
         switch (m_blockType) {

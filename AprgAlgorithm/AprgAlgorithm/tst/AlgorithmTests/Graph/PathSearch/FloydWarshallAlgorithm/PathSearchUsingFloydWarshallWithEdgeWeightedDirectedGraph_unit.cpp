@@ -26,7 +26,7 @@ TEST(PathSearchUsingFloydWarshallTest, ShortestPathSearchEndsWhenThereArePositiv
     graph.connect(1, 2, 0.38);
     graph.connect(2, 3, 0.29);
     graph.connect(3, 0, 0.34);
-    ShortestPathSearchForTest pathSearch(graph);
+    ShortestPathSearchForTest const pathSearch(graph);
 
     EXPECT_TRUE(pathSearch.hasPathTo(0, 0));
     EXPECT_TRUE(pathSearch.hasPathTo(0, 1));
@@ -46,7 +46,7 @@ TEST(PathSearchUsingFloydWarshallTest, ShortestPathSearchEndsWhenThereAreNegativ
     graph.connect(1, 2, -0.38);
     graph.connect(2, 3, -0.29);
     graph.connect(3, 0, -0.34);
-    ShortestPathSearchForTest pathSearch(graph);
+    ShortestPathSearchForTest const pathSearch(graph);
 
     EXPECT_TRUE(pathSearch.hasPathTo(0, 0));
     EXPECT_TRUE(pathSearch.hasPathTo(0, 1));
@@ -66,7 +66,7 @@ TEST(PathSearchUsingFloydWarshallTest, LongestPathSearchEndsWhenThereArePositive
     graph.connect(1, 2, 0.38);
     graph.connect(2, 3, 0.29);
     graph.connect(3, 0, 0.34);
-    LongestPathSearchForTest pathSearch(graph);
+    LongestPathSearchForTest const pathSearch(graph);
 
     EXPECT_TRUE(pathSearch.hasPathTo(0, 0));
     EXPECT_TRUE(pathSearch.hasPathTo(0, 1));
@@ -86,7 +86,7 @@ TEST(PathSearchUsingFloydWarshallTest, LongestPathSearchEndsWhenThereAreNegative
     graph.connect(1, 2, -0.38);
     graph.connect(2, 3, -0.29);
     graph.connect(3, 0, -0.34);
-    LongestPathSearchForTest pathSearch(graph);
+    LongestPathSearchForTest const pathSearch(graph);
 
     EXPECT_TRUE(pathSearch.hasPathTo(0, 0));
     EXPECT_TRUE(pathSearch.hasPathTo(0, 1));
@@ -112,7 +112,7 @@ TEST(PathSearchUsingFloydWarshallTest, HasPathToWorksWithEdgeWeightedDirectedGra
     graph.connect(5, 1, 0.32);
     graph.connect(5, 7, 0.28);
     graph.connect(7, 3, 0.39);
-    ShortestPathSearchForTest pathSearch(graph);
+    ShortestPathSearchForTest const pathSearch(graph);
 
     EXPECT_TRUE(pathSearch.hasPathTo(0, 0));
     EXPECT_TRUE(pathSearch.hasPathTo(0, 1));
@@ -137,7 +137,7 @@ TEST(PathSearchUsingFloydWarshallTest, GetPathToWorksWithEdgeWeightedDirectedGra
     graph.connect(5, 1, 0.32);
     graph.connect(5, 7, 0.28);
     graph.connect(7, 3, 0.39);
-    ShortestPathSearchForTest pathSearch(graph);
+    ShortestPathSearchForTest const pathSearch(graph);
 
     EXPECT_EQ(PathForTest(), pathSearch.getPathTo(0, 0));
     EXPECT_EQ(PathForTest({0, 4, 5, 1}), pathSearch.getPathTo(0, 1));
@@ -162,7 +162,7 @@ TEST(PathSearchUsingFloydWarshallTest, HasPathToWorksWithEdgeWeightedDirectedGra
     graph.connect(5, 1, 0.32);
     graph.connect(5, 7, 0.28);
     graph.connect(7, 3, 0.39);
-    LongestPathSearchForTest pathSearch(graph);
+    LongestPathSearchForTest const pathSearch(graph);
 
     EXPECT_TRUE(pathSearch.hasPathTo(0, 0));
     EXPECT_TRUE(pathSearch.hasPathTo(0, 1));
@@ -187,7 +187,7 @@ TEST(PathSearchUsingFloydWarshallTest, GetPathToWorksWithEdgeWeightedDirectedGra
     graph.connect(5, 1, 0.32);
     graph.connect(5, 7, 0.28);
     graph.connect(7, 3, 0.39);
-    LongestPathSearchForTest pathSearch(graph);
+    LongestPathSearchForTest const pathSearch(graph);
 
     EXPECT_EQ(PathForTest(), pathSearch.getPathTo(0, 0));
     EXPECT_EQ(PathForTest({0, 4, 5, 1}), pathSearch.getPathTo(0, 1));

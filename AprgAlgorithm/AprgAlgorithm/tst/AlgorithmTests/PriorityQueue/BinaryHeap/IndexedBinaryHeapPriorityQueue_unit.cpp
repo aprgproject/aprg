@@ -14,7 +14,7 @@ auto UNUSED = VALUE_FOR_UNUSED_INDEX;
 }  // namespace
 
 TEST(IndexedBinaryHeapPriorityQueueTest, IsEmptyWorks) {
-    IndexedPqForTest indexedPQ1;
+    IndexedPqForTest const indexedPQ1;
     IndexedPqForTest indexedPQ2;
     indexedPQ2.insert(0, 'A');
 
@@ -32,7 +32,7 @@ TEST(IndexedBinaryHeapPriorityQueueTest, ContainsWorks) {
 }
 
 TEST(IndexedBinaryHeapPriorityQueueTest, GetSizeWorks) {
-    IndexedPqForTest indexedPQ1;
+    IndexedPqForTest const indexedPQ1;
     IndexedPqForTest indexedPQ2;
     indexedPQ2.insert(1, 'B');
     indexedPQ2.insert(2, 'C');

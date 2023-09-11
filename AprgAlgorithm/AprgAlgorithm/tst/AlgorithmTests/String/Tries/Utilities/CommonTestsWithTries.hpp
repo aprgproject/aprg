@@ -124,9 +124,9 @@ void testGetKeysWithInt() {
     trie.put("shore", 7);
     trie.put("s", 8);
 
-    Strings keysToVerify(trie.getKeys());
+    Strings const keysToVerify(trie.getKeys());
 
-    Strings expectedKeys{"by", "s", "sea", "sells", "she", "shells", "shore", "the"};
+    Strings const expectedKeys{"by", "s", "sea", "sells", "she", "shells", "shore", "the"};
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -144,9 +144,9 @@ void testGetAllKeysWithPrefixWithInt() {
     trie.put("shore", 7);
     trie.put("s", 8);
 
-    Strings keysToVerify(trie.getAllKeysWithPrefix("s"));
+    Strings const keysToVerify(trie.getAllKeysWithPrefix("s"));
 
-    Strings expectedKeys{"s", "sea", "sells", "she", "shells", "shore"};
+    Strings const expectedKeys{"s", "sea", "sells", "she", "shells", "shore"};
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -164,9 +164,9 @@ void testGetAllKeysThatMatchWithInt() {
     trie.put("shore", 7);
     trie.put("s", 8);
 
-    Strings keysToVerify(trie.getAllKeysThatMatch("s.."));
+    Strings const keysToVerify(trie.getAllKeysThatMatch("s.."));
 
-    Strings expectedKeys{"sea", "she"};
+    Strings const expectedKeys{"sea", "she"};
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 

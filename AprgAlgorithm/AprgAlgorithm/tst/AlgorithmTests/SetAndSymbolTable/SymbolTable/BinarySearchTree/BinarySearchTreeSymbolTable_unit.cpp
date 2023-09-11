@@ -65,7 +65,7 @@ TEST(BinarySearchTreeSymbolTableTest, GetRootWorks) {
 
     auto const& expectedRoot(symbolTable.getRoot());
 
-    NodeForTest node{8, 'H', nullptr, nullptr, 1};
+    NodeForTest const node{8, 'H', nullptr, nullptr, 1};
     ASSERT_TRUE(expectedRoot);
     EXPECT_EQ(node.key, expectedRoot->key);
     EXPECT_EQ(node.value, expectedRoot->value);
@@ -86,7 +86,7 @@ TEST(BinarySearchTreeSymbolTableTest, TraverseByPreOrderWorks) {
     KeysForTest keysToVerify;
     symbolTable.traverseByPreOrder([&keysToVerify](NodeForTest const& node) { keysToVerify.emplace_back(node.key); });
 
-    KeysForTest expectedKeys{3, 4, 5, 9, 8, 7};  // not balanced
+    KeysForTest const expectedKeys{3, 4, 5, 9, 8, 7};  // not balanced
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -102,7 +102,7 @@ TEST(BinarySearchTreeSymbolTableTest, TraverseByInOrderWorks) {
     KeysForTest keysToVerify;
     symbolTable.traverseByInOrder([&keysToVerify](NodeForTest const& node) { keysToVerify.emplace_back(node.key); });
 
-    KeysForTest expectedKeys{3, 4, 5, 7, 8, 9};  // not balanced
+    KeysForTest const expectedKeys{3, 4, 5, 7, 8, 9};  // not balanced
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -118,7 +118,7 @@ TEST(BinarySearchTreeSymbolTableTest, TraverseByPostOrderWorks) {
     KeysForTest keysToVerify;
     symbolTable.traverseByPostOrder([&keysToVerify](NodeForTest const& node) { keysToVerify.emplace_back(node.key); });
 
-    KeysForTest expectedKeys{7, 8, 9, 5, 4, 3};  // not balanced
+    KeysForTest const expectedKeys{7, 8, 9, 5, 4, 3};  // not balanced
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -141,8 +141,8 @@ TEST(BinarySearchTreeSymbolTableTest, HibbardDeletionWorks) {
     symbolTable.traverseByPreOrder(
         [&actualAfterDelete](NodeForTest const& node) { actualAfterDelete.emplace_back(node.key); });
 
-    KeysForTest expectedBeforeDelete{8, 4, 3, 7, 5, 9};
-    KeysForTest expectedAfterDelete{8, 5, 9};
+    KeysForTest const expectedBeforeDelete{8, 4, 3, 7, 5, 9};
+    KeysForTest const expectedAfterDelete{8, 5, 9};
     EXPECT_EQ(expectedBeforeDelete, actualBeforeDelete);
     EXPECT_EQ(expectedAfterDelete, actualAfterDelete);
 }

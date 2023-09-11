@@ -64,11 +64,11 @@ public:
         AlbaStreamBitReader reader(input);
         AlbaStreamBitWriter writer(output);
 
-        Characters allInputCharacters(readAllCharacters(reader));
-        FrequencyOfEachCharacter frequency(getFrequencyOfEachCharacter(allInputCharacters));
+        Characters const allInputCharacters(readAllCharacters(reader));
+        FrequencyOfEachCharacter const frequency(getFrequencyOfEachCharacter(allInputCharacters));
 
-        TrieNodeUniquePointer root(buildTrie(frequency));
-        HuffmanCodeTable huffmanCodeTable(buildHuffmanCodeTableFromTrie(root));
+        TrieNodeUniquePointer const root(buildTrie(frequency));
+        HuffmanCodeTable const huffmanCodeTable(buildHuffmanCodeTableFromTrie(root));
 
         writeTrie(writer, root);
         writer.writeBigEndianNumberData<Count>(allInputCharacters.size());
@@ -79,7 +79,7 @@ public:
         AlbaStreamBitReader reader(input);
         AlbaStreamBitWriter writer(output);
 
-        TrieNodeUniquePointer root(readTrie(reader));
+        TrieNodeUniquePointer const root(readTrie(reader));
         auto lengthOfString(reader.readBigEndianNumberData<Count>());
         expandAllCharacters(reader, writer, root, lengthOfString);
     }
@@ -107,7 +107,7 @@ private:
         AlbaStreamBitReader& reader, AlbaStreamBitWriter& writer, TrieNodeUniquePointer const& root) {
         TrieNode const* currentNodePointer(root.get());
         while (!currentNodePointer->isLeaf()) {
-            bool bit(reader.readBoolData());
+            bool const bit(reader.readBoolData());
             if (!reader.getInputStream().eof()) {
                 if (bit) {
                     // if one, go to the right
@@ -155,7 +155,7 @@ private:
     Characters readAllCharacters(AlbaStreamBitReader& reader) {
         Characters result;
         while (true) {
-            char c(reader.readCharData());
+            char const c(reader.readCharData());
             if (!reader.getInputStream().eof()) {
                 result.emplace_back(c);
             } else {
@@ -181,11 +181,11 @@ private:
 
     TrieNodeUniquePointer readTrie(AlbaStreamBitReader& reader) {
         TrieNodeUniquePointer result;
-        bool bit(reader.readBoolData());
+        bool const bit(reader.readBoolData());
         if (!reader.getInputStream().eof()) {
             if (bit) {
                 // this mean its a leaf
-                char c(reader.readCharData());
+                char const c(reader.readCharData());
                 result = std::make_unique<TrieNode>(c, nullptr, nullptr);
             } else {
                 // keep reading if not leaf
@@ -216,9 +216,9 @@ private:
         // Needs to be 2 or higher because we are popping 2 items per iteration
         while (frequenciesInMinimumOrder.size() > 1) {
             // process the frequencies (minimum first) and build the trie by combining two nodes with lowest frequencies
-            CharacterFrequency first(frequenciesInMinimumOrder.top());
+            CharacterFrequency const first(frequenciesInMinimumOrder.top());
             frequenciesInMinimumOrder.pop();
-            CharacterFrequency second(frequenciesInMinimumOrder.top());
+            CharacterFrequency const second(frequenciesInMinimumOrder.top());
             frequenciesInMinimumOrder.pop();
             // use first character to keep track
             frequenciesInMinimumOrder.emplace(first.character, first.frequency + second.frequency, true);
@@ -228,7 +228,7 @@ private:
             characterNode[first.character] =
                 std::make_unique<TrieNode>('\0', std::move(firstNode), std::move(secondNode));
         }
-        CharacterFrequency last(frequenciesInMinimumOrder.top());
+        CharacterFrequency const last(frequenciesInMinimumOrder.top());
         return std::move(characterNode[last.character]);
     }
 };

@@ -75,7 +75,7 @@ TEST(UnionFindForFreeIndexTest, GetRootWithPathCompressionWorks) {
 TEST(UnionFindForFreeIndexTest, GetRelativeRootVectorWorks) {
     UnionFindForTest unionFind(13);
 
-    UnionFindForTest::RootVector expectedInitialRelativeRootVector{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    UnionFindForTest::RootVector const expectedInitialRelativeRootVector{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
     EXPECT_EQ(expectedInitialRelativeRootVector, unionFind.getRelativeRootVector());
 
     unionFind.connect(4, 3);
@@ -84,7 +84,7 @@ TEST(UnionFindForFreeIndexTest, GetRelativeRootVectorWorks) {
     unionFind.connect(9, 4);
     unionFind.connect(2, 1);
 
-    UnionFindForTest::RootVector expectedRelativeRootVector{0, 1, 1, 8, 8, 5, 5, 7, 8, 8, 10, 11, 12};
+    UnionFindForTest::RootVector const expectedRelativeRootVector{0, 1, 1, 8, 8, 5, 5, 7, 8, 8, 10, 11, 12};
     EXPECT_EQ(expectedRelativeRootVector, unionFind.getRelativeRootVector());
 }
 

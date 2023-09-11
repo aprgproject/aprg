@@ -217,9 +217,9 @@ void testGetKeysWithUnsignedIntAndChar() {
     symbolTable.put(7, 'G');
     symbolTable.put(3, 'C');
 
-    Keys keysToVerify(symbolTable.getKeys());
+    Keys const keysToVerify(symbolTable.getKeys());
 
-    Keys expectedKeys{3, 4, 5, 7, 8, 9};
+    Keys const expectedKeys{3, 4, 5, 7, 8, 9};
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -234,9 +234,9 @@ void testGetKeysInRangeInclusiveWithUnsignedIntAndChar() {
     symbolTable.put(7, 'G');
     symbolTable.put(3, 'C');
 
-    Keys keysToVerify(symbolTable.getKeysInRangeInclusive(5, 8));
+    Keys const keysToVerify(symbolTable.getKeysInRangeInclusive(5, 8));
 
-    Keys expectedKeys{5, 7, 8};
+    Keys const expectedKeys{5, 7, 8};
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 

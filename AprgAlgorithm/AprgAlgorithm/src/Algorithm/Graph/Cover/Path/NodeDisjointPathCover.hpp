@@ -44,7 +44,7 @@ public:
     }
 
     [[nodiscard]] Paths getNodeDisjointPathCover(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
-        Edges edges(getEdgesOfNodeDisjointPathCover(newSourceVertex, newSinkVertex));
+        Edges const edges(getEdgesOfNodeDisjointPathCover(newSourceVertex, newSinkVertex));
         return getNodeDisjointPathCover(edges);
     }
 
@@ -52,10 +52,10 @@ private:
     [[nodiscard]] Edges getEdgesOfNodeDisjointPathCoverUsingFordFulkerson(
         Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         Edges result;
-        FordFulkerson fordFulkerson(getFlowNetwork(m_graph, newSourceVertex, newSinkVertex));
+        FordFulkerson const fordFulkerson(getFlowNetwork(m_graph, newSourceVertex, newSinkVertex));
         auto const& flowNetwork(fordFulkerson.getFlowNetwork());
-        VertexWithLeftRight source(flowNetwork.getSourceVertex());
-        VertexWithLeftRight sink(flowNetwork.getSinkVertex());
+        VertexWithLeftRight const source(flowNetwork.getSourceVertex());
+        VertexWithLeftRight const sink(flowNetwork.getSinkVertex());
         for (auto const& flowEdge : flowNetwork.getFlowEdges()) {
             if (1 == flowEdge.flow && source != flowEdge.source && sink != flowEdge.destination) {
                 result.emplace_back(flowEdge.source.first, flowEdge.destination.first);
@@ -71,8 +71,8 @@ private:
         // There is an edge from a left node to a right node if there is such an edge in the original graph.
         // In addition, the matching graph contains a source and a sink, and there are edges from the source to all left
         // nodes and from all right nodes to the sink.
-        VertexWithLeftRight sourceVertexWithLeft{newSourceVertex, false};
-        VertexWithLeftRight sinkVertexWithRight{newSinkVertex, true};
+        VertexWithLeftRight const sourceVertexWithLeft{newSourceVertex, false};
+        VertexWithLeftRight const sinkVertexWithRight{newSinkVertex, true};
         FlowNetwork flowNetwork(sourceVertexWithLeft, sinkVertexWithRight);
         for (Vertex const& vertex : graph.getVertices()) {
             flowNetwork.connect(sourceVertexWithLeft, {vertex, false}, 1, 0);
@@ -90,7 +90,7 @@ private:
         VectorOfDequeOfVertices paths;
         while (!detectedEdges.empty()) {
             // construct paths from detected edges
-            Edge firstEdge(detectedEdges.front());
+            Edge const firstEdge(detectedEdges.front());
             detectedEdges.pop_front();
             DequeOfVertices pathInDeque{firstEdge.first, firstEdge.second};
             for (int i = 0; i < static_cast<int>(detectedEdges.size());) {
@@ -109,7 +109,7 @@ private:
             }
             paths.emplace_back(pathInDeque);
         }
-        Vertices allVertices(m_graph.getVertices());
+        Vertices const allVertices(m_graph.getVertices());
         SetOfVertices unprocessedVertices(allVertices.cbegin(), allVertices.cend());
         // remove vertices from path to get unprocessed vertices
         for (DequeOfVertices const& pathInDeque : paths) {

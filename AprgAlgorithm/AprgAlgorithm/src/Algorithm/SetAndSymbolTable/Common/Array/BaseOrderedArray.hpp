@@ -23,7 +23,7 @@ public:
 
     static Key getFloor(Key const& key, Keys const& keys) {
         Key result{};
-        int rank(getRank(key, keys));
+        int const rank(getRank(key, keys));
         if (rank < static_cast<int>(keys.size()) && keys[rank] == key) {
             result = key;
         } else if (rank > 0 && rank - 1 < static_cast<int>(keys.size()) && keys[rank - 1] < key) {
@@ -34,7 +34,7 @@ public:
 
     static Key getCeiling(Key const& key, Keys const& keys) {
         Key result{};
-        int rank(getRank(key, keys));
+        int const rank(getRank(key, keys));
         if (rank < static_cast<int>(keys.size())) {
             result = keys[rank];
         }
@@ -47,7 +47,7 @@ public:
         int lowIndex = 0;
         int highIndex = keys.size() - 1;
         while (lowIndex <= highIndex) {
-            int middleIndex = getMidpointOfIndexes(lowIndex, highIndex);
+            int const middleIndex = getMidpointOfIndexes(lowIndex, highIndex);
             Key const& keyAtMiddleIndex(keys[middleIndex]);
             if (key < keyAtMiddleIndex) {
                 highIndex = middleIndex - 1;
@@ -103,7 +103,7 @@ public:
     [[nodiscard]] bool doesContain(Key const& key) const override {
         bool result(false);
         if (!isEmpty()) {
-            int rank(getRank(key));
+            int const rank(getRank(key));
             if (rank < m_size && m_keys[rank] == key) {
                 result = true;
             }

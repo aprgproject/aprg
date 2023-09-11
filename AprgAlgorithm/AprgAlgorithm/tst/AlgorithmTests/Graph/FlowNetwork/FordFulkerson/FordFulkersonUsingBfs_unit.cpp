@@ -26,10 +26,10 @@ TEST(FordFulkersonUsingBfsTest, GetMaxFlowValueAndIsInMaxFlowMinCutWorksOnExampl
     flowNetwork.connect(2, 4, 1, 0);
     flowNetwork.connect(3, 5, 2, 0);
     flowNetwork.connect(4, 5, 3, 0);
-    MaxFlowForTest maxFlow(flowNetwork);
+    MaxFlowForTest const maxFlow(flowNetwork);
 
-    PathsForTest expectedAugmentingPaths{{0, 1, 3, 5}, {0, 2, 4, 5}, {0, 2, 3, 1, 4, 5}};
-    EdgesForTest expectedMinCutEdges{{0, 1}, {2, 3}, {2, 4}};
+    PathsForTest const expectedAugmentingPaths{{0, 1, 3, 5}, {0, 2, 4, 5}, {0, 2, 3, 1, 4, 5}};
+    EdgesForTest const expectedMinCutEdges{{0, 1}, {2, 3}, {2, 4}};
     EXPECT_DOUBLE_EQ(4, maxFlow.getMaxFlowValue());
     EXPECT_EQ(expectedAugmentingPaths, maxFlow.getAugmentingPaths());
     EXPECT_EQ(expectedMinCutEdges, maxFlow.getMinCutEdges());
@@ -45,10 +45,10 @@ TEST(FordFulkersonUsingBfsTest, GetMaxFlowValueAndIsInMaxFlowMinCutWorksOnExampl
     flowNetwork.connect(4, 2, 3, 0);
     flowNetwork.connect(4, 5, 1, 0);
     flowNetwork.connect(5, 6, 2, 0);
-    MaxFlowForTest maxFlow(flowNetwork);
+    MaxFlowForTest const maxFlow(flowNetwork);
 
-    PathsForTest expectedAugmentingPaths{{1, 2, 3, 6}, {1, 4, 5, 6}, {1, 4, 2, 3, 6}};
-    EdgesForTest expectedMinCutEdges{{2, 3}, {4, 5}};
+    PathsForTest const expectedAugmentingPaths{{1, 2, 3, 6}, {1, 4, 5, 6}, {1, 4, 2, 3, 6}};
+    EdgesForTest const expectedMinCutEdges{{2, 3}, {4, 5}};
     EXPECT_DOUBLE_EQ(7, maxFlow.getMaxFlowValue());
     EXPECT_EQ(expectedAugmentingPaths, maxFlow.getAugmentingPaths());
     EXPECT_EQ(expectedMinCutEdges, maxFlow.getMinCutEdges());

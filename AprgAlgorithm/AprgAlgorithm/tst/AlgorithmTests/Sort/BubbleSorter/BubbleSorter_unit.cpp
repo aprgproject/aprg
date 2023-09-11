@@ -27,47 +27,47 @@ using StabilityCheckObjectsSorter = BubbleSorter<StabilityCheckObjects>;
 }  // namespace
 
 TEST(BubbleSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(BubbleSorterTest, SortWorksOnCharactersUsingOneValueExample) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(BubbleSorterTest, SortWorksOnCharactersUsingExample1) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(BubbleSorterTest, SortWorksOnCharactersUsingExample2) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingExample2WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(BubbleSorterTest, SortWorksOnListOfCharactersUsingExample1) {
-    ListOfCharactersSorter sorter;
+    ListOfCharactersSorter const sorter;
     testSortUsingExample1WithCharacters<ListOfCharactersSorter, ListOfCharacters>(sorter);
 }
 
 TEST(BubbleSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
-    IntegersSorter sorter;
+    IntegersSorter const sorter;
     testSortUsingExample1WithPositiveAndNegativeIntegers<IntegersSorter, Integers>(sorter);
 }
 
 TEST(BubbleSorterTest, SortWorksOnDoublesUsingExample1) {
-    DoublesSorter sorter;
+    DoublesSorter const sorter;
     testSortUsingExample1WithDoubleValues<DoublesSorter, Doubles>(sorter);
 }
 
 TEST(BubbleSorterTest, SortWorksOnStringsUsingExample1) {
-    StringsSorter sorter;
+    StringsSorter const sorter;
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);
 }
 
 TEST(BubbleSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1) {
-    StabilityCheckObjectsSorter sorter;
+    StabilityCheckObjectsSorter const sorter;
     testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(sorter);
 }
 

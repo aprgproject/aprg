@@ -33,7 +33,7 @@ public:
     [[nodiscard]] Value getNearestValue(Value const& target) const {
         Value result{};
         if (!m_sortedValues.empty()) {
-            Index selectedIndex(getIndexOfNearestValueWithoutCheck(0, m_sortedValues.size() - 1, target));
+            Index const selectedIndex(getIndexOfNearestValueWithoutCheck(0, m_sortedValues.size() - 1, target));
             if (selectedIndex != INVALID_INDEX) {
                 result = m_sortedValues[selectedIndex];
             }
@@ -48,13 +48,13 @@ private:
         if (target < m_sortedValues[lowIndex]) {
             result = (lowIndex == 0) ? 0 : getIndexOfNearestValueInBetweenTwoIndices(lowIndex - 1, lowIndex, target);
         } else if (m_sortedValues[highIndex] < target) {
-            Index lastIndex = static_cast<Index>(m_sortedValues.size()) - 1;
+            Index const lastIndex = static_cast<Index>(m_sortedValues.size()) - 1;
             result = (highIndex == lastIndex)
                          ? lastIndex
                          : getIndexOfNearestValueInBetweenTwoIndices(highIndex, highIndex + 1, target);
         } else {
-            Index firstMiddleIndex = getFirstOneThirdIndex(lowIndex, highIndex);
-            Index secondMiddleIndex = getSecondOneThirdIndex(lowIndex, highIndex);
+            Index const firstMiddleIndex = getFirstOneThirdIndex(lowIndex, highIndex);
+            Index const secondMiddleIndex = getSecondOneThirdIndex(lowIndex, highIndex);
             if (target < m_sortedValues[firstMiddleIndex]) {
                 result = getIndexOfNearestValueWithoutCheck(lowIndex, firstMiddleIndex - 1, target);
             } else if (m_sortedValues[secondMiddleIndex] < target) {
@@ -68,8 +68,8 @@ private:
 
     [[nodiscard]] Index getIndexOfNearestValueInBetweenTwoIndices(
         Index const lowIndex, Index const highIndex, Value const& target) const {
-        Value deviationFromLower(mathHelper::getPositiveDelta(target, m_sortedValues[lowIndex]));
-        Value deviationFromHigher(mathHelper::getPositiveDelta(target, m_sortedValues[highIndex]));
+        Value const deviationFromLower(mathHelper::getPositiveDelta(target, m_sortedValues[lowIndex]));
+        Value const deviationFromHigher(mathHelper::getPositiveDelta(target, m_sortedValues[highIndex]));
         return (deviationFromLower <= deviationFromHigher) ? lowIndex : highIndex;
     }
 

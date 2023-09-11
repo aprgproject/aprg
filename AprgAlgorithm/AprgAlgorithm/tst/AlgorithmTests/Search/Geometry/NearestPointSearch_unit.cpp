@@ -20,7 +20,7 @@ TEST(NearestPointSearchTest, GetNearestPointWorksWhenPointIsAtTheLeft) {
 
     auto pointToVerify(search.getNearestPoint({-3, 0}));
 
-    PointForTest pointToExpect{-5, 0};
+    PointForTest const pointToExpect{-5, 0};
     EXPECT_EQ(pointToExpect, pointToVerify);
 }
 
@@ -32,7 +32,7 @@ TEST(NearestPointSearchTest, GetNearestPointWorksWhenPointIsAtTheRight) {
 
     auto pointToVerify(search.getNearestPoint({3, 0}));
 
-    PointForTest pointToExpect{5, 0};
+    PointForTest const pointToExpect{5, 0};
     EXPECT_EQ(pointToExpect, pointToVerify);
 }
 
@@ -44,7 +44,7 @@ TEST(NearestPointSearchTest, GetNearestPointWorksOnExample1) {
 
     auto pointToVerify(search.getNearestPoint({1, -11}));
 
-    PointForTest pointToExpect{-1, -10};
+    PointForTest const pointToExpect{-1, -10};
     EXPECT_EQ(pointToExpect, pointToVerify);
 }
 
@@ -63,7 +63,7 @@ TEST(NearestPointSearchTest, GetNearestPointWorksOnExample2) {
 
     auto pointToVerify(search.getNearestPoint({-5, 2.5}));
 
-    PointForTest pointToExpect{-4, 0};
+    PointForTest const pointToExpect{-4, 0};
     EXPECT_EQ(pointToExpect, pointToVerify);
 }
 
@@ -88,7 +88,7 @@ TEST(NearestPointSearchTest, GetNearestPointPairWorksOnExample1) {
 
     auto pointPairToVerify(search.getNearestPointPair());
 
-    PointPairForTest pointPairToExpect{{-1, 3}, {-2, 2}};
+    PointPairForTest const pointPairToExpect{{-1, 3}, {-2, 2}};
     EXPECT_EQ(pointPairToExpect, pointPairToVerify);
 }
 

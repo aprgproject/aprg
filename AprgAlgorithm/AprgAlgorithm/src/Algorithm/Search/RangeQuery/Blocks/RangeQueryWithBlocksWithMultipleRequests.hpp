@@ -100,10 +100,10 @@ private:
         // and a query [a1,b1] is processed before a query [a2,b2] if either:
         // -> a1/k < a2/k or
         // -> a1/k = a2/k and b1 < b2.
-        Index blockSize = this->getBlockSize();
+        Index const blockSize = this->getBlockSize();
         std::sort(result.begin(), result.end(), [blockSize](Range const& range1, Range const& range2) {
-            Index blockIndex1 = range1.first / blockSize;
-            Index blockIndex2 = range2.first / blockSize;
+            Index const blockIndex1 = range1.first / blockSize;
+            Index const blockIndex2 = range2.first / blockSize;
             if (blockIndex1 == blockIndex2) {
                 return range1.second < range2.second;
             }

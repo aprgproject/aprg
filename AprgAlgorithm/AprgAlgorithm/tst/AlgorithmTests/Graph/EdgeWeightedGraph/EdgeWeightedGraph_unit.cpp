@@ -45,7 +45,7 @@ TEST(EdgeWeightedGraphTest, GetSortedWeightsWorksOnUndirectedGraph) {
     graph.connect(0, 1, 3.5);
     graph.connect(0, 2, 4.5);
 
-    WeightsForTest expectedWeights{3.5, 4.5};
+    WeightsForTest const expectedWeights{3.5, 4.5};
     EXPECT_EQ(expectedWeights, graph.getSortedWeights());
 }
 
@@ -54,7 +54,7 @@ TEST(EdgeWeightedGraphTest, GetEdgeToWeightMapWorksOnUndirectedGraph) {
     graph.connect(0, 1, 3.5);
     graph.connect(0, 2, 4.5);
 
-    EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap expectedEdgesToWeight{{{0, 1}, 3.5}, {{0, 2}, 4.5}};
+    EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap const expectedEdgesToWeight{{{0, 1}, 3.5}, {{0, 2}, 4.5}};
     EXPECT_EQ(expectedEdgesToWeight, graph.getEdgeToWeightMap());
 }
 
@@ -63,7 +63,7 @@ TEST(EdgeWeightedGraphTest, GetEdgesWithWeightWorksOnUndirectedGraph) {
     graph.connect(0, 1, 3.5);
     graph.connect(0, 2, 4.5);
 
-    EdgeWeightedUndirectedGraphForTest::EdgesWithWeight expectedEdgesWithWeight{{0, 1, 3.5}, {0, 2, 4.5}};
+    EdgeWeightedUndirectedGraphForTest::EdgesWithWeight const expectedEdgesWithWeight{{0, 1, 3.5}, {0, 2, 4.5}};
     EXPECT_EQ(expectedEdgesWithWeight, graph.getEdgesWithWeight());
 }
 
@@ -74,8 +74,8 @@ TEST(EdgeWeightedGraphTest, ConnectWorksOnUndirectedGraph) {
 
     EXPECT_EQ(3, graph.getNumberOfVertices());
     EXPECT_EQ(2, graph.getNumberOfEdges());
-    Edges edgesToExpect{{0, 1}, {0, 2}};
-    EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap expectedEdgesToWeight{{{0, 1}, 3.5}, {{0, 2}, 4.5}};
+    Edges const edgesToExpect{{0, 1}, {0, 2}};
+    EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap const expectedEdgesToWeight{{{0, 1}, 3.5}, {{0, 2}, 4.5}};
     EXPECT_EQ(edgesToExpect, graph.getEdges());
     EXPECT_EQ(expectedEdgesToWeight, graph.getEdgeToWeightMap());
 }
@@ -89,8 +89,8 @@ TEST(EdgeWeightedGraphTest, DisconnectWorksOnUndirectedGraph) {
 
     EXPECT_EQ(2, graph.getNumberOfVertices());
     EXPECT_EQ(1, graph.getNumberOfEdges());
-    Edges edgesToExpect{{0, 2}};
-    EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap expectedEdgesToWeight{{{0, 2}, 4.5}};
+    Edges const edgesToExpect{{0, 2}};
+    EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap const expectedEdgesToWeight{{{0, 2}, 4.5}};
     EXPECT_EQ(edgesToExpect, graph.getEdges());
     EXPECT_EQ(expectedEdgesToWeight, graph.getEdgeToWeightMap());
 }

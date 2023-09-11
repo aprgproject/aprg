@@ -64,7 +64,7 @@ ostream& operator<<(ostream& out, TestObject const& testObject) {
 }
 
 TEST(AlbaLargeSorterTest, ObjectsCanBeSavedAndLoadFromFile) {
-    AlbaLocalPathHandler localPathHandler(ALBA_LARGE_SORTER_TEST_FILE);
+    AlbaLocalPathHandler const localPathHandler(ALBA_LARGE_SORTER_TEST_FILE);
     ofstream outputTestFile(localPathHandler.getFullPath());
     outputTestFile << TestObject(0, 0, '0', "") << "\n";
     outputTestFile << TestObject(1, 1.1, 'a', "firstString") << "\n";
@@ -102,27 +102,27 @@ TEST(AlbaLargeSorterTest, ObjectsCanBeSavedAndLoadFromFile) {
 }
 
 TEST(AlbaLargeSorterTest, ConfigurationWorksAsSuccessfulWhenTheConfigurationIsValid) {
-    AlbaLargeSorterConfiguration configuration(ALBA_LARGE_SORTER_BLOCK_DIR, 100, 1000, 1, 100);
+    AlbaLargeSorterConfiguration const configuration(ALBA_LARGE_SORTER_BLOCK_DIR, 100, 1000, 1, 100);
     EXPECT_TRUE(configuration.isConfigurationValid());
 }
 
 TEST(AlbaLargeSorterTest, ConfigurationWorksAsFailedWhenTheDirectoryDoesNotExist) {
-    AlbaLargeSorterConfiguration configuration("io23i4uoiyw4oiy5", 100, 1000, 1, 100);
+    AlbaLargeSorterConfiguration const configuration("io23i4uoiyw4oiy5", 100, 1000, 1, 100);
     EXPECT_FALSE(configuration.isConfigurationValid());
 }
 
 TEST(AlbaLargeSorterTest, ConfigurationWorksAsFailedWhenDirectoryPathIsGiven) {
-    AlbaLargeSorterConfiguration configuration(ALBA_LARGE_SORTER_TEST_FILE, 100, 1000, 1, 100);
+    AlbaLargeSorterConfiguration const configuration(ALBA_LARGE_SORTER_TEST_FILE, 100, 1000, 1, 100);
     EXPECT_FALSE(configuration.isConfigurationValid());
 }
 
 TEST(AlbaLargeSorterTest, ConfigurationWorksAsFailedWhenMiminumIsZero) {
-    AlbaLargeSorterConfiguration configuration(ALBA_LARGE_SORTER_TEST_FILE, 0, 1000, 1, 100);
+    AlbaLargeSorterConfiguration const configuration(ALBA_LARGE_SORTER_TEST_FILE, 0, 1000, 1, 100);
     EXPECT_FALSE(configuration.isConfigurationValid());
 }
 
 TEST(AlbaLargeSorterTest, ConfigurationWorksAsFailedWhenMiminumIsGreaterThanMaximum) {
-    AlbaLargeSorterConfiguration configuration(ALBA_LARGE_SORTER_TEST_FILE, 100, 99, 1, 100);
+    AlbaLargeSorterConfiguration const configuration(ALBA_LARGE_SORTER_TEST_FILE, 100, 99, 1, 100);
     EXPECT_FALSE(configuration.isConfigurationValid());
 }
 
@@ -237,7 +237,7 @@ TEST(AlbaLargeSorterTest, FileHandlerWorksAsFileAreWrittenAtTheEndAgainAfterRele
     fileHandler.getFileDumpStreamReference() << 4 << "\n";
     fileHandler.releaseFileStream();
 
-    AlbaLocalPathHandler inputPathHandler(ALBA_LARGE_SORTER_TEST_FILE);
+    AlbaLocalPathHandler const inputPathHandler(ALBA_LARGE_SORTER_TEST_FILE);
     ASSERT_TRUE(inputPathHandler.isFoundInLocalSystem());
     int valueFromFile = 0;
     ifstream inputTestFile(inputPathHandler.getFullPath());
@@ -253,7 +253,8 @@ TEST(AlbaLargeSorterTest, FileHandlerWorksAsFileAreWrittenAtTheEndAgainAfterRele
 }
 
 TEST(AlbaLargeSorterTest, SorterIsInitiallyEmpty) {
-    AlbaLargeSorter<int> largeSorter(AlbaLargeSorterConfiguration(ALBA_LARGE_SORTER_BLOCK_DIR, 100, 1000, 1000, 100));
+    AlbaLargeSorter<int> const largeSorter(
+        AlbaLargeSorterConfiguration(ALBA_LARGE_SORTER_BLOCK_DIR, 100, 1000, 1000, 100));
     EXPECT_TRUE(largeSorter.isEmpty());
 }
 
@@ -340,7 +341,7 @@ TEST(AlbaLargeSorterTest, PrimitiveDataTypesForBlocksAreCreatedWhenBlocksWhenMem
 }
 
 TEST(AlbaLargeSorterTest, FilesForBlocksAreDeletedAfterFileForBlocksAreCreated) {
-    AlbaLocalPathHandler directoryPathHandler(ALBA_LARGE_SORTER_BLOCK_DIR);
+    AlbaLocalPathHandler const directoryPathHandler(ALBA_LARGE_SORTER_BLOCK_DIR);
     set<string> listOfFiles;
     set<string> listOfDirectories;
     directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
@@ -760,7 +761,7 @@ TEST(AlbaLargeSorterTest, DISABLED_FileStreamAreLimitedByMaximumFileStreams) {
     shuffle(
         integersToShuffle.begin(), integersToShuffle.end(),
         default_random_engine(getCurrentDateTime().getMicroSeconds()));
-    for (int value : integersToShuffle) {
+    for (int const value : integersToShuffle) {
         largeSorter.add(value);
     }
 

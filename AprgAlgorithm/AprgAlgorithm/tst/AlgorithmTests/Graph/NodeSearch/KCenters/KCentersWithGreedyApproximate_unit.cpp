@@ -27,9 +27,9 @@ TEST(KCentersWithGreedyApproximateTest, GetDistanceToWorksWithUndirectedGraphFor
     graph.connect(2, 4, 0.30);
     graph.connect(3, 4, 0.35);
     graph.connect(3, 5, 0.40);
-    NodeSearchForTest nodeSearch(graph, 0, 3);
+    NodeSearchForTest const nodeSearch(graph, 0, 3);
 
-    VerticesForTest expectedCenters{0, 4, 3};
+    VerticesForTest const expectedCenters{0, 4, 3};
     EXPECT_EQ(expectedCenters, nodeSearch.getFoundCenters());
 }
 
@@ -41,9 +41,9 @@ TEST(KCentersWithGreedyApproximateTest, GetDistanceToWorksWithUndirectedGraphFor
     graph.connect(1, 2, 0.8);
     graph.connect(1, 3, 0.5);
     graph.connect(2, 3, 1.2);
-    NodeSearchForTest nodeSearch(graph, 2, 2);
+    NodeSearchForTest const nodeSearch(graph, 2, 2);
 
-    VerticesForTest expectedCenters{2, 3};
+    VerticesForTest const expectedCenters{2, 3};
     EXPECT_EQ(expectedCenters, nodeSearch.getFoundCenters());
 }
 

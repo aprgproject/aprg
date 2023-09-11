@@ -27,7 +27,7 @@ private:
         int iLow(lowIndex);
         int iHigh(highIndex);
         while (iLow <= iHigh) {
-            int middleIndex = getMidpointOfIndexes(iLow, iHigh);
+            int const middleIndex = getMidpointOfIndexes(iLow, iHigh);
             Value const& middleValue(valuesToSort[middleIndex]);
             if (value < middleValue) {
                 result = middleIndex;
@@ -40,7 +40,7 @@ private:
     }
 
     void swapDownWithIndexFoundInBinarySearch(Values& valuesToSort, int const insertIndex) const {
-        int indexWithGreaterValue =
+        int const indexWithGreaterValue =
             getIndexWithGreaterValueUsingBinarySearch(valuesToSort, 0, insertIndex - 1, valuesToSort[insertIndex]);
         if (indexWithGreaterValue != INVALID_INDEX) {
             for (int swapIndex(insertIndex); swapIndex > indexWithGreaterValue; --swapIndex) {

@@ -55,7 +55,7 @@ TEST(UnionFindUsingMapTest, GetRootWorks) {
 TEST(UnionFindUsingMapTest, GetConnectionMapWorks) {
     UnionFindForTest unionFind;
 
-    UnionFindForTest::ConnectionMap expectedInitialConnectionMap;
+    UnionFindForTest::ConnectionMap const expectedInitialConnectionMap;
     EXPECT_EQ(expectedInitialConnectionMap, unionFind.getConnectionMap());
 
     unionFind.connect(4, 3);
@@ -64,8 +64,8 @@ TEST(UnionFindUsingMapTest, GetConnectionMapWorks) {
     unionFind.connect(9, 4);
     unionFind.connect(2, 1);
 
-    UnionFindForTest::ConnectionMap expectedConnectionMap{{1, 1}, {2, 1}, {3, 3}, {4, 3},
-                                                          {5, 5}, {6, 5}, {8, 3}, {9, 3}};
+    UnionFindForTest::ConnectionMap const expectedConnectionMap{{1, 1}, {2, 1}, {3, 3}, {4, 3},
+                                                                {5, 5}, {6, 5}, {8, 3}, {9, 3}};
     EXPECT_EQ(expectedConnectionMap, unionFind.getConnectionMap());
 }
 

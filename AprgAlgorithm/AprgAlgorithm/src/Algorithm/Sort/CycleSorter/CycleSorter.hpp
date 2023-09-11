@@ -35,7 +35,7 @@ public:
 private:
     [[nodiscard]] int getCorrectIndexForValue(
         Values const& valuesToSort, Value const& currentCycleValue, int const incorrectIndex) const {
-        int numberOfLessValues = std::count_if(
+        int const numberOfLessValues = std::count_if(
             valuesToSort.cbegin() + incorrectIndex + 1, valuesToSort.cend(),
             [&](Value const& valueToSort) { return valueToSort < currentCycleValue; });
         return incorrectIndex + numberOfLessValues;

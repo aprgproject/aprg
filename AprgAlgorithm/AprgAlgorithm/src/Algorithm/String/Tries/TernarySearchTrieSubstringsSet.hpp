@@ -48,7 +48,7 @@ protected:
     [[nodiscard]] int getLengthOfLongestPrefixStartingOnThisNode(
         NodeUniquePointer const& currentNodePointer, Key const& keyToCheck, int const index) const override {
         if (currentNodePointer && index < static_cast<int>(keyToCheck.length())) {
-            char c(keyToCheck[index]);
+            char const c(keyToCheck[index]);
             if (c < currentNodePointer->c) {
                 return getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->left, keyToCheck, index);
             }
@@ -65,7 +65,7 @@ protected:
         Strings& collectedKeys) const override {
         if (currentNodePointer != nullptr) {
             collectAllKeysAtNode(currentNodePointer->left.get(), previousPrefix, collectedKeys);
-            std::string currentPrefix(previousPrefix + currentNodePointer->c);
+            std::string const currentPrefix(previousPrefix + currentNodePointer->c);
             collectedKeys.emplace_back(currentPrefix);
             collectAllKeysAtNode(currentNodePointer->mid.get(), currentPrefix, collectedKeys);
             collectAllKeysAtNode(currentNodePointer->right.get(), previousPrefix, collectedKeys);
@@ -76,11 +76,11 @@ protected:
         Node const* const currentNodePointer, std::string const& previousPrefix, Key const& patternToMatch,
         Strings& collectedKeys) const override {
         if (currentNodePointer != nullptr) {
-            int previousPrefixLength = previousPrefix.length();
-            int lastIndexToMatch = patternToMatch.length() - 1;
-            char currentChar = currentNodePointer->c;
-            char charToMatch = patternToMatch[previousPrefixLength];
-            std::string currentPrefix(previousPrefix + currentNodePointer->c);
+            int const previousPrefixLength = previousPrefix.length();
+            int const lastIndexToMatch = patternToMatch.length() - 1;
+            char const currentChar = currentNodePointer->c;
+            char const charToMatch = patternToMatch[previousPrefixLength];
+            std::string const currentPrefix(previousPrefix + currentNodePointer->c);
             if (charToMatch < currentChar) {
                 collectKeysThatMatchAtNode(
                     currentNodePointer->left.get(), previousPrefix, patternToMatch, collectedKeys);
@@ -109,9 +109,9 @@ protected:
     void deleteBasedOnKeyStartingOnThisNode(
         NodeUniquePointer& currentNodePointer, Key const& key, int const index) override {
         if (currentNodePointer) {
-            int lastIndex = key.length() - 1;
+            int const lastIndex = key.length() - 1;
             if (index < lastIndex) {
-                char charAtKey(key[index]);
+                char const charAtKey(key[index]);
                 if (charAtKey < currentNodePointer->c) {
                     deleteBasedOnKeyStartingOnThisNode(currentNodePointer->left, key, index);
                 } else if (charAtKey > currentNodePointer->c) {
@@ -135,7 +135,7 @@ protected:
     }
 
     void putStartingOnThisNode(NodeUniquePointer& currentNodePointer, Key const& key, int const index) {
-        char charAtKey(key[index]);
+        char const charAtKey(key[index]);
         if (!currentNodePointer) {
             currentNodePointer = std::make_unique<Node>(Node{charAtKey, nullptr, nullptr, nullptr});
         }

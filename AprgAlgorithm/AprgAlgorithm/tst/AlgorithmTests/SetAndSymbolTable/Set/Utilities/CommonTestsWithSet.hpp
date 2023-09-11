@@ -209,9 +209,9 @@ void testGetKeysWithUnsignedIntAndChar() {
     setObject.put(7);
     setObject.put(3);
 
-    Keys keysToVerify(setObject.getKeys());
+    Keys const keysToVerify(setObject.getKeys());
 
-    Keys expectedKeys{3, 4, 5, 7, 8, 9};
+    Keys const expectedKeys{3, 4, 5, 7, 8, 9};
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -226,9 +226,9 @@ void testGetKeysInRangeInclusiveWithUnsignedIntAndChar() {
     setObject.put(7);
     setObject.put(3);
 
-    Keys keysToVerify(setObject.getKeysInRangeInclusive(5, 8));
+    Keys const keysToVerify(setObject.getKeysInRangeInclusive(5, 8));
 
-    Keys expectedKeys{5, 7, 8};
+    Keys const expectedKeys{5, 7, 8};
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 

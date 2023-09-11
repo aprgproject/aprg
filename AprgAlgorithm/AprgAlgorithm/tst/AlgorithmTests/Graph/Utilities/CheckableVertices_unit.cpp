@@ -10,7 +10,7 @@ using CheckableVerticesForTest = CheckableVertices<VertexForTest>;
 }  // namespace
 
 TEST(CheckableVerticesTest, IsFoundWorks) {
-    CheckableVerticesForTest emptyCheckableVertices;
+    CheckableVerticesForTest const emptyCheckableVertices;
     CheckableVerticesForTest nonEmptyCheckableVertices;
     nonEmptyCheckableVertices.putVertex(10);
     nonEmptyCheckableVertices.putVertex(11);
@@ -25,7 +25,7 @@ TEST(CheckableVerticesTest, IsFoundWorks) {
 }
 
 TEST(CheckableVerticesTest, IsNotFoundWorks) {
-    CheckableVerticesForTest emptyCheckableVertices;
+    CheckableVerticesForTest const emptyCheckableVertices;
     CheckableVerticesForTest nonEmptyCheckableVertices;
     nonEmptyCheckableVertices.putVertex(10);
     nonEmptyCheckableVertices.putVertex(11);

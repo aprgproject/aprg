@@ -32,7 +32,7 @@ void putConnectionsForTest(EdgeWeightedUndirectedGraphForTest& graph) {
 TEST(PathSearchUsingBfsWithDistanceSumTest, GetDistanceToWorksWithUndirectedGraph) {
     EdgeWeightedUndirectedGraphForTest graph;
     putConnectionsForTest(graph);
-    PathSearchForTest pathSearch(graph, {0});
+    PathSearchForTest const pathSearch(graph, {0});
 
     EXPECT_DOUBLE_EQ(0, pathSearch.getDistanceTo(0));
     EXPECT_DOUBLE_EQ(0.05, pathSearch.getDistanceTo(1));
@@ -46,9 +46,9 @@ TEST(PathSearchUsingBfsWithDistanceSumTest, GetDistanceToWorksWithUndirectedGrap
 TEST(PathSearchUsingBfsWithDistanceSumTest, GetEndVertexToDistanceSumMapWorksWithUndirectedGraph) {
     EdgeWeightedUndirectedGraphForTest graph;
     putConnectionsForTest(graph);
-    PathSearchForTest pathSearch(graph, {0});
+    PathSearchForTest const pathSearch(graph, {0});
 
-    ContentMapForTest expectedMap{{0, 0.0}, {1, 0.05}, {2, 0.1}, {3, 0.35}, {4, 0.4}, {5, 0.15}};
+    ContentMapForTest const expectedMap{{0, 0.0}, {1, 0.05}, {2, 0.1}, {3, 0.35}, {4, 0.4}, {5, 0.15}};
     EXPECT_EQ(expectedMap, pathSearch.getEndVertexToDistanceSumMap());
 }
 

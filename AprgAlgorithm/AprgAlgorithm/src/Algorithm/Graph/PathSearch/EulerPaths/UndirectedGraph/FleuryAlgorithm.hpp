@@ -41,7 +41,7 @@ public:
 
     [[nodiscard]] Path getEulerPath() const override {
         Path result;
-        Edges originalEdges(b_graph.getEdges());
+        Edges const originalEdges(b_graph.getEdges());
         if (!originalEdges.empty()) {
             // check graph for starting vertex
             searchForEulerPath(result, this->getStartingVertexForEulerPath(), originalEdges);
@@ -63,7 +63,7 @@ private:
         // THIS IS COSTLY!
         GraphToManipulate graphWithDeletedEdge(graph);
         graphWithDeletedEdge.disconnect(edgeToDelete.first, edgeToDelete.second);
-        ConnectedComponentsUsingDfs<Vertex> connectedComponents(graphWithDeletedEdge);
+        ConnectedComponentsUsingDfs<Vertex> const connectedComponents(graphWithDeletedEdge);
         return connectedComponents.getNumberOfComponentIds() <= 1               // graph is still connected
                && connectedComponents.getComponentId(edgeToDelete.second) > 0;  // destination is still connected
     }
@@ -77,7 +77,7 @@ private:
 
     void searchForEulerPath(Path& result, Vertex const& startVertex, Edges const& originalEdges) const {
         GraphToManipulate graphToManipulate(createGraphToManipulate(originalEdges));
-        SetOfEdges& edgesReference(graphToManipulate.getSetOfEdgesReference());
+        SetOfEdges const& edgesReference(graphToManipulate.getSetOfEdgesReference());
         bool isComplete(true);
         Edges edgesInEulerCycle;
         Edge deletedEdge(startVertex, startVertex);

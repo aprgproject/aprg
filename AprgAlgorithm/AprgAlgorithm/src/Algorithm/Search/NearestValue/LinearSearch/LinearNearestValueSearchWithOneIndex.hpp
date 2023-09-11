@@ -30,12 +30,12 @@ public:
         if (!m_values.empty()) {
             Value minimumDeviation(std::numeric_limits<Value>::max());
             for (auto it = m_values.cbegin() + m_startIndex; it != m_values.cbegin() + m_endIndex; ++it) {
-                Value value(*it);
+                Value const value(*it);
                 if (value == target) {
                     result = std::distance(m_values.cbegin(), it);
                     break;
                 }
-                Value currentDeviation(mathHelper::getPositiveDelta(value, target));
+                Value const currentDeviation(mathHelper::getPositiveDelta(value, target));
                 if (minimumDeviation > currentDeviation) {
                     minimumDeviation = currentDeviation;
                     result = std::distance(m_values.cbegin(), it);
@@ -47,7 +47,7 @@ public:
 
     Value getNearestValue(Value const& target) {
         Value result{};
-        Index selectedIndex(getIndexOfNearestValue(target));
+        Index const selectedIndex(getIndexOfNearestValue(target));
         if (selectedIndex != INVALID_INDEX) {
             result = m_values[selectedIndex];
         }

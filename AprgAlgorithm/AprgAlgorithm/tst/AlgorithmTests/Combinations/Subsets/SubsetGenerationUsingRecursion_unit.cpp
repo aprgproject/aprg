@@ -13,16 +13,16 @@ using Subsets = GenerationForTest::Subsets;
 }  // namespace
 
 TEST(SubsetGenerationUsingRecursionTest, GenerateOrderedSubsetsUsingDfsWorks) {
-    Subsets actualSubsets(GenerationForTest::generateOrderedSubsetsUsingDfs({1, 3, 5}));
+    Subsets const actualSubsets(GenerationForTest::generateOrderedSubsetsUsingDfs({1, 3, 5}));
 
-    Subsets expectedSubsets{{}, {1}, {1, 3}, {1, 3, 5}, {1, 5}, {3}, {3, 5}, {5}};
+    Subsets const expectedSubsets{{}, {1}, {1, 3}, {1, 3, 5}, {1, 5}, {3}, {3, 5}, {5}};
     EXPECT_EQ(expectedSubsets, actualSubsets);
 }
 
 TEST(SubsetGenerationUsingRecursionTest, GenerateSubsetsUsingOnlyRecursionWorks) {
-    Subsets actualSubsets(GenerationForTest::generateSubsetsUsingOnlyRecursion({1, 3, 5}));
+    Subsets const actualSubsets(GenerationForTest::generateSubsetsUsingOnlyRecursion({1, 3, 5}));
 
-    Subsets expectedSubsets{{}, {5}, {3}, {3, 5}, {1}, {1, 5}, {1, 3}, {1, 3, 5}};
+    Subsets const expectedSubsets{{}, {5}, {3}, {3, 5}, {1}, {1, 5}, {1, 3}, {1, 3, 5}};
     EXPECT_EQ(expectedSubsets, actualSubsets);
 }
 

@@ -23,7 +23,7 @@ TEST(CountPathsWithLengthUsingAdjacencyMatrixTest, GetCountWorksWithUndirectedGr
     graph.connect(5, 3);
     graph.connect(2, 3);
     graph.connect(3, 6);
-    CountPathsForTest countPaths(3, graph.getAdjacencyMatrix());
+    CountPathsForTest const countPaths(3, graph.getAdjacencyMatrix());
 
     EXPECT_EQ(0, countPaths.getCount(1, 1));
     EXPECT_EQ(5, countPaths.getCount(1, 2));
@@ -42,7 +42,7 @@ TEST(CountPathsWithLengthUsingAdjacencyMatrixTest, GetCountWorksWithDirectedGrap
     graph.connect(5, 3);
     graph.connect(2, 3);
     graph.connect(3, 6);
-    CountPathsForTest countPaths(3, graph.getAdjacencyMatrix());
+    CountPathsForTest const countPaths(3, graph.getAdjacencyMatrix());
 
     EXPECT_EQ(0, countPaths.getCount(1, 1));
     EXPECT_EQ(1, countPaths.getCount(1, 2));
@@ -62,7 +62,7 @@ TEST(CountPathsWithLengthUsingAdjacencyMatrixTest, GetCountWorksWithDirectedGrap
     graph.connect(4, 2);
     graph.connect(6, 3);
     graph.connect(6, 5);
-    CountPathsForTest countPaths(4, graph.getAdjacencyMatrix());
+    CountPathsForTest const countPaths(4, graph.getAdjacencyMatrix());
 
     EXPECT_EQ(0, countPaths.getCount(1, 1));
     EXPECT_EQ(0, countPaths.getCount(1, 2));

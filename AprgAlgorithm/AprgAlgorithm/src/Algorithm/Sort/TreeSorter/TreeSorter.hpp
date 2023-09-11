@@ -13,7 +13,7 @@ public:
     TreeSorter() = default;
 
     void sort(Values& valuesToSort) const override {
-        std::multiset<Value> tree(valuesToSort.cbegin(), valuesToSort.cend());
+        std::multiset<Value> const tree(valuesToSort.cbegin(), valuesToSort.cend());
 
         std::copy(tree.cbegin(), tree.cend(), valuesToSort.begin());
     }

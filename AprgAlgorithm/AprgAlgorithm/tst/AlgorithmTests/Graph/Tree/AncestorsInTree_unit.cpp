@@ -20,7 +20,7 @@ TEST(AncestorsInTreeTest, GetAncestorWorks) {
     graph.connect(4, 3);
     graph.connect(4, 7);
     graph.connect(7, 8);
-    QueryForTest query(graph, 1);
+    QueryForTest const query(graph, 1);
 
     EXPECT_EQ(1, query.getAncestor(2, 1));
     EXPECT_EQ(7, query.getAncestor(8, 1));

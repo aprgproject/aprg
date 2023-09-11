@@ -14,8 +14,8 @@ using CycleDetectionForTest = FloydAlgorithmForSuccessorGraphs<VertexForTest>;
 }  // namespace
 
 TEST(FloydAlgorithmForSuccessorGraphsTest, CycleDetectionWorksWhenGraphIsEmpty) {
-    GraphForTest graph;
-    CycleDetectionForTest cycleDetection(graph);
+    GraphForTest const graph;
+    CycleDetectionForTest const cycleDetection(graph);
 
     EXPECT_FALSE(cycleDetection.hasACycle());
     EXPECT_TRUE(cycleDetection.getCycle().empty());
@@ -47,7 +47,7 @@ TEST(FloydAlgorithmForSuccessorGraphsTest, CycleDetectionWorksUsingExample1) {
 
     cycleDetection.reinitializeStartingFrom(0);
 
-    PathForTest expectedCycle{4, 5, 6, 4};
+    PathForTest const expectedCycle{4, 5, 6, 4};
     EXPECT_TRUE(cycleDetection.hasACycle());
     EXPECT_EQ(expectedCycle, cycleDetection.getCycle());
 }

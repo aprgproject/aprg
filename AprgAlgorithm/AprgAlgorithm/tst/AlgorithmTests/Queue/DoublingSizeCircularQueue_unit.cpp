@@ -20,7 +20,7 @@ TEST(DoublingSizeCircularQueueTest, EnqueueWorks) { testEnqueueWithInt<QueueForT
 TEST(DoublingSizeCircularQueueTest, DequeueWorks) { testDequeueWithInt<QueueForTest>(); }
 
 TEST(DoublingSizeCircularQueueTest, GetContainerSizeWorks) {
-    QueueForTest queue1;
+    QueueForTest const queue1;
     QueueForTest queue2;
     queue2.enqueue(10);
     queue2.enqueue(5);

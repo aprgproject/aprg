@@ -15,7 +15,7 @@ public:
         int lowest = 0;
         int highest = valuesToSelect.size() - 1;
         while (highest > lowest) {
-            int partitionIndex = partitionAndGetPartitionIndex(valuesToSelect, lowest, highest, m_pivotType);
+            int const partitionIndex = partitionAndGetPartitionIndex(valuesToSelect, lowest, highest, m_pivotType);
 
             // move lowest or highest to the partition where selectionIndex is
             if (partitionIndex < selectionIndex) {

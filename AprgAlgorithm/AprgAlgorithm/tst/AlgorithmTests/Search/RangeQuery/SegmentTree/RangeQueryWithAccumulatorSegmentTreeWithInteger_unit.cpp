@@ -15,14 +15,14 @@ RangeQueryForTest::Function minusFunction = minus<>();
 }  // namespace
 
 TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, GetValueOnIntervalWithMinimumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
+    ValuesForTest const values;
     RangeQueryForTest sumRangeQuery(values, plusFunction, minusFunction, 0);
 
     EXPECT_EQ(0, sumRangeQuery.getValueOnInterval(0, 0));
 }
 
 TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, GetValueOnIntervalWithSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
     RangeQueryForTest sumRangeQuery(values, plusFunction, minusFunction, 0);
 
     EXPECT_EQ(1, sumRangeQuery.getValueOnInterval(0, 0));
@@ -42,7 +42,7 @@ TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, GetValueOnIntervalWithSumWork
 }
 
 TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, IncreaseAtRangeWithSumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
+    ValuesForTest const values;
     RangeQueryForTest sumRangeQuery(values, plusFunction, minusFunction, 0);
 
     sumRangeQuery.increaseAtRange(0, 5, 4);
@@ -51,7 +51,7 @@ TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, IncreaseAtRangeWithSumWorksWi
 }
 
 TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, IncreaseAtRangeWithSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
     RangeQueryForTest sumRangeQuery(values, plusFunction, minusFunction, 0);
 
     sumRangeQuery.increaseAtRange(0, 5, 4);
@@ -73,7 +73,7 @@ TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, IncreaseAtRangeWithSumWorksOn
 }
 
 TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, ChangeValueAtIndexWithSumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
+    ValuesForTest const values;
     RangeQueryForTest sumRangeQuery(values, plusFunction, minusFunction, 0);
 
     sumRangeQuery.changeValueAtIndex(0, 0);
@@ -82,7 +82,7 @@ TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, ChangeValueAtIndexWithSumWork
 }
 
 TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, ChangeValueAtIndexWithSumWorksWithOneValue) {
-    ValuesForTest values{5};
+    ValuesForTest const values{5};
     RangeQueryForTest sumRangeQuery(values, plusFunction, minusFunction, 0);
 
     sumRangeQuery.changeValueAtIndex(0, 3);
@@ -91,7 +91,7 @@ TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, ChangeValueAtIndexWithSumWork
 }
 
 TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, ChangeValueAtIndexWithSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
     RangeQueryForTest sumRangeQuery(values, plusFunction, minusFunction, 0);
 
     sumRangeQuery.changeValueAtIndex(3, 3);

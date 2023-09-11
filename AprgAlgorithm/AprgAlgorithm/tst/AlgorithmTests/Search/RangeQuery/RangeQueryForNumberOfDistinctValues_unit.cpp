@@ -15,8 +15,8 @@ using InputAndOutputPairsForTest = typename RangeQueryForTest::InputAndOutputPai
 }  // namespace
 
 TEST(RangeQueryForNumberOfDistinctValuesTest, GetCountOfDistinctValuesOnIntervalWorksOnExample1) {
-    ValuesForTest values{4, 2, 5, 4, 2, 4, 3, 3, 4};
-    RangeQueryForTest countRangeQuery(values);
+    ValuesForTest const values{4, 2, 5, 4, 2, 4, 3, 3, 4};
+    RangeQueryForTest const countRangeQuery(values);
 
     EXPECT_EQ(1, countRangeQuery.getCountOfDistinctValuesOnInterval(0, 0));
     EXPECT_EQ(2, countRangeQuery.getCountOfDistinctValuesOnInterval(0, 1));
@@ -35,14 +35,14 @@ TEST(RangeQueryForNumberOfDistinctValuesTest, GetCountOfDistinctValuesOnInterval
 }
 
 TEST(RangeQueryForNumberOfDistinctValuesTest, GetInputAndOutputPairsUsingMoAlgorithmWorksOnExample1) {
-    ValuesForTest values{4, 2, 5, 4, 2, 4, 3, 3, 4};
-    RangeQueryForTest countRangeQuery(values);
-    RangesForTest inputRanges{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6},
-                              {0, 7}, {0, 8}, {0, 9}, {1, 6}, {2, 5}, {3, 4}, {4, 4}};
+    ValuesForTest const values{4, 2, 5, 4, 2, 4, 3, 3, 4};
+    RangeQueryForTest const countRangeQuery(values);
+    RangesForTest const inputRanges{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6},
+                                    {0, 7}, {0, 8}, {0, 9}, {1, 6}, {2, 5}, {3, 4}, {4, 4}};
 
-    InputAndOutputPairsForTest expectedPairs{{{0, 0}, 1}, {{0, 1}, 2}, {{0, 2}, 3}, {{0, 3}, 3}, {{0, 4}, 3},
-                                             {{0, 5}, 3}, {{2, 5}, 3}, {{0, 6}, 4}, {{1, 6}, 4}, {{0, 7}, 4},
-                                             {{0, 8}, 4}, {{3, 4}, 2}, {{4, 4}, 1}};
+    InputAndOutputPairsForTest const expectedPairs{{{0, 0}, 1}, {{0, 1}, 2}, {{0, 2}, 3}, {{0, 3}, 3}, {{0, 4}, 3},
+                                                   {{0, 5}, 3}, {{2, 5}, 3}, {{0, 6}, 4}, {{1, 6}, 4}, {{0, 7}, 4},
+                                                   {{0, 8}, 4}, {{3, 4}, 2}, {{4, 4}, 1}};
     EXPECT_EQ(expectedPairs, countRangeQuery.getInputAndOutputPairsUsingMoAlgorithm(inputRanges));
 }
 

@@ -76,7 +76,7 @@ private:
     void saveFrequencyForEachCharacterAt(
         ArrayOfCountPerDigitValue& countPerDigitValue, bool& areAllDigitsInvalid, Values const& valuesToSort,
         int const lowContainerIndex, int const highContainerIndex, int const digitIndex) const {
-        int limit(std::min(highContainerIndex + 1, static_cast<int>(valuesToSort.size())));
+        int const limit(std::min(highContainerIndex + 1, static_cast<int>(valuesToSort.size())));
         // starts at low container index and ends at high container index
         for (auto it = valuesToSort.cbegin() + lowContainerIndex; it != valuesToSort.cbegin() + limit; ++it) {
             Value const& value(*it);
@@ -94,7 +94,7 @@ private:
     void copyUsingNewIndexesAndIncrement(
         Values& valuesToSort, ArrayOfCountPerDigitValue& newIndexes, int const lowContainerIndex,
         int const highContainerIndex, int const digitIndex) const {
-        int limit(std::min(highContainerIndex + 1, static_cast<int>(valuesToSort.size())));
+        int const limit(std::min(highContainerIndex + 1, static_cast<int>(valuesToSort.size())));
 
         // copy first and then copy back to output in the new indexes;
         Values copiedValues(valuesToSort.cbegin() + lowContainerIndex, valuesToSort.cbegin() + limit);
@@ -102,7 +102,8 @@ private:
         for (auto it = copiedValues.cbegin(); it != copiedValues.cend(); ++it) {
             // replace index uses the character index before it
             Value const& copiedValue(*it);
-            int replaceIndex = lowContainerIndex + newIndexes[m_getDigitAtFunction(copiedValue, digitIndex) + 1]++;
+            int const replaceIndex =
+                lowContainerIndex + newIndexes[m_getDigitAtFunction(copiedValue, digitIndex) + 1]++;
             valuesToSort[replaceIndex] = copiedValue;
         }
     }
@@ -111,8 +112,8 @@ private:
         Values& valuesToSort, ArrayOfCountPerDigitValue const& newIndexes, int const lowContainerIndex,
         int const digitIndex) const {
         for (int i = 0; i < MAX_NUMBER_OF_DIGIT_VALUES; ++i) {
-            int newLowContainerIndex(lowContainerIndex + newIndexes[i]);
-            int newHighContainerIndex(lowContainerIndex + newIndexes[i + 1] - 1);
+            int const newLowContainerIndex(lowContainerIndex + newIndexes[i]);
+            int const newHighContainerIndex(lowContainerIndex + newIndexes[i + 1] - 1);
             if (newLowContainerIndex < newHighContainerIndex) {
                 sortStartingAtMostSignificantDigitInternal(
                     valuesToSort, newLowContainerIndex, newHighContainerIndex, digitIndex + 1);

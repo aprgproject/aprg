@@ -46,7 +46,7 @@ TEST(LinearNearestValueSearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhen
 }
 
 TEST(LinearNearestValueSearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
-    ValuesForTest duplicateValues{0, 0, 0, 0, 0};
+    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
     SearchForTest search(duplicateValues);
 
     EXPECT_EQ(0, search.getIndexOfNearestValue(33));
@@ -67,7 +67,7 @@ TEST(LinearNearestValueSearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhen
 TEST(
     LinearNearestValueSearchWithTwoIndicesTest,
     GetNearestValueWorksWithInitialIndexesWhenDistanceFromLowerToHigherIsOne) {
-    ValuesForTest unsortedValues{43, 96, 53, 25, 95, 72, 6, 84, 14, 64, 33, 97, 51, 93, 13};
+    ValuesForTest const unsortedValues{43, 96, 53, 25, 95, 72, 6, 84, 14, 64, 33, 97, 51, 93, 13};
     SearchForTest search(4, 5, unsortedValues);
 
     EXPECT_EQ(72, search.getNearestValue(33));
@@ -76,14 +76,14 @@ TEST(
 TEST(
     LinearNearestValueSearchWithTwoIndicesTest,
     GetNearestValueWorksWithInitialIndexesWhenDistanceFromLowerToHigherIsTwo) {
-    ValuesForTest unsortedValues{43, 96, 53, 25, 95, 72, 6, 84, 14, 64, 33, 97, 51, 93, 13};
+    ValuesForTest const unsortedValues{43, 96, 53, 25, 95, 72, 6, 84, 14, 64, 33, 97, 51, 93, 13};
     SearchForTest search(4, 6, unsortedValues);
 
     EXPECT_EQ(6, search.getNearestValue(33));
 }
 
 TEST(LinearNearestValueSearchWithTwoIndicesTest, GetNearestValueWithInitialIndexesWhenDistanceFromLowerToHigherIsOdd) {
-    ValuesForTest unsortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
+    ValuesForTest const unsortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
     SearchForTest search(1, 8, unsortedValues);
 
     EXPECT_EQ(33, search.getNearestValue(33));

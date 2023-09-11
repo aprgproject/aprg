@@ -97,7 +97,7 @@ TEST(WeightedQuickUnionWithArrayTest, GetRootWithPathCompressionTwoPassWorks) {
 TEST(WeightedQuickUnionWithArrayTest, GetRelativeRootArrayWorks) {
     UnionFindForTest unionFind;
 
-    UnionFindForTest::RootArray expectedInitialRelativeRootArray{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    UnionFindForTest::RootArray const expectedInitialRelativeRootArray{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
     EXPECT_EQ(expectedInitialRelativeRootArray, unionFind.getRelativeRootArray());
 
     unionFind.connect(4, 3);
@@ -106,7 +106,7 @@ TEST(WeightedQuickUnionWithArrayTest, GetRelativeRootArrayWorks) {
     unionFind.connect(9, 4);
     unionFind.connect(2, 1);
 
-    UnionFindForTest::RootArray expectedRelativeRootArray{0, 2, 2, 4, 4, 6, 6, 7, 4, 4, 10, 11, 12};
+    UnionFindForTest::RootArray const expectedRelativeRootArray{0, 2, 2, 4, 4, 6, 6, 7, 4, 4, 10, 11, 12};
     EXPECT_EQ(expectedRelativeRootArray, unionFind.getRelativeRootArray());
 }
 

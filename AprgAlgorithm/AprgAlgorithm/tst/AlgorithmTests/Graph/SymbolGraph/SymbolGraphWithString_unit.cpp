@@ -31,7 +31,7 @@ using SymbolGraphForTest = SymbolGraph<int, string, GraphForTest>;
 
 TEST(SymbolGraphWithStringTest, ContainsWorksWhenEmpty) {
     invertedMap.clear();
-    SymbolGraphForTest symbolGraph;
+    SymbolGraphForTest const symbolGraph;
 
     EXPECT_FALSE(symbolGraph.contains("zero"));
     EXPECT_FALSE(symbolGraph.contains("one"));
@@ -55,7 +55,7 @@ TEST(SymbolGraphWithStringTest, ContainsWorksWhenNotEmpty) {
 
 TEST(SymbolGraphWithStringTest, GetVertexWorks) {
     invertedMap.clear();
-    SymbolGraphForTest symbolGraph;
+    SymbolGraphForTest const symbolGraph;
 
     EXPECT_EQ(0, symbolGraph.getVertex("zero"));
     EXPECT_EQ(1, symbolGraph.getVertex("one"));
@@ -83,7 +83,7 @@ TEST(SymbolGraphWithStringTest, GetGraphWorks) {
     symbolGraph.connect("zero", "two");
     symbolGraph.connect("one", "two");
 
-    GraphForTest::Edges expectedEdges{{0, 1}, {0, 2}, {1, 2}};
+    GraphForTest::Edges const expectedEdges{{0, 1}, {0, 2}, {1, 2}};
     EXPECT_EQ(expectedEdges, symbolGraph.getGraph().getEdges());
 }
 
@@ -94,7 +94,7 @@ TEST(SymbolGraphWithStringTest, GetSymbolTableWorks) {
     symbolGraph.connect("zero", "two");
     symbolGraph.connect("one", "two");
 
-    SymbolGraphForTest::SymbolTable expectedSymbolTable{{0, "zero"}, {1, "one"}, {2, "two"}};
+    SymbolGraphForTest::SymbolTable const expectedSymbolTable{{0, "zero"}, {1, "one"}, {2, "two"}};
     EXPECT_EQ(expectedSymbolTable, symbolGraph.getSymbolTable());
 }
 
@@ -105,8 +105,8 @@ TEST(SymbolGraphWithStringTest, ConnectWorks) {
     symbolGraph.connect("zero", "two");
     symbolGraph.connect("one", "two");
 
-    GraphForTest::Edges expectedEdges{{0, 1}, {0, 2}, {1, 2}};
-    SymbolGraphForTest::SymbolTable expectedSymbolTable{{0, "zero"}, {1, "one"}, {2, "two"}};
+    GraphForTest::Edges const expectedEdges{{0, 1}, {0, 2}, {1, 2}};
+    SymbolGraphForTest::SymbolTable const expectedSymbolTable{{0, "zero"}, {1, "one"}, {2, "two"}};
     EXPECT_EQ(expectedEdges, symbolGraph.getGraph().getEdges());
     EXPECT_EQ(expectedSymbolTable, symbolGraph.getSymbolTable());
 }
@@ -121,8 +121,8 @@ TEST(SymbolGraphWithStringTest, DisconnectWorks) {
     symbolGraph.disconnect("zero", "one");
     symbolGraph.disconnect("zero", "two");
 
-    GraphForTest::Edges expectedEdges{{1, 2}};
-    SymbolGraphForTest::SymbolTable expectedSymbolTable{{1, "one"}, {2, "two"}};
+    GraphForTest::Edges const expectedEdges{{1, 2}};
+    SymbolGraphForTest::SymbolTable const expectedSymbolTable{{1, "one"}, {2, "two"}};
     EXPECT_EQ(expectedEdges, symbolGraph.getGraph().getEdges());
     EXPECT_EQ(expectedSymbolTable, symbolGraph.getSymbolTable());
 }

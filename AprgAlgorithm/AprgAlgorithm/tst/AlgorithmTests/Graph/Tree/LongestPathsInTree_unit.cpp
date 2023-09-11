@@ -30,9 +30,9 @@ TEST(LongestPathsInTreeTest, GetEndPointPairsOfLongestPathsWorks) {
     LongestPathsForTest longestPath(graph);
     longestPath.searchForAllEndPointPairs();
 
-    EndPointPairsForTest endPointPairsToVerify(longestPath.getEndPointPairsOfLongestPaths());
+    EndPointPairsForTest const endPointPairsToVerify(longestPath.getEndPointPairsOfLongestPaths());
 
-    EndPointPairsForTest endPointPairsToExpect{{5, 7}, {6, 7}, {7, 5}, {7, 6}};
+    EndPointPairsForTest const endPointPairsToExpect{{5, 7}, {6, 7}, {7, 5}, {7, 6}};
     EXPECT_EQ(endPointPairsToExpect, endPointPairsToVerify);
 }
 
@@ -53,9 +53,9 @@ TEST(LongestPathsInTreeTest, SearchForAtLeastOneEndPointPairWorks) {
 
     longestPath.searchForAtLeastOneEndPointPair();
 
-    EndPointPairsForTest endPointPairsToVerify(longestPath.getEndPointPairsOfLongestPaths());
+    EndPointPairsForTest const endPointPairsToVerify(longestPath.getEndPointPairsOfLongestPaths());
 
-    EndPointPairsForTest endPointPairsToExpect{{5, 7}};
+    EndPointPairsForTest const endPointPairsToExpect{{5, 7}};
     EXPECT_EQ(endPointPairsToExpect, endPointPairsToVerify);
 }
 
@@ -66,8 +66,8 @@ TEST(LongestPathsInTreeTest, SearchForAllEndPointPairsWorks) {
 
     longestPath.searchForAllEndPointPairs();
 
-    EndPointPairsForTest endPointPairsToVerify(longestPath.getEndPointPairsOfLongestPaths());
-    EndPointPairsForTest endPointPairsToExpect{{5, 7}, {6, 7}, {7, 5}, {7, 6}};
+    EndPointPairsForTest const endPointPairsToVerify(longestPath.getEndPointPairsOfLongestPaths());
+    EndPointPairsForTest const endPointPairsToExpect{{5, 7}, {6, 7}, {7, 5}, {7, 6}};
     EXPECT_EQ(endPointPairsToExpect, endPointPairsToVerify);
 }
 

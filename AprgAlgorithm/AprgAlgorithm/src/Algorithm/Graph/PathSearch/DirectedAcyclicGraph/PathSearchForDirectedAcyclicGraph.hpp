@@ -30,7 +30,8 @@ private:
 
     void searchForPath() {
         VertexOrderingUsingDfsWithVertex vertexOrdering(b_graph);
-        Vertices verticesInTopologicalOrder(vertexOrdering.getVerticesInTopologicalOrder());  // Uses topological sort
+        Vertices const verticesInTopologicalOrder(
+            vertexOrdering.getVerticesInTopologicalOrder());  // Uses topological sort
         // Since dependency is in order, we are assured we are getting best weight path for each vertex
         // This works even with negative weights
         for (Vertex const& vertex : verticesInTopologicalOrder) {

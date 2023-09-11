@@ -60,7 +60,7 @@ protected:
         m_processedVertices.putVertex(vertex);
         m_verticesInDfsPreOrder.emplace_back(vertex);
         m_accumulatedValuesOfPaths.emplace_back(pathAccumulatedValue);
-        int index = treeSize++;
+        int const index = treeSize++;
         for (Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(vertex)) {
             if (m_processedVertices.isNotFound(adjacentVertex)) {
                 traverseUsingDfs(treeSize, m_accumulator(pathAccumulatedValue, adjacentVertex), adjacentVertex);

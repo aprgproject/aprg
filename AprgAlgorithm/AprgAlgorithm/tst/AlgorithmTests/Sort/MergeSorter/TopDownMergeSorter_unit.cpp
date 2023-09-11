@@ -23,43 +23,43 @@ using StabilityCheckObjectsSorter = TopDownMergeSorter<StabilityCheckObjects>;
 }  // namespace
 
 TEST(TopDownMergeSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(TopDownMergeSorterTest, SortWorksOnCharactersUsingOneValueExample) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(TopDownMergeSorterTest, SortWorksOnCharactersUsingExample1) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(TopDownMergeSorterTest, SortWorksOnCharactersUsingExample2) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingExample2WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 // CANNOT SORT STD::LIST
 TEST(TopDownMergeSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
-    IntegersSorter sorter;
+    IntegersSorter const sorter;
     testSortUsingExample1WithPositiveAndNegativeIntegers<IntegersSorter, Integers>(sorter);
 }
 
 TEST(TopDownMergeSorterTest, SortWorksOnDoublesUsingExample1) {
-    DoublesSorter sorter;
+    DoublesSorter const sorter;
     testSortUsingExample1WithDoubleValues<DoublesSorter, Doubles>(sorter);
 }
 
 TEST(TopDownMergeSorterTest, SortWorksOnStringsUsingExample1) {
-    StringsSorter sorter;
+    StringsSorter const sorter;
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);
 }
 
 TEST(TopDownMergeSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1) {
-    StabilityCheckObjectsSorter sorter;
+    StabilityCheckObjectsSorter const sorter;
     testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(sorter);
 }
 

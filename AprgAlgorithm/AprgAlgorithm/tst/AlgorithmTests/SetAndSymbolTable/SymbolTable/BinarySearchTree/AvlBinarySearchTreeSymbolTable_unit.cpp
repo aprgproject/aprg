@@ -84,7 +84,7 @@ TEST(AvlBinarySearchTreeSymbolTableTest, TraverseByPreOrderWorks) {
     KeysForTest keysToVerify;
     symbolTable.traverseByPreOrder([&keysToVerify](NodeForTest const& node) { keysToVerify.emplace_back(node.key); });
 
-    KeysForTest expectedKeys{5, 4, 3, 8, 7, 9};  // balanced
+    KeysForTest const expectedKeys{5, 4, 3, 8, 7, 9};  // balanced
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -100,7 +100,7 @@ TEST(AvlBinarySearchTreeSymbolTableTest, TraverseByInOrderWorks) {
     KeysForTest keysToVerify;
     symbolTable.traverseByInOrder([&keysToVerify](NodeForTest const& node) { keysToVerify.emplace_back(node.key); });
 
-    KeysForTest expectedKeys{3, 4, 5, 7, 8, 9};  // balanced
+    KeysForTest const expectedKeys{3, 4, 5, 7, 8, 9};  // balanced
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -116,7 +116,7 @@ TEST(AvlBinarySearchTreeSymbolTableTest, TraverseByPostOrderWorks) {
     KeysForTest keysToVerify;
     symbolTable.traverseByPostOrder([&keysToVerify](NodeForTest const& node) { keysToVerify.emplace_back(node.key); });
 
-    KeysForTest expectedKeys{3, 4, 7, 9, 8, 5};  // balanced
+    KeysForTest const expectedKeys{3, 4, 7, 9, 8, 5};  // balanced
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -139,8 +139,8 @@ TEST(AvlBinarySearchTreeSymbolTableTest, AfterDeletionTheTreeIsStillBalanced) {
     symbolTable.traverseByPreOrder(
         [&actualAfterDelete](NodeForTest const& node) { actualAfterDelete.emplace_back(node.key); });
 
-    KeysForTest expectedBeforeDelete{5, 4, 3, 8, 7, 9};  // balanced
-    KeysForTest expectedAfterDelete{4, 3, 9};            // still balanced
+    KeysForTest const expectedBeforeDelete{5, 4, 3, 8, 7, 9};  // balanced
+    KeysForTest const expectedAfterDelete{4, 3, 9};            // still balanced
     EXPECT_EQ(expectedBeforeDelete, actualBeforeDelete);
     EXPECT_EQ(expectedAfterDelete, actualAfterDelete);
 }
@@ -164,8 +164,8 @@ TEST(AvlBinarySearchTreeSymbolTableTest, AfterDeletionOfMinimumTheTreeIsStillBal
     symbolTable.traverseByPreOrder(
         [&actualAfterDelete](NodeForTest const& node) { actualAfterDelete.emplace_back(node.key); });
 
-    KeysForTest expectedBeforeDelete{5, 4, 3, 8, 7, 9};  // balanced
-    KeysForTest expectedAfterDelete{8, 7, 9};            // still balanced
+    KeysForTest const expectedBeforeDelete{5, 4, 3, 8, 7, 9};  // balanced
+    KeysForTest const expectedAfterDelete{8, 7, 9};            // still balanced
     EXPECT_EQ(expectedBeforeDelete, actualBeforeDelete);
     EXPECT_EQ(expectedAfterDelete, actualAfterDelete);
 }
@@ -189,8 +189,8 @@ TEST(AvlBinarySearchTreeSymbolTableTest, AfterDeletionOfMaximumTheTreeIsStillBal
     symbolTable.traverseByPreOrder(
         [&actualAfterDelete](NodeForTest const& node) { actualAfterDelete.emplace_back(node.key); });
 
-    KeysForTest expectedBeforeDelete{5, 4, 3, 8, 7, 9};  // balanced
-    KeysForTest expectedAfterDelete{4, 3, 5};            // still balanced
+    KeysForTest const expectedBeforeDelete{5, 4, 3, 8, 7, 9};  // balanced
+    KeysForTest const expectedAfterDelete{4, 3, 5};            // still balanced
     EXPECT_EQ(expectedBeforeDelete, actualBeforeDelete);
     EXPECT_EQ(expectedAfterDelete, actualAfterDelete);
 }

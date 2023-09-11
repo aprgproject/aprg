@@ -53,7 +53,7 @@ TEST(MaxItemsSaverTest, GetMaxItemsAndClearWorks) {
     saver.save(98);
     saver.save(976);
 
-    MaxItemsSaverForTest::Objects expectedObjects{100, 721, 976};
+    MaxItemsSaverForTest::Objects const expectedObjects{100, 721, 976};
     EXPECT_EQ(expectedObjects, saver.getMaxItemsAndClear());
 }
 

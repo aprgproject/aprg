@@ -36,7 +36,7 @@ TEST(HamiltonianPathUtilitiesTest, HasHamiltonianPathBecauseOfDiracTheoremWorks)
     graphWithPathButNotSatisfied.connect(3, 4);
     graphWithPathButNotSatisfied.connect(4, 5);
     graphWithPathButNotSatisfied.connect(5, 1);
-    UndirectedGraphForTest graphWithPathAndSatisfied;
+    UndirectedGraphForTest const graphWithPathAndSatisfied;
     graphWithNoPath.connect(0, 1);
     graphWithNoPath.connect(0, 2);
 

@@ -17,8 +17,8 @@ public:
 
     [[nodiscard]] Edges getEdges() const override {
         Edges result;
-        int numberOfColumns(m_adjacencyMatrix.getNumberOfColumns());
-        int numberOfRows(m_adjacencyMatrix.getNumberOfRows());
+        int const numberOfColumns(m_adjacencyMatrix.getNumberOfColumns());
+        int const numberOfRows(m_adjacencyMatrix.getNumberOfRows());
         for (Vertex vertex1 = 0; vertex1 < numberOfColumns; ++vertex1) {
             for (Vertex vertex2 = vertex1; vertex2 < numberOfRows; ++vertex2) {
                 if (isDirectlyConnected(vertex1, vertex2)) {
@@ -31,7 +31,7 @@ public:
 
     [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
         Vertices result;
-        int numberOfRows(m_adjacencyMatrix.getNumberOfRows());
+        int const numberOfRows(m_adjacencyMatrix.getNumberOfRows());
         for (Vertex possibleAdjacentVertex = 0; possibleAdjacentVertex < numberOfRows; ++possibleAdjacentVertex) {
             if (isDirectlyConnected(vertex, possibleAdjacentVertex)) {
                 result.emplace_back(possibleAdjacentVertex);
@@ -42,7 +42,7 @@ public:
 
     [[nodiscard]] Vertices getVertices() const override {
         Vertices result;
-        int numberOfColumns(m_adjacencyMatrix.getNumberOfColumns());
+        int const numberOfColumns(m_adjacencyMatrix.getNumberOfColumns());
         for (Vertex vertex = 0; vertex < numberOfColumns; ++vertex) {
             if (hasAnyConnection(vertex)) {
                 result.emplace_back(vertex);
@@ -53,7 +53,7 @@ public:
 
     [[nodiscard]] int getNumberOfVertices() const override {
         int result(0);
-        int numberOfColumns(m_adjacencyMatrix.getNumberOfColumns());
+        int const numberOfColumns(m_adjacencyMatrix.getNumberOfColumns());
         for (Vertex vertex = 0; vertex < numberOfColumns; ++vertex) {
             if (hasAnyConnection(vertex)) {
                 ++result;
@@ -67,7 +67,7 @@ public:
 
     [[nodiscard]] bool hasAnyConnection(Vertex const& vertex) const override {
         bool result(false);
-        int numberOfRows(m_adjacencyMatrix.getNumberOfRows());
+        int const numberOfRows(m_adjacencyMatrix.getNumberOfRows());
         for (Vertex adjacentVertex = 0; adjacentVertex < numberOfRows; ++adjacentVertex) {
             if (isDirectlyConnected(vertex, adjacentVertex)) {
                 result = true;

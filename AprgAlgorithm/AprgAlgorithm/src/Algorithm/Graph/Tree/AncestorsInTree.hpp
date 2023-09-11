@@ -38,7 +38,7 @@ private:
                     result = it->second;
                 }
             } else {
-                int powerOfTwoDistance =
+                int const powerOfTwoDistance =
                     BitValueUtilities::get2ToThePowerOf(BitValueUtilities::getLogarithmWithBase2Of(distance));
                 result =
                     getAncestorInternal(getAncestorInternal(vertex, distance - powerOfTwoDistance), powerOfTwoDistance);

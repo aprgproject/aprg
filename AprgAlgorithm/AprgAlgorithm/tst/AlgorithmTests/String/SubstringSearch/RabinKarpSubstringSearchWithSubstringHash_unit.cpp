@@ -16,10 +16,10 @@ using SubstringSearchForTest = RabinKarpSubstringSearchWithSubstringHash<Index, 
 
 TEST(RabinKarpSubstringSearchWithSubstringHashTest, SearchWorksUsingEmptyStringsAndDoesNotCrash) {
     // SubstringSearchUsingZAlgorithm has unique results of handling empty strings
-    string emptyString;
-    string nonEmptyString("NonEmptyString");
-    SubstringSearchForTest emptyStringSearch(emptyString);
-    SubstringSearchForTest nonEmptyStringSearch(nonEmptyString);
+    string const emptyString;
+    string const nonEmptyString("NonEmptyString");
+    SubstringSearchForTest const emptyStringSearch(emptyString);
+    SubstringSearchForTest const nonEmptyStringSearch(nonEmptyString);
 
     EXPECT_EQ(Index(string::npos), emptyStringSearch.search(emptyString));
     EXPECT_EQ(Index(string::npos), emptyStringSearch.search(nonEmptyString));

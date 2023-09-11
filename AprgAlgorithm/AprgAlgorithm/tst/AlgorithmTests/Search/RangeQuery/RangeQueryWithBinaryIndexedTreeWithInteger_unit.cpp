@@ -15,15 +15,15 @@ RangeQueryForTest::AccumulatorFunction minusAccumulator = minus<>();
 }  // namespace
 
 TEST(RangeQueryWithBinaryIndexedTreeTest, GetAccumulatedValueOnIntervalWithSumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
-    RangeQueryForTest sumRangeQuery(values, plusAccumulator, minusAccumulator);
+    ValuesForTest const values;
+    RangeQueryForTest const sumRangeQuery(values, plusAccumulator, minusAccumulator);
 
     EXPECT_EQ(0, sumRangeQuery.getAccumulatedValueOnInterval(0, 0));
 }
 
 TEST(RangeQueryWithBinaryIndexedTreeTest, GetAccumulatedValueOnIntervalWithSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
-    RangeQueryForTest sumRangeQuery(values, plusAccumulator, minusAccumulator);
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    RangeQueryForTest const sumRangeQuery(values, plusAccumulator, minusAccumulator);
 
     EXPECT_EQ(1, sumRangeQuery.getAccumulatedValueOnInterval(0, 0));
     EXPECT_EQ(4, sumRangeQuery.getAccumulatedValueOnInterval(0, 1));
@@ -42,15 +42,15 @@ TEST(RangeQueryWithBinaryIndexedTreeTest, GetAccumulatedValueOnIntervalWithSumWo
 }
 
 TEST(RangeQueryWithBinaryIndexedTreeTest, GetSumFrom0ToIndexWithSumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
-    RangeQueryForTest sumRangeQuery(values, plusAccumulator, minusAccumulator);
+    ValuesForTest const values;
+    RangeQueryForTest const sumRangeQuery(values, plusAccumulator, minusAccumulator);
 
     EXPECT_EQ(0, sumRangeQuery.getAccumulatedValueFrom0ToIndex(0));
 }
 
 TEST(RangeQueryWithBinaryIndexedTreeTest, GetSumFrom0ToIndexWithSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
-    RangeQueryForTest sumRangeQuery(values, plusAccumulator, minusAccumulator);
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    RangeQueryForTest const sumRangeQuery(values, plusAccumulator, minusAccumulator);
 
     EXPECT_EQ(1, sumRangeQuery.getAccumulatedValueFrom0ToIndex(0));
     EXPECT_EQ(4, sumRangeQuery.getAccumulatedValueFrom0ToIndex(1));
@@ -65,7 +65,7 @@ TEST(RangeQueryWithBinaryIndexedTreeTest, GetSumFrom0ToIndexWithSumWorksOnExampl
 }
 
 TEST(RangeQueryWithBinaryIndexedTreeTest, ChangeValueAtIndexWithSumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
+    ValuesForTest const values;
     RangeQueryForTest sumRangeQuery(values, plusAccumulator, minusAccumulator);
 
     sumRangeQuery.changeValueAtIndex(0, 0);
@@ -74,7 +74,7 @@ TEST(RangeQueryWithBinaryIndexedTreeTest, ChangeValueAtIndexWithSumWorksWithEmpt
 }
 
 TEST(RangeQueryWithBinaryIndexedTreeTest, ChangeValueAtIndexWithSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
     RangeQueryForTest sumRangeQuery(values, plusAccumulator, minusAccumulator);
 
     sumRangeQuery.changeValueAtIndex(3, 3);
@@ -96,7 +96,7 @@ TEST(RangeQueryWithBinaryIndexedTreeTest, ChangeValueAtIndexWithSumWorksOnExampl
 }
 
 TEST(RangeQueryWithBinaryIndexedTreeTest, ChangeValueAtIndexWithSumWorksTwiceOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
     RangeQueryForTest sumRangeQuery(values, plusAccumulator, minusAccumulator);
 
     sumRangeQuery.changeValueAtIndex(3, 3);

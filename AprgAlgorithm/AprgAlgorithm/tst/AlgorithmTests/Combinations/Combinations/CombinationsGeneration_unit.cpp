@@ -13,16 +13,16 @@ using Combinations = GenerationForTest::Combinations;
 }  // namespace
 
 TEST(CombinationsGenerationTest, GenerateCombinationsWithLengthWorksWhenCombinationLengthIsLessThanSize) {
-    Combinations actualCombinations(GenerationForTest::generateCombinationsWithLength({1, 3, 5}, 2));
+    Combinations const actualCombinations(GenerationForTest::generateCombinationsWithLength({1, 3, 5}, 2));
 
-    Combinations expectedCombinations{{1, 3}, {1, 5}, {3, 5}};
+    Combinations const expectedCombinations{{1, 3}, {1, 5}, {3, 5}};
     EXPECT_EQ(expectedCombinations, actualCombinations);
 }
 
 TEST(CombinationsGenerationTest, GenerateCombinationsWithLengthWorksWhenCombinationLengthIsEqualToSize) {
-    Combinations actualCombinations(GenerationForTest::generateCombinationsWithLength({1, 3, 5}, 3));
+    Combinations const actualCombinations(GenerationForTest::generateCombinationsWithLength({1, 3, 5}, 3));
 
-    Combinations expectedCombinations{{1, 3, 5}};
+    Combinations const expectedCombinations{{1, 3, 5}};
     EXPECT_EQ(expectedCombinations, actualCombinations);
 }
 

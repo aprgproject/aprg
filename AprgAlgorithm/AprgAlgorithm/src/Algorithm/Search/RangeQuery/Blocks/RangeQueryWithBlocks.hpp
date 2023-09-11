@@ -47,11 +47,11 @@ public:
         // This is max(O(k), O(n/k)) time.
         Output result{};
         if (start < static_cast<Index>(m_values.size()) && end < static_cast<Index>(m_values.size()) && start <= end) {
-            Index startOfBlocks = mathHelper::getMultipleThatIsGreaterOrEqual(m_blockSize, start);
-            Index endOfBlocks = mathHelper::getMultipleThatIsLesserOrEqual(m_blockSize, end);
+            Index const startOfBlocks = mathHelper::getMultipleThatIsGreaterOrEqual(m_blockSize, start);
+            Index const endOfBlocks = mathHelper::getMultipleThatIsLesserOrEqual(m_blockSize, end);
             if (startOfBlocks + m_blockSize <= endOfBlocks) {
-                Index blockStart = startOfBlocks / m_blockSize;
-                Index blockEnd = endOfBlocks / m_blockSize;
+                Index const blockStart = startOfBlocks / m_blockSize;
+                Index const blockEnd = endOfBlocks / m_blockSize;
 
                 Values resultParts;
                 if (start < startOfBlocks) {
@@ -82,8 +82,8 @@ public:
         if (index < static_cast<Index>(m_values.size())) {
             m_values[index] = newValue;
 
-            Index start = mathHelper::getMultipleThatIsLesserOrEqual(m_blockSize, index);
-            Index end = std::min(start + m_blockSize, static_cast<Index>(m_values.size()));
+            Index const start = mathHelper::getMultipleThatIsLesserOrEqual(m_blockSize, index);
+            Index const end = std::min(start + m_blockSize, static_cast<Index>(m_values.size()));
             m_blocks[start / m_blockSize] = m_valuesFunction(m_values.cbegin() + start, m_values.cbegin() + end);
         }
     }
@@ -92,11 +92,11 @@ protected:
     void initialize(Values const& valuesToCheck, Index const suggestedNumberOfBlocks) {
         if (!valuesToCheck.empty()) {
             m_blockSize = std::max(static_cast<Index>(valuesToCheck.size() / suggestedNumberOfBlocks), 1);
-            Index numberOfBlocks =
+            Index const numberOfBlocks =
                 mathHelper::getMultipleThatIsGreaterOrEqual(static_cast<Index>(valuesToCheck.size()), m_blockSize);
             m_blocks.reserve(numberOfBlocks);
             for (Index start = 0; start < static_cast<Index>(m_values.size()); start += m_blockSize) {
-                Index end = std::min(start + m_blockSize, static_cast<Index>(m_values.size()));
+                Index const end = std::min(start + m_blockSize, static_cast<Index>(m_values.size()));
                 m_blocks.emplace_back(m_valuesFunction(m_values.cbegin() + start, m_values.cbegin() + end));
             }
             m_blocks.shrink_to_fit();

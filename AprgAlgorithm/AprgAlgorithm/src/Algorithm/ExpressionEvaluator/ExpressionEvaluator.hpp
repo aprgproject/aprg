@@ -129,7 +129,7 @@ private:
 
     void performOperationWithStacks(ValueStack& valueStack, OperatorStack& operatorStack) {
         if (!operatorStack.empty()) {
-            Term operatorTerm(operatorStack.top());
+            Term const operatorTerm(operatorStack.top());
             operatorStack.pop();
             if (operatorTerm.isPrefixUnaryOperator() && !valueStack.empty()) {
                 ValueTemplateType const value(valueStack.top());
@@ -246,14 +246,14 @@ public:
                 expressionsStack.push({term});
             } else if (term.isOperator()) {
                 if (term.isPrefixUnaryOperator()) {
-                    Terms expressionOperand = popTermsStackAndReturnTopValue(expressionsStack);
+                    Terms const expressionOperand = popTermsStackAndReturnTopValue(expressionsStack);
                     Terms newExpression;
                     newExpression.emplace_back(term);
                     copyTermsAndPutGroupOperatorsIfNeeded(expressionOperand, newExpression);
                     expressionsStack.push(newExpression);
                 } else if (term.isBinaryOperator()) {
-                    Terms expressionOperand1 = popTermsStackAndReturnTopValue(expressionsStack);
-                    Terms expressionOperand2 = popTermsStackAndReturnTopValue(expressionsStack);
+                    Terms const expressionOperand1 = popTermsStackAndReturnTopValue(expressionsStack);
+                    Terms const expressionOperand2 = popTermsStackAndReturnTopValue(expressionsStack);
                     Terms newExpression;
                     copyTermsAndPutGroupOperatorsIfNeeded(expressionOperand1, newExpression);
                     newExpression.emplace_back(term);
@@ -263,7 +263,7 @@ public:
             }
         }
         if (!expressionsStack.empty()) {
-            Terms finalExpression = expressionsStack.top();
+            Terms const finalExpression = expressionsStack.top();
             termsInInfix.reserve(finalExpression.size());
             std::copy(finalExpression.cbegin(), finalExpression.cend(), std::back_inserter(termsInInfix));
         }
@@ -309,7 +309,7 @@ private:
     }
 
     static void copyTermsAndPutGroupOperatorsIfNeeded(Terms const& inputTerms, Terms& outputTerms) {
-        bool areGroupOperatorsNeeded = inputTerms.size() > 1;
+        bool const areGroupOperatorsNeeded = inputTerms.size() > 1;
         if (areGroupOperatorsNeeded) {
             outputTerms.emplace_back(Term::OperatorSyntaxType::StartGroup);
         }

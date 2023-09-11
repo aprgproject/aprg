@@ -23,9 +23,9 @@ TEST(NodeDisjointPathsTest, Example1Works) {
     graph.connect(4, 3);
     graph.connect(4, 5);
     graph.connect(5, 6);
-    PathSearchForTest pathSearch(graph, 1, 6);
+    PathSearchForTest const pathSearch(graph, 1, 6);
 
-    PathsForTest expectedNodeDisjointPaths{{1, 4, 3, 6}};
+    PathsForTest const expectedNodeDisjointPaths{{1, 4, 3, 6}};
     EXPECT_EQ(1, pathSearch.getNumberOfNodeDisjointPaths());
     EXPECT_EQ(expectedNodeDisjointPaths, pathSearch.getNodeDisjointPaths());
 }

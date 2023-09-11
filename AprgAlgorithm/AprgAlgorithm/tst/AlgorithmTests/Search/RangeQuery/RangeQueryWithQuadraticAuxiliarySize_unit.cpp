@@ -26,15 +26,15 @@ RangeQueryForTest::Function multipliesAccumulator = multiplies<>();
 }  // namespace
 
 TEST(RangeQueryWithQuadraticAuxiliarySizeTest, GetValueOnIntervalWithMinimumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
-    RangeQueryForTest minimumRangeQuery(values, minimumSelector);
+    ValuesForTest const values;
+    RangeQueryForTest const minimumRangeQuery(values, minimumSelector);
 
     EXPECT_EQ(0, minimumRangeQuery.getValueOnInterval(0, 0));
 }
 
 TEST(RangeQueryWithQuadraticAuxiliarySizeTest, GetValueOnIntervalWithMinimumWorksOnExample1) {
-    ValuesForTest values{5, 9, 4, 8, 6, 1, 4, 2, 0};
-    RangeQueryForTest minimumRangeQuery(values, minimumSelector);
+    ValuesForTest const values{5, 9, 4, 8, 6, 1, 4, 2, 0};
+    RangeQueryForTest const minimumRangeQuery(values, minimumSelector);
 
     EXPECT_EQ(5, minimumRangeQuery.getValueOnInterval(0, 0));
     EXPECT_EQ(5, minimumRangeQuery.getValueOnInterval(0, 1));
@@ -51,8 +51,8 @@ TEST(RangeQueryWithQuadraticAuxiliarySizeTest, GetValueOnIntervalWithMinimumWork
 }
 
 TEST(RangeQueryWithQuadraticAuxiliarySizeTest, GetValueOnIntervalWithMaximumWorksOnExample1) {
-    ValuesForTest values{5, 9, 4, 8, 6, 1, 4, 2, 10};
-    RangeQueryForTest maximumRangeQuery(values, maximumSelector);
+    ValuesForTest const values{5, 9, 4, 8, 6, 1, 4, 2, 10};
+    RangeQueryForTest const maximumRangeQuery(values, maximumSelector);
 
     EXPECT_EQ(5, maximumRangeQuery.getValueOnInterval(0, 0));
     EXPECT_EQ(9, maximumRangeQuery.getValueOnInterval(0, 1));
@@ -69,8 +69,8 @@ TEST(RangeQueryWithQuadraticAuxiliarySizeTest, GetValueOnIntervalWithMaximumWork
 }
 
 TEST(RangeQueryWithQuadraticAuxiliarySizeTest, GetValueOnIntervalWithSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
-    RangeQueryForTest sumRangeQuery(values, plusAccumulator);
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    RangeQueryForTest const sumRangeQuery(values, plusAccumulator);
 
     EXPECT_EQ(1, sumRangeQuery.getValueOnInterval(0, 0));
     EXPECT_EQ(4, sumRangeQuery.getValueOnInterval(0, 1));
@@ -90,8 +90,8 @@ TEST(RangeQueryWithQuadraticAuxiliarySizeTest, GetValueOnIntervalWithSumWorksOnE
 }
 
 TEST(RangeQueryWithQuadraticAuxiliarySizeTest, GetValueOnIntervalWithSumWorksOnExample2) {
-    ValuesForTest values{1, 3, 4, 3, 6, 1, 4, 2, 9};
-    RangeQueryForTest sumRangeQuery(values, plusAccumulator);
+    ValuesForTest const values{1, 3, 4, 3, 6, 1, 4, 2, 9};
+    RangeQueryForTest const sumRangeQuery(values, plusAccumulator);
 
     EXPECT_EQ(1, sumRangeQuery.getValueOnInterval(0, 0));
     EXPECT_EQ(4, sumRangeQuery.getValueOnInterval(0, 1));
@@ -110,8 +110,8 @@ TEST(RangeQueryWithQuadraticAuxiliarySizeTest, GetValueOnIntervalWithSumWorksOnE
 }
 
 TEST(RangeQueryWithQuadraticAuxiliarySizeTest, GetValueOnIntervalWithGeometricSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
-    RangeQueryForTest geometricSumRangeQuery(values, multipliesAccumulator);
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    RangeQueryForTest const geometricSumRangeQuery(values, multipliesAccumulator);
 
     EXPECT_EQ(1, geometricSumRangeQuery.getValueOnInterval(0, 0));
     EXPECT_EQ(3, geometricSumRangeQuery.getValueOnInterval(0, 1));
@@ -130,8 +130,8 @@ TEST(RangeQueryWithQuadraticAuxiliarySizeTest, GetValueOnIntervalWithGeometricSu
 }
 
 TEST(RangeQueryWithQuadraticAuxiliarySizeTest, GetValueOnIntervalWithGeometricSumWorksOnExample2) {
-    ValuesForTest values{1, 3, 4, 3, 6, 1, 4, 2, 9};
-    RangeQueryForTest geometricSumRangeQuery(values, multipliesAccumulator);
+    ValuesForTest const values{1, 3, 4, 3, 6, 1, 4, 2, 9};
+    RangeQueryForTest const geometricSumRangeQuery(values, multipliesAccumulator);
 
     EXPECT_EQ(1, geometricSumRangeQuery.getValueOnInterval(0, 0));
     EXPECT_EQ(3, geometricSumRangeQuery.getValueOnInterval(0, 1));

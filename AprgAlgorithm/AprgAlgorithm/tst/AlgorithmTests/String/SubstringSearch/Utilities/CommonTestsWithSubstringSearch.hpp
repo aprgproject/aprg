@@ -10,8 +10,8 @@ namespace alba::algorithm::CommonTestsWithSubstringSearch {
 
 template <typename SubstringSearch, typename Index>
 void testSearchUsingEmptyStringsAndDoesNotCrash() {
-    string emptyString;
-    string nonEmptyString("NonEmptyString");
+    string const emptyString;
+    string const nonEmptyString("NonEmptyString");
     SubstringSearch emptyStringSearch(emptyString);
     SubstringSearch nonEmptyStringSearch(nonEmptyString);
 
@@ -25,7 +25,7 @@ template <typename SubstringSearch, typename Index>
 void testSearchUsingExample1() {
     SubstringSearch substringSearchWithHit("AACAA");
     SubstringSearch substringSearchWithoutHit("BBB");
-    string searchSpace("AABRAACADABRAACAADABRA");
+    string const searchSpace("AABRAACADABRAACAADABRA");
 
     EXPECT_EQ(Index(12), substringSearchWithHit.search(searchSpace));
     EXPECT_EQ(Index(string::npos), substringSearchWithoutHit.search(searchSpace));
@@ -35,7 +35,7 @@ template <typename SubstringSearch, typename Index>
 void testSearchUsingExample2() {
     SubstringSearch substringSearchWithHit("blue");
     SubstringSearch substringSearchWithoutHit("red");
-    string searchSpace("Mr. Blue has a blue house");
+    string const searchSpace("Mr. Blue has a blue house");
 
     EXPECT_EQ(Index(15), substringSearchWithHit.search(searchSpace));
     EXPECT_EQ(Index(string::npos), substringSearchWithoutHit.search(searchSpace));

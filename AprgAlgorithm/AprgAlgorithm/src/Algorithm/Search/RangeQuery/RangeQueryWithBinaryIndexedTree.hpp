@@ -67,7 +67,7 @@ public:
         // This has log(N) running time
         if (index < static_cast<Index>(m_values.size())) {
             // Indexes here have plus one (for easier end loop conditions)
-            Value delta = m_inverseAccumulator(newValue, m_values[index]);
+            Value const delta = m_inverseAccumulator(newValue, m_values[index]);
             Index indexPlusOne(index + 1);
             while (indexPlusOne <= static_cast<Index>(m_partialTreeSums.size())) {
                 // update partial sums
@@ -101,7 +101,7 @@ private:
         m_partialTreeSums.reserve(m_values.size());
         // Indexes here have plus one (for easier end loop conditions)
         for (Index indexPlusOne = 1; indexPlusOne <= static_cast<Index>(m_values.size()); ++indexPlusOne) {
-            Index powerOf2Factor(getGreatestPowerOf2Factor(indexPlusOne));
+            Index const powerOf2Factor(getGreatestPowerOf2Factor(indexPlusOne));
             m_partialTreeSums.emplace_back(getPartialTreeSum(powerOf2Factor, indexPlusOne));
         }
         m_partialTreeSums.shrink_to_fit();

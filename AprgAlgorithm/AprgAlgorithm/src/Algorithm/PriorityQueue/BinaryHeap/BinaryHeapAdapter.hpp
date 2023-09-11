@@ -38,7 +38,7 @@ public:
         // Heap order: isInHeapOrder(child, parent) is true
         while (treeIndex > 1 &&
                !isInHeapOrder(getObjectOnTree(treeIndex), getObjectOnTree(getParentIndex(treeIndex)))) {
-            int parentTreeIndex(getParentIndex(treeIndex));
+            int const parentTreeIndex(getParentIndex(treeIndex));
             // swap parent and child
             std::swap(getObjectReferenceOnTree(parentTreeIndex), getObjectReferenceOnTree(treeIndex));
             treeIndex = parentTreeIndex;  // move to the next parent
@@ -51,7 +51,7 @@ public:
         // Sink is "top down reheapify" -> it sinks down to the bottom of the tree
         int treeIndex(startTreeIndex);
         while (getFirstChildIndex(treeIndex) <= treeSize) {
-            int significantChildIndex(getChildIndexThatWouldMostBreakTheHeapOrder(treeIndex, treeSize));
+            int const significantChildIndex(getChildIndexThatWouldMostBreakTheHeapOrder(treeIndex, treeSize));
             if (isInHeapOrder(getObjectOnTree(significantChildIndex), getObjectOnTree(treeIndex))) {
                 break;  // heap order is found so stop
             }
@@ -66,8 +66,8 @@ public:
 private:
     [[nodiscard]] inline int getChildIndexThatWouldMostBreakTheHeapOrder(
         int const treeIndex, int const treeSize) const {
-        int firstChildIndex(getFirstChildIndex(treeIndex));
-        int lastPossibleChildIndex(std::min(getLastChildIndex(treeIndex), treeSize));
+        int const firstChildIndex(getFirstChildIndex(treeIndex));
+        int const lastPossibleChildIndex(std::min(getLastChildIndex(treeIndex), treeSize));
         int significantChildIndex = firstChildIndex;
         for (int childIndex = firstChildIndex + 1; childIndex <= lastPossibleChildIndex; ++childIndex) {
             // Heap order: isInHeapOrder(child, parent) is true

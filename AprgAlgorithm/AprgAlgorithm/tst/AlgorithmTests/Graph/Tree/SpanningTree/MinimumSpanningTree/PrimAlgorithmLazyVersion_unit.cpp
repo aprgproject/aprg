@@ -35,9 +35,9 @@ TEST(PrimAlgorithmLazyVersionTest, WorksOnUndirectedGraph) {
     graph.connect(4, 7, 0.37);
     graph.connect(5, 7, 0.28);
 
-    MinimumSpanningTreeSearchForTest spanningTreeSearch(graph, 0);
+    MinimumSpanningTreeSearchForTest const spanningTreeSearch(graph, 0);
 
-    Edges expectedMinimumSpanningTree{{0, 7}, {1, 7}, {0, 2}, {2, 3}, {5, 7}, {4, 5}, {2, 6}};
+    Edges const expectedMinimumSpanningTree{{0, 7}, {1, 7}, {0, 2}, {2, 3}, {5, 7}, {4, 5}, {2, 6}};
     EXPECT_EQ(expectedMinimumSpanningTree, spanningTreeSearch.getMinimumSpanningTreeEdges());
 }
 

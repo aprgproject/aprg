@@ -45,7 +45,7 @@ void putConnectionsWithNoCyclesForTest(EdgeWeightedDirectedGraphForTest& graph) 
 TEST(PathSearchUsingDijkstraTest, StillProcessWhenThereAreCyclesInLesserComparison) {
     EdgeWeightedDirectedGraphForTest graph;
     putConnectionsWithCyclesForTest(graph);
-    ShortestPathSearchForTest pathSearch(graph, 0);
+    ShortestPathSearchForTest const pathSearch(graph, 0);
 
     EXPECT_TRUE(pathSearch.hasPathTo(0));
     EXPECT_TRUE(pathSearch.hasPathTo(1));
@@ -62,7 +62,7 @@ TEST(PathSearchUsingDijkstraTest, StillProcessWhenThereAreCyclesInLesserComparis
 TEST(PathSearchUsingDijkstraTest, DoesNotProcessWhenThereAreCyclesInGreaterComparison) {
     EdgeWeightedDirectedGraphForTest graph;
     putConnectionsWithCyclesForTest(graph);
-    LongestPathSearchForTest pathSearch(graph, 0);
+    LongestPathSearchForTest const pathSearch(graph, 0);
 
     EXPECT_FALSE(pathSearch.hasPathTo(0));
     EXPECT_FALSE(pathSearch.hasPathTo(1));
@@ -79,7 +79,7 @@ TEST(PathSearchUsingDijkstraTest, DoesNotProcessWhenThereAreCyclesInGreaterCompa
 TEST(PathSearchUsingDijkstraTest, HasPathToWorksWithEdgeWeightedDirectedGraphAndLesserComparison) {
     EdgeWeightedDirectedGraphForTest graph;
     putConnectionsWithNoCyclesForTest(graph);
-    ShortestPathSearchForTest pathSearch(graph, 0);
+    ShortestPathSearchForTest const pathSearch(graph, 0);
 
     EXPECT_FALSE(pathSearch.hasPathTo(0));
     EXPECT_TRUE(pathSearch.hasPathTo(1));
@@ -95,7 +95,7 @@ TEST(PathSearchUsingDijkstraTest, HasPathToWorksWithEdgeWeightedDirectedGraphAnd
 TEST(PathSearchUsingDijkstraTest, GetPathToWorksWithEdgeWeightedDirectedGraphAndLesserComparison) {
     EdgeWeightedDirectedGraphForTest graph;
     putConnectionsWithNoCyclesForTest(graph);
-    ShortestPathSearchForTest pathSearch(graph, 0);
+    ShortestPathSearchForTest const pathSearch(graph, 0);
 
     EXPECT_EQ(PathForTest(), pathSearch.getPathTo(0));
     EXPECT_EQ(PathForTest({0, 4, 5, 1}), pathSearch.getPathTo(1));
@@ -111,7 +111,7 @@ TEST(PathSearchUsingDijkstraTest, GetPathToWorksWithEdgeWeightedDirectedGraphAnd
 TEST(PathSearchUsingDijkstraTest, HasPathToWorksWithEdgeWeightedDirectedGraphAndGreaterComparison) {
     EdgeWeightedDirectedGraphForTest graph;
     putConnectionsWithNoCyclesForTest(graph);
-    LongestPathSearchForTest pathSearch(graph, 0);
+    LongestPathSearchForTest const pathSearch(graph, 0);
 
     EXPECT_FALSE(pathSearch.hasPathTo(0));
     EXPECT_TRUE(pathSearch.hasPathTo(1));
@@ -127,7 +127,7 @@ TEST(PathSearchUsingDijkstraTest, HasPathToWorksWithEdgeWeightedDirectedGraphAnd
 TEST(PathSearchUsingDijkstraTest, GetPathToWorksWithEdgeWeightedDirectedGraphAndGreaterComparison) {
     EdgeWeightedDirectedGraphForTest graph;
     putConnectionsWithNoCyclesForTest(graph);
-    LongestPathSearchForTest pathSearch(graph, 0);
+    LongestPathSearchForTest const pathSearch(graph, 0);
 
     EXPECT_EQ(PathForTest(), pathSearch.getPathTo(0));
     EXPECT_EQ(PathForTest({0, 4, 5, 1}), pathSearch.getPathTo(1));

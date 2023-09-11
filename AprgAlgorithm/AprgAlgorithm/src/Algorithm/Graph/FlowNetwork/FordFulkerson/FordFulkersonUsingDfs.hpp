@@ -30,7 +30,7 @@ protected:
     void traverseUsingDfs(Vertex const& vertex) {
         b_processedVertices.putVertex(vertex);
         for (FlowEdge const& flowEdge : b_flowNetwork.getFlowEdgesWithVertex(vertex)) {
-            Vertex otherVertex(flowEdge.getTheOtherVertex(vertex));
+            Vertex const otherVertex(flowEdge.getTheOtherVertex(vertex));
             if (b_processedVertices.isNotFound(otherVertex) && flowEdge.getResidualCapacityTo(otherVertex) > 0) {
                 b_vertexToAugmentingPathEdgeMap[otherVertex] = flowEdge;
                 traverseUsingDfs(otherVertex);

@@ -28,7 +28,7 @@ TEST(AlbaLargeSorterProfileTest, DISABLED_FirstTest) {
     // AlbaUserInterface ui;
     // while(true)
     //{
-    int sampleSize = 1280000;  //(stringHelper::convertStringToNumber<int>(ui.getUserInput()));
+    int const sampleSize = 1280000;  //(stringHelper::convertStringToNumber<int>(ui.getUserInput()));
     vector<string> samples;
     samples.resize(sampleSize);
     generate_n(samples.begin(), sampleSize, [&]() { return stringHelper::getRandomAlphaNumericString(stringSize); });

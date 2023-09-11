@@ -54,39 +54,39 @@ StabilityCheckObjectsSorter::ValueToIndexableValueFunction stabilityCheckObjectT
 }  // namespace
 
 TEST(CountingSorterUsingCountPerValueTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
-    CharactersSorter sorter(characterToIndexableValueFunction, indexableValueToCharacterFunction);
+    CharactersSorter const sorter(characterToIndexableValueFunction, indexableValueToCharacterFunction);
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(CountingSorterUsingCountPerValueTest, SortWorksOnCharactersUsingOneValueExample) {
-    CharactersSorter sorter(characterToIndexableValueFunction, indexableValueToCharacterFunction);
+    CharactersSorter const sorter(characterToIndexableValueFunction, indexableValueToCharacterFunction);
     testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(CountingSorterUsingCountPerValueTest, SortWorksOnCharactersUsingExample1) {
-    CharactersSorter sorter(characterToIndexableValueFunction, indexableValueToCharacterFunction);
+    CharactersSorter const sorter(characterToIndexableValueFunction, indexableValueToCharacterFunction);
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(CountingSorterUsingCountPerValueTest, SortWorksOnCharactersUsingExample2) {
-    CharactersSorter sorter(characterToIndexableValueFunction, indexableValueToCharacterFunction);
+    CharactersSorter const sorter(characterToIndexableValueFunction, indexableValueToCharacterFunction);
     testSortUsingExample2WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(CountingSorterUsingCountPerValueTest, SortWorksOnListOfCharactersUsingExample1) {
-    ListOfCharactersSorter sorter(characterToIndexableValueFunction, indexableValueToCharacterFunction);
+    ListOfCharactersSorter const sorter(characterToIndexableValueFunction, indexableValueToCharacterFunction);
     testSortUsingExample1WithCharacters<ListOfCharactersSorter, ListOfCharacters>(sorter);
 }
 
 TEST(CountingSorterUsingCountPerValueTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
-    SmallIntegerSorter sorter(smallIntToIndexableValueFunction, indexableValueToSmallIntFunction);
+    SmallIntegerSorter const sorter(smallIntToIndexableValueFunction, indexableValueToSmallIntFunction);
     testSortUsingExample1WithPositiveAndNegativeIntegers<SmallIntegerSorter, Integers>(sorter);
 }
 
 // CANNOT SORT DOUBLE VALUES
 // CANNOT SORT STRINGS
 TEST(CountingSorterUsingCountPerValueTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1) {
-    StabilityCheckObjectsSorter sorter(
+    StabilityCheckObjectsSorter const sorter(
         stabilityCheckObjectToIndexableValueFunction, indexableValueToStabilityCheckObjectFunction);
     testSortAsNotStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(
         sorter);

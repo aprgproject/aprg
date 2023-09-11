@@ -15,7 +15,7 @@ public:
 
     DigitValue getDigitValue(char const c) {
         DigitValue result{};
-        int indexOfCharacter = m_characters.find_first_of(c);
+        int const indexOfCharacter = m_characters.find_first_of(c);
         if (stringHelper::isNotNpos(indexOfCharacter)) {
             result = static_cast<DigitValue>(indexOfCharacter);
         }

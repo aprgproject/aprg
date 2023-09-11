@@ -12,7 +12,7 @@ using KeywordInContextIndexingForTest = KeywordInContextIndexing<int>;
 }  // namespace
 
 TEST(KeywordInContextIndexingTest, GetKeywordInContextIndexingWorks) {
-    string searchSpace(
+    string const searchSpace(
         "it was the best of times it was the worst of times "
         "it was the age of wisdom it was the age of foolishness "
         "it was the epoch of belief if was the epoch of incredulity "
@@ -20,7 +20,7 @@ TEST(KeywordInContextIndexingTest, GetKeywordInContextIndexingWorks) {
         "it was the spring of hope it was the winter of despair ");
     KeywordInContextIndexingForTest keywordInContextIndexing(searchSpace);
 
-    strings stringsToExpect{"om it was the age of foolis", "es it was the age of wisdom"};
+    strings const stringsToExpect{"om it was the age of foolis", "es it was the age of wisdom"};
     EXPECT_EQ(stringsToExpect, keywordInContextIndexing.getKeywordInContextIndexing("the age", 10));
 }
 

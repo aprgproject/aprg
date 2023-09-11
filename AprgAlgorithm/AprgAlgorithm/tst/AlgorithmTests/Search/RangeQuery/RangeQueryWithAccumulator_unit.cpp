@@ -17,15 +17,15 @@ RangeQueryForTest::AccumulatorFunction dividesAccumulator = divides<>();
 }  // namespace
 
 TEST(RangeQueryWithAccumulatorTest, GetAccumulatedValueOnIntervalWithSumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
-    RangeQueryForTest sumRangeQuery(values, plusAccumulator, minusAccumulator);
+    ValuesForTest const values;
+    RangeQueryForTest const sumRangeQuery(values, plusAccumulator, minusAccumulator);
 
     EXPECT_EQ(0, sumRangeQuery.getAccumulatedValueOnInterval(0, 0));
 }
 
 TEST(RangeQueryWithAccumulatorTest, GetAccumulatedValueOnIntervalWithSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
-    RangeQueryForTest sumRangeQuery(values, plusAccumulator, minusAccumulator);
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    RangeQueryForTest const sumRangeQuery(values, plusAccumulator, minusAccumulator);
 
     EXPECT_EQ(1, sumRangeQuery.getAccumulatedValueOnInterval(0, 0));
     EXPECT_EQ(4, sumRangeQuery.getAccumulatedValueOnInterval(0, 1));
@@ -45,8 +45,8 @@ TEST(RangeQueryWithAccumulatorTest, GetAccumulatedValueOnIntervalWithSumWorksOnE
 }
 
 TEST(RangeQueryWithAccumulatorTest, GetAccumulatedValueOnIntervalWithSumWorksOnExample2) {
-    ValuesForTest values{1, 3, 4, 3, 6, 1, 4, 2, 9};
-    RangeQueryForTest sumRangeQuery(values, plusAccumulator, minusAccumulator);
+    ValuesForTest const values{1, 3, 4, 3, 6, 1, 4, 2, 9};
+    RangeQueryForTest const sumRangeQuery(values, plusAccumulator, minusAccumulator);
 
     EXPECT_EQ(1, sumRangeQuery.getAccumulatedValueOnInterval(0, 0));
     EXPECT_EQ(4, sumRangeQuery.getAccumulatedValueOnInterval(0, 1));
@@ -65,8 +65,8 @@ TEST(RangeQueryWithAccumulatorTest, GetAccumulatedValueOnIntervalWithSumWorksOnE
 }
 
 TEST(RangeQueryWithAccumulatorTest, GetAccumulatedValueOnIntervalWithGeometricSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
-    RangeQueryForTest geometricSumRangeQuery(values, multipliesAccumulator, dividesAccumulator);
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    RangeQueryForTest const geometricSumRangeQuery(values, multipliesAccumulator, dividesAccumulator);
 
     EXPECT_EQ(1, geometricSumRangeQuery.getAccumulatedValueOnInterval(0, 0));
     EXPECT_EQ(3, geometricSumRangeQuery.getAccumulatedValueOnInterval(0, 1));
@@ -85,8 +85,8 @@ TEST(RangeQueryWithAccumulatorTest, GetAccumulatedValueOnIntervalWithGeometricSu
 }
 
 TEST(RangeQueryWithAccumulatorTest, GetAccumulatedValueOnIntervalWithGeometricSumWorksOnExample2) {
-    ValuesForTest values{1, 3, 4, 3, 6, 1, 4, 2, 9};
-    RangeQueryForTest geometricSumRangeQuery(values, multipliesAccumulator, dividesAccumulator);
+    ValuesForTest const values{1, 3, 4, 3, 6, 1, 4, 2, 9};
+    RangeQueryForTest const geometricSumRangeQuery(values, multipliesAccumulator, dividesAccumulator);
 
     EXPECT_EQ(1, geometricSumRangeQuery.getAccumulatedValueOnInterval(0, 0));
     EXPECT_EQ(3, geometricSumRangeQuery.getAccumulatedValueOnInterval(0, 1));

@@ -35,7 +35,7 @@ StringsSorter::GetDigitAtFunction getCharacterAtForString = [](string const& val
                                                                int const leastSignificantDigitIndex) -> int {
     int digitValue{};
     if (leastSignificantDigitIndex < s_maxNumberOfCharacters) {
-        int mostSignificantDigitIndex = s_maxNumberOfCharacters - leastSignificantDigitIndex - 1;
+        int const mostSignificantDigitIndex = s_maxNumberOfCharacters - leastSignificantDigitIndex - 1;
         if (mostSignificantDigitIndex < static_cast<int>(value.length())) {
             digitValue = value[mostSignificantDigitIndex] & 0xFF;
         }
@@ -65,39 +65,40 @@ StabilityCheckObjectsSorter::GetNumberOfDigitsFunction getNumberOfNibblesForStab
 }  // namespace
 
 TEST(RadixSorterUsingCountingSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
-    CharactersSorter sorter(getNumberOfNibblesForCharacter, getNibbleAtForCharacter);
+    CharactersSorter const sorter(getNumberOfNibblesForCharacter, getNibbleAtForCharacter);
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(RadixSorterUsingCountingSorterTest, SortWorksOnCharactersUsingOneValueExample) {
-    CharactersSorter sorter(getNumberOfNibblesForCharacter, getNibbleAtForCharacter);
+    CharactersSorter const sorter(getNumberOfNibblesForCharacter, getNibbleAtForCharacter);
     testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(RadixSorterUsingCountingSorterTest, SortWorksOnCharactersUsingExample1) {
-    CharactersSorter sorter(getNumberOfNibblesForCharacter, getNibbleAtForCharacter);
+    CharactersSorter const sorter(getNumberOfNibblesForCharacter, getNibbleAtForCharacter);
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(RadixSorterUsingCountingSorterTest, SortWorksOnCharactersUsingExample2) {
-    CharactersSorter sorter(getNumberOfNibblesForCharacter, getNibbleAtForCharacter);
+    CharactersSorter const sorter(getNumberOfNibblesForCharacter, getNibbleAtForCharacter);
     testSortUsingExample2WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 // CANNOT SORT STD::LIST, because CountingSorterUsingNewPositions is used in RadixSorter
 TEST(RadixSorterUsingCountingSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
-    SmallIntegerSorter sorter(getNumberOfNibblesForInteger, getNibbleAtForSmallInteger);
+    SmallIntegerSorter const sorter(getNumberOfNibblesForInteger, getNibbleAtForSmallInteger);
     testSortUsingExample1WithPositiveAndNegativeIntegers<SmallIntegerSorter, Integers>(sorter);
 }
 
 // CANNOT SORT DOUBLE VALUES
 TEST(RadixSorterUsingCountingSorterTest, SortWorksOnStringsUsingExample1) {
-    StringsSorter sorter(getNumberOfCharactersForStrings, getCharacterAtForString);
+    StringsSorter const sorter(getNumberOfCharactersForStrings, getCharacterAtForString);
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);
 }
 
 TEST(RadixSorterUsingCountingSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1) {
-    StabilityCheckObjectsSorter sorter(getNumberOfNibblesForStabilityCheckObject, getNibbleAtForStabilityCheckObject);
+    StabilityCheckObjectsSorter const sorter(
+        getNumberOfNibblesForStabilityCheckObject, getNibbleAtForStabilityCheckObject);
     testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(sorter);
 }
 

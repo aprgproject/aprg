@@ -30,7 +30,7 @@ public:
         Vertex result{};
         auto it = b_vertexToIndexMap.find(subRoot);
         if (it != b_vertexToIndexMap.cend()) {
-            int indexOfSubRoot = it->second;
+            int const indexOfSubRoot = it->second;
             result = m_rangeQuery.getAccumulatedValueOnInterval(
                 indexOfSubRoot, indexOfSubRoot + b_subTreeSize[indexOfSubRoot] - 1);
         }

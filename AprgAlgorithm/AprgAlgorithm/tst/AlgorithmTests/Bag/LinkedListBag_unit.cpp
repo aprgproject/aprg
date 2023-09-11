@@ -11,7 +11,7 @@ using BagForTest = LinkedListBag<int>;
 }  // namespace
 
 TEST(LinkedListBagTest, IsEmptyWorks) {
-    BagForTest bag1;
+    BagForTest const bag1;
     BagForTest bag2;
     bag2.add(10);
 
@@ -20,7 +20,7 @@ TEST(LinkedListBagTest, IsEmptyWorks) {
 }
 
 TEST(LinkedListBagTest, GetSizeWorks) {
-    BagForTest bag1;
+    BagForTest const bag1;
     BagForTest bag2;
     bag2.add(10);
     bag2.add(5);

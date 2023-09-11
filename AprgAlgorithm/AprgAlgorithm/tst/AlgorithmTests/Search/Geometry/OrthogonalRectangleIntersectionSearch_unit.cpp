@@ -17,7 +17,7 @@ TEST(OrthogonalRectangleIntersectionSearchTest, GetIntersectingPointsWorksWhen2R
 
     auto rectanglesToVerify(search.getIntersectingRectangles());
 
-    SearchForTest::Rectangles rectanglesToExpect{{{-2, -1}, {2, 1}}, {{-1, -2}, {1, 2}}};
+    SearchForTest::Rectangles const rectanglesToExpect{{{-2, -1}, {2, 1}}, {{-1, -2}, {1, 2}}};
     EXPECT_EQ(rectanglesToExpect, rectanglesToVerify);
 }
 
@@ -30,7 +30,7 @@ TEST(OrthogonalRectangleIntersectionSearchTest, GetIntersectingPointsWorksOnComp
 
     auto rectanglesToVerify(search.getIntersectingRectangles());
 
-    SearchForTest::Rectangles rectanglesToExpect{{{0, -1}, {7, 1}}, {{2, 2}, {6, 4}}, {{3, 0}, {4, 5}}};
+    SearchForTest::Rectangles const rectanglesToExpect{{{0, -1}, {7, 1}}, {{2, 2}, {6, 4}}, {{3, 0}, {4, 5}}};
     EXPECT_EQ(rectanglesToExpect, rectanglesToVerify);
 }
 

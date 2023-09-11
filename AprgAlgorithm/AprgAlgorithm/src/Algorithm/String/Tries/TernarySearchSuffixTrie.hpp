@@ -27,7 +27,7 @@ protected:
     }
 
     void initialize(Key const& searchSpace) {
-        int length = searchSpace.length();
+        int const length = searchSpace.length();
         for (int i = 0; i < length; ++i) {
             TernarySearchSuffixTrie::put(searchSpace.substr(i), i);
         }
@@ -41,7 +41,7 @@ protected:
 
     void putStartingOnThisNode(
         NodeUniquePointer& currentNodePointer, Key const& key, Value const& value, int const index) override {
-        char charAtKey(key[index]);
+        char const charAtKey(key[index]);
         if (!currentNodePointer) {
             currentNodePointer = std::make_unique<Node>(Node{charAtKey, nullptr, nullptr, nullptr, nullptr});
         }

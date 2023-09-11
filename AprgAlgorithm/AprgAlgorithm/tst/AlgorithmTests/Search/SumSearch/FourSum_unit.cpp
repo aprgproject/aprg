@@ -14,12 +14,12 @@ using FourValuesForTest = SumSearch::FourValues;
 }  // namespace
 
 TEST(FourSumTest, GetPossibleDuplicatedFourValuesWithSumWorksOnExample1) {
-    ValuesForTest sortedValues{1, 4, 5, 6, 7, 9, 10};
-    SumSearch search(sortedValues);
+    ValuesForTest const sortedValues{1, 4, 5, 6, 7, 9, 10};
+    SumSearch const search(sortedValues);
 
-    FourValuesForTest fourValuesToVerify(search.getPossibleDuplicatedFourValuesWithSum(18));
+    FourValuesForTest const fourValuesToVerify(search.getPossibleDuplicatedFourValuesWithSum(18));
 
-    FourValuesForTest fourValuesToExpect{1, 1, 7, 9};
+    FourValuesForTest const fourValuesToExpect{1, 1, 7, 9};
     EXPECT_EQ(fourValuesToExpect, fourValuesToVerify);
 }
 

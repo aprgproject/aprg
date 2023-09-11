@@ -28,8 +28,8 @@ TEST(SubTreeQueryWithPathAccumulatorTest, Example1Works) {
     graph.connect(4, 9);
     SubTreeQueryForTest subTreeQuery(graph, 1, plusAccumulator);
 
-    VerticesForTest expectedVertices{1, 2, 6, 3, 4, 7, 8, 9, 5};
-    CountsForTest expectedPathResults{1, 3, 9, 4, 5, 12, 13, 14, 6};
+    VerticesForTest const expectedVertices{1, 2, 6, 3, 4, 7, 8, 9, 5};
+    CountsForTest const expectedPathResults{1, 3, 9, 4, 5, 12, 13, 14, 6};
     EXPECT_EQ(expectedVertices, subTreeQuery.getVerticesInDfsPreOrder());
     EXPECT_EQ(expectedPathResults, subTreeQuery.getAccumulatedValuesOfPaths());
     EXPECT_EQ(9, subTreeQuery.getAccumulatedValueOfPathThatStartsAtTopAndEndsAt(6));

@@ -30,8 +30,8 @@ TEST(LinearSearchWithTwoIndicesTest, GetIndexOfValueWorksWhenValueIsNotFoundAndW
 }
 
 TEST(LinearSearchWithTwoIndicesTest, GetIndexOfValueWorksWhenValueIsFoundAndWhenThereAreDuplicateValues) {
-    ValuesForTest unsortedValues{96, 96, 53, 53, 53, 72, 72, 72, 72, 14, 33, 33, 33, 13, 13};
-    SearchForTest search(unsortedValues);
+    ValuesForTest const unsortedValues{96, 96, 53, 53, 53, 72, 72, 72, 72, 14, 33, 33, 33, 13, 13};
+    SearchForTest const search(unsortedValues);
 
     EXPECT_EQ(12, search.getIndexOfValue(33));
 }

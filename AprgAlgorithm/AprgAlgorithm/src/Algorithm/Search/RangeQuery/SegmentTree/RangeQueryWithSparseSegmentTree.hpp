@@ -76,7 +76,7 @@ protected:
         if (baseLeft == baseRight) {
             nodePointer->value = valueToSet;
         } else {
-            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
+            Index const baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
             if (index <= baseMidPoint) {
                 setValueOnIndexFromTopToBottom(
                     index, valueToSet, nodePointer->leftChildPointer, baseLeft, baseMidPoint);
@@ -99,9 +99,9 @@ protected:
         if (startInterval <= baseLeft && baseRight <= endInterval) {
             result = nodePointer->value;
         } else {
-            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
-            bool doesLeftPartIntersect = !(endInterval < baseLeft || baseMidPoint < startInterval);
-            bool doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
+            Index const baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
+            bool const doesLeftPartIntersect = !(endInterval < baseLeft || baseMidPoint < startInterval);
+            bool const doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
             if (doesLeftPartIntersect && doesRightPartIntersect) {
                 result = m_function(
                     getValueOnIntervalFromTopToBottom(

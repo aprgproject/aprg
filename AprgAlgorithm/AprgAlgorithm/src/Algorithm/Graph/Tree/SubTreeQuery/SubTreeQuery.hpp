@@ -26,8 +26,8 @@ public:
         Vertices result;
         auto it = m_vertexToIndexMap.find(subRoot);
         if (it != m_vertexToIndexMap.cend()) {
-            int indexOfSubRoot = it->second;
-            int subTreeSizeAtSubRoot = m_subTreeSize[indexOfSubRoot];
+            int const indexOfSubRoot = it->second;
+            int const subTreeSizeAtSubRoot = m_subTreeSize[indexOfSubRoot];
             result.reserve(subTreeSizeAtSubRoot);
             auto start = m_verticesInDfsPreOrder.cbegin() + indexOfSubRoot;
             auto end = m_verticesInDfsPreOrder.cbegin() + indexOfSubRoot + subTreeSizeAtSubRoot;
@@ -62,7 +62,7 @@ protected:
     void traverseUsingDfs(int& treeSize, Vertex const& vertex) {
         m_processedVertices.putVertex(vertex);
         m_verticesInDfsPreOrder.emplace_back(vertex);
-        int beforeTreeSize = treeSize++;
+        int const beforeTreeSize = treeSize++;
         for (Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(vertex)) {
             if (m_processedVertices.isNotFound(adjacentVertex)) {
                 traverseUsingDfs(treeSize, adjacentVertex);

@@ -111,7 +111,7 @@ private:
     }
 
     void limitMemoryConsumption() {
-        int totalMemoryConsumption = calculateTotalMemoryConsumption();
+        int const totalMemoryConsumption = calculateTotalMemoryConsumption();
         transferMemoryBlocksToFileIfNeeded(totalMemoryConsumption);
     }
 
@@ -157,7 +157,7 @@ private:
 
     int calculateTotalMemoryConsumption() {
         BlockCacheContainer const& memoryLimitCache(m_memoryCache.getContainerReference());
-        int totalMemoryConsumption = accumulate(
+        int const totalMemoryConsumption = accumulate(
             memoryLimitCache.cbegin(), memoryLimitCache.cend(), 0,
             [](int const memoryConsumption, BlockCacheEntry const& blockCacheEntry) {
                 return memoryConsumption + blockCacheEntry.m_blockInformation->getNumberOfObjectsInMemory();

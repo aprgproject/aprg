@@ -15,8 +15,8 @@ RangeQueryForTest::AccumulatorFunction minusAccumulator = minus<>();
 }  // namespace
 
 TEST(RangeQueryForTwoDimensionsWithAccumulatorTest, GetValueOn2DIntervalWorksOnExample1) {
-    ValueMatrixForTest valueMatrix(4, 4, {7, 6, 1, 6, 8, 7, 5, 2, 3, 9, 7, 1, 8, 5, 3, 8});
-    RangeQueryForTest sumRangeQuery(valueMatrix, plusAccumulator, minusAccumulator);
+    ValueMatrixForTest const valueMatrix(4, 4, {7, 6, 1, 6, 8, 7, 5, 2, 3, 9, 7, 1, 8, 5, 3, 8});
+    RangeQueryForTest const sumRangeQuery(valueMatrix, plusAccumulator, minusAccumulator);
 
     // starts with (0,0)
     EXPECT_EQ(7, sumRangeQuery.getAccumulatedValueOn2DInterval(0, 0, 0, 0));

@@ -82,7 +82,7 @@ private:
             while (it != vertexToQueueOfEdgesMap.cend() && !it->second.empty()) {
                 // traverse to find a continuous path, until a dead end is found
                 QueueOfEdges& queueOfEdgesAtVertex(vertexToQueueOfEdgesMap[currentVertex]);
-                Edge currentEdge(queueOfEdgesAtVertex.front());
+                Edge const currentEdge(queueOfEdgesAtVertex.front());
                 queueOfEdgesAtVertex.pop();
                 if (previousEdges.find(currentEdge) != previousEdges.cend()) {
                     // must be a new edge

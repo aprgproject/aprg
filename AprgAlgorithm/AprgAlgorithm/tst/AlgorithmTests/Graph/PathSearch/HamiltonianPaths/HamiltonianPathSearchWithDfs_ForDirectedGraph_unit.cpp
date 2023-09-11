@@ -21,9 +21,9 @@ TEST(HamiltonianPathSearchWithDfsTestForDirectedGraph, GetAllHamiltonianPathsWor
     graph.connect(3, 0);
     PathSearchForTest pathSearch(graph);
 
-    PathsForTest pathsToVerify(pathSearch.getAllHamiltonianPaths());
+    PathsForTest const pathsToVerify(pathSearch.getAllHamiltonianPaths());
 
-    PathsForTest pathsToExpect{{0, 1, 2, 3}, {1, 2, 3, 0}, {2, 3, 0, 1}, {3, 0, 1, 2}};
+    PathsForTest const pathsToExpect{{0, 1, 2, 3}, {1, 2, 3, 0}, {2, 3, 0, 1}, {3, 0, 1, 2}};
     EXPECT_EQ(pathsToExpect, pathsToVerify);
 }
 
@@ -35,9 +35,9 @@ TEST(HamiltonianPathSearchWithDfsTestForDirectedGraph, GetOneHamiltonianPathWork
     graph.connect(3, 0);
     PathSearchForTest pathSearch(graph);
 
-    PathForTest pathsToVerify(pathSearch.getOneHamiltonianPath());
+    PathForTest const pathsToVerify(pathSearch.getOneHamiltonianPath());
 
-    PathForTest pathsToExpect{0, 1, 2, 3};
+    PathForTest const pathsToExpect{0, 1, 2, 3};
     EXPECT_EQ(pathsToExpect, pathsToVerify);
 }
 
@@ -49,9 +49,9 @@ TEST(HamiltonianPathSearchWithDfsTestForDirectedGraph, GetAllHamiltonianCyclesWo
     graph.connect(3, 0);
     PathSearchForTest pathSearch(graph);
 
-    PathsForTest pathsToVerify(pathSearch.getAllHamiltonianCycles());
+    PathsForTest const pathsToVerify(pathSearch.getAllHamiltonianCycles());
 
-    PathsForTest pathsToExpect{{0, 1, 2, 3, 0}, {1, 2, 3, 0, 1}, {2, 3, 0, 1, 2}, {3, 0, 1, 2, 3}};
+    PathsForTest const pathsToExpect{{0, 1, 2, 3, 0}, {1, 2, 3, 0, 1}, {2, 3, 0, 1, 2}, {3, 0, 1, 2, 3}};
     EXPECT_EQ(pathsToExpect, pathsToVerify);
 }
 
@@ -63,9 +63,9 @@ TEST(HamiltonianPathSearchWithDfsTestForDirectedGraph, GetOneHamiltonianCycleWor
     graph.connect(3, 0);
     PathSearchForTest pathSearch(graph);
 
-    PathForTest pathsToVerify(pathSearch.getOneHamiltonianCycle());
+    PathForTest const pathsToVerify(pathSearch.getOneHamiltonianCycle());
 
-    PathForTest pathsToExpect{0, 1, 2, 3, 0};
+    PathForTest const pathsToExpect{0, 1, 2, 3, 0};
     EXPECT_EQ(pathsToExpect, pathsToVerify);
 }
 

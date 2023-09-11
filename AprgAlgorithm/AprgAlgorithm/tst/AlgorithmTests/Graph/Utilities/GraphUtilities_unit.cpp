@@ -27,24 +27,24 @@ using SinkSourceFlowNetworkForTest = SinkSourceFlowNetwork<VertexForTest, FlowDa
 }  // namespace
 
 TEST(GraphUtilitiesTest, IsASimplePathWorks) {
-    PathForTest simplePath{1, 2, 3};
-    PathForTest nonSimplePath{1, 2, 3, 2, 4};
+    PathForTest const simplePath{1, 2, 3};
+    PathForTest const nonSimplePath{1, 2, 3, 2, 4};
 
     EXPECT_TRUE(isASimplePath<VertexForTest>(simplePath));
     EXPECT_FALSE(isASimplePath<VertexForTest>(nonSimplePath));
 }
 
 TEST(GraphUtilitiesTest, IsACycleWorks) {
-    PathForTest cyclePath{1, 2, 3, 1};
-    PathForTest nonCyclePath{1, 2, 3, 1, 4};
+    PathForTest const cyclePath{1, 2, 3, 1};
+    PathForTest const nonCyclePath{1, 2, 3, 1, 4};
 
     EXPECT_TRUE(isACycle<VertexForTest>(cyclePath));
     EXPECT_FALSE(isACycle<VertexForTest>(nonCyclePath));
 }
 
 TEST(GraphUtilitiesTest, IsASimpleCycleWorks) {
-    PathForTest cycleSimplePath{1, 2, 3, 1};
-    PathForTest nonCycleSimplePath{1, 2, 3, 2, 1};
+    PathForTest const cycleSimplePath{1, 2, 3, 1};
+    PathForTest const nonCycleSimplePath{1, 2, 3, 2, 1};
 
     EXPECT_TRUE(isASimpleCycle<VertexForTest>(cycleSimplePath));
     EXPECT_FALSE(isASimpleCycle<VertexForTest>(nonCycleSimplePath));
@@ -249,7 +249,7 @@ TEST(GraphUtilitiesTest, IsGraphConnectedWorksForDirectedGraphs) {
     stronglyConnectedGraph.connect(1, 2);
     stronglyConnectedGraph.connect(2, 3);
     stronglyConnectedGraph.connect(3, 0);
-    DirectedGraphForTest nonStronglyConnectedGraph;
+    DirectedGraphForTest const nonStronglyConnectedGraph;
     stronglyConnectedGraph.connect(0, 1);
     stronglyConnectedGraph.connect(0, 2);
     stronglyConnectedGraph.connect(0, 3);
@@ -264,7 +264,7 @@ TEST(GraphUtilitiesTest, IsGraphStronglyConnectedWorks) {
     stronglyConnectedGraph.connect(1, 2);
     stronglyConnectedGraph.connect(2, 3);
     stronglyConnectedGraph.connect(3, 0);
-    DirectedGraphForTest nonStronglyConnectedGraph;
+    DirectedGraphForTest const nonStronglyConnectedGraph;
     stronglyConnectedGraph.connect(0, 1);
     stronglyConnectedGraph.connect(0, 2);
     stronglyConnectedGraph.connect(0, 3);
@@ -331,8 +331,8 @@ TEST(GraphUtilitiesTest, IsSinkSourceFlowNetworkFeasibleWorks) {
 }
 
 TEST(GraphUtilitiesTest, GetLengthOfPathWorks) {
-    PathForTest emptyPath;
-    PathForTest nonEmptyPath{1, 2, 3};
+    PathForTest const emptyPath;
+    PathForTest const nonEmptyPath{1, 2, 3};
 
     EXPECT_EQ(0, getLengthOfPath<VertexForTest>(emptyPath));
     EXPECT_EQ(2, getLengthOfPath<VertexForTest>(nonEmptyPath));
@@ -439,7 +439,7 @@ TEST(GraphUtilitiesTest, GetEdgesOfMaximalConnectedSubgraphsWorks) {
     graph.connect(9, 11);
     graph.connect(5, 3);
 
-    ListOfEdgesForTest listOfEdgesToVerify(getEdgesOfMaximalConnectedSubgraphs(graph));
+    ListOfEdgesForTest const listOfEdgesToVerify(getEdgesOfMaximalConnectedSubgraphs(graph));
 
     ListOfEdgesForTest listOfEdgesToExpect;
     listOfEdgesToExpect.emplace_back(EdgesForTest{{0, 1}, {0, 2}, {0, 5}, {0, 6}, {3, 4}, {3, 5}, {4, 5}, {4, 6}});

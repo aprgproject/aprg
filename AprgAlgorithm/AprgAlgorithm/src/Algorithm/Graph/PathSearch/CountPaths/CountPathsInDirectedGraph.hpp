@@ -21,7 +21,7 @@ public:
 
 private:
     void initialize() {
-        Vertices verticesInOrder(VertexOrderingUsingDfs<Vertex>(m_graph).getVerticesInTopologicalOrder());
+        Vertices const verticesInOrder(VertexOrderingUsingDfs<Vertex>(m_graph).getVerticesInTopologicalOrder());
         int index(0);
         for (Vertex const& vertexInOrder : verticesInOrder) {
             m_vertexToTopologicalIndex[vertexInOrder] = index++;
@@ -51,9 +51,9 @@ private:
         auto itStart = m_vertexToTopologicalIndex.find(start);
         auto itEnd = m_vertexToTopologicalIndex.find(end);
         if (itStart != m_vertexToTopologicalIndex.cend() && itEnd != m_vertexToTopologicalIndex.cend()) {
-            int startIndex = itStart->second;
-            int endIndex = itEnd->second;
-            int distanceInTopologicalOrder = endIndex - startIndex;
+            int const startIndex = itStart->second;
+            int const endIndex = itEnd->second;
+            int const distanceInTopologicalOrder = endIndex - startIndex;
             // if distanceInTopologicalOrder is positive: sum counts of dependent vertices at the end
             // if distanceInTopologicalOrder is zero: count is 1
             // if distanceInTopologicalOrder is negative: count is 0

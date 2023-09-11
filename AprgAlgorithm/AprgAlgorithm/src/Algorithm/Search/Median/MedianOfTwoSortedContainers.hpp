@@ -27,12 +27,12 @@ public:
 private:
     [[nodiscard]] Value getMedianAtLeastOneContainerIsNotEmpty() const {
         // Running time: O(log(container1)*log(container2))
-        int medianSize = (m_container1.size() + m_container2.size() + 1) / 2;
+        int const medianSize = (m_container1.size() + m_container2.size() + 1) / 2;
         int lowIndexOn1 = 0;
         int highIndexOn1 = m_container1.size() - 1;
         while (lowIndexOn1 < highIndexOn1) {
-            int midIndexOn1 = getMidpointOfIndexes(lowIndexOn1, highIndexOn1);
-            int totalAtMid = getTotalOnBothContainers(midIndexOn1);
+            int const midIndexOn1 = getMidpointOfIndexes(lowIndexOn1, highIndexOn1);
+            int const totalAtMid = getTotalOnBothContainers(midIndexOn1);
             if (totalAtMid < medianSize) {
                 lowIndexOn1 = midIndexOn1 + 1;
             } else if (medianSize < totalAtMid) {

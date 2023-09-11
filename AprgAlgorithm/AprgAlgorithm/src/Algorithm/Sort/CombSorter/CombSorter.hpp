@@ -16,7 +16,7 @@ public:
     void sort(Values& valuesToSort) const override {
         // Based from: https://en.wikipedia.org/wiki/Comb_sort#Python_code
         if (!valuesToSort.empty()) {
-            int size = valuesToSort.size();
+            int const size = valuesToSort.size();
             int gap = size;
 
             bool didSwapHappened(true);
@@ -36,7 +36,7 @@ public:
 private:
     [[nodiscard]] int getNextGapValue(int const gap) const {
         // gap = floor(gap / shrink)
-        int result = (gap * 10) / 13;  // apply shrink factor=1.3
+        int const result = (gap * 10) / 13;  // apply shrink factor=1.3
         return mathHelper::clampLowerBound(result, 1);
     }
 };

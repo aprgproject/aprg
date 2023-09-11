@@ -13,7 +13,7 @@ using QueryForTest = GetAccumulatedNextFreeIndexWithSegmentTree<IndexesForTest>;
 }  // namespace
 
 TEST(GetAccumulatedNextFreeIndexWithSegmentTreeTest, GetNextFreeIndexAtWorksWithZeroSize) {
-    QueryForTest query(0);
+    QueryForTest const query(0);
 
     EXPECT_EQ(0, query.getNextFreeIndexAt(0));
     EXPECT_EQ(0, query.getNextFreeIndexAt(1));
@@ -21,7 +21,7 @@ TEST(GetAccumulatedNextFreeIndexWithSegmentTreeTest, GetNextFreeIndexAtWorksWith
 }
 
 TEST(GetAccumulatedNextFreeIndexWithSegmentTreeTest, GetNextFreeIndexAtWorks) {
-    QueryForTest query(28);
+    QueryForTest const query(28);
 
     EXPECT_EQ(0, query.getNextFreeIndexAt(0));
     EXPECT_EQ(1, query.getNextFreeIndexAt(1));

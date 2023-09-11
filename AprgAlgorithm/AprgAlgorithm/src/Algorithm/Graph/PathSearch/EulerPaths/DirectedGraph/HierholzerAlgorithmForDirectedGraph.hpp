@@ -24,7 +24,7 @@ public:
 private:
     [[nodiscard]] VertexToAdjacencyVerticesMap createVertexToAdjacentVerticesMap() const {
         VertexToAdjacencyVerticesMap result;
-        Vertices allVertices(b_graph.getVertices());
+        Vertices const allVertices(b_graph.getVertices());
         for (Vertex const& vertex : allVertices) {
             result.emplace(vertex, b_graph.getAdjacentVerticesAt(vertex));
         }

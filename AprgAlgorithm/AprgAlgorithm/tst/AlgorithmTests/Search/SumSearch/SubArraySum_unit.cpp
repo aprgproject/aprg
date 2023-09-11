@@ -13,12 +13,12 @@ using ValueForTest = SumSearch::Value;
 }  // namespace
 
 TEST(SubArraySumTest, GetSubArrayWithSumWorksOnExample1) {
-    ValuesForTest valuesToSearch{1, 3, 2, 5, 1, 1, 2, 3};
-    SumSearch search(valuesToSearch);
+    ValuesForTest const valuesToSearch{1, 3, 2, 5, 1, 1, 2, 3};
+    SumSearch const search(valuesToSearch);
 
-    ValuesForTest valuesToVerify(search.getSubArrayWithSum(8));
+    ValuesForTest const valuesToVerify(search.getSubArrayWithSum(8));
 
-    ValuesForTest valuesToExpect{2, 5, 1};
+    ValuesForTest const valuesToExpect{2, 5, 1};
     EXPECT_EQ(valuesToExpect, valuesToVerify);
 }
 

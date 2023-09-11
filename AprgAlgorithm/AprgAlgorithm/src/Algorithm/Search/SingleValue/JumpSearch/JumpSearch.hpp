@@ -24,7 +24,7 @@ public:
             blockEndIndex += m_blockSize;
         }
 
-        LinearSearchWithOneIndex<Values> linearSearch(m_sortedValues);  // perform linear search on that block
+        LinearSearchWithOneIndex<Values> const linearSearch(m_sortedValues);  // perform linear search on that block
         return linearSearch.getIndexOfValue(
             blockStartIndex, std::min(blockEndIndex, static_cast<int>(m_sortedValues.size()) - 1), target);
     }

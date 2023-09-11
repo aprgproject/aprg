@@ -68,7 +68,7 @@ public:
     void addRectangle(Rectangle const& rectangle) {
         Unit xLow(std::min(rectangle.first.first, rectangle.second.first));
         Unit xHigh(std::max(rectangle.first.first, rectangle.second.first));
-        IntervalWithUnit yInterval{rectangle.first.second, rectangle.second.second};
+        IntervalWithUnit const yInterval{rectangle.first.second, rectangle.second.second};
         m_events.emplace(Event{xLow, yInterval, rectangle, EventType::StartOfRectangle});
         m_events.emplace(Event{xHigh, yInterval, rectangle, EventType::EndOfRectangle});
     }

@@ -32,7 +32,7 @@ private:
         while (!m_adjacentEdgesInOrder.empty()) {
             // continue to grow the MST by processing the current nearest edge and only adding only edges with minimum
             // weight
-            EdgeOrderedByWeight adjacentEdgeWithLowestWeight(m_adjacentEdgesInOrder.top());
+            EdgeOrderedByWeight const adjacentEdgeWithLowestWeight(m_adjacentEdgesInOrder.top());
             m_adjacentEdgesInOrder.pop();
             checkAdjacentEdgesOfEdgeAndAddToMstIfNeeded(adjacentEdgeWithLowestWeight);
         }
@@ -42,8 +42,8 @@ private:
         // Since this is lazy algorithm (nearest vertices are not kept), we need to find which vertex/s is not included
         // in the tree
         auto const& [startVertexOfEdge, endVertexOfEdge] = dynamic_cast<Edge const&>(edgeOrderedByWeight);
-        bool isVertex1NotProcessed(m_processedVertices.isNotFound(startVertexOfEdge));
-        bool isVertex2NotProcessed(m_processedVertices.isNotFound(endVertexOfEdge));
+        bool const isVertex1NotProcessed(m_processedVertices.isNotFound(startVertexOfEdge));
+        bool const isVertex2NotProcessed(m_processedVertices.isNotFound(endVertexOfEdge));
         if (isVertex1NotProcessed || isVertex2NotProcessed) {
             m_minimumSpanningTreeEdges.emplace_back(createSortedEdge<Vertex, Edge>(startVertexOfEdge, endVertexOfEdge));
             if (isVertex1NotProcessed) {

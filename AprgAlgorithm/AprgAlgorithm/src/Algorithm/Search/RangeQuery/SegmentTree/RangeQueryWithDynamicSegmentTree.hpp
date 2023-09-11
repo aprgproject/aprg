@@ -51,10 +51,10 @@ private:
         if (startInterval <= baseLeft && baseRight <= endInterval) {
             result = nodePointer->value;
         } else {
-            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
-            bool isLeftPartIncluded =
+            Index const baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
+            bool const isLeftPartIncluded =
                 nodePointer->leftChildPointer && !(endInterval < baseLeft || baseMidPoint < startInterval);
-            bool isRightPartIncluded =
+            bool const isRightPartIncluded =
                 nodePointer->rightChildPointer && !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
             if (isLeftPartIncluded && isRightPartIncluded) {
                 result = m_function(
@@ -101,7 +101,7 @@ private:
         if (baseLeft == baseRight) {
             nodePointer->value = values[baseLeft];
         } else {
-            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
+            Index const baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
             setValuesFromTopToBottom(values, nodePointer->leftChildPointer, baseLeft, baseMidPoint);
             if (baseMidPoint + 1 < static_cast<Index>(values.size())) {
                 setValuesFromTopToBottom(values, nodePointer->rightChildPointer, baseMidPoint + 1, baseRight);
@@ -118,7 +118,7 @@ private:
             if (baseLeft == baseRight) {
                 nodePointer->value = newValue;
             } else {
-                Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
+                Index const baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
                 if (index <= baseMidPoint) {
                     changeValueOnIndexFromTopToBottom(
                         index, newValue, nodePointer->leftChildPointer, baseLeft, baseMidPoint);

@@ -13,7 +13,7 @@ using QueryForTest = MedianOfSmallerSizes<ValuesForTest>;
 }  // namespace
 
 TEST(MedianOfSmallerSizesTest, GetMedianOfSmallerSizesWorksOnEmpty) {
-    ValuesForTest valuesForTest;
+    ValuesForTest const valuesForTest;
     QueryForTest query(valuesForTest);
 
     EXPECT_EQ(0, query.getSmallerMedian());
@@ -22,7 +22,7 @@ TEST(MedianOfSmallerSizesTest, GetMedianOfSmallerSizesWorksOnEmpty) {
 }
 
 TEST(MedianOfSmallerSizesTest, GetMedianOfSmallerSizesWorksOnOneValue) {
-    ValuesForTest valuesForTest{10};
+    ValuesForTest const valuesForTest{10};
     QueryForTest query(valuesForTest);
 
     EXPECT_EQ(10, query.getSmallerMedian());
@@ -31,7 +31,7 @@ TEST(MedianOfSmallerSizesTest, GetMedianOfSmallerSizesWorksOnOneValue) {
 }
 
 TEST(MedianOfSmallerSizesTest, GetMedianOfSmallerSizesWorksOnExample1) {
-    ValuesForTest valuesForTest{10, 12, 20, 30, 25, 40, 32, 31, 35, 50, 60};
+    ValuesForTest const valuesForTest{10, 12, 20, 30, 25, 40, 32, 31, 35, 50, 60};
     QueryForTest query(valuesForTest);
 
     EXPECT_EQ(31, query.getSmallerMedian());
@@ -40,7 +40,7 @@ TEST(MedianOfSmallerSizesTest, GetMedianOfSmallerSizesWorksOnExample1) {
 }
 
 TEST(MedianOfSmallerSizesTest, GetMedianOfSmallerSizesWorksOnExample2) {
-    ValuesForTest valuesForTest{0, 1, 15, 25, 6, 7, 30, 40};
+    ValuesForTest const valuesForTest{0, 1, 15, 25, 6, 7, 30, 40};
     QueryForTest query(valuesForTest);
 
     EXPECT_EQ(7, query.getSmallerMedian());

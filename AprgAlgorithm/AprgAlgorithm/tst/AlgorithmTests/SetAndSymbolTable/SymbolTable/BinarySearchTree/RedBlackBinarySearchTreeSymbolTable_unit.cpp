@@ -89,7 +89,7 @@ TEST(RedBlackBinarySearchTreeSymbolTableTest, TraverseByPreOrderWorks) {
     KeysForTest keysToVerify;
     symbolTable.traverseByPreOrder([&keysToVerify](NodeForTest const& node) { keysToVerify.emplace_back(node.key); });
 
-    KeysForTest expectedKeys{8, 4, 3, 7, 5, 9};  // balanced
+    KeysForTest const expectedKeys{8, 4, 3, 7, 5, 9};  // balanced
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -105,7 +105,7 @@ TEST(RedBlackBinarySearchTreeSymbolTableTest, TraverseByInOrderWorks) {
     KeysForTest keysToVerify;
     symbolTable.traverseByInOrder([&keysToVerify](NodeForTest const& node) { keysToVerify.emplace_back(node.key); });
 
-    KeysForTest expectedKeys{3, 4, 5, 7, 8, 9};  // balanced
+    KeysForTest const expectedKeys{3, 4, 5, 7, 8, 9};  // balanced
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -121,7 +121,7 @@ TEST(RedBlackBinarySearchTreeSymbolTableTest, TraverseByPostOrderWorks) {
     KeysForTest keysToVerify;
     symbolTable.traverseByPostOrder([&keysToVerify](NodeForTest const& node) { keysToVerify.emplace_back(node.key); });
 
-    KeysForTest expectedKeys{3, 5, 7, 4, 9, 8};  // balanced
+    KeysForTest const expectedKeys{3, 5, 7, 4, 9, 8};  // balanced
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -144,8 +144,8 @@ TEST(RedBlackBinarySearchTreeSymbolTableTest, HibbardDeletionWorks) {
     symbolTable.traverseByPreOrder(
         [&actualAfterDelete](NodeForTest const& node) { actualAfterDelete.emplace_back(node.key); });
 
-    KeysForTest expectedBeforeDelete{8, 4, 3, 7, 5, 9};
-    KeysForTest expectedAfterDelete{8, 5, 9};
+    KeysForTest const expectedBeforeDelete{8, 4, 3, 7, 5, 9};
+    KeysForTest const expectedAfterDelete{8, 5, 9};
     EXPECT_EQ(expectedBeforeDelete, actualBeforeDelete);
     EXPECT_EQ(expectedAfterDelete, actualAfterDelete);
 }

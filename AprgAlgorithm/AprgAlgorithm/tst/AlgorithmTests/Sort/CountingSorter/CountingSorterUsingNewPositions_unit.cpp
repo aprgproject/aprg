@@ -36,35 +36,35 @@ StabilityCheckObjectsSorter::ValueToIndexableValueFunction stabilityCheckObjectT
 }  // namespace
 
 TEST(CountingSorterUsingNewPositionsTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
-    CharactersSorter sorter(characterToIndexableValueFunction);
+    CharactersSorter const sorter(characterToIndexableValueFunction);
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(CountingSorterUsingNewPositionsTest, SortWorksOnCharactersUsingOneValueExample) {
-    CharactersSorter sorter(characterToIndexableValueFunction);
+    CharactersSorter const sorter(characterToIndexableValueFunction);
     testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(CountingSorterUsingNewPositionsTest, SortWorksOnCharactersUsingExample1) {
-    CharactersSorter sorter(characterToIndexableValueFunction);
+    CharactersSorter const sorter(characterToIndexableValueFunction);
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(CountingSorterUsingNewPositionsTest, SortWorksOnCharactersUsingExample2) {
-    CharactersSorter sorter(characterToIndexableValueFunction);
+    CharactersSorter const sorter(characterToIndexableValueFunction);
     testSortUsingExample2WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 // CANNOT SORT STD::LIST
 TEST(CountingSorterUsingNewPositionsTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
-    SmallIntegerSorter sorter(smallIntToIndexableValueFunction);
+    SmallIntegerSorter const sorter(smallIntToIndexableValueFunction);
     testSortUsingExample1WithPositiveAndNegativeIntegers<SmallIntegerSorter, Integers>(sorter);
 }
 
 // CANNOT SORT DOUBLE VALUES
 // CANNOT SORT STRINGS
 TEST(CountingSorterUsingNewPositionsTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1) {
-    StabilityCheckObjectsSorter sorter(stabilityCheckObjectToIndexableValueFunction);
+    StabilityCheckObjectsSorter const sorter(stabilityCheckObjectToIndexableValueFunction);
     testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(sorter);
 }
 

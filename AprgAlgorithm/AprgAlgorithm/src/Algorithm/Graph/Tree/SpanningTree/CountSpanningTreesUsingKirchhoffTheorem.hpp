@@ -26,9 +26,9 @@ public:
         // when we remove any row and any column from L.
         // The determinant is always the same, regardless of which row and column we remove from L.
         // Note that Cayley’s formula is a special case of Kirchhoff’s theorem, because in a complete graph of n nodes.
-        LaplaceanMatrix laplaceanMatrix(createLaplaceanMatrix<Vertex, MAX_VERTEX_VALUE>(graph));
-        RowAndColumnPair rowAndColumnPair(getBestRowAndColumnPairToRemove(laplaceanMatrix));
-        LaplaceanMatrix reducedMatrix(matrix::getMatrixWithOneColumnAndOneRowRemoved(
+        LaplaceanMatrix const laplaceanMatrix(createLaplaceanMatrix<Vertex, MAX_VERTEX_VALUE>(graph));
+        RowAndColumnPair const rowAndColumnPair(getBestRowAndColumnPairToRemove(laplaceanMatrix));
+        LaplaceanMatrix const reducedMatrix(matrix::getMatrixWithOneColumnAndOneRowRemoved(
             laplaceanMatrix, rowAndColumnPair.first, rowAndColumnPair.second));
         return matrix::getDeterminant(reducedMatrix);
     }

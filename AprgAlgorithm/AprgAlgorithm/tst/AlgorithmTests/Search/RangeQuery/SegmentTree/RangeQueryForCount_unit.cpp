@@ -12,8 +12,8 @@ using RangeQueryForTest = RangeQueryForCount<ValuesForTest>;
 }  // namespace
 
 TEST(RangeQueryForCountTest, GetCountOfThisValueOnIntervalWorksOnExample1) {
-    ValuesForTest values{4, 2, 4, 4, 2, 4, 3, 3, 4};
-    RangeQueryForTest countRangeQuery(values);
+    ValuesForTest const values{4, 2, 4, 4, 2, 4, 3, 3, 4};
+    RangeQueryForTest const countRangeQuery(values);
 
     // The counts for 1
     EXPECT_EQ(0, countRangeQuery.getCountOfThisValueOnInterval(0, 0, 1));
@@ -81,7 +81,7 @@ TEST(RangeQueryForCountTest, GetCountOfThisValueOnIntervalWorksOnExample1) {
 }
 
 TEST(RangeQueryForCountTest, ChangeValueAtIndexWorksOnExample1) {
-    ValuesForTest values{4, 2, 4, 4, 2, 4, 3, 3, 4};
+    ValuesForTest const values{4, 2, 4, 4, 2, 4, 3, 3, 4};
     RangeQueryForTest countRangeQuery(values);
 
     countRangeQuery.changeValueAtIndex(1, 1);

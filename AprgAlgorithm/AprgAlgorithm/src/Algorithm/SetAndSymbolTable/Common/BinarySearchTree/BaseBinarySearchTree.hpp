@@ -268,7 +268,7 @@ protected:
         NodeUniquePointer const& nodePointer, int const index) const {
         Node const* result(nullptr);
         if (nodePointer) {
-            int sizeOfThisSubTree = getSizeOfThisSubTree(nodePointer->left);
+            int const sizeOfThisSubTree = getSizeOfThisSubTree(nodePointer->left);
             if (sizeOfThisSubTree > index) {
                 result = selectNodeWithIndexStartingOnThisNode(nodePointer->left, index);
             } else if (sizeOfThisSubTree < index) {

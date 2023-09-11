@@ -20,7 +20,7 @@ public:
 
 private:
     [[nodiscard]] int searchUsingTrie(std::string const& searchSpace, std::string const& query) const {
-        TernarySearchSuffixTrie trie(searchSpace);
+        TernarySearchSuffixTrie const trie(searchSpace);
         return trie.getIndexOfFirstOccurrence(query);
     }
 

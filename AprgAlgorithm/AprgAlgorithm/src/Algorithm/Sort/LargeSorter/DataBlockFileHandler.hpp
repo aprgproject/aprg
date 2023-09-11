@@ -19,7 +19,7 @@ public:
 
     void openFileIfNeeded(std::string const& path) {
         if (!m_fileOptional) {
-            AlbaLocalPathHandler filePathHandler(path);
+            AlbaLocalPathHandler const filePathHandler(path);
             // filePathHandler.createDirectoriesForNonExisitingDirectories(); //is this needed?
             m_path = filePathHandler.getFullPath();
             m_fileOptional.emplace();

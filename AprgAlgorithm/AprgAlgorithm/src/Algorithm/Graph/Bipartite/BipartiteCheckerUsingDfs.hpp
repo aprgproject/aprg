@@ -47,7 +47,7 @@ private:
     }
 
     void initialize() {
-        Vertices vertices(m_graph.getVertices());
+        Vertices const vertices(m_graph.getVertices());
         for (Vertex const& vertex : vertices) {
             m_vertexToColorMap[vertex] = false;  // set all colors to one color (note that "false" is the first color)
         }
@@ -64,7 +64,7 @@ private:
 
     void checkUsingDfs(Vertex const& vertex) {
         m_processedVertices.putVertex(vertex);
-        bool vertexColor(m_vertexToColorMap[vertex]);
+        bool const vertexColor(m_vertexToColorMap[vertex]);
         for (Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(vertex)) {
             if (m_processedVertices.isNotFound(adjacentVertex)) {
                 // assign the other color for unprocessed adjacent vertices

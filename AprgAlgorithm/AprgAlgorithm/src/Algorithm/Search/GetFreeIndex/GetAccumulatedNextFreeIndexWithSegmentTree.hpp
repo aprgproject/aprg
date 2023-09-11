@@ -44,10 +44,10 @@ private:
             m_treeSums[m_startOfChildren + baseLeft] != 0) {
             result = baseLeft;
         } else {
-            Index leftChild = Utilities::getLeftChild(currentChild);
+            Index const leftChild = Utilities::getLeftChild(currentChild);
             if (leftChild < static_cast<Index>(m_treeSums.size())) {
-                Index leftChildSum = m_treeSums[leftChild];
-                Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
+                Index const leftChildSum = m_treeSums[leftChild];
+                Index const baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
                 if (index + 1 <= leftChildSum) {
                     result = getNextFreeIndexAt(index, leftChild, baseLeft, baseMidPoint);
                 } else {

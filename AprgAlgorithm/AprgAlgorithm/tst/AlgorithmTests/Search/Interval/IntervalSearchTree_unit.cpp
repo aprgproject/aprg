@@ -81,8 +81,8 @@ TEST(IntervalSearchTreeTest, GetSupersetIntervalsOfWorksOnExample3) {
 
 TEST(IntervalSearchTreeTest, MergeIntervalsWorksOnExample2) {
     SearchTreeForTest search;
-    SearchTreeForTest::BooleanBinaryFunction mergeCondition = [](SearchTreeForTest::Key const& interval1,
-                                                                 SearchTreeForTest::Key const& interval2) {
+    SearchTreeForTest::BooleanBinaryFunction const mergeCondition = [](SearchTreeForTest::Key const& interval1,
+                                                                       SearchTreeForTest::Key const& interval2) {
         return interval1.end + 1 >= interval2.start;
     };
     search.put({5, 8});

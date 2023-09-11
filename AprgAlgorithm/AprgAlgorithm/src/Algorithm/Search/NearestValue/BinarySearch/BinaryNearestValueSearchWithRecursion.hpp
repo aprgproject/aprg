@@ -43,7 +43,7 @@ private:
         Index const lowIndex, Index const highIndex, Value const& target) const {
         if (lowIndex + 1 < highIndex) {
             // Binary search with one comparison per iteration
-            Index middleIndex = getMidpointOfIndexes(lowIndex, highIndex);
+            Index const middleIndex = getMidpointOfIndexes(lowIndex, highIndex);
             if (m_sortedValues[middleIndex] <= target) {
                 return getIndexUsingIntervalsInsideTarget(middleIndex, highIndex, target);
             }
@@ -54,8 +54,8 @@ private:
 
     [[nodiscard]] Index getIndexOfNearestValueInBetweenTwoIndices(
         Index const lowIndex, Index const highIndex, Value const& target) const {
-        Value deviationFromLower(mathHelper::getPositiveDelta(target, m_sortedValues[lowIndex]));
-        Value deviationFromHigher(mathHelper::getPositiveDelta(target, m_sortedValues[highIndex]));
+        Value const deviationFromLower(mathHelper::getPositiveDelta(target, m_sortedValues[lowIndex]));
+        Value const deviationFromHigher(mathHelper::getPositiveDelta(target, m_sortedValues[highIndex]));
         return (deviationFromLower <= deviationFromHigher) ? lowIndex : highIndex;
     }
 

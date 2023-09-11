@@ -46,7 +46,7 @@ TEST(JumpNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereIsOneValue)
 }
 
 TEST(JumpNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
-    ValuesForTest duplicateValues{0, 0, 0, 0, 0};
+    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
     SearchForTest search(duplicateValues);
 
     EXPECT_EQ(4, search.getIndexOfNearestValue(33));

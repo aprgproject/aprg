@@ -13,14 +13,14 @@ using VertexOrderingForTest = VertexOrderingUsingDfs<VertexForTest>;
 }  // namespace
 
 TEST(VertexOrderingUsingDfsTest, VertexOrderingWorksWhenGraphIsEmptyWithUndirectedGraph) {
-    GraphForTest graph;
+    GraphForTest const graph;
     VertexOrderingForTest vertexOrderingWithDfs(graph);
 
-    VerticesForTest preOrderFromAllVertices(
+    VerticesForTest const preOrderFromAllVertices(
         vertexOrderingWithDfs.getVerticesInThisOrder(VertexTraversalOrder::PreOrder));
-    VerticesForTest postOrderFromAllVertices(
+    VerticesForTest const postOrderFromAllVertices(
         vertexOrderingWithDfs.getVerticesInThisOrder(VertexTraversalOrder::PostOrder));
-    VerticesForTest reversePostOrderFromAllVertices(
+    VerticesForTest const reversePostOrderFromAllVertices(
         vertexOrderingWithDfs.getVerticesInThisOrder(VertexTraversalOrder::ReversePostOrder));
 
     EXPECT_TRUE(preOrderFromAllVertices.empty());
@@ -44,25 +44,25 @@ TEST(VertexOrderingUsingDfsTest, VertexOrderingWorksUsingExample1WithUndirectedG
     graph.connect(23, 13);
     VertexOrderingForTest vertexOrderingWithDfs(graph);
 
-    VerticesForTest preOrderFromAVertex(
+    VerticesForTest const preOrderFromAVertex(
         vertexOrderingWithDfs.getVerticesInThisOrder(30, VertexTraversalOrder::PreOrder));
-    VerticesForTest postOrderFromAVertex(
+    VerticesForTest const postOrderFromAVertex(
         vertexOrderingWithDfs.getVerticesInThisOrder(30, VertexTraversalOrder::PostOrder));
-    VerticesForTest reversePostOrderAVertex(
+    VerticesForTest const reversePostOrderAVertex(
         vertexOrderingWithDfs.getVerticesInThisOrder(30, VertexTraversalOrder::ReversePostOrder));
-    VerticesForTest preOrderFromAllVertices(
+    VerticesForTest const preOrderFromAllVertices(
         vertexOrderingWithDfs.getVerticesInThisOrder(VertexTraversalOrder::PreOrder));
-    VerticesForTest postOrderFromAllVertices(
+    VerticesForTest const postOrderFromAllVertices(
         vertexOrderingWithDfs.getVerticesInThisOrder(VertexTraversalOrder::PostOrder));
-    VerticesForTest reversePostOrderFromAllVertices(
+    VerticesForTest const reversePostOrderFromAllVertices(
         vertexOrderingWithDfs.getVerticesInThisOrder(VertexTraversalOrder::ReversePostOrder));
 
-    VerticesForTest expectedPreOrderFromAVertex{30, 20, 10, 40, 31, 21, 11, 32, 22, 12, 33, 23, 13};
-    VerticesForTest expectedPostOrderFromAVertex{10, 20, 11, 21, 31, 12, 22, 32, 13, 23, 33, 40, 30};
-    VerticesForTest expectedReversePostOrderFromAVertex{30, 40, 33, 23, 13, 32, 22, 12, 31, 21, 11, 20, 10};
-    VerticesForTest expectedPreOrderFromAllVertices{10, 20, 30, 40, 31, 21, 11, 32, 22, 12, 33, 23, 13};
-    VerticesForTest expectedPostOrderFromAllVertices{11, 21, 31, 12, 22, 32, 13, 23, 33, 40, 30, 20, 10};
-    VerticesForTest expectedReversePostOrderFromAllVertices{10, 20, 30, 40, 33, 23, 13, 32, 22, 12, 31, 21, 11};
+    VerticesForTest const expectedPreOrderFromAVertex{30, 20, 10, 40, 31, 21, 11, 32, 22, 12, 33, 23, 13};
+    VerticesForTest const expectedPostOrderFromAVertex{10, 20, 11, 21, 31, 12, 22, 32, 13, 23, 33, 40, 30};
+    VerticesForTest const expectedReversePostOrderFromAVertex{30, 40, 33, 23, 13, 32, 22, 12, 31, 21, 11, 20, 10};
+    VerticesForTest const expectedPreOrderFromAllVertices{10, 20, 30, 40, 31, 21, 11, 32, 22, 12, 33, 23, 13};
+    VerticesForTest const expectedPostOrderFromAllVertices{11, 21, 31, 12, 22, 32, 13, 23, 33, 40, 30, 20, 10};
+    VerticesForTest const expectedReversePostOrderFromAllVertices{10, 20, 30, 40, 33, 23, 13, 32, 22, 12, 31, 21, 11};
     EXPECT_EQ(expectedPreOrderFromAVertex, preOrderFromAVertex);
     EXPECT_EQ(expectedPostOrderFromAVertex, postOrderFromAVertex);
     EXPECT_EQ(expectedReversePostOrderFromAVertex, reversePostOrderAVertex);
@@ -88,25 +88,25 @@ TEST(VertexOrderingUsingDfsTest, VertexOrderingWorksUsingExample2WithUndirectedG
     graph.connect(5, 3);
     VertexOrderingForTest vertexOrderingWithDfs(graph);
 
-    VerticesForTest preOrderFromAVertex(
+    VerticesForTest const preOrderFromAVertex(
         vertexOrderingWithDfs.getVerticesInThisOrder(4, VertexTraversalOrder::PreOrder));
-    VerticesForTest postOrderFromAVertex(
+    VerticesForTest const postOrderFromAVertex(
         vertexOrderingWithDfs.getVerticesInThisOrder(4, VertexTraversalOrder::PostOrder));
-    VerticesForTest reversePostOrderAVertex(
+    VerticesForTest const reversePostOrderAVertex(
         vertexOrderingWithDfs.getVerticesInThisOrder(4, VertexTraversalOrder::ReversePostOrder));
-    VerticesForTest preOrderFromAllVertices(
+    VerticesForTest const preOrderFromAllVertices(
         vertexOrderingWithDfs.getVerticesInThisOrder(VertexTraversalOrder::PreOrder));
-    VerticesForTest postOrderFromAllVertices(
+    VerticesForTest const postOrderFromAllVertices(
         vertexOrderingWithDfs.getVerticesInThisOrder(VertexTraversalOrder::PostOrder));
-    VerticesForTest reversePostOrderFromAllVertices(
+    VerticesForTest const reversePostOrderFromAllVertices(
         vertexOrderingWithDfs.getVerticesInThisOrder(VertexTraversalOrder::ReversePostOrder));
 
-    VerticesForTest expectedPreOrderFromAVertex{4, 3, 5, 0, 1, 2, 6};
-    VerticesForTest expectedPostOrderFromAVertex{1, 2, 6, 0, 5, 3, 4};
-    VerticesForTest expectedReversePostOrderFromAVertex{4, 3, 5, 0, 6, 2, 1};
-    VerticesForTest expectedPreOrderFromAllVertices{0, 1, 2, 5, 3, 4, 6, 7, 8, 9, 10, 11, 12};
-    VerticesForTest expectedPostOrderFromAllVertices{1, 2, 6, 4, 3, 5, 0, 8, 7, 10, 12, 11, 9};
-    VerticesForTest expectedReversePostOrderFromAllVertices{9, 11, 12, 10, 7, 8, 0, 5, 3, 4, 6, 2, 1};
+    VerticesForTest const expectedPreOrderFromAVertex{4, 3, 5, 0, 1, 2, 6};
+    VerticesForTest const expectedPostOrderFromAVertex{1, 2, 6, 0, 5, 3, 4};
+    VerticesForTest const expectedReversePostOrderFromAVertex{4, 3, 5, 0, 6, 2, 1};
+    VerticesForTest const expectedPreOrderFromAllVertices{0, 1, 2, 5, 3, 4, 6, 7, 8, 9, 10, 11, 12};
+    VerticesForTest const expectedPostOrderFromAllVertices{1, 2, 6, 4, 3, 5, 0, 8, 7, 10, 12, 11, 9};
+    VerticesForTest const expectedReversePostOrderFromAllVertices{9, 11, 12, 10, 7, 8, 0, 5, 3, 4, 6, 2, 1};
     EXPECT_EQ(expectedPreOrderFromAVertex, preOrderFromAVertex);
     EXPECT_EQ(expectedPostOrderFromAVertex, postOrderFromAVertex);
     EXPECT_EQ(expectedReversePostOrderFromAVertex, reversePostOrderAVertex);
@@ -132,11 +132,11 @@ TEST(VertexOrderingUsingDfsTest, GetVerticesInTopologicalOrderWorksWithUndirecte
     graph.connect(5, 3);
     VertexOrderingForTest vertexOrderingWithDfs(graph);
 
-    VerticesForTest pathFromAVertex(vertexOrderingWithDfs.getVerticesInTopologicalOrder(4));
-    VerticesForTest pathFromAllVertices(vertexOrderingWithDfs.getVerticesInTopologicalOrder());
+    VerticesForTest const pathFromAVertex(vertexOrderingWithDfs.getVerticesInTopologicalOrder(4));
+    VerticesForTest const pathFromAllVertices(vertexOrderingWithDfs.getVerticesInTopologicalOrder());
 
-    VerticesForTest expectedPathFromAVertex{4, 3, 5, 0, 6, 2, 1};
-    VerticesForTest expectedPathFromAllVertices{9, 11, 12, 10, 7, 8, 0, 5, 3, 4, 6, 2, 1};
+    VerticesForTest const expectedPathFromAVertex{4, 3, 5, 0, 6, 2, 1};
+    VerticesForTest const expectedPathFromAllVertices{9, 11, 12, 10, 7, 8, 0, 5, 3, 4, 6, 2, 1};
     EXPECT_EQ(expectedPathFromAVertex, pathFromAVertex);
     EXPECT_EQ(expectedPathFromAllVertices, pathFromAllVertices);
 }
@@ -158,9 +158,9 @@ TEST(VertexOrderingUsingDfsTest, GetVerticesInTopologicalOrderWorksWithDagChecki
     graph.connect(5, 3);
     VertexOrderingForTest vertexOrderingWithDfs(graph);
 
-    VerticesForTest pathFromAllVertices(vertexOrderingWithDfs.getVerticesInTopologicalOrderWithDagChecking());
+    VerticesForTest const pathFromAllVertices(vertexOrderingWithDfs.getVerticesInTopologicalOrderWithDagChecking());
 
-    VerticesForTest expectedPathFromAllVertices{9, 11, 12, 10, 7, 8, 0, 5, 3, 4, 6, 2, 1};
+    VerticesForTest const expectedPathFromAllVertices{9, 11, 12, 10, 7, 8, 0, 5, 3, 4, 6, 2, 1};
     EXPECT_EQ(expectedPathFromAllVertices, pathFromAllVertices);
 }
 

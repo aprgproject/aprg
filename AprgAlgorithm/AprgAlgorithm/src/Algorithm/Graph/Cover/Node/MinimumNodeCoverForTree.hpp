@@ -46,7 +46,7 @@ private:
             Count countIfVertexIsIncluded(1);
             Count countIfVertexIsNotIncluded(0);
             for (Vertex const child : m_childrenInTree.getChildren(vertex)) {
-                Count childrenCount = getMinimumNodeCoverSizeUsingMemoizationDP(vertexToCountMap, child);
+                Count const childrenCount = getMinimumNodeCoverSizeUsingMemoizationDP(vertexToCountMap, child);
                 Count grandChildrenCount = 1;
                 for (Vertex const grandChild : m_childrenInTree.getChildren(child)) {
                     grandChildrenCount += getMinimumNodeCoverSizeUsingMemoizationDP(vertexToCountMap, grandChild);
@@ -54,7 +54,7 @@ private:
                 countIfVertexIsIncluded += childrenCount;
                 countIfVertexIsNotIncluded += grandChildrenCount;
             }
-            Count result = std::min(countIfVertexIsIncluded, countIfVertexIsNotIncluded);
+            Count const result = std::min(countIfVertexIsIncluded, countIfVertexIsNotIncluded);
             vertexToCountMap.emplace(vertex, result);
             return result;
         }
@@ -68,12 +68,13 @@ private:
             SetOfVerticesWithVertex setIfVertexIsIncluded{vertex};
             SetOfVerticesWithVertex setIfVertexIsNotIncluded;
             for (Vertex const child : m_childrenInTree.getChildren(vertex)) {
-                SetOfVerticesWithVertex childSet(getMinimumNodeCoverUsingMemoizationDP(vertexToMinimumSetMap, child));
+                SetOfVerticesWithVertex const childSet(
+                    getMinimumNodeCoverUsingMemoizationDP(vertexToMinimumSetMap, child));
                 copy(
                     childSet.cbegin(), childSet.cend(), inserter(setIfVertexIsIncluded, setIfVertexIsIncluded.begin()));
                 setIfVertexIsNotIncluded.emplace(child);
                 for (Vertex const grandChild : m_childrenInTree.getChildren(child)) {
-                    SetOfVerticesWithVertex grandChildSet(
+                    SetOfVerticesWithVertex const grandChildSet(
                         getMinimumNodeCoverUsingMemoizationDP(vertexToMinimumSetMap, grandChild));
                     copy(
                         grandChildSet.cbegin(), grandChildSet.cend(),

@@ -28,7 +28,7 @@ constexpr uint64_t vertexFor45 = 0x4012000000000000LL;
 }  // namespace
 
 TEST(SymbolGraphWithDoubleTest, ContainsWorksWhenEmpty) {
-    SymbolGraphForTest symbolGraph;
+    SymbolGraphForTest const symbolGraph;
 
     EXPECT_FALSE(symbolGraph.contains(1.2));
     EXPECT_FALSE(symbolGraph.contains(1.3));
@@ -50,7 +50,7 @@ TEST(SymbolGraphWithDoubleTest, ContainsWorksWhenNotEmpty) {
 }
 
 TEST(SymbolGraphWithDoubleTest, GetVertexWorks) {
-    SymbolGraphForTest symbolGraph;
+    SymbolGraphForTest const symbolGraph;
 
     EXPECT_EQ(vertexFor12, symbolGraph.getVertex(1.2));
     EXPECT_EQ(vertexFor13, symbolGraph.getVertex(1.3));
@@ -76,7 +76,7 @@ TEST(SymbolGraphWithDoubleTest, GetGraphWorks) {
     symbolGraph.connect(1.2, 2.3);
     symbolGraph.connect(1.3, 2.3);
 
-    GraphForTest::Edges expectedEdges{
+    GraphForTest::Edges const expectedEdges{
         {vertexFor12, vertexFor13}, {vertexFor12, vertexFor23}, {vertexFor13, vertexFor23}};
     EXPECT_EQ(expectedEdges, symbolGraph.getGraph().getEdges());
 }
@@ -87,7 +87,8 @@ TEST(SymbolGraphWithDoubleTest, GetSymbolTableWorks) {
     symbolGraph.connect(1.2, 2.3);
     symbolGraph.connect(1.3, 2.3);
 
-    SymbolGraphForTest::SymbolTable expectedSymbolTable{{vertexFor12, 1.2}, {vertexFor13, 1.3}, {vertexFor23, 2.3}};
+    SymbolGraphForTest::SymbolTable const expectedSymbolTable{
+        {vertexFor12, 1.2}, {vertexFor13, 1.3}, {vertexFor23, 2.3}};
     EXPECT_EQ(expectedSymbolTable, symbolGraph.getSymbolTable());
 }
 
@@ -97,9 +98,10 @@ TEST(SymbolGraphWithDoubleTest, ConnectWorks) {
     symbolGraph.connect(1.2, 2.3);
     symbolGraph.connect(1.3, 2.3);
 
-    GraphForTest::Edges expectedEdges{
+    GraphForTest::Edges const expectedEdges{
         {vertexFor12, vertexFor13}, {vertexFor12, vertexFor23}, {vertexFor13, vertexFor23}};
-    SymbolGraphForTest::SymbolTable expectedSymbolTable{{vertexFor12, 1.2}, {vertexFor13, 1.3}, {vertexFor23, 2.3}};
+    SymbolGraphForTest::SymbolTable const expectedSymbolTable{
+        {vertexFor12, 1.2}, {vertexFor13, 1.3}, {vertexFor23, 2.3}};
     EXPECT_EQ(expectedEdges, symbolGraph.getGraph().getEdges());
     EXPECT_EQ(expectedSymbolTable, symbolGraph.getSymbolTable());
 }
@@ -113,8 +115,8 @@ TEST(SymbolGraphWithDoubleTest, DisconnectWorks) {
     symbolGraph.disconnect(1.2, 1.3);
     symbolGraph.disconnect(1.2, 2.3);
 
-    GraphForTest::Edges expectedEdges{{vertexFor13, vertexFor23}};
-    SymbolGraphForTest::SymbolTable expectedSymbolTable{{vertexFor13, 1.3}, {vertexFor23, 2.3}};
+    GraphForTest::Edges const expectedEdges{{vertexFor13, vertexFor23}};
+    SymbolGraphForTest::SymbolTable const expectedSymbolTable{{vertexFor13, 1.3}, {vertexFor23, 2.3}};
     EXPECT_EQ(expectedEdges, symbolGraph.getGraph().getEdges());
     EXPECT_EQ(expectedSymbolTable, symbolGraph.getSymbolTable());
 }

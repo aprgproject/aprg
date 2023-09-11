@@ -62,7 +62,7 @@ void testGetEulerCycleWorksOnEmptyGraph() {
     Graph graph;
     PathSearch pathSearch(graph);
 
-    Path pathToVerify(pathSearch.getEulerCycle());
+    Path const pathToVerify(pathSearch.getEulerCycle());
 
     EXPECT_TRUE(pathToVerify.empty());
 }
@@ -76,9 +76,9 @@ void testGetEulerCycleWorksOnGraphWithAllInDegreesEqualsOutDegrees() {
     graph.connect(2, 0);
     PathSearch pathSearch(graph);
 
-    Path pathToVerify(pathSearch.getEulerCycle());
+    Path const pathToVerify(pathSearch.getEulerCycle());
 
-    Path pathToExpect{0, 1, 2, 0};
+    Path const pathToExpect{0, 1, 2, 0};
     EXPECT_EQ(pathToExpect, pathToVerify);
 }
 
@@ -90,7 +90,7 @@ void testGetEulerCycleWorksOnGraphWithAllInDegreesNotEqualToOutDegrees() {
     graph.connect(0, 2);
     PathSearch pathSearch(graph);
 
-    Path pathToVerify(pathSearch.getEulerCycle());
+    Path const pathToVerify(pathSearch.getEulerCycle());
 
     EXPECT_TRUE(pathToVerify.empty());
 }
@@ -101,7 +101,7 @@ void testGetEulerPathWorksOnEmptyGraph() {
     Graph graph;
     PathSearch pathSearch(graph);
 
-    Path pathToVerify(pathSearch.getEulerPath());
+    Path const pathToVerify(pathSearch.getEulerPath());
 
     EXPECT_TRUE(pathToVerify.empty());
 }
@@ -114,9 +114,9 @@ void testGetEulerPathWorksOnGraphWithOneLesserAndGreaterInAndOutDegrees() {
     graph.connect(1, 2);
     PathSearch pathSearch(graph);
 
-    Path pathToVerify(pathSearch.getEulerPath());
+    Path const pathToVerify(pathSearch.getEulerPath());
 
-    Path pathToExpect{0, 1, 2};
+    Path const pathToExpect{0, 1, 2};
     EXPECT_EQ(pathToExpect, pathToVerify);
 }
 
@@ -128,7 +128,7 @@ void testGetEulerPathWorksOnGraphWithMoreThanOneLesserAndGreaterInAndOutDegrees(
     graph.connect(0, 2);
     PathSearch pathSearch(graph);
 
-    Path pathToVerify(pathSearch.getEulerCycle());
+    Path const pathToVerify(pathSearch.getEulerCycle());
 
     EXPECT_TRUE(pathToVerify.empty());
 }
@@ -145,10 +145,10 @@ void testGetEulerCycleAndPathWorksOnExample1() {
     graph.connect(5, 4);
     PathSearch pathSearch(graph);
 
-    Path pathToVerify(pathSearch.getEulerPath());
-    Path cycleToVerify(pathSearch.getEulerCycle());
+    Path const pathToVerify(pathSearch.getEulerPath());
+    Path const cycleToVerify(pathSearch.getEulerCycle());
 
-    Path pathToExpect{1, 2, 3, 5, 5, 4, 1};
+    Path const pathToExpect{1, 2, 3, 5, 5, 4, 1};
     EXPECT_EQ(pathToExpect, pathToVerify);
     EXPECT_TRUE(cycleToVerify.empty());
 }

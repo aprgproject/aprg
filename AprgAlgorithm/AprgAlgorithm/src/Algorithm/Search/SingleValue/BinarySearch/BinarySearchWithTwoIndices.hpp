@@ -35,8 +35,8 @@ private:
         Index lowIndex(startIndex);
         Index highIndex(endIndex);
         while (lowIndex <= highIndex) {
-            Index middleIndex = getMidpointOfIndexes(lowIndex, highIndex);
-            Value middleValue(m_sortedValues[middleIndex]);
+            Index const middleIndex = getMidpointOfIndexes(lowIndex, highIndex);
+            Value const middleValue(m_sortedValues[middleIndex]);
             if (target < middleValue) {
                 highIndex = middleIndex - 1;
             } else if (middleValue < target) {

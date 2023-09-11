@@ -23,7 +23,7 @@ public:
 
         // Put array elements in different buckets
         for (Value const& value : valuesToSort) {
-            int bucketIndex = static_cast<int>(value - m_minValue) * NUMBER_OF_BUCKETS / deltaValue;
+            int const bucketIndex = static_cast<int>(value - m_minValue) * NUMBER_OF_BUCKETS / deltaValue;
             if (bucketIndex < NUMBER_OF_BUCKETS) {
                 buckets[bucketIndex].emplace_back(value);
             }

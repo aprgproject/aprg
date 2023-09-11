@@ -30,8 +30,9 @@ public:
             codeTrie);             // initialize input as single char code words for radix R keys
         Code lastCode(RADIX + 1);  // RADIX+1 because its the first code of the multi char strings
         while (!wholeInputString.empty()) {
-            std::string bestTrieMatch(codeTrie.getLongestPrefixOf(wholeInputString));  // find longest prefix match
-            writeCode(writer, codeTrie.get(bestTrieMatch));  // write code word for the best match in trie
+            std::string const bestTrieMatch(
+                codeTrie.getLongestPrefixOf(wholeInputString));  // find longest prefix match
+            writeCode(writer, codeTrie.get(bestTrieMatch));      // write code word for the best match in trie
             Code matchLength(bestTrieMatch.length());
             if (matchLength < static_cast<Code>(wholeInputString.length()) && lastCode < MAX_NUMBER_CODE_WORDS) {
                 codeTrie.put(wholeInputString.substr(0, matchLength + 1), lastCode++);  // add new next code word
@@ -91,12 +92,13 @@ private:
     }
 
     void writeCode(AlbaStreamBitWriter& writer, Code const& code) {
-        std::bitset<CODE_WORD_WIDTH> bitsetToWrite(code);
+        std::bitset<CODE_WORD_WIDTH> const bitsetToWrite(code);
         writer.writeBitsetData<CODE_WORD_WIDTH>(bitsetToWrite, CODE_WORD_WIDTH - 1, 0);
     }
 
     Code readOneCodeword(AlbaStreamBitReader& reader) {
-        std::bitset<CODE_WORD_WIDTH> bitsetCodeword(reader.readBitsetData<CODE_WORD_WIDTH>(CODE_WORD_WIDTH - 1, 0));
+        std::bitset<CODE_WORD_WIDTH> const bitsetCodeword(
+            reader.readBitsetData<CODE_WORD_WIDTH>(CODE_WORD_WIDTH - 1, 0));
         return static_cast<Code>(bitsetCodeword.to_ullong());
     }
 };

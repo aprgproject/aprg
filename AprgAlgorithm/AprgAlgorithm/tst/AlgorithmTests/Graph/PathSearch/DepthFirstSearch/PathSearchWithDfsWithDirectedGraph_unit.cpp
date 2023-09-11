@@ -28,7 +28,7 @@ void putConnectionsForTest(GraphForTest& graph) {
 TEST(PathSearchUsingDfsTest, HasPathToWorksWithDirectedGraph) {
     GraphForTest graph;
     putConnectionsForTest(graph);
-    PathSearchForTest pathSearch(graph, 0);
+    PathSearchForTest const pathSearch(graph, 0);
 
     EXPECT_TRUE(pathSearch.hasPathTo(0));
     EXPECT_TRUE(pathSearch.hasPathTo(1));
@@ -42,7 +42,7 @@ TEST(PathSearchUsingDfsTest, HasPathToWorksWithDirectedGraph) {
 TEST(PathSearchUsingDfsTest, GetOrderedPathToWorksWithDirectedGraph) {
     GraphForTest graph;
     putConnectionsForTest(graph);
-    PathSearchForTest pathSearch(graph, 0);
+    PathSearchForTest const pathSearch(graph, 0);
 
     EXPECT_EQ(PathForTest(), pathSearch.getOrderedPathTo(0));
     EXPECT_EQ(PathForTest({0, 1}), pathSearch.getOrderedPathTo(1));
@@ -56,7 +56,7 @@ TEST(PathSearchUsingDfsTest, GetOrderedPathToWorksWithDirectedGraph) {
 TEST(PathSearchUsingDfsTest, GetOrderedPathToWorksWithDirectedGraphWithMultipleStartingPoints) {
     GraphForTest graph;
     putConnectionsForTest(graph);
-    PathSearchForTest pathSearch(graph, {0, 2});
+    PathSearchForTest const pathSearch(graph, {0, 2});
 
     EXPECT_EQ(PathForTest(), pathSearch.getOrderedPathTo(0));
     EXPECT_EQ(PathForTest({0, 1}), pathSearch.getOrderedPathTo(1));
@@ -70,7 +70,7 @@ TEST(PathSearchUsingDfsTest, GetOrderedPathToWorksWithDirectedGraphWithMultipleS
 TEST(PathSearchUsingDfsTest, GetPreviousVertexWorksWithDirectedGraph) {
     GraphForTest graph;
     putConnectionsForTest(graph);
-    PathSearchForTest pathSearch(graph, 0);
+    PathSearchForTest const pathSearch(graph, 0);
 
     EXPECT_EQ(0, pathSearch.getPreviousVertex(0));
     EXPECT_EQ(0, pathSearch.getPreviousVertex(1));

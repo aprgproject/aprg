@@ -29,7 +29,7 @@ RangeQueryForTest::IncrementFunction incrementFunction = [](IndexForTest const i
 TEST(
     RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdateTest,
     GetValueOnIntervalWithMinimumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
+    ValuesForTest const values;
     RangeQueryForTest sumRangeQuery(values, plusFunction, incrementFunction);
 
     EXPECT_EQ(0, sumRangeQuery.getValueOnInterval(0, 0));
@@ -37,7 +37,7 @@ TEST(
 
 TEST(
     RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdateTest, GetValueOnIntervalWithSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
     RangeQueryForTest sumRangeQuery(values, plusFunction, incrementFunction);
 
     EXPECT_EQ(1, sumRangeQuery.getValueOnInterval(0, 0));
@@ -59,7 +59,7 @@ TEST(
 TEST(
     RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdateTest,
     IncreaseAtRangeWithSumWorksWithEmptySetOfValues) {
-    ValuesForTest values;
+    ValuesForTest const values;
     RangeQueryForTest sumRangeQuery(values, plusFunction, incrementFunction);
 
     sumRangeQuery.increaseAtRange(0, 5);
@@ -68,7 +68,7 @@ TEST(
 }
 
 TEST(RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdateTest, IncreaseAtRangeWithSumWorksOnExample1) {
-    ValuesForTest values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
     RangeQueryForTest sumRangeQuery(values, plusFunction, incrementFunction);
 
     sumRangeQuery.increaseAtRange(0, 5);

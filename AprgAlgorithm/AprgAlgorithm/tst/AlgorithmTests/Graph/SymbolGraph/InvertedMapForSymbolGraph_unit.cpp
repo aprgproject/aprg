@@ -19,7 +19,7 @@ TEST(InvertedMapForSymbolGraphTest, GetVertexIdentifierAndAddObjectIfNeededWorks
     invertedMap.getVertexIdentifierAndAddObjectIfNeeded("one");
     invertedMap.getVertexIdentifierAndAddObjectIfNeeded("two");
 
-    InvertedMapForTest::ObjectToVertexMap expectedMap{{"zero", 0}, {"one", 1}, {"two", 2}};
+    InvertedMapForTest::ObjectToVertexMap const expectedMap{{"zero", 0}, {"one", 1}, {"two", 2}};
     EXPECT_EQ(expectedMap, invertedMap.getObjectToVertexMap());
     EXPECT_TRUE(invertedMap.getUnusedVertices().empty());
 }
@@ -34,8 +34,8 @@ TEST(InvertedMapForSymbolGraphTest, GetVertexIdentifierAndAddObjectIfNeededWorks
 
     invertedMap.getVertexIdentifierAndAddObjectIfNeeded("replacement for one");
 
-    InvertedMapForTest::ObjectToVertexMap expectedMap{{"replacement for one", 1}, {"two", 2}};
-    InvertedMapForTest::Vertices expectedUnusedVertices{0};
+    InvertedMapForTest::ObjectToVertexMap const expectedMap{{"replacement for one", 1}, {"two", 2}};
+    InvertedMapForTest::Vertices const expectedUnusedVertices{0};
     EXPECT_EQ(expectedMap, invertedMap.getObjectToVertexMap());
     EXPECT_EQ(expectedUnusedVertices, invertedMap.getUnusedVertices());
 }
@@ -49,8 +49,8 @@ TEST(InvertedMapForSymbolGraphTest, RemoveObjectWorksWhenAddingObjects) {
     invertedMap.removeObject("zero");
     invertedMap.removeObject("one");
 
-    InvertedMapForTest::ObjectToVertexMap expectedMap{{"two", 2}};
-    InvertedMapForTest::Vertices expectedUnusedVertices{0, 1};
+    InvertedMapForTest::ObjectToVertexMap const expectedMap{{"two", 2}};
+    InvertedMapForTest::Vertices const expectedUnusedVertices{0, 1};
     EXPECT_EQ(expectedMap, invertedMap.getObjectToVertexMap());
     EXPECT_EQ(expectedUnusedVertices, invertedMap.getUnusedVertices());
 }

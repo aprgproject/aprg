@@ -55,7 +55,7 @@ TEST(QuickUnionTest, GetRootWorks) {
 TEST(QuickUnionTest, GetRelativeRootArrayWorks) {
     UnionFindForTest unionFind;
 
-    UnionFindForTest::RootArray expectedInitialRelativeRootArray{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    UnionFindForTest::RootArray const expectedInitialRelativeRootArray{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
     EXPECT_EQ(expectedInitialRelativeRootArray, unionFind.getRelativeRootArray());
 
     unionFind.connect(4, 3);
@@ -64,7 +64,7 @@ TEST(QuickUnionTest, GetRelativeRootArrayWorks) {
     unionFind.connect(9, 4);
     unionFind.connect(2, 1);
 
-    UnionFindForTest::RootArray expectedRelativeRootArray{0, 1, 1, 8, 3, 5, 5, 7, 8, 8, 10, 11, 12};
+    UnionFindForTest::RootArray const expectedRelativeRootArray{0, 1, 1, 8, 3, 5, 5, 7, 8, 8, 10, 11, 12};
     EXPECT_EQ(expectedRelativeRootArray, unionFind.getRelativeRootArray());
 }
 

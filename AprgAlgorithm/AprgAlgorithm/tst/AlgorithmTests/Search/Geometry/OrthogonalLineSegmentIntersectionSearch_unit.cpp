@@ -17,7 +17,7 @@ TEST(OrthogonalLineSegmentIntersectionSearchTest, GetIntersectingPointsWorksWhen
 
     auto pointsToVerify(search.getIntersectingPoints());
 
-    SearchForTest::Points pointsToExpect{{3, 3}};
+    SearchForTest::Points const pointsToExpect{{3, 3}};
     EXPECT_EQ(pointsToExpect, pointsToVerify);
 }
 
@@ -29,7 +29,7 @@ TEST(OrthogonalLineSegmentIntersectionSearchTest, GetIntersectingPointsWorksWhen
 
     auto pointsToVerify(search.getIntersectingPoints());
 
-    SearchForTest::Points pointsToExpect{{0, 3}, {5, 3}};
+    SearchForTest::Points const pointsToExpect{{0, 3}, {5, 3}};
     EXPECT_EQ(pointsToExpect, pointsToVerify);
 }
 
@@ -50,7 +50,7 @@ TEST(OrthogonalLineSegmentIntersectionSearchTest, GetIntersectingPointsWorksOnCo
 
     auto pointsToVerify(search.getIntersectingPoints());
 
-    SearchForTest::Points pointsToExpect{{6, 5}, {9, 2}, {11, 7}, {11, 10}, {14, 5}};
+    SearchForTest::Points const pointsToExpect{{6, 5}, {9, 2}, {11, 7}, {11, 10}, {14, 5}};
     EXPECT_EQ(pointsToExpect, pointsToVerify);
 }
 

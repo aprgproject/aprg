@@ -14,22 +14,22 @@ using ThreeValuesForTest = SumSearch::ThreeValues;
 }  // namespace
 
 TEST(ThreeSumTest, GetNonDuplicateThreeValuesWithSumWorksOnExample1) {
-    ValuesForTest sortedValues{1, 4, 5, 6, 7, 9, 10};
-    SumSearch search(sortedValues);
+    ValuesForTest const sortedValues{1, 4, 5, 6, 7, 9, 10};
+    SumSearch const search(sortedValues);
 
-    ThreeValuesForTest threeValuesToVerify(search.getNonDuplicateThreeValuesWithSum(18));
+    ThreeValuesForTest const threeValuesToVerify(search.getNonDuplicateThreeValuesWithSum(18));
 
-    ThreeValuesForTest threeValuesToExpect{1, 7, 10};
+    ThreeValuesForTest const threeValuesToExpect{1, 7, 10};
     EXPECT_EQ(threeValuesToExpect, threeValuesToVerify);
 }
 
 TEST(ThreeSumTest, GetPossibleDuplicatedThreeValuesWithSumWorksOnExample1) {
-    ValuesForTest sortedValues{1, 4, 5, 6, 7, 9, 10};
-    SumSearch search(sortedValues);
+    ValuesForTest const sortedValues{1, 4, 5, 6, 7, 9, 10};
+    SumSearch const search(sortedValues);
 
-    ThreeValuesForTest threeValuesToVerify(search.getPossibleDuplicatedThreeValuesWithSum(30));
+    ThreeValuesForTest const threeValuesToVerify(search.getPossibleDuplicatedThreeValuesWithSum(30));
 
-    ThreeValuesForTest threeValuesToExpect{10, 10, 10};
+    ThreeValuesForTest const threeValuesToExpect{10, 10, 10};
     EXPECT_EQ(threeValuesToExpect, threeValuesToVerify);
 }
 

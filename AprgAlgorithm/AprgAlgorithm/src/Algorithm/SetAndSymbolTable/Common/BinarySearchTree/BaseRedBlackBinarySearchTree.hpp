@@ -73,7 +73,7 @@ protected:
                 nodePointer->left = std::move(nodeToMove);
 
                 // update other things:
-                NodeUniquePointer& previousNodePointer(nodePointer->left);
+                NodeUniquePointer const& previousNodePointer(nodePointer->left);
                 nodePointer->parentLinkColor = previousNodePointer->parentLinkColor;
                 nodePointer->sizeOfThisSubTree = previousNodePointer->sizeOfThisSubTree;
                 previousNodePointer->parentLinkColor = RedBlackColor::Red;
@@ -95,7 +95,7 @@ protected:
                 nodePointer->right = std::move(nodeToMove);
 
                 // update other things:
-                NodeUniquePointer& previousNodePointer(nodePointer->right);
+                NodeUniquePointer const& previousNodePointer(nodePointer->right);
                 nodePointer->parentLinkColor = previousNodePointer->parentLinkColor;
                 nodePointer->sizeOfThisSubTree = previousNodePointer->sizeOfThisSubTree;
                 previousNodePointer->parentLinkColor = RedBlackColor::Red;

@@ -30,7 +30,7 @@ TEST(ShortestDistanceByTraverseCountUsingAdjacencyMatrixTest, GetShortestDistanc
     graph.connect(5, 3, 3.0);
     graph.connect(2, 3, 2.0);
     graph.connect(3, 6, 1.0);
-    ShortestPathsForUndirectedGraphForTest shortestPaths(graph, 3);
+    ShortestPathsForUndirectedGraphForTest const shortestPaths(graph, 3);
 
     EXPECT_DOUBLE_EQ(INFINITY, shortestPaths.getShortestDistance(1, 1));
     EXPECT_DOUBLE_EQ(3.5, shortestPaths.getShortestDistance(1, 2));
@@ -49,7 +49,7 @@ TEST(ShortestDistanceByTraverseCountUsingAdjacencyMatrixTest, GetShortestDistanc
     graph.connect(5, 3, 3.0);
     graph.connect(2, 3, 2.0);
     graph.connect(3, 6, 1.0);
-    ShortestPathsForDirectedGraphForTest shortestPaths(graph, 3);
+    ShortestPathsForDirectedGraphForTest const shortestPaths(graph, 3);
 
     EXPECT_DOUBLE_EQ(INFINITY, shortestPaths.getShortestDistance(1, 1));
     EXPECT_DOUBLE_EQ(5.5, shortestPaths.getShortestDistance(1, 2));
@@ -69,7 +69,7 @@ TEST(ShortestDistanceByTraverseCountUsingAdjacencyMatrixTest, GetShortestDistanc
     graph.connect(4, 2, 1.0);
     graph.connect(6, 3, 3.0);
     graph.connect(6, 5, 2.0);
-    ShortestPathsForDirectedGraphForTest shortestPaths(graph, 4);
+    ShortestPathsForDirectedGraphForTest const shortestPaths(graph, 4);
 
     EXPECT_DOUBLE_EQ(INFINITY, shortestPaths.getShortestDistance(1, 1));
     EXPECT_DOUBLE_EQ(INFINITY, shortestPaths.getShortestDistance(1, 2));

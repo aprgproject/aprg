@@ -12,7 +12,7 @@ using PatternMatchingToTest = RegularExpressionPatternMatching<int>;
 }  // namespace
 
 TEST(RegularExpressionPatternMatchingTest, SearchWorksUsingExample1) {
-    PatternMatchingToTest patternMatching("((A*B|AC)D)");
+    PatternMatchingToTest const patternMatching("((A*B|AC)D)");
 
     EXPECT_TRUE(patternMatching.isAMatch("AABD"));
     EXPECT_FALSE(patternMatching.isAMatch("DDD"));

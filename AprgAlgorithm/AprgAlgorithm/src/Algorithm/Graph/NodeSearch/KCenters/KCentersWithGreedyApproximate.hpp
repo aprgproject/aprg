@@ -33,7 +33,7 @@ private:
     }
 
     void updateClosestDistances(Vertex const& currentCenter) {
-        Bfs bfs(m_graph, {currentCenter});
+        Bfs const bfs(m_graph, {currentCenter});
         for (auto const& [vertex, distance] : bfs.getEndVertexToDistanceSumMap()) {
             auto it = m_closestDistanceForVertex.find(vertex);
             if (it != m_closestDistanceForVertex.cend()) {

@@ -38,7 +38,7 @@ public:
                 auto itYStart = setOfYs.lower_bound(point.second - smallestDistance);
                 auto itYEnd = setOfYs.upper_bound(point.second + smallestDistance);
                 for (auto itY = itYStart; itY != itYEnd; ++itY) {
-                    Point possibleNearPoint(x, *itY);
+                    Point const possibleNearPoint(x, *itY);
                     if (point != possibleNearPoint) {
                         Unit distance = getDistance(point, possibleNearPoint);
                         if (smallestDistance > distance) {

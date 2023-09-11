@@ -15,8 +15,8 @@ public:
         int const size = valuesToSort.size();
         for (int subHalfSize = 1; subHalfSize < size; subHalfSize *= 2) {
             for (int lowest = 0; lowest < size - subHalfSize; lowest += subHalfSize * 2) {
-                int middle = lowest + subHalfSize - 1;
-                int highest = std::min(lowest + (subHalfSize * 2) - 1, size - 1);
+                int const middle = lowest + subHalfSize - 1;
+                int const highest = std::min(lowest + (subHalfSize * 2) - 1, size - 1);
                 mergeTheTwoSortedParts(valuesToSort, auxiliary, lowest, middle, highest);
             }
         }

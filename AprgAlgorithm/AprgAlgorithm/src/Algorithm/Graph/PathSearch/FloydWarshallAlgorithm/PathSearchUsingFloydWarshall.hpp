@@ -95,17 +95,17 @@ private:
     }
 
     void checkAllIntermediateVertices() {
-        Vertices vertices(m_graph.getVertices());
+        Vertices const vertices(m_graph.getVertices());
         for (Vertex const& inbetweenVertex : vertices) {
             for (Vertex const& startVertex : vertices) {
                 if (startVertex != inbetweenVertex) {
-                    PathDetails& startToIntermediateDetails(
+                    PathDetails const& startToIntermediateDetails(
                         m_pathDetailsMatrix.getEntryReference(startVertex, inbetweenVertex));
                     for (Vertex const& endVertex : vertices) {
                         if (endVertex != inbetweenVertex && startVertex != endVertex) {
                             PathDetails& startToEndDetails(
                                 m_pathDetailsMatrix.getEntryReference(startVertex, endVertex));
-                            PathDetails& intermediateToEndDetails(
+                            PathDetails const& intermediateToEndDetails(
                                 m_pathDetailsMatrix.getEntryReference(inbetweenVertex, endVertex));
                             if (startToIntermediateDetails.hasAPath && intermediateToEndDetails.hasAPath) {
                                 Weight possibleNewWeight =

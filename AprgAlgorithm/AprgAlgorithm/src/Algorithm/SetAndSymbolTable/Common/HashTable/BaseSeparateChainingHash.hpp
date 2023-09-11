@@ -54,17 +54,17 @@ public:
     }
 
     [[nodiscard]] Key selectAt(int const index) const override {
-        Keys keys(getKeys());
+        Keys const keys(getKeys());
         return OrderedArray::selectAt(index, keys);
     }
 
     [[nodiscard]] Key getFloor(Key const& key) const override {
-        Keys keys(getKeys());
+        Keys const keys(getKeys());
         return OrderedArray::getFloor(key, keys);
     }
 
     [[nodiscard]] Key getCeiling(Key const& key) const override {
-        Keys keys(getKeys());
+        Keys const keys(getKeys());
         return OrderedArray::getCeiling(key, keys);
     }
 
@@ -91,7 +91,7 @@ public:
     [[nodiscard]] int getSize() const override { return m_size; }
 
     [[nodiscard]] int getRank(Key const& key) const override {
-        Keys keys(getKeys());
+        Keys const keys(getKeys());
         return OrderedArray::getRank(key, keys);
     }
 

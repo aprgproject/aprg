@@ -20,7 +20,7 @@ public:
         for (int y = 0; y < DIMENSION; ++y) {
             displayTable.addRow();
             for (int x = 0; x < DIMENSION; ++x) {
-                std::string cell = isSiteOpen(getIndex(x, y)) ? " " : "X";
+                std::string const cell = isSiteOpen(getIndex(x, y)) ? " " : "X";
                 displayTable.getLastRow().addCell(cell);
             }
         }
@@ -44,7 +44,7 @@ public:
 
     void addOpenSite() {
         while (true) {
-            int newOpenSiteIndex(m_randomizer.getRandomValue());
+            int const newOpenSiteIndex(m_randomizer.getRandomValue());
             if (!isSiteOpen(newOpenSiteIndex)) {
                 m_sites[newOpenSiteIndex] = true;
                 connectNeighboringSitesAt(newOpenSiteIndex);

@@ -16,7 +16,7 @@ public:
     [[nodiscard]] Value get(Key const& key) const override {
         Value result{};
         if (!this->isEmpty()) {
-            int rank(this->getRank(key));
+            int const rank(this->getRank(key));
             if (rank < b_size && b_keys[rank] == key) {
                 result = m_values[rank];
             }
@@ -26,7 +26,7 @@ public:
 
     void put(Key const& key, Value const& value) override {
         bool isKeyFound(false);
-        int rank(this->getRank(key));
+        int const rank(this->getRank(key));
         if (rank < b_size && b_keys[rank] == key) {
             m_values[rank] = value;
             isKeyFound = true;
@@ -45,7 +45,7 @@ public:
     }
 
     void deleteBasedOnKey(Key const& key) override {
-        int rank(this->getRank(key));
+        int const rank(this->getRank(key));
         if (rank < b_size && b_keys[rank] == key) {
             if (b_size >= 2) {
                 for (int i = rank; i < b_size - 1; ++i) {

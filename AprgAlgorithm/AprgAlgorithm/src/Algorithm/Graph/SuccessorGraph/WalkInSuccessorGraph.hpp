@@ -26,7 +26,7 @@ private:
                 result = it->second;
             } else {
                 if (distance > 1) {
-                    int halfDistance = distance / 2;
+                    int const halfDistance = distance / 2;
                     result = walkInternal(walkInternal(vertex, distance - halfDistance), halfDistance);
                 } else if (distance == 1) {
                     Vertices adjacentVertices(

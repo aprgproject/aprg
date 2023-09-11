@@ -38,7 +38,7 @@ public:
     explicit GeneralPathCover(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}
 
     [[nodiscard]] Paths getGeneralPathCover(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
-        VertexPairs vertexPairs(getConnectedVerticesOfGeneralPathCover(newSourceVertex, newSinkVertex));
+        VertexPairs const vertexPairs(getConnectedVerticesOfGeneralPathCover(newSourceVertex, newSinkVertex));
         return getGeneralPathCover(vertexPairs);
     }
 
@@ -65,15 +65,15 @@ private:
         // A minimum general path cover can be found almost like a minimum node-disjoint path cover.
         // It suffices to add some new edges to the matching graph so that there is an edge a->b always
         // when there is a path from a to b in the original graph (possibly through several edges).
-        VertexWithLeftRight sourceVertexWithLeft{newSourceVertex, false};
-        VertexWithLeftRight sinkVertexWithRight{newSinkVertex, true};
+        VertexWithLeftRight const sourceVertexWithLeft{newSourceVertex, false};
+        VertexWithLeftRight const sinkVertexWithRight{newSinkVertex, true};
         FlowNetwork flowNetwork(sourceVertexWithLeft, sinkVertexWithRight);
-        Vertices vertices(graph.getVertices());
+        Vertices const vertices(graph.getVertices());
         for (Vertex const& vertex : vertices) {
             flowNetwork.connect(sourceVertexWithLeft, {vertex, false}, 1, 0);
             flowNetwork.connect({vertex, true}, sinkVertexWithRight, 1, 0);
         }
-        TransitiveClosure transitiveClosure(m_graph);
+        TransitiveClosure const transitiveClosure(m_graph);
         for (Vertex const& vertex1 : vertices) {
             for (Vertex const& vertex2 : vertices) {
                 if (transitiveClosure.isReachable(vertex1, vertex2) && vertex1 != vertex2) {
@@ -86,7 +86,7 @@ private:
 
     [[nodiscard]] Paths getGeneralPathCover(VertexPairs const& vertexPairs) const {
         Paths result;
-        Edges allEdges(m_graph.getEdges());
+        Edges const allEdges(m_graph.getEdges());
         DequeOfEdges detectedEdges;
         SetOfEdges unprocessedEdges(allEdges.cbegin(), allEdges.cend());
         for (auto const& [firstVertex, secondVertex] : vertexPairs) {
@@ -99,7 +99,7 @@ private:
         VectorOfDequeOfVertices paths;
         // construct paths from detected edges
         while (!detectedEdges.empty()) {
-            Edge firstEdge(detectedEdges.front());
+            Edge const firstEdge(detectedEdges.front());
             detectedEdges.pop_front();
             DequeOfVertices pathInDeque{firstEdge.first, firstEdge.second};
             for (int i = 0; i < static_cast<int>(detectedEdges.size());) {
@@ -135,7 +135,7 @@ private:
                 }
             }
         }
-        Vertices allVertices(m_graph.getVertices());
+        Vertices const allVertices(m_graph.getVertices());
         SetOfVertices unprocessedVertices(allVertices.cbegin(), allVertices.cend());
         for (DequeOfVertices const& pathInDeque : paths) {
             // remove vertices from path to get unprocessed vertices
@@ -157,10 +157,10 @@ private:
     [[nodiscard]] VertexPairs getConnectedVerticesOfGeneralPathCoverUsingFordFulkerson(
         Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         Edges result;
-        FordFulkerson fordFulkerson(getFlowNetwork(m_graph, newSourceVertex, newSinkVertex));
+        FordFulkerson const fordFulkerson(getFlowNetwork(m_graph, newSourceVertex, newSinkVertex));
         auto const& flowNetwork(fordFulkerson.getFlowNetwork());
-        VertexWithLeftRight source(flowNetwork.getSourceVertex());
-        VertexWithLeftRight sink(flowNetwork.getSinkVertex());
+        VertexWithLeftRight const source(flowNetwork.getSourceVertex());
+        VertexWithLeftRight const sink(flowNetwork.getSinkVertex());
         for (auto const& flowEdge : flowNetwork.getFlowEdges()) {
             if (1 == flowEdge.flow && source != flowEdge.source && sink != flowEdge.destination) {
                 result.emplace_back(flowEdge.source.first, flowEdge.destination.first);

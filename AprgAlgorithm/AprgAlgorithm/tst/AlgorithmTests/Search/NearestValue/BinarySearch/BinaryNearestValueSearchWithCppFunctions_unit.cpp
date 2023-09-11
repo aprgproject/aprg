@@ -46,8 +46,8 @@ TEST(BinaryNearestValueSearchWithCppFunctionsTest, GetIndexOfNearestValueWorksWh
 }
 
 TEST(BinaryNearestValueSearchWithCppFunctionsTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
-    ValuesForTest duplicateValues{0, 0, 0, 0, 0};
-    SearchForTest search(duplicateValues);
+    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
+    SearchForTest const search(duplicateValues);
 
     EXPECT_EQ(4, search.getIndexOfNearestValue(33));
 }
@@ -65,8 +65,8 @@ TEST(BinaryNearestValueSearchWithCppFunctionsTest, GetIndexOfNearestValueWorksWh
 }
 
 TEST(BinaryNearestValueSearchWithCppFunctionsTest, GetLowerBoundAndGetHigherBoundWorks) {
-    ValuesForTest sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
-    SearchForTest search(sortedValues);
+    ValuesForTest const sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
+    SearchForTest const search(sortedValues);
 
     EXPECT_EQ(43, search.getLowerBound(34));
     EXPECT_EQ(43, search.getHigherBound(34));

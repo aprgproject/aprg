@@ -35,8 +35,8 @@ private:
         // Based from https://en.wikipedia.org/wiki/Ternary_search#Algorithm
         Index result(INVALID_INDEX);
         if (lowIndex < highIndex) {
-            Index firstMiddleIndex = getFirstOneThirdIndex(lowIndex, highIndex);
-            Index secondMiddleIndex = getSecondOneThirdIndex(lowIndex, highIndex);
+            Index const firstMiddleIndex = getFirstOneThirdIndex(lowIndex, highIndex);
+            Index const secondMiddleIndex = getSecondOneThirdIndex(lowIndex, highIndex);
             if (target < m_sortedValues[firstMiddleIndex]) {
                 result = getIndexOfValueWithoutCheck(lowIndex, firstMiddleIndex - 1, target);
             } else if (m_sortedValues[secondMiddleIndex] < target) {

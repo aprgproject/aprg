@@ -82,7 +82,7 @@ int partitionAndGetPartitionIndexUsingLomuto(
     Values& values, int const lowIndex, int const highIndex, PivotType const pivotType) {
     // This is based from Lomuto partition scheme
     // https://en.wikipedia.org/wiki/Quicksort#Lomuto_partition_scheme
-    int indexWithPivotValue = getPivotIndex(values, lowIndex, highIndex, pivotType);
+    int const indexWithPivotValue = getPivotIndex(values, lowIndex, highIndex, pivotType);
     auto pivotValue = values[indexWithPivotValue];
     std::swap(values[highIndex], values[indexWithPivotValue]);
 
@@ -131,7 +131,7 @@ typename Values::iterator partitionAndGetPartitionIteratorInOneDirection(
     typename Values::iterator const itLow, typename Values::iterator const itHighPlusOne) {
     auto pivotValue(*itLow);  // pivot value is at itLow
     auto partitionIt = itLow;
-    auto stopIt = itHighPlusOne;
+    const auto& stopIt = itHighPlusOne;
     for (auto compareIt = std::next(itLow); compareIt != stopIt; ++compareIt) {
         if (*compareIt <= pivotValue) {
             std::swap(*++partitionIt, *compareIt);

@@ -61,8 +61,8 @@ public:
 
 private:
     [[nodiscard]] Index getIndexOfNearestValueInBetweenTwoIndices(Value const& target) const {
-        Value deviationFromLower(mathHelper::getPositiveDelta(target, m_sortedValues[m_lowIndex]));
-        Value deviationFromHigher(mathHelper::getPositiveDelta(target, m_sortedValues[m_highIndex]));
+        Value const deviationFromLower(mathHelper::getPositiveDelta(target, m_sortedValues[m_lowIndex]));
+        Value const deviationFromHigher(mathHelper::getPositiveDelta(target, m_sortedValues[m_highIndex]));
         return (deviationFromLower <= deviationFromHigher) ? m_lowIndex : m_highIndex;
     }
 
@@ -75,7 +75,7 @@ private:
 
     void setInitialIndexes(Index const lowIndex, Index const highIndex) {
         if (!m_sortedValues.empty()) {
-            Index maxIndex = m_sortedValues.size() - 1;
+            Index const maxIndex = m_sortedValues.size() - 1;
             m_lowIndex = std::min(lowIndex, maxIndex);
             m_highIndex = std::min(highIndex, maxIndex);  // fully closed interval
             if (m_lowIndex > m_highIndex) {
@@ -87,7 +87,7 @@ private:
     void moveCloserUsingIntervalsInsideTarget(Value const& target) {
         if (!m_sortedValues.empty()) {
             while (m_lowIndex + 1 < m_highIndex) {
-                Index middleIndex(getMidpointOfIndexes(m_lowIndex, m_highIndex));
+                Index const middleIndex(getMidpointOfIndexes(m_lowIndex, m_highIndex));
                 if (m_sortedValues[middleIndex] <= target) {
                     m_lowIndex = middleIndex;
                 } else {

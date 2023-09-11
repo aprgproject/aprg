@@ -18,7 +18,7 @@ TEST(PointsInsideRectangleSearchTest, GetPointsInsideTheRectangleWorksWhenRectan
 
     auto pointsToVerify(search.getPointsInsideTheRectangle());
 
-    SearchForTest::Points pointsToExpect{{-5, 0}};
+    SearchForTest::Points const pointsToExpect{{-5, 0}};
     EXPECT_EQ(pointsToExpect, pointsToVerify);
 }
 
@@ -30,7 +30,7 @@ TEST(PointsInsideRectangleSearchTest, GetPointsInsideTheRectangleWorksWhenRectan
 
     auto pointsToVerify(search.getPointsInsideTheRectangle());
 
-    SearchForTest::Points pointsToExpect{{5, 0}};
+    SearchForTest::Points const pointsToExpect{{5, 0}};
     EXPECT_EQ(pointsToExpect, pointsToVerify);
 }
 
@@ -42,7 +42,7 @@ TEST(PointsInsideRectangleSearchTest, GetPointsInsideTheRectangleWorksWhenRectan
 
     auto pointsToVerify(search.getPointsInsideTheRectangle());
 
-    SearchForTest::Points pointsToExpect{{0, 0}, {-5, 0}, {5, 0}};
+    SearchForTest::Points const pointsToExpect{{0, 0}, {-5, 0}, {5, 0}};
     EXPECT_EQ(pointsToExpect, pointsToVerify);
 }
 
@@ -61,7 +61,7 @@ TEST(PointsInsideRectangleSearchTest, GetPointsInsideTheRectangleWorksOnComplica
 
     auto pointsToVerify(search.getPointsInsideTheRectangle());
 
-    SearchForTest::Points pointsToExpect{{-2, 2}, {-4, 0}};
+    SearchForTest::Points const pointsToExpect{{-2, 2}, {-4, 0}};
     EXPECT_EQ(pointsToExpect, pointsToVerify);
 }
 

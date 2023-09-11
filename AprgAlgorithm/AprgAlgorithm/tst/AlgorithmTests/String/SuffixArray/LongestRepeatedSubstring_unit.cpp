@@ -11,7 +11,7 @@ using LongestRepeatedSubstringForTest = LongestRepeatedSubstring<int>;
 }  // namespace
 
 TEST(LongestRepeatedSubstringTest, GetLongestRepeatedSubstringWorks) {
-    string stringToTest(
+    string const stringToTest(
         "it was the best of times it was the worst of times "
         "it was the age of wisdom it was the age of foolishness "
         "it was the epoch of belief if was the epoch of incredulity "

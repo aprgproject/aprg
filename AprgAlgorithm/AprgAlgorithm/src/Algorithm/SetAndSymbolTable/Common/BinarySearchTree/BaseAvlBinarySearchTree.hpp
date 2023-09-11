@@ -66,7 +66,7 @@ protected:
                 nodePointer->left = std::move(nodeToMove);
 
                 // update other things:
-                NodeUniquePointer& previousNodePointer(nodePointer->left);
+                NodeUniquePointer const& previousNodePointer(nodePointer->left);
                 this->updateTreeNodeDetails(*previousNodePointer);
                 this->updateTreeNodeDetails(*nodePointer);
             }
@@ -85,7 +85,7 @@ protected:
                 nodePointer->right = std::move(nodeToMove);
 
                 // update other things:
-                NodeUniquePointer& previousNodePointer(nodePointer->right);
+                NodeUniquePointer const& previousNodePointer(nodePointer->right);
                 this->updateTreeNodeDetails(*previousNodePointer);
                 this->updateTreeNodeDetails(*nodePointer);
             }
@@ -95,7 +95,7 @@ protected:
     void reBalanceTreeOnPutAction(NodeUniquePointer& nodePointer) {
         if (nodePointer) {
             Node& node(*nodePointer);
-            int balanceFactor = this->calculateBalanceFactor(node);
+            int const balanceFactor = this->calculateBalanceFactor(node);
             if (balanceFactor > 1) {
                 if (node.key < node.left->key) {
                     this->rotateRight(nodePointer);
@@ -118,7 +118,7 @@ protected:
     void reBalanceTreeOnDeleteAction(NodeUniquePointer& nodePointer) {
         if (nodePointer) {
             Node& node(*nodePointer);
-            int balanceFactor = this->calculateBalanceFactor(node);
+            int const balanceFactor = this->calculateBalanceFactor(node);
             if (balanceFactor > 1) {
                 if (this->calculateBalanceFactor(*(node.left)) >= 0) {
                     this->rotateRight(nodePointer);

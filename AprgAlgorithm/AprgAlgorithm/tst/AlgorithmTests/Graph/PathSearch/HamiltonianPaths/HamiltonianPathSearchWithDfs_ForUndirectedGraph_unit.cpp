@@ -22,10 +22,11 @@ TEST(HamiltonianPathSearchWithDfsTestForUndirectedGraph, GetAllHamiltonianPathsW
     graph.connect(2, 3);
     PathSearchForTest pathSearch(graph);
 
-    PathsForTest pathsToVerify(pathSearch.getAllHamiltonianPaths());
+    PathsForTest const pathsToVerify(pathSearch.getAllHamiltonianPaths());
 
-    PathsForTest pathsToExpect{{0, 1, 2, 3}, {0, 1, 3, 2}, {0, 2, 1, 3}, {0, 2, 3, 1}, {1, 0, 2, 3}, {1, 3, 2, 0},
-                               {2, 0, 1, 3}, {2, 3, 1, 0}, {3, 1, 0, 2}, {3, 1, 2, 0}, {3, 2, 0, 1}, {3, 2, 1, 0}};
+    PathsForTest const pathsToExpect{{0, 1, 2, 3}, {0, 1, 3, 2}, {0, 2, 1, 3}, {0, 2, 3, 1},
+                                     {1, 0, 2, 3}, {1, 3, 2, 0}, {2, 0, 1, 3}, {2, 3, 1, 0},
+                                     {3, 1, 0, 2}, {3, 1, 2, 0}, {3, 2, 0, 1}, {3, 2, 1, 0}};
     EXPECT_EQ(pathsToExpect, pathsToVerify);
 }
 
@@ -38,9 +39,9 @@ TEST(HamiltonianPathSearchWithDfsTestForUndirectedGraph, GetOneHamiltonianPathWo
     graph.connect(2, 3);
     PathSearchForTest pathSearch(graph);
 
-    PathForTest pathsToVerify(pathSearch.getOneHamiltonianPath());
+    PathForTest const pathsToVerify(pathSearch.getOneHamiltonianPath());
 
-    PathForTest pathsToExpect{0, 1, 2, 3};
+    PathForTest const pathsToExpect{0, 1, 2, 3};
     EXPECT_EQ(pathsToExpect, pathsToVerify);
 }
 
@@ -53,10 +54,10 @@ TEST(HamiltonianPathSearchWithDfsTestForUndirectedGraph, GetAllHamiltonianCycles
     graph.connect(2, 3);
     PathSearchForTest pathSearch(graph);
 
-    PathsForTest pathsToVerify(pathSearch.getAllHamiltonianCycles());
+    PathsForTest const pathsToVerify(pathSearch.getAllHamiltonianCycles());
 
-    PathsForTest pathsToExpect{{0, 1, 3, 2, 0}, {0, 2, 3, 1, 0}, {1, 0, 2, 3, 1}, {1, 3, 2, 0, 1},
-                               {2, 0, 1, 3, 2}, {2, 3, 1, 0, 2}, {3, 1, 0, 2, 3}, {3, 2, 0, 1, 3}};
+    PathsForTest const pathsToExpect{{0, 1, 3, 2, 0}, {0, 2, 3, 1, 0}, {1, 0, 2, 3, 1}, {1, 3, 2, 0, 1},
+                                     {2, 0, 1, 3, 2}, {2, 3, 1, 0, 2}, {3, 1, 0, 2, 3}, {3, 2, 0, 1, 3}};
     EXPECT_EQ(pathsToExpect, pathsToVerify);
 }
 
@@ -69,9 +70,9 @@ TEST(HamiltonianPathSearchWithDfsTestForUndirectedGraph, GetOneHamiltonianCycleW
     graph.connect(2, 3);
     PathSearchForTest pathSearch(graph);
 
-    PathForTest pathsToVerify(pathSearch.getOneHamiltonianCycle());
+    PathForTest const pathsToVerify(pathSearch.getOneHamiltonianCycle());
 
-    PathForTest pathsToExpect{0, 1, 3, 2, 0};
+    PathForTest const pathsToExpect{0, 1, 3, 2, 0};
     EXPECT_EQ(pathsToExpect, pathsToVerify);
 }
 

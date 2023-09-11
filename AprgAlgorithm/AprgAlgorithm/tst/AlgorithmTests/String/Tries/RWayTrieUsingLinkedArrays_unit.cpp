@@ -36,7 +36,7 @@ TEST(RWayTrieUsingLinkedArraysTest, GetWhenEmptyStringWorks) {
 }
 
 TEST(RWayTrieUsingLinkedArraysTest, GetNumberOfNodesWorksWhenEmpty) {
-    TrieForTest trie;
+    TrieForTest const trie;
 
     EXPECT_EQ(0, trie.getNumberOfNodes());
 }

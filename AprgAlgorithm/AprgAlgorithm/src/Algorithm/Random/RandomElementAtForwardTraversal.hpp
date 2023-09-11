@@ -21,7 +21,7 @@ public:
         AlbaUniformNonDeterministicRandomizer<int> randomizer(0, count);
         for (Value const& value : values) {
             randomizer.setMinimumAndMaximum(0, count);
-            int randomIndex = randomizer.getRandomValue();
+            int const randomIndex = randomizer.getRandomValue();
             if (randomIndex == 0) {
                 result = value;
             }

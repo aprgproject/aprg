@@ -11,13 +11,13 @@ using SuffixArrayForTest = SuffixArray<int>;
 }  // namespace
 
 TEST(SuffixArrayTest, GetSizeWorks) {
-    SuffixArrayForTest suffixArray("LetsDanceToThisSong");
+    SuffixArrayForTest const suffixArray("LetsDanceToThisSong");
 
     EXPECT_EQ(19, suffixArray.getSize());
 }
 
 TEST(SuffixArrayTest, GetIndexOnMainStringOfSuffixAtWorks) {
-    SuffixArrayForTest suffixArray("LetsDanceToThisSong");
+    SuffixArrayForTest const suffixArray("LetsDanceToThisSong");
 
     EXPECT_EQ(5, suffixArray.getIndexOnMainStringOfSuffixAt(5));
     EXPECT_EQ(7, suffixArray.getIndexOnMainStringOfSuffixAt(6));
@@ -25,13 +25,13 @@ TEST(SuffixArrayTest, GetIndexOnMainStringOfSuffixAtWorks) {
 }
 
 TEST(SuffixArrayTest, GetRankWorks) {
-    SuffixArrayForTest suffixArray("LetsDanceToThisSong");
+    SuffixArrayForTest const suffixArray("LetsDanceToThisSong");
 
     EXPECT_EQ(2, suffixArray.getRank("LetsSingInstead"));
 }
 
 TEST(SuffixArrayTest, GetSuffixViewAtWorks) {
-    SuffixArrayForTest suffixArray("LetsDanceToThisSong");
+    SuffixArrayForTest const suffixArray("LetsDanceToThisSong");
 
     EXPECT_EQ("DanceToThisSong", suffixArray.getSuffixViewAt(0));
     EXPECT_EQ("LetsDanceToThisSong", suffixArray.getSuffixViewAt(1));
@@ -46,7 +46,7 @@ TEST(SuffixArrayTest, GetSuffixViewAtWorks) {
 }
 
 TEST(SuffixArrayTest, GetLongestCommonPrefixOfTwoSuffixesWorks) {
-    SuffixArrayForTest suffixArray("LetsDanceToThisSong");
+    SuffixArrayForTest const suffixArray("LetsDanceToThisSong");
 
     EXPECT_EQ("T", suffixArray.getLongestCommonPrefixOfTwoSuffixes(3, 4));
     EXPECT_TRUE(suffixArray.getLongestCommonPrefixOfTwoSuffixes(5, 6).empty());

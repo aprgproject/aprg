@@ -55,10 +55,10 @@ private:
     [[nodiscard]] Index getIndexOfNearestValueUsingEqualRange(Value const& target) const {
         // assumption is non set
         auto&& [lowerIt, upperIt] = containerHelper::getLowerAndUpperConstIteratorsForNonSet(m_sortedValues, target);
-        Value lowerBoundValue(*lowerIt);
-        Value higherBoundValue(*upperIt);
-        Value deviationFromLower(mathHelper::getPositiveDelta(target, lowerBoundValue));
-        Value deviationFromHigher(mathHelper::getPositiveDelta(target, higherBoundValue));
+        Value const lowerBoundValue(*lowerIt);
+        Value const higherBoundValue(*upperIt);
+        Value const deviationFromLower(mathHelper::getPositiveDelta(target, lowerBoundValue));
+        Value const deviationFromHigher(mathHelper::getPositiveDelta(target, higherBoundValue));
         return (deviationFromLower <= deviationFromHigher) ? std::distance(m_sortedValues.cbegin(), lowerIt)
                                                            : std::distance(m_sortedValues.cbegin(), upperIt);
     }
@@ -67,8 +67,8 @@ private:
         // assumption is non set
         auto&& [lowerBoundValue, higherBoundValue] =
             containerHelper::getLowerAndUpperValuesForNonSet(m_sortedValues, target);
-        Value deviationFromLower(mathHelper::getPositiveDelta(target, lowerBoundValue));
-        Value deviationFromHigher(mathHelper::getPositiveDelta(target, higherBoundValue));
+        Value const deviationFromLower(mathHelper::getPositiveDelta(target, lowerBoundValue));
+        Value const deviationFromHigher(mathHelper::getPositiveDelta(target, higherBoundValue));
         return (deviationFromLower <= deviationFromHigher) ? lowerBoundValue : higherBoundValue;
     }
 

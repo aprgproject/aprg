@@ -55,7 +55,7 @@ bool isASimpleCycle(typename GraphTypes<Vertex>::Path const& path) {
 
     bool result(false);
     if (!path.empty() && isACycle<Vertex>(path)) {
-        Path pathWithOutEnd(path.cbegin(), path.cbegin() + path.size() - 1);
+        Path const pathWithOutEnd(path.cbegin(), path.cbegin() + path.size() - 1);
         result = isASimplePath<Vertex>(pathWithOutEnd);
     }
     return result;
@@ -85,7 +85,7 @@ bool isARegularGraph(BaseGraph<Vertex> const& graph) {
     bool result(true);
     auto vertices(graph.getVertices());
     if (!vertices.empty()) {
-        int degreeThatShouldMatch = getDegreeAt(graph, vertices.front());
+        int const degreeThatShouldMatch = getDegreeAt(graph, vertices.front());
         for (auto it = vertices.cbegin() + 1; it != vertices.cend(); ++it) {
             if (degreeThatShouldMatch != getDegreeAt(graph, *it)) {
                 result = false;
@@ -152,7 +152,7 @@ template <typename Vertex>
 bool isGraphConnected(BaseUndirectedGraph<Vertex> const& graph) {
     // A graph is connected if there is a path from every vertex to every other vertex in the graph.
     // This is used for undirected graphs.
-    ConnectedComponentsUsingDfs<Vertex> connectedComponents(graph);
+    ConnectedComponentsUsingDfs<Vertex> const connectedComponents(graph);
     return 1 == connectedComponents.getNumberOfComponentIds();
 }
 
@@ -168,7 +168,7 @@ template <typename Vertex>
 bool isGraphStronglyConnected(BaseDirectedGraph<Vertex> const& graph) {
     // Two vertices v and w are strongly connected if they are mutually reachable (so there is a edge from v to w and
     // from w to v) A directed graph is strongly connected if all its vertices are strongly connected to one another
-    StronglyConnectedComponentsUsingKosarajuSharir<Vertex> connectedComponents(graph);
+    StronglyConnectedComponentsUsingKosarajuSharir<Vertex> const connectedComponents(graph);
     return 1 == connectedComponents.getNumberOfComponentIds();
 }
 

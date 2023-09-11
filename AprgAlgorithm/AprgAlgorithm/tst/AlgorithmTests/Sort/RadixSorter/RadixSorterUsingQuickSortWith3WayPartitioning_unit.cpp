@@ -62,39 +62,40 @@ StabilityCheckObjectsSorter::IsDigitFunction isNibbleDigitValidForStabilityCheck
 }  // namespace
 
 TEST(RadixSorterUsingQuickSortWith3WayPartitioningTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
-    CharactersSorter sorter(getNibbleAtForCharacter, isNibbleDigitValidForCharacter);
+    CharactersSorter const sorter(getNibbleAtForCharacter, isNibbleDigitValidForCharacter);
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(RadixSorterUsingQuickSortWith3WayPartitioningTest, SortWorksOnCharactersUsingOneValueExample) {
-    CharactersSorter sorter(getNibbleAtForCharacter, isNibbleDigitValidForCharacter);
+    CharactersSorter const sorter(getNibbleAtForCharacter, isNibbleDigitValidForCharacter);
     testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(RadixSorterUsingQuickSortWith3WayPartitioningTest, SortWorksOnCharactersUsingExample1) {
-    CharactersSorter sorter(getNibbleAtForCharacter, isNibbleDigitValidForCharacter);
+    CharactersSorter const sorter(getNibbleAtForCharacter, isNibbleDigitValidForCharacter);
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(RadixSorterUsingQuickSortWith3WayPartitioningTest, SortWorksOnCharactersUsingExample2) {
-    CharactersSorter sorter(getNibbleAtForCharacter, isNibbleDigitValidForCharacter);
+    CharactersSorter const sorter(getNibbleAtForCharacter, isNibbleDigitValidForCharacter);
     testSortUsingExample2WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 // CANNOT SORT STD::LIST, actually it might be possible if we change indexes to iterators
 TEST(RadixSorterUsingQuickSortWith3WayPartitioningTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
-    SmallIntegerSorter sorter(getNibbleAtForSmallInteger, isNibbleDigitValidForSmallInteger);
+    SmallIntegerSorter const sorter(getNibbleAtForSmallInteger, isNibbleDigitValidForSmallInteger);
     testSortUsingExample1WithPositiveAndNegativeIntegers<SmallIntegerSorter, Integers>(sorter);
 }
 
 // CANNOT SORT DOUBLE VALUES
 TEST(RadixSorterUsingQuickSortWith3WayPartitioningTest, SortWorksOnStringsUsingExample1) {
-    StringsSorter sorter(getCharacterAtForString, isDigitValidForString);
+    StringsSorter const sorter(getCharacterAtForString, isDigitValidForString);
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);
 }
 
 TEST(RadixSorterUsingQuickSortWith3WayPartitioningTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1) {
-    StabilityCheckObjectsSorter sorter(getNibbleAtForStabilityCheckObject, isNibbleDigitValidForStabilityCheckObject);
+    StabilityCheckObjectsSorter const sorter(
+        getNibbleAtForStabilityCheckObject, isNibbleDigitValidForStabilityCheckObject);
     testSortAsNotStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(
         sorter);
 }
@@ -102,42 +103,42 @@ TEST(RadixSorterUsingQuickSortWith3WayPartitioningTest, SortWorksAsNotStableOnSt
 TEST(
     RadixSorterUsingQuickSortWith3WayPartitioningTest,
     SortStartingAtMostSignificantDigitWorksWithDigitThatExistsInAllStrings) {
-    StringsSorter sorter(getCharacterAtForString, isDigitValidForString);
+    StringsSorter const sorter(getCharacterAtForString, isDigitValidForString);
     Strings stringsToTest{"spongebob", "patrick", "mr. crabs", "squidward", "sandy",
                           "ms. puff",  "pearl",   "larry",     "plankton"};
 
     sorter.sortStartingAtMostSignificantDigit(stringsToTest, 2, 5, 1);
 
-    Strings expectedStrings{"spongebob", "patrick", "sandy", "squidward", "mr. crabs",
-                            "ms. puff",  "pearl",   "larry", "plankton"};
+    Strings const expectedStrings{"spongebob", "patrick", "sandy", "squidward", "mr. crabs",
+                                  "ms. puff",  "pearl",   "larry", "plankton"};
     EXPECT_EQ(expectedStrings, stringsToTest);
 }
 
 TEST(
     RadixSorterUsingQuickSortWith3WayPartitioningTest,
     SortStartingAtMostSignificantDigitWorksWithDigitThatExistsInSomeOfTheStrings) {
-    StringsSorter sorter(getCharacterAtForString, isDigitValidForString);
+    StringsSorter const sorter(getCharacterAtForString, isDigitValidForString);
     Strings stringsToTest{"spongebob", "patrick", "mr. crabs", "squidward", "sandy",
                           "ms. puff",  "pearl",   "larry",     "plankton"};
 
     sorter.sortStartingAtMostSignificantDigit(stringsToTest, 2, 5, 6);
 
-    Strings expectedStrings{"spongebob", "patrick", "sandy", "mr. crabs", "squidward",
-                            "ms. puff",  "pearl",   "larry", "plankton"};
+    Strings const expectedStrings{"spongebob", "patrick", "sandy", "mr. crabs", "squidward",
+                                  "ms. puff",  "pearl",   "larry", "plankton"};
     EXPECT_EQ(expectedStrings, stringsToTest);
 }
 
 TEST(
     RadixSorterUsingQuickSortWith3WayPartitioningTest,
     SortStartingAtMostSignificantDigitWorksWithDigitThatDoesNotExistInOfTheStrings) {
-    StringsSorter sorter(getCharacterAtForString, isDigitValidForString);
+    StringsSorter const sorter(getCharacterAtForString, isDigitValidForString);
     Strings stringsToTest{"spongebob", "patrick", "mr. crabs", "squidward", "sandy",
                           "ms. puff",  "pearl",   "larry",     "plankton"};
 
     sorter.sortStartingAtMostSignificantDigit(stringsToTest, 2, 5, 9);
 
-    Strings expectedStrings{"spongebob", "patrick", "mr. crabs", "squidward", "sandy",
-                            "ms. puff",  "pearl",   "larry",     "plankton"};
+    Strings const expectedStrings{"spongebob", "patrick", "mr. crabs", "squidward", "sandy",
+                                  "ms. puff",  "pearl",   "larry",     "plankton"};
     EXPECT_EQ(expectedStrings, stringsToTest);
 }
 

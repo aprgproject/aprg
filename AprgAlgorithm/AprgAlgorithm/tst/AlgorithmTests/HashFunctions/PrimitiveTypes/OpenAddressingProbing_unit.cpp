@@ -10,7 +10,7 @@ namespace alba::algorithm {
 
 TEST(OpenAddressingProbingTest, GetHashForLinearProbingWorks) {
     constexpr uint64_t numberOfSlots = 100;
-    HashingFunction<uint64_t> originalHashFunction = [=](uint64_t const hashKey) {
+    HashingFunction<uint64_t> const originalHashFunction = [=](uint64_t const hashKey) {
         return getHashUsingDivisionMethod<uint64_t>(hashKey, numberOfSlots);
     };
 
@@ -25,7 +25,7 @@ TEST(OpenAddressingProbingTest, GetHashForQuadraticProbingWorks) {
     constexpr uint64_t numberOfSlots = 100;
     constexpr uint64_t coefficient1 = 3;
     constexpr uint64_t coefficient2 = 5;
-    HashingFunction<uint64_t> originalHashFunction = [=](uint64_t const hashKey) {
+    HashingFunction<uint64_t> const originalHashFunction = [=](uint64_t const hashKey) {
         return getHashUsingDivisionMethod<uint64_t>(hashKey, numberOfSlots);
     };
 

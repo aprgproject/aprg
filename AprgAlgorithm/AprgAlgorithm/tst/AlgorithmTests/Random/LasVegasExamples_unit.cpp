@@ -28,7 +28,7 @@ TEST(LasVegasTest, GraphColoringExample) {
     graph.connect(4, 5);
     map<Vertex, Color> vertexToColorMap;
 
-    LasVegasAlgorithm graphColoringAlgorithm = [&]() {
+    LasVegasAlgorithm const graphColoringAlgorithm = [&]() {
         int numberOfEdgesWithDifferentColors(0);
         do {
             vertexToColorMap.clear();

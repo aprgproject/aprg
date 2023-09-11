@@ -39,7 +39,7 @@ TEST(BinarySearchTreeSetTest, GetRootWorks) {
 
     auto const& expectedRoot(setObject.getRoot());
 
-    NodeForTest node{8, nullptr, nullptr, 1};
+    NodeForTest const node{8, nullptr, nullptr, 1};
     ASSERT_TRUE(expectedRoot);
     EXPECT_EQ(node.key, expectedRoot->key);
     EXPECT_EQ(node.left, expectedRoot->left);
@@ -59,7 +59,7 @@ TEST(BinarySearchTreeSetTest, TraverseByPreOrderWorks) {
     KeysForTest keysToVerify;
     setObject.traverseByPreOrder([&keysToVerify](NodeForTest const& node) { keysToVerify.emplace_back(node.key); });
 
-    KeysForTest expectedKeys{3, 4, 5, 9, 8, 7};  // not balanced
+    KeysForTest const expectedKeys{3, 4, 5, 9, 8, 7};  // not balanced
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -75,7 +75,7 @@ TEST(BinarySearchTreeSetTest, TraverseByInOrderWorks) {
     KeysForTest keysToVerify;
     setObject.traverseByInOrder([&keysToVerify](NodeForTest const& node) { keysToVerify.emplace_back(node.key); });
 
-    KeysForTest expectedKeys{3, 4, 5, 7, 8, 9};
+    KeysForTest const expectedKeys{3, 4, 5, 7, 8, 9};
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -91,7 +91,7 @@ TEST(BinarySearchTreeSetTest, TraverseByPostOrderWorks) {
     KeysForTest keysToVerify;
     setObject.traverseByPostOrder([&keysToVerify](NodeForTest const& node) { keysToVerify.emplace_back(node.key); });
 
-    KeysForTest expectedKeys{7, 8, 9, 5, 4, 3};  // not balanced
+    KeysForTest const expectedKeys{7, 8, 9, 5, 4, 3};  // not balanced
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -114,8 +114,8 @@ TEST(BinarySearchTreeSetTest, HibbardDeletionWorks) {
     setObject.traverseByPreOrder(
         [&actualAfterDelete](NodeForTest const& node) { actualAfterDelete.emplace_back(node.key); });
 
-    KeysForTest expectedBeforeDelete{8, 4, 3, 7, 5, 9};
-    KeysForTest expectedAfterDelete{8, 5, 9};
+    KeysForTest const expectedBeforeDelete{8, 4, 3, 7, 5, 9};
+    KeysForTest const expectedAfterDelete{8, 5, 9};
     EXPECT_EQ(expectedBeforeDelete, actualBeforeDelete);
     EXPECT_EQ(expectedAfterDelete, actualAfterDelete);
 }

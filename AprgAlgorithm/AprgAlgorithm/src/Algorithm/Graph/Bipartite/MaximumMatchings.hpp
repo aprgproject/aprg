@@ -32,7 +32,7 @@ public:
     [[nodiscard]] Edges getMaximumMatchings(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         Edges result;
         if (m_bipartiteChecker.isBipartite()) {
-            FordFulkerson fordFulkerson(getFlowNetwork(m_graph, newSourceVertex, newSinkVertex));
+            FordFulkerson const fordFulkerson(getFlowNetwork(m_graph, newSourceVertex, newSinkVertex));
             result = getMaximumMatchings(fordFulkerson, newSourceVertex, newSinkVertex);
         }
         return result;
@@ -53,7 +53,7 @@ public:
             SetOfVertices neighborVertices;
             for (Vertex const& vertexInSubset : subsetWithFirstColor) {
                 if (m_bipartiteChecker.hasFirstColor(vertexInSubset)) {
-                    Vertices adjacentVertices(m_graph.getAdjacentVerticesAt(vertexInSubset));
+                    Vertices const adjacentVertices(m_graph.getAdjacentVerticesAt(vertexInSubset));
                     std::copy(
                         adjacentVertices.cbegin(), adjacentVertices.cend(),
                         std::inserter(neighborVertices, neighborVertices.cbegin()));
@@ -93,8 +93,8 @@ private:
             }
         }
         for (auto const& [startVertexOfEdge, endVertexOfEdge] : graph.getEdges()) {
-            bool startVertexColor = m_bipartiteChecker.hasFirstColor(startVertexOfEdge);
-            bool endVertexColor = m_bipartiteChecker.hasFirstColor(endVertexOfEdge);
+            bool const startVertexColor = m_bipartiteChecker.hasFirstColor(startVertexOfEdge);
+            bool const endVertexColor = m_bipartiteChecker.hasFirstColor(endVertexOfEdge);
             if ((startVertexColor && !endVertexColor) || (!startVertexColor && endVertexColor)) {
                 flowNetwork.connect(startVertexOfEdge, endVertexOfEdge, 1, 0);
             }

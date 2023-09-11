@@ -15,7 +15,7 @@ using CompressionForTest = RunLengthEncodingCompression<uint8_t>;
 }  // namespace
 
 TEST(RunLengthEncodingCompressionTest, CompressWorksUsingExample1) {
-    bitset<40> initialValue(0B0000000000000001111111000000011111111111);
+    bitset<40> const initialValue(0B0000000000000001111111000000011111111111);
     stringstream inputSs;
     stringstream outputSs;
     AlbaStreamBitWriter initialWriter(inputSs);

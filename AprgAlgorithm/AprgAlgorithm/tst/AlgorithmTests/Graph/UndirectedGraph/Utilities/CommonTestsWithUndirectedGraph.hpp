@@ -105,7 +105,7 @@ void testGetAdjacentVerticesAtWhenEmptyWithVertexAsInt() {
     using Vertices = typename Graph::Vertices;
     Graph graph;
 
-    Vertices adjacentVerticesToVerify(graph.getAdjacentVerticesAt(0));
+    Vertices const adjacentVerticesToVerify(graph.getAdjacentVerticesAt(0));
 
     EXPECT_TRUE(adjacentVerticesToVerify.empty());
 }
@@ -117,13 +117,13 @@ void testGetAdjacentVerticesAtWhenNotEmptyWithVertexAsInt() {
     graph.connect(0, 1);
     graph.connect(0, 2);
 
-    Vertices adjacentVerticesAt0ToVerify(graph.getAdjacentVerticesAt(0));
-    Vertices adjacentVerticesAt1ToVerify(graph.getAdjacentVerticesAt(1));
-    Vertices adjacentVerticesAt2ToVerify(graph.getAdjacentVerticesAt(2));
+    Vertices const adjacentVerticesAt0ToVerify(graph.getAdjacentVerticesAt(0));
+    Vertices const adjacentVerticesAt1ToVerify(graph.getAdjacentVerticesAt(1));
+    Vertices const adjacentVerticesAt2ToVerify(graph.getAdjacentVerticesAt(2));
 
-    Vertices adjacentVerticesAt0ToExpect{1, 2};
-    Vertices adjacentVerticesAt1ToExpect{0};
-    Vertices adjacentVerticesAt2ToExpect{0};
+    Vertices const adjacentVerticesAt0ToExpect{1, 2};
+    Vertices const adjacentVerticesAt1ToExpect{0};
+    Vertices const adjacentVerticesAt2ToExpect{0};
     EXPECT_EQ(adjacentVerticesAt0ToExpect, adjacentVerticesAt0ToVerify);
     EXPECT_EQ(adjacentVerticesAt1ToExpect, adjacentVerticesAt1ToVerify);
     EXPECT_EQ(adjacentVerticesAt2ToExpect, adjacentVerticesAt2ToVerify);
@@ -134,7 +134,7 @@ void testGetVerticesWhenEmptyWithVertexAsInt() {
     using Vertices = typename Graph::Vertices;
     Graph graph;
 
-    Vertices verticesToVerify(graph.getVertices());
+    Vertices const verticesToVerify(graph.getVertices());
 
     EXPECT_TRUE(verticesToVerify.empty());
 }
@@ -146,9 +146,9 @@ void testGetVerticesWhenNotEmptyWithVertexAsInt() {
     graph.connect(0, 1);
     graph.connect(0, 2);
 
-    Vertices verticesToVerify(graph.getVertices());
+    Vertices const verticesToVerify(graph.getVertices());
 
-    Vertices verticesToExpect{0, 1, 2};
+    Vertices const verticesToExpect{0, 1, 2};
     EXPECT_EQ(verticesToExpect, verticesToVerify);
 }
 
@@ -157,7 +157,7 @@ void testGetEdgesWhenEmptyWithVertexAsInt() {
     using Edges = typename Graph::Edges;
     Graph graph;
 
-    Edges edgesToVerify(graph.getEdges());
+    Edges const edgesToVerify(graph.getEdges());
 
     EXPECT_TRUE(edgesToVerify.empty());
 }
@@ -169,9 +169,9 @@ void testGetEdgesWhenNotEmptyWithVertexAsInt() {
     graph.connect(0, 1);
     graph.connect(0, 2);
 
-    Edges edgesToVerify(graph.getEdges());
+    Edges const edgesToVerify(graph.getEdges());
 
-    Edges edgesToExpect{{0, 1}, {0, 2}};
+    Edges const edgesToExpect{{0, 1}, {0, 2}};
     EXPECT_EQ(edgesToExpect, edgesToVerify);
 }
 
@@ -184,8 +184,8 @@ void testConnectWithVertexAsInt() {
 
     EXPECT_EQ(3, graph.getNumberOfVertices());
     EXPECT_EQ(2, graph.getNumberOfEdges());
-    Edges edgesToVerify(graph.getEdges());
-    Edges edgesToExpect{{0, 1}, {0, 2}};
+    Edges const edgesToVerify(graph.getEdges());
+    Edges const edgesToExpect{{0, 1}, {0, 2}};
     EXPECT_EQ(edgesToExpect, edgesToVerify);
 }
 
@@ -200,8 +200,8 @@ void testDisconnectWithVertexAsInt() {
 
     EXPECT_EQ(2, graph.getNumberOfVertices());
     EXPECT_EQ(1, graph.getNumberOfEdges());
-    Edges edgesToVerify(graph.getEdges());
-    Edges edgesToExpect{{0, 2}};
+    Edges const edgesToVerify(graph.getEdges());
+    Edges const edgesToExpect{{0, 2}};
     EXPECT_EQ(edgesToExpect, edgesToVerify);
 }
 
@@ -232,8 +232,8 @@ void testGraphWorksAfterClearWithVertexAsInt() {
 
     EXPECT_EQ(4, graph.getNumberOfVertices());
     EXPECT_EQ(3, graph.getNumberOfEdges());
-    Edges edgesToVerify(graph.getEdges());
-    Edges edgesToExpect{{3, 4}, {4, 5}, {5, 6}};
+    Edges const edgesToVerify(graph.getEdges());
+    Edges const edgesToExpect{{3, 4}, {4, 5}, {5, 6}};
     EXPECT_EQ(edgesToExpect, edgesToVerify);
 }
 
@@ -257,9 +257,9 @@ void testWithComplicatedExampleWithVertexAsInt() {
 
     EXPECT_EQ(13, graph.getNumberOfVertices());
     EXPECT_EQ(13, graph.getNumberOfEdges());
-    Edges edgesToVerify(graph.getEdges());
-    Edges edgesToExpect{{0, 1}, {0, 2}, {0, 5},  {0, 6},  {3, 4},  {3, 5},  {4, 5},
-                        {4, 6}, {7, 8}, {9, 10}, {9, 11}, {9, 12}, {11, 12}};
+    Edges const edgesToVerify(graph.getEdges());
+    Edges const edgesToExpect{{0, 1}, {0, 2}, {0, 5},  {0, 6},  {3, 4},  {3, 5},  {4, 5},
+                              {4, 6}, {7, 8}, {9, 10}, {9, 11}, {9, 12}, {11, 12}};
     EXPECT_EQ(edgesToExpect, edgesToVerify);
 }
 

@@ -34,7 +34,7 @@ public:
     }
 
     [[nodiscard]] Vertices getVertices() const override {
-        SetOfVertices uniqueVertices(getUniqueVertices());
+        SetOfVertices const uniqueVertices(getUniqueVertices());
         return Vertices(uniqueVertices.cbegin(), uniqueVertices.cend());
     }
 

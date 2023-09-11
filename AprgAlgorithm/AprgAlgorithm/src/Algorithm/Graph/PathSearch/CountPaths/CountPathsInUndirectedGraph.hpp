@@ -21,7 +21,7 @@ private:
         for (Vertex const& adjacentToCurrent : m_graph.getAdjacentVerticesAt(current)) {
             if (processingVertices.isNotFound(adjacentToCurrent)) {
                 traverseUsingDfs(start, adjacentToCurrent, processingVertices);
-                VertexPair endPointPair{start, adjacentToCurrent};
+                VertexPair const endPointPair{start, adjacentToCurrent};
                 m_pathCounts.emplace(endPointPair, 0);
                 m_pathCounts[endPointPair]++;
             }
