@@ -112,8 +112,8 @@ auto advance(Iterator const begin, int const n) {
 
 // Note: This works because we can overload on SupportsPlusType.
 TEST(TemplateIdiomsExamplesTest, TagDispatchIdiomWorks) {
-    TreeIterator<int> treeIterator;
-    VectorIterator<int> vectorIterator;
+    TreeIterator<int> const treeIterator;
+    VectorIterator<int> const vectorIterator;
 
     advance(treeIterator, 5);    // Correctly maps to tree iterator and false_type
     advance(vectorIterator, 5);  // Correctly maps to tree iterator and true_type
@@ -161,8 +161,8 @@ auto advance(Iterator const begin, int const n) {
 // Note: This works because we can overload on SupportsPlusType.
 // Best practice is to follow STL, have "_t" on the template name for the type.
 TEST(TemplateIdiomsExamplesTest, TagDispatchIdiomWithIteratorTraitsWorks) {
-    TreeIterator<int> treeIterator;
-    VectorIterator<int> vectorIterator;
+    TreeIterator<int> const treeIterator;
+    VectorIterator<int> const vectorIterator;
 
     advance(treeIterator, 5);    // Correctly maps to tree iterator and false_type
     advance(vectorIterator, 5);  // Correctly maps to tree iterator and true_type

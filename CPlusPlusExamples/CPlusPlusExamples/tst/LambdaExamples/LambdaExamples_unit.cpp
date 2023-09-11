@@ -155,7 +155,7 @@ private:
 
 TEST(LambdaExamplesTest, ClassMemberFunctionTemplatesWorks) {
     // C++11 approach:
-    Kitten kitten(1);
+    Kitten const kitten(1);
     cout << "kitten plusMe with int:[" << kitten.plusMe(42) << "]\n";       // This returns 43
     cout << "kitten plusMe with double:[" << kitten.plusMe(3.14) << "]\n";  // This returns 4.14
     cout << "kitten operator() with int:[" << kitten(42) << "]\n";          // This returns 43
@@ -201,7 +201,7 @@ private:
 
 TEST(LambdaExamplesTest, ClassMemberFunctionVariadicTemplatesWorks) {
     // C++11 approach:
-    Kitten kitten(1);
+    Kitten const kitten(1);
     cout << "kitten operator():[" << kitten(42, 3.14, 1) << "]\n";  // This returns 46.14
     // C++14 approach: Simplified version using variadic generic lambdas
     auto plusMe = [value = 1](auto&&... xs) { return value + (... + xs); };

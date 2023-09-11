@@ -58,7 +58,7 @@ TEST(StaticOnTranslationUnit1Test, VariableValuesCanBeChanged) {
 
 TEST(StaticOnTranslationUnit1Test, VariableValuesOnOtherTranslationUnit) {
     restoreInitialValuesForTranslationUnit2();
-    TranslationUnitValues otherTranslationUnitValues(getValuesInTranslationUnit2());
+    TranslationUnitValues const otherTranslationUnitValues(getValuesInTranslationUnit2());
     EXPECT_EQ(100, otherTranslationUnitValues.constInteger);
     EXPECT_EQ(220, otherTranslationUnitValues.staticInteger);
     EXPECT_EQ(0, otherTranslationUnitValues.integer);  // does not exist TranslationUnit2
@@ -74,7 +74,7 @@ TEST(StaticOnTranslationUnit1Test, VariableValuesAreChangedAndReflectedOnOtherTr
     integer = 312;
     externInteger = 412;
     // externConstInteger = 512; // const so cannot change value
-    TranslationUnitValues otherTranslationUnitValues(getValuesInTranslationUnit2());
+    TranslationUnitValues const otherTranslationUnitValues(getValuesInTranslationUnit2());
     EXPECT_EQ(100, otherTranslationUnitValues.constInteger);
     EXPECT_EQ(220, otherTranslationUnitValues.staticInteger);
     EXPECT_EQ(0, otherTranslationUnitValues.integer);  // does not exist TranslationUnit2

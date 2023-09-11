@@ -55,8 +55,8 @@ struct mylist {
 // ---> In particular, each static data member must be defined somewhere if you want to use it.
 // ---> Templates are similar to inline
 TEST(TemplateExamplesTest, ClassTemplatesWork) {
-    mylist<int> intList{5, nullptr};
-    mylist<double> doubleList{4.5, nullptr};
+    mylist<int> const intList{5, nullptr};
+    mylist<double> const doubleList{4.5, nullptr};
     cout << "intList: " << intList.data << "\n";
     cout << "doubleList: " << doubleList.data << "\n";
 }
@@ -366,7 +366,7 @@ void foo(typename myvec<T>::type&) {
 
 // -> We don't know what myvec<T>::type is until we know what T is (because it can be specialized).
 TEST(TemplateExamplesTest, ClassTemplatesCanBeSpecialized) {
-    vector<int> v1;
+    vector<int> const v1;
     // foo(v1);  // Error : couldn't infer template argument 'T'
 }
 
@@ -438,10 +438,10 @@ struct myVectorStruct<Tp**> {
 // -----> Otherwise, look for the best-matching partial specialization.
 // -------> If the "best match" is hard to identify (ambiguous), give an error instead.
 TEST(TemplateExamplesTest, SelectingTheSpecializationWorks) {
-    myVectorStruct<int> a;     // myVectorStruct<T>::myVectorStruct() [with T = int]
-    myVectorStruct<void> b;    // myVectorStruct<void>::myVectorStruct()
-    myVectorStruct<int*> c;    // myVectorStruct<Tp*>::myVectorStruct() [with Tp = int]
-    myVectorStruct<int***> d;  // myVectorStruct<Tp**>::myVectorStruct() [with Tp = int*]
+    myVectorStruct<int> const a;     // myVectorStruct<T>::myVectorStruct() [with T = int]
+    myVectorStruct<void> const b;    // myVectorStruct<void>::myVectorStruct()
+    myVectorStruct<int*> const c;    // myVectorStruct<Tp*>::myVectorStruct() [with Tp = int]
+    myVectorStruct<int***> const d;  // myVectorStruct<Tp**>::myVectorStruct() [with Tp = int*]
 }
 
 }  // namespace SelectingTheSpecializationWorks
@@ -477,7 +477,7 @@ bool isPointer(Tp*) {
 // ------->(isPointer in this example).
 TEST(TemplateExamplesTest, FunctionTemplatesCannotBePartiallySpecialized) {
     void* pv = nullptr;
-    bool result = isPointer(pv);  // isPointer(Tp*) [with Tp = void]
+    bool const result = isPointer(pv);  // isPointer(Tp*) [with Tp = void]
     // [T=void*] specialization is not called, because the other template is a better match.
     cout << "isPointer with void*: " << result << "\n";
 }
@@ -516,7 +516,7 @@ bool isPointer(T) {
 // ---> Use the right tool for the job!
 TEST(TemplateExamplesTest, FunctionTemplatesPartiallySpecializationUsingClasses) {
     void* pv = nullptr;
-    bool result = isPointer(pv);  // isPointerImpl<Tp*>::isPointer() [with Tp = void]
+    bool const result = isPointer(pv);  // isPointerImpl<Tp*>::isPointer() [with Tp = void]
     cout << "isPointer with void*: " << result << "\n";
 }
 
@@ -562,7 +562,7 @@ struct InstantiationClass {
 TEST(TemplateExamplesTest, TemplateIsOnlyInstantiatedWhenNeeded) {
     // NoInstantiationClass<int> variable1;  // Compiler error (static_assert failure)
     NoInstantiationClass<int>* variable2 = nullptr;  // No compiler error.
-    InstantiationClass<int> variable3;               // No compiler error.
+    InstantiationClass<int> const variable3;         // No compiler error.
     // InstantiationClass<int>::noInstantiationStaticFunction(); // Compiler error (static_assert failure)
     // variable3.noInstantiationFunction();  // Compiler error (static_assert failure)
 }
@@ -682,8 +682,8 @@ struct myvec {
 // -> N4606 13.3.1.8 over.match.class.deduct
 TEST(TemplateExamplesTest, TemplateTypeDeductionWorksForClassesInCpp17) {
     int integer = 5;
-    myvec v1(integer);   // myvec(T) [with T = int]
-    myvec v2(&integer);  // myvec(T*) [with T = int]
+    myvec const v1(integer);   // myvec(T) [with T = int]
+    myvec const v2(&integer);  // myvec(T*) [with T = int]
 }
 
 }  // namespace TemplateTypeDeductionWorksForClassesInCpp17
@@ -699,8 +699,8 @@ struct myvec {
 myvec(int) -> myvec<double>;  // deduction guide
 myvec(double) -> myvec<int>;  // deduction guide
 TEST(TemplateExamplesTest, TemplateDeductionGuidesWorksForCpp17) {
-    myvec v1(5);    // myvec(int) [with T = double]
-    myvec v2(5.1);  // myvec(double) [with T = int]
+    myvec const v1(5);    // myvec(int) [with T = double]
+    myvec const v2(5.1);  // myvec(double) [with T = int]
 }
 
 }  // namespace TemplateDeductionGuidesWorksForCpp17

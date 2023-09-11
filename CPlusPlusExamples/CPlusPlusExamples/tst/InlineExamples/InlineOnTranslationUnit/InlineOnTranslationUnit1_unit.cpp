@@ -82,7 +82,7 @@ TEST(InlineOnTranslationUnit1Test, VariableValuesCanBeChanged) {
 
 TEST(InlineOnTranslationUnit1Test, VariableValuesOnOtherTranslationUnit) {
     restoreInitialValuesForTranslationUnit2();
-    TranslationUnitValues otherTranslationUnitValues(getValuesInTranslationUnit2());
+    TranslationUnitValues const otherTranslationUnitValues(getValuesInTranslationUnit2());
     EXPECT_EQ(100, otherTranslationUnitValues.constInteger);
     EXPECT_EQ(220, otherTranslationUnitValues.inlineIntegerWithDefinition);
     EXPECT_EQ(320, otherTranslationUnitValues.inlineIntegerWithDeclaration);
@@ -106,7 +106,7 @@ TEST(InlineOnTranslationUnit1Test, VariableValuesAreChangedAndReflectedOnOtherTr
     inlineIntegerAtTranslationUnit = 712;
     nonInlineAtTranslationUnit = 812;
     // SampleClassWithInline::constIntegerInClass = 1012; // const so cannot change value
-    TranslationUnitValues otherTranslationUnitValues(getValuesInTranslationUnit2());
+    TranslationUnitValues const otherTranslationUnitValues(getValuesInTranslationUnit2());
     EXPECT_EQ(100, otherTranslationUnitValues.constInteger);
     EXPECT_EQ(212, otherTranslationUnitValues.inlineIntegerWithDefinition);
     EXPECT_EQ(312, otherTranslationUnitValues.inlineIntegerWithDeclaration);
