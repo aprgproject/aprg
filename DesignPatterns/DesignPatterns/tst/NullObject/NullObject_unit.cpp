@@ -7,10 +7,10 @@ using namespace std;
 namespace NullObject {
 
 TEST(NullObjectTest, Test1) {
-    std::unique_ptr<AbstractObject> realObject(make_unique<RealObject>());
+    std::unique_ptr<AbstractObject> const realObject(make_unique<RealObject>());
     realObject->doSomething();
 
-    std::unique_ptr<AbstractObject> nullObject(make_unique<NullObject>());
+    std::unique_ptr<AbstractObject> const nullObject(make_unique<NullObject>());
     nullObject->doSomething();
 }
 

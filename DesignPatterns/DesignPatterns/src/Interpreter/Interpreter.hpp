@@ -49,7 +49,7 @@ class NonterminalExpression : public AbstractExpression {
 public:
     NonterminalExpression(
         std::unique_ptr<AbstractExpression> leftPointer, std::unique_ptr<AbstractExpression> rightPointer)
-        : m_leftPointer(move(leftPointer)), m_rightPointer(move(rightPointer)) {}
+        : m_leftPointer(std::move(leftPointer)), m_rightPointer(std::move(rightPointer)) {}
 
     int interpret(Context const& context) override {
         // Addition is the interpretation

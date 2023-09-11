@@ -13,9 +13,9 @@ TEST(MementoTest, Test1) {
     caretaker.save(Originator(2));
     caretaker.save(Originator(3));
 
-    Originator originator3 = caretaker.undoAndGetLastOriginator();
-    Originator originator2 = caretaker.undoAndGetLastOriginator();
-    Originator originator1 = caretaker.undoAndGetLastOriginator();
+    Originator const originator3 = caretaker.undoAndGetLastOriginator();
+    Originator const originator2 = caretaker.undoAndGetLastOriginator();
+    Originator const originator1 = caretaker.undoAndGetLastOriginator();
 
     caretaker.save(originator3);
     caretaker.save(originator2);
