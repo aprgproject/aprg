@@ -1,109 +1,316 @@
 name: Debug Workflow
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '**'
   workflow_dispatch:
     inputs:
-      staticAnalysisJobId:
-        description: 'Job Identifier'
-        type: number
+      cppProjects:
+        description: 'C/C++ Project ("all" for all projects)'
+        type: string
         required: true
-        default: 0
-  
+        default: 'AprgAlgorithm'
+      cppBuildConfigurations:
+        description: 'Build Configurations'
+        required: true
+        default: '["WindowsLatestClang"]'  #"MacOSLatestClang"
+      cppCMakeBuildType:
+        description: 'Build Type to use for C/C++ Project'
+        type: choice
+        required: true
+        default: 'Debug'
+        options:
+        - Debug
+        - Release
+      enableAsan:
+        description: 'Enable Address Sanitizer for Clang Builds'
+        type: boolean
+        required: true
+        default: false
+      enableStaticAnalyzers:
+        description: 'Enable Static Analyzers for Clang Builds'
+        type: boolean
+        required: true
+        default: false
+
+
 env:
+  checkCMakeFilesRelativePath: "AllCommonScripts/ScriptsForCMakeFiles/checkCMakeFiles.sh"
+  checkShellScriptsRelativePath: "AllCommonScripts/ScriptsForShellScripts/checkShellScripts.sh"
+  checkPythonScriptsRelativePath: "AllCommonScripts/ScriptsForPython/checkPythonScripts.sh"
   determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
-  gitAddCommitPushScriptRelativePath: "AllCommonScripts/GithubWorkflowScripts/GitAddCommitPush.sh"
-  staticAnalysisScriptRelativePath: "AllCommonScripts/GithubWorkflowScripts/RunStaticAnalysisWithAutoFixes.sh"
-  formatCppFilesRelativePath: "AllCommonScripts/ScriptsForCpp/formatCppFiles.sh"
-  staticAnalysisFilename: "StaticAnalysisAutoFix.txt"
+  buildAndRunScriptRelativePath: "AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
+  buildType: ${{ inputs.cppCMakeBuildType != '' && inputs.cppCMakeBuildType || 'Debug'}} # ternary operator
+  buildDirectory: "GithubBuild"
+  windowsEnvironmentScript: "C:/Program Files (x86)/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
 
 jobs:
+
+  lintChecks:
+    name: Perform linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Prepare for linting
+        shell: bash
+        run: |
+          sudo apt update
+          pip install --upgrade pip
+          sudo pip install cmakelang 
+          echo "cmake-lint version: [$(cmake-lint --version)]"
+          sudo apt install shellcheck
+          echo "shellcheck version: [$(shellcheck --version)]"
+          sudo apt install pylint
+          echo "pylint version: [$(pylint --version)]"
+          
+      - name: Perform linting for cmake files
+        shell: bash
+        continue-on-error: true
+        run: |
+          checkCMakeFilesPath=$(realpath "$(pwd)/${{ env.checkCMakeFilesRelativePath }}")
+          echo "checkCMakeFilesPath: [$checkCMakeFilesPath]"
+          chmod +x "$checkCMakeFilesPath"
+          "$checkCMakeFilesPath"
+          lintStatus=$?
+          echo "cmakeLintStatus=$lintStatus" >> "$GITHUB_ENV"
+          
+      - name: Perform linting for shell scripts
+        shell: bash
+        continue-on-error: true
+        run: |
+          checkShellScriptsPath=$(realpath "$(pwd)/${{ env.checkShellScriptsRelativePath }}")
+          echo "checkShellScriptsPath: [$checkShellScriptsPath]"
+          chmod +x "$checkShellScriptsPath"
+          "$checkShellScriptsPath"
+          lintStatus=$?
+          echo "shellLintStatus=$lintStatus" >> "$GITHUB_ENV"
+          
+      - name: Perform linting for python scripts
+        shell: bash
+        continue-on-error: true
+        run: |
+          checkPythonScriptsPath=$(realpath "$(pwd)/${{ env.checkPythonScriptsRelativePath }}")
+          echo "checkPythonScriptsPath: [$checkPythonScriptsPath]"
+          chmod +x "$checkPythonScriptsPath"
+          "$checkPythonScriptsPath"
+          lintStatus=$?
+          echo "pythonLintStatus=$lintStatus" >> "$GITHUB_ENV"
+          
+      - name: Check overall linting status
+        shell: bash
+        run: |
+          overallLintStatus=0
+          echo "Checking linting errors..."
+          echo "cmakeLintStatus: [$cmakeLintStatus]"
+          if [ "$cmakeLintStatus" -gt 0 ]; then
+            echo "CMake linting failed, so the overall linting status is set to failed."
+            overallLintStatus=1
+          fi
+          echo "shellLintStatus: [$shellLintStatus]"
+          if [ "$shellLintStatus" -gt 0 ]; then
+            echo "Shell linting failed, so the overall linting status is set to failed."
+            overallLintStatus=1
+          fi
+          echo "pythonLintStatus: [$pythonLintStatus]"
+          if [ "$pythonLintStatus" -gt 0 ]; then
+            echo "Python linting failed, so the overall linting status is set to failed."
+            overallLintStatus=1
+          fi
+          echo "overallLintStatus: [$overallLintStatus]"
+          if [ $overallLintStatus -eq 0 ]; then
+            echo "There were no linting issues found."
+          fi
+          exit $overallLintStatus
+
+
   determineCppProjects:
     name: Determine CPP Projects
     runs-on: ubuntu-latest
     outputs:
-      staticAnalysisJobId: ${{ steps.idOfGetJobIdStep.outputs.STATIC_ANALYSIS_JOB_ID }}
       projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_CPP_DIRECTORIES }}
-      projectsWithWindowsStaticAnalysis: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_WINDOWS_STATIC_ANALYSIS }}
+      excludedConfigurations: ${{ steps.idOfGetCppProjectStep.outputs.APRG_EXCLUDED_CONFIGURATIONS }}
+      projectsWithBoost: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_BOOST }}
+      projectsWithGsl: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_GSL }}
+      projectsWith7Zip: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_7ZIP }}
     steps:
       - name: Checkout code for changes checking
         id: idOfCheckout
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
           
-      - name: Get Static Analysis Job Id from Git Or from User Input
-        id: idOfGetJobIdStep
-        run: |
-          staticAnalysisJobId="${{ inputs.staticAnalysisJobId }}" 
-          if [[ -z $staticAnalysisJobId ]]; then
-            lastCommitMessage=$(git log -1 --pretty=%B)
-            echo "lastCommitMessage: [$lastCommitMessage]"
-            staticAnalysisJobId=$(echo "$lastCommitMessage" | sed -nE "s|^.*JobId\[(.*)\].*$|\1|p")
-          fi
-          echo "staticAnalysisJobId: [$staticAnalysisJobId]"
-          echo "staticAnalysisJobId=$staticAnalysisJobId" >> "$GITHUB_ENV"
-          echo "STATIC_ANALYSIS_JOB_ID=$staticAnalysisJobId" >> "$GITHUB_OUTPUT"
-        
-      - name: Get C/C++ Projects for Static Analysis
+      - name: Get C/C++ Projects from Git Diff and User Input
+        shell: bash
         id: idOfGetCppProjectStep
         run: |
           determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
           echo "determineCppProjectsPath: [$determineCppProjectsPath]"
           chmod +x "$determineCppProjectsPath"
-          "$determineCppProjectsPath" checkStaticAnalysisFiles "$staticAnalysisJobId" "${{ env.staticAnalysisFilename }}"
-          
-          
-  runStaticAnalyzersOnCppProjects:
-    name: JobId[${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}] on ${{ matrix.project }} | Run Static Analyzers with Auto Fixes
+          userInput="${{ inputs.cppProjects }}"
+          if [[ -z $userInput ]]; then
+            echo "User input is empty, [checkGit] is set as argument to script."
+            "$determineCppProjectsPath" checkGit
+          else
+            echo "User input isnot empty, [checkUserInput] is set as argument to script."
+            "$determineCppProjectsPath" checkUserInput "${{ inputs.cppProjects }}"
+          fi
+
+
+  buildAndTest:
+    name: Test ${{ matrix.project }} on ${{ matrix.configurationName }}
     needs: determineCppProjects
-    runs-on: ${{ contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), matrix.project) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
+    runs-on: ${{ startsWith(matrix.configurationName, 'Windows') && 'windows-latest' || startsWith(matrix.configurationName, 'Ubuntu') && 'ubuntu-latest' || 'macos-latest'}} # ternary operator
     strategy:
       fail-fast: false
       matrix:
         project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
-    permissions:
-      contents: write
+        configurationName: ${{ fromJSON(inputs.cppBuildConfigurations != '' && inputs.cppBuildConfigurations || '["WindowsLatestMsvc", "WindowsLatestMingw", "WindowsLatestClang", "UbuntuLatestGcc", "UbuntuLatestClang"]') }}  # ternary operator
+        exclude: ${{ fromJSON(needs.determineCppProjects.outputs.excludedConfigurations) }}
+        
     steps:
-          
       - name: Print Job Details
         shell: bash
         run: |
           echo "github.event_name: [${{ github.event_name }}]"
           echo "github.event.action: [${{ github.event.action }}]"
           echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
-          echo "c/c++ next project: [${{ matrix.project }}]"
-          echo "projects with windows static analysis: [${{ needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis }}]"
-          echo "operating system: [${{ runner.os }}]"
-          echo "staticAnalysisFilename: [${{ env.staticAnalysisFilename }}]"
-          echo "staticAnalysisJobId: [${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}]"
+          echo "matrix.project: [${{ matrix.project }}]"
+          echo "matrix.configurationName: [${{ matrix.configurationName }}]"
+          echo "buildType: [${{ env.buildType }}]"
           
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          persist-credentials: false 
-          # use the personal access token (without this setting, the GITHUB_TOKEN is used)
-          # this is needed to trigger BuildAndRun github workflow after commit
-        
-      - name: Set up Git
-        shell: bash
-        run: |
-          git config user.name "aprgproject"
-          git config user.email "aprgproject@gmail.com"
-          git config core.autocrlf input
-          git config core.eol lf
-          # set origin (fetch)
-          git remote set-url origin https://$WORKFLOW_TOKEN@github.com/aprgproject/aprg
-          # set origin (push)
-          git remote set-url --push origin https://$WORKFLOW_TOKEN@github.com/aprgproject/aprg
-          git remote -v
-        env:
-          WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
-        
-      - name: Commit and Push Changes
-        shell: bash
-        run: |
-          echo "Changes" >> "DeleteThis.txt"
-          git add "DeleteThis.txt"
-          gitAddCommitPushScriptPath=$(realpath "$(pwd)/${{ env.gitAddCommitPushScriptRelativePath }}")
-          echo "gitAddCommitPushScriptPath: [$gitAddCommitPushScriptPath]"
-          chmod +x "$gitAddCommitPushScriptPath"
-          "$gitAddCommitPushScriptPath" "${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}" "WORKFLOW COMMIT: Automatic fixes from Static Analyzers."
           
+      - name: Install dependencies on Windows
+        shell: bash
+        if: startsWith(matrix.configurationName, 'Windows')
+        run: |
+          choco install cmake ninja
+          choco info cmake
+          echo "cmake version: [$(cmake --version)]"
+          choco info ninja
+          echo "ninja version: [$(ninja --version)]"
+          # Not needed to run environment script
+          # echo "Executing visual studio environment script..."
+          # cmd "${{ env.windowsEnvironmentScript }}"
+          # echo "Finished visual studio environment script."
+
+      - name: Update APT for dependencies in Ubuntu
+        shell: bash
+        if: startsWith(matrix.configurationName, 'Ubuntu')
+        run: |
+          sudo apt update
+
+      - name: Install dependencies on Ubuntu/Gcc
+        shell: bash
+        if: matrix.configurationName == 'UbuntuLatestGcc'
+        run: |
+          sudo apt install cmake ninja-build
+          echo "cmake version: [$(cmake --version)]"
+          echo "ninja version: [$(ninja --version)]"
+          echo "gcc version: [$(gcc --version)]"
+
+      - name: Install dependencies on Ubuntu/Clang
+        shell: bash
+        if: matrix.configurationName == 'UbuntuLatestClang'
+        run: |
+          sudo apt install ninja-build cmake
+          echo "cmake version: [$(cmake --version)]"
+          echo "ninja version: [$(ninja --version)]"
+          echo "clang version: [$(clang --version)]"
+          
+# MAC OS is not supported          
+#      - name: Install dependencies on macos
+#        if: startsWith(matrix.configurationName, 'MacOS')
+#        run: |
+#          brew install cmake ninja
+#          ninja --version
+#          cmake --version
+
+      - name: Install Boost on Ubuntu
+        shell: bash
+        if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWithBoost), matrix.project)
+        run: |
+          sudo apt install libboost-all-dev
+          echo "libboost-all-dev version (dpkg): [$(dpkg -l | grep libboost-all-dev | tr -s ' ')]"
+
+      - name: Install GSL on Ubuntu
+        shell: bash
+        if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWithGsl), matrix.project)
+        run: |
+          sudo apt install libgsl-dev
+          echo "libgsl-dev version (dpkg): [$(dpkg -l | grep libgsl-dev | tr -s ' ')]"
+
+      - name: Install 7zip
+        shell: bash
+        if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWith7Zip), matrix.project)
+        run: |
+          sudo apt install p7zip-full
+          echo "p7zip-full version (dpkg): [$(dpkg -l | grep p7zip-full | tr -s ' ')]"
+          
+      - name: Prepare aprg directories and scripts
+        shell: bash
+        run: |
+          buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
+          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
+          chmod +x "$buildAndRunScriptPath"
+          echo "buildAndRunScriptPath=$buildAndRunScriptPath" >> "$GITHUB_ENV"
+          unquotedProject=$(echo "${{ matrix.project }}" | tr -d '"')
+          echo "unquotedProject: [$unquotedProject]"
+          echo "unquotedProject=$unquotedProject" >> "$GITHUB_ENV"
+            
+      - name: Configure for Windows/MSVC
+        shell: bash
+        if: matrix.configurationName == 'WindowsLatestMsvc'
+        working-directory: ${{ matrix.project }}
+        run: |
+          "$buildAndRunScriptPath" cleanAndConfigureWithDefaultCompiler "${{ env.buildDirectory }}" "${{ env.buildType }}" "Visual Studio 17 2022"
+            
+      - name: Configure for Windows/Mingw
+        shell: bash
+        if: matrix.configurationName == 'WindowsLatestMingw'
+        working-directory: ${{ matrix.project }}
+        run: |
+          echo "gcc version: [$(gcc --version)]"
+          "$buildAndRunScriptPath" cleanAndConfigureWithGcc "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+            
+      - name: Configure for Windows/Clang
+        shell: bash
+        if: matrix.configurationName == 'WindowsLatestClang'
+        working-directory: ${{ matrix.project }}
+        run: |
+          echo "clang version: [$(clang --version)]"
+          "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+            
+      - name: Configure for Ubuntu/Gcc
+        shell: bash
+        if: matrix.configurationName == 'UbuntuLatestGcc'
+        working-directory: ${{ matrix.project }}
+        run: |
+          echo "gcc version: [$(gcc --version)]"
+          "$buildAndRunScriptPath" cleanAndConfigureWithGcc "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+            
+      - name: Configure for Ubuntu/Clang
+        shell: bash
+        if: matrix.configurationName == 'UbuntuLatestClang'
+        working-directory: ${{ matrix.project }}
+        run: |
+          echo "clang version: [$(clang --version)]"
+          "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+            
+      - name: Build and Run with Static Analyzers
+        shell: bash
+        if: contains(matrix.configurationName, 'Clang') && inputs.enableStaticAnalyzers
+        working-directory: ${{ matrix.project }}
+        run: |
+          currentDirectory="$(pwd)"
+          "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          echo "Running Static Analysis..."
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
