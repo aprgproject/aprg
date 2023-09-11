@@ -12,7 +12,7 @@ NearestSamples::NearestSamples(Samples const& samples) : m_samples(samples) { sa
 
 Indexes NearestSamples::getNearestSamplesIndexes(double const value, int const recommendedNumberOfSamples) {
     Indexes result;
-    pair<ValuesToIndexes::const_iterator, ValuesToIndexes::const_iterator> lowerAndUpperIterator(
+    pair<ValuesToIndexes::const_iterator, ValuesToIndexes::const_iterator> const lowerAndUpperIterator(
         containerHelper::getLowerAndUpperConstIteratorsInMap(m_valuesToIndexes, value));
 
     set<int> indexesInOrder;

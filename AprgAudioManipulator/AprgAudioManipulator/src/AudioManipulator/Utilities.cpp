@@ -42,20 +42,20 @@ void searchForBestSampleIndexes(
 
     for (int replicationIndex = 0; replicationIndex < static_cast<int>(deltaSamplesToReplicate.size());
          replicationIndex += sampleIntervalForReplication) {
-        int numberOfSamplesToCompare =
+        int const numberOfSamplesToCompare =
             min(numberOfSamplesForReplication, static_cast<int>(deltaSamplesToReplicate.size() - replicationIndex));
-        double commonMultiplierInReplicate = getCommonMultiplierForDeltaSamples(
+        double const commonMultiplierInReplicate = getCommonMultiplierForDeltaSamples(
             deltaSamplesToReplicate, replicationIndex, replicationIndex + numberOfSamplesToCompare);
-        Indexes searchIndexes(nearestSamplesToSearch.getNearestSamplesIndexes(
+        Indexes const searchIndexes(nearestSamplesToSearch.getNearestSamplesIndexes(
             samplesToReplicate[replicationIndex], numberOfSearchSamplesPerReplication));
         bool isFirst(true);
         SearchResultDetails searchResult{false, replicationIndex, 0, 0, 0.0, 0.0};
-        for (int searchIndex : searchIndexes) {
-            int lastExcludedIndex = searchIndex + numberOfSamplesToCompare;
+        for (int const searchIndex : searchIndexes) {
+            int const lastExcludedIndex = searchIndex + numberOfSamplesToCompare;
             if (lastExcludedIndex <= static_cast<int>(deltaSamplesToSearch.size())) {
-                double commonMultiplierInSearch =
+                double const commonMultiplierInSearch =
                     getCommonMultiplierForDeltaSamples(deltaSamplesToSearch, searchIndex, lastExcludedIndex);
-                double multiplierForSearch = commonMultiplierInReplicate / commonMultiplierInSearch;
+                double const multiplierForSearch = commonMultiplierInReplicate / commonMultiplierInSearch;
                 DoubleOptional differenceOptional = compareDeltasAndGetDifference(
                     deltaSamplesToReplicate, deltaSamplesToSearch, multiplierForSearch, replicationIndex, searchIndex,
                     numberOfSamplesToCompare);
@@ -93,14 +93,14 @@ void searchAndTryToReplicateSamples(
 void searchAndTryToReplicate(
     std::string const& filePathForAudioToChange, std::string const& filePathForAudioToReplicate,
     std::string const& filePathForAudioToSearch, bool const alwaysPutNewValue) {
-    AudioManipulator audioToReplicateManipulator(filePathForAudioToReplicate);
-    AudioManipulator audioToSearchManipulator(filePathForAudioToSearch);
+    AudioManipulator const audioToReplicateManipulator(filePathForAudioToReplicate);
+    AudioManipulator const audioToSearchManipulator(filePathForAudioToSearch);
     AudioManipulator audioToChangeManipulator(filePathForAudioToChange);
     AudioInDouble const& audioToReplicate(audioToReplicateManipulator.getAudio());
     AudioInDouble const& audioToSearch(audioToSearchManipulator.getAudio());
     AudioInDouble& audioToChange(audioToChangeManipulator.getAudioReference());
 
-    int numberOfChannels =
+    int const numberOfChannels =
         max(max(audioToReplicate.getNumberOfChannels(), audioToSearch.getNumberOfChannels()),
             audioToChange.getNumberOfChannels());
     for (int i = 0; i < numberOfChannels; ++i) {
@@ -123,11 +123,11 @@ DoubleOptional compareDeltasAndGetDifference(
     bool hasLimitExceeded(false);
 
     for (int i = 0; i < numberOfSamples; i += 1) {
-        double deltaSample1 = deltaSamples1[startOfDeltaSamples1 + i];
-        double deltaSample2 = deltaSamples2[startOfDeltaSamples2 + i];
+        double const deltaSample1 = deltaSamples1[startOfDeltaSamples1 + i];
+        double const deltaSample2 = deltaSamples2[startOfDeltaSamples2 + i];
         currentValue1 += deltaSample1;
         currentValue2 += (deltaSample2 * multiplierToSample2);
-        double currentPositiveDifference = getAbsoluteValue(currentValue1 - currentValue2);
+        double const currentPositiveDifference = getAbsoluteValue(currentValue1 - currentValue2);
         if (limitOfOneDifference < currentPositiveDifference) {
             hasLimitExceeded = true;
             break;

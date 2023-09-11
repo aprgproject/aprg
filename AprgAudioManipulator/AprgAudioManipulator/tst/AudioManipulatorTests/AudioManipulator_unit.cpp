@@ -9,8 +9,8 @@ using namespace std;
 namespace alba::AprgAudio {
 
 TEST(AudioManipulatorTest, DISABLED_AddSamplesWithValueWorks) {
-    AlbaLocalPathHandler audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
-    AlbaLocalPathHandler audioFilePathHandler(
+    AlbaLocalPathHandler const audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
+    AlbaLocalPathHandler const audioFilePathHandler(
         audioDirectoryPathHandler.getDirectory() + "AChannel_AOpeningSong_001.wav");
     AudioManipulator audioManipulator(audioFilePathHandler.getFullPath());
 
@@ -20,8 +20,8 @@ TEST(AudioManipulatorTest, DISABLED_AddSamplesWithValueWorks) {
 }
 
 TEST(AudioManipulatorTest, DISABLED_MultiplySamplesWithValueWorks) {
-    AlbaLocalPathHandler audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
-    AlbaLocalPathHandler audioFilePathHandler(
+    AlbaLocalPathHandler const audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
+    AlbaLocalPathHandler const audioFilePathHandler(
         audioDirectoryPathHandler.getDirectory() + "AChannel_AOpeningSong_001.wav");
     AudioManipulator audioManipulator(audioFilePathHandler.getFullPath());
 

@@ -48,8 +48,8 @@ void AudioManipulator::saveAudioIntoFileInTheSameDirectory(string const& filenam
 }
 
 void AudioManipulator::saveAudioIntoFileWithFullFilePath(string const& newFilePath) {
-    AlbaLocalPathHandler newFilePathHandler(newFilePath);
-    string extension(getStringWithCapitalLetters(newFilePathHandler.getExtension()));
+    AlbaLocalPathHandler const newFilePathHandler(newFilePath);
+    string const extension(getStringWithCapitalLetters(newFilePathHandler.getExtension()));
     if (extension == "WAV") {
         m_audio.save(newFilePathHandler.getFullPath(), AudioFormat::Wave);
     } else if (extension == "AIFF") {
