@@ -64,8 +64,8 @@ gsl_permutation_valid (const gsl_permutation * p)
 {
   const size_t size = p->size ;
 
-  size_t i;
-  size_t j ;
+  size_t i = 0;
+  size_t j = 0 ;
 
   for (i = 0; i < size; i++) 
     {
@@ -130,9 +130,9 @@ gsl_permutation_next (gsl_permutation * p)
    * ordering).  Returns GSL_FAILURE if there is no next permutation.
    */
   const size_t size = p->size;
-  size_t i;
-  size_t j;
-  size_t k;
+  size_t i = 0;
+  size_t j = 0;
+  size_t k = 0;
 
   if (size < 2)
     {
@@ -183,9 +183,9 @@ int
 gsl_permutation_prev (gsl_permutation * p)
 {
   const size_t size = p->size;
-  size_t i;
-  size_t j;
-  size_t k;
+  size_t i = 0;
+  size_t j = 0;
+  size_t k = 0;
 
   if (size < 2)
     {

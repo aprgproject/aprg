@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <gsl/gsl_math.h>
@@ -27,10 +28,10 @@
 int
 main (void)
 {
-  double y;
-  double y_expected;
-  int e;
-  int e_expected;
+  double y = NAN;
+  double y_expected = NAN;
+  int e = 0;
+  int e_expected = 0;
 
   gsl_ieee_env_setup ();
 
@@ -501,8 +502,8 @@ main (void)
 
   /* Test for approximate floating point comparison */
   {
-    double x;
-    double y;
+    double x = NAN;
+    double y = NAN;
     int i = 0;
 
     x = M_PI;

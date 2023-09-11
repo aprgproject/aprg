@@ -458,19 +458,19 @@ francis_qrstep(gsl_matrix * H, gsl_eigen_francis_workspace * w)
   double scale = NAN;    /* scale factor to avoid overflow */
   gsl_vector_view v2;
   gsl_vector_view v3;
-  size_t q;
-  size_t r;
+  size_t q = 0;
+  size_t r = 0;
   size_t top = 0;  /* location of H in original matrix */
-  double s;
-  double disc;
-  double h_nn;
+  double s = NAN;
+  double disc = NAN;
+  double h_nn = NAN;
   double /* H(n,n) */
-         h_nm1nm1;
+         h_nm1nm1 = NAN;
   double /* H(n-1,n-1) */
-         h_cross;
+         h_cross = NAN;
   double /* H(n,n-1) * H(n-1,n) */
-         h_tmp1;
-  double h_tmp2;
+         h_tmp1 = NAN;
+  double h_tmp2 = NAN;
 
   v2 = gsl_vector_view_array(dat, 2);
   v3 = gsl_vector_view_array(dat, 3);
@@ -740,8 +740,8 @@ francis_schur_standardize(gsl_matrix *A, gsl_complex *eval1,
                           gsl_eigen_francis_workspace *w)
 {
   const size_t N = w->size;
-  double cs;
-  double sn;
+  double cs = NAN;
+  double sn = NAN;
   size_t top = 0;
 
   /*
@@ -912,26 +912,26 @@ Notes: 1) based on LAPACK routine DLANV2
 static void
 francis_standard_form(gsl_matrix *A, double *cs, double *sn)
 {
-  double a;
-  double b;
-  double c;
-  double d; /* input matrix values */
+  double a = NAN;
+  double b = NAN;
+  double c = NAN;
+  double d = NAN; /* input matrix values */
   double tmp = NAN;
-  double p;
-  double z;
-  double bcmax;
-  double bcmis;
-  double scale;
-  double tau;
-  double sigma;
-  double cs1;
-  double sn1;
-  double aa;
-  double bb;
-  double cc;
-  double dd;
-  double sab;
-  double sac;
+  double p = NAN;
+  double z = NAN;
+  double bcmax = NAN;
+  double bcmis = NAN;
+  double scale = NAN;
+  double tau = NAN;
+  double sigma = NAN;
+  double cs1 = NAN;
+  double sn1 = NAN;
+  double aa = NAN;
+  double bb = NAN;
+  double cc = NAN;
+  double dd = NAN;
+  double sab = NAN;
+  double sac = NAN;
 
   a = gsl_matrix_get(A, 0, 0);
   b = gsl_matrix_get(A, 0, 1);

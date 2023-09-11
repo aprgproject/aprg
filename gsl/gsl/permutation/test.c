@@ -129,7 +129,7 @@ main (void)
 
   {
     int i = 0;
-    int j;
+    int j = 0;
     int status = 0;
   
     gsl_permutation * p = NULL ;
@@ -225,7 +225,7 @@ main (void)
   /* testing cycles representations */
   {
     int i = 0;
-    int j;
+    int j = 0;
     int status = 0;
 
     gsl_permutation * p = gsl_permutation_alloc (5);

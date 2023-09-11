@@ -69,7 +69,7 @@ gsl_linalg_QR_decomp (gsl_matrix * A, gsl_vector * tau)
   
     
       const size_t M = A->size1;
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < GSL_MIN (M, N); i++)
         {
@@ -513,8 +513,8 @@ gsl_linalg_QR_unpack (const gsl_matrix * QR, const gsl_vector * tau, gsl_matrix 
     }
   else
     {
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       /* Initialize Q to the identity */
       gsl_matrix_set_identity (Q);
@@ -577,8 +577,8 @@ gsl_linalg_QR_update (gsl_matrix * Q, gsl_matrix * R,
     }
   else
     {
-      size_t j;
-      size_t k;
+      size_t j = 0;
+      size_t k = 0;
       double w0 = NAN;
 
       /* Apply Given's rotations to reduce w to (|w|, 0, 0, ... , 0)
@@ -590,8 +590,8 @@ gsl_linalg_QR_update (gsl_matrix * Q, gsl_matrix * R,
 
       for (k = M - 1; k > 0; k--)  /* loop from k = M-1 to 1 */
         {
-          double c;
-          double s;
+          double c = NAN;
+          double s = NAN;
           double wk = gsl_vector_get (w, k);
           double wkm1 = gsl_vector_get (w, k - 1);
 
@@ -616,8 +616,8 @@ gsl_linalg_QR_update (gsl_matrix * Q, gsl_matrix * R,
 
       for (k = 1; k < GSL_MIN(M,N+1); k++)
         {
-          double c;
-          double s;
+          double c = NAN;
+          double s = NAN;
           double diag = gsl_matrix_get (R, k - 1, k - 1);
           double offdiag = gsl_matrix_get (R, k, k - 1);
 
@@ -645,8 +645,8 @@ gsl_linalg_QR_QRsolve (gsl_matrix * Q, gsl_matrix * R, const gsl_vector * b, gsl
     {
       return GSL_EBADLEN;
     }
-  else
-    {
+  
+    
       /* compute sol = Q^T b */
       gsl_blas_dgemv (CblasTrans, 1.0, Q, b, 0.0, x);
 
@@ -654,7 +654,7 @@ gsl_linalg_QR_QRsolve (gsl_matrix * Q, gsl_matrix * R, const gsl_vector * b, gsl
       gsl_blas_dtrsv (CblasUpper, CblasNoTrans, CblasNonUnit, R, x);
 
       return GSL_SUCCESS;
-    }
+   
 }
 
 int

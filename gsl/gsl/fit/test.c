@@ -3,6 +3,7 @@
    information. */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_test.h>
@@ -56,12 +57,12 @@ main (void)
   gsl_ieee_env_setup();
 
   {
-    double c0;
-    double c1;
-    double cov00;
-    double cov01;
-    double cov11;
-    double sumsq;
+    double c0 = NAN;
+    double c1 = NAN;
+    double cov00 = NAN;
+    double cov01 = NAN;
+    double cov11 = NAN;
+    double sumsq = NAN;
        
     double expected_c0 = -0.262323073774029;
     double expected_c1 =  1.00211681802045; 
@@ -85,12 +86,12 @@ main (void)
   }
 
   {
-    double c0;
-    double c1;
-    double cov00;
-    double cov01;
-    double cov11;
-    double sumsq;
+    double c0 = NAN;
+    double c1 = NAN;
+    double cov00 = NAN;
+    double cov01 = NAN;
+    double cov11 = NAN;
+    double sumsq = NAN;
        
     double expected_c0 = -0.262323073774029;
     double expected_c1 =  1.00211681802045; 
@@ -118,9 +119,9 @@ main (void)
     }
 
   {
-    double c1;
-    double cov11;
-    double sumsq;
+    double c1 = NAN;
+    double cov11 = NAN;
+    double sumsq = NAN;
        
     double expected_c1 = 2.07438016528926; 
     double expected_cov11 = pow(0.165289256198347E-01, 2.0);  
@@ -134,9 +135,9 @@ main (void)
   }
 
   {
-    double c1;
-    double cov11;
-    double sumsq;
+    double c1 = NAN;
+    double cov11 = NAN;
+    double sumsq = NAN;
        
     double expected_c1 = 2.07438016528926; 
     double expected_cov11 = 2.14661371686165e-05; /* computed from octave */
@@ -158,9 +159,9 @@ main (void)
     }
 
   {
-    double c1;
-    double cov11;
-    double sumsq;
+    double c1 = NAN;
+    double cov11 = NAN;
+    double sumsq = NAN;
        
     double expected_c1 = 0.727272727272727; 
     double expected_cov11 = pow(0.420827318078432E-01, 2.0);  
@@ -174,9 +175,9 @@ main (void)
   }
 
   {
-    double c1;
-    double cov11;
-    double sumsq;
+    double c1 = NAN;
+    double cov11 = NAN;
+    double sumsq = NAN;
        
     double expected_c1 = 0.727272727272727; 
     double expected_cov11 = 1.29870129870130e-02 ; /* computed from octave */

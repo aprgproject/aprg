@@ -93,7 +93,7 @@ gsl_sf_bessel_Jnupos_e(const double nu, const double x, gsl_sf_result * result)
   if(x*x < 10.0*(nu+1.0)) {
     return gsl_sf_bessel_IJ_taylor_e(nu, x, -1, 100, GSL_DBL_EPSILON, result);
   }
-  else if(nu > 50.0) {
+  if(nu > 50.0) {
     return gsl_sf_bessel_Jnu_asymp_Olver_e(nu, x, result);
   }
   else if(x > 1000.0)

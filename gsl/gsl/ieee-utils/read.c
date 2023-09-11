@@ -58,9 +58,9 @@ gsl_ieee_read_mode_string (const char * description,
 
   do {
     int status = 0 ;
-    int new_precision;
-    int new_rounding;
-    int new_exception ;
+    int new_precision = 0;
+    int new_rounding = 0;
+    int new_exception = 0 ;
 
     end = strchr (p,',') ;
 

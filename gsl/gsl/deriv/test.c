@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -133,8 +134,8 @@ void
 test (deriv_fn * deriv, gsl_function * f, gsl_function * df, double x, 
       const char * desc)
 {
-  double result;
-  double abserr;
+  double result = NAN;
+  double abserr = NAN;
   double expected = GSL_FN_EVAL (df, x);
   (*deriv) (f, x, 1e-4, &result, &abserr);
 

@@ -53,6 +53,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_vector.h>
@@ -98,8 +99,8 @@ gsl_linalg_symmtd_decomp (gsl_matrix * A, gsl_vector * tau)
 
               /* w = x - (1/2) tau * (x' * v) * v  */
               {
-                double xv;
-                double alpha;
+                double xv = NAN;
+                double alpha = NAN;
                 gsl_blas_ddot(&x.vector, &v.vector, &xv);
                 alpha = -0.5 * tau_i * xv;
                 gsl_blas_daxpy(alpha, &v.vector, &x.vector);

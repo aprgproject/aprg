@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_errno.h>
@@ -193,8 +194,8 @@ double
 gsl_cheb_eval_mode (const gsl_cheb_series * cs,
                     const double x, gsl_mode_t mode)
 {
-  double result;
-  double abserr;
+  double result = NAN;
+  double abserr = NAN;
   int status = gsl_cheb_eval_mode_e (cs, x, mode, &result, &abserr);
 
   if (status != GSL_SUCCESS) 

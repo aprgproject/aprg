@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_min.h>
@@ -95,11 +96,11 @@ test_f (const gsl_min_fminimizer_type * T,
 {
   int status = 0;
   size_t iterations = 0;
-  double m;
-  double a;
-  double b;
-  double x_lower;
-  double x_upper;
+  double m = NAN;
+  double a = NAN;
+  double b = NAN;
+  double x_lower = NAN;
+  double x_upper = NAN;
   gsl_min_fminimizer * s = NULL;
 
   x_lower = lower_bound;
@@ -162,10 +163,10 @@ test_f_e (const gsl_min_fminimizer_type * T,
 {
   int status = 0;
   size_t iterations = 0;
-  double x_lower;
-  double x_upper;
-  double a;
-  double b;
+  double x_lower = NAN;
+  double x_upper = NAN;
+  double a = NAN;
+  double b = NAN;
   gsl_min_fminimizer * s = NULL;
 
   x_lower = lower_bound;
@@ -211,11 +212,11 @@ test_bracket (const char * description,gsl_function *f,double lower_bound,
               double upper_bound, unsigned int max)
 {
   int status = 0;
-  double x_lower;
-  double x_upper;
-  double f_upper;
-  double f_lower;
-  double f_minimum;
+  double x_lower = NAN;
+  double x_upper = NAN;
+  double f_upper = NAN;
+  double f_lower = NAN;
+  double f_minimum = NAN;
   double x_minimum = NAN;
 
   x_lower=lower_bound;

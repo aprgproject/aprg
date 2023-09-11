@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_test.h>
@@ -36,9 +37,9 @@ cmp_cplx(const double *a, const double *b)
       double t = a[1] - b[1];
 	    return t < 0.0 ? -1 : t > 0.0 ? 1 : 0;
     }
-  if (r < 0.0)
+  if (r < 0.0) {
     return -1;
-  else
+  } 
     return 1;
 }
 
@@ -52,8 +53,8 @@ main (void)
   /* Polynomial evaluation */
 
   {
-    double x;
-    double y;
+    double x = NAN;
+    double y = NAN;
     double c[3] = { 1.0, 0.5, 0.3 };
     x = 0.5;
     y = gsl_poly_eval (c, 3, x);
@@ -62,8 +63,8 @@ main (void)
   }
 
   {
-    double x;
-    double y;
+    double x = NAN;
+    double y = NAN;
     double d[11] = { 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1 };
     x = 1.0;
     y = gsl_poly_eval (d, 11, x);
@@ -133,8 +134,8 @@ main (void)
   /* Quadratic */
 
   {
-    double x0;
-    double x1;
+    double x0 = NAN;
+    double x1 = NAN;
 
     int n = gsl_poly_solve_quadratic (4.0, -20.0, 26.0, &x0, &x1);
 
@@ -142,8 +143,8 @@ main (void)
   }
 
   {
-    double x0;
-    double x1;
+    double x0 = NAN;
+    double x1 = NAN;
 
     int n = gsl_poly_solve_quadratic (4.0, -20.0, 25.0, &x0, &x1);
 
@@ -154,8 +155,8 @@ main (void)
   }
 
   {
-    double x0;
-    double x1;
+    double x0 = NAN;
+    double x1 = NAN;
 
     int n = gsl_poly_solve_quadratic (4.0, -20.0, 21.0, &x0, &x1);
 
@@ -165,8 +166,8 @@ main (void)
   }
 
   {
-    double x0;
-    double x1;
+    double x0 = NAN;
+    double x1 = NAN;
 
     int n = gsl_poly_solve_quadratic (4.0, 7.0, 0.0, &x0, &x1);
 
@@ -176,8 +177,8 @@ main (void)
   }
 
   {
-    double x0;
-    double x1;
+    double x0 = NAN;
+    double x1 = NAN;
 
     int n = gsl_poly_solve_quadratic (5.0, 0.0, -20.0, &x0, &x1);
 
@@ -189,8 +190,8 @@ main (void)
 
 
   {
-    double x0;
-    double x1;
+    double x0 = NAN;
+    double x1 = NAN;
 
     int n = gsl_poly_solve_quadratic (0.0, 3.0, -21.0, &x0, &x1);
 
@@ -201,8 +202,8 @@ main (void)
 
 
   {
-    double x0;
-    double x1;
+    double x0 = NAN;
+    double x1 = NAN;
     int n = gsl_poly_solve_quadratic (0.0, 0.0, 1.0, &x0, &x1);
 
     gsl_test (n != 0,
@@ -213,9 +214,9 @@ main (void)
   /* Cubic */
 
   {
-    double x0;
-    double x1;
-    double x2;
+    double x0 = NAN;
+    double x1 = NAN;
+    double x2 = NAN;
 
     int n = gsl_poly_solve_cubic (0.0, 0.0, -27.0, &x0, &x1, &x2);
 
@@ -224,9 +225,9 @@ main (void)
   }
 
   {
-    double x0;
-    double x1;
-    double x2;
+    double x0 = NAN;
+    double x1 = NAN;
+    double x2 = NAN;
 
     int n = gsl_poly_solve_cubic (-51.0, 867.0, -4913.0, &x0, &x1, &x2);
 
@@ -237,9 +238,9 @@ main (void)
   }
 
   {
-    double x0;
-    double x1;
-    double x2;
+    double x0 = NAN;
+    double x1 = NAN;
+    double x2 = NAN;
 
     int n = gsl_poly_solve_cubic (-57.0, 1071.0, -6647.0, &x0, &x1, &x2);
 
@@ -251,9 +252,9 @@ main (void)
   }
 
   {
-    double x0;
-    double x1;
-    double x2;
+    double x0 = NAN;
+    double x1 = NAN;
+    double x2 = NAN;
 
     int n = gsl_poly_solve_cubic (-11.0, -493.0, +6647.0, &x0, &x1, &x2);
 
@@ -265,9 +266,9 @@ main (void)
   }
 
   {
-    double x0;
-    double x1;
-    double x2;
+    double x0 = NAN;
+    double x1 = NAN;
+    double x2 = NAN;
 
     int n = gsl_poly_solve_cubic (-143.0, 5087.0, -50065.0, &x0, &x1, &x2);
 
@@ -279,9 +280,9 @@ main (void)
   }
 
   {
-    double x0;
-    double x1;
-    double x2;
+    double x0 = NAN;
+    double x1 = NAN;
+    double x2 = NAN;
 
     int n = gsl_poly_solve_cubic (-109.0, 803.0, 50065.0, &x0, &x1, &x2);
 

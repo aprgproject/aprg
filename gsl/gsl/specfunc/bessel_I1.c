@@ -23,6 +23,7 @@
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sf_bessel.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -174,8 +175,8 @@ int gsl_sf_bessel_I1_scaled_e(const double x, gsl_sf_result * result)
   else if(y <= 8.0) {
     const double sy = sqrt(y);
     gsl_sf_result c;
-    double b;
-    double s;
+    double b = NAN;
+    double s = NAN;
     cheb_eval_e(&ai1_cs, (48.0/y-11.0)/5.0, &c);
     b = (0.375 + c.val) / sy;
     s = (x > 0.0 ? 1.0 : -1.0);
@@ -187,8 +188,8 @@ int gsl_sf_bessel_I1_scaled_e(const double x, gsl_sf_result * result)
   else {
     const double sy = sqrt(y);
     gsl_sf_result c;
-    double b;
-    double s;
+    double b = NAN;
+    double s = NAN;
     cheb_eval_e(&ai12_cs, 16.0/y-1.0, &c);
     b = (0.375 + c.val) / sy;
     s = (x > 0.0 ? 1.0 : -1.0);

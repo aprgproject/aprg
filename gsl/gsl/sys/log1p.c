@@ -23,8 +23,8 @@
 
 double gsl_log1p (const double x)
 {
-  volatile double y;
-  volatile double z;
+  volatile double y = NAN;
+  volatile double z = NAN;
   y = 1 + x;
   z = y - 1;
   return log(y) - (z-x)/y ;  /* cancels errors with IEEE arithmetic */

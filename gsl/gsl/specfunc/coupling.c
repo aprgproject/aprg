@@ -150,7 +150,7 @@ gsl_sf_coupling_3j_e (int two_ja, int two_jb, int two_jc,
     int jsum = ( two_ja + two_jb + two_jc) / 2;
     int kmin = locMax3 (0, jpmb - jmmc, jmma - jpmc);
     int kmax = locMin3 (jcc, jmma, jpmb);
-    int k;
+    int k = 0;
     int sign = GSL_IS_ODD (kmin - jpma + jmmb) ? -1 : 1;
     int status = 0;
     double sum_pos = 0.0;
@@ -255,9 +255,9 @@ gsl_sf_coupling_6j_e(int two_ja, int two_jb, int two_jc,
     gsl_sf_result d5;
     gsl_sf_result d6;
     double norm = NAN;
-    int tk;
-    int tkmin;
-    int tkmax;
+    int tk = 0;
+    int tkmin = 0;
+    int tkmax = 0;
     double phase = NAN;
     double sum_pos = 0.0;
     double sum_neg = 0.0;

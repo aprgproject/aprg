@@ -24,14 +24,15 @@
 #include <gsl/gsl_bspline.h>
 #include <gsl/gsl_ieee_utils.h>
 #include <gsl/gsl_nan.h>
+#include <math.h>
 
 void
 test_bspline(gsl_bspline_workspace * bw)
 {
   gsl_vector *B = NULL;
   gsl_matrix *dB = NULL;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   size_t n = 100;
   size_t ncoeffs = gsl_bspline_ncoeffs(bw);
   size_t order = gsl_bspline_order(bw);
@@ -88,9 +89,9 @@ test_bspline(gsl_bspline_workspace * bw)
 int
 main(int argc, char **argv)
 {
-  size_t order;
-  size_t breakpoints;
-  size_t i;
+  size_t order = 0;
+  size_t breakpoints = 0;
+  size_t i = 0;
 
   gsl_ieee_env_setup();
 
@@ -121,8 +122,8 @@ main(int argc, char **argv)
           gsl_vector *k = gsl_vector_alloc(breakpoints);
           for (i = 0; i < breakpoints; i++)
             {
-              double f;
-              double x;
+              double f = NAN;
+              double x = NAN;
               f = sqrt(i / (breakpoints - 1.0));
               x = (1 - f) * a + f * b;
               gsl_vector_set(k, i, x);
@@ -137,8 +138,8 @@ main(int argc, char **argv)
   /* Spot check known 0th, 1st, 2nd derivative
      evaluations for a particular k = 2 case.  */
   {
-    size_t i;
-    size_t j; /* looping */
+    size_t i = 0;
+    size_t j = 0; /* looping */
 
     const double xloc[4]     =  { 0.0,  1.0,  6.0,  7.0};
     const double deriv[4][3] =
@@ -192,8 +193,8 @@ main(int argc, char **argv)
   /* Spot check known 0th, 1st, 2nd derivative
      evaluations for a particular k = 3 case.  */
   {
-    size_t i;
-    size_t j; /* looping */
+    size_t i = 0;
+    size_t j = 0; /* looping */
     const double xloc[5]     =  { 0.0, 5.0, 9.0, 12.0, 15.0 };
     const double eval[5][6]  =
     {

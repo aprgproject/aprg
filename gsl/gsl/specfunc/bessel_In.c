@@ -46,7 +46,7 @@ gsl_sf_bessel_In_scaled_e(int n, const double x, gsl_sf_result * result)
   if(n == 1) {
     return gsl_sf_bessel_I1_scaled_e(x, result);
   }
-  else if(x == 0.0) {
+  if(x == 0.0) {
     result->val = 0.0;
     result->err = 0.0;
     return GSL_SUCCESS;

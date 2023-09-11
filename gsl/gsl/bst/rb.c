@@ -95,8 +95,8 @@ static int
 rb_empty (void * vtable)
 {
   rb_table * table = (rb_table *) vtable;
-  rb_node *p;
-  rb_node *q;
+  rb_node *p = NULL;
+  rb_node *q = NULL;
 
   for (p = table->rb_root; p != NULL; p = q)
     {
@@ -593,8 +593,8 @@ rb_t_find (const void * item, void * vtrav, const void * vtable)
 {
   const rb_table * table = (const rb_table *) vtable;
   rb_traverser * trav = (rb_traverser *) vtrav;
-  rb_node *p;
-  rb_node *q;
+  rb_node *p = NULL;
+  rb_node *q = NULL;
 
   trav->rb_table = table;
   trav->rb_height = 0;
@@ -720,7 +720,7 @@ rb_t_next (void * vtrav)
     }
   else
     {
-      rb_node *y;
+      rb_node *y = NULL;
 
       do
         {
@@ -782,7 +782,7 @@ rb_t_prev (void * vtrav)
     }
   else
     {
-      rb_node *y;
+      rb_node *y = NULL;
 
       do
         {

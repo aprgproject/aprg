@@ -23,6 +23,7 @@
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sf_bessel.h>
+#include <math.h>
 
 
 #define DYDX_p(p,u,x) (-(p)/(x) + (((nu)*(nu))/((x)*(x))-1.0)*(u))
@@ -76,8 +77,8 @@ gsl_sf_bessel_sequence_Jnu_e(double nu, gsl_mode_t mode, size_t size, double * v
 
     gsl_sf_result J0;
     gsl_sf_result J1;
-    double Jp;
-    double J;
+    double Jp = NAN;
+    double J = NAN;
     double x = NAN;
     size_t i = 0;
 

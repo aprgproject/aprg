@@ -82,8 +82,8 @@ gsl_linalg_COD_decomp_e(gsl_matrix * A, gsl_vector * tau_Q, gsl_vector * tau_Z,
     }
   else
     {
-      int status;
-      int signum;
+      int status = 0;
+      int signum = 0;
       size_t r = 0;
 
       /* decompose: A P = Q R */
@@ -508,8 +508,8 @@ cod_RZ(gsl_matrix * A, gsl_vector * tau)
 static double
 cod_householder_transform(double *alpha, gsl_vector * v)
 {
-  double beta;
-  double tau;
+  double beta = NAN;
+  double tau = NAN;
   double xnorm = gsl_blas_dnrm2(v);
 
   if (xnorm == 0)
@@ -567,7 +567,8 @@ cod_householder_hv(const double tau, const gsl_vector * v, gsl_vector * w)
       const size_t L = v->size;
       double w0 = gsl_vector_get(w, 0);
       gsl_vector_view w1 = gsl_vector_subvector(w, M - L, L);
-      double d1, d;
+      double d1;
+      double d;
 
       /* d1 := v . w(M-L:M) */
       gsl_blas_ddot(v, &w1.vector, &d1);
@@ -709,9 +710,9 @@ cod_trireg_solve (const gsl_matrix * R, const double lambda, const gsl_vector * 
 {
   const size_t N = R->size2;
   gsl_vector_const_view diag = gsl_matrix_const_diagonal(R);
-  size_t i;
-  size_t j;
-  size_t k;
+  size_t i = 0;
+  size_t j = 0;
+  size_t k = 0;
 
   if (lambda <= 0.0)
     {
@@ -745,8 +746,8 @@ cod_trireg_solve (const gsl_matrix * R, const double lambda, const gsl_vector * 
           /* determine a Givens rotation which eliminates the
              appropriate element in the current row of lambda*I */
 
-          double sine;
-          double cosine;
+          double sine = NAN;
+          double cosine = NAN;
 
           double xk = gsl_vector_get (x, k);
           double rkk = gsl_vector_get (work, k);

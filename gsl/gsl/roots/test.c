@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_test.h>
@@ -154,11 +155,11 @@ test_f (const gsl_root_fsolver_type * T, const char * description, gsl_function 
 {
   int status = 0;
   size_t iterations = 0;
-  double r;
-  double a;
-  double b;
-  double x_lower;
-  double x_upper;
+  double r = NAN;
+  double a = NAN;
+  double b = NAN;
+  double x_lower = NAN;
+  double x_upper = NAN;
   gsl_root_fsolver * s = NULL;
 
   x_lower = lower_bound;
@@ -219,8 +220,8 @@ test_f_e (const gsl_root_fsolver_type * T,
 {
   int status = 0;
   size_t iterations = 0;
-  double x_lower;
-  double x_upper;
+  double x_lower = NAN;
+  double x_upper = NAN;
   gsl_root_fsolver * s = NULL;
 
   x_lower = lower_bound;

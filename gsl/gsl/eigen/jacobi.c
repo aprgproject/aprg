@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_vector.h>
@@ -36,8 +37,8 @@ symschur2 (gsl_matrix * A, size_t p, size_t q, double *c, double *s)
       double App = gsl_matrix_get (A, p, p);
       double Aqq = gsl_matrix_get (A, q, q);
       double tau = (Aqq - App) / (2.0 * Apq);
-      double t;
-      double c1;
+      double t = NAN;
+      double c1 = NAN;
 
       if (tau >= 0.0)
         {
@@ -101,8 +102,8 @@ apply_jacobi_R (gsl_matrix * A, size_t p, size_t q, double c, double s)
 inline static double
 norm (gsl_matrix * A)
 {
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   size_t M = A->size1;
   size_t N = A->size2;
   double sum = 0.0;
@@ -148,12 +149,12 @@ gsl_eigen_jacobi (gsl_matrix * a,
                   gsl_vector * eval,
                   gsl_matrix * evec, unsigned int max_rot, unsigned int *nrot)
 {
-  size_t i;
-  size_t p;
-  size_t q;
+  size_t i = 0;
+  size_t p = 0;
+  size_t q = 0;
   const size_t M = a->size1;
   const size_t N = a->size2;
-  double red;
+  double red = NAN;
   double redsum = 0.0;
 
   if (M != N)
@@ -184,8 +185,8 @@ gsl_eigen_jacobi (gsl_matrix * a,
         {
           for (q = p + 1; q < N; q++)
             {
-              double c;
-              double s;
+              double c = NAN;
+              double s = NAN;
 
               red = symschur2 (a, p, q, &c, &s);
               redsum += red;
@@ -231,9 +232,9 @@ gsl_eigen_invert_jacobi (const gsl_matrix * a,
   
   {
     const size_t n = a->size2;
-    size_t i;
-    size_t j;
-    size_t k;
+    size_t i = 0;
+    size_t j = 0;
+    size_t k = 0;
     unsigned int nrot = 0;
     int status = 0;
 

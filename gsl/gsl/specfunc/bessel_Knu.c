@@ -25,6 +25,7 @@
 #include <gsl/gsl_sf_exp.h>
 #include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_sf_bessel.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -60,13 +61,13 @@ gsl_sf_bessel_Knu_scaled_e10_e(const double nu, const double x, gsl_sf_result_e1
   else {
     int N = (int)(nu + 0.5);
     double mu = nu - N;      /* -1/2 <= mu <= 1/2 */
-    double K_mu;
-    double K_mup1;
-    double Kp_mu;
-    double K_nu;
-    double K_nup1;
-    double K_num1;
-    int n;
+    double K_mu = NAN;
+    double K_mup1 = NAN;
+    double Kp_mu = NAN;
+    double K_nu = NAN;
+    double K_nup1 = NAN;
+    double K_num1 = NAN;
+    int n = 0;
     int e10 = 0;
 
     if(x < 2.0) {

@@ -36,6 +36,7 @@
  * convention.  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_vector.h>
@@ -82,7 +83,7 @@ gsl_linalg_complex_householder_transform (gsl_vector_complex * v)
   
     
       gsl_complex tau ;
-      double beta_r;
+      double beta_r = NAN;
 
       gsl_vector_complex_view x = gsl_vector_complex_subvector (v, 1, n - 1) ; 
       gsl_complex alpha = gsl_vector_complex_get (v, 0) ;            
@@ -238,8 +239,8 @@ gsl_linalg_complex_householder_hm (gsl_complex tau, const gsl_vector_complex * v
 {
   /* applies a householder transformation v,tau to matrix m */
 
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   if (GSL_REAL(tau) == 0.0 && GSL_IMAG(tau) == 0.0)
     {
@@ -291,8 +292,8 @@ gsl_linalg_complex_householder_mh (gsl_complex tau, const gsl_vector_complex * v
 {
   /* applies a householder transformation v,tau to matrix m on the right */
 
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   if (GSL_REAL(tau) == 0.0 && GSL_IMAG(tau) == 0.0)
     {

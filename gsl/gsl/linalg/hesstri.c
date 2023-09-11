@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 
@@ -69,10 +70,10 @@ gsl_linalg_hesstri_decomp(gsl_matrix * A, gsl_matrix * B, gsl_matrix * U,
     }
   else
     {
-      double cs;
-      double sn;          /* rotation parameters */
-      size_t i;
-      size_t j;            /* looping */
+      double cs = NAN;
+      double sn = NAN;          /* rotation parameters */
+      size_t i = 0;
+      size_t j = 0;            /* looping */
       gsl_vector_view xv;
       gsl_vector_view yv; /* temporary views */
 

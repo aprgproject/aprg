@@ -41,7 +41,7 @@ test_sf_frac_diff(double x1, double x2)
   }
   if (x1 == 0.0) {
     return fabs(x2);
-  } else if(x1 <= DBL_MAX && x2 <= DBL_MAX && (x1 + x2 != 0.0)) {
+  } if(x1 <= DBL_MAX && x2 <= DBL_MAX && (x1 + x2 != 0.0)) {
     return fabs((x1-x2)/(x1+x2));
   }
   else {
@@ -1558,11 +1558,11 @@ int test_gegen(void)
 
 int test_jac(void)
 {
-  double u;
-  double m;
-  double sn;
-  double cn;
-  double dn;
+  double u = NAN;
+  double m = NAN;
+  double sn = NAN;
+  double cn = NAN;
+  double dn = NAN;
   int stat_ej = 0;
   int s = 0;
   int sa = 0;

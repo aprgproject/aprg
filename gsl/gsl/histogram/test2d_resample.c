@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 #include <gsl/gsl_histogram2d.h>
@@ -29,8 +30,8 @@
 void
 test2d_resample (void)
 {
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   int status = 0;
   double total = 0;
   size_t N = 200000;
@@ -64,8 +65,8 @@ test2d_resample (void)
       {
         double u = urand();
         double v = urand();
-        double x;
-        double y;
+        double x = NAN;
+        double y = NAN;
         status = gsl_histogram2d_pdf_sample (p, u, v, &x, &y);
         status = gsl_histogram2d_increment (hh, x, y);
       }
@@ -76,13 +77,13 @@ test2d_resample (void)
         for (j = 0; j < 20; j++)
           {
             double z = 4 * total * gsl_histogram2d_get (hh, i, j) / (double) N;
-            size_t k1;
-            size_t k2;
+            size_t k1 = 0;
+            size_t k2 = 0;
             double ya = NAN;
-            double x;
-            double xmax;
-            double y;
-            double ymax;
+            double x = NAN;
+            double xmax = NAN;
+            double y = NAN;
+            double ymax = NAN;
 
             gsl_histogram2d_get_xrange (hh, i, &x, &xmax);
             gsl_histogram2d_get_yrange (hh, j, &y, &ymax);

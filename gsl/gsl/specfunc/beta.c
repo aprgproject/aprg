@@ -75,9 +75,9 @@ gsl_sf_lnbeta_sgn_e(const double x, const double y, gsl_sf_result * result, doub
       double lnpre_err = NAN;
       double lnpow_val = NAN;
       double lnpow_err = NAN;
-      double t1;
-      double t2;
-      double t3;
+      double t1 = NAN;
+      double t2 = NAN;
+      double t3 = NAN;
       gsl_sf_result lnopr;
       gsl_sf_result gsx;
       gsl_sf_result gsy;
@@ -107,9 +107,9 @@ gsl_sf_lnbeta_sgn_e(const double x, const double y, gsl_sf_result * result, doub
     gsl_sf_result lgx;
     gsl_sf_result lgy;
     gsl_sf_result lgxy;
-    double sgx;
-    double sgy;
-    double sgxy;
+    double sgx = NAN;
+    double sgy = NAN;
+    double sgxy = NAN;
     double xy = x+y;
     int stat_gx  = gsl_sf_lngamma_sgn_e(x, &lgx, &sgx);
     int stat_gy  = gsl_sf_lngamma_sgn_e(y, &lgy, &sgy);
@@ -150,18 +150,18 @@ gsl_sf_beta_e(const double x, const double y, gsl_sf_result * result)
     return GSL_SUCCESS;
   } else {
     gsl_sf_result lb;
-    double sgn;
+    double sgn = NAN;
     int stat_lb = gsl_sf_lnbeta_sgn_e(x, y, &lb, &sgn);
     if(stat_lb == GSL_SUCCESS) {
       int status = gsl_sf_exp_err_e(lb.val, lb.err, result);
       result->val *= sgn;
       return status;
     }
-    else {
+    
       result->val = 0.0;
       result->err = 0.0;
       return stat_lb;
-    }
+   
   }
 }
 

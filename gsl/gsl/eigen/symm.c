@@ -104,8 +104,8 @@ gsl_eigen_symm (gsl_matrix * A, gsl_vector * eval,
       double *const d = w->d;
       double *const sd = w->sd;
 
-      size_t a;
-      size_t b;
+      size_t a = 0;
+      size_t b = 0;
 
       /* handle special case */
 

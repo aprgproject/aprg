@@ -97,8 +97,8 @@ gsl_complex_logabs (gsl_complex z)
 {                               /* return log|z| */
   double xabs = fabs (GSL_REAL (z));
   double yabs = fabs (GSL_IMAG (z));
-  double max;
-  double u;
+  double max = NAN;
+  double u = NAN;
 
   if (xabs >= yabs)
     {
@@ -558,8 +558,8 @@ gsl_complex_arcsin (gsl_complex a)
       double B = x / A;
       double y2 = y * y;
 
-      double real;
-      double imag;
+      double real = NAN;
+      double imag = NAN;
 
       const double A_crossover = 1.5;
       const double B_crossover = 0.6417;
@@ -654,8 +654,8 @@ gsl_complex_arccos (gsl_complex a)
       double B = x / A;
       double y2 = y * y;
 
-      double real;
-      double imag;
+      double real = NAN;
+      double imag = NAN;
 
       const double A_crossover = 1.5;
       const double B_crossover = 0.6417;

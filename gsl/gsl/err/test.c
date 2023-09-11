@@ -33,8 +33,8 @@ int verbose = 0 ;
 int
 main (void)
 {
-  int i;
-  int j;
+  int i = 0;
+  int j = 0;
   int n = 0 ;
 
   struct { 

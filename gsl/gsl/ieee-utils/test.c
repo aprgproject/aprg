@@ -53,8 +53,8 @@
 int
 main (void)
 {
-  float zerof = 0.0f;
-  float minus_onef = -1.0f ;
+  float zerof = 0.0F;
+  float minus_onef = -1.0F ;
   double zero = 0.0;
   double minus_one = -1.0 ;
 
@@ -251,8 +251,8 @@ main (void)
 
   {
     gsl_ieee_float_rep r;
-    float x = 1.0f;
-    float y = 2.0f;
+    float x = 1.0F;
+    float y = 2.0F;
     float z = zerof;
 
     x = x / z;

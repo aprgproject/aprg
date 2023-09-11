@@ -46,12 +46,12 @@ bessel_Kn_scaled_small_x(const int n, const double x, gsl_sf_result * result)
   double ex = exp(x);
   gsl_sf_result ln_nm1_fact;
   double k_term = NAN;
-  double term1;
-  double sum1;
-  double ln_pre1;
-  double term2;
-  double sum2;
-  double pre2;
+  double term1 = NAN;
+  double sum1 = NAN;
+  double ln_pre1 = NAN;
+  double term2 = NAN;
+  double sum2 = NAN;
+  double pre2 = NAN;
 
   gsl_sf_lnfact_e((unsigned int)(n-1), &ln_nm1_fact);
 

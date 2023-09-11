@@ -103,10 +103,10 @@ check (double x, double actual, double eps)
     {
       return fabs(x) > eps;
     }
-  else
-    {
+  
+    
       return (fabs(x - actual)/fabs(actual)) > eps;
-    }
+   
 }
 
 
@@ -136,8 +136,8 @@ vector_free (gsl_vector * v)
 gsl_matrix *
 create_hilbert_matrix(unsigned long size)
 {
-  unsigned long i;
-  unsigned long j;
+  unsigned long i = 0;
+  unsigned long j = 0;
   gsl_matrix * m = gsl_matrix_alloc(size, size);
   for(i=0; i<size; i++) {
     for(j=0; j<size; j++) {
@@ -150,8 +150,8 @@ create_hilbert_matrix(unsigned long size)
 gsl_matrix *
 create_general_matrix(unsigned long size1, unsigned long size2)
 {
-  unsigned long i;
-  unsigned long j;
+  unsigned long i = 0;
+  unsigned long j = 0;
   gsl_matrix * m = gsl_matrix_alloc(size1, size2);
   for(i=0; i<size1; i++) {
     for(j=0; j<size2; j++) {
@@ -164,8 +164,8 @@ create_general_matrix(unsigned long size1, unsigned long size2)
 gsl_matrix *
 create_singular_matrix(unsigned long size1, unsigned long size2)
 {
-  unsigned long i;
-  unsigned long j;
+  unsigned long i = 0;
+  unsigned long j = 0;
   gsl_matrix * m = gsl_matrix_alloc(size1, size2);
   for(i=0; i<size1; i++) {
     for(j=0; j<size2; j++) {
@@ -185,8 +185,8 @@ create_singular_matrix(unsigned long size1, unsigned long size2)
 gsl_matrix *
 create_vandermonde_matrix(unsigned long size)
 {
-  unsigned long i;
-  unsigned long j;
+  unsigned long i = 0;
+  unsigned long j = 0;
   gsl_matrix * m = gsl_matrix_alloc(size, size);
   for(i=0; i<size; i++) {
     for(j=0; j<size; j++) {
@@ -199,8 +199,8 @@ create_vandermonde_matrix(unsigned long size)
 gsl_matrix *
 create_moler_matrix(unsigned long size)
 {
-  unsigned long i;
-  unsigned long j;
+  unsigned long i = 0;
+  unsigned long j = 0;
   gsl_matrix * m = gsl_matrix_alloc(size, size);
   for(i=0; i<size; i++) {
     for(j=0; j<size; j++) {
@@ -213,8 +213,8 @@ create_moler_matrix(unsigned long size)
 gsl_matrix_complex *
 create_complex_matrix(unsigned long size)
 {
-  unsigned long i;
-  unsigned long j;
+  unsigned long i = 0;
+  unsigned long j = 0;
   gsl_matrix_complex * m = gsl_matrix_complex_alloc(size, size);
   for(i=0; i<size; i++) {
     for(j=0; j<size; j++) {
@@ -270,8 +270,8 @@ gsl_matrix *
 create_sparse_matrix(unsigned long m, unsigned long n) {
   gsl_matrix* A = gsl_matrix_calloc(m, n);
   
-  unsigned long int i;
-  unsigned long int j;
+  unsigned long int i = 0;
+  unsigned long int j = 0;
 
   for (i = 0; i < m; i++) {
     for (j = 0; j < n; j++) {
@@ -300,8 +300,8 @@ static int
 create_tri_matrix(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_matrix * m, gsl_rng * r)
 {
   const size_t N = m->size1;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   gsl_matrix_set_zero(m);
 
@@ -418,7 +418,7 @@ int
 test_QR_solve_dim(const gsl_matrix * m, const double * actual, double eps)
 {
   int s = 0;
-  unsigned long i;
+  unsigned long i = 0;
   unsigned long dim = m->size1;
 
   gsl_vector * rhs = gsl_vector_alloc(dim);
@@ -492,7 +492,7 @@ int
 test_QR_QRsolve_dim(const gsl_matrix * m, const double * actual, double eps)
 {
   int s = 0;
-  unsigned long i;
+  unsigned long i = 0;
   unsigned long dim = m->size1;
 
   gsl_vector * rhs = gsl_vector_alloc(dim);
@@ -570,7 +570,7 @@ int
 test_QR_lssolve_dim(const gsl_matrix * m, const double * actual, double eps)
 {
   int s = 0;
-  unsigned long i;
+  unsigned long i = 0;
   unsigned long M = m->size1;
   unsigned long N = m->size2;
 
@@ -669,7 +669,7 @@ int
 test_QRPT_lssolve_dim(const gsl_matrix * m, const double * actual, double eps)
 {
   int s = 0;
-  size_t i;
+  size_t i = 0;
   size_t M = m->size1;
   size_t N = m->size2;
 
@@ -784,7 +784,7 @@ int
 test_QRPT_lssolve2_dim(const gsl_matrix * m, const double * actual, double eps)
 {
   int s = 0;
-  size_t i;
+  size_t i = 0;
   size_t M = m->size1;
   size_t N = m->size2;
 
@@ -907,7 +907,7 @@ test_QRPT_solve_dim(const gsl_matrix * m, const double * actual, double eps)
 {
   int s = 0;
   int signum = 0;
-  unsigned long i;
+  unsigned long i = 0;
   unsigned long dim = m->size1;
 
   gsl_permutation * perm = gsl_permutation_alloc(dim);
@@ -985,7 +985,7 @@ test_QRPT_QRsolve_dim(const gsl_matrix * m, const double * actual, double eps)
 {
   int s = 0;
   int signum = 0;
-  unsigned long i;
+  unsigned long i = 0;
   unsigned long dim = m->size1;
 
   gsl_permutation * perm = gsl_permutation_alloc(dim);
@@ -1066,9 +1066,9 @@ int
 test_QRPT_decomp_dim(const gsl_matrix * m, const double expected_rcond, double eps)
 {
   int s = 0;
-  int signum;
-  unsigned long i;
-  unsigned long j;
+  int signum = 0;
+  unsigned long i = 0;
+  unsigned long j = 0;
   unsigned long M = m->size1;
   unsigned long N = m->size2;
 
@@ -1200,9 +1200,9 @@ int
 test_QR_update_dim(const gsl_matrix * m, double eps)
 {
   int s = 0;
-  unsigned long i;
-  unsigned long j;
-  unsigned long k;
+  unsigned long i = 0;
+  unsigned long j = 0;
+  unsigned long k = 0;
   unsigned long M = m->size1;
   unsigned long N = m->size2;
 
@@ -1353,10 +1353,10 @@ int
 test_QRPT_update_dim(const gsl_matrix * m, double eps)
 {
   int s = 0;
-  int signum;
-  unsigned long i;
-  unsigned long j;
-  unsigned long k;
+  int signum = 0;
+  unsigned long i = 0;
+  unsigned long j = 0;
+  unsigned long k = 0;
   unsigned long M = m->size1;
   unsigned long N = m->size2;
 
@@ -1517,7 +1517,7 @@ int
 test_SV_solve_dim(const gsl_matrix * m, const double * actual, double eps)
 {
   int s = 0;
-  unsigned long i;
+  unsigned long i = 0;
   unsigned long dim = m->size1;
 
   gsl_vector * rhs = gsl_vector_alloc(dim);
@@ -1591,8 +1591,8 @@ test_SV_decomp_dim(const gsl_matrix * m, double eps)
 {
   int s = 0;
   double di1 = NAN;
-  unsigned long i;
-  unsigned long j;
+  unsigned long i = 0;
+  unsigned long j = 0;
   unsigned long M = m->size1;
   unsigned long N = m->size2;
   unsigned long input_nans = 0;
@@ -1787,10 +1787,10 @@ int test_SV_decomp(void)
 
 
   {
-    double i1;
-    double i2;
-    double i3;
-    double i4;
+    double i1 = NAN;
+    double i2 = NAN;
+    double i3 = NAN;
+    double i4 = NAN;
     double lower = -2;
     double upper = 2;
 
@@ -1882,8 +1882,8 @@ test_SV_decomp_mod_dim(const gsl_matrix * m, double eps)
 {
   int s = 0;
   double di1 = NAN;
-  unsigned long i;
-  unsigned long j;
+  unsigned long i = 0;
+  unsigned long j = 0;
   unsigned long M = m->size1;
   unsigned long N = m->size2;
 
@@ -2045,10 +2045,10 @@ int test_SV_decomp_mod(void)
 
 
   {
-    double i1;
-    double i2;
-    double i3;
-    double i4;
+    double i1 = NAN;
+    double i2 = NAN;
+    double i3 = NAN;
+    double i4 = NAN;
     double lower = -2;
     double upper = 2;
 
@@ -2140,8 +2140,8 @@ test_SV_decomp_jacobi_dim(const gsl_matrix * m, double eps)
 {
   int s = 0;
   double di1 = NAN;
-  unsigned long i;
-  unsigned long j;
+  unsigned long i = 0;
+  unsigned long j = 0;
   unsigned long M = m->size1;
   unsigned long N = m->size2;
 
@@ -2304,10 +2304,10 @@ int test_SV_decomp_jacobi(void)
 #endif
 
   {
-    double i1;
-    double i2;
-    double i3;
-    double i4;
+    double i1 = NAN;
+    double i2 = NAN;
+    double i3 = NAN;
+    double i4 = NAN;
     double lower = -2;
     double upper = 2;
 
@@ -2432,7 +2432,7 @@ int
 test_cholesky_solve_dim(const gsl_matrix * m, const double * actual, double eps)
 {
   int s = 0;
-  unsigned long i;
+  unsigned long i = 0;
   unsigned long dim = m->size1;
 
   gsl_vector * rhs = gsl_vector_alloc(dim);
@@ -2461,7 +2461,7 @@ int
 test_cholesky_solve2_dim(const gsl_matrix * m, const double * actual, double eps)
 {
   int s = 0;
-  unsigned long i;
+  unsigned long i = 0;
   unsigned long dim = m->size1;
 
   gsl_vector * rhs = gsl_vector_alloc(dim);
@@ -2537,8 +2537,8 @@ test_cholesky_decomp_unit_dim(const gsl_matrix * m, double eps)
   int s = 0;
   const unsigned long M = m->size1;
   const unsigned long N = m->size2;
-  unsigned long i;
-  unsigned long j;
+  unsigned long i = 0;
+  unsigned long j = 0;
 
   gsl_matrix * v  = gsl_matrix_alloc(M,N);
   gsl_matrix * a  = gsl_matrix_alloc(M,N);
@@ -2643,7 +2643,7 @@ int
 test_choleskyc_solve_dim(const gsl_matrix_complex * m, const gsl_vector_complex * actual, double eps)
 {
   int s = 0;
-  unsigned long i;
+  unsigned long i = 0;
   unsigned long dim = m->size1;
   gsl_complex z;
   gsl_vector_complex * rhs = gsl_vector_complex_alloc(dim);
@@ -2709,7 +2709,7 @@ int
 test_HH_solve_dim(const gsl_matrix * m, const double * actual, double eps)
 {
   int s = 0;
-  unsigned long i;
+  unsigned long i = 0;
   unsigned long dim = m->size1;
 
   gsl_permutation * perm = gsl_permutation_alloc(dim);
@@ -3093,10 +3093,10 @@ int
 test_bidiag_decomp_dim(const gsl_matrix * m, double eps)
 {
   int s = 0;
-  unsigned long i;
-  unsigned long j;
-  unsigned long k;
-  unsigned long r;
+  unsigned long i = 0;
+  unsigned long j = 0;
+  unsigned long k = 0;
+  unsigned long r = 0;
   unsigned long M = m->size1;
   unsigned long N = m->size2;
 
@@ -3205,9 +3205,9 @@ test_tri_invert2(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_rng * r, const double
 {
   const size_t N_max = 200;
   int s = 0;
-  size_t n;
-  size_t i;
-  size_t j;
+  size_t n = 0;
+  size_t i = 0;
+  size_t j = 0;
 
   for (n = 1; n <= N_max; ++n)
     {

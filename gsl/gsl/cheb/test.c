@@ -205,8 +205,8 @@ main(void)
   }
   
   for(x=-M_PI; x<M_PI; x += M_PI/100.0) {
-    double r;
-    double e;
+    double r = NAN;
+    double e = NAN;
     gsl_cheb_eval_err(cs, x, &r, &e);
     gsl_test_abs(r, sin(x), tol, "gsl_cheb_eval_err, sin(%.3g)", x);
     gsl_test_factor(fabs(r-sin(x)) + GSL_DBL_EPSILON, e, ftol, 
@@ -219,8 +219,8 @@ main(void)
   }
 
   for(x=-M_PI; x<M_PI; x += M_PI/100.0) {
-    double r;
-    double e;
+    double r = NAN;
+    double e = NAN;
     gsl_cheb_eval_n_err(cs, 25, x, &r, &e);
     gsl_test_abs(r, sin(x), 100.0 * tol, "gsl_cheb_eval_n_err, deriv sin(%.3g)", x);
     gsl_test_factor(fabs(r-sin(x)) + GSL_DBL_EPSILON, e, ftol, 

@@ -117,8 +117,8 @@ gsl_eigen_symmv (gsl_matrix * A, gsl_vector * eval, gsl_matrix * evec,
       double *const d = w->d;
       double *const sd = w->sd;
       const size_t N = A->size1;
-      size_t a;
-      size_t b;
+      size_t a = 0;
+      size_t b = 0;
 
       /* handle special case */
 

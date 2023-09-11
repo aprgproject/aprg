@@ -1694,9 +1694,9 @@ test_nonstiff_problems (void)
   /* initial values for each ode-solver */
   double y[MAXEQ * MAXNS];
 
-  size_t i;
-  size_t k;
-  size_t p;
+  size_t i = 0;
+  size_t k = 0;
+  size_t p = 0;
 
   /* Number of problems to test */
 #define CONST_NONSTIFF_NPROB 4
@@ -1826,9 +1826,9 @@ test_stiff_problems (void)
   /* initial values for each ode-solver */
   double y[MAXEQ * MAXNS];
 
-  size_t i;
-  size_t k;
-  size_t p;
+  size_t i = 0;
+  size_t k = 0;
+  size_t p = 0;
 
   /* Number of problems to test */
 #define CONST_STIFF_NPROB 3
@@ -1945,9 +1945,9 @@ test_extreme_problems (void)
   /* initial values for each ode-solver */
   double y[MAXEQ * MAXNS];
 
-  size_t i;
-  size_t k;
-  size_t p;
+  size_t i = 0;
+  size_t k = 0;
+  size_t p = 0;
 
   /* Number of problems to test */
 #define CONST_EXTREME_NPROB 3
@@ -2262,10 +2262,10 @@ benchmark_precision (void)
   /* precise results from e.g. analytical solution */
   double yres[MAXEQ];
 
-  size_t i;
-  size_t j;
-  size_t k;
-  size_t p;
+  size_t i = 0;
+  size_t j = 0;
+  size_t k = 0;
+  size_t p = 0;
 
   /* Number of problems to test */
 #define CONST_BENCHMARK_PRECISION_NPROB 3

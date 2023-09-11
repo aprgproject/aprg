@@ -26,6 +26,7 @@
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_complex.h>
 #include <gsl/gsl_complex_math.h>
+#include <math.h>
 
 /*
  * This module contains some routines related to manipulating the
@@ -82,33 +83,33 @@ gsl_schur_gen_eigvals(const gsl_matrix *A, const gsl_matrix *B, double *wr1,
   const double safemax = 1.0 / safemin;
   const double rtmin = sqrt(safemin);
   const double rtmax = 1.0 / rtmin;
-  double anorm;
-  double bnorm;
-  double ascale;
-  double bscale;
-  double bsize;
-  double s1;
-  double s2;
-  double A11;
-  double A12;
-  double A21;
-  double A22;
-  double B11;
-  double B12;
-  double B22;
-  double binv11;
-  double binv22;
+  double anorm = NAN;
+  double bnorm = NAN;
+  double ascale = NAN;
+  double bscale = NAN;
+  double bsize = NAN;
+  double s1 = NAN;
+  double s2 = NAN;
+  double A11 = NAN;
+  double A12 = NAN;
+  double A21 = NAN;
+  double A22 = NAN;
+  double B11 = NAN;
+  double B12 = NAN;
+  double B22 = NAN;
+  double binv11 = NAN;
+  double binv22 = NAN;
   double bmin = NAN;
-  double as11;
-  double as12;
-  double as22;
-  double abi22;
-  double pp;
-  double qq;
-  double shift;
-  double ss;
-  double discr;
-  double r;
+  double as11 = NAN;
+  double as12 = NAN;
+  double as22 = NAN;
+  double abi22 = NAN;
+  double pp = NAN;
+  double qq = NAN;
+  double shift = NAN;
+  double ss = NAN;
+  double discr = NAN;
+  double r = NAN;
 
   /* scale A */
   anorm = GSL_MAX(GSL_MAX(fabs(gsl_matrix_get(A, 0, 0)) +
@@ -224,14 +225,14 @@ gsl_schur_gen_eigvals(const gsl_matrix *A, const gsl_matrix *B, double *wr1,
   /* compute scaling */
   {
     const double fuzzy1 = 1.0 + 1.0e-5;
-    double c1;
-    double c2;
-    double c3;
-    double c4;
-    double c5;
-    double wabs;
-    double wsize;
-    double wscale;
+    double c1 = NAN;
+    double c2 = NAN;
+    double c3 = NAN;
+    double c4 = NAN;
+    double c5 = NAN;
+    double wabs = NAN;
+    double wsize = NAN;
+    double wscale = NAN;
 
     c1 = bsize * (safemin * GSL_MAX(1.0, ascale));
     c2 = safemin * GSL_MAX(1.0, bnorm);
@@ -362,9 +363,9 @@ gsl_schur_solve_equation(double ca, const gsl_matrix *A, double z,
   
   if (N == 1)
     {
-      double c;
+      double c = NAN;
       double /* denominator */
-             cnorm; /* |c| */
+             cnorm = NAN; /* |c| */
 
       /* we have a 1-by-1 (real) scalar system to solve */
 
@@ -396,22 +397,22 @@ gsl_schur_solve_equation(double ca, const gsl_matrix *A, double z,
       double cr[2][2];
       double *crv = NULL;
       double cmax = NAN;
-      size_t icmax;
-      size_t j;
-      double bval1;
-      double bval2;
-      double ur11;
-      double ur12;
-      double ur22;
-      double ur11r;
-      double cr21;
-      double cr22;
+      size_t icmax = 0;
+      size_t j = 0;
+      double bval1 = NAN;
+      double bval2 = NAN;
+      double ur11 = NAN;
+      double ur12 = NAN;
+      double ur22 = NAN;
+      double ur11r = NAN;
+      double cr21 = NAN;
+      double cr22 = NAN;
       double lr21 = NAN;
-      double b1;
-      double b2;
-      double bbnd;
-      double x1;
-      double x2;
+      double b1 = NAN;
+      double b2 = NAN;
+      double bbnd = NAN;
+      double x1 = NAN;
+      double x2 = NAN;
       double temp = NAN;
       size_t ipivot[4][4] = { { 0, 1, 2, 3 },
                               { 1, 0, 3, 2 },
@@ -586,10 +587,10 @@ gsl_schur_solve_equation_z(double ca, const gsl_matrix *A, gsl_complex *z,
 
   if (N == 1)
     {
-      double cr;
+      double cr = NAN;
       double /* denominator */
-             ci;
-      double cnorm; /* |c| */
+             ci = NAN;
+      double cnorm = NAN; /* |c| */
       gsl_complex bval;
       gsl_complex c;
       gsl_complex xval;
@@ -633,40 +634,40 @@ gsl_schur_solve_equation_z(double ca, const gsl_matrix *A, gsl_complex *z,
     {
       double cr[2][2];
       double ci[2][2];
-      double *civ;
-      double *crv;
+      double *civ = NULL;
+      double *crv = NULL;
       double cmax = NAN;
       gsl_complex bval1;
       gsl_complex bval2;
       gsl_complex xval1;
       gsl_complex xval2;
-      double xr1;
-      double xi1;
+      double xr1 = NAN;
+      double xi1 = NAN;
       size_t icmax = 0;
       size_t j = 0;
       double temp = NAN;
-      double ur11;
-      double ur12;
-      double ur22;
-      double ui11;
-      double ui12;
-      double ui22;
-      double ur11r;
-      double ui11r;
-      double ur12s;
-      double ui12s;
+      double ur11 = NAN;
+      double ur12 = NAN;
+      double ur22 = NAN;
+      double ui11 = NAN;
+      double ui12 = NAN;
+      double ui22 = NAN;
+      double ur11r = NAN;
+      double ui11r = NAN;
+      double ur12s = NAN;
+      double ui12s = NAN;
       double u22abs = NAN;
-      double lr21;
-      double li21;
-      double cr21;
-      double cr22;
-      double ci21;
-      double ci22;
-      double br1;
-      double bi1;
-      double br2;
-      double bi2;
-      double bbnd;
+      double lr21 = NAN;
+      double li21 = NAN;
+      double cr21 = NAN;
+      double cr22 = NAN;
+      double ci21 = NAN;
+      double ci22 = NAN;
+      double br1 = NAN;
+      double bi1 = NAN;
+      double br2 = NAN;
+      double bi2 = NAN;
+      double bbnd = NAN;
       gsl_complex b1;
       gsl_complex b2;
       size_t ipivot[4][4] = { { 0, 1, 2, 3 },

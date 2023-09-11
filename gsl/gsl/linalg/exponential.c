@@ -24,6 +24,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_mode.h>
@@ -70,8 +71,8 @@ inline
 static double
 sup_norm(const gsl_matrix * A)
 {
-  double min;
-  double max;
+  double min = NAN;
+  double max = NAN;
   gsl_matrix_minmax(A, &min, &max);
   return GSL_MAX_DBL(fabs(min), fabs(max));
 }
@@ -84,8 +85,8 @@ obtain_suggestion(const gsl_matrix * A, gsl_mode_t mode)
   const unsigned int mode_prec = GSL_MODE_PREC(mode);
   const double norm_A = sup_norm(A);
   if(norm_A < 0.01) { return mvl_tab[mode_prec][0];
-  } if(norm_A < 0.1) return mvl_tab[mode_prec][1];
-  else if(norm_A < 1.0) return mvl_tab[mode_prec][2];
+  } if(norm_A < 0.1) { return mvl_tab[mode_prec][1];
+  } if(norm_A < 1.0) return mvl_tab[mode_prec][2];
   else if(norm_A < 10.0) return mvl_tab[mode_prec][3];
   else if(norm_A < 100.0) return mvl_tab[mode_prec][4];
   else if(norm_A < 1000.0) return mvl_tab[mode_prec][5];

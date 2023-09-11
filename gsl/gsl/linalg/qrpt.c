@@ -105,7 +105,7 @@ gsl_linalg_QRPT_decomp (gsl_matrix * A, gsl_vector * tau, gsl_permutation * p, i
           /* Bring the column of largest norm into the pivot position */
 
           double max_norm = gsl_vector_get(norm, i);
-          size_t j;
+          size_t j = 0;
           size_t kmax = i;
 
           for (j = i + 1; j < N; j++)
@@ -401,8 +401,8 @@ gsl_linalg_QRPT_QRsolve (const gsl_matrix * Q, const gsl_matrix * R,
     {
       return GSL_EBADLEN;
     }
-  else
-    {
+  
+    
       /* compute b' = Q^T b */
 
       gsl_blas_dgemv (CblasTrans, 1.0, Q, b, 0.0, x);
@@ -416,7 +416,7 @@ gsl_linalg_QRPT_QRsolve (const gsl_matrix * Q, const gsl_matrix * R,
       gsl_permute_vector_inverse (p, x);
 
       return GSL_SUCCESS;
-    }
+   
 }
 
 int
@@ -522,8 +522,8 @@ gsl_linalg_QRPT_update (gsl_matrix * Q, gsl_matrix * R,
     }
   else
     {
-      size_t j;
-      size_t k;
+      size_t j = 0;
+      size_t k = 0;
       double w0 = NAN;
 
       /* Apply Given's rotations to reduce w to (|w|, 0, 0, ... , 0) 
@@ -535,8 +535,8 @@ gsl_linalg_QRPT_update (gsl_matrix * Q, gsl_matrix * R,
 
       for (k = M - 1; k > 0; k--)
         {
-          double c;
-          double s;
+          double c = NAN;
+          double s = NAN;
           double wk = gsl_vector_get (w, k);
           double wkm1 = gsl_vector_get (w, k - 1);
 
@@ -562,8 +562,8 @@ gsl_linalg_QRPT_update (gsl_matrix * Q, gsl_matrix * R,
 
      for (k = 1; k < GSL_MIN(M,N+1); k++)
         {
-          double c;
-          double s;
+          double c = NAN;
+          double s = NAN;
           double diag = gsl_matrix_get (R, k - 1, k - 1);
           double offdiag = gsl_matrix_get (R, k, k - 1);
 
@@ -601,9 +601,9 @@ gsl_linalg_QRPT_rank (const gsl_matrix * QR, const double tol)
 
   if (tol < 0.0)
     {
-      double min;
-      double max;
-      double absmax;
+      double min = NAN;
+      double max = NAN;
+      double absmax = NAN;
       int ee = 0;
 
       gsl_vector_minmax(&diag.vector, &min, &max);

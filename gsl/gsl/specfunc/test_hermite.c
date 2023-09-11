@@ -21,6 +21,7 @@
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_test.h>
 #include <gsl/gsl_sf.h>
+#include <math.h>
 
 #include "test_sf.h"
 
@@ -42,8 +43,8 @@ test_hermite_id1(const int n, const double x, const double y)
 {
   double *a = malloc((n + 1) * sizeof(double));
   double *b = malloc((n + 1) * sizeof(double));
-  double lhs;
-  double rhs;
+  double lhs = NAN;
+  double rhs = NAN;
   int k = 0;
 
   a[0] = gsl_pow_int(2.0 * y, n);
@@ -73,9 +74,9 @@ test_hermite(void)
   gsl_sf_result r;
   
   int s = 0;
-  int m;
-  int n;
-  int sa;
+  int m = 0;
+  int n = 0;
+  int sa = 0;
   double res[256];
   double x = NAN;
   const double aizero1 = -2.3381074104597670384891972524467; /* first zero of the Airy function Ai */

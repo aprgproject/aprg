@@ -111,7 +111,7 @@ gsl_linalg_PTLQ_decomp (gsl_matrix * A, gsl_vector * tau, gsl_permutation * p, i
           /* Bring the column of largest norm into the pivot position */
 
           double max_norm = gsl_vector_get(norm, i);
-          size_t j;
+          size_t j = 0;
           size_t kmax = i;
 
           for (j = i + 1; j < N; j++)
@@ -319,8 +319,8 @@ gsl_linalg_PTLQ_LQsolve_T (const gsl_matrix * Q, const gsl_matrix * L,
     {
       return GSL_EBADLEN;
     }
-  else
-    {
+  
+    
       /* compute b' = Q b */
 
       gsl_blas_dgemv (CblasNoTrans, 1.0, Q, b, 0.0, x);
@@ -334,7 +334,7 @@ gsl_linalg_PTLQ_LQsolve_T (const gsl_matrix * Q, const gsl_matrix * L,
       gsl_permute_vector_inverse (p, x);
 
       return GSL_SUCCESS;
-    }
+   
 }
 
 int
@@ -433,8 +433,8 @@ gsl_linalg_PTLQ_update (gsl_matrix * Q, gsl_matrix * L,
     {
       return GSL_EBADLEN;
     }
-  else
-    {
+  
+    
       size_t j, k;
       const size_t N = Q->size1;
       const size_t M = Q->size2;
@@ -484,5 +484,5 @@ gsl_linalg_PTLQ_update (gsl_matrix * Q, gsl_matrix * L,
         }
 
       return GSL_SUCCESS;
-    }
+   
 }

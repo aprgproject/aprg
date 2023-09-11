@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -264,8 +265,8 @@ rng_float_test (const gsl_rng_type * T)
   gsl_rng *ri = gsl_rng_alloc (T);
   gsl_rng *rf = gsl_rng_alloc (T);
 
-  double u;
-  double c ; 
+  double u = NAN;
+  double c = NAN ; 
   unsigned int i = 0;
   unsigned long int k = 0;
   int status = 0 ;
@@ -561,8 +562,8 @@ int
 rng_sum_test (gsl_rng * r, double *sigma)
 {
   double sum = 0;
-  int i;
-  int status;
+  int i = 0;
+  int status = 0;
 
   for (i = 0; i < N2; ++i)
     {
@@ -594,8 +595,8 @@ rng_bin_test (gsl_rng * r, double *sigma)
 {
   int count[BINS+EXTRA];
   double chisq = 0;
-  int i;
-  int status;
+  int i = 0;
+  int status = 0;
 
   for (i = 0; i < BINS+EXTRA; i++) {
       count[i] = 0 ;
@@ -641,8 +642,8 @@ int
 rng_sanity_test (gsl_rng * r)
 {
   double sum = 0;
-  double sigma;
-  int i;
+  double sigma = NAN;
+  int i = 0;
   int status = 0;
 
   for (i = 0; i < N2; ++i)

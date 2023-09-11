@@ -80,7 +80,7 @@ gsl_sf_atanint_e(const double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else if(ax <= 1.0) {
+  if(ax <= 1.0) {
     const double t = 2.0 * (x*x - 0.5);
     gsl_sf_result result_c;
     cheb_eval_e(&atanint_cs, t, &result_c);

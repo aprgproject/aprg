@@ -141,8 +141,8 @@ LU_decomp_L2 (gsl_matrix_complex * A, gsl_vector_uint * ipiv)
     }
   else
     {
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       for (j = 0; j < minMN; ++j)
         {
@@ -505,7 +505,7 @@ gsl_linalg_complex_LU_invx (gsl_matrix_complex * LU, const gsl_permutation * p)
 gsl_complex
 gsl_linalg_complex_LU_det (gsl_matrix_complex * LU, int signum)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = LU->size1;
 
   gsl_complex det = gsl_complex_rect((double) signum, 0.0);
@@ -523,7 +523,7 @@ gsl_linalg_complex_LU_det (gsl_matrix_complex * LU, int signum)
 double
 gsl_linalg_complex_LU_lndet (gsl_matrix_complex * LU)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = LU->size1;
 
   double lndet = 0.0;
@@ -541,7 +541,7 @@ gsl_linalg_complex_LU_lndet (gsl_matrix_complex * LU)
 gsl_complex
 gsl_linalg_complex_LU_sgndet (gsl_matrix_complex * LU, int signum)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = LU->size1;
 
   gsl_complex phase = gsl_complex_rect((double) signum, 0.0);
@@ -570,7 +570,7 @@ gsl_linalg_complex_LU_sgndet (gsl_matrix_complex * LU, int signum)
 static int
 singular (const gsl_matrix_complex * LU)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = LU->size1;
 
   for (i = 0; i < n; i++)

@@ -164,8 +164,8 @@ test_legendre_compare(const size_t lmax, const double *p_expected,
                       double (*factor)(const size_t l, const size_t m),
                       const char *desc, const char *desc2)
 {
-  size_t l;
-  size_t m;
+  size_t l = 0;
+  size_t m = 0;
 
   for (l = 0; l <= lmax; ++l)
     {
@@ -192,14 +192,14 @@ test_legendre_schmidt(const size_t lmax, const double csphase, const char *desc)
   int s = 0;
   const size_t nlm = gsl_sf_legendre_nlm(lmax);
   size_t l = 0;
-  double x;
-  double dx;
-  double *p;
-  double *p2;
-  double *dp;
-  double *d2p;
-  double *p_alt;
-  double *dp_alt;
+  double x = NAN;
+  double dx = NAN;
+  double *p = NULL;
+  double *p2 = NULL;
+  double *dp = NULL;
+  double *d2p = NULL;
+  double *p_alt = NULL;
+  double *dp_alt = NULL;
   size_t dim = 0;
   size_t i = 0;
   const gsl_sf_legendre_t norm = GSL_SF_LEGENDRE_SCHMIDT;
@@ -340,14 +340,14 @@ test_legendre_norm(const gsl_sf_legendre_t norm_type, const size_t lmax,
                    const double csphase, const char *desc)
 {
   int s = 0;
-  double x;
-  double dx;
-  double *p_schmidt;
-  double *dp_schmidt;
-  double *d2p_schmidt;
-  double *p;
-  double *dp;
-  double *d2p;
+  double x = NAN;
+  double dx = NAN;
+  double *p_schmidt = NULL;
+  double *dp_schmidt = NULL;
+  double *d2p_schmidt = NULL;
+  double *p = NULL;
+  double *dp = NULL;
+  double *d2p = NULL;
   size_t dim = 0;
   double (*factor)(const size_t l, const size_t m) = NULL;
 
@@ -446,17 +446,17 @@ test_legendre_unnorm(const size_t lmax_orig, const char *desc)
 {
   int s = 0;
   const int lmax = GSL_MIN(lmax_orig, 140);
-  size_t l;
-  size_t m;
-  double x;
-  double dx;
-  double *p;
-  double *dp;
-  double *d2p;
-  double *p2;
-  double *p_schmidt;
-  double *dp_schmidt;
-  double *d2p_schmidt;
+  size_t l = 0;
+  size_t m = 0;
+  double x = NAN;
+  double dx = NAN;
+  double *p = NULL;
+  double *dp = NULL;
+  double *d2p = NULL;
+  double *p2 = NULL;
+  double *p_schmidt = NULL;
+  double *dp_schmidt = NULL;
+  double *d2p_schmidt = NULL;
   size_t dim = 0;
 
   dim = gsl_sf_legendre_array_n(lmax);

@@ -121,8 +121,8 @@ static void
 test_random_matrix(gsl_matrix *m, const gsl_rng *r,
                    const double lower, const double upper)
 {
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   size_t M = m->size1;
   size_t N = m->size2;
 
@@ -338,10 +338,10 @@ test_random(const gsl_multilarge_linear_type * T,
   gsl_matrix *Ltall = gsl_matrix_alloc(5*p, p);
   gsl_vector *c0 = gsl_vector_alloc(p);
   gsl_vector *c1 = gsl_vector_alloc(p);
-  double rnorm0;
-  double snorm0;
-  double rnorm1;
-  double snorm1;
+  double rnorm0 = NAN;
+  double snorm0 = NAN;
+  double rnorm1 = NAN;
+  double snorm1 = NAN;
   char str[2048];
   size_t i = 0;
 

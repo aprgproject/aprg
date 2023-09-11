@@ -519,11 +519,11 @@ helical_f (const gsl_vector * x, void *params, gsl_vector * f)
   double x1 = gsl_vector_get (x, 1);
   double x2 = gsl_vector_get (x, 2);
 
-  double t1;
-  double t2;
-  double y0;
-  double y1;
-  double y2;
+  double t1 = NAN;
+  double t2 = NAN;
+  double y0 = NAN;
+  double y1 = NAN;
+  double y2 = NAN;
 
   if (x0 > 0) 
     {
@@ -634,7 +634,7 @@ dbv_f (const gsl_vector * x, void *params, gsl_vector * f)
 
   for (i = 0; i < N; i++)
     {
-      double z;
+      double z = NAN;
       double ti = (i + 1) * h;
       double xi = 0;
       double xim1 = 0;
@@ -664,8 +664,8 @@ dbv_f (const gsl_vector * x, void *params, gsl_vector * f)
 int
 dbv_df (const gsl_vector * x, void *params, gsl_matrix * df)
 {
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   double h = 1.0 / (N + 1.0);
 
@@ -677,7 +677,7 @@ dbv_df (const gsl_vector * x, void *params, gsl_matrix * df)
 
   for (i = 0; i < N; i++)
     {
-      double dz_dxi;
+      double dz_dxi = NAN;
       double ti = (i + 1) * h;
 
       double xi = gsl_vector_get (x, i);
@@ -757,8 +757,8 @@ trig_f (const gsl_vector * x, void *params, gsl_vector * f)
 int
 trig_df (const gsl_vector * x, void *params, gsl_matrix * df)
 {
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   for (i = 0; i < N; i++)
     {

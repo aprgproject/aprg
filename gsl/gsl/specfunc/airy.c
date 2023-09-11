@@ -24,6 +24,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sf_trig.h>
 #include <gsl/gsl_sf_airy.h>
+#include <math.h>
 
 #include "error.h"
 #include "check.h"
@@ -244,8 +245,8 @@ airy_mod_phase(const double x, gsl_mode_t mode, gsl_sf_result * mod, gsl_sf_resu
 {
   gsl_sf_result result_m;
   gsl_sf_result result_p;
-  double m;
-  double p;
+  double m = NAN;
+  double p = NAN;
   double sqx = NAN;
 
   if(x < -2.0) {
@@ -683,7 +684,7 @@ gsl_sf_airy_Ai_e(const double x, const gsl_mode_t mode, gsl_sf_result * result)
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     double x32 = x * sqrt(x);
     double s   = exp(-2.0*x32/3.0);
     gsl_sf_result result_aie;
@@ -693,7 +694,7 @@ gsl_sf_airy_Ai_e(const double x, const gsl_mode_t mode, gsl_sf_result * result)
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     CHECK_UNDERFLOW(result);
     return stat_aie;
-  }
+ 
 }
 
 
@@ -731,9 +732,9 @@ gsl_sf_airy_Ai_scaled_e(const double x, gsl_mode_t mode, gsl_sf_result * result)
 
     return GSL_SUCCESS;
   }
-  else {
+  
     return airy_aie(x, mode, result);
-  }
+ 
 }
 
 
@@ -762,7 +763,7 @@ int gsl_sf_airy_Bi_e(const double x, gsl_mode_t mode, gsl_sf_result * result)
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else if(x <= 2.0) {
+  if(x <= 2.0) {
     const double z = (2.0*x*x*x - 9.0)/7.0;
     gsl_sf_result result_c0;
     gsl_sf_result result_c1;
@@ -824,7 +825,7 @@ gsl_sf_airy_Bi_scaled_e(const double x, gsl_mode_t mode, gsl_sf_result * result)
     }
     return GSL_SUCCESS;
   }
-  else if(x <= 2.0) {
+  if(x <= 2.0) {
     const double x3 = x*x*x;
     const double z  = (2.0*x3 - 9.0)/7.0;
     const double s  = exp(-2.0/3.0 * sqrt(x3));

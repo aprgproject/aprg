@@ -430,8 +430,8 @@ gsl_linalg_cholesky_band_scale_apply(gsl_matrix * A, const gsl_vector * S)
     }
   else
     {
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       for (j = 0; j < N; ++j)
         {
@@ -474,8 +474,8 @@ cholesky_band_norm1(const gsl_matrix * A)
           size_t ncol = GSL_MIN(ndiag, N - j); /* number of elements in column j below and including main diagonal */
           gsl_vector_const_view v = gsl_matrix_const_subrow(A, j, 0, ncol);
           double sum = gsl_blas_dasum(&v.vector);
-          size_t k;
-          size_t l;
+          size_t k = 0;
+          size_t l = 0;
 
           /* sum now contains the absolute sum of elements below and including main diagonal for column j; we
            * have to add the symmetric elements above the diagonal */

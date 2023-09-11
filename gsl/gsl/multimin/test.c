@@ -173,7 +173,7 @@ test_f(const char * desc, gsl_multimin_function *f, initpt_function initpt,
        const gsl_multimin_fminimizer_type *T)
 {
   int status = 0;
-  size_t i;
+  size_t i = 0;
   size_t iter = 0;
 
   gsl_vector *x = gsl_vector_alloc (f->n);

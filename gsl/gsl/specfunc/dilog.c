@@ -166,7 +166,7 @@ dilog_xge0(const double x, gsl_sf_result * result)
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return stat_ser;
   }
-  else if(x > 1.0) {
+  if(x > 1.0) {
     /* series around x = 1.0 */
     const double eps = x - 1.0;
     const double lne = log(eps);
@@ -247,8 +247,8 @@ dilogc_series_1(
   const int kmax = 50 + (int)(22.0/(-log(r))); /* tuned for double-precision */
   int k = 0;
   for(k=2; k<kmax; k++) {
-    double dr;
-    double di;
+    double dr = NAN;
+    double di = NAN;
     double ck_tmp = ck;
     ck = ck - (alpha*ck + beta*sk);
     sk = sk - (alpha*sk - beta*ck_tmp);
@@ -300,8 +300,8 @@ series_2_c(
   int k = 0;
   for(k=2; k<kmax; k++)
   {
-    double dr;
-    double di;
+    double dr = NAN;
+    double di = NAN;
     const double ck_tmp = ck;
     ck = ck - (alpha*ck + beta*sk);
     sk = sk - (alpha*sk - beta*ck_tmp);
@@ -410,10 +410,10 @@ dilogc_series_3(
   const double omc2 = omc*omc;
   double H_re[7];
   double H_im[7];
-  double an;
-  double nfact;
-  double sum_re;
-  double sum_im;
+  double an = NAN;
+  double nfact = NAN;
+  double sum_re = NAN;
+  double sum_im = NAN;
   gsl_sf_result Him0;
   int n = 0;
 
@@ -479,9 +479,9 @@ dilogc_fundamental(double r, double x, double y, gsl_sf_result * real_dl, gsl_sf
 {
   if(r > 0.98) {  
     return dilogc_series_3(r, x, y, real_dl, imag_dl);
-  } if(r > 0.25)
+  } if(r > 0.25) {
     return dilogc_series_2(r, x, y, real_dl, imag_dl);
-  else
+  } 
     return dilogc_series_1(r, x, y, real_dl, imag_dl);
 }
 
@@ -548,7 +548,8 @@ gsl_sf_dilog_e(const double x, gsl_sf_result * result)
     return dilog_xge0(x, result);
   }
   
-    gsl_sf_result d1, d2;
+    gsl_sf_result d1;
+    gsl_sf_result d2;
     int stat_d1 = dilog_xge0( -x, &d1);
     int stat_d2 = dilog_xge0(x*x, &d2);
     result->val  = -d1.val + 0.5 * d2.val;
@@ -595,7 +596,7 @@ gsl_sf_complex_dilog_xy_e(
     real_dl->err = 2.0 * GSL_DBL_EPSILON * (zeta2 + term1 + term2);
     return gsl_sf_clausen_e(theta, imag_dl);
   }
-  else if(r2 < 1.0)
+  if(r2 < 1.0)
   {
     return dilogc_unitdisk(x, y, real_dl, imag_dl);
   }

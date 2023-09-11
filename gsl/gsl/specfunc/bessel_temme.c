@@ -27,6 +27,7 @@
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_mode.h>
+#include <math.h>
 #include "bessel_temme.h"
 
 #include "chebyshev.h"
@@ -119,20 +120,20 @@ gsl_sf_bessel_Y_temme(const double nu, const double x,
   const double sinhalf = (fabs(alpha) < GSL_DBL_EPSILON ? 1.0 : sin(alpha)/alpha);
   const double sin_sqr = nu*M_PI*M_PI*0.5 * sinhalf*sinhalf;
   
-  double sum0;
-  double sum1;
-  double fk;
-  double pk;
-  double qk;
-  double hk;
-  double ck;
+  double sum0 = NAN;
+  double sum1 = NAN;
+  double fk = NAN;
+  double pk = NAN;
+  double qk = NAN;
+  double hk = NAN;
+  double ck = NAN;
   int k = 0;
   int stat_iter = 0;
 
-  double g_1pnu;
-  double g_1mnu;
-  double g1;
-  double g2;
+  double g_1pnu = NAN;
+  double g_1mnu = NAN;
+  double g1 = NAN;
+  double g2 = NAN;
   int stat_g = gsl_sf_temme_gamma(nu, &g_1pnu, &g_1mnu, &g1, &g2);
 
   fk = 2.0/M_PI * sinrat * (cosh(sigma)*g1 - sinhrat*ln_half_x*g2);
@@ -188,20 +189,20 @@ gsl_sf_bessel_K_scaled_temme(const double nu, const double x,
   const double sinhrat = (fabs(sigma) < GSL_DBL_EPSILON ? 1.0 : sinh(sigma)/sigma);
   const double ex = exp(x);
 
-  double sum0;
-  double sum1;
-  double fk;
-  double pk;
-  double qk;
-  double hk;
-  double ck;
+  double sum0 = NAN;
+  double sum1 = NAN;
+  double fk = NAN;
+  double pk = NAN;
+  double qk = NAN;
+  double hk = NAN;
+  double ck = NAN;
   int k = 0;
   int stat_iter = 0;
 
-  double g_1pnu;
-  double g_1mnu;
-  double g1;
-  double g2;
+  double g_1pnu = NAN;
+  double g_1mnu = NAN;
+  double g1 = NAN;
+  double g2 = NAN;
   int stat_g = gsl_sf_temme_gamma(nu, &g_1pnu, &g_1mnu, &g1, &g2);
 
   fk = sinrat * (cosh(sigma)*g1 - sinhrat*ln_half_x*g2);

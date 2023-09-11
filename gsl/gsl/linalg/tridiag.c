@@ -55,8 +55,8 @@ solve_tridiag(
     }
   else
     {
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       /* Cholesky decomposition
          A = L.D.L^t
@@ -153,8 +153,8 @@ solve_tridiag_nonsym(
     }
   else
     {
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       /* Bidiagonalization (eliminating belowdiag)
          & rhs update
@@ -235,8 +235,8 @@ solve_cyc_tridiag(
     }
   else
     {
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
       double sum = 0.0;
 
       /* factor */
@@ -419,8 +419,8 @@ int solve_cyc_tridiag_nonsym(
 
       /* backsubstitution */
       {
-        size_t i;
-        size_t j;
+        size_t i = 0;
+        size_t j = 0;
         w[N-1] = zu[N-1]/alpha[N-1];
         x[x_stride*(N-1)] = zb[N-1]/alpha[N-1];
         for (i = N - 2, j = 0; j <= N - 2; j++, i--)

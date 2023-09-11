@@ -734,9 +734,9 @@ test_compare_vanderpol (void)
   double y[11][2];
   double *yp = &y[0][0];
 
-  size_t i;
-  size_t j;
-  size_t k;
+  size_t i = 0;
+  size_t j = 0;
+  size_t k = 0;
   int status = 0;
 
   /* Parameters for the problem and stepper  */
@@ -845,9 +845,9 @@ test_compare_oregonator (void)
   double y[2][3];
   double *yp = &y[0][0];
 
-  size_t i;
-  size_t j;
-  size_t k;
+  size_t i = 0;
+  size_t j = 0;
+  size_t k = 0;
   int status = 0;
   
   /* Parameters for the problem and stepper  */

@@ -282,8 +282,8 @@ int
 gsl_linalg_hessenberg_set_zero(gsl_matrix * H)
 {
   const size_t N = H->size1;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   if (N < 3) {
     return GSL_SUCCESS;

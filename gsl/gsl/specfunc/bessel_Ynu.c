@@ -24,6 +24,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sf_bessel.h>
 #include <gsl/gsl_sf_sincos_pi.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -77,12 +78,13 @@ gsl_sf_bessel_Ynupos_e(double nu, double x, gsl_sf_result * result)
     int N = (int)(nu + 0.5);
     double mu = nu - N;
 
-    gsl_sf_result Y_mu, Y_mup1;
-    int stat_mu;
-    double Ynm1;
-    double Yn;
-    double Ynp1;
-    int n;
+    gsl_sf_result Y_mu;
+    gsl_sf_result Y_mup1;
+    int stat_mu = 0;
+    double Ynm1 = NAN;
+    double Yn = NAN;
+    double Ynp1 = NAN;
+    int n = 0;
 
     if(x < 2.0) {
       /* Determine Ymu, Ymup1 directly. This is really
@@ -95,7 +97,8 @@ gsl_sf_bessel_Ynupos_e(double nu, double x, gsl_sf_result * result)
     else {
       /* Determine Ymu, Ymup1 and Jmu, Jmup1.
        */
-      gsl_sf_result J_mu, J_mup1;
+      gsl_sf_result J_mu;
+      gsl_sf_result J_mup1;
       stat_mu = gsl_sf_bessel_JY_mu_restricted(mu, x, &J_mu, &J_mup1, &Y_mu, &Y_mup1);
     }
 

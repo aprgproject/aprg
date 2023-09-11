@@ -31,9 +31,9 @@ gsl_permutation_linear_to_canonical (gsl_permutation * q,
                                      const gsl_permutation * p)
 {
   const size_t n = p->size;
-  size_t i;
-  size_t k;
-  size_t s;
+  size_t i = 0;
+  size_t k = 0;
+  size_t s = 0;
   size_t t = n;
 
   const size_t *const pp = p->data;
@@ -88,10 +88,10 @@ int
 gsl_permutation_canonical_to_linear (gsl_permutation * p,
                                      const gsl_permutation * q)
 {
-  size_t i;
-  size_t k;
-  size_t kk;
-  size_t first;
+  size_t i = 0;
+  size_t k = 0;
+  size_t kk = 0;
+  size_t first = 0;
   const size_t n = p->size;
 
   size_t *const pp = p->data;
@@ -137,8 +137,8 @@ size_t
 gsl_permutation_inversions (const gsl_permutation * p)
 {
   size_t count = 0;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   const size_t size = p->size;
 
   for (i = 0; i < size - 1; i++)
@@ -158,8 +158,8 @@ gsl_permutation_inversions (const gsl_permutation * p)
 size_t
 gsl_permutation_linear_cycles (const gsl_permutation * p)
 {
-  size_t i;
-  size_t k;
+  size_t i = 0;
+  size_t k = 0;
   size_t count = 0;
   const size_t size = p->size;
 

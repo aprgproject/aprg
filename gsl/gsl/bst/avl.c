@@ -99,8 +99,8 @@ static int
 avl_empty (void * vtable)
 {
   avl_table * table = (avl_table *) vtable;
-  avl_node *p;
-  avl_node *q;
+  avl_node *p = NULL;
+  avl_node *q = NULL;
 
   for (p = table->avl_root; p != NULL; p = q)
     {
@@ -135,10 +135,10 @@ Returns |NULL| in case of memory allocation failure.
 static void **
 avl_probe (void * item, avl_table * table)
 {
-  avl_node *y;
-  avl_node *z; /* top node to update balance factor, and parent */
-  avl_node *p;
-  avl_node *q; /* iterator, and parent */
+  avl_node *y = NULL;
+  avl_node *z = NULL; /* top node to update balance factor, and parent */
+  avl_node *p = NULL;
+  avl_node *q = NULL; /* iterator, and parent */
   avl_node *n = NULL;     /* newly inserted node */
   avl_node *w = NULL;     /* new root of rebalanced subtree */
   int dir = 0;         /* direction to descend */
@@ -388,18 +388,19 @@ avl_remove (const void * item, void * vtable)
               avl_node *x = y->avl_link[1];
               if (x->avl_balance == -1)
                 {
-                  avl_node *w;
+                  avl_node *w = NULL;
                   w = x->avl_link[0];
                   x->avl_link[0] = w->avl_link[1];
                   w->avl_link[1] = x;
                   y->avl_link[1] = w->avl_link[0];
                   w->avl_link[0] = y;
-                  if (w->avl_balance == +1)
+                  if (w->avl_balance == +1) {
                     x->avl_balance = 0, y->avl_balance = -1;
-                  else if (w->avl_balance == 0)
+                  } else if (w->avl_balance == 0) {
                     x->avl_balance = y->avl_balance = 0;
-                  else /* |w->avl_balance == -1| */
+                  } else { /* |w->avl_balance == -1| */
                     x->avl_balance = +1, y->avl_balance = 0;
+}
                   w->avl_balance = 0;
                   pa[k - 1]->avl_link[da[k - 1]] = w;
                 }
@@ -414,7 +415,7 @@ avl_remove (const void * item, void * vtable)
                       y->avl_balance = +1;
                       break;
                     }
-                  else
+                  
                     x->avl_balance = y->avl_balance = 0;
                 }
             }
@@ -429,18 +430,19 @@ avl_remove (const void * item, void * vtable)
               avl_node *x = y->avl_link[0];
               if (x->avl_balance == +1)
                 {
-                  avl_node *w;
+                  avl_node *w = NULL;
                   w = x->avl_link[1];
                   x->avl_link[1] = w->avl_link[0];
                   w->avl_link[0] = x;
                   y->avl_link[0] = w->avl_link[1];
                   w->avl_link[1] = y;
-                  if (w->avl_balance == -1)
+                  if (w->avl_balance == -1) {
                     x->avl_balance = 0, y->avl_balance = +1;
-                  else if (w->avl_balance == 0)
+                  } else if (w->avl_balance == 0) {
                     x->avl_balance = y->avl_balance = 0;
-                  else /* |w->avl_balance == +1| */
+                  } else { /* |w->avl_balance == +1| */
                     x->avl_balance = -1, y->avl_balance = 0;
+}
                   w->avl_balance = 0;
                   pa[k - 1]->avl_link[da[k - 1]] = w;
                 }
@@ -455,7 +457,7 @@ avl_remove (const void * item, void * vtable)
                       y->avl_balance = -1;
                       break;
                     }
-                  else
+                  
                     x->avl_balance = y->avl_balance = 0;
                 }
             }
@@ -706,8 +708,8 @@ avl_t_find (const void * item, void * vtrav, const void * vtable)
 {
   const avl_table * table = (const avl_table *) vtable;
   avl_traverser * trav = (avl_traverser *) vtrav;
-  avl_node *p;
-  avl_node *q;
+  avl_node *p = NULL;
+  avl_node *q = NULL;
 
   trav->avl_table = table;
   trav->avl_height = 0;
@@ -844,7 +846,7 @@ avl_t_next (void * vtrav)
     }
   else
     {
-      avl_node *y;
+      avl_node *y = NULL;
 
       do
         {
@@ -909,7 +911,7 @@ avl_t_prev (void * vtrav)
     }
   else
     {
-      avl_node *y;
+      avl_node *y = NULL;
 
       do
         {

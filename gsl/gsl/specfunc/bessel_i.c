@@ -130,7 +130,8 @@ int gsl_sf_bessel_i1_scaled_e(const double x, gsl_sf_result * result)
     double ex = exp(-2.0*ax);
     result->val = 0.5 * (ax*(1.0+ex) - (1.0-ex)) / (ax*ax);
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
-    if(x < 0.0) result->val = -result->val;
+    if(x < 0.0) { result->val = -result->val;
+}
     return GSL_SUCCESS;
   }
 }
@@ -286,14 +287,14 @@ int gsl_sf_bessel_il_scaled_array(const int lmax, const double x, double * resul
     };
     return GSL_SUCCESS;
   } 
-    int ell;
+    int ell = 0;
     gsl_sf_result r_iellp1;
     gsl_sf_result r_iell;
     int stat_0 = gsl_sf_bessel_il_scaled_e(lmax+1, x, &r_iellp1);
     int stat_1 = gsl_sf_bessel_il_scaled_e(lmax,   x, &r_iell);
     double iellp1 = r_iellp1.val;
     double iell   = r_iell.val;
-    double iellm1;
+    double iellm1 = NAN;
     result_array[lmax] = iell;
     for(ell = lmax; ell >= 1; ell--) {
       iellm1 = iellp1 + (2*ell + 1)/x * iell;
