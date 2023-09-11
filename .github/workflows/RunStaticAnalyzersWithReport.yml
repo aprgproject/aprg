@@ -64,11 +64,11 @@ jobs:
           chmod +x "$determineCppProjectsPath"
           userInput="${{ inputs.cppProjects }}"
           if [[ -z $userInput ]]; then
-            echo "User input is empty, [checkGitForOneProject] is set as argument to script."
-            "$determineCppProjectsPath" checkGitForOneProject
-          else
-            echo "User input is not empty, [checkStaticAnalysisFiles] is set as argument to script."
+            echo "User input is empty, [checkStaticAnalysisFiles] is set as argument to script."
             "$determineCppProjectsPath" checkStaticAnalysisFiles "$staticAnalysisJobId" "${{ env.staticAnalysisFilename }}"
+          else
+            echo "User input is not empty, [checkUserInput] is set as argument to script."
+            "$determineCppProjectsPath" checkUserInput "${{ inputs.cppProjects }}"
           fi
           
           
