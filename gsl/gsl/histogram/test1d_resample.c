@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 #include <gsl/gsl_histogram.h>
@@ -60,8 +61,8 @@ test1d_resample (void)
     for (i = 0; i < 100; i++)
       {
         double y = gsl_histogram_get (hh, i) / 2500;
-        double x;
-        double xmax;
+        double x = NAN;
+        double xmax = NAN;
         size_t k = 0;
         double ya = NAN;
 

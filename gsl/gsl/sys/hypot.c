@@ -25,8 +25,8 @@ double gsl_hypot (const double x, const double y)
 {
   double xabs = fabs(x) ;
   double yabs = fabs(y) ;
-  double min;
-  double max;
+  double min = NAN;
+  double max = NAN;
 
   /* Follow the optional behavior of the ISO C standard and return
      +Inf when any of the argument is +-Inf, even if the other is NaN.

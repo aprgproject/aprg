@@ -141,8 +141,8 @@ gsl_eigen_hermv (gsl_matrix_complex * A, gsl_vector * eval,
       double *const d = w->d;
       double *const sd = w->sd;
 
-      size_t a;
-      size_t b;
+      size_t a = 0;
+      size_t b = 0;
 
       /* handle special case */
 

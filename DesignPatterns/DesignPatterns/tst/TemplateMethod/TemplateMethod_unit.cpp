@@ -9,7 +9,7 @@ using namespace std;
 namespace TemplateMethod {
 
 TEST(TemplateMethodTest, Test1) {
-    unique_ptr<AbstractClass> pointer = make_unique<ConcreteClass>();
+    unique_ptr<AbstractClass> const pointer = make_unique<ConcreteClass>();
     pointer->templateMethod();
 }
 

@@ -60,7 +60,9 @@ gsl_linalg_householder_transform (gsl_vector * v)
     }
   
     
-      double alpha, beta, tau ;
+      double alpha;
+      double beta;
+      double tau ;
       
       gsl_vector_view x = gsl_vector_subvector (v, 1, n - 1) ; 
       
@@ -126,7 +128,8 @@ gsl_linalg_householder_transform2 (double * alpha, gsl_vector * v)
     }
   
     
-      double beta, tau;
+      double beta;
+      double tau;
       gsl_vector_view x = gsl_vector_subvector (v, 0, n - 1); 
       double xnorm = gsl_blas_dnrm2 (&x.vector);
       
@@ -191,8 +194,8 @@ gsl_linalg_householder_hm (double tau, const gsl_vector * v, gsl_matrix * A)
   }
 #else
   {
-    size_t i;
-    size_t j;
+    size_t i = 0;
+    size_t j = 0;
     
     for (j = 0; j < A->size2; j++)
       {
@@ -263,8 +266,8 @@ gsl_linalg_householder_mh (double tau, const gsl_vector * v, gsl_matrix * A)
   }
 #else
   {
-    size_t i;
-    size_t j;
+    size_t i = 0;
+    size_t j = 0;
     
     for (i = 0; i < A->size1; i++)
       {
@@ -311,8 +314,8 @@ gsl_linalg_householder_hv (double tau, const gsl_vector * v, gsl_vector * w)
     /* compute d = v'w */
 
     double w0 = gsl_vector_get(w,0);
-    double d1;
-    double d;
+    double d1 = NAN;
+    double d = NAN;
 
     gsl_vector_const_view v1 = gsl_vector_const_subvector(v, 1, N-1);
     gsl_vector_view w1 = gsl_vector_subvector(w, 1, N-1);
@@ -446,8 +449,8 @@ gsl_linalg_householder_hm1 (double tau, gsl_matrix * A)
 
   if (tau == 0)
     {
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       gsl_matrix_set (A, 0, 0, 1.0);
       
@@ -492,8 +495,8 @@ gsl_linalg_householder_hm1 (double tau, gsl_matrix * A)
   }
 #else
   {
-    size_t i;
-    size_t j;
+    size_t i = 0;
+    size_t j = 0;
     
     for (j = 1; j < A->size2; j++)
       {

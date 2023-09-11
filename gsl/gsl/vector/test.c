@@ -136,9 +136,9 @@ void my_error_handler (const char *reason, const char *file,
 int
 main (void)
 {
-  size_t stride;
-  size_t ostride;
-  size_t N;
+  size_t stride = 0;
+  size_t ostride = 0;
+  size_t N = 0;
 
   gsl_ieee_env_setup ();
 

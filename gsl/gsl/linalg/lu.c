@@ -138,8 +138,8 @@ LU_decomp_L2 (gsl_matrix * A, gsl_vector_uint * ipiv)
     }
   else
     {
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       for (j = 0; j < minMN; ++j)
         {
@@ -490,7 +490,7 @@ gsl_linalg_LU_invx (gsl_matrix * LU, const gsl_permutation * p)
 double
 gsl_linalg_LU_det (gsl_matrix * LU, int signum)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = LU->size1;
 
   double det = (double) signum;
@@ -507,7 +507,7 @@ gsl_linalg_LU_det (gsl_matrix * LU, int signum)
 double
 gsl_linalg_LU_lndet (gsl_matrix * LU)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = LU->size1;
 
   double lndet = 0.0;
@@ -523,7 +523,7 @@ gsl_linalg_LU_lndet (gsl_matrix * LU)
 int
 gsl_linalg_LU_sgndet (gsl_matrix * LU, int signum)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = LU->size1;
 
   int s = signum;
@@ -549,7 +549,7 @@ gsl_linalg_LU_sgndet (gsl_matrix * LU, int signum)
 static int
 singular (const gsl_matrix * LU)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = LU->size1;
 
   for (i = 0; i < n; i++)

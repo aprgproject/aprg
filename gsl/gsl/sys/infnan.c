@@ -61,9 +61,9 @@ gsl_isinf (const double x)
 
   if (fpc == _FPCLASS_PINF) {
     return +1;
-  } if (fpc == _FPCLASS_NINF)
+  } if (fpc == _FPCLASS_NINF) {
     return -1;
-  else 
+  } 
     return 0;
 }
 

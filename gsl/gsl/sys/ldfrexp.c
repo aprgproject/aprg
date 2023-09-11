@@ -35,7 +35,7 @@ gsl_ldexp (const double x, const int e)
   {
     double y = gsl_frexp (x, &ex);
     double e2 = e + ex;
-    double p2;
+    double p2 = NAN;
     
     if (e2 >= DBL_MAX_EXP)
       {
@@ -66,7 +66,7 @@ gsl_frexp (const double x, int *e)
       *e = 0;
       return x;
     }
-  else if (fabs (x) >= 0.5 && fabs (x) < 1)     /* Handle the common case */
+  if (fabs (x) >= 0.5 && fabs (x) < 1)     /* Handle the common case */
     {
       *e = 0;
       return x;

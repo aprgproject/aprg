@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 
@@ -341,14 +342,14 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
   const double smlnum = GSL_DBL_MIN * N / GSL_DBL_EPSILON;
   const double bignum = (1.0 - GSL_DBL_EPSILON) / smlnum;
   int i = 0;              /* looping */
-  size_t iu;
+  size_t iu = 0;
   size_t /* looping */
-         ju;
-  size_t ii;
+         ju = 0;
+  size_t ii = 0;
   gsl_complex lambda; /* current eigenvalue */
-  double lambda_re;
+  double lambda_re = NAN;
   double /* Re(lambda) */
-         lambda_im;   /* Im(lambda) */
+         lambda_im = NAN;   /* Im(lambda) */
   gsl_matrix_view Tv;
   gsl_matrix_view /* temporary views */
                   Zv;
@@ -410,8 +411,8 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
 
       if (lambda_im == 0.0)
         {
-          int k;
-          int l;
+          int k = 0;
+          int l = 0;
           gsl_vector_view bv;
           gsl_vector_view xv;
 
@@ -513,8 +514,8 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
                 } /* if (!complex_pair) */
               else
                 {
-                  double x11;
-                  double x21;
+                  double x11 = NAN;
+                  double x21 = NAN;
 
                   /*
                    * 2-by-2 diagonal block

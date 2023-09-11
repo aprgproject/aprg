@@ -110,15 +110,15 @@ test_dgemv(const size_t N, const size_t M, const double alpha,
            const gsl_rng *r)
 {
   gsl_spmatrix *A = create_random_sparse(M, N, 0.2, r);
-  gsl_spmatrix *B;
-  gsl_spmatrix *C;
+  gsl_spmatrix *B = NULL;
+  gsl_spmatrix *C = NULL;
   gsl_matrix *A_dense = gsl_matrix_alloc(M, N);
-  gsl_vector *x;
-  gsl_vector *y;
-  gsl_vector *y_gsl;
-  gsl_vector *y_sp;
-  size_t lenX;
-  size_t lenY;
+  gsl_vector *x = NULL;
+  gsl_vector *y = NULL;
+  gsl_vector *y_gsl = NULL;
+  gsl_vector *y_sp = NULL;
+  size_t lenX = 0;
+  size_t lenY = 0;
 
   if (TransA == CblasNoTrans)
     {
@@ -186,9 +186,9 @@ test_dgemm(const double alpha, const size_t M, const size_t N,
            const gsl_rng *r)
 {
   const size_t max = GSL_MAX(M, N);
-  size_t i;
-  size_t j;
-  size_t k;
+  size_t i = 0;
+  size_t j = 0;
+  size_t k = 0;
   gsl_matrix *A_dense = gsl_matrix_alloc(M, max);
   gsl_matrix *B_dense = gsl_matrix_alloc(max, N);
   gsl_matrix *C_dense = gsl_matrix_alloc(M, N);
@@ -240,8 +240,8 @@ int
 main()
 {
   const size_t N_max = 40;
-  size_t m;
-  size_t n;
+  size_t m = 0;
+  size_t n = 0;
   gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
 
   for (m = 1; m <= N_max; ++m)

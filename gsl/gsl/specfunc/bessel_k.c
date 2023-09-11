@@ -203,9 +203,9 @@ gsl_sf_bessel_kl_scaled_array(const int lmax, const double x, double * result_ar
     return stat;
   } else {
     int ell = 0;
-    double kellp1;
-    double kell;
-    double kellm1;
+    double kellp1 = NAN;
+    double kell = NAN;
+    double kellm1 = NAN;
     gsl_sf_result r_kell;
     gsl_sf_result r_kellm1;
     gsl_sf_bessel_k1_scaled_e(x, &r_kell);

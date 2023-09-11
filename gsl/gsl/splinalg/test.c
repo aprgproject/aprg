@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 
@@ -175,8 +176,8 @@ test_poisson(const size_t N, const double epsrel, const int compress)
   /* check that the residual satisfies ||r|| <= tol*||b|| */
   {
     gsl_vector *r = gsl_vector_alloc(n);
-    double normr;
-    double normb;
+    double normr = NAN;
+    double normb = NAN;
 
     gsl_vector_memcpy(r, b);
     gsl_spblas_dgemv(CblasNoTrans, -1.0, A, u, 1.0, r);
@@ -221,10 +222,10 @@ test_toeplitz(const size_t N, const double a, const double b,
   const gsl_splinalg_itersolve_type *T = gsl_splinalg_itersolve_gmres;
   const char *desc = NULL;
   gsl_spmatrix *A = NULL;
-  gsl_vector *rhs;
-  gsl_vector *x;
+  gsl_vector *rhs = NULL;
+  gsl_vector *x = NULL;
   gsl_splinalg_itersolve *w = NULL;
-  size_t i;
+  size_t i = 0;
   size_t iter = 0;
 
   if (N <= 1) {
@@ -269,8 +270,8 @@ test_toeplitz(const size_t N, const double a, const double b,
   /* check that the residual satisfies ||r|| <= tol*||b|| */
   {
     gsl_vector *r = gsl_vector_alloc(N);
-    double normr;
-    double normb;
+    double normr = NAN;
+    double normb = NAN;
 
     gsl_vector_memcpy(r, rhs);
     gsl_spblas_dgemv(CblasNoTrans, -1.0, A, x, 1.0, r);
@@ -321,8 +322,8 @@ test_random(const size_t N, const gsl_rng *r, const int compress)
   /* check that the residual satisfies ||r|| <= tol*||b|| */
   {
     gsl_vector *res = gsl_vector_alloc(N);
-    double normr;
-    double normb;
+    double normr = NAN;
+    double normb = NAN;
 
     gsl_vector_memcpy(res, b);
     gsl_spblas_dgemv(CblasNoTrans, -1.0, A, x, 1.0, res);

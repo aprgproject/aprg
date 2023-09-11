@@ -34,12 +34,12 @@ test1d (void)
   double xr[NR + 1] =
   {0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0};
 
-  gsl_histogram *h;
-  gsl_histogram *h1;
-  gsl_histogram *hr;
-  gsl_histogram *g;
-  size_t i;
-  size_t j;
+  gsl_histogram *h = NULL;
+  gsl_histogram *h1 = NULL;
+  gsl_histogram *hr = NULL;
+  gsl_histogram *g = NULL;
+  size_t i = 0;
+  size_t j = 0;
 
   gsl_ieee_env_setup ();
 
@@ -399,10 +399,10 @@ test1d (void)
   gsl_histogram_accumulate (h, 0.3, 4.0);
 
   {
-    size_t i1;
-    size_t i2;
-    size_t i3;
-    size_t i4;
+    size_t i1 = 0;
+    size_t i2 = 0;
+    size_t i3 = 0;
+    size_t i4 = 0;
     double expected = NAN;
     int status = gsl_histogram_find (h, 0.0, &i1);
     status = gsl_histogram_find (h, 0.1, &i2);

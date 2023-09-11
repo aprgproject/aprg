@@ -258,8 +258,8 @@ int
 gsl_linalg_cholesky_decomp_unit(gsl_matrix * A, gsl_vector * D)
 {
   const size_t N = A->size1;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   /* initial Cholesky */
   int stat_chol = gsl_linalg_cholesky_decomp1(A);
@@ -376,8 +376,8 @@ gsl_linalg_cholesky_scale_apply(gsl_matrix * A, const gsl_vector * S)
     }
   else
     {
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       /* compute: A <- diag(S) A diag(S) using lower triangle */
       for (j = 0; j < N; ++j)
@@ -556,8 +556,8 @@ cholesky_norm1(const gsl_matrix * LLT, gsl_vector * work)
 {
   const size_t N = LLT->size1;
   double max = 0.0;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   for (j = 0; j < N; ++j)
     {

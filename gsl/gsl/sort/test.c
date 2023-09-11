@@ -101,8 +101,8 @@ size_t urand (size_t);
 int
 main (void)
 {
-  size_t i;
-  size_t s;
+  size_t i = 0;
+  size_t s = 0;
 
   gsl_ieee_env_setup ();
 

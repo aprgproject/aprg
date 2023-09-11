@@ -100,7 +100,7 @@ void scale (gsl_vector * x, double factor);
 void
 scale (gsl_vector * x, double factor)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = x->size;
 
   if (gsl_vector_isnull(x))
@@ -127,7 +127,7 @@ test_fdf (const char * desc, gsl_multiroot_function_fdf * function,
 {
   int status = 0;
   double residual = 0;
-  size_t i;
+  size_t i = 0;
   size_t n = function->n;
   size_t iter = 0;
   
@@ -211,7 +211,7 @@ test_f (const char * desc, gsl_multiroot_function_fdf * fdf,
         const gsl_multiroot_fsolver_type * T)
 {
   int status = 0;
-  size_t i;
+  size_t i = 0;
   size_t n = fdf->n;
   size_t iter = 0;
   double residual = 0;

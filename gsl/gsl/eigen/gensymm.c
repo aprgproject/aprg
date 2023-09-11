@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+#include <math.h>
 #include <stdlib.h>
 
 #include <config.h>
@@ -204,9 +205,9 @@ gensymm_standardize_L2(gsl_matrix *A, const gsl_matrix *B)
 {
   const size_t N = A->size1;
   size_t i = 0;
-  double a;
-  double b;
-  double c;
+  double a = NAN;
+  double b = NAN;
+  double c = NAN;
 
   for (i = 0; i < N; ++i)
     {
@@ -287,7 +288,7 @@ gensymm_standardize_L3(gsl_matrix *A, const gsl_matrix *B)
        *
        * where A11 and B11 are N1-by-N1
        */
-      int status;
+      int status = 0;
       const size_t N1 = GSL_EIGEN_SPLIT(N);
       const size_t N2 = N - N1;
 
@@ -301,8 +302,9 @@ gensymm_standardize_L3(gsl_matrix *A, const gsl_matrix *B)
 
       /* recursion on (A11, B11) */
       status = gensymm_standardize_L3(&A11.matrix, &B11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* A21 = A21 * B11^{-1} */
       gsl_blas_dtrsm(CblasRight, CblasLower, CblasTrans, CblasNonUnit, 1.0, &B11.matrix, &A21.matrix);
@@ -321,8 +323,9 @@ gensymm_standardize_L3(gsl_matrix *A, const gsl_matrix *B)
 
       /* recursion on (A22, B22) */
       status = gensymm_standardize_L3(&A22.matrix, &B22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       return GSL_SUCCESS;
    

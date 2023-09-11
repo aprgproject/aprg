@@ -73,9 +73,9 @@ gsl_linalg_HH_svx (gsl_matrix * A, gsl_vector * x)
     {
       const size_t N = A->size1;
       const size_t M = A->size2;
-      size_t i;
-      size_t j;
-      size_t k;
+      size_t i = 0;
+      size_t j = 0;
+      size_t k = 0;
       REAL *d = (REAL *) malloc (N * sizeof (REAL));
 
       if (d == 0)

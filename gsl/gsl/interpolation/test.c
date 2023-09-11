@@ -81,8 +81,8 @@ test_bsearch(void)
   /* Test the accelerator */
 
   {
-    size_t i;
-    size_t j;
+    size_t i = 0;
+    size_t j = 0;
     size_t k1 = 0;
     size_t k2 = 0;
     int t = 0;
@@ -153,9 +153,9 @@ test_interp (
   )
 {
   int status = 0;
-  int s1;
-  int s2;
-  int s3;
+  int s1 = 0;
+  int s2 = 0;
+  int s3 = 0;
   size_t i = 0;
 
   gsl_interp_accel *a = gsl_interp_accel_alloc ();
@@ -173,9 +173,9 @@ test_interp (
       double y = NAN;
       double deriv = NAN;
       double integ = NAN;
-      double diff_y;
-      double diff_deriv;
-      double diff_integ;
+      double diff_y = NAN;
+      double diff_deriv = NAN;
+      double diff_integ = NAN;
       s1 = gsl_interp_eval_e (interp, data_table->x, data_table->y, x, a, &y);
       s2 = gsl_interp_eval_deriv_e (interp, data_table->x, data_table->y, x, a, &deriv);
       s3 = gsl_interp_eval_integ_e (interp, data_table->x, data_table->y, test_table->x[0], x, a, &integ);

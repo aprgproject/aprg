@@ -1,4 +1,5 @@
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #include <gsl/gsl_ntuple.h>
@@ -146,10 +147,10 @@ main (void)
 int
 sel_func (void *ntuple_data, void * params)
 {
-  double x;
-  double y;
-  double z;
-  double scale;
+  double x = NAN;
+  double y = NAN;
+  double z = NAN;
+  double scale = NAN;
   scale = *(double *)params;
 
   x = ((struct data *) ntuple_data)->x;
@@ -162,10 +163,10 @@ sel_func (void *ntuple_data, void * params)
 double
 val_func (void *ntuple_data, void * params)
 {
-  double x;
-  double y;
-  double z;
-  double scale;
+  double x = NAN;
+  double y = NAN;
+  double z = NAN;
+  double scale = NAN;
   scale = *(double *)params;
 
   x = ((struct data *) ntuple_data)->x;

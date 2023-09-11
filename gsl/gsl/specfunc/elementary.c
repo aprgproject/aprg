@@ -47,7 +47,7 @@ gsl_sf_multiply_e(const double x, const double y, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     const double f = 1.0 - 2.0 * GSL_DBL_EPSILON;
     const double min = GSL_MIN_DBL(fabs(x), fabs(y));
     const double max = GSL_MAX_DBL(fabs(x), fabs(y));
@@ -60,7 +60,7 @@ gsl_sf_multiply_e(const double x, const double y, gsl_sf_result * result)
     else {
       OVERFLOW_ERROR(result);
     }
-  }
+ 
 }
 
 

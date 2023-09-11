@@ -224,8 +224,8 @@ gsl_sf_bessel_Jnu_asympx_e(const double nu, const double x, gsl_sf_result * resu
   
   double k = 0;
   double t = 1;
-  int convP;
-  int convQ;
+  int convP = 0;
+  int convQ = 0;
 
   do
     {
@@ -492,9 +492,10 @@ gsl_sf_bessel_JY_mu_restricted(const double mu, const double x,
       return GSL_ERROR_SELECT_2(stat_J, stat_Y);
     }
     if(x < 1000.0) {
-      double P, Q;
-      double J_ratio;
-      double J_sgn;
+      double P;
+      double Q;
+      double J_ratio = NAN;
+      double J_sgn = NAN;
       const int stat_CF1 = gsl_sf_bessel_J_CF1(mu, x, &J_ratio, &J_sgn);
       const int stat_CF2 = gsl_sf_bessel_JY_steed_CF2(mu, x, &P, &Q);
       double Jprime_J_ratio = mu/x - J_ratio;
@@ -509,7 +510,7 @@ gsl_sf_bessel_JY_mu_restricted(const double mu, const double x,
       Ymup1->err = Ymu->err * fabs(mu/x - P - Q/gamma) + 4.0*GSL_DBL_EPSILON*fabs(Ymup1->val);
       return GSL_ERROR_SELECT_2(stat_CF1, stat_CF2);
     }
-    else {
+    
       /* Use asymptotics for large argument.
        */
       const int stat_J0 = gsl_sf_bessel_Jnu_asympx_e(mu,     x, Jmu);
@@ -519,7 +520,7 @@ gsl_sf_bessel_JY_mu_restricted(const double mu, const double x,
       stat_J = GSL_ERROR_SELECT_2(stat_J0, stat_J1);
       stat_Y = GSL_ERROR_SELECT_2(stat_Y0, stat_Y1);
       return GSL_ERROR_SELECT_2(stat_J, stat_Y);
-    }
+   
   }
 }
 

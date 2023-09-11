@@ -43,13 +43,13 @@ test2d (void)
 
   double yr[NR + 1] = { 90.0, 91.0, 92.0, 93.0, 94.0, 95.0 };
 
-  gsl_histogram2d *h;
-  gsl_histogram2d *h1;
-  gsl_histogram2d *g;
-  gsl_histogram2d *hr;
-  size_t i;
-  size_t j;
-  size_t k;
+  gsl_histogram2d *h = NULL;
+  gsl_histogram2d *h1 = NULL;
+  gsl_histogram2d *g = NULL;
+  gsl_histogram2d *hr = NULL;
+  size_t i = 0;
+  size_t j = 0;
+  size_t k = 0;
 
   gsl_ieee_env_setup ();
 
@@ -428,8 +428,8 @@ test2d (void)
   }
 
   {
-    size_t imax;
-    size_t jmax;
+    size_t imax = 0;
+    size_t jmax = 0;
     gsl_histogram2d_max_bin (h, &imax, &jmax);
     gsl_test (imax != 3
               || jmax != 2,
@@ -437,8 +437,8 @@ test2d (void)
   }
 
   {
-    size_t imin;
-    size_t jmin;
+    size_t imin = 0;
+    size_t jmin = 0;
     gsl_histogram2d_min_bin (h, &imin, &jmin);
     gsl_test (imin != 4
               || jmin != 3, "gsl_histogram2d_min_bin find minimum value bin");
@@ -635,14 +635,14 @@ test2d (void)
   gsl_histogram2d_accumulate (h, 0.3, 0.01, 4.0);
 
   {
-    size_t i1;
-    size_t i2;
-    size_t i3;
-    size_t i4;
-    size_t j1;
-    size_t j2;
-    size_t j3;
-    size_t j4;
+    size_t i1 = 0;
+    size_t i2 = 0;
+    size_t i3 = 0;
+    size_t i4 = 0;
+    size_t j1 = 0;
+    size_t j2 = 0;
+    size_t j3 = 0;
+    size_t j4 = 0;
     double expected = NAN;
     int status = 0;
     status = gsl_histogram2d_find (h, 0.0, 3.01, &i1, &j1);

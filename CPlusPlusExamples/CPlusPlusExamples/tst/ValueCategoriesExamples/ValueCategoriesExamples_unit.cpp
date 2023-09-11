@@ -13,7 +13,7 @@ namespace alba {
 namespace RValueAssignmentCannotWork {
 
 TEST(ValueCategoriesExamplesTest, RValueAssignmentCannotWork) {
-    int n = 5;
+    int const n = 5;
     // 1 = n; // Error: lvalue required as left operand of assignment
 }
 
@@ -37,7 +37,7 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
     foo(s);             // calls foo (with lvalue)
     foo(s + " world");  // calls foo (with rvalue)
     foo("hi");          // calls foo (with rvalue)
-    foo(move(s));       // calls foo (with rvalue)
+    foo(std::move(s));  // calls foo (with rvalue)
 }
 
 }  // namespace LValuesAndRValuesBindToDifferentFunctions

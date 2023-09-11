@@ -24,6 +24,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sf_exp.h>
 #include <gsl/gsl_sf_airy.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -590,8 +591,8 @@ airy_deriv_mod_phase(const double x, gsl_mode_t mode,
   const double pi34 = 2.356194490192344928847;
   gsl_sf_result result_a;
   gsl_sf_result result_p;
-  double a;
-  double p;
+  double a = NAN;
+  double p = NAN;
   double sqx = NAN;
 
   if(x <= -4.0) {
@@ -669,7 +670,7 @@ gsl_sf_airy_Ai_deriv_scaled_e(const double x, gsl_mode_t mode, gsl_sf_result * r
 
     return GSL_SUCCESS;
   }
-  else if(x <= 4.0) {
+  if(x <= 4.0) {
     const double sqrtx = sqrt(x);
     const double z = (16.0/(x*sqrtx) - 9.0)/7.0;
     const double s = sqrt(sqrtx);
@@ -720,7 +721,7 @@ gsl_sf_airy_Ai_deriv_e(const double x, gsl_mode_t mode, gsl_sf_result * result)
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else if(x*x*x < 9.0/4.0 * GSL_LOG_DBL_MIN*GSL_LOG_DBL_MIN) {
+  if(x*x*x < 9.0/4.0 * GSL_LOG_DBL_MIN*GSL_LOG_DBL_MIN) {
     gsl_sf_result result_aps;
     const double arg = -2.0*x*sqrt(x)/3.0;
     const int stat_a = gsl_sf_airy_Ai_deriv_scaled_e(x, mode, &result_aps);
@@ -773,7 +774,7 @@ gsl_sf_airy_Bi_deriv_scaled_e(const double x, gsl_mode_t mode, gsl_sf_result * r
 
     return GSL_SUCCESS;
   }
-  else if(x < 2.0) {
+  if(x < 2.0) {
     const double z = (2.0*x*x*x - 9.0) / 7.0;
     const double s = exp(-2.0*x*sqrt(x)/3.0);
     gsl_sf_result result_c0;
@@ -837,7 +838,7 @@ gsl_sf_airy_Bi_deriv_e(const double x, gsl_mode_t mode, gsl_sf_result * result)
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else if(x < 2.0) {
+  if(x < 2.0) {
     const double z = (2.0*x*x*x - 9.0) / 7.0;
     gsl_sf_result result_c1;
     gsl_sf_result result_c2;

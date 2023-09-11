@@ -772,7 +772,7 @@ main (void)
 
   {
     int status = 0;
-    int i; struct counter_params p;
+    int i = 0; struct counter_params p;
     double result = 0;
     double abserr=0;
 
@@ -850,7 +850,7 @@ main (void)
 
   {
     int status = 0;
-    int i; struct counter_params p;
+    int i = 0; struct counter_params p;
     double result = 0;
     double abserr=0;
 
@@ -1016,7 +1016,7 @@ main (void)
 
   {
     int status = 0;
-    int i; struct counter_params p;
+    int i = 0; struct counter_params p;
     double result = 0;
     double abserr=0;
 
@@ -1099,7 +1099,7 @@ main (void)
 
   {
     int status = 0;
-    int i; struct counter_params p;
+    int i = 0; struct counter_params p;
     double result = 0;
     double abserr=0;
 
@@ -1178,7 +1178,7 @@ main (void)
 
   {
     int status = 0;
-    int i; struct counter_params p;
+    int i = 0; struct counter_params p;
     double result = 0;
     double abserr=0;
 
@@ -1283,7 +1283,7 @@ main (void)
 
   {
     int status = 0;
-    int i; struct counter_params p;
+    int i = 0; struct counter_params p;
     double result = 0;
     double abserr=0;
 
@@ -1380,7 +1380,7 @@ main (void)
 
   {
     int status = 0;
-    int i; struct counter_params p;
+    int i = 0; struct counter_params p;
     double result = 0;
     double abserr=0;
 
@@ -1479,7 +1479,7 @@ main (void)
 
   {
     int status = 0;
-    int i; struct counter_params p;
+    int i = 0; struct counter_params p;
     double result = 0;
     double abserr=0;
 
@@ -1562,7 +1562,7 @@ main (void)
 
   {
     int status = 0;
-    int i; struct counter_params p;
+    int i = 0; struct counter_params p;
     double result = 0;
     double abserr=0;
 
@@ -1639,7 +1639,7 @@ main (void)
 
   {
     int status = 0;
-    int i; struct counter_params p;
+    int i = 0; struct counter_params p;
     double result = 0;
     double abserr=0;
 
@@ -1717,7 +1717,7 @@ main (void)
 
   {
     int status = 0;
-    int i; struct counter_params p;
+    int i = 0; struct counter_params p;
     double result = 0;
     double abserr=0;
 
@@ -1864,7 +1864,7 @@ main (void)
 
   {
     int status = 0;
-    int i; struct counter_params p;
+    int i = 0; struct counter_params p;
     double result = 0;
     double abserr=0;
 
@@ -1957,7 +1957,7 @@ main (void)
 
   {
     int status = 0;
-    int i; struct counter_params p;
+    int i = 0; struct counter_params p;
     double result = 0;
     double abserr=0;
 
@@ -2104,7 +2104,7 @@ main (void)
 
   {
     int status = 0;
-    int i; struct counter_params p;
+    int i = 0; struct counter_params p;
     double result = 0;
     double abserr=0;
 
@@ -2217,7 +2217,7 @@ main (void)
 
   {
     int status = 0;
-    int i; struct counter_params p;
+    int i = 0; struct counter_params p;
     double result = 0;
     double abserr=0;
 
@@ -2367,8 +2367,8 @@ main (void)
 
     for (n = 1; n < 1025; ++n)
       {
-        double expected;
-        double result;
+        double expected = NAN;
+        double result = NAN;
 
         gsl_integration_glfixed_table * tbl =
           gsl_integration_glfixed_table_alloc(n);
@@ -2411,8 +2411,8 @@ main (void)
     const double a = 0.0;
     const double b = M_PI;
     const double expected = integ_f_sin(a, b);
-    double result;
-    double abserr;
+    double result = NAN;
+    double abserr = NAN;
     double prev_abserr = 0.0;
     int n = 0;
 
@@ -2458,10 +2458,10 @@ main (void)
   {
     const double eps = GSL_DBL_EPSILON;
     gsl_integration_glfixed_table *tbl = NULL;
-    int n;
-    int i;
-    double xi;
-    double wi;
+    int n = 0;
+    int i = 0;
+    double xi = NAN;
+    double wi = NAN;
 
     /* Analytical results for points and weights on [-1, 1]
        Pulled from http://en.wikipedia.org/wiki/Gaussian_quadrature
@@ -2547,9 +2547,9 @@ main (void)
   /* This verifies the (point, weight) retrieval API is okay on non-[-1,1] */
   {
     gsl_integration_glfixed_table *tbl = NULL;
-    double result;
-    double x;
-    double w;
+    double result = NAN;
+    double x = NAN;
+    double w = NAN;
     int i = 0;
 
     /* Odd n = 3, f(x) = x**5 + x**4 + x**3 + x**2 + x**1 + 1 */
@@ -2596,8 +2596,8 @@ main (void)
                                  0.16349494301863722618 , -0.63466518254339257343 , 
                                  0.013492485649467772692 , 17.664383539246514971 , 7.5 };
     
-    double result;
-    double abserr;
+    double result = NAN;
+    double abserr = NAN;
     size_t neval = 0;
     int fid = 0;
         
@@ -2624,8 +2624,8 @@ main (void)
     struct monomial_params params;
     gsl_function f;
     double exact = NAN;
-    double a;
-    double b;
+    double a = NAN;
+    double b = NAN;
     int deg = 5; /* monomial degree */
     double dterm = (deg % 2) == 0 ? 1.0 : -1.0;
 
@@ -2708,8 +2708,8 @@ main (void)
 
   /* test Gegenbauer quadrature */
   {
-    size_t n;
-    size_t k;
+    size_t n = 0;
+    size_t k = 0;
     struct monomial_params params;
     gsl_function f;
     const double exactarray[5] = {4.15933612154155020161400717857e-7, 744697.808572324010134504819452, 55.2024994284578980512106835228, 7.95574829722734114107142857143, 0.00179653588816666666666666666667};
@@ -2733,15 +2733,15 @@ main (void)
 
   /* test Jacobi quadrature */
   {
-    size_t n;
-    size_t k;
+    size_t n = 0;
+    size_t k = 0;
     struct monomial_params params;
     gsl_function f;
     const double exactarray[5] = {9.052430592016123480501898e-7,3.131716150347619771233591755e6,0.04435866422797298224404592896,5.287059602300844442782407,2.5337038518475893688512749675e-6};
     const double aarray[5] = {0.123,7.747,1.47,-1.47,0.0};
     const double barray[5] = {0.456,12.0,2.0,2.0,0.47};
-    double alpha;
-    double beta;
+    double alpha = NAN;
+    double beta = NAN;
 
     f.function = &f_monomial;
     f.params = &params;
@@ -2761,8 +2761,8 @@ main (void)
 
   /* test Exponential quadrature */
   {
-    size_t n;
-    size_t k;
+    size_t n = 0;
+    size_t k = 0;
     struct monomial_params params;
     gsl_function f;
     const double exactarray[5] = {1.598864206823942764921875e-4, 624615.81848571833291063083819, 0.222578063871903188095238095238, 28.8968950008739567709168294271, 4.62725113500425479890950520833e-7};
@@ -2786,8 +2786,8 @@ main (void)
 
   /* test Rational quadrature */
   {
-    size_t n;
-    size_t k;
+    size_t n = 0;
+    size_t k = 0;
     struct monomial_params params;
     gsl_function f;
     const double exactarray[6] = {1.312245361412108703130374957e-10,0.0170362044485924082779613124672, 8.93065131938394658578136414201e-11, 7.17990217357447544326794457270e-13, -11.0760676986664098133970869634, 0.00290392485414197833688178206557};

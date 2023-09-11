@@ -39,6 +39,7 @@
 #include <gsl/gsl_sf_pow_int.h>
 #include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_sf_coulomb.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -57,11 +58,11 @@ C0sq(double eta)
   if(twopieta > GSL_LOG_DBL_MAX) {
     return 0.0;
   }
-  else {
+  
     gsl_sf_result scale;
     gsl_sf_expm1_e(twopieta, &scale);
     return twopieta/scale.val;
-  }
+ 
 }
 
 
@@ -81,8 +82,8 @@ CLeta(double L, double eta, gsl_sf_result * result)
   gsl_sf_result ln1; /* log of numerator Gamma function */
   gsl_sf_result ln2; /* log of denominator Gamma function */
   double sgn = 1.0;
-  double arg_val;
-  double arg_err;
+  double arg_val = NAN;
+  double arg_err = NAN;
 
   if(fabs(eta/(L+1.0)) < GSL_DBL_EPSILON) {
     gsl_sf_lngamma_e(L+1.0, &ln1);
@@ -467,11 +468,11 @@ coulomb_FGmhalf_series(const double eta, const double x,
   double u_mm2 = 1.0;                      /* u_0 */
   double u_mm1 = tex * u_mm2;              /* u_1 */
   double u_m = NAN;
-  double v_mm2;
-  double v_mm1;
-  double v_m;
-  double f_sum;
-  double g_sum;
+  double v_mm2 = NAN;
+  double v_mm1 = NAN;
+  double v_m = NAN;
+  double f_sum = NAN;
+  double g_sum = NAN;
   double tmp1 = NAN;
   gsl_sf_result rpsi_1pe;
   gsl_sf_result rpsi_1p2e;
@@ -619,8 +620,8 @@ coulomb_CF1(double lambda,
 
   double pk = lambda + 1.0;
   double F  = eta/pk + pk*x_inv;
-  double D;
-  double C;
+  double D = NAN;
+  double C = NAN;
   double df = NAN;
 
   *fcl_sign = 1.0;
@@ -773,10 +774,10 @@ coulomb_CF2(const double lambda, const double eta, const double x,
   double dp = -x_inv*(ar*di + ai*dr);
   double dq =  x_inv*(ar*dr - ai*di);
 
-  double A;
-  double B;
-  double C;
-  double D;
+  double A = NAN;
+  double B = NAN;
+  double C = NAN;
+  double D = NAN;
 
   double pk =  0.0;
   double P  =  0.0;
@@ -960,16 +961,16 @@ gsl_sf_coulomb_wave_FG_e(const double eta, const double x,
     const int N    = (int)(lam_F + 0.5);
     const int span = GSL_MAX(k_lam_G, N);
     const double lam_min = lam_F - N;    /* -1/2 <= lam_min < 1/2 */
-    double F_lam_F;
-    double Fp_lam_F;
+    double F_lam_F = NAN;
+    double Fp_lam_F = NAN;
     double G_lam_G = 0.0;
     double Gp_lam_G = 0.0;
-    double F_lam_F_err;
-    double Fp_lam_F_err;
+    double F_lam_F_err = NAN;
+    double Fp_lam_F_err = NAN;
     double Fp_over_F_lam_F = NAN;
     double F_sign_lam_F = NAN;
-    double F_lam_min_unnorm;
-    double Fp_lam_min_unnorm;
+    double F_lam_min_unnorm = NAN;
+    double Fp_lam_min_unnorm = NAN;
     double Fp_over_F_lam_min = NAN;
     gsl_sf_result F_lam_min;
     gsl_sf_result G_lam_min;
@@ -1080,8 +1081,8 @@ gsl_sf_coulomb_wave_FG_e(const double eta, const double x,
     gsl_sf_result G_lam_F;
     gsl_sf_result F_lam_G;
     gsl_sf_result G_lam_G;
-    double exp_lam_F;
-    double exp_lam_G;
+    double exp_lam_F = NAN;
+    double exp_lam_G = NAN;
     int stat_lam_F = 0;
     int stat_lam_G = 0;
     int stat_CF1_lam_F = 0;
@@ -1152,22 +1153,22 @@ gsl_sf_coulomb_wave_FG_e(const double eta, const double x,
     const int N = ceil(lam_F - C + 0.5);
     const double lam_0   = lam_F - GSL_MAX(N, 0);
     const double lam_min = GSL_MIN(lam_0, lam_G);
-    double F_lam_F;
-    double Fp_lam_F;
-    double G_lam_G;
-    double Gp_lam_G;
-    double F_lam_min_unnorm;
-    double Fp_lam_min_unnorm;
-    double F_lam_min;
-    double Fp_lam_min;
-    double G_lam_min;
-    double Gp_lam_min;
+    double F_lam_F = NAN;
+    double Fp_lam_F = NAN;
+    double G_lam_G = NAN;
+    double Gp_lam_G = NAN;
+    double F_lam_min_unnorm = NAN;
+    double Fp_lam_min_unnorm = NAN;
+    double F_lam_min = NAN;
+    double Fp_lam_min = NAN;
+    double G_lam_min = NAN;
+    double Gp_lam_min = NAN;
     double Fp_over_F_lam_F = NAN;
     double Fp_over_F_lam_min = NAN;
-    double F_sign_lam_F;
-    double F_sign_lam_min;
-    double P_lam_min;
-    double Q_lam_min;
+    double F_sign_lam_F = NAN;
+    double F_sign_lam_min = NAN;
+    double P_lam_min = NAN;
+    double Q_lam_min = NAN;
     double alpha = NAN;
     double gamma = NAN;
     double F_scale = NAN;
@@ -1263,9 +1264,11 @@ gsl_sf_coulomb_wave_F_array(double lam_min, int kmax,
   
     const double x_inv = 1.0/x;
     const double lam_max = lam_min + kmax;
-    gsl_sf_result F, Fp;
-    gsl_sf_result G, Gp;
-    double G_exp;
+    gsl_sf_result F;
+    gsl_sf_result Fp;
+    gsl_sf_result G;
+    gsl_sf_result Gp;
+    double G_exp = NAN;
 
     int stat_FG = gsl_sf_coulomb_wave_FG_e(eta, x, lam_max, 0,
                                               &F, &Fp, &G, &Gp, F_exp, &G_exp);
@@ -1273,7 +1276,7 @@ gsl_sf_coulomb_wave_F_array(double lam_min, int kmax,
     double fcl  = F.val;
     double fpl = Fp.val;
     double lam = lam_max;
-    int k;
+    int k = 0;
 
     fc_array[kmax] = F.val;
 
@@ -1314,8 +1317,8 @@ gsl_sf_coulomb_wave_FG_array(double lam_min, int kmax,
   double lam = lam_max;
   int k = 0;
 
-  double gcl;
-  double gpl;
+  double gcl = NAN;
+  double gpl = NAN;
 
   fc_array[kmax] = F.val;
 
@@ -1375,8 +1378,8 @@ gsl_sf_coulomb_wave_FGp_array(double lam_min, int kmax,
   double lam = lam_max;
   int k = 0;
 
-  double gcl;
-  double gpl;
+  double gcl = NAN;
+  double gpl = NAN;
 
   fc_array[kmax]  = F.val;
   fcp_array[kmax] = Fp.val;

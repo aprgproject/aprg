@@ -187,7 +187,7 @@ gsl_sf_beta_inc_e(
       /* Apply continued fraction after hypergeometric transformation. */
       gsl_sf_result cf;
       const int stat_cf = beta_cont_frac(b, a, 1.0-x, &cf);
-      int stat;
+      int stat = 0;
       const double term = prefactor.val * cf.val / b;
       result->val  = 1.0 - term;
       result->err  = fabs(prefactor.err * cf.val)/b;

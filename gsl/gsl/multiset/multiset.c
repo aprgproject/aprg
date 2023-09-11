@@ -48,8 +48,8 @@ gsl_multiset_valid (gsl_multiset * c)
   const size_t n = c->n ;
   const size_t k = c->k ;
 
-  size_t i;
-  size_t j ;
+  size_t i = 0;
+  size_t j = 0 ;
 
   for (i = 0; i < k; i++)
     {

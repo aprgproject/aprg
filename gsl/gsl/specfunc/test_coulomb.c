@@ -22,6 +22,7 @@
 #include <config.h>
 #include <gsl/gsl_test.h>
 #include <gsl/gsl_sf.h>
+#include <math.h>
 #include "test_sf.h"
 
 #define PRINT(n) printf("%22.18g  %22.18g  %22.18g  %22.18g\n", F[n], Fp[n], G[n], Gp[n])
@@ -43,12 +44,12 @@ int test_coulomb(void)
   gsl_sf_result Fp;
   gsl_sf_result G;
   gsl_sf_result Gp;
-  double Fe;
-  double Ge;
+  double Fe = NAN;
+  double Ge = NAN;
   double lam_min = NAN;
   double lam_F = NAN;
-  double eta;
-  double x;
+  double eta = NAN;
+  double x = NAN;
   int k_G = 0;
 
   TEST_SF(s, gsl_sf_hydrogenicR_1_e, (3.0, 2.0, &r),  0.025759948256148471036,  TEST_TOL0, GSL_SUCCESS);

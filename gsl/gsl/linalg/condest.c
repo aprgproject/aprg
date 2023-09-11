@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #include <gsl/gsl_math.h>
@@ -76,11 +77,11 @@ gsl_linalg_invnorm1(const size_t N,
       gsl_vector_view x = gsl_vector_subvector(work, 0, N);
       gsl_vector_view v = gsl_vector_subvector(work, N, N);
       gsl_vector_view xi = gsl_vector_subvector(work, 2*N, N);
-      double gamma;
-      double gamma_old;
-      double temp;
-      size_t i;
-      size_t k;
+      double gamma = NAN;
+      double gamma_old = NAN;
+      double temp = NAN;
+      size_t i = 0;
+      size_t k = 0;
 
       for (i = 0; i < N; ++i) {
         gsl_vector_set(&x.vector, i, 1.0 / (double) N);
@@ -209,8 +210,8 @@ condest_tri_norm1(CBLAS_UPLO_t Uplo, const gsl_matrix * A)
 {
   const size_t N = A->size2;
   double max = 0.0;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   if (Uplo == CblasUpper)
     {

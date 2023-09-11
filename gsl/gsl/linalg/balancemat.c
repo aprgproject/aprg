@@ -33,6 +33,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_vector.h>
@@ -55,8 +56,8 @@ gsl_linalg_balance_matrix(gsl_matrix * A, gsl_vector * D)
     }
   else
     {
-      double row_norm;
-      double col_norm;
+      double row_norm = NAN;
+      double col_norm = NAN;
       int not_converged = 0;
       gsl_vector_view v;
 
@@ -67,11 +68,11 @@ gsl_linalg_balance_matrix(gsl_matrix * A, gsl_vector * D)
 
       while (not_converged)
         {
-          size_t i;
-          size_t j;
-          double g;
-          double f;
-          double s;
+          size_t i = 0;
+          size_t j = 0;
+          double g = NAN;
+          double f = NAN;
+          double s = NAN;
 
           not_converged = 0;
 

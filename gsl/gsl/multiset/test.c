@@ -57,10 +57,10 @@ void my_error_handler (const char *reason, const char *file, int line, int err);
 int
 main (void)
 {
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   int status = 0;
-  int s;
+  int s = 0;
   gsl_multiset * c = NULL ;
 
   gsl_ieee_env_setup ();

@@ -67,8 +67,8 @@ void gsl_cheb_free(gsl_cheb_series * cs)
 int gsl_cheb_init(gsl_cheb_series * cs, const gsl_function *func,
                   const double a, const double b)
 {
-  size_t k;
-  size_t j;
+  size_t k = 0;
+  size_t j = 0;
 
   if(a >= b) {
     GSL_ERROR_VAL("null function interval [a,b]", GSL_EDOM, 0);

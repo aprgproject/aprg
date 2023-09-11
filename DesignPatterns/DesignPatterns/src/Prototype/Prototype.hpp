@@ -37,7 +37,7 @@ class Client {
 public:
     void setPrototypeAt(int const index, std::unique_ptr<Prototype> prototype) {
         if (index < NUMBER_OF_TYPES) {
-            m_types[index] = move(prototype);
+            m_types[index] = std::move(prototype);
         }
     }
 

@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+#include <math.h>
 #include <stdlib.h>
 
 #include <config.h>
@@ -206,8 +207,8 @@ genherm_standardize_L2(gsl_matrix_complex *A, const gsl_matrix_complex *B)
 {
   const size_t N = A->size1;
   size_t i = 0;
-  double a;
-  double b;
+  double a = NAN;
+  double b = NAN;
   gsl_complex y;
   gsl_complex z;
 
@@ -300,7 +301,7 @@ genherm_standardize_L3(gsl_matrix_complex *A, const gsl_matrix_complex *B)
        *
        * where A11 and B11 are N1-by-N1
        */
-      int status;
+      int status = 0;
       const size_t N1 = GSL_EIGEN_SPLIT_COMPLEX(N);
       const size_t N2 = N - N1;
 
@@ -316,8 +317,9 @@ genherm_standardize_L3(gsl_matrix_complex *A, const gsl_matrix_complex *B)
 
       /* recursion on (A11, B11) */
       status = genherm_standardize_L3(&A11.matrix, &B11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* A21 = A21 * B11^{-1} */
       gsl_blas_ztrsm(CblasRight, CblasLower, CblasConjTrans, CblasNonUnit, GSL_COMPLEX_ONE, &B11.matrix, &A21.matrix);
@@ -336,8 +338,9 @@ genherm_standardize_L3(gsl_matrix_complex *A, const gsl_matrix_complex *B)
 
       /* recursion on (A22, B22) */
       status = genherm_standardize_L3(&A22.matrix, &B22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       return GSL_SUCCESS;
    

@@ -185,8 +185,8 @@ gsl_linalg_bidiag_unpack (const gsl_matrix * A,
     }
   else
     {
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       /* Copy diagonal into diag */
 
@@ -270,8 +270,8 @@ gsl_linalg_bidiag_unpack2 (gsl_matrix * A,
     }
   else
     {
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       /* Initialize V to the identity */
 

@@ -57,8 +57,8 @@ public:
 // responsible for managing the correct sequence of object creation
 class Director {
 public:
-    explicit Director(std::unique_ptr<Builder> builder) : m_builder(move(builder)) {}
-    void setBuilder(std::unique_ptr<Builder> builder) { m_builder = move(builder); }
+    explicit Director(std::unique_ptr<Builder> builder) : m_builder(std::move(builder)) {}
+    void setBuilder(std::unique_ptr<Builder> builder) { m_builder = std::move(builder); }
 
     void construct() {
         m_builder->buildPartA();

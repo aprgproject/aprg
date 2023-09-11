@@ -33,7 +33,7 @@ public:
 class Context {
 public:
     Context() = default;
-    void setState(std::unique_ptr<State> statePointer) { m_statePointer = move(statePointer); }
+    void setState(std::unique_ptr<State> statePointer) { m_statePointer = std::move(statePointer); }
     void request() { m_statePointer->handle(); }
 
     // ...

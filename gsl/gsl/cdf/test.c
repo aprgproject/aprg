@@ -285,9 +285,9 @@ test_discrete_cdf_P (double (*pdf)(unsigned int),
 {
   double sum = NAN;
   double tol = TEST_TOL2;
-  int i;
-  int min;
-  int max;
+  int i = 0;
+  int min = 0;
+  int max = 0;
 
   struct range r = range();
 
@@ -312,9 +312,9 @@ test_discrete_cdf_Q (double (*pdf)(unsigned int),
 {
   double sum = NAN;
   double tol = TEST_TOL2;
-  int i;
-  int min;
-  int max;
+  int i = 0;
+  int min = 0;
+  int max = 0;
 
   struct range r = range();
 
@@ -339,9 +339,9 @@ test_discrete_cdf_PQ (double (*cdf_P)(unsigned int),
 {
   double sum = NAN;
   double tol = GSL_DBL_EPSILON;
-  int i;
-  int min;
-  int max;
+  int i = 0;
+  int min = 0;
+  int max = 0;
 
   struct range r = range();
 

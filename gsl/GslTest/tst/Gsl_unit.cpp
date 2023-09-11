@@ -34,8 +34,8 @@ using namespace alba::mathHelper;
 using namespace std;
 
 TEST(GslTest, GettingTheBesselFunctionInGslWorks) {
-    double xValue = 5.0;
-    double yValue = gsl_sf_bessel_J0(xValue);
+    double const xValue = 5.0;
+    double const yValue = gsl_sf_bessel_J0(xValue);
 
     EXPECT_DOUBLE_EQ(-0.17759677131433830434739701, yValue);
 }
@@ -74,18 +74,18 @@ TEST(GslTest, PermutationFunctionsInGslWorks) {
     gsl_permutation *permutation2 = gsl_permutation_alloc(NUMBER_OF_DIGITS);
 
     gsl_permutation_init(permutation1);
-    PermutationVector initialPermutation(permutation1->data, permutation1->data + permutation1->size);
-    PermutationVector expectedInitialPermutation{0, 1, 2, 3, 4};
+    PermutationVector const initialPermutation(permutation1->data, permutation1->data + permutation1->size);
+    PermutationVector const expectedInitialPermutation{0, 1, 2, 3, 4};
     EXPECT_EQ(expectedInitialPermutation, initialPermutation);
 
     gsl_permutation_next(permutation1);
-    PermutationVector nextPermutation(permutation1->data, permutation1->data + permutation1->size);
-    PermutationVector expectedNextPermutation{0, 1, 2, 4, 3};
+    PermutationVector const nextPermutation(permutation1->data, permutation1->data + permutation1->size);
+    PermutationVector const expectedNextPermutation{0, 1, 2, 4, 3};
     EXPECT_EQ(expectedNextPermutation, nextPermutation);
 
     gsl_permutation_prev(permutation1);
-    PermutationVector prevPermutation(permutation1->data, permutation1->data + permutation1->size);
-    PermutationVector expectedPrevPermutation{0, 1, 2, 3, 4};
+    PermutationVector const prevPermutation(permutation1->data, permutation1->data + permutation1->size);
+    PermutationVector const expectedPrevPermutation{0, 1, 2, 3, 4};
     EXPECT_EQ(expectedPrevPermutation, prevPermutation);
 
     gsl_permutation_next(permutation1);
@@ -94,8 +94,8 @@ TEST(GslTest, PermutationFunctionsInGslWorks) {
     gsl_permutation_inverse(permutation2, permutation1);
     // The inverse of a permutation is another permutation that,
     // when composed with the original permutation, results in the identity permutation
-    PermutationVector inversePermutation(permutation2->data, permutation2->data + permutation2->size);
-    PermutationVector expectedInversePermutation{0, 1, 4, 2, 3};
+    PermutationVector const inversePermutation(permutation2->data, permutation2->data + permutation2->size);
+    PermutationVector const expectedInversePermutation{0, 1, 4, 2, 3};
     EXPECT_EQ(expectedInversePermutation, inversePermutation);
 
     gsl_permutation_free(permutation1);
@@ -181,7 +181,7 @@ TEST(GslTest, SortingAndGettingTheSmallestValuesInGslWorks) {
 
     gsl_sort_smallest(smallestValues.data(), NUMBER_OF_SMALLEST_VALUES, values.data(), stride, NUMBER_OF_VALUES);
 
-    decltype(smallestValues) expectedSmallestValues{0, 1, 2, 3, 4};
+    decltype(smallestValues) const expectedSmallestValues{0, 1, 2, 3, 4};
     EXPECT_EQ(expectedSmallestValues, smallestValues);
 }
 
@@ -192,14 +192,14 @@ TEST(GslTest, MatrixMultiplicationInGslWorks) {
     AlbaMatrix<double> matrixA(3, 2, {0.11, 0.12, 0.13, 0.21, 0.22, 0.23});
     AlbaMatrix<double> matrixB(2, 3, {1011, 1012, 1021, 1022, 1031, 1032});
     AlbaMatrix<double> matrixC(2, 2, {0.00, 0.00, 0.00, 0.00});
-    gsl_matrix_view matrixViewA = gsl_matrix_view_array(matrixA.getMatrixDataReference().data(), 2, 3);
-    gsl_matrix_view matrixViewB = gsl_matrix_view_array(matrixB.getMatrixDataReference().data(), 3, 2);
+    gsl_matrix_view const matrixViewA = gsl_matrix_view_array(matrixA.getMatrixDataReference().data(), 2, 3);
+    gsl_matrix_view const matrixViewB = gsl_matrix_view_array(matrixB.getMatrixDataReference().data(), 3, 2);
     gsl_matrix_view matrixViewC = gsl_matrix_view_array(matrixC.getMatrixDataReference().data(), 2, 2);
 
     // Compute C = A * B
     gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1.0, &matrixViewA.matrix, &matrixViewB.matrix, 0.0, &matrixViewC.matrix);
 
-    AlbaMatrix<double> expectedMatrixC(2, 2, {367.76, 368.12, 674.06, 674.72});
+    AlbaMatrix<double> const expectedMatrixC(2, 2, {367.76, 368.12, 674.06, 674.72});
     EXPECT_EQ(expectedMatrixC, matrixC);
 }
 
@@ -208,8 +208,10 @@ TEST(GslTest, MatrixMultiplicationWithRandomNumbersInGslWorks) {
     AlbaMatrix<double> matrixA(SIDE_SIZE, SIDE_SIZE, {0.11, 0.12, 0.13, 0.21, 0.22, 0.23});
     AlbaMatrix<double> matrixB(SIDE_SIZE, SIDE_SIZE, {1011, 1012, 1021, 1022, 1031, 1032});
     AlbaMatrix<double> matrixC(SIDE_SIZE, SIDE_SIZE);
-    gsl_matrix_view matrixViewA = gsl_matrix_view_array(matrixA.getMatrixDataReference().data(), SIDE_SIZE, SIDE_SIZE);
-    gsl_matrix_view matrixViewB = gsl_matrix_view_array(matrixB.getMatrixDataReference().data(), SIDE_SIZE, SIDE_SIZE);
+    gsl_matrix_view const matrixViewA =
+        gsl_matrix_view_array(matrixA.getMatrixDataReference().data(), SIDE_SIZE, SIDE_SIZE);
+    gsl_matrix_view const matrixViewB =
+        gsl_matrix_view_array(matrixB.getMatrixDataReference().data(), SIDE_SIZE, SIDE_SIZE);
     gsl_matrix_view matrixViewC = gsl_matrix_view_array(matrixC.getMatrixDataReference().data(), SIDE_SIZE, SIDE_SIZE);
     // Fill the matrices with random numbers.
     AlbaUniformNonDeterministicRandomizer<double> randomizer(0, 100);
@@ -243,7 +245,7 @@ TEST(GslTest, SolvingLinearSystemInGslWorks) {
     vector<double> vectorB{1.0, 2.0, 3.0, 4.0};
     vector<double> vectorX{0.0, 0.0, 0.0, 0.0};
     gsl_matrix_view matrixViewA = gsl_matrix_view_array(matrixA.getMatrixDataReference().data(), 4, 4);
-    gsl_vector_view vectorViewB = gsl_vector_view_array(vectorB.data(), 4);
+    gsl_vector_view const vectorViewB = gsl_vector_view_array(vectorB.data(), 4);
     gsl_vector_view vectorViewX = gsl_vector_view_array(vectorX.data(), 4);
     int signum{};
     gsl_permutation *permutation = gsl_permutation_alloc(4);
@@ -251,7 +253,8 @@ TEST(GslTest, SolvingLinearSystemInGslWorks) {
     gsl_linalg_LU_decomp(&matrixViewA.matrix, permutation, &signum);
     gsl_linalg_LU_solve(&matrixViewA.matrix, permutation, &vectorViewB.vector, &vectorViewX.vector);
 
-    vector<double> expectedVectorX{-4.0520502295739744, -12.605611395906907, 1.6609116267088422, 8.6937669287952293};
+    vector<double> const expectedVectorX{
+        -4.0520502295739744, -12.605611395906907, 1.6609116267088422, 8.6937669287952293};
     EXPECT_EQ(expectedVectorX, vectorX);
     gsl_permutation_free(permutation);
 }
@@ -275,9 +278,9 @@ TEST(GslTest, GettingEigenValuesAndVectorInGslWorks) {
     gsl_eigen_symmv_free(workspace);
     gsl_eigen_symmv_sort(&eigenValuesView.vector, &eigenVectorsView.matrix, GSL_EIGEN_SORT_ABS_ASC);
 
-    vector<double> expectedEigenValues{
+    vector<double> const expectedEigenValues{
         9.6702304022603313e-05, 0.0067382736057606408, 0.16914122022144978, 1.5002142800592426};
-    AlbaMatrix<double> expectedEigenVectors(
+    AlbaMatrix<double> const expectedEigenVectors(
         4, 4,
         {-0.029193323164787031432, -0.17918629053545487295, 0.58207569949723725333, 0.79260829116376363412,
          0.32871205576319251218, 0.74191779062845186754, -0.37050218506709270416, 0.45192312090159986182,
@@ -331,7 +334,7 @@ TEST(GslTest, FastFourierTransformInGslWorks) {
 }
 
 double function1ToIntegrate(double const inputValue, void *parameters) {
-    double alpha = *static_cast<double *>(parameters);
+    double const alpha = *static_cast<double *>(parameters);
     return log(alpha * inputValue) / sqrt(inputValue);
 }
 
@@ -352,7 +355,7 @@ TEST(GslTest, NumericalAdaptiveIntegrationInGslWorks) {
     double actualValue{};
     gsl_integration_qags(&gslFunction, 0, 1, 0, 1e-7, 1000, workspace, &actualValue, &estimatedError);
 
-    double expectedValue = -4.0;
+    double const expectedValue = -4.0;
     cout << "actualValue = " << actualValue << "\n";
     cout << "expectedValue = " << expectedValue << "\n";
     cout << "estimatedError = " << estimatedError << "\n";
@@ -364,7 +367,7 @@ TEST(GslTest, NumericalAdaptiveIntegrationInGslWorks) {
 }
 
 double function2ToIntegrate(double const inputValue, void *parameters) {
-    int mFunctionInput = *static_cast<int *>(parameters);
+    int const mFunctionInput = *static_cast<int *>(parameters);
     return gsl_pow_int(inputValue, mFunctionInput) + 1.0;
 }
 
@@ -387,7 +390,8 @@ TEST(GslTest, NumericalFixedPointQuadratureIntegrationInGslWorks) {
 
     gsl_integration_fixed(&gslFunction, &actualValue, workspace);
 
-    double expectedValue = (mFunctionInput % 2 == 0) ? M_SQRTPI + gsl_sf_gamma(0.5 * (1.0 + mFunctionInput)) : M_SQRTPI;
+    double const expectedValue =
+        (mFunctionInput % 2 == 0) ? M_SQRTPI + gsl_sf_gamma(0.5 * (1.0 + mFunctionInput)) : M_SQRTPI;
     cout << "mFunctionInput = " << mFunctionInput << "\n";
     cout << "intervals = " << gsl_integration_fixed_n(workspace) << "\n";
     cout << "actualValue = " << actualValue << "\n";
@@ -405,7 +409,7 @@ TEST(GslTest, UsingARandomGeneratorInGslWorks) {
     const gsl_rng_type *randomGeneratorType = gsl_rng_default;
     gsl_rng_env_setup();
     gsl_rng *randomGenerator = gsl_rng_alloc(randomGeneratorType);
-    int NUMBER_OF_ITEMS = 10;
+    int const NUMBER_OF_ITEMS = 10;
     for (int index = 0; index < NUMBER_OF_ITEMS; ++index) {
         cout << gsl_rng_uniform(randomGenerator) << ",";
     }

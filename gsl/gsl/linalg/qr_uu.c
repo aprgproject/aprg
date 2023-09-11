@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #include <gsl/gsl_linalg.h>
@@ -364,9 +365,9 @@ qrtt_householder_transform (double *v0, double *v1)
   /* replace v[0:M-1] with a householder vector (v[0:M-1]) and
      coefficient tau that annihilate v[1:M-1] */
 
-  double alpha;
-  double beta;
-  double tau ;
+  double alpha = NAN;
+  double beta = NAN;
+  double tau = NAN ;
   
   /* compute xnorm = || [ 0 ; v ] ||, ignoring zero part of vector */
   double xnorm = fabs(*v1);

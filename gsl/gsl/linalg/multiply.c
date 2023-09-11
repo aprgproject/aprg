@@ -20,6 +20,7 @@
 /* Author:  G. Jungman */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_linalg.h>
@@ -35,12 +36,12 @@ gsl_linalg_matmult (const gsl_matrix * A, const gsl_matrix * B, gsl_matrix * C)
     }
   else
     {
-      double a;
-      double b;
+      double a = NAN;
+      double b = NAN;
       double temp = NAN;
-      size_t i;
-      size_t j;
-      size_t k;
+      size_t i = 0;
+      size_t j = 0;
+      size_t k = 0;
 
       for (i = 0; i < C->size1; i++)
         {
@@ -82,10 +83,12 @@ gsl_linalg_matmult_mod (const gsl_matrix * A, gsl_linalg_matrix_mod_t modA,
       size_t dim1_C = C->size1;
       size_t dim2_C = C->size2;
 
-      if (modA & GSL_LINALG_MOD_TRANSPOSE)
+      if (modA & GSL_LINALG_MOD_TRANSPOSE) {
         SWAP_SIZE_T (dim1_A, dim2_A);
-      if (modB & GSL_LINALG_MOD_TRANSPOSE)
+}
+      if (modB & GSL_LINALG_MOD_TRANSPOSE) {
         SWAP_SIZE_T (dim1_B, dim2_B);
+}
 
       if (dim2_A != dim1_B || dim1_A != dim1_C || dim2_B != dim2_C)
         {
@@ -93,10 +96,16 @@ gsl_linalg_matmult_mod (const gsl_matrix * A, gsl_linalg_matrix_mod_t modA,
         }
       else
         {
-          double a, b;
-          double temp;
-          size_t i, j, k;
-          size_t a1, a2, b1, b2;
+          double a;
+          double b;
+          double temp = NAN;
+          size_t i;
+          size_t j;
+          size_t k;
+          size_t a1;
+          size_t a2;
+          size_t b1;
+          size_t b2;
 
           for (i = 0; i < dim1_C; i++)
             {
@@ -106,10 +115,12 @@ gsl_linalg_matmult_mod (const gsl_matrix * A, gsl_linalg_matrix_mod_t modA,
                   a2 = 0;
                   b1 = 0;
                   b2 = j;
-                  if (modA & GSL_LINALG_MOD_TRANSPOSE)
+                  if (modA & GSL_LINALG_MOD_TRANSPOSE) {
                     SWAP_SIZE_T (a1, a2);
-                  if (modB & GSL_LINALG_MOD_TRANSPOSE)
+}
+                  if (modB & GSL_LINALG_MOD_TRANSPOSE) {
                     SWAP_SIZE_T (b1, b2);
+}
 
                   a = gsl_matrix_get (A, a1, a2);
                   b = gsl_matrix_get (B, b1, b2);
@@ -121,10 +132,12 @@ gsl_linalg_matmult_mod (const gsl_matrix * A, gsl_linalg_matrix_mod_t modA,
                       a2 = k;
                       b1 = k;
                       b2 = j;
-                      if (modA & GSL_LINALG_MOD_TRANSPOSE)
+                      if (modA & GSL_LINALG_MOD_TRANSPOSE) {
                         SWAP_SIZE_T (a1, a2);
-                      if (modB & GSL_LINALG_MOD_TRANSPOSE)
+}
+                      if (modB & GSL_LINALG_MOD_TRANSPOSE) {
                         SWAP_SIZE_T (b1, b2);
+}
                       a = gsl_matrix_get (A, a1, a2);
                       b = gsl_matrix_get (B, b1, b2);
                       temp += a * b;

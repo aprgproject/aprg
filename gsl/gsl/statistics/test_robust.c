@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 
@@ -50,8 +51,8 @@ static double
 slow_MAD(const size_t n, const double x[])
 {
   double *work = malloc(n * sizeof(double));
-  double median;
-  double mad;
+  double median = NAN;
+  double mad = NAN;
   size_t i = 0;
 
   for (i = 0; i < n; ++i) {
@@ -80,8 +81,8 @@ slow_Sn0(const size_t n, const double x[])
   double *work1 = malloc(n * sizeof(double));
   double *work2 = malloc(n * sizeof(double));
   double Sn = NAN;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   for (i = 0; i < n; ++i)
     {
@@ -114,8 +115,8 @@ slow_Qn0(const size_t n, const double x[])
   double *work = NULL;
   double Qn = NAN;
   size_t idx = 0;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   if (n < 2) {
     return (0.0);
@@ -142,8 +143,8 @@ static int
 test_median(const double tol, const size_t n, gsl_rng * r)
 {
   double * x = malloc(n * sizeof(double));
-  double median1;
-  double median2;
+  double median1 = NAN;
+  double median2 = NAN;
 
   random_array(n, x, r);
 
@@ -164,8 +165,8 @@ test_mad(const double tol, const size_t n, gsl_rng * r)
 {
   double * x = malloc(n * sizeof(double));
   double * work = malloc(n * sizeof(double));
-  double mad1;
-  double mad2;
+  double mad1 = NAN;
+  double mad2 = NAN;
 
   random_array(n, x, r);
 
@@ -187,8 +188,8 @@ test_Sn(const double tol, const size_t n, gsl_rng * r)
 {
   double * x = malloc(n * sizeof(double));
   double * work = malloc(n * sizeof(double));
-  double Sn1;
-  double Sn2;
+  double Sn1 = NAN;
+  double Sn2 = NAN;
 
   random_array(n, x, r);
 
@@ -213,8 +214,8 @@ test_Qn(const double tol, const size_t n, gsl_rng * r)
   double * x = malloc(n * sizeof(double));
   double * work = malloc(3 * n * sizeof(double));
   int * work_int = malloc(5 * n * sizeof(int));
-  double Qn1;
-  double Qn2;
+  double Qn1 = NAN;
+  double Qn2 = NAN;
 
   random_array(n, x, r);
 

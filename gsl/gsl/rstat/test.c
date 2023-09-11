@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
@@ -50,15 +51,15 @@ test_basic(const size_t n, const double data[], const double tol, const char * d
   const double expected_skew = gsl_stats_skew(data, 1, n);
   const double expected_kurtosis = gsl_stats_kurtosis(data, 1, n);
   double expected_rms = 0.0;
-  double mean;
-  double var;
-  double sd;
-  double sd_mean;
-  double rms;
-  double skew;
-  double kurtosis;
-  size_t i;
-  size_t num;
+  double mean = NAN;
+  double var = NAN;
+  double sd = NAN;
+  double sd_mean = NAN;
+  double rms = NAN;
+  double skew = NAN;
+  double kurtosis = NAN;
+  size_t i = 0;
+  size_t num = 0;
   int status = 0;
 
   /* compute expected rms */
@@ -104,8 +105,8 @@ test_basic(const size_t n, const double data[], const double tol, const char * d
     {
       /* median should be exact for n <= 5 */
       double * data_copy = malloc(n * sizeof(double));
-      double expected_median;
-      double median;
+      double expected_median = NAN;
+      double median = NAN;
 
       memcpy(data_copy, data, n * sizeof(double));
       expected_median = gsl_stats_median(data_copy, 1, n);
@@ -161,8 +162,8 @@ main()
     const size_t N = 2000000;
     double *data = malloc(N * sizeof(double));
     double data2[5];
-    size_t i;
-    size_t j;
+    size_t i = 0;
+    size_t j = 0;
     char buf[64];
 
     /* test1: test on small datasets n <= 5 (median will be exact in this case) */

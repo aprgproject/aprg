@@ -150,8 +150,8 @@ gsl_linalg_complex_cholesky_invert(gsl_matrix_complex * LLT)
     {
       int status = 0;
       size_t N = LLT->size1;
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       /* invert the lower triangle of LLT */
       status = gsl_linalg_complex_tri_invert(CblasLower, CblasNonUnit, LLT);

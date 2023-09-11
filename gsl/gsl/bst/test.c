@@ -164,9 +164,9 @@ static void
 check_traverser(const size_t n, const enum array_order order, gsl_bst_trav * trav, int data,
                 const char *desc, const gsl_bst_workspace * w)
 {
-  int *prev;
-  int *cur;
-  int *next;
+  int *prev = NULL;
+  int *cur = NULL;
+  int *next = NULL;
 
   prev = gsl_bst_trav_prev(trav);
   if (prev != NULL)

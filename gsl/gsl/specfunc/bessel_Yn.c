@@ -43,12 +43,12 @@ static int bessel_Yn_small_x(const int n, const double x, gsl_sf_result * result
   double ln_x_2 = log(0.5*x);
   gsl_sf_result ln_nm1_fact;
   double k_term = NAN;
-  double term1;
-  double sum1;
-  double ln_pre1;
-  double term2;
-  double sum2;
-  double pre2;
+  double term1 = NAN;
+  double sum1 = NAN;
+  double ln_pre1 = NAN;
+  double term2 = NAN;
+  double sum2 = NAN;
+  double pre2 = NAN;
 
   gsl_sf_lnfact_e((unsigned int)(n-1), &ln_nm1_fact);
 
@@ -127,7 +127,7 @@ gsl_sf_bessel_Yn_e(int n, const double x, gsl_sf_result * result)
     result->val *= sign;
     return status;
   }
-  else {
+  
     if(x <= 0.0) {
       DOMAIN_ERROR(result);
     }
@@ -168,7 +168,7 @@ gsl_sf_bessel_Yn_e(int n, const double x, gsl_sf_result * result)
 
       return GSL_ERROR_SELECT_2(stat_1, stat_0);
     }
-  }
+ 
 }
 
 

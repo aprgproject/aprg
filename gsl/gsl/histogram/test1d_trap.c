@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <gsl/gsl_histogram.h>
@@ -35,9 +36,9 @@ void
 test1d_trap (void)
 {
   gsl_histogram *h = NULL;
-  double result;
-  double lower;
-  double upper;
+  double result = NAN;
+  double lower = NAN;
+  double upper = NAN;
   size_t i = 0;
 
   gsl_set_error_handler (&my_error_handler);

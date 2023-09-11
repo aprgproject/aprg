@@ -5,8 +5,8 @@
 namespace alba {
 
 TEST(SampleClassWithStaticTest, InitialValuesAreCorrect) {
-    SampleClassWithStatic object1;
-    SampleClassWithStatic object2;
+    SampleClassWithStatic const object1;
+    SampleClassWithStatic const object2;
 
     EXPECT_EQ(100, object1.nonStaticData);
     EXPECT_EQ(100, object2.nonStaticData);
@@ -17,7 +17,7 @@ TEST(SampleClassWithStaticTest, InitialValuesAreCorrect) {
 }
 
 TEST(SampleClassWithStaticTest, StaticDataCanBeReferedInSeveralWays) {
-    SampleClassWithStatic object;
+    SampleClassWithStatic const object;
 
     EXPECT_EQ(200, SampleClassWithStatic::staticData);
     EXPECT_EQ(300, SampleClassWithStatic::staticConstData);
@@ -34,7 +34,7 @@ TEST(SampleClassWithStaticTest, StaticDataCanBeReferedInSeveralWays) {
 
 TEST(SampleClassWithStaticTest, ValuesCanBeChanged) {
     SampleClassWithStatic object1;
-    SampleClassWithStatic object2;
+    SampleClassWithStatic const object2;
 
     object1.nonStaticData = 101;
     SampleClassWithStatic::staticData = 201;
@@ -52,7 +52,7 @@ TEST(SampleClassWithStaticTest, ValuesCanBeChanged) {
 
 TEST(SampleClassWithStaticTest, ClassDeclaredFunctionsCanCalledWithChangedValues) {
     SampleClassWithStatic object1;
-    SampleClassWithStatic object2;
+    SampleClassWithStatic const object2;
 
     object1.nonStaticData = 101;
     SampleClassWithStatic::staticData = 201;
@@ -65,7 +65,7 @@ TEST(SampleClassWithStaticTest, ClassDeclaredFunctionsCanCalledWithChangedValues
 
 TEST(SampleClassWithStaticTest, ClassDefinedFunctionsCanCalledWithChangedValues) {
     SampleClassWithStatic object1;
-    SampleClassWithStatic object2;
+    SampleClassWithStatic const object2;
 
     object1.nonStaticData = 101;
     SampleClassWithStatic::staticData = 201;

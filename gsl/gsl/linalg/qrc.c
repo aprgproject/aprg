@@ -309,8 +309,8 @@ gsl_linalg_complex_QR_unpack (const gsl_matrix_complex * QR, const gsl_vector_co
     }
   else
     {
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       /* initialize Q to the identity */
       gsl_matrix_complex_set_identity (Q);

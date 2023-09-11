@@ -322,7 +322,7 @@ double cqf16 ( double x , void *params ) {
 
 double cqf17 ( double x , void *params ) {
   double t1 = 50 * M_PI * x ;
-  double t2;
+  double t2 = NAN;
   t2 = sin(t1) / t1;
   return 50 * t2 * t2;
 }

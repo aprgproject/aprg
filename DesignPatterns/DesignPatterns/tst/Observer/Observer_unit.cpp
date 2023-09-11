@@ -13,7 +13,7 @@ TEST(ObserverTest, Test1) {
     std::cout << "Observer 1 state: " << observer1.getState() << "\n";
     std::cout << "Observer 2 state: " << observer2.getState() << "\n";
 
-    std::unique_ptr<Subject> subject = make_unique<ConcreteSubject>();
+    std::unique_ptr<Subject> const subject = make_unique<ConcreteSubject>();
     subject->attach(&observer1);
     subject->attach(&observer2);
 

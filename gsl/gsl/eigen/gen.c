@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 
@@ -233,8 +234,8 @@ gsl_eigen_gen (gsl_matrix * A, gsl_matrix * B, gsl_vector_complex * alpha,
     }
   else
     {
-      double anorm;
-      double bnorm;
+      double anorm = NAN;
+      double bnorm = NAN;
 
       /* compute the Hessenberg-Triangular reduction of (A, B) */
       gsl_linalg_hesstri_decomp(A, B, w->Q, w->Z, w->work);
@@ -360,8 +361,8 @@ gen_schur_decomp(gsl_matrix *H, gsl_matrix *R, gsl_vector_complex *alpha,
   size_t q = 0;             /* index of small subdiagonal element */
   gsl_complex z1;
   gsl_complex z2;   /* complex values */
-  double a;
-  double b;
+  double a = NAN;
+  double b = NAN;
   int s = 0;
   int flag = 0;
 
@@ -427,8 +428,9 @@ gen_schur_decomp(gsl_matrix *H, gsl_matrix *R, gsl_vector_complex *alpha,
                * H(n, n - 1) to split off a 1-by-1 block
                */
 
-              if (q != N - 1)
+              if (q != N - 1) {
                 gen_tri_chase_zero(&h.matrix, &r.matrix, q, w);
+}
 
               /* now zero H(n, n - 1) */
               gen_tri_zero_H(&h.matrix, &r.matrix, w);
@@ -606,17 +608,17 @@ gen_qzstep(gsl_matrix *H, gsl_matrix *R, gsl_eigen_gen_workspace *w)
   const size_t N = H->size1;
   gsl_matrix_view vh;
   gsl_matrix_view vr; /* views of bottom right 2-by-2 block */
-  double wr1;
-  double wr2;
-  double wi;
-  double scale1;
-  double scale2;
-  double scale;
-  double cs;
-  double sn;          /* givens rotation */
-  double temp;
+  double wr1 = NAN;
+  double wr2 = NAN;
+  double wi = NAN;
+  double scale1 = NAN;
+  double scale2 = NAN;
+  double scale = NAN;
+  double cs = NAN;
+  double sn = NAN;          /* givens rotation */
+  double temp = NAN;
   double /* temporary variables */
-         temp2;
+         temp2 = NAN;
   size_t j = 0;               /* looping */
   gsl_vector_view xv;
   gsl_vector_view yv; /* temporary views */
@@ -843,22 +845,22 @@ gen_qzstep_d(gsl_matrix *H, gsl_matrix *R, gsl_eigen_gen_workspace *w)
   gsl_vector_view v3; /* views into 'dat' */
   gsl_matrix_view m;      /* temporary view */
   double tmp = NAN;
-  size_t q;
-  size_t r;
+  size_t q = 0;
+  size_t r = 0;
   size_t top = 0;         /* location of H in original matrix */
   double scale = NAN;
-  double AB11;
+  double AB11 = NAN;
   double /* various matrix element ratios */
-         AB22;
-  double ABNN;
-  double ABMM;
-  double AMNBNN;
-  double ANMBMM;
-  double A21B11;
-  double A12B22;
-  double A32B22;
-  double B12B22;
-  double BMNBNN;
+         AB22 = NAN;
+  double ABNN = NAN;
+  double ABMM = NAN;
+  double AMNBNN = NAN;
+  double ANMBMM = NAN;
+  double A21B11 = NAN;
+  double A12B22 = NAN;
+  double A32B22 = NAN;
+  double B12B22 = NAN;
+  double BMNBNN = NAN;
 
   v2 = gsl_vector_view_array(dat, 2);
   v3 = gsl_vector_view_array(dat, 3);
@@ -1250,10 +1252,10 @@ static void
 gen_tri_split_top(gsl_matrix *H, gsl_matrix *R, gsl_eigen_gen_workspace *w)
 {
   const size_t N = H->size1;
-  size_t j;
+  size_t j = 0;
   size_t top = 0;
-  double cs;
-  double sn;
+  double cs = NAN;
+  double sn = NAN;
   gsl_vector_view xv;
   gsl_vector_view yv;
 
@@ -1321,10 +1323,10 @@ gen_tri_chase_zero(gsl_matrix *H, gsl_matrix *R, size_t q,
                    gsl_eigen_gen_workspace *w)
 {
   const size_t N = H->size1;
-  size_t j;
+  size_t j = 0;
   size_t top = 0;
-  double cs;
-  double sn;
+  double cs = NAN;
+  double sn = NAN;
   gsl_vector_view xv;
   gsl_vector_view yv;
 
@@ -1430,8 +1432,8 @@ gen_tri_zero_H(gsl_matrix *H, gsl_matrix *R, gsl_eigen_gen_workspace *w)
 {
   const size_t N = H->size1;
   size_t top = 0;
-  double cs;
-  double sn;
+  double cs = NAN;
+  double sn = NAN;
   gsl_vector_view xv;
   gsl_vector_view yv;
 
@@ -1553,7 +1555,7 @@ gen_search_small_elements(gsl_matrix *H, gsl_matrix *R,
           *flag = 2;
           return (i);
         }
-      else if (pass1 && pass2)  /* case D */
+      if (pass1 && pass2)  /* case D */
         {
           *flag = 3;
           return (i);
@@ -1672,14 +1674,14 @@ gen_schur_standardize2(gsl_matrix *A, gsl_matrix *B, gsl_complex *alpha1,
   gsl_matrix_view vv = gsl_matrix_view_array(datV, 2, 2);
   gsl_vector_view sv = gsl_vector_view_array(datS, 2);
   gsl_vector_view wv = gsl_vector_view_array(work, 2);
-  double B11;
-  double B22;
+  double B11 = NAN;
+  double B22 = NAN;
   size_t top = 0;
   double det = NAN;
-  double cr;
-  double sr;
-  double cl;
-  double sl;
+  double cr = NAN;
+  double sr = NAN;
+  double cl = NAN;
+  double sl = NAN;
   gsl_vector_view xv;
   gsl_vector_view yv;
   int s = 0;
@@ -1875,48 +1877,48 @@ static int
 gen_compute_eigenvals(gsl_matrix *A, gsl_matrix *B, gsl_complex *alpha1,
                       gsl_complex *alpha2, double *beta1, double *beta2)
 {
-  double wr1;
-  double wr2;
-  double wi;
-  double scale1;
-  double scale2;
+  double wr1 = NAN;
+  double wr2 = NAN;
+  double wi = NAN;
+  double scale1 = NAN;
+  double scale2 = NAN;
   double s1inv = NAN;
-  double A11;
-  double A12;
-  double A21;
-  double A22;
-  double B11;
-  double B22;
-  double c11r;
-  double c11i;
-  double c12;
-  double c21;
-  double c22r;
-  double c22i;
-  double cz;
-  double cq;
-  double szr;
-  double szi;
-  double sqr;
-  double sqi;
-  double a1r;
-  double a1i;
-  double a2r;
-  double a2i;
-  double b1r;
-  double b1i;
-  double b1a;
-  double b2r;
-  double b2i;
-  double b2a;
-  double alphar;
-  double alphai;
-  double t1;
-  double an;
-  double bn;
-  double tempr;
-  double tempi;
-  double wabs;
+  double A11 = NAN;
+  double A12 = NAN;
+  double A21 = NAN;
+  double A22 = NAN;
+  double B11 = NAN;
+  double B22 = NAN;
+  double c11r = NAN;
+  double c11i = NAN;
+  double c12 = NAN;
+  double c21 = NAN;
+  double c22r = NAN;
+  double c22i = NAN;
+  double cz = NAN;
+  double cq = NAN;
+  double szr = NAN;
+  double szi = NAN;
+  double sqr = NAN;
+  double sqi = NAN;
+  double a1r = NAN;
+  double a1i = NAN;
+  double a2r = NAN;
+  double a2i = NAN;
+  double b1r = NAN;
+  double b1i = NAN;
+  double b1a = NAN;
+  double b2r = NAN;
+  double b2i = NAN;
+  double b2a = NAN;
+  double alphar = NAN;
+  double alphai = NAN;
+  double t1 = NAN;
+  double an = NAN;
+  double bn = NAN;
+  double tempr = NAN;
+  double tempi = NAN;
+  double wabs = NAN;
 
   /*
    * This function is called from gen_schur_standardize2() and
@@ -2135,8 +2137,8 @@ gen_get_submatrix(const gsl_matrix *A, const gsl_matrix *B)
 inline static double
 normF (gsl_matrix * A)
 {
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   size_t M = A->size1;
   size_t N = A->size2;
   double sum = 0.0;

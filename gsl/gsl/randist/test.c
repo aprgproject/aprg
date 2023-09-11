@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -425,8 +426,8 @@ test_shuffle (void)
 {
   double count[10][10];
   int x[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-  int i;
-  int j;
+  int i = 0;
+  int j = 0;
   int status = 0;
 
   for (i = 0; i < 10; i++)
@@ -477,8 +478,8 @@ test_choose (void)
   double count[10];
   int x[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
   int y[3] = { 0, 1, 2 };
-  int i;
-  int j;
+  int i = 0;
+  int j = 0;
   int status = 0;
 
   for (i = 0; i < 10; i++)
@@ -526,8 +527,8 @@ testMoments (double (*f) (void), const char *name,
 {
   int i = 0;
   double count = 0;
-  double expected;
-  double sigma;
+  double expected = NAN;
+  double sigma = NAN;
   int status = 0;
 
   for (i = 0; i < N; i++)
@@ -571,8 +572,8 @@ wrapper_function (double x, void *params)
 double
 integrate (pdf_func * pdf, double a, double b)
 {
-  double result;
-  double abserr;
+  double result = NAN;
+  double abserr = NAN;
   size_t n = 1000;
   gsl_function f;  
   gsl_integration_workspace * w = gsl_integration_workspace_alloc (n);
@@ -598,9 +599,9 @@ testPDF (double (*f) (void), double (*pdf) (double), const char *name)
   double dx = (b - a) / BINS;
   double bin = NAN;
   double total = 0;
-  double mean;
-  int i;
-  int j;
+  double mean = NAN;
+  int i = 0;
+  int j = 0;
   int status = 0;
   int status_i = 0;
   int attempts = 0;
@@ -942,7 +943,7 @@ test_dir2d (void)
 {
   double x = 0;
   double y = 0;
-  double theta;
+  double theta = NAN;
   gsl_ran_dir_2d (r_global, &x, &y);
   theta = atan2 (x, y);
   return theta;
@@ -966,7 +967,7 @@ test_dir2d_trig_method (void)
 {
   double x = 0;
   double y = 0;
-  double theta;
+  double theta = NAN;
   gsl_ran_dir_2d_trig_method (r_global, &x, &y);
   theta = atan2 (x, y);
   return theta;
@@ -991,7 +992,7 @@ test_dir3dxy (void)
   double x = 0;
   double y = 0;
   double z = 0;
-  double theta;
+  double theta = NAN;
   gsl_ran_dir_3d (r_global, &x, &y, &z);
   theta = atan2 (x, y);
   return theta;
@@ -1016,7 +1017,7 @@ test_dir3dyz (void)
   double x = 0;
   double y = 0;
   double z = 0;
-  double theta;
+  double theta = NAN;
   gsl_ran_dir_3d (r_global, &x, &y, &z);
   theta = atan2 (y, z);
   return theta;
@@ -1041,7 +1042,7 @@ test_dir3dzx (void)
   double x = 0;
   double y = 0;
   double z = 0;
-  double theta;
+  double theta = NAN;
   gsl_ran_dir_3d (r_global, &x, &y, &z);
   theta = atan2 (z, x);
   return theta;
@@ -1135,13 +1136,13 @@ test_dirichlet_moments (void)
   double theta_sum[DIRICHLET_K];
 
   double alpha_sum = 0.0;
-  double mean;
-  double obs_mean;
-  double sd;
-  double sigma;
-  int status;
-  int k;
-  int n;
+  double mean = NAN;
+  double obs_mean = NAN;
+  double sd = NAN;
+  double sigma = NAN;
+  int status = 0;
+  int k = 0;
+  int n = 0;
 
   for (k = 0; k < DIRICHLET_K; k++)
     {
@@ -1190,13 +1191,13 @@ test_multinomial_moments (void)
   unsigned int  x[MULTI_DIM];
   double x_sum[MULTI_DIM];
 
-  double mean;
-  double obs_mean;
-  double sd;
-  double sigma;
-  int status;
-  int k;
-  int n;
+  double mean = NAN;
+  double obs_mean = NAN;
+  double sd = NAN;
+  double sigma = NAN;
+  int status = 0;
+  int k = 0;
+  int n = 0;
 
   for (k = 0; k < MULTI_DIM; k++) {
     x_sum[k] =0.0;
@@ -1715,7 +1716,7 @@ test_bivariate_gaussian2 (void)
 double
 test_bivariate_gaussian2_pdf (double y)
 {
-  int i;
+  int i = 0;
   int n = 10;
   double sum = 0;
   double a = -10;
@@ -2042,11 +2043,11 @@ void
 test_wishart (void)
 {
   size_t d = 1;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   double df[5] = {1, 3, 5, 7, 9};
-  double mean_wishart;
-  double var_wishart;
+  double mean_wishart = NAN;
+  double var_wishart = NAN;
   int status = 0;
   gsl_matrix * V = gsl_matrix_calloc(d, d);
   gsl_matrix * L = gsl_matrix_calloc(d, d);

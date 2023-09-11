@@ -65,9 +65,9 @@ TEST(ConstExamplesTest, ConstCanBeAddedOnTopUsingPointers) {
 }
 
 TEST(ConstExamplesTest, ConstCanBeAddedOnTopUsingReferences) {
-    int data1 = 1;
-    int& r1 = data1;     // r1 refers to (mutable) int
-    int const& r2 = r1;  // r2 refers to "const"ant int, "const" is added on r2
+    int const data1 = 1;
+    int const& r1 = data1;  // r1 refers to (mutable) int
+    int const& r2 = r1;     // r2 refers to "const"ant int, "const" is added on r2
     // int & r3 = r2; // Error because you cannot remove the "const"ness of r2
     // int& const r4 = r1; // Error because there is no &const, because address of the reference cannot be moved
     int const data2 = 2;
@@ -207,7 +207,7 @@ TEST(ConstExamplesTest, FunctionMatchingWithoutConstInFunctionSignatureOfAClassW
         static void myFunction() { cout << "calling non-const\n"; }
     };
 
-    Foo a;
+    Foo const a;
     // Foo const b(a);
     Foo::myFunction();  // goes to "non-const"
     // b.myFunction(); // Error because b is const

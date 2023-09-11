@@ -84,7 +84,7 @@ int gsl_sf_bessel_J0_e(const double x, gsl_sf_result * result)
   if(y <= 4.0) {
     return cheb_eval_e(&bj0_cs, 0.125*y*y - 1.0, result);
   }
-  else {
+  
     const double z = 32.0/(y*y) - 1.0;
     gsl_sf_result ca;
     gsl_sf_result ct;
@@ -98,7 +98,7 @@ int gsl_sf_bessel_J0_e(const double x, gsl_sf_result * result)
     result->err  = fabs(cp.val) * ca.err/sqrty + fabs(ampl) * cp.err;
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_ERROR_SELECT_3(stat_ca, stat_ct, stat_cp);
-  }
+ 
 }
 
 /*-*-*-*-*-*-*-*-*-* Functions w/ Natural Prototypes *-*-*-*-*-*-*-*-*-*-*/

@@ -506,8 +506,8 @@ cholesky_LDLT_norm1(const gsl_matrix * LDLT, const gsl_permutation * p, gsl_vect
   gsl_vector_const_view D = gsl_matrix_const_diagonal(LDLT);
   gsl_vector_view diagA = gsl_vector_subvector(work, N, N);
   double max = 0.0;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   /* reconstruct diagonal entries of original matrix A */
   for (j = 0; j < N; ++j)

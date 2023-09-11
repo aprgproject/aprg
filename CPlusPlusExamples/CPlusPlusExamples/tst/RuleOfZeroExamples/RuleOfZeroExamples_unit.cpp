@@ -65,7 +65,7 @@ public:
 
     NaiveIntVector& operator=(NaiveIntVector&& rightHandSide) noexcept {
         cout << "Move assignment\n";
-        NaiveIntVector copy(move(rightHandSide));  // calls the move constructor
+        NaiveIntVector copy(std::move(rightHandSide));  // calls the move constructor
         // std::move is needed (because rvalue has a name)
         swap(copy, *this);  // The copy-and-swap idiom (to be safe for "self assignment").
         return *this;
@@ -103,10 +103,10 @@ private:
 }  // namespace
 
 TEST(RuleOfZeroExamplesTest, InitializationIsNotAssignment) {
-    OperationPrinter object1;
+    OperationPrinter const object1;
 
     // Even though "=" operation is used:
-    OperationPrinter object2(3);         // Calls the value constructor
+    OperationPrinter const object2(3);   // Calls the value constructor
     OperationPrinter object3 = object1;  // Calls the copy constructor
     object3 = object2;                   // now it calls the copy assignment (operator=);
 }

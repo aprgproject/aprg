@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 
@@ -328,50 +329,50 @@ genv_get_right_eigenvectors(const gsl_matrix *S, const gsl_matrix *T,
   const double small = GSL_DBL_MIN * N / GSL_DBL_EPSILON;
   const double big = 1.0 / small;
   const double bignum = 1.0 / (GSL_DBL_MIN * N);
-  size_t i;
-  size_t j;
-  size_t k;
-  size_t end;
+  size_t i = 0;
+  size_t j = 0;
+  size_t k = 0;
+  size_t end = 0;
   int is = 0;
-  double anorm;
-  double bnorm;
-  double temp;
-  double temp2;
-  double temp2r;
-  double temp2i;
-  double ascale;
-  double bscale;
-  double salfar;
-  double sbeta;
-  double acoef;
-  double bcoefr;
-  double bcoefi;
-  double acoefa;
-  double bcoefa;
-  double creala;
-  double cimaga;
-  double crealb;
-  double cimagb;
-  double cre2a;
-  double cim2a;
-  double cre2b;
-  double cim2b;
-  double dmin;
-  double xmax;
+  double anorm = NAN;
+  double bnorm = NAN;
+  double temp = NAN;
+  double temp2 = NAN;
+  double temp2r = NAN;
+  double temp2i = NAN;
+  double ascale = NAN;
+  double bscale = NAN;
+  double salfar = NAN;
+  double sbeta = NAN;
+  double acoef = NAN;
+  double bcoefr = NAN;
+  double bcoefi = NAN;
+  double acoefa = NAN;
+  double bcoefa = NAN;
+  double creala = NAN;
+  double cimaga = NAN;
+  double crealb = NAN;
+  double cimagb = NAN;
+  double cre2a = NAN;
+  double cim2a = NAN;
+  double cre2b = NAN;
+  double cim2b = NAN;
+  double dmin = NAN;
+  double xmax = NAN;
   double scale = NAN;
-  size_t nw;
-  size_t na;
-  int lsa;
-  int lsb;
+  size_t nw = 0;
+  size_t na = 0;
+  int lsa = 0;
+  int lsb = 0;
   int complex_pair = 0;
   gsl_complex z_zero;
   gsl_complex z_one;
   double bdiag[2] = { 0.0, 0.0 };
   double sum[4];
   int il2by2 = 0;
-  size_t jr;
-  size_t jc;
-  size_t ja;
+  size_t jr = 0;
+  size_t jc = 0;
+  size_t ja = 0;
   double xscale = NAN;
   gsl_vector_complex_view ecol;
   gsl_vector_view re;

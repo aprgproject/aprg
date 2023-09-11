@@ -20,6 +20,7 @@
 /* Author:  G. Jungman */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <gsl/gsl_math.h>
@@ -58,8 +59,8 @@ main (void)
 
   {
     double t[N];
-    double x;
-    double y;
+    double x = NAN;
+    double y = NAN;
     int n = 0;
 
     /* terms for exp(10.0) */
@@ -78,8 +79,8 @@ main (void)
 
   {
     double t[N];
-    double x;
-    double y;
+    double x = NAN;
+    double y = NAN;
     int n = 0;
 
     /* terms for exp(-10.0) */
@@ -98,8 +99,8 @@ main (void)
 
   {
     double t[N];
-    double x;
-    double y;
+    double x = NAN;
+    double y = NAN;
     int n = 0;
 
     /* terms for -log(1-x) */
@@ -117,8 +118,8 @@ main (void)
 
   {
     double t[N];
-    double x;
-    double y;
+    double x = NAN;
+    double y = NAN;
     int n = 0;
 
     /* terms for -log(1-x) */
@@ -220,8 +221,8 @@ main (void)
 void
 check_trunc (double * t, double expected, const char * desc)
 {
-  double sum_accel;
-  double prec;
+  double sum_accel = NAN;
+  double prec = NAN;
 
   gsl_sum_levin_utrunc_workspace * w = gsl_sum_levin_utrunc_alloc (N);
   
@@ -237,10 +238,10 @@ check_trunc (double * t, double expected, const char * desc)
 void
 check_full (double * t, double expected, const char * desc)
 {
-  double sum_accel;
-  double err_est;
-  double sd_actual;
-  double sd_est;
+  double sum_accel = NAN;
+  double err_est = NAN;
+  double sd_actual = NAN;
+  double sd_est = NAN;
   
   gsl_sum_levin_u_workspace * w = gsl_sum_levin_u_alloc (N);
 

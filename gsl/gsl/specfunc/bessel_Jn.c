@@ -67,7 +67,7 @@ int gsl_sf_bessel_Jn_e(int n, double x, gsl_sf_result * result)
     result->err = b1.err;
     return stat_J1;
   }
-  else {
+  
     if(x == 0.0) {
       result->val = 0.0;
       result->err = 0.0;
@@ -137,7 +137,7 @@ int gsl_sf_bessel_Jn_e(int n, double x, gsl_sf_result * result)
       result->err = fabs(err);
       return GSL_ERROR_SELECT_2(stat_CF1, stat_b);
     }
-  }
+ 
 }
 
 

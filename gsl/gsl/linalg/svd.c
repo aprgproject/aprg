@@ -50,11 +50,11 @@ int
 gsl_linalg_SV_decomp (gsl_matrix * A, gsl_matrix * V, gsl_vector * S, 
                       gsl_vector * work)
 {
-  size_t a;
-  size_t b;
-  size_t i;
-  size_t j;
-  size_t iter;
+  size_t a = 0;
+  size_t b = 0;
+  size_t i = 0;
+  size_t j = 0;
+  size_t iter = 0;
 
   const size_t M = A->size1;
   const size_t N = A->size2;
@@ -282,8 +282,8 @@ gsl_linalg_SV_decomp_mod (gsl_matrix * A,
                           gsl_matrix * X,
                           gsl_matrix * V, gsl_vector * S, gsl_vector * work)
 {
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   const size_t M = A->size1;
   const size_t N = A->size2;
@@ -568,9 +568,9 @@ gsl_linalg_SV_decomp_jacobi (gsl_matrix * A, gsl_matrix * Q, gsl_vector * S)
     {
       const size_t M = A->size1;
       const size_t N = A->size2;
-      size_t i;
-      size_t j;
-      size_t k;
+      size_t i = 0;
+      size_t j = 0;
+      size_t k = 0;
 
       /* Initialize the rotation counter and the sweep counter. */
       int count = 1;
@@ -610,15 +610,15 @@ gsl_linalg_SV_decomp_jacobi (gsl_matrix * A, gsl_matrix * Q, gsl_vector * S)
                   double b = 0.0;
                   double p = 0.0;
                   double q = 0.0;
-                  double cosine;
-                  double sine;
+                  double cosine = NAN;
+                  double sine = NAN;
                   double v = NAN;
-                  double abserr_a;
-                  double abserr_b;
-                  int sorted;
-                  int orthog;
-                  int noisya;
-                  int noisyb;
+                  double abserr_a = NAN;
+                  double abserr_b = NAN;
+                  int sorted = 0;
+                  int orthog = 0;
+                  int noisya = 0;
+                  int noisyb = 0;
 
                   gsl_vector_view cj = gsl_matrix_column (A, j);
                   gsl_vector_view ck = gsl_matrix_column (A, k);

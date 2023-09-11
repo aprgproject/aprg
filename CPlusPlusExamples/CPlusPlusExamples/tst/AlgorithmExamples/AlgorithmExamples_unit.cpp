@@ -25,7 +25,7 @@ TEST(AlgorithmExamplesTest, SlideToTheRightWorksByUsingRotate) {
     // {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
     // { ,  ,  , f,  ,  , l,  ,  , p}; // call rotate(f,l,p);
     // {0, 1, 2, 6, 7, 8, 3, 4, 5, 9};
-    array input = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    array const input = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     auto output = input;
     rotate(begin(output) + 3, begin(output) + 6, begin(output) + 9);
@@ -38,7 +38,7 @@ TEST(AlgorithmExamplesTest, SlideToTheLeftWorksByUsingRotate) {
     // {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
     // {p,  ,  , f,  ,  , l,  ,  ,  }; // call rotate(p,f,l);
     // {0, 3, 4, 5, 1, 2, 6, 7, 8, 9};
-    array input = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    array const input = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     auto output = input;
     rotate(begin(output) + 1, begin(output) + 3, begin(output) + 6);
@@ -51,7 +51,7 @@ TEST(AlgorithmExamplesTest, SlideWorksByUsingRotate) {
     auto slideStart = 3;
     auto slideEnd = 5;
     auto destination = 7;  // move after destination
-    array input = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    array const input = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     auto output = input;
     using Iterator = decltype(input)::iterator;
@@ -73,7 +73,7 @@ TEST(AlgorithmExamplesTest, SlideWorksByUsingRotate) {
 
 TEST(AlgorithmExamplesTest, GatherToTheLeftWorksByUsingStablePartition) {
     // gather items divisible by 3 and put it at the start
-    array input = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    array const input = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     auto output = input;
     stable_partition(begin(output), end(output), [](auto value) { return mathHelper::isDivisible(value, 3); });
@@ -84,7 +84,7 @@ TEST(AlgorithmExamplesTest, GatherToTheLeftWorksByUsingStablePartition) {
 
 TEST(AlgorithmExamplesTest, GatherToTheRightWorksByUsingStablePartition) {
     // gather items divisible by 3 and put it at the start
-    array input = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    array const input = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     auto output = input;
     stable_partition(begin(output), end(output), [](auto value) { return !(mathHelper::isDivisible(value, 3)); });
@@ -95,7 +95,7 @@ TEST(AlgorithmExamplesTest, GatherToTheRightWorksByUsingStablePartition) {
 
 TEST(AlgorithmExamplesTest, GatherToACenterWorksByUsingStablePartition) {
     // gather items divisible by 3 and put it at the start
-    array input = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    array const input = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     auto center = 5;
 
     auto output = input;
@@ -116,7 +116,7 @@ TEST(AlgorithmExamplesTest, PartialSortVsNthElementPlusSort) {
     // Partial sort or nth element + sort?
     // In old implementations (nthElement+sort) used to be better
     // sort first four elements
-    array input = {2, 8, 1, 9, 3, 5, 7, 4, 6};
+    array const input = {2, 8, 1, 9, 3, 5, 7, 4, 6};
 
     // Partial sort
     auto output1 = input;
@@ -154,7 +154,7 @@ TEST(AlgorithmExamplesTest, ProcessConfigurationUpdates) {
 TEST(AlgorithmExamplesTest, GettingTheDifferenceBetweenMaximumAndMinimumWorks) {
     // Given an array of integers find the difference between the minimum and maximum?
     // Note its guaranteed that input is not empty.
-    array input = {2, 1, 3, 5, 4};
+    array const input = {2, 1, 3, 5, 4};
 
     auto [minIterator, maxIterator] = minmax_element(cbegin(input), cend(input));
     auto output = *maxIterator - *minIterator;
@@ -224,7 +224,7 @@ TEST(AlgorithmExamplesTest, TrappingRainWater) {
     // | | | |B|W|W|W|B|B|W|B| |
     // | |B|W|B|B|W|B|B|B|B|B|B|
     // Legend: B is a block, W is water.
-    array elevations = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
+    array const elevations = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
 
     auto highestIterator = max_element(cbegin(elevations), cend(elevations));
     // transform reduce solution

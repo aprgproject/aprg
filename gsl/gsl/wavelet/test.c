@@ -1,4 +1,5 @@
 #include <config.h>
+#include <math.h>
 #include <stdio.h>
 #include <math.h>
 
@@ -34,10 +35,10 @@ test_2d (size_t N, size_t tda, const gsl_wavelet_type * T, size_t member, int ty
 int
 main (int argc, char **argv)
 {
-  size_t i;
-  size_t N;
-  size_t stride;
-  size_t tda;
+  size_t i = 0;
+  size_t N = 0;
+  size_t stride = 0;
+  size_t tda = 0;
   const int S = 1;
   const int NS = 2;  /* Standard & Non-standard transforms */
 
@@ -104,9 +105,9 @@ void
 test_1d (size_t N, size_t stride, const gsl_wavelet_type * T, size_t member)
 {
   gsl_wavelet_workspace *work = NULL;
-  gsl_vector *v1;
-  gsl_vector *v2;
-  gsl_vector *vdelta;
+  gsl_vector *v1 = NULL;
+  gsl_vector *v2 = NULL;
+  gsl_vector *vdelta = NULL;
   gsl_vector_view v;
   gsl_wavelet *w = NULL;
 
@@ -145,8 +146,8 @@ test_1d (size_t N, size_t stride, const gsl_wavelet_type * T, size_t member)
     }
 
   {
-    double x1;
-    double x2;
+    double x1 = NAN;
+    double x2 = NAN;
     i = gsl_vector_max_index (vdelta);
     x1 = gsl_vector_get (v1, i);
     x2 = gsl_vector_get (v2, i);
@@ -246,8 +247,8 @@ test_2d (size_t N, size_t tda, const gsl_wavelet_type * T, size_t member, int ty
     }
 
   {
-    double x1;
-    double x2;
+    double x1 = NAN;
+    double x2 = NAN;
     gsl_matrix_max_index (mdelta, &i, &j);
     x1 = gsl_matrix_get (m1, i, j);
     x2 = gsl_matrix_get (m2, i, j);

@@ -27,6 +27,7 @@
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_linalg.h>
+#include <math.h>
 
 static double ldlt_norm1(const gsl_matrix * A);
 static int ldlt_Ainv(CBLAS_TRANSPOSE_t TransA, gsl_vector * x, void * params);
@@ -60,10 +61,10 @@ gsl_linalg_ldlt_decomp (gsl_matrix * A)
     }
   else
     {
-      size_t i;
-      size_t j;
-      double a00;
-      double anorm;
+      size_t i = 0;
+      size_t j = 0;
+      double a00 = NAN;
+      double anorm = NAN;
       gsl_vector_view work;
       gsl_vector_view v;
 
@@ -242,8 +243,8 @@ ldlt_norm1(const gsl_matrix * A)
 {
   const size_t N = A->size1;
   double max = 0.0;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   for (j = 0; j < N; ++j)
     {

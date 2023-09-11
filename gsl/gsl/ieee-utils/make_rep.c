@@ -46,8 +46,8 @@ static int determine_ieee_type (int non_zero, int exponent, int max_exponent);
 void 
 gsl_ieee_float_to_rep (const float * x, gsl_ieee_float_rep * r)
 {
-  int e;
-  int non_zero;
+  int e = 0;
+  int non_zero = 0;
 
   union { 
     float f;
@@ -92,8 +92,8 @@ void
 gsl_ieee_double_to_rep (const double * x, gsl_ieee_double_rep * r)
 {
 
-  int e;
-  int non_zero;
+  int e = 0;
+  int non_zero = 0;
 
   union 
   { 
@@ -183,7 +183,7 @@ determine_ieee_type (int non_zero, int exponent, int max_exponent)
           return GSL_IEEE_TYPE_INF ;
        
     }
-  else if (exponent == 0)
+  if (exponent == 0)
     {
       if (non_zero)
         {

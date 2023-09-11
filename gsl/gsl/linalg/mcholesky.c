@@ -94,8 +94,8 @@ gsl_linalg_mcholesky_decomp (gsl_matrix * A, gsl_permutation * p,
       double gamma = 0.0;
       double xi = 0.0;
       gsl_vector_view diag = gsl_matrix_diagonal(A);
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       /* save a copy of A in upper triangle (for later rcond calculation) */
       gsl_matrix_transpose_tricpy(CblasLower, CblasUnit, A, A);
@@ -137,11 +137,11 @@ gsl_linalg_mcholesky_decomp (gsl_matrix * A, gsl_permutation * p,
 
       for (j = 0; j < N; ++j)
         {
-          double ajj;
-          double thetaj;
-          double u;
-          double alpha;
-          double alphainv;
+          double ajj = NAN;
+          double thetaj = NAN;
+          double u = NAN;
+          double alpha = NAN;
+          double alphainv = NAN;
           gsl_vector_view w;
           size_t q = 0;
 

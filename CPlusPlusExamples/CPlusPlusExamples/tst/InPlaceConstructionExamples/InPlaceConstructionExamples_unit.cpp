@@ -44,18 +44,18 @@ struct S {
 };
 
 TEST(InPlaceConstructionExamplesTest, ClassesWithBasicFunctionWorks) {
-    S s01;              // Default construct
-    S s02(Arg{});       // Value construct
-    S s03(4);           // Explicit value construct (1)
-    S s04(4, 5);        // Explicit value construct (2)
-    S s05(s01);         // Copy construct
-    S s06(move(s01));   // Move construct
-    S s07 = s02;        // Copy construct
-    S s08 = move(s02);  // Move construct
-    S s09;              // Default construct
-    s09 = s03;          // Copy assign
-    S s10;              // Default construct
-    s10 = s03;          // Copy assign
+    S s01;                         // Default construct
+    S s02(Arg{});                  // Value construct
+    S const s03(4);                // Explicit value construct (1)
+    S const s04(4, 5);             // Explicit value construct (2)
+    S const s05(s01);              // Copy construct
+    S const s06(std::move(s01));   // Move construct
+    S const s07 = s02;             // Copy construct
+    S const s08 = std::move(s02);  // Move construct
+    S s09;                         // Default construct
+    s09 = s03;                     // Copy assign
+    S s10;                         // Default construct
+    s10 = s03;                     // Copy assign
     // 10 Destructors called
 }
 
@@ -72,7 +72,7 @@ PhoneBook buildPhoneBook() {
 }
 
 TEST(InPlaceConstructionExamplesTest, RvoWorks) {
-    PhoneBook pb = buildPhoneBook();
+    PhoneBook const pb = buildPhoneBook();
     // RVO happens in this case
     // RVO is "Return Value Optimization" also known as "Copy Elision".
     // If RVO does not happen, this will be a move.
@@ -91,7 +91,7 @@ string sadFunction(string s) {
 }
 
 TEST(InPlaceConstructionExamplesTest, NoRvoBecauseNoOpportunity) {
-    string s(sadFunction("Can I please have RVO? "));
+    string const s(sadFunction("Can I please have RVO? "));
     cout << s << "\n";
 
     // -> You can't RVO a variable if you didn't get the chance to construct it in the first place.
@@ -105,11 +105,11 @@ namespace NoRvoBecauseWrongType {
 string sadFunction() {
     string s("No RVO for you!");
     // NOLINTNEXTLINE(clang-diagnostic-pessimizing-move)
-    return move(s);
+    return std::move(s);
 }
 
 TEST(InPlaceConstructionExamplesTest, NoRvoBecauseNoOpportunity) {
-    string s(sadFunction());
+    string const s(sadFunction());
     cout << s << "\n";
 
     // -> If its not the correct type, you have to construct the correct type
@@ -139,7 +139,7 @@ string undecidedFunction() {
 }
 
 TEST(InPlaceConstructionExamplesTest, NoRvoBecauseNotEnoughInfo) {
-    string s(undecidedFunction());
+    string const s(undecidedFunction());
     cout << s << "\n";
 
     // -> If its not the correct type, you have to construct the correct type
@@ -227,7 +227,7 @@ string willThisRvo06(bool const condition) {
 }
 
 string willThisRvo07(bool const condition) {
-    string s("I won't RVO!");
+    string const s("I won't RVO!");
     return condition ? s : "I won't RVO as well!";
 
     // This will NOT RVO because we are NOT returning a named variable.
@@ -237,7 +237,7 @@ string willThisRvo07(bool const condition) {
 }
 
 string willThisRvo08(bool const condition) {
-    string s("I will RVO!");
+    string const s("I will RVO!");
     return condition ? directlyReturnTemporary() : "I will RVO as well!";
 
     // This will RVO in both cases because they are temporaries.
@@ -267,22 +267,22 @@ string willThisRvo10() {
 }
 
 TEST(InPlaceConstructionExamplesTest, MultipleExamplesOfRvo) {
-    string s01(willThisRvo01());                   // RVO is successful
-    string s02(willThisRvo02(true));               // RVO is successful
-    string s03(willThisRvo02(false));              // RVO is successful
-    string s04(willThisRvo03(true, "Stop RVO"));   // RVO is unsuccessful
-    string s05(willThisRvo03(false, "Stop RVO"));  // RVO is unsuccessful
-    string s06(willThisRvo04(true));               // RVO is successful
-    string s07(willThisRvo04(false));              // RVO is successful
-    string s08(willThisRvo05(true));               // can RVO
-    string s09(willThisRvo05(false));              // can RVO
-    string s10(willThisRvo06(true));               // RVO is unsuccessful
-    string s11(willThisRvo06(false));              // RVO is unsuccessful
-    string s12(willThisRvo07(true));               // RVO is unsuccessful
-    string s13(willThisRvo07(false));              // RVO is unsuccessful
-    string s14(willThisRvo09());                   // RVO is successful
-    string s15(willThisRvo10());                   // RVO is successful
-    MoveOnlyConstExprObject o01(willThisRvo11());  // It depends
+    string const s01(willThisRvo01());                   // RVO is successful
+    string const s02(willThisRvo02(true));               // RVO is successful
+    string const s03(willThisRvo02(false));              // RVO is successful
+    string const s04(willThisRvo03(true, "Stop RVO"));   // RVO is unsuccessful
+    string const s05(willThisRvo03(false, "Stop RVO"));  // RVO is unsuccessful
+    string const s06(willThisRvo04(true));               // RVO is successful
+    string const s07(willThisRvo04(false));              // RVO is successful
+    string const s08(willThisRvo05(true));               // can RVO
+    string const s09(willThisRvo05(false));              // can RVO
+    string const s10(willThisRvo06(true));               // RVO is unsuccessful
+    string const s11(willThisRvo06(false));              // RVO is unsuccessful
+    string const s12(willThisRvo07(true));               // RVO is unsuccessful
+    string const s13(willThisRvo07(false));              // RVO is unsuccessful
+    string const s14(willThisRvo09());                   // RVO is successful
+    string const s15(willThisRvo10());                   // RVO is successful
+    MoveOnlyConstExprObject const o01(willThisRvo11());  // It depends
     EXPECT_EQ(0, o01.x);
 }
 
@@ -292,12 +292,12 @@ namespace VectorPushBackVsEmplaceBack {
 
 TEST(InPlaceConstructionExamplesTest, VectorPushBackVsEmplaceBack) {
     vector<string> v;
-    string s("Content1");
+    string const s("Content1");
 
     string sTemp1(s);
-    v.push_back(move(sTemp1));
+    v.push_back(std::move(sTemp1));
     string sTemp2(s);
-    v.emplace_back(move(sTemp2));
+    v.emplace_back(std::move(sTemp2));
     // No difference, except emplace_back returns a reference on the created object by definition
     auto carray = "Content2";
     // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
@@ -307,7 +307,7 @@ TEST(InPlaceConstructionExamplesTest, VectorPushBackVsEmplaceBack) {
     // ---> "I don't like that view, I don't login to my computer as root."
     // ---> "I like to use the least powerful thing that is available to me."
     // ---> "It helps the reader of my code, theres gonna be a copy here and I can't do anything better."
-    string& s2 = v.emplace_back();  // first default construct in the vector
+    string const& s2 = v.emplace_back();  // first default construct in the vector
     // after emplace_back we can mutate s2
     // emplace_back takes a parameter pack and parameter packs can be empty
     // emplace_back does perfect forwarding. It can call explicit constructors;
@@ -322,7 +322,7 @@ using Arg = ClassesWithBasicFunctionWorks::Arg;
 using S = ClassesWithBasicFunctionWorks::S;
 
 TEST(InPlaceConstructionExamplesTest, CopyingToAVectorFromAnArrayOfCustomArguments) {
-    array<Arg, 3> a = {Arg{}, Arg{}, Arg{}};
+    array<Arg, 3> const a = {Arg{}, Arg{}, Arg{}};
 
     vector<S> v;
     v.reserve(3);
@@ -340,7 +340,7 @@ using Arg = ClassesWithBasicFunctionWorks::Arg;
 using S = ClassesWithBasicFunctionWorks::S;
 
 TEST(InPlaceConstructionExamplesTest, CopyingToAVectorFromAnArrayOfInts) {
-    array a = {1, 2, 3, 4, 5};
+    array const a = {1, 2, 3, 4, 5};
 
     vector<S> v;
     v.reserve(a.size());
@@ -361,7 +361,7 @@ namespace AvoidUnecessaryMovesInConstruction {
 TEST(InPlaceConstructionExamplesTest, AvoidUnecessaryMovesInConstruction) {
     vector<string_view> tokens;
 
-    string_view newToken;
+    string_view const newToken;
     tokens.emplace_back(newToken);
     // tokens.emplace_back(move(newToken));  // move in unnecessary
     //  move here prevents in-place construction
@@ -374,7 +374,7 @@ namespace AvoidSuperfluousMovesDueToExplicitConstructorCall {
 TEST(InPlaceConstructionExamplesTest, AvoidSuperfluousMovesDueToExplicitConstructorCall) {
     vector<string> tokens;
 
-    tokens.emplace_back(string(3, 'A'));  // Explicitly calling the string constructor in unnecessary
+    tokens.emplace_back(3, 'A');  // Explicitly calling the string constructor in unnecessary
     // Move is done and NOT in-place construction
     tokens.emplace_back(3, 'A');  // Construction arguments in emplace_back results to in-place construction
 }
@@ -390,8 +390,8 @@ struct Value {
 TEST(InPlaceConstructionExamplesTest, CreatingAVectorOfPairs) {
     vector<pair<int, Value>> v;
 
-    v.emplace_back(1, Value{42, "hello", 3.14});             // This is no good
-    v.emplace_back(make_pair(1, Value{42, "hello", 3.14}));  // This is no better
+    v.emplace_back(1, Value{42, "hello", 3.14});  // This is no good
+    v.emplace_back(1, Value{42, "hello", 3.14});  // This is no better
     // -> piecewise_construct to the rescue
     // ---> pair has a constructor that will handle your multi argument construtor
     // ---> piecewise_construct_t is a tag type
@@ -411,14 +411,14 @@ auto f() {
 }
 
 void fineFunction() {
-    for (int i : {1, 2, 3}) {
+    for (int const i : {1, 2, 3}) {
         cout << i << ", ";
     }
     cout << "\n";
 }
 
 void fineUntilItExplodesFunction() {
-    for (int i : f<1, 2, 3>()) {
+    for (int const i : f<1, 2, 3>()) {
         cout << i << ", ";
     }
     cout << "\n";
@@ -446,7 +446,7 @@ using S = ClassesWithBasicFunctionWorks::S;
 TEST(InPlaceConstructionExamplesTest, InitializerListWithMap) {
     using M = map<int, S>;
 
-    M m{{0, Arg{}}};  // 1 value construction, 1 copy construction, 2 destruction
+    M const m{{0, Arg{}}};  // 1 value construction, 1 copy construction, 2 destruction
 }
 
 }  // namespace InitializerListWithMap
@@ -536,10 +536,10 @@ using S = ClassesWithBasicFunctionWorks::S;
 TEST(InPlaceConstructionExamplesTest, OptionalConstruction) {
     using OptionalS = optional<S>;
 
-    OptionalS opt1 = Arg{};            // 1 value construction, 1 destruction, good
-    OptionalS opt2 = S{1};             // 1 value construction, 1 move construction, 2 destructions, not good
-    OptionalS opt3(in_place, 1);       // 1 value construction, 1 destruction, good
-    OptionalS opt4(make_optional(1));  // 1 value construction, 1 destruction, good
+    OptionalS const opt1 = Arg{};            // 1 value construction, 1 destruction, good
+    OptionalS const opt2 = S{1};             // 1 value construction, 1 move construction, 2 destructions, not good
+    OptionalS const opt3(in_place, 1);       // 1 value construction, 1 destruction, good
+    OptionalS const opt4(make_optional(1));  // 1 value construction, 1 destruction, good
 }
 
 }  // namespace OptionalConstruction
@@ -570,10 +570,10 @@ using S = ClassesWithBasicFunctionWorks::S;
 TEST(InPlaceConstructionExamplesTest, VariantConstruction) {
     using VariantS = variant<int, S>;
 
-    VariantS opt1 = Arg{};                // 1 value construction, 1 destruction, good
-    VariantS opt2 = S{1};                 // 1 value construction, 1 move construction, 2 destructions, not good
-    VariantS opt3(in_place_type<S>, 1);   // 1 value construction, 1 destruction, good
-    VariantS opt4(in_place_index<1>, 1);  // 1 value construction, 1 destruction, good
+    VariantS const opt1 = Arg{};                // 1 value construction, 1 destruction, good
+    VariantS const opt2 = S{1};                 // 1 value construction, 1 move construction, 2 destructions, not good
+    VariantS const opt3(in_place_type<S>, 1);   // 1 value construction, 1 destruction, good
+    VariantS const opt4(in_place_index<1>, 1);  // 1 value construction, 1 destruction, good
 }
 
 }  // namespace VariantConstruction
