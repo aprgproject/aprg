@@ -9,9 +9,7 @@
 #include <fstream>
 #include <string>
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 class ChessEngineControllerWithUci {
 public:
@@ -87,6 +85,4 @@ private:
     std::deque<Command> m_pendingCommands;
 };
 
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess

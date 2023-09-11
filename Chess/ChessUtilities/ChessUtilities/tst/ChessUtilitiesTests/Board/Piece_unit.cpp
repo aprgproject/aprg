@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 TEST(PieceTest, ExtractColorWorks) {
     EXPECT_EQ(PieceColor::Unknown, Piece::extractColor(0U));
@@ -49,9 +47,9 @@ TEST(PieceTest, ExtractColorAndTypeWorks) {
 }
 
 TEST(PieceTest, GetColorWorks) {
-    Piece piece1(0U);
-    Piece piece2(5U);
-    Piece piece3(13U);
+    Piece const piece1(0U);
+    Piece const piece2(5U);
+    Piece const piece3(13U);
 
     EXPECT_EQ(PieceColor::Unknown, piece1.getColor());
     EXPECT_EQ(PieceColor::White, piece2.getColor());
@@ -59,21 +57,19 @@ TEST(PieceTest, GetColorWorks) {
 }
 
 TEST(PieceTest, GetTypeWorks) {
-    Piece piece1(0U);
-    Piece piece2(13U);
+    Piece const piece1(0U);
+    Piece const piece2(13U);
 
     EXPECT_EQ(PieceType::Empty, piece1.getType());
     EXPECT_EQ(PieceType::Queen, piece2.getType());
 }
 
 TEST(PieceTest, GetColorAndTypeWorks) {
-    Piece piece1(0U);
-    Piece piece2(13U);
+    Piece const piece1(0U);
+    Piece const piece2(13U);
 
     EXPECT_EQ(PieceColorAndType::Empty, piece1.getColorAndType());
     EXPECT_EQ(PieceColorAndType::BlackQueen, piece2.getColorAndType());
 }
 
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess

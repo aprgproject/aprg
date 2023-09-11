@@ -4,13 +4,11 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 TEST(BoardValueTest, ConstructionWorks) {
-    Board board(BoardOrientation::BlackUpWhiteDown);
-    BoardValue boardValue(board);
+    Board const board(BoardOrientation::BlackUpWhiteDown);
+    BoardValue const boardValue(board);
 
     auto data(boardValue.getData());
 
@@ -21,10 +19,10 @@ TEST(BoardValueTest, ConstructionWorks) {
 }
 
 TEST(BoardValueTest, DifferentOrientationsHasSameValueWorks) {
-    Board board1(BoardOrientation::BlackUpWhiteDown);
-    Board board2(BoardOrientation::WhiteUpBlackDown);
-    BoardValue boardValue1(board1);
-    BoardValue boardValue2(board2);
+    Board const board1(BoardOrientation::BlackUpWhiteDown);
+    Board const board2(BoardOrientation::WhiteUpBlackDown);
+    BoardValue const boardValue1(board1);
+    BoardValue const boardValue2(board2);
 
     EXPECT_EQ(boardValue1, boardValue2);
 }
@@ -32,8 +30,8 @@ TEST(BoardValueTest, DifferentOrientationsHasSameValueWorks) {
 TEST(BoardValueTest, DifferentOrientationsHasSameValueWorksEvenAfterMove) {
     Board board1(BoardOrientation::BlackUpWhiteDown);
     Board board2(BoardOrientation::WhiteUpBlackDown);
-    BoardValue boardValue1(board1);
-    BoardValue boardValue2(board2);
+    BoardValue const boardValue1(board1);
+    BoardValue const boardValue2(board2);
 
     board1.move(board1.getMoveUsingAlgebraicNotation("d4", PieceColor::White));
     board2.move(board2.getMoveUsingAlgebraicNotation("d4", PieceColor::White));
@@ -41,6 +39,4 @@ TEST(BoardValueTest, DifferentOrientationsHasSameValueWorksEvenAfterMove) {
     EXPECT_EQ(boardValue1, boardValue2);
 }
 
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess

@@ -8,9 +8,7 @@
 #include <optional>
 #include <string>
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 class ChessEngineHandler {
 public:
@@ -43,6 +41,4 @@ private:
     std::optional<ProcessAStringFunction> m_additionalStepsInProcessingAStringFromEngine;
 };
 
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess

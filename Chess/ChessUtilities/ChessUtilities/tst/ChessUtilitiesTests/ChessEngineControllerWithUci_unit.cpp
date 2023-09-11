@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 TEST(ChessEngineControllerWithUciTest, DISABLED_WorksOnStartPosition) {
     ChessEngineHandler chessEngineHandler(APRG_DIR R"(\Chess\ChessUtilities\FilesForTests\RybkaTest.exe)");
@@ -21,6 +19,4 @@ TEST(ChessEngineControllerWithUciTest, DISABLED_WorksOnStartPosition) {
     Sleep(1000);
 }
 
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess

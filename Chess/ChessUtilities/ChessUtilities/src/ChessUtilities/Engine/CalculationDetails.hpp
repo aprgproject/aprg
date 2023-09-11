@@ -2,13 +2,11 @@
 
 #include <Common/String/AlbaStringHelper.hpp>
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 struct Variation {
-    int mateValue;  // number of mate moves, can be negative if player is about to be mated
-    int scoreInCentipawns;
+    int mateValue{};  // number of mate moves, can be negative if player is about to be mated
+    int scoreInCentipawns{};
     stringHelper::strings halfMoves;
 };
 
@@ -35,6 +33,4 @@ struct CalculationDetails {
 // All the nodes included by the PV are PV-nodes.
 // Inside an iterative deepening framework, it is the most important move ordering consideration to play the PV
 // collected during the current iteration, as the very first left moves of the next iteration
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess

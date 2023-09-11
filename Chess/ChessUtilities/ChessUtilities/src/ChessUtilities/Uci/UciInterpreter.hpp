@@ -3,9 +3,7 @@
 #include <ChessUtilities/Engine/CalculationDetails.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 class UciInterpreter {
 public:
@@ -25,12 +23,10 @@ private:
     void processBestMoveTokens(stringHelper::strings const& tokens);
     void saveCommonParametersOfBestLine(InfoDetails const& infoDetails);
     void saveVariation(InfoDetails const& infoDetails);
-    InfoDetails createInfoDetailsFromInfoTokens(stringHelper::strings const& tokens);
+    static InfoDetails createInfoDetailsFromInfoTokens(stringHelper::strings const& tokens);
     static bool shouldSkipTheEntireInfo(std::string const& token);
     static bool isACommonParameter(std::string const& token);
     CalculationDetails& m_calculationDetails;
 };
 
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess

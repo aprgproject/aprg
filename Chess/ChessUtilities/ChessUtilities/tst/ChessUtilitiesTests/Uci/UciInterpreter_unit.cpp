@@ -6,9 +6,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithMultiPvWithScore) {
     CalculationDetails actualDetails{};
@@ -17,8 +15,8 @@ TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithMultiPvWithScore) {
     interpreter.updateCalculationDetails(
         "info depth 3 seldepth 3 multipv 1 score cp -69 nodes 16 nps 16000 tbhits 0 time 1 pv e8f7 e5e6 f7e6");
 
-    Variation expectedVariation{0, -69, {"e8f7", "e5e6", "f7e6"}};
-    Variations expectedVariations{expectedVariation};
+    Variation const expectedVariation{0, -69, {"e8f7", "e5e6", "f7e6"}};
+    Variations const expectedVariations{expectedVariation};
     EXPECT_EQ(3, actualDetails.depthInPlies);
     EXPECT_EQ(3, actualDetails.selectiveDepthInPlies);
     EXPECT_EQ(expectedVariations, actualDetails.variations);
@@ -33,8 +31,8 @@ TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithMultiPvWithMate) {
     interpreter.updateCalculationDetails(
         "info depth 179 seldepth 2 multipv 1 score mate -3 nodes 5200 nps 57777 tbhits 0 time 90 pv b2d2");
 
-    Variation expectedVariation{-3, 0, {"b2d2"}};
-    Variations expectedVariations{expectedVariation};
+    Variation const expectedVariation{-3, 0, {"b2d2"}};
+    Variations const expectedVariations{expectedVariation};
     EXPECT_EQ(179, actualDetails.depthInPlies);
     EXPECT_EQ(2, actualDetails.selectiveDepthInPlies);
     EXPECT_EQ(expectedVariations, actualDetails.variations);
@@ -51,8 +49,8 @@ TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithOverwritingVariationIf
     interpreter.updateCalculationDetails(
         "info depth 10 seldepth 12 multipv 1 score cp 98 nodes 20559 nps 1082052 tbhits 0 time 19 pv g1e2 c7c5 d2e4");
 
-    Variation expectedVariation{0, 98, {"g1e2", "c7c5", "d2e4"}};
-    Variations expectedVariations{expectedVariation};
+    Variation const expectedVariation{0, 98, {"g1e2", "c7c5", "d2e4"}};
+    Variations const expectedVariations{expectedVariation};
     EXPECT_EQ(10, actualDetails.depthInPlies);
     EXPECT_EQ(12, actualDetails.selectiveDepthInPlies);
     EXPECT_EQ(expectedVariations, actualDetails.variations);
@@ -69,9 +67,9 @@ TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithExpandingVariationsByO
     interpreter.updateCalculationDetails(
         "info depth 10 seldepth 12 multipv 2 score cp 98 nodes 20559 nps 1082052 tbhits 0 time 19 pv g1e2 c7c5 d2e4");
 
-    Variation expectedVariation1{0, 14, {"f6e4", "b1d2", "d8f6"}};
-    Variation expectedVariation2{0, 98, {"g1e2", "c7c5", "d2e4"}};
-    Variations expectedVariations{expectedVariation1, expectedVariation2};
+    Variation const expectedVariation1{0, 14, {"f6e4", "b1d2", "d8f6"}};
+    Variation const expectedVariation2{0, 98, {"g1e2", "c7c5", "d2e4"}};
+    Variations const expectedVariations{expectedVariation1, expectedVariation2};
     EXPECT_EQ(10, actualDetails.depthInPlies);
     EXPECT_EQ(12, actualDetails.selectiveDepthInPlies);
     EXPECT_EQ(expectedVariations, actualDetails.variations);
@@ -88,9 +86,9 @@ TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithExpandingVariationsMor
     interpreter.updateCalculationDetails(
         "info depth 10 seldepth 12 multipv 5 score cp 98 nodes 20559 nps 1082052 tbhits 0 time 19 pv g1e2 c7c5 d2e4");
 
-    Variation expectedVariation1{0, 14, {"f6e4", "b1d2", "d8f6"}};
-    Variation expectedVariation2{0, 98, {"g1e2", "c7c5", "d2e4"}};
-    Variations expectedVariations{expectedVariation1, {}, {}, {}, expectedVariation2};
+    Variation const expectedVariation1{0, 14, {"f6e4", "b1d2", "d8f6"}};
+    Variation const expectedVariation2{0, 98, {"g1e2", "c7c5", "d2e4"}};
+    Variations const expectedVariations{expectedVariation1, {}, {}, {}, expectedVariation2};
     EXPECT_EQ(10, actualDetails.depthInPlies);
     EXPECT_EQ(12, actualDetails.selectiveDepthInPlies);
     EXPECT_EQ(expectedVariations, actualDetails.variations);
@@ -106,7 +104,7 @@ TEST(UciInterpreterTest, UpdateCalculationDetailsWorksOnInfoExample4) {
     interpreter.updateCalculationDetails("info depth 23 currmove c7c5 currmovenumber 2");
     interpreter.updateCalculationDetails("info depth 23 currmove d7d6 currmovenumber 3");
 
-    Variations expectedVariations;
+    Variations const expectedVariations;
     EXPECT_EQ(0, actualDetails.depthInPlies);
     EXPECT_EQ(0, actualDetails.selectiveDepthInPlies);
     EXPECT_TRUE(actualDetails.variations.empty());
@@ -144,6 +142,4 @@ TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithIgnoringStringsWithInv
     EXPECT_TRUE(actualDetails.responseMoveToPonder.empty());
 }
 
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess
