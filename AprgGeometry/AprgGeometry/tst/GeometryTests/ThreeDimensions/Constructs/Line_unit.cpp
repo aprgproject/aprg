@@ -17,7 +17,7 @@ TEST(ThreeDimensionsLineTest, LineCanBeComparedForEquality)
 }
 */
 TEST(ThreeDimensionsLineTest, EmptyLine) {
-    Line line;
+    Line const line;
 
     EXPECT_TRUE(line.isInvalid());
     EXPECT_EQ(0, line.getACoefficient());
@@ -35,7 +35,7 @@ TEST(ThreeDimensionsLineTest, EmptyLine) {
 }
 
 TEST(ThreeDimensionsLineTest, InvalidLine) {
-    Line line(Point(3, 3, 3), Point(3, 3, 3));
+    Line const line(Point(3, 3, 3), Point(3, 3, 3));
 
     EXPECT_TRUE(line.isInvalid());
     EXPECT_EQ(0, line.getACoefficient());
@@ -53,7 +53,7 @@ TEST(ThreeDimensionsLineTest, InvalidLine) {
 }
 
 TEST(ThreeDimensionsLineTest, HorizontalLine) {
-    Line line(Point(-2, 3, 4), Point(2, 3, -4));
+    Line const line(Point(-2, 3, 4), Point(2, 3, -4));
 
     EXPECT_FALSE(line.isInvalid());
     EXPECT_EQ(4, line.getACoefficient());
@@ -75,7 +75,7 @@ TEST(ThreeDimensionsLineTest, HorizontalLine) {
 }
 
 TEST(ThreeDimensionsLineTest, VerticalLine) {
-    Line line(Point(2, -3, 6), Point(2, 3, -6));
+    Line const line(Point(2, -3, 6), Point(2, 3, -6));
 
     EXPECT_FALSE(line.isInvalid());
     EXPECT_EQ(0, line.getACoefficient());
@@ -97,7 +97,7 @@ TEST(ThreeDimensionsLineTest, VerticalLine) {
 }
 
 TEST(ThreeDimensionsLineTest, ParallelWithZAxis) {
-    Line line(Point(-2, 4, 6), Point(2, -4, 6));
+    Line const line(Point(-2, 4, 6), Point(2, -4, 6));
 
     EXPECT_FALSE(line.isInvalid());
     EXPECT_EQ(4, line.getACoefficient());
@@ -119,7 +119,7 @@ TEST(ThreeDimensionsLineTest, ParallelWithZAxis) {
 }
 
 TEST(ThreeDimensionsLineTest, LineNotParallelWithXYZAxis) {
-    Line line(Point(2, 4, 5), Point(3, 3, 3));
+    Line const line(Point(2, 4, 5), Point(3, 3, 3));
 
     EXPECT_FALSE(line.isInvalid());
     EXPECT_EQ(-1, line.getACoefficient());
@@ -143,7 +143,7 @@ TEST(ThreeDimensionsLineTest, LineNotParallelWithXYZAxis) {
 }
 
 TEST(ThreeDimensionsLineTest, LineWithSlopeSet) {
-    Line line(3, 2, 1, Point(1, 2, 3));
+    Line const line(3, 2, 1, Point(1, 2, 3));
 
     EXPECT_FALSE(line.isInvalid());
     EXPECT_EQ(3, line.getACoefficient());
@@ -167,7 +167,7 @@ TEST(ThreeDimensionsLineTest, LineWithSlopeSet) {
 }
 
 TEST(ThreeDimensionsLineTest, LineWithSumOfCoefficientsEqualToZero) {
-    Line line(-2, 1, 1, Point(1, 0, 0));
+    Line const line(-2, 1, 1, Point(1, 0, 0));
 
     EXPECT_FALSE(line.isInvalid());
     EXPECT_EQ(-2, line.getACoefficient());
@@ -191,7 +191,7 @@ TEST(ThreeDimensionsLineTest, LineWithSumOfCoefficientsEqualToZero) {
 }
 
 TEST(ThreeDimensionsLineTest, LineWithSomeZeroCoefficientWorks) {
-    Line line(Point(0, 40, 0), Point(40, 0, 0));
+    Line const line(Point(0, 40, 0), Point(40, 0, 0));
 
     EXPECT_FALSE(line.isInvalid());
     EXPECT_EQ(40, line.getACoefficient());

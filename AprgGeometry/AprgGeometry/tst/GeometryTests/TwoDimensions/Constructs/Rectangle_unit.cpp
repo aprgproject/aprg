@@ -7,7 +7,7 @@ using namespace std;
 namespace alba::TwoDimensions {
 
 TEST(RectangleTest, GetPointsWorks) {
-    Rectangle retangle(Point(-1, 1), Point(1, -1));
+    Rectangle const retangle(Point(-1, 1), Point(1, -1));
     Points points(retangle.getPoints(1));
 
     ASSERT_EQ(8U, points.size());

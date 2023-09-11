@@ -15,7 +15,7 @@ public:
 
     Polynomial(std::initializer_list<double> const& coefficients) {
         static_assert(numberOfCoefficients > 0, "The numberOfCoefficients is not more than 0. Its not a polynomial");
-        int limit = std::min(numberOfCoefficients, static_cast<int>(coefficients.size()));
+        int const limit = std::min(numberOfCoefficients, static_cast<int>(coefficients.size()));
         std::copy(coefficients.begin(), coefficients.begin() + limit, m_coefficients.rbegin());
         saveFirstDerivativeCoefficients();
     }

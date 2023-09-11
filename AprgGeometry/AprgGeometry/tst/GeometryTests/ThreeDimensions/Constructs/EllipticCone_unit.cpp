@@ -10,7 +10,7 @@ using namespace std;
 namespace alba::ThreeDimensions {
 
 TEST(EllipticConeTest, EmptyEllipticCone) {
-    EllipticCone ellipticCone;
+    EllipticCone const ellipticCone;
 
     EXPECT_EQ(Point(0, 0, 0), ellipticCone.getCenter());
     EXPECT_DOUBLE_EQ(0, ellipticCone.getAValue());
@@ -19,7 +19,7 @@ TEST(EllipticConeTest, EmptyEllipticCone) {
 }
 
 TEST(EllipticConeTest, EllipticConeAtOriginWithRadius) {
-    EllipticCone ellipticCone(Point(0, 0, 0), 4, 5, 12);
+    EllipticCone const ellipticCone(Point(0, 0, 0), 4, 5, 12);
 
     EXPECT_EQ(Point(0, 0, 0), ellipticCone.getCenter());
     EXPECT_DOUBLE_EQ(4, ellipticCone.getAValue());
@@ -31,7 +31,7 @@ TEST(EllipticConeTest, EllipticConeAtOriginWithRadius) {
 }
 
 TEST(EllipticConeTest, EllipticConeNotAtOriginWithRadius) {
-    EllipticCone ellipticCone(Point(1, 2, 3), 4, 5, 12);
+    EllipticCone const ellipticCone(Point(1, 2, 3), 4, 5, 12);
 
     EXPECT_EQ(Point(1, 2, 3), ellipticCone.getCenter());
     EXPECT_DOUBLE_EQ(4, ellipticCone.getAValue());

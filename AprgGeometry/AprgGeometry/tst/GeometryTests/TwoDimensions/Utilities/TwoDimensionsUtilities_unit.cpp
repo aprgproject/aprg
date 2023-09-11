@@ -19,9 +19,9 @@ TEST(TwoDimensionsUtilitiesTest, IsOriginWorks) {
 }
 
 TEST(TwoDimensionsUtilitiesTest, IsInsideTwoPointsWorks) {
-    Points points;
-    Point minimumXAndY(-1, -1);
-    Point maximumXAndY(1, 1);
+    Points const points;
+    Point const minimumXAndY(-1, -1);
+    Point const maximumXAndY(1, 1);
     EXPECT_FALSE(isInsideTwoPoints(Point(-3, -3), minimumXAndY, maximumXAndY));
     EXPECT_FALSE(isInsideTwoPoints(Point(-2, -2), minimumXAndY, maximumXAndY));
     EXPECT_TRUE(isInsideTwoPoints(Point(-1, -1), minimumXAndY, maximumXAndY));
@@ -32,9 +32,9 @@ TEST(TwoDimensionsUtilitiesTest, IsInsideTwoPointsWorks) {
 }
 
 TEST(TwoDimensionsUtilitiesTest, PointCanBeCheckedIfItsOnLine) {
-    Point pointOnLine(-2, 2);
-    Point pointNotOnLine(2, 2);
-    Line line(Point(0, 0), Point(-1, 1));
+    Point const pointOnLine(-2, 2);
+    Point const pointNotOnLine(2, 2);
+    Line const line(Point(0, 0), Point(-1, 1));
 
     EXPECT_TRUE(isPointInLine(pointOnLine, line));
     EXPECT_FALSE(isPointInLine(pointNotOnLine, line));
@@ -48,11 +48,11 @@ TEST(TwoDimensionsUtilitiesTest, IsCongruentWorksForTriangles) {
 }
 
 TEST(TwoDimensionsUtilitiesTest, AreLinesParallelWorks) {
-    Line commonLine(Point(0, 0), Point(2, 2));
-    Line crossLine(Point(0, 2), Point(2, 0));
-    Line parallelLine(Point(2, 2), Point(3, 3));
-    Line horizontal(Point(0, 0), Point(5, 0));
-    Line vertical(Point(0, 0), Point(0, 5));
+    Line const commonLine(Point(0, 0), Point(2, 2));
+    Line const crossLine(Point(0, 2), Point(2, 0));
+    Line const parallelLine(Point(2, 2), Point(3, 3));
+    Line const horizontal(Point(0, 0), Point(5, 0));
+    Line const vertical(Point(0, 0), Point(0, 5));
 
     EXPECT_FALSE(areLinesParallel(commonLine, crossLine));
     EXPECT_TRUE(areLinesParallel(commonLine, parallelLine));
@@ -63,11 +63,11 @@ TEST(TwoDimensionsUtilitiesTest, AreLinesParallelWorks) {
 }
 
 TEST(TwoDimensionsUtilitiesTest, AreLinesPerpendicularWorks) {
-    Line commonLine(Point(0, 0), Point(2, 2));
-    Line crossLine(Point(0, 2), Point(2, 0));
-    Line parallelLine(Point(2, 2), Point(3, 3));
-    Line horizontal(Point(0, 0), Point(5, 0));
-    Line vertical(Point(0, 0), Point(0, 5));
+    Line const commonLine(Point(0, 0), Point(2, 2));
+    Line const crossLine(Point(0, 2), Point(2, 0));
+    Line const parallelLine(Point(2, 2), Point(3, 3));
+    Line const horizontal(Point(0, 0), Point(5, 0));
+    Line const vertical(Point(0, 0), Point(0, 5));
 
     EXPECT_TRUE(areLinesPerpendicular(commonLine, crossLine));
     EXPECT_FALSE(areLinesPerpendicular(commonLine, parallelLine));
@@ -78,11 +78,11 @@ TEST(TwoDimensionsUtilitiesTest, AreLinesPerpendicularWorks) {
 }
 
 TEST(TwoDimensionsUtilitiesTest, DoesTheTwoLineSegmentsIntersectWorks) {
-    LineSegment commonSegment(Point(0, 0), Point(2, 2));
-    LineSegment crossSegment(Point(0, 2), Point(2, 0));
-    LineSegment parallelIntersecting(Point(2, 2), Point(3, 3));
-    LineSegment parallelNotIntersecting(Point(2, 1), Point(3, 2));
-    LineSegment perpendicularNotIntersecting(Point(2, 1), Point(3, 0));
+    LineSegment const commonSegment(Point(0, 0), Point(2, 2));
+    LineSegment const crossSegment(Point(0, 2), Point(2, 0));
+    LineSegment const parallelIntersecting(Point(2, 2), Point(3, 3));
+    LineSegment const parallelNotIntersecting(Point(2, 1), Point(3, 2));
+    LineSegment const perpendicularNotIntersecting(Point(2, 1), Point(3, 0));
 
     EXPECT_TRUE(doesTheTwoLineSegmentsIntersect(commonSegment, crossSegment));
     EXPECT_TRUE(doesTheTwoLineSegmentsIntersect(commonSegment, parallelIntersecting));
@@ -91,14 +91,14 @@ TEST(TwoDimensionsUtilitiesTest, DoesTheTwoLineSegmentsIntersectWorks) {
 }
 
 TEST(TwoDimensionsUtilitiesTest, IsPointInsideTriangleWorks) {
-    Triangle triangle(Point(10, 30), Point(0, 0), Point(20, 0));
+    Triangle const triangle(Point(10, 30), Point(0, 0), Point(20, 0));
 
     EXPECT_TRUE(isPointInsideTriangle(triangle, Point(10, 10)));
     EXPECT_FALSE(isPointInsideTriangle(triangle, Point(10, 100)));
 }
 
 TEST(TwoDimensionsUtilitiesTest, IsPointInsidePolygonWorks) {
-    Triangle triangle(Point(0, 0), Point(0, 4), Point(4, 0));
+    Triangle const triangle(Point(0, 0), Point(0, 4), Point(4, 0));
 
     EXPECT_TRUE(isPointInsidePolygon(triangle, Point(1, 1), Point(-1, 1)));
     EXPECT_FALSE(isPointInsidePolygon(triangle, Point(2, 2), Point(-1, 1)));  // on the border
@@ -135,7 +135,7 @@ TEST(TwoDimensionsUtilitiesTest, GetManhattanDistanceAlternateWayWorks) {
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetMaximumManhattanDistanceOfTwoPointsWorks) {
-    Points points{{1, 3}, {2, 1}, {4, 4}, {4, 2}};
+    Points const points{{1, 3}, {2, 1}, {4, 4}, {4, 2}};
     EXPECT_DOUBLE_EQ(5, getMaximumManhattanDistanceOfTwoPoints(points));
 }
 
@@ -144,8 +144,8 @@ TEST(TwoDimensionsUtilitiesTest, GetCosineOfAngleUsing1DeltaWorks) {
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetCosineOfAngleUsing2DeltasWorks) {
-    Vector deltaVector1{2, 4};
-    Vector deltaVector2{8, 16};
+    Vector const deltaVector1{2, 4};
+    Vector const deltaVector2{8, 16};
     EXPECT_DOUBLE_EQ(1, getCosineOfAngleUsing2Deltas(deltaVector1, deltaVector2));
 }
 
@@ -194,49 +194,49 @@ TEST(TwoDimensionsUtilitiesTest, GetAreaUsingPicksTheoremWorks) {
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetAreaForPolygonWorksForTriangle) {
-    Triangle triangle(Point(0, 0), Point(0, 4), Point(4, 0));
+    Triangle const triangle(Point(0, 0), Point(0, 4), Point(4, 0));
     EXPECT_DOUBLE_EQ(8, getArea(triangle));
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetAreaForPolygonWorksForRectangle) {
-    Rectangle rectangle(Point(0, 5), Point(4, 0));
+    Rectangle const rectangle(Point(0, 5), Point(4, 0));
     EXPECT_DOUBLE_EQ(20, getArea(rectangle));
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetAreaForPolygonWorksForQuadrilateral) {
-    Quadrilateral quadrilateral(Point(0, 0), Point(0, 2), Point(3, 2), Point(3, 0));
+    Quadrilateral const quadrilateral(Point(0, 0), Point(0, 2), Point(3, 2), Point(3, 0));
     EXPECT_DOUBLE_EQ(6, getArea(quadrilateral));
 }
 
 TEST(TwoDimensionsUtilitiesTest, LineAndLineIntersectionCanBeFound) {
-    Line line1(Point(2, 4), Point(3, 3));
-    Line line2(Point(4, 4), Point(3, 3));
-    Line line3(Point(3, 3), Point(3, 3));
-    Line line4(Point(0, 1), Point(1, 2));
+    Line const line1(Point(2, 4), Point(3, 3));
+    Line const line2(Point(4, 4), Point(3, 3));
+    Line const line3(Point(3, 3), Point(3, 3));
+    Line const line4(Point(0, 1), Point(1, 2));
 
     EXPECT_EQ(Point(3, 3), getIntersectionOfTwoLines(line1, line2));
-    Point verifyIfNan(getIntersectionOfTwoLines(line2, line3));
+    Point const verifyIfNan(getIntersectionOfTwoLines(line2, line3));
     EXPECT_TRUE(isnan(verifyIfNan.getX()));
     EXPECT_TRUE(isnan(verifyIfNan.getY()));
     EXPECT_EQ(Point(INFINITY, INFINITY), getIntersectionOfTwoLines(line2, line4));
 }
 
 TEST(TwoDimensionsUtilitiesTest, VerticalLineAndHorizontalLineIntersectionCanBeFound) {
-    Line line1(Point(4, 3), Point(3, 3));
-    Line line2(Point(3, 4), Point(3, 3));
+    Line const line1(Point(4, 3), Point(3, 3));
+    Line const line2(Point(3, 4), Point(3, 3));
 
     EXPECT_EQ(Point(3, 3), getIntersectionOfTwoLines(line1, line2));
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetIntersectionOfTwoLineSegmentWorks) {
-    LineSegment commonSegment(Point(0, 0), Point(2, 2));
-    LineSegment crossSegment(Point(0, 2), Point(2, 0));
-    LineSegment parallelSegment(Point(3, 3), Point(4, 4));
-    LineSegment segmentWithPointInLine1(Point(2, 2), Point(3, 4));
-    LineSegment segmentWithPointInLine2(Point(3, 4), Point(2, 2));
+    LineSegment const commonSegment(Point(0, 0), Point(2, 2));
+    LineSegment const crossSegment(Point(0, 2), Point(2, 0));
+    LineSegment const parallelSegment(Point(3, 3), Point(4, 4));
+    LineSegment const segmentWithPointInLine1(Point(2, 2), Point(3, 4));
+    LineSegment const segmentWithPointInLine2(Point(3, 4), Point(2, 2));
 
     EXPECT_EQ(Point(1, 1), getIntersectionOfTwoLineSegment(commonSegment, crossSegment));
-    Point verifyIfNan(getIntersectionOfTwoLineSegment(commonSegment, parallelSegment));
+    Point const verifyIfNan(getIntersectionOfTwoLineSegment(commonSegment, parallelSegment));
     EXPECT_TRUE(isnan(verifyIfNan.getX()));
     EXPECT_TRUE(isnan(verifyIfNan.getY()));
     EXPECT_EQ(Point(2, 2), getIntersectionOfTwoLineSegment(commonSegment, segmentWithPointInLine1));
@@ -265,8 +265,8 @@ TEST(TwoDimensionsUtilitiesTest, GetPointAlongALineWithDistanceFromAPointWorks) 
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetIntersectionsOfParabolaAndLineWorksOnParabolaWithPolynomialX) {
-    Parabola<ParabolaOrientation::PolynomialX> parabola(1, -5, 4);
-    Line line(Point(0, -0.25), Point(1, 0));
+    Parabola<ParabolaOrientation::PolynomialX> const parabola(1, -5, 4);
+    Line const line(Point(0, -0.25), Point(1, 0));
 
     Points points(getIntersectionsOfParabolaAndLine(parabola, line));
 
@@ -276,8 +276,8 @@ TEST(TwoDimensionsUtilitiesTest, GetIntersectionsOfParabolaAndLineWorksOnParabol
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetIntersectionsOfParabolaAndLineWorksOnParabolaWithPolynomialY) {
-    Parabola<ParabolaOrientation::PolynomialY> parabola(1, -5, 4);
-    Line line(Point(-0.25, 0), Point(0, 1));
+    Parabola<ParabolaOrientation::PolynomialY> const parabola(1, -5, 4);
+    Line const line(Point(-0.25, 0), Point(0, 1));
 
     Points points(getIntersectionsOfParabolaAndLine(parabola, line));
 
@@ -323,10 +323,10 @@ TEST(TwoDimensionsUtilitiesTest, ConvertFromPolarCoordinatesWorks) {
 }
 
 TEST(TwoDimensionsUtilitiesTest, ConvertToPolarCoordinateWorks) {
-    PolarCoordinate polarCoordinate1(convertToPolarCoordinate(Point(0, 5)));
-    PolarCoordinate polarCoordinate2(convertToPolarCoordinate(Point(-10, 0)));
-    PolarCoordinate polarCoordinate3(convertToPolarCoordinate(Point(0, -15)));
-    PolarCoordinate polarCoordinate4(convertToPolarCoordinate(Point(20, 0)));
+    PolarCoordinate const polarCoordinate1(convertToPolarCoordinate(Point(0, 5)));
+    PolarCoordinate const polarCoordinate2(convertToPolarCoordinate(Point(-10, 0)));
+    PolarCoordinate const polarCoordinate3(convertToPolarCoordinate(Point(0, -15)));
+    PolarCoordinate const polarCoordinate4(convertToPolarCoordinate(Point(20, 0)));
 
     EXPECT_DOUBLE_EQ(5, polarCoordinate1.radius);
     EXPECT_EQ(AlbaAngle(AngleUnitType::Degrees, 90), polarCoordinate1.angle);
@@ -339,10 +339,10 @@ TEST(TwoDimensionsUtilitiesTest, ConvertToPolarCoordinateWorks) {
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetConicSectionBasedOnEccentricityWorks) {
-    Circle circle(Point(1, 1), 1);
-    Parabola<ParabolaOrientation::PolynomialX> parabola(1, 1, 1);
-    Ellipse ellipse(Point(1, 1), 2, 3);
-    Hyperbola hyperbola(Point(1, 1), 2, 3);
+    Circle const circle(Point(1, 1), 1);
+    Parabola<ParabolaOrientation::PolynomialX> const parabola(1, 1, 1);
+    Ellipse const ellipse(Point(1, 1), 2, 3);
+    Hyperbola const hyperbola(Point(1, 1), 2, 3);
 
     EXPECT_EQ(ConicSectionType::Circle, getConicSectionBasedOnEccentricity(circle.getEccentricity()));
     EXPECT_EQ(ConicSectionType::Parabola, getConicSectionBasedOnEccentricity(parabola.getEccentricity()));
@@ -391,8 +391,8 @@ TEST(TwoDimensionsUtilitiesTest, GetRotationDirectionTraversing3PointsWorksOnDet
     // If the cross product is positive, p is located on the left side,
     // and if the cross product is negative, p is located on the right side.
     // Finally, if the cross product is zero, points s1, s2 and p are on the same line.
-    Point s1(0, 0);
-    Point s2(2, 2);
+    Point const s1(0, 0);
+    Point const s2(2, 2);
 
     EXPECT_EQ(RotationDirection::CounterClockWise, getRotationDirectionTraversing3Points(s1, s2, Point(1, 3)));
     EXPECT_EQ(RotationDirection::ClockWise, getRotationDirectionTraversing3Points(s1, s2, Point(3, 1)));
@@ -446,8 +446,8 @@ TEST(TwoDimensionsUtilitiesTest, GetLargerAngleBetweenTwoLinesWorks) {
 }
 
 TEST(TwoDimensionsUtilitiesTest, PointsInParabolaCanBeConnected) {
-    Parabola<ParabolaOrientation::PolynomialX> parabola{1, 2, 3};
-    Points parabolaPoints(parabola.getPoints(-2, 2, 1));
+    Parabola<ParabolaOrientation::PolynomialX> const parabola{1, 2, 3};
+    Points const parabolaPoints(parabola.getPoints(-2, 2, 1));
     Points connectedPoints(getConnectedPointsUsingALine(parabolaPoints, 1));
 
     ASSERT_EQ(11U, connectedPoints.size());
@@ -465,28 +465,28 @@ TEST(TwoDimensionsUtilitiesTest, PointsInParabolaCanBeConnected) {
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetConvexHullPointsUsingJarvisAlgorithmWorks) {
-    Points inputPoints{{-7, 8}, {-4, 6},  {2, 6},  {6, 4},   {8, 6},   {7, -2}, {4, -6},  {8, -7}, {0, 0},
-                       {3, -2}, {6, -10}, {0, -6}, {-9, -5}, {-8, -2}, {-8, 0}, {-10, 3}, {-2, 2}, {-10, 4}};
-    Points actualPoints(getConvexHullPointsUsingJarvisAlgorithm(inputPoints));
+    Points const inputPoints{{-7, 8}, {-4, 6},  {2, 6},  {6, 4},   {8, 6},   {7, -2}, {4, -6},  {8, -7}, {0, 0},
+                             {3, -2}, {6, -10}, {0, -6}, {-9, -5}, {-8, -2}, {-8, 0}, {-10, 3}, {-2, 2}, {-10, 4}};
+    Points const actualPoints(getConvexHullPointsUsingJarvisAlgorithm(inputPoints));
 
-    Points expectedPoints{Point(-10, 3), Point(-9, -5), Point(6, -10), Point(8, -7),
-                          Point(8, 6),   Point(-7, 8),  Point(-10, 4)};
+    Points const expectedPoints{Point(-10, 3), Point(-9, -5), Point(6, -10), Point(8, -7),
+                                Point(8, 6),   Point(-7, 8),  Point(-10, 4)};
     ASSERT_EQ(expectedPoints, actualPoints);
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetConvexHullPointsUsingGrahamScanWorks) {
-    Points inputPoints{{-7, 8}, {-4, 6},  {2, 6},  {6, 4},   {8, 6},   {7, -2}, {4, -6},  {8, -7}, {0, 0},
-                       {3, -2}, {6, -10}, {0, -6}, {-9, -5}, {-8, -2}, {-8, 0}, {-10, 3}, {-2, 2}, {-10, 4}};
-    Points actualPoints(getConvexHullPointsUsingGrahamScan(inputPoints));
+    Points const inputPoints{{-7, 8}, {-4, 6},  {2, 6},  {6, 4},   {8, 6},   {7, -2}, {4, -6},  {8, -7}, {0, 0},
+                             {3, -2}, {6, -10}, {0, -6}, {-9, -5}, {-8, -2}, {-8, 0}, {-10, 3}, {-2, 2}, {-10, 4}};
+    Points const actualPoints(getConvexHullPointsUsingGrahamScan(inputPoints));
 
-    Points expectedPoints{Point(-9, -5), Point(-10, 3), Point(-10, 4), Point(-7, 8),
-                          Point(8, 6),   Point(8, -7),  Point(6, -10)};
+    Points const expectedPoints{Point(-9, -5), Point(-10, 3), Point(-10, 4), Point(-7, 8),
+                                Point(8, 6),   Point(8, -7),  Point(6, -10)};
     ASSERT_EQ(expectedPoints, actualPoints);
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetLineWithSameSlopeAndPoint) {
-    Line lineInput(Point(0, 0), Point(-1, 1));
-    Line expectedLine(getLineWithSameSlope(lineInput, Point(2, 2)));
+    Line const lineInput(Point(0, 0), Point(-1, 1));
+    Line const expectedLine(getLineWithSameSlope(lineInput, Point(2, 2)));
 
     EXPECT_EQ(4, expectedLine.getYIntercept());
     EXPECT_EQ(4, expectedLine.getXIntercept());
@@ -497,8 +497,8 @@ TEST(TwoDimensionsUtilitiesTest, GetLineWithSameSlopeAndPoint) {
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetLineWithInverseSlopeAndPoint) {
-    Line lineInput(Point(0, 0), Point(1, 1));
-    Line expectedLine(getLineWithPerpendicularSlope(lineInput, Point(2, 2)));
+    Line const lineInput(Point(0, 0), Point(1, 1));
+    Line const expectedLine(getLineWithPerpendicularSlope(lineInput, Point(2, 2)));
 
     EXPECT_EQ(4, expectedLine.getYIntercept());
     EXPECT_EQ(4, expectedLine.getXIntercept());
@@ -509,10 +509,10 @@ TEST(TwoDimensionsUtilitiesTest, GetLineWithInverseSlopeAndPoint) {
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetTangentLineForCircleIsCorrect) {
-    Circle circle(Point(1, 2), 3);
-    Line expectedLine1(getTangentLineAt(circle, Point(1, 5)));
-    Line expectedLine2(getTangentLineAt(circle, Point(4, 2)));
-    Line expectedLine3(getTangentLineAt(circle, Point(2.5, 3.5)));
+    Circle const circle(Point(1, 2), 3);
+    Line const expectedLine1(getTangentLineAt(circle, Point(1, 5)));
+    Line const expectedLine2(getTangentLineAt(circle, Point(4, 2)));
+    Line const expectedLine3(getTangentLineAt(circle, Point(2.5, 3.5)));
 
     EXPECT_EQ(LineType::Horizontal, expectedLine1.getType());
     EXPECT_DOUBLE_EQ(5, expectedLine1.getYIntercept());
@@ -530,10 +530,10 @@ TEST(TwoDimensionsUtilitiesTest, GetTangentLineForCircleIsCorrect) {
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetTangentLineForPolynomialIsCorrect) {
-    Parabola<ParabolaOrientation::PolynomialX> parabola{1, 2, 3};
-    Line expectedLine1(getPolynomialTangentLineAt(parabola, -1));
-    Line expectedLine2(getPolynomialTangentLineAt(parabola, 0));
-    Line expectedLine3(getPolynomialTangentLineAt(parabola, 1));
+    Parabola<ParabolaOrientation::PolynomialX> const parabola{1, 2, 3};
+    Line const expectedLine1(getPolynomialTangentLineAt(parabola, -1));
+    Line const expectedLine2(getPolynomialTangentLineAt(parabola, 0));
+    Line const expectedLine3(getPolynomialTangentLineAt(parabola, 1));
 
     EXPECT_EQ(LineType::Horizontal, expectedLine1.getType());
     EXPECT_DOUBLE_EQ(2, expectedLine1.getYIntercept());
@@ -553,8 +553,8 @@ TEST(TwoDimensionsUtilitiesTest, GetTangentLineForPolynomialIsCorrect) {
 
 TEST(TwoDimensionsUtilitiesTest, AddPointIfInsideTwoPointsWorks) {
     Points points;
-    Point minimumXAndY(-1, -1);
-    Point maximumXAndY(1, 1);
+    Point const minimumXAndY(-1, -1);
+    Point const maximumXAndY(1, 1);
     addPointIfInsideTwoPoints(points, Point(-3, -3), minimumXAndY, maximumXAndY);
     addPointIfInsideTwoPoints(points, Point(-2, -2), minimumXAndY, maximumXAndY);
     addPointIfInsideTwoPoints(points, Point(-1, -1), minimumXAndY, maximumXAndY);

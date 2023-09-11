@@ -9,7 +9,7 @@ namespace alba::TwoDimensions {
 TEST(PolynomialInXEqualsYTest, PolynomialInXEqualsYCanBeCreated) { PolynomialInXEqualsY<3>{1, 2, 3}; }
 
 TEST(PolynomialInXEqualsYTest, GetPointsWorks) {
-    PolynomialInXEqualsY<3> polynomial{1, 2, 3};
+    PolynomialInXEqualsY<3> const polynomial{1, 2, 3};
     Points points(polynomial.getPoints(-2, 2, 1));
 
     ASSERT_EQ(5U, points.size());
@@ -21,13 +21,13 @@ TEST(PolynomialInXEqualsYTest, GetPointsWorks) {
 }
 
 TEST(PolynomialInXEqualsYTest, CalculateYfromXWorks) {
-    PolynomialInXEqualsY<3> polynomial{1, 2, 3};
+    PolynomialInXEqualsY<3> const polynomial{1, 2, 3};
 
     EXPECT_DOUBLE_EQ(38, polynomial.calculateYfromX(5));
 }
 
 TEST(PolynomialInXEqualsYTest, GetValueOfFirstDerivativeWorks) {
-    PolynomialInXEqualsY<3> polynomial{1, 2, 3};
+    PolynomialInXEqualsY<3> const polynomial{1, 2, 3};
 
     EXPECT_DOUBLE_EQ(12, polynomial.getSlopeAt(5));
 }

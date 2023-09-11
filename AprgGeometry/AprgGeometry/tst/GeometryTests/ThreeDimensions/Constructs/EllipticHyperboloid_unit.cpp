@@ -10,7 +10,7 @@ using namespace std;
 namespace alba::ThreeDimensions {
 
 TEST(EllipticHyperboloidTest, EmptyEllipticHyperboloid) {
-    EllipticHyperboloid ellipticHyperboloid;
+    EllipticHyperboloid const ellipticHyperboloid;
 
     EXPECT_EQ(Point(0, 0, 0), ellipticHyperboloid.getCenter());
     EXPECT_DOUBLE_EQ(0, ellipticHyperboloid.getAValue());
@@ -19,7 +19,7 @@ TEST(EllipticHyperboloidTest, EmptyEllipticHyperboloid) {
 }
 
 TEST(EllipticHyperboloidTest, EllipticHyperboloidAtOriginWithRadius) {
-    EllipticHyperboloid ellipticHyperboloid(Point(0, 0, 0), 10, 11, 12, false);
+    EllipticHyperboloid const ellipticHyperboloid(Point(0, 0, 0), 10, 11, 12, false);
 
     EXPECT_EQ(Point(0, 0, 0), ellipticHyperboloid.getCenter());
     EXPECT_DOUBLE_EQ(10, ellipticHyperboloid.getAValue());
@@ -31,7 +31,7 @@ TEST(EllipticHyperboloidTest, EllipticHyperboloidAtOriginWithRadius) {
 }
 
 TEST(EllipticHyperboloidTest, EllipticHyperboloidNotAtOriginWithRadius) {
-    EllipticHyperboloid ellipticHyperboloid(Point(1, 2, 3), 10, 11, 12, false);
+    EllipticHyperboloid const ellipticHyperboloid(Point(1, 2, 3), 10, 11, 12, false);
 
     EXPECT_EQ(Point(1, 2, 3), ellipticHyperboloid.getCenter());
     EXPECT_DOUBLE_EQ(10, ellipticHyperboloid.getAValue());
@@ -43,7 +43,7 @@ TEST(EllipticHyperboloidTest, EllipticHyperboloidNotAtOriginWithRadius) {
 }
 
 TEST(EllipticHyperboloidTest, IsInsideWorks) {
-    EllipticHyperboloid ellipticHyperboloid(Point(1, 2, 3), 10, 11, 12, false);
+    EllipticHyperboloid const ellipticHyperboloid(Point(1, 2, 3), 10, 11, 12, false);
 
     EXPECT_TRUE(ellipticHyperboloid.isInside(Point(0, 0, 0)));
 }

@@ -7,7 +7,7 @@ using namespace std;
 namespace alba::TwoDimensions {
 
 TEST(TwoDimensionsPointTest, PointsCanBeCreated) {
-    Point point(100, 200);
+    Point const point(100, 200);
     EXPECT_EQ(100, point.getX());
     EXPECT_EQ(200, point.getY());
 }

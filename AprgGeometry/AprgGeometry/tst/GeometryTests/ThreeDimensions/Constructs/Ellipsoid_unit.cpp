@@ -10,7 +10,7 @@ using namespace std;
 namespace alba::ThreeDimensions {
 
 TEST(EllipsoidTest, EmptyEllipsoid) {
-    Ellipsoid ellipsoid;
+    Ellipsoid const ellipsoid;
 
     EXPECT_EQ(Point(0, 0, 0), ellipsoid.getCenter());
     EXPECT_DOUBLE_EQ(0, ellipsoid.getAValue());
@@ -19,7 +19,7 @@ TEST(EllipsoidTest, EmptyEllipsoid) {
 }
 
 TEST(EllipsoidTest, EllipsoidAtOriginWithRadius) {
-    Ellipsoid ellipsoid(Point(0, 0, 0), 10, 11, 12);
+    Ellipsoid const ellipsoid(Point(0, 0, 0), 10, 11, 12);
 
     EXPECT_EQ(Point(0, 0, 0), ellipsoid.getCenter());
     EXPECT_DOUBLE_EQ(10, ellipsoid.getAValue());
@@ -31,7 +31,7 @@ TEST(EllipsoidTest, EllipsoidAtOriginWithRadius) {
 }
 
 TEST(EllipsoidTest, EllipsoidNotAtOriginWithRadius) {
-    Ellipsoid ellipsoid(Point(1, 2, 3), 10, 11, 12);
+    Ellipsoid const ellipsoid(Point(1, 2, 3), 10, 11, 12);
 
     EXPECT_EQ(Point(1, 2, 3), ellipsoid.getCenter());
     EXPECT_DOUBLE_EQ(10, ellipsoid.getAValue());
@@ -43,7 +43,7 @@ TEST(EllipsoidTest, EllipsoidNotAtOriginWithRadius) {
 }
 
 TEST(EllipsoidTest, IsInsideWorks) {
-    Ellipsoid ellipsoid(Point(1, 2, 3), 10, 11, 12);
+    Ellipsoid const ellipsoid(Point(1, 2, 3), 10, 11, 12);
 
     EXPECT_TRUE(ellipsoid.isInside(Point(0, 0, 0)));
 }

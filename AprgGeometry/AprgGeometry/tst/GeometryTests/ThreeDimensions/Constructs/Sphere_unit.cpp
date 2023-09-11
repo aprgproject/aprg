@@ -10,14 +10,14 @@ using namespace std;
 namespace alba::ThreeDimensions {
 
 TEST(SphereTest, EmptySphere) {
-    Sphere sphere;
+    Sphere const sphere;
 
     EXPECT_EQ(Point(0, 0, 0), sphere.getCenter());
     EXPECT_DOUBLE_EQ(0, sphere.getRadius());
 }
 
 TEST(SphereTest, SphereAtOriginWithRadius) {
-    Sphere sphere(Point(0, 0, 0), 10);
+    Sphere const sphere(Point(0, 0, 0), 10);
 
     EXPECT_EQ(Point(0, 0, 0), sphere.getCenter());
     EXPECT_DOUBLE_EQ(10, sphere.getRadius());
@@ -27,7 +27,7 @@ TEST(SphereTest, SphereAtOriginWithRadius) {
 }
 
 TEST(SphereTest, SphereNotAtOriginWithRadius) {
-    Sphere sphere(Point(1, 2, 3), 10);
+    Sphere const sphere(Point(1, 2, 3), 10);
 
     EXPECT_EQ(Point(1, 2, 3), sphere.getCenter());
     EXPECT_DOUBLE_EQ(10, sphere.getRadius());
@@ -37,7 +37,7 @@ TEST(SphereTest, SphereNotAtOriginWithRadius) {
 }
 
 TEST(SphereTest, IsInsideWorks) {
-    Sphere sphere(Point(1, 2, 3), 10);
+    Sphere const sphere(Point(1, 2, 3), 10);
 
     EXPECT_TRUE(sphere.isInside(Point(0, 0, 0)));
 }

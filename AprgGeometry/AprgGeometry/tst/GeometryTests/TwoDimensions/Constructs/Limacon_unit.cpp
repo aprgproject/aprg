@@ -33,28 +33,28 @@ TEST(LimaconTest, NonEqualityOperatorWorks) {
 }
 
 TEST(LimaconTest, GetAValueWorks) {
-    Limacon limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
+    Limacon const limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
 
     EXPECT_DOUBLE_EQ(10, limacon.getAValue());
 }
 
 TEST(LimaconTest, GetBValueWorks) {
-    Limacon limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
+    Limacon const limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
 
     EXPECT_DOUBLE_EQ(13, limacon.getBValue());
 }
 
 TEST(LimaconTest, GetTrigonometricFunctionTypeWorks) {
-    Limacon limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
+    Limacon const limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
 
     EXPECT_EQ(LimaconTrigonometricFunctionType::Cosine, limacon.getTrigonometricFunctionType());
 }
 
 TEST(LimaconTest, GetLimaconTypeWorks) {
-    Limacon limacon1(1, 2, LimaconTrigonometricFunctionType::Cosine);
-    Limacon limacon2(1, 1, LimaconTrigonometricFunctionType::Cosine);
-    Limacon limacon3(3, 2, LimaconTrigonometricFunctionType::Cosine);
-    Limacon limacon4(2, 1, LimaconTrigonometricFunctionType::Cosine);
+    Limacon const limacon1(1, 2, LimaconTrigonometricFunctionType::Cosine);
+    Limacon const limacon2(1, 1, LimaconTrigonometricFunctionType::Cosine);
+    Limacon const limacon3(3, 2, LimaconTrigonometricFunctionType::Cosine);
+    Limacon const limacon4(2, 1, LimaconTrigonometricFunctionType::Cosine);
 
     EXPECT_EQ(LimaconType::WithALoop, limacon1.getLimaconType());
     EXPECT_EQ(LimaconType::Cardioid, limacon2.getLimaconType());
@@ -63,7 +63,7 @@ TEST(LimaconTest, GetLimaconTypeWorks) {
 }
 
 TEST(LimaconTest, GetPointsForShapeWorks) {
-    Limacon limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
+    Limacon const limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
 
     Points points(limacon.getPointsForShape(AlbaAngle(AngleUnitType::Degrees, 90)));
     ASSERT_EQ(4U, points.size());
@@ -74,7 +74,7 @@ TEST(LimaconTest, GetPointsForShapeWorks) {
 }
 
 TEST(LimaconTest, CalculateRadiusFromThetaWorks) {
-    Limacon limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
+    Limacon const limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
 
     EXPECT_DOUBLE_EQ(10, limacon.calculateRadiusFromTheta(AlbaAngle(AngleUnitType::Degrees, 90)));
     EXPECT_DOUBLE_EQ(-3, limacon.calculateRadiusFromTheta(AlbaAngle(AngleUnitType::Degrees, 180)));
@@ -83,7 +83,7 @@ TEST(LimaconTest, CalculateRadiusFromThetaWorks) {
 }
 
 TEST(LimaconTest, CalculateThetaFromRadiusWorks) {
-    Limacon limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
+    Limacon const limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
 
     EXPECT_DOUBLE_EQ(90, limacon.calculateThetaFromRadius(10).getDegrees());
     EXPECT_DOUBLE_EQ(57.421029607195877, limacon.calculateThetaFromRadius(17).getDegrees());

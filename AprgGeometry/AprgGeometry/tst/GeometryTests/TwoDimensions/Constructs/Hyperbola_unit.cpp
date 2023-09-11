@@ -9,7 +9,7 @@ using namespace std;
 namespace alba::TwoDimensions {
 
 TEST(HyperbolaTest, EmptyHyperbola) {
-    Hyperbola hyperbola;
+    Hyperbola const hyperbola;
 
     EXPECT_EQ(Point(0, 0), hyperbola.getCenter());
     EXPECT_DOUBLE_EQ(0, hyperbola.getAValue());
@@ -18,12 +18,12 @@ TEST(HyperbolaTest, EmptyHyperbola) {
     EXPECT_NE(0, hyperbola.getEccentricity());
     EXPECT_NE(0, hyperbola.getSemiLactusRectum());
 
-    Points points(hyperbola.getPointsForShape(1));
+    Points const points(hyperbola.getPointsForShape(1));
     ASSERT_TRUE(points.empty());
 }
 
 TEST(HyperbolaTest, HyperbolaAtOriginWithRadius) {
-    Hyperbola hyperbola(Point(0, 0), 3, 2);
+    Hyperbola const hyperbola(Point(0, 0), 3, 2);
 
     EXPECT_EQ(Point(0, 0), hyperbola.getCenter());
     EXPECT_DOUBLE_EQ(3, hyperbola.getAValue());
@@ -59,9 +59,9 @@ TEST(HyperbolaTest, HyperbolaAtOriginWithRadius) {
 }
 
 TEST(HyperbolaTest, GetFociWorks) {
-    Hyperbola hyperbola1(Point(0, 0), 1, 1);
-    Hyperbola hyperbola2(Point(0, 0), 3, 4);
-    Hyperbola hyperbola3(Point(0, 0), -3, -4);
+    Hyperbola const hyperbola1(Point(0, 0), 1, 1);
+    Hyperbola const hyperbola2(Point(0, 0), 3, 4);
+    Hyperbola const hyperbola3(Point(0, 0), -3, -4);
 
     Points foci1(hyperbola1.getFoci());
     Points foci2(hyperbola2.getFoci());
@@ -79,9 +79,9 @@ TEST(HyperbolaTest, GetFociWorks) {
 }
 
 TEST(HyperbolaTest, GetVerticesWorks) {
-    Hyperbola hyperbola1(Point(0, 0), 1, 1);
-    Hyperbola hyperbola2(Point(0, 0), 3, 4);
-    Hyperbola hyperbola3(Point(0, 0), -3, -4);
+    Hyperbola const hyperbola1(Point(0, 0), 1, 1);
+    Hyperbola const hyperbola2(Point(0, 0), 3, 4);
+    Hyperbola const hyperbola3(Point(0, 0), -3, -4);
 
     Points vertices1(hyperbola1.getVertices());
     Points vertices2(hyperbola2.getVertices());
@@ -99,9 +99,9 @@ TEST(HyperbolaTest, GetVerticesWorks) {
 }
 
 TEST(HyperbolaTest, GetAsymptotesWorks) {
-    Hyperbola hyperbola1(Point(0, 0), 1, 1);
-    Hyperbola hyperbola2(Point(0, 0), 3, 4);
-    Hyperbola hyperbola3(Point(0, 0), -3, -4);
+    Hyperbola const hyperbola1(Point(0, 0), 1, 1);
+    Hyperbola const hyperbola2(Point(0, 0), 3, 4);
+    Hyperbola const hyperbola3(Point(0, 0), -3, -4);
 
     Lines asymptotes1(hyperbola1.getAsymptotes());
     Lines asymptotes2(hyperbola2.getAsymptotes());

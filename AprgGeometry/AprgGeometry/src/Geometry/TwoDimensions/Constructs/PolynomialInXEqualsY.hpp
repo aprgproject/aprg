@@ -14,7 +14,7 @@ public:
 
     [[nodiscard]] Points getPoints(double const startValueOfX, double const endValueOfX, double const interval) const {
         Points points;
-        AlbaValueRange<double> range(startValueOfX, endValueOfX, interval);
+        AlbaValueRange<double> const range(startValueOfX, endValueOfX, interval);
         range.traverse([&](double const traverseValueOfX) {
             points.emplace_back(traverseValueOfX, calculateYfromX(traverseValueOfX));
         });

@@ -11,18 +11,18 @@ using namespace std;
 namespace alba::TwoDimensions {
 
 TEST(CircleTest, EmptyCircle) {
-    Circle circle;
+    Circle const circle;
 
     EXPECT_EQ(Point(0, 0), circle.getCenter());
     EXPECT_DOUBLE_EQ(0, circle.getRadius());
     EXPECT_DOUBLE_EQ(0, circle.getArea());
     EXPECT_DOUBLE_EQ(0, circle.getCircumference());
-    Points points(circle.getLocus(1));
+    Points const points(circle.getLocus(1));
     ASSERT_TRUE(points.empty());
 }
 
 TEST(CircleTest, CreateCircleFromCoefficients) {
-    Circle circle(1, 6, -2, -15);
+    Circle const circle(1, 6, -2, -15);
 
     EXPECT_EQ(Point(-3, 1), circle.getCenter());
     EXPECT_DOUBLE_EQ(5, circle.getRadius());
@@ -31,7 +31,7 @@ TEST(CircleTest, CreateCircleFromCoefficients) {
 }
 
 TEST(CircleTest, CircleAtOriginWithRadius) {
-    Circle circle(Point(0, 0), 3);
+    Circle const circle(Point(0, 0), 3);
 
     EXPECT_EQ(Point(0, 0), circle.getCenter());
     EXPECT_DOUBLE_EQ(3, circle.getRadius());
@@ -62,14 +62,14 @@ TEST(CircleTest, CircleAtOriginWithRadius) {
 }
 
 TEST(CircleTest, IsInsideWorks) {
-    Circle circle(Point(0, 0), 3);
+    Circle const circle(Point(0, 0), 3);
 
     EXPECT_TRUE(circle.isInside(Point(1, 1)));
     EXPECT_FALSE(circle.isInside(Point(100, 100)));
 }
 
 TEST(CircleTest, GetEccentricityWorks) {
-    Circle circle(1, 6, -2, -15);
+    Circle const circle(1, 6, -2, -15);
 
     EXPECT_DOUBLE_EQ(0, circle.getEccentricity());
 }
@@ -84,12 +84,12 @@ TEST(CircleTest, GetPointAtAngleWorks) {
 }
 
 TEST(CircleTest, GetNearestPointAtCircumferenceWorks) {
-    Circle circle(Point(1, 2), 3);
+    Circle const circle(Point(1, 2), 3);
     EXPECT_EQ(Point(3.4, 3.8), circle.getNearestPointInCircumference(Point(5, 5)));
 }
 
 TEST(CircleTest, PointsInAreaTraversalIsCorrect) {
-    Circle circle(Point(3, 3), 2);
+    Circle const circle(Point(3, 3), 2);
     Points pointsInAreaTraversal;
 
     circle.traverseArea(1, [&](Point const& pointInArea) { pointsInAreaTraversal.emplace_back(pointInArea); });

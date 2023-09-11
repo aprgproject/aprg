@@ -43,9 +43,9 @@ public:
         : ParabolaParent{aCoefficient, bCoefficient, cCoefficient} {}
 
     [[nodiscard]] Line getDirectrix() const {
-        double p(getP());
-        double xt(getTranslationInX());
-        double yt(getTranslationInY());
+        double const p(getP());
+        double const xt(getTranslationInX());
+        double const yt(getTranslationInY());
         Line directrix;
         if (ParabolaOrientation::PolynomialX == parabolaOrientation) {
             directrix = Line(Point(0, yt - p), Point(1, yt - p));
@@ -56,11 +56,11 @@ public:
     }
 
     [[nodiscard]] Point getVertex() const {
-        double a(getA());
-        double b(getB());
-        double c(getC());
-        double vertexCoordinate1 = -b / (2 * a);
-        double vertexCoordinate2 = ((4 * a * c) - (b * b)) / (4 * a);
+        double const a(getA());
+        double const b(getB());
+        double const c(getC());
+        double const vertexCoordinate1 = -b / (2 * a);
+        double const vertexCoordinate2 = ((4 * a * c) - (b * b)) / (4 * a);
         Point vertex;
         if (ParabolaOrientation::PolynomialX == parabolaOrientation) {
             vertex = Point(vertexCoordinate1, vertexCoordinate2);
@@ -71,9 +71,9 @@ public:
     }
 
     [[nodiscard]] Point getFocus() const {
-        double p(getP());
-        double xt(getTranslationInX());
-        double yt(getTranslationInY());
+        double const p(getP());
+        double const xt(getTranslationInX());
+        double const yt(getTranslationInY());
         Point focus;
         if (ParabolaOrientation::PolynomialX == parabolaOrientation) {
             focus = Point(xt, yt + p);

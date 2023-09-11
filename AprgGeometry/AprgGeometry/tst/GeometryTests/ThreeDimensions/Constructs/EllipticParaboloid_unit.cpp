@@ -10,7 +10,7 @@ using namespace std;
 namespace alba::ThreeDimensions {
 
 TEST(EllipticParaboloidTest, EmptyEllipticParaboloid) {
-    EllipticParaboloid ellipticParaboloid;
+    EllipticParaboloid const ellipticParaboloid;
 
     EXPECT_EQ(Point(0, 0, 0), ellipticParaboloid.getCenter());
     EXPECT_DOUBLE_EQ(0, ellipticParaboloid.getAValue());
@@ -19,7 +19,7 @@ TEST(EllipticParaboloidTest, EmptyEllipticParaboloid) {
 }
 
 TEST(EllipticParaboloidTest, EllipticParaboloidAtOriginWithRadius) {
-    EllipticParaboloid ellipticParaboloid(Point(0, 0, 0), 10, 11, 12);
+    EllipticParaboloid const ellipticParaboloid(Point(0, 0, 0), 10, 11, 12);
 
     EXPECT_EQ(Point(0, 0, 0), ellipticParaboloid.getCenter());
     EXPECT_DOUBLE_EQ(10, ellipticParaboloid.getAValue());
@@ -31,7 +31,7 @@ TEST(EllipticParaboloidTest, EllipticParaboloidAtOriginWithRadius) {
 }
 
 TEST(EllipticParaboloidTest, EllipticParaboloidNotAtOriginWithRadius) {
-    EllipticParaboloid ellipticParaboloid(Point(1, 2, 3), 10, 11, 12);
+    EllipticParaboloid const ellipticParaboloid(Point(1, 2, 3), 10, 11, 12);
 
     EXPECT_EQ(Point(1, 2, 3), ellipticParaboloid.getCenter());
     EXPECT_DOUBLE_EQ(10, ellipticParaboloid.getAValue());

@@ -116,9 +116,9 @@ bool isPointInsidePolygon(
     // ---> and calculate the number of times it touches the boundary of the polygon.
     // ---> If the number is odd, the point is inside the polygon,
     // ---> and if the number is even, the point is outside the polygon.
-    LineSegments lineSegments(polygon.getLineSegments());
+    LineSegments const lineSegments(polygon.getLineSegments());
     LineSegment rayLineSegment(point, pointForRayTesting);
-    int numberOfIntersections = std::count_if(
+    int const numberOfIntersections = std::count_if(
         lineSegments.cbegin(), lineSegments.cend(), [&rayLineSegment](LineSegment const& lineSegmentInPolygon) {
             return doesTheTwoLineSegmentsIntersect(rayLineSegment, lineSegmentInPolygon);
         });
@@ -132,7 +132,7 @@ double getArea(Polygon<numberOfVertices> const& polygon) {
     // check also: https://en.wikipedia.org/wiki/Green%27s_theorem
     double area(0);
     Points const& vertices(polygon.getVertices());
-    int sizeMinusOne = static_cast<int>(vertices.size()) - 1;
+    int const sizeMinusOne = static_cast<int>(vertices.size()) - 1;
     for (int i = 0; i < sizeMinusOne; ++i) {
         area += getSignedCounterClockwiseDoubleTriangleAreaOfOriginAnd2Points(vertices[i], vertices[i + 1]);
     }
@@ -143,8 +143,8 @@ double getArea(Polygon<numberOfVertices> const& polygon) {
 
 template <int numberOfCoefficients>
 Line getPolynomialTangentLineAt(PolynomialInXEqualsY<numberOfCoefficients> polynomial, double const x) {
-    double slope = polynomial.getSlopeAt(x);
-    double y = polynomial.calculateYfromX(x);
+    double const slope = polynomial.getSlopeAt(x);
+    double const y = polynomial.calculateYfromX(x);
     return {Point(x, y), Point(x + 1, y + slope)};
 }
 

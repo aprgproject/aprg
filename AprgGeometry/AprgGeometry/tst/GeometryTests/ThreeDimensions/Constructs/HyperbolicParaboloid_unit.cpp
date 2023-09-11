@@ -10,7 +10,7 @@ using namespace std;
 namespace alba::ThreeDimensions {
 
 TEST(HyperbolicParaboloidTest, EmptyHyperbolicParaboloid) {
-    HyperbolicParaboloid hyperbolicParaboloid;
+    HyperbolicParaboloid const hyperbolicParaboloid;
 
     EXPECT_EQ(Point(0, 0, 0), hyperbolicParaboloid.getCenter());
     EXPECT_DOUBLE_EQ(0, hyperbolicParaboloid.getAValue());
@@ -19,7 +19,7 @@ TEST(HyperbolicParaboloidTest, EmptyHyperbolicParaboloid) {
 }
 
 TEST(HyperbolicParaboloidTest, HyperbolicParaboloidAtOriginWithRadius) {
-    HyperbolicParaboloid hyperbolicParaboloid(Point(0, 0, 0), 10, 5, 10);
+    HyperbolicParaboloid const hyperbolicParaboloid(Point(0, 0, 0), 10, 5, 10);
 
     EXPECT_EQ(Point(0, 0, 0), hyperbolicParaboloid.getCenter());
     EXPECT_DOUBLE_EQ(10, hyperbolicParaboloid.getAValue());
@@ -31,7 +31,7 @@ TEST(HyperbolicParaboloidTest, HyperbolicParaboloidAtOriginWithRadius) {
 }
 
 TEST(HyperbolicParaboloidTest, HyperbolicParaboloidNotAtOriginWithRadius) {
-    HyperbolicParaboloid hyperbolicParaboloid(Point(1, 2, 3), 10, 5, 10);
+    HyperbolicParaboloid const hyperbolicParaboloid(Point(1, 2, 3), 10, 5, 10);
 
     EXPECT_EQ(Point(1, 2, 3), hyperbolicParaboloid.getCenter());
     EXPECT_DOUBLE_EQ(10, hyperbolicParaboloid.getAValue());

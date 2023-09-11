@@ -9,7 +9,7 @@ using namespace std;
 namespace alba::ThreeDimensions {
 
 TEST(PlaneTest, EmptyPlane) {
-    Plane plane;
+    Plane const plane;
 
     EXPECT_EQ(0, plane.getACoefficient());
     EXPECT_EQ(0, plane.getBCoefficient());
@@ -24,7 +24,7 @@ TEST(PlaneTest, EmptyPlane) {
 }
 
 TEST(PlaneTest, InvalidPlane) {
-    Plane plane(Point(3, 3, 3), Point(3, 3, 3), Point(3, 3, 3));
+    Plane const plane(Point(3, 3, 3), Point(3, 3, 3), Point(3, 3, 3));
 
     EXPECT_EQ(0, plane.getACoefficient());
     EXPECT_EQ(0, plane.getBCoefficient());
@@ -39,7 +39,7 @@ TEST(PlaneTest, InvalidPlane) {
 }
 
 TEST(PlaneTest, PlaneWithConstantZ) {
-    Plane plane(Point(1, 1, 0), Point(-2, 2, 0), Point(2, -1, 0));
+    Plane const plane(Point(1, 1, 0), Point(-2, 2, 0), Point(2, -1, 0));
 
     EXPECT_EQ(0, plane.getACoefficient());
     EXPECT_EQ(0, plane.getBCoefficient());
@@ -56,7 +56,7 @@ TEST(PlaneTest, PlaneWithConstantZ) {
 }
 
 TEST(PlaneTest, PlaneWithConstantY) {
-    Plane plane(Point(1, 0, 1), Point(-2, 0, 2), Point(2, 0, -1));
+    Plane const plane(Point(1, 0, 1), Point(-2, 0, 2), Point(2, 0, -1));
 
     EXPECT_EQ(0, plane.getACoefficient());
     EXPECT_EQ(-5, plane.getBCoefficient());
@@ -73,7 +73,7 @@ TEST(PlaneTest, PlaneWithConstantY) {
 }
 
 TEST(PlaneTest, PlaneWithConstantX) {
-    Plane plane(Point(0, 1, 1), Point(0, -2, 2), Point(0, 2, -1));
+    Plane const plane(Point(0, 1, 1), Point(0, -2, 2), Point(0, 2, -1));
 
     EXPECT_EQ(5, plane.getACoefficient());
     EXPECT_EQ(0, plane.getBCoefficient());

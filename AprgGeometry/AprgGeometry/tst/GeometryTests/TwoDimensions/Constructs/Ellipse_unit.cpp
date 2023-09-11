@@ -9,7 +9,7 @@ using namespace std;
 namespace alba::TwoDimensions {
 
 TEST(EllipseTest, EmptyEllipse) {
-    Ellipse ellipse;
+    Ellipse const ellipse;
 
     EXPECT_EQ(Point(0, 0), ellipse.getCenter());
     EXPECT_DOUBLE_EQ(0, ellipse.getAValue());
@@ -19,12 +19,12 @@ TEST(EllipseTest, EmptyEllipse) {
     EXPECT_NE(0, ellipse.getSemiLatusRectum());
     EXPECT_DOUBLE_EQ(0, ellipse.getArea());
 
-    Points points(ellipse.getPointsForCircumference(1));
+    Points const points(ellipse.getPointsForCircumference(1));
     ASSERT_TRUE(points.empty());
 }
 
 TEST(EllipseTest, EllipseAtOriginWithRadius) {
-    Ellipse ellipse(Point(0, 0), 3, 2);
+    Ellipse const ellipse(Point(0, 0), 3, 2);
 
     EXPECT_EQ(Point(0, 0), ellipse.getCenter());
     EXPECT_DOUBLE_EQ(3, ellipse.getAValue());
@@ -55,16 +55,16 @@ TEST(EllipseTest, EllipseAtOriginWithRadius) {
 }
 
 TEST(EllipseTest, IsInsideWorks) {
-    Ellipse ellipse(Point(0, 0), 5, 4);
+    Ellipse const ellipse(Point(0, 0), 5, 4);
 
     EXPECT_TRUE(ellipse.isInside(Point(0, 0)));
     EXPECT_FALSE(ellipse.isInside(Point(5, 5)));
 }
 
 TEST(EllipseTest, GetFociWorks) {
-    Ellipse ellipse1(Point(0, 0), 1, 1);
-    Ellipse ellipse2(Point(0, 0), 4, 5);
-    Ellipse ellipse3(Point(0, 0), 5, 4);
+    Ellipse const ellipse1(Point(0, 0), 1, 1);
+    Ellipse const ellipse2(Point(0, 0), 4, 5);
+    Ellipse const ellipse3(Point(0, 0), 5, 4);
 
     Points foci1(ellipse1.getFoci());
     Points foci2(ellipse2.getFoci());
@@ -81,11 +81,11 @@ TEST(EllipseTest, GetFociWorks) {
 }
 
 TEST(EllipseTest, GetMajorVerticesWorks) {
-    Ellipse ellipse1(Point(0, 0), 1, 1);
-    Ellipse ellipse2(Point(0, 0), 4, 5);
-    Ellipse ellipse3(Point(0, 0), 5, 4);
+    Ellipse const ellipse1(Point(0, 0), 1, 1);
+    Ellipse const ellipse2(Point(0, 0), 4, 5);
+    Ellipse const ellipse3(Point(0, 0), 5, 4);
 
-    Points majorVertices1(ellipse1.getMajorVertices());
+    Points const majorVertices1(ellipse1.getMajorVertices());
     Points majorVertices2(ellipse2.getMajorVertices());
     Points majorVertices3(ellipse3.getMajorVertices());
 
@@ -99,11 +99,11 @@ TEST(EllipseTest, GetMajorVerticesWorks) {
 }
 
 TEST(EllipseTest, GetMinorVerticesWorks) {
-    Ellipse ellipse1(Point(0, 0), 1, 1);
-    Ellipse ellipse2(Point(0, 0), 4, 5);
-    Ellipse ellipse3(Point(0, 0), 5, 4);
+    Ellipse const ellipse1(Point(0, 0), 1, 1);
+    Ellipse const ellipse2(Point(0, 0), 4, 5);
+    Ellipse const ellipse3(Point(0, 0), 5, 4);
 
-    Points minorVertices1(ellipse1.getMinorVertices());
+    Points const minorVertices1(ellipse1.getMinorVertices());
     Points minorVertices2(ellipse2.getMinorVertices());
     Points minorVertices3(ellipse3.getMinorVertices());
 
@@ -117,13 +117,13 @@ TEST(EllipseTest, GetMinorVerticesWorks) {
 }
 
 TEST(EllipseTest, GetMajorAxisWorks) {
-    Ellipse ellipse1(Point(0, 0), 1, 1);
-    Ellipse ellipse2(Point(0, 0), 4, 5);
-    Ellipse ellipse3(Point(0, 0), 5, 4);
+    Ellipse const ellipse1(Point(0, 0), 1, 1);
+    Ellipse const ellipse2(Point(0, 0), 4, 5);
+    Ellipse const ellipse3(Point(0, 0), 5, 4);
 
-    Line majorAxis1(ellipse1.getMajorAxis());
-    Line majorAxis2(ellipse2.getMajorAxis());
-    Line majorAxis3(ellipse3.getMajorAxis());
+    Line const majorAxis1(ellipse1.getMajorAxis());
+    Line const majorAxis2(ellipse2.getMajorAxis());
+    Line const majorAxis3(ellipse3.getMajorAxis());
 
     EXPECT_EQ(Line(), majorAxis1);
     EXPECT_EQ(Line(10, 0, 0), majorAxis2);
@@ -131,13 +131,13 @@ TEST(EllipseTest, GetMajorAxisWorks) {
 }
 
 TEST(EllipseTest, GetMinorAxisWorks) {
-    Ellipse ellipse1(Point(0, 0), 1, 1);
-    Ellipse ellipse2(Point(0, 0), 4, 5);
-    Ellipse ellipse3(Point(0, 0), 5, 4);
+    Ellipse const ellipse1(Point(0, 0), 1, 1);
+    Ellipse const ellipse2(Point(0, 0), 4, 5);
+    Ellipse const ellipse3(Point(0, 0), 5, 4);
 
-    Line minorAxis1(ellipse1.getMinorAxis());
-    Line minorAxis2(ellipse2.getMinorAxis());
-    Line minorAxis3(ellipse3.getMinorAxis());
+    Line const minorAxis1(ellipse1.getMinorAxis());
+    Line const minorAxis2(ellipse2.getMinorAxis());
+    Line const minorAxis3(ellipse3.getMinorAxis());
 
     EXPECT_EQ(Line(), minorAxis1);
     EXPECT_EQ(Line(0, 8, 0), minorAxis2);

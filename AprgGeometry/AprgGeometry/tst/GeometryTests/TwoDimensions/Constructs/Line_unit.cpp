@@ -9,7 +9,7 @@ using namespace std;
 namespace alba::TwoDimensions {
 
 TEST(TwoDimensionsLineTest, EmptyLine) {
-    Line line;
+    Line const line;
 
     EXPECT_EQ(LineType::Invalid, line.getType());
     EXPECT_TRUE(isnan(line.getYIntercept()));
@@ -23,12 +23,12 @@ TEST(TwoDimensionsLineTest, EmptyLine) {
     EXPECT_EQ(0, line.getAUnitIncreaseInY());
     EXPECT_EQ(Point(0, 0), line.getAPoint());
 
-    Points points(line.getPoints(Point(-10, -10), Point(10, 10), 1));
+    Points const points(line.getPoints(Point(-10, -10), Point(10, 10), 1));
     ASSERT_TRUE(points.empty());
 }
 
 TEST(TwoDimensionsLineTest, InvalidLine) {
-    Line line(Point(3, 3), Point(3, 3));
+    Line const line(Point(3, 3), Point(3, 3));
 
     EXPECT_EQ(LineType::Invalid, line.getType());
     EXPECT_TRUE(isnan(line.getYIntercept()));
@@ -42,12 +42,12 @@ TEST(TwoDimensionsLineTest, InvalidLine) {
     EXPECT_EQ(0, line.getAUnitIncreaseInY());
     EXPECT_EQ(Point(0, 0), line.getAPoint());
 
-    Points points(line.getPoints(Point(-10, -10), Point(10, 10), 1));
+    Points const points(line.getPoints(Point(-10, -10), Point(10, 10), 1));
     ASSERT_TRUE(points.empty());
 }
 
 TEST(TwoDimensionsLineTest, HorizontalLine) {
-    Line line(Point(-2, 3), Point(2, 3));
+    Line const line(Point(-2, 3), Point(2, 3));
 
     EXPECT_EQ(LineType::Horizontal, line.getType());
     EXPECT_EQ(3, line.getYIntercept());
@@ -71,7 +71,7 @@ TEST(TwoDimensionsLineTest, HorizontalLine) {
 }
 
 TEST(TwoDimensionsLineTest, VerticalLine) {
-    Line line(Point(2, -3), Point(2, 3));
+    Line const line(Point(2, -3), Point(2, 3));
 
     EXPECT_EQ(LineType::Vertical, line.getType());
     EXPECT_EQ(INFINITY, line.getYIntercept());
@@ -97,7 +97,7 @@ TEST(TwoDimensionsLineTest, VerticalLine) {
 }
 
 TEST(TwoDimensionsLineTest, LineWithSlope) {
-    Line line(Point(-2, -3), Point(2, 3));
+    Line const line(Point(-2, -3), Point(2, 3));
 
     EXPECT_EQ(LineType::WithPositiveSlope, line.getType());
     EXPECT_EQ(0, line.getYIntercept());
@@ -125,7 +125,7 @@ TEST(TwoDimensionsLineTest, LineWithSlope) {
 }
 
 TEST(TwoDimensionsLineTest, HorizontalLineWithPointsReversed) {
-    Line line(Point(2, 3), Point(-2, 3));
+    Line const line(Point(2, 3), Point(-2, 3));
 
     EXPECT_EQ(LineType::Horizontal, line.getType());
     EXPECT_EQ(3, line.getYIntercept());
@@ -149,7 +149,7 @@ TEST(TwoDimensionsLineTest, HorizontalLineWithPointsReversed) {
 }
 
 TEST(TwoDimensionsLineTest, VerticalLineWithPointsReversed) {
-    Line line(Point(2, 3), Point(2, -3));
+    Line const line(Point(2, 3), Point(2, -3));
 
     EXPECT_EQ(LineType::Vertical, line.getType());
     EXPECT_EQ(-INFINITY, line.getYIntercept());
@@ -175,7 +175,7 @@ TEST(TwoDimensionsLineTest, VerticalLineWithPointsReversed) {
 }
 
 TEST(TwoDimensionsLineTest, LineWithSlopeWithPointsReversed) {
-    Line line(Point(2, 3), Point(-2, -3));
+    Line const line(Point(2, 3), Point(-2, -3));
 
     EXPECT_EQ(LineType::WithPositiveSlope, line.getType());
     EXPECT_EQ(0, line.getYIntercept());
@@ -203,7 +203,7 @@ TEST(TwoDimensionsLineTest, LineWithSlopeWithPointsReversed) {
 }
 
 TEST(TwoDimensionsLineTest, LineWithNegativeSlope) {
-    Line line(Point(2, 0), Point(0, 2));
+    Line const line(Point(2, 0), Point(0, 2));
 
     EXPECT_EQ(LineType::WithNegativeSlope, line.getType());
     EXPECT_EQ(2, line.getYIntercept());
@@ -225,7 +225,7 @@ TEST(TwoDimensionsLineTest, LineWithNegativeSlope) {
 }
 
 TEST(TwoDimensionsLineTest, InvalidLineConstructedByCoefficients) {
-    Line line(0, 0, 10);
+    Line const line(0, 0, 10);
 
     EXPECT_EQ(LineType::Invalid, line.getType());
     EXPECT_EQ(-INFINITY, line.getYIntercept());
@@ -241,7 +241,7 @@ TEST(TwoDimensionsLineTest, InvalidLineConstructedByCoefficients) {
 }
 
 TEST(TwoDimensionsLineTest, HorizontalLineConstructedByCoefficients) {
-    Line line(0, -1, 3);
+    Line const line(0, -1, 3);
 
     EXPECT_EQ(LineType::Horizontal, line.getType());
     EXPECT_EQ(3, line.getYIntercept());
@@ -265,7 +265,7 @@ TEST(TwoDimensionsLineTest, HorizontalLineConstructedByCoefficients) {
 }
 
 TEST(TwoDimensionsLineTest, VerticalLineConstructedByCoefficients) {
-    Line line(1, 0, -2);
+    Line const line(1, 0, -2);
 
     EXPECT_EQ(LineType::Vertical, line.getType());
     EXPECT_EQ(INFINITY, line.getYIntercept());
@@ -291,7 +291,7 @@ TEST(TwoDimensionsLineTest, VerticalLineConstructedByCoefficients) {
 }
 
 TEST(TwoDimensionsLineTest, LineWithSlopeConstructedByCoefficients) {
-    Line line(3, -2, 0);
+    Line const line(3, -2, 0);
 
     EXPECT_EQ(LineType::WithPositiveSlope, line.getType());
     EXPECT_EQ(0, line.getYIntercept());
@@ -319,7 +319,7 @@ TEST(TwoDimensionsLineTest, LineWithSlopeConstructedByCoefficients) {
 }
 
 TEST(TwoDimensionsLineTest, PointsAreCorrectForLineWithSteepSlope) {
-    Line line(-5, 1, 0);
+    Line const line(-5, 1, 0);
 
     EXPECT_EQ(LineType::WithPositiveSlope, line.getType());
     EXPECT_EQ(0, line.getYIntercept());
@@ -343,7 +343,7 @@ TEST(TwoDimensionsLineTest, PointsAreCorrectForLineWithSteepSlope) {
 }
 
 TEST(TwoDimensionsLineTest, LineWithExtremeSlopeWithManyPoints) {
-    Line line(1, 0.229085, -868.451);
+    Line const line(1, 0.229085, -868.451);
 
     EXPECT_EQ(LineType::WithNegativeSlope, line.getType());
     EXPECT_EQ(3790.9553222602962705, line.getYIntercept());
@@ -357,7 +357,7 @@ TEST(TwoDimensionsLineTest, LineWithExtremeSlopeWithManyPoints) {
     EXPECT_EQ(-1, line.getAUnitIncreaseInY());
     EXPECT_EQ(Point(0, 3790.95532226029627054231241345), line.getAPoint());
 
-    Points points(line.getPoints(Point(0, 0), Point(3194, 3966), 1));
+    Points const points(line.getPoints(Point(0, 0), Point(3194, 3966), 1));
     ASSERT_EQ(4660U, points.size());
 }
 

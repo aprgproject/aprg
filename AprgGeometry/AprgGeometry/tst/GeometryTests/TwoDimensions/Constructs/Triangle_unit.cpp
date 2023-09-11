@@ -8,10 +8,10 @@ using namespace std;
 
 namespace alba::TwoDimensions {
 
-TEST(TriangleTest, TriangleCanBeCreated) { Triangle triangle(Point(1, 1), Point(2, 3), Point(0, 17)); }
+TEST(TriangleTest, TriangleCanBeCreated) { Triangle const triangle(Point(1, 1), Point(2, 3), Point(0, 17)); }
 
 TEST(TriangleTest, GetLengthOfSidesAreCorrect) {
-    Triangle triangle(Point(0, 0), Point(0, 4), Point(4, 0));
+    Triangle const triangle(Point(0, 0), Point(0, 4), Point(4, 0));
     array<double, 3> lengthOfSides(triangle.getLengthOfSides());
 
     EXPECT_DOUBLE_EQ(4, lengthOfSides[0]);
@@ -20,7 +20,7 @@ TEST(TriangleTest, GetLengthOfSidesAreCorrect) {
 }
 
 TEST(TriangleTest, GetAnglesAreCorrect) {
-    Triangle triangle(Point(0, 0), Point(0, 4), Point(4, 0));
+    Triangle const triangle(Point(0, 0), Point(0, 4), Point(4, 0));
     AlbaAngles angles(triangle.getAnglesAtVertices());
 
     ASSERT_EQ(3U, angles.size());
@@ -30,39 +30,39 @@ TEST(TriangleTest, GetAnglesAreCorrect) {
 }
 
 TEST(TriangleTest, GetSumOfAnglesIsCorrect) {
-    Triangle triangle(Point(0, 0), Point(0, 4), Point(4, 0));
+    Triangle const triangle(Point(0, 0), Point(0, 4), Point(4, 0));
 
     EXPECT_DOUBLE_EQ(180, triangle.getSumOfAngles().getDegrees());
 }
 
 TEST(TriangleTest, IsEquilateralWorks) {
-    Triangle regularTriangle(Point(1, 0), Point(-1, 0), Point(0, sqrt(3)));
-    Triangle nonRegularTriangle(Point(0, 0), Point(0, 4), Point(4, 0));
+    Triangle const regularTriangle(Point(1, 0), Point(-1, 0), Point(0, sqrt(3)));
+    Triangle const nonRegularTriangle(Point(0, 0), Point(0, 4), Point(4, 0));
 
     EXPECT_TRUE(regularTriangle.isEquilateral());
     EXPECT_FALSE(nonRegularTriangle.isEquilateral());
 }
 
 TEST(TriangleTest, IsEquiangularWorksCorrect) {
-    Triangle regularTriangle(Point(1, 0), Point(-1, 0), Point(0, sqrt(3)));
-    Triangle nonRegularTriangle(Point(0, 0), Point(0, 4), Point(4, 0));
+    Triangle const regularTriangle(Point(1, 0), Point(-1, 0), Point(0, sqrt(3)));
+    Triangle const nonRegularTriangle(Point(0, 0), Point(0, 4), Point(4, 0));
 
     EXPECT_TRUE(regularTriangle.isEquiangular());
     EXPECT_FALSE(nonRegularTriangle.isEquiangular());
 }
 
 TEST(TriangleTest, IsRegularWorksCorrect) {
-    Triangle regularTriangle(Point(1, 0), Point(-1, 0), Point(0, sqrt(3)));
-    Triangle nonRegularTriangle(Point(0, 0), Point(0, 4), Point(4, 0));
+    Triangle const regularTriangle(Point(1, 0), Point(-1, 0), Point(0, sqrt(3)));
+    Triangle const nonRegularTriangle(Point(0, 0), Point(0, 4), Point(4, 0));
 
     EXPECT_TRUE(regularTriangle.isRegular());
     EXPECT_FALSE(nonRegularTriangle.isRegular());
 }
 
 TEST(TriangleTest, IsIsocelesWorksCorrect) {
-    Triangle regularTriangle(Point(1, 0), Point(-1, 0), Point(0, sqrt(3)));
-    Triangle isocelesTriangle(Point(0, 0), Point(0, 4), Point(4, 0));
-    Triangle nonIsocelesTriangle(Point(0, 0), Point(0, 4), Point(5, 0));
+    Triangle const regularTriangle(Point(1, 0), Point(-1, 0), Point(0, sqrt(3)));
+    Triangle const isocelesTriangle(Point(0, 0), Point(0, 4), Point(4, 0));
+    Triangle const nonIsocelesTriangle(Point(0, 0), Point(0, 4), Point(5, 0));
 
     EXPECT_TRUE(regularTriangle.isIsoceles());
     EXPECT_TRUE(isocelesTriangle.isIsoceles());
@@ -70,15 +70,15 @@ TEST(TriangleTest, IsIsocelesWorksCorrect) {
 }
 
 TEST(TriangleTest, IsRightTriangleWorksCorrect) {
-    Triangle regularTriangle(Point(1, 0), Point(-1, 0), Point(0, sqrt(3)));
-    Triangle rightTriangle(Point(0, 0), Point(0, 4), Point(4, 0));
+    Triangle const regularTriangle(Point(1, 0), Point(-1, 0), Point(0, sqrt(3)));
+    Triangle const rightTriangle(Point(0, 0), Point(0, 4), Point(4, 0));
 
     EXPECT_FALSE(regularTriangle.isRightTriangle());
     EXPECT_TRUE(rightTriangle.isRightTriangle());
 }
 
 TEST(TriangleTest, GetPointsWorks) {
-    Triangle triangle(Point(0, 0), Point(3, 3), Point(0, 6));
+    Triangle const triangle(Point(0, 0), Point(3, 3), Point(0, 6));
     Points points(triangle.getPoints(1));
 
     ASSERT_EQ(12U, points.size());
