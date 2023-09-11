@@ -39,8 +39,8 @@ void AsilBasebandPooling::assignBasebandCardsWithOneLcg(
     auto lcgsIterator = lcgsInPriorityOrder.cbegin();
     for (BasebandCard const& basebandCard : basebandCardsWithPrioritization) {
         if (lcgsIterator != lcgsInPriorityOrder.cend()) {
-            unsigned int lcgId(lcgsIterator->getLcgId());
-            SetOfKeplers keplersInBasebandCard(basebandCard.getKeplers());
+            unsigned int const lcgId(lcgsIterator->getLcgId());
+            SetOfKeplers const keplersInBasebandCard(basebandCard.getKeplers());
             for (Kepler const& kepler : keplersInBasebandCard) {
                 poolingMap[kepler.getNid()] = lcgId;
             }
@@ -61,14 +61,14 @@ void AsilBasebandPooling::assignBasebandCardsWithMultipleLcgs(
 
     auto lcgsIterator = lcgsInPriorityOrder.cbegin();
     for (BasebandCard const& basebandCard : basebandCardsWithPrioritization) {
-        SetOfKeplers keplersInBasebandCard(basebandCard.getKeplers());
+        SetOfKeplers const keplersInBasebandCard(basebandCard.getKeplers());
         unsigned int keplerCount = 0;
         for (Kepler const& kepler : keplersInBasebandCard) {
             if (keplerCount % 2 == 0 && keplerCount != 0) {
                 ++lcgsIterator;
             }
             if (lcgsIterator != lcgsInPriorityOrder.cend()) {
-                unsigned int lcgId(lcgsIterator->getLcgId());
+                unsigned int const lcgId(lcgsIterator->getLcgId());
                 poolingMap[kepler.getNid()] = lcgId;
             }
             ++keplerCount;
@@ -108,8 +108,8 @@ BasebandPoolingResult AsilBasebandPooling::performBasebandPoolingForAsil() const
     poolingResult.isSuccessful = areLcgAndBasebandCardsValid();
     if (poolingResult.isSuccessful) {
         VectorOfLcgs lcgsInPriorityOrder(getLcgsInPriorityOrder());
-        unsigned int numberOfBasebandCardsWithMultipleLcgs(getNumberBasebandCardsWithMultipleLcgs());
-        BasebandCardsSplitBasedOnNumberOfLcgs basebandCardsBasedOnNumberOfLcgs(
+        unsigned int const numberOfBasebandCardsWithMultipleLcgs(getNumberBasebandCardsWithMultipleLcgs());
+        BasebandCardsSplitBasedOnNumberOfLcgs const basebandCardsBasedOnNumberOfLcgs(
             getBasebandCardsSplitBetweenOneLcgAndMultipleLcgs(numberOfBasebandCardsWithMultipleLcgs));
         assignBasebandCardsWithOneLcg(
             poolingResult.keplerNidToLcgMap, lcgsInPriorityOrder,
