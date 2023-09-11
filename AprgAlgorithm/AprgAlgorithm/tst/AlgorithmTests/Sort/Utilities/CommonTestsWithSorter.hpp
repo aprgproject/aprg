@@ -1,7 +1,6 @@
 #pragma once
 
 #include <AlgorithmTests/Sort/Utilities/StabilityCheckObject.hpp>
-#include <Common/Debug/AlbaDebug.hpp>
 
 #include <gtest/gtest.h>
 
@@ -70,19 +69,14 @@ void testSortUsingExample1WithDoubleValues(Sorter const& sorter) {
 
 template <typename Sorter, typename Values>
 void testSortUsingExample1WithStrings(Sorter const& sorter) {
-    ALBA_DBG_PRINT1("pass100");
     Values valuesToSort{"spongebob", "patrick", "mr. crabs", "squidward", "sandy",
                         "ms. puff",  "pearl",   "larry",     "plankton"};
 
-    ALBA_DBG_PRINT1("pass101");
     sorter.sort(valuesToSort);
 
-    ALBA_DBG_PRINT1("pass102");
     Values valuesToExpect{"larry",    "mr. crabs", "ms. puff",  "patrick",  "pearl",
                           "plankton", "sandy",     "spongebob", "squidward"};
-    ALBA_DBG_PRINT1("pass103");
     EXPECT_EQ(valuesToExpect, valuesToSort);
-    ALBA_DBG_PRINT1("pass104");
 }
 
 template <typename Sorter, typename Values>

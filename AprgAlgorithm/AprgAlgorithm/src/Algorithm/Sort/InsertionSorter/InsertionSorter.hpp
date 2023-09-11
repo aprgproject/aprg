@@ -33,15 +33,10 @@ private:
     void continuouslySwapBackIfStillOutOfOrder(Values& valuesToSort, Iterator const insertIt) const {
         ALBA_DBG_PRINT1("pass2001");
         auto rItLow = std::make_reverse_iterator(insertIt);  // make_reverse_iterator moves it by one
-        ALBA_DBG_PRINT1("pass2002");
-        auto rItHigh = std::prev(rItLow);  // move it back to original place (same as insert It)
-        ALBA_DBG_PRINT1("pass2003");
+        auto rItHigh = std::prev(rItLow);                    // move it back to original place (same as insert It)
         // so final the stiuation here is rItLow < rItHigh and insertIt
-        ALBA_DBG_PRINT1("pass2004");
         for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; ++rItLow, ++rItHigh) {
-            ALBA_DBG_PRINT1("pass2005");
             std::swap(*rItLow, *rItHigh);
-            ALBA_DBG_PRINT1("pass2006");
         }
         ALBA_DBG_PRINT1("pass2007");
     }
@@ -51,17 +46,11 @@ private:
         // this is another implementation (from CLRS book)
         ALBA_DBG_PRINT1("pass3001");
         auto insertItem = *insertIt;
-        ALBA_DBG_PRINT1("pass3002");
         auto rItLow = std::make_reverse_iterator(insertIt);  // make_reverse_iterator moves it by one
-        ALBA_DBG_PRINT1("pass3003");
         // so final the stiuation here is rItLow < insertIt
-        ALBA_DBG_PRINT1("pass3004");
         for (; rItLow != valuesToSort.rend() && *rItLow > insertItem; ++rItLow) {
-            ALBA_DBG_PRINT1("pass3005");
             *std::prev(rItLow) = *rItLow;  // move
-            ALBA_DBG_PRINT1("pass3006");
         }
-        ALBA_DBG_PRINT1("pass3007");
         *std::prev(rItLow) = insertItem;
         ALBA_DBG_PRINT1("pass3008");
     }
