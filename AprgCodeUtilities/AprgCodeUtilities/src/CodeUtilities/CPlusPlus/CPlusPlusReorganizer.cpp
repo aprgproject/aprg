@@ -57,6 +57,7 @@ void CPlusPlusReorganizer::reorganizeFile(string const& file) {
     m_purpose = Purpose::Reorganize;
     m_scopeDetails = {ScopeDetail{0, 0, 0, ScopeType::TopLevel, {}, {}}};
     AlbaLocalPathHandler const filePathHandler(file);
+    m_fileType = getFileType(filePathHandler.getExtension());
     m_terms = getTermsFromFile(filePathHandler.getFullPath());
     processTerms();
     writeAllTerms(filePathHandler.getFullPath(), m_terms);
@@ -208,6 +209,7 @@ void CPlusPlusReorganizer::gatherInformationFromFile(string const& file) {
     m_purpose = Purpose::GatherInformation;
     m_scopeDetails = {ScopeDetail{0, 0, 0, ScopeType::TopLevel, {}, {}}};
     AlbaLocalPathHandler const filePathHandler(file);
+    m_fileType = getFileType(filePathHandler.getExtension());
     m_terms = getTermsFromFile(filePathHandler.getFullPath());
     processTerms();
 }
@@ -339,7 +341,7 @@ void CPlusPlusReorganizer::exitScope(int& lastProcessedIndex, int const closingB
         m_terms.erase(m_terms.cbegin() + scopeToExit.openingBraceIndex + 1, m_terms.cbegin() + closingBraceIndex);
 
         CPlusPlusReorganizeItems const sorter(
-            scopeToExit.scopeType, scopeToExit.items, getScopeNames(), m_headerInformation.signatures);
+            {m_fileType, scopeToExit.scopeType, scopeToExit.items, getScopeNames(), m_headerInformation.signatures});
         Terms const sortedTerms(sorter.getSortedAggregateTerms());
         m_terms.insert(m_terms.cbegin() + scopeToExit.openingBraceIndex + 1, sortedTerms.cbegin(), sortedTerms.cend());
 

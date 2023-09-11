@@ -53,6 +53,7 @@ private:
     void exitScope(int& lastProcessedIndex, int const closingBraceIndex, int const endIndex);
     void addItemIfNeeded(int const startIndex, int const endIndex);
     Purpose m_purpose{Purpose::Unknown};
+    CppFileType m_fileType{CppFileType::Unknown};
     std::vector<ScopeDetail> m_scopeDetails;
     HeaderInformation m_headerInformation;
     Terms m_terms;

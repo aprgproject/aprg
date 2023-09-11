@@ -1,10 +1,6 @@
 name: Debug Workflow
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - '**'
   workflow_dispatch:
     inputs:
       cppProjects:
@@ -33,7 +29,7 @@ on:
         description: 'Enable Static Analyzers for Clang Builds'
         type: boolean
         required: true
-        default: false
+        default: true
 
 
 env:

@@ -14,32 +14,24 @@ using namespace std;
 
 namespace alba::CodeUtilities {
 
-CPlusPlusReorganizeItems::CPlusPlusReorganizeItems(
-    ScopeType const scopeType, strings const& items, strings const& scopeNames, strings const& headerSignatures)
-    : m_scopeType(scopeType), m_items(items), m_scopeNames(scopeNames), m_headerSignatures(headerSignatures) {
-    fixItemContents();
-}
+CPlusPlusReorganizeItems::CPlusPlusReorganizeItems(Data const& data) : m_data(data) { fixItemContents(); }
 
-CPlusPlusReorganizeItems::CPlusPlusReorganizeItems(
-    ScopeType const scopeType, strings&& items, strings&& scopeNames, strings&& headerSignatures)
-    : m_scopeType(scopeType), m_items(items), m_scopeNames(scopeNames), m_headerSignatures(headerSignatures) {
-    fixItemContents();
-}
+CPlusPlusReorganizeItems::CPlusPlusReorganizeItems(Data&& data) : m_data(data) { fixItemContents(); }
 
 Terms CPlusPlusReorganizeItems::getSortedAggregateTerms() const {
     Terms terms;
     SortItems const sortedItems(getSortedItems());
     terms.emplace_back(TermType::WhiteSpace, "\n");
-    bool const isMultilineScope = hasMultilineItem(sortedItems) && m_scopeType != ScopeType::EnumClass;
+    bool const isMultilineScope = hasMultilineItem(sortedItems) && m_data.scopeType != ScopeType::EnumClass;
     bool isPreviousAMultilineItem(isMultilineScope);
     bool isFirst(true);
     bool isPreviousAnAccessControl(false);
     for (SortItem const& sortItem : sortedItems) {
-        string const& item(m_items[sortItem.itemsIndex]);
+        string const& item(m_data.items[sortItem.itemsIndex]);
         bool const isAccessControl = sortItem.itemType == ItemType::AccessControl;
         bool const isMultilineItem = isMultiLine(sortItem.numberOfLines) || isAccessControl;
         bool const shouldPreventNewLine =
-            (isFirst && isAccessControl) || isPreviousAnAccessControl || m_scopeType == ScopeType::EnumClass;
+            (isFirst && isAccessControl) || isPreviousAnAccessControl || m_data.scopeType == ScopeType::EnumClass;
         if ((isMultilineItem || isPreviousAMultilineItem) && !shouldPreventNewLine) {
             terms.emplace_back(TermType::WhiteSpace, "\n");
         }
@@ -200,9 +192,9 @@ CPlusPlusReorganizeItems::SortItems CPlusPlusReorganizeItems::getSortedItems() c
 
 CPlusPlusReorganizeItems::SortItems CPlusPlusReorganizeItems::getSortItems() const {
     SortItems sortItems;
-    sortItems.reserve(m_items.size());
+    sortItems.reserve(m_data.items.size());
     int index = 0;
-    for (string const& item : m_items) {
+    for (string const& item : m_data.items) {
         SortItem sortItem{0, 0, 0, false, ItemType::Unknown, index++, {}};
         saveDetailsFromHeaderSignatures(sortItem, item);
         saveDetailsBasedFromItem(sortItem, item);
@@ -217,7 +209,7 @@ int CPlusPlusReorganizeItems::getBestHeaderIndex(string const& item) const {
     int bestHeaderIndex = 0;
     bool isFirst(true);
     int headerIndex = 0;
-    for (string const& headerSignature : m_headerSignatures) {
+    for (string const& headerSignature : m_data.headerSignatures) {
         int const difference = static_cast<int>(getLevenshteinDistance(itemSignature, headerSignature));
         if (isFirst) {
             bestDifference = difference;
@@ -233,7 +225,7 @@ int CPlusPlusReorganizeItems::getBestHeaderIndex(string const& item) const {
         static_cast<double>(bestDifference) / static_cast<double>(itemSignature.length()) < 0.20) {
         return bestHeaderIndex;
     }
-    return static_cast<int>(m_headerSignatures.size());
+    return static_cast<int>(m_data.headerSignatures.size());
 }
 
 void CPlusPlusReorganizeItems::saveDetailsFromHeaderSignatures(SortItem& sortItem, string const& item) const {
@@ -304,8 +296,8 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
             // A - automatic (default, delete)
             // T - type (namespace const data, declarations, namespace data, functions, data)
             if (firstTerm.getContent() == "(") {
-                if (!m_scopeNames.empty() &&
-                    m_scopeNames.back() == getIdentifierBeforeParenthesis(terms, firstHitIndex)) {
+                if (!m_data.scopeNames.empty() &&
+                    m_data.scopeNames.back() == getIdentifierBeforeParenthesis(terms, firstHitIndex)) {
                     sortItem.score += 0x3'0000;  // impt:constructors, etc
                 }
                 moveToEndParenthesis(terms, termIndex, firstHitIndex);
@@ -374,13 +366,13 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
         saveDetailsBasedFromFunctionSignature(sortItem, getFunctionSignature(item));
         sortItem.score += isAFriend ? 0x100 : isStatic ? 0x200 : 0x300;  // class:friend,static
     } else if (sortItem.itemType == ItemType::Data) {
-        if (m_scopeType == ScopeType::AnonymousNamespace || m_scopeType == ScopeType::NamedNamespace) {
+        if (m_data.scopeType == ScopeType::AnonymousNamespace || m_data.scopeType == ScopeType::NamedNamespace) {
             sortItem.score += isConst ? 0x800'0000 : 0x200'0000;  // type:namespace (const) data
             sortItem.headerIndex = 0;
-            if (m_scopeType == ScopeType::NamedNamespace && !isConst) {
+            if (m_data.scopeType == ScopeType::NamedNamespace) {
                 cout << "warning: Data not wrapped in anonymous namespace. Item: [" << item << "]\n";
             }
-        } else if (m_scopeType == ScopeType::ClassDeclaration) {
+        } else if (m_data.scopeType == ScopeType::ClassDeclaration) {
             // do not move class member data
             sortItem.score = (isStatic || isConst) ? sortItem.score : 0;
         }
@@ -388,7 +380,7 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
 }
 
 void CPlusPlusReorganizeItems::fixItemContents() {
-    for (string& item : m_items) {
+    for (string& item : m_data.items) {
         Terms terms(getTermsFromString(item));
         replaceCommentsWithExtraLine(terms, 0);
         item = getCombinedContents(terms);

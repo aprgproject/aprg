@@ -22,14 +22,16 @@ public:
 
     using SortItems = std::vector<SortItem>;
 
-    CPlusPlusReorganizeItems(
-        ScopeType const scopeType, stringHelper::strings const& items, stringHelper::strings const& scopeNames,
-        stringHelper::strings const& headerSignatures);
+    struct Data {
+        CppFileType fileType;
+        ScopeType scopeType;
+        stringHelper::strings items;
+        stringHelper::strings scopeNames;
+        stringHelper::strings headerSignatures;
+    };
 
-    CPlusPlusReorganizeItems(
-        ScopeType const scopeType, stringHelper::strings&& items, stringHelper::strings&& scopeNames,
-        stringHelper::strings&& headerSignatures);
-
+    explicit CPlusPlusReorganizeItems(Data const& data);
+    explicit CPlusPlusReorganizeItems(Data&& data);
     [[nodiscard]] Terms getSortedAggregateTerms() const;
 
 private:
@@ -48,10 +50,7 @@ private:
     void saveDetailsBasedFromItem(SortItem& sortItem, std::string const& item) const;
     void saveDetailsBasedFromItemTerms(SortItem& sortItem, std::string const& item, Terms const& terms) const;
     void fixItemContents();
-    ScopeType m_scopeType;
-    stringHelper::strings m_items;
-    stringHelper::strings m_scopeNames;
-    stringHelper::strings m_headerSignatures;
+    Data m_data;
 };
 
 bool operator<(CPlusPlusReorganizeItems::SortItem const& item1, CPlusPlusReorganizeItems::SortItem const& item2);
