@@ -5,15 +5,17 @@ if(APRG_ENABLE_STATIC_ANALYZERS)
         set(APRG_STATIC_ANALYZERS_TYPE "ReportWithoutClazy")
     endif()
 	
-    find_program(CPPCHECK_PROGRAM "cppcheck")
-    print_variable(CPPCHECK_PROGRAM)
-    if(CPPCHECK_PROGRAM)
-        set(CMAKE_C_CPPCHECK ${CPPCHECK_PROGRAM} --enable=all --inline-suppr
-                             --suppressions-list=${APRG_DIR}/cppcheck-suppressions.txt)
-        set(CMAKE_CXX_CPPCHECK ${CPPCHECK_PROGRAM} --enable=all --inline-suppr
-                               --suppressions-list=${APRG_DIR}/cppcheck-suppressions.txt)
-        print_variable(CMAKE_C_CPPCHECK)
-        print_variable(CMAKE_CXX_CPPCHECK)
+    if(NOT APRG_STATIC_ANALYZERS_TYPE STREQUAL "AutoFix")
+        find_program(CPPCHECK_PROGRAM "cppcheck")
+        print_variable(CPPCHECK_PROGRAM)
+        if(CPPCHECK_PROGRAM)
+            set(CMAKE_C_CPPCHECK ${CPPCHECK_PROGRAM} --enable=all --inline-suppr
+                                 --suppressions-list=${APRG_DIR}/cppcheck-suppressions.txt)
+            set(CMAKE_CXX_CPPCHECK ${CPPCHECK_PROGRAM} --enable=all --inline-suppr
+                                   --suppressions-list=${APRG_DIR}/cppcheck-suppressions.txt)
+            print_variable(CMAKE_C_CPPCHECK)
+            print_variable(CMAKE_CXX_CPPCHECK)
+        endif()
     endif()
 
     find_program(CLANG_TIDY_PROGRAM "clang-tidy")

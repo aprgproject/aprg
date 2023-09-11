@@ -24,12 +24,12 @@ on:
         description: 'Enable Address Sanitizer for Clang Builds'
         type: boolean
         required: true
-        default: false
+        default: true
       enableStaticAnalyzers:
         description: 'Enable Static Analyzers for Clang Builds'
         type: boolean
         required: true
-        default: true
+        default: false
 
 
 env:
