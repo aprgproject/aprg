@@ -98,4 +98,10 @@ bool isImplementationFileExtension(string const& extension) {
     return extension == "cpp" || extension == "c" || extension == "cc";
 }
 
+CppFileType getFileType(string const& extension) {
+    return isHeaderFileExtension(extension) ? CppFileType::HeaderFile
+           : isCppFileExtension(extension)  ? CppFileType::CppFile
+                                            : CppFileType::Unknown;
+}
+
 }  // namespace alba::CodeUtilities::CPlusPlusUtilities
