@@ -6,9 +6,11 @@ detectGitChanges() {
     local aprgDirectory
     local aprgDirectoryName
     local cppProjectsSet
+    local scriptOption
     scriptName="DetectGitChanges.sh"
     aprgDirectory=$(realpath "$(dirname "$0")/../../")
     aprgDirectoryName="aprg"
+    scriptOption="$1"
     declare -A cppProjectsSet
     
     # Source needed scripts
@@ -44,6 +46,9 @@ detectGitChanges() {
     cppProjectsFromGit=""
     for cppProjectsSetItem in "${!cppProjectsSet[@]}"; do
         cppProjectsFromGit="$cppProjectsFromGit$cppProjectsSetItem,"
+        if [[ "$scriptOption" == "checkGitForOneProject" ]]; then
+            break;
+        fi
     done
 
     # Put AprgCommon if empty

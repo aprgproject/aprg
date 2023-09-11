@@ -8,6 +8,11 @@ on:
       - '**StaticAnalysisAutoFix.txt'
   workflow_dispatch:
     inputs:
+      cppProjects:
+        description: 'C/C++ Project ("all" for all projects)'
+        type: string
+        required: true
+        default: 'all'
       staticAnalysisJobId:
         description: 'Job Identifier'
         type: number
@@ -56,7 +61,14 @@ jobs:
           determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
           echo "determineCppProjectsPath: [$determineCppProjectsPath]"
           chmod +x "$determineCppProjectsPath"
+          userInput="${{ inputs.cppProjects }}"
+          if [[ -z $userInput ]]; then
+            echo "User input is empty, [checkGitForOneProject] is set as argument to script."
+            "$determineCppProjectsPath" checkGitForOneProject
+          else
+            echo "User input is not empty, [checkStaticAnalysisFiles] is set as argument to script."
           "$determineCppProjectsPath" checkStaticAnalysisFiles "$staticAnalysisJobId" "${{ env.staticAnalysisFilename }}"
+          fi
           
           
   runStaticAnalyzersOnCppProjects:

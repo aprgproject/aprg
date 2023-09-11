@@ -156,7 +156,7 @@ jobs:
             echo "User input is empty, [checkGit] is set as argument to script."
             "$determineCppProjectsPath" checkGit
           else
-            echo "User input isnot empty, [checkUserInput] is set as argument to script."
+            echo "User input is not empty, [checkUserInput] is set as argument to script."
             "$determineCppProjectsPath" checkUserInput "${{ inputs.cppProjects }}"
           fi
 
