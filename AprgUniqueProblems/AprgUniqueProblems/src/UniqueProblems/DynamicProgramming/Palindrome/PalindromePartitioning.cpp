@@ -32,12 +32,12 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
     // Auxiliary Space: O(n^2)
     Count result(0);
     if (!m_string.empty()) {
-        Index stringLength = m_string.length();
+        Index const stringLength = m_string.length();
         CountMatrix countMatrix(stringLength, stringLength, 0);
 
         for (Index length = 1; length <= stringLength; ++length) {
             for (Index left = 0; left + length <= static_cast<Index>(countMatrix.getNumberOfColumns()); ++left) {
-                Index right = left + length - 1;
+                Index const right = left + length - 1;
                 Count entryResult(0);
                 if (!isPalindrome(left, right)) {
                     Count minimumCuts(MAX_COUNT);
@@ -76,7 +76,7 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
         for (Index length = 3; length <= stringLength; ++length) {
             // length = >3
             for (Index left = 0; left + length <= stringLength; ++left) {
-                Index right = left + length - 1;
+                Index const right = left + length - 1;
                 if (m_string[left] == m_string[right] && isSubstrAPalindrome.getEntry(left + 1, right - 1)) {
                     isSubstrAPalindrome.setEntry(left, right, true);
                 }

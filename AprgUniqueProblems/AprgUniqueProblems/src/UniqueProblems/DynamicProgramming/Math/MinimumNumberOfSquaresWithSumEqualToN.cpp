@@ -60,13 +60,13 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
     immediateNodes.emplace(NodeDetails{m_sumOfSquares, 0});
 
     while (!immediateNodes.empty()) {
-        NodeDetails immediateNode(immediateNodes.front());
+        NodeDetails const immediateNode(immediateNodes.front());
         immediateNodes.pop();
         if (immediateNode.sum == 0) {
             result = min(result, immediateNode.count);
         }
         for (Count base = 1; base * base <= immediateNode.sum; ++base) {
-            Count newSum = immediateNode.sum - base * base;
+            Count const newSum = immediateNode.sum - base * base;
             if (newSum == 0 || !isProcessed[newSum]) {
                 isProcessed[newSum] = true;
                 immediateNodes.emplace(NodeDetails{newSum, immediateNode.count + 1});
@@ -85,7 +85,7 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
         squaredValues.emplace_back(base * base);
     }
 
-    CoinProblem coinProblem(squaredValues);
+    CoinProblem const coinProblem(squaredValues);
     return coinProblem.getNumberOfFewestCoinsIterativeDP(m_sumOfSquares);
 }
 

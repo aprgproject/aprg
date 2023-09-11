@@ -49,7 +49,7 @@ MaximumSumIncreasingSubsequence::Values MaximumSumIncreasingSubsequence::getSubs
 
         // construct longest sequence
         auto itMax = max_element(partialSums.cbegin(), partialSums.cend());
-        Index indexOfMaxSum = distance(partialSums.cbegin(), itMax);
+        Index const indexOfMaxSum = distance(partialSums.cbegin(), itMax);
         Index traverseIndex = indexOfMaxSum;
         for (; traverseIndex != indexToPreviousIndex[traverseIndex];
              traverseIndex = indexToPreviousIndex[traverseIndex]) {

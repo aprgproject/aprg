@@ -44,8 +44,8 @@ MinimumNumberOfJumpsToReachEnd::Count MinimumNumberOfJumpsToReachEnd::getMinimum
         Counts indexToCountOfJumps(m_sequence.size(), static_cast<Count>(MAX_COUNT));
         indexToCountOfJumps[0] = 0;
         for (Index startOfJumpIndex(0); startOfJumpIndex < static_cast<Index>(m_sequence.size()); ++startOfJumpIndex) {
-            Count countOfJumps = indexToCountOfJumps[startOfJumpIndex] + 1;
-            Index maxPossibleJumpIndex =
+            Count const countOfJumps = indexToCountOfJumps[startOfJumpIndex] + 1;
+            Index const maxPossibleJumpIndex =
                 min(startOfJumpIndex + m_sequence[startOfJumpIndex], static_cast<Index>(m_sequence.size() - 1));
             for (Index endOfJumpIndex = startOfJumpIndex + 1; endOfJumpIndex <= maxPossibleJumpIndex;
                  ++endOfJumpIndex) {
@@ -98,7 +98,7 @@ MinimumNumberOfJumpsToReachEnd::Indices MinimumNumberOfJumpsToReachEnd::getPathO
         for (Index index(1); index <= maxIndexAtNextJump; ++index) {
             indexToPreviousIndex[index] = startOfJump;
 
-            Index nextJumpIndex = min(index + m_sequence[index], static_cast<Index>(m_sequence.size() - 1));
+            Index const nextJumpIndex = min(index + m_sequence[index], static_cast<Index>(m_sequence.size() - 1));
             if (nextJumpIndex > maxIndexAtNextJump) {
                 maxIndexAtNextJump = nextJumpIndex;
                 startOfNextJump = index;
@@ -129,7 +129,7 @@ MinimumNumberOfJumpsToReachEnd::Count MinimumNumberOfJumpsToReachEnd::getMinimum
     Count result(0);
     if (startOfJumpIndex + 1 < static_cast<Index>(m_sequence.size())) {
         result = MAX_COUNT;
-        Index maxPossibleJumpIndex =
+        Index const maxPossibleJumpIndex =
             min(startOfJumpIndex + m_sequence[startOfJumpIndex], static_cast<Index>(m_sequence.size() - 1));
         for (Index endOfJumpIndex = startOfJumpIndex + 1; endOfJumpIndex <= maxPossibleJumpIndex; ++endOfJumpIndex) {
             result = min(result, getMinimumNumberOfJumpsUsingNaiveRecursion(endOfJumpIndex));
@@ -145,7 +145,7 @@ MinimumNumberOfJumpsToReachEnd::Count MinimumNumberOfJumpsToReachEnd::getMinimum
     if (MAX_COUNT == result) {
         if (startOfJumpIndex + 1 < static_cast<Index>(m_sequence.size())) {
             // result is already MAX_COUNT
-            Index maxPossibleJumpIndex =
+            Index const maxPossibleJumpIndex =
                 min(startOfJumpIndex + m_sequence[startOfJumpIndex], static_cast<Index>(m_sequence.size() - 1));
             for (Index endOfJumpIndex = startOfJumpIndex + 1; endOfJumpIndex <= maxPossibleJumpIndex;
                  ++endOfJumpIndex) {

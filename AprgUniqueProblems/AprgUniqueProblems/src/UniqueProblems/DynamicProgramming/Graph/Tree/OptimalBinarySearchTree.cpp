@@ -29,7 +29,7 @@ OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingIterat
     // Auxiliary Space: O(n^2)
     Cost result(0);
     if (!m_valueAndFrequencyPairs.empty()) {
-        Index numberOfPairs = m_valueAndFrequencyPairs.size();
+        Index const numberOfPairs = m_valueAndFrequencyPairs.size();
         CostMatrix costMatrix(numberOfPairs, numberOfPairs);
 
         Frequencies frequencies;
@@ -37,7 +37,7 @@ OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingIterat
         transform(
             m_valueAndFrequencyPairs.cbegin(), m_valueAndFrequencyPairs.cend(), back_inserter(frequencies),
             [](ValueAndFrequencyPair const& pair) { return pair.second; });
-        RangeQueryWithAccumulator<Frequencies> frequencyRange(frequencies, plus<>(), minus<>());
+        RangeQueryWithAccumulator<Frequencies> const frequencyRange(frequencies, plus<>(), minus<>());
 
         // length = 1
         for (Index index = 0; index < numberOfPairs; ++index) {
@@ -46,9 +46,9 @@ OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingIterat
         // length >= 2
         for (Index length = 2; length <= numberOfPairs; ++length) {
             for (Index left = 0; left + length <= static_cast<Index>(costMatrix.getNumberOfColumns()); ++left) {
-                Index right = left + length - 1;
+                Index const right = left + length - 1;
                 Cost entryResult(MAX_COUNT);
-                Cost offsetCost(
+                Cost const offsetCost(
                     frequencyRange.getAccumulatedValueOnInterval(left, right));  // pattern when going down with depth
                 for (Index possibleParent = left; possibleParent <= right; ++possibleParent) {
                     Cost costOfPossibleParent(offsetCost);

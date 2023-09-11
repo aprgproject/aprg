@@ -11,7 +11,7 @@ using Distance = LongestCommonSubstring::Index;
 }  // namespace
 
 TEST(LongestCommonSubstringTest, GetLongestCommonSubstringWorksOnExample1) {
-    LongestCommonSubstring queryForTest("MOVIE", "LOVE");
+    LongestCommonSubstring const queryForTest("MOVIE", "LOVE");
 
     EXPECT_EQ(2, queryForTest.getLongestCommonSubstringLengthUsingNaiveRecursion());
     EXPECT_EQ(2, queryForTest.getLongestCommonSubstringLengthUsingMemoizationDP());
@@ -21,7 +21,7 @@ TEST(LongestCommonSubstringTest, GetLongestCommonSubstringWorksOnExample1) {
 }
 
 TEST(LongestCommonSubstringTest, GetLongestCommonSubstringWorksOnExample2) {
-    LongestCommonSubstring queryForTest("This is a statement", "This is not a statement");
+    LongestCommonSubstring const queryForTest("This is a statement", "This is not a statement");
 
     EXPECT_EQ(12, queryForTest.getLongestCommonSubstringLengthUsingNaiveRecursion());
     EXPECT_EQ(12, queryForTest.getLongestCommonSubstringLengthUsingMemoizationDP());

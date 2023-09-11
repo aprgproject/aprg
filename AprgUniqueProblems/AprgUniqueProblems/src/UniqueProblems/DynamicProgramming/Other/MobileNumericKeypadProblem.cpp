@@ -40,7 +40,7 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingItera
             countMatrix.setEntry(0, numpadValue, 1);
         }
         for (Count lengthMinus1 = 1; lengthMinus1 < m_length; ++lengthMinus1) {
-            Count previousLengthMinus1 = lengthMinus1 - 1;
+            Count const previousLengthMinus1 = lengthMinus1 - 1;
             countMatrix.setEntry(
                 lengthMinus1, 0,
                 countMatrix.getEntry(previousLengthMinus1, 0) + countMatrix.getEntry(previousLengthMinus1, 8));
@@ -126,7 +126,7 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountForValueUs
     Count const length, NumpadValue const numpadValue) const {
     Count result(0);
     if (length > 1) {
-        Count lengthMinus1 = length - 1;
+        Count const lengthMinus1 = length - 1;
         switch (numpadValue) {
             case 0:
                 result = getCountForValueUsingNaiveRecursion(lengthMinus1, 0) +
@@ -199,7 +199,7 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountForValueUs
     if (UNUSED_VALUE == result) {
         result = 0;
         if (length > 1) {
-            Count lengthMinus1 = length - 1;
+            Count const lengthMinus1 = length - 1;
             switch (numpadValue) {
                 case 0:
                     result = getCountForValueUsingMemoizationDP(countMatrix, lengthMinus1, 0) +

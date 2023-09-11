@@ -18,22 +18,23 @@ EightPuzzlePossibleProblem::EightPuzzlePossibleProblem(
 }
 
 void EightPuzzlePossibleProblem::printStepsToSolve() {
-    Coordinate blankTile(getBlankTile(m_startMatrix));
-    PuzzleSnapshot initialSnapshot{INVALID_NODE_ID, blankTile, m_startMatrix};
+    Coordinate const blankTile(getBlankTile(m_startMatrix));
+    PuzzleSnapshot const initialSnapshot{INVALID_NODE_ID, blankTile, m_startMatrix};
     m_nodeIdToSnapshot.emplace_back(initialSnapshot);
     // using prioritized queue for branch and bound approach
     MinCostPriorityQueue nodesInMinCost;
     nodesInMinCost.push(createNode(INVALID_NODE_ID, blankTile, -1));
     while (!nodesInMinCost.empty()) {
-        SearchNode currentNode(nodesInMinCost.top());
+        SearchNode const currentNode(nodesInMinCost.top());
         nodesInMinCost.pop();
         if (currentNode.differenceFromTarget == 0) {
             printSteps(currentNode.nodeId);
             break;
         }
-        Coordinate currentBlankTile(m_nodeIdToSnapshot[currentNode.nodeId].blankTile);
+        Coordinate const currentBlankTile(m_nodeIdToSnapshot[currentNode.nodeId].blankTile);
         for (int i = 0; i < 4; ++i) {
-            Coordinate nextBlankTile{currentBlankTile.first + X_OFFSETS[i], currentBlankTile.second + Y_OFFSETS[i]};
+            Coordinate const nextBlankTile{
+                currentBlankTile.first + X_OFFSETS[i], currentBlankTile.second + Y_OFFSETS[i]};
             if (isValidCoordinate(nextBlankTile)) {
                 nodesInMinCost.push(createNode(currentNode.nodeId, nextBlankTile, currentNode.searchLevel + 1));
             }
@@ -107,7 +108,7 @@ void EightPuzzlePossibleProblem::clear() {
 
 EightPuzzlePossibleProblem::SearchNode EightPuzzlePossibleProblem::createNode(
     SearchNodeId const& currentNodeId, Coordinate const& nextBlankTile, int const nextSearchLevel) {
-    SearchNodeId nextNodeId = getNextNodeId();
+    SearchNodeId const nextNodeId = getNextNodeId();
     m_nodeIdToSnapshot.emplace_back(
         PuzzleSnapshot{currentNodeId, nextBlankTile, m_nodeIdToSnapshot[currentNodeId].numberMatrix});
     PuzzleSnapshot& nextSnapshot(m_nodeIdToSnapshot[nextNodeId]);

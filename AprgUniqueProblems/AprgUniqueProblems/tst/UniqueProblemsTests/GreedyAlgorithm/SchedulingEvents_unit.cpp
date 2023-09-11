@@ -13,9 +13,9 @@ TEST(SchedulingEventsTest, GetAsMuchEventsAsPossibleWorksOnExample1) {
     schedulingEvents.addEvent("C", 3, 9);
     schedulingEvents.addEvent("D", 6, 8);
 
-    SchedulingEvents::EventNames actualNames(schedulingEvents.getAsMuchEventsAsPossible());
+    SchedulingEvents::EventNames const actualNames(schedulingEvents.getAsMuchEventsAsPossible());
 
-    SchedulingEvents::EventNames expectedNames{"A", "D"};
+    SchedulingEvents::EventNames const expectedNames{"A", "D"};
     EXPECT_EQ(expectedNames, actualNames);
 }
 
@@ -25,9 +25,9 @@ TEST(SchedulingEventsTest, GetAsMuchEventsAsPossibleWorksAndShortEventsAreNotImm
     schedulingEvents.addEvent("B", 4, 6);
     schedulingEvents.addEvent("C", 6, 10);
 
-    SchedulingEvents::EventNames actualNames(schedulingEvents.getAsMuchEventsAsPossible());
+    SchedulingEvents::EventNames const actualNames(schedulingEvents.getAsMuchEventsAsPossible());
 
-    SchedulingEvents::EventNames expectedNames{"A", "C"};
+    SchedulingEvents::EventNames const expectedNames{"A", "C"};
     EXPECT_EQ(expectedNames, actualNames);
 }
 
@@ -37,9 +37,9 @@ TEST(SchedulingEventsTest, GetAsMuchEventsAsPossibleWorksAndEarlyEventsAreNotImm
     schedulingEvents.addEvent("B", 3, 4);
     schedulingEvents.addEvent("C", 4, 5);
 
-    SchedulingEvents::EventNames actualNames(schedulingEvents.getAsMuchEventsAsPossible());
+    SchedulingEvents::EventNames const actualNames(schedulingEvents.getAsMuchEventsAsPossible());
 
-    SchedulingEvents::EventNames expectedNames{"B", "C"};
+    SchedulingEvents::EventNames const expectedNames{"B", "C"};
     EXPECT_EQ(expectedNames, actualNames);
 }
 
@@ -49,9 +49,9 @@ TEST(SchedulingEventsTest, GetAsMuchEventsAsPossibleWorksOnExample2) {
     schedulingEvents.addEvent("B", 12, 25);
     schedulingEvents.addEvent("C", 20, 30);
 
-    SchedulingEvents::EventNames actualNames(schedulingEvents.getAsMuchEventsAsPossible());
+    SchedulingEvents::EventNames const actualNames(schedulingEvents.getAsMuchEventsAsPossible());
 
-    SchedulingEvents::EventNames expectedNames{"A", "C"};
+    SchedulingEvents::EventNames const expectedNames{"A", "C"};
     EXPECT_EQ(expectedNames, actualNames);
 }
 
@@ -64,9 +64,9 @@ TEST(SchedulingEventsTest, GetAsMuchEventsAsPossibleWorksOnExample3) {
     schedulingEvents.addEvent("E", 8, 9);
     schedulingEvents.addEvent("F", 5, 9);
 
-    SchedulingEvents::EventNames actualNames(schedulingEvents.getAsMuchEventsAsPossible());
+    SchedulingEvents::EventNames const actualNames(schedulingEvents.getAsMuchEventsAsPossible());
 
-    SchedulingEvents::EventNames expectedNames{"A", "B", "D", "E"};
+    SchedulingEvents::EventNames const expectedNames{"A", "B", "D", "E"};
     EXPECT_EQ(expectedNames, actualNames);
 }
 

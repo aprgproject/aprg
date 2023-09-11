@@ -26,7 +26,7 @@ void TowersOfHanoi::initialStartStack(StackOfDisks& startStack, int const number
 }
 
 void TowersOfHanoi::transferOneDisk(StackOfDisks& source, StackOfDisks& destination) {
-    Disk disk = source.disks.top();
+    Disk const disk = source.disks.top();
     destination.disks.push(source.disks.top());
     source.disks.pop();
     cout << "Transferred disk:[" << disk << "]";
@@ -36,7 +36,7 @@ void TowersOfHanoi::transferOneDisk(StackOfDisks& source, StackOfDisks& destinat
 void TowersOfHanoi::printStacksContents(StackOfDisks& source, StackOfDisks& destination) {
     auto const& sourceContainer(getUnderlyingContainer(source.disks));
     auto const& destinationContainer(getUnderlyingContainer(destination.disks));
-    std::ostream_iterator<Disk> outputIterator(cout, ", ");
+    std::ostream_iterator<Disk> const outputIterator(cout, ", ");
     cout << " from " << source.name << " { ";
     std::copy(sourceContainer.crbegin(), sourceContainer.crend(), outputIterator);
     cout << " } to " << destination.name << " { ";

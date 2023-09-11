@@ -20,8 +20,8 @@ public:
             auto forwardIt1 = values1.cbegin();
             auto reverseIt2 = values2.crbegin();
             while (forwardIt1 != values1.cend() && reverseIt2 != values2.crend()) {
-                Value currentSum = *forwardIt1 + *reverseIt2;
-                Value currentDeviation = mathHelper::getPositiveDelta(currentSum, sumToCheck);
+                Value const currentSum = *forwardIt1 + *reverseIt2;
+                Value const currentDeviation = mathHelper::getPositiveDelta(currentSum, sumToCheck);
                 if (currentDeviation < minimumDeviation) {
                     minimumDeviation = currentDeviation;
                     result = {*forwardIt1, *reverseIt2};

@@ -31,9 +31,9 @@ CountNumberOfWaysToReachAGivenScoreInAGame::Value
 CountNumberOfWaysToReachAGivenScoreInAGame::getMinimumCostUsingCoinProblemSolutions() const {
     // Time Complexity: O(n^2)
     // Auxiliary Space: O(1)
-    CoinProblem::Coins moveScores{3, 5, 10};
+    CoinProblem::Coins const moveScores{3, 5, 10};
 
-    CoinProblem coinProblem(moveScores);
+    CoinProblem const coinProblem(moveScores);
     return coinProblem.getNumberOfCoinCombinationsUsingIterativeDPAndSpaceEfficient(m_targetScore);
 }
 

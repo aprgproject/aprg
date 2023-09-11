@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(PrintMaximumNumberOfAsTest, GetMaxCountOfAOnScreenOnZero) {
-    PrintMaximumNumberOfAs queryForTest(0);
+    PrintMaximumNumberOfAs const queryForTest(0);
 
     EXPECT_EQ(0, queryForTest.getMaxCountOfAOnScreenUsingNaiveRecursion());
     EXPECT_EQ(0, queryForTest.getMaxCountOfAOnScreenUsingMemoizationDP());
@@ -16,7 +16,7 @@ TEST(PrintMaximumNumberOfAsTest, GetMaxCountOfAOnScreenOnZero) {
 }
 
 TEST(PrintMaximumNumberOfAsTest, GetMaxCountOfAOnScreenOnExample1) {
-    PrintMaximumNumberOfAs queryForTest(1);
+    PrintMaximumNumberOfAs const queryForTest(1);
 
     EXPECT_EQ(1, queryForTest.getMaxCountOfAOnScreenUsingNaiveRecursion());
     EXPECT_EQ(1, queryForTest.getMaxCountOfAOnScreenUsingMemoizationDP());
@@ -25,7 +25,7 @@ TEST(PrintMaximumNumberOfAsTest, GetMaxCountOfAOnScreenOnExample1) {
 }
 
 TEST(PrintMaximumNumberOfAsTest, GetMaxCountOfAOnScreenOnExample2) {
-    PrintMaximumNumberOfAs queryForTest(3);
+    PrintMaximumNumberOfAs const queryForTest(3);
 
     EXPECT_EQ(3, queryForTest.getMaxCountOfAOnScreenUsingNaiveRecursion());
     EXPECT_EQ(3, queryForTest.getMaxCountOfAOnScreenUsingMemoizationDP());
@@ -34,7 +34,7 @@ TEST(PrintMaximumNumberOfAsTest, GetMaxCountOfAOnScreenOnExample2) {
 }
 
 TEST(PrintMaximumNumberOfAsTest, GetMaxCountOfAOnScreenOnExample3) {
-    PrintMaximumNumberOfAs queryForTest(7);
+    PrintMaximumNumberOfAs const queryForTest(7);
 
     EXPECT_EQ(9, queryForTest.getMaxCountOfAOnScreenUsingNaiveRecursion());
     EXPECT_EQ(9, queryForTest.getMaxCountOfAOnScreenUsingMemoizationDP());
@@ -43,7 +43,7 @@ TEST(PrintMaximumNumberOfAsTest, GetMaxCountOfAOnScreenOnExample3) {
 }
 
 TEST(PrintMaximumNumberOfAsTest, GetMaxCountOfAOnScreenOnExample4) {
-    PrintMaximumNumberOfAs queryForTest(11);
+    PrintMaximumNumberOfAs const queryForTest(11);
 
     // EXPECT_EQ(27, queryForTest.getMaxCountOfAOnScreenUsingNaiveRecursion()); // too long
     EXPECT_EQ(27, queryForTest.getMaxCountOfAOnScreenUsingMemoizationDP());

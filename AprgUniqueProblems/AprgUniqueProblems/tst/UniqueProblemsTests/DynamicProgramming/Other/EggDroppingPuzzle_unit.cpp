@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(EggDroppingPuzzleTest, GetMinimumNumberOfOperationsWorksOnExample1) {
-    EggDroppingPuzzle queryForTest(0, 0);
+    EggDroppingPuzzle const queryForTest(0, 0);
 
     EXPECT_EQ(0, queryForTest.getMinimumNumberOfTrialsUsingNaiveRecursion());
     EXPECT_EQ(0, queryForTest.getMinimumNumberOfTrialsUsingMemoizationDP());
@@ -15,7 +15,7 @@ TEST(EggDroppingPuzzleTest, GetMinimumNumberOfOperationsWorksOnExample1) {
 }
 
 TEST(EggDroppingPuzzleTest, GetMinimumNumberOfOperationsWorksOnExample2) {
-    EggDroppingPuzzle queryForTest(1, 5);
+    EggDroppingPuzzle const queryForTest(1, 5);
 
     EXPECT_EQ(5, queryForTest.getMinimumNumberOfTrialsUsingNaiveRecursion());
     EXPECT_EQ(5, queryForTest.getMinimumNumberOfTrialsUsingMemoizationDP());
@@ -23,7 +23,7 @@ TEST(EggDroppingPuzzleTest, GetMinimumNumberOfOperationsWorksOnExample2) {
 }
 
 TEST(EggDroppingPuzzleTest, GetMinimumNumberOfOperationsWorksOnExample3) {
-    EggDroppingPuzzle queryForTest(2, 10);
+    EggDroppingPuzzle const queryForTest(2, 10);
 
     EXPECT_EQ(4, queryForTest.getMinimumNumberOfTrialsUsingNaiveRecursion());
     EXPECT_EQ(4, queryForTest.getMinimumNumberOfTrialsUsingMemoizationDP());
@@ -31,7 +31,7 @@ TEST(EggDroppingPuzzleTest, GetMinimumNumberOfOperationsWorksOnExample3) {
 }
 
 TEST(EggDroppingPuzzleTest, GetMinimumNumberOfOperationsWorksOnExample4) {
-    EggDroppingPuzzle queryForTest(2, 36);
+    EggDroppingPuzzle const queryForTest(2, 36);
 
     // EXPECT_EQ(8, queryForTest.getMinimumNumberOfTrialsUsingNaiveRecursion()); // too long
     EXPECT_EQ(8, queryForTest.getMinimumNumberOfTrialsUsingMemoizationDP());

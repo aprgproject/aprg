@@ -12,7 +12,7 @@ using Values = SubArraySum::Values;
 }  // namespace
 
 TEST(SubArraySumTest, GetSubArrayWithSumWorksOnExample1) {
-    SubArraySum search({1, 3, 2, 5, 1, 1, 2, 3});
+    SubArraySum const search({1, 3, 2, 5, 1, 1, 2, 3});
 
     EXPECT_EQ((Values{2, 5, 1}), search.getSubArrayWithSum(8));
 }

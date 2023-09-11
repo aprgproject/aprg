@@ -22,7 +22,7 @@ CountTotalSetBitsInAllNumbersFrom1ToN::getTotalSetBitsUsingPreComputedBitCounts(
     countsBeforeThisBit.reserve(MAX_NUMBER_OF_BITS);
     countsBeforeThisBit.emplace_back(1);
     for (Value bitPosition = 1; bitPosition < MAX_NUMBER_OF_BITS; ++bitPosition) {
-        Value valueForBitPosition = (1 << bitPosition) + 2 * countsBeforeThisBit[bitPosition - 1];
+        Value const valueForBitPosition = (1 << bitPosition) + 2 * countsBeforeThisBit[bitPosition - 1];
         // Formula: count = 2*previousValue + powerOfTwo;
         // -> From 0 to 1: 2^0 = 1
         // -> From 00 to 11: 2*1 + 2^1 = 4
@@ -41,8 +41,8 @@ CountTotalSetBitsInAllNumbersFrom1ToN::getTotalSetBitsUsingPreComputedBitCounts(
         // -> For 1000: 12 + 1 = 13
         // -> For 1110: (12 + 7) + (compute for 110) = 19 + (compute for 110)
         // -> For 11: 1 + 2 + (compute for 1)  = 3 + (compute for 1)
-        Value powerOfTwo = static_cast<Value>(1) << bitPositionPlusOne;
-        Value seriesOfOnes = powerOfTwo - 1;
+        Value const powerOfTwo = static_cast<Value>(1) << bitPositionPlusOne;
+        Value const seriesOfOnes = powerOfTwo - 1;
         if ((remainingValue & powerOfTwo) != 0U) {
             result += countsBeforeThisBit[bitPositionPlusOne - 1] + remainingValue - seriesOfOnes;
             remainingValue ^= powerOfTwo;
@@ -58,10 +58,10 @@ CountTotalSetBitsInAllNumbersFrom1ToN::Value CountTotalSetBitsInAllNumbersFrom1T
     Value result(endValue & 1);
     Value countBeforeThisBit = 1;
     for (Value bitPosition = 1; bitPosition < MAX_NUMBER_OF_BITS; ++bitPosition) {
-        Value powerOfTwo = static_cast<Value>(1) << bitPosition;
-        Value seriesOfOnes = powerOfTwo - 1;
+        Value const powerOfTwo = static_cast<Value>(1) << bitPosition;
+        Value const seriesOfOnes = powerOfTwo - 1;
         if ((endValue & powerOfTwo) != 0U) {
-            Value countForThisBit = (endValue & seriesOfOnes) + 1;
+            Value const countForThisBit = (endValue & seriesOfOnes) + 1;
             result += countBeforeThisBit + countForThisBit;
         }
         countBeforeThisBit = (1 << bitPosition) + 2 * countBeforeThisBit;

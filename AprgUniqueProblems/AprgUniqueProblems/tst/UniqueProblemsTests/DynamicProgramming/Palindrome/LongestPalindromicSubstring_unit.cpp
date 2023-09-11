@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(LongestPalindromicSubstringTest, GetLongestLengthWorksOnExample1) {
-    LongestPalindromicSubstring queryForTest("forgeeksskeegfor");
+    LongestPalindromicSubstring const queryForTest("forgeeksskeegfor");
 
     EXPECT_EQ(10, queryForTest.getLongestLengthUsingNaiveRecursion());
     EXPECT_EQ(10, queryForTest.getLongestLengthUsingMemoizationDP());
@@ -17,7 +17,7 @@ TEST(LongestPalindromicSubstringTest, GetLongestLengthWorksOnExample1) {
 }
 
 TEST(LongestPalindromicSubstringTest, GetLongestLengthWorksOnExample2) {
-    LongestPalindromicSubstring queryForTest("Geeks");
+    LongestPalindromicSubstring const queryForTest("Geeks");
 
     EXPECT_EQ(2, queryForTest.getLongestLengthUsingNaiveRecursion());
     EXPECT_EQ(2, queryForTest.getLongestLengthUsingMemoizationDP());
@@ -27,7 +27,7 @@ TEST(LongestPalindromicSubstringTest, GetLongestLengthWorksOnExample2) {
 }
 
 TEST(LongestPalindromicSubstringTest, GetLongestLengthWorksOnExample3) {
-    LongestPalindromicSubstring queryForTest("eeeeee");
+    LongestPalindromicSubstring const queryForTest("eeeeee");
 
     EXPECT_EQ(6, queryForTest.getLongestLengthUsingNaiveRecursion());
     EXPECT_EQ(6, queryForTest.getLongestLengthUsingMemoizationDP());
@@ -37,7 +37,7 @@ TEST(LongestPalindromicSubstringTest, GetLongestLengthWorksOnExample3) {
 }
 
 TEST(LongestPalindromicSubstringTest, GetLongestLengthWorksOnExample4) {
-    LongestPalindromicSubstring queryForTest("bananas");
+    LongestPalindromicSubstring const queryForTest("bananas");
 
     EXPECT_EQ(5, queryForTest.getLongestLengthUsingNaiveRecursion());
     EXPECT_EQ(5, queryForTest.getLongestLengthUsingMemoizationDP());
@@ -47,7 +47,7 @@ TEST(LongestPalindromicSubstringTest, GetLongestLengthWorksOnExample4) {
 }
 
 TEST(LongestPalindromicSubstringTest, GetLongestLengthWorksOnExample5) {
-    LongestPalindromicSubstring queryForTest("abbcccbbbcaaccbababcbcabca");
+    LongestPalindromicSubstring const queryForTest("abbcccbbbcaaccbababcbcabca");
 
     // EXPECT_EQ(7, queryForTest.getLongestLengthUsingNaiveRecursion());
     // EXPECT_EQ(7, queryForTest.getLongestLengthUsingMemoizationDP());

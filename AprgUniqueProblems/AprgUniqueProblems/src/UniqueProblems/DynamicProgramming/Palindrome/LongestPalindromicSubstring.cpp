@@ -52,7 +52,7 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
         for (Index length = 3; length <= stringLength; ++length) {
             // length >= 3
             for (Index left = 0; left + length <= stringLength; ++left) {
-                Index right = left + length - 1;
+                Index const right = left + length - 1;
                 if (m_string[left] == m_string[right] && isSubstrAPalindrome.getEntry(left + 1, right - 1)) {
                     isSubstrAPalindrome.setEntry(left, right, true);
                     result = max(result, length);
@@ -124,7 +124,7 @@ string LongestPalindromicSubstring::getLongestStringUsingIterativeDPAndSpaceEffi
 LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLengthUsingNaiveRecursion(
     Index const left, Index const right) const {
     Index result(0);
-    Index length = right - left + 1;
+    Index const length = right - left + 1;
     if (length == 1) {
         result = 1;
     } else if (length == 2) {
@@ -132,7 +132,7 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
     } else {
         bool isCompletePalindrome(false);
         if (m_string[left] == m_string[right]) {
-            Index middleLength = getLongestLengthUsingNaiveRecursion(left + 1, right - 1);
+            Index const middleLength = getLongestLengthUsingNaiveRecursion(left + 1, right - 1);
             if (middleLength + 2 == length) {
                 isCompletePalindrome = true;
                 result = middleLength + 2;
@@ -152,7 +152,7 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
     IndexMatrix& lengthMatrix, Index const left, Index const right) const {
     Index result(lengthMatrix.getEntry(left, right));
     if (MAX_INDEX == result) {
-        Index length = right - left + 1;
+        Index const length = right - left + 1;
         if (length == 1) {
             result = 1;
         } else if (length == 2) {
@@ -160,7 +160,7 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
         } else {
             bool isCompletePalindrome(false);
             if (m_string[left] == m_string[right]) {
-                Index middleLength = getLongestLengthUsingNaiveRecursion(left + 1, right - 1);
+                Index const middleLength = getLongestLengthUsingNaiveRecursion(left + 1, right - 1);
                 if (middleLength + 2 == length) {
                     isCompletePalindrome = true;
                     result = middleLength + 2;

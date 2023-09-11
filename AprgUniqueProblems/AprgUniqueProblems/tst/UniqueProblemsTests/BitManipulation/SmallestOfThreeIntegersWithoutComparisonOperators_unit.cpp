@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(SmallestOfThreeIntegersWithoutComparisonOperatorsTest, GetSmallestWorksOnExample1) {
-    SmallestOfThreeIntegersWithoutComparisonOperators solution;
+    SmallestOfThreeIntegersWithoutComparisonOperators const solution;
 
     EXPECT_EQ(0U, solution.getSmallest(0U, 0U, 0U));
     EXPECT_EQ(0U, solution.getSmallest(0U, 1U, 0U));

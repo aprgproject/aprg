@@ -18,7 +18,7 @@ JosephusProblem::Values JosephusProblem::getJosephusPermutationUsingIntervalTree
         for (int index = skipCount - 1; static_cast<int>(result.size()) < numberOfPeople;) {
             int actualSkip = 0;
             while (actualSkip < skipCount && !isFirst) {
-                int possibleIndex = skipTree.getIndexWithTargetValue(index, skipCount - actualSkip, minus<>());
+                int const possibleIndex = skipTree.getIndexWithTargetValue(index, skipCount - actualSkip, minus<>());
                 if (possibleIndex == -1) {
                     actualSkip += skipTree.getValueOnInterval(index, numberOfPeople - 1);
                     index = 0;

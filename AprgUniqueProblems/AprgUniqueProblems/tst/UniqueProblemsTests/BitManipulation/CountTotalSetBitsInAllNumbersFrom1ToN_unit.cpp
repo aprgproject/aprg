@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(CountTotalSetBitsInAllNumbersFrom1ToNTest, GetTotalSetBitsUsingPopcountWorksOnExample1) {
-    CountTotalSetBitsInAllNumbersFrom1ToN solution;
+    CountTotalSetBitsInAllNumbersFrom1ToN const solution;
 
     EXPECT_EQ(0U, solution.getTotalSetBitsUsingPopcount(0U));
     EXPECT_EQ(1U, solution.getTotalSetBitsUsingPopcount(1U));
@@ -22,7 +22,7 @@ TEST(CountTotalSetBitsInAllNumbersFrom1ToNTest, GetTotalSetBitsUsingPopcountWork
 }
 
 TEST(CountTotalSetBitsInAllNumbersFrom1ToNTest, GetTotalSetBitsUsingPreComputedBitCountsWorksOnExample1) {
-    CountTotalSetBitsInAllNumbersFrom1ToN solution;
+    CountTotalSetBitsInAllNumbersFrom1ToN const solution;
 
     EXPECT_EQ(0U, solution.getTotalSetBitsUsingPreComputedBitCounts(0U));
     EXPECT_EQ(1U, solution.getTotalSetBitsUsingPreComputedBitCounts(1U));
@@ -37,7 +37,7 @@ TEST(CountTotalSetBitsInAllNumbersFrom1ToNTest, GetTotalSetBitsUsingPreComputedB
 }
 
 TEST(CountTotalSetBitsInAllNumbersFrom1ToNTest, GetTotalSetBitsUsingBitCountsWorksOnExample1) {
-    CountTotalSetBitsInAllNumbersFrom1ToN solution;
+    CountTotalSetBitsInAllNumbersFrom1ToN const solution;
 
     EXPECT_EQ(0U, solution.getTotalSetBitsUsingBitCounts(0U));
     EXPECT_EQ(1U, solution.getTotalSetBitsUsingBitCounts(1U));

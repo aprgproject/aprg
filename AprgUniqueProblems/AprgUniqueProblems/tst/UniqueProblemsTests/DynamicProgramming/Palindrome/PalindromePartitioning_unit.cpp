@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(PalindromePartitioningTest, GetMinimumNumberOfCutsWorksOnExample1) {
-    PalindromePartitioning queryForTest("ababbbabbababa");
+    PalindromePartitioning const queryForTest("ababbbabbababa");
 
     EXPECT_EQ(3, queryForTest.getMinimumNumberOfCutsUsingNaiveRecursion());
     EXPECT_EQ(3, queryForTest.getMinimumNumberOfCutsUsingMemoizationDP());
@@ -16,7 +16,7 @@ TEST(PalindromePartitioningTest, GetMinimumNumberOfCutsWorksOnExample1) {
 }
 
 TEST(PalindromePartitioningTest, GetMinimumNumberOfCutsWorksOnExample2) {
-    PalindromePartitioning queryForTest("GEEKSFORGEEKS");
+    PalindromePartitioning const queryForTest("GEEKSFORGEEKS");
 
     EXPECT_EQ(10, queryForTest.getMinimumNumberOfCutsUsingNaiveRecursion());
     EXPECT_EQ(10, queryForTest.getMinimumNumberOfCutsUsingMemoizationDP());
@@ -25,7 +25,7 @@ TEST(PalindromePartitioningTest, GetMinimumNumberOfCutsWorksOnExample2) {
 }
 
 TEST(PalindromePartitioningTest, GetMinimumNumberOfCutsWorksOnExample3) {
-    PalindromePartitioning queryForTest("BBABCBCAB");
+    PalindromePartitioning const queryForTest("BBABCBCAB");
 
     EXPECT_EQ(4, queryForTest.getMinimumNumberOfCutsUsingNaiveRecursion());
     EXPECT_EQ(4, queryForTest.getMinimumNumberOfCutsUsingMemoizationDP());

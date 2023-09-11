@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(CountNumberOfBinaryStringsWithoutConsecutiveOnesTest, GetCountWorksOnExample1) {
-    CountNumberOfBinaryStringsWithoutConsecutiveOnes queryForTest(1);
+    CountNumberOfBinaryStringsWithoutConsecutiveOnes const queryForTest(1);
 
     EXPECT_EQ(2, queryForTest.getCountUsingNaiveRecursion());
     EXPECT_EQ(2, queryForTest.getCountUsingIterativeDP());
@@ -16,7 +16,7 @@ TEST(CountNumberOfBinaryStringsWithoutConsecutiveOnesTest, GetCountWorksOnExampl
 }
 
 TEST(CountNumberOfBinaryStringsWithoutConsecutiveOnesTest, GetCountWorksOnExample2) {
-    CountNumberOfBinaryStringsWithoutConsecutiveOnes queryForTest(2);
+    CountNumberOfBinaryStringsWithoutConsecutiveOnes const queryForTest(2);
 
     EXPECT_EQ(3, queryForTest.getCountUsingNaiveRecursion());
     EXPECT_EQ(3, queryForTest.getCountUsingIterativeDP());
@@ -25,7 +25,7 @@ TEST(CountNumberOfBinaryStringsWithoutConsecutiveOnesTest, GetCountWorksOnExampl
 }
 
 TEST(CountNumberOfBinaryStringsWithoutConsecutiveOnesTest, GetCountWorksOnExample3) {
-    CountNumberOfBinaryStringsWithoutConsecutiveOnes queryForTest(3);
+    CountNumberOfBinaryStringsWithoutConsecutiveOnes const queryForTest(3);
 
     EXPECT_EQ(5, queryForTest.getCountUsingNaiveRecursion());
     EXPECT_EQ(5, queryForTest.getCountUsingIterativeDP());
@@ -34,7 +34,7 @@ TEST(CountNumberOfBinaryStringsWithoutConsecutiveOnesTest, GetCountWorksOnExampl
 }
 
 TEST(CountNumberOfBinaryStringsWithoutConsecutiveOnesTest, GetCountWorksOnExample4) {
-    CountNumberOfBinaryStringsWithoutConsecutiveOnes queryForTest(10);
+    CountNumberOfBinaryStringsWithoutConsecutiveOnes const queryForTest(10);
 
     EXPECT_EQ(144, queryForTest.getCountUsingNaiveRecursion());
     EXPECT_EQ(144, queryForTest.getCountUsingIterativeDP());

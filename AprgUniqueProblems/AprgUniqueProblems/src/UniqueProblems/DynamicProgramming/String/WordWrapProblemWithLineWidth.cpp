@@ -12,8 +12,8 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
     // Auxiliary Space :O(numberOfWords) (RecursionDetails has allocation on stack)
     Cost result(0);
     if (!m_words.empty()) {
-        Index firstWordLength = m_words.front().length();
-        RecursionDetails recursionDetails{Indices{firstWordLength}};  // bad idea to have structure as argument
+        Index const firstWordLength = m_words.front().length();
+        RecursionDetails const recursionDetails{Indices{firstWordLength}};  // bad idea to have structure as argument
         result = getOptimizedCostUsingNaiveRecursion(recursionDetails, 1);
     }
     return result;
@@ -30,7 +30,7 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
             bool hasNoSolutions(false);
             Index lineLength(m_words.front().length());
             for (auto it = m_words.cbegin() + 1; it != m_words.cend(); ++it) {
-                Index wordLength(it->length());
+                Index const wordLength(it->length());
                 if (wordLength > targetLineLength) {
                     hasNoSolutions = true;
                     break;  // no possible solutions on all lengths
@@ -59,7 +59,7 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
     // Auxiliary Space: O(numberOfWords)
     Cost result(0);
     if (!m_words.empty()) {
-        Index numberOfWords(m_words.size());
+        Index const numberOfWords(m_words.size());
         Costs costsIfFirstWord(numberOfWords, static_cast<Cost>(MAX_COST));
         for (int firstWordIndex = numberOfWords - 1; firstWordIndex >= 0; --firstWordIndex) {
             // try all first word in lines
@@ -94,9 +94,9 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
     Cost result(0);
     if (wordIndex < static_cast<Index>(m_words.size())) {
         result = MAX_COST;
-        Index wordLength(m_words[wordIndex].length());
+        Index const wordLength(m_words[wordIndex].length());
         if (wordLength <= m_maxLineLength) {
-            Index lastLength(recursionDetails.lineLengths.back());
+            Index const lastLength(recursionDetails.lineLengths.back());
             if (lastLength + 1 + wordLength <= m_maxLineLength) {
                 // try to put word on last line
                 RecursionDetails currentDetails(recursionDetails);

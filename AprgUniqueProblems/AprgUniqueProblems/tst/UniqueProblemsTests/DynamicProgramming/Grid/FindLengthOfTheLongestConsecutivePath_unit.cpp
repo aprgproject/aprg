@@ -11,8 +11,8 @@ using Grid = FindLengthOfTheLongestConsecutivePath::ValueGrid;
 }  // namespace
 
 TEST(FindLengthOfTheLongestConsecutivePathTest, GetLongestLengthWorksOnExample1) {
-    Grid inputGrid(3, 3, {'a', 'c', 'd', 'h', 'b', 'e', 'i', 'g', 'f'});
-    FindLengthOfTheLongestConsecutivePath queryForTest(inputGrid);
+    Grid const inputGrid(3, 3, {'a', 'c', 'd', 'h', 'b', 'e', 'i', 'g', 'f'});
+    FindLengthOfTheLongestConsecutivePath const queryForTest(inputGrid);
 
     EXPECT_EQ(9, queryForTest.getLongestLengthUsingNaiveRecursion());
     EXPECT_EQ(5, queryForTest.getLongestLengthStartingAtUsingNaiveRecursion(2, 1));
@@ -21,8 +21,8 @@ TEST(FindLengthOfTheLongestConsecutivePathTest, GetLongestLengthWorksOnExample1)
 }
 
 TEST(FindLengthOfTheLongestConsecutivePathTest, GetLongestLengthWorksOnExample2) {
-    Grid inputGrid(3, 3, {'b', 'e', 'f', 'h', 'd', 'a', 'i', 'c', 'a'});
-    FindLengthOfTheLongestConsecutivePath queryForTest(inputGrid);
+    Grid const inputGrid(3, 3, {'b', 'e', 'f', 'h', 'd', 'a', 'i', 'c', 'a'});
+    FindLengthOfTheLongestConsecutivePath const queryForTest(inputGrid);
 
     EXPECT_EQ(4, queryForTest.getLongestLengthUsingNaiveRecursion());
     EXPECT_EQ(1, queryForTest.getLongestLengthStartingAtUsingNaiveRecursion(0, 0));

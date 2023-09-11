@@ -13,9 +13,9 @@ public:
 
     void sort(int const maximumDistanceFromCorrectPosition, Values& valuesToSort) const {
         if (maximumDistanceFromCorrectPosition <= static_cast<int>(valuesToSort.size())) {
-            int pqSize = (maximumDistanceFromCorrectPosition == static_cast<int>(valuesToSort.size()))
-                             ? maximumDistanceFromCorrectPosition
-                             : maximumDistanceFromCorrectPosition + 1;
+            int const pqSize = (maximumDistanceFromCorrectPosition == static_cast<int>(valuesToSort.size()))
+                                   ? maximumDistanceFromCorrectPosition
+                                   : maximumDistanceFromCorrectPosition + 1;
             KPriorityQueue pq(valuesToSort.cbegin(), valuesToSort.cbegin() + pqSize);
 
             int sortedIndex(0);

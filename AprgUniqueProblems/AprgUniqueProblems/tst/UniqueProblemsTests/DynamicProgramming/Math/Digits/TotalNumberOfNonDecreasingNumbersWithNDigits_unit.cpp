@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample1) {
-    TotalNumberOfNonDecreasingNumbersWithNDigits queryForTest(0);
+    TotalNumberOfNonDecreasingNumbersWithNDigits const queryForTest(0);
 
     EXPECT_EQ(0, queryForTest.getCountUsingNaiveRecursion());
     EXPECT_EQ(0, queryForTest.getCountUsingMemoizationDP());
@@ -17,7 +17,7 @@ TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample1) 
 }
 
 TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample2) {
-    TotalNumberOfNonDecreasingNumbersWithNDigits queryForTest(1);
+    TotalNumberOfNonDecreasingNumbersWithNDigits const queryForTest(1);
 
     EXPECT_EQ(10, queryForTest.getCountUsingNaiveRecursion());
     EXPECT_EQ(10, queryForTest.getCountUsingMemoizationDP());
@@ -27,7 +27,7 @@ TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample2) 
 }
 
 TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample3) {
-    TotalNumberOfNonDecreasingNumbersWithNDigits queryForTest(2);
+    TotalNumberOfNonDecreasingNumbersWithNDigits const queryForTest(2);
 
     EXPECT_EQ(55, queryForTest.getCountUsingNaiveRecursion());
     EXPECT_EQ(55, queryForTest.getCountUsingMemoizationDP());
@@ -37,7 +37,7 @@ TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample3) 
 }
 
 TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample4) {
-    TotalNumberOfNonDecreasingNumbersWithNDigits queryForTest(3);
+    TotalNumberOfNonDecreasingNumbersWithNDigits const queryForTest(3);
 
     EXPECT_EQ(220, queryForTest.getCountUsingNaiveRecursion());
     EXPECT_EQ(220, queryForTest.getCountUsingMemoizationDP());
@@ -47,7 +47,7 @@ TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample4) 
 }
 
 TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample5) {
-    TotalNumberOfNonDecreasingNumbersWithNDigits queryForTest(10);
+    TotalNumberOfNonDecreasingNumbersWithNDigits const queryForTest(10);
 
     EXPECT_EQ(92378, queryForTest.getCountUsingNaiveRecursion());
     EXPECT_EQ(92378, queryForTest.getCountUsingMemoizationDP());

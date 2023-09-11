@@ -33,8 +33,8 @@ private:
             Index lowerIndex = lowestIndex;
             Index higherIndex = highestIndex;
             while (lowerIndex < higherIndex) {
-                Value currentSum(m_sortedValues[lowerIndex] + m_sortedValues[higherIndex]);
-                Value currentDeviation(mathHelper::getPositiveDelta(currentSum, targetSum));
+                Value const currentSum(m_sortedValues[lowerIndex] + m_sortedValues[higherIndex]);
+                Value const currentDeviation(mathHelper::getPositiveDelta(currentSum, targetSum));
                 if (minimumDeviation > currentDeviation) {
                     minimumDeviation = currentDeviation;
                     result = {m_sortedValues[lowerIndex], m_sortedValues[higherIndex]};

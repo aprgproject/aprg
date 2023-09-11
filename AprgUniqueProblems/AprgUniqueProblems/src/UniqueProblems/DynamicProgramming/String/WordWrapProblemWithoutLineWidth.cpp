@@ -13,8 +13,8 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
     // Auxiliary Space :O(numberOfWords) (RecursionDetails has allocation on stack)
     Cost result(0);
     if (!m_words.empty()) {
-        Index firstWordLength = m_words.front().length();
-        RecursionDetails recursionDetails{firstWordLength, Indices{firstWordLength}};
+        Index const firstWordLength = m_words.front().length();
+        RecursionDetails const recursionDetails{firstWordLength, Indices{firstWordLength}};
         result = getOptimizedCostUsingNaiveRecursion(recursionDetails, 1);
     }
     return result;
@@ -24,7 +24,7 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
     // Time Complexity: O(totalLength x numberOfWords)
     // Auxiliary Space: O(totalLength)
     Cost result(0);
-    Index totalLength(getTotalLength());
+    Index const totalLength(getTotalLength());
     if (totalLength > 0) {
         Costs costsAtLength(totalLength, static_cast<Cost>(MAX_COST));
         for (Index targetLineLength = 1; targetLineLength < totalLength; ++targetLineLength) {
@@ -32,7 +32,7 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
             bool hasNoSolutions(false);
             Index lineLength(m_words.front().length());
             for (auto it = m_words.cbegin() + 1; it != m_words.cend(); ++it) {
-                Index wordLength(it->length());
+                Index const wordLength(it->length());
                 if (wordLength > targetLineLength) {
                     hasNoSolutions = true;
                     break;  // no possible solution try next length
@@ -80,7 +80,7 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
     Cost result(0);
     if (wordIndex < static_cast<Index>(m_words.size())) {
         result = MAX_COST;
-        Index wordLength(m_words[wordIndex].length());
+        Index const wordLength(m_words[wordIndex].length());
         {
             RecursionDetails currentDetails(recursionDetails);
             Index& lastLength(currentDetails.lengths.back());

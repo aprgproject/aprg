@@ -11,7 +11,7 @@ using Distance = LevenshteinDistance::Index;
 }  // namespace
 
 TEST(LevenshteinDistanceTest, GetLevenshteinDistanceWorksOnExample1) {
-    LevenshteinDistance queryForTest("MOVIE", "LOVE");
+    LevenshteinDistance const queryForTest("MOVIE", "LOVE");
 
     EXPECT_EQ(2, queryForTest.getLevenshteinDistanceUsingNaiveRecursion());
     EXPECT_EQ(2, queryForTest.getLevenshteinDistanceUsingMemoizationDP());
@@ -20,7 +20,7 @@ TEST(LevenshteinDistanceTest, GetLevenshteinDistanceWorksOnExample1) {
 }
 
 TEST(LevenshteinDistanceTest, GetLevenshteinDistanceWorksOnExample2) {
-    LevenshteinDistance queryForTest("This is a statement", "This is not a statement");
+    LevenshteinDistance const queryForTest("This is a statement", "This is not a statement");
 
     EXPECT_EQ(4, queryForTest.getLevenshteinDistanceUsingNaiveRecursion());
     EXPECT_EQ(4, queryForTest.getLevenshteinDistanceUsingMemoizationDP());

@@ -47,7 +47,7 @@ bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingIterativeDP
         }
         for (Value partialSum = 1; partialSum <= m_targetSum; ++partialSum) {
             for (Index valueIndex = 1; valueIndex <= static_cast<Index>(m_inputValues.size()); ++valueIndex) {
-                Value previousValue(m_inputValues[valueIndex - 1]);
+                Value const previousValue(m_inputValues[valueIndex - 1]);
                 bool isPossible(isPossibleMatrix.getEntry(partialSum, valueIndex - 1));  // get previous entry result
                 if (!isPossible && partialSum >= previousValue) {
                     isPossible =
@@ -86,7 +86,7 @@ bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingNaiveRecurs
     Value const partialSum, Index const valueIndex) const {
     bool result(false);
     if (valueIndex < static_cast<Index>(m_inputValues.size())) {
-        Value currentValue(m_inputValues[valueIndex]);
+        Value const currentValue(m_inputValues[valueIndex]);
         if (partialSum == currentValue) {
             result = true;
         } else if (partialSum > currentValue) {
@@ -103,11 +103,11 @@ bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingNaiveRecurs
 
 bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingMemoizationDP(
     StateMatrix& stateMatrix, Value const partialSum, Index const valueIndex) const {
-    State resultState = stateMatrix.getEntry(partialSum, valueIndex);
+    State const resultState = stateMatrix.getEntry(partialSum, valueIndex);
     if (State::Unused == resultState) {
         bool result(false);
         if (valueIndex < static_cast<Index>(m_inputValues.size())) {
-            Value currentValue(m_inputValues[valueIndex]);
+            Value const currentValue(m_inputValues[valueIndex]);
             if (partialSum >= currentValue) {
                 result = isPartialSumPossibleUsingMemoizationDP(stateMatrix, partialSum, valueIndex + 1)  // skip value
                          || isPartialSumPossibleUsingMemoizationDP(

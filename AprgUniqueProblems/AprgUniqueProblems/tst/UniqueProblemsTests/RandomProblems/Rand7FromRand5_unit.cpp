@@ -19,7 +19,7 @@ TEST(Rand7FromRand5Test, GetRandomFrom0To6WorksAsUniformlyDistributed) {
 
     ASSERT_FALSE(hitsForEachValue.empty());
     auto&& [minIterator, maxIterator] = std::minmax_element(hitsForEachValue.cbegin(), hitsForEachValue.cend());
-    int deviationCount(*maxIterator - *minIterator);
+    int const deviationCount(*maxIterator - *minIterator);
     EXPECT_LT(deviationCount, allowedDeviationCount);
 }
 

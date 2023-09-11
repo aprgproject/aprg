@@ -20,9 +20,9 @@ public:
     [[nodiscard]] IndexPair getMaximumUnsortedRange(Values const& valuesToSort) const {
         IndexPair result{INVALID_INDEX, INVALID_INDEX};
         if (!valuesToSort.empty()) {
-            Index startIndex(getStartIndex(valuesToSort));
+            Index const startIndex(getStartIndex(valuesToSort));
             if (startIndex + 1 < static_cast<Index>(valuesToSort.size())) {
-                Index endIndex(getEndIndex(valuesToSort));
+                Index const endIndex(getEndIndex(valuesToSort));
                 auto [minValue, maxValue] = getMinMaxPairInUnsorted(valuesToSort, startIndex, endIndex);
                 result = {
                     getAdjustedStartIndex(valuesToSort, startIndex, minValue),

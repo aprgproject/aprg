@@ -17,7 +17,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDP(Numbe
     // The tabulated program for a given problem builds a table in bottom up fashion and returns the last entry from
     // table. For example, for the same Fibonacci number, we first calculate fib(0) then fib(1) then fib(2) then fib(3)
     // and so on. So literally, we are building the solutions of subproblems bottom-up.
-    Number size = max(number + 1, 2);
+    Number const size = max(number + 1, 2);
     Numbers tabulationData(size);
     tabulationData[0] = 0;
     tabulationData[1] = 1;
@@ -39,7 +39,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDPAndSpa
     Number previousFibonacci(0);
     Number currentFibonacci(1);
     for (Number n = 2; n <= number; ++n) {
-        Number nextFibonacci = currentFibonacci + previousFibonacci;
+        Number const nextFibonacci = currentFibonacci + previousFibonacci;
         previousFibonacci = currentFibonacci;
         currentFibonacci = nextFibonacci;
     }
@@ -51,8 +51,8 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciNumberUsingBinetsFormu
     // NOTE: The time complexity is constant but it uses double precision so its not that accurate
     // NOTE: The pow() might be logarithmic but its not clearly written on the standard.
     // Binets formula:
-    double sqrtOf5 = sqrt(5);
-    double phi = (1 + sqrtOf5) / 2;
+    double const sqrtOf5 = sqrt(5);
+    double const phi = (1 + sqrtOf5) / 2;
     return getIntegerAfterRoundingADoubleValue<Number>(pow(phi, number) / sqrtOf5);
 }
 
@@ -69,7 +69,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMatrixMultiplicat
     if (number == 0) {
         return 0;
     }
-    NumberMatrix formulaicTransform(2, 2, {0, 1, 1, 1});
+    NumberMatrix const formulaicTransform(2, 2, {0, 1, 1, 1});
 
     NumberMatrix fibonacciMatrix(formulaicTransform);
     for (Number i = 2; i < number; ++i) {
@@ -87,9 +87,9 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMatrixPowerWithLo
     }  // Matrix representation:
     // |f(n-1)|f(n)  |
     // |f(n)  |f(n+1)|
-    NumberMatrix formulaicTransform(2, 2, {0, 1, 1, 1});
+    NumberMatrix const formulaicTransform(2, 2, {0, 1, 1, 1});
 
-    NumberMatrix fibonacciMatrix(getMatrixRaiseToScalarPower(formulaicTransform, number - 1));  // logarithmic
+    NumberMatrix const fibonacciMatrix(getMatrixRaiseToScalarPower(formulaicTransform, number - 1));  // logarithmic
     return fibonacciMatrix.getEntry(1, 1);
 }
 
@@ -97,7 +97,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicIterat
     // Derived using matrix power (check notes at header file)
     Number result(number);
     if (result > 1) {
-        Number size = max(number + 1, 2);
+        Number const size = max(number + 1, 2);
         Numbers iterativeData(size);
         iterativeData[0] = 0;
         iterativeData[1] = 1;
@@ -113,14 +113,14 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicIterat
         for (Number const step : logarithmicSteps) {
             Number& resultForStep(iterativeData[step]);
             if (mathHelper::isOdd(step)) {
-                Number k2 = (step + 1) / 2;
-                Number fibonacciAtK = iterativeData[k2];
-                Number fibonacciAtKMinus1 = iterativeData[k2 - 1];
+                Number const k2 = (step + 1) / 2;
+                Number const fibonacciAtK = iterativeData[k2];
+                Number const fibonacciAtKMinus1 = iterativeData[k2 - 1];
                 resultForStep = fibonacciAtK * fibonacciAtK + fibonacciAtKMinus1 * fibonacciAtKMinus1;
             } else {
-                Number k2 = step / 2;
-                Number fibonacciAtK = iterativeData[k2];
-                Number fibonacciAtKMinus1 = iterativeData[k2 - 1];
+                Number const k2 = step / 2;
+                Number const fibonacciAtK = iterativeData[k2];
+                Number const fibonacciAtKMinus1 = iterativeData[k2 - 1];
                 resultForStep = (2 * fibonacciAtKMinus1 + fibonacciAtK) * fibonacciAtK;
             }
         }
@@ -150,7 +150,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMemoizationDP(Num
     // Whenever we need the solution to a subproblem, we first look into the lookup table.
     // If the precomputed value is there then we return that value,
     // otherwise, we calculate the value and put the result in the lookup table so that it can be reused later.
-    Number size = max(number + 1, 2);
+    Number const size = max(number + 1, 2);
     Numbers memoizationData(size, static_cast<int>(UNUSED_VALUE));
     memoizationData[0] = 0;
     memoizationData[1] = 1;
@@ -160,7 +160,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMemoizationDP(Num
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicMemoizationDP(Number const number) {
     // Time Complexity: O(log(n))
     // Extra Space: O(n)
-    Number size = max(number + 1, 2);
+    Number const size = max(number + 1, 2);
     Numbers memoizationData(size, static_cast<int>(UNUSED_VALUE));
     memoizationData[0] = 0;
     memoizationData[1] = 1;
@@ -183,14 +183,14 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicMemoiz
     Number& resultForNumber(memoizationData[number]);
     if (resultForNumber == UNUSED_VALUE) {
         if (mathHelper::isOdd(number)) {
-            Number k = (number + 1) / 2;
-            Number fibonacciAtK = getNthFibonacciUsingLogarithmicMemoizationDP(memoizationData, k);
-            Number fibonacciAtKMinus1 = getNthFibonacciUsingLogarithmicMemoizationDP(memoizationData, k - 1);
+            Number const k = (number + 1) / 2;
+            Number const fibonacciAtK = getNthFibonacciUsingLogarithmicMemoizationDP(memoizationData, k);
+            Number const fibonacciAtKMinus1 = getNthFibonacciUsingLogarithmicMemoizationDP(memoizationData, k - 1);
             resultForNumber = fibonacciAtK * fibonacciAtK + fibonacciAtKMinus1 * fibonacciAtKMinus1;
         } else {
-            Number k = number / 2;
-            Number fibonacciAtK = getNthFibonacciUsingLogarithmicMemoizationDP(memoizationData, k);
-            Number fibonacciAtKMinus1 = getNthFibonacciUsingLogarithmicMemoizationDP(memoizationData, k - 1);
+            Number const k = number / 2;
+            Number const fibonacciAtK = getNthFibonacciUsingLogarithmicMemoizationDP(memoizationData, k);
+            Number const fibonacciAtKMinus1 = getNthFibonacciUsingLogarithmicMemoizationDP(memoizationData, k - 1);
             resultForNumber = (2 * fibonacciAtKMinus1 + fibonacciAtK) * fibonacciAtK;
         }
     }

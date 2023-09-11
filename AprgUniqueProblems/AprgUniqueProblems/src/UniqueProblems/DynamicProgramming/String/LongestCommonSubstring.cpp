@@ -14,7 +14,7 @@ LongestCommonSubstring::Count LongestCommonSubstring::getLongestCommonSubstringL
     for (Index index2 = 0; index2 < static_cast<int>(m_string2.length()); ++index2) {
         for (Index index1 = 0; index1 < static_cast<int>(m_string1.length()); ++index1) {
             if (m_string1[index1] == m_string2[index2]) {
-                Index length = getLongestCommonSubstringLengthUsingNaiveRecursion(index1, index2);
+                Index const length = getLongestCommonSubstringLengthUsingNaiveRecursion(index1, index2);
                 maxLength = max(maxLength, length);
             }
         }
@@ -28,7 +28,7 @@ LongestCommonSubstring::Count LongestCommonSubstring::getLongestCommonSubstringL
     for (Index index2 = 0; index2 < static_cast<int>(m_string2.length()); ++index2) {
         for (Index index1 = 0; index1 < static_cast<int>(m_string1.length()); ++index1) {
             if (m_string1[index1] == m_string2[index2]) {
-                Index length = getLongestCommonSubstringLengthUsingMemoizationDP(lengthGrid, index1, index2);
+                Index const length = getLongestCommonSubstringLengthUsingMemoizationDP(lengthGrid, index1, index2);
                 maxLength = max(maxLength, length);
             }
         }

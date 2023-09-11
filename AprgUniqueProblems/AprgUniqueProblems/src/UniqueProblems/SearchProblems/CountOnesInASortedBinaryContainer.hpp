@@ -16,7 +16,7 @@ public:
             Index lowerIndex(0);
             Index higherIndex(sortedBinaryValues.size() - 1);
             while (lowerIndex < higherIndex) {
-                Index middleIndex = (lowerIndex + higherIndex) / 2;
+                Index const middleIndex = (lowerIndex + higherIndex) / 2;
                 if (sortedBinaryValues[middleIndex]) {
                     result = sortedBinaryValues.size() - middleIndex;
                     higherIndex = middleIndex - 1;

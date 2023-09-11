@@ -18,7 +18,7 @@ public:
         IndexPair result{INVALID_INDEX, INVALID_INDEX};
 
         BinaryNearestValueSearchWithTwoIndices<Values> binarySearch(m_values);
-        Index nearestIndex(binarySearch.getIndexOfNearestValue(valueToCheck));
+        Index const nearestIndex(binarySearch.getIndexOfNearestValue(valueToCheck));
         if (nearestIndex != INVALID_INDEX) {
             Index count(1);
             Index low(nearestIndex);

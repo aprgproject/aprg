@@ -22,22 +22,22 @@ using SmallIntegerSorter = SortNNumbersFromZeroToNSquaredMinus1<Integers>;
 // CANNOT SORT STRINGS
 // CANNOT SORT STABILITY OBJECTS
 TEST(SortNNumbersFromZeroToNSquaredMinus1Test, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(SortNNumbersFromZeroToNSquaredMinus1Test, SortWorksOnCharactersUsingOneValueExample) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(SortNNumbersFromZeroToNSquaredMinus1Test, SortWorksOnCharactersUsingExample1) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(SortNNumbersFromZeroToNSquaredMinus1Test, SortWorksOnCharactersUsingExample2) {
-    CharactersSorter sorter;
+    CharactersSorter const sorter;
     testSortUsingExample2WithCharacters<CharactersSorter, Characters>(sorter);
 }
 

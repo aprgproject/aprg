@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(BooleanParenthesizationProblemTest, GetNumberOfWaysForTrueWorksOnWrongArguments) {
-    BooleanParenthesizationProblem queryForTest({true, false, true}, {'^'});
+    BooleanParenthesizationProblem const queryForTest({true, false, true}, {'^'});
 
     EXPECT_EQ(0, queryForTest.getNumberOfWaysForTrueUsingNaiveRecursion());
     EXPECT_EQ(0, queryForTest.getNumberOfWaysForTrueUsingMemoizationDP());
@@ -15,7 +15,7 @@ TEST(BooleanParenthesizationProblemTest, GetNumberOfWaysForTrueWorksOnWrongArgum
 }
 
 TEST(BooleanParenthesizationProblemTest, GetNumberOfWaysForTrueWorksOnExample1) {
-    BooleanParenthesizationProblem queryForTest({true, false, true}, {'^', '&'});
+    BooleanParenthesizationProblem const queryForTest({true, false, true}, {'^', '&'});
 
     EXPECT_EQ(2, queryForTest.getNumberOfWaysForTrueUsingNaiveRecursion());
     EXPECT_EQ(2, queryForTest.getNumberOfWaysForTrueUsingMemoizationDP());
@@ -23,7 +23,7 @@ TEST(BooleanParenthesizationProblemTest, GetNumberOfWaysForTrueWorksOnExample1) 
 }
 
 TEST(BooleanParenthesizationProblemTest, GetNumberOfWaysForTrueWorksOnExample2) {
-    BooleanParenthesizationProblem queryForTest({true, true, false, true}, {'|', '&', '^'});
+    BooleanParenthesizationProblem const queryForTest({true, true, false, true}, {'|', '&', '^'});
 
     EXPECT_EQ(4, queryForTest.getNumberOfWaysForTrueUsingNaiveRecursion());
     EXPECT_EQ(4, queryForTest.getNumberOfWaysForTrueUsingMemoizationDP());

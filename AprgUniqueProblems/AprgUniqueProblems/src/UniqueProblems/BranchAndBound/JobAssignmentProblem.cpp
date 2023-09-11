@@ -16,16 +16,16 @@ JobAssignmentProblem::JobAssignmentProblem(CostMatrix const& costMatrix)
 
 int JobAssignmentProblem::getMinimalCostAndPrintAssignments() {
     int minimalCost{};
-    SearchNodeDetails initialDetails{INVALID_NODE_ID, -1, -1, BoolVector(m_numberOfJobs, false)};
+    SearchNodeDetails const initialDetails{INVALID_NODE_ID, -1, -1, BoolVector(m_numberOfJobs, false)};
     m_nodeIdToDetails.emplace_back(initialDetails);
 
     // using prioritized queue for branch and bound approach
     MinCostPriorityQueue nodesInMinCost;
     nodesInMinCost.push(SearchNode{INVALID_NODE_ID, 0, 0});
     while (!nodesInMinCost.empty()) {
-        SearchNode currentNode(nodesInMinCost.top());
+        SearchNode const currentNode(nodesInMinCost.top());
         nodesInMinCost.pop();
-        int nextWorkerId = m_nodeIdToDetails[currentNode.nodeId].workerId + 1;
+        int const nextWorkerId = m_nodeIdToDetails[currentNode.nodeId].workerId + 1;
         if (nextWorkerId == m_numberOfWorkers) {
             printAssignments(currentNode.nodeId);
             minimalCost = currentNode.minimumPossibleCost;
@@ -76,13 +76,14 @@ void JobAssignmentProblem::printAssignments(SearchNodeId const nodeId) const {
 JobAssignmentProblem::SearchNode JobAssignmentProblem::createNode(
     SearchNode const& currentNode, Coordinate const& nextWorkerAndJob) {
     auto const [workerId, jobId] = nextWorkerAndJob;
-    SearchNodeId nextNodeId = getNextNodeId();
+    SearchNodeId const nextNodeId = getNextNodeId();
     m_nodeIdToDetails.emplace_back(
         SearchNodeDetails{currentNode.nodeId, workerId, jobId, m_nodeIdToDetails[currentNode.nodeId].isJobAssigned});
     SearchNodeDetails& nextNodeDetails(m_nodeIdToDetails[nextNodeId]);
     nextNodeDetails.isJobAssigned[jobId] = true;
-    int accumulatedCost = getAccumulatedCost(workerId, jobId, currentNode);
-    int minimumPossibleCost = accumulatedCost + getMinimumPossibleCost(workerId, jobId, nextNodeDetails.isJobAssigned);
+    int const accumulatedCost = getAccumulatedCost(workerId, jobId, currentNode);
+    int const minimumPossibleCost =
+        accumulatedCost + getMinimumPossibleCost(workerId, jobId, nextNodeDetails.isJobAssigned);
     return SearchNode{nextNodeId, accumulatedCost, minimumPossibleCost};
 }
 

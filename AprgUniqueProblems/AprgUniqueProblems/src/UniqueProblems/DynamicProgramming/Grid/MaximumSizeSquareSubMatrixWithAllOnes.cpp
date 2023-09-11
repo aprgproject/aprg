@@ -22,7 +22,7 @@ MaximumSizeSquareSubMatrixWithAllOnes::getMaximumSquareAreaUsingMemoizationDP() 
 
         Unit maximumSide(0);
         sideMatrix.iterateAllThroughYAndThenX([&](Index const x, Index const y) {
-            Unit side = sideMatrix.getEntry(x, y);
+            Unit const side = sideMatrix.getEntry(x, y);
             if (side != UNUSED_UNIT) {
                 maximumSide = max(maximumSide, side);
             }
@@ -44,10 +44,10 @@ MaximumSizeSquareSubMatrixWithAllOnes::getMaximumSquareAreaUsingIterativeDP() co
             if (x == 0 || y == 0) {
                 entryResult = getUnitAt(x, y);
             } else if (m_booleanMatrix.getEntry(x, y)) {
-                Unit maxSideOfSmallerSquare = sideMatrix.getEntry(x - 1, y - 1);
+                Unit const maxSideOfSmallerSquare = sideMatrix.getEntry(x - 1, y - 1);
 
-                int upX = static_cast<int>(x - maxSideOfSmallerSquare);
-                int leftY = static_cast<int>(y - maxSideOfSmallerSquare);
+                int const upX = static_cast<int>(x - maxSideOfSmallerSquare);
+                int const leftY = static_cast<int>(y - maxSideOfSmallerSquare);
 
                 bool areAllOnes(true);
                 for (int i = static_cast<int>(x - 1); areAllOnes && i >= upX; --i) {
@@ -63,7 +63,7 @@ MaximumSizeSquareSubMatrixWithAllOnes::getMaximumSquareAreaUsingIterativeDP() co
 
         Unit maximumSide(0);
         sideMatrix.iterateAllThroughYAndThenX([&](Index const x, Index const y) {
-            Unit side = sideMatrix.getEntry(x, y);
+            Unit const side = sideMatrix.getEntry(x, y);
             if (side != UNUSED_UNIT) {
                 maximumSide = max(maximumSide, side);
             }
@@ -121,10 +121,10 @@ MaximumSizeSquareSubMatrixWithAllOnes::Unit MaximumSizeSquareSubMatrixWithAllOne
         if (x == 0 || y == 0) {
             result = getUnitAt(x, y);
         } else if (m_booleanMatrix.getEntry(x, y)) {
-            Unit maxSideOfSmallerSquare = getMaximumSideUsingMemoizationDP(sideMatrix, x - 1, y - 1);
+            Unit const maxSideOfSmallerSquare = getMaximumSideUsingMemoizationDP(sideMatrix, x - 1, y - 1);
 
-            int upX = static_cast<int>(x - maxSideOfSmallerSquare);
-            int leftY = static_cast<int>(y - maxSideOfSmallerSquare);
+            int const upX = static_cast<int>(x - maxSideOfSmallerSquare);
+            int const leftY = static_cast<int>(y - maxSideOfSmallerSquare);
 
             bool areAllOnes(true);
             for (int i = static_cast<int>(x - 1); areAllOnes && i >= upX; --i) {

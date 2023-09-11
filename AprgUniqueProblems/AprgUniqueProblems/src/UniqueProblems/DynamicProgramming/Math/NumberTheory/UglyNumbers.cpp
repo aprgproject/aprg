@@ -20,10 +20,10 @@ UglyNumbers::Number UglyNumbers::getNthUglyNumberByCheckingPreviousUglyNumbersUs
         Number currentNumber = 1;
         for (Number count = 1; count < m_nth;) {
             ++currentNumber;
-            bool isCurrentNumberUgly = isDivisible(currentNumber, 2)   ? isUglyNumber[(currentNumber / 2) - 1]
-                                       : isDivisible(currentNumber, 3) ? isUglyNumber[(currentNumber / 3) - 1]
-                                       : isDivisible(currentNumber, 5) ? isUglyNumber[(currentNumber / 5) - 1]
-                                                                       : false;
+            bool const isCurrentNumberUgly = isDivisible(currentNumber, 2)   ? isUglyNumber[(currentNumber / 2) - 1]
+                                             : isDivisible(currentNumber, 3) ? isUglyNumber[(currentNumber / 3) - 1]
+                                             : isDivisible(currentNumber, 5) ? isUglyNumber[(currentNumber / 5) - 1]
+                                                                             : false;
             isUglyNumber.emplace_back(isCurrentNumberUgly);
             count += isCurrentNumberUgly ? 1 : 0;
         }
@@ -48,7 +48,7 @@ UglyNumbers::Number UglyNumbers::getNthUglyNumberByMultiplesUsingIterativeDP() c
         Number next3Multiple(3);
         Number next5Multiple(5);
         while (static_cast<Number>(uglyNumbers.size()) < m_nth) {
-            Number nextUglyNumber = min(min(next2Multiple, next3Multiple), next5Multiple);
+            Number const nextUglyNumber = min(min(next2Multiple, next3Multiple), next5Multiple);
             uglyNumbers.emplace_back(nextUglyNumber);
             next2Multiple = (nextUglyNumber == next2Multiple) ? uglyNumbers[++indexFor2] * 2 : next2Multiple;
             next3Multiple = (nextUglyNumber == next3Multiple) ? uglyNumbers[++indexFor3] * 3 : next3Multiple;

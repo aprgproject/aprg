@@ -40,10 +40,10 @@ ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom
     Value previousDigits = 0;
     for (Value numberForDigitsSum = m_lastNumber; numberForDigitsSum > 0;
          numberForDigitsSum /= 10, ++digitIndex, previousPowerOf10 = powerOf10, powerOf10 *= 10) {
-        Value digitValue = numberForDigitsSum % 10;
-        Value sumAtDigit = getSummationFrom1ToN(digitValue - 1) * powerOf10 + digitValue * (previousDigits + 1);
-        Value numberOf0To9 = digitIndex * previousPowerOf10;
-        Value sumAtLessSignificantDigits = digitValue * numberOf0To9 * getSummationFrom1ToN(9);
+        Value const digitValue = numberForDigitsSum % 10;
+        Value const sumAtDigit = getSummationFrom1ToN(digitValue - 1) * powerOf10 + digitValue * (previousDigits + 1);
+        Value const numberOf0To9 = digitIndex * previousPowerOf10;
+        Value const sumAtLessSignificantDigits = digitValue * numberOf0To9 * getSummationFrom1ToN(9);
 
         result += sumAtDigit + sumAtLessSignificantDigits;
         previousDigits += digitValue * powerOf10;
@@ -64,7 +64,7 @@ ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom
     if (number < 10) {
         result = getSummationFrom1ToN(number);
     } else {
-        Value numberOfDigitsMinus1 = getLogarithmForIntegers(10, number);
+        Value const numberOfDigitsMinus1 = getLogarithmForIntegers(10, number);
 
         Values sumAtDigitIndex(numberOfDigitsMinus1 + 1);
         // sumAtDigitIndex[0]=0;
@@ -78,9 +78,9 @@ ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom
                 10 * sumAtDigitIndex[digitIndex - 1] + 45 * getRaiseToPowerForIntegers(10, digitIndex - 1);
         }
 
-        Value highestPowerOf10 = getRaiseToPowerForIntegers(10, numberOfDigitsMinus1);
-        Value mostSignificantDigit = number / highestPowerOf10;
-        Value remainingDigits = number % highestPowerOf10;
+        Value const highestPowerOf10 = getRaiseToPowerForIntegers(10, numberOfDigitsMinus1);
+        Value const mostSignificantDigit = number / highestPowerOf10;
+        Value const remainingDigits = number % highestPowerOf10;
 
         result = mostSignificantDigit * sumAtDigitIndex[numberOfDigitsMinus1] +
                  mostSignificantDigit * (mostSignificantDigit - 1) / 2 * highestPowerOf10 +

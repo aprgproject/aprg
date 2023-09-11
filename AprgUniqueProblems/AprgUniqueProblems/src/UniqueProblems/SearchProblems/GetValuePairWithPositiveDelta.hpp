@@ -21,7 +21,7 @@ public:
             Index lowerIndex(0);
             Index higherIndex(1);
             while (lowerIndex < higherIndex && higherIndex < static_cast<Index>(m_sortedValues.size())) {
-                Value currentPositiveDelta = m_sortedValues[higherIndex] - m_sortedValues[lowerIndex];
+                Value const currentPositiveDelta = m_sortedValues[higherIndex] - m_sortedValues[lowerIndex];
                 if (currentPositiveDelta == targetPositiveDelta) {
                     result = {m_sortedValues[lowerIndex], m_sortedValues[higherIndex]};
                     break;
