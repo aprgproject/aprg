@@ -19,7 +19,7 @@ TEST(CPlusPlusFileFixerTest, DISABLED_ActualRun) {
 
 TEST(CPlusPlusFileFixerTest, CPlusPlusFileHeadersAreCorrected) {
     CPlusPlusFileFixer fixer;
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
+    AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << R"(#include <file2.hpp>)"
@@ -84,7 +84,7 @@ TEST(CPlusPlusFileFixerTest, CPlusPlusFileHeadersAreCorrected) {
 
 TEST(CPlusPlusFileFixerTest, CPlusPlusFileMainHeaderIsConvertedToQuotationHeader) {
     CPlusPlusFileFixer fixer;
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
+    AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << R"(#include <)" << file1ToReadPathHandler.getFile() << R"(>)"
@@ -111,7 +111,7 @@ TEST(CPlusPlusFileFixerTest, CPlusPlusFileMainHeaderIsConvertedToQuotationHeader
 
 TEST(CPlusPlusFileFixerTest, TrailingEmptyLineAreRemoved) {
     CPlusPlusFileFixer fixer;
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
+    AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << R"(         This is a line in the code)"
@@ -136,7 +136,7 @@ TEST(CPlusPlusFileFixerTest, TrailingEmptyLineAreRemoved) {
 
 TEST(CPlusPlusFileFixerTest, NamespaceFormattingIsCorrected) {
     CPlusPlusFileFixer fixer;
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
+    AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << R"(namespace samplenamespace {)"
@@ -162,7 +162,7 @@ TEST(CPlusPlusFileFixerTest, NamespaceFormattingIsCorrected) {
 
 TEST(CPlusPlusFileFixerTest, SmallUInNumberIsConvertedToCapitalU) {
     CPlusPlusFileFixer fixer;
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
+    AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << R"(u)"
@@ -220,7 +220,7 @@ TEST(CPlusPlusFileFixerTest, SmallUInNumberIsConvertedToCapitalU) {
 
 TEST(CPlusPlusFileFixerTest, DISABLED_TwoCascadingLoopsDetection) {
     CPlusPlusFileFixer fixer;
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
+    AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << R"(for(SomeDetailsHere))"

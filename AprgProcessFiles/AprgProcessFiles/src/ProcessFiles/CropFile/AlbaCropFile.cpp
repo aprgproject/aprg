@@ -25,10 +25,10 @@ bool AlbaCropFile::isOutputFileWritten() const { return m_isOutputFileWritten; }
 
 void AlbaCropFile::processFile(string const& inputFilePath, string const& outputFilePath) {
     m_isOutputFileWritten = false;
-    AlbaLocalPathHandler inputPathHandler(inputFilePath);
-    AlbaLocalPathHandler outputPathHandler(outputFilePath);
+    AlbaLocalPathHandler const inputPathHandler(inputFilePath);
+    AlbaLocalPathHandler const outputPathHandler(outputFilePath);
 
-    double foundLocation(getLocationOfPrioritizedPrint(inputPathHandler.getFullPath()));
+    double const foundLocation(getLocationOfPrioritizedPrint(inputPathHandler.getFullPath()));
     if (foundLocation >= 0) {
         performCropForFile(inputPathHandler.getFullPath(), outputPathHandler.getFullPath(), foundLocation);
     } else {
@@ -43,8 +43,8 @@ AlbaCropFile::LocationsInFile AlbaCropFile::getLocationsInFile(
     LocationsInFile locations{};
     locations.startLocation = foundLocation - (m_cropSize / 2);
     locations.endLocation = foundLocation + (m_cropSize / 2);
-    double overFlowOnTheLeft = -locations.startLocation;
-    double overFlowOnTheRight = locations.endLocation - fileSize;
+    double const overFlowOnTheLeft = -locations.startLocation;
+    double const overFlowOnTheRight = locations.endLocation - fileSize;
     if (overFlowOnTheLeft > 0 || overFlowOnTheRight > 0) {
         if (overFlowOnTheLeft < 0 && overFlowOnTheRight + overFlowOnTheLeft <= 0) {
             locations.startLocation -= overFlowOnTheRight;
@@ -66,14 +66,14 @@ void AlbaCropFile::performCropForFile(
     ofstream outputFileStream(outputFilePath);
 
     AlbaFileReader fileReader(inputFileStream);
-    LocationsInFile locations(getLocationsInFile(foundLocation, fileReader.getFileSize()));
+    LocationsInFile const locations(getLocationsInFile(foundLocation, fileReader.getFileSize()));
     inputFileStream.clear();
     fileReader.moveLocation(static_cast<uint64_t>(locations.startLocation));
 
-    double locationDifference = locations.endLocation - locations.startLocation;
+    double const locationDifference = locations.endLocation - locations.startLocation;
     while (fileReader.isNotFinished()) {
-        double currentLocation = fileReader.getCurrentLocation();
-        string lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
+        double const currentLocation = fileReader.getCurrentLocation();
+        string const lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
         if (currentLocation < locations.endLocation) {
             m_isOutputFileWritten = true;
             outputFileStream << lineInFile << "\n";
@@ -96,10 +96,10 @@ double AlbaCropFile::getLocationOfPrioritizedPrint(string const& inputFilePath) 
     double foundLocation(-1);
     ifstream inputFileStream(inputFilePath);
     AlbaFileReader fileReader(inputFileStream);
-    double sizeOfFile = fileReader.getFileSize();
+    double const sizeOfFile = fileReader.getFileSize();
     while (fileReader.isNotFinished()) {
-        double currentLocation = fileReader.getCurrentLocation();
-        string lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
+        double const currentLocation = fileReader.getCurrentLocation();
+        string const lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
         if (m_prioritizedLineEvaluator.evaluate(lineInFile)) {
             cout << "CropFile: Found the prioritized line in input file. Line: " << lineInFile << "\n";
             foundLocation = currentLocation;

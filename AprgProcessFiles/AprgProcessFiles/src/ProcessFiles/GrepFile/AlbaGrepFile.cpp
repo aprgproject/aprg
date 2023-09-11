@@ -21,14 +21,14 @@ bool AlbaGrepFile::isOutputFileWritten() const { return m_isOutputFileWritten; }
 
 void AlbaGrepFile::processFile(string const& inputFilePath, string const& outputFilePath) {
     m_isOutputFileWritten = false;
-    AlbaLocalPathHandler inputPathHandler(inputFilePath);
-    AlbaLocalPathHandler outputPathHandler(outputFilePath);
+    AlbaLocalPathHandler const inputPathHandler(inputFilePath);
+    AlbaLocalPathHandler const outputPathHandler(outputFilePath);
     ifstream inputFileStream(inputPathHandler.getFullPath());
     ofstream outputFileStream(outputPathHandler.getFullPath());
     AlbaFileReader fileReader(inputFileStream);
-    double sizeOfFile = fileReader.getFileSize();
+    double const sizeOfFile = fileReader.getFileSize();
     while (fileReader.isNotFinished()) {
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if (m_lineGrepEvaluator.evaluate(lineInLogs)) {
             m_isOutputFileWritten = true;
             outputFileStream << lineInLogs << "\n";

@@ -12,7 +12,7 @@ FileDestructor::FileDestructor() : m_pathToDestroy(AlbaLocalPathHandler::createP
 
 void FileDestructor::destroyFilesAndDirectories(string const& path) {
     cout << "Destroying files in: [" << path << "]\n";
-    AlbaLocalPathHandler pathHandler(path);
+    AlbaLocalPathHandler const pathHandler(path);
     ListOfPaths listOfFiles;
     ListOfPaths listOfDirectories;
     pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
@@ -69,7 +69,7 @@ void FileDestructor::destroy(string const& path) const {
 }
 
 void FileDestructor::renameDirectoriesUnderneath(string const& directoryPath) const {
-    AlbaLocalPathHandler pathHandler(directoryPath);
+    AlbaLocalPathHandler const pathHandler(directoryPath);
     ListOfPaths listOfFiles;
     ListOfPaths listOfDirectories;
     pathHandler.findFilesAndDirectoriesOneDepth("*.*", listOfFiles, listOfDirectories);

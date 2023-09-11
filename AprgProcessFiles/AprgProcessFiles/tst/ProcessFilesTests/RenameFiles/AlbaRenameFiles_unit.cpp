@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(AlbaRenameFilesTest, DISABLED_RealExample) {
-    AlbaRenameFiles renameFiles(
+    AlbaRenameFiles const renameFiles(
         R"(N:\Branches\APRG\AprgBitmapFilters\SampleBitmaps\AnimizeMultipleFilesTest\output2test)");
     renameFiles.renameWithIncreasingNumbers("JohnMayer", 0, 6);
 }

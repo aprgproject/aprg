@@ -11,7 +11,7 @@ AlbaRenameFiles::AlbaRenameFiles(string const& directoryPath) : m_directoryPathH
 
 void AlbaRenameFiles::renameWithIncreasingNumbers(
     string const& prefix, int const startingNumber, int const fieldWidth) const {
-    StringConverterWithFormatting converter(fieldWidth, '0');
+    StringConverterWithFormatting const converter(fieldWidth, '0');
 
     ListOfPaths listOfFiles;
     ListOfPaths listOfDirectories;

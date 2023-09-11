@@ -30,7 +30,7 @@ void retrieveNumberOfFilesAndDirectoriesFromPath(
 }  // namespace
 
 TEST(SampleTest, DestroyOneFileTest) {
-    FileDestructor fileDestructor;
+    FileDestructor const fileDestructor;
     AlbaLocalPathHandler pathHandler(APRG_FILE_DESTRUCTION_TEST_DIRECTORY);
     unsigned int numberOfFiles = 0;
     unsigned int numberOfDirectories = 0;

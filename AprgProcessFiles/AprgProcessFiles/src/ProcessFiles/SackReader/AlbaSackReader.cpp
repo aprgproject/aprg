@@ -60,16 +60,16 @@ void AlbaSackReader::combineWords(stringHelper::strings& tokens) {
     };
     vector<TokenAndIndex> recentWords;
     for (int i = 0; i < static_cast<int>(tokens.size()); ++i) {
-        string token(tokens[i]);
+        string const token(tokens[i]);
         if (stringHelper::isIdentifier(token)) {
             TokenAndIndex tokenAndIndex{};
             tokenAndIndex.index = i;
             tokenAndIndex.token = token;
             recentWords.emplace_back(tokenAndIndex);
-            int lastIndex = static_cast<int>(recentWords.size()) - 1;
+            int const lastIndex = static_cast<int>(recentWords.size()) - 1;
             if (lastIndex >= 2) {
-                string lastThreeWords = recentWords[lastIndex - 2].token + " " + recentWords[lastIndex - 1].token +
-                                        " " + recentWords[lastIndex].token;
+                string const lastThreeWords = recentWords[lastIndex - 2].token + " " +
+                                              recentWords[lastIndex - 1].token + " " + recentWords[lastIndex].token;
                 if (tokensToCombine.end() !=
                     std::find(tokensToCombine.begin(), tokensToCombine.end(), lastThreeWords)) {
                     tokens.erase(
@@ -82,7 +82,7 @@ void AlbaSackReader::combineWords(stringHelper::strings& tokens) {
                 }
             }
             if (lastIndex >= 1) {
-                string lastTwoWords = recentWords[lastIndex - 1].token + " " + recentWords[lastIndex].token;
+                string const lastTwoWords = recentWords[lastIndex - 1].token + " " + recentWords[lastIndex].token;
                 if (tokensToCombine.end() != std::find(tokensToCombine.begin(), tokensToCombine.end(), lastTwoWords)) {
                     tokens.erase(
                         tokens.begin() + recentWords[lastIndex - 1].index,
@@ -114,7 +114,7 @@ void AlbaSackReader::combineArrayOperators(stringHelper::strings& tokens) {
         } else if (1 == state) {
             if (']' == token[0]) {
                 closingBracketIndex = i;
-                string combinedArrayString = accumulate(
+                string const combinedArrayString = accumulate(
                     tokens.begin() + nonWhiteSpaceIndex, tokens.begin() + closingBracketIndex + 1, string(),
                     [&](string const& partialResult, string const& currentToken) {
                         string nextResult = partialResult;
@@ -167,14 +167,14 @@ void AlbaSackReader::processDirectory(string const& path) {
 }
 
 void AlbaSackReader::processFile(string const& path) {
-    AlbaLocalPathHandler filePathHandler(path);
+    AlbaLocalPathHandler const filePathHandler(path);
     stringHelper::strings tokens;
     if (m_fileEvaluator.isInvalid() || m_fileEvaluator.evaluate(filePathHandler.getFile())) {
         cout << "ProcessFile: " << path << "\n";
         ifstream inputLogFileStream(filePathHandler.getFullPath());
         AlbaFileReader fileReader(inputLogFileStream);
         while (fileReader.isNotFinished()) {
-            string line(fileReader.getLineAndIgnoreWhiteSpaces());
+            string const line(fileReader.getLineAndIgnoreWhiteSpaces());
             tokenize(tokens, line);
         }
     }

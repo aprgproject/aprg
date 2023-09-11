@@ -18,7 +18,7 @@ TEST(AlbaSackReaderTest, SackTest) {
 }
 
 TEST(AlbaSackReaderTest, ClassesAreRecognized) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
+    AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "class myClass\n";
@@ -30,7 +30,7 @@ TEST(AlbaSackReaderTest, ClassesAreRecognized) {
 
     AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
     sackReader.process();
-    AlbaSackReaderType myClass = sackReader.getType("myClass");
+    AlbaSackReaderType const myClass = sackReader.getType("myClass");
     AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();
     ASSERT_EQ(2U, myClassParameters.size());
     EXPECT_EQ("unsigned long int", myClassParameters[0].getTypeName());
@@ -40,7 +40,7 @@ TEST(AlbaSackReaderTest, ClassesAreRecognized) {
 }
 
 TEST(AlbaSackReaderTest, ClassesAreRecognizedInForwardDeclaration) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
+    AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "class myClass;\n";
@@ -48,13 +48,13 @@ TEST(AlbaSackReaderTest, ClassesAreRecognizedInForwardDeclaration) {
 
     AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
     sackReader.process();
-    AlbaSackReaderType myClass = sackReader.getType("myClass");
-    AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();
+    AlbaSackReaderType const myClass = sackReader.getType("myClass");
+    AlbaSackReaderType::Parameters const myClassParameters = myClass.getParameters();
     ASSERT_EQ(0U, myClassParameters.size());
 }
 
 TEST(AlbaSackReaderTest, TypedefAreRecognized) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
+    AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef type1 type2;\n";
@@ -62,11 +62,11 @@ TEST(AlbaSackReaderTest, TypedefAreRecognized) {
 
     AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
     sackReader.process();
-    AlbaSackReaderType type1 = sackReader.getType("type1");
-    AlbaSackReaderType::Parameters type1Parameters = type1.getParameters();
+    AlbaSackReaderType const type1 = sackReader.getType("type1");
+    AlbaSackReaderType::Parameters const type1Parameters = type1.getParameters();
     AlbaSackReaderType::TypeNames type1OtherTypes = type1.getOtherTypes();
-    AlbaSackReaderType type2 = sackReader.getType("type2");
-    AlbaSackReaderType::Parameters type2Parameters = type2.getParameters();
+    AlbaSackReaderType const type2 = sackReader.getType("type2");
+    AlbaSackReaderType::Parameters const type2Parameters = type2.getParameters();
     AlbaSackReaderType::TypeNames type2OtherTypes = type2.getOtherTypes();
     ASSERT_EQ(0U, type1Parameters.size());
     ASSERT_EQ(1U, type1OtherTypes.size());
@@ -77,7 +77,7 @@ TEST(AlbaSackReaderTest, TypedefAreRecognized) {
 }
 
 TEST(AlbaSackReaderTest, TypedefArrayAreRecognized) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
+    AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef type1 type2 [ 5 ] ;\n";
@@ -85,11 +85,11 @@ TEST(AlbaSackReaderTest, TypedefArrayAreRecognized) {
 
     AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
     sackReader.process();
-    AlbaSackReaderType type1 = sackReader.getType("type1");
-    AlbaSackReaderType::Parameters type1Parameters = type1.getParameters();
+    AlbaSackReaderType const type1 = sackReader.getType("type1");
+    AlbaSackReaderType::Parameters const type1Parameters = type1.getParameters();
     AlbaSackReaderType::TypeNames type1OtherTypes = type1.getOtherTypes();
-    AlbaSackReaderType type2 = sackReader.getType("type2[5]");
-    AlbaSackReaderType::Parameters type2Parameters = type2.getParameters();
+    AlbaSackReaderType const type2 = sackReader.getType("type2[5]");
+    AlbaSackReaderType::Parameters const type2Parameters = type2.getParameters();
     AlbaSackReaderType::TypeNames type2OtherTypes = type2.getOtherTypes();
     ASSERT_EQ(0U, type1Parameters.size());
     ASSERT_EQ(1U, type1OtherTypes.size());
@@ -100,7 +100,7 @@ TEST(AlbaSackReaderTest, TypedefArrayAreRecognized) {
 }
 
 TEST(AlbaSackReaderTest, TypedefWithStructAreRecognized) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
+    AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef struct type1 type2;\n";
@@ -108,15 +108,15 @@ TEST(AlbaSackReaderTest, TypedefWithStructAreRecognized) {
 
     AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
     sackReader.process();
-    AlbaSackReaderType type2 = sackReader.getType("type2");
-    AlbaSackReaderType::Parameters type2Parameters = type2.getParameters();
-    AlbaSackReaderType::TypeNames type2OtherTypes = type2.getOtherTypes();
+    AlbaSackReaderType const type2 = sackReader.getType("type2");
+    AlbaSackReaderType::Parameters const type2Parameters = type2.getParameters();
+    AlbaSackReaderType::TypeNames const type2OtherTypes = type2.getOtherTypes();
     ASSERT_EQ(0U, type2Parameters.size());
     ASSERT_EQ(0U, type2OtherTypes.size());
 }
 
 TEST(AlbaSackReaderTest, TypedefWithStructWithParametersAreRecognized) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
+    AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef struct myStruct1\n";
@@ -128,9 +128,9 @@ TEST(AlbaSackReaderTest, TypedefWithStructWithParametersAreRecognized) {
 
     AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
     sackReader.process();
-    AlbaSackReaderType myClass = sackReader.getType("myStruct2");
+    AlbaSackReaderType const myClass = sackReader.getType("myStruct2");
     AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();
-    AlbaSackReaderType::TypeNames myClassOtherTypes = myClass.getOtherTypes();
+    AlbaSackReaderType::TypeNames const myClassOtherTypes = myClass.getOtherTypes();
     ASSERT_EQ(2U, myClassParameters.size());
     EXPECT_EQ("unsigned long int", myClassParameters[0].getTypeName());
     EXPECT_EQ("integerParameter", myClassParameters[0].getParameterName());
@@ -140,7 +140,7 @@ TEST(AlbaSackReaderTest, TypedefWithStructWithParametersAreRecognized) {
 }
 
 TEST(AlbaSackReaderTest, TypedefWithSingleStructWithParametersAreRecognized) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
+    AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef struct\n";
@@ -152,9 +152,9 @@ TEST(AlbaSackReaderTest, TypedefWithSingleStructWithParametersAreRecognized) {
 
     AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
     sackReader.process();
-    AlbaSackReaderType myClass = sackReader.getType("myStruct1");
+    AlbaSackReaderType const myClass = sackReader.getType("myStruct1");
     AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();
-    AlbaSackReaderType::TypeNames myClassOtherTypes = myClass.getOtherTypes();
+    AlbaSackReaderType::TypeNames const myClassOtherTypes = myClass.getOtherTypes();
     ASSERT_EQ(2U, myClassParameters.size());
     EXPECT_EQ("unsigned long int", myClassParameters[0].getTypeName());
     EXPECT_EQ("integerParameter", myClassParameters[0].getParameterName());
@@ -165,7 +165,7 @@ TEST(AlbaSackReaderTest, TypedefWithSingleStructWithParametersAreRecognized) {
 }
 
 TEST(AlbaSackReaderTest, TypedefWithUnionWithParametersAreRecognized) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
+    AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef union myUnion1\n";
@@ -177,9 +177,9 @@ TEST(AlbaSackReaderTest, TypedefWithUnionWithParametersAreRecognized) {
 
     AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
     sackReader.process();
-    AlbaSackReaderType myClass = sackReader.getType("myUnion2");
+    AlbaSackReaderType const myClass = sackReader.getType("myUnion2");
     AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();
-    AlbaSackReaderType::TypeNames myClassOtherTypes = myClass.getOtherTypes();
+    AlbaSackReaderType::TypeNames const myClassOtherTypes = myClass.getOtherTypes();
     ASSERT_EQ(2U, myClassParameters.size());
     EXPECT_EQ("unsigned long int", myClassParameters[0].getTypeName());
     EXPECT_EQ("integerParameter", myClassParameters[0].getParameterName());
@@ -190,7 +190,7 @@ TEST(AlbaSackReaderTest, TypedefWithUnionWithParametersAreRecognized) {
 }
 
 TEST(AlbaSackReaderTest, TypedefWithEnumAreRecognized) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
+    AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef enum {\n";
@@ -203,8 +203,8 @@ TEST(AlbaSackReaderTest, TypedefWithEnumAreRecognized) {
 
     AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
     sackReader.process();
-    AlbaSackReaderType myClass = sackReader.getType("MyEnum");
-    AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();
+    AlbaSackReaderType const myClass = sackReader.getType("MyEnum");
+    AlbaSackReaderType::Parameters const myClassParameters = myClass.getParameters();
     ASSERT_EQ(0U, myClassParameters.size());
 }
 

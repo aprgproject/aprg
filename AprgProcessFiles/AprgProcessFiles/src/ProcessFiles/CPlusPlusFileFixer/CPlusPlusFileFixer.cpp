@@ -95,7 +95,7 @@ void CPlusPlusFileFixer::processDirectory(string const& path) {
     set<string> listOfDirectories;
     AlbaLocalPathHandler(path).findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
     for (string const& filePath : listOfFiles) {
-        AlbaLocalPathHandler filePathHandler(filePath);
+        AlbaLocalPathHandler const filePathHandler(filePath);
         if (!isPathIgnored(filePath)) {
             if ("cpp" == filePathHandler.getExtension() || "hpp" == filePathHandler.getExtension()) {
                 processFile(filePathHandler.getFullPath());
@@ -170,7 +170,7 @@ bool CPlusPlusFileFixer::isGtestHeader(string const& header) { return isStringFo
 
 bool CPlusPlusFileFixer::isQtHeader(string const& header) {
     bool result(false);
-    AlbaLocalPathHandler headerFileHandler(header);
+    AlbaLocalPathHandler const headerFileHandler(header);
     if (header.length() >= 2) {
         if ('Q' == header[0] && ('t' == header[1] || isCapitalLetter(header[1])) &&
             headerFileHandler.getExtension().empty()) {
@@ -181,7 +181,7 @@ bool CPlusPlusFileFixer::isQtHeader(string const& header) {
 }
 
 void CPlusPlusFileFixer::notifyIfAlbaDebugHeaderExistInProductionCode(string const& path) const {
-    bool isAlbaDebugHeaderFound =
+    bool const isAlbaDebugHeaderFound =
         (find(
              m_headerListFromAngleBrackets.cbegin(), m_headerListFromAngleBrackets.cend(),
              string("Debug/AlbaDebug.hpp")) != m_headerListFromAngleBrackets.end());
@@ -192,12 +192,12 @@ void CPlusPlusFileFixer::notifyIfAlbaDebugHeaderExistInProductionCode(string con
 }
 
 void CPlusPlusFileFixer::notifyIfIostreamHeaderExistInProductionCode(string const& path) const {
-    AlbaLocalPathHandler filePathHandler(path);
-    bool isIostreamFound =
+    AlbaLocalPathHandler const filePathHandler(path);
+    bool const isIostreamFound =
         (find(m_headerListFromAngleBrackets.cbegin(), m_headerListFromAngleBrackets.cend(), string("iostream")) !=
          m_headerListFromAngleBrackets.end());
     // bool isCpp = filePathHandler.getExtension() == "cpp";
-    bool isUnitTest = isStringFoundCaseSensitive(filePathHandler.getFile(), "_unit.cpp");
+    bool const isUnitTest = isStringFoundCaseSensitive(filePathHandler.getFile(), "_unit.cpp");
     if (isIostreamFound && !isUnitTest) {
         // && !isCpp) // !isUnitTest)
         cout << "CHECK THIS: iostream found in:[" << path << "].\n";
@@ -205,7 +205,7 @@ void CPlusPlusFileFixer::notifyIfIostreamHeaderExistInProductionCode(string cons
 }
 
 void CPlusPlusFileFixer::notifyIfCAssertHeaderExistInProductionCode(string const& path) const {
-    bool isCAssertFound =
+    bool const isCAssertFound =
         (find(m_headerListFromAngleBrackets.cbegin(), m_headerListFromAngleBrackets.cend(), string("cassert")) !=
          m_headerListFromAngleBrackets.end());
     if (isCAssertFound) {
@@ -269,12 +269,12 @@ void CPlusPlusFileFixer::checkFile(string const& path) {
 }
 
 void CPlusPlusFileFixer::readContentsFromFile(string const& path) {
-    AlbaLocalPathHandler filePathHandler(path);
+    AlbaLocalPathHandler const filePathHandler(path);
     ifstream inputLogFileStream(filePathHandler.getFullPath());
     AlbaFileReader fileReader(inputLogFileStream);
     bool isOnHeaderPart(true);
     while (fileReader.isNotFinished()) {
-        string line(fileReader.getLine());
+        string const line(fileReader.getLine());
         if (isOnHeaderPart) {
             if (isStringFoundCaseSensitive(line, "#include")) {
                 notifyIfThereAreCommentsInHeader(path, line);
@@ -292,11 +292,11 @@ void CPlusPlusFileFixer::readContentsFromFile(string const& path) {
 }
 
 void CPlusPlusFileFixer::readLineWithSharpInclude(string const& line, string const& path) {
-    string headerFromAngleBrackets(getStringInBetweenTwoStrings(line, R"(<)", R"(>)"));
-    string headerFromQuotations(getStringInBetweenTwoStrings(line, R"(")", R"(")"));
+    string const headerFromAngleBrackets(getStringInBetweenTwoStrings(line, R"(<)", R"(>)"));
+    string const headerFromQuotations(getStringInBetweenTwoStrings(line, R"(")", R"(")"));
     if (!headerFromAngleBrackets.empty()) {
-        AlbaLocalPathHandler filePathHandler(path);
-        AlbaPathHandler headerFromAngleBracketsPathHandler(headerFromAngleBrackets, "/");
+        AlbaLocalPathHandler const filePathHandler(path);
+        AlbaPathHandler const headerFromAngleBracketsPathHandler(headerFromAngleBrackets, "/");
         if (headerFromAngleBracketsPathHandler.getFilenameOnly() == filePathHandler.getFilenameOnly() &&
             isStringFoundCaseSensitive(filePathHandler.getFullPath(), headerFromAngleBrackets)) {
             addHeaderFileFromQuotations(filePathHandler.getFile());
@@ -363,7 +363,7 @@ void CPlusPlusFileFixer::removeTrailingLinesInCode() {
 
 void CPlusPlusFileFixer::fixNamespaces() {
     for (string& line : m_linesAfterTheHeader) {
-        string firstWord(getStringBeforeThisString(getStringWithoutStartingAndTrailingWhiteSpace(line), " "));
+        string const firstWord(getStringBeforeThisString(getStringWithoutStartingAndTrailingWhiteSpace(line), " "));
         if ("namespace" == firstWord) {
             replaceAllAndReturnIfFound(line, "{", "\n{");
         }
@@ -393,17 +393,17 @@ void CPlusPlusFileFixer::fixSmallUToCapitalUInNumbers() {
 }
 
 void CPlusPlusFileFixer::addHeaderFileFromAngleBrackets(string const& header) {
-    AlbaPathHandler headerPathHandler(header, "/");
+    AlbaPathHandler const headerPathHandler(header, "/");
     m_headerListFromAngleBrackets.emplace_back(headerPathHandler.getFullPath());
 }
 
 void CPlusPlusFileFixer::addHeaderFileFromQuotations(string const& header) {
-    AlbaPathHandler headerPathHandler(header, "/");
+    AlbaPathHandler const headerPathHandler(header, "/");
     m_headerListFromQuotations.emplace(headerPathHandler.getFullPath());
 }
 
 void CPlusPlusFileFixer::writeFile(string const& path) {
-    AlbaLocalPathHandler filePathHandler(path);
+    AlbaLocalPathHandler const filePathHandler(path);
     ofstream outputLogFileStream(filePathHandler.getFullPath());
     if (m_isPragmaOnceFound) {
         outputLogFileStream << "#pragma once\n";
