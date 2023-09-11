@@ -326,8 +326,8 @@ jobs:
         if: contains(matrix.configurationName, 'Clang') && inputs.enableAsan
         working-directory: ${{ matrix.project }}
         run: |
-          "$buildAndRunScriptPath" clean ${{ env.buildDirectory }}
           "$buildAndRunScriptPath" cleanAndConfigureWithClangWithAsan "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          echo "Building and running with ASAN..."
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
@@ -337,7 +337,6 @@ jobs:
         if: contains(matrix.configurationName, 'Clang') && inputs.enableStaticAnalyzers
         working-directory: ${{ matrix.project }}
         run: |
-          currentDirectory="$(pwd)"
           "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
           echo "Running Static Analysis..."
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}

@@ -13,15 +13,15 @@ cppProjects=""
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 excludedConfigurations=""
-source "$scriptDirectory/ExcludedConfigurations.sh"
+projectsThatAreWindowsOnly=""
+projectsThatAreLinuxOnly=""
+source "$scriptDirectory/ProjectsThatAreOsDependent.sh"
 projectsWithBoost=""
 source "$scriptDirectory/ProjectsWithBoost.sh"
 projectsWithGsl=""
 source "$scriptDirectory/ProjectsWithGsl.sh"
 projectsWith7Zip=""
 source "$scriptDirectory/ProjectsWith7Zip.sh"
-projectsWithWindowsStaticAnalysis=""
-source "$scriptDirectory/ProjectsWithWindowsStaticAnalysis.sh"
 
 scriptPrint "$scriptName" "$LINENO" "The scriptOption is: [$scriptOption]"
 
@@ -59,6 +59,14 @@ scriptPrint "$scriptName" "$LINENO" "The cppProjects are: [$cppProjects]"
 # shellcheck disable=SC2154
 echo "APRG_CPP_DIRECTORIES=[$cppProjects]" >> "$GITHUB_OUTPUT"
 
+scriptPrint "$scriptName" "$LINENO" "The projectsThatAreWindowsOnly are: [$projectsThatAreWindowsOnly]"
+# shellcheck disable=SC2154
+echo "APRG_WINDOWS_ONLY_PROJECTS=[$projectsThatAreWindowsOnly]" >> "$GITHUB_OUTPUT"
+
+scriptPrint "$scriptName" "$LINENO" "The projectsThatAreLinuxOnly are: [$projectsThatAreLinuxOnly]"
+# shellcheck disable=SC2154
+echo "APRG_LINUX_ONLY_PROJECTS=[$projectsThatAreLinuxOnly]" >> "$GITHUB_OUTPUT"
+
 scriptPrint "$scriptName" "$LINENO" "The excludedConfigurations are: [$excludedConfigurations]"
 # shellcheck disable=SC2154
 echo "APRG_EXCLUDED_CONFIGURATIONS=[$excludedConfigurations]" >> "$GITHUB_OUTPUT"
@@ -74,7 +82,3 @@ echo "APRG_PROJECTS_WITH_GSL=[$projectsWithGsl]" >> "$GITHUB_OUTPUT"
 scriptPrint "$scriptName" "$LINENO" "The projectsWith7Zip are: [$projectsWith7Zip]"
 # shellcheck disable=SC2154
 echo "APRG_PROJECTS_WITH_7ZIP=[$projectsWith7Zip]" >> "$GITHUB_OUTPUT"
-
-scriptPrint "$scriptName" "$LINENO" "The projectsWithWindowsStaticAnalysis are: [$projectsWithWindowsStaticAnalysis]"
-# shellcheck disable=SC2154
-echo "APRG_PROJECTS_WITH_WINDOWS_STATIC_ANALYSIS=[$projectsWithWindowsStaticAnalysis]" >> "$GITHUB_OUTPUT"

@@ -34,7 +34,8 @@ jobs:
     outputs:
       staticAnalysisJobId: ${{ steps.idOfGetJobIdStep.outputs.STATIC_ANALYSIS_JOB_ID }}
       projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_CPP_DIRECTORIES }}
-      projectsWithWindowsStaticAnalysis: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_WINDOWS_STATIC_ANALYSIS }}
+      windowsOnlyProjects: ${{ steps.idOfGetCppProjectStep.outputs.APRG_WINDOWS_ONLY_PROJECTS }}
+      linuxOnlyProjects: ${{ steps.idOfGetCppProjectStep.outputs.APRG_LINUX_ONLY_PROJECTS }}
     steps:
       - name: Checkout code for changes checking
         id: idOfCheckout
@@ -74,7 +75,7 @@ jobs:
   runStaticAnalyzersOnCppProjects:
     name: JobId[${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}] on ${{ matrix.project }} | Run Static Analyzers with Report
     needs: determineCppProjects
-    runs-on: 'windows-latest' #${{ contains(fromJSON(needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis), matrix.project) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
+    runs-on: 'windows-latest' #${{ contains(fromJSON(needs.determineCppProjects.outputs.windowsOnlyProjects), matrix.project) && 'windows-latest' || 'ubuntu-latest' }} # ternary operator
     strategy:
       fail-fast: false
       matrix:
@@ -90,7 +91,8 @@ jobs:
           echo "github.event.action: [${{ github.event.action }}]"
           echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
           echo "c/c++ next project: [${{ matrix.project }}]"
-          echo "projects with windows static analysis: [${{ needs.determineCppProjects.outputs.projectsWithWindowsStaticAnalysis }}]"
+          echo "windows only projects: [${{ needs.determineCppProjects.outputs.windowsOnlyProjects }}]"
+          echo "linus only projects: [${{ needs.determineCppProjects.outputs.linuxOnlyProjects }}]"
           echo "operating system: [${{ runner.os }}]"
           echo "staticAnalysisFilename: [${{ env.staticAnalysisFilename }}]"
           echo "staticAnalysisJobId: [${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}]"
