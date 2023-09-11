@@ -4,11 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 // TEST(ChessPeekTest, DISABLED_CalculationDetailsSavedAndCanBeDisplayedLater) {
 //    ChessPeek chessPeek;
@@ -51,7 +47,9 @@ TEST(ChessPeekTest, DISABLED_StartNewAnalysisUsingEngineWorks) {
 
 TEST(ChessPeekTest, DISABLED_CalculationDetailsAreFilteredByTimer) {
     ChessPeek chessPeek;
-    ChessPeek::EngineCalculationDetails details1{}, details2{}, details3{};
+    ChessPeek::EngineCalculationDetails details1{};
+    ChessPeek::EngineCalculationDetails details2{};
+    ChessPeek::EngineCalculationDetails details3{};
     details1.depthInPlies = 1;
     details2.depthInPlies = 2;
     details3.depthInPlies = 3;
@@ -62,7 +60,4 @@ TEST(ChessPeekTest, DISABLED_CalculationDetailsAreFilteredByTimer) {
     chessPeek.calculationMonitoringCallBackForEngine(details3);
 }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

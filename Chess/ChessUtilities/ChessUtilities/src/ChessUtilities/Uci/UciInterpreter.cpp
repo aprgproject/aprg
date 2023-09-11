@@ -5,9 +5,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 UciInterpreter::UciInterpreter(CalculationDetails& calculationDetails) : m_calculationDetails(calculationDetails) {}
 
@@ -26,7 +24,7 @@ void UciInterpreter::updateCalculationDetails(string const& stringFromEngine) {
 }
 
 void UciInterpreter::processInfoTokens(strings const& infoTokens) {
-    InfoDetails infoDetails(createInfoDetailsFromInfoTokens(infoTokens));
+    InfoDetails const infoDetails(createInfoDetailsFromInfoTokens(infoTokens));
     if (!infoDetails.pvHalfMoves.empty()) {
         if (infoDetails.multipv == 1) {  // best line (because multipv is 1)
             saveCommonParametersOfBestLine(infoDetails);
@@ -61,7 +59,7 @@ void UciInterpreter::saveVariation(InfoDetails const& infoDetails) {
         auto size = m_calculationDetails.variations.size();
         auto possibleNewSize = infoDetails.multipv;
         auto index = infoDetails.multipv - 1;
-        Variation variation{infoDetails.mateValue, infoDetails.scoreInCentipawns, infoDetails.pvHalfMoves};
+        Variation const variation{infoDetails.mateValue, infoDetails.scoreInCentipawns, infoDetails.pvHalfMoves};
         if (possibleNewSize <= static_cast<int>(size)) {
             m_calculationDetails.variations[index] = variation;
         } else if (possibleNewSize == static_cast<int>(size) + 1) {
@@ -79,7 +77,8 @@ UciInterpreter::InfoDetails UciInterpreter::createInfoDetailsFromInfoTokens(stri
         string const& token(tokens[i]);
         if (shouldSkipTheEntireInfo(token)) {
             break;
-        } else if (isACommonParameter(token)) {
+        }
+        if (isACommonParameter(token)) {
             infoDetails.commonParameterNameAndValue.emplace_back(token, tokens[++i]);
         } else if ("multipv" == token) {
             infoDetails.multipv = convertStringToNumber<int>(tokens[++i]);
@@ -109,6 +108,4 @@ bool UciInterpreter::isACommonParameter(string const& token) {
     return find(tokens.cbegin(), tokens.cend(), token) != tokens.cend();
 }
 
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess

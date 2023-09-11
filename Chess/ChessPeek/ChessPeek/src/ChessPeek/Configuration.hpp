@@ -3,26 +3,22 @@
 #include <ChessPeek/CommonTypes.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 class Configuration {
 public:
     enum class Type { ChessDotComVersus, ChessDotComPuzzle, ChessDotComExplorer, LichessVersus, LichessStream };
 
     Configuration() = delete;
-    Configuration(Type const type);
-    stringHelper::StringPairs const& getUciOptionNamesAndValuePairs() const;
-    Type getType() const;
-    XY getTopLeftOfBoard() const;
-    XY getBottomRightOfBoard() const;
-    std::string const& getChessEnginePath() const;
-    std::string const& getScreenShotPath() const;
-    double getWhiteColorLimit() const;
-    double getBlackColorLimit() const;
+    explicit Configuration(Type const type);
+    [[nodiscard]] stringHelper::StringPairs const& getUciOptionNamesAndValuePairs() const;
+    [[nodiscard]] Type getType() const;
+    [[nodiscard]] XY getTopLeftOfBoard() const;
+    [[nodiscard]] XY getBottomRightOfBoard() const;
+    [[nodiscard]] std::string const& getChessEnginePath() const;
+    [[nodiscard]] std::string const& getScreenShotPath() const;
+    [[nodiscard]] double getWhiteColorLimit() const;
+    [[nodiscard]] double getBlackColorLimit() const;
 
 private:
     void initialize();
@@ -42,7 +38,4 @@ private:
     double m_blackColorLimit;
 };
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

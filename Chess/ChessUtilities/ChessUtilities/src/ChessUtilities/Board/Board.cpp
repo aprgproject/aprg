@@ -42,8 +42,8 @@ BoardOrientation Board::getOrientation() const { return m_orientation; }
 Coordinate Board::getCoordinateFromAlgebraicNotation(string const& text) const {
     Coordinate result{};
     if (text.size() == 2) {
-        char letterChar = tolower(text[0]);
-        char numberChar = text[1];
+        char const letterChar = tolower(text[0]);
+        char const numberChar = text[1];
         if (isAToH(letterChar) && is1To8(numberChar)) {
             result = getCorrectCoordinateFromAlgebraicNotation(letterChar - 'a', numberChar - '1');
         }
@@ -73,7 +73,7 @@ Exchange Board::getExchangeAt(Coordinate const& coordinate) const {
         totalCount.attack += count.attack;
         totalCount.defend += count.defend;
     }
-    Piece pieceToCapture(getPieceAt(coordinate));
+    Piece const pieceToCapture(getPieceAt(coordinate));
     int pendingPieceValue = getValueOfPieceType(pieceToCapture.getType());
     int exchangeValue = 0;
     int exchangeCount = 0;
@@ -84,7 +84,7 @@ Exchange Board::getExchangeAt(Coordinate const& coordinate) const {
         }
         if (counts[ai].attack > 0 && counts[di].defend > 0 && pieceValue[ai] == pieceValue[di] &&
             pendingPieceValue == pieceValue[ai] && exchangeValue == 0) {
-            int sameCount = min(counts[ai].attack, counts[di].defend);
+            int const sameCount = min(counts[ai].attack, counts[di].defend);
             counts[ai].attack -= sameCount;
             counts[di].defend -= sameCount;
             totalCount.attack -= sameCount;
@@ -145,7 +145,7 @@ Move Board::getMoveUsingAlgebraicNotation(string const& text, PieceColor const m
     // Source: https://en.wikipedia.org/wiki/Algebraic_text_(chess)
     Move result{};
 
-    CastleType castleType(getCastleTypeWithAlgebraicNotation(text));
+    CastleType const castleType(getCastleTypeWithAlgebraicNotation(text));
     if (CastleType::KingSideCastle == castleType || CastleType::QueenSideCastle == castleType) {
         result = getCastleMove(castleType, moveColor);
     } else {
@@ -183,12 +183,12 @@ string Board::getReadableStringOfMove(Move const& move) const {
 
 string Board::getNotationPartOfFenString() const {
     stringstream ss;
-    CoordinateDataType startpoint = (BoardOrientation::BlackUpWhiteDown == m_orientation)   ? 0
-                                    : (BoardOrientation::WhiteUpBlackDown == m_orientation) ? 7
-                                                                                            : 0;
-    CoordinateDataType end = (BoardOrientation::WhiteUpBlackDown == m_orientation)   ? 0
-                             : (BoardOrientation::BlackUpWhiteDown == m_orientation) ? 7
-                                                                                     : 0;
+    CoordinateDataType const startpoint = (BoardOrientation::BlackUpWhiteDown == m_orientation)   ? 0
+                                          : (BoardOrientation::WhiteUpBlackDown == m_orientation) ? 7
+                                                                                                  : 0;
+    CoordinateDataType const end = (BoardOrientation::WhiteUpBlackDown == m_orientation)   ? 0
+                                   : (BoardOrientation::BlackUpWhiteDown == m_orientation) ? 7
+                                                                                           : 0;
 
     function<bool(CoordinateDataType, CoordinateDataType)> loopCondition;
     if (startpoint <= end) {
@@ -197,12 +197,12 @@ string Board::getNotationPartOfFenString() const {
         loopCondition = greater_equal<CoordinateDataType>{};
     }
 
-    CoordinateDataType interval = startpoint <= end ? 1 : -1;
+    CoordinateDataType const interval = startpoint <= end ? 1 : -1;
     for (CoordinateDataType y = startpoint; loopCondition(y, end); y += interval) {
         int emptyCellsInRank = 0;
         for (CoordinateDataType x = startpoint; loopCondition(x, end); x += interval) {
-            Coordinate coordinate(x, y);
-            Piece piece(getPieceAt(coordinate));
+            Coordinate const coordinate(x, y);
+            Piece const piece(getPieceAt(coordinate));
             if (piece.isEmpty()) {
                 ++emptyCellsInRank;
             } else {
@@ -226,12 +226,12 @@ string Board::getNotationPartOfFenString() const {
 string Board::getCastlingPartOfFenString() const {
     string result;
     if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
-        Piece pieceAtWhiteKing(getPieceAt(Coordinate(4, 7)));
-        Piece pieceAtWhiteRookOnKingSide(getPieceAt(Coordinate(7, 7)));
-        Piece pieceAtWhiteRookOnQueenSide(getPieceAt(Coordinate(0, 7)));
-        Piece pieceAtBlackKing(getPieceAt(Coordinate(4, 0)));
-        Piece pieceAtBlackRookOnKingSide(getPieceAt(Coordinate(7, 0)));
-        Piece pieceAtBlackRookOnQueenSide(getPieceAt(Coordinate(0, 0)));
+        Piece const pieceAtWhiteKing(getPieceAt(Coordinate(4, 7)));
+        Piece const pieceAtWhiteRookOnKingSide(getPieceAt(Coordinate(7, 7)));
+        Piece const pieceAtWhiteRookOnQueenSide(getPieceAt(Coordinate(0, 7)));
+        Piece const pieceAtBlackKing(getPieceAt(Coordinate(4, 0)));
+        Piece const pieceAtBlackRookOnKingSide(getPieceAt(Coordinate(7, 0)));
+        Piece const pieceAtBlackRookOnQueenSide(getPieceAt(Coordinate(0, 0)));
         if (PieceColorAndType::WhiteKing == pieceAtWhiteKing.getColorAndType() &&
             PieceColorAndType::WhiteRook == pieceAtWhiteRookOnKingSide.getColorAndType()) {
             result += "K";
@@ -249,12 +249,12 @@ string Board::getCastlingPartOfFenString() const {
             result += "q";
         }
     } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
-        Piece pieceAtWhiteKing(getPieceAt(Coordinate(3, 0)));
-        Piece pieceAtWhiteRookOnKingSide(getPieceAt(Coordinate(0, 0)));
-        Piece pieceAtWhiteRookOnQueenSide(getPieceAt(Coordinate(7, 0)));
-        Piece pieceAtBlackKing(getPieceAt(Coordinate(3, 7)));
-        Piece pieceAtBlackRookOnKingSide(getPieceAt(Coordinate(0, 7)));
-        Piece pieceAtBlackRookOnQueenSide(getPieceAt(Coordinate(7, 7)));
+        Piece const pieceAtWhiteKing(getPieceAt(Coordinate(3, 0)));
+        Piece const pieceAtWhiteRookOnKingSide(getPieceAt(Coordinate(0, 0)));
+        Piece const pieceAtWhiteRookOnQueenSide(getPieceAt(Coordinate(7, 0)));
+        Piece const pieceAtBlackKing(getPieceAt(Coordinate(3, 7)));
+        Piece const pieceAtBlackRookOnKingSide(getPieceAt(Coordinate(0, 7)));
+        Piece const pieceAtBlackRookOnQueenSide(getPieceAt(Coordinate(7, 7)));
         if (PieceColorAndType::WhiteKing == pieceAtWhiteKing.getColorAndType() &&
             PieceColorAndType::WhiteRook == pieceAtWhiteRookOnKingSide.getColorAndType()) {
             result += "K";
@@ -286,17 +286,17 @@ bool Board::isAPromotionMove(Move const& move) const {
 }
 
 bool Board::isACastlingMove(Move const& move) const {
-    MovePair kingAndRookCastlingMovePair(getMatchingCastlingKingAndRookMovePair(move));
+    MovePair const kingAndRookCastlingMovePair(getMatchingCastlingKingAndRookMovePair(move));
     return kingAndRookCastlingMovePair.first == move;
 }
 
 bool Board::isAPossibleMove(Move const& move) const { return isPossibleMoveBasedFromPieceType(move); }
 
 bool Board::canBeCaptured(Coordinate const& endpoint) const {
-    Piece pieceAtEnd(getPieceAt(endpoint));
+    Piece const pieceAtEnd(getPieceAt(endpoint));
     bool result(false);
     if (!pieceAtEnd.isEmpty()) {
-        PieceColor opponentsColor(getOppositeColor(pieceAtEnd.getColor()));
+        PieceColor const opponentsColor(getOppositeColor(pieceAtEnd.getColor()));
         result = areThereAnyAttacksToThis(endpoint, opponentsColor);
     }
     return result;
@@ -325,13 +325,13 @@ void Board::setPieceAt(Coordinate const& coordinate, Piece const& piece) {
 
 void Board::move(Move const& move) {
     // if (isAPossibleMove(move)) // dont check if its valid to be quicker
-    MovePair kingAndRookCastlingMovePair(getMatchingCastlingKingAndRookMovePair(move));
+    MovePair const kingAndRookCastlingMovePair(getMatchingCastlingKingAndRookMovePair(move));
     if (kingAndRookCastlingMovePair.first == move) {
         changePieceGridWithMove(kingAndRookCastlingMovePair.first);
         changePieceGridWithMove(kingAndRookCastlingMovePair.second);
     } else {
         if (isAPawnEnPassantMove(move)) {
-            Coordinate opponentPawnLocation{move.second.getX(), move.first.getY()};
+            Coordinate const opponentPawnLocation{move.second.getX(), move.first.getY()};
             setPieceAt(opponentPawnLocation, Piece());
         }
         changePieceGridWithMove(move);
@@ -398,31 +398,31 @@ bool Board::isPieceNonEmptyAndHasOpposingColors(Piece const& piece, PieceColor c
 }
 
 bool Board::isADiagonalMove(Move const& move) {
-    Coordinate moveDelta = move.second - move.first;
+    Coordinate const moveDelta = move.second - move.first;
     return getAbsoluteValue(moveDelta.getX()) == getAbsoluteValue(moveDelta.getY());
 }
 
 bool Board::isAStraightMove(Move const& move) {
-    Coordinate moveDelta = move.second - move.first;
+    Coordinate const moveDelta = move.second - move.first;
     return (moveDelta.getX() == 0 && moveDelta.getY() != 0) || (moveDelta.getX() != 0 && moveDelta.getY() == 0);
 }
 
 bool Board::isAnLMove(Move const& move) {
     Coordinate moveDelta = move.second - move.first;
-    Coordinates lDeltas(getLDeltaCoordinates());
+    Coordinates const lDeltas(getLDeltaCoordinates());
     return any_of(
         lDeltas.cbegin(), lDeltas.cend(), [&moveDelta](Coordinate const& lDelta) { return moveDelta == lDelta; });
 }
 
 bool Board::isAOneStepMove(Move const& move) {
-    Coordinate moveDelta = move.second - move.first;
+    Coordinate const moveDelta = move.second - move.first;
     return moveDelta.getX() >= -1 && moveDelta.getX() <= 1 && moveDelta.getY() >= -1 && moveDelta.getY() <= 1;
 }
 
 bool Board::doesAllCellsInBetweenSatisfyTheCondition(
     Coordinate const& startpoint, Coordinate const& endpoint, CoordinateCondition const& condition) {
-    Coordinate moveDelta = endpoint - startpoint;
-    Coordinate oneIncrementDelta(getOneIncrement(moveDelta.getX()), getOneIncrement(moveDelta.getY()));
+    Coordinate const moveDelta = endpoint - startpoint;
+    Coordinate const oneIncrementDelta(getOneIncrement(moveDelta.getX()), getOneIncrement(moveDelta.getY()));
     Coordinate cellInBetween = startpoint + oneIncrementDelta;
     while (isCoordinateWithinTheBoard(cellInBetween) && endpoint != cellInBetween && condition(cellInBetween)) {
         cellInBetween += oneIncrementDelta;
@@ -573,7 +573,7 @@ Move Board::getFirstMoveThatFits(
     optional<CoordinateDataType> const& yLimitation) const {
     Move result{};
     for (Move const& possibleMove : possibleMoves) {
-        Piece pieceAtStart(getPieceAt(possibleMove.first));
+        Piece const pieceAtStart(getPieceAt(possibleMove.first));
         if (pieceType == pieceAtStart.getType()) {
             if (xLimitation) {
                 if (xLimitation.value() == possibleMove.first.getX()) {
@@ -596,10 +596,10 @@ Move Board::getFirstMoveThatFits(
 
 Move Board::getCastleMove(CastleType const castleType, PieceColor const moveColor) const {
     Move result{};
-    CoordinateDataType rookMoveDistance = CastleType::KingSideCastle == castleType    ? 2
-                                          : CastleType::QueenSideCastle == castleType ? 3
-                                                                                      : 0;
-    MovePairs castlingPairs(getCastlingKingAndRookMovePairs(moveColor));
+    CoordinateDataType const rookMoveDistance = CastleType::KingSideCastle == castleType    ? 2
+                                                : CastleType::QueenSideCastle == castleType ? 3
+                                                                                            : 0;
+    MovePairs const castlingPairs(getCastlingKingAndRookMovePairs(moveColor));
     for (MovePair const& castlingPair : castlingPairs) {
         Move const& kingMove(castlingPair.first);
         Move const& rookMove(castlingPair.second);
@@ -612,8 +612,8 @@ Move Board::getCastleMove(CastleType const castleType, PieceColor const moveColo
 
 MovePair Board::getMatchingCastlingKingAndRookMovePair(Move const& kingMoveThatShouldMatch) const {
     MovePair result{};
-    Piece pieceAtKing(getPieceAt(kingMoveThatShouldMatch.first));
-    MovePairs kingAndRookMovePairs(getCastlingKingAndRookMovePairs(pieceAtKing.getColor()));
+    Piece const pieceAtKing(getPieceAt(kingMoveThatShouldMatch.first));
+    MovePairs const kingAndRookMovePairs(getCastlingKingAndRookMovePairs(pieceAtKing.getColor()));
     auto it = find_if(
         kingAndRookMovePairs.cbegin(), kingAndRookMovePairs.cend(),
         [&kingMoveThatShouldMatch](MovePair const& kingAndRookMovePair) {
@@ -629,9 +629,9 @@ MovePairs Board::getCastlingKingAndRookMovePairs(PieceColor const moveColor) con
     MovePairs result;
     if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
         if (PieceColor::Black == moveColor) {
-            Piece pieceAtKing(getPieceAt(Coordinate(4, 0)));
-            Piece pieceAtQueenSideRook(getPieceAt(Coordinate(0, 0)));
-            Piece pieceAtKingSideRook(getPieceAt(Coordinate(7, 0)));
+            Piece const pieceAtKing(getPieceAt(Coordinate(4, 0)));
+            Piece const pieceAtQueenSideRook(getPieceAt(Coordinate(0, 0)));
+            Piece const pieceAtKingSideRook(getPieceAt(Coordinate(7, 0)));
             if (PieceColorAndType::BlackKing == pieceAtKing.getColorAndType() &&
                 PieceColorAndType::BlackRook == pieceAtQueenSideRook.getColorAndType()) {
                 result.emplace_back(Move{{4, 0}, {2, 0}}, Move{{0, 0}, {3, 0}});
@@ -641,9 +641,9 @@ MovePairs Board::getCastlingKingAndRookMovePairs(PieceColor const moveColor) con
                 result.emplace_back(Move{{4, 0}, {6, 0}}, Move{{7, 0}, {5, 0}});
             }
         } else if (PieceColor::White == moveColor) {
-            Piece pieceAtKing(getPieceAt(Coordinate(4, 7)));
-            Piece pieceAtQueenSideRook(getPieceAt(Coordinate(0, 7)));
-            Piece pieceAtKingSideRook(getPieceAt(Coordinate(7, 7)));
+            Piece const pieceAtKing(getPieceAt(Coordinate(4, 7)));
+            Piece const pieceAtQueenSideRook(getPieceAt(Coordinate(0, 7)));
+            Piece const pieceAtKingSideRook(getPieceAt(Coordinate(7, 7)));
             if (PieceColorAndType::WhiteKing == pieceAtKing.getColorAndType() &&
                 PieceColorAndType::WhiteRook == pieceAtQueenSideRook.getColorAndType()) {
                 result.emplace_back(Move{{4, 7}, {2, 7}}, Move{{0, 7}, {3, 7}});
@@ -655,9 +655,9 @@ MovePairs Board::getCastlingKingAndRookMovePairs(PieceColor const moveColor) con
         }
     } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
         if (PieceColor::White == moveColor) {
-            Piece pieceAtKing(getPieceAt(Coordinate(3, 0)));
-            Piece pieceAtQueenSideRook(getPieceAt(Coordinate(0, 0)));
-            Piece pieceAtKingSideRook(getPieceAt(Coordinate(7, 0)));
+            Piece const pieceAtKing(getPieceAt(Coordinate(3, 0)));
+            Piece const pieceAtQueenSideRook(getPieceAt(Coordinate(0, 0)));
+            Piece const pieceAtKingSideRook(getPieceAt(Coordinate(7, 0)));
             if (PieceColorAndType::WhiteKing == pieceAtKing.getColorAndType() &&
                 PieceColorAndType::WhiteRook == pieceAtQueenSideRook.getColorAndType()) {
                 result.emplace_back(Move{{3, 0}, {1, 0}}, Move{{0, 0}, {2, 0}});
@@ -667,9 +667,9 @@ MovePairs Board::getCastlingKingAndRookMovePairs(PieceColor const moveColor) con
                 result.emplace_back(Move{{3, 0}, {5, 0}}, Move{{7, 0}, {4, 0}});
             }
         } else if (PieceColor::Black == moveColor) {
-            Piece pieceAtKing(getPieceAt(Coordinate(3, 7)));
-            Piece pieceAtQueenSideRook(getPieceAt(Coordinate(0, 7)));
-            Piece pieceAtKingSideRook(getPieceAt(Coordinate(7, 7)));
+            Piece const pieceAtKing(getPieceAt(Coordinate(3, 7)));
+            Piece const pieceAtQueenSideRook(getPieceAt(Coordinate(0, 7)));
+            Piece const pieceAtKingSideRook(getPieceAt(Coordinate(7, 7)));
             if (PieceColorAndType::BlackKing == pieceAtKing.getColorAndType() &&
                 PieceColorAndType::BlackRook == pieceAtQueenSideRook.getColorAndType()) {
                 result.emplace_back(Move{{3, 7}, {1, 7}}, Move{{0, 7}, {2, 7}});
@@ -686,7 +686,7 @@ MovePairs Board::getCastlingKingAndRookMovePairs(PieceColor const moveColor) con
 Moves Board::getCandidatesMoves(
     Coordinate const& endpoint, PieceColor const moveColor, PieceType const pieceType) const {
     Moves result;
-    Piece pieceAtEnd(getPieceAt(endpoint));
+    Piece const pieceAtEnd(getPieceAt(endpoint));
     switch (pieceType) {
         case PieceType::Pawn: {
             if (pieceAtEnd.isEmpty()) {
@@ -741,7 +741,7 @@ Board::NotationDetailsOfMove Board::determineNotationDetailsOfMove(string const&
 
     State state(State::LastY);
     for (auto it = textInAlgebraicNotation.crbegin(); it != textInAlgebraicNotation.crend();) {
-        char c = *it;
+        char const c = *it;
         switch (state) {
             case State::LastY: {
                 if (is1To8(c)) {
@@ -822,8 +822,8 @@ int Board::getNumberOfWaysToBlockPath(
     Coordinate const& startpoint, Coordinate const& endpoint, PieceColor const blockingPieceColor,
     int const maxSize) const {
     int result{};
-    Coordinate moveDelta = endpoint - startpoint;
-    Coordinate oneIncrementDelta(getOneIncrement(moveDelta.getX()), getOneIncrement(moveDelta.getY()));
+    Coordinate const moveDelta = endpoint - startpoint;
+    Coordinate const oneIncrementDelta(getOneIncrement(moveDelta.getX()), getOneIncrement(moveDelta.getY()));
     Coordinate cellInBetween = startpoint + oneIncrementDelta;
     while (isCoordinateWithinTheBoard(cellInBetween) && endpoint != cellInBetween) {
         cellInBetween += oneIncrementDelta;
@@ -834,7 +834,7 @@ int Board::getNumberOfWaysToBlockPath(
 
 bool Board::isPossibleMoveBasedFromPieceType(Move const& move) const {
     bool result(false);
-    Piece piece(getPieceAt(move.first));
+    Piece const piece(getPieceAt(move.first));
     switch (piece.getType()) {
         case PieceType::Pawn: {
             result = isPossiblePawnMove(move);
@@ -897,20 +897,20 @@ bool Board::isPossibleOneKingMove(Move const& move) const {
 }
 
 bool Board::isPossibleKingCastlingMove(Move const& move) const {
-    MovePair kingAndRookCastlingMovePair(getMatchingCastlingKingAndRookMovePair(move));
-    Move kingMove(kingAndRookCastlingMovePair.first);
-    Move rookMove(kingAndRookCastlingMovePair.second);
+    MovePair const kingAndRookCastlingMovePair(getMatchingCastlingKingAndRookMovePair(move));
+    Move const kingMove(kingAndRookCastlingMovePair.first);
+    Move const rookMove(kingAndRookCastlingMovePair.second);
     return kingAndRookCastlingMovePair.first == move && isCastlingPossible(kingMove, rookMove);
 }
 
 bool Board::isAPawnNonCaptureMove(Move const& move) const {
     bool result(false);
     if (move.first.getX() == move.second.getX()) {
-        Piece pieceAtStart(getPieceAt(move.first));
-        Piece pieceAtEnd(getPieceAt(move.second));
+        Piece const pieceAtStart(getPieceAt(move.first));
+        Piece const pieceAtEnd(getPieceAt(move.second));
         if (pieceAtEnd.isEmpty() && isThereNoPieceInBetween(move)) {
-            Coordinate moveDelta = move.second - move.first;
-            DeltaRange range = getPawnNonCaptureDeltaRange(move.first, pieceAtStart.getColor());
+            Coordinate const moveDelta = move.second - move.first;
+            DeltaRange const range = getPawnNonCaptureDeltaRange(move.first, pieceAtStart.getColor());
             for (CoordinateDataType deltaY = range.interval; deltaY != range.invalidDelta; deltaY += range.interval) {
                 if (deltaY == moveDelta.getY()) {
                     result = true;
@@ -924,11 +924,11 @@ bool Board::isAPawnNonCaptureMove(Move const& move) const {
 
 bool Board::isAPawnCapture(Move const& move) const {
     bool result(false);
-    Piece pieceAtStart(getPieceAt(move.first));
-    Piece pieceAtEnd(getPieceAt(move.second));
+    Piece const pieceAtStart(getPieceAt(move.first));
+    Piece const pieceAtEnd(getPieceAt(move.second));
     Coordinate moveDelta = move.second - move.first;
     if (!pieceAtEnd.isEmpty() && areOpposingColors(pieceAtStart.getColor(), pieceAtEnd.getColor())) {
-        Coordinates pawnCaptureDeltas(getPawnCapturesDeltaCoordinates(pieceAtStart.getColor()));
+        Coordinates const pawnCaptureDeltas(getPawnCapturesDeltaCoordinates(pieceAtStart.getColor()));
         result = any_of(
             pawnCaptureDeltas.cbegin(), pawnCaptureDeltas.cend(),
             [&moveDelta](Coordinate const& pawnDelta) { return moveDelta == pawnDelta; });
@@ -938,30 +938,30 @@ bool Board::isAPawnCapture(Move const& move) const {
 
 bool Board::isAPawnEnPassantMove(Move const& move) const {
     bool result(false);
-    Piece pieceAtStart(getPieceAt(move.first));
-    Piece pieceAtEnd(getPieceAt(move.second));
+    Piece const pieceAtStart(getPieceAt(move.first));
+    Piece const pieceAtEnd(getPieceAt(move.second));
     if (pieceAtEnd.isEmpty() && getPositiveDelta(move.first.getX(), move.second.getX()) == 1) {
         if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
             if (PieceColor::White == pieceAtStart.getColor()) {
                 if (move.first.getY() == 3 && move.first.getY() - move.second.getY() == 1) {
-                    Piece opponentPawn(getPieceAt({move.second.getX(), move.first.getY()}));
+                    Piece const opponentPawn(getPieceAt({move.second.getX(), move.first.getY()}));
                     result = opponentPawn.getColorAndType() == PieceColorAndType::BlackPawn;
                 }
             } else if (PieceColor::Black == pieceAtStart.getColor()) {
                 if (move.first.getY() == 4 && move.second.getY() - move.first.getY() == 1) {
-                    Piece opponentPawn(getPieceAt({move.second.getX(), move.first.getY()}));
+                    Piece const opponentPawn(getPieceAt({move.second.getX(), move.first.getY()}));
                     result = opponentPawn.getColorAndType() == PieceColorAndType::WhitePawn;
                 }
             }
         } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
             if (PieceColor::Black == pieceAtStart.getColor()) {
                 if (move.first.getY() == 3 && move.first.getY() - move.second.getY() == 1) {
-                    Piece opponentPawn(getPieceAt({move.second.getX(), move.first.getY()}));
+                    Piece const opponentPawn(getPieceAt({move.second.getX(), move.first.getY()}));
                     result = opponentPawn.getColorAndType() == PieceColorAndType::WhitePawn;
                 }
             } else if (PieceColor::White == pieceAtStart.getColor()) {
                 if (move.first.getY() == 4 && move.second.getY() - move.first.getY() == 1) {
-                    Piece opponentPawn(getPieceAt({move.second.getX(), move.first.getY()}));
+                    Piece const opponentPawn(getPieceAt({move.second.getX(), move.first.getY()}));
                     result = opponentPawn.getColorAndType() == PieceColorAndType::BlackPawn;
                 }
             }
@@ -976,8 +976,8 @@ bool Board::isCastlingPossible(Move const& kingMove, Move const& rookMove) const
 }
 
 bool Board::isEndpointEmptyOrHaveDifferentColors(Move const& move) const {
-    Piece pieceAtStart(getPieceAt(move.first));
-    Piece pieceAtEnd(getPieceAt(move.second));
+    Piece const pieceAtStart(getPieceAt(move.first));
+    Piece const pieceAtEnd(getPieceAt(move.second));
     return pieceAtEnd.isEmpty() || (!pieceAtStart.isEmpty() && !pieceAtEnd.isEmpty() &&
                                     areOpposingColors(pieceAtStart.getColor(), pieceAtEnd.getColor()));
 }
@@ -996,7 +996,7 @@ bool Board::isSafeToCastleInBetween(Coordinate const& startpoint, Coordinate con
 
 void Board::retrieveMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const {
     CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
-    Piece pieceAtStart(getPieceAt(startpoint));
+    Piece const pieceAtStart(getPieceAt(startpoint));
     switch (pieceAtStart.getType()) {
         case PieceType::Pawn: {
             retrievePawnMovesFromThis(result, startpoint, maxSize);
@@ -1035,11 +1035,11 @@ void Board::retrievePawnMovesFromThis(Moves& result, Coordinate const& startpoin
 
 void Board::retrieveKnightMovesThis(Moves& result, Coordinate const& startpoint, int const maxSize) const {
     CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
-    Piece pieceAtStart(getPieceAt(startpoint));
+    Piece const pieceAtStart(getPieceAt(startpoint));
     for (Coordinate const& delta : getLDeltaCoordinates()) {
-        Coordinate endpoint(startpoint + delta);
+        Coordinate const endpoint(startpoint + delta);
         if (isCoordinateWithinTheBoard(endpoint)) {
-            Piece pieceAtEnd(getPieceAt(endpoint));
+            Piece const pieceAtEnd(getPieceAt(endpoint));
             if (pieceAtEnd.isEmpty() || areOpposingColors(pieceAtStart.getColor(), pieceAtEnd.getColor())) {
                 result.emplace_back(startpoint, endpoint);
                 CHESS_UTILITIES_BOARD_QUICK_BREAK_IN_LOOP_IF_MAX_SIZE_IS_REACHED
@@ -1068,12 +1068,12 @@ void Board::retrieveKingMovesFromThis(Moves& result, Coordinate const& startpoin
 
 void Board::retrievePawnNonCapturesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const {
     CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
-    Piece pieceAtStart(getPieceAt(startpoint));
-    DeltaRange range = getPawnNonCaptureDeltaRange(startpoint, pieceAtStart.getColor());
+    Piece const pieceAtStart(getPieceAt(startpoint));
+    DeltaRange const range = getPawnNonCaptureDeltaRange(startpoint, pieceAtStart.getColor());
     for (CoordinateDataType deltaY = range.interval; deltaY != range.invalidDelta; deltaY += range.interval) {
-        Coordinate endpoint(startpoint.getX(), startpoint.getY() + deltaY);
+        Coordinate const endpoint(startpoint.getX(), startpoint.getY() + deltaY);
         if (isCoordinateWithinTheBoard(endpoint)) {
-            Piece pieceAtEnd(getPieceAt(endpoint));
+            Piece const pieceAtEnd(getPieceAt(endpoint));
             if (pieceAtEnd.isEmpty()) {
                 result.emplace_back(startpoint, endpoint);
                 CHESS_UTILITIES_BOARD_QUICK_BREAK_IN_LOOP_IF_MAX_SIZE_IS_REACHED
@@ -1088,11 +1088,11 @@ void Board::retrievePawnNonCapturesFromThis(Moves& result, Coordinate const& sta
 
 void Board::retrievePawnCapturesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const {
     CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
-    Piece pieceAtStart(getPieceAt(startpoint));
+    Piece const pieceAtStart(getPieceAt(startpoint));
     for (Coordinate const& delta : getPawnCapturesDeltaCoordinates(pieceAtStart.getColor())) {
-        Coordinate endpoint(startpoint + delta);
+        Coordinate const endpoint(startpoint + delta);
         if (isCoordinateWithinTheBoard(endpoint)) {
-            Piece pieceAtEnd(getPieceAt(endpoint));
+            Piece const pieceAtEnd(getPieceAt(endpoint));
             if (!pieceAtEnd.isEmpty() && areOpposingColors(pieceAtStart.getColor(), pieceAtEnd.getColor())) {
                 result.emplace_back(startpoint, endpoint);
                 CHESS_UTILITIES_BOARD_QUICK_BREAK_IN_LOOP_IF_MAX_SIZE_IS_REACHED
@@ -1119,12 +1119,12 @@ void Board::retrieveStraightMovesFromThis(Moves& result, Coordinate const& start
 
 void Board::retrieveKingOneStepMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const {
     CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
-    Piece pieceAtStart(getPieceAt(startpoint));
-    PieceColor opponentsColor(getOppositeColor(pieceAtStart.getColor()));
+    Piece const pieceAtStart(getPieceAt(startpoint));
+    PieceColor const opponentsColor(getOppositeColor(pieceAtStart.getColor()));
     for (Coordinate const& delta : getOneStepDeltaCoordinates()) {
-        Coordinate endpoint(startpoint + delta);
+        Coordinate const endpoint(startpoint + delta);
         if (isCoordinateWithinTheBoard(endpoint)) {
-            Piece pieceAtEnd(getPieceAt(endpoint));
+            Piece const pieceAtEnd(getPieceAt(endpoint));
 
             if (!areThereAnyAttacksToThis(endpoint, opponentsColor) &&
                 (pieceAtEnd.isEmpty() || areOpposingColors(pieceAtStart.getColor(), pieceAtEnd.getColor()))) {
@@ -1137,7 +1137,7 @@ void Board::retrieveKingOneStepMovesFromThis(Moves& result, Coordinate const& st
 
 void Board::retrieveKingCastlingMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const {
     CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
-    Piece pieceAtStart(getPieceAt(startpoint));
+    Piece const pieceAtStart(getPieceAt(startpoint));
     for (MovePair const& kingAndRookMovePair : getCastlingKingAndRookMovePairs(pieceAtStart.getColor())) {
         Move const& kingMove(kingAndRookMovePair.first);
         Move const& rookMove(kingAndRookMovePair.second);
@@ -1153,9 +1153,9 @@ void Board::retrieveMovesFromThisByIncrementingDelta(
     CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
     Coordinate endpoint(startpoint + delta);
     while (true) {
-        Piece pieceAtStart(getPieceAt(startpoint));
+        Piece const pieceAtStart(getPieceAt(startpoint));
         if (isCoordinateWithinTheBoard(endpoint)) {
-            Piece pieceAtEnd(getPieceAt(endpoint));
+            Piece const pieceAtEnd(getPieceAt(endpoint));
             if (pieceAtEnd.isEmpty()) {
                 result.emplace_back(startpoint, endpoint);
                 CHESS_UTILITIES_BOARD_QUICK_BREAK_IN_LOOP_IF_MAX_SIZE_IS_REACHED
@@ -1176,7 +1176,7 @@ void Board::retrieveMovesFromThisByIncrementingDelta(
 void Board::retrieveMovesToThis(
     Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const {
     CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
-    Piece pieceAtEnd(getPieceAt(endpoint));
+    Piece const pieceAtEnd(getPieceAt(endpoint));
     if (pieceAtEnd.isEmpty()) {  // non capture only
         retrievePawnReverseNonCapturesToThis(result, endpoint, moveColor, maxSize);
         retrievePawnEnPassantReverseToThis(result, endpoint, moveColor, maxSize);
@@ -1192,7 +1192,7 @@ void Board::retrieveMovesToThis(
 void Board::retrieveAttacksToThis(
     Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const {
     CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
-    Piece pieceAtEnd(getPieceAt(endpoint));
+    Piece const pieceAtEnd(getPieceAt(endpoint));
     if (isPieceNonEmptyAndHasOpposingColors(pieceAtEnd, moveColor)) {  // capture only
         retrievePawnReverseCapturesToThis(result, endpoint, moveColor, maxSize);
     }
@@ -1202,7 +1202,7 @@ void Board::retrieveAttacksToThis(
 void Board::retrieveAttacksToThisWithNoKingMoves(
     Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const {
     CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
-    Piece pieceAtEnd(getPieceAt(endpoint));
+    Piece const pieceAtEnd(getPieceAt(endpoint));
     if (!pieceAtEnd.isEmpty() && areOpposingColors(moveColor, pieceAtEnd.getColor())) {  // capture only
         retrievePawnReverseCapturesToThis(result, endpoint, moveColor, maxSize);
     }
@@ -1216,10 +1216,10 @@ void Board::retrieveAttacksToThisWithNoKingMoves(
 void Board::retrievePawnReverseNonCapturesToThis(
     Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const {
     CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
-    DeltaRange range = getPawnReverseNonCaptureDeltaRange(endpoint, moveColor);
+    DeltaRange const range = getPawnReverseNonCaptureDeltaRange(endpoint, moveColor);
     for (CoordinateDataType deltaY = range.interval; deltaY != range.invalidDelta; deltaY += range.interval) {
-        Coordinate startpoint(endpoint.getX(), endpoint.getY() + deltaY);
-        Piece pieceAtStart(getPieceAt(startpoint));
+        Coordinate const startpoint(endpoint.getX(), endpoint.getY() + deltaY);
+        Piece const pieceAtStart(getPieceAt(startpoint));
         if (moveColor == pieceAtStart.getColor() && PieceType::Pawn == pieceAtStart.getType()) {
             result.emplace_back(startpoint, endpoint);
             CHESS_UTILITIES_BOARD_QUICK_BREAK_IN_LOOP_IF_MAX_SIZE_IS_REACHED
@@ -1231,8 +1231,8 @@ void Board::retrievePawnReverseCapturesToThis(
     Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const {
     CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
     for (Coordinate const& delta : getPawnReverseCapturesDeltaCoordinates(moveColor)) {
-        Coordinate startpoint = endpoint + delta;
-        Piece pieceAtStart(getPieceAt(startpoint));
+        Coordinate const startpoint = endpoint + delta;
+        Piece const pieceAtStart(getPieceAt(startpoint));
         if (moveColor == pieceAtStart.getColor() && PieceType::Pawn == pieceAtStart.getType()) {
             result.emplace_back(startpoint, endpoint);
             CHESS_UTILITIES_BOARD_QUICK_BREAK_IN_LOOP_IF_MAX_SIZE_IS_REACHED
@@ -1247,9 +1247,9 @@ void Board::retrievePawnEnPassantReverseToThis(
         if (PieceColor::White == moveColor) {
             if (endpoint.getY() == 2) {
                 for (Coordinate const& delta : getPawnReverseCapturesDeltaCoordinates(moveColor)) {
-                    Coordinate startpoint = endpoint + delta;
-                    Piece pieceAtStart(getPieceAt(startpoint));
-                    Piece opponentPawn(getPieceAt({endpoint.getX(), startpoint.getY()}));
+                    Coordinate const startpoint = endpoint + delta;
+                    Piece const pieceAtStart(getPieceAt(startpoint));
+                    Piece const opponentPawn(getPieceAt({endpoint.getX(), startpoint.getY()}));
                     if (PieceColorAndType::WhitePawn == pieceAtStart.getColorAndType() &&
                         PieceColorAndType::BlackPawn == opponentPawn.getColorAndType()) {
                         result.emplace_back(startpoint, endpoint);
@@ -1260,9 +1260,9 @@ void Board::retrievePawnEnPassantReverseToThis(
         } else if (PieceColor::Black == moveColor) {
             if (endpoint.getY() == 5) {
                 for (Coordinate const& delta : getPawnReverseCapturesDeltaCoordinates(moveColor)) {
-                    Coordinate startpoint = endpoint + delta;
-                    Piece pieceAtStart(getPieceAt(startpoint));
-                    Piece opponentPawn(getPieceAt({endpoint.getX(), startpoint.getY()}));
+                    Coordinate const startpoint = endpoint + delta;
+                    Piece const pieceAtStart(getPieceAt(startpoint));
+                    Piece const opponentPawn(getPieceAt({endpoint.getX(), startpoint.getY()}));
                     if (PieceColorAndType::BlackPawn == pieceAtStart.getColorAndType() &&
                         PieceColorAndType::WhitePawn == opponentPawn.getColorAndType()) {
                         result.emplace_back(startpoint, endpoint);
@@ -1275,9 +1275,9 @@ void Board::retrievePawnEnPassantReverseToThis(
         if (PieceColor::Black == moveColor) {
             if (endpoint.getY() == 2) {
                 for (Coordinate const& delta : getPawnReverseCapturesDeltaCoordinates(moveColor)) {
-                    Coordinate startpoint = endpoint + delta;
-                    Piece pieceAtStart(getPieceAt(startpoint));
-                    Piece opponentPawn(getPieceAt({endpoint.getX(), startpoint.getY()}));
+                    Coordinate const startpoint = endpoint + delta;
+                    Piece const pieceAtStart(getPieceAt(startpoint));
+                    Piece const opponentPawn(getPieceAt({endpoint.getX(), startpoint.getY()}));
                     if (PieceColorAndType::BlackPawn == pieceAtStart.getColorAndType() &&
                         PieceColorAndType::WhitePawn == opponentPawn.getColorAndType()) {
                         result.emplace_back(startpoint, endpoint);
@@ -1288,9 +1288,9 @@ void Board::retrievePawnEnPassantReverseToThis(
         } else if (PieceColor::White == moveColor) {
             if (endpoint.getY() == 5) {
                 for (Coordinate const& delta : getPawnReverseCapturesDeltaCoordinates(moveColor)) {
-                    Coordinate startpoint = endpoint + delta;
-                    Piece pieceAtStart(getPieceAt(startpoint));
-                    Piece opponentPawn(getPieceAt({endpoint.getX(), startpoint.getY()}));
+                    Coordinate const startpoint = endpoint + delta;
+                    Piece const pieceAtStart(getPieceAt(startpoint));
+                    Piece const opponentPawn(getPieceAt({endpoint.getX(), startpoint.getY()}));
                     if (PieceColorAndType::WhitePawn == pieceAtStart.getColorAndType() &&
                         PieceColorAndType::BlackPawn == opponentPawn.getColorAndType()) {
                         result.emplace_back(startpoint, endpoint);
@@ -1314,8 +1314,8 @@ void Board::retrieveKnightMovesToThis(
     Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const {
     CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
     for (Coordinate const& delta : getLDeltaCoordinates()) {
-        Coordinate startpoint = endpoint + delta;
-        Piece pieceAtStart(getPieceAt(startpoint));
+        Coordinate const startpoint = endpoint + delta;
+        Piece const pieceAtStart(getPieceAt(startpoint));
         if (moveColor == pieceAtStart.getColor() && PieceType::Knight == pieceAtStart.getType()) {
             result.emplace_back(startpoint, endpoint);
             CHESS_UTILITIES_BOARD_QUICK_BREAK_IN_LOOP_IF_MAX_SIZE_IS_REACHED
@@ -1329,7 +1329,7 @@ void Board::retrieveDiagonalMovesToThis(
     for (Coordinate const& delta : getDiagonalIncrementDeltaCoordinates()) {
         Coordinate startpoint = endpoint + delta;
         while (isCoordinateWithinTheBoard(startpoint)) {
-            Piece pieceAtStart(getPieceAt(startpoint));
+            Piece const pieceAtStart(getPieceAt(startpoint));
             if (!pieceAtStart.isEmpty()) {
                 if (moveColor == pieceAtStart.getColor() &&
                     (PieceType::Bishop == pieceAtStart.getType() || PieceType::Queen == pieceAtStart.getType())) {
@@ -1349,7 +1349,7 @@ void Board::retrieveStraightMovesToThis(
     for (Coordinate const& delta : getStraightIncrementDeltaCoordinates()) {
         Coordinate startpoint = endpoint + delta;
         while (isCoordinateWithinTheBoard(startpoint)) {
-            Piece pieceAtStart(getPieceAt(startpoint));
+            Piece const pieceAtStart(getPieceAt(startpoint));
             if (!pieceAtStart.isEmpty()) {
                 if (moveColor == pieceAtStart.getColor() &&
                     (PieceType::Rook == pieceAtStart.getType() || PieceType::Queen == pieceAtStart.getType())) {
@@ -1370,8 +1370,8 @@ void Board::retrieveKingOneStepMovesToThis(
     retrieveAttacksToThisWithNoKingMoves(attacksToThisCell, endpoint, getOppositeColor(moveColor), 1);
     if (attacksToThisCell.empty()) {
         for (Coordinate const& delta : getOneStepDeltaCoordinates()) {
-            Coordinate startpoint = endpoint + delta;
-            Piece pieceAtStart(getPieceAt(startpoint));
+            Coordinate const startpoint = endpoint + delta;
+            Piece const pieceAtStart(getPieceAt(startpoint));
             if (moveColor == pieceAtStart.getColor() && PieceType::King == pieceAtStart.getType()) {
                 result.emplace_back(startpoint, endpoint);
                 CHESS_UTILITIES_BOARD_QUICK_BREAK_IN_LOOP_IF_MAX_SIZE_IS_REACHED
@@ -1381,19 +1381,19 @@ void Board::retrieveKingOneStepMovesToThis(
 }
 
 void Board::retrievePawnAttackDefendCountToThis(AttackDefendCount& count, Coordinate const& endpoint) const {
-    Piece pieceAtEnd(getPieceAt(endpoint));
-    PieceColor sameColor(pieceAtEnd.getColor());
-    PieceColor oppositeColor(getOppositeColor(pieceAtEnd.getColor()));
+    Piece const pieceAtEnd(getPieceAt(endpoint));
+    PieceColor const sameColor(pieceAtEnd.getColor());
+    PieceColor const oppositeColor(getOppositeColor(pieceAtEnd.getColor()));
     for (Coordinate const& delta : getPawnReverseCapturesDeltaCoordinates(sameColor)) {
-        Coordinate startpoint = endpoint + delta;
-        Piece pieceAtStart(getPieceAt(startpoint));
+        Coordinate const startpoint = endpoint + delta;
+        Piece const pieceAtStart(getPieceAt(startpoint));
         if (PieceType::Pawn == pieceAtStart.getType() && sameColor == pieceAtStart.getColor()) {
             count.defend++;
         }
     }
     for (Coordinate const& delta : getPawnReverseCapturesDeltaCoordinates(oppositeColor)) {
-        Coordinate startpoint = endpoint + delta;
-        Piece pieceAtStart(getPieceAt(startpoint));
+        Coordinate const startpoint = endpoint + delta;
+        Piece const pieceAtStart(getPieceAt(startpoint));
         if (PieceType::Pawn == pieceAtStart.getType() && oppositeColor == pieceAtStart.getColor()) {
             count.attack++;
         }
@@ -1401,12 +1401,12 @@ void Board::retrievePawnAttackDefendCountToThis(AttackDefendCount& count, Coordi
 }
 
 void Board::retrieveKnightAttackDefendCountToThis(AttackDefendCount& count, Coordinate const& endpoint) const {
-    Piece pieceAtEnd(getPieceAt(endpoint));
-    PieceColor sameColor(pieceAtEnd.getColor());
-    PieceColor oppositeColor(getOppositeColor(pieceAtEnd.getColor()));
+    Piece const pieceAtEnd(getPieceAt(endpoint));
+    PieceColor const sameColor(pieceAtEnd.getColor());
+    PieceColor const oppositeColor(getOppositeColor(pieceAtEnd.getColor()));
     for (Coordinate const& delta : getLDeltaCoordinates()) {
-        Coordinate startpoint = endpoint + delta;
-        Piece pieceAtStart(getPieceAt(startpoint));
+        Coordinate const startpoint = endpoint + delta;
+        Piece const pieceAtStart(getPieceAt(startpoint));
         if (PieceType::Knight == pieceAtStart.getType()) {
             updateAttackDefendCount(count, pieceAtStart.getColor(), sameColor, oppositeColor);
         }
@@ -1415,13 +1415,13 @@ void Board::retrieveKnightAttackDefendCountToThis(AttackDefendCount& count, Coor
 
 void Board::retrieveDiagonalAttackDefendCountToThis(
     AttackDefendCount& bishopCount, AttackDefendCount& queenCount, Coordinate const& endpoint) const {
-    Piece pieceAtEnd(getPieceAt(endpoint));
-    PieceColor sameColor(pieceAtEnd.getColor());
-    PieceColor oppositeColor(getOppositeColor(pieceAtEnd.getColor()));
+    Piece const pieceAtEnd(getPieceAt(endpoint));
+    PieceColor const sameColor(pieceAtEnd.getColor());
+    PieceColor const oppositeColor(getOppositeColor(pieceAtEnd.getColor()));
     for (Coordinate const& delta : getDiagonalIncrementDeltaCoordinates()) {
         Coordinate startpoint = endpoint + delta;
         while (isCoordinateWithinTheBoard(startpoint)) {
-            Piece pieceAtStart(getPieceAt(startpoint));
+            Piece const pieceAtStart(getPieceAt(startpoint));
             if (!pieceAtStart.isEmpty()) {
                 if (PieceType::Bishop == pieceAtStart.getType()) {
                     updateAttackDefendCount(bishopCount, pieceAtStart.getColor(), sameColor, oppositeColor);
@@ -1438,13 +1438,13 @@ void Board::retrieveDiagonalAttackDefendCountToThis(
 
 void Board::retrieveStraightAttackDefendCountToThis(
     AttackDefendCount& rookCount, AttackDefendCount& queenCount, Coordinate const& endpoint) const {
-    Piece pieceAtEnd(getPieceAt(endpoint));
-    PieceColor sameColor(pieceAtEnd.getColor());
-    PieceColor oppositeColor(getOppositeColor(pieceAtEnd.getColor()));
+    Piece const pieceAtEnd(getPieceAt(endpoint));
+    PieceColor const sameColor(pieceAtEnd.getColor());
+    PieceColor const oppositeColor(getOppositeColor(pieceAtEnd.getColor()));
     for (Coordinate const& delta : getStraightIncrementDeltaCoordinates()) {
         Coordinate startpoint = endpoint + delta;
         while (isCoordinateWithinTheBoard(startpoint)) {
-            Piece pieceAtStart(getPieceAt(startpoint));
+            Piece const pieceAtStart(getPieceAt(startpoint));
             if (!pieceAtStart.isEmpty()) {
                 if (PieceType::Rook == pieceAtStart.getType()) {
                     updateAttackDefendCount(rookCount, pieceAtStart.getColor(), sameColor, oppositeColor);
@@ -1460,12 +1460,12 @@ void Board::retrieveStraightAttackDefendCountToThis(
 }
 
 void Board::retrieveKingOneStepAttackDefendCountToThis(AttackDefendCount& count, Coordinate const& endpoint) const {
-    Piece pieceAtEnd(getPieceAt(endpoint));
-    PieceColor sameColor(pieceAtEnd.getColor());
-    PieceColor oppositeColor(getOppositeColor(pieceAtEnd.getColor()));
+    Piece const pieceAtEnd(getPieceAt(endpoint));
+    PieceColor const sameColor(pieceAtEnd.getColor());
+    PieceColor const oppositeColor(getOppositeColor(pieceAtEnd.getColor()));
     for (Coordinate const& delta : getOneStepDeltaCoordinates()) {
-        Coordinate startpoint = endpoint + delta;
-        Piece pieceAtStart(getPieceAt(startpoint));
+        Coordinate const startpoint = endpoint + delta;
+        Piece const pieceAtStart(getPieceAt(startpoint));
         if (PieceType::King == pieceAtStart.getType()) {
             updateAttackDefendCount(count, pieceAtStart.getColor(), sameColor, oppositeColor);
         }
@@ -1483,14 +1483,14 @@ Move Board::getNonCastleMoveWithAlgebraicNotation(
     NotationDetailsOfMove details(determineNotationDetailsOfMove(textInAlgebraicNotation));
     if (details.lastX && details.lastY) {
         // last are prioritized because its reversed
-        Coordinate endpoint(details.lastX.value(), details.lastY.value());
+        Coordinate const endpoint(details.lastX.value(), details.lastY.value());
         if (details.firstX && details.firstY) {
-            Move candidateMove{{details.firstX.value(), details.firstY.value()}, endpoint};
+            Move const candidateMove{{details.firstX.value(), details.firstY.value()}, endpoint};
             if (isAPossibleMove(candidateMove)) {
                 result = candidateMove;
             }
         } else {
-            Moves candidateMoves(getCandidatesMoves(endpoint, moveColor, details.pieceType));
+            Moves const candidateMoves(getCandidatesMoves(endpoint, moveColor, details.pieceType));
             result = getFirstMoveThatFits(candidateMoves, details.pieceType, details.firstX, details.firstY);
         }
     }
@@ -1518,11 +1518,11 @@ Moves Board::getAttacksToThis(Coordinate const& endpoint, PieceColor const& move
 int Board::getNumberOfWaysToBlockAttacks(Moves const& attacks, int const maxSize) const {
     int result{};
     if (attacks.size() == 1) {  // multiple attacks cannot be blocked (think about it)
-        Move attack = attacks.back();
-        Piece attackingPiece = getPieceAt(attack.first);
+        Move const attack = attacks.back();
+        Piece const attackingPiece = getPieceAt(attack.first);
         if (PieceType::Bishop == attackingPiece.getType() || PieceType::Rook == attackingPiece.getType() ||
             PieceType::Queen == attackingPiece.getType()) {
-            PieceColor opponentsColor = getOppositeColor(getPieceAt(attack.first).getColor());
+            PieceColor const opponentsColor = getOppositeColor(getPieceAt(attack.first).getColor());
             result = getNumberOfWaysToBlockPath(attack.first, attack.second, opponentsColor, maxSize);
         }
     }

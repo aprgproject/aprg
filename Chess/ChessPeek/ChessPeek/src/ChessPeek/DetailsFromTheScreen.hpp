@@ -4,11 +4,7 @@
 #include <ChessPeek/BoardWithContext.hpp>
 #include <ScreenMonitoring/AlbaLocalScreenMonitoring.hpp>
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 class DetailsFromTheScreen {
 public:
@@ -24,13 +20,13 @@ public:
         Coordinate blackKingCoordinate;
     };
 
-    DetailsFromTheScreen(Configuration const& configuration);
-    BoardWithContext const& getBoardWithContext() const;
-    bool canAnalyzeBoard() const;
+    explicit DetailsFromTheScreen(Configuration const& configuration);
+    [[nodiscard]] BoardWithContext const& getBoardWithContext() const;
+    [[nodiscard]] bool canAnalyzeBoard() const;
     void saveDetailsFromTheScreen();
 
 private:
-    bool areKingsValid() const;
+    [[nodiscard]] bool areKingsValid() const;
     void saveBoardDetails(Coordinate const& coordinate, Piece const& piece);
     void saveBoardKingDetails(Coordinate const& coordinate, Piece const& piece);
     void saveBoardUpperHalfAndLowerHalfDetails(Coordinate const& coordinate, Piece const& piece);
@@ -51,7 +47,4 @@ private:
     CountOfPieces m_countOfPieces;
 };
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

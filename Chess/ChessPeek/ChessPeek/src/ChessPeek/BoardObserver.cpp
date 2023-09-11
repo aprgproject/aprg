@@ -8,11 +8,7 @@ using namespace alba::AprgBitmap;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 BoardObserver::BoardObserver(Configuration const& configuration, AlbaLocalScreenMonitoring const& screenMonitoring)
     : m_configuration(configuration), m_screenMonitoringPtr(&screenMonitoring), m_bitmapSnippetPtr(nullptr) {
@@ -25,7 +21,8 @@ BoardObserver::BoardObserver(Configuration const& configuration, BitmapSnippet c
 }
 
 BoardObserver::BitSet64 BoardObserver::getBitValueFromCell(int const xIndex, int const yIndex) const {
-    XY chessCellTopLeft, chessCellBottomRight;
+    XY chessCellTopLeft;
+    XY chessCellBottomRight;
     retrieveChessCellTopLeftAndBottomRight(chessCellTopLeft, chessCellBottomRight, xIndex, yIndex);
 
     BitSet64 result;  // The object is initialized with zeros.
@@ -48,12 +45,12 @@ Piece BoardObserver::getPieceFromCell(int const xIndex, int const yIndex) const 
 
 void BoardObserver::retrieveChessCellTopLeftAndBottomRight(
     XY& chessCellTopLeft, XY& chessCellBottomRight, int const xIndex, int const yIndex) const {
-    double startX = m_configuration.getTopLeftOfBoard().getX();
-    double startY = m_configuration.getTopLeftOfBoard().getY();
-    double endX = m_configuration.getBottomRightOfBoard().getX();
-    double endY = m_configuration.getBottomRightOfBoard().getY();
-    double deltaX = (endX - startX) / 8;
-    double deltaY = (endY - startY) / 8;
+    double const startX = m_configuration.getTopLeftOfBoard().getX();
+    double const startY = m_configuration.getTopLeftOfBoard().getY();
+    double const endX = m_configuration.getBottomRightOfBoard().getX();
+    double const endY = m_configuration.getBottomRightOfBoard().getY();
+    double const deltaX = (endX - startX) / 8;
+    double const deltaY = (endY - startY) / 8;
     chessCellTopLeft =
         XY{static_cast<int>(round(startX + deltaX * xIndex)), static_cast<int>(round(startY + deltaY * yIndex))};
     chessCellBottomRight =
@@ -86,9 +83,9 @@ BoardObserver::PieceColorAndTypes BoardObserver::getBestFitPiecesFromChessCellBi
     PieceColorAndTypes result;
     Count minimumDifferenceCount(65U);
     for (auto& pieceAndChessCellBitValuePair : m_piecesToChessCellBitValuesMap) {
-        PieceColorAndType piece(pieceAndChessCellBitValuePair.first);
-        uint64_t pieceChessCellBitValue(pieceAndChessCellBitValuePair.second);
-        Count differenceCount =
+        PieceColorAndType const piece(pieceAndChessCellBitValuePair.first);
+        uint64_t const pieceChessCellBitValue(pieceAndChessCellBitValuePair.second);
+        auto const differenceCount =
             static_cast<Count>(BitValueUtilities::getNumberOfOnes(pieceChessCellBitValue ^ chessCellBitValue));
         if (minimumDifferenceCount > differenceCount) {
             minimumDifferenceCount = differenceCount;
@@ -103,9 +100,9 @@ BoardObserver::PieceColorAndTypes BoardObserver::getBestFitPiecesFromChessCellBi
 
 uint32_t BoardObserver::getColorAt(int const x, int const y) const {
     uint32_t result{};
-    if (m_screenMonitoringPtr) {
+    if (m_screenMonitoringPtr != nullptr) {
         result = m_screenMonitoringPtr->getColorAt(x, y);
-    } else if (m_bitmapSnippetPtr) {
+    } else if (m_bitmapSnippetPtr != nullptr) {
         result = m_bitmapSnippetPtr->getColorAt({x, y});
     }
     return result;
@@ -116,19 +113,19 @@ bool BoardObserver::isBitValueAsserted(
     static const XYs aroundOffsets{XY(0, -1), XY(0, 1), XY(-1, 0), XY(1, 0)};
 
     bool result(false);
-    int deltaX = chessCellBottomRight.getX() - chessCellTopLeft.getX();
-    int deltaY = chessCellBottomRight.getY() - chessCellTopLeft.getY();
-    int offsetInX = getIntegerAfterRoundingADoubleValue<int>(
+    int const deltaX = chessCellBottomRight.getX() - chessCellTopLeft.getX();
+    int const deltaY = chessCellBottomRight.getY() - chessCellTopLeft.getY();
+    int const offsetInX = getIntegerAfterRoundingADoubleValue<int>(
         static_cast<double>(checkDetail.pointOffset.getX()) * deltaX / m_checkMaxPoint.getX());
-    int offsetInY = getIntegerAfterRoundingADoubleValue<int>(
+    int const offsetInY = getIntegerAfterRoundingADoubleValue<int>(
         static_cast<double>(checkDetail.pointOffset.getY()) * deltaY / m_checkMaxPoint.getY());
-    XY pointToCheck{chessCellTopLeft.getX() + offsetInX, chessCellTopLeft.getY() + offsetInY};
-    uint32_t colorToCheck(getColorAt(pointToCheck.getX(), pointToCheck.getY()));
+    XY const pointToCheck{chessCellTopLeft.getX() + offsetInX, chessCellTopLeft.getY() + offsetInY};
+    uint32_t const colorToCheck(getColorAt(pointToCheck.getX(), pointToCheck.getY()));
     double currentIntensity(calculateColorIntensityDecimal(colorToCheck));
     if (WhiteOrBlack::White == checkDetail.condition) {
         double maximum(currentIntensity);
         for (XY const& aroundOffset : aroundOffsets) {
-            XY pointWithOffset = pointToCheck + aroundOffset;
+            XY const pointWithOffset = pointToCheck + aroundOffset;
             currentIntensity =
                 calculateColorIntensityDecimal(getColorAt(pointWithOffset.getX(), pointWithOffset.getY()));
             if (maximum < currentIntensity) {
@@ -139,7 +136,7 @@ bool BoardObserver::isBitValueAsserted(
     } else if (WhiteOrBlack::Black == checkDetail.condition) {
         double minimum(currentIntensity);
         for (XY const& aroundOffset : aroundOffsets) {
-            XY pointWithOffset = pointToCheck + aroundOffset;
+            XY const pointWithOffset = pointToCheck + aroundOffset;
             currentIntensity =
                 calculateColorIntensityDecimal(getColorAt(pointWithOffset.getX(), pointWithOffset.getY()));
             if (minimum > currentIntensity) {
@@ -294,20 +291,20 @@ void BoardObserver::retrieveBlackOffsetPoints(XYs& bitmapXYs, int const xIndex, 
 
 void BoardObserver::retrieveOffsetPointsWithCondition(
     XYs& bitmapXYs, int const xIndex, int const yIndex, BoolFunction const& condition) const {
-    double startX = m_configuration.getTopLeftOfBoard().getX();
-    double startY = m_configuration.getTopLeftOfBoard().getY();
-    double endX = m_configuration.getBottomRightOfBoard().getX();
-    double endY = m_configuration.getBottomRightOfBoard().getY();
-    double deltaX = (endX - startX) / 8;
-    double deltaY = (endY - startY) / 8;
-    XY chessCellTopLeft{
+    double const startX = m_configuration.getTopLeftOfBoard().getX();
+    double const startY = m_configuration.getTopLeftOfBoard().getY();
+    double const endX = m_configuration.getBottomRightOfBoard().getX();
+    double const endY = m_configuration.getBottomRightOfBoard().getY();
+    double const deltaX = (endX - startX) / 8;
+    double const deltaY = (endY - startY) / 8;
+    XY const chessCellTopLeft{
         static_cast<int>(round(startX + deltaX * xIndex)), static_cast<int>(round(startY + deltaY * yIndex))};
-    XY chessCellBottomRight{
+    XY const chessCellBottomRight{
         static_cast<int>(round(startX + deltaX * (xIndex + 1))),
         static_cast<int>(round(startY + deltaY * (yIndex + 1)))};
 
-    int xLimit = chessCellBottomRight.getX() - chessCellTopLeft.getX();
-    int yLimit = chessCellBottomRight.getY() - chessCellTopLeft.getY();
+    int const xLimit = chessCellBottomRight.getX() - chessCellTopLeft.getX();
+    int const yLimit = chessCellBottomRight.getY() - chessCellTopLeft.getY();
     for (int x = 0U; x < xLimit; ++x) {
         for (int y = 0U; y < yLimit; ++y) {
             if (condition(calculateColorIntensityDecimal(
@@ -318,7 +315,4 @@ void BoardObserver::retrieveOffsetPointsWithCondition(
     }
 }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

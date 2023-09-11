@@ -5,18 +5,11 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 Configuration::Configuration(Type const type)
     : m_type(type),
-      m_chessEnginePath(),
-      m_uciOptionNamesAndValuePairs(),
-      m_boardTopLeft{},
-      m_boardBottomRight{},
+
       m_whiteColorLimit{},
       m_blackColorLimit{} {
     initialize();
@@ -67,7 +60,7 @@ void Configuration::initializeCommonParameters() {
     // option name Use NNUE type check default true
     // option name EvalFile type string default nn-6877cd24400e.nnue
     // uciok
-    StringConverterWithFormatting converter;
+    StringConverterWithFormatting const converter;
     m_uciOptionNamesAndValuePairs = {
         {"Threads", converter.convertToString(EngineConstants::NUMBER_OF_THREADS)},
         {"MultiPV", converter.convertToString(EngineConstants::NUMBER_OF_VARIATIONS)},
@@ -138,7 +131,4 @@ void Configuration::initializeLichessStream() {
     m_blackColorLimit = 0.30;
 }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

@@ -2,11 +2,7 @@
 
 #include <ChessUtilities/Board/Board.hpp>
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 class BoardWithContext {
 public:
@@ -17,13 +13,13 @@ public:
 
     BoardWithContext();
     BoardWithContext(PieceColor const& playerColor, Board const& board);
-    Board const& getBoard() const;
-    Coordinate getPlayerKingCoordinate() const;
-    Coordinate getOpponentsKingCoordinate() const;
-    PieceColor getPlayerColor() const;
-    std::string getFenString() const;
-    bool isPlayersKingOnCheck() const;
-    bool isOpponentsKingOnCheck() const;
+    [[nodiscard]] Board const& getBoard() const;
+    [[nodiscard]] Coordinate getPlayerKingCoordinate() const;
+    [[nodiscard]] Coordinate getOpponentsKingCoordinate() const;
+    [[nodiscard]] PieceColor getPlayerColor() const;
+    [[nodiscard]] std::string getFenString() const;
+    [[nodiscard]] bool isPlayersKingOnCheck() const;
+    [[nodiscard]] bool isOpponentsKingOnCheck() const;
     void save(PieceColor const& playerColor, Board const& board);
     void setPlayerColor(PieceColor const& playerColor);
     void move(Move const& move);
@@ -35,7 +31,4 @@ private:
     BoardDetails m_boardDetails;
 };
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

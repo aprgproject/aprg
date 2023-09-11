@@ -7,14 +7,10 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 TEST(PrintBoardDataTest, PrintBoardData) {
-    Configuration configuration(Configuration::Type::ChessDotComVersus);
+    Configuration const configuration(Configuration::Type::ChessDotComVersus);
     DetailsFromTheScreen detailsFromScreen(configuration);
     detailsFromScreen.saveDetailsFromTheScreen();
 
@@ -24,7 +20,4 @@ TEST(PrintBoardDataTest, PrintBoardData) {
     cout << "\n";
 }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

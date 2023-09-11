@@ -10,21 +10,17 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 ChessEngineControllerWithUci::ChessEngineControllerWithUci(
     ChessEngineHandler& engineHandler, stringHelper::StringPairs const& uciOptionNamesAndValuePairs)
     : m_engineHandler(engineHandler),
       m_uciOptionNamesAndValuePairs(uciOptionNamesAndValuePairs),
-      m_additionalStepsInCalculationMonitoring(),
-      m_logFileStreamOptional(),
+
       m_state(ControllerState::Initializing),
       m_waitingForReadyOkay(false),
       m_calculationDetails{},
-      m_uciInterpreter(m_calculationDetails),
-      m_pendingCommands() {
+      m_uciInterpreter(m_calculationDetails) {
     putStringProcessingFunctionAsCallBack();
 }
 
@@ -170,7 +166,7 @@ void ChessEngineControllerWithUci::proceedToIdleStateAndProcessPendingCommands()
 void ChessEngineControllerWithUci::processPendingCommands() {
     bool hasGoCommandOnPending(false);
     while (!m_pendingCommands.empty() && !hasGoCommandOnPending) {
-        Command pendingCommand(m_pendingCommands.front());
+        Command const pendingCommand(m_pendingCommands.front());
         m_pendingCommands.pop_front();
         hasGoCommandOnPending = CommandType::Go == pendingCommand.commandType;
         send(pendingCommand);
@@ -264,7 +260,7 @@ void ChessEngineControllerWithUci::forceSend(string const& commandString) {
 }
 
 void ChessEngineControllerWithUci::processAStringFromEngine(string const& stringFromEngine) {
-    string stringToProcess(getStringWithoutStartingAndTrailingWhiteSpace(stringFromEngine));
+    string const stringToProcess(getStringWithoutStartingAndTrailingWhiteSpace(stringFromEngine));
     if (m_waitingForReadyOkay && "readyok" == stringToProcess) {
         log("Ready okay received");
         m_waitingForReadyOkay = false;
@@ -309,6 +305,4 @@ void ChessEngineControllerWithUci::putStringProcessingFunctionAsCallBack() {
         [&](string const& stringFromEngine) { processAStringFromEngine(stringFromEngine); });
 }
 
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess

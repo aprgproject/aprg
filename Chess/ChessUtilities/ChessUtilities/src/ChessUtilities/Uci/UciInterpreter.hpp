@@ -26,8 +26,8 @@ private:
     void saveCommonParametersOfBestLine(InfoDetails const& infoDetails);
     void saveVariation(InfoDetails const& infoDetails);
     InfoDetails createInfoDetailsFromInfoTokens(stringHelper::strings const& tokens);
-    bool shouldSkipTheEntireInfo(std::string const& token);
-    bool isACommonParameter(std::string const& token);
+    static bool shouldSkipTheEntireInfo(std::string const& token);
+    static bool isACommonParameter(std::string const& token);
     CalculationDetails& m_calculationDetails;
 };
 

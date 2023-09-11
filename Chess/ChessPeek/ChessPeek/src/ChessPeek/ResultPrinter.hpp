@@ -7,11 +7,7 @@
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Common/User/DisplayTable.hpp>
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 class ResultPrinter {
 public:
@@ -77,7 +73,7 @@ private:
         int const rowSize) const;
 
     void printHorizontalBorder() const;
-    void setSeparatorsOnGrid(DisplayTable& grid, int const xOffset) const;
+    static void setSeparatorsOnGrid(DisplayTable& grid, int const xOffset);
     void setBoardOnGrid(DisplayTable& grid, Board const& board, int const xOffset) const;
 
     void setMoveOnGrid(
@@ -87,33 +83,34 @@ private:
     void fillMovesFromBook(BookMoves& bookMoves) const;
     void fillNextMovesFromCalculation(NextMoves& nextMoves) const;
     void humanizeMoves(NextMoves& nextMoves) const;
-    void sortForMoreHumanMoves(NextMoves& nextMoves) const;
+    static void sortForMoreHumanMoves(NextMoves& nextMoves);
     void removeTooManyPawnMoves(NextMoves& nextMoves) const;
     void fillMovesSequenceFromVariation(MovesSequence& result, Variation const& variation) const;
-    BookMove createBookMove(
+    [[nodiscard]] BookMove createBookMove(
         Move const& move, Book::LineDetail const& lineDetail, Book::MoveDetail const& bookMoveDetail) const;
-    BookMoves getMovesFromBook() const;
-    MovesSequence getMovesSequenceFromMoveString(std::string const& moveString) const;
-    NextMove createNextMove(Move const& move, Variation const& variation) const;
-    NextMoves getNextMovesFromCalculation() const;
-    ScorePair getBestAndWorstScores(Variations const& variations) const;
-    std::optional<char> getFirstCharOfABoardCell(bool const isCertainPreMove, bool const isPossiblePreMove) const;
-    std::string getNameOfBookMove(Move const& move, Book::LineDetail const& lineDetail) const;
-    std::string getDisplayableString(NextMove const& nextMove) const;
-    std::string getDisplayableString(BookMove const& bookMove) const;
-    std::string getDisplayableString(MovesSequence const& movesSequence) const;
-    std::string getDisplayableString(
-        int const mateValue, int const engineScore, HumanScoreGenerator::Score const humanScore) const;
-    std::string getDisplayableString(int const mateValue, int const engineScore) const;
-    std::string formatToHeaderString(std::string const& content) const;
-    std::string getDisplayableStringForABoardCell(
-        Piece const& piece, int const moveNumber, std::optional<char> const& firstChar) const;
-    stringHelper::strings getNextMovesString(NextMoves const& nextMoves, int const startIndex) const;
-    stringHelper::strings getBookMovesString(BookMoves const& bookMoves) const;
-    int getNumberOfColumnsOfGrid(int const numberOfBoards) const;
-    int getHorizontalBorderSize(int const numberOfBoards) const;
-    int getRowSizeForHalfMoves(int const numberOfHalfMoves) const;
-    int getRowSizeForFullMoves(int const numberOfFullMoves) const;
+    [[nodiscard]] BookMoves getMovesFromBook() const;
+    [[nodiscard]] MovesSequence getMovesSequenceFromMoveString(std::string const& moveString) const;
+    [[nodiscard]] NextMove createNextMove(Move const& move, Variation const& variation) const;
+    [[nodiscard]] NextMoves getNextMovesFromCalculation() const;
+    [[nodiscard]] static ScorePair getBestAndWorstScores(Variations const& variations);
+    [[nodiscard]] static std::optional<char> getFirstCharOfABoardCell(
+        bool const isCertainPreMove, bool const isPossiblePreMove);
+    [[nodiscard]] std::string getNameOfBookMove(Move const& move, Book::LineDetail const& lineDetail) const;
+    [[nodiscard]] std::string getDisplayableString(NextMove const& nextMove) const;
+    [[nodiscard]] static std::string getDisplayableString(BookMove const& bookMove);
+    [[nodiscard]] std::string getDisplayableString(MovesSequence const& movesSequence) const;
+    [[nodiscard]] static std::string getDisplayableString(
+        int const mateValue, int const engineScore, HumanScoreGenerator::Score const humanScore);
+    [[nodiscard]] static std::string getDisplayableString(int const mateValue, int const engineScore);
+    [[nodiscard]] static std::string formatToHeaderString(std::string const& content);
+    [[nodiscard]] static std::string getDisplayableStringForABoardCell(
+        Piece const& piece, int const moveNumber, std::optional<char> const& firstChar);
+    [[nodiscard]] stringHelper::strings getNextMovesString(NextMoves const& nextMoves, int const startIndex) const;
+    [[nodiscard]] stringHelper::strings getBookMovesString(BookMoves const& bookMoves) const;
+    [[nodiscard]] static int getNumberOfColumnsOfGrid(int const numberOfBoards);
+    [[nodiscard]] static int getHorizontalBorderSize(int const numberOfBoards);
+    [[nodiscard]] static int getRowSizeForHalfMoves(int const numberOfHalfMoves);
+    [[nodiscard]] static int getRowSizeForFullMoves(int const numberOfFullMoves);
     CalculationDetails const& m_calculationDetails;
     BoardWithContext const& m_engineBoardWithContext;
     Book const& m_book;
@@ -122,7 +119,4 @@ private:
     std::string m_horizontalBorder;
 };
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

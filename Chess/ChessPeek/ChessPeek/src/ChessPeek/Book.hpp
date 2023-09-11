@@ -7,11 +7,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 class Book {
 public:
@@ -31,8 +27,8 @@ public:
 
     using LineDetailOptional = std::optional<LineDetail>;
     void saveDatabaseTo(std::string const& path) const;
-    LineDetailOptional getLine(Board const& board) const;
-    size_t getSize() const;
+    [[nodiscard]] LineDetailOptional getLine(Board const& board) const;
+    [[nodiscard]] size_t getSize() const;
     void clear();
     void addLine(Board const& board, LineDetail const& lineDetail);
     void loadDatabaseFrom(std::string const& path);
@@ -41,7 +37,4 @@ private:
     std::map<BoardValue, LineDetail> m_boardToLineDetail;
 };
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

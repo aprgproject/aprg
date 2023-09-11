@@ -2,11 +2,7 @@
 
 #include <ChessPeek/BoardWithContext.hpp>
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 class HumanScoreGenerator {
 public:
@@ -37,7 +33,7 @@ public:
     //    static constexpr int SCORE_LEVEL_DISTANCE_WHEN_SLIGHTLY_WORSE = 140;
     //    static constexpr int SCORE_LEVEL_DISTANCE_WHEN_LOSING = 40;
     HumanScoreGenerator(BoardWithContext const& boardWithContext, int const worstScore, int const bestScore);
-    Score getHumanScore(MoveDetail const& moveDetail) const;
+    [[nodiscard]] Score getHumanScore(MoveDetail const& moveDetail) const;
     static constexpr int LOWER_LIMIT_FOR_WINNING = 200;          // x > 200
     static constexpr int LOWER_LIMIT_FOR_SLIGHTLY_BETTER = 100;  // 200 > x > 100
     static constexpr int LOWER_LIMIT_FOR_EQUAL = -100;           // 100 > x > -100
@@ -50,26 +46,23 @@ public:
     static constexpr int SCORE_LEVEL_DISTANCE_WHEN_LOSING = 90;
 
 private:
-    DataFromExchanges getDataFromExchanges(Move const& move) const;
-    Score getScoreLevelPart(MoveDetail const& moveDetail) const;
-    Score getMoveTypePart(Move const& move) const;
-    Score getDistanceToKingPart(Move const& move) const;
-    Score getPiecePart(Move const& move) const;
-    Score getHumanScoreOfPiece(PieceType const pieceType) const;
-    int getDistanceToKing(Coordinate const& coordinate) const;
-    int getScoreLevelDistance() const;
-    bool isACaptureMove(Piece const pieceAtStart, Piece const pieceAtEnd) const;
-    bool isSameValueExchange(Piece const pieceAtStart, Piece const pieceAtEnd) const;
-    bool isDevelopingMove(Piece const pieceAtStart, Move const& move) const;
-    bool isCastlingMove(Piece const pieceAtStart, Move const& move) const;
-    bool isCheck(Piece const pieceAtEnd) const;
+    [[nodiscard]] DataFromExchanges getDataFromExchanges(Move const& move) const;
+    [[nodiscard]] Score getScoreLevelPart(MoveDetail const& moveDetail) const;
+    [[nodiscard]] Score getMoveTypePart(Move const& move) const;
+    [[nodiscard]] Score getDistanceToKingPart(Move const& move) const;
+    [[nodiscard]] Score getPiecePart(Move const& move) const;
+    [[nodiscard]] static Score getHumanScoreOfPiece(PieceType const pieceType);
+    [[nodiscard]] int getDistanceToKing(Coordinate const& coordinate) const;
+    [[nodiscard]] int getScoreLevelDistance() const;
+    [[nodiscard]] static bool isACaptureMove(Piece const pieceAtStart, Piece const pieceAtEnd);
+    [[nodiscard]] bool isSameValueExchange(Piece const pieceAtStart, Piece const pieceAtEnd) const;
+    [[nodiscard]] bool isDevelopingMove(Piece const pieceAtStart, Move const& move) const;
+    [[nodiscard]] static bool isCastlingMove(Piece const pieceAtStart, Move const& move);
+    [[nodiscard]] static bool isCheck(Piece const pieceAtEnd);
     BoardWithContext const& m_boardWithContext;
     int m_worstScore;
     int m_bestScore;
     int m_highestScoreLevel;
 };
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

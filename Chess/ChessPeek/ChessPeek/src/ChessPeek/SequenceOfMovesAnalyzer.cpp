@@ -5,11 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 SequenceOfMovesAnalyzer::SequenceOfMovesAnalyzer(BoardWithContext const& boardWithContext)
     : m_state(State::NoMove), m_current{boardWithContext, {}}, m_previous{} {}
@@ -29,7 +25,7 @@ void SequenceOfMovesAnalyzer::analyzeMove(Move const& halfMove) {
     if (areCoordinatesValid(halfMove)) {
         m_previous.move = m_current.move;
         m_current.move = halfMove;
-        PieceColor moveColor = m_current.boardWithContext.getBoard().getPieceAt(m_current.move.first).getColor();
+        PieceColor const moveColor = m_current.boardWithContext.getBoard().getPieceAt(m_current.move.first).getColor();
         m_current.boardWithContext.setPlayerColor(moveColor);
         m_state = State::AnalyzingMove;
     }
@@ -54,9 +50,9 @@ bool SequenceOfMovesAnalyzer::canPreMoveBecauseOfCheck() const {
     BoardWithContext const& previousContext(m_previous.boardWithContext);
 
     if (previousContext.isPlayersKingOnCheck()) {
-        Coordinate kingCoordinate = previousContext.getPlayerKingCoordinate();
+        Coordinate const kingCoordinate = previousContext.getPlayerKingCoordinate();
         Board const& analysisBoard(previousContext.getBoard());
-        Moves attacksOnKing = analysisBoard.getAttacksToThis(kingCoordinate, currentContext.getPlayerColor());
+        Moves const attacksOnKing = analysisBoard.getAttacksToThis(kingCoordinate, currentContext.getPlayerColor());
         auto numberOfKingEscapes = analysisBoard.getMovesFromThis(kingCoordinate, 2).size();
         auto numberOfBlocks = analysisBoard.getNumberOfWaysToBlockAttacks(attacksOnKing, 2);
         auto numberOfLegalMoves = numberOfKingEscapes + numberOfBlocks;
@@ -79,7 +75,4 @@ bool SequenceOfMovesAnalyzer::isARecapture() const {
            currentBoard.isACaptureMove(m_current.move);
 }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

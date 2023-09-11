@@ -13,7 +13,7 @@ using namespace std;
 
 namespace alba {
 
-void AlbaWindowsUserAutomation::setMousePosition(MousePosition const& position) const {
+void AlbaWindowsUserAutomation::setMousePosition(MousePosition const& position) {
     long const screenWidth = GetSystemMetrics(SM_CXSCREEN) - 1;
     long const screenHeight = GetSystemMetrics(SM_CYSCREEN) - 1;
     float ratioInX = position.getX() * (65535.0F / screenWidth);
@@ -28,14 +28,14 @@ void AlbaWindowsUserAutomation::setMousePosition(MousePosition const& position) 
     sleepWithRealisticDelay();
 }
 
-void AlbaWindowsUserAutomation::pressLeftButtonOnMouse() const {
+void AlbaWindowsUserAutomation::pressLeftButtonOnMouse() {
     doOperation([](INPUT& input) {
         input.type = INPUT_MOUSE;
         input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
     });
 }
 
-void AlbaWindowsUserAutomation::releaseLeftButtonOnMouse() const {
+void AlbaWindowsUserAutomation::releaseLeftButtonOnMouse() {
     doOperation([](INPUT& input) {
         input.type = INPUT_MOUSE;
         input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
@@ -64,14 +64,14 @@ void AlbaWindowsUserAutomation::doDoubleLeftClickAt(MousePosition const& positio
     doDoubleLeftClick();
 }
 
-void AlbaWindowsUserAutomation::pressRightButtonOnMouse() const {
+void AlbaWindowsUserAutomation::pressRightButtonOnMouse() {
     doOperation([](INPUT& input) {
         input.type = INPUT_MOUSE;
         input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
     });
 }
 
-void AlbaWindowsUserAutomation::releaseRightButtonOnMouse() const {
+void AlbaWindowsUserAutomation::releaseRightButtonOnMouse() {
     doOperation([](INPUT& input) {
         input.type = INPUT_MOUSE;
         input.mi.dwFlags = MOUSEEVENTF_RIGHTUP;
@@ -90,7 +90,7 @@ void AlbaWindowsUserAutomation::doRightClickAt(MousePosition const& position) co
     doRightClick();
 }
 
-void AlbaWindowsUserAutomation::pressKey(uint16_t const key) const {
+void AlbaWindowsUserAutomation::pressKey(uint16_t const key) {
     doOperation([&](INPUT& input) {
         input.type = INPUT_KEYBOARD;
         input.ki.wScan = 0;
@@ -101,7 +101,7 @@ void AlbaWindowsUserAutomation::pressKey(uint16_t const key) const {
     });
 }
 
-void AlbaWindowsUserAutomation::releaseKey(uint16_t const key) const {
+void AlbaWindowsUserAutomation::releaseKey(uint16_t const key) {
     doOperation([&](INPUT& input) {
         input.type = INPUT_KEYBOARD;
         input.ki.wScan = 0;
@@ -148,7 +148,7 @@ void AlbaWindowsUserAutomation::performKeyCombination(
     }
 }
 
-void AlbaWindowsUserAutomation::setForegroundWindowWithClassName(string_view const& className) const {
+void AlbaWindowsUserAutomation::setForegroundWindowWithClassName(string_view const& className) {
     Sleep(2000);
     int const LENGTH = 1000;
     char classNameTemp[LENGTH];
@@ -161,7 +161,7 @@ void AlbaWindowsUserAutomation::setForegroundWindowWithClassName(string_view con
     setForegroundWindowWithWindowHandle(windowHandle);
 }
 
-void AlbaWindowsUserAutomation::setForegroundWindowWithWindowName(string_view const& windowName) const {
+void AlbaWindowsUserAutomation::setForegroundWindowWithWindowName(string_view const& windowName) {
     HWND windowHandle = FindWindowEx(nullptr, nullptr, nullptr, windowName.data());
     setForegroundWindowWithWindowHandle(windowHandle);
 }
@@ -258,7 +258,7 @@ bool AlbaWindowsUserAutomation::isKeyPressed(int const key) {
     return (status & 0x8000) >> 15 == 1;  // || (status & 1) == 1;
 }
 
-bool AlbaWindowsUserAutomation::isLetterPressed(char const letter) const { return isKeyPressed(::toupper(letter)); }
+bool AlbaWindowsUserAutomation::isLetterPressed(char const letter) { return isKeyPressed(::toupper(letter)); }
 
 void AlbaWindowsUserAutomation::setForegroundWindowWithWindowHandle(HWND const windowHandle) {
     bool isSuccessful(false);

@@ -9,11 +9,7 @@
 #include <ChessUtilities/ChessEngineHandler.hpp>
 #include <Common/Time/AlbaLocalTimer.hpp>
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 class ChessPeek {
 public:
@@ -26,10 +22,10 @@ public:
     void calculationMonitoringCallBackForEngine(EngineCalculationDetails const& engineCalculationDetails);
 
 private:
-    Move getPerformedMove() const;
-    bool shouldAnalyzeBoard() const;
-    bool didPlayerChange() const;
-    bool didBoardChange() const;
+    [[nodiscard]] Move getPerformedMove() const;
+    [[nodiscard]] bool shouldAnalyzeBoard() const;
+    [[nodiscard]] bool didPlayerChange() const;
+    [[nodiscard]] bool didBoardChange() const;
     void initialize();
     void saveCalculationDetails(EngineCalculationDetails const& engineCalculationDetails);
     void printCalculationDetailsWithFiltering();
@@ -48,7 +44,4 @@ private:
     bool m_hasPendingPrintAction;
 };
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

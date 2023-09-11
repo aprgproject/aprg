@@ -2,23 +2,16 @@
 
 #include <ChessPeek/BoardWithContext.hpp>
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 class DetailsOnTheEngine {
 public:
     DetailsOnTheEngine();
-    BoardWithContext const& getBoardWithContext() const;
+    [[nodiscard]] BoardWithContext const& getBoardWithContext() const;
     void save(BoardWithContext const& boardWithContext);
 
 private:
     BoardWithContext m_boardWithContext;
 };
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

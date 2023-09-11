@@ -7,11 +7,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 HumanScoreGenerator::HumanScoreGenerator(
     BoardWithContext const& boardWithContext, int const worstScore, int const bestScore)
@@ -22,7 +18,7 @@ HumanScoreGenerator::HumanScoreGenerator(
 
 HumanScoreGenerator::Score HumanScoreGenerator::getHumanScore(MoveDetail const& moveDetail) const {
     // Format: 0000 0000 0000 0000 SSSS SSSS SSSS HHHH HHHH HHHH MMMM KKKK KKKK CCCC CCCC CCCC
-    DataFromExchanges dataFromExchanges(getDataFromExchanges(moveDetail.move));
+    DataFromExchanges const dataFromExchanges(getDataFromExchanges(moveDetail.move));
     return getScoreLevelPart(moveDetail) << 36 | dataFromExchanges.hangingValue << 24 |
            getMoveTypePart(moveDetail.move) << 20 | getDistanceToKingPart(moveDetail.move) << 12 |
            dataFromExchanges.complicatedScore;
@@ -30,8 +26,8 @@ HumanScoreGenerator::Score HumanScoreGenerator::getHumanScore(MoveDetail const& 
 
 HumanScoreGenerator::DataFromExchanges HumanScoreGenerator::getDataFromExchanges(Move const& move) const {
     Board const& board(m_boardWithContext.getBoard());
-    Piece pieceAtStart = board.getPieceAt(move.first);
-    Piece pieceAtEnd = board.getPieceAt(move.second);
+    Piece const pieceAtStart = board.getPieceAt(move.first);
+    Piece const pieceAtEnd = board.getPieceAt(move.second);
     Board boardAfterMove(m_boardWithContext.getBoard());
     boardAfterMove.move(move);
 
@@ -39,9 +35,9 @@ HumanScoreGenerator::DataFromExchanges HumanScoreGenerator::getDataFromExchanges
     int complicatedScore = 0;
     for (int j = 0; j < Board::CHESS_SIDE_SIZE; ++j) {
         for (int i = 0; i < Board::CHESS_SIDE_SIZE; ++i) {
-            Coordinate coordinate{i, j};
-            Piece piece(boardAfterMove.getPieceAt(coordinate));
-            Exchange exchange(boardAfterMove.getExchangeAt(coordinate));
+            Coordinate const coordinate{i, j};
+            Piece const piece(boardAfterMove.getPieceAt(coordinate));
+            Exchange const exchange(boardAfterMove.getExchangeAt(coordinate));
             if (piece.getColor() == m_boardWithContext.getPlayerColor()) {
                 if (exchange.getValue() < 0) {
                     hangingValue += getValueOfPieceType(piece.getType());
@@ -76,11 +72,12 @@ HumanScoreGenerator::Score HumanScoreGenerator::getScoreLevelPart(MoveDetail con
 
 HumanScoreGenerator::Score HumanScoreGenerator::getMoveTypePart(Move const& move) const {
     Board const& board(m_boardWithContext.getBoard());
-    Piece pieceAtStart = board.getPieceAt(move.first);
-    Piece pieceAtEnd = board.getPieceAt(move.second);
+    Piece const pieceAtStart = board.getPieceAt(move.first);
+    Piece const pieceAtEnd = board.getPieceAt(move.second);
     if (isSameValueExchange(pieceAtStart, pieceAtEnd)) {
         return 0;  // avoid same value exchanges
-    } else if (isCastlingMove(pieceAtStart, move)) {
+    }
+    if (isCastlingMove(pieceAtStart, move)) {
         return 4;  // prioritize checks to be castling
     } else if (isDevelopingMove(pieceAtStart, move)) {
         return 3;  // prioritize developing moves
@@ -93,7 +90,7 @@ HumanScoreGenerator::Score HumanScoreGenerator::getMoveTypePart(Move const& move
 
 HumanScoreGenerator::Score HumanScoreGenerator::getDistanceToKingPart(Move const& move) const {
     constexpr int MAX_DISTANCE_SQUARED_IN_BOARD = 98;
-    int reverseDistance = MAX_DISTANCE_SQUARED_IN_BOARD - getDistanceToKing(move.second);
+    int const reverseDistance = MAX_DISTANCE_SQUARED_IN_BOARD - getDistanceToKing(move.second);
     return static_cast<HumanScoreGenerator::Score>(reverseDistance) & 0xFF;
 }
 
@@ -101,7 +98,7 @@ HumanScoreGenerator::Score HumanScoreGenerator::getPiecePart(Move const& move) c
     return getHumanScoreOfPiece(m_boardWithContext.getBoard().getPieceAt(move.first).getType()) & 0xF;
 }
 
-HumanScoreGenerator::Score HumanScoreGenerator::getHumanScoreOfPiece(PieceType const pieceType) const {
+HumanScoreGenerator::Score HumanScoreGenerator::getHumanScoreOfPiece(PieceType const pieceType) {
     int result{};
     switch (pieceType) {
         case PieceType::Pawn: {
@@ -136,14 +133,15 @@ HumanScoreGenerator::Score HumanScoreGenerator::getHumanScoreOfPiece(PieceType c
 }
 
 int HumanScoreGenerator::getDistanceToKing(Coordinate const& coordinate) const {
-    Coordinate deltaToKing = m_boardWithContext.getOpponentsKingCoordinate() - coordinate;
+    Coordinate const deltaToKing = m_boardWithContext.getOpponentsKingCoordinate() - coordinate;
     return (deltaToKing.getX() * deltaToKing.getX() + deltaToKing.getY() * deltaToKing.getY());
 }
 
 int HumanScoreGenerator::getScoreLevelDistance() const {
     if (m_bestScore > LOWER_LIMIT_FOR_WINNING) {
         return SCORE_LEVEL_DISTANCE_WHEN_WINNING;
-    } else if (m_bestScore > LOWER_LIMIT_FOR_SLIGHTLY_BETTER) {
+    }
+    if (m_bestScore > LOWER_LIMIT_FOR_SLIGHTLY_BETTER) {
         return SCORE_LEVEL_DISTANCE_WHEN_SLIGHTLY_BETTER;
     } else if (m_bestScore > LOWER_LIMIT_FOR_EQUAL) {
         return SCORE_LEVEL_DISTANCE_WHEN_EQUAL;
@@ -154,7 +152,7 @@ int HumanScoreGenerator::getScoreLevelDistance() const {
     }
 }
 
-bool HumanScoreGenerator::isACaptureMove(Piece const pieceAtStart, Piece const pieceAtEnd) const {
+bool HumanScoreGenerator::isACaptureMove(Piece const pieceAtStart, Piece const pieceAtEnd) {
     return !pieceAtStart.isEmpty() && !pieceAtEnd.isEmpty();
 }
 
@@ -168,13 +166,10 @@ bool HumanScoreGenerator::isDevelopingMove(Piece const pieceAtStart, Move const&
            getDistanceToKing(move.first) > getDistanceToKing(move.second);
 }
 
-bool HumanScoreGenerator::isCastlingMove(Piece const pieceAtStart, Move const& move) const {
+bool HumanScoreGenerator::isCastlingMove(Piece const pieceAtStart, Move const& move) {
     return PieceType::King == pieceAtStart.getType() && getPositiveDelta(move.first.getX(), move.second.getX()) == 2;
 }
 
-bool HumanScoreGenerator::isCheck(Piece const pieceAtEnd) const { return PieceType::King == pieceAtEnd.getType(); }
+bool HumanScoreGenerator::isCheck(Piece const pieceAtEnd) { return PieceType::King == pieceAtEnd.getType(); }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

@@ -4,16 +4,12 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 TEST(HumanScoreGeneratorTest, GetHumanScoreWorks) {
-    Board board(BoardOrientation::BlackUpWhiteDown);
-    BoardWithContext boardWithContext(PieceColor::White, board);
-    HumanScoreGenerator humanScoreGenerator(boardWithContext, -127, 52);
+    Board const board(BoardOrientation::BlackUpWhiteDown);
+    BoardWithContext const boardWithContext(PieceColor::White, board);
+    HumanScoreGenerator const humanScoreGenerator(boardWithContext, -127, 52);
 
     EXPECT_EQ(0x08FF348FFFU, humanScoreGenerator.getHumanScore({{{6, 7}, {5, 5}}, 0, 52}));
     EXPECT_EQ(0x08FF151FFFU, humanScoreGenerator.getHumanScore({{{3, 6}, {3, 4}}, 0, 52}));
@@ -37,7 +33,4 @@ TEST(HumanScoreGeneratorTest, GetHumanScoreWorks) {
     EXPECT_EQ(0x08FF14EFFFU, humanScoreGenerator.getHumanScore({{{6, 6}, {6, 4}}, 0, -127}));
 }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

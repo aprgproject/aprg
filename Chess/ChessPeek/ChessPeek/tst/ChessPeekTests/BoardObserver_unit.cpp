@@ -8,11 +8,7 @@
 using namespace alba::AprgBitmap;
 using namespace std;
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 namespace {
 
@@ -53,60 +49,59 @@ void verifyGetChessCellPieceForBlackUpWhiteDown(BoardObserver const& retriever) 
 
 }  // namespace
 TEST(BoardObserverTest, DISABLED_GetChessCellPieceWorksForChessDotComVersus) {
-    AlbaLocalPathHandler inputFile(APRG_DIR
-                                   R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComVersus\ChessDotComVersus.bmp)");
+    AlbaLocalPathHandler const inputFile(
+        APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComVersus\ChessDotComVersus.bmp)");
 
-    Configuration configuration(Configuration::Type::ChessDotComVersus);
-    Bitmap inputBitmap(inputFile.getFullPath());
-    BitmapSnippet inputSnippet(inputBitmap.getSnippetReadFromFile(
+    Configuration const configuration(Configuration::Type::ChessDotComVersus);
+    Bitmap const inputBitmap(inputFile.getFullPath());
+    BitmapSnippet const inputSnippet(inputBitmap.getSnippetReadFromFile(
         convertToBitmapXY(configuration.getTopLeftOfBoard()),
         convertToBitmapXY(configuration.getBottomRightOfBoard())));
-    BoardObserver retriever(configuration, inputSnippet);
+    BoardObserver const retriever(configuration, inputSnippet);
 
     verifyGetChessCellPieceForBlackUpWhiteDown(retriever);
 }
 
 TEST(BoardObserverTest, DISABLED_GetChessCellPieceWorksForChessDotComPuzzle) {
-    AlbaLocalPathHandler inputFile(APRG_DIR
-                                   R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComPuzzle\ChessDotComPuzzle.bmp)");
+    AlbaLocalPathHandler const inputFile(
+        APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComPuzzle\ChessDotComPuzzle.bmp)");
 
-    Configuration configuration(Configuration::Type::ChessDotComPuzzle);
-    Bitmap inputBitmap(inputFile.getFullPath());
-    BitmapSnippet inputSnippet(inputBitmap.getSnippetReadFromFile(
+    Configuration const configuration(Configuration::Type::ChessDotComPuzzle);
+    Bitmap const inputBitmap(inputFile.getFullPath());
+    BitmapSnippet const inputSnippet(inputBitmap.getSnippetReadFromFile(
         convertToBitmapXY(configuration.getTopLeftOfBoard()),
         convertToBitmapXY(configuration.getBottomRightOfBoard())));
-    BoardObserver retriever(configuration, inputSnippet);
+    BoardObserver const retriever(configuration, inputSnippet);
 
     verifyGetChessCellPieceForBlackUpWhiteDown(retriever);
 }
 
 TEST(BoardObserverTest, DISABLED_GetChessCellPieceWorksForLichessVersus) {
-    AlbaLocalPathHandler inputFile(APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\LichessVersus\LichessVersus.bmp)");
+    AlbaLocalPathHandler const inputFile(APRG_DIR
+                                         R"(\Chess\ChessPeek\Files\RetrieverBasis\LichessVersus\LichessVersus.bmp)");
 
-    Configuration configuration(Configuration::Type::LichessVersus);
-    Bitmap inputBitmap(inputFile.getFullPath());
-    BitmapSnippet inputSnippet(inputBitmap.getSnippetReadFromFile(
+    Configuration const configuration(Configuration::Type::LichessVersus);
+    Bitmap const inputBitmap(inputFile.getFullPath());
+    BitmapSnippet const inputSnippet(inputBitmap.getSnippetReadFromFile(
         convertToBitmapXY(configuration.getTopLeftOfBoard()),
         convertToBitmapXY(configuration.getBottomRightOfBoard())));
-    BoardObserver retriever(configuration, inputSnippet);
+    BoardObserver const retriever(configuration, inputSnippet);
 
     verifyGetChessCellPieceForBlackUpWhiteDown(retriever);
 }
 
 TEST(BoardObserverTest, DISABLED_GetChessCellPieceWorksForLichessStream) {
-    AlbaLocalPathHandler inputFile(APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\LichessStream\LichessStream.bmp)");
+    AlbaLocalPathHandler const inputFile(APRG_DIR
+                                         R"(\Chess\ChessPeek\Files\RetrieverBasis\LichessStream\LichessStream.bmp)");
 
-    Configuration configuration(Configuration::Type::LichessStream);
-    Bitmap inputBitmap(inputFile.getFullPath());
-    BitmapSnippet inputSnippet(inputBitmap.getSnippetReadFromFile(
+    Configuration const configuration(Configuration::Type::LichessStream);
+    Bitmap const inputBitmap(inputFile.getFullPath());
+    BitmapSnippet const inputSnippet(inputBitmap.getSnippetReadFromFile(
         convertToBitmapXY(configuration.getTopLeftOfBoard()),
         convertToBitmapXY(configuration.getBottomRightOfBoard())));
-    BoardObserver retriever(configuration, inputSnippet);
+    BoardObserver const retriever(configuration, inputSnippet);
 
     verifyGetChessCellPieceForBlackUpWhiteDown(retriever);
 }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

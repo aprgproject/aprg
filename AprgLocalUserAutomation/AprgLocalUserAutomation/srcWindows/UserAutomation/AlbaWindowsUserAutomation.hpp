@@ -14,25 +14,25 @@ using MousePosition = AlbaXY<int>;
 
 class AlbaWindowsUserAutomation {
 public:
-    void setMousePosition(MousePosition const& position) const;
-    void pressLeftButtonOnMouse() const;
-    void releaseLeftButtonOnMouse() const;
+    static void setMousePosition(MousePosition const& position);
+    static void pressLeftButtonOnMouse();
+    static void releaseLeftButtonOnMouse();
     void doLeftClick() const;
     void doDoubleLeftClick() const;
     void doLeftClickAt(MousePosition const& position) const;
     void doDoubleLeftClickAt(MousePosition const& position) const;
-    void pressRightButtonOnMouse() const;
-    void releaseRightButtonOnMouse() const;
+    static void pressRightButtonOnMouse();
+    static void releaseRightButtonOnMouse();
     void doRightClick() const;
     void doRightClickAt(MousePosition const& position) const;
-    void pressKey(uint16_t const key) const;
-    void releaseKey(uint16_t const key) const;
+    static void pressKey(uint16_t const key);
+    static void releaseKey(uint16_t const key);
     void typeKey(uint16_t const key) const;
     void typeCharacter(char const character) const;
     void typeString(std::string_view const& stringToType) const;
     void performKeyCombination(std::vector<uint16_t> const& keys, std::vector<char> const& characters) const;
-    void setForegroundWindowWithClassName(std::string_view const& className) const;
-    void setForegroundWindowWithWindowName(std::string_view const& windowName) const;
+    static void setForegroundWindowWithClassName(std::string_view const& className);
+    static void setForegroundWindowWithWindowName(std::string_view const& windowName);
     static void sleepWithRealisticDelay();
     static void sleep(int const milliseconds);
     void saveBitmapOnScreen(std::string_view const& filePath) const;
@@ -42,7 +42,7 @@ public:
     [[nodiscard]] static std::string getClassNameOfForegroundWindow();
     [[nodiscard]] static std::string getStringFromClipboard();
     [[nodiscard]] static bool isKeyPressed(int const key);
-    [[nodiscard]] bool isLetterPressed(char const letter) const;
+    [[nodiscard]] static bool isLetterPressed(char const letter);
     using InputFunction = std::function<void(INPUT&)>;
 
 private:

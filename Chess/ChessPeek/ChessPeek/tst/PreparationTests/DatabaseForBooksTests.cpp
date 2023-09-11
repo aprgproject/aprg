@@ -14,28 +14,24 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 TEST(DatabaseForBooksTest, DISABLED_SavingChessDotComDatabaseWorks) {
     constexpr int MIN_NUMBER_OF_GAMES = 0;  // put a restriction if the database gets too large
-    AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
-    AlbaLocalPathHandler chessDotComDataFromSite(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_DATA_FROM_SITE);
+    AlbaLocalPathHandler const chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
+    AlbaLocalPathHandler const chessDotComDataFromSite(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_DATA_FROM_SITE);
     ifstream inStream(chessDotComDataFromSite.getFullPath());
     AlbaFileReader fileReader(inStream);
 
     Book book;
     while (fileReader.isNotFinished()) {
-        string line = getStringInBetweenTwoStrings(fileReader.getLineAndIgnoreWhiteSpaces(), "Line: [", "]");
+        string const line = getStringInBetweenTwoStrings(fileReader.getLineAndIgnoreWhiteSpaces(), "Line: [", "]");
         strings initialMoveStrings;
         splitToStrings<SplitStringType::WithoutDelimeters>(initialMoveStrings, line, ",");
         string nameOfLine =
             getStringInBetweenTwoStrings(fileReader.getLineAndIgnoreWhiteSpaces(), "NameOfLine: [", "]");
         replaceAllAndReturnIfFound(nameOfLine, "é", "e");  // for Reti
-        int numberOfNextMoves = convertStringToNumber<int>(
+        int const numberOfNextMoves = convertStringToNumber<int>(
             getStringInBetweenTwoStrings(fileReader.getLineAndIgnoreWhiteSpaces(), "NumberOfNextMoves: [", "]"));
 
         Board board(BoardOrientation::BlackUpWhiteDown);
@@ -48,19 +44,19 @@ TEST(DatabaseForBooksTest, DISABLED_SavingChessDotComDatabaseWorks) {
         int totalNumberOfGames{};
         Book::LineDetail lineDetail{nameOfLine, playerColor, {}, {}};
         for (int i = 0; i < numberOfNextMoves; ++i) {
-            string nextMove =
+            string const nextMove =
                 getStringInBetweenTwoStrings(fileReader.getLineAndIgnoreWhiteSpaces(), "NextMove: [", "]");
-            int numberOfGames = convertStringToNumber<int>(
+            int const numberOfGames = convertStringToNumber<int>(
                 getStringInBetweenTwoStrings(fileReader.getLineAndIgnoreWhiteSpaces(), "NumberOfGames: [", "]"));
-            int whiteWinPercentage = convertStringToNumber<int>(
+            int const whiteWinPercentage = convertStringToNumber<int>(
                 getStringInBetweenTwoStrings(fileReader.getLineAndIgnoreWhiteSpaces(), "WhiteWinPercentage: [", "]"));
             fileReader.skipLine();  // DrawPercentage;
-            int blackWinPercentage = convertStringToNumber<int>(
+            int const blackWinPercentage = convertStringToNumber<int>(
                 getStringInBetweenTwoStrings(fileReader.getLineAndIgnoreWhiteSpaces(), "BlackWinPercentage: [", "]"));
-            int winPercentageForColor = (PieceColor::White == playerColor)   ? whiteWinPercentage
-                                        : (PieceColor::Black == playerColor) ? blackWinPercentage
-                                                                             : 0;
-            Book::MoveDetail moveDetail{nextMove, winPercentageForColor};
+            int const winPercentageForColor = (PieceColor::White == playerColor)   ? whiteWinPercentage
+                                              : (PieceColor::Black == playerColor) ? blackWinPercentage
+                                                                                   : 0;
+            Book::MoveDetail const moveDetail{nextMove, winPercentageForColor};
             if (nextMove.empty()) {
                 cout << "The numberOfNextMoves is in correct on site details. Please check." << endl;
                 cout << "line: " << line << endl;
@@ -83,10 +79,10 @@ TEST(DatabaseForBooksTest, DISABLED_SavingChessDotComDatabaseWorks) {
 }
 
 TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithStartingPosition) {
-    AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
+    AlbaLocalPathHandler const chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
-    Board boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
-    Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);
+    Board const boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
+    Board const boardWithWUBD(BoardOrientation::WhiteUpBlackDown);
     book.loadDatabaseFrom(chessDotComBookDatabase.getFullPath());
 
     auto resultWithBUWD(book.getLine(boardWithBUWD));
@@ -106,7 +102,7 @@ TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithStartingPosition) {
 }
 
 TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithE4) {
-    AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
+    AlbaLocalPathHandler const chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
     Board boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
     Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);
@@ -139,7 +135,7 @@ TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithE4) {
 }
 
 TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithD4) {
-    AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
+    AlbaLocalPathHandler const chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
     Board boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
     Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);
@@ -172,7 +168,7 @@ TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithD4) {
 }
 
 TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithC4) {
-    AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
+    AlbaLocalPathHandler const chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
     Board boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
     Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);
@@ -205,7 +201,7 @@ TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithC4) {
 }
 
 TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithSicilianDefense) {
-    AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
+    AlbaLocalPathHandler const chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
     Board boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
     Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);
@@ -239,7 +235,4 @@ TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithSicilianDefense) {
     EXPECT_EQ(27U, lineDetailsWithWUBD.nextMoves.size());
 }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

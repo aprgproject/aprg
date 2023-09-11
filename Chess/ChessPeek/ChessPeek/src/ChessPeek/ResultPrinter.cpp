@@ -20,11 +20,7 @@ constexpr char SEPARATOR[] = "     ";
 static string s_nameOfLine;
 }  // namespace
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 ResultPrinter::ResultPrinter(
     CalculationDetails const& calculationDetails, BoardWithContext const& engineBoard, Book const& book)
@@ -74,7 +70,7 @@ void ResultPrinter::printCalculationDetails(MovesToPrint const& movesToPrint) co
     Board updatedBoard(engineBoard);
     cout << "Best variation: ";
     for (Move const& halfMove : movesToPrint.bestLine.halfMoves) {
-        Piece piece = updatedBoard.getPieceAt(halfMove.first);
+        Piece const piece = updatedBoard.getPieceAt(halfMove.first);
         cout << updatedBoard.getReadableStringOfMove(halfMove);
         cout << " by " << piece.getColor() << ", ";
         updatedBoard.move(halfMove);
@@ -96,7 +92,7 @@ void ResultPrinter::printCalculationDetails(MovesToPrint const& movesToPrint) co
 
 void ResultPrinter::printMovesGrids(MovesToPrint const& movesToPrint) const {
     if (!movesToPrint.mostHumanMoves.empty()) {
-        strings suffixHeaders{
+        strings const suffixHeaders{
             " -> 1st most human move", " -> 2nd most human move", " -> 3rd most human move", " -> 4th most human move",
             " -> 5th most human move"};
         printHeadersForNextMoves(movesToPrint.mostHumanMoves, 0, suffixHeaders);
@@ -104,7 +100,7 @@ void ResultPrinter::printMovesGrids(MovesToPrint const& movesToPrint) const {
     }
 
     if (!movesToPrint.mostHumanMoves.empty()) {
-        strings suffixHeaders{
+        strings const suffixHeaders{
             " -> 4th best move", " -> 5th best move", " -> 6th best move", " -> 7th best move", " -> 8th best move"};
         printHeadersForNextMoves(movesToPrint.calculatedMoves, 3, suffixHeaders);
         printARowOfNextMoves(movesToPrint.calculatedMoves, 3);
@@ -115,7 +111,7 @@ void ResultPrinter::printMovesGrids(MovesToPrint const& movesToPrint) const {
         printARowOfNextMoves(movesToPrint.bookMoves, 0);
         printHorizontalBorder();
     } else if (!movesToPrint.bestLine.halfMoves.empty()) {
-        strings suffixHeaders{
+        strings const suffixHeaders{
             " -> best line move 1", "best line move 2", "best line move 3", "best line move 4", "best line move 5"};
         printHeadersForBestLine(movesToPrint.bestLine, suffixHeaders);
         printARowOfMovesSequence(movesToPrint.bestLine);
@@ -126,8 +122,8 @@ void ResultPrinter::printMovesGrids(MovesToPrint const& movesToPrint) const {
 template <typename GenericMoves>
 void ResultPrinter::printARowOfNextMoves(GenericMoves const& genericMoves, int const startIndex) const {
     if (startIndex < static_cast<int>(genericMoves.size())) {
-        int rowSize = getRowSizeForFullMoves(static_cast<int>(genericMoves.size()) - startIndex);
-        int numberOfBoardDisplayColumns = getNumberOfColumnsOfGrid(rowSize);
+        int const rowSize = getRowSizeForFullMoves(static_cast<int>(genericMoves.size()) - startIndex);
+        int const numberOfBoardDisplayColumns = getNumberOfColumnsOfGrid(rowSize);
         DisplayTable grid(numberOfBoardDisplayColumns, Board::CHESS_SIDE_SIZE);
         grid.setVerticalBorder("|");
         setSeparatorsOnGrid(grid, NEXT_OFFSET_OF_GRID);
@@ -153,8 +149,8 @@ void ResultPrinter::setNextMovesOnGrid(
 }
 
 void ResultPrinter::printARowOfMovesSequence(MovesSequence const& movesSequence) const {
-    int rowSize = getRowSizeForHalfMoves(movesSequence.halfMoves.size());
-    int numberOfColumns = getNumberOfColumnsOfGrid(rowSize);
+    int const rowSize = getRowSizeForHalfMoves(movesSequence.halfMoves.size());
+    int const numberOfColumns = getNumberOfColumnsOfGrid(rowSize);
     DisplayTable grid(numberOfColumns, Board::CHESS_SIDE_SIZE);
     grid.setVerticalBorder("|");
     setSeparatorsOnGrid(grid, NEXT_OFFSET_OF_GRID);
@@ -166,16 +162,16 @@ void ResultPrinter::setMovesSequenceOnGrid(
     DisplayTable& grid, MovesSequence const& movesSequence, int const rowSize) const {
     SequenceOfMovesAnalyzer analyzer(m_engineBoardWithContext);
     Board const& analyzerBoard(analyzer.getCurrentBoard());
-    int numberOfBoardDisplayColumns = static_cast<int>(grid.getMaxNumberOfColumns());
+    int const numberOfBoardDisplayColumns = static_cast<int>(grid.getMaxNumberOfColumns());
     int movesDisplayed = 0;
     int xOffset = 0;
-    bool isUnSurePreMove = false;
+    bool const isUnSurePreMove = false;
 
     for (Move const& halfMove : movesSequence.halfMoves) {
         if (xOffset < numberOfBoardDisplayColumns) {
             analyzer.analyzeMove(halfMove);
             if (analyzer.getCurrentMoveColor() == m_engineBoardWithContext.getPlayerColor()) {
-                optional<char> firstChar = getFirstCharOfABoardCell(analyzer.canPreMove(), isUnSurePreMove);
+                optional<char> const firstChar = getFirstCharOfABoardCell(analyzer.canPreMove(), isUnSurePreMove);
 
                 setBoardOnGrid(grid, analyzerBoard, xOffset);
                 setMoveOnGrid(grid, analyzerBoard, halfMove, xOffset, movesDisplayed + 1, firstChar);
@@ -195,9 +191,9 @@ void ResultPrinter::setMovesSequenceOnGrid(
 
 void ResultPrinter::printHeadersForNextMoves(
     NextMoves const& nextMoves, int const startIndex, strings const& suffixHeaders) const {
-    int rowSize = getRowSizeForFullMoves(static_cast<int>(nextMoves.size()) - startIndex);
+    int const rowSize = getRowSizeForFullMoves(static_cast<int>(nextMoves.size()) - startIndex);
     if (rowSize > 0) {
-        strings prefixHeaders = getNextMovesString(nextMoves, startIndex);
+        strings const prefixHeaders = getNextMovesString(nextMoves, startIndex);
         printHorizontalBorder();
         printHeaders(prefixHeaders, suffixHeaders, rowSize);
         printHorizontalBorder();
@@ -205,16 +201,16 @@ void ResultPrinter::printHeadersForNextMoves(
 }
 
 void ResultPrinter::printHeadersForBookMoves(BookMoves const& bookMoves) const {
-    strings prefixHeaders = getBookMovesString(bookMoves);
+    strings const prefixHeaders = getBookMovesString(bookMoves);
     printHorizontalBorder();
     printHeaders(prefixHeaders, strings(), prefixHeaders.size());
     printHorizontalBorder();
 }
 
 void ResultPrinter::printHeadersForBestLine(MovesSequence const& movesSequence, strings const& suffixHeaders) const {
-    int rowSize = getRowSizeForHalfMoves(movesSequence.halfMoves.size());
+    int const rowSize = getRowSizeForHalfMoves(movesSequence.halfMoves.size());
     if (rowSize > 0) {
-        strings prefixHeaders{getDisplayableString(movesSequence)};
+        strings const prefixHeaders{getDisplayableString(movesSequence)};
         printHorizontalBorder();
         printHeaders(prefixHeaders, suffixHeaders, rowSize);
         printHorizontalBorder();
@@ -245,8 +241,9 @@ void ResultPrinter::printHeaders(strings const& prefixHeaders, strings const& su
 
 void ResultPrinter::printHorizontalBorder() const { cout << m_horizontalBorder << "\n"; }
 
-void ResultPrinter::setSeparatorsOnGrid(DisplayTable& grid, int const xOffset) const {
-    int const numberOfColumns = grid.getMaxNumberOfColumns(), numberOfRows = grid.getNumberOfRows();
+void ResultPrinter::setSeparatorsOnGrid(DisplayTable& grid, int const xOffset) {
+    int const numberOfColumns = grid.getMaxNumberOfColumns();
+    int const numberOfRows = grid.getNumberOfRows();
     for (int j = 0; j < numberOfRows; ++j) {
         for (int separatorIndex = xOffset - 1; separatorIndex < numberOfColumns; separatorIndex += xOffset) {
             grid.getCellReferenceAt(separatorIndex, j).setText(SEPARATOR);
@@ -257,7 +254,7 @@ void ResultPrinter::setSeparatorsOnGrid(DisplayTable& grid, int const xOffset) c
 void ResultPrinter::setBoardOnGrid(DisplayTable& grid, Board const& board, int const xOffset) const {
     for (CoordinateDataType y = 0; y < Board::CHESS_SIDE_SIZE; ++y) {
         for (CoordinateDataType x = 0; x < Board::CHESS_SIDE_SIZE; ++x) {
-            Piece piece(board.getPieceAt(Coordinate(x, y)));
+            Piece const piece(board.getPieceAt(Coordinate(x, y)));
             grid.getCellReferenceAt(x + xOffset, y)
                 .setText(getDisplayableStringForABoardCell(piece, 0, optional<char>()));
         }
@@ -267,7 +264,7 @@ void ResultPrinter::setBoardOnGrid(DisplayTable& grid, Board const& board, int c
 void ResultPrinter::setMoveOnGrid(
     DisplayTable& grid, Board const& board, Move const& move, int const xOffset, int const moveNumber,
     optional<char> const& firstChar) const {
-    Piece piece(board.getPieceAt(move.first));
+    Piece const piece(board.getPieceAt(move.first));
     grid.getCellReferenceAt(move.first.getX() + xOffset, move.first.getY())
         .setText(getDisplayableStringForABoardCell(piece, moveNumber, firstChar));
     grid.getCellReferenceAt(move.second.getX() + xOffset, move.second.getY())
@@ -283,7 +280,7 @@ void ResultPrinter::fillMovesFromBook(BookMoves& bookMoves) const {
             Board const& engineBoard(m_engineBoardWithContext.getBoard());
             bookMoves.reserve(MAX_NUMBER_OF_BOARDS_IN_A_ROW);
             for (Book::MoveDetail const& bookMoveDetail : lineDetail.nextMoves) {
-                Move move(engineBoard.getMoveUsingAlgebraicNotation(
+                Move const move(engineBoard.getMoveUsingAlgebraicNotation(
                     bookMoveDetail.move, m_engineBoardWithContext.getPlayerColor()));
                 bookMoves.emplace_back(createBookMove(move, lineDetail, bookMoveDetail));
                 if (bookMoves.size() > MAX_NUMBER_OF_BOARDS_IN_A_ROW) {
@@ -299,7 +296,7 @@ void ResultPrinter::fillNextMovesFromCalculation(NextMoves& nextMoves) const {
     nextMoves.reserve(MAX_NUMBER_OF_BOARDS_IN_A_ROW);
     for (Variation const& variation : m_calculationDetails.variations) {
         if (!variation.halfMoves.empty()) {
-            Move move(engineBoard.getMoveUsingUciNotation(variation.halfMoves.front()));
+            Move const move(engineBoard.getMoveUsingUciNotation(variation.halfMoves.front()));
             if (engineBoard.isAPossibleMove(move)) {
                 nextMoves.emplace_back(createNextMove(move, variation));
                 if (nextMoves.size() > MAX_NUMBER_OF_MOVES_FOR_PRINTING) {
@@ -315,7 +312,7 @@ void ResultPrinter::humanizeMoves(NextMoves& nextMoves) const {
     removeTooManyPawnMoves(nextMoves);
 }
 
-void ResultPrinter::sortForMoreHumanMoves(NextMoves& nextMoves) const {
+void ResultPrinter::sortForMoreHumanMoves(NextMoves& nextMoves) {
     if (!nextMoves.empty()) {
         stable_sort(nextMoves.begin(), nextMoves.end(), [&](NextMove const& detail1, NextMove const& detail2) {
             return detail1.humanScore > detail2.humanScore;
@@ -346,7 +343,7 @@ void ResultPrinter::fillMovesSequenceFromVariation(MovesSequence& result, Variat
     result.mateValue = variation.mateValue;
     result.engineScore = variation.scoreInCentipawns;
     if (!variation.halfMoves.empty()) {
-        Move move(m_engineBoardWithContext.getBoard().getMoveUsingUciNotation(variation.halfMoves.front()));
+        Move const move(m_engineBoardWithContext.getBoard().getMoveUsingUciNotation(variation.halfMoves.front()));
         result.humanScore =
             m_humanScoreGenerator.getHumanScore({move, variation.mateValue, variation.scoreInCentipawns});
     }
@@ -354,9 +351,9 @@ void ResultPrinter::fillMovesSequenceFromVariation(MovesSequence& result, Variat
     PieceColor previousColor{};
     int index = 0;
     for (string const& halfMoves : variation.halfMoves) {
-        Move move(updatedBoard.getMoveUsingUciNotation(halfMoves));
+        Move const move(updatedBoard.getMoveUsingUciNotation(halfMoves));
         if (updatedBoard.isAPossibleMove(move)) {
-            Piece piece = updatedBoard.getPieceAt(move.first);
+            Piece const piece = updatedBoard.getPieceAt(move.first);
             if (index == 0 || areOpposingColors(previousColor, piece.getColor())) {
                 result.halfMoves.emplace_back(move);
                 updatedBoard.move(move);
@@ -407,7 +404,7 @@ ResultPrinter::NextMoves ResultPrinter::getNextMovesFromCalculation() const {
     return result;
 }
 
-ResultPrinter::ScorePair ResultPrinter::getBestAndWorstScores(Variations const& variations) const {
+ResultPrinter::ScorePair ResultPrinter::getBestAndWorstScores(Variations const& variations) {
     if (!variations.empty()) {
         auto itPair = minmax_element(
             variations.cbegin(), variations.cend(), [](Variation const& variation1, Variation const& variation2) {
@@ -436,7 +433,7 @@ string ResultPrinter::getDisplayableString(NextMove const& nextMove) const {
     return getDisplayableString(nextMove.mateValue, nextMove.engineScore, nextMove.humanScore);
 }
 
-string ResultPrinter::getDisplayableString(BookMove const& bookMove) const {
+string ResultPrinter::getDisplayableString(BookMove const& bookMove) {
     stringstream ss;
     ss << "(" << bookMove.winningPercentageInBook << "%) " << bookMove.nameOfLineInBook;
     return ss.str();
@@ -447,7 +444,7 @@ string ResultPrinter::getDisplayableString(MovesSequence const& movesSequence) c
 }
 
 string ResultPrinter::getDisplayableString(
-    int const mateValue, int const engineScore, HumanScoreGenerator::Score const humanScore) const {
+    int const mateValue, int const engineScore, HumanScoreGenerator::Score const humanScore) {
     stringstream ss;
     if (mateValue == 0) {
         ss << fixed << setprecision(2) << setfill('0') << static_cast<double>(engineScore) / 100;
@@ -458,7 +455,7 @@ string ResultPrinter::getDisplayableString(
     return ss.str();
 }
 
-string ResultPrinter::getDisplayableString(int const mateValue, int const engineScore) const {
+string ResultPrinter::getDisplayableString(int const mateValue, int const engineScore) {
     stringstream ss;
     if (mateValue == 0) {
         ss << fixed << setprecision(2) << setfill('0') << static_cast<double>(engineScore) / 100;
@@ -468,15 +465,15 @@ string ResultPrinter::getDisplayableString(int const mateValue, int const engine
     return ss.str();
 }
 
-string ResultPrinter::formatToHeaderString(string const& content) const {
+string ResultPrinter::formatToHeaderString(string const& content) {
     return getStringWithCenterAlignment(content, DESIRED_HEADER_LENGTH).substr(0, DESIRED_HEADER_LENGTH);
 }
 
 string ResultPrinter::getDisplayableStringForABoardCell(
-    Piece const& piece, int const moveNumber, optional<char> const& firstChar) const {
+    Piece const& piece, int const moveNumber, optional<char> const& firstChar) {
     string result(3, ' ');
     if (moveNumber != 0) {
-        char moveNumberCharacter = '0' + static_cast<char>(moveNumber);
+        char const moveNumberCharacter = '0' + static_cast<char>(moveNumber);
         if (firstChar) {
             result[0] = firstChar.value();
         } else {
@@ -491,7 +488,7 @@ string ResultPrinter::getDisplayableStringForABoardCell(
 strings ResultPrinter::getNextMovesString(NextMoves const& nextMoves, int const startIndex) const {
     strings result;
     if (startIndex < static_cast<int>(nextMoves.size())) {
-        int rowSize = min(MAX_NUMBER_OF_BOARDS_IN_A_ROW, static_cast<int>(nextMoves.size() - startIndex));
+        int const rowSize = min(MAX_NUMBER_OF_BOARDS_IN_A_ROW, static_cast<int>(nextMoves.size() - startIndex));
         result.reserve(rowSize);
         for (int moveIndex = 0; moveIndex < rowSize; ++moveIndex) {
             auto const& nextMove(nextMoves[startIndex + moveIndex]);
@@ -503,7 +500,7 @@ strings ResultPrinter::getNextMovesString(NextMoves const& nextMoves, int const 
 
 strings ResultPrinter::getBookMovesString(BookMoves const& bookMoves) const {
     strings result;
-    int rowSize = min(MAX_NUMBER_OF_BOARDS_IN_A_ROW, static_cast<int>(bookMoves.size()));
+    int const rowSize = min(MAX_NUMBER_OF_BOARDS_IN_A_ROW, static_cast<int>(bookMoves.size()));
     result.reserve(rowSize);
     for (int moveIndex = 0; moveIndex < rowSize; ++moveIndex) {
         auto const& bookMove(bookMoves[moveIndex]);
@@ -512,11 +509,11 @@ strings ResultPrinter::getBookMovesString(BookMoves const& bookMoves) const {
     return result;
 }
 
-int ResultPrinter::getNumberOfColumnsOfGrid(int const numberOfBoards) const {
+int ResultPrinter::getNumberOfColumnsOfGrid(int const numberOfBoards) {
     return numberOfBoards <= 0 ? 0 : (numberOfBoards * Board::CHESS_SIDE_SIZE) + numberOfBoards - 1;
 }
 
-int ResultPrinter::getHorizontalBorderSize(int const numberOfBoards) const {
+int ResultPrinter::getHorizontalBorderSize(int const numberOfBoards) {
     constexpr int CELL_SIZE = 3;
     constexpr int BORDER_SIZE = 1;
     constexpr int SEPARATOR_SIZE = 5;
@@ -526,15 +523,15 @@ int ResultPrinter::getHorizontalBorderSize(int const numberOfBoards) const {
                                      (numberOfBoards - 1) * SEPARATOR_SIZE;
 }
 
-int ResultPrinter::getRowSizeForHalfMoves(int const numberOfHalfMoves) const {
+int ResultPrinter::getRowSizeForHalfMoves(int const numberOfHalfMoves) {
     return min(MAX_NUMBER_OF_BOARDS_IN_A_ROW, static_cast<int>((numberOfHalfMoves + 1) / 2));
 }
 
-int ResultPrinter::getRowSizeForFullMoves(int const numberOfFullMoves) const {
+int ResultPrinter::getRowSizeForFullMoves(int const numberOfFullMoves) {
     return min(MAX_NUMBER_OF_BOARDS_IN_A_ROW, static_cast<int>(numberOfFullMoves));
 }
 
-optional<char> ResultPrinter::getFirstCharOfABoardCell(bool const isSurePreMove, bool const isUnsurePreMove) const {
+optional<char> ResultPrinter::getFirstCharOfABoardCell(bool const isSurePreMove, bool const isUnsurePreMove) {
     optional<char> result;
     if (isSurePreMove) {
         result = '*';
@@ -544,7 +541,4 @@ optional<char> ResultPrinter::getFirstCharOfABoardCell(bool const isSurePreMove,
     return result;
 }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

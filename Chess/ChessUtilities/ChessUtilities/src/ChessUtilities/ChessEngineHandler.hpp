@@ -27,7 +27,7 @@ public:
     void setAdditionalStepsInProcessingAStringFromEngine(ProcessAStringFunction const& additionalSteps);
 
 private:
-    std::string getLogHeader(LogType const logtype) const;
+    static std::string getLogHeader(LogType const logtype);
     void initializeEngine();
     void shutdownEngine();
     void log(LogType const logtype, std::string const& logString);

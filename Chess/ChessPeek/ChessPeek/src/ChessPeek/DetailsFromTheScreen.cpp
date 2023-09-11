@@ -5,17 +5,13 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 DetailsFromTheScreen::DetailsFromTheScreen(Configuration const& configuration)
     : m_configuration(configuration),
       m_screenMonitoring(),
       m_boardObserver(m_configuration, m_screenMonitoring),
-      m_boardWithContext(),
+
       m_savedPlayerColor{},
       m_savedOrientation{},
       m_countOfPieces{} {}
@@ -100,15 +96,18 @@ void DetailsFromTheScreen::savePlayerColorIfChessDotComPuzzle() {
 }
 
 void DetailsFromTheScreen::savePlayerColorIfLichessStream() {
-    constexpr auto xForWhiteSection = 3387, xForBlackSection = 3553;
-    constexpr auto lastMovePixelColor = 0x2A4053U, rgbMask = 0xFFFFFFU;
+    constexpr auto xForWhiteSection = 3387;
+    constexpr auto xForBlackSection = 3553;
+    constexpr auto lastMovePixelColor = 0x2A4053U;
+    constexpr auto rgbMask = 0xFFFFFFU;
     for (auto yCoordinate = 897; yCoordinate >= 199; yCoordinate -= 1) {
         auto pixelColorInWhiteSection = m_screenMonitoring.getColorAt(xForWhiteSection, yCoordinate) & rgbMask;
         auto pixelColorInBlackSection = m_screenMonitoring.getColorAt(xForBlackSection, yCoordinate) & rgbMask;
         if (lastMovePixelColor == pixelColorInWhiteSection) {
             savePlayerColor(PieceColor::Black);
             break;
-        } else if (lastMovePixelColor == pixelColorInBlackSection) {
+        }
+        if (lastMovePixelColor == pixelColorInBlackSection) {
             savePlayerColor(PieceColor::White);
             break;
         }
@@ -153,8 +152,8 @@ Board DetailsFromTheScreen::getBoardAndSaveDetails() {
     m_countOfPieces = {};
     for (int j = 0; j < Board::CHESS_SIDE_SIZE; ++j) {
         for (int i = 0; i < Board::CHESS_SIDE_SIZE; ++i) {
-            Coordinate coordinate(i, j);
-            Piece piece(m_boardObserver.getPieceFromCell(i, j));
+            Coordinate const coordinate(i, j);
+            Piece const piece(m_boardObserver.getPieceFromCell(i, j));
             board.setPieceAt(coordinate, piece);
             if (!piece.isEmpty()) {
                 saveBoardDetails(coordinate, piece);
@@ -164,7 +163,4 @@ Board DetailsFromTheScreen::getBoardAndSaveDetails() {
     return board;
 }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

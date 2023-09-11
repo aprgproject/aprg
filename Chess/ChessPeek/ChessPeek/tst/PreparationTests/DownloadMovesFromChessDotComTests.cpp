@@ -49,10 +49,10 @@ string removeHtmlTags(string const& mainString) {
         if (!shouldStillRun) {
             exit(0);
         }
-        int lastIndexOfFirstString = firstIndexOfFirstString + 1;
-        int firstIndexOfSecondString = withTags.find(">", lastIndexOfFirstString);
+        int const lastIndexOfFirstString = firstIndexOfFirstString + 1;
+        int const firstIndexOfSecondString = withTags.find(">", lastIndexOfFirstString);
         if (isNotNpos(firstIndexOfSecondString)) {
-            int lastIndexOfSecondString = firstIndexOfSecondString + 1;
+            int const lastIndexOfSecondString = firstIndexOfSecondString + 1;
             withoutTags += withTags.substr(0, firstIndexOfFirstString);
             withTags = withTags.substr(lastIndexOfSecondString);
             firstIndexOfFirstString = withTags.find("<", 0);
@@ -66,11 +66,11 @@ string removeHtmlTags(string const& mainString) {
 string getStringInBetween(
     string_view const mainString, string_view const firstString, string_view const secondString, int& index) {
     string result{};
-    int indexToStart = index;
-    int firstIndexOfFirstString = mainString.find(firstString, indexToStart);
+    int const indexToStart = index;
+    int const firstIndexOfFirstString = mainString.find(firstString, indexToStart);
     if (isNotNpos(firstIndexOfFirstString)) {
-        int lastIndexOfFirstString = firstIndexOfFirstString + firstString.length();
-        int firstIndexOfSecondString = mainString.find(secondString, lastIndexOfFirstString);
+        int const lastIndexOfFirstString = firstIndexOfFirstString + firstString.length();
+        int const firstIndexOfSecondString = mainString.find(secondString, lastIndexOfFirstString);
         if (isNotNpos(firstIndexOfSecondString)) {
             result = mainString.substr(lastIndexOfFirstString, firstIndexOfSecondString - lastIndexOfFirstString);
             index = firstIndexOfSecondString + secondString.length();
@@ -86,11 +86,7 @@ string getStringInBetween(string_view const mainString, string_view const firstS
 
 }  // namespace
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 struct Paths {
     string url;
@@ -109,10 +105,10 @@ struct MoveInfo {
 };
 
 void trackKeyPressForDownloadMovesFromChessDotCom() {
-    AlbaLocalUserAutomation userAutomation;
+    AlbaLocalUserAutomation const userAutomation;
     while (shouldStillRun) {
-        shouldStillRun = !userAutomation.isKeyPressed(VK_NUMLOCK);
-        userAutomation.sleep(100);
+        shouldStillRun = !alba::AlbaLocalUserAutomation::isKeyPressed(VK_NUMLOCK);
+        alba::AlbaLocalUserAutomation::sleep(100);
     }
 }
 
@@ -124,34 +120,34 @@ struct WebPageInfo {
 };
 
 bool performMovesAndReturnIfValid(strings const& line) {
-    Configuration configuration(Configuration::Type::ChessDotComExplorer);
+    Configuration const configuration(Configuration::Type::ChessDotComExplorer);
     DetailsFromTheScreen detailsFromScreen(configuration);
-    AlbaLocalUserAutomation userAutomation;
+    AlbaLocalUserAutomation const userAutomation;
 
-    MousePosition topLeft(2245, 101);
-    MousePosition bottomRight(3124, 980);
+    MousePosition const topLeft(2245, 101);
+    MousePosition const bottomRight(3124, 980);
     Board updatedBoard(BoardOrientation::BlackUpWhiteDown);
     PieceColor currentColor = PieceColor::White;
-    double deltaX = (bottomRight.getX() - topLeft.getX()) / 8;
-    double deltaY = (bottomRight.getY() - topLeft.getY()) / 8;
+    double const deltaX = (bottomRight.getX() - topLeft.getX()) / 8;
+    double const deltaY = (bottomRight.getY() - topLeft.getY()) / 8;
     for (string const& moveString : line) {
         if (!shouldStillRun) {
             exit(0);
         }
-        Move move = updatedBoard.getMoveUsingAlgebraicNotation(moveString, currentColor);
+        Move const move = updatedBoard.getMoveUsingAlgebraicNotation(moveString, currentColor);
         if (areCoordinatesValid(move)) {
-            int startX = round(topLeft.getX() + (move.first.getX() + 0.5) * deltaX);
-            int startY = round(topLeft.getY() + (move.first.getY() + 0.5) * deltaY);
-            int endX = round(topLeft.getX() + (move.second.getX() + 0.5) * deltaX);
-            int endY = round(topLeft.getY() + (move.second.getY() + 0.5) * deltaY);
+            int const startX = round(topLeft.getX() + (move.first.getX() + 0.5) * deltaX);
+            int const startY = round(topLeft.getY() + (move.first.getY() + 0.5) * deltaY);
+            int const endX = round(topLeft.getX() + (move.second.getX() + 0.5) * deltaX);
+            int const endY = round(topLeft.getY() + (move.second.getY() + 0.5) * deltaY);
 
-            userAutomation.setMousePosition(MousePosition(startX, startY));
-            userAutomation.pressLeftButtonOnMouse();
-            userAutomation.sleep(200);
-            userAutomation.setMousePosition(MousePosition(endX, endY));
-            userAutomation.sleep(200);
-            userAutomation.releaseLeftButtonOnMouse();
-            userAutomation.sleep(600);
+            alba::AlbaLocalUserAutomation::setMousePosition(MousePosition(startX, startY));
+            alba::AlbaLocalUserAutomation::pressLeftButtonOnMouse();
+            alba::AlbaLocalUserAutomation::sleep(200);
+            alba::AlbaLocalUserAutomation::setMousePosition(MousePosition(endX, endY));
+            alba::AlbaLocalUserAutomation::sleep(200);
+            alba::AlbaLocalUserAutomation::releaseLeftButtonOnMouse();
+            alba::AlbaLocalUserAutomation::sleep(600);
 
             updatedBoard.move(move);
             currentColor = getOppositeColor(currentColor);
@@ -187,7 +183,7 @@ bool readHtmlFileIfValid(WebPageInfo& pageInfo, string const& htmlFile) {
         if (!shouldStillRun) {
             exit(0);
         }
-        string line(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const line(fileReader.getLineAndIgnoreWhiteSpaces());
         int index = line.find(R"("eco-classifier-component sidebar-game-opening")");
         if (isNotNpos(index)) {
             result = true;
@@ -202,16 +198,16 @@ bool readHtmlFileIfValid(WebPageInfo& pageInfo, string const& htmlFile) {
                 MoveInfo moveInfo{};
                 moveInfo.nextMove = getStringInBetween(line, R"(<span class="move-san-san">)", R"(</span>)", index);
                 if (moveInfo.nextMove.empty()) {
-                    string prefix =
+                    string const prefix =
                         getStringInBetween(line, R"(<span class="move-san-figurine icon-font-chess )", R"(-)", index);
-                    string suffix =
+                    string const suffix =
                         getStringInBetween(line, R"(<span class="move-san-afterfigurine">)", R"(</span>)", index);
                     moveInfo.nextMove = getOneCharPiece(prefix) + suffix;
                 }
                 moveInfo.numberOfGames = removeHtmlTags(
                     getStringInBetween(line, R"(<p class="suggested-moves-total-games">)", R"(</p>)", index));
                 if (!moveInfo.numberOfGames.empty()) {
-                    string moveList = getStringInBetween(
+                    string const moveList = getStringInBetween(
                         line, R"(<div class="suggested-moves-suggested-moves-list">)", R"(</div></li>)", index);
                     int moveListIndex = 0;
                     if (isStringFoundCaseSensitive(moveList, R"("suggested-moves-suggested-white")")) {
@@ -228,9 +224,9 @@ bool readHtmlFileIfValid(WebPageInfo& pageInfo, string const& htmlFile) {
                     }
                 } else {
                     moveInfo.numberOfGames = "1";
-                    string moveList = getStringInBetween(
+                    string const moveList = getStringInBetween(
                         line, R"(<div class="suggested-moves-suggested-moves-list">)", R"(</div></li>)", index);
-                    string oneMatch = getStringInBetween(
+                    string const oneMatch = getStringInBetween(
                         moveList, R"(<div class="suggested-moves-result suggested-moves-suggested-)", R"(</div>)");
                     if (oneMatch == R"(white">1-0)") {
                         moveInfo.whiteWinPercentage = "100%";
@@ -256,11 +252,11 @@ bool shouldIncludeLine(strings const& currentLine, Book const& book) {
 
     Board updatedBoard(BoardOrientation::BlackUpWhiteDown);
     PieceColor currentColor = PieceColor::White;
-    int size = currentLine.size();
+    int const size = currentLine.size();
     int index{};
     for (string const& moveString : currentLine) {
         if (index != size - 1) {
-            Move move = updatedBoard.getMoveUsingAlgebraicNotation(moveString, currentColor);
+            Move const move = updatedBoard.getMoveUsingAlgebraicNotation(moveString, currentColor);
             if (areCoordinatesValid(move)) {
                 updatedBoard.move(move);
                 currentColor = getOppositeColor(currentColor);
@@ -306,7 +302,7 @@ strings getLineOfMoves(string const& lineFile, int const lineNumber) {
             fileReader.skipLine();
             ++i;
         } else if (i == lineNumber) {
-            string lineString = fileReader.getLineAndIgnoreWhiteSpaces();
+            string const lineString = fileReader.getLineAndIgnoreWhiteSpaces();
             splitToStrings<SplitStringType::WithoutDelimeters>(result, lineString, ",");
             break;
         } else {
@@ -317,21 +313,21 @@ strings getLineOfMoves(string const& lineFile, int const lineNumber) {
 }
 
 void clickWindow() {
-    AlbaLocalUserAutomation userAutomation;
+    AlbaLocalUserAutomation const userAutomation;
     userAutomation.doLeftClickAt(MousePosition(3750, 550));
 }
 
 void gotoWebPage(string const& url) {
-    AlbaLocalUserAutomation userAutomation;
+    AlbaLocalUserAutomation const userAutomation;
     userAutomation.performKeyCombination({VK_CONTROL}, {'L'});
 
-    userAutomation.setStringToClipboard(url);
-    userAutomation.sleep(1000);
+    alba::AlbaLocalUserAutomation::setStringToClipboard(url);
+    alba::AlbaLocalUserAutomation::sleep(1000);
 
     userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
 
     userAutomation.typeKey(VK_RETURN);
-    userAutomation.sleep(500);
+    alba::AlbaLocalUserAutomation::sleep(500);
 }
 
 void deleteWebPageUntilItsDeleted(string const& htmlFile) {
@@ -350,11 +346,11 @@ void deleteWebPageUntilItsDeleted(string const& htmlFile) {
 }
 
 void saveWebPage(string const& htmlFile) {
-    AlbaLocalUserAutomation userAutomation;
+    AlbaLocalUserAutomation const userAutomation;
     userAutomation.performKeyCombination({VK_CONTROL}, {'S'});
 
-    userAutomation.setStringToClipboard(htmlFile);
-    userAutomation.sleep(1000);
+    alba::AlbaLocalUserAutomation::setStringToClipboard(htmlFile);
+    alba::AlbaLocalUserAutomation::sleep(1000);
 
     userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
 
@@ -362,7 +358,7 @@ void saveWebPage(string const& htmlFile) {
 }
 
 void typeEnter() {
-    AlbaLocalUserAutomation userAutomation;
+    AlbaLocalUserAutomation const userAutomation;
     userAutomation.typeKey(VK_RETURN);
 }
 
@@ -384,7 +380,7 @@ void saveWebPageUntilItsDeleted(string const& htmlFile) {
 }
 
 void clickReset() {
-    AlbaLocalUserAutomation userAutomation;
+    AlbaLocalUserAutomation const userAutomation;
     userAutomation.doLeftClickAt(MousePosition(3426, 952));
 }
 
@@ -413,7 +409,7 @@ void setLineNumber(string const& lineNumberFile, int const lineNumber) {
 }
 
 void saveLine(ofstream& outStream, strings const& line) {
-    ostream_iterator<string> outputIterator(outStream, ",");
+    ostream_iterator<string> const outputIterator(outStream, ",");
     copy(line.cbegin(), line.cend(), outputIterator);
     outStream << "\n";
 }
@@ -465,7 +461,7 @@ void doOnePage(strings const& currentLine, Paths const& paths) {
 
 void doAllPagesRecursively(Paths const& paths) {
     thread trackKeyPressForDownloadMovesFromChessDotComThread(trackKeyPressForDownloadMovesFromChessDotCom);
-    AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
+    AlbaLocalPathHandler const chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
     book.loadDatabaseFrom(chessDotComBookDatabase.getFullPath());
 
@@ -498,20 +494,18 @@ TEST(DownloadMovesFromChessDotComTest, DISABLED_DoAllPagesRecursivelyWorks) {
     // ChessDotComMoves should be deleted or empty
     // ChessDotComLines should be deleted or empty
     // ChessDotComLineNumber has to contain 0
-    AlbaWebPathHandler explorerUrl(R"(https://www.chess.com/explorer)");
-    AlbaLocalPathHandler tempHtmlFile(APRG_DIR R"(\Chess\ChessPeek\Files\ChessDotComAutomation\temp.html)");
-    AlbaLocalPathHandler dataFile(APRG_DIR
-                                  R"(\Chess\ChessPeek\Files\ChessDotComAutomation\ChessDotComDataFromSite.txt)");
-    AlbaLocalPathHandler linesFile(APRG_DIR R"(\Chess\ChessPeek\Files\ChessDotComAutomation\ChessDotComLines.txt)");
-    AlbaLocalPathHandler lineNumberFile(APRG_DIR
-                                        R"(\Chess\ChessPeek\Files\ChessDotComAutomation\ChessDotComLineNumber.txt)");
+    AlbaWebPathHandler const explorerUrl(R"(https://www.chess.com/explorer)");
+    AlbaLocalPathHandler const tempHtmlFile(APRG_DIR R"(\Chess\ChessPeek\Files\ChessDotComAutomation\temp.html)");
+    AlbaLocalPathHandler const dataFile(APRG_DIR
+                                        R"(\Chess\ChessPeek\Files\ChessDotComAutomation\ChessDotComDataFromSite.txt)");
+    AlbaLocalPathHandler const linesFile(APRG_DIR
+                                         R"(\Chess\ChessPeek\Files\ChessDotComAutomation\ChessDotComLines.txt)");
+    AlbaLocalPathHandler const lineNumberFile(
+        APRG_DIR R"(\Chess\ChessPeek\Files\ChessDotComAutomation\ChessDotComLineNumber.txt)");
 
     doAllPagesRecursively(Paths{
         explorerUrl.getFullPath(), tempHtmlFile.getFullPath(), dataFile.getFullPath(), linesFile.getFullPath(),
         lineNumberFile.getFullPath()});
 }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

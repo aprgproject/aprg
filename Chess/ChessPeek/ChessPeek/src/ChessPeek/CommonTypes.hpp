@@ -4,14 +4,7 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 using XY = AlbaXY<int>;
 using XYs = std::vector<XY>;
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

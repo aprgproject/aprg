@@ -4,16 +4,12 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 TEST(BookTest, GetSizeWorks) {
     Book book;
-    Board board(BoardOrientation::BlackUpWhiteDown);
-    Book::LineDetail lineDetail{"LineForTesting", PieceColor::White, {}, {}};
+    Board const board(BoardOrientation::BlackUpWhiteDown);
+    Book::LineDetail const lineDetail{"LineForTesting", PieceColor::White, {}, {}};
 
     EXPECT_EQ(0U, book.getSize());
 
@@ -23,8 +19,8 @@ TEST(BookTest, GetSizeWorks) {
 
 TEST(BookTest, GetLineWorks) {
     Book book;
-    Board board(BoardOrientation::BlackUpWhiteDown);
-    Book::LineDetail lineDetail{"LineForTesting", PieceColor::White, {}, {}};
+    Board const board(BoardOrientation::BlackUpWhiteDown);
+    Book::LineDetail const lineDetail{"LineForTesting", PieceColor::White, {}, {}};
 
     EXPECT_FALSE(book.getLine(board));
 
@@ -40,8 +36,8 @@ TEST(BookTest, GetLineWorks) {
 
 TEST(BookTest, ClearWorks) {
     Book book;
-    Board board(BoardOrientation::BlackUpWhiteDown);
-    Book::LineDetail lineDetail{"LineForTesting", PieceColor::White, 100, {}};
+    Board const board(BoardOrientation::BlackUpWhiteDown);
+    Book::LineDetail const lineDetail{"LineForTesting", PieceColor::White, 100, {}};
 
     EXPECT_EQ(0U, book.getSize());
 
@@ -54,8 +50,8 @@ TEST(BookTest, ClearWorks) {
 
 TEST(BookTest, AddLineWorksOnAddingANewLine) {
     Book book;
-    Board board(BoardOrientation::BlackUpWhiteDown);
-    Book::LineDetail lineDetail{"LineForTesting", PieceColor::White, 100, {}};
+    Board const board(BoardOrientation::BlackUpWhiteDown);
+    Book::LineDetail const lineDetail{"LineForTesting", PieceColor::White, 100, {}};
 
     book.addLine(board, lineDetail);
 
@@ -69,9 +65,9 @@ TEST(BookTest, AddLineWorksOnAddingANewLine) {
 
 TEST(BookTest, AddLineWorksOnNotOverwritingAnExistingLineIfLessThanTotalNumberOfGames) {
     Book book;
-    Board board(BoardOrientation::BlackUpWhiteDown);
-    Book::LineDetail lineDetail1{"LineForTesting", PieceColor::White, 100, {}};
-    Book::LineDetail lineDetail2{"LineIsOverwritten", PieceColor::Black, 50, {}};
+    Board const board(BoardOrientation::BlackUpWhiteDown);
+    Book::LineDetail const lineDetail1{"LineForTesting", PieceColor::White, 100, {}};
+    Book::LineDetail const lineDetail2{"LineIsOverwritten", PieceColor::Black, 50, {}};
 
     book.addLine(board, lineDetail1);
     book.addLine(board, lineDetail2);
@@ -86,9 +82,9 @@ TEST(BookTest, AddLineWorksOnNotOverwritingAnExistingLineIfLessThanTotalNumberOf
 
 TEST(BookTest, AddLineWorksOnOverwritingAnExistingLineIfGreaterThanTotalNumberOfGames) {
     Book book;
-    Board board(BoardOrientation::BlackUpWhiteDown);
-    Book::LineDetail lineDetail1{"LineForTesting", PieceColor::White, 100, {}};
-    Book::LineDetail lineDetail2{"LineIsOverwritten", PieceColor::Black, 200, {}};
+    Board const board(BoardOrientation::BlackUpWhiteDown);
+    Book::LineDetail const lineDetail1{"LineForTesting", PieceColor::White, 100, {}};
+    Book::LineDetail const lineDetail2{"LineIsOverwritten", PieceColor::Black, 200, {}};
 
     book.addLine(board, lineDetail1);
     book.addLine(board, lineDetail2);
@@ -101,7 +97,4 @@ TEST(BookTest, AddLineWorksOnOverwritingAnExistingLineIfGreaterThanTotalNumberOf
     EXPECT_EQ(200, actualLineDetail.totalNumberOfGames);
 }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

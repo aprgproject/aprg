@@ -16,27 +16,23 @@ static atomic_bool currentlyPrinting = false;
 bool shouldStillRun = true;  // USE ESCAPE KEY TO CLEANLY SHUTDOWN
 
 void trackKeyPress() {
-    alba::AlbaLocalUserAutomation userAutomation;
+    alba::AlbaLocalUserAutomation const userAutomation;
     while (shouldStillRun) {
-        shouldStillRun = !userAutomation.isKeyPressed(VK_ESCAPE);
+        shouldStillRun = !alba::AlbaLocalUserAutomation::isKeyPressed(VK_ESCAPE);
         Sleep(100);
     }
 }
 
 }  // namespace
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 ChessPeek::ChessPeek()
     : m_configuration(Configuration::Type::ChessDotComVersus),
       m_engineHandler(m_configuration.getChessEnginePath()),
       m_engineController(m_engineHandler, m_configuration.getUciOptionNamesAndValuePairs()),
       m_detailsFromTheScreen(m_configuration),
-      m_detailsOnTheEngine(),
+
       m_book(),
       m_calculationDetails{},
       m_engineWasJustReset(true),
@@ -81,7 +77,7 @@ void ChessPeek::startEngineAnalysisWithBoardFromScreen() {
 }
 
 void ChessPeek::calculationMonitoringCallBackForEngine(EngineCalculationDetails const& calculationDetails) {
-    CalculationDetails previousCalculationDetails = m_calculationDetails;
+    CalculationDetails const previousCalculationDetails = m_calculationDetails;
     saveCalculationDetails(calculationDetails);
     if (previousCalculationDetails != m_calculationDetails) {
         printCalculationDetailsWithFiltering();
@@ -97,9 +93,9 @@ Move ChessPeek::getPerformedMove() const {
     Coordinates changedCoordinates;
     for (int j = 0; j < 8; ++j) {
         for (int i = 0; i < 8; ++i) {
-            Coordinate coordinate(i, j);
-            Piece oldPiece(oldBoard.getPieceAt(coordinate));
-            Piece newPiece(newBoard.getPieceAt(coordinate));
+            Coordinate const coordinate(i, j);
+            Piece const oldPiece(oldBoard.getPieceAt(coordinate));
+            Piece const newPiece(newBoard.getPieceAt(coordinate));
             if (oldPiece != newPiece) {
                 changedCoordinates.emplace_back(coordinate);
                 if (changedCoordinates.size() > 4) {
@@ -109,10 +105,10 @@ Move ChessPeek::getPerformedMove() const {
         }
     }
     if (changedCoordinates.size() == 2) {
-        Coordinate coordinate1(changedCoordinates.front());
-        Coordinate coordinate2(changedCoordinates.back());
-        bool isPossibleMove1 = oldBoard.isAPossibleMove({coordinate1, coordinate2});
-        bool isPossibleMove2 = oldBoard.isAPossibleMove({coordinate2, coordinate1});
+        Coordinate const coordinate1(changedCoordinates.front());
+        Coordinate const coordinate2(changedCoordinates.back());
+        bool const isPossibleMove1 = oldBoard.isAPossibleMove({coordinate1, coordinate2});
+        bool const isPossibleMove2 = oldBoard.isAPossibleMove({coordinate2, coordinate1});
         if (isPossibleMove1 && !isPossibleMove2) {
             result = {coordinate1, coordinate2};
         } else if (!isPossibleMove1 && isPossibleMove2) {
@@ -192,7 +188,4 @@ void ChessPeek::printCalculationDetails() {
     }
 }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

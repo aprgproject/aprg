@@ -5,11 +5,7 @@
 using namespace alba::AprgBitmap;
 using namespace std;
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 BitmapXY convertToBitmapXY(XY const& xy) { return xy; }
 XY convertToXY(BitmapXY const& bitmapXY) { return bitmapXY; }
@@ -23,7 +19,4 @@ double calculateColorIntensityDecimal(uint32_t const color) {
            3;
 }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

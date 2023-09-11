@@ -4,13 +4,9 @@
 
 using namespace std;
 
-namespace alba {
+namespace alba::chess::ChessPeek {
 
-namespace chess {
-
-namespace ChessPeek {
-
-BoardWithContext::BoardWithContext() : m_playerColor{}, m_board(), m_boardDetails{} {}
+BoardWithContext::BoardWithContext() : m_playerColor{}, m_boardDetails{} {}
 
 BoardWithContext::BoardWithContext(PieceColor const& playerColor, Board const& board)
     : m_playerColor(playerColor), m_board(board), m_boardDetails{} {
@@ -70,8 +66,8 @@ void BoardWithContext::updateBoardDetails() {
     m_boardDetails = {};
     for (int j = 0; j < 8; ++j) {
         for (int i = 0; i < 8; ++i) {
-            Coordinate coordinate(i, j);
-            Piece piece(m_board.getPieceAt(coordinate));
+            Coordinate const coordinate(i, j);
+            Piece const piece(m_board.getPieceAt(coordinate));
             if (piece.getType() == PieceType::King) {
                 if (piece.getColor() == PieceColor::White) {
                     m_boardDetails.whiteKingCoordinate = coordinate;
@@ -83,7 +79,4 @@ void BoardWithContext::updateBoardDetails() {
     }
 }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

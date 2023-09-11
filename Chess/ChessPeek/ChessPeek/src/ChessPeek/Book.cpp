@@ -7,11 +7,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace chess {
-
-namespace ChessPeek {
+namespace alba::chess::ChessPeek {
 
 void Book::saveDatabaseTo(std::string const& path) const {
     ofstream outStream(path);
@@ -41,7 +37,7 @@ size_t Book::getSize() const { return m_boardToLineDetail.size(); }
 void Book::clear() { m_boardToLineDetail.clear(); }
 
 void Book::addLine(Board const& board, LineDetail const& lineDetail) {
-    BoardValue boardValue(board);
+    BoardValue const boardValue(board);
     auto itExistingPair = m_boardToLineDetail.find(boardValue);
     if (itExistingPair != m_boardToLineDetail.cend()) {
         if (lineDetail.totalNumberOfGames > itExistingPair->second.totalNumberOfGames) {
@@ -79,7 +75,4 @@ void Book::loadDatabaseFrom(std::string const& path) {
     }
 }
 
-}  // namespace ChessPeek
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess::ChessPeek

@@ -11,23 +11,18 @@ using namespace std;
 
 #define MAX_BUFFER_SIZE 2000
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 namespace {
 
-typedef struct _mydata {
+using CallBackData = struct _mydata {
     ChessEngineHandler* epointer;
-}
-
-CallBackData,
-    *PointerToCallBackData;
+};
+using PointerToCallBackData = CallBackData*;
 
 DWORD WINAPI engineMonitoringCallbackFunction(LPVOID const lpParam) {
-    PointerToCallBackData pointerToCallBackData = (PointerToCallBackData)lpParam;
-    ChessEngineHandler* chessEngineHandlerPointer =
-        reinterpret_cast<ChessEngineHandler*>(pointerToCallBackData->epointer);
+    auto pointerToCallBackData = static_cast<PointerToCallBackData>(lpParam);
+    auto* chessEngineHandlerPointer = reinterpret_cast<ChessEngineHandler*>(pointerToCallBackData->epointer);
     chessEngineHandlerPointer->startMonitoringEngineOutput();
     return 0;
 }
@@ -36,13 +31,13 @@ int IsWinNT() {
     OSVERSIONINFO osv{};
     osv.dwOSVersionInfoSize = sizeof(osv);
     GetVersionEx(&osv);
-    return (osv.dwPlatformId == VER_PLATFORM_WIN32_NT);
+    return static_cast<int>(osv.dwPlatformId == VER_PLATFORM_WIN32_NT);
 }
 
 }  // namespace
 ChessEngineHandler::ChessEngineHandler(string const& enginePath)
     : m_enginePath(enginePath),
-      m_readMutex(),
+
       m_startupInfo{},
       m_processInfo{},
       m_engineMonitoringThread{},
@@ -69,7 +64,8 @@ void ChessEngineHandler::sendStringToEngine(string const& stringToEngine) {
     long remainingLength = stringToWrite.length();
     bool isSuccessful(true);
     do {
-        isSuccessful = WriteFile(m_inputStreamOnHandler, stringToWrite.c_str(), remainingLength, &bytesWritten, NULL);
+        isSuccessful =
+            (WriteFile(m_inputStreamOnHandler, stringToWrite.c_str(), remainingLength, &bytesWritten, nullptr) != 0);
         if (isSuccessful) {
             remainingLength = remainingLength - bytesWritten;
             if (remainingLength > 0) {
@@ -96,19 +92,19 @@ void ChessEngineHandler::startMonitoringEngineOutput() {
     array<char, MAX_BUFFER_SIZE> buffer{};
     string stringBuffer;
     while (true) {
-        PeekNamedPipe(m_outputStreamOnHandler, buffer.data(), MAX_BUFFER_SIZE, NULL, &bytesAvailable, NULL);
+        PeekNamedPipe(m_outputStreamOnHandler, buffer.data(), MAX_BUFFER_SIZE, nullptr, &bytesAvailable, nullptr);
         if (bytesAvailable > 0) {
-            ReadFile(m_outputStreamOnHandler, buffer.data(), MAX_BUFFER_SIZE, &bytesRead, NULL);
+            ReadFile(m_outputStreamOnHandler, buffer.data(), MAX_BUFFER_SIZE, &bytesRead, nullptr);
             stringBuffer.reserve(stringBuffer.size() + bytesRead);
             copy(buffer.begin(), buffer.begin() + bytesRead, back_inserter(stringBuffer));
 
             int currentIndex(0U);
             bool shouldContinue(true);
             while (shouldContinue) {
-                int startIndex = currentIndex;
-                int newLineIndex = stringBuffer.find_first_of("\r\n", startIndex);
+                int const startIndex = currentIndex;
+                int const newLineIndex = stringBuffer.find_first_of("\r\n", startIndex);
                 if (isNotNpos(static_cast<int>(newLineIndex))) {
-                    string oneLine(stringBuffer.substr(startIndex, newLineIndex - startIndex));
+                    string const oneLine(stringBuffer.substr(startIndex, newLineIndex - startIndex));
                     if (!oneLine.empty()) {
                         processStringFromEngine(oneLine);
                     }
@@ -142,7 +138,7 @@ void ChessEngineHandler::setAdditionalStepsInProcessingAStringFromEngine(
     m_additionalStepsInProcessingAStringFromEngine = additionalSteps;
 }
 
-string ChessEngineHandler::getLogHeader(LogType const logtype) const {
+string ChessEngineHandler::getLogHeader(LogType const logtype) {
     string result;
     switch (logtype) {
         case LogType::FromEngine: {
@@ -165,21 +161,21 @@ void ChessEngineHandler::initializeEngine() {
     SECURITY_DESCRIPTOR securityDescriptor{};  // security information for pipes
     SECURITY_ATTRIBUTES securityAttributes;
 
-    if (IsWinNT()) {
+    if (IsWinNT() != 0) {
         InitializeSecurityDescriptor(&securityDescriptor, SECURITY_DESCRIPTOR_REVISION);
-        SetSecurityDescriptorDacl(&securityDescriptor, 1, NULL, 0);
+        SetSecurityDescriptorDacl(&securityDescriptor, 1, nullptr, 0);
         securityAttributes.lpSecurityDescriptor = &securityDescriptor;
     } else {
-        securityAttributes.lpSecurityDescriptor = NULL;
+        securityAttributes.lpSecurityDescriptor = nullptr;
     }
 
     securityAttributes.nLength = sizeof(SECURITY_ATTRIBUTES);
     securityAttributes.bInheritHandle = 1;  // allow inheritable handles
-    if (!CreatePipe(&(m_inputStreamOnEngineThread), &(m_inputStreamOnHandler), &securityAttributes, 0)) {
+    if (CreatePipe(&(m_inputStreamOnEngineThread), &(m_inputStreamOnHandler), &securityAttributes, 0) == 0) {
         log(LogType::HandlerStatus, "Cannot Create Pipe");
     }
 
-    if (!CreatePipe(&(m_outputStreamOnHandler), &(m_outputStreamOnEngineThread), &securityAttributes, 0)) {
+    if (CreatePipe(&(m_outputStreamOnHandler), &(m_outputStreamOnEngineThread), &securityAttributes, 0) == 0) {
         log(LogType::HandlerStatus, "Cannot Create Pipe");
     }
     GetStartupInfo(&m_startupInfo);  // set startupinfo for the spawned process
@@ -191,13 +187,13 @@ void ChessEngineHandler::initializeEngine() {
 
     // spawn the child process
     if (!CreateProcess(
-            m_enginePath.c_str(), NULL, NULL, NULL, TRUE, CREATE_NEW_CONSOLE, NULL, NULL, &m_startupInfo,
+            m_enginePath.c_str(), nullptr, nullptr, nullptr, TRUE, CREATE_NEW_CONSOLE, nullptr, nullptr, &m_startupInfo,
             &m_processInfo)) {
         log(LogType::HandlerStatus, "Cannot Create Process");
     }
-    PointerToCallBackData pData = new CallBackData();
+    auto pData = new CallBackData();
     pData->epointer = this;
-    m_engineMonitoringThread = CreateThread(NULL, 0, engineMonitoringCallbackFunction, pData, 0, &(m_threadId));
+    m_engineMonitoringThread = CreateThread(nullptr, 0, engineMonitoringCallbackFunction, pData, 0, &(m_threadId));
 }
 
 void ChessEngineHandler::shutdownEngine() {
@@ -218,6 +214,4 @@ void ChessEngineHandler::log(LogType const logtype, string const& logString) {
     }
 }
 
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess
