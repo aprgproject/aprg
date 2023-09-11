@@ -19,13 +19,13 @@ excludedConfigurations='
 {"project": "Chess/ChessUtilities/ChessUtilities", "configurationName": "UbuntuLatestGcc"},
 {"project": "Chess/ChessUtilities/ChessUtilities", "configurationName": "UbuntuLatestClang"},
 {"project": "ZZZ_OldProjects/FesterRobot/FesterRobot", "configurationName": "UbuntuLatestGcc"},
-{"project": "ZZZ_OldProjects/FesterRobot/FesterRobot", "configurationName": "UbuntuLatestClang"}
+{"project": "ZZZ_OldProjects/FesterRobot/FesterRobot", "configurationName": "UbuntuLatestClang"},
 {"project": "boost/BoostTest", "configurationName": "WindowsLatestMsvc"},
 {"project": "boost/BoostTest", "configurationName": "WindowsLatestMingw"},
 {"project": "boost/BoostTest", "configurationName": "WindowsLatestClang"},
 {"project": "AprgGnuPlot/AprgGnuPlot", "configurationName": "WindowsLatestMsvc"},
 {"project": "AprgGnuPlot/AprgGnuPlot", "configurationName": "WindowsLatestMingw"},
-{"project": "AprgGnuPlot/AprgGnuPlot", "configurationName": "WindowsLatestClang"},
+{"project": "AprgGnuPlot/AprgGnuPlot", "configurationName": "WindowsLatestClang"}
 '
 
 projectsThatAreWindowsOnly=$(echo "$projectsThatAreWindowsOnly" | tr '\n' ' ')

@@ -26,11 +26,11 @@ source "$scriptDirectory/ProjectsWith7Zip.sh"
 scriptPrint "$scriptName" "$LINENO" "The scriptOption is: [$scriptOption]"
 
 # Get C/C++ projects by git changes or by user input.
-if [[ "$scriptOption" == "checkGit" ]] || [[ "$scriptOption" == "checkGitForOneProject" ]]; then
+if [[ "$scriptOption" == "checkGit" ]]; then
     scriptPrint "$scriptName" "$LINENO" "Searching C/C++ projects from Git changes..."
     cppProjectsFromGit=""
     source "$scriptDirectory/FindCppProjectsFromGitChanges.sh"
-    detectGitChanges "$scriptOption"
+    detectGitChanges
     cppProjects="$cppProjectsFromGit"
     scriptPrint "$scriptName" "$LINENO" "The C/C++ projects based from git changes: [$cppProjects]"
 elif [[ "$scriptOption" == "checkUserInput" ]]; then
