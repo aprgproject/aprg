@@ -304,13 +304,9 @@ jobs:
         if: contains(matrix.configurationName, 'Clang')
         working-directory: ${{ matrix.project }}
         run: |
-          echo "[36/311] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp.obj" > "sample.txt"
-          echo "D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:205:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]" >> "sample.txt"
-          echo "int DisplayTablePrinter::getVerticalBorderLength() const { return m_verticalBorder.length(); }" >> "sample.txt"
-          echo "D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:208:12: note: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]" >> "sample.txt"
-          echo "return ((m_maxLengthAtColumn.size() + 1) * getVerticalBorderLength()) + m_totalColumnLength;" >> "sample.txt"
+          buildAndRunScriptPath=$(realpath "$(pwd)/AprgAlgebra/AprgAlgebra/StaticAnalysisAutoFix.txt")
+          grep -E 'note:|style:|warning:|error:' "$buildAndRunScriptPath"
           "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
-          grep -E 'note:|style:|warning:|error:' "sample.txt"
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
