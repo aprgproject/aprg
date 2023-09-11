@@ -316,7 +316,7 @@ jobs:
         working-directory: ${{ matrix.project }}
         run: |
           echo "grep with E output"
-          grep -E 'note:|style:|warning:|error:' "$(pwd)/AprgAlgebra/AprgAlgebra/StaticAnalysisAutoFix.txt"
+          grep -E 'note:|style:|warning:|error:' "$(pwd)/StaticAnalysisAutoFix.txt"
           echo "grep with E output done"
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
             
