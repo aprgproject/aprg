@@ -11,9 +11,9 @@ using namespace std;
 namespace alba {
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_ShowMousePositions) {
-    AlbaWindowsUserAutomation userAutomation;
+    AlbaWindowsUserAutomation const userAutomation;
     while (1) {
-        MousePosition position(userAutomation.getMousePosition());
+        MousePosition const position(alba::AlbaWindowsUserAutomation::getMousePosition());
         cout << "X: " << position.getX() << " Y: " << position.getY() << "\n";
         cout.flush();
         if (userAutomation.isLetterPressed('s') || (0 == position.getX() && 0 == position.getY())) {
@@ -24,16 +24,16 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_ShowMousePositions) {
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_SetMouseTest) {
-    AlbaWindowsUserAutomation userAutomation;
+    AlbaWindowsUserAutomation const userAutomation;
     for (int x = 0; x < 100; ++x) {
-        MousePosition position{x, x};
+        MousePosition const position{x, x};
         userAutomation.setMousePosition(position);
     }
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_KeyPressDownAndUpSmallLetterTest) {
 #define VK_CONTROL 0x11
-    AlbaWindowsUserAutomation userAutomation;
+    AlbaWindowsUserAutomation const userAutomation;
     userAutomation.pressKey(VK_CONTROL);
     userAutomation.pressKey('A');
     userAutomation.releaseKey(VK_CONTROL);
@@ -41,37 +41,37 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_KeyPressDownAndUpSmallLetterTest) {
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_TypeSmallLetterTest) {
-    AlbaWindowsUserAutomation userAutomation;
+    AlbaWindowsUserAutomation const userAutomation;
     for (char c = 'a'; c <= 'z'; ++c) {
         userAutomation.typeCharacter(c);
     }
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_TypeCapitalLetterTest) {
-    AlbaWindowsUserAutomation userAutomation;
+    AlbaWindowsUserAutomation const userAutomation;
     for (char c = 'A'; c <= 'Z'; ++c) {
         userAutomation.typeCharacter(c);
     }
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_TypeNumberTest) {
-    AlbaWindowsUserAutomation userAutomation;
+    AlbaWindowsUserAutomation const userAutomation;
     for (char c = '0'; c <= '9'; ++c) {
         userAutomation.typeCharacter(c);
     }
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_TypeString) {
-    AlbaWindowsUserAutomation userAutomation;
+    AlbaWindowsUserAutomation const userAutomation;
     userAutomation.typeString(R"(.......)");
     // userAutomation.typeString(R"(`~!@#$%^&*()_+-=[]\{}|;':",./<>?)");
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_IsKeyPressedTest) {
-    AlbaWindowsUserAutomation userAutomation;
+    AlbaWindowsUserAutomation const userAutomation;
     while (1) {
         auto key = VK_CONTROL;
-        bool isPressed = userAutomation.isKeyPressed(key);
+        bool const isPressed = alba::AlbaWindowsUserAutomation::isKeyPressed(key);
         cout << " isPressed: " << isPressed << "\n";
         if (isPressed) {
             break;
@@ -81,10 +81,10 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_IsKeyPressedTest) {
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_IsLetterPressedTest) {
-    AlbaWindowsUserAutomation userAutomation;
+    AlbaWindowsUserAutomation const userAutomation;
     while (1) {
-        char letter = 'q';
-        bool isPressed = userAutomation.isLetterPressed(letter);
+        char const letter = 'q';
+        bool const isPressed = userAutomation.isLetterPressed(letter);
         cout << "letter: " << letter << " isPressed: " << isPressed << "\n";
         if (isPressed) {
             break;
@@ -94,40 +94,40 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_IsLetterPressedTest) {
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_GetClassNameOfForegroundWindow) {
-    AlbaWindowsUserAutomation userAutomation;
-    cout << userAutomation.getClassNameOfForegroundWindow() << "\n";
+    AlbaWindowsUserAutomation const userAutomation;
+    cout << alba::AlbaWindowsUserAutomation::getClassNameOfForegroundWindow() << "\n";
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_SetActiveWindowBasedClassName) {
-    AlbaWindowsUserAutomation userAutomation;
+    AlbaWindowsUserAutomation const userAutomation;
     userAutomation.setForegroundWindowWithClassName("Notepad");
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_SetActiveWindowBasedWindowName) {
-    AlbaWindowsUserAutomation userAutomation;
+    AlbaWindowsUserAutomation const userAutomation;
     userAutomation.setForegroundWindowWithWindowName("Untitled - Notepad");
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_SaveBitmapOnScreen) {
-    string bitmapFilePath = APRG_DIR R"(\AprgLocalUserAutomation\FilesForTests\BitmapFromScreen.bmp)";
-    AlbaWindowsUserAutomation userAutomation;
+    string const bitmapFilePath = APRG_DIR R"(\AprgLocalUserAutomation\FilesForTests\BitmapFromScreen.bmp)";
+    AlbaWindowsUserAutomation const userAutomation;
     userAutomation.saveBitmapOnScreen(bitmapFilePath);
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_GetStringFromClipboard) {
-    AlbaWindowsUserAutomation userAutomation;
-    cout << userAutomation.getStringFromClipboard() << "\n";
+    AlbaWindowsUserAutomation const userAutomation;
+    cout << alba::AlbaWindowsUserAutomation::getStringFromClipboard() << "\n";
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_SetStringFromClipboard) {
-    AlbaWindowsUserAutomation userAutomation;
-    userAutomation.setStringToClipboard("TestString");
+    AlbaWindowsUserAutomation const userAutomation;
+    alba::AlbaWindowsUserAutomation::setStringToClipboard("TestString");
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_SaveBitmapFromClipboard) {
-    string bitmapFilePath = APRG_DIR R"(\AprgLocalUserAutomation\FilesForTests\BitmapFromClipboard.bmp)";
-    AlbaWindowsUserAutomation userAutomation;
-    userAutomation.saveBitmapFromClipboard(bitmapFilePath);
+    string const bitmapFilePath = APRG_DIR R"(\AprgLocalUserAutomation\FilesForTests\BitmapFromClipboard.bmp)";
+    AlbaWindowsUserAutomation const userAutomation;
+    alba::AlbaWindowsUserAutomation::saveBitmapFromClipboard(bitmapFilePath);
 }
 
 }  // namespace alba

@@ -14,10 +14,10 @@ using namespace std;
 namespace alba {
 
 void AlbaWindowsUserAutomation::setMousePosition(MousePosition const& position) const {
-    long screenWidth = GetSystemMetrics(SM_CXSCREEN) - 1;
-    long screenHeight = GetSystemMetrics(SM_CYSCREEN) - 1;
-    float ratioInX = position.getX() * (65535.0f / screenWidth);
-    float ratioInY = position.getY() * (65535.0f / screenHeight);
+    long const screenWidth = GetSystemMetrics(SM_CXSCREEN) - 1;
+    long const screenHeight = GetSystemMetrics(SM_CYSCREEN) - 1;
+    float ratioInX = position.getX() * (65535.0F / screenWidth);
+    float ratioInY = position.getY() * (65535.0F / screenHeight);
 
     doOperation([&](INPUT& input) {
         input.type = INPUT_MOUSE;
@@ -96,7 +96,7 @@ void AlbaWindowsUserAutomation::pressKey(uint16_t const key) const {
         input.ki.wScan = 0;
         input.ki.time = 0;
         input.ki.dwExtraInfo = 0;
-        input.ki.wVk = (WORD)key;
+        input.ki.wVk = static_cast<WORD>(key);
         input.ki.dwFlags = 0;
     });
 }
@@ -107,7 +107,7 @@ void AlbaWindowsUserAutomation::releaseKey(uint16_t const key) const {
         input.ki.wScan = 0;
         input.ki.time = 0;
         input.ki.dwExtraInfo = 0;
-        input.ki.wVk = (WORD)key;
+        input.ki.wVk = static_cast<WORD>(key);
         input.ki.dwFlags = KEYEVENTF_KEYUP;
     });
 }
@@ -166,8 +166,8 @@ void AlbaWindowsUserAutomation::setForegroundWindowWithWindowName(string_view co
     setForegroundWindowWithWindowHandle(windowHandle);
 }
 
-void AlbaWindowsUserAutomation::sleepWithRealisticDelay() const { Sleep(REALISTIC_DELAY_IN_MILLISECONDS); }
-void AlbaWindowsUserAutomation::sleep(int const milliseconds) const { Sleep(milliseconds); }
+void AlbaWindowsUserAutomation::sleepWithRealisticDelay() { Sleep(REALISTIC_DELAY_IN_MILLISECONDS); }
+void AlbaWindowsUserAutomation::sleep(int const milliseconds) { Sleep(milliseconds); }
 
 void AlbaWindowsUserAutomation::saveBitmapOnScreen(string_view const& filePath) const {
     // Note: the difference on partially capturing the screen is negligible
@@ -175,34 +175,34 @@ void AlbaWindowsUserAutomation::saveBitmapOnScreen(string_view const& filePath) 
     saveBitmapFromClipboard(filePath);
 }
 
-void AlbaWindowsUserAutomation::setStringToClipboard(string_view const& clipBoardText) const {
-    HANDLE hData;
-    char* pointerData = NULL;
+void AlbaWindowsUserAutomation::setStringToClipboard(string_view const& clipBoardText) {
+    HANDLE hData = nullptr;
+    char* pointerData = nullptr;
     hData = GlobalAlloc(GMEM_MOVEABLE | GMEM_DDESHARE, clipBoardText.length() + 1);
-    pointerData = (char*)GlobalLock(hData);
+    pointerData = static_cast<char*>(GlobalLock(hData));
     memcpy(pointerData, clipBoardText.data(), clipBoardText.length() + 1);
     GlobalUnlock(hData);
-    OpenClipboard(NULL);
+    OpenClipboard(nullptr);
     EmptyClipboard();
     SetClipboardData(CF_TEXT, hData);
     CloseClipboard();
 }
 
-void AlbaWindowsUserAutomation::saveBitmapFromClipboard(string_view const& filePath) const {
-    AlbaLocalPathHandler pathHandler(filePath);
+void AlbaWindowsUserAutomation::saveBitmapFromClipboard(string_view const& filePath) {
+    AlbaLocalPathHandler const pathHandler(filePath);
     ofstream outputBitmapFile(pathHandler.getFullPath(), ios::out | ios::binary);
     if (!outputBitmapFile) {
         return;
     }
-    if (!IsClipboardFormatAvailable(CF_DIB)) {
+    if (IsClipboardFormatAvailable(CF_DIB) == 0) {
         return;
     }
-    if (OpenClipboard(NULL)) {
+    if (OpenClipboard(nullptr) != 0) {
         HANDLE hClipboard = GetClipboardData(CF_DIB);
-        if (hClipboard != NULL && hClipboard != INVALID_HANDLE_VALUE) {
+        if (hClipboard != nullptr && hClipboard != INVALID_HANDLE_VALUE) {
             void* dib = GlobalLock(hClipboard);
             if (dib != nullptr) {
-                BITMAPINFOHEADER* bitmapInfoPointer = reinterpret_cast<BITMAPINFOHEADER*>(dib);
+                auto* bitmapInfoPointer = reinterpret_cast<BITMAPINFOHEADER*>(dib);
                 BITMAPFILEHEADER fileHeader{};
                 fileHeader.bfType = 0x4D42;
                 fileHeader.bfOffBits = 54;
@@ -214,7 +214,7 @@ void AlbaWindowsUserAutomation::saveBitmapFromClipboard(string_view const& fileP
                 outputBitmapFile.write(reinterpret_cast<char*>(&fileHeader), sizeof(BITMAPFILEHEADER));
                 outputBitmapFile.write(reinterpret_cast<char*>(bitmapInfoPointer), sizeof(BITMAPINFOHEADER));
 
-                unsigned long long sizeOfBitmapData = bitmapInfoPointer->biSizeImage;
+                unsigned long long const sizeOfBitmapData = bitmapInfoPointer->biSizeImage;
                 char* startOfBitmapDataPointer = reinterpret_cast<char*>(++bitmapInfoPointer);
                 outputBitmapFile.write(startOfBitmapDataPointer, sizeOfBitmapData);
                 GlobalUnlock(dib);
@@ -224,43 +224,43 @@ void AlbaWindowsUserAutomation::saveBitmapFromClipboard(string_view const& fileP
     }
 }
 
-MousePosition AlbaWindowsUserAutomation::getMousePosition() const {
-    MousePosition position;
+MousePosition AlbaWindowsUserAutomation::getMousePosition() {
+    MousePosition const position;
     POINT mouse;
     GetCursorPos(&mouse);
     return MousePosition(mouse.x, mouse.y);
 }
 
-string AlbaWindowsUserAutomation::getClassNameOfForegroundWindow() const {
+string AlbaWindowsUserAutomation::getClassNameOfForegroundWindow() {
     int const LENGTH = 1000;
     char className[LENGTH];
     GetClassName(GetForegroundWindow(), className, LENGTH);
     return string(className);
 }
 
-string AlbaWindowsUserAutomation::getStringFromClipboard() const {
+string AlbaWindowsUserAutomation::getStringFromClipboard() {
     string stringInClipboard;
-    if (OpenClipboard(NULL)) {
+    if (OpenClipboard(nullptr) != 0) {
         HANDLE clipboardData = GetClipboardData(CF_TEXT);
-        stringInClipboard = (char*)clipboardData;
+        stringInClipboard = static_cast<char*>(clipboardData);
         CloseClipboard();
     }
     return stringInClipboard;
 }
 
-bool AlbaWindowsUserAutomation::isKeyPressed(int const key) const {
+bool AlbaWindowsUserAutomation::isKeyPressed(int const key) {
     // https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getasynckeystate
     // If the function succeeds, the return value specifies whether the key was pressed since the last call to
     // GetAsyncKeyState, and whether the key is currently up or down. If the most significant bit is set, the key is
     // down. If the least significant bit is set, the key was pressed after the previous call to GetAsyncKeyState.
     // However, you should not rely on this last behavior; for more information, see the Remarks.
-    USHORT status = GetAsyncKeyState(key);
+    USHORT const status = GetAsyncKeyState(key);
     return (status & 0x8000) >> 15 == 1;  // || (status & 1) == 1;
 }
 
 bool AlbaWindowsUserAutomation::isLetterPressed(char const letter) const { return isKeyPressed(::toupper(letter)); }
 
-void AlbaWindowsUserAutomation::setForegroundWindowWithWindowHandle(HWND const windowHandle) const {
+void AlbaWindowsUserAutomation::setForegroundWindowWithWindowHandle(HWND const windowHandle) {
     bool isSuccessful(false);
     if (windowHandle != nullptr) {
         isSuccessful = static_cast<bool>(SetWindowPos(
@@ -279,14 +279,14 @@ void AlbaWindowsUserAutomation::setForegroundWindowWithWindowHandle(HWND const w
     }
 }
 
-void AlbaWindowsUserAutomation::doOperation(AlbaWindowsUserAutomation::InputFunction const& inputFunction) const {
+void AlbaWindowsUserAutomation::doOperation(AlbaWindowsUserAutomation::InputFunction const& inputFunction) {
     INPUT input;
     memset(&input, 0, sizeof(INPUT));
     inputFunction(input);
     SendInput(1, &input, sizeof(INPUT));
 }
 
-uint16_t AlbaWindowsUserAutomation::convertToVirtualKey(char const character) const {
+uint16_t AlbaWindowsUserAutomation::convertToVirtualKey(char const character) {
     int virtualKey = character;
     if (stringHelper::isLetter(character)) {
         virtualKey = ::toupper(character);

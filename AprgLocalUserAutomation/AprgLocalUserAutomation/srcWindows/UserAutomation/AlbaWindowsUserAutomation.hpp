@@ -33,22 +33,22 @@ public:
     void performKeyCombination(std::vector<uint16_t> const& keys, std::vector<char> const& characters) const;
     void setForegroundWindowWithClassName(std::string_view const& className) const;
     void setForegroundWindowWithWindowName(std::string_view const& windowName) const;
-    void sleepWithRealisticDelay() const;
-    void sleep(int const milliseconds) const;
+    static void sleepWithRealisticDelay();
+    static void sleep(int const milliseconds);
     void saveBitmapOnScreen(std::string_view const& filePath) const;
-    void setStringToClipboard(std::string_view const& clipBoardText) const;
-    void saveBitmapFromClipboard(std::string_view const& filePath) const;
-    MousePosition getMousePosition() const;
-    std::string getClassNameOfForegroundWindow() const;
-    std::string getStringFromClipboard() const;
-    bool isKeyPressed(int const key) const;
-    bool isLetterPressed(char const letter) const;
-    typedef std::function<void(INPUT&)> InputFunction;
+    static void setStringToClipboard(std::string_view const& clipBoardText);
+    static void saveBitmapFromClipboard(std::string_view const& filePath);
+    [[nodiscard]] static MousePosition getMousePosition();
+    [[nodiscard]] static std::string getClassNameOfForegroundWindow();
+    [[nodiscard]] static std::string getStringFromClipboard();
+    [[nodiscard]] static bool isKeyPressed(int const key);
+    [[nodiscard]] bool isLetterPressed(char const letter) const;
+    using InputFunction = std::function<void(INPUT&)>;
 
 private:
-    void setForegroundWindowWithWindowHandle(HWND const windowHandle) const;
-    void doOperation(InputFunction const& inputFunction) const;
-    uint16_t convertToVirtualKey(char const character) const;
+    static void setForegroundWindowWithWindowHandle(HWND const windowHandle);
+    static void doOperation(InputFunction const& inputFunction);
+    [[nodiscard]] static uint16_t convertToVirtualKey(char const character);
     static constexpr int REALISTIC_DELAY_IN_MILLISECONDS = 100;
 };
 

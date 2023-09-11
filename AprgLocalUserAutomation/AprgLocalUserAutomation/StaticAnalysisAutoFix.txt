@@ -1,3 +1,1044 @@
-StaticAnalysisJobIdentifier: [56]
-2023-09-09T17:49:52
+StaticAnalysisJobIdentifier: [011]
+2023-09-11T06:52:08
+[35m2023-09-11T06:53:08[0m | [33mBuildAndRun.sh:28[0m | The current path is [/d/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation].
+[35m2023-09-11T06:53:08[0m | [33mBuildAndRun.sh:29[0m | The scriptPath is [/d/a/aprg/aprg/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh].
+[35m2023-09-11T06:53:08[0m | [33mBuildAndRun.sh:30[0m | The scriptOption is [buildOnOneCore].
+[35m2023-09-11T06:53:08[0m | [33mBuildAndRun.sh:31[0m | The buildDirectoryName is [StaticAnalyzersBuild].
+[35m2023-09-11T06:53:08[0m | [33mBuildAndRun.sh:32[0m | The argument1 is [Debug] and argument2 is [].
+[35m2023-09-11T06:53:08[0m | [33mBuildAndRun.sh:33[0m | The immediateDirectoryName is [AprgLocalUserAutomation].
+[35m2023-09-11T06:53:09[0m | [33mBuildAndRun.sh:84[0m | The buildType is [Debug].
+[35m2023-09-11T06:53:09[0m | [33mBuildAndRun.sh:85[0m | The numberOfCores is [2].
+[35m2023-09-11T06:53:09[0m | [33mBuildAndRun.sh:68[0m | The build path is [/d/a/aprg/aprg/AprgLocalUserAutomation/StaticAnalyzersBuild] and the output of [ls -la --color=auto]:
+total 164
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 06:53 .
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 06:52 ..
+-rw-r--r-- 1 runneradmin 197121  18225 Sep 11 06:53 CMakeCache.txt
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 06:53 CMakeFiles
+-rw-r--r-- 1 runneradmin 197121    652 Sep 11 06:53 CTestTestfile.cmake
+-rw-r--r-- 1 runneradmin 197121 126776 Sep 11 06:53 build.ninja
+-rw-r--r-- 1 runneradmin 197121   2373 Sep 11 06:53 cmake_install.cmake
+[1/50] Building CXX object CMakeFiles/gtest.dir/D_/a/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc.obj
+In file included from D:/a/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:49:
+D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
+  __try {
+  ^
+1 warning generated.
+[2/50] Building CXX object CMakeFiles/gtest.dir/D_/a/aprg/aprg/gtest/gtest/googletest/src/gtest_main.cc.obj
+[3/50] Linking CXX static library gtest.lib
+[4/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaContainerHelper.cpp.obj
+[5/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/File/AlbaFileReader.cpp.obj
+[6/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Angle/AlbaAngle.cpp.obj
+[7/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/ComplexNumberHelpers.cpp.obj
+[8/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/ComputationHelpers.cpp.obj
+[9/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/FactorAndMulitplesHelpers.cpp.obj
+[10/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/PowerHelpers.cpp.obj
+[11/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/PrecisionHelpers.cpp.obj
+[12/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/StatisticsHelpers.cpp.obj
+[13/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/AlbaComplexNumber.cpp.obj
+[14/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/AlbaNumber.cpp.obj
+[15/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/Interval/AlbaNumberInterval.cpp.obj
+[16/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/Interval/AlbaNumberIntervalEndpoint.cpp.obj
+[17/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/Interval/AlbaNumberIntervalHelpers.cpp.obj
+[18/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Ratio/AlbaRatio.cpp.obj
+[19/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Memory/AlbaMemoryBuffer.cpp.obj
+[20/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/PathHandler/AlbaPathHandler.cpp.obj
+[21/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/PathHandler/AlbaWebPathHandler.cpp.obj
+[22/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Print/AlbaPrintFunctions.cpp.obj
+[23/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Randomizer/AlbaOldRandomizer.cpp.obj
+[24/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Randomizer/EntropySources/AlbaCombinedEntropySource.cpp.obj
+[25/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Randomizer/EntropySources/AlbaEntropySourceBasedOnTime.cpp.obj
+[26/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamBitReader.cpp.obj
+[27/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamBitWriter.cpp.obj
+[28/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterReader.cpp.obj
+[29/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterWriter.cpp.obj
+[30/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/String/AlbaStringHelper.cpp.obj
+[31/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaDateTime.cpp.obj
+[32/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaDateTimeHelper.cpp.obj
+[33/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\Time\AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
+    struct tm const localTime = *localtime(&currentTimeT);
+                                 ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
+        _CRT_INSECURE_DEPRECATE(localtime_s)
+        ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+D:/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
+    struct tm const localTime = *localtime(&currentTimeT);
+                                 ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
+        _CRT_INSECURE_DEPRECATE(localtime_s)
+        ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+1 warning generated.
+[34/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimer.cpp.obj
+[35/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/AlbaUserInterface.cpp.obj
+[36/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:205:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+int DisplayTablePrinter::getVerticalBorderLength() const { return m_verticalBorder.length(); }
+                                                                  ^
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:208:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    return ((m_maxLengthAtColumn.size() + 1) * getVerticalBorderLength()) + m_totalColumnLength;
+           ^
+[37/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Utility/AlbaScopeGuard.cpp.obj
+[38/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/tstUtilities/CommonTestsUtilities/File/BaseFileReaderTest.cpp.obj
+[39/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/tstUtilities/CommonTestsUtilities/File/FileUtilities.cpp.obj
+[40/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/PathHandler/AlbaWindowsPathHandler.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    int const length = fullPath.length();
+                       ^
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+        int const indexWithSlashCharacter = fullPath.find_first_of(m_slashCharacterString, index);
+                                            ^
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:270:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    int const index = m_directory.find_first_of(m_slashCharacterString + ":");
+                      ^
+[41/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/Time/AlbaWindowsTimeHelper.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+    return AlbaDateTime(
+           ^
+[42/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/Time/AlbaWindowsTimer.cpp.obj
+[43/50] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/Windows/AlbaWindowsHelper.cpp.obj
+[44/50] Linking CXX static library APRG_COMMON.lib
+[45/50] Building CXX object CMakeFiles/AprgLocalUserAutomation.dir/src/UserAutomation/AlbaLocalUserAutomation.cpp.obj
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:41:5: warning: function 'getMousePosition' should be marked [[nodiscard]] [modernize-use-nodiscard]
+    MousePosition getMousePosition() const;
+    ^
+    [[nodiscard]] 
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:41:5: note: FIX-IT applied suggested code changes
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:42:5: warning: function 'getClassNameOfForegroundWindow' should be marked [[nodiscard]] [modernize-use-nodiscard]
+    std::string getClassNameOfForegroundWindow() const;
+    ^
+    [[nodiscard]] 
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:42:5: note: FIX-IT applied suggested code changes
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:43:5: warning: function 'getStringFromClipboard' should be marked [[nodiscard]] [modernize-use-nodiscard]
+    std::string getStringFromClipboard() const;
+    ^
+    [[nodiscard]] 
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:43:5: note: FIX-IT applied suggested code changes
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:44:5: warning: function 'isKeyPressed' should be marked [[nodiscard]] [modernize-use-nodiscard]
+    bool isKeyPressed(int const key) const;
+    ^
+    [[nodiscard]] 
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:44:5: note: FIX-IT applied suggested code changes
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:45:5: warning: function 'isLetterPressed' should be marked [[nodiscard]] [modernize-use-nodiscard]
+    bool isLetterPressed(char const letter) const;
+    ^
+    [[nodiscard]] 
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:45:5: note: FIX-IT applied suggested code changes
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:46:5: warning: use 'using' instead of 'typedef' [modernize-use-using]
+    typedef std::function<void(INPUT&)> InputFunction;
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    using InputFunction = std::function<void (INPUT &)>
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:46:5: note: FIX-IT applied suggested code changes
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:51:5: warning: function 'convertToVirtualKey' should be marked [[nodiscard]] [modernize-use-nodiscard]
+    uint16_t convertToVirtualKey(char const character) const;
+    ^
+    [[nodiscard]] 
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:51:5: note: FIX-IT applied suggested code changes
+[46/50] Building CXX object CMakeFiles/AprgLocalUserAutomation.dir/srcWindows/UserAutomation/AlbaWindowsUserAutomation.cpp.obj
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:17:5: warning: variable 'screenWidth' of type 'long' can be declared 'const' [misc-const-correctness]
+    long screenWidth = GetSystemMetrics(SM_CXSCREEN) - 1;
+    ^
+         const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:17:10: note: FIX-IT applied suggested code changes
+    long screenWidth = GetSystemMetrics(SM_CXSCREEN) - 1;
+         ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:18:5: warning: variable 'screenHeight' of type 'long' can be declared 'const' [misc-const-correctness]
+    long screenHeight = GetSystemMetrics(SM_CYSCREEN) - 1;
+    ^
+         const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:18:10: note: FIX-IT applied suggested code changes
+    long screenHeight = GetSystemMetrics(SM_CYSCREEN) - 1;
+         ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:19:22: warning: narrowing conversion from 'int' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    float ratioInX = position.getX() * (65535.0f / screenWidth);
+                     ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:19:41: warning: floating point literal has suffix 'f', which is not uppercase [hicpp-uppercase-literal-suffix,readability-uppercase-literal-suffix]
+    float ratioInX = position.getX() * (65535.0f / screenWidth);
+                                        ^      ~
+                                               F
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:19:48: note: FIX-IT applied suggested code changes
+    float ratioInX = position.getX() * (65535.0f / screenWidth);
+                                               ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:19:52: warning: narrowing conversion from 'long' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    float ratioInX = position.getX() * (65535.0f / screenWidth);
+                                                   ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:20:22: warning: narrowing conversion from 'int' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    float ratioInY = position.getY() * (65535.0f / screenHeight);
+                     ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:20:41: warning: floating point literal has suffix 'f', which is not uppercase [hicpp-uppercase-literal-suffix,readability-uppercase-literal-suffix]
+    float ratioInY = position.getY() * (65535.0f / screenHeight);
+                                        ^      ~
+                                               F
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:20:48: note: FIX-IT applied suggested code changes
+    float ratioInY = position.getY() * (65535.0f / screenHeight);
+                                               ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:20:52: warning: narrowing conversion from 'long' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    float ratioInY = position.getY() * (65535.0f / screenHeight);
+                                                   ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:99:24: warning: C-style casts are discouraged; use static_cast (if needed, the cast may be redundant) [google-readability-casting]
+        input.ki.wVk = (WORD)key;
+                       ^~~~~~
+                       static_cast<WORD>( )
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:99:24: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:99:33: note: FIX-IT applied suggested code changes
+        input.ki.wVk = (WORD)key;
+                                ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:110:24: warning: C-style casts are discouraged; use static_cast (if needed, the cast may be redundant) [google-readability-casting]
+        input.ki.wVk = (WORD)key;
+                       ^~~~~~
+                       static_cast<WORD>( )
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:110:24: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:110:33: note: FIX-IT applied suggested code changes
+        input.ki.wVk = (WORD)key;
+                                ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:169:33: warning: method 'sleepWithRealisticDelay' can be made static [readability-convert-member-functions-to-static]
+void AlbaWindowsUserAutomation::sleepWithRealisticDelay() const { Sleep(REALISTIC_DELAY_IN_MILLISECONDS); }
+                                ^                         ~~~~~~
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:36:5: note: FIX-IT applied suggested code changes
+    void sleepWithRealisticDelay() const;
+    ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:36:36: note: FIX-IT applied suggested code changes
+    void sleepWithRealisticDelay() const;
+                                   ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:169:59: note: FIX-IT applied suggested code changes
+void AlbaWindowsUserAutomation::sleepWithRealisticDelay() const { Sleep(REALISTIC_DELAY_IN_MILLISECONDS); }
+                                                          ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:170:33: warning: method 'sleep' can be made static [readability-convert-member-functions-to-static]
+void AlbaWindowsUserAutomation::sleep(int const milliseconds) const { Sleep(milliseconds); }
+                                ^                             ~~~~~~
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:37:5: note: FIX-IT applied suggested code changes
+    void sleep(int const milliseconds) const;
+    ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:37:40: note: FIX-IT applied suggested code changes
+    void sleep(int const milliseconds) const;
+                                       ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:170:63: note: FIX-IT applied suggested code changes
+void AlbaWindowsUserAutomation::sleep(int const milliseconds) const { Sleep(milliseconds); }
+                                                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:178:33: warning: method 'setStringToClipboard' can be made static [readability-convert-member-functions-to-static]
+void AlbaWindowsUserAutomation::setStringToClipboard(string_view const& clipBoardText) const {
+                                ^                                                      ~~~~~~
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:39:5: note: FIX-IT applied suggested code changes
+    void setStringToClipboard(std::string_view const& clipBoardText) const;
+    ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:39:70: note: FIX-IT applied suggested code changes
+    void setStringToClipboard(std::string_view const& clipBoardText) const;
+                                                                     ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:178:88: note: FIX-IT applied suggested code changes
+void AlbaWindowsUserAutomation::setStringToClipboard(string_view const& clipBoardText) const {
+                                                                                       ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:179:12: warning: variable 'hData' is not initialized [cppcoreguidelines-init-variables]
+    HANDLE hData;
+           ^
+                 = nullptr
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:179:17: note: FIX-IT applied suggested code changes
+    HANDLE hData;
+                ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:180:25: warning: use nullptr [modernize-use-nullptr]
+    char* pointerData = NULL;
+                        ^~~~
+                        nullptr
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:180:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:182:19: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+    pointerData = (char*)GlobalLock(hData);
+                  ^~~~~~~
+                  static_cast<char*>(     )
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:182:19: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:182:43: note: FIX-IT applied suggested code changes
+    pointerData = (char*)GlobalLock(hData);
+                                          ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:185:19: warning: use nullptr [modernize-use-nullptr]
+    OpenClipboard(NULL);
+                  ^~~~
+                  nullptr
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:185:19: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:191:33: warning: method 'saveBitmapFromClipboard' can be made static [readability-convert-member-functions-to-static]
+void AlbaWindowsUserAutomation::saveBitmapFromClipboard(string_view const& filePath) const {
+                                ^                                                    ~~~~~~
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:40:5: note: FIX-IT applied suggested code changes
+    void saveBitmapFromClipboard(std::string_view const& filePath) const;
+    ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:40:68: note: FIX-IT applied suggested code changes
+    void saveBitmapFromClipboard(std::string_view const& filePath) const;
+                                                                   ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:191:86: note: FIX-IT applied suggested code changes
+void AlbaWindowsUserAutomation::saveBitmapFromClipboard(string_view const& filePath) const {
+                                                                                     ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:192:5: warning: variable 'pathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler pathHandler(filePath);
+    ^
+                         const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:192:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler pathHandler(filePath);
+                         ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:197:10: warning: implicit conversion 'BOOL' (aka 'int') -> bool [readability-implicit-bool-conversion]
+    if (!IsClipboardFormatAvailable(CF_DIB)) {
+        ~^
+                                            == 0
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:197:9: note: FIX-IT applied suggested code changes
+    if (!IsClipboardFormatAvailable(CF_DIB)) {
+        ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:197:44: note: FIX-IT applied suggested code changes
+    if (!IsClipboardFormatAvailable(CF_DIB)) {
+                                           ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:200:9: warning: implicit conversion 'BOOL' (aka 'int') -> bool [readability-implicit-bool-conversion]
+    if (OpenClipboard(NULL)) {
+        ^
+                            != 0
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:200:28: note: FIX-IT applied suggested code changes
+    if (OpenClipboard(NULL)) {
+                           ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:200:23: warning: use nullptr [modernize-use-nullptr]
+    if (OpenClipboard(NULL)) {
+                      ^~~~
+                      nullptr
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:200:23: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:202:27: warning: use nullptr [modernize-use-nullptr]
+        if (hClipboard != NULL && hClipboard != INVALID_HANDLE_VALUE) {
+                          ^~~~
+                          nullptr
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:202:27: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:205:17: warning: use auto when initializing with a cast to avoid duplicating the type name [hicpp-use-auto,modernize-use-auto]
+                BITMAPINFOHEADER* bitmapInfoPointer = reinterpret_cast<BITMAPINFOHEADER*>(dib);
+                ^~~~~~~~~~~~~~~~
+                auto
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:205:17: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:217:17: warning: variable 'sizeOfBitmapData' of type 'unsigned long long' can be declared 'const' [misc-const-correctness]
+                unsigned long long sizeOfBitmapData = bitmapInfoPointer->biSizeImage;
+                ^
+                                   const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:217:36: note: FIX-IT applied suggested code changes
+                unsigned long long sizeOfBitmapData = bitmapInfoPointer->biSizeImage;
+                                   ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:219:66: warning: narrowing conversion from 'unsigned long long' to signed type 'streamsize' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+                outputBitmapFile.write(startOfBitmapDataPointer, sizeOfBitmapData);
+                                                                 ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:227:42: warning: method 'getMousePosition' can be made static [readability-convert-member-functions-to-static]
+MousePosition AlbaWindowsUserAutomation::getMousePosition() const {
+                                         ^                  ~~~~~~
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:41:19: note: FIX-IT applied suggested code changes
+    [[nodiscard]] MousePosition getMousePosition() const;
+                  ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:41:52: note: FIX-IT applied suggested code changes
+    [[nodiscard]] MousePosition getMousePosition() const;
+                                                   ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:227:61: note: FIX-IT applied suggested code changes
+MousePosition AlbaWindowsUserAutomation::getMousePosition() const {
+                                                            ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:228:5: warning: variable 'position' of type 'MousePosition' (aka 'AlbaXY<int>') can be declared 'const' [misc-const-correctness]
+    MousePosition position;
+    ^
+                  const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:228:19: note: FIX-IT applied suggested code changes
+    MousePosition position;
+                  ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:231:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+    return MousePosition(mouse.x, mouse.y);
+           ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:234:35: warning: method 'getClassNameOfForegroundWindow' can be made static [readability-convert-member-functions-to-static]
+string AlbaWindowsUserAutomation::getClassNameOfForegroundWindow() const {
+                                  ^                                ~~~~~~
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:42:19: note: FIX-IT applied suggested code changes
+    [[nodiscard]] std::string getClassNameOfForegroundWindow() const;
+                  ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:42:64: note: FIX-IT applied suggested code changes
+    [[nodiscard]] std::string getClassNameOfForegroundWindow() const;
+                                                               ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:234:68: note: FIX-IT applied suggested code changes
+string AlbaWindowsUserAutomation::getClassNameOfForegroundWindow() const {
+                                                                   ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:238:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+    return string(className);
+           ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:241:35: warning: method 'getStringFromClipboard' can be made static [readability-convert-member-functions-to-static]
+string AlbaWindowsUserAutomation::getStringFromClipboard() const {
+                                  ^                        ~~~~~~
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:43:19: note: FIX-IT applied suggested code changes
+    [[nodiscard]] std::string getStringFromClipboard() const;
+                  ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:43:56: note: FIX-IT applied suggested code changes
+    [[nodiscard]] std::string getStringFromClipboard() const;
+                                                       ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:241:60: note: FIX-IT applied suggested code changes
+string AlbaWindowsUserAutomation::getStringFromClipboard() const {
+                                                           ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:243:9: warning: implicit conversion 'BOOL' (aka 'int') -> bool [readability-implicit-bool-conversion]
+    if (OpenClipboard(NULL)) {
+        ^
+                            != 0
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:243:28: note: FIX-IT applied suggested code changes
+    if (OpenClipboard(NULL)) {
+                           ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:243:23: warning: use nullptr [modernize-use-nullptr]
+    if (OpenClipboard(NULL)) {
+                      ^~~~
+                      nullptr
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:243:23: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:245:29: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+        stringInClipboard = (char*)clipboardData;
+                            ^~~~~~~
+                            static_cast<char*>( )
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:245:29: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:245:49: note: FIX-IT applied suggested code changes
+        stringInClipboard = (char*)clipboardData;
+                                                ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:251:33: warning: method 'isKeyPressed' can be made static [readability-convert-member-functions-to-static]
+bool AlbaWindowsUserAutomation::isKeyPressed(int const key) const {
+                                ^                           ~~~~~~
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:44:19: note: FIX-IT applied suggested code changes
+    [[nodiscard]] bool isKeyPressed(int const key) const;
+                  ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:44:52: note: FIX-IT applied suggested code changes
+    [[nodiscard]] bool isKeyPressed(int const key) const;
+                                                   ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:251:61: note: FIX-IT applied suggested code changes
+bool AlbaWindowsUserAutomation::isKeyPressed(int const key) const {
+                                                            ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:257:5: warning: variable 'status' of type 'USHORT' (aka 'unsigned short') can be declared 'const' [misc-const-correctness]
+    USHORT status = GetAsyncKeyState(key);
+    ^
+           const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:257:12: note: FIX-IT applied suggested code changes
+    USHORT status = GetAsyncKeyState(key);
+           ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:263:33: warning: method 'setForegroundWindowWithWindowHandle' can be made static [readability-convert-member-functions-to-static]
+void AlbaWindowsUserAutomation::setForegroundWindowWithWindowHandle(HWND const windowHandle) const {
+                                ^                                                            ~~~~~~
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:49:5: note: FIX-IT applied suggested code changes
+    void setForegroundWindowWithWindowHandle(HWND const windowHandle) const;
+    ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:49:71: note: FIX-IT applied suggested code changes
+    void setForegroundWindowWithWindowHandle(HWND const windowHandle) const;
+                                                                      ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:263:94: note: FIX-IT applied suggested code changes
+void AlbaWindowsUserAutomation::setForegroundWindowWithWindowHandle(HWND const windowHandle) const {
+                                                                                             ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:282:33: warning: method 'doOperation' can be made static [readability-convert-member-functions-to-static]
+void AlbaWindowsUserAutomation::doOperation(AlbaWindowsUserAutomation::InputFunction const& inputFunction) const {
+                                ^                                                                          ~~~~~~
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:50:5: note: FIX-IT applied suggested code changes
+    void doOperation(InputFunction const& inputFunction) const;
+    ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:50:58: note: FIX-IT applied suggested code changes
+    void doOperation(InputFunction const& inputFunction) const;
+                                                         ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:282:108: note: FIX-IT applied suggested code changes
+void AlbaWindowsUserAutomation::doOperation(AlbaWindowsUserAutomation::InputFunction const& inputFunction) const {
+                                                                                                           ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:289:37: warning: method 'convertToVirtualKey' can be made static [readability-convert-member-functions-to-static]
+uint16_t AlbaWindowsUserAutomation::convertToVirtualKey(char const character) const {
+                                    ^                                         ~~~~~~
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:51:19: note: FIX-IT applied suggested code changes
+    [[nodiscard]] uint16_t convertToVirtualKey(char const character) const;
+                  ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:51:70: note: FIX-IT applied suggested code changes
+    [[nodiscard]] uint16_t convertToVirtualKey(char const character) const;
+                                                                     ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:289:79: note: FIX-IT applied suggested code changes
+uint16_t AlbaWindowsUserAutomation::convertToVirtualKey(char const character) const {
+                                                                              ^
+[47/50] Building CXX object CMakeFiles/AprgLocalUserAutomation.dir/tst/UserAutomationTests/AlbaLocalUserAutomation_unit.cpp.obj
+[48/50] Building CXX object CMakeFiles/AprgLocalUserAutomation.dir/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp.obj
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:14:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:14:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:15:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
+    while (1) {
+           ^
+note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:15:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:16:9: warning: variable 'position' of type 'MousePosition' (aka 'AlbaXY<int>') can be declared 'const' [misc-const-correctness]
+        MousePosition position(userAutomation.getMousePosition());
+        ^
+                      const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:16:23: note: FIX-IT applied suggested code changes
+        MousePosition position(userAutomation.getMousePosition());
+                      ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:16:32: warning: static member accessed through instance [readability-static-accessed-through-instance]
+        MousePosition position(userAutomation.getMousePosition());
+                               ^~~~~~~~~~~~~~~
+                               alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:16:32: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:27:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:27:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:29:9: warning: variable 'position' of type 'MousePosition' (aka 'AlbaXY<int>') can be declared 'const' [misc-const-correctness]
+        MousePosition position{x, x};
+        ^
+                      const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:29:23: note: FIX-IT applied suggested code changes
+        MousePosition position{x, x};
+                      ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:36:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:36:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:44:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:44:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:51:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:51:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:58:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:58:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:65:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:65:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:71:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:71:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:72:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
+    while (1) {
+           ^
+note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:72:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:74:9: warning: variable 'isPressed' of type 'bool' can be declared 'const' [misc-const-correctness]
+        bool isPressed = userAutomation.isKeyPressed(key);
+        ^
+             const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:74:14: note: FIX-IT applied suggested code changes
+        bool isPressed = userAutomation.isKeyPressed(key);
+             ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:74:26: warning: static member accessed through instance [readability-static-accessed-through-instance]
+        bool isPressed = userAutomation.isKeyPressed(key);
+                         ^~~~~~~~~~~~~~~
+                         alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:74:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:84:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:84:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:85:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
+    while (1) {
+           ^
+note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:85:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:86:9: warning: variable 'letter' of type 'char' can be declared 'const' [misc-const-correctness]
+        char letter = 'q';
+        ^
+             const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:86:14: note: FIX-IT applied suggested code changes
+        char letter = 'q';
+             ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:87:9: warning: variable 'isPressed' of type 'bool' can be declared 'const' [misc-const-correctness]
+        bool isPressed = userAutomation.isLetterPressed(letter);
+        ^
+             const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:87:14: note: FIX-IT applied suggested code changes
+        bool isPressed = userAutomation.isLetterPressed(letter);
+             ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:97:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:97:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:98:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
+    cout << userAutomation.getClassNameOfForegroundWindow() << "\n";
+            ^~~~~~~~~~~~~~~
+            alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:98:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:102:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:102:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:107:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:107:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:112:5: warning: variable 'bitmapFilePath' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+    string bitmapFilePath = APRG_DIR R"(\AprgLocalUserAutomation\FilesForTests\BitmapFromScreen.bmp)";
+    ^
+           const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:112:12: note: FIX-IT applied suggested code changes
+    string bitmapFilePath = APRG_DIR R"(\AprgLocalUserAutomation\FilesForTests\BitmapFromScreen.bmp)";
+           ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:113:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:113:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:118:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:118:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:119:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
+    cout << userAutomation.getStringFromClipboard() << "\n";
+            ^~~~~~~~~~~~~~~
+            alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:119:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:123:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:123:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:124:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+    userAutomation.setStringToClipboard("TestString");
+    ^~~~~~~~~~~~~~~
+    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:124:5: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:128:5: warning: variable 'bitmapFilePath' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+    string bitmapFilePath = APRG_DIR R"(\AprgLocalUserAutomation\FilesForTests\BitmapFromClipboard.bmp)";
+    ^
+           const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:128:12: note: FIX-IT applied suggested code changes
+    string bitmapFilePath = APRG_DIR R"(\AprgLocalUserAutomation\FilesForTests\BitmapFromClipboard.bmp)";
+           ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:129:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:129:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:130:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+    userAutomation.saveBitmapFromClipboard(bitmapFilePath);
+    ^~~~~~~~~~~~~~~
+    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:130:5: note: FIX-IT applied suggested code changes
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:71:37: warning: unused variable 'userAutomation' [-Wunused-variable]
+    AlbaWindowsUserAutomation const userAutomation;
+                                    ^
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:97:37: warning: unused variable 'userAutomation' [-Wunused-variable]
+    AlbaWindowsUserAutomation const userAutomation;
+                                    ^
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:118:37: warning: unused variable 'userAutomation' [-Wunused-variable]
+    AlbaWindowsUserAutomation const userAutomation;
+                                    ^
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:123:37: warning: unused variable 'userAutomation' [-Wunused-variable]
+    AlbaWindowsUserAutomation const userAutomation;
+                                    ^
+D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:129:37: warning: unused variable 'userAutomation' [-Wunused-variable]
+    AlbaWindowsUserAutomation const userAutomation;
+                                    ^
+5 warnings generated.
+[49/50] Building CXX object CMakeFiles/AprgLocalUserAutomation.dir/tstWindows/UserAutomationTests/RealAutomationTests.cpp.obj
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:20:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:20:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:22:5: warning: variable 'itemDatabaseFolder' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler itemDatabaseFolder(R"(C:\Users\detectivemark7\Desktop\RO\TalonRO\SellingShops\)");
+    ^
+                         const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:22:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler itemDatabaseFolder(R"(C:\Users\detectivemark7\Desktop\RO\TalonRO\SellingShops\)");
+                         ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:27:5: warning: variable 'talonRoPath' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+    string talonRoPath(R"(https://panel.talonro.com/whosell/)");
+    ^
+           const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:27:12: note: FIX-IT applied suggested code changes
+    string talonRoPath(R"(https://panel.talonro.com/whosell/)");
+           ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:29:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+    userAutomation.setStringToClipboard(talonRoPath);
+    ^~~~~~~~~~~~~~~
+    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:29:5: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:33:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+    userAutomation.sleep(3000);
+    ^~~~~~~~~~~~~~~
+    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:33:5: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:37:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
+        userAutomation.sleep(2000);
+        ^~~~~~~~~~~~~~~
+        alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:37:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:41:9: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+        AlbaLocalPathHandler filePathHandler(itemDatabaseFolder.getFullPath() + fileName.str());
+        ^
+                             const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:41:30: note: FIX-IT applied suggested code changes
+        AlbaLocalPathHandler filePathHandler(itemDatabaseFolder.getFullPath() + fileName.str());
+                             ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:42:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
+        userAutomation.setStringToClipboard(filePathHandler.getFullPath());
+        ^~~~~~~~~~~~~~~
+        alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:42:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:49:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
+        userAutomation.sleep(2000);
+        ^~~~~~~~~~~~~~~
+        alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:49:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:56:13: warning: variable 'line' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+            string line(fileReader.getLineAndIgnoreWhiteSpaces());
+            ^
+                   const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:56:20: note: FIX-IT applied suggested code changes
+            string line(fileReader.getLineAndIgnoreWhiteSpaces());
+                   ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:64:11: warning: do not use 'else' after 'break' [llvm-else-after-return,readability-else-after-return]
+        } else {
+          ^~~~~~
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:64:11: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:64:16: note: FIX-IT applied suggested code changes
+        } else {
+               ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:67:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
+            userAutomation.sleep(2000);
+            ^
+note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:73:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:73:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:74:5: warning: variable 'itemDatabaseFolder' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler itemDatabaseFolder(R"(C:\Users\detectivemark7\Desktop\RO\RMS\MonsterDatabaseTraversal\)");
+    ^
+                         const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:74:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler itemDatabaseFolder(R"(C:\Users\detectivemark7\Desktop\RO\RMS\MonsterDatabaseTraversal\)");
+                         ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:84:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
+            userAutomation.setStringToClipboard(rmsPath.str());
+            ^~~~~~~~~~~~~~~
+            alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:84:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:88:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
+            userAutomation.sleep(3000);
+            ^~~~~~~~~~~~~~~
+            alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:88:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:93:13: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+            AlbaLocalPathHandler filePathHandler(itemDatabaseFolder.getFullPath() + fileName.str());
+            ^
+                                 const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:93:34: note: FIX-IT applied suggested code changes
+            AlbaLocalPathHandler filePathHandler(itemDatabaseFolder.getFullPath() + fileName.str());
+                                 ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:94:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
+            userAutomation.setStringToClipboard(filePathHandler.getFullPath());
+            ^~~~~~~~~~~~~~~
+            alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:94:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:105:17: warning: variable 'line' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+                string line(fileReader.getLineAndIgnoreWhiteSpaces());
+                ^
+                       const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:105:24: note: FIX-IT applied suggested code changes
+                string line(fileReader.getLineAndIgnoreWhiteSpaces());
+                       ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:119:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:119:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:120:5: warning: variable 'mp3FilesPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler mp3FilesPathHandler(R"(N:\MUSIC\111_DoAutomationHere)");
+    ^
+                         const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:120:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler mp3FilesPathHandler(R"(N:\MUSIC\111_DoAutomationHere)");
+                         ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:122:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
+    while (1) {
+           ^
+note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:122:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:135:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(1000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:135:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:138:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(2000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:138:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:142:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(1000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:142:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:145:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.setStringToClipboard(filePathHandler.getFile());
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:145:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:152:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(10000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:152:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:167:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(10000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:167:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:171:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(2000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:171:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:174:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(1000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:174:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:176:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(1000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:176:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:178:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(1000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:178:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:182:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(15000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:182:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:193:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(1000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:193:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:196:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(2000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:196:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:210:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:210:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:215:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
+        userAutomation.sleep(1000);
+        ^~~~~~~~~~~~~~~
+        alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:215:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:218:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
+        userAutomation.sleep(1000);
+        ^~~~~~~~~~~~~~~
+        alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:218:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:221:9: warning: variable 'url' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+        string url = userAutomation.getStringFromClipboard();
+        ^
+               const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:221:16: note: FIX-IT applied suggested code changes
+        string url = userAutomation.getStringFromClipboard();
+               ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:221:22: warning: static member accessed through instance [readability-static-accessed-through-instance]
+        string url = userAutomation.getStringFromClipboard();
+                     ^~~~~~~~~~~~~~~
+                     alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:221:22: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:228:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
+        userAutomation.sleep(1000);
+        ^~~~~~~~~~~~~~~
+        alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:228:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:230:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
+        userAutomation.sleep(1000);
+        ^~~~~~~~~~~~~~~
+        alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:230:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:234:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
+        userAutomation.sleep(1000);
+        ^~~~~~~~~~~~~~~
+        alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:234:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:236:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
+        userAutomation.sleep(3000);
+        ^~~~~~~~~~~~~~~
+        alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:236:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:238:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
+        userAutomation.sleep(1000);
+        ^~~~~~~~~~~~~~~
+        alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:238:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:240:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
+        userAutomation.sleep(1000);
+        ^~~~~~~~~~~~~~~
+        alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:240:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:242:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
+        userAutomation.sleep(5000);
+        ^~~~~~~~~~~~~~~
+        alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:242:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:247:5: warning: variable 'userAutomation' of type 'AlbaWindowsUserAutomation' can be declared 'const' [misc-const-correctness]
+    AlbaWindowsUserAutomation userAutomation;
+    ^
+                              const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:247:31: note: FIX-IT applied suggested code changes
+    AlbaWindowsUserAutomation userAutomation;
+                              ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:254:5: warning: multiple declarations in a single statement reduces readability [readability-isolate-declaration]
+    int lineCount = 1, lineCountToStart = 1641, pendingNumberOfLines = 0;
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:254:5: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:255:5: warning: variable 'requestHeader' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+    string requestHeader =
+    ^
+           const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:255:12: note: FIX-IT applied suggested code changes
+    string requestHeader =
+           ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:260:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+    userAutomation.sleep(3000);
+    ^~~~~~~~~~~~~~~
+    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:260:5: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:267:9: warning: variable 'line' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+        string line(commitMessagesReader.getLineAndIgnoreWhiteSpaces());
+        ^
+               const 
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:267:16: note: FIX-IT applied suggested code changes
+        string line(commitMessagesReader.getLineAndIgnoreWhiteSpaces());
+               ^
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:285:25: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                        userAutomation.sleep(10000);
+                        ^~~~~~~~~~~~~~~
+                        alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:285:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:288:25: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                        userAutomation.sleep(2000);
+                        ^~~~~~~~~~~~~~~
+                        alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:288:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:292:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.setStringToClipboard(requestToChatGpt);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:292:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:294:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(2000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:294:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:298:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(2000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:298:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:302:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(2000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:302:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:306:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(2000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:306:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:309:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.setStringToClipboard("");
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:309:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:311:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(2000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:311:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:313:37: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    fromClipboard = userAutomation.getStringFromClipboard();
+                                    ^~~~~~~~~~~~~~~
+                                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:313:37: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:325:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(20000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:325:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:328:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.setStringToClipboard("");
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:328:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:332:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    userAutomation.sleep(2000);
+                    ^~~~~~~~~~~~~~~
+                    alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:332:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:335:46: warning: static member accessed through instance [readability-static-accessed-through-instance]
+                    string outputOfChatGpt = userAutomation.getStringFromClipboard();
+                                             ^~~~~~~~~~~~~~~
+                                             alba::AlbaWindowsUserAutomation::
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:335:46: note: FIX-IT applied suggested code changes
+[50/50] Linking CXX executable AprgLocalUserAutomation.exe
+[35m2023-09-11T07:08:43[0m | [33mBuildAndRun.sh:218[0m | The script [BuildAndRun.sh] for [buildOnOneCore] is finished.
 DONE!
