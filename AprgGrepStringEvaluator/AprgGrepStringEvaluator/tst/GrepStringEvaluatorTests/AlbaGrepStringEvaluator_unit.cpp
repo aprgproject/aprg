@@ -19,17 +19,17 @@ TEST(AlbaGrepStringEvaluatorTest, FalseIsReturnedWhenThereAreNoConvertedTerms) {
 }
 
 TEST(AlbaGrepStringEvaluatorTest, EvaluatorIsInvalidWhenOperandIsMissingForPrefixOperator) {
-    AlbaGrepStringEvaluator evaluator(" ! ");
+    AlbaGrepStringEvaluator const evaluator(" ! ");
     EXPECT_TRUE(evaluator.isInvalid());
 }
 
 TEST(AlbaGrepStringEvaluatorTest, EvaluatorIsInvalidWhen1OperandIsMissingForBiDirectionalOperator) {
-    AlbaGrepStringEvaluator evaluator("[TestString] || ");
+    AlbaGrepStringEvaluator const evaluator("[TestString] || ");
     EXPECT_TRUE(evaluator.isInvalid());
 }
 
 TEST(AlbaGrepStringEvaluatorTest, EvaluatorIsInvalidWhenOperandsAreMissingForBiDirectionalOperator) {
-    AlbaGrepStringEvaluator evaluator(" || ");
+    AlbaGrepStringEvaluator const evaluator(" || ");
     EXPECT_TRUE(evaluator.isInvalid());
 }
 
@@ -198,25 +198,25 @@ TEST(AlbaGrepStringEvaluatorTest, XnorOperatorCombinationWorksAsIntended) {
 }
 
 TEST(AlbaGrepStringEvaluatorTest, InvalidCombinationsAreDetected) {
-    AlbaGrepStringEvaluator evaluator1("[StringDoesNotExist1] ^^ [StringDoesNotExist2]");
+    AlbaGrepStringEvaluator const evaluator1("[StringDoesNotExist1] ^^ [StringDoesNotExist2]");
     EXPECT_TRUE(evaluator1.isInvalid());
 
-    AlbaGrepStringEvaluator evaluator2("[StringDoesNotExist1] &| [StringDoesNotExist2]");
+    AlbaGrepStringEvaluator const evaluator2("[StringDoesNotExist1] &| [StringDoesNotExist2]");
     EXPECT_TRUE(evaluator2.isInvalid());
 
-    AlbaGrepStringEvaluator evaluator3("[StringDoesNotExist1] ^& [StringDoesNotExist2]");
+    AlbaGrepStringEvaluator const evaluator3("[StringDoesNotExist1] ^& [StringDoesNotExist2]");
     EXPECT_TRUE(evaluator3.isInvalid());
 
-    AlbaGrepStringEvaluator evaluator4("[StringDoesNotExist1] ||||||& [StringDoesNotExist2]");
+    AlbaGrepStringEvaluator const evaluator4("[StringDoesNotExist1] ||||||& [StringDoesNotExist2]");
     EXPECT_TRUE(evaluator4.isInvalid());
 
-    AlbaGrepStringEvaluator evaluator5("[StringDoesNotExist1] !^^ [StringDoesNotExist2]");
+    AlbaGrepStringEvaluator const evaluator5("[StringDoesNotExist1] !^^ [StringDoesNotExist2]");
     EXPECT_TRUE(evaluator5.isInvalid());
 
-    AlbaGrepStringEvaluator evaluator6("[StringDoesNotExist1] ^!& [StringDoesNotExist2]");
+    AlbaGrepStringEvaluator const evaluator6("[StringDoesNotExist1] ^!& [StringDoesNotExist2]");
     EXPECT_TRUE(evaluator6.isInvalid());
 
-    AlbaGrepStringEvaluator evaluator7("[StringDoesNotExist1] !& [StringDoesNotExist2]");
+    AlbaGrepStringEvaluator const evaluator7("[StringDoesNotExist1] !& [StringDoesNotExist2]");
     EXPECT_TRUE(evaluator7.isInvalid());
 }
 
@@ -237,10 +237,10 @@ TEST(AlbaGrepStringEvaluatorTest, ParenthesesArePrioritized) {
 }
 
 TEST(AlbaGrepStringEvaluatorTest, EvaluatorIsInvalidWhenNumberOfOpeningAndClosingParenthesisDoesNotMatch) {
-    AlbaGrepStringEvaluator evaluator1("([I'm]&(![hungry]|([at]&(![this]^!![moment])))");
+    AlbaGrepStringEvaluator const evaluator1("([I'm]&(![hungry]|([at]&(![this]^!![moment])))");
     EXPECT_TRUE(evaluator1.isInvalid());
 
-    AlbaGrepStringEvaluator evaluator2("[I'm]&(![hungry])|([at]&(![this]^!![moment])))");
+    AlbaGrepStringEvaluator const evaluator2("[I'm]&(![hungry])|([at]&(![this]^!![moment])))");
     EXPECT_TRUE(evaluator2.isInvalid());
 }
 
