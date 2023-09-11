@@ -1,3 +1,123 @@
-StaticAnalysisJobIdentifier: [56]
-2023-09-09T18:42:34
+StaticAnalysisJobIdentifier: [011]
+2023-09-11T19:51:37
+[35m2023-09-11T19:53:08[0m | [33mBuildAndRun.sh:28[0m | The current path is [/d/a/aprg/aprg/TemplateForAllCases/TemplateForAllCases].
+[35m2023-09-11T19:53:08[0m | [33mBuildAndRun.sh:29[0m | The scriptPath is [/d/a/aprg/aprg/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh].
+[35m2023-09-11T19:53:08[0m | [33mBuildAndRun.sh:30[0m | The scriptOption is [buildOnOneCore].
+[35m2023-09-11T19:53:08[0m | [33mBuildAndRun.sh:31[0m | The buildDirectoryName is [StaticAnalyzersBuild].
+[35m2023-09-11T19:53:08[0m | [33mBuildAndRun.sh:32[0m | The argument1 is [Debug] and argument2 is [].
+[35m2023-09-11T19:53:08[0m | [33mBuildAndRun.sh:33[0m | The immediateDirectoryName is [TemplateForAllCases].
+[35m2023-09-11T19:53:08[0m | [33mBuildAndRun.sh:84[0m | The buildType is [Debug].
+[35m2023-09-11T19:53:08[0m | [33mBuildAndRun.sh:85[0m | The numberOfCores is [2].
+[35m2023-09-11T19:53:08[0m | [33mBuildAndRun.sh:68[0m | The build path is [/d/a/aprg/aprg/TemplateForAllCases/StaticAnalyzersBuild] and the output of [ls -la --color=auto]:
+total 152
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 19:53 .
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 19:51 ..
+-rw-r--r-- 1 runneradmin 197121  18096 Sep 11 19:53 CMakeCache.txt
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 19:53 CMakeFiles
+-rw-r--r-- 1 runneradmin 197121    612 Sep 11 19:53 CTestTestfile.cmake
+-rw-r--r-- 1 runneradmin 197121 112390 Sep 11 19:53 build.ninja
+-rw-r--r-- 1 runneradmin 197121   2337 Sep 11 19:53 cmake_install.cmake
+[1/47] Building CXX object CMakeFiles/gtest.dir/D_/a/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc.obj
+In file included from D:/a/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:49:
+D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
+  __try {
+  ^
+1 warning generated.
+[2/47] Building CXX object CMakeFiles/gtest.dir/D_/a/aprg/aprg/gtest/gtest/googletest/src/gtest_main.cc.obj
+[3/47] Linking CXX static library gtest.lib
+[4/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaContainerHelper.cpp.obj
+[5/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/File/AlbaFileReader.cpp.obj
+[6/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Angle/AlbaAngle.cpp.obj
+[7/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/ComplexNumberHelpers.cpp.obj
+[8/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/ComputationHelpers.cpp.obj
+[9/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/FactorAndMulitplesHelpers.cpp.obj
+[10/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/PowerHelpers.cpp.obj
+[11/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/PrecisionHelpers.cpp.obj
+[12/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/StatisticsHelpers.cpp.obj
+[13/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/AlbaComplexNumber.cpp.obj
+[14/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/AlbaNumber.cpp.obj
+[15/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/Interval/AlbaNumberInterval.cpp.obj
+[16/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/Interval/AlbaNumberIntervalEndpoint.cpp.obj
+[17/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/Interval/AlbaNumberIntervalHelpers.cpp.obj
+[18/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Ratio/AlbaRatio.cpp.obj
+[19/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Memory/AlbaMemoryBuffer.cpp.obj
+[20/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/PathHandler/AlbaPathHandler.cpp.obj
+[21/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/PathHandler/AlbaWebPathHandler.cpp.obj
+[22/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Print/AlbaPrintFunctions.cpp.obj
+[23/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Randomizer/AlbaOldRandomizer.cpp.obj
+[24/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Randomizer/EntropySources/AlbaCombinedEntropySource.cpp.obj
+[25/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Randomizer/EntropySources/AlbaEntropySourceBasedOnTime.cpp.obj
+[26/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamBitReader.cpp.obj
+[27/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamBitWriter.cpp.obj
+[28/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterReader.cpp.obj
+[29/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterWriter.cpp.obj
+[30/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/String/AlbaStringHelper.cpp.obj
+[31/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaDateTime.cpp.obj
+[32/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaDateTimeHelper.cpp.obj
+[33/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\Time\AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
+    struct tm const localTime = *localtime(&currentTimeT);
+                                 ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
+        _CRT_INSECURE_DEPRECATE(localtime_s)
+        ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+D:/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
+    struct tm const localTime = *localtime(&currentTimeT);
+                                 ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
+        _CRT_INSECURE_DEPRECATE(localtime_s)
+        ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+1 warning generated.
+[34/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimer.cpp.obj
+[35/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/AlbaUserInterface.cpp.obj
+[36/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:205:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+int DisplayTablePrinter::getVerticalBorderLength() const { return m_verticalBorder.length(); }
+                                                                  ^
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:208:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    return ((m_maxLengthAtColumn.size() + 1) * getVerticalBorderLength()) + m_totalColumnLength;
+           ^
+[37/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Utility/AlbaScopeGuard.cpp.obj
+[38/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/tstUtilities/CommonTestsUtilities/File/BaseFileReaderTest.cpp.obj
+[39/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/tstUtilities/CommonTestsUtilities/File/FileUtilities.cpp.obj
+[40/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/PathHandler/AlbaWindowsPathHandler.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    int const length = fullPath.length();
+                       ^
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+        int const indexWithSlashCharacter = fullPath.find_first_of(m_slashCharacterString, index);
+                                            ^
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:270:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    int const index = m_directory.find_first_of(m_slashCharacterString + ":");
+                      ^
+[41/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/Time/AlbaWindowsTimeHelper.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+    return AlbaDateTime(
+           ^
+[42/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/Time/AlbaWindowsTimer.cpp.obj
+[43/47] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/Windows/AlbaWindowsHelper.cpp.obj
+[44/47] Linking CXX static library APRG_COMMON.lib
+[45/47] Building CXX object CMakeFiles/TemplateForAllCases.dir/src/TemplateForAllCases/TemplateForAllCases.cpp.obj
+[46/47] Building CXX object CMakeFiles/TemplateForAllCases.dir/tst/TemplateForAllCasesTests/TemplateForAllCases_unit.cpp.obj
+D:\a\aprg\aprg\TemplateForAllCases\TemplateForAllCases\tst\TemplateForAllCasesTests\TemplateForAllCases_unit.cpp:10:5: warning: variable 'entity' of type 'TemplateForAllCases' can be declared 'const' [misc-const-correctness]
+    TemplateForAllCases entity;
+    ^
+                        const 
+D:\a\aprg\aprg\TemplateForAllCases\TemplateForAllCases\tst\TemplateForAllCasesTests\TemplateForAllCases_unit.cpp:10:25: note: FIX-IT applied suggested code changes
+    TemplateForAllCases entity;
+                        ^
+[47/47] Linking CXX executable TemplateForAllCases.exe
+[35m2023-09-11T20:05:41[0m | [33mBuildAndRun.sh:218[0m | The script [BuildAndRun.sh] for [buildOnOneCore] is finished.
 DONE!
