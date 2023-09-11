@@ -3,15 +3,16 @@
 #include <CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.hpp>
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
 #include <CodeUtilities/Common/TermUtilities.hpp>
+#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/Print/AlbaLogPrints.hpp>
 
 #include <algorithm>
 #include <iostream>
 
-using namespace std;
 using namespace alba::CodeUtilities::CPlusPlusUtilities;
 using namespace alba::stringHelper;
+using namespace std;
 
 namespace alba::CodeUtilities {
 
@@ -55,17 +56,299 @@ void CPlusPlusReorganizer::processHeaderAndImplementationFile(
 void CPlusPlusReorganizer::reorganizeFile(string const& file) {
     ALBA_INF_PRINT1(cout, file);
     m_purpose = Purpose::Reorganize;
-    m_scopeDetails = {ScopeDetail{0, 0, 0, ScopeType::TopLevel, {}, {}}};
     AlbaLocalPathHandler const filePathHandler(file);
     m_fileType = getFileType(filePathHandler.getExtension());
     m_terms = getTermsFromFile(filePathHandler.getFullPath());
+
     processTerms();
     writeAllTerms(filePathHandler.getFullPath(), m_terms);
 }
 
+CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
+    int const scopeHeaderStart, int const openingBraceIndex) const {
+    string const scopeHeader(getContents(scopeHeaderStart, openingBraceIndex));
+    Terms scopeHeaderTerms(getTermsFromString(scopeHeader));
+    ScopeDetail scopeDetail{scopeHeaderStart, openingBraceIndex, 0, ScopeType::Unknown, {}, {}};
+    Patterns const searchPatterns{
+        {M("template"), M("<")},
+        {M("namespace"), M(TermType::Identifier)},
+        {M("namespace"), M("{")},
+        {M("enum"), M("class"), M(TermType::Identifier)},
+        {M("class"), M(TermType::Identifier)},
+        {M("struct"), M(TermType::Identifier)},
+        {M("union"), M(TermType::Identifier)}};
+    int nextIndex = 0;
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForPatternsForwards(scopeHeaderTerms, nextIndex, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            int const firstHitIndex = hitIndexes.front();
+            int const lastHitIndex = hitIndexes.back();
+            Term const& firstTerm(scopeHeaderTerms[firstHitIndex]);
+            Term const& lastTerm(scopeHeaderTerms[lastHitIndex]);
+            if (firstTerm.getContent() == "namespace" && lastTerm.getTermType() == TermType::Identifier) {
+                scopeDetail.scopeType = ScopeType::NamedNamespace;
+                scopeDetail.name = lastTerm.getContent();
+                break;
+            }
+            if (firstTerm.getContent() == "namespace" && lastTerm.getContent() == "{") {
+                scopeDetail.scopeType = ScopeType::AnonymousNamespace;
+                scopeDetail.name.clear();
+                break;
+            }
+            if (firstTerm.getContent() == "enum" && scopeHeaderTerms[hitIndexes[1]].getContent() == "class" &&
+                lastTerm.getTermType() == TermType::Identifier) {
+                scopeDetail.scopeType = ScopeType::EnumClass;
+                scopeDetail.name = lastTerm.getContent();
+                break;
+            }
+            if ((firstTerm.getContent() == "class" || firstTerm.getContent() == "struct" ||
+                 firstTerm.getContent() == "union") &&
+                lastTerm.getTermType() == TermType::Identifier) {
+                scopeDetail.scopeType = ScopeType::ClassDeclaration;
+                scopeDetail.name = lastTerm.getContent();
+                break;
+            }
+            if (firstTerm.getContent() == "template" && lastTerm.getContent() == "<") {
+                nextIndex = getIndexAtClosingString(scopeHeaderTerms, lastHitIndex, "<", ">");
+            } else {
+                nextIndex = lastHitIndex + 1;
+            }
+        }
+    }
+    return scopeDetail;
+}
+
+string CPlusPlusReorganizer::getContents(int const start, int const end) const {
+    return getStringWithoutStartingAndTrailingWhiteSpace(getCombinedContents(m_terms, start, end));
+}
+
+strings CPlusPlusReorganizer::getScopeNames() const {
+    strings result;
+    for (ScopeDetail const& scopeDetail : m_scopeDetails) {
+        if (!scopeDetail.name.empty()) {
+            result.emplace_back(scopeDetail.name);
+        }
+    }
+    return result;
+}
+
+strings CPlusPlusReorganizer::getSavedSignatures() const { return m_headerInformation.signatures; }
+
+int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
+    int endIndex = index;
+    Patterns const searchPatterns{{M(TermType::WhiteSpace), M(MatcherType::Comment)}, {M(MatcherType::Comment)}};
+    Indexes hitIndexes = checkPatternAt(m_terms, index + 1, searchPatterns);
+    if (!hitIndexes.empty()) {
+        int const firstHitIndex = hitIndexes.front();
+        int const lastHitIndex = hitIndexes.back();
+        Term const& firstTerm(m_terms[firstHitIndex]);
+        Term const& lastTerm(m_terms[lastHitIndex]);
+        if (firstTerm == M(TermType::WhiteSpace) && lastTerm == M(MatcherType::Comment) && !hasNewLine(firstTerm)) {
+            endIndex = lastHitIndex;
+        }
+        if (firstTerm == M(MatcherType::Comment)) {
+            endIndex = firstHitIndex;
+        }
+    }
+    return endIndex;
+}
+
+void CPlusPlusReorganizer::gatherInformationFromFile(string const& file) {
+    ALBA_INF_PRINT1(cout, file);
+    m_purpose = Purpose::GatherInformation;
+    AlbaLocalPathHandler const filePathHandler(file);
+    m_fileType = getFileType(filePathHandler.getExtension());
+    m_terms = getTermsFromFile(filePathHandler.getFullPath());
+
+    processTerms();
+}
+
+void CPlusPlusReorganizer::processTerms() {
+    enterAndSetTopLevelScope();
+
+    Patterns const searchPatterns{
+        {M(TermType::Macro)},
+        {M(";")},
+        {M("{"), M("}"), M(";")},
+        {M("{"), M("}")},
+        {M("{")},
+        {M("}"), M(";")},
+        {M("}")},
+        {M("(")},
+        {M("public"), M(":")},
+        {M("protected"), M(":")},
+        {M("private"), M(":")}};
+    int nextIndex = 0;
+    int searchIndex = 0;
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForPatternsForwards(m_terms, searchIndex, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            int const firstHitIndex = hitIndexes.front();
+            int const lastHitIndex = hitIndexes.back();
+            Term const& firstTerm(m_terms[firstHitIndex]);
+            Term const& lastTerm(m_terms[lastHitIndex]);
+            if (firstTerm.getTermType() == TermType::Macro) {
+                processMacro(nextIndex, firstHitIndex);
+                searchIndex = nextIndex;
+            } else if (firstTerm.getContent() == ";") {
+                processSemiColon(nextIndex, firstHitIndex);
+                searchIndex = nextIndex;
+            } else if (
+                (firstTerm.getContent() == "{" && m_terms[hitIndexes[1]].getContent() == "}" &&
+                 lastTerm.getContent() == ";") ||
+                (firstTerm.getContent() == "{" && lastTerm.getContent() == "}")) {
+                processOpeningAndClosingBrace(nextIndex, firstHitIndex, lastHitIndex);
+                searchIndex = nextIndex;
+            } else if (firstTerm.getContent() == "{") {
+                processOpeningBrace(nextIndex, firstHitIndex);
+                searchIndex = nextIndex;
+            } else if (firstTerm.getContent() == "}") {
+                processClosingBrace(nextIndex, firstHitIndex, lastHitIndex);
+                searchIndex = nextIndex;
+            } else if (firstTerm.getContent() == "(") {
+                searchIndex = getIndexAtClosingString(m_terms, firstHitIndex, "(", ")");
+            } else {
+                processRecognizedItem(nextIndex, lastHitIndex);
+                searchIndex = nextIndex;
+            }
+        }
+    }
+    addItemIfNeeded(nextIndex, static_cast<int>(m_terms.size()) - 1);
+
+    exitTopLevelScope();
+}
+
+void CPlusPlusReorganizer::processMacro(int& nextIndex, int const macroStartIndex) {
+    addItemIfNeeded(nextIndex, macroStartIndex - 1);  // add item before macro
+    nextIndex = macroStartIndex + 1;
+    Patterns const searchPatterns{
+        {M(MatcherType::WhiteSpaceWithNewLine)}, {M("\\"), M(MatcherType::WhiteSpaceWithNewLine)}};
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForPatternsForwards(m_terms, nextIndex, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            int const firstHitIndex = hitIndexes.front();
+            int const lastHitIndex = hitIndexes.back();
+            Term const& firstTerm(m_terms[firstHitIndex]);
+            nextIndex = lastHitIndex + 1;
+            if (firstTerm == M(MatcherType::WhiteSpaceWithNewLine)) {
+                addItemIfNeeded(macroStartIndex, lastHitIndex);
+                break;
+            }
+        }
+    }
+}
+
+void CPlusPlusReorganizer::processSemiColon(int& nextIndex, int const semiColonIndex) {
+    int const endIndex = getIndexAtSameLineComment(semiColonIndex);
+    addItemIfNeeded(nextIndex, endIndex);
+    nextIndex = endIndex + 1;
+}
+
+void CPlusPlusReorganizer::processOpeningAndClosingBrace(
+    int& nextIndex, int const openingBraceIndex, int const closingBraceSemiColonIndex) {
+    int const endIndex = getIndexAtSameLineComment(closingBraceSemiColonIndex);
+    Terms const scopeHeaderTerms(getTermsFromString(getContents(nextIndex, openingBraceIndex - 1)));
+    strings& currentItems(m_scopeDetails.back().items);
+    if (!currentItems.empty() && hasEndBrace(currentItems.back()) && shouldConnectToPreviousItem(scopeHeaderTerms)) {
+        currentItems.back() += getCombinedContents(m_terms, nextIndex, endIndex);
+    } else {
+        addItemIfNeeded(nextIndex, endIndex);
+    }
+    nextIndex = endIndex + 1;
+}
+
+void CPlusPlusReorganizer::processOpeningBrace(int& nextIndex, int const openingBraceIndex) {
+    Terms const scopeHeaderTerms(getTermsFromString(getContents(nextIndex, openingBraceIndex - 1)));
+    strings& currentItems(m_scopeDetails.back().items);
+    if (!currentItems.empty() && hasEndBrace(currentItems.back()) && shouldConnectToPreviousItem(scopeHeaderTerms)) {
+        Terms const lastItemTerms = getTermsFromString(currentItems.back());
+        currentItems.pop_back();
+        nextIndex -= static_cast<int>(lastItemTerms.size()) + 1;
+    }
+    enterScope(nextIndex, openingBraceIndex);
+    nextIndex = openingBraceIndex + 1;
+}
+
+void CPlusPlusReorganizer::processClosingBrace(
+    int& nextIndex, int const closingBraceIndex, int const closingBraceSemiColonIndex) {
+    int const endIndex = getIndexAtSameLineComment(closingBraceSemiColonIndex);
+    addItemIfNeeded(nextIndex, closingBraceIndex - 1);
+    exitScope(nextIndex, closingBraceIndex, endIndex);
+}
+
+void CPlusPlusReorganizer::processRecognizedItem(int& nextIndex, int const recognizedItemEndIndex) {
+    addItemIfNeeded(nextIndex, recognizedItemEndIndex);
+    nextIndex = recognizedItemEndIndex + 1;
+}
+
+void CPlusPlusReorganizer::enterAndSetTopLevelScope() {
+    m_scopeDetails = {ScopeDetail{0, 0, 0, ScopeType::TopLevel, {}, {}}};
+}
+
+void CPlusPlusReorganizer::exitTopLevelScope() {
+    ScopeDetail const& scopeToExit(m_scopeDetails.back());
+
+    CPlusPlusReorganizeItems const sorter(
+        {m_fileType, scopeToExit.scopeType, scopeToExit.items, getScopeNames(), m_headerInformation.signatures});
+    Terms const sortedTerms(sorter.getReorganizedTerms());
+    m_terms = sortedTerms;
+
+    m_scopeDetails.pop_back();
+}
+
+void CPlusPlusReorganizer::enterScope(int const scopeHeaderStart, int const openingBraceIndex) {
+    m_scopeDetails.emplace_back(constructScopeDetails(scopeHeaderStart, openingBraceIndex));
+}
+
+void CPlusPlusReorganizer::exitScope(int& nextIndex, int const closingBraceIndex, int const endIndex) {
+    ScopeDetail const& scopeToExit(m_scopeDetails.back());
+    if (shouldReorganizeInThisScope(scopeToExit)) {
+        m_terms.erase(m_terms.cbegin() + scopeToExit.openingBraceIndex + 1, m_terms.cbegin() + closingBraceIndex);
+
+        CPlusPlusReorganizeItems const sorter(
+            {m_fileType, scopeToExit.scopeType, scopeToExit.items, getScopeNames(), m_headerInformation.signatures});
+        Terms const sortedTerms(sorter.getReorganizedTerms());
+        m_terms.insert(m_terms.cbegin() + scopeToExit.openingBraceIndex + 1, sortedTerms.cbegin(), sortedTerms.cend());
+
+        int const sizeDifference =
+            static_cast<int>(sortedTerms.size()) - closingBraceIndex + scopeToExit.openingBraceIndex + 1;
+        m_scopeDetails.pop_back();
+        addItemIfNeeded(scopeToExit.scopeHeaderStart, endIndex + sizeDifference);
+        nextIndex = endIndex + 1 + sizeDifference;
+    } else {
+        m_scopeDetails.pop_back();
+        addItemIfNeeded(scopeToExit.scopeHeaderStart, endIndex);
+        nextIndex = endIndex + 1;
+    }
+}
+
+void CPlusPlusReorganizer::addItemIfNeeded(int const startIndex, int const endIndex) {
+    string const content = getContents(startIndex, endIndex);
+    if (!content.empty() && shouldReorganizeInThisScope(m_scopeDetails.back())) {
+        switch (m_purpose) {
+            case Purpose::Reorganize: {
+                m_scopeDetails.back().items.emplace_back(content);
+                break;
+            }
+            case Purpose::GatherInformation:
+                m_headerInformation.signatures.emplace_back(getFunctionSignature(content));
+                break;
+            case Purpose::Unknown:
+                break;
+        }
+    }
+}
+
 bool CPlusPlusReorganizer::shouldReorganizeInThisScope(ScopeDetail const& scope) {
-    return scope.scopeType == ScopeType::NamedNamespace || scope.scopeType == ScopeType::AnonymousNamespace ||
-           scope.scopeType == ScopeType::ClassDeclaration || scope.scopeType == ScopeType::EnumClass;
+    return scope.scopeType == ScopeType::TopLevel || scope.scopeType == ScopeType::NamedNamespace ||
+           scope.scopeType == ScopeType::AnonymousNamespace || scope.scopeType == ScopeType::ClassDeclaration ||
+           scope.scopeType == ScopeType::EnumClass;
 }
 
 bool CPlusPlusReorganizer::shouldConnectToPreviousItem(Terms const& scopeHeaderTerms) {
@@ -111,267 +394,6 @@ int CPlusPlusReorganizer::getIndexAtClosingString(
         }
     }
     return endIndex;
-}
-
-CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
-    int const scopeHeaderStart, int const openingBraceIndex) const {
-    string const scopeHeader(getContents(scopeHeaderStart, openingBraceIndex));
-    Terms scopeHeaderTerms(getTermsFromString(scopeHeader));
-    ScopeDetail scopeDetail{scopeHeaderStart, openingBraceIndex, 0, ScopeType::Unknown, {}, {}};
-    Patterns const searchPatterns{
-        {M("template"), M("<")},
-        {M("namespace"), M(TermType::Identifier)},
-        {M("namespace"), M("{")},
-        {M("enum"), M("class"), M(TermType::Identifier)},
-        {M("class"), M(TermType::Identifier)},
-        {M("struct"), M(TermType::Identifier)},
-        {M("union"), M(TermType::Identifier)}};
-    int lastProcessedIndex = 0;
-    bool isFound(true);
-    while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(scopeHeaderTerms, lastProcessedIndex, searchPatterns);
-        isFound = !hitIndexes.empty();
-        if (isFound) {
-            int const firstHitIndex = hitIndexes.front();
-            int const lastHitIndex = hitIndexes.back();
-            Term const& firstTerm(scopeHeaderTerms[firstHitIndex]);
-            Term const& lastTerm(scopeHeaderTerms[lastHitIndex]);
-            if (firstTerm.getContent() == "namespace" && lastTerm.getTermType() == TermType::Identifier) {
-                scopeDetail.scopeType = ScopeType::NamedNamespace;
-                scopeDetail.name = lastTerm.getContent();
-                break;
-            }
-            if (firstTerm.getContent() == "namespace" && lastTerm.getContent() == "{") {
-                scopeDetail.scopeType = ScopeType::AnonymousNamespace;
-                scopeDetail.name.clear();
-                break;
-            }
-            if (firstTerm.getContent() == "enum" && scopeHeaderTerms[hitIndexes[1]].getContent() == "class" &&
-                lastTerm.getTermType() == TermType::Identifier) {
-                scopeDetail.scopeType = ScopeType::EnumClass;
-                scopeDetail.name = lastTerm.getContent();
-                break;
-            }
-            if ((firstTerm.getContent() == "class" || firstTerm.getContent() == "struct" ||
-                 firstTerm.getContent() == "union") &&
-                lastTerm.getTermType() == TermType::Identifier) {
-                scopeDetail.scopeType = ScopeType::ClassDeclaration;
-                scopeDetail.name = lastTerm.getContent();
-                break;
-            }
-            if (firstTerm.getContent() == "template" && lastTerm.getContent() == "<") {
-                lastProcessedIndex = getIndexAtClosingString(scopeHeaderTerms, lastHitIndex, "<", ">");
-            } else {
-                lastProcessedIndex = lastHitIndex + 1;
-            }
-        }
-    }
-    return scopeDetail;
-}
-
-string CPlusPlusReorganizer::getContents(int const start, int const end) const {
-    return getStringWithoutStartingAndTrailingWhiteSpace(getCombinedContents(m_terms, start, end));
-}
-
-strings CPlusPlusReorganizer::getScopeNames() const {
-    strings result;
-    for (ScopeDetail const& scopeDetail : m_scopeDetails) {
-        if (!scopeDetail.name.empty()) {
-            result.emplace_back(scopeDetail.name);
-        }
-    }
-    return result;
-}
-
-strings CPlusPlusReorganizer::getSavedSignatures() const { return m_headerInformation.signatures; }
-
-int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
-    int endIndex = index;
-    Patterns const searchPatterns{{M(TermType::WhiteSpace), M(MatcherType::Comment)}, {M(MatcherType::Comment)}};
-    Indexes hitIndexes = checkPatternAt(m_terms, index + 1, searchPatterns);
-    if (!hitIndexes.empty()) {
-        int const firstHitIndex = hitIndexes.front();
-        int const lastHitIndex = hitIndexes.back();
-        Term const& firstTerm(m_terms[firstHitIndex]);
-        Term const& lastTerm(m_terms[lastHitIndex]);
-        if (firstTerm == M(TermType::WhiteSpace) && lastTerm == M(MatcherType::Comment) && !hasNewLine(firstTerm)) {
-            endIndex = lastHitIndex;
-        }
-        if (firstTerm == M(MatcherType::Comment)) {
-            endIndex = firstHitIndex;
-        }
-    }
-    return endIndex;
-}
-
-void CPlusPlusReorganizer::gatherInformationFromFile(string const& file) {
-    ALBA_INF_PRINT1(cout, file);
-    m_purpose = Purpose::GatherInformation;
-    m_scopeDetails = {ScopeDetail{0, 0, 0, ScopeType::TopLevel, {}, {}}};
-    AlbaLocalPathHandler const filePathHandler(file);
-    m_fileType = getFileType(filePathHandler.getExtension());
-    m_terms = getTermsFromFile(filePathHandler.getFullPath());
-    processTerms();
-}
-
-void CPlusPlusReorganizer::processTerms() {
-    Patterns const searchPatterns{
-        {M(TermType::Macro)},
-        {M(";")},
-        {M("{"), M("}"), M(";")},
-        {M("{"), M("}")},
-        {M("{")},
-        {M("}"), M(";")},
-        {M("}")},
-        {M("(")},
-        {M("public"), M(":")},
-        {M("protected"), M(":")},
-        {M("private"), M(":")}};
-    int lastProcessedIndex = 0;
-    int searchIndex = 0;
-    bool isFound(true);
-    while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(m_terms, searchIndex, searchPatterns);
-        isFound = !hitIndexes.empty();
-        if (isFound) {
-            int const firstHitIndex = hitIndexes.front();
-            int const lastHitIndex = hitIndexes.back();
-            Term const& firstTerm(m_terms[firstHitIndex]);
-            Term const& lastTerm(m_terms[lastHitIndex]);
-            if (firstTerm.getTermType() == TermType::Macro) {
-                processMacro(lastProcessedIndex, firstHitIndex);
-                searchIndex = lastProcessedIndex;
-            } else if (firstTerm.getContent() == ";") {
-                processSemiColon(lastProcessedIndex, firstHitIndex);
-                searchIndex = lastProcessedIndex;
-            } else if (
-                (firstTerm.getContent() == "{" && m_terms[hitIndexes[1]].getContent() == "}" &&
-                 lastTerm.getContent() == ";") ||
-                (firstTerm.getContent() == "{" && lastTerm.getContent() == "}")) {
-                processOpeningAndClosingBrace(lastProcessedIndex, firstHitIndex, lastHitIndex);
-                searchIndex = lastProcessedIndex;
-            } else if (firstTerm.getContent() == "{") {
-                processOpeningBrace(lastProcessedIndex, firstHitIndex);
-                searchIndex = lastProcessedIndex;
-            } else if (firstTerm.getContent() == "}") {
-                processClosingBrace(lastProcessedIndex, firstHitIndex, lastHitIndex);
-                searchIndex = lastProcessedIndex;
-            } else if (firstTerm.getContent() == "(") {
-                searchIndex = getIndexAtClosingString(m_terms, firstHitIndex, "(", ")");
-            } else {
-                processRecognizedItem(lastProcessedIndex, lastHitIndex);
-                searchIndex = lastProcessedIndex;
-            }
-        }
-    }
-}
-
-void CPlusPlusReorganizer::processMacro(int& lastProcessedIndex, int const macroStartIndex) {
-    addItemIfNeeded(lastProcessedIndex, macroStartIndex - 1);  // add item before macro
-    lastProcessedIndex = macroStartIndex + 1;
-    Patterns const searchPatterns{
-        {M(MatcherType::WhiteSpaceWithNewLine)}, {M("\\"), M(MatcherType::WhiteSpaceWithNewLine)}};
-    bool isFound(true);
-    while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(m_terms, lastProcessedIndex, searchPatterns);
-        isFound = !hitIndexes.empty();
-        if (isFound) {
-            int const firstHitIndex = hitIndexes.front();
-            int const lastHitIndex = hitIndexes.back();
-            Term const& firstTerm(m_terms[firstHitIndex]);
-            lastProcessedIndex = lastHitIndex + 1;
-            if (firstTerm == M(MatcherType::WhiteSpaceWithNewLine)) {
-                addItemIfNeeded(macroStartIndex, lastHitIndex);
-                break;
-            }
-        }
-    }
-}
-
-void CPlusPlusReorganizer::processSemiColon(int& lastProcessedIndex, int const semiColonIndex) {
-    int const endIndex = getIndexAtSameLineComment(semiColonIndex);
-    addItemIfNeeded(lastProcessedIndex, endIndex);
-    lastProcessedIndex = endIndex + 1;
-}
-
-void CPlusPlusReorganizer::processOpeningAndClosingBrace(
-    int& lastProcessedIndex, int const openingBraceIndex, int const closingBraceSemiColonIndex) {
-    int const endIndex = getIndexAtSameLineComment(closingBraceSemiColonIndex);
-    Terms const scopeHeaderTerms(getTermsFromString(getContents(lastProcessedIndex, openingBraceIndex - 1)));
-    strings& currentItems(m_scopeDetails.back().items);
-    if (!currentItems.empty() && hasEndBrace(currentItems.back()) && shouldConnectToPreviousItem(scopeHeaderTerms)) {
-        currentItems.back() += getCombinedContents(m_terms, lastProcessedIndex, endIndex);
-    } else {
-        addItemIfNeeded(lastProcessedIndex, endIndex);
-    }
-    lastProcessedIndex = endIndex + 1;
-}
-
-void CPlusPlusReorganizer::processOpeningBrace(int& lastProcessedIndex, int const openingBraceIndex) {
-    Terms const scopeHeaderTerms(getTermsFromString(getContents(lastProcessedIndex, openingBraceIndex - 1)));
-    strings& currentItems(m_scopeDetails.back().items);
-    if (!currentItems.empty() && hasEndBrace(currentItems.back()) && shouldConnectToPreviousItem(scopeHeaderTerms)) {
-        Terms const lastItemTerms = getTermsFromString(currentItems.back());
-        currentItems.pop_back();
-        lastProcessedIndex -= static_cast<int>(lastItemTerms.size()) + 1;
-    }
-    enterScope(lastProcessedIndex, openingBraceIndex);
-    lastProcessedIndex = openingBraceIndex + 1;
-}
-
-void CPlusPlusReorganizer::processClosingBrace(
-    int& lastProcessedIndex, int const closingBraceIndex, int const closingBraceSemiColonIndex) {
-    int const endIndex = getIndexAtSameLineComment(closingBraceSemiColonIndex);
-    addItemIfNeeded(lastProcessedIndex, closingBraceIndex - 1);
-    exitScope(lastProcessedIndex, closingBraceIndex, endIndex);
-}
-
-void CPlusPlusReorganizer::processRecognizedItem(int& lastProcessedIndex, int const recognizedItemEndIndex) {
-    addItemIfNeeded(lastProcessedIndex, recognizedItemEndIndex);
-    lastProcessedIndex = recognizedItemEndIndex + 1;
-}
-
-void CPlusPlusReorganizer::enterScope(int const scopeHeaderStart, int const openingBraceIndex) {
-    m_scopeDetails.emplace_back(constructScopeDetails(scopeHeaderStart, openingBraceIndex));
-}
-
-void CPlusPlusReorganizer::exitScope(int& lastProcessedIndex, int const closingBraceIndex, int const endIndex) {
-    ScopeDetail const& scopeToExit(m_scopeDetails.back());
-    if (shouldReorganizeInThisScope(scopeToExit)) {
-        m_terms.erase(m_terms.cbegin() + scopeToExit.openingBraceIndex + 1, m_terms.cbegin() + closingBraceIndex);
-
-        CPlusPlusReorganizeItems const sorter(
-            {m_fileType, scopeToExit.scopeType, scopeToExit.items, getScopeNames(), m_headerInformation.signatures});
-        Terms const sortedTerms(sorter.getSortedAggregateTerms());
-        m_terms.insert(m_terms.cbegin() + scopeToExit.openingBraceIndex + 1, sortedTerms.cbegin(), sortedTerms.cend());
-
-        int const sizeDifference =
-            static_cast<int>(sortedTerms.size()) - closingBraceIndex + scopeToExit.openingBraceIndex + 1;
-        m_scopeDetails.pop_back();
-        addItemIfNeeded(scopeToExit.scopeHeaderStart, endIndex + sizeDifference);
-        lastProcessedIndex = endIndex + 1 + sizeDifference;
-    } else {
-        m_scopeDetails.pop_back();
-        addItemIfNeeded(scopeToExit.scopeHeaderStart, endIndex);
-        lastProcessedIndex = endIndex + 1;
-    }
-}
-
-void CPlusPlusReorganizer::addItemIfNeeded(int const startIndex, int const endIndex) {
-    string const content = getContents(startIndex, endIndex);
-    if (!content.empty() && shouldReorganizeInThisScope(m_scopeDetails.back())) {
-        switch (m_purpose) {
-            case Purpose::Reorganize: {
-                m_scopeDetails.back().items.emplace_back(content);
-                break;
-            }
-            case Purpose::GatherInformation:
-                m_headerInformation.signatures.emplace_back(getFunctionSignature(content));
-                break;
-            case Purpose::Unknown:
-                break;
-        }
-    }
 }
 
 CPlusPlusReorganizer::CPlusPlusReorganizer() = default;

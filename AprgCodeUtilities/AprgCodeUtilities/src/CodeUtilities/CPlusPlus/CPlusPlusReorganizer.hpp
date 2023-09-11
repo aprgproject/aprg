@@ -29,11 +29,6 @@ public:
     void reorganizeFile(std::string const& file);
 
 private:
-    [[nodiscard]] static bool shouldReorganizeInThisScope(ScopeDetail const& scope);
-    [[nodiscard]] static bool shouldConnectToPreviousItem(Terms const& scopeHeaderTerms);
-    [[nodiscard]] static bool hasEndBrace(std::string const& content);
-    static int getIndexAtClosingString(
-        Terms const& terms, int const openingIndex, std::string const& openingString, std::string const& closingString);
     [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const openingBraceIndex) const;
     [[nodiscard]] std::string getContents(int const start, int const end) const;
     [[nodiscard]] stringHelper::strings getScopeNames() const;
@@ -41,17 +36,23 @@ private:
     [[nodiscard]] int getIndexAtSameLineComment(int const index) const;
     void gatherInformationFromFile(std::string const& file);
     void processTerms();
-    void processMacro(int& lastProcessedIndex, int const macroStartIndex);
-    void processSemiColon(int& lastProcessedIndex, int const endIndex);
+    void processMacro(int& nextIndex, int const macroStartIndex);
+    void processSemiColon(int& nextIndex, int const endIndex);
     void processOpeningAndClosingBrace(
-        int& lastProcessedIndex, int const openingBraceIndex, int const closingBraceSemiColonIndex);
-    void processOpeningBrace(int& lastProcessedIndex, int const openingBraceIndex);
-    void processClosingBrace(
-        int& lastProcessedIndex, int const closingBraceIndex, int const closingBraceSemiColonIndex);
-    void processRecognizedItem(int& lastProcessedIndex, int const recognizedItemEndIndex);
+        int& nextIndex, int const openingBraceIndex, int const closingBraceSemiColonIndex);
+    void processOpeningBrace(int& nextIndex, int const openingBraceIndex);
+    void processClosingBrace(int& nextIndex, int const closingBraceIndex, int const closingBraceSemiColonIndex);
+    void processRecognizedItem(int& nextIndex, int const recognizedItemEndIndex);
+    void enterAndSetTopLevelScope();
+    void exitTopLevelScope();
     void enterScope(int const scopeHeaderStart, int const openingBraceIndex);
-    void exitScope(int& lastProcessedIndex, int const closingBraceIndex, int const endIndex);
+    void exitScope(int& nextIndex, int const closingBraceIndex, int const endIndex);
     void addItemIfNeeded(int const startIndex, int const endIndex);
+    [[nodiscard]] static bool shouldReorganizeInThisScope(ScopeDetail const& scope);
+    [[nodiscard]] static bool shouldConnectToPreviousItem(Terms const& scopeHeaderTerms);
+    [[nodiscard]] static bool hasEndBrace(std::string const& content);
+    static int getIndexAtClosingString(
+        Terms const& terms, int const openingIndex, std::string const& openingString, std::string const& closingString);
     Purpose m_purpose{Purpose::Unknown};
     CppFileType m_fileType{CppFileType::Unknown};
     std::vector<ScopeDetail> m_scopeDetails;

@@ -30,19 +30,6 @@ void replaceAllForwards(
     }
 }
 
-void replaceCommentsWithExtraLine(Terms& terms, int const startIndex) {
-    Patterns const searchPattern{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
-    for (int termIndex = startIndex; termIndex < static_cast<int>(terms.size());) {
-        Indexes patternIndexes = checkPatternAt(terms, termIndex, searchPattern);
-        if (!patternIndexes.empty()) {
-            terms[patternIndexes.back()] = Term(TermType::WhiteSpace, "\n");
-            termIndex = patternIndexes.back() + 1;
-        } else {
-            ++termIndex;
-        }
-    }
-}
-
 void combineTermsInPlace(Terms& terms, TermType const newTermType, int const startIndex, int const endIndex) {
     if (startIndex < endIndex) {
         string combinedContent;

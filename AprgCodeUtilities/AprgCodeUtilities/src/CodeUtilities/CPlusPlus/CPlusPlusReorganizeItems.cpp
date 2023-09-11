@@ -2,6 +2,7 @@
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
 #include <CodeUtilities/Common/TermUtilities.hpp>
+#include <Common/Debug/AlbaDebug.hpp>
 
 #include <algorithm>
 #include <iostream>
@@ -15,33 +16,65 @@ using namespace std;
 namespace alba::CodeUtilities {
 
 CPlusPlusReorganizeItems::CPlusPlusReorganizeItems(Data const& data) : m_data(data) { fixItemContents(); }
-
 CPlusPlusReorganizeItems::CPlusPlusReorganizeItems(Data&& data) : m_data(data) { fixItemContents(); }
 
-Terms CPlusPlusReorganizeItems::getSortedAggregateTerms() const {
+Terms CPlusPlusReorganizeItems::getReorganizedTerms() const {
+    switch (m_data.scopeType) {
+        case ScopeType::AnonymousNamespace:
+        case ScopeType::NamedNamespace:
+            return getReorganizedTermsInNamespace();
+        case ScopeType::ClassDeclaration:
+            return getReorganizedTermsInClassDeclaration();
+        case ScopeType::EnumClass:
+            return getReorganizedTermsInEnumClass();
+        case ScopeType::TopLevel:
+            return getReorganizedTermsInTopLevelScope();
+        case ScopeType::Unknown:
+            return {};
+    }
+    return {};
+}
+
+CPlusPlusReorganizeItems::SortItems CPlusPlusReorganizeItems::getSortedItems() const {
+    SortItems sortItems(getSortItems());
+    sortByComparingItems(sortItems);
+    sortAlphabetically(sortItems);
+    return sortItems;
+}
+
+CPlusPlusReorganizeItems::SortItems CPlusPlusReorganizeItems::getSortItems() const {
+    SortItems sortItems;
+    sortItems.reserve(m_data.items.size());
+    int index = 0;
+    for (string const& item : m_data.items) {
+        SortItem sortItem(createSortItem(index++));
+        saveDetailsFromHeaderSignatures(sortItem, item);
+        saveDetailsBasedFromItem(sortItem, item);
+        sortItems.emplace_back(sortItem);
+    }
+    return sortItems;
+}
+
+Terms CPlusPlusReorganizeItems::getReorganizedTermsInClassDeclaration() const {
     Terms terms;
     SortItems const sortedItems(getSortedItems());
-    terms.emplace_back(TermType::WhiteSpace, "\n");
-    bool const isMultilineScope = hasMultilineItem(sortedItems) && m_data.scopeType != ScopeType::EnumClass;
+    bool const isMultilineScope = hasMultilineItem(sortedItems);
     bool isPreviousAMultilineItem(isMultilineScope);
     bool isFirst(true);
     bool isPreviousAnAccessControl(false);
+    terms.emplace_back(TermType::WhiteSpace, "\n");  // new line after brace
     for (SortItem const& sortItem : sortedItems) {
         string const& item(m_data.items[sortItem.itemsIndex]);
         bool const isAccessControl = sortItem.itemType == ItemType::AccessControl;
         bool const isMultilineItem = isMultiLine(sortItem.numberOfLines) || isAccessControl;
-        bool const shouldPreventNewLine =
-            (isFirst && isAccessControl) || isPreviousAnAccessControl || m_data.scopeType == ScopeType::EnumClass;
-        if ((isMultilineItem || isPreviousAMultilineItem) && !shouldPreventNewLine) {
+        bool const shouldPreventNewLine = (isFirst && isAccessControl) || isPreviousAnAccessControl;
+        bool placeNewLineBeforeItem = !shouldPreventNewLine && (isMultilineItem || isPreviousAMultilineItem);
+        if (placeNewLineBeforeItem) {
             terms.emplace_back(TermType::WhiteSpace, "\n");
         }
 
-        // stringstream commentStream;
-        // commentStream << "/*BEGIN ADD (" << sortItem.headerIndex << ",0x" << hex << sortItem.score << "," << dec
-        //               << sortItem.itemsIndex << ")*/";
-        // terms.emplace_back(TermType::CommentMultiline, commentStream.str());
         terms.emplace_back(TermType::Aggregate, item);
-        // terms.emplace_back(TermType::CommentMultiline, "/*END ADD*/");
+
         terms.emplace_back(TermType::WhiteSpace, "\n");
         isPreviousAMultilineItem = isMultilineItem;
         isFirst = false;
@@ -53,154 +86,84 @@ Terms CPlusPlusReorganizeItems::getSortedAggregateTerms() const {
     return terms;
 }
 
-Patterns CPlusPlusReorganizeItems::getSearchPatterns() {
-    return Patterns{
-        {M("(")},
-        {M(";")},
-        {M("{")},
-        {M(":")},
-        {M("static_assert")},
-        {M("namespace")},
-        {M("using")},
-        {M("template")},
-        {M(TermType::Macro)},
-        {M("public"), M(":")},
-        {M("protected"), M(":")},
-        {M("private"), M(":")},
-        {M("enum"), M("class")},
-        {M("enum")},
-        {M("struct")},
-        {M("union")},
-        {M("class")},
-        {M("="), M("default")},
-        {M("="), M("delete")},
-        {M("operator"), M("=")},
-        {M("operator")},
-        {M("constexpr")},
-        {M("inline")},
-        {M("explicit")},
-        {M("virtual")},
-        {M("override")},
-        {M("static")},
-        {M("[[nodiscard]]")},
-        {M(TermType::Attribute)},
-        {M("volatile")},
-        {M("const")},
-        {M("friend")}};
-}
-
-string CPlusPlusReorganizeItems::getIdentifierBeforeParenthesis(Terms const& terms, int const parenthesisIndex) {
-    int const beforeParenthesis = parenthesisIndex - 1;
-    Patterns const searchPatterns{{M(TermType::Identifier)}};
-    Indexes hitIndexes = checkPatternAt(terms, beforeParenthesis, searchPatterns);
-    if (!hitIndexes.empty()) {
-        return terms[hitIndexes.front()].getContent();
+Terms CPlusPlusReorganizeItems::getReorganizedTermsInEnumClass() const {
+    Terms terms;
+    SortItems const sortedItems(getSortedItems());
+    terms.emplace_back(TermType::WhiteSpace, "\n");  // new line after brace
+    for (SortItem const& sortItem : sortedItems) {
+        string const& item(m_data.items[sortItem.itemsIndex]);
+        terms.emplace_back(TermType::Aggregate, item);
+        terms.emplace_back(TermType::WhiteSpace, "\n");
     }
-    return {};
+    return terms;
 }
 
-int CPlusPlusReorganizeItems::getTotalNumberLines(SortItems const& sortItems) {
-    return accumulate(sortItems.cbegin(), sortItems.cend(), 0, [](int const partialResult, SortItem const& sortItem) {
-        return partialResult + sortItem.numberOfLines;
-    });
-}
-
-bool CPlusPlusReorganizeItems::hasMultilineItem(SortItems const& sortItems) {
-    return any_of(sortItems.cbegin(), sortItems.cend(), [&](SortItem const& sortItem) {
-        return isMultiLine(sortItem.numberOfLines);
-    });
-}
-
-bool CPlusPlusReorganizeItems::isMultiLine(int const numberOfLines) { return numberOfLines > 2; }
-
-void CPlusPlusReorganizeItems::sortByComparingItems(SortItems& sortItems) {
-    int start = 0;
-    int end = 0;
-    for (; end < static_cast<int>(sortItems.size()); end++) {
-        if (sortItems[end].isDivider) {
-            sort(sortItems.begin() + start, sortItems.begin() + end);
-            start = end + 1;
+Terms CPlusPlusReorganizeItems::getReorganizedTermsInNamespace() const {
+    Terms terms;
+    SortItems const sortedItems(getSortedItems());
+    bool const isMultilineScope = hasMultilineItem(sortedItems);
+    bool isPreviousAMultilineItem(isMultilineScope);
+    terms.emplace_back(TermType::WhiteSpace, "\n");  // new line after brace
+    for (SortItem const& sortItem : sortedItems) {
+        string const& item(m_data.items[sortItem.itemsIndex]);
+        bool const isMultilineItem = isMultiLine(sortItem.numberOfLines);
+        bool placeNewLineBeforeItem = isMultilineItem || isPreviousAMultilineItem;
+        if (placeNewLineBeforeItem) {
+            terms.emplace_back(TermType::WhiteSpace, "\n");
         }
+        // ALBA_DBG_PRINT(item);
+        // ALBA_DBG_PRINT(isMultilineItem, sortItem.numberOfLines);
+        // ALBA_DBG_PRINT(placeNewLineBeforeItem, isMultilineItem, isPreviousAMultilineItem);
+        terms.emplace_back(TermType::Aggregate, item);
+        terms.emplace_back(TermType::WhiteSpace, "\n");
+        isPreviousAMultilineItem = isMultilineItem;
     }
-    if (start < end) {
-        sort(sortItems.begin() + start, sortItems.begin() + end);
+    if (isMultilineScope) {
+        terms.emplace_back(TermType::WhiteSpace, "\n");
     }
+    return terms;
 }
 
-void CPlusPlusReorganizeItems::moveToEndParenthesis(Terms const& terms, int& termIndex, int const parenthesisIndex) {
-    termIndex = parenthesisIndex + 1;
-    Patterns const searchPatterns{{M(")")}, {M(";")}, {M("{")}, {M(":")}};
-    bool isFound(true);
-    bool isCloseParenthesisFound(false);
-    while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
-        isFound = !hitIndexes.empty();
-        if (isFound) {
-            int const firstHitIndex = hitIndexes.front();
-            int const lastHitIndex = hitIndexes.back();
-            Term const& firstTerm(terms[firstHitIndex]);
-            if (firstTerm.getContent() == ")") {
-                termIndex = lastHitIndex + 1;
-                isCloseParenthesisFound = true;
-            }
-            if (firstTerm.getContent() == ";" || firstTerm.getContent() == "{" || firstTerm.getContent() == ":") {
-                if (!isCloseParenthesisFound) {
-                    termIndex = lastHitIndex;
-                }
-                break;
-            }
+Terms CPlusPlusReorganizeItems::getReorganizedTermsInTopLevelScope() const {
+    Terms terms;
+    SortItems const sortedItems(getSortedItems());
+    bool isPreviousAMultilineItem(false);
+    bool isPreviousAGroupItem(false);
+    bool isFirst(true);
+    ItemType previousItemType(ItemType::Unknown);
+    for (SortItem const& sortItem : sortedItems) {
+        string const& item(m_data.items[sortItem.itemsIndex]);
+        bool const isMultilineItem =
+            isMultiLine(sortItem.numberOfLines) || sortItem.itemSubType == ItemSubType::PragmaMacro;
+        bool isAGroupItem = sortItem.itemType == ItemType::Macro || sortItem.itemType == ItemType::UsingKeyword;
+        bool shouldSeparateGroups = (isAGroupItem || isPreviousAGroupItem) &&
+                                    (getGroupType(sortItem.itemType) != getGroupType(previousItemType));
+        bool placeNewLineBeforeItem = !isFirst && (isMultilineItem || isPreviousAMultilineItem || shouldSeparateGroups);
+        // ALBA_DBG_PRINT(item);
+        // ALBA_DBG_PRINT(
+        //     isMultilineItem, isMultiLine(sortItem.numberOfLines), (sortItem.itemSubType ==
+        //     ItemSubType::PragmaMacro));
+        // ALBA_DBG_PRINT(shouldSeparateGroups, isAGroupItem, isPreviousAGroupItem);
+        // ALBA_DBG_PRINT(
+        //     static_cast<int>(getGroupType(sortItem.itemType)), static_cast<int>(getGroupType(previousItemType)));
+        // ALBA_DBG_PRINT(
+        //     placeNewLineBeforeItem, isFirst, isMultilineItem, isPreviousAMultilineItem, shouldSeparateGroups);
+        if (placeNewLineBeforeItem) {
+            terms.emplace_back(TermType::WhiteSpace, "\n");
         }
+        // stringstream commentStream;
+        // commentStream << "/*BEGIN ADD (" << sortItem.headerIndex << ",0x" << hex << sortItem.score << "," << dec
+        //               << sortItem.itemsIndex << ")*/";
+        // terms.emplace_back(TermType::CommentMultiline, commentStream.str());
+        terms.emplace_back(TermType::Aggregate, item);
+        // terms.emplace_back(TermType::CommentMultiline, "/*END ADD*/");
+        terms.emplace_back(TermType::WhiteSpace, "\n");
+        isPreviousAMultilineItem = isMultilineItem;
+        isPreviousAGroupItem = isAGroupItem;
+        previousItemType = sortItem.itemType;
+        isFirst = false;
     }
-}
-
-void CPlusPlusReorganizeItems::saveDetailsBasedFromFunctionSignature(
-    SortItem& sortItem, string const& functionSignature) {
-    Terms terms(getTermsFromString(functionSignature));
-    Patterns const searchPatterns{{M(TermType::PrimitiveType)}, {M(TermType::Identifier)}, {M(TermType::Keyword)}};
-    Indexes hitIndexes = searchForPatternsForwards(terms, 0, searchPatterns);
-    if (!hitIndexes.empty()) {
-        int const firstHitIndex = hitIndexes.front();
-        Term const& firstTerm(terms[firstHitIndex]);
-        if (firstTerm.getTermType() == TermType::PrimitiveType) {
-            if (firstTerm.getContent() == "bool") {
-                sortItem.score += 0x2;  // returnType: bool
-            } else if (firstTerm.getContent() == "void") {
-                sortItem.score += 0x5;  // returnType: void
-            } else {
-                sortItem.score += 0x3;  // returnType: primitive type
-            }
-        } else if (firstTerm.getTermType() == TermType::Identifier) {
-            if (firstTerm.getContent() == "TEST" || firstTerm.getContent() == "TEST_F") {
-                sortItem.score += 0x1;  // returnType: gtest tests
-            } else if (firstTerm.getContent() == "size_t") {
-                sortItem.score += 0x3;  // returnType: same level as primitive type
-            } else {
-                sortItem.score += 0x4;  // returnType: user type
-            }
-        } else if (firstTerm.getTermType() == TermType::Keyword) {
-            sortItem.score += 0x6;
-        }
-        sortItem.functionReturnTypeName = firstTerm.getContent();
-    }
-}
-
-CPlusPlusReorganizeItems::SortItems CPlusPlusReorganizeItems::getSortedItems() const {
-    SortItems sortItems(getSortItems());
-    sortByComparingItems(sortItems);
-    return sortItems;
-}
-
-CPlusPlusReorganizeItems::SortItems CPlusPlusReorganizeItems::getSortItems() const {
-    SortItems sortItems;
-    sortItems.reserve(m_data.items.size());
-    int index = 0;
-    for (string const& item : m_data.items) {
-        SortItem sortItem{0, 0, 0, false, ItemType::Unknown, index++, {}};
-        saveDetailsFromHeaderSignatures(sortItem, item);
-        saveDetailsBasedFromItem(sortItem, item);
-        sortItems.emplace_back(sortItem);
-    }
-    return sortItems;
+    return terms;
 }
 
 int CPlusPlusReorganizeItems::getBestHeaderIndex(string const& item) const {
@@ -226,6 +189,36 @@ int CPlusPlusReorganizeItems::getBestHeaderIndex(string const& item) const {
         return bestHeaderIndex;
     }
     return static_cast<int>(m_data.headerSignatures.size());
+}
+
+void CPlusPlusReorganizeItems::sortAlphabetically(SortItems& sortItems) const {
+    int start = 0;
+    int end = 0;
+    ItemType itemTypeToSort = ItemType::Unknown;
+    for (; end < static_cast<int>(sortItems.size()); end++) {
+        SortItem const& currentSortItem(sortItems[end]);
+        if (currentSortItem.shouldSortAlphabetically) {
+            if (itemTypeToSort == ItemType::Unknown) {
+                start = end;
+                itemTypeToSort = currentSortItem.itemType;
+            } else if (itemTypeToSort != currentSortItem.itemType) {
+                sort(
+                    sortItems.begin() + start, sortItems.begin() + end,
+                    [&](SortItem const& sortItem1, SortItem const& sortItem2) {
+                        return m_data.items[sortItem1.itemsIndex] < m_data.items[sortItem2.itemsIndex];
+                    });
+                start = end;
+                itemTypeToSort = currentSortItem.itemType;
+            }
+        } else if (itemTypeToSort != ItemType::Unknown) {
+            sort(
+                sortItems.begin() + start, sortItems.begin() + end,
+                [&](SortItem const& sortItem1, SortItem const& sortItem2) {
+                    return m_data.items[sortItem1.itemsIndex] < m_data.items[sortItem2.itemsIndex];
+                });
+            itemTypeToSort = ItemType::Unknown;
+        }
+    }
 }
 
 void CPlusPlusReorganizeItems::saveDetailsFromHeaderSignatures(SortItem& sortItem, string const& item) const {
@@ -258,7 +251,20 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
                 break;
             }
             if (firstTerm.getContent() == "static_assert") {
-                sortItem.itemType = ItemType::Declaration;
+                sortItem.itemType = ItemType::StaticAssert;
+                break;
+            }
+            if (firstTerm.getTermType() == TermType::Macro) {
+                if (firstTerm.getContent() == "#include") {
+                    sortItem.itemSubType = ItemSubType::IncludeMacro;
+                    sortItem.shouldSortAlphabetically = true;
+                } else if (firstTerm.getContent() == "#pragma") {
+                    sortItem.itemSubType = ItemSubType::PragmaMacro;
+                } else {
+                    sortItem.itemSubType = ItemSubType::GenericMacro;
+                }
+                sortItem.itemType = ItemType::Macro;
+                sortItem.isDivider = true;
                 break;
             }
             if (firstTerm.getContent() == "namespace") {
@@ -267,17 +273,18 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
                 break;
             }
             if (firstTerm.getContent() == "using") {
-                sortItem.itemType = ItemType::Declaration;
+                if (lastTerm.getContent() == "namespace") {
+                    sortItem.itemSubType = ItemSubType::UsingNamespace;
+                    sortItem.shouldSortAlphabetically = true;
+                } else {
+                    sortItem.itemSubType = ItemSubType::UsingOther;
+                }
+                sortItem.itemType = ItemType::UsingKeyword;
                 sortItem.isDivider = true;
                 break;
             }
             if (firstTerm.getContent() == "template") {
                 sortItem.itemType = ItemType::Template;
-                sortItem.isDivider = true;
-                break;
-            }
-            if (firstTerm.getTermType() == TermType::Macro) {
-                sortItem.itemType = ItemType::Macro;
                 sortItem.isDivider = true;
                 break;
             }
@@ -382,8 +389,172 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
 void CPlusPlusReorganizeItems::fixItemContents() {
     for (string& item : m_data.items) {
         Terms terms(getTermsFromString(item));
-        replaceCommentsWithExtraLine(terms, 0);
+        makeLoneCommentsStickWithNextLine(terms, 0);
         item = getCombinedContents(terms);
+    }
+}
+
+CPlusPlusReorganizeItems::GroupType CPlusPlusReorganizeItems::getGroupType(ItemType const itemType) {
+    switch (itemType) {
+        case ItemType::Macro:
+        case ItemType::StaticAssert:
+            return GroupType::CompilerTimeGroup;
+        case ItemType::UsingKeyword:
+            return GroupType::UsingGroup;
+        case ItemType::AccessControl:
+        case ItemType::Data:
+        case ItemType::Declaration:
+        case ItemType::Function:
+        case ItemType::Namespace:
+        case ItemType::Template:
+        case ItemType::Unknown:
+            return GroupType::OtherGroup;
+    }
+}
+
+Patterns CPlusPlusReorganizeItems::getSearchPatterns() {
+    return Patterns{
+        {M("(")},
+        {M(";")},
+        {M("{")},
+        {M(":")},
+        {M("static_assert")},
+        {M("namespace")},
+        {M("using"), M("namespace")},
+        {M("using")},
+        {M("template")},
+        {M(TermType::Macro)},
+        {M("public"), M(":")},
+        {M("protected"), M(":")},
+        {M("private"), M(":")},
+        {M("enum"), M("class")},
+        {M("enum")},
+        {M("struct")},
+        {M("union")},
+        {M("class")},
+        {M("="), M("default")},
+        {M("="), M("delete")},
+        {M("operator"), M("=")},
+        {M("operator")},
+        {M("constexpr")},
+        {M("inline")},
+        {M("explicit")},
+        {M("virtual")},
+        {M("override")},
+        {M("static")},
+        {M("[[nodiscard]]")},
+        {M(TermType::Attribute)},
+        {M("volatile")},
+        {M("const")},
+        {M("friend")}};
+}
+
+CPlusPlusReorganizeItems::SortItem CPlusPlusReorganizeItems::createSortItem(int const index) {
+    return SortItem{0, 0, 0, false, false, ItemType::Unknown, ItemSubType::Unknown, index, {}};
+}
+
+string CPlusPlusReorganizeItems::getIdentifierBeforeParenthesis(Terms const& terms, int const parenthesisIndex) {
+    int const beforeParenthesis = parenthesisIndex - 1;
+    Patterns const searchPatterns{{M(TermType::Identifier)}};
+    Indexes hitIndexes = checkPatternAt(terms, beforeParenthesis, searchPatterns);
+    if (!hitIndexes.empty()) {
+        return terms[hitIndexes.front()].getContent();
+    }
+    return {};
+}
+
+bool CPlusPlusReorganizeItems::hasMultilineItem(SortItems const& sortItems) {
+    return any_of(sortItems.cbegin(), sortItems.cend(), [&](SortItem const& sortItem) {
+        return isMultiLine(sortItem.numberOfLines);
+    });
+}
+
+bool CPlusPlusReorganizeItems::isMultiLine(int const numberOfLines) { return numberOfLines > 2; }
+
+void CPlusPlusReorganizeItems::makeLoneCommentsStickWithNextLine(Terms& terms, int const startIndex) {
+    Patterns const searchPattern{
+        {M(MatcherType::WhiteSpaceWithNewLine), M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
+    for (int termIndex = startIndex; termIndex < static_cast<int>(terms.size());) {
+        Indexes patternIndexes = checkPatternAt(terms, termIndex, searchPattern);
+        if (!patternIndexes.empty()) {
+            terms[patternIndexes.back()] = Term(TermType::WhiteSpace, "\n");
+            termIndex = patternIndexes.back();
+        } else {
+            ++termIndex;
+        }
+    }
+}
+
+void CPlusPlusReorganizeItems::sortByComparingItems(SortItems& sortItems) {
+    int start = 0;
+    int end = 0;
+    for (; end < static_cast<int>(sortItems.size()); end++) {
+        if (sortItems[end].isDivider) {
+            sort(sortItems.begin() + start, sortItems.begin() + end);
+            start = end + 1;
+        }
+    }
+    if (start < end) {
+        sort(sortItems.begin() + start, sortItems.begin() + end);
+    }
+}
+
+void CPlusPlusReorganizeItems::moveToEndParenthesis(Terms const& terms, int& termIndex, int const parenthesisIndex) {
+    termIndex = parenthesisIndex + 1;
+    Patterns const searchPatterns{{M(")")}, {M(";")}, {M("{")}, {M(":")}};
+    bool isFound(true);
+    bool isCloseParenthesisFound(false);
+    while (isFound) {
+        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            int const firstHitIndex = hitIndexes.front();
+            int const lastHitIndex = hitIndexes.back();
+            Term const& firstTerm(terms[firstHitIndex]);
+            if (firstTerm.getContent() == ")") {
+                termIndex = lastHitIndex + 1;
+                isCloseParenthesisFound = true;
+            }
+            if (firstTerm.getContent() == ";" || firstTerm.getContent() == "{" || firstTerm.getContent() == ":") {
+                if (!isCloseParenthesisFound) {
+                    termIndex = lastHitIndex;
+                }
+                break;
+            }
+        }
+    }
+}
+
+void CPlusPlusReorganizeItems::saveDetailsBasedFromFunctionSignature(
+    SortItem& sortItem, string const& functionSignature) {
+    Terms terms(getTermsFromString(functionSignature));
+    Patterns const searchPatterns{{M(TermType::PrimitiveType)}, {M(TermType::Identifier)}, {M(TermType::Keyword)}};
+    Indexes hitIndexes = searchForPatternsForwards(terms, 0, searchPatterns);
+    if (!hitIndexes.empty()) {
+        int const firstHitIndex = hitIndexes.front();
+        Term const& firstTerm(terms[firstHitIndex]);
+        if (firstTerm.getTermType() == TermType::PrimitiveType) {
+            if (firstTerm.getContent() == "bool") {
+                sortItem.score += 0x3;  // returnType: bool
+            } else if (firstTerm.getContent() == "void") {
+                sortItem.score += 0x6;  // returnType: void
+            } else {
+                sortItem.score += 0x4;  // returnType: primitive type
+            }
+        } else if (firstTerm.getTermType() == TermType::Identifier) {
+            if (firstTerm.getContent() == "TEST") {
+                sortItem.score += 0x1;  // returnType: gtest tests
+            } else if (firstTerm.getContent() == "TEST_F") {
+                sortItem.score += 0x2;  // returnType: gtest tests
+            } else if (firstTerm.getContent() == "size_t") {
+                sortItem.score += 0x4;  // returnType: same level as primitive type
+            } else {
+                sortItem.score += 0x5;  // returnType: user type
+            }
+        } else if (firstTerm.getTermType() == TermType::Keyword) {
+            sortItem.score += 0x7;
+        }
+        sortItem.functionReturnTypeName = firstTerm.getContent();
     }
 }
 

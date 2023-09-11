@@ -3,13 +3,17 @@
 #define KEYWORD_OPERATORS \
     "typeid", "const_cast", "dynamic_cast", "reinterpret_cast", "static_cast", "sizeof", "new", "delete", "throw"
 #define THREE_CHAR_OPERATORS "->*", "<<=", ">>="
+
 #define TWO_CHAR_OPERATORS                                                        \
     "::", "++", "--", "->", ".*", "<<", ">>", "<=", ">=", "==", "!=", "&&", "||", \
         "+=", "-=", "*=", "/=", "%=", "&=", "^=", "|="
+
 // should backslash be really included?
+
 #define ONE_CHAR_OPERATORS                                                                                             \
     "(", ")", "[", "]", "{", "}", ";", ".", "+", "-", "!", "~", "*", "&", "/", "%", "<", ">", "^", "|", "?", ":", "=", \
         ",", "\\"
+
 #define CPLUSPLUS_KEYWORDS                                                                                             \
     "alignas", "alignof", "and", "and_eq", "asm", "auto", "bitand", "bitor", "bool", "break", "case", "catch", "char", \
         "char16_t", "char32_t", "class", "compl", "const", "constexpr", "const_cast", "continue", "decltype",          \
@@ -19,6 +23,7 @@
         "reinterpret_cast", "return", "short", "signed", "sizeof", "static", "static_assert", "static_cast", "struct", \
         "switch", "template", "this", "thread_local", "throw", "true", "try", "typedef", "typeid", "typename",         \
         "union", "unsigned", "using", "virtual", "void", "volatile", "wchar_t", "while", "xor", "xor_eq"
+
 #define PRIMITIVE_TYPES                                                                                              \
     "bool", "char", "char16_t", "char32_t", "double", "float", "int", "long", "short", "signed", "unsigned", "void", \
         "wchar_t"

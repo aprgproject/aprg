@@ -5,8 +5,8 @@
 
 #include <string>
 
-using namespace std;
 using namespace alba::stringHelper;
+using namespace std;
 
 namespace alba::CodeUtilities {
 
