@@ -23,8 +23,8 @@ BitManipulator::getNibbleAt<3>(plmnId)); if(BitManipulator::getNibbleAt<0>(mnc) 
 */
 MccMncPair convertPlmnIdToMccMnc(u32 const plmnId) {
     constexpr unsigned char fillerDigitValue = 0x0F;
-    u16 mcc = BitManipulator::getNibbleAt<2>(plmnId) * 100 + BitManipulator::getNibbleAt<5>(plmnId) * 10 +
-              BitManipulator::getNibbleAt<4>(plmnId);
+    u16 const mcc = BitManipulator::getNibbleAt<2>(plmnId) * 100 + BitManipulator::getNibbleAt<5>(plmnId) * 10 +
+                    BitManipulator::getNibbleAt<4>(plmnId);
     u16 mnc = 0;
     if (BitManipulator::getNibbleAt<3>(plmnId) == fillerDigitValue) {
         mnc = BitManipulator::getNibbleAt<0>(plmnId) * 10 + BitManipulator::getNibbleAt<1>(plmnId);

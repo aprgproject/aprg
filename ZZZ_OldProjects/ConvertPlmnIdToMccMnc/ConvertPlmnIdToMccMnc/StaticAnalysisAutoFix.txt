@@ -1,3 +1,34 @@
-StaticAnalysisJobIdentifier: [56]
-2023-09-09T19:03:37
+StaticAnalysisJobIdentifier: [011]
+2023-09-11T22:12:04
+D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\Time\AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+D:/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:205:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:208:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:270:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+D:\a\aprg\aprg\ZZZ_OldProjects\ConvertPlmnIdToMccMnc\ConvertPlmnIdToMccMnc\src\ConvertPlmnIdToMccMnc.cpp:26:5: warning: variable 'mcc' of type 'u16' (aka 'unsigned short') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\ConvertPlmnIdToMccMnc\ConvertPlmnIdToMccMnc\src\ConvertPlmnIdToMccMnc.cpp:26:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\ConvertPlmnIdToMccMnc\ConvertPlmnIdToMccMnc\tst\ConvertPlmnIdToMccMnc_unit.cpp:10:5: warning: variable 'mccMncPair' of type 'MccMncPair' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\ConvertPlmnIdToMccMnc\ConvertPlmnIdToMccMnc\tst\ConvertPlmnIdToMccMnc_unit.cpp:10:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\ConvertPlmnIdToMccMnc\ConvertPlmnIdToMccMnc\tst\ConvertPlmnIdToMccMnc_unit.cpp:16:5: warning: variable 'mccMncPair' of type 'MccMncPair' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\ConvertPlmnIdToMccMnc\ConvertPlmnIdToMccMnc\tst\ConvertPlmnIdToMccMnc_unit.cpp:16:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\ConvertPlmnIdToMccMnc\ConvertPlmnIdToMccMnc\tst\ConvertPlmnIdToMccMnc_unit.cpp:22:5: warning: variable 'mccMncPair' of type 'MccMncPair' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\ConvertPlmnIdToMccMnc\ConvertPlmnIdToMccMnc\tst\ConvertPlmnIdToMccMnc_unit.cpp:22:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\ConvertPlmnIdToMccMnc\ConvertPlmnIdToMccMnc\tst\ConvertPlmnIdToMccMnc_unit.cpp:28:5: warning: variable 'mccMncPair' of type 'MccMncPair' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\ConvertPlmnIdToMccMnc\ConvertPlmnIdToMccMnc\tst\ConvertPlmnIdToMccMnc_unit.cpp:28:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\ConvertPlmnIdToMccMnc\ConvertPlmnIdToMccMnc\tst\ConvertPlmnIdToMccMnc_unit.cpp:34:5: warning: variable 'mccMncPair' of type 'MccMncPair' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\ConvertPlmnIdToMccMnc\ConvertPlmnIdToMccMnc\tst\ConvertPlmnIdToMccMnc_unit.cpp:34:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\ConvertPlmnIdToMccMnc\ConvertPlmnIdToMccMnc\tst\ConvertPlmnIdToMccMnc_unit.cpp:40:5: warning: variable 'mccMncPair' of type 'MccMncPair' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\ConvertPlmnIdToMccMnc\ConvertPlmnIdToMccMnc\tst\ConvertPlmnIdToMccMnc_unit.cpp:40:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\ConvertPlmnIdToMccMnc\ConvertPlmnIdToMccMnc\tst\ConvertPlmnIdToMccMnc_unit.cpp:46:5: warning: variable 'mccMncPair' of type 'MccMncPair' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\ConvertPlmnIdToMccMnc\ConvertPlmnIdToMccMnc\tst\ConvertPlmnIdToMccMnc_unit.cpp:46:16: note: FIX-IT applied suggested code changes
 DONE!
