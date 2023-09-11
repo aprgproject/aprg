@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Algorithm/Sort/BaseSorter.hpp>
+#include <Common/Debug/AlbaDebug.hpp>
 
 #include <iterator>
 #include <utility>
@@ -14,34 +15,55 @@ public:
     InsertionSorter() = default;
 
     void sort(Values& valuesToSort) const override {
+        ALBA_DBG_PRINT1("pass1001");
         if (!valuesToSort.empty()) {
+            ALBA_DBG_PRINT1("pass1002");
             for (auto insertIt = std::next(valuesToSort.begin()); insertIt != valuesToSort.end(); ++insertIt) {
+                ALBA_DBG_PRINT1("pass1003");
                 continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
+                ALBA_DBG_PRINT1("pass1004");
                 // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
             }
+            ALBA_DBG_PRINT1("pass1005");
         }
+        ALBA_DBG_PRINT1("pass1006");
     }
 
 private:
     void continuouslySwapBackIfStillOutOfOrder(Values& valuesToSort, Iterator const insertIt) const {
+        ALBA_DBG_PRINT1("pass2001");
         auto rItLow = std::make_reverse_iterator(insertIt);  // make_reverse_iterator moves it by one
-        auto rItHigh = std::prev(rItLow);                    // move it back to original place (same as insert It)
+        ALBA_DBG_PRINT1("pass2002");
+        auto rItHigh = std::prev(rItLow);  // move it back to original place (same as insert It)
+        ALBA_DBG_PRINT1("pass2003");
         // so final the stiuation here is rItLow < rItHigh and insertIt
+        ALBA_DBG_PRINT1("pass2004");
         for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; ++rItLow, ++rItHigh) {
+            ALBA_DBG_PRINT1("pass2005");
             std::swap(*rItLow, *rItHigh);
+            ALBA_DBG_PRINT1("pass2006");
         }
+        ALBA_DBG_PRINT1("pass2007");
     }
 
     void continuouslyCopyBackIfStillOutOfOrder(Values& valuesToSort, Iterator const insertIt) const {
         // reserve a copy instead of continuously swapping down
         // this is another implementation (from CLRS book)
+        ALBA_DBG_PRINT1("pass3001");
         auto insertItem = *insertIt;
+        ALBA_DBG_PRINT1("pass3002");
         auto rItLow = std::make_reverse_iterator(insertIt);  // make_reverse_iterator moves it by one
+        ALBA_DBG_PRINT1("pass3003");
         // so final the stiuation here is rItLow < insertIt
+        ALBA_DBG_PRINT1("pass3004");
         for (; rItLow != valuesToSort.rend() && *rItLow > insertItem; ++rItLow) {
+            ALBA_DBG_PRINT1("pass3005");
             *std::prev(rItLow) = *rItLow;  // move
+            ALBA_DBG_PRINT1("pass3006");
         }
+        ALBA_DBG_PRINT1("pass3007");
         *std::prev(rItLow) = insertItem;
+        ALBA_DBG_PRINT1("pass3008");
     }
 };
 
