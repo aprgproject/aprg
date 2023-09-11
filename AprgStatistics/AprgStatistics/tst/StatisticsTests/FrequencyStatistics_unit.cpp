@@ -9,9 +9,9 @@ using namespace std;
 namespace alba {
 
 TEST(FrequencyStatisticsTest, SamplesAreEmpty) {
-    FrequencyStatistics::FrequencySamples samples;
+    FrequencyStatistics::FrequencySamples const samples;
 
-    FrequencyStatistics::MultipleValues modes(FrequencyStatistics::calculateMode(samples));
+    FrequencyStatistics::MultipleValues const modes(FrequencyStatistics::calculateMode(samples));
     EXPECT_EQ(0, FrequencyStatistics::calculateNumberOfSamples(samples));
     EXPECT_EQ(0, FrequencyStatistics::calculateSum(samples));
     EXPECT_EQ(0, FrequencyStatistics::calculateMean(samples));

@@ -10,7 +10,7 @@ using LocalKMeans = KMeansClustering<2>;
 using LocalSamples = LocalKMeans::Samples;
 using LocalSample = LocalKMeans::Sample;
 using LocalGroupOfSamples = LocalKMeans::GroupOfSamples;
-TEST(KMeansClusteringTestTwoDimensions, KMeansObjectCanbeCreated) { LocalKMeans kMeans; }
+TEST(KMeansClusteringTestTwoDimensions, KMeansObjectCanbeCreated) { LocalKMeans const kMeans; }
 
 TEST(KMeansClusteringTestTwoDimensions, DataSampleCanBeAdded) {
     LocalKMeans kMeans;
@@ -25,8 +25,8 @@ TEST(KMeansClusteringTestTwoDimensions, DataSampleCanBeAdded) {
 TEST(KMeansClusteringTestTwoDimensions, DataSamplesCanBeAdded) {
     LocalKMeans kMeans;
     LocalSamples samples;
-    samples.emplace_back(LocalSample{1, 1});
-    samples.emplace_back(LocalSample{2, 2});
+    samples.emplace_back(1, 1);
+    samples.emplace_back(2, 2);
     kMeans.addSamples(samples);
 
     LocalSamples result(kMeans.getSamples());
@@ -37,9 +37,9 @@ TEST(KMeansClusteringTestTwoDimensions, DataSamplesCanBeAdded) {
 }
 
 TEST(KMeansClusteringTestTwoDimensions, PerformKMeansWithNoSamples) {
-    LocalKMeans kMeans;
+    LocalKMeans const kMeans;
 
-    LocalGroupOfSamples result(kMeans.getGroupOfSamplesUsingKMeans(1));
+    LocalGroupOfSamples const result(kMeans.getGroupOfSamplesUsingKMeans(1));
 
     ASSERT_EQ(1U, result.size());
 }
