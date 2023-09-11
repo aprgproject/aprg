@@ -45,7 +45,7 @@ runStaticAnalyzersInDirectory() {
     scriptPrint "$scriptName" "$LINENO" "Configure step done"
     set +e
     scriptPrint "$scriptName" "$LINENO" "Building..."
-    "$buildAndRunScriptPath" build "StaticAnalyzersBuild" "Debug" | tee -a "$staticAnalysisFilename"
+    "$buildAndRunScriptPath" build "StaticAnalyzersBuild" "Debug" | grep -E 'note:|style:|warning:|error:' | tee -a "$staticAnalysisFilename"
     scriptPrint "$scriptName" "$LINENO" "Building step done"
     set -e
 
