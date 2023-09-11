@@ -36,7 +36,7 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingItera
             valueMatrix.setEntry(n, 0, 1);
         }
         for (Value n = 1; n <= m_n; ++n) {
-            Value lastK = min(n, m_k);
+            Value const lastK = min(n, m_k);
             for (Value k = 1; k <= lastK; ++k) {
                 if (n == k) {
                     valueMatrix.setEntry(n, k, 1);
@@ -81,7 +81,7 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingItera
         Values partialValues(m_k + 1, 0);
         partialValues[0] = 1;
         for (Value n = 1; n <= m_n; ++n) {
-            Value lastK = min(n, m_k);
+            Value const lastK = min(n, m_k);
             for (Value k = lastK; k > 0; --k) {
                 // reverse traversal to avoid accessing already computed values
                 partialValues[k] += partialValues[k - 1];
@@ -115,7 +115,7 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingGcf()
             }
             if (shouldContinue && accumulatedDenominator > 1 &&
                 mathHelper::isValueBeyondLimits<Value>(static_cast<double>(accumulatedNumerator) * numerator)) {
-                Value gcf = mathHelper::getGreatestCommonFactor(accumulatedNumerator, accumulatedDenominator);
+                Value const gcf = mathHelper::getGreatestCommonFactor(accumulatedNumerator, accumulatedDenominator);
                 accumulatedNumerator /= gcf;
                 accumulatedDenominator /= gcf;
             }

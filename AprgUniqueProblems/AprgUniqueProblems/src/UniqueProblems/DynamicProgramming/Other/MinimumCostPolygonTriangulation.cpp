@@ -43,11 +43,12 @@ MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getMinimu
 
         for (Index length = 3; length <= static_cast<Index>(m_vertices.size()); ++length) {
             for (Index left = 0; left + length <= static_cast<Index>(countMatrix.getNumberOfColumns()); ++left) {
-                Index right = left + length - 1;
+                Index const right = left + length - 1;
                 Cost minimumCount(MAX_COUNT);
                 for (Index inBetween = left + 1; inBetween < right; ++inBetween) {
-                    Cost currentCount = countMatrix.getEntry(left, inBetween) + countMatrix.getEntry(inBetween, right) +
-                                        getCostOfThreePoints(left, inBetween, right);
+                    Cost const currentCount = countMatrix.getEntry(left, inBetween) +
+                                              countMatrix.getEntry(inBetween, right) +
+                                              getCostOfThreePoints(left, inBetween, right);
                     minimumCount = min(minimumCount, currentCount);
                 }
                 countMatrix.setEntry(left, right, minimumCount);
@@ -65,9 +66,9 @@ MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getMinimu
         // distance should be two for at least three elements
         result = MAX_COUNT;
         for (Index inBetween = left + 1; inBetween < right; ++inBetween) {
-            Cost currentCount = getMinimumNumberOfOperationsUsingNaiveRecursion(left, inBetween) +
-                                getMinimumNumberOfOperationsUsingNaiveRecursion(inBetween, right) +
-                                getCostOfThreePoints(left, inBetween, right);
+            Cost const currentCount = getMinimumNumberOfOperationsUsingNaiveRecursion(left, inBetween) +
+                                      getMinimumNumberOfOperationsUsingNaiveRecursion(inBetween, right) +
+                                      getCostOfThreePoints(left, inBetween, right);
             result = min(result, currentCount);
         }
     }
@@ -89,9 +90,10 @@ MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getMinimu
             // distance should be two for at least three elements
             // result is already set to MAX_COUNT so we can proceed on using min
             for (Index inBetween = left + 1; inBetween < right; ++inBetween) {
-                Cost currentCount = getMinimumNumberOfOperationsUsingMemoizationDP(countMatrix, left, inBetween) +
-                                    getMinimumNumberOfOperationsUsingMemoizationDP(countMatrix, inBetween, right) +
-                                    getCostOfThreePoints(left, inBetween, right);
+                Cost const currentCount =
+                    getMinimumNumberOfOperationsUsingMemoizationDP(countMatrix, left, inBetween) +
+                    getMinimumNumberOfOperationsUsingMemoizationDP(countMatrix, inBetween, right) +
+                    getCostOfThreePoints(left, inBetween, right);
                 result = min(result, currentCount);
             }
         } else {

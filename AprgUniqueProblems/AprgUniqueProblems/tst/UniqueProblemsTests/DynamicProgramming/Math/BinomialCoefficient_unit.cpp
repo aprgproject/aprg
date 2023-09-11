@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(BinomialCoefficientTest, GetMinimumNumberOfOperationsWorksOnExample1) {
-    BinomialCoefficient queryForTest(0, 0);
+    BinomialCoefficient const queryForTest(0, 0);
 
     EXPECT_EQ(1, queryForTest.getBinomialCoefficientUsingNaiveRecursion());
     EXPECT_EQ(1, queryForTest.getBinomialCoefficientUsingMemoizationDP());
@@ -17,7 +17,7 @@ TEST(BinomialCoefficientTest, GetMinimumNumberOfOperationsWorksOnExample1) {
 }
 
 TEST(BinomialCoefficientTest, GetMinimumNumberOfOperationsWorksOnExample2) {
-    BinomialCoefficient queryForTest(5, 2);
+    BinomialCoefficient const queryForTest(5, 2);
 
     EXPECT_EQ(10, queryForTest.getBinomialCoefficientUsingNaiveRecursion());
     EXPECT_EQ(10, queryForTest.getBinomialCoefficientUsingMemoizationDP());
@@ -27,7 +27,7 @@ TEST(BinomialCoefficientTest, GetMinimumNumberOfOperationsWorksOnExample2) {
 }
 
 TEST(BinomialCoefficientTest, GetMinimumNumberOfOperationsWorksOnExample3) {
-    BinomialCoefficient queryForTest(34, 17);
+    BinomialCoefficient const queryForTest(34, 17);
 
     // EXPECT_EQ(2333606220, queryForTest.getBinomialCoefficientUsingNaiveRecursion()); // Too long
     EXPECT_EQ(2333606220, queryForTest.getBinomialCoefficientUsingMemoizationDP());

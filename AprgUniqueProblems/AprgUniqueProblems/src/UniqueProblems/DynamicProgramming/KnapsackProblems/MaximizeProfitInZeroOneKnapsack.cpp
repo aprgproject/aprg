@@ -35,12 +35,12 @@ MaximizeProfitInZeroOneKnapsack::Profit MaximizeProfitInZeroOneKnapsack::getBest
     if (!m_items.empty()) {
         Weight const& maximumWeightInIteration(m_maximumWeight + 1);
         ProfitMatrix profitMatrix(maximumWeightInIteration, m_items.size() + 1, 0);
-        Weight smallestItemWeight(getSmallestItemWeight());
+        Weight const smallestItemWeight(getSmallestItemWeight());
         for (int itemIndex = static_cast<int>(m_items.size()) - 1; itemIndex >= 0; --itemIndex) {
             auto const& [itemWeight, itemProfit] = m_items[itemIndex];
             for (Weight weight(smallestItemWeight); weight < maximumWeightInIteration; ++weight) {
                 if (weight >= itemWeight) {
-                    Profit profit =
+                    Profit const profit =
                         max(profitMatrix.getEntry(weight, itemIndex + 1),
                             itemProfit + profitMatrix.getEntry(weight - itemWeight, itemIndex + 1));
                     profitMatrix.setEntry(weight, itemIndex, profit);
@@ -63,7 +63,7 @@ MaximizeProfitInZeroOneKnapsack::getBestProfitUsingIterativeDPAndSpaceEfficient(
     Profit result(0);
     if (!m_items.empty()) {
         Profits weightToProfit(m_maximumWeight + 1, 0);
-        Weight smallestItemWeight(getSmallestItemWeight());
+        Weight const smallestItemWeight(getSmallestItemWeight());
         for (auto const& [itemWeight, itemProfit] : m_items) {
             // reverse traversal to avoid accessing already computed values
             for (Weight weight = m_maximumWeight; weight >= smallestItemWeight; --weight) {

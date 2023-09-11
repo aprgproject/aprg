@@ -51,9 +51,9 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingItera
         } else if (m_string1[x - 1] == m_string2[y - 1]) {
             entryResult = distanceGrid.getEntry(x - 1, y - 1);
         } else {
-            Index replaceDistance = distanceGrid.getEntry(x - 1, y - 1);
-            Index deleteDistance = distanceGrid.getEntry(x - 1, y);
-            Index insertDistance = distanceGrid.getEntry(x, y - 1);
+            Index const replaceDistance = distanceGrid.getEntry(x - 1, y - 1);
+            Index const deleteDistance = distanceGrid.getEntry(x - 1, y);
+            Index const insertDistance = distanceGrid.getEntry(x, y - 1);
             entryResult = min(min(replaceDistance, deleteDistance), insertDistance) + 1;
         }
         distanceGrid.setEntry(x, y, entryResult);
@@ -85,7 +85,7 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingItera
 
         currentCounts[0] = index2;  // first column
         for (Index index1 = 1; index1 <= static_cast<Index>(m_string1.length()); ++index1) {
-            int cost = m_string1[index1 - 1] == m_string2[index2 - 1] ? 0 : 1;
+            int const cost = m_string1[index1 - 1] == m_string2[index2 - 1] ? 0 : 1;
             currentCounts[index1] =
                 min(min(currentCounts[index1 - 1] + 1, previousCounts[index1] + 1), previousCounts[index1 - 1] + cost);
         }
@@ -106,9 +106,9 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingNaive
     if (m_string1[index1 - 1] == m_string2[index2 - 1]) {
         return getLevenshteinDistanceUsingNaiveRecursion(index1 - 1, index2 - 1);
     }
-    Index replaceDistance = getLevenshteinDistanceUsingNaiveRecursion(index1 - 1, index2 - 1);
-    Index deleteDistance = getLevenshteinDistanceUsingNaiveRecursion(index1 - 1, index2);
-    Index insertDistance = getLevenshteinDistanceUsingNaiveRecursion(index1, index2 - 1);
+    Index const replaceDistance = getLevenshteinDistanceUsingNaiveRecursion(index1 - 1, index2 - 1);
+    Index const deleteDistance = getLevenshteinDistanceUsingNaiveRecursion(index1 - 1, index2);
+    Index const insertDistance = getLevenshteinDistanceUsingNaiveRecursion(index1, index2 - 1);
     return min(min(replaceDistance, deleteDistance), insertDistance) + 1;
 }
 
@@ -125,9 +125,10 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingMemoi
         } else if (m_string1[index1 - 1] == m_string2[index2 - 1]) {
             result = getLevenshteinDistanceUsingMemoizationDP(distanceGrid, index1 - 1, index2 - 1);
         } else {
-            Index replaceDistance = getLevenshteinDistanceUsingMemoizationDP(distanceGrid, index1 - 1, index2 - 1);
-            Index deleteDistance = getLevenshteinDistanceUsingMemoizationDP(distanceGrid, index1 - 1, index2);
-            Index insertDistance = getLevenshteinDistanceUsingMemoizationDP(distanceGrid, index1, index2 - 1);
+            Index const replaceDistance =
+                getLevenshteinDistanceUsingMemoizationDP(distanceGrid, index1 - 1, index2 - 1);
+            Index const deleteDistance = getLevenshteinDistanceUsingMemoizationDP(distanceGrid, index1 - 1, index2);
+            Index const insertDistance = getLevenshteinDistanceUsingMemoizationDP(distanceGrid, index1, index2 - 1);
             result = min(min(replaceDistance, deleteDistance), insertDistance) + 1;
         }
         distanceGrid.setEntry(index1, index2, result);

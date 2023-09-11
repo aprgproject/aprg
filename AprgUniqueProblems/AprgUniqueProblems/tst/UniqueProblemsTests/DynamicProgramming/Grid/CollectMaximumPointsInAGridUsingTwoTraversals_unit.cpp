@@ -11,8 +11,8 @@ using Grid = CollectMaximumPointsInAGridUsingTwoTraversals::ValueGrid;
 }  // namespace
 
 TEST(CollectMaximumPointsInAGridUsingTwoTraversalsTest, GetMaximumPointsWorksOnEmptyInput) {
-    Grid inputGrid;
-    CollectMaximumPointsInAGridUsingTwoTraversals queryForTest(inputGrid);
+    Grid const inputGrid;
+    CollectMaximumPointsInAGridUsingTwoTraversals const queryForTest(inputGrid);
 
     EXPECT_EQ(0, queryForTest.getMaximumPointsUsingNaiveRecursion());
     EXPECT_EQ(0, queryForTest.getMaximumPointsUsingMemoizationDP());
@@ -20,8 +20,8 @@ TEST(CollectMaximumPointsInAGridUsingTwoTraversalsTest, GetMaximumPointsWorksOnE
 }
 
 TEST(CollectMaximumPointsInAGridUsingTwoTraversalsTest, GetMaximumPointsWorksOnOneElement) {
-    Grid inputGrid(1, 1, {100});
-    CollectMaximumPointsInAGridUsingTwoTraversals queryForTest(inputGrid);
+    Grid const inputGrid(1, 1, {100});
+    CollectMaximumPointsInAGridUsingTwoTraversals const queryForTest(inputGrid);
 
     EXPECT_EQ(100, queryForTest.getMaximumPointsUsingNaiveRecursion());
     EXPECT_EQ(100, queryForTest.getMaximumPointsUsingMemoizationDP());
@@ -29,8 +29,8 @@ TEST(CollectMaximumPointsInAGridUsingTwoTraversalsTest, GetMaximumPointsWorksOnO
 }
 
 TEST(CollectMaximumPointsInAGridUsingTwoTraversalsTest, GetMaximumPointsWorksOnExample1) {
-    Grid inputGrid(4, 5, {3, 6, 8, 2, 5, 2, 4, 3, 1, 1, 20, 10, 1, 1, 20, 10, 1, 1, 20, 10});
-    CollectMaximumPointsInAGridUsingTwoTraversals queryForTest(inputGrid);
+    Grid const inputGrid(4, 5, {3, 6, 8, 2, 5, 2, 4, 3, 1, 1, 20, 10, 1, 1, 20, 10, 1, 1, 20, 10});
+    CollectMaximumPointsInAGridUsingTwoTraversals const queryForTest(inputGrid);
 
     // EXPECT_EQ(73, queryForTest.getMaximumPointsUsingNaiveRecursion());
     EXPECT_EQ(73, queryForTest.getMaximumPointsUsingMemoizationDP());

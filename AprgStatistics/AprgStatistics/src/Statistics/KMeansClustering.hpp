@@ -25,7 +25,7 @@ public:
         bool isSamplesGroupPairsChanged(true);
         while (isSamplesGroupPairsChanged) {
             isSamplesGroupPairsChanged = false;
-            GroupOfSamples groupOfSamples(
+            GroupOfSamples const groupOfSamples(
                 calculateGroupOfSamplesFromSamplesGroupPairs(samplesGroupPairs, numberOfGroups));
             Samples meanForEachGroup(calculateMeanForEachGroup(groupOfSamples));
 
@@ -33,7 +33,7 @@ public:
                 int nearestGroup(0);
                 double nearestDistance(0);
                 for (int groupIndex = 0; groupIndex < numberOfGroups; ++groupIndex) {
-                    double currentDistance(
+                    double const currentDistance(
                         StatisticsUtilities::calculateDistance(samplesGroupPair.first, meanForEachGroup[groupIndex]));
                     if (groupIndex == 0 || nearestDistance > currentDistance) {
                         nearestGroup = groupIndex;
@@ -83,7 +83,7 @@ private:
     [[nodiscard]] SamplesGroupPairs calculateInitialSamplesGroupPairsFromSavedSamples(int const numberOfGroups) const {
         SamplesGroupPairs result;
         int count(0);
-        int numberSamplesPerGroup((m_samples.size() / numberOfGroups) + 1);
+        int const numberSamplesPerGroup((m_samples.size() / numberOfGroups) + 1);
         for (Sample const& sample : m_samples) {
             result.emplace_back(sample, count++ / numberSamplesPerGroup);
         }

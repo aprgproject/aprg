@@ -13,30 +13,30 @@ using QueryForTest = FindThePairWithClosestToSum<ValuesForTest>;
 }  // namespace
 
 TEST(FindThePairWithClosestToSumTest, GetValuePairThatIsClosestToSumWorksWhenFirstContainerIsEmpty) {
-    ValuesForTest values1{1, 4, 5, 7};
-    ValuesForTest values2;
+    ValuesForTest const values1{1, 4, 5, 7};
+    ValuesForTest const values2;
     QueryForTest query;
 
-    QueryForTest::ValuePair expectedValuePair{};
+    QueryForTest::ValuePair const expectedValuePair{};
     EXPECT_EQ(expectedValuePair, query.getValuePairThatIsClosestToSum(values1, values2, 32));
 }
 
 TEST(FindThePairWithClosestToSumTest, GetValuePairThatIsClosestToSumWorksWhenSecondContainerIsEmpty) {
-    ValuesForTest values1;
-    ValuesForTest values2{10, 20, 30, 40};
+    ValuesForTest const values1;
+    ValuesForTest const values2{10, 20, 30, 40};
     QueryForTest query;
 
-    QueryForTest::ValuePair expectedValuePair{};
+    QueryForTest::ValuePair const expectedValuePair{};
     EXPECT_EQ(expectedValuePair, query.getValuePairThatIsClosestToSum(values1, values2, 32));
 }
 
 TEST(FindThePairWithClosestToSumTest, GetValuePairThatIsClosestToSumWorksOnExample1) {
-    ValuesForTest values1{1, 4, 5, 7};
-    ValuesForTest values2{10, 20, 30, 40};
+    ValuesForTest const values1{1, 4, 5, 7};
+    ValuesForTest const values2{10, 20, 30, 40};
     QueryForTest query;
 
-    QueryForTest::ValuePair expectedValuePair1{1, 30};
-    QueryForTest::ValuePair expectedValuePair2{7, 40};
+    QueryForTest::ValuePair const expectedValuePair1{1, 30};
+    QueryForTest::ValuePair const expectedValuePair2{7, 40};
     EXPECT_EQ(expectedValuePair1, query.getValuePairThatIsClosestToSum(values1, values2, 32));
     EXPECT_EQ(expectedValuePair2, query.getValuePairThatIsClosestToSum(values1, values2, 50));
 }

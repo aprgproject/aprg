@@ -29,7 +29,7 @@ int ElevatorWeightProblem::getNumberOfOptimalRides() {
             }
         }
     }
-    int allPeopleBits = getNumberOfPeopleSubsets() - 1;
+    int const allPeopleBits = getNumberOfPeopleSubsets() - 1;
     if (allPeopleBits < static_cast<int>(m_numberOfRidesAndLastWeights.size())) {
         result = m_numberOfRidesAndLastWeights[allPeopleBits].first + 1;
     }

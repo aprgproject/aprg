@@ -16,7 +16,7 @@ using IntegersInForwardListSorter = SortInWaveForm<IntegersInForwardList>;
 }  // namespace
 
 TEST(SortInWaveFormTest, SortWorksOnIntegersAndDoesNotCrashUsingEmptyExample) {
-    IntegersSorter sorter;
+    IntegersSorter const sorter;
     Integers emptyContainer;
 
     sorter.sort(emptyContainer);
@@ -25,42 +25,42 @@ TEST(SortInWaveFormTest, SortWorksOnIntegersAndDoesNotCrashUsingEmptyExample) {
 }
 
 TEST(SortInWaveFormTest, SortWorksOnIntegersUsingOneValueExample) {
-    IntegersSorter sorter;
+    IntegersSorter const sorter;
     Integers valuesToTest{5};
 
     sorter.sort(valuesToTest);
 
-    Integers valuesToExpect{5};
+    Integers const valuesToExpect{5};
     EXPECT_EQ(valuesToExpect, valuesToTest);
 }
 
 TEST(SortInWaveFormTest, SortWorksOnIntegersUsingExample1) {
-    IntegersSorter sorter;
+    IntegersSorter const sorter;
     Integers valuesToTest{6, 5, 3, 2, 8, 10, 9};
 
     sorter.sort(valuesToTest);
 
-    Integers valuesToExpect{6, 3, 5, 2, 10, 8, 9};
+    Integers const valuesToExpect{6, 3, 5, 2, 10, 8, 9};
     EXPECT_EQ(valuesToExpect, valuesToTest);
 }
 
 TEST(SortInWaveFormTest, SortWorksOnIntegersUsingExample2) {
-    IntegersSorter sorter;
+    IntegersSorter const sorter;
     Integers valuesToTest{10, 90, 49, 2, 1, 5, 23};
 
     sorter.sort(valuesToTest);
 
-    Integers valuesToExpect{90, 10, 49, 1, 5, 2, 23};
+    Integers const valuesToExpect{90, 10, 49, 1, 5, 2, 23};
     EXPECT_EQ(valuesToExpect, valuesToTest);
 }
 
 TEST(SortInWaveFormTest, SortWorksOnIntegersUsingForwardListExample) {
-    IntegersInForwardListSorter sorter;
+    IntegersInForwardListSorter const sorter;
     IntegersInForwardList valuesToTest{10, 90, 49, 2, 1, 5, 23};
 
     sorter.sort(valuesToTest);
 
-    Integers valuesToExpect{90, 10, 49, 1, 5, 2, 23};
+    Integers const valuesToExpect{90, 10, 49, 1, 5, 2, 23};
     EXPECT_EQ(valuesToExpect, valuesToTest);
 }
 

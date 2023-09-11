@@ -1,3 +1,987 @@
-StaticAnalysisJobIdentifier: [56]
-2023-09-09T18:06:55
+StaticAnalysisJobIdentifier: [011]
+2023-09-11T15:38:29
+[35m2023-09-11T15:39:44[0m | [33mBuildAndRun.sh:28[0m | The current path is [/d/a/aprg/aprg/benchmark/BenchmarkTest].
+[35m2023-09-11T15:39:44[0m | [33mBuildAndRun.sh:29[0m | The scriptPath is [/d/a/aprg/aprg/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh].
+[35m2023-09-11T15:39:44[0m | [33mBuildAndRun.sh:30[0m | The scriptOption is [buildOnOneCore].
+[35m2023-09-11T15:39:44[0m | [33mBuildAndRun.sh:31[0m | The buildDirectoryName is [StaticAnalyzersBuild].
+[35m2023-09-11T15:39:44[0m | [33mBuildAndRun.sh:32[0m | The argument1 is [Debug] and argument2 is [].
+[35m2023-09-11T15:39:44[0m | [33mBuildAndRun.sh:33[0m | The immediateDirectoryName is [BenchmarkTest].
+[35m2023-09-11T15:39:44[0m | [33mBuildAndRun.sh:84[0m | The buildType is [Debug].
+[35m2023-09-11T15:39:44[0m | [33mBuildAndRun.sh:85[0m | The numberOfCores is [2].
+[35m2023-09-11T15:39:44[0m | [33mBuildAndRun.sh:68[0m | The build path is [/d/a/aprg/aprg/benchmark/StaticAnalyzersBuild] and the output of [ls -la --color=auto]:
+total 185
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 15:39 .
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 15:38 ..
+-rw-r--r-- 1 runneradmin 197121  17990 Sep 11 15:39 CMakeCache.txt
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 15:39 CMakeFiles
+-rw-r--r-- 1 runneradmin 197121    536 Sep 11 15:39 CTestTestfile.cmake
+-rw-r--r-- 1 runneradmin 197121 150373 Sep 11 15:39 build.ninja
+-rw-r--r-- 1 runneradmin 197121   2267 Sep 11 15:39 cmake_install.cmake
+[1/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc.obj
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark.cc:210:5: warning: variable 'l' of type 'MutexLock' can be declared 'const' [misc-const-correctness]
+    MutexLock l(manager_->GetBenchmarkMutex());
+    ^
+              const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark.cc:210:15: note: FIX-IT applied suggested code changes
+    MutexLock l(manager_->GetBenchmarkMutex());
+              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark.cc:226:3: warning: variable 'l' of type 'MutexLock' can be declared 'const' [misc-const-correctness]
+  MutexLock l(manager_->GetBenchmarkMutex());
+  ^
+            const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark.cc:226:13: note: FIX-IT applied suggested code changes
+  MutexLock l(manager_->GetBenchmarkMutex());
+            ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark.cc:334:7: warning: variable 'num_repeats_of_this_instance' of type 'int' can be declared 'const' [misc-const-correctness]
+      int num_repeats_of_this_instance = runners.back().GetNumRepeats();
+      ^
+          const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark.cc:334:11: note: FIX-IT applied suggested code changes
+      int num_repeats_of_this_instance = runners.back().GetNumRepeats();
+          ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark.cc:359:10: warning: variable 'repetition_index' of type 'size_t' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    for (size_t repetition_index : repetition_indices) {
+         ^
+                const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark.cc:359:17: note: FIX-IT applied suggested code changes
+    for (size_t repetition_index : repetition_indices) {
+                ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark.cc:406:24: warning: 'CSVReporter' is deprecated: The CSV Reporter will be removed in a future release [clang-diagnostic-deprecated-declarations]
+    return PtrType(new CSVReporter);
+                       ^
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:1608:7: note: 'CSVReporter' has been explicitly marked deprecated here
+class BENCHMARK_DEPRECATED_MSG(
+      ^
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:243:54: note: expanded from macro 'BENCHMARK_DEPRECATED_MSG'
+#define BENCHMARK_DEPRECATED_MSG(msg) __attribute__((deprecated(msg)))
+                                                     ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark.cc:611:3: warning: variable 'init' of type 'std::ios_base::Init' can be declared 'const' [misc-const-correctness]
+  static std::ios_base::Init init;
+  ^
+                             const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark.cc:611:30: note: FIX-IT applied suggested code changes
+  static std::ios_base::Init init;
+                             ^
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:15:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:406:24: warning: 'CSVReporter' is deprecated: The CSV Reporter will be removed in a future release [-Wdeprecated-declarations]
+    return PtrType(new CSVReporter);
+                       ^
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:1608:7: note: 'CSVReporter' has been explicitly marked deprecated here
+class BENCHMARK_DEPRECATED_MSG(
+      ^
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:243:54: note: expanded from macro 'BENCHMARK_DEPRECATED_MSG'
+#define BENCHMARK_DEPRECATED_MSG(msg) __attribute__((deprecated(msg)))
+                                                     ^
+2 warnings generated.
+[2/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_api_internal.cc.obj
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_api_internal.cc:92:2: warning: namespace 'benchmark::internal' ends with a comment that refers to a wrong namespace 'benchmark' [google-readability-namespace-comments,llvm-namespace-comment]
+}  // namespace benchmark
+ ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_api_internal.cc:7:11: note: namespace 'benchmark::internal' starts here
+namespace benchmark::internal {
+          ^
+note: cannot apply fix-it because an alias checker has suggested a different fix-it; please remove one of the checkers ('google-readability-namespace-comments', 'llvm-namespace-comment') or ensure they are both configured the same
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_api_internal.cc:1:
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_api_internal.h:11:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+1 warning generated.
+[3/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_main.cc.obj
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_main.cc:15:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+1 warning generated.
+[4/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_name.cc.obj
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_name.cc:15:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+1 warning generated.
+[5/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc.obj
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_register.cc:99:3: warning: variable 'l' of type 'MutexLock' can be declared 'const' [misc-const-correctness]
+  MutexLock l(mutex_);
+  ^
+            const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_register.cc:99:13: note: FIX-IT applied suggested code changes
+  MutexLock l(mutex_);
+            ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_register.cc:100:3: warning: variable 'index' of type 'size_t' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+  size_t index = families_.size();
+  ^
+         const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_register.cc:100:10: note: FIX-IT applied suggested code changes
+  size_t index = families_.size();
+         ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_register.cc:106:3: warning: variable 'l' of type 'MutexLock' can be declared 'const' [misc-const-correctness]
+  MutexLock l(mutex_);
+  ^
+            const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_register.cc:106:13: note: FIX-IT applied suggested code changes
+  MutexLock l(mutex_);
+            ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_register.cc:134:3: warning: variable 'l' of type 'MutexLock' can be declared 'const' [misc-const-correctness]
+  MutexLock l(mutex_);
+  ^
+            const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_register.cc:134:13: note: FIX-IT applied suggested code changes
+  MutexLock l(mutex_);
+            ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_register.cc:135:8: warning: variable 'family' of type 'std::unique_ptr<Benchmark> &' can be declared 'const' [misc-const-correctness]
+  for (std::unique_ptr<Benchmark>& family : families_) {
+       ^
+                                  const
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_register.cc:135:34: note: FIX-IT applied suggested code changes
+  for (std::unique_ptr<Benchmark>& family : families_) {
+                                 ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_register.cc:136:5: warning: variable 'family_index' of type 'int' can be declared 'const' [misc-const-correctness]
+    int family_index = next_family_index;
+    ^
+        const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_register.cc:136:9: note: FIX-IT applied suggested code changes
+    int family_index = next_family_index;
+        ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_register.cc:163:12: warning: variable 'num_threads' of type 'int' can be declared 'const' [misc-const-correctness]
+      for (int num_threads : *thread_counts) {
+           ^
+               const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_register.cc:163:16: note: FIX-IT applied suggested code changes
+      for (int num_threads : *thread_counts) {
+               ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_register.cc:247:8: warning: variable 'i' of type 'int64_t' (aka 'long long') can be declared 'const' [misc-const-correctness]
+  for (int64_t i : arglist) {
+       ^
+               const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_register.cc:247:16: note: FIX-IT applied suggested code changes
+  for (int64_t i : arglist) {
+               ^
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:15:
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.h:7:
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:8:
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/internal_macros.h:4:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+1 warning generated.
+[6/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc.obj
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_runner.cc:103:35: warning: narrowing conversion from 'IterationCount' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+                                  memory_iterations
+                                  ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_runner.cc:123:3: warning: variable 'st' of type 'State' can be declared 'const' [misc-const-correctness]
+  State st =
+  ^
+        const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_runner.cc:123:9: note: FIX-IT applied suggested code changes
+  State st =
+        ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_runner.cc:128:5: warning: variable 'l' of type 'MutexLock' can be declared 'const' [misc-const-correctness]
+    MutexLock l(manager->GetBenchmarkMutex());
+    ^
+              const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_runner.cc:128:15: note: FIX-IT applied suggested code changes
+    MutexLock l(manager->GetBenchmarkMutex());
+              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_runner.cc:199:5: warning: variable 'l' of type 'MutexLock' can be declared 'const' [misc-const-correctness]
+    MutexLock l(manager->GetBenchmarkMutex());
+    ^
+              const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_runner.cc:199:15: note: FIX-IT applied suggested code changes
+    MutexLock l(manager->GetBenchmarkMutex());
+              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_runner.cc:241:3: warning: variable 'is_significant' of type 'bool' can be declared 'const' [misc-const-correctness]
+  bool is_significant = (i.seconds / min_time) > 0.1;
+  ^
+       const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_runner.cc:241:8: note: FIX-IT applied suggested code changes
+  bool is_significant = (i.seconds / min_time) > 0.1;
+       ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_runner.cc:324:3: warning: variable 'report' of type 'BenchmarkReporter::Run' can be declared 'const' [misc-const-correctness]
+  BenchmarkReporter::Run report =
+  ^
+                         const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_runner.cc:324:26: note: FIX-IT applied suggested code changes
+  BenchmarkReporter::Run report =
+                         ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_runner.cc:348:2: warning: namespace 'benchmark::internal' ends with a comment that refers to a wrong namespace 'benchmark' [google-readability-namespace-comments,llvm-namespace-comment]
+}  // end namespace benchmark
+ ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_runner.cc:56:11: note: namespace 'benchmark::internal' starts here
+namespace benchmark::internal {
+          ^
+note: cannot apply fix-it because an alias checker has suggested a different fix-it; please remove one of the checkers ('google-readability-namespace-comments', 'llvm-namespace-comment') or ensure they are both configured the same
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:15:
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.h:21:
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_api_internal.h:11:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+1 warning generated.
+[7/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc.obj
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\colorprint.cc:37:1: warning: use 'using' instead of 'typedef' [modernize-use-using]
+typedef WORD PlatformColorCode;
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+using PlatformColorCode = WORD
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\colorprint.cc:37:1: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\colorprint.cc:87:11: warning: variable 'args_cp' is not initialized [cppcoreguidelines-init-variables]
+  va_list args_cp;
+          ^
+                  = nullptr
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\colorprint.cc:87:18: note: FIX-IT applied suggested code changes
+  va_list args_cp;
+                 ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\colorprint.cc:105:5: warning: variable 'buff' of type 'std::unique_ptr<char[]>' can be declared 'const' [misc-const-correctness]
+    std::unique_ptr<char[]> buff(new char[size]);
+    ^
+                            const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\colorprint.cc:105:29: note: FIX-IT applied suggested code changes
+    std::unique_ptr<char[]> buff(new char[size]);
+                            ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\colorprint.cc:113:11: warning: variable 'args' is not initialized [cppcoreguidelines-init-variables]
+  va_list args;
+          ^
+               = nullptr
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\colorprint.cc:113:15: note: FIX-IT applied suggested code changes
+  va_list args;
+              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\colorprint.cc:121:11: warning: variable 'args' is not initialized [cppcoreguidelines-init-variables]
+  va_list args;
+          ^
+               = nullptr
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\colorprint.cc:121:15: note: FIX-IT applied suggested code changes
+  va_list args;
+              ^
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:24:
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:8:
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/internal_macros.h:4:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+1 warning generated.
+[8/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc.obj
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\commandlineflags.cc:127:33: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
+  const char* const value_str = getenv(env_var.c_str());
+                                ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
+    _Check_return_ _CRT_INSECURE_DEPRECATE(_dupenv_s)
+                   ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\commandlineflags.cc:133:33: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
+  const char* const value_str = getenv(env_var.c_str());
+                                ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
+    _Check_return_ _CRT_INSECURE_DEPRECATE(_dupenv_s)
+                   ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\commandlineflags.cc:145:33: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
+  const char* const value_str = getenv(env_var.c_str());
+                                ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
+    _Check_return_ _CRT_INSECURE_DEPRECATE(_dupenv_s)
+                   ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\commandlineflags.cc:157:29: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
+  const char* const value = getenv(env_var.c_str());
+                            ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
+    _Check_return_ _CRT_INSECURE_DEPRECATE(_dupenv_s)
+                   ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\commandlineflags.cc:164:33: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
+  const char* const value_str = getenv(env_var.c_str());
+                                ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
+    _Check_return_ _CRT_INSECURE_DEPRECATE(_dupenv_s)
+                   ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\commandlineflags.cc:285:5: warning: variable 'v' of type 'char' can be declared 'const' [misc-const-correctness]
+    char v = value[0];
+    ^
+         const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\commandlineflags.cc:285:10: note: FIX-IT applied suggested code changes
+    char v = value[0];
+         ^
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:26:
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/../src/string_util.h:8:
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/internal_macros.h:4:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:127:33: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
+  const char* const value_str = getenv(env_var.c_str());
+                                ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
+    _Check_return_ _CRT_INSECURE_DEPRECATE(_dupenv_s)
+                   ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:133:33: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
+  const char* const value_str = getenv(env_var.c_str());
+                                ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
+    _Check_return_ _CRT_INSECURE_DEPRECATE(_dupenv_s)
+                   ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:145:33: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
+  const char* const value_str = getenv(env_var.c_str());
+                                ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
+    _Check_return_ _CRT_INSECURE_DEPRECATE(_dupenv_s)
+                   ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:157:29: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
+  const char* const value = getenv(env_var.c_str());
+                            ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
+    _Check_return_ _CRT_INSECURE_DEPRECATE(_dupenv_s)
+                   ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:164:33: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
+  const char* const value_str = getenv(env_var.c_str());
+                                ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
+    _Check_return_ _CRT_INSECURE_DEPRECATE(_dupenv_s)
+                   ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+6 warnings generated.
+[9/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/complexity.cc.obj
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:44:25: warning: narrowing conversion from 'IterationCount' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+        return kLog2E * n * log(static_cast<double>(n));
+                        ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:91:5: warning: variable 'gn_i' of type 'double' can be declared 'const' [misc-const-correctness]
+    double gn_i = fitting_curve(n[i]);
+    ^
+           const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:91:12: note: FIX-IT applied suggested code changes
+    double gn_i = fitting_curve(n[i]);
+           ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:106:5: warning: variable 'fit' of type 'double' can be declared 'const' [misc-const-correctness]
+    double fit = result.coef * fitting_curve(n[i]);
+    ^
+           const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:106:12: note: FIX-IT applied suggested code changes
+    double fit = result.coef * fitting_curve(n[i]);
+           ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:111:3: warning: variable 'mean' of type 'double' can be declared 'const' [misc-const-correctness]
+  double mean = sigma_time / n.size();
+  ^
+         const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:111:10: note: FIX-IT applied suggested code changes
+  double mean = sigma_time / n.size();
+         ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:111:30: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+  double mean = sigma_time / n.size();
+                             ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:112:27: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+  result.rms = sqrt(rms / n.size()) / mean;
+                          ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:134:5: warning: variable 'fit_curves' of type 'std::vector<BigO>' can be declared 'const' [misc-const-correctness]
+    std::vector<BigO> fit_curves = {oLogN, oN, oNLogN, oNSquared, oNCubed};
+    ^
+                      const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:134:23: note: FIX-IT applied suggested code changes
+    std::vector<BigO> fit_curves = {oLogN, oN, oNLogN, oNSquared, oNCubed};
+                      ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:142:7: warning: variable 'current_fit' of type 'LeastSq' can be declared 'const' [misc-const-correctness]
+      LeastSq current_fit = MinimalLeastSq(n, time, FittingCurve(fit));
+      ^
+              const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:142:15: note: FIX-IT applied suggested code changes
+      LeastSq current_fit = MinimalLeastSq(n, time, FittingCurve(fit));
+              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:174:53: warning: narrowing conversion from 'IterationCount' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    real_time.push_back(run.real_accumulated_time / run.iterations);
+                                                    ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:175:51: warning: narrowing conversion from 'IterationCount' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    cpu_time.push_back(run.cpu_accumulated_time / run.iterations);
+                                                  ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:216:3: warning: variable 'multiplier' of type 'double' can be declared 'const' [misc-const-correctness]
+  double multiplier = GetTimeUnitMultiplier(reports[0].time_unit);
+  ^
+         const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:216:10: note: FIX-IT applied suggested code changes
+  double multiplier = GetTimeUnitMultiplier(reports[0].time_unit);
+         ^
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/complexity.cc:18:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+1 warning generated.
+[10/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc.obj
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\console_reporter.cc:44:7: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+  if ((output_options_ & OO_Color) && &std::cout != &GetOutputStream()) {
+      ^
+      (                            != 0)
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\console_reporter.cc:44:7: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\console_reporter.cc:44:35: note: FIX-IT applied suggested code changes
+  if ((output_options_ & OO_Color) && &std::cout != &GetOutputStream()) {
+                                  ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\console_reporter.cc:67:3: warning: variable 'line' of type 'std::string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+  std::string line = std::string(str.length(), '-');
+  ^
+              const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\console_reporter.cc:67:15: note: FIX-IT applied suggested code changes
+  std::string line = std::string(str.length(), '-');
+              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\console_reporter.cc:94:11: warning: variable 'args' is not initialized [cppcoreguidelines-init-variables]
+  va_list args;
+          ^
+               = nullptr
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\console_reporter.cc:94:15: note: FIX-IT applied suggested code changes
+  va_list args;
+              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\console_reporter.cc:139:5: warning: variable 'big_o' of type 'std::string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+    std::string big_o = GetBigOString(result.complexity);
+    ^
+                const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\console_reporter.cc:139:17: note: FIX-IT applied suggested code changes
+    std::string big_o = GetBigOString(result.complexity);
+                ^
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:24:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+1 warning generated.
+[11/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc.obj
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\counter.cc:29:10: warning: narrowing conversion from 'IterationCount' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    v *= iterations;
+         ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\counter.cc:32:10: warning: narrowing conversion from 'IterationCount' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    v /= iterations;
+         ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\counter.cc:79:2: warning: namespace 'benchmark::internal' ends with a comment that refers to a wrong namespace 'benchmark' [google-readability-namespace-comments,llvm-namespace-comment]
+}  // end namespace benchmark
+ ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\counter.cc:17:11: note: namespace 'benchmark::internal' starts here
+namespace benchmark::internal {
+          ^
+note: cannot apply fix-it because an alias checker has suggested a different fix-it; please remove one of the checkers ('google-readability-namespace-comments', 'llvm-namespace-comment') or ensure they are both configured the same
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:15:
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/counter.h:18:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+1 warning generated.
+[12/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc.obj
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\csv_reporter.cc:43:8: warning: variable 'c' of type 'char' can be declared 'const' [misc-const-correctness]
+  for (char c : s) {
+       ^
+            const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\csv_reporter.cc:43:13: note: FIX-IT applied suggested code changes
+  for (char c : s) {
+            ^
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:15:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+1 warning generated.
+[13/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc.obj
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\json_reporter.cc:40:8: warning: variable 'c' of type 'char' can be declared 'const' [misc-const-correctness]
+  for (char c : s) {
+       ^
+            const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\json_reporter.cc:40:13: note: FIX-IT applied suggested code changes
+  for (char c : s) {
+            ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\json_reporter.cc:124:3: warning: variable 'inner_indent' of type 'std::string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+  std::string inner_indent(2, ' ');
+  ^
+              const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\json_reporter.cc:124:15: note: FIX-IT applied suggested code changes
+  std::string inner_indent(2, ' ');
+              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\json_reporter.cc:130:3: warning: variable 'walltime_value' of type 'std::string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+  std::string walltime_value = LocalDateTimeString();
+  ^
+              const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\json_reporter.cc:130:15: note: FIX-IT applied suggested code changes
+  std::string walltime_value = LocalDateTimeString();
+              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\json_reporter.cc:155:3: warning: variable 'cache_indent' of type 'std::string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+  std::string cache_indent(8, ' ');
+  ^
+              const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\json_reporter.cc:155:15: note: FIX-IT applied suggested code changes
+  std::string cache_indent(8, ' ');
+              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\json_reporter.cc:207:3: warning: variable 'indent' of type 'std::string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+  std::string indent(4, ' ');
+  ^
+              const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\json_reporter.cc:207:15: note: FIX-IT applied suggested code changes
+  std::string indent(4, ' ');
+              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\json_reporter.cc:231:3: warning: variable 'indent' of type 'std::string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+  std::string indent(6, ' ');
+  ^
+              const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\json_reporter.cc:231:15: note: FIX-IT applied suggested code changes
+  std::string indent(6, ' ');
+              ^
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:25:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+1 warning generated.
+[14/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/perf_counters.cc.obj
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\perf_counters.cc:130:2: warning: namespace 'benchmark::internal' ends with a comment that refers to a wrong namespace 'benchmark' [google-readability-namespace-comments,llvm-namespace-comment]
+}  // namespace benchmark
+ ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\perf_counters.cc:25:11: note: namespace 'benchmark::internal' starts here
+namespace benchmark::internal {
+          ^
+note: cannot apply fix-it because an alias checker has suggested a different fix-it; please remove one of the checkers ('google-readability-namespace-comments', 'llvm-namespace-comment') or ensure they are both configured the same
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/perf_counters.cc:15:
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/perf_counters.h:22:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+1 warning generated.
+[15/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/reporter.cc.obj
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/reporter.cc:15:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+1 warning generated.
+[16/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/sleep.cc.obj
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/sleep.cc:21:
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/internal_macros.h:4:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+1 warning generated.
+[17/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc.obj
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\statistics.cc:35:36: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+  return StatisticsSum(v) * (1.0 / v.size());
+                                   ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\statistics.cc:43:32: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'difference_type' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+  auto center = copy.begin() + v.size() / 2;
+                               ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\statistics.cc:52:33: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'difference_type' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+  auto center2 = copy.begin() + v.size() / 2 - 1;
+                                ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\statistics.cc:79:53: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+  const double avg_squares = SumSquares(v) * (1.0 / v.size());
+                                                    ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\statistics.cc:80:15: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+  return Sqrt(v.size() / (v.size() - 1.0) * (avg_squares - Sqr(mean)));
+              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\statistics.cc:80:27: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+  return Sqrt(v.size() / (v.size() - 1.0) * (avg_squares - Sqr(mean)));
+                          ^
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:16:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+1 warning generated.
+[18/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc.obj
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\string_util.cc:59:21: warning: narrowing conversion from 'size_t' (aka 'unsigned long long') to signed type 'int64_t' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+        *exponent = i + 1;
+                    ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\string_util.cc:101:16: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+  }     return std::string(1, array[index]);
+               ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\string_util.cc:131:11: warning: variable 'args_cp' is not initialized [cppcoreguidelines-init-variables]
+  va_list args_cp;
+          ^
+                  = nullptr
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\string_util.cc:131:18: note: FIX-IT applied suggested code changes
+  va_list args_cp;
+                 ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\string_util.cc:148:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+    return std::string(local_buff.data());
+           ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\string_util.cc:157:3: warning: Value stored to 'ret' is never read [clang-analyzer-deadcode.DeadStores]
+  ret = vsnprintf(buff_ptr.get(), size, msg, args);
+  ^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\string_util.cc:157:3: note: Value stored to 'ret' is never read
+  ret = vsnprintf(buff_ptr.get(), size, msg, args);
+  ^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\string_util.cc:158:10: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+  return std::string(buff_ptr.get());
+         ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\string_util.cc:162:11: warning: variable 'args' is not initialized [cppcoreguidelines-init-variables]
+  va_list args;
+          ^
+               = nullptr
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\string_util.cc:162:15: note: FIX-IT applied suggested code changes
+  va_list args;
+              ^
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:1:
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.h:8:
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/internal_macros.h:4:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+1 warning generated.
+[19/70] Building CXX object CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc.obj
+FAILED: CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc.obj 
+"C:\Program Files\CMake\bin\cmake.exe" -E __run_co_compile --tidy="C:/Program Files/LLVM/bin/clang-tidy.exe;--fix;--header-filter=D:\/a\/aprg\/aprg\/benchmark\/BenchmarkTest.*;--config-file=D:/a/aprg/aprg/Clang/ClangTidyFiles/autofix.clang-tidy;--extra-arg-before=--driver-mode=g++" --source=D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc -- C:\PROGRA~1\LLVM\bin\CLANG_~1.EXE -DAPRG_CODE_REVISION=\"c218cc8fe1a7ec28df2fb66faa974da1a9ed0c48\" -DAPRG_DEBUG -DAPRG_DIR=\"D:/a/aprg/aprg\" -DAPRG_TEST_MODE_ON -DOS_WINDOWS -ID:/a/aprg/aprg/benchmark/benchmarkLibrary/include -ID:/a/aprg/aprg/AprgCommon/AprgCommon/src -ID:/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows -ID:/a/aprg/aprg/AprgCommon/AprgCommon/tstUtilities -ID:/a/aprg/aprg/benchmark/BenchmarkTest/tst -ID:/a/aprg/aprg/gtest/gtest/googletest/include -ID:/a/aprg/aprg/gtest/gtest/googletest -Wall -Wextra -pedantic -fcolor-diagnostics -std=c++20  -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -MD -MT CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc.obj -MF CMakeFiles\BENCHMARK_LIBRARY.dir\D_\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc.obj.d -o CMakeFiles/BENCHMARK_LIBRARY.dir/D_/a/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc.obj -c D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\shlwapi.h:2128:9: warning: 'OS_WINDOWS' macro redefined [clang-diagnostic-macro-redefined]
+#define OS_WINDOWS                  0           // Windows 9x vs. NT
+        ^
+note: previous definition is here
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:208:3: warning: variable 'f' of type 'std::ifstream' (aka 'basic_ifstream<char, char_traits<char>>') can be declared 'const' [misc-const-correctness]
+  std::ifstream f(fname.c_str());
+  ^
+                const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:208:17: note: FIX-IT applied suggested code changes
+  std::ifstream f(fname.c_str());
+                ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:242:5: warning: variable 'Mask' of type 'CPUMask' (aka 'bitset<sizeof(std::uintptr_t) * 8>') can be declared 'const' [misc-const-correctness]
+    CPUMask Mask(benchmark::stoul(Part, nullptr, 16));
+    ^
+            const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:242:13: note: FIX-IT applied suggested code changes
+    CPUMask Mask(benchmark::stoul(Part, nullptr, 16));
+            ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:260:3: warning: variable 'dir' of type 'std::string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+  std::string dir = "/sys/devices/system/cpu/cpu0/cache/";
+  ^
+              const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:260:15: note: FIX-IT applied suggested code changes
+  std::string dir = "/sys/devices/system/cpu/cpu0/cache/";
+              ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:264:5: warning: variable 'FPath' of type 'std::string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+    std::string FPath = StrCat(dir, "index", Idx++, "/");
+    ^
+                const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:264:17: note: FIX-IT applied suggested code changes
+    std::string FPath = StrCat(dir, "index", Idx++, "/");
+                ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:337:3: warning: variable 'buff' of type 'UPtr' (aka 'unique_ptr<_SYSTEM_LOGICAL_PROCESSOR_INFORMATION, void (*)(void *)>') can be declared 'const' [misc-const-correctness]
+  UPtr buff((PInfo*)malloc(buffer_size), &std::free);
+  ^
+       const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:337:8: note: FIX-IT applied suggested code changes
+  UPtr buff((PInfo*)malloc(buffer_size), &std::free);
+       ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:337:13: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+  UPtr buff((PInfo*)malloc(buffer_size), &std::free);
+            ^~~~~~~~
+            static_cast<PInfo*>(       )
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:337:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:337:40: note: FIX-IT applied suggested code changes
+  UPtr buff((PInfo*)malloc(buffer_size), &std::free);
+                                       ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:338:8: warning: implicit conversion 'BOOL' (aka 'int') -> bool [readability-implicit-bool-conversion]
+  if (!GetLogicalProcessorInformation(buff.get(), &buffer_size))
+      ~^
+                                                                == 0
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:338:7: note: FIX-IT applied suggested code changes
+  if (!GetLogicalProcessorInformation(buff.get(), &buffer_size))
+      ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:338:64: note: FIX-IT applied suggested code changes
+  if (!GetLogicalProcessorInformation(buff.get(), &buffer_size))
+                                                               ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:338:65: warning: statement should be inside braces [google-readability-braces-around-statements,hicpp-braces-around-statements,readability-braces-around-statements]
+  if (!GetLogicalProcessorInformation(buff.get(), &buffer_size))
+                                                                ^
+                                                                 {
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:338:65: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:340:38: note: FIX-IT applied suggested code changes
+                     GetLastError());
+                                     ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:346:43: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+    if (it->Relationship != RelationCache) continue;
+                                          ^
+                                           {
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:346:43: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:346:53: note: FIX-IT applied suggested code changes
+    if (it->Relationship != RelationCache) continue;
+                                                    ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:348:5: warning: variable 'B' of type 'BitSet' (aka 'bitset<sizeof(ULONG_PTR) * 8>') can be declared 'const' [misc-const-correctness]
+    BitSet B(it->ProcessorMask);
+    ^
+           const 
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:348:12: note: FIX-IT applied suggested code changes
+    BitSet B(it->ProcessorMask);
+           ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:350:20: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
+    if (!B.test(0)) continue;
+                   ^
+                    {
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:350:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:350:30: note: FIX-IT applied suggested code changes
+    if (!B.test(0)) continue;
+                             ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:355:14: warning: narrowing conversion from 'DWORD' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    C.size = Cache->Size;
+             ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:433:44: warning: statement should be inside braces [google-readability-braces-around-statements,hicpp-braces-around-statements,readability-braces-around-statements]
+  if (!GetComputerName(hostname, &DWCOUNT))
+                                           ^
+                                            {
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:433:44: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:434:28: note: FIX-IT applied suggested code changes
+    return std::string("");
+                           ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:434:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+    return std::string("");
+           ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:480:10: warning: narrowing conversion from 'DWORD' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+  return sysinfo.dwNumberOfProcessors;  // number of logical
+         ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:657:3: warning: multiple declarations in a single statement reduces readability [readability-isolate-declaration]
+  DWORD data, data_size = sizeof(data);
+  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:657:3: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:657:9: warning: variable 'data' is not initialized [cppcoreguidelines-init-variables]
+  DWORD data, data_size = sizeof(data);
+        ^
+note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:662:60: warning: statement should be inside braces [google-readability-braces-around-statements,hicpp-braces-around-statements,readability-braces-around-statements]
+                      "~MHz", nullptr, &data, &data_size)))
+                                                           ^
+                                                            {
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:662:60: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:664:68: note: FIX-IT applied suggested code changes
+                               (int64_t)(1000 * 1000));  // was mhz
+                                                                   ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:663:32: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+    return static_cast<double>((int64_t)data *
+                               ^~~~~~~~~
+                               static_cast<int64_t>( )
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:663:32: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:663:45: note: FIX-IT applied suggested code changes
+    return static_cast<double>((int64_t)data *
+                                            ^
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:664:32: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+                               (int64_t)(1000 * 1000));  // was mhz
+                               ^~~~~~~~~
+                               static_cast<int64_t>
+D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:664:32: note: FIX-IT applied suggested code changes
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:15:
+In file included from D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/internal_macros.h:4:
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
+    kInvert = 1U << 31U
+    ^
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:211:5: error: invalid operands to binary expression ('const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') and 'std::basic_string<char>')
+  f >> *arg;
+  ~ ^  ~~~~
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:284:10: note: in instantiation of function template specialization 'benchmark::(anonymous namespace)::ReadFromFile<std::basic_string<char>>' requested here
+    if (!ReadFromFile(StrCat(FPath, "type"), &info.type)) {
+         ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:883:31: note: candidate function template not viable: no known conversion from 'std::basic_string<char>' to 'signed char &' for 2nd argument
+basic_istream<char, _Traits>& operator>>(basic_istream<char, _Traits>& _Istr, signed char& _Ch) {
+                              ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:889:31: note: candidate function template not viable: no known conversion from 'std::basic_string<char>' to 'unsigned char &' for 2nd argument
+basic_istream<char, _Traits>& operator>>(basic_istream<char, _Traits>& _Istr, unsigned char& _Ch) {
+                              ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:860:32: note: candidate template ignored: deduced conflicting types for parameter '_Elem' ('char' vs. 'std::basic_string<char>')
+basic_istream<_Elem, _Traits>& operator>>(basic_istream<_Elem, _Traits>& _Istr, _Elem& _Ch) { // extract a character
+                               ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\cstddef:38:27: note: candidate template ignored: requirement 'is_integral_v<std::basic_string<char, std::char_traits<char>, std::allocator<char>>>' was not satisfied [with _IntType = std::basic_string<char>]
+_NODISCARD constexpr byte operator>>(const byte _Arg, const _IntType _Shift) noexcept {
+                          ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\xstring:5136:32: note: candidate template ignored: deduced type 'basic_istream<char, char_traits<char>>' of 1st parameter does not match adjusted type 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') of argument [with _Elem = char, _Traits = std::char_traits<char>, _Alloc = std::allocator<char>]
+basic_istream<_Elem, _Traits>& operator>>(
+                               ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\bitset:529:28: note: candidate template ignored: could not match 'bitset' against 'basic_string'
+basic_istream<_Elem, _Tr>& operator>>(basic_istream<_Elem, _Tr>& _Istr, bitset<_Bits>& _Right) {
+                           ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:825:32: note: candidate template ignored: could not match '_Elem[_Size]' against 'std::basic_string<char>'
+basic_istream<_Elem, _Traits>& operator>>(
+                               ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:831:31: note: candidate template ignored: could not match 'signed char[_Size]' against 'std::basic_string<char>'
+basic_istream<char, _Traits>& operator>>(
+                              ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:837:31: note: candidate template ignored: could not match 'unsigned char[_Size]' against 'std::basic_string<char>'
+basic_istream<char, _Traits>& operator>>(
+                              ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:902:9: note: candidate template ignored: substitution failure [with _Istr = const std::ifstream &, _Ty = std::basic_string<char> &]: 'type name' declared as a pointer to a reference of type 'const std::ifstream &' (aka 'const basic_ifstream<char, char_traits<char>> &')
+_Istr&& operator>>(_Istr&& _Is, _Ty&& _Val) { // extract from rvalue stream
+        ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:176:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(basic_istream&(__cdecl* _Pfn)(basic_istream&) ) {
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:181:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(_Myios&(__cdecl* _Pfn)(_Myios&) ) { // call basic_ios manipulator
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:186:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(ios_base&(__cdecl* _Pfn)(ios_base&) ) { // call ios_base manipulator
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:215:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(bool& _Val) { // extract a boolean
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:219:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(short& _Val) { // extract a short
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:251:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(unsigned short& _Val) { // extract an unsigned short
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:255:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(int& _Val) { // extract an int
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:263:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(unsigned int& _Val) { // extract an unsigned int
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:267:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(long& _Val) { // extract a long
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:271:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(unsigned long& _Val) { // extract an unsigned long
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:275:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(long long& _Val) { // extract a long long
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:279:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(unsigned long long& _Val) { // extract an unsigned long long
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:283:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(float& _Val) { // extract a float
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:287:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(double& _Val) { // extract a double
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:291:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(long double& _Val) { // extract a long double
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:295:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(void*& _Val) { // extract a void pointer
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:299:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(_Mysb* _Strbuf) { // extract until end-of-file into a stream buffer
+                                      ^
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:211:5: error: invalid operands to binary expression ('const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') and 'int')
+  f >> *arg;
+  ~ ^  ~~~~
+D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:287:10: note: in instantiation of function template specialization 'benchmark::(anonymous namespace)::ReadFromFile<int>' requested here
+    if (!ReadFromFile(StrCat(FPath, "level"), &info.level)) {
+         ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\cstddef:38:27: note: candidate function template not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'const byte' for 1st argument
+_NODISCARD constexpr byte operator>>(const byte _Arg, const _IntType _Shift) noexcept {
+                          ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:883:31: note: candidate function template not viable: no known conversion from 'int' to 'signed char &' for 2nd argument
+basic_istream<char, _Traits>& operator>>(basic_istream<char, _Traits>& _Istr, signed char& _Ch) {
+                              ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:889:31: note: candidate function template not viable: no known conversion from 'int' to 'unsigned char &' for 2nd argument
+basic_istream<char, _Traits>& operator>>(basic_istream<char, _Traits>& _Istr, unsigned char& _Ch) {
+                              ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:860:32: note: candidate template ignored: deduced conflicting types for parameter '_Elem' ('char' vs. 'int')
+basic_istream<_Elem, _Traits>& operator>>(basic_istream<_Elem, _Traits>& _Istr, _Elem& _Ch) { // extract a character
+                               ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\xstring:5136:32: note: candidate template ignored: could not match 'basic_string<_Elem, _Traits, _Alloc>' against 'int'
+basic_istream<_Elem, _Traits>& operator>>(
+                               ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\bitset:529:28: note: candidate template ignored: could not match 'bitset<_Bits>' against 'int'
+basic_istream<_Elem, _Tr>& operator>>(basic_istream<_Elem, _Tr>& _Istr, bitset<_Bits>& _Right) {
+                           ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:825:32: note: candidate template ignored: could not match '_Elem[_Size]' against 'int'
+basic_istream<_Elem, _Traits>& operator>>(
+                               ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:831:31: note: candidate template ignored: could not match 'signed char[_Size]' against 'int'
+basic_istream<char, _Traits>& operator>>(
+                              ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:837:31: note: candidate template ignored: could not match 'unsigned char[_Size]' against 'int'
+basic_istream<char, _Traits>& operator>>(
+                              ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:902:9: note: candidate template ignored: substitution failure [with _Istr = const std::ifstream &, _Ty = int &]: 'type name' declared as a pointer to a reference of type 'const std::ifstream &' (aka 'const basic_ifstream<char, char_traits<char>> &')
+_Istr&& operator>>(_Istr&& _Is, _Ty&& _Val) { // extract from rvalue stream
+        ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:176:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(basic_istream&(__cdecl* _Pfn)(basic_istream&) ) {
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:181:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(_Myios&(__cdecl* _Pfn)(_Myios&) ) { // call basic_ios manipulator
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:186:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(ios_base&(__cdecl* _Pfn)(ios_base&) ) { // call ios_base manipulator
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:215:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(bool& _Val) { // extract a boolean
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:219:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(short& _Val) { // extract a short
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:251:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(unsigned short& _Val) { // extract an unsigned short
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:255:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(int& _Val) { // extract an int
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:263:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(unsigned int& _Val) { // extract an unsigned int
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:267:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(long& _Val) { // extract a long
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:271:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(unsigned long& _Val) { // extract an unsigned long
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:275:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(long long& _Val) { // extract a long long
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:279:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(unsigned long long& _Val) { // extract an unsigned long long
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:283:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(float& _Val) { // extract a float
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:287:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(double& _Val) { // extract a double
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:291:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(long double& _Val) { // extract a long double
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:295:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(void*& _Val) { // extract a void pointer
+                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\istream:299:39: note: candidate function not viable: no known conversion from 'const std::ifstream' (aka 'const basic_ifstream<char, char_traits<char>>') to 'std::basic_istream<char>' for object argument
+    basic_istream& __CLR_OR_THIS_CALL operator>>(_Mysb* _Strbuf) { // extract until end-of-file into a stream buffer
+                                      ^
+1 warning and 2 errors generated.
+ninja: build stopped: subcommand failed.
 DONE!

@@ -16,7 +16,7 @@ MaximumSubMatrixSum::SubArrayDetails MaximumSubMatrixSum::getMaximumSubMatrixSum
         Values accumulatedColumn;
         m_valueMatrix.retrieveColumn(accumulatedColumn, left);
         for (Index right = left + 1; right < static_cast<Index>(m_valueMatrix.getNumberOfColumns()); ++right) {
-            MaximumSubArraySum maximumSubArraySum(accumulatedColumn);
+            MaximumSubArraySum const maximumSubArraySum(accumulatedColumn);
 
             auto columnSumDetails(maximumSubArraySum.getMaximumSubArraySumWithDetails());  // linear
             if (result.sum < columnSumDetails.sum) {
@@ -45,7 +45,7 @@ MaximumSubMatrixSum::Value MaximumSubMatrixSum::getMaximumSubMatrixSum() const {
         Values accumulatedColumn;
         m_valueMatrix.retrieveColumn(accumulatedColumn, left);
         for (Index right = left + 1; right < static_cast<Index>(m_valueMatrix.getNumberOfColumns()); ++right) {
-            MaximumSubArraySum maximumSubArraySum(accumulatedColumn);
+            MaximumSubArraySum const maximumSubArraySum(accumulatedColumn);
             result = max(result, maximumSubArraySum.getMaximumSubArraySum());  // linear
             for (Index rowIndex = 0; rowIndex < static_cast<Index>(m_valueMatrix.getNumberOfRows()); ++rowIndex) {
                 // add next column

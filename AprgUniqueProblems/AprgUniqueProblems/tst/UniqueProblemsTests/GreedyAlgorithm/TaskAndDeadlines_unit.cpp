@@ -13,9 +13,9 @@ TEST(TaskAndDeadlinesTest, GetTasksAsPossibleWorksOnExample1) {
     taskAndDeadlines.addTask("C", 2, 7);
     taskAndDeadlines.addTask("D", 4, 5);
 
-    TaskAndDeadlines::TaskNames actualNames(taskAndDeadlines.getTasksOrderWithMaximumScore());
+    TaskAndDeadlines::TaskNames const actualNames(taskAndDeadlines.getTasksOrderWithMaximumScore());
 
-    TaskAndDeadlines::TaskNames expectedNames{"C", "B", "A", "D"};
+    TaskAndDeadlines::TaskNames const expectedNames{"C", "B", "A", "D"};
     EXPECT_EQ(expectedNames, actualNames);
 }
 

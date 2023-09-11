@@ -37,7 +37,7 @@ namespace {
 std::string StrEscape(const std::string& s) {
   std::string tmp;
   tmp.reserve(s.size());
-  for (char c : s) {
+  for (char const c : s) {
     switch (c) {
       case '\b':
         tmp += "\\b";
@@ -121,13 +121,13 @@ bool JSONReporter::ReportContext(const Context& context) {
   std::ostream& out = GetOutputStream();
 
   out << "{\n";
-  std::string inner_indent(2, ' ');
+  std::string const inner_indent(2, ' ');
 
   // Open context block and print context information.
   out << inner_indent << "\"context\": {\n";
   std::string indent(4, ' ');
 
-  std::string walltime_value = LocalDateTimeString();
+  std::string const walltime_value = LocalDateTimeString();
   out << indent << FormatKV("date", walltime_value) << ",\n";
 
   out << indent << FormatKV("host_name", context.sys_info.name) << ",\n";
@@ -152,7 +152,7 @@ bool JSONReporter::ReportContext(const Context& context) {
 
   out << indent << "\"caches\": [\n";
   indent = std::string(6, ' ');
-  std::string cache_indent(8, ' ');
+  std::string const cache_indent(8, ' ');
   for (size_t i = 0; i < info.caches.size(); ++i) {
     auto& CI = info.caches[i];
     out << indent << "{\n";
@@ -204,7 +204,7 @@ void JSONReporter::ReportRuns(std::vector<Run> const& reports) {
   if (reports.empty()) {
     return;
   }
-  std::string indent(4, ' ');
+  std::string const indent(4, ' ');
   std::ostream& out = GetOutputStream();
   if (!first_report_) {
     out << ",\n";
@@ -228,7 +228,7 @@ void JSONReporter::Finalize() {
 }
 
 void JSONReporter::PrintRunData(Run const& run) {
-  std::string indent(6, ' ');
+  std::string const indent(6, ' ');
   std::ostream& out = GetOutputStream();
   out << indent << FormatKV("name", run.benchmark_name()) << ",\n";
   out << indent << FormatKV("family_index", run.family_index) << ",\n";

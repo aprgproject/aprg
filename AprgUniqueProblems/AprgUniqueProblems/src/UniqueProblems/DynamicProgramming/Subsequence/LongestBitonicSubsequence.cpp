@@ -108,7 +108,7 @@ LongestBitonicSubsequence::Values LongestBitonicSubsequence::getLongestSubsequen
     Value maxLength(0);
     Index indexOfLongestLength(0);
     for (Index index(0); index < static_cast<Index>(m_sequence.size()); ++index) {
-        Value lengthAtIndex(increasingPartialLengths[index] + decreasingPartialLengths[index] - 1);
+        Value const lengthAtIndex(increasingPartialLengths[index] + decreasingPartialLengths[index] - 1);
         if (maxLength < lengthAtIndex) {
             maxLength = lengthAtIndex;
             indexOfLongestLength = index;

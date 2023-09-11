@@ -29,7 +29,8 @@ CollectMaximumPointsInAGridUsingTwoTraversals::getMaximumPointsUsingMemoizationD
     // Auxiliary Space: O(rows*columns*columns)
     Value result(0);
     if (!m_inputGrid.isEmpty()) {
-        ValueGrid initialValueGrid(m_inputGrid.getNumberOfColumns(), m_inputGrid.getNumberOfColumns(), UNUSED_COUNT);
+        ValueGrid const initialValueGrid(
+            m_inputGrid.getNumberOfColumns(), m_inputGrid.getNumberOfColumns(), UNUSED_COUNT);
         ValueGrids valueGrids(m_inputGrid.getNumberOfRows(), initialValueGrid);
         result = getMaximumPointsUsingMemoizationDP(valueGrids, 0, 0, m_inputGrid.getNumberOfColumns() - 1);
     }
@@ -42,15 +43,16 @@ CollectMaximumPointsInAGridUsingTwoTraversals::getMaximumPointsUsingIterativeDP(
     // Auxiliary Space: O(rows*columns*columns)
     Value result(0);
     if (!m_inputGrid.isEmpty()) {
-        ValueGrid initialValueGrid(m_inputGrid.getNumberOfColumns(), m_inputGrid.getNumberOfColumns(), INVALID_COUNT);
+        ValueGrid const initialValueGrid(
+            m_inputGrid.getNumberOfColumns(), m_inputGrid.getNumberOfColumns(), INVALID_COUNT);
         ValueGrids valueGrids(m_inputGrid.getNumberOfRows(), initialValueGrid);
 
         {
-            Index columnLeft(0);
-            Index columnRight(m_inputGrid.getNumberOfColumns() - 1);
-            Value firstEntryResult = (columnLeft == columnRight)
-                                         ? m_inputGrid.getEntry(columnLeft, 0)
-                                         : m_inputGrid.getEntry(columnLeft, 0) + m_inputGrid.getEntry(columnRight, 0);
+            Index const columnLeft(0);
+            Index const columnRight(m_inputGrid.getNumberOfColumns() - 1);
+            Value const firstEntryResult = (columnLeft == columnRight) ? m_inputGrid.getEntry(columnLeft, 0)
+                                                                       : m_inputGrid.getEntry(columnLeft, 0) +
+                                                                             m_inputGrid.getEntry(columnRight, 0);
             valueGrids[0].setEntry(columnLeft, columnRight, firstEntryResult);
         }
 
@@ -60,12 +62,12 @@ CollectMaximumPointsInAGridUsingTwoTraversals::getMaximumPointsUsingIterativeDP(
                      ++columnRight) {
                     Value entryResult(INVALID_COUNT);
                     for (auto const& [leftOffset, rightOffset] : columnsOffsets) {
-                        Index previousRow = row - 1;
-                        Index previousColumnLeft = columnLeft + leftOffset;
-                        Index previousColumnRight = columnRight + rightOffset;
+                        Index const previousRow = row - 1;
+                        Index const previousColumnLeft = columnLeft + leftOffset;
+                        Index const previousColumnRight = columnRight + rightOffset;
                         if (m_inputGrid.isInside(previousColumnLeft, previousRow) &&
                             m_inputGrid.isInside(previousColumnRight, previousRow)) {
-                            Value previousValue =
+                            Value const previousValue =
                                 valueGrids[previousRow].getEntry(previousColumnLeft, previousColumnRight);
                             if (INVALID_COUNT != previousValue) {
                                 entryResult =
@@ -97,11 +99,11 @@ CollectMaximumPointsInAGridUsingTwoTraversals::getMaximumPointsUsingNaiveRecursi
         result = INVALID_COUNT;
     } else {
         for (auto const& [leftOffset, rightOffset] : columnsOffsets) {
-            Index nextRow = row + 1;
-            Index nextColumnLeft = columnLeft + leftOffset;
-            Index nextColumnRight = columnRight + rightOffset;
+            Index const nextRow = row + 1;
+            Index const nextColumnLeft = columnLeft + leftOffset;
+            Index const nextColumnRight = columnRight + rightOffset;
             if (m_inputGrid.isInside(nextColumnLeft, nextRow) && m_inputGrid.isInside(nextColumnRight, nextRow)) {
-                Value nextValue = getMaximumPointsUsingNaiveRecursion(nextRow, nextColumnLeft, nextColumnRight);
+                Value const nextValue = getMaximumPointsUsingNaiveRecursion(nextRow, nextColumnLeft, nextColumnRight);
                 if (INVALID_COUNT != nextValue) {
                     result = max(result, nextValue);
                 }
@@ -126,11 +128,11 @@ CollectMaximumPointsInAGridUsingTwoTraversals::getMaximumPointsUsingMemoizationD
             result = INVALID_COUNT;
         } else {
             for (auto const& [leftOffset, rightOffset] : columnsOffsets) {
-                Index nextRow = row + 1;
-                Index nextColumnLeft = columnLeft + leftOffset;
-                Index nextColumnRight = columnRight + rightOffset;
+                Index const nextRow = row + 1;
+                Index const nextColumnLeft = columnLeft + leftOffset;
+                Index const nextColumnRight = columnRight + rightOffset;
                 if (m_inputGrid.isInside(nextColumnLeft, nextRow) && m_inputGrid.isInside(nextColumnRight, nextRow)) {
-                    Value nextValue =
+                    Value const nextValue =
                         getMaximumPointsUsingMemoizationDP(valueGrids, nextRow, nextColumnLeft, nextColumnRight);
                     if (INVALID_COUNT != nextValue) {
                         result = max(result, nextValue);

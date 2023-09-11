@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSumTest, GetCountWorksOnZeroWithOneDigit) {
-    CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum queryForTest(1, 0);
+    CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum const queryForTest(1, 0);
 
     EXPECT_EQ(1, queryForTest.getCountUsingNaiveRecursion());
     EXPECT_EQ(1, queryForTest.getCountUsingMemoizationDP());
@@ -17,7 +17,7 @@ TEST(CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSumTest, GetCountWorksOnZe
 }
 
 TEST(CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSumTest, GetCountWorksOnZeroWithMultipleDigits) {
-    CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum queryForTest(2, 0);
+    CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum const queryForTest(2, 0);
 
     EXPECT_EQ(1, queryForTest.getCountUsingNaiveRecursion());
     EXPECT_EQ(1, queryForTest.getCountUsingMemoizationDP());
@@ -27,7 +27,7 @@ TEST(CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSumTest, GetCountWorksOnZe
 }
 
 TEST(CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSumTest, GetCountWorksOnExample1) {
-    CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum queryForTest(2, 2);
+    CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum const queryForTest(2, 2);
 
     EXPECT_EQ(2, queryForTest.getCountUsingNaiveRecursion());
     EXPECT_EQ(2, queryForTest.getCountUsingMemoizationDP());
@@ -37,7 +37,7 @@ TEST(CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSumTest, GetCountWorksOnEx
 }
 
 TEST(CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSumTest, GetCountWorksOnExample2) {
-    CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum queryForTest(2, 5);
+    CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum const queryForTest(2, 5);
 
     EXPECT_EQ(5, queryForTest.getCountUsingNaiveRecursion());
     EXPECT_EQ(5, queryForTest.getCountUsingMemoizationDP());
@@ -47,7 +47,7 @@ TEST(CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSumTest, GetCountWorksOnEx
 }
 
 TEST(CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSumTest, GetCountWorksOnExample3) {
-    CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum queryForTest(3, 6);
+    CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum const queryForTest(3, 6);
 
     EXPECT_EQ(21, queryForTest.getCountUsingNaiveRecursion());
     EXPECT_EQ(21, queryForTest.getCountUsingMemoizationDP());

@@ -47,14 +47,14 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
         for (Index length = 2; length <= static_cast<Index>(m_inputValues.size()); ++length) {
             for (Index leftParenthesis = 0; leftParenthesis + length <= static_cast<Index>(m_inputValues.size());
                  ++leftParenthesis) {
-                Index rightParenthesis = leftParenthesis + length - 1;
+                Index const rightParenthesis = leftParenthesis + length - 1;
                 Count currentCountForFalse(0);
                 Count currentCountForTrue(0);
                 for (Index operationIndex = leftParenthesis; operationIndex < rightParenthesis; ++operationIndex) {
-                    Count numberOfFalseInLeft = countsForFalse.getEntry(leftParenthesis, operationIndex);
-                    Count numberOfTrueInLeft = countsForTrue.getEntry(leftParenthesis, operationIndex);
-                    Count numberOfFalseInRight = countsForFalse.getEntry(operationIndex + 1, rightParenthesis);
-                    Count numberOfTrueInRight = countsForTrue.getEntry(operationIndex + 1, rightParenthesis);
+                    Count const numberOfFalseInLeft = countsForFalse.getEntry(leftParenthesis, operationIndex);
+                    Count const numberOfTrueInLeft = countsForTrue.getEntry(leftParenthesis, operationIndex);
+                    Count const numberOfFalseInRight = countsForFalse.getEntry(operationIndex + 1, rightParenthesis);
+                    Count const numberOfTrueInRight = countsForTrue.getEntry(operationIndex + 1, rightParenthesis);
 
                     if (m_operators[operationIndex] == '&') {
                         currentCountForFalse += numberOfFalseInLeft * numberOfFalseInRight +
@@ -103,11 +103,13 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
     if (leftParenthesis + 1 <= rightParenthesis) {
         // distance should be one for at least two elements
         for (Index operationIndex = leftParenthesis; operationIndex < rightParenthesis; ++operationIndex) {
-            Count numberOfFalseInLeft = getNumberOfWaysUsingNaiveRecursion(false, leftParenthesis, operationIndex);
-            Count numberOfTrueInLeft = getNumberOfWaysUsingNaiveRecursion(true, leftParenthesis, operationIndex);
-            Count numberOfFalseInRight =
+            Count const numberOfFalseInLeft =
+                getNumberOfWaysUsingNaiveRecursion(false, leftParenthesis, operationIndex);
+            Count const numberOfTrueInLeft = getNumberOfWaysUsingNaiveRecursion(true, leftParenthesis, operationIndex);
+            Count const numberOfFalseInRight =
                 getNumberOfWaysUsingNaiveRecursion(false, operationIndex + 1, rightParenthesis);
-            Count numberOfTrueInRight = getNumberOfWaysUsingNaiveRecursion(true, operationIndex + 1, rightParenthesis);
+            Count const numberOfTrueInRight =
+                getNumberOfWaysUsingNaiveRecursion(true, operationIndex + 1, rightParenthesis);
 
             if (m_operators[operationIndex] == '&' && !expectedOutput) {
                 result += numberOfFalseInLeft * numberOfFalseInRight + numberOfFalseInLeft * numberOfTrueInRight +
@@ -135,18 +137,20 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
 BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberOfWaysUsingMemoizationDP(
     CountMatrices& countMatrices, bool const expectedOutput, Index const leftParenthesis,
     Index const rightParenthesis) const {
-    Count expectedOutputIndex = convertBoolToCount(expectedOutput);
+    Count const expectedOutputIndex = convertBoolToCount(expectedOutput);
     Count result(countMatrices[expectedOutputIndex].getEntry(leftParenthesis, rightParenthesis));
     if (UNUSED_COUNT == result) {
         result = 0;
         if (leftParenthesis + 1 <= rightParenthesis) {
             // distance should be one for at least two elements
             for (Index operationIndex = leftParenthesis; operationIndex < rightParenthesis; ++operationIndex) {
-                Count numberOfFalseInLeft = getNumberOfWaysUsingNaiveRecursion(false, leftParenthesis, operationIndex);
-                Count numberOfTrueInLeft = getNumberOfWaysUsingNaiveRecursion(true, leftParenthesis, operationIndex);
-                Count numberOfFalseInRight =
+                Count const numberOfFalseInLeft =
+                    getNumberOfWaysUsingNaiveRecursion(false, leftParenthesis, operationIndex);
+                Count const numberOfTrueInLeft =
+                    getNumberOfWaysUsingNaiveRecursion(true, leftParenthesis, operationIndex);
+                Count const numberOfFalseInRight =
                     getNumberOfWaysUsingNaiveRecursion(false, operationIndex + 1, rightParenthesis);
-                Count numberOfTrueInRight =
+                Count const numberOfTrueInRight =
                     getNumberOfWaysUsingNaiveRecursion(true, operationIndex + 1, rightParenthesis);
 
                 if (m_operators[operationIndex] == '&' && !expectedOutput) {

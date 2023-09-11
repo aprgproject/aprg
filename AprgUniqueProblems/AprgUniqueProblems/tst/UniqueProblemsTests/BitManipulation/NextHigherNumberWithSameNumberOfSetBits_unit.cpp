@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(NextHigherNumberWithSameNumberOfSetBitsTest, GetNextHigherNumberWorksOnExample1) {
-    NextHigherNumberWithSameNumberOfSetBits solution;
+    NextHigherNumberWithSameNumberOfSetBits const solution;
 
     EXPECT_EQ(0U, solution.getNextHigherNumber(0U));
     EXPECT_EQ(2U, solution.getNextHigherNumber(1U));

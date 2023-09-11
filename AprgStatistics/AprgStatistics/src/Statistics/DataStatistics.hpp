@@ -75,7 +75,7 @@ protected:
     void calculateMeanIfNeeded() {
         if (!m_mean) {
             calculateSumIfNeeded();
-            int sampleSize(m_samples.empty() ? 1 : m_samples.size());
+            int const sampleSize(m_samples.empty() ? 1 : m_samples.size());
             m_mean = m_sum.value() / sampleSize;
         }
     }

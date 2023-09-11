@@ -20,7 +20,7 @@ NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPair(Value c
     // many times each letter appears in the grid. Assume that a letter c appears k times. If k <= sqrt(n), we use
     // Algorithm 1, and if k > sqrt(n), we use Algorithm 2. It turns out that by doing this, the total running time of
     // the algorithm is only O(n*sqrt(n)).
-    Coordinates coordinatesWithValue(getCoordinatesWithThisValue(value));
+    Coordinates const coordinatesWithValue(getCoordinatesWithThisValue(value));
     if (static_cast<int>(coordinatesWithValue.size()) <= static_cast<int>(sqrt(m_valueMatrix.getNumberOfCells()))) {
         return getNearestEqualPairByCheckingAllPairs(value);
     }
@@ -31,7 +31,7 @@ NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPairByChecki
     // Algorithm 1: Go through all pairs of cells with letter c, and calculate the minimum distance between such cells.
     // This will take O(k2) time where k is the number of cells with letter c.
     CoordinatePair result{};
-    Coordinates coordinates(getCoordinatesWithThisValue(value));
+    Coordinates const coordinates(getCoordinatesWithThisValue(value));
     auto twoCoordinatesCombinations(
         CombinationsGeneration<Coordinates>::generateCombinationsWithLength(coordinates, 2));
 
@@ -44,7 +44,7 @@ NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPairByChecki
                 result = {twoCoordinates[0], twoCoordinates[1]};
                 isFirst = false;
             } else {
-                int distance = getDistance(twoCoordinates[0], twoCoordinates[1]);
+                int const distance = getDistance(twoCoordinates[0], twoCoordinates[1]);
                 if (distance < minimumDistance) {
                     minimumDistance = distance;
                     result = {twoCoordinates[0], twoCoordinates[1]};
@@ -58,7 +58,7 @@ NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPairByChecki
 NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPairUsingBfs(Value const value) const {
     // Algorithm 2: Perform a breadth-first search that simultaneously starts at each cell with letter c.
     // The minimum distance between two cells with letter c will be calculated in O(n) time.
-    Coordinate firstCoordinate(getFirstCoordinateUsingBfs(value));
+    Coordinate const firstCoordinate(getFirstCoordinateUsingBfs(value));
     return {firstCoordinate, getSecondCoordinateUsingBfs(value, firstCoordinate)};
 }
 
@@ -68,7 +68,7 @@ int NearestEqualCells::getDistance(Coordinate const& coordinate1, Coordinate con
 }
 
 NearestEqualCells::Coordinate NearestEqualCells::getFirstCoordinateUsingBfs(Value const value) const {
-    Coordinates coordinates(getCoordinatesWithThisValue(value));
+    Coordinates const coordinates(getCoordinatesWithThisValue(value));
     Bfs bfs(m_coordinateGraph, coordinates);
     return getCoordinateUsingBfs(
         value, Coordinate{m_valueMatrix.getNumberOfColumns(), m_valueMatrix.getNumberOfRows()}, bfs);

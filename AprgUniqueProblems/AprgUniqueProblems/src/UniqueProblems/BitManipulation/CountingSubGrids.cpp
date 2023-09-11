@@ -26,8 +26,8 @@ int CountingSubGrids::countSubGridsWithAllBlackCorners() const {
 
 void CountingSubGrids::initialize(BitGrid const& bitGrid) {
     if (bitGrid.getNumberOfRows() <= bitGrid.getNumberOfColumns()) {
-        int newColumns((bitGrid.getNumberOfColumns() + NUMBER_OF_BITS - 1) / NUMBER_OF_BITS);
-        int newRows(bitGrid.getNumberOfRows());
+        int const newColumns((bitGrid.getNumberOfColumns() + NUMBER_OF_BITS - 1) / NUMBER_OF_BITS);
+        int const newRows(bitGrid.getNumberOfRows());
         m_bitValueGrid.clearAndResize(newColumns, newRows);
         bitset<NUMBER_OF_BITS> bitsetValue;
         for (int y = 0; y < static_cast<int>(bitGrid.getNumberOfRows()); ++y) {
@@ -35,7 +35,7 @@ void CountingSubGrids::initialize(BitGrid const& bitGrid) {
                 if (x % NUMBER_OF_BITS == 0) {
                     bitsetValue.reset();
                 }
-                int bitPosition = NUMBER_OF_BITS - 1 - x % NUMBER_OF_BITS;
+                int const bitPosition = NUMBER_OF_BITS - 1 - x % NUMBER_OF_BITS;
                 bitsetValue[bitPosition] = bitGrid.getEntry(x, y);
                 if (bitPosition == NUMBER_OF_BITS - 1 || x == static_cast<int>(bitGrid.getNumberOfColumns()) - 1) {
                     m_bitValueGrid.setEntry(x / NUMBER_OF_BITS, y, static_cast<BitValue>(bitsetValue.to_ullong()));
@@ -43,13 +43,13 @@ void CountingSubGrids::initialize(BitGrid const& bitGrid) {
             }
         }
     } else {
-        int newColumns((bitGrid.getNumberOfRows() + NUMBER_OF_BITS - 1) / NUMBER_OF_BITS);
-        int newRows(bitGrid.getNumberOfColumns());
+        int const newColumns((bitGrid.getNumberOfRows() + NUMBER_OF_BITS - 1) / NUMBER_OF_BITS);
+        int const newRows(bitGrid.getNumberOfColumns());
         m_bitValueGrid.clearAndResize(newColumns, newRows);
         bitset<NUMBER_OF_BITS> bitsetValue;
         for (int y = 0; y < static_cast<int>(bitGrid.getNumberOfColumns()); ++y) {
             for (int x = 0; x < static_cast<int>(bitGrid.getNumberOfRows()); ++x) {
-                int bitPosition = x % NUMBER_OF_BITS;
+                int const bitPosition = x % NUMBER_OF_BITS;
                 if (bitPosition == 0) {
                     bitsetValue.reset();
                 }

@@ -19,7 +19,7 @@ public:
     DataSample() { std::fill(m_data.begin(), m_data.end(), 0); }
 
     DataSample(std::initializer_list<double> const& dataSampleValues) {
-        int limit = std::min(DIMENSIONS, static_cast<int>(dataSampleValues.size()));
+        int const limit = std::min(DIMENSIONS, static_cast<int>(dataSampleValues.size()));
         std::copy(dataSampleValues.begin(), dataSampleValues.begin() + limit, m_data.begin());
     }
 

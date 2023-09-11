@@ -41,7 +41,7 @@ bool ConsoleReporter::ReportContext(const Context& context) {
   PrintBasicContext(&GetErrorStream(), context);
 
 #ifdef BENCHMARK_OS_WINDOWS
-  if ((output_options_ & OO_Color) && &std::cout != &GetOutputStream()) {
+  if (((output_options_ & OO_Color) != 0) && &std::cout != &GetOutputStream()) {
     GetErrorStream()
         << "Color printing is only supported for stdout on windows."
            " Disabling color printing\n";
@@ -64,7 +64,7 @@ void ConsoleReporter::PrintHeader(const Run& run) {
       str += " UserCounters...";
     }
   }
-  std::string line = std::string(str.length(), '-');
+  std::string const line = std::string(str.length(), '-');
   GetOutputStream() << line << "\n" << str << "\n" << line << "\n";
 }
 
@@ -91,7 +91,7 @@ void ConsoleReporter::ReportRuns(const std::vector<Run>& reports) {
 
 static void IgnoreColorPrint(std::ostream& out, LogColor, const char* fmt,
                              ...) {
-  va_list args;
+  va_list args = nullptr;
   va_start(args, fmt);
   out << FormatString(fmt, args);
   va_end(args);
@@ -136,7 +136,7 @@ void ConsoleReporter::PrintRunData(const Run& result) {
 
 
   if (result.report_big_o) {
-    std::string big_o = GetBigOString(result.complexity);
+    std::string const big_o = GetBigOString(result.complexity);
     printer(Out, COLOR_YELLOW, "%10.2f %-4s %10.2f %-4s ", real_time, big_o.c_str(),
             cpu_time, big_o.c_str());
   } else if (result.report_rms) {

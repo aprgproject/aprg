@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(AddTwoNumbersWithoutUsingArithmeticOperatorsTest, GetSumWorksOnExample1) {
-    AddTwoNumbersWithoutUsingArithmeticOperators solution;
+    AddTwoNumbersWithoutUsingArithmeticOperators const solution;
 
     EXPECT_EQ(0U, solution.getSum(0U, 0U));
     EXPECT_EQ(1U, solution.getSum(0U, 1U));

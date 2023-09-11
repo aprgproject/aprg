@@ -13,10 +13,10 @@ TEST(DataStatisticsUtilitiesTest, SumAreCorrect) {
     using LocalSamples = LocalStatisticsUtilities::Samples;
     using LocalSample = LocalStatisticsUtilities::Sample;
 
-    LocalSamples samples1;
-    LocalSamples samples2{LocalSample{1, 10, 100}, LocalSample{2, 20, 200}, LocalSample{3, 30, 300}};
-    LocalSample expectedSum1{0, 0, 0};
-    LocalSample expectedSum2{6, 60, 600};
+    LocalSamples const samples1;
+    LocalSamples const samples2{LocalSample{1, 10, 100}, LocalSample{2, 20, 200}, LocalSample{3, 30, 300}};
+    LocalSample const expectedSum1{0, 0, 0};
+    LocalSample const expectedSum2{6, 60, 600};
 
     EXPECT_EQ(expectedSum1, LocalStatisticsUtilities::calculateSum(samples1));
     EXPECT_EQ(expectedSum2, LocalStatisticsUtilities::calculateSum(samples2));

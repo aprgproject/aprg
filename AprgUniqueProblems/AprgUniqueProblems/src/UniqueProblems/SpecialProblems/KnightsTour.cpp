@@ -89,8 +89,8 @@ void KnightsTour::initializeGraph() {
 }
 
 void KnightsTour::connectAllAt(int const x, int const y) {
-    int sourceNeighbors = getNumberOfNeighbors(x, y);
-    int sourceIndex = getChessBoardIndex(x, y);
+    int const sourceNeighbors = getNumberOfNeighbors(x, y);
+    int const sourceIndex = getChessBoardIndex(x, y);
     connectIfNeeded(sourceNeighbors, sourceIndex, x - 2, y - 1);
     connectIfNeeded(sourceNeighbors, sourceIndex, x - 2, y + 1);
     connectIfNeeded(sourceNeighbors, sourceIndex, x - 1, y - 2);
@@ -108,8 +108,8 @@ void KnightsTour::connectIfNeeded(int const sourceNeighbors, int const sourceInd
     // -> The idea is to always move the knight so that it ends up in a square where the number of possible moves is as
     // small as possible.
     if (isInside(x, y)) {
-        int destinationNeighbors = getNumberOfNeighbors(x, y);
-        int destinationIndex = getChessBoardIndex(x, y);
+        int const destinationNeighbors = getNumberOfNeighbors(x, y);
+        int const destinationIndex = getChessBoardIndex(x, y);
         m_graph.connect({sourceNeighbors, sourceIndex}, {destinationNeighbors, destinationIndex});
     }
 }

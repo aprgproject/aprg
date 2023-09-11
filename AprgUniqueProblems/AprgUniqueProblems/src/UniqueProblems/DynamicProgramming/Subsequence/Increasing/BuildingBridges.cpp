@@ -44,7 +44,7 @@ BuildingBridges::Bridges BuildingBridges::getPossibleBridges() const {
                 lengthMinus1ToEndIndex[longestLength] = i;
                 lengthMinus1ToEndValue[longestLength++] = value;  // extend
             } else {
-                Index currentLength = distance(lengthMinus1ToEndValue.begin(), lowerBoundItForEndValue);
+                Index const currentLength = distance(lengthMinus1ToEndValue.begin(), lowerBoundItForEndValue);
                 if (currentLength > 0) {
                     indexToPreviousIndex[i] = lengthMinus1ToEndIndex[currentLength - 1];
                 }
@@ -77,7 +77,7 @@ BuildingBridges::Index BuildingBridges::getNumberOfPossibleBridges() const {
         return bridge.second;
     });
 
-    LongestIncreasingSubsequenceLinearithmic lis(secondPoints);
+    LongestIncreasingSubsequenceLinearithmic const lis(secondPoints);
     return lis.getLongestLength();
 }
 

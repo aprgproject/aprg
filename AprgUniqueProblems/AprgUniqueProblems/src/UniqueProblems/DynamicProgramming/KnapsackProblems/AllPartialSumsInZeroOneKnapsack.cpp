@@ -11,7 +11,7 @@ namespace alba {
 AllPartialSumsInZeroOneKnapsack::AllPartialSumsInZeroOneKnapsack(Values const& values) : m_inputValues(values) {}
 
 AllPartialSumsInZeroOneKnapsack::Values AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSums() const {
-    Value sum(accumulate(m_inputValues.cbegin(), m_inputValues.cend(), 0));
+    Value const sum(accumulate(m_inputValues.cbegin(), m_inputValues.cend(), 0));
     Booleans isPartialSumPossible(sum + 1, false);  // zero index is for zero value, sum index is for the sum
     isPartialSumPossible[0] = true;
     for (Value const& inputValue : m_inputValues) {
@@ -27,14 +27,14 @@ AllPartialSumsInZeroOneKnapsack::Values AllPartialSumsInZeroOneKnapsack::getAllP
 
 AllPartialSumsInZeroOneKnapsack::Values
 AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSumsBySettingFutureValues() const {
-    Value sum(accumulate(m_inputValues.cbegin(), m_inputValues.cend(), 0));
+    Value const sum(accumulate(m_inputValues.cbegin(), m_inputValues.cend(), 0));
     Booleans isPartialSumPossible(sum + 1, false);  // zero index is for zero value, sum index is for the sum
     isPartialSumPossible[0] = true;
     // reverse traversal so that the changed values wont be changed again in one iteration
     for (Value const& inputValue : m_inputValues) {
         for (int partialSum = sum; partialSum >= 0; --partialSum) {
             if (isPartialSumPossible[partialSum]) {
-                Value possibleNextValue = static_cast<Value>(partialSum) + inputValue;
+                Value const possibleNextValue = static_cast<Value>(partialSum) + inputValue;
                 if (possibleNextValue <= sum) {
                     isPartialSumPossible[possibleNextValue] = true;
                 }
@@ -66,7 +66,7 @@ AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSumsWithSquareRootAlgorith
         inputValueToCount[inputValue]++;
     }
 
-    Value sum(accumulate(m_inputValues.cbegin(), m_inputValues.cend(), 0));
+    Value const sum(accumulate(m_inputValues.cbegin(), m_inputValues.cend(), 0));
     Booleans isPartialSumPossible(sum + 1, false);  // zero index is for zero value, sum index is for the sum
     isPartialSumPossible[0] = true;
 

@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(LongestPalindromicSubsequenceTest, GetLongestLengthWorksOnExample1) {
-    LongestPalindromicSubsequence queryForTest("GEEKSFORGEEKS");
+    LongestPalindromicSubsequence const queryForTest("GEEKSFORGEEKS");
 
     EXPECT_EQ(5, queryForTest.getLongestLengthUsingNaiveRecursion());
     EXPECT_EQ(5, queryForTest.getLongestLengthUsingMemoizationDP());
@@ -16,7 +16,7 @@ TEST(LongestPalindromicSubsequenceTest, GetLongestLengthWorksOnExample1) {
 }
 
 TEST(LongestPalindromicSubsequenceTest, GetLongestLengthWorksOnExample2) {
-    LongestPalindromicSubsequence queryForTest("BBABCBCAB");
+    LongestPalindromicSubsequence const queryForTest("BBABCBCAB");
 
     EXPECT_EQ(7, queryForTest.getLongestLengthUsingNaiveRecursion());
     EXPECT_EQ(7, queryForTest.getLongestLengthUsingMemoizationDP());

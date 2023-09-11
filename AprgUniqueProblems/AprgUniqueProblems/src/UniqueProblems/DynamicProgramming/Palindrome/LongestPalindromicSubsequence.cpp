@@ -29,7 +29,7 @@ LongestPalindromicSubsequence::Count LongestPalindromicSubsequence::getLongestLe
     // Auxiliary Space: O(n^2)
     Count result(0);
     if (!m_string.empty()) {
-        Index stringLength = m_string.length();
+        Index const stringLength = m_string.length();
         CountMatrix lengthMatrix(stringLength, stringLength, 0);
 
         for (Index index2 = 0; index2 < stringLength; ++index2) {
@@ -60,7 +60,7 @@ LongestPalindromicSubsequence::Count LongestPalindromicSubsequence::getLongestLe
     // Since accessing the previous partial values requires only one column or one row above,
     // we only really need 2 rows (not a matrix) to keep track partial values.
     // current and previous are the rows in the dynamic programming solution
-    Index stringLength = m_string.length();
+    Index const stringLength = m_string.length();
     vector<Counts> previousAndCurrentCounts(2, Counts(stringLength, 0));  // set first row to zero
     for (Index index2 = 0; index2 < stringLength; ++index2) {
         Counts& previousCounts(previousAndCurrentCounts[index2 % 2]);

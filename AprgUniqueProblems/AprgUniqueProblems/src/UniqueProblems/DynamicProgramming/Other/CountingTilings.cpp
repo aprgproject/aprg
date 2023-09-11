@@ -19,7 +19,7 @@ CountingTilings::Count CountingTilings::getNumberOfSolutionsUsingDynamicProgramm
 
     m_numberOfSolutions = 0;
 
-    Row currentRow(getEmptyRow(m_numberOfColumns));
+    Row const currentRow(getEmptyRow(m_numberOfColumns));
     searchNextRow(0, currentRow);
 
     return m_numberOfSolutions;
@@ -49,7 +49,7 @@ CountingTilings::Rows CountingTilings::calculateNextRows(Row const& currentRow) 
     while (!possibleNextDetails.empty()) {
         NextDetail const& nextDetail(possibleNextDetails.top());
         Row nextRow(nextDetail.nextRow);
-        Count nextIndex(nextDetail.nextIndex);
+        Count const nextIndex(nextDetail.nextIndex);
         possibleNextDetails.pop();
         if (nextIndex >= static_cast<Count>(currentRow.length())) {
             result.emplace_back(nextRow);
@@ -72,7 +72,7 @@ void CountingTilings::searchNextRow(Count const rowIndex, Row const& currentRow)
             searchNextRow(rowIndex + 1, nextRow);
         }
     } else if (rowIndex == m_numberOfRows - 1) {
-        Row emptyRow(getEmptyRow(currentRow.length()));
+        Row const emptyRow(getEmptyRow(currentRow.length()));
         for (Row const& nextRow : getNextRows(currentRow)) {
             if (emptyRow == nextRow) {
                 ++m_numberOfSolutions;

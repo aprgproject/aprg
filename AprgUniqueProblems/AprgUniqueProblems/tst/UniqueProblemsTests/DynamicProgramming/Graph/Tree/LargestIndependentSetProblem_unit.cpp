@@ -19,7 +19,7 @@ TEST(LargestIndependentSetProblemTest, GetMaximumCountWorksOnExample1) {
     graph.connect(30, 60);
     graph.connect(50, 70);
     graph.connect(50, 80);
-    LargestIndependentSetProblem queryForTest(graph, 10);
+    LargestIndependentSetProblem const queryForTest(graph, 10);
 
     EXPECT_EQ(5, queryForTest.getMaximumCountUsingNaiveRecursion());
     EXPECT_EQ(5, queryForTest.getMaximumCountUsingMemoizationDP());
@@ -35,7 +35,7 @@ TEST(LargestIndependentSetProblemTest, GetMaximumCountWorksOnExample2) {
     graph.connect(4, 3);
     graph.connect(4, 7);
     graph.connect(7, 8);
-    LargestIndependentSetProblem queryForTest(graph, 1);
+    LargestIndependentSetProblem const queryForTest(graph, 1);
 
     EXPECT_EQ(4, queryForTest.getMaximumCountUsingNaiveRecursion());
     EXPECT_EQ(4, queryForTest.getMaximumCountUsingMemoizationDP());

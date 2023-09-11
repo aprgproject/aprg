@@ -22,8 +22,8 @@ JobWithProfitAndDeadlines::JobNames JobWithProfitAndDeadlines::getJobsOrderWithM
 
     PreviousFreeIndex availableSchedule(getMaximumDeadline() + 1);  // plus one because deadline should indexable
     for (Job const& job : jobToSchedule) {
-        int availableTime = availableSchedule.getPreviousFreeIndexAt(job.deadline);
-        bool isAvailableTime =
+        int const availableTime = availableSchedule.getPreviousFreeIndexAt(job.deadline);
+        bool const isAvailableTime =
             availableSchedule.getPreviousFreeIndexAt(0) != availableSchedule.getPreviousFreeIndexAt(job.deadline);
         if (isAvailableTime) {
             availableSchedule.setAsNotFree(availableTime);

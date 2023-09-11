@@ -12,7 +12,7 @@ using QueryForTest = FindTheMissingNumber<ValuesForTest>;
 }  // namespace
 
 TEST(FindTheMissingNumberTest, GetTheMissingNumberWorksOnEmpty) {
-    ValuesForTest valuesForTest;
+    ValuesForTest const valuesForTest;
     QueryForTest query;
 
     EXPECT_EQ(1, query.getTheMissingNumberUsingSum(valuesForTest));
@@ -20,7 +20,7 @@ TEST(FindTheMissingNumberTest, GetTheMissingNumberWorksOnEmpty) {
 }
 
 TEST(FindTheMissingNumberTest, GetTheMissingNumberWorksOnOneValue) {
-    ValuesForTest valuesForTest{2};
+    ValuesForTest const valuesForTest{2};
     QueryForTest query;
 
     EXPECT_EQ(1, query.getTheMissingNumberUsingSum(valuesForTest));
@@ -28,7 +28,7 @@ TEST(FindTheMissingNumberTest, GetTheMissingNumberWorksOnOneValue) {
 }
 
 TEST(FindTheMissingNumberTest, GetTheMissingNumberWorksOnExample1) {
-    ValuesForTest valuesForTest{1, 2, 3, 5};
+    ValuesForTest const valuesForTest{1, 2, 3, 5};
     QueryForTest query;
 
     EXPECT_EQ(4, query.getTheMissingNumberUsingSum(valuesForTest));
@@ -36,7 +36,7 @@ TEST(FindTheMissingNumberTest, GetTheMissingNumberWorksOnExample1) {
 }
 
 TEST(FindTheMissingNumberTest, GetTheMissingNumberWorksOnExample2) {
-    ValuesForTest valuesForTest{1, 2, 4, 6, 3, 7, 8};
+    ValuesForTest const valuesForTest{1, 2, 4, 6, 3, 7, 8};
     QueryForTest query;
 
     EXPECT_EQ(5, query.getTheMissingNumberUsingSum(valuesForTest));

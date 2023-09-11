@@ -67,7 +67,7 @@ LargestIndependentSetProblem::Count LargestIndependentSetProblem::getMaximumCoun
                 countIfVertexIsIncluded += getMaximumCountUsingMemoizationDP(vertexToCountMap, grandChild);
             }
         }
-        Count result = max(countIfVertexIsIncluded, countIfVertexIsNotIncluded);
+        Count const result = max(countIfVertexIsIncluded, countIfVertexIsNotIncluded);
         vertexToCountMap.emplace(vertex, result);
         return result;
     }
@@ -81,12 +81,12 @@ LargestIndependentSetProblem::SetOfVertices LargestIndependentSetProblem::getMax
         SetOfVertices setIfVertexIsIncluded{vertex};
         SetOfVertices setIfVertexIsNotIncluded;
         for (Vertex const child : m_childrenInTree.getChildren(vertex)) {
-            SetOfVertices childSet(getMaximumSetUsingMemoizationDP(vertexToMaximumSetMap, child));
+            SetOfVertices const childSet(getMaximumSetUsingMemoizationDP(vertexToMaximumSetMap, child));
             copy(
                 childSet.cbegin(), childSet.cend(),
                 inserter(setIfVertexIsNotIncluded, setIfVertexIsNotIncluded.begin()));
             for (Vertex const grandChild : m_childrenInTree.getChildren(child)) {
-                SetOfVertices grandChildSet(getMaximumSetUsingMemoizationDP(vertexToMaximumSetMap, grandChild));
+                SetOfVertices const grandChildSet(getMaximumSetUsingMemoizationDP(vertexToMaximumSetMap, grandChild));
                 copy(
                     grandChildSet.cbegin(), grandChildSet.cend(),
                     inserter(setIfVertexIsIncluded, setIfVertexIsIncluded.begin()));

@@ -21,8 +21,8 @@ public:
         auto result(getInvalidIndex<Index>());
         if (!sortedValues.empty()) {
             // reversed
-            Index higherIndex = getNearestFloorIndex(sortedValues, valueToCheck);
-            Index lowerIndex = getNearestCielIndex(sortedValues, valueToCheck);
+            Index const higherIndex = getNearestFloorIndex(sortedValues, valueToCheck);
+            Index const lowerIndex = getNearestCielIndex(sortedValues, valueToCheck);
             if (sortedValues[higherIndex] == valueToCheck && valueToCheck == sortedValues[lowerIndex]) {
                 result = higherIndex + 1 - lowerIndex;
             }
@@ -52,7 +52,7 @@ public:
                     result = lowerIndex;
                     break;
                 }
-                Index middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
+                Index const middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
                 if (sortedValues[middleIndex] < sortedValues[higherIndex]) {
                     higherIndex = middleIndex;
                 } else {
@@ -95,8 +95,8 @@ private:
         Index lowerIndex(0);
         Index higherIndex(sortedValues.size() - 1);
         while (lowerIndex + 1 < higherIndex) {
-            Index middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
-            Value middleValue(sortedValues[middleIndex]);
+            Index const middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
+            Value const middleValue(sortedValues[middleIndex]);
             if (middleValue <= value) {
                 lowerIndex = middleIndex;
             } else {
@@ -111,8 +111,8 @@ private:
         Index lowerIndex(0);
         Index higherIndex(sortedValues.size() - 1);
         while (lowerIndex + 1 < higherIndex) {
-            Index middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
-            Value middleValue(sortedValues[middleIndex]);
+            Index const middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
+            Value const middleValue(sortedValues[middleIndex]);
             if (value <= middleValue) {
                 higherIndex = middleIndex;
             } else {

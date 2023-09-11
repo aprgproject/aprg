@@ -205,7 +205,7 @@ bool GetSysctl(std::string const& Name, std::array<Tp, N>* Out) {
 template <class ArgT>
 bool ReadFromFile(std::string const& fname, ArgT* arg) {
   *arg = ArgT();
-  std::ifstream f(fname.c_str());
+  std::ifstream const f(fname.c_str());
   if (!f.is_open()) { return false;
 }
   f >> *arg;
@@ -239,7 +239,7 @@ int CountSetBitsInCPUMap(std::string Val) {
   auto CountBits = [](std::string Part) {
     using CPUMask = std::bitset<sizeof(std::uintptr_t) * CHAR_BIT>;
     Part = "0x" + Part;
-    CPUMask Mask(benchmark::stoul(Part, nullptr, 16));
+    CPUMask const Mask(benchmark::stoul(Part, nullptr, 16));
     return static_cast<int>(Mask.count());
   };
   size_t Pos = 0;
@@ -257,11 +257,11 @@ int CountSetBitsInCPUMap(std::string Val) {
 BENCHMARK_MAYBE_UNUSED
 std::vector<CPUInfo::CacheInfo> GetCacheSizesFromKVFS() {
   std::vector<CPUInfo::CacheInfo> res;
-  std::string dir = "/sys/devices/system/cpu/cpu0/cache/";
+  std::string const dir = "/sys/devices/system/cpu/cpu0/cache/";
   int Idx = 0;
   while (true) {
     CPUInfo::CacheInfo info;
-    std::string FPath = StrCat(dir, "index", Idx++, "/");
+    std::string const FPath = StrCat(dir, "index", Idx++, "/");
     std::ifstream f(StrCat(FPath, "size").c_str());
     if (!f.is_open()) { break;
 }
@@ -334,20 +334,23 @@ std::vector<CPUInfo::CacheInfo> GetCacheSizesWindows() {
 
   using UPtr = std::unique_ptr<PInfo, decltype(&std::free)>;
   GetLogicalProcessorInformation(nullptr, &buffer_size);
-  UPtr buff((PInfo*)malloc(buffer_size), &std::free);
-  if (!GetLogicalProcessorInformation(buff.get(), &buffer_size))
+  UPtr const buff(static_cast<PInfo*>(malloc(buffer_size)), &std::free);
+  if (GetLogicalProcessorInformation(buff.get(), &buffer_size) == 0) {
     PrintErrorAndDie("Failed during call to GetLogicalProcessorInformation: ",
                      GetLastError());
+}
 
   PInfo* it = buff.get();
   PInfo* end = buff.get() + (buffer_size / sizeof(PInfo));
 
   for (; it != end; ++it) {
-    if (it->Relationship != RelationCache) continue;
+    if (it->Relationship != RelationCache) { continue;
+}
     using BitSet = std::bitset<sizeof(ULONG_PTR) * CHAR_BIT>;
-    BitSet B(it->ProcessorMask);
+    BitSet const B(it->ProcessorMask);
     // To prevent duplicates, only consider caches where CPU 0 is specified
-    if (!B.test(0)) continue;
+    if (!B.test(0)) { continue;
+}
     CInfo* Cache = &it->Cache;
     CPUInfo::CacheInfo C;
     C.num_sharing = static_cast<int>(B.count());
@@ -430,8 +433,9 @@ std::string GetSystemName() {
   const unsigned COUNT = MAX_COMPUTERNAME_LENGTH+1;
   TCHAR  hostname[COUNT] = {'\0'};
   DWORD DWCOUNT = COUNT;
-  if (!GetComputerName(hostname, &DWCOUNT))
+  if (!GetComputerName(hostname, &DWCOUNT)) {
     return std::string("");
+}
 #ifndef UNICODE
   str = std::string(hostname, DWCOUNT);
 #else
@@ -654,14 +658,16 @@ double GetCPUCyclesPerSecond(CPUInfo::Scaling scaling) {
 #elif defined BENCHMARK_OS_WINDOWS
   // In NT, read MHz from the registry. If we fail to do so or we're in win9x
   // then make a crude estimate.
-  DWORD data, data_size = sizeof(data);
+  DWORD data;
+  DWORD data_size = sizeof(data);
   if (IsWindowsXPOrGreater() &&
       SUCCEEDED(
           SHGetValueA(HKEY_LOCAL_MACHINE,
                       "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0",
-                      "~MHz", nullptr, &data, &data_size)))
-    return static_cast<double>((int64_t)data *
-                               (int64_t)(1000 * 1000));  // was mhz
+                      "~MHz", nullptr, &data, &data_size))) {
+    return static_cast<double>(static_cast<int64_t>(data) *
+                               static_cast<int64_t>(1000 * 1000));  // was mhz
+}
 #elif defined (BENCHMARK_OS_SOLARIS)
   kstat_ctl_t *kc = kstat_open();
   if (!kc) {

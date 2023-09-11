@@ -13,8 +13,8 @@ constexpr Value UV = FindTheMinimumCostToReachDestinationUsingATrain::UNUSED_VAL
 }  // namespace
 
 TEST(FindTheMinimumCostToReachDestinationUsingATrainTest, GetMinimumPriceWorksOnEmpty) {
-    ValueMatrix valueMatrix(0, 0);
-    FindTheMinimumCostToReachDestinationUsingATrain queryForTest(valueMatrix);
+    ValueMatrix const valueMatrix(0, 0);
+    FindTheMinimumCostToReachDestinationUsingATrain const queryForTest(valueMatrix);
 
     EXPECT_EQ(0, queryForTest.getMinimumCostUsingNaiveRecursion());
     EXPECT_EQ(0, queryForTest.getMinimumCostUsingMemoizationDP());
@@ -22,8 +22,8 @@ TEST(FindTheMinimumCostToReachDestinationUsingATrainTest, GetMinimumPriceWorksOn
 }
 
 TEST(FindTheMinimumCostToReachDestinationUsingATrainTest, GetMinimumPriceWorksOnExample1) {
-    ValueMatrix valueMatrix(4, 4, {0, UV, UV, UV, 15, 0, UV, UV, 80, 40, 0, UV, 90, 50, 70, 0});
-    FindTheMinimumCostToReachDestinationUsingATrain queryForTest(valueMatrix);
+    ValueMatrix const valueMatrix(4, 4, {0, UV, UV, UV, 15, 0, UV, UV, 80, 40, 0, UV, 90, 50, 70, 0});
+    FindTheMinimumCostToReachDestinationUsingATrain const queryForTest(valueMatrix);
 
     EXPECT_EQ(65, queryForTest.getMinimumCostUsingNaiveRecursion());
     EXPECT_EQ(65, queryForTest.getMinimumCostUsingMemoizationDP());

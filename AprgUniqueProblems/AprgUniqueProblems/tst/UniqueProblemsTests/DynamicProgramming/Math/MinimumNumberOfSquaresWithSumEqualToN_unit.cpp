@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(MinimumNumberOfSquaresWithSumEqualToNTest, GetCountWorksOnZero) {
-    MinimumNumberOfSquaresWithSumEqualToN queryForTest(0);
+    MinimumNumberOfSquaresWithSumEqualToN const queryForTest(0);
 
     EXPECT_EQ(0, queryForTest.getMinimumCountUsingNaiveRecursion());
     EXPECT_EQ(0, queryForTest.getMinimumCountUsingMemoizationDP());
@@ -18,7 +18,7 @@ TEST(MinimumNumberOfSquaresWithSumEqualToNTest, GetCountWorksOnZero) {
 }
 
 TEST(MinimumNumberOfSquaresWithSumEqualToNTest, GetCountWorksOnOne) {
-    MinimumNumberOfSquaresWithSumEqualToN queryForTest(1);
+    MinimumNumberOfSquaresWithSumEqualToN const queryForTest(1);
 
     EXPECT_EQ(1, queryForTest.getMinimumCountUsingNaiveRecursion());
     EXPECT_EQ(1, queryForTest.getMinimumCountUsingMemoizationDP());
@@ -28,7 +28,7 @@ TEST(MinimumNumberOfSquaresWithSumEqualToNTest, GetCountWorksOnOne) {
 }
 
 TEST(MinimumNumberOfSquaresWithSumEqualToNTest, GetCountWorksOnAnExactSquare) {
-    MinimumNumberOfSquaresWithSumEqualToN queryForTest(100);
+    MinimumNumberOfSquaresWithSumEqualToN const queryForTest(100);
 
     EXPECT_EQ(1, queryForTest.getMinimumCountUsingNaiveRecursion());
     EXPECT_EQ(1, queryForTest.getMinimumCountUsingMemoizationDP());
@@ -38,7 +38,7 @@ TEST(MinimumNumberOfSquaresWithSumEqualToNTest, GetCountWorksOnAnExactSquare) {
 }
 
 TEST(MinimumNumberOfSquaresWithSumEqualToNTest, GetCountWorksOnExample1) {
-    MinimumNumberOfSquaresWithSumEqualToN queryForTest(6);
+    MinimumNumberOfSquaresWithSumEqualToN const queryForTest(6);
 
     EXPECT_EQ(3, queryForTest.getMinimumCountUsingNaiveRecursion());
     EXPECT_EQ(3, queryForTest.getMinimumCountUsingMemoizationDP());
@@ -48,7 +48,7 @@ TEST(MinimumNumberOfSquaresWithSumEqualToNTest, GetCountWorksOnExample1) {
 }
 
 TEST(MinimumNumberOfSquaresWithSumEqualToNTest, GetCountWorksOnExample2) {
-    MinimumNumberOfSquaresWithSumEqualToN queryForTest(47);
+    MinimumNumberOfSquaresWithSumEqualToN const queryForTest(47);
 
     EXPECT_EQ(4, queryForTest.getMinimumCountUsingNaiveRecursion());
     EXPECT_EQ(4, queryForTest.getMinimumCountUsingMemoizationDP());

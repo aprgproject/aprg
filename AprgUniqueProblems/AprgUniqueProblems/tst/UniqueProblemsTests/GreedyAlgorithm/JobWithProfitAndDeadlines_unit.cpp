@@ -13,9 +13,9 @@ TEST(JobWithProfitAndDeadlinesTest, GetJobsAsPossibleWorksOnExample1) {
     taskAndDeadlines.addJob("C", 40, 1);
     taskAndDeadlines.addJob("D", 30, 1);
 
-    JobWithProfitAndDeadlines::JobNames actualNames(taskAndDeadlines.getJobsOrderWithMaximumProfit());
+    JobWithProfitAndDeadlines::JobNames const actualNames(taskAndDeadlines.getJobsOrderWithMaximumProfit());
 
-    JobWithProfitAndDeadlines::JobNames expectedNames{"C", "A"};
+    JobWithProfitAndDeadlines::JobNames const expectedNames{"C", "A"};
     EXPECT_EQ(expectedNames, actualNames);
 }
 
@@ -27,9 +27,9 @@ TEST(JobWithProfitAndDeadlinesTest, GetJobsAsPossibleWorksOnExample2) {
     taskAndDeadlines.addJob("D", 25, 1);
     taskAndDeadlines.addJob("E", 15, 3);
 
-    JobWithProfitAndDeadlines::JobNames actualNames(taskAndDeadlines.getJobsOrderWithMaximumProfit());
+    JobWithProfitAndDeadlines::JobNames const actualNames(taskAndDeadlines.getJobsOrderWithMaximumProfit());
 
-    JobWithProfitAndDeadlines::JobNames expectedNames{"A", "C", "E"};
+    JobWithProfitAndDeadlines::JobNames const expectedNames{"A", "C", "E"};
     EXPECT_EQ(expectedNames, actualNames);
 }
 

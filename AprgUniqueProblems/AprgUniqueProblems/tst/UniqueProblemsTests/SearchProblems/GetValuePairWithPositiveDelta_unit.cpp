@@ -13,26 +13,26 @@ using ValuePairForTest = QueryForTest::ValuePair;
 }  // namespace
 
 TEST(GetValuePairWithPositiveDeltaTest, GetNumberOfOnesInASortedBinaryContainerWorksOnEmpty) {
-    ValuesForTest sortedValues;
-    QueryForTest query(sortedValues);
+    ValuesForTest const sortedValues;
+    QueryForTest const query(sortedValues);
 
-    ValuePairForTest pairToExpect{};
+    ValuePairForTest const pairToExpect{};
     EXPECT_EQ(pairToExpect, query.getValuePairWithPositiveDelta(8));
 }
 
 TEST(GetValuePairWithPositiveDeltaTest, GetNumberOfOnesInASortedBinaryContainerWorksOnOneValue) {
-    ValuesForTest sortedValues{5};
-    QueryForTest query(sortedValues);
+    ValuesForTest const sortedValues{5};
+    QueryForTest const query(sortedValues);
 
-    ValuePairForTest pairToExpect{};
+    ValuePairForTest const pairToExpect{};
     EXPECT_EQ(pairToExpect, query.getValuePairWithPositiveDelta(8));
 }
 
 TEST(GetValuePairWithPositiveDeltaTest, GetPossibleDuplicatedTwoValuesWithSumWithIndexesDoesNotWorkOnExample1) {
-    ValuesForTest sortedValues{1, 4, 5, 6, 7, 9, 10};
-    QueryForTest query(sortedValues);
+    ValuesForTest const sortedValues{1, 4, 5, 6, 7, 9, 10};
+    QueryForTest const query(sortedValues);
 
-    ValuePairForTest pairToExpect{1, 9};
+    ValuePairForTest const pairToExpect{1, 9};
     EXPECT_EQ(pairToExpect, query.getValuePairWithPositiveDelta(8));
 }
 

@@ -34,8 +34,8 @@ private:
         Index const lowerIndex, Index const higherIndex, Value const& value) const {
         Index result(INVALID_INDEX);
         if (lowerIndex <= higherIndex) {
-            Index middleIndex = (lowerIndex + higherIndex) / 2;
-            Value middleValue(m_sortedValues[middleIndex]);
+            Index const middleIndex = (lowerIndex + higherIndex) / 2;
+            Value const middleValue(m_sortedValues[middleIndex]);
             if (value == middleValue) {
                 result = middleIndex;
             } else if (lowerIndex < middleIndex && value == m_sortedValues[middleIndex - 1]) {

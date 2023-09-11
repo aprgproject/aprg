@@ -36,7 +36,7 @@ EggDroppingPuzzle::Count EggDroppingPuzzle::getMinimumNumberOfTrialsUsingIterati
         for (Count floorIndexPlusOne = 2; floorIndexPlusOne <= m_numberOfFloors; ++floorIndexPlusOne) {
             Count minimumCount(MAX_COUNT);
             for (int currentFloor = 1; currentFloor <= floorIndexPlusOne; ++currentFloor) {
-                Count countForFloor =
+                Count const countForFloor =
                     max(countMatrix.getEntry(remainingEggs - 1, currentFloor - 1),
                         countMatrix.getEntry(remainingEggs, floorIndexPlusOne - currentFloor));
                 minimumCount = min(minimumCount, countForFloor);
@@ -57,7 +57,7 @@ EggDroppingPuzzle::Count EggDroppingPuzzle::getMinimumNumberOfTrialsUsingNaiveRe
     }  // Consider all droppings from 1st floor to kth floor and return the minimum of these values plus 1.
     Count minimumCount(MAX_COUNT);
     for (int currentFloor = 1; currentFloor <= floorIndexPlusOne; ++currentFloor) {
-        Count countForFloor =
+        Count const countForFloor =
             max(getMinimumNumberOfTrialsUsingNaiveRecursion(remainingEggs - 1, currentFloor - 1),
                 getMinimumNumberOfTrialsUsingNaiveRecursion(remainingEggs, floorIndexPlusOne - currentFloor));
         minimumCount = min(minimumCount, countForFloor);
@@ -74,7 +74,7 @@ EggDroppingPuzzle::Count EggDroppingPuzzle::getMinimumNumberOfTrialsUsingMemoiza
         } else {
             // result is already MAX_COUNT
             for (int currentFloor = 1; currentFloor <= floorIndexPlusOne; ++currentFloor) {
-                Count countForFloor =
+                Count const countForFloor =
                     max(getMinimumNumberOfTrialsUsingMemoizationDP(countMatrix, remainingEggs - 1, currentFloor - 1),
                         getMinimumNumberOfTrialsUsingMemoizationDP(
                             countMatrix, remainingEggs, floorIndexPlusOne - currentFloor));

@@ -42,8 +42,8 @@ CountPossibleWaysToConstructBuildings::getNumberOfWaysUsingCountOfBuildingAndSpa
         Count countOfBuildings = 1;
         Count countOfSpaces = 1;
         for (Count section = 2; section <= m_numberOfSections; ++section) {
-            Count previousCountOfBuildings = countOfBuildings;
-            Count previousCountOfSpaces = countOfSpaces;
+            Count const previousCountOfBuildings = countOfBuildings;
+            Count const previousCountOfSpaces = countOfSpaces;
 
             countOfSpaces = previousCountOfBuildings + previousCountOfSpaces;
             countOfBuildings = previousCountOfSpaces;
@@ -92,7 +92,7 @@ CountPossibleWaysToConstructBuildings::getNumberOfWaysUsingFibonacciNumber() con
     // N = 5, result = 169 [result for one side = 13]
     // ...
     // In general, we can say that: result(N) = getFibonacciNumber(N+2)^2
-    Count resultInOnSide = getNthFibonacciNumber(m_numberOfSections + 2);
+    Count const resultInOnSide = getNthFibonacciNumber(m_numberOfSections + 2);
     return resultInOnSide * resultInOnSide;
 }
 
@@ -101,7 +101,7 @@ CountPossibleWaysToConstructBuildings::Count CountPossibleWaysToConstructBuildin
     // Time Complexity: O(numberOfSections)
     // Auxiliary Space: Constant
     // Approach: Using box and balls combinations (with spaces)
-    Count maxNumberOfBuildings = (m_numberOfSections + 1) / 2;
+    Count const maxNumberOfBuildings = (m_numberOfSections + 1) / 2;
     Count resultInOnSide(0);
     for (Count numberOfBuildings = 0; numberOfBuildings <= maxNumberOfBuildings; ++numberOfBuildings) {
         resultInOnSide += getNumberOfCombinations(m_numberOfSections - numberOfBuildings + 1, numberOfBuildings);

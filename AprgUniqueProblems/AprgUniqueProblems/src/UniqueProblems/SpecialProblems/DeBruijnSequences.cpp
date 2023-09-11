@@ -17,7 +17,7 @@ string DeBruijnSequences::getDeBruijnString() const {
     if (m_substringSize == 1) {
         result = m_alphabet;
     } else {
-        HierholzerAlgorithmForDirectedGraph<string> eulerPathSearch(m_graph);
+        HierholzerAlgorithmForDirectedGraph<string> const eulerPathSearch(m_graph);
         auto eulerPath(eulerPathSearch.getEulerPath());
         if (!eulerPath.empty()) {
             result = eulerPath.front();
@@ -36,14 +36,14 @@ void DeBruijnSequences::initialize() {
 }
 
 void DeBruijnSequences::addAllSubstringsAsVertex() {
-    string substring(m_substringSize - 1, m_alphabet.front());
+    string const substring(m_substringSize - 1, m_alphabet.front());
     addSubstringAsVertex(0, substring);
 }
 
 void DeBruijnSequences::addSubstringAsVertex(int const depth, string const& substring) {
     if (depth < m_substringSize) {
         for (char const c : m_alphabet) {
-            string newSubstring = substring.substr(1, substring.length()) + c;
+            string const newSubstring = substring.substr(1, substring.length()) + c;
             addSubstringAsVertex(depth + 1, newSubstring);
             m_graph.connect(substring, newSubstring);
         }

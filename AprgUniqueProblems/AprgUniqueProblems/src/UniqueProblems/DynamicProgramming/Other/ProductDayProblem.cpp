@@ -49,10 +49,10 @@ ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingIterativeDP() co
                 day, productBits, minimumPrices.getEntry(day - 1, productBits));  // put total of previous day
             for (Product product = 0; product < getNumberOfProducts(); ++product) {
                 if (isProductIncluded(productBits, product)) {
-                    Price previousDayWithoutProduct =
+                    Price const previousDayWithoutProduct =
                         minimumPrices.getEntry(day - 1, removeProduct(productBits, product));
                     if (UNUSED_PRICE != previousDayWithoutProduct) {
-                        Price currentMinimum =
+                        Price const currentMinimum =
                             min(minimumPrices.getEntry(day, productBits),  // current value
                                 previousDayWithoutProduct +
                                     m_pricesInDayByProduct.getEntry(day, product));  // plus price of the product today
@@ -113,7 +113,7 @@ ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingMemoizationDP(
             result = getMinimumPriceUsingMemoizationDP(minimumPrices, day - 1, productBits);
             for (Product product = 0; product < getNumberOfProducts(); ++product) {
                 if (isProductIncluded(productBits, product)) {
-                    Price previousDayWithoutProduct =
+                    Price const previousDayWithoutProduct =
                         getMinimumPriceUsingMemoizationDP(minimumPrices, day - 1, removeProduct(productBits, product));
                     if (INVALID_PRICE != previousDayWithoutProduct) {
                         result = min(

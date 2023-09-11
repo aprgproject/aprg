@@ -14,7 +14,7 @@ PathSumInGridInRightOrDownWithDiagonalTraversal::Path
 PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathUsingIterativeDP() const {
     Path path;
     if (!m_inputGrid.isEmpty()) {
-        Grid partialSumGrid(getPartialSumGridUsingIterativeDP());
+        Grid const partialSumGrid(getPartialSumGridUsingIterativeDP());
         Index x = partialSumGrid.getNumberOfColumns() - 1;
         Index y = partialSumGrid.getNumberOfRows() - 1;
         path = {m_inputGrid.getEntry(x, y)};
@@ -27,7 +27,7 @@ PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathUsingIterativeDP() c
             } else if (y == 0) {
                 path.emplace_back(m_inputGrid.getEntry(--x, y));
             } else {
-                Value bestNeighbor = m_minMaxFunction(
+                Value const bestNeighbor = m_minMaxFunction(
                     m_minMaxFunction(partialSumGrid.getEntry(x - 1, y), partialSumGrid.getEntry(x, y - 1)),
                     partialSumGrid.getEntry(x - 1, y - 1));
                 if (bestNeighbor == partialSumGrid.getEntry(x - 1, y)) {
@@ -70,7 +70,7 @@ PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathSumUsingIterativeDP(
     // Time Complexity of the DP implementation is O(mn) which is much better than Naive Recursive implementation.
     Value pathSum(0);
     if (!m_inputGrid.isEmpty()) {
-        Grid partialSumGrid(getPartialSumGridUsingIterativeDP());
+        Grid const partialSumGrid(getPartialSumGridUsingIterativeDP());
         pathSum =
             partialSumGrid.getEntry(partialSumGrid.getNumberOfColumns() - 1, partialSumGrid.getNumberOfRows() - 1);
     }

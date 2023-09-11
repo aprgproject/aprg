@@ -107,7 +107,7 @@ int CoinProblem::getNumberOfFewestCoinsIterativeDP(Value const total) const {
     for (Value partialValue = 1; partialValue <= total; ++partialValue) {
         for (Value const availableCoin : m_availableCoins) {
             if (partialValue > availableCoin) {
-                int subCount = countPerValue[partialValue - availableCoin];
+                int const subCount = countPerValue[partialValue - availableCoin];
                 if (UNUSED_COUNT != subCount) {
                     countPerValue[partialValue] = min(countPerValue[partialValue], subCount + 1);
                 }
@@ -283,7 +283,8 @@ int CoinProblem::getNumberOfFewestCoinsUsingMemoizationDPInternal(
         // result is already set to max value so we can use min
         for (Value const availableCoin : m_availableCoins) {
             if (total > availableCoin) {
-                int subCount(getNumberOfFewestCoinsUsingMemoizationDPInternal(countPerValue, total - availableCoin));
+                int const subCount(
+                    getNumberOfFewestCoinsUsingMemoizationDPInternal(countPerValue, total - availableCoin));
                 if (UNUSED_COUNT != subCount) {
                     result = min(result, subCount + 1);
                 }
@@ -315,7 +316,7 @@ int CoinProblem::getNumberOfCoinCombinationsUsingMemoizationDPInternal(
     if (UNUSED_COUNT == result) {
         if (coinIndex > 0) {
             Value countWithCoin(0);
-            Value countWithoutCoin = getNumberOfCoinCombinationsUsingMemoizationDPInternal(
+            Value const countWithoutCoin = getNumberOfCoinCombinationsUsingMemoizationDPInternal(
                 countByValueByCoin, total, coinIndex - 1);  // possibilities before this coin entry
             if (total >= m_availableCoins[coinIndex]) {
                 // if coin can be subtracted to value

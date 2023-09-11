@@ -37,10 +37,10 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
         for (Index length = 3; length <= static_cast<Index>(m_dimensions.size()); ++length) {
             for (Index leftParenthesis = 0;
                  leftParenthesis + length <= static_cast<Index>(countMatrix.getNumberOfColumns()); ++leftParenthesis) {
-                Index rightParenthesis = leftParenthesis + length - 1;
+                Index const rightParenthesis = leftParenthesis + length - 1;
                 Count minimumCount(MAX_COUNT);
                 for (Index inBetween = leftParenthesis + 1; inBetween < rightParenthesis; ++inBetween) {
-                    Count currentCount =
+                    Count const currentCount =
                         countMatrix.getEntry(leftParenthesis, inBetween) +
                         countMatrix.getEntry(inBetween, rightParenthesis) +
                         m_dimensions[leftParenthesis] * m_dimensions[inBetween] * m_dimensions[rightParenthesis];
@@ -61,7 +61,7 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
         // distance should be two for at least three elements
         result = MAX_COUNT;
         for (Index inBetween = leftParenthesis + 1; inBetween < rightParenthesis; ++inBetween) {
-            Count currentCount =
+            Count const currentCount =
                 getMinimumNumberOfOperationsUsingNaiveRecursion(leftParenthesis, inBetween) +
                 getMinimumNumberOfOperationsUsingNaiveRecursion(inBetween, rightParenthesis) +
                 m_dimensions[leftParenthesis] * m_dimensions[inBetween] * m_dimensions[rightParenthesis];
@@ -79,7 +79,7 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
             // distance should be two for at least three elements
             // result is already set to MAX_COUNT so we can proceed on using min
             for (Index inBetween = leftParenthesis + 1; inBetween < rightParenthesis; ++inBetween) {
-                Count currentCount =
+                Count const currentCount =
                     getMinimumNumberOfOperationsUsingMemoizationDP(countMatrix, leftParenthesis, inBetween) +
                     getMinimumNumberOfOperationsUsingMemoizationDP(countMatrix, inBetween, rightParenthesis) +
                     m_dimensions[leftParenthesis] * m_dimensions[inBetween] * m_dimensions[rightParenthesis];

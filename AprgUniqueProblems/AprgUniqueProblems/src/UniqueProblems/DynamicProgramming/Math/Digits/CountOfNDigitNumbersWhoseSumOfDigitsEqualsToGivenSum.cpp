@@ -90,8 +90,8 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountBySearchingValuesW
     if (m_targetSumOfDigits == 0) {
         result = 1;
     } else if (m_numberOfDigits > 0) {
-        Value start = getRaiseToPowerForIntegers(10, m_numberOfDigits - 1);
-        Value end = getRaiseToPowerForIntegers(10, m_numberOfDigits);
+        Value const start = getRaiseToPowerForIntegers(10, m_numberOfDigits - 1);
+        Value const end = getRaiseToPowerForIntegers(10, m_numberOfDigits);
 
         for (Value value = start; value < end; value += (value == m_targetSumOfDigits) ? 9 : 1) {
             // once sum is found just add 9 to find the next one
@@ -115,7 +115,7 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingNaiveRecursio
     Count result(0);
     if (digitIndex > 0) {
         if (partialSum > 0) {
-            Value lastDigitValue = min(partialSum - 1, 9);
+            Value const lastDigitValue = min(partialSum - 1, 9);
             for (Value digitValue = 0; digitValue <= lastDigitValue; ++digitValue) {
                 result += getCountUsingNaiveRecursion(partialSum - digitValue, digitIndex - 1);
             }
@@ -137,7 +137,7 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingMemoizationDP
         result = 0;
         if (digitIndex > 0) {
             if (partialSum > 0) {
-                Value lastDigitValue = min(partialSum - 1, 9);
+                Value const lastDigitValue = min(partialSum - 1, 9);
                 for (Value digitValue = 0; digitValue <= lastDigitValue; ++digitValue) {
                     result += getCountUsingMemoizationDP(countMatrix, partialSum - digitValue, digitIndex - 1);
                 }

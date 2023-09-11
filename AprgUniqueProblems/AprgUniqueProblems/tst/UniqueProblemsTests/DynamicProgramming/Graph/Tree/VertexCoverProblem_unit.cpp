@@ -19,7 +19,7 @@ TEST(VertexCoverProblemTest, GetMinimumCountWorksOnExample1) {
     graph.connect(30, 60);
     graph.connect(50, 70);
     graph.connect(50, 80);
-    VertexCoverProblem queryForTest(graph, 10);
+    VertexCoverProblem const queryForTest(graph, 10);
 
     EXPECT_EQ(3, queryForTest.getMinimumCountUsingNaiveRecursion());
     EXPECT_EQ(3, queryForTest.getMinimumCountUsingMemoizationDP());
@@ -35,7 +35,7 @@ TEST(VertexCoverProblemTest, GetMinimumCountWorksOnExample2) {
     graph.connect(4, 3);
     graph.connect(4, 7);
     graph.connect(7, 8);
-    VertexCoverProblem queryForTest(graph, 1);
+    VertexCoverProblem const queryForTest(graph, 1);
 
     EXPECT_EQ(4, queryForTest.getMinimumCountUsingNaiveRecursion());
     EXPECT_EQ(4, queryForTest.getMinimumCountUsingMemoizationDP());

@@ -42,14 +42,14 @@ WeightedJobScheduling::Profit WeightedJobScheduling::getMaxProfitByMonitoringTim
         sort(jobsSortedByEndTime.begin(), jobsSortedByEndTime.end(), endTimeJobComparator);
 
         for (Job const& job : jobsSortedByEndTime) {
-            Index timeIndexBeforeJob =
+            Index const timeIndexBeforeJob =
                 distance(timeStamps.begin(), find(timeStamps.begin(), timeStamps.end(), job.startTime));
-            Index timeIndexAfterJob =
+            Index const timeIndexAfterJob =
                 distance(timeStamps.begin(), find(timeStamps.begin(), timeStamps.end(), job.endTime));
-            Profit profitBeforeJob = maxProfitsAtTime[timeIndexBeforeJob];
-            Profit profitAfterJob = maxProfitsAtTime[timeIndexAfterJob];
-            Profit profitIfJobIsDone = profitBeforeJob + job.profit;
-            Profit maxProfitForJob = max(profitIfJobIsDone, profitAfterJob);
+            Profit const profitBeforeJob = maxProfitsAtTime[timeIndexBeforeJob];
+            Profit const profitAfterJob = maxProfitsAtTime[timeIndexAfterJob];
+            Profit const profitIfJobIsDone = profitBeforeJob + job.profit;
+            Profit const maxProfitForJob = max(profitIfJobIsDone, profitAfterJob);
             for (Index timeToUpdate = timeIndexAfterJob; timeToUpdate < static_cast<Index>(timeStamps.size());
                  ++timeToUpdate) {
                 maxProfitsAtTime[timeToUpdate] = max(maxProfitsAtTime[timeToUpdate], maxProfitForJob);

@@ -34,7 +34,7 @@
 namespace benchmark {
 namespace {
 #ifdef BENCHMARK_OS_WINDOWS
-typedef WORD PlatformColorCode;
+using PlatformColorCode = WORD;
 #else
 using PlatformColorCode = const char *;
 #endif
@@ -84,7 +84,7 @@ PlatformColorCode GetPlatformColorCode(LogColor color) {
 
 std::string FormatString(const char* msg, va_list args) {
   // we might need a second shot at this, so pre-emptivly make a copy
-  va_list args_cp;
+  va_list args_cp = nullptr;
   va_copy(args_cp, args);
 
   std::size_t size = 256;
@@ -102,7 +102,7 @@ std::string FormatString(const char* msg, va_list args) {
     return local_buff;
   }     // we did not provide a long enough buffer on our first attempt.
     size = static_cast<size_t>(ret) + 1;  // + 1 for the null byte
-    std::unique_ptr<char[]> buff(new char[size]);
+    std::unique_ptr<char[]> const buff(new char[size]);
     ret = vsnprintf(buff.get(), size, msg, args);
     BM_CHECK(ret > 0 && ((size_t)ret) < size);
     return buff.get();
@@ -110,7 +110,7 @@ std::string FormatString(const char* msg, va_list args) {
 }
 
 std::string FormatString(const char* msg, ...) {
-  va_list args;
+  va_list args = nullptr;
   va_start(args, msg);
   auto tmp = FormatString(msg, args);
   va_end(args);
@@ -118,7 +118,7 @@ std::string FormatString(const char* msg, ...) {
 }
 
 void ColorPrintf(std::ostream& out, LogColor color, const char* fmt, ...) {
-  va_list args;
+  va_list args = nullptr;
   va_start(args, fmt);
   ColorPrintf(out, color, fmt, args);
   va_end(args);

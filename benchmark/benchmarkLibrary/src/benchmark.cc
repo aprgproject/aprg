@@ -207,7 +207,7 @@ void State::SkipWithError(const char* msg) {
   BM_CHECK(msg);
   error_occurred_ = true;
   {
-    MutexLock l(manager_->GetBenchmarkMutex());
+    MutexLock const l(manager_->GetBenchmarkMutex());
     if (manager_->results.has_error_ == false) {
       manager_->results.error_message_ = msg;
       manager_->results.has_error_ = true;
@@ -223,7 +223,7 @@ void State::SetIterationTime(double seconds) {
 }
 
 void State::SetLabel(const char* label) {
-  MutexLock l(manager_->GetBenchmarkMutex());
+  MutexLock const l(manager_->GetBenchmarkMutex());
   manager_->results.report_label_ = label;
 }
 
@@ -331,7 +331,7 @@ void RunBenchmarks(const std::vector<BenchmarkInstance>& benchmarks,
 }
 
       runners.emplace_back(benchmark, reports_for_family);
-      int num_repeats_of_this_instance = runners.back().GetNumRepeats();
+      int const num_repeats_of_this_instance = runners.back().GetNumRepeats();
       num_repetitions_total += num_repeats_of_this_instance;
       if (reports_for_family != nullptr) {
         reports_for_family->num_runs_total += num_repeats_of_this_instance;
@@ -356,7 +356,7 @@ void RunBenchmarks(const std::vector<BenchmarkInstance>& benchmarks,
       std::shuffle(repetition_indices.begin(), repetition_indices.end(), g);
     }
 
-    for (size_t repetition_index : repetition_indices) {
+    for (size_t const repetition_index : repetition_indices) {
       internal::BenchmarkRunner& runner = runners[repetition_index];
       runner.DoOneRepetition();
       if (runner.HasRepeatsRemaining()) { continue;
@@ -608,7 +608,7 @@ void ParseCommandLineFlags(int* argc, char** argv) {
 }
 
 int InitializeStreams() {
-  static std::ios_base::Init init;
+  static std::ios_base::Init const init;
   return 0;
 }
 

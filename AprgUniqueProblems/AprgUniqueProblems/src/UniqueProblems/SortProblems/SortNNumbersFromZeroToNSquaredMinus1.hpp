@@ -18,7 +18,7 @@ public:
     void sort(Integers& valuesToSort) const {
         static_assert(typeHelper::isIntegralType<Integer>(), "Data type must be an integer");
 
-        int size = valuesToSort.size();
+        int const size = valuesToSort.size();
         if (size > 1) {
             // If we set b as n, the value of O(logb(n)) becomes O(1) and overall time complexity becomes O(n).
             int numberOfBitsInDigit = AlbaBitValueUtilities<int>::getCeilOfLogarithmWithBase2Of(size);
@@ -27,14 +27,15 @@ public:
                 (AlbaBitValueUtilities<Integer>::getNumberOfBits() + numberOfBitsInDigit - 1) / numberOfBitsInDigit;
             Integer mask = AlbaBitValueUtilities<Integer>::generateOnesWithNumberOfBits(numberOfBitsInDigit);
 
-            GetDigitAtFunction getDigitAt = [&](Integer const& value, int const mostSignificantDigitIndex) -> Integer {
+            GetDigitAtFunction const getDigitAt = [&](Integer const& value,
+                                                      int const mostSignificantDigitIndex) -> Integer {
                 return (value >> ((numberOfDigits - mostSignificantDigitIndex - 1) * numberOfBitsInDigit)) & mask;
             };
-            IsDigitFunction isDigitIndexValid = [numberOfDigits](Integer const&, int const digitIndex) -> bool {
+            IsDigitFunction const isDigitIndexValid = [numberOfDigits](Integer const&, int const digitIndex) -> bool {
                 return digitIndex < numberOfDigits;
             };
 
-            RadixSorter radixSorter(getDigitAt, isDigitIndexValid);
+            RadixSorter const radixSorter(getDigitAt, isDigitIndexValid);
             radixSorter.sort(valuesToSort);
         }
     }

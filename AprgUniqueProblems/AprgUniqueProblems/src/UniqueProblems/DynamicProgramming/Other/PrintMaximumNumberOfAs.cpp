@@ -11,7 +11,7 @@ PrintMaximumNumberOfAs::PrintMaximumNumberOfAs(Count const numberOfPresses) : m_
 PrintMaximumNumberOfAs::Count PrintMaximumNumberOfAs::getMaxCountOfAOnScreenUsingNaiveRecursion() const {
     // Time Complexity: O(4^n)
     // Auxiliary Space: O(1)
-    CountDetails countDetails{
+    CountDetails const countDetails{
         getMaxCountOfAOnScreenUsingNaiveRecursion(m_numberOfPresses, PressType::TypeA),
         getMaxCountOfAOnScreenUsingNaiveRecursion(m_numberOfPresses, PressType::CtrlA),
         getMaxCountOfAOnScreenUsingNaiveRecursion(m_numberOfPresses, PressType::CtrlC),
@@ -30,7 +30,7 @@ PrintMaximumNumberOfAs::Count PrintMaximumNumberOfAs::getMaxCountOfAOnScreenUsin
     CountDetailMatrix savedCounts(
         m_numberOfPresses + 1, static_cast<Count>(PressType::CtrlV) + 1,
         CountDetail{UNUSED_COUNT, UNUSED_COUNT, UNUSED_COUNT});
-    CountDetails countDetails{
+    CountDetails const countDetails{
         getMaxCountOfAOnScreenUsingMemoizationDP(savedCounts, m_numberOfPresses, PressType::TypeA),
         getMaxCountOfAOnScreenUsingMemoizationDP(savedCounts, m_numberOfPresses, PressType::CtrlA),
         getMaxCountOfAOnScreenUsingMemoizationDP(savedCounts, m_numberOfPresses, PressType::CtrlC),
@@ -85,7 +85,8 @@ PrintMaximumNumberOfAs::Count PrintMaximumNumberOfAs::getMaxCountOfAOnScreenUsin
          ++remainingNumberOfPresses) {
         // break point will start ctrl-a, ctrl-c and then only ctrl-v all the way.
         for (Count breakPoint = remainingNumberOfPresses - 3; breakPoint >= 1; --breakPoint) {
-            Count countIfBreakPoint = (remainingNumberOfPresses - breakPoint - 1) * countsOnScreen[breakPoint - 1];
+            Count const countIfBreakPoint =
+                (remainingNumberOfPresses - breakPoint - 1) * countsOnScreen[breakPoint - 1];
             if (countIfBreakPoint > countsOnScreen[remainingNumberOfPresses - 1]) {
                 countsOnScreen[remainingNumberOfPresses - 1] = countIfBreakPoint;
             }

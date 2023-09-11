@@ -46,7 +46,7 @@ VertexCoverProblem::Count VertexCoverProblem::getMinimumCountUsingNaiveRecursion
     Count countIfVertexIsIncluded(1);
     Count countIfVertexIsNotIncluded(0);
     for (Vertex const child : m_childrenInTree.getChildren(vertex)) {
-        Count childrenCount = getMinimumCountUsingNaiveRecursion(child);
+        Count const childrenCount = getMinimumCountUsingNaiveRecursion(child);
         Count grandChildrenCount = 1;
         for (Vertex const grandChild : m_childrenInTree.getChildren(child)) {
             grandChildrenCount += getMinimumCountUsingNaiveRecursion(grandChild);
@@ -64,7 +64,7 @@ VertexCoverProblem::Count VertexCoverProblem::getMinimumCountUsingMemoizationDP(
         Count countIfVertexIsIncluded(1);
         Count countIfVertexIsNotIncluded(0);
         for (Vertex const child : m_childrenInTree.getChildren(vertex)) {
-            Count childrenCount = getMinimumCountUsingMemoizationDP(vertexToCountMap, child);
+            Count const childrenCount = getMinimumCountUsingMemoizationDP(vertexToCountMap, child);
             Count grandChildrenCount = 1;
             for (Vertex const grandChild : m_childrenInTree.getChildren(child)) {
                 grandChildrenCount += getMinimumCountUsingMemoizationDP(vertexToCountMap, grandChild);
@@ -72,7 +72,7 @@ VertexCoverProblem::Count VertexCoverProblem::getMinimumCountUsingMemoizationDP(
             countIfVertexIsIncluded += childrenCount;
             countIfVertexIsNotIncluded += grandChildrenCount;
         }
-        Count result = min(countIfVertexIsIncluded, countIfVertexIsNotIncluded);
+        Count const result = min(countIfVertexIsIncluded, countIfVertexIsNotIncluded);
         vertexToCountMap.emplace(vertex, result);
         return result;
     }
@@ -86,11 +86,11 @@ VertexCoverProblem::SetOfVertices VertexCoverProblem::getMinimumSetUsingMemoizat
         SetOfVertices setIfVertexIsIncluded{vertex};
         SetOfVertices setIfVertexIsNotIncluded;
         for (Vertex const child : m_childrenInTree.getChildren(vertex)) {
-            SetOfVertices childSet(getMinimumSetUsingMemoizationDP(vertexToMinimumSetMap, child));
+            SetOfVertices const childSet(getMinimumSetUsingMemoizationDP(vertexToMinimumSetMap, child));
             copy(childSet.cbegin(), childSet.cend(), inserter(setIfVertexIsIncluded, setIfVertexIsIncluded.begin()));
             setIfVertexIsNotIncluded.emplace(child);
             for (Vertex const grandChild : m_childrenInTree.getChildren(child)) {
-                SetOfVertices grandChildSet(getMinimumSetUsingMemoizationDP(vertexToMinimumSetMap, grandChild));
+                SetOfVertices const grandChildSet(getMinimumSetUsingMemoizationDP(vertexToMinimumSetMap, grandChild));
                 copy(
                     grandChildSet.cbegin(), grandChildSet.cend(),
                     inserter(setIfVertexIsNotIncluded, setIfVertexIsNotIncluded.begin()));

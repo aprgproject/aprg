@@ -12,7 +12,7 @@ public:
 
     Count getMinAdjacentSwaps(Values const& values) {
         Count result(0);
-        Index size = values.size();
+        Index const size = values.size();
         if (size > 1) {
             Index firstMaxIndex = 0;
             Index lastMinIndex = 0;
