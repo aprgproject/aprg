@@ -25,8 +25,7 @@ public:
                 ALBA_DBG_PRINT2("pass10001", std::distance(valuesToSort.begin(), insertIt));
                 ALBA_DBG_PRINT2("pass10002", valuesToSort);
                 ALBA_DBG_PRINT2("pass10003", *insertIt);
-                if (valuesToSort.size() == 9 && std::distance(valuesToSort.begin(), insertIt) == 8 &&
-                    *insertIt == "squidward") {
+                if (std::distance(valuesToSort.begin(), insertIt) + 1 == valuesToSort.size()) {
                     break;
                 }
                 // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
