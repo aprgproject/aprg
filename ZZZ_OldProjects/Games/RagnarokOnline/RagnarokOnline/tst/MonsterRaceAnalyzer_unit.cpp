@@ -19,9 +19,10 @@ TEST(MonsterRaceAnalyzerTest, DISABLED_AnalyzeWorks) {
     // #Luck: 34, 50, 40, 15, 22, 23
     // #HP:   42, 40, 40, 42, 43, 44
     // #Winner: 6, 3
-    MonsterRaceAnalyzer analyzer;
+    MonsterRaceAnalyzer const analyzer;
     // NOTE BE SURE TO UPDATE "currentConfiguration"
-    RaceConfiguration currentConfiguration{{34, 50, 40, 15, 22, 23}, {42, 40, 40, 42, 43, 44}};  // delete this line
+    RaceConfiguration const currentConfiguration{
+        {34, 50, 40, 15, 22, 23}, {42, 40, 40, 42, 43, 44}};  // delete this line
     analyzer.showNextPossibleWinners(currentConfiguration);
 }
 
@@ -32,8 +33,9 @@ TEST(MonsterRaceAnalyzerTest, DISABLED_DuplicatedAnalyzeWorks) {
     // #HP:   , , , , ,
     // #Winner:
     // NOTE BE SURE TO UPDATE "currentConfiguration"
-    MonsterRaceAnalyzer analyzer;
-    RaceConfiguration currentConfiguration{{37, 45, 56, 38, 26, 31}, {37, 22, 13, 31, 53, 34}};  // delete this line
+    MonsterRaceAnalyzer const analyzer;
+    RaceConfiguration const currentConfiguration{
+        {37, 45, 56, 38, 26, 31}, {37, 22, 13, 31, 53, 34}};  // delete this line
     analyzer.showNextPossibleWinners(currentConfiguration);
 }
 

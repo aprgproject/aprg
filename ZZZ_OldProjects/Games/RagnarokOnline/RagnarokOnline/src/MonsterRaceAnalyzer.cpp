@@ -58,7 +58,7 @@ void MonsterRaceAnalyzer::retrieveBestWinners(
     RaceConfiguration const& currentConfiguration) {
     int lowestDiscrepancy = INT_MAX;
     for (auto const& race : previousRaces) {
-        int discrepancy = getDiscrepancy(race.raceConfiguration, currentConfiguration);
+        int const discrepancy = getDiscrepancy(race.raceConfiguration, currentConfiguration);
 
         queueOfWinners.emplace(PossibleWinner{race.winner, discrepancy});
 
@@ -136,18 +136,18 @@ int MonsterRaceAnalyzer::getDiscrepancy(RaceConfiguration const& r1, RaceConfigu
 }
 
 void MonsterRaceAnalyzer::readPreviousRaceDatabase() {
-    AlbaLocalPathHandler filePathHandler(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\MonsterRacingDatabase.txt)");
+    AlbaLocalPathHandler const filePathHandler(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\MonsterRacingDatabase.txt)");
     ifstream fileStream(filePathHandler.getFullPath());
     AlbaFileReader fileReader(fileStream);
     PreviousRace previousRace{};
     RacePlaceType racePlaceType{RacePlaceType::Unknown};
     while (fileReader.isNotFinished()) {
-        string line(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const line(fileReader.getLineAndIgnoreWhiteSpaces());
         if (isStringFoundCaseSensitive(line, "#HP:")) {
             strings hpValuesStrings;
             splitToStrings<SplitStringType::WithoutDelimeters>(
                 hpValuesStrings, getStringAfterThisString(line, "#HP:"), ",");
-            int limit = min(NUMBER_OF_MONSTERS, static_cast<int>(hpValuesStrings.size()));
+            int const limit = min(NUMBER_OF_MONSTERS, static_cast<int>(hpValuesStrings.size()));
             for (int i = 0; i < limit; ++i) {
                 previousRace.raceConfiguration.hp[i] = convertStringToNumber<int>(hpValuesStrings.at(i));
             }
@@ -155,7 +155,7 @@ void MonsterRaceAnalyzer::readPreviousRaceDatabase() {
             strings luckValuesStrings;
             splitToStrings<SplitStringType::WithoutDelimeters>(
                 luckValuesStrings, getStringAfterThisString(line, "#Luck:"), ",");
-            int limit = min(NUMBER_OF_MONSTERS, static_cast<int>(luckValuesStrings.size()));
+            int const limit = min(NUMBER_OF_MONSTERS, static_cast<int>(luckValuesStrings.size()));
             for (int i = 0; i < limit; ++i) {
                 previousRace.raceConfiguration.luck[i] = convertStringToNumber<int>(luckValuesStrings.at(i));
             }

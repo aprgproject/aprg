@@ -280,7 +280,7 @@ void RagnarokOnline::printSellingShopItems() const {
 }
 
 void RagnarokOnline::retrieveItemDataFromRmsWebpages(string const& directoryPathOfWebPages) {
-    AlbaLocalPathHandler directoryPathHandler(directoryPathOfWebPages);
+    AlbaLocalPathHandler const directoryPathHandler(directoryPathOfWebPages);
     ListOfPaths listOfFiles;
     ListOfPaths listOfDirectories;
     directoryPathHandler.findFilesAndDirectoriesOneDepth("*.html", listOfFiles, listOfDirectories);
@@ -290,7 +290,7 @@ void RagnarokOnline::retrieveItemDataFromRmsWebpages(string const& directoryPath
 }
 
 void RagnarokOnline::retrieveItemDataFromRmsWebPage(string const& filePathOfWebPage) {
-    AlbaLocalPathHandler filePathHandler(filePathOfWebPage);
+    AlbaLocalPathHandler const filePathHandler(filePathOfWebPage);
     ifstream fileStream(filePathHandler.getFullPath());
     AlbaFileReader fileReader(fileStream);
     fileReader.setMaxBufferSize(100000);
@@ -302,7 +302,7 @@ void RagnarokOnline::retrieveItemDataFromRmsWebPage(string const& filePathOfWebP
     string itemScript;
     bool isItemScriptNotComplete(false);
     while (fileReader.isNotFinished()) {
-        string line(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const line(fileReader.getLineAndIgnoreWhiteSpaces());
         bool shouldItemBeCleared(false);
         if (isStringFoundCaseSensitive(line, R"(table class="content_box_item")")) {
             isContextBoxEncountered = true;
@@ -329,7 +329,7 @@ void RagnarokOnline::retrieveItemDataFromRmsWebPage(string const& filePathOfWebP
                     fixText(getStringInBetweenTwoStrings(line, R"(Item ID#)", R"( ()")));
             }
             if (isStringFoundCaseSensitive(line, R"(<td class="bb" align="right">)")) {
-                string value =
+                string const value =
                     fixText(getStringInBetweenTwoStrings(line, R"(<td class="bb" align="right">)", R"(</td>)"));
                 if ("Type" == parameterName) {
                     item.type = value;
@@ -409,7 +409,7 @@ void RagnarokOnline::retrieveItemDataFromRmsWebPage(string const& filePathOfWebP
                 if ("Applicable Jobs" == parameterName) {
                     string lineWithJobs(line);
                     while (isStringFoundCaseSensitive(lineWithJobs, R"(<td width="100">)")) {
-                        string value =
+                        string const value =
                             fixText(getStringInBetweenTwoStrings(lineWithJobs, R"(<td width="100">)", R"(</td>)"));
                         item.applicableJobs.emplace_back(value);
                         lineWithJobs = getStringAfterThisString(lineWithJobs, R"(<td width="100">)");
@@ -417,9 +417,9 @@ void RagnarokOnline::retrieveItemDataFromRmsWebPage(string const& filePathOfWebP
                 } else if ("Dropped By" == parameterName) {
                     string lineWithDroppedBy(line);
                     while (isStringFoundCaseSensitive(lineWithDroppedBy, R"(<div class="tipstext">)")) {
-                        string monsterName = fixText(
+                        string const monsterName = fixText(
                             getStringInBetweenTwoStrings(lineWithDroppedBy, ")\">", R"(<div class="tipstext">)"));
-                        string monsterRate = fixText(
+                        string const monsterRate = fixText(
                             getStringInBetweenTwoStrings(lineWithDroppedBy, R"(<div class="tipstext">)", R"(</div>)"));
                         item.droppedByMonstersWithRates.emplace_back(
                             NameAndRate{monsterName, convertStringToNumber<double>(monsterRate)});
@@ -432,7 +432,7 @@ void RagnarokOnline::retrieveItemDataFromRmsWebPage(string const& filePathOfWebP
 }
 
 void RagnarokOnline::retrieveMonsterDataFromRmsWebpages(string const& directoryPathOfWebPages) {
-    AlbaLocalPathHandler directoryPathHandler(directoryPathOfWebPages);
+    AlbaLocalPathHandler const directoryPathHandler(directoryPathOfWebPages);
     ListOfPaths listOfFiles;
     ListOfPaths listOfDirectories;
     directoryPathHandler.findFilesAndDirectoriesOneDepth("*.html", listOfFiles, listOfDirectories);
@@ -442,7 +442,7 @@ void RagnarokOnline::retrieveMonsterDataFromRmsWebpages(string const& directoryP
 }
 
 void RagnarokOnline::retrieveMonsterDataFromRmsWebPage(string const& filePathOfWebPage) {
-    AlbaLocalPathHandler filePathHandler(filePathOfWebPage);
+    AlbaLocalPathHandler const filePathHandler(filePathOfWebPage);
     ifstream fileStream(filePathHandler.getFullPath());
     AlbaFileReader fileReader(fileStream);
     fileReader.setMaxBufferSize(100000);
@@ -450,7 +450,7 @@ void RagnarokOnline::retrieveMonsterDataFromRmsWebPage(string const& filePathOfW
     Monster monster{};
     string parameterName;
     while (fileReader.isNotFinished()) {
-        string line(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const line(fileReader.getLineAndIgnoreWhiteSpaces());
         bool shouldItemBeCleared(false);
         if (isStringFoundCaseSensitive(line, R"(table class="content_box_mob")")) {
             isContextBoxEncountered = true;
@@ -479,7 +479,7 @@ void RagnarokOnline::retrieveMonsterDataFromRmsWebPage(string const& filePathOfW
             }
             if (isStringFoundCaseSensitive(line, R"(<td class="bb")") &&
                 isStringFoundCaseSensitive(line, R"(align="right">)")) {
-                string value = fixText(getStringInBetweenTwoStrings(line, R"(align="right">)", R"(</td>)"));
+                string const value = fixText(getStringInBetweenTwoStrings(line, R"(align="right">)", R"(</td>)"));
                 if ("HP" == parameterName) {
                     monster.hp = convertStringToNumber<unsigned int>(value);
                 } else if ("Level" == parameterName) {
@@ -558,13 +558,13 @@ void RagnarokOnline::retrieveMonsterDataFromRmsWebPage(string const& filePathOfW
             if (isStringFoundCaseSensitive(line, R"(onclick="return popItem)")) {
                 if ("Drops" == parameterName) {
                     string dropName = fixText(getStringInBetweenTwoStrings(line, R"(">)", R"(<b>)"));
-                    string slot = fixText(getStringInBetweenTwoStrings(line, R"([</b>)", R"(<b>])"));
+                    string const slot = fixText(getStringInBetweenTwoStrings(line, R"([</b>)", R"(<b>])"));
                     if (!slot.empty()) {
                         dropName += " [";
                         dropName += slot;
                         dropName += "]";
                     }
-                    string dropRate = fixText(getStringInBetweenTwoStrings(line, R"((</b>)", R"(<b>))"));
+                    string const dropRate = fixText(getStringInBetweenTwoStrings(line, R"((</b>)", R"(<b>))"));
                     monster.dropsWithRates.emplace_back(NameAndRate{dropName, convertStringToNumber<double>(dropRate)});
                 }
             }
@@ -583,7 +583,7 @@ void RagnarokOnline::retrieveMonsterDataFromRmsWebPage(string const& filePathOfW
             if (isStringFoundCaseSensitive(line, R"(<td class="bb" width="180" valign="top">)")) {
                 string lineWithMaps(line);
                 while (isStringFoundCaseSensitive(lineWithMaps, "map_dim)\">")) {
-                    string value = fixText(getStringInBetweenTwoStrings(lineWithMaps, "map_dim)\">", R"(</a>)"));
+                    string const value = fixText(getStringInBetweenTwoStrings(lineWithMaps, "map_dim)\">", R"(</a>)"));
                     monster.maps.emplace_back(value);
                     lineWithMaps = getStringAfterThisString(lineWithMaps, "map_dim)\">");
                 }
@@ -592,7 +592,7 @@ void RagnarokOnline::retrieveMonsterDataFromRmsWebPage(string const& filePathOfW
                 if ("Monster Skills" == parameterName) {
                     string lineWithMonsterSkills(line);
                     while (isStringFoundCaseSensitive(lineWithMonsterSkills, R"(circle.gif">)")) {
-                        string value =
+                        string const value =
                             fixText(getStringInBetweenTwoStrings(lineWithMonsterSkills, R"(circle.gif">)", R"(</td>)"));
                         monster.monsterSkills.emplace_back(value);
                         lineWithMonsterSkills = getStringAfterThisString(lineWithMonsterSkills, R"(circle.gif">)");
@@ -613,7 +613,7 @@ void RagnarokOnline::retrieveMonsterDataFromRmsWebPage(string const& filePathOfW
 }
 
 void RagnarokOnline::retrieveMapDataFromRmsWebpages(string const& directoryPathOfWebPages) {
-    AlbaLocalPathHandler directoryPathHandler(directoryPathOfWebPages);
+    AlbaLocalPathHandler const directoryPathHandler(directoryPathOfWebPages);
     ListOfPaths listOfFiles;
     ListOfPaths listOfDirectories;
     directoryPathHandler.findFilesAndDirectoriesOneDepth("*.html", listOfFiles, listOfDirectories);
@@ -623,14 +623,14 @@ void RagnarokOnline::retrieveMapDataFromRmsWebpages(string const& directoryPathO
 }
 
 void RagnarokOnline::retrieveMapDataFromRmsWebPage(string const& filePathOfWebPage) {
-    AlbaLocalPathHandler filePathHandler(filePathOfWebPage);
+    AlbaLocalPathHandler const filePathHandler(filePathOfWebPage);
     ifstream fileStream(filePathHandler.getFullPath());
     AlbaFileReader fileReader(fileStream);
     fileReader.setMaxBufferSize(100000);
     bool isContextBoxEncountered(false);
     RoMap map{};
     while (fileReader.isNotFinished()) {
-        string line(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const line(fileReader.getLineAndIgnoreWhiteSpaces());
         bool shouldItemBeCleared(false);
         if (isStringFoundCaseSensitive(line, R"(table class="content_box_db")")) {
             isContextBoxEncountered = true;
@@ -663,9 +663,9 @@ void RagnarokOnline::retrieveMapDataFromRmsWebPage(string const& filePathOfWebPa
                 string lineWithMonsters(line);
                 while (isStringFoundCaseSensitive(lineWithMonsters, "onmouseout=\"hideddrivetip_image()\">")) {
                     MonsterDetailsOnRoMap monsterDetailsOnMap{};
-                    string wholeMonsterString = getStringInBetweenTwoStrings(
+                    string const wholeMonsterString = getStringInBetweenTwoStrings(
                         lineWithMonsters, "onmouseout=\"hideddrivetip_image()\">", R"(</a>)");
-                    string wholeSpawnString =
+                    string const wholeSpawnString =
                         getStringInBetweenTwoStrings(wholeMonsterString, R"(<b>(</b>)", R"(<b>)</b>)");
                     monsterDetailsOnMap.monsterName =
                         fixText(getStringBeforeThisString(wholeMonsterString, R"(<b>(</b>)"));
@@ -687,7 +687,7 @@ void RagnarokOnline::retrieveMapDataFromRmsWebPage(string const& filePathOfWebPa
 }
 
 void RagnarokOnline::retrieveBuyingShopDataFromTalonRoWebpages(string const& directoryPathOfWebPages) {
-    AlbaLocalPathHandler directoryPathHandler(directoryPathOfWebPages);
+    AlbaLocalPathHandler const directoryPathHandler(directoryPathOfWebPages);
     ListOfPaths listOfFiles;
     ListOfPaths listOfDirectories;
     directoryPathHandler.findFilesAndDirectoriesOneDepth("*.html", listOfFiles, listOfDirectories);
@@ -697,7 +697,7 @@ void RagnarokOnline::retrieveBuyingShopDataFromTalonRoWebpages(string const& dir
 }
 
 void RagnarokOnline::retrieveSellingShopDataFromTalonRoWebpages(string const& directoryPathOfWebPages) {
-    AlbaLocalPathHandler directoryPathHandler(directoryPathOfWebPages);
+    AlbaLocalPathHandler const directoryPathHandler(directoryPathOfWebPages);
     ListOfPaths listOfFiles;
     ListOfPaths listOfDirectories;
     directoryPathHandler.findFilesAndDirectoriesOneDepth("*.html", listOfFiles, listOfDirectories);
@@ -707,21 +707,22 @@ void RagnarokOnline::retrieveSellingShopDataFromTalonRoWebpages(string const& di
 }
 
 void RagnarokOnline::retrieveShopDataFromTalonRoWebPage(string const& filePathOfWebPage, ShopType const shopType) {
-    AlbaLocalPathHandler filePathHandler(filePathOfWebPage);
+    AlbaLocalPathHandler const filePathHandler(filePathOfWebPage);
     ifstream fileStream(filePathHandler.getFullPath());
     AlbaFileReader fileReader(fileStream);
     fileReader.setMaxBufferSize(100000);
     while (fileReader.isNotFinished()) {
-        string line(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const line(fileReader.getLineAndIgnoreWhiteSpaces());
         if (isStringFoundCaseSensitive(line, R"(<td class="sorting_1">)")) {
             string lineWithItems(line);
             while (isStringFoundCaseSensitive(lineWithItems, R"(<td class="sorting_1">)")) {
-                string itemString = getStringInBetweenTwoStrings(
+                string const itemString = getStringInBetweenTwoStrings(
                     lineWithItems, R"(<td class="sorting_1">)", R"(<span class="d-none">)");
                 lineWithItems = getStringAfterThisString(lineWithItems, R"(<td class="sorting_1">)");
-                string priceString = getStringInBetweenTwoStrings(lineWithItems, R"(</span></td><td>)", R"(</td><td>)");
+                string const priceString =
+                    getStringInBetweenTwoStrings(lineWithItems, R"(</span></td><td>)", R"(</td><td>)");
                 lineWithItems = getStringAfterThisString(lineWithItems, R"(</span></td><td>)");
-                string numberString = getStringInBetweenTwoStrings(lineWithItems, R"(</td><td>)", R"(</td><td>)");
+                string const numberString = getStringInBetweenTwoStrings(lineWithItems, R"(</td><td>)", R"(</td><td>)");
 
                 ShopItemDetail newDetail{};
                 newDetail.itemName = fixText(itemString);
@@ -731,10 +732,10 @@ void RagnarokOnline::retrieveShopDataFromTalonRoWebPage(string const& filePathOf
                 if (ShopType::BuyingShop == shopType) {
                     auto it = m_buyingShopItems.find(newDetail.itemName);
                     if (it != m_buyingShopItems.cend()) {
-                        unsigned newTotalNumber = it->second.totalNumber + newDetail.totalNumber;
-                        double newAveragePrice = ((it->second.averagePrice * it->second.totalNumber) +
-                                                  (newDetail.averagePrice * newDetail.totalNumber)) /
-                                                 newTotalNumber;
+                        unsigned const newTotalNumber = it->second.totalNumber + newDetail.totalNumber;
+                        double const newAveragePrice = ((it->second.averagePrice * it->second.totalNumber) +
+                                                        (newDetail.averagePrice * newDetail.totalNumber)) /
+                                                       newTotalNumber;
                         it->second.totalNumber = newTotalNumber;
                         it->second.averagePrice = newAveragePrice;
                     } else {
@@ -743,10 +744,10 @@ void RagnarokOnline::retrieveShopDataFromTalonRoWebPage(string const& filePathOf
                 } else if (ShopType::SellingShop == shopType) {
                     auto it = m_sellingShopItems.find(newDetail.itemName);
                     if (it != m_sellingShopItems.cend()) {
-                        unsigned newTotalNumber = it->second.totalNumber + newDetail.totalNumber;
-                        double newAveragePrice = ((it->second.averagePrice * it->second.totalNumber) +
-                                                  (newDetail.averagePrice * newDetail.totalNumber)) /
-                                                 newTotalNumber;
+                        unsigned const newTotalNumber = it->second.totalNumber + newDetail.totalNumber;
+                        double const newAveragePrice = ((it->second.averagePrice * it->second.totalNumber) +
+                                                        (newDetail.averagePrice * newDetail.totalNumber)) /
+                                                       newTotalNumber;
                         it->second.totalNumber = newTotalNumber;
                         it->second.averagePrice = newAveragePrice;
                     } else {
@@ -760,38 +761,38 @@ void RagnarokOnline::retrieveShopDataFromTalonRoWebPage(string const& filePathOf
 
 void RagnarokOnline::readItemIdToItemMapFromFile(string const& inputFilePath) {
     ifstream inputStream(inputFilePath);
-    AlbaStreamParameterReader reader(inputStream);
+    AlbaStreamParameterReader const reader(inputStream);
     reader.readMapData<unsigned int, Item>(m_itemIdToItemMap);
 }
 
 void RagnarokOnline::readMonsterIdToMonsterMapFromFile(string const& inputFilePath) {
     ifstream inputStream(inputFilePath);
-    AlbaStreamParameterReader reader(inputStream);
+    AlbaStreamParameterReader const reader(inputStream);
     reader.readMapData<unsigned int, Monster>(m_monsterIdToMonsterMap);
 }
 
 void RagnarokOnline::readMapNameToRoMapFromFile(string const& inputFilePath) {
     ifstream inputStream(inputFilePath);
-    AlbaStreamParameterReader reader(inputStream);
+    AlbaStreamParameterReader const reader(inputStream);
     reader.readMapData<string, RoMap>(m_mapNameToRoMap);
 }
 
 void RagnarokOnline::readBuyingShopItems(string const& inputFilePath) {
     ifstream inputStream(inputFilePath);
-    AlbaStreamParameterReader reader(inputStream);
+    AlbaStreamParameterReader const reader(inputStream);
     reader.readMapData<string, ShopItemDetail>(m_buyingShopItems);
 }
 
 void RagnarokOnline::readSellingShopItems(string const& inputFilePath) {
     ifstream inputStream(inputFilePath);
-    AlbaStreamParameterReader reader(inputStream);
+    AlbaStreamParameterReader const reader(inputStream);
     reader.readMapData<string, ShopItemDetail>(m_sellingShopItems);
 }
 
 void RagnarokOnline::buildItemNameToItemId() {
     for (auto const& itemIdItemPair : m_itemIdToItemMap) {
         Item const& item(itemIdItemPair.second);
-        string fixedItemName(getFixedItemName(item));
+        string const fixedItemName(getFixedItemName(item));
         m_itemNameToItemIdMap.emplace(fixedItemName, itemIdItemPair.first);
     }
 }
@@ -819,14 +820,14 @@ string RagnarokOnline::fixText(string const& text) {
 
 istream& operator>>(istream& in, NameAndRate& nameAndRate) {
     in.precision(20);
-    AlbaStreamParameterReader reader(in);
+    AlbaStreamParameterReader const reader(in);
     nameAndRate.name = reader.readData<string>();
     nameAndRate.rate = reader.readData<double>();
     return in;
 }
 
 istream& operator>>(istream& in, MonsterDetailsOnRoMap& monsterDetailsOnRoMap) {
-    AlbaStreamParameterReader reader(in);
+    AlbaStreamParameterReader const reader(in);
     monsterDetailsOnRoMap.monsterName = reader.readData<string>();
     monsterDetailsOnRoMap.spawnCount = reader.readData<unsigned int>();
     monsterDetailsOnRoMap.spawnRate = reader.readData<string>();
@@ -834,7 +835,7 @@ istream& operator>>(istream& in, MonsterDetailsOnRoMap& monsterDetailsOnRoMap) {
 }
 
 istream& operator>>(istream& in, Item& item) {
-    AlbaStreamParameterReader reader(in);
+    AlbaStreamParameterReader const reader(in);
     item.itemId = reader.readData<unsigned int>();
     item.name = reader.readData<string>();
     item.type = reader.readData<string>();
@@ -858,7 +859,7 @@ istream& operator>>(istream& in, Item& item) {
 }
 
 istream& operator>>(istream& in, Monster& monster) {
-    AlbaStreamParameterReader reader(in);
+    AlbaStreamParameterReader const reader(in);
     monster.monsterId = reader.readData<unsigned int>();
     monster.name = reader.readData<string>();
     monster.hp = reader.readData<unsigned int>();
@@ -907,7 +908,7 @@ istream& operator>>(istream& in, Monster& monster) {
 
 istream& operator>>(istream& in, ShopItemDetail& shopItemDetail) {
     in.precision(20);
-    AlbaStreamParameterReader reader(in);
+    AlbaStreamParameterReader const reader(in);
     shopItemDetail.itemName = reader.readData<string>();
     shopItemDetail.averagePrice = reader.readData<double>();
     shopItemDetail.totalNumber = reader.readData<unsigned int>();
@@ -915,7 +916,7 @@ istream& operator>>(istream& in, ShopItemDetail& shopItemDetail) {
 }
 
 istream& operator>>(istream& in, RoMap& roMap) {
-    AlbaStreamParameterReader reader(in);
+    AlbaStreamParameterReader const reader(in);
     roMap.name = reader.readData<string>();
     roMap.fullName = reader.readData<string>();
     reader.readVectorData<MonsterDetailsOnRoMap>(roMap.monstersDetailsOnMap);
@@ -923,25 +924,25 @@ istream& operator>>(istream& in, RoMap& roMap) {
 }
 
 istream& operator>>(istream& in, ItemIdToItemMap& itemIdToItemMap) {
-    AlbaStreamParameterReader reader(in);
+    AlbaStreamParameterReader const reader(in);
     reader.readMapData<unsigned int, Item>(itemIdToItemMap);
     return in;
 }
 
 istream& operator>>(istream& in, MonsterIdToMonsterMap& monsterIdToMonsterMap) {
-    AlbaStreamParameterReader reader(in);
+    AlbaStreamParameterReader const reader(in);
     reader.readMapData<unsigned int, Monster>(monsterIdToMonsterMap);
     return in;
 }
 
 istream& operator>>(istream& in, MapNameToRoMap& mapNameToRoMap) {
-    AlbaStreamParameterReader reader(in);
+    AlbaStreamParameterReader const reader(in);
     reader.readMapData<string, RoMap>(mapNameToRoMap);
     return in;
 }
 
 istream& operator>>(istream& in, ItemNameToShopItemDetailMap& itemNameToShopItemDetailMap) {
-    AlbaStreamParameterReader reader(in);
+    AlbaStreamParameterReader const reader(in);
     reader.readMapData<string, ShopItemDetail>(itemNameToShopItemDetailMap);
     return in;
 }

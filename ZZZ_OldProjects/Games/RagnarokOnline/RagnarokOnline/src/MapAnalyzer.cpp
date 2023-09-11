@@ -25,8 +25,8 @@ double MapAnalyzer::getPotentialZenyFromMonster(Monster const& monster) const {
     double potentialZeny = 0;
     for (NameAndRate const& dropWithRate : monster.dropsWithRates) {
         if (isDropRateAcceptable(dropWithRate.rate)) {
-            Item item(m_ragnarokOnline.getItem(dropWithRate.name));
-            double bestPrice(getBestPrice(item));
+            Item const item(m_ragnarokOnline.getItem(dropWithRate.name));
+            double const bestPrice(getBestPrice(item));
             potentialZeny += bestPrice * getTalonRoDropRate(dropWithRate.rate) / 100;
         }
     }
@@ -46,13 +46,13 @@ void MapAnalyzer::printPotentialZenyFromMonster(string const& monsterName) const
     cout.precision(10);
     cout << "\n";
     cout << "Monster name: [" << monsterName << "]\n";
-    Monster monster(m_ragnarokOnline.getMonster(monsterName));
+    Monster const monster(m_ragnarokOnline.getMonster(monsterName));
     for (NameAndRate const& dropWithRate : monster.dropsWithRates) {
         if (isDropRateAcceptable(dropWithRate.rate)) {
-            Item item(m_ragnarokOnline.getItem(dropWithRate.name));
-            string fixedItemName(alba::RagnarokOnline::getFixedItemName(item));
-            double bestPrice(getBestPrice(item));
-            double itemPotentialZeny = bestPrice * getTalonRoDropRate(dropWithRate.rate) / 100;
+            Item const item(m_ragnarokOnline.getItem(dropWithRate.name));
+            string const fixedItemName(alba::RagnarokOnline::getFixedItemName(item));
+            double const bestPrice(getBestPrice(item));
+            double const itemPotentialZeny = bestPrice * getTalonRoDropRate(dropWithRate.rate) / 100;
             cout << "Item name: [" << fixedItemName << "] Item potential zeny: [" << itemPotentialZeny
                  << "] Talon RO drop rate: [" << getTalonRoDropRate(dropWithRate.rate) << "] Best price: [" << bestPrice
                  << "] NPC price: [" << item.sellingPrice << "] TalonRo buying price: ["
@@ -79,10 +79,10 @@ double MapAnalyzer::getTalonRoDropRate(double const dropRate) {
 
 double MapAnalyzer::getBestPrice(Item const& item) const {
     double result = NAN;
-    string fixedItemName(alba::RagnarokOnline::getFixedItemName(item));
-    double npcPrice = item.sellingPrice;
-    double talonRoBuyingPrice = m_ragnarokOnline.getTalonRoBuyingPrice(fixedItemName);
-    double talonRoSellingPrice = m_ragnarokOnline.getTalonRoSellingPrice(fixedItemName);
+    string const fixedItemName(alba::RagnarokOnline::getFixedItemName(item));
+    double const npcPrice = item.sellingPrice;
+    double const talonRoBuyingPrice = m_ragnarokOnline.getTalonRoBuyingPrice(fixedItemName);
+    double const talonRoSellingPrice = m_ragnarokOnline.getTalonRoSellingPrice(fixedItemName);
     result = npcPrice;
     if (result < talonRoBuyingPrice) {
         result = talonRoBuyingPrice;  // remove this if buying shops are ignored
@@ -127,7 +127,7 @@ void MapAnalyzer::selectMaps() {
         bool hasAcceptableLarge(false);
         map<string, MonsterData> monstersNameToDataMap;
         for (MonsterDetailsOnRoMap const& monsterDetailsOnMap : roMap.monstersDetailsOnMap) {
-            Monster monster(m_ragnarokOnline.getMonster(monsterDetailsOnMap.monsterName));
+            Monster const monster(m_ragnarokOnline.getMonster(monsterDetailsOnMap.monsterName));
             if (!monster.isMvp()) {
                 // default case:
                 // if (false) {
@@ -174,13 +174,13 @@ void MapAnalyzer::selectMaps() {
         if (hasAcceptableLarge) {
             ++countAcceptable;
         }
-        bool isMapAcceptable = countAcceptable >= 3;
+        bool const isMapAcceptable = countAcceptable >= 3;
         if (isMapAcceptable && !monstersNameToDataMap.empty()) {
             double totalPotentialZeny = 0;
             double totalPotentialBaseExperience = 0;
             double totalPotentialJobExperience = 0;
             for (auto& monsterNameToDataPair : monstersNameToDataMap) {
-                Monster monster(m_ragnarokOnline.getMonster(monsterNameToDataPair.first));
+                Monster const monster(m_ragnarokOnline.getMonster(monsterNameToDataPair.first));
                 MonsterData& monsterData(monsterNameToDataPair.second);
                 monsterData.potentialZeny = getPotentialZenyFromMonster(monster) * monsterData.spawnCount;
                 monsterData.potentialBaseExperience =
@@ -216,9 +216,9 @@ void MapAnalyzer::selectMaps() {
             mapAnalyzerData.baseExperiencePotential = totalPotentialBaseExperience;
             mapAnalyzerData.jobExperiencePotential = totalPotentialJobExperience;
             // double averageZeny = totalPotentialZeny / monstersNameToDataMap.size();
-            double averageJobExperience = totalPotentialJobExperience / monstersNameToDataMap.size();
+            double const averageJobExperience = totalPotentialJobExperience / monstersNameToDataMap.size();
             for (auto& monsterNameToDataPair : monstersNameToDataMap) {
-                Monster monster(m_ragnarokOnline.getMonster(monsterNameToDataPair.first));
+                Monster const monster(m_ragnarokOnline.getMonster(monsterNameToDataPair.first));
                 MonsterData& monsterData(monsterNameToDataPair.second);
                 // job annoyance
                 monsterData.isAnnoyance = monsterData.potentialJobExperience / averageJobExperience < 0.5;

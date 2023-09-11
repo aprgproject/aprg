@@ -25,7 +25,7 @@ TEST(RagnarokOnlineShopUpdateTest, DISABLED_RetrieveSellingShopDataFromTalonRoWe
 }
 
 TEST(RagnarokOnlineShopUpdateTest, DISABLED_SaveBuyingShopItemsCumulativeData) {
-    string filePath(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\BuyingShopItemsCumulativeData.txt)");
+    string const filePath(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\BuyingShopItemsCumulativeData.txt)");
     RagnarokOnline ragnarokOnline;
     ragnarokOnline.readBuyingShopItems(filePath);
     ragnarokOnline.retrieveBuyingShopDataFromTalonRoWebpages(
@@ -34,7 +34,7 @@ TEST(RagnarokOnlineShopUpdateTest, DISABLED_SaveBuyingShopItemsCumulativeData) {
 }
 
 TEST(RagnarokOnlineShopUpdateTest, DISABLED_SaveSellingShopItemsCumulativeData) {
-    string filePath(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\SellingShopItemsCumulativeData.txt)");
+    string const filePath(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\SellingShopItemsCumulativeData.txt)");
     RagnarokOnline ragnarokOnline;
     ragnarokOnline.readSellingShopItems(filePath);
     ragnarokOnline.retrieveSellingShopDataFromTalonRoWebpages(
