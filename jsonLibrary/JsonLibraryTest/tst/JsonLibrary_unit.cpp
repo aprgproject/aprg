@@ -21,14 +21,14 @@ TEST(SampleTest, CreatingJsonObjectsFromJsonLiteralsTest) {
     // }
     // There are various options:
     // Using (raw) string literals and json::parse
-    json jsonObject1 = json::parse(R"({ "pi": 3.141, "happy": true })");
+    json const jsonObject1 = json::parse(R"({ "pi": 3.141, "happy": true })");
 
     // Using user-defined (raw) string literals
     using namespace nlohmann::literals;
-    json jsonObject2 = R"({ "pi": 3.141, "happy": true })"_json;
+    json const jsonObject2 = R"({ "pi": 3.141, "happy": true })"_json;
 
     // Using initializer lists
-    json jsonObject3 = {
+    json const jsonObject3 = {
         {"happy", true},
         {"pi", 3.141},
     };
@@ -82,7 +82,7 @@ TEST(SampleTest, JsonAsFirstClassDataTypeTest) {
     jsonObject1["object"] = {{"currency", "USD"}, {"value", 42.99}};
 
     // instead, you could also write (which looks very similar to the JSON above)
-    json jsonObject2 = {
+    json const jsonObject2 = {
         {"pi", 3.141},
         {"happy", true},
         {"name", "Niels"},
@@ -107,7 +107,7 @@ TEST(SampleTest, SerializationDeserializationTest) {
 }
 
 TEST(SampleTest, SerializationDeserializationForFilesTest) {
-    json jsonObject = {
+    json const jsonObject = {
         {"happy", true},
         {"pi", 3.141},
     };
