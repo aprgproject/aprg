@@ -17,12 +17,13 @@ public:
     void sort(Values& valuesToSort) const override {
         ALBA_DBG_PRINT1("pass1001");
         if (!valuesToSort.empty()) {
-            ALBA_DBG_PRINT2("pass1002", valuesToSort.size());
+            ALBA_DBG_PRINT2("pass1002", valuesToSort);
             for (auto insertIt = std::next(valuesToSort.begin()); insertIt != valuesToSort.end(); ++insertIt) {
                 ALBA_DBG_PRINT1("pass1003");
                 continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
                 ALBA_DBG_PRINT1("pass1004");
-                ALBA_DBG_PRINT2("pass1005", std::distance(valuesToSort.begin(), insertIt));
+                ALBA_DBG_PRINT2("pass10001", std::distance(valuesToSort.begin(), insertIt));
+                ALBA_DBG_PRINT2("pass10002", *insertIt);
                 // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
             }
             ALBA_DBG_PRINT1("pass1005");
