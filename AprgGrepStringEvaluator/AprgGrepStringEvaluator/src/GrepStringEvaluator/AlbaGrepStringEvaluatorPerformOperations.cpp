@@ -25,8 +25,8 @@ AlbaGrepStringEvaluatorTerm performBinaryOperation<AlbaGrepStringEvaluatorTerm, 
     AlbaGrepStringEvaluatorTerm const& value2) {
     using OperatorType = AlbaGrepStringOperatorType;
     bool outputValue(false);
-    bool inputValue1(value1.getResult());
-    bool inputValue2(value2.getResult());
+    bool const inputValue1(value1.getResult());
+    bool const inputValue2(value2.getResult());
     switch (operatorObject) {
         case OperatorType::AndOperator:
             outputValue = inputValue1 && inputValue2;
