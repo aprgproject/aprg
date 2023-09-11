@@ -120,12 +120,12 @@ void RunInThread(const BenchmarkInstance* b, IterationCount iters,
       b->measure_process_cpu_time()
           ? internal::ThreadTimer::CreateProcessCpuTime()
           : internal::ThreadTimer::Create());
-  State st =
+  State const st =
       b->Run(iters, thread_id, &timer, manager, perf_counters_measurement);
   BM_CHECK(st.error_occurred() || st.iterations() >= st.max_iterations)
       << "Benchmark returned before State::KeepRunning() returned false!";
   {
-    MutexLock l(manager->GetBenchmarkMutex());
+    MutexLock const l(manager->GetBenchmarkMutex());
     internal::ThreadManager::Result& results = manager->results;
     results.iterations += st.iterations();
     results.cpu_time_used += timer.cpu_time_used();
@@ -196,7 +196,7 @@ BenchmarkRunner::IterationResults BenchmarkRunner::DoNIterations() {
   IterationResults i;
   // Acquire the measurements/counters from the manager, UNDER THE LOCK!
   {
-    MutexLock l(manager->GetBenchmarkMutex());
+    MutexLock const l(manager->GetBenchmarkMutex());
     i.results = manager->results;
   }
 
@@ -238,7 +238,7 @@ IterationCount BenchmarkRunner::PredictNumItersNeeded(
   // Otherwise we use at most 10 times expansion.
   // NOTE: When the last run was at least 10% of the min time the max
   // expansion should be 14x.
-  bool is_significant = (i.seconds / min_time) > 0.1;
+  bool const is_significant = (i.seconds / min_time) > 0.1;
   multiplier = is_significant ? multiplier : 10.0;
 
   // So what seems to be the sufficiently-large iteration count? Round up.
@@ -321,7 +321,7 @@ void BenchmarkRunner::DoOneRepetition() {
   }
 
   // Ok, now actually report.
-  BenchmarkReporter::Run report =
+  BenchmarkReporter::Run const report =
       CreateRunReport(b, i.results, memory_iterations, memory_result, i.seconds,
                       num_repetitions_done, repeats);
 

@@ -128,7 +128,7 @@ std::string HumanReadableNumber(double n, double one_k) {
 
 std::string StrFormatImp(const char* msg, va_list args) {
   // we might need a second shot at this, so pre-emptivly make a copy
-  va_list args_cp;
+  va_list args_cp = nullptr;
   va_copy(args_cp, args);
 
   // TODO(ericwf): use std::array for first attempt to avoid one memory
@@ -159,7 +159,7 @@ std::string StrFormatImp(const char* msg, va_list args) {
 }
 
 std::string StrFormat(const char* format, ...) {
-  va_list args;
+  va_list args = nullptr;
   va_start(args, format);
   std::string tmp = StrFormatImp(format, args);
   va_end(args);
