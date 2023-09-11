@@ -39,12 +39,17 @@ int test_coulomb(void)
 
   /* const int kmax = 20; */
   /* double F[kmax+1], Fp[kmax+1], G[kmax+1], Gp[kmax+1]; */
-  gsl_sf_result F, Fp, G, Gp;
-  double Fe, Ge;
-  double lam_min;
-  double lam_F;
-  double eta, x;
-  int k_G;
+  gsl_sf_result F;
+  gsl_sf_result Fp;
+  gsl_sf_result G;
+  gsl_sf_result Gp;
+  double Fe;
+  double Ge;
+  double lam_min = NAN;
+  double lam_F = NAN;
+  double eta;
+  double x;
+  int k_G = 0;
 
   TEST_SF(s, gsl_sf_hydrogenicR_1_e, (3.0, 2.0, &r),  0.025759948256148471036,  TEST_TOL0, GSL_SUCCESS);
   TEST_SF(s, gsl_sf_hydrogenicR_1_e, (3.0, 10.0, &r), 9.724727052062819704e-13, TEST_TOL1, GSL_SUCCESS);

@@ -25,7 +25,7 @@
 double
 gsl_ldexp (const double x, const int e)
 {
-  int ex;
+  int ex = 0;
   
   if (x == 0.0)
     {
@@ -34,7 +34,8 @@ gsl_ldexp (const double x, const int e)
 
   {
     double y = gsl_frexp (x, &ex);
-    double e2 = e + ex, p2;
+    double e2 = e + ex;
+    double p2;
     
     if (e2 >= DBL_MAX_EXP)
       {
@@ -60,7 +61,7 @@ gsl_frexp (const double x, int *e)
       *e = 0;
       return 0.0;
     }
-  else if (!gsl_finite (x))
+  if (!gsl_finite (x))
     {
       *e = 0;
       return x;

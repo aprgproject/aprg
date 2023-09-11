@@ -50,7 +50,7 @@ int gsl_cheb_calc_integ(gsl_cheb_series * integ, const gsl_cheb_series * f)
   else {
     double sum = 0.0;
     double fac = 1.0;
-    size_t i;
+    size_t i = 0;
     for(i=1; i<=n-2; i++) {
       integ->c[i] = con * (f->c[i-1] - f->c[i+1])/((double)i);
       sum += fac * integ->c[i];

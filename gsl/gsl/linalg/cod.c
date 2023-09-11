@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #include <gsl/gsl_math.h>
@@ -81,13 +82,15 @@ gsl_linalg_COD_decomp_e(gsl_matrix * A, gsl_vector * tau_Q, gsl_vector * tau_Z,
     }
   else
     {
-      int status, signum;
-      size_t r;
+      int status;
+      int signum;
+      size_t r = 0;
 
       /* decompose: A P = Q R */
       status = gsl_linalg_QRPT_decomp(A, tau_Q, p, &signum, work);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* estimate rank of A */
       r = gsl_linalg_QRPT_rank(A, tol);
@@ -339,7 +342,7 @@ gsl_linalg_COD_unpack(const gsl_matrix * QRZT, const gsl_vector * tau_Q,
     }
   else
     {
-      size_t i;
+      size_t i = 0;
       gsl_matrix_view R11 = gsl_matrix_submatrix(R, 0, 0, rank, rank);
       gsl_matrix_const_view QRZT11 = gsl_matrix_const_submatrix(QRZT, 0, 0, rank, rank);
 
@@ -416,7 +419,7 @@ gsl_linalg_COD_matZ(const gsl_matrix * QRZT, const gsl_vector * tau_Z, const siz
       /* if rank == N, then Z = I and there is nothing to do */
       if (rank < N)
         {
-          size_t i;
+          size_t i = 0;
 
           for (i = rank; i > 0 && i--; )
             {
@@ -477,13 +480,13 @@ cod_RZ(gsl_matrix * A, gsl_vector * tau)
     }
   else
     {
-      size_t k;
+      size_t k = 0;
 
       for (k = M; k > 0 && k--; )
         {
           double *alpha = gsl_matrix_ptr(A, k, k);
           gsl_vector_view z = gsl_matrix_subrow(A, k, M, N - M);
-          double tauk;
+          double tauk = NAN;
 
           /* compute Householder reflection to zero [ A(k,k) A(k,M+1:N) ] */
           tauk = cod_householder_transform(alpha, &z.vector);
@@ -505,7 +508,8 @@ cod_RZ(gsl_matrix * A, gsl_vector * tau)
 static double
 cod_householder_transform(double *alpha, gsl_vector * v)
 {
-  double beta, tau;
+  double beta;
+  double tau;
   double xnorm = gsl_blas_dnrm2(v);
 
   if (xnorm == 0)
@@ -557,8 +561,8 @@ cod_householder_hv(const double tau, const gsl_vector * v, gsl_vector * w)
     {
       return GSL_SUCCESS; /* H = I */
     }
-  else
-    {
+  
+    
       const size_t M = w->size;
       const size_t L = v->size;
       double w0 = gsl_vector_get(w, 0);
@@ -578,7 +582,7 @@ cod_householder_hv(const double tau, const gsl_vector * v, gsl_vector * w)
       gsl_blas_daxpy(-tau * d, v, &w1.vector);
 
       return GSL_SUCCESS;
-    }
+   
 }
 
 /*
@@ -602,8 +606,8 @@ cod_householder_mh(const double tau, const gsl_vector * v, gsl_matrix * A,
     {
       return GSL_SUCCESS; /* H = I */
     }
-  else
-    {
+  
+    
       const size_t M = A->size1;
       const size_t N = A->size2;
       const size_t L = v->size;
@@ -623,7 +627,7 @@ cod_householder_mh(const double tau, const gsl_vector * v, gsl_matrix * A,
       gsl_blas_dger(-tau, work, v, &C.matrix);
 
       return GSL_SUCCESS;
-    }
+   
 }
 
 /*
@@ -656,7 +660,7 @@ cod_householder_Zvec(const gsl_matrix * QRZT, const gsl_vector * tau_Z, const si
     {
       if (rank < N)
         {
-          size_t i;
+          size_t i = 0;
 
           for (i = 0; i < rank; ++i)
             {
@@ -705,7 +709,9 @@ cod_trireg_solve (const gsl_matrix * R, const double lambda, const gsl_vector * 
 {
   const size_t N = R->size2;
   gsl_vector_const_view diag = gsl_matrix_const_diagonal(R);
-  size_t i, j, k;
+  size_t i;
+  size_t j;
+  size_t k;
 
   if (lambda <= 0.0)
     {
@@ -739,7 +745,8 @@ cod_trireg_solve (const gsl_matrix * R, const double lambda, const gsl_vector * 
           /* determine a Givens rotation which eliminates the
              appropriate element in the current row of lambda*I */
 
-          double sine, cosine;
+          double sine;
+          double cosine;
 
           double xk = gsl_vector_get (x, k);
           double rkk = gsl_vector_get (work, k);

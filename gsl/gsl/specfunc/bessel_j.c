@@ -25,6 +25,7 @@
 #include <gsl/gsl_sf_pow_int.h>
 #include <gsl/gsl_sf_trig.h>
 #include <gsl/gsl_sf_bessel.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -51,11 +52,11 @@ int gsl_sf_bessel_j0_e(const double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     result->val = sin(x) / x;
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
-  }
+ 
 }
 
 
@@ -70,7 +71,7 @@ int gsl_sf_bessel_j1_e(const double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else if(ax < 3.1*GSL_DBL_MIN) {
+  if(ax < 3.1*GSL_DBL_MIN) {
     UNDERFLOW_ERROR(result);
   }
   else if(ax < 0.25) {
@@ -107,7 +108,7 @@ int gsl_sf_bessel_j2_e(const double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else if(ax < 4.0*GSL_SQRT_DBL_MIN) {
+  if(ax < 4.0*GSL_SQRT_DBL_MIN) {
     UNDERFLOW_ERROR(result);
   }
   else if(ax < 1.3) {
@@ -211,15 +212,15 @@ gsl_sf_bessel_jl_e(const int l, const double x, gsl_sf_result * result)
     return status;  
   }
   else {
-    double sgn;
-    double ratio;
+    double sgn = NAN;
+    double ratio = NAN;
     /* The CF1 call will hit 10000 iterations for x > 10000 + l */
     int stat_CF1 = gsl_sf_bessel_J_CF1(l+0.5, x, &ratio, &sgn);
     const double BESSEL_J_SMALL = GSL_DBL_MIN / GSL_DBL_EPSILON;
     double jellp1 = BESSEL_J_SMALL * ratio;
     double jell   = BESSEL_J_SMALL;
-    double jellm1;
-    int ell;
+    double jellm1 = NAN;
+    int ell = 0;
     for(ell = l; ell > 0; ell--) {
       jellm1 = -jellp1 + (2*ell + 1)/x * jell;
       jellp1 = jell;
@@ -235,7 +236,7 @@ gsl_sf_bessel_jl_e(const int l, const double x, gsl_sf_result * result)
       result->err += 4.0 * GSL_DBL_EPSILON * (0.5*l + 1.0) * fabs(result->val);
       return GSL_ERROR_SELECT_2(stat_j0, stat_CF1);
     }
-    else {
+    
       gsl_sf_result j1_result;
       int stat_j1  = gsl_sf_bessel_j1_e(x, &j1_result);
       double pre   = BESSEL_J_SMALL / jellp1;
@@ -243,7 +244,7 @@ gsl_sf_bessel_jl_e(const int l, const double x, gsl_sf_result * result)
       result->err  = j1_result.err * fabs(pre);
       result->err += 4.0 * GSL_DBL_EPSILON * (0.5*l + 1.0) * fabs(result->val);
       return GSL_ERROR_SELECT_2(stat_j1, stat_CF1);
-    }
+   
   }
 }
 
@@ -254,13 +255,15 @@ gsl_sf_bessel_jl_array(const int lmax, const double x, double * result_array)
   /* CHECK_POINTER(result_array) */
 
   if(lmax < 0 || x < 0.0) {
-    int j;
-    for(j=0; j<=lmax; j++) result_array[j] = 0.0;
+    int j = 0;
+    for(j=0; j<=lmax; j++) { result_array[j] = 0.0;
+}
     GSL_ERROR ("error", GSL_EDOM);
   }
   else if(x == 0.0) {
-    int j;
-    for(j=1; j<=lmax; j++) result_array[j] = 0.0;
+    int j = 0;
+    for(j=1; j<=lmax; j++) { result_array[j] = 0.0;
+}
     result_array[0] = 1.0;
     return GSL_SUCCESS;
   }
@@ -271,8 +274,8 @@ gsl_sf_bessel_jl_array(const int lmax, const double x, double * result_array)
     int stat_1 = gsl_sf_bessel_jl_e(lmax,   x, &r_jell);
     double jellp1 = r_jellp1.val;
     double jell   = r_jell.val;
-    double jellm1;
-    int ell;
+    double jellm1 = NAN;
+    int ell = 0;
 
     result_array[lmax] = jell;
     for(ell = lmax; ell >= 1; ell--) {
@@ -292,13 +295,15 @@ int gsl_sf_bessel_jl_steed_array(const int lmax, const double x, double * jl_x)
   /* CHECK_POINTER(jl_x) */
 
   if(lmax < 0 || x < 0.0) {
-    int j;
-    for(j=0; j<=lmax; j++) jl_x[j] = 0.0;
+    int j = 0;
+    for(j=0; j<=lmax; j++) { jl_x[j] = 0.0;
+}
     GSL_ERROR ("error", GSL_EDOM);
   }
   else if(x == 0.0) {
-    int j;
-    for(j=1; j<=lmax; j++) jl_x[j] = 0.0;
+    int j = 0;
+    for(j=1; j<=lmax; j++) { jl_x[j] = 0.0;
+}
     jl_x[0] = 1.0;
     return GSL_SUCCESS;
   }
@@ -306,7 +311,7 @@ int gsl_sf_bessel_jl_steed_array(const int lmax, const double x, double * jl_x)
     /* first two terms of Taylor series */
     double inv_fact = 1.0;  /* 1/(1 3 5 ... (2l+1)) */
     double x_l      = 1.0;  /* x^l */
-    int l;
+    int l = 0;
     for(l=0; l<=lmax; l++) {
       jl_x[l]  = x_l * inv_fact;
       jl_x[l] *= 1.0 - 0.5*x*x/(2.0*l+3.0);
@@ -334,7 +339,8 @@ int gsl_sf_bessel_jl_steed_array(const int lmax, const double x, double * jl_x)
       D = 1.0/(B-D);
       del *= (B*D - 1.);
       FP += del;
-      if(D < 0.0) F = -F;
+      if(D < 0.0) { F = -F;
+}
       if(B > end) {
         GSL_ERROR ("error", GSL_EMAXITER);
       }
@@ -348,7 +354,7 @@ int gsl_sf_bessel_jl_steed_array(const int lmax, const double x, double * jl_x)
       double XP2 = FP;
       double PL = lmax * x_inv;
       int L  = lmax;
-      int LP;
+      int LP = 0;
       jl_x[lmax] = F;
       for(LP = 1; LP<=lmax; LP++) {
         jl_x[L-1] = PL * jl_x[L] + XP2;
@@ -364,7 +370,7 @@ int gsl_sf_bessel_jl_steed_array(const int lmax, const double x, double * jl_x)
     W = x_inv / hypot(FP, F);
     jl_x[0] = W*F;
     if(lmax > 0) {
-      int L;
+      int L = 0;
       for(L=1; L<=lmax; L++) {
         jl_x[L] *= W;
       }

@@ -7,21 +7,22 @@
 
 void
 test_rotmg (void) {
-const double flteps = 1e-4, dbleps = 1e-6;
+const double flteps = 1e-4;
+const double dbleps = 1e-6;
   {
-   float d1 = -1630.28519312f;
-   float d2 = 44320.1964703f;
-   float b1 = 1274.7681352f;
-   float b2 = 0.983006912864f;
-   float h[] = { -999.0f, -999.1f, -999.2f, -999.3f, -999.4f };
-   float d1_expected = 0.0f;
-   float d2_expected = 0.0f;
-   float b1_expected = 0.0f;
-   float h0_expected = -1.0f;
-   float h11_expected = 0.0f;
-   float h21_expected = 0.0f;
-   float h12_expected = 0.0f;
-   float h22_expected = 0.0f;
+   float d1 = -1630.28519312F;
+   float d2 = 44320.1964703F;
+   float b1 = 1274.7681352F;
+   float b2 = 0.983006912864F;
+   float h[] = { -999.0F, -999.1F, -999.2F, -999.3F, -999.4F };
+   float d1_expected = 0.0F;
+   float d2_expected = 0.0F;
+   float b1_expected = 0.0F;
+   float h0_expected = -1.0F;
+   float h11_expected = 0.0F;
+   float h21_expected = 0.0F;
+   float h12_expected = 0.0F;
+   float h22_expected = 0.0F;
    cblas_srotmg(&d1, &d2, &b1, b2, h);
    gsl_test_rel(d1, d1_expected, flteps, "srotmg(case 606)");
    gsl_test_rel(d2, d2_expected, flteps, "srotmg(case 607)");
@@ -61,19 +62,19 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float d1 = 0.00100326116366f;
-   float d2 = -1.20359225232f;
-   float b1 = -7.45489498808f;
-   float b2 = 0.159616854019f;
-   float h[] = { -999.0f, -999.1f, -999.2f, -999.3f, -999.4f };
-   float d1_expected = 0.00222932574734f;
-   float d2_expected = -2.67447728926f;
-   float b1_expected = -3.35491869218f;
-   float h0_expected = 0.0f;
-   float h11_expected = -999.1f;
-   float h21_expected = 0.0214110130692f;
-   float h12_expected = 25.6863620142f;
-   float h22_expected = -999.4f;
+   float d1 = 0.00100326116366F;
+   float d2 = -1.20359225232F;
+   float b1 = -7.45489498808F;
+   float b2 = 0.159616854019F;
+   float h[] = { -999.0F, -999.1F, -999.2F, -999.3F, -999.4F };
+   float d1_expected = 0.00222932574734F;
+   float d2_expected = -2.67447728926F;
+   float b1_expected = -3.35491869218F;
+   float h0_expected = 0.0F;
+   float h11_expected = -999.1F;
+   float h21_expected = 0.0214110130692F;
+   float h12_expected = 25.6863620142F;
+   float h22_expected = -999.4F;
    cblas_srotmg(&d1, &d2, &b1, b2, h);
    gsl_test_rel(d1, d1_expected, flteps, "srotmg(case 622)");
    gsl_test_rel(d2, d2_expected, flteps, "srotmg(case 623)");
@@ -113,19 +114,19 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float d1 = 0.00760694276009f;
-   float d2 = -1.07649167228f;
-   float b1 = -22584.0076391f;
-   float b2 = -0.00305597817159f;
-   float h[] = { -999.0f, -999.1f, -999.2f, -999.3f, -999.4f };
-   float d1_expected = 0.00760694276011f;
-   float d2_expected = -1.07649167228f;
-   float b1_expected = -22584.007639f;
-   float h0_expected = 0.0f;
-   float h11_expected = -999.1f;
-   float h21_expected = -1.35316026298e-07f;
-   float h12_expected = -1.91491615001e-05f;
-   float h22_expected = -999.4f;
+   float d1 = 0.00760694276009F;
+   float d2 = -1.07649167228F;
+   float b1 = -22584.0076391F;
+   float b2 = -0.00305597817159F;
+   float h[] = { -999.0F, -999.1F, -999.2F, -999.3F, -999.4F };
+   float d1_expected = 0.00760694276011F;
+   float d2_expected = -1.07649167228F;
+   float b1_expected = -22584.007639F;
+   float h0_expected = 0.0F;
+   float h11_expected = -999.1F;
+   float h21_expected = -1.35316026298e-07F;
+   float h12_expected = -1.91491615001e-05F;
+   float h22_expected = -999.4F;
    cblas_srotmg(&d1, &d2, &b1, b2, h);
    gsl_test_rel(d1, d1_expected, flteps, "srotmg(case 638)");
    gsl_test_rel(d2, d2_expected, flteps, "srotmg(case 639)");

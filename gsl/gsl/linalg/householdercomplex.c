@@ -79,8 +79,8 @@ gsl_linalg_complex_householder_transform (gsl_vector_complex * v)
       
       return tau;
     }
-  else
-    { 
+  
+    
       gsl_complex tau ;
       double beta_r;
 
@@ -112,7 +112,7 @@ gsl_linalg_complex_householder_transform (gsl_vector_complex * v)
       }
       
       return tau;
-    }
+   
 }
 
 int
@@ -120,13 +120,15 @@ gsl_linalg_complex_householder_hv (gsl_complex tau, const gsl_vector_complex * v
 {
   const size_t N = v->size;
 
-  if (GSL_REAL(tau) == 0.0 && GSL_IMAG(tau) == 0.0)
+  if (GSL_REAL(tau) == 0.0 && GSL_IMAG(tau) == 0.0) {
     return GSL_SUCCESS;
+}
 
   if (N == 1)
     {
       gsl_complex w0 = gsl_vector_complex_get(w, 0);
-      gsl_complex a, b;
+      gsl_complex a;
+      gsl_complex b;
 
       GSL_SET_COMPLEX(&a, 1.0 - GSL_REAL(tau), -GSL_IMAG(tau)); /* a = 1 - tau */
       b = gsl_complex_mul(a, w0);                               /* b = (1 - tau) w0 */
@@ -137,8 +139,10 @@ gsl_linalg_complex_householder_hv (gsl_complex tau, const gsl_vector_complex * v
       /* compute z = v'w */
 
       gsl_complex z0 = gsl_vector_complex_get(w,0);
-      gsl_complex z1, z;
-      gsl_complex tz, ntz;
+      gsl_complex z1;
+      gsl_complex z;
+      gsl_complex tz;
+      gsl_complex ntz;
     
       gsl_vector_complex_const_view v1 = gsl_vector_complex_const_subvector(v, 1, N-1);
       gsl_vector_complex_view w1 = gsl_vector_complex_subvector(w, 1, N-1);
@@ -200,11 +204,13 @@ gsl_linalg_complex_householder_left(const gsl_complex tau, const gsl_vector_comp
     }
   else
     {
-      gsl_complex v0, mtau;
+      gsl_complex v0;
+      gsl_complex mtau;
 
       /* quick return */
-      if (GSL_REAL(tau) == 0.0 && GSL_IMAG(tau) == 0.0)
+      if (GSL_REAL(tau) == 0.0 && GSL_IMAG(tau) == 0.0) {
         return GSL_SUCCESS;
+}
 
       v0 = gsl_vector_complex_get(v, 0);
       v->data[0] = 1.0;
@@ -232,7 +238,8 @@ gsl_linalg_complex_householder_hm (gsl_complex tau, const gsl_vector_complex * v
 {
   /* applies a householder transformation v,tau to matrix m */
 
-  size_t i, j;
+  size_t i;
+  size_t j;
 
   if (GSL_REAL(tau) == 0.0 && GSL_IMAG(tau) == 0.0)
     {
@@ -284,7 +291,8 @@ gsl_linalg_complex_householder_mh (gsl_complex tau, const gsl_vector_complex * v
 {
   /* applies a householder transformation v,tau to matrix m on the right */
 
-  size_t i, j;
+  size_t i;
+  size_t j;
 
   if (GSL_REAL(tau) == 0.0 && GSL_IMAG(tau) == 0.0)
     {

@@ -45,10 +45,11 @@ test_proc(const gsl_multilarge_nlinear_trs *trs,
   fdf_params.fdtype = fdtype;
 
   if (trs == gsl_multilarge_nlinear_trs_lm ||
-      trs == gsl_multilarge_nlinear_trs_lmaccel)
+      trs == gsl_multilarge_nlinear_trs_lmaccel) {
     fdf_params.solver = gsl_multilarge_nlinear_solver_cholesky;
-  else
+  } else {
     fdf_params.solver = gsl_multilarge_nlinear_solver_mcholesky;
+}
 
   test_fdf_main(&fdf_params);
 }
@@ -58,9 +59,9 @@ main (void)
 {
   const gsl_multilarge_nlinear_trs **nlinear_trs[7];
   const gsl_multilarge_nlinear_scale **nlinear_scales[3];
-  const gsl_multilarge_nlinear_trs **trs;
-  const gsl_multilarge_nlinear_scale **scale;
-  int fdtype;
+  const gsl_multilarge_nlinear_trs **trs = NULL;
+  const gsl_multilarge_nlinear_scale **scale = NULL;
+  int fdtype = 0;
   size_t i = 0;
 
   gsl_ieee_env_setup();

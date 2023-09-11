@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_test.h>
@@ -77,8 +78,8 @@ test_random_matrix_ill(gsl_matrix *m, const gsl_rng *r)
   const double smin = 16.0 * GSL_DBL_EPSILON;
   const double smax = 10.0;
   const double ratio = pow(smin / smax, 1.0 / (N - 1.0));
-  double s;
-  size_t j;
+  double s = NAN;
+  size_t j = 0;
 
   test_random_matrix_orth(U, r);
   test_random_matrix_orth(V, r);
@@ -106,7 +107,7 @@ static void
 test_random_vector(gsl_vector *v, const gsl_rng *r,
                    const double lower, const double upper)
 {
-  size_t i;
+  size_t i = 0;
   size_t N = v->size;
 
   for (i = 0; i < N; ++i)
@@ -120,7 +121,8 @@ static void
 test_random_matrix(gsl_matrix *m, const gsl_rng *r,
                    const double lower, const double upper)
 {
-  size_t i, j;
+  size_t i;
+  size_t j;
   size_t M = m->size1;
   size_t N = m->size2;
 
@@ -137,7 +139,7 @@ test_random_matrix(gsl_matrix *m, const gsl_rng *r,
 static void
 test_random_vector_noise(const gsl_rng *r, gsl_vector *y)
 {
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < y->size; ++i)
     {
@@ -150,7 +152,7 @@ static void
 test_compare_vectors(const double tol, const gsl_vector * a,
                      const gsl_vector * b, const char * desc)
 {
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < a->size; ++i)
     {
@@ -206,24 +208,28 @@ test_multifit_solve(const double lambda, const gsl_matrix * X,
   gsl_multifit_linear_solve(lambda, Xs, ys, cs, rnorm, snorm, w);
 
   /* convert to general form */
-  if (diagL)
+  if (diagL) {
     gsl_multifit_linear_genform1(diagL, cs, c, w);
-  else if (L)
+  } else if (L) {
     gsl_multifit_linear_wgenform2(LQR, Ltau, X, wts, y, cs, M, c, w);
-  else
+  } else {
     gsl_vector_memcpy(c, cs);
+}
 
   gsl_multifit_linear_free(w);
   gsl_matrix_free(Xs);
   gsl_vector_free(ys);
   gsl_vector_free(cs);
 
-  if (LQR)
+  if (LQR) {
     gsl_matrix_free(LQR);
-  if (Ltau)
+}
+  if (Ltau) {
     gsl_vector_free(Ltau);
-  if (M)
+}
+  if (M) {
     gsl_matrix_free(M);
+}
 }
 
 /* solve least squares system with multilarge */
@@ -267,8 +273,9 @@ test_multilarge_solve(const gsl_multilarge_linear_type * T, const double lambda,
       gsl_matrix_view Xsv = gsl_matrix_submatrix(Xs, 0, 0, nr, p);
       gsl_vector_view ysv = gsl_vector_subvector(ys, 0, nr);
 
-      if (wts)
+      if (wts) {
         wv = gsl_vector_subvector(wts, rowidx, nr);
+}
 
       /* convert to standard form */
       if (diagL)
@@ -294,22 +301,25 @@ test_multilarge_solve(const gsl_multilarge_linear_type * T, const double lambda,
 
   gsl_multilarge_linear_solve(lambda, cs, rnorm, snorm, w);
 
-  if (diagL)
+  if (diagL) {
     gsl_multilarge_linear_genform1(diagL, cs, c, w);
-  else if (L)
+  } else if (L) {
     gsl_multilarge_linear_genform2(LQR, Ltau, cs, c, w);
-  else
+  } else {
     gsl_vector_memcpy(c, cs);
+}
 
   gsl_multilarge_linear_free(w);
   gsl_matrix_free(Xs);
   gsl_vector_free(ys);
   gsl_vector_free(cs);
 
-  if (LQR)
+  if (LQR) {
     gsl_matrix_free(LQR);
-  if (Ltau)
+}
+  if (Ltau) {
     gsl_vector_free(Ltau);
+}
 }
 
 static void
@@ -328,10 +338,12 @@ test_random(const gsl_multilarge_linear_type * T,
   gsl_matrix *Ltall = gsl_matrix_alloc(5*p, p);
   gsl_vector *c0 = gsl_vector_alloc(p);
   gsl_vector *c1 = gsl_vector_alloc(p);
-  double rnorm0, snorm0;
-  double rnorm1, snorm1;
+  double rnorm0;
+  double snorm0;
+  double rnorm1;
+  double snorm1;
   char str[2048];
-  size_t i;
+  size_t i = 0;
 
   /* generate LS system */
   /*XXXtest_random_matrix_ill(X, r);*/
@@ -473,7 +485,7 @@ main (void)
     const double tol2 = 1.0e-11;
     const size_t n_vals[] = { 200, 356, 501 };
     const size_t p_vals[] = { 10, 21, 34 };
-    size_t i;
+    size_t i = 0;
 
     for (i = 0; i < 1; ++i)
       {

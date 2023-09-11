@@ -23,18 +23,20 @@
 #include <config.h>
 #include <gsl/gsl_test.h>
 #include <gsl/gsl_sf.h>
+#include <math.h>
 #include "test_sf.h"
 
 static double
 test_legendre_dx(const size_t l)
 {
   const double dx_max = 0.4;
-  double dx;
+  double dx = NAN;
 
-  if (l < 1000)
+  if (l < 1000) {
     dx = exp((double)l / 1000.0) / exp(2.0);
-  else
+  } else {
     dx = dx_max;
+}
 
   return dx;
 } /* test_legendre_dx() */
@@ -53,8 +55,8 @@ static double
 test_legendre_sum(const size_t l, double *p)
 {
   double sum = 0.0;
-  size_t idx;
-  size_t m;
+  size_t idx = 0;
+  size_t m = 0;
 
   for (m = 0; m <= l; ++m)
     {
@@ -78,8 +80,8 @@ static double
 test_legendre_sum_deriv(const int l, double *p, double *dp)
 {
   double sum = 0.0;
-  size_t idx;
-  int m;
+  size_t idx = 0;
+  int m = 0;
 
   for (m = 0; m <= l; ++m)
     {
@@ -103,7 +105,7 @@ static double
 test_legendre_sum_deriv2(const int l, double *p, double *dp, double *d2p)
 {
   double sum = 0.0;
-  int m;
+  int m = 0;
 
   for (m = 0; m <= l; ++m)
     {
@@ -120,10 +122,11 @@ test_value(const size_t lmax, const size_t l, const size_t m,
            const char *desc, const char *desc2)
 {
   size_t idx = gsl_sf_legendre_array_index(l, m);
-  double value;
+  double value = NAN;
 
-  if (l > lmax)
+  if (l > lmax) {
     return;
+}
 
   value = p[idx];
 
@@ -136,9 +139,9 @@ test_factor_spharm(const size_t l, const size_t m)
 {
   double factor = sqrt( (2.0 * l + 1.0) / 4.0 / M_PI);
 
-  if (m == 0)
+  if (m == 0) {
     return factor;
-  else
+  } 
     return (factor / sqrt(2.0));
 } /* test_factor_spharm() */
 
@@ -148,9 +151,9 @@ test_factor_full(const size_t l, const size_t m)
 {
   double factor = sqrt(l + 0.5);
 
-  if (m == 0)
+  if (m == 0) {
     return factor;
-  else
+  } 
     return (factor / sqrt(2.0));
 } /* test_factor_full() */
 
@@ -161,7 +164,8 @@ test_legendre_compare(const size_t lmax, const double *p_expected,
                       double (*factor)(const size_t l, const size_t m),
                       const char *desc, const char *desc2)
 {
-  size_t l, m;
+  size_t l;
+  size_t m;
 
   for (l = 0; l <= lmax; ++l)
     {
@@ -170,8 +174,9 @@ test_legendre_compare(const size_t lmax, const double *p_expected,
           size_t idx = gsl_sf_legendre_array_index(l, m);
           double fac = (*factor)(l, m);
 
-          if (fabs(p_expected[idx]) < GSL_DBL_MIN)
+          if (fabs(p_expected[idx]) < GSL_DBL_MIN) {
             continue;
+}
 
           gsl_test_rel(p[idx] / fac, p_expected[idx], 1.0e-10,
                        "%s %s l=%zu m=%zu", desc, desc2, l, m);
@@ -186,11 +191,17 @@ test_legendre_schmidt(const size_t lmax, const double csphase, const char *desc)
 {
   int s = 0;
   const size_t nlm = gsl_sf_legendre_nlm(lmax);
-  size_t l;
-  double x, dx;
-  double *p, *p2, *dp, *d2p, *p_alt, *dp_alt;
-  size_t dim;
-  size_t i;
+  size_t l = 0;
+  double x;
+  double dx;
+  double *p;
+  double *p2;
+  double *dp;
+  double *d2p;
+  double *p_alt;
+  double *dp_alt;
+  size_t dim = 0;
+  size_t i = 0;
   const gsl_sf_legendre_t norm = GSL_SF_LEGENDRE_SCHMIDT;
 
   dim = gsl_sf_legendre_array_n(lmax);
@@ -263,8 +274,9 @@ test_legendre_schmidt(const size_t lmax, const double csphase, const char *desc)
 
       for (i = 0; i < nlm; ++i)
         {
-          if (fabs(p2[i]) < GSL_DBL_MIN)
+          if (fabs(p2[i]) < GSL_DBL_MIN) {
             continue;
+}
 
           /* check p = p_alt = p2 */
           gsl_test_rel(p[i], p2[i], 1.0e-10, "%s deriv i=%zu", desc, i);
@@ -293,10 +305,11 @@ test_legendre_schmidt(const size_t lmax, const double csphase, const char *desc)
       /* check p = p2 */
       for (i = 0; i < nlm; ++i)
         {
-          if (fabs(p2[i]) < 1.0e3 * GSL_DBL_EPSILON)
+          if (fabs(p2[i]) < 1.0e3 * GSL_DBL_EPSILON) {
             gsl_test_abs(p[i], p2[i], 1.0e-10, "%s deriv2 i=%zu", desc, i);
-          else
+          } else {
             gsl_test_rel(p[i], p2[i], 1.0e-10, "%s deriv2 i=%zu", desc, i);
+}
         }
 
       for (l = 0; l <= lmax; ++l)
@@ -327,10 +340,15 @@ test_legendre_norm(const gsl_sf_legendre_t norm_type, const size_t lmax,
                    const double csphase, const char *desc)
 {
   int s = 0;
-  double x, dx;
-  double *p_schmidt, *dp_schmidt, *d2p_schmidt;
-  double *p, *dp, *d2p;
-  size_t dim;
+  double x;
+  double dx;
+  double *p_schmidt;
+  double *dp_schmidt;
+  double *d2p_schmidt;
+  double *p;
+  double *dp;
+  double *d2p;
+  size_t dim = 0;
   double (*factor)(const size_t l, const size_t m) = NULL;
 
   dim = gsl_sf_legendre_array_n(lmax);
@@ -428,11 +446,18 @@ test_legendre_unnorm(const size_t lmax_orig, const char *desc)
 {
   int s = 0;
   const int lmax = GSL_MIN(lmax_orig, 140);
-  size_t l, m;
-  double x, dx;
-  double *p, *dp, *d2p, *p2;
-  double *p_schmidt, *dp_schmidt, *d2p_schmidt;
-  size_t dim;
+  size_t l;
+  size_t m;
+  double x;
+  double dx;
+  double *p;
+  double *dp;
+  double *d2p;
+  double *p2;
+  double *p_schmidt;
+  double *dp_schmidt;
+  double *d2p_schmidt;
+  size_t dim = 0;
 
   dim = gsl_sf_legendre_array_n(lmax);
   p = malloc(sizeof(double) * dim);
@@ -454,7 +479,7 @@ test_legendre_unnorm(const size_t lmax_orig, const char *desc)
       for (l = 0; l <= (size_t) lmax; ++l)
         {
           double a_lm = sqrt(2.0 / (double)l / (l + 1.0));
-          size_t idx;
+          size_t idx = 0;
 
           /* test S(l,0) = P(l,0) */
           idx = gsl_sf_legendre_array_index(l, 0);
@@ -542,9 +567,10 @@ test_legendre_all(const size_t lmax)
 int test_legendre(void)
 {
   gsl_sf_result r;
-  double L[256], DL[256];
+  double L[256];
+  double DL[256];
   int s = 0;
-  int sa;
+  int sa = 0;
 
   TEST_SF(s,  gsl_sf_legendre_P1_e, (-0.5, &r), -0.5, TEST_TOL0, GSL_SUCCESS);
   TEST_SF(s,  gsl_sf_legendre_P1_e, ( 0.5, &r), 0.5, TEST_TOL0, GSL_SUCCESS);
@@ -1070,10 +1096,11 @@ int test_legendre(void)
 
   /* test associated legendre functions */
   {
-    size_t l;
+    size_t l = 0;
 
-    for (l = 0; l <= 10; ++l)
+    for (l = 0; l <= 10; ++l) {
       test_legendre_all(l);
+}
 
     test_legendre_all(140);
     test_legendre_all(1000);

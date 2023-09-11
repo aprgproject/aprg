@@ -33,10 +33,11 @@
 int
 random_data(const size_t n, double data[], gsl_rng *r)
 {
-  size_t i;
+  size_t i = 0;
 
-  for (i = 0; i < n; ++i)
+  for (i = 0; i < n; ++i) {
     data[i] = 2.0 * gsl_rng_uniform(r) - 1.0;
+}
 
   return 0;
 }
@@ -49,19 +50,28 @@ test_basic(const size_t n, const double data[], const double tol, const char * d
   const double expected_skew = gsl_stats_skew(data, 1, n);
   const double expected_kurtosis = gsl_stats_kurtosis(data, 1, n);
   double expected_rms = 0.0;
-  double mean, var, sd, sd_mean, rms, skew, kurtosis;
-  size_t i, num;
-  int status;
+  double mean;
+  double var;
+  double sd;
+  double sd_mean;
+  double rms;
+  double skew;
+  double kurtosis;
+  size_t i;
+  size_t num;
+  int status = 0;
 
   /* compute expected rms */
-  for (i = 0; i < n; ++i)
+  for (i = 0; i < n; ++i) {
     expected_rms += data[i] * data[i];
+}
 
   expected_rms = sqrt(expected_rms / n);
 
   /* add data to rstat workspace */
-  for (i = 0; i < n; ++i)
+  for (i = 0; i < n; ++i) {
     gsl_rstat_add(data[i], rstat_workspace_p);
+}
 
   mean     = gsl_rstat_mean(rstat_workspace_p);
   rms      = gsl_rstat_rms(rstat_workspace_p);
@@ -94,7 +104,8 @@ test_basic(const size_t n, const double data[], const double tol, const char * d
     {
       /* median should be exact for n <= 5 */
       double * data_copy = malloc(n * sizeof(double));
-      double expected_median, median;
+      double expected_median;
+      double median;
 
       memcpy(data_copy, data, n * sizeof(double));
       expected_median = gsl_stats_median(data_copy, 1, n);
@@ -119,18 +130,20 @@ test_quantile(const double p, const double data[], const size_t n,
               const double expected, const double tol, const char *desc)
 {
   gsl_rstat_quantile_workspace *w = gsl_rstat_quantile_alloc(p);
-  double result;
-  size_t i;
+  double result = NAN;
+  size_t i = 0;
 
-  for (i = 0; i < n; ++i)
+  for (i = 0; i < n; ++i) {
     gsl_rstat_quantile_add(data[i], w);
+}
 
   result = gsl_rstat_quantile_get(w);
 
-  if (fabs(expected) < 1.0e-4)
+  if (fabs(expected) < 1.0e-4) {
     gsl_test_abs(result, expected, tol, "%s p=%g", desc, p);
-  else
+  } else {
     gsl_test_rel(result, expected, tol, "%s p=%g", desc, p);
+}
 
   gsl_rstat_quantile_free(w);
 }
@@ -148,7 +161,8 @@ main()
     const size_t N = 2000000;
     double *data = malloc(N * sizeof(double));
     double data2[5];
-    size_t i, j;
+    size_t i;
+    size_t j;
     char buf[64];
 
     /* test1: test on small datasets n <= 5 (median will be exact in this case) */
@@ -167,8 +181,9 @@ main()
 
     random_data(N, data, r);
 
-    for (i = 1; i <= 10; ++i)
+    for (i = 1; i <= 10; ++i) {
       test_basic(i, data, tol1, "test2");
+}
 
     test_basic(100, data, tol1, "test2");
     test_basic(1000, data, tol1, "test2");
@@ -180,8 +195,9 @@ main()
 
     /* test3: add large constant */
 
-    for (i = 0; i < 5; ++i)
+    for (i = 0; i < 5; ++i) {
       data2[i] += 1.0e9;
+}
 
     test_basic(5, data2, 1.0e-6, "test3");
 
@@ -205,8 +221,8 @@ main()
     double *data = malloc(n * sizeof(double));
     double *sorted_data = malloc(n * sizeof(double));
     gsl_rstat_workspace *rstat_workspace_p = gsl_rstat_alloc();
-    double p;
-    size_t i;
+    double p = NAN;
+    size_t i = 0;
 
     for (i = 0; i < n; ++i)
       {

@@ -40,7 +40,7 @@ main (void)
 
   {
     double t[N];
-    int n;
+    int n = 0;
 
     const double zeta_2 = M_PI * M_PI / 6.0;
 
@@ -58,8 +58,9 @@ main (void)
 
   {
     double t[N];
-    double x, y;
-    int n;
+    double x;
+    double y;
+    int n = 0;
 
     /* terms for exp(10.0) */
     x = 10.0;
@@ -77,8 +78,9 @@ main (void)
 
   {
     double t[N];
-    double x, y;
-    int n;
+    double x;
+    double y;
+    int n = 0;
 
     /* terms for exp(-10.0) */
     x = -10.0;
@@ -96,8 +98,9 @@ main (void)
 
   {
     double t[N];
-    double x, y;
-    int n;
+    double x;
+    double y;
+    int n = 0;
 
     /* terms for -log(1-x) */
     x = 0.5;
@@ -114,8 +117,9 @@ main (void)
 
   {
     double t[N];
-    double x, y;
-    int n;
+    double x;
+    double y;
+    int n = 0;
 
     /* terms for -log(1-x) */
     x = -1.0;
@@ -132,7 +136,7 @@ main (void)
 
   {
     double t[N];
-    int n;
+    int n = 0;
 
     double result = 0.192594048773;
 
@@ -151,7 +155,7 @@ main (void)
 
   {
     double t[N];
-    int n;
+    int n = 0;
 
     /* Euler's gamma from GNU Calc (precision = 32) */
 
@@ -172,7 +176,7 @@ main (void)
 
   {
     double t[N];
-    int n;
+    int n = 0;
 
     /* eta(1/2) = sum_{k=1}^{\infty} (-1)^(k+1) / sqrt(k)
 
@@ -196,7 +200,7 @@ main (void)
 
   {
     double t[N];
-    int n;
+    int n = 0;
 
     double result = 1.23;
 
@@ -216,7 +220,8 @@ main (void)
 void
 check_trunc (double * t, double expected, const char * desc)
 {
-  double sum_accel, prec;
+  double sum_accel;
+  double prec;
 
   gsl_sum_levin_utrunc_workspace * w = gsl_sum_levin_utrunc_alloc (N);
   
@@ -232,7 +237,10 @@ check_trunc (double * t, double expected, const char * desc)
 void
 check_full (double * t, double expected, const char * desc)
 {
-  double sum_accel, err_est, sd_actual, sd_est;
+  double sum_accel;
+  double err_est;
+  double sd_actual;
+  double sd_est;
   
   gsl_sum_levin_u_workspace * w = gsl_sum_levin_u_alloc (N);
 

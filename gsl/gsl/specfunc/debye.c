@@ -220,7 +220,7 @@ int gsl_sf_debye_1_e(const double x, gsl_sf_result * result)
     double sum = 0.0;
     double xk  = nexp * x;
     double rk  = nexp;
-    int i;
+    int i = 0;
     for(i=nexp; i>=1; i--) {
       sum *= ex;
       sum += (1.0 + 1.0/xk)/rk;
@@ -273,7 +273,7 @@ int gsl_sf_debye_2_e(const double x, gsl_sf_result * result)
     double xk  = nexp * x;
     double rk  = nexp;
     double sum = 0.0;
-    int i;
+    int i = 0;
     for(i=nexp; i>=1; i--) {
       sum *= ex;
       sum += (1.0 + 2.0/xk + 2.0/(xk*xk)) / rk;
@@ -329,7 +329,7 @@ int gsl_sf_debye_3_e(const double x, gsl_sf_result * result)
     double xk  = nexp * x;
     double rk  = nexp;
     double sum = 0.0;
-    int i;
+    int i = 0;
     for(i=nexp; i>=1; i--) {
       double xk_inv = 1.0/xk;
       sum *= ex;
@@ -386,7 +386,7 @@ int gsl_sf_debye_4_e(const double x, gsl_sf_result * result)
     double xk  = nexp * x;
     double rk  = nexp;
     double sum = 0.0;
-    int i;
+    int i = 0;
     for(i=nexp; i>=1; i--) {
       double xk_inv = 1.0/xk;
       sum *= ex;
@@ -443,7 +443,7 @@ int gsl_sf_debye_5_e(const double x, gsl_sf_result * result)
     double xk  = nexp * x;
     double rk  = nexp;
     double sum = 0.0;
-    int i;
+    int i = 0;
     for(i=nexp; i>=1; i--) {
       double xk_inv = 1.0/xk;
       sum *= ex;
@@ -501,7 +501,7 @@ int gsl_sf_debye_6_e(const double x, gsl_sf_result * result)
     double xk  = nexp * x;
     double rk  = nexp;
     double sum = 0.0;
-    int i;
+    int i = 0;
     for(i=nexp; i>=1; i--) {
       double xk_inv = 1.0/xk;
       sum *= ex;

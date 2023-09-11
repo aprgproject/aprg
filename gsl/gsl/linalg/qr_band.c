@@ -81,7 +81,7 @@ gsl_linalg_QR_band_decomp_L2 (const size_t M, const size_t p, const size_t q, gs
   else
     {
       const size_t minMN = GSL_MIN(M, N);
-      size_t j;
+      size_t j = 0;
 
       /* set AB(:,1:p) to zero */
       if (p > 0)
@@ -153,7 +153,7 @@ gsl_linalg_QR_band_unpack_L2 (const size_t p, const size_t q, const gsl_matrix *
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* form matrix Q */
       gsl_matrix_set_identity (Q);

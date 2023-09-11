@@ -104,7 +104,8 @@ int test_robust (void);
 int
 main (void)
 {
-  size_t s1, s2;
+  size_t s1;
+  size_t s2;
 
   gsl_ieee_env_setup ();
 

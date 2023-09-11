@@ -114,7 +114,7 @@ gsl_linalg_QR_UD_decomp (gsl_matrix * U, const gsl_vector * D, gsl_matrix * Y, g
        * N1 [ D11 D12 ]
        * N2 [  0  D22 ]
        */
-      int status;
+      int status = 0;
       const size_t N1 = N / 2;
       const size_t N2 = N - N1;
 
@@ -144,8 +144,9 @@ gsl_linalg_QR_UD_decomp (gsl_matrix * U, const gsl_vector * D, gsl_matrix * Y, g
        * N2 [  0  ]      [  0  ] N2
        */
       status = gsl_linalg_QR_UD_decomp(&U11.matrix, &D1.vector, &Y11.matrix, &T11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /*
        * Eq. 3:
@@ -179,8 +180,9 @@ gsl_linalg_QR_UD_decomp (gsl_matrix * U, const gsl_vector * D, gsl_matrix * Y, g
        */
       m = gsl_matrix_submatrix(Y, 0, N1, N, N2);
       status = aux_QR_TRD_decomp(&U22.matrix, &m.matrix, &D2.vector, &T22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /*
        * Eq. 13: update T12 := -T11 * V1^T * V2 * T22
@@ -342,7 +344,7 @@ aux_QR_TRD_decomp (gsl_matrix * U, gsl_matrix * A, const gsl_vector * D, gsl_mat
        * N1 [ D11 D12 ]
        * N2 [  0  D22 ]
        */
-      int status;
+      int status = 0;
       const size_t M = A->size1 - N;
       const size_t N1 = N / 2;
       const size_t N2 = N - N1;
@@ -378,8 +380,9 @@ aux_QR_TRD_decomp (gsl_matrix * U, gsl_matrix * A, const gsl_vector * D, gsl_mat
        */
       m = gsl_matrix_submatrix(A, 0, 0, M + N1, N1);
       status = aux_QR_TRD_decomp(&U11.matrix, &m.matrix, &D1.vector, &T11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /*
        * Eq. 3:
@@ -418,8 +421,9 @@ aux_QR_TRD_decomp (gsl_matrix * U, gsl_matrix * A, const gsl_vector * D, gsl_mat
        */
       m = gsl_matrix_submatrix(A, 0, N1, M + N, N2);
       status = aux_QR_TRD_decomp(&U22.matrix, &m.matrix, &D2.vector, &T22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /*
        * Eq. 13: update T12 := -T11 * V1^T * V2 * T22
@@ -475,7 +479,9 @@ qrtd_householder_transform (double *v0, double *v1)
   /* replace v[0:M-1] with a householder vector (v[0:M-1]) and
      coefficient tau that annihilate v[1:M-1] */
 
-  double alpha, beta, tau ;
+  double alpha;
+  double beta;
+  double tau ;
   
   /* compute xnorm = || [ 0 ; v ] ||, ignoring zero part of vector */
   double xnorm = fabs(*v1);
@@ -541,10 +547,12 @@ qrtrd_householder_transform (double *v0, gsl_vector * v, double *d)
   /* replace v[0:M-1] with a householder vector (v[0:M-1]) and
      coefficient tau that annihilate v[1:M-1] */
 
-  double alpha, beta, tau ;
+  double alpha;
+  double beta;
+  double tau ;
   
   /* compute xnorm = || [ 0 ; v ; 0 ; d] ||, ignoring zero part of vector */
-  double xnorm;
+  double xnorm = NAN;
   
   xnorm = gsl_blas_dnrm2(v);
   xnorm = gsl_hypot(xnorm, *d);

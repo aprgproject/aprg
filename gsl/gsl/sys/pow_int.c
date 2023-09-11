@@ -27,7 +27,7 @@
 
 double gsl_pow_int(double x, int n)
 {
-  unsigned int un;
+  unsigned int un = 0;
 
   if(n < 0) {
     x = 1.0/x;
@@ -47,7 +47,8 @@ double gsl_pow_uint(double x, unsigned int n)
    * returns 0.0^0 = 1.0, so continuous in x
    */
   do {
-     if(n & 1) value *= x;  /* for n odd */
+     if(n & 1) { value *= x;  /* for n odd */
+}
      n >>= 1;
      x *= x;
   } while (n);

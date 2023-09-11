@@ -7,24 +7,25 @@
 
 void
 test_swap (void) {
-const double flteps = 1e-4, dbleps = 1e-6;
+const double flteps = 1e-4;
+const double dbleps = 1e-6;
   {
    int N = 1;
-   float X[] = { 0.539f };
+   float X[] = { 0.539F };
    int incX = 1;
-   float Y[] = { -0.262f };
+   float Y[] = { -0.262F };
    int incY = -1;
-   float expected1[] = { -0.262f };
-   float expected2[] = { 0.539f };
+   float expected1[] = { -0.262F };
+   float expected2[] = { 0.539F };
    cblas_sswap(N, X, incX, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], expected1[i], flteps, "sswap(case 88)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], expected2[i], flteps, "sswap(case 89)");
      }
@@ -42,13 +43,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double expected2[] = { 0.906 };
    cblas_dswap(N, X, incX, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], expected1[i], dbleps, "dswap(case 90)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], expected2[i], dbleps, "dswap(case 91)");
      }
@@ -58,22 +59,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float X[] = { -0.316f, -0.529f };
+   float X[] = { -0.316F, -0.529F };
    int incX = 1;
-   float Y[] = { -0.313f, 0.363f };
+   float Y[] = { -0.313F, 0.363F };
    int incY = -1;
-   float expected1[] = { -0.313f, 0.363f };
-   float expected2[] = { -0.316f, -0.529f };
+   float expected1[] = { -0.313F, 0.363F };
+   float expected2[] = { -0.316F, -0.529F };
    cblas_cswap(N, X, incX, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], expected1[2*i], flteps, "cswap(case 92) real");
        gsl_test_rel(X[2*i+1], expected1[2*i+1], flteps, "cswap(case 92) imag");
      };
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], expected2[2*i], flteps, "cswap(case 93) real");
        gsl_test_rel(Y[2*i+1], expected2[2*i+1], flteps, "cswap(case 93) imag");
@@ -92,14 +93,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double expected2[] = { 0.512, -0.89 };
    cblas_zswap(N, X, incX, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], expected1[2*i], dbleps, "zswap(case 94) real");
        gsl_test_rel(X[2*i+1], expected1[2*i+1], dbleps, "zswap(case 94) imag");
      };
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], expected2[2*i], dbleps, "zswap(case 95) real");
        gsl_test_rel(Y[2*i+1], expected2[2*i+1], dbleps, "zswap(case 95) imag");
@@ -110,21 +111,21 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float X[] = { 0.336f };
+   float X[] = { 0.336F };
    int incX = -1;
-   float Y[] = { -0.431f };
+   float Y[] = { -0.431F };
    int incY = 1;
-   float expected1[] = { -0.431f };
-   float expected2[] = { 0.336f };
+   float expected1[] = { -0.431F };
+   float expected2[] = { 0.336F };
    cblas_sswap(N, X, incX, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], expected1[i], flteps, "sswap(case 96)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], expected2[i], flteps, "sswap(case 97)");
      }
@@ -142,13 +143,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double expected2[] = { 0.764 };
    cblas_dswap(N, X, incX, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], expected1[i], dbleps, "dswap(case 98)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], expected2[i], dbleps, "dswap(case 99)");
      }
@@ -158,22 +159,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float X[] = { -0.239f, 0.361f };
+   float X[] = { -0.239F, 0.361F };
    int incX = -1;
-   float Y[] = { 0.149f, 0.347f };
+   float Y[] = { 0.149F, 0.347F };
    int incY = 1;
-   float expected1[] = { 0.149f, 0.347f };
-   float expected2[] = { -0.239f, 0.361f };
+   float expected1[] = { 0.149F, 0.347F };
+   float expected2[] = { -0.239F, 0.361F };
    cblas_cswap(N, X, incX, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], expected1[2*i], flteps, "cswap(case 100) real");
        gsl_test_rel(X[2*i+1], expected1[2*i+1], flteps, "cswap(case 100) imag");
      };
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], expected2[2*i], flteps, "cswap(case 101) real");
        gsl_test_rel(Y[2*i+1], expected2[2*i+1], flteps, "cswap(case 101) imag");
@@ -192,14 +193,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double expected2[] = { -0.171, -0.936 };
    cblas_zswap(N, X, incX, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], expected1[2*i], dbleps, "zswap(case 102) real");
        gsl_test_rel(X[2*i+1], expected1[2*i+1], dbleps, "zswap(case 102) imag");
      };
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], expected2[2*i], dbleps, "zswap(case 103) real");
        gsl_test_rel(Y[2*i+1], expected2[2*i+1], dbleps, "zswap(case 103) imag");
@@ -210,21 +211,21 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float X[] = { -0.405f };
+   float X[] = { -0.405F };
    int incX = -1;
-   float Y[] = { -0.213f };
+   float Y[] = { -0.213F };
    int incY = -1;
-   float expected1[] = { -0.213f };
-   float expected2[] = { -0.405f };
+   float expected1[] = { -0.213F };
+   float expected2[] = { -0.405F };
    cblas_sswap(N, X, incX, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], expected1[i], flteps, "sswap(case 104)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], expected2[i], flteps, "sswap(case 105)");
      }
@@ -242,13 +243,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double expected2[] = { -0.761 };
    cblas_dswap(N, X, incX, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], expected1[i], dbleps, "dswap(case 106)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], expected2[i], dbleps, "dswap(case 107)");
      }
@@ -258,22 +259,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float X[] = { 0.853f, 0.146f };
+   float X[] = { 0.853F, 0.146F };
    int incX = -1;
-   float Y[] = { 0.009f, -0.178f };
+   float Y[] = { 0.009F, -0.178F };
    int incY = -1;
-   float expected1[] = { 0.009f, -0.178f };
-   float expected2[] = { 0.853f, 0.146f };
+   float expected1[] = { 0.009F, -0.178F };
+   float expected2[] = { 0.853F, 0.146F };
    cblas_cswap(N, X, incX, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], expected1[2*i], flteps, "cswap(case 108) real");
        gsl_test_rel(X[2*i+1], expected1[2*i+1], flteps, "cswap(case 108) imag");
      };
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], expected2[2*i], flteps, "cswap(case 109) real");
        gsl_test_rel(Y[2*i+1], expected2[2*i+1], flteps, "cswap(case 109) imag");
@@ -292,14 +293,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double expected2[] = { -0.228, 0.386 };
    cblas_zswap(N, X, incX, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], expected1[2*i], dbleps, "zswap(case 110) real");
        gsl_test_rel(X[2*i+1], expected1[2*i+1], dbleps, "zswap(case 110) imag");
      };
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], expected2[2*i], dbleps, "zswap(case 111) real");
        gsl_test_rel(Y[2*i+1], expected2[2*i+1], dbleps, "zswap(case 111) imag");

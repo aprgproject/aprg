@@ -42,17 +42,30 @@ void my_error_handler (const char *reason, const char *file,
 int
 main (void)
 {
-  gsl_function F_sin, F_cos, F_func1, F_func2, F_func3, F_func4,
-	  F_func5, F_func6;
+  gsl_function F_sin;
+  gsl_function F_cos;
+  gsl_function F_func1;
+  gsl_function F_func2;
+  gsl_function F_func3;
+  gsl_function F_func4;
+  gsl_function F_func5;
+  gsl_function F_func6;
   
-  gsl_function_fdf FDF_sin, FDF_cos, FDF_func1, FDF_func2, FDF_func3, FDF_func4,
-	  FDF_func5, FDF_func6, FDF_func7;
+  gsl_function_fdf FDF_sin;
+  gsl_function_fdf FDF_cos;
+  gsl_function_fdf FDF_func1;
+  gsl_function_fdf FDF_func2;
+  gsl_function_fdf FDF_func3;
+  gsl_function_fdf FDF_func4;
+  gsl_function_fdf FDF_func5;
+  gsl_function_fdf FDF_func6;
+  gsl_function_fdf FDF_func7;
 
   const gsl_root_fsolver_type * fsolver[4] ;
   const gsl_root_fdfsolver_type * fdfsolver[4] ;
 
-  const gsl_root_fsolver_type ** T;
-  const gsl_root_fdfsolver_type ** S;
+  const gsl_root_fsolver_type ** T = NULL;
+  const gsl_root_fdfsolver_type ** S = NULL;
 
   gsl_ieee_env_setup();
 
@@ -139,11 +152,14 @@ void
 test_f (const gsl_root_fsolver_type * T, const char * description, gsl_function *f,
         double lower_bound, double upper_bound, double correct_root)
 {
-  int status;
+  int status = 0;
   size_t iterations = 0;
-  double r, a, b;
-  double x_lower, x_upper;
-  gsl_root_fsolver * s;
+  double r;
+  double a;
+  double b;
+  double x_lower;
+  double x_upper;
+  gsl_root_fsolver * s = NULL;
 
   x_lower = lower_bound;
   x_upper = upper_bound;
@@ -162,11 +178,13 @@ test_f (const gsl_root_fsolver_type * T, const char * description, gsl_function 
       a = gsl_root_fsolver_x_lower(s);
       b = gsl_root_fsolver_x_upper(s);
       
-      if (a > b)
+      if (a > b) {
         gsl_test (GSL_FAILURE, "interval is invalid (%g,%g)", a, b);
+}
 
-      if (r < a || r > b)
+      if (r < a || r > b) {
         gsl_test (GSL_FAILURE, "r lies outside interval %g (%g,%g)", r, a, b);
+}
 
       status = gsl_root_test_interval (a,b, EPSABS, EPSREL);
     }
@@ -199,10 +217,11 @@ test_f_e (const gsl_root_fsolver_type * T,
           const char * description, gsl_function *f,
           double lower_bound, double upper_bound, double correct_root)
 {
-  int status;
+  int status = 0;
   size_t iterations = 0;
-  double x_lower, x_upper;
-  gsl_root_fsolver * s;
+  double x_lower;
+  double x_upper;
+  gsl_root_fsolver * s = NULL;
 
   x_lower = lower_bound;
   x_upper = upper_bound;
@@ -239,7 +258,7 @@ void
 test_fdf (const gsl_root_fdfsolver_type * T, const char * description, 
         gsl_function_fdf *fdf, double root, double correct_root)
 {
-  int status;
+  int status = 0;
   size_t iterations = 0;
   double prev = 0 ;
 
@@ -282,7 +301,7 @@ test_fdf_e (const gsl_root_fdfsolver_type * T,
             const char * description, gsl_function_fdf *fdf,
             double root, double correct_root)
 {
-  int status;
+  int status = 0;
   size_t iterations = 0;
   double prev = 0 ;
 
@@ -309,8 +328,9 @@ test_fdf_e (const gsl_root_fdfsolver_type * T,
 void
 my_error_handler (const char *reason, const char *file, int line, int err)
 {
-  if (0)
+  if (0) {
     printf ("(caught [%s:%d: %s (%d)])\n", file, line, reason, err);
+}
 }
 
 

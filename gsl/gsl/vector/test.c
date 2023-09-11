@@ -136,7 +136,9 @@ void my_error_handler (const char *reason, const char *file,
 int
 main (void)
 {
-  size_t stride, ostride, N;
+  size_t stride;
+  size_t ostride;
+  size_t N;
 
   gsl_ieee_env_setup ();
 
@@ -278,7 +280,8 @@ main (void)
 void
 my_error_handler (const char *reason, const char *file, int line, int err)
 {
-  if (0)
+  if (0) {
     printf ("(caught [%s:%d: %s (%d)])\n", file, line, reason, err);
+}
   status = 1;
 }

@@ -74,9 +74,11 @@ gsl_sf_bessel_sequence_Jnu_e(double nu, gsl_mode_t mode, size_t size, double * v
     const double smalls[] = { 0.01, 0.02, 0.4, 0.7, 1.3, 2.0, 2.5, 3.2, 3.5, 4.5, 6.0 };
     const double x_small = ( nu >= 10.0 ? nu - nu13 : smalls[cnu] );
 
-    gsl_sf_result J0, J1;
-    double Jp, J;
-    double x;
+    gsl_sf_result J0;
+    gsl_sf_result J1;
+    double Jp;
+    double J;
+    double x = NAN;
     size_t i = 0;
 
     /* Calculate the first point. */
@@ -129,8 +131,8 @@ gsl_sf_bessel_sequence_Jnu_e(double nu, gsl_mode_t mode, size_t size, double * v
       const double dv = v[i] - x;
       const int Nd    = (int) ceil(dv/dx_nominal);
       const double dx = dv / Nd;
-      double xj;
-      int j;
+      double xj = NAN;
+      int j = 0;
 
       if(v[i] <= x) {
         /* Strict ordering failure. */

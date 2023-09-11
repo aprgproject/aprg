@@ -27,6 +27,7 @@
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_linalg.h>
+#include <math.h>
 
 #include "recurse.h"
 
@@ -45,11 +46,12 @@ gsl_linalg_tri_invert(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_matrix * T)
     }
   else
     {
-      int status;
+      int status = 0;
       
       status = triangular_singular(T);
-      if (status)
+      if (status) {
         return status;
+}
 
       return triangular_inverse_L3(Uplo, Diag, T);
     }
@@ -83,13 +85,13 @@ triangular_inverse_L2(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_matrix * T)
     {
       gsl_matrix_view m;
       gsl_vector_view v;
-      size_t i;
+      size_t i = 0;
 
       if (Uplo == CblasUpper)
         {
           for (i = 0; i < N; ++i)
             {
-              double aii;
+              double aii = NAN;
 
               if (Diag == CblasNonUnit)
                 {
@@ -118,7 +120,7 @@ triangular_inverse_L2(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_matrix * T)
         {
           for (i = 0; i < N; ++i)
             {
-              double ajj;
+              double ajj = NAN;
               size_t j = N - i - 1;
 
               if (Diag == CblasNonUnit)
@@ -189,7 +191,7 @@ triangular_inverse_L3(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_matrix * T)
        *
        * where T11 is N1-by-N1
        */
-      int status;
+      int status = 0;
       const size_t N1 = GSL_LINALG_SPLIT(N);
       const size_t N2 = N - N1;
       gsl_matrix_view T11 = gsl_matrix_submatrix(T, 0, 0, N1, N1);
@@ -199,8 +201,9 @@ triangular_inverse_L3(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_matrix * T)
 
       /* recursion on T11 */
       status = triangular_inverse_L3(Uplo, Diag, &T11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       if (Uplo == CblasLower)
         {
@@ -221,8 +224,9 @@ triangular_inverse_L3(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_matrix * T)
 
       /* recursion on T22 */
       status = triangular_inverse_L3(Uplo, Diag, &T22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       return GSL_SUCCESS;
     }
@@ -231,13 +235,14 @@ triangular_inverse_L3(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_matrix * T)
 static int
 triangular_singular(const gsl_matrix * T)
 {
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < T->size1; ++i)
     {
       double Tii = gsl_matrix_get(T, i, i);
-      if (Tii == 0.0)
+      if (Tii == 0.0) {
         return GSL_ESING;
+}
     }
 
   return GSL_SUCCESS;
@@ -249,8 +254,9 @@ int
 gsl_linalg_tri_upper_invert(gsl_matrix * T)
 {
   int status = triangular_singular(T);
-  if (status)
+  if (status) {
     return status;
+}
   
   return triangular_inverse_L3(CblasUpper, CblasNonUnit, T);
 }
@@ -259,8 +265,9 @@ int
 gsl_linalg_tri_lower_invert(gsl_matrix * T)
 {
   int status = triangular_singular(T);
-  if (status)
+  if (status) {
     return status;
+}
 
   return triangular_inverse_L3(CblasLower, CblasNonUnit, T);
 }
@@ -269,8 +276,9 @@ int
 gsl_linalg_tri_upper_unit_invert(gsl_matrix * T)
 {
   int status = triangular_singular(T);
-  if (status)
+  if (status) {
     return status;
+}
 
   return triangular_inverse_L3(CblasUpper, CblasUnit, T);
 }
@@ -279,8 +287,9 @@ int
 gsl_linalg_tri_lower_unit_invert(gsl_matrix * T)
 {
   int status = triangular_singular(T);
-  if (status)
+  if (status) {
     return status;
+}
 
   return triangular_inverse_L3(CblasLower, CblasUnit, T);
 }

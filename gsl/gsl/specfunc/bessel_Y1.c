@@ -97,7 +97,7 @@ int gsl_sf_bessel_Y1_e(const double x, gsl_sf_result * result)
   }
   else if(x < 4.0) {
     const double lnterm = log(0.5*x);
-    int status;
+    int status = 0;
     gsl_sf_result J1;
     gsl_sf_result c;
     cheb_eval_e(&by1_cs, 0.125*x*x-1.0, &c);

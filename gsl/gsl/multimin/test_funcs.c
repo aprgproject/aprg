@@ -327,10 +327,12 @@ spring_f (const gsl_vector * x, void *params)
   double theta = atan2 (x1, x0);
   double r = sqrt (x0 * x0 + x1 * x1);
   double z = x2;
-  while (z > M_PI)
+  while (z > M_PI) {
     z -= 2.0 * M_PI;
-  while (z < -M_PI)
+}
+  while (z < -M_PI) {
     z += 2.0 * M_PI;
+}
   {
     double tmz = theta - z;
     double rm1 = r - 1.0;

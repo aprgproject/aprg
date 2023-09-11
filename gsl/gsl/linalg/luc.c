@@ -72,12 +72,12 @@ gsl_linalg_complex_LU_decomp (gsl_matrix_complex * A, gsl_permutation * p, int *
     }
   else
     {
-      int status;
+      int status = 0;
       const size_t N = A->size2;
       const size_t minMN = GSL_MIN(M, N);
       gsl_vector_uint * ipiv = gsl_vector_uint_alloc(minMN);
       gsl_matrix_complex_view AL = gsl_matrix_complex_submatrix(A, 0, 0, M, minMN);
-      size_t i;
+      size_t i = 0;
 
       status = LU_decomp_L3 (&AL.matrix, ipiv);
 
@@ -141,14 +141,16 @@ LU_decomp_L2 (gsl_matrix_complex * A, gsl_vector_uint * ipiv)
     }
   else
     {
-      size_t i, j;
+      size_t i;
+      size_t j;
 
       for (j = 0; j < minMN; ++j)
         {
           /* find maximum in the j-th column */
           gsl_vector_complex_view v = gsl_matrix_complex_subcolumn(A, j, j, M - j);
           size_t j_pivot = j + gsl_blas_izamax(&v.vector);
-          gsl_vector_complex_view v1, v2;
+          gsl_vector_complex_view v1;
+          gsl_vector_complex_view v2;
 
           gsl_vector_uint_set(ipiv, j, j_pivot);
 
@@ -237,7 +239,7 @@ LU_decomp_L3 (gsl_matrix_complex * A, gsl_vector_uint * ipiv)
        *      N1  N2
        * M  [ AL  AR  ]
        */
-      int status;
+      int status = 0;
       const size_t N1 = GSL_LINALG_SPLIT_COMPLEX(N);
       const size_t N2 = N - N1;
       const size_t M2 = M - N1;
@@ -256,12 +258,13 @@ LU_decomp_L3 (gsl_matrix_complex * A, gsl_vector_uint * ipiv)
       gsl_vector_uint_view ipiv1 = gsl_vector_uint_subvector(ipiv, 0, N1);
       gsl_vector_uint_view ipiv2 = gsl_vector_uint_subvector(ipiv, N1, N2);
 
-      size_t i;
+      size_t i = 0;
 
       /* recursion on (AL, ipiv1) */
       status = LU_decomp_L3(&AL.matrix, &ipiv1.vector);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* apply ipiv1 to AR */
       apply_pivots(&AR.matrix, &ipiv1.vector);
@@ -274,8 +277,9 @@ LU_decomp_L3 (gsl_matrix_complex * A, gsl_vector_uint * ipiv)
 
       /* recursion on (A22, ipiv2) */
       status = LU_decomp_L3(&A22.matrix, &ipiv2.vector);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* apply pivots to A21 */
       apply_pivots(&A21.matrix, &ipiv2.vector);
@@ -316,7 +320,7 @@ gsl_linalg_complex_LU_solve (const gsl_matrix_complex * LU, const gsl_permutatio
     }
   else
     {
-      int status;
+      int status = 0;
 
       /* copy x <- b */
       gsl_vector_complex_memcpy (x, b);
@@ -401,7 +405,7 @@ gsl_linalg_complex_LU_refine (const gsl_matrix_complex * A, const gsl_matrix_com
     }
   else
     {
-      int status;
+      int status = 0;
 
       /* Compute residual = (A * x  - b) */
 
@@ -465,24 +469,27 @@ gsl_linalg_complex_LU_invx (gsl_matrix_complex * LU, const gsl_permutation * p)
     }
   else
     {
-      int status;
+      int status = 0;
       const size_t N = LU->size1;
-      size_t i;
+      size_t i = 0;
 
       /* compute U^{-1} */
       status = gsl_linalg_complex_tri_invert(CblasUpper, CblasNonUnit, LU);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* compute L^{-1} */
       status = gsl_linalg_complex_tri_invert(CblasLower, CblasUnit, LU);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* compute U^{-1} L^{-1} */
       status = gsl_linalg_complex_tri_UL(LU);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* apply permutation to columns of A^{-1} */
       for (i = 0; i < N; ++i)
@@ -498,7 +505,8 @@ gsl_linalg_complex_LU_invx (gsl_matrix_complex * LU, const gsl_permutation * p)
 gsl_complex
 gsl_linalg_complex_LU_det (gsl_matrix_complex * LU, int signum)
 {
-  size_t i, n = LU->size1;
+  size_t i;
+  size_t n = LU->size1;
 
   gsl_complex det = gsl_complex_rect((double) signum, 0.0);
 
@@ -515,7 +523,8 @@ gsl_linalg_complex_LU_det (gsl_matrix_complex * LU, int signum)
 double
 gsl_linalg_complex_LU_lndet (gsl_matrix_complex * LU)
 {
-  size_t i, n = LU->size1;
+  size_t i;
+  size_t n = LU->size1;
 
   double lndet = 0.0;
 
@@ -532,7 +541,8 @@ gsl_linalg_complex_LU_lndet (gsl_matrix_complex * LU)
 gsl_complex
 gsl_linalg_complex_LU_sgndet (gsl_matrix_complex * LU, int signum)
 {
-  size_t i, n = LU->size1;
+  size_t i;
+  size_t n = LU->size1;
 
   gsl_complex phase = gsl_complex_rect((double) signum, 0.0);
 
@@ -547,11 +557,11 @@ gsl_linalg_complex_LU_sgndet (gsl_matrix_complex * LU, int signum)
           phase = gsl_complex_rect(0.0, 0.0);
           break;
         }
-      else
-        {
+      
+        
           z = gsl_complex_div_real(z, r);
           phase = gsl_complex_mul(phase, z);
-        }
+       
     }
 
   return phase;
@@ -560,12 +570,14 @@ gsl_linalg_complex_LU_sgndet (gsl_matrix_complex * LU, int signum)
 static int
 singular (const gsl_matrix_complex * LU)
 {
-  size_t i, n = LU->size1;
+  size_t i;
+  size_t n = LU->size1;
 
   for (i = 0; i < n; i++)
     {
       gsl_complex u = gsl_matrix_complex_get (LU, i, i);
-      if (GSL_REAL(u) == 0 && GSL_IMAG(u) == 0) return 1;
+      if (GSL_REAL(u) == 0 && GSL_IMAG(u) == 0) { return 1;
+}
     }
  
  return 0;
@@ -580,7 +592,7 @@ apply_pivots(gsl_matrix_complex * A, const gsl_vector_uint * ipiv)
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < ipiv->size; ++i)
         {

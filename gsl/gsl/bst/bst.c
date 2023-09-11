@@ -48,8 +48,8 @@ gsl_bst_workspace *
 gsl_bst_alloc(const gsl_bst_type * T, const gsl_bst_allocator * allocator,
               gsl_bst_cmp_function * compare, void * params)
 {
-  int status;
-  gsl_bst_workspace *w;
+  int status = 0;
+  gsl_bst_workspace *w = NULL;
 
   w = calloc(1, sizeof(gsl_bst_workspace));
   if (w == NULL)

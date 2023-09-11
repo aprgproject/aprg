@@ -30,9 +30,9 @@ static double c[NVAL];
 int test_mathieu(void)
 {
   gsl_sf_result r;
-  gsl_sf_mathieu_workspace *work;
+  gsl_sf_mathieu_workspace *work = NULL;
   int s = 0;
-  int sa;
+  int sa = 0;
 
   TEST_SF(s, gsl_sf_mathieu_ce_e, (0, 0.0, 0.0, &r),
           0.7071067811865475, TEST_SNGL, GSL_SUCCESS);

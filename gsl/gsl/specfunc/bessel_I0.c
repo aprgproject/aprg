@@ -152,7 +152,7 @@ int gsl_sf_bessel_I0_scaled_e(const double x, gsl_sf_result * result)
     result->err = 0.5*y*y;
     return GSL_SUCCESS;
   }
-  else if(y <= 3.0) {
+  if(y <= 3.0) {
     const double ey = exp(-y);
     gsl_sf_result c;
     cheb_eval_e(&bi0_cs, y*y/4.5-1.0, &c);
@@ -194,7 +194,7 @@ int gsl_sf_bessel_I0_e(const double x, gsl_sf_result * result)
     result->err = 0.5*y*y;
     return GSL_SUCCESS;
   }
-  else if(y <= 3.0) {
+  if(y <= 3.0) {
     gsl_sf_result c;
     cheb_eval_e(&bi0_cs, y*y/4.5-1.0, &c);
     result->val  = 2.75 + c.val;

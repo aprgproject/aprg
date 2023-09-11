@@ -36,7 +36,7 @@ compare_vectors(const double tol, const gsl_vector * v, const gsl_vector * expec
                 const char * desc)
 {
   const size_t n = v->size;
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < n; ++i)
     {
@@ -51,7 +51,7 @@ compare_vectors(const double tol, const gsl_vector * v, const gsl_vector * expec
 static void
 random_vector(gsl_vector * v, gsl_rng * r)
 {
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < v->size; ++i)
     {

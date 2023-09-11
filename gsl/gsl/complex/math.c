@@ -97,7 +97,8 @@ gsl_complex_logabs (gsl_complex z)
 {                               /* return log|z| */
   double xabs = fabs (GSL_REAL (z));
   double yabs = fabs (GSL_IMAG (z));
-  double max, u;
+  double max;
+  double u;
 
   if (xabs >= yabs)
     {
@@ -123,8 +124,10 @@ gsl_complex_logabs (gsl_complex z)
 gsl_complex
 gsl_complex_add (gsl_complex a, gsl_complex b)
 {                               /* z=a+b */
-  double ar = GSL_REAL (a), ai = GSL_IMAG (a);
-  double br = GSL_REAL (b), bi = GSL_IMAG (b);
+  double ar = GSL_REAL (a);
+  double ai = GSL_IMAG (a);
+  double br = GSL_REAL (b);
+  double bi = GSL_IMAG (b);
 
   gsl_complex z;
   GSL_SET_COMPLEX (&z, ar + br, ai + bi);
@@ -151,8 +154,10 @@ gsl_complex_add_imag (gsl_complex a, double y)
 gsl_complex
 gsl_complex_sub (gsl_complex a, gsl_complex b)
 {                               /* z=a-b */
-  double ar = GSL_REAL (a), ai = GSL_IMAG (a);
-  double br = GSL_REAL (b), bi = GSL_IMAG (b);
+  double ar = GSL_REAL (a);
+  double ai = GSL_IMAG (a);
+  double br = GSL_REAL (b);
+  double bi = GSL_IMAG (b);
 
   gsl_complex z;
   GSL_SET_COMPLEX (&z, ar - br, ai - bi);
@@ -178,8 +183,10 @@ gsl_complex_sub_imag (gsl_complex a, double y)
 gsl_complex
 gsl_complex_mul (gsl_complex a, gsl_complex b)
 {                               /* z=a*b */
-  double ar = GSL_REAL (a), ai = GSL_IMAG (a);
-  double br = GSL_REAL (b), bi = GSL_IMAG (b);
+  double ar = GSL_REAL (a);
+  double ai = GSL_IMAG (a);
+  double br = GSL_REAL (b);
+  double bi = GSL_IMAG (b);
 
   gsl_complex z;
   GSL_SET_COMPLEX (&z, ar * br - ai * bi, ar * bi + ai * br);
@@ -205,8 +212,10 @@ gsl_complex_mul_imag (gsl_complex a, double y)
 gsl_complex
 gsl_complex_div (gsl_complex a, gsl_complex b)
 {                               /* z=a/b */
-  double ar = GSL_REAL (a), ai = GSL_IMAG (a);
-  double br = GSL_REAL (b), bi = GSL_IMAG (b);
+  double ar = GSL_REAL (a);
+  double ai = GSL_IMAG (a);
+  double br = GSL_REAL (b);
+  double bi = GSL_IMAG (b);
 
   double s = 1.0 / gsl_complex_abs (b);
 
@@ -280,7 +289,7 @@ gsl_complex_sqrt (gsl_complex a)
     {
       double x = fabs (GSL_REAL (a));
       double y = fabs (GSL_IMAG (a));
-      double w;
+      double w = NAN;
 
       if (x >= y)
         {
@@ -366,7 +375,8 @@ gsl_complex_pow (gsl_complex a, gsl_complex b)
       double logr = gsl_complex_logabs (a);
       double theta = gsl_complex_arg (a);
 
-      double br = GSL_REAL (b), bi = GSL_IMAG (b);
+      double br = GSL_REAL (b);
+      double bi = GSL_IMAG (b);
 
       double rho = exp (logr * br - bi * theta);
       double beta = theta * br + bi * logr;
@@ -435,7 +445,8 @@ gsl_complex_log_b (gsl_complex a, gsl_complex b)
 gsl_complex
 gsl_complex_sin (gsl_complex a)
 {                               /* z = sin(a) */
-  double R = GSL_REAL (a), I = GSL_IMAG (a);
+  double R = GSL_REAL (a);
+  double I = GSL_IMAG (a);
 
   gsl_complex z;
 
@@ -456,7 +467,8 @@ gsl_complex_sin (gsl_complex a)
 gsl_complex
 gsl_complex_cos (gsl_complex a)
 {                               /* z = cos(a) */
-  double R = GSL_REAL (a), I = GSL_IMAG (a);
+  double R = GSL_REAL (a);
+  double I = GSL_IMAG (a);
 
   gsl_complex z;
 
@@ -477,7 +489,8 @@ gsl_complex_cos (gsl_complex a)
 gsl_complex
 gsl_complex_tan (gsl_complex a)
 {                               /* z = tan(a) */
-  double R = GSL_REAL (a), I = GSL_IMAG (a);
+  double R = GSL_REAL (a);
+  double I = GSL_IMAG (a);
 
   gsl_complex z;
 
@@ -527,7 +540,8 @@ gsl_complex_cot (gsl_complex a)
 gsl_complex
 gsl_complex_arcsin (gsl_complex a)
 {                               /* z = arcsin(a) */
-  double R = GSL_REAL (a), I = GSL_IMAG (a);
+  double R = GSL_REAL (a);
+  double I = GSL_IMAG (a);
   gsl_complex z;
 
   if (I == 0)
@@ -536,15 +550,19 @@ gsl_complex_arcsin (gsl_complex a)
     }
   else
     {
-      double x = fabs (R), y = fabs (I);
-      double r = hypot (x + 1, y), s = hypot (x - 1, y);
+      double x = fabs (R);
+      double y = fabs (I);
+      double r = hypot (x + 1, y);
+      double s = hypot (x - 1, y);
       double A = 0.5 * (r + s);
       double B = x / A;
       double y2 = y * y;
 
-      double real, imag;
+      double real;
+      double imag;
 
-      const double A_crossover = 1.5, B_crossover = 0.6417;
+      const double A_crossover = 1.5;
+      const double B_crossover = 0.6417;
 
       if (B <= B_crossover)
         {
@@ -567,7 +585,7 @@ gsl_complex_arcsin (gsl_complex a)
 
       if (A <= A_crossover)
         {
-          double Am1;
+          double Am1 = NAN;
 
           if (x < 1)
             {
@@ -618,7 +636,8 @@ gsl_complex_arcsin_real (double a)
 gsl_complex
 gsl_complex_arccos (gsl_complex a)
 {                               /* z = arccos(a) */
-  double R = GSL_REAL (a), I = GSL_IMAG (a);
+  double R = GSL_REAL (a);
+  double I = GSL_IMAG (a);
   gsl_complex z;
 
   if (I == 0)
@@ -627,15 +646,19 @@ gsl_complex_arccos (gsl_complex a)
     }
   else
     {
-      double x = fabs (R), y = fabs (I);
-      double r = hypot (x + 1, y), s = hypot (x - 1, y);
+      double x = fabs (R);
+      double y = fabs (I);
+      double r = hypot (x + 1, y);
+      double s = hypot (x - 1, y);
       double A = 0.5 * (r + s);
       double B = x / A;
       double y2 = y * y;
 
-      double real, imag;
+      double real;
+      double imag;
 
-      const double A_crossover = 1.5, B_crossover = 0.6417;
+      const double A_crossover = 1.5;
+      const double B_crossover = 0.6417;
 
       if (B <= B_crossover)
         {
@@ -658,7 +681,7 @@ gsl_complex_arccos (gsl_complex a)
 
       if (A <= A_crossover)
         {
-          double Am1;
+          double Am1 = NAN;
 
           if (x < 1)
             {
@@ -709,7 +732,8 @@ gsl_complex_arccos_real (double a)
 gsl_complex
 gsl_complex_arctan (gsl_complex a)
 {                               /* z = arctan(a) */
-  double R = GSL_REAL (a), I = GSL_IMAG (a);
+  double R = GSL_REAL (a);
+  double I = GSL_IMAG (a);
   gsl_complex z;
 
   if (I == 0)
@@ -724,7 +748,7 @@ gsl_complex_arctan (gsl_complex a)
 
       double r = hypot (R, I);
 
-      double imag;
+      double imag = NAN;
 
       double u = 2 * I / (1 + r * r);
 
@@ -853,7 +877,8 @@ gsl_complex_arccot (gsl_complex a)
 gsl_complex
 gsl_complex_sinh (gsl_complex a)
 {                               /* z = sinh(a) */
-  double R = GSL_REAL (a), I = GSL_IMAG (a);
+  double R = GSL_REAL (a);
+  double I = GSL_IMAG (a);
 
   gsl_complex z;
   GSL_SET_COMPLEX (&z, sinh (R) * cos (I), cosh (R) * sin (I));
@@ -863,7 +888,8 @@ gsl_complex_sinh (gsl_complex a)
 gsl_complex
 gsl_complex_cosh (gsl_complex a)
 {                               /* z = cosh(a) */
-  double R = GSL_REAL (a), I = GSL_IMAG (a);
+  double R = GSL_REAL (a);
+  double I = GSL_IMAG (a);
 
   gsl_complex z;
   GSL_SET_COMPLEX (&z, cosh (R) * cos (I), sinh (R) * sin (I));
@@ -873,7 +899,8 @@ gsl_complex_cosh (gsl_complex a)
 gsl_complex
 gsl_complex_tanh (gsl_complex a)
 {                               /* z = tanh(a) */
-  double R = GSL_REAL (a), I = GSL_IMAG (a);
+  double R = GSL_REAL (a);
+  double I = GSL_IMAG (a);
 
   gsl_complex z;
 
@@ -967,13 +994,13 @@ gsl_complex_arctanh (gsl_complex a)
     {
       return gsl_complex_arctanh_real (GSL_REAL (a));
     }
-  else
-    {
+  
+    
       gsl_complex z = gsl_complex_mul_imag(a, 1.0);
       z = gsl_complex_arctan (z);
       z = gsl_complex_mul_imag (z, -1.0);
       return z;
-    }
+   
 }
 
 gsl_complex

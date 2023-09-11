@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #include <gsl/gsl_math.h>
@@ -84,7 +85,7 @@ gsl_linalg_QRPT_decomp (gsl_matrix * A, gsl_vector * tau, gsl_permutation * p, i
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       *signum = 1;
 
@@ -104,7 +105,8 @@ gsl_linalg_QRPT_decomp (gsl_matrix * A, gsl_vector * tau, gsl_permutation * p, i
           /* Bring the column of largest norm into the pivot position */
 
           double max_norm = gsl_vector_get(norm, i);
-          size_t j, kmax = i;
+          size_t j;
+          size_t kmax = i;
 
           for (j = i + 1; j < N; j++)
             {
@@ -160,10 +162,11 @@ gsl_linalg_QRPT_decomp (gsl_matrix * A, gsl_vector * tau, gsl_permutation * p, i
                       double y = 0;
                       double temp= gsl_matrix_get (A, i, j) / x;
                   
-                      if (fabs (temp) >= 1)
+                      if (fabs (temp) >= 1) {
                         y = 0.0;
-                      else
+                      } else {
                         y = x * sqrt (1 - temp * temp);
+}
                       
                       /* recompute norm to prevent loss of accuracy */
 
@@ -357,7 +360,7 @@ gsl_linalg_QRPT_lssolve2 (const gsl_matrix * QR, const gsl_vector * tau, const g
       gsl_matrix_const_view R11 = gsl_matrix_const_submatrix (QR, 0, 0, rank, rank);
       gsl_vector_view QTb1 = gsl_vector_subvector(residual, 0, rank);
       gsl_vector_view x1 = gsl_vector_subvector(x, 0, rank);
-      size_t i;
+      size_t i = 0;
 
       /* compute work = Q^T b */
       gsl_vector_memcpy(residual, b);
@@ -368,8 +371,9 @@ gsl_linalg_QRPT_lssolve2 (const gsl_matrix * QR, const gsl_vector * tau, const g
       gsl_blas_dtrsv (CblasUpper, CblasNoTrans, CblasNonUnit, &(R11.matrix), &(x1.vector));
 
       /* x(r+1:N) = 0 */
-      for (i = rank; i < N; ++i)
+      for (i = rank; i < N; ++i) {
         gsl_vector_set(x, i, 0.0);
+}
 
       /* compute x = P y */
       gsl_permute_vector_inverse (p, x);
@@ -392,7 +396,7 @@ gsl_linalg_QRPT_QRsolve (const gsl_matrix * Q, const gsl_matrix * R,
     {
       return GSL_ENOTSQR;
     }
-  else if (Q->size1 != p->size || Q->size1 != R->size1
+  if (Q->size1 != p->size || Q->size1 != R->size1
            || Q->size1 != b->size)
     {
       return GSL_EBADLEN;
@@ -518,8 +522,9 @@ gsl_linalg_QRPT_update (gsl_matrix * Q, gsl_matrix * R,
     }
   else
     {
-      size_t j, k;
-      double w0;
+      size_t j;
+      size_t k;
+      double w0 = NAN;
 
       /* Apply Given's rotations to reduce w to (|w|, 0, 0, ... , 0) 
 
@@ -530,7 +535,8 @@ gsl_linalg_QRPT_update (gsl_matrix * Q, gsl_matrix * R,
 
       for (k = M - 1; k > 0; k--)
         {
-          double c, s;
+          double c;
+          double s;
           double wk = gsl_vector_get (w, k);
           double wkm1 = gsl_vector_get (w, k - 1);
 
@@ -556,7 +562,8 @@ gsl_linalg_QRPT_update (gsl_matrix * Q, gsl_matrix * R,
 
      for (k = 1; k < GSL_MIN(M,N+1); k++)
         {
-          double c, s;
+          double c;
+          double s;
           double diag = gsl_matrix_get (R, k - 1, k - 1);
           double offdiag = gsl_matrix_get (R, k, k - 1);
 
@@ -588,14 +595,16 @@ gsl_linalg_QRPT_rank (const gsl_matrix * QR, const double tol)
   const size_t M = QR->size1;
   const size_t N = QR->size2;
   gsl_vector_const_view diag = gsl_matrix_const_diagonal(QR);
-  double eps;
-  size_t i;
+  double eps = NAN;
+  size_t i = 0;
   size_t r = 0;
 
   if (tol < 0.0)
     {
-      double min, max, absmax;
-      int ee;
+      double min;
+      double max;
+      double absmax;
+      int ee = 0;
 
       gsl_vector_minmax(&diag.vector, &min, &max);
       absmax = GSL_MAX(fabs(min), fabs(max));
@@ -603,15 +612,17 @@ gsl_linalg_QRPT_rank (const gsl_matrix * QR, const double tol)
 
       eps = 20.0 * (M + N) * pow(2.0, (double) ee) * GSL_DBL_EPSILON;
     }
-  else
+  else {
     eps = tol;
+}
 
   /* count number of diagonal elements with |di| > eps */
   for (i = 0; i < GSL_MIN(M, N); ++i)
     {
       double di = gsl_vector_get(&diag.vector, i);
-      if (fabs(di) > eps)
+      if (fabs(di) > eps) {
         ++r;
+}
     }
 
   return r;
@@ -634,7 +645,7 @@ gsl_linalg_QRPT_rcond(const gsl_matrix * QR, double * rcond, gsl_vector * work)
   else
     {
       gsl_matrix_const_view R = gsl_matrix_const_submatrix (QR, 0, 0, N, N);
-      int status;
+      int status = 0;
 
       status = gsl_linalg_tri_rcond(CblasUpper, &R.matrix, rcond, work);
 

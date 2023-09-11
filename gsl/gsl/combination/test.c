@@ -40,9 +40,11 @@ void my_error_handler (const char *reason, const char *file, int line, int err);
 int 
 main (void)
 {
-  size_t i, j;
-  int status = 0, s;
-  gsl_combination * c ;
+  size_t i;
+  size_t j;
+  int status = 0;
+  int s;
+  gsl_combination * c = NULL ;
 
   gsl_ieee_env_setup ();
 
@@ -257,5 +259,6 @@ main (void)
 void
 my_error_handler (const char *reason, const char *file, int line, int err)
 {
-  if (0) printf ("(caught [%s:%d: %s (%d)])\n", file, line, reason, err) ;
+  if (0) { printf ("(caught [%s:%d: %s (%d)])\n", file, line, reason, err) ;
+}
 }

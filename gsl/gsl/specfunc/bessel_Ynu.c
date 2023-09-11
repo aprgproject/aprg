@@ -72,7 +72,7 @@ gsl_sf_bessel_Ynupos_e(double nu, double x, gsl_sf_result * result)
   if(nu > 50.0) {
     return gsl_sf_bessel_Ynu_asymp_Olver_e(nu, x, result);
   }
-  else {
+  
     /* -1/2 <= mu <= 1/2 */
     int N = (int)(nu + 0.5);
     double mu = nu - N;
@@ -114,7 +114,7 @@ gsl_sf_bessel_Ynupos_e(double nu, double x, gsl_sf_result * result)
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(Ynm1);
 
     return stat_mu;
-  }
+ 
 }
 
 int
@@ -143,7 +143,8 @@ gsl_sf_bessel_Ynu_e(double nu, double x, gsl_sf_result * result)
     result->err = fabs(c*Yerr) + fabs(s*Jerr) + fabs(cerr*Yval) + fabs(serr*Jval);
     return GSL_ERROR_SELECT_4(Jstatus, Ystatus, sinstatus, cosstatus);
   }
-  else return gsl_sf_bessel_Ynupos_e(nu, x, result);
+  else { return gsl_sf_bessel_Ynupos_e(nu, x, result);
+}
 }
 
 /*-*-*-*-*-*-*-*-*-* Functions w/ Natural Prototypes *-*-*-*-*-*-*-*-*-*-*/

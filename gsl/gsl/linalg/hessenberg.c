@@ -21,6 +21,7 @@
 #include <gsl/gsl_linalg.h>
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_vector.h>
+#include <math.h>
 
 /*
 gsl_linalg_hessenberg_decomp()
@@ -84,11 +85,12 @@ gsl_linalg_hessenberg_decomp(gsl_matrix *A, gsl_vector *tau)
     }
   else
     {
-      size_t i;           /* looping */
-      gsl_vector_view c,  /* matrix column */
+      size_t i = 0;           /* looping */
+      gsl_vector_view c;
+      gsl_vector_view /* matrix column */
                       hv; /* householder vector */
       gsl_matrix_view m;
-      double tau_i;       /* beta in algorithm 7.4.2 */
+      double tau_i = NAN;       /* beta in algorithm 7.4.2 */
 
       for (i = 0; i < N - 2; ++i)
         {
@@ -162,7 +164,7 @@ int
 gsl_linalg_hessenberg_unpack(gsl_matrix * H, gsl_vector * tau,
                              gsl_matrix * U)
 {
-  int s;
+  int s = 0;
 
   gsl_matrix_set_identity(U);
 
@@ -224,9 +226,10 @@ gsl_linalg_hessenberg_unpack_accum(gsl_matrix * H, gsl_vector * tau,
     }
   else
     {
-      size_t j;           /* looping */
-      double tau_j;       /* householder coefficient */
-      gsl_vector_view c,  /* matrix column */
+      size_t j = 0;           /* looping */
+      double tau_j = NAN;       /* householder coefficient */
+      gsl_vector_view c;
+      gsl_vector_view /* matrix column */
                       hv; /* householder vector */
       gsl_matrix_view m;
 
@@ -279,10 +282,12 @@ int
 gsl_linalg_hessenberg_set_zero(gsl_matrix * H)
 {
   const size_t N = H->size1;
-  size_t i, j;
+  size_t i;
+  size_t j;
 
-  if (N < 3)
+  if (N < 3) {
     return GSL_SUCCESS;
+}
 
   for (j = 0; j < N - 2; ++j)
     {
@@ -370,11 +375,12 @@ gsl_linalg_hessenberg_submatrix(gsl_matrix *M, gsl_matrix *A, size_t top,
     }
   else
     {
-      size_t i;           /* looping */
-      gsl_vector_view c,  /* matrix column */
+      size_t i = 0;           /* looping */
+      gsl_vector_view c;
+      gsl_vector_view /* matrix column */
                       hv; /* householder vector */
       gsl_matrix_view m;
-      double tau_i;       /* beta in algorithm 7.4.2 */
+      double tau_i = NAN;       /* beta in algorithm 7.4.2 */
 
       for (i = 0; i < N - 2; ++i)
         {

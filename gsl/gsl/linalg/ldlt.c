@@ -60,13 +60,17 @@ gsl_linalg_ldlt_decomp (gsl_matrix * A)
     }
   else
     {
-      size_t i, j;
-      double a00, anorm;
-      gsl_vector_view work, v;
+      size_t i;
+      size_t j;
+      double a00;
+      double anorm;
+      gsl_vector_view work;
+      gsl_vector_view v;
 
       /* check for quick return */
-      if (N == 1)
+      if (N == 1) {
         return GSL_SUCCESS;
+}
 
       /* compute ||A||_1 */
       anorm = ldlt_norm1(A);
@@ -88,7 +92,7 @@ gsl_linalg_ldlt_decomp (gsl_matrix * A)
         {
           gsl_vector_view w = gsl_vector_subvector(&work.vector, 0, j);
           double ajj = gsl_matrix_get(A, j, j);
-          double dval;
+          double dval = NAN;
 
           for (i = 0; i < j; ++i)
             {
@@ -143,7 +147,7 @@ gsl_linalg_ldlt_solve (const gsl_matrix * LDLT,
     }
   else
     {
-      int status;
+      int status = 0;
 
       /* copy x <- b */
       gsl_vector_memcpy (x, b);
@@ -200,29 +204,33 @@ gsl_linalg_ldlt_rcond (const gsl_matrix * LDLT, double * rcond,
     }
   else
     {
-      int status;
-      double Anorm;    /* ||A||_1 */
-      double Ainvnorm; /* ||A^{-1}||_1 */
+      int status = 0;
+      double Anorm = NAN;    /* ||A||_1 */
+      double Ainvnorm = NAN; /* ||A^{-1}||_1 */
 
-      if (N == 1)
+      if (N == 1) {
         Anorm = fabs(gsl_matrix_get(LDLT, 0, 0));
-      else
+      } else {
         Anorm = gsl_matrix_get(LDLT, 0, N - 1);
+}
 
       *rcond = 0.0;
 
       /* don't continue if matrix is singular */
-      if (Anorm == 0.0)
+      if (Anorm == 0.0) {
         return GSL_SUCCESS;
+}
 
       /* estimate ||A^{-1}||_1 */
       status = gsl_linalg_invnorm1(N, ldlt_Ainv, (void *) LDLT, &Ainvnorm, work);
 
-      if (status)
+      if (status) {
         return status;
+}
 
-      if (Ainvnorm != 0.0)
+      if (Ainvnorm != 0.0) {
         *rcond = (1.0 / Anorm) / Ainvnorm;
+}
 
       return GSL_SUCCESS;
     }
@@ -234,7 +242,8 @@ ldlt_norm1(const gsl_matrix * A)
 {
   const size_t N = A->size1;
   double max = 0.0;
-  size_t i, j;
+  size_t i;
+  size_t j;
 
   for (j = 0; j < N; ++j)
     {
@@ -248,8 +257,9 @@ ldlt_norm1(const gsl_matrix * A)
           sum += fabs(Aij);
         }
 
-      if (sum > max)
+      if (sum > max) {
         max = sum;
+}
     }
 
   return max;
@@ -259,7 +269,7 @@ ldlt_norm1(const gsl_matrix * A)
 static int
 ldlt_Ainv(CBLAS_TRANSPOSE_t TransA, gsl_vector * x, void * params)
 {
-  int status;
+  int status = 0;
   gsl_matrix * A = (gsl_matrix * ) params;
   gsl_vector_const_view diag = gsl_matrix_const_diagonal(A);
 
@@ -267,16 +277,18 @@ ldlt_Ainv(CBLAS_TRANSPOSE_t TransA, gsl_vector * x, void * params)
 
   /* compute L^{-1} x */
   status = gsl_blas_dtrsv(CblasLower, CblasNoTrans, CblasUnit, A, x);
-  if (status)
+  if (status) {
     return status;
+}
 
   /* compute D^{-1} x */
   gsl_vector_div(x, &diag.vector);
 
   /* compute L^{-t} x */
   status = gsl_blas_dtrsv(CblasLower, CblasTrans, CblasUnit, A, x);
-  if (status)
+  if (status) {
     return status;
+}
 
   return GSL_SUCCESS;
 }

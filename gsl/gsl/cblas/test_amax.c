@@ -9,10 +9,10 @@ void
 test_amax (void) {
   {
    int N = 1;
-   float X[] = { -0.388f };
+   float X[] = { -0.388F };
    int incX = -1;
    int expected = 0;
-   int k;
+   int k = 0;
    k = cblas_isamax(N, X, incX);
    gsl_test_int(k, expected, "samax(case 52)");
   };
@@ -23,7 +23,7 @@ test_amax (void) {
    double X[] = { 0.247 };
    int incX = -1;
    int expected = 0;
-   int k;
+   int k = 0;
    k = cblas_idamax(N, X, incX);
    gsl_test_int(k, expected, "damax(case 53)");
   };
@@ -31,10 +31,10 @@ test_amax (void) {
 
   {
    int N = 1;
-   float X[] = { 0.704f, 0.665f };
+   float X[] = { 0.704F, 0.665F };
    int incX = -1;
    int expected = 0;
-   int k;
+   int k = 0;
    k = cblas_icamax(N, X, incX);
    gsl_test_int(k, expected, "camax(case 54)");
   };
@@ -45,7 +45,7 @@ test_amax (void) {
    double X[] = { -0.599, -0.758 };
    int incX = -1;
    int expected = 0;
-   int k;
+   int k = 0;
    k = cblas_izamax(N, X, incX);
    gsl_test_int(k, expected, "zamax(case 55)");
   };
@@ -53,10 +53,10 @@ test_amax (void) {
 
   {
    int N = 2;
-   float X[] = { 0.909f, 0.037f };
+   float X[] = { 0.909F, 0.037F };
    int incX = 1;
    int expected = 0;
-   int k;
+   int k = 0;
    k = cblas_isamax(N, X, incX);
    gsl_test_int(k, expected, "samax(case 56)");
   };
@@ -67,7 +67,7 @@ test_amax (void) {
    double X[] = { 0.271, -0.426 };
    int incX = 1;
    int expected = 1;
-   int k;
+   int k = 0;
    k = cblas_idamax(N, X, incX);
    gsl_test_int(k, expected, "damax(case 57)");
   };
@@ -75,10 +75,10 @@ test_amax (void) {
 
   {
    int N = 2;
-   float X[] = { -0.648f, 0.317f, 0.62f, 0.392f };
+   float X[] = { -0.648F, 0.317F, 0.62F, 0.392F };
    int incX = 1;
    int expected = 1;
-   int k;
+   int k = 0;
    k = cblas_icamax(N, X, incX);
    gsl_test_int(k, expected, "camax(case 58)");
   };
@@ -89,7 +89,7 @@ test_amax (void) {
    double X[] = { -0.789, 0.352, 0.562, 0.697 };
    int incX = 1;
    int expected = 1;
-   int k;
+   int k = 0;
    k = cblas_izamax(N, X, incX);
    gsl_test_int(k, expected, "zamax(case 59)");
   };
@@ -97,10 +97,10 @@ test_amax (void) {
 
   {
    int N = 2;
-   float X[] = { 0.487f, 0.918f };
+   float X[] = { 0.487F, 0.918F };
    int incX = -1;
    int expected = 0;
-   int k;
+   int k = 0;
    k = cblas_isamax(N, X, incX);
    gsl_test_int(k, expected, "samax(case 60)");
   };
@@ -111,7 +111,7 @@ test_amax (void) {
    double X[] = { 0.537, 0.826 };
    int incX = -1;
    int expected = 0;
-   int k;
+   int k = 0;
    k = cblas_idamax(N, X, incX);
    gsl_test_int(k, expected, "damax(case 61)");
   };
@@ -119,10 +119,10 @@ test_amax (void) {
 
   {
    int N = 2;
-   float X[] = { 0.993f, 0.172f, -0.825f, 0.873f };
+   float X[] = { 0.993F, 0.172F, -0.825F, 0.873F };
    int incX = -1;
    int expected = 0;
-   int k;
+   int k = 0;
    k = cblas_icamax(N, X, incX);
    gsl_test_int(k, expected, "camax(case 62)");
   };
@@ -133,7 +133,7 @@ test_amax (void) {
    double X[] = { 0.913, -0.436, -0.134, 0.129 };
    int incX = -1;
    int expected = 0;
-   int k;
+   int k = 0;
    k = cblas_izamax(N, X, incX);
    gsl_test_int(k, expected, "zamax(case 63)");
   };

@@ -46,7 +46,7 @@ main (void)
 {
   const gsl_rng_type ** rngs = gsl_rng_types_setup();  /* get all rng types */
 
-  const gsl_rng_type ** r ;
+  const gsl_rng_type ** r = NULL ;
 
   gsl_ieee_env_setup ();
 
@@ -183,26 +183,31 @@ main (void)
 
   /* Test constant relationship between int and double functions */
 
-  for (r = rngs ; *r != 0; r++)
+  for (r = rngs ; *r != 0; r++) {
     rng_float_test (*r);
+}
 
   /* Test save/restore functions */
 
-  for (r = rngs ; *r != 0; r++)
+  for (r = rngs ; *r != 0; r++) {
     rng_state_test (*r);
+}
 
-  for (r = rngs ; *r != 0; r++)
+  for (r = rngs ; *r != 0; r++) {
     rng_parallel_state_test (*r);
+}
 
-  for (r = rngs ; *r != 0; r++)
+  for (r = rngs ; *r != 0; r++) {
     rng_read_write_test (*r);
+}
 
   /* generic statistical tests (these are just to make sure that we
      don't get any crazy results back from the generator, i.e. they
      aren't a test of the algorithm, just the implementation) */
 
-  for (r = rngs ; *r != 0; r++)
+  for (r = rngs ; *r != 0; r++) {
     generic_rng_test (*r);
+}
 
 #ifdef TEST_SEEDS
   rng_seed_test (gsl_rng_mt19937);
@@ -232,9 +237,9 @@ rng_test (const gsl_rng_type * T, unsigned long int seed, unsigned int n,
           unsigned long int result)
 {
   gsl_rng *r = gsl_rng_alloc (T);
-  unsigned int i;
+  unsigned int i = 0;
   unsigned long int k = 0;
-  int status;
+  int status = 0;
 
   if (seed != 0)
     {
@@ -259,8 +264,9 @@ rng_float_test (const gsl_rng_type * T)
   gsl_rng *ri = gsl_rng_alloc (T);
   gsl_rng *rf = gsl_rng_alloc (T);
 
-  double u, c ; 
-  unsigned int i;
+  double u;
+  double c ; 
+  unsigned int i = 0;
   unsigned long int k = 0;
   int status = 0 ;
 
@@ -294,9 +300,10 @@ rng_float_test (const gsl_rng_type * T)
 void
 rng_state_test (const gsl_rng_type * T)
 {
-  unsigned long int test_a[N], test_b[N];
+  unsigned long int test_a[N];
+  unsigned long int test_b[N];
 
-  int i;
+  int i = 0;
 
   gsl_rng *r = gsl_rng_alloc (T);
   gsl_rng *r_save = gsl_rng_alloc (T);
@@ -338,11 +345,14 @@ rng_state_test (const gsl_rng_type * T)
 void
 rng_parallel_state_test (const gsl_rng_type * T)
 {
-  unsigned long int test_a[N], test_b[N];
-  unsigned long int test_c[N], test_d[N];
-  double test_e[N], test_f[N];
+  unsigned long int test_a[N];
+  unsigned long int test_b[N];
+  unsigned long int test_c[N];
+  unsigned long int test_d[N];
+  double test_e[N];
+  double test_f[N];
 
-  int i;
+  int i = 0;
 
   gsl_rng *r1 = gsl_rng_alloc (T);
   gsl_rng *r2 = gsl_rng_alloc (T);
@@ -385,9 +395,10 @@ rng_parallel_state_test (const gsl_rng_type * T)
 void
 rng_read_write_test (const gsl_rng_type * T)
 {
-  unsigned long int test_a[N], test_b[N];
+  unsigned long int test_a[N];
+  unsigned long int test_b[N];
 
-  int i;
+  int i = 0;
 
   gsl_rng *r = gsl_rng_alloc (T);
 
@@ -436,7 +447,8 @@ generic_rng_test (const gsl_rng_type * T)
 {
   gsl_rng *r = gsl_rng_alloc (T);
   const char *name = gsl_rng_name (r);
-  unsigned long int kmax = 0, kmin = 1000;
+  unsigned long int kmax = 0;
+  unsigned long int kmin = 1000;
   double sigma = 0;
   const unsigned long int ran_max = gsl_rng_max (r);
   const unsigned long int ran_min = gsl_rng_min (r);
@@ -493,17 +505,18 @@ generic_rng_test (const gsl_rng_type * T)
 int
 rng_max_test (gsl_rng * r, unsigned long int *kmax, unsigned long int ran_max)
 {
-  unsigned long int actual_uncovered;
-  double expect_uncovered;
-  int status;
+  unsigned long int actual_uncovered = 0;
+  double expect_uncovered = NAN;
+  int status = 0;
   unsigned long int max = 0;
-  int i;
+  int i = 0;
 
   for (i = 0; i < N2; ++i)
     {
       unsigned long int k = gsl_rng_get (r);
-      if (k > max)
+      if (k > max) {
         max = k;
+}
     }
 
   *kmax = max;
@@ -520,17 +533,18 @@ int
 rng_min_test (gsl_rng * r, unsigned long int *kmin, 
               unsigned long int ran_min, unsigned long int ran_max)
 {
-  unsigned long int actual_uncovered;
-  double expect_uncovered;
-  int status;
+  unsigned long int actual_uncovered = 0;
+  double expect_uncovered = NAN;
+  int status = 0;
   unsigned long int min = 1000000000UL;
-  int i;
+  int i = 0;
 
   for (i = 0; i < N2; ++i)
     {
       unsigned long int k = gsl_rng_get (r);
-      if (k < min)
+      if (k < min) {
         min = k;
+}
     }
 
   *kmin = min;
@@ -547,7 +561,8 @@ int
 rng_sum_test (gsl_rng * r, double *sigma)
 {
   double sum = 0;
-  int i, status;
+  int i;
+  int status;
 
   for (i = 0; i < N2; ++i)
     {
@@ -579,10 +594,12 @@ rng_bin_test (gsl_rng * r, double *sigma)
 {
   int count[BINS+EXTRA];
   double chisq = 0;
-  int i, status;
+  int i;
+  int status;
 
-  for (i = 0; i < BINS+EXTRA; i++)
+  for (i = 0; i < BINS+EXTRA; i++) {
       count[i] = 0 ;
+}
 
 
   for (i = 0; i < N2; i++)
@@ -623,8 +640,10 @@ rng_bin_test (gsl_rng * r, double *sigma)
 int
 rng_sanity_test (gsl_rng * r)
 {
-  double sum = 0, sigma;
-  int i, status = 0;
+  double sum = 0;
+  double sigma;
+  int i;
+  int status = 0;
 
   for (i = 0; i < N2; ++i)
     {
@@ -658,18 +677,20 @@ rng_seed_test (const gsl_rng_type * T)
 {
   gsl_rng *r = gsl_rng_alloc (T);
   const char *name = gsl_rng_name (r);
-  unsigned long int i;
-  int j;
-  int status;
+  unsigned long int i = 0;
+  int j = 0;
+  int status = 0;
 
   for (i = 0xFFFFFFFFUL ; i > 0; i >>= 1) {
     for (j = 1; j >= -1 ; j--) {
       unsigned long int seed = i + j;
-      if (j > 0 && seed < i) continue;
+      if (j > 0 && seed < i) { continue;
+}
       gsl_rng_set (r, seed);
       status = rng_sanity_test (r);
-      if (status) 
+      if (status) { 
         gsl_test (status, "%s, sanity tests for seed = %#lx", name, seed);
+}
     }
   }
 }

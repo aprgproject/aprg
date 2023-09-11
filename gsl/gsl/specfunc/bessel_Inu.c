@@ -57,12 +57,16 @@ gsl_sf_bessel_Inu_scaled_e(double nu, double x, gsl_sf_result * result)
   else {
     int N = (int)(nu + 0.5);
     double mu = nu - N;      /* -1/2 <= mu <= 1/2 */ 
-    double K_mu, K_mup1, Kp_mu;
-    double K_nu, K_nup1, K_num1;
-    double I_nu_ratio;
-    int stat_Irat;
-    int stat_Kmu;
-    int n;
+    double K_mu;
+    double K_mup1;
+    double Kp_mu;
+    double K_nu;
+    double K_nup1;
+    double K_num1;
+    double I_nu_ratio = NAN;
+    int stat_Irat = 0;
+    int stat_Kmu = 0;
+    int n = 0;
 
     /* obtain K_mu, K_mup1 */
     if(x < 2.0) {

@@ -21,6 +21,7 @@
 /* Author:  G. Jungman */
 
 #include <config.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -38,7 +39,7 @@ test_sf_frac_diff(double x1, double x2)
   if(x1 == 0.0 && x2 == 0.0) {
     return 0.0;
   }
-  else if (x1 == 0.0) {
+  if (x1 == 0.0) {
     return fabs(x2);
   } else if(x1 <= DBL_MAX && x2 <= DBL_MAX && (x1 + x2 != 0.0)) {
     return fabs((x1-x2)/(x1+x2));
@@ -55,7 +56,8 @@ int
 test_sf_check_result(char * message_buff, gsl_sf_result r, double val, double tol)
 {
   int    s = 0;
-  double f = 0, d = 0;
+  double f = 0;
+  double d = 0;
 
   if (gsl_isnan(r.val) || gsl_isnan(val)) 
     {
@@ -70,13 +72,17 @@ test_sf_check_result(char * message_buff, gsl_sf_result r, double val, double to
       f = test_sf_frac_diff(val, r.val);
       d = fabs(val - r.val);
 
-      if(d > 2.0 * TEST_SIGMA * r.err) s |= TEST_SF_INCONS;
-      if(r.err < 0.0)                                  s |= TEST_SF_ERRNEG;
-      if(gsl_isinf(r.err))                             s |= TEST_SF_ERRBAD;
+      if(d > 2.0 * TEST_SIGMA * r.err) { s |= TEST_SF_INCONS;
+}
+      if(r.err < 0.0) {                                  s |= TEST_SF_ERRNEG;
+}
+      if(gsl_isinf(r.err)) {                             s |= TEST_SF_ERRBAD;
+}
 #if TEST_EXCESSIVE_ERROR
       if(d > 0 && r.err > 1e4 * fabs(val)*tol)         s |= TEST_SF_ERRBIG;
 #endif
-      if(f > TEST_FACTOR * tol)                        s |= TEST_SF_TOLBAD;
+      if(f > TEST_FACTOR * tol) {                        s |= TEST_SF_TOLBAD;
+}
     }
 
   if(s != 0) {
@@ -143,7 +149,8 @@ test_sf_check_val(char * message_buff, double rval, double val, double tol)
   int    s = 0;
   double f = test_sf_frac_diff(val, rval);
 
-  if(f > TEST_FACTOR * tol)                       s |= TEST_SF_TOLBAD;
+  if(f > TEST_FACTOR * tol) {                       s |= TEST_SF_TOLBAD;
+}
 
   if(s != 0) {
     char buff[2048];
@@ -172,10 +179,14 @@ test_sf_check_result_relax(char * message_buff, gsl_sf_result r, double val, dou
   int    s = 0;
   double f = test_sf_frac_diff(val, r.val);
 
-  if(f > GSL_MAX_DBL(TEST_SNGL, TEST_FACTOR * tol))   s |= TEST_SF_INCONS;
-  if(r.err < 0.0)     s |= TEST_SF_ERRNEG;
-  if(gsl_isinf(r.err))              s |= TEST_SF_ERRBAD;
-  if(f > TEST_FACTOR * tol)         s |= TEST_SF_TOLBAD;
+  if(f > GSL_MAX_DBL(TEST_SNGL, TEST_FACTOR * tol)) {   s |= TEST_SF_INCONS;
+}
+  if(r.err < 0.0) {     s |= TEST_SF_ERRNEG;
+}
+  if(gsl_isinf(r.err)) {              s |= TEST_SF_ERRBAD;
+}
+  if(f > TEST_FACTOR * tol) {         s |= TEST_SF_TOLBAD;
+}
 
   if(s != 0) {
     char buff[2048];
@@ -215,9 +226,9 @@ test_sf_check_return(char * message_buff, int val_return, int expected_return)
     strcat(message_buff, buff);
     return TEST_SF_RETBAD;
   }
-  else {
+  
     return 0;
-  }
+ 
 }
 
 
@@ -958,8 +969,8 @@ int test_exp(void)
 {
   gsl_sf_result r;
   gsl_sf_result_e10 re;
-  double x;
-  int sa;
+  double x = NAN;
+  int sa = 0;
   int s = 0;
 
   TEST_SF(s,  gsl_sf_exp_e, (-10.0, &r), exp(-10.0), TEST_TOL0, GSL_SUCCESS);
@@ -1501,7 +1512,7 @@ int test_gegen(void)
   gsl_sf_result r;
   double ga[100];
   int s = 0;
-  int sa;
+  int sa = 0;
 
   TEST_SF(s,  gsl_sf_gegenpoly_1_e, (-0.2,   1.0, &r), -0.4, TEST_TOL0, GSL_SUCCESS);
   TEST_SF(s,  gsl_sf_gegenpoly_1_e, ( 0.0,   1.0, &r), 2.0, TEST_TOL0, GSL_SUCCESS);
@@ -1547,11 +1558,14 @@ int test_gegen(void)
 
 int test_jac(void)
 {
-  double u, m;
-  double sn, cn, dn;
-  int stat_ej;
+  double u;
+  double m;
+  double sn;
+  double cn;
+  double dn;
+  int stat_ej = 0;
   int s = 0;
-  int sa;
+  int sa = 0;
 
   u = 0.5;
   m = 0.5;
@@ -2016,7 +2030,8 @@ int test_lambert(void)
 int test_log(void)
 {
   gsl_sf_result r;
-  gsl_sf_result r1, r2;
+  gsl_sf_result r1;
+  gsl_sf_result r2;
   int s = 0;
 
   TEST_SF(s, gsl_sf_log_e, (0.1, &r), -2.3025850929940456840,  TEST_TOL0, GSL_SUCCESS);
@@ -2314,10 +2329,11 @@ int test_transport(void)
 int test_trig(void)
 {
   gsl_sf_result r;
-  gsl_sf_result r1, r2;
-  double theta;
+  gsl_sf_result r1;
+  gsl_sf_result r2;
+  double theta = NAN;
   int s = 0;
-  int sa;
+  int sa = 0;
 
   TEST_SF(s, gsl_sf_sin_e, (-10.0, &r),       0.5440211108893698134,    TEST_TOL0, GSL_SUCCESS);
   TEST_SF(s, gsl_sf_sin_e, (1.0, &r),         0.8414709848078965067,    TEST_TOL0, GSL_SUCCESS);

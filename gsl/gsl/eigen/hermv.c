@@ -37,7 +37,7 @@
 gsl_eigen_hermv_workspace * 
 gsl_eigen_hermv_alloc (const size_t n)
 {
-  gsl_eigen_hermv_workspace * w ;
+  gsl_eigen_hermv_workspace * w = NULL ;
 
   if (n == 0)
     {
@@ -141,7 +141,8 @@ gsl_eigen_hermv (gsl_matrix_complex * A, gsl_vector * eval,
       double *const d = w->d;
       double *const sd = w->sd;
 
-      size_t a, b;
+      size_t a;
+      size_t b;
 
       /* handle special case */
 
@@ -195,7 +196,7 @@ gsl_eigen_hermv (gsl_matrix_complex * A, gsl_vector * eval,
             }
           
           {
-            size_t i;
+            size_t i = 0;
             const size_t n_block = b - a + 1;
             double *d_block = d + a;
             double *sd_block = sd + a;
@@ -211,8 +212,9 @@ gsl_eigen_hermv (gsl_matrix_complex * A, gsl_vector * eval,
             
             for (i = 0; i < n_block - 1; i++)
               {
-                const double c = gc[i], s = gs[i];
-                size_t k;
+                const double c = gc[i];
+                const double s = gs[i];
+                size_t k = 0;
                 
                 for (k = 0; k < N; k++)
                   {

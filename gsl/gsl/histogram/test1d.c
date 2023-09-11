@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <gsl/gsl_histogram.h>
@@ -33,8 +34,12 @@ test1d (void)
   double xr[NR + 1] =
   {0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0};
 
-  gsl_histogram *h, *h1, *hr, *g;
-  size_t i, j;
+  gsl_histogram *h;
+  gsl_histogram *h1;
+  gsl_histogram *hr;
+  gsl_histogram *g;
+  size_t i;
+  size_t j;
 
   gsl_ieee_env_setup ();
 
@@ -111,8 +116,9 @@ test1d (void)
 
     for (i = 0; i < N; i++)
       {
-        if (gsl_histogram_get (h, i) != i)
+        if (gsl_histogram_get (h, i) != i) {
           status = 1;
+}
       };
     gsl_test (status, "gsl_histogram_get reads from array");
   }
@@ -128,8 +134,9 @@ test1d (void)
     int status = 0;
     for (i = 0; i <= N; i++)
       {
-        if (h1->range[i] != h->range[i])
+        if (h1->range[i] != h->range[i]) {
           status = 1;
+}
       };
     gsl_test (status, "gsl_histogram_memcpy copies bin ranges");
   }
@@ -138,8 +145,9 @@ test1d (void)
     int status = 0;
     for (i = 0; i < N; i++)
       {
-        if (gsl_histogram_get (h1, i) != gsl_histogram_get (h, i))
+        if (gsl_histogram_get (h1, i) != gsl_histogram_get (h, i)) {
           status = 1;
+}
       };
     gsl_test (status, "gsl_histogram_memcpy copies bin values");
   }
@@ -152,8 +160,9 @@ test1d (void)
     int status = 0;
     for (i = 0; i <= N; i++)
       {
-        if (h1->range[i] != h->range[i])
+        if (h1->range[i] != h->range[i]) {
           status = 1;
+}
       };
     gsl_test (status, "gsl_histogram_clone copies bin ranges");
   }
@@ -162,8 +171,9 @@ test1d (void)
     int status = 0;
     for (i = 0; i < N; i++)
       {
-        if (gsl_histogram_get (h1, i) != gsl_histogram_get (h, i))
+        if (gsl_histogram_get (h1, i) != gsl_histogram_get (h, i)) {
           status = 1;
+}
       };
     gsl_test (status, "gsl_histogram_clone copies bin values");
   }
@@ -175,8 +185,9 @@ test1d (void)
 
     for (i = 0; i < N; i++)
       {
-        if (h->bin[i] != 0)
+        if (h->bin[i] != 0) {
           status = 1;
+}
       }
     gsl_test (status, "gsl_histogram_reset zeros array");
   }
@@ -213,7 +224,8 @@ test1d (void)
     int status = 0;
     for (i = 0; i < N; i++)
       {
-        double x0 = 0, x1 = 0;
+        double x0 = 0;
+        double x1 = 0;
 
         gsl_histogram_get_range (h, i, &x0, &x1);
 
@@ -227,22 +239,25 @@ test1d (void)
 
   {
     int status = 0;
-    if (gsl_histogram_max (h) != N)
+    if (gsl_histogram_max (h) != N) {
       status = 1;
+}
     gsl_test (status, "gsl_histogram_max returns maximum");
   }
 
   {
     int status = 0;
-    if (gsl_histogram_min (h) != 0)
+    if (gsl_histogram_min (h) != 0) {
       status = 1;
+}
     gsl_test (status, "gsl_histogram_min returns minimum");
   }
 
   {
     int status = 0;
-    if (gsl_histogram_bins (h) != N)
+    if (gsl_histogram_bins (h) != N) {
       status = 1;
+}
     gsl_test (status, "gsl_histogram_bins returns number of bins");
   }
 
@@ -287,8 +302,9 @@ test1d (void)
     int status = 0;
     for (i = 0; i < N; i++)
       {
-        if (h1->bin[i] != g->bin[i] + h->bin[i])
+        if (h1->bin[i] != g->bin[i] + h->bin[i]) {
           status = 1;
+}
       }
     gsl_test (status, "gsl_histogram_add histogram addition");
   }
@@ -300,8 +316,9 @@ test1d (void)
     int status = 0;
     for (i = 0; i < N; i++)
       {
-        if (h1->bin[i] != g->bin[i] - h->bin[i])
+        if (h1->bin[i] != g->bin[i] - h->bin[i]) {
           status = 1;
+}
       }
     gsl_test (status, "gsl_histogram_sub histogram subtraction");
   }
@@ -314,8 +331,9 @@ test1d (void)
     int status = 0;
     for (i = 0; i < N; i++)
       {
-        if (h1->bin[i] != g->bin[i] * h->bin[i])
+        if (h1->bin[i] != g->bin[i] * h->bin[i]) {
           status = 1;
+}
       }
     gsl_test (status, "gsl_histogram_mul histogram multiplication");
   }
@@ -328,8 +346,9 @@ test1d (void)
     int status = 0;
     for (i = 0; i < N; i++)
       {
-        if (h1->bin[i] != g->bin[i] / h->bin[i])
+        if (h1->bin[i] != g->bin[i] / h->bin[i]) {
           status = 1;
+}
       }
     gsl_test (status, "gsl_histogram_div histogram division");
   }
@@ -341,8 +360,9 @@ test1d (void)
     int status = 0;
     for (i = 0; i < N; i++)
       {
-        if (h1->bin[i] != 0.5 * g->bin[i])
+        if (h1->bin[i] != 0.5 * g->bin[i]) {
           status = 1;
+}
       }
     gsl_test (status, "gsl_histogram_scale histogram scaling");
   }
@@ -354,8 +374,9 @@ test1d (void)
     int status = 0;
     for (i = 0; i < N; i++)
       {
-        if (h1->bin[i] != 0.25 + g->bin[i])
+        if (h1->bin[i] != 0.25 + g->bin[i]) {
           status = 1;
+}
       }
     gsl_test (status, "gsl_histogram_shift histogram shift");
   }
@@ -378,8 +399,11 @@ test1d (void)
   gsl_histogram_accumulate (h, 0.3, 4.0);
 
   {
-    size_t i1, i2, i3, i4;
-    double expected;
+    size_t i1;
+    size_t i2;
+    size_t i3;
+    size_t i4;
+    double expected = NAN;
     int status = gsl_histogram_find (h, 0.0, &i1);
     status = gsl_histogram_find (h, 0.1, &i2);
     status = gsl_histogram_find (h, 0.2, &i3);
@@ -433,13 +457,16 @@ test1d (void)
 
     for (i = 0; i < N; i++)
       {
-        if (h->range[i] != hh->range[i])
+        if (h->range[i] != hh->range[i]) {
           status = 1;
-        if (h->bin[i] != hh->bin[i])
+}
+        if (h->bin[i] != hh->bin[i]) {
           status = 1;
+}
       }
-    if (h->range[N] != hh->range[N])
+    if (h->range[N] != hh->range[N]) {
       status = 1;
+}
 
     gsl_test (status, "gsl_histogram_fprintf and fscanf");
 
@@ -462,13 +489,16 @@ test1d (void)
 
     for (i = 0; i < N; i++)
       {
-        if (h->range[i] != hh->range[i])
+        if (h->range[i] != hh->range[i]) {
           status = 1;
-        if (h->bin[i] != hh->bin[i])
+}
+        if (h->bin[i] != hh->bin[i]) {
           status = 1;
+}
       }
-    if (h->range[N] != hh->range[N])
+    if (h->range[N] != hh->range[N]) {
       status = 1;
+}
 
     gsl_test (status, "gsl_histogram_fwrite and fread");
 

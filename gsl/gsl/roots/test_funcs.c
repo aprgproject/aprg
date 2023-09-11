@@ -74,14 +74,15 @@ func1_fdf (double x, void * p, double *y, double *yprime)
 double
 func2 (double x, void * p)
 {
-  double delta;
+  double delta = NAN;
 
-  if (x > 0)
+  if (x > 0) {
     delta = 1.0;
-  else if (x < 0)
+  } else if (x < 0) {
     delta = -1.0;
-  else
+  } else {
     delta = 0.0;
+}
 
   return sqrt (fabs (x)) * delta;
 }

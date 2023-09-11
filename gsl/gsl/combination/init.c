@@ -27,7 +27,7 @@
 gsl_combination *
 gsl_combination_alloc (const size_t n, const size_t k)
 {
-  gsl_combination * c;
+  gsl_combination * c = NULL;
 
   if (n == 0)
     {
@@ -73,12 +73,13 @@ gsl_combination_alloc (const size_t n, const size_t k)
 gsl_combination *
 gsl_combination_calloc (const size_t n, const size_t k)
 {
-  size_t i;
+  size_t i = 0;
 
   gsl_combination * c =  gsl_combination_alloc (n, k);
 
-  if (c == 0)
+  if (c == 0) {
     return 0;
+}
 
   /* initialize combination to identity */
 
@@ -94,7 +95,7 @@ void
 gsl_combination_init_first (gsl_combination * c)
 {
   const size_t k = c->k ;
-  size_t i;
+  size_t i = 0;
 
   /* initialize combination to identity */
 
@@ -108,7 +109,7 @@ void
 gsl_combination_init_last (gsl_combination * c)
 {
   const size_t k = c->k ;
-  size_t i;
+  size_t i = 0;
   size_t n = c->n;
 
   /* initialize combination to identity */
@@ -123,6 +124,7 @@ void
 gsl_combination_free (gsl_combination * c)
 {
   RETURN_IF_NULL (c);
-  if (c->k > 0) free (c->data);
+  if (c->k > 0) { free (c->data);
+}
   free (c);
 }

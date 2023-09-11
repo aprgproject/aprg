@@ -40,7 +40,7 @@ gsl_sf_multiply_e(const double x, const double y, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else if((ax <= 1.0 && ay >= 1.0) || (ay <= 1.0 && ax >= 1.0)) {
+  if((ax <= 1.0 && ay >= 1.0) || (ay <= 1.0 && ax >= 1.0)) {
     /* Straddling 1.0 is always safe.
      */
     result->val = x*y;

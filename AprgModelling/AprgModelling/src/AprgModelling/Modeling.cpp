@@ -27,7 +27,7 @@ void Modeling::retrieveDataFromFileWithFileFormat1(string const& filePath) {
     AlbaFileReader fileReader(inputFile);
     fileReader.getLineAndIgnoreWhiteSpaces();  // Get Headers
     while (fileReader.isNotFinished()) {
-        string lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
         stringHelper::strings itemsFound;
         stringHelper::splitToStrings<stringHelper::SplitStringType::WithoutDelimeters>(itemsFound, lineInFile, ",");
         if (!itemsFound.empty()) {
@@ -57,7 +57,7 @@ void Modeling::retrieveDataFromFileWithFileFormat2(string const& filePath) {
     AlbaFileReader fileReader(inputFile);
     fileReader.getLineAndIgnoreWhiteSpaces();  // Get Headers
     while (fileReader.isNotFinished()) {
-        string lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
         stringHelper::strings itemsFound;
         stringHelper::splitToStrings<stringHelper::SplitStringType::WithoutDelimeters>(itemsFound, lineInFile, ",");
 
@@ -135,8 +135,8 @@ Modeling::ValidationResult Modeling::validate() {
     ValidationResult result{};
     vector<double> calculationDataBuffer;
 
-    unsigned int dataHeight = m_validationDataForY.getNumberOfRows();
-    unsigned int dataWidthForX = m_validationDataForX.getNumberOfColumns();
+    unsigned int const dataHeight = m_validationDataForY.getNumberOfRows();
+    unsigned int const dataWidthForX = m_validationDataForX.getNumberOfColumns();
 
     for (unsigned int j = 0; j < dataHeight; ++j) {
         double yPredicted = 0;
@@ -159,8 +159,8 @@ Modeling::ValidationResult Modeling::validate() {
         totalSquareError += calculationDataBuffer[j];
     }
 
-    double meanSquareError = totalSquareError / calculationDataBuffer.size();
-    double rootMeanSquareError = pow(meanSquareError, 0.5);
+    double const meanSquareError = totalSquareError / calculationDataBuffer.size();
+    double const rootMeanSquareError = pow(meanSquareError, 0.5);
 
     result.totalSquareError = totalSquareError;
     result.resultSize = calculationDataBuffer.size();
@@ -205,7 +205,7 @@ void Modeling::saveRetrievedDataToMatrixRandomly(
     matrixInY.clearAndResize(1, numberOfSamples);
     AlbaUniformNonDeterministicRandomizer<unsigned int> randomizer(0, m_retrievedDataForY.getNumberOfRows() - 1);
     for (unsigned int j = 0; j < numberOfSamples; ++j) {
-        unsigned int randomRow(randomizer.getRandomValue());
+        unsigned int const randomRow(randomizer.getRandomValue());
         matrixInY.setEntry(0, j, m_retrievedDataForY.getEntry(0, randomRow));
         for (unsigned int i = 0; i < m_retrievedDataForX.getNumberOfColumns(); ++i) {
             matrixInX.setEntry(i, j, m_retrievedDataForX.getEntry(i, randomRow));
@@ -226,8 +226,8 @@ void Modeling::saveRetrievedDataToMatrix(
 }
 
 void Modeling::calculateCoefficientsUsingLeastSquares() {
-    unsigned int dataHeight = m_modelingDataForY.getNumberOfRows();
-    unsigned int dataWidth = m_modelingDataForX.getNumberOfColumns();
+    unsigned int const dataHeight = m_modelingDataForY.getNumberOfRows();
+    unsigned int const dataWidth = m_modelingDataForX.getNumberOfColumns();
     double chisq = NAN;
 
     gsl_matrix* xModelingData = nullptr;

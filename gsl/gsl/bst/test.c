@@ -46,20 +46,22 @@ static void
 random_integers(const size_t n, const int lower, const int upper,
                 int array[], gsl_rng * r)
 {
-  size_t i;
+  size_t i = 0;
 
-  for (i = 0; i < n; ++i)
+  for (i = 0; i < n; ++i) {
     array[i] = (int) ((upper - lower) * gsl_rng_uniform(r) + lower);
+}
 }
 
 /* fills array[] with a random permutation of the integers between 0 and n - 1 */
 static void
 random_permuted_integers (const size_t n, int array[], gsl_rng * r)
 {
-  size_t i;
+  size_t i = 0;
 
-  for (i = 0; i < n; i++)
+  for (i = 0; i < n; i++) {
     array[i] = i;
+}
 
   for (i = 0; i < n; i++)
     {
@@ -88,10 +90,11 @@ compare_ints(const void *pa, const void *pb, void *params)
 static void
 gen_balanced_tree (const int min, const int max, int **array)
 {
-  int i;
+  int i = 0;
 
-  if (min > max)
+  if (min > max) {
     return;
+}
 
   i = (min + max + 1) / 2;
   *(*array)++ = i;
@@ -103,7 +106,7 @@ gen_balanced_tree (const int min, const int max, int **array)
 static void
 gen_int_array (const size_t n, const enum array_order order, int array[], gsl_rng * r)
 {
-  size_t i;
+  size_t i = 0;
 
   switch (order)
     {
@@ -112,13 +115,15 @@ gen_int_array (const size_t n, const enum array_order order, int array[], gsl_rn
         break;
 
       case ORD_ASCENDING:
-        for (i = 0; i < n; i++)
+        for (i = 0; i < n; i++) {
           array[i] = i;
+}
         break;
 
       case ORD_DESCENDING:
-        for (i = 0; i < n; i++)
+        for (i = 0; i < n; i++) {
           array[i] = n - i - 1;
+}
         break;
 
       case ORD_BALANCED:
@@ -128,10 +133,11 @@ gen_int_array (const size_t n, const enum array_order order, int array[], gsl_rn
       case ORD_ZIGZAG:
         for (i = 0; i < n; i++)
           {
-            if (i % 2 == 0)
+            if (i % 2 == 0) {
               array[i] = i / 2;
-            else
+            } else {
               array[i] = n - i / 2 - 1;
+}
           }
         break;
 
@@ -139,8 +145,9 @@ gen_int_array (const size_t n, const enum array_order order, int array[], gsl_rn
         for (i = 0; i < n; i++)
           {
             array[i] = i + n / 2;
-            if ((size_t) array[i] >= n)
+            if ((size_t) array[i] >= n) {
               array[i] -= n;
+}
           }
         break;
 
@@ -157,7 +164,9 @@ static void
 check_traverser(const size_t n, const enum array_order order, gsl_bst_trav * trav, int data,
                 const char *desc, const gsl_bst_workspace * w)
 {
-  int *prev, *cur, *next;
+  int *prev;
+  int *cur;
+  int *next;
 
   prev = gsl_bst_trav_prev(trav);
   if (prev != NULL)
@@ -188,15 +197,16 @@ test_bst_int(const size_t n, const gsl_bst_type * T, const enum array_order orde
   int *sorted_data = malloc(n * sizeof(int));
   gsl_bst_workspace * w = gsl_bst_alloc(T, NULL, compare_ints, NULL);
   gsl_bst_trav trav;
-  int *p;
-  int i;
-  size_t nodes;
+  int *p = NULL;
+  int i = 0;
+  size_t nodes = 0;
 
   /* generate data to be inserted in tree */
   gen_int_array(n, order, data, r);
 
-  for (i = 0; i < (int) n; ++i)
+  for (i = 0; i < (int) n; ++i) {
     sorted_data[i] = data[i];
+}
 
   gsl_sort_int(sorted_data, 1, n);
 
@@ -207,8 +217,9 @@ test_bst_int(const size_t n, const gsl_bst_type * T, const enum array_order orde
     }
   else
     {
-      for (i = 0; i < (int) n; ++i)
+      for (i = 0; i < (int) n; ++i) {
         data_delete[i] = sorted_data[i];
+}
     }
 
   /* insert data */
@@ -282,13 +293,16 @@ test_bst_int(const size_t n, const gsl_bst_type * T, const enum array_order orde
   /* test traversal during tree modifications */
   for (i = 0; i < (int) n; ++i)
     {
-      gsl_bst_trav x, y, z;
+      gsl_bst_trav x;
+      gsl_bst_trav y;
+      gsl_bst_trav z;
 
       gsl_bst_trav_find(&data[i], &x, w);
       check_traverser(n, order, &x, data[i], "pre-deletion", w);
 
-      if (data[i] == data_delete[i])
+      if (data[i] == data_delete[i]) {
         continue;
+}
 
       p = gsl_bst_remove(&data_delete[i], w);
       gsl_test(*p != data_delete[i], "bst_int %s[n=%zu,order=%d] remove i=%d [%d,%d]",

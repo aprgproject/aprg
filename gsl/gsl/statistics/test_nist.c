@@ -34,7 +34,7 @@ int test_nist (void);
 int
 test_nist (void)
 {
-  size_t i ;
+  size_t i = 0 ;
 
   const size_t nlew = 200 ; 
 

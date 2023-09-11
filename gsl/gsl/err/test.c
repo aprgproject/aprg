@@ -33,7 +33,9 @@ int verbose = 0 ;
 int
 main (void)
 {
-  int i, j, n = 0 ;
+  int i;
+  int j;
+  int n = 0 ;
 
   struct { 
     int number; 
@@ -78,7 +80,8 @@ main (void)
 
   for (i = 0 ; i < n ; i++) 
     {
-      if (verbose) printf ("%s = %d\n", errors[i].name, errors[i].number) ;
+      if (verbose) { printf ("%s = %d\n", errors[i].name, errors[i].number) ;
+}
     }
 
   for (i = 0; i < n; i++)
@@ -86,8 +89,9 @@ main (void)
       int status = 0;
       for (j = 0; j < n; j++)
         {
-          if (j != i)
+          if (j != i) {
               status |= (errors[i].number == errors[j].number);
+}
         }
 
       gsl_test (status, "%s is distinct from other error values",

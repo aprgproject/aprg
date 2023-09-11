@@ -58,8 +58,8 @@ gsl_linalg_householder_transform (gsl_vector * v)
     {
       return 0.0; /* tau = 0 */
     }
-  else
-    { 
+  
+    
       double alpha, beta, tau ;
       
       gsl_vector_view x = gsl_vector_subvector (v, 1, n - 1) ; 
@@ -92,7 +92,7 @@ gsl_linalg_householder_transform (gsl_vector * v)
       }
       
       return tau;
-    }
+   
 }
 
 /*
@@ -124,8 +124,8 @@ gsl_linalg_householder_transform2 (double * alpha, gsl_vector * v)
     {
       return 0.0; /* tau = 0 */
     }
-  else
-    { 
+  
+    
       double beta, tau;
       gsl_vector_view x = gsl_vector_subvector (v, 0, n - 1); 
       double xnorm = gsl_blas_dnrm2 (&x.vector);
@@ -155,7 +155,7 @@ gsl_linalg_householder_transform2 (double * alpha, gsl_vector * v)
       }
       
       return tau;
-    }
+   
 }
 
 int
@@ -191,7 +191,8 @@ gsl_linalg_householder_hm (double tau, const gsl_vector * v, gsl_matrix * A)
   }
 #else
   {
-    size_t i, j;
+    size_t i;
+    size_t j;
     
     for (j = 0; j < A->size2; j++)
       {
@@ -233,8 +234,9 @@ gsl_linalg_householder_mh (double tau, const gsl_vector * v, gsl_matrix * A)
   /* applies a householder transformation v,tau to matrix m from the
      right hand side in order to zero out rows */
 
-  if (tau == 0)
+  if (tau == 0) {
     return GSL_SUCCESS;
+}
 
   /* A = A - tau w v' */
 
@@ -261,7 +263,8 @@ gsl_linalg_householder_mh (double tau, const gsl_vector * v, gsl_matrix * A)
   }
 #else
   {
-    size_t i, j;
+    size_t i;
+    size_t j;
     
     for (i = 0; i < A->size1; i++)
       {
@@ -300,14 +303,16 @@ gsl_linalg_householder_hv (double tau, const gsl_vector * v, gsl_vector * w)
   /* applies a householder transformation v to vector w */
   const size_t N = v->size;
  
-  if (tau == 0)
+  if (tau == 0) {
     return GSL_SUCCESS ;
+}
 
   {
     /* compute d = v'w */
 
     double w0 = gsl_vector_get(w,0);
-    double d1, d;
+    double d1;
+    double d;
 
     gsl_vector_const_view v1 = gsl_vector_const_subvector(v, 1, N-1);
     gsl_vector_view w1 = gsl_vector_subvector(w, 1, N-1);
@@ -361,8 +366,9 @@ gsl_linalg_householder_left(const double tau, const gsl_vector * v, gsl_matrix *
   else
     {
       /* quick return */
-      if (tau == 0.0)
+      if (tau == 0.0) {
         return GSL_SUCCESS;
+}
 
       /* work := A^T v */
       gsl_blas_dgemv(CblasTrans, 1.0, A, v, 0.0, work);
@@ -409,11 +415,12 @@ gsl_linalg_householder_right(const double tau, const gsl_vector * v, gsl_matrix 
     }
   else
     {
-      double v0;
+      double v0 = NAN;
 
       /* quick return */
-      if (tau == 0.0)
+      if (tau == 0.0) {
         return GSL_SUCCESS;
+}
 
       v0 = gsl_vector_get(v, 0);
       v->data[0] = 1.0;
@@ -439,7 +446,8 @@ gsl_linalg_householder_hm1 (double tau, gsl_matrix * A)
 
   if (tau == 0)
     {
-      size_t i,j;
+      size_t i;
+      size_t j;
 
       gsl_matrix_set (A, 0, 0, 1.0);
       
@@ -484,7 +492,8 @@ gsl_linalg_householder_hm1 (double tau, gsl_matrix * A)
   }
 #else
   {
-    size_t i, j;
+    size_t i;
+    size_t j;
     
     for (j = 1; j < A->size2; j++)
       {

@@ -24,6 +24,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sf_pow_int.h>
 #include <gsl/gsl_sf_bessel.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -40,22 +41,24 @@ bessel_il_CF1(const int l, const double x, const double threshold, double * rati
   double tk   = 1.0;
   double sum  = 1.0;
   double rhok = 0.0;
-  int k;
+  int k = 0;
 
   for(k=1; k<=kmax; k++) {
     double ak = (x/(2.0*l+1.0+2.0*k)) * (x/(2.0*l+3.0+2.0*k));
     rhok = -ak*(1.0 + rhok)/(1.0 + ak*(1.0 + rhok));
     tk  *= rhok;
     sum += tk;
-    if(fabs(tk/sum) < threshold) break;
+    if(fabs(tk/sum) < threshold) { break;
+}
   }
 
   *ratio = x/(2.0*l+3.0) * sum;
 
-  if(k == kmax)
+  if(k == kmax) {
     GSL_ERROR ("error", GSL_EMAXITER);
-  else
+  } else {
     return GSL_SUCCESS;
+}
 }
 
 
@@ -72,7 +75,7 @@ int gsl_sf_bessel_i0_scaled_e(const double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;    
   }
-  else if(ax < 0.2) {
+  if(ax < 0.2) {
     const double eax = exp(-ax);
     const double y = ax*ax;
     const double c1 = 1.0/6.0;
@@ -107,7 +110,7 @@ int gsl_sf_bessel_i1_scaled_e(const double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else if(ax < 3.0*GSL_DBL_MIN) {
+  if(ax < 3.0*GSL_DBL_MIN) {
     UNDERFLOW_ERROR(result);
   }
   else if(ax < 0.25) {
@@ -144,7 +147,7 @@ int gsl_sf_bessel_i2_scaled_e(const double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;    
   }
-  else if(ax < 4.0*GSL_SQRT_DBL_MIN) {
+  if(ax < 4.0*GSL_SQRT_DBL_MIN) {
     UNDERFLOW_ERROR(result);
   }
   else if(ax < 0.25) {
@@ -222,12 +225,12 @@ int gsl_sf_bessel_il_scaled_e(const int l, double x, gsl_sf_result * result)
   else if(l < 150) {
     gsl_sf_result i0_scaled;
     int stat_i0  = gsl_sf_bessel_i0_scaled_e(ax, &i0_scaled);
-    double rat;
+    double rat = NAN;
     int stat_CF1 = bessel_il_CF1(l, ax, GSL_DBL_EPSILON, &rat);
     double iellp1 = rat * GSL_SQRT_DBL_MIN;
     double iell   = GSL_SQRT_DBL_MIN;
-    double iellm1;
-    int ell;
+    double iellm1 = NAN;
+    int ell = 0;
     for(ell = l; ell >= 1; ell--) {
       iellm1 = iellp1 + (2*ell + 1)/x * iell;
       iellp1 = iell;
@@ -256,7 +259,7 @@ int gsl_sf_bessel_il_scaled_e(const int l, double x, gsl_sf_result * result)
     double iellp1 = r_iellp1.val;
     double iell   = r_iell.val;
     double iellm1 = 0.0;
-    int ell;
+    int ell = 0;
     iellp1 *= rt_term;
     iell   *= rt_term;
     for(ell = LMAX; ell >= l+1; ell--) {
@@ -276,13 +279,13 @@ int gsl_sf_bessel_il_scaled_e(const int l, double x, gsl_sf_result * result)
 int gsl_sf_bessel_il_scaled_array(const int lmax, const double x, double * result_array)
 {
   if(x == 0.0) {
-    int ell;
+    int ell = 0;
     result_array[0] = 1.0;
     for (ell = lmax; ell >= 1; ell--) {
       result_array[ell] = 0.0;
     };
     return GSL_SUCCESS;
-  } else {
+  } 
     int ell;
     gsl_sf_result r_iellp1;
     gsl_sf_result r_iell;
@@ -299,7 +302,7 @@ int gsl_sf_bessel_il_scaled_array(const int lmax, const double x, double * resul
       result_array[ell-1] = iellm1;
     }
     return GSL_ERROR_SELECT_2(stat_0, stat_1);
-  }
+ 
 }
 
 

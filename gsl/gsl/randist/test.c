@@ -425,7 +425,9 @@ test_shuffle (void)
 {
   double count[10][10];
   int x[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-  int i, j, status = 0;
+  int i;
+  int j;
+  int status = 0;
 
   for (i = 0; i < 10; i++)
     {
@@ -437,13 +439,15 @@ test_shuffle (void)
 
   for (i = 0; i < N; i++)
     {
-      for (j = 0; j < 10; j++)
+      for (j = 0; j < 10; j++) {
         x[j] = j;
+}
 
       gsl_ran_shuffle (r_global, x, 10, sizeof (int));
 
-      for (j = 0; j < 10; j++)
+      for (j = 0; j < 10; j++) {
         count[x[j]][j]++;
+}
     }
 
   for (i = 0; i < 10; i++)
@@ -473,7 +477,9 @@ test_choose (void)
   double count[10];
   int x[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
   int y[3] = { 0, 1, 2 };
-  int i, j, status = 0;
+  int i;
+  int j;
+  int status = 0;
 
   for (i = 0; i < 10; i++)
     {
@@ -482,13 +488,15 @@ test_choose (void)
 
   for (i = 0; i < N; i++)
     {
-      for (j = 0; j < 10; j++)
+      for (j = 0; j < 10; j++) {
         x[j] = j;
+}
 
       gsl_ran_choose (r_global, y, 3, x, 10, sizeof (int));
 
-      for (j = 0; j < 3; j++)
+      for (j = 0; j < 3; j++) {
         count[y[j]]++;
+}
     }
 
   for (i = 0; i < 10; i++)
@@ -516,15 +524,18 @@ void
 testMoments (double (*f) (void), const char *name,
              double a, double b, double p)
 {
-  int i;
-  double count = 0, expected, sigma;
-  int status;
+  int i = 0;
+  double count = 0;
+  double expected;
+  double sigma;
+  int status = 0;
 
   for (i = 0; i < N; i++)
     {
       double r = f ();
-      if (r < b && r > a)
+      if (r < b && r > a) {
         count++;
+}
     }
 
   expected = p * N;
@@ -560,7 +571,8 @@ wrapper_function (double x, void *params)
 double
 integrate (pdf_func * pdf, double a, double b)
 {
-  double result, abserr;
+  double result;
+  double abserr;
   size_t n = 1000;
   gsl_function f;  
   gsl_integration_workspace * w = gsl_integration_workspace_alloc (n);
@@ -569,7 +581,8 @@ integrate (pdf_func * pdf, double a, double b)
   pdf_errors = 0;
   gsl_integration_qags (&f, a, b, 1e-16, 1e-4, n, w, &result, &abserr);
   gsl_integration_workspace_free (w);
-  if (pdf_errors) return pdf_errval;
+  if (pdf_errors) { return pdf_errval;
+}
   return result;
 }
 
@@ -577,13 +590,22 @@ integrate (pdf_func * pdf, double a, double b)
 void
 testPDF (double (*f) (void), double (*pdf) (double), const char *name)
 {
-  double count[BINS], edge[BINS], p[BINS];
-  double a = -5.0, b = +5.0;
+  double count[BINS];
+  double edge[BINS];
+  double p[BINS];
+  double a = -5.0;
+  double b = +5.0;
   double dx = (b - a) / BINS;
-  double bin;
-  double total = 0, mean;
-  int i, j, status = 0, status_i = 0, attempts = 0;
-  long int n0 = 0, n = N;
+  double bin = NAN;
+  double total = 0;
+  double mean;
+  int i;
+  int j;
+  int status = 0;
+  int status_i = 0;
+  int attempts = 0;
+  long int n0 = 0;
+  long int n = N;
 
   for (i = 0; i < BINS; i++)
     {
@@ -591,8 +613,9 @@ testPDF (double (*f) (void), double (*pdf) (double), const char *name)
 
       double x = a + i * dx;
 
-      if (fabs (x) < 1e-10)     /* hit the origin exactly */
+      if (fabs (x) < 1e-10) {     /* hit the origin exactly */
         x = 0.0;
+}
 
       p[i]  = integrate (pdf, x, x+dx);
     }
@@ -618,10 +641,11 @@ testPDF (double (*f) (void), double (*pdf) (double), const char *name)
           double f = modf(u, &bin);
           j = (int)bin;
 
-          if (f == 0)
+          if (f == 0) {
             edge[j]++;
-          else 
+          } else { 
             count[j]++;
+}
         }
     }
 
@@ -677,36 +701,43 @@ testPDF (double (*f) (void), double (*pdf) (double), const char *name)
         }
 
       status |= status_i;
-      if (status_i)
+      if (status_i) {
         gsl_test (status_i, "%s [%g,%g) (%g/%d=%g observed vs %g expected)",
                   name, x, x + dx, count[i], n, count[i] / n, p[i]);
+}
     }
 
-  if (status == 0)
+  if (status == 0) {
     gsl_test (status, "%s, sampling against pdf over range [%g,%g) ",
               name, a, b);
+}
 }
 
 void
 testDiscretePDF (double (*f) (void), double (*pdf) (unsigned int),
                  const char *name)
 {
-  double count[BINS], p[BINS];
-  unsigned int i;
-  int status = 0, status_i = 0;
+  double count[BINS];
+  double p[BINS];
+  unsigned int i = 0;
+  int status = 0;
+  int status_i = 0;
 
-  for (i = 0; i < BINS; i++)
+  for (i = 0; i < BINS; i++) {
     count[i] = 0;
+}
 
   for (i = 0; i < N; i++)
     {
       int r = (int) (f ());
-      if (r >= 0 && r < BINS)
+      if (r >= 0 && r < BINS) {
         count[r]++;
+}
     }
 
-  for (i = 0; i < BINS; i++)
+  for (i = 0; i < BINS; i++) {
     p[i] = pdf (i);
+}
 
   for (i = 0; i < BINS; i++)
     {
@@ -721,14 +752,16 @@ testDiscretePDF (double (*f) (void), double (*pdf) (unsigned int),
           status_i = (count[i] != 0);
         }
       status |= status_i;
-      if (status_i)
+      if (status_i) {
         gsl_test (status_i, "%s i=%d (%g observed vs %g expected)",
                   name, i, count[i] / N, p[i]);
+}
     }
 
-  if (status == 0)
+  if (status == 0) {
     gsl_test (status, "%s, sampling against pdf over range [%d,%d) ",
               name, 0, BINS);
+}
 }
 
 
@@ -907,7 +940,9 @@ test_chisqnu2_pdf (double x)
 double
 test_dir2d (void)
 {
-  double x = 0, y = 0, theta;
+  double x = 0;
+  double y = 0;
+  double theta;
   gsl_ran_dir_2d (r_global, &x, &y);
   theta = atan2 (x, y);
   return theta;
@@ -920,16 +955,18 @@ test_dir2d_pdf (double x)
     {
       return 1 / (2 * M_PI);
     }
-  else
-    {
+  
+    
       return 0;
-    }
+   
 }
 
 double
 test_dir2d_trig_method (void)
 {
-  double x = 0, y = 0, theta;
+  double x = 0;
+  double y = 0;
+  double theta;
   gsl_ran_dir_2d_trig_method (r_global, &x, &y);
   theta = atan2 (x, y);
   return theta;
@@ -942,16 +979,19 @@ test_dir2d_trig_method_pdf (double x)
     {
       return 1 / (2 * M_PI);
     }
-  else
-    {
+  
+    
       return 0;
-    }
+   
 }
 
 double
 test_dir3dxy (void)
 {
-  double x = 0, y = 0, z = 0, theta;
+  double x = 0;
+  double y = 0;
+  double z = 0;
+  double theta;
   gsl_ran_dir_3d (r_global, &x, &y, &z);
   theta = atan2 (x, y);
   return theta;
@@ -964,16 +1004,19 @@ test_dir3dxy_pdf (double x)
     {
       return 1 / (2 * M_PI);
     }
-  else
-    {
+  
+    
       return 0;
-    }
+   
 }
 
 double
 test_dir3dyz (void)
 {
-  double x = 0, y = 0, z = 0, theta;
+  double x = 0;
+  double y = 0;
+  double z = 0;
+  double theta;
   gsl_ran_dir_3d (r_global, &x, &y, &z);
   theta = atan2 (y, z);
   return theta;
@@ -986,16 +1029,19 @@ test_dir3dyz_pdf (double x)
     {
       return 1 / (2 * M_PI);
     }
-  else
-    {
+  
+    
       return 0;
-    }
+   
 }
 
 double
 test_dir3dzx (void)
 {
-  double x = 0, y = 0, z = 0, theta;
+  double x = 0;
+  double y = 0;
+  double z = 0;
+  double theta;
   gsl_ran_dir_3d (r_global, &x, &y, &z);
   theta = atan2 (z, x);
   return theta;
@@ -1008,10 +1054,10 @@ test_dir3dzx_pdf (double x)
     {
       return 1 / (2 * M_PI);
     }
-  else
-    {
+  
+    
       return 0;
-    }
+   
 }
 
 double
@@ -1035,8 +1081,9 @@ test_dirichlet_pdf (double x)
   double alpha[2] = { 2.5, 5.0 };
   double theta[2];
 
-  if (x <= 0.0 || x >= 1.0)
+  if (x <= 0.0 || x >= 1.0) {
     return 0.0;                 /* Out of range */
+}
 
   theta[0] = x;
   theta[1] = 1.0 - x;
@@ -1064,8 +1111,9 @@ test_dirichlet_small_pdf (double x)
   double alpha[2] = { 2.5e-3, 5.0e-3 };
   double theta[2];
 
-  if (x <= 0.0 || x >= 1.0)
+  if (x <= 0.0 || x >= 1.0) {
     return 0.0;                 /* Out of range */
+}
 
   theta[0] = x;
   theta[1] = 1.0 - x;
@@ -1087,8 +1135,13 @@ test_dirichlet_moments (void)
   double theta_sum[DIRICHLET_K];
 
   double alpha_sum = 0.0;
-  double mean, obs_mean, sd, sigma;
-  int status, k, n;
+  double mean;
+  double obs_mean;
+  double sd;
+  double sigma;
+  int status;
+  int k;
+  int n;
 
   for (k = 0; k < DIRICHLET_K; k++)
     {
@@ -1100,8 +1153,9 @@ test_dirichlet_moments (void)
   for (n = 0; n < N; n++)
     {
       gsl_ran_dirichlet (r_global, DIRICHLET_K, alpha, theta);
-      for (k = 0; k < DIRICHLET_K; k++)
+      for (k = 0; k < DIRICHLET_K; k++) {
         theta_sum[k] += theta[k];
+}
     }
 
   for (k = 0; k < DIRICHLET_K; k++)
@@ -1136,17 +1190,24 @@ test_multinomial_moments (void)
   unsigned int  x[MULTI_DIM];
   double x_sum[MULTI_DIM];
 
-  double mean, obs_mean, sd, sigma;
-  int status, k, n;
+  double mean;
+  double obs_mean;
+  double sd;
+  double sigma;
+  int status;
+  int k;
+  int n;
 
-  for (k = 0; k < MULTI_DIM; k++)
+  for (k = 0; k < MULTI_DIM; k++) {
     x_sum[k] =0.0;
+}
 
   for (n = 0; n < N; n++)
     {
       gsl_ran_multinomial (r_global, MULTI_DIM, sum_n, p, x);
-      for (k = 0; k < MULTI_DIM; k++)
+      for (k = 0; k < MULTI_DIM; k++) {
         x_sum[k] += x[k];
+}
     }
 
   for (k = 0; k < MULTI_DIM; k++)
@@ -1204,8 +1265,9 @@ test_discrete3 (void)
 {
   static double P[20];
   if (g3 == NULL)
-    { int i;
-      for (i=0; i<20; ++i) P[i]=1.0/20;
+    { int i = 0;
+      for (i=0; i<20; ++i) { P[i]=1.0/20;
+}
       g3 = gsl_ran_discrete_preproc (20, P);
     }
   return gsl_ran_discrete (r_global, g3);
@@ -1629,7 +1691,8 @@ test_ugaussian_tail_pdf (double x)
 double
 test_bivariate_gaussian1 (void)
 {
-  double x = 0, y = 0;
+  double x = 0;
+  double y = 0;
   gsl_ran_bivariate_gaussian (r_global, 3.0, 2.0, 0.3, &x, &y);
   return x;
 }
@@ -1643,7 +1706,8 @@ test_bivariate_gaussian1_pdf (double x)
 double
 test_bivariate_gaussian2 (void)
 {
-  double x = 0, y = 0;
+  double x = 0;
+  double y = 0;
   gsl_ran_bivariate_gaussian (r_global, 3.0, 2.0, 0.3, &x, &y);
   return y;
 }
@@ -1651,9 +1715,12 @@ test_bivariate_gaussian2 (void)
 double
 test_bivariate_gaussian2_pdf (double y)
 {
-  int i, n = 10;
+  int i;
+  int n = 10;
   double sum = 0;
-  double a = -10, b = 10, dx = (b - a) / n;
+  double a = -10;
+  double b = 10;
+  double dx = (b - a) / n;
   for (i = 0; i < n; i++)
     {
       double x = a + i * dx;
@@ -1666,7 +1733,8 @@ test_bivariate_gaussian2_pdf (double y)
 double
 test_bivariate_gaussian3 (void)
 {
-  double x = 0, y = 0;
+  double x = 0;
+  double y = 0;
   gsl_ran_bivariate_gaussian (r_global, 3.0, 2.0, 0.3, &x, &y);
   return x + y;
 }
@@ -1674,7 +1742,9 @@ test_bivariate_gaussian3 (void)
 double
 test_bivariate_gaussian3_pdf (double x)
 {
-  double sx = 3.0, sy = 2.0, r = 0.3;
+  double sx = 3.0;
+  double sy = 2.0;
+  double r = 0.3;
   double su = (sx + r * sy);
   double sv = sy * sqrt (1 - r * r);
   double sigma = sqrt (su * su + sv * sv);
@@ -1685,7 +1755,8 @@ test_bivariate_gaussian3_pdf (double x)
 double
 test_bivariate_gaussian4 (void)
 {
-  double x = 0, y = 0;
+  double x = 0;
+  double y = 0;
   gsl_ran_bivariate_gaussian (r_global, 3.0, 2.0, -0.5, &x, &y);
   return x + y;
 }
@@ -1693,7 +1764,9 @@ test_bivariate_gaussian4 (void)
 double
 test_bivariate_gaussian4_pdf (double x)
 {
-  double sx = 3.0, sy = 2.0, r = -0.5;
+  double sx = 3.0;
+  double sy = 2.0;
+  double r = -0.5;
   double su = (sx + r * sy);
   double sv = sy * sqrt (1 - r * r);
   double sigma = sqrt (su * su + sv * sv);
@@ -1713,7 +1786,7 @@ test_multivariate_gaussian_log_pdf (void)
 {
   size_t d = 2;
   const double exp_res = -3.565097837249263;
-  double obs_res;
+  double obs_res = NAN;
   gsl_vector * mu = gsl_vector_calloc(d);
   gsl_matrix * Sigma = gsl_matrix_calloc(d, d);
   gsl_matrix * L = gsl_matrix_calloc(d, d);
@@ -1790,9 +1863,13 @@ test_multivariate_gaussian_pdf (void)
 void
 test_multivariate_gaussian (void)
 {
-  size_t d = 2, i = 0;
+  size_t d = 2;
+  size_t i = 0;
   int status = 0;
-  double T2 = 0, threshold = 0, alpha = 0.05, pvalue = 0;
+  double T2 = 0;
+  double threshold = 0;
+  double alpha = 0.05;
+  double pvalue = 0;
   gsl_vector * mu = gsl_vector_calloc(d);
   gsl_matrix * Sigma = gsl_matrix_calloc(d, d);
   gsl_matrix * L = gsl_matrix_calloc(d, d);
@@ -1873,8 +1950,9 @@ void
 test_wishart_log_pdf (void)
 {
   size_t d = 2;
-  const double df = 3, exp_res = -4.931913612377813;
-  double obs_res;
+  const double df = 3;
+  const double exp_res = -4.931913612377813;
+  double obs_res = NAN;
   gsl_matrix * V = gsl_matrix_calloc(d, d);
   gsl_matrix * L = gsl_matrix_calloc(d, d);
   gsl_matrix * X = gsl_matrix_calloc(d, d);
@@ -1920,8 +1998,9 @@ void
 test_wishart_pdf (void)
 {
   size_t d = 2;
-  const double df = 3, exp_res = 0.007212687778224;
-  double obs_res;
+  const double df = 3;
+  const double exp_res = 0.007212687778224;
+  double obs_res = NAN;
   gsl_matrix * V = gsl_matrix_calloc(d, d);
   gsl_matrix * L = gsl_matrix_calloc(d, d);
   gsl_matrix * X = gsl_matrix_calloc(d, d);
@@ -1962,9 +2041,13 @@ test_wishart_pdf (void)
 void
 test_wishart (void)
 {
-  size_t d = 1, i, j;
-  double df[5] = {1, 3, 5, 7, 9}, mean_wishart, var_wishart;
-  int status;
+  size_t d = 1;
+  size_t i;
+  size_t j;
+  double df[5] = {1, 3, 5, 7, 9};
+  double mean_wishart;
+  double var_wishart;
+  int status = 0;
   gsl_matrix * V = gsl_matrix_calloc(d, d);
   gsl_matrix * L = gsl_matrix_calloc(d, d);
   gsl_matrix * sample_wishart = gsl_matrix_calloc(d, d);

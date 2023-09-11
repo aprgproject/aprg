@@ -49,11 +49,13 @@ initialise (void)
   /* 0 = show failures only (we always want to see these) */
   /* 1 = show passes and failures */
 
-  if (p == 0)  /* environment variable is not set */
+  if (p == 0) {  /* environment variable is not set */
     return ;
+}
 
-  if (*p == '\0') /* environment variable is empty */
+  if (*p == '\0') { /* environment variable is empty */
     return ;
+}
 
   verbose = strtoul (p, 0, 0);  
 
@@ -78,7 +80,8 @@ update (int s)
 void
 gsl_test (int status, const char *test_description,...)
 {
-  if (!tests) initialise();
+  if (!tests) { initialise();
+}
 
   update (status);
 
@@ -88,7 +91,7 @@ gsl_test (int status, const char *test_description,...)
 
 #if HAVE_VPRINTF
       {
-        va_list ap;
+        va_list ap = NULL;
 #ifdef STDC_HEADERS
         va_start (ap, test_description);
 #else
@@ -99,8 +102,9 @@ gsl_test (int status, const char *test_description,...)
       }
 #endif
 
-      if (status && !verbose)
+      if (status && !verbose) {
         printf(" [%u]", tests);
+}
 
       printf("\n");
       fflush (stdout);
@@ -112,9 +116,10 @@ void
 gsl_test_rel (double result, double expected, double relative_error,
               const char *test_description,...)
 {
-  int status ;
+  int status = 0 ;
 
-  if (!tests) initialise();
+  if (!tests) { initialise();
+}
 
   /* Check for NaN vs inf vs number */
 
@@ -148,7 +153,7 @@ gsl_test_rel (double result, double expected, double relative_error,
 
 #if HAVE_VPRINTF
       {
-        va_list ap;
+        va_list ap = NULL;
 #ifdef STDC_HEADERS
         va_start (ap, test_description);
 #else
@@ -180,8 +185,9 @@ gsl_test_rel (double result, double expected, double relative_error,
           printf(" [test uses subnormal value]") ;
         }
 
-      if (status && !verbose)
+      if (status && !verbose) {
         printf(" [%u]", tests);
+}
 
       printf ("\n") ;
       fflush (stdout);
@@ -192,9 +198,10 @@ void
 gsl_test_abs (double result, double expected, double absolute_error,
               const char *test_description,...)
 {
-  int status ;
+  int status = 0 ;
 
-  if (!tests) initialise();
+  if (!tests) { initialise();
+}
 
   /* Check for NaN vs inf vs number */
 
@@ -224,7 +231,7 @@ gsl_test_abs (double result, double expected, double absolute_error,
 
 #if HAVE_VPRINTF
       {
-        va_list ap;
+        va_list ap = NULL;
         
 #ifdef STDC_HEADERS
         va_start (ap, test_description);
@@ -257,8 +264,9 @@ gsl_test_abs (double result, double expected, double absolute_error,
           printf(" [test uses subnormal value]") ;
         }
 
-      if (status && !verbose)
+      if (status && !verbose) {
         printf(" [%u]", tests);
+}
 
       printf ("\n") ;
       fflush (stdout);
@@ -270,9 +278,10 @@ void
 gsl_test_factor (double result, double expected, double factor,
                  const char *test_description,...)
 {
-  int status;
+  int status = 0;
 
-  if (!tests) initialise();
+  if (!tests) { initialise();
+}
   
   if ((expected > 0 && expected < GSL_DBL_MIN)
       || (expected < 0 && expected > -(GSL_DBL_MIN)))
@@ -301,7 +310,7 @@ gsl_test_factor (double result, double expected, double factor,
 
 #if HAVE_VPRINTF
       {
-        va_list ap;
+        va_list ap = NULL;
         
 #ifdef STDC_HEADERS
         va_start (ap, test_description);
@@ -333,8 +342,9 @@ gsl_test_factor (double result, double expected, double factor,
           printf(" [test uses subnormal value]") ;
         }
 
-      if (status && !verbose)
+      if (status && !verbose) {
         printf(" [%u]", tests);
+}
 
       printf ("\n") ;
       fflush (stdout);
@@ -346,7 +356,8 @@ gsl_test_int (int result, int expected, const char *test_description,...)
 {
   int status = (result != expected) ;
 
-  if (!tests) initialise();
+  if (!tests) { initialise();
+}
 
   update (status);
 
@@ -356,7 +367,7 @@ gsl_test_int (int result, int expected, const char *test_description,...)
 
 #if HAVE_VPRINTF
       {
-        va_list ap;
+        va_list ap = NULL;
         
 #ifdef STDC_HEADERS
         va_start (ap, test_description);
@@ -376,8 +387,9 @@ gsl_test_int (int result, int expected, const char *test_description,...)
           printf(" (%d observed vs %d expected)", result, expected) ;
         }
 
-      if (status && !verbose)
+      if (status && !verbose) {
         printf(" [%u]", tests);
+}
 
       printf ("\n");
       fflush (stdout);
@@ -390,7 +402,8 @@ gsl_test_str (const char * result, const char * expected,
 {
   int status = strcmp(result,expected) ;
 
-  if (!tests) initialise();
+  if (!tests) { initialise();
+}
 
   update (status);
 
@@ -400,7 +413,7 @@ gsl_test_str (const char * result, const char * expected,
 
 #if HAVE_VPRINTF
       {
-        va_list ap;
+        va_list ap = NULL;
         
 #ifdef STDC_HEADERS
         va_start (ap, test_description);
@@ -416,8 +429,9 @@ gsl_test_str (const char * result, const char * expected,
           printf(" (%s observed vs %s expected)", result, expected) ;
         }
 
-      if (status && !verbose)
+      if (status && !verbose) {
         printf(" [%u]", tests);
+}
 
       printf ("\n");
       fflush (stdout);
@@ -433,8 +447,9 @@ gsl_test_verbose (int v)
 int
 gsl_test_summary (void)
 {
-  if (verbose && 0)             /* FIXME: turned it off, this annoys me */
+  if (verbose && 0) {             /* FIXME: turned it off, this annoys me */
     printf ("%d tests, passed %d, failed %d.\n", tests, passed, failed);
+}
 
   if (failed != 0)
     {
@@ -443,16 +458,18 @@ gsl_test_summary (void)
 
   if (tests != passed + failed)
     {
-      if (verbose)
+      if (verbose) {
         printf ("TEST RESULTS DO NOT ADD UP %d != %d + %d\n",
                 tests, passed, failed);
+}
       return EXIT_FAILURE;
     }
 
   if (passed == tests)
     {
-      if (!verbose)         /* display a summary of passed tests */
+      if (!verbose) {         /* display a summary of passed tests */
         printf ("Completed [%d/%d]\n", passed, tests);
+}
 
       return EXIT_SUCCESS;
     }

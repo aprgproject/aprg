@@ -99,7 +99,8 @@ static int
 avl_empty (void * vtable)
 {
   avl_table * table = (avl_table *) vtable;
-  avl_node *p, *q;
+  avl_node *p;
+  avl_node *q;
 
   for (p = table->avl_root; p != NULL; p = q)
     {
@@ -134,11 +135,13 @@ Returns |NULL| in case of memory allocation failure.
 static void **
 avl_probe (void * item, avl_table * table)
 {
-  avl_node *y, *z; /* top node to update balance factor, and parent */
-  avl_node *p, *q; /* iterator, and parent */
-  avl_node *n;     /* newly inserted node */
-  avl_node *w;     /* new root of rebalanced subtree */
-  int dir;         /* direction to descend */
+  avl_node *y;
+  avl_node *z; /* top node to update balance factor, and parent */
+  avl_node *p;
+  avl_node *q; /* iterator, and parent */
+  avl_node *n = NULL;     /* newly inserted node */
+  avl_node *w = NULL;     /* new root of rebalanced subtree */
+  int dir = 0;         /* direction to descend */
 
   unsigned char da[AVL_MAX_HEIGHT]; /* cached comparison results */
   int k = 0;                        /* number of cached results */
@@ -150,19 +153,22 @@ avl_probe (void * item, avl_table * table)
     {
       int cmp = table->avl_compare (item, p->avl_data, table->avl_param);
 
-      if (cmp == 0)
+      if (cmp == 0) {
         return &p->avl_data;
+}
 
-      if (p->avl_balance != 0)
+      if (p->avl_balance != 0) {
         z = q, y = p, k = 0;
+}
 
       da[k++] = dir = cmp > 0;
     }
 
   /* allocate a new node */
   n = q->avl_link[dir] = table->avl_alloc->alloc (sizeof *n, table->avl_param);
-  if (n == NULL)
+  if (n == NULL) {
     return NULL;
+}
 
   table->avl_count++;
 
@@ -170,14 +176,17 @@ avl_probe (void * item, avl_table * table)
   n->avl_link[0] = n->avl_link[1] = NULL;
   n->avl_balance = 0;
 
-  if (y == NULL)
+  if (y == NULL) {
     return &n->avl_data;
+}
 
-  for (p = y, k = 0; p != n; p = p->avl_link[da[k]], k++)
-    if (da[k] == 0)
+  for (p = y, k = 0; p != n; p = p->avl_link[da[k]], k++) {
+    if (da[k] == 0) {
       p->avl_balance--;
-    else
+    } else {
       p->avl_balance++;
+}
+}
 
   if (y->avl_balance == -2)
     {
@@ -196,12 +205,13 @@ avl_probe (void * item, avl_table * table)
           w->avl_link[0] = x;
           y->avl_link[0] = w->avl_link[1];
           w->avl_link[1] = y;
-          if (w->avl_balance == -1)
+          if (w->avl_balance == -1) {
             x->avl_balance = 0, y->avl_balance = +1;
-          else if (w->avl_balance == 0)
+          } else if (w->avl_balance == 0) {
             x->avl_balance = y->avl_balance = 0;
-          else /* |w->avl_balance == +1| */
+          } else { /* |w->avl_balance == +1| */
             x->avl_balance = -1, y->avl_balance = 0;
+}
           w->avl_balance = 0;
         }
     }
@@ -222,17 +232,19 @@ avl_probe (void * item, avl_table * table)
           w->avl_link[1] = x;
           y->avl_link[1] = w->avl_link[0];
           w->avl_link[0] = y;
-          if (w->avl_balance == +1)
+          if (w->avl_balance == +1) {
             x->avl_balance = 0, y->avl_balance = -1;
-          else if (w->avl_balance == 0)
+          } else if (w->avl_balance == 0) {
             x->avl_balance = y->avl_balance = 0;
-          else /* |w->avl_balance == -1| */
+          } else { /* |w->avl_balance == -1| */
             x->avl_balance = +1, y->avl_balance = 0;
+}
           w->avl_balance = 0;
         }
     }
-  else
+  else {
     return &n->avl_data;
+}
 
   z->avl_link[y != z->avl_link[0]] = w;
   table->avl_generation++;
@@ -264,18 +276,19 @@ static void *
 avl_find (const void * item, const void * vtable)
 {
   const avl_table * table = (const avl_table *) vtable;
-  avl_node *p;
+  avl_node *p = NULL;
 
   for (p = table->avl_root; p != NULL; )
     {
       int cmp = table->avl_compare (item, p->avl_data, table->avl_param);
 
-      if (cmp < 0)
+      if (cmp < 0) {
         p = p->avl_link[0];
-      else if (cmp > 0)
+      } else if (cmp > 0) {
         p = p->avl_link[1];
-      else /* |cmp == 0| */
+      } else { /* |cmp == 0| */
         return p->avl_data;
+}
     }
 
   return NULL;
@@ -295,10 +308,10 @@ avl_remove (const void * item, void * vtable)
   /* stack of nodes */
   avl_node *pa[AVL_MAX_HEIGHT];      /* nodes */
   unsigned char da[AVL_MAX_HEIGHT];  /* |link[]| indexes */
-  int k;                             /* stack pointer */
+  int k = 0;                             /* stack pointer */
 
-  avl_node *p;                       /* traverses tree to find node to delete */
-  int cmp;                           /* result of comparison between |item| and |p| */
+  avl_node *p = NULL;                       /* traverses tree to find node to delete */
+  int cmp = 0;                           /* result of comparison between |item| and |p| */
 
   k = 0;
   p = (avl_node *) &table->avl_root;
@@ -311,15 +324,16 @@ avl_remove (const void * item, void * vtable)
       da[k++] = dir;
 
       p = p->avl_link[dir];
-      if (p == NULL)
+      if (p == NULL) {
         return NULL;
+}
     }
 
   item = p->avl_data;
 
-  if (p->avl_link[1] == NULL)
+  if (p->avl_link[1] == NULL) {
     pa[k - 1]->avl_link[da[k - 1]] = p->avl_link[0];
-  else
+  } else
     {
       avl_node *r = p->avl_link[1];
       if (r->avl_link[0] == NULL)
@@ -332,7 +346,7 @@ avl_remove (const void * item, void * vtable)
         }
       else
         {
-          avl_node *s;
+          avl_node *s = NULL;
           int j = k++;
 
           for (;;)
@@ -340,8 +354,9 @@ avl_remove (const void * item, void * vtable)
               da[k] = 0;
               pa[k++] = r;
               s = r->avl_link[0];
-              if (s->avl_link[0] == NULL)
+              if (s->avl_link[0] == NULL) {
                 break;
+}
 
               r = s;
             }
@@ -366,9 +381,9 @@ avl_remove (const void * item, void * vtable)
       if (da[k] == 0)
         {
           y->avl_balance++;
-          if (y->avl_balance == +1)
+          if (y->avl_balance == +1) {
             break;
-          else if (y->avl_balance == +2)
+          } if (y->avl_balance == +2)
             {
               avl_node *x = y->avl_link[1];
               if (x->avl_balance == -1)
@@ -407,9 +422,9 @@ avl_remove (const void * item, void * vtable)
       else
         {
           y->avl_balance--;
-          if (y->avl_balance == -1)
+          if (y->avl_balance == -1) {
             break;
-          else if (y->avl_balance == -2)
+          } if (y->avl_balance == -2)
             {
               avl_node *x = y->avl_link[0];
               if (x->avl_balance == +1)
@@ -616,7 +631,7 @@ avl_t_first (void * vtrav, const void * vtable)
 {
   const avl_table * table = (const avl_table *) vtable;
   avl_traverser * trav = (avl_traverser *) vtrav;
-  avl_node *x;
+  avl_node *x = NULL;
 
   trav->avl_table = table;
   trav->avl_height = 0;
@@ -653,7 +668,7 @@ avl_t_last (void * vtrav, const void * vtable)
 {
   const avl_table * table = (const avl_table *) vtable;
   avl_traverser * trav = (avl_traverser *) vtrav;
-  avl_node *x;
+  avl_node *x = NULL;
 
   trav->avl_table = table;
   trav->avl_height = 0;
@@ -691,7 +706,8 @@ avl_t_find (const void * item, void * vtrav, const void * vtable)
 {
   const avl_table * table = (const avl_table *) vtable;
   avl_traverser * trav = (avl_traverser *) vtrav;
-  avl_node *p, *q;
+  avl_node *p;
+  avl_node *q;
 
   trav->avl_table = table;
   trav->avl_height = 0;
@@ -701,11 +717,11 @@ avl_t_find (const void * item, void * vtrav, const void * vtable)
     {
       int cmp = table->avl_compare (item, p->avl_data, table->avl_param);
 
-      if (cmp < 0)
+      if (cmp < 0) {
         q = p->avl_link[0];
-      else if (cmp > 0)
+      } else if (cmp > 0) {
         q = p->avl_link[1];
-      else /* |cmp == 0| */
+      } else /* |cmp == 0| */
         {
           trav->avl_node = p;
           return p->avl_data;
@@ -740,7 +756,7 @@ avl_t_insert (void * item, void * vtrav, void * vtable)
 {
   avl_table * table = (avl_table *) vtable;
   avl_traverser * trav = (avl_traverser *) vtrav;
-  void **p;
+  void **p = NULL;
 
   p = avl_probe (item, table);
   if (p != NULL)
@@ -750,11 +766,11 @@ avl_t_insert (void * item, void * vtrav, void * vtable)
       trav->avl_generation = table->avl_generation - 1;
       return *p;
     }
-  else
-    {
+  
+    
       avl_t_init (vtrav, vtable);
       return NULL;
-    }
+   
 }
 
 /*
@@ -794,17 +810,18 @@ static void *
 avl_t_next (void * vtrav)
 {
   avl_traverser * trav = (avl_traverser *) vtrav;
-  avl_node *x;
+  avl_node *x = NULL;
 
-  if (trav->avl_generation != trav->avl_table->avl_generation)
+  if (trav->avl_generation != trav->avl_table->avl_generation) {
     avl_trav_refresh (trav);
+}
 
   x = trav->avl_node;
   if (x == NULL)
     {
       return avl_t_first (vtrav, trav->avl_table);
     }
-  else if (x->avl_link[1] != NULL)
+  if (x->avl_link[1] != NULL)
     {
       if (trav->avl_height >= AVL_MAX_HEIGHT)
         {
@@ -858,17 +875,18 @@ static void *
 avl_t_prev (void * vtrav)
 {
   avl_traverser * trav = (avl_traverser *) vtrav;
-  avl_node *x;
+  avl_node *x = NULL;
 
-  if (trav->avl_generation != trav->avl_table->avl_generation)
+  if (trav->avl_generation != trav->avl_table->avl_generation) {
     avl_trav_refresh (trav);
+}
 
   x = trav->avl_node;
   if (x == NULL)
     {
       return avl_t_last (vtrav, trav->avl_table);
     }
-  else if (x->avl_link[0] != NULL)
+  if (x->avl_link[0] != NULL)
     {
       if (trav->avl_height >= AVL_MAX_HEIGHT)
         {
@@ -930,7 +948,7 @@ static void *
 avl_t_replace (void * vtrav, void * new_item)
 {
   avl_traverser * trav = (avl_traverser *) vtrav;
-  void *old;
+  void *old = NULL;
 
   old = trav->avl_node->avl_data;
   trav->avl_node->avl_data = new_item;
@@ -953,7 +971,7 @@ avl_trav_refresh (avl_traverser * trav)
       gsl_bst_cmp_function *cmp = trav->avl_table->avl_compare;
       void *param = trav->avl_table->avl_param;
       avl_node *node = trav->avl_node;
-      avl_node *i;
+      avl_node *i = NULL;
 
       trav->avl_height = 0;
       for (i = trav->avl_table->avl_root; i != node; )

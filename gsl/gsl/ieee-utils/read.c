@@ -33,9 +33,9 @@ gsl_ieee_read_mode_string (const char * description,
                            int * rounding, 
                            int * exception_mask)
 {
-  char * start ;
-  char * end;
-  char * p;
+  char * start = NULL ;
+  char * end = NULL;
+  char * p = NULL;
 
   int precision_count = 0 ;
   int rounding_count = 0 ;
@@ -57,8 +57,10 @@ gsl_ieee_read_mode_string (const char * description,
   *exception_mask = 0 ;
 
   do {
-    int status ;
-    int new_precision, new_rounding, new_exception ;
+    int status = 0 ;
+    int new_precision;
+    int new_rounding;
+    int new_exception ;
 
     end = strchr (p,',') ;
 

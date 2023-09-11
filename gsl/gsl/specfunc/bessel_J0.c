@@ -81,7 +81,7 @@ int gsl_sf_bessel_J0_e(const double x, gsl_sf_result * result)
     result->err = y*y;
     return GSL_SUCCESS;
   }
-  else if(y <= 4.0) {
+  if(y <= 4.0) {
     return cheb_eval_e(&bj0_cs, 0.125*y*y - 1.0, result);
   }
   else {

@@ -29,12 +29,13 @@
 void
 test2d_resample (void)
 {
-  size_t i, j;
+  size_t i;
+  size_t j;
   int status = 0;
   double total = 0;
   size_t N = 200000;
 
-  gsl_histogram2d *h;
+  gsl_histogram2d *h = NULL;
 
   gsl_ieee_env_setup ();
 
@@ -63,7 +64,8 @@ test2d_resample (void)
       {
         double u = urand();
         double v = urand();
-        double x, y;
+        double x;
+        double y;
         status = gsl_histogram2d_pdf_sample (p, u, v, &x, &y);
         status = gsl_histogram2d_increment (hh, x, y);
       }
@@ -74,9 +76,13 @@ test2d_resample (void)
         for (j = 0; j < 20; j++)
           {
             double z = 4 * total * gsl_histogram2d_get (hh, i, j) / (double) N;
-            size_t k1, k2;
-            double ya;
-            double x, xmax, y, ymax;
+            size_t k1;
+            size_t k2;
+            double ya = NAN;
+            double x;
+            double xmax;
+            double y;
+            double ymax;
 
             gsl_histogram2d_get_xrange (hh, i, &x, &xmax);
             gsl_histogram2d_get_yrange (hh, j, &y, &ymax);

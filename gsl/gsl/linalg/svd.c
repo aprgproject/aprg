@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #include <gsl/gsl_math.h>
@@ -49,7 +50,11 @@ int
 gsl_linalg_SV_decomp (gsl_matrix * A, gsl_matrix * V, gsl_vector * S, 
                       gsl_vector * work)
 {
-  size_t a, b, i, j, iter;
+  size_t a;
+  size_t b;
+  size_t i;
+  size_t j;
+  size_t iter;
 
   const size_t M = A->size1;
   const size_t N = A->size2;
@@ -169,14 +174,16 @@ gsl_linalg_SV_decomp (gsl_matrix * A, gsl_matrix * V, gsl_vector * S,
             {
               double s_i = gsl_vector_get (&S_block.vector, i);
               double a = fabs(s_i);
-              if (a > norm) norm = a;
+              if (a > norm) { norm = a;
+}
             }
 
           for (i = 0; i < n_block - 1; i++) 
             {
               double f_i = gsl_vector_get (&f_block.vector, i);
               double a = fabs(f_i);
-              if (a > norm) norm = a;
+              if (a > norm) { norm = a;
+}
             }
 
           /* Temporarily scale the submatrix if necessary */
@@ -275,7 +282,8 @@ gsl_linalg_SV_decomp_mod (gsl_matrix * A,
                           gsl_matrix * X,
                           gsl_matrix * V, gsl_vector * S, gsl_vector * work)
 {
-  size_t i, j;
+  size_t i;
+  size_t j;
 
   const size_t M = A->size1;
   const size_t N = A->size2;
@@ -449,7 +457,7 @@ gsl_linalg_SV_solve (const gsl_matrix * U,
   else
     {
       const size_t N = U->size2;
-      size_t i;
+      size_t i = 0;
 
       gsl_vector *w = gsl_vector_calloc (N);
 
@@ -459,8 +467,9 @@ gsl_linalg_SV_solve (const gsl_matrix * U,
         {
           double wi = gsl_vector_get (w, i);
           double alpha = gsl_vector_get (S, i);
-          if (alpha != 0)
+          if (alpha != 0) {
             alpha = 1.0 / alpha;
+}
           gsl_vector_set (w, i, alpha * wi);
         }
 
@@ -496,12 +505,12 @@ gsl_linalg_SV_leverage(const gsl_matrix *U, gsl_vector *h)
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < M; ++i)
         {
           gsl_vector_const_view v = gsl_matrix_const_row(U, i);
-          double hi;
+          double hi = NAN;
           
           gsl_blas_ddot(&v.vector, &v.vector, &hi);
           gsl_vector_set(h, i, hi);
@@ -559,7 +568,9 @@ gsl_linalg_SV_decomp_jacobi (gsl_matrix * A, gsl_matrix * Q, gsl_vector * S)
     {
       const size_t M = A->size1;
       const size_t N = A->size2;
-      size_t i, j, k;
+      size_t i;
+      size_t j;
+      size_t k;
 
       /* Initialize the rotation counter and the sweep counter. */
       int count = 1;
@@ -599,10 +610,15 @@ gsl_linalg_SV_decomp_jacobi (gsl_matrix * A, gsl_matrix * Q, gsl_vector * S)
                   double b = 0.0;
                   double p = 0.0;
                   double q = 0.0;
-                  double cosine, sine;
-                  double v;
-                  double abserr_a, abserr_b;
-                  int sorted, orthog, noisya, noisyb;
+                  double cosine;
+                  double sine;
+                  double v = NAN;
+                  double abserr_a;
+                  double abserr_b;
+                  int sorted;
+                  int orthog;
+                  int noisya;
+                  int noisyb;
 
                   gsl_vector_view cj = gsl_matrix_column (A, j);
                   gsl_vector_view ck = gsl_matrix_column (A, k);

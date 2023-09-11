@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
@@ -66,7 +67,7 @@ double M1(void *xp, void *yp)
 void S1(const gsl_rng * r, void *xp, double step_size)
 {
   double old_x = *((double *) xp);
-  double new_x;
+  double new_x = NAN;
 
   new_x = gsl_rng_uniform(r)*2*step_size - step_size + old_x;
 
@@ -81,7 +82,7 @@ void P1(void *xp)
 int main(void)
 {
   double x_min = 1.36312999455315182 ;
-  double x ;
+  double x = NAN ;
 
   gsl_rng * r = gsl_rng_alloc (gsl_rng_env_setup()) ;
 

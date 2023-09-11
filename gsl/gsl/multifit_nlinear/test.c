@@ -55,9 +55,9 @@ main (void)
   const gsl_multifit_nlinear_trs **nlinear_trs[6];
   const gsl_multifit_nlinear_solver **nlinear_solvers[5];
   const gsl_multifit_nlinear_scale **nlinear_scales[3];
-  const gsl_multifit_nlinear_trs **trs;
-  const gsl_multifit_nlinear_solver **solver;
-  const gsl_multifit_nlinear_scale **scale;
+  const gsl_multifit_nlinear_trs **trs = NULL;
+  const gsl_multifit_nlinear_solver **solver = NULL;
+  const gsl_multifit_nlinear_scale **scale = NULL;
   size_t i = 0;
 
   gsl_ieee_env_setup();
@@ -95,8 +95,9 @@ main (void)
           size_t k = 0;
 
           /* don't use Cholesky solver with dogleg methods */
-          if (i > 1 && *solver == gsl_multifit_nlinear_solver_cholesky)
+          if (i > 1 && *solver == gsl_multifit_nlinear_solver_cholesky) {
             continue;
+}
 
           fprintf(stderr, "solver = %s\n", (*solver)->name);
           for (scale = nlinear_scales[k]; scale != NULL; scale = nlinear_scales[++k])

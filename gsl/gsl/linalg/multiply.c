@@ -35,9 +35,12 @@ gsl_linalg_matmult (const gsl_matrix * A, const gsl_matrix * B, gsl_matrix * C)
     }
   else
     {
-      double a, b;
-      double temp;
-      size_t i, j, k;
+      double a;
+      double b;
+      double temp = NAN;
+      size_t i;
+      size_t j;
+      size_t k;
 
       for (i = 0; i < C->size1; i++)
         {
@@ -70,8 +73,8 @@ gsl_linalg_matmult_mod (const gsl_matrix * A, gsl_linalg_matrix_mod_t modA,
     {
       return gsl_linalg_matmult (A, B, C);
     }
-  else
-    {
+  
+    
       size_t dim1_A = A->size1;
       size_t dim2_A = A->size2;
       size_t dim1_B = B->size1;
@@ -133,5 +136,5 @@ gsl_linalg_matmult_mod (const gsl_matrix * A, gsl_linalg_matrix_mod_t modA,
 
           return GSL_SUCCESS;
         }
-    }
+   
 }

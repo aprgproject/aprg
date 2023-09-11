@@ -27,6 +27,7 @@
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_linalg.h>
+#include <math.h>
 
 static double symband_norm1(const gsl_matrix * A);
 static int ldlt_band_Ainv(CBLAS_TRANSPOSE_t TransA, gsl_vector * x, void * params);
@@ -81,12 +82,13 @@ gsl_linalg_ldlt_band_decomp(gsl_matrix * A)
     {
       const size_t p = ndiag - 1; /* lower bandwidth */
       const int kld = (int) GSL_MAX(1, p);
-      double Anorm;
-      size_t j;
+      double Anorm = NAN;
+      size_t j = 0;
 
       /* check for quick return */
-      if (ndiag == 1)
+      if (ndiag == 1) {
         return GSL_SUCCESS;
+}
 
       /*
        * calculate 1-norm of A and store in lower right of matrix, which is not accessed
@@ -100,7 +102,7 @@ gsl_linalg_ldlt_band_decomp(gsl_matrix * A)
       for (j = 0; j < N - 1; ++j)
         {
           double ajj = gsl_matrix_get(A, j, 0);
-          size_t lenv;
+          size_t lenv = 0;
 
           if (ajj == 0.0)
             {
@@ -142,7 +144,7 @@ gsl_linalg_ldlt_band_solve (const gsl_matrix * LDLT,
     }
   else
     {
-      int status;
+      int status = 0;
 
       /* copy x <- b */
       gsl_vector_memcpy (x, b);
@@ -209,7 +211,7 @@ gsl_linalg_ldlt_band_unpack (const gsl_matrix * LDLT, gsl_matrix * L, gsl_vector
       const size_t p = LDLT->size2 - 1; /* lower bandwidth */
       gsl_vector_const_view diag = gsl_matrix_const_column(LDLT, 0);
       gsl_vector_view diagL = gsl_matrix_diagonal(L);
-      size_t i;
+      size_t i = 0;
 
       /* copy diagonal entries */
       gsl_vector_memcpy(D, &diag.vector);
@@ -247,10 +249,10 @@ gsl_linalg_ldlt_band_rcond (const gsl_matrix * LDLT, double * rcond, gsl_vector 
     }
   else
     {
-      int status;
+      int status = 0;
       const size_t ndiag = LDLT->size2;
-      double Anorm;    /* ||A||_1 */
-      double Ainvnorm; /* ||A^{-1}||_1 */
+      double Anorm = NAN;    /* ||A||_1 */
+      double Ainvnorm = NAN; /* ||A^{-1}||_1 */
 
       if (ndiag == 1)
         {
@@ -266,15 +268,18 @@ gsl_linalg_ldlt_band_rcond (const gsl_matrix * LDLT, double * rcond, gsl_vector 
       *rcond = 0.0;
 
       /* return if matrix is singular */
-      if (Anorm == 0.0)
+      if (Anorm == 0.0) {
         return GSL_SUCCESS;
+}
 
       status = gsl_linalg_invnorm1(N, ldlt_band_Ainv, (void *) LDLT, &Ainvnorm, work);
-      if (status)
+      if (status) {
         return status;
+}
 
-      if (Ainvnorm != 0.0)
+      if (Ainvnorm != 0.0) {
         *rcond = (1.0 / Anorm) / Ainvnorm;
+}
 
       return GSL_SUCCESS;
     }
@@ -286,7 +291,7 @@ symband_norm1(const gsl_matrix * A)
 {
   const size_t N = A->size1;
   const size_t ndiag = A->size2; /* number of diagonals in band, including main diagonal */
-  double value;
+  double value = NAN;
 
   if (ndiag == 1)
     {
@@ -297,7 +302,7 @@ symband_norm1(const gsl_matrix * A)
     }
   else
     {
-      size_t j;
+      size_t j = 0;
 
       value = 0.0;
       for (j = 0; j < N; ++j)
@@ -305,7 +310,8 @@ symband_norm1(const gsl_matrix * A)
           size_t ncol = GSL_MIN(ndiag, N - j); /* number of elements in column j below and including main diagonal */
           gsl_vector_const_view v = gsl_matrix_const_subrow(A, j, 0, ncol);
           double sum = gsl_blas_dasum(&v.vector);
-          size_t k, l;
+          size_t k;
+          size_t l;
 
           /* sum now contains the absolute sum of elements below and including main diagonal for column j; we
            * have to add the symmetric elements above the diagonal */

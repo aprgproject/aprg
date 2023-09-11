@@ -34,8 +34,12 @@ test_2d (size_t N, size_t tda, const gsl_wavelet_type * T, size_t member, int ty
 int
 main (int argc, char **argv)
 {
-  size_t i, N, stride, tda;
-  const int S = 1, NS = 2;  /* Standard & Non-standard transforms */
+  size_t i;
+  size_t N;
+  size_t stride;
+  size_t tda;
+  const int S = 1;
+  const int NS = 2;  /* Standard & Non-standard transforms */
 
   /* One-dimensional tests */
 
@@ -99,16 +103,19 @@ main (int argc, char **argv)
 void
 test_1d (size_t N, size_t stride, const gsl_wavelet_type * T, size_t member)
 {
-  gsl_wavelet_workspace *work;
-  gsl_vector *v1, *v2, *vdelta;
+  gsl_wavelet_workspace *work = NULL;
+  gsl_vector *v1;
+  gsl_vector *v2;
+  gsl_vector *vdelta;
   gsl_vector_view v;
-  gsl_wavelet *w;
+  gsl_wavelet *w = NULL;
 
-  size_t i;
+  size_t i = 0;
   double *data = (double *)malloc (N * stride * sizeof (double));
 
-  for (i = 0; i < N * stride; i++)
+  for (i = 0; i < N * stride; i++) {
     data[i] = 12345.0 + i;
+}
 
   v = gsl_vector_view_array_with_stride (data, stride, N);
   v1 = &(v.vector);
@@ -138,7 +145,8 @@ test_1d (size_t N, size_t stride, const gsl_wavelet_type * T, size_t member)
     }
 
   {
-    double x1, x2;
+    double x1;
+    double x2;
     i = gsl_vector_max_index (vdelta);
     x1 = gsl_vector_get (v1, i);
     x2 = gsl_vector_get (v2, i);
@@ -154,8 +162,9 @@ test_1d (size_t N, size_t stride, const gsl_wavelet_type * T, size_t member)
 
       for (i = 0; i < N * stride; i++)
         {
-          if (i % stride == 0)
+          if (i % stride == 0) {
             continue;
+}
 
           status |= (data[i] != (12345.0 + i));
         }
@@ -175,23 +184,24 @@ test_1d (size_t N, size_t stride, const gsl_wavelet_type * T, size_t member)
 void
 test_2d (size_t N, size_t tda, const gsl_wavelet_type * T, size_t member, int type)
 {
-  gsl_wavelet_workspace *work;
-  gsl_matrix *m2;
-  gsl_wavelet *w;
-  gsl_matrix *m1;
-  gsl_matrix *mdelta;
+  gsl_wavelet_workspace *work = NULL;
+  gsl_matrix *m2 = NULL;
+  gsl_wavelet *w = NULL;
+  gsl_matrix *m1 = NULL;
+  gsl_matrix *mdelta = NULL;
   gsl_matrix_view m;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   double *data = (double *)malloc (N * tda * sizeof (double));
 
-  const char * name;
+  const char * name = NULL;
 
   name = (type == 1) ? "standard" : "nonstd" ;
 
-  for (i = 0; i < N * tda; i++)
+  for (i = 0; i < N * tda; i++) {
     data[i] = 12345.0 + i;
+}
 
   m = gsl_matrix_view_array_with_tda (data, N, N, tda);
   m1 = &(m.matrix);
@@ -236,7 +246,8 @@ test_2d (size_t N, size_t tda, const gsl_wavelet_type * T, size_t member, int ty
     }
 
   {
-    double x1, x2;
+    double x1;
+    double x2;
     gsl_matrix_max_index (mdelta, &i, &j);
     x1 = gsl_matrix_get (m1, i, j);
     x2 = gsl_matrix_get (m2, i, j);

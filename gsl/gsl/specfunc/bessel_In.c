@@ -43,7 +43,7 @@ gsl_sf_bessel_In_scaled_e(int n, const double x, gsl_sf_result * result)
   if(n == 0) {
     return gsl_sf_bessel_I0_scaled_e(x, result);
   }
-  else if(n == 1) {
+  if(n == 1) {
     return gsl_sf_bessel_I1_scaled_e(x, result);
   }
   else if(x == 0.0) {
@@ -115,14 +115,17 @@ gsl_sf_bessel_In_scaled_array(const int nmin, const int nmax, const double x, do
   /* CHECK_POINTER(result_array) */
 
   if(nmax < nmin || nmin < 0) {
-    int j;
-    for(j=0; j<=nmax-nmin; j++) result_array[j] = 0.0;
+    int j = 0;
+    for(j=0; j<=nmax-nmin; j++) { result_array[j] = 0.0;
+}
     GSL_ERROR ("domain error", GSL_EDOM);
   }
   else if(x == 0.0) {
-    int j;
-    for(j=0; j<=nmax-nmin; j++) result_array[j] = 0.0;
-    if(nmin == 0) result_array[0] = 1.0;
+    int j = 0;
+    for(j=0; j<=nmax-nmin; j++) { result_array[j] = 0.0;
+}
+    if(nmin == 0) { result_array[0] = 1.0;
+}
     return GSL_SUCCESS;
   }
   else if(nmax == 0) {
@@ -142,8 +145,8 @@ gsl_sf_bessel_In_scaled_array(const int nmin, const int nmax, const double x, do
     int stat_1 = gsl_sf_bessel_In_scaled_e(nmax,   ax, &r_In);
     double Inp1 = r_Inp1.val;
     double In   = r_In.val;
-    double Inm1;
-    int n;
+    double Inm1 = NAN;
+    int n = 0;
 
     for(n=nmax; n>=nmin; n--) {
       result_array[n-nmin] = In;
@@ -155,7 +158,8 @@ gsl_sf_bessel_In_scaled_array(const int nmin, const int nmax, const double x, do
     /* deal with signs */
     if(x < 0.0) {
       for(n=nmin; n<=nmax; n++) {
-        if(GSL_IS_ODD(n)) result_array[n-nmin] = -result_array[n-nmin];
+        if(GSL_IS_ODD(n)) { result_array[n-nmin] = -result_array[n-nmin];
+}
       }
     }
 
@@ -183,7 +187,8 @@ gsl_sf_bessel_In_e(const int n_in, const double x, gsl_sf_result * result)
     result->val  = ex * In_scaled.val;
     result->err  = ex * In_scaled.err;
     result->err += ax * GSL_DBL_EPSILON * fabs(result->val);
-    if(x < 0.0 && GSL_IS_ODD(n)) result->val = -result->val;
+    if(x < 0.0 && GSL_IS_ODD(n)) { result->val = -result->val;
+}
     return stat_In_scaled;
   }
 }
@@ -197,15 +202,17 @@ gsl_sf_bessel_In_array(const int nmin, const int nmax, const double x, double * 
   /* CHECK_POINTER(result_array) */
 
   if(ax > GSL_LOG_DBL_MAX - 1.0) {
-    int j;
-    for(j=0; j<=nmax-nmin; j++) result_array[j] = 0.0; /* FIXME: should be Inf */
+    int j = 0;
+    for(j=0; j<=nmax-nmin; j++) { result_array[j] = 0.0; /* FIXME: should be Inf */
+}
     GSL_ERROR ("overflow", GSL_EOVRFLW);
   }
   else {
-    int j;
+    int j = 0;
     double eax = exp(ax);
     int status = gsl_sf_bessel_In_scaled_array(nmin, nmax, x, result_array);
-    for(j=0; j<=nmax-nmin; j++) result_array[j] *= eax;
+    for(j=0; j<=nmax-nmin; j++) { result_array[j] *= eax;
+}
     return status;
   }
 }

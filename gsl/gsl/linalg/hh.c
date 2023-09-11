@@ -46,7 +46,7 @@ gsl_linalg_HH_solve (gsl_matrix * A, const gsl_vector * b, gsl_vector * x)
     }
   else
     {
-      int status ;
+      int status = 0 ;
 
       gsl_vector_memcpy (x, b);
 
@@ -73,7 +73,9 @@ gsl_linalg_HH_svx (gsl_matrix * A, gsl_vector * x)
     {
       const size_t N = A->size1;
       const size_t M = A->size2;
-      size_t i, j, k;
+      size_t i;
+      size_t j;
+      size_t k;
       REAL *d = (REAL *) malloc (N * sizeof (REAL));
 
       if (d == 0)
@@ -86,9 +88,9 @@ gsl_linalg_HH_svx (gsl_matrix * A, gsl_vector * x)
       for (i = 0; i < N; i++)
         {
           const REAL aii = gsl_matrix_get (A, i, i);
-          REAL alpha;
-          REAL f;
-          REAL ak;
+          REAL alpha = NAN;
+          REAL f = NAN;
+          REAL ak = NAN;
           REAL max_norm = 0.0;
           REAL r = 0.0;
 

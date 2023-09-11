@@ -26,6 +26,7 @@
 #include <gsl/gsl_sf_trig.h>
 #include <gsl/gsl_sf_log.h>
 #include <gsl/gsl_sf_dilog.h>
+#include <math.h>
 
 
 /* Evaluate series for real dilog(x)
@@ -40,23 +41,25 @@ dilog_series_1(const double x, gsl_sf_result * result)
   const int kmax = 1000;
   double sum  = x;
   double term = x;
-  int k;
+  int k = 0;
   for(k=2; k<kmax; k++) {
     const double rk = (k-1.0)/k;
     term *= x;
     term *= rk*rk;
     sum += term;
-    if(fabs(term/sum) < GSL_DBL_EPSILON) break;
+    if(fabs(term/sum) < GSL_DBL_EPSILON) { break;
+}
   }
 
   result->val  = sum;
   result->err  = 2.0 * fabs(term);
   result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
 
-  if(k == kmax)
+  if(k == kmax) {
     GSL_ERROR ("error", GSL_EMAXITER);
-  else
+  } else {
     return GSL_SUCCESS;
+}
 }
 
 
@@ -74,21 +77,22 @@ series_2(double r, gsl_sf_result * result)
   static const int kmax = 100;
   double rk = r;
   double sum = 0.5 * r;
-  int k;
+  int k = 0;
   for(k=2; k<10; k++)
   {
-    double ds;
+    double ds = NAN;
     rk *= r;
     ds = rk/(k*k*(k+1.0));
     sum += ds;
   }
   for(; k<kmax; k++)
   {
-    double ds;
+    double ds = NAN;
     rk *= r;
     ds = rk/(k*k*(k+1.0));
     sum += ds;
-    if(fabs(ds/sum) < 0.5*GSL_DBL_EPSILON) break;
+    if(fabs(ds/sum) < 0.5*GSL_DBL_EPSILON) { break;
+}
   }
 
   result->val = sum;
@@ -108,10 +112,10 @@ static int
 dilog_series_2(double x, gsl_sf_result * result)
 {
   const int stat_s3 = series_2(x, result);
-  double t;
-  if(x > 0.01)
+  double t = NAN;
+  if(x > 0.01) {
     t = (1.0 - x) * log(1.0-x) / x;
-  else
+  } else
   {
     static const double c3 = 1.0/3.0;
     static const double c4 = 1.0/4.0;
@@ -148,7 +152,7 @@ dilog_xge0(const double x, gsl_sf_result * result)
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return stat_ser;
   }
-  else if(x > 1.01) {
+  if(x > 1.01) {
     gsl_sf_result ser;
     const int stat_ser = dilog_series_2(1.0 - 1.0/x, &ser);
     const double log_x    = log(x);
@@ -241,9 +245,10 @@ dilogc_series_1(
   double real_sum = r*ck;
   double imag_sum = r*sk;
   const int kmax = 50 + (int)(22.0/(-log(r))); /* tuned for double-precision */
-  int k;
+  int k = 0;
   for(k=2; k<kmax; k++) {
-    double dr, di;
+    double dr;
+    double di;
     double ck_tmp = ck;
     ck = ck - (alpha*ck + beta*sk);
     sk = sk - (alpha*sk - beta*ck_tmp);
@@ -252,7 +257,8 @@ dilogc_series_1(
     di = rk/((double)k*k) * sk;
     real_sum += dr;
     imag_sum += di;
-    if(fabs((dr*dr + di*di)/(real_sum*real_sum + imag_sum*imag_sum)) < GSL_DBL_EPSILON*GSL_DBL_EPSILON) break;
+    if(fabs((dr*dr + di*di)/(real_sum*real_sum + imag_sum*imag_sum)) < GSL_DBL_EPSILON*GSL_DBL_EPSILON) { break;
+}
   }
 
   real_result->val = real_sum;
@@ -291,10 +297,11 @@ series_2_c(
   double real_sum = 0.5 * r*ck;
   double imag_sum = 0.5 * r*sk;
   const int kmax = 30 + (int)(18.0/(-log(r))); /* tuned for double-precision */
-  int k;
+  int k = 0;
   for(k=2; k<kmax; k++)
   {
-    double dr, di;
+    double dr;
+    double di;
     const double ck_tmp = ck;
     ck = ck - (alpha*ck + beta*sk);
     sk = sk - (alpha*sk - beta*ck_tmp);
@@ -303,7 +310,8 @@ series_2_c(
     di = rk/((double)k*k*(k+1.0)) * sk;
     real_sum += dr;
     imag_sum += di;
-    if(fabs((dr*dr + di*di)/(real_sum*real_sum + imag_sum*imag_sum)) < GSL_DBL_EPSILON*GSL_DBL_EPSILON) break;
+    if(fabs((dr*dr + di*di)/(real_sum*real_sum + imag_sum*imag_sum)) < GSL_DBL_EPSILON*GSL_DBL_EPSILON) { break;
+}
   }
 
   sum_re->val = real_sum;
@@ -341,8 +349,8 @@ dilogc_series_2(
     imag_dl->err = 0.0;
     return GSL_SUCCESS;
   }
-  else
-  {
+  
+  
     gsl_sf_result sum_re;
     gsl_sf_result sum_im;
     const int stat_s3 = series_2_c(r, x, y, &sum_re, &sum_im);
@@ -363,7 +371,7 @@ dilogc_series_2(
     real_dl->err = sum_re.err + 2.0*GSL_DBL_EPSILON*(fabs(real_dl->val) + fabs(r_x));
     imag_dl->err = sum_im.err + 2.0*GSL_DBL_EPSILON*(fabs(imag_dl->val) + fabs(r_y));
     return GSL_ERROR_SELECT_2(stat_s3, stat_log);
-  }
+ 
 }
 
 
@@ -402,10 +410,12 @@ dilogc_series_3(
   const double omc2 = omc*omc;
   double H_re[7];
   double H_im[7];
-  double an, nfact;
-  double sum_re, sum_im;
+  double an;
+  double nfact;
+  double sum_re;
+  double sum_im;
   gsl_sf_result Him0;
-  int n;
+  int n = 0;
 
   H_re[0] = M_PI*M_PI/6.0 + 0.25*(theta*theta - 2.0*M_PI*fabs(theta));
   gsl_sf_clausen_e(theta, &Him0);
@@ -434,7 +444,7 @@ dilogc_series_3(
   an = 1.0;
   nfact = 1.0;
   for(n=1; n<=6; n++) {
-    double t;
+    double t = NAN;
     an *= a;
     nfact *= n;
     t = an/nfact;
@@ -467,9 +477,9 @@ static
 int
 dilogc_fundamental(double r, double x, double y, gsl_sf_result * real_dl, gsl_sf_result * imag_dl)
 {
-  if(r > 0.98)  
+  if(r > 0.98) {  
     return dilogc_series_3(r, x, y, real_dl, imag_dl);
-  else if(r > 0.25)
+  } if(r > 0.25)
     return dilogc_series_2(r, x, y, real_dl, imag_dl);
   else
     return dilogc_series_1(r, x, y, real_dl, imag_dl);
@@ -520,10 +530,10 @@ dilogc_unitdisk(double x, double y, gsl_sf_result * real_dl, gsl_sf_result * ima
 
     return stat_dilog;
   }
-  else
-  {
+  
+  
     return dilogc_fundamental(r, x, y, real_dl, imag_dl);
-  }
+ 
 }
 
 
@@ -537,7 +547,7 @@ gsl_sf_dilog_e(const double x, gsl_sf_result * result)
   if(x >= 0.0) {
     return dilog_xge0(x, result);
   }
-  else {
+  
     gsl_sf_result d1, d2;
     int stat_d1 = dilog_xge0( -x, &d1);
     int stat_d2 = dilog_xge0(x*x, &d2);
@@ -545,7 +555,7 @@ gsl_sf_dilog_e(const double x, gsl_sf_result * result)
     result->err  =  d1.err + 0.5 * d2.err;
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_ERROR_SELECT_2(stat_d1, stat_d2);
-  }
+ 
 }
 
 
@@ -574,7 +584,7 @@ gsl_sf_complex_dilog_xy_e(
     }
     return gsl_sf_dilog_e(x, real_dl);
   }
-  else if(fabs(r2 - 1.0) < GSL_DBL_EPSILON)
+  if(fabs(r2 - 1.0) < GSL_DBL_EPSILON)
   {
     /* Lewin A.2.4.1 and A.2.4.2 */
 

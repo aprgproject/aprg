@@ -69,9 +69,12 @@ gsl_linalg_hesstri_decomp(gsl_matrix * A, gsl_matrix * B, gsl_matrix * U,
     }
   else
     {
-      double cs, sn;          /* rotation parameters */
-      size_t i, j;            /* looping */
-      gsl_vector_view xv, yv; /* temporary views */
+      double cs;
+      double sn;          /* rotation parameters */
+      size_t i;
+      size_t j;            /* looping */
+      gsl_vector_view xv;
+      gsl_vector_view yv; /* temporary views */
 
       /* B -> Q^T B = R (upper triangular) */
       gsl_linalg_QR_decomp(B, work);
@@ -90,16 +93,19 @@ gsl_linalg_hesstri_decomp(gsl_matrix * A, gsl_matrix * B, gsl_matrix * U,
           /* zero out lower triangle of B */
           for (j = 0; j < N - 1; ++j)
             {
-              for (i = j + 1; i < N; ++i)
+              for (i = j + 1; i < N; ++i) {
                 gsl_matrix_set(B, i, j, 0.0);
+}
             }
         }
 
-      if (V)
+      if (V) {
         gsl_matrix_set_identity(V);
+}
 
-      if (N < 3)
+      if (N < 3) {
         return GSL_SUCCESS; /* nothing more to do */
+}
 
       /* reduce A and B */
       for (j = 0; j < N - 2; ++j)

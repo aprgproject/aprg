@@ -72,7 +72,7 @@ gsl_linalg_hermtd_decomp (gsl_matrix_complex * A, gsl_vector_complex * tau)
   else
     {
       const size_t N = A->size1;
-      size_t i;
+      size_t i = 0;
   
       const gsl_complex zero = gsl_complex_rect (0.0, 0.0);
       const gsl_complex one = gsl_complex_rect (1.0, 0.0);
@@ -101,7 +101,9 @@ gsl_linalg_hermtd_decomp (gsl_matrix_complex * A, gsl_vector_complex * tau)
 
               /* w = x - (1/2) tau * (x' * v) * v  */
               {
-                gsl_complex xv, txv, alpha;
+                gsl_complex xv;
+                gsl_complex txv;
+                gsl_complex alpha;
                 gsl_blas_zdotc(&x.vector, &v.vector, &xv);
                 txv = gsl_complex_mul(tau_i, xv);
                 alpha = gsl_complex_mul_real(txv, -0.5);
@@ -159,7 +161,7 @@ gsl_linalg_hermtd_unpack (const gsl_matrix_complex * A,
       gsl_vector_const_view d = gsl_vector_complex_const_real(&zd.vector);
       gsl_vector_const_view sd = gsl_vector_complex_const_real(&zsd.vector);
       gsl_vector_complex * work = gsl_vector_complex_alloc(N);
-      size_t i;
+      size_t i = 0;
 
       /* initialize U to the identity */
       gsl_matrix_complex_set_identity (U);

@@ -119,12 +119,20 @@ gsl_sf_bessel_Y_temme(const double nu, const double x,
   const double sinhalf = (fabs(alpha) < GSL_DBL_EPSILON ? 1.0 : sin(alpha)/alpha);
   const double sin_sqr = nu*M_PI*M_PI*0.5 * sinhalf*sinhalf;
   
-  double sum0, sum1;
-  double fk, pk, qk, hk, ck;
+  double sum0;
+  double sum1;
+  double fk;
+  double pk;
+  double qk;
+  double hk;
+  double ck;
   int k = 0;
-  int stat_iter;
+  int stat_iter = 0;
 
-  double g_1pnu, g_1mnu, g1, g2;
+  double g_1pnu;
+  double g_1mnu;
+  double g1;
+  double g2;
   int stat_g = gsl_sf_temme_gamma(nu, &g_1pnu, &g_1mnu, &g1, &g2);
 
   fk = 2.0/M_PI * sinrat * (cosh(sigma)*g1 - sinhrat*ln_half_x*g2);
@@ -137,9 +145,9 @@ gsl_sf_bessel_Y_temme(const double nu, const double x,
   sum1 = pk;
 
   while(k < max_iter) {
-    double del0;
-    double del1;
-    double gk;
+    double del0 = NAN;
+    double del1 = NAN;
+    double gk = NAN;
     k++;
     fk  = (k*fk + pk + qk)/(k*k-nu*nu);
     ck *= -half_x*half_x/k;
@@ -151,7 +159,8 @@ gsl_sf_bessel_Y_temme(const double nu, const double x,
     del1 = ck * hk;
     sum0 += del0;
     sum1 += del1;
-    if(fabs(del0) < 0.5*(1.0 + fabs(sum0))*GSL_DBL_EPSILON) break;
+    if(fabs(del0) < 0.5*(1.0 + fabs(sum0))*GSL_DBL_EPSILON) { break;
+}
   }
 
   Ynu->val   = -sum0;
@@ -179,12 +188,20 @@ gsl_sf_bessel_K_scaled_temme(const double nu, const double x,
   const double sinhrat = (fabs(sigma) < GSL_DBL_EPSILON ? 1.0 : sinh(sigma)/sigma);
   const double ex = exp(x);
 
-  double sum0, sum1;
-  double fk, pk, qk, hk, ck;
+  double sum0;
+  double sum1;
+  double fk;
+  double pk;
+  double qk;
+  double hk;
+  double ck;
   int k = 0;
-  int stat_iter;
+  int stat_iter = 0;
 
-  double g_1pnu, g_1mnu, g1, g2;
+  double g_1pnu;
+  double g_1mnu;
+  double g1;
+  double g2;
   int stat_g = gsl_sf_temme_gamma(nu, &g_1pnu, &g_1mnu, &g1, &g2);
 
   fk = sinrat * (cosh(sigma)*g1 - sinhrat*ln_half_x*g2);
@@ -195,8 +212,8 @@ gsl_sf_bessel_K_scaled_temme(const double nu, const double x,
   sum0 = fk;
   sum1 = hk;
   while(k < max_iter) {
-    double del0;
-    double del1;
+    double del0 = NAN;
+    double del1 = NAN;
     k++;
     fk  = (k*fk + pk + qk)/(k*k-nu*nu);
     ck *= half_x*half_x/k;
@@ -207,7 +224,8 @@ gsl_sf_bessel_K_scaled_temme(const double nu, const double x,
     del1 = ck * hk;
     sum0 += del0;
     sum1 += del1;
-    if(fabs(del0) < 0.5*fabs(sum0)*GSL_DBL_EPSILON) break;
+    if(fabs(del0) < 0.5*fabs(sum0)*GSL_DBL_EPSILON) { break;
+}
   }
   
   *K_nu   = sum0 * ex;

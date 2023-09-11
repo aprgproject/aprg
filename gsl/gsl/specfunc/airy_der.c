@@ -590,8 +590,9 @@ airy_deriv_mod_phase(const double x, gsl_mode_t mode,
   const double pi34 = 2.356194490192344928847;
   gsl_sf_result result_a;
   gsl_sf_result result_p;
-  double a, p;
-  double sqx;
+  double a;
+  double p;
+  double sqx = NAN;
 
   if(x <= -4.0) {
     double z = 128.0/(x*x*x) + 1.0;
@@ -647,7 +648,7 @@ gsl_sf_airy_Ai_deriv_scaled_e(const double x, gsl_mode_t mode, gsl_sf_result * r
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return status_ap;
   }
-  else if(x <= 1.0) {
+  if(x <= 1.0) {
     const double x3 = x*x*x;
     const double x2 = x*x;
     gsl_sf_result result_c0;
@@ -708,7 +709,7 @@ gsl_sf_airy_Ai_deriv_e(const double x, gsl_mode_t mode, gsl_sf_result * result)
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return status_ap;
   }
-  else if(x < 1.0) {
+  if(x < 1.0) {
     const double x3 = x*x*x;
     gsl_sf_result result_c1;
     gsl_sf_result result_c2;
@@ -752,7 +753,7 @@ gsl_sf_airy_Bi_deriv_scaled_e(const double x, gsl_mode_t mode, gsl_sf_result * r
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return status_ap;
   }
-  else if(x < 1.0) {
+  if(x < 1.0) {
     const double x3 = x*x*x;
     const double x2 = x*x;
     gsl_sf_result result_c1;
@@ -824,7 +825,7 @@ gsl_sf_airy_Bi_deriv_e(const double x, gsl_mode_t mode, gsl_sf_result * result)
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return status_ap;
   }
-  else if(x < 1.0) {
+  if(x < 1.0) {
     const double x3 = x*x*x;
     const double x2 = x*x;
     gsl_sf_result result_c1;

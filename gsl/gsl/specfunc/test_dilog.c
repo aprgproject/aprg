@@ -28,7 +28,8 @@
 int test_dilog(void)
 {
   gsl_sf_result r;
-  gsl_sf_result r1, r2;
+  gsl_sf_result r1;
+  gsl_sf_result r2;
   int s = 0;
 
   /* real dilog */

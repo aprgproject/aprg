@@ -114,7 +114,8 @@ add (struct problem * problems, int * n,
 int
 main (void)
 {
-  double result[TRIALS], error[TRIALS];
+  double result[TRIALS];
+  double error[TRIALS];
   double a = 0.1;
   double c = (1.0 + sqrt (10.0)) / 9.0;
 
@@ -135,7 +136,7 @@ main (void)
      the volume) */
 
   int n = 0;
-  struct problem * I;
+  struct problem * I = NULL;
   struct problem problems[256];
 
 #ifdef CONSTANT
@@ -405,7 +406,7 @@ double
 f0 (double x[], size_t num_dim, void *params)
 {
   double prod = 1.0;
-  unsigned int i;
+  unsigned int i = 0;
 
   for (i = 0; i < num_dim; ++i)
     {
@@ -423,7 +424,7 @@ f1 (double x[], size_t num_dim, void *params)
   double a = *(double *)params;
   double sum = 0.;
 
-  unsigned int i;
+  unsigned int i = 0;
   for (i = 0; i < num_dim; i++)
     {
       double dx = x[i] - 0.5;
@@ -441,7 +442,7 @@ f2 (double x[], size_t num_dim, void *params)
   double sum1 = 0.;
   double sum2 = 0.;
 
-  unsigned int i;
+  unsigned int i = 0;
   for (i = 0; i < num_dim; i++)
     {
       double dx1 = x[i] - 1. / 3.;
@@ -461,7 +462,7 @@ f3 (double x[], size_t num_dim, void *params)
 
   double prod = 1.;
 
-  unsigned int i;
+  unsigned int i = 0;
 
   for (i = 0; i < num_dim; i++)
     {
@@ -475,6 +476,7 @@ f3 (double x[], size_t num_dim, void *params)
 void
 my_error_handler (const char *reason, const char *file, int line, int err)
 {
-  if (0)
+  if (0) {
     printf ("(caught [%s:%d: %s (%d)])\n", file, line, reason, err);
+}
 }

@@ -38,8 +38,12 @@ test_sincos_pi(void)
 {
   gsl_sf_result r;
   int s = 0;
-  int k = 0, kmax = 12;
-  double x = 0.0, ix = 0.0, fx = 0.0, exact = 0.0;
+  int k = 0;
+  int kmax = 12;
+  double x = 0.0;
+  double ix = 0.0;
+  double fx = 0.0;
+  double exact = 0.0;
 
   /* sin_pi tests */
 
@@ -96,7 +100,8 @@ test_sincos_pi(void)
   for (k=0; k<kmax; k++) {
     TEST_SF(s, gsl_sf_sin_pi_e, (ix+fx, &r), exact, TEST_TOL0, GSL_SUCCESS);
     ix = pow(3.0,k+1);
-    if (k==0) exact = -exact;
+    if (k==0) { exact = -exact;
+}
   }
 
   exact = fabs(exact);
@@ -113,7 +118,8 @@ test_sincos_pi(void)
   for (k=0; k<kmax; k++) {
     TEST_SF(s, gsl_sf_sin_pi_e, (ix+fx, &r), exact, TEST_TOL0, GSL_SUCCESS);
     ix = pow(3.0,k+1);
-    if (k==0) exact = -exact;
+    if (k==0) { exact = -exact;
+}
   }
 
   exact = fabs(exact);
@@ -130,7 +136,8 @@ test_sincos_pi(void)
   for (k=0; k<kmax; k++) {
     TEST_SF(s, gsl_sf_sin_pi_e, (ix+fx, &r), exact, TEST_TOL0, GSL_SUCCESS);
     ix = pow(3.0,k+1);
-    if (k==0) exact = -exact;
+    if (k==0) { exact = -exact;
+}
   }
 
   exact = fabs(exact);
@@ -148,7 +155,8 @@ test_sincos_pi(void)
   for (k=0; k<kmax; k++) {
     TEST_SF(s, gsl_sf_sin_pi_e, (ix+fx, &r), exact, TEST_TOL0, GSL_SUCCESS);
     ix = pow(3.0,k+1);
-    if (k==0) exact = -exact;
+    if (k==0) { exact = -exact;
+}
   }
 
   exact = fabs(exact);
@@ -165,7 +173,8 @@ test_sincos_pi(void)
   for (k=0; k<kmax; k++) {
     TEST_SF(s, gsl_sf_sin_pi_e, (ix+fx, &r), exact, TEST_TOL0, GSL_SUCCESS);
     ix = pow(3.0,k+1);
-    if (k==0) exact = -exact;
+    if (k==0) { exact = -exact;
+}
   }
 
   exact = fabs(exact);
@@ -182,7 +191,8 @@ test_sincos_pi(void)
   for (k=0; k<kmax; k++) {
     TEST_SF(s, gsl_sf_sin_pi_e, (ix+fx, &r), exact, TEST_TOL0, GSL_SUCCESS);
     ix = pow(3.0,k+1);
-    if (k==0) exact = -exact;
+    if (k==0) { exact = -exact;
+}
   }
 
   exact = fabs(exact);
@@ -202,7 +212,8 @@ test_sincos_pi(void)
   for (k=0; k<kmax; k++) {
     x = ix + fx;
     x -= ix; /* careful with compiler optimization */
-    if ( ( x != fx ) || ( fabs(ix+fx) >= BIGDBL ) ) break;
+    if ( ( x != fx ) || ( fabs(ix+fx) >= BIGDBL ) ) { break;
+}
     printf("ix+fx= %.18e\n", ix+fx);
     TEST_SF(s, gsl_sf_sin_pi_e, (ix+fx, &r), exact, TEST_TOL0, GSL_SUCCESS);
     ix += 101.0;
@@ -217,7 +228,8 @@ test_sincos_pi(void)
   for (k=0; k<kmax; k++) {
     x = ix + fx;
     x -= ix; /* careful with compiler optimization */
-    if ( ( x != fx ) || ( fabs(ix+fx) >= BIGDBL ) ) break;
+    if ( ( x != fx ) || ( fabs(ix+fx) >= BIGDBL ) ) { break;
+}
     printf("ix+fx= %.18e\n", ix+fx);
     TEST_SF(s, gsl_sf_sin_pi_e, (ix+fx, &r), exact, TEST_TOL0, GSL_SUCCESS);
     ix -= 101.0;
@@ -282,7 +294,8 @@ test_sincos_pi(void)
   for (k=0; k<kmax; k++) {
     TEST_SF(s, gsl_sf_cos_pi_e, (ix+fx, &r), exact, TEST_TOL0, GSL_SUCCESS);
     ix = pow(3.0,k+1);
-    if (k==0) exact = -exact;
+    if (k==0) { exact = -exact;
+}
   }
 
   exact = fabs(exact);
@@ -299,7 +312,8 @@ test_sincos_pi(void)
   for (k=0; k<kmax; k++) {
     TEST_SF(s, gsl_sf_cos_pi_e, (ix+fx, &r), exact, TEST_TOL0, GSL_SUCCESS);
     ix = pow(3.0,k+1);
-    if (k==0) exact = -exact;
+    if (k==0) { exact = -exact;
+}
   }
 
   exact = fabs(exact);
@@ -316,7 +330,8 @@ test_sincos_pi(void)
   for (k=0; k<kmax; k++) {
     TEST_SF(s, gsl_sf_cos_pi_e, (ix+fx, &r), exact, TEST_TOL0, GSL_SUCCESS);
     ix = pow(3.0,k+1);
-    if (k==0) exact = -exact;
+    if (k==0) { exact = -exact;
+}
   }
 
   exact = fabs(exact);
@@ -333,7 +348,8 @@ test_sincos_pi(void)
   for (k=0; k<kmax; k++) {
     TEST_SF(s, gsl_sf_cos_pi_e, (ix+fx, &r), exact, TEST_TOL0, GSL_SUCCESS);
     ix = pow(3.0,k+1);
-    if (k==0) exact = -exact;
+    if (k==0) { exact = -exact;
+}
   }
 
   exact = fabs(exact);
@@ -350,7 +366,8 @@ test_sincos_pi(void)
   for (k=0; k<kmax; k++) {
     TEST_SF(s, gsl_sf_cos_pi_e, (ix+fx, &r), exact, TEST_TOL0, GSL_SUCCESS);
     ix = pow(3.0,k+1);
-    if (k==0) exact = -exact;
+    if (k==0) { exact = -exact;
+}
   }
 
   exact = fabs(exact);
@@ -370,7 +387,8 @@ test_sincos_pi(void)
   for (k=0; k<kmax; k++) {
     x = ix + fx;
     x -= ix; /* careful with compiler optimization */
-    if ( ( x != fx ) || ( fabs(ix+fx) >= BIGDBL ) ) break;
+    if ( ( x != fx ) || ( fabs(ix+fx) >= BIGDBL ) ) { break;
+}
     TEST_SF(s, gsl_sf_cos_pi_e, (ix+fx, &r), exact, TEST_TOL0, GSL_SUCCESS);
     ix += 101.0;
     exact = -exact;
@@ -384,7 +402,8 @@ test_sincos_pi(void)
   for (k=0; k<kmax; k++) {
     x = ix + fx;
     x -= ix; /* careful with compiler optimization */
-    if ( ( x != fx ) || ( fabs(ix+fx) >= BIGDBL ) ) break;
+    if ( ( x != fx ) || ( fabs(ix+fx) >= BIGDBL ) ) { break;
+}
     TEST_SF(s, gsl_sf_cos_pi_e, (ix+fx, &r), exact, TEST_TOL0, GSL_SUCCESS);
     ix -= 101.0;
     exact = -exact;

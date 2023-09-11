@@ -48,10 +48,10 @@ f2 (double x, void *params)
     {
       return x * sqrt (x);
     }
-  else
-    {
+  
+    
       return 0.0;
-    }
+   
 }
 
 double
@@ -61,10 +61,10 @@ df2 (double x, void *params)
     {
       return 1.5 * sqrt (x);
     }
-  else
-    {
+  
+    
       return 0.0;
-    }
+   
 }
 
 double
@@ -74,10 +74,10 @@ f3 (double x, void *params)
     {
       return sin (1 / x);
     }
-  else
-    {
+  
+    
       return 0.0;
-    }
+   
 }
 
 double
@@ -87,10 +87,10 @@ df3 (double x, void *params)
     {
       return -cos (1 / x) / (x * x);
     }
-  else
-    {
+  
+    
       return 0.0;
-    }
+   
 }
 
 double
@@ -135,7 +135,8 @@ void
 test (diff_fn * diff, gsl_function * f, gsl_function * df, double x, 
       const char * desc)
 {
-  double result, abserr;
+  double result;
+  double abserr;
   double expected = GSL_FN_EVAL (df, x);
   (*diff) (f, x, &result, &abserr);
   gsl_test_abs (result, expected, abserr, desc);
@@ -145,7 +146,18 @@ test (diff_fn * diff, gsl_function * f, gsl_function * df, double x,
 int
 main ()
 {
-  gsl_function F1, DF1, F2, DF2, F3, DF3, F4, DF4, F5, DF5, F6, DF6;
+  gsl_function F1;
+  gsl_function DF1;
+  gsl_function F2;
+  gsl_function DF2;
+  gsl_function F3;
+  gsl_function DF3;
+  gsl_function F4;
+  gsl_function DF4;
+  gsl_function F5;
+  gsl_function DF5;
+  gsl_function F6;
+  gsl_function DF6;
 
   gsl_ieee_env_setup ();
 

@@ -29,7 +29,7 @@
 gsl_multiset *
 gsl_multiset_alloc (const size_t n, const size_t k)
 {
-  gsl_multiset * c;
+  gsl_multiset * c = NULL;
 
   if (n == 0)
     {
@@ -70,12 +70,13 @@ gsl_multiset_alloc (const size_t n, const size_t k)
 gsl_multiset *
 gsl_multiset_calloc (const size_t n, const size_t k)
 {
-  size_t i;
+  size_t i = 0;
 
   gsl_multiset * c =  gsl_multiset_alloc (n, k);
 
-  if (c == 0)
+  if (c == 0) {
     return 0;
+}
 
   /* initialize multiset to repeated first element */
 
@@ -91,7 +92,7 @@ void
 gsl_multiset_init_first (gsl_multiset * c)
 {
   const size_t k = c->k ;
-  size_t i;
+  size_t i = 0;
 
   /* initialize multiset to repeated first element */
 
@@ -105,7 +106,7 @@ void
 gsl_multiset_init_last (gsl_multiset * c)
 {
   const size_t k = c->k ;
-  size_t i;
+  size_t i = 0;
   size_t n = c->n;
 
   /* initialize multiset to repeated last element */
@@ -120,6 +121,7 @@ void
 gsl_multiset_free (gsl_multiset * c)
 {
   RETURN_IF_NULL (c);
-  if (c->k > 0) free (c->data);
+  if (c->k > 0) { free (c->data);
+}
   free (c);
 }

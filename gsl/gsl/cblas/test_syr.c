@@ -7,20 +7,21 @@
 
 void
 test_syr (void) {
-const double flteps = 1e-4, dbleps = 1e-6;
+const double flteps = 1e-4;
+const double dbleps = 1e-6;
   {
    int order = 101;
    int uplo = 121;
    int N = 1;
    int lda = 1;
-   float alpha = 0.1f;
-   float A[] = { -0.291f };
-   float X[] = { 0.845f };
+   float alpha = 0.1F;
+   float A[] = { -0.291F };
+   float X[] = { 0.845F };
    int incX = -1;
-   float A_expected[] = { -0.219597f };
+   float A_expected[] = { -0.219597F };
    cblas_ssyr(order, uplo, N, alpha, X, incX, A, lda);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(A[i], A_expected[i], flteps, "ssyr(case 1402)");
      }
@@ -33,14 +34,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int uplo = 122;
    int N = 1;
    int lda = 1;
-   float alpha = 0.1f;
-   float A[] = { -0.291f };
-   float X[] = { 0.845f };
+   float alpha = 0.1F;
+   float A[] = { -0.291F };
+   float X[] = { 0.845F };
    int incX = -1;
-   float A_expected[] = { -0.219597f };
+   float A_expected[] = { -0.219597F };
    cblas_ssyr(order, uplo, N, alpha, X, incX, A, lda);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(A[i], A_expected[i], flteps, "ssyr(case 1403)");
      }
@@ -53,14 +54,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int uplo = 121;
    int N = 1;
    int lda = 1;
-   float alpha = 0.1f;
-   float A[] = { -0.291f };
-   float X[] = { 0.845f };
+   float alpha = 0.1F;
+   float A[] = { -0.291F };
+   float X[] = { 0.845F };
    int incX = -1;
-   float A_expected[] = { -0.219597f };
+   float A_expected[] = { -0.219597F };
    cblas_ssyr(order, uplo, N, alpha, X, incX, A, lda);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(A[i], A_expected[i], flteps, "ssyr(case 1404)");
      }
@@ -73,14 +74,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int uplo = 122;
    int N = 1;
    int lda = 1;
-   float alpha = 0.1f;
-   float A[] = { -0.291f };
-   float X[] = { 0.845f };
+   float alpha = 0.1F;
+   float A[] = { -0.291F };
+   float X[] = { 0.845F };
    int incX = -1;
-   float A_expected[] = { -0.219597f };
+   float A_expected[] = { -0.219597F };
    cblas_ssyr(order, uplo, N, alpha, X, incX, A, lda);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(A[i], A_expected[i], flteps, "ssyr(case 1405)");
      }
@@ -100,7 +101,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double A_expected[] = { -0.8881643 };
    cblas_dsyr(order, uplo, N, alpha, X, incX, A, lda);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(A[i], A_expected[i], dbleps, "dsyr(case 1406)");
      }
@@ -120,7 +121,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double A_expected[] = { -0.8881643 };
    cblas_dsyr(order, uplo, N, alpha, X, incX, A, lda);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(A[i], A_expected[i], dbleps, "dsyr(case 1407)");
      }
@@ -140,7 +141,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double A_expected[] = { -0.8881643 };
    cblas_dsyr(order, uplo, N, alpha, X, incX, A, lda);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(A[i], A_expected[i], dbleps, "dsyr(case 1408)");
      }
@@ -160,7 +161,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double A_expected[] = { -0.8881643 };
    cblas_dsyr(order, uplo, N, alpha, X, incX, A, lda);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(A[i], A_expected[i], dbleps, "dsyr(case 1409)");
      }

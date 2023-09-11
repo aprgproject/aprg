@@ -23,14 +23,16 @@
 #include <config.h>
 #include <gsl/gsl_test.h>
 #include <gsl/gsl_sf.h>
+#include <math.h>
 #include "test_sf.h"
 
 
 int test_gamma(void)
 {
   gsl_sf_result r;
-  gsl_sf_result r1, r2;
-  double sgn;
+  gsl_sf_result r1;
+  gsl_sf_result r2;
+  double sgn = NAN;
   int s = 0;
 
   TEST_SF(s,  gsl_sf_lngamma_e, (-0.1, &r), 2.368961332728788655 , TEST_TOL0, GSL_SUCCESS);

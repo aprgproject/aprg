@@ -27,6 +27,7 @@
 #include <gsl/gsl_complex_math.h>
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_errno.h>
+#include <math.h>
 
 #include "recurse.h"
 
@@ -147,19 +148,22 @@ gsl_linalg_complex_cholesky_invert(gsl_matrix_complex * LLT)
     }
   else
     {
-      int status;
+      int status = 0;
       size_t N = LLT->size1;
-      size_t i, j;
+      size_t i;
+      size_t j;
 
       /* invert the lower triangle of LLT */
       status = gsl_linalg_complex_tri_invert(CblasLower, CblasNonUnit, LLT);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* compute A^{-1} = L^{-H} L^{-1} */
       status = gsl_linalg_complex_tri_LHL(LLT);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* copy the Hermitian lower triangle to the upper triangle */
       for (i = 1; i < N; ++i)
@@ -183,7 +187,7 @@ gsl_linalg_complex_cholesky_invert(gsl_matrix_complex * LLT)
 static void
 cholesky_complex_conj_vector(gsl_vector_complex *v)
 {
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < v->size; ++i)
     {
@@ -217,9 +221,9 @@ complex_cholesky_decomp_L2(gsl_matrix_complex * A)
     }
   else
     {
-      size_t j;
+      size_t j = 0;
       gsl_complex z;
-      double ajj;
+      double ajj = NAN;
 
       for (j = 0; j < N; ++j)
         {
@@ -315,7 +319,7 @@ complex_cholesky_decomp_L3(gsl_matrix_complex * A)
        *
        * where A11 is N1-by-N1
        */
-      int status;
+      int status = 0;
       const size_t N1 = GSL_LINALG_SPLIT_COMPLEX(N);
       const size_t N2 = N - N1;
       gsl_matrix_complex_view A11 = gsl_matrix_complex_submatrix(A, 0, 0, N1, N1);
@@ -324,8 +328,9 @@ complex_cholesky_decomp_L3(gsl_matrix_complex * A)
 
       /* recursion on A11 */
       status = complex_cholesky_decomp_L3(&A11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* A21 = A21 * A11^{-1} */
       gsl_blas_ztrsm(CblasRight, CblasLower, CblasConjTrans, CblasNonUnit, GSL_COMPLEX_ONE, &A11.matrix, &A21.matrix);
@@ -335,8 +340,9 @@ complex_cholesky_decomp_L3(gsl_matrix_complex * A)
 
       /* recursion on A22 */
       status = complex_cholesky_decomp_L3(&A22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       return GSL_SUCCESS;
     }

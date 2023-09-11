@@ -7,7 +7,8 @@
 
 void
 test_gemm (void) {
-const double flteps = 1e-4, dbleps = 1e-6;
+const double flteps = 1e-4;
+const double dbleps = 1e-6;
   {
    int order = 101;
    int transA = 111;
@@ -15,18 +16,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha = 1.0f;
-   float beta = 0.0f;
-   float A[] = { 0.199f, 0.237f, 0.456f, 0.377f };
+   float alpha = 1.0F;
+   float beta = 0.0F;
+   float A[] = { 0.199F, 0.237F, 0.456F, 0.377F };
    int lda = 4;
-   float B[] = { 0.842f, -0.734f, 0.323f, -0.957f, -0.303f, -0.873f, -0.871f, -0.819f };
+   float B[] = { 0.842F, -0.734F, 0.323F, -0.957F, -0.303F, -0.873F, -0.871F, -0.819F };
    int ldb = 2;
-   float C[] = { 0.498f, -0.925f };
+   float C[] = { 0.498F, -0.925F };
    int ldc = 2;
-   float C_expected[] = { -0.222426f, -1.07973f };
+   float C_expected[] = { -0.222426F, -1.07973F };
    cblas_sgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[i], C_expected[i], flteps, "sgemm(case 1466)");
      }
@@ -41,18 +42,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha = 1.0f;
-   float beta = 0.0f;
-   float A[] = { -0.83f, 0.922f, -0.228f, -0.003f };
+   float alpha = 1.0F;
+   float beta = 0.0F;
+   float A[] = { -0.83F, 0.922F, -0.228F, -0.003F };
    int lda = 1;
-   float B[] = { 0.072f, 0.345f, 0.944f, -0.39f, -0.577f, 0.656f, -0.693f, -0.453f };
+   float B[] = { 0.072F, 0.345F, 0.944F, -0.39F, -0.577F, 0.656F, -0.693F, -0.453F };
    int ldb = 4;
-   float C[] = { 0.583f, 0.522f };
+   float C[] = { 0.583F, 0.522F };
    int ldc = 1;
-   float C_expected[] = { 0.044268f, 1.24311f };
+   float C_expected[] = { 0.044268F, 1.24311F };
    cblas_sgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[i], C_expected[i], flteps, "sgemm(case 1467)");
      }
@@ -67,18 +68,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha = 0.1f;
-   float beta = 0.1f;
-   float A[] = { -0.838f, 0.622f, -0.494f, 0.304f };
+   float alpha = 0.1F;
+   float beta = 0.1F;
+   float A[] = { -0.838F, 0.622F, -0.494F, 0.304F };
    int lda = 4;
-   float B[] = { 0.147f, 0.134f, 0.169f, 0.734f, -0.7f, 0.541f, -0.794f, -0.256f };
+   float B[] = { 0.147F, 0.134F, 0.169F, 0.734F, -0.7F, 0.541F, -0.794F, -0.256F };
    int ldb = 4;
-   float C[] = { -0.632f, -0.559f };
+   float C[] = { -0.632F, -0.559F };
    int ldc = 2;
-   float C_expected[] = { -0.0532188f, 0.0678514f };
+   float C_expected[] = { -0.0532188F, 0.0678514F };
    cblas_sgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[i], C_expected[i], flteps, "sgemm(case 1468)");
      }
@@ -93,18 +94,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha = 0.1f;
-   float beta = 0.1f;
-   float A[] = { -0.937f, 0.635f, 0.596f, -0.51f };
+   float alpha = 0.1F;
+   float beta = 0.1F;
+   float A[] = { -0.937F, 0.635F, 0.596F, -0.51F };
    int lda = 1;
-   float B[] = { -0.688f, -0.265f, 0.049f, 0.133f, -0.918f, -0.147f, 0.977f, -0.21f };
+   float B[] = { -0.688F, -0.265F, 0.049F, 0.133F, -0.918F, -0.147F, 0.977F, -0.21F };
    int ldb = 2;
-   float C[] = { 0.844f, 0.999f };
+   float C[] = { 0.844F, 0.999F };
    int ldc = 1;
-   float C_expected[] = { 0.0474373f, 0.135125f };
+   float C_expected[] = { 0.0474373F, 0.135125F };
    cblas_sgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[i], C_expected[i], flteps, "sgemm(case 1469)");
      }
@@ -119,18 +120,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha = -0.3f;
-   float beta = 0.1f;
-   float A[] = { -0.165f, 0.638f, 0.346f, -0.697f };
+   float alpha = -0.3F;
+   float beta = 0.1F;
+   float A[] = { -0.165F, 0.638F, 0.346F, -0.697F };
    int lda = 1;
-   float B[] = { 0.499f, -0.73f, 0.262f, 0.759f, 0.664f, 0.997f, -0.702f, -0.839f };
+   float B[] = { 0.499F, -0.73F, 0.262F, 0.759F, 0.664F, 0.997F, -0.702F, -0.839F };
    int ldb = 2;
-   float C[] = { 0.17f, 0.425f };
+   float C[] = { 0.17F, 0.425F };
    int ldc = 2;
-   float C_expected[] = { -0.224158f, -0.417831f };
+   float C_expected[] = { -0.224158F, -0.417831F };
    cblas_sgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[i], C_expected[i], flteps, "sgemm(case 1470)");
      }
@@ -145,18 +146,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha = -0.3f;
-   float beta = 0.1f;
-   float A[] = { -0.603f, -0.714f, -0.893f, 0.046f };
+   float alpha = -0.3F;
+   float beta = 0.1F;
+   float A[] = { -0.603F, -0.714F, -0.893F, 0.046F };
    int lda = 4;
-   float B[] = { 0.859f, -0.694f, -0.868f, -0.98f, -0.103f, 0.567f, -0.277f, -0.734f };
+   float B[] = { 0.859F, -0.694F, -0.868F, -0.98F, -0.103F, 0.567F, -0.277F, -0.734F };
    int ldb = 4;
-   float C[] = { 0.517f, -0.622f };
+   float C[] = { 0.517F, -0.622F };
    int ldc = 1;
-   float C_expected[] = { -0.160575f, -0.0234604f };
+   float C_expected[] = { -0.160575F, -0.0234604F };
    cblas_sgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[i], C_expected[i], flteps, "sgemm(case 1471)");
      }
@@ -171,18 +172,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha = 0.1f;
-   float beta = 1.0f;
-   float A[] = { -0.087f, -0.047f, -0.051f, -0.615f };
+   float alpha = 0.1F;
+   float beta = 1.0F;
+   float A[] = { -0.087F, -0.047F, -0.051F, -0.615F };
    int lda = 1;
-   float B[] = { -0.722f, -0.077f, 0.563f, 0.501f, 0.855f, 0.605f, 0.556f, -0.627f };
+   float B[] = { -0.722F, -0.077F, 0.563F, 0.501F, 0.855F, 0.605F, 0.556F, -0.627F };
    int ldb = 4;
-   float C[] = { -0.181f, -0.89f };
+   float C[] = { -0.181F, -0.89F };
    int ldc = 2;
-   float C_expected[] = { -0.208039f, -0.864557f };
+   float C_expected[] = { -0.208039F, -0.864557F };
    cblas_sgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[i], C_expected[i], flteps, "sgemm(case 1472)");
      }
@@ -197,18 +198,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha = 0.1f;
-   float beta = 1.0f;
-   float A[] = { -0.753f, -0.074f, -0.247f, -0.19f };
+   float alpha = 0.1F;
+   float beta = 1.0F;
+   float A[] = { -0.753F, -0.074F, -0.247F, -0.19F };
    int lda = 4;
-   float B[] = { 0.061f, 0.743f, 0.22f, -0.682f, 0.733f, 0.417f, 0.772f, 0.665f };
+   float B[] = { 0.061F, 0.743F, 0.22F, -0.682F, 0.733F, 0.417F, 0.772F, 0.665F };
    int ldb = 2;
-   float C[] = { -0.253f, 0.972f };
+   float C[] = { -0.253F, 0.972F };
    int ldc = 1;
-   float C_expected[] = { -0.291994f, 0.898164f };
+   float C_expected[] = { -0.291994F, 0.898164F };
    cblas_sgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[i], C_expected[i], flteps, "sgemm(case 1473)");
      }
@@ -234,7 +235,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { 0.0, 0.0 };
    cblas_dgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[i], C_expected[i], dbleps, "dgemm(case 1474)");
      }
@@ -260,7 +261,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { 0.0, 0.0 };
    cblas_dgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[i], C_expected[i], dbleps, "dgemm(case 1475)");
      }
@@ -286,7 +287,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.7137904, -0.1270986 };
    cblas_dgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[i], C_expected[i], dbleps, "dgemm(case 1476)");
      }
@@ -312,7 +313,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.1562981, -0.0026243 };
    cblas_dgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[i], C_expected[i], dbleps, "dgemm(case 1477)");
      }
@@ -338,7 +339,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -1.123883, 0.49819 };
    cblas_dgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[i], C_expected[i], dbleps, "dgemm(case 1478)");
      }
@@ -364,7 +365,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.57956, 0.017636 };
    cblas_dgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[i], C_expected[i], dbleps, "dgemm(case 1479)");
      }
@@ -390,7 +391,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.1996785, 0.5813976 };
    cblas_dgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[i], C_expected[i], dbleps, "dgemm(case 1480)");
      }
@@ -416,7 +417,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.0248334, 0.1884672 };
    cblas_dgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[i], C_expected[i], dbleps, "dgemm(case 1481)");
      }
@@ -431,18 +432,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {0.0f, 1.0f};
-   float beta[2] = {0.0f, 0.0f};
-   float A[] = { -0.082f, -0.281f, -0.096f, 0.913f, 0.974f, -0.706f, -0.773f, 0.522f };
+   float alpha[2] = {0.0F, 1.0F};
+   float beta[2] = {0.0F, 0.0F};
+   float A[] = { -0.082F, -0.281F, -0.096F, 0.913F, 0.974F, -0.706F, -0.773F, 0.522F };
    int lda = 4;
-   float B[] = { 0.745f, -0.664f, 0.352f, -0.733f, 0.304f, -0.555f, -0.493f, -0.089f, 0.188f, 0.631f, 0.235f, 0.152f, -0.299f, -0.731f, -0.686f, -0.332f };
+   float B[] = { 0.745F, -0.664F, 0.352F, -0.733F, 0.304F, -0.555F, -0.493F, -0.089F, 0.188F, 0.631F, 0.235F, 0.152F, -0.299F, -0.731F, -0.686F, -0.332F };
    int ldb = 2;
-   float C[] = { -0.179f, -0.284f, -0.996f, -0.414f };
+   float C[] = { -0.179F, -0.284F, -0.996F, -0.414F };
    int ldc = 2;
-   float C_expected[] = { -1.06679f, 1.47116f, 0.599689f, 0.933532f };
+   float C_expected[] = { -1.06679F, 1.47116F, 0.599689F, 0.933532F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1482) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1482) imag");
@@ -458,18 +459,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {0.0f, 1.0f};
-   float beta[2] = {0.0f, 0.0f};
-   float A[] = { 0.044f, -0.33f, 0.279f, 0.712f, -0.363f, -0.788f, -0.768f, -0.551f };
+   float alpha[2] = {0.0F, 1.0F};
+   float beta[2] = {0.0F, 0.0F};
+   float A[] = { 0.044F, -0.33F, 0.279F, 0.712F, -0.363F, -0.788F, -0.768F, -0.551F };
    int lda = 1;
-   float B[] = { 0.138f, 0.927f, -0.178f, -0.864f, 0.888f, 0.844f, -0.199f, 0.706f, -0.034f, 0.483f, 0.499f, 0.664f, 0.648f, 0.324f, 0.97f, 0.609f };
+   float B[] = { 0.138F, 0.927F, -0.178F, -0.864F, 0.888F, 0.844F, -0.199F, 0.706F, -0.034F, 0.483F, 0.499F, 0.664F, 0.648F, 0.324F, 0.97F, 0.609F };
    int ldb = 4;
-   float C[] = { -0.129f, 0.842f, 0.214f, -0.626f };
+   float C[] = { -0.129F, 0.842F, 0.214F, -0.626F };
    int ldc = 1;
-   float C_expected[] = { 1.81122f, 1.76205f, 1.0574f, -0.564966f };
+   float C_expected[] = { 1.81122F, 1.76205F, 1.0574F, -0.564966F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1483) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1483) imag");
@@ -485,18 +486,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {0.0f, 0.0f};
-   float beta[2] = {-1.0f, 0.0f};
-   float A[] = { 0.812f, -0.471f, 0.241f, 0.795f, 0.439f, 0.131f, -0.636f, 0.531f };
+   float alpha[2] = {0.0F, 0.0F};
+   float beta[2] = {-1.0F, 0.0F};
+   float A[] = { 0.812F, -0.471F, 0.241F, 0.795F, 0.439F, 0.131F, -0.636F, 0.531F };
    int lda = 4;
-   float B[] = { 0.062f, 0.807f, 0.873f, 0.372f, 0.239f, 0.804f, 0.537f, -0.954f, -0.396f, 0.838f, 0.081f, 0.15f, 0.489f, -0.438f, 0.165f, 0.429f };
+   float B[] = { 0.062F, 0.807F, 0.873F, 0.372F, 0.239F, 0.804F, 0.537F, -0.954F, -0.396F, 0.838F, 0.081F, 0.15F, 0.489F, -0.438F, 0.165F, 0.429F };
    int ldb = 4;
-   float C[] = { 0.868f, 0.329f, -0.509f, 0.724f };
+   float C[] = { 0.868F, 0.329F, -0.509F, 0.724F };
    int ldc = 2;
-   float C_expected[] = { -0.868f, -0.329f, 0.509f, -0.724f };
+   float C_expected[] = { -0.868F, -0.329F, 0.509F, -0.724F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1484) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1484) imag");
@@ -512,18 +513,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {0.0f, 0.0f};
-   float beta[2] = {-1.0f, 0.0f};
-   float A[] = { 0.832f, 0.198f, 0.794f, -0.522f, -0.319f, 0.578f, 0.332f, 0.746f };
+   float alpha[2] = {0.0F, 0.0F};
+   float beta[2] = {-1.0F, 0.0F};
+   float A[] = { 0.832F, 0.198F, 0.794F, -0.522F, -0.319F, 0.578F, 0.332F, 0.746F };
    int lda = 1;
-   float B[] = { -0.361f, 0.187f, -0.163f, -0.781f, 0.536f, 0.888f, -0.969f, 0.899f, 0.961f, -0.583f, 0.753f, 0.29f, -0.997f, 0.729f, -0.352f, -0.2f };
+   float B[] = { -0.361F, 0.187F, -0.163F, -0.781F, 0.536F, 0.888F, -0.969F, 0.899F, 0.961F, -0.583F, 0.753F, 0.29F, -0.997F, 0.729F, -0.352F, -0.2F };
    int ldb = 2;
-   float C[] = { 0.864f, 0.735f, -0.074f, -0.228f };
+   float C[] = { 0.864F, 0.735F, -0.074F, -0.228F };
    int ldc = 1;
-   float C_expected[] = { -0.864f, -0.735f, 0.074f, 0.228f };
+   float C_expected[] = { -0.864F, -0.735F, 0.074F, 0.228F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1485) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1485) imag");
@@ -539,18 +540,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {0.0f, 1.0f};
-   float beta[2] = {0.0f, 0.1f};
-   float A[] = { 0.149f, 0.187f, 0.263f, -0.715f, -0.882f, -0.907f, 0.87f, -0.527f };
+   float alpha[2] = {0.0F, 1.0F};
+   float beta[2] = {0.0F, 0.1F};
+   float A[] = { 0.149F, 0.187F, 0.263F, -0.715F, -0.882F, -0.907F, 0.87F, -0.527F };
    int lda = 4;
-   float B[] = { -0.915f, -0.249f, -0.986f, -0.799f, -0.136f, 0.712f, 0.964f, 0.799f, -0.569f, 0.686f, 0.603f, 0.758f, 0.161f, -0.698f, -0.263f, -0.256f };
+   float B[] = { -0.915F, -0.249F, -0.986F, -0.799F, -0.136F, 0.712F, 0.964F, 0.799F, -0.569F, 0.686F, 0.603F, 0.758F, 0.161F, -0.698F, -0.263F, -0.256F };
    int ldb = 4;
-   float C[] = { 0.622f, -0.824f, -0.482f, -0.161f };
+   float C[] = { 0.622F, -0.824F, -0.482F, -0.161F };
    int ldc = 2;
-   float C_expected[] = { -0.246901f, 0.083044f, 1.25556f, 0.009106f };
+   float C_expected[] = { -0.246901F, 0.083044F, 1.25556F, 0.009106F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1486) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1486) imag");
@@ -566,18 +567,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {0.0f, 1.0f};
-   float beta[2] = {0.0f, 0.1f};
-   float A[] = { 0.963f, -0.943f, -0.734f, -0.253f, 0.832f, 0.545f, -0.815f, -0.434f };
+   float alpha[2] = {0.0F, 1.0F};
+   float beta[2] = {0.0F, 0.1F};
+   float A[] = { 0.963F, -0.943F, -0.734F, -0.253F, 0.832F, 0.545F, -0.815F, -0.434F };
    int lda = 1;
-   float B[] = { 0.23f, -0.211f, 0.906f, 0.232f, -0.339f, 0.597f, -0.919f, 0.793f, 0.535f, 0.526f, 0.119f, 0.053f, 0.751f, 0.044f, 0.752f, -0.469f };
+   float B[] = { 0.23F, -0.211F, 0.906F, 0.232F, -0.339F, 0.597F, -0.919F, 0.793F, 0.535F, 0.526F, 0.119F, 0.053F, 0.751F, 0.044F, 0.752F, -0.469F };
    int ldb = 2;
-   float C[] = { 0.483f, -0.266f, -0.224f, -0.692f };
+   float C[] = { 0.483F, -0.266F, -0.224F, -0.692F };
    int ldc = 1;
-   float C_expected[] = { -0.047537f, 0.667177f, 1.02025f, 0.823778f };
+   float C_expected[] = { -0.047537F, 0.667177F, 1.02025F, 0.823778F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1487) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1487) imag");
@@ -593,18 +594,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {-0.3f, 0.1f};
-   float beta[2] = {-1.0f, 0.0f};
-   float A[] = { -0.657f, -0.497f, -0.293f, -0.168f, -0.943f, -0.181f, 0.569f, 0.91f };
+   float alpha[2] = {-0.3F, 0.1F};
+   float beta[2] = {-1.0F, 0.0F};
+   float A[] = { -0.657F, -0.497F, -0.293F, -0.168F, -0.943F, -0.181F, 0.569F, 0.91F };
    int lda = 1;
-   float B[] = { -0.047f, 0.796f, -0.913f, 0.998f, 0.365f, 0.467f, -0.627f, -0.523f, 0.885f, 0.234f, -0.494f, 0.071f, -0.361f, -0.154f, -0.055f, -0.32f };
+   float B[] = { -0.047F, 0.796F, -0.913F, 0.998F, 0.365F, 0.467F, -0.627F, -0.523F, 0.885F, 0.234F, -0.494F, 0.071F, -0.361F, -0.154F, -0.055F, -0.32F };
    int ldb = 2;
-   float C[] = { 0.956f, 0.268f, 0.152f, 0.717f };
+   float C[] = { 0.956F, 0.268F, 0.152F, 0.717F };
    int ldc = 2;
-   float C_expected[] = { -0.668685f, 0.134477f, -0.715786f, -0.478065f };
+   float C_expected[] = { -0.668685F, 0.134477F, -0.715786F, -0.478065F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1488) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1488) imag");
@@ -620,18 +621,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {-0.3f, 0.1f};
-   float beta[2] = {-1.0f, 0.0f};
-   float A[] = { 0.394f, -0.482f, 0.631f, -0.833f, 0.221f, 0.672f, 0.2f, 0.967f };
+   float alpha[2] = {-0.3F, 0.1F};
+   float beta[2] = {-1.0F, 0.0F};
+   float A[] = { 0.394F, -0.482F, 0.631F, -0.833F, 0.221F, 0.672F, 0.2F, 0.967F };
    int lda = 4;
-   float B[] = { 0.708f, 0.695f, 0.111f, -0.912f, 0.376f, 0.606f, -0.997f, -0.741f, 0.349f, 0.543f, 0.372f, -0.563f, 0.129f, -0.295f, -0.672f, -0.95f };
+   float B[] = { 0.708F, 0.695F, 0.111F, -0.912F, 0.376F, 0.606F, -0.997F, -0.741F, 0.349F, 0.543F, 0.372F, -0.563F, 0.129F, -0.295F, -0.672F, -0.95F };
    int ldb = 4;
-   float C[] = { 0.436f, 0.752f, 0.074f, 0.209f };
+   float C[] = { 0.436F, 0.752F, 0.074F, 0.209F };
    int ldc = 1;
-   float C_expected[] = { -0.325083f, -0.301952f, -0.283022f, 0.339919f };
+   float C_expected[] = { -0.325083F, -0.301952F, -0.283022F, 0.339919F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1489) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1489) imag");
@@ -647,18 +648,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {1.0f, 0.0f};
-   float beta[2] = {-0.3f, 0.1f};
-   float A[] = { 0.827f, -0.862f, 0.373f, -0.265f, -0.9f, 0.892f, -0.319f, 0.151f };
+   float alpha[2] = {1.0F, 0.0F};
+   float beta[2] = {-0.3F, 0.1F};
+   float A[] = { 0.827F, -0.862F, 0.373F, -0.265F, -0.9F, 0.892F, -0.319F, 0.151F };
    int lda = 1;
-   float B[] = { 0.603f, 0.816f, -0.511f, 0.831f, -0.36f, -0.954f, -0.978f, 0.485f, 0.675f, 0.186f, 0.463f, 0.144f, 0.851f, -0.458f, 0.766f, -0.213f };
+   float B[] = { 0.603F, 0.816F, -0.511F, 0.831F, -0.36F, -0.954F, -0.978F, 0.485F, 0.675F, 0.186F, 0.463F, 0.144F, 0.851F, -0.458F, 0.766F, -0.213F };
    int ldb = 4;
-   float C[] = { -0.335f, 0.333f, -0.4f, 0.422f };
+   float C[] = { -0.335F, 0.333F, -0.4F, 0.422F };
    int ldc = 2;
-   float C_expected[] = { 2.7126f, 0.702111f, 0.437661f, 0.691294f };
+   float C_expected[] = { 2.7126F, 0.702111F, 0.437661F, 0.691294F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1490) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1490) imag");
@@ -674,18 +675,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {1.0f, 0.0f};
-   float beta[2] = {-0.3f, 0.1f};
-   float A[] = { 0.966f, 0.476f, -0.013f, -0.655f, 0.773f, -0.543f, -0.231f, -0.353f };
+   float alpha[2] = {1.0F, 0.0F};
+   float beta[2] = {-0.3F, 0.1F};
+   float A[] = { 0.966F, 0.476F, -0.013F, -0.655F, 0.773F, -0.543F, -0.231F, -0.353F };
    int lda = 4;
-   float B[] = { -0.684f, 0.144f, 0.018f, -0.77f, -0.688f, 0.909f, -0.094f, -0.938f, -0.757f, 0.574f, -0.479f, 0.473f, 0.0f, 0.064f, -0.168f, 0.858f };
+   float B[] = { -0.684F, 0.144F, 0.018F, -0.77F, -0.688F, 0.909F, -0.094F, -0.938F, -0.757F, 0.574F, -0.479F, 0.473F, 0.0F, 0.064F, -0.168F, 0.858F };
    int ldb = 2;
-   float C[] = { -0.912f, 0.54f, 0.756f, 0.024f };
+   float C[] = { -0.912F, 0.54F, 0.756F, 0.024F };
    int ldc = 1;
-   float C_expected[] = { -0.156236f, 0.839112f, -0.230206f, -0.106256f };
+   float C_expected[] = { -0.156236F, 0.839112F, -0.230206F, -0.106256F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1491) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1491) imag");
@@ -701,18 +702,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {0.0f, 0.0f};
-   float beta[2] = {1.0f, 0.0f};
-   float A[] = { 0.66f, -0.113f, -0.663f, -0.856f, 0.614f, -0.344f, -0.964f, -0.532f };
+   float alpha[2] = {0.0F, 0.0F};
+   float beta[2] = {1.0F, 0.0F};
+   float A[] = { 0.66F, -0.113F, -0.663F, -0.856F, 0.614F, -0.344F, -0.964F, -0.532F };
    int lda = 1;
-   float B[] = { -0.606f, -0.965f, -0.279f, -0.312f, 0.63f, 0.967f, 0.041f, -0.557f, 0.663f, 0.619f, -0.134f, 0.261f, -0.388f, 0.525f, 0.222f, 0.538f };
+   float B[] = { -0.606F, -0.965F, -0.279F, -0.312F, 0.63F, 0.967F, 0.041F, -0.557F, 0.663F, 0.619F, -0.134F, 0.261F, -0.388F, 0.525F, 0.222F, 0.538F };
    int ldb = 4;
-   float C[] = { 0.114f, -0.376f, -0.851f, -0.682f };
+   float C[] = { 0.114F, -0.376F, -0.851F, -0.682F };
    int ldc = 2;
-   float C_expected[] = { 0.114f, -0.376f, -0.851f, -0.682f };
+   float C_expected[] = { 0.114F, -0.376F, -0.851F, -0.682F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1492) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1492) imag");
@@ -728,18 +729,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {0.0f, 0.0f};
-   float beta[2] = {1.0f, 0.0f};
-   float A[] = { 0.212f, -0.752f, 0.679f, 0.49f, -0.029f, -0.488f, 0.567f, 0.374f };
+   float alpha[2] = {0.0F, 0.0F};
+   float beta[2] = {1.0F, 0.0F};
+   float A[] = { 0.212F, -0.752F, 0.679F, 0.49F, -0.029F, -0.488F, 0.567F, 0.374F };
    int lda = 4;
-   float B[] = { -0.914f, 0.734f, -0.845f, 0.059f, -0.297f, 0.152f, -0.417f, -0.669f, 0.831f, -0.544f, 0.022f, 0.102f, -0.379f, -0.357f, -0.394f, -0.588f };
+   float B[] = { -0.914F, 0.734F, -0.845F, 0.059F, -0.297F, 0.152F, -0.417F, -0.669F, 0.831F, -0.544F, 0.022F, 0.102F, -0.379F, -0.357F, -0.394F, -0.588F };
    int ldb = 2;
-   float C[] = { -0.584f, 0.373f, 0.235f, 0.521f };
+   float C[] = { -0.584F, 0.373F, 0.235F, 0.521F };
    int ldc = 1;
-   float C_expected[] = { -0.584f, 0.373f, 0.235f, 0.521f };
+   float C_expected[] = { -0.584F, 0.373F, 0.235F, 0.521F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1493) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1493) imag");
@@ -755,18 +756,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {0.0f, 0.1f};
-   float beta[2] = {-1.0f, 0.0f};
-   float A[] = { 0.135f, 0.128f, 0.909f, -0.963f, 0.299f, -0.944f, 0.944f, 0.942f };
+   float alpha[2] = {0.0F, 0.1F};
+   float beta[2] = {-1.0F, 0.0F};
+   float A[] = { 0.135F, 0.128F, 0.909F, -0.963F, 0.299F, -0.944F, 0.944F, 0.942F };
    int lda = 1;
-   float B[] = { 0.924f, -0.317f, -0.992f, -0.854f, -0.435f, 0.102f, 0.126f, 0.862f, 0.952f, 0.68f, 0.545f, 0.168f, 0.752f, 0.549f, 0.687f, -0.76f };
+   float B[] = { 0.924F, -0.317F, -0.992F, -0.854F, -0.435F, 0.102F, 0.126F, 0.862F, 0.952F, 0.68F, 0.545F, 0.168F, 0.752F, 0.549F, 0.687F, -0.76F };
    int ldb = 2;
-   float C[] = { -0.369f, -0.33f, 0.849f, -0.632f };
+   float C[] = { -0.369F, -0.33F, 0.849F, -0.632F };
    int ldc = 2;
-   float C_expected[] = { 0.326537f, 0.37603f, -0.86067f, 0.529817f };
+   float C_expected[] = { 0.326537F, 0.37603F, -0.86067F, 0.529817F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1494) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1494) imag");
@@ -782,18 +783,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {0.0f, 0.1f};
-   float beta[2] = {-1.0f, 0.0f};
-   float A[] = { 0.061f, -0.271f, -0.043f, -0.023f, 0.694f, 0.333f, 0.733f, -0.967f };
+   float alpha[2] = {0.0F, 0.1F};
+   float beta[2] = {-1.0F, 0.0F};
+   float A[] = { 0.061F, -0.271F, -0.043F, -0.023F, 0.694F, 0.333F, 0.733F, -0.967F };
    int lda = 4;
-   float B[] = { 0.088f, -0.607f, 0.589f, 0.375f, -0.897f, -0.954f, -0.216f, -0.195f, -0.865f, -0.511f, -0.219f, 0.535f, 0.976f, 0.582f, 0.464f, -0.041f };
+   float B[] = { 0.088F, -0.607F, 0.589F, 0.375F, -0.897F, -0.954F, -0.216F, -0.195F, -0.865F, -0.511F, -0.219F, 0.535F, 0.976F, 0.582F, 0.464F, -0.041F };
    int ldb = 4;
-   float C[] = { 0.533f, -0.63f, 0.405f, 0.667f };
+   float C[] = { 0.533F, -0.63F, 0.405F, 0.667F };
    int ldc = 1;
-   float C_expected[] = { -0.459906f, 0.552595f, -0.425391f, -0.533626f };
+   float C_expected[] = { -0.459906F, 0.552595F, -0.425391F, -0.533626F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1495) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1495) imag");
@@ -809,18 +810,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {0.0f, 0.0f};
-   float beta[2] = {1.0f, 0.0f};
-   float A[] = { -0.676f, -0.116f, 0.707f, -0.256f, -0.893f, -0.966f, 0.159f, -0.246f };
+   float alpha[2] = {0.0F, 0.0F};
+   float beta[2] = {1.0F, 0.0F};
+   float A[] = { -0.676F, -0.116F, 0.707F, -0.256F, -0.893F, -0.966F, 0.159F, -0.246F };
    int lda = 1;
-   float B[] = { 0.059f, 0.281f, -0.93f, -0.263f, 0.583f, -0.11f, 0.639f, -0.96f, -0.878f, 0.984f, 0.058f, 0.977f, -0.567f, 0.561f, -0.048f, -0.798f };
+   float B[] = { 0.059F, 0.281F, -0.93F, -0.263F, 0.583F, -0.11F, 0.639F, -0.96F, -0.878F, 0.984F, 0.058F, 0.977F, -0.567F, 0.561F, -0.048F, -0.798F };
    int ldb = 4;
-   float C[] = { 0.362f, -0.808f, 0.428f, -0.112f };
+   float C[] = { 0.362F, -0.808F, 0.428F, -0.112F };
    int ldc = 2;
-   float C_expected[] = { 0.362f, -0.808f, 0.428f, -0.112f };
+   float C_expected[] = { 0.362F, -0.808F, 0.428F, -0.112F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1496) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1496) imag");
@@ -836,18 +837,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {0.0f, 0.0f};
-   float beta[2] = {1.0f, 0.0f};
-   float A[] = { -0.915f, 0.439f, 0.171f, -0.019f, 0.843f, 0.944f, -0.581f, 0.856f };
+   float alpha[2] = {0.0F, 0.0F};
+   float beta[2] = {1.0F, 0.0F};
+   float A[] = { -0.915F, 0.439F, 0.171F, -0.019F, 0.843F, 0.944F, -0.581F, 0.856F };
    int lda = 4;
-   float B[] = { -0.284f, 0.207f, -0.27f, 0.832f, 0.894f, -0.626f, -0.305f, -0.006f, 0.562f, -0.744f, -0.533f, 0.126f, -0.375f, -0.333f, 0.275f, 0.748f };
+   float B[] = { -0.284F, 0.207F, -0.27F, 0.832F, 0.894F, -0.626F, -0.305F, -0.006F, 0.562F, -0.744F, -0.533F, 0.126F, -0.375F, -0.333F, 0.275F, 0.748F };
    int ldb = 2;
-   float C[] = { -0.763f, -0.829f, 0.708f, -0.613f };
+   float C[] = { -0.763F, -0.829F, 0.708F, -0.613F };
    int ldc = 1;
-   float C_expected[] = { -0.763f, -0.829f, 0.708f, -0.613f };
+   float C_expected[] = { -0.763F, -0.829F, 0.708F, -0.613F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1497) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1497) imag");
@@ -863,18 +864,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {0.0f, 0.1f};
-   float beta[2] = {0.0f, 1.0f};
-   float A[] = { 0.496f, -0.9f, 0.825f, -0.678f, 0.41f, -0.585f, -0.264f, 0.308f };
+   float alpha[2] = {0.0F, 0.1F};
+   float beta[2] = {0.0F, 1.0F};
+   float A[] = { 0.496F, -0.9F, 0.825F, -0.678F, 0.41F, -0.585F, -0.264F, 0.308F };
    int lda = 1;
-   float B[] = { 0.907f, 0.972f, -0.724f, 0.745f, -0.601f, 0.589f, 0.759f, -0.521f, -0.161f, -0.321f, 0.341f, -0.981f, -0.378f, -0.671f, -0.314f, -0.878f };
+   float B[] = { 0.907F, 0.972F, -0.724F, 0.745F, -0.601F, 0.589F, 0.759F, -0.521F, -0.161F, -0.321F, 0.341F, -0.981F, -0.378F, -0.671F, -0.314F, -0.878F };
    int ldb = 4;
-   float C[] = { -0.293f, 0.07f, 0.087f, -0.542f };
+   float C[] = { -0.293F, 0.07F, 0.087F, -0.542F };
    int ldc = 2;
-   float C_expected[] = { 0.10357f, -0.163927f, 0.444626f, -0.0076744f };
+   float C_expected[] = { 0.10357F, -0.163927F, 0.444626F, -0.0076744F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1498) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1498) imag");
@@ -890,18 +891,18 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 2;
    int K = 4;
-   float alpha[2] = {0.0f, 0.1f};
-   float beta[2] = {0.0f, 1.0f};
-   float A[] = { -0.225f, -0.629f, -0.939f, -0.836f, -0.841f, -0.794f, 0.836f, -0.65f };
+   float alpha[2] = {0.0F, 0.1F};
+   float beta[2] = {0.0F, 1.0F};
+   float A[] = { -0.225F, -0.629F, -0.939F, -0.836F, -0.841F, -0.794F, 0.836F, -0.65F };
    int lda = 4;
-   float B[] = { 0.869f, -0.453f, 0.8f, -0.947f, 0.545f, 0.716f, -0.507f, -0.228f, 0.722f, 0.372f, 0.77f, 0.317f, -0.153f, -0.524f, -0.465f, -0.684f };
+   float B[] = { 0.869F, -0.453F, 0.8F, -0.947F, 0.545F, 0.716F, -0.507F, -0.228F, 0.722F, 0.372F, 0.77F, 0.317F, -0.153F, -0.524F, -0.465F, -0.684F };
    int ldb = 2;
-   float C[] = { -0.896f, 0.91f, -0.973f, -0.269f };
+   float C[] = { -0.896F, 0.91F, -0.973F, -0.269F };
    int ldc = 1;
-   float C_expected[] = { -1.18974f, -1.0134f, 0.189027f, -1.14494f };
+   float C_expected[] = { -1.18974F, -1.0134F, 0.189027F, -1.14494F };
    cblas_cgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cgemm(case 1499) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cgemm(case 1499) imag");
@@ -928,7 +929,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { 0.042563, -0.465908, -0.649991, -1.621116 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1500) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1500) imag");
@@ -955,7 +956,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.181084, 0.257841, 2.251901, 1.558195 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1501) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1501) imag");
@@ -982,7 +983,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { 0.6553584, 0.0864583, 0.2559136, 0.7518389 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1502) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1502) imag");
@@ -1009,7 +1010,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { 0.0980569, -0.6430449, -0.539207, 0.4226848 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1503) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1503) imag");
@@ -1036,7 +1037,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.981, 0.336, 0.377, 0.41 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1504) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1504) imag");
@@ -1063,7 +1064,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.902, 0.584, 0.695, 0.607 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1505) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1505) imag");
@@ -1090,7 +1091,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { 1.117044, 1.983417, -1.276831, -0.447092 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1506) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1506) imag");
@@ -1117,7 +1118,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { 0.753107, 0.896395, 0.481996, -0.263126 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1507) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1507) imag");
@@ -1144,7 +1145,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { 0.166046, 0.491557, 1.473191, -0.033821 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1508) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1508) imag");
@@ -1171,7 +1172,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -1.070679, 0.178755, -0.344714, -0.308137 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1509) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1509) imag");
@@ -1198,7 +1199,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { 0.1423153, -0.066679, 0.1175618, 0.0012949 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1510) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1510) imag");
@@ -1225,7 +1226,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { 0.1728438, 0.1183508, 0.2526999, 0.3004174 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1511) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1511) imag");
@@ -1252,7 +1253,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { 1.372475, -0.135616, 0.549353, -1.968747 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1512) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1512) imag");
@@ -1279,7 +1280,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.975939, 0.415528, 0.275533, 0.002716 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1513) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1513) imag");
@@ -1306,7 +1307,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.833, -0.761, -0.074, 0.448 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1514) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1514) imag");
@@ -1333,7 +1334,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { 0.88, -0.945, -0.416, -0.99 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1515) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1515) imag");
@@ -1360,7 +1361,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.5507177, -0.0286821, 0.2222276, 0.5197398 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1516) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1516) imag");
@@ -1387,7 +1388,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.7876717, 0.0341179, -0.0800018, 0.5717566 };
    cblas_zgemm(order, transA, transB, M, N, K, alpha, A, lda, B, ldb, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 2; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zgemm(case 1517) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zgemm(case 1517) imag");

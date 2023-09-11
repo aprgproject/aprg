@@ -95,7 +95,8 @@ static int
 rb_empty (void * vtable)
 {
   rb_table * table = (rb_table *) vtable;
-  rb_node *p, *q;
+  rb_node *p;
+  rb_node *q;
 
   for (p = table->rb_root; p != NULL; p = q)
     {
@@ -129,10 +130,10 @@ rb_probe (void * item, rb_table * table)
 {
   rb_node *pa[RB_MAX_HEIGHT];      /* nodes on stack */
   unsigned char da[RB_MAX_HEIGHT]; /* directions moved from stack nodes */
-  int k;                           /* stack height */
+  int k = 0;                           /* stack height */
 
-  rb_node *p; /* traverses tree looking for insertion point */
-  rb_node *n; /* newly inserted node */
+  rb_node *p = NULL; /* traverses tree looking for insertion point */
+  rb_node *n = NULL; /* newly inserted node */
 
   pa[0] = (rb_node *) &table->rb_root;
   da[0] = 0;
@@ -140,8 +141,9 @@ rb_probe (void * item, rb_table * table)
   for (p = table->rb_root; p != NULL; p = p->rb_link[da[k - 1]])
     {
       int cmp = table->rb_compare (item, p->rb_data, table->rb_param);
-      if (cmp == 0)
+      if (cmp == 0) {
         return &p->rb_data;
+}
 
       pa[k] = p;
       da[k++] = cmp > 0;
@@ -149,8 +151,9 @@ rb_probe (void * item, rb_table * table)
 
   n = pa[k - 1]->rb_link[da[k - 1]] =
     table->rb_alloc->alloc (sizeof *n, table->rb_param);
-  if (n == NULL)
+  if (n == NULL) {
     return NULL;
+}
 
   n->rb_data = item;
   n->rb_link[0] = n->rb_link[1] = NULL;
@@ -171,11 +174,11 @@ rb_probe (void * item, rb_table * table)
             }
           else
             {
-              rb_node *x;
+              rb_node *x = NULL;
 
-              if (da[k - 1] == 0)
+              if (da[k - 1] == 0) {
                 y = pa[k - 1];
-              else
+              } else
                 {
                   x = pa[k - 1];
                   y = x->rb_link[1];
@@ -205,11 +208,11 @@ rb_probe (void * item, rb_table * table)
             }
           else
             {
-              rb_node *x;
+              rb_node *x = NULL;
 
-              if (da[k - 1] == 1)
+              if (da[k - 1] == 1) {
                 y = pa[k - 1];
-              else
+              } else
                 {
                   x = pa[k - 1];
                   y = x->rb_link[0];
@@ -253,18 +256,19 @@ static void *
 rb_find (const void * item, const void * vtable)
 {
   const rb_table * table = (const rb_table *) vtable;
-  const rb_node *p;
+  const rb_node *p = NULL;
 
   for (p = table->rb_root; p != NULL; )
     {
       int cmp = table->rb_compare (item, p->rb_data, table->rb_param);
 
-      if (cmp < 0)
+      if (cmp < 0) {
         p = p->rb_link[0];
-      else if (cmp > 0)
+      } else if (cmp > 0) {
         p = p->rb_link[1];
-      else /* |cmp == 0| */
+      } else { /* |cmp == 0| */
         return p->rb_data;
+}
     }
 
   return NULL;
@@ -301,10 +305,10 @@ rb_remove (const void * item, void * vtable)
   rb_table * table = (rb_table *) vtable;
   rb_node *pa[RB_MAX_HEIGHT];      /* nodes on stack */
   unsigned char da[RB_MAX_HEIGHT]; /* directions moved from stack nodes */
-  int k;                           /* stack height */
+  int k = 0;                           /* stack height */
 
-  rb_node *p;    /* the node to delete, or a node part way to it */
-  int cmp;       /* result of comparison between |item| and |p| */
+  rb_node *p = NULL;    /* the node to delete, or a node part way to it */
+  int cmp = 0;       /* result of comparison between |item| and |p| */
 
   k = 0;
   p = (rb_node *) &table->rb_root;
@@ -317,14 +321,15 @@ rb_remove (const void * item, void * vtable)
       da[k++] = dir;
 
       p = p->rb_link[dir];
-      if (p == NULL)
+      if (p == NULL) {
         return NULL;
+}
     }
   item = p->rb_data;
 
-  if (p->rb_link[1] == NULL)
+  if (p->rb_link[1] == NULL) {
     pa[k - 1]->rb_link[da[k - 1]] = p->rb_link[0];
-  else
+  } else
     {
       enum rb_color t;
       rb_node *r = p->rb_link[1];
@@ -341,7 +346,7 @@ rb_remove (const void * item, void * vtable)
         }
       else
         {
-          rb_node *s;
+          rb_node *s = NULL;
           int j = k++;
 
           for (;;)
@@ -349,8 +354,9 @@ rb_remove (const void * item, void * vtable)
               da[k] = 0;
               pa[k++] = r;
               s = r->rb_link[0];
-              if (s->rb_link[0] == NULL)
+              if (s->rb_link[0] == NULL) {
                 break;
+}
 
               r = s;
             }
@@ -379,8 +385,9 @@ rb_remove (const void * item, void * vtable)
               x->rb_color = RB_BLACK;
               break;
             }
-          if (k < 2)
+          if (k < 2) {
             break;
+}
 
           if (da[k - 1] == 0)
             {
@@ -406,9 +413,9 @@ rb_remove (const void * item, void * vtable)
               if ((w->rb_link[0] == NULL
                    || w->rb_link[0]->rb_color == RB_BLACK)
                   && (w->rb_link[1] == NULL
-                      || w->rb_link[1]->rb_color == RB_BLACK))
+                      || w->rb_link[1]->rb_color == RB_BLACK)) {
                 w->rb_color = RB_RED;
-              else
+              } else
                 {
                   if (w->rb_link[1] == NULL
                       || w->rb_link[1]->rb_color == RB_BLACK)
@@ -455,9 +462,9 @@ rb_remove (const void * item, void * vtable)
               if ((w->rb_link[0] == NULL
                    || w->rb_link[0]->rb_color == RB_BLACK)
                   && (w->rb_link[1] == NULL
-                      || w->rb_link[1]->rb_color == RB_BLACK))
+                      || w->rb_link[1]->rb_color == RB_BLACK)) {
                 w->rb_color = RB_RED;
-              else
+              } else
                 {
                   if (w->rb_link[0] == NULL
                       || w->rb_link[0]->rb_color == RB_BLACK)
@@ -516,7 +523,7 @@ rb_t_first (void * vtrav, const void * vtable)
 {
   const rb_table * table = (const rb_table *) vtable;
   rb_traverser * trav = (rb_traverser *) vtrav;
-  rb_node *x;
+  rb_node *x = NULL;
 
   trav->rb_table = table;
   trav->rb_height = 0;
@@ -550,7 +557,7 @@ rb_t_last (void * vtrav, const void * vtable)
 {
   const rb_table * table = (const rb_table *) vtable;
   rb_traverser * trav = (rb_traverser *) vtrav;
-  rb_node *x;
+  rb_node *x = NULL;
 
   trav->rb_table = table;
   trav->rb_height = 0;
@@ -586,7 +593,8 @@ rb_t_find (const void * item, void * vtrav, const void * vtable)
 {
   const rb_table * table = (const rb_table *) vtable;
   rb_traverser * trav = (rb_traverser *) vtrav;
-  rb_node *p, *q;
+  rb_node *p;
+  rb_node *q;
 
   trav->rb_table = table;
   trav->rb_height = 0;
@@ -595,11 +603,11 @@ rb_t_find (const void * item, void * vtrav, const void * vtable)
     {
       int cmp = table->rb_compare (item, p->rb_data, table->rb_param);
 
-      if (cmp < 0)
+      if (cmp < 0) {
         q = p->rb_link[0];
-      else if (cmp > 0)
+      } else if (cmp > 0) {
         q = p->rb_link[1];
-      else /* |cmp == 0| */
+      } else /* |cmp == 0| */
         {
           trav->rb_node = p;
           return p->rb_data;
@@ -631,7 +639,7 @@ rb_t_insert (void * item, void * vtrav, void * vtable)
 {
   rb_table * table = (rb_table *) vtable;
   rb_traverser * trav = (rb_traverser *) vtrav;
-  void **p;
+  void **p = NULL;
 
   p = rb_probe (item, table);
   if (p != NULL)
@@ -641,11 +649,11 @@ rb_t_insert (void * item, void * vtrav, void * vtable)
       trav->rb_generation = table->rb_generation - 1;
       return *p;
     }
-  else
-    {
+  
+    
       rb_t_init (vtrav, vtable);
       return NULL;
-    }
+   
 }
 
 /* Initializes |trav| to have the same current node as |src|. */
@@ -678,17 +686,18 @@ static void *
 rb_t_next (void * vtrav)
 {
   rb_traverser * trav = (rb_traverser *) vtrav;
-  rb_node *x;
+  rb_node *x = NULL;
 
-  if (trav->rb_generation != trav->rb_table->rb_generation)
+  if (trav->rb_generation != trav->rb_table->rb_generation) {
     rb_trav_refresh (trav);
+}
 
   x = trav->rb_node;
   if (x == NULL)
     {
       return rb_t_first (vtrav, trav->rb_table);
     }
-  else if (x->rb_link[1] != NULL)
+  if (x->rb_link[1] != NULL)
     {
       if (trav->rb_height >= RB_MAX_HEIGHT)
         {
@@ -739,17 +748,18 @@ static void *
 rb_t_prev (void * vtrav)
 {
   rb_traverser * trav = (rb_traverser *) vtrav;
-  rb_node *x;
+  rb_node *x = NULL;
 
-  if (trav->rb_generation != trav->rb_table->rb_generation)
+  if (trav->rb_generation != trav->rb_table->rb_generation) {
     rb_trav_refresh (trav);
+}
 
   x = trav->rb_node;
   if (x == NULL)
     {
       return rb_t_last (vtrav, trav->rb_table);
     }
-  else if (x->rb_link[0] != NULL)
+  if (x->rb_link[0] != NULL)
     {
       if (trav->rb_height >= RB_MAX_HEIGHT)
         {
@@ -808,7 +818,7 @@ static void *
 rb_t_replace (void * vtrav, void * new_item)
 {
   rb_traverser * trav = (rb_traverser *) vtrav;
-  void *old;
+  void *old = NULL;
 
   old = trav->rb_node->rb_data;
   trav->rb_node->rb_data = new_item;
@@ -947,7 +957,7 @@ rb_trav_refresh (rb_traverser *trav)
       gsl_bst_cmp_function *cmp = trav->rb_table->rb_compare;
       void *param = trav->rb_table->rb_param;
       rb_node *node = trav->rb_node;
-      rb_node *i;
+      rb_node *i = NULL;
 
       trav->rb_height = 0;
       for (i = trav->rb_table->rb_root; i != node; )

@@ -77,7 +77,7 @@ gsl_linalg_LU_band_decomp (const size_t M, const size_t lb, const size_t ub, gsl
     }
   else
     {
-      int status;
+      int status = 0;
 
       status = LU_band_decomp_L2 (M, lb, ub, AB, piv);
 
@@ -117,7 +117,7 @@ gsl_linalg_LU_band_solve (const size_t lb, const size_t ub, const gsl_matrix * L
     }
   else
     {
-      int status;
+      int status = 0;
 
       gsl_vector_memcpy(x, b);
 
@@ -157,7 +157,7 @@ gsl_linalg_LU_band_svx (const size_t lb, const size_t ub, const gsl_matrix * LUB
     {
       if (lb > 0)
         {
-          size_t j;
+          size_t j = 0;
 
           for (j = 0; j < N - 1; ++j)
             {
@@ -221,7 +221,7 @@ gsl_linalg_LU_band_unpack (const size_t M, const size_t lb, const size_t ub, con
   else
     {
       const size_t ub_U = lb + ub;
-      size_t j;
+      size_t j = 0;
 
       gsl_matrix_set_identity(L);
       gsl_matrix_set_zero(U);
@@ -230,7 +230,7 @@ gsl_linalg_LU_band_unpack (const size_t M, const size_t lb, const size_t ub, con
       if (lb > 0)
         {
           const size_t jstart = (M > N) ? minMN : minMN - 1;
-          size_t j;
+          size_t j = 0;
 
           for (j = jstart; j > 0 && j--; )
             {
@@ -306,7 +306,7 @@ LU_band_decomp_L2 (const size_t M, const size_t lb, const size_t ub,
       const size_t ub_U = lb + ub; /* upper bandwidth of U factor */
       const size_t ldab = AB->size2;
       size_t ju = 0;
-      size_t j;
+      size_t j = 0;
 
       if (lb > 0)
         {
@@ -321,17 +321,18 @@ LU_band_decomp_L2 (const size_t M, const size_t lb, const size_t ub,
           gsl_vector_view x = gsl_matrix_subrow(AB, j, ub_U, lbj + 1);
           gsl_vector_view y;
           CBLAS_INDEX_t j_pivot = gsl_blas_idamax(&x.vector);
-          double * ptr;
+          double * ptr = NULL;
 
           gsl_vector_uint_set(ipiv, j, j + j_pivot);
 
           ptr = gsl_matrix_ptr(AB, j, ub_U + j_pivot);
-          if (*ptr != 0.0)
+          if (*ptr != 0.0) {
             ju = GSL_MAX(ju, GSL_MIN(j + ub + j_pivot, N - 1));
+}
 
           if (j_pivot != 0)
             {
-              double *ptr2;
+              double *ptr2 = NULL;
 
               /* swap columns */
 

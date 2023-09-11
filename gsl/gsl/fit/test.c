@@ -37,10 +37,14 @@ main (void)
 {
 
 
-  double x[1000], y[1000], w[1000];
+  double x[1000];
+  double y[1000];
+  double w[1000];
 
-  size_t xstride = 2, wstride = 3, ystride = 5;
-  size_t i;
+  size_t xstride = 2;
+  size_t wstride = 3;
+  size_t ystride = 5;
+  size_t i = 0;
 
   for (i = 0; i < norris_n; i++) 
     {
@@ -52,7 +56,12 @@ main (void)
   gsl_ieee_env_setup();
 
   {
-    double c0, c1, cov00, cov01, cov11, sumsq;
+    double c0;
+    double c1;
+    double cov00;
+    double cov01;
+    double cov11;
+    double sumsq;
        
     double expected_c0 = -0.262323073774029;
     double expected_c1 =  1.00211681802045; 
@@ -76,7 +85,12 @@ main (void)
   }
 
   {
-    double c0, c1, cov00, cov01, cov11, sumsq;
+    double c0;
+    double c1;
+    double cov00;
+    double cov01;
+    double cov11;
+    double sumsq;
        
     double expected_c0 = -0.262323073774029;
     double expected_c1 =  1.00211681802045; 
@@ -104,7 +118,9 @@ main (void)
     }
 
   {
-    double c1, cov11, sumsq;
+    double c1;
+    double cov11;
+    double sumsq;
        
     double expected_c1 = 2.07438016528926; 
     double expected_cov11 = pow(0.165289256198347E-01, 2.0);  
@@ -118,7 +134,9 @@ main (void)
   }
 
   {
-    double c1, cov11, sumsq;
+    double c1;
+    double cov11;
+    double sumsq;
        
     double expected_c1 = 2.07438016528926; 
     double expected_cov11 = 2.14661371686165e-05; /* computed from octave */
@@ -140,7 +158,9 @@ main (void)
     }
 
   {
-    double c1, cov11, sumsq;
+    double c1;
+    double cov11;
+    double sumsq;
        
     double expected_c1 = 0.727272727272727; 
     double expected_cov11 = pow(0.420827318078432E-01, 2.0);  
@@ -154,7 +174,9 @@ main (void)
   }
 
   {
-    double c1, cov11, sumsq;
+    double c1;
+    double cov11;
+    double sumsq;
        
     double expected_c1 = 0.727272727272727; 
     double expected_cov11 = 1.29870129870130e-02 ; /* computed from octave */

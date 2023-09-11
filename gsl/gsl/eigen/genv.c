@@ -60,7 +60,7 @@ Return: pointer to workspace
 gsl_eigen_genv_workspace *
 gsl_eigen_genv_alloc(const size_t n)
 {
-  gsl_eigen_genv_workspace *w;
+  gsl_eigen_genv_workspace *w = NULL;
 
   if (n == 0)
     {
@@ -117,26 +117,33 @@ gsl_eigen_genv_free(gsl_eigen_genv_workspace *w)
 {
   RETURN_IF_NULL (w);
 
-  if (w->gen_workspace_p)
+  if (w->gen_workspace_p) {
     gsl_eigen_gen_free(w->gen_workspace_p);
+}
 
-  if (w->work1)
+  if (w->work1) {
     gsl_vector_free(w->work1);
+}
 
-  if (w->work2)
+  if (w->work2) {
     gsl_vector_free(w->work2);
+}
 
-  if (w->work3)
+  if (w->work3) {
     gsl_vector_free(w->work3);
+}
 
-  if (w->work4)
+  if (w->work4) {
     gsl_vector_free(w->work4);
+}
 
-  if (w->work5)
+  if (w->work5) {
     gsl_vector_free(w->work5);
+}
 
-  if (w->work6)
+  if (w->work6) {
     gsl_vector_free(w->work6);
+}
 
   free(w);
 } /* gsl_eigen_genv_free() */
@@ -191,7 +198,7 @@ gsl_eigen_genv (gsl_matrix * A, gsl_matrix * B, gsl_vector_complex * alpha,
     }
   else
     {
-      int s;
+      int s = 0;
       gsl_matrix Z;
 
       /*
@@ -221,8 +228,9 @@ gsl_eigen_genv (gsl_matrix * A, gsl_matrix * B, gsl_vector_complex * alpha,
           /* compute eigenvectors */
           s = genv_get_right_eigenvectors(A, B, &Z, evec, w);
 
-          if (s == GSL_SUCCESS)
+          if (s == GSL_SUCCESS) {
             genv_normalize_eigenvectors(alpha, evec);
+}
         }
 
       return s;
@@ -273,7 +281,7 @@ gsl_eigen_genv_QZ (gsl_matrix * A, gsl_matrix * B,
     }
   else
     {
-      int s;
+      int s = 0;
 
       w->Q = Q;
       w->Z = Z;
@@ -320,27 +328,56 @@ genv_get_right_eigenvectors(const gsl_matrix *S, const gsl_matrix *T,
   const double small = GSL_DBL_MIN * N / GSL_DBL_EPSILON;
   const double big = 1.0 / small;
   const double bignum = 1.0 / (GSL_DBL_MIN * N);
-  size_t i, j, k, end;
-  int is;
-  double anorm, bnorm;
-  double temp, temp2, temp2r, temp2i;
-  double ascale, bscale;
-  double salfar, sbeta;
-  double acoef, bcoefr, bcoefi, acoefa, bcoefa;
-  double creala, cimaga, crealb, cimagb, cre2a, cim2a, cre2b, cim2b;
-  double dmin, xmax;
-  double scale;
-  size_t nw, na;
-  int lsa, lsb;
-  int complex_pair;
-  gsl_complex z_zero, z_one;
+  size_t i;
+  size_t j;
+  size_t k;
+  size_t end;
+  int is = 0;
+  double anorm;
+  double bnorm;
+  double temp;
+  double temp2;
+  double temp2r;
+  double temp2i;
+  double ascale;
+  double bscale;
+  double salfar;
+  double sbeta;
+  double acoef;
+  double bcoefr;
+  double bcoefi;
+  double acoefa;
+  double bcoefa;
+  double creala;
+  double cimaga;
+  double crealb;
+  double cimagb;
+  double cre2a;
+  double cim2a;
+  double cre2b;
+  double cim2b;
+  double dmin;
+  double xmax;
+  double scale = NAN;
+  size_t nw;
+  size_t na;
+  int lsa;
+  int lsb;
+  int complex_pair = 0;
+  gsl_complex z_zero;
+  gsl_complex z_one;
   double bdiag[2] = { 0.0, 0.0 };
   double sum[4];
-  int il2by2;
-  size_t jr, jc, ja;
-  double xscale;
+  int il2by2 = 0;
+  size_t jr;
+  size_t jc;
+  size_t ja;
+  double xscale = NAN;
   gsl_vector_complex_view ecol;
-  gsl_vector_view re, im, re2, im2;
+  gsl_vector_view re;
+  gsl_vector_view im;
+  gsl_vector_view re2;
+  gsl_vector_view im2;
 
   GSL_SET_COMPLEX(&z_zero, 0.0, 0.0);
   GSL_SET_COMPLEX(&z_one, 1.0, 0.0);
@@ -352,8 +389,9 @@ genv_get_right_eigenvectors(const gsl_matrix *S, const gsl_matrix *T,
    */
 
   anorm = fabs(gsl_matrix_get(S, 0, 0));
-  if (N > 1)
+  if (N > 1) {
     anorm += fabs(gsl_matrix_get(S, 1, 0));
+}
   bnorm = fabs(gsl_matrix_get(T, 0, 0));
 
   gsl_vector_set(w->work1, 0, 0.0);
@@ -362,10 +400,11 @@ genv_get_right_eigenvectors(const gsl_matrix *S, const gsl_matrix *T,
   for (j = 1; j < N; ++j)
     {
       temp = temp2 = 0.0;
-      if (gsl_matrix_get(S, j, j - 1) == 0.0)
+      if (gsl_matrix_get(S, j, j - 1) == 0.0) {
         end = j;
-      else
+      } else {
         end = j - 1;
+}
 
       for (i = 0; i < end; ++i)
         {
@@ -416,8 +455,9 @@ genv_get_right_eigenvectors(const gsl_matrix *S, const gsl_matrix *T,
               fabs(gsl_matrix_get(T, je, je)) <= GSL_DBL_MIN)
             {
               /* singular matrix pencil - unit eigenvector */
-              for (i = 0; i < N; ++i)
+              for (i = 0; i < N; ++i) {
                 gsl_matrix_complex_set(evec, i, je, z_zero);
+}
 
               gsl_matrix_complex_set(evec, je, je, z_one);
 
@@ -425,8 +465,9 @@ genv_get_right_eigenvectors(const gsl_matrix *S, const gsl_matrix *T,
             }
 
           /* clear vector */
-          for (i = 0; i < N; ++i)
+          for (i = 0; i < N; ++i) {
             gsl_vector_set(w->work3, i, 0.0);
+}
         }
       else
         {
@@ -455,10 +496,12 @@ genv_get_right_eigenvectors(const gsl_matrix *S, const gsl_matrix *T,
           scale = 1.0;
           lsa = fabs(sbeta) >= GSL_DBL_MIN && fabs(acoef) < small;
           lsb = fabs(salfar) >= GSL_DBL_MIN && fabs(bcoefr) < small;
-          if (lsa)
+          if (lsa) {
             scale = (small / fabs(sbeta)) * GSL_MIN(anorm, big);
-          if (lsb)
+}
+          if (lsb) {
             scale = GSL_MAX(scale, (small / fabs(salfar)) * GSL_MIN(bnorm, big));
+}
 
           if (lsa || lsb)
             {
@@ -466,15 +509,17 @@ genv_get_right_eigenvectors(const gsl_matrix *S, const gsl_matrix *T,
                         1.0 / (GSL_DBL_MIN *
                                GSL_MAX(1.0,
                                  GSL_MAX(fabs(acoef), fabs(bcoefr)))));
-              if (lsa)
+              if (lsa) {
                 acoef = ascale * (scale * sbeta);
-              else
+              } else {
                 acoef *= scale;
+}
 
-              if (lsb)
+              if (lsb) {
                 bcoefr = bscale * (scale * salfar);
-              else
+              } else {
                 bcoefr *= scale;
+}
             }
 
           acoefa = fabs(acoef);
@@ -519,14 +564,18 @@ genv_get_right_eigenvectors(const gsl_matrix *S, const gsl_matrix *T,
           bcoefa = fabs(bcoefr) + fabs(bcoefi);
           scale = 1.0;
 
-          if (acoefa*GSL_DBL_EPSILON < GSL_DBL_MIN && acoefa >= GSL_DBL_MIN)
+          if (acoefa*GSL_DBL_EPSILON < GSL_DBL_MIN && acoefa >= GSL_DBL_MIN) {
             scale = (GSL_DBL_MIN / GSL_DBL_EPSILON) / acoefa;
-          if (bcoefa*GSL_DBL_EPSILON < GSL_DBL_MIN && bcoefa >= GSL_DBL_MIN)
+}
+          if (bcoefa*GSL_DBL_EPSILON < GSL_DBL_MIN && bcoefa >= GSL_DBL_MIN) {
             scale = GSL_MAX(scale, (GSL_DBL_MIN/GSL_DBL_EPSILON) / bcoefa);
-          if (GSL_DBL_MIN*acoefa > ascale)
+}
+          if (GSL_DBL_MIN*acoefa > ascale) {
             scale = ascale / (GSL_DBL_MIN * acoefa);
-          if (GSL_DBL_MIN*bcoefa > bscale)
+}
+          if (GSL_DBL_MIN*bcoefa > bscale) {
             scale = GSL_MIN(scale, bscale / (GSL_DBL_MIN*bcoefa));
+}
           if (scale != 1.0)
             {
               acoef *= scale;
@@ -623,15 +672,17 @@ genv_get_right_eigenvectors(const gsl_matrix *S, const gsl_matrix *T,
               na = 2;
               bdiag[1] = gsl_matrix_get(T, j + 1, j + 1);
             }
-          else
+          else {
             na = 1;
+}
 
 
           if (nw == 1)
             {
               gsl_matrix_const_view sv =
                 gsl_matrix_const_submatrix(S, j, j, na, na);
-              gsl_vector_view xv, bv;
+              gsl_vector_view xv;
+              gsl_vector_view bv;
 
               bv = gsl_vector_subvector(w->work3, j, na);
 
@@ -704,8 +755,9 @@ genv_get_right_eigenvectors(const gsl_matrix *S, const gsl_matrix *T,
           for (jr = 0; jr < na; ++jr)
             {
               gsl_vector_set(w->work3, j + jr, sum[jr*na]);
-              if (nw == 2)
+              if (nw == 2) {
                 gsl_vector_set(w->work4, j + jr, sum[jr*na + 1]);
+}
             }
 
           if (j > 0)
@@ -892,11 +944,12 @@ genv_normalize_eigenvectors(gsl_vector_complex *alpha,
                             gsl_matrix_complex *evec)
 {
   const size_t N = evec->size1;
-  size_t i;     /* looping */
+  size_t i = 0;     /* looping */
   gsl_complex ai;
   gsl_vector_complex_view vi;
-  gsl_vector_view re, im;
-  double scale; /* scaling factor */
+  gsl_vector_view re;
+  gsl_vector_view im;
+  double scale = NAN; /* scaling factor */
 
   for (i = 0; i < N; ++i)
     {

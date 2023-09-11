@@ -76,11 +76,15 @@ gsl_linalg_invnorm1(const size_t N,
       gsl_vector_view x = gsl_vector_subvector(work, 0, N);
       gsl_vector_view v = gsl_vector_subvector(work, N, N);
       gsl_vector_view xi = gsl_vector_subvector(work, 2*N, N);
-      double gamma, gamma_old, temp;
-      size_t i, k;
+      double gamma;
+      double gamma_old;
+      double temp;
+      size_t i;
+      size_t k;
 
-      for (i = 0; i < N; ++i)
+      for (i = 0; i < N; ++i) {
         gsl_vector_set(&x.vector, i, 1.0 / (double) N);
+}
 
       /* compute v = A^{-1} x */
       gsl_vector_memcpy(&v.vector, &x.vector);
@@ -113,8 +117,9 @@ gsl_linalg_invnorm1(const size_t N,
           gamma = gsl_blas_dasum(&v.vector);
 
           /* check for repeated sign vector (algorithm has converged) */
-          if (condest_same_sign(&v.vector, &xi.vector) || (gamma < gamma_old))
+          if (condest_same_sign(&v.vector, &xi.vector) || (gamma < gamma_old)) {
             break;
+}
 
           /* xi = sign(v) */
           for (i = 0; i < N; ++i)
@@ -168,27 +173,31 @@ condest_tri_rcond(CBLAS_UPLO_t Uplo, const gsl_matrix * A, double * rcond, gsl_v
     }
   else
     {
-      int status;
+      int status = 0;
       double Anorm = condest_tri_norm1(Uplo, A); /* ||A||_1 */
-      double Ainvnorm;                           /* ||A^{-1}||_1 */
+      double Ainvnorm = NAN;                           /* ||A^{-1}||_1 */
 
       *rcond = 0.0;
 
       /* don't continue if matrix is singular */
-      if (Anorm == 0.0)
+      if (Anorm == 0.0) {
         return GSL_SUCCESS;
+}
 
       /* estimate ||A^{-1}||_1 */
-      if (Uplo == CblasUpper)
+      if (Uplo == CblasUpper) {
         status = gsl_linalg_invnorm1(N, condest_invtriu, (void *) A, &Ainvnorm, work);
-      else
+      } else {
         status = gsl_linalg_invnorm1(N, condest_invtril, (void *) A, &Ainvnorm, work);
+}
 
-      if (status)
+      if (status) {
         return status;
+}
 
-      if (Ainvnorm != 0.0)
+      if (Ainvnorm != 0.0) {
         *rcond = (1.0 / Anorm) / Ainvnorm;
+}
 
       return GSL_SUCCESS;
     }
@@ -200,7 +209,8 @@ condest_tri_norm1(CBLAS_UPLO_t Uplo, const gsl_matrix * A)
 {
   const size_t N = A->size2;
   double max = 0.0;
-  size_t i, j;
+  size_t i;
+  size_t j;
 
   if (Uplo == CblasUpper)
     {
@@ -239,14 +249,15 @@ static int
 condest_same_sign(const gsl_vector * x, const gsl_vector * y)
 {
   const size_t n = x->size;
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < n; ++i)
     {
       double xi = gsl_vector_get(x, i);
       double yi = gsl_vector_get(y, i);
-      if (GSL_SIGN(xi) != GSL_SIGN(yi))
+      if (GSL_SIGN(xi) != GSL_SIGN(yi)) {
         return 0;
+}
     }
 
   return 1;

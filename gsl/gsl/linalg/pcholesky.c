@@ -36,6 +36,7 @@
 #include <gsl/gsl_linalg.h>
 #include <gsl/gsl_permutation.h>
 #include <gsl/gsl_permute_vector.h>
+#include <math.h>
 
 #include "cholesky_common.c"
 
@@ -84,7 +85,7 @@ pcholesky_decomp (const int copy_uplo, gsl_matrix * A, gsl_permutation * p)
   else
     {
       gsl_vector_view diag = gsl_matrix_diagonal(A);
-      size_t k;
+      size_t k = 0;
 
       if (copy_uplo)
         {
@@ -97,7 +98,7 @@ pcholesky_decomp (const int copy_uplo, gsl_matrix * A, gsl_permutation * p)
       for (k = 0; k < N; ++k)
         {
           gsl_vector_view w;
-          size_t j;
+          size_t j = 0;
 
           /* compute j = max_idx { A_kk, ..., A_nn } */
           w = gsl_vector_subvector(&diag.vector, k, N - k);
@@ -177,7 +178,7 @@ gsl_linalg_pcholesky_solve(const gsl_matrix * LDLT,
     }
   else
     {
-      int status;
+      int status = 0;
 
       gsl_vector_memcpy (x, b);
 
@@ -248,25 +249,28 @@ gsl_linalg_pcholesky_decomp2(gsl_matrix * A, gsl_permutation * p,
     }
   else
     {
-      int status;
+      int status = 0;
 
       /* save a copy of A in upper triangle (for later rcond calculation) */
       gsl_matrix_transpose_tricpy(CblasLower, CblasUnit, A, A);
 
       /* compute scaling factors to reduce cond(A) */
       status = gsl_linalg_cholesky_scale(A, S);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* apply scaling factors */
       status = gsl_linalg_cholesky_scale_apply(A, S);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* compute Cholesky decomposition of diag(S) A diag(S) */
       status = pcholesky_decomp(0, A, p);
-      if (status)
+      if (status) {
         return status;
+}
 
       return GSL_SUCCESS;
     }
@@ -301,7 +305,7 @@ gsl_linalg_pcholesky_solve2(const gsl_matrix * LDLT,
     }
   else
     {
-      int status;
+      int status = 0;
 
       gsl_vector_memcpy (x, b);
 
@@ -335,15 +339,16 @@ gsl_linalg_pcholesky_svx2(const gsl_matrix * LDLT,
     }
   else
     {
-      int status;
+      int status = 0;
 
       /* x := S b */
       gsl_vector_mul(x, S);
 
       /* solve: A~ x~ = b~, with A~ = S A S, b~ = S b */
       status = gsl_linalg_pcholesky_svx(LDLT, p, x);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* compute: x = S x~ */
       gsl_vector_mul(x, S);
@@ -389,7 +394,7 @@ gsl_linalg_pcholesky_invert(const gsl_matrix * LDLT, const gsl_permutation * p,
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* invert the lower triangle of LDLT */
       gsl_matrix_memcpy(Ainv, LDLT);
@@ -453,16 +458,17 @@ gsl_linalg_pcholesky_rcond (const gsl_matrix * LDLT, const gsl_permutation * p,
     }
   else
     {
-      int status;
+      int status = 0;
       double Anorm = cholesky_LDLT_norm1(LDLT, p, work); /* ||A||_1 */
-      double Ainvnorm;                                   /* ||A^{-1}||_1 */
+      double Ainvnorm = NAN;                                   /* ||A^{-1}||_1 */
       pcholesky_params params;
 
       *rcond = 0.0;
 
       /* don't continue if matrix is singular */
-      if (Anorm == 0.0)
+      if (Anorm == 0.0) {
         return GSL_SUCCESS;
+}
 
       params.LDLT = LDLT;
       params.perm = p;
@@ -470,11 +476,13 @@ gsl_linalg_pcholesky_rcond (const gsl_matrix * LDLT, const gsl_permutation * p,
       /* estimate ||A^{-1}||_1 */
       status = gsl_linalg_invnorm1(N, cholesky_LDLT_Ainv, &params, &Ainvnorm, work);
 
-      if (status)
+      if (status) {
         return status;
+}
 
-      if (Ainvnorm != 0.0)
+      if (Ainvnorm != 0.0) {
         *rcond = (1.0 / Anorm) / Ainvnorm;
+}
 
       return GSL_SUCCESS;
     }
@@ -498,12 +506,13 @@ cholesky_LDLT_norm1(const gsl_matrix * LDLT, const gsl_permutation * p, gsl_vect
   gsl_vector_const_view D = gsl_matrix_const_diagonal(LDLT);
   gsl_vector_view diagA = gsl_vector_subvector(work, N, N);
   double max = 0.0;
-  size_t i, j;
+  size_t i;
+  size_t j;
 
   /* reconstruct diagonal entries of original matrix A */
   for (j = 0; j < N; ++j)
     {
-      double Ajj;
+      double Ajj = NAN;
 
       /* compute diagonal (j,j) entry of A */
       Ajj = gsl_vector_get(&D.vector, j);
@@ -551,7 +560,7 @@ cholesky_LDLT_norm1(const gsl_matrix * LDLT, const gsl_permutation * p, gsl_vect
 static int
 cholesky_LDLT_Ainv(CBLAS_TRANSPOSE_t TransA, gsl_vector * x, void * params)
 {
-  int status;
+  int status = 0;
   pcholesky_params *par = (pcholesky_params *) params;
 
   (void) TransA; /* unused parameter warning */

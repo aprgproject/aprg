@@ -82,7 +82,7 @@ int gsl_sf_bessel_J1_e(const double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else if(y < 2.0*GSL_DBL_MIN) {
+  if(y < 2.0*GSL_DBL_MIN) {
     UNDERFLOW_ERROR(result);
   }
   else if(y < ROOT_EIGHT * GSL_SQRT_DBL_EPSILON) {

@@ -70,7 +70,8 @@ inline
 static double
 sup_norm(const gsl_matrix * A)
 {
-  double min, max;
+  double min;
+  double max;
   gsl_matrix_minmax(A, &min, &max);
   return GSL_MAX_DBL(fabs(min), fabs(max));
 }
@@ -82,8 +83,8 @@ obtain_suggestion(const gsl_matrix * A, gsl_mode_t mode)
 {
   const unsigned int mode_prec = GSL_MODE_PREC(mode);
   const double norm_A = sup_norm(A);
-  if(norm_A < 0.01) return mvl_tab[mode_prec][0];
-  else if(norm_A < 0.1) return mvl_tab[mode_prec][1];
+  if(norm_A < 0.01) { return mvl_tab[mode_prec][0];
+  } if(norm_A < 0.1) return mvl_tab[mode_prec][1];
   else if(norm_A < 1.0) return mvl_tab[mode_prec][2];
   else if(norm_A < 10.0) return mvl_tab[mode_prec][3];
   else if(norm_A < 100.0) return mvl_tab[mode_prec][4];
@@ -116,7 +117,7 @@ matrix_exp_series(
   int number_of_terms
   )
 {
-  int count;
+  int count = 0;
   gsl_matrix * temp = gsl_matrix_calloc(B->size1, B->size2);
 
   /* init the Horner polynomial evaluation,
@@ -159,7 +160,7 @@ gsl_linalg_exponential_ss(
   }
   else
   {
-    int i;
+    int i = 0;
     const mvl_suggestion_t sugg = obtain_suggestion(A, mode);
     const double divisor = exp(M_LN2 * sugg.j);
 

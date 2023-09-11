@@ -59,7 +59,7 @@ create_random_sparse(const size_t M, const size_t N, const double density,
   gsl_spmatrix *m = gsl_spmatrix_alloc_nzmax(M, N,
                                              nnzwanted,
                                              GSL_SPMATRIX_TRIPLET);
-  size_t i;
+  size_t i = 0;
 
   /* set diagonal entries to try to ensure non-singularity */
   for (i = 0; i < GSL_MIN(M, N); ++i)
@@ -85,7 +85,7 @@ create_random_sparse(const size_t M, const size_t N, const double density,
 static void
 create_random_vector(gsl_vector *v, const gsl_rng *r)
 {
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < v->size; ++i)
     {
@@ -109,13 +109,13 @@ test_poisson(const size_t N, const double epsrel, const int compress)
   const size_t max_iter = 10;
   size_t iter = 0;
   gsl_spmatrix *A = gsl_spmatrix_alloc(n ,n); /* triplet format */
-  gsl_spmatrix *B;
+  gsl_spmatrix *B = NULL;
   gsl_vector *b = gsl_vector_alloc(n);        /* right hand side vector */
   gsl_vector *u = gsl_vector_calloc(n);       /* solution vector, u0 = 0 */
   gsl_splinalg_itersolve *w = gsl_splinalg_itersolve_alloc(T, n, 0);
   const char *desc = gsl_splinalg_itersolve_name(w);
-  size_t i;
-  int status;
+  size_t i = 0;
+  int status = 0;
 
   /* construct the sparse matrix for the finite difference equation */
 
@@ -146,10 +146,11 @@ test_poisson(const size_t N, const double epsrel, const int compress)
       gsl_vector_set(b, i, bi);
     }
 
-  if (compress)
+  if (compress) {
     B = gsl_spmatrix_compcol(A);
-  else
+  } else {
     B = A;
+}
 
   /* solve the system */
   do
@@ -174,7 +175,8 @@ test_poisson(const size_t N, const double epsrel, const int compress)
   /* check that the residual satisfies ||r|| <= tol*||b|| */
   {
     gsl_vector *r = gsl_vector_alloc(n);
-    double normr, normb;
+    double normr;
+    double normb;
 
     gsl_vector_memcpy(r, b);
     gsl_spblas_dgemv(CblasNoTrans, -1.0, A, u, 1.0, r);
@@ -194,8 +196,9 @@ test_poisson(const size_t N, const double epsrel, const int compress)
   gsl_vector_free(b);
   gsl_vector_free(u);
 
-  if (compress)
+  if (compress) {
     gsl_spmatrix_free(B);
+}
 } /* test_poisson() */
 
 /*
@@ -212,18 +215,21 @@ static void
 test_toeplitz(const size_t N, const double a, const double b,
               const double c)
 {
-  int status;
+  int status = 0;
   const double tol = 1.0e-10;
   const size_t max_iter = 10;
   const gsl_splinalg_itersolve_type *T = gsl_splinalg_itersolve_gmres;
-  const char *desc;
-  gsl_spmatrix *A;
-  gsl_vector *rhs, *x;
-  gsl_splinalg_itersolve *w;
-  size_t i, iter = 0;
+  const char *desc = NULL;
+  gsl_spmatrix *A = NULL;
+  gsl_vector *rhs;
+  gsl_vector *x;
+  gsl_splinalg_itersolve *w = NULL;
+  size_t i;
+  size_t iter = 0;
 
-  if (N <= 1)
+  if (N <= 1) {
     return;
+}
 
   A = gsl_spmatrix_alloc(N ,N);
   rhs = gsl_vector_alloc(N);
@@ -263,7 +269,8 @@ test_toeplitz(const size_t N, const double a, const double b,
   /* check that the residual satisfies ||r|| <= tol*||b|| */
   {
     gsl_vector *r = gsl_vector_alloc(N);
-    double normr, normb;
+    double normr;
+    double normb;
 
     gsl_vector_memcpy(r, rhs);
     gsl_spblas_dgemv(CblasNoTrans, -1.0, A, x, 1.0, r);
@@ -289,9 +296,9 @@ test_random(const size_t N, const gsl_rng *r, const int compress)
 {
   const gsl_splinalg_itersolve_type *T = gsl_splinalg_itersolve_gmres;
   const double tol = 1.0e-8;
-  int status;
+  int status = 0;
   gsl_spmatrix *A = create_random_sparse(N, N, 0.3, r);
-  gsl_spmatrix *B;
+  gsl_spmatrix *B = NULL;
   gsl_vector *b = gsl_vector_alloc(N);
   gsl_vector *x = gsl_vector_calloc(N);
 
@@ -302,10 +309,11 @@ test_random(const size_t N, const gsl_rng *r, const int compress)
 
   create_random_vector(b, r);
 
-  if (compress)
+  if (compress) {
     B = gsl_spmatrix_compcol(A);
-  else
+  } else {
     B = A;
+}
 
   status = gsl_splinalg_itersolve_iterate(B, b, tol, x, w);
   gsl_test(status, "%s random status s=%d N=%zu", desc, status, N);
@@ -313,7 +321,8 @@ test_random(const size_t N, const gsl_rng *r, const int compress)
   /* check that the residual satisfies ||r|| <= tol*||b|| */
   {
     gsl_vector *res = gsl_vector_alloc(N);
-    double normr, normb;
+    double normr;
+    double normb;
 
     gsl_vector_memcpy(res, b);
     gsl_spblas_dgemv(CblasNoTrans, -1.0, A, x, 1.0, res);
@@ -333,15 +342,16 @@ test_random(const size_t N, const gsl_rng *r, const int compress)
   gsl_vector_free(x);
   gsl_splinalg_itersolve_free(w);
 
-  if (compress)
+  if (compress) {
     gsl_spmatrix_free(B);
+}
 } /* test_random() */
 
 int
 main()
 {
   gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
-  size_t n;
+  size_t n = 0;
 
   test_poisson(7, 1.0e-1, 0);
   test_poisson(7, 1.0e-1, 1);

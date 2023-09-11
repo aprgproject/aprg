@@ -21,6 +21,7 @@
 */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -134,7 +135,8 @@ static int jac_xsin_reset = 0;
 int
 rhs_xsin (double t, const double y[], double f[], void *params)
 {
-  static int n = 0, m = 0;
+  static int n = 0;
+  static int m = 0;
   
   if (rhs_xsin_reset) { rhs_xsin_reset = 0; n = 0; m = 1;}
   n++;
@@ -489,7 +491,7 @@ test_odeiv_stepper (const gsl_odeiv_step_type *T, const gsl_odeiv_system *sys,
   double y[MAXEQ] = {0.0};
   double yerr[MAXEQ] = {0.0};
   size_t ne = sys->dimension;
-  size_t i;
+  size_t i = 0;
 
   gsl_odeiv_step *step = gsl_odeiv_step_alloc (T, ne);
 
@@ -522,10 +524,10 @@ test_stepper (const gsl_odeiv_step_type *T)
   double yfin[MAXEQ] = {0.0};
 
   /* Step length */
-  double h;
+  double h = NAN;
 
   /* Required tolerance */
-  double err_target;
+  double err_target = NAN;
 
   /* linear */
   h = 1e-1;
@@ -581,7 +583,7 @@ test_evolve_system (const gsl_odeiv_step_type * T,
   */     
   
   int steps = 0;
-  size_t i;
+  size_t i = 0;
 
   double t = t0;
   double h = hstart;
@@ -601,7 +603,7 @@ test_evolve_system (const gsl_odeiv_step_type * T,
   while (t < t1)
     {
       double t_orig = t;
-      int s;
+      int s = 0;
       memcpy (y_orig, y, sys->dimension * sizeof(double));
       s= gsl_odeiv_evolve_apply (e, c, step, sys, &t, t1, &h, y);
 
@@ -720,7 +722,7 @@ test_compare_vanderpol (void)
   const size_t sd = 2;
   
   const gsl_odeiv_step_type *steppers[20];
-  const gsl_odeiv_step_type **T;
+  const gsl_odeiv_step_type **T = NULL;
 
   /* Required error tolerance for each stepper. */
   double err_target[20];
@@ -732,7 +734,9 @@ test_compare_vanderpol (void)
   double y[11][2];
   double *yp = &y[0][0];
 
-  size_t i, j, k;
+  size_t i;
+  size_t j;
+  size_t k;
   int status = 0;
 
   /* Parameters for the problem and stepper  */
@@ -804,8 +808,8 @@ test_compare_vanderpol (void)
       
   T = steppers;
 
-  for (i = 0; i < ns; i++)
-    for (j = i+1; j < ns; j++)
+  for (i = 0; i < ns; i++) {
+    for (j = i+1; j < ns; j++) {
       for (k = 0; k < sd; k++)
 	{
 	  const double val1 = yp[sd * i + k];
@@ -815,6 +819,8 @@ test_compare_vanderpol (void)
 			"%s/%s vanderpol",
 			T[i]->name, T[j]->name);
 	}
+}
+}
 
 }
 
@@ -827,7 +833,7 @@ test_compare_oregonator (void)
   const size_t sd = 3;
   
   const gsl_odeiv_step_type *steppers[20];
-  const gsl_odeiv_step_type **T;
+  const gsl_odeiv_step_type **T = NULL;
 
   /* Required error tolerance for each stepper. */
   double err_target[20];
@@ -839,7 +845,9 @@ test_compare_oregonator (void)
   double y[2][3];
   double *yp = &y[0][0];
 
-  size_t i, j, k;
+  size_t i;
+  size_t j;
+  size_t k;
   int status = 0;
   
   /* Parameters for the problem and stepper  */
@@ -895,8 +903,8 @@ test_compare_oregonator (void)
   
   T = steppers;
 
-  for (i = 0; i < ns; i++)
-    for (j = i+1; j < ns; j++)
+  for (i = 0; i < ns; i++) {
+    for (j = i+1; j < ns; j++) {
       for (k = 0; k < sd; k++)
 	{
 	  const double val1 = yp[sd * i + k];
@@ -906,6 +914,8 @@ test_compare_oregonator (void)
 			"%s/%s oregonator",
 			T[i]->name, T[j]->name);
 	}
+}
+}
 
 }
 
@@ -1004,10 +1014,11 @@ test_evolve_stiff5 (const gsl_odeiv_step_type * T, double h, double err)
 /* Test cases from Frank Reininghaus <frank78ac@googlemail.com> */
 
 int rhs_stepfn (double t, const double * y, double * dydt, void * params) {
-  if (t >= 1.0)
+  if (t >= 1.0) {
     dydt [0] = 1;
-  else
+  } else {
     dydt [0] = 0;
+}
 
   return GSL_SUCCESS;
 }
@@ -1027,15 +1038,16 @@ void test_stepfn (void) {
   double h = 1e-6;
   double y = 0.0;
   int i = 0;
-  int status;
+  int status = 0;
 
   while (t < 2.0 && i < 1000000) {
     status = gsl_odeiv_evolve_apply (e, c, s, &sys, &t, 2, &h, &y);
 #ifdef DEBUG
     printf("i=%d status=%d t=%g h=%g y=%g\n", i, status, t, h, y);
 #endif
-    if (status != GSL_SUCCESS)
+    if (status != GSL_SUCCESS) {
       break;
+}
     
     i++;
   }
@@ -1049,10 +1061,11 @@ void test_stepfn (void) {
 }
 
 int rhs_stepfn2 (double t, const double * y, double * dydt, void * params) {
-  if (t >= 0.0)
+  if (t >= 0.0) {
     dydt [0] = 1e300;
-  else
+  } else {
     dydt [0] = 0;
+}
 
   return GSL_SUCCESS;
 }
@@ -1073,15 +1086,16 @@ void test_stepfn2 (void) {
   double y = 0.0;
 
   int i = 0;
-  int status;
+  int status = 0;
 
   while (t < 1.0 && i < 10000) {
     status = gsl_odeiv_evolve_apply (e, c, s, &sys, &t, 1.0, &h, &y);
 #ifdef DEBUG
     printf("i=%d status=%d t=%g h=%g y=%g\n", i, status, t, h, y);
 #endif
-    if (status != GSL_SUCCESS)
+    if (status != GSL_SUCCESS) {
       break;
+}
 
     i++;
   }
@@ -1098,10 +1112,11 @@ int rhs_stepfn3 (double t, const double * y, double * dydt, void * params) {
 
   static int calls = 0;
 
-  if (t >= 0.0)
+  if (t >= 0.0) {
     dydt [0] = 1e300;
-  else
+  } else {
     dydt [0] = 0;
+}
 
   calls++;
 
@@ -1125,15 +1140,16 @@ void test_stepfn3 (void) {
   double y = 0.0;
 
   int i = 0;
-  int status;
+  int status = 0;
 
   while (t < 1.0 && i < 10000) {
     status = gsl_odeiv_evolve_apply (e, c, s, &sys, &t, 1.0, &h, &y);
 #ifdef DEBUG
     printf("i=%d status=%d t=%g h=%g y=%g\n", i, status, t, h, y);
 #endif
-    if (status != GSL_SUCCESS)
+    if (status != GSL_SUCCESS) {
       break;
+}
 
     i++;
   }
@@ -1205,7 +1221,7 @@ test_evolve_negative_h (const gsl_odeiv_step_type * T, double h, double err)
 int
 main (void)
 {
-  int i;
+  int i = 0;
 
   struct ptype
   {

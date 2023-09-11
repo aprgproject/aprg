@@ -76,7 +76,7 @@ triangular_multherm_L2(CBLAS_UPLO_t Uplo, gsl_matrix_complex * T)
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       if (Uplo == CblasUpper)
         {
@@ -157,7 +157,7 @@ triangular_multherm_L3(CBLAS_UPLO_t Uplo, gsl_matrix_complex * T)
        *
        * where T11 is N1-by-N1
        */
-      int status;
+      int status = 0;
       const size_t N1 = GSL_LINALG_SPLIT_COMPLEX(N);
       const size_t N2 = N - N1;
       gsl_matrix_complex_view T11 = gsl_matrix_complex_submatrix(T, 0, 0, N1, N1);
@@ -167,8 +167,9 @@ triangular_multherm_L3(CBLAS_UPLO_t Uplo, gsl_matrix_complex * T)
 
       /* recursion on T11 */
       status = triangular_multherm_L3(Uplo, &T11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       if (Uplo == CblasLower)
         {
@@ -189,8 +190,9 @@ triangular_multherm_L3(CBLAS_UPLO_t Uplo, gsl_matrix_complex * T)
 
       /* recursion on T22 */
       status = triangular_multherm_L3(Uplo, &T22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       return GSL_SUCCESS;
     }
@@ -222,11 +224,12 @@ triangular_mult_L2(CBLAS_UPLO_t Uplo, gsl_matrix_complex * LU)
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* quick return */
-      if (N == 1)
+      if (N == 1) {
         return GSL_SUCCESS;
+}
 
       if (Uplo == CblasUpper)
         {
@@ -305,7 +308,7 @@ triangular_mult_L3(CBLAS_UPLO_t Uplo, gsl_matrix_complex * A)
        *
        * where A11 is N1-by-N1
        */
-      int status;
+      int status = 0;
       const size_t N1 = GSL_LINALG_SPLIT_COMPLEX(N);
       const size_t N2 = N - N1;
       gsl_matrix_complex_view A11 = gsl_matrix_complex_submatrix(A, 0, 0, N1, N1);
@@ -315,8 +318,9 @@ triangular_mult_L3(CBLAS_UPLO_t Uplo, gsl_matrix_complex * A)
 
       /* recursion on A11 */
       status = triangular_mult_L3(Uplo, &A11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       if (Uplo == CblasLower)
         {
@@ -337,8 +341,9 @@ triangular_mult_L3(CBLAS_UPLO_t Uplo, gsl_matrix_complex * A)
 
       /* recursion on A22 */
       status = triangular_mult_L3(Uplo, &A22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       return GSL_SUCCESS;
     }
@@ -347,7 +352,7 @@ triangular_mult_L3(CBLAS_UPLO_t Uplo, gsl_matrix_complex * A)
 static void
 complex_conj_vector(gsl_vector_complex * v)
 {
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < v->size; ++i)
     {

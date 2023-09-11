@@ -36,7 +36,7 @@ cmp_cplx(const double *a, const double *b)
       double t = a[1] - b[1];
 	    return t < 0.0 ? -1 : t > 0.0 ? 1 : 0;
     }
-  else if (r < 0.0)
+  if (r < 0.0)
     return -1;
   else
     return 1;
@@ -52,7 +52,8 @@ main (void)
   /* Polynomial evaluation */
 
   {
-    double x, y;
+    double x;
+    double y;
     double c[3] = { 1.0, 0.5, 0.3 };
     x = 0.5;
     y = gsl_poly_eval (c, 3, x);
@@ -61,7 +62,8 @@ main (void)
   }
 
   {
-    double x, y;
+    double x;
+    double y;
     double d[11] = { 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1 };
     x = 1.0;
     y = gsl_poly_eval (d, 11, x);
@@ -71,7 +73,8 @@ main (void)
   }
 
   {
-    gsl_complex x, y;
+    gsl_complex x;
+    gsl_complex y;
     double c[1] = {0.3};
     GSL_SET_REAL (&x, 0.75);
     GSL_SET_IMAG (&x, 1.2);
@@ -82,7 +85,8 @@ main (void)
   }
 
   {
-    gsl_complex x, y;
+    gsl_complex x;
+    gsl_complex y;
     double c[4] = {2.1, -1.34, 0.76, 0.45};
     GSL_SET_REAL (&x, 0.49);
     GSL_SET_IMAG (&x, 0.95);
@@ -93,7 +97,8 @@ main (void)
   }
 
   {
-    gsl_complex x, y;
+    gsl_complex x;
+    gsl_complex y;
     gsl_complex c[1];
     GSL_SET_REAL (&c[0], 0.674);
     GSL_SET_IMAG (&c[0], -1.423);
@@ -106,7 +111,8 @@ main (void)
   }
 
   {
-    gsl_complex x, y;
+    gsl_complex x;
+    gsl_complex y;
     gsl_complex c[4];
     GSL_SET_REAL (&c[0], -2.31);
     GSL_SET_IMAG (&c[0], 0.44);
@@ -127,7 +133,8 @@ main (void)
   /* Quadratic */
 
   {
-    double x0, x1;
+    double x0;
+    double x1;
 
     int n = gsl_poly_solve_quadratic (4.0, -20.0, 26.0, &x0, &x1);
 
@@ -135,7 +142,8 @@ main (void)
   }
 
   {
-    double x0, x1;
+    double x0;
+    double x1;
 
     int n = gsl_poly_solve_quadratic (4.0, -20.0, 25.0, &x0, &x1);
 
@@ -146,7 +154,8 @@ main (void)
   }
 
   {
-    double x0, x1;
+    double x0;
+    double x1;
 
     int n = gsl_poly_solve_quadratic (4.0, -20.0, 21.0, &x0, &x1);
 
@@ -156,7 +165,8 @@ main (void)
   }
 
   {
-    double x0, x1;
+    double x0;
+    double x1;
 
     int n = gsl_poly_solve_quadratic (4.0, 7.0, 0.0, &x0, &x1);
 
@@ -166,7 +176,8 @@ main (void)
   }
 
   {
-    double x0, x1;
+    double x0;
+    double x1;
 
     int n = gsl_poly_solve_quadratic (5.0, 0.0, -20.0, &x0, &x1);
 
@@ -178,7 +189,8 @@ main (void)
 
 
   {
-    double x0, x1;
+    double x0;
+    double x1;
 
     int n = gsl_poly_solve_quadratic (0.0, 3.0, -21.0, &x0, &x1);
 
@@ -189,7 +201,8 @@ main (void)
 
 
   {
-    double x0, x1;
+    double x0;
+    double x1;
     int n = gsl_poly_solve_quadratic (0.0, 0.0, 1.0, &x0, &x1);
 
     gsl_test (n != 0,
@@ -200,7 +213,9 @@ main (void)
   /* Cubic */
 
   {
-    double x0, x1, x2;
+    double x0;
+    double x1;
+    double x2;
 
     int n = gsl_poly_solve_cubic (0.0, 0.0, -27.0, &x0, &x1, &x2);
 
@@ -209,7 +224,9 @@ main (void)
   }
 
   {
-    double x0, x1, x2;
+    double x0;
+    double x1;
+    double x2;
 
     int n = gsl_poly_solve_cubic (-51.0, 867.0, -4913.0, &x0, &x1, &x2);
 
@@ -220,7 +237,9 @@ main (void)
   }
 
   {
-    double x0, x1, x2;
+    double x0;
+    double x1;
+    double x2;
 
     int n = gsl_poly_solve_cubic (-57.0, 1071.0, -6647.0, &x0, &x1, &x2);
 
@@ -232,7 +251,9 @@ main (void)
   }
 
   {
-    double x0, x1, x2;
+    double x0;
+    double x1;
+    double x2;
 
     int n = gsl_poly_solve_cubic (-11.0, -493.0, +6647.0, &x0, &x1, &x2);
 
@@ -244,7 +265,9 @@ main (void)
   }
 
   {
-    double x0, x1, x2;
+    double x0;
+    double x1;
+    double x2;
 
     int n = gsl_poly_solve_cubic (-143.0, 5087.0, -50065.0, &x0, &x1, &x2);
 
@@ -256,7 +279,9 @@ main (void)
   }
 
   {
-    double x0, x1, x2;
+    double x0;
+    double x1;
+    double x2;
 
     int n = gsl_poly_solve_cubic (-109.0, 803.0, 50065.0, &x0, &x1, &x2);
 
@@ -270,7 +295,8 @@ main (void)
   /* Quadratic with complex roots */
 
   {
-    gsl_complex z0, z1;
+    gsl_complex z0;
+    gsl_complex z1;
 
     int n = gsl_poly_complex_solve_quadratic (4.0, -20.0, 26.0, &z0, &z1);
 
@@ -284,7 +310,8 @@ main (void)
   }
 
   {
-    gsl_complex z0, z1;
+    gsl_complex z0;
+    gsl_complex z1;
 
     int n = gsl_poly_complex_solve_quadratic (4.0, -20.0, 25.0, &z0, &z1);
 
@@ -301,7 +328,8 @@ main (void)
   }
 
   {
-    gsl_complex z0, z1;
+    gsl_complex z0;
+    gsl_complex z1;
 
     int n = gsl_poly_complex_solve_quadratic (4.0, -20.0, 21.0, &z0, &z1);
 
@@ -314,7 +342,8 @@ main (void)
   }
 
   {
-    gsl_complex z0, z1;
+    gsl_complex z0;
+    gsl_complex z1;
 
     int n = gsl_poly_complex_solve_quadratic (4.0, 7.0, 0.0, &z0, &z1);
 
@@ -327,7 +356,8 @@ main (void)
   }
 
   {
-    gsl_complex z0, z1;
+    gsl_complex z0;
+    gsl_complex z1;
 
     int n = gsl_poly_complex_solve_quadratic (5.0, 0.0, -20.0, &z0, &z1);
 
@@ -340,7 +370,8 @@ main (void)
   }
 
   {
-    gsl_complex z0, z1;
+    gsl_complex z0;
+    gsl_complex z1;
 
     int n = gsl_poly_complex_solve_quadratic (5.0, 0.0, 20.0, &z0, &z1);
 
@@ -354,7 +385,8 @@ main (void)
 
 
   {
-    gsl_complex z0, z1;
+    gsl_complex z0;
+    gsl_complex z1;
 
     int n = gsl_poly_complex_solve_quadratic (0.0, 3.0, -21.0, &z0, &z1);
 
@@ -367,7 +399,8 @@ main (void)
 
 
   {
-    gsl_complex z0, z1;
+    gsl_complex z0;
+    gsl_complex z1;
 
     int n = gsl_poly_complex_solve_quadratic (0.0, 0.0, 1.0, &z0, &z1);
     gsl_test (n != 0,
@@ -379,7 +412,9 @@ main (void)
   /* Cubic with complex roots */
 
   {
-    gsl_complex z0, z1, z2;
+    gsl_complex z0;
+    gsl_complex z1;
+    gsl_complex z2;
 
     int n = gsl_poly_complex_solve_cubic (0.0, 0.0, -27.0, &z0, &z1, &z2);
 
@@ -394,7 +429,9 @@ main (void)
   }
 
   {
-    gsl_complex z0, z1, z2;
+    gsl_complex z0;
+    gsl_complex z1;
+    gsl_complex z2;
 
     int n = gsl_poly_complex_solve_cubic (-1.0, 1.0, 39.0, &z0, &z1, &z2);
 
@@ -409,7 +446,9 @@ main (void)
   }
 
   {
-    gsl_complex z0, z1, z2;
+    gsl_complex z0;
+    gsl_complex z1;
+    gsl_complex z2;
 
     int n =
       gsl_poly_complex_solve_cubic (-51.0, 867.0, -4913.0, &z0, &z1, &z2);
@@ -425,7 +464,9 @@ main (void)
   }
 
   {
-    gsl_complex z0, z1, z2;
+    gsl_complex z0;
+    gsl_complex z1;
+    gsl_complex z2;
 
     int n =
       gsl_poly_complex_solve_cubic (-57.0, 1071.0, -6647.0, &z0, &z1, &z2);
@@ -441,7 +482,9 @@ main (void)
   }
 
   {
-    gsl_complex z0, z1, z2;
+    gsl_complex z0;
+    gsl_complex z1;
+    gsl_complex z2;
 
     int n =
       gsl_poly_complex_solve_cubic (-11.0, -493.0, +6647.0, &z0, &z1, &z2);
@@ -459,7 +502,9 @@ main (void)
 
 
   {
-    gsl_complex z0, z1, z2;
+    gsl_complex z0;
+    gsl_complex z1;
+    gsl_complex z2;
 
     int n =
       gsl_poly_complex_solve_cubic (-143.0, 5087.0, -50065.0, &z0, &z1, &z2);
@@ -565,7 +610,7 @@ main (void)
       2.0000000000000000,    0.00000000000000000,
       2.0000000000000000,    0.00000000000000000 };
 
-    int i;
+    int i = 0;
 
     gsl_poly_complex_workspace *w = gsl_poly_complex_workspace_alloc (16);
 
@@ -586,7 +631,7 @@ main (void)
 
 
   {
-    int i;
+    int i = 0;
 
     double xa[7] = {0.16, 0.97, 1.94, 2.74, 3.58, 3.73, 4.70 };
     double ya[7] = {0.73, 1.11, 1.49, 1.84, 2.30, 2.41, 3.07 };
@@ -599,7 +644,9 @@ main (void)
                                6.12763259971375e-03,
                               -6.45402453527083e-03 };
 
-    double dd[7], coeff[7], work[7];
+    double dd[7];
+    double coeff[7];
+    double work[7];
     
     gsl_poly_dd_init (dd, xa, ya, 7);
 
@@ -624,7 +671,7 @@ main (void)
   }
 
   {
-    size_t i;
+    size_t i = 0;
     double xa[3] = { 1.3, 1.6, 1.9 };
     double ya[3] = { 0.6200860, 0.4554022, 0.2818186 };
     double dya[3] = { -0.5220232, -0.5698959, -0.5811571 };
@@ -636,7 +683,10 @@ main (void)
                                2.666666666662e-03,
                               -2.774691357989e-03 };
 
-    double dd[6], za[6], coeff[6], work[6];
+    double dd[6];
+    double za[6];
+    double coeff[6];
+    double work[6];
 
     gsl_poly_dd_hermite_init(dd, za, xa, ya, dya, 3);
 
@@ -661,7 +711,7 @@ main (void)
   {
     double c[6] = { +1.0, -2.0, +3.0, -4.0, +5.0, -6.0 };
     double dc[6];
-    double x;
+    double x = NAN;
     x = -0.5;
     gsl_poly_eval_derivs(c, 6, x, dc, 6);
 

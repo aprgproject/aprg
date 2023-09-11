@@ -37,7 +37,7 @@ int
 gsl_linalg_balance_columns (gsl_matrix * A, gsl_vector * D)
 {
   const size_t N = A->size2;
-  size_t j;
+  size_t j = 0;
 
   if (D->size != A->size2)
     {

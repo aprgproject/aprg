@@ -38,7 +38,8 @@ R_norm(const int n, const int l, const double Z, gsl_sf_result * result)
 {
   double A   = 2.0*Z/n;
   double pre = sqrt(A*A*A /(2.0*n));
-  gsl_sf_result ln_a, ln_b;
+  gsl_sf_result ln_a;
+  gsl_sf_result ln_b;
   gsl_sf_result ex;
   int stat_a = gsl_sf_lnfact_e(n+l, &ln_a);
   int stat_b = gsl_sf_lnfact_e(n-l-1, &ln_b);
@@ -66,9 +67,9 @@ gsl_sf_hydrogenicR_1_e(const double Z, const double r, gsl_sf_result * result)
     CHECK_UNDERFLOW(result);
     return GSL_SUCCESS;
   }
-  else {
+  
     DOMAIN_ERROR(result);
-  }
+ 
 }
 
 

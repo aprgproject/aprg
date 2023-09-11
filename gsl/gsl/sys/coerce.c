@@ -24,7 +24,7 @@
 double 
 gsl_coerce_double (const double x)
 {
-  volatile double y;
+  volatile double y = NAN;
   y = x;
   return y;
 }
@@ -32,7 +32,7 @@ gsl_coerce_double (const double x)
 float 
 gsl_coerce_float (const float x)
 {
-  volatile float y;
+  volatile float y = NAN;
   y = x;
   return y;
 }
@@ -42,7 +42,7 @@ gsl_coerce_float (const float x)
 long double 
 gsl_coerce_long_double (const long double x)
 {
-  volatile long double y;
+  volatile long double y = NAN;
   y = x;
   return y;
 }

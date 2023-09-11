@@ -55,13 +55,14 @@ void test_halton(void)
 {
 	int status = 0;
 	double v[1229];
-	unsigned int i;
+	unsigned int i = 0;
 
 	/* test in dimension 1229 */
 
 	gsl_qrng * g = gsl_qrng_alloc(gsl_qrng_halton, 1229);
-	for (i=0;i<30;i++)
+	for (i=0;i<30;i++) {
 		gsl_qrng_get(g, v);
+}
 	gsl_qrng_free(g);
 
 	gsl_test (status, "Halton d=1229");

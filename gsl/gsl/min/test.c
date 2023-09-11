@@ -43,10 +43,14 @@ void my_error_handler (const char *reason, const char *file,
 int
 main (void)
 {
-  gsl_function F_cos, F_func1, F_func2, F_func3, F_func4;
+  gsl_function F_cos;
+  gsl_function F_func1;
+  gsl_function F_func2;
+  gsl_function F_func3;
+  gsl_function F_func4;
   
   const gsl_min_fminimizer_type * fminimizer[4] ;
-  const gsl_min_fminimizer_type ** T;
+  const gsl_min_fminimizer_type ** T = NULL;
 
   gsl_ieee_env_setup ();
 
@@ -89,11 +93,14 @@ test_f (const gsl_min_fminimizer_type * T,
         double lower_bound, double middle, double upper_bound, 
         double correct_minimum)
 {
-  int status;
+  int status = 0;
   size_t iterations = 0;
-  double m, a, b;
-  double x_lower, x_upper;
-  gsl_min_fminimizer * s;
+  double m;
+  double a;
+  double b;
+  double x_lower;
+  double x_upper;
+  gsl_min_fminimizer * s = NULL;
 
   x_lower = lower_bound;
   x_upper = upper_bound;
@@ -116,13 +123,16 @@ test_f (const gsl_min_fminimizer_type * T,
              a, GSL_FN_EVAL(f, a), m, GSL_FN_EVAL(f, m), b, GSL_FN_EVAL(f, b), status);
 #endif
 
-      if (a > b)
+      if (a > b) {
         gsl_test (GSL_FAILURE, "interval is invalid (%g,%g)", a, b);
+}
 
-      if (m < a || m > b)
+      if (m < a || m > b) {
         gsl_test (GSL_FAILURE, "m lies outside interval %g (%g,%g)", m, a, b);
+}
 
-      if (status) break ;
+      if (status) { break ;
+}
 
       status = gsl_min_test_interval (a, b, EPSABS, EPSREL);
     }
@@ -150,11 +160,13 @@ test_f_e (const gsl_min_fminimizer_type * T,
           double lower_bound, double middle, double upper_bound, 
           double correct_minimum)
 {
-  int status;
+  int status = 0;
   size_t iterations = 0;
-  double x_lower, x_upper;
-  double a, b;
-  gsl_min_fminimizer * s;
+  double x_lower;
+  double x_upper;
+  double a;
+  double b;
+  gsl_min_fminimizer * s = NULL;
 
   x_lower = lower_bound;
   x_upper = upper_bound;
@@ -189,18 +201,22 @@ test_f_e (const gsl_min_fminimizer_type * T,
 void
 my_error_handler (const char *reason, const char *file, int line, int err)
 {
-  if (0)
+  if (0) {
     printf ("(caught [%s:%d: %s (%d)])\n", file, line, reason, err);
+}
 }
 
 int
 test_bracket (const char * description,gsl_function *f,double lower_bound, 
               double upper_bound, unsigned int max)
 {
-  int status;
-  double x_lower, x_upper;
-  double f_upper,f_lower,f_minimum;
-  double x_minimum;
+  int status = 0;
+  double x_lower;
+  double x_upper;
+  double f_upper;
+  double f_lower;
+  double f_minimum;
+  double x_minimum = NAN;
 
   x_lower=lower_bound;
   x_upper=upper_bound;

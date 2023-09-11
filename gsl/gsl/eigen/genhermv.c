@@ -51,7 +51,7 @@ Return: pointer to workspace
 gsl_eigen_genhermv_workspace *
 gsl_eigen_genhermv_alloc(const size_t n)
 {
-  gsl_eigen_genhermv_workspace *w;
+  gsl_eigen_genhermv_workspace *w = NULL;
 
   if (n == 0)
     {
@@ -88,8 +88,9 @@ gsl_eigen_genhermv_free (gsl_eigen_genhermv_workspace * w)
 {
   RETURN_IF_NULL (w);
 
-  if (w->hermv_workspace_p)
+  if (w->hermv_workspace_p) {
     gsl_eigen_hermv_free(w->hermv_workspace_p);
+}
 
   free(w);
 } /* gsl_eigen_genhermv_free() */
@@ -147,20 +148,22 @@ gsl_eigen_genhermv (gsl_matrix_complex * A, gsl_matrix_complex * B,
     }
   else
     {
-      int s;
+      int s = 0;
 
       /* compute Cholesky factorization of B */
       s = gsl_linalg_complex_cholesky_decomp(B);
-      if (s != GSL_SUCCESS)
+      if (s != GSL_SUCCESS) {
         return s; /* B is not positive definite */
+}
 
       /* transform to standard hermitian eigenvalue problem */
       gsl_eigen_genherm_standardize(A, B);
 
       /* compute eigenvalues and eigenvectors */
       s = gsl_eigen_hermv(A, eval, evec, w->hermv_workspace_p);
-      if (s != GSL_SUCCESS)
+      if (s != GSL_SUCCESS) {
         return s;
+}
 
       /* backtransform eigenvectors: evec -> L^{-H} evec */
       gsl_blas_ztrsm(CblasLeft,
@@ -193,7 +196,7 @@ static void
 genhermv_normalize_eigenvectors(gsl_matrix_complex *evec)
 {
   const size_t N = evec->size1;
-  size_t i;     /* looping */
+  size_t i = 0;     /* looping */
 
   for (i = 0; i < N; ++i)
     {

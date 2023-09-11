@@ -123,8 +123,10 @@ double f15 (double x, void * params) {
 
 double f16 (double x, void * params) {
   double alpha = *(double *) params ;
-  if (x==0 && alpha == 1) return 1 ;  /* make the function continuous in x */
-  if (x==0 && alpha > 1) return 0 ;   /* avoid problems with pow(0,1) */
+  if (x==0 && alpha == 1) { return 1 ;  /* make the function continuous in x */
+}
+  if (x==0 && alpha > 1) { return 0 ;   /* avoid problems with pow(0,1) */
+}
   return pow(x,alpha-1)/pow((1+10*x),2.0) ;
 }
 
@@ -186,13 +188,13 @@ double f458 (double x, void * params) {
     {
       return 0;
     }
-  else 
-    {
+  
+    
       double u = log(x);
       double v = 1 + u * u;
       
       return 1.0 / (v * v) ;
-    }
+   
 }
 
 /* f459(x) = 1/(5 x^3 + 6) */
@@ -319,7 +321,8 @@ double cqf16 ( double x , void *params ) {
 }
 
 double cqf17 ( double x , void *params ) {
-  double t1 = 50 * M_PI * x ,t2;
+  double t1 = 50 * M_PI * x ;
+  double t2;
   t2 = sin(t1) / t1;
   return 50 * t2 * t2;
 }

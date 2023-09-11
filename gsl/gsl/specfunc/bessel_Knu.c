@@ -60,9 +60,14 @@ gsl_sf_bessel_Knu_scaled_e10_e(const double nu, const double x, gsl_sf_result_e1
   else {
     int N = (int)(nu + 0.5);
     double mu = nu - N;      /* -1/2 <= mu <= 1/2 */
-    double K_mu, K_mup1, Kp_mu;
-    double K_nu, K_nup1, K_num1;
-    int n, e10 = 0;
+    double K_mu;
+    double K_mup1;
+    double Kp_mu;
+    double K_nu;
+    double K_nup1;
+    double K_num1;
+    int n;
+    int e10 = 0;
 
     if(x < 2.0) {
       gsl_sf_bessel_K_scaled_temme(mu, x, &K_mu, &K_mup1, &Kp_mu);
@@ -135,7 +140,7 @@ gsl_sf_bessel_lnKnu_e(const double nu, const double x, gsl_sf_result * result)
      * we decide whether or not there is an overflow
      * problem because x is small.
      */
-    double ln_bound;
+    double ln_bound = NAN;
     gsl_sf_result lg_nu;
     gsl_sf_lngamma_e(nu, &lg_nu);
     ln_bound = -M_LN2 - nu*log(0.5*x) + lg_nu.val;
@@ -144,7 +149,8 @@ gsl_sf_bessel_lnKnu_e(const double nu, const double x, gsl_sf_result * result)
        */
       double xi  = 0.25*x*x;
       double sum = 1.0 - xi/(nu-1.0);
-      if(nu > 2.0) sum +=  (xi/(nu-1.0)) * (xi/(nu-2.0));
+      if(nu > 2.0) { sum +=  (xi/(nu-1.0)) * (xi/(nu-2.0));
+}
       result->val  = ln_bound + log(sum);
       result->err  = lg_nu.err;
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);

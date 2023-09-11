@@ -27,6 +27,7 @@
 #include <gsl/gsl_sf_exp.h>
 #include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_sf_hyperg.h>
+#include <math.h>
 
 #include "error.h"
 #include "check.h"
@@ -49,25 +50,28 @@ beta_cont_frac(
   const unsigned int max_iter = 512;        /* control iterations      */
   const double cutoff = 2.0 * GSL_DBL_MIN;  /* control the zero cutoff */
   unsigned int iter_count = 0;
-  double cf;
+  double cf = NAN;
 
   /* standard initialization for continued fraction */
   double num_term = 1.0;
   double den_term = 1.0 - (a+b)*x/(a+1.0);
-  if (fabs(den_term) < cutoff) den_term = cutoff;
+  if (fabs(den_term) < cutoff) { den_term = cutoff;
+}
   den_term = 1.0/den_term;
   cf = den_term;
 
   while(iter_count < max_iter) {
     const int k  = iter_count + 1;
     double coeff = k*(b-k)*x/(((a-1.0)+2*k)*(a+2*k));
-    double delta_frac;
+    double delta_frac = NAN;
 
     /* first step */
     den_term = 1.0 + coeff*den_term;
     num_term = 1.0 + coeff/num_term;
-    if(fabs(den_term) < cutoff) den_term = cutoff;
-    if(fabs(num_term) < cutoff) num_term = cutoff;
+    if(fabs(den_term) < cutoff) { den_term = cutoff;
+}
+    if(fabs(num_term) < cutoff) { num_term = cutoff;
+}
     den_term  = 1.0/den_term;
 
     delta_frac = den_term * num_term;
@@ -78,14 +82,17 @@ beta_cont_frac(
     /* second step */
     den_term = 1.0 + coeff*den_term;
     num_term = 1.0 + coeff/num_term;
-    if(fabs(den_term) < cutoff) den_term = cutoff;
-    if(fabs(num_term) < cutoff) num_term = cutoff;
+    if(fabs(den_term) < cutoff) { den_term = cutoff;
+}
+    if(fabs(num_term) < cutoff) { num_term = cutoff;
+}
     den_term = 1.0/den_term;
 
     delta_frac = den_term*num_term;
     cf *= delta_frac;
 
-    if(fabs(delta_frac-1.0) < 2.0*GSL_DBL_EPSILON) break;
+    if(fabs(delta_frac-1.0) < 2.0*GSL_DBL_EPSILON) { break;
+}
 
     ++iter_count;
   }
@@ -93,10 +100,11 @@ beta_cont_frac(
   result->val = cf;
   result->err = iter_count * 4.0 * GSL_DBL_EPSILON * fabs(cf);
 
-  if(iter_count >= max_iter)
+  if(iter_count >= max_iter) {
     GSL_ERROR ("error", GSL_EMAXITER);
-  else
+  } else {
     return GSL_SUCCESS;
+}
 }
 
 
@@ -127,8 +135,9 @@ gsl_sf_beta_inc_e(
     result->err = 0.0;
     return GSL_SUCCESS;
   } else if (a <= 0 || b <= 0) {
-    gsl_sf_result f, beta;
-    int stat;
+    gsl_sf_result f;
+    gsl_sf_result beta;
+    int stat = 0;
     const int stat_f = gsl_sf_hyperg_2F1_e(a, 1-b, a+1, x, &f);
     const int stat_beta = gsl_sf_beta_e(a, b, &beta);
     double prefactor = (pow(x, a) / a);
@@ -164,7 +173,7 @@ gsl_sf_beta_inc_e(
       /* Apply continued fraction directly. */
       gsl_sf_result cf;
       const int stat_cf = beta_cont_frac(a, b, x, &cf);
-      int stat;
+      int stat = 0;
       result->val = prefactor.val * cf.val / a;
       result->err = (fabs(prefactor.err * cf.val) + fabs(prefactor.val * cf.err))/a;
 
@@ -174,7 +183,7 @@ gsl_sf_beta_inc_e(
       }
       return stat;
     }
-    else {
+    
       /* Apply continued fraction after hypergeometric transformation. */
       gsl_sf_result cf;
       const int stat_cf = beta_cont_frac(b, a, 1.0-x, &cf);
@@ -195,7 +204,7 @@ gsl_sf_beta_inc_e(
         CHECK_UNDERFLOW(result);
       }
       return stat;
-    }
+   
   }
 }
 

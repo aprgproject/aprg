@@ -29,10 +29,10 @@
 void
 test1d_resample (void)
 {
-  size_t i;
+  size_t i = 0;
   int status = 0;
 
-  gsl_histogram *h;
+  gsl_histogram *h = NULL;
 
   gsl_ieee_env_setup ();
 
@@ -60,9 +60,10 @@ test1d_resample (void)
     for (i = 0; i < 100; i++)
       {
         double y = gsl_histogram_get (hh, i) / 2500;
-        double x, xmax;
-        size_t k;
-        double ya;
+        double x;
+        double xmax;
+        size_t k = 0;
+        double ya = NAN;
 
         gsl_histogram_get_range (hh, i, &x, &xmax);
 

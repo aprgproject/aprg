@@ -20,6 +20,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -93,7 +94,7 @@ test_fixed_quadrature(const gsl_integration_fixed_type * T, const size_t n,
   int status = GSL_SUCCESS;
   gsl_integration_fixed_workspace * w = gsl_integration_fixed_alloc(T, n, a, b, alpha, beta);
   char buf[2048];
-  double result;
+  double result = NAN;
 
   sprintf(buf, "%s a=%g b=%g alpha=%g beta=%g", desc, a, b, alpha, beta);
 
@@ -115,7 +116,10 @@ main (void)
   /* Test the basic Gauss-Kronrod rules with a smooth positive function. */
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result = 7.716049357767090777E-02;
     double exp_abserr = 2.990224871000550874E-06;
     double exp_resabs = 7.716049357767090777E-02;
@@ -141,7 +145,10 @@ main (void)
   }
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result = 7.716049379303084599E-02;
     double exp_abserr = 9.424302194248481445E-08;
     double exp_resabs = 7.716049379303084599E-02;
@@ -166,7 +173,10 @@ main (void)
   }
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result = 7.716049382494900855E-02;
     double exp_abserr = 1.713503193600029893E-09;
     double exp_resabs = 7.716049382494900855E-02;
@@ -191,7 +201,10 @@ main (void)
   }
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result = 7.716049382681375302E-02;
     double exp_abserr = 9.576386660975511224E-11;
     double exp_resabs = 7.716049382681375302E-02;
@@ -216,7 +229,10 @@ main (void)
   }
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result = 7.716049382708510540E-02;
     double exp_abserr = 1.002079980317363772E-11;
     double exp_resabs = 7.716049382708510540E-02;
@@ -241,7 +257,10 @@ main (void)
   }
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result = 7.716049382713800753E-02;
     double exp_abserr = 1.566060362296155616E-12;
     double exp_resabs = 7.716049382713800753E-02;
@@ -270,7 +289,10 @@ main (void)
      find discrepancies in the abserr calculation. */
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result = 1.555688196612745777E+01;
     double exp_abserr = 2.350164577239293706E+01;
     double exp_resabs = 1.555688196612745777E+01;
@@ -295,7 +317,10 @@ main (void)
   }
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result = 1.799045317938126232E+01;
     double exp_abserr = 2.782360287710622515E+01;
     double exp_resabs = 1.799045317938126232E+01;
@@ -320,7 +345,10 @@ main (void)
   }
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result = 2.081873305159121657E+01;
     double exp_abserr = 3.296500137482590276E+01;
     double exp_resabs = 2.081873305159121301E+01;
@@ -345,7 +373,10 @@ main (void)
   }
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result = 2.288677623903126701E+01;
     double exp_abserr = 3.671538820274916048E+01;
     double exp_resabs = 2.288677623903126701E+01;
@@ -370,7 +401,10 @@ main (void)
   }
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result = 2.449953612016972215E+01;
     double exp_abserr = 3.967771249391228849E+01;
     double exp_resabs = 2.449953612016972215E+01;
@@ -395,7 +429,10 @@ main (void)
   }
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result = 2.583030240976628988E+01;
     double exp_abserr = 4.213750493076978643E+01;
     double exp_resabs = 2.583030240976628988E+01;
@@ -424,7 +461,10 @@ main (void)
      discrepancies in the abscissae. */
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result =-7.238969575483799046E-01;
     double exp_abserr = 8.760080200939757174E-06;
     double exp_resabs = 1.165564172429140788E+00;
@@ -449,7 +489,10 @@ main (void)
   }
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result =-7.238969575482959717E-01;
     double exp_abserr = 7.999213141433641888E-11;
     double exp_resabs = 1.150829032708484023E+00;
@@ -474,7 +517,10 @@ main (void)
   }
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result =-7.238969575482959717E-01;
     double exp_abserr = 1.285805464427459261E-14;
     double exp_resabs = 1.158150602093290571E+00;
@@ -499,7 +545,10 @@ main (void)
   }
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result =-7.238969575482959717E-01;
     double exp_abserr = 1.286535726271015626E-14;
     double exp_resabs = 1.158808363486595328E+00;
@@ -524,7 +573,10 @@ main (void)
   }
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result =-7.238969575482961938E-01;
     double exp_abserr = 1.285290995039385778E-14;
     double exp_resabs = 1.157687209264406381E+00;
@@ -549,7 +601,10 @@ main (void)
   }
 
   {
-    double result = 0, abserr = 0, resabs = 0, resasc = 0 ;
+    double result = 0;
+    double abserr = 0;
+    double resabs = 0;
+    double resasc = 0 ;
     double exp_result =-7.238969575482959717E-01;
     double exp_abserr = 1.286438572027470736E-14;
     double exp_resabs = 1.158720854723590099E+00;
@@ -577,7 +632,8 @@ main (void)
 
   {
     int status = 0; size_t neval = 0 ;
-    double result = 0, abserr = 0 ;
+    double result = 0;
+    double abserr = 0 ;
     double exp_result = 7.716049379303083211E-02;
     double exp_abserr = 9.424302199601294244E-08;
     int exp_neval  =  21;
@@ -603,7 +659,8 @@ main (void)
 
   {
     int status = 0; size_t neval = 0 ;
-    double result = 0, abserr = 0 ;
+    double result = 0;
+    double abserr = 0 ;
 
     double exp_result = 7.716049382706505200E-02;
     double exp_abserr = 2.666893044866214501E-12;
@@ -629,8 +686,9 @@ main (void)
   }
 
   {
-    int status; size_t neval = 0 ;
-    double result = 0, abserr = 0 ;
+    int status = 0; size_t neval = 0 ;
+    double result = 0;
+    double abserr = 0 ;
     double exp_result =-7.238969575482961938E-01;
     double exp_abserr = 1.277676889520056369E-14;
     int exp_neval  =  43;
@@ -656,7 +714,8 @@ main (void)
 
   {
     int status = 0; size_t neval = 0 ;
-    double result = 0, abserr = 0 ;
+    double result = 0;
+    double abserr = 0 ;
 
     double exp_result = 7.716049382716029525E-02;
     double exp_abserr = 8.566535680046930668E-16;
@@ -683,7 +742,8 @@ main (void)
 
   {
     int status = 0; size_t neval = 0 ;
-    double result = 0, abserr = 0 ;
+    double result = 0;
+    double abserr = 0 ;
 
     double exp_result = 3.222948711817264211E+01;
     double exp_abserr = 2.782360287710622870E+01;
@@ -711,8 +771,10 @@ main (void)
   /* Test the adaptive integrator QAG */
 
   {
-    int status = 0, i; struct counter_params p;
-    double result = 0, abserr=0;
+    int status = 0;
+    int i; struct counter_params p;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000) ;
 
@@ -743,24 +805,29 @@ main (void)
 
     gsl_test_rel(result,exp_result,1e-15,"qag(f1) smooth result") ;
     gsl_test_rel(abserr,exp_abserr,1e-6,"qag(f1) smooth abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qag(f1) smooth neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qag(f1) smooth neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qag(f1) smooth last") ;  
     gsl_test_int(status,exp_ier,"qag(f1) smooth status") ;
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_rel(w->alist[i],a[i],1e-15,"qag(f1) smooth alist") ;
+}
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_rel(w->blist[i],b[i],1e-15,"qag(f1) smooth blist") ;
+}
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_rel(w->rlist[i],r[i],1e-15,"qag(f1) smooth rlist") ;
+}
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_rel(w->elist[i],e[i],1e-6,"qag(f1) smooth elist") ;
+}
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_int((int)w->order[i],order[i]-1,"qag(f1) smooth order") ;
+}
 
     p.neval = 0;
 
@@ -770,7 +837,7 @@ main (void)
 
     gsl_test_rel(result,-exp_result,1e-15,"qag(f1) reverse result") ;
     gsl_test_rel(abserr,exp_abserr,1e-6,"qag(f1) reverse abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qag(f1) reverse neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qag(f1) reverse neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qag(f1) reverse last") ;  
     gsl_test_int(status,exp_ier,"qag(f1) reverse status") ;
 
@@ -782,8 +849,10 @@ main (void)
      21-point rule */
 
   {
-    int status = 0, i; struct counter_params p;
-    double result = 0, abserr=0;
+    int status = 0;
+    int i; struct counter_params p;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000) ;
 
@@ -818,24 +887,29 @@ main (void)
 
     gsl_test_rel(result,exp_result,1e-15,"qag(f1,21pt) smooth result") ;
     gsl_test_rel(abserr,exp_abserr,1e-6,"qag(f1,21pt) smooth abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qag(f1,21pt) smooth neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qag(f1,21pt) smooth neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qag(f1,21pt) smooth last") ;  
     gsl_test_int(status,exp_ier,"qag(f1,21pt) smooth status") ;
 
-    for (i = 0; i < 8 ; i++) 
+    for (i = 0; i < 8 ; i++) { 
         gsl_test_rel(w->alist[i],a[i],1e-15,"qag(f1,21pt) smooth alist") ;
+}
 
-    for (i = 0; i < 8 ; i++) 
+    for (i = 0; i < 8 ; i++) { 
         gsl_test_rel(w->blist[i],b[i],1e-15,"qag(f1,21pt) smooth blist") ;
+}
 
-    for (i = 0; i < 8 ; i++) 
+    for (i = 0; i < 8 ; i++) { 
         gsl_test_rel(w->rlist[i],r[i],1e-15,"qag(f1,21pt) smooth rlist") ;
+}
 
-    for (i = 0; i < 8 ; i++) 
+    for (i = 0; i < 8 ; i++) { 
         gsl_test_rel(w->elist[i],e[i],1e-6,"qag(f1,21pt) smooth elist") ;
+}
 
-    for (i = 0; i < 8 ; i++) 
+    for (i = 0; i < 8 ; i++) { 
         gsl_test_int((int)w->order[i],order[i]-1,"qag(f1,21pt) smooth order");
+}
 
 
     p.neval = 0;
@@ -845,7 +919,7 @@ main (void)
 
     gsl_test_rel(result,-exp_result,1e-15,"qag(f1,21pt) reverse result") ;
     gsl_test_rel(abserr,exp_abserr,1e-6,"qag(f1,21pt) reverse abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qag(f1,21pt) reverse neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qag(f1,21pt) reverse neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qag(f1,21pt) reverse last") ;  
     gsl_test_int(status,exp_ier,"qag(f1,21pt) reverse status") ;
 
@@ -858,7 +932,8 @@ main (void)
 
   {
     int status = 0; struct counter_params p;
-    double result = 0, abserr=0;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000) ;
 
@@ -879,7 +954,7 @@ main (void)
 
     gsl_test_rel(result,exp_result,1e-15,"qag(f3,31pt) oscill result");
     gsl_test_rel(abserr,exp_abserr,1e-6,"qag(f3,31pt) oscill abserr");
-    gsl_test_int((int)(p.neval),exp_neval,"qag(f3,31pt) oscill neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qag(f3,31pt) oscill neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qag(f3,31pt) oscill last") ;  
     gsl_test_int(status,exp_ier,"qag(f3,31pt) oscill status") ;
 
@@ -890,7 +965,7 @@ main (void)
 
     gsl_test_rel(result,-exp_result,1e-15,"qag(f3,31pt) reverse result");
     gsl_test_rel(abserr,exp_abserr,1e-6,"qag(f3,31pt) reverse abserr");
-    gsl_test_int((int)(p.neval),exp_neval,"qag(f3,31pt) reverse neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qag(f3,31pt) reverse neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qag(f3,31pt) reverse last") ;  
     gsl_test_int(status,exp_ier,"qag(f3,31pt) reverse status") ;
 
@@ -902,7 +977,8 @@ main (void)
 
   {
     int status = 0; struct counter_params p;
-    double result = 0, abserr=0;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000) ;
 
@@ -919,7 +995,7 @@ main (void)
                                   GSL_INTEG_GAUSS51, w, 
                                   &result, &abserr) ;
 
-    gsl_test_int((int)(p.neval),exp_neval,"qag(f16,51pt) sing neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qag(f16,51pt) sing neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qag(f16,51pt) sing last") ;  
     gsl_test_int(status,exp_ier,"qag(f16,51pt) sing status") ;
 
@@ -928,7 +1004,7 @@ main (void)
                                   GSL_INTEG_GAUSS51, w, 
                                   &result, &abserr) ;
 
-    gsl_test_int((int)(p.neval),exp_neval,"qag(f16,51pt) rev neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qag(f16,51pt) rev neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qag(f16,51pt) rev last") ;  
     gsl_test_int(status,exp_ier,"qag(f16,51pt) rev status") ;
 
@@ -939,8 +1015,10 @@ main (void)
   /* Check for hitting the iteration limit */
 
   {
-    int status = 0, i; struct counter_params p;
-    double result = 0, abserr=0;
+    int status = 0;
+    int i; struct counter_params p;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_workspace * w = gsl_integration_workspace_alloc (3) ;
 
@@ -978,24 +1056,29 @@ main (void)
 
     gsl_test_rel(result,exp_result,1e-15,"qag(f16,61pt) limit result") ;
     gsl_test_rel(abserr,exp_abserr,1e-6,"qag(f16,61pt) limit abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qag(f16,61pt) limit neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qag(f16,61pt) limit neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qag(f16,61pt) limit last") ;  
     gsl_test_int(status,exp_ier,"qag(f16,61pt) limit status") ;
 
-    for (i = 0; i < 3 ; i++) 
+    for (i = 0; i < 3 ; i++) { 
         gsl_test_rel(w->alist[i],a[i],1e-15,"qag(f16,61pt) limit alist") ;
+}
 
-    for (i = 0; i < 3 ; i++) 
+    for (i = 0; i < 3 ; i++) { 
         gsl_test_rel(w->blist[i],b[i],1e-15,"qag(f16,61pt) limit blist") ;
+}
 
-    for (i = 0; i < 3 ; i++) 
+    for (i = 0; i < 3 ; i++) { 
         gsl_test_rel(w->rlist[i],r[i],1e-15,"qag(f16,61pt) limit rlist") ;
+}
 
-    for (i = 0; i < 3 ; i++) 
+    for (i = 0; i < 3 ; i++) { 
         gsl_test_rel(w->elist[i],e[i],1e-6,"qag(f16,61pt) limit elist") ;
+}
 
-    for (i = 0; i < 3 ; i++) 
+    for (i = 0; i < 3 ; i++) { 
         gsl_test_int((int)w->order[i],order[i]-1,"qag(f16,61pt) limit order");
+}
 
     p.neval = 0;
     status = gsl_integration_qag (&fc, 1.0, -1.0, 1e-14, 0.0, w->limit, 
@@ -1004,7 +1087,7 @@ main (void)
 
     gsl_test_rel(result,-exp_result,1e-15,"qag(f16,61pt) reverse result") ;
     gsl_test_rel(abserr,exp_abserr,1e-6,"qag(f16,61pt) reverse abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qag(f16,61pt) reverse neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qag(f16,61pt) reverse neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qag(f16,61pt) reverse last") ;  
     gsl_test_int(status,exp_ier,"qag(f16,61pt) reverse status") ;
 
@@ -1015,8 +1098,10 @@ main (void)
   /* Test the adaptive integrator with extrapolation QAGS */
 
   {
-    int status = 0, i; struct counter_params p;
-    double result = 0, abserr=0;
+    int status = 0;
+    int i; struct counter_params p;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000) ;
 
@@ -1050,24 +1135,29 @@ main (void)
 
     gsl_test_rel(result,exp_result,1e-15,"qags(f1) smooth result") ;
     gsl_test_rel(abserr,exp_abserr,1e-6,"qags(f1) smooth abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qags(f1) smooth neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qags(f1) smooth neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qags(f1) smooth last") ;  
     gsl_test_int(status,exp_ier,"qags(f1) smooth status") ;
 
-    for (i = 0; i < 5 ; i++) 
+    for (i = 0; i < 5 ; i++) { 
         gsl_test_rel(w->alist[i],a[i],1e-15,"qags(f1) smooth alist") ;
+}
 
-    for (i = 0; i < 5 ; i++) 
+    for (i = 0; i < 5 ; i++) { 
         gsl_test_rel(w->blist[i],b[i],1e-15,"qags(f1) smooth blist") ;
+}
 
-    for (i = 0; i < 5 ; i++) 
+    for (i = 0; i < 5 ; i++) { 
         gsl_test_rel(w->rlist[i],r[i],1e-15,"qags(f1) smooth rlist") ;
+}
 
-    for (i = 0; i < 5 ; i++) 
+    for (i = 0; i < 5 ; i++) { 
         gsl_test_rel(w->elist[i],e[i],1e-6,"qags(f1) smooth elist") ;
+}
 
-    for (i = 0; i < 5 ; i++) 
+    for (i = 0; i < 5 ; i++) { 
         gsl_test_int((int)w->order[i],order[i]-1,"qags(f1) smooth order") ;
+}
 
     p.neval = 0;
     status = gsl_integration_qags (&fc, 1.0, 0.0, 0.0, 1e-10, w->limit,
@@ -1076,7 +1166,7 @@ main (void)
 
     gsl_test_rel(result,-exp_result,1e-15,"qags(f1) reverse result") ;
     gsl_test_rel(abserr,exp_abserr,1e-6,"qags(f1) reverse abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qags(f1) reverse neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qags(f1) reverse neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qags(f1) reverse last") ;  
     gsl_test_int(status,exp_ier,"qags(f1) reverse status") ;
 
@@ -1087,8 +1177,10 @@ main (void)
   /* Test f11 using an absolute error bound */
 
   {
-    int status = 0, i; struct counter_params p;
-    double result = 0, abserr=0;
+    int status = 0;
+    int i; struct counter_params p;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000) ;
 
@@ -1148,24 +1240,29 @@ main (void)
     
     gsl_test_rel(result,exp_result,1e-15,"qags(f11) smooth result") ;
     gsl_test_rel(abserr,exp_abserr,1e-3,"qags(f11) smooth abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qags(f11) smooth neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qags(f11) smooth neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qags(f11) smooth last") ;  
     gsl_test_int(status,exp_ier,"qags(f11) smooth status") ;
 
-    for (i = 0; i < 9 ; i++) 
+    for (i = 0; i < 9 ; i++) { 
         gsl_test_rel(w->alist[i],a[i],1e-15,"qags(f11) smooth alist") ;
+}
 
-    for (i = 0; i < 9 ; i++) 
+    for (i = 0; i < 9 ; i++) { 
         gsl_test_rel(w->blist[i],b[i],1e-15,"qags(f11) smooth blist") ;
+}
 
-    for (i = 0; i < 9 ; i++) 
+    for (i = 0; i < 9 ; i++) { 
         gsl_test_rel(w->rlist[i],r[i],1e-15,"qags(f11) smooth rlist") ;
+}
 
-    for (i = 0; i < 9 ; i++) 
+    for (i = 0; i < 9 ; i++) { 
         gsl_test_rel(w->elist[i],e[i],1e-5,"qags(f11) smooth elist") ;
+}
 
-    for (i = 0; i < 9 ; i++) 
+    for (i = 0; i < 9 ; i++) { 
         gsl_test_int((int)w->order[i],order[i]-1,"qags(f11) smooth order");
+}
 
     p.neval = 0;
     status = gsl_integration_qags (&fc, 1000.0, 1.0, 1e-7, 0.0, w->limit,
@@ -1174,7 +1271,7 @@ main (void)
     
     gsl_test_rel(result,-exp_result,1e-15,"qags(f11) reverse result") ;
     gsl_test_rel(abserr,exp_abserr,1e-3,"qags(f11) reverse abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qags(f11) reverse neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qags(f11) reverse neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qags(f11) reverse last") ;  
     gsl_test_int(status,exp_ier,"qags(f11) reverse status") ;
 
@@ -1185,8 +1282,10 @@ main (void)
   /* Test infinite range integral f455 using a relative error bound */
 
   {
-    int status = 0, i; struct counter_params p;
-    double result = 0, abserr=0;
+    int status = 0;
+    int i; struct counter_params p;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000) ;
 
@@ -1249,24 +1348,29 @@ main (void)
     
     gsl_test_rel(result,exp_result,1e-14,"qagiu(f455) smooth result") ;
     gsl_test_rel(abserr,exp_abserr,1e-5,"qagiu(f455) smooth abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qagiu(f455) smooth neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qagiu(f455) smooth neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qagiu(f455) smooth last") ;  
     gsl_test_int(status,exp_ier,"qagiu(f455) smooth status") ;
 
-    for (i = 0; i < 10 ; i++) 
+    for (i = 0; i < 10 ; i++) { 
         gsl_test_rel(w->alist[i],a[i],1e-15,"qagiu(f455) smooth alist") ;
+}
 
-    for (i = 0; i < 10 ; i++) 
+    for (i = 0; i < 10 ; i++) { 
         gsl_test_rel(w->blist[i],b[i],1e-15,"qagiu(f455) smooth blist") ;
+}
 
-    for (i = 0; i < 10 ; i++) 
+    for (i = 0; i < 10 ; i++) { 
         gsl_test_rel(w->rlist[i],r[i],1e-15,"qagiu(f455) smooth rlist") ;
+}
 
-    for (i = 0; i < 10 ; i++) 
+    for (i = 0; i < 10 ; i++) { 
         gsl_test_rel(w->elist[i],e[i],1e-4,"qagiu(f455) smooth elist") ;
+}
 
-    for (i = 0; i < 10 ; i++) 
+    for (i = 0; i < 10 ; i++) { 
         gsl_test_int((int)w->order[i],order[i]-1,"qagiu(f455) smooth order");
+}
 
     gsl_integration_workspace_free (w) ;
 
@@ -1275,8 +1379,10 @@ main (void)
   /* Test infinite range integral f15 using a relative error bound */
 
   {
-    int status = 0, i; struct counter_params p;
-    double result = 0, abserr=0;
+    int status = 0;
+    int i; struct counter_params p;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000) ;
 
@@ -1341,24 +1447,29 @@ main (void)
     
     gsl_test_rel(result,exp_result,1e-14,"qagiu(f15) smooth result") ;
     gsl_test_rel(abserr,exp_abserr,1e-5,"qagiu(f15) smooth abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qagiu(f15) smooth neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qagiu(f15) smooth neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qagiu(f15) smooth last") ;  
     gsl_test_int(status,exp_ier,"qagiu(f15) smooth status") ;
 
-    for (i = 0; i < 10 ; i++) 
+    for (i = 0; i < 10 ; i++) { 
         gsl_test_rel(w->alist[i],a[i],1e-15,"qagiu(f15) smooth alist") ;
+}
 
-    for (i = 0; i < 10 ; i++) 
+    for (i = 0; i < 10 ; i++) { 
         gsl_test_rel(w->blist[i],b[i],1e-15,"qagiu(f15) smooth blist") ;
+}
 
-    for (i = 0; i < 10 ; i++) 
+    for (i = 0; i < 10 ; i++) { 
         gsl_test_rel(w->rlist[i],r[i],1e-15,"qagiu(f15) smooth rlist") ;
+}
 
-    for (i = 0; i < 10 ; i++) 
+    for (i = 0; i < 10 ; i++) { 
         gsl_test_rel(w->elist[i],e[i],1e-4,"qagiu(f15) smooth elist") ;
+}
 
-    for (i = 0; i < 10 ; i++) 
+    for (i = 0; i < 10 ; i++) { 
         gsl_test_int((int)w->order[i],order[i]-1,"qagiu(f15) smooth order");
+}
 
     gsl_integration_workspace_free (w) ;
 
@@ -1367,8 +1478,10 @@ main (void)
   /* Test infinite range integral f16 using an absolute error bound */
 
   {
-    int status = 0, i; struct counter_params p;
-    double result = 0, abserr=0;
+    int status = 0;
+    int i; struct counter_params p;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000) ;
 
@@ -1417,24 +1530,29 @@ main (void)
     
     gsl_test_rel(result,exp_result,1e-14,"qagiu(f16) smooth result") ;
     gsl_test_rel(abserr,exp_abserr,1e-5,"qagiu(f16) smooth abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qagiu(f16) smooth neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qagiu(f16) smooth neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qagiu(f16) smooth last") ;  
     gsl_test_int(status,exp_ier,"qagiu(f16) smooth status") ;
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_rel(w->alist[i],a[i],1e-15,"qagiu(f16) smooth alist") ;
+}
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_rel(w->blist[i],b[i],1e-15,"qagiu(f16) smooth blist") ;
+}
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_rel(w->rlist[i],r[i],1e-15,"qagiu(f16) smooth rlist") ;
+}
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_rel(w->elist[i],e[i],1e-4,"qagiu(f16) smooth elist") ;
+}
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_int((int)w->order[i],order[i]-1,"qagiu(f16) smooth order");
+}
 
     gsl_integration_workspace_free (w) ;
 
@@ -1443,8 +1561,10 @@ main (void)
   /* Test infinite range integral myfn1 using an absolute error bound */
 
   {
-    int status = 0, i; struct counter_params p;
-    double result = 0, abserr=0;
+    int status = 0;
+    int i; struct counter_params p;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000) ;
 
@@ -1487,24 +1607,29 @@ main (void)
     
     gsl_test_rel(result,exp_result,1e-14,"qagiu(myfn1) smooth result") ;
     gsl_test_rel(abserr,exp_abserr,1e-5,"qagiu(myfn1) smooth abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qagiu(myfn1) smooth neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qagiu(myfn1) smooth neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qagiu(myfn1) smooth last") ;  
     gsl_test_int(status,exp_ier,"qagiu(myfn1) smooth status") ;
 
-    for (i = 0; i < 5 ; i++) 
+    for (i = 0; i < 5 ; i++) { 
         gsl_test_rel(w->alist[i],a[i],1e-15,"qagiu(myfn1) smooth alist") ;
+}
 
-    for (i = 0; i < 5 ; i++) 
+    for (i = 0; i < 5 ; i++) { 
         gsl_test_rel(w->blist[i],b[i],1e-15,"qagiu(myfn1) smooth blist") ;
+}
 
-    for (i = 0; i < 5 ; i++) 
+    for (i = 0; i < 5 ; i++) { 
         gsl_test_rel(w->rlist[i],r[i],1e-14,"qagiu(myfn1) smooth rlist") ;
+}
 
-    for (i = 0; i < 5 ; i++) 
+    for (i = 0; i < 5 ; i++) { 
         gsl_test_rel(w->elist[i],e[i],1e-4,"qagiu(myfn1) smooth elist") ;
+}
 
-    for (i = 0; i < 5 ; i++) 
+    for (i = 0; i < 5 ; i++) { 
         gsl_test_int((int)w->order[i],order[i]-1,"qagiu(myfn1) smooth order");
+}
 
     gsl_integration_workspace_free (w) ;
 
@@ -1513,8 +1638,10 @@ main (void)
   /* Test infinite range integral myfn1 using an absolute error bound */
 
   {
-    int status = 0, i; struct counter_params p;
-    double result = 0, abserr=0;
+    int status = 0;
+    int i; struct counter_params p;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000) ;
 
@@ -1558,24 +1685,29 @@ main (void)
     
     gsl_test_rel(result,exp_result,1e-14,"qagiu(myfn2) smooth result") ;
     gsl_test_rel(abserr,exp_abserr,1e-5,"qagiu(myfn2) smooth abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qagiu(myfn2) smooth neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qagiu(myfn2) smooth neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qagiu(myfn2) smooth last") ;  
     gsl_test_int(status,exp_ier,"qagiu(myfn2) smooth status") ;
 
-    for (i = 0; i < 5 ; i++) 
+    for (i = 0; i < 5 ; i++) { 
         gsl_test_rel(w->alist[i],a[i],1e-15,"qagiu(myfn2) smooth alist") ;
+}
 
-    for (i = 0; i < 5 ; i++) 
+    for (i = 0; i < 5 ; i++) { 
         gsl_test_rel(w->blist[i],b[i],1e-15,"qagiu(myfn2) smooth blist") ;
+}
 
-    for (i = 0; i < 5 ; i++) 
+    for (i = 0; i < 5 ; i++) { 
         gsl_test_rel(w->rlist[i],r[i],1e-14,"qagiu(myfn2) smooth rlist") ;
+}
 
-    for (i = 0; i < 5 ; i++) 
+    for (i = 0; i < 5 ; i++) { 
         gsl_test_rel(w->elist[i],e[i],1e-4,"qagiu(myfn2) smooth elist") ;
+}
 
-    for (i = 0; i < 5 ; i++) 
+    for (i = 0; i < 5 ; i++) { 
         gsl_test_int((int)w->order[i],order[i]-1,"qagiu(myfn2) smooth order");
+}
 
     gsl_integration_workspace_free (w) ;
 
@@ -1584,8 +1716,10 @@ main (void)
   /* Test integral f454 with integrable singular points */
 
   {
-    int status = 0, i; struct counter_params p;
-    double result = 0, abserr=0;
+    int status = 0;
+    int i; struct counter_params p;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000) ;
 
@@ -1697,24 +1831,29 @@ main (void)
     
     gsl_test_rel(result,exp_result,1e-14,"qagp(f454) singular result") ;
     gsl_test_rel(abserr,exp_abserr,1e-5,"qagp(f454) singular abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qagp(f454) singular neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qagp(f454) singular neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qagp(f454) singular last") ;  
     gsl_test_int(status,exp_ier,"qagp(f454) singular status") ;
 
-    for (i = 0; i < 20 ; i++) 
+    for (i = 0; i < 20 ; i++) { 
         gsl_test_rel(w->alist[i],a[i],1e-15,"qagp(f454) singular alist") ;
+}
 
-    for (i = 0; i < 20 ; i++) 
+    for (i = 0; i < 20 ; i++) { 
         gsl_test_rel(w->blist[i],b[i],1e-15,"qagp(f454) singular blist") ;
+}
 
-    for (i = 0; i < 20 ; i++) 
+    for (i = 0; i < 20 ; i++) { 
         gsl_test_rel(w->rlist[i],r[i],1e-14,"qagp(f454) singular rlist") ;
+}
 
-    for (i = 0; i < 20 ; i++) 
+    for (i = 0; i < 20 ; i++) { 
         gsl_test_rel(w->elist[i],e[i],1e-4,"qagp(f454) singular elist") ;
+}
 
-    for (i = 0; i < 20 ; i++) 
+    for (i = 0; i < 20 ; i++) { 
         gsl_test_int((int)w->order[i],order[i]-1,"qagp(f454) singular order");
+}
 
     gsl_integration_workspace_free (w) ;
 
@@ -1724,8 +1863,10 @@ main (void)
   /* Test cauchy integration using a relative error bound */
 
   {
-    int status = 0, i; struct counter_params p;
-    double result = 0, abserr=0;
+    int status = 0;
+    int i; struct counter_params p;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000) ;
 
@@ -1773,24 +1914,29 @@ main (void)
     
     gsl_test_rel(result,exp_result,1e-14,"qawc(f459) result") ;
     gsl_test_rel(abserr,exp_abserr,1e-6,"qawc(f459) abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qawc(f459) neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qawc(f459) neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qawc(f459) last") ;  
     gsl_test_int(status,exp_ier,"qawc(f459) status") ;
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_rel(w->alist[i],a[i],1e-15,"qawc(f459) alist") ;
+}
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_rel(w->blist[i],b[i],1e-15,"qawc(f459) blist") ;
+}
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_rel(w->rlist[i],r[i],1e-14,"qawc(f459) rlist") ;
+}
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_rel(w->elist[i],e[i],1e-4,"qawc(f459) elist") ;
+}
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_int((int)w->order[i],order[i]-1,"qawc(f459) order");
+}
 
     p.neval = 0;
     status = gsl_integration_qawc (&fc, 5.0, -1.0, 0.0, 0.0, 1.0e-3, w->limit,
@@ -1799,7 +1945,7 @@ main (void)
     
     gsl_test_rel(result,-exp_result,1e-14,"qawc(f459) rev result") ;
     gsl_test_rel(abserr,exp_abserr,1e-6,"qawc(f459) rev abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qawc(f459) rev neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qawc(f459) rev neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qawc(f459) rev last") ;  
     gsl_test_int(status,exp_ier,"qawc(f459) rev status") ;
 
@@ -1810,8 +1956,10 @@ main (void)
   /* Test QAWS singular integration using a relative error bound */
 
   {
-    int status = 0, i; struct counter_params p;
-    double result = 0, abserr=0;
+    int status = 0;
+    int i; struct counter_params p;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_qaws_table * t 
       = gsl_integration_qaws_table_alloc (0.0, 0.0, 1, 0);
@@ -1870,24 +2018,29 @@ main (void)
     
     gsl_test_rel(result,exp_result,1e-14,"qaws(f458) ln(x-a) result") ;
     gsl_test_rel(abserr,exp_abserr,1e-6,"qaws(f458) ln(x-a) abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qaws(f458) ln(x-a) neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qaws(f458) ln(x-a) neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qaws(f458) ln(x-a) last") ;  
     gsl_test_int(status,exp_ier,"qaws(f458) ln(x-a) status") ;
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_rel(w->alist[i],a[i],1e-15,"qaws(f458) ln(x-a) alist") ;
+}
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_rel(w->blist[i],b[i],1e-15,"qaws(f458) ln(x-a) blist") ;
+}
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_rel(w->rlist[i],r[i],1e-14,"qaws(f458) ln(x-a) rlist") ;
+}
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_rel(w->elist[i],e[i],1e-4,"qaws(f458) ln(x-a) elist") ;
+}
 
-    for (i = 0; i < 6 ; i++) 
+    for (i = 0; i < 6 ; i++) { 
         gsl_test_int((int)w->order[i],order[i]-1,"qaws(f458) ln(x-a) order");
+}
     
     /* Test without logs */
     
@@ -1950,8 +2103,10 @@ main (void)
   /* Test oscillatory integration using a relative error bound */
 
   {
-    int status = 0, i; struct counter_params p;
-    double result = 0, abserr=0;
+    int status = 0;
+    int i; struct counter_params p;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000) ;
     gsl_integration_qawo_table * wo 
@@ -2013,24 +2168,29 @@ main (void)
     
     gsl_test_rel(result,exp_result,1e-14,"qawo(f456) result") ;
     gsl_test_rel(abserr,exp_abserr,1e-3,"qawo(f456) abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qawo(f456) neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qawo(f456) neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qawo(f456) last") ;  
     gsl_test_int(status,exp_ier,"qawo(f456) status") ;
 
-    for (i = 0; i < 9 ; i++) 
+    for (i = 0; i < 9 ; i++) { 
         gsl_test_rel(w->alist[i],a[i],1e-15,"qawo(f456) alist") ;
+}
 
-    for (i = 0; i < 9 ; i++) 
+    for (i = 0; i < 9 ; i++) { 
         gsl_test_rel(w->blist[i],b[i],1e-15,"qawo(f456) blist") ;
+}
 
-    for (i = 0; i < 9 ; i++) 
+    for (i = 0; i < 9 ; i++) { 
         gsl_test_rel(w->rlist[i],r[i],1e-14,"qawo(f456) rlist") ;
+}
 
-    for (i = 0; i < 9 ; i++) 
+    for (i = 0; i < 9 ; i++) { 
         gsl_test_rel(w->elist[i],e[i],1e-2,"qawo(f456) elist") ;
+}
 
-    for (i = 0; i < 9 ; i++) 
+    for (i = 0; i < 9 ; i++) { 
         gsl_test_int((int)w->order[i],order[i]-1,"qawo(f456) order");
+}
 
 
     /* In reverse, flip limit and sign of length */
@@ -2043,7 +2203,7 @@ main (void)
     
     gsl_test_rel(result,-exp_result,1e-14,"qawo(f456) rev result") ;
     gsl_test_rel(abserr,exp_abserr,1e-3,"qawo(f456) rev abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qawo(f456) rev neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qawo(f456) rev neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qawo(f456) rev last") ;  
     gsl_test_int(status,exp_ier,"qawo(f456) rev status") ;
 
@@ -2056,8 +2216,10 @@ main (void)
   /* Test fourier integration using an absolute error bound */
 
   {
-    int status = 0, i; struct counter_params p;
-    double result = 0, abserr=0;
+    int status = 0;
+    int i; struct counter_params p;
+    double result = 0;
+    double abserr=0;
 
     gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000) ;
     gsl_integration_workspace * wc = gsl_integration_workspace_alloc (1000) ;
@@ -2107,18 +2269,20 @@ main (void)
     
     gsl_test_rel(result,exp_result,1e-14,"qawf(f457) result") ;
     gsl_test_rel(abserr,exp_abserr,1e-3,"qawf(f457) abserr") ;
-    gsl_test_int((int)(p.neval),exp_neval,"qawf(f457) neval") ;  
+    gsl_test_int((p.neval),exp_neval,"qawf(f457) neval") ;  
     gsl_test_int((int)(w->size),exp_last,"qawf(f457) last") ;  
     gsl_test_int(status,exp_ier,"qawf(f457) status") ;
 
-    for (i = 0; i < 9 ; i++) 
+    for (i = 0; i < 9 ; i++) { 
         gsl_test_rel(w->rlist[i],r[i],1e-12,"qawf(f457) rlist") ;
+}
 
     /* We can only get within two orders of magnitude on the error
        here, which is very sensitive to the floating point precision */
 
-    for (i = 0; i < 9 ; i++) 
+    for (i = 0; i < 9 ; i++) { 
         gsl_test_rel(w->elist[i],e[i],50.0,"qawf(f457) elist") ;
+}
 
 
     gsl_integration_qawo_table_free (wo) ;
@@ -2130,9 +2294,9 @@ main (void)
   /* test Romberg integration */
   {
     int status = 0;
-    double result;
-    size_t neval;
-    double exp_result;
+    double result = NAN;
+    size_t neval = 0;
+    double exp_result = NAN;
     int exp_ier = 0;
 
     gsl_function f;
@@ -2190,10 +2354,11 @@ main (void)
 
   /* Test the fixed-order Gauss-Legendre rules with a monomial. */
   {
-    int n;
+    int n = 0;
     struct monomial_params params;
     gsl_function f;
-    const double a   = 0.0, b = 1.2;
+    const double a   = 0.0;
+    const double b = 1.2;
 
     f.function = &f_monomial;
     f.params = &params;
@@ -2202,7 +2367,8 @@ main (void)
 
     for (n = 1; n < 1025; ++n)
       {
-        double expected, result;
+        double expected;
+        double result;
 
         gsl_integration_glfixed_table * tbl =
           gsl_integration_glfixed_table_alloc(n);
@@ -2242,10 +2408,13 @@ main (void)
   {
     const int n_max = 1024;
     const gsl_function f = { f_sin, NULL };
-    const double a = 0.0, b = M_PI;
+    const double a = 0.0;
+    const double b = M_PI;
     const double expected = integ_f_sin(a, b);
-    double result, abserr, prev_abserr = 0.0;
-    int n;
+    double result;
+    double abserr;
+    double prev_abserr = 0.0;
+    int n = 0;
 
     for (n = 1; n <= n_max; ++n)
       {
@@ -2288,9 +2457,11 @@ main (void)
   /* This verifies the (point, weight) retrieval API behaves sanely */
   {
     const double eps = GSL_DBL_EPSILON;
-    gsl_integration_glfixed_table *tbl;
-    int n, i;
-    double xi, wi;
+    gsl_integration_glfixed_table *tbl = NULL;
+    int n;
+    int i;
+    double xi;
+    double wi;
 
     /* Analytical results for points and weights on [-1, 1]
        Pulled from http://en.wikipedia.org/wiki/Gaussian_quadrature
@@ -2375,9 +2546,11 @@ main (void)
   /* Test some fixed-order Gauss-Legendre rule points and weights on [-2, 3] */
   /* This verifies the (point, weight) retrieval API is okay on non-[-1,1] */
   {
-    gsl_integration_glfixed_table *tbl;
-    double result, x, w;
-    int i;
+    gsl_integration_glfixed_table *tbl = NULL;
+    double result;
+    double x;
+    double w;
+    int i = 0;
 
     /* Odd n = 3, f(x) = x**5 + x**4 + x**3 + x**2 + x**1 + 1 */
     result = 0;
@@ -2423,9 +2596,10 @@ main (void)
                                  0.16349494301863722618 , -0.63466518254339257343 , 
                                  0.013492485649467772692 , 17.664383539246514971 , 7.5 };
     
-    double result, abserr;
-    size_t neval;
-    int fid;
+    double result;
+    double abserr;
+    size_t neval = 0;
+    int fid = 0;
         
     /* Loop over the functions... */
     for ( fid = 0 ; fid < 25 ; fid++ ) {
@@ -2446,11 +2620,12 @@ main (void)
 
   /* test fixed quadrature */
   {
-    size_t n;
+    size_t n = 0;
     struct monomial_params params;
     gsl_function f;
-    double exact;
-    double a, b;
+    double exact = NAN;
+    double a;
+    double b;
     int deg = 5; /* monomial degree */
     double dterm = (deg % 2) == 0 ? 1.0 : -1.0;
 
@@ -2533,7 +2708,8 @@ main (void)
 
   /* test Gegenbauer quadrature */
   {
-    size_t n, k;
+    size_t n;
+    size_t k;
     struct monomial_params params;
     gsl_function f;
     const double exactarray[5] = {4.15933612154155020161400717857e-7, 744697.808572324010134504819452, 55.2024994284578980512106835228, 7.95574829722734114107142857143, 0.00179653588816666666666666666667};
@@ -2557,13 +2733,15 @@ main (void)
 
   /* test Jacobi quadrature */
   {
-    size_t n, k;
+    size_t n;
+    size_t k;
     struct monomial_params params;
     gsl_function f;
     const double exactarray[5] = {9.052430592016123480501898e-7,3.131716150347619771233591755e6,0.04435866422797298224404592896,5.287059602300844442782407,2.5337038518475893688512749675e-6};
     const double aarray[5] = {0.123,7.747,1.47,-1.47,0.0};
     const double barray[5] = {0.456,12.0,2.0,2.0,0.47};
-    double alpha, beta;
+    double alpha;
+    double beta;
 
     f.function = &f_monomial;
     f.params = &params;
@@ -2583,7 +2761,8 @@ main (void)
 
   /* test Exponential quadrature */
   {
-    size_t n, k;
+    size_t n;
+    size_t k;
     struct monomial_params params;
     gsl_function f;
     const double exactarray[5] = {1.598864206823942764921875e-4, 624615.81848571833291063083819, 0.222578063871903188095238095238, 28.8968950008739567709168294271, 4.62725113500425479890950520833e-7};
@@ -2607,7 +2786,8 @@ main (void)
 
   /* test Rational quadrature */
   {
-    size_t n, k;
+    size_t n;
+    size_t k;
     struct monomial_params params;
     gsl_function f;
     const double exactarray[6] = {1.312245361412108703130374957e-10,0.0170362044485924082779613124672, 8.93065131938394658578136414201e-11, 7.17990217357447544326794457270e-13, -11.0760676986664098133970869634, 0.00290392485414197833688178206557};
@@ -2636,5 +2816,6 @@ main (void)
 void
 my_error_handler (const char *reason, const char *file, int line, int err)
 {
-  if (0) printf ("(caught [%s:%d: %s (%d)])\n", file, line, reason, err) ;
+  if (0) { printf ("(caught [%s:%d: %s (%d)])\n", file, line, reason, err) ;
+}
 }

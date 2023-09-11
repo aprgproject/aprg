@@ -29,7 +29,7 @@
 double
 gsl_cheb_eval (const gsl_cheb_series * cs, const double x)
 {
-  size_t i;
+  size_t i = 0;
   double d1 = 0.0;
   double d2 = 0.0;
 
@@ -49,7 +49,7 @@ gsl_cheb_eval (const gsl_cheb_series * cs, const double x)
 double
 gsl_cheb_eval_n (const gsl_cheb_series * cs, const size_t n, const double x)
 {
-  size_t i;
+  size_t i = 0;
   double d1 = 0.0;
   double d2 = 0.0;
 
@@ -73,7 +73,7 @@ int
 gsl_cheb_eval_err (const gsl_cheb_series * cs, const double x,
                    double *result, double *abserr)
 {
-  size_t i;
+  size_t i = 0;
   double d1 = 0.0;
   double d2 = 0.0;
 
@@ -110,7 +110,7 @@ gsl_cheb_eval_n_err (const gsl_cheb_series * cs,
                      const size_t n, const double x,
                      double *result, double *abserr)
 {
-  size_t i;
+  size_t i = 0;
   double d1 = 0.0;
   double d2 = 0.0;
 
@@ -149,7 +149,7 @@ gsl_cheb_eval_mode_e (const gsl_cheb_series * cs,
                       const double x, gsl_mode_t mode,
                       double *result, double *abserr)
 {
-  size_t i;
+  size_t i = 0;
   double d1 = 0.0;
   double d2 = 0.0;
 
@@ -158,12 +158,13 @@ gsl_cheb_eval_mode_e (const gsl_cheb_series * cs,
 
   double absc = 0.0;
 
-  size_t eval_order;
+  size_t eval_order = 0;
 
-  if (GSL_MODE_PREC (mode) == GSL_PREC_DOUBLE)
+  if (GSL_MODE_PREC (mode) == GSL_PREC_DOUBLE) {
     eval_order = cs->order;
-  else
+  } else {
     eval_order = cs->order_sp;
+}
 
   for (i = eval_order; i >= 1; i--)
     {
@@ -192,7 +193,8 @@ double
 gsl_cheb_eval_mode (const gsl_cheb_series * cs,
                     const double x, gsl_mode_t mode)
 {
-  double result, abserr;
+  double result;
+  double abserr;
   int status = gsl_cheb_eval_mode_e (cs, x, mode, &result, &abserr);
 
   if (status != GSL_SUCCESS) 

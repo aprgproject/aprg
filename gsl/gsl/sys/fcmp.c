@@ -29,8 +29,9 @@
 int
 gsl_fcmp (const double x1, const double x2, const double epsilon)
 {
-  int exponent;
-  double delta, difference;
+  int exponent = 0;
+  double delta;
+  double difference;
 
   /* Find exponent of largest absolute value */
 
@@ -50,7 +51,7 @@ gsl_fcmp (const double x1, const double x2, const double epsilon)
     {
       return 1;
     }
-  else if (difference < -delta) /* x1 < x2 */
+  if (difference < -delta) /* x1 < x2 */
     {
       return -1;
     }

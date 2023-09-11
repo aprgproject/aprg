@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <gsl/gsl_vector.h>
@@ -35,12 +36,12 @@ int
 main (void)
 {
   const gsl_multiroot_fsolver_type * fsolvers[5] ;
-  const gsl_multiroot_fsolver_type ** T1 ;
+  const gsl_multiroot_fsolver_type ** T1 = NULL ;
 
   const gsl_multiroot_fdfsolver_type * fdfsolvers[5] ;
-  const gsl_multiroot_fdfsolver_type ** T2 ;
+  const gsl_multiroot_fdfsolver_type ** T2 = NULL ;
 
-  double f;
+  double f = NAN;
 
   fsolvers[0] = gsl_multiroot_fsolver_dnewton;
   fsolvers[1] = gsl_multiroot_fsolver_broyden;
@@ -99,7 +100,8 @@ void scale (gsl_vector * x, double factor);
 void
 scale (gsl_vector * x, double factor)
 {
-  size_t i, n = x->size;
+  size_t i;
+  size_t n = x->size;
 
   if (gsl_vector_isnull(x))
     {
@@ -123,18 +125,21 @@ test_fdf (const char * desc, gsl_multiroot_function_fdf * function,
           initpt_function initpt, double factor,
           const gsl_multiroot_fdfsolver_type * T)
 {
-  int status;
+  int status = 0;
   double residual = 0;
-  size_t i, n = function->n, iter = 0;
+  size_t i;
+  size_t n = function->n;
+  size_t iter = 0;
   
   gsl_vector *x = gsl_vector_alloc (n);
   gsl_matrix *J = gsl_matrix_alloc (n, n);
 
-  gsl_multiroot_fdfsolver *s;
+  gsl_multiroot_fdfsolver *s = NULL;
 
   (*initpt) (x);
 
-  if (factor != 1.0) scale(x, factor);
+  if (factor != 1.0) { scale(x, factor);
+}
 
   s = gsl_multiroot_fdfsolver_alloc (T, n);
   gsl_multiroot_fdfsolver_set (s, function, x);
@@ -144,8 +149,9 @@ test_fdf (const char * desc, gsl_multiroot_function_fdf * function,
       iter++;
       status = gsl_multiroot_fdfsolver_iterate (s);
       
-      if (status)
+      if (status) {
         break ;
+}
 
       status = gsl_multiroot_test_residual (s->f, 0.0000001);
     }
@@ -204,13 +210,15 @@ test_f (const char * desc, gsl_multiroot_function_fdf * fdf,
         initpt_function initpt, double factor,
         const gsl_multiroot_fsolver_type * T)
 {
-  int status;
-  size_t i, n = fdf->n, iter = 0;
+  int status = 0;
+  size_t i;
+  size_t n = fdf->n;
+  size_t iter = 0;
   double residual = 0;
 
-  gsl_vector *x;
+  gsl_vector *x = NULL;
 
-  gsl_multiroot_fsolver *s;
+  gsl_multiroot_fsolver *s = NULL;
   gsl_multiroot_function function;
 
   function.f = fdf->f;
@@ -221,7 +229,8 @@ test_f (const char * desc, gsl_multiroot_function_fdf * fdf,
 
   (*initpt) (x);
 
-  if (factor != 1.0) scale(x, factor);
+  if (factor != 1.0) { scale(x, factor);
+}
 
   s = gsl_multiroot_fsolver_alloc (T, n);
   gsl_multiroot_fsolver_set (s, &function, x);
@@ -234,8 +243,9 @@ test_f (const char * desc, gsl_multiroot_function_fdf * fdf,
       iter++;
       status = gsl_multiroot_fsolver_iterate (s);
       
-      if (status)
+      if (status) {
         break ;
+}
 
       status = gsl_multiroot_test_residual (s->f, 0.0000001);
     }

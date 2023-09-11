@@ -2,21 +2,23 @@
 #include <gsl/gsl_ieee_utils.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_cblas.h>
+#include <math.h>
 
 #include "tests.h"
 
 void
 test_rotg (void) {
-const double flteps = 1e-4, dbleps = 1e-6;
+const double flteps = 1e-4;
+const double dbleps = 1e-6;
   {
-   float a = -1.5f;
-   float b = -1.5f;
-   float c;
-   float s;
-   float r_expected = -2.12132034356f;
-   float z_expected = 1.41421356237f;
-   float c_expected = 0.707106781187f;
-   float s_expected = 0.707106781187f;
+   float a = -1.5F;
+   float b = -1.5F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -2.12132034356F;
+   float z_expected = 1.41421356237F;
+   float c_expected = 0.707106781187F;
+   float s_expected = 0.707106781187F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 166)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 167)");
@@ -26,14 +28,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -1.5f;
-   float b = -1.0f;
-   float c;
-   float s;
-   float r_expected = -1.80277563773f;
-   float z_expected = 0.554700196225f;
-   float c_expected = 0.832050294338f;
-   float s_expected = 0.554700196225f;
+   float a = -1.5F;
+   float b = -1.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.80277563773F;
+   float z_expected = 0.554700196225F;
+   float c_expected = 0.832050294338F;
+   float s_expected = 0.554700196225F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 170)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 171)");
@@ -43,14 +45,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -1.5f;
-   float b = -0.1f;
-   float c;
-   float s;
-   float r_expected = -1.50332963784f;
-   float z_expected = 0.0665190105238f;
-   float c_expected = 0.997785157857f;
-   float s_expected = 0.0665190105238f;
+   float a = -1.5F;
+   float b = -0.1F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.50332963784F;
+   float z_expected = 0.0665190105238F;
+   float c_expected = 0.997785157857F;
+   float s_expected = 0.0665190105238F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 174)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 175)");
@@ -60,14 +62,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -1.5f;
-   float b = 0.0f;
-   float c;
-   float s;
-   float r_expected = -1.5f;
-   float z_expected = -0.0f;
-   float c_expected = 1.0f;
-   float s_expected = -0.0f;
+   float a = -1.5F;
+   float b = 0.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.5F;
+   float z_expected = -0.0F;
+   float c_expected = 1.0F;
+   float s_expected = -0.0F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 178)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 179)");
@@ -77,14 +79,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -1.5f;
-   float b = 0.1f;
-   float c;
-   float s;
-   float r_expected = -1.50332963784f;
-   float z_expected = -0.0665190105238f;
-   float c_expected = 0.997785157857f;
-   float s_expected = -0.0665190105238f;
+   float a = -1.5F;
+   float b = 0.1F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.50332963784F;
+   float z_expected = -0.0665190105238F;
+   float c_expected = 0.997785157857F;
+   float s_expected = -0.0665190105238F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 182)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 183)");
@@ -94,14 +96,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -1.5f;
-   float b = 1.0f;
-   float c;
-   float s;
-   float r_expected = -1.80277563773f;
-   float z_expected = -0.554700196225f;
-   float c_expected = 0.832050294338f;
-   float s_expected = -0.554700196225f;
+   float a = -1.5F;
+   float b = 1.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.80277563773F;
+   float z_expected = -0.554700196225F;
+   float c_expected = 0.832050294338F;
+   float s_expected = -0.554700196225F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 186)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 187)");
@@ -111,14 +113,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -1.5f;
-   float b = 1.5f;
-   float c;
-   float s;
-   float r_expected = 2.12132034356f;
-   float z_expected = -1.41421356237f;
-   float c_expected = -0.707106781187f;
-   float s_expected = 0.707106781187f;
+   float a = -1.5F;
+   float b = 1.5F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 2.12132034356F;
+   float z_expected = -1.41421356237F;
+   float c_expected = -0.707106781187F;
+   float s_expected = 0.707106781187F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 190)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 191)");
@@ -128,14 +130,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -1.0f;
-   float b = -1.5f;
-   float c;
-   float s;
-   float r_expected = -1.80277563773f;
-   float z_expected = 1.80277563773f;
-   float c_expected = 0.554700196225f;
-   float s_expected = 0.832050294338f;
+   float a = -1.0F;
+   float b = -1.5F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.80277563773F;
+   float z_expected = 1.80277563773F;
+   float c_expected = 0.554700196225F;
+   float s_expected = 0.832050294338F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 194)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 195)");
@@ -145,14 +147,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -1.0f;
-   float b = -1.0f;
-   float c;
-   float s;
-   float r_expected = -1.41421356237f;
-   float z_expected = 1.41421356237f;
-   float c_expected = 0.707106781187f;
-   float s_expected = 0.707106781187f;
+   float a = -1.0F;
+   float b = -1.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.41421356237F;
+   float z_expected = 1.41421356237F;
+   float c_expected = 0.707106781187F;
+   float s_expected = 0.707106781187F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 198)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 199)");
@@ -162,14 +164,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -1.0f;
-   float b = -0.1f;
-   float c;
-   float s;
-   float r_expected = -1.00498756211f;
-   float z_expected = 0.099503719021f;
-   float c_expected = 0.99503719021f;
-   float s_expected = 0.099503719021f;
+   float a = -1.0F;
+   float b = -0.1F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.00498756211F;
+   float z_expected = 0.099503719021F;
+   float c_expected = 0.99503719021F;
+   float s_expected = 0.099503719021F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 202)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 203)");
@@ -179,14 +181,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -1.0f;
-   float b = 0.0f;
-   float c;
-   float s;
-   float r_expected = -1.0f;
-   float z_expected = -0.0f;
-   float c_expected = 1.0f;
-   float s_expected = -0.0f;
+   float a = -1.0F;
+   float b = 0.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.0F;
+   float z_expected = -0.0F;
+   float c_expected = 1.0F;
+   float s_expected = -0.0F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 206)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 207)");
@@ -196,14 +198,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -1.0f;
-   float b = 0.1f;
-   float c;
-   float s;
-   float r_expected = -1.00498756211f;
-   float z_expected = -0.099503719021f;
-   float c_expected = 0.99503719021f;
-   float s_expected = -0.099503719021f;
+   float a = -1.0F;
+   float b = 0.1F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.00498756211F;
+   float z_expected = -0.099503719021F;
+   float c_expected = 0.99503719021F;
+   float s_expected = -0.099503719021F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 210)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 211)");
@@ -213,14 +215,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -1.0f;
-   float b = 1.0f;
-   float c;
-   float s;
-   float r_expected = 1.41421356237f;
-   float z_expected = -1.41421356237f;
-   float c_expected = -0.707106781187f;
-   float s_expected = 0.707106781187f;
+   float a = -1.0F;
+   float b = 1.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.41421356237F;
+   float z_expected = -1.41421356237F;
+   float c_expected = -0.707106781187F;
+   float s_expected = 0.707106781187F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 214)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 215)");
@@ -230,14 +232,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -1.0f;
-   float b = 1.5f;
-   float c;
-   float s;
-   float r_expected = 1.80277563773f;
-   float z_expected = -1.80277563773f;
-   float c_expected = -0.554700196225f;
-   float s_expected = 0.832050294338f;
+   float a = -1.0F;
+   float b = 1.5F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.80277563773F;
+   float z_expected = -1.80277563773F;
+   float c_expected = -0.554700196225F;
+   float s_expected = 0.832050294338F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 218)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 219)");
@@ -247,14 +249,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -0.1f;
-   float b = -1.5f;
-   float c;
-   float s;
-   float r_expected = -1.50332963784f;
-   float z_expected = 15.0332963784f;
-   float c_expected = 0.0665190105238f;
-   float s_expected = 0.997785157857f;
+   float a = -0.1F;
+   float b = -1.5F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.50332963784F;
+   float z_expected = 15.0332963784F;
+   float c_expected = 0.0665190105238F;
+   float s_expected = 0.997785157857F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 222)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 223)");
@@ -264,14 +266,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -0.1f;
-   float b = -1.0f;
-   float c;
-   float s;
-   float r_expected = -1.00498756211f;
-   float z_expected = 10.0498756211f;
-   float c_expected = 0.099503719021f;
-   float s_expected = 0.99503719021f;
+   float a = -0.1F;
+   float b = -1.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.00498756211F;
+   float z_expected = 10.0498756211F;
+   float c_expected = 0.099503719021F;
+   float s_expected = 0.99503719021F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 226)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 227)");
@@ -281,14 +283,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -0.1f;
-   float b = -0.1f;
-   float c;
-   float s;
-   float r_expected = -0.141421356237f;
-   float z_expected = 1.41421356237f;
-   float c_expected = 0.707106781187f;
-   float s_expected = 0.707106781187f;
+   float a = -0.1F;
+   float b = -0.1F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -0.141421356237F;
+   float z_expected = 1.41421356237F;
+   float c_expected = 0.707106781187F;
+   float s_expected = 0.707106781187F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 230)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 231)");
@@ -298,14 +300,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -0.1f;
-   float b = 0.0f;
-   float c;
-   float s;
-   float r_expected = -0.1f;
-   float z_expected = -0.0f;
-   float c_expected = 1.0f;
-   float s_expected = -0.0f;
+   float a = -0.1F;
+   float b = 0.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -0.1F;
+   float z_expected = -0.0F;
+   float c_expected = 1.0F;
+   float s_expected = -0.0F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 234)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 235)");
@@ -315,14 +317,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -0.1f;
-   float b = 0.1f;
-   float c;
-   float s;
-   float r_expected = 0.141421356237f;
-   float z_expected = -1.41421356237f;
-   float c_expected = -0.707106781187f;
-   float s_expected = 0.707106781187f;
+   float a = -0.1F;
+   float b = 0.1F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 0.141421356237F;
+   float z_expected = -1.41421356237F;
+   float c_expected = -0.707106781187F;
+   float s_expected = 0.707106781187F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 238)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 239)");
@@ -332,14 +334,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -0.1f;
-   float b = 1.0f;
-   float c;
-   float s;
-   float r_expected = 1.00498756211f;
-   float z_expected = -10.0498756211f;
-   float c_expected = -0.099503719021f;
-   float s_expected = 0.99503719021f;
+   float a = -0.1F;
+   float b = 1.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.00498756211F;
+   float z_expected = -10.0498756211F;
+   float c_expected = -0.099503719021F;
+   float s_expected = 0.99503719021F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 242)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 243)");
@@ -349,14 +351,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = -0.1f;
-   float b = 1.5f;
-   float c;
-   float s;
-   float r_expected = 1.50332963784f;
-   float z_expected = -15.0332963784f;
-   float c_expected = -0.0665190105238f;
-   float s_expected = 0.997785157857f;
+   float a = -0.1F;
+   float b = 1.5F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.50332963784F;
+   float z_expected = -15.0332963784F;
+   float c_expected = -0.0665190105238F;
+   float s_expected = 0.997785157857F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 246)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 247)");
@@ -366,14 +368,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 0.0f;
-   float b = -1.5f;
-   float c;
-   float s;
-   float r_expected = -1.5f;
-   float z_expected = 1.0f;
-   float c_expected = -0.0f;
-   float s_expected = 1.0f;
+   float a = 0.0F;
+   float b = -1.5F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.5F;
+   float z_expected = 1.0F;
+   float c_expected = -0.0F;
+   float s_expected = 1.0F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 250)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 251)");
@@ -383,14 +385,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 0.0f;
-   float b = -1.0f;
-   float c;
-   float s;
-   float r_expected = -1.0f;
-   float z_expected = 1.0f;
-   float c_expected = -0.0f;
-   float s_expected = 1.0f;
+   float a = 0.0F;
+   float b = -1.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.0F;
+   float z_expected = 1.0F;
+   float c_expected = -0.0F;
+   float s_expected = 1.0F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 254)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 255)");
@@ -400,14 +402,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 0.0f;
-   float b = -0.1f;
-   float c;
-   float s;
-   float r_expected = -0.1f;
-   float z_expected = 1.0f;
-   float c_expected = -0.0f;
-   float s_expected = 1.0f;
+   float a = 0.0F;
+   float b = -0.1F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -0.1F;
+   float z_expected = 1.0F;
+   float c_expected = -0.0F;
+   float s_expected = 1.0F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 258)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 259)");
@@ -417,14 +419,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 0.0f;
-   float b = 0.0f;
-   float c;
-   float s;
-   float r_expected = 0.0f;
-   float z_expected = 0.0f;
-   float c_expected = 1.0f;
-   float s_expected = 0.0f;
+   float a = 0.0F;
+   float b = 0.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 0.0F;
+   float z_expected = 0.0F;
+   float c_expected = 1.0F;
+   float s_expected = 0.0F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 262)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 263)");
@@ -434,14 +436,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 0.0f;
-   float b = 0.1f;
-   float c;
-   float s;
-   float r_expected = 0.1f;
-   float z_expected = 1.0f;
-   float c_expected = 0.0f;
-   float s_expected = 1.0f;
+   float a = 0.0F;
+   float b = 0.1F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 0.1F;
+   float z_expected = 1.0F;
+   float c_expected = 0.0F;
+   float s_expected = 1.0F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 266)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 267)");
@@ -451,14 +453,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 0.0f;
-   float b = 1.0f;
-   float c;
-   float s;
-   float r_expected = 1.0f;
-   float z_expected = 1.0f;
-   float c_expected = 0.0f;
-   float s_expected = 1.0f;
+   float a = 0.0F;
+   float b = 1.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.0F;
+   float z_expected = 1.0F;
+   float c_expected = 0.0F;
+   float s_expected = 1.0F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 270)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 271)");
@@ -468,14 +470,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 0.0f;
-   float b = 1.5f;
-   float c;
-   float s;
-   float r_expected = 1.5f;
-   float z_expected = 1.0f;
-   float c_expected = 0.0f;
-   float s_expected = 1.0f;
+   float a = 0.0F;
+   float b = 1.5F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.5F;
+   float z_expected = 1.0F;
+   float c_expected = 0.0F;
+   float s_expected = 1.0F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 274)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 275)");
@@ -485,14 +487,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 0.1f;
-   float b = -1.5f;
-   float c;
-   float s;
-   float r_expected = -1.50332963784f;
-   float z_expected = -15.0332963784f;
-   float c_expected = -0.0665190105238f;
-   float s_expected = 0.997785157857f;
+   float a = 0.1F;
+   float b = -1.5F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.50332963784F;
+   float z_expected = -15.0332963784F;
+   float c_expected = -0.0665190105238F;
+   float s_expected = 0.997785157857F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 278)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 279)");
@@ -502,14 +504,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 0.1f;
-   float b = -1.0f;
-   float c;
-   float s;
-   float r_expected = -1.00498756211f;
-   float z_expected = -10.0498756211f;
-   float c_expected = -0.099503719021f;
-   float s_expected = 0.99503719021f;
+   float a = 0.1F;
+   float b = -1.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.00498756211F;
+   float z_expected = -10.0498756211F;
+   float c_expected = -0.099503719021F;
+   float s_expected = 0.99503719021F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 282)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 283)");
@@ -519,14 +521,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 0.1f;
-   float b = -0.1f;
-   float c;
-   float s;
-   float r_expected = -0.141421356237f;
-   float z_expected = -1.41421356237f;
-   float c_expected = -0.707106781187f;
-   float s_expected = 0.707106781187f;
+   float a = 0.1F;
+   float b = -0.1F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -0.141421356237F;
+   float z_expected = -1.41421356237F;
+   float c_expected = -0.707106781187F;
+   float s_expected = 0.707106781187F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 286)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 287)");
@@ -536,14 +538,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 0.1f;
-   float b = 0.0f;
-   float c;
-   float s;
-   float r_expected = 0.1f;
-   float z_expected = 0.0f;
-   float c_expected = 1.0f;
-   float s_expected = 0.0f;
+   float a = 0.1F;
+   float b = 0.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 0.1F;
+   float z_expected = 0.0F;
+   float c_expected = 1.0F;
+   float s_expected = 0.0F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 290)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 291)");
@@ -553,14 +555,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 0.1f;
-   float b = 0.1f;
-   float c;
-   float s;
-   float r_expected = 0.141421356237f;
-   float z_expected = 1.41421356237f;
-   float c_expected = 0.707106781187f;
-   float s_expected = 0.707106781187f;
+   float a = 0.1F;
+   float b = 0.1F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 0.141421356237F;
+   float z_expected = 1.41421356237F;
+   float c_expected = 0.707106781187F;
+   float s_expected = 0.707106781187F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 294)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 295)");
@@ -570,14 +572,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 0.1f;
-   float b = 1.0f;
-   float c;
-   float s;
-   float r_expected = 1.00498756211f;
-   float z_expected = 10.0498756211f;
-   float c_expected = 0.099503719021f;
-   float s_expected = 0.99503719021f;
+   float a = 0.1F;
+   float b = 1.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.00498756211F;
+   float z_expected = 10.0498756211F;
+   float c_expected = 0.099503719021F;
+   float s_expected = 0.99503719021F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 298)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 299)");
@@ -587,14 +589,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 0.1f;
-   float b = 1.5f;
-   float c;
-   float s;
-   float r_expected = 1.50332963784f;
-   float z_expected = 15.0332963784f;
-   float c_expected = 0.0665190105238f;
-   float s_expected = 0.997785157857f;
+   float a = 0.1F;
+   float b = 1.5F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.50332963784F;
+   float z_expected = 15.0332963784F;
+   float c_expected = 0.0665190105238F;
+   float s_expected = 0.997785157857F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 302)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 303)");
@@ -604,14 +606,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 1.0f;
-   float b = -1.5f;
-   float c;
-   float s;
-   float r_expected = -1.80277563773f;
-   float z_expected = -1.80277563773f;
-   float c_expected = -0.554700196225f;
-   float s_expected = 0.832050294338f;
+   float a = 1.0F;
+   float b = -1.5F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.80277563773F;
+   float z_expected = -1.80277563773F;
+   float c_expected = -0.554700196225F;
+   float s_expected = 0.832050294338F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 306)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 307)");
@@ -621,14 +623,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 1.0f;
-   float b = -1.0f;
-   float c;
-   float s;
-   float r_expected = -1.41421356237f;
-   float z_expected = -1.41421356237f;
-   float c_expected = -0.707106781187f;
-   float s_expected = 0.707106781187f;
+   float a = 1.0F;
+   float b = -1.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -1.41421356237F;
+   float z_expected = -1.41421356237F;
+   float c_expected = -0.707106781187F;
+   float s_expected = 0.707106781187F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 310)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 311)");
@@ -638,14 +640,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 1.0f;
-   float b = -0.1f;
-   float c;
-   float s;
-   float r_expected = 1.00498756211f;
-   float z_expected = -0.099503719021f;
-   float c_expected = 0.99503719021f;
-   float s_expected = -0.099503719021f;
+   float a = 1.0F;
+   float b = -0.1F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.00498756211F;
+   float z_expected = -0.099503719021F;
+   float c_expected = 0.99503719021F;
+   float s_expected = -0.099503719021F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 314)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 315)");
@@ -655,14 +657,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 1.0f;
-   float b = 0.0f;
-   float c;
-   float s;
-   float r_expected = 1.0f;
-   float z_expected = 0.0f;
-   float c_expected = 1.0f;
-   float s_expected = 0.0f;
+   float a = 1.0F;
+   float b = 0.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.0F;
+   float z_expected = 0.0F;
+   float c_expected = 1.0F;
+   float s_expected = 0.0F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 318)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 319)");
@@ -672,14 +674,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 1.0f;
-   float b = 0.1f;
-   float c;
-   float s;
-   float r_expected = 1.00498756211f;
-   float z_expected = 0.099503719021f;
-   float c_expected = 0.99503719021f;
-   float s_expected = 0.099503719021f;
+   float a = 1.0F;
+   float b = 0.1F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.00498756211F;
+   float z_expected = 0.099503719021F;
+   float c_expected = 0.99503719021F;
+   float s_expected = 0.099503719021F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 322)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 323)");
@@ -689,14 +691,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 1.0f;
-   float b = 1.0f;
-   float c;
-   float s;
-   float r_expected = 1.41421356237f;
-   float z_expected = 1.41421356237f;
-   float c_expected = 0.707106781187f;
-   float s_expected = 0.707106781187f;
+   float a = 1.0F;
+   float b = 1.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.41421356237F;
+   float z_expected = 1.41421356237F;
+   float c_expected = 0.707106781187F;
+   float s_expected = 0.707106781187F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 326)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 327)");
@@ -706,14 +708,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 1.0f;
-   float b = 1.5f;
-   float c;
-   float s;
-   float r_expected = 1.80277563773f;
-   float z_expected = 1.80277563773f;
-   float c_expected = 0.554700196225f;
-   float s_expected = 0.832050294338f;
+   float a = 1.0F;
+   float b = 1.5F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.80277563773F;
+   float z_expected = 1.80277563773F;
+   float c_expected = 0.554700196225F;
+   float s_expected = 0.832050294338F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 330)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 331)");
@@ -723,14 +725,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 1.5f;
-   float b = -1.5f;
-   float c;
-   float s;
-   float r_expected = -2.12132034356f;
-   float z_expected = -1.41421356237f;
-   float c_expected = -0.707106781187f;
-   float s_expected = 0.707106781187f;
+   float a = 1.5F;
+   float b = -1.5F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = -2.12132034356F;
+   float z_expected = -1.41421356237F;
+   float c_expected = -0.707106781187F;
+   float s_expected = 0.707106781187F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 334)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 335)");
@@ -740,14 +742,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 1.5f;
-   float b = -1.0f;
-   float c;
-   float s;
-   float r_expected = 1.80277563773f;
-   float z_expected = -0.554700196225f;
-   float c_expected = 0.832050294338f;
-   float s_expected = -0.554700196225f;
+   float a = 1.5F;
+   float b = -1.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.80277563773F;
+   float z_expected = -0.554700196225F;
+   float c_expected = 0.832050294338F;
+   float s_expected = -0.554700196225F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 338)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 339)");
@@ -757,14 +759,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 1.5f;
-   float b = -0.1f;
-   float c;
-   float s;
-   float r_expected = 1.50332963784f;
-   float z_expected = -0.0665190105238f;
-   float c_expected = 0.997785157857f;
-   float s_expected = -0.0665190105238f;
+   float a = 1.5F;
+   float b = -0.1F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.50332963784F;
+   float z_expected = -0.0665190105238F;
+   float c_expected = 0.997785157857F;
+   float s_expected = -0.0665190105238F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 342)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 343)");
@@ -774,14 +776,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 1.5f;
-   float b = 0.0f;
-   float c;
-   float s;
-   float r_expected = 1.5f;
-   float z_expected = 0.0f;
-   float c_expected = 1.0f;
-   float s_expected = 0.0f;
+   float a = 1.5F;
+   float b = 0.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.5F;
+   float z_expected = 0.0F;
+   float c_expected = 1.0F;
+   float s_expected = 0.0F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 346)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 347)");
@@ -791,14 +793,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 1.5f;
-   float b = 0.1f;
-   float c;
-   float s;
-   float r_expected = 1.50332963784f;
-   float z_expected = 0.0665190105238f;
-   float c_expected = 0.997785157857f;
-   float s_expected = 0.0665190105238f;
+   float a = 1.5F;
+   float b = 0.1F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.50332963784F;
+   float z_expected = 0.0665190105238F;
+   float c_expected = 0.997785157857F;
+   float s_expected = 0.0665190105238F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 350)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 351)");
@@ -808,14 +810,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 1.5f;
-   float b = 1.0f;
-   float c;
-   float s;
-   float r_expected = 1.80277563773f;
-   float z_expected = 0.554700196225f;
-   float c_expected = 0.832050294338f;
-   float s_expected = 0.554700196225f;
+   float a = 1.5F;
+   float b = 1.0F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 1.80277563773F;
+   float z_expected = 0.554700196225F;
+   float c_expected = 0.832050294338F;
+   float s_expected = 0.554700196225F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 354)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 355)");
@@ -825,14 +827,14 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
 
   {
-   float a = 1.5f;
-   float b = 1.5f;
-   float c;
-   float s;
-   float r_expected = 2.12132034356f;
-   float z_expected = 1.41421356237f;
-   float c_expected = 0.707106781187f;
-   float s_expected = 0.707106781187f;
+   float a = 1.5F;
+   float b = 1.5F;
+   float c = NAN;
+   float s = NAN;
+   float r_expected = 2.12132034356F;
+   float z_expected = 1.41421356237F;
+   float c_expected = 0.707106781187F;
+   float s_expected = 0.707106781187F;
    cblas_srotg(&a, &b, &c, &s);
    gsl_test_rel(a, r_expected, flteps, "srotg(case 358)");
    gsl_test_rel(b, z_expected, flteps, "srotg(case 359)");
@@ -844,8 +846,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -1.5;
    double b = -1.5;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -2.12132034356;
    double z_expected = 1.41421356237;
    double c_expected = 0.707106781187;
@@ -861,8 +863,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -1.5;
    double b = -1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1.80277563773;
    double z_expected = 0.554700196225;
    double c_expected = 0.832050294338;
@@ -878,8 +880,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -1.5;
    double b = -0.1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1.50332963784;
    double z_expected = 0.0665190105238;
    double c_expected = 0.997785157857;
@@ -895,8 +897,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -1.5;
    double b = 0;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1.5;
    double z_expected = -0;
    double c_expected = 1;
@@ -912,8 +914,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -1.5;
    double b = 0.1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1.50332963784;
    double z_expected = -0.0665190105238;
    double c_expected = 0.997785157857;
@@ -929,8 +931,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -1.5;
    double b = 1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1.80277563773;
    double z_expected = -0.554700196225;
    double c_expected = 0.832050294338;
@@ -946,8 +948,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -1.5;
    double b = 1.5;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 2.12132034356;
    double z_expected = -1.41421356237;
    double c_expected = -0.707106781187;
@@ -963,8 +965,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -1;
    double b = -1.5;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1.80277563773;
    double z_expected = 1.80277563773;
    double c_expected = 0.554700196225;
@@ -980,8 +982,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -1;
    double b = -1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1.41421356237;
    double z_expected = 1.41421356237;
    double c_expected = 0.707106781187;
@@ -997,8 +999,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -1;
    double b = -0.1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1.00498756211;
    double z_expected = 0.099503719021;
    double c_expected = 0.99503719021;
@@ -1014,8 +1016,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -1;
    double b = 0;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1;
    double z_expected = -0;
    double c_expected = 1;
@@ -1031,8 +1033,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -1;
    double b = 0.1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1.00498756211;
    double z_expected = -0.099503719021;
    double c_expected = 0.99503719021;
@@ -1048,8 +1050,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -1;
    double b = 1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1.41421356237;
    double z_expected = -1.41421356237;
    double c_expected = -0.707106781187;
@@ -1065,8 +1067,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -1;
    double b = 1.5;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1.80277563773;
    double z_expected = -1.80277563773;
    double c_expected = -0.554700196225;
@@ -1082,8 +1084,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -0.1;
    double b = -1.5;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1.50332963784;
    double z_expected = 15.0332963784;
    double c_expected = 0.0665190105238;
@@ -1099,8 +1101,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -0.1;
    double b = -1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1.00498756211;
    double z_expected = 10.0498756211;
    double c_expected = 0.099503719021;
@@ -1116,8 +1118,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -0.1;
    double b = -0.1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -0.141421356237;
    double z_expected = 1.41421356237;
    double c_expected = 0.707106781187;
@@ -1133,8 +1135,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -0.1;
    double b = 0;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -0.1;
    double z_expected = -0;
    double c_expected = 1;
@@ -1150,8 +1152,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -0.1;
    double b = 0.1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 0.141421356237;
    double z_expected = -1.41421356237;
    double c_expected = -0.707106781187;
@@ -1167,8 +1169,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -0.1;
    double b = 1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1.00498756211;
    double z_expected = -10.0498756211;
    double c_expected = -0.099503719021;
@@ -1184,8 +1186,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = -0.1;
    double b = 1.5;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1.50332963784;
    double z_expected = -15.0332963784;
    double c_expected = -0.0665190105238;
@@ -1201,8 +1203,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 0;
    double b = -1.5;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1.5;
    double z_expected = 1;
    double c_expected = -0;
@@ -1218,8 +1220,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 0;
    double b = -1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1;
    double z_expected = 1;
    double c_expected = -0;
@@ -1235,8 +1237,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 0;
    double b = -0.1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -0.1;
    double z_expected = 1;
    double c_expected = -0;
@@ -1252,8 +1254,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 0;
    double b = 0;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 0;
    double z_expected = 0;
    double c_expected = 1;
@@ -1269,8 +1271,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 0;
    double b = 0.1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 0.1;
    double z_expected = 1;
    double c_expected = 0;
@@ -1286,8 +1288,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 0;
    double b = 1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1;
    double z_expected = 1;
    double c_expected = 0;
@@ -1303,8 +1305,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 0;
    double b = 1.5;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1.5;
    double z_expected = 1;
    double c_expected = 0;
@@ -1320,8 +1322,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 0.1;
    double b = -1.5;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1.50332963784;
    double z_expected = -15.0332963784;
    double c_expected = -0.0665190105238;
@@ -1337,8 +1339,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 0.1;
    double b = -1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1.00498756211;
    double z_expected = -10.0498756211;
    double c_expected = -0.099503719021;
@@ -1354,8 +1356,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 0.1;
    double b = -0.1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -0.141421356237;
    double z_expected = -1.41421356237;
    double c_expected = -0.707106781187;
@@ -1371,8 +1373,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 0.1;
    double b = 0;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 0.1;
    double z_expected = 0;
    double c_expected = 1;
@@ -1388,8 +1390,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 0.1;
    double b = 0.1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 0.141421356237;
    double z_expected = 1.41421356237;
    double c_expected = 0.707106781187;
@@ -1405,8 +1407,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 0.1;
    double b = 1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1.00498756211;
    double z_expected = 10.0498756211;
    double c_expected = 0.099503719021;
@@ -1422,8 +1424,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 0.1;
    double b = 1.5;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1.50332963784;
    double z_expected = 15.0332963784;
    double c_expected = 0.0665190105238;
@@ -1439,8 +1441,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 1;
    double b = -1.5;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1.80277563773;
    double z_expected = -1.80277563773;
    double c_expected = -0.554700196225;
@@ -1456,8 +1458,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 1;
    double b = -1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -1.41421356237;
    double z_expected = -1.41421356237;
    double c_expected = -0.707106781187;
@@ -1473,8 +1475,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 1;
    double b = -0.1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1.00498756211;
    double z_expected = -0.099503719021;
    double c_expected = 0.99503719021;
@@ -1490,8 +1492,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 1;
    double b = 0;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1;
    double z_expected = 0;
    double c_expected = 1;
@@ -1507,8 +1509,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 1;
    double b = 0.1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1.00498756211;
    double z_expected = 0.099503719021;
    double c_expected = 0.99503719021;
@@ -1524,8 +1526,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 1;
    double b = 1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1.41421356237;
    double z_expected = 1.41421356237;
    double c_expected = 0.707106781187;
@@ -1541,8 +1543,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 1;
    double b = 1.5;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1.80277563773;
    double z_expected = 1.80277563773;
    double c_expected = 0.554700196225;
@@ -1558,8 +1560,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 1.5;
    double b = -1.5;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = -2.12132034356;
    double z_expected = -1.41421356237;
    double c_expected = -0.707106781187;
@@ -1575,8 +1577,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 1.5;
    double b = -1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1.80277563773;
    double z_expected = -0.554700196225;
    double c_expected = 0.832050294338;
@@ -1592,8 +1594,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 1.5;
    double b = -0.1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1.50332963784;
    double z_expected = -0.0665190105238;
    double c_expected = 0.997785157857;
@@ -1609,8 +1611,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 1.5;
    double b = 0;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1.5;
    double z_expected = 0;
    double c_expected = 1;
@@ -1626,8 +1628,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 1.5;
    double b = 0.1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1.50332963784;
    double z_expected = 0.0665190105238;
    double c_expected = 0.997785157857;
@@ -1643,8 +1645,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 1.5;
    double b = 1;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 1.80277563773;
    double z_expected = 0.554700196225;
    double c_expected = 0.832050294338;
@@ -1660,8 +1662,8 @@ const double flteps = 1e-4, dbleps = 1e-6;
   {
    double a = 1.5;
    double b = 1.5;
-   double c;
-   double s;
+   double c = NAN;
+   double s = NAN;
    double r_expected = 2.12132034356;
    double z_expected = 1.41421356237;
    double c_expected = 0.707106781187;

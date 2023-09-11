@@ -42,8 +42,9 @@ test_hermite_id1(const int n, const double x, const double y)
 {
   double *a = malloc((n + 1) * sizeof(double));
   double *b = malloc((n + 1) * sizeof(double));
-  double lhs, rhs;
-  int k;
+  double lhs;
+  double rhs;
+  int k = 0;
 
   a[0] = gsl_pow_int(2.0 * y, n);
   b[0] = gsl_pow_int(y, n);
@@ -72,9 +73,11 @@ test_hermite(void)
   gsl_sf_result r;
   
   int s = 0;
-  int m, n, sa;
+  int m;
+  int n;
+  int sa;
   double res[256];
-  double x;
+  double x = NAN;
   const double aizero1 = -2.3381074104597670384891972524467; /* first zero of the Airy function Ai */
 
   /* test some known identities */

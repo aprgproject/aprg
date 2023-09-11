@@ -21,6 +21,7 @@
 /* Author:  G. Jungman */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #include <gsl/gsl_linalg.h>
@@ -65,8 +66,8 @@ gsl_linalg_QR_decomp (gsl_matrix * A, gsl_vector * tau)
     {
       return gsl_linalg_QR_decomp_old (A, tau);
     }
-  else
-    {
+  
+    
       const size_t M = A->size1;
       size_t i;
 
@@ -97,7 +98,7 @@ gsl_linalg_QR_decomp (gsl_matrix * A, gsl_vector * tau)
         }
 
       return GSL_SUCCESS;
-    }
+   
 }
 
 int
@@ -112,7 +113,7 @@ gsl_linalg_QR_decomp_old (gsl_matrix * A, gsl_vector * tau)
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < GSL_MIN (M, N); i++)
         {
@@ -374,7 +375,7 @@ gsl_linalg_QR_QTvec (const gsl_matrix * QR, const gsl_vector * tau, gsl_vector *
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* compute Q^T v */
       for (i = 0; i < GSL_MIN (M, N); i++)
@@ -406,7 +407,7 @@ gsl_linalg_QR_Qvec (const gsl_matrix * QR, const gsl_vector * tau, gsl_vector * 
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* compute Q v */
       for (i = GSL_MIN (M, N); i-- > 0;)
@@ -441,7 +442,7 @@ gsl_linalg_QR_QTmat (const gsl_matrix * QR, const gsl_vector * tau, gsl_matrix *
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* compute Q^T A */
       for (i = 0; i < GSL_MIN (M, N); i++)
@@ -474,7 +475,7 @@ gsl_linalg_QR_matQ (const gsl_matrix * QR, const gsl_vector * tau, gsl_matrix * 
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* compute A Q */
       for (i = 0; i < GSL_MIN (M, N); i++)
@@ -512,7 +513,8 @@ gsl_linalg_QR_unpack (const gsl_matrix * QR, const gsl_vector * tau, gsl_matrix 
     }
   else
     {
-      size_t i, j;
+      size_t i;
+      size_t j;
 
       /* Initialize Q to the identity */
       gsl_matrix_set_identity (Q);
@@ -528,11 +530,13 @@ gsl_linalg_QR_unpack (const gsl_matrix * QR, const gsl_vector * tau, gsl_matrix 
       /*  form the right triangular matrix R from a packed QR matrix */
       for (i = 0; i < M; i++)
         {
-          for (j = 0; j < i && j < N; j++)
+          for (j = 0; j < i && j < N; j++) {
             gsl_matrix_set (R, i, j, 0.0);
+}
 
-          for (j = i; j < N; j++)
+          for (j = i; j < N; j++) {
             gsl_matrix_set (R, i, j, gsl_matrix_get (QR, i, j));
+}
         }
 
       return GSL_SUCCESS;
@@ -573,8 +577,9 @@ gsl_linalg_QR_update (gsl_matrix * Q, gsl_matrix * R,
     }
   else
     {
-      size_t j, k;
-      double w0;
+      size_t j;
+      size_t k;
+      double w0 = NAN;
 
       /* Apply Given's rotations to reduce w to (|w|, 0, 0, ... , 0)
 
@@ -585,7 +590,8 @@ gsl_linalg_QR_update (gsl_matrix * Q, gsl_matrix * R,
 
       for (k = M - 1; k > 0; k--)  /* loop from k = M-1 to 1 */
         {
-          double c, s;
+          double c;
+          double s;
           double wk = gsl_vector_get (w, k);
           double wkm1 = gsl_vector_get (w, k - 1);
 
@@ -610,7 +616,8 @@ gsl_linalg_QR_update (gsl_matrix * Q, gsl_matrix * R,
 
       for (k = 1; k < GSL_MIN(M,N+1); k++)
         {
-          double c, s;
+          double c;
+          double s;
           double diag = gsl_matrix_get (R, k - 1, k - 1);
           double offdiag = gsl_matrix_get (R, k, k - 1);
 
@@ -634,7 +641,7 @@ gsl_linalg_QR_QRsolve (gsl_matrix * Q, gsl_matrix * R, const gsl_vector * b, gsl
     {
       return GSL_ENOTSQR;
     }
-  else if (Q->size1 != M || b->size != M || x->size != M)
+  if (Q->size1 != M || b->size != M || x->size != M)
     {
       return GSL_EBADLEN;
     }
@@ -667,7 +674,7 @@ gsl_linalg_QR_rcond(const gsl_matrix * QR, double * rcond, gsl_vector * work)
   else
     {
       gsl_matrix_const_view R = gsl_matrix_const_submatrix (QR, 0, 0, N, N);
-      int status;
+      int status = 0;
 
       status = gsl_linalg_tri_rcond(CblasUpper, &R.matrix, rcond, work);
 

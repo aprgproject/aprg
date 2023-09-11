@@ -27,8 +27,10 @@
 int
 main (void)
 {
-  double y, y_expected;
-  int e, e_expected;
+  double y;
+  double y_expected;
+  int e;
+  int e_expected;
 
   gsl_ieee_env_setup ();
 
@@ -339,7 +341,7 @@ main (void)
   gsl_test_rel (y, y_expected, 1e-15, "gsl_pow_9(-3.14)");
 
   {
-    int n;
+    int n = 0;
     for (n = -9; n < 10; n++)
       {
         y = gsl_pow_int (-3.14, n);
@@ -350,7 +352,7 @@ main (void)
 
 
   {
-    unsigned int n;
+    unsigned int n = 0;
     for (n = 0; n < 10; n++)
       {
         y = gsl_pow_uint (-3.14, n);
@@ -499,8 +501,9 @@ main (void)
 
   /* Test for approximate floating point comparison */
   {
-    double x, y;
-    int i;
+    double x;
+    double y;
+    int i = 0;
 
     x = M_PI;
     y = 22.0 / 7.0;

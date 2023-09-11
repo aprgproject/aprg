@@ -31,7 +31,9 @@ gsl_permutation_linear_to_canonical (gsl_permutation * q,
                                      const gsl_permutation * p)
 {
   const size_t n = p->size;
-  size_t i, k, s;
+  size_t i;
+  size_t k;
+  size_t s;
   size_t t = n;
 
   const size_t *const pp = p->data;
@@ -54,8 +56,9 @@ gsl_permutation_linear_to_canonical (gsl_permutation * q,
           s++;
         }
 
-      if (k < i)
+      if (k < i) {
         continue;
+}
 
       /* Now have k == i, i.e the least in its cycle, and s == cycle length */
 
@@ -73,8 +76,9 @@ gsl_permutation_linear_to_canonical (gsl_permutation * q,
           s++;
         }
 
-      if (t == 0)
+      if (t == 0) {
         break;
+}
     }
 
   return GSL_SUCCESS;
@@ -84,7 +88,10 @@ int
 gsl_permutation_canonical_to_linear (gsl_permutation * p,
                                      const gsl_permutation * q)
 {
-  size_t i, k, kk, first;
+  size_t i;
+  size_t k;
+  size_t kk;
+  size_t first;
   const size_t n = p->size;
 
   size_t *const pp = p->data;
@@ -130,7 +137,8 @@ size_t
 gsl_permutation_inversions (const gsl_permutation * p)
 {
   size_t count = 0;
-  size_t i, j;
+  size_t i;
+  size_t j;
   const size_t size = p->size;
 
   for (i = 0; i < size - 1; i++)
@@ -150,7 +158,8 @@ gsl_permutation_inversions (const gsl_permutation * p)
 size_t
 gsl_permutation_linear_cycles (const gsl_permutation * p)
 {
-  size_t i, k;
+  size_t i;
+  size_t k;
   size_t count = 0;
   const size_t size = p->size;
 
@@ -164,8 +173,9 @@ gsl_permutation_linear_cycles (const gsl_permutation * p)
           k = p->data[k];
         }
 
-      if (k < i)
+      if (k < i) {
         continue;
+}
 
       count++;
     }
@@ -176,7 +186,7 @@ gsl_permutation_linear_cycles (const gsl_permutation * p)
 size_t
 gsl_permutation_canonical_cycles (const gsl_permutation * p)
 {
-  size_t i;
+  size_t i = 0;
   size_t count = 1;
   size_t min = p->data[0];
 

@@ -25,6 +25,7 @@
 #include <gsl/gsl_sf_airy.h>
 #include <gsl/gsl_sf_pow_int.h>
 #include <gsl/gsl_sf_bessel.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -927,8 +928,8 @@ clenshaw(const double * c, int N, double u)
 {
   double B_np1 = 0.0;
   double B_n   = c[N];
-  double B_nm1;
-  int n;
+  double B_nm1 = NAN;
+  int n = 0;
   for(n=N; n>0; n--) {
     B_nm1 = 2.0*(2.0*u-1.0) * B_n - B_np1 + c[n-1];
     B_np1 = B_n;
@@ -962,7 +963,7 @@ mcmahon_correction(const double mu, const double beta)
     const double term5 =  512.0*2092163573.0/(315.0*ebsq*ebsq*ebsq*ebsq*ebsq);
     return 1.0 + 8.0*(term1 + term2 + term3 + term4 + term5);
   }
-  else {
+  
     /* Here we do things in terms of 1/mu, which
      * is purely to prevent overflow in the very
      * unlikely case that mu is really big.
@@ -981,7 +982,7 @@ mcmahon_correction(const double mu, const double beta)
     const double term5 = term1 * n5 * r*r*r*r;
     const double term6 = term1 * n6 * r*r*r*r*r;
     return 1.0 - 8.0*(term1 + term2 + term3 + term4 + term5 + term6);
-  }
+ 
 }
 
 
@@ -1002,11 +1003,11 @@ olver_b0(double z, double minus_zeta)
     const double c8 = -0.0001906870370050847239813945647;
     return c0 + a*(c1 + a*(c2 + a*(c3 + a*(c4 + a*(c5 + a*(c6 + a*(c7 + a*c8)))))));
   }
-  else {
+  
     const double abs_zeta = minus_zeta;
     const double t = 1.0/(z*sqrt(1.0 - 1.0/(z*z)));
     return -5.0/(48.0*abs_zeta*abs_zeta) + t*(3.0 + 5.0*t*t)/(24.0*sqrt(abs_zeta));
-  }
+ 
 }
 
 
@@ -1066,7 +1067,7 @@ gsl_sf_bessel_zero_J1_e(unsigned int s, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else {
+  
     /* See [M. Branders et al., J. Comp. Phys. 42, 403 (1981)]. */
 
     static const double a[] = { -0.362804405737084,
@@ -1088,7 +1089,7 @@ gsl_sf_bessel_zero_J1_e(unsigned int s, gsl_sf_result * result)
     result->val = beta * (1.0 + R*bi2);
     result->err = fabs(2.0e-14 * result->val);
     return GSL_SUCCESS;
-  }
+ 
 }
 
 

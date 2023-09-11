@@ -40,13 +40,15 @@ int gsl_sf_bessel_Jn_e(int n, double x, gsl_sf_result * result)
   if(n < 0) {
     /* reduce to case n >= 0 */
     n = -n;
-    if(GSL_IS_ODD(n)) sign = -sign;
+    if(GSL_IS_ODD(n)) { sign = -sign;
+}
   }  
 
   if(x < 0.0) {
     /* reduce to case x >= 0. */
     x = -x;
-    if(GSL_IS_ODD(n)) sign = -sign;
+    if(GSL_IS_ODD(n)) { sign = -sign;
+}
   }
 
   /* CHECK_POINTER(result) */
@@ -58,7 +60,7 @@ int gsl_sf_bessel_Jn_e(int n, double x, gsl_sf_result * result)
     result->err = b0.err;
     return stat_J0;
   }
-  else if(n == 1) {
+  if(n == 1) {
     gsl_sf_result b1;
     int stat_J1 = gsl_sf_bessel_J1_e(x, &b1);
     result->val = sign * b1.val;
@@ -145,18 +147,19 @@ gsl_sf_bessel_Jn_array(int nmin, int nmax, double x, double * result_array)
   /* CHECK_POINTER(result_array) */
 
   if(nmin < 0 || nmax < nmin) {
-    int n;
+    int n = 0;
     for(n=nmax; n>=nmin; n--) {
       result_array[n-nmin] = 0.0;
     }
     GSL_ERROR ("domain error", GSL_EDOM);
   }
   else if(x == 0.0) {
-    int n;
+    int n = 0;
     for(n=nmax; n>=nmin; n--) {
       result_array[n-nmin] = 0.0;
     }
-    if(nmin == 0) result_array[0] = 1.0;
+    if(nmin == 0) { result_array[0] = 1.0;
+}
     return GSL_SUCCESS;
   }
   else {
@@ -168,8 +171,8 @@ gsl_sf_bessel_Jn_array(int nmin, int nmax, double x, double * result_array)
 
     double Jnp1 = r_Jnp1.val;
     double Jn   = r_Jn.val;
-    double Jnm1;
-    int n;
+    double Jnm1 = NAN;
+    int n = 0;
 
     if(stat == GSL_SUCCESS) {
       for(n=nmax; n>=nmin; n--) {

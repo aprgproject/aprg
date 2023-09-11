@@ -52,10 +52,10 @@ gsl_blas_sdsdot (float alpha, const gsl_vector_float * X,
                       INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 int
@@ -69,10 +69,10 @@ gsl_blas_dsdot (const gsl_vector_float * X, const gsl_vector_float * Y,
                      INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 int
@@ -86,10 +86,10 @@ gsl_blas_sdot (const gsl_vector_float * X, const gsl_vector_float * Y,
                     INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 int
@@ -102,10 +102,10 @@ gsl_blas_ddot (const gsl_vector * X, const gsl_vector * Y, double *result)
                     INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -119,10 +119,10 @@ gsl_blas_cdotu (const gsl_vector_complex_float * X,
                        INT (Y->stride), GSL_COMPLEX_P (dotu));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -136,10 +136,10 @@ gsl_blas_cdotc (const gsl_vector_complex_float * X,
                        INT (Y->stride), GSL_COMPLEX_P (dotc));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -153,10 +153,10 @@ gsl_blas_zdotu (const gsl_vector_complex * X, const gsl_vector_complex * Y,
                        INT (Y->stride), GSL_COMPLEX_P (dotu));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -170,10 +170,10 @@ gsl_blas_zdotc (const gsl_vector_complex * X, const gsl_vector_complex * Y,
                        INT (Y->stride), GSL_COMPLEX_P (dotc));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 /* Norms of vectors */
@@ -266,10 +266,10 @@ gsl_blas_sswap (gsl_vector_float * X, gsl_vector_float * Y)
                    INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 int
@@ -281,10 +281,10 @@ gsl_blas_dswap (gsl_vector * X, gsl_vector * Y)
                    INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    };
+   ;
 }
 
 int
@@ -296,10 +296,10 @@ gsl_blas_cswap (gsl_vector_complex_float * X, gsl_vector_complex_float * Y)
                    INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 int
@@ -311,10 +311,10 @@ gsl_blas_zswap (gsl_vector_complex * X, gsl_vector_complex * Y)
                    INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -329,10 +329,10 @@ gsl_blas_scopy (const gsl_vector_float * X, gsl_vector_float * Y)
                    INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 int
@@ -344,10 +344,10 @@ gsl_blas_dcopy (const gsl_vector * X, gsl_vector * Y)
                    INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 int
@@ -360,10 +360,10 @@ gsl_blas_ccopy (const gsl_vector_complex_float * X,
                    INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 int
@@ -375,10 +375,10 @@ gsl_blas_zcopy (const gsl_vector_complex * X, gsl_vector_complex * Y)
                    INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -393,10 +393,10 @@ gsl_blas_saxpy (float alpha, const gsl_vector_float * X, gsl_vector_float * Y)
                    INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 int
@@ -408,10 +408,10 @@ gsl_blas_daxpy (double alpha, const gsl_vector * X, gsl_vector * Y)
                    INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 int
@@ -425,10 +425,10 @@ gsl_blas_caxpy (const gsl_complex_float alpha,
                    INT (X->stride), Y->data, INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 int
@@ -441,10 +441,10 @@ gsl_blas_zaxpy (const gsl_complex alpha, const gsl_vector_complex * X,
                    INT (X->stride), Y->data, INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 /* Generate rotation */
@@ -474,10 +474,10 @@ gsl_blas_srot (gsl_vector_float * X, gsl_vector_float * Y, float c, float s)
                   INT (Y->stride), c, s);
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 int
@@ -489,10 +489,10 @@ gsl_blas_drot (gsl_vector * X, gsl_vector * Y, const double c, const double s)
                   INT (Y->stride), c, s);
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -524,10 +524,10 @@ gsl_blas_srotm (gsl_vector_float * X, gsl_vector_float * Y, const float P[])
                    INT (Y->stride), P);
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 int
@@ -539,10 +539,10 @@ gsl_blas_drotm (gsl_vector * X, gsl_vector * Y, const double P[])
                    INT (Y->stride), P);
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -609,10 +609,10 @@ gsl_blas_sgemv (CBLAS_TRANSPOSE_t TransA, float alpha,
                    INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -631,10 +631,10 @@ gsl_blas_dgemv (CBLAS_TRANSPOSE_t TransA, double alpha, const gsl_matrix * A,
                    INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -657,10 +657,10 @@ gsl_blas_cgemv (CBLAS_TRANSPOSE_t TransA, const gsl_complex_float alpha,
                    INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -682,10 +682,10 @@ gsl_blas_zgemv (CBLAS_TRANSPOSE_t TransA, const gsl_complex alpha,
                    INT (Y->stride));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -987,10 +987,10 @@ gsl_blas_sger (float alpha, const gsl_vector_float * X,
                   INT (A->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -1008,10 +1008,10 @@ gsl_blas_dger (double alpha, const gsl_vector * X, const gsl_vector * Y,
                   INT (A->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -1033,10 +1033,10 @@ gsl_blas_cgeru (const gsl_complex_float alpha,
                    A->data, INT (A->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 int
@@ -1053,10 +1053,10 @@ gsl_blas_zgeru (const gsl_complex alpha, const gsl_vector_complex * X,
                    A->data, INT (A->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -1078,10 +1078,10 @@ gsl_blas_cgerc (const gsl_complex_float alpha,
                    A->data, INT (A->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -1099,10 +1099,10 @@ gsl_blas_zgerc (const gsl_complex alpha, const gsl_vector_complex * X,
                    A->data, INT (A->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 /* HER */
@@ -1323,10 +1323,10 @@ gsl_blas_sgemm (CBLAS_TRANSPOSE_t TransA, CBLAS_TRANSPOSE_t TransB,
                    C->data, INT (C->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -1349,10 +1349,10 @@ gsl_blas_dgemm (CBLAS_TRANSPOSE_t TransA, CBLAS_TRANSPOSE_t TransB,
                    C->data, INT (C->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -1378,10 +1378,10 @@ gsl_blas_cgemm (CBLAS_TRANSPOSE_t TransA, CBLAS_TRANSPOSE_t TransB,
                    INT (C->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -1406,10 +1406,10 @@ gsl_blas_zgemm (CBLAS_TRANSPOSE_t TransA, CBLAS_TRANSPOSE_t TransB,
                    INT (C->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -1440,10 +1440,10 @@ gsl_blas_ssymm (CBLAS_SIDE_t Side, CBLAS_UPLO_t Uplo, float alpha,
                    C->data, INT (C->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 
 }
 
@@ -1473,10 +1473,10 @@ gsl_blas_dsymm (CBLAS_SIDE_t Side, CBLAS_UPLO_t Uplo, double alpha,
                    C->data, INT (C->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -1508,10 +1508,10 @@ gsl_blas_csymm (CBLAS_SIDE_t Side, CBLAS_UPLO_t Uplo,
                    INT (C->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 int
@@ -1541,10 +1541,10 @@ gsl_blas_zsymm (CBLAS_SIDE_t Side, CBLAS_UPLO_t Uplo,
                    INT (C->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -1578,10 +1578,10 @@ gsl_blas_chemm (CBLAS_SIDE_t Side, CBLAS_UPLO_t Uplo,
                    INT (C->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 
 }
 
@@ -1613,10 +1613,10 @@ gsl_blas_zhemm (CBLAS_SIDE_t Side, CBLAS_UPLO_t Uplo,
                    INT (C->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 /* SYRK */
@@ -1975,10 +1975,10 @@ gsl_blas_strmm (CBLAS_SIDE_t Side, CBLAS_UPLO_t Uplo,
                    alpha, A->data, INT (A->tda), B->data, INT (B->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -2003,10 +2003,10 @@ gsl_blas_dtrmm (CBLAS_SIDE_t Side, CBLAS_UPLO_t Uplo,
                    alpha, A->data, INT (A->tda), B->data, INT (B->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -2034,10 +2034,10 @@ gsl_blas_ctrmm (CBLAS_SIDE_t Side, CBLAS_UPLO_t Uplo,
                    INT (B->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -2064,10 +2064,10 @@ gsl_blas_ztrmm (CBLAS_SIDE_t Side, CBLAS_UPLO_t Uplo,
                    INT (B->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -2094,10 +2094,10 @@ gsl_blas_strsm (CBLAS_SIDE_t Side, CBLAS_UPLO_t Uplo,
                    alpha, A->data, INT (A->tda), B->data, INT (B->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -2122,10 +2122,10 @@ gsl_blas_dtrsm (CBLAS_SIDE_t Side, CBLAS_UPLO_t Uplo,
                    alpha, A->data, INT (A->tda), B->data, INT (B->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -2153,10 +2153,10 @@ gsl_blas_ctrsm (CBLAS_SIDE_t Side, CBLAS_UPLO_t Uplo,
                    INT (B->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }
 
 
@@ -2183,8 +2183,8 @@ gsl_blas_ztrsm (CBLAS_SIDE_t Side, CBLAS_UPLO_t Uplo,
                    INT (B->tda));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       GSL_ERROR ("invalid length", GSL_EBADLEN);
-    }
+   
 }

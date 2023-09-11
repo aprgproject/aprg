@@ -82,15 +82,33 @@ gsl_schur_gen_eigvals(const gsl_matrix *A, const gsl_matrix *B, double *wr1,
   const double safemax = 1.0 / safemin;
   const double rtmin = sqrt(safemin);
   const double rtmax = 1.0 / rtmin;
-  double anorm, bnorm;
-  double ascale, bscale, bsize;
-  double s1, s2;
-  double A11, A12, A21, A22;
-  double B11, B12, B22;
-  double binv11, binv22;
-  double bmin;
-  double as11, as12, as22, abi22;
-  double pp, qq, shift, ss, discr, r;
+  double anorm;
+  double bnorm;
+  double ascale;
+  double bscale;
+  double bsize;
+  double s1;
+  double s2;
+  double A11;
+  double A12;
+  double A21;
+  double A22;
+  double B11;
+  double B12;
+  double B22;
+  double binv11;
+  double binv22;
+  double bmin = NAN;
+  double as11;
+  double as12;
+  double as22;
+  double abi22;
+  double pp;
+  double qq;
+  double shift;
+  double ss;
+  double discr;
+  double r;
 
   /* scale A */
   anorm = GSL_MAX(GSL_MAX(fabs(gsl_matrix_get(A, 0, 0)) +
@@ -110,10 +128,12 @@ gsl_schur_gen_eigvals(const gsl_matrix *A, const gsl_matrix *B, double *wr1,
   B22 = gsl_matrix_get(B, 1, 1);
   bmin = rtmin * GSL_MAX(fabs(B11),
                          GSL_MAX(fabs(B12), GSL_MAX(fabs(B22), rtmin)));
-  if (fabs(B11) < bmin)
+  if (fabs(B11) < bmin) {
     B11 = GSL_SIGN(B11) * bmin;
-  if (fabs(B22) < bmin)
+}
+  if (fabs(B22) < bmin) {
     B22 = GSL_SIGN(B22) * bmin;
+}
 
   /* scale B */
   bnorm = GSL_MAX(fabs(B11), GSL_MAX(fabs(B12) + fabs(B22), safemin));
@@ -204,21 +224,29 @@ gsl_schur_gen_eigvals(const gsl_matrix *A, const gsl_matrix *B, double *wr1,
   /* compute scaling */
   {
     const double fuzzy1 = 1.0 + 1.0e-5;
-    double c1, c2, c3, c4, c5;
-    double wabs, wsize, wscale;
+    double c1;
+    double c2;
+    double c3;
+    double c4;
+    double c5;
+    double wabs;
+    double wsize;
+    double wscale;
 
     c1 = bsize * (safemin * GSL_MAX(1.0, ascale));
     c2 = safemin * GSL_MAX(1.0, bnorm);
     c3 = bsize * safemin;
-    if (ascale <= 1.0 && bsize <= 1.0)
+    if (ascale <= 1.0 && bsize <= 1.0) {
       c4 = GSL_MIN(1.0, (ascale / safemin) * bsize);
-    else
+    } else {
       c4 = 1.0;
+}
 
-    if (ascale <= 1.0 || bsize <= 1.0)
+    if (ascale <= 1.0 || bsize <= 1.0) {
       c5 = GSL_MIN(1.0, ascale * bsize);
-    else
+    } else {
       c5 = 1.0;
+}
 
     /* scale first eigenvalue */
     wabs = fabs(*wr1) + fabs(*wi);
@@ -329,12 +357,13 @@ gsl_schur_solve_equation(double ca, const gsl_matrix *A, double z,
                          double smin)
 {
   size_t N = A->size1;
-  double bnorm;
+  double bnorm = NAN;
   double scale = 1.0;
   
   if (N == 1)
     {
-      double c,     /* denominator */
+      double c;
+      double /* denominator */
              cnorm; /* |c| */
 
       /* we have a 1-by-1 (real) scalar system to solve */
@@ -353,8 +382,9 @@ gsl_schur_solve_equation(double ca, const gsl_matrix *A, double z,
       bnorm = fabs(gsl_vector_get(b, 0));
       if (cnorm < 1.0 && bnorm > 1.0)
         {
-          if (bnorm > GSL_SCHUR_BIGNUM*cnorm)
+          if (bnorm > GSL_SCHUR_BIGNUM*cnorm) {
             scale = 1.0 / bnorm;
+}
         }
 
       /* compute x */
@@ -364,16 +394,25 @@ gsl_schur_solve_equation(double ca, const gsl_matrix *A, double z,
   else
     {
       double cr[2][2];
-      double *crv;
-      double cmax;
-      size_t icmax, j;
-      double bval1, bval2;
-      double ur11, ur12, ur22, ur11r;
-      double cr21, cr22;
-      double lr21;
-      double b1, b2, bbnd;
-      double x1, x2;
-      double temp;
+      double *crv = NULL;
+      double cmax = NAN;
+      size_t icmax;
+      size_t j;
+      double bval1;
+      double bval2;
+      double ur11;
+      double ur12;
+      double ur22;
+      double ur11r;
+      double cr21;
+      double cr22;
+      double lr21 = NAN;
+      double b1;
+      double b2;
+      double bbnd;
+      double x1;
+      double x2;
+      double temp = NAN;
       size_t ipivot[4][4] = { { 0, 1, 2, 3 },
                               { 1, 0, 3, 2 },
                               { 2, 3, 0, 1 },
@@ -423,8 +462,9 @@ gsl_schur_solve_equation(double ca, const gsl_matrix *A, double z,
           bnorm = GSL_MAX(fabs(bval1), fabs(bval2));
           if (smin < 1.0 && bnorm > 1.0)
             {
-              if (bnorm > GSL_SCHUR_BIGNUM*smin)
+              if (bnorm > GSL_SCHUR_BIGNUM*smin) {
                 scale = 1.0 / bnorm;
+}
             }
           temp = scale / smin;
           gsl_vector_set(x, 0, temp * bval1);
@@ -444,8 +484,9 @@ gsl_schur_solve_equation(double ca, const gsl_matrix *A, double z,
       ur22 = cr22 - ur12 * lr21;
 
       /* if smaller pivot < smin, use smin */
-      if (fabs(ur22) < smin)
+      if (fabs(ur22) < smin) {
         ur22 = smin;
+}
 
       if (rswap[icmax])
         {
@@ -462,8 +503,9 @@ gsl_schur_solve_equation(double ca, const gsl_matrix *A, double z,
       bbnd = GSL_MAX(fabs(b1 * (ur22 * ur11r)), fabs(b2));
       if (bbnd > 1.0 && fabs(ur22) < 1.0)
         {
-          if (bbnd >= GSL_SCHUR_BIGNUM * fabs(ur22))
+          if (bbnd >= GSL_SCHUR_BIGNUM * fabs(ur22)) {
             scale = 1.0 / bbnd;
+}
         }
 
       x2 = (b2 * scale) / ur22;
@@ -540,14 +582,18 @@ gsl_schur_solve_equation_z(double ca, const gsl_matrix *A, gsl_complex *z,
 {
   size_t N = A->size1;
   double scale = 1.0;
-  double bnorm;
+  double bnorm = NAN;
 
   if (N == 1)
     {
-      double cr,    /* denominator */
-             ci,
-             cnorm; /* |c| */
-      gsl_complex bval, c, xval, tmp;
+      double cr;
+      double /* denominator */
+             ci;
+      double cnorm; /* |c| */
+      gsl_complex bval;
+      gsl_complex c;
+      gsl_complex xval;
+      gsl_complex tmp;
 
       /* we have a 1-by-1 (complex) scalar system to solve */
 
@@ -569,8 +615,9 @@ gsl_schur_solve_equation_z(double ca, const gsl_matrix *A, gsl_complex *z,
       bnorm = fabs(GSL_REAL(bval)) + fabs(GSL_IMAG(bval));
       if (cnorm < 1.0 && bnorm > 1.0)
         {
-          if (bnorm > GSL_SCHUR_BIGNUM*cnorm)
+          if (bnorm > GSL_SCHUR_BIGNUM*cnorm) {
             scale = 1.0 / bnorm;
+}
         }
 
       /* compute x */
@@ -584,22 +631,44 @@ gsl_schur_solve_equation_z(double ca, const gsl_matrix *A, gsl_complex *z,
     } /* if (N == 1) */
   else
     {
-      double cr[2][2], ci[2][2];
-      double *civ, *crv;
-      double cmax;
-      gsl_complex bval1, bval2;
-      gsl_complex xval1, xval2;
-      double xr1, xi1;
-      size_t icmax;
-      size_t j;
-      double temp;
-      double ur11, ur12, ur22, ui11, ui12, ui22, ur11r, ui11r;
-      double ur12s, ui12s;
-      double u22abs;
-      double lr21, li21;
-      double cr21, cr22, ci21, ci22;
-      double br1, bi1, br2, bi2, bbnd;
-      gsl_complex b1, b2;
+      double cr[2][2];
+      double ci[2][2];
+      double *civ;
+      double *crv;
+      double cmax = NAN;
+      gsl_complex bval1;
+      gsl_complex bval2;
+      gsl_complex xval1;
+      gsl_complex xval2;
+      double xr1;
+      double xi1;
+      size_t icmax = 0;
+      size_t j = 0;
+      double temp = NAN;
+      double ur11;
+      double ur12;
+      double ur22;
+      double ui11;
+      double ui12;
+      double ui22;
+      double ur11r;
+      double ui11r;
+      double ur12s;
+      double ui12s;
+      double u22abs = NAN;
+      double lr21;
+      double li21;
+      double cr21;
+      double cr22;
+      double ci21;
+      double ci22;
+      double br1;
+      double bi1;
+      double br2;
+      double bi2;
+      double bbnd;
+      gsl_complex b1;
+      gsl_complex b2;
       size_t ipivot[4][4] = { { 0, 1, 2, 3 },
                               { 1, 0, 3, 2 },
                               { 2, 3, 0, 1 },
@@ -658,8 +727,9 @@ gsl_schur_solve_equation_z(double ca, const gsl_matrix *A, gsl_complex *z,
                           fabs(GSL_REAL(bval2)) + fabs(GSL_IMAG(bval2)));
           if (smin < 1.0 && bnorm > 1.0)
             {
-              if (bnorm > GSL_SCHUR_BIGNUM*smin)
+              if (bnorm > GSL_SCHUR_BIGNUM*smin) {
                 scale = 1.0 / bnorm;
+}
             }
 
           temp = scale / smin;

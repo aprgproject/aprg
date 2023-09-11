@@ -54,7 +54,7 @@ Return: pointer to workspace
 gsl_eigen_genherm_workspace *
 gsl_eigen_genherm_alloc(const size_t n)
 {
-  gsl_eigen_genherm_workspace *w;
+  gsl_eigen_genherm_workspace *w = NULL;
 
   if (n == 0)
     {
@@ -91,8 +91,9 @@ gsl_eigen_genherm_free (gsl_eigen_genherm_workspace * w)
 {
   RETURN_IF_NULL (w);
 
-  if (w->herm_workspace_p)
+  if (w->herm_workspace_p) {
     gsl_eigen_herm_free(w->herm_workspace_p);
+}
 
   free(w);
 } /* gsl_eigen_genherm_free() */
@@ -140,12 +141,13 @@ gsl_eigen_genherm (gsl_matrix_complex * A, gsl_matrix_complex * B,
     }
   else
     {
-      int s;
+      int s = 0;
 
       /* compute Cholesky factorization of B */
       s = gsl_linalg_complex_cholesky_decomp(B);
-      if (s != GSL_SUCCESS)
+      if (s != GSL_SUCCESS) {
         return s; /* B is not positive definite */
+}
 
       /* transform to standard hermitian eigenvalue problem */
       gsl_eigen_genherm_standardize(A, B);
@@ -203,9 +205,11 @@ static int
 genherm_standardize_L2(gsl_matrix_complex *A, const gsl_matrix_complex *B)
 {
   const size_t N = A->size1;
-  size_t i;
-  double a, b;
-  gsl_complex y, z;
+  size_t i = 0;
+  double a;
+  double b;
+  gsl_complex y;
+  gsl_complex z;
 
   GSL_SET_IMAG(&z, 0.0);
 
@@ -286,8 +290,8 @@ genherm_standardize_L3(gsl_matrix_complex *A, const gsl_matrix_complex *B)
       /* use Level 2 algorithm */
       return genherm_standardize_L2(A, B);
     }
-  else
-    {
+  
+    
       /*
        * partition matrices:
        *
@@ -336,5 +340,5 @@ genherm_standardize_L3(gsl_matrix_complex *A, const gsl_matrix_complex *B)
         return status;
 
       return GSL_SUCCESS;
-    }
+   
 }

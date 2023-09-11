@@ -25,6 +25,7 @@
 #include <gsl/gsl_sf_pow_int.h>
 #include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_sf_bessel.h>
+#include <math.h>
 
 #include "error.h"
 #include "check.h"
@@ -50,23 +51,24 @@ static int bessel_kl_scaled_small_x(int l, const double x, gsl_sf_result * resul
   else {
     const int lmax = 50;
     gsl_sf_result ipos_term;
-    double ineg_term;
+    double ineg_term = NAN;
     double sgn = (GSL_IS_ODD(l) ? -1.0 : 1.0);
     double ex  = exp(x);
     double t = 0.5*x*x;
     double sum = 1.0;
     double t_coeff = 1.0;
     double t_power = 1.0;
-    double delta;
-    int stat_il;
-    int i;
+    double delta = NAN;
+    int stat_il = 0;
+    int i = 0;
 
     for(i=1; i<lmax; i++) {
       t_coeff /= i*(2*(i-l) - 1);
       t_power *= t;
       delta = t_power*t_coeff;
       sum += delta;
-      if(fabs(delta/sum) < GSL_DBL_EPSILON) break;
+      if(fabs(delta/sum) < GSL_DBL_EPSILON) { break;
+}
     }
 
     stat_il = gsl_sf_bessel_il_scaled_e(l, x, &ipos_term);
@@ -172,10 +174,10 @@ int gsl_sf_bessel_kl_scaled_e(int l, const double x, gsl_sf_result * result)
     gsl_sf_result r_bkm;
     int stat_1 = gsl_sf_bessel_k1_scaled_e(x, &r_bk);
     int stat_0 = gsl_sf_bessel_k0_scaled_e(x, &r_bkm);
-    double bkp;
+    double bkp = NAN;
     double bk  = r_bk.val;
     double bkm = r_bkm.val;
-    int j;
+    int j = 0;
     for(j=1; j<l; j++) { 
       bkp = (2*j+1)/x*bk + bkm;
       bkm = bk;
@@ -200,8 +202,10 @@ gsl_sf_bessel_kl_scaled_array(const int lmax, const double x, double * result_ar
     result_array[0] = result.val;
     return stat;
   } else {
-    int ell;
-    double kellp1, kell, kellm1;
+    int ell = 0;
+    double kellp1;
+    double kell;
+    double kellm1;
     gsl_sf_result r_kell;
     gsl_sf_result r_kellm1;
     gsl_sf_bessel_k1_scaled_e(x, &r_kell);

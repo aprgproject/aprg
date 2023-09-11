@@ -46,7 +46,8 @@ gsl_combination_valid (gsl_combination * c)
   const size_t n = c->n ;
   const size_t k = c->k ;
 
-  size_t i, j ;
+  size_t i;
+  size_t j ;
 
   if( k > n )
     {
@@ -88,7 +89,7 @@ gsl_combination_next (gsl_combination * c)
   const size_t n = c->n;
   const size_t k = c->k;
   size_t *data = c->data;
-  size_t i;
+  size_t i = 0;
 
   if(k == 0)
     {
@@ -122,7 +123,7 @@ gsl_combination_prev (gsl_combination * c)
   const size_t n = c->n;
   const size_t k = c->k;
   size_t *data = c->data;
-  size_t i;
+  size_t i = 0;
 
   if(k == 0)
     {
@@ -160,7 +161,7 @@ gsl_combination_memcpy (gsl_combination * dest, const gsl_combination * src)
      }
    
    {
-     size_t j;
+     size_t j = 0;
      
      for (j = 0; j < src_k; j++)
        {

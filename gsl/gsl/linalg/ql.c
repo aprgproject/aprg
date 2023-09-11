@@ -76,7 +76,7 @@ gsl_linalg_QL_decomp (gsl_matrix * A, gsl_vector * tau)
   else
     {
       const size_t K = GSL_MIN(M, N);
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < K; i++)
         {
@@ -128,7 +128,7 @@ gsl_linalg_QL_unpack (const gsl_matrix * QL, const gsl_vector * tau, gsl_matrix 
   else
     {
       const size_t K = GSL_MIN(M, N);
-      size_t i;
+      size_t i = 0;
 
       /* initialize Q to the identity */
       gsl_matrix_set_identity (Q);

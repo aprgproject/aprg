@@ -27,6 +27,7 @@
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_linalg.h>
+#include <math.h>
 
 #include "recurse.h"
 
@@ -72,8 +73,9 @@ triangular_multsymm_L2(CBLAS_UPLO_t Uplo, gsl_matrix * T)
     }
   else
     {
-      gsl_vector_view v1, v2;
-      size_t i;
+      gsl_vector_view v1;
+      gsl_vector_view v2;
+      size_t i = 0;
 
       if (Uplo == CblasUpper)
         {
@@ -86,7 +88,7 @@ triangular_multsymm_L2(CBLAS_UPLO_t Uplo, gsl_matrix * T)
 
               if (i < N - 1)
                 {
-                  double tmp;
+                  double tmp = NAN;
 
                   v1 = gsl_matrix_subcolumn(T, i, i, N - i);
                   gsl_blas_ddot(&v1.vector, &v1.vector, &tmp);
@@ -150,7 +152,7 @@ triangular_multsymm_L3(CBLAS_UPLO_t Uplo, gsl_matrix * T)
        *
        * where T11 is N1-by-N1
        */
-      int status;
+      int status = 0;
       const size_t N1 = GSL_LINALG_SPLIT(N);
       const size_t N2 = N - N1;
       gsl_matrix_view T11 = gsl_matrix_submatrix(T, 0, 0, N1, N1);
@@ -160,8 +162,9 @@ triangular_multsymm_L3(CBLAS_UPLO_t Uplo, gsl_matrix * T)
 
       /* recursion on T11 */
       status = triangular_multsymm_L3(Uplo, &T11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       if (Uplo == CblasLower)
         {
@@ -182,8 +185,9 @@ triangular_multsymm_L3(CBLAS_UPLO_t Uplo, gsl_matrix * T)
 
       /* recursion on T22 */
       status = triangular_multsymm_L3(Uplo, &T22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       return GSL_SUCCESS;
     }
@@ -211,11 +215,12 @@ triangular_mult_L2(CBLAS_UPLO_t Uplo, gsl_matrix * A)
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* quick return */
-      if (N == 1)
+      if (N == 1) {
         return GSL_SUCCESS;
+}
 
       if (Uplo == CblasUpper)
         {
@@ -230,7 +235,7 @@ triangular_mult_L2(CBLAS_UPLO_t Uplo, gsl_matrix * A)
                 {
                   gsl_vector_view lb = gsl_matrix_subcolumn(A, i, i + 1, N - i - 1);
                   gsl_vector_view ur = gsl_matrix_subrow(A, i, i + 1, N - i - 1);
-                  double tmp;
+                  double tmp = NAN;
 
                   gsl_blas_ddot(&lb.vector, &ur.vector, &tmp);
                   *Aii += tmp;
@@ -294,7 +299,7 @@ triangular_mult_L3(CBLAS_UPLO_t Uplo, gsl_matrix * A)
        *
        * where A11 is N1-by-N1
        */
-      int status;
+      int status = 0;
       const size_t N1 = GSL_LINALG_SPLIT(N);
       const size_t N2 = N - N1;
       gsl_matrix_view A11 = gsl_matrix_submatrix(A, 0, 0, N1, N1);
@@ -304,8 +309,9 @@ triangular_mult_L3(CBLAS_UPLO_t Uplo, gsl_matrix * A)
 
       /* recursion on A11 */
       status = triangular_mult_L3(Uplo, &A11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       if (Uplo == CblasLower)
         {
@@ -326,8 +332,9 @@ triangular_mult_L3(CBLAS_UPLO_t Uplo, gsl_matrix * A)
 
       /* recursion on A22 */
       status = triangular_mult_L3(Uplo, &A22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       return GSL_SUCCESS;
     }

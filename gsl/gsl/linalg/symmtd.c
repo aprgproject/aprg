@@ -76,7 +76,7 @@ gsl_linalg_symmtd_decomp (gsl_matrix * A, gsl_vector * tau)
   else
     {
       const size_t N = A->size1;
-      size_t i;
+      size_t i = 0;
   
       for (i = 0 ; i < N - 2; i++)
         {
@@ -98,7 +98,8 @@ gsl_linalg_symmtd_decomp (gsl_matrix * A, gsl_vector * tau)
 
               /* w = x - (1/2) tau * (x' * v) * v  */
               {
-                double xv, alpha;
+                double xv;
+                double alpha;
                 gsl_blas_ddot(&x.vector, &v.vector, &xv);
                 alpha = -0.5 * tau_i * xv;
                 gsl_blas_daxpy(alpha, &v.vector, &x.vector);
@@ -152,7 +153,7 @@ gsl_linalg_symmtd_unpack (const gsl_matrix * A,
       const size_t N = A->size1;
       gsl_vector_const_view d = gsl_matrix_const_diagonal(A);
       gsl_vector_const_view sd = gsl_matrix_const_subdiagonal(A, 1);
-      size_t i;
+      size_t i = 0;
 
       /* Initialize Q to the identity */
 

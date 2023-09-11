@@ -101,14 +101,16 @@ size_t urand (size_t);
 int
 main (void)
 {
-  size_t i, s;
+  size_t i;
+  size_t s;
 
   gsl_ieee_env_setup ();
 
   /* Test for lengths of 1 ... 31, then 32, 64, 128, 256, ... */
 
-  for (i = 1; i < 1024; i = (i < 32) ? i + 1 : 2 * i)
+  for (i = 1; i < 1024; i = (i < 32) ? i + 1 : 2 * i) {
     test_heapsort (i);
+}
 
   for (i = 1; i < 1024; i = (i < 32) ? i + 1 : 2 * i)
     {

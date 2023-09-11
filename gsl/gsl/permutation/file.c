@@ -65,7 +65,7 @@ gsl_permutation_fprintf (FILE * stream, const gsl_permutation * p, const char *f
   
   size_t * data = p->data ;
   
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < n; i++)
     {
@@ -87,11 +87,11 @@ gsl_permutation_fscanf (FILE * stream, gsl_permutation * p)
   
   size_t * data = p->data ;
 
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < n; i++)
     {
-      unsigned long j ;  
+      unsigned long j = 0 ;  
 
       /* FIXME: what if size_t != unsigned long ??? 
 

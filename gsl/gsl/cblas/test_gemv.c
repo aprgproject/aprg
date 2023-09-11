@@ -7,24 +7,25 @@
 
 void
 test_gemv (void) {
-const double flteps = 1e-4, dbleps = 1e-6;
+const double flteps = 1e-4;
+const double dbleps = 1e-6;
   {
    int order = 101;
    int trans = 111;
    int M = 1;
    int N = 1;
    int lda = 1;
-   float alpha = 1.0f;
-   float beta = -0.3f;
-   float A[] = { -0.805f };
-   float X[] = { -0.965f };
+   float alpha = 1.0F;
+   float beta = -0.3F;
+   float A[] = { -0.805F };
+   float X[] = { -0.965F };
    int incX = -1;
-   float Y[] = { 0.537f };
+   float Y[] = { 0.537F };
    int incY = -1;
-   float y_expected[] = { 0.615725f };
+   float y_expected[] = { 0.615725F };
    cblas_sgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "sgemv(case 774)");
      }
@@ -38,17 +39,17 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 1;
    int lda = 1;
-   float alpha = 1.0f;
-   float beta = -0.3f;
-   float A[] = { -0.805f };
-   float X[] = { -0.965f };
+   float alpha = 1.0F;
+   float beta = -0.3F;
+   float A[] = { -0.805F };
+   float X[] = { -0.965F };
    int incX = -1;
-   float Y[] = { 0.537f };
+   float Y[] = { 0.537F };
    int incY = -1;
-   float y_expected[] = { 0.615725f };
+   float y_expected[] = { 0.615725F };
    cblas_sgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "sgemv(case 775)");
      }
@@ -62,17 +63,17 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 1;
    int lda = 1;
-   float alpha = 1.0f;
-   float beta = 0.0f;
-   float A[] = { -0.805f };
-   float X[] = { -0.965f };
+   float alpha = 1.0F;
+   float beta = 0.0F;
+   float A[] = { -0.805F };
+   float X[] = { -0.965F };
    int incX = -1;
-   float Y[] = { 0.537f };
+   float Y[] = { 0.537F };
    int incY = -1;
-   float y_expected[] = { 0.776825f };
+   float y_expected[] = { 0.776825F };
    cblas_sgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "sgemv(case 776)");
      }
@@ -86,17 +87,17 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 1;
    int lda = 1;
-   float alpha = 1.0f;
-   float beta = 0.0f;
-   float A[] = { -0.805f };
-   float X[] = { -0.965f };
+   float alpha = 1.0F;
+   float beta = 0.0F;
+   float A[] = { -0.805F };
+   float X[] = { -0.965F };
    int incX = -1;
-   float Y[] = { 0.537f };
+   float Y[] = { 0.537F };
    int incY = -1;
-   float y_expected[] = { 0.776825f };
+   float y_expected[] = { 0.776825F };
    cblas_sgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "sgemv(case 777)");
      }
@@ -120,7 +121,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -0.5445248 };
    cblas_dgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "dgemv(case 778)");
      }
@@ -144,7 +145,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -0.5445248 };
    cblas_dgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "dgemv(case 779)");
      }
@@ -168,7 +169,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { 0.585584 };
    cblas_dgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "dgemv(case 780)");
      }
@@ -192,7 +193,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { 0.585584 };
    cblas_dgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "dgemv(case 781)");
      }
@@ -206,17 +207,17 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 1;
    int lda = 1;
-   float alpha[2] = {0.0f, 0.1f};
-   float beta[2] = {0.0f, 1.0f};
-   float A[] = { 0.629f, 0.801f };
-   float X[] = { 0.778f, -0.073f };
+   float alpha[2] = {0.0F, 0.1F};
+   float beta[2] = {0.0F, 1.0F};
+   float A[] = { 0.629F, 0.801F };
+   float X[] = { 0.778F, -0.073F };
    int incX = -1;
-   float Y[] = { -0.976f, -0.682f };
+   float Y[] = { -0.976F, -0.682F };
    int incY = -1;
-   float y_expected[] = { 0.624274f, -0.921216f };
+   float y_expected[] = { 0.624274F, -0.921216F };
    cblas_cgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], y_expected[2*i], flteps, "cgemv(case 782) real");
        gsl_test_rel(Y[2*i+1], y_expected[2*i+1], flteps, "cgemv(case 782) imag");
@@ -231,17 +232,17 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 1;
    int lda = 1;
-   float alpha[2] = {0.0f, 0.1f};
-   float beta[2] = {0.0f, 1.0f};
-   float A[] = { 0.629f, 0.801f };
-   float X[] = { 0.778f, -0.073f };
+   float alpha[2] = {0.0F, 0.1F};
+   float beta[2] = {0.0F, 1.0F};
+   float A[] = { 0.629F, 0.801F };
+   float X[] = { 0.778F, -0.073F };
    int incX = -1;
-   float Y[] = { -0.976f, -0.682f };
+   float Y[] = { -0.976F, -0.682F };
    int incY = -1;
-   float y_expected[] = { 0.624274f, -0.921216f };
+   float y_expected[] = { 0.624274F, -0.921216F };
    cblas_cgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], y_expected[2*i], flteps, "cgemv(case 783) real");
        gsl_test_rel(Y[2*i+1], y_expected[2*i+1], flteps, "cgemv(case 783) imag");
@@ -256,17 +257,17 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 1;
    int lda = 1;
-   float alpha[2] = {0.0f, 1.0f};
-   float beta[2] = {-0.3f, 0.1f};
-   float A[] = { 0.629f, 0.801f };
-   float X[] = { 0.778f, -0.073f };
+   float alpha[2] = {0.0F, 1.0F};
+   float beta[2] = {-0.3F, 0.1F};
+   float A[] = { 0.629F, 0.801F };
+   float X[] = { 0.778F, -0.073F };
    int incX = -1;
-   float Y[] = { -0.976f, -0.682f };
+   float Y[] = { -0.976F, -0.682F };
    int incY = -1;
-   float y_expected[] = { -0.216261f, 0.654835f };
+   float y_expected[] = { -0.216261F, 0.654835F };
    cblas_cgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], y_expected[2*i], flteps, "cgemv(case 784) real");
        gsl_test_rel(Y[2*i+1], y_expected[2*i+1], flteps, "cgemv(case 784) imag");
@@ -281,17 +282,17 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 1;
    int lda = 1;
-   float alpha[2] = {0.0f, 1.0f};
-   float beta[2] = {-0.3f, 0.1f};
-   float A[] = { 0.629f, 0.801f };
-   float X[] = { 0.778f, -0.073f };
+   float alpha[2] = {0.0F, 1.0F};
+   float beta[2] = {-0.3F, 0.1F};
+   float A[] = { 0.629F, 0.801F };
+   float X[] = { 0.778F, -0.073F };
    int incX = -1;
-   float Y[] = { -0.976f, -0.682f };
+   float Y[] = { -0.976F, -0.682F };
    int incY = -1;
-   float y_expected[] = { -0.216261f, 0.654835f };
+   float y_expected[] = { -0.216261F, 0.654835F };
    cblas_cgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], y_expected[2*i], flteps, "cgemv(case 785) real");
        gsl_test_rel(Y[2*i+1], y_expected[2*i+1], flteps, "cgemv(case 785) imag");
@@ -306,17 +307,17 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 1;
    int lda = 1;
-   float alpha[2] = {0.0f, 0.1f};
-   float beta[2] = {-0.3f, 0.1f};
-   float A[] = { 0.629f, 0.801f };
-   float X[] = { 0.778f, -0.073f };
+   float alpha[2] = {0.0F, 0.1F};
+   float beta[2] = {-0.3F, 0.1F};
+   float A[] = { 0.629F, 0.801F };
+   float X[] = { 0.778F, -0.073F };
    int incX = -1;
-   float Y[] = { -0.976f, -0.682f };
+   float Y[] = { -0.976F, -0.682F };
    int incY = -1;
-   float y_expected[] = { 0.427909f, 0.150089f };
+   float y_expected[] = { 0.427909F, 0.150089F };
    cblas_cgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], y_expected[2*i], flteps, "cgemv(case 786) real");
        gsl_test_rel(Y[2*i+1], y_expected[2*i+1], flteps, "cgemv(case 786) imag");
@@ -331,17 +332,17 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int M = 1;
    int N = 1;
    int lda = 1;
-   float alpha[2] = {0.0f, 0.1f};
-   float beta[2] = {-0.3f, 0.1f};
-   float A[] = { 0.629f, 0.801f };
-   float X[] = { 0.778f, -0.073f };
+   float alpha[2] = {0.0F, 0.1F};
+   float beta[2] = {-0.3F, 0.1F};
+   float A[] = { 0.629F, 0.801F };
+   float X[] = { 0.778F, -0.073F };
    int incX = -1;
-   float Y[] = { -0.976f, -0.682f };
+   float Y[] = { -0.976F, -0.682F };
    int incY = -1;
-   float y_expected[] = { 0.427909f, 0.150089f };
+   float y_expected[] = { 0.427909F, 0.150089F };
    cblas_cgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], y_expected[2*i], flteps, "cgemv(case 787) real");
        gsl_test_rel(Y[2*i+1], y_expected[2*i+1], flteps, "cgemv(case 787) imag");
@@ -366,7 +367,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { 0.401726, 0.078178 };
    cblas_zgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], y_expected[2*i], dbleps, "zgemv(case 788) real");
        gsl_test_rel(Y[2*i+1], y_expected[2*i+1], dbleps, "zgemv(case 788) imag");
@@ -391,7 +392,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { 0.401726, 0.078178 };
    cblas_zgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], y_expected[2*i], dbleps, "zgemv(case 789) real");
        gsl_test_rel(Y[2*i+1], y_expected[2*i+1], dbleps, "zgemv(case 789) imag");
@@ -416,7 +417,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -0.040808, 0.517356 };
    cblas_zgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], y_expected[2*i], dbleps, "zgemv(case 790) real");
        gsl_test_rel(Y[2*i+1], y_expected[2*i+1], dbleps, "zgemv(case 790) imag");
@@ -441,7 +442,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -0.040808, 0.517356 };
    cblas_zgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], y_expected[2*i], dbleps, "zgemv(case 791) real");
        gsl_test_rel(Y[2*i+1], y_expected[2*i+1], dbleps, "zgemv(case 791) imag");
@@ -466,7 +467,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { 0.540796, -0.053628 };
    cblas_zgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], y_expected[2*i], dbleps, "zgemv(case 792) real");
        gsl_test_rel(Y[2*i+1], y_expected[2*i+1], dbleps, "zgemv(case 792) imag");
@@ -491,7 +492,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { 0.540796, -0.053628 };
    cblas_zgemv(order, trans, M, N, alpha, A, lda, X,                                  incX, beta, Y, incY);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[2*i], y_expected[2*i], dbleps, "zgemv(case 793) real");
        gsl_test_rel(Y[2*i+1], y_expected[2*i+1], dbleps, "zgemv(case 793) imag");

@@ -91,7 +91,7 @@ gsl_linalg_PTLQ_decomp (gsl_matrix * A, gsl_vector * tau, gsl_permutation * p, i
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       *signum = 1;
 
@@ -111,7 +111,8 @@ gsl_linalg_PTLQ_decomp (gsl_matrix * A, gsl_vector * tau, gsl_permutation * p, i
           /* Bring the column of largest norm into the pivot position */
 
           double max_norm = gsl_vector_get(norm, i);
-          size_t j, kmax = i;
+          size_t j;
+          size_t kmax = i;
 
           for (j = i + 1; j < N; j++)
             {
@@ -164,10 +165,11 @@ gsl_linalg_PTLQ_decomp (gsl_matrix * A, gsl_vector * tau, gsl_permutation * p, i
                       double y = 0;
                       double temp= gsl_matrix_get (A, j, i) / x;
                   
-                      if (fabs (temp) >= 1)
+                      if (fabs (temp) >= 1) {
                         y = 0.0;
-                      else
+                      } else {
                         y = x * sqrt (1 - temp * temp);
+}
                       
                       /* recompute norm to prevent loss of accuracy */
 
@@ -312,7 +314,7 @@ gsl_linalg_PTLQ_LQsolve_T (const gsl_matrix * Q, const gsl_matrix * L,
     {
       return GSL_ENOTSQR;
     }
-  else if (Q->size1 != p->size || Q->size1 != L->size1
+  if (Q->size1 != p->size || Q->size1 != L->size1
            || Q->size1 != b->size)
     {
       return GSL_EBADLEN;
@@ -427,7 +429,7 @@ gsl_linalg_PTLQ_update (gsl_matrix * Q, gsl_matrix * L,
     {
       return GSL_ENOTSQR;
     }
-  else if (L->size1 != Q->size2 || v->size != Q->size2 || w->size != Q->size2)
+  if (L->size1 != Q->size2 || v->size != Q->size2 || w->size != Q->size2)
     {
       return GSL_EBADLEN;
     }

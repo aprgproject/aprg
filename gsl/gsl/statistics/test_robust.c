@@ -36,10 +36,11 @@ int test_robust (void);
 static int
 random_array(const size_t n, double * x, gsl_rng * r)
 {
-  size_t i;
+  size_t i = 0;
 
-  for (i = 0; i < n; ++i)
+  for (i = 0; i < n; ++i) {
     x[i] = 2.0 * gsl_rng_uniform(r) - 1.0;
+}
 
   return 0;
 }
@@ -49,17 +50,20 @@ static double
 slow_MAD(const size_t n, const double x[])
 {
   double *work = malloc(n * sizeof(double));
-  double median, mad;
-  size_t i;
+  double median;
+  double mad;
+  size_t i = 0;
 
-  for (i = 0; i < n; ++i)
+  for (i = 0; i < n; ++i) {
     work[i] = x[i];
+}
 
   gsl_sort(work, 1, n);
   median = gsl_stats_median_from_sorted_data(work, 1, n);
 
-  for (i = 0; i < n; ++i)
+  for (i = 0; i < n; ++i) {
     work[i] = fabs(x[i] - median);
+}
 
   gsl_sort(work, 1, n);
   mad = gsl_stats_median_from_sorted_data(work, 1, n);
@@ -75,13 +79,15 @@ slow_Sn0(const size_t n, const double x[])
 {
   double *work1 = malloc(n * sizeof(double));
   double *work2 = malloc(n * sizeof(double));
-  double Sn;
-  size_t i, j;
+  double Sn = NAN;
+  size_t i;
+  size_t j;
 
   for (i = 0; i < n; ++i)
     {
-      for (j = 0; j < n; ++j)
+      for (j = 0; j < n; ++j) {
         work1[j] = fabs(x[i] - x[j]);
+}
 
       /* find himed_j | x_i - x_j | */
       gsl_sort(work1, 1, n);
@@ -105,20 +111,23 @@ slow_Qn0(const size_t n, const double x[])
   const size_t wsize = n * (n - 1) / 2;
   const size_t n_2 = n / 2;
   const size_t k = ((n_2 + 1) * n_2) / 2;
-  double *work;
-  double Qn;
+  double *work = NULL;
+  double Qn = NAN;
   size_t idx = 0;
-  size_t i, j;
+  size_t i;
+  size_t j;
 
-  if (n < 2)
+  if (n < 2) {
     return (0.0);
+}
 
   work = malloc(wsize * sizeof(double));
 
   for (i = 0; i < n; ++i)
     {
-      for (j = i + 1; j < n; ++j)
+      for (j = i + 1; j < n; ++j) {
         work[idx++] = fabs(x[i] - x[j]);
+}
     }
 
   gsl_sort(work, 1, idx);
@@ -133,7 +142,8 @@ static int
 test_median(const double tol, const size_t n, gsl_rng * r)
 {
   double * x = malloc(n * sizeof(double));
-  double median1, median2;
+  double median1;
+  double median2;
 
   random_array(n, x, r);
 
@@ -154,7 +164,8 @@ test_mad(const double tol, const size_t n, gsl_rng * r)
 {
   double * x = malloc(n * sizeof(double));
   double * work = malloc(n * sizeof(double));
-  double mad1, mad2;
+  double mad1;
+  double mad2;
 
   random_array(n, x, r);
 
@@ -176,7 +187,8 @@ test_Sn(const double tol, const size_t n, gsl_rng * r)
 {
   double * x = malloc(n * sizeof(double));
   double * work = malloc(n * sizeof(double));
-  double Sn1, Sn2;
+  double Sn1;
+  double Sn2;
 
   random_array(n, x, r);
 
@@ -201,7 +213,8 @@ test_Qn(const double tol, const size_t n, gsl_rng * r)
   double * x = malloc(n * sizeof(double));
   double * work = malloc(3 * n * sizeof(double));
   int * work_int = malloc(5 * n * sizeof(int));
-  double Qn1, Qn2;
+  double Qn1;
+  double Qn2;
 
   random_array(n, x, r);
 

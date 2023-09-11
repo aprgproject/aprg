@@ -26,6 +26,7 @@
 #include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_sf_trig.h>
 #include <gsl/gsl_sf_bessel.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -54,14 +55,15 @@ static int bessel_yl_small_x(int l, const double x, gsl_sf_result * result)
     double sum = 1.0;
     double t_coeff = 1.0;
     double t_power = 1.0;
-    double delta;
-    int i;
+    double delta = NAN;
+    int i = 0;
     for(i=1; i<=lmax; i++) {
       t_coeff /= i*(2*(i-l) - 1);
       t_power *= t;
       delta = t_power*t_coeff;
       sum += delta;
-      if(fabs(delta/sum) < 0.5*GSL_DBL_EPSILON) break;
+      if(fabs(delta/sum) < 0.5*GSL_DBL_EPSILON) { break;
+}
     }
     result->val = -num_fact.val/den * sum;
     result->err = GSL_DBL_EPSILON * fabs(result->val);
@@ -214,8 +216,8 @@ int gsl_sf_bessel_yl_e(int l, const double x, gsl_sf_result * result)
     int stat_0 = gsl_sf_bessel_y0_e(x, &r_bym);
     double bym = r_bym.val;
     double by  = r_by.val;
-    double byp;
-    int j;
+    double byp = NAN;
+    int j = 0;
     for(j=1; j<l; j++) { 
       byp = (2*j+1)/x*by - bym;
       bym = by;
@@ -245,10 +247,10 @@ int gsl_sf_bessel_yl_array(const int lmax, const double x, double * result_array
     gsl_sf_result r_yellm1;
     int stat_1 = gsl_sf_bessel_y1_e(x, &r_yell);
     int stat_0 = gsl_sf_bessel_y0_e(x, &r_yellm1);
-    double yellp1;
+    double yellp1 = NAN;
     double yell   = r_yell.val;
     double yellm1 = r_yellm1.val;
-    int ell;
+    int ell = 0;
 
     result_array[0] = yellm1;
     result_array[1] = yell;

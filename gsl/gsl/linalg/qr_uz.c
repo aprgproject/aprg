@@ -115,7 +115,7 @@ gsl_linalg_QR_UZ_decomp (gsl_matrix * S, gsl_matrix * A, gsl_matrix * T)
        * N1 [ U11 U12 ]
        * N2 [  0  U22 ]
        */
-      int status;
+      int status = 0;
       const size_t N1 = N / 2;
       const size_t N2 = N - N1;
 
@@ -147,8 +147,9 @@ gsl_linalg_QR_UZ_decomp (gsl_matrix * S, gsl_matrix * A, gsl_matrix * T)
        */
       m = gsl_matrix_submatrix(A, 0, 0, M - N2, N1);
       status = gsl_linalg_QR_UZ_decomp(&S11.matrix, &m.matrix, &T11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /*
        * Eq. 3:
@@ -188,8 +189,9 @@ gsl_linalg_QR_UZ_decomp (gsl_matrix * S, gsl_matrix * A, gsl_matrix * T)
        */
       m = gsl_matrix_submatrix(A, 0, N1, M, N2);
       status = gsl_linalg_QR_UZ_decomp(&S22.matrix, &m.matrix, &T22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /*
        * Eq. 13: update T12 := -T11 * V1^T * V2 * T22
@@ -246,7 +248,9 @@ qrtz_householder_transform (double *v0, gsl_vector * v)
   /* replace v[0:M-1] with a householder vector (v[0:M-1]) and
      coefficient tau that annihilate v[1:M-1] */
 
-  double alpha, beta, tau ;
+  double alpha;
+  double beta;
+  double tau ;
   
   /* compute xnorm = || [ 0 ; v ] ||, ignoring zero part of vector */
   double xnorm = gsl_blas_dnrm2(v);

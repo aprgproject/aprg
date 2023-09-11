@@ -43,8 +43,8 @@ double gsl_expm1 (const double x)
       
       return sum ;
     }
-  else
-    {
+  
+    
       return exp(x) - 1;
-    }
+   
 }

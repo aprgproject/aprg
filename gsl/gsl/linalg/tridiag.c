@@ -20,6 +20,7 @@
 /* Author: G. Jungman */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 #include <gsl/gsl_errno.h>
@@ -54,7 +55,8 @@ solve_tridiag(
     }
   else
     {
-      size_t i, j;
+      size_t i;
+      size_t j;
 
       /* Cholesky decomposition
          A = L.D.L^t
@@ -104,14 +106,18 @@ solve_tridiag(
         }
     }
 
-  if (z != 0)
+  if (z != 0) {
     free (z);
-  if (c != 0)
+}
+  if (c != 0) {
     free (c);
-  if (alpha != 0)
+}
+  if (alpha != 0) {
     free (alpha);
-  if (gamma != 0)
+}
+  if (gamma != 0) {
     free (gamma);
+}
 
   if (status == GSL_EZERODIV) {
     GSL_ERROR ("matrix must be positive definite", status);
@@ -147,7 +153,8 @@ solve_tridiag_nonsym(
     }
   else
     {
-      size_t i, j;
+      size_t i;
+      size_t j;
 
       /* Bidiagonalization (eliminating belowdiag)
          & rhs update
@@ -182,10 +189,12 @@ solve_tridiag_nonsym(
         }
     }
 
-  if (z != 0)
+  if (z != 0) {
     free (z);
-  if (alpha != 0)
+}
+  if (alpha != 0) {
     free (alpha);
+}
 
   if (status == GSL_EZERODIV) {
     GSL_ERROR ("matrix must be positive definite", status);
@@ -226,7 +235,8 @@ solve_cyc_tridiag(
     }
   else
     {
-      size_t i, j;
+      size_t i;
+      size_t j;
       double sum = 0.0;
 
       /* factor */
@@ -300,16 +310,21 @@ solve_cyc_tridiag(
         }
     }
 
-  if (z != 0)
+  if (z != 0) {
     free (z);
-  if (c != 0)
+}
+  if (c != 0) {
     free (c);
-  if (alpha != 0)
+}
+  if (alpha != 0) {
     free (alpha);
-  if (gamma != 0)
+}
+  if (gamma != 0) {
     free (gamma);
-  if (delta != 0)
+}
+  if (delta != 0) {
     free (delta);
+}
 
   if (status == GSL_EZERODIV) {
     GSL_ERROR ("matrix must be positive definite", status);
@@ -349,7 +364,7 @@ int solve_cyc_tridiag_nonsym(
     }
   else
     {
-      double beta;
+      double beta = NAN;
 
       /* Bidiagonalization (eliminating belowdiag)
          & rhs update
@@ -358,7 +373,8 @@ int solve_cyc_tridiag_nonsym(
          rhs' for Aq=u is zu
        */
       zb[0] = rhs[0];
-      if (diag[0] != 0) beta = -diag[0]; else beta = 1;
+      if (diag[0] != 0) { beta = -diag[0]; } else { beta = 1;
+}
       {
         const double q = 1 - abovediag[0]*belowdiag[0]/(diag[0]*diag[d_stride]);
         if (fabs(q/beta) > 0.5 && fabs(q/beta) < 2) {
@@ -373,7 +389,7 @@ int solve_cyc_tridiag_nonsym(
       }
 
       { 
-        size_t i;
+        size_t i = 0;
         for (i = 1; i+1 < N; i++)
         {
           const double t = belowdiag[b_stride*(i - 1)]/alpha[i-1];
@@ -403,7 +419,8 @@ int solve_cyc_tridiag_nonsym(
 
       /* backsubstitution */
       {
-        size_t i, j;
+        size_t i;
+        size_t j;
         w[N-1] = zu[N-1]/alpha[N-1];
         x[x_stride*(N-1)] = zb[N-1]/alpha[N-1];
         for (i = N - 2, j = 0; j <= N - 2; j++, i--)
@@ -423,21 +440,26 @@ int solve_cyc_tridiag_nonsym(
         }
 
         {
-          size_t i;
-          for (i = 0; i < N; i++)
+          size_t i = 0;
+          for (i = 0; i < N; i++) {
             x[i*x_stride] -= vx/(1 + vw)*w[i];
+}
         }
       }
     }
 
-  if (zb != 0)
+  if (zb != 0) {
     free (zb);
-  if (zu != 0)
+}
+  if (zu != 0) {
     free (zu);
-  if (w != 0)
+}
+  if (w != 0) {
     free (w);
-  if (alpha != 0)
+}
+  if (alpha != 0) {
     free (alpha);
+}
 
   if (status == GSL_EZERODIV) {
     GSL_ERROR ("matrix must be positive definite", status);

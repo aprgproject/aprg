@@ -7,7 +7,8 @@
 
 void
 test_trsv (void) {
-const double flteps = 1e-4, dbleps = 1e-6;
+const double flteps = 1e-4;
+const double dbleps = 1e-6;
   {
    int order = 101;
    int trans = 111;
@@ -15,13 +16,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.995f };
-   float X[] = { 0.348f };
+   float A[] = { 0.995F };
+   float X[] = { 0.348F };
    int incX = -1;
-   float x_expected[] = { 0.349749f };
+   float x_expected[] = { 0.349749F };
    cblas_strsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "strsv(case 1150)");
      }
@@ -36,13 +37,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.995f };
-   float X[] = { 0.348f };
+   float A[] = { 0.995F };
+   float X[] = { 0.348F };
    int incX = -1;
-   float x_expected[] = { 0.348f };
+   float x_expected[] = { 0.348F };
    cblas_strsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "strsv(case 1151)");
      }
@@ -57,13 +58,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.995f };
-   float X[] = { 0.348f };
+   float A[] = { 0.995F };
+   float X[] = { 0.348F };
    int incX = -1;
-   float x_expected[] = { 0.349749f };
+   float x_expected[] = { 0.349749F };
    cblas_strsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "strsv(case 1152)");
      }
@@ -78,13 +79,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.995f };
-   float X[] = { 0.348f };
+   float A[] = { 0.995F };
+   float X[] = { 0.348F };
    int incX = -1;
-   float x_expected[] = { 0.348f };
+   float x_expected[] = { 0.348F };
    cblas_strsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "strsv(case 1153)");
      }
@@ -99,13 +100,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.995f };
-   float X[] = { 0.348f };
+   float A[] = { 0.995F };
+   float X[] = { 0.348F };
    int incX = -1;
-   float x_expected[] = { 0.349749f };
+   float x_expected[] = { 0.349749F };
    cblas_strsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "strsv(case 1154)");
      }
@@ -120,13 +121,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.995f };
-   float X[] = { 0.348f };
+   float A[] = { 0.995F };
+   float X[] = { 0.348F };
    int incX = -1;
-   float x_expected[] = { 0.348f };
+   float x_expected[] = { 0.348F };
    cblas_strsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "strsv(case 1155)");
      }
@@ -141,13 +142,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.995f };
-   float X[] = { 0.348f };
+   float A[] = { 0.995F };
+   float X[] = { 0.348F };
    int incX = -1;
-   float x_expected[] = { 0.349749f };
+   float x_expected[] = { 0.349749F };
    cblas_strsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "strsv(case 1156)");
      }
@@ -162,13 +163,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.995f };
-   float X[] = { 0.348f };
+   float A[] = { 0.995F };
+   float X[] = { 0.348F };
    int incX = -1;
-   float x_expected[] = { 0.348f };
+   float x_expected[] = { 0.348F };
    cblas_strsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "strsv(case 1157)");
      }
@@ -183,13 +184,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.793f };
-   float X[] = { 0.338f };
+   float A[] = { 0.793F };
+   float X[] = { 0.338F };
    int incX = -1;
-   float x_expected[] = { 0.42623f };
+   float x_expected[] = { 0.42623F };
    cblas_strsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "strsv(case 1158)");
      }
@@ -204,13 +205,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.793f };
-   float X[] = { 0.338f };
+   float A[] = { 0.793F };
+   float X[] = { 0.338F };
    int incX = -1;
-   float x_expected[] = { 0.338f };
+   float x_expected[] = { 0.338F };
    cblas_strsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "strsv(case 1159)");
      }
@@ -225,13 +226,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.793f };
-   float X[] = { 0.338f };
+   float A[] = { 0.793F };
+   float X[] = { 0.338F };
    int incX = -1;
-   float x_expected[] = { 0.42623f };
+   float x_expected[] = { 0.42623F };
    cblas_strsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "strsv(case 1160)");
      }
@@ -246,13 +247,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.793f };
-   float X[] = { 0.338f };
+   float A[] = { 0.793F };
+   float X[] = { 0.338F };
    int incX = -1;
-   float x_expected[] = { 0.338f };
+   float x_expected[] = { 0.338F };
    cblas_strsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "strsv(case 1161)");
      }
@@ -267,13 +268,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.793f };
-   float X[] = { 0.338f };
+   float A[] = { 0.793F };
+   float X[] = { 0.338F };
    int incX = -1;
-   float x_expected[] = { 0.42623f };
+   float x_expected[] = { 0.42623F };
    cblas_strsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "strsv(case 1162)");
      }
@@ -288,13 +289,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.793f };
-   float X[] = { 0.338f };
+   float A[] = { 0.793F };
+   float X[] = { 0.338F };
    int incX = -1;
-   float x_expected[] = { 0.338f };
+   float x_expected[] = { 0.338F };
    cblas_strsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "strsv(case 1163)");
      }
@@ -309,13 +310,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.793f };
-   float X[] = { 0.338f };
+   float A[] = { 0.793F };
+   float X[] = { 0.338F };
    int incX = -1;
-   float x_expected[] = { 0.42623f };
+   float x_expected[] = { 0.42623F };
    cblas_strsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "strsv(case 1164)");
      }
@@ -330,13 +331,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.793f };
-   float X[] = { 0.338f };
+   float A[] = { 0.793F };
+   float X[] = { 0.338F };
    int incX = -1;
-   float x_expected[] = { 0.338f };
+   float x_expected[] = { 0.338F };
    cblas_strsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "strsv(case 1165)");
      }
@@ -357,7 +358,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -2.25238095238 };
    cblas_dtrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "dtrsv(case 1166)");
      }
@@ -378,7 +379,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 0.473 };
    cblas_dtrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "dtrsv(case 1167)");
      }
@@ -399,7 +400,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -2.25238095238 };
    cblas_dtrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "dtrsv(case 1168)");
      }
@@ -420,7 +421,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 0.473 };
    cblas_dtrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "dtrsv(case 1169)");
      }
@@ -441,7 +442,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -2.25238095238 };
    cblas_dtrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "dtrsv(case 1170)");
      }
@@ -462,7 +463,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 0.473 };
    cblas_dtrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "dtrsv(case 1171)");
      }
@@ -483,7 +484,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -2.25238095238 };
    cblas_dtrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "dtrsv(case 1172)");
      }
@@ -504,7 +505,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 0.473 };
    cblas_dtrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "dtrsv(case 1173)");
      }
@@ -525,7 +526,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 1.30882352941 };
    cblas_dtrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "dtrsv(case 1174)");
      }
@@ -546,7 +547,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 0.979 };
    cblas_dtrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "dtrsv(case 1175)");
      }
@@ -567,7 +568,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 1.30882352941 };
    cblas_dtrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "dtrsv(case 1176)");
      }
@@ -588,7 +589,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 0.979 };
    cblas_dtrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "dtrsv(case 1177)");
      }
@@ -609,7 +610,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 1.30882352941 };
    cblas_dtrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "dtrsv(case 1178)");
      }
@@ -630,7 +631,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 0.979 };
    cblas_dtrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "dtrsv(case 1179)");
      }
@@ -651,7 +652,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 1.30882352941 };
    cblas_dtrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "dtrsv(case 1180)");
      }
@@ -672,7 +673,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 0.979 };
    cblas_dtrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "dtrsv(case 1181)");
      }
@@ -687,13 +688,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.529f, -0.348f };
-   float X[] = { -0.95f, 0.343f };
+   float A[] = { 0.529F, -0.348F };
+   float X[] = { -0.95F, 0.343F };
    int incX = -1;
-   float x_expected[] = { -1.55112f, -0.372004f };
+   float x_expected[] = { -1.55112F, -0.372004F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1182) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1182) imag");
@@ -709,13 +710,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.529f, -0.348f };
-   float X[] = { -0.95f, 0.343f };
+   float A[] = { 0.529F, -0.348F };
+   float X[] = { -0.95F, 0.343F };
    int incX = -1;
-   float x_expected[] = { -0.95f, 0.343f };
+   float x_expected[] = { -0.95F, 0.343F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1183) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1183) imag");
@@ -731,13 +732,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.529f, -0.348f };
-   float X[] = { -0.95f, 0.343f };
+   float A[] = { 0.529F, -0.348F };
+   float X[] = { -0.95F, 0.343F };
    int incX = -1;
-   float x_expected[] = { -1.55112f, -0.372004f };
+   float x_expected[] = { -1.55112F, -0.372004F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1184) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1184) imag");
@@ -753,13 +754,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.529f, -0.348f };
-   float X[] = { -0.95f, 0.343f };
+   float A[] = { 0.529F, -0.348F };
+   float X[] = { -0.95F, 0.343F };
    int incX = -1;
-   float x_expected[] = { -0.95f, 0.343f };
+   float x_expected[] = { -0.95F, 0.343F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1185) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1185) imag");
@@ -775,13 +776,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.529f, -0.348f };
-   float X[] = { -0.95f, 0.343f };
+   float A[] = { 0.529F, -0.348F };
+   float X[] = { -0.95F, 0.343F };
    int incX = -1;
-   float x_expected[] = { -1.55112f, -0.372004f };
+   float x_expected[] = { -1.55112F, -0.372004F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1186) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1186) imag");
@@ -797,13 +798,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.529f, -0.348f };
-   float X[] = { -0.95f, 0.343f };
+   float A[] = { 0.529F, -0.348F };
+   float X[] = { -0.95F, 0.343F };
    int incX = -1;
-   float x_expected[] = { -0.95f, 0.343f };
+   float x_expected[] = { -0.95F, 0.343F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1187) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1187) imag");
@@ -819,13 +820,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.529f, -0.348f };
-   float X[] = { -0.95f, 0.343f };
+   float A[] = { 0.529F, -0.348F };
+   float X[] = { -0.95F, 0.343F };
    int incX = -1;
-   float x_expected[] = { -1.55112f, -0.372004f };
+   float x_expected[] = { -1.55112F, -0.372004F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1188) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1188) imag");
@@ -841,13 +842,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.529f, -0.348f };
-   float X[] = { -0.95f, 0.343f };
+   float A[] = { 0.529F, -0.348F };
+   float X[] = { -0.95F, 0.343F };
    int incX = -1;
-   float x_expected[] = { -0.95f, 0.343f };
+   float x_expected[] = { -0.95F, 0.343F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1189) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1189) imag");
@@ -863,13 +864,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.6f, 0.041f };
-   float X[] = { 0.896f, -0.447f };
+   float A[] = { 0.6F, 0.041F };
+   float X[] = { 0.896F, -0.447F };
    int incX = -1;
-   float x_expected[] = { 1.43572f, -0.843108f };
+   float x_expected[] = { 1.43572F, -0.843108F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1190) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1190) imag");
@@ -885,13 +886,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.6f, 0.041f };
-   float X[] = { 0.896f, -0.447f };
+   float A[] = { 0.6F, 0.041F };
+   float X[] = { 0.896F, -0.447F };
    int incX = -1;
-   float x_expected[] = { 0.896f, -0.447f };
+   float x_expected[] = { 0.896F, -0.447F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1191) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1191) imag");
@@ -907,13 +908,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.6f, 0.041f };
-   float X[] = { 0.896f, -0.447f };
+   float A[] = { 0.6F, 0.041F };
+   float X[] = { 0.896F, -0.447F };
    int incX = -1;
-   float x_expected[] = { 1.43572f, -0.843108f };
+   float x_expected[] = { 1.43572F, -0.843108F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1192) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1192) imag");
@@ -929,13 +930,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.6f, 0.041f };
-   float X[] = { 0.896f, -0.447f };
+   float A[] = { 0.6F, 0.041F };
+   float X[] = { 0.896F, -0.447F };
    int incX = -1;
-   float x_expected[] = { 0.896f, -0.447f };
+   float x_expected[] = { 0.896F, -0.447F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1193) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1193) imag");
@@ -951,13 +952,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.6f, 0.041f };
-   float X[] = { 0.896f, -0.447f };
+   float A[] = { 0.6F, 0.041F };
+   float X[] = { 0.896F, -0.447F };
    int incX = -1;
-   float x_expected[] = { 1.43572f, -0.843108f };
+   float x_expected[] = { 1.43572F, -0.843108F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1194) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1194) imag");
@@ -973,13 +974,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.6f, 0.041f };
-   float X[] = { 0.896f, -0.447f };
+   float A[] = { 0.6F, 0.041F };
+   float X[] = { 0.896F, -0.447F };
    int incX = -1;
-   float x_expected[] = { 0.896f, -0.447f };
+   float x_expected[] = { 0.896F, -0.447F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1195) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1195) imag");
@@ -995,13 +996,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.6f, 0.041f };
-   float X[] = { 0.896f, -0.447f };
+   float A[] = { 0.6F, 0.041F };
+   float X[] = { 0.896F, -0.447F };
    int incX = -1;
-   float x_expected[] = { 1.43572f, -0.843108f };
+   float x_expected[] = { 1.43572F, -0.843108F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1196) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1196) imag");
@@ -1017,13 +1018,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.6f, 0.041f };
-   float X[] = { 0.896f, -0.447f };
+   float A[] = { 0.6F, 0.041F };
+   float X[] = { 0.896F, -0.447F };
    int incX = -1;
-   float x_expected[] = { 0.896f, -0.447f };
+   float x_expected[] = { 0.896F, -0.447F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1197) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1197) imag");
@@ -1039,13 +1040,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.397f, 0.683f };
-   float X[] = { 0.765f, 0.18f };
+   float A[] = { 0.397F, 0.683F };
+   float X[] = { 0.765F, 0.18F };
    int incX = -1;
-   float x_expected[] = { 0.289642f, 0.951701f };
+   float x_expected[] = { 0.289642F, 0.951701F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1198) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1198) imag");
@@ -1061,13 +1062,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.397f, 0.683f };
-   float X[] = { 0.765f, 0.18f };
+   float A[] = { 0.397F, 0.683F };
+   float X[] = { 0.765F, 0.18F };
    int incX = -1;
-   float x_expected[] = { 0.765f, 0.18f };
+   float x_expected[] = { 0.765F, 0.18F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1199) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1199) imag");
@@ -1083,13 +1084,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.397f, 0.683f };
-   float X[] = { 0.765f, 0.18f };
+   float A[] = { 0.397F, 0.683F };
+   float X[] = { 0.765F, 0.18F };
    int incX = -1;
-   float x_expected[] = { 0.289642f, 0.951701f };
+   float x_expected[] = { 0.289642F, 0.951701F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1200) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1200) imag");
@@ -1105,13 +1106,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.397f, 0.683f };
-   float X[] = { 0.765f, 0.18f };
+   float A[] = { 0.397F, 0.683F };
+   float X[] = { 0.765F, 0.18F };
    int incX = -1;
-   float x_expected[] = { 0.765f, 0.18f };
+   float x_expected[] = { 0.765F, 0.18F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1201) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1201) imag");
@@ -1127,13 +1128,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.397f, 0.683f };
-   float X[] = { 0.765f, 0.18f };
+   float A[] = { 0.397F, 0.683F };
+   float X[] = { 0.765F, 0.18F };
    int incX = -1;
-   float x_expected[] = { 0.289642f, 0.951701f };
+   float x_expected[] = { 0.289642F, 0.951701F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1202) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1202) imag");
@@ -1149,13 +1150,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.397f, 0.683f };
-   float X[] = { 0.765f, 0.18f };
+   float A[] = { 0.397F, 0.683F };
+   float X[] = { 0.765F, 0.18F };
    int incX = -1;
-   float x_expected[] = { 0.765f, 0.18f };
+   float x_expected[] = { 0.765F, 0.18F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1203) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1203) imag");
@@ -1171,13 +1172,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 131;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.397f, 0.683f };
-   float X[] = { 0.765f, 0.18f };
+   float A[] = { 0.397F, 0.683F };
+   float X[] = { 0.765F, 0.18F };
    int incX = -1;
-   float x_expected[] = { 0.289642f, 0.951701f };
+   float x_expected[] = { 0.289642F, 0.951701F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1204) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1204) imag");
@@ -1193,13 +1194,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int diag = 132;
    int N = 1;
    int lda = 1;
-   float A[] = { 0.397f, 0.683f };
-   float X[] = { 0.765f, 0.18f };
+   float A[] = { 0.397F, 0.683F };
+   float X[] = { 0.765F, 0.18F };
    int incX = -1;
-   float x_expected[] = { 0.765f, 0.18f };
+   float x_expected[] = { 0.765F, 0.18F };
    cblas_ctrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], flteps, "ctrsv(case 1205) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], flteps, "ctrsv(case 1205) imag");
@@ -1221,7 +1222,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -0.471957414573, -0.173714770642 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1206) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1206) imag");
@@ -1243,7 +1244,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -0.627, 0.281 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1207) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1207) imag");
@@ -1265,7 +1266,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -0.471957414573, -0.173714770642 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1208) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1208) imag");
@@ -1287,7 +1288,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -0.627, 0.281 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1209) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1209) imag");
@@ -1309,7 +1310,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -0.471957414573, -0.173714770642 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1210) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1210) imag");
@@ -1331,7 +1332,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -0.627, 0.281 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1211) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1211) imag");
@@ -1353,7 +1354,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -0.471957414573, -0.173714770642 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1212) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1212) imag");
@@ -1375,7 +1376,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -0.627, 0.281 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1213) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1213) imag");
@@ -1397,7 +1398,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 5.18357980622, -0.587200407955 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1214) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1214) imag");
@@ -1419,7 +1420,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 0.3, -0.874 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1215) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1215) imag");
@@ -1441,7 +1442,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 5.18357980622, -0.587200407955 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1216) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1216) imag");
@@ -1463,7 +1464,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 0.3, -0.874 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1217) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1217) imag");
@@ -1485,7 +1486,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 5.18357980622, -0.587200407955 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1218) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1218) imag");
@@ -1507,7 +1508,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 0.3, -0.874 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1219) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1219) imag");
@@ -1529,7 +1530,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 5.18357980622, -0.587200407955 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1220) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1220) imag");
@@ -1551,7 +1552,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { 0.3, -0.874 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1221) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1221) imag");
@@ -1573,7 +1574,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -0.371144591432, -0.0712292456544 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1222) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1222) imag");
@@ -1595,7 +1596,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -0.085, -0.303 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1223) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1223) imag");
@@ -1617,7 +1618,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -0.371144591432, -0.0712292456544 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1224) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1224) imag");
@@ -1639,7 +1640,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -0.085, -0.303 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1225) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1225) imag");
@@ -1661,7 +1662,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -0.371144591432, -0.0712292456544 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1226) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1226) imag");
@@ -1683,7 +1684,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -0.085, -0.303 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1227) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1227) imag");
@@ -1705,7 +1706,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -0.371144591432, -0.0712292456544 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1228) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1228) imag");
@@ -1727,7 +1728,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double x_expected[] = { -0.085, -0.303 };
    cblas_ztrsv(order, uplo, trans, diag, N, A, lda, X, incX);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[2*i], x_expected[2*i], dbleps, "ztrsv(case 1229) real");
        gsl_test_rel(X[2*i+1], x_expected[2*i+1], dbleps, "ztrsv(case 1229) imag");

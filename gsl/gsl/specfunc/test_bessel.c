@@ -32,9 +32,9 @@ static double K[100];
 int test_bessel(void)
 {
   gsl_sf_result r;
-  int i;
+  int i = 0;
   int s = 0;
-  int sa;
+  int sa = 0;
 
   TEST_SF(s, gsl_sf_bessel_J0_e, (0.1, &r),     0.99750156206604003230,    TEST_TOL0, GSL_SUCCESS);
   TEST_SF(s, gsl_sf_bessel_J0_e, (2.0, &r),     0.22389077914123566805,    TEST_TOL0, GSL_SUCCESS);

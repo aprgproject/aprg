@@ -7,21 +7,22 @@
 
 void
 test_hpr2 (void) {
-const double flteps = 1e-4, dbleps = 1e-6;
+const double flteps = 1e-4;
+const double dbleps = 1e-6;
   {
    int order = 101;
    int uplo = 121;
    int N = 1;
-   float alpha[2] = {-1.0f, 0.0f};
-   float Ap[] = { 0.159f, -0.13f };
-   float X[] = { 0.854f, 0.851f };
+   float alpha[2] = {-1.0F, 0.0F};
+   float Ap[] = { 0.159F, -0.13F };
+   float X[] = { 0.854F, 0.851F };
    int incX = -1;
-   float Y[] = { 0.526f, -0.267f };
+   float Y[] = { 0.526F, -0.267F };
    int incY = -1;
-   float Ap_expected[] = { -0.284974f, 0.0f };
+   float Ap_expected[] = { -0.284974F, 0.0F };
    cblas_chpr2(order, uplo, N, alpha, X, incX, Y, incY, Ap);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Ap[2*i], Ap_expected[2*i], flteps, "chpr2(case 1458) real");
        gsl_test_rel(Ap[2*i+1], Ap_expected[2*i+1], flteps, "chpr2(case 1458) imag");
@@ -34,16 +35,16 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int order = 101;
    int uplo = 122;
    int N = 1;
-   float alpha[2] = {-1.0f, 0.0f};
-   float Ap[] = { 0.159f, -0.13f };
-   float X[] = { 0.854f, 0.851f };
+   float alpha[2] = {-1.0F, 0.0F};
+   float Ap[] = { 0.159F, -0.13F };
+   float X[] = { 0.854F, 0.851F };
    int incX = -1;
-   float Y[] = { 0.526f, -0.267f };
+   float Y[] = { 0.526F, -0.267F };
    int incY = -1;
-   float Ap_expected[] = { -0.284974f, 0.0f };
+   float Ap_expected[] = { -0.284974F, 0.0F };
    cblas_chpr2(order, uplo, N, alpha, X, incX, Y, incY, Ap);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Ap[2*i], Ap_expected[2*i], flteps, "chpr2(case 1459) real");
        gsl_test_rel(Ap[2*i+1], Ap_expected[2*i+1], flteps, "chpr2(case 1459) imag");
@@ -56,16 +57,16 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int order = 102;
    int uplo = 121;
    int N = 1;
-   float alpha[2] = {-1.0f, 0.0f};
-   float Ap[] = { 0.159f, -0.13f };
-   float X[] = { 0.854f, 0.851f };
+   float alpha[2] = {-1.0F, 0.0F};
+   float Ap[] = { 0.159F, -0.13F };
+   float X[] = { 0.854F, 0.851F };
    int incX = -1;
-   float Y[] = { 0.526f, -0.267f };
+   float Y[] = { 0.526F, -0.267F };
    int incY = -1;
-   float Ap_expected[] = { -0.284974f, 0.0f };
+   float Ap_expected[] = { -0.284974F, 0.0F };
    cblas_chpr2(order, uplo, N, alpha, X, incX, Y, incY, Ap);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Ap[2*i], Ap_expected[2*i], flteps, "chpr2(case 1460) real");
        gsl_test_rel(Ap[2*i+1], Ap_expected[2*i+1], flteps, "chpr2(case 1460) imag");
@@ -78,16 +79,16 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int order = 102;
    int uplo = 122;
    int N = 1;
-   float alpha[2] = {-1.0f, 0.0f};
-   float Ap[] = { 0.159f, -0.13f };
-   float X[] = { 0.854f, 0.851f };
+   float alpha[2] = {-1.0F, 0.0F};
+   float Ap[] = { 0.159F, -0.13F };
+   float X[] = { 0.854F, 0.851F };
    int incX = -1;
-   float Y[] = { 0.526f, -0.267f };
+   float Y[] = { 0.526F, -0.267F };
    int incY = -1;
-   float Ap_expected[] = { -0.284974f, 0.0f };
+   float Ap_expected[] = { -0.284974F, 0.0F };
    cblas_chpr2(order, uplo, N, alpha, X, incX, Y, incY, Ap);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Ap[2*i], Ap_expected[2*i], flteps, "chpr2(case 1461) real");
        gsl_test_rel(Ap[2*i+1], Ap_expected[2*i+1], flteps, "chpr2(case 1461) imag");
@@ -109,7 +110,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double Ap_expected[] = { 0.829742, 0.0 };
    cblas_zhpr2(order, uplo, N, alpha, X, incX, Y, incY, Ap);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Ap[2*i], Ap_expected[2*i], dbleps, "zhpr2(case 1462) real");
        gsl_test_rel(Ap[2*i+1], Ap_expected[2*i+1], dbleps, "zhpr2(case 1462) imag");
@@ -131,7 +132,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double Ap_expected[] = { 0.829742, 0.0 };
    cblas_zhpr2(order, uplo, N, alpha, X, incX, Y, incY, Ap);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Ap[2*i], Ap_expected[2*i], dbleps, "zhpr2(case 1463) real");
        gsl_test_rel(Ap[2*i+1], Ap_expected[2*i+1], dbleps, "zhpr2(case 1463) imag");
@@ -153,7 +154,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double Ap_expected[] = { 0.829742, 0.0 };
    cblas_zhpr2(order, uplo, N, alpha, X, incX, Y, incY, Ap);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Ap[2*i], Ap_expected[2*i], dbleps, "zhpr2(case 1464) real");
        gsl_test_rel(Ap[2*i+1], Ap_expected[2*i+1], dbleps, "zhpr2(case 1464) imag");
@@ -175,7 +176,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double Ap_expected[] = { 0.829742, 0.0 };
    cblas_zhpr2(order, uplo, N, alpha, X, incX, Y, incY, Ap);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Ap[2*i], Ap_expected[2*i], dbleps, "zhpr2(case 1465) real");
        gsl_test_rel(Ap[2*i+1], Ap_expected[2*i+1], dbleps, "zhpr2(case 1465) imag");

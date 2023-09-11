@@ -34,9 +34,11 @@ static int status = 0;
 void
 test1d_trap (void)
 {
-  gsl_histogram *h;
-  double result, lower, upper;
-  size_t i;
+  gsl_histogram *h = NULL;
+  double result;
+  double lower;
+  double upper;
+  size_t i = 0;
 
   gsl_set_error_handler (&my_error_handler);
 
@@ -124,7 +126,8 @@ test1d_trap (void)
 static void
 my_error_handler (const char *reason, const char *file, int line, int err)
 {
-  if (0)
+  if (0) {
     printf ("(caught [%s:%d: %s (%d)])\n", file, line, reason, err);
+}
   status = 1;
 }

@@ -88,12 +88,16 @@ gsl_sf_ellint_RC_e(double x, double y, gsl_mode_t mode, gsl_sf_result * result)
     const double c2 = 9.0 / 22.0;
     double xn = x;
     double yn = y;
-    double mu, sn, lamda, s;
+    double mu;
+    double sn;
+    double lamda;
+    double s;
     int n = 0;
     while(1) {
       mu = (xn + yn + yn) / 3.0;
       sn = (yn + mu) / mu - 2.0;
-      if (fabs(sn) < errtol) break;
+      if (fabs(sn) < errtol) { break;
+}
       lamda = 2.0 * sqrt(xn) * sqrt(yn) + yn;
       xn = (xn + lamda) * 0.25;
       yn = (yn + lamda) * 0.25;
@@ -136,18 +140,31 @@ gsl_sf_ellint_RD_e(double x, double y, double z, gsl_mode_t mode, gsl_sf_result 
     double zn = z;
     double sigma  = 0.0;
     double power4 = 1.0;
-    double ea, eb, ec, ed, ef, s1, s2;
-    double mu, xndev, yndev, zndev;
+    double ea;
+    double eb;
+    double ec;
+    double ed;
+    double ef;
+    double s1;
+    double s2;
+    double mu;
+    double xndev;
+    double yndev;
+    double zndev;
     int n = 0;
     while(1) {
-      double xnroot, ynroot, znroot, lamda;
-      double epslon;
+      double xnroot;
+      double ynroot;
+      double znroot;
+      double lamda;
+      double epslon = NAN;
       mu = (xn + yn + 3.0 * zn) * 0.2;
       xndev = (mu - xn) / mu;
       yndev = (mu - yn) / mu;
       zndev = (mu - zn) / mu;
       epslon = locMAX3(fabs(xndev), fabs(yndev), fabs(zndev));
-      if (epslon < errtol) break;
+      if (epslon < errtol) { break;
+}
       xnroot = sqrt(xn);
       ynroot = sqrt(yn);
       znroot = sqrt(zn);
@@ -202,17 +219,27 @@ gsl_sf_ellint_RF_e(double x, double y, double z, gsl_mode_t mode, gsl_sf_result 
     double xn = x;
     double yn = y;
     double zn = z;
-    double mu, xndev, yndev, zndev, e2, e3, s;
+    double mu;
+    double xndev;
+    double yndev;
+    double zndev;
+    double e2;
+    double e3;
+    double s;
     int n = 0;
     while(1) {
-      double epslon, lamda;
-      double xnroot, ynroot, znroot;
+      double epslon;
+      double lamda;
+      double xnroot;
+      double ynroot;
+      double znroot;
       mu = (xn + yn + zn) / 3.0;
       xndev = 2.0 - (mu + xn) / mu;
       yndev = 2.0 - (mu + yn) / mu;
       zndev = 2.0 - (mu + zn) / mu;
       epslon = locMAX3(fabs(xndev), fabs(yndev), fabs(zndev));
-      if (epslon < errtol) break;
+      if (epslon < errtol) { break;
+}
       xnroot = sqrt(xn);
       ynroot = sqrt(yn);
       znroot = sqrt(zn);
@@ -265,22 +292,38 @@ gsl_sf_ellint_RJ_e(double x, double y, double z, double p, gsl_mode_t mode, gsl_
     double pn = p;
     double sigma = 0.0;
     double power4 = 1.0;
-    double mu, xndev, yndev, zndev, pndev;
-    double ea, eb, ec, e2, e3, s1, s2, s3;
+    double mu;
+    double xndev;
+    double yndev;
+    double zndev;
+    double pndev;
+    double ea;
+    double eb;
+    double ec;
+    double e2;
+    double e3;
+    double s1;
+    double s2;
+    double s3;
     int n = 0;
     while(1) {
-      double xnroot, ynroot, znroot;
-      double lamda, alfa, beta;
-      double epslon;
+      double xnroot;
+      double ynroot;
+      double znroot;
+      double lamda;
+      double alfa;
+      double beta;
+      double epslon = NAN;
       gsl_sf_result rcresult;
-      int rcstatus;
+      int rcstatus = 0;
       mu = (xn + yn + zn + pn + pn) * 0.2;
       xndev = (mu - xn) / mu;
       yndev = (mu - yn) / mu;
       zndev = (mu - zn) / mu;
       pndev = (mu - pn) / mu;
       epslon = locMAX4(fabs(xndev), fabs(yndev), fabs(zndev), fabs(pndev));
-      if(epslon < errtol) break;
+      if(epslon < errtol) { break;
+}
       xnroot = sqrt(xn);
       ynroot = sqrt(yn);
       znroot = sqrt(zn);
@@ -346,13 +389,13 @@ gsl_sf_ellint_F_e(double phi, double k, gsl_mode_t mode, gsl_sf_result * result)
     result->err = GSL_DBL_EPSILON * fabs(result->val) + fabs(sin_phi*rf.err);
     if (nc == 0) {
       return status;
-    } else {
+    } 
       gsl_sf_result rk;  /* add extra terms from periodicity */
       const int rkstatus = gsl_sf_ellint_Kcomp_e(k, mode, &rk);  
       result->val += 2*nc*rk.val;
       result->err += 2*fabs(nc)*rk.err;
       return GSL_ERROR_SELECT_2(status, rkstatus);
-    }
+   
   }
 }
 
@@ -382,7 +425,7 @@ gsl_sf_ellint_E_e(double phi, double k, gsl_mode_t mode, gsl_sf_result * result)
       result->err = 2*fabs(nc)*re.err + re.err;
       return status;
     }
-    else {
+    
       gsl_sf_result rf, rd;
       const double sin3_phi = sin2_phi * sin_phi;
       const int rfstatus = gsl_sf_ellint_RF_e(x, y, 1.0, mode, &rf);
@@ -401,7 +444,7 @@ gsl_sf_ellint_E_e(double phi, double k, gsl_mode_t mode, gsl_sf_result * result)
         result->err += 2*fabs(nc)*re.err;
         return GSL_ERROR_SELECT_3(rfstatus, rdstatus, restatus);
       }
-    }
+   
   }
 }
 
@@ -436,13 +479,13 @@ gsl_sf_ellint_P_e(double phi, double k, double n, gsl_mode_t mode, gsl_sf_result
     result->err += n/3.0 * fabs(sin3_phi*rj.err);
     if (nc == 0) {
       return GSL_ERROR_SELECT_2(rfstatus, rjstatus);
-    } else {
+    } 
       gsl_sf_result rp;  /* add extra terms from periodicity */
       const int rpstatus = gsl_sf_ellint_Pcomp_e(k, n, mode, &rp);  
       result->val += 2*nc*rp.val;
       result->err += 2*fabs(nc)*rp.err;
       return GSL_ERROR_SELECT_3(rfstatus, rjstatus, rpstatus);
-    }
+   
   }
 }
 
@@ -471,13 +514,13 @@ gsl_sf_ellint_D_e(double phi, double k, gsl_mode_t mode, gsl_sf_result * result)
     result->err = GSL_DBL_EPSILON * fabs(result->val) + fabs(sin3_phi/3.0 * rd.err);
     if (nc == 0) {
       return status;
-    } else {
+    } 
       gsl_sf_result rd;  /* add extra terms from periodicity */
       const int rdstatus = gsl_sf_ellint_Dcomp_e(k, mode, &rd);  
       result->val += 2*nc*rd.val;
       result->err += 2*fabs(nc)*rd.err;
       return GSL_ERROR_SELECT_2(status, rdstatus);
-    }
+   
   }
 }
 

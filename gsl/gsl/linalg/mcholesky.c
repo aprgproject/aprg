@@ -23,6 +23,7 @@
 #include <gsl/gsl_linalg.h>
 #include <gsl/gsl_permutation.h>
 #include <gsl/gsl_permute_vector.h>
+#include <math.h>
 
 #include "cholesky_common.c"
 
@@ -89,11 +90,12 @@ gsl_linalg_mcholesky_decomp (gsl_matrix * A, gsl_permutation * p,
   else
     {
       const double delta = GSL_DBL_EPSILON;
-      double beta;
+      double beta = NAN;
       double gamma = 0.0;
       double xi = 0.0;
       gsl_vector_view diag = gsl_matrix_diagonal(A);
-      size_t i, j;
+      size_t i;
+      size_t j;
 
       /* save a copy of A in upper triangle (for later rcond calculation) */
       gsl_matrix_transpose_tricpy(CblasLower, CblasUnit, A, A);
@@ -135,9 +137,13 @@ gsl_linalg_mcholesky_decomp (gsl_matrix * A, gsl_permutation * p,
 
       for (j = 0; j < N; ++j)
         {
-          double ajj, thetaj, u, alpha, alphainv;
+          double ajj;
+          double thetaj;
+          double u;
+          double alpha;
+          double alphainv;
           gsl_vector_view w;
-          size_t q;
+          size_t q = 0;
 
           /* compute q = max_idx { A_jj, ..., A_nn } */
           w = gsl_vector_subvector(&diag.vector, j, N - j);
@@ -180,8 +186,9 @@ gsl_linalg_mcholesky_decomp (gsl_matrix * A, gsl_permutation * p,
 
             }
 
-          if (E)
+          if (E) {
             gsl_vector_set(E, j, alpha - ajj);
+}
 
           gsl_matrix_set(A, j, j, alpha);
         }
@@ -248,7 +255,7 @@ static size_t
 mcholesky_maxabs(const gsl_vector * v, double *maxabs)
 {
   const size_t n = v->size;
-  size_t i;
+  size_t i = 0;
   size_t idx = 0;
   double max = gsl_vector_get(v, idx);
 
@@ -264,8 +271,9 @@ mcholesky_maxabs(const gsl_vector * v, double *maxabs)
         }
     }
 
-  if (maxabs)
+  if (maxabs) {
     *maxabs = max;
+}
 
   return idx;
 }

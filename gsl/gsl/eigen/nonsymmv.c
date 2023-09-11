@@ -64,7 +64,7 @@ Return: pointer to workspace
 gsl_eigen_nonsymmv_workspace *
 gsl_eigen_nonsymmv_alloc(const size_t n)
 {
-  gsl_eigen_nonsymmv_workspace *w;
+  gsl_eigen_nonsymmv_workspace *w = NULL;
 
   if (n == 0)
     {
@@ -118,17 +118,21 @@ gsl_eigen_nonsymmv_free (gsl_eigen_nonsymmv_workspace * w)
 {
   RETURN_IF_NULL (w);
 
-  if (w->nonsymm_workspace_p)
+  if (w->nonsymm_workspace_p) {
     gsl_eigen_nonsymm_free(w->nonsymm_workspace_p);
+}
 
-  if (w->work)
+  if (w->work) {
     gsl_vector_free(w->work);
+}
 
-  if (w->work2)
+  if (w->work2) {
     gsl_vector_free(w->work2);
+}
 
-  if (w->work3)
+  if (w->work3) {
     gsl_vector_free(w->work3);
+}
 
   free(w);
 } /* gsl_eigen_nonsymmv_free() */
@@ -193,7 +197,7 @@ gsl_eigen_nonsymmv (gsl_matrix * A, gsl_vector_complex * eval,
     }
   else
     {
-      int s;
+      int s = 0;
       gsl_matrix Z;
 
       /*
@@ -279,7 +283,7 @@ gsl_eigen_nonsymmv_Z (gsl_matrix * A, gsl_vector_complex * eval,
     }
   else
     {
-      int s;
+      int s = 0;
 
       w->Z = Z;
 
@@ -336,27 +340,33 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
   const size_t N = T->size1;
   const double smlnum = GSL_DBL_MIN * N / GSL_DBL_EPSILON;
   const double bignum = (1.0 - GSL_DBL_EPSILON) / smlnum;
-  int i;              /* looping */
-  size_t iu,          /* looping */
-         ju,
-         ii;
+  int i = 0;              /* looping */
+  size_t iu;
+  size_t /* looping */
+         ju;
+  size_t ii;
   gsl_complex lambda; /* current eigenvalue */
-  double lambda_re,   /* Re(lambda) */
+  double lambda_re;
+  double /* Re(lambda) */
          lambda_im;   /* Im(lambda) */
-  gsl_matrix_view Tv, /* temporary views */
+  gsl_matrix_view Tv;
+  gsl_matrix_view /* temporary views */
                   Zv;
-  gsl_vector_view y,  /* temporary views */
-                  y2,
-                  ev,
-                  ev2;
-  double dat[4],      /* scratch arrays */
+  gsl_vector_view y;
+  gsl_vector_view /* temporary views */
+                  y2;
+  gsl_vector_view ev;
+  gsl_vector_view ev2;
+  double dat[4];
+  double /* scratch arrays */
          dat_X[4];
-  double scale;       /* scale factor */
-  double xnorm;       /* |X| */
-  gsl_vector_complex_view ecol, /* column of evec */
+  double scale = NAN;       /* scale factor */
+  double xnorm = NAN;       /* |X| */
+  gsl_vector_complex_view ecol;
+  gsl_vector_complex_view /* column of evec */
                           ecol2;
-  int complex_pair;   /* complex eigenvalue pair? */
-  double smin;
+  int complex_pair = 0;   /* complex eigenvalue pair? */
+  double smin = NAN;
 
   /*
    * Compute 1-norm of each column of upper triangular part of T
@@ -400,8 +410,10 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
 
       if (lambda_im == 0.0)
         {
-          int k, l;
-          gsl_vector_view bv, xv;
+          int k;
+          int l;
+          gsl_vector_view bv;
+          gsl_vector_view xv;
 
           /* real eigenvector */
 
@@ -433,14 +445,15 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
             {
               size_t lu = (size_t) l;
 
-              if (lu == 0)
+              if (lu == 0) {
                 complex_pair = 0;
-              else
+              } else {
                 complex_pair = gsl_matrix_get(T, lu, lu - 1) != 0.0;
+}
 
               if (!complex_pair)
                 {
-                  double x;
+                  double x = NAN;
 
                   /*
                    * 1-by-1 diagonal block - solve the system:
@@ -488,7 +501,8 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
 
                   if (lu > 0)
                     {
-                      gsl_vector_view v1, v2;
+                      gsl_vector_view v1;
+                      gsl_vector_view v2;
 
                       /* update right hand side */
 
@@ -499,7 +513,8 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
                 } /* if (!complex_pair) */
               else
                 {
-                  double x11, x21;
+                  double x11;
+                  double x21;
 
                   /*
                    * 2-by-2 diagonal block
@@ -530,7 +545,7 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
 
                   if (xnorm > 1.0)
                     {
-                      double beta;
+                      double beta = NAN;
 
                       beta = GSL_MAX(gsl_vector_get(w->work3, lu - 1),
                                      gsl_vector_get(w->work3, lu));
@@ -557,7 +572,8 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
                   /* update right hand side */
                   if (lu > 1)
                     {
-                      gsl_vector_view v1, v2;
+                      gsl_vector_view v1;
+                      gsl_vector_view v2;
 
                       v1 = gsl_matrix_subcolumn(T, lu - 1, 0, lu - 1);
                       v2 = gsl_vector_subvector(w->work, 0, lu - 1);
@@ -614,21 +630,24 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
               /* set imaginary part to 0 */
               gsl_vector_set(&ev2.vector, ii, 0.0);
 
-              if (fabs(a) > scale)
+              if (fabs(a) > scale) {
                 scale = fabs(a);
+}
             }
 
-          if (scale != 0.0)
+          if (scale != 0.0) {
             scale = 1.0 / scale;
+}
 
           /* scale by magnitude of largest element */
           gsl_blas_dscal(scale, &ev.vector);
         } /* if (GSL_IMAG(lambda) == 0.0) */
       else
         {
-          gsl_vector_complex_view bv, xv;
-          size_t k;
-          int l;
+          gsl_vector_complex_view bv;
+          gsl_vector_complex_view xv;
+          size_t k = 0;
+          int l = 0;
           gsl_complex lambda2;
 
           /* complex eigenvector */
@@ -685,10 +704,11 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
             {
               size_t lu = (size_t) l;
 
-              if (lu == 0)
+              if (lu == 0) {
                 complex_pair = 0;
-              else
+              } else {
                 complex_pair = gsl_matrix_get(T, lu, lu - 1) != 0.0;
+}
 
               if (!complex_pair)
                 {
@@ -748,7 +768,8 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
                   /* update the right hand side */
                   if (lu > 0)
                     {
-                      gsl_vector_view v1, v2;
+                      gsl_vector_view v1;
+                      gsl_vector_view v2;
 
                       v1 = gsl_matrix_subcolumn(T, lu, 0, lu);
                       v2 = gsl_vector_subvector(w->work, 0, lu);
@@ -760,7 +781,10 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
                 } /* if (!complex_pair) */
               else
                 {
-                  gsl_complex b1, b2, x1, x2;
+                  gsl_complex b1;
+                  gsl_complex b2;
+                  gsl_complex x1;
+                  gsl_complex x2;
 
                   /*
                    * 2-by-2 diagonal block - solve the system
@@ -795,7 +819,7 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
 
                   if (xnorm > 1.0)
                     {
-                      double beta;
+                      double beta = NAN;
 
                       beta = GSL_MAX(gsl_vector_get(w->work3, lu - 1),
                                      gsl_vector_get(w->work3, lu));
@@ -824,7 +848,10 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
                   /* update right hand side */
                   if (lu > 1)
                     {
-                      gsl_vector_view v1, v2, v3, v4;
+                      gsl_vector_view v1;
+                      gsl_vector_view v2;
+                      gsl_vector_view v3;
+                      gsl_vector_view v4;
 
                       v1 = gsl_matrix_subcolumn(T, lu - 1, 0, lu - 1);
                       v4 = gsl_matrix_subcolumn(T, lu, 0, lu - 1);
@@ -923,8 +950,9 @@ nonsymmv_get_right_eigenvectors(gsl_matrix *T, gsl_matrix *Z,
               gsl_vector_set(&ev2.vector, ii, a);
             }
 
-          if (scale != 0.0)
+          if (scale != 0.0) {
             scale = 1.0 / scale;
+}
 
           /* scale by largest element magnitude */
 
@@ -953,11 +981,12 @@ nonsymmv_normalize_eigenvectors(gsl_vector_complex *eval,
                                 gsl_matrix_complex *evec)
 {
   const size_t N = evec->size1;
-  size_t i;     /* looping */
+  size_t i = 0;     /* looping */
   gsl_complex ei;
   gsl_vector_complex_view vi;
-  gsl_vector_view re, im;
-  double scale; /* scaling factor */
+  gsl_vector_view re;
+  gsl_vector_view im;
+  double scale = NAN; /* scaling factor */
 
   for (i = 0; i < N; ++i)
     {

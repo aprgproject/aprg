@@ -58,7 +58,9 @@ gsl_heapsort_index (size_t * p, const void *data, size_t count, size_t size, gsl
      algorithm with N log N operations. Worst case (an already sorted
      array) is something like 20% slower */
 
-  size_t i, k, N;
+  size_t i;
+  size_t k;
+  size_t N;
 
   if (count == 0)
     {

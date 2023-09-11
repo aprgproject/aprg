@@ -36,7 +36,7 @@
 gsl_eigen_herm_workspace * 
 gsl_eigen_herm_alloc (const size_t n)
 {
-  gsl_eigen_herm_workspace * w ;
+  gsl_eigen_herm_workspace * w = NULL ;
 
   if (n == 0)
     {
@@ -104,7 +104,8 @@ gsl_eigen_herm (gsl_matrix_complex * A, gsl_vector * eval,
       double *const d = w->d;
       double *const sd = w->sd;
 
-      size_t a, b;
+      size_t a;
+      size_t b;
 
       /* handle special case */
 

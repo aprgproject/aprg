@@ -236,7 +236,7 @@ gsl_sf_dawson_e(double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else if(y < 1.0) {
+  if(y < 1.0) {
     gsl_sf_result result_c;
     cheb_eval_e(&daw_cs, 2.0*y*y - 1.0, &result_c);
     result->val = x * (0.75 + result_c.val);

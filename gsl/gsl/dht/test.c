@@ -40,9 +40,12 @@ test_dht_exact(void)
   gsl_dht_apply(t, f_in, f_out);
 
   /* Check values. */
-  if(fabs( f_out[0]-( 0.375254649407520))/0.375254649407520 > 1.0e-14) stat++;
-  if(fabs( f_out[1]-(-0.133507872695560))/0.133507872695560 > 1.0e-14) stat++;
-  if(fabs( f_out[2]-( 0.044679925143840))/0.044679925143840 > 1.0e-14) stat++;
+  if(fabs( f_out[0]-( 0.375254649407520))/0.375254649407520 > 1.0e-14) { stat++;
+}
+  if(fabs( f_out[1]-(-0.133507872695560))/0.133507872695560 > 1.0e-14) { stat++;
+}
+  if(fabs( f_out[2]-( 0.044679925143840))/0.044679925143840 > 1.0e-14) { stat++;
+}
 
 
   /* Check inverse.
@@ -62,9 +65,12 @@ test_dht_exact(void)
    * application, you really have to have some
    * a-priori knowledge of the underlying function.
    */
-  if(fabs( f_in[0]-1.0)/1.0 > 2.0e-05) stat++;
-  if(fabs( f_in[1]-2.0)/2.0 > 2.0e-05) stat++;
-  if(fabs( f_in[2]-3.0)/3.0 > 2.0e-05) stat++;
+  if(fabs( f_in[0]-1.0)/1.0 > 2.0e-05) { stat++;
+}
+  if(fabs( f_in[1]-2.0)/2.0 > 2.0e-05) { stat++;
+}
+  if(fabs( f_in[2]-3.0)/3.0 > 2.0e-05) { stat++;
+}
 
   gsl_dht_free(t);
 
@@ -80,7 +86,7 @@ int
 test_dht_simple(void)
 {
   int stat = 0;
-  int n;
+  int n = 0;
   double f_in[128];
   double f_out[128];
   gsl_dht * t = gsl_dht_new(128, 0.0, 100.0);
@@ -98,11 +104,16 @@ test_dht_simple(void)
    * compare this to high accuracy. We only check
    * that it seems to be working.
    */
-  if(fabs( f_out[0]-4.00)/4.00 > 0.02) stat++;
-  if(fabs( f_out[5]-1.84)/1.84 > 0.02) stat++;
-  if(fabs(f_out[10]-1.27)/1.27 > 0.02) stat++;
-  if(fabs(f_out[35]-0.352)/0.352 > 0.02) stat++;
-  if(fabs(f_out[100]-0.0237)/0.0237 > 0.02) stat++;
+  if(fabs( f_out[0]-4.00)/4.00 > 0.02) { stat++;
+}
+  if(fabs( f_out[5]-1.84)/1.84 > 0.02) { stat++;
+}
+  if(fabs(f_out[10]-1.27)/1.27 > 0.02) { stat++;
+}
+  if(fabs(f_out[35]-0.352)/0.352 > 0.02) { stat++;
+}
+  if(fabs(f_out[100]-0.0237)/0.0237 > 0.02) { stat++;
+}
 
   gsl_dht_free(t);
 
@@ -117,7 +128,7 @@ int
 test_dht_exp1(void)
 {
   int stat = 0;
-  int n;
+  int n = 0;
   double f_in[128];
   double f_out[128];
   gsl_dht * t = gsl_dht_new(128, 1.0, 20.0);
@@ -134,11 +145,16 @@ test_dht_exp1(void)
    * are quite large, so it is meaningless to compare
    * to a high accuracy.
    */
-  if(fabs( f_out[0]-0.181)/0.181 > 0.02) stat++;
-  if(fabs( f_out[5]-0.357)/0.357 > 0.02) stat++;
-  if(fabs(f_out[10]-0.211)/0.211 > 0.02) stat++;
-  if(fabs(f_out[35]-0.0289)/0.0289 > 0.02) stat++;
-  if(fabs(f_out[100]-0.00221)/0.00211 > 0.02) stat++;
+  if(fabs( f_out[0]-0.181)/0.181 > 0.02) { stat++;
+}
+  if(fabs( f_out[5]-0.357)/0.357 > 0.02) { stat++;
+}
+  if(fabs(f_out[10]-0.211)/0.211 > 0.02) { stat++;
+}
+  if(fabs(f_out[35]-0.0289)/0.0289 > 0.02) { stat++;
+}
+  if(fabs(f_out[100]-0.00221)/0.00211 > 0.02) { stat++;
+}
 
   gsl_dht_free(t);
 
@@ -153,7 +169,7 @@ int
 test_dht_poly1(void)
 {
   int stat = 0;
-  int n;
+  int n = 0;
   double f_in[128];
   double f_out[128];
   gsl_dht * t = gsl_dht_new(128, 1.0, 1.0);
@@ -168,11 +184,16 @@ test_dht_poly1(void)
   /* Spot check. This function satisfies the boundary condition,
    * so the accuracy should be ok.
    */
-  if(fabs( f_out[0]-0.057274214)/0.057274214    > 1.0e-07) stat++;
-  if(fabs( f_out[5]-(-0.000190850))/0.000190850 > 1.0e-05) stat++;
-  if(fabs(f_out[10]-0.000024342)/0.000024342    > 1.0e-04) stat++;
-  if(fabs(f_out[35]-(-4.04e-07))/4.04e-07       > 1.0e-03) stat++;
-  if(fabs(f_out[100]-1.0e-08)/1.0e-08           > 0.25)    stat++;
+  if(fabs( f_out[0]-0.057274214)/0.057274214    > 1.0e-07) { stat++;
+}
+  if(fabs( f_out[5]-(-0.000190850))/0.000190850 > 1.0e-05) { stat++;
+}
+  if(fabs(f_out[10]-0.000024342)/0.000024342    > 1.0e-04) { stat++;
+}
+  if(fabs(f_out[35]-(-4.04e-07))/4.04e-07       > 1.0e-03) { stat++;
+}
+  if(fabs(f_out[100]-1.0e-08)/1.0e-08           > 0.25) {    stat++;
+}
 
   gsl_dht_free(t);
 

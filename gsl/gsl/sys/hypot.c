@@ -25,7 +25,8 @@ double gsl_hypot (const double x, const double y)
 {
   double xabs = fabs(x) ;
   double yabs = fabs(y) ;
-  double min, max;
+  double min;
+  double max;
 
   /* Follow the optional behavior of the ISO C standard and return
      +Inf when any of the argument is +-Inf, even if the other is NaN.
@@ -66,11 +67,11 @@ gsl_hypot3(const double x, const double y, const double z)
     {
       return (0.0);
     }
-  else
-    {
+  
+    
       double r = w * sqrt((xabs / w) * (xabs / w) +
                           (yabs / w) * (yabs / w) +
                           (zabs / w) * (zabs / w));
       return r;
-    }
+   
 }

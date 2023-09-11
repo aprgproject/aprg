@@ -53,7 +53,7 @@ Return: pointer to workspace
 gsl_eigen_nonsymm_workspace *
 gsl_eigen_nonsymm_alloc(const size_t n)
 {
-  gsl_eigen_nonsymm_workspace *w;
+  gsl_eigen_nonsymm_workspace *w = NULL;
 
   if (n == 0)
     {
@@ -110,14 +110,17 @@ gsl_eigen_nonsymm_free (gsl_eigen_nonsymm_workspace * w)
 {
   RETURN_IF_NULL (w);
 
-  if (w->tau)
+  if (w->tau) {
     gsl_vector_free(w->tau);
+}
 
-  if (w->diag)
+  if (w->diag) {
     gsl_vector_free(w->diag);
+}
 
-  if (w->francis_workspace_p)
+  if (w->francis_workspace_p) {
     gsl_eigen_francis_free(w->francis_workspace_p);
+}
 
   free(w);
 } /* gsl_eigen_nonsymm_free() */
@@ -186,7 +189,7 @@ gsl_eigen_nonsymm (gsl_matrix * A, gsl_vector_complex * eval,
     }
   else
     {
-      int s;
+      int s = 0;
 
       if (w->do_balance)
         {
@@ -280,7 +283,7 @@ gsl_eigen_nonsymm_Z (gsl_matrix * A, gsl_vector_complex * eval,
     }
   else
     {
-      int s;
+      int s = 0;
 
       w->Z = Z;
 

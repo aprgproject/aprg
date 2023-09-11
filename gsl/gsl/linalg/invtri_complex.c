@@ -59,11 +59,12 @@ gsl_linalg_complex_tri_invert(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_matrix_c
     }
   else
     {
-      int status;
+      int status = 0;
 
       status = triangular_singular(T);
-      if (status)
+      if (status) {
         return status;
+}
 
       return complex_tri_invert_L3(Uplo, Diag, T);
     }
@@ -95,7 +96,7 @@ complex_tri_invert_L2(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_matrix_complex *
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       if (Uplo == CblasUpper)
         {
@@ -110,8 +111,9 @@ complex_tri_invert_L2(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_matrix_complex *
                   GSL_REAL(aii) = -GSL_REAL(*Tii);
                   GSL_IMAG(aii) = -GSL_IMAG(*Tii);
                 }
-              else
+              else {
                 aii = GSL_COMPLEX_NEGONE;
+}
 
               if (i > 0)
                 {
@@ -137,8 +139,9 @@ complex_tri_invert_L2(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_matrix_complex *
                   GSL_REAL(ajj) = -GSL_REAL(*Tjj);
                   GSL_IMAG(ajj) = -GSL_IMAG(*Tjj);
                 }
-              else
+              else {
                 ajj = GSL_COMPLEX_NEGONE;
+}
 
               if (j < N - 1)
                 {
@@ -194,7 +197,7 @@ complex_tri_invert_L3(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_matrix_complex *
        *
        * where T11 is N1-by-N1
        */
-      int status;
+      int status = 0;
       const size_t N1 = GSL_LINALG_SPLIT_COMPLEX(N);
       const size_t N2 = N - N1;
       gsl_matrix_complex_view T11 = gsl_matrix_complex_submatrix(T, 0, 0, N1, N1);
@@ -204,8 +207,9 @@ complex_tri_invert_L3(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_matrix_complex *
 
       /* recursion on T11 */
       status = complex_tri_invert_L3(Uplo, Diag, &T11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       if (Uplo == CblasLower)
         {
@@ -226,8 +230,9 @@ complex_tri_invert_L3(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_matrix_complex *
 
       /* recursion on T22 */
       status = complex_tri_invert_L3(Uplo, Diag, &T22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       return GSL_SUCCESS;
     }
@@ -236,13 +241,14 @@ complex_tri_invert_L3(CBLAS_UPLO_t Uplo, CBLAS_DIAG_t Diag, gsl_matrix_complex *
 static int
 triangular_singular(const gsl_matrix_complex * T)
 {
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < T->size1; ++i)
     {
       gsl_complex z = gsl_matrix_complex_get(T, i, i);
-      if (GSL_REAL(z) == 0.0 && GSL_IMAG(z) == 0.0)
+      if (GSL_REAL(z) == 0.0 && GSL_IMAG(z) == 0.0) {
         return GSL_ESING;
+}
     }
 
   return GSL_SUCCESS;

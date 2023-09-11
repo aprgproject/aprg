@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -282,9 +283,11 @@ test_discrete_cdf_P (double (*pdf)(unsigned int),
                      struct range (*range)(void), 
                      const char * desc)
 {
-  double sum;
+  double sum = NAN;
   double tol = TEST_TOL2;
-  int i, min, max;
+  int i;
+  int min;
+  int max;
 
   struct range r = range();
 
@@ -307,9 +310,11 @@ test_discrete_cdf_Q (double (*pdf)(unsigned int),
                      struct range (*range)(void), 
                      const char * desc)
 {
-  double sum;
+  double sum = NAN;
   double tol = TEST_TOL2;
-  int i, min, max;
+  int i;
+  int min;
+  int max;
 
   struct range r = range();
 
@@ -332,9 +337,11 @@ test_discrete_cdf_PQ (double (*cdf_P)(unsigned int),
                       struct range (*range)(void), 
                       const char * desc)
 {
-  double sum;
+  double sum = NAN;
   double tol = GSL_DBL_EPSILON;
-  int i, min, max;
+  int i;
+  int min;
+  int max;
 
   struct range r = range();
 

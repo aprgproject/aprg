@@ -2,21 +2,23 @@
 #include <gsl/gsl_ieee_utils.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_cblas.h>
+#include <math.h>
 
 #include "tests.h"
 
 void
 test_dot (void) {
-const double flteps = 1e-4, dbleps = 1e-6;
+const double flteps = 1e-4;
+const double dbleps = 1e-6;
   {
    int N = 1;
-   float alpha = 0.0f;
-   float X[] = { 0.733f };
-   float Y[] = { 0.825f };
+   float alpha = 0.0F;
+   float X[] = { 0.733F };
+   float Y[] = { 0.825F };
    int incX = 1;
    int incY = -1;
-   float expected = 0.604725f;
-   float f;
+   float expected = 0.604725F;
+   float f = NAN;
    f = cblas_sdsdot (N, alpha, X, incX, Y, incY);
    gsl_test_rel(f, expected, flteps, "sdsdot(case 1)");
   };
@@ -24,13 +26,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float alpha = 0.1f;
-   float X[] = { 0.733f };
-   float Y[] = { 0.825f };
+   float alpha = 0.1F;
+   float X[] = { 0.733F };
+   float Y[] = { 0.825F };
    int incX = 1;
    int incY = -1;
-   float expected = 0.704725f;
-   float f;
+   float expected = 0.704725F;
+   float f = NAN;
    f = cblas_sdsdot (N, alpha, X, incX, Y, incY);
    gsl_test_rel(f, expected, flteps, "sdsdot(case 2)");
   };
@@ -38,13 +40,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float alpha = 1.0f;
-   float X[] = { 0.733f };
-   float Y[] = { 0.825f };
+   float alpha = 1.0F;
+   float X[] = { 0.733F };
+   float Y[] = { 0.825F };
    int incX = 1;
    int incY = -1;
-   float expected = 1.604725f;
-   float f;
+   float expected = 1.604725F;
+   float f = NAN;
    f = cblas_sdsdot (N, alpha, X, incX, Y, incY);
    gsl_test_rel(f, expected, flteps, "sdsdot(case 3)");
   };
@@ -52,13 +54,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float alpha = 0.0f;
-   float X[] = { -0.812f };
-   float Y[] = { -0.667f };
+   float alpha = 0.0F;
+   float X[] = { -0.812F };
+   float Y[] = { -0.667F };
    int incX = -1;
    int incY = 1;
-   float expected = 0.541604f;
-   float f;
+   float expected = 0.541604F;
+   float f = NAN;
    f = cblas_sdsdot (N, alpha, X, incX, Y, incY);
    gsl_test_rel(f, expected, flteps, "sdsdot(case 4)");
   };
@@ -66,13 +68,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float alpha = 0.1f;
-   float X[] = { -0.812f };
-   float Y[] = { -0.667f };
+   float alpha = 0.1F;
+   float X[] = { -0.812F };
+   float Y[] = { -0.667F };
    int incX = -1;
    int incY = 1;
-   float expected = 0.641604f;
-   float f;
+   float expected = 0.641604F;
+   float f = NAN;
    f = cblas_sdsdot (N, alpha, X, incX, Y, incY);
    gsl_test_rel(f, expected, flteps, "sdsdot(case 5)");
   };
@@ -80,13 +82,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float alpha = 1.0f;
-   float X[] = { -0.812f };
-   float Y[] = { -0.667f };
+   float alpha = 1.0F;
+   float X[] = { -0.812F };
+   float Y[] = { -0.667F };
    int incX = -1;
    int incY = 1;
-   float expected = 1.541604f;
-   float f;
+   float expected = 1.541604F;
+   float f = NAN;
    f = cblas_sdsdot (N, alpha, X, incX, Y, incY);
    gsl_test_rel(f, expected, flteps, "sdsdot(case 6)");
   };
@@ -94,13 +96,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float alpha = 0.0f;
-   float X[] = { 0.481f };
-   float Y[] = { 0.523f };
+   float alpha = 0.0F;
+   float X[] = { 0.481F };
+   float Y[] = { 0.523F };
    int incX = -1;
    int incY = -1;
-   float expected = 0.251563f;
-   float f;
+   float expected = 0.251563F;
+   float f = NAN;
    f = cblas_sdsdot (N, alpha, X, incX, Y, incY);
    gsl_test_rel(f, expected, flteps, "sdsdot(case 7)");
   };
@@ -108,13 +110,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float alpha = 0.1f;
-   float X[] = { 0.481f };
-   float Y[] = { 0.523f };
+   float alpha = 0.1F;
+   float X[] = { 0.481F };
+   float Y[] = { 0.523F };
    int incX = -1;
    int incY = -1;
-   float expected = 0.351563f;
-   float f;
+   float expected = 0.351563F;
+   float f = NAN;
    f = cblas_sdsdot (N, alpha, X, incX, Y, incY);
    gsl_test_rel(f, expected, flteps, "sdsdot(case 8)");
   };
@@ -122,13 +124,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float alpha = 1.0f;
-   float X[] = { 0.481f };
-   float Y[] = { 0.523f };
+   float alpha = 1.0F;
+   float X[] = { 0.481F };
+   float Y[] = { 0.523F };
    int incX = -1;
    int incY = -1;
-   float expected = 1.251563f;
-   float f;
+   float expected = 1.251563F;
+   float f = NAN;
    f = cblas_sdsdot (N, alpha, X, incX, Y, incY);
    gsl_test_rel(f, expected, flteps, "sdsdot(case 9)");
   };
@@ -136,12 +138,12 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float X[] = { 0.785f };
-   float Y[] = { -0.7f };
+   float X[] = { 0.785F };
+   float Y[] = { -0.7F };
    int incX = 1;
    int incY = -1;
-   float expected = -0.5495f;
-   float f;
+   float expected = -0.5495F;
+   float f = NAN;
    f = cblas_sdot(N, X, incX, Y, incY);
    gsl_test_rel(f, expected, flteps, "sdot(case 10)");
   };
@@ -154,7 +156,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int incX = 1;
    int incY = -1;
    double expected = -0.53641;
-   double f;
+   double f = NAN;
    f = cblas_ddot(N, X, incX, Y, incY);
    gsl_test_rel(f, expected, dbleps, "ddot(case 11)");
   };
@@ -162,11 +164,11 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float X[] = { 0.474f, -0.27f };
-   float Y[] = { -0.144f, -0.392f };
+   float X[] = { 0.474F, -0.27F };
+   float Y[] = { -0.144F, -0.392F };
    int incX = 1;
    int incY = -1;
-   float expected[2] = {-0.174096f, -0.146928f};
+   float expected[2] = {-0.174096F, -0.146928F};
    float f[2];
    cblas_cdotu_sub(N, X, incX, Y, incY, &f);
    gsl_test_rel(f[0], expected[0], flteps, "cdotu(case 12) real");
@@ -176,11 +178,11 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float X[] = { 0.474f, -0.27f };
-   float Y[] = { -0.144f, -0.392f };
+   float X[] = { 0.474F, -0.27F };
+   float Y[] = { -0.144F, -0.392F };
    int incX = 1;
    int incY = -1;
-   float expected[2] = {0.037584f, -0.224688f};
+   float expected[2] = {0.037584F, -0.224688F};
    float f[2];
    cblas_cdotc_sub(N, X, incX, Y, incY, &f);
    gsl_test_rel(f[0], expected[0], flteps, "cdotc(case 13) real");
@@ -218,12 +220,12 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float X[] = { -0.457f };
-   float Y[] = { 0.839f };
+   float X[] = { -0.457F };
+   float Y[] = { 0.839F };
    int incX = -1;
    int incY = 1;
-   float expected = -0.383423f;
-   float f;
+   float expected = -0.383423F;
+   float f = NAN;
    f = cblas_sdot(N, X, incX, Y, incY);
    gsl_test_rel(f, expected, flteps, "sdot(case 16)");
   };
@@ -236,7 +238,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int incX = -1;
    int incY = 1;
    double expected = -0.828477;
-   double f;
+   double f = NAN;
    f = cblas_ddot(N, X, incX, Y, incY);
    gsl_test_rel(f, expected, dbleps, "ddot(case 17)");
   };
@@ -244,11 +246,11 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float X[] = { 0.852f, -0.045f };
-   float Y[] = { 0.626f, -0.164f };
+   float X[] = { 0.852F, -0.045F };
+   float Y[] = { 0.626F, -0.164F };
    int incX = -1;
    int incY = 1;
-   float expected[2] = {0.525972f, -0.167898f};
+   float expected[2] = {0.525972F, -0.167898F};
    float f[2];
    cblas_cdotu_sub(N, X, incX, Y, incY, &f);
    gsl_test_rel(f[0], expected[0], flteps, "cdotu(case 18) real");
@@ -258,11 +260,11 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float X[] = { 0.852f, -0.045f };
-   float Y[] = { 0.626f, -0.164f };
+   float X[] = { 0.852F, -0.045F };
+   float Y[] = { 0.626F, -0.164F };
    int incX = -1;
    int incY = 1;
-   float expected[2] = {0.540732f, -0.111558f};
+   float expected[2] = {0.540732F, -0.111558F};
    float f[2];
    cblas_cdotc_sub(N, X, incX, Y, incY, &f);
    gsl_test_rel(f[0], expected[0], flteps, "cdotc(case 19) real");
@@ -300,12 +302,12 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float X[] = { -0.088f };
-   float Y[] = { -0.165f };
+   float X[] = { -0.088F };
+   float Y[] = { -0.165F };
    int incX = -1;
    int incY = -1;
-   float expected = 0.01452f;
-   float f;
+   float expected = 0.01452F;
+   float f = NAN;
    f = cblas_sdot(N, X, incX, Y, incY);
    gsl_test_rel(f, expected, flteps, "sdot(case 22)");
   };
@@ -318,7 +320,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int incX = -1;
    int incY = -1;
    double expected = 0.174468;
-   double f;
+   double f = NAN;
    f = cblas_ddot(N, X, incX, Y, incY);
    gsl_test_rel(f, expected, dbleps, "ddot(case 23)");
   };
@@ -326,11 +328,11 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float X[] = { -0.347f, 0.899f };
-   float Y[] = { -0.113f, -0.858f };
+   float X[] = { -0.347F, 0.899F };
+   float Y[] = { -0.113F, -0.858F };
    int incX = -1;
    int incY = -1;
-   float expected[2] = {0.810553f, 0.196139f};
+   float expected[2] = {0.810553F, 0.196139F};
    float f[2];
    cblas_cdotu_sub(N, X, incX, Y, incY, &f);
    gsl_test_rel(f[0], expected[0], flteps, "cdotu(case 24) real");
@@ -340,11 +342,11 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float X[] = { -0.347f, 0.899f };
-   float Y[] = { -0.113f, -0.858f };
+   float X[] = { -0.347F, 0.899F };
+   float Y[] = { -0.113F, -0.858F };
    int incX = -1;
    int incY = -1;
-   float expected[2] = {-0.732131f, 0.399313f};
+   float expected[2] = {-0.732131F, 0.399313F};
    float f[2];
    cblas_cdotc_sub(N, X, incX, Y, incY, &f);
    gsl_test_rel(f[0], expected[0], flteps, "cdotc(case 25) real");

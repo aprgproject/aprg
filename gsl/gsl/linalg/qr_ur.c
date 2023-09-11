@@ -103,7 +103,7 @@ gsl_linalg_QR_UR_decomp (gsl_matrix * S, gsl_matrix * A, gsl_matrix * T)
        * N2 [  0  S22 ]      N2 [  0  T22 ]
        * M  [  A1  A2 ]
        */
-      int status;
+      int status = 0;
       const size_t N1 = N / 2;
       const size_t N2 = N - N1;
 
@@ -127,8 +127,9 @@ gsl_linalg_QR_UR_decomp (gsl_matrix * S, gsl_matrix * A, gsl_matrix * T)
        * M  [  A1 ]      [  0  ] M
        */
       status = gsl_linalg_QR_UR_decomp(&S11.matrix, &A1.matrix, &T11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /*
        * Eq. 3:
@@ -158,8 +159,9 @@ gsl_linalg_QR_UR_decomp (gsl_matrix * S, gsl_matrix * A, gsl_matrix * T)
        * [  A2~ ]       [  0  ]
        */
       status = gsl_linalg_QR_UR_decomp(&S22.matrix, &A2.matrix, &T22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /*
        * Eq. 13: update T12 := -T11 * V1^T * V2 * T22
@@ -212,7 +214,9 @@ qrtr_householder_transform (double *v0, gsl_vector * v)
   /* replace v[0:M-1] with a householder vector (v[0:M-1]) and
      coefficient tau that annihilate v[1:M-1] */
 
-  double alpha, beta, tau ;
+  double alpha;
+  double beta;
+  double tau ;
   
   /* compute xnorm = || [ 0 ; v ] ||, ignoring zero part of vector */
   double xnorm = gsl_blas_dnrm2(v);

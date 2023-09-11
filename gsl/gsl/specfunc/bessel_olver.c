@@ -23,6 +23,7 @@
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sf_airy.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -141,7 +142,7 @@ gsl_sf_bessel_Olver_zofmzeta(double minus_zeta)
     cheb_eval_e(&zofmzeta_a_cs, x, &c);
     return c.val;
   }
-  else if(minus_zeta < 10.0) {
+  if(minus_zeta < 10.0) {
     const double x = (2.0*minus_zeta - 11.0)/9.0;
     gsl_sf_result c;
     cheb_eval_e(&zofmzeta_b_cs, x, &c);
@@ -530,7 +531,7 @@ static double olver_B0(double z, double abs_zeta)
     const double t = 1.0/sqrt(1.0-z*z);
     return -5.0/(48.0*abs_zeta*abs_zeta) + t*(-3.0 + 5.0*t*t)/(24.0*sqrt(abs_zeta));
   }
-  else if(z < 1.02) {
+  if(z < 1.02) {
     const double a = 1.0-z;
     const double c0 =  0.0179988721413553309252458658183;
     const double c1 =  0.0111992982212877614645974276203;
@@ -564,7 +565,7 @@ static double olver_B1(double z, double abs_zeta)
     const double term4 = 5.0/55296.0*t2*(81.0 - 462.0*t2 + 385.0*t2*t2)/z32;
     return -(term1 + term2 + term3 + term4)/rz;
   }
-  else if(z < 1.12) {
+  if(z < 1.12) {
     const double a = 1.0-z;
     const double c0  = -0.00149282953213429172050073403334;
     const double c1  = -0.00175640941909277865678308358128;
@@ -602,7 +603,7 @@ static double olver_B2(double z)
     cheb_eval_e(&B2_lt1_cs, x, &c);
     return  c.val / z;
   }
-  else if(z <= 1.2) {
+  if(z <= 1.2) {
     const double a = 1.0-z;
     const double c0 = 0.00055221307672129279005986982501;
     const double c1 = 0.00089586516310476929281129228969;
@@ -634,7 +635,7 @@ static double olver_B3(double z)
     cheb_eval_e(&B3_lt1_cs, x, &c);
     return c.val;
   }
-  else if(z < 1.2) {
+  if(z < 1.2) {
     const double a = 1.0-z;
     const double c0 = -0.00047461779655995980754441833105;
     const double c1 = -0.00095572913429464297452176811898;
@@ -667,7 +668,7 @@ static double olver_A1(double z, double abs_zeta, double * err)
     *err = 2.0 * GSL_DBL_EPSILON * (fabs(term1) + fabs(term2) + fabs(term3));
     return term1 + term2 + term3;
   }
-  else if(z < 1.02) {
+  if(z < 1.02) {
     const double a = 1.0-z;
     const double c0 = -0.00444444444444444444444444444444;
     const double c1 = -0.00184415584415584415584415584416;
@@ -714,7 +715,7 @@ static double olver_A2(double z, double abs_zeta)
     double term5 = -7.0/19906560.0*t*t2*(30375.0 - 369603.0*t2  + 765765.0*t4  - 425425.0*t6)/z32;
     return term1 + term2 + term3 + term4 + term5;
   }
-  else if(z < 1.12) {
+  if(z < 1.12) {
     double a = 1.0-z;
     const double c0  =  0.000693735541354588973636592684210;
     const double c1  =  0.000464483490365843307019777608010;
@@ -757,7 +758,7 @@ static double olver_A3(double z)
     cheb_eval_e(&A3_lt1_cs, x, &c);
     return c.val;
   }
-  else if(z < 1.1) {
+  if(z < 1.1) {
     double a = 1.0-z;
     const double c0 = -0.000354211971457743840771125759200;
     const double c1 = -0.000312322527890318832782774881353;
@@ -786,7 +787,7 @@ static double olver_A4(double z)
     cheb_eval_e(&A4_lt1_cs, x, &c);
     return c.val;
   }
-  else if(z < 1.2) {
+  if(z < 1.2) {
     double a = 1.0-z;
     const double c0 =  0.00037819419920177291402661228437;
     const double c1 =  0.00040494390552363233477213857527;
@@ -809,7 +810,7 @@ inline
 static double olver_Asum(double nu, double z, double abs_zeta, double * err)
 {
   double nu2 = nu*nu;
-  double A1_err;
+  double A1_err = NAN;
   double A1 = olver_A1(z, abs_zeta, &A1_err);
   double A2 = olver_A2(z, abs_zeta);
   double A3 = olver_A3(z);
@@ -847,17 +848,21 @@ int gsl_sf_bessel_Jnu_asymp_Olver_e(double nu, double x, gsl_sf_result * result)
     DOMAIN_ERROR(result);
   }  
   else {
-    double zeta, abs_zeta;
-    double arg;
-    double pre;
-    double asum, bsum, asum_err;
+    double zeta;
+    double abs_zeta;
+    double arg = NAN;
+    double pre = NAN;
+    double asum;
+    double bsum;
+    double asum_err;
     gsl_sf_result ai;
     gsl_sf_result aip;
     double z = x/nu;
     double crnu = pow(nu, 1.0/3.0);
     double nu3  = nu*nu*nu;
     double nu11 = nu3*nu3*nu3*nu*nu;
-    int stat_a, stat_ap;
+    int stat_a;
+    int stat_ap;
 
     if(fabs(1.0-z) < 0.02) {
       const double a = 1.0-z;
@@ -922,17 +927,21 @@ int gsl_sf_bessel_Ynu_asymp_Olver_e(double nu, double x, gsl_sf_result * result)
     DOMAIN_ERROR(result);
   }  
   else {
-    double zeta, abs_zeta;
-    double arg;
-    double pre;
-    double asum, bsum, asum_err;
+    double zeta;
+    double abs_zeta;
+    double arg = NAN;
+    double pre = NAN;
+    double asum;
+    double bsum;
+    double asum_err;
     gsl_sf_result bi;
     gsl_sf_result bip;
     double z = x/nu;
     double crnu = pow(nu, 1.0/3.0);
     double nu3  = nu*nu*nu;
     double nu11 = nu3*nu3*nu3*nu*nu;
-    int stat_b, stat_d;
+    int stat_b;
+    int stat_d;
 
     if(fabs(1.0-z) < 0.02) {
       const double a = 1.0-z;

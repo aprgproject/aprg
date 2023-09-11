@@ -7,23 +7,24 @@
 
 void
 test_herk (void) {
-const double flteps = 1e-4, dbleps = 1e-6;
+const double flteps = 1e-4;
+const double dbleps = 1e-6;
   {
    int order = 101;
    int uplo = 121;
    int trans = 111;
    int N = 2;
    int K = 1;
-   float alpha = 0.0f;
-   float beta = 0.1f;
-   float A[] = { -0.617f, 0.179f, -0.626f, 0.334f };
+   float alpha = 0.0F;
+   float beta = 0.1F;
+   float A[] = { -0.617F, 0.179F, -0.626F, 0.334F };
    int lda = 1;
-   float C[] = { 0.346f, -0.903f, 0.022f, -0.839f, -0.715f, 0.049f, -0.338f, 0.149f };
+   float C[] = { 0.346F, -0.903F, 0.022F, -0.839F, -0.715F, 0.049F, -0.338F, 0.149F };
    int ldc = 2;
-   float C_expected[] = { 0.0346f, 0.0f, 0.0022f, -0.0839f, -0.715f, 0.049f, -0.0338f, 0.0f };
+   float C_expected[] = { 0.0346F, 0.0F, 0.0022F, -0.0839F, -0.715F, 0.049F, -0.0338F, 0.0F };
    cblas_cherk(order, uplo, trans, N, K, alpha, A, lda, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 4; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cherk(case 1598) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cherk(case 1598) imag");
@@ -38,16 +39,16 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int trans = 111;
    int N = 2;
    int K = 1;
-   float alpha = 0.0f;
-   float beta = 0.1f;
-   float A[] = { -0.356f, -0.308f, 0.493f, -0.351f };
+   float alpha = 0.0F;
+   float beta = 0.1F;
+   float A[] = { -0.356F, -0.308F, 0.493F, -0.351F };
    int lda = 2;
-   float C[] = { -0.898f, -0.905f, 0.002f, -0.219f, 0.881f, 0.879f, 0.275f, -0.351f };
+   float C[] = { -0.898F, -0.905F, 0.002F, -0.219F, 0.881F, 0.879F, 0.275F, -0.351F };
    int ldc = 2;
-   float C_expected[] = { -0.0898f, 0.0f, 0.002f, -0.219f, 0.0881f, 0.0879f, 0.0275f, 0.0f };
+   float C_expected[] = { -0.0898F, 0.0F, 0.002F, -0.219F, 0.0881F, 0.0879F, 0.0275F, 0.0F };
    cblas_cherk(order, uplo, trans, N, K, alpha, A, lda, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 4; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cherk(case 1599) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cherk(case 1599) imag");
@@ -62,16 +63,16 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int trans = 113;
    int N = 2;
    int K = 1;
-   float alpha = 0.1f;
-   float beta = 1.0f;
-   float A[] = { -0.103f, -0.951f, -0.601f, -0.041f };
+   float alpha = 0.1F;
+   float beta = 1.0F;
+   float A[] = { -0.103F, -0.951F, -0.601F, -0.041F };
    int lda = 2;
-   float C[] = { -0.918f, -0.018f, 0.991f, -0.789f, -0.698f, -0.067f, 0.956f, -0.599f };
+   float C[] = { -0.918F, -0.018F, 0.991F, -0.789F, -0.698F, -0.067F, 0.956F, -0.599F };
    int ldc = 2;
-   float C_expected[] = { -0.826499f, 0.0f, 1.00109f, -0.845733f, -0.698f, -0.067f, 0.992288f, 0.0f };
+   float C_expected[] = { -0.826499F, 0.0F, 1.00109F, -0.845733F, -0.698F, -0.067F, 0.992288F, 0.0F };
    cblas_cherk(order, uplo, trans, N, K, alpha, A, lda, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 4; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cherk(case 1600) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cherk(case 1600) imag");
@@ -86,16 +87,16 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int trans = 113;
    int N = 2;
    int K = 1;
-   float alpha = 0.1f;
-   float beta = 1.0f;
-   float A[] = { -0.237f, 0.925f, -0.904f, -0.091f };
+   float alpha = 0.1F;
+   float beta = 1.0F;
+   float A[] = { -0.237F, 0.925F, -0.904F, -0.091F };
    int lda = 1;
-   float C[] = { -0.572f, 0.915f, 0.398f, 0.222f, 0.016f, 0.288f, -0.078f, -0.507f };
+   float C[] = { -0.572F, 0.915F, 0.398F, 0.222F, 0.016F, 0.288F, -0.078F, -0.507F };
    int ldc = 2;
-   float C_expected[] = { -0.480821f, 0.0f, 0.398f, 0.222f, 0.0290073f, 0.373777f, 0.0045497f, 0.0f };
+   float C_expected[] = { -0.480821F, 0.0F, 0.398F, 0.222F, 0.0290073F, 0.373777F, 0.0045497F, 0.0F };
    cblas_cherk(order, uplo, trans, N, K, alpha, A, lda, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 4; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cherk(case 1601) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cherk(case 1601) imag");
@@ -110,16 +111,16 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int trans = 111;
    int N = 2;
    int K = 1;
-   float alpha = -0.3f;
-   float beta = 0.0f;
-   float A[] = { 0.963f, -0.23f, -0.435f, 0.289f };
+   float alpha = -0.3F;
+   float beta = 0.0F;
+   float A[] = { 0.963F, -0.23F, -0.435F, 0.289F };
    int lda = 1;
-   float C[] = { 0.282f, -0.272f, -0.516f, -0.594f, -0.001f, 0.155f, -0.39f, -0.354f };
+   float C[] = { 0.282F, -0.272F, -0.516F, -0.594F, -0.001F, 0.155F, -0.39F, -0.354F };
    int ldc = 2;
-   float C_expected[] = { -0.294081f, 0.0f, -0.516f, -0.594f, 0.145613f, -0.0534771f, -0.0818238f, 0.0f };
+   float C_expected[] = { -0.294081F, 0.0F, -0.516F, -0.594F, 0.145613F, -0.0534771F, -0.0818238F, 0.0F };
    cblas_cherk(order, uplo, trans, N, K, alpha, A, lda, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 4; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cherk(case 1602) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cherk(case 1602) imag");
@@ -134,16 +135,16 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int trans = 111;
    int N = 2;
    int K = 1;
-   float alpha = -0.3f;
-   float beta = 0.0f;
-   float A[] = { 0.674f, 0.1f, -0.098f, 0.552f };
+   float alpha = -0.3F;
+   float beta = 0.0F;
+   float A[] = { 0.674F, 0.1F, -0.098F, 0.552F };
    int lda = 2;
-   float C[] = { 0.089f, -0.523f, -0.551f, 0.618f, 0.67f, 0.247f, 0.975f, -0.714f };
+   float C[] = { 0.089F, -0.523F, -0.551F, 0.618F, 0.67F, 0.247F, 0.975F, -0.714F };
    int ldc = 2;
-   float C_expected[] = { -0.139283f, 0.0f, 0.0032556f, -0.114554f, 0.67f, 0.247f, -0.0942924f, 0.0f };
+   float C_expected[] = { -0.139283F, 0.0F, 0.0032556F, -0.114554F, 0.67F, 0.247F, -0.0942924F, 0.0F };
    cblas_cherk(order, uplo, trans, N, K, alpha, A, lda, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 4; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cherk(case 1603) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cherk(case 1603) imag");
@@ -158,16 +159,16 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int trans = 113;
    int N = 2;
    int K = 1;
-   float alpha = 1.0f;
-   float beta = 0.1f;
-   float A[] = { 0.033f, -0.864f, 0.168f, 0.524f };
+   float alpha = 1.0F;
+   float beta = 0.1F;
+   float A[] = { 0.033F, -0.864F, 0.168F, 0.524F };
    int lda = 2;
-   float C[] = { 0.788f, 0.016f, -0.436f, 0.749f, -0.89f, -0.87f, 0.421f, -0.203f };
+   float C[] = { 0.788F, 0.016F, -0.436F, 0.749F, -0.89F, -0.87F, 0.421F, -0.203F };
    int ldc = 2;
-   float C_expected[] = { 0.826385f, 0.0f, -0.436f, 0.749f, -0.536192f, -0.249444f, 0.3449f, 0.0f };
+   float C_expected[] = { 0.826385F, 0.0F, -0.436F, 0.749F, -0.536192F, -0.249444F, 0.3449F, 0.0F };
    cblas_cherk(order, uplo, trans, N, K, alpha, A, lda, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 4; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cherk(case 1604) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cherk(case 1604) imag");
@@ -182,16 +183,16 @@ const double flteps = 1e-4, dbleps = 1e-6;
    int trans = 113;
    int N = 2;
    int K = 1;
-   float alpha = 1.0f;
-   float beta = 0.1f;
-   float A[] = { 0.957f, -0.079f, 0.935f, 0.232f };
+   float alpha = 1.0F;
+   float beta = 0.1F;
+   float A[] = { 0.957F, -0.079F, 0.935F, 0.232F };
    int lda = 1;
-   float C[] = { -0.744f, -0.061f, 0.195f, -0.574f, 0.551f, 0.478f, -0.337f, 0.1f };
+   float C[] = { -0.744F, -0.061F, 0.195F, -0.574F, 0.551F, 0.478F, -0.337F, 0.1F };
    int ldc = 2;
-   float C_expected[] = { 0.84769f, 0.0f, 0.895967f, -0.353289f, 0.551f, 0.478f, 0.894349f, 0.0f };
+   float C_expected[] = { 0.84769F, 0.0F, 0.895967F, -0.353289F, 0.551F, 0.478F, 0.894349F, 0.0F };
    cblas_cherk(order, uplo, trans, N, K, alpha, A, lda, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 4; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], flteps, "cherk(case 1605) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], flteps, "cherk(case 1605) imag");
@@ -215,7 +216,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { 1.564252, 0.0, 1.332516, -0.311778, 0.152, -0.899, 0.080645, 0.0 };
    cblas_zherk(order, uplo, trans, N, K, alpha, A, lda, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 4; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zherk(case 1606) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zherk(case 1606) imag");
@@ -239,7 +240,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { 1.011896, 0.0, 0.776, 0.112, 0.126384, -0.096232, 1.537305, 0.0 };
    cblas_zherk(order, uplo, trans, N, K, alpha, A, lda, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 4; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zherk(case 1607) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zherk(case 1607) imag");
@@ -263,7 +264,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.6957382, 0.0, 0.956116, -0.316218, 0.584, 0.806, 1.0111, 0.0 };
    cblas_zherk(order, uplo, trans, N, K, alpha, A, lda, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 4; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zherk(case 1608) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zherk(case 1608) imag");
@@ -287,7 +288,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.0789023, 0.0, -0.873, 0.09, -0.4503115, -0.9277045, -0.184675, 0.0 };
    cblas_zherk(order, uplo, trans, N, K, alpha, A, lda, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 4; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zherk(case 1609) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zherk(case 1609) imag");
@@ -311,7 +312,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.0855, 0.0, 0.581, -0.56, -0.0336, -0.1587, -0.048, 0.0 };
    cblas_zherk(order, uplo, trans, N, K, alpha, A, lda, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 4; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zherk(case 1610) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zherk(case 1610) imag");
@@ -335,7 +336,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { 0.132, 0.0, -0.0468, 0.2835, -0.943, -0.355, -0.1731, 0.0 };
    cblas_zherk(order, uplo, trans, N, K, alpha, A, lda, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 4; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zherk(case 1611) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zherk(case 1611) imag");
@@ -359,7 +360,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.217455, 0.0, -0.689, -0.072, 0.531607, 0.615096, 0.929137, 0.0 };
    cblas_zherk(order, uplo, trans, N, K, alpha, A, lda, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 4; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zherk(case 1612) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zherk(case 1612) imag");
@@ -383,7 +384,7 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double C_expected[] = { -0.558822, 0.0, 0.982524, -0.928422, -0.051, -0.535, -0.19003, 0.0 };
    cblas_zherk(order, uplo, trans, N, K, alpha, A, lda, beta, C, ldc);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 4; i++) {
        gsl_test_rel(C[2*i], C_expected[2*i], dbleps, "zherk(case 1613) real");
        gsl_test_rel(C[2*i+1], C_expected[2*i+1], dbleps, "zherk(case 1613) imag");

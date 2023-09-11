@@ -53,11 +53,11 @@ gsl_eigen_symmv_sort (gsl_vector * eval, gsl_matrix * evec,
   else
     {
       const size_t N = eval->size;
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < N - 1; i++)
         {
-          size_t j;
+          size_t j = 0;
           size_t k = i;
 
           double ek = gsl_vector_get (eval, i);
@@ -65,7 +65,7 @@ gsl_eigen_symmv_sort (gsl_vector * eval, gsl_matrix * evec,
           /* search for something to swap */
           for (j = i + 1; j < N; j++)
             {
-              int test;
+              int test = 0;
               const double ej = gsl_vector_get (eval, j);
 
               switch (sort_type)
@@ -123,11 +123,11 @@ gsl_eigen_hermv_sort (gsl_vector * eval, gsl_matrix_complex * evec,
   else
     {
       const size_t N = eval->size;
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < N - 1; i++)
         {
-          size_t j;
+          size_t j = 0;
           size_t k = i;
 
           double ek = gsl_vector_get (eval, i);
@@ -135,7 +135,7 @@ gsl_eigen_hermv_sort (gsl_vector * eval, gsl_matrix_complex * evec,
           /* search for something to swap */
           for (j = i + 1; j < N; j++)
             {
-              int test;
+              int test = 0;
               const double ej = gsl_vector_get (eval, j);
 
               switch (sort_type)
@@ -193,11 +193,11 @@ gsl_eigen_nonsymmv_sort (gsl_vector_complex * eval,
   else
     {
       const size_t N = eval->size;
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < N - 1; i++)
         {
-          size_t j;
+          size_t j = 0;
           size_t k = i;
 
           gsl_complex ek = gsl_vector_complex_get (eval, i);
@@ -205,7 +205,7 @@ gsl_eigen_nonsymmv_sort (gsl_vector_complex * eval,
           /* search for something to swap */
           for (j = i + 1; j < N; j++)
             {
-              int test;
+              int test = 0;
               const gsl_complex ej = gsl_vector_complex_get (eval, j);
 
               switch (sort_type)
@@ -239,8 +239,9 @@ gsl_eigen_nonsymmv_sort (gsl_vector_complex * eval,
               gsl_vector_complex_swap_elements (eval, i, k);
 
               /* swap eigenvectors */
-              if (evec)
+              if (evec) {
                 gsl_matrix_complex_swap_columns (evec, i, k);
+}
             }
         }
 
@@ -252,7 +253,7 @@ int
 gsl_eigen_gensymmv_sort (gsl_vector * eval, gsl_matrix * evec, 
                          gsl_eigen_sort_t sort_type)
 {
-  int s;
+  int s = 0;
 
   s = gsl_eigen_symmv_sort(eval, evec, sort_type);
 
@@ -263,7 +264,7 @@ int
 gsl_eigen_genhermv_sort (gsl_vector * eval, gsl_matrix_complex * evec, 
                          gsl_eigen_sort_t sort_type)
 {
-  int s;
+  int s = 0;
 
   s = gsl_eigen_hermv_sort(eval, evec, sort_type);
 
@@ -285,11 +286,11 @@ gsl_eigen_genv_sort (gsl_vector_complex * alpha, gsl_vector * beta,
   else
     {
       const size_t N = alpha->size;
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < N - 1; i++)
         {
-          size_t j;
+          size_t j = 0;
           size_t k = i;
 
           gsl_complex ak = gsl_vector_complex_get (alpha, i);
@@ -302,13 +303,14 @@ gsl_eigen_genv_sort (gsl_vector_complex * alpha, gsl_vector * beta,
                               GSL_SIGN(GSL_REAL(ak)) ? GSL_POSINF : GSL_NEGINF,
                               GSL_SIGN(GSL_IMAG(ak)) ? GSL_POSINF : GSL_NEGINF);
             }
-          else
+          else {
             ek = gsl_complex_div_real(ak, bk);
+}
 
           /* search for something to swap */
           for (j = i + 1; j < N; j++)
             {
-              int test;
+              int test = 0;
               const gsl_complex aj = gsl_vector_complex_get (alpha, j);
               double bj = gsl_vector_get(beta, j);
               gsl_complex ej;
@@ -319,8 +321,9 @@ gsl_eigen_genv_sort (gsl_vector_complex * alpha, gsl_vector * beta,
                                   GSL_SIGN(GSL_REAL(aj)) ? GSL_POSINF : GSL_NEGINF,
                                   GSL_SIGN(GSL_IMAG(aj)) ? GSL_POSINF : GSL_NEGINF);
                 }
-              else
+              else {
                 ej = gsl_complex_div_real(aj, bj);
+}
 
               switch (sort_type)
                 {       

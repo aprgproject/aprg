@@ -56,7 +56,7 @@ gsl_set_stream_handler (gsl_stream_handler_t * new_handler)
 FILE *
 gsl_set_stream (FILE * new_stream)
 {
-  FILE * previous_stream;
+  FILE * previous_stream = NULL;
   if (gsl_stream == NULL) {
     gsl_stream = stderr;
   }

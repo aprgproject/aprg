@@ -20,6 +20,7 @@
 /* Author:  G. Jungman */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_errno.h>
@@ -62,7 +63,10 @@ static
 int
 delta(int ta, int tb, int tc, gsl_sf_result * d)
 {
-  gsl_sf_result f1, f2, f3, f4;
+  gsl_sf_result f1;
+  gsl_sf_result f2;
+  gsl_sf_result f3;
+  gsl_sf_result f4;
   int status = 0;
   status += gsl_sf_fact_e((ta + tb - tc)/2, &f1);
   status += gsl_sf_fact_e((ta + tc - tb)/2, &f2);
@@ -134,22 +138,35 @@ gsl_sf_coupling_3j_e (int two_ja, int two_jb, int two_jc,
     return GSL_SUCCESS;
   }
   else {
-    int jca  = (-two_ja + two_jb + two_jc) / 2,
-        jcb  = ( two_ja - two_jb + two_jc) / 2,
-        jcc  = ( two_ja + two_jb - two_jc) / 2,
-        jmma = ( two_ja - two_ma) / 2,
-        jmmb = ( two_jb - two_mb) / 2,
-        jmmc = ( two_jc - two_mc) / 2,
-        jpma = ( two_ja + two_ma) / 2,
-        jpmb = ( two_jb + two_mb) / 2,
-        jpmc = ( two_jc + two_mc) / 2,
-        jsum = ( two_ja + two_jb + two_jc) / 2,
-        kmin = locMax3 (0, jpmb - jmmc, jmma - jpmc),
-        kmax = locMin3 (jcc, jmma, jpmb),
-        k, sign = GSL_IS_ODD (kmin - jpma + jmmb) ? -1 : 1,
-        status = 0;
-    double sum_pos = 0.0, sum_neg = 0.0, sum_err = 0.0;
-    gsl_sf_result bc1, bc2, bc3, bcn1, bcn2, bcd1, bcd2, bcd3, bcd4, term, lnorm;
+    int jca  = (-two_ja + two_jb + two_jc) / 2;
+    int jcb  = ( two_ja - two_jb + two_jc) / 2;
+    int jcc  = ( two_ja + two_jb - two_jc) / 2;
+    int jmma = ( two_ja - two_ma) / 2;
+    int jmmb = ( two_jb - two_mb) / 2;
+    int jmmc = ( two_jc - two_mc) / 2;
+    int jpma = ( two_ja + two_ma) / 2;
+    int jpmb = ( two_jb + two_mb) / 2;
+    int jpmc = ( two_jc + two_mc) / 2;
+    int jsum = ( two_ja + two_jb + two_jc) / 2;
+    int kmin = locMax3 (0, jpmb - jmmc, jmma - jpmc);
+    int kmax = locMin3 (jcc, jmma, jpmb);
+    int k;
+    int sign = GSL_IS_ODD (kmin - jpma + jmmb) ? -1 : 1;
+    int status = 0;
+    double sum_pos = 0.0;
+    double sum_neg = 0.0;
+    double sum_err = 0.0;
+    gsl_sf_result bc1;
+    gsl_sf_result bc2;
+    gsl_sf_result bc3;
+    gsl_sf_result bcn1;
+    gsl_sf_result bcn2;
+    gsl_sf_result bcd1;
+    gsl_sf_result bcd2;
+    gsl_sf_result bcd3;
+    gsl_sf_result bcd4;
+    gsl_sf_result term;
+    gsl_sf_result lnorm;
 
     status += gsl_sf_lnchoose_e (two_ja, jcc , &bcn1);
     status += gsl_sf_lnchoose_e (two_jb, jcc , &bcn2);
@@ -231,10 +248,17 @@ gsl_sf_coupling_6j_e(int two_ja, int two_jb, int two_jc,
   }
   else {
     gsl_sf_result n1;
-    gsl_sf_result d1, d2, d3, d4, d5, d6;
-    double norm;
-    int tk, tkmin, tkmax;
-    double phase;
+    gsl_sf_result d1;
+    gsl_sf_result d2;
+    gsl_sf_result d3;
+    gsl_sf_result d4;
+    gsl_sf_result d5;
+    gsl_sf_result d6;
+    double norm = NAN;
+    int tk;
+    int tkmin;
+    int tkmax;
+    double phase = NAN;
     double sum_pos = 0.0;
     double sum_neg = 0.0;
     double sumsq_err = 0.0;
@@ -263,10 +287,12 @@ gsl_sf_coupling_6j_e(int two_ja, int two_jb, int two_jc,
             :  1.0;
 
     for(tk=tkmin; tk<=tkmax; tk += 2) {
-      double term;
-      double term_err;
-      gsl_sf_result den_1, den_2;
-      gsl_sf_result d1_a, d1_b;
+      double term = NAN;
+      double term_err = NAN;
+      gsl_sf_result den_1;
+      gsl_sf_result den_2;
+      gsl_sf_result d1_a;
+      gsl_sf_result d1_b;
       status = 0;
 
       status += gsl_sf_fact_e((two_ja + two_jb + two_je + two_jd - tk)/2 + 1, &n1);
@@ -359,17 +385,19 @@ gsl_sf_coupling_9j_e(int two_ja, int two_jb, int two_jc,
     return GSL_SUCCESS;
   }
   else {
-    int tk;
+    int tk = 0;
     int tkmin = locMax3(abs(two_ja-two_ji), abs(two_jh-two_jd), abs(two_jb-two_jf));
     int tkmax = locMin3(two_ja + two_ji, two_jh + two_jd, two_jb + two_jf);
     double sum_pos = 0.0;
     double sum_neg = 0.0;
     double sumsq_err = 0.0;
-    double phase;
+    double phase = NAN;
     for(tk=tkmin; tk<=tkmax; tk += 2) {
-      gsl_sf_result s1, s2, s3;
-      double term;
-      double term_err;
+      gsl_sf_result s1;
+      gsl_sf_result s2;
+      gsl_sf_result s3;
+      double term = NAN;
+      double term_err = NAN;
       int status = 0;
 
       status += gsl_sf_coupling_6j_e(two_ja, two_ji, tk,  two_jh, two_jd, two_jg,  &s1);

@@ -27,7 +27,7 @@ int gsl_cheb_calc_deriv(gsl_cheb_series * deriv, const gsl_cheb_series * f)
 {
   const size_t n = f->order + 1;
   const double con = 2.0 / (f->b - f->a);
-  size_t i;
+  size_t i = 0;
   
   if(deriv->order != f->order) 
     {
@@ -49,11 +49,13 @@ int gsl_cheb_calc_deriv(gsl_cheb_series * deriv, const gsl_cheb_series * f)
   if(n > 1) {
     deriv->c[n-2] = 2.0 *(n-1.0) * f->c[n-1];
 
-    for(i = n; i>=3; i--) 
+    for(i = n; i>=3; i--) { 
       deriv->c[i-3] = deriv->c[i-1] + 2.0 *(i-2.0) * f->c[i-2];
+}
 
-    for(i = 0  ; i<n ; i++) 
+    for(i = 0  ; i<n ; i++) { 
       deriv->c[i] *= con;
+}
   }
 
   return GSL_SUCCESS;

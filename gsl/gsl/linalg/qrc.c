@@ -69,7 +69,7 @@ gsl_linalg_complex_QR_decomp (gsl_matrix_complex * A, gsl_vector_complex * tau)
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < GSL_MIN (M, N); i++)
         {
@@ -235,7 +235,7 @@ gsl_linalg_complex_QR_QHvec (const gsl_matrix_complex * QR, const gsl_vector_com
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* compute Q^H v */
 
@@ -269,7 +269,7 @@ gsl_linalg_complex_QR_Qvec (const gsl_matrix_complex * QR, const gsl_vector_comp
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* compute Q v */
 
@@ -309,7 +309,8 @@ gsl_linalg_complex_QR_unpack (const gsl_matrix_complex * QR, const gsl_vector_co
     }
   else
     {
-      size_t i, j;
+      size_t i;
+      size_t j;
 
       /* initialize Q to the identity */
       gsl_matrix_complex_set_identity (Q);
@@ -330,11 +331,13 @@ gsl_linalg_complex_QR_unpack (const gsl_matrix_complex * QR, const gsl_vector_co
 
       for (i = 0; i < M; i++)
         {
-          for (j = 0; j < i && j < N; j++)
+          for (j = 0; j < i && j < N; j++) {
             gsl_matrix_complex_set (R, i, j, GSL_COMPLEX_ZERO);
+}
 
-          for (j = i; j < N; j++)
+          for (j = i; j < N; j++) {
             gsl_matrix_complex_set (R, i, j, gsl_matrix_complex_get (QR, i, j));
+}
         }
 
       return GSL_SUCCESS;

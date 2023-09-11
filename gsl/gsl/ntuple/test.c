@@ -19,9 +19,12 @@ int
 main (void)
 {
   struct data ntuple_row;
-  int i;
+  int i = 0;
 
-  double x[1000], y[1000], z[1000], f[100];
+  double x[1000];
+  double y[1000];
+  double z[1000];
+  double f[100];
 
   gsl_ntuple_select_fn S;
   gsl_ntuple_value_fn V;
@@ -45,7 +48,8 @@ main (void)
 
     int status = 0;
 
-    for (i = 0; i < 100; i++) f[i] = 0;
+    for (i = 0; i < 100; i++) { f[i] = 0;
+}
     
     for (i = 0; i < 1000; i++)
       {
@@ -142,7 +146,10 @@ main (void)
 int
 sel_func (void *ntuple_data, void * params)
 {
-  double x, y, z, scale;
+  double x;
+  double y;
+  double z;
+  double scale;
   scale = *(double *)params;
 
   x = ((struct data *) ntuple_data)->x;
@@ -155,7 +162,10 @@ sel_func (void *ntuple_data, void * params)
 double
 val_func (void *ntuple_data, void * params)
 {
-  double x, y, z, scale;
+  double x;
+  double y;
+  double z;
+  double scale;
   scale = *(double *)params;
 
   x = ((struct data *) ntuple_data)->x;

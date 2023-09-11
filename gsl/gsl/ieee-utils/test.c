@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 #include <float.h>
@@ -52,13 +53,15 @@
 int
 main (void)
 {
-  float zerof = 0.0f, minus_onef = -1.0f ;
-  double zero = 0.0, minus_one = -1.0 ;
+  float zerof = 0.0f;
+  float minus_onef = -1.0f ;
+  double zero = 0.0;
+  double minus_one = -1.0 ;
 
   /* Check for +ZERO (float) */
 
   {
-    float f = 0.0f;
+    float f = 0.0F;
     const char mantissa[] = "00000000000000000000000";
     gsl_ieee_float_rep r;
     gsl_ieee_float_to_rep (&f, &r);
@@ -77,7 +80,7 @@ main (void)
     gsl_ieee_float_rep r;
     
     while (f < 0) {
-      f *= 0.1f;
+      f *= 0.1F;
     }
 
     gsl_ieee_float_to_rep (&f, &r);
@@ -91,7 +94,7 @@ main (void)
   /* Check for a positive NORMAL number (e.g. 2.1) (float) */
 
   {
-    float f = 2.1f;
+    float f = 2.1F;
     const char mantissa[] = "00001100110011001100110";
 
     gsl_ieee_float_rep r;
@@ -107,7 +110,7 @@ main (void)
   /* Check for a negative NORMAL number (e.g. -1.3304...) (float) */
 
   {
-    float f = -1.3303577090924210f ;
+    float f = -1.3303577090924210F ;
     const char mantissa[] = "01010100100100100101001";
 
     gsl_ieee_float_rep r;
@@ -123,7 +126,7 @@ main (void)
   /* Check for a large positive NORMAL number (e.g. 3.37e31) (float) */
 
   {
-    float f = 3.37e31f;
+    float f = 3.37e31F;
     const char mantissa[] = "10101001010110101001001";
     gsl_ieee_float_rep r;
     gsl_ieee_float_to_rep (&f, &r);
@@ -137,7 +140,7 @@ main (void)
   /* Check for a small positive NORMAL number (e.g. 3.37e-31) (float) */
 
   {
-    float f = 3.37e-31f;
+    float f = 3.37e-31F;
     const char mantissa[] = "10110101011100110111011";
 
     gsl_ieee_float_rep r;
@@ -216,7 +219,7 @@ main (void)
 
     gsl_ieee_float_rep r;
 
-    float x;
+    float x = NAN;
     x = 2 * f;
     gsl_ieee_float_to_rep (&x, &r);
 
@@ -234,7 +237,7 @@ main (void)
 
     gsl_ieee_float_rep r;
 
-    float x;
+    float x = NAN;
     x = -2 * f;
     gsl_ieee_float_to_rep (&x, &r);
 
@@ -248,7 +251,9 @@ main (void)
 
   {
     gsl_ieee_float_rep r;
-    float x = 1.0f, y = 2.0f, z = zerof;
+    float x = 1.0f;
+    float y = 2.0f;
+    float z = zerof;
 
     x = x / z;
     y = y / z;
@@ -431,7 +436,7 @@ main (void)
       = "0000000000000000000000000000000000000000000000000000";
     gsl_ieee_double_rep r;
 
-    double x;
+    double x = NAN;
     x = 2.0 * d;
     gsl_ieee_double_to_rep (&x, &r);
 
@@ -449,7 +454,7 @@ main (void)
       = "0000000000000000000000000000000000000000000000000000";
     gsl_ieee_double_rep r;
 
-    double x;
+    double x = NAN;
     x = -2.0 * d;
     gsl_ieee_double_to_rep (&x, &r);
 
@@ -463,7 +468,9 @@ main (void)
 
   {
     gsl_ieee_double_rep r;
-    double x = 1.0, y = 2.0, z = zero;
+    double x = 1.0;
+    double y = 2.0;
+    double z = zero;
 
     x = x / z;
     y = y / z;

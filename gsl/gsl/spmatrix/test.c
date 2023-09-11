@@ -123,7 +123,7 @@ main (void)
   const size_t N[] = { 107, 20, 30 };
   const double density[] = { 0.3, 0.2, 0.5 };
   gsl_rng * r = gsl_rng_alloc(gsl_rng_default);
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < num; ++i)
     {

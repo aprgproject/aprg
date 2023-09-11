@@ -75,7 +75,7 @@ gsl_sf_atanint_e(const double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else if(ax < 0.5*GSL_SQRT_DBL_EPSILON) {
+  if(ax < 0.5*GSL_SQRT_DBL_EPSILON) {
     result->val = x;
     result->err = 0.0;
     return GSL_SUCCESS;

@@ -48,7 +48,8 @@ gsl_multiset_valid (gsl_multiset * c)
   const size_t n = c->n ;
   const size_t k = c->k ;
 
-  size_t i, j ;
+  size_t i;
+  size_t j ;
 
   for (i = 0; i < k; i++)
     {
@@ -82,7 +83,7 @@ gsl_multiset_next (gsl_multiset * c)
   const size_t n = c->n;
   const size_t k = c->k;
   size_t *data = c->data;
-  size_t i;
+  size_t i = 0;
 
   if(k == 0)
     {
@@ -121,7 +122,7 @@ gsl_multiset_prev (gsl_multiset * c)
   const size_t n = c->n;
   const size_t k = c->k;
   size_t *data = c->data;
-  size_t i;
+  size_t i = 0;
 
   if(k == 0)
     {
@@ -165,7 +166,7 @@ gsl_multiset_memcpy (gsl_multiset * dest, const gsl_multiset * src)
      }
 
    {
-     size_t j;
+     size_t j = 0;
 
      for (j = 0; j < src_k; j++)
        {

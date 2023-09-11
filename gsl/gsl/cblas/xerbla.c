@@ -28,7 +28,7 @@
 void
 cblas_xerbla (int p, const char *rout, const char *form, ...)
 {
-  va_list ap;
+  va_list ap = NULL;
 
   va_start (ap, form);
 

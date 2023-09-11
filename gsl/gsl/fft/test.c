@@ -69,15 +69,17 @@ void my_error_handler (const char *reason, const char *file,
 int
 main (int argc, char *argv[])
 {
-  size_t i;
-  size_t start = 1, end = 99;
-  size_t stride ;
+  size_t i = 0;
+  size_t start = 1;
+  size_t end = 99;
+  size_t stride = 0 ;
   size_t n = 0;
 
   gsl_ieee_env_setup ();
 
-  if (argc == 2) 
+  if (argc == 2) { 
     n = strtol (argv[1], NULL, 0);
+}
  
   if (n)
     {
@@ -122,5 +124,6 @@ main (int argc, char *argv[])
 void
 my_error_handler (const char *reason, const char *file, int line, int err)
 {
-  if (0) printf ("(caught [%s:%d: %s (%d)])\n", file, line, reason, err) ;
+  if (0) { printf ("(caught [%s:%d: %s (%d)])\n", file, line, reason, err) ;
+}
 }

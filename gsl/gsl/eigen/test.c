@@ -21,6 +21,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_test.h>
 #include <gsl/gsl_math.h>
@@ -51,7 +52,8 @@ chop_subnormals (double x)
 void
 create_random_symm_matrix(gsl_matrix *m, gsl_rng *r, int lower, int upper)
 {
-  size_t i, j;
+  size_t i;
+  size_t j;
 
   for (i = 0; i < m->size1; ++i)
     {
@@ -68,7 +70,8 @@ void
 create_random_herm_matrix(gsl_matrix_complex *m, gsl_rng *r, int lower,
                           int upper)
 {
-  size_t i, j;
+  size_t i;
+  size_t j;
 
   for (i = 0; i < m->size1; ++i)
     {
@@ -78,10 +81,11 @@ create_random_herm_matrix(gsl_matrix_complex *m, gsl_rng *r, int lower,
 
         GSL_REAL(z) = gsl_rng_uniform(r) * (upper - lower) + lower;
 
-        if (i == j)
+        if (i == j) {
           GSL_IMAG(z) = 0.0;
-        else
+        } else {
           GSL_IMAG(z) = gsl_rng_uniform(r) * (upper - lower) + lower;
+}
 
         gsl_matrix_complex_set(m, i, j, z);
         gsl_matrix_complex_set(m, j, i, gsl_complex_conjugate(z));
@@ -93,7 +97,8 @@ create_random_herm_matrix(gsl_matrix_complex *m, gsl_rng *r, int lower,
 void
 create_random_posdef_matrix(gsl_matrix *m, gsl_rng *r)
 {
-  size_t i, j;
+  size_t i;
+  size_t j;
   double x = gsl_rng_uniform(r);
 
   for (i = 0; i < m->size1; ++i)
@@ -113,7 +118,7 @@ create_random_complex_posdef_matrix(gsl_matrix_complex *m, gsl_rng *r)
 {
   const size_t N = m->size1;
   const double alpha = 10.0 * N;
-  size_t i;
+  size_t i = 0;
 
   create_random_herm_matrix(m, r, 0, 1);
 
@@ -130,7 +135,8 @@ void
 create_random_nonsymm_matrix(gsl_matrix *m, gsl_rng *r, int lower,
                              int upper)
 {
-  size_t i, j;
+  size_t i;
+  size_t j;
 
   for (i = 0; i < m->size1; ++i)
     {
@@ -152,7 +158,8 @@ test_eigen_schur(const gsl_matrix * A, const gsl_matrix * S,
                  const char * desc2)
 {
   const size_t N = A->size1;
-  size_t i, j;
+  size_t i;
+  size_t j;
 
   gsl_matrix * T1 = gsl_matrix_alloc(N, N);
   gsl_matrix * T2 = gsl_matrix_alloc(N, N);
@@ -186,7 +193,8 @@ test_eigen_orthog(gsl_matrix *A, size_t count, const char *desc,
 {
   size_t N = A->size1;
   gsl_matrix *M = gsl_matrix_alloc(A->size1, A->size2);
-  size_t i, j;
+  size_t i;
+  size_t j;
 
   gsl_blas_dgemm(CblasNoTrans, CblasTrans, 1.0, A, A, 0.0, M);
 
@@ -194,13 +202,14 @@ test_eigen_orthog(gsl_matrix *A, size_t count, const char *desc,
     {
       for (j = 0; j < A->size2; ++j)
         {
-          double val;
+          double val = NAN;
           double mij = gsl_matrix_get(M, i, j);
 
-          if (i == j)
+          if (i == j) {
             val = 1.0;
-          else
+          } else {
             val = 0.0;
+}
 
           gsl_test_abs(mij, val, 1.0e8 * GSL_DBL_EPSILON,
                        "%s(N=%u,cnt=%u), %s, orthog(%d,%d)", desc, N, count, desc2, i, j);
@@ -217,7 +226,7 @@ test_eigenvalues_real (const gsl_vector *eval, const gsl_vector * eval2,
                        const char * desc, const char * desc2)
 {
   const size_t N = eval->size;
-  size_t i;
+  size_t i = 0;
 
   double emax = 0;
 
@@ -225,7 +234,8 @@ test_eigenvalues_real (const gsl_vector *eval, const gsl_vector * eval2,
   for (i = 0; i < N; i++) 
     {
       double ei = gsl_vector_get (eval, i);
-      if (fabs(ei) > emax) emax = fabs(ei);
+      if (fabs(ei) > emax) { emax = fabs(ei);
+}
     }
 
   for (i = 0; i < N; i++)
@@ -245,7 +255,7 @@ test_eigenvalues_complex (const gsl_vector_complex * eval,
                           const char * desc, const char * desc2)
 {
   const size_t N = eval->size;
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < N; i++)
     {
@@ -273,7 +283,8 @@ test_eigen_symm_results (const gsl_matrix * A,
                          const char * desc2)
 {
   const size_t N = A->size1;
-  size_t i, j;
+  size_t i;
+  size_t j;
   double emax = 0;
 
   gsl_vector * x = gsl_vector_alloc(N);
@@ -283,7 +294,8 @@ test_eigen_symm_results (const gsl_matrix * A,
   for (i = 0; i < N; i++) 
     {
       double ei = gsl_vector_get (eval, i);
-      if (fabs(ei) > emax) emax = fabs(ei);
+      if (fabs(ei) > emax) { emax = fabs(ei);
+}
     }
 
   for (i = 0; i < N; i++)
@@ -319,7 +331,7 @@ test_eigen_symm_results (const gsl_matrix * A,
       for (j = i + 1; j < N; j++)
         {
           gsl_vector_const_view vj = gsl_matrix_const_column(evec, j);
-          double vivj;
+          double vivj = NAN;
           gsl_blas_ddot (&vi.vector, &vj.vector, &vivj);
           gsl_test_abs (vivj, 0.0, N * GSL_DBL_EPSILON, 
                         "%s, orthogonal(%d,%d), %s", desc, i, j, desc2);
@@ -386,7 +398,8 @@ void
 test_eigen_symm(void)
 {
   size_t N_max = 20;
-  size_t n, i;
+  size_t n;
+  size_t i;
   gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
 
   for (n = 1; n <= N_max; ++n)
@@ -473,7 +486,8 @@ test_eigen_herm_results (const gsl_matrix_complex * A,
                          const char * desc2)
 {
   const size_t N = A->size1;
-  size_t i, j;
+  size_t i;
+  size_t j;
 
   gsl_vector_complex * x = gsl_vector_complex_alloc(N);
   gsl_vector_complex * y = gsl_vector_complex_alloc(N);
@@ -584,7 +598,8 @@ void
 test_eigen_herm(void)
 {
   size_t N_max = 20;
-  size_t n, i;
+  size_t n;
+  size_t i;
   gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
 
   for (n = 1; n <= N_max; ++n)
@@ -633,7 +648,8 @@ test_eigen_nonsymm_results (const gsl_matrix * m,
                             const char * desc,
                             const char * desc2)
 {
-  size_t i,j;
+  size_t i;
+  size_t j;
   size_t N = m->size1;
 
   gsl_vector_complex * x = gsl_vector_complex_alloc(N);
@@ -723,8 +739,9 @@ test_eigen_nonsymm_matrix(const gsl_matrix * m, size_t count,
   test_eigen_schur(m, A, Z, Z, count, "nonsymm", desc);
 
   /* test if Z is an orthogonal matrix */
-  if (w->nonsymm_workspace_p->do_balance == 0)
+  if (w->nonsymm_workspace_p->do_balance == 0) {
     test_eigen_orthog(Z, count, "nonsymm", desc);
+}
 
   gsl_matrix_free(A);
   gsl_matrix_free(Z);
@@ -736,7 +753,8 @@ void
 test_eigen_nonsymm(void)
 {
   size_t N_max = 20;
-  size_t n, i;
+  size_t n;
+  size_t i;
   gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
 
   for (n = 1; n <= N_max; ++n)
@@ -797,7 +815,8 @@ test_eigen_gensymm_results (const gsl_matrix * A,
                             const char * desc2)
 {
   const size_t N = A->size1;
-  size_t i, j;
+  size_t i;
+  size_t j;
 
   gsl_vector * x = gsl_vector_alloc(N);
   gsl_vector * y = gsl_vector_alloc(N);
@@ -846,7 +865,8 @@ void
 test_eigen_gensymm(void)
 {
   size_t N_max = 50;
-  size_t n, i;
+  size_t n;
+  size_t i;
   gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
 
   for (n = 1; n <= N_max; ++n)
@@ -928,7 +948,8 @@ test_eigen_genherm_results (const gsl_matrix_complex * A,
                             const char * desc2)
 {
   const size_t N = A->size1;
-  size_t i, j;
+  size_t i;
+  size_t j;
 
   gsl_vector_complex * x = gsl_vector_complex_alloc(N);
   gsl_vector_complex * y = gsl_vector_complex_alloc(N);
@@ -976,7 +997,8 @@ void
 test_eigen_genherm(void)
 {
   size_t N_max = 50;
-  size_t n, i;
+  size_t n;
+  size_t i;
   gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
 
   for (n = 1; n <= N_max; ++n)
@@ -1070,7 +1092,7 @@ typedef struct
 test_eigen_gen_workspace *
 test_eigen_gen_alloc(const size_t n)
 {
-  test_eigen_gen_workspace *w;
+  test_eigen_gen_workspace *w = NULL;
 
   w = (test_eigen_gen_workspace *) calloc(1, sizeof(test_eigen_gen_workspace));
 
@@ -1123,10 +1145,14 @@ test_eigen_gen_results (const gsl_matrix * A, const gsl_matrix * B,
                         const char * desc2)
 {
   const size_t N = A->size1;
-  size_t i, j;
-  gsl_matrix_complex *ma, *mb;
-  gsl_vector_complex *x, *y;
-  gsl_complex z_one, z_zero;
+  size_t i;
+  size_t j;
+  gsl_matrix_complex *ma;
+  gsl_matrix_complex *mb;
+  gsl_vector_complex *x;
+  gsl_vector_complex *y;
+  gsl_complex z_one;
+  gsl_complex z_zero;
 
   ma = gsl_matrix_complex_alloc(N, N);
   mb = gsl_matrix_complex_alloc(N, N);
@@ -1194,7 +1220,7 @@ test_eigen_gen_pencil(const gsl_matrix * A, const gsl_matrix * B,
                       test_eigen_gen_workspace *w)
 {
   const size_t N = A->size1;
-  size_t i;
+  size_t i = 0;
 
   gsl_matrix_memcpy(w->A, A);
   gsl_matrix_memcpy(w->B, B);
@@ -1205,8 +1231,9 @@ test_eigen_gen_pencil(const gsl_matrix * A, const gsl_matrix * B,
       test_eigen_schur(A, w->A, w->Q, w->Z, count, "genv/A", desc);
       test_eigen_schur(B, w->B, w->Q, w->Z, count, "genv/B", desc);
     }
-  else
+  else {
     gsl_eigen_genv(w->A, w->B, w->alphav, w->betav, w->evec, w->genv_p);
+}
 
   test_eigen_gen_results(A, B, w->alphav, w->betav, w->evec, count, desc, "unsorted");
 
@@ -1229,8 +1256,9 @@ test_eigen_gen_pencil(const gsl_matrix * A, const gsl_matrix * B,
   /* compute eval = alpha / beta values */
   for (i = 0; i < N; ++i)
     {
-      gsl_complex z, ai;
-      double bi;
+      gsl_complex z;
+      gsl_complex ai;
+      double bi = NAN;
 
       ai = gsl_vector_complex_get(w->alpha, i);
       bi = gsl_vector_get(w->beta, i);
@@ -1258,7 +1286,8 @@ void
 test_eigen_gen(void)
 {
   size_t N_max = 20;
-  size_t n, i;
+  size_t n;
+  size_t i;
   gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
 
   for (n = 1; n <= N_max; ++n)

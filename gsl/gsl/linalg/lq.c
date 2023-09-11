@@ -19,6 +19,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #include <gsl/gsl_math.h>
@@ -90,7 +91,7 @@ gsl_linalg_LQ_decomp (gsl_matrix * A, gsl_vector * tau)
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < GSL_MIN (M, N); i++)
         {
@@ -340,7 +341,7 @@ gsl_linalg_LQ_vecQT (const gsl_matrix * LQ, const gsl_vector * tau, gsl_vector *
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* compute v Q^T  */
 
@@ -374,7 +375,7 @@ gsl_linalg_LQ_vecQ (const gsl_matrix * LQ, const gsl_vector * tau, gsl_vector * 
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* compute v Q^T  */
       
@@ -414,7 +415,9 @@ gsl_linalg_LQ_unpack (const gsl_matrix * LQ, const gsl_vector * tau, gsl_matrix 
     }
   else
     {
-      size_t i, j, l_border;
+      size_t i;
+      size_t j;
+      size_t l_border;
 
       /* Initialize Q to the identity */
 
@@ -433,11 +436,13 @@ gsl_linalg_LQ_unpack (const gsl_matrix * LQ, const gsl_vector * tau, gsl_matrix 
       for (i = 0; i < M; i++)
         {
           l_border = GSL_MIN(i, N - 1);
-          for (j = 0; j <= l_border ; j++)
+          for (j = 0; j <= l_border ; j++) {
             gsl_matrix_set (L, i, j, gsl_matrix_get (LQ, i, j));
+}
 
-          for (j = l_border+1; j < N; j++)
+          for (j = l_border+1; j < N; j++) {
             gsl_matrix_set (L, i, j, 0.0);
+}
         }
 
       return GSL_SUCCESS;
@@ -478,8 +483,9 @@ gsl_linalg_LQ_update (gsl_matrix * Q, gsl_matrix * L,
     }
   else
     {
-      size_t j, k;
-      double w0;
+      size_t j;
+      size_t k;
+      double w0 = NAN;
 
       /* Apply Given's rotations to reduce w to (|w|, 0, 0, ... , 0)
 
@@ -490,7 +496,8 @@ gsl_linalg_LQ_update (gsl_matrix * Q, gsl_matrix * L,
       
       for (k = M - 1; k > 0; k--)  /* loop from k = M-1 to 1 */
         {
-          double c, s;
+          double c;
+          double s;
           double wk = gsl_vector_get (w, k);
           double wkm1 = gsl_vector_get (w, k - 1);
 
@@ -515,7 +522,8 @@ gsl_linalg_LQ_update (gsl_matrix * Q, gsl_matrix * L,
 
       for (k = 1; k < GSL_MIN(M,N+1); k++)
         {
-          double c, s;
+          double c;
+          double s;
           double diag = gsl_matrix_get (L, k - 1, k - 1);
           double offdiag = gsl_matrix_get (L, k - 1 , k);
 
@@ -539,7 +547,7 @@ gsl_linalg_LQ_LQsolve (gsl_matrix * Q, gsl_matrix * L, const gsl_vector * b, gsl
     {
       return GSL_ENOTSQR;
     }
-  else if (Q->size1 != M || b->size != M || x->size != M)
+  if (Q->size1 != M || b->size != M || x->size != M)
     {
       return GSL_EBADLEN;
     }
@@ -592,13 +600,14 @@ gsl_linalg_LQ_lssolve(const gsl_matrix * LQ, const gsl_vector * tau, const gsl_v
     {
       gsl_matrix_const_view L1 = gsl_matrix_const_submatrix (LQ, 0, 0, M, M); /* L_1 */
       gsl_vector_view x1 = gsl_vector_subvector(x, 0, M);
-      size_t i;
+      size_t i = 0;
 
       gsl_vector_memcpy(&x1.vector, b);
 
       /* zero x(M+1:N) */
-      for (i = M; i < N; ++i)
+      for (i = M; i < N; ++i) {
         gsl_vector_set(x, i, 0.0);
+}
 
       /* compute z = L_1^{-1} b */
       gsl_blas_dtrsv(CblasLower, CblasNoTrans, CblasNonUnit, &L1.matrix, &x1.vector);
@@ -642,7 +651,7 @@ gsl_linalg_LQ_QTvec(const gsl_matrix * LQ, const gsl_vector * tau, gsl_vector * 
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* compute Q^T v */
 

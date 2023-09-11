@@ -26,6 +26,7 @@
 #include <gsl/gsl_sf_log.h>
 #include <gsl/gsl_sf_psi.h>
 #include <gsl/gsl_sf_gamma.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -38,7 +39,7 @@ isnegint (const double x)
 int
 gsl_sf_lnbeta_e(const double x, const double y, gsl_sf_result * result)
 {
-  double sgn;
+  double sgn = NAN;
   int status = gsl_sf_lnbeta_sgn_e(x,y,result,&sgn);
   if (sgn == -1) {
     DOMAIN_ERROR(result);
@@ -70,13 +71,17 @@ gsl_sf_lnbeta_sgn_e(const double x, const double y, gsl_sf_result * result, doub
       /* min << max, so be careful
        * with the subtraction
        */
-      double lnpre_val;
-      double lnpre_err;
-      double lnpow_val;
-      double lnpow_err;
-      double t1, t2, t3;
+      double lnpre_val = NAN;
+      double lnpre_err = NAN;
+      double lnpow_val = NAN;
+      double lnpow_err = NAN;
+      double t1;
+      double t2;
+      double t3;
       gsl_sf_result lnopr;
-      gsl_sf_result gsx, gsy, gsxy;
+      gsl_sf_result gsx;
+      gsl_sf_result gsy;
+      gsl_sf_result gsxy;
       gsl_sf_gammastar_e(x, &gsx);
       gsl_sf_gammastar_e(y, &gsy);
       gsl_sf_gammastar_e(x+y, &gsxy);
@@ -99,8 +104,13 @@ gsl_sf_lnbeta_sgn_e(const double x, const double y, gsl_sf_result * result, doub
 
   /* General case - Fallback */
   {
-    gsl_sf_result lgx, lgy, lgxy;
-    double sgx, sgy, sgxy, xy = x+y;
+    gsl_sf_result lgx;
+    gsl_sf_result lgy;
+    gsl_sf_result lgxy;
+    double sgx;
+    double sgy;
+    double sgxy;
+    double xy = x+y;
     int stat_gx  = gsl_sf_lngamma_sgn_e(x, &lgx, &sgx);
     int stat_gy  = gsl_sf_lngamma_sgn_e(y, &lgy, &sgy);
     int stat_gxy = gsl_sf_lngamma_sgn_e(xy, &lgxy, &sgxy);
@@ -119,7 +129,9 @@ gsl_sf_beta_e(const double x, const double y, gsl_sf_result * result)
 {
   if((x > 0 && y > 0) && x < 50.0 && y < 50.0) {
     /* Handle the easy case */
-    gsl_sf_result gx, gy, gxy;
+    gsl_sf_result gx;
+    gsl_sf_result gy;
+    gsl_sf_result gxy;
     gsl_sf_gamma_e(x, &gx);
     gsl_sf_gamma_e(y, &gy);
     gsl_sf_gamma_e(x+y, &gxy);
@@ -130,7 +142,7 @@ gsl_sf_beta_e(const double x, const double y, gsl_sf_result * result)
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else if (isnegint(x) || isnegint(y)) {
+  if (isnegint(x) || isnegint(y)) {
     DOMAIN_ERROR(result);
   } else if (isnegint(x+y)) {  /* infinity in the denominator */
     result->val = 0.0;

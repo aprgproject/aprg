@@ -128,9 +128,11 @@ main (void)
   gsl_ieee_env_setup ();
 
   {
-    int i = 0, j, status = 0;
+    int i = 0;
+    int j;
+    int status = 0;
   
-    gsl_permutation * p ;
+    gsl_permutation * p = NULL ;
     
     p = gsl_permutation_alloc (5);
     
@@ -222,7 +224,9 @@ main (void)
 
   /* testing cycles representations */
   {
-    int i = 0, j, status = 0;
+    int i = 0;
+    int j;
+    int status = 0;
 
     gsl_permutation * p = gsl_permutation_alloc (5);
 
@@ -276,7 +280,8 @@ main (void)
 
   /* testing number of inversions */
   {
-    int i = 0, status = 0;
+    int i = 0;
+    int status = 0;
 
     gsl_permutation * p = gsl_permutation_alloc (5);
 

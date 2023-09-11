@@ -64,7 +64,8 @@ gsl_permutation_valid (const gsl_permutation * p)
 {
   const size_t size = p->size ;
 
-  size_t i, j ;
+  size_t i;
+  size_t j ;
 
   for (i = 0; i < size; i++) 
     {
@@ -90,7 +91,7 @@ gsl_permutation_reverse (gsl_permutation * p)
 {
   const size_t size = p->size ;
 
-  size_t i ;
+  size_t i = 0 ;
   
   for (i = 0; i < (size / 2); i++) 
     {
@@ -107,7 +108,7 @@ gsl_permutation_inverse (gsl_permutation * inv, const gsl_permutation * p)
 {
   const size_t size = p->size ;
 
-  size_t i ;
+  size_t i = 0 ;
 
   if (inv->size != size)
     {
@@ -129,7 +130,9 @@ gsl_permutation_next (gsl_permutation * p)
    * ordering).  Returns GSL_FAILURE if there is no next permutation.
    */
   const size_t size = p->size;
-  size_t i, j, k;
+  size_t i;
+  size_t j;
+  size_t k;
 
   if (size < 2)
     {
@@ -180,7 +183,9 @@ int
 gsl_permutation_prev (gsl_permutation * p)
 {
   const size_t size = p->size;
-  size_t i, j, k;
+  size_t i;
+  size_t j;
+  size_t k;
 
   if (size < 2)
     {
@@ -230,7 +235,7 @@ gsl_permutation_prev (gsl_permutation * p)
 int
 gsl_permutation_mul (gsl_permutation * p, const gsl_permutation * pa, const gsl_permutation * pb)
 {
-  size_t i;
+  size_t i = 0;
   const size_t size = p->size;
 
   if (pa->size != size)
@@ -264,7 +269,7 @@ gsl_permutation_memcpy (gsl_permutation * dest,
     }
 
   {
-    size_t j;
+    size_t j = 0;
 
     for (j = 0; j < src_size; j++)
       {

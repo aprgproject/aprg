@@ -90,7 +90,7 @@ gsl_sf_bessel_Jnupos_e(const double nu, const double x, gsl_sf_result * result)
     }
     return GSL_SUCCESS;
   }
-  else if(x*x < 10.0*(nu+1.0)) {
+  if(x*x < 10.0*(nu+1.0)) {
     return gsl_sf_bessel_IJ_taylor_e(nu, x, -1, 100, GSL_DBL_EPSILON, result);
   }
   else if(nu > 50.0) {
@@ -199,7 +199,8 @@ gsl_sf_bessel_Jnu_e(const double nu, const double x, gsl_sf_result * result)
     result->err = fabs(c*Yerr) + fabs(s*Jerr) + fabs(cerr*Yval) + fabs(serr*Jval);
     return GSL_ERROR_SELECT_4(Jstatus, Ystatus, sinstatus, cosstatus);
   }
-  else return gsl_sf_bessel_Jnupos_e(nu, x, result);
+  else { return gsl_sf_bessel_Jnupos_e(nu, x, result);
+}
 }
 
 /*-*-*-*-*-*-*-*-*-* Functions w/ Natural Prototypes *-*-*-*-*-*-*-*-*-*-*/

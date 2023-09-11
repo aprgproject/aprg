@@ -27,15 +27,18 @@ gsl_ieee_env_setup (void)
 {
   const char * p = getenv("GSL_IEEE_MODE") ;
 
-  int precision = 0, rounding = 0, exception_mask = 0 ;
+  int precision = 0;
+  int rounding = 0;
+  int exception_mask = 0 ;
 
   int comma = 0 ;
 
 #if defined( _MSC_VER )
 
     extern const char *fp_env_string;
-	if(p == 0 || *p == '\0')
+	if(p == 0 || *p == '\0') {
         p = fp_env_string;
+}
 
 #else
 
@@ -96,24 +99,30 @@ gsl_ieee_env_setup (void)
     }
   else 
     {
-      if (exception_mask & GSL_IEEE_MASK_INVALID)
+      if (exception_mask & GSL_IEEE_MASK_INVALID) {
         PRINTC("mask-invalid") ;
+}
       
-      if (exception_mask & GSL_IEEE_MASK_DENORMALIZED)
+      if (exception_mask & GSL_IEEE_MASK_DENORMALIZED) {
         PRINTC("mask-denormalized") ;
+}
       
-      if (exception_mask & GSL_IEEE_MASK_DIVISION_BY_ZERO)
+      if (exception_mask & GSL_IEEE_MASK_DIVISION_BY_ZERO) {
         PRINTC("mask-division-by-zero") ;
+}
       
-      if (exception_mask & GSL_IEEE_MASK_OVERFLOW)
+      if (exception_mask & GSL_IEEE_MASK_OVERFLOW) {
         PRINTC("mask-overflow") ;
+}
       
-      if (exception_mask & GSL_IEEE_MASK_UNDERFLOW)
+      if (exception_mask & GSL_IEEE_MASK_UNDERFLOW) {
         PRINTC("mask-underflow") ;
+}
     }
 
-  if (exception_mask & GSL_IEEE_TRAP_INEXACT)
+  if (exception_mask & GSL_IEEE_TRAP_INEXACT) {
     PRINTC("trap-inexact") ;
+}
   
   fprintf(stderr,"\"\n") ;
 }

@@ -46,7 +46,8 @@ static int determine_ieee_type (int non_zero, int exponent, int max_exponent);
 void 
 gsl_ieee_float_to_rep (const float * x, gsl_ieee_float_rep * r)
 {
-  int e, non_zero;
+  int e;
+  int non_zero;
 
   union { 
     float f;
@@ -57,8 +58,9 @@ gsl_ieee_float_to_rep (const float * x, gsl_ieee_float_rep * r)
   
   u.f = *x ; 
 
-  if (little_endian_p())
+  if (little_endian_p()) {
     make_float_bigendian(&(u.f)) ;
+}
   
   /* note that r->sign is signed, u.ieee.byte is unsigned */
 
@@ -90,7 +92,8 @@ void
 gsl_ieee_double_to_rep (const double * x, gsl_ieee_double_rep * r)
 {
 
-  int e, non_zero;
+  int e;
+  int non_zero;
 
   union 
   { 
@@ -102,8 +105,9 @@ gsl_ieee_double_to_rep (const double * x, gsl_ieee_double_rep * r)
 
   u.d= *x ; 
   
-  if (little_endian_p())
+  if (little_endian_p()) {
     make_double_bigendian(&(u.d)) ;
+}
   
   /* note that r->sign is signed, u.ieee.byte is unsigned */
 
@@ -150,7 +154,7 @@ static char nybble[16][5]={ /* include space for the \0 */
 static void
 sprint_nybble(int i, char *s)
 {
-  char *c ;
+  char *c = NULL ;
   c=nybble[i & 0x0f ];
   *s=c[0] ;  *(s+1)=c[1] ;  *(s+2)=c[2] ;  *(s+3)=c[3] ;
 } 
@@ -158,7 +162,7 @@ sprint_nybble(int i, char *s)
 static void
 sprint_byte(int i, char *s)
 {
-  char *c ;
+  char *c = NULL ;
   c=nybble[(i & 0xf0)>>4];
   *s=c[0] ;  *(s+1)=c[1] ;  *(s+2)=c[2] ;  *(s+3)=c[3] ;
   c=nybble[i & 0x0f];
@@ -174,10 +178,10 @@ determine_ieee_type (int non_zero, int exponent, int max_exponent)
         {
           return GSL_IEEE_TYPE_NAN ;
         }
-      else
-        {
+      
+        
           return GSL_IEEE_TYPE_INF ;
-        }
+       
     }
   else if (exponent == 0)
     {
@@ -185,10 +189,10 @@ determine_ieee_type (int non_zero, int exponent, int max_exponent)
         {
           return GSL_IEEE_TYPE_DENORMAL ;
         }
-      else
-        {
+      
+        
           return GSL_IEEE_TYPE_ZERO ;
-        }
+       
     }
   else
     {

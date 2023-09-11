@@ -28,6 +28,7 @@
 #include <gsl/gsl_sf_exp.h>
 #include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_sf_trig.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -116,9 +117,9 @@ gsl_sf_bessel_IJ_taylor_e(const double nu, const double x,
     gsl_sf_result prefactor;   /* (x/2)^nu / Gamma(nu+1) */
     gsl_sf_result sum;
 
-    int stat_pre;
-    int stat_sum;
-    int stat_mul;
+    int stat_pre = 0;
+    int stat_sum = 0;
+    int stat_mul = 0;
 
     if(nu == 0.0) {
       prefactor.val = 1.0;
@@ -162,12 +163,13 @@ gsl_sf_bessel_IJ_taylor_e(const double nu, const double x,
       const double y = sign * 0.25 * x*x;
       double sumk = 1.0;
       double term = 1.0;
-      int k;
+      int k = 0;
 
       for(k=1; k<=kmax; k++) {
         term *= y/((nu+k)*k);
         sumk += term;
-        if(fabs(term/sumk) < threshold) break;
+        if(fabs(term/sumk) < threshold) { break;
+}
       }
 
       sum.val = sumk;
@@ -220,8 +222,10 @@ gsl_sf_bessel_Jnu_asympx_e(const double nu, const double x, gsl_sf_result * resu
   double P   = 0.0; 
   double Q   = 0.0;
   
-  double k = 0, t = 1;
-  int convP, convQ;
+  double k = 0;
+  double t = 1;
+  int convP;
+  int convQ;
 
   do
     {
@@ -238,8 +242,9 @@ gsl_sf_bessel_Jnu_asympx_e(const double nu, const double x, gsl_sf_result * resu
       /* To preserve the consistency of the series we need to exit
          when P and Q have the same number of terms */
 
-      if (convP && convQ && k > (nu / 2)) 
+      if (convP && convQ && k > (nu / 2)) { 
         break;
+}
 
       k++;
     }
@@ -264,8 +269,8 @@ gsl_sf_bessel_Jnu_asympx_e(const double nu, const double x, gsl_sf_result * resu
 int
 gsl_sf_bessel_Ynu_asympx_e(const double nu, const double x, gsl_sf_result * result)
 {
-  double ampl;
-  double theta;
+  double ampl = NAN;
+  double theta = NAN;
   double alpha = x;
   double beta  = -0.5*nu*M_PI;
   int stat_a = gsl_sf_bessel_asymp_Mnu_e(nu, x, &ampl);
@@ -355,7 +360,7 @@ gsl_sf_bessel_Knu_scaled_asympx_e(const double nu, const double x, gsl_sf_result
 int
 gsl_sf_bessel_Inu_scaled_asymp_unif_e(const double nu, const double x, gsl_sf_result * result)
 {
-  int i;
+  int i = 0;
   double z = x/nu;
   double root_term = hypot(1.0,z);
   double pre = 1.0/sqrt(2.0*M_PI*nu * root_term);
@@ -365,10 +370,11 @@ gsl_sf_bessel_Inu_scaled_asymp_unif_e(const double nu, const double x, gsl_sf_re
   int stat_ex = gsl_sf_exp_e(ex_arg, &ex_result);
   if(stat_ex == GSL_SUCCESS) {
     double t = 1.0/root_term;
-    double sum;
+    double sum = NAN;
     double tpow[16];
     tpow[0] = 1.0;
-    for(i=1; i<16; i++) tpow[i] = t * tpow[i-1];
+    for(i=1; i<16; i++) { tpow[i] = t * tpow[i-1];
+}
     sum = 1.0 + debye_u1(tpow)/nu + debye_u2(tpow)/(nu*nu) + debye_u3(tpow)/(nu*nu*nu)
           + debye_u4(tpow)/(nu*nu*nu*nu) + debye_u5(tpow)/(nu*nu*nu*nu*nu);
     result->val  = pre * ex_result.val * sum;
@@ -377,11 +383,11 @@ gsl_sf_bessel_Inu_scaled_asymp_unif_e(const double nu, const double x, gsl_sf_re
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     result->val = 0.0;
     result->err = 0.0;
     return stat_ex;
-  }
+ 
 }
 
 
@@ -393,7 +399,7 @@ gsl_sf_bessel_Inu_scaled_asymp_unif_e(const double nu, const double x, gsl_sf_re
 int
 gsl_sf_bessel_Knu_scaled_asymp_unif_e(const double nu, const double x, gsl_sf_result * result)
 {
-  int i;
+  int i = 0;
   double z = x/nu;
   double root_term = hypot(1.0,z);
   double pre = sqrt(M_PI/(2.0*nu*root_term));
@@ -403,10 +409,11 @@ gsl_sf_bessel_Knu_scaled_asymp_unif_e(const double nu, const double x, gsl_sf_re
   int stat_ex = gsl_sf_exp_e(ex_arg, &ex_result);
   if(stat_ex == GSL_SUCCESS) {
     double t = 1.0/root_term;
-    double sum;
+    double sum = NAN;
     double tpow[16];
     tpow[0] = 1.0;
-    for(i=1; i<16; i++) tpow[i] = t * tpow[i-1];
+    for(i=1; i<16; i++) { tpow[i] = t * tpow[i-1];
+}
     sum = 1.0 - debye_u1(tpow)/nu + debye_u2(tpow)/(nu*nu) - debye_u3(tpow)/(nu*nu*nu)
           + debye_u4(tpow)/(nu*nu*nu*nu) - debye_u5(tpow)/(nu*nu*nu*nu*nu);
     result->val  = pre * ex_result.val * sum;
@@ -415,11 +422,11 @@ gsl_sf_bessel_Knu_scaled_asymp_unif_e(const double nu, const double x, gsl_sf_re
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     result->val = 0.0;
     result->err = 0.0;
     return stat_ex;
-  }
+ 
 }
 
 
@@ -464,8 +471,8 @@ gsl_sf_bessel_JY_mu_restricted(const double mu, const double x,
     GSL_ERROR ("error", GSL_EDOM);
   }
   else {
-    int stat_Y;
-    int stat_J;
+    int stat_Y = 0;
+    int stat_J = 0;
 
     if(x < 2.0) {
       /* Use Taylor series for J and the Temme series for Y.
@@ -484,7 +491,7 @@ gsl_sf_bessel_JY_mu_restricted(const double mu, const double x,
       stat_Y = gsl_sf_bessel_Y_temme(mu, x, Ymu, Ymup1);
       return GSL_ERROR_SELECT_2(stat_J, stat_Y);
     }
-    else if(x < 1000.0) {
+    if(x < 1000.0) {
       double P, Q;
       double J_ratio;
       double J_sgn;
@@ -532,14 +539,14 @@ gsl_sf_bessel_J_CF1(const double nu, const double x,
   double a1 = x/(2.0*(nu+1.0));
   double An = Anm1 + a1*Anm2;
   double Bn = Bnm1 + a1*Bnm2;
-  double an;
+  double an = NAN;
   double fn = An/Bn;
   double dn = a1;
   double s  = 1.0;
 
   while(n < maxiter) {
-    double old_fn;
-    double del;
+    double old_fn = NAN;
+    double del = NAN;
     n++;
     Anm2 = Anm1;
     Bnm2 = Bnm1;
@@ -569,9 +576,11 @@ gsl_sf_bessel_J_CF1(const double nu, const double x,
     del = old_fn/fn;
 
     dn = 1.0 / (2.0*(nu+n)/x - dn);
-    if(dn < 0.0) s = -s;
+    if(dn < 0.0) { s = -s;
+}
 
-    if(fabs(del - 1.0) < 2.0*GSL_DBL_EPSILON) break;
+    if(fabs(del - 1.0) < 2.0*GSL_DBL_EPSILON) { break;
+}
   }
 
   /* FIXME: we should return an error term here as well, because the
@@ -580,10 +589,11 @@ gsl_sf_bessel_J_CF1(const double nu, const double x,
   *ratio = fn;
   *sgn   = s;
 
-  if(n >= maxiter)
+  if(n >= maxiter) {
     GSL_ERROR ("error", GSL_EMAXITER);
-  else
+  } else {
     return GSL_SUCCESS;
+}
 }
 
 
@@ -640,22 +650,24 @@ gsl_sf_bessel_I_CF1_ser(const double nu, const double x, double * ratio)
   double tk   = 1.0;
   double sum  = 1.0;
   double rhok = 0.0;
-  int k;
+  int k = 0;
 
   for(k=1; k<maxk; k++) {
     double ak = 0.25 * (x/(nu+k)) * x/(nu+k+1.0);
     rhok = -ak*(1.0 + rhok)/(1.0 + ak*(1.0 + rhok));
     tk  *= rhok;
     sum += tk;
-    if(fabs(tk/sum) < GSL_DBL_EPSILON) break;
+    if(fabs(tk/sum) < GSL_DBL_EPSILON) { break;
+}
   }
 
   *ratio = x/(2.0*(nu+1.0)) * sum;
 
-  if(k == maxk)
+  if(k == maxk) {
     GSL_ERROR ("error", GSL_EMAXITER);
-  else
+  } else {
     return GSL_SUCCESS;
+}
 }
 
 
@@ -690,11 +702,13 @@ gsl_sf_bessel_JY_steed_CF2(const double nu, const double x,
     bi += 2.0;
     dr = a*dr + br;
     di = a*di + bi;
-    if(fabs(dr)+fabs(di) < SMALL) dr = SMALL;
+    if(fabs(dr)+fabs(di) < SMALL) { dr = SMALL;
+}
     fact = a/(cr*cr+ci*ci);
     cr = br + cr*fact;
     ci = bi - ci*fact;
-    if(fabs(cr)+fabs(ci) < SMALL) cr = SMALL;
+    if(fabs(cr)+fabs(ci) < SMALL) { cr = SMALL;
+}
     den = dr*dr + di*di;
     dr /= den;
     di /= -den;
@@ -703,16 +717,18 @@ gsl_sf_bessel_JY_steed_CF2(const double nu, const double x,
     temp = p*dlr - q*dli;
     q = p*dli + q*dlr;
     p = temp;
-    if(fabs(dlr-1.0)+fabs(dli) < GSL_DBL_EPSILON) break;
+    if(fabs(dlr-1.0)+fabs(dli) < GSL_DBL_EPSILON) { break;
+}
   }
 
   *P = p;
   *Q = q;
 
-  if(i == max_iter)
+  if(i == max_iter) {
     GSL_ERROR ("error", GSL_EMAXITER);
-  else
+  } else {
     return GSL_SUCCESS;
+}
 }
 
 
@@ -746,8 +762,8 @@ gsl_sf_bessel_K_scaled_steed_temme_CF2(const double nu, const double x,
   double s = 1.0 + Qi*delhi;
 
   for(i=2; i<=maxiter; i++) {
-    double dels;
-    double tmp;
+    double dels = NAN;
+    double tmp = NAN;
     ai -= 2.0*(i-1);
     ci  = -ai*ci/i;
     tmp  = (qi - bi*qip1)/ai;
@@ -760,7 +776,8 @@ gsl_sf_bessel_K_scaled_steed_temme_CF2(const double nu, const double x,
     hi += delhi;
     dels = Qi*delhi;
     s += dels;
-    if(fabs(dels/s) < GSL_DBL_EPSILON) break;
+    if(fabs(dels/s) < GSL_DBL_EPSILON) { break;
+}
   }
   
   hi *= -a1;
@@ -768,10 +785,11 @@ gsl_sf_bessel_K_scaled_steed_temme_CF2(const double nu, const double x,
   *K_nu   = sqrt(M_PI/(2.0*x)) / s;
   *K_nup1 = *K_nu * (nu + x + 0.5 - hi)/x;
   *Kp_nu  = - *K_nup1 + nu/x * *K_nu;
-  if(i == maxiter)
+  if(i == maxiter) {
     GSL_ERROR ("error", GSL_EMAXITER);
-  else
+  } else {
     return GSL_SUCCESS;
+}
 }
 
 
@@ -782,8 +800,8 @@ int gsl_sf_bessel_cos_pi4_e(double y, double eps, gsl_sf_result * result)
   const double s = sy + cy;
   const double d = sy - cy;
   const double abs_sum = fabs(cy) + fabs(sy);
-  double seps;
-  double ceps;
+  double seps = NAN;
+  double ceps = NAN;
   if(fabs(eps) < GSL_ROOT5_DBL_EPSILON) {
     const double e2 = eps*eps;
     seps = eps * (1.0 - e2/6.0 * (1.0 - e2/20.0));
@@ -820,8 +838,8 @@ int gsl_sf_bessel_sin_pi4_e(double y, double eps, gsl_sf_result * result)
   const double s = sy + cy;
   const double d = sy - cy;
   const double abs_sum = fabs(cy) + fabs(sy);
-  double seps;
-  double ceps;
+  double seps = NAN;
+  double ceps = NAN;
   if(fabs(eps) < GSL_ROOT5_DBL_EPSILON) {
     const double e2 = eps*eps;
     seps = eps * (1.0 - e2/6.0 * (1.0 - e2/20.0));

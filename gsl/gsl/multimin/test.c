@@ -20,6 +20,7 @@
 /* Modified by Tuomo Keskitalo to add Nelder Mead Simplex test suite */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_test.h>
 #include <gsl/gsl_blas.h>
@@ -45,7 +46,7 @@ main (void)
 
   {
     const gsl_multimin_fdfminimizer_type *fdfminimizers[6];
-    const gsl_multimin_fdfminimizer_type ** T;
+    const gsl_multimin_fdfminimizer_type ** T = NULL;
 
     fdfminimizers[0] = gsl_multimin_fdfminimizer_steepest_descent;
     fdfminimizers[1] = gsl_multimin_fdfminimizer_conjugate_pr;
@@ -80,7 +81,7 @@ main (void)
 
   {
     const gsl_multimin_fminimizer_type *fminimizers[4];
-    const gsl_multimin_fminimizer_type ** T;
+    const gsl_multimin_fminimizer_type ** T = NULL;
 
     fminimizers[0] = gsl_multimin_fminimizer_nmsimplex;
     fminimizers[1] = gsl_multimin_fminimizer_nmsimplex2;
@@ -109,13 +110,13 @@ test_fdf(const char * desc,
          initpt_function initpt,
          const gsl_multimin_fdfminimizer_type *T)
 {
-  int status;
+  int status = 0;
   size_t iter = 0;
-  double step_size;
+  double step_size = NAN;
   
   gsl_vector *x = gsl_vector_alloc (f->n);
 
-  gsl_multimin_fdfminimizer *s;
+  gsl_multimin_fdfminimizer *s = NULL;
   fcount = 0; gcount = 0;
 
   (*initpt) (x);
@@ -145,16 +146,18 @@ test_fdf(const char * desc,
       printf("status=%d\n", status);
       printf("\n");
 #endif
-      if (status == GSL_ENOPROG)
+      if (status == GSL_ENOPROG) {
         break;
+}
 
       status = gsl_multimin_test_gradient(s->gradient,1e-3);
     }
   while (iter < 5000 && status == GSL_CONTINUE);
 
   /* If no error in iteration, test for numerical convergence */
-  if (status == GSL_CONTINUE || status == GSL_ENOPROG) 
+  if (status == GSL_CONTINUE || status == GSL_ENOPROG) { 
     status = (fabs(s->f) > 1e-5);
+}
 
   gsl_test(status, "%s, on %s: %i iters (fn+g=%d+%d), f(x)=%g",
            gsl_multimin_fdfminimizer_name(s),desc, iter, fcount, gcount, s->f);
@@ -169,20 +172,22 @@ int
 test_f(const char * desc, gsl_multimin_function *f, initpt_function initpt,
        const gsl_multimin_fminimizer_type *T)
 {
-  int status;
-  size_t i, iter = 0;
+  int status = 0;
+  size_t i;
+  size_t iter = 0;
 
   gsl_vector *x = gsl_vector_alloc (f->n);
 
   gsl_vector *step_size = gsl_vector_alloc (f->n);
 
-  gsl_multimin_fminimizer *s;
+  gsl_multimin_fminimizer *s = NULL;
 
   fcount = 0; gcount = 0;
   (*initpt) (x);
 
-  for (i = 0; i < f->n; i++) 
+  for (i = 0; i < f->n; i++) { 
     gsl_vector_set (step_size, i, 1);
+}
 
   s = gsl_multimin_fminimizer_alloc(T, f->n);
 

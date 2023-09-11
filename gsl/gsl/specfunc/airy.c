@@ -244,8 +244,9 @@ airy_mod_phase(const double x, gsl_mode_t mode, gsl_sf_result * mod, gsl_sf_resu
 {
   gsl_sf_result result_m;
   gsl_sf_result result_p;
-  double m, p;
-  double sqx;
+  double m;
+  double p;
+  double sqx = NAN;
 
   if(x < -2.0) {
     double z = 16.0/(x*x*x) + 1.0;
@@ -671,7 +672,7 @@ gsl_sf_airy_Ai_e(const double x, const gsl_mode_t mode, gsl_sf_result * result)
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_ERROR_SELECT_2(stat_mp, stat_cos);
   }
-  else if(x <= 1.0) {
+  if(x <= 1.0) {
     const double z = x*x*x;
     gsl_sf_result result_c0;
     gsl_sf_result result_c1;
@@ -712,7 +713,7 @@ gsl_sf_airy_Ai_scaled_e(const double x, gsl_mode_t mode, gsl_sf_result * result)
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_ERROR_SELECT_2(stat_mp, stat_cos);
   }
-  else if(x <= 1.0) {
+  if(x <= 1.0) {
     const double z = x*x*x;
     gsl_sf_result result_c0;
     gsl_sf_result result_c1;
@@ -750,7 +751,7 @@ int gsl_sf_airy_Bi_e(const double x, gsl_mode_t mode, gsl_sf_result * result)
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_ERROR_SELECT_2(stat_mp, stat_sin);
   }
-  else if(x < 1.0) {
+  if(x < 1.0) {
     const double z = x*x*x;
     gsl_sf_result result_c0;
     gsl_sf_result result_c1;
@@ -807,7 +808,7 @@ gsl_sf_airy_Bi_scaled_e(const double x, gsl_mode_t mode, gsl_sf_result * result)
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_ERROR_SELECT_2(stat_mp, stat_sin);
   }
-  else if(x < 1.0) {
+  if(x < 1.0) {
     const double z = x*x*x;
     gsl_sf_result result_c0;
     gsl_sf_result result_c1;

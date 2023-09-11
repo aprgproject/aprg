@@ -7,25 +7,26 @@
 
 void
 test_rotm (void) {
-const double flteps = 1e-4, dbleps = 1e-6;
+const double flteps = 1e-4;
+const double dbleps = 1e-6;
   {
    int N = 1;
-   float h[] = { -1.0f, -4.44982e+03f, -15.5826f, 7.091334e+04f, 2.95912e+04f };
-   float X[] = { -0.034f };
+   float h[] = { -1.0F, -4.44982e+03F, -15.5826F, 7.091334e+04F, 2.95912e+04F };
+   float X[] = { -0.034F };
    int incX = 1;
-   float Y[] = { -0.56f };
+   float Y[] = { -0.56F };
    int incY = -1;
-   float x_expected[] = { -3.956017e+04f };
-   float y_expected[] = { -1.657054e+04f };
+   float x_expected[] = { -3.956017e+04F };
+   float y_expected[] = { -1.657054e+04F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 654)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 655)");
      }
@@ -35,22 +36,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { 0.0f, 15.9728f, 6.400638e+03f, 1.733082e-05f, 1.524511e-04f };
-   float X[] = { -0.034f };
+   float h[] = { 0.0F, 15.9728F, 6.400638e+03F, 1.733082e-05F, 1.524511e-04F };
+   float X[] = { -0.034F };
    int incX = 1;
-   float Y[] = { -0.56f };
+   float Y[] = { -0.56F };
    int incY = -1;
-   float x_expected[] = { -0.0340097f };
-   float y_expected[] = { -218.182f };
+   float x_expected[] = { -0.0340097F };
+   float y_expected[] = { -218.182F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 656)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 657)");
      }
@@ -60,22 +61,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { 1.0f, 5.688411e+04f, 5.914789e+03f, 0.00210473f, 0.0231019f };
-   float X[] = { -0.034f };
+   float h[] = { 1.0F, 5.688411e+04F, 5.914789e+03F, 0.00210473F, 0.0231019F };
+   float X[] = { -0.034F };
    int incX = 1;
-   float Y[] = { -0.56f };
+   float Y[] = { -0.56F };
    int incY = -1;
-   float x_expected[] = { -1.93462e+03f };
-   float y_expected[] = { 0.0210629f };
+   float x_expected[] = { -1.93462e+03F };
+   float y_expected[] = { 0.0210629F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 658)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 659)");
      }
@@ -85,22 +86,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { -2.0f, -0.582083f, 0.00103161f, -3.429851e-05f, 7.411469e-05f };
-   float X[] = { -0.034f };
+   float h[] = { -2.0F, -0.582083F, 0.00103161F, -3.429851e-05F, 7.411469e-05F };
+   float X[] = { -0.034F };
    int incX = 1;
-   float Y[] = { -0.56f };
+   float Y[] = { -0.56F };
    int incY = -1;
-   float x_expected[] = { -0.034f };
-   float y_expected[] = { -0.56f };
+   float x_expected[] = { -0.034F };
+   float y_expected[] = { -0.56F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 660)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 661)");
      }
@@ -110,22 +111,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { -1.0f, 115.163f, -6.715448e+04f, -258.695f, -16.2552f };
-   float X[] = { -0.034f };
+   float h[] = { -1.0F, 115.163F, -6.715448e+04F, -258.695F, -16.2552F };
+   float X[] = { -0.034F };
    int incX = 1;
-   float Y[] = { -0.56f };
+   float Y[] = { -0.56F };
    int incY = -1;
-   float x_expected[] = { 140.954f };
-   float y_expected[] = { 2.292355e+03f };
+   float x_expected[] = { 140.954F };
+   float y_expected[] = { 2.292355e+03F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 662)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 663)");
      }
@@ -135,22 +136,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { 0.0f, -3.314862e+03f, -442.976f, -214.586f, -25.9716f };
-   float X[] = { -0.034f };
+   float h[] = { 0.0F, -3.314862e+03F, -442.976F, -214.586F, -25.9716F };
+   float X[] = { -0.034F };
    int incX = 1;
-   float Y[] = { -0.56f };
+   float Y[] = { -0.56F };
    int incY = -1;
-   float x_expected[] = { 120.134f };
-   float y_expected[] = { 14.5012f };
+   float x_expected[] = { 120.134F };
+   float y_expected[] = { 14.5012F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 664)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 665)");
      }
@@ -160,22 +161,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { 1.0f, -1.177304e+03f, -1.236662e-04f, -0.186585f, 1.15841f };
-   float X[] = { -0.034f };
+   float h[] = { 1.0F, -1.177304e+03F, -1.236662e-04F, -0.186585F, 1.15841F };
+   float X[] = { -0.034F };
    int incX = 1;
-   float Y[] = { -0.56f };
+   float Y[] = { -0.56F };
    int incY = -1;
-   float x_expected[] = { 39.4683f };
-   float y_expected[] = { -0.614711f };
+   float x_expected[] = { 39.4683F };
+   float y_expected[] = { -0.614711F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 666)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 667)");
      }
@@ -185,22 +186,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { -2.0f, -88.9796f, 0.808226f, 1.106582e-05f, -0.00862288f };
-   float X[] = { -0.034f };
+   float h[] = { -2.0F, -88.9796F, 0.808226F, 1.106582e-05F, -0.00862288F };
+   float X[] = { -0.034F };
    int incX = 1;
-   float Y[] = { -0.56f };
+   float Y[] = { -0.56F };
    int incY = -1;
-   float x_expected[] = { -0.034f };
-   float y_expected[] = { -0.56f };
+   float x_expected[] = { -0.034F };
+   float y_expected[] = { -0.56F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 668)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 669)");
      }
@@ -210,22 +211,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { -1.0f, -0.00225865f, 8.338551e+04f, -1.98282f, -2.409905e-05f };
-   float X[] = { -0.034f };
+   float h[] = { -1.0F, -0.00225865F, 8.338551e+04F, -1.98282F, -2.409905e-05F };
+   float X[] = { -0.034F };
    int incX = 1;
-   float Y[] = { -0.56f };
+   float Y[] = { -0.56F };
    int incY = -1;
-   float x_expected[] = { 1.11046f };
-   float y_expected[] = { -2.835107e+03f };
+   float x_expected[] = { 1.11046F };
+   float y_expected[] = { -2.835107e+03F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 670)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 671)");
      }
@@ -235,22 +236,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { 0.0f, 0.258779f, 74.2802f, 0.923299f, 4.847128e+03f };
-   float X[] = { -0.034f };
+   float h[] = { 0.0F, 0.258779F, 74.2802F, 0.923299F, 4.847128e+03F };
+   float X[] = { -0.034F };
    int incX = 1;
-   float Y[] = { -0.56f };
+   float Y[] = { -0.56F };
    int incY = -1;
-   float x_expected[] = { -0.551048f };
-   float y_expected[] = { -3.08553f };
+   float x_expected[] = { -0.551048F };
+   float y_expected[] = { -3.08553F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 672)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 673)");
      }
@@ -269,13 +270,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { 3.09369795149 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 674)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 675)");
      }
@@ -294,13 +295,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { 175.736586112 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 676)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 677)");
      }
@@ -319,13 +320,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -0.829776862405 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 678)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 679)");
      }
@@ -344,13 +345,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -0.711 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 680)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 681)");
      }
@@ -369,13 +370,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { 0.00824558059248 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 682)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 683)");
      }
@@ -394,13 +395,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { 2.095446741254e+03 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 684)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 685)");
      }
@@ -419,13 +420,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -132.128457473 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 686)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 687)");
      }
@@ -444,13 +445,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -0.711 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 688)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 689)");
      }
@@ -469,13 +470,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -1.183082090116e+03 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 690)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 691)");
      }
@@ -494,13 +495,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -0.710580007882 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 692)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 693)");
      }
@@ -510,22 +511,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { -1.0f, 162.86f, 1.379231e-04f, 9.67285f, 0.929218f };
-   float X[] = { 0.629f };
+   float h[] = { -1.0F, 162.86F, 1.379231e-04F, 9.67285F, 0.929218F };
+   float X[] = { 0.629F };
    int incX = -1;
-   float Y[] = { 0.386f };
+   float Y[] = { 0.386F };
    int incY = 1;
-   float x_expected[] = { 106.173f };
-   float y_expected[] = { 0.358765f };
+   float x_expected[] = { 106.173F };
+   float y_expected[] = { 0.358765F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 694)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 695)");
      }
@@ -535,22 +536,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { 0.0f, 537.387f, -21.6404f, -1.017074e+03f, -1.730546e-05f };
-   float X[] = { 0.629f };
+   float h[] = { 0.0F, 537.387F, -21.6404F, -1.017074e+03F, -1.730546e-05F };
+   float X[] = { 0.629F };
    int incX = -1;
-   float Y[] = { 0.386f };
+   float Y[] = { 0.386F };
    int incY = 1;
-   float x_expected[] = { -391.961f };
-   float y_expected[] = { -13.2258f };
+   float x_expected[] = { -391.961F };
+   float y_expected[] = { -13.2258F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 696)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 697)");
      }
@@ -560,22 +561,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { 1.0f, -1.339977e-05f, 0.00522784f, 2.020352e-05f, -0.0654088f };
-   float X[] = { 0.629f };
+   float h[] = { 1.0F, -1.339977e-05F, 0.00522784F, 2.020352e-05F, -0.0654088F };
+   float X[] = { 0.629F };
    int incX = -1;
-   float Y[] = { 0.386f };
+   float Y[] = { 0.386F };
    int incY = 1;
-   float x_expected[] = { 0.385992f };
-   float y_expected[] = { -0.654248f };
+   float x_expected[] = { 0.385992F };
+   float y_expected[] = { -0.654248F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 698)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 699)");
      }
@@ -585,22 +586,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { -2.0f, -50.922f, 31.5261f, -0.194913f, 0.206417f };
-   float X[] = { 0.629f };
+   float h[] = { -2.0F, -50.922F, 31.5261F, -0.194913F, 0.206417F };
+   float X[] = { 0.629F };
    int incX = -1;
-   float Y[] = { 0.386f };
+   float Y[] = { 0.386F };
    int incY = 1;
-   float x_expected[] = { 0.629f };
-   float y_expected[] = { 0.386f };
+   float x_expected[] = { 0.629F };
+   float y_expected[] = { 0.386F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 700)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 701)");
      }
@@ -610,22 +611,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { -1.0f, 1.15659f, 2.599832e+04f, 435.891f, 1.546671e+03f };
-   float X[] = { 0.629f };
+   float h[] = { -1.0F, 1.15659F, 2.599832e+04F, 435.891F, 1.546671e+03F };
+   float X[] = { 0.629F };
    int incX = -1;
-   float Y[] = { 0.386f };
+   float Y[] = { 0.386F };
    int incY = 1;
-   float x_expected[] = { 168.981f };
-   float y_expected[] = { 1.694996e+04f };
+   float x_expected[] = { 168.981F };
+   float y_expected[] = { 1.694996e+04F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 702)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 703)");
      }
@@ -635,22 +636,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { 0.0f, 3.359889e-04f, -0.00134822f, -12.9136f, -5.655622e+04f };
-   float X[] = { 0.629f };
+   float h[] = { 0.0F, 3.359889e-04F, -0.00134822F, -12.9136F, -5.655622e+04F };
+   float X[] = { 0.629F };
    int incX = -1;
-   float Y[] = { 0.386f };
+   float Y[] = { 0.386F };
    int incY = 1;
-   float x_expected[] = { -4.35566f };
-   float y_expected[] = { 0.385152f };
+   float x_expected[] = { -4.35566F };
+   float y_expected[] = { 0.385152F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 704)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 705)");
      }
@@ -660,22 +661,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { 1.0f, 2.75119e-05f, 1.70314f, 18.4063f, 185.731f };
-   float X[] = { 0.629f };
+   float h[] = { 1.0F, 2.75119e-05F, 1.70314F, 18.4063F, 185.731F };
+   float X[] = { 0.629F };
    int incX = -1;
-   float Y[] = { 0.386f };
+   float Y[] = { 0.386F };
    int incY = 1;
-   float x_expected[] = { 0.386017f };
-   float y_expected[] = { 71.063f };
+   float x_expected[] = { 0.386017F };
+   float y_expected[] = { 71.063F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 706)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 707)");
      }
@@ -685,22 +686,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { -2.0f, -1.031009e-04f, -3.378602e+04f, 7.869358e-05f, 157.303f };
-   float X[] = { 0.629f };
+   float h[] = { -2.0F, -1.031009e-04F, -3.378602e+04F, 7.869358e-05F, 157.303F };
+   float X[] = { 0.629F };
    int incX = -1;
-   float Y[] = { 0.386f };
+   float Y[] = { 0.386F };
    int incY = 1;
-   float x_expected[] = { 0.629f };
-   float y_expected[] = { 0.386f };
+   float x_expected[] = { 0.629F };
+   float y_expected[] = { 0.386F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 708)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 709)");
      }
@@ -710,22 +711,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { -1.0f, 0.00207419f, -89.9374f, -1.40414f, -25.1433f };
-   float X[] = { 0.629f };
+   float h[] = { -1.0F, 0.00207419F, -89.9374F, -1.40414F, -25.1433F };
+   float X[] = { 0.629F };
    int incX = -1;
-   float Y[] = { 0.386f };
+   float Y[] = { 0.386F };
    int incY = 1;
-   float x_expected[] = { -0.540694f };
-   float y_expected[] = { -66.276f };
+   float x_expected[] = { -0.540694F };
+   float y_expected[] = { -66.276F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 710)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 711)");
      }
@@ -735,22 +736,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { 0.0f, -4.972562e+04f, 3.65698e-05f, 632.116f, 0.195207f };
-   float X[] = { 0.629f };
+   float h[] = { 0.0F, -4.972562e+04F, 3.65698e-05F, 632.116F, 0.195207F };
+   float X[] = { 0.629F };
    int incX = -1;
-   float Y[] = { 0.386f };
+   float Y[] = { 0.386F };
    int incY = 1;
-   float x_expected[] = { 244.626f };
-   float y_expected[] = { 0.386023f };
+   float x_expected[] = { 244.626F };
+   float y_expected[] = { 0.386023F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 712)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 713)");
      }
@@ -769,13 +770,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { 72.2119146942 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 714)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 715)");
      }
@@ -794,13 +795,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -0.645223441713 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 716)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 717)");
      }
@@ -819,13 +820,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { 3.03875213767 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 718)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 719)");
      }
@@ -844,13 +845,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -0.645 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 720)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 721)");
      }
@@ -869,13 +870,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { 16.0377567181 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 722)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 723)");
      }
@@ -894,13 +895,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -33.0370420448 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 724)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 725)");
      }
@@ -919,13 +920,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -1.84824513369 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 726)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 727)");
      }
@@ -944,13 +945,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -0.645 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 728)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 729)");
      }
@@ -969,13 +970,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -8.85426519126 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 730)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 731)");
      }
@@ -994,13 +995,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -396.794859553 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 732)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 733)");
      }
@@ -1010,22 +1011,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { -1.0f, 0.070033f, 0.034824f, -0.00740144f, -0.153474f };
-   float X[] = { -0.111f };
+   float h[] = { -1.0F, 0.070033F, 0.034824F, -0.00740144F, -0.153474F };
+   float X[] = { -0.111F };
    int incX = -1;
-   float Y[] = { -0.103f };
+   float Y[] = { -0.103F };
    int incY = -1;
-   float x_expected[] = { -0.00701131f };
-   float y_expected[] = { 0.0119423f };
+   float x_expected[] = { -0.00701131F };
+   float y_expected[] = { 0.0119423F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 734)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 735)");
      }
@@ -1035,22 +1036,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { 0.0f, 7.618016e-04f, -0.00396806f, -92.8408f, -0.0018571f };
-   float X[] = { -0.111f };
+   float h[] = { 0.0F, 7.618016e-04F, -0.00396806F, -92.8408F, -0.0018571F };
+   float X[] = { -0.111F };
    int incX = -1;
-   float Y[] = { -0.103f };
+   float Y[] = { -0.103F };
    int incY = -1;
-   float x_expected[] = { 9.4516f };
-   float y_expected[] = { -0.10256f };
+   float x_expected[] = { 9.4516F };
+   float y_expected[] = { -0.10256F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 736)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 737)");
      }
@@ -1060,22 +1061,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { 1.0f, -5.833806e+03f, 0.00265668f, -587.573f, 0.0972416f };
-   float X[] = { -0.111f };
+   float h[] = { 1.0F, -5.833806e+03F, 0.00265668F, -587.573F, 0.0972416F };
+   float X[] = { -0.111F };
    int incX = -1;
-   float Y[] = { -0.103f };
+   float Y[] = { -0.103F };
    int incY = -1;
-   float x_expected[] = { 647.449f };
-   float y_expected[] = { 0.100984f };
+   float x_expected[] = { 647.449F };
+   float y_expected[] = { 0.100984F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 738)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 739)");
      }
@@ -1085,22 +1086,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { -2.0f, -8.93339e+04f, -5.16022e-05f, 2.589784e-05f, -7.52586f };
-   float X[] = { -0.111f };
+   float h[] = { -2.0F, -8.93339e+04F, -5.16022e-05F, 2.589784e-05F, -7.52586F };
+   float X[] = { -0.111F };
    int incX = -1;
-   float Y[] = { -0.103f };
+   float Y[] = { -0.103F };
    int incY = -1;
-   float x_expected[] = { -0.111f };
-   float y_expected[] = { -0.103f };
+   float x_expected[] = { -0.111F };
+   float y_expected[] = { -0.103F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 740)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 741)");
      }
@@ -1110,22 +1111,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { -1.0f, 0.125135f, 0.00586453f, 1.100694e-05f, -0.0137436f };
-   float X[] = { -0.111f };
+   float h[] = { -1.0F, 0.125135F, 0.00586453F, 1.100694e-05F, -0.0137436F };
+   float X[] = { -0.111F };
    int incX = -1;
-   float Y[] = { -0.103f };
+   float Y[] = { -0.103F };
    int incY = -1;
-   float x_expected[] = { -0.0138912f };
-   float y_expected[] = { 7.64631e-04f };
+   float x_expected[] = { -0.0138912F };
+   float y_expected[] = { 7.64631e-04F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 742)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 743)");
      }
@@ -1135,22 +1136,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { 0.0f, -0.0996414f, 0.00505806f, 1.321441e-05f, 1.151406e-04f };
-   float X[] = { -0.111f };
+   float h[] = { 0.0F, -0.0996414F, 0.00505806F, 1.321441e-05F, 1.151406e-04F };
+   float X[] = { -0.111F };
    int incX = -1;
-   float Y[] = { -0.103f };
+   float Y[] = { -0.103F };
    int incY = -1;
-   float x_expected[] = { -0.111001f };
-   float y_expected[] = { -0.103561f };
+   float x_expected[] = { -0.111001F };
+   float y_expected[] = { -0.103561F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 744)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 745)");
      }
@@ -1160,22 +1161,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { 1.0f, 8.18165f, 169.902f, -1.453316e-05f, 1.539957e+03f };
-   float X[] = { -0.111f };
+   float h[] = { 1.0F, 8.18165F, 169.902F, -1.453316e-05F, 1.539957e+03F };
+   float X[] = { -0.111F };
    int incX = -1;
-   float Y[] = { -0.103f };
+   float Y[] = { -0.103F };
    int incY = -1;
-   float x_expected[] = { -1.01116f };
-   float y_expected[] = { -158.505f };
+   float x_expected[] = { -1.01116F };
+   float y_expected[] = { -158.505F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 746)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 747)");
      }
@@ -1185,22 +1186,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { -2.0f, 1.827623e-04f, -0.0528808f, 24.7305f, 328.39f };
-   float X[] = { -0.111f };
+   float h[] = { -2.0F, 1.827623e-04F, -0.0528808F, 24.7305F, 328.39F };
+   float X[] = { -0.111F };
    int incX = -1;
-   float Y[] = { -0.103f };
+   float Y[] = { -0.103F };
    int incY = -1;
-   float x_expected[] = { -0.111f };
-   float y_expected[] = { -0.103f };
+   float x_expected[] = { -0.111F };
+   float y_expected[] = { -0.103F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 748)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 749)");
      }
@@ -1210,22 +1211,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { -1.0f, -0.0876053f, 7.858704e+04f, -4.758389e+03f, -0.0114841f };
-   float X[] = { -0.111f };
+   float h[] = { -1.0F, -0.0876053F, 7.858704e+04F, -4.758389e+03F, -0.0114841F };
+   float X[] = { -0.111F };
    int incX = -1;
-   float Y[] = { -0.103f };
+   float Y[] = { -0.103F };
    int incY = -1;
-   float x_expected[] = { 490.124f };
-   float y_expected[] = { -8.72316e+03f };
+   float x_expected[] = { 490.124F };
+   float y_expected[] = { -8.72316e+03F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 750)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 751)");
      }
@@ -1235,22 +1236,22 @@ const double flteps = 1e-4, dbleps = 1e-6;
 
   {
    int N = 1;
-   float h[] = { 0.0f, 0.00192188f, -1.031412e-05f, -0.00123957f, 0.312197f };
-   float X[] = { -0.111f };
+   float h[] = { 0.0F, 0.00192188F, -1.031412e-05F, -0.00123957F, 0.312197F };
+   float X[] = { -0.111F };
    int incX = -1;
-   float Y[] = { -0.103f };
+   float Y[] = { -0.103F };
    int incY = -1;
-   float x_expected[] = { -0.110872f };
-   float y_expected[] = { -0.102999f };
+   float x_expected[] = { -0.110872F };
+   float y_expected[] = { -0.102999F };
    cblas_srotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], flteps, "srotm(case 752)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], flteps, "srotm(case 753)");
      }
@@ -1269,13 +1270,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { 1.622920078085e+03 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 754)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 755)");
      }
@@ -1294,13 +1295,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -0.0300125589845 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 756)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 757)");
      }
@@ -1319,13 +1320,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -0.202984126075 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 758)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 759)");
      }
@@ -1344,13 +1345,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -0.03 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 760)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 761)");
      }
@@ -1369,13 +1370,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -1.035722423559e+04 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 762)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 763)");
      }
@@ -1394,13 +1395,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -0.0320364270262 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 764)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 765)");
      }
@@ -1419,13 +1420,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { 0.644376716086 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 766)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 767)");
      }
@@ -1444,13 +1445,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -0.03 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 768)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 769)");
      }
@@ -1469,13 +1470,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -1.783346955549e-06 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 770)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 771)");
      }
@@ -1494,13 +1495,13 @@ const double flteps = 1e-4, dbleps = 1e-6;
    double y_expected[] = { -4.11623373087 };
    cblas_drotm(N, X, incX, Y, incY, h);
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(X[i], x_expected[i], dbleps, "drotm(case 772)");
      }
    };
    {
-     int i;
+     int i = 0;
      for (i = 0; i < 1; i++) {
        gsl_test_rel(Y[i], y_expected[i], dbleps, "drotm(case 773)");
      }

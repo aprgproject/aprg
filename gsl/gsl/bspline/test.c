@@ -28,9 +28,10 @@
 void
 test_bspline(gsl_bspline_workspace * bw)
 {
-  gsl_vector *B;
-  gsl_matrix *dB;
-  size_t i, j;
+  gsl_vector *B = NULL;
+  gsl_matrix *dB = NULL;
+  size_t i;
+  size_t j;
   size_t n = 100;
   size_t ncoeffs = gsl_bspline_ncoeffs(bw);
   size_t order = gsl_bspline_order(bw);
@@ -87,7 +88,9 @@ test_bspline(gsl_bspline_workspace * bw)
 int
 main(int argc, char **argv)
 {
-  size_t order, breakpoints, i;
+  size_t order;
+  size_t breakpoints;
+  size_t i;
 
   gsl_ieee_env_setup();
 
@@ -98,7 +101,8 @@ main(int argc, char **argv)
     {
       for (breakpoints = 2; breakpoints < 100; breakpoints++)
         {
-          double a = -1.23 * order, b = 45.6 * order;
+          double a = -1.23 * order;
+          double b = 45.6 * order;
           gsl_bspline_workspace *bw = gsl_bspline_alloc(order, breakpoints);
           gsl_bspline_knots_uniform(a, b, bw);
           test_bspline(bw);
@@ -111,12 +115,14 @@ main(int argc, char **argv)
     {
       for (breakpoints = 2; breakpoints < 100; breakpoints++)
         {
-          double a = -1.23 * order, b = 45.6 * order;
+          double a = -1.23 * order;
+          double b = 45.6 * order;
           gsl_bspline_workspace *bw = gsl_bspline_alloc(order, breakpoints);
           gsl_vector *k = gsl_vector_alloc(breakpoints);
           for (i = 0; i < breakpoints; i++)
             {
-              double f, x;
+              double f;
+              double x;
               f = sqrt(i / (breakpoints - 1.0));
               x = (1 - f) * a + f * b;
               gsl_vector_set(k, i, x);
@@ -131,7 +137,8 @@ main(int argc, char **argv)
   /* Spot check known 0th, 1st, 2nd derivative
      evaluations for a particular k = 2 case.  */
   {
-    size_t i, j; /* looping */
+    size_t i;
+    size_t j; /* looping */
 
     const double xloc[4]     =  { 0.0,  1.0,  6.0,  7.0};
     const double deriv[4][3] =
@@ -185,7 +192,8 @@ main(int argc, char **argv)
   /* Spot check known 0th, 1st, 2nd derivative
      evaluations for a particular k = 3 case.  */
   {
-    size_t i, j; /* looping */
+    size_t i;
+    size_t j; /* looping */
     const double xloc[5]     =  { 0.0, 5.0, 9.0, 12.0, 15.0 };
     const double eval[5][6]  =
     {
@@ -261,7 +269,7 @@ main(int argc, char **argv)
 
   /* Check Greville abscissae functionality on a non-uniform k=1 */
   {
-    size_t i; /* looping */
+    size_t i = 0; /* looping */
 
     /* Test parameters */
     const size_t k = 1;
@@ -289,7 +297,7 @@ main(int argc, char **argv)
 
   /* Check Greville abscissae functionality on a non-uniform k=2 */
   {
-    size_t i; /* looping */
+    size_t i = 0; /* looping */
 
     /* Test parameters */
     const size_t k = 2;
@@ -317,7 +325,7 @@ main(int argc, char **argv)
 
   /* Check Greville abscissae functionality on non-uniform k=3 */
   {
-    size_t i; /* looping */
+    size_t i = 0; /* looping */
 
     /* Test parameters */
     const size_t k = 3;
@@ -346,7 +354,7 @@ main(int argc, char **argv)
 
   /* Check Greville abscissae functionality on non-uniform k=4 */
   {
-    size_t i; /* looping */
+    size_t i = 0; /* looping */
 
     /* Test parameters */
     const size_t k = 4;
@@ -375,7 +383,7 @@ main(int argc, char **argv)
 
   /* Knots computed from prescribed Greville abscissae for k = 4 */
   {
-    size_t i; /* looping */
+    size_t i = 0; /* looping */
 
     /* Test parameters */
     const size_t k = 4;
@@ -387,7 +395,7 @@ main(int argc, char **argv)
     const size_t nbreak           = sizeof(bpoint_data)/sizeof(bpoint_data[0]);
 
     /* Compute knots from Greville abscissae */
-    double abserr;
+    double abserr = NAN;
     gsl_vector_const_view abscissae
         = gsl_vector_const_view_array(abscissae_data, nabscissae);
     gsl_bspline_workspace *w = gsl_bspline_alloc(k, nbreak);
@@ -406,7 +414,7 @@ main(int argc, char **argv)
 
   /* Knots computed from prescribed Greville abscissae for k = 8 */
   {
-    size_t i; /* looping */
+    size_t i = 0; /* looping */
 
     /* Test parameters */
     const size_t k = 8;
@@ -420,7 +428,7 @@ main(int argc, char **argv)
     const size_t nbreak           = sizeof(bpoint_data)/sizeof(bpoint_data[0]);
 
     /* Compute knots from Greville abscissae */
-    double abserr;
+    double abserr = NAN;
     gsl_vector_const_view abscissae
         = gsl_vector_const_view_array(abscissae_data, nabscissae);
     gsl_bspline_workspace *w = gsl_bspline_alloc(k, nbreak);
@@ -440,7 +448,7 @@ main(int argc, char **argv)
   /* Knots computed from prescribed Greville abscissae for k = 2 */
   /* Not an interesting calculation but checks the k = 2 edge case */
   {
-    size_t i; /* looping */
+    size_t i = 0; /* looping */
 
     /* Test parameters */
     const size_t k = 2;
@@ -452,7 +460,7 @@ main(int argc, char **argv)
     const size_t nbreak           = sizeof(bpoint_data)/sizeof(bpoint_data[0]);
 
     /* Compute knots from Greville abscissae */
-    double abserr;
+    double abserr = NAN;
     gsl_vector_const_view abscissae
         = gsl_vector_const_view_array(abscissae_data, nabscissae);
     gsl_bspline_workspace *w = gsl_bspline_alloc(k, nbreak);
@@ -471,7 +479,7 @@ main(int argc, char **argv)
 
   /* Knots computed from prescribed abscissae for edge case when nbreak = 2 */
   {
-    size_t i; /* looping */
+    size_t i = 0; /* looping */
 
     /* Test parameters */
     const size_t k = 4;
@@ -483,7 +491,7 @@ main(int argc, char **argv)
     const size_t nbreak        = sizeof(bpoint_data)/sizeof(bpoint_data[0]);
 
     /* Compute knots from Greville abscissae where abscissae are recoverable */
-    double abserr;
+    double abserr = NAN;
     gsl_vector_view abscissae
         = gsl_vector_view_array(abscissae_data, nabscissae);
     gsl_bspline_workspace *w = gsl_bspline_alloc(k, nbreak);

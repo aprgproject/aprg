@@ -154,7 +154,7 @@ int gsl_sf_bessel_I1_scaled_e(const double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else if(y < xmin) {
+  if(y < xmin) {
     UNDERFLOW_ERROR(result);
   }
   else if(y < x_small) {
@@ -213,7 +213,7 @@ int gsl_sf_bessel_I1_e(const double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else if(y < xmin) {
+  if(y < xmin) {
     UNDERFLOW_ERROR(result);
   }
   else if(y < x_small) {

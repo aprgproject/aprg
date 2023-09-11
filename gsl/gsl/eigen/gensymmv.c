@@ -49,7 +49,7 @@ Return: pointer to workspace
 gsl_eigen_gensymmv_workspace *
 gsl_eigen_gensymmv_alloc(const size_t n)
 {
-  gsl_eigen_gensymmv_workspace *w;
+  gsl_eigen_gensymmv_workspace *w = NULL;
 
   if (n == 0)
     {
@@ -86,8 +86,9 @@ gsl_eigen_gensymmv_free (gsl_eigen_gensymmv_workspace * w)
 {
   RETURN_IF_NULL (w);
 
-  if (w->symmv_workspace_p)
+  if (w->symmv_workspace_p) {
     gsl_eigen_symmv_free(w->symmv_workspace_p);
+}
 
   free(w);
 } /* gsl_eigen_gensymmv_free() */
@@ -144,20 +145,22 @@ gsl_eigen_gensymmv (gsl_matrix * A, gsl_matrix * B, gsl_vector * eval,
     }
   else
     {
-      int s;
+      int s = 0;
 
       /* compute Cholesky factorization of B */
       s = gsl_linalg_cholesky_decomp1(B);
-      if (s != GSL_SUCCESS)
+      if (s != GSL_SUCCESS) {
         return s; /* B is not positive definite */
+}
 
       /* transform to standard symmetric eigenvalue problem */
       gsl_eigen_gensymm_standardize(A, B);
 
       /* compute eigenvalues and eigenvectors */
       s = gsl_eigen_symmv(A, eval, evec, w->symmv_workspace_p);
-      if (s != GSL_SUCCESS)
+      if (s != GSL_SUCCESS) {
         return s;
+}
 
       /* backtransform eigenvectors: evec -> L^{-T} evec */
       gsl_blas_dtrsm(CblasLeft,
@@ -190,7 +193,7 @@ static void
 gensymmv_normalize_eigenvectors(gsl_matrix *evec)
 {
   const size_t N = evec->size1;
-  size_t i;     /* looping */
+  size_t i = 0;     /* looping */
 
   for (i = 0; i < N; ++i)
     {

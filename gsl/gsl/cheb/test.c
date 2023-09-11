@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_errno.h>
@@ -72,7 +73,7 @@ test_dim (const size_t n, const double a, const double b,
           gsl_function * F, gsl_function * DF, gsl_function *IF)
 {
   double tol = 100.0 * GSL_DBL_EPSILON;
-  double x; 
+  double x = NAN; 
 
   gsl_cheb_series * cs = gsl_cheb_alloc(n);
   gsl_cheb_series * csd = gsl_cheb_alloc(n);
@@ -113,14 +114,21 @@ main(void)
 {
   double tol = 100.0 * GSL_DBL_EPSILON;
   double ftol = 20.0;
-  double x; 
-  size_t i;
+  double x = NAN; 
+  size_t i = 0;
 
   gsl_cheb_series * cs = gsl_cheb_alloc(40);
   gsl_cheb_series * csd = gsl_cheb_alloc(40);
   gsl_cheb_series * csi = gsl_cheb_alloc(40);
 
-  gsl_function F_sin, F_T0, F_T1, F_T2, F_DP, F_P, F_IP1, F_IP2;
+  gsl_function F_sin;
+  gsl_function F_T0;
+  gsl_function F_T1;
+  gsl_function F_T2;
+  gsl_function F_DP;
+  gsl_function F_P;
+  gsl_function F_IP1;
+  gsl_function F_IP2;
 
   F_sin.function = f_sin;
   F_sin.params = 0;
@@ -197,7 +205,8 @@ main(void)
   }
   
   for(x=-M_PI; x<M_PI; x += M_PI/100.0) {
-    double r, e;
+    double r;
+    double e;
     gsl_cheb_eval_err(cs, x, &r, &e);
     gsl_test_abs(r, sin(x), tol, "gsl_cheb_eval_err, sin(%.3g)", x);
     gsl_test_factor(fabs(r-sin(x)) + GSL_DBL_EPSILON, e, ftol, 
@@ -210,7 +219,8 @@ main(void)
   }
 
   for(x=-M_PI; x<M_PI; x += M_PI/100.0) {
-    double r, e;
+    double r;
+    double e;
     gsl_cheb_eval_n_err(cs, 25, x, &r, &e);
     gsl_test_abs(r, sin(x), 100.0 * tol, "gsl_cheb_eval_n_err, deriv sin(%.3g)", x);
     gsl_test_factor(fabs(r-sin(x)) + GSL_DBL_EPSILON, e, ftol, 

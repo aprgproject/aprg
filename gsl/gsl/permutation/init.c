@@ -25,7 +25,7 @@
 gsl_permutation *
 gsl_permutation_alloc (const size_t n)
 {
-  gsl_permutation * p;
+  gsl_permutation * p = NULL;
 
   if (n == 0)
     {
@@ -59,12 +59,13 @@ gsl_permutation_alloc (const size_t n)
 gsl_permutation *
 gsl_permutation_calloc (const size_t n)
 {
-  size_t i;
+  size_t i = 0;
 
   gsl_permutation * p =  gsl_permutation_alloc (n);
 
-  if (p == 0)
+  if (p == 0) {
     return 0;
+}
 
   /* initialize permutation to identity */
 
@@ -80,7 +81,7 @@ void
 gsl_permutation_init (gsl_permutation * p)
 {
   const size_t n = p->size ;
-  size_t i;
+  size_t i = 0;
 
   /* initialize permutation to identity */
 

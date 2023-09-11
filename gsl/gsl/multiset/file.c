@@ -68,7 +68,7 @@ gsl_multiset_fprintf (FILE * stream, const gsl_multiset * c, const char *format)
 
   size_t * data = c->data ;
 
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < k; i++)
     {
@@ -90,11 +90,11 @@ gsl_multiset_fscanf (FILE * stream, gsl_multiset * c)
 
   size_t * data = c->data ;
 
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < k; i++)
     {
-      unsigned long j ;
+      unsigned long j = 0 ;
 
       /* FIXME: what if size_t != unsigned long ???
 

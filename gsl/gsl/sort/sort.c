@@ -33,8 +33,9 @@ swap (void *base, size_t size, size_t i, size_t j)
   register char *b = size * j + (char *) base;
   register size_t s = size;
 
-  if (i == j)
+  if (i == j) {
     return;
+}
 
   do
     {
@@ -79,8 +80,8 @@ gsl_heapsort (void *data, size_t count, size_t size, gsl_comparison_fn_t compare
      algorithm with N log N operations. Worst case (an already sorted
      array) is something like 20% slower */
 
-  size_t N;
-  size_t k;
+  size_t N = 0;
+  size_t k = 0;
 
   if (count == 0)
     {

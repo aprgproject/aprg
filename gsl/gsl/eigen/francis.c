@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 #include <gsl/gsl_eigen.h>
@@ -71,7 +72,7 @@ Return: pointer to workspace
 gsl_eigen_francis_workspace *
 gsl_eigen_francis_alloc(void)
 {
-  gsl_eigen_francis_workspace *w;
+  gsl_eigen_francis_workspace *w = NULL;
 
   w = (gsl_eigen_francis_workspace *)
       calloc (1, sizeof (gsl_eigen_francis_workspace));
@@ -164,7 +165,7 @@ gsl_eigen_francis (gsl_matrix * H, gsl_vector_complex * eval,
   else
     {
       const size_t N = H->size1;
-      int j;
+      int j = 0;
 
       /*
        * Set internal parameters which depend on matrix size.
@@ -195,8 +196,9 @@ gsl_eigen_francis (gsl_matrix * H, gsl_vector_complex * eval,
           gsl_matrix_set(H, (size_t) j + 3, (size_t) j, 0.0);
         }
 
-      if (N > 2)
+      if (N > 2) {
         gsl_matrix_set(H, N - 1, N - 3, 0.0);
+}
 
       /*
        * compute Schur decomposition of H and store eigenvalues
@@ -260,7 +262,7 @@ int
 gsl_eigen_francis_Z (gsl_matrix * H, gsl_vector_complex * eval,
                      gsl_matrix * Z, gsl_eigen_francis_workspace * w)
 {
-  int s;
+  int s = 0;
 
   /* set internal Z pointer so we know to accumulate transformations */
   w->Z = Z;
@@ -292,9 +294,10 @@ francis_schur_decomp(gsl_matrix * H, gsl_vector_complex * eval,
                      gsl_eigen_francis_workspace * w)
 {
   gsl_matrix_view m;   /* active matrix we are working on */
-  size_t N;            /* size of matrix */
-  size_t q;            /* index of small subdiagonal element */
-  gsl_complex lambda1, /* eigenvalues */
+  size_t N = 0;            /* size of matrix */
+  size_t q = 0;            /* index of small subdiagonal element */
+  gsl_complex lambda1;
+  gsl_complex /* eigenvalues */
               lambda2;
 
   N = H->size1;
@@ -448,21 +451,26 @@ static inline int
 francis_qrstep(gsl_matrix * H, gsl_eigen_francis_workspace * w)
 {
   const size_t N = H->size1;
-  size_t i;        /* looping */
+  size_t i = 0;        /* looping */
   gsl_matrix_view m;
-  double tau_i;    /* householder coefficient */
+  double tau_i = NAN;    /* householder coefficient */
   double dat[3];   /* householder vector */
-  double scale;    /* scale factor to avoid overflow */
-  gsl_vector_view v2, v3;
-  size_t q, r;
+  double scale = NAN;    /* scale factor to avoid overflow */
+  gsl_vector_view v2;
+  gsl_vector_view v3;
+  size_t q;
+  size_t r;
   size_t top = 0;  /* location of H in original matrix */
-  double s,
-         disc;
-  double h_nn,     /* H(n,n) */
-         h_nm1nm1, /* H(n-1,n-1) */
-         h_cross,  /* H(n,n-1) * H(n-1,n) */
-         h_tmp1,
-         h_tmp2;
+  double s;
+  double disc;
+  double h_nn;
+  double /* H(n,n) */
+         h_nm1nm1;
+  double /* H(n-1,n-1) */
+         h_cross;
+  double /* H(n,n-1) * H(n-1,n) */
+         h_tmp1;
+  double h_tmp2;
 
   v2 = gsl_vector_view_array(dat, 2);
   v3 = gsl_vector_view_array(dat, 3);
@@ -496,7 +504,7 @@ francis_qrstep(gsl_matrix * H, gsl_eigen_francis_workspace * w)
       disc = disc * disc + h_cross;
       if (disc > 0.0)
         {
-          double ave;
+          double ave = NAN;
 
           /* real roots - use Wilkinson's shift twice */
           disc = sqrt(disc);
@@ -694,7 +702,7 @@ static inline size_t
 francis_search_subdiag_small_elements(gsl_matrix * A)
 {
   const size_t N = A->size1;
-  size_t i;
+  size_t i = 0;
   double dpel = gsl_matrix_get(A, N - 2, N - 2);
 
   for (i = N - 1; i > 0; --i)
@@ -732,8 +740,9 @@ francis_schur_standardize(gsl_matrix *A, gsl_complex *eval1,
                           gsl_eigen_francis_workspace *w)
 {
   const size_t N = w->size;
-  double cs, sn;
-  size_t top;
+  double cs;
+  double sn;
+  size_t top = 0;
 
   /*
    * figure out where the submatrix A resides in the
@@ -763,7 +772,8 @@ francis_schur_standardize(gsl_matrix *A, gsl_complex *eval1,
 
   if (w->compute_t)
     {
-      gsl_vector_view xv, yv;
+      gsl_vector_view xv;
+      gsl_vector_view yv;
 
       /*
        * The above call to francis_standard_form transformed a 2-by-2 block
@@ -833,7 +843,8 @@ francis_schur_standardize(gsl_matrix *A, gsl_complex *eval1,
 
   if (w->Z)
     {
-      gsl_vector_view xv, yv;
+      gsl_vector_view xv;
+      gsl_vector_view yv;
 
       /*
        * Accumulate the transformation in Z. Here, Z -> Z * M
@@ -864,9 +875,9 @@ compute the indices in A of where the matrix B resides
 static inline size_t
 francis_get_submatrix(gsl_matrix *A, gsl_matrix *B)
 {
-  size_t diff;
-  double ratio;
-  size_t top;
+  size_t diff = 0;
+  double ratio = NAN;
+  size_t top = 0;
 
   diff = (size_t) (B->data - A->data);
 
@@ -901,14 +912,26 @@ Notes: 1) based on LAPACK routine DLANV2
 static void
 francis_standard_form(gsl_matrix *A, double *cs, double *sn)
 {
-  double a, b, c, d; /* input matrix values */
-  double tmp;
-  double p, z;
-  double bcmax, bcmis, scale;
-  double tau, sigma;
-  double cs1, sn1;
-  double aa, bb, cc, dd;
-  double sab, sac;
+  double a;
+  double b;
+  double c;
+  double d; /* input matrix values */
+  double tmp = NAN;
+  double p;
+  double z;
+  double bcmax;
+  double bcmis;
+  double scale;
+  double tau;
+  double sigma;
+  double cs1;
+  double sn1;
+  double aa;
+  double bb;
+  double cc;
+  double dd;
+  double sab;
+  double sac;
 
   a = gsl_matrix_get(A, 0, 0);
   b = gsl_matrix_get(A, 0, 1);

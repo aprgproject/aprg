@@ -22,6 +22,7 @@
 /* Author:  G. Jungman
  */
 #include <config.h>
+#include <math.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -37,9 +38,9 @@ int
 test_bsearch(void)
 {
   double x_array[5] = { 0.0, 1.0, 2.0, 3.0, 4.0 };
-  size_t index_result;
+  size_t index_result = 0;
   int status = 0;
-  int s;
+  int s = 0;
 
   /* check an interior point */
   index_result = gsl_interp_bsearch(x_array, 1.5, 0, 4);
@@ -80,7 +81,10 @@ test_bsearch(void)
   /* Test the accelerator */
 
   {
-    size_t i, j, k1 = 0, k2 = 0;
+    size_t i;
+    size_t j;
+    size_t k1 = 0;
+    size_t k2 = 0;
     int t = 0;
     double x = 0;
     double r[16] = { -0.2, 0.0, 0.1, 0.7, 
@@ -100,7 +104,8 @@ test_bsearch(void)
       
       if (t == 0) { 
         k1 = (k1 + 1) % 16; 
-        if (k1 == 0) k2++;
+        if (k1 == 0) { k2++;
+}
       };
 
       i = gsl_interp_accel_find(a, x_array, 5, x);
@@ -147,8 +152,11 @@ test_interp (
   xy_table * test_i_table
   )
 {
-  int status = 0, s1, s2, s3;
-  size_t i;
+  int status = 0;
+  int s1;
+  int s2;
+  int s3;
+  size_t i = 0;
 
   gsl_interp_accel *a = gsl_interp_accel_alloc ();
   gsl_interp *interp = gsl_interp_alloc (T, data_table->n);
@@ -162,10 +170,12 @@ test_interp (
   for (i = 0; i < test_table->n; i++)
     {
       double x = test_table->x[i];
-      double y;
-      double deriv;
-      double integ;
-      double diff_y, diff_deriv, diff_integ;
+      double y = NAN;
+      double deriv = NAN;
+      double integ = NAN;
+      double diff_y;
+      double diff_deriv;
+      double diff_integ;
       s1 = gsl_interp_eval_e (interp, data_table->x, data_table->y, x, a, &y);
       s2 = gsl_interp_eval_deriv_e (interp, data_table->x, data_table->y, x, a, &deriv);
       s3 = gsl_interp_eval_integ_e (interp, data_table->x, data_table->y, test_table->x[0], x, a, &integ);
@@ -195,7 +205,7 @@ test_interp (
 static int
 test_linear (void)
 {
-  int s;
+  int s = 0;
 
   double data_x[4] = { 0.0, 1.0, 2.0, 3.0 };
   double data_y[4] = { 0.0, 1.0, 2.0, 3.0 };
@@ -217,7 +227,7 @@ test_linear (void)
 static int
 test_polynomial (void)
 {
-  int s;
+  int s = 0;
 
   double data_x[4] = { 0.0, 1.0, 2.0, 3.0 };
   double data_y[4] = { 0.0, 1.0, 2.0, 3.0 };
@@ -240,7 +250,7 @@ test_polynomial (void)
 static int
 test_cspline (void)
 {
-  int s;
+  int s = 0;
 
   double data_x[3] = { 0.0, 1.0, 2.0 };
   double data_y[3] = { 0.0, 1.0, 2.0 };
@@ -265,7 +275,7 @@ test_cspline2 (void)
   /* Test taken from Young & Gregory, A Survey of Numerical
      Mathematics, Vol 1 Chapter 6.8 */
   
-  int s;
+  int s = 0;
 
   double data_x[6] = { 0.0, 0.2, 0.4, 0.6, 0.8, 1.0 };
 
@@ -354,7 +364,7 @@ test_cspline3 (void)
   /* This data has been chosen to be random (uneven spacing in x and y)
      and the exact cubic spine solution computed using Octave */
   
-  int s;
+  int s = 0;
   
   double data_x[7] = {   
     -1.2139767065644265,
@@ -480,7 +490,7 @@ test_csplinep (void)
   /* This data has been chosen to be random (uneven spacing in x and y)
      and the exact cubic spine solution computed using Octave */
   
-  int s;
+  int s = 0;
   
   double data_x[11] = {   
     0.000000000000000,
@@ -661,7 +671,7 @@ test_csplinep2 (void)
 {
   /* This data tests the periodic case n=3 */
   
-  int s;
+  int s = 0;
   
   double data_x[3] = {   
     0.123,
@@ -944,7 +954,7 @@ test_csplinep2 (void)
 static int
 test_akima (void)
 {
-  int s;
+  int s = 0;
 
   double data_x[5] = { 0.0, 1.0, 2.0, 3.0, 4.0 };
   double data_y[5] = { 0.0, 1.0, 2.0, 3.0, 4.0 };
@@ -966,7 +976,7 @@ test_akima (void)
 static int
 test_steffen1 (void)
 {
-  int s;
+  int s = 0;
 
   double data_x[5] = { 0.0, 1.0, 2.0, 3.0, 4.0 };
   double data_y[5] = { 0.0, 1.0, 2.0, 3.0, 4.0 };
@@ -989,7 +999,7 @@ test_steffen1 (void)
 static int
 test_steffen2 (void)
 {
-  int s;
+  int s = 0;
 
   double data_x[30] = { 
     4.673405471947611, 4.851675778029557, 6.185473620119991,

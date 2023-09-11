@@ -25,6 +25,7 @@
 #include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_sf_psi.h>
 #include <gsl/gsl_sf_bessel.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -39,19 +40,24 @@ static
 int
 bessel_Kn_scaled_small_x(const int n, const double x, gsl_sf_result * result)
 {
-  int k;
+  int k = 0;
   double y = 0.25 * x * x;
   double ln_x_2 = log(0.5*x);
   double ex = exp(x);
   gsl_sf_result ln_nm1_fact;
-  double k_term;
-  double term1, sum1, ln_pre1;
-  double term2, sum2, pre2;
+  double k_term = NAN;
+  double term1;
+  double sum1;
+  double ln_pre1;
+  double term2;
+  double sum2;
+  double pre2;
 
   gsl_sf_lnfact_e((unsigned int)(n-1), &ln_nm1_fact);
 
   ln_pre1 = -n*ln_x_2 + ln_nm1_fact.val;
-  if(ln_pre1 > GSL_LOG_DBL_MAX - 3.0) GSL_ERROR ("error", GSL_EOVRFLW);
+  if(ln_pre1 > GSL_LOG_DBL_MAX - 3.0) { GSL_ERROR ("error", GSL_EOVRFLW);
+}
 
   sum1 = 1.0;
   k_term = 1.0;
@@ -69,7 +75,7 @@ bessel_Kn_scaled_small_x(const int n, const double x, gsl_sf_result * result)
     double yk = 1.0;
     double k_fact  = 1.0;
     double psi_kp1 = -M_EULER;
-    double psi_npkp1;
+    double psi_npkp1 = NAN;
     gsl_sf_psi_int_e(n, &psi_n);
     gsl_sf_fact_e((unsigned int)n, &npk_fact);
     psi_npkp1 = psi_n.val + 1.0/n;
@@ -132,8 +138,8 @@ int gsl_sf_bessel_Kn_scaled_e(int n, const double x, gsl_sf_result * result)
     int stat_1 = gsl_sf_bessel_K1_scaled_e(x, &r_b_j);
     double b_jm1 = r_b_jm1.val;
     double b_j   = r_b_j.val;
-    double b_jp1;
-    int j;
+    double b_jp1 = NAN;
+    int j = 0;
 
     for(j=1; j<n; j++) {
       b_jp1 = b_jm1 + j * two_over_x * b_j;
@@ -166,8 +172,9 @@ int gsl_sf_bessel_Kn_scaled_array(const int nmin, const int nmax, const double x
   /* CHECK_POINTER(result_array) */
 
   if(nmin < 0 || nmax < nmin || x <= 0.0) {
-    int j;
-    for(j=0; j<=nmax-nmin; j++) result_array[j] = 0.0;
+    int j = 0;
+    for(j=0; j<=nmax-nmin; j++) { result_array[j] = 0.0;
+}
     GSL_ERROR ("domain error", GSL_EDOM);
   }
   else if(nmax == 0) {
@@ -183,10 +190,10 @@ int gsl_sf_bessel_Kn_scaled_array(const int nmin, const int nmax, const double x
     int stat_0 = gsl_sf_bessel_Kn_scaled_e(nmin,   x, &r_Knm1);
     int stat_1 = gsl_sf_bessel_Kn_scaled_e(nmin+1, x, &r_Kn);
     int stat = GSL_ERROR_SELECT_2(stat_0, stat_1);
-    double Knp1;
+    double Knp1 = NAN;
     double Kn   = r_Kn.val;
     double Knm1 = r_Knm1.val;
-    int n;
+    int n = 0;
 
     for(n=nmin+1; n<=nmax+1; n++) {
       if(Knm1 < GSL_DBL_MAX) {
@@ -203,8 +210,9 @@ int gsl_sf_bessel_Kn_scaled_array(const int nmin, const int nmax, const double x
          * a number. This may be only an IEEE convention,
          * so the portability is unclear.
          */
-        int j;
-        for(j=n; j<=nmax+1; j++) result_array[j-1-nmin] = 0.0;
+        int j = 0;
+        for(j=n; j<=nmax+1; j++) { result_array[j-1-nmin] = 0.0;
+}
         GSL_ERROR ("overflow", GSL_EOVRFLW);
       }
     }
@@ -219,8 +227,9 @@ gsl_sf_bessel_Kn_array(const int nmin, const int nmax, const double x, double * 
 {
   int status = gsl_sf_bessel_Kn_scaled_array(nmin, nmax, x, result_array);
   double ex = exp(-x);
-  int i;
-  for(i=0; i<=nmax-nmin; i++) result_array[i] *= ex;
+  int i = 0;
+  for(i=0; i<=nmax-nmin; i++) { result_array[i] *= ex;
+}
   return status;
 }
 

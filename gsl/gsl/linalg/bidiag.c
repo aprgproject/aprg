@@ -91,7 +91,7 @@ gsl_linalg_bidiag_decomp (gsl_matrix * A, gsl_vector * tau_U, gsl_vector * tau_V
       const size_t M = A->size1;
       const size_t N = A->size2;
       gsl_vector * tmp = gsl_vector_alloc(M);
-      size_t j;
+      size_t j = 0;
   
       for (j = 0 ; j < N; j++)
         {
@@ -185,7 +185,8 @@ gsl_linalg_bidiag_unpack (const gsl_matrix * A,
     }
   else
     {
-      size_t i, j;
+      size_t i;
+      size_t j;
 
       /* Copy diagonal into diag */
 
@@ -269,7 +270,8 @@ gsl_linalg_bidiag_unpack2 (gsl_matrix * A,
     }
   else
     {
-      size_t i, j;
+      size_t i;
+      size_t j;
 
       /* Initialize V to the identity */
 
@@ -337,7 +339,7 @@ gsl_linalg_bidiag_unpack_B (const gsl_matrix * A,
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* Copy diagonal into diag */
 

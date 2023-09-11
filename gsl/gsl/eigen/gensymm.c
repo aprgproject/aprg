@@ -52,7 +52,7 @@ Return: pointer to workspace
 gsl_eigen_gensymm_workspace *
 gsl_eigen_gensymm_alloc(const size_t n)
 {
-  gsl_eigen_gensymm_workspace *w;
+  gsl_eigen_gensymm_workspace *w = NULL;
 
   if (n == 0)
     {
@@ -89,8 +89,9 @@ gsl_eigen_gensymm_free (gsl_eigen_gensymm_workspace * w)
 {
   RETURN_IF_NULL (w);
 
-  if (w->symm_workspace_p)
+  if (w->symm_workspace_p) {
     gsl_eigen_symm_free(w->symm_workspace_p);
+}
 
   free(w);
 } /* gsl_eigen_gensymm_free() */
@@ -138,12 +139,13 @@ gsl_eigen_gensymm (gsl_matrix * A, gsl_matrix * B, gsl_vector * eval,
     }
   else
     {
-      int s;
+      int s = 0;
 
       /* compute Cholesky factorization of B */
       s = gsl_linalg_cholesky_decomp1(B);
-      if (s != GSL_SUCCESS)
+      if (s != GSL_SUCCESS) {
         return s; /* B is not positive definite */
+}
 
       /* transform to standard symmetric eigenvalue problem */
       gsl_eigen_gensymm_standardize(A, B);
@@ -201,8 +203,10 @@ static int
 gensymm_standardize_L2(gsl_matrix *A, const gsl_matrix *B)
 {
   const size_t N = A->size1;
-  size_t i;
-  double a, b, c;
+  size_t i = 0;
+  double a;
+  double b;
+  double c;
 
   for (i = 0; i < N; ++i)
     {
@@ -273,8 +277,8 @@ gensymm_standardize_L3(gsl_matrix *A, const gsl_matrix *B)
       /* use Level 2 algorithm */
       return gensymm_standardize_L2(A, B);
     }
-  else
-    {
+  
+    
       /*
        * partition matrices:
        *
@@ -321,5 +325,5 @@ gensymm_standardize_L3(gsl_matrix *A, const gsl_matrix *B)
         return status;
 
       return GSL_SUCCESS;
-    }
+   
 }

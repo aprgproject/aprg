@@ -36,7 +36,8 @@ symschur2 (gsl_matrix * A, size_t p, size_t q, double *c, double *s)
       double App = gsl_matrix_get (A, p, p);
       double Aqq = gsl_matrix_get (A, q, q);
       double tau = (Aqq - App) / (2.0 * Apq);
-      double t, c1;
+      double t;
+      double c1;
 
       if (tau >= 0.0)
         {
@@ -66,7 +67,7 @@ symschur2 (gsl_matrix * A, size_t p, size_t q, double *c, double *s)
 inline static void
 apply_jacobi_L (gsl_matrix * A, size_t p, size_t q, double c, double s)
 {
-  size_t j;
+  size_t j = 0;
   const size_t N = A->size2;
 
   /* Apply rotation to matrix A,  A' = J^T A */
@@ -83,7 +84,7 @@ apply_jacobi_L (gsl_matrix * A, size_t p, size_t q, double c, double s)
 inline static void
 apply_jacobi_R (gsl_matrix * A, size_t p, size_t q, double c, double s)
 {
-  size_t i;
+  size_t i = 0;
   const size_t M = A->size1;
 
   /* Apply rotation to matrix A,  A' = A J */
@@ -100,8 +101,13 @@ apply_jacobi_R (gsl_matrix * A, size_t p, size_t q, double c, double s)
 inline static double
 norm (gsl_matrix * A)
 {
-  size_t i, j, M = A->size1, N = A->size2;
-  double sum = 0.0, scale = 0.0, ssq = 1.0;
+  size_t i;
+  size_t j;
+  size_t M = A->size1;
+  size_t N = A->size2;
+  double sum = 0.0;
+  double scale = 0.0;
+  double ssq = 1.0;
 
   for (i = 0; i < M; i++)
     {
@@ -111,7 +117,8 @@ norm (gsl_matrix * A)
           
           /* compute norm of off-diagonal elements as per algorithm
              8.4.3 and definition at start of section 8.4.1 */
-          if (i == j) continue;  
+          if (i == j) { continue;  
+}
 
           if (Aij != 0.0)
             {
@@ -141,9 +148,13 @@ gsl_eigen_jacobi (gsl_matrix * a,
                   gsl_vector * eval,
                   gsl_matrix * evec, unsigned int max_rot, unsigned int *nrot)
 {
-  size_t i, p, q;
-  const size_t M = a->size1, N = a->size2;
-  double red, redsum = 0.0;
+  size_t i;
+  size_t p;
+  size_t q;
+  const size_t M = a->size1;
+  const size_t N = a->size2;
+  double red;
+  double redsum = 0.0;
 
   if (M != N)
     {
@@ -165,14 +176,16 @@ gsl_eigen_jacobi (gsl_matrix * a,
     {
       double nrm = norm (a);
 
-      if (nrm == 0.0)
+      if (nrm == 0.0) {
         break;
+}
 
       for (p = 0; p < N; p++)
         {
           for (q = p + 1; q < N; q++)
             {
-              double c, s;
+              double c;
+              double s;
 
               red = symschur2 (a, p, q, &c, &s);
               redsum += red;
@@ -218,9 +231,11 @@ gsl_eigen_invert_jacobi (const gsl_matrix * a,
   
   {
     const size_t n = a->size2;
-    size_t i,j,k;
+    size_t i;
+    size_t j;
+    size_t k;
     unsigned int nrot = 0;
-    int status;
+    int status = 0;
 
     gsl_vector * eval = gsl_vector_alloc(n);
     gsl_matrix * evec = gsl_matrix_alloc(n, n);
@@ -255,9 +270,9 @@ gsl_eigen_invert_jacobi (const gsl_matrix * a,
       {
         return status;
       }
-    else
-      {
+    
+      
         return GSL_SUCCESS;
-      }
+     
   }
 }

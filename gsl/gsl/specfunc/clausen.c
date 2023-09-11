@@ -60,7 +60,7 @@ int gsl_sf_clausen_e(double x, gsl_sf_result *result)
   const double x_cut = M_PI * GSL_SQRT_DBL_EPSILON;
 
   double sgn = 1.0;
-  int status_red;
+  int status_red = 0;
 
   if(x < 0.0) {
     x   = -x;

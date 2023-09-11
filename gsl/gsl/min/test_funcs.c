@@ -66,9 +66,9 @@ func3 (double x, void * p)
 {
   p = 0;  /* avoid warning about unused parameter */
 
-  if (x < 1)
+  if (x < 1) {
     return 1 ;
-  else
+  } 
     return - exp(-x) ;
 }
 

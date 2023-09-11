@@ -55,9 +55,9 @@ gsl_linalg_balance_matrix(gsl_matrix * A, gsl_vector * D)
     }
   else
     {
-      double row_norm,
-             col_norm;
-      int not_converged;
+      double row_norm;
+      double col_norm;
+      int not_converged = 0;
       gsl_vector_view v;
 
       /* initialize D to the identity matrix */
@@ -67,8 +67,11 @@ gsl_linalg_balance_matrix(gsl_matrix * A, gsl_vector * D)
 
       while (not_converged)
         {
-          size_t i, j;
-          double g, f, s;
+          size_t i;
+          size_t j;
+          double g;
+          double f;
+          double s;
 
           not_converged = 0;
 
@@ -169,8 +172,8 @@ gsl_linalg_balance_accum(gsl_matrix *A, gsl_vector *D)
     }
   else
     {
-      size_t i;
-      double s;
+      size_t i = 0;
+      double s = NAN;
       gsl_vector_view r;
 
       for (i = 0; i < N; ++i)

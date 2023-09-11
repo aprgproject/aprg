@@ -67,7 +67,8 @@ void gsl_cheb_free(gsl_cheb_series * cs)
 int gsl_cheb_init(gsl_cheb_series * cs, const gsl_function *func,
                   const double a, const double b)
 {
-  size_t k, j;
+  size_t k;
+  size_t j;
 
   if(a >= b) {
     GSL_ERROR_VAL("null function interval [a,b]", GSL_EDOM, 0);
@@ -88,8 +89,9 @@ int gsl_cheb_init(gsl_cheb_series * cs, const gsl_function *func,
     
     for(j = 0; j<=cs->order; j++) {
       double sum = 0.0;
-      for(k = 0; k<=cs->order; k++) 
+      for(k = 0; k<=cs->order; k++) { 
         sum += cs->f[k]*cos(M_PI * j*(k+0.5)/(cs->order+1));
+}
       cs->c[j] = fac * sum;
     }
     

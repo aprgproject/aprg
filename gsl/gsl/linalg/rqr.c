@@ -99,7 +99,7 @@ gsl_linalg_QR_decomp_r (gsl_matrix * A, gsl_matrix * T)
        * N1 [ A11 A12 ] and  N1 [ T11 T12 ]
        * M2 [ A21 A22 ]      N2 [  0  T22 ]
        */
-      int status;
+      int status = 0;
       const size_t N1 = N / 2;
       const size_t N2 = N - N1;
       const size_t M2 = M - N1;
@@ -126,8 +126,9 @@ gsl_linalg_QR_decomp_r (gsl_matrix * A, gsl_matrix * T)
        */
       m = gsl_matrix_submatrix(A, 0, 0, M, N1);
       status = gsl_linalg_QR_decomp_r(&m.matrix, &T11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /*
        * Eq. 3:
@@ -155,8 +156,9 @@ gsl_linalg_QR_decomp_r (gsl_matrix * A, gsl_matrix * T)
        *            [ 0  Q2~ ] M2
        */
       status = gsl_linalg_QR_decomp_r(&A22.matrix, &T22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /*
        * Eq. 13: update T12 := -T11 * V1^T * V2 * T22
@@ -223,7 +225,7 @@ gsl_linalg_QR_solve_r (const gsl_matrix * QR, const gsl_matrix * T, const gsl_ve
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* compute Q^T b = [I - V T^T V^T] b */
 
@@ -553,7 +555,7 @@ Q1 = [ Q1 Q2 ] [ I_n ] = (I - V T V^T) [ I; 0 ] = [ I - V1 T V1^T ] N
 static int
 unpack_Q1(gsl_matrix * Q)
 {
-  int status;
+  int status = 0;
   const size_t M = Q->size1;
   const size_t N = Q->size2;
   gsl_matrix_view Q1 = gsl_matrix_submatrix(Q, 0, 0, N, N);
@@ -561,8 +563,9 @@ unpack_Q1(gsl_matrix * Q)
 
   /* Q1 := T V1^T */
   status = aux_ULT(&Q1.matrix, &Q1.matrix);
-  if (status)
+  if (status) {
     return status;
+}
 
   if (M > N)
     {
@@ -573,8 +576,9 @@ unpack_Q1(gsl_matrix * Q)
 
   /* Q1 := - V1 T V1^T */
   status = aux_mLU(&Q1.matrix);
-  if (status)
+  if (status) {
     return status;
+}
 
   /* Q1 := I - V1 T V1^T */
   gsl_vector_add_constant(&diag.vector, 1.0);
@@ -669,7 +673,7 @@ aux_ULT(const gsl_matrix * L, gsl_matrix * U)
     }
   else
     {
-      int status;
+      int status = 0;
       const size_t N1 = N / 2;
       const size_t N2 = N - N1;
 
@@ -686,16 +690,19 @@ aux_ULT(const gsl_matrix * L, gsl_matrix * U)
 
       /* U12 = U12 + U11 * L21^T */
       status = aux_ApUBT(&U11.matrix, &L21.matrix, &U12.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       status = aux_ULT(&L11.matrix, &U11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       status = aux_ULT(&L22.matrix, &U22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       return GSL_SUCCESS;
     }
@@ -719,7 +726,7 @@ aux_mLU(gsl_matrix * A)
     }
   else
     {
-      int status;
+      int status = 0;
       const size_t N1 = N / 2;
       const size_t N2 = N - N1;
 
@@ -730,8 +737,9 @@ aux_mLU(gsl_matrix * A)
 
       /* A22 = - L22 U22 */
       status = aux_mLU(&A22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* A22 = A22 - L21 U12 */
       gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, -1.0, &A21.matrix, &A12.matrix, 1.0, &A22.matrix);
@@ -744,8 +752,9 @@ aux_mLU(gsl_matrix * A)
 
       /* A11 = - L11 U11 */
       status = aux_mLU(&A11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       return GSL_SUCCESS;
     }
@@ -794,7 +803,7 @@ aux_ApUBT(const gsl_matrix * U, const gsl_matrix * B, gsl_matrix * A)
        * M1 [ A11 ] + [ U11 U12 ] [ B11^T ] M1
        * M2 [ A21 ]   [  0  U22 ] [ B12^T ] M2
        */
-      int status;
+      int status = 0;
       const size_t M1 = M / 2;
       const size_t M2 = M - M1;
 
@@ -815,19 +824,21 @@ aux_ApUBT(const gsl_matrix * U, const gsl_matrix * B, gsl_matrix * A)
 
       /* A11 := A11 + U11 B11^T */
       status = aux_ApUBT(&U11.matrix, &B11.matrix, &A11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* A21 := A21 + U22 B12^T */
       status = aux_ApUBT(&U22.matrix, &B12.matrix, &A21.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       return GSL_SUCCESS;
     }
   else
     {
-      int status;
+      int status = 0;
       const size_t M1 = M / 2;
       const size_t M2 = M - M1;
       const size_t N1 = N / 2;
@@ -849,29 +860,33 @@ aux_ApUBT(const gsl_matrix * U, const gsl_matrix * B, gsl_matrix * A)
 
       /* A11 := A11 + U11 B11^T */
       status = aux_ApUBT(&U11.matrix, &B11.matrix, &A11.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* A11 := A11 + U12 B12^T */
       gsl_blas_dgemm(CblasNoTrans, CblasTrans, 1.0, &U12.matrix, &B12.matrix, 1.0, &A11.matrix);
 
       /* A12 := A12 + U11 B21^T */
       status = aux_ApUBT(&U11.matrix, &B21.matrix, &A12.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* A12 := A12 + U12 B22^T */
       gsl_blas_dgemm(CblasNoTrans, CblasTrans, 1.0, &U12.matrix, &B22.matrix, 1.0, &A12.matrix);
 
       /* A21 := A21 + U22 B12^T */
       status = aux_ApUBT(&U22.matrix, &B12.matrix, &A21.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* A22 := A22 + U22 B22^T */
       status = aux_ApUBT(&U22.matrix, &B22.matrix, &A22.matrix);
-      if (status)
+      if (status) {
         return status;
+}
 
       return GSL_SUCCESS;
     }

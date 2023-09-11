@@ -37,7 +37,7 @@
 gsl_eigen_symm_workspace *
 gsl_eigen_symm_alloc (const size_t n)
 {
-  gsl_eigen_symm_workspace *w;
+  gsl_eigen_symm_workspace *w = NULL;
 
   if (n == 0)
     {
@@ -104,7 +104,8 @@ gsl_eigen_symm (gsl_matrix * A, gsl_vector * eval,
       double *const d = w->d;
       double *const sd = w->sd;
 
-      size_t a, b;
+      size_t a;
+      size_t b;
 
       /* handle special case */
 
