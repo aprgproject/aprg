@@ -4,7 +4,7 @@ if(APRG_ENABLE_STATIC_ANALYZERS)
     if(NOT APRG_STATIC_ANALYZERS_TYPE)
         set(APRG_STATIC_ANALYZERS_TYPE "ReportWithoutClazy")
     endif()
-	
+
     if(NOT APRG_STATIC_ANALYZERS_TYPE STREQUAL "AutoFix")
         find_program(CPPCHECK_PROGRAM "cppcheck")
         print_variable(CPPCHECK_PROGRAM)
@@ -57,7 +57,7 @@ if(APRG_ENABLE_STATIC_ANALYZERS)
             # There are many checks and they are divided in levels:
             # level0: Very stable checks, 99.99% safe, mostly no false-positives, very desirable
             # level1: The default level. Very similar to level 0, slightly more false-positives but very few.
-            # level2: Also very few false-positives, but contains noisy checks which not everyone agree should be default.
+            # level2: Also few false-positives, but contains checks which not everyone agree should be default.
             # manual: Checks here need to be enabled explicitly, as they can be very stable or very unstable
             # ME: Just stick to default
             # set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Xclang -plugin-arg-clazy -Xclang level2")
