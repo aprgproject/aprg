@@ -42,7 +42,7 @@ void AlbaWindowsUserAutomation::releaseLeftButtonOnMouse() {
     });
 }
 
-void AlbaWindowsUserAutomation::doLeftClick() const {
+void AlbaWindowsUserAutomation::doLeftClick() {
     pressLeftButtonOnMouse();
     sleepWithRealisticDelay();
     releaseLeftButtonOnMouse();
@@ -78,7 +78,7 @@ void AlbaWindowsUserAutomation::releaseRightButtonOnMouse() {
     });
 }
 
-void AlbaWindowsUserAutomation::doRightClick() const {
+void AlbaWindowsUserAutomation::doRightClick() {
     pressRightButtonOnMouse();
     sleepWithRealisticDelay();
     releaseRightButtonOnMouse();
@@ -112,7 +112,7 @@ void AlbaWindowsUserAutomation::releaseKey(uint16_t const key) {
     });
 }
 
-void AlbaWindowsUserAutomation::typeKey(uint16_t const key) const {
+void AlbaWindowsUserAutomation::typeKey(uint16_t const key) {
     pressKey(key);
     sleepWithRealisticDelay();
     releaseKey(key);
@@ -128,7 +128,7 @@ void AlbaWindowsUserAutomation::typeString(string_view const& stringToType) cons
 }
 
 void AlbaWindowsUserAutomation::performKeyCombination(
-    vector<uint16_t> const& keys, std::vector<char> const& characters) const {
+    vector<uint16_t> const& keys, std::vector<char> const& characters) {
     for (auto const key : keys) {
         pressKey(key);
         sleepWithRealisticDelay();

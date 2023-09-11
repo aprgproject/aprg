@@ -23,7 +23,7 @@ void FesterRobot::run() {
     cout << "Press the key 'ctrl' to start.\n";
     while (true) {
         exitIfSpecialKeyIsPressed();
-        if (m_userAutomation.isLetterPressed(VK_CONTROL)) {
+        if (alba::AlbaWindowsUserAutomation::isLetterPressed(VK_CONTROL)) {
             cout << "Starting robot duties.\n";
             setupFesterEnvironmentInMatlab();
 
@@ -37,9 +37,9 @@ void FesterRobot::run() {
             }
             break;
         }
-        m_userAutomation.sleep(POLLING_DELAY_TO_WAIT_FOR_START);
+        alba::AlbaWindowsUserAutomation::sleep(POLLING_DELAY_TO_WAIT_FOR_START);
     }
-    m_userAutomation.setMousePosition(MousePosition(ORIGIN));
+    alba::AlbaWindowsUserAutomation::setMousePosition(MousePosition(ORIGIN));
 }
 
 bool FesterRobot::isRunningInClipboardData(string const& clipboardData) {
@@ -47,14 +47,14 @@ bool FesterRobot::isRunningInClipboardData(string const& clipboardData) {
 }
 
 string FesterRobot::getClipboardFormattedData() const {
-    string clipboardData(m_userAutomation.getStringFromClipboard());
+    string clipboardData(alba::AlbaWindowsUserAutomation::getStringFromClipboard());
     stringHelper::replaceAllAndReturnIfFound(clipboardData, "\r", "");
     return clipboardData;
 }
 
 string FesterRobot::getFrequenciesStringForExcel() const {
     stringstream frequencyStream;
-    for (int frequency : m_frequencies) {
+    for (int const frequency : m_frequencies) {
         frequencyStream << frequency << " ";
     }
     string frequencyString(frequencyStream.str());
@@ -65,18 +65,18 @@ string FesterRobot::getFrequenciesStringForExcel() const {
 }
 
 bool FesterRobot::isRunningFinishedInClipboardData(string const& clipboardData) const {
-    string freqBandStringInLog(stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(
+    string const freqBandStringInLog(stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(
         stringHelper::getStringWithoutRedundantWhiteSpace(stringHelper::getStringAfterThisString(
             stringHelper::getStringInBetweenTwoStrings(clipboardData, "freqBand", "filCoef"), "="))));
-    string frequenciesStringForExcel(getFrequenciesStringForExcel());
+    string const frequenciesStringForExcel(getFrequenciesStringForExcel());
     cout << "freqBandStringInLog: [" << freqBandStringInLog << "]\n";
     cout << "frequenciesStringForExcel: [" << frequenciesStringForExcel << "]\n";
     return freqBandStringInLog == frequenciesStringForExcel;
 }
 
 void FesterRobot::exitIfSpecialKeyIsPressed() {
-    if (m_userAutomation.isLetterPressed(VK_MENU)) {
-        m_userAutomation.setMousePosition(MousePosition(ORIGIN));
+    if (alba::AlbaWindowsUserAutomation::isLetterPressed(VK_MENU)) {
+        alba::AlbaWindowsUserAutomation::setMousePosition(MousePosition(ORIGIN));
         exit(0);
     }
 }
@@ -85,20 +85,20 @@ void FesterRobot::updateExcelFile(unsigned int const freqUsageBits) {
     updateFrequenciesBasedFreqUsageBits(freqUsageBits);
     editCellInExcelWithNewFrequencies(MousePosition(EXCEL_CELL_COORDINATES1));
     editCellInExcelWithNewFrequencies(MousePosition(EXCEL_CELL_COORDINATES2));
-    m_userAutomation.performKeyCombination({VK_CONTROL}, {'S'});
+    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'S'});
 }
 
 void FesterRobot::setupFesterEnvironmentInMatlab() {
     m_userAutomation.doLeftClickAt(MousePosition(MATLAB_COMMAND_WINDOW_COORDINATES));
     m_userAutomation.doLeftClickAt(MousePosition(MATLAB_COMMAND_WINDOW_COORDINATES));
-    m_userAutomation.setStringToClipboard("clc");
-    m_userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
+    alba::AlbaWindowsUserAutomation::setStringToClipboard("clc");
+    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
     m_userAutomation.typeCharacter(VK_RETURN);
-    m_userAutomation.setStringToClipboard(R"(run('C:\Users\malba\Desktop\DSS\Fester\Fester_scp.m'))");
-    m_userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
+    alba::AlbaWindowsUserAutomation::setStringToClipboard(R"(run('C:\Users\malba\Desktop\DSS\Fester\Fester_scp.m'))");
+    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
     m_userAutomation.typeCharacter(VK_RETURN);
-    m_userAutomation.setStringToClipboard(R"(format long g)");
-    m_userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
+    alba::AlbaWindowsUserAutomation::setStringToClipboard(R"(format long g)");
+    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
     m_userAutomation.typeCharacter(VK_RETURN);
 }
 
@@ -107,27 +107,27 @@ void FesterRobot::editCellInExcelWithNewFrequencies(MousePosition const& excelCe
     m_userAutomation.doLeftClickAt(excelCellPosition);
     m_userAutomation.typeCharacter(VK_DELETE);
     m_userAutomation.doDoubleLeftClickAt(excelCellPosition);
-    m_userAutomation.setStringToClipboard(getFrequenciesStringForExcel());
-    m_userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
+    alba::AlbaWindowsUserAutomation::setStringToClipboard(getFrequenciesStringForExcel());
+    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
 }
 
 void FesterRobot::runFesterFunctionInMatlab() {
     m_userAutomation.doLeftClickAt(MousePosition(MATLAB_COMMAND_WINDOW_COORDINATES));
-    m_userAutomation.setStringToClipboard("clc");
-    m_userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
+    alba::AlbaWindowsUserAutomation::setStringToClipboard("clc");
+    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
     m_userAutomation.typeCharacter(VK_RETURN);
-    m_userAutomation.setStringToClipboard(R"(fester('perf_rake_ilpc_gsm:1M_FixedGsm','300a');)");
-    m_userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
+    alba::AlbaWindowsUserAutomation::setStringToClipboard(R"(fester('perf_rake_ilpc_gsm:1M_FixedGsm','300a');)");
+    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
     m_userAutomation.typeCharacter(VK_RETURN);
     bool isRunning(true);
     bool isRunningFinished(false);
     string clipboardData;
     while (isRunning && !isRunningFinished) {
         exitIfSpecialKeyIsPressed();
-        m_userAutomation.sleep(2000);
+        alba::AlbaWindowsUserAutomation::sleep(2000);
         m_userAutomation.doLeftClickAt(MousePosition(MATLAB_COMMAND_WINDOW_COORDINATES));
-        m_userAutomation.performKeyCombination({VK_CONTROL}, {'A'});
-        m_userAutomation.performKeyCombination({VK_CONTROL}, {'C'});
+        alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'A'});
+        alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'C'});
         clipboardData = getClipboardFormattedData();
         isRunning = isRunningInClipboardData(clipboardData);
         isRunningFinished = isRunningFinishedInClipboardData(clipboardData);
