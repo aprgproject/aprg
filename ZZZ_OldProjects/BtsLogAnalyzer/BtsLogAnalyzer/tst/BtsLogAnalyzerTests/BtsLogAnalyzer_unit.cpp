@@ -9,8 +9,8 @@ using namespace std;
 namespace alba {
 
 TEST(BtsLogAnalyzerTest, DISABLED_WireSharkTimeCanBeExtracted) {
-    BtsLogAnalyzer reader;
-    double timeStamp = alba::BtsLogAnalyzer::getWireSharkTime(
+    BtsLogAnalyzer const reader;
+    double const timeStamp = alba::BtsLogAnalyzer::getWireSharkTime(
         "94 0.004714000    10.34.246.5           10.34.46.6            NBAP     238    id-radioLinkSetup , "
         "RadioLinkSetupRequestFDD ");
 
@@ -18,8 +18,8 @@ TEST(BtsLogAnalyzerTest, DISABLED_WireSharkTimeCanBeExtracted) {
 }
 
 TEST(BtsLogAnalyzerTest, DISABLED_WireSharkTimeCanBeExtracted2) {
-    BtsLogAnalyzer reader;
-    double timeStamp = alba::BtsLogAnalyzer::getWireSharkTime(
+    BtsLogAnalyzer const reader;
+    double const timeStamp = alba::BtsLogAnalyzer::getWireSharkTime(
         "  96414 4.137924000    10.34.46.6            10.34.246.5           NBAP     138    id-radioLinkSetup , "
         "RadioLinkSetupResponseFDD ");
 
@@ -27,12 +27,12 @@ TEST(BtsLogAnalyzerTest, DISABLED_WireSharkTimeCanBeExtracted2) {
 }
 
 TEST(BtsLogAnalyzerTest, DISABLED_GetNumberAfterThisStringWorksAsIntended) {
-    BtsLogAnalyzer reader;
-    string crnccIdString = alba::BtsLogAnalyzer::getNumberAfterThisString(
+    BtsLogAnalyzer const reader;
+    string const crnccIdString = alba::BtsLogAnalyzer::getNumberAfterThisString(
         "criticality: ignore (1) value CRNC-CommunicationContextID: 13388 Item 1: id-NodeB-CommunicationContextID "
         "ProtocolIE-Field",
         "CRNC-CommunicationContextID: ");
-    int crnccId = stringHelper::convertStringToNumber<int>(crnccIdString);
+    int const crnccId = stringHelper::convertStringToNumber<int>(crnccIdString);
     EXPECT_EQ(13388, crnccId);
 }
 
@@ -83,7 +83,8 @@ TEST(BtsLogAnalyzerTest, DISABLED_ProcessFileForBtsRlDeletionDelay2) {
 }
 
 TEST(BtsLogAnalyzerTest, DISABLED_ProcessFileForBtsDelayForRlhWBTS17Knife) {
-    BtsLogAnalyzer reader(R"(D:\W\ZZZ_Useless_Logs\wireshark_challenge\WBTS17Knife\bts_logs\RlhBtsLogTimeResults.csv)");
+    BtsLogAnalyzer const reader(
+        R"(D:\W\ZZZ_Useless_Logs\wireshark_challenge\WBTS17Knife\bts_logs\RlhBtsLogTimeResults.csv)");
     alba::BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(
         R"(D:\W\ZZZ_Useless_Logs\wireshark_challenge\WBTS17Knife\bts_logs\sorted.log)");
 }
@@ -102,7 +103,7 @@ TEST(BtsLogAnalyzerTest, DISABLED_ProcessFileWireshark) {
 }
 
 TEST(BtsLogAnalyzerTest, DISABLED_UesWithTracingWithCount) {
-    BtsLogAnalyzer reader(R"(D:\W\ZZZ_Useless_Logs\RAN2861\WBTS17\TRACING_REPORT.csv)");
+    BtsLogAnalyzer const reader(R"(D:\W\ZZZ_Useless_Logs\RAN2861\WBTS17\TRACING_REPORT.csv)");
     alba::BtsLogAnalyzer::processFileForToCountUsersWithTracing(
         R"(D:\W\ZZZ_Useless_Logs\RAN2861\WBTS17\TRACING_REPORT.log)");
 }
@@ -119,7 +120,7 @@ TEST(BtsLogAnalyzerTest, DISABLED_SizeOfTest) {
         unsigned char seqNum[4];  // 4 dapat
         // short extra; //2
     };
-    TraceReportHeader traceReportHeader{};
+    TraceReportHeader const traceReportHeader{};
     cout << "Size of:" << sizeof(traceReportHeader) << "\n";
 }
 

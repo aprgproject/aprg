@@ -47,7 +47,7 @@ public:
     static void processFileForBtsDelayForMikhailKnife(std::string const& filePath);
     static std::string getNumberAfterThisString(std::string const& mainString, std::string const& stringToSearch);
     static double getWireSharkTime(std::string const& lineInLogs);
-    double getComputedAverageDelay() const;
+    [[nodiscard]] double getComputedAverageDelay() const;
     void processDirectoryForWireSharkDelay(std::string const& directoryPath);
     void processFileForWireSharkDelay(std::string const& filePath);
     void processFileForMsgQueuingTime(std::string const& filePath);
