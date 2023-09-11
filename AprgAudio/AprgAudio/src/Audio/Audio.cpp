@@ -89,14 +89,14 @@ void Audio<DataType>::printSummary() const {
 
 template <class DataType>
 bool Audio<DataType>::setAudioBuffer(AudioBuffer& newBuffer) {
-    int numberOfChannels = static_cast<int>(newBuffer.size());
+    int const numberOfChannels = static_cast<int>(newBuffer.size());
 
     if (numberOfChannels <= 0) {
         assert(false && "The buffer your are trying to use has no channels");
         return false;
     }
 
-    int numberOfSamples = newBuffer[0].size();
+    int const numberOfSamples = newBuffer[0].size();
 
     // set the number of channels
     samples.resize(newBuffer.size());
@@ -122,7 +122,7 @@ void Audio<DataType>::setAudioBufferSize(int const numberOfChannels, int const n
 
 template <class DataType>
 void Audio<DataType>::setNumSamplesPerChannel(int const numberOfSamples) {
-    int originalSize = getNumberOfSamplesPerChannel();
+    int const originalSize = getNumberOfSamplesPerChannel();
 
     for (int i = 0; i < getNumberOfChannels(); ++i) {
         samples[i].resize(numberOfSamples);
@@ -136,8 +136,8 @@ void Audio<DataType>::setNumSamplesPerChannel(int const numberOfSamples) {
 
 template <class DataType>
 void Audio<DataType>::setNumberOfChannels(int const numberOfChannels) {
-    int originalNumberOfChannels = static_cast<int>(getNumberOfChannels());
-    int originalNumSamplesPerChannel = static_cast<int>(getNumberOfSamplesPerChannel());
+    int const originalNumberOfChannels = static_cast<int>(getNumberOfChannels());
+    int const originalNumSamplesPerChannel = static_cast<int>(getNumberOfSamplesPerChannel());
 
     samples.resize(numberOfChannels);
 
@@ -173,8 +173,8 @@ bool Audio<DataType>::load(string const& filePath) {
     }
 
     file.unsetf(ios::skipws);
-    istream_iterator<uint8_t> begin(file);
-    istream_iterator<uint8_t> end;
+    istream_iterator<uint8_t> const begin(file);
+    istream_iterator<uint8_t> const end;
     vector<uint8_t> dataBuffer(begin, end);
 
     // get audio file format
@@ -194,14 +194,14 @@ template <class DataType>
 bool Audio<DataType>::decodeWaveFile(vector<uint8_t>& dataBuffer) {
     // -----------------------------------------------------------
     // HEADER CHUNK
-    string headerChunkID(dataBuffer.begin(), dataBuffer.begin() + 4);
+    string const headerChunkID(dataBuffer.begin(), dataBuffer.begin() + 4);
     // int32_t fileSizeInBytes = fourBytesToInt (dataBuffer, 4) + 8;
-    string format(dataBuffer.begin() + 8, dataBuffer.begin() + 12);
+    string const format(dataBuffer.begin() + 8, dataBuffer.begin() + 12);
 
     // -----------------------------------------------------------
     // try and find the start points of key chunks
-    int indexOfDataChunk = getIndexOfString(dataBuffer, "data");
-    int indexOfFormatChunk = getIndexOfString(dataBuffer, "fmt");
+    int const indexOfDataChunk = getIndexOfString(dataBuffer, "data");
+    int const indexOfFormatChunk = getIndexOfString(dataBuffer, "fmt");
 
     // if we can't find the data or format chunks, or the IDs/formats don't seem to be as expected
     // then it is unlikely we'll able to read this file, so abort
@@ -212,17 +212,17 @@ bool Audio<DataType>::decodeWaveFile(vector<uint8_t>& dataBuffer) {
 
     // -----------------------------------------------------------
     // FORMAT CHUNK
-    int f = indexOfFormatChunk;
+    int const f = indexOfFormatChunk;
     // string formatChunkID(dataBuffer.begin() + f, dataBuffer.begin() + f + 4);
     //  int32_t formatChunkSize = fourBytesToInt (dataBuffer, f + 4);
-    int16_t audioFormat = twoBytesToInt(dataBuffer, f + 8);
-    int16_t numberOfChannels = twoBytesToInt(dataBuffer, f + 10);
+    int16_t const audioFormat = twoBytesToInt(dataBuffer, f + 8);
+    int16_t const numberOfChannels = twoBytesToInt(dataBuffer, f + 10);
     sampleRate = static_cast<int>(fourBytesToInt(dataBuffer, f + 12));
-    int32_t numberBytesPerSecond = fourBytesToInt(dataBuffer, f + 16);
-    int16_t numberBytesPerBlock = twoBytesToInt(dataBuffer, f + 20);
+    int32_t const numberBytesPerSecond = fourBytesToInt(dataBuffer, f + 16);
+    int16_t const numberBytesPerBlock = twoBytesToInt(dataBuffer, f + 20);
     bitDepth = static_cast<int>(twoBytesToInt(dataBuffer, f + 22));
 
-    int numberBytesPerSample = bitDepth / 8;
+    int const numberBytesPerSample = bitDepth / 8;
 
     // check that the audio format is PCM
     if (audioFormat != 1) {
@@ -251,25 +251,25 @@ bool Audio<DataType>::decodeWaveFile(vector<uint8_t>& dataBuffer) {
 
     // -----------------------------------------------------------
     // DATA CHUNK
-    int d = indexOfDataChunk;
+    int const d = indexOfDataChunk;
     // string dataChunkID(dataBuffer.begin() + d, dataBuffer.begin() + d + 4);
-    int32_t dataChunkSize = fourBytesToInt(dataBuffer, d + 4);
+    int32_t const dataChunkSize = fourBytesToInt(dataBuffer, d + 4);
 
-    int numberOfSamples = dataChunkSize / (numberOfChannels * bitDepth / 8);
-    int samplesStartIndex = indexOfDataChunk + 8;
+    int const numberOfSamples = dataChunkSize / (numberOfChannels * bitDepth / 8);
+    int const samplesStartIndex = indexOfDataChunk + 8;
 
     clearAudioBuffer();
     samples.resize(numberOfChannels);
 
     for (int i = 0; i < numberOfSamples; ++i) {
         for (int channel = 0; channel < numberOfChannels; ++channel) {
-            int sampleIndex = samplesStartIndex + (numberBytesPerBlock * i) + channel * numberBytesPerSample;
+            int const sampleIndex = samplesStartIndex + (numberBytesPerBlock * i) + channel * numberBytesPerSample;
 
             if (bitDepth == 8) {
                 DataType sample = singleByteToSample(dataBuffer[sampleIndex]);
                 samples[channel].push_back(sample);
             } else if (bitDepth == 16) {
-                int16_t sampleAsInt = twoBytesToInt(dataBuffer, sampleIndex);
+                int16_t const sampleAsInt = twoBytesToInt(dataBuffer, sampleIndex);
                 DataType sample = sixteenBitIntToSample(sampleAsInt);
                 samples[channel].push_back(sample);
             } else if (bitDepth == 24) {
@@ -297,14 +297,14 @@ template <class DataType>
 bool Audio<DataType>::decodeAiffFile(vector<uint8_t>& dataBuffer) {
     // -----------------------------------------------------------
     // HEADER CHUNK
-    string headerChunkID(dataBuffer.begin(), dataBuffer.begin() + 4);
+    string const headerChunkID(dataBuffer.begin(), dataBuffer.begin() + 4);
     // int32_t fileSizeInBytes = fourBytesToInt (dataBuffer, 4, Endianness::BigEndian) + 8;
-    string format(dataBuffer.begin() + 8, dataBuffer.begin() + 12);
+    string const format(dataBuffer.begin() + 8, dataBuffer.begin() + 12);
 
     // -----------------------------------------------------------
     // try and find the start points of key chunks
-    int indexOfCommChunk = getIndexOfString(dataBuffer, "COMM");
-    int indexOfSoundDataChunk = getIndexOfString(dataBuffer, "SSND");
+    int const indexOfCommChunk = getIndexOfString(dataBuffer, "COMM");
+    int const indexOfSoundDataChunk = getIndexOfString(dataBuffer, "SSND");
 
     // if we can't find the data or format chunks, or the IDs/formats don't seem to be as expected
     // then it is unlikely we'll able to read this file, so abort
@@ -315,11 +315,11 @@ bool Audio<DataType>::decodeAiffFile(vector<uint8_t>& dataBuffer) {
 
     // -----------------------------------------------------------
     // COMM CHUNK
-    int p = indexOfCommChunk;
+    int const p = indexOfCommChunk;
     // string commChunkID(dataBuffer.begin() + p, dataBuffer.begin() + p + 4);
     //  int32_t commChunkSize = fourBytesToInt (dataBuffer, p + 4, Endianness::BigEndian);
-    int16_t numberOfChannels = twoBytesToInt(dataBuffer, p + 8, Endianness::BigEndian);
-    int32_t numberOfSamplesPerChannel = fourBytesToInt(dataBuffer, p + 10, Endianness::BigEndian);
+    int16_t const numberOfChannels = twoBytesToInt(dataBuffer, p + 8, Endianness::BigEndian);
+    int32_t const numberOfSamplesPerChannel = fourBytesToInt(dataBuffer, p + 10, Endianness::BigEndian);
     bitDepth = static_cast<int>(twoBytesToInt(dataBuffer, p + 14, Endianness::BigEndian));
     sampleRate = getAiffSampleRate(dataBuffer, p + 16);
 
@@ -343,15 +343,15 @@ bool Audio<DataType>::decodeAiffFile(vector<uint8_t>& dataBuffer) {
 
     // -----------------------------------------------------------
     // SSND CHUNK
-    int s = indexOfSoundDataChunk;
+    int const s = indexOfSoundDataChunk;
     // string soundDataChunkID(dataBuffer.begin() + s, dataBuffer.begin() + s + 4);
-    int32_t soundDataChunkSize = fourBytesToInt(dataBuffer, s + 4, Endianness::BigEndian);
-    int32_t offset = fourBytesToInt(dataBuffer, s + 8, Endianness::BigEndian);
+    int32_t const soundDataChunkSize = fourBytesToInt(dataBuffer, s + 4, Endianness::BigEndian);
+    int32_t const offset = fourBytesToInt(dataBuffer, s + 8, Endianness::BigEndian);
     // int32_t blockSize = fourBytesToInt (dataBuffer, s + 12, Endianness::BigEndian);
-    int numberBytesPerSample = bitDepth / 8;
-    int numberBytesPerFrame = numberBytesPerSample * numberOfChannels;
-    int totalNumAudioSampleBytes = numberOfSamplesPerChannel * numberBytesPerFrame;
-    int samplesStartIndex = s + 16 + static_cast<int>(offset);
+    int const numberBytesPerSample = bitDepth / 8;
+    int const numberBytesPerFrame = numberBytesPerSample * numberOfChannels;
+    int const totalNumAudioSampleBytes = numberOfSamplesPerChannel * numberBytesPerFrame;
+    int const samplesStartIndex = s + 16 + static_cast<int>(offset);
 
     // sanity check the data
     if ((soundDataChunkSize - 8) != totalNumAudioSampleBytes ||
@@ -365,14 +365,14 @@ bool Audio<DataType>::decodeAiffFile(vector<uint8_t>& dataBuffer) {
 
     for (int i = 0; i < numberOfSamplesPerChannel; ++i) {
         for (int channel = 0; channel < numberOfChannels; ++channel) {
-            int sampleIndex = samplesStartIndex + (numberBytesPerFrame * i) + channel * numberBytesPerSample;
+            int const sampleIndex = samplesStartIndex + (numberBytesPerFrame * i) + channel * numberBytesPerSample;
 
             if (bitDepth == 8) {
                 auto sampleAsSigned8Bit = static_cast<int8_t>(dataBuffer[sampleIndex]);
                 DataType sample = static_cast<DataType>(sampleAsSigned8Bit) / static_cast<DataType>(128);
                 samples[channel].push_back(sample);
             } else if (bitDepth == 16) {
-                int16_t sampleAsInt = twoBytesToInt(dataBuffer, sampleIndex, Endianness::BigEndian);
+                int16_t const sampleAsInt = twoBytesToInt(dataBuffer, sampleIndex, Endianness::BigEndian);
                 DataType sample = sixteenBitIntToSample(sampleAsInt);
                 samples[channel].push_back(sample);
             } else if (bitDepth == 24) {
@@ -430,7 +430,7 @@ void Audio<DataType>::addSampleRateToAiffData(vector<uint8_t>& dataBuffer, int c
 
 template <class DataType>
 bool Audio<DataType>::save(string const& filePath, AudioFormat const format) {
-    AlbaLocalPathHandler filePathHandler(filePath);
+    AlbaLocalPathHandler const filePathHandler(filePath);
     if (format == AudioFormat::Wave) {
         return saveToWaveFile(filePathHandler.getFullPath());
     }
@@ -453,7 +453,7 @@ bool Audio<DataType>::saveToWaveFile(string const& filePath) {
 
     // The file size in bytes is the header chunk size (4, not counting RIFF and WAVE) + the format
     // chunk size (24) + the metadata part of the data chunk plus the actual data chunk size
-    int32_t fileSizeInBytes = 4 + 24 + 8 + dataChunkSize;
+    int32_t const fileSizeInBytes = 4 + 24 + 8 + dataChunkSize;
     addInt32ToFileData(dataBuffer, fileSizeInBytes);
 
     addStringToFileData(dataBuffer, "WAVE");
@@ -481,10 +481,10 @@ bool Audio<DataType>::saveToWaveFile(string const& filePath) {
     for (int i = 0; i < getNumberOfSamplesPerChannel(); ++i) {
         for (int channel = 0; channel < getNumberOfChannels(); ++channel) {
             if (bitDepth == 8) {
-                uint8_t byte = sampleToSingleByte(samples[channel][i]);
+                uint8_t const byte = sampleToSingleByte(samples[channel][i]);
                 dataBuffer.push_back(byte);
             } else if (bitDepth == 16) {
-                int16_t sampleAsInt = sampleToSixteenBitInt(samples[channel][i]);
+                int16_t const sampleAsInt = sampleToSixteenBitInt(samples[channel][i]);
                 addInt16ToFileData(dataBuffer, sampleAsInt);
             } else if (bitDepth == 24) {
                 auto sampleAsIntAgain = static_cast<int32_t>(samples[channel][i] * static_cast<DataType>(8388608.));
@@ -515,10 +515,10 @@ template <class DataType>
 bool Audio<DataType>::saveToAiffFile(string const& filePath) {
     vector<uint8_t> dataBuffer;
 
-    int32_t numberBytesPerSample = bitDepth / 8;
+    int32_t const numberBytesPerSample = bitDepth / 8;
     auto numberBytesPerFrame = static_cast<int32_t>(numberBytesPerSample * getNumberOfChannels());
     auto totalNumAudioSampleBytes = static_cast<int32_t>(getNumberOfSamplesPerChannel() * numberBytesPerFrame);
-    int32_t soundDataChunkSize = totalNumAudioSampleBytes + 8;
+    int32_t const soundDataChunkSize = totalNumAudioSampleBytes + 8;
 
     // -----------------------------------------------------------
     // HEADER CHUNK
@@ -526,7 +526,7 @@ bool Audio<DataType>::saveToAiffFile(string const& filePath) {
 
     // The file size in bytes is the header chunk size (4, not counting FORM and AIFF) + the COMM
     // chunk size (26) + the metadata part of the SSND chunk plus the actual data chunk size
-    int32_t fileSizeInBytes = 4 + 26 + 16 + totalNumAudioSampleBytes;
+    int32_t const fileSizeInBytes = 4 + 26 + 16 + totalNumAudioSampleBytes;
     addInt32ToFileData(dataBuffer, fileSizeInBytes, Endianness::BigEndian);
 
     addStringToFileData(dataBuffer, "AIFF");
@@ -551,10 +551,10 @@ bool Audio<DataType>::saveToAiffFile(string const& filePath) {
     for (int i = 0; i < getNumberOfSamplesPerChannel(); ++i) {
         for (int channel = 0; channel < getNumberOfChannels(); ++channel) {
             if (bitDepth == 8) {
-                uint8_t byte = sampleToSingleByte(samples[channel][i]);
+                uint8_t const byte = sampleToSingleByte(samples[channel][i]);
                 dataBuffer.push_back(byte);
             } else if (bitDepth == 16) {
-                int16_t sampleAsInt = sampleToSixteenBitInt(samples[channel][i]);
+                int16_t const sampleAsInt = sampleToSixteenBitInt(samples[channel][i]);
                 addInt16ToFileData(dataBuffer, sampleAsInt, Endianness::BigEndian);
             } else if (bitDepth == 24) {
                 auto sampleAsIntAgain = static_cast<int32_t>(samples[channel][i] * static_cast<DataType>(8388608.));
@@ -586,7 +586,7 @@ bool Audio<DataType>::writeDataToFile(vector<uint8_t>& dataBuffer, string const&
 
     if (outputFile.is_open()) {
         for (uint8_t const fileDataBytesByte : dataBuffer) {
-            char value = static_cast<char>(fileDataBytesByte);
+            char const value = static_cast<char>(fileDataBytesByte);
             outputFile.write(&value, sizeof(char));
         }
         outputFile.close();
@@ -650,7 +650,7 @@ void Audio<DataType>::clearAudioBuffer() {
 
 template <class DataType>
 AudioFormat Audio<DataType>::determineAudioFormat(vector<uint8_t>& dataBuffer) {
-    string header(dataBuffer.begin(), dataBuffer.begin() + 4);
+    string const header(dataBuffer.begin(), dataBuffer.begin() + 4);
 
     if (header == "RIFF") {
         return AudioFormat::Wave;
@@ -694,10 +694,10 @@ int16_t Audio<DataType>::twoBytesToInt(
 template <class DataType>
 int Audio<DataType>::getIndexOfString(vector<uint8_t> const& source, string const& stringToSearchFor) {
     int index = -1;
-    int stringLength = static_cast<int>(stringToSearchFor.length());
+    int const stringLength = static_cast<int>(stringToSearchFor.length());
 
     for (int i = 0; i < static_cast<int>(source.size() - stringLength); ++i) {
-        string section(source.cbegin() + i, source.cbegin() + i + stringLength);
+        string const section(source.cbegin() + i, source.cbegin() + i + stringLength);
 
         if (section == stringToSearchFor) {
             index = i;
