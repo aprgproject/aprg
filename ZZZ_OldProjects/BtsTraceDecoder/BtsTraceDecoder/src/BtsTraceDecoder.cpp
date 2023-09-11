@@ -24,7 +24,7 @@ void BtsTraceDecoder::processInputTraceFile(std::string const& inputTraceFilePat
     if (traceFile.is_open()) {
         AlbaFileReader traceFileReader(traceFile);
         while (traceFileReader.isNotFinished()) {
-            string lineInTraceFile(traceFileReader.getLine());
+            string const lineInTraceFile(traceFileReader.getLine());
             auto traceAddressValue =
                 convertHexStringToNumber<unsigned int>(getStringInBetweenTwoStrings(lineInTraceFile, "[", "]"));
             if (traceAddressValue != 0) {
@@ -38,7 +38,7 @@ void BtsTraceDecoder::processInputTraceFile(std::string const& inputTraceFilePat
 std::string BtsTraceDecoder::getNearestLowerSymbol(int const address, int const offset) {
     string symbol;
     if (!m_symbolMap.empty()) {
-        int addressWithOffset(address + offset);
+        int const addressWithOffset(address + offset);
         auto symbolIterator = m_symbolMap.lower_bound(addressWithOffset);
         if (static_cast<int>(symbolIterator->first) <= addressWithOffset) {
             symbol = symbolIterator->second;
@@ -68,7 +68,7 @@ void BtsTraceDecoder::saveSymbolTable(std::string const& symbolTableFilePath, Sy
         cout << "Symbol table file is opened\n";
         AlbaFileReader symbolTableFileReader(symbolTableFileStream);
         while (symbolTableFileReader.isNotFinished()) {
-            string lineInFile(symbolTableFileReader.getLineAndIgnoreWhiteSpaces());
+            string const lineInFile(symbolTableFileReader.getLineAndIgnoreWhiteSpaces());
             saveLineInSymbolMapIfValid(getAddressFromLineInFile(lineInFile, filetype), lineInFile);
         }
     } else {
