@@ -24,7 +24,7 @@ on:
         description: 'Enable Address Sanitizer for Clang Builds'
         type: boolean
         required: true
-        default: true
+        default: false
       enableStaticAnalyzers:
         description: 'Enable Static Analyzers for Clang Builds'
         type: boolean
@@ -152,7 +152,7 @@ jobs:
             echo "User input is empty, [checkGit] is set as argument to script."
             "$determineCppProjectsPath" checkGit
           else
-            echo "User input isnot empty, [checkUserInput] is set as argument to script."
+            echo "User input is not empty, [checkUserInput] is set as argument to script."
             "$determineCppProjectsPath" checkUserInput "${{ inputs.cppProjects }}"
           fi
 
@@ -299,14 +299,42 @@ jobs:
           echo "clang version: [$(clang --version)]"
           "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
-      - name: Build and Run with Address Sanitizer
+      - name: Build
         shell: bash
-        if: contains(matrix.configurationName, 'Clang')
         working-directory: ${{ matrix.project }}
         run: |
-          buildAndRunScriptPath=$(realpath "$(pwd)/AprgAlgebra/AprgAlgebra/StaticAnalysisAutoFix.txt")
-          grep -E 'note:|style:|warning:|error:' "$buildAndRunScriptPath"
-          "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
+            
+      - name: Install
+        shell: bash
+        working-directory: ${{ matrix.project }}
+        run: |
+          "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
+
+      - name: Run
+        shell: bash
+        working-directory: ${{ matrix.project }}
+        run: |
+          "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
+            
+      - name: Build and Run with Address Sanitizer
+        shell: bash
+        if: contains(matrix.configurationName, 'Clang') && inputs.enableAsan
+        working-directory: ${{ matrix.project }}
+        run: |
+          "$buildAndRunScriptPath" cleanAndConfigureWithClangWithAsan "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          echo "Building and running with ASAN..."
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
+            
+      - name: Build and Run with Static Analyzers
+        shell: bash
+        if: contains(matrix.configurationName, 'Clang') && inputs.enableStaticAnalyzers
+        working-directory: ${{ matrix.project }}
+        run: |
+          "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          echo "Running Static Analysis..."
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
