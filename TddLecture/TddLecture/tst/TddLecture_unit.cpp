@@ -6,11 +6,11 @@ using namespace std;
 
 namespace alba {
 
-TEST(SampleTest, DISABLED_SampleTest1) { TddLecture entity; }
+TEST(SampleTest, DISABLED_SampleTest1) { TddLecture const entity; }
 
 TEST(SampleTest, SampleTest1) {
-    TddLecture entity;
-    TddLecture::UnsignedInts oneToTen(alba::TddLecture::getUnsignedIntsOneToTen());
+    TddLecture const entity;
+    TddLecture::UnsignedInts const oneToTen(alba::TddLecture::getUnsignedIntsOneToTen());
 
     // ASSERT_EQ(10, oneToTen.size()); // this will fail
 }
