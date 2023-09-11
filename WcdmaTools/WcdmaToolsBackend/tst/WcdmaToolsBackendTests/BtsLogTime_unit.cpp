@@ -11,7 +11,7 @@ using namespace std;
 namespace wcdmaToolsBackend {
 
 TEST(BtsLogTimeTest, DefaultConstructorIsEmpty) {
-    BtsLogTime logTime;
+    BtsLogTime const logTime;
     EXPECT_TRUE(logTime.isEmpty());
 }
 
@@ -23,7 +23,7 @@ TEST(BtsLogTimeTest, ClearingMakesItEmpty) {
 }
 
 TEST(BtsLogTimeTest, BtsTimeStampWithSevenNumbersIsUsed) {
-    BtsLogTime logTime(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565172Z");
+    BtsLogTime const logTime(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565172Z");
 
     EXPECT_EQ(2015U, logTime.getYears());
     EXPECT_EQ(8U, logTime.getMonths());
@@ -38,7 +38,7 @@ TEST(BtsLogTimeTest, BtsTimeStampWithSevenNumbersIsUsed) {
 }
 
 TEST(BtsLogTimeTest, BtsTimeStampWithSpacesAreStartAndEnd) {
-    BtsLogTime logTime(BtsLogTimeType::BtsTimeStamp, " <2015-08-20T18:14:51.565172Z> ");
+    BtsLogTime const logTime(BtsLogTimeType::BtsTimeStamp, " <2015-08-20T18:14:51.565172Z> ");
 
     EXPECT_EQ(2015U, logTime.getYears());
     EXPECT_EQ(8U, logTime.getMonths());
@@ -53,7 +53,7 @@ TEST(BtsLogTimeTest, BtsTimeStampWithSpacesAreStartAndEnd) {
 }
 
 TEST(BtsLogTimeTest, PcTimeStampWithSixNumbersIsUsed) {
-    BtsLogTime logTime(BtsLogTimeType::BtsTimeStamp, "13.09 05:24:24.772449");
+    BtsLogTime const logTime(BtsLogTimeType::BtsTimeStamp, "13.09 05:24:24.772449");
 
     EXPECT_EQ(0U, logTime.getYears());
     EXPECT_EQ(9U, logTime.getMonths());
@@ -68,7 +68,7 @@ TEST(BtsLogTimeTest, PcTimeStampWithSixNumbersIsUsed) {
 }
 
 TEST(BtsLogTimeTest, PcTimeStampIsUsed) {
-    BtsLogTime logTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:02.982");
+    BtsLogTime const logTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:02.982");
 
     EXPECT_EQ(0U, logTime.getYears());
     EXPECT_EQ(9U, logTime.getMonths());
@@ -83,14 +83,14 @@ TEST(BtsLogTimeTest, PcTimeStampIsUsed) {
 }
 
 TEST(BtsLogTimeTest, LessThanOperatorWorksAsIntended) {
-    BtsLogTime logTime1(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565172Z");
-    BtsLogTime logTime2(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565173Z");
-    BtsLogTime logTime3(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:52.565172Z");
-    BtsLogTime logTime4(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:15:51.565172Z");
-    BtsLogTime logTime5(BtsLogTimeType::BtsTimeStamp, "2015-08-20T19:14:51.565172Z");
-    BtsLogTime logTime6(BtsLogTimeType::BtsTimeStamp, "2015-08-21T18:14:51.565172Z");
-    BtsLogTime logTime7(BtsLogTimeType::BtsTimeStamp, "2015-09-20T18:14:51.565172Z");
-    BtsLogTime logTime8(BtsLogTimeType::BtsTimeStamp, "2016-08-20T18:14:51.565172Z");
+    BtsLogTime const logTime1(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565172Z");
+    BtsLogTime const logTime2(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565173Z");
+    BtsLogTime const logTime3(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:52.565172Z");
+    BtsLogTime const logTime4(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:15:51.565172Z");
+    BtsLogTime const logTime5(BtsLogTimeType::BtsTimeStamp, "2015-08-20T19:14:51.565172Z");
+    BtsLogTime const logTime6(BtsLogTimeType::BtsTimeStamp, "2015-08-21T18:14:51.565172Z");
+    BtsLogTime const logTime7(BtsLogTimeType::BtsTimeStamp, "2015-09-20T18:14:51.565172Z");
+    BtsLogTime const logTime8(BtsLogTimeType::BtsTimeStamp, "2016-08-20T18:14:51.565172Z");
 
     EXPECT_TRUE(logTime1 < logTime2);
     EXPECT_TRUE(logTime1 < logTime3);
@@ -113,14 +113,14 @@ TEST(BtsLogTimeTest, LessThanOperatorWorksAsIntended) {
 }
 
 TEST(BtsLogTimeTest, GreaterThanOperatorWorksAsIntended) {
-    BtsLogTime logTime1(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565172Z");
-    BtsLogTime logTime2(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565173Z");
-    BtsLogTime logTime3(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:52.565172Z");
-    BtsLogTime logTime4(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:15:51.565172Z");
-    BtsLogTime logTime5(BtsLogTimeType::BtsTimeStamp, "2015-08-20T19:14:51.565172Z");
-    BtsLogTime logTime6(BtsLogTimeType::BtsTimeStamp, "2015-08-21T18:14:51.565172Z");
-    BtsLogTime logTime7(BtsLogTimeType::BtsTimeStamp, "2015-09-20T18:14:51.565172Z");
-    BtsLogTime logTime8(BtsLogTimeType::BtsTimeStamp, "2016-08-20T18:14:51.565172Z");
+    BtsLogTime const logTime1(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565172Z");
+    BtsLogTime const logTime2(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565173Z");
+    BtsLogTime const logTime3(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:52.565172Z");
+    BtsLogTime const logTime4(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:15:51.565172Z");
+    BtsLogTime const logTime5(BtsLogTimeType::BtsTimeStamp, "2015-08-20T19:14:51.565172Z");
+    BtsLogTime const logTime6(BtsLogTimeType::BtsTimeStamp, "2015-08-21T18:14:51.565172Z");
+    BtsLogTime const logTime7(BtsLogTimeType::BtsTimeStamp, "2015-09-20T18:14:51.565172Z");
+    BtsLogTime const logTime8(BtsLogTimeType::BtsTimeStamp, "2016-08-20T18:14:51.565172Z");
 
     EXPECT_TRUE(logTime8 > logTime1);
     EXPECT_TRUE(logTime8 > logTime2);
@@ -143,14 +143,14 @@ TEST(BtsLogTimeTest, GreaterThanOperatorWorksAsIntended) {
 }
 
 TEST(BtsLogTimeTest, EqualityOperatorWorksAsIntended) {
-    BtsLogTime logTime1(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565172Z");
-    BtsLogTime logTime2(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565173Z");
-    BtsLogTime logTime3(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:52.565172Z");
-    BtsLogTime logTime4(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:15:51.565172Z");
-    BtsLogTime logTime5(BtsLogTimeType::BtsTimeStamp, "2015-08-20T19:14:51.565172Z");
-    BtsLogTime logTime6(BtsLogTimeType::BtsTimeStamp, "2015-08-21T18:14:51.565172Z");
-    BtsLogTime logTime7(BtsLogTimeType::BtsTimeStamp, "2015-09-20T18:14:51.565172Z");
-    BtsLogTime logTime8(BtsLogTimeType::BtsTimeStamp, "2016-08-20T18:14:51.565172Z");
+    BtsLogTime const logTime1(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565172Z");
+    BtsLogTime const logTime2(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565173Z");
+    BtsLogTime const logTime3(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:52.565172Z");
+    BtsLogTime const logTime4(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:15:51.565172Z");
+    BtsLogTime const logTime5(BtsLogTimeType::BtsTimeStamp, "2015-08-20T19:14:51.565172Z");
+    BtsLogTime const logTime6(BtsLogTimeType::BtsTimeStamp, "2015-08-21T18:14:51.565172Z");
+    BtsLogTime const logTime7(BtsLogTimeType::BtsTimeStamp, "2015-09-20T18:14:51.565172Z");
+    BtsLogTime const logTime8(BtsLogTimeType::BtsTimeStamp, "2016-08-20T18:14:51.565172Z");
 
     EXPECT_FALSE(logTime8 == logTime1);
     EXPECT_FALSE(logTime8 == logTime2);
@@ -172,45 +172,45 @@ TEST(BtsLogTimeTest, EqualityOperatorWorksAsIntended) {
 }
 
 TEST(BtsLogTimeTest, AdditionOperatorWorksAsIntended) {
-    BtsLogTime logTime1(BtsLogTimeType::BtsTimeStamp, "0000-00-01T01:01:01.1");
-    BtsLogTime logTime2(BtsLogTimeType::BtsTimeStamp, "2000-01-02T02:02:02.2");
-    BtsLogTime expectedAnswer(BtsLogTimeType::BtsTimeStamp, "2000-01-03T03:03:03.3");
+    BtsLogTime const logTime1(BtsLogTimeType::BtsTimeStamp, "0000-00-01T01:01:01.1");
+    BtsLogTime const logTime2(BtsLogTimeType::BtsTimeStamp, "2000-01-02T02:02:02.2");
+    BtsLogTime const expectedAnswer(BtsLogTimeType::BtsTimeStamp, "2000-01-03T03:03:03.3");
 
-    BtsLogTime actualAnswer = logTime1 + logTime2;
+    BtsLogTime const actualAnswer = logTime1 + logTime2;
     EXPECT_EQ(expectedAnswer, actualAnswer);
 }
 
 TEST(BtsLogTimeTest, AdditionOperatorWorksWithOverflowValues) {
-    BtsLogTime logTime1(BtsLogTimeType::BtsTimeStamp, "0000-00-00T00:00:00.000001");
-    BtsLogTime logTime2(BtsLogTimeType::BtsTimeStamp, "2000-01-01T23:59:59.999999");
-    BtsLogTime expectedAnswer(BtsLogTimeType::BtsTimeStamp, "2000-01-02T00:00:00.000000");
+    BtsLogTime const logTime1(BtsLogTimeType::BtsTimeStamp, "0000-00-00T00:00:00.000001");
+    BtsLogTime const logTime2(BtsLogTimeType::BtsTimeStamp, "2000-01-01T23:59:59.999999");
+    BtsLogTime const expectedAnswer(BtsLogTimeType::BtsTimeStamp, "2000-01-02T00:00:00.000000");
 
-    BtsLogTime actualAnswer = logTime1 + logTime2;
+    BtsLogTime const actualAnswer = logTime1 + logTime2;
     EXPECT_EQ(expectedAnswer, actualAnswer);
 }
 
 TEST(BtsLogTimeTest, SubtractionOperatorWorksAsIntended) {
-    BtsLogTime logTime1(BtsLogTimeType::BtsTimeStamp, "0000-00-01T01:01:01.1");
-    BtsLogTime logTime2(BtsLogTimeType::BtsTimeStamp, "2000-01-02T02:02:02.2");
-    BtsLogTime expectedAnswer(BtsLogTimeType::BtsTimeStamp, "2000-01-01T01:01:01.1");
+    BtsLogTime const logTime1(BtsLogTimeType::BtsTimeStamp, "0000-00-01T01:01:01.1");
+    BtsLogTime const logTime2(BtsLogTimeType::BtsTimeStamp, "2000-01-02T02:02:02.2");
+    BtsLogTime const expectedAnswer(BtsLogTimeType::BtsTimeStamp, "2000-01-01T01:01:01.1");
 
-    BtsLogTime actualAnswer = logTime2 - logTime1;
+    BtsLogTime const actualAnswer = logTime2 - logTime1;
     EXPECT_EQ(expectedAnswer, actualAnswer);
 }
 
 TEST(BtsLogTimeTest, SubtractionOperatorWithUnderflowValues) {
-    BtsLogTime logTime1(BtsLogTimeType::BtsTimeStamp, "0000-00-00T00:00:00.000001");
-    BtsLogTime logTime2(BtsLogTimeType::BtsTimeStamp, "2000-01-02T00:00:00.000000");
-    BtsLogTime expectedAnswer(BtsLogTimeType::BtsTimeStamp, "2000-01-01T23:59:59.999999");
+    BtsLogTime const logTime1(BtsLogTimeType::BtsTimeStamp, "0000-00-00T00:00:00.000001");
+    BtsLogTime const logTime2(BtsLogTimeType::BtsTimeStamp, "2000-01-02T00:00:00.000000");
+    BtsLogTime const expectedAnswer(BtsLogTimeType::BtsTimeStamp, "2000-01-01T23:59:59.999999");
 
-    BtsLogTime actualAnswer = logTime2 - logTime1;
+    BtsLogTime const actualAnswer = logTime2 - logTime1;
     EXPECT_EQ(expectedAnswer, actualAnswer);
 }
 
 TEST(BtsLogTimeTest, TheDataCanBeSavedToAndRetrieveFromFile) {
-    BtsLogTime sampleLogTime(BtsLogTimeType::BtsTimeStamp, "2000-01-01T23:59:59.999999");
+    BtsLogTime const sampleLogTime(BtsLogTimeType::BtsTimeStamp, "2000-01-01T23:59:59.999999");
     BtsLogTime testLogTime;
-    string pathOfTempFile(
+    string const pathOfTempFile(
         AlbaLocalPathHandler(
             APRG_DIR R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ImportantTestingFiles\TempTestFiles\temp.txt)")
             .getFullPath());

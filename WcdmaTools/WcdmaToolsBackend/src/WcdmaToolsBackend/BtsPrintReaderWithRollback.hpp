@@ -9,7 +9,7 @@ namespace wcdmaToolsBackend {
 class BtsPrintReaderWithRollback {
 public:
     BtsPrintReaderWithRollback();
-    bool isGood() const;
+    [[nodiscard]] bool isGood() const;
     void clear();
     void rollBackPrint();
     void openIfNeeded(std::string const& filePath);

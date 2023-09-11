@@ -90,7 +90,7 @@ void BtsLogTime::setTimeByTimeStamp(BtsLogTimeType const logTimeType, string con
     vector<unsigned int> timeValues;
     string timeValueString;
 
-    for (char character : timeStampString) {
+    for (char const character : timeStampString) {
         if (isNumber(character)) {
             timeValueString += character;
         } else if (!timeValueString.empty()) {
@@ -143,7 +143,7 @@ void BtsLogTime::setTimeByTimeStamp(BtsLogTimeType const logTimeType, string con
 void BtsLogTime::clearMicroSeconds() { m_dateTime.getMicroSecondsReference() = 0; }
 
 istream& operator>>(istream& in, BtsLogTime& btsLogTime) {
-    AlbaStreamParameterReader reader(in);
+    AlbaStreamParameterReader const reader(in);
     auto years(reader.readData<unsigned int>());
     auto months(reader.readData<unsigned int>());
     auto days(reader.readData<unsigned int>());

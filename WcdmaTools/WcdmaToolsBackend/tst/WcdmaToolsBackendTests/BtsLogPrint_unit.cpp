@@ -13,7 +13,7 @@ using namespace std;
 namespace wcdmaToolsBackend {
 
 TEST(BtsLogPrintTest, DefaultConstructorIsEmpty) {
-    BtsLogPrint logPrint;
+    BtsLogPrint const logPrint;
     EXPECT_TRUE(logPrint.isEmpty());
 }
 
@@ -28,14 +28,14 @@ TEST(BtsLogPrintTest, ClearingMakesItEmpty) {
 }
 
 TEST(BtsLogPrintTest, PrintFromBtsSyslogsIsUsed) {
-    BtsLogPrint logPrint(
+    BtsLogPrint const logPrint(
         "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSP-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
         "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
         "averagePowerRxLevel: 65");
-    BtsLogTime expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-09-23T09:06:04.156235Z");
-    BtsLogTime expectedPcTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:04.213");
-    string expectedHardwareType("FSP-120D");
-    string expectedPrint(
+    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-09-23T09:06:04.156235Z");
+    BtsLogTime const expectedPcTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:04.213");
+    string const expectedHardwareType("FSP-120D");
+    string const expectedPrint(
         "FSP-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG "
         "from 0x120D0156, size: 20 cellId: 1996, averagePowerRxLevel: 65");
 
@@ -46,14 +46,14 @@ TEST(BtsLogPrintTest, PrintFromBtsSyslogsIsUsed) {
 }
 
 TEST(BtsLogPrintTest, PrintFromBtsLogSorterIsUsed) {
-    BtsLogPrint logPrint(
+    BtsLogPrint const logPrint(
         "SYSLOG_73.LOG            |26.11 07:39:15.009000 FSP-120C-0-TCOMexe <2015-11-26T05:39:14.187399Z> 74 "
         "INF/TCOM/G, Received BB_SAMPLE_REPORT_IND_MSG Provider: MasterHsupa, SampleStartSfn: 0, SampledDataVolume: 0, "
         "CFs: 0, NumberOfUsers: 0, NumberOfCells: 0");
-    BtsLogTime expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-11-26T05:39:14.187399Z");
-    BtsLogTime expectedPcTime(BtsLogTimeType::PcTimeStamp, "26.11 07:39:15.009000");
-    string expectedHardwareType("FSP-120C");
-    string expectedPrint(
+    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-11-26T05:39:14.187399Z");
+    BtsLogTime const expectedPcTime(BtsLogTimeType::PcTimeStamp, "26.11 07:39:15.009000");
+    string const expectedHardwareType("FSP-120C");
+    string const expectedPrint(
         "FSP-120C-0-TCOMexe <2015-11-26T05:39:14.187399Z> 74 INF/TCOM/G, Received BB_SAMPLE_REPORT_IND_MSG Provider: "
         "MasterHsupa, SampleStartSfn: 0, SampledDataVolume: 0, CFs: 0, NumberOfUsers: 0, NumberOfCells: 0");
 
@@ -64,12 +64,12 @@ TEST(BtsLogPrintTest, PrintFromBtsLogSorterIsUsed) {
 }
 
 TEST(BtsLogPrintTest, PrintFromSnapshotIsUsed) {
-    BtsLogPrint logPrint(
+    BtsLogPrint const logPrint(
         "a7 FSP-140D-0-TCOMexe <22.10 11:38:33.309447> 83 INF/TCOM/Logger, RLH_TUP_HsdpaDeleteReq: nbccId: 1740, "
         "activationMethod: 2, cfn: 56, rcv: 0x14820363");
-    BtsLogTime expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "22.10 11:38:33.309447");
-    string expectedHardwareType("FSP-140D");
-    string expectedPrint(
+    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "22.10 11:38:33.309447");
+    string const expectedHardwareType("FSP-140D");
+    string const expectedPrint(
         "FSP-140D-0-TCOMexe <22.10 11:38:33.309447> 83 INF/TCOM/Logger, RLH_TUP_HsdpaDeleteReq: nbccId: 1740, "
         "activationMethod: 2, cfn: 56, rcv: 0x14820363");
 
@@ -80,11 +80,11 @@ TEST(BtsLogPrintTest, PrintFromSnapshotIsUsed) {
 }
 
 TEST(BtsLogPrintTest, PrintFromSctLogsIsUsed) {
-    BtsLogPrint logPrint(
+    BtsLogPrint const logPrint(
         "00 0x1011-0-ld-linux <2015-05-26T06:00:14.137037Z> 5A03 INF/TCOM/LRM/CCH, Cell waited for this "
         "modeChangeResp; cpuId: 0x14500000; cellId: 1");
-    BtsLogTime expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-05-26T06:00:14.137037Z");
-    string expectedPrint(
+    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-05-26T06:00:14.137037Z");
+    string const expectedPrint(
         "00 0x1011-0-ld-linux <2015-05-26T06:00:14.137037Z> 5A03 INF/TCOM/LRM/CCH, Cell waited for this "
         "modeChangeResp; cpuId: 0x14500000; cellId: 1");
 
@@ -95,13 +95,13 @@ TEST(BtsLogPrintTest, PrintFromSctLogsIsUsed) {
 }
 
 TEST(BtsLogPrintTest, HardwareTypeIsEmptyWhenInvalidHardwareTypesAreDetectedWithNothreeLetters) {
-    BtsLogPrint logPrint(
+    BtsLogPrint const logPrint(
         "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSPJ-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
         "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
         "averagePowerRxLevel: 65");
-    BtsLogTime expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-09-23T09:06:04.156235Z");
-    BtsLogTime expectedPcTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:04.213");
-    string expectedPrint(
+    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-09-23T09:06:04.156235Z");
+    BtsLogTime const expectedPcTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:04.213");
+    string const expectedPrint(
         "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSPJ-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
         "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
         "averagePowerRxLevel: 65");
@@ -113,13 +113,13 @@ TEST(BtsLogPrintTest, HardwareTypeIsEmptyWhenInvalidHardwareTypesAreDetectedWith
 }
 
 TEST(BtsLogPrintTest, HardwareTypeIsEmptyWhenInvalidHardwareTypesAreDetectedWithNoFourHexDigit) {
-    BtsLogPrint logPrint(
+    BtsLogPrint const logPrint(
         "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSP-120DE-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
         "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
         "averagePowerRxLevel: 65");
-    BtsLogTime expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-09-23T09:06:04.156235Z");
-    BtsLogTime expectedPcTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:04.213");
-    string expectedPrint(
+    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-09-23T09:06:04.156235Z");
+    BtsLogTime const expectedPcTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:04.213");
+    string const expectedPrint(
         "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSP-120DE-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
         "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
         "averagePowerRxLevel: 65");
@@ -131,13 +131,13 @@ TEST(BtsLogPrintTest, HardwareTypeIsEmptyWhenInvalidHardwareTypesAreDetectedWith
 }
 
 TEST(BtsLogPrintTest, RfHardwareTypesAreRecognized) {
-    BtsLogPrint logPrint(
+    BtsLogPrint const logPrint(
         "027966 17.12 14:10:43.903  [192.168.254.129]  d0 FRM_REL2 <2004-01-01T00:33:46.806457Z> 20088 INF/LTX/RX_VD, "
         "RX1: RX_SET_INPUT_ATTENUATOR_REQ attenuator 0 (StatusOk)");
-    BtsLogTime expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2004-01-01T00:33:46.806457Z");
-    BtsLogTime expectedPcTime(BtsLogTimeType::PcTimeStamp, "17.12 14:10:43.903");
-    string expectedHardwareType("FRM_REL2");
-    string expectedPrint(
+    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2004-01-01T00:33:46.806457Z");
+    BtsLogTime const expectedPcTime(BtsLogTimeType::PcTimeStamp, "17.12 14:10:43.903");
+    string const expectedHardwareType("FRM_REL2");
+    string const expectedPrint(
         "FRM_REL2 <2004-01-01T00:33:46.806457Z> 20088 INF/LTX/RX_VD, RX1: RX_SET_INPUT_ATTENUATOR_REQ attenuator 0 "
         "(StatusOk)");
 
@@ -148,25 +148,25 @@ TEST(BtsLogPrintTest, RfHardwareTypesAreRecognized) {
 }
 
 TEST(BtsLogPrintTest, OperatorLessThanWorksWhenHigherBtsTimeIsCompared) {
-    BtsLogPrint printWithNoPcTimeDuringLowerBtsStartupTime(
+    BtsLogPrint const printWithNoPcTimeDuringLowerBtsStartupTime(
         "FCT-1011-3-BTSOMex <1990-01-01T01:01:01.111111Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithNoPcTimeDuringLowerBtsRuntimeTime(
+    BtsLogPrint const printWithNoPcTimeDuringLowerBtsRuntimeTime(
         "FCT-1011-3-BTSOMex <2015-05-26T01:01:01.111111Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithPcTimeDuringLowerBtsStartupTime(
+    BtsLogPrint const printWithPcTimeDuringLowerBtsStartupTime(
         "000009 23.09 12:01:01.222  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T01:01:01.111111Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithPcTimeDuringLowerBtsRuntimeTime(
+    BtsLogPrint const printWithPcTimeDuringLowerBtsRuntimeTime(
         "000009 23.09 12:01:01.222  [192.168.255.1]  19 FCT-1011-3-BTSOMex <2015-05-26T01:01:01.111111Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
 
-    BtsLogPrint printWithNoPcTimeDuringHigherBtsStartupTime(
+    BtsLogPrint const printWithNoPcTimeDuringHigherBtsStartupTime(
         "FCT-1011-3-BTSOMex <1990-01-01T01:01:01.222222Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithNoPcTimeDuringHigherBtsRuntimeTime(
+    BtsLogPrint const printWithNoPcTimeDuringHigherBtsRuntimeTime(
         "FCT-1011-3-BTSOMex <2015-05-26T01:01:01.222222Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithPcTimeDuringHigherBtsStartupTime(
+    BtsLogPrint const printWithPcTimeDuringHigherBtsStartupTime(
         "000009 23.09 12:01:01.111  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T01:01:01.222222Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithPcTimeDuringHigherBtsRuntimeTime(
+    BtsLogPrint const printWithPcTimeDuringHigherBtsRuntimeTime(
         "000009 23.09 12:01:01.111  [192.168.255.1]  19 FCT-1011-3-BTSOMex <2015-05-26T01:01:01.222222Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
 
@@ -192,25 +192,25 @@ TEST(BtsLogPrintTest, OperatorLessThanWorksWhenHigherBtsTimeIsCompared) {
 }
 
 TEST(BtsLogPrintTest, OperatorLessThanWorksWhenLowerBtsTimeIsCompared) {
-    BtsLogPrint printWithNoPcTimeDuringLowerBtsStartupTime(
+    BtsLogPrint const printWithNoPcTimeDuringLowerBtsStartupTime(
         "FCT-1011-3-BTSOMex <1990-01-01T01:01:01.111111Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithNoPcTimeDuringLowerBtsRuntimeTime(
+    BtsLogPrint const printWithNoPcTimeDuringLowerBtsRuntimeTime(
         "FCT-1011-3-BTSOMex <2015-05-26T01:01:01.111111Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithPcTimeDuringLowerBtsStartupTime(
+    BtsLogPrint const printWithPcTimeDuringLowerBtsStartupTime(
         "000009 23.09 12:01:01.222  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T01:01:01.111111Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithPcTimeDuringLowerBtsRuntimeTime(
+    BtsLogPrint const printWithPcTimeDuringLowerBtsRuntimeTime(
         "000009 23.09 12:01:01.222  [192.168.255.1]  19 FCT-1011-3-BTSOMex <2015-05-26T01:01:01.111111Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
 
-    BtsLogPrint printWithNoPcTimeDuringHigherBtsStartupTime(
+    BtsLogPrint const printWithNoPcTimeDuringHigherBtsStartupTime(
         "FCT-1011-3-BTSOMex <1990-01-01T01:01:01.222222Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithNoPcTimeDuringHigherBtsRuntimeTime(
+    BtsLogPrint const printWithNoPcTimeDuringHigherBtsRuntimeTime(
         "FCT-1011-3-BTSOMex <2015-05-26T01:01:01.222222Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithPcTimeDuringHigherBtsStartupTime(
+    BtsLogPrint const printWithPcTimeDuringHigherBtsStartupTime(
         "000009 23.09 12:01:01.111  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T01:01:01.222222Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithPcTimeDuringHigherBtsRuntimeTime(
+    BtsLogPrint const printWithPcTimeDuringHigherBtsRuntimeTime(
         "000009 23.09 12:01:01.111  [192.168.255.1]  19 FCT-1011-3-BTSOMex <2015-05-26T01:01:01.222222Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
 
@@ -236,25 +236,25 @@ TEST(BtsLogPrintTest, OperatorLessThanWorksWhenLowerBtsTimeIsCompared) {
 }
 
 TEST(BtsLogPrintTest, OperatorGreaterThanWorksWhenLowerBtsTimeIsCompared) {
-    BtsLogPrint printWithNoPcTimeDuringLowerBtsStartupTime(
+    BtsLogPrint const printWithNoPcTimeDuringLowerBtsStartupTime(
         "FCT-1011-3-BTSOMex <1990-01-01T01:01:01.111111Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithNoPcTimeDuringLowerBtsRuntimeTime(
+    BtsLogPrint const printWithNoPcTimeDuringLowerBtsRuntimeTime(
         "FCT-1011-3-BTSOMex <2015-05-26T01:01:01.111111Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithPcTimeDuringLowerBtsStartupTime(
+    BtsLogPrint const printWithPcTimeDuringLowerBtsStartupTime(
         "000009 23.09 12:01:01.222  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T01:01:01.111111Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithPcTimeDuringLowerBtsRuntimeTime(
+    BtsLogPrint const printWithPcTimeDuringLowerBtsRuntimeTime(
         "000009 23.09 12:01:01.222  [192.168.255.1]  19 FCT-1011-3-BTSOMex <2015-05-26T01:01:01.111111Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
 
-    BtsLogPrint printWithNoPcTimeDuringHigherBtsStartupTime(
+    BtsLogPrint const printWithNoPcTimeDuringHigherBtsStartupTime(
         "FCT-1011-3-BTSOMex <1990-01-01T01:01:01.222222Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithNoPcTimeDuringHigherBtsRuntimeTime(
+    BtsLogPrint const printWithNoPcTimeDuringHigherBtsRuntimeTime(
         "FCT-1011-3-BTSOMex <2015-05-26T01:01:01.222222Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithPcTimeDuringHigherBtsStartupTime(
+    BtsLogPrint const printWithPcTimeDuringHigherBtsStartupTime(
         "000009 23.09 12:01:01.111  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T01:01:01.222222Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithPcTimeDuringHigherBtsRuntimeTime(
+    BtsLogPrint const printWithPcTimeDuringHigherBtsRuntimeTime(
         "000009 23.09 12:01:01.111  [192.168.255.1]  19 FCT-1011-3-BTSOMex <2015-05-26T01:01:01.222222Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
 
@@ -280,25 +280,25 @@ TEST(BtsLogPrintTest, OperatorGreaterThanWorksWhenLowerBtsTimeIsCompared) {
 }
 
 TEST(BtsLogPrintTest, OperatorGreaterThanWorksWhenHigherBtsTimeIsCompared) {
-    BtsLogPrint printWithNoPcTimeDuringLowerBtsStartupTime(
+    BtsLogPrint const printWithNoPcTimeDuringLowerBtsStartupTime(
         "FCT-1011-3-BTSOMex <1990-01-01T01:01:01.111111Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithNoPcTimeDuringLowerBtsRuntimeTime(
+    BtsLogPrint const printWithNoPcTimeDuringLowerBtsRuntimeTime(
         "FCT-1011-3-BTSOMex <2015-05-26T01:01:01.111111Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithPcTimeDuringLowerBtsStartupTime(
+    BtsLogPrint const printWithPcTimeDuringLowerBtsStartupTime(
         "000009 23.09 12:01:01.222  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T01:01:01.111111Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithPcTimeDuringLowerBtsRuntimeTime(
+    BtsLogPrint const printWithPcTimeDuringLowerBtsRuntimeTime(
         "000009 23.09 12:01:01.222  [192.168.255.1]  19 FCT-1011-3-BTSOMex <2015-05-26T01:01:01.111111Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
 
-    BtsLogPrint printWithNoPcTimeDuringHigherBtsStartupTime(
+    BtsLogPrint const printWithNoPcTimeDuringHigherBtsStartupTime(
         "FCT-1011-3-BTSOMex <1990-01-01T01:01:01.222222Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithNoPcTimeDuringHigherBtsRuntimeTime(
+    BtsLogPrint const printWithNoPcTimeDuringHigherBtsRuntimeTime(
         "FCT-1011-3-BTSOMex <2015-05-26T01:01:01.222222Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithPcTimeDuringHigherBtsStartupTime(
+    BtsLogPrint const printWithPcTimeDuringHigherBtsStartupTime(
         "000009 23.09 12:01:01.111  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T01:01:01.222222Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint printWithPcTimeDuringHigherBtsRuntimeTime(
+    BtsLogPrint const printWithPcTimeDuringHigherBtsRuntimeTime(
         "000009 23.09 12:01:01.111  [192.168.255.1]  19 FCT-1011-3-BTSOMex <2015-05-26T01:01:01.222222Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
 
@@ -324,15 +324,15 @@ TEST(BtsLogPrintTest, OperatorGreaterThanWorksWhenHigherBtsTimeIsCompared) {
 }
 
 TEST(BtsLogPrintTest, OperatorEqualityWorksBasedOnBtsTime) {
-    BtsLogPrint logPrint1(
+    BtsLogPrint const logPrint1(
         "000009 23.09 12:08:04.251  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T00:00:16.700634Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint logPrint2(
+    BtsLogPrint const logPrint2(
         "000009 23.09 12:08:04.251  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T00:00:16.700634Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint logPrint3(
+    BtsLogPrint const logPrint3(
         "FCT-1011-3-BTSOMex <1990-01-01T00:00:16.700634Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint differentTimePrint4(
+    BtsLogPrint const differentTimePrint4(
         "FCT-1011-3-BTSOMex <2004-01-01T00:00:17.856856> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
 
     EXPECT_TRUE(logPrint1 == logPrint2);
@@ -343,10 +343,10 @@ TEST(BtsLogPrintTest, OperatorEqualityWorksBasedOnBtsTime) {
 }
 
 TEST(BtsLogPrintTest, OperatorEqualityWorksBasedPrint) {
-    BtsLogPrint logPrint1(
+    BtsLogPrint const logPrint1(
         "000009 23.09 12:08:04.251  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T00:00:16.700634Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint differentPrint2(
+    BtsLogPrint const differentPrint2(
         "000009 23.09 12:08:04.251  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T00:00:16.700634Z> 2F9 "
         "INF/SUBSYSTEM/SUBCOMPONENT, This is a different print");
 
@@ -354,20 +354,20 @@ TEST(BtsLogPrintTest, OperatorEqualityWorksBasedPrint) {
 }
 
 TEST(BtsLogPrintTest, SyslogAndSnapshotPrintStartupComparisonTest) {
-    BtsLogPrint logPrint1(
+    BtsLogPrint const logPrint1(
         "022712 09.11 15:32:45.246  [192.168.255.129]  90 FCT-1011-0-HWRSwDl <2004-01-01T00:01:33.827322Z> 3C0 "
         "WRN/HWA/SWDL, 1");
-    BtsLogPrint logPrint2("9b FCT-1011-0-HWRSwDl <2004-01-01T00:01:34.533125Z> 3C0 WRN/HWA/SWDL, 2");
+    BtsLogPrint const logPrint2("9b FCT-1011-0-HWRSwDl <2004-01-01T00:01:34.533125Z> 3C0 WRN/HWA/SWDL, 2");
 
     EXPECT_TRUE(logPrint1 < logPrint2);
     EXPECT_FALSE(logPrint1 > logPrint2);
 }
 
 TEST(BtsLogPrintTest, SyslogAndSnapshotPrintRuntimeComparisonTest) {
-    BtsLogPrint logPrint1(
+    BtsLogPrint const logPrint1(
         "022712 09.11 15:32:45.246  [192.168.255.129]  90 FCT-1011-0-HWRSwDl <2015-01-01T00:01:33.827322Z> 3C0 "
         "WRN/HWA/SWDL, 1");
-    BtsLogPrint logPrint2("9b FCT-1011-0-HWRSwDl <2015-01-01T00:01:34.533125Z> 3C0 WRN/HWA/SWDL, 2");
+    BtsLogPrint const logPrint2("9b FCT-1011-0-HWRSwDl <2015-01-01T00:01:34.533125Z> 3C0 WRN/HWA/SWDL, 2");
 
     EXPECT_TRUE(logPrint1 < logPrint2);
     EXPECT_FALSE(logPrint1 > logPrint2);

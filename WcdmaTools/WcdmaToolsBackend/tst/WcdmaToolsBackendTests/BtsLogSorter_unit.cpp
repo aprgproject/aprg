@@ -26,10 +26,10 @@ TEST_F(BtsLogSorterTest, DISABLED_PerformanceTest) {
 
 TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreMerged) {
     BtsLogSorter btsLogSorter(m_configuration);
-    AlbaLocalPathHandler inputPathHandler(
+    AlbaLocalPathHandler const inputPathHandler(
         APRG_DIR
         R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ImportantTestingFiles\SyslogsAndSnapshotTest_PrintsAreMerged\input.log)");
-    AlbaLocalPathHandler outputPathHandler(
+    AlbaLocalPathHandler const outputPathHandler(
         APRG_DIR
         R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ImportantTestingFiles\SyslogsAndSnapshotTest_PrintsAreMerged\output.log)");
     btsLogSorter.processFile(inputPathHandler.getFullPath());
@@ -48,10 +48,10 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreMerged) {
 
 TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreMerged2) {
     BtsLogSorter btsLogSorter(m_configuration);
-    AlbaLocalPathHandler inputPathHandler(
+    AlbaLocalPathHandler const inputPathHandler(
         APRG_DIR
         R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ImportantTestingFiles\SyslogsAndSnapshotTest_PrintsAreMerged2\input.log)");
-    AlbaLocalPathHandler outputPathHandler(
+    AlbaLocalPathHandler const outputPathHandler(
         APRG_DIR
         R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ImportantTestingFiles\SyslogsAndSnapshotTest_PrintsAreMerged2\output.log)");
     btsLogSorter.processFile(inputPathHandler.getFullPath());
@@ -70,10 +70,10 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreMerged2) {
 
 TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreOrderedBasedOnBtsTime) {
     BtsLogSorter btsLogSorter(m_configuration);
-    AlbaLocalPathHandler inputPathHandler(
+    AlbaLocalPathHandler const inputPathHandler(
         APRG_DIR
         R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ImportantTestingFiles\SyslogsAndSnapshotTest_PrintsAreOrderedBasedOnBtsTime\input.log)");
-    AlbaLocalPathHandler outputPathHandler(
+    AlbaLocalPathHandler const outputPathHandler(
         APRG_DIR
         R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ImportantTestingFiles\SyslogsAndSnapshotTest_PrintsAreOrderedBasedOnBtsTime\output.log)");
     btsLogSorter.processFile(inputPathHandler.getFullPath());
@@ -94,10 +94,10 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotWorksWithPrintsAreFiltered) {
     m_configuration.m_isFilterGrepOn = true;
     m_configuration.m_filterGrepCondition = "[TCOM/NC]";
     BtsLogSorter btsLogSorter(m_configuration);
-    AlbaLocalPathHandler inputPathHandler(
+    AlbaLocalPathHandler const inputPathHandler(
         APRG_DIR
         R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ImportantTestingFiles\SyslogsAndSnapshotTest_PrintsAreFiltered\input.log)");
-    AlbaLocalPathHandler outputPathHandler(
+    AlbaLocalPathHandler const outputPathHandler(
         APRG_DIR
         R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ImportantTestingFiles\SyslogsAndSnapshotTest_PrintsAreFiltered\output.log)");
     btsLogSorter.processFile(inputPathHandler.getFullPath());

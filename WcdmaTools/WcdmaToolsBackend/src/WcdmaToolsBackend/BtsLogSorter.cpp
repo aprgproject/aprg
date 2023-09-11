@@ -49,7 +49,7 @@ void BtsLogSorter::processDirectory(string const& directoryPath) {
     AlbaLocalPathHandler(directoryPath).findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
     ProgressCounters::totalSizeToBeReadForCombine = getTotalSizeToBeRead(listOfFiles);
     for (string const& filePath : listOfFiles) {
-        AlbaLocalPathHandler filePathHandler(filePath);
+        AlbaLocalPathHandler const filePathHandler(filePath);
         if (m_acceptedFilesGrepEvaluator.evaluate(filePathHandler.getFile())) {
             processFile(filePathHandler.getFullPath());
         }
@@ -61,11 +61,11 @@ void BtsLogSorter::processFile(string const& filePath) {
     AlbaLocalPathHandler filePathHandler(filePath);
     cout << "processFile: " << filePathHandler.getFile() << "\n";
 
-    double previousTotalSize(ProgressCounters::totalSizeReadForCombine);
+    double const previousTotalSize(ProgressCounters::totalSizeReadForCombine);
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
     while (fileReader.isNotFinished()) {
-        string lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
         if (!m_isFilterOn || m_filterGrepEvaluator.evaluate(lineInFile)) {
             processLineInFile(filePathHandler.getFile(), lineInFile);
         }
@@ -75,7 +75,7 @@ void BtsLogSorter::processFile(string const& filePath) {
 }
 
 void BtsLogSorter::processLineInFile(string const& filename, string const& lineInFile) {
-    BtsLogPrint logPrint(filename, lineInFile);
+    BtsLogPrint const logPrint(filename, lineInFile);
     m_foundHardwareAddresses.emplace(logPrint.getHardwareAddress());
     if (logPrint.getPcTime().isEmpty()) {
         m_sorterWithoutPcTime.add(logPrint);
@@ -113,7 +113,7 @@ void BtsLogSorter::deleteFilesInDirectory(string const& directoryOfLogs) {
 
 string BtsLogSorter::getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
     string const& directory, string const& hardwareAddress) {
-    string filename = hardwareAddress.empty() ? "NoHardwareAddress" : hardwareAddress;
+    string const filename = hardwareAddress.empty() ? "NoHardwareAddress" : hardwareAddress;
     return AlbaLocalPathHandler(directory + R"(\)" + filename + R"(.log)").getFullPath();
 }
 
@@ -123,16 +123,16 @@ void BtsLogSorter::createTempDirectories() const {
 }
 
 void BtsLogSorter::deleteTempFilesAndDirectoriesOfOneDayOld() const {
-    AlbaLocalPathHandler tempFileAndDirectoryPathHandler(m_pathOfAllTempFiles);
+    AlbaLocalPathHandler const tempFileAndDirectoryPathHandler(m_pathOfAllTempFiles);
     ListOfPaths listOfFiles;
     ListOfPaths listOfDirectories;
     tempFileAndDirectoryPathHandler.findFilesAndDirectoriesOneDepth("*.*", listOfFiles, listOfDirectories);
-    AlbaDateTime currentTime(getCurrentDateTime());
-    AlbaDateTime oneDay(0, 0, 1, 0, 0, 0, 0);
+    AlbaDateTime const currentTime(getCurrentDateTime());
+    AlbaDateTime const oneDay(0, 0, 1, 0, 0, 0, 0);
     for (string const& directoryPath : listOfDirectories) {
         AlbaLocalPathHandler temporaryDirectoryPathHandler(directoryPath);
-        AlbaDateTime fileCreationTime(temporaryDirectoryPathHandler.getFileCreationTime());
-        AlbaDateTime difference = currentTime - fileCreationTime;
+        AlbaDateTime const fileCreationTime(temporaryDirectoryPathHandler.getFileCreationTime());
+        AlbaDateTime const difference = currentTime - fileCreationTime;
         if (difference > oneDay) {
             cout << "Difference: [" << difference << "] deleted temporaryPath:" << directoryPath << "\n";
             temporaryDirectoryPathHandler.deleteDirectoryWithFilesAndDirectories();
@@ -170,9 +170,9 @@ void BtsLogSorter::addStartupLogsOnSorterWithPcTime() {
     m_startupLogStreamOptional.reset();
     BtsPrintReaderWithRollback printReader;
     printReader.openIfNeeded(m_pathOfStartupLog);
-    double fileSize(AlbaLocalPathHandler(m_pathOfStartupLog).getFileSizeEstimate());
+    double const fileSize(AlbaLocalPathHandler(m_pathOfStartupLog).getFileSizeEstimate());
     while (printReader.isGood()) {
-        BtsLogPrint startupLogPrint(printReader.getPrint());
+        BtsLogPrint const startupLogPrint(printReader.getPrint());
         if (!startupLogPrint.isEmpty()) {
             m_sorterWithPcTime.add(startupLogPrint);
         }
@@ -230,7 +230,7 @@ void BtsLogSorter::writeLogsWithPcTimeToOutputFile(ofstream& outputLogFileStream
 
 void BtsLogSorter::addPrintsFromReaderToSorterWithoutPcTime(BtsPrintReaderWithRollback& printReader) {
     while (printReader.isGood()) {
-        BtsLogPrint logPrintWithoutPcTime(printReader.getPrint());
+        BtsLogPrint const logPrintWithoutPcTime(printReader.getPrint());
         if (!logPrintWithoutPcTime.isEmpty()) {
             m_sorterWithoutPcTime.add(logPrintWithoutPcTime);
         }
@@ -240,7 +240,7 @@ void BtsLogSorter::addPrintsFromReaderToSorterWithoutPcTime(BtsPrintReaderWithRo
 void BtsLogSorter::writePrintsFromFileReaderBeforeThisPrint(
     BtsPrintReaderWithRollback& printReader, BtsLogPrint const& logPrint, ofstream& outputLogFileStream) {
     while (printReader.isGood()) {
-        BtsLogPrint logPrintWithoutPcTime(printReader.getPrint());
+        BtsLogPrint const logPrintWithoutPcTime(printReader.getPrint());
         if (logPrintWithoutPcTime.getBtsTime() < logPrint.getBtsTime() ||
             logPrintWithoutPcTime.getBtsTime() == logPrint.getBtsTime()) {
             if (!logPrintWithoutPcTime.isEmpty()) {

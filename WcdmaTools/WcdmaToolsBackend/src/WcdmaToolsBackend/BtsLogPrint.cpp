@@ -23,10 +23,10 @@ BtsLogPrint::BtsLogPrint(string const& filename, string const& lineInLogs) : m_f
 }
 
 bool BtsLogPrint::operator<(BtsLogPrint const& btsLogPrintToCompare) const {
-    bool hasPcTime1 = !m_pcTime.isEmpty();
-    bool hasPcTime2 = !btsLogPrintToCompare.m_pcTime.isEmpty();
-    bool isStartup1 = m_btsTime.isStartup();
-    bool isStartup2 = btsLogPrintToCompare.m_btsTime.isStartup();
+    bool const hasPcTime1 = !m_pcTime.isEmpty();
+    bool const hasPcTime2 = !btsLogPrintToCompare.m_pcTime.isEmpty();
+    bool const isStartup1 = m_btsTime.isStartup();
+    bool const isStartup2 = btsLogPrintToCompare.m_btsTime.isStartup();
 
     if (hasPcTime1 && hasPcTime2 && (isStartup1 || isStartup2)) {
         if (m_pcTime == btsLogPrintToCompare.m_pcTime) {
@@ -40,10 +40,10 @@ bool BtsLogPrint::operator<(BtsLogPrint const& btsLogPrintToCompare) const {
 }
 
 bool BtsLogPrint::operator>(BtsLogPrint const& btsLogPrintToCompare) const {
-    bool hasPcTime1 = !m_pcTime.isEmpty();
-    bool hasPcTime2 = !btsLogPrintToCompare.m_pcTime.isEmpty();
-    bool isStartup1 = m_btsTime.isStartup();
-    bool isStartup2 = btsLogPrintToCompare.m_btsTime.isStartup();
+    bool const hasPcTime1 = !m_pcTime.isEmpty();
+    bool const hasPcTime2 = !btsLogPrintToCompare.m_pcTime.isEmpty();
+    bool const isStartup1 = m_btsTime.isStartup();
+    bool const isStartup2 = btsLogPrintToCompare.m_btsTime.isStartup();
 
     if (hasPcTime1 && hasPcTime2 && (isStartup1 || isStartup2)) {
         if (m_pcTime == btsLogPrintToCompare.m_pcTime) {
@@ -91,7 +91,7 @@ void BtsLogPrint::updatePcTimeAndFileNameDetails(BtsLogPrint const& logPrint) {
 }
 
 istream& operator>>(istream& in, BtsLogPrint& btsLogPrint) {
-    AlbaStreamParameterReader reader(in);
+    AlbaStreamParameterReader const reader(in);
     btsLogPrint.m_btsTime = reader.readData<BtsLogTime>();
     btsLogPrint.m_pcTime = reader.readData<BtsLogTime>();
     btsLogPrint.m_hardwareAddress = reader.readData<string>();
