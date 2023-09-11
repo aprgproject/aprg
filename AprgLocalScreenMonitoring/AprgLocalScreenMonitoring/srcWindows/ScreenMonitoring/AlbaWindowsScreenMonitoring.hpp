@@ -12,7 +12,7 @@ class AlbaWindowsScreenMonitoring {
 public:
     AlbaWindowsScreenMonitoring();
     ~AlbaWindowsScreenMonitoring();
-    uint32_t getColorAt(int const x, int const y) const;
+    [[nodiscard]] uint32_t getColorAt(int const x, int const y) const;
     void capturePixelsFromScreen();
 
 private:
