@@ -23,7 +23,8 @@ public:
                 continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
                 ALBA_DBG_PRINT1("pass1004");
                 ALBA_DBG_PRINT2("pass10001", std::distance(valuesToSort.begin(), insertIt));
-                ALBA_DBG_PRINT2("pass10002", *insertIt);
+                ALBA_DBG_PRINT2("pass10002", valuesToSort);
+                ALBA_DBG_PRINT2("pass10003", *insertIt);
                 // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
             }
             ALBA_DBG_PRINT1("pass1005");
