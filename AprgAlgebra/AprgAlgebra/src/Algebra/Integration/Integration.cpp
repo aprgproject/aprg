@@ -224,12 +224,12 @@ void Integration::fillInMatrixForPartialFractionsWithVariableValues(
             if (variableName == originalVariableName) {
                 auto itPosition = exponents.find(exponent);
                 if (itPosition != exponents.cend()) {
-                    exponentPosition = distance(exponents.cbegin(), itPosition);
+                    exponentPosition = static_cast<int>(distance(exponents.cbegin(), itPosition));
                 }
             } else {
                 auto itPosition = newVariableNames.find(variableName);
                 if (itPosition != newVariableNames.cend()) {
-                    variablePosition = distance(newVariableNames.cbegin(), itPosition);
+                    variablePosition = static_cast<int>(distance(newVariableNames.cbegin(), itPosition));
                     isVariablePositionFound = true;
                 }
             }
@@ -250,7 +250,7 @@ void Integration::fillInMatrixForPartialFractionsWithOutputValues(
             if (variableName == originalVariableName) {
                 auto itPosition = exponents.find(exponent);
                 if (itPosition != exponents.cend()) {
-                    exponentPosition = distance(exponents.cbegin(), itPosition);
+                    exponentPosition = static_cast<int>(distance(exponents.cbegin(), itPosition));
                 }
             }
         }
@@ -372,7 +372,8 @@ void Integration::fixTrigonometricFunctionsBasedFromExponents(
     Term& term, InputTermToTrigonometryFunctionExponentsMap const& trigFunctionsInputTermToExponents,
     TermsRaiseToNumbers const& remainingTermsWithExponents) {
     if (!trigFunctionsInputTermToExponents.empty()) {
-        InputTermToTrigonometryFunctionExponentsMap const newTrigFunctionsInputTermToExponents(
+        // NOLINTNEXTLINE(misc-const-correctness)
+        InputTermToTrigonometryFunctionExponentsMap newTrigFunctionsInputTermToExponents(
             trigFunctionsInputTermToExponents);
         bool isChanged(false);
         for (auto& [_, exponents] : newTrigFunctionsInputTermToExponents) {
@@ -1160,7 +1161,7 @@ void Integration::integrateUsingTrigonometricSubstitutionWithDeterminedTerms(
 
 void Integration::integrateInMultiplicationOrDivisionByTryingReverseChainRule(
     Term& result, TermsWithDetails const& termsWithDetailsInMultiplicationOrDivision) {
-    int const numberOfTerms(termsWithDetailsInMultiplicationOrDivision.size());
+    int const numberOfTerms(static_cast<int>(termsWithDetailsInMultiplicationOrDivision.size()));
     for (int i = 0; result.isEmpty() && i < numberOfTerms; ++i) {
         TermsWithDetails termsInFirstTerms(termsWithDetailsInMultiplicationOrDivision);
         termsInFirstTerms.erase(termsInFirstTerms.cbegin() + i);
@@ -1326,7 +1327,7 @@ void Integration::integrateUsingIntegrationByPartsByTryingTwoTerms(Term& result,
         if (OperatorLevel::MultiplicationAndDivision == expression.getCommonOperatorLevel()) {
             TermsWithDetails const& termsWithDetailsInMultiplicationAndDivision(
                 expression.getTermsWithAssociation().getTermsWithDetails());
-            int const numberOfTerms(termsWithDetailsInMultiplicationAndDivision.size());
+            int const numberOfTerms(static_cast<int>(termsWithDetailsInMultiplicationAndDivision.size()));
             for (int i = 0; result.isEmpty() && i < numberOfTerms; ++i) {
                 TermsWithDetails termsInFirstTerms(termsWithDetailsInMultiplicationAndDivision);
                 termsInFirstTerms.erase(termsInFirstTerms.cbegin() + i);
