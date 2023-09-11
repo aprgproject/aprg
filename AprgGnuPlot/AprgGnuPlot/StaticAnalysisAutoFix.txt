@@ -1,3 +1,17 @@
-StaticAnalysisJobIdentifier: [56]
-2023-09-09T17:37:48
+StaticAnalysisJobIdentifier: [011]
+2023-09-11T05:40:56
+[35m2023-09-11T05:42:16[0m | [33mBuildAndRun.sh:28[0m | The current path is [/d/a/aprg/aprg/AprgGnuPlot/AprgGnuPlot].
+[35m2023-09-11T05:42:16[0m | [33mBuildAndRun.sh:29[0m | The scriptPath is [/d/a/aprg/aprg/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh].
+[35m2023-09-11T05:42:16[0m | [33mBuildAndRun.sh:30[0m | The scriptOption is [buildOnOneCore].
+[35m2023-09-11T05:42:16[0m | [33mBuildAndRun.sh:31[0m | The buildDirectoryName is [StaticAnalyzersBuild].
+[35m2023-09-11T05:42:16[0m | [33mBuildAndRun.sh:32[0m | The argument1 is [Debug] and argument2 is [].
+[35m2023-09-11T05:42:16[0m | [33mBuildAndRun.sh:33[0m | The immediateDirectoryName is [AprgGnuPlot].
+[35m2023-09-11T05:42:16[0m | [33mBuildAndRun.sh:84[0m | The buildType is [Debug].
+[35m2023-09-11T05:42:16[0m | [33mBuildAndRun.sh:85[0m | The numberOfCores is [2].
+[35m2023-09-11T05:42:16[0m | [33mBuildAndRun.sh:68[0m | The build path is [/d/a/aprg/aprg/AprgGnuPlot/StaticAnalyzersBuild] and the output of [ls -la --color=auto]:
+total 28
+drwxr-xr-x 1 runneradmin 197121     0 Sep 11 05:42 .
+drwxr-xr-x 1 runneradmin 197121     0 Sep 11 05:40 ..
+-rw-r--r-- 1 runneradmin 197121 20166 Sep 11 05:42 CMakeCache.txt
+drwxr-xr-x 1 runneradmin 197121     0 Sep 11 05:42 CMakeFiles
 DONE!
