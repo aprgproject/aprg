@@ -1,22 +1,22 @@
 StaticAnalysisJobIdentifier: [011]
-2023-09-11T08:52:55
-[35m2023-09-11T08:54:18[0m | [33mBuildAndRun.sh:28[0m | The current path is [/d/a/aprg/aprg/AprgCommon/AprgCommon].
-[35m2023-09-11T08:54:18[0m | [33mBuildAndRun.sh:29[0m | The scriptPath is [/d/a/aprg/aprg/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh].
-[35m2023-09-11T08:54:18[0m | [33mBuildAndRun.sh:30[0m | The scriptOption is [buildOnOneCore].
-[35m2023-09-11T08:54:18[0m | [33mBuildAndRun.sh:31[0m | The buildDirectoryName is [StaticAnalyzersBuild].
-[35m2023-09-11T08:54:18[0m | [33mBuildAndRun.sh:32[0m | The argument1 is [Debug] and argument2 is [].
-[35m2023-09-11T08:54:18[0m | [33mBuildAndRun.sh:33[0m | The immediateDirectoryName is [AprgCommon].
-[35m2023-09-11T08:54:18[0m | [33mBuildAndRun.sh:84[0m | The buildType is [Debug].
-[35m2023-09-11T08:54:18[0m | [33mBuildAndRun.sh:85[0m | The numberOfCores is [2].
-[35m2023-09-11T08:54:18[0m | [33mBuildAndRun.sh:68[0m | The build path is [/d/a/aprg/aprg/AprgCommon/StaticAnalyzersBuild] and the output of [ls -la --color=auto]:
+2023-09-11T10:27:12
+[35m2023-09-11T10:28:28[0m | [33mBuildAndRun.sh:28[0m | The current path is [/d/a/aprg/aprg/AprgCommon/AprgCommon].
+[35m2023-09-11T10:28:28[0m | [33mBuildAndRun.sh:29[0m | The scriptPath is [/d/a/aprg/aprg/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh].
+[35m2023-09-11T10:28:28[0m | [33mBuildAndRun.sh:30[0m | The scriptOption is [buildOnOneCore].
+[35m2023-09-11T10:28:29[0m | [33mBuildAndRun.sh:31[0m | The buildDirectoryName is [StaticAnalyzersBuild].
+[35m2023-09-11T10:28:29[0m | [33mBuildAndRun.sh:32[0m | The argument1 is [Debug] and argument2 is [].
+[35m2023-09-11T10:28:29[0m | [33mBuildAndRun.sh:33[0m | The immediateDirectoryName is [AprgCommon].
+[35m2023-09-11T10:28:29[0m | [33mBuildAndRun.sh:84[0m | The buildType is [Debug].
+[35m2023-09-11T10:28:29[0m | [33mBuildAndRun.sh:85[0m | The numberOfCores is [2].
+[35m2023-09-11T10:28:29[0m | [33mBuildAndRun.sh:68[0m | The build path is [/d/a/aprg/aprg/AprgCommon/StaticAnalyzersBuild] and the output of [ls -la --color=auto]:
 total 269
-drwxr-xr-x 1 runneradmin 197121      0 Sep 11 08:54 .
-drwxr-xr-x 1 runneradmin 197121      0 Sep 11 08:52 ..
--rw-r--r-- 1 runneradmin 197121  18056 Sep 11 08:54 CMakeCache.txt
-drwxr-xr-x 1 runneradmin 197121      0 Sep 11 08:54 CMakeFiles
--rw-r--r-- 1 runneradmin 197121    522 Sep 11 08:54 CTestTestfile.cmake
--rw-r--r-- 1 runneradmin 197121 237260 Sep 11 08:54 build.ninja
--rw-r--r-- 1 runneradmin 197121   2256 Sep 11 08:54 cmake_install.cmake
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 10:28 .
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 10:27 ..
+-rw-r--r-- 1 runneradmin 197121  17979 Sep 11 10:28 CMakeCache.txt
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 10:28 CMakeFiles
+-rw-r--r-- 1 runneradmin 197121    522 Sep 11 10:28 CTestTestfile.cmake
+-rw-r--r-- 1 runneradmin 197121 237260 Sep 11 10:28 build.ninja
+-rw-r--r-- 1 runneradmin 197121   2256 Sep 11 10:28 cmake_install.cmake
 [1/126] Building CXX object CMakeFiles/gtest.dir/D_/a/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc.obj
 In file included from D:/a/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:49:
 D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
@@ -287,5 +287,5 @@ D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Macros\AlbaXMacros_unit.cpp
 [124/126] Building CXX object CMakeFiles/AprgCommon.dir/tstWindows/CommonTests/PathHandler/AlbaWindowsPathHandler_unit.cpp.obj
 [125/126] Building CXX object CMakeFiles/AprgCommon.dir/tstWindows/CommonTests/Time/AlbaWindowsTimer_unit.cpp.obj
 [126/126] Linking CXX executable AprgCommon.exe
-[35m2023-09-11T10:21:15[0m | [33mBuildAndRun.sh:218[0m | The script [BuildAndRun.sh] for [buildOnOneCore] is finished.
+[35m2023-09-11T11:46:11[0m | [33mBuildAndRun.sh:218[0m | The script [BuildAndRun.sh] for [buildOnOneCore] is finished.
 DONE!
