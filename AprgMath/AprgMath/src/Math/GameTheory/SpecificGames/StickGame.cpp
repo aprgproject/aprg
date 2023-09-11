@@ -20,7 +20,7 @@ GameState StickGame::getGameState(UnsignedInteger const remainingSticks) const {
 UnsignedInteger StickGame::getOptimalNumberOfSticksToTake(UnsignedInteger const remainingSticks) const {
     UnsignedInteger result(0);
     if (remainingSticks > 0) {
-        UnsignedInteger remainder = remainingSticks % (m_maxSticksToTake + 1);
+        UnsignedInteger const remainder = remainingSticks % (m_maxSticksToTake + 1);
         if (remainder == 0) {
             result = 1U;  // Just take one to prolong the game
         } else {

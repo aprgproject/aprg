@@ -57,7 +57,7 @@ private:
         for (int i = 0; i < MAX_STATE_VALUE; ++i) {
             inputMatrix.setEntry(0U, i, current[i]);
         }
-        ProbabilityMatrix outputMatrix = m_probabilityMatrix * inputMatrix;
+        ProbabilityMatrix const outputMatrix = m_probabilityMatrix * inputMatrix;
         ProbabilityDistribution result;
         for (int i = 0; i < MAX_STATE_VALUE; ++i) {
             result[i] = outputMatrix.getEntry(0U, i);

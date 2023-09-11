@@ -30,8 +30,8 @@ PythagoreanTriple getPrimitivePythagoreanTripleUsingEuclidFormula(
     PythagoreanTriple result;
     if (0 < seedValueM && seedValueM < seedValueN && isCoPrime(seedValueM, seedValueN) &&
         (isEven(seedValueM) || isEven(seedValueN))) {
-        UnsignedInteger mSquared = seedValueM * seedValueM;
-        UnsignedInteger nSquared = seedValueN * seedValueN;
+        UnsignedInteger const mSquared = seedValueM * seedValueM;
+        UnsignedInteger const nSquared = seedValueN * seedValueN;
         result = PythagoreanTriple{nSquared - mSquared, 2 * seedValueN * seedValueM, nSquared + mSquared};
     }
     return result;
@@ -46,7 +46,7 @@ bool isPythagoreanTriple(PythagoreanTriple const& triple) {
 bool isPrimitive(PythagoreanTriple const& triple) {
     // A Pythagorean triple is primitive if a, b and c are coprime,
     // and all Pythagorean triples can be constructed from primitive triples using a multiplier k.
-    UnsignedInteger gcfOfABC =
+    UnsignedInteger const gcfOfABC =
         getGreatestCommonFactor(getGreatestCommonFactor(get<0>(triple), get<1>(triple)), get<2>(triple));
     return gcfOfABC == 1;
 }

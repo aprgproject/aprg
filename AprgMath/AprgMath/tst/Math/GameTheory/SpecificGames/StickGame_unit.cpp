@@ -7,7 +7,7 @@ using namespace std;
 namespace alba::math {
 
 TEST(StickGameTest, GetGameStateWorks) {
-    StickGame stickGame(3U);
+    StickGame const stickGame(3U);
 
     EXPECT_EQ(GameState::Losing, stickGame.getGameState(0U));
     EXPECT_EQ(GameState::Winning, stickGame.getGameState(1U));
@@ -21,7 +21,7 @@ TEST(StickGameTest, GetGameStateWorks) {
 }
 
 TEST(StickGameTest, GetOptimalNumberOfSticksToTakeWorks) {
-    StickGame stickGame(3U);
+    StickGame const stickGame(3U);
 
     EXPECT_EQ(0U, stickGame.getOptimalNumberOfSticksToTake(0U));
     EXPECT_EQ(1U, stickGame.getOptimalNumberOfSticksToTake(1U));

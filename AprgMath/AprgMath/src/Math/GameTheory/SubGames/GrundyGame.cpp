@@ -16,10 +16,10 @@ bool GrundyGame::hasNoMoves() const {
 }
 
 void GrundyGame::split(HeapIndexAndFirstPileAndSecondPile const& heapIndexAndFirstPileAndSecondPile) {
-    UnsignedInteger index = get<0>(heapIndexAndFirstPileAndSecondPile);
+    UnsignedInteger const index = get<0>(heapIndexAndFirstPileAndSecondPile);
     if (index < m_stickHeaps.size()) {
-        UnsignedInteger firstPile = get<1>(heapIndexAndFirstPileAndSecondPile);
-        UnsignedInteger secondPile = get<2>(heapIndexAndFirstPileAndSecondPile);
+        UnsignedInteger const firstPile = get<1>(heapIndexAndFirstPileAndSecondPile);
+        UnsignedInteger const secondPile = get<2>(heapIndexAndFirstPileAndSecondPile);
         if (m_stickHeaps[index] == firstPile + secondPile) {
             m_stickHeaps.erase(m_stickHeaps.begin() + index);
             m_stickHeaps.emplace(m_stickHeaps.begin() + index, secondPile);
@@ -32,8 +32,8 @@ GameState GrundyGame::getGameState() { return getGameStateFromGrundyNumber(getOv
 
 GrundyGame::HeapIndexAndFirstPileAndSecondPile GrundyGame::getOptimalWayToSplit() {
     HeapIndexAndFirstPileAndSecondPile result{};
-    UnsignedInteger overallGrundyNumber = getOverallGrundyNumber();
-    GameState gameState = getGameStateFromGrundyNumber(overallGrundyNumber);
+    UnsignedInteger const overallGrundyNumber = getOverallGrundyNumber();
+    GameState const gameState = getGameStateFromGrundyNumber(overallGrundyNumber);
     if (GameState::Losing == gameState) {
         for (UnsignedInteger heapIndex = 0; heapIndex < m_stickHeaps.size(); ++heapIndex) {
             UnsignedInteger const& stickHeap(m_stickHeaps[heapIndex]);
@@ -47,10 +47,10 @@ GrundyGame::HeapIndexAndFirstPileAndSecondPile GrundyGame::getOptimalWayToSplit(
         bool isFound(false);
         for (UnsignedInteger heapIndex = 0; !isFound && heapIndex < m_stickHeaps.size(); ++heapIndex) {
             UnsignedInteger const& stickHeap(m_stickHeaps[heapIndex]);
-            UnsignedInteger grundyNumberAtIndex = getGrundyNumberWithNumberOfSticks(stickHeap);
-            UnsignedInteger hammingDistance = grundyNumberAtIndex ^ overallGrundyNumber;
+            UnsignedInteger const grundyNumberAtIndex = getGrundyNumberWithNumberOfSticks(stickHeap);
+            UnsignedInteger const hammingDistance = grundyNumberAtIndex ^ overallGrundyNumber;
             for (int a = (static_cast<int>(stickHeap) - 1) / 2; !isFound && a > 0; --a) {
-                int b = static_cast<int>(stickHeap) - a;
+                int const b = static_cast<int>(stickHeap) - a;
                 if (hammingDistance ==
                     getCombinedGrundyNumber(
                         getGrundyNumberWithNumberOfSticks(a), getGrundyNumberWithNumberOfSticks(b))) {
@@ -74,9 +74,9 @@ UnsignedInteger GrundyGame::getOverallGrundyNumber() {
 SetOfUnsignedIntegers GrundyGame::getNextGrundyNumbersWithNumberOfSticks(UnsignedInteger const numberOfSticks) {
     SetOfUnsignedIntegers result;
 
-    UnsignedInteger limit = (numberOfSticks + 1) / 2;
+    UnsignedInteger const limit = (numberOfSticks + 1) / 2;
     for (int a = 1; a < static_cast<int>(limit); ++a) {
-        int b = numberOfSticks - a;
+        int const b = numberOfSticks - a;
         result.emplace(
             getCombinedGrundyNumber(getGrundyNumberWithNumberOfSticks(a), getGrundyNumberWithNumberOfSticks(b)));
     }

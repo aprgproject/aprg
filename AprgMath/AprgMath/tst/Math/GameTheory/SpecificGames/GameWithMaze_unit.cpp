@@ -12,7 +12,7 @@ using Coordinate = GameWithMaze::Coordinate;
 }  // namespace
 
 TEST(GameWithMazeTest, Example1Works) {
-    BooleanMatrix isBlockedMatrix(
+    BooleanMatrix const isBlockedMatrix(
         5U, 5U, {false, false, true, false, false, true,  false, false, false, true,  false, false, true,
                  false, false, true, false, false, false, false, false, false, false, false, false});
     GameWithMaze gameWithMaze(isBlockedMatrix);

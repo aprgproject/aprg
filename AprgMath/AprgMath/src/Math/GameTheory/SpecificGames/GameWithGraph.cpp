@@ -27,12 +27,12 @@ UnsignedInteger GameWithGraph::getGrundyNumberAt(Vertex const vertex) {
 
 GameWithGraph::Vertex GameWithGraph::getOptimalNextVertexAt(Vertex const vertex) {
     Vertex result{};
-    GameState gameState = getGameStateFromGrundyNumber(getGrundyNumberAt(vertex));
+    GameState const gameState = getGameStateFromGrundyNumber(getGrundyNumberAt(vertex));
     if (GameState::Losing == gameState) {
         bool isFirst(true);
         UnsignedInteger maxGrundyNumber(0U);
         for (Vertex const nextVertex : m_graph.getAdjacentVerticesAt(vertex)) {
-            UnsignedInteger grundyNumber(getGrundyNumberAt(vertex));
+            UnsignedInteger const grundyNumber(getGrundyNumberAt(vertex));
             if (isFirst || maxGrundyNumber < grundyNumber) {
                 isFirst = false;
                 maxGrundyNumber = grundyNumber;
@@ -54,7 +54,7 @@ GameWithGraph::Vertex GameWithGraph::getOptimalNextVertexAt(Vertex const vertex)
 
 SetOfUnsignedIntegers GameWithGraph::getNextGrundyNumbers(Vertex const vertex) {
     SetOfUnsignedIntegers result;
-    Vertices nextVertices(m_graph.getAdjacentVerticesAt(vertex));
+    Vertices const nextVertices(m_graph.getAdjacentVerticesAt(vertex));
     transform(
         nextVertices.cbegin(), nextVertices.cend(), inserter(result, result.begin()),
         [&](Vertex const nextVertex) { return getGrundyNumberAt(nextVertex); });

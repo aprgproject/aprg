@@ -13,13 +13,13 @@ using GameIndexAndCoordinatePair = MultipleGamesWithMaze::GameIndexAndCoordinate
 }  // namespace
 
 TEST(MultipleGamesWithMazeTest, Example1Works) {
-    BooleanMatrix firstGameMatrix(
+    BooleanMatrix const firstGameMatrix(
         5U, 5U, {false, false, true, false, false, true,  false, false, false, true,  false, false, true,
                  false, false, true, false, false, false, false, false, false, false, false, false});
-    BooleanMatrix secondGameMatrix(
+    BooleanMatrix const secondGameMatrix(
         5U, 5U, {false, false, false, false, true,  false, false, true,  false, false, false, true, false,
                  false, false, false, true,  false, false, false, false, false, false, false, false});
-    BooleanMatrix thirdGameMatrix(
+    BooleanMatrix const thirdGameMatrix(
         5U, 5U, {false, false, false, false, false, false, true,  true,  true,  false, false, true, true,
                  true,  false, false, true,  true,  true,  false, false, false, false, false, false});
     MultipleGamesWithMaze games;

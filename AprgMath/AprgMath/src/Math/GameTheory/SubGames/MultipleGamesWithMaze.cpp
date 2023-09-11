@@ -33,8 +33,8 @@ void MultipleGamesWithMaze::addGameWithMaze(
 
 MultipleGamesWithMaze::GameIndexAndCoordinatePair MultipleGamesWithMaze::getOptimalNextGameAndCoordinate() {
     GameIndexAndCoordinatePair result{};
-    UnsignedInteger overallGrundyNumber = getOverallGrundyNumber();
-    GameState gameState = getGameStateFromGrundyNumber(overallGrundyNumber);
+    UnsignedInteger const overallGrundyNumber = getOverallGrundyNumber();
+    GameState const gameState = getGameStateFromGrundyNumber(overallGrundyNumber);
     if (GameState::Losing == gameState) {
         for (UnsignedInteger gameIndex = 0; gameIndex < m_games.size(); ++gameIndex) {
             Game& game(m_games[gameIndex]);
@@ -48,8 +48,8 @@ MultipleGamesWithMaze::GameIndexAndCoordinatePair MultipleGamesWithMaze::getOpti
         for (UnsignedInteger gameIndex = 0; gameIndex < m_games.size(); ++gameIndex) {
             Game& game(m_games[gameIndex]);
             Coordinate const& coordinate(m_coordinateInGames[gameIndex]);
-            UnsignedInteger grundyNumberAtGame = game.getGrundyNumberAt(coordinate);
-            UnsignedInteger hammingDistance = grundyNumberAtGame ^ overallGrundyNumber;
+            UnsignedInteger const grundyNumberAtGame = game.getGrundyNumberAt(coordinate);
+            UnsignedInteger const hammingDistance = grundyNumberAtGame ^ overallGrundyNumber;
             if (hammingDistance < grundyNumberAtGame) {
                 result = {gameIndex, m_games[gameIndex].getNextCoordinateWithGrundyNumber(coordinate, hammingDistance)};
                 break;

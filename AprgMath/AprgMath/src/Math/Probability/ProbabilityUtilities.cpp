@@ -41,10 +41,10 @@ AlbaNumber getProbabilityOnBinomialDistribution(
     // P(X=x) = p^x * (1-p)^(n-x) * combinations of (n, x)
     // where p^x and (1-p)^(n-x) correspond to successful and unsuccessful attempts, and nx
     // combinations of (n, x)is the number of ways we can choose the order of the attempts.
-    AlbaNumber probabilityOfSuccessfulAttempts = probabilityOfASingleAttempt ^ static_cast<int>(xTarget);
-    AlbaNumber probabilityOfUnsuccessfulAttempts =
+    AlbaNumber const probabilityOfSuccessfulAttempts = probabilityOfASingleAttempt ^ static_cast<int>(xTarget);
+    AlbaNumber const probabilityOfUnsuccessfulAttempts =
         (AlbaNumber(1) - probabilityOfASingleAttempt) ^ static_cast<int>(nTries - xTarget);
-    int numberOfCombinations = static_cast<int>(getNumberOfCombinations(nTries, xTarget));
+    int const numberOfCombinations = static_cast<int>(getNumberOfCombinations(nTries, xTarget));
     return getCorrectProbability(
         probabilityOfSuccessfulAttempts * probabilityOfUnsuccessfulAttempts * numberOfCombinations);
 }
@@ -56,9 +56,9 @@ AlbaNumber getProbabilityOnGeometricDistribution(
     // The random variable X counts the number of attempts needed, and the probability of a value x is
     // P(X=x) = (1-p)^(x-1) * p
     // where (1-p)^(x-1) corresponds to the unsuccessful attempts and p corresponds to the first successful attempt.
-    AlbaNumber probabilityOfUnsuccessfulAttempts =
+    AlbaNumber const probabilityOfUnsuccessfulAttempts =
         (AlbaNumber(1) - probabilityOfASingleAttempt) ^ static_cast<int>(xTarget - 1);
-    AlbaNumber probabilityOfFirstSuccessfulAttempt = probabilityOfASingleAttempt;
+    AlbaNumber const probabilityOfFirstSuccessfulAttempt = probabilityOfASingleAttempt;
     return getCorrectProbability(probabilityOfUnsuccessfulAttempts * probabilityOfFirstSuccessfulAttempt);
 }
 
@@ -181,7 +181,7 @@ AlbaNumber getNumberOfPeopleForTheBirthdayParadoxUsingQuadraticFormula(AlbaNumbe
     AlbaNumber result(AlbaMathConstants::POSITIVE_INFINITY_DOUBLE_VALUE);
 
     constexpr auto DAYS_IN_YEAR = 365;
-    AlbaNumbers roots =
+    AlbaNumbers const roots =
         getQuadraticRoots(RootType::RealRootsOnly, 1, -1, propbabilityThatMustBeMet * -2 * DAYS_IN_YEAR);
     for (AlbaNumber const& root : roots) {
         if (root > 0 && result > root) {
@@ -256,15 +256,15 @@ bool doesExpectedValuesHaveLinearity(
     // ---> Linearity of expectation holds for any number of random variables on some probability space.
     // -----> Let R1, R2, R3, … Rk be k random variables, then
     // ---> E[R1 + R2 + R3 + … + Rk] = E[R1] + E[R2] + E[R3] + … + E[Rk]
-    AlbaNumber expectedValueFromSeparated = getExpectedValue(firstSetOfValueAndProbabilityPairsOfX) +
-                                            getExpectedValue(secondSetOfValueAndProbabilityPairsOfX);
+    AlbaNumber const expectedValueFromSeparated = getExpectedValue(firstSetOfValueAndProbabilityPairsOfX) +
+                                                  getExpectedValue(secondSetOfValueAndProbabilityPairsOfX);
 
     ValueAndProbabilityPairs all(firstSetOfValueAndProbabilityPairsOfX);
     all.reserve(all.size() + secondSetOfValueAndProbabilityPairsOfX.size());
     copy(
         secondSetOfValueAndProbabilityPairsOfX.cbegin(), secondSetOfValueAndProbabilityPairsOfX.cend(),
         back_inserter(all));
-    AlbaNumber expectedValueFromCombined = getExpectedValue(all);
+    AlbaNumber const expectedValueFromCombined = getExpectedValue(all);
 
     return expectedValueFromSeparated == expectedValueFromCombined;
 }

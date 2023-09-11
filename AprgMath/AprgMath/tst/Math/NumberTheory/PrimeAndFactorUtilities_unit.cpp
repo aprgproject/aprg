@@ -73,19 +73,19 @@ TEST(PrimeAndFactorUtilitiesTest, GetNumberOfCoPrimesBelowThisNumberWorks) {
 }
 
 TEST(PrimeAndFactorUtilitiesTest, GetPrimesBelowThisNumberWorks) {
-    UnsignedIntegers expectedNumbers{2U, 3U, 5U, 7U, 11U, 13U, 17U, 19U, 23U, 29U};
+    UnsignedIntegers const expectedNumbers{2U, 3U, 5U, 7U, 11U, 13U, 17U, 19U, 23U, 29U};
 
     EXPECT_EQ(expectedNumbers, getPrimesBelowThisNumber(30U));
 }
 
 TEST(PrimeAndFactorUtilitiesTest, GetPrimeFactorsOfNumberWorks) {
-    UnsignedIntegers expectedNumbers{2U, 2U, 3U, 7U};
+    UnsignedIntegers const expectedNumbers{2U, 2U, 3U, 7U};
 
     EXPECT_EQ(expectedNumbers, getPrimeFactorsOfNumber(84U));
 }
 
 TEST(PrimeAndFactorUtilitiesTest, GetPrimeFactorsToCountMapWorks) {
-    FactorsToCountMap expectedMap{{2U, 2U}, {3U, 1U}, {7U, 1U}};
+    FactorsToCountMap const expectedMap{{2U, 2U}, {3U, 1U}, {7U, 1U}};
 
     EXPECT_EQ(expectedMap, getPrimeFactorsToCountMap(84U));
 }

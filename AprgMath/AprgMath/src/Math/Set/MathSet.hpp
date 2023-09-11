@@ -42,21 +42,21 @@ public:
     MathSet(std::string const& description, Rule const& rule) : m_description(description), m_ruleToBeInTheSet(rule) {}
 
     [[nodiscard]] MathSet getComplement() const {
-        Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
+        Rule const ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
             return !m_ruleToBeInTheSet(elementToCheck);
         };
         return MathSet(std::string("complement of ") + getDescription(), ruleToBeInTheNewSet);
     }
 
     [[nodiscard]] MathSet getUnionWith(MathSet const& mathSet2) const {
-        Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
+        Rule const ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
             return m_ruleToBeInTheSet(elementToCheck) || mathSet2.m_ruleToBeInTheSet(elementToCheck);
         };
         return MathSet(getDescription() + " union " + mathSet2.getDescription(), ruleToBeInTheNewSet);
     }
 
     [[nodiscard]] MathSet getIntersectionWith(MathSet const& mathSet2) const {
-        Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
+        Rule const ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
             return m_ruleToBeInTheSet(elementToCheck) && mathSet2.m_ruleToBeInTheSet(elementToCheck);
         };
         return MathSet(getDescription() + " intersection " + mathSet2.getDescription(), ruleToBeInTheNewSet);
@@ -65,7 +65,7 @@ public:
     [[nodiscard]] MathSet getDifferenceWith(MathSet const& mathSet2) const {
         // The difference (A\B) = A intersection B' consists of elements that are in A but not in B. Note that B can
         // contain elements that are not in A.
-        Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
+        Rule const ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
             return m_ruleToBeInTheSet(elementToCheck) && !mathSet2.m_ruleToBeInTheSet(elementToCheck);
         };
         return MathSet(getDescription() + " difference " + mathSet2.getDescription(), ruleToBeInTheNewSet);
@@ -78,7 +78,7 @@ public:
                 roster.emplace_back(element);
             }
         });
-        RosterLists subsetsRoster(
+        RosterLists const subsetsRoster(
             algorithm::SubsetGenerationUsingRecursion<RosterList>::generateOrderedSubsetsUsingDfs(roster));
         MathSets result;
         for (RosterList const& subsetRoster : subsetsRoster) {

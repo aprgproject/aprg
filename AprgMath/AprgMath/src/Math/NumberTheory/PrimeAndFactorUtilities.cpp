@@ -31,7 +31,7 @@ FactorsToCountMap getPrimeFactorsToCountMap(UnsignedInteger const number) {
 }
 
 UnsignedInteger getNumberOfFactors(UnsignedInteger const number) {
-    FactorsToCountMap primeFactorsToCountMap(getPrimeFactorsToCountMap(number));
+    FactorsToCountMap const primeFactorsToCountMap(getPrimeFactorsToCountMap(number));
     UnsignedInteger result(1);
     for (auto const& [_, count] : primeFactorsToCountMap) {
         result *= count + 1;
@@ -40,17 +40,18 @@ UnsignedInteger getNumberOfFactors(UnsignedInteger const number) {
 }
 
 UnsignedInteger getSumOfFactors(UnsignedInteger const number) {
-    FactorsToCountMap primeFactorsToCountMap(getPrimeFactorsToCountMap(number));
+    FactorsToCountMap const primeFactorsToCountMap(getPrimeFactorsToCountMap(number));
     UnsignedInteger result(1);
     for (auto const& [primeFactor, count] : primeFactorsToCountMap) {
-        UnsignedInteger formulaValue = (getRaiseToPowerForIntegers(primeFactor, count + 1) - 1) / (primeFactor - 1);
+        UnsignedInteger const formulaValue =
+            (getRaiseToPowerForIntegers(primeFactor, count + 1) - 1) / (primeFactor - 1);
         result *= formulaValue;
     }
     return result;
 }
 
 UnsignedInteger getProductOfFactors(UnsignedInteger const number) {
-    UnsignedInteger numberOfFactors(getNumberOfFactors(number));
+    UnsignedInteger const numberOfFactors(getNumberOfFactors(number));
     return getRaiseToPowerForIntegers(number, numberOfFactors / 2);
 }
 
@@ -61,10 +62,10 @@ UnsignedInteger getApproximateDensityOfPrimes(UnsignedInteger const number) {
 
 UnsignedInteger getNumberOfCoPrimesBelowThisNumber(UnsignedInteger const number) {
     // Euler’s totient function phi(n) gives the number of coprime numbers to n between 1 and n.
-    FactorsToCountMap primeFactorsToCountMap(getPrimeFactorsToCountMap(number));
+    FactorsToCountMap const primeFactorsToCountMap(getPrimeFactorsToCountMap(number));
     UnsignedInteger result(1);
     for (auto const& [primeFactor, count] : primeFactorsToCountMap) {
-        UnsignedInteger formulaValue = getRaiseToPowerForIntegers(primeFactor, count - 1) * (primeFactor - 1);
+        UnsignedInteger const formulaValue = getRaiseToPowerForIntegers(primeFactor, count - 1) * (primeFactor - 1);
         result *= formulaValue;
     }
     return result;
@@ -133,8 +134,8 @@ bool isGoldbachConjectureTrue(UnsignedInteger const evenNumber) {
     // primes.
     bool result(false);  // set as false when input is wrong
     if (evenNumber > 2 && isEven(evenNumber)) {
-        UnsignedIntegers numbers(getPrimesBelowThisNumber(evenNumber));
-        TwoSum<UnsignedIntegers> twoSum(numbers);
+        UnsignedIntegers const numbers(getPrimesBelowThisNumber(evenNumber));
+        TwoSum<UnsignedIntegers> const twoSum(numbers);
         auto [firstValue, secondValue] = twoSum.getNonDuplicateTwoValuesWithSum(evenNumber);
         result = firstValue != 0 && secondValue != 0;
     }
@@ -156,8 +157,8 @@ bool isTwinPrimeConjectureTrue(UnsignedInteger const number) {
 
 bool isLegendreConjectureTrue(UnsignedInteger const number) {
     // Legendre’s conjecture: There is always a prime between numbers n^2 and (n+1)^2, where n is any positive integer.
-    UnsignedInteger start = getRaiseToPowerForIntegers(number, static_cast<UnsignedInteger>(2));
-    UnsignedInteger end = getRaiseToPowerForIntegers(number + 1, static_cast<UnsignedInteger>(2));
+    UnsignedInteger const start = getRaiseToPowerForIntegers(number, static_cast<UnsignedInteger>(2));
+    UnsignedInteger const end = getRaiseToPowerForIntegers(number + 1, static_cast<UnsignedInteger>(2));
     bool result(false);
     for (UnsignedInteger numberToCheck = start + 1; numberToCheck < end; ++numberToCheck) {
         if (isPrime(numberToCheck)) {
@@ -174,7 +175,7 @@ bool isWilsonTheoremTrue(UnsignedInteger const number) {
     // and the number 12 is not prime, because 11! mod 12 = 0 (not equal to 11).
     bool result(false);  // false when input is wrong
     if (number >= 2) {
-        bool isFormulaSatisfied = getModularFactorial(number - 1, number) == number - 1;
+        bool const isFormulaSatisfied = getModularFactorial(number - 1, number) == number - 1;
         result = isFormulaSatisfied == isPrime(number);
     }
     return result;

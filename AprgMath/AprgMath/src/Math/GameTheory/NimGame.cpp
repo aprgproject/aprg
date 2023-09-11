@@ -27,8 +27,8 @@ NimHeapSize NimGame::getNimSum(NimState const& nimState) {
 
 NimState NimGame::getOptimalNextState(NimState const& nimState) {
     NimState result(nimState);
-    NimHeapSize nimSum(getNimSum(nimState));
-    GameState gameState(getGameState(nimSum));
+    NimHeapSize const nimSum(getNimSum(nimState));
+    GameState const gameState(getGameState(nimSum));
     if (GameState::Losing == gameState) {
         // Losing states: The final state [0,0,...,0] is a losing state, and its nim sum is 0, as expected.
         // In other losing states, any move leads to a winning state, because when a single value xk changes,
@@ -46,7 +46,7 @@ NimState NimGame::getOptimalNextState(NimState const& nimState) {
         // losing state. There is always such a heap, where xk has a one bit at the position of the leftmost one bit of
         // s.
         for (NimHeapSize& nimHeapSize : result) {
-            NimHeapSize hammingDistanceFromNimSum = nimHeapSize ^ nimSum;
+            NimHeapSize const hammingDistanceFromNimSum = nimHeapSize ^ nimSum;
             if (hammingDistanceFromNimSum < nimHeapSize) {
                 nimHeapSize = hammingDistanceFromNimSum;
                 break;

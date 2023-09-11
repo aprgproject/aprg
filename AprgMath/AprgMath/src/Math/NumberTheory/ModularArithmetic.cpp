@@ -60,7 +60,7 @@ UnsignedInteger getModularInverseByGcfEuclidAlgorithm(UnsignedInteger const numb
     UnsignedInteger result{};
     UnsignedInteger x = 0;
     UnsignedInteger y = 0;
-    UnsignedInteger gcf = getGreatestCommonFactorWithLastValues(number, modulo, x, y);
+    UnsignedInteger const gcf = getGreatestCommonFactorWithLastValues(number, modulo, x, y);
     if (1 == gcf) {
         // is coprime
         result = (x % modulo + modulo) % modulo;
@@ -115,38 +115,38 @@ UnsignedInteger getModularFactorial(UnsignedInteger const number, UnsignedIntege
 bool canModuloBeDistributedInAddition(
     UnsignedInteger const number1, UnsignedInteger const number2, UnsignedInteger const modulo) {
     // (a + b) mod m = (a mod m + b mod m) mod m
-    UnsignedInteger undistributed = (number1 + number2) % modulo;
-    UnsignedInteger distributed = (number1 % modulo + number2 % modulo) % modulo;
+    UnsignedInteger const undistributed = (number1 + number2) % modulo;
+    UnsignedInteger const distributed = (number1 % modulo + number2 % modulo) % modulo;
     return undistributed == distributed;
 }
 
 bool canModuloBeDistributedInSubtraction(
     UnsignedInteger const number1, UnsignedInteger const number2, UnsignedInteger const modulo) {
     // (a - b) mod m = (a mod m - b mod m) mod m
-    UnsignedInteger undistributed = (number1 - number2) % modulo;
-    UnsignedInteger distributed = (number1 % modulo - number2 % modulo) % modulo;
+    UnsignedInteger const undistributed = (number1 - number2) % modulo;
+    UnsignedInteger const distributed = (number1 % modulo - number2 % modulo) % modulo;
     return undistributed == distributed;
 }
 
 bool canModuloBeDistributedInMultiplication(
     UnsignedInteger const number1, UnsignedInteger const number2, UnsignedInteger const modulo) {
     // (a * b) mod m = ((a mod m) * (b mod m)) mod m
-    UnsignedInteger undistributed = (number1 * number2) % modulo;
-    UnsignedInteger distributed = (number1 % modulo * number2 % modulo) % modulo;
+    UnsignedInteger const undistributed = (number1 * number2) % modulo;
+    UnsignedInteger const distributed = (number1 % modulo * number2 % modulo) % modulo;
     return undistributed == distributed;
 }
 
 bool canModuloBeDistributedInPower(
     UnsignedInteger const number, UnsignedInteger const exponent, UnsignedInteger const modulo) {
     // x^n mod m = ((x mod m)^n) mod m
-    UnsignedInteger undistributed = getRaiseToPowerForIntegers(number, exponent) % modulo;
-    UnsignedInteger distributed = getRaiseToPowerForIntegers(number % modulo, exponent) % modulo;
+    UnsignedInteger const undistributed = getRaiseToPowerForIntegers(number, exponent) % modulo;
+    UnsignedInteger const distributed = getRaiseToPowerForIntegers(number % modulo, exponent) % modulo;
     return undistributed == distributed;
 }
 
 bool canModuloBeDistributedInEveryIterationOfFactorial(UnsignedInteger const number, UnsignedInteger const modulo) {
     // n! mod m = ((n mod m) * (n-1 mod m) * (n-2 mod m) ... (1 mod m)) mod m
-    UnsignedInteger undistributed = getFactorial(number) % modulo;
+    UnsignedInteger const undistributed = getFactorial(number) % modulo;
     UnsignedInteger distributed = 1;
     for (int i = 2; i <= static_cast<int>(number); ++i) {
         distributed = (distributed * i) % modulo;
@@ -160,7 +160,7 @@ bool isFermatTheoremTrue(UnsignedInteger const prime, UnsignedInteger const coPr
     // where m is prime and x and m are coprime.
     bool result(false);
     if (isPrime(prime) && isCoPrime(prime, coPrime)) {
-        UnsignedInteger formula = getRaiseToPowerForIntegers(prime, coPrime - 1) % coPrime;
+        UnsignedInteger const formula = getRaiseToPowerForIntegers(prime, coPrime - 1) % coPrime;
         result = formula == static_cast<UnsignedInteger>(1);
     }
     return result;
@@ -171,7 +171,7 @@ bool isEulerTheoremTrue(UnsignedInteger const coPrime1, UnsignedInteger const co
     // where x and m are coprime.
     bool result(false);
     if (isCoPrime(coPrime1, coPrime2)) {
-        UnsignedInteger formula =
+        UnsignedInteger const formula =
             getRaiseToPowerForIntegers(coPrime1, getNumberOfCoPrimesBelowThisNumber(coPrime2)) % coPrime2;
         result = formula == static_cast<UnsignedInteger>(1);
     }

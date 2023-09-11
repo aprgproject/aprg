@@ -1,3 +1,1370 @@
-StaticAnalysisJobIdentifier: [56]
-2023-09-09T17:52:35
+StaticAnalysisJobIdentifier: [011]
+2023-09-11T07:15:53
+[35m2023-09-11T07:17:16[0m | [33mBuildAndRun.sh:28[0m | The current path is [/d/a/aprg/aprg/AprgMath/AprgMath].
+[35m2023-09-11T07:17:16[0m | [33mBuildAndRun.sh:29[0m | The scriptPath is [/d/a/aprg/aprg/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh].
+[35m2023-09-11T07:17:16[0m | [33mBuildAndRun.sh:30[0m | The scriptOption is [buildOnOneCore].
+[35m2023-09-11T07:17:16[0m | [33mBuildAndRun.sh:31[0m | The buildDirectoryName is [StaticAnalyzersBuild].
+[35m2023-09-11T07:17:16[0m | [33mBuildAndRun.sh:32[0m | The argument1 is [Debug] and argument2 is [].
+[35m2023-09-11T07:17:16[0m | [33mBuildAndRun.sh:33[0m | The immediateDirectoryName is [AprgMath].
+[35m2023-09-11T07:17:16[0m | [33mBuildAndRun.sh:84[0m | The buildType is [Debug].
+[35m2023-09-11T07:17:16[0m | [33mBuildAndRun.sh:85[0m | The numberOfCores is [2].
+[35m2023-09-11T07:17:16[0m | [33mBuildAndRun.sh:68[0m | The build path is [/d/a/aprg/aprg/AprgMath/StaticAnalyzersBuild] and the output of [ls -la --color=auto]:
+total 217
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 07:17 .
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 07:15 ..
+-rw-r--r-- 1 runneradmin 197121  18030 Sep 11 07:17 CMakeCache.txt
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 07:17 CMakeFiles
+-rw-r--r-- 1 runneradmin 197121    502 Sep 11 07:17 CTestTestfile.cmake
+-rw-r--r-- 1 runneradmin 197121 188101 Sep 11 07:17 build.ninja
+-rw-r--r-- 1 runneradmin 197121   2238 Sep 11 07:17 cmake_install.cmake
+[1/93] Building CXX object CMakeFiles/gtest.dir/D_/a/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc.obj
+In file included from D:/a/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:49:
+D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
+  __try {
+  ^
+1 warning generated.
+[2/93] Building CXX object CMakeFiles/gtest.dir/D_/a/aprg/aprg/gtest/gtest/googletest/src/gtest_main.cc.obj
+[3/93] Linking CXX static library gtest.lib
+[4/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaContainerHelper.cpp.obj
+[5/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/File/AlbaFileReader.cpp.obj
+[6/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Angle/AlbaAngle.cpp.obj
+[7/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/ComplexNumberHelpers.cpp.obj
+[8/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/ComputationHelpers.cpp.obj
+[9/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/FactorAndMulitplesHelpers.cpp.obj
+[10/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/PowerHelpers.cpp.obj
+[11/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/PrecisionHelpers.cpp.obj
+[12/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/StatisticsHelpers.cpp.obj
+[13/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/AlbaComplexNumber.cpp.obj
+[14/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/AlbaNumber.cpp.obj
+[15/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/Interval/AlbaNumberInterval.cpp.obj
+[16/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/Interval/AlbaNumberIntervalEndpoint.cpp.obj
+[17/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/Interval/AlbaNumberIntervalHelpers.cpp.obj
+[18/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Ratio/AlbaRatio.cpp.obj
+[19/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Memory/AlbaMemoryBuffer.cpp.obj
+[20/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/PathHandler/AlbaPathHandler.cpp.obj
+[21/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/PathHandler/AlbaWebPathHandler.cpp.obj
+[22/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Print/AlbaPrintFunctions.cpp.obj
+[23/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Randomizer/AlbaOldRandomizer.cpp.obj
+[24/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Randomizer/EntropySources/AlbaCombinedEntropySource.cpp.obj
+[25/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Randomizer/EntropySources/AlbaEntropySourceBasedOnTime.cpp.obj
+[26/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamBitReader.cpp.obj
+[27/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamBitWriter.cpp.obj
+[28/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterReader.cpp.obj
+[29/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterWriter.cpp.obj
+[30/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/String/AlbaStringHelper.cpp.obj
+[31/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaDateTime.cpp.obj
+[32/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaDateTimeHelper.cpp.obj
+[33/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\Time\AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
+    struct tm const localTime = *localtime(&currentTimeT);
+                                 ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
+        _CRT_INSECURE_DEPRECATE(localtime_s)
+        ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+D:/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
+    struct tm const localTime = *localtime(&currentTimeT);
+                                 ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
+        _CRT_INSECURE_DEPRECATE(localtime_s)
+        ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+1 warning generated.
+[34/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimer.cpp.obj
+[35/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/AlbaUserInterface.cpp.obj
+[36/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:205:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+int DisplayTablePrinter::getVerticalBorderLength() const { return m_verticalBorder.length(); }
+                                                                  ^
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:208:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    return ((m_maxLengthAtColumn.size() + 1) * getVerticalBorderLength()) + m_totalColumnLength;
+           ^
+[37/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Utility/AlbaScopeGuard.cpp.obj
+[38/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/tstUtilities/CommonTestsUtilities/File/BaseFileReaderTest.cpp.obj
+[39/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/tstUtilities/CommonTestsUtilities/File/FileUtilities.cpp.obj
+[40/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/PathHandler/AlbaWindowsPathHandler.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    int const length = fullPath.length();
+                       ^
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+        int const indexWithSlashCharacter = fullPath.find_first_of(m_slashCharacterString, index);
+                                            ^
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:270:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    int const index = m_directory.find_first_of(m_slashCharacterString + ":");
+                      ^
+[41/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/Time/AlbaWindowsTimeHelper.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+    return AlbaDateTime(
+           ^
+[42/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/Time/AlbaWindowsTimer.cpp.obj
+[43/93] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/Windows/AlbaWindowsHelper.cpp.obj
+[44/93] Linking CXX static library APRG_COMMON.lib
+[45/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/Combinatorics/BurnsideLemma.cpp.obj
+[46/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/Combinatorics/CatalanNumbers.cpp.obj
+[47/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/Combinatorics/CayleysFormula.cpp.obj
+[48/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/Combinatorics/CombinationUtilities.cpp.obj
+[49/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/Combinatorics/Derangements.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Combinatorics\Derangements.cpp:168:65: warning: narrowing conversion from 'unsigned long long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    return getIntegerAfterRoundingADoubleValue<UnsignedInteger>(getNumberOfPermutations(n, n) / E_DOUBLE_VALUE);
+                                                                ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Combinatorics\Derangements.cpp:172:62: warning: narrowing conversion from 'unsigned long long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    return static_cast<double>(getNumberOfDerangements(n)) / getNumberOfPermutations(n, n);
+                                                             ^
+[50/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/Combinatorics/InclusionExclusion.cpp.obj
+[51/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/GameTheory/Common/GameUtilities.cpp.obj
+[52/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/GameTheory/NimGame.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\NimGame.cpp:30:5: warning: variable 'nimSum' of type 'NimHeapSize' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    NimHeapSize nimSum(getNimSum(nimState));
+    ^
+                const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\NimGame.cpp:30:17: note: FIX-IT applied suggested code changes
+    NimHeapSize nimSum(getNimSum(nimState));
+                ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\NimGame.cpp:31:5: warning: variable 'gameState' of type 'GameState' can be declared 'const' [misc-const-correctness]
+    GameState gameState(getGameState(nimSum));
+    ^
+              const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\NimGame.cpp:31:15: note: FIX-IT applied suggested code changes
+    GameState gameState(getGameState(nimSum));
+              ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\NimGame.cpp:49:13: warning: variable 'hammingDistanceFromNimSum' of type 'NimHeapSize' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+            NimHeapSize hammingDistanceFromNimSum = nimHeapSize ^ nimSum;
+            ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\NimGame.cpp:49:25: note: FIX-IT applied suggested code changes
+            NimHeapSize hammingDistanceFromNimSum = nimHeapSize ^ nimSum;
+                        ^
+[53/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/GameTheory/SpecificGames/GameWithGraph.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithGraph.cpp:30:5: warning: variable 'gameState' of type 'GameState' can be declared 'const' [misc-const-correctness]
+    GameState gameState = getGameStateFromGrundyNumber(getGrundyNumberAt(vertex));
+    ^
+              const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithGraph.cpp:30:15: note: FIX-IT applied suggested code changes
+    GameState gameState = getGameStateFromGrundyNumber(getGrundyNumberAt(vertex));
+              ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithGraph.cpp:35:13: warning: variable 'grundyNumber' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+            UnsignedInteger grundyNumber(getGrundyNumberAt(vertex));
+            ^
+                            const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithGraph.cpp:35:29: note: FIX-IT applied suggested code changes
+            UnsignedInteger grundyNumber(getGrundyNumberAt(vertex));
+                            ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithGraph.cpp:57:5: warning: variable 'nextVertices' of type 'Vertices' (aka 'vector<unsigned long long>') can be declared 'const' [misc-const-correctness]
+    Vertices nextVertices(m_graph.getAdjacentVerticesAt(vertex));
+    ^
+             const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithGraph.cpp:57:14: note: FIX-IT applied suggested code changes
+    Vertices nextVertices(m_graph.getAdjacentVerticesAt(vertex));
+             ^
+[54/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/GameTheory/SpecificGames/GameWithMaze.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:17:5: warning: variable 'oneLeft' of type 'Coordinate' (aka 'pair<int, int>') can be declared 'const' [misc-const-correctness]
+    Coordinate oneLeft(coordinate.first - 1, coordinate.second);
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:17:16: note: FIX-IT applied suggested code changes
+    Coordinate oneLeft(coordinate.first - 1, coordinate.second);
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:18:5: warning: variable 'oneUp' of type 'Coordinate' (aka 'pair<int, int>') can be declared 'const' [misc-const-correctness]
+    Coordinate oneUp(coordinate.first, coordinate.second - 1);
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:18:16: note: FIX-IT applied suggested code changes
+    Coordinate oneUp(coordinate.first, coordinate.second - 1);
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:19:5: warning: variable 'isLeftNotAllowed' of type 'bool' can be declared 'const' [misc-const-correctness]
+    bool isLeftNotAllowed = !m_isBlockedMatrix.isInside(oneLeft.first, oneLeft.second) ||
+    ^
+         const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:19:10: note: FIX-IT applied suggested code changes
+    bool isLeftNotAllowed = !m_isBlockedMatrix.isInside(oneLeft.first, oneLeft.second) ||
+         ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:21:5: warning: variable 'isUpAllowed' of type 'bool' can be declared 'const' [misc-const-correctness]
+    bool isUpAllowed =
+    ^
+         const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:21:10: note: FIX-IT applied suggested code changes
+    bool isUpAllowed =
+         ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:28:5: warning: variable 'gameState' of type 'GameState' can be declared 'const' [misc-const-correctness]
+    GameState gameState = getGameStateFromGrundyNumber(getGrundyNumberAt(coordinate));
+    ^
+              const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:28:15: note: FIX-IT applied suggested code changes
+    GameState gameState = getGameStateFromGrundyNumber(getGrundyNumberAt(coordinate));
+              ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:30:9: warning: variable 'oneLeft' of type 'Coordinate' (aka 'pair<int, int>') can be declared 'const' [misc-const-correctness]
+        Coordinate oneLeft(coordinate.first - 1, coordinate.second);
+        ^
+                   const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:30:20: note: FIX-IT applied suggested code changes
+        Coordinate oneLeft(coordinate.first - 1, coordinate.second);
+                   ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:31:9: warning: variable 'oneUp' of type 'Coordinate' (aka 'pair<int, int>') can be declared 'const' [misc-const-correctness]
+        Coordinate oneUp(coordinate.first, coordinate.second - 1);
+        ^
+                   const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:31:20: note: FIX-IT applied suggested code changes
+        Coordinate oneUp(coordinate.first, coordinate.second - 1);
+                   ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:73:9: warning: variable 'grundyNumberEntry' of type 'GrundyNumberEntry' (aka 'int') can be declared 'const' [misc-const-correctness]
+        GrundyNumberEntry grundyNumberEntry = m_grundyNumberMatrix.getEntry(coordinate.first, coordinate.second);
+        ^
+                          const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:73:27: note: FIX-IT applied suggested code changes
+        GrundyNumberEntry grundyNumberEntry = m_grundyNumberMatrix.getEntry(coordinate.first, coordinate.second);
+                          ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:115:9: warning: variable 'xyToCheck' of type 'Coordinate' (aka 'pair<int, int>') can be declared 'const' [misc-const-correctness]
+        Coordinate xyToCheck(x, coordinate.second);
+        ^
+                   const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:115:20: note: FIX-IT applied suggested code changes
+        Coordinate xyToCheck(x, coordinate.second);
+                   ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:126:9: warning: variable 'xyToCheck' of type 'Coordinate' (aka 'pair<int, int>') can be declared 'const' [misc-const-correctness]
+        Coordinate xyToCheck(coordinate.first, y);
+        ^
+                   const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:126:20: note: FIX-IT applied suggested code changes
+        Coordinate xyToCheck(coordinate.first, y);
+                   ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:137:5: warning: variable 'nextCoorindates' of type 'Coordinates' (aka 'vector<pair<int, int>>') can be declared 'const' [misc-const-correctness]
+    Coordinates nextCoorindates(getNextCoordinates(coordinate));
+    ^
+                const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\GameWithMaze.cpp:137:17: note: FIX-IT applied suggested code changes
+    Coordinates nextCoorindates(getNextCoordinates(coordinate));
+                ^
+[55/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/GameTheory/SpecificGames/MisereGame.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\MisereGame.cpp:18:9: warning: variable 'nimSum' of type 'NimHeapSize' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        NimHeapSize nimSum(NimGame::getNimSum(nimState));
+        ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\MisereGame.cpp:18:21: note: FIX-IT applied suggested code changes
+        NimHeapSize nimSum(NimGame::getNimSum(nimState));
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\MisereGame.cpp:28:5: warning: variable 'gameState' of type 'GameState' can be declared 'const' [misc-const-correctness]
+    GameState gameState(getGameState(inputNimState));
+    ^
+              const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\MisereGame.cpp:28:15: note: FIX-IT applied suggested code changes
+    GameState gameState(getGameState(inputNimState));
+              ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\MisereGame.cpp:39:9: warning: variable 'nimSum' of type 'NimHeapSize' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        NimHeapSize nimSum(NimGame::getNimSum(inputNimState));
+        ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\MisereGame.cpp:39:21: note: FIX-IT applied suggested code changes
+        NimHeapSize nimSum(NimGame::getNimSum(inputNimState));
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\MisereGame.cpp:42:13: warning: variable 'hammingDistanceFromNimSum' of type 'NimHeapSize' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+            NimHeapSize hammingDistanceFromNimSum = result[i] ^ nimSum;
+            ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\MisereGame.cpp:42:25: note: FIX-IT applied suggested code changes
+            NimHeapSize hammingDistanceFromNimSum = result[i] ^ nimSum;
+                        ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\MisereGame.cpp:49:9: warning: variable 'nonEmptyHeapsInResult' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        UnsignedInteger nonEmptyHeapsInResult = countNonEmptyHeaps(result);
+        ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\MisereGame.cpp:49:25: note: FIX-IT applied suggested code changes
+        UnsignedInteger nonEmptyHeapsInResult = countNonEmptyHeaps(result);
+                        ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\MisereGame.cpp:50:9: warning: variable 'nonEmptyHeapsInInput' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        UnsignedInteger nonEmptyHeapsInInput = countNonEmptyHeaps(inputNimState);
+        ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\MisereGame.cpp:50:25: note: FIX-IT applied suggested code changes
+        UnsignedInteger nonEmptyHeapsInInput = countNonEmptyHeaps(inputNimState);
+                        ^
+[56/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/GameTheory/SpecificGames/StickGame.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\StickGame.cpp:23:9: warning: variable 'remainder' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        UnsignedInteger remainder = remainingSticks % (m_maxSticksToTake + 1);
+        ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SpecificGames\StickGame.cpp:23:25: note: FIX-IT applied suggested code changes
+        UnsignedInteger remainder = remainingSticks % (m_maxSticksToTake + 1);
+                        ^
+[57/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/GameTheory/SubGames/GrundyGame.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:19:5: warning: variable 'index' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger index = get<0>(heapIndexAndFirstPileAndSecondPile);
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:19:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger index = get<0>(heapIndexAndFirstPileAndSecondPile);
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:21:9: warning: variable 'firstPile' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        UnsignedInteger firstPile = get<1>(heapIndexAndFirstPileAndSecondPile);
+        ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:21:25: note: FIX-IT applied suggested code changes
+        UnsignedInteger firstPile = get<1>(heapIndexAndFirstPileAndSecondPile);
+                        ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:22:9: warning: variable 'secondPile' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        UnsignedInteger secondPile = get<2>(heapIndexAndFirstPileAndSecondPile);
+        ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:22:25: note: FIX-IT applied suggested code changes
+        UnsignedInteger secondPile = get<2>(heapIndexAndFirstPileAndSecondPile);
+                        ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:24:55: warning: narrowing conversion from 'UnsignedInteger' (aka 'unsigned long long') to signed type 'difference_type' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+            m_stickHeaps.erase(m_stickHeaps.begin() + index);
+                                                      ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:25:57: warning: narrowing conversion from 'UnsignedInteger' (aka 'unsigned long long') to signed type 'difference_type' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+            m_stickHeaps.emplace(m_stickHeaps.begin() + index, secondPile);
+                                                        ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:26:57: warning: narrowing conversion from 'UnsignedInteger' (aka 'unsigned long long') to signed type 'difference_type' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+            m_stickHeaps.emplace(m_stickHeaps.begin() + index, firstPile);
+                                                        ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:35:5: warning: variable 'overallGrundyNumber' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger overallGrundyNumber = getOverallGrundyNumber();
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:35:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger overallGrundyNumber = getOverallGrundyNumber();
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:36:5: warning: variable 'gameState' of type 'GameState' can be declared 'const' [misc-const-correctness]
+    GameState gameState = getGameStateFromGrundyNumber(overallGrundyNumber);
+    ^
+              const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:36:15: note: FIX-IT applied suggested code changes
+    GameState gameState = getGameStateFromGrundyNumber(overallGrundyNumber);
+              ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:50:13: warning: variable 'grundyNumberAtIndex' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+            UnsignedInteger grundyNumberAtIndex = getGrundyNumberWithNumberOfSticks(stickHeap);
+            ^
+                            const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:50:29: note: FIX-IT applied suggested code changes
+            UnsignedInteger grundyNumberAtIndex = getGrundyNumberWithNumberOfSticks(stickHeap);
+                            ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:51:13: warning: variable 'hammingDistance' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+            UnsignedInteger hammingDistance = grundyNumberAtIndex ^ overallGrundyNumber;
+            ^
+                            const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:51:29: note: FIX-IT applied suggested code changes
+            UnsignedInteger hammingDistance = grundyNumberAtIndex ^ overallGrundyNumber;
+                            ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:53:17: warning: variable 'b' of type 'int' can be declared 'const' [misc-const-correctness]
+                int b = static_cast<int>(stickHeap) - a;
+                ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:53:21: note: FIX-IT applied suggested code changes
+                int b = static_cast<int>(stickHeap) - a;
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:77:5: warning: variable 'limit' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger limit = (numberOfSticks + 1) / 2;
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:77:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger limit = (numberOfSticks + 1) / 2;
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:79:9: warning: variable 'b' of type 'int' can be declared 'const' [misc-const-correctness]
+        int b = numberOfSticks - a;
+        ^
+            const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:79:13: note: FIX-IT applied suggested code changes
+        int b = numberOfSticks - a;
+            ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\GrundyGame.cpp:79:17: warning: narrowing conversion from 'UnsignedInteger' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+        int b = numberOfSticks - a;
+                ^
+[58/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/GameTheory/SubGames/MultipleGamesWithMaze.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\MultipleGamesWithMaze.cpp:36:5: warning: variable 'overallGrundyNumber' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger overallGrundyNumber = getOverallGrundyNumber();
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\MultipleGamesWithMaze.cpp:36:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger overallGrundyNumber = getOverallGrundyNumber();
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\MultipleGamesWithMaze.cpp:37:5: warning: variable 'gameState' of type 'GameState' can be declared 'const' [misc-const-correctness]
+    GameState gameState = getGameStateFromGrundyNumber(overallGrundyNumber);
+    ^
+              const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\MultipleGamesWithMaze.cpp:37:15: note: FIX-IT applied suggested code changes
+    GameState gameState = getGameStateFromGrundyNumber(overallGrundyNumber);
+              ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\MultipleGamesWithMaze.cpp:51:13: warning: variable 'grundyNumberAtGame' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+            UnsignedInteger grundyNumberAtGame = game.getGrundyNumberAt(coordinate);
+            ^
+                            const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\MultipleGamesWithMaze.cpp:51:29: note: FIX-IT applied suggested code changes
+            UnsignedInteger grundyNumberAtGame = game.getGrundyNumberAt(coordinate);
+                            ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\MultipleGamesWithMaze.cpp:52:13: warning: variable 'hammingDistance' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+            UnsignedInteger hammingDistance = grundyNumberAtGame ^ overallGrundyNumber;
+            ^
+                            const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\GameTheory\SubGames\MultipleGamesWithMaze.cpp:52:29: note: FIX-IT applied suggested code changes
+            UnsignedInteger hammingDistance = grundyNumberAtGame ^ overallGrundyNumber;
+                            ^
+[59/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/Matrices/LinearRecurrence.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Matrices\LinearRecurrence.cpp:13:5: warning: variable 'formulaicTransform' of type 'UnsignedIntegerMatrix' (aka 'AlbaMatrix<unsigned long long>') can be declared 'const' [misc-const-correctness]
+    UnsignedIntegerMatrix formulaicTransform(2U, 2U, {0U, 1U, 1U, 1U});
+    ^
+                          const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Matrices\LinearRecurrence.cpp:13:27: note: FIX-IT applied suggested code changes
+    UnsignedIntegerMatrix formulaicTransform(2U, 2U, {0U, 1U, 1U, 1U});
+                          ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Matrices\LinearRecurrence.cpp:15:5: warning: variable 'input' of type 'UnsignedIntegerMatrix' (aka 'AlbaMatrix<unsigned long long>') can be declared 'const' [misc-const-correctness]
+    UnsignedIntegerMatrix input(1U, 2U, {integerPair.first, integerPair.second});
+    ^
+                          const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Matrices\LinearRecurrence.cpp:15:27: note: FIX-IT applied suggested code changes
+    UnsignedIntegerMatrix input(1U, 2U, {integerPair.first, integerPair.second});
+                          ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Matrices\LinearRecurrence.cpp:17:5: warning: variable 'output' of type 'UnsignedIntegerMatrix' (aka 'AlbaMatrix<unsigned long long>') can be declared 'const' [misc-const-correctness]
+    UnsignedIntegerMatrix output = formulaicTransform * input;
+    ^
+                          const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Matrices\LinearRecurrence.cpp:17:27: note: FIX-IT applied suggested code changes
+    UnsignedIntegerMatrix output = formulaicTransform * input;
+                          ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Matrices\LinearRecurrence.cpp:28:9: warning: variable 'formulaicTransform' of type 'UnsignedIntegerMatrix' (aka 'AlbaMatrix<unsigned long long>') can be declared 'const' [misc-const-correctness]
+        UnsignedIntegerMatrix formulaicTransform(2U, 2U, {0U, 1, nthValue - 1, nthValue - 1});
+        ^
+                              const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Matrices\LinearRecurrence.cpp:28:31: note: FIX-IT applied suggested code changes
+        UnsignedIntegerMatrix formulaicTransform(2U, 2U, {0U, 1, nthValue - 1, nthValue - 1});
+                              ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Matrices\LinearRecurrence.cpp:30:9: warning: variable 'input' of type 'UnsignedIntegerMatrix' (aka 'AlbaMatrix<unsigned long long>') can be declared 'const' [misc-const-correctness]
+        UnsignedIntegerMatrix input(1U, 2U, {integerPair.first, integerPair.second});
+        ^
+                              const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Matrices\LinearRecurrence.cpp:30:31: note: FIX-IT applied suggested code changes
+        UnsignedIntegerMatrix input(1U, 2U, {integerPair.first, integerPair.second});
+                              ^
+[60/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/NumberTheory/ChineseRemainderTheorem.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ChineseRemainderTheorem.cpp:32:13: warning: variable 'formulaForK' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+            UnsignedInteger formulaForK = m_productOfModulos / modulo;
+            ^
+                            const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ChineseRemainderTheorem.cpp:32:29: note: FIX-IT applied suggested code changes
+            UnsignedInteger formulaForK = m_productOfModulos / modulo;
+                            ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ChineseRemainderTheorem.cpp:33:13: warning: variable 'modularInverseOfFk' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+            UnsignedInteger modularInverseOfFk = getModularInverseByEulersTheorem(formulaForK, modulo);
+            ^
+                            const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ChineseRemainderTheorem.cpp:33:29: note: FIX-IT applied suggested code changes
+            UnsignedInteger modularInverseOfFk = getModularInverseByEulersTheorem(formulaForK, modulo);
+                            ^
+[61/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/NumberTheory/ModularArithmetic.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:63:5: warning: variable 'gcf' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger gcf = getGreatestCommonFactorWithLastValues(number, modulo, x, y);
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:63:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger gcf = getGreatestCommonFactorWithLastValues(number, modulo, x, y);
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:118:5: warning: variable 'undistributed' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger undistributed = (number1 + number2) % modulo;
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:118:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger undistributed = (number1 + number2) % modulo;
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:119:5: warning: variable 'distributed' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger distributed = (number1 % modulo + number2 % modulo) % modulo;
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:119:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger distributed = (number1 % modulo + number2 % modulo) % modulo;
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:126:5: warning: variable 'undistributed' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger undistributed = (number1 - number2) % modulo;
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:126:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger undistributed = (number1 - number2) % modulo;
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:127:5: warning: variable 'distributed' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger distributed = (number1 % modulo - number2 % modulo) % modulo;
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:127:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger distributed = (number1 % modulo - number2 % modulo) % modulo;
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:134:5: warning: variable 'undistributed' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger undistributed = (number1 * number2) % modulo;
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:134:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger undistributed = (number1 * number2) % modulo;
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:135:5: warning: variable 'distributed' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger distributed = (number1 % modulo * number2 % modulo) % modulo;
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:135:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger distributed = (number1 % modulo * number2 % modulo) % modulo;
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:142:5: warning: variable 'undistributed' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger undistributed = getRaiseToPowerForIntegers(number, exponent) % modulo;
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:142:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger undistributed = getRaiseToPowerForIntegers(number, exponent) % modulo;
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:143:5: warning: variable 'distributed' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger distributed = getRaiseToPowerForIntegers(number % modulo, exponent) % modulo;
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:143:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger distributed = getRaiseToPowerForIntegers(number % modulo, exponent) % modulo;
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:149:5: warning: variable 'undistributed' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger undistributed = getFactorial(number) % modulo;
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:149:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger undistributed = getFactorial(number) % modulo;
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:163:9: warning: variable 'formula' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        UnsignedInteger formula = getRaiseToPowerForIntegers(prime, coPrime - 1) % coPrime;
+        ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:163:25: note: FIX-IT applied suggested code changes
+        UnsignedInteger formula = getRaiseToPowerForIntegers(prime, coPrime - 1) % coPrime;
+                        ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:174:9: warning: variable 'formula' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        UnsignedInteger formula =
+        ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\ModularArithmetic.cpp:174:25: note: FIX-IT applied suggested code changes
+        UnsignedInteger formula =
+                        ^
+[62/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/NumberTheory/OtherUtilities.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:25:9: warning: variable 'fibonacci' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        UnsignedInteger fibonacci(fibonaccis[i]);
+        ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:25:25: note: FIX-IT applied suggested code changes
+        UnsignedInteger fibonacci(fibonaccis[i]);
+                        ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:52:9: warning: variable 'nextFibonacci' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        UnsignedInteger nextFibonacci = currentFibonacci + previousFibonacci;
+        ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:52:25: note: FIX-IT applied suggested code changes
+        UnsignedInteger nextFibonacci = currentFibonacci + previousFibonacci;
+                        ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:63:5: warning: variable 'sqrtOf5' of type 'double' can be declared 'const' [misc-const-correctness]
+    double sqrtOf5 = sqrt(5);
+    ^
+           const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:63:12: note: FIX-IT applied suggested code changes
+    double sqrtOf5 = sqrt(5);
+           ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:64:5: warning: variable 'phi' of type 'double' can be declared 'const' [misc-const-correctness]
+    double phi = (1 + sqrtOf5) / 2;
+    ^
+           const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:64:12: note: FIX-IT applied suggested code changes
+    double phi = (1 + sqrtOf5) / 2;
+           ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:87:5: warning: variable 'formulaicTransform' of type 'UnsignedIntegerMatrix' (aka 'AlbaMatrix<unsigned long long>') can be declared 'const' [misc-const-correctness]
+    UnsignedIntegerMatrix formulaicTransform(2, 2, {0, 1, 1, 1});
+    ^
+                          const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:87:27: note: FIX-IT applied suggested code changes
+    UnsignedIntegerMatrix formulaicTransform(2, 2, {0, 1, 1, 1});
+                          ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:89:5: warning: variable 'fibonacciMatrix' of type 'UnsignedIntegerMatrix' (aka 'AlbaMatrix<unsigned long long>') can be declared 'const' [misc-const-correctness]
+    UnsignedIntegerMatrix fibonacciMatrix(getMatrixRaiseToScalarPower(formulaicTransform, number - 1));  // logarithmic
+    ^
+                          const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:89:27: note: FIX-IT applied suggested code changes
+    UnsignedIntegerMatrix fibonacciMatrix(getMatrixRaiseToScalarPower(formulaicTransform, number - 1));  // logarithmic
+                          ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:97:9: warning: variable 'size' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        UnsignedInteger size = max(static_cast<UnsignedInteger>(number + 1), static_cast<UnsignedInteger>(2));
+        ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:97:25: note: FIX-IT applied suggested code changes
+        UnsignedInteger size = max(static_cast<UnsignedInteger>(number + 1), static_cast<UnsignedInteger>(2));
+                        ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:112:13: warning: variable 'n' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+            UnsignedInteger n = (step + 1) / 2;
+            ^
+                            const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:112:29: note: FIX-IT applied suggested code changes
+            UnsignedInteger n = (step + 1) / 2;
+                            ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:113:13: warning: variable 'fibonacciAtK' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+            UnsignedInteger fibonacciAtK = tabularData[n];
+            ^
+                            const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:113:29: note: FIX-IT applied suggested code changes
+            UnsignedInteger fibonacciAtK = tabularData[n];
+                            ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:114:13: warning: variable 'fibonacciAtKMinus1' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+            UnsignedInteger fibonacciAtKMinus1 = tabularData[n - 1];
+            ^
+                            const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:114:29: note: FIX-IT applied suggested code changes
+            UnsignedInteger fibonacciAtKMinus1 = tabularData[n - 1];
+                            ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:135:9: warning: variable 'nextFibonacci' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        UnsignedInteger nextFibonacci = currentFibonacci + previousFibonacci;
+        ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:135:25: note: FIX-IT applied suggested code changes
+        UnsignedInteger nextFibonacci = currentFibonacci + previousFibonacci;
+                        ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:189:5: warning: variable 'fourSum' of type 'FourSum<UnsignedIntegers>' (aka 'FourSum<vector<unsigned long long>>') can be declared 'const' [misc-const-correctness]
+    FourSum<UnsignedIntegers> fourSum(squaredElements);
+    ^
+                              const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:189:31: note: FIX-IT applied suggested code changes
+    FourSum<UnsignedIntegers> fourSum(squaredElements);
+                              ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:191:5: warning: variable 'sumOfSquares' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger sumOfSquares = get<0>(fourValues) + get<1>(fourValues) + get<2>(fourValues) + get<3>(fourValues);
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:191:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger sumOfSquares = get<0>(fourValues) + get<1>(fourValues) + get<2>(fourValues) + get<3>(fourValues);
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:201:5: warning: variable 'fibonaccis' of type 'UnsignedIntegers' (aka 'vector<unsigned long long>') can be declared 'const' [misc-const-correctness]
+    UnsignedIntegers fibonaccis(getFibonacciNumbersBelowThisNumber(number));
+    ^
+                     const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:201:22: note: FIX-IT applied suggested code changes
+    UnsignedIntegers fibonaccis(getFibonacciNumbersBelowThisNumber(number));
+                     ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:208:9: warning: variable 'sumOfFibonaccis' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        UnsignedInteger sumOfFibonaccis =
+        ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\OtherUtilities.cpp:208:25: note: FIX-IT applied suggested code changes
+        UnsignedInteger sumOfFibonaccis =
+                        ^
+[63/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/NumberTheory/PrimeAndFactorUtilities.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:34:5: warning: variable 'primeFactorsToCountMap' of type 'FactorsToCountMap' (aka 'map<unsigned long long, unsigned long long>') can be declared 'const' [misc-const-correctness]
+    FactorsToCountMap primeFactorsToCountMap(getPrimeFactorsToCountMap(number));
+    ^
+                      const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:34:23: note: FIX-IT applied suggested code changes
+    FactorsToCountMap primeFactorsToCountMap(getPrimeFactorsToCountMap(number));
+                      ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:43:5: warning: variable 'primeFactorsToCountMap' of type 'FactorsToCountMap' (aka 'map<unsigned long long, unsigned long long>') can be declared 'const' [misc-const-correctness]
+    FactorsToCountMap primeFactorsToCountMap(getPrimeFactorsToCountMap(number));
+    ^
+                      const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:43:23: note: FIX-IT applied suggested code changes
+    FactorsToCountMap primeFactorsToCountMap(getPrimeFactorsToCountMap(number));
+                      ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:46:9: warning: variable 'formulaValue' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        UnsignedInteger formulaValue = (getRaiseToPowerForIntegers(primeFactor, count + 1) - 1) / (primeFactor - 1);
+        ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:46:25: note: FIX-IT applied suggested code changes
+        UnsignedInteger formulaValue = (getRaiseToPowerForIntegers(primeFactor, count + 1) - 1) / (primeFactor - 1);
+                        ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:53:5: warning: variable 'numberOfFactors' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger numberOfFactors(getNumberOfFactors(number));
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:53:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger numberOfFactors(getNumberOfFactors(number));
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:59:12: warning: narrowing conversion from 'UnsignedInteger' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    return number / log(number);
+           ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:59:12: warning: narrowing conversion from 'double' to 'UnsignedInteger' (aka 'unsigned long long') [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:64:5: warning: variable 'primeFactorsToCountMap' of type 'FactorsToCountMap' (aka 'map<unsigned long long, unsigned long long>') can be declared 'const' [misc-const-correctness]
+    FactorsToCountMap primeFactorsToCountMap(getPrimeFactorsToCountMap(number));
+    ^
+                      const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:64:23: note: FIX-IT applied suggested code changes
+    FactorsToCountMap primeFactorsToCountMap(getPrimeFactorsToCountMap(number));
+                      ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:67:9: warning: variable 'formulaValue' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        UnsignedInteger formulaValue = getRaiseToPowerForIntegers(primeFactor, count - 1) * (primeFactor - 1);
+        ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:67:25: note: FIX-IT applied suggested code changes
+        UnsignedInteger formulaValue = getRaiseToPowerForIntegers(primeFactor, count - 1) * (primeFactor - 1);
+                        ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:90:49: warning: narrowing conversion from 'UnsignedInteger' (aka 'unsigned long long') to signed type 'difference_type' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+            find(sieveOfEratosthenes.cbegin() + candidatePrime + 1, sieveOfEratosthenes.cend(), true);
+                                                ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:136:9: warning: variable 'numbers' of type 'UnsignedIntegers' (aka 'vector<unsigned long long>') can be declared 'const' [misc-const-correctness]
+        UnsignedIntegers numbers(getPrimesBelowThisNumber(evenNumber));
+        ^
+                         const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:136:26: note: FIX-IT applied suggested code changes
+        UnsignedIntegers numbers(getPrimesBelowThisNumber(evenNumber));
+                         ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:137:9: warning: variable 'twoSum' of type 'TwoSum<UnsignedIntegers>' (aka 'TwoSum<vector<unsigned long long>>') can be declared 'const' [misc-const-correctness]
+        TwoSum<UnsignedIntegers> twoSum(numbers);
+        ^
+                                 const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:137:34: note: FIX-IT applied suggested code changes
+        TwoSum<UnsignedIntegers> twoSum(numbers);
+                                 ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:159:5: warning: variable 'start' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger start = getRaiseToPowerForIntegers(number, static_cast<UnsignedInteger>(2));
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:159:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger start = getRaiseToPowerForIntegers(number, static_cast<UnsignedInteger>(2));
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:160:5: warning: variable 'end' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger end = getRaiseToPowerForIntegers(number + 1, static_cast<UnsignedInteger>(2));
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:160:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger end = getRaiseToPowerForIntegers(number + 1, static_cast<UnsignedInteger>(2));
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:177:9: warning: variable 'isFormulaSatisfied' of type 'bool' can be declared 'const' [misc-const-correctness]
+        bool isFormulaSatisfied = getModularFactorial(number - 1, number) == number - 1;
+        ^
+             const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PrimeAndFactorUtilities.cpp:177:14: note: FIX-IT applied suggested code changes
+        bool isFormulaSatisfied = getModularFactorial(number - 1, number) == number - 1;
+             ^
+[64/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/NumberTheory/PythagoreanTripleUtilities.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PythagoreanTripleUtilities.cpp:33:9: warning: variable 'mSquared' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        UnsignedInteger mSquared = seedValueM * seedValueM;
+        ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PythagoreanTripleUtilities.cpp:33:25: note: FIX-IT applied suggested code changes
+        UnsignedInteger mSquared = seedValueM * seedValueM;
+                        ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PythagoreanTripleUtilities.cpp:34:9: warning: variable 'nSquared' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+        UnsignedInteger nSquared = seedValueN * seedValueN;
+        ^
+                        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PythagoreanTripleUtilities.cpp:34:25: note: FIX-IT applied suggested code changes
+        UnsignedInteger nSquared = seedValueN * seedValueN;
+                        ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PythagoreanTripleUtilities.cpp:49:5: warning: variable 'gcfOfABC' of type 'UnsignedInteger' (aka 'unsigned long long') can be declared 'const' [misc-const-correctness]
+    UnsignedInteger gcfOfABC =
+    ^
+                    const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\NumberTheory\PythagoreanTripleUtilities.cpp:49:21: note: FIX-IT applied suggested code changes
+    UnsignedInteger gcfOfABC =
+                    ^
+[65/93] Building CXX object CMakeFiles/AprgMath.dir/src/Math/Probability/ProbabilityUtilities.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Probability\ProbabilityUtilities.cpp:44:5: warning: variable 'probabilityOfSuccessfulAttempts' of type 'AlbaNumber' can be declared 'const' [misc-const-correctness]
+    AlbaNumber probabilityOfSuccessfulAttempts = probabilityOfASingleAttempt ^ static_cast<int>(xTarget);
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Probability\ProbabilityUtilities.cpp:44:16: note: FIX-IT applied suggested code changes
+    AlbaNumber probabilityOfSuccessfulAttempts = probabilityOfASingleAttempt ^ static_cast<int>(xTarget);
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Probability\ProbabilityUtilities.cpp:45:5: warning: variable 'probabilityOfUnsuccessfulAttempts' of type 'AlbaNumber' can be declared 'const' [misc-const-correctness]
+    AlbaNumber probabilityOfUnsuccessfulAttempts =
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Probability\ProbabilityUtilities.cpp:45:16: note: FIX-IT applied suggested code changes
+    AlbaNumber probabilityOfUnsuccessfulAttempts =
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Probability\ProbabilityUtilities.cpp:47:5: warning: variable 'numberOfCombinations' of type 'int' can be declared 'const' [misc-const-correctness]
+    int numberOfCombinations = static_cast<int>(getNumberOfCombinations(nTries, xTarget));
+    ^
+        const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Probability\ProbabilityUtilities.cpp:47:9: note: FIX-IT applied suggested code changes
+    int numberOfCombinations = static_cast<int>(getNumberOfCombinations(nTries, xTarget));
+        ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Probability\ProbabilityUtilities.cpp:59:5: warning: variable 'probabilityOfUnsuccessfulAttempts' of type 'AlbaNumber' can be declared 'const' [misc-const-correctness]
+    AlbaNumber probabilityOfUnsuccessfulAttempts =
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Probability\ProbabilityUtilities.cpp:59:16: note: FIX-IT applied suggested code changes
+    AlbaNumber probabilityOfUnsuccessfulAttempts =
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Probability\ProbabilityUtilities.cpp:61:5: warning: variable 'probabilityOfFirstSuccessfulAttempt' of type 'AlbaNumber' can be declared 'const' [misc-const-correctness]
+    AlbaNumber probabilityOfFirstSuccessfulAttempt = probabilityOfASingleAttempt;
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Probability\ProbabilityUtilities.cpp:61:16: note: FIX-IT applied suggested code changes
+    AlbaNumber probabilityOfFirstSuccessfulAttempt = probabilityOfASingleAttempt;
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Probability\ProbabilityUtilities.cpp:184:5: warning: variable 'roots' of type 'AlbaNumbers' (aka 'vector<AlbaNumber>') can be declared 'const' [misc-const-correctness]
+    AlbaNumbers roots =
+    ^
+                const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Probability\ProbabilityUtilities.cpp:184:17: note: FIX-IT applied suggested code changes
+    AlbaNumbers roots =
+                ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Probability\ProbabilityUtilities.cpp:259:5: warning: variable 'expectedValueFromSeparated' of type 'AlbaNumber' can be declared 'const' [misc-const-correctness]
+    AlbaNumber expectedValueFromSeparated = getExpectedValue(firstSetOfValueAndProbabilityPairsOfX) +
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Probability\ProbabilityUtilities.cpp:259:16: note: FIX-IT applied suggested code changes
+    AlbaNumber expectedValueFromSeparated = getExpectedValue(firstSetOfValueAndProbabilityPairsOfX) +
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Probability\ProbabilityUtilities.cpp:267:5: warning: variable 'expectedValueFromCombined' of type 'AlbaNumber' can be declared 'const' [misc-const-correctness]
+    AlbaNumber expectedValueFromCombined = getExpectedValue(all);
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\src\Math\Probability\ProbabilityUtilities.cpp:267:16: note: FIX-IT applied suggested code changes
+    AlbaNumber expectedValueFromCombined = getExpectedValue(all);
+               ^
+[66/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/Combinatorics/BurnsideLemma_unit.cpp.obj
+[67/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/Combinatorics/CatalanNumbers_unit.cpp.obj
+[68/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/Combinatorics/CayleysFormula_unit.cpp.obj
+[69/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/Combinatorics/CombinationUtilities_unit.cpp.obj
+[70/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/Combinatorics/CombinationsExamples_unit.cpp.obj
+[71/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/Combinatorics/Derangements_unit.cpp.obj
+[72/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/Combinatorics/InclusionExclusion_unit.cpp.obj
+[73/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/Combinatorics/PermutationsExamples_unit.cpp.obj
+[74/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/Combinatorics/PossibilitiesExamples_unit.cpp.obj
+[75/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/GameTheory/Common/GameUtilities_unit.cpp.obj
+[76/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/GameTheory/NimGame_unit.cpp.obj
+[77/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/GameTheory/SpecificGames/GameWithGraph_unit.cpp.obj
+[78/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/GameTheory/SpecificGames/GameWithMaze_unit.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\GameTheory\SpecificGames\GameWithMaze_unit.cpp:15:5: warning: variable 'isBlockedMatrix' of type 'BooleanMatrix' (aka 'AlbaMatrix<bool>') can be declared 'const' [misc-const-correctness]
+    BooleanMatrix isBlockedMatrix(
+    ^
+                  const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\GameTheory\SpecificGames\GameWithMaze_unit.cpp:15:19: note: FIX-IT applied suggested code changes
+    BooleanMatrix isBlockedMatrix(
+                  ^
+[79/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/GameTheory/SpecificGames/MisereGame_unit.cpp.obj
+[80/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/GameTheory/SpecificGames/StickGame_unit.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\GameTheory\SpecificGames\StickGame_unit.cpp:10:5: warning: variable 'stickGame' of type 'StickGame' can be declared 'const' [misc-const-correctness]
+    StickGame stickGame(3U);
+    ^
+              const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\GameTheory\SpecificGames\StickGame_unit.cpp:10:15: note: FIX-IT applied suggested code changes
+    StickGame stickGame(3U);
+              ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\GameTheory\SpecificGames\StickGame_unit.cpp:24:5: warning: variable 'stickGame' of type 'StickGame' can be declared 'const' [misc-const-correctness]
+    StickGame stickGame(3U);
+    ^
+              const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\GameTheory\SpecificGames\StickGame_unit.cpp:24:15: note: FIX-IT applied suggested code changes
+    StickGame stickGame(3U);
+              ^
+[81/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/GameTheory/SubGames/GrundyGame_unit.cpp.obj
+[82/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/GameTheory/SubGames/MultipleGamesWithMaze_unit.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\GameTheory\SubGames\MultipleGamesWithMaze_unit.cpp:16:5: warning: variable 'firstGameMatrix' of type 'BooleanMatrix' (aka 'AlbaMatrix<bool>') can be declared 'const' [misc-const-correctness]
+    BooleanMatrix firstGameMatrix(
+    ^
+                  const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\GameTheory\SubGames\MultipleGamesWithMaze_unit.cpp:16:19: note: FIX-IT applied suggested code changes
+    BooleanMatrix firstGameMatrix(
+                  ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\GameTheory\SubGames\MultipleGamesWithMaze_unit.cpp:19:5: warning: variable 'secondGameMatrix' of type 'BooleanMatrix' (aka 'AlbaMatrix<bool>') can be declared 'const' [misc-const-correctness]
+    BooleanMatrix secondGameMatrix(
+    ^
+                  const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\GameTheory\SubGames\MultipleGamesWithMaze_unit.cpp:19:19: note: FIX-IT applied suggested code changes
+    BooleanMatrix secondGameMatrix(
+                  ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\GameTheory\SubGames\MultipleGamesWithMaze_unit.cpp:22:5: warning: variable 'thirdGameMatrix' of type 'BooleanMatrix' (aka 'AlbaMatrix<bool>') can be declared 'const' [misc-const-correctness]
+    BooleanMatrix thirdGameMatrix(
+    ^
+                  const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\GameTheory\SubGames\MultipleGamesWithMaze_unit.cpp:22:19: note: FIX-IT applied suggested code changes
+    BooleanMatrix thirdGameMatrix(
+                  ^
+[83/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/Matrices/LinearRecurrence_unit.cpp.obj
+[84/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/NumberTheory/ChineseRemainderTheorem_unit.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\ChineseRemainderTheorem_unit.cpp:13:5: warning: variable 'chineseRemainderTheorem' of type 'ChineseRemainderTheorem' can be declared 'const' [misc-const-correctness]
+    ChineseRemainderTheorem chineseRemainderTheorem({3U, 4U, 2U}, {5U, 7U, 3U});
+    ^
+                            const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\ChineseRemainderTheorem_unit.cpp:13:29: note: FIX-IT applied suggested code changes
+    ChineseRemainderTheorem chineseRemainderTheorem({3U, 4U, 2U}, {5U, 7U, 3U});
+                            ^
+[85/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/NumberTheory/ModularArithmetic_unit.cpp.obj
+[86/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/NumberTheory/OtherUtilities_unit.cpp.obj
+[87/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/NumberTheory/PrimeAndFactorUtilities_unit.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PrimeAndFactorUtilities_unit.cpp:76:5: warning: variable 'expectedNumbers' of type 'UnsignedIntegers' (aka 'vector<unsigned long long>') can be declared 'const' [misc-const-correctness]
+    UnsignedIntegers expectedNumbers{2U, 3U, 5U, 7U, 11U, 13U, 17U, 19U, 23U, 29U};
+    ^
+                     const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PrimeAndFactorUtilities_unit.cpp:76:22: note: FIX-IT applied suggested code changes
+    UnsignedIntegers expectedNumbers{2U, 3U, 5U, 7U, 11U, 13U, 17U, 19U, 23U, 29U};
+                     ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PrimeAndFactorUtilities_unit.cpp:82:5: warning: variable 'expectedNumbers' of type 'UnsignedIntegers' (aka 'vector<unsigned long long>') can be declared 'const' [misc-const-correctness]
+    UnsignedIntegers expectedNumbers{2U, 2U, 3U, 7U};
+    ^
+                     const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PrimeAndFactorUtilities_unit.cpp:82:22: note: FIX-IT applied suggested code changes
+    UnsignedIntegers expectedNumbers{2U, 2U, 3U, 7U};
+                     ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PrimeAndFactorUtilities_unit.cpp:88:5: warning: variable 'expectedMap' of type 'FactorsToCountMap' (aka 'map<unsigned long long, unsigned long long>') can be declared 'const' [misc-const-correctness]
+    FactorsToCountMap expectedMap{{2U, 2U}, {3U, 1U}, {7U, 1U}};
+    ^
+                      const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PrimeAndFactorUtilities_unit.cpp:88:23: note: FIX-IT applied suggested code changes
+    FactorsToCountMap expectedMap{{2U, 2U}, {3U, 1U}, {7U, 1U}};
+                      ^
+[88/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/NumberTheory/PythagoreanTripleUtilities_unit.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PythagoreanTripleUtilities_unit.cpp:22:5: warning: variable 'tripleToVerify' of type 'PythagoreanTriple' (aka 'tuple<unsigned long long, unsigned long long, unsigned long long>') can be declared 'const' [misc-const-correctness]
+    PythagoreanTriple tripleToVerify(getNewPythagoreanTripleUsingMultiplier(PythagoreanTriple{3U, 4U, 5U}, 5));
+    ^
+                      const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PythagoreanTripleUtilities_unit.cpp:22:23: note: FIX-IT applied suggested code changes
+    PythagoreanTriple tripleToVerify(getNewPythagoreanTripleUsingMultiplier(PythagoreanTriple{3U, 4U, 5U}, 5));
+                      ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PythagoreanTripleUtilities_unit.cpp:24:5: warning: variable 'tripleToExpect' of type 'PythagoreanTriple' (aka 'tuple<unsigned long long, unsigned long long, unsigned long long>') can be declared 'const' [misc-const-correctness]
+    PythagoreanTriple tripleToExpect{15U, 20U, 25U};
+    ^
+                      const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PythagoreanTripleUtilities_unit.cpp:24:23: note: FIX-IT applied suggested code changes
+    PythagoreanTriple tripleToExpect{15U, 20U, 25U};
+                      ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PythagoreanTripleUtilities_unit.cpp:29:5: warning: variable 'tripleToVerify1' of type 'PythagoreanTriple' (aka 'tuple<unsigned long long, unsigned long long, unsigned long long>') can be declared 'const' [misc-const-correctness]
+    PythagoreanTriple tripleToVerify1(getPrimitivePythagoreanTripleUsingEuclidFormula(1U, 2U));
+    ^
+                      const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PythagoreanTripleUtilities_unit.cpp:29:23: note: FIX-IT applied suggested code changes
+    PythagoreanTriple tripleToVerify1(getPrimitivePythagoreanTripleUsingEuclidFormula(1U, 2U));
+                      ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PythagoreanTripleUtilities_unit.cpp:30:5: warning: variable 'tripleToVerify2' of type 'PythagoreanTriple' (aka 'tuple<unsigned long long, unsigned long long, unsigned long long>') can be declared 'const' [misc-const-correctness]
+    PythagoreanTriple tripleToVerify2(getPrimitivePythagoreanTripleUsingEuclidFormula(23U, 44U));
+    ^
+                      const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PythagoreanTripleUtilities_unit.cpp:30:23: note: FIX-IT applied suggested code changes
+    PythagoreanTriple tripleToVerify2(getPrimitivePythagoreanTripleUsingEuclidFormula(23U, 44U));
+                      ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PythagoreanTripleUtilities_unit.cpp:32:5: warning: variable 'tripleToExpect1' of type 'PythagoreanTriple' (aka 'tuple<unsigned long long, unsigned long long, unsigned long long>') can be declared 'const' [misc-const-correctness]
+    PythagoreanTriple tripleToExpect1{3U, 4U, 5U};
+    ^
+                      const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PythagoreanTripleUtilities_unit.cpp:32:23: note: FIX-IT applied suggested code changes
+    PythagoreanTriple tripleToExpect1{3U, 4U, 5U};
+                      ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PythagoreanTripleUtilities_unit.cpp:33:5: warning: variable 'tripleToExpect2' of type 'PythagoreanTriple' (aka 'tuple<unsigned long long, unsigned long long, unsigned long long>') can be declared 'const' [misc-const-correctness]
+    PythagoreanTriple tripleToExpect2{1407U, 2024U, 2465U};
+    ^
+                      const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\NumberTheory\PythagoreanTripleUtilities_unit.cpp:33:23: note: FIX-IT applied suggested code changes
+    PythagoreanTriple tripleToExpect2{1407U, 2024U, 2465U};
+                      ^
+[89/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/Probability/MarkovChains_unit.cpp.obj
+D:/a/aprg/aprg/AprgMath/AprgMath/src\Math/Probability/MarkovChains.hpp:60:9: warning: variable 'outputMatrix' of type 'ProbabilityMatrix' (aka 'AlbaMatrix<AlbaNumber>') can be declared 'const' [misc-const-correctness]
+        ProbabilityMatrix outputMatrix = m_probabilityMatrix * inputMatrix;
+        ^
+                          const 
+D:/a/aprg/aprg/AprgMath/AprgMath/src\Math/Probability/MarkovChains.hpp:60:27: note: FIX-IT applied suggested code changes
+        ProbabilityMatrix outputMatrix = m_probabilityMatrix * inputMatrix;
+                          ^
+[90/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/Probability/ProbabilityExamples_unit.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:59:5: warning: variable 'probabilityOfASingleEvent' of type 'AlbaNumber' can be declared 'const' [misc-const-correctness]
+    AlbaNumber probabilityOfASingleEvent(AlbaNumber::createFraction(1, numberOfBoxes));
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:59:16: note: FIX-IT applied suggested code changes
+    AlbaNumber probabilityOfASingleEvent(AlbaNumber::createFraction(1, numberOfBoxes));
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:125:5: warning: variable 'probabilityToVerify' of type 'AlbaNumber' can be declared 'const' [misc-const-correctness]
+    AlbaNumber probabilityToVerify = getComplementOfProbability(getProbability(5U, 6U) ^ 10);
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:125:16: note: FIX-IT applied suggested code changes
+    AlbaNumber probabilityToVerify = getComplementOfProbability(getProbability(5U, 6U) ^ 10);
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:127:5: warning: variable 'expectedProbability' of type 'AlbaNumber' can be declared 'const' [misc-const-correctness]
+    AlbaNumber expectedProbability(AlbaNumber::createFraction(50700551, 60466176U));
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:127:16: note: FIX-IT applied suggested code changes
+    AlbaNumber expectedProbability(AlbaNumber::createFraction(50700551, 60466176U));
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:138:5: warning: variable 'probabilityToVerify' of type 'AlbaNumber' can be declared 'const' [misc-const-correctness]
+    AlbaNumber probabilityToVerify =
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:138:16: note: FIX-IT applied suggested code changes
+    AlbaNumber probabilityToVerify =
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:141:5: warning: variable 'expectedProbability' of type 'AlbaNumber' can be declared 'const' [misc-const-correctness]
+    AlbaNumber expectedProbability(AlbaNumber::createFraction(5, 6U));
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:141:16: note: FIX-IT applied suggested code changes
+    AlbaNumber expectedProbability(AlbaNumber::createFraction(5, 6U));
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:152:5: warning: variable 'probabilityToVerify' of type 'AlbaNumber' can be declared 'const' [misc-const-correctness]
+    AlbaNumber probabilityToVerify =
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:152:16: note: FIX-IT applied suggested code changes
+    AlbaNumber probabilityToVerify =
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:155:5: warning: variable 'expectedProbability' of type 'AlbaNumber' can be declared 'const' [misc-const-correctness]
+    AlbaNumber expectedProbability(AlbaNumber::createFraction(1, 3U));
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:155:16: note: FIX-IT applied suggested code changes
+    AlbaNumber expectedProbability(AlbaNumber::createFraction(1, 3U));
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:166:5: warning: variable 'probabilityToVerify' of type 'AlbaNumber' can be declared 'const' [misc-const-correctness]
+    AlbaNumber probabilityToVerify =
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:166:16: note: FIX-IT applied suggested code changes
+    AlbaNumber probabilityToVerify =
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:169:5: warning: variable 'expectedProbability' of type 'AlbaNumber' can be declared 'const' [misc-const-correctness]
+    AlbaNumber expectedProbability(AlbaNumber::createFraction(1, 52U));
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:169:16: note: FIX-IT applied suggested code changes
+    AlbaNumber expectedProbability(AlbaNumber::createFraction(1, 52U));
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:182:5: warning: variable 'pairsToTest' of type 'ValueAndProbabilityPairs' (aka 'vector<pair<AlbaNumber, AlbaNumber>>') can be declared 'const' [misc-const-correctness]
+    ValueAndProbabilityPairs pairsToTest{{1U, getProbability(1U, 6U)}, {2U, getProbability(1U, 6U)},
+    ^
+                             const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityExamples_unit.cpp:182:30: note: FIX-IT applied suggested code changes
+    ValueAndProbabilityPairs pairsToTest{{1U, getProbability(1U, 6U)}, {2U, getProbability(1U, 6U)},
+                             ^
+[91/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/Probability/ProbabilityUtilities_unit.cpp.obj
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityUtilities_unit.cpp:12:5: warning: variable 'firstPairs' of type 'ValueAndProbabilityPairs' (aka 'vector<pair<AlbaNumber, AlbaNumber>>') can be declared 'const' [misc-const-correctness]
+    ValueAndProbabilityPairs firstPairs{
+    ^
+                             const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityUtilities_unit.cpp:12:30: note: FIX-IT applied suggested code changes
+    ValueAndProbabilityPairs firstPairs{
+                             ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityUtilities_unit.cpp:14:5: warning: variable 'secondPairs' of type 'ValueAndProbabilityPairs' (aka 'vector<pair<AlbaNumber, AlbaNumber>>') can be declared 'const' [misc-const-correctness]
+    ValueAndProbabilityPairs secondPairs{{4U, getProbability(1U, 5U)}, {5U, getProbability(1U, 5U)}};
+    ^
+                             const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityUtilities_unit.cpp:14:30: note: FIX-IT applied suggested code changes
+    ValueAndProbabilityPairs secondPairs{{4U, getProbability(1U, 5U)}, {5U, getProbability(1U, 5U)}};
+                             ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityUtilities_unit.cpp:87:5: warning: variable 'pairsToTest' of type 'ValueAndProbabilityPairs' (aka 'vector<pair<AlbaNumber, AlbaNumber>>') can be declared 'const' [misc-const-correctness]
+    ValueAndProbabilityPairs pairsToTest{
+    ^
+                             const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityUtilities_unit.cpp:87:30: note: FIX-IT applied suggested code changes
+    ValueAndProbabilityPairs pairsToTest{
+                             ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityUtilities_unit.cpp:101:5: warning: variable 'pairsToTest' of type 'ValueAndProbabilityPairs' (aka 'vector<pair<AlbaNumber, AlbaNumber>>') can be declared 'const' [misc-const-correctness]
+    ValueAndProbabilityPairs pairsToTest{{1U, getProbability(1U, 6U)}, {2U, getProbability(1U, 6U)},
+    ^
+                             const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityUtilities_unit.cpp:101:30: note: FIX-IT applied suggested code changes
+    ValueAndProbabilityPairs pairsToTest{{1U, getProbability(1U, 6U)}, {2U, getProbability(1U, 6U)},
+                             ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityUtilities_unit.cpp:119:5: warning: variable 'pairsToTest' of type 'ValueAndProbabilityPairs' (aka 'vector<pair<AlbaNumber, AlbaNumber>>') can be declared 'const' [misc-const-correctness]
+    ValueAndProbabilityPairs pairsToTest{
+    ^
+                             const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Probability\ProbabilityUtilities_unit.cpp:119:30: note: FIX-IT applied suggested code changes
+    ValueAndProbabilityPairs pairsToTest{
+                             ^
+[92/93] Building CXX object CMakeFiles/AprgMath.dir/tst/Math/Set/MathSet_unit.cpp.obj
+D:/a/aprg/aprg/AprgMath/AprgMath/src\Math/Set/MathSet.hpp:45:9: warning: variable 'ruleToBeInTheNewSet' of type 'Rule' (aka 'function<bool (const int &)>') can be declared 'const' [misc-const-correctness]
+        Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
+        ^
+             const 
+D:/a/aprg/aprg/AprgMath/AprgMath/src\Math/Set/MathSet.hpp:45:14: note: FIX-IT applied suggested code changes
+        Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
+             ^
+D:/a/aprg/aprg/AprgMath/AprgMath/src\Math/Set/MathSet.hpp:52:9: warning: variable 'ruleToBeInTheNewSet' of type 'Rule' (aka 'function<bool (const int &)>') can be declared 'const' [misc-const-correctness]
+        Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
+        ^
+             const 
+D:/a/aprg/aprg/AprgMath/AprgMath/src\Math/Set/MathSet.hpp:52:14: note: FIX-IT applied suggested code changes
+        Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
+             ^
+D:/a/aprg/aprg/AprgMath/AprgMath/src\Math/Set/MathSet.hpp:59:9: warning: variable 'ruleToBeInTheNewSet' of type 'Rule' (aka 'function<bool (const int &)>') can be declared 'const' [misc-const-correctness]
+        Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
+        ^
+             const 
+D:/a/aprg/aprg/AprgMath/AprgMath/src\Math/Set/MathSet.hpp:59:14: note: FIX-IT applied suggested code changes
+        Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
+             ^
+D:/a/aprg/aprg/AprgMath/AprgMath/src\Math/Set/MathSet.hpp:68:9: warning: variable 'ruleToBeInTheNewSet' of type 'Rule' (aka 'function<bool (const int &)>') can be declared 'const' [misc-const-correctness]
+        Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
+        ^
+             const 
+D:/a/aprg/aprg/AprgMath/AprgMath/src\Math/Set/MathSet.hpp:68:14: note: FIX-IT applied suggested code changes
+        Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
+             ^
+D:/a/aprg/aprg/AprgMath/AprgMath/src\Math/Set/MathSet.hpp:81:9: warning: variable 'subsetsRoster' of type 'RosterLists' (aka 'vector<vector<int>>') can be declared 'const' [misc-const-correctness]
+        RosterLists subsetsRoster(
+        ^
+                    const 
+D:/a/aprg/aprg/AprgMath/AprgMath/src\Math/Set/MathSet.hpp:81:21: note: FIX-IT applied suggested code changes
+        RosterLists subsetsRoster(
+                    ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:34:5: warning: variable 'nullSet' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet nullSet;
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:34:16: note: FIX-IT applied suggested code changes
+    IntegerSet nullSet;
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:43:5: warning: variable 'rosterList' of type 'IntegerSet::RosterList' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet::RosterList rosterList{1, 2, 3, 4, 5};
+    ^
+                           const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:43:28: note: FIX-IT applied suggested code changes
+    IntegerSet::RosterList rosterList{1, 2, 3, 4, 5};
+                           ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:44:5: warning: variable 'mathSet' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet(rosterList);
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:44:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet(rosterList);
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:55:5: warning: variable 'mathSet' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet({2, 4, 6, 8, 9});
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:55:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet({2, 4, 6, 8, 9});
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:66:5: warning: variable 'mathSet' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:66:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:77:5: warning: variable 'mathSet1' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet1({2, 4});
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:77:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet1({2, 4});
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:78:5: warning: variable 'mathSet2' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet2("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:78:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet2("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:85:5: warning: variable 'mathSet1' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet1({3, 5});
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:85:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet1({3, 5});
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:86:5: warning: variable 'mathSet2' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet2("set of odd numbers", [](int const& elementToCheck) { return isOdd(elementToCheck); });
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:86:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet2("set of odd numbers", [](int const& elementToCheck) { return isOdd(elementToCheck); });
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:93:5: warning: variable 'mathSet1' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet1("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:93:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet1("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:94:5: warning: variable 'mathSet2' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet2("set of odd numbers", [](int const& elementToCheck) { return isOdd(elementToCheck); });
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:94:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet2("set of odd numbers", [](int const& elementToCheck) { return isOdd(elementToCheck); });
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:95:5: warning: variable 'mathSet3' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet3({2, 4});
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:95:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet3({2, 4});
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:104:5: warning: variable 'mathSet' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:104:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:106:5: warning: variable 'complementSet' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet complementSet(mathSet.getComplement());
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:106:16: note: FIX-IT applied suggested code changes
+    IntegerSet complementSet(mathSet.getComplement());
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:117:5: warning: variable 'mathSet1' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet1({1, 2, 3});
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:117:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet1({1, 2, 3});
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:118:5: warning: variable 'mathSet2' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet2("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:118:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet2("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:120:5: warning: variable 'unionSet' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet unionSet(mathSet1.getUnionWith(mathSet2));
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:120:16: note: FIX-IT applied suggested code changes
+    IntegerSet unionSet(mathSet1.getUnionWith(mathSet2));
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:131:5: warning: variable 'mathSet1' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet1({1, 2, 3});
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:131:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet1({1, 2, 3});
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:132:5: warning: variable 'mathSet2' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet2("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:132:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet2("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:134:5: warning: variable 'intersectionSet' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet intersectionSet(mathSet1.getIntersectionWith(mathSet2));
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:134:16: note: FIX-IT applied suggested code changes
+    IntegerSet intersectionSet(mathSet1.getIntersectionWith(mathSet2));
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:145:5: warning: variable 'mathSet1' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet1({1, 2, 3});
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:145:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet1({1, 2, 3});
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:146:5: warning: variable 'mathSet2' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet2("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:146:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet2("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:148:5: warning: variable 'differenceSet' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet differenceSet(mathSet1.getDifferenceWith(mathSet2));
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:148:16: note: FIX-IT applied suggested code changes
+    IntegerSet differenceSet(mathSet1.getDifferenceWith(mathSet2));
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:159:5: warning: variable 'mathSet' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet({1, 2, 3});
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:159:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet({1, 2, 3});
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:161:5: warning: variable 'actualSubsets' of type 'IntegerSets' (aka 'vector<MathSet<int>>') can be declared 'const' [misc-const-correctness]
+    IntegerSets actualSubsets(mathSet.getSubsets(generateNumbersFromZeroToTen));
+    ^
+                const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:161:17: note: FIX-IT applied suggested code changes
+    IntegerSets actualSubsets(mathSet.getSubsets(generateNumbersFromZeroToTen));
+                ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:163:5: warning: variable 'actualSubsetsString' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+    string actualSubsetsString(containerHelper::getStringFromContents(actualSubsets));
+    ^
+           const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:163:12: note: FIX-IT applied suggested code changes
+    string actualSubsetsString(containerHelper::getStringFromContents(actualSubsets));
+           ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:168:5: warning: variable 'mathSet1' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet1({3, 4, 5});
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:168:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet1({3, 4, 5});
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:169:5: warning: variable 'mathSet2' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet2("set of odd numbers", [](int const& elementToCheck) { return isOdd(elementToCheck); });
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:169:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet2("set of odd numbers", [](int const& elementToCheck) { return isOdd(elementToCheck); });
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:171:5: warning: variable 'unionSet' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet unionSet(getUnion(mathSet1, mathSet2));
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:171:16: note: FIX-IT applied suggested code changes
+    IntegerSet unionSet(getUnion(mathSet1, mathSet2));
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:182:5: warning: variable 'mathSet1' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet1({3, 4, 5});
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:182:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet1({3, 4, 5});
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:183:5: warning: variable 'mathSet2' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet2("set of odd numbers", [](int const& elementToCheck) { return isOdd(elementToCheck); });
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:183:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet2("set of odd numbers", [](int const& elementToCheck) { return isOdd(elementToCheck); });
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:185:5: warning: variable 'intersectionSet' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet intersectionSet(getIntersection(mathSet1, mathSet2));
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:185:16: note: FIX-IT applied suggested code changes
+    IntegerSet intersectionSet(getIntersection(mathSet1, mathSet2));
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:196:5: warning: variable 'mathSet1' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet1({1, 2, 3});
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:196:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet1({1, 2, 3});
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:197:5: warning: variable 'mathSet2' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet2("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:197:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet2("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:199:5: warning: variable 'differenceSet' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet differenceSet(getDifference(mathSet1, mathSet2));
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:199:16: note: FIX-IT applied suggested code changes
+    IntegerSet differenceSet(getDifference(mathSet1, mathSet2));
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:210:5: warning: variable 'mathSet1' of type 'IntegerSet' (aka 'MathSet<int>') can be declared 'const' [misc-const-correctness]
+    IntegerSet mathSet1({1, 2});
+    ^
+               const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:210:16: note: FIX-IT applied suggested code changes
+    IntegerSet mathSet1({1, 2});
+               ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:211:5: warning: variable 'mathSet2' of type 'CharSet' (aka 'MathSet<char>') can be declared 'const' [misc-const-correctness]
+    CharSet mathSet2({'x', 'y'});
+    ^
+            const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:211:13: note: FIX-IT applied suggested code changes
+    CharSet mathSet2({'x', 'y'});
+            ^
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:213:5: warning: variable 'cartesianProduct' of type 'MathSet<pair<int, char>>' can be declared 'const' [misc-const-correctness]
+    MathSet<pair<int, char>> cartesianProduct(
+    ^
+                             const 
+D:\a\aprg\aprg\AprgMath\AprgMath\tst\Math\Set\MathSet_unit.cpp:213:30: note: FIX-IT applied suggested code changes
+    MathSet<pair<int, char>> cartesianProduct(
+                             ^
+[93/93] Linking CXX executable AprgMath.exe
+[35m2023-09-11T07:52:14[0m | [33mBuildAndRun.sh:218[0m | The script [BuildAndRun.sh] for [buildOnOneCore] is finished.
 DONE!

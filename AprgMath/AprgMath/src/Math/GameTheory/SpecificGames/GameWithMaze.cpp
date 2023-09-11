@@ -14,21 +14,21 @@ GameWithMaze::GameWithMaze(BooleanMatrix const& isBlockedMatrix)
           isBlockedMatrix.getNumberOfColumns(), isBlockedMatrix.getNumberOfRows(), INVALID_GRUNDY_NUMBER) {}
 
 bool GameWithMaze::hasNoMoves(Coordinate const& coordinate) const {
-    Coordinate oneLeft(coordinate.first - 1, coordinate.second);
-    Coordinate oneUp(coordinate.first, coordinate.second - 1);
-    bool isLeftNotAllowed = !m_isBlockedMatrix.isInside(oneLeft.first, oneLeft.second) ||
-                            m_isBlockedMatrix.getEntry(oneLeft.first, oneLeft.second);
-    bool isUpAllowed =
+    Coordinate const oneLeft(coordinate.first - 1, coordinate.second);
+    Coordinate const oneUp(coordinate.first, coordinate.second - 1);
+    bool const isLeftNotAllowed = !m_isBlockedMatrix.isInside(oneLeft.first, oneLeft.second) ||
+                                  m_isBlockedMatrix.getEntry(oneLeft.first, oneLeft.second);
+    bool const isUpAllowed =
         !m_isBlockedMatrix.isInside(oneUp.first, oneUp.second) || m_isBlockedMatrix.getEntry(oneUp.first, oneUp.second);
     return isLeftNotAllowed && isUpAllowed;
 }
 
 GameWithMaze::Coordinate GameWithMaze::getOptimalNextCoordinateAt(Coordinate const& coordinate) {
     Coordinate result{};
-    GameState gameState = getGameStateFromGrundyNumber(getGrundyNumberAt(coordinate));
+    GameState const gameState = getGameStateFromGrundyNumber(getGrundyNumberAt(coordinate));
     if (GameState::Losing == gameState) {
-        Coordinate oneLeft(coordinate.first - 1, coordinate.second);
-        Coordinate oneUp(coordinate.first, coordinate.second - 1);
+        Coordinate const oneLeft(coordinate.first - 1, coordinate.second);
+        Coordinate const oneUp(coordinate.first, coordinate.second - 1);
         if (m_isBlockedMatrix.isInside(oneLeft.first, oneLeft.second) &&
             !m_isBlockedMatrix.getEntry(oneLeft.first, oneLeft.second)) {
             // move one left if possible to prolong the game
@@ -70,7 +70,7 @@ GameState GameWithMaze::getGameStateAt(Coordinate const& coordinate) {
 UnsignedInteger GameWithMaze::getGrundyNumberAt(Coordinate const& coordinate) {
     UnsignedInteger result{};
     if (!m_isBlockedMatrix.getEntry(coordinate.first, coordinate.second)) {
-        GrundyNumberEntry grundyNumberEntry = m_grundyNumberMatrix.getEntry(coordinate.first, coordinate.second);
+        GrundyNumberEntry const grundyNumberEntry = m_grundyNumberMatrix.getEntry(coordinate.first, coordinate.second);
         if (grundyNumberEntry != INVALID_GRUNDY_NUMBER) {
             result = static_cast<UnsignedInteger>(grundyNumberEntry);
         } else {
@@ -112,7 +112,7 @@ GameWithMaze::Coordinates GameWithMaze::getNextCoordinates(Coordinate const& coo
 
 void GameWithMaze::retrieveLeftCoordinates(Coordinates& retrievedCoordinates, Coordinate const& coordinate) const {
     for (int x = coordinate.first - 1; x >= 0; --x) {
-        Coordinate xyToCheck(x, coordinate.second);
+        Coordinate const xyToCheck(x, coordinate.second);
         if (!m_isBlockedMatrix.getEntry(xyToCheck.first, xyToCheck.second)) {
             retrievedCoordinates.emplace_back(xyToCheck);
         } else {
@@ -123,7 +123,7 @@ void GameWithMaze::retrieveLeftCoordinates(Coordinates& retrievedCoordinates, Co
 
 void GameWithMaze::retrieveUpCoordinates(Coordinates& retrievedCoordinates, Coordinate const& coordinate) const {
     for (int y = coordinate.second - 1; y >= 0; --y) {
-        Coordinate xyToCheck(coordinate.first, y);
+        Coordinate const xyToCheck(coordinate.first, y);
         if (!m_isBlockedMatrix.getEntry(xyToCheck.first, xyToCheck.second)) {
             retrievedCoordinates.emplace_back(xyToCheck);
         } else {
@@ -134,7 +134,7 @@ void GameWithMaze::retrieveUpCoordinates(Coordinates& retrievedCoordinates, Coor
 
 SetOfUnsignedIntegers GameWithMaze::getNextGrundyNumbers(Coordinate const& coordinate) {
     SetOfUnsignedIntegers result;
-    Coordinates nextCoorindates(getNextCoordinates(coordinate));
+    Coordinates const nextCoorindates(getNextCoordinates(coordinate));
     transform(
         nextCoorindates.cbegin(), nextCoorindates.cend(), inserter(result, result.begin()),
         [&](Coordinate const& nextCoordinate) { return getGrundyNumberAt(nextCoordinate); });

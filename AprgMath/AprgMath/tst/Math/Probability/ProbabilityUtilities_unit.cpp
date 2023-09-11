@@ -9,9 +9,9 @@ using namespace std;
 namespace alba::math {
 
 TEST(ProbabilityUtilitiesTest, DoesExpectedValuesHaveLinearityWorks) {
-    ValueAndProbabilityPairs firstPairs{
+    ValueAndProbabilityPairs const firstPairs{
         {1U, getProbability(1U, 5U)}, {2U, getProbability(1U, 5U)}, {3U, getProbability(1U, 5U)}};
-    ValueAndProbabilityPairs secondPairs{{4U, getProbability(1U, 5U)}, {5U, getProbability(1U, 5U)}};
+    ValueAndProbabilityPairs const secondPairs{{4U, getProbability(1U, 5U)}, {5U, getProbability(1U, 5U)}};
 
     EXPECT_TRUE(doesExpectedValuesHaveLinearity(firstPairs, secondPairs));
 }
@@ -84,7 +84,7 @@ TEST(ProbabilityUtilitiesTest, GetConditionalProbabilityOfEventAGivenThatEventBH
 }
 
 TEST(ProbabilityUtilitiesTest, GetExpectedValueWorks) {
-    ValueAndProbabilityPairs pairsToTest{
+    ValueAndProbabilityPairs const pairsToTest{
         {1U, getProbability(1U, 5U)},
         {2U, getProbability(1U, 5U)},
         {3U, getProbability(1U, 5U)},
@@ -98,9 +98,9 @@ TEST(ProbabilityUtilitiesTest, GetExpectedValueWorksOnExample1) {
     // Problem: Given a fair dice with 6 faces,
     // the dice is thrown n times, find the expected value of the sum of all results.
     // For example, if n = 2, there are total 36 possible outcomes.
-    ValueAndProbabilityPairs pairsToTest{{1U, getProbability(1U, 6U)}, {2U, getProbability(1U, 6U)},
-                                         {3U, getProbability(1U, 6U)}, {4U, getProbability(1U, 6U)},
-                                         {5U, getProbability(1U, 6U)}, {6U, getProbability(1U, 6U)}};
+    ValueAndProbabilityPairs const pairsToTest{{1U, getProbability(1U, 6U)}, {2U, getProbability(1U, 6U)},
+                                               {3U, getProbability(1U, 6U)}, {4U, getProbability(1U, 6U)},
+                                               {5U, getProbability(1U, 6U)}, {6U, getProbability(1U, 6U)}};
     auto sumOfTwo = getExpectedValue(pairsToTest) * 2;
 
     EXPECT_EQ(AlbaNumber(7), sumOfTwo);
@@ -116,7 +116,7 @@ TEST(ProbabilityUtilitiesTest, GetExpectedValueWorksOnHatCheckProblem) {
     // [Here P(Ri = 1)  indicates probability that Ri is 1]
     // = 1/n + 1/n + ... + 1/n
     // = 1
-    ValueAndProbabilityPairs pairsToTest{
+    ValueAndProbabilityPairs const pairsToTest{
         {1U, getProbability(1U, 5U)},
         {1U, getProbability(1U, 5U)},
         {1U, getProbability(1U, 5U)},

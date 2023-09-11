@@ -22,7 +22,7 @@ void findDistinctNonConsecutiveFibonacciNumbersForSum(
     UnsignedInteger const index) {
     // This can be improved by dynamic programming
     for (UnsignedInteger i = index; i < fibonaccis.size(); ++i) {
-        UnsignedInteger fibonacci(fibonaccis[i]);
+        UnsignedInteger const fibonacci(fibonaccis[i]);
         if (sum > fibonacci) {
             fibonaccisForSum.emplace_back(fibonacci);
             findDistinctNonConsecutiveFibonacciNumbersForSum(
@@ -49,7 +49,7 @@ UnsignedInteger getNthFibonacciNumber(UnsignedInteger const number) {
     UnsignedInteger previousFibonacci(0);
     UnsignedInteger currentFibonacci(1);
     for (UnsignedInteger n = 2; n <= number; ++n) {
-        UnsignedInteger nextFibonacci = currentFibonacci + previousFibonacci;
+        UnsignedInteger const nextFibonacci = currentFibonacci + previousFibonacci;
         previousFibonacci = currentFibonacci;
         currentFibonacci = nextFibonacci;
     }
@@ -60,8 +60,8 @@ UnsignedInteger getNthFibonacciNumberUsingBinetsFormula(UnsignedInteger const nu
     // NOTE: The time complexity is constant but it uses double precision so its not that accurate
     // NOTE: The pow() might be logarithmic but its not clearly written on the standard.
     // Binets formula:
-    double sqrtOf5 = sqrt(5);
-    double phi = (1 + sqrtOf5) / 2;
+    double const sqrtOf5 = sqrt(5);
+    double const phi = (1 + sqrtOf5) / 2;
     return getIntegerAfterRoundingADoubleValue<UnsignedInteger>(pow(phi, number) / sqrtOf5);
 }
 
@@ -84,9 +84,10 @@ UnsignedInteger getNthFibonacciUsingMatrixPowerWithLogarithmicTime(UnsignedInteg
     }  // Matrix representation:
     // |f(n-1)|f(n)  |
     // |f(n)  |f(n+1)|
-    UnsignedIntegerMatrix formulaicTransform(2, 2, {0, 1, 1, 1});
+    UnsignedIntegerMatrix const formulaicTransform(2, 2, {0, 1, 1, 1});
 
-    UnsignedIntegerMatrix fibonacciMatrix(getMatrixRaiseToScalarPower(formulaicTransform, number - 1));  // logarithmic
+    UnsignedIntegerMatrix const fibonacciMatrix(
+        getMatrixRaiseToScalarPower(formulaicTransform, number - 1));  // logarithmic
     return fibonacciMatrix.getEntry(1U, 1U);
 }
 
@@ -94,7 +95,7 @@ UnsignedInteger getNthFibonacciUsingLogarithmicTabularDP(UnsignedInteger const n
     // Derived using matrix power
     UnsignedInteger result(number);
     if (number > 1) {
-        UnsignedInteger size = max(static_cast<UnsignedInteger>(number + 1), static_cast<UnsignedInteger>(2));
+        UnsignedInteger const size = max(static_cast<UnsignedInteger>(number + 1), static_cast<UnsignedInteger>(2));
         UnsignedIntegers tabularData(size);
         tabularData[0] = 0;
         tabularData[1] = 1;
@@ -109,9 +110,9 @@ UnsignedInteger getNthFibonacciUsingLogarithmicTabularDP(UnsignedInteger const n
 
         for (UnsignedInteger const step : logarithmicSteps) {
             UnsignedInteger& resultForStep(tabularData[step]);
-            UnsignedInteger n = (step + 1) / 2;
-            UnsignedInteger fibonacciAtK = tabularData[n];
-            UnsignedInteger fibonacciAtKMinus1 = tabularData[n - 1];
+            UnsignedInteger const n = (step + 1) / 2;
+            UnsignedInteger const fibonacciAtK = tabularData[n];
+            UnsignedInteger const fibonacciAtKMinus1 = tabularData[n - 1];
             if (mathHelper::isOdd(step)) {
                 resultForStep = fibonacciAtK * fibonacciAtK + fibonacciAtKMinus1 * fibonacciAtKMinus1;
             } else {
@@ -132,7 +133,7 @@ UnsignedIntegers getFibonacciNumbersBelowThisNumber(UnsignedInteger const number
     }
     while (currentFibonacci < number) {
         result.emplace_back(currentFibonacci);
-        UnsignedInteger nextFibonacci = currentFibonacci + previousFibonacci;
+        UnsignedInteger const nextFibonacci = currentFibonacci + previousFibonacci;
         previousFibonacci = currentFibonacci;
         currentFibonacci = nextFibonacci;
     }
@@ -186,9 +187,10 @@ bool isLagrangeTheoremTrue(UnsignedInteger const number) {
         squaredElements.emplace_back(i * i);
     }
 
-    FourSum<UnsignedIntegers> fourSum(squaredElements);
+    FourSum<UnsignedIntegers> const fourSum(squaredElements);
     auto fourValues = fourSum.getPossibleDuplicatedFourValuesWithSum(number);
-    UnsignedInteger sumOfSquares = get<0>(fourValues) + get<1>(fourValues) + get<2>(fourValues) + get<3>(fourValues);
+    UnsignedInteger const sumOfSquares =
+        get<0>(fourValues) + get<1>(fourValues) + get<2>(fourValues) + get<3>(fourValues);
 
     return sumOfSquares == number;
 }
@@ -198,14 +200,14 @@ bool isZeckendorfTheoremTrue(UnsignedInteger const number) {
     // such that no two numbers are equal or consecutive Fibonacci numbers.
     // For example, the number 74 can be represented as the sum 55 + 13 + 5 + 1.
     bool result(false);
-    UnsignedIntegers fibonaccis(getFibonacciNumbersBelowThisNumber(number));
+    UnsignedIntegers const fibonaccis(getFibonacciNumbersBelowThisNumber(number));
 
     bool isComplete(false);
     UnsignedIntegers fibonaccisForSum;
     findDistinctNonConsecutiveFibonacciNumbersForSum(isComplete, fibonaccisForSum, fibonaccis, number, 0);
 
     if (isComplete) {
-        UnsignedInteger sumOfFibonaccis =
+        UnsignedInteger const sumOfFibonaccis =
             accumulate(fibonaccisForSum.cbegin(), fibonaccisForSum.cend(), 0, std::plus<>());
         result = sumOfFibonaccis == number;
     }

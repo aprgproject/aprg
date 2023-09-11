@@ -56,7 +56,7 @@ TEST(ProbabilityExampleTest, BallsAndBoxesWorksWithExpectedNumberOfBallsInABox) 
 TEST(ProbabilityExampleTest, BallsAndBoxesWorksWithProbabilityOfOneBall) {
     // How many balls must we toss on the average until a given box contains a ball?
     auto numberOfBoxes = 2;
-    AlbaNumber probabilityOfASingleEvent(AlbaNumber::createFraction(1, numberOfBoxes));
+    AlbaNumber const probabilityOfASingleEvent(AlbaNumber::createFraction(1, numberOfBoxes));
     EXPECT_EQ(AlbaNumber::createFraction(1, 2), getProbabilityOnGeometricDistribution(probabilityOfASingleEvent, 1));
 }
 
@@ -122,9 +122,9 @@ TEST(ProbabilityExampleTest, ComplementExampleWorks) {
     // Take note that probability of getting NOT a six on when throwing a dice ten times is (5/6)^10
     // The complement of NOT getting a six is getting a six.
     // Hence the probability is 1-(5/6)^10.
-    AlbaNumber probabilityToVerify = getComplementOfProbability(getProbability(5U, 6U) ^ 10);
+    AlbaNumber const probabilityToVerify = getComplementOfProbability(getProbability(5U, 6U) ^ 10);
 
-    AlbaNumber expectedProbability(AlbaNumber::createFraction(50700551, 60466176U));
+    AlbaNumber const expectedProbability(AlbaNumber::createFraction(50700551, 60466176U));
     EXPECT_EQ(expectedProbability, probabilityToVerify);
 }
 
@@ -135,10 +135,10 @@ TEST(ProbabilityExampleTest, UnionExampleWorks) {
     // -> B = "the outcome is less than 4" -> P(B) = 3/6
     // -> A∩B = "the outcome is even or less than 4" -> P(A∩B) = 1/6
     // What is the probability of the union of A and B? Or P(A∪B)?
-    AlbaNumber probabilityToVerify =
+    AlbaNumber const probabilityToVerify =
         getUnionOfProbabilities(getProbability(3U, 6U), getProbability(3U, 6U), getProbability(1U, 6U));
 
-    AlbaNumber expectedProbability(AlbaNumber::createFraction(5, 6U));
+    AlbaNumber const expectedProbability(AlbaNumber::createFraction(5, 6U));
     EXPECT_EQ(expectedProbability, probabilityToVerify);
 }
 
@@ -149,10 +149,10 @@ TEST(ProbabilityExampleTest, ConditionalProbabilityExampleWorks) {
     // -> B = "the outcome is less than 4" -> P(B) = 3/6
     // -> A∩B = "the outcome is even or less than 4" -> P(A∩B) = 1/6
     // What is the conditional probability of A given B? Or P(A|B)?
-    AlbaNumber probabilityToVerify =
+    AlbaNumber const probabilityToVerify =
         getConditionalProbabilityOfEventAGivenThatEventBHappened(getProbability(3U, 6U), getProbability(1U, 6U));
 
-    AlbaNumber expectedProbability(AlbaNumber::createFraction(1, 3U));
+    AlbaNumber const expectedProbability(AlbaNumber::createFraction(1, 3U));
     EXPECT_EQ(expectedProbability, probabilityToVerify);
 }
 
@@ -163,10 +163,10 @@ TEST(ProbabilityExampleTest, IntersectionExampleWorks) {
     // -> B = "the value is four" -> P(B) = 4/52
     // -> A and B are independent -> P(A|B) = P(A) and P(B|A) = P(B)
     // What is the probability of the intersection of A and B? Or P(A∪B)?
-    AlbaNumber probabilityToVerify =
+    AlbaNumber const probabilityToVerify =
         getIntersectionOfProbabilitiesOfIndependentEvents(getProbability(13U, 52U), getProbability(4U, 52U));
 
-    AlbaNumber expectedProbability(AlbaNumber::createFraction(1, 52U));
+    AlbaNumber const expectedProbability(AlbaNumber::createFraction(1, 52U));
     EXPECT_EQ(expectedProbability, probabilityToVerify);
 }
 
@@ -179,9 +179,9 @@ TEST(ProbabilityExampleTest, ExpectedValueExampleWorks) {
     // Probability of value of 5 is 1/6.
     // Probability of value of 6 is 1/6.
     // Expected value is 7/2
-    ValueAndProbabilityPairs pairsToTest{{1U, getProbability(1U, 6U)}, {2U, getProbability(1U, 6U)},
-                                         {3U, getProbability(1U, 6U)}, {4U, getProbability(1U, 6U)},
-                                         {5U, getProbability(1U, 6U)}, {6U, getProbability(1U, 6U)}};
+    ValueAndProbabilityPairs const pairsToTest{{1U, getProbability(1U, 6U)}, {2U, getProbability(1U, 6U)},
+                                               {3U, getProbability(1U, 6U)}, {4U, getProbability(1U, 6U)},
+                                               {5U, getProbability(1U, 6U)}, {6U, getProbability(1U, 6U)}};
 
     EXPECT_EQ(AlbaNumber::createFraction(7, 2U), getExpectedValue(pairsToTest));
 }

@@ -19,18 +19,18 @@ TEST(PythagoreanTripleTest, IsPrimitiveWorks) {
 }
 
 TEST(PythagoreanTripleTest, GetNewPythagoreanTripleUsingMultiplierWorks) {
-    PythagoreanTriple tripleToVerify(getNewPythagoreanTripleUsingMultiplier(PythagoreanTriple{3U, 4U, 5U}, 5));
+    PythagoreanTriple const tripleToVerify(getNewPythagoreanTripleUsingMultiplier(PythagoreanTriple{3U, 4U, 5U}, 5));
 
-    PythagoreanTriple tripleToExpect{15U, 20U, 25U};
+    PythagoreanTriple const tripleToExpect{15U, 20U, 25U};
     EXPECT_EQ(tripleToExpect, tripleToVerify);
 }
 
 TEST(PythagoreanTripleTest, GetPrimitivePythagoreanTripleUsingEuclidFormulaWorks) {
-    PythagoreanTriple tripleToVerify1(getPrimitivePythagoreanTripleUsingEuclidFormula(1U, 2U));
-    PythagoreanTriple tripleToVerify2(getPrimitivePythagoreanTripleUsingEuclidFormula(23U, 44U));
+    PythagoreanTriple const tripleToVerify1(getPrimitivePythagoreanTripleUsingEuclidFormula(1U, 2U));
+    PythagoreanTriple const tripleToVerify2(getPrimitivePythagoreanTripleUsingEuclidFormula(23U, 44U));
 
-    PythagoreanTriple tripleToExpect1{3U, 4U, 5U};
-    PythagoreanTriple tripleToExpect2{1407U, 2024U, 2465U};
+    PythagoreanTriple const tripleToExpect1{3U, 4U, 5U};
+    PythagoreanTriple const tripleToExpect2{1407U, 2024U, 2465U};
     EXPECT_EQ(tripleToExpect1, tripleToVerify1);
     EXPECT_EQ(tripleToExpect2, tripleToVerify2);
 }
