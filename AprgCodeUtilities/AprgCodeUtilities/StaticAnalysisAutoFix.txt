@@ -18,11 +18,16 @@ drwxr-xr-x 1 runneradmin 197121      0 Sep 11 02:59 CMakeFiles
 -rw-r--r-- 1 runneradmin 197121 137065 Sep 11 02:59 build.ninja
 -rw-r--r-- 1 runneradmin 197121   2319 Sep 11 02:59 cmake_install.cmake
 [1/61] Building CXX object CMakeFiles/gtest.dir/D_/a/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc.obj
-In file included from D:/a/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:49:
-D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
-  __try {
-  ^
-1 warning generated.
+In file included from D:/a/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:49:
+
+D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
+
+  __try {
+
+  ^
+
+1 warning generated.
+
 [2/61] Building CXX object CMakeFiles/gtest.dir/D_/a/aprg/aprg/gtest/gtest/googletest/src/gtest_main.cc.obj
 [3/61] Linking CXX static library gtest.lib
 [4/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaContainerHelper.cpp.obj
@@ -73,13 +78,20 @@ D:/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp:23:
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
         _CRT_INSECURE_DEPRECATE(localtime_s)
         ^
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
-        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
-                                                      ^
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
-                                              ^
-1 warning generated.
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+
+                                                      ^
+
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+
+                                              ^
+
+1 warning generated.
+
 [34/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimer.cpp.obj
 [35/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/AlbaUserInterface.cpp.obj
 [36/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp.obj
@@ -522,10 +534,10 @@ D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\C
     ScopeDetail& scopeToExit(m_scopeDetails.back());
     ^
                 const
-D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:336:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\agetReorganizedTermsprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:336:16: note: FIX-IT applied suggested code changes
     ScopeDetail& scopeToExit(m_scopeDetails.back());
                ^
-D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:340:9: warning: variable 'sorter' of type 'CPlusPlusReorganizeItems' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\getReorganizedTermsodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:340:9: warning: variable 'sorter' of type 'CPlusPlusReorganizeItems' can be declared 'const' [misc-const-correctness]
         CPlusPlusReorganizeItems sorter(
         ^
                                  const 

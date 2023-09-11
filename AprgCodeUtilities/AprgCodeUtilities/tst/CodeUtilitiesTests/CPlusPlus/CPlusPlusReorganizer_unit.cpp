@@ -114,7 +114,7 @@ TEST(CPlusPlusReorganizerTest, DISABLED_ActualProcessAprgDirectoryTest) {
 }
 
 TEST(CPlusPlusReorganizerTest, DISABLED_ActualProcessDirectoryTest) {
-    processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\CPlusPlusExamples\CPlusPlusExamples)");
+    processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities)");
 }
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaContainerHelperWorks) {
@@ -212,6 +212,16 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaBitManipulationClassDefinitionWorks
     reorganizer.reorganizeFile(TEST_HEADER_FILE);
 
     verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaBitManipulationClassDefinition.hpp)", TEST_HEADER_FILE);
+    clearFile(TEST_HEADER_FILE);
+}
+
+TEST(CPlusPlusReorganizerTest, ReorganizeAlbaDebugWorks) {
+    CPlusPlusReorganizer reorganizer;
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaDebug.hpp)", TEST_HEADER_FILE);
+
+    reorganizer.reorganizeFile(TEST_HEADER_FILE);
+
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaDebug.hpp)", TEST_HEADER_FILE);
     clearFile(TEST_HEADER_FILE);
 }
 

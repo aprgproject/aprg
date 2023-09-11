@@ -5,7 +5,6 @@
 namespace alba::CodeUtilities {
 void replaceAllForwards(
     Terms& terms, int const startIndex, Patterns const& searchPatterns, Terms const& replacementTerms);
-void replaceCommentsWithExtraLine(Terms& terms, int const startIndex);
 void combineTermsInPlace(Terms& terms, TermType const newTermType, int const startIndex, int const endIndex);
 void changeTerm(Term& term, TermType const newTermType, std::string const& content);
 Indexes searchForPatternsForwards(Terms const& terms, int const startIndex, Patterns const& searchPatterns);

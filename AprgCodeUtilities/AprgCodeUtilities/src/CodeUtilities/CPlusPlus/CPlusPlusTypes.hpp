@@ -2,7 +2,8 @@
 
 namespace alba::CodeUtilities {
 
-enum class ScopeType { Unknown, TopLevel, NamedNamespace, AnonymousNamespace, ClassDeclaration, EnumClass };
-enum class CppFileType { Unknown, HeaderFile, CppFile };
+enum class ScopeType { AnonymousNamespace, ClassDeclaration, EnumClass, NamedNamespace, TopLevel, Unknown };
+
+enum class CppFileType { CppFile, HeaderFile, Unknown };
 
 }  // namespace alba::CodeUtilities

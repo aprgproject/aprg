@@ -8,8 +8,8 @@
 #include <fstream>
 #include <iostream>
 
-using namespace std;
 using namespace alba::CodeUtilities::CPlusPlusUtilities;
+using namespace std;
 
 namespace alba::CodeUtilities::CPlusPlusFixer {
 

@@ -21,6 +21,12 @@ void writeAllTerms(string const& path, Terms const& terms) {
     }
 }
 
+CppFileType getFileType(string const& extension) {
+    return isHeaderFileExtension(extension) ? CppFileType::HeaderFile
+           : isCppFileExtension(extension)  ? CppFileType::CppFile
+                                            : CppFileType::Unknown;
+}
+
 Terms getTermsFromFile(string const& path) {
     Terms result;
     CPlusPlusTokenizer tokenizer(result);
@@ -96,12 +102,6 @@ bool isHeaderFileExtension(string const& extension) { return extension == "hpp" 
 
 bool isImplementationFileExtension(string const& extension) {
     return extension == "cpp" || extension == "c" || extension == "cc";
-}
-
-CppFileType getFileType(string const& extension) {
-    return isHeaderFileExtension(extension) ? CppFileType::HeaderFile
-           : isCppFileExtension(extension)  ? CppFileType::CppFile
-                                            : CppFileType::Unknown;
 }
 
 }  // namespace alba::CodeUtilities::CPlusPlusUtilities
