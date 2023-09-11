@@ -18,13 +18,13 @@ namespace alba::CodeUtilities {
 namespace {
 
 void runFormatterInDirectory(string const& directoryPath) {
-    CPlusPlusReorganizer reorganizer;
-    AlbaLocalPathHandler directoryPathHandler(directoryPath);
+    CPlusPlusReorganizer const reorganizer;
+    AlbaLocalPathHandler const directoryPathHandler(directoryPath);
     ListOfPaths directories;
     ListOfPaths files;
     directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
     for (auto const& file : files) {
-        AlbaLocalPathHandler filePathHandler(file);
+        AlbaLocalPathHandler const filePathHandler(file);
         if (isCppFileExtension(filePathHandler.getExtension())) {
             string command(FORMATTER_APPLICATION_PATH);
             command += R"( -style=file -i ")";
@@ -43,13 +43,13 @@ void processDirectory(string const& directoryPath) {
 }
 
 void processAprgDirectory(string const& aprgPath) {
-    CPlusPlusReorganizer reorganizer;
-    AlbaLocalPathHandler aprgPathHandler(aprgPath);
+    CPlusPlusReorganizer const reorganizer;
+    AlbaLocalPathHandler const aprgPathHandler(aprgPath);
     ListOfPaths directories;
     ListOfPaths files;
     aprgPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
     for (auto const& file : files) {
-        AlbaLocalPathHandler filePathHandler(file);
+        AlbaLocalPathHandler const filePathHandler(file);
         if (filePathHandler.getFile() == "CppProjectIndicatorFile.txt") {
             processDirectory(filePathHandler.getDirectory());
         }
@@ -58,13 +58,13 @@ void processAprgDirectory(string const& aprgPath) {
 
 void copyFile(string const& source, string const& destination) {
     AlbaLocalPathHandler sourcePathHandler(source);
-    AlbaLocalPathHandler destinationPathHandler(destination);
+    AlbaLocalPathHandler const destinationPathHandler(destination);
     sourcePathHandler.copyToNewFile(destinationPathHandler.getFullPath());
 }
 
 void verifyFile(string const& expectedFile, string const& testFile) {
-    AlbaLocalPathHandler expectedFilePathHandler(expectedFile);
-    AlbaLocalPathHandler testFilePathHandler(testFile);
+    AlbaLocalPathHandler const expectedFilePathHandler(expectedFile);
+    AlbaLocalPathHandler const testFilePathHandler(testFile);
     ifstream expectedFileStream(expectedFilePathHandler.getFullPath());
     ifstream testFileStream(testFilePathHandler.getFullPath());
     AlbaFileReader expectedFileReader(expectedFileStream);
@@ -72,12 +72,12 @@ void verifyFile(string const& expectedFile, string const& testFile) {
     bool isDifferenceFound(false);
     strings lines;
     while (expectedFileReader.isNotFinished() && testFileReader.isNotFinished()) {
-        string lineInExpectedFile(expectedFileReader.getLine());
-        string lineInTestFile(testFileReader.getLine());
+        string const lineInExpectedFile(expectedFileReader.getLine());
+        string const lineInTestFile(testFileReader.getLine());
         EXPECT_EQ(lineInExpectedFile, lineInTestFile);
         if (lineInExpectedFile != lineInTestFile) {
             constexpr int LINES_TO_DISPLAY = 6;
-            int numberOfLines = static_cast<int>(lines.size());
+            int const numberOfLines = static_cast<int>(lines.size());
             int lineIndex = numberOfLines < LINES_TO_DISPLAY ? 0 : numberOfLines - LINES_TO_DISPLAY;
             cout << "Difference occured at:\n";
             for (; lineIndex < numberOfLines; ++lineIndex) {
@@ -105,7 +105,7 @@ void verifyFile(string const& expectedFile, string const& testFile) {
     }
 }
 
-void clearFile(string const& file) { ofstream expectedFileStream(AlbaLocalPathHandler(file).getFullPath()); }
+void clearFile(string const& file) { ofstream const expectedFileStream(AlbaLocalPathHandler(file).getFullPath()); }
 
 }  // namespace
 

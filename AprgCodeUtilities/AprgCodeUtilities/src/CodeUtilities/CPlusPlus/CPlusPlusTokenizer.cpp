@@ -148,7 +148,7 @@ bool CPlusPlusTokenizer::isNumberAt(int const index) const {
 
 bool CPlusPlusTokenizer::isOperatorAt(int const index) const {
     if (index < static_cast<int>(m_code.length())) {
-        char character = m_code[index];
+        char const character = m_code[index];
         return isDisplayableCharacter(character) && !isLetterOrNumberOrUnderscore(character) &&
                !isWhiteSpace(character);
     }
@@ -157,7 +157,7 @@ bool CPlusPlusTokenizer::isOperatorAt(int const index) const {
 
 bool CPlusPlusTokenizer::isThreeCharOperatorAt(int const index) const {
     if (index + 2 < static_cast<int>(m_code.length())) {
-        string possibleOperator = m_code.substr(index, 3);
+        string const possibleOperator = m_code.substr(index, 3);
         return isRecognizedThreeCharOperators(possibleOperator);
     }
     return false;
@@ -165,7 +165,7 @@ bool CPlusPlusTokenizer::isThreeCharOperatorAt(int const index) const {
 
 bool CPlusPlusTokenizer::isTwoCharOperatorAt(int const index) const {
     if (index + 1 < static_cast<int>(m_code.length())) {
-        string possibleOperator = m_code.substr(index, 2);
+        string const possibleOperator = m_code.substr(index, 2);
         return isRecognizedTwoCharOperators(possibleOperator);
     }
     return false;
@@ -173,7 +173,7 @@ bool CPlusPlusTokenizer::isTwoCharOperatorAt(int const index) const {
 
 bool CPlusPlusTokenizer::isOneCharOperatorAt(int const index) const {
     if (index < static_cast<int>(m_code.length())) {
-        string possibleOperator = m_code.substr(index, 1);
+        string const possibleOperator = m_code.substr(index, 1);
         return isRecognizedOneCharOperators(possibleOperator);
     }
     return false;
@@ -390,7 +390,7 @@ bool CPlusPlusTokenizer::hasProcessedAWhiteSpace() {
 
 bool CPlusPlusTokenizer::hasProcessedAMacro() {
     if (isNextString("#") && isIndentifierStartAt(m_index + 1)) {
-        string termString = string("#") + getIndentifierAt(m_index + 1);
+        string const termString = string("#") + getIndentifierAt(m_index + 1);
         m_index += static_cast<int>(termString.length());
         m_terms.emplace_back(createMacro(termString));
         return true;
@@ -400,7 +400,7 @@ bool CPlusPlusTokenizer::hasProcessedAMacro() {
 
 bool CPlusPlusTokenizer::hasProcessedANumber() {
     if (isNumberAt(m_index)) {
-        string termString = getNumberAt(m_index);
+        string const termString = getNumberAt(m_index);
         m_index += static_cast<int>(termString.length());
         m_terms.emplace_back(createNumber(termString));
         return true;
@@ -410,7 +410,7 @@ bool CPlusPlusTokenizer::hasProcessedANumber() {
 
 bool CPlusPlusTokenizer::hasProcessedAnIdentifier() {
     if (isIndentifierStartAt(m_index)) {
-        string termString = getIndentifierAt(m_index);
+        string const termString = getIndentifierAt(m_index);
         m_index += static_cast<int>(termString.length());
         if (isRecognizedPrimitiveType(termString)) {
             m_terms.emplace_back(createPrimitiveType(termString));
@@ -454,7 +454,7 @@ bool CPlusPlusTokenizer::isTerminatedWhileCheckingALiteralWithEscape(char const 
     bool isTerminated(false);
     int numberSlashes = 0;
     for (; m_index < static_cast<int>(m_code.length()); ++m_index) {
-        char character = m_code[m_index];
+        char const character = m_code[m_index];
         if (character == '\\') {
             ++numberSlashes;
             if (numberSlashes == 2) {

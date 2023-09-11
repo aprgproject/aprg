@@ -7,26 +7,26 @@ using namespace std;
 namespace alba::CodeUtilities {
 
 TEST(TermTest, ConstructorWorks) {
-    Term term(TermType::Identifier, "SomeIdentifier");
+    Term const term(TermType::Identifier, "SomeIdentifier");
 
     EXPECT_EQ(TermType::Identifier, term.getTermType());
     EXPECT_EQ("SomeIdentifier", term.getContent());
 }
 
 TEST(TermTest, GetTermTypeWorks) {
-    Term term(TermType::Identifier, "SomeIdentifier");
+    Term const term(TermType::Identifier, "SomeIdentifier");
 
     EXPECT_EQ(TermType::Identifier, term.getTermType());
 }
 
 TEST(TermTest, GetContentWorks) {
-    Term term(TermType::Identifier, "SomeIdentifier");
+    Term const term(TermType::Identifier, "SomeIdentifier");
 
     EXPECT_EQ("SomeIdentifier", term.getContent());
 }
 
 TEST(TermTest, GetTermTypeStringWorks) {
-    Term term(TermType::Identifier, "SomeIdentifier");
+    Term const term(TermType::Identifier, "SomeIdentifier");
 
     EXPECT_EQ("TermType::Identifier", term.getTermTypeString());
 }
@@ -48,10 +48,10 @@ TEST(TermTest, SetContentWorks) {
 }
 
 TEST(TermTest, OperatorEqualsWorks) {
-    Term term1(TermType::Identifier, "SomeIdentifier");
-    Term term2(TermType::Identifier, "SomeIdentifier");
-    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
-    Term term4(TermType::Keyword, "SomeIdentifier");
+    Term const term1(TermType::Identifier, "SomeIdentifier");
+    Term const term2(TermType::Identifier, "SomeIdentifier");
+    Term const term3(TermType::Identifier, "SomeIdentifierDifferent");
+    Term const term4(TermType::Keyword, "SomeIdentifier");
 
     EXPECT_TRUE(term1.operator==(term1));
     EXPECT_TRUE(term1.operator==(term2));
@@ -60,10 +60,10 @@ TEST(TermTest, OperatorEqualsWorks) {
 }
 
 TEST(TermTest, OperatorNotEqualsWorks) {
-    Term term1(TermType::Identifier, "SomeIdentifier");
-    Term term2(TermType::Identifier, "SomeIdentifier");
-    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
-    Term term4(TermType::Keyword, "SomeIdentifier");
+    Term const term1(TermType::Identifier, "SomeIdentifier");
+    Term const term2(TermType::Identifier, "SomeIdentifier");
+    Term const term3(TermType::Identifier, "SomeIdentifierDifferent");
+    Term const term4(TermType::Keyword, "SomeIdentifier");
 
     EXPECT_FALSE(term1.operator!=(term1));
     EXPECT_FALSE(term1.operator!=(term2));

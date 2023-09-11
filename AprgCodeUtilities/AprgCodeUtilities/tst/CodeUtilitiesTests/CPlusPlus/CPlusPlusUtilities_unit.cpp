@@ -7,9 +7,9 @@ using namespace std;
 namespace alba::CodeUtilities::CPlusPlusUtilities {
 
 TEST(CPlusPlusUtilitiesTest, GetTermsFromStringWorks) {
-    Terms actualTerms(getTermsFromString("identifier1 identifier2 identifier3"));
+    Terms const actualTerms(getTermsFromString("identifier1 identifier2 identifier3"));
 
-    Terms expectedTerms{
+    Terms const expectedTerms{
         Term(TermType::Identifier, "identifier1"), Term(TermType::WhiteSpace, " "),
         Term(TermType::Identifier, "identifier2"), Term(TermType::WhiteSpace, " "),
         Term(TermType::Identifier, "identifier3")};
@@ -18,20 +18,20 @@ TEST(CPlusPlusUtilitiesTest, GetTermsFromStringWorks) {
 }
 
 TEST(CPlusPlusUtilitiesTest, GetFunctionSignatureWorks) {
-    string wholeFunction =
+    string const wholeFunction =
         "/*Comment*/ \t\t\n friend static name::AlbaOptional::AlbaOptional(AlbaOptional<ContentType&> const& optional) "
         ":  m_hasContent(optional.m_hasContent),  {}";
 
-    string functionSignature(getFunctionSignature(wholeFunction));
+    string const functionSignature(getFunctionSignature(wholeFunction));
 
     EXPECT_EQ("AlbaOptional(AlbaOptional<ContentType&> const& optional)", functionSignature);
 }
 
 TEST(CPlusPlusUtilitiesTest, GetTextWithoutCommentsWithNewLineWorks) {
-    string codeWithComments = "Code\n /*MultilineComment*/\n //SingleLineComment\n Code\n";
-    Terms termsWithComments(getTermsFromString(codeWithComments));
+    string const codeWithComments = "Code\n /*MultilineComment*/\n //SingleLineComment\n Code\n";
+    Terms const termsWithComments(getTermsFromString(codeWithComments));
 
-    string codeWithoutComments(getTextWithoutCommentsWithNewLine(termsWithComments));
+    string const codeWithoutComments(getTextWithoutCommentsWithNewLine(termsWithComments));
 
     EXPECT_EQ("Code\n Code\n", codeWithoutComments);
 }

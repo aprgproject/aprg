@@ -28,17 +28,17 @@ CPlusPlusReorganizeItems::CPlusPlusReorganizeItems(
 
 Terms CPlusPlusReorganizeItems::getSortedAggregateTerms() const {
     Terms terms;
-    SortItems sortedItems(getSortedItems());
+    SortItems const sortedItems(getSortedItems());
     terms.emplace_back(TermType::WhiteSpace, "\n");
-    bool isMultilineScope = hasMultilineItem(sortedItems) && m_scopeType != ScopeType::EnumClass;
+    bool const isMultilineScope = hasMultilineItem(sortedItems) && m_scopeType != ScopeType::EnumClass;
     bool isPreviousAMultilineItem(isMultilineScope);
     bool isFirst(true);
     bool isPreviousAnAccessControl(false);
     for (SortItem const& sortItem : sortedItems) {
         string const& item(m_items[sortItem.itemsIndex]);
-        bool isAccessControl = sortItem.itemType == ItemType::AccessControl;
-        bool isMultilineItem = isMultiLine(sortItem.numberOfLines) || isAccessControl;
-        bool shouldPreventNewLine =
+        bool const isAccessControl = sortItem.itemType == ItemType::AccessControl;
+        bool const isMultilineItem = isMultiLine(sortItem.numberOfLines) || isAccessControl;
+        bool const shouldPreventNewLine =
             (isFirst && isAccessControl) || isPreviousAnAccessControl || m_scopeType == ScopeType::EnumClass;
         if ((isMultilineItem || isPreviousAMultilineItem) && !shouldPreventNewLine) {
             terms.emplace_back(TermType::WhiteSpace, "\n");
@@ -98,8 +98,8 @@ Patterns CPlusPlusReorganizeItems::getSearchPatterns() {
 }
 
 string CPlusPlusReorganizeItems::getIdentifierBeforeParenthesis(Terms const& terms, int const parenthesisIndex) {
-    int beforeParenthesis = parenthesisIndex - 1;
-    Patterns searchPatterns{{M(TermType::Identifier)}};
+    int const beforeParenthesis = parenthesisIndex - 1;
+    Patterns const searchPatterns{{M(TermType::Identifier)}};
     Indexes hitIndexes = checkPatternAt(terms, beforeParenthesis, searchPatterns);
     if (!hitIndexes.empty()) {
         return terms[hitIndexes.front()].getContent();
@@ -137,15 +137,15 @@ void CPlusPlusReorganizeItems::sortByComparingItems(SortItems& sortItems) {
 
 void CPlusPlusReorganizeItems::moveToEndParenthesis(Terms const& terms, int& termIndex, int const parenthesisIndex) {
     termIndex = parenthesisIndex + 1;
-    Patterns searchPatterns{{M(")")}, {M(";")}, {M("{")}, {M(":")}};
+    Patterns const searchPatterns{{M(")")}, {M(";")}, {M("{")}, {M(":")}};
     bool isFound(true);
     bool isCloseParenthesisFound(false);
     while (isFound) {
         Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
-            int firstHitIndex = hitIndexes.front();
-            int lastHitIndex = hitIndexes.back();
+            int const firstHitIndex = hitIndexes.front();
+            int const lastHitIndex = hitIndexes.back();
             Term const& firstTerm(terms[firstHitIndex]);
             if (firstTerm.getContent() == ")") {
                 termIndex = lastHitIndex + 1;
@@ -164,10 +164,10 @@ void CPlusPlusReorganizeItems::moveToEndParenthesis(Terms const& terms, int& ter
 void CPlusPlusReorganizeItems::saveDetailsBasedFromFunctionSignature(
     SortItem& sortItem, string const& functionSignature) {
     Terms terms(getTermsFromString(functionSignature));
-    Patterns searchPatterns{{M(TermType::PrimitiveType)}, {M(TermType::Identifier)}, {M(TermType::Keyword)}};
+    Patterns const searchPatterns{{M(TermType::PrimitiveType)}, {M(TermType::Identifier)}, {M(TermType::Keyword)}};
     Indexes hitIndexes = searchForPatternsForwards(terms, 0, searchPatterns);
     if (!hitIndexes.empty()) {
-        int firstHitIndex = hitIndexes.front();
+        int const firstHitIndex = hitIndexes.front();
         Term const& firstTerm(terms[firstHitIndex]);
         if (firstTerm.getTermType() == TermType::PrimitiveType) {
             if (firstTerm.getContent() == "bool") {
@@ -212,13 +212,13 @@ CPlusPlusReorganizeItems::SortItems CPlusPlusReorganizeItems::getSortItems() con
 }
 
 int CPlusPlusReorganizeItems::getBestHeaderIndex(string const& item) const {
-    string itemSignature = getFunctionSignature(item);
+    string const itemSignature = getFunctionSignature(item);
     int bestDifference = static_cast<int>(itemSignature.size());
     int bestHeaderIndex = 0;
     bool isFirst(true);
     int headerIndex = 0;
     for (string const& headerSignature : m_headerSignatures) {
-        int difference = static_cast<int>(getLevenshteinDistance(itemSignature, headerSignature));
+        int const difference = static_cast<int>(getLevenshteinDistance(itemSignature, headerSignature));
         if (isFirst) {
             bestDifference = difference;
             isFirst = false;
@@ -241,14 +241,14 @@ void CPlusPlusReorganizeItems::saveDetailsFromHeaderSignatures(SortItem& sortIte
 }
 
 void CPlusPlusReorganizeItems::saveDetailsBasedFromItem(SortItem& sortItem, string const& item) const {
-    Terms terms(getTermsFromString(item));
+    Terms const terms(getTermsFromString(item));
     saveDetailsBasedFromItemTerms(sortItem, item, terms);
 }
 
 void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
     SortItem& sortItem, string const& item, Terms const& terms) const {
     int termIndex = 0;
-    Patterns searchPatterns(getSearchPatterns());
+    Patterns const searchPatterns(getSearchPatterns());
     bool isFound(true);
     bool isConst(false);
     bool isStatic(false);
@@ -258,8 +258,8 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
         Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
-            int firstHitIndex = hitIndexes.front();
-            int lastHitIndex = hitIndexes.back();
+            int const firstHitIndex = hitIndexes.front();
+            int const lastHitIndex = hitIndexes.back();
             Term const& firstTerm(terms[firstHitIndex]);
             Term const& lastTerm(terms[lastHitIndex]);
             if (firstTerm.getContent() == ";" || firstTerm.getContent() == "{" || firstTerm.getContent() == ":") {

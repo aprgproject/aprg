@@ -14,7 +14,7 @@ using namespace std;
 namespace alba::CodeUtilities::CPlusPlusUtilities {
 
 void writeAllTerms(string const& path, Terms const& terms) {
-    AlbaLocalPathHandler filePathHandler(path);
+    AlbaLocalPathHandler const filePathHandler(path);
     ofstream outputStream(filePathHandler.getFullPath(), ios::binary);
     for (Term const& term : terms) {
         outputStream << term.getContent();
@@ -24,7 +24,7 @@ void writeAllTerms(string const& path, Terms const& terms) {
 Terms getTermsFromFile(string const& path) {
     Terms result;
     CPlusPlusTokenizer tokenizer(result);
-    AlbaLocalPathHandler filePathHandler(path);
+    AlbaLocalPathHandler const filePathHandler(path);
     ifstream inputStream(filePathHandler.getFullPath());
     AlbaFileReader fileReader(inputStream);
     while (fileReader.isNotFinished()) {
@@ -45,13 +45,13 @@ Terms getTermsFromString(string const& code) {
 
 string getFunctionSignature(string const& functionText) {
     Terms terms(getTermsFromString(functionText));
-    Patterns terminatingPatterns{{M(";")}, {M("{")}, {M(":")}};
+    Patterns const terminatingPatterns{{M(";")}, {M("{")}, {M(":")}};
     Indexes terminatingIndexes = searchForPatternsForwards(terms, 0, terminatingPatterns);
     if (!terminatingIndexes.empty()) {
         terms.erase(terms.cbegin() + terminatingIndexes.front(), terms.cend());
     }
 
-    Patterns removePatterns{
+    Patterns const removePatterns{
         {M(MatcherType::Comment)},
         {M("explicit")},
         {M("inline")},
@@ -83,7 +83,7 @@ string getFunctionSignature(string const& functionText) {
 
 string getTextWithoutCommentsWithNewLine(Terms const& terms) {
     Terms revisedTerms(terms);
-    Patterns removePatterns{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
+    Patterns const removePatterns{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
     replaceAllForwards(revisedTerms, 0, removePatterns, {});
     return getCombinedContents(revisedTerms);
 }

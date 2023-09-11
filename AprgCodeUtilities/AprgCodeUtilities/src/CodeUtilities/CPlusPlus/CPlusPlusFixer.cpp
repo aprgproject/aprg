@@ -14,13 +14,13 @@ using namespace alba::CodeUtilities::CPlusPlusUtilities;
 namespace alba::CodeUtilities::CPlusPlusFixer {
 
 void processAprgDirectory(string const& aprgPath) {
-    AlbaLocalPathHandler aprgPathHandler(aprgPath);
+    AlbaLocalPathHandler const aprgPathHandler(aprgPath);
     ALBA_INF_PRINT1(cout, aprgPath);
     ListOfPaths directories;
     ListOfPaths files;
     aprgPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
     for (auto const& file : files) {
-        AlbaLocalPathHandler filePathHandler(file);
+        AlbaLocalPathHandler const filePathHandler(file);
         if (filePathHandler.getFile() == "CppProjectIndicatorFile.txt") {
             processDirectory(filePathHandler.getDirectory());
         }
@@ -28,7 +28,7 @@ void processAprgDirectory(string const& aprgPath) {
 }
 
 void processPath(string const& path) {
-    AlbaLocalPathHandler pathHandler(path);
+    AlbaLocalPathHandler const pathHandler(path);
     if (pathHandler.isFoundInLocalSystem()) {
         if (pathHandler.isDirectory()) {
             processDirectory(path);
@@ -39,12 +39,12 @@ void processPath(string const& path) {
 }
 
 void processDirectory(string const& path) {
-    AlbaLocalPathHandler directoryPathHandler(path);
+    AlbaLocalPathHandler const directoryPathHandler(path);
     ListOfPaths directories;
     ListOfPaths files;
     directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
     for (auto const& file : files) {
-        AlbaLocalPathHandler filePathHandler(file);
+        AlbaLocalPathHandler const filePathHandler(file);
         if (isCppFileExtension(filePathHandler.getExtension())) {
             processFile(file);
         }
@@ -107,7 +107,7 @@ void fixConstReferenceOrder(Terms& terms, TermMatcher const& typeMatcher) {
 void fixCStyleStaticCast(Terms& terms) { fixCStyleStaticCast(terms, M(TermType::PrimitiveType)); }
 
 void fixCStyleStaticCast(Terms& terms, TermMatcher const& typeMatcher) {
-    Patterns searchPatterns{{M(TermType::Operator), M("("), typeMatcher, M(")"), M(MatcherType::NotAWhiteSpace)}};
+    Patterns const searchPatterns{{M(TermType::Operator), M("("), typeMatcher, M(")"), M(MatcherType::NotAWhiteSpace)}};
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
@@ -154,7 +154,7 @@ void fixNoConstPassByValue(Terms& terms, Patterns const& searchPatterns) {
 }
 
 void fixCommentsPositionOfBraces(Terms& terms) {
-    Patterns searchPatterns{{M(MatcherType::Comment), M("{")}};
+    Patterns const searchPatterns{{M(MatcherType::Comment), M("{")}};
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
@@ -163,7 +163,7 @@ void fixCommentsPositionOfBraces(Terms& terms) {
         if (isFound) {
             termIndex = hitIndexes.back();
             std::swap(terms[hitIndexes[0]], terms[hitIndexes[1]]);
-            Term nextTermAfterComment = terms[hitIndexes[1] + 1];
+            Term const nextTermAfterComment = terms[hitIndexes[1] + 1];
             if (!hasNewLine(nextTermAfterComment)) {
                 terms.insert(terms.begin() + hitIndexes[1] + 1, Term(TermType::WhiteSpace, "\n"));
             }
@@ -195,7 +195,7 @@ void findTermsAndCheckForLoopAndSwapAt(
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
-            Patterns forLoopPatterns{{M("for"), M("(")}, {M(";")}, {M("{")}, {M("}")}};
+            Patterns const forLoopPatterns{{M("for"), M("(")}, {M(";")}, {M("{")}, {M("}")}};
             Indexes forLoopHitIndexes = searchForPatternsBackwards(terms, hitIndexes.front(), forLoopPatterns);
             if (forLoopHitIndexes.size() == 2 && terms[forLoopHitIndexes[0]].getContent() == "for" &&
                 terms[forLoopHitIndexes[1]].getContent() == "(") {
@@ -209,7 +209,7 @@ void findTermsAndCheckForLoopAndSwapAt(
 void combinePrimitiveTypes(Terms& terms) {
     int termIndex = 0;
     bool isFound(true);
-    Patterns primitiveTypesPatterns{{M(TermType::PrimitiveType), M(TermType::PrimitiveType)}};
+    Patterns const primitiveTypesPatterns{{M(TermType::PrimitiveType), M(TermType::PrimitiveType)}};
     while (isFound) {
         Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, primitiveTypesPatterns);
         isFound = !hitIndexes.empty();

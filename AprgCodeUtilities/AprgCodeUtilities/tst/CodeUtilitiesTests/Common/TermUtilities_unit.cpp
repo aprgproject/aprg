@@ -14,7 +14,7 @@ TEST(TermUtilitiesTest, CombineTermsInPlaceWorks) {
 
     combineTermsInPlace(terms, TermType::Keyword, 1, 3);
 
-    Terms expectedTerms{
+    Terms const expectedTerms{
         Term(TermType::Identifier, "identifier1"), Term(TermType::Keyword, "identifier2identifier3identifier4"),
         Term(TermType::Identifier, "identifier5")};
 
@@ -22,13 +22,13 @@ TEST(TermUtilitiesTest, CombineTermsInPlaceWorks) {
 }
 
 TEST(TermUtilitiesTest, SearchForPatternsForwardsWorksInTheMiddleOfMatch) {
-    Terms terms{
+    Terms const terms{
         Term(TermType::Identifier, "identifier1"), Term(TermType::Identifier, "identifier2"),
         Term(TermType::Identifier, "identifier3"), Term(TermType::Identifier, "identifier4"),
         Term(TermType::Identifier, "identifier5")};
-    Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
+    Patterns const patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
 
-    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+    Indexes const patternIndexes = searchForPatternsForwards(terms, 0, patterns);
     ASSERT_EQ(3U, patternIndexes.size());
     auto itPatterns = patternIndexes.cbegin();
     EXPECT_EQ(1, *itPatterns++);
@@ -37,14 +37,14 @@ TEST(TermUtilitiesTest, SearchForPatternsForwardsWorksInTheMiddleOfMatch) {
 }
 
 TEST(TermUtilitiesTest, SearchForPatternsForwardsWorksWithIgnoringComments) {
-    Terms terms{Term(TermType::Identifier, "identifier1"), Term(TermType::CommentMultiline, "/*Comment*/"),
-                Term(TermType::Identifier, "identifier2"), Term(TermType::CommentMultiline, "/*Comment*/"),
-                Term(TermType::Identifier, "identifier3"), Term(TermType::CommentMultiline, "/*Comment*/"),
-                Term(TermType::Identifier, "identifier4"), Term(TermType::CommentMultiline, "/*Comment*/"),
-                Term(TermType::Identifier, "identifier5"), Term(TermType::CommentMultiline, "/*Comment*/")};
-    Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
+    Terms const terms{Term(TermType::Identifier, "identifier1"), Term(TermType::CommentMultiline, "/*Comment*/"),
+                      Term(TermType::Identifier, "identifier2"), Term(TermType::CommentMultiline, "/*Comment*/"),
+                      Term(TermType::Identifier, "identifier3"), Term(TermType::CommentMultiline, "/*Comment*/"),
+                      Term(TermType::Identifier, "identifier4"), Term(TermType::CommentMultiline, "/*Comment*/"),
+                      Term(TermType::Identifier, "identifier5"), Term(TermType::CommentMultiline, "/*Comment*/")};
+    Patterns const patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
 
-    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+    Indexes const patternIndexes = searchForPatternsForwards(terms, 0, patterns);
     ASSERT_EQ(3U, patternIndexes.size());
     auto itPatterns = patternIndexes.cbegin();
     EXPECT_EQ(2, *itPatterns++);
@@ -53,14 +53,14 @@ TEST(TermUtilitiesTest, SearchForPatternsForwardsWorksWithIgnoringComments) {
 }
 
 TEST(TermUtilitiesTest, SearchForPatternsForwardsWorksWithSpaces) {
-    Terms terms{Term(TermType::Identifier, "identifier1"), Term(TermType::WhiteSpace, "\t"),
-                Term(TermType::Identifier, "identifier2"), Term(TermType::WhiteSpace, "\t"),
-                Term(TermType::Identifier, "identifier3"), Term(TermType::WhiteSpace, "\t"),
-                Term(TermType::Identifier, "identifier4"), Term(TermType::WhiteSpace, "\t"),
-                Term(TermType::Identifier, "identifier5"), Term(TermType::WhiteSpace, "\t")};
-    Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
+    Terms const terms{Term(TermType::Identifier, "identifier1"), Term(TermType::WhiteSpace, "\t"),
+                      Term(TermType::Identifier, "identifier2"), Term(TermType::WhiteSpace, "\t"),
+                      Term(TermType::Identifier, "identifier3"), Term(TermType::WhiteSpace, "\t"),
+                      Term(TermType::Identifier, "identifier4"), Term(TermType::WhiteSpace, "\t"),
+                      Term(TermType::Identifier, "identifier5"), Term(TermType::WhiteSpace, "\t")};
+    Patterns const patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
 
-    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+    Indexes const patternIndexes = searchForPatternsForwards(terms, 0, patterns);
     ASSERT_EQ(3U, patternIndexes.size());
     auto itPatterns = patternIndexes.cbegin();
     EXPECT_EQ(2, *itPatterns++);
@@ -69,26 +69,26 @@ TEST(TermUtilitiesTest, SearchForPatternsForwardsWorksWithSpaces) {
 }
 
 TEST(TermUtilitiesTest, SearchForPatternsForwardsWorksAsGoingForward) {
-    Terms terms{
+    Terms const terms{
         Term(TermType::Identifier, "identifier1"), Term(TermType::Identifier, "identifier2"),
         Term(TermType::Identifier, "identifier2"), Term(TermType::Identifier, "identifier2"),
         Term(TermType::Identifier, "identifier1")};
-    Patterns patterns{{M("identifier2")}};
+    Patterns const patterns{{M("identifier2")}};
 
-    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+    Indexes const patternIndexes = searchForPatternsForwards(terms, 0, patterns);
     ASSERT_EQ(1U, patternIndexes.size());
     auto itPatterns = patternIndexes.cbegin();
     EXPECT_EQ(1, *itPatterns++);
 }
 
 TEST(TermUtilitiesTest, SearchForPatternsBackwardsWorksAsGoingBackward) {
-    Terms terms{
+    Terms const terms{
         Term(TermType::Identifier, "identifier1"), Term(TermType::Identifier, "identifier2"),
         Term(TermType::Identifier, "identifier2"), Term(TermType::Identifier, "identifier2"),
         Term(TermType::Identifier, "identifier1")};
-    Patterns patterns{{M("identifier2")}};
+    Patterns const patterns{{M("identifier2")}};
 
-    Indexes patternIndexes = searchForPatternsBackwards(terms, terms.size() - 1, patterns);
+    Indexes const patternIndexes = searchForPatternsBackwards(terms, terms.size() - 1, patterns);
     ASSERT_EQ(1U, patternIndexes.size());
     auto itPatterns = patternIndexes.cbegin();
     EXPECT_EQ(3, *itPatterns++);
@@ -99,8 +99,8 @@ TEST(TermUtilitiesTest, ReplaceAllForwardsWorks) {
         Term(TermType::Identifier, "identifier1"), Term(TermType::Identifier, "identifier2"),
         Term(TermType::Identifier, "identifier3"), Term(TermType::Identifier, "identifier4"),
         Term(TermType::Identifier, "identifier5")};
-    Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
-    Terms replacementTerms{Term(TermType::Identifier, "identifier7")};
+    Patterns const patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
+    Terms const replacementTerms{Term(TermType::Identifier, "identifier7")};
 
     replaceAllForwards(terms, 0, patterns, replacementTerms);
 

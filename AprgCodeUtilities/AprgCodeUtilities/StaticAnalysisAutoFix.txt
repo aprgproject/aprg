@@ -1,3 +1,1232 @@
-StaticAnalysisJobIdentifier: [56]
-2023-09-09T17:27:01
+StaticAnalysisJobIdentifier: [011]
+2023-09-11T02:58:25
+[35m2023-09-11T02:59:38[0m | [33mBuildAndRun.sh:28[0m | The current path is [/d/a/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities].
+[35m2023-09-11T02:59:38[0m | [33mBuildAndRun.sh:29[0m | The scriptPath is [/d/a/aprg/aprg/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh].
+[35m2023-09-11T02:59:38[0m | [33mBuildAndRun.sh:30[0m | The scriptOption is [buildOnOneCore].
+[35m2023-09-11T02:59:38[0m | [33mBuildAndRun.sh:31[0m | The buildDirectoryName is [StaticAnalyzersBuild].
+[35m2023-09-11T02:59:38[0m | [33mBuildAndRun.sh:32[0m | The argument1 is [Debug] and argument2 is [].
+[35m2023-09-11T02:59:38[0m | [33mBuildAndRun.sh:33[0m | The immediateDirectoryName is [AprgCodeUtilities].
+[35m2023-09-11T02:59:38[0m | [33mBuildAndRun.sh:84[0m | The buildType is [Debug].
+[35m2023-09-11T02:59:38[0m | [33mBuildAndRun.sh:85[0m | The numberOfCores is [2].
+[35m2023-09-11T02:59:38[0m | [33mBuildAndRun.sh:68[0m | The build path is [/d/a/aprg/aprg/AprgCodeUtilities/StaticAnalyzersBuild] and the output of [ls -la --color=auto]:
+total 176
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 02:59 .
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 02:58 ..
+-rw-r--r-- 1 runneradmin 197121  18147 Sep 11 02:59 CMakeCache.txt
+drwxr-xr-x 1 runneradmin 197121      0 Sep 11 02:59 CMakeFiles
+-rw-r--r-- 1 runneradmin 197121    592 Sep 11 02:59 CTestTestfile.cmake
+-rw-r--r-- 1 runneradmin 197121 137065 Sep 11 02:59 build.ninja
+-rw-r--r-- 1 runneradmin 197121   2319 Sep 11 02:59 cmake_install.cmake
+[1/61] Building CXX object CMakeFiles/gtest.dir/D_/a/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc.obj
+In file included from D:/a/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:49:
+D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
+  __try {
+  ^
+1 warning generated.
+[2/61] Building CXX object CMakeFiles/gtest.dir/D_/a/aprg/aprg/gtest/gtest/googletest/src/gtest_main.cc.obj
+[3/61] Linking CXX static library gtest.lib
+[4/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaContainerHelper.cpp.obj
+[5/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/File/AlbaFileReader.cpp.obj
+[6/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Angle/AlbaAngle.cpp.obj
+[7/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/ComplexNumberHelpers.cpp.obj
+[8/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/ComputationHelpers.cpp.obj
+[9/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/FactorAndMulitplesHelpers.cpp.obj
+[10/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/PowerHelpers.cpp.obj
+[11/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/PrecisionHelpers.cpp.obj
+[12/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/StatisticsHelpers.cpp.obj
+[13/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/AlbaComplexNumber.cpp.obj
+[14/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/AlbaNumber.cpp.obj
+[15/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/Interval/AlbaNumberInterval.cpp.obj
+[16/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/Interval/AlbaNumberIntervalEndpoint.cpp.obj
+[17/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/Interval/AlbaNumberIntervalHelpers.cpp.obj
+[18/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Ratio/AlbaRatio.cpp.obj
+[19/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Memory/AlbaMemoryBuffer.cpp.obj
+[20/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/PathHandler/AlbaPathHandler.cpp.obj
+[21/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/PathHandler/AlbaWebPathHandler.cpp.obj
+[22/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Print/AlbaPrintFunctions.cpp.obj
+[23/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Randomizer/AlbaOldRandomizer.cpp.obj
+[24/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Randomizer/EntropySources/AlbaCombinedEntropySource.cpp.obj
+[25/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Randomizer/EntropySources/AlbaEntropySourceBasedOnTime.cpp.obj
+[26/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamBitReader.cpp.obj
+[27/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamBitWriter.cpp.obj
+[28/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterReader.cpp.obj
+[29/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterWriter.cpp.obj
+[30/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/String/AlbaStringHelper.cpp.obj
+[31/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaDateTime.cpp.obj
+[32/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaDateTimeHelper.cpp.obj
+[33/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\Time\AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
+    struct tm const localTime = *localtime(&currentTimeT);
+                                 ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
+        _CRT_INSECURE_DEPRECATE(localtime_s)
+        ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+D:/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
+    struct tm const localTime = *localtime(&currentTimeT);
+                                 ^
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
+        _CRT_INSECURE_DEPRECATE(localtime_s)
+        ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
+                                                      ^
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
+                                              ^
+1 warning generated.
+[34/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimer.cpp.obj
+[35/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/AlbaUserInterface.cpp.obj
+[36/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:205:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+int DisplayTablePrinter::getVerticalBorderLength() const { return m_verticalBorder.length(); }
+                                                                  ^
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:208:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    return ((m_maxLengthAtColumn.size() + 1) * getVerticalBorderLength()) + m_totalColumnLength;
+           ^
+[37/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Utility/AlbaScopeGuard.cpp.obj
+[38/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/tstUtilities/CommonTestsUtilities/File/BaseFileReaderTest.cpp.obj
+[39/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/tstUtilities/CommonTestsUtilities/File/FileUtilities.cpp.obj
+[40/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/PathHandler/AlbaWindowsPathHandler.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    int const length = fullPath.length();
+                       ^
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+        int const indexWithSlashCharacter = fullPath.find_first_of(m_slashCharacterString, index);
+                                            ^
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:270:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    int const index = m_directory.find_first_of(m_slashCharacterString + ":");
+                      ^
+[41/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/Time/AlbaWindowsTimeHelper.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+    return AlbaDateTime(
+           ^
+[42/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/Time/AlbaWindowsTimer.cpp.obj
+[43/61] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/Windows/AlbaWindowsHelper.cpp.obj
+[44/61] Linking CXX static library APRG_COMMON.lib
+[45/61] Building CXX object CMakeFiles/AprgCodeUtilities.dir/src/CodeUtilities/CPlusPlus/CPlusPlusFixer.cpp.obj
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:17:5: warning: variable 'aprgPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler aprgPathHandler(aprgPath);
+    ^
+                         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:17:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler aprgPathHandler(aprgPath);
+                         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:23:9: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+        AlbaLocalPathHandler filePathHandler(file);
+        ^
+                             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:23:30: note: FIX-IT applied suggested code changes
+        AlbaLocalPathHandler filePathHandler(file);
+                             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:31:5: warning: variable 'pathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler pathHandler(path);
+    ^
+                         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:31:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler pathHandler(path);
+                         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:42:5: warning: variable 'directoryPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler directoryPathHandler(path);
+    ^
+                         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:42:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler directoryPathHandler(path);
+                         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:47:9: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+        AlbaLocalPathHandler filePathHandler(file);
+        ^
+                             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:47:30: note: FIX-IT applied suggested code changes
+        AlbaLocalPathHandler filePathHandler(file);
+                             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:110:5: warning: variable 'searchPatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns searchPatterns{{M(TermType::Operator), M("("), typeMatcher, M(")"), M(MatcherType::NotAWhiteSpace)}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:110:14: note: FIX-IT applied suggested code changes
+    Patterns searchPatterns{{M(TermType::Operator), M("("), typeMatcher, M(")"), M(MatcherType::NotAWhiteSpace)}};
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:157:5: warning: variable 'searchPatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns searchPatterns{{M(MatcherType::Comment), M("{")}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:157:14: note: FIX-IT applied suggested code changes
+    Patterns searchPatterns{{M(MatcherType::Comment), M("{")}};
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:166:13: warning: variable 'nextTermAfterComment' of type 'Term' can be declared 'const' [misc-const-correctness]
+            Term nextTermAfterComment = terms[hitIndexes[1] + 1];
+            ^
+                 const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:166:18: note: FIX-IT applied suggested code changes
+            Term nextTermAfterComment = terms[hitIndexes[1] + 1];
+                 ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:198:13: warning: variable 'forLoopPatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+            Patterns forLoopPatterns{{M("for"), M("(")}, {M(";")}, {M("{")}, {M("}")}};
+            ^
+                     const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:198:22: note: FIX-IT applied suggested code changes
+            Patterns forLoopPatterns{{M("for"), M("(")}, {M(";")}, {M("{")}, {M("}")}};
+                     ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:212:5: warning: variable 'primitiveTypesPatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns primitiveTypesPatterns{{M(TermType::PrimitiveType), M(TermType::PrimitiveType)}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:212:14: note: FIX-IT applied suggested code changes
+    Patterns primitiveTypesPatterns{{M(TermType::PrimitiveType), M(TermType::PrimitiveType)}};
+             ^
+[46/61] Building CXX object CMakeFiles/AprgCodeUtilities.dir/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp.obj
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:31:5: warning: variable 'sortedItems' of type 'SortItems' (aka 'vector<SortItem>') can be declared 'const' [misc-const-correctness]
+    SortItems sortedItems(getSortedItems());
+    ^
+              const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:31:15: note: FIX-IT applied suggested code changes
+    SortItems sortedItems(getSortedItems());
+              ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:33:5: warning: variable 'isMultilineScope' of type 'bool' can be declared 'const' [misc-const-correctness]
+    bool isMultilineScope = hasMultilineItem(sortedItems) && m_scopeType != ScopeType::EnumClass;
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:33:10: note: FIX-IT applied suggested code changes
+    bool isMultilineScope = hasMultilineItem(sortedItems) && m_scopeType != ScopeType::EnumClass;
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:39:9: warning: variable 'isAccessControl' of type 'bool' can be declared 'const' [misc-const-correctness]
+        bool isAccessControl = sortItem.itemType == ItemType::AccessControl;
+        ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:39:14: note: FIX-IT applied suggested code changes
+        bool isAccessControl = sortItem.itemType == ItemType::AccessControl;
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:40:9: warning: variable 'isMultilineItem' of type 'bool' can be declared 'const' [misc-const-correctness]
+        bool isMultilineItem = isMultiLine(sortItem.numberOfLines) || isAccessControl;
+        ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:40:14: note: FIX-IT applied suggested code changes
+        bool isMultilineItem = isMultiLine(sortItem.numberOfLines) || isAccessControl;
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:41:9: warning: variable 'shouldPreventNewLine' of type 'bool' can be declared 'const' [misc-const-correctness]
+        bool shouldPreventNewLine =
+        ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:41:14: note: FIX-IT applied suggested code changes
+        bool shouldPreventNewLine =
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:101:5: warning: variable 'beforeParenthesis' of type 'int' can be declared 'const' [misc-const-correctness]
+    int beforeParenthesis = parenthesisIndex - 1;
+    ^
+        const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:101:9: note: FIX-IT applied suggested code changes
+    int beforeParenthesis = parenthesisIndex - 1;
+        ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:102:5: warning: variable 'searchPatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns searchPatterns{{M(TermType::Identifier)}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:102:14: note: FIX-IT applied suggested code changes
+    Patterns searchPatterns{{M(TermType::Identifier)}};
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:140:5: warning: variable 'searchPatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns searchPatterns{{M(")")}, {M(";")}, {M("{")}, {M(":")}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:140:14: note: FIX-IT applied suggested code changes
+    Patterns searchPatterns{{M(")")}, {M(";")}, {M("{")}, {M(":")}};
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:147:13: warning: variable 'firstHitIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+            int firstHitIndex = hitIndexes.front();
+            ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:147:17: note: FIX-IT applied suggested code changes
+            int firstHitIndex = hitIndexes.front();
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:148:13: warning: variable 'lastHitIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+            int lastHitIndex = hitIndexes.back();
+            ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:148:17: note: FIX-IT applied suggested code changes
+            int lastHitIndex = hitIndexes.back();
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:167:5: warning: variable 'searchPatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns searchPatterns{{M(TermType::PrimitiveType)}, {M(TermType::Identifier)}, {M(TermType::Keyword)}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:167:14: note: FIX-IT applied suggested code changes
+    Patterns searchPatterns{{M(TermType::PrimitiveType)}, {M(TermType::Identifier)}, {M(TermType::Keyword)}};
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:170:9: warning: variable 'firstHitIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+        int firstHitIndex = hitIndexes.front();
+        ^
+            const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:170:13: note: FIX-IT applied suggested code changes
+        int firstHitIndex = hitIndexes.front();
+            ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:215:5: warning: variable 'itemSignature' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+    string itemSignature = getFunctionSignature(item);
+    ^
+           const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:215:12: note: FIX-IT applied suggested code changes
+    string itemSignature = getFunctionSignature(item);
+           ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:221:9: warning: variable 'difference' of type 'int' can be declared 'const' [misc-const-correctness]
+        int difference = static_cast<int>(getLevenshteinDistance(itemSignature, headerSignature));
+        ^
+            const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:221:13: note: FIX-IT applied suggested code changes
+        int difference = static_cast<int>(getLevenshteinDistance(itemSignature, headerSignature));
+            ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:244:5: warning: variable 'terms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+    Terms terms(getTermsFromString(item));
+    ^
+          const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:244:11: note: FIX-IT applied suggested code changes
+    Terms terms(getTermsFromString(item));
+          ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:251:5: warning: variable 'searchPatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns searchPatterns(getSearchPatterns());
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:251:14: note: FIX-IT applied suggested code changes
+    Patterns searchPatterns(getSearchPatterns());
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:261:13: warning: variable 'firstHitIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+            int firstHitIndex = hitIndexes.front();
+            ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:261:17: note: FIX-IT applied suggested code changes
+            int firstHitIndex = hitIndexes.front();
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:262:13: warning: variable 'lastHitIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+            int lastHitIndex = hitIndexes.back();
+            ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:262:17: note: FIX-IT applied suggested code changes
+            int lastHitIndex = hitIndexes.back();
+                ^
+[47/61] Building CXX object CMakeFiles/AprgCodeUtilities.dir/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizer.cpp.obj
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:19:5: warning: variable 'directoryPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler directoryPathHandler(directory);
+    ^
+                         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:19:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler directoryPathHandler(directory);
+                         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:26:9: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+        AlbaLocalPathHandler filePathHandler(file);
+        ^
+                             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:26:30: note: FIX-IT applied suggested code changes
+        AlbaLocalPathHandler filePathHandler(file);
+                             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:59:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler filePathHandler(file);
+    ^
+                         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:59:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler filePathHandler(file);
+                         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:71:5: warning: variable 'isEmpty' of type 'bool' can be declared 'const' [misc-const-correctness]
+    bool isEmpty(scopeHeaderTerms.empty());
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:71:10: note: FIX-IT applied suggested code changes
+    bool isEmpty(scopeHeaderTerms.empty());
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:72:5: warning: variable 'hasNoInvalidKeyword' of type 'bool' can be declared 'const' [misc-const-correctness]
+    bool hasNoInvalidKeyword = all_of(scopeHeaderTerms.cbegin(), scopeHeaderTerms.cend(), [](Term const& term) {
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:72:10: note: FIX-IT applied suggested code changes
+    bool hasNoInvalidKeyword = all_of(scopeHeaderTerms.cbegin(), scopeHeaderTerms.cend(), [](Term const& term) {
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:77:5: warning: variable 'hasCommaAtTheStart' of type 'bool' can be declared 'const' [misc-const-correctness]
+    bool hasCommaAtTheStart = !checkPatternAt(scopeHeaderTerms, 0, Patterns{{M(",")}}).empty();
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:77:10: note: FIX-IT applied suggested code changes
+    bool hasCommaAtTheStart = !checkPatternAt(scopeHeaderTerms, 0, Patterns{{M(",")}}).empty();
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:82:5: warning: variable 'termsToCheck' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+    Terms termsToCheck(getTermsFromString(content));
+    ^
+          const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:82:11: note: FIX-IT applied suggested code changes
+    Terms termsToCheck(getTermsFromString(content));
+          ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:83:5: warning: variable 'hitIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
+    Indexes hitIndexes = checkMatcherAtBackwards(termsToCheck, static_cast<int>(termsToCheck.size()) - 1, M("}"));
+    ^
+            const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:83:13: note: FIX-IT applied suggested code changes
+    Indexes hitIndexes = checkMatcherAtBackwards(termsToCheck, static_cast<int>(termsToCheck.size()) - 1, M("}"));
+            ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:89:5: warning: variable 'searchPatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns searchPatterns{{M(openingString)}, {M(closingString)}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:89:14: note: FIX-IT applied suggested code changes
+    Patterns searchPatterns{{M(openingString)}, {M(closingString)}};
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:97:13: warning: variable 'firstHitIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+            int firstHitIndex = hitIndexes.front();
+            ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:97:17: note: FIX-IT applied suggested code changes
+            int firstHitIndex = hitIndexes.front();
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:117:5: warning: variable 'scopeHeader' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+    string scopeHeader(getContents(scopeHeaderStart, openingBraceIndex));
+    ^
+           const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:117:12: note: FIX-IT applied suggested code changes
+    string scopeHeader(getContents(scopeHeaderStart, openingBraceIndex));
+           ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:120:5: warning: variable 'searchPatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns searchPatterns{
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:120:14: note: FIX-IT applied suggested code changes
+    Patterns searchPatterns{
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:134:13: warning: variable 'firstHitIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+            int firstHitIndex = hitIndexes.front();
+            ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:134:17: note: FIX-IT applied suggested code changes
+            int firstHitIndex = hitIndexes.front();
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:135:13: warning: variable 'lastHitIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+            int lastHitIndex = hitIndexes.back();
+            ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:135:17: note: FIX-IT applied suggested code changes
+            int lastHitIndex = hitIndexes.back();
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:189:5: warning: variable 'searchPatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns searchPatterns{{M(TermType::WhiteSpace), M(MatcherType::Comment)}, {M(MatcherType::Comment)}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:189:14: note: FIX-IT applied suggested code changes
+    Patterns searchPatterns{{M(TermType::WhiteSpace), M(MatcherType::Comment)}, {M(MatcherType::Comment)}};
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:192:9: warning: variable 'firstHitIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+        int firstHitIndex = hitIndexes.front();
+        ^
+            const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:192:13: note: FIX-IT applied suggested code changes
+        int firstHitIndex = hitIndexes.front();
+            ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:193:9: warning: variable 'lastHitIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+        int lastHitIndex = hitIndexes.back();
+        ^
+            const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:193:13: note: FIX-IT applied suggested code changes
+        int lastHitIndex = hitIndexes.back();
+            ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:210:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler filePathHandler(file);
+    ^
+                         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:210:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler filePathHandler(file);
+                         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:216:5: warning: variable 'searchPatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns searchPatterns{
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:216:14: note: FIX-IT applied suggested code changes
+    Patterns searchPatterns{
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:235:13: warning: variable 'firstHitIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+            int firstHitIndex = hitIndexes.front();
+            ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:235:17: note: FIX-IT applied suggested code changes
+            int firstHitIndex = hitIndexes.front();
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:236:13: warning: variable 'lastHitIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+            int lastHitIndex = hitIndexes.back();
+            ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:236:17: note: FIX-IT applied suggested code changes
+            int lastHitIndex = hitIndexes.back();
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:270:5: warning: variable 'searchPatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns searchPatterns{{M(MatcherType::WhiteSpaceWithNewLine)}, {M("\\"), M(MatcherType::WhiteSpaceWithNewLine)}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:270:14: note: FIX-IT applied suggested code changes
+    Patterns searchPatterns{{M(MatcherType::WhiteSpaceWithNewLine)}, {M("\\"), M(MatcherType::WhiteSpaceWithNewLine)}};
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:276:13: warning: variable 'firstHitIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+            int firstHitIndex = hitIndexes.front();
+            ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:276:17: note: FIX-IT applied suggested code changes
+            int firstHitIndex = hitIndexes.front();
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:277:13: warning: variable 'lastHitIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+            int lastHitIndex = hitIndexes.back();
+            ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:277:17: note: FIX-IT applied suggested code changes
+            int lastHitIndex = hitIndexes.back();
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:289:5: warning: variable 'endIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+    int endIndex = getIndexAtSameLineComment(semiColonIndex);
+    ^
+        const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:289:9: note: FIX-IT applied suggested code changes
+    int endIndex = getIndexAtSameLineComment(semiColonIndex);
+        ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:296:5: warning: variable 'endIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+    int endIndex = getIndexAtSameLineComment(closingBraceSemiColonIndex);
+    ^
+        const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:296:9: note: FIX-IT applied suggested code changes
+    int endIndex = getIndexAtSameLineComment(closingBraceSemiColonIndex);
+        ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:297:5: warning: variable 'scopeHeaderTerms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+    Terms scopeHeaderTerms(getTermsFromString(getContents(lastProcessedIndex, openingBraceIndex - 1)));
+    ^
+          const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:297:11: note: FIX-IT applied suggested code changes
+    Terms scopeHeaderTerms(getTermsFromString(getContents(lastProcessedIndex, openingBraceIndex - 1)));
+          ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:308:5: warning: variable 'scopeHeaderTerms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+    Terms scopeHeaderTerms(getTermsFromString(getContents(lastProcessedIndex, openingBraceIndex - 1)));
+    ^
+          const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:308:11: note: FIX-IT applied suggested code changes
+    Terms scopeHeaderTerms(getTermsFromString(getContents(lastProcessedIndex, openingBraceIndex - 1)));
+          ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:311:9: warning: variable 'lastItemTerms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+        Terms lastItemTerms = getTermsFromString(currentItems.back());
+        ^
+              const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:311:15: note: FIX-IT applied suggested code changes
+        Terms lastItemTerms = getTermsFromString(currentItems.back());
+              ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:321:5: warning: variable 'endIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+    int endIndex = getIndexAtSameLineComment(closingBraceSemiColonIndex);
+    ^
+        const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:321:9: note: FIX-IT applied suggested code changes
+    int endIndex = getIndexAtSameLineComment(closingBraceSemiColonIndex);
+        ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:336:5: warning: variable 'scopeToExit' of type 'ScopeDetail &' can be declared 'const' [misc-const-correctness]
+    ScopeDetail& scopeToExit(m_scopeDetails.back());
+    ^
+                const
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:336:16: note: FIX-IT applied suggested code changes
+    ScopeDetail& scopeToExit(m_scopeDetails.back());
+               ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:340:9: warning: variable 'sorter' of type 'CPlusPlusReorganizeItems' can be declared 'const' [misc-const-correctness]
+        CPlusPlusReorganizeItems sorter(
+        ^
+                                 const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:340:34: note: FIX-IT applied suggested code changes
+        CPlusPlusReorganizeItems sorter(
+                                 ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:342:9: warning: variable 'sortedTerms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+        Terms sortedTerms(sorter.getSortedAggregateTerms());
+        ^
+              const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:342:15: note: FIX-IT applied suggested code changes
+        Terms sortedTerms(sorter.getSortedAggregateTerms());
+              ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:345:9: warning: variable 'sizeDifference' of type 'int' can be declared 'const' [misc-const-correctness]
+        int sizeDifference =
+        ^
+            const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:345:13: note: FIX-IT applied suggested code changes
+        int sizeDifference =
+            ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:358:5: warning: variable 'content' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+    string content = getContents(startIndex, endIndex);
+    ^
+           const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:358:12: note: FIX-IT applied suggested code changes
+    string content = getContents(startIndex, endIndex);
+           ^
+[48/61] Building CXX object CMakeFiles/AprgCodeUtilities.dir/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp.obj
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusTokenizer.cpp:151:9: warning: variable 'character' of type 'char' can be declared 'const' [misc-const-correctness]
+        char character = m_code[index];
+        ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusTokenizer.cpp:151:14: note: FIX-IT applied suggested code changes
+        char character = m_code[index];
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusTokenizer.cpp:160:9: warning: variable 'possibleOperator' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+        string possibleOperator = m_code.substr(index, 3);
+        ^
+               const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusTokenizer.cpp:160:16: note: FIX-IT applied suggested code changes
+        string possibleOperator = m_code.substr(index, 3);
+               ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusTokenizer.cpp:168:9: warning: variable 'possibleOperator' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+        string possibleOperator = m_code.substr(index, 2);
+        ^
+               const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusTokenizer.cpp:168:16: note: FIX-IT applied suggested code changes
+        string possibleOperator = m_code.substr(index, 2);
+               ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusTokenizer.cpp:176:9: warning: variable 'possibleOperator' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+        string possibleOperator = m_code.substr(index, 1);
+        ^
+               const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusTokenizer.cpp:176:16: note: FIX-IT applied suggested code changes
+        string possibleOperator = m_code.substr(index, 1);
+               ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusTokenizer.cpp:393:9: warning: variable 'termString' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+        string termString = string("#") + getIndentifierAt(m_index + 1);
+        ^
+               const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusTokenizer.cpp:393:16: note: FIX-IT applied suggested code changes
+        string termString = string("#") + getIndentifierAt(m_index + 1);
+               ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusTokenizer.cpp:403:9: warning: variable 'termString' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+        string termString = getNumberAt(m_index);
+        ^
+               const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusTokenizer.cpp:403:16: note: FIX-IT applied suggested code changes
+        string termString = getNumberAt(m_index);
+               ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusTokenizer.cpp:413:9: warning: variable 'termString' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+        string termString = getIndentifierAt(m_index);
+        ^
+               const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusTokenizer.cpp:413:16: note: FIX-IT applied suggested code changes
+        string termString = getIndentifierAt(m_index);
+               ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusTokenizer.cpp:457:9: warning: variable 'character' of type 'char' can be declared 'const' [misc-const-correctness]
+        char character = m_code[m_index];
+        ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusTokenizer.cpp:457:14: note: FIX-IT applied suggested code changes
+        char character = m_code[m_index];
+             ^
+[49/61] Building CXX object CMakeFiles/AprgCodeUtilities.dir/src/CodeUtilities/CPlusPlus/CPlusPlusUtilities.cpp.obj
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusUtilities.cpp:17:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler filePathHandler(path);
+    ^
+                         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusUtilities.cpp:17:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler filePathHandler(path);
+                         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusUtilities.cpp:27:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler filePathHandler(path);
+    ^
+                         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusUtilities.cpp:27:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler filePathHandler(path);
+                         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusUtilities.cpp:48:5: warning: variable 'terminatingPatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns terminatingPatterns{{M(";")}, {M("{")}, {M(":")}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusUtilities.cpp:48:14: note: FIX-IT applied suggested code changes
+    Patterns terminatingPatterns{{M(";")}, {M("{")}, {M(":")}};
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusUtilities.cpp:54:5: warning: variable 'removePatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns removePatterns{
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusUtilities.cpp:54:14: note: FIX-IT applied suggested code changes
+    Patterns removePatterns{
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusUtilities.cpp:86:5: warning: variable 'removePatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns removePatterns{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusUtilities.cpp:86:14: note: FIX-IT applied suggested code changes
+    Patterns removePatterns{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
+             ^
+[50/61] Building CXX object CMakeFiles/AprgCodeUtilities.dir/src/CodeUtilities/Common/Term.cpp.obj
+[51/61] Building CXX object CMakeFiles/AprgCodeUtilities.dir/src/CodeUtilities/Common/TermCreateHelpers.cpp.obj
+[52/61] Building CXX object CMakeFiles/AprgCodeUtilities.dir/src/CodeUtilities/Common/TermMatcher.cpp.obj
+[53/61] Building CXX object CMakeFiles/AprgCodeUtilities.dir/src/CodeUtilities/Common/TermUtilities.cpp.obj
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\Common\TermUtilities.cpp:20:13: warning: variable 'sizeDifference' of type 'int' can be declared 'const' [misc-const-correctness]
+            int sizeDifference =
+            ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\Common\TermUtilities.cpp:20:17: note: FIX-IT applied suggested code changes
+            int sizeDifference =
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\Common\TermUtilities.cpp:34:5: warning: variable 'searchPattern' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns searchPattern{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\Common\TermUtilities.cpp:34:14: note: FIX-IT applied suggested code changes
+    Patterns searchPattern{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\Common\TermUtilities.cpp:91:13: warning: variable 'isMatchForThisIndex' of type 'bool' can be declared 'const' [misc-const-correctness]
+            bool isMatchForThisIndex = currentTerm == searchPattern[matchIndex];
+            ^
+                 const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\Common\TermUtilities.cpp:91:18: note: FIX-IT applied suggested code changes
+            bool isMatchForThisIndex = currentTerm == searchPattern[matchIndex];
+                 ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\Common\TermUtilities.cpp:111:9: warning: variable 'isMatchForThisIndex' of type 'bool' can be declared 'const' [misc-const-correctness]
+        bool isMatchForThisIndex = currentTerm == matcher;
+        ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\Common\TermUtilities.cpp:111:14: note: FIX-IT applied suggested code changes
+        bool isMatchForThisIndex = currentTerm == matcher;
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\Common\TermUtilities.cpp:137:5: warning: variable 'sizeIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+    int sizeIndex = static_cast<int>(terms.size());
+    ^
+        const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\Common\TermUtilities.cpp:137:9: note: FIX-IT applied suggested code changes
+    int sizeIndex = static_cast<int>(terms.size());
+        ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\Common\TermUtilities.cpp:138:5: warning: variable 'startIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+    int startIndex = (index >= itemsOnOneSide) ? index - itemsOnOneSide : 0;
+    ^
+        const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\Common\TermUtilities.cpp:138:9: note: FIX-IT applied suggested code changes
+    int startIndex = (index >= itemsOnOneSide) ? index - itemsOnOneSide : 0;
+        ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\Common\TermUtilities.cpp:139:5: warning: variable 'endIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+    int endIndex = (index + itemsOnOneSide < sizeIndex) ? index + itemsOnOneSide : sizeIndex - 1;
+    ^
+        const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\Common\TermUtilities.cpp:139:9: note: FIX-IT applied suggested code changes
+    int endIndex = (index + itemsOnOneSide < sizeIndex) ? index + itemsOnOneSide : sizeIndex - 1;
+        ^
+[54/61] Building CXX object CMakeFiles/AprgCodeUtilities.dir/tst/CodeUtilitiesTests/CPlusPlus/CPlusPlusFixer_unit.cpp.obj
+[55/61] Building CXX object CMakeFiles/AprgCodeUtilities.dir/tst/CodeUtilitiesTests/CPlusPlus/CPlusPlusReorganizer_unit.cpp.obj
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:21:5: warning: variable 'reorganizer' of type 'CPlusPlusReorganizer' can be declared 'const' [misc-const-correctness]
+    CPlusPlusReorganizer reorganizer;
+    ^
+                         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:21:26: note: FIX-IT applied suggested code changes
+    CPlusPlusReorganizer reorganizer;
+                         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:22:5: warning: variable 'directoryPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler directoryPathHandler(directoryPath);
+    ^
+                         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:22:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler directoryPathHandler(directoryPath);
+                         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:27:9: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+        AlbaLocalPathHandler filePathHandler(file);
+        ^
+                             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:27:30: note: FIX-IT applied suggested code changes
+        AlbaLocalPathHandler filePathHandler(file);
+                             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:46:5: warning: variable 'reorganizer' of type 'CPlusPlusReorganizer' can be declared 'const' [misc-const-correctness]
+    CPlusPlusReorganizer reorganizer;
+    ^
+                         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:46:26: note: FIX-IT applied suggested code changes
+    CPlusPlusReorganizer reorganizer;
+                         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:47:5: warning: variable 'aprgPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler aprgPathHandler(aprgPath);
+    ^
+                         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:47:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler aprgPathHandler(aprgPath);
+                         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:52:9: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+        AlbaLocalPathHandler filePathHandler(file);
+        ^
+                             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:52:30: note: FIX-IT applied suggested code changes
+        AlbaLocalPathHandler filePathHandler(file);
+                             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:61:5: warning: variable 'destinationPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler destinationPathHandler(destination);
+    ^
+                         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:61:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler destinationPathHandler(destination);
+                         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:66:5: warning: variable 'expectedFilePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler expectedFilePathHandler(expectedFile);
+    ^
+                         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:66:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler expectedFilePathHandler(expectedFile);
+                         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:67:5: warning: variable 'testFilePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+    AlbaLocalPathHandler testFilePathHandler(testFile);
+    ^
+                         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:67:26: note: FIX-IT applied suggested code changes
+    AlbaLocalPathHandler testFilePathHandler(testFile);
+                         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:75:9: warning: variable 'lineInExpectedFile' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+        string lineInExpectedFile(expectedFileReader.getLine());
+        ^
+               const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:75:16: note: FIX-IT applied suggested code changes
+        string lineInExpectedFile(expectedFileReader.getLine());
+               ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:76:9: warning: variable 'lineInTestFile' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+        string lineInTestFile(testFileReader.getLine());
+        ^
+               const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:76:16: note: FIX-IT applied suggested code changes
+        string lineInTestFile(testFileReader.getLine());
+               ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:80:13: warning: variable 'numberOfLines' of type 'int' can be declared 'const' [misc-const-correctness]
+            int numberOfLines = static_cast<int>(lines.size());
+            ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:80:17: note: FIX-IT applied suggested code changes
+            int numberOfLines = static_cast<int>(lines.size());
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:108:38: warning: variable 'expectedFileStream' of type 'ofstream' (aka 'basic_ofstream<char, char_traits<char>>') can be declared 'const' [misc-const-correctness]
+void clearFile(string const& file) { ofstream expectedFileStream(AlbaLocalPathHandler(file).getFullPath()); }
+                                     ^
+                                              const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:108:47: note: FIX-IT applied suggested code changes
+void clearFile(string const& file) { ofstream expectedFileStream(AlbaLocalPathHandler(file).getFullPath()); }
+                                              ^
+[56/61] Building CXX object CMakeFiles/AprgCodeUtilities.dir/tst/CodeUtilitiesTests/CPlusPlus/CPlusPlusTokenizer_unit.cpp.obj
+[57/61] Building CXX object CMakeFiles/AprgCodeUtilities.dir/tst/CodeUtilitiesTests/CPlusPlus/CPlusPlusUtilities_unit.cpp.obj
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusUtilities_unit.cpp:10:5: warning: variable 'actualTerms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+    Terms actualTerms(getTermsFromString("identifier1 identifier2 identifier3"));
+    ^
+          const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusUtilities_unit.cpp:10:11: note: FIX-IT applied suggested code changes
+    Terms actualTerms(getTermsFromString("identifier1 identifier2 identifier3"));
+          ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusUtilities_unit.cpp:12:5: warning: variable 'expectedTerms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+    Terms expectedTerms{
+    ^
+          const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusUtilities_unit.cpp:12:11: note: FIX-IT applied suggested code changes
+    Terms expectedTerms{
+          ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusUtilities_unit.cpp:21:5: warning: variable 'wholeFunction' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+    string wholeFunction =
+    ^
+           const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusUtilities_unit.cpp:21:12: note: FIX-IT applied suggested code changes
+    string wholeFunction =
+           ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusUtilities_unit.cpp:25:5: warning: variable 'functionSignature' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+    string functionSignature(getFunctionSignature(wholeFunction));
+    ^
+           const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusUtilities_unit.cpp:25:12: note: FIX-IT applied suggested code changes
+    string functionSignature(getFunctionSignature(wholeFunction));
+           ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusUtilities_unit.cpp:31:5: warning: variable 'codeWithComments' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+    string codeWithComments = "Code\n /*MultilineComment*/\n //SingleLineComment\n Code\n";
+    ^
+           const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusUtilities_unit.cpp:31:12: note: FIX-IT applied suggested code changes
+    string codeWithComments = "Code\n /*MultilineComment*/\n //SingleLineComment\n Code\n";
+           ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusUtilities_unit.cpp:32:5: warning: variable 'termsWithComments' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+    Terms termsWithComments(getTermsFromString(codeWithComments));
+    ^
+          const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusUtilities_unit.cpp:32:11: note: FIX-IT applied suggested code changes
+    Terms termsWithComments(getTermsFromString(codeWithComments));
+          ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusUtilities_unit.cpp:34:5: warning: variable 'codeWithoutComments' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+    string codeWithoutComments(getTextWithoutCommentsWithNewLine(termsWithComments));
+    ^
+           const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusUtilities_unit.cpp:34:12: note: FIX-IT applied suggested code changes
+    string codeWithoutComments(getTextWithoutCommentsWithNewLine(termsWithComments));
+           ^
+[58/61] Building CXX object CMakeFiles/AprgCodeUtilities.dir/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp.obj
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:10:5: warning: variable 'matcher' of type 'TermMatcher' can be declared 'const' [misc-const-correctness]
+    TermMatcher matcher(TermType::Identifier, "SomeIdentifier");
+    ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:10:17: note: FIX-IT applied suggested code changes
+    TermMatcher matcher(TermType::Identifier, "SomeIdentifier");
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:11:5: warning: variable 'term2' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term2(TermType::Identifier, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:11:10: note: FIX-IT applied suggested code changes
+    Term term2(TermType::Identifier, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:12:5: warning: variable 'term3' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:12:10: note: FIX-IT applied suggested code changes
+    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:13:5: warning: variable 'term4' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term4(TermType::Keyword, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:13:10: note: FIX-IT applied suggested code changes
+    Term term4(TermType::Keyword, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:24:5: warning: variable 'matcher' of type 'TermMatcher' can be declared 'const' [misc-const-correctness]
+    TermMatcher matcher(TermType::Identifier);
+    ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:24:17: note: FIX-IT applied suggested code changes
+    TermMatcher matcher(TermType::Identifier);
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:25:5: warning: variable 'term2' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term2(TermType::Identifier, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:25:10: note: FIX-IT applied suggested code changes
+    Term term2(TermType::Identifier, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:26:5: warning: variable 'term3' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:26:10: note: FIX-IT applied suggested code changes
+    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:27:5: warning: variable 'term4' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term4(TermType::Keyword, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:27:10: note: FIX-IT applied suggested code changes
+    Term term4(TermType::Keyword, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:38:5: warning: variable 'matcher' of type 'TermMatcher' can be declared 'const' [misc-const-correctness]
+    TermMatcher matcher("SomeIdentifier");
+    ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:38:17: note: FIX-IT applied suggested code changes
+    TermMatcher matcher("SomeIdentifier");
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:39:5: warning: variable 'term2' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term2(TermType::Identifier, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:39:10: note: FIX-IT applied suggested code changes
+    Term term2(TermType::Identifier, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:40:5: warning: variable 'term3' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:40:10: note: FIX-IT applied suggested code changes
+    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:41:5: warning: variable 'term4' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term4(TermType::Keyword, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:41:10: note: FIX-IT applied suggested code changes
+    Term term4(TermType::Keyword, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:52:5: warning: variable 'matcher' of type 'TermMatcher' can be declared 'const' [misc-const-correctness]
+    TermMatcher matcher(TermType::Identifier, "SomeIdentifier");
+    ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:52:17: note: FIX-IT applied suggested code changes
+    TermMatcher matcher(TermType::Identifier, "SomeIdentifier");
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:53:5: warning: variable 'term2' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term2(TermType::Identifier, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:53:10: note: FIX-IT applied suggested code changes
+    Term term2(TermType::Identifier, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:54:5: warning: variable 'term3' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:54:10: note: FIX-IT applied suggested code changes
+    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:55:5: warning: variable 'term4' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term4(TermType::Keyword, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:55:10: note: FIX-IT applied suggested code changes
+    Term term4(TermType::Keyword, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:66:5: warning: variable 'matcher' of type 'TermMatcher' can be declared 'const' [misc-const-correctness]
+    TermMatcher matcher(TermType::Identifier);
+    ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:66:17: note: FIX-IT applied suggested code changes
+    TermMatcher matcher(TermType::Identifier);
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:67:5: warning: variable 'term2' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term2(TermType::Identifier, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:67:10: note: FIX-IT applied suggested code changes
+    Term term2(TermType::Identifier, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:68:5: warning: variable 'term3' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:68:10: note: FIX-IT applied suggested code changes
+    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:69:5: warning: variable 'term4' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term4(TermType::Keyword, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:69:10: note: FIX-IT applied suggested code changes
+    Term term4(TermType::Keyword, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:80:5: warning: variable 'matcher' of type 'TermMatcher' can be declared 'const' [misc-const-correctness]
+    TermMatcher matcher("SomeIdentifier");
+    ^
+                const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:80:17: note: FIX-IT applied suggested code changes
+    TermMatcher matcher("SomeIdentifier");
+                ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:81:5: warning: variable 'term2' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term2(TermType::Identifier, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:81:10: note: FIX-IT applied suggested code changes
+    Term term2(TermType::Identifier, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:82:5: warning: variable 'term3' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:82:10: note: FIX-IT applied suggested code changes
+    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:83:5: warning: variable 'term4' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term4(TermType::Keyword, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermMatcher_unit.cpp:83:10: note: FIX-IT applied suggested code changes
+    Term term4(TermType::Keyword, "SomeIdentifier");
+         ^
+[59/61] Building CXX object CMakeFiles/AprgCodeUtilities.dir/tst/CodeUtilitiesTests/Common/TermUtilities_unit.cpp.obj
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:17:5: warning: variable 'expectedTerms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+    Terms expectedTerms{
+    ^
+          const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:17:11: note: FIX-IT applied suggested code changes
+    Terms expectedTerms{
+          ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:25:5: warning: variable 'terms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+    Terms terms{
+    ^
+          const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:25:11: note: FIX-IT applied suggested code changes
+    Terms terms{
+          ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:29:5: warning: variable 'patterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:29:14: note: FIX-IT applied suggested code changes
+    Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:31:5: warning: variable 'patternIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
+    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+    ^
+            const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:31:13: note: FIX-IT applied suggested code changes
+    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+            ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:40:5: warning: variable 'terms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+    Terms terms{Term(TermType::Identifier, "identifier1"), Term(TermType::CommentMultiline, "/*Comment*/"),
+    ^
+          const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:40:11: note: FIX-IT applied suggested code changes
+    Terms terms{Term(TermType::Identifier, "identifier1"), Term(TermType::CommentMultiline, "/*Comment*/"),
+          ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:45:5: warning: variable 'patterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:45:14: note: FIX-IT applied suggested code changes
+    Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:47:5: warning: variable 'patternIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
+    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+    ^
+            const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:47:13: note: FIX-IT applied suggested code changes
+    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+            ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:56:5: warning: variable 'terms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+    Terms terms{Term(TermType::Identifier, "identifier1"), Term(TermType::WhiteSpace, "\t"),
+    ^
+          const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:56:11: note: FIX-IT applied suggested code changes
+    Terms terms{Term(TermType::Identifier, "identifier1"), Term(TermType::WhiteSpace, "\t"),
+          ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:61:5: warning: variable 'patterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:61:14: note: FIX-IT applied suggested code changes
+    Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:63:5: warning: variable 'patternIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
+    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+    ^
+            const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:63:13: note: FIX-IT applied suggested code changes
+    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+            ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:72:5: warning: variable 'terms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+    Terms terms{
+    ^
+          const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:72:11: note: FIX-IT applied suggested code changes
+    Terms terms{
+          ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:76:5: warning: variable 'patterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns patterns{{M("identifier2")}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:76:14: note: FIX-IT applied suggested code changes
+    Patterns patterns{{M("identifier2")}};
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:78:5: warning: variable 'patternIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
+    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+    ^
+            const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:78:13: note: FIX-IT applied suggested code changes
+    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+            ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:85:5: warning: variable 'terms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+    Terms terms{
+    ^
+          const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:85:11: note: FIX-IT applied suggested code changes
+    Terms terms{
+          ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:89:5: warning: variable 'patterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns patterns{{M("identifier2")}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:89:14: note: FIX-IT applied suggested code changes
+    Patterns patterns{{M("identifier2")}};
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:91:5: warning: variable 'patternIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
+    Indexes patternIndexes = searchForPatternsBackwards(terms, terms.size() - 1, patterns);
+    ^
+            const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:91:13: note: FIX-IT applied suggested code changes
+    Indexes patternIndexes = searchForPatternsBackwards(terms, terms.size() - 1, patterns);
+            ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:91:64: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+    Indexes patternIndexes = searchForPatternsBackwards(terms, terms.size() - 1, patterns);
+                                                               ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:102:5: warning: variable 'patterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
+    Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
+    ^
+             const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:102:14: note: FIX-IT applied suggested code changes
+    Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
+             ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:103:5: warning: variable 'replacementTerms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+    Terms replacementTerms{Term(TermType::Identifier, "identifier7")};
+    ^
+          const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:103:11: note: FIX-IT applied suggested code changes
+    Terms replacementTerms{Term(TermType::Identifier, "identifier7")};
+          ^
+[60/61] Building CXX object CMakeFiles/AprgCodeUtilities.dir/tst/CodeUtilitiesTests/Common/Term_unit.cpp.obj
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:10:5: warning: variable 'term' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term(TermType::Identifier, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:10:10: note: FIX-IT applied suggested code changes
+    Term term(TermType::Identifier, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:17:5: warning: variable 'term' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term(TermType::Identifier, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:17:10: note: FIX-IT applied suggested code changes
+    Term term(TermType::Identifier, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:23:5: warning: variable 'term' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term(TermType::Identifier, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:23:10: note: FIX-IT applied suggested code changes
+    Term term(TermType::Identifier, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:29:5: warning: variable 'term' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term(TermType::Identifier, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:29:10: note: FIX-IT applied suggested code changes
+    Term term(TermType::Identifier, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:51:5: warning: variable 'term1' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term1(TermType::Identifier, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:51:10: note: FIX-IT applied suggested code changes
+    Term term1(TermType::Identifier, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:52:5: warning: variable 'term2' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term2(TermType::Identifier, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:52:10: note: FIX-IT applied suggested code changes
+    Term term2(TermType::Identifier, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:53:5: warning: variable 'term3' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:53:10: note: FIX-IT applied suggested code changes
+    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:54:5: warning: variable 'term4' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term4(TermType::Keyword, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:54:10: note: FIX-IT applied suggested code changes
+    Term term4(TermType::Keyword, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:63:5: warning: variable 'term1' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term1(TermType::Identifier, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:63:10: note: FIX-IT applied suggested code changes
+    Term term1(TermType::Identifier, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:64:5: warning: variable 'term2' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term2(TermType::Identifier, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:64:10: note: FIX-IT applied suggested code changes
+    Term term2(TermType::Identifier, "SomeIdentifier");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:65:5: warning: variable 'term3' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:65:10: note: FIX-IT applied suggested code changes
+    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
+         ^
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:66:5: warning: variable 'term4' of type 'Term' can be declared 'const' [misc-const-correctness]
+    Term term4(TermType::Keyword, "SomeIdentifier");
+    ^
+         const 
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\Term_unit.cpp:66:10: note: FIX-IT applied suggested code changes
+    Term term4(TermType::Keyword, "SomeIdentifier");
+         ^
+[61/61] Linking CXX executable AprgCodeUtilities.exe
+[35m2023-09-11T03:14:06[0m | [33mBuildAndRun.sh:218[0m | The script [BuildAndRun.sh] for [buildOnOneCore] is finished.
 DONE!

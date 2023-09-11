@@ -7,10 +7,10 @@ using namespace std;
 namespace alba::CodeUtilities {
 
 TEST(TermMatcherTest, OperatorEqualsWorksWithBothTermTypeAndIdentifier) {
-    TermMatcher matcher(TermType::Identifier, "SomeIdentifier");
-    Term term2(TermType::Identifier, "SomeIdentifier");
-    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
-    Term term4(TermType::Keyword, "SomeIdentifier");
+    TermMatcher const matcher(TermType::Identifier, "SomeIdentifier");
+    Term const term2(TermType::Identifier, "SomeIdentifier");
+    Term const term3(TermType::Identifier, "SomeIdentifierDifferent");
+    Term const term4(TermType::Keyword, "SomeIdentifier");
 
     EXPECT_TRUE(operator==(matcher, term2));
     EXPECT_FALSE(operator==(matcher, term3));
@@ -21,10 +21,10 @@ TEST(TermMatcherTest, OperatorEqualsWorksWithBothTermTypeAndIdentifier) {
 }
 
 TEST(TermMatcherTest, OperatorEqualsWorksWithTermType) {
-    TermMatcher matcher(TermType::Identifier);
-    Term term2(TermType::Identifier, "SomeIdentifier");
-    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
-    Term term4(TermType::Keyword, "SomeIdentifier");
+    TermMatcher const matcher(TermType::Identifier);
+    Term const term2(TermType::Identifier, "SomeIdentifier");
+    Term const term3(TermType::Identifier, "SomeIdentifierDifferent");
+    Term const term4(TermType::Keyword, "SomeIdentifier");
 
     EXPECT_TRUE(operator==(matcher, term2));
     EXPECT_TRUE(operator==(matcher, term3));
@@ -35,10 +35,10 @@ TEST(TermMatcherTest, OperatorEqualsWorksWithTermType) {
 }
 
 TEST(TermMatcherTest, OperatorEqualsWorksWithContent) {
-    TermMatcher matcher("SomeIdentifier");
-    Term term2(TermType::Identifier, "SomeIdentifier");
-    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
-    Term term4(TermType::Keyword, "SomeIdentifier");
+    TermMatcher const matcher("SomeIdentifier");
+    Term const term2(TermType::Identifier, "SomeIdentifier");
+    Term const term3(TermType::Identifier, "SomeIdentifierDifferent");
+    Term const term4(TermType::Keyword, "SomeIdentifier");
 
     EXPECT_TRUE(operator==(matcher, term2));
     EXPECT_FALSE(operator==(matcher, term3));
@@ -49,10 +49,10 @@ TEST(TermMatcherTest, OperatorEqualsWorksWithContent) {
 }
 
 TEST(TermMatcherTest, OperatorNotEqualsWorksWithBothTermTypeAndIdentifier) {
-    TermMatcher matcher(TermType::Identifier, "SomeIdentifier");
-    Term term2(TermType::Identifier, "SomeIdentifier");
-    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
-    Term term4(TermType::Keyword, "SomeIdentifier");
+    TermMatcher const matcher(TermType::Identifier, "SomeIdentifier");
+    Term const term2(TermType::Identifier, "SomeIdentifier");
+    Term const term3(TermType::Identifier, "SomeIdentifierDifferent");
+    Term const term4(TermType::Keyword, "SomeIdentifier");
 
     EXPECT_FALSE(operator!=(matcher, term2));
     EXPECT_TRUE(operator!=(matcher, term3));
@@ -63,10 +63,10 @@ TEST(TermMatcherTest, OperatorNotEqualsWorksWithBothTermTypeAndIdentifier) {
 }
 
 TEST(TermMatcherTest, OperatorNotEqualsWorksWithTermType) {
-    TermMatcher matcher(TermType::Identifier);
-    Term term2(TermType::Identifier, "SomeIdentifier");
-    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
-    Term term4(TermType::Keyword, "SomeIdentifier");
+    TermMatcher const matcher(TermType::Identifier);
+    Term const term2(TermType::Identifier, "SomeIdentifier");
+    Term const term3(TermType::Identifier, "SomeIdentifierDifferent");
+    Term const term4(TermType::Keyword, "SomeIdentifier");
 
     EXPECT_FALSE(operator!=(matcher, term2));
     EXPECT_FALSE(operator!=(matcher, term3));
@@ -77,10 +77,10 @@ TEST(TermMatcherTest, OperatorNotEqualsWorksWithTermType) {
 }
 
 TEST(TermMatcherTest, OperatorNotEqualsWorksWithContent) {
-    TermMatcher matcher("SomeIdentifier");
-    Term term2(TermType::Identifier, "SomeIdentifier");
-    Term term3(TermType::Identifier, "SomeIdentifierDifferent");
-    Term term4(TermType::Keyword, "SomeIdentifier");
+    TermMatcher const matcher("SomeIdentifier");
+    Term const term2(TermType::Identifier, "SomeIdentifier");
+    Term const term3(TermType::Identifier, "SomeIdentifierDifferent");
+    Term const term4(TermType::Keyword, "SomeIdentifier");
 
     EXPECT_FALSE(operator!=(matcher, term2));
     EXPECT_TRUE(operator!=(matcher, term3));

@@ -17,7 +17,7 @@ void replaceAllForwards(
         if (!patternIndexes.empty()) {
             terms.erase(terms.cbegin() + patternIndexes.front(), terms.cbegin() + patternIndexes.back() + 1);
             terms.insert(terms.cbegin() + patternIndexes.front(), replacementTerms.cbegin(), replacementTerms.cend());
-            int sizeDifference =
+            int const sizeDifference =
                 static_cast<int>(replacementTerms.size()) - (patternIndexes.back() + 1 - patternIndexes.front());
             if (sizeDifference == 0) {
                 termIndex = patternIndexes.front() + 1;
@@ -31,7 +31,7 @@ void replaceAllForwards(
 }
 
 void replaceCommentsWithExtraLine(Terms& terms, int const startIndex) {
-    Patterns searchPattern{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
+    Patterns const searchPattern{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
     for (int termIndex = startIndex; termIndex < static_cast<int>(terms.size());) {
         Indexes patternIndexes = checkPatternAt(terms, termIndex, searchPattern);
         if (!patternIndexes.empty()) {
@@ -88,7 +88,7 @@ Indexes checkPatternAt(Terms const& terms, int const termIndex, Patterns const& 
              termIndex2 < static_cast<int>(terms.size()) && matchIndex < static_cast<int>(searchPattern.size());
              ++termIndex2) {
             Term const& currentTerm(terms[termIndex2]);
-            bool isMatchForThisIndex = currentTerm == searchPattern[matchIndex];
+            bool const isMatchForThisIndex = currentTerm == searchPattern[matchIndex];
             if (isMatchForThisIndex) {
                 patternIndexes.emplace_back(termIndex2);
                 ++matchIndex;
@@ -108,7 +108,7 @@ Indexes checkMatcherAtBackwards(Terms const& terms, int const termIndex, TermMat
     Indexes patternIndexes;
     for (int termIndex2 = termIndex; termIndex2 >= 0; --termIndex2) {
         Term const& currentTerm(terms[termIndex2]);
-        bool isMatchForThisIndex = currentTerm == matcher;
+        bool const isMatchForThisIndex = currentTerm == matcher;
         if (isMatchForThisIndex) {
             patternIndexes.emplace_back(termIndex2);
         }
@@ -134,9 +134,9 @@ string getCombinedContents(Terms const& terms, int const startIndex, int const e
 string getLocatorString(Terms const& terms, int const index) {
     string combinedContent;
     constexpr int itemsOnOneSide = 6;
-    int sizeIndex = static_cast<int>(terms.size());
-    int startIndex = (index >= itemsOnOneSide) ? index - itemsOnOneSide : 0;
-    int endIndex = (index + itemsOnOneSide < sizeIndex) ? index + itemsOnOneSide : sizeIndex - 1;
+    int const sizeIndex = static_cast<int>(terms.size());
+    int const startIndex = (index >= itemsOnOneSide) ? index - itemsOnOneSide : 0;
+    int const endIndex = (index + itemsOnOneSide < sizeIndex) ? index + itemsOnOneSide : sizeIndex - 1;
     for (int termIndex = startIndex; termIndex < index; ++termIndex) {
         combinedContent += terms[termIndex].getContent();
     }
