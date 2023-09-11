@@ -11,7 +11,7 @@ using namespace std;
 namespace alba::AprgBitmap {
 
 TEST(BitmapWriteTest, TestForWritingBitmap) {
-    Bitmap bitmap(APRG_BITMAP_WRITE_TEST_FILE);
+    Bitmap const bitmap(APRG_BITMAP_WRITE_TEST_FILE);
     ASSERT_TRUE(bitmap.getConfiguration().isValid());
     ASSERT_EQ(CompressedMethodType::RGB, bitmap.getConfiguration().getCompressedMethodType());
     ASSERT_TRUE(bitmap.getConfiguration().isCompressedMethodSupported());
@@ -26,7 +26,7 @@ TEST(BitmapWriteTest, TestForWritingBitmap) {
 }
 
 TEST(BitmapWriteTest, TestForWritingMissingBitmapFile) {
-    Bitmap bitmap("FileThatDoesNotExist");
+    Bitmap const bitmap("FileThatDoesNotExist");
     ASSERT_FALSE(bitmap.getConfiguration().isValid());
 
     BitmapSnippet snippet(bitmap.getSnippetReadFromFile(BitmapXY(50, 50), BitmapXY(150, 150)));

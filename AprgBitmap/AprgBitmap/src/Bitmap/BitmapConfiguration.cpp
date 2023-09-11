@@ -23,8 +23,8 @@ BitmapXY BitmapConfiguration::getPointWithinTheBitmap(int const xCoordinate, int
 }
 
 BitmapXY BitmapConfiguration::getDownRightCornerPoint() const {
-    int maxX = m_bitmapWidth == 0 ? 0 : m_bitmapWidth - 1;
-    int maxY = m_bitmapHeight == 0 ? 0 : m_bitmapHeight - 1;
+    int const maxX = m_bitmapWidth == 0 ? 0 : m_bitmapWidth - 1;
+    int const maxY = m_bitmapHeight == 0 ? 0 : m_bitmapHeight - 1;
     return {maxX, maxY};
 }
 
@@ -80,12 +80,12 @@ int BitmapConfiguration::convertBytesToPixels(int const bytes) const {
 int BitmapConfiguration::getNumberOfPixelsForOneByte() const { return convertBytesToPixels(1); }
 
 int BitmapConfiguration::getMaximumNumberOfPixelsBeforeOneByte() const {
-    int numberOfPixelsInOneByte(convertBytesToPixels(1));
+    int const numberOfPixelsInOneByte(convertBytesToPixels(1));
     return (numberOfPixelsInOneByte > 0) ? numberOfPixelsInOneByte - 1 : 0;
 }
 
 int BitmapConfiguration::getMinimumNumberOfBytesForOnePixel() const {
-    int numberOfBytesInOnePixel(convertPixelsToBytesRoundedToFloor(1));
+    int const numberOfBytesInOnePixel(convertPixelsToBytesRoundedToFloor(1));
     return (numberOfBytesInOnePixel > 0) ? numberOfBytesInOnePixel : 1;
 }
 
@@ -93,9 +93,9 @@ int BitmapConfiguration::getEstimatedSquareSideInPixels(int const numberOfBytesT
     // Quadratic equation: side*side*m_numberOfBitsPerPixel
     //+ side*(1+getMinimumNumberOfBytesForOnePixel())*AlbaBitConstants::BYTE_SIZE_IN_BITS
     //- numberOfBytesToRead*AlbaBitConstants::BYTE_SIZE_IN_BITS
-    double a = m_numberOfBitsPerPixel;
-    double b = (1 + getMinimumNumberOfBytesForOnePixel()) * AlbaBitConstants::BYTE_SIZE_IN_BITS;
-    double c = -1 * static_cast<int>(numberOfBytesToRead * AlbaBitConstants::BYTE_SIZE_IN_BITS);
+    double const a = m_numberOfBitsPerPixel;
+    double const b = (1 + getMinimumNumberOfBytesForOnePixel()) * AlbaBitConstants::BYTE_SIZE_IN_BITS;
+    double const c = -1 * static_cast<int>(numberOfBytesToRead * AlbaBitConstants::BYTE_SIZE_IN_BITS);
     int result(0);
     AlbaNumbers roots(getQuadraticRoots(RootType::RealRootsOnly, AlbaNumber(a), AlbaNumber(b), AlbaNumber(c)));
     if (!roots.empty()) {

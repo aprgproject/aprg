@@ -50,13 +50,13 @@ BitmapSnippet Bitmap::getSnippetReadFromFileWithNumberOfBytesToRead(
 }
 
 BitmapSnippet Bitmap::getSnippetReadFromFile(BitmapXY const topLeftCorner, BitmapXY const bottomRightCorner) const {
-    int byteOffsetInXForStart =
+    int const byteOffsetInXForStart =
         static_cast<int>(m_configuration.convertPixelsToBytesRoundedToFloor(topLeftCorner.getX()));
-    int byteOffsetInXForEnd =
+    int const byteOffsetInXForEnd =
         static_cast<int>(m_configuration.convertPixelsToBytesRoundedToFloor(bottomRightCorner.getX()));
-    int startPixelInX = static_cast<int>(m_configuration.getXCoordinateWithinTheBitmap(
+    int const startPixelInX = static_cast<int>(m_configuration.getXCoordinateWithinTheBitmap(
         static_cast<int>(m_configuration.convertBytesToPixels(byteOffsetInXForStart))));
-    int endPixelInX = static_cast<int>(m_configuration.getXCoordinateWithinTheBitmap(static_cast<int>(
+    int const endPixelInX = static_cast<int>(m_configuration.getXCoordinateWithinTheBitmap(static_cast<int>(
         m_configuration.convertBytesToPixels(byteOffsetInXForEnd) +
         m_configuration.getMaximumNumberOfPixelsBeforeOneByte())));
 
@@ -71,21 +71,21 @@ void Bitmap::setSnippetWriteToFile(BitmapSnippet const& snippet) const {
             m_configuration.isPositionWithinTheBitmap(snippet.getBottomRightCorner())) {
             fstream streamFile(m_configuration.getPath(), fstream::in | fstream::out | fstream::binary);
             if (streamFile.is_open()) {
-                int byteOffsetInXForStart = static_cast<int>(
+                int const byteOffsetInXForStart = static_cast<int>(
                     m_configuration.convertPixelsToBytesRoundedToFloor(snippet.getTopLeftCorner().getX()));
-                int byteOffsetInXForEnd = static_cast<int>(
+                int const byteOffsetInXForEnd = static_cast<int>(
                     m_configuration.convertPixelsToBytesRoundedToFloor(snippet.getBottomRightCorner().getX()));
-                int offsetInYForStart = static_cast<int>(m_configuration.getBitmapHeight()) -
-                                        static_cast<int>(snippet.getTopLeftCorner().getY()) - 1;
-                int offsetInYForEnd = static_cast<int>(m_configuration.getBitmapHeight()) -
-                                      static_cast<int>(snippet.getBottomRightCorner().getY()) - 1;
-                int numberOfBytesToBeCopiedForX = static_cast<int>(
+                int const offsetInYForStart = static_cast<int>(m_configuration.getBitmapHeight()) -
+                                              static_cast<int>(snippet.getTopLeftCorner().getY()) - 1;
+                int const offsetInYForEnd = static_cast<int>(m_configuration.getBitmapHeight()) -
+                                            static_cast<int>(snippet.getBottomRightCorner().getY()) - 1;
+                int const numberOfBytesToBeCopiedForX = static_cast<int>(
                     m_configuration.getOneRowSizeInBytesFromBytes(byteOffsetInXForStart, byteOffsetInXForEnd));
-                int snippetSize = snippet.getPixelDataSize();
+                int const snippetSize = snippet.getPixelDataSize();
                 int snippetIndex = 0;
 
                 for (int y = offsetInYForStart; y >= offsetInYForEnd && snippetIndex < snippetSize; --y) {
-                    uint64_t fileOffsetForStart =
+                    uint64_t const fileOffsetForStart =
                         m_configuration.getPixelArrayAddress() +
                         (static_cast<uint64_t>(m_configuration.getNumberOfBytesPerRowInFile()) * y) +
                         byteOffsetInXForStart;
@@ -104,7 +104,7 @@ void Bitmap::setSnippetWriteToFile(BitmapSnippet const& snippet) const {
 
 void Bitmap::adjustToTargetLength(int& low, int& high, int const targetLength, int const maxLength) {
     if (high - low + 1 < targetLength) {
-        int additionalSizeInX = targetLength - (high - low + 1);
+        int const additionalSizeInX = targetLength - (high - low + 1);
         if ((low - additionalSizeInX) >= 0) {
             low = low - additionalSizeInX;
         } else if ((high + additionalSizeInX) < maxLength) {
@@ -115,8 +115,8 @@ void Bitmap::adjustToTargetLength(int& low, int& high, int const targetLength, i
 
 void Bitmap::calculateNewCornersBasedOnCenterAndNumberOfBytes(
     BitmapXY& topLeftCorner, BitmapXY& bottomRightCorner, BitmapXY const center, int const numberOfBytes) const {
-    int side(static_cast<int>(m_configuration.getEstimatedSquareSideInPixels(numberOfBytes)));
-    int halfSide(side / 2);
+    int const side(static_cast<int>(m_configuration.getEstimatedSquareSideInPixels(numberOfBytes)));
+    int const halfSide(side / 2);
     int left(
         static_cast<int>(m_configuration.getXCoordinateWithinTheBitmap(static_cast<int>(center.getX()) - halfSide)));
     int right(
@@ -125,8 +125,8 @@ void Bitmap::calculateNewCornersBasedOnCenterAndNumberOfBytes(
 
     int xSizeInBytes(static_cast<int>(m_configuration.getOneRowSizeInBytesFromPixels(left, right)));
     xSizeInBytes = (xSizeInBytes > 0) ? xSizeInBytes : 1;
-    int ySizeInBytes(static_cast<int>(numberOfBytes / xSizeInBytes));
-    int halfYSizeInBytes(ySizeInBytes / 2);
+    int const ySizeInBytes(static_cast<int>(numberOfBytes / xSizeInBytes));
+    int const halfYSizeInBytes(ySizeInBytes / 2);
     int top(static_cast<int>(
         m_configuration.getYCoordinateWithinTheBitmap(static_cast<int>(center.getY()) - halfYSizeInBytes)));
     int bottom(static_cast<int>(
