@@ -1,0 +1,5 @@
+StaticAnalysisJobIdentifier: [51]
+2023-09-06T01:16:32
+/home/runner/work/aprg/aprg/AprgModeling/AprgModeling/src/AprgModeling/Modeling.cpp:150:49: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgModeling/AprgModeling/src/AprgModeling/Modeling.cpp:154:25: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+DONE!

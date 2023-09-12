@@ -2,7 +2,7 @@
 
 projectsWithGsl='
 "gsl/GslTest",
-"AprgModelling/AprgModelling"
+"AprgModeling/AprgModeling"
 '
 
 projectsWithGsl=$(echo "$projectsWithGsl" | tr '\n' ' ')
