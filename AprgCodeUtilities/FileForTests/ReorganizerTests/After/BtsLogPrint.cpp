@@ -1,9 +1,7 @@
 #include "BtsLogPrint.hpp"
-
 #include <Common/Stream/AlbaStreamParameterReader.hpp>
 #include <Common/Stream/AlbaStreamParameterWriter.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
-
 #include <iostream>
 
 using namespace alba;

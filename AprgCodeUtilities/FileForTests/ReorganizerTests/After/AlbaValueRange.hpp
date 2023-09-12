@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
-
 #include <functional>
 #include <ostream>
 #include <string>

@@ -17,6 +17,7 @@ public:
         Namespace,
         StaticAssert,
         Template,
+        Test,
         Unknown,
         UsingKeyword
     };
@@ -35,6 +36,7 @@ public:
         ItemSubType itemSubType;
         int itemsIndex;
         std::string functionReturnTypeName;
+        std::vector<int> functionUsageInTest;
     };
 
     using SortItems = std::vector<SortItem>;
@@ -44,7 +46,8 @@ public:
         ScopeType scopeType;
         stringHelper::strings items;
         stringHelper::strings scopeNames;
-        stringHelper::strings headerSignatures;
+        stringHelper::strings headerFunctionSignatures;
+        Patterns headerFunctionNamePatterns;
     };
 
     explicit CPlusPlusReorganizeItems(Data const& data);
@@ -63,6 +66,7 @@ private:
     void saveDetailsFromHeaderSignatures(SortItem& sortItem, std::string const& item) const;
     void saveDetailsBasedFromItem(SortItem& sortItem, std::string const& item) const;
     void saveDetailsBasedFromItemTerms(SortItem& sortItem, std::string const& item, Terms const& terms) const;
+    void saveDetailsForTest(SortItem& sortItem, Terms const& terms) const;
     void fixItemContents();
     [[nodiscard]] static GroupType getGroupType(ItemType const itemType);
     [[nodiscard]] static Patterns getSearchPatterns();
@@ -70,7 +74,7 @@ private:
     [[nodiscard]] static std::string getIdentifierBeforeParenthesis(Terms const& terms, int const parenthesisIndex);
     [[nodiscard]] static bool hasMultilineItem(SortItems const& sortItems);
     [[nodiscard]] static bool isMultiLine(int const numberOfLines);
-    static void makeLoneCommentsStickWithNextLine(Terms& terms, int const startIndex);
+    static void makeIsolatedCommentsStickWithNextLine(Terms& terms, int const startIndex);
     static void sortByComparingItems(SortItems& sortItems);
     static void moveToEndParenthesis(Terms const& terms, int& termIndex, int const parenthesisIndex);
     static void saveDetailsBasedFromFunctionSignature(SortItem& sortItem, std::string const& functionSignature);

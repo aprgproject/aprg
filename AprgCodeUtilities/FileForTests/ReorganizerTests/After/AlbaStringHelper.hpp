@@ -2,7 +2,6 @@
 
 #include <Common/Math/Number/AlbaNumber.hpp>
 #include <Common/Types/AlbaTypeHelper.hpp>
-
 #include <cctype>
 #include <iomanip>
 #include <optional>

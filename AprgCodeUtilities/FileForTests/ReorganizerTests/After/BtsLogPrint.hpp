@@ -1,7 +1,6 @@
 #pragma once
 
 #include "BtsLogTime.hpp"
-
 #include <string>
 
 namespace wcdmaToolsBackend {

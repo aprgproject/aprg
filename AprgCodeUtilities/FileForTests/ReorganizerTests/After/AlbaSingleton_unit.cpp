@@ -1,5 +1,4 @@
 #include <Common/Container/AlbaSingleton.hpp>
-
 #include <gtest/gtest.h>
 
 namespace alba {

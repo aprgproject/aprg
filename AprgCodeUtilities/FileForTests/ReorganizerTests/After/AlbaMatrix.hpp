@@ -8,7 +8,6 @@
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Common/Types/AlbaTypeHelper.hpp>
 #include <Common/User/DisplayTable.hpp>
-
 #include <cassert>
 #include <functional>
 #include <sstream>

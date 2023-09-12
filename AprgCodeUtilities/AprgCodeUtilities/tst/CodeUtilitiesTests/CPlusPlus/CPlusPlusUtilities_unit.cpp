@@ -27,6 +27,14 @@ TEST(CPlusPlusUtilitiesTest, GetFunctionSignatureWorks) {
     EXPECT_EQ("AlbaOptional(AlbaOptional<ContentType&> const& optional)", functionSignature);
 }
 
+TEST(CPlusPlusUtilitiesTest, GetFunctionNameWorks) {
+    string const functionSignature = "AlbaOptional(AlbaOptional<ContentType&> const& optional)";
+
+    string const functionName(getFunctionName(functionSignature));
+
+    EXPECT_EQ("AlbaOptional", functionName);
+}
+
 TEST(CPlusPlusUtilitiesTest, GetTextWithoutCommentsWithNewLineWorks) {
     string const codeWithComments = "Code\n /*MultilineComment*/\n //SingleLineComment\n Code\n";
     Terms const termsWithComments(getTermsFromString(codeWithComments));

@@ -1,5 +1,4 @@
 #include "TermRaiseToTerms.hpp"
-
 #include <Algebra/Constructs/PolynomialRaiseToAnUnsignedInt.hpp>
 #include <Algebra/Functions/CommonFunctionLibrary.hpp>
 #include <Algebra/Operations/AccumulateOperations.hpp>
@@ -11,7 +10,6 @@
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 #include <Common/Math/Helpers/DivisibilityHelpers.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
-
 #include <algorithm>
 
 using namespace alba::algebra::Functions;
