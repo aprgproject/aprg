@@ -8,7 +8,7 @@ namespace alba {
 
 TEST(LrmDssWcdmaLteLoadMonitoringTest, ConsecutiveLowerLoadStateCountIsInitiallyZero) {
     // Given
-    LrmDssWcdmaLteLoadMonitoring loadMonitoring;
+    LrmDssWcdmaLteLoadMonitoring const loadMonitoring;
 
     // When
     // Then
@@ -28,7 +28,7 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, ConsecutiveLowerLoadStateCountCanBeSet) {
 
 TEST(LrmDssWcdmaLteLoadMonitoringTest, CommissioningLoadFactorValuesAreInitiallyZero) {
     // Given
-    LrmDssWcdmaLteLoadMonitoring loadMonitoring;
+    LrmDssWcdmaLteLoadMonitoring const loadMonitoring;
 
     // When
     // Then
@@ -49,7 +49,7 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, CommissioningLoadFactorValuesCanBeSet) {
 
 TEST(LrmDssWcdmaLteLoadMonitoringTest, CommissioningLoadThresholdValuesAreInitiallyZero) {
     // Given
-    LrmDssWcdmaLteLoadMonitoring loadMonitoring;
+    LrmDssWcdmaLteLoadMonitoring const loadMonitoring;
 
     // When
     // Then
@@ -104,7 +104,7 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, HighLoadStateCanBeDeterminedBasedOnCellLo
 
 TEST(LrmDssWcdmaLteLoadMonitoringTest, CellLoadIsCalculatedAsZeroWhenThereAreNoUsersAndHsFach) {
     // Given
-    LrmDssWcdmaLteLoadMonitoring loadMonitoring;
+    LrmDssWcdmaLteLoadMonitoring const loadMonitoring;
 
     // When
     // Then
@@ -161,8 +161,8 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, NextLoadStateIsLowWhenAllInputLoadStatesA
     LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 
     // When
-    EDssWcdmaLoad currentLoadState = EDssWcdmaLoad_Low;
-    EDssWcdmaLoad currentLoadStateOfTheAppliedFilter = EDssWcdmaLoad_Low;
+    EDssWcdmaLoad const currentLoadState = EDssWcdmaLoad_Low;
+    EDssWcdmaLoad const currentLoadStateOfTheAppliedFilter = EDssWcdmaLoad_Low;
     loadMonitoring.setConsecutiveLowerLoadStateCount(0);
 
     EXPECT_EQ(
@@ -176,8 +176,8 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, NextLoadStateIsHighWhenAllInputLoadStates
     LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 
     // When
-    EDssWcdmaLoad currentLoadState = EDssWcdmaLoad_High;
-    EDssWcdmaLoad currentLoadStateOfTheAppliedFilter = EDssWcdmaLoad_High;
+    EDssWcdmaLoad const currentLoadState = EDssWcdmaLoad_High;
+    EDssWcdmaLoad const currentLoadStateOfTheAppliedFilter = EDssWcdmaLoad_High;
     loadMonitoring.setConsecutiveLowerLoadStateCount(0);
 
     EXPECT_EQ(
@@ -192,8 +192,8 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, ConsecutiveLowerLoadStateCountIsResetToZe
     loadMonitoring.setConsecutiveLowerLoadStateCount(10);
 
     // When
-    EDssWcdmaLoad currentLoadState = EDssWcdmaLoad_High;
-    EDssWcdmaLoad currentLoadStateOfTheAppliedFilter = EDssWcdmaLoad_High;
+    EDssWcdmaLoad const currentLoadState = EDssWcdmaLoad_High;
+    EDssWcdmaLoad const currentLoadStateOfTheAppliedFilter = EDssWcdmaLoad_High;
     loadMonitoring.determineLoadStateForTheNextFilterUpdateAndUpdateConsecutiveLowerLoadStateCountIfNeeded(
         currentLoadState, currentLoadStateOfTheAppliedFilter);
 
@@ -208,8 +208,8 @@ TEST(
     loadMonitoring.setConsecutiveLowerLoadStateCount(10);
 
     // When
-    EDssWcdmaLoad currentLoadState = EDssWcdmaLoad_Low;
-    EDssWcdmaLoad currentLoadStateOfTheAppliedFilter = EDssWcdmaLoad_High;
+    EDssWcdmaLoad const currentLoadState = EDssWcdmaLoad_Low;
+    EDssWcdmaLoad const currentLoadStateOfTheAppliedFilter = EDssWcdmaLoad_High;
     loadMonitoring.determineLoadStateForTheNextFilterUpdateAndUpdateConsecutiveLowerLoadStateCountIfNeeded(
         currentLoadState, currentLoadStateOfTheAppliedFilter);
 
@@ -218,7 +218,7 @@ TEST(
 
 TEST(LrmDssWcdmaLteLoadMonitoringTest, NextLowerLoadStateCanBeDetermined) {
     // Given
-    LrmDssWcdmaLteLoadMonitoring loadMonitoring;
+    LrmDssWcdmaLteLoadMonitoring const loadMonitoring;
 
     // When
     // Then
@@ -234,8 +234,8 @@ TEST(
     LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 
     // When
-    EDssWcdmaLoad currentLoadState = EDssWcdmaLoad_Low;
-    EDssWcdmaLoad currentLoadStateOfTheAppliedFilter = EDssWcdmaLoad_High;
+    EDssWcdmaLoad const currentLoadState = EDssWcdmaLoad_Low;
+    EDssWcdmaLoad const currentLoadStateOfTheAppliedFilter = EDssWcdmaLoad_High;
     loadMonitoring.setConsecutiveLowerLoadStateCount(DSS_WCDMA_LTE_LOAD_STATE_CHANGE_FILTERING_COUNT - 2);
 
     // Then
@@ -252,8 +252,8 @@ TEST(
     LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 
     // When
-    EDssWcdmaLoad currentLoadState = EDssWcdmaLoad_Low;
-    EDssWcdmaLoad currentLoadStateOfTheAppliedFilter = EDssWcdmaLoad_High;
+    EDssWcdmaLoad const currentLoadState = EDssWcdmaLoad_Low;
+    EDssWcdmaLoad const currentLoadStateOfTheAppliedFilter = EDssWcdmaLoad_High;
     loadMonitoring.setConsecutiveLowerLoadStateCount(DSS_WCDMA_LTE_LOAD_STATE_CHANGE_FILTERING_COUNT - 1);
 
     // Then
@@ -274,8 +274,8 @@ TEST(
     LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 
     // When
-    EDssWcdmaLoad currentLoadState = EDssWcdmaLoad_High;
-    EDssWcdmaLoad currentLoadStateOfTheAppliedFilter = EDssWcdmaLoad_Low;
+    EDssWcdmaLoad const currentLoadState = EDssWcdmaLoad_High;
+    EDssWcdmaLoad const currentLoadStateOfTheAppliedFilter = EDssWcdmaLoad_Low;
 
     // Then
     EXPECT_EQ(
@@ -286,7 +286,7 @@ TEST(
 
 TEST(LrmDssWcdmaLteLoadMonitoringTest, ConversionOfFilterBandwidthToLoadStateWorks) {
     // Given
-    LrmDssWcdmaLteLoadMonitoring loadMonitoring;
+    LrmDssWcdmaLteLoadMonitoring const loadMonitoring;
 
     // When
     // Then
@@ -297,7 +297,7 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, ConversionOfFilterBandwidthToLoadStateWor
 
 TEST(LrmDssWcdmaLteLoadMonitoringTest, ConversionOfLoadStateToFilterBandwidthWorks) {
     // Given
-    LrmDssWcdmaLteLoadMonitoring loadMonitoring;
+    LrmDssWcdmaLteLoadMonitoring const loadMonitoring;
 
     // When
     // Then

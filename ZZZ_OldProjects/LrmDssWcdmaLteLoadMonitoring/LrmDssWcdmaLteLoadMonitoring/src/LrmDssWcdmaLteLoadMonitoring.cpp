@@ -21,7 +21,7 @@ EDssWcdmaFilterBandwidth LrmDssWcdmaLteLoadMonitoring::convertLoadStateToFilterB
 
 EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::getNextLowerLoadState(EDssWcdmaLoad const loadState) {
     EDssWcdmaLoad result(EDssWcdmaLoad_Low);
-    unsigned int loadStateValue = static_cast<EDssWcdmaLoad>(loadState);
+    unsigned int const loadStateValue = static_cast<EDssWcdmaLoad>(loadState);
     constexpr unsigned int lowLoadStateValue = static_cast<EDssWcdmaLoad>(EDssWcdmaLoad_Low);
     if (loadStateValue > lowLoadStateValue) {
         result = static_cast<EDssWcdmaLoad>(loadStateValue - 1);
