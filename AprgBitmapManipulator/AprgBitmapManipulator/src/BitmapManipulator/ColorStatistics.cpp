@@ -28,13 +28,15 @@ void AprgColorStatistics::gatherStatistics(string const& bitmapPath) {
         saturationValueSet.emplace(hsvData.saturationValueDecimal);
         valueSet.emplace(hsvData.valueDecimalOfColorMax);
 
-        colorIntensitySamples.emplace_back(colorIntensity);
-        saturationLightnessSamples.emplace_back(hslData.saturationLightnessDecimal);
-        lightnessSamples.emplace_back(hslData.lightnessDecimal);
-        saturationValueSamples.emplace_back(hsvData.saturationValueDecimal);
-        valueSamples.emplace_back(hsvData.valueDecimalOfColorMax);
-        luma601Samples.emplace_back(luma601);
-        luma709Samples.emplace_back(luma709);
+        // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
+        colorIntensitySamples.emplace_back(OneDimensionStatistics::Sample{colorIntensity});
+        saturationLightnessSamples.emplace_back(OneDimensionStatistics::Sample{hslData.saturationLightnessDecimal});
+        lightnessSamples.emplace_back(OneDimensionStatistics::Sample{hslData.lightnessDecimal});
+        saturationValueSamples.emplace_back(OneDimensionStatistics::Sample{hsvData.saturationValueDecimal});
+        valueSamples.emplace_back(OneDimensionStatistics::Sample{hsvData.valueDecimalOfColorMax});
+        luma601Samples.emplace_back(OneDimensionStatistics::Sample{luma601});
+        luma709Samples.emplace_back(OneDimensionStatistics::Sample{luma709});
+        // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
     });
 }
 
