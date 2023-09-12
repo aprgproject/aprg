@@ -63,7 +63,7 @@ void TopLogAnalyzer::putHeadersInMemReport(
 }
 
 void TopLogAnalyzer::saveTimeFromTop(string const& lineInLogs, DataEntry& currentEntry) {
-    string timeString(stringHelper::getStringInBetweenTwoStrings(lineInLogs, "top - ", " "));
+    string const timeString(stringHelper::getStringInBetweenTwoStrings(lineInLogs, "top - ", " "));
     stringHelper::strings timeValues;
     stringHelper::splitToStrings<stringHelper::SplitStringType::WithoutDelimeters>(timeValues, timeString, ":");
     if (timeValues.size() == 3) {
@@ -75,7 +75,7 @@ void TopLogAnalyzer::saveTimeFromTop(string const& lineInLogs, DataEntry& curren
 }
 
 void TopLogAnalyzer::saveOverallCpuData(string const& lineInLogs, DataEntry& currentEntry) {
-    unsigned int bracketCpuIndexInLine(lineInLogs.find('['));
+    unsigned int const bracketCpuIndexInLine(lineInLogs.find('['));
     if (bracketCpuIndexInLine > 3) {
         currentEntry.totalCpuFromTop =
             stringHelper::convertStringToNumber<double>(lineInLogs.substr(bracketCpuIndexInLine - 3, 3));
@@ -97,7 +97,7 @@ void TopLogAnalyzer::putEntriesInCpuReport(
     stringHelper::strings const& processNamesInReport, ofstream& cpuReportFileStream) const {
     cpuReportFileStream.precision(3);
     for (DataEntry const& entry : m_dataEntries) {
-        double totalCalculatedCpu = accumulate(
+        double const totalCalculatedCpu = accumulate(
             entry.processToCpuMemMap.begin(), entry.processToCpuMemMap.end(), static_cast<double>(0),
             [](double const partialSum, DataEntry::ProcessToCpuMemPair const& processToCpuMemPair) {
                 return partialSum + processToCpuMemPair.second.cpuLoad;
@@ -137,13 +137,13 @@ void TopLogAnalyzer::putEntriesInMemReport(
 }
 
 void TopLogAnalyzer::readTopLogsAndSaveToDatabase(std::string const& pathOfTopLog) {
-    AlbaLocalPathHandler topLogPathHandler(pathOfTopLog);
+    AlbaLocalPathHandler const topLogPathHandler(pathOfTopLog);
     ifstream inputLogFileStream(topLogPathHandler.getFullPath());
 
     AlbaFileReader fileReader(inputLogFileStream);
     DataEntry currentEntry;
     while (fileReader.isNotFinished()) {
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
 
         if (isTopCommandFirstLine(lineInLogs)) {
             m_state = TopLogAnalyzerState::BeforeColumnHeaders;
@@ -164,23 +164,23 @@ void TopLogAnalyzer::readTopLogsAndSaveToDatabase(std::string const& pathOfTopLo
 }
 
 void TopLogAnalyzer::generateCpuReport(std::string const& pathOfTopLog) {
-    AlbaLocalPathHandler topLogPathHandler(pathOfTopLog);
-    AlbaLocalPathHandler cpuReportFilePathHandler(
+    AlbaLocalPathHandler const topLogPathHandler(pathOfTopLog);
+    AlbaLocalPathHandler const cpuReportFilePathHandler(
         topLogPathHandler.getDirectory() + topLogPathHandler.getFilenameOnly() + "_CpuReport.csv");
     ofstream cpuReportFileStream(cpuReportFilePathHandler.getFullPath());
 
-    stringHelper::strings processNamesInReport(getProcessNamesForCpuReport());
+    stringHelper::strings const processNamesInReport(getProcessNamesForCpuReport());
     putHeadersInCpuReport(processNamesInReport, cpuReportFileStream);
     putEntriesInCpuReport(processNamesInReport, cpuReportFileStream);
 }
 
 void TopLogAnalyzer::generateMemReport(std::string const& pathOfTopLog) {
-    AlbaLocalPathHandler topLogPathHandler(pathOfTopLog);
-    AlbaLocalPathHandler cpuReportFilePathHandler(
+    AlbaLocalPathHandler const topLogPathHandler(pathOfTopLog);
+    AlbaLocalPathHandler const cpuReportFilePathHandler(
         topLogPathHandler.getDirectory() + topLogPathHandler.getFilenameOnly() + "_MemReport.csv");
     ofstream cpuReportFileStream(cpuReportFilePathHandler.getFullPath());
 
-    stringHelper::strings processNamesInReport(getProcessNamesForMemReport());
+    stringHelper::strings const processNamesInReport(getProcessNamesForMemReport());
     putHeadersInMemReport(processNamesInReport, cpuReportFileStream);
     putEntriesInMemReport(processNamesInReport, cpuReportFileStream);
 }
@@ -195,7 +195,7 @@ void TopLogAnalyzer::saveAndClearCurrentEntry(DataEntry& currentEntry) {
 void TopLogAnalyzer::saveDataFromHeaders(string const& lineInLogs) {
     stringHelper::strings headers;
     stringHelper::splitToStrings<stringHelper::SplitStringType::WithoutDelimeters>(headers, lineInLogs, " ");
-    unsigned int headersSize(headers.size());
+    unsigned int const headersSize(headers.size());
     unsigned int cpuIndexInHeaders(distance(headers.cbegin(), find(headers.cbegin(), headers.cend(), "%CPU")));
     cpuIndexInHeaders = cpuIndexInHeaders > headersSize ? 0 : cpuIndexInHeaders;
     unsigned int memIndexInHeaders(distance(headers.cbegin(), find(headers.cbegin(), headers.cend(), "%MEM")));
@@ -207,8 +207,8 @@ void TopLogAnalyzer::saveCpuAndMem(string const& lineInLogs, DataEntry& currentE
     stringHelper::strings contents;
     stringHelper::splitToStrings<stringHelper::SplitStringType::WithoutDelimeters>(contents, lineInLogs, " ");
     if (m_columnHeaders.size > 0 && contents.size() > m_columnHeaders.size - 1) {
-        stringHelper::strings lastContents(contents.cbegin() + m_columnHeaders.size - 1, contents.cend());
-        string processName(stringHelper::getStringWithoutStartingAndTrailingCharacters(
+        stringHelper::strings const lastContents(contents.cbegin() + m_columnHeaders.size - 1, contents.cend());
+        string const processName(stringHelper::getStringWithoutStartingAndTrailingCharacters(
             stringHelper::combineStrings(lastContents, "_"), "`-_"));
         auto cpuLoad = stringHelper::convertStringToNumber<double>(contents[m_columnHeaders.cpuIndex]);
         auto memLoad = stringHelper::convertStringToNumber<double>(contents[m_columnHeaders.memIndex]);
@@ -235,11 +235,11 @@ stringHelper::strings TopLogAnalyzer::getProcessNamesForCpuReport() {
         processNamesInReport.begin(), processNamesInReport.end(),
         [&](string const& firstProcessName, string const& secondProcessName) {
             bool result(false);
-            bool isTcomTupcOnFirstProcess(
+            bool const isTcomTupcOnFirstProcess(
                 stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "TCOM") ||
                 stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "Conman") ||
                 stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "Aalman"));
-            bool isTcomTupcOnSecondProcess(
+            bool const isTcomTupcOnSecondProcess(
                 stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "TCOM") ||
                 stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "Conman") ||
                 stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "Aalman"));
@@ -273,11 +273,11 @@ stringHelper::strings TopLogAnalyzer::getProcessNamesForMemReport() {
         processNamesInReport.begin(), processNamesInReport.end(),
         [&](string const& firstProcessName, string const& secondProcessName) {
             bool result(false);
-            bool isTcomTupcOnFirstProcess(
+            bool const isTcomTupcOnFirstProcess(
                 stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "TCOM") ||
                 stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "Conman") ||
                 stringHelper::isStringFoundNotCaseSensitive(firstProcessName, "Aalman"));
-            bool isTcomTupcOnSecondProcess(
+            bool const isTcomTupcOnSecondProcess(
                 stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "TCOM") ||
                 stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "Conman") ||
                 stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "Aalman"));

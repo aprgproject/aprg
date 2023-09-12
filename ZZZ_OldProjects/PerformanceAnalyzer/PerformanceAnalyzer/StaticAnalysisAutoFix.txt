@@ -1,3 +1,458 @@
-StaticAnalysisJobIdentifier: [56]
-2023-09-09T19:25:18
+StaticAnalysisJobIdentifier: [011]
+2023-09-12T00:50:46
+D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\Time\AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+D:/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:205:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:208:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:270:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+D:\a\aprg\aprg\AprgFileExtractor\AprgFileExtractor\src\FileExtractor\AprgFileExtractor.cpp:141:65: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgFileExtractor\AprgFileExtractor\src\FileExtractor\AprgFileExtractor.cpp:170:65: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\WcdmaTools\WcdmaToolsBackend\src\WcdmaToolsBackend\BtsLogPrint.cpp:246:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\WcdmaTools\WcdmaToolsBackend\src\WcdmaToolsBackend\BtsLogSorter.cpp:72:73: warning: narrowing conversion from 'size_t' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\WcdmaTools\WcdmaToolsBackend\src\WcdmaToolsBackend\BtsPrintReaderWithRollback.cpp:42:66: warning: narrowing conversion from 'streamoff' (aka 'long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:59:9: warning: variable 'lineInLogs' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:59:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:88:5: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:88:17: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:96:5: warning: variable 'latency' of type 'BtsLogTime' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:96:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:101:5: warning: variable 'result' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:101:12: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:108:5: warning: variable 'messageQueueingTimeFilePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:108:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:118:5: warning: variable 'rlSetupTimeFilePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:118:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:129:5: warning: variable 'rlDeletionTimeFilePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:129:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:141:5: warning: variable 'rlSetupPerSecondFilePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:141:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:152:9: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:152:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:167:5: warning: variable 'delimetersInGrmPrint' of type 'strings' (aka 'vector<basic_string<char, char_traits<char>, allocator<char>>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:167:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:187:9: warning: variable 'dspAddress' of type 'unsigned int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:187:22: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:201:9: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:201:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:216:5: warning: variable 'delimetersBeforeCni1738' of type 'strings' (aka 'vector<basic_string<char, char_traits<char>, allocator<char>>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:216:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:217:5: warning: variable 'delimetersAfterCni1738' of type 'strings' (aka 'vector<basic_string<char, char_traits<char>, allocator<char>>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:217:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:255:9: warning: variable 'dspAddress' of type 'unsigned int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:255:22: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:269:9: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:269:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:271:9: warning: variable 'logsAfterLrmPrint' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:271:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:285:5: warning: variable 'delimetersBeforeCni1738' of type 'strings' (aka 'vector<basic_string<char, char_traits<char>, allocator<char>>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:285:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:286:5: warning: variable 'delimetersAfterCni1738' of type 'strings' (aka 'vector<basic_string<char, char_traits<char>, allocator<char>>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:286:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:320:9: warning: variable 'dspAddress' of type 'unsigned int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:320:22: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:370:5: warning: variable 'dspDataPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:370:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:381:5: warning: variable 'totalUsersAndCfsFileHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:381:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:391:5: warning: variable 'totalUsersAndCfsFileHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:391:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:397:5: warning: variable 'dspDataPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:397:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:408:5: warning: variable 'dspDataPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:408:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:426:5: warning: variable 'dspDataPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:426:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:430:29: warning: loop variable 'dspDataPair' of type 'const DspDataPair &' (aka 'const pair<unsigned int, DspData> &') binds to a temporary constructed from type 'reference' (aka 'std::pair<const unsigned int, alba::BtsLogAnalyzer::DspData> &') [clang-diagnostic-range-loop-construct]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:430:10: note: use non-reference type 'DspDataPair' (aka 'pair<unsigned int, DspData>') to make construction explicit or type 'const value_type &' (aka 'const std::pair<const unsigned int, alba::BtsLogAnalyzer::DspData> &') to prevent copying
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:477:9: warning: variable 'messsageQueueingTime' of type 'unsigned int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:477:22: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:489:9: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:489:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:508:9: warning: variable 'userIdentifiers' of type 'UserIdentifiers' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:508:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:511:9: warning: variable 'userIdentifiers' of type 'UserIdentifiers' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:511:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:520:9: warning: variable 'userIdentifiers' of type 'UserIdentifiers' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:520:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:523:9: warning: variable 'userIdentifiers' of type 'UserIdentifiers' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:523:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:530:5: warning: variable 'userIdentifiers' of type 'UserIdentifiers' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:530:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:531:5: warning: variable 'logTimePairOfTheUser' of type 'LogTimePair &' (aka 'pair<optional<wcdmaToolsBackend::BtsLogTime>, optional<wcdmaToolsBackend::BtsLogTime>> &') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:531:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:551:9: warning: variable 'latencyInMicroseconds' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:551:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:568:9: warning: variable 'latencyInMicroseconds' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:568:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:588:5: warning: variable 'printsAvailable' of type 'PrintsAvailable &' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\BtsLogAnalyzer.cpp:588:20: note: FIX-IT applied suggested code changes
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:430:29: warning: loop variable 'dspDataPair' of type 'const DspDataPair &' (aka 'const pair<unsigned int, DspData> &') binds to a temporary constructed from type 'reference' (aka 'std::pair<const unsigned int, alba::BtsLogAnalyzer::DspData> &') [-Wrange-loop-construct]
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:430:10: note: use non-reference type 'DspDataPair' (aka 'pair<unsigned int, DspData>') to make construction explicit or type 'const value_type &' (aka 'const std::pair<const unsigned int, alba::BtsLogAnalyzer::DspData> &') to prevent copying
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\CombineAndGrep.cpp:17:5: warning: variable 'inputDirectoryPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\CombineAndGrep.cpp:17:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\CombineAndGrep.cpp:28:5: warning: variable 'inputFilePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\CombineAndGrep.cpp:28:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\CombineAndGrep.cpp:33:9: warning: variable 'lineFromFile' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\CombineAndGrep.cpp:33:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:15:5: warning: variable 'string1' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:15:12: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:16:5: warning: variable 'string2' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:16:12: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:21:5: warning: variable 'string1' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:21:12: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:22:5: warning: variable 'string2' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:22:12: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:27:5: warning: variable 'string1' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:27:12: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:28:5: warning: variable 'string2' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:28:12: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:35:5: warning: variable 'outputFileHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:35:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:48:13: warning: variable 'firstLogStringInCsv' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:48:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:51:17: warning: variable 'logStringInCsv' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:51:24: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:74:9: warning: variable 'lineInLogs' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\LogStatisticsAnalyzer.cpp:74:16: note: FIX-IT applied suggested code changes
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.hpp:39:5: warning: function 'extract' should be marked [[nodiscard]] [modernize-use-nodiscard]
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.hpp:39:5: note: FIX-IT applied suggested code changes
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.hpp:40:5: warning: function 'combineAndSort' should be marked [[nodiscard]] [modernize-use-nodiscard]
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.hpp:40:5: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:46:5: warning: variable 'nbccid' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:46:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:47:5: warning: variable 'nbccId' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:47:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:59:5: warning: variable 'logCrnccId' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:59:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:60:5: warning: variable 'logCrncId' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:60:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:83:5: warning: variable 'pathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:83:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:108:5: warning: variable 'delayTime' of type 'BtsLogTime' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:108:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:109:12: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:113:5: warning: variable 'delayTime' of type 'BtsLogTime' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:113:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:114:12: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:177:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:177:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:187:9: warning: variable 'lineInLogs' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:187:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:189:13: warning: variable 'msgQueueingTime' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:189:17: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:203:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:203:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:220:9: warning: variable 'lineInLogs' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:220:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:222:13: warning: variable 'uniqueUserId' of type 'UniqueUserId' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:222:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:224:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:224:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:235:13: warning: variable 'uniqueUserId' of type 'UniqueUserId' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:235:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:237:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:237:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:243:17: warning: variable 'delay' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:243:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:258:13: warning: variable 'uniqueUserId' of type 'UniqueUserId' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:258:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:260:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:260:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:266:17: warning: variable 'delay' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:266:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:284:5: warning: variable 'delayTime' of type 'BtsLogTime' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:284:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:289:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:289:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:301:9: warning: variable 'lineInLogs' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:301:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:303:13: warning: variable 'uniqueUserId' of type 'UniqueUserId' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:303:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:305:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:305:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:310:13: warning: variable 'uniqueUserId' of type 'UniqueUserId' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:310:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:312:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:312:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:318:17: warning: variable 'delay' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:318:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:337:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:337:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:345:9: warning: variable 'lineInLogs' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:345:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:364:13: warning: variable 'threadCpuTimeSpent' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:364:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:373:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:373:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:423:13: warning: variable 'isCorrect' of type 'bool' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:423:18: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:458:9: warning: variable 'lineInLogs' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:458:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:460:13: warning: variable 'uniqueUserId' of type 'UniqueUserId' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:460:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:465:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:465:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:474:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:474:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:482:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:482:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:491:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:491:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:499:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:499:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:502:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:502:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:513:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:513:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:521:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:521:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:529:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:529:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:537:13: warning: variable 'uniqueUserId' of type 'UniqueUserId' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:537:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:543:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:543:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:551:17: warning: variable 'delay' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:551:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:630:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:630:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:663:13: warning: variable 'isCorrect' of type 'bool' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:663:18: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:687:9: warning: variable 'lineInLogs' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:687:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:689:13: warning: variable 'uniqueUserId' of type 'UniqueUserId' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:689:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:694:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:694:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:703:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:703:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:712:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:712:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:720:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:720:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:723:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:723:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:734:13: warning: variable 'uniqueUserId' of type 'UniqueUserId' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:734:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:740:13: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:740:25: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:748:17: warning: variable 'delay' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:748:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:786:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:786:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:817:9: warning: variable 'lineInLogs' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:817:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:819:13: warning: variable 'nextLine' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:819:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:820:13: warning: variable 'timeString' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:820:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:826:17: warning: variable 'followingLine' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:826:24: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:830:25: warning: variable 'followingLine2' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:830:32: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:848:25: warning: variable 'followingLine2' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:848:32: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:871:17: warning: variable 'delay' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:871:24: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:893:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:893:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:915:9: warning: variable 'lineInLogs' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:915:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:924:30: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:925:35: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:937:13: warning: variable 'bracketCpuIndexInLine' of type 'unsigned int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:937:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:942:33: warning: comparison of integers of different signs: 'int' and 'size_type' (aka 'unsigned long long') [clang-diagnostic-sign-compare]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:942:77: warning: comparison of integers of different signs: 'int' and 'size_type' (aka 'unsigned long long') [clang-diagnostic-sign-compare]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:943:13: warning: variable 'processName' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:943:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:948:26: warning: comparison of integers of different signs: 'int' and 'size_type' (aka 'unsigned long long') [clang-diagnostic-sign-compare]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:993:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:993:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1011:9: warning: variable 'lineInLogs' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1011:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1020:30: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1021:35: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1025:29: warning: loop variable 'consumption' of type 'const int &' binds to a temporary constructed from type 'reference' (aka 'double &') [clang-diagnostic-range-loop-construct]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1025:18: note: use non-reference type 'int' to make construction explicit or type 'const value_type &' (aka 'const double &') to prevent copying
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1025:41: warning: narrowing conversion from 'value_type' (aka 'double') to 'int' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1032:33: warning: comparison of integers of different signs: 'int' and 'size_type' (aka 'unsigned long long') [clang-diagnostic-sign-compare]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1032:77: warning: comparison of integers of different signs: 'int' and 'size_type' (aka 'unsigned long long') [clang-diagnostic-sign-compare]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1033:13: warning: variable 'processName' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1033:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1038:26: warning: comparison of integers of different signs: 'int' and 'size_type' (aka 'unsigned long long') [clang-diagnostic-sign-compare]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1078:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1078:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1090:5: warning: variable 'firstLogTime' of type 'BtsLogTime' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1090:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1092:9: warning: variable 'lineInLogs' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1092:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1093:9: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1093:21: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1094:9: warning: variable 'logTime' of type 'BtsLogTime' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1094:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1099:23: warning: comparison of integers of different signs: 'int' and 'unsigned int' [clang-diagnostic-sign-compare]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1099:54: warning: comparison of integers of different signs: 'int' and 'unsigned int' [clang-diagnostic-sign-compare]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1099:87: warning: comparison of integers of different signs: 'int' and 'unsigned int' [clang-diagnostic-sign-compare]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1105:24: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1106:23: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1107:23: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1118:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1118:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1127:9: warning: variable 'lineInLogs' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1127:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1129:13: warning: variable 'hour' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1129:17: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1130:13: warning: variable 'min' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1130:17: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1131:13: warning: variable 'sec' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1131:17: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1134:13: warning: variable 'hour' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1134:17: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1135:13: warning: variable 'min' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1135:17: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1136:13: warning: variable 'sec' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\PerformanceAnalyzer.cpp:1136:17: note: FIX-IT applied suggested code changes
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:942:77: warning: comparison of integers of different signs: 'int' and 'size_type' (aka 'unsigned long long') [-Wsign-compare]
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:942:33: warning: comparison of integers of different signs: 'int' and 'size_type' (aka 'unsigned long long') [-Wsign-compare]
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:948:26: warning: comparison of integers of different signs: 'int' and 'size_type' (aka 'unsigned long long') [-Wsign-compare]
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1025:29: warning: loop variable 'consumption' of type 'const int &' binds to a temporary constructed from type 'reference' (aka 'double &') [-Wrange-loop-construct]
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1025:18: note: use non-reference type 'int' to make construction explicit or type 'const value_type &' (aka 'const double &') to prevent copying
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1032:77: warning: comparison of integers of different signs: 'int' and 'size_type' (aka 'unsigned long long') [-Wsign-compare]
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1032:33: warning: comparison of integers of different signs: 'int' and 'size_type' (aka 'unsigned long long') [-Wsign-compare]
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1038:26: warning: comparison of integers of different signs: 'int' and 'size_type' (aka 'unsigned long long') [-Wsign-compare]
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1099:87: warning: comparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare]
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1099:54: warning: comparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare]
+D:/a/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1099:23: warning: comparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:64:5: warning: variable 'outputFileHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:64:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:120:9: warning: variable 'lineInLogs' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:120:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:126:5: warning: variable 'latency' of type 'BtsLogTime' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:126:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:131:5: warning: variable 'result' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:131:12: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:140:5: warning: variable 'logPrint' of type 'BtsLogPrint' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:140:17: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:141:5: warning: variable 'logTimeInLogs' of type 'BtsLogTime' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:141:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:143:5: warning: variable 'allowedLogs' of type 'BtsLogTime' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:143:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:157:13: warning: variable 'firstDspToBecomeAvailableTime' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:157:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:166:13: warning: variable 'allDspsBecomeAvailableTime' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:166:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:202:13: warning: variable 'processingAndMessagingDelay' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:202:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:213:13: warning: variable 'basebandAllocationRequestResponseTime' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:213:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:223:13: warning: variable 'firstDspModeChangeFromFirstDspAvailable' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:223:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:233:13: warning: variable 'firstModeChangeTime' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:233:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:242:13: warning: variable 'startupAllocationTimeAfterModeChange' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:242:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:287:13: warning: variable 'processingAndMessagingDelay' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:287:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:296:13: warning: variable 'auditRequestResponseWithRncTime' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:296:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:306:13: warning: variable 'processingAndMessagingDelay' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:306:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:315:13: warning: variable 'processingAndMessagingDelay' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:315:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:326:13: warning: variable 'auditToFirstCellSetupTime' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:326:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:335:13: warning: variable 'cellAllocationInTelecomTime' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:335:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:344:13: warning: variable 'cellSetupInDspTime' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:344:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:353:13: warning: variable 'processingAndMessagingDelay' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:353:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:362:13: warning: variable 'antennaCarrierSetupRequestResponseTime' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:362:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:372:13: warning: variable 'processingAndMessagingDelay' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:372:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:381:13: warning: variable 'antennaCarrierActivateRequestResponseTime' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:381:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:391:13: warning: variable 'processingAndMessagingDelay' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:391:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:400:13: warning: variable 'commonChannelsSetupInDsp' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:400:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:409:13: warning: variable 'processingAndMessagingDelay' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:409:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:418:13: warning: variable 'commonChannelsActivationInDsp' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:418:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:427:13: warning: variable 'commonChannelsActivationToCellSetupResponseTime' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:427:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:439:13: warning: variable 'firstCtchSetupAfterFirstCellSetupTime' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:439:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:449:13: warning: variable 'firstCtchSetupProcedureTime' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:449:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:458:13: warning: variable 'firstCtchSetupToSiuTime' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:458:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:467:13: warning: variable 'siuProcedureTime' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:467:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:476:13: warning: variable 'siuToCellOnAirTime' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\StartupLogAnalyzer.cpp:476:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:36:16: warning: narrowing conversion from 'double' to 'unsigned int' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:37:16: warning: narrowing conversion from 'double' to 'unsigned int' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:66:5: warning: variable 'timeString' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:66:12: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:78:5: warning: variable 'bracketCpuIndexInLine' of type 'unsigned int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:78:18: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:100:9: warning: variable 'totalCalculatedCpu' of type 'double' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:100:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:140:5: warning: variable 'topLogPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:140:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:146:9: warning: variable 'lineInLogs' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:146:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:167:5: warning: variable 'topLogPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:167:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:168:5: warning: variable 'cpuReportFilePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:168:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:172:5: warning: variable 'processNamesInReport' of type 'stringHelper::strings' (aka 'vector<basic_string<char, char_traits<char>, allocator<char>>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:172:27: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:178:5: warning: variable 'topLogPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:178:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:179:5: warning: variable 'cpuReportFilePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:179:26: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:183:5: warning: variable 'processNamesInReport' of type 'stringHelper::strings' (aka 'vector<basic_string<char, char_traits<char>, allocator<char>>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:183:27: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:198:5: warning: variable 'headersSize' of type 'unsigned int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:198:18: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:210:9: warning: variable 'lastContents' of type 'stringHelper::strings' (aka 'vector<basic_string<char, char_traits<char>, allocator<char>>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:210:31: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:211:9: warning: variable 'processName' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:211:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:238:13: warning: variable 'isTcomTupcOnFirstProcess' of type 'bool' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:238:18: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:242:13: warning: variable 'isTcomTupcOnSecondProcess' of type 'bool' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:242:18: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:276:13: warning: variable 'isTcomTupcOnFirstProcess' of type 'bool' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:276:18: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:280:13: warning: variable 'isTcomTupcOnSecondProcess' of type 'bool' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:280:18: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\TopLogAnalyzer.cpp:302:1: warning: constructor does not initialize these fields: m_state [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\UserIdentifiers.cpp:13:5: warning: variable 'nbccId1' of type 'unsigned int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\UserIdentifiers.cpp:13:18: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\UserIdentifiers.cpp:14:5: warning: variable 'nbccId2' of type 'unsigned int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\UserIdentifiers.cpp:14:18: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\UserIdentifiers.cpp:15:5: warning: variable 'crnccId1' of type 'unsigned int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\UserIdentifiers.cpp:15:18: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\UserIdentifiers.cpp:16:5: warning: variable 'crnccId2' of type 'unsigned int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\UserIdentifiers.cpp:16:18: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\UserIdentifiers.cpp:17:5: warning: variable 'transactionId1' of type 'unsigned int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\UserIdentifiers.cpp:17:18: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\UserIdentifiers.cpp:18:5: warning: variable 'transactionId2' of type 'unsigned int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\ZZZ_OldProjects\PerformanceAnalyzer\PerformanceAnalyzer\src\UserIdentifiers.cpp:18:18: note: FIX-IT applied suggested code changes
 DONE!

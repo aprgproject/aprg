@@ -10,12 +10,12 @@ UserIdentifiers::UserIdentifiers(std::string const& lineInLogs) { saveUserIndent
 
 bool UserIdentifiers::operator<(UserIdentifiers const& userIdentifiers) const {
     bool result(true);
-    unsigned int nbccId1(getNbccId());
-    unsigned int nbccId2(userIdentifiers.getNbccId());
-    unsigned int crnccId1(getCrnccId());
-    unsigned int crnccId2(userIdentifiers.getCrnccId());
-    unsigned int transactionId1(getTransactionId());
-    unsigned int transactionId2(userIdentifiers.getTransactionId());
+    unsigned int const nbccId1(getNbccId());
+    unsigned int const nbccId2(userIdentifiers.getNbccId());
+    unsigned int const crnccId1(getCrnccId());
+    unsigned int const crnccId2(userIdentifiers.getCrnccId());
+    unsigned int const transactionId1(getTransactionId());
+    unsigned int const transactionId2(userIdentifiers.getTransactionId());
     if (nbccId1 == nbccId2) {
         if (crnccId1 == crnccId2) {
             result = transactionId1 < transactionId2;

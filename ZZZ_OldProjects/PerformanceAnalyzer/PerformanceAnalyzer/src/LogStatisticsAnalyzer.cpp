@@ -12,27 +12,27 @@ using namespace std;
 namespace alba {
 
 bool LogDetails::operator<(LogDetails const& logDetails) const {
-    string string1(stringHelper::combineStrings(logStrings, ""));
-    string string2(stringHelper::combineStrings(logDetails.logStrings, ""));
+    string const string1(stringHelper::combineStrings(logStrings, ""));
+    string const string2(stringHelper::combineStrings(logDetails.logStrings, ""));
     return string1 < string2;
 }
 
 bool LogDetails::operator>(LogDetails const& logDetails) const {
-    string string1(stringHelper::combineStrings(logStrings, ""));
-    string string2(stringHelper::combineStrings(logDetails.logStrings, ""));
+    string const string1(stringHelper::combineStrings(logStrings, ""));
+    string const string2(stringHelper::combineStrings(logDetails.logStrings, ""));
     return string1 > string2;
 }
 
 bool LogDetails::operator==(LogDetails const& logDetails) const {
-    string string1(stringHelper::combineStrings(logStrings, ""));
-    string string2(stringHelper::combineStrings(logDetails.logStrings, ""));
+    string const string1(stringHelper::combineStrings(logStrings, ""));
+    string const string2(stringHelper::combineStrings(logDetails.logStrings, ""));
     return string1 == string2;
 }
 
 LogStatisticsAnalyzer::LogStatisticsAnalyzer() : m_btsLogPathHandler("") { initializeLogDetailsToCheck(); }
 
 void LogStatisticsAnalyzer::saveDataToCsv(string const& csvPath) {
-    AlbaLocalPathHandler outputFileHandler(csvPath);
+    AlbaLocalPathHandler const outputFileHandler(csvPath);
     ofstream outputFileStream(outputFileHandler.getFullPath());
     saveLogDetailsToCsv(outputFileStream);
 }
@@ -45,10 +45,10 @@ void LogStatisticsAnalyzer::saveLogDetailsToCsv(ofstream& outputCsvFileStream) {
         string stringInCsv;
         stringHelper::strings const& logStrings(logDetails.logStrings);
         if (!logStrings.empty()) {
-            string firstLogStringInCsv(string("[") + logStrings.front() + "]");
+            string const firstLogStringInCsv(string("[") + logStrings.front() + "]");
             stringInCsv += firstLogStringInCsv;
             for (auto it = logStrings.cbegin() + 1; it != logStrings.cend(); ++it) {
-                string logStringInCsv(string("[") + *it + "]");
+                string const logStringInCsv(string("[") + *it + "]");
                 stringInCsv += " && ";
                 stringInCsv += logStringInCsv;
             }
@@ -71,7 +71,7 @@ void LogStatisticsAnalyzer::processFileWithSortedPrints(std::string const& pathO
 
     AlbaFileReader fileReader(inputLogFileStream);
     while (fileReader.isNotFinished()) {
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         analyzeLog(lineInLogs);
     }
 }

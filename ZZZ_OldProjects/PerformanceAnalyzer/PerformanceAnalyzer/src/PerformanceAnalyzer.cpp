@@ -43,8 +43,8 @@ bool PerformanceAnalyzer::UniqueUserId::operator<(UniqueUserId const& uniqueUser
 
 int PerformanceAnalyzer::UniqueUserId::getNbccId(std::string const& lineInLogs) {
     int properNbccId = 0;
-    int nbccid = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccid: "));
-    int nbccId = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
+    int const nbccid = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccid: "));
+    int const nbccId = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
     if (nbccid > 0) {
         properNbccId = nbccid;
     }
@@ -56,8 +56,8 @@ int PerformanceAnalyzer::UniqueUserId::getNbccId(std::string const& lineInLogs) 
 
 int PerformanceAnalyzer::UniqueUserId::getCrnccId(std::string const& lineInLogs) {
     int properCrnccId = 0;
-    int logCrnccId = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
-    int logCrncId = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crncId: "));
+    int const logCrnccId = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
+    int const logCrncId = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crncId: "));
     if (logCrncId > 0) {
         properCrnccId = logCrncId;
     }
@@ -80,7 +80,7 @@ void PerformanceAnalyzer::UniqueUserId::saveTransactionId(std::string const& lin
 
 PerformanceAnalyzer::PerformanceAnalyzer() {
     // defautlvalues
-    AlbaLocalPathHandler pathHandler(R"(C:\temp\BtsSorter\)");
+    AlbaLocalPathHandler const pathHandler(R"(C:\temp\BtsSorter\)");
     pathHandler.createDirectoriesForNonExisitingDirectories();
     m_sorterConfiguration.m_acceptedFilesGrepCondition =
         R"( ([syslog]&&[.log]) || [ccns.log] || [tcom.log] || (([startup]||[runtime]||[system])&&[.log]) || ([UDP]&&([.log]||[.txt])) )";
@@ -105,12 +105,12 @@ PerformanceAnalyzer::PerformanceAnalyzer() {
 }
 
 int PerformanceAnalyzer::getDelayTimeInUs(BtsLogTime const& endTime, BtsLogTime const& startTime) {
-    BtsLogTime delayTime = endTime - startTime;
+    BtsLogTime const delayTime = endTime - startTime;
     return delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000;
 }
 
 int PerformanceAnalyzer::getDelayTimeInMinutes(BtsLogTime const& endTime, BtsLogTime const& startTime) {
-    BtsLogTime delayTime = endTime - startTime;
+    BtsLogTime const delayTime = endTime - startTime;
     return delayTime.getMinutes();
 }
 
@@ -174,7 +174,7 @@ void PerformanceAnalyzer::logStringInRawDataFile(string const& line) {
 }
 
 void PerformanceAnalyzer::processFileForMsgQueueingTime(string const& filePath) {
-    AlbaLocalPathHandler filePathHandler(filePath);
+    AlbaLocalPathHandler const filePathHandler(filePath);
     cout << "processFile: " << filePathHandler.getFullPath() << "\n";
 
     ifstream inputLogFileStream(filePath);
@@ -184,9 +184,10 @@ void PerformanceAnalyzer::processFileForMsgQueueingTime(string const& filePath) 
     int numberOfInstances = 0;
 
     while (fileReader.isNotFinished()) {
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if (isStringFoundCaseSensitive(lineInLogs, "MSG TIME, start queuing time")) {
-            int msgQueueingTime = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "msgQueuingTime: "));
+            int const msgQueueingTime =
+                convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "msgQueuingTime: "));
             totalMsgQueueingTime += msgQueueingTime;
             highestMsgQueueingTime = std::max(msgQueueingTime, highestMsgQueueingTime);
             logLineInRawDataFile(lineInLogs);
@@ -200,7 +201,7 @@ void PerformanceAnalyzer::processFileForMsgQueueingTime(string const& filePath) 
 }
 
 void PerformanceAnalyzer::processFileForRlSetupDelayInRlh(string const& filePath) {
-    AlbaLocalPathHandler filePathHandler(filePath);
+    AlbaLocalPathHandler const filePathHandler(filePath);
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
@@ -217,11 +218,11 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInRlh(string const& filePath
     BtsLogTime startTest;
     BtsLogTime endTest;
     while (fileReader.isNotFinished()) {
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if (isStringFoundNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlSetupReq3G)")) {
-            UniqueUserId uniqueUserId(lineInLogs);
+            UniqueUserId const uniqueUserId(lineInLogs);
             BtsLogDelay& btsLogDelay = btsLogDelays[uniqueUserId];
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             if (!logPrint.getBtsTime().isStartup()) {
                 btsLogDelay.startTimeOptional = logPrint.getBtsTime();
                 if (!logPrint.getPcTime().isEmpty()) {
@@ -232,15 +233,15 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInRlh(string const& filePath
                 }
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(RLH_CTRL_RlSetupResp3G)")) {
-            UniqueUserId uniqueUserId(lineInLogs);
+            UniqueUserId const uniqueUserId(lineInLogs);
             BtsLogDelay& btsLogDelay = btsLogDelays[uniqueUserId];
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             if (!logPrint.getBtsTime().isStartup()) {
                 btsLogDelay.endTimeOptional = logPrint.getBtsTime();
             }
             if (btsLogDelay.startTimeOptional && btsLogDelay.endTimeOptional &&
                 btsLogDelay.startTimeOptional->getTotalSeconds() <= btsLogDelay.endTimeOptional->getTotalSeconds()) {
-                int delay =
+                int const delay =
                     getDelayTimeInUs(btsLogDelay.endTimeOptional.value(), btsLogDelay.startTimeOptional.value());
                 if (maxDelay < delay) {
                     maxDelay = delay;
@@ -255,15 +256,15 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInRlh(string const& filePath
             }
             btsLogDelays.erase(uniqueUserId);
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(RLH_CTRL_RlSetupFail3G)")) {
-            UniqueUserId uniqueUserId(lineInLogs);
+            UniqueUserId const uniqueUserId(lineInLogs);
             BtsLogDelay& btsLogDelay = btsLogDelays[uniqueUserId];
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             if (!logPrint.getBtsTime().isStartup()) {
                 btsLogDelay.endTimeOptional = logPrint.getBtsTime();
             }
             if (btsLogDelay.startTimeOptional && btsLogDelay.endTimeOptional &&
                 btsLogDelay.startTimeOptional->getTotalSeconds() <= btsLogDelay.endTimeOptional->getTotalSeconds()) {
-                int delay =
+                int const delay =
                     getDelayTimeInUs(btsLogDelay.endTimeOptional.value(), btsLogDelay.startTimeOptional.value());
                 ++countFail;
                 stringstream ss;
@@ -281,12 +282,12 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInRlh(string const& filePath
          << " transactionId: " << userIdForMaxDelay.transactionId << "\n";
     cout << "RL setup success count: " << count << "\n";
     cout << "RL setup failures count: " << countFail << "\n";
-    BtsLogTime delayTime = endTest - startTest;
+    BtsLogTime const delayTime = endTest - startTest;
     cout << "Test Duration: " << delayTime.getEquivalentStringBtsTimeFormat() << "\n";
 }
 
 void PerformanceAnalyzer::processFileForRlDeletionDelayInRlh(string const& filePath) {
-    AlbaLocalPathHandler filePathHandler(filePath);
+    AlbaLocalPathHandler const filePathHandler(filePath);
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
@@ -298,24 +299,24 @@ void PerformanceAnalyzer::processFileForRlDeletionDelayInRlh(string const& fileP
     int count = 0;
     std::map<UniqueUserId, BtsLogDelay> btsLogDelays;
     while (fileReader.isNotFinished()) {
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if (isStringFoundNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlDeletionReq3G)")) {
-            UniqueUserId uniqueUserId(lineInLogs);
+            UniqueUserId const uniqueUserId(lineInLogs);
             BtsLogDelay& btsLogDelay(btsLogDelays[uniqueUserId]);
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             if (!logPrint.getBtsTime().isStartup()) {
                 btsLogDelay.startTimeOptional = logPrint.getBtsTime();
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(RLH_CTRL_RlDeletionResp3G)")) {
-            UniqueUserId uniqueUserId(lineInLogs);
+            UniqueUserId const uniqueUserId(lineInLogs);
             BtsLogDelay& btsLogDelay(btsLogDelays[uniqueUserId]);
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             if (!logPrint.getBtsTime().isStartup()) {
                 btsLogDelay.endTimeOptional = logPrint.getBtsTime();
             }
             if (btsLogDelay.startTimeOptional && btsLogDelay.endTimeOptional &&
                 btsLogDelay.startTimeOptional->getTotalSeconds() <= btsLogDelay.endTimeOptional->getTotalSeconds()) {
-                int delay =
+                int const delay =
                     getDelayTimeInUs(btsLogDelay.endTimeOptional.value(), btsLogDelay.startTimeOptional.value());
                 maxDelay = std::max(maxDelay, static_cast<double>(delay));
                 totalDelay += delay;
@@ -334,7 +335,7 @@ void PerformanceAnalyzer::processFileForRlDeletionDelayInRlh(string const& fileP
 }
 
 void PerformanceAnalyzer::processFileForPeriodicCpuLogging(string const& filePath) {
-    AlbaLocalPathHandler filePathHandler(filePath);
+    AlbaLocalPathHandler const filePathHandler(filePath);
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
@@ -342,7 +343,7 @@ void PerformanceAnalyzer::processFileForPeriodicCpuLogging(string const& filePat
     logLineInRawDataFile("subsystem,inProcess,inSystem,threadCpuTimeSpent");
 
     while (fileReader.isNotFinished()) {
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if (isStringFoundNotCaseSensitive(lineInLogs, R"(Periodic CPU Usage Report)") ||
             isStringFoundNotCaseSensitive(lineInLogs, R"(printCpuDataCollection)")) {
             string subsystem("Unknown");
@@ -361,7 +362,7 @@ void PerformanceAnalyzer::processFileForPeriodicCpuLogging(string const& filePat
             }
             auto inProcess = convertStringToNumber<double>(getStringInBetweenTwoStrings(lineInLogs, "inProcess:", "%"));
             auto inSystem = convertStringToNumber<double>(getStringInBetweenTwoStrings(lineInLogs, "inSystem:", "%"));
-            string threadCpuTimeSpent(getStringInBetweenTwoStrings(lineInLogs, "threadCpuTimeSpent:", " ("));
+            string const threadCpuTimeSpent(getStringInBetweenTwoStrings(lineInLogs, "threadCpuTimeSpent:", " ("));
             stringstream ss;
             ss << subsystem << "," << inProcess << "," << inSystem << "," << threadCpuTimeSpent;
             logLineInRawDataFile(ss.str());
@@ -370,7 +371,7 @@ void PerformanceAnalyzer::processFileForPeriodicCpuLogging(string const& filePat
 }
 
 void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string const& filePath) {
-    AlbaLocalPathHandler filePathHandler(filePath);
+    AlbaLocalPathHandler const filePathHandler(filePath);
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
@@ -420,7 +421,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
             if (!isComplete(nbccId)) {
                 return false;
             }
-            bool isCorrect =
+            bool const isCorrect =
                 (rlhRlSetupRequestOptional.value() < rlhTbRegisterTimeOptional.value()) &&
                 (rlhTbRegisterTimeOptional.value() < tupcTbRegisterTimeOptional.value()) &&
                 //(tupcTbRegisterTimeOptional.value()<tupcFirstTransportConnectionSetupOptional.value()) &&
@@ -455,14 +456,14 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
     BtsLogPrint ecfLogPrint;
 
     while (fileReader.isNotFinished()) {
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if (isStringFoundNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlSetupReq3G)")) {
-            UniqueUserId uniqueUserId(lineInLogs);
+            UniqueUserId const uniqueUserId(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
 
             BtsLogDelay& btsLogDelay = btsLogDelays[uniqueUserId];
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             if (!logPrint.getBtsTime().isStartup()) {
                 btsLogDelay.startTimeOptional = logPrint.getBtsTime();
                 UniqueUserId tupcUserIdInStartup;
@@ -471,7 +472,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
                 tupcLogDelay.rlhRlSetupRequestOptional = logPrint.getBtsTime();
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(RLH send TC_TRANSPORT_BEARER_REGISTER_MSG)")) {
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
             if (tupcLogDelays.contains(tupcUserId)) {
@@ -479,7 +480,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
                 tupcLogDelay.rlhTbRegisterTimeOptional = logPrint.getBtsTime();
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"([Rcvd:TC_TRANSPORT_BEARER_REGISTER_MSG])")) {
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
             if (tupcLogDelays.contains(tupcUserId)) {
@@ -488,7 +489,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
                 tupcRegisterRequestTupcUserId = tupcUserId;
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"([Sent:M_IP_ERQ])")) {
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             if (tupcLogDelays.contains(tupcRegisterRequestTupcUserId)) {
                 TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcRegisterRequestTupcUserId];
                 if (!tupcLogDelay.tupcFirstErqSentOptional) {
@@ -496,10 +497,10 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
                 }
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(Rcvd[M_IP_ECF])")) {
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             ecfLogPrint = logPrint;
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"([Sent:TUP_TRANSPORT_CONNECTION_SETUP_REQ_MSG])")) {
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
             if (tupcLogDelays.contains(tupcUserId)) {
@@ -510,7 +511,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
                 }
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"([TUP_TRANSPORT_CONNECTION_SETUP_RESP])")) {
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
             if (tupcLogDelays.contains(tupcUserId)) {
@@ -518,7 +519,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
                 tupcLogDelay.tupcLastTransportConnectionSetupResponseOptional = logPrint.getBtsTime();
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"([Sent:TC_TRANSPORT_BEARER_REGISTER_RESP_MSG])")) {
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
             if (tupcLogDelays.contains(tupcUserId)) {
@@ -526,7 +527,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
                 tupcLogDelay.tupcTbRegisterResponseTimeOptional = logPrint.getBtsTime();
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(RLH receive TC_TRANSPORT_BEARER_REGISTER_RESP_MSG)")) {
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
             if (tupcLogDelays.contains(tupcUserId)) {
@@ -534,13 +535,13 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
                 tupcLogDelay.rlhTbRegisterResponseTimeOptional = logPrint.getBtsTime();
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(RLH_CTRL_RlSetupResp3G)")) {
-            UniqueUserId uniqueUserId(lineInLogs);
+            UniqueUserId const uniqueUserId(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
 
             BtsLogDelay& btsLogDelay = btsLogDelays[uniqueUserId];
             TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcUserId];
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             if (!logPrint.getBtsTime().isStartup()) {
                 btsLogDelay.endTimeOptional = logPrint.getBtsTime();
                 tupcLogDelay.rlhRlSetupResponseOptional = logPrint.getBtsTime();
@@ -548,7 +549,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
             if (tupcLogDelay.isCorrect(tupcUserId.nbccId) && btsLogDelay.startTimeOptional &&
                 btsLogDelay.endTimeOptional &&
                 btsLogDelay.startTimeOptional->getTotalSeconds() <= btsLogDelay.endTimeOptional->getTotalSeconds()) {
-                int delay =
+                int const delay =
                     getDelayTimeInUs(btsLogDelay.endTimeOptional.value(), btsLogDelay.startTimeOptional.value());
                 if (maxDelay < delay) {
                     maxDelay = delay;
@@ -627,7 +628,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
 }
 
 void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(string const& filePath) {
-    AlbaLocalPathHandler filePathHandler(filePath);
+    AlbaLocalPathHandler const filePathHandler(filePath);
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
@@ -660,7 +661,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
             if (!isComplete(nbccId)) {
                 return false;
             }
-            bool isCorrect =
+            bool const isCorrect =
                 (rlhRlSetupRequestOptional.value() < tupcTbRegisterTimeOptional.value()) &&
                 (tupcTbRegisterTimeOptional.value() < tupcFirstErqSentOptional.value()) &&
                 (tupcFirstErqSentOptional.value() < tupcLastEcfReceivedOptional.value()) &&
@@ -684,14 +685,14 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
     BtsLogPrint ecfLogPrint;
 
     while (fileReader.isNotFinished()) {
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if (isStringFoundNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlSetupReq3G)")) {
-            UniqueUserId uniqueUserId(lineInLogs);
+            UniqueUserId const uniqueUserId(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
 
             BtsLogDelay& btsLogDelay = btsLogDelays[uniqueUserId];
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             if (!logPrint.getBtsTime().isStartup()) {
                 btsLogDelay.startTimeOptional = logPrint.getBtsTime();
                 UniqueUserId tupcUserIdInStartup;
@@ -700,7 +701,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
                 tupcLogDelay.rlhRlSetupRequestOptional = logPrint.getBtsTime();
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"([Rcvd:TC_TRANSPORT_BEARER_REGISTER_MSG])")) {
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
             if (tupcLogDelays.contains(tupcUserId)) {
@@ -709,7 +710,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
                 tupcRegisterRequestTupcUserId = tupcUserId;
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"([Sent:M_IP_ERQ])")) {
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             if (tupcLogDelays.contains(tupcRegisterRequestTupcUserId)) {
                 TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcRegisterRequestTupcUserId];
                 if (!tupcLogDelay.tupcFirstErqSentOptional) {
@@ -717,10 +718,10 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
                 }
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(Rcvd[M_IP_ECF])")) {
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             ecfLogPrint = logPrint;
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"([Sent:TUP_TRANSPORT_CONNECTION_SETUP_REQ_MSG])")) {
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
             if (tupcLogDelays.contains(tupcUserId)) {
@@ -731,13 +732,13 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
                 }
             }
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(RLH_CTRL_RlSetupResp3G)")) {
-            UniqueUserId uniqueUserId(lineInLogs);
+            UniqueUserId const uniqueUserId(lineInLogs);
             UniqueUserId tupcUserId;
             tupcUserId.saveNbccId(lineInLogs);
 
             BtsLogDelay& btsLogDelay = btsLogDelays[uniqueUserId];
             TupcDelaysData& tupcLogDelay = tupcLogDelays[tupcUserId];
-            BtsLogPrint logPrint(lineInLogs);
+            BtsLogPrint const logPrint(lineInLogs);
             if (!logPrint.getBtsTime().isStartup()) {
                 btsLogDelay.endTimeOptional = logPrint.getBtsTime();
                 tupcLogDelay.rlhRlSetupResponseOptional = logPrint.getBtsTime();
@@ -745,7 +746,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
             if (tupcLogDelay.isCorrect(tupcUserId.nbccId) && btsLogDelay.startTimeOptional &&
                 btsLogDelay.endTimeOptional &&
                 btsLogDelay.startTimeOptional->getTotalSeconds() <= btsLogDelay.endTimeOptional->getTotalSeconds()) {
-                int delay =
+                int const delay =
                     getDelayTimeInUs(btsLogDelay.endTimeOptional.value(), btsLogDelay.startTimeOptional.value());
                 if (maxDelay < delay) {
                     maxDelay = delay;
@@ -783,7 +784,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
 }
 
 void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) {
-    AlbaLocalPathHandler filePathHandler(filePath);
+    AlbaLocalPathHandler const filePathHandler(filePath);
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
@@ -814,20 +815,20 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
     };
     std::map<WiresharkLogKey, WiresharkLogDelay> wiresharkLogDelays;
     while (fileReader.isNotFinished()) {
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if (isStringFoundNotCaseSensitive(lineInLogs, R"(No.     Time        Source                Destination)")) {
-            string nextLine(fileReader.getLineAndIgnoreWhiteSpaces());
-            string timeString(getStringInBetweenTwoStrings(nextLine, " ", " "));
+            string const nextLine(fileReader.getLineAndIgnoreWhiteSpaces());
+            string const timeString(getStringInBetweenTwoStrings(nextLine, " ", " "));
             auto wiresharkTime = convertStringToNumber<double>(timeString);
             endWiresharkTime = wiresharkTime;
             auto numberInWireshark = convertStringToNumber<unsigned int>(getStringBeforeThisString(nextLine, " "));
             WiresharkLogKey key{};
             while (fileReader.isNotFinished()) {
-                string followingLine(fileReader.getLineAndIgnoreWhiteSpaces());
+                string const followingLine(fileReader.getLineAndIgnoreWhiteSpaces());
                 if (isStringFoundNotCaseSensitive(followingLine, R"(0000)")) {
                     auto msgId = convertHexStringToNumber<unsigned int>(followingLine.substr(18, 2));
                     if (msgId == 0x75 || msgId == 0x77 || msgId == 0x7E) {
-                        string followingLine2(fileReader.getLineAndIgnoreWhiteSpaces());
+                        string const followingLine2(fileReader.getLineAndIgnoreWhiteSpaces());
                         if (isStringFoundNotCaseSensitive(followingLine2, R"(0010)")) {
                             key.said = 0;  // convertHexStringToNumber<unsigned int>(followingLine2.substr(6,11));
                             if (msgId == 0x75) {
@@ -845,7 +846,7 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
                             wiresharkLogDelay.numberInWiresharkOfStart = numberInWireshark;
                         }
                     } else if (msgId == 0x74 || msgId == 0x76 || msgId == 0x7C) {
-                        string followingLine2(fileReader.getLineAndIgnoreWhiteSpaces());
+                        string const followingLine2(fileReader.getLineAndIgnoreWhiteSpaces());
                         if (isStringFoundNotCaseSensitive(followingLine2, R"(0010)")) {
                             key.said = 0;
                             if (msgId == 0x74) {
@@ -868,7 +869,7 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
             WiresharkLogDelay& checkWiresharkLogDelay = wiresharkLogDelays[key];
             if (checkWiresharkLogDelay.startTimeOptional && checkWiresharkLogDelay.endTimeOptional &&
                 checkWiresharkLogDelay.startTimeOptional.value() <= checkWiresharkLogDelay.endTimeOptional.value()) {
-                double delay =
+                double const delay =
                     checkWiresharkLogDelay.endTimeOptional.value() - checkWiresharkLogDelay.startTimeOptional.value();
                 maxDelay = std::max(maxDelay, delay);
                 totalDelay += delay;
@@ -890,7 +891,7 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
 }
 
 void PerformanceAnalyzer::processFileForTopLogs(string const& filePath) {
-    AlbaLocalPathHandler filePathHandler(filePath);
+    AlbaLocalPathHandler const filePathHandler(filePath);
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
@@ -912,7 +913,7 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath) {
     stringstream masterStringStream;
     double totalCpuFromTop(0);
     while (fileReader.isNotFinished()) {
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
 
         if (isStringFoundNotCaseSensitive(lineInLogs, "=~=~=~=~=~=~=~=~=~=~=~=") ||
             isStringFoundNotCaseSensitive(lineInLogs, "top - ")) {
@@ -934,13 +935,14 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath) {
             maxTotalCpu = std::max(maxTotalCpu, totalCpu);
             totalCpuFromTop = 0;
         } else if (state == 1 && isStringFoundNotCaseSensitive(lineInLogs, "%Cpu0  :")) {
-            unsigned int bracketCpuIndexInLine(lineInLogs.find('['));
+            unsigned int const bracketCpuIndexInLine(lineInLogs.find('['));
             totalCpuFromTop = convertStringToNumber<double>(lineInLogs.substr(bracketCpuIndexInLine - 3, 3));
             maxTotalCpuFromTop = std::max(maxTotalCpuFromTop, totalCpuFromTop);
         }
         if (state == 2 && isNotNpos(commmandIndexInLine) && isNotNpos(cpuIndexInLine) &&
             commmandIndexInLine < lineInLogs.length() && cpuIndexInLine + 5 < lineInLogs.length()) {
-            string processName(getStringWithoutStartingAndTrailingWhiteSpace(lineInLogs.substr(commmandIndexInLine)));
+            string const processName(
+                getStringWithoutStartingAndTrailingWhiteSpace(lineInLogs.substr(commmandIndexInLine)));
             auto cpuLoad = convertStringToNumber<double>(lineInLogs.substr(cpuIndexInLine, 5));
             if (cpuLoad > 0 && processName != "`- top") {
                 int i = 0;
@@ -990,7 +992,7 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath) {
 }
 
 void PerformanceAnalyzer::processFileForTopLogsMem(string const& filePath) {
-    AlbaLocalPathHandler filePathHandler(filePath);
+    AlbaLocalPathHandler const filePathHandler(filePath);
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
@@ -1008,7 +1010,7 @@ void PerformanceAnalyzer::processFileForTopLogsMem(string const& filePath) {
     int commmandIndexInLine = 0;
     stringstream masterStringStream;
     while (fileReader.isNotFinished()) {
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
 
         if (isStringFoundNotCaseSensitive(lineInLogs, "=~=~=~=~=~=~=~=~=~=~=~=") ||
             isStringFoundNotCaseSensitive(lineInLogs, "top - ")) {
@@ -1030,7 +1032,8 @@ void PerformanceAnalyzer::processFileForTopLogsMem(string const& filePath) {
         }
         if (state == 2 && isNotNpos(commmandIndexInLine) && isNotNpos(memIndexInLine) &&
             commmandIndexInLine < lineInLogs.length() && memIndexInLine + 5 < lineInLogs.length()) {
-            string processName(getStringWithoutStartingAndTrailingWhiteSpace(lineInLogs.substr(commmandIndexInLine)));
+            string const processName(
+                getStringWithoutStartingAndTrailingWhiteSpace(lineInLogs.substr(commmandIndexInLine)));
             auto memLoad = convertStringToNumber<double>(lineInLogs.substr(memIndexInLine - 1, 4));
             if (memLoad > 0 && processName != "`- top") {
                 int i = 0;
@@ -1075,7 +1078,7 @@ void PerformanceAnalyzer::processFileForTopLogsMem(string const& filePath) {
 }
 
 void PerformanceAnalyzer::processFileForRlSetupPerSecond(string const& filePath) {
-    AlbaLocalPathHandler filePathHandler(filePath);
+    AlbaLocalPathHandler const filePathHandler(filePath);
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
@@ -1087,11 +1090,11 @@ void PerformanceAnalyzer::processFileForRlSetupPerSecond(string const& filePath)
     int min = 0;
     int sec = 0;
     int instances = 0;
-    BtsLogTime firstLogTime;
+    BtsLogTime const firstLogTime;
     while (fileReader.isNotFinished()) {
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
-        BtsLogPrint logPrint(lineInLogs);
-        BtsLogTime logTime(logPrint.getBtsTime());
+        string const lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        BtsLogPrint const logPrint(lineInLogs);
+        BtsLogTime const logTime(logPrint.getBtsTime());
 
         // int hourOffsetForDay = 0;
         // cout<<"hourOffsetForDay"<<hourOffsetForDay<<"D1:"<<firstLogTime.getDays()<<"D1:"<<logTime.getDays()<<"\n";
@@ -1115,7 +1118,7 @@ void PerformanceAnalyzer::processFileForRlSetupPerSecond(string const& filePath)
 }
 
 void PerformanceAnalyzer::processFileForTraceLog(string const& traceLogPath) {
-    AlbaLocalPathHandler filePathHandler(traceLogPath);
+    AlbaLocalPathHandler const filePathHandler(traceLogPath);
     ifstream inputLogFileStream(traceLogPath);
     AlbaFileReader fileReader(inputLogFileStream);
 
@@ -1124,16 +1127,16 @@ void PerformanceAnalyzer::processFileForTraceLog(string const& traceLogPath) {
 
     stringstream ss;
     while (fileReader.isNotFinished()) {
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if (isStringFoundNotCaseSensitive(lineInLogs, R"(START time=)")) {
-            int hour = convertStringToNumber<int>(lineInLogs.substr(22, 2));
-            int min = convertStringToNumber<int>(lineInLogs.substr(25, 2));
-            int sec = convertStringToNumber<int>(lineInLogs.substr(28, 2));
+            int const hour = convertStringToNumber<int>(lineInLogs.substr(22, 2));
+            int const min = convertStringToNumber<int>(lineInLogs.substr(25, 2));
+            int const sec = convertStringToNumber<int>(lineInLogs.substr(28, 2));
             ss << hour << ":" << min << ":" << sec << ",";
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(STOP  time=)")) {
-            int hour = convertStringToNumber<int>(lineInLogs.substr(22, 2));
-            int min = convertStringToNumber<int>(lineInLogs.substr(25, 2));
-            int sec = convertStringToNumber<int>(lineInLogs.substr(28, 2));
+            int const hour = convertStringToNumber<int>(lineInLogs.substr(22, 2));
+            int const min = convertStringToNumber<int>(lineInLogs.substr(25, 2));
+            int const sec = convertStringToNumber<int>(lineInLogs.substr(28, 2));
             ss << hour << ":" << min << ":" << sec;
         }
     }

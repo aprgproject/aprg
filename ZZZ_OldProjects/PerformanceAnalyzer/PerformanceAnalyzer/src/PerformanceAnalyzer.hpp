@@ -36,8 +36,8 @@ public:
         wcdmaToolsBackend::BtsLogTime const& endTime, wcdmaToolsBackend::BtsLogTime const& startTime);
     static int getDelayTimeInMinutes(
         wcdmaToolsBackend::BtsLogTime const& endTime, wcdmaToolsBackend::BtsLogTime const& startTime);
-    std::string extract(std::string const& inputPath) const;
-    std::string combineAndSort(std::string const& inputPath) const;
+    [[nodiscard]] std::string extract(std::string const& inputPath) const;
+    [[nodiscard]] std::string combineAndSort(std::string const& inputPath) const;
     void setFileForRawDataDump(std::string const& rawDataPath);
     void logLineInRawDataFile(std::string const& line);
     void logStringInRawDataFile(std::string const& line);

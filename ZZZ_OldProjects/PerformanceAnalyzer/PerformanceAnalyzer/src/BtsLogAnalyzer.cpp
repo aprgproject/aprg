@@ -56,7 +56,7 @@ void BtsLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSor
     LogTimePairs rlSetupLogTimePairs;
     LogTimePairs rlDeletionLogTimePairs;
     while (fileReader.isNotFinished()) {
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         saveQueueingTime(lineInLogs);
         saveRlhSetupTime(lineInLogs, rlSetupLogTimePairs);
         saveRlhDeletionTime(lineInLogs, rlDeletionLogTimePairs);
@@ -85,7 +85,7 @@ void BtsLogAnalyzer::saveUserIndentifierAndLatencyToCsvFile(
 }
 
 void BtsLogAnalyzer::setLogTimeIfNeeded(string const& lineInLogs, LogTime& logTime) {
-    BtsLogPrint logPrint(lineInLogs);
+    BtsLogPrint const logPrint(lineInLogs);
     // if(!logPrint.getBtsTime().isStartup())
     //{
     logTime = logPrint.getBtsTime();
@@ -93,19 +93,19 @@ void BtsLogAnalyzer::setLogTimeIfNeeded(string const& lineInLogs, LogTime& logTi
 }
 
 double BtsLogAnalyzer::getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser) {
-    BtsLogTime latency = logTimePairOfTheUser.second.value() - logTimePairOfTheUser.first.value();
+    BtsLogTime const latency = logTimePairOfTheUser.second.value() - logTimePairOfTheUser.first.value();
     return getTotalMicroseconds(latency);
 }
 
 double BtsLogAnalyzer::getTotalMicroseconds(BtsLogTime const& btsLogTime) {
-    double result(
+    double const result(
         static_cast<double>(btsLogTime.getMinutes()) * 1000000 * 60 +
         static_cast<double>(btsLogTime.getSeconds()) * 1000000 + static_cast<double>(btsLogTime.getMicroSeconds()));
     return result;
 }
 
 void BtsLogAnalyzer::initializeMessageQueueingTimeFileStream() {
-    AlbaLocalPathHandler messageQueueingTimeFilePathHandler(
+    AlbaLocalPathHandler const messageQueueingTimeFilePathHandler(
         m_btsLogPathHandler.getDirectory() + m_btsLogPathHandler.getFilenameOnly() + "_MessageQueueingTime.csv");
     messageQueueingTimeFileStreamOptional.emplace();
     ofstream& messageQueueingTimeFileStream(messageQueueingTimeFileStreamOptional.value());
@@ -115,7 +115,7 @@ void BtsLogAnalyzer::initializeMessageQueueingTimeFileStream() {
 }
 
 void BtsLogAnalyzer::initializeRlSetupTimeFileStream() {
-    AlbaLocalPathHandler rlSetupTimeFilePathHandler(
+    AlbaLocalPathHandler const rlSetupTimeFilePathHandler(
         m_btsLogPathHandler.getDirectory() + m_btsLogPathHandler.getFilenameOnly() + "_RlSetupTime.csv");
     rlSetupTimeFileStreamOptional.emplace();
     ofstream& rlSetupTimeFileStream(rlSetupTimeFileStreamOptional.value());
@@ -126,7 +126,7 @@ void BtsLogAnalyzer::initializeRlSetupTimeFileStream() {
 }
 
 void BtsLogAnalyzer::initializeRlDeletionTimeFileStream() {
-    AlbaLocalPathHandler rlDeletionTimeFilePathHandler(
+    AlbaLocalPathHandler const rlDeletionTimeFilePathHandler(
         m_btsLogPathHandler.getDirectory() + m_btsLogPathHandler.getFilenameOnly() + "_RlDeletionTime.csv");
     rlDeletionTimeFileStreamOptional.emplace();
     ofstream& rlDeletionTimeFileStream(rlDeletionTimeFileStreamOptional.value());
@@ -138,7 +138,7 @@ void BtsLogAnalyzer::initializeRlDeletionTimeFileStream() {
 }
 
 void BtsLogAnalyzer::initializeRlSetupPerSecondFileStream() {
-    AlbaLocalPathHandler rlSetupPerSecondFilePathHandler(
+    AlbaLocalPathHandler const rlSetupPerSecondFilePathHandler(
         m_btsLogPathHandler.getDirectory() + m_btsLogPathHandler.getFilenameOnly() + "_RlSetupPerSecond.csv");
     rlSetupPerSecondFileStreamOptional.emplace();
     ofstream& rlSetupPerSecondFileStream(rlSetupPerSecondFileStreamOptional.value());
@@ -149,7 +149,7 @@ void BtsLogAnalyzer::initializeRlSetupPerSecondFileStream() {
 
 void BtsLogAnalyzer::saveDspCapacityInformationInGrm(string const& lineInLogs) {
     if (isStringFoundCaseSensitive(lineInLogs, "INF/TCOM/G, 0x")) {
-        BtsLogPrint logPrint(lineInLogs);
+        BtsLogPrint const logPrint(lineInLogs);
         strings dspCapacitiesPerDsp;
         splitToStrings<SplitStringType::WithoutDelimeters>(dspCapacitiesPerDsp, lineInLogs, "()");
         auto boardId(convertHexStringToNumber<unsigned int>(getStringInBetweenTwoStrings(lineInLogs, "0x", ",")));
@@ -164,7 +164,7 @@ void BtsLogAnalyzer::saveDspCapacityInformationInGrmOfOneDsp(
     bool isDspDataFilled(false);
     DspData dspData;
     dspData.boardId = boardId;
-    strings delimetersInGrmPrint{":", " ", "/", "[", "]", "[", ",", ",", ",", ",", ",", ",", "]"};
+    strings const delimetersInGrmPrint{":", " ", "/", "[", "]", "[", ",", ",", ",", ",", ",", ",", "]"};
     strings valuesWithBeforeCni1738;
     splitToStringsUsingASeriesOfDelimeters(valuesWithBeforeCni1738, dspCapacityOfOneDsp, delimetersInGrmPrint);
 
@@ -184,7 +184,7 @@ void BtsLogAnalyzer::saveDspCapacityInformationInGrmOfOneDsp(
         isDspDataFilled = true;
     }
     if (isDspDataFilled) {
-        unsigned int dspAddress = (dspData.boardId << 8) | dspData.cpuId;
+        unsigned int const dspAddress = (dspData.boardId << 8) | dspData.cpuId;
         stringstream ss;
         ss << std::hex << dspAddress;
         // saveDataDumpOfOneDsp(ss.str(), dspData, logPrint);
@@ -198,7 +198,7 @@ void BtsLogAnalyzer::saveDspCapacityInformationInGrmOfOneDsp(
 
 void BtsLogAnalyzer::saveDspCapacityInformationInLrmForR3(string const& lineInLogs) {
     if (isStringFoundCaseSensitive(lineInLogs, "printDspCapacityInd(): 0x")) {
-        BtsLogPrint logPrint(lineInLogs);
+        BtsLogPrint const logPrint(lineInLogs);
         strings dspCapacitiesPerDsp;
         splitToStrings<SplitStringType::WithoutDelimeters>(dspCapacitiesPerDsp, lineInLogs, " ");
         auto boardId(convertHexStringToNumber<unsigned int>(getStringInBetweenTwoStrings(lineInLogs, "0x", " ")));
@@ -213,8 +213,8 @@ void BtsLogAnalyzer::saveDspCapacityInformationInLrmOfOneDspForR3(
     bool isDspDataFilled(false);
     DspData dspData;
     dspData.boardId = boardId;
-    strings delimetersBeforeCni1738{"{", "}", ":", "/", "[", ",", ",", ",", "]", "[", ",", ",", "]"};
-    strings delimetersAfterCni1738{"{", "}", ":", "/", "[", ",", ",", ",", ",", "]", "[", ",", ",", "]"};
+    strings const delimetersBeforeCni1738{"{", "}", ":", "/", "[", ",", ",", ",", "]", "[", ",", ",", "]"};
+    strings const delimetersAfterCni1738{"{", "}", ":", "/", "[", ",", ",", ",", ",", "]", "[", ",", ",", "]"};
     strings valuesWithBeforeCni1738;
     strings valuesWithAfterCni1738;
     splitToStringsUsingASeriesOfDelimeters(valuesWithBeforeCni1738, dspCapacityOfOneDsp, delimetersBeforeCni1738);
@@ -252,7 +252,7 @@ void BtsLogAnalyzer::saveDspCapacityInformationInLrmOfOneDspForR3(
         isDspDataFilled = true;
     }
     if (isDspDataFilled) {
-        unsigned int dspAddress = (dspData.boardId << 8) | dspData.cpuId;
+        unsigned int const dspAddress = (dspData.boardId << 8) | dspData.cpuId;
         stringstream ss;
         ss << std::hex << dspAddress;
         // saveDataDumpOfOneDsp(ss.str(), dspData, logPrint);
@@ -266,9 +266,9 @@ void BtsLogAnalyzer::saveDspCapacityInformationInLrmOfOneDspForR3(
 
 void BtsLogAnalyzer::saveDspCapacityInformationInLrmForR2(string const& lineInLogs) {
     if (isStringFoundCaseSensitive(lineInLogs, "INF/TCOM/LRM/Rep, |0x")) {
-        BtsLogPrint logPrint(lineInLogs);
+        BtsLogPrint const logPrint(lineInLogs);
         strings dspCapacitiesPerDsp;
-        string logsAfterLrmPrint(getStringAfterThisString(lineInLogs, "INF/TCOM/LRM/Rep"));
+        string const logsAfterLrmPrint(getStringAfterThisString(lineInLogs, "INF/TCOM/LRM/Rep"));
         splitToStrings<SplitStringType::WithoutDelimeters>(dspCapacitiesPerDsp, logsAfterLrmPrint, "(");
         auto boardId(convertHexStringToNumber<unsigned int>(getStringInBetweenTwoStrings(lineInLogs, ",0x", "-")));
         for (string const& dspCapacityOfOneDsp : dspCapacitiesPerDsp) {
@@ -282,8 +282,8 @@ void BtsLogAnalyzer::saveDspCapacityInformationInLrmOfOneDspForR2(
     bool isDspDataFilled(false);
     DspData dspData;
     dspData.boardId = boardId;
-    strings delimetersBeforeCni1738{":", "/", "[", ",", ",", ",", ",", ",", "]"};
-    strings delimetersAfterCni1738{":", "/", "[", ",", ",", ",", ",", ",", ",", "]"};
+    strings const delimetersBeforeCni1738{":", "/", "[", ",", ",", ",", ",", ",", "]"};
+    strings const delimetersAfterCni1738{":", "/", "[", ",", ",", ",", ",", ",", ",", "]"};
     strings valuesWithBeforeCni1738;
     strings valuesWithAfterCni1738;
     splitToStringsUsingASeriesOfDelimeters(valuesWithBeforeCni1738, dspCapacityOfOneDsp, delimetersBeforeCni1738);
@@ -317,7 +317,7 @@ void BtsLogAnalyzer::saveDspCapacityInformationInLrmOfOneDspForR2(
         isDspDataFilled = true;
     }
     if (isDspDataFilled) {
-        unsigned int dspAddress = (dspData.boardId << 8) | dspData.cpuId;
+        unsigned int const dspAddress = (dspData.boardId << 8) | dspData.cpuId;
         stringstream ss;
         ss << std::hex << dspAddress;
         // saveDataDumpOfOneDsp(ss.str(), dspData, logPrint);
@@ -367,7 +367,7 @@ void BtsLogAnalyzer::initializeDataDumpOfAllDspsForR2() {
 }
 
 void BtsLogAnalyzer::initializeDataDumpOfOneDsp(string const& fileName) {
-    AlbaLocalPathHandler dspDataPathHandler(m_btsLogPathHandler.getDirectory() + fileName + ".csv");
+    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory() + fileName + ".csv");
     ofstream dspDataFileStream(dspDataPathHandler.getFullPath());
     dspDataFileStream << "BtsTime,";
     dspDataFileStream << "availableUlCEs,availableDlCEs,";
@@ -378,7 +378,7 @@ void BtsLogAnalyzer::initializeDataDumpOfOneDsp(string const& fileName) {
 }
 
 void BtsLogAnalyzer::initializeTotalUsersAndCfsDump() {
-    AlbaLocalPathHandler totalUsersAndCfsFileHandler(m_btsLogPathHandler.getDirectory() + "TotalUsersAndCfs.csv");
+    AlbaLocalPathHandler const totalUsersAndCfsFileHandler(m_btsLogPathHandler.getDirectory() + "TotalUsersAndCfs.csv");
     ofstream totalUsersAndCfsFileStream(totalUsersAndCfsFileHandler.getFullPath());
     totalUsersAndCfsFileStream << "BtsTime,";
     totalUsersAndCfsFileStream << "TotalCfs,";
@@ -388,13 +388,14 @@ void BtsLogAnalyzer::initializeTotalUsersAndCfsDump() {
 }
 
 void BtsLogAnalyzer::initializeSaveAllUsersAndCfsDump() {
-    AlbaLocalPathHandler totalUsersAndCfsFileHandler(m_btsLogPathHandler.getDirectory() + "SaveAllUsersAndCfs.csv");
+    AlbaLocalPathHandler const totalUsersAndCfsFileHandler(
+        m_btsLogPathHandler.getDirectory() + "SaveAllUsersAndCfs.csv");
     ofstream totalUsersAndCfsFileStream(totalUsersAndCfsFileHandler.getFullPath());
     totalUsersAndCfsFileStream << "Time,Address,hsupaCFs,totalCfs,dchUsers,hsupaUsers\n";
 }
 
 void BtsLogAnalyzer::saveDataDumpOfOneDsp(string const& fileName, DspData const& dspData, BtsLogPrint const& logPrint) {
-    AlbaLocalPathHandler dspDataPathHandler(m_btsLogPathHandler.getDirectory() + fileName + ".csv");
+    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory() + fileName + ".csv");
     ofstream dspDataFileStream(dspDataPathHandler.getFullPath(), std::ios::ate | std::ios::app);
     dspDataFileStream << logPrint.getBtsTime().getEquivalentStringBtsTimeFormat() << ",";
     dspDataFileStream << dspData.availableUlCEs << "," << dspData.availableDlCEs << ",";
@@ -405,7 +406,7 @@ void BtsLogAnalyzer::saveDataDumpOfOneDsp(string const& fileName, DspData const&
 }
 
 void BtsLogAnalyzer::saveTotalUsersAndCfs(BtsLogPrint const& logPrint) {
-    AlbaLocalPathHandler dspDataPathHandler(m_btsLogPathHandler.getDirectory() + "TotalUsersAndCfs.csv");
+    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory() + "TotalUsersAndCfs.csv");
     ofstream totalCfsFileStream(dspDataPathHandler.getFullPath(), std::ios::ate | std::ios::app);
     unsigned int totalCfs(0);
     unsigned int totalR99Users(0);
@@ -423,7 +424,7 @@ void BtsLogAnalyzer::saveTotalUsersAndCfs(BtsLogPrint const& logPrint) {
 }
 
 void BtsLogAnalyzer::saveAllUsersAndCfs(BtsLogPrint const& logPrint) {
-    AlbaLocalPathHandler dspDataPathHandler(m_btsLogPathHandler.getDirectory() + "SaveAllUsersAndCfs.csv");
+    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory() + "SaveAllUsersAndCfs.csv");
     ofstream totalUsersAndCfsFileStream(dspDataPathHandler.getFullPath(), std::ios::ate | std::ios::app);
     totalUsersAndCfsFileStream << logPrint.getBtsTime().getEquivalentStringBtsTimeFormat() << ",";
     unsigned int totalCfs(0);
@@ -474,7 +475,7 @@ void BtsLogAnalyzer::saveMaxDspInformation(DspData const& dspData) {
 
 void BtsLogAnalyzer::saveQueueingTime(string const& lineInLogs) {
     if (isStringFoundCaseSensitive(lineInLogs, "MSG TIME, start queuing time")) {
-        unsigned int messsageQueueingTime(
+        unsigned int const messsageQueueingTime(
             convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "msgQueuingTime: ")));
         m_messageQueueingTime.addData(messsageQueueingTime);
         saveMessageQueueingTimeToCsvFile(lineInLogs, messsageQueueingTime);
@@ -486,7 +487,7 @@ void BtsLogAnalyzer::saveRlSetupPerSecond(string const& lineInLogs) {
     static unsigned int numberOfUsersInSecond = 0;
     if (isStringFoundNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlSetupReq3G)")) {
         BtsLogTime currentLogTime;
-        BtsLogPrint logPrint(lineInLogs);
+        BtsLogPrint const logPrint(lineInLogs);
         currentLogTime = logPrint.getBtsTime();
         currentLogTime.clearMicroSeconds();
         if (savedSecond == currentLogTime) {
@@ -505,10 +506,10 @@ void BtsLogAnalyzer::saveRlSetupPerSecond(string const& lineInLogs) {
 
 void BtsLogAnalyzer::saveRlhSetupTime(string const& lineInLogs, LogTimePairs& rlSetupLogTimePairs) {
     if (isStringFoundNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlSetupReq3G)")) {
-        UserIdentifiers userIdentifiers(lineInLogs);
+        UserIdentifiers const userIdentifiers(lineInLogs);
         setFirstLogTimeInPair(lineInLogs, userIdentifiers, rlSetupLogTimePairs);
     } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(RLH_CTRL_RlSetupResp3G)")) {
-        UserIdentifiers userIdentifiers(lineInLogs);
+        UserIdentifiers const userIdentifiers(lineInLogs);
         setSecondLogTimeInPair(lineInLogs, userIdentifiers, rlSetupLogTimePairs);
         computeRlSetupLatencyAndUpdateIfLogTimePairIsValid(userIdentifiers, rlSetupLogTimePairs);
         m_rlSetupPrintsAvailableMap.erase(userIdentifiers);
@@ -517,18 +518,18 @@ void BtsLogAnalyzer::saveRlhSetupTime(string const& lineInLogs, LogTimePairs& rl
 
 void BtsLogAnalyzer::saveRlhDeletionTime(string const& lineInLogs, LogTimePairs& rlDeletionLogTimePairs) {
     if (isStringFoundNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlDeletionReq3G)")) {
-        UserIdentifiers userIdentifiers(lineInLogs);
+        UserIdentifiers const userIdentifiers(lineInLogs);
         setFirstLogTimeInPair(lineInLogs, userIdentifiers, rlDeletionLogTimePairs);
     } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(RLH_CTRL_RlDeletionResp3G)")) {
-        UserIdentifiers userIdentifiers(lineInLogs);
+        UserIdentifiers const userIdentifiers(lineInLogs);
         setSecondLogTimeInPair(lineInLogs, userIdentifiers, rlDeletionLogTimePairs);
         computeRLDeletionLatencyAndUpdateIfLogTimePairIsValid(userIdentifiers, rlDeletionLogTimePairs);
     }
 }
 
 void BtsLogAnalyzer::saveAdditionalPrintsRlSetup(string const& lineInLogs, LogTimePairs& rlSetupLogTimePairs) {
-    UserIdentifiers userIdentifiers(lineInLogs);
-    LogTimePair& logTimePairOfTheUser(rlSetupLogTimePairs[userIdentifiers]);
+    UserIdentifiers const userIdentifiers(lineInLogs);
+    LogTimePair const& logTimePairOfTheUser(rlSetupLogTimePairs[userIdentifiers]);
     PrintsAvailable& printsAvailableForTheUser(m_rlSetupPrintsAvailableMap[userIdentifiers]);
     if (logTimePairOfTheUser.first) {
         if (isStringFoundNotCaseSensitive(lineInLogs, R"(BB_2_RL_SETUP_REQ_MSG)")) {
@@ -548,7 +549,7 @@ void BtsLogAnalyzer::computeRlSetupLatencyAndUpdateIfLogTimePairIsValid(
     LogTimePair& logTimePairOfTheUser(logTimePairs[userIdentifiers]);
     if (logTimePairOfTheUser.first && logTimePairOfTheUser.second &&
         logTimePairOfTheUser.first->getTotalSeconds() <= logTimePairOfTheUser.second->getTotalSeconds()) {
-        double latencyInMicroseconds(getTotalMicroseconds(logTimePairOfTheUser));
+        double const latencyInMicroseconds(getTotalMicroseconds(logTimePairOfTheUser));
         m_rlhRlSetupLatency.addData(latencyInMicroseconds);
         if (rlSetupTimeFileStreamOptional) {
             ofstream& rlSetupTimeFileStream(rlSetupTimeFileStreamOptional.value());
@@ -565,7 +566,7 @@ void BtsLogAnalyzer::computeRLDeletionLatencyAndUpdateIfLogTimePairIsValid(
     LogTimePair& logTimePairOfTheUser(logTimePairs[userIdentifiers]);
     if (logTimePairOfTheUser.first && logTimePairOfTheUser.second &&
         logTimePairOfTheUser.first->getTotalSeconds() <= logTimePairOfTheUser.second->getTotalSeconds()) {
-        double latencyInMicroseconds(getTotalMicroseconds(logTimePairOfTheUser));
+        double const latencyInMicroseconds(getTotalMicroseconds(logTimePairOfTheUser));
         m_rlhRlDeletionLatency.addData(latencyInMicroseconds);
         if (rlDeletionTimeFileStreamOptional) {
             ofstream& rlDeletionTimeFileStream(rlDeletionTimeFileStreamOptional.value());
@@ -585,7 +586,7 @@ void BtsLogAnalyzer::saveMessageQueueingTimeToCsvFile(
 }
 
 void BtsLogAnalyzer::savePrintsAvailableToCsvFile(UserIdentifiers const& userIdentifiers, ofstream& csvFileStream) {
-    PrintsAvailable& printsAvailable(m_rlSetupPrintsAvailableMap[userIdentifiers]);
+    PrintsAvailable const& printsAvailable(m_rlSetupPrintsAvailableMap[userIdentifiers]);
     csvFileStream << printsAvailable.hasBB_2_RL_SETUP_REQ_MSG << "," << printsAvailable.hasBB_2_RL_SETUP_ACK_MSG << ","
                   << printsAvailable.hasTC_TRANSPORT_BEARER_REGISTER_MSG << ","
                   << printsAvailable.hasTC_TRANSPORT_BEARER_REGISTER_RESP_MSG << ",";

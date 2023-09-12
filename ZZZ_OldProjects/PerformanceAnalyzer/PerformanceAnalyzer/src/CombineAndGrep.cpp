@@ -14,7 +14,7 @@ CombineAndGrep::CombineAndGrep(string const& outputFilePath, string const& grepS
     : m_outputFileStream(AlbaLocalPathHandler(outputFilePath).getFullPath()), m_grepString(grepString) {}
 
 void CombineAndGrep::processDirectory(string const& inputDirectoryPath) {
-    AlbaLocalPathHandler inputDirectoryPathHandler(inputDirectoryPath);
+    AlbaLocalPathHandler const inputDirectoryPathHandler(inputDirectoryPath);
     cout << "processDirectory() inputDirectoryPath:" << inputDirectoryPath << "\n";
     ListOfPaths files;
     ListOfPaths directories;
@@ -25,12 +25,12 @@ void CombineAndGrep::processDirectory(string const& inputDirectoryPath) {
 }
 
 void CombineAndGrep::processFile(string const& inputFilePath) {
-    AlbaLocalPathHandler inputFilePathHandler(inputFilePath);
+    AlbaLocalPathHandler const inputFilePathHandler(inputFilePath);
     cout << "processFile() inputFilePath:" << inputFilePath << "\n";
     ifstream inputFileStream(inputFilePathHandler.getFullPath());
     AlbaFileReader fileToRead(inputFileStream);
     while (fileToRead.isNotFinished()) {
-        string lineFromFile(fileToRead.getLineAndIgnoreWhiteSpaces());
+        string const lineFromFile(fileToRead.getLineAndIgnoreWhiteSpaces());
         if (stringHelper::isStringFoundNotCaseSensitive(lineFromFile, m_grepString)) {
             m_outputFileStream << lineFromFile << "\n";
         }
