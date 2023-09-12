@@ -25,8 +25,8 @@
 #include "internal_macros.h"
 
 #ifdef BENCHMARK_OS_WINDOWS
-#include <windows.h>
 #include <io.h>
+#include <windows.h>
 #else
 #include <unistd.h>
 #endif  // BENCHMARK_OS_WINDOWS
@@ -36,7 +36,7 @@ namespace {
 #ifdef BENCHMARK_OS_WINDOWS
 using PlatformColorCode = WORD;
 #else
-using PlatformColorCode = const char *;
+using PlatformColorCode = const char*;
 #endif
 
 PlatformColorCode GetPlatformColorCode(LogColor color) {
@@ -84,7 +84,7 @@ PlatformColorCode GetPlatformColorCode(LogColor color) {
 
 std::string FormatString(const char* msg, va_list args) {
   // we might need a second shot at this, so pre-emptivly make a copy
-  va_list args_cp = nullptr;
+  va_list args_cp{};
   va_copy(args_cp, args);
 
   std::size_t size = 256;
@@ -98,19 +98,19 @@ std::string FormatString(const char* msg, va_list args) {
 
   if (ret == 0) {  // handle empty expansion
     return {};
-  } if (static_cast<size_t>(ret) < size) {
+  }
+  if (static_cast<size_t>(ret) < size) {
     return local_buff;
-  }     // we did not provide a long enough buffer on our first attempt.
-    size = static_cast<size_t>(ret) + 1;  // + 1 for the null byte
-    std::unique_ptr<char[]> const buff(new char[size]);
-    ret = vsnprintf(buff.get(), size, msg, args);
-    BM_CHECK(ret > 0 && ((size_t)ret) < size);
-    return buff.get();
- 
+  }  // we did not provide a long enough buffer on our first attempt.
+  size = static_cast<size_t>(ret) + 1;  // + 1 for the null byte
+  std::unique_ptr<char[]> const buff(new char[size]);
+  ret = vsnprintf(buff.get(), size, msg, args);
+  BM_CHECK(ret > 0 && ((size_t)ret) < size);
+  return buff.get();
 }
 
 std::string FormatString(const char* msg, ...) {
-  va_list args = nullptr;
+  va_list args{};
   va_start(args, msg);
   auto tmp = FormatString(msg, args);
   va_end(args);
@@ -118,7 +118,7 @@ std::string FormatString(const char* msg, ...) {
 }
 
 void ColorPrintf(std::ostream& out, LogColor color, const char* fmt, ...) {
-  va_list args = nullptr;
+  va_list args{};
   va_start(args, fmt);
   ColorPrintf(out, color, fmt, args);
   va_end(args);
@@ -149,8 +149,9 @@ void ColorPrintf(std::ostream& out, LogColor color, const char* fmt,
   SetConsoleTextAttribute(stdout_handle, old_color_attrs);
 #else
   const char* color_code = GetPlatformColorCode(color);
-  if (color_code != nullptr) { out << FormatString("\033[0;3%sm", color_code);
-}
+  if (color_code != nullptr) {
+    out << FormatString("\033[0;3%sm", color_code);
+  }
   out << FormatString(fmt, args) << "\033[m";
 #endif
 }

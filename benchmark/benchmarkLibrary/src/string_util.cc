@@ -87,18 +87,21 @@ void ToExponentAndMantissa(double val, double thresh, int precision,
 }
 
 std::string ExponentToPrefix(int64_t exponent, bool iec) {
-  if (exponent == 0) { return "";
-}
+  if (exponent == 0) {
+    return "";
+  }
 
   const int64_t index = (exponent > 0 ? exponent - 1 : -exponent - 1);
-  if (index >= kUnitsSize) { return "";
-}
+  if (index >= kUnitsSize) {
+    return "";
+  }
 
   const char* array =
       (exponent > 0 ? (iec ? kBigIECUnits : kBigSIUnits) : kSmallSIUnits);
   if (iec) {
     return array[index] + std::string("i");
-  }     return std::string(1, array[index]);
+  }
+  return std::string(1, array[index]);
 }
 
 std::string ToBinaryStringFullySpecified(double value, double threshold,
@@ -128,7 +131,7 @@ std::string HumanReadableNumber(double n, double one_k) {
 
 std::string StrFormatImp(const char* msg, va_list args) {
   // we might need a second shot at this, so pre-emptivly make a copy
-  va_list args_cp = nullptr;
+  va_list args_cp{};
   va_copy(args_cp, args);
 
   // TODO(ericwf): use std::array for first attempt to avoid one memory
@@ -142,11 +145,12 @@ std::string StrFormatImp(const char* msg, va_list args) {
   va_end(args_cp);
 
   // handle empty expansion
-  if (ret == 0) { return std::string{};
-}
+  if (ret == 0) {
+    return std::string{};
+  }
   if (static_cast<std::size_t>(ret) < size) {
     return std::string(local_buff.data());
-}
+  }
 
   // we did not provide a long enough buffer on our first attempt.
   // add 1 to size to account for null-byte in size cast to prevent overflow
@@ -159,7 +163,7 @@ std::string StrFormatImp(const char* msg, va_list args) {
 }
 
 std::string StrFormat(const char* format, ...) {
-  va_list args = nullptr;
+  va_list args{};
   va_start(args, format);
   std::string tmp = StrFormatImp(format, args);
   va_end(args);
@@ -167,8 +171,9 @@ std::string StrFormat(const char* format, ...) {
 }
 
 std::vector<std::string> StrSplit(const std::string& str, char delim) {
-  if (str.empty()) { return {};
-}
+  if (str.empty()) {
+    return {};
+  }
   std::vector<std::string> ret;
   size_t first = 0;
   size_t next = str.find(delim);
@@ -202,11 +207,10 @@ unsigned long stoul(const std::string& str, size_t* pos, int base) {
 
   /* Check for errors and return */
   if (strtoulErrno == ERANGE) {
-    throw std::out_of_range(
-      "stoul failed: " + str + " is outside of range of unsigned long");
+    throw std::out_of_range("stoul failed: " + str +
+                            " is outside of range of unsigned long");
   } else if (strEnd == strStart || strtoulErrno != 0) {
-    throw std::invalid_argument(
-      "stoul failed: " + str + " is not an integer");
+    throw std::invalid_argument("stoul failed: " + str + " is not an integer");
   }
   if (pos != nullptr) {
     *pos = static_cast<size_t>(strEnd - strStart);
@@ -229,11 +233,10 @@ int stoi(const std::string& str, size_t* pos, int base) {
 
   /* Check for errors and return */
   if (strtolErrno == ERANGE || long(int(result)) != result) {
-    throw std::out_of_range(
-      "stoul failed: " + str + " is outside of range of int");
+    throw std::out_of_range("stoul failed: " + str +
+                            " is outside of range of int");
   } else if (strEnd == strStart || strtolErrno != 0) {
-    throw std::invalid_argument(
-      "stoul failed: " + str + " is not an integer");
+    throw std::invalid_argument("stoul failed: " + str + " is not an integer");
   }
   if (pos != nullptr) {
     *pos = static_cast<size_t>(strEnd - strStart);
@@ -256,11 +259,10 @@ double stod(const std::string& str, size_t* pos) {
 
   /* Check for errors and return */
   if (strtodErrno == ERANGE) {
-    throw std::out_of_range(
-      "stoul failed: " + str + " is outside of range of int");
+    throw std::out_of_range("stoul failed: " + str +
+                            " is outside of range of int");
   } else if (strEnd == strStart || strtodErrno != 0) {
-    throw std::invalid_argument(
-      "stoul failed: " + str + " is not an integer");
+    throw std::invalid_argument("stoul failed: " + str + " is not an integer");
   }
   if (pos != nullptr) {
     *pos = static_cast<size_t>(strEnd - strStart);
