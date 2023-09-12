@@ -53,8 +53,8 @@ void RevisionEditor::setRevisionDataFromFile() {
 
 void RevisionEditor::editCommitDates() {
     AlbaUniformNonDeterministicRandomizer<int> maxCommitRandomizer(19, 26);
-    AlbaYearMonthDay startDate(2020, 10, 1);
-    AlbaYearMonthDay endDate(2023, 8, 1);  // not a strict end date
+    AlbaYearMonthDay const startDate(2020, 10, 1);
+    AlbaYearMonthDay const endDate(2023, 8, 1);  // not a strict end date
     DaysIntervals gaps{createDaysInterval(2020, 10, 3, 2020, 10, 8),   createDaysInterval(2020, 11, 1, 2020, 11, 14),
                        createDaysInterval(2020, 12, 12, 2020, 12, 31), createDaysInterval(2021, 1, 1, 2021, 1, 12),
                        createDaysInterval(2021, 2, 12, 2021, 2, 28),   createDaysInterval(2021, 4, 3, 2021, 4, 15),
@@ -70,13 +70,13 @@ void RevisionEditor::editCommitDates() {
                        createDaysInterval(2023, 6, 1, 2023, 6, 23),    createDaysInterval(2023, 7, 13, 2023, 7, 20),
                        createDaysInterval(2023, 8, 8, 2023, 8, 11),    createDaysInterval(2023, 10, 7, 2023, 10, 12),
                        createDaysInterval(2023, 11, 11, 2023, 11, 14), createDaysInterval(2023, 12, 14, 2023, 12, 31)};
-    uint32_t startDayCount = startDate.getTotalDays();
-    uint32_t endDayCount = endDate.getTotalDays();
+    uint32_t const startDayCount = startDate.getTotalDays();
+    uint32_t const endDayCount = endDate.getTotalDays();
     int revisionIndex = 0;
     int gapIndex = 0;
     int const numberOfRevisions = static_cast<int>(m_revisionEntries.size());
     for (uint32_t currentDayCount = startDayCount; revisionIndex < numberOfRevisions; ++currentDayCount) {
-        uint32_t remainingNumberOfDays = (endDayCount > currentDayCount) ? endDayCount - currentDayCount : 1;
+        uint32_t const remainingNumberOfDays = (endDayCount > currentDayCount) ? endDayCount - currentDayCount : 1;
         while (gapIndex < static_cast<int>(gaps.size()) && gaps[gapIndex].second < currentDayCount) {
             ++gapIndex;
         }
@@ -95,7 +95,7 @@ void RevisionEditor::editCommitDates() {
             (numberOfCommits > numberOfRevisions - revisionIndex) ? numberOfRevisions - revisionIndex : numberOfCommits;
         numberOfCommits = clampHigherBound<int>(numberOfCommits, maxCommitRandomizer.getRandomValue());
 
-        AlbaYearMonthDay ymd = AlbaYearMonthDay::createFromTotalDays(currentDayCount);
+        AlbaYearMonthDay const ymd = AlbaYearMonthDay::createFromTotalDays(currentDayCount);
         ALBA_INF_PRINT5(cout, ymd.getYears(), ymd.getMonths(), ymd.getDays(), targetAverageCommit, numberOfCommits);
         vector<AlbaHourMinuteSecond> hmses;
         hmses.reserve(numberOfCommits);
@@ -105,7 +105,7 @@ void RevisionEditor::editCommitDates() {
         sort(hmses.begin(), hmses.end());
 
         for (AlbaHourMinuteSecond const& hms : hmses) {
-            AlbaDateTime revisedDateTime(ymd, hms, 0U);
+            AlbaDateTime const revisedDateTime(ymd, hms, 0U);
             m_revisionEntries[revisionIndex++].dateTime = revisedDateTime;
         }
     }
@@ -116,7 +116,7 @@ void RevisionEditor::editCommitMessages() {
     AlbaFileReader newMessageReader(newMessagesStream);
     int revisionIndex = 0;
     while (newMessageReader.isNotFinished() && revisionIndex < static_cast<int>(m_revisionEntries.size())) {
-        string line(newMessageReader.getLineAndIgnoreWhiteSpaces());
+        string const line(newMessageReader.getLineAndIgnoreWhiteSpaces());
         m_revisionEntries[revisionIndex++].message = line;
     }
 }
@@ -146,13 +146,13 @@ RevisionEditor::DaysInterval RevisionEditor::createDaysInterval(
 
 RevisionEditor::RevisionEntry RevisionEditor::getRevisionEntry(string const& line) {
     int index = 0;
-    string revisionHash = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
+    string const revisionHash = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
     index = line.find(END_ENTRY_PATTERN, index) + 3;
-    string date = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
+    string const date = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
     index = line.find(END_ENTRY_PATTERN, index) + 3;
-    string author = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
+    string const author = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
     index = line.find(END_ENTRY_PATTERN, index) + 3;
-    string message = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
+    string const message = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
     // ALBA_PRINT4(revisionHash, date, author, message);
     return {revisionHash, getDateTime(date), author, message};
 }
@@ -190,7 +190,7 @@ void RevisionEditor::setDataFromGitHistory() {
     int totalNumberOfInstances = 0;
     bool isFirst = true;
     while (revisionHistoryReader.isNotFinished()) {
-        string line(revisionHistoryReader.getLineAndIgnoreWhiteSpaces());
+        string const line(revisionHistoryReader.getLineAndIgnoreWhiteSpaces());
         if (!line.empty()) {
             m_revisionEntries.emplace_back(getRevisionEntry(line));
             RevisionEntry const& currentRevision(m_revisionEntries.back());
