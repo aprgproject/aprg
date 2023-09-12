@@ -19,7 +19,7 @@ int numberOfFilesAnalyzedForExtraction;
 SnapshotStatistics::SnapshotStatistics() : m_fileExtractor("[.]") { initializeFileGroups(); }
 
 string SnapshotStatistics::getSnapshotDirectory(string const& snapshotPath) {
-    AlbaLocalPathHandler snapshotPathHandler(snapshotPath);
+    AlbaLocalPathHandler const snapshotPathHandler(snapshotPath);
     return snapshotPathHandler.getDirectory() + R"(\)" + snapshotPathHandler.getFilenameOnly();
 }
 
@@ -44,7 +44,7 @@ string SnapshotStatistics::getWildcardNameIfFileGroupsIsFound(string const& file
 
 void SnapshotStatistics::addFileSizeForSnapshot(
     string const& fileName, string const& snapshotName, double const fileSize) {
-    string fileNameWithoutWhiteSpace(stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(fileName));
+    string const fileNameWithoutWhiteSpace(stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(fileName));
     m_fileNameToSnapshotNameToFileSize[fileNameWithoutWhiteSpace][snapshotName] = fileSize;
     m_snapshotNames.emplace(snapshotName);
 }
@@ -59,7 +59,7 @@ void SnapshotStatistics::extractFilesInSnapshot(string const& snapshotPath) {
 
 void SnapshotStatistics::fetchFileSizesForSnapshot(string const& snapshotPath) {
     // cout<<"fetchStatistics snapshotPath: "<<snapshotPath<<"\n";
-    AlbaLocalPathHandler snapshotDirectoryPathHandler(getSnapshotDirectory(snapshotPath));
+    AlbaLocalPathHandler const snapshotDirectoryPathHandler(getSnapshotDirectory(snapshotPath));
     ListOfPaths listOfFiles;
     ListOfPaths listOfDirectories;
     snapshotDirectoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
@@ -139,7 +139,7 @@ void SnapshotStatistics::processMemory(string const& memoryFilePath, string cons
     ifstream memoryFileStream(memoryFilePath);
     AlbaFileReader memoryFileReader(memoryFileStream);
     while (memoryFileReader.isNotFinished()) {
-        string lineInFile(memoryFileReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInFile(memoryFileReader.getLineAndIgnoreWhiteSpaces());
         string relativeFilePath;
         string fileSizeInString;
         double fileSizeInBytes = 0;
@@ -162,7 +162,7 @@ void SnapshotStatistics::processMemory(string const& memoryFilePath, string cons
 
 void SnapshotStatistics::addStatisticForMemory(
     string const& fileName, string const& snapshotName, double const fileSize) {
-    string fileNameWithoutWhiteSpace(stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(fileName));
+    string const fileNameWithoutWhiteSpace(stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(fileName));
     m_fileNameToSnapshotNameToMemorySize[fileNameWithoutWhiteSpace][snapshotName] = fileSize;
     m_snapshotNames.emplace(snapshotName);
 }

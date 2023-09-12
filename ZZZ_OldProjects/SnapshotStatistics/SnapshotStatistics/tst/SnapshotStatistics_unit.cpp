@@ -40,13 +40,13 @@ TEST(SnapshotStatisticsTest, DISABLED_SnapshotFilesRel2) {
     statistics.fetchFileSizesForSnapshot(
         R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_3_RESULTS\RADIO MODULE HOT REMOVE_INSERT\Snapshot_rf hotremove_insert_WBTS-399_WBTS00_0000_3215_00.zip)");
 
-    AlbaLocalPathHandler localPathHandler(
+    AlbaLocalPathHandler const localPathHandler(
         R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_1_RESULTS)");
     ListOfPaths listOfFiles;
     ListOfPaths listOfDirectories;
     localPathHandler.findFilesAndDirectoriesOneDepth("*.*", listOfFiles, listOfDirectories);
     for (string const& filePath : listOfFiles) {
-        AlbaLocalPathHandler localPathHandler(filePath);
+        AlbaLocalPathHandler const localPathHandler(filePath);
         if (localPathHandler.getExtension() == "zip") {
             statistics.fetchFileSizesForSnapshot(localPathHandler.getFullPath());
         }
