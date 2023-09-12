@@ -28,7 +28,7 @@ AlbaNumber getConstantFactor(Term const& term) {
     } else if (term.isMonomial()) {
         result = term.getAsMonomial().getCoefficient();
     } else if (term.isPolynomial()) {
-        Polynomials factors(factorizeCommonMonomial(term.getAsPolynomial()));
+        Polynomials const factors(factorizeCommonMonomial(term.getAsPolynomial()));
         for (Polynomial const& factor : factors) {
             if (isOneMonomial(factor)) {
                 result *= getFirstMonomial(factor).getCoefficient();
@@ -85,7 +85,7 @@ AlbaNumberPairs evaluateAndGetInputOutputPair(
     SubstitutionOfVariablesToValues substitution;
     for (AlbaNumber const& number : numbers) {
         substitution.putVariableWithValue(variableName, number);
-        Term substituteTerm(substitution.performSubstitutionTo(term));
+        Term const substituteTerm(substitution.performSubstitutionTo(term));
         if (substituteTerm.isConstant()) {
             result.emplace_back(number, substituteTerm.getAsNumber());
         }
@@ -142,9 +142,9 @@ Term flipTermIfHasNegativeAssociation(TermWithDetails const& termWithDetails) {
 
 Term invertTerm(Term const& term, string const& variableName) {
     string newVariableName(createVariableNameForSubstitution(term));
-    Equation equationToIsolate(newVariableName, "=", term);
-    IsolationOfOneVariableOnEqualityEquation isolation(equationToIsolate);
-    SubstitutionOfVariablesToTerms substitution{{newVariableName, variableName}};
+    Equation const equationToIsolate(newVariableName, "=", term);
+    IsolationOfOneVariableOnEqualityEquation const isolation(equationToIsolate);
+    SubstitutionOfVariablesToTerms const substitution{{newVariableName, variableName}};
     return substitution.performSubstitutionTo(isolation.getEquivalentTermByIsolatingAVariable(variableName));
 }
 
@@ -166,17 +166,17 @@ bool isNegatedTermSimpler(Term const& term, Term const& negatedTerm) {
 }
 
 bool isNonEmptyOrNonOperatorType(Term const& term) {
-    TermType termType(term.getTermType());
+    TermType const termType(term.getTermType());
     return TermType::Empty != termType && TermType::Operator != termType;
 }
 
 bool isNonEmptyOrNonOperatorOrNonExpressionType(Term const& term) {
-    TermType termType(term.getTermType());
+    TermType const termType(term.getTermType());
     return TermType::Empty != termType && TermType::Operator != termType && TermType::Expression != termType;
 }
 
 bool isARadicalTerm(Term const& term) {
-    TermRaiseToANumber termRaiseToANumber(createTermRaiseToANumberFromTerm(term));
+    TermRaiseToANumber const termRaiseToANumber(createTermRaiseToANumberFromTerm(term));
     return termRaiseToANumber.isRadical();
 }
 

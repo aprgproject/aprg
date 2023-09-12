@@ -25,7 +25,7 @@ LimitsAtInfinity::LimitsAtInfinity(Term const& term, string const& variableName)
 Term LimitsAtInfinity::getSimplifiedTermAtInfinity() const { return m_simplifiedTermAtInfinity; }
 
 Term LimitsAtInfinity::getValueAtInfinity(AlbaNumber const infinityValue) const {
-    SubstitutionOfVariablesToValues substitution{{m_variableName, infinityValue}};
+    SubstitutionOfVariablesToValues const substitution{{m_variableName, infinityValue}};
     return substitution.performSubstitutionTo(m_simplifiedTermAtInfinity);
 }
 
@@ -57,13 +57,13 @@ void LimitsAtInfinity::simplifyAsATerm() {
 }
 
 void LimitsAtInfinity::simplifyAsTermsOverTermsIfPossible() {
-    TermsOverTerms currentTermsOverTerms(createTermsOverTermsFromTerm(m_simplifiedTermAtInfinity));
+    TermsOverTerms const currentTermsOverTerms(createTermsOverTermsFromTerm(m_simplifiedTermAtInfinity));
     Term numerator(currentTermsOverTerms.getCombinedNumerator());
     Term denominator(currentTermsOverTerms.getCombinedDenominator());
-    AlbaNumber numeratorDegree(getMaxDegree(numerator));
-    AlbaNumber denominatorDegree(getMaxDegree(denominator));
+    AlbaNumber const numeratorDegree(getMaxDegree(numerator));
+    AlbaNumber const denominatorDegree(getMaxDegree(denominator));
     AlbaNumber degreeToRemove(getDegreeToRemove(numeratorDegree, denominatorDegree));
-    Term termToDivide(Monomial(1, {{m_variableName, degreeToRemove}}));
+    Term const termToDivide(Monomial(1, {{m_variableName, degreeToRemove}}));
     numerator = numerator / termToDivide;
     numerator.simplify();
     denominator = denominator / termToDivide;
@@ -79,7 +79,7 @@ void LimitsAtInfinity::simplifyPolynomialToMaxDegreeMonomialOnly() {
     if (m_simplifiedTermAtInfinity.isPolynomial()) {
         Polynomial newPolynomial(m_simplifiedTermAtInfinity.getAsPolynomial());
         AlbaNumber maxDegree(getMaxDegree(m_simplifiedTermAtInfinity));
-        Monomial monomialWithMaxDegree(1, {{m_variableName, maxDegree}});
+        Monomial const monomialWithMaxDegree(1, {{m_variableName, maxDegree}});
         newPolynomial.divideMonomial(monomialWithMaxDegree);
         m_removeMonomialsWithNegativeExponentMutator.mutatePolynomial(newPolynomial);
         newPolynomial.multiplyMonomial(monomialWithMaxDegree);

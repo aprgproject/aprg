@@ -13,8 +13,8 @@ void retrieveInitialValuesForIteratingMethods(AlbaNumbersSet& allValues, Term co
     retriever.retrieveFromTerm(term);
     AlbaNumbersSet const& numbers(retriever.getNumbers());
     for (AlbaNumber const& number : numbers) {
-        AlbaNumber positiveNumber(getAbsoluteValue(number));
-        AlbaNumber positiveLogarithm(log(positiveNumber.getDouble()));
+        AlbaNumber const positiveNumber(getAbsoluteValue(number));
+        AlbaNumber const positiveLogarithm(log(positiveNumber.getDouble()));
         allValues.emplace(positiveNumber * -1);
         allValues.emplace(positiveLogarithm * -1);
         allValues.emplace(positiveLogarithm);

@@ -48,7 +48,7 @@ Term SubstitutionOfTermsToTerms::getTermForTerm(Term const& term) const {
 
 Term SubstitutionOfTermsToTerms::performSubstitutionTo(Expression const& expression) const {
     Term result;
-    Term expressionTerm(expression);
+    Term const expressionTerm(expression);
     if (isTermFound(expressionTerm)) {
         result = getTermForTerm(expressionTerm);
     } else {
@@ -59,7 +59,7 @@ Term SubstitutionOfTermsToTerms::performSubstitutionTo(Expression const& express
 
 Term SubstitutionOfTermsToTerms::performSubstitutionTo(Function const& functionObject) const {
     Term result;
-    Term functionTerm(functionObject);
+    Term const functionTerm(functionObject);
     if (isTermFound(functionTerm)) {
         result = getTermForTerm(functionTerm);
     } else {

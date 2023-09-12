@@ -13,7 +13,7 @@ Term TaylorSeries::getFormulaForTaylorSeries() const { return m_formulaForTaylor
 Term TaylorSeries::getValueAtIndex(int const index, Term const& startingValue) const {
     Term result;
     if (index >= 0) {
-        int positiveIndex(static_cast<int>(index));
+        int const positiveIndex(static_cast<int>(index));
         result = getApproximationUsingTaylorsFormula(
             m_formulaForTaylorSeries, m_variableName, startingValue, m_variableName, positiveIndex);
     }

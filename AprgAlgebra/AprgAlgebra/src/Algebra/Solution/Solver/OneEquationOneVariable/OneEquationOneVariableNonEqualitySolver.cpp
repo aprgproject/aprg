@@ -24,7 +24,7 @@ void OneEquationOneVariableNonEqualitySolver::calculateSolution(SolutionSet& sol
 
 void OneEquationOneVariableNonEqualitySolver::calculateForEquation(SolutionSet& solutionSet, Equation const& equation) {
     Term const& nonZeroLeftHandTerm(equation.getLeftHandTerm());
-    string singleVariableName = getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(equation);
+    string const singleVariableName = getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(equation);
     if (!singleVariableName.empty()) {
         calculateForTermAndCheckAbsoluteValueFunctions(nonZeroLeftHandTerm, singleVariableName);
         sortAndRemoveDuplicateCalculatedValues();
@@ -36,8 +36,8 @@ void OneEquationOneVariableNonEqualitySolver::calculateForTermAndVariable(Term c
     PolynomialOverPolynomialOptional popOptional(createPolynomialOverPolynomialFromTermIfPossible(term));
     if (popOptional) {
         PolynomialOverPolynomial const& pop(popOptional.value());
-        AlbaNumbers numeratorRoots(getRoots(RootType::RealAndImaginaryRoots, pop.getNumerator()));
-        AlbaNumbers denominatorRoots(getRoots(RootType::RealAndImaginaryRoots, pop.getDenominator()));
+        AlbaNumbers const numeratorRoots(getRoots(RootType::RealAndImaginaryRoots, pop.getNumerator()));
+        AlbaNumbers const denominatorRoots(getRoots(RootType::RealAndImaginaryRoots, pop.getDenominator()));
         m_calculatedValues.reserve(numeratorRoots.size() + denominatorRoots.size());
         copy(numeratorRoots.cbegin(), numeratorRoots.cend(), back_inserter(m_calculatedValues));
         copy(denominatorRoots.cbegin(), denominatorRoots.cend(), back_inserter(m_calculatedValues));
@@ -51,7 +51,7 @@ void OneEquationOneVariableNonEqualitySolver::addIntervalsToSolutionSetIfNeeded(
         SubstitutionOfVariablesToValues substitution;
         solutionSet.determineAndAddAcceptedIntervals(m_calculatedValues, [&](AlbaNumber const& value) {
             substitution.putVariableWithValue(variableName, value);
-            Equation substitutedEquation(substitution.performSubstitutionTo(equation));
+            Equation const substitutedEquation(substitution.performSubstitutionTo(equation));
             return isARealFiniteConstant(substitutedEquation.getLeftHandTerm()) &&
                    isARealFiniteConstant(substitutedEquation.getRightHandTerm()) &&
                    substitutedEquation.isEquationSatisfied();

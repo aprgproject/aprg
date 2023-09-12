@@ -12,7 +12,7 @@ namespace alba::algebra {
 
 void addValueTermIfNotEmpty(Terms& terms, string const& valueString) {
     if (!valueString.empty()) {
-        terms.emplace_back(Term(valueString));
+        terms.emplace_back(valueString);
     }
 }
 
@@ -32,7 +32,7 @@ Terms tokenizeToTerms(string const& inputString) {
     string valueString;
     for (char const c : inputString) {
         if (!isWhiteSpace(c)) {
-            string characterString(1, c);
+            string const characterString(1, c);
             if (isOperator(characterString)) {
                 addValueTermIfNotEmpty(tokenizedTerms, valueString);
                 valueString.clear();

@@ -22,7 +22,7 @@ PowerSeries::PowerSeries(
       m_xName(xName) {}
 
 AlbaNumber PowerSeries::getRadiusOfConvergence() const {
-    AlbaNumberIntervals intervals(getIntervalsOfConvergence());
+    AlbaNumberIntervals const intervals(getIntervalsOfConvergence());
     AlbaNumber result = accumulate(
         intervals.cbegin(), intervals.cend(), AlbaNumber(),
         [](AlbaNumber const& partialSum, AlbaNumberInterval const& nextInterval) {
@@ -35,16 +35,17 @@ AlbaNumber PowerSeries::getRadiusOfConvergence() const {
 }
 
 AlbaNumberIntervals PowerSeries::getIntervalsOfConvergence() const {
-    Term limitForRatioTest(
+    Term const limitForRatioTest(
         getLimitForRatioTest(static_cast<SeriesBasedOnSummation const&>(*this), getNameForVariableInFormula()));
-    Term limitWithAbsoluteValue(abs(limitForRatioTest));
+    Term const limitWithAbsoluteValue(abs(limitForRatioTest));
     OneEquationOneVariableNonEqualitySolver solver;
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(limitWithAbsoluteValue, "<", 1)));
+    SolutionSet const solutionSet(
+        solver.calculateSolutionAndReturnSolutionSet(Equation(limitWithAbsoluteValue, "<", 1)));
     return solutionSet.getAcceptedIntervals();
 }
 
 void PowerSeries::differentiate() {
-    Differentiation differentiation(m_xName);
+    Differentiation const differentiation(m_xName);
     m_formulaForEachTermInSummation = differentiation.differentiate(m_formulaForEachTermInSummation);
     m_isSummationModelValid = false;
 }
@@ -57,7 +58,7 @@ void PowerSeries::integrate() {
 
 Term PowerSeries::getFormula(
     Term const& multiplierForEachTerm, string const& nName, string const& xName, AlbaNumber const& aValue) {
-    Term subTerm(createExpressionIfPossible({xName, "-", aValue}));
+    Term const subTerm(createExpressionIfPossible({xName, "-", aValue}));
     return createExpressionIfPossible({multiplierForEachTerm, "*", subTerm, "^", nName});
 }
 

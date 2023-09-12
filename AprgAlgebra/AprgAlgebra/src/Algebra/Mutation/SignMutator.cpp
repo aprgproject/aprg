@@ -78,7 +78,7 @@ void SignMutator::mutateExpressionWithMultiplicationAndDivision(Expression& expr
 
 void SignMutator::mutateExpressionWithRaiseToPower(Expression& expression) {
     bool isExpressionSignKnown(false);
-    TermRaiseToTerms termRaiseToTerms(expression.getTermsWithAssociation().getTermsWithDetails());
+    TermRaiseToTerms const termRaiseToTerms(expression.getTermsWithAssociation().getTermsWithDetails());
     Term mutatedBase(termRaiseToTerms.getBase());
     mutateTerm(mutatedBase);
     if (isTheValue(mutatedBase, 1)) {

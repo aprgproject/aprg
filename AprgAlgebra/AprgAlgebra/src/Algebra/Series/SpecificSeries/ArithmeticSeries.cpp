@@ -18,8 +18,8 @@ Term ArithmeticSeries::getFormula(AlbaNumber const& firstValue, AlbaNumber const
 
 Term ArithmeticSeries::getFormula(
     AlbaNumber const& valueAtIndex1, int const index1, AlbaNumber const& valueAtIndex2, int const index2) {
-    AlbaNumber commonDifference = (valueAtIndex1 - valueAtIndex2) / (index1 - index2);
-    AlbaNumber firstValue = valueAtIndex1 - commonDifference * index1;
+    AlbaNumber const commonDifference = (valueAtIndex1 - valueAtIndex2) / (index1 - index2);
+    AlbaNumber const firstValue = valueAtIndex1 - commonDifference * index1;
     return getFormula(firstValue, commonDifference);
 }
 

@@ -38,10 +38,10 @@ Term AxisRotation::rotateFunctionByAngle(Function const& functionObject) {
 
 void AxisRotation::initializeSubstitution(
     string const& xName, string const& yName, double const angle, bool const doRotationBack) {
-    Term oldX(xName);
-    Term oldY(yName);
-    Term sinTheta(sin(angle));
-    Term cosTheta(cos(angle));
+    Term const oldX(xName);
+    Term const oldY(yName);
+    Term const sinTheta(sin(angle));
+    Term const cosTheta(cos(angle));
     Term newX;
     Term newY;
     if (doRotationBack) {

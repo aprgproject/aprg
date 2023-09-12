@@ -21,7 +21,7 @@ bool TermsWithAssociation::operator==(TermsWithAssociation const& second) const 
     bool result(false);
     if (terms1.size() == terms2.size()) {
         result = true;
-        int commonSize = terms1.size();
+        int const commonSize = terms1.size();
         for (int i = 0; i < commonSize; ++i) {
             if (terms1[i] != terms2[i]) {
                 result = false;
@@ -39,7 +39,7 @@ bool TermsWithAssociation::operator<(TermsWithAssociation const& second) const {
     TermsWithDetails const& terms2(second.m_termsWithDetails);
     bool result(false);
     if (terms1.size() == terms2.size()) {
-        int size = terms1.size();
+        int const size = terms1.size();
         for (int i = 0; i < size; ++i) {
             TermWithDetails const& termWithDetails1(terms1[i]);
             TermWithDetails const& termWithDetails2(terms2[i]);

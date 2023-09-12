@@ -36,12 +36,12 @@ void BaseOneEquationOneVariableSolver::sortAndRemoveDuplicateCalculatedValues() 
 
 void BaseOneEquationOneVariableSolver::calculateAndSubstituteAbsoluteValueFunctions(
     FunctionsSet const& absFunctions, Term const& term, string const& variableName) {
-    int finalValue = AlbaBitValueUtilities<int>::generateOnesWithNumberOfBits(absFunctions.size());
+    int const finalValue = AlbaBitValueUtilities<int>::generateOnesWithNumberOfBits(absFunctions.size());
     for (int permutationValue = 0; permutationValue <= finalValue; ++permutationValue) {
         SubstitutionOfTermsToTerms substitution;
         auto itFunctionSet = absFunctions.cbegin();
         for (int i = 0; i < static_cast<int>(absFunctions.size()); ++i) {
-            bool isBitAsserted(((permutationValue >> i) & 1) != 0);
+            bool const isBitAsserted(((permutationValue >> i) & 1) != 0);
             Term termToReplace;
             Term const& absFunctionTerm(*itFunctionSet);
             Term const& absFunctionInputTerm(getTermConstReferenceFromBaseTerm(itFunctionSet->getInputTerm()));
@@ -53,7 +53,7 @@ void BaseOneEquationOneVariableSolver::calculateAndSubstituteAbsoluteValueFuncti
             substitution.putTermToTermMapping(absFunctionTerm, termToReplace);
             ++itFunctionSet;
         }
-        Term termAfterSubstitution(substitution.performSubstitutionTo(term));
+        Term const termAfterSubstitution(substitution.performSubstitutionTo(term));
         calculateForTermAndVariable(termAfterSubstitution, variableName);
     }
 }

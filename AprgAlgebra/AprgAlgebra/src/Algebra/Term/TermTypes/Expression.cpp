@@ -180,11 +180,11 @@ void Expression::putTermWithRaiseToPowerIfNeeded(BaseTerm const& baseTerm) {
 
 void Expression::putPolynomialFirstWithMultiplication(Polynomial const& polynomial) {
     if (OperatorLevel::AdditionAndSubtraction == m_commonOperatorLevel) {
-        TermsWithDetails termsWithDetails(m_termsWithAssociation.getTermsWithDetails());
+        TermsWithDetails const termsWithDetails(m_termsWithAssociation.getTermsWithDetails());
         clear();
         distributeAndMultiply(polynomial, termsWithDetails);
     } else {
-        Expression expressionCopy(*this);
+        Expression const expressionCopy(*this);
         clear();
         distributeAndMultiply(polynomial, expressionCopy);
     }
@@ -193,11 +193,11 @@ void Expression::putPolynomialFirstWithMultiplication(Polynomial const& polynomi
 
 void Expression::putPolynomialSecondWithMultiplication(Polynomial const& polynomial) {
     if (OperatorLevel::AdditionAndSubtraction == m_commonOperatorLevel) {
-        TermsWithDetails termsWithDetails(m_termsWithAssociation.getTermsWithDetails());
+        TermsWithDetails const termsWithDetails(m_termsWithAssociation.getTermsWithDetails());
         clear();
         distributeAndMultiply(termsWithDetails, polynomial);
     } else {
-        Expression expressionCopy(*this);
+        Expression const expressionCopy(*this);
         clear();
         distributeAndMultiply(expressionCopy, polynomial);
     }
@@ -210,16 +210,16 @@ void Expression::putExpressionWithMultiplication(Expression const& secondExpress
     } else if (
         OperatorLevel::AdditionAndSubtraction == m_commonOperatorLevel &&
         OperatorLevel::AdditionAndSubtraction == secondExpression.getCommonOperatorLevel()) {
-        TermsWithDetails termsWithDetails1(m_termsWithAssociation.getTermsWithDetails());
-        TermsWithDetails termsWithDetails2(secondExpression.getTermsWithAssociation().getTermsWithDetails());
+        TermsWithDetails const termsWithDetails1(m_termsWithAssociation.getTermsWithDetails());
+        TermsWithDetails const termsWithDetails2(secondExpression.getTermsWithAssociation().getTermsWithDetails());
         clear();
         distributeAndMultiply(termsWithDetails1, termsWithDetails2);
     } else if (OperatorLevel::AdditionAndSubtraction == m_commonOperatorLevel) {
-        TermsWithDetails termsWithDetails(m_termsWithAssociation.getTermsWithDetails());
+        TermsWithDetails const termsWithDetails(m_termsWithAssociation.getTermsWithDetails());
         clear();
         distributeAndMultiply(termsWithDetails, Term(secondExpression));
     } else if (OperatorLevel::AdditionAndSubtraction == secondExpression.getCommonOperatorLevel()) {
-        Term thisExpressionTerm(*this);
+        Term const thisExpressionTerm(*this);
         clear();
         distributeAndMultiply(thisExpressionTerm, secondExpression.getTermsWithAssociation().getTermsWithDetails());
     } else {
@@ -367,7 +367,7 @@ void Expression::putTermWithMultiplication(BaseTerm const& baseTerm) {
             break;
         }
         case OperatorLevel::AdditionAndSubtraction: {
-            TermsWithDetails termsWithDetails(m_termsWithAssociation.getTermsWithDetails());
+            TermsWithDetails const termsWithDetails(m_termsWithAssociation.getTermsWithDetails());
             clear();
             distributeAndMultiply(termsWithDetails, getTermConstReferenceFromBaseTerm(baseTerm));
             break;
@@ -533,7 +533,7 @@ void Expression::distributeAndMultiply(Expression const& multiplicand, BaseTerm 
 
 ostream& operator<<(ostream& out, Expression const& expression) {
     TermsWithDetails const& termsWithDetails(expression.m_termsWithAssociation.getTermsWithDetails());
-    OperatorLevel operatorLevel(expression.m_commonOperatorLevel);
+    OperatorLevel const operatorLevel(expression.m_commonOperatorLevel);
     out << "(";
     if (!termsWithDetails.empty()) {
         TermWithDetails const& firstTermWithDetails(termsWithDetails.front());

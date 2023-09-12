@@ -21,7 +21,7 @@ AlbaNumber IsolationOfOneVariableOnEqualityEquation::getIdenticalExponentForVari
     string const& variableName) const {
     AlbaNumber exponent(0);
     if (canBeConvertedToPolynomial(m_simplifiedLeftSideTerm)) {
-        Polynomial polynomial(createPolynomialIfPossible(m_simplifiedLeftSideTerm));
+        Polynomial const polynomial(createPolynomialIfPossible(m_simplifiedLeftSideTerm));
         exponent = getIdenticalExponentForVariableIfPossible(variableName, polynomial);
     }
     return exponent;
@@ -53,7 +53,7 @@ Term IsolationOfOneVariableOnEqualityEquation::getEquivalentTermByIsolatingAVari
 bool IsolationOfOneVariableOnEqualityEquation::canBeIsolated(string const& variableName) const {
     bool result(false);
     if (canBeConvertedToPolynomial(m_simplifiedLeftSideTerm)) {
-        Polynomial polynomial(createPolynomialIfPossible(m_simplifiedLeftSideTerm));
+        Polynomial const polynomial(createPolynomialIfPossible(m_simplifiedLeftSideTerm));
         result = canBeIsolatedBasedOnExponent(getIdenticalExponentForVariableIfPossible(variableName, polynomial));
     }
     return result;
@@ -62,7 +62,7 @@ bool IsolationOfOneVariableOnEqualityEquation::canBeIsolated(string const& varia
 void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
     string const& variableName, Term& termWithVariable, Term& termWithWithoutVariable) const {
     if (canBeConvertedToPolynomial(m_simplifiedLeftSideTerm)) {
-        Polynomial polynomial(createPolynomialIfPossible(m_simplifiedLeftSideTerm));
+        Polynomial const polynomial(createPolynomialIfPossible(m_simplifiedLeftSideTerm));
         isolateTermWithVariable(variableName, polynomial, termWithVariable, termWithWithoutVariable);
     } else if (m_simplifiedLeftSideTerm.isExpression()) {
         Expression const& expression(m_simplifiedLeftSideTerm.getAsExpression());
@@ -89,7 +89,7 @@ void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
         Polynomial numerator(monomialsWithoutVariable);
         Polynomial denominator(monomialsWithVariable);
         numerator.multiplyNumber(-1);
-        Monomial monomialWithIsolatedVariable(1, {{variableName, identicalExponentForVariable}});
+        Monomial const monomialWithIsolatedVariable(1, {{variableName, identicalExponentForVariable}});
         denominator.divideMonomial(monomialWithIsolatedVariable);
         termWithVariable = monomialWithIsolatedVariable;
         termWithWithoutVariable = Term(numerator) / Term(denominator);
@@ -111,17 +111,17 @@ void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
 
         Term termFromExpressionWithVariable(
             createTermWithAdditionAndSubtractionTermsWithDetails(termsWithDetailsWithVariable));
-        Term termFromExpressionWithoutVariable(
+        Term const termFromExpressionWithoutVariable(
             createTermWithAdditionAndSubtractionTermsWithDetails(termsWithDetailsWithoutVariable));
 
         termFromExpressionWithVariable.simplify();
         if (canBeConvertedToPolynomial(termFromExpressionWithVariable)) {
-            Polynomial polynomialWithVariable(createPolynomialIfPossible(termFromExpressionWithVariable));
+            Polynomial const polynomialWithVariable(createPolynomialIfPossible(termFromExpressionWithVariable));
             AlbaNumber identicalExponentForVariable(
                 getIdenticalExponentForVariableIfPossible(variableName, polynomialWithVariable));
-            Term termWithIsolatedVariable(Monomial(1, {{variableName, identicalExponentForVariable}}));
-            Term numerator(negateTerm(termFromExpressionWithoutVariable));
-            Term denominator(termFromExpressionWithVariable / termWithIsolatedVariable);
+            Term const termWithIsolatedVariable(Monomial(1, {{variableName, identicalExponentForVariable}}));
+            Term const numerator(negateTerm(termFromExpressionWithoutVariable));
+            Term const denominator(termFromExpressionWithVariable / termWithIsolatedVariable);
             termWithVariable = termWithIsolatedVariable;
             termWithWithoutVariable = numerator / denominator;
             termWithVariable.simplify();
@@ -139,7 +139,7 @@ void IsolationOfOneVariableOnEqualityEquation::simplifyForIsolation(Term& term) 
         configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
         configurationDetails.shouldSimplifyToACommonDenominator = true;
 
-        SimplificationOfExpression::ScopeObject scopeObject;
+        SimplificationOfExpression::ScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
         term.simplify();
@@ -155,7 +155,7 @@ void IsolationOfOneVariableOnEqualityEquation::simplifyForIsolation(Expression& 
         configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
         configurationDetails.shouldSimplifyToACommonDenominator = true;
 
-        SimplificationOfExpression::ScopeObject scopeObject;
+        SimplificationOfExpression::ScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
         expression.simplify();
@@ -166,7 +166,7 @@ AlbaNumber IsolationOfOneVariableOnEqualityEquation::getIdenticalExponentForVari
     string const& variableName, Polynomial const& polynomial) {
     AlbaNumber exponent;
     for (Monomial const& monomial : polynomial.getMonomials()) {
-        AlbaNumber currentExponent = monomial.getExponentForVariable(variableName);
+        AlbaNumber const currentExponent = monomial.getExponentForVariable(variableName);
         if (currentExponent != 0) {
             if (exponent == 0) {
                 exponent = currentExponent;

@@ -33,8 +33,8 @@ bool Monomial::operator<(Monomial const& second) const {
         result = m_constant < second.m_constant;
     } else {
         // highest degree is the lower priority for sorting
-        AlbaNumber degree1(getDegree(*this));
-        AlbaNumber degree2(getDegree(second));
+        AlbaNumber const degree1(getDegree(*this));
+        AlbaNumber const degree2(getDegree(second));
         if (degree1 == degree2) {
             result = isLessThanByComparingVariableNameMaps(*this, second);
         } else {
@@ -122,7 +122,7 @@ void Monomial::raiseToPowerNumber(AlbaNumber const& number) {
 }
 
 void Monomial::multiplyMonomial(Monomial const& monomial) {
-    VariablesToExponentsMap newVariablesMap(
+    VariablesToExponentsMap const newVariablesMap(
         combineVariableExponentMapByMultiplication(m_variablesToExponentsMap, monomial.m_variablesToExponentsMap));
     m_constant = m_constant * monomial.m_constant;
     m_variablesToExponentsMap = newVariablesMap;
@@ -130,7 +130,7 @@ void Monomial::multiplyMonomial(Monomial const& monomial) {
 }
 
 void Monomial::divideMonomial(Monomial const& monomial) {
-    VariablesToExponentsMap newVariablesMap(
+    VariablesToExponentsMap const newVariablesMap(
         combineVariableExponentMapByDivision(m_variablesToExponentsMap, monomial.m_variablesToExponentsMap));
     m_constant = m_constant / monomial.m_constant;
     m_variablesToExponentsMap = newVariablesMap;
@@ -169,8 +169,8 @@ bool Monomial::isLessThanByComparingVariableNameMaps(Monomial const& monomial1, 
     }
     bool result(false);
     for (string const& variableName : variableNames) {
-        AlbaNumber exponent1(monomial1.getExponentForVariable(variableName));
-        AlbaNumber exponent2(monomial2.getExponentForVariable(variableName));
+        AlbaNumber const exponent1(monomial1.getExponentForVariable(variableName));
+        AlbaNumber const exponent2(monomial2.getExponentForVariable(variableName));
         if (exponent1 != exponent2) {
             result = exponent1 < exponent2;
             break;
@@ -187,7 +187,7 @@ void Monomial::setNanIfNeeded() {
 }
 
 void Monomial::removeZeroExponents() {
-    VariablesToExponentsMap oldVariableMap(m_variablesToExponentsMap);
+    VariablesToExponentsMap const oldVariableMap(m_variablesToExponentsMap);
     m_variablesToExponentsMap.clear();
     for (auto const& [variableName, exponent] : oldVariableMap) {
         if (exponent != 0) {

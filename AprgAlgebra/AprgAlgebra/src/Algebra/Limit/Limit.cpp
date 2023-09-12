@@ -31,13 +31,13 @@ constexpr double POSITIVE_DELTA_FOR_INITIAL_VALUE = 1E-3;
 
 void calculateTermAndLimitUsingLhopitalsRule(
     Term& newTerm, Term& limitValue, Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
-    Differentiation differentiation(variableName);
+    Differentiation const differentiation(variableName);
     newTerm = term;
     simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(newTerm);
-    TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(newTerm));
+    TermsOverTerms const termsOverTerms(createTermsOverTermsFromTerm(newTerm));
     Term numerator(termsOverTerms.getCombinedNumerator());
     Term denominator(termsOverTerms.getCombinedDenominator());
-    SubstitutionOfVariablesToValues substitution{{variableName, valueToApproach}};
+    SubstitutionOfVariablesToValues const substitution{{variableName, valueToApproach}};
     Term numeratorValue(substitution.performSubstitutionTo(numerator));
     Term denominatorValue(substitution.performSubstitutionTo(denominator));
     while (continueToDifferentiateForLhopitalsRule(numerator, denominator, numeratorValue, denominatorValue)) {
@@ -45,13 +45,13 @@ void calculateTermAndLimitUsingLhopitalsRule(
         denominator = differentiation.differentiate(denominator);
         newTerm = (numerator / denominator);
         simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(newTerm);
-        TermsOverTerms newTermsOverTerms(createTermsOverTermsFromTerm(newTerm));
+        TermsOverTerms const newTermsOverTerms(createTermsOverTermsFromTerm(newTerm));
         numerator = newTermsOverTerms.getCombinedNumerator();
         denominator = newTermsOverTerms.getCombinedDenominator();
         numeratorValue = substitution.performSubstitutionTo(numerator);
         denominatorValue = substitution.performSubstitutionTo(denominator);
     }
-    Term outputValue(substitution.performSubstitutionTo(newTerm));
+    Term const outputValue(substitution.performSubstitutionTo(newTerm));
     if (isNan(outputValue) ||
         (isPositiveOrNegativeInfinity(numeratorValue) && isPositiveOrNegativeInfinity(denominatorValue))) {
         limitValue = getLimitAtAValueOrInfinity(newTerm, variableName, valueToApproach);
@@ -77,8 +77,8 @@ AlbaNumber getLimitAtAValueByApproachType(
 AlbaNumber getLimitAtAValueInBothSides(
     Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
     AlbaNumber result(ALBA_NUMBER_NOT_A_NUMBER);
-    AlbaNumber limitPositiveSide(getLimitAtAValueInThePositiveSide(term, variableName, valueToApproach));
-    AlbaNumber limitNegativeSide(getLimitAtAValueInTheNegativeSide(term, variableName, valueToApproach));
+    AlbaNumber const limitPositiveSide(getLimitAtAValueInThePositiveSide(term, variableName, valueToApproach));
+    AlbaNumber const limitNegativeSide(getLimitAtAValueInTheNegativeSide(term, variableName, valueToApproach));
     if (isAlmostEqualForLimitChecking(limitPositiveSide, limitNegativeSide)) {
         // limit only exists if both sides are equal  (Calculus Theorem)
         result = getAverage(limitPositiveSide, limitNegativeSide);
@@ -103,7 +103,7 @@ AlbaNumber getLimitAtAValueInTheNegativeSide(
 AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
     Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
     AlbaNumber const& initialValueForIteration, int const maxNumberOfIterations) {
-    AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
+    AlbaNumber::ScopeConfigurationObject const scopeConfigurationObject;
     AlbaNumber::ScopeConfigurationObject::setInThisScopeTheTolerancesToZero();
 
     SubstitutionOfVariablesToValues substitution;
@@ -115,16 +115,16 @@ AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
         // As current currentInput approaches valueToApproach the calculation becomes inaccurate so limit value is not
         // accurate.
         substitution.putVariableWithValue(variableName, currentInput);
-        Term currentOutputTerm = substitution.performSubstitutionTo(term);
+        Term const currentOutputTerm = substitution.performSubstitutionTo(term);
         if (currentOutputTerm.isConstant()) {
-            AlbaNumber currentOutputNumber(currentOutputTerm.getAsNumber());
+            AlbaNumber const currentOutputNumber(currentOutputTerm.getAsNumber());
             if (!currentOutputNumber.isARealFiniteValue()) {
                 previousRejectedInput = currentInput;
             } else {
                 previousOfPreviousAcceptedInput = previousAcceptedInput;
                 previousAcceptedInput = currentInput;
             }
-            AlbaNumber newInput(getAverage(previousAcceptedInput, previousRejectedInput));
+            AlbaNumber const newInput(getAverage(previousAcceptedInput, previousRejectedInput));
             // to investigate, print currentInput, currentOutputNumber and newInput to check how it approaches the limit
             // value this are checks to prevent inaccurate values when the values get to close
             if (isAlmostEqualForLimitIteration(newInput, valueToApproach) ||
@@ -143,23 +143,23 @@ AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
 AlbaNumber getLimitAtAValueUsingTrendOfValues(
     Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
     AlbaNumber const& previousAcceptedInput, AlbaNumber const& previousOfPreviousAcceptedInput) {
-    AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
+    AlbaNumber::ScopeConfigurationObject const scopeConfigurationObject;
     AlbaNumber::ScopeConfigurationObject::setInThisScopeTheTolerancesToZero();
 
     AlbaNumber result(ALBA_NUMBER_NOT_A_NUMBER);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue(variableName, valueToApproach);
-    Term outputTermAtValueToApproach(substitution.performSubstitutionTo(term));
+    Term const outputTermAtValueToApproach(substitution.performSubstitutionTo(term));
     substitution.putVariableWithValue(variableName, previousAcceptedInput);
-    Term previousAcceptedOutputTerm(substitution.performSubstitutionTo(term));
+    Term const previousAcceptedOutputTerm(substitution.performSubstitutionTo(term));
     substitution.putVariableWithValue(variableName, previousOfPreviousAcceptedInput);
-    Term previousOfPreviousAcceptedOutputTerm(substitution.performSubstitutionTo(term));
+    Term const previousOfPreviousAcceptedOutputTerm(substitution.performSubstitutionTo(term));
 
     if (outputTermAtValueToApproach.isConstant() && previousAcceptedOutputTerm.isConstant() &&
         previousOfPreviousAcceptedOutputTerm.isConstant()) {
-        AlbaNumber outputAtValueToApproach(outputTermAtValueToApproach.getAsNumber());
-        AlbaNumber previousAcceptedOutput(previousAcceptedOutputTerm.getAsNumber());
-        AlbaNumber previousOfPreviousAcceptedOutput(previousOfPreviousAcceptedOutputTerm.getAsNumber());
+        AlbaNumber const outputAtValueToApproach(outputTermAtValueToApproach.getAsNumber());
+        AlbaNumber const previousAcceptedOutput(previousAcceptedOutputTerm.getAsNumber());
+        AlbaNumber const previousOfPreviousAcceptedOutput(previousOfPreviousAcceptedOutputTerm.getAsNumber());
         if (outputAtValueToApproach.isPositiveOrNegativeInfinity()) {
             result = (previousAcceptedOutput < 0) ? ALBA_NUMBER_NEGATIVE_INFINITY : ALBA_NUMBER_POSITIVE_INFINITY;
         } else {
@@ -174,9 +174,9 @@ AlbaNumber getLimitAtAValueUsingTrendOfValues(
 AlbaNumber getValueUsingLinearInterpolation(
     AlbaNumber const& input1, AlbaNumber const& input2, AlbaNumber const& inputValue, AlbaNumber const& output1,
     AlbaNumber const& output2) {
-    AlbaNumber deltaInput = input2 - input1;
-    AlbaNumber deltaOutput = output2 - output1;
-    AlbaNumber deltaInputToUse = inputValue - input2;
+    AlbaNumber const deltaInput = input2 - input1;
+    AlbaNumber const deltaOutput = output2 - output1;
+    AlbaNumber const deltaInputToUse = inputValue - input2;
     AlbaNumber result;
     if (deltaInput == 0) {
         result = ALBA_NUMBER_NOT_A_NUMBER;
@@ -195,7 +195,7 @@ Term getLimitWithMultipleVariablesWithDifferentApproaches(
     SubstitutionsOfVariablesToTerms const& substitutionsForApproaches) {
     Terms limitValues;
     for (auto const& substitution : substitutionsForApproaches) {
-        Term limitTermUsingApproach(substitution.performSubstitutionTo(term));
+        Term const limitTermUsingApproach(substitution.performSubstitutionTo(term));
         limitValues.emplace_back(getLimit(limitTermUsingApproach, variableName, valueToApproach));
     }
     Term result;
@@ -244,7 +244,7 @@ Term simplifyAndGetLimitAtAValue(
 }
 
 Term getLimitAtInfinity(Term const& term, string const& variableName, AlbaNumber const infinityValue) {
-    LimitsAtInfinity limitsAtInfinity(term, variableName);
+    LimitsAtInfinity const limitsAtInfinity(term, variableName);
     return limitsAtInfinity.getValueAtInfinity(infinityValue);
 }
 
@@ -259,7 +259,7 @@ Term getObliqueAsymptote(Term const& term) {
     PolynomialOverPolynomialOptional popOptional(createPolynomialOverPolynomialFromTermIfPossible(term));
     if (popOptional) {
         if (getMaxDegree(popOptional->getDenominator()) > 0) {
-            PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(popOptional->simplifyAndDivide());
+            PolynomialOverPolynomial::QuotientAndRemainder const quotientAndRemainder(popOptional->simplifyAndDivide());
             Polynomial const& quotient(quotientAndRemainder.quotient);
             if (hasOnlyASingleVariable(quotient) && AlbaNumber(1) == getMaxDegree(quotient)) {
                 result = Term(quotient);
@@ -284,8 +284,8 @@ bool hasVerticalAsymptoteAtValue(Term const& term, string const& variableName, A
 
 bool hasHorizontalAsymptoteAtValue(Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
     bool result(false);
-    Term limitAtPositiveInfinity(getLimitAtInfinity(term, variableName, ALBA_NUMBER_POSITIVE_INFINITY));
-    Term limitAtNegativeInfinity(getLimitAtInfinity(term, variableName, ALBA_NUMBER_NEGATIVE_INFINITY));
+    Term const limitAtPositiveInfinity(getLimitAtInfinity(term, variableName, ALBA_NUMBER_POSITIVE_INFINITY));
+    Term const limitAtNegativeInfinity(getLimitAtInfinity(term, variableName, ALBA_NUMBER_NEGATIVE_INFINITY));
     if (limitAtPositiveInfinity.isConstant() && limitAtNegativeInfinity.isConstant()) {
         result = limitAtPositiveInfinity.getAsNumber() == valueToApproach ||
                  limitAtNegativeInfinity.getAsNumber() == valueToApproach;
@@ -301,11 +301,11 @@ bool isSqueezeTheoremSatisfied(
     // f(x) as it approaches A and limit for h(x) as it approaches A, both exists and are both equal to L
     // Then, the limit of g(x) exists and equal to L as well.
     bool result(false);
-    Term limitAtLower(simplifyAndGetLimitAtAValue(
+    Term const limitAtLower(simplifyAndGetLimitAtAValue(
         alwaysLowerTermAtInterval, variableName, valueToApproach, LimitAtAValueApproachType::BothSides));
-    Term limitAtTermInBetween(simplifyAndGetLimitAtAValue(
+    Term const limitAtTermInBetween(simplifyAndGetLimitAtAValue(
         termInBetweenAtInterval, variableName, valueToApproach, LimitAtAValueApproachType::BothSides));
-    Term limitAtHigher(simplifyAndGetLimitAtAValue(
+    Term const limitAtHigher(simplifyAndGetLimitAtAValue(
         alwaysHigherTermAtInterval, variableName, valueToApproach, LimitAtAValueApproachType::BothSides));
 
     if (limitAtLower == limitAtHigher) {
@@ -317,32 +317,32 @@ bool isSqueezeTheoremSatisfied(
 
 bool continueToDifferentiateForLhopitalsRule(
     Term const& numerator, Term const& denominator, Term const& numeratorValue, Term const& denominatorValue) {
-    AlbaNumber numeratorDegree(getDegree(numerator));
-    AlbaNumber denominatorDegree(getDegree(denominator));
+    AlbaNumber const numeratorDegree(getDegree(numerator));
+    AlbaNumber const denominatorDegree(getDegree(denominator));
 
-    bool areBothDegreesZero = numeratorDegree == 0 && denominatorDegree == 0;
-    bool areDegreesEitherZeroOrNonZero =
+    bool const areBothDegreesZero = numeratorDegree == 0 && denominatorDegree == 0;
+    bool const areDegreesEitherZeroOrNonZero =
         (numeratorDegree == 0 && denominatorDegree != 0) || (numeratorDegree != 0 && denominatorDegree == 0);
-    bool areDegreesEitherNonZeroOrInfinite =
+    bool const areDegreesEitherNonZeroOrInfinite =
         (numeratorDegree != 0 && denominatorDegree.isPositiveOrNegativeInfinity()) ||
         (numeratorDegree.isPositiveOrNegativeInfinity() && denominatorDegree != 0);
-    bool continueBasedOnDegrees =
+    bool const continueBasedOnDegrees =
         areBothDegreesZero || areDegreesEitherZeroOrNonZero || areDegreesEitherNonZeroOrInfinite;
 
-    bool areBothValuesZero = isTheValue(numeratorValue, 0) && isTheValue(denominatorValue, 0);
-    bool areBothValuesInfinite =
+    bool const areBothValuesZero = isTheValue(numeratorValue, 0) && isTheValue(denominatorValue, 0);
+    bool const areBothValuesInfinite =
         isPositiveOrNegativeInfinity(numeratorValue) && isPositiveOrNegativeInfinity(denominatorValue);
-    bool continueBasedOnValues = areBothValuesZero || areBothValuesInfinite;
+    bool const continueBasedOnValues = areBothValuesZero || areBothValuesInfinite;
     return continueBasedOnDegrees && continueBasedOnValues;
 }
 
 Term getLimitAtAValue(
     Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
     LimitAtAValueApproachType const limitApproachType) {
-    SubstitutionOfVariablesToValues substitution{{variableName, valueToApproach}};
+    SubstitutionOfVariablesToValues const substitution{{variableName, valueToApproach}};
     Term limitResult(substitution.performSubstitutionTo(term));
     if (limitResult.isConstant()) {
-        AlbaNumber limitResultNumber(limitResult.getAsNumber());
+        AlbaNumber const limitResultNumber(limitResult.getAsNumber());
         if (!limitResultNumber.isARealFiniteValue() || hasAnyFunctions(term)) {
             limitResult = Term(getLimitAtAValueByApproachType(term, variableName, valueToApproach, limitApproachType));
         }

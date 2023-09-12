@@ -1004,13 +1004,13 @@ Term operator^(Monomial const& monomial, Term const& term) { return performRaise
 
 Term operator^(Polynomial const& polynomial, Constant const& constant) {
     Term newTerm;
-    AlbaNumber exponentNumber(constant.getNumber());
+    AlbaNumber const exponentNumber(constant.getNumber());
     if (exponentNumber.isIntegerType()) {
-        int exponentInteger(static_cast<int>(exponentNumber.getInteger()));
+        int const exponentInteger(static_cast<int>(exponentNumber.getInteger()));
         if (exponentInteger == 0) {
             newTerm = 1;
         } else {
-            int exponentAbsoluteValue(static_cast<int>(getAbsoluteValue(exponentInteger)));
+            int const exponentAbsoluteValue(static_cast<int>(getAbsoluteValue(exponentInteger)));
             Polynomial newPolynomial(polynomial);
             newPolynomial.raiseToUnsignedInteger(exponentAbsoluteValue);
             if (exponentInteger > 0) {

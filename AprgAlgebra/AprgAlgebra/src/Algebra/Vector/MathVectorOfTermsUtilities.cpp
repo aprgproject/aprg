@@ -36,7 +36,7 @@ void retrieveWithAndWithoutOtherCoordinates(
 
 Equation getTangentPlaneOnAPointOfASurface(
     Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point) {
-    MathVectorOfThreeTerms normalOfASurface(getNormalOfASurfaceOnAPoint(surface, coordinateVariables, point));
+    MathVectorOfThreeTerms const normalOfASurface(getNormalOfASurfaceOnAPoint(surface, coordinateVariables, point));
     SubstitutionOfVariablesToTerms substitution;
     substitution.putVariableWithTerm(a, normalOfASurface.getValueAt(0));
     substitution.putVariableWithTerm(b, normalOfASurface.getValueAt(1));
@@ -45,13 +45,13 @@ Equation getTangentPlaneOnAPointOfASurface(
     substitution.putVariableWithTerm(y0, point.getValueAt(1));
     substitution.putVariableWithTerm(z0, point.getValueAt(2));
 
-    Equation generalPlane(ThreeDimensions::getPlaneEquationWithPointCoordinates());
+    Equation const generalPlane(ThreeDimensions::getPlaneEquationWithPointCoordinates());
     return substitution.performSubstitutionTo(generalPlane);
 }
 
 Equations getPerpendicularLineOnAPointOfASurface(
     Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point) {
-    MathVectorOfThreeTerms normalOfASurface(getNormalOfASurfaceOnAPoint(surface, coordinateVariables, point));
+    MathVectorOfThreeTerms const normalOfASurface(getNormalOfASurfaceOnAPoint(surface, coordinateVariables, point));
     SubstitutionOfVariablesToTerms substitution;
     substitution.putVariableWithTerm(a, normalOfASurface.getValueAt(0));
     substitution.putVariableWithTerm(b, normalOfASurface.getValueAt(1));
@@ -72,7 +72,7 @@ MathVectorOfThreeTerms getNormalOfASurfaceOnAPoint(
     using Values = typename MathVectorOfThreeTerms::ValuesInArray;
     Equation simplifiedSurface(surface);
     simplifiedSurface.simplify();
-    MathVectorOfThreeTerms gradient(getGradient<3>(simplifiedSurface.getLeftHandTerm(), coordinateVariables));
+    MathVectorOfThreeTerms const gradient(getGradient<3>(simplifiedSurface.getLeftHandTerm(), coordinateVariables));
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue(coordinateVariables[0], point.getValueAt(0));
     substitution.putVariableWithValue(coordinateVariables[1], point.getValueAt(1));
@@ -91,23 +91,23 @@ MathVectorOfThreeTerms getCurl(
     Term const& aValue(termVector.getValueAt(0));
     Term const& bValue(termVector.getValueAt(1));
     Term const& cValue(termVector.getValueAt(2));
-    Term xValue(
+    Term const xValue(
         getPartialDerivative(cValue, coordinateVariables[1]) - getPartialDerivative(bValue, coordinateVariables[2]));
-    Term yValue(
+    Term const yValue(
         getPartialDerivative(aValue, coordinateVariables[2]) - getPartialDerivative(cValue, coordinateVariables[0]));
-    Term zValue(
+    Term const zValue(
         getPartialDerivative(bValue, coordinateVariables[0]) - getPartialDerivative(aValue, coordinateVariables[1]));
     return MathVectorOfThreeTerms{xValue, yValue, zValue};
 }
 
 SegregateTermsByConditionInAdditionAndSubtractionRetriever getRetrieverForComparison(
     Term const& termToAnalyze, string const& coordinateVariableName, strings const& processedCoordinates) {
-    SegregateTermsByConditionInAdditionAndSubtractionRetriever::ConditionFunction condition =
+    SegregateTermsByConditionInAdditionAndSubtractionRetriever::ConditionFunction const condition =
         [&](Term const& term) -> bool {
         VariableNamesRetriever retriever;
         retriever.retrieveFromTerm(term);
         VariableNamesSet const& names(retriever.getVariableNames());
-        bool isCurrentCoordinateFound = names.find(coordinateVariableName) != names.cend();
+        bool const isCurrentCoordinateFound = names.find(coordinateVariableName) != names.cend();
         bool isOneOfTheOtherPreviousCoordinatesFound(false);
         for (string const& processedCoordinate : processedCoordinates) {
             if (processedCoordinate != coordinateVariableName && names.find(processedCoordinate) != names.cend()) {
@@ -123,7 +123,7 @@ SegregateTermsByConditionInAdditionAndSubtractionRetriever getRetrieverForCompar
 }
 
 Term getDyOverDx(MathVectorOfTwoTerms const& termVector, string const& variableName) {
-    MathVectorOfTwoTerms derivative(differentiate(termVector, variableName));
+    MathVectorOfTwoTerms const derivative(differentiate(termVector, variableName));
     Term result(derivative.getValueAt(1) / derivative.getValueAt(0));
     result.simplify();
     return result;
@@ -131,8 +131,9 @@ Term getDyOverDx(MathVectorOfTwoTerms const& termVector, string const& variableN
 
 Term getDirectionalDerivativeInTwoDimensions(
     Term const& term, ArrayOfTwoStrings const& coordinateVariables, AlbaAngle const& angleOfDirection) {
-    MathVectorOfTwoTerms gradient(getGradient<2>(term, coordinateVariables));
-    MathVectorOfTwoTerms unitDirection({::cos(angleOfDirection.getRadians()), ::sin(angleOfDirection.getRadians())});
+    MathVectorOfTwoTerms const gradient(getGradient<2>(term, coordinateVariables));
+    MathVectorOfTwoTerms const unitDirection(
+        {::cos(angleOfDirection.getRadians()), ::sin(angleOfDirection.getRadians())});
     Term result(getDotProduct(gradient, unitDirection));
     simplifyForTermInVector(result);
     return result;
@@ -140,8 +141,8 @@ Term getDirectionalDerivativeInTwoDimensions(
 
 Term getDirectionalDerivativeInThreeDimensions(
     Term const& term, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeAngles const& coordinateAngles) {
-    MathVectorOfThreeTerms gradient(getGradient<3>(term, coordinateVariables));
-    MathVectorOfThreeTerms unitDirection(
+    MathVectorOfThreeTerms const gradient(getGradient<3>(term, coordinateVariables));
+    MathVectorOfThreeTerms const unitDirection(
         {::cos(coordinateAngles.getValueAt(0).getRadians()), ::cos(coordinateAngles.getValueAt(1).getRadians()),
          ::cos(coordinateAngles.getValueAt(2).getRadians())});
     Term result(getDotProduct(gradient, unitDirection));
@@ -155,9 +156,9 @@ Term getLineIntegralOfAClosedNonIntersectingPathUsingGreensTheorem(
     DetailsForDefiniteIntegralWithTerms const& yDetailsForLinePath) {
     // Green's Theorem is only usable on a line path that is closed and simple (non intersecting)
     // Green's Theorem relates line integral to area
-    Term partialDerivativeOfYOnX(getPartialDerivative(vectorField.getValueAt(1), coordinateVariables[0]));
-    Term partialDerivativeOfXOnY(getPartialDerivative(vectorField.getValueAt(0), coordinateVariables[1]));
-    Term termToIntegrateForArea(partialDerivativeOfYOnX - partialDerivativeOfXOnY);
+    Term const partialDerivativeOfYOnX(getPartialDerivative(vectorField.getValueAt(1), coordinateVariables[0]));
+    Term const partialDerivativeOfXOnY(getPartialDerivative(vectorField.getValueAt(0), coordinateVariables[1]));
+    Term const termToIntegrateForArea(partialDerivativeOfYOnX - partialDerivativeOfXOnY);
     return getDoubleIntegralInCartesianCoordinates(termToIntegrateForArea, xDetailsForLinePath, yDetailsForLinePath);
 }
 
@@ -166,7 +167,7 @@ Term getAreaOfAClosedNonIntersectingPathUsingGreensTheorem(
     DetailsForDefiniteIntegralWithTerms const& linePathIntegralDetails) {
     // Green's Theorem is only usable on a line path that is closed and simple (non intersecting)
     // Green's Theorem relates area to line integral
-    MathVectorOfTwoTerms vectorField{coordinateVariables[1] * -1, coordinateVariables[0]};
+    MathVectorOfTwoTerms const vectorField{coordinateVariables[1] * -1, coordinateVariables[0]};
     return getLineIntegral<2>(vectorField, coordinateVariables, linePath, linePathIntegralDetails) / 2;
 }
 
@@ -192,14 +193,14 @@ bool isGaussDivergenceTheoremInAPlaneTrue(
     for (int i = 0; i < 2; ++i) {
         linePathInVectorField.getValueReferenceAt(i) = substitution.performSubstitutionTo(vectorField.getValueAt(i));
     }
-    Term termIntegrate(getDotProduct(linePathInVectorField, unitOutwardNormal));
+    Term const termIntegrate(getDotProduct(linePathInVectorField, unitOutwardNormal));
     Integration integration(lineIntegralDetails.variableName);
-    Term lineIntegralResult(integration.integrateAtDefiniteTerms(
+    Term const lineIntegralResult(integration.integrateAtDefiniteTerms(
         termIntegrate, lineIntegralDetails.lowerEnd, lineIntegralDetails.higherEnd));
 
     // Area result
-    Term divergence(getDivergence<2>(vectorField, coordinateVariables));
-    Term areaResult(getDoubleIntegralInCartesianCoordinates(divergence, areaDetailsInX, areaDetailsInY));
+    Term const divergence(getDivergence<2>(vectorField, coordinateVariables));
+    Term const areaResult(getDoubleIntegralInCartesianCoordinates(divergence, areaDetailsInX, areaDetailsInY));
     return lineIntegralResult == areaResult;
 }
 
@@ -220,16 +221,17 @@ bool isStokesTheoremInAPlaneTrue(
     for (int i = 0; i < 2; ++i) {
         linePathInVectorField.getValueReferenceAt(i) = substitution.performSubstitutionTo(vectorField.getValueAt(i));
     }
-    Term termIntegrate(getDotProduct(linePathInVectorField, unitTangentVector));
+    Term const termIntegrate(getDotProduct(linePathInVectorField, unitTangentVector));
     Integration integration(lineIntegralDetails.variableName);
-    Term lineIntegralResult(integration.integrateAtDefiniteTerms(
+    Term const lineIntegralResult(integration.integrateAtDefiniteTerms(
         termIntegrate, lineIntegralDetails.lowerEnd, lineIntegralDetails.higherEnd));
 
     // Area result
-    Term partialDerivativeOfYOnX(getPartialDerivative(vectorField.getValueAt(1), coordinateVariables[0]));
-    Term partialDerivativeOfXOnY(getPartialDerivative(vectorField.getValueAt(0), coordinateVariables[1]));
-    Term termToIntegrateForArea(partialDerivativeOfYOnX - partialDerivativeOfXOnY);
-    Term areaResult(getDoubleIntegralInCartesianCoordinates(termToIntegrateForArea, areaDetailsInX, areaDetailsInY));
+    Term const partialDerivativeOfYOnX(getPartialDerivative(vectorField.getValueAt(1), coordinateVariables[0]));
+    Term const partialDerivativeOfXOnY(getPartialDerivative(vectorField.getValueAt(0), coordinateVariables[1]));
+    Term const termToIntegrateForArea(partialDerivativeOfYOnX - partialDerivativeOfXOnY);
+    Term const areaResult(
+        getDoubleIntegralInCartesianCoordinates(termToIntegrateForArea, areaDetailsInX, areaDetailsInY));
     return lineIntegralResult == areaResult;
 }
 

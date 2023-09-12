@@ -35,7 +35,7 @@ int MultipleVariableSolutionSet::getNumberOfVariablesWithSolutions() const {
 
 bool MultipleVariableSolutionSet::isValueAcceptedForVariable(
     string const& variableName, AlbaNumber const& value) const {
-    SolutionSet solutionSet(getSolutionSetForVariable(variableName));
+    SolutionSet const solutionSet(getSolutionSetForVariable(variableName));
     AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
     return find(acceptedValues.cbegin(), acceptedValues.cend(), value) != acceptedValues.cend();
 }

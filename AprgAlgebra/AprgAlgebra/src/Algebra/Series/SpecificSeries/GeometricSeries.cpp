@@ -22,9 +22,9 @@ Term GeometricSeries::getFormula(AlbaNumber const& firstValue, AlbaNumber const&
 
 Term GeometricSeries::getFormula(
     AlbaNumber const& valueAtNthIndex1, int const nthIndex1, AlbaNumber const& valueAtNthIndex2, int const nthIndex2) {
-    AlbaNumber commonMultiplier =
+    AlbaNumber const commonMultiplier =
         (valueAtNthIndex2 / valueAtNthIndex1) ^ (AlbaNumber(1) / AlbaNumber(nthIndex2 - nthIndex1));
-    AlbaNumber firstValue = valueAtNthIndex1 / (commonMultiplier ^ nthIndex1);
+    AlbaNumber const firstValue = valueAtNthIndex1 / (commonMultiplier ^ nthIndex1);
     return getFormula(firstValue, commonMultiplier);
 }
 

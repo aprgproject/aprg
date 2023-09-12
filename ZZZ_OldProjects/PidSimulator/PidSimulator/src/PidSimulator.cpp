@@ -23,8 +23,8 @@ PidSimulator::PidSimulator(stringHelper::strings const& argumentsInMain)
 
 double PidSimulator::computeFromMachsModel1(
     double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) {
-    double newDemand = inputDemandSample + adjustedDemand;
-    double machsOutput = min(psuedoMaxTxPower, newDemand);
+    double const newDemand = inputDemandSample + adjustedDemand;
+    double const machsOutput = min(psuedoMaxTxPower, newDemand);
     adjustedDemand = max(newDemand - psuedoMaxTxPower, static_cast<double>(0));
     return machsOutput;
 }
@@ -41,7 +41,7 @@ double PidSimulator::calculatePid(double const input, double const target) const
     static double derivative = 0;
     static double lastError = 0;
 
-    double error = target - input;
+    double const error = target - input;
     double pwm = 0;
 
     integral += error;
@@ -81,8 +81,8 @@ void PidSimulator::generateInput() {
 void PidSimulator::generateTriangleWavesForInput() {
     for (unsigned int j = 0; j < m_conf.numberOfLoopsOfPeriodicInputDemand; ++j) {
         // go up
-        unsigned int partOfSamples = m_conf.numberOfSamplesOfInputDemandInOnePeriod / 2;
-        double slope = static_cast<double>(m_conf.amplitudeOfInputDemand) / partOfSamples;
+        unsigned int const partOfSamples = m_conf.numberOfSamplesOfInputDemandInOnePeriod / 2;
+        double const slope = static_cast<double>(m_conf.amplitudeOfInputDemand) / partOfSamples;
         for (unsigned int i = 0; i < partOfSamples; ++i) {
             m_inputSample.emplace_back((slope * i) + m_conf.addedOffsetOfInputDemand);
         }
@@ -106,7 +106,7 @@ void PidSimulator::generateSineWavesForInput() {
 void PidSimulator::generateStepUpForInput() {
     for (unsigned int j = 0; j < m_conf.numberOfLoopsOfPeriodicInputDemand; ++j) {
         // minimum
-        unsigned int partOfSamples = m_conf.numberOfSamplesOfInputDemandInOnePeriod / 2;
+        unsigned int const partOfSamples = m_conf.numberOfSamplesOfInputDemandInOnePeriod / 2;
         for (unsigned int i = 0; i < partOfSamples; ++i) {
             m_inputSample.emplace_back(m_conf.addedOffsetOfInputDemand);
         }
@@ -121,7 +121,7 @@ void PidSimulator::generateStepUpForInput() {
 void PidSimulator::generateStepDownForInput() {
     for (unsigned int j = 0; j < m_conf.numberOfLoopsOfPeriodicInputDemand; ++j) {
         // maximum
-        unsigned int partOfSamples = m_conf.numberOfSamplesOfInputDemandInOnePeriod / 2;
+        unsigned int const partOfSamples = m_conf.numberOfSamplesOfInputDemandInOnePeriod / 2;
         for (unsigned int i = 0; i < partOfSamples; ++i) {
             m_inputSample.emplace_back(m_conf.amplitudeOfInputDemand + m_conf.addedOffsetOfInputDemand);
         }
@@ -155,8 +155,8 @@ void PidSimulator::calculateAndGenerateOutputImage() {
     Points tcomReceivedPowerFromMachsSeries;
     Points adjustedDemandSeries;
     for (double const inputDemandSample : m_inputSample) {
-        double pidOutput(calculatePid(tcomReceivedPowerFromMachs, m_conf.targetInPidCalculation));
-        double psuedoMaxTxPower = min(pidOutput, m_conf.maxCellTxPower);
+        double const pidOutput(calculatePid(tcomReceivedPowerFromMachs, m_conf.targetInPidCalculation));
+        double const psuedoMaxTxPower = min(pidOutput, m_conf.maxCellTxPower);
         targetSeries.emplace_back(static_cast<double>(index), m_conf.targetInPidCalculation);
         inputDemandSeries.emplace_back(static_cast<double>(index), inputDemandSample);
         pseudoMaxTxPowerSeries.emplace_back(static_cast<double>(index), psuedoMaxTxPower);
@@ -183,7 +183,7 @@ void PidSimulator::calculateAndGenerateOutputImage() {
     updateAllMaxWithBuffer(xLeftMax, xRightMax, yBottomMax, yTopMax);
     cout << "max list:[" << xLeftMax << ", " << xRightMax << ", " << yBottomMax << ", " << yTopMax << "]\n";
 
-    AlbaLocalPathHandler detectedPath(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
+    AlbaLocalPathHandler const detectedPath(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
     AlbaLocalPathHandler defaultFile(detectedPath.getDirectory() + R"(Default24Bit.bmp)");
     cout << "defaultFile:[" << defaultFile.getFullPath() << "]\n";
     if (defaultFile.isFoundInLocalSystem()) {
@@ -192,8 +192,8 @@ void PidSimulator::calculateAndGenerateOutputImage() {
         graphOutputFile.deleteFile();
         defaultFile.copyToNewFile(graphOutputFile.getFullPath());
 
-        Bitmap bitmap(graphOutputFile.getFullPath());
-        BitmapConfiguration configuration(bitmap.getConfiguration());
+        Bitmap const bitmap(graphOutputFile.getFullPath());
+        BitmapConfiguration const configuration(bitmap.getConfiguration());
         calculateMagnificationAndOffset(
             xLeftMax, xRightMax, yBottomMax, yTopMax, configuration.getBitmapWidth(), configuration.getBitmapHeight());
         cout << "offset:[" << m_xOffsetToGraph << ", " << m_yOffsetToGraph << "] magnification:["
@@ -222,7 +222,7 @@ void PidSimulator::updateAllMaxWithBuffer(int& xLeftMax, int& xRightMax, int& yB
 
 void PidSimulator::updateMaxWithBuffer(int& lowerValue, int& higherValue) {
     const double hardBuffer = 5;
-    int difference = higherValue - lowerValue;
+    int const difference = higherValue - lowerValue;
     double increase = static_cast<double>(difference) * 0.1;
     if (increase < hardBuffer) {
         increase = hardBuffer;
@@ -271,14 +271,14 @@ void PidSimulator::calculateMagnificationAndOffset(
     double const xLeftMax, double const xRightMax, double const yBottomMax, double const yTopMax,
     double const bitmapSizeInX, double const bitmapSizeInY) {
     m_xMagnificationToGraph = bitmapSizeInX / (xRightMax - xLeftMax);
-    int xOffsetGraph = static_cast<int>(round(-1 * m_xMagnificationToGraph * xLeftMax));
+    int const xOffsetGraph = static_cast<int>(round(-1 * m_xMagnificationToGraph * xLeftMax));
     if (xOffsetGraph < 0) {
         m_xOffsetToGraph = 0;
     } else {
         m_xOffsetToGraph = static_cast<unsigned int>(xOffsetGraph);
     }
     m_yMagnificationToGraph = bitmapSizeInY / (yTopMax - yBottomMax);
-    int yOffsetGraph = static_cast<int>(round(1 * m_yMagnificationToGraph * yTopMax));
+    int const yOffsetGraph = static_cast<int>(round(1 * m_yMagnificationToGraph * yTopMax));
     if (yOffsetGraph < 0) {
         m_yOffsetToGraph = 0;
     } else {

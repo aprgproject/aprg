@@ -26,7 +26,7 @@ bool Polynomial::operator==(Polynomial const& second) const {
     if (monomials1.size() == monomials2.size()) {
         using MonomialsIterator = Monomials::const_iterator;
         using MismatchResultType = pair<MonomialsIterator, MonomialsIterator>;
-        MismatchResultType mismatchResult = mismatch(monomials1.cbegin(), monomials1.end(), monomials2.cbegin());
+        MismatchResultType const mismatchResult = mismatch(monomials1.cbegin(), monomials1.end(), monomials2.cbegin());
         result = mismatchResult.first == monomials1.cend();
     }
     return result;
@@ -39,7 +39,7 @@ bool Polynomial::operator<(Polynomial const& second) const {
     Monomials const& monomials2(second.m_monomials);
     bool result(false);
     if (monomials1.size() == monomials2.size()) {
-        int size = monomials1.size();
+        int const size = monomials1.size();
         for (int i = 0; i < size; ++i) {
             Monomial const& monomial1(monomials1[i]);
             Monomial const& monomial2(monomials2[i]);
@@ -124,7 +124,7 @@ void Polynomial::multiplyMonomial(Monomial const& monomial) {
 }
 
 void Polynomial::multiplyPolynomial(Polynomial const& polynomial) {
-    Monomials monomialsCopy(m_monomials);
+    Monomials const monomialsCopy(m_monomials);
     m_monomials.clear();
     for (Monomial const& monomial2 : polynomial.getMonomials()) {
         for (Monomial const& monomial1 : monomialsCopy) {
@@ -144,7 +144,7 @@ void Polynomial::divideMonomial(Monomial const& monomial) {
 }
 
 void Polynomial::raiseToUnsignedInteger(int const exponent) {
-    Polynomial base(*this);
+    Polynomial const base(*this);
     for (int exponentCount = 1; exponentCount < exponent; ++exponentCount) {
         multiplyPolynomial(base);
     }

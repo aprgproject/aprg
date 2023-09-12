@@ -20,7 +20,7 @@ constexpr double DIFFERENCE_TOLERANCE_FOR_ACCEPTED_VALUE = 1E-11;
 AlbaNumber OneEquationOneVariableEqualitySolver::getMoreAccurateValueFromNewtonMethod(
     Term const& termToCheck, string const& variableNameForSubstitution, AlbaNumber const& value) {
     AlbaNumber result(value);
-    NewtonMethod::Function functionToIterate(getFunctionToIterate(termToCheck, variableNameForSubstitution));
+    NewtonMethod::Function const functionToIterate(getFunctionToIterate(termToCheck, variableNameForSubstitution));
     NewtonMethod newtonMethod(value, functionToIterate);
     newtonMethod.runMaxNumberOfIterationsOrUntilFinished(NUMBER_OF_ITERATIONS_IN_NEWTON_METHOD);
     if (newtonMethod.isSolved()) {
@@ -34,7 +34,7 @@ NewtonMethod::Function OneEquationOneVariableEqualitySolver::getFunctionToIterat
     NewtonMethod::Function result = [&](AlbaNumber const& value) {
         SubstitutionOfVariablesToValues substitution;
         substitution.putVariableWithValue(variableNameForSubstitution, value);
-        Term substitutedTerm(substitution.performSubstitutionTo(termToCheck));
+        Term const substitutedTerm(substitution.performSubstitutionTo(termToCheck));
         AlbaNumber computedValue;
         if (substitutedTerm.isConstant()) {
             computedValue = substitutedTerm.getAsNumber();
@@ -58,7 +58,7 @@ void OneEquationOneVariableEqualitySolver::calculateSolution(SolutionSet& soluti
 
 void OneEquationOneVariableEqualitySolver::calculateForEquation(SolutionSet& solutionSet, Equation const& equation) {
     Term const& nonZeroLeftHandTerm(equation.getLeftHandTerm());
-    string singleVariableName = getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(nonZeroLeftHandTerm);
+    string const singleVariableName = getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(nonZeroLeftHandTerm);
     if (!singleVariableName.empty()) {
         calculateForTermAndCheckAbsoluteValueFunctions(nonZeroLeftHandTerm, singleVariableName);
         sortAndRemoveDuplicateCalculatedValues();
@@ -70,14 +70,14 @@ void OneEquationOneVariableEqualitySolver::calculateForTermAndVariable(Term cons
     PolynomialOverPolynomialOptional popOptional(createPolynomialOverPolynomialFromTermIfPossible(term));
     if (popOptional) {
         PolynomialOverPolynomial const& pop(popOptional.value());
-        AlbaNumbers numeratorRoots(getRoots(RootType::RealAndImaginaryRoots, pop.getNumerator()));
-        AlbaNumbers denominatorRoots(getRoots(RootType::RealAndImaginaryRoots, pop.getDenominator()));
+        AlbaNumbers const numeratorRoots(getRoots(RootType::RealAndImaginaryRoots, pop.getNumerator()));
+        AlbaNumbers const denominatorRoots(getRoots(RootType::RealAndImaginaryRoots, pop.getDenominator()));
         m_calculatedValues.reserve(numeratorRoots.size() + denominatorRoots.size());
         copy(numeratorRoots.cbegin(), numeratorRoots.cend(), back_inserter(m_calculatedValues));
         copy(denominatorRoots.cbegin(), denominatorRoots.cend(), back_inserter(m_calculatedValues));
         setAsCompleteSolution();
     } else {
-        TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(term));
+        TermsOverTerms const termsOverTerms(createTermsOverTermsFromTerm(term));
         if (!termsOverTerms.getDenominators().empty()) {
             performNewtonMethodToFindSolution(termsOverTerms.getCombinedNumerator(), variableName);
             performNewtonMethodToFindSolution(termsOverTerms.getCombinedDenominator(), variableName);
@@ -93,7 +93,7 @@ void OneEquationOneVariableEqualitySolver::addValuesToSolutionSetIfNeeded(
         SubstitutionOfVariablesToValues substitution;
         for (AlbaNumber const& value : m_calculatedValues) {
             substitution.putVariableWithValue(variableName, value);
-            Term substitutedResult(substitution.performSubstitutionTo(term));
+            Term const substitutedResult(substitution.performSubstitutionTo(term));
             if (substitutedResult.isConstant()) {
                 AlbaNumber const& computedValue(substitutedResult.getAsNumber());
                 if (!computedValue.isAFiniteValue()) {
@@ -108,8 +108,8 @@ void OneEquationOneVariableEqualitySolver::addValuesToSolutionSetIfNeeded(
 
 void OneEquationOneVariableEqualitySolver::performNewtonMethodToFindSolution(
     Term const& termToCheck, string const& variableNameForSubstitution) {
-    NewtonMethod::Function functionToIterate(getFunctionToIterate(termToCheck, variableNameForSubstitution));
-    AlbaNumbers initialValues(getInitialValuesForIteratingMethods(termToCheck));
+    NewtonMethod::Function const functionToIterate(getFunctionToIterate(termToCheck, variableNameForSubstitution));
+    AlbaNumbers const initialValues(getInitialValuesForIteratingMethods(termToCheck));
     for (AlbaNumber const& initialValue : initialValues) {
         NewtonMethod newtonMethod(initialValue, functionToIterate);
         newtonMethod.runMaxNumberOfIterationsOrUntilFinished(NUMBER_OF_ITERATIONS_IN_NEWTON_METHOD);

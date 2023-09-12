@@ -73,7 +73,7 @@ void SimplificationOfEquation::removeExponentIfNeeded(Term& leftHandSide) {
     if (leftHandSide.isExpression()) {
         Expression const& expression(leftHandSide.getAsExpression());
         if (OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel()) {
-            TermRaiseToTerms termRaiseToTerms(expression.getTermsWithAssociation().getTermsWithDetails());
+            TermRaiseToTerms const termRaiseToTerms(expression.getTermsWithAssociation().getTermsWithDetails());
             leftHandSide = termRaiseToTerms.getBase();
         }
     }
@@ -91,10 +91,10 @@ void SimplificationOfEquation::completeExpressionWithFractionalExponentsIfNeeded
                 Term const& secondTerm(getTermConstReferenceFromUniquePointer(termsWithDetails[1].baseTermPointer));
                 TermRaiseToANumber termRaiseToANumber1(createTermRaiseToANumberFromTerm(firstTerm));
                 TermRaiseToANumber termRaiseToANumber2(createTermRaiseToANumberFromTerm(secondTerm));
-                AlbaNumber gcfOfExponents =
+                AlbaNumber const gcfOfExponents =
                     getGreatestCommonFactor(termRaiseToANumber1.getExponent(), termRaiseToANumber2.getExponent());
                 if (gcfOfExponents.isFractionType()) {
-                    AlbaNumber::FractionData exponentFraction(gcfOfExponents.getFractionData());
+                    AlbaNumber::FractionData const exponentFraction(gcfOfExponents.getFractionData());
                     termRaiseToANumber1.setExponent(termRaiseToANumber1.getExponent() * exponentFraction.denominator);
                     termRaiseToANumber2.setExponent(termRaiseToANumber2.getExponent() * exponentFraction.denominator);
                     leftHandSide = termRaiseToANumber1.getCombinedTerm() - termRaiseToANumber2.getCombinedTerm();
@@ -142,7 +142,7 @@ void SimplificationOfEquation::removeCommonConstant(Term& leftHandSide) {
             }
             if (isLeftHandSideChanged) {
                 Term combinedTerm(1);
-                for (Term& factor : factors) {
+                for (Term const& factor : factors) {
                     combinedTerm *= factor;
                 }
                 leftHandSide = combinedTerm;

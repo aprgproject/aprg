@@ -25,12 +25,13 @@ Term AlternatingSeries::getRemainderAtIndex(int const index) const {
 }
 
 Term AlternatingSeries::getFormula(Term const& formulaForEachTermWithoutSign, string const& variableName) {
-    Term sign(createExpressionIfPossible({-1, "^", variableName}));
+    Term const sign(createExpressionIfPossible({-1, "^", variableName}));
     return createExpressionIfPossible({sign, "*", formulaForEachTermWithoutSign});
 }
 
 bool AlternatingSeries::isConvergent() const {
-    Term limit(getLimit(m_formulaForEachTermWithoutSign, getNameForVariableInFormula(), ALBA_NUMBER_POSITIVE_INFINITY));
+    Term const limit(
+        getLimit(m_formulaForEachTermWithoutSign, getNameForVariableInFormula(), ALBA_NUMBER_POSITIVE_INFINITY));
     return isTheValue(limit, 0);
 }
 

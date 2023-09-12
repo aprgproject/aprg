@@ -58,17 +58,17 @@ AlbaNumberOptional SeriesBasedOnFormula::getLeastUpperBound() const {
 Term SeriesBasedOnFormula::getFormulaForSeries() const { return m_formulaForSeries; }
 
 Term SeriesBasedOnFormula::getValueAtIndex(int const index) const {
-    SubstitutionOfVariablesToValues substitution{{m_variableName, index}};
+    SubstitutionOfVariablesToValues const substitution{{m_variableName, index}};
     return substitution.performSubstitutionTo(m_formulaForSeries);
 }
 
 Term SeriesBasedOnFormula::getSum(int const startingIndex, int const endingIndex) const {
-    Summation summation(m_formulaForSeries, m_variableName);
+    Summation const summation(m_formulaForSeries, m_variableName);
     return summation.getSum(startingIndex, endingIndex);
 }
 
 Term SeriesBasedOnFormula::getSumStartingAtIndexAndToInfinity(int const startingIndex) const {
-    Summation summation(m_formulaForSeries, m_variableName);
+    Summation const summation(m_formulaForSeries, m_variableName);
     return summation.getSum(startingIndex, ALBA_NUMBER_POSITIVE_INFINITY);
 }
 
@@ -84,41 +84,41 @@ string SeriesBasedOnFormula::getNameForVariableInFormula() const { return m_vari
 bool SeriesBasedOnFormula::isConvergent() const { return isARealFiniteConstant(getValueAtInfinity()); }
 
 bool SeriesBasedOnFormula::isIncreasing() const {
-    Term sign(getSignDerivativeForFiniteCalculus());
+    Term const sign(getSignDerivativeForFiniteCalculus());
     return isTheValue(sign, 1);
 }
 
 bool SeriesBasedOnFormula::isDecreasing() const {
-    Term sign(getSignDerivativeForFiniteCalculus());
+    Term const sign(getSignDerivativeForFiniteCalculus());
     return isTheValue(sign, -1);
 }
 
 bool SeriesBasedOnFormula::isMonotonic() const {
-    Term sign(getSignDerivativeForFiniteCalculus());
+    Term const sign(getSignDerivativeForFiniteCalculus());
     return isTheValue(sign, 1) || isTheValue(sign, -1);
 }
 
 bool SeriesBasedOnFormula::isBounded() const {
-    AlbaNumberOptional greatestLowerBound(getGreatestLowerBound());
-    AlbaNumberOptional leastUpperBound(getLeastUpperBound());
+    AlbaNumberOptional const greatestLowerBound(getGreatestLowerBound());
+    AlbaNumberOptional const leastUpperBound(getLeastUpperBound());
     return greatestLowerBound && leastUpperBound;
 }
 
 AlbaNumbers SeriesBasedOnFormula::getBoundValues() const {
-    DifferentiationForFiniteCalculus differentiation(m_variableName);
-    Term secondDerivative(differentiation.differentiateMultipleTimes(m_formulaForSeries, 2));
+    DifferentiationForFiniteCalculus const differentiation(m_variableName);
+    Term const secondDerivative(differentiation.differentiateMultipleTimes(m_formulaForSeries, 2));
 
     AlbaNumbers boundValues;
     AlbaNumbers extremaIndexes(getExtremaIndexes());
-    extremaIndexes.emplace_back(AlbaNumber(0));
+    extremaIndexes.emplace_back(0);
     for (AlbaNumber const& extremumIndex : extremaIndexes) {
-        SubstitutionOfVariablesToValues substitution{{m_variableName, extremumIndex}};
-        Term secondDerivativeAtExtrema(substitution.performSubstitutionTo(secondDerivative));
+        SubstitutionOfVariablesToValues const substitution{{m_variableName, extremumIndex}};
+        Term const secondDerivativeAtExtrema(substitution.performSubstitutionTo(secondDerivative));
         if (secondDerivativeAtExtrema.isConstant()) {
             boundValues.emplace_back(secondDerivativeAtExtrema.getAsNumber());
         }
     }
-    Term valueTermAtInfinity(getValueAtInfinity());
+    Term const valueTermAtInfinity(getValueAtInfinity());
     if (isARealFiniteConstant(valueTermAtInfinity)) {
         boundValues.emplace_back(valueTermAtInfinity.getAsNumber());
     }
@@ -126,16 +126,16 @@ AlbaNumbers SeriesBasedOnFormula::getBoundValues() const {
 }
 
 AlbaNumbers SeriesBasedOnFormula::getExtremaIndexes() const {
-    DifferentiationForFiniteCalculus differentiation(m_variableName);
+    DifferentiationForFiniteCalculus const differentiation(m_variableName);
     Term firstDerivative(differentiation.differentiate(m_formulaForSeries));
     OneEquationOneVariableEqualitySolver solver;
     simplifyTermToACommonDenominator(firstDerivative);
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(firstDerivative, "=", 0)));
+    SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(firstDerivative, "=", 0)));
     return solutionSet.getAcceptedValues();
 }
 
 Term SeriesBasedOnFormula::getSignDerivativeForFiniteCalculus() const {
-    DifferentiationForFiniteCalculus differentiation(m_variableName);
+    DifferentiationForFiniteCalculus const differentiation(m_variableName);
     Term derivative(differentiation.differentiate(m_formulaForSeries));
     SignMutator signMutator;
     signMutator.putVariableWithSign(m_variableName, TermAssociationType::Positive);

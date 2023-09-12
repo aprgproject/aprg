@@ -29,7 +29,7 @@ Term SeriesBasedOnSummation::getValueAtIndex(int const index) const {
 }
 
 Term SeriesBasedOnSummation::getTermValueAtIndex(int const index) const {
-    SubstitutionOfVariablesToValues substitution{{m_variableName, index}};
+    SubstitutionOfVariablesToValues const substitution{{m_variableName, index}};
     return substitution.performSubstitutionTo(m_formulaForEachTermInSummation);
 }
 
@@ -37,7 +37,7 @@ Term SeriesBasedOnSummation::getFormulaForEachTermInSummation() const { return m
 bool SeriesBasedOnSummation::isSummationModelValid() const { return m_isSummationModelValid; }
 
 bool SeriesBasedOnSummation::isAbsolutelyConvergent() const {
-    SeriesBasedOnSummation summation(abs(m_formulaForEachTermInSummation), m_variableName);
+    SeriesBasedOnSummation const summation(abs(m_formulaForEachTermInSummation), m_variableName);
     return summation.isConvergent();
 }
 

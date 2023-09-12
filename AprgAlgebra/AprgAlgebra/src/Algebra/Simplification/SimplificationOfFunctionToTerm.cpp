@@ -44,7 +44,7 @@ bool SimplificationOfFunctionToTerm::shouldNotSimplifyLogarithmicFunctionsByRedu
 
 Term SimplificationOfFunctionToTerm::simplifyTrigometricFunctionToExpression(Function const& functionObject) {
     Term result;
-    string functionName(functionObject.getFunctionName());
+    string const functionName(functionObject.getFunctionName());
     if (shouldSimplifyTrigonometricFunctionsToSinAndCos()) {
         Term const& inputTerm(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
         if ("tan" == functionName) {
@@ -75,9 +75,10 @@ Term SimplificationOfFunctionToTerm::simplifyLogarithmicFunctionToExpression(Fun
                 }
                 resultExpression.set(OperatorLevel::AdditionAndSubtraction, newTermsWithDetails);
             } else if (OperatorLevel::RaiseToPower == inputExpression.getCommonOperatorLevel()) {
-                TermRaiseToTerms termRaiseToTerms(inputExpression.getTermsWithAssociation().getTermsWithDetails());
+                TermRaiseToTerms const termRaiseToTerms(
+                    inputExpression.getTermsWithAssociation().getTermsWithDetails());
                 TermsWithDetails newTermsWithDetails(termRaiseToTerms.getExponents());
-                Term logarithmicBase(
+                Term const logarithmicBase(
                     getLogarithmicOfTermBasedFromName(termRaiseToTerms.getBase(), functionObject.getFunctionName()));
                 newTermsWithDetails.emplace_back(logarithmicBase, TermAssociationType::Positive);
                 resultExpression.set(OperatorLevel::MultiplicationAndDivision, newTermsWithDetails);

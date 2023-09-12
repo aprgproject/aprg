@@ -38,7 +38,7 @@ void SingleVariableNameRetriever::retrieveFromMonomial(Monomial const& monomial)
     if (!m_hasMultipleVariables) {
         auto const& variablesToExponentsMap(monomial.getVariablesToExponentsMap());
         if (variablesToExponentsMap.size() == 1) {
-            string firstVariableOfMonomial = (variablesToExponentsMap.cbegin())->first;
+            string const firstVariableOfMonomial = (variablesToExponentsMap.cbegin())->first;
             putVariableIfPossible(firstVariableOfMonomial);
         } else if (variablesToExponentsMap.size() > 1) {
             m_hasEncounteredAVariable = true;

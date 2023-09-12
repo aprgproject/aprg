@@ -86,7 +86,7 @@ Term convertExpressionToSimplestTerm(Expression const& expression) {
 }
 
 Term convertFunctionToSimplestTerm(Function const& functionObject) {
-    SimplificationOfFunctionToTerm simplification;
+    SimplificationOfFunctionToTerm const simplification;
     return alba::algebra::Simplification::SimplificationOfFunctionToTerm::simplifyToTerm(functionObject);
 }
 
@@ -95,7 +95,7 @@ bool canBeConvertedToConstant(Polynomial const& polynomial) {
 }
 
 bool canBeConvertedToMonomial(Term const& term) {
-    TermType termType(term.getTermType());
+    TermType const termType(term.getTermType());
     bool isPolynomialWithOneMonomial(false);
     if (term.isPolynomial()) {
         isPolynomialWithOneMonomial = isOneMonomial(term.getAsPolynomial());
@@ -105,7 +105,7 @@ bool canBeConvertedToMonomial(Term const& term) {
 }
 
 bool canBeConvertedToPolynomial(Term const& term) {
-    TermType termType(term.getTermType());
+    TermType const termType(term.getTermType());
     return TermType::Constant == termType || TermType::Variable == termType || TermType::Monomial == termType ||
            TermType::Polynomial == termType;
 }

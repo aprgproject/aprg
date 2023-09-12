@@ -43,7 +43,7 @@ void LinearDiophantineEquationSolver::calculateForEquation(
     MultipleVariableSolutionSet& solutionSet, Equation const& equation) {
     Term const& nonZeroLeftHandTerm(equation.getLeftHandTerm());
     if (canBeConvertedToPolynomial(nonZeroLeftHandTerm)) {
-        Polynomial polynomial(createPolynomialIfPossible(nonZeroLeftHandTerm));
+        Polynomial const polynomial(createPolynomialIfPossible(nonZeroLeftHandTerm));
         bool isPatternRecognized(false);
         AlbaNumber a;
         AlbaNumber b;
@@ -52,7 +52,7 @@ void LinearDiophantineEquationSolver::calculateForEquation(
         string yName;
         retrieveDetailsFromPolynomial(isPatternRecognized, a, b, c, xName, yName, polynomial);
         if (isPatternRecognized) {
-            LinearDiophantineEquationCoefficientSolver solver(a, b, c);
+            LinearDiophantineEquationCoefficientSolver const solver(a, b, c);
             if (solver.isSolved()) {
                 SolutionSet xSolution;
                 SolutionSet ySolution;

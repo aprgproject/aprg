@@ -67,11 +67,11 @@ AlbaNumber getRemainderForOneVariablePolynomialDividedByVariableMinusConstantVal
     // It states that the remainder of the division of a polynomial f(x) by a linear polynomial x-r is equal to f(r).
     // In particular, x−r is a divisor of f(x) if and only if f(r) = 0, a property known as the factor theorem.
     AlbaNumber remainder;
-    string singleVariableName = getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(polynomial);
+    string const singleVariableName = getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(polynomial);
     if (!singleVariableName.empty()) {
         SubstitutionOfVariablesToValues substitution;
         substitution.putVariableWithValue(singleVariableName, value);
-        Term substitutedTerm(substitution.performSubstitutionTo(polynomial));
+        Term const substitutedTerm(substitution.performSubstitutionTo(polynomial));
         if (substitutedTerm.isConstant()) {
             remainder = substitutedTerm.getAsNumber();
         }
@@ -84,7 +84,7 @@ AlbaNumber getEvaluatedValueUsingHornersSubstitutionOfOneVariablePolynomial(
     // https://en.wikipedia.org/wiki/Horner%27s_method
     // The algorithm is based on Horner's rule:
     // // c0 + c1*x + c2*x^2 + c3*x^3 + ... + cn*x^n = c0 + x(c1 + x(c2 + x(c3 +... + x(cn−1 + x*cn ) ... ) ) ).
-    string singleVariableName = getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(polynomial);
+    string const singleVariableName = getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(polynomial);
     if (!singleVariableName.empty()) {
         AlbaNumber result;
         Polynomial simplifiedPolynomial(polynomial);
@@ -98,7 +98,7 @@ AlbaNumber getEvaluatedValueUsingHornersSubstitutionOfOneVariablePolynomial(
                 isFirst = false;
                 result = monomial.getCoefficient();
             } else {
-                AlbaNumber deltaExponent = previousExponent - currentExponent;
+                AlbaNumber const deltaExponent = previousExponent - currentExponent;
                 result = (result * (value ^ deltaExponent)) + monomial.getCoefficient();
             }
             previousExponent = currentExponent;
@@ -113,15 +113,15 @@ AlbaNumbers getRoots(RootType const rootType, Polynomial const& polynomial) {
     AlbaNumbers result;
     if (hasOnlyASingleVariable(polynomial)) {
         Polynomial const& polynomialToFactorize(polynomial);
-        Polynomials factorizedPolynomials(factorizeAPolynomial(polynomialToFactorize));
+        Polynomials const factorizedPolynomials(factorizeAPolynomial(polynomialToFactorize));
         for (Polynomial const& factorizedPolynomial : factorizedPolynomials) {
             Monomials const& monomialsToCheck(factorizedPolynomial.getMonomials());
-            AlbaNumber maxDegree(getMaxDegree(factorizedPolynomial));
+            AlbaNumber const maxDegree(getMaxDegree(factorizedPolynomial));
             if (monomialsToCheck.size() == 1 && maxDegree > 0) {
-                result.emplace_back(AlbaNumber(0));
+                result.emplace_back(0);
             } else if (monomialsToCheck.size() == 2) {
-                Monomial firstMonomial(monomialsToCheck[0]);
-                Monomial secondMonomial(monomialsToCheck[1]);
+                Monomial const firstMonomial(monomialsToCheck[0]);
+                Monomial const secondMonomial(monomialsToCheck[1]);
                 if (isConstantOnly(secondMonomial)) {
                     AlbaNumber constant(-secondMonomial.getCoefficient());
                     constant = constant / firstMonomial.getCoefficient();
@@ -154,7 +154,7 @@ IntegerCoefficient getMultinomialCoefficient(
     //  k1+k2+...+km = n.
     // Multinomial coefficients can be seen as a generalization of binomial cofficients;
     // if m=2, the above formula corresponds to the binomial coefficient formula.
-    IntegerCoefficient numerator(getFactorial(power));
+    IntegerCoefficient const numerator(getFactorial(power));
     IntegerCoefficient denominator(1);
     for (IntegerCoefficient const variableExponent : variableExponents) {
         denominator *= getFactorial(variableExponent);
@@ -178,8 +178,8 @@ Polynomial raiseBinomialToAPowerUsingBinomialExpansion(Polynomial const& binomia
         Monomial const& firstMonomial(monomials[0]);
         Monomial const& secondMonomial(monomials[1]);
         for (IntegerCoefficient i = 0; i <= power; ++i) {
-            IntegerCoefficient firstPower = i;
-            IntegerCoefficient secondPower = power - i;
+            IntegerCoefficient const firstPower = i;
+            IntegerCoefficient const secondPower = power - i;
             Monomial firstPart(firstMonomial);
             Monomial secondPart(secondMonomial);
             firstPart.raiseToPowerNumber(AlbaNumber(firstPower));
@@ -201,7 +201,7 @@ pair<AlbaNumber, AlbaNumber> getMinmaxDegree(Polynomial const& polynomial) {
         result.first = getDegree(monomials.front());
         result.second = result.first;
         for (auto it = monomials.cbegin() + 1; it != monomials.cend(); ++it) {
-            AlbaNumber degree = getDegree(*it);
+            AlbaNumber const degree = getDegree(*it);
             result.first = min(result.first, degree);
             result.second = max(result.second, degree);
         }
@@ -246,7 +246,7 @@ bool hasAMonomialWithMultipleVariables(Polynomial const& polynomial) {
 bool hasAMonomialWithDegreeMoreThanOneOrFractional(Polynomial const& polynomial) {
     bool result(false);
     for (Monomial const& monomial : polynomial.getMonomials()) {
-        AlbaNumber degree(getDegree(monomial));
+        AlbaNumber const degree(getDegree(monomial));
         if (degree > 1 || !degree.isIntegerType()) {
             result = true;
             break;

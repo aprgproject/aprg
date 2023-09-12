@@ -50,7 +50,7 @@ Function SubstitutionOfVariablesToValues::performSubstitutionForFunction(Functio
 
 Monomial SubstitutionOfVariablesToValues::performSubstitutionForMonomial(Monomial const& monomial) const {
     Monomial newMonomial(createMonomialFromNumber(monomial.getCoefficient()));
-    Monomial::VariablesToExponentsMap previousVariableExponentMap(monomial.getVariablesToExponentsMap());
+    Monomial::VariablesToExponentsMap const previousVariableExponentMap(monomial.getVariablesToExponentsMap());
     for (auto const& [variableName, exponent] : previousVariableExponentMap) {
         if (isVariableFound(variableName)) {
             newMonomial.setConstant(newMonomial.getCoefficient() * (getValueForVariable(variableName) ^ exponent));
@@ -73,7 +73,7 @@ Polynomial SubstitutionOfVariablesToValues::performSubstitutionForPolynomial(Pol
 
 Term SubstitutionOfVariablesToValues::performSubstitutionTo(Variable const& variable) const {
     Term result;
-    string variableName(variable.getVariableName());
+    string const variableName(variable.getVariableName());
     if (isVariableFound(variableName)) {
         result = Term(getValueForVariable(variableName));
     } else {

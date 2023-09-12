@@ -103,14 +103,15 @@ Term IntegrationForFiniteCalculus::integrateTerm(Term const& term) const {
 
 Term IntegrationForFiniteCalculus::integrateMonomial(Monomial const& monomial) const {
     Term result;
-    AlbaNumber exponent(monomial.getExponentForVariable(m_nameOfVariableToIntegrate));
+    AlbaNumber const exponent(monomial.getExponentForVariable(m_nameOfVariableToIntegrate));
     if (exponent.isIntegerType()) {
-        int exponentInteger(exponent.getInteger());
+        int const exponentInteger(exponent.getInteger());
         if (exponentInteger >= 0) {
-            Polynomial polynomialInFallingPower(
+            Polynomial const polynomialInFallingPower(
                 convertMonomialWithPositiveExponentsFromRegularPowerToFallingPower(monomial));
-            Polynomial integratedPolynomialInFallingPower(integratePolynomialInFallingPower(polynomialInFallingPower));
-            Polynomial integratedPolynomial(convertPolynomialWithPositiveExponentsFromFallingPowerToRegularPower(
+            Polynomial const integratedPolynomialInFallingPower(
+                integratePolynomialInFallingPower(polynomialInFallingPower));
+            Polynomial const integratedPolynomial(convertPolynomialWithPositiveExponentsFromFallingPowerToRegularPower(
                 integratedPolynomialInFallingPower));
             result = integratedPolynomial;
         } else if (exponentInteger == -1) {
@@ -122,16 +123,17 @@ Term IntegrationForFiniteCalculus::integrateMonomial(Monomial const& monomial) c
             result = createExpressionIfPossible({monomialToRetain, "*", harmonicNumber(m_nameOfVariableToIntegrate)});
             result.simplify();
         } else {
-            AlbaNumber exponentAbsoluteValue(getAbsoluteValue(exponent));
+            AlbaNumber const exponentAbsoluteValue(getAbsoluteValue(exponent));
             Monomial monomialWithOneLessExponent(monomial);
             monomialWithOneLessExponent.putVariableWithExponent(m_nameOfVariableToIntegrate, exponentAbsoluteValue - 1);
-            Polynomial denominatorInFallingPower(
+            Polynomial const denominatorInFallingPower(
                 convertMonomialWithPositiveExponentsFromRegularPowerToFallingPower(monomialWithOneLessExponent));
-            Term termToIntegrate(createExpressionIfPossible({1, "/", denominatorInFallingPower}));
-            Term integratedTermInFallingPower(integrateTerm(termToIntegrate));
+            Term const termToIntegrate(createExpressionIfPossible({1, "/", denominatorInFallingPower}));
+            Term const integratedTermInFallingPower(integrateTerm(termToIntegrate));
             if (!isNan(integratedTermInFallingPower) && canBeConvertedToPolynomial(integratedTermInFallingPower)) {
-                Polynomial integratedPolynomial(convertPolynomialWithPositiveExponentsFromFallingPowerToRegularPower(
-                    createPolynomialIfPossible(integratedTermInFallingPower)));
+                Polynomial const integratedPolynomial(
+                    convertPolynomialWithPositiveExponentsFromFallingPowerToRegularPower(
+                        createPolynomialIfPossible(integratedTermInFallingPower)));
                 result = integratedPolynomial;
             } else {
                 result = ALBA_NUMBER_NOT_A_NUMBER;
@@ -195,9 +197,9 @@ Polynomial IntegrationForFiniteCalculus::integratePolynomialInFallingPower(Polyn
 Polynomial IntegrationForFiniteCalculus::convertMonomialWithPositiveExponentsFromRegularPowerToFallingPower(
     Monomial const& monomial) const {
     Polynomial result;
-    int exponent(monomial.getExponentForVariable(m_nameOfVariableToIntegrate).getInteger());
+    int const exponent(monomial.getExponentForVariable(m_nameOfVariableToIntegrate).getInteger());
     if (exponent >= 0) {
-        int exponentUnsigned = static_cast<int>(exponent);
+        int const exponentUnsigned = static_cast<int>(exponent);
         Monomial monomialToRetain(monomial);
         monomialToRetain.putVariableWithExponent(m_nameOfVariableToIntegrate, 0);
         for (int i = 0; i <= exponentUnsigned; ++i) {
@@ -213,9 +215,9 @@ Polynomial IntegrationForFiniteCalculus::convertMonomialWithPositiveExponentsFro
 Polynomial IntegrationForFiniteCalculus::convertMonomialWithPositiveExponentsFromFallingPowerToRegularPower(
     Monomial const& monomial) const {
     Polynomial result;
-    int exponent(monomial.getExponentForVariable(m_nameOfVariableToIntegrate).getInteger());
+    int const exponent(monomial.getExponentForVariable(m_nameOfVariableToIntegrate).getInteger());
     if (exponent > 0) {
-        int exponentUnsigned = static_cast<int>(exponent);
+        int const exponentUnsigned = static_cast<int>(exponent);
         result = createPolynomialFromNumber(1);
         Monomial monomialToRetain(monomial);
         monomialToRetain.putVariableWithExponent(m_nameOfVariableToIntegrate, 0);
@@ -281,7 +283,7 @@ Term IntegrationForFiniteCalculus::integrateTermsInAdditionOrSubtraction(Express
     Expression accumulatedExpression(createOrCopyExpressionFromATerm(0));
     for (TermWithDetails const& termWithDetails : termsWithDetails) {
         Term const& currentTerm(getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer));
-        Term integratedTerm(integrate(currentTerm));
+        Term const integratedTerm(integrate(currentTerm));
         if (termWithDetails.hasPositiveAssociation()) {
             accumulatedExpression.putTermWithAdditionIfNeeded(integratedTerm);
         } else {
@@ -303,10 +305,10 @@ Term IntegrationForFiniteCalculus::integrateTermsInRaiseToPower(Expression const
     Term result;
     TermRaiseToTerms termRaiseToTerms(termsWithDetails);
     termRaiseToTerms.simplify();
-    Term firstTerm(termRaiseToTerms.getBase());
-    Term secondTerm(termRaiseToTerms.getCombinedExponents());
-    bool isFirstAChangingTerm = isChangingTerm(firstTerm);
-    bool isSecondAChangingTerm = isChangingTerm(secondTerm);
+    Term const firstTerm(termRaiseToTerms.getBase());
+    Term const secondTerm(termRaiseToTerms.getCombinedExponents());
+    bool const isFirstAChangingTerm = isChangingTerm(firstTerm);
+    bool const isSecondAChangingTerm = isChangingTerm(secondTerm);
     if (!isFirstAChangingTerm && !isSecondAChangingTerm) {
         result = termRaiseToTerms.getCombinedTerm() * m_nameOfVariableToIntegrate;
     } else if (!isFirstAChangingTerm && isSecondAChangingTerm) {
@@ -331,9 +333,9 @@ Term IntegrationForFiniteCalculus::integrateNonChangingTermRaiseToChangingTerm(
     // (c^x)/(c-1) = Integrate((c^x))
     // Integrate((c^x)) = (c^x)/(c-1)
     Term nPlusOne(Polynomial{Monomial(1, {{m_nameOfVariableToIntegrate, 1}}), Monomial(1, {})});
-    SubstitutionOfVariablesToTerms substitution{{m_nameOfVariableToIntegrate, nPlusOne}};
-    Term exponentWithNPlusOneSubstitution(substitution.performSubstitutionTo(exponent));
-    Term exponentDifference(exponentWithNPlusOneSubstitution - exponent);
+    SubstitutionOfVariablesToTerms const substitution{{m_nameOfVariableToIntegrate, nPlusOne}};
+    Term const exponentWithNPlusOneSubstitution(substitution.performSubstitutionTo(exponent));
+    Term const exponentDifference(exponentWithNPlusOneSubstitution - exponent);
 
     if (!isChangingTerm(exponentDifference)) {
         // if exponentDifference can be factored out
@@ -365,9 +367,9 @@ void IntegrationForFiniteCalculus::integrateNonChangingAndChangingTermsInMultipl
     if (nonChangingTerms.empty()) {
         integrateChangingTermsInMultiplicationOrDivision(result, changingTerms);
     } else {
-        Term nonChangingTermCombined(createTermWithMultiplicationAndDivisionTermsWithDetails(nonChangingTerms));
-        Term changingTermCombined(createTermWithMultiplicationAndDivisionTermsWithDetails(changingTerms));
-        Term integratedChangingTerm(integrateTerm(changingTermCombined));
+        Term const nonChangingTermCombined(createTermWithMultiplicationAndDivisionTermsWithDetails(nonChangingTerms));
+        Term const changingTermCombined(createTermWithMultiplicationAndDivisionTermsWithDetails(changingTerms));
+        Term const integratedChangingTerm(integrateTerm(changingTermCombined));
         if (isNan(integratedChangingTerm)) {
             result = ALBA_NUMBER_NOT_A_NUMBER;
         } else {

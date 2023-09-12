@@ -105,7 +105,7 @@ void SolutionSet::addInterval(
 }
 
 void SolutionSet::combineAcceptedIntervalsIfPossible() {
-    AlbaNumberIntervals intervals(m_acceptedIntervals);
+    AlbaNumberIntervals const intervals(m_acceptedIntervals);
     m_acceptedIntervals.clear();
 
     AlbaNumberIntervalOptional intervalToSaveOptional;

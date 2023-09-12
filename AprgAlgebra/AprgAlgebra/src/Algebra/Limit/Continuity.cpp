@@ -13,11 +13,11 @@ namespace alba::algebra {
 
 ContinuityType getContinuityTypeAt(Term const& term, string const& variableName, AlbaNumber const& value) {
     ContinuityType result(ContinuityType::Unknown);
-    SubstitutionOfVariablesToValues substitution{{variableName, value}};
-    Term substitutedResult(substitution.performSubstitutionTo(term));
+    SubstitutionOfVariablesToValues const substitution{{variableName, value}};
+    Term const substitutedResult(substitution.performSubstitutionTo(term));
     if (substitutedResult.isConstant()) {
-        AlbaNumber limitAtValueInPositiveSide(getLimitAtAValueInThePositiveSide(term, variableName, value));
-        AlbaNumber limitAtValueInNegativeSide(getLimitAtAValueInTheNegativeSide(term, variableName, value));
+        AlbaNumber const limitAtValueInPositiveSide(getLimitAtAValueInThePositiveSide(term, variableName, value));
+        AlbaNumber const limitAtValueInNegativeSide(getLimitAtAValueInTheNegativeSide(term, variableName, value));
         if (isAlmostEqualForLimitChecking(limitAtValueInPositiveSide, limitAtValueInNegativeSide)) {
             AlbaNumber const& substitutedResultValue(substitutedResult.getAsNumber());
             if (isAlmostEqualForLimitChecking(limitAtValueInPositiveSide, substitutedResultValue)) {
@@ -45,13 +45,13 @@ SolutionSet getContinuityDomain(Term const& term) {
 bool isContinuousAtWithMultipleVariablesWithDifferentApproaches(
     Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
     SubstitutionsOfVariablesToTerms const& substitutionsForApproaches) {
-    SubstitutionOfVariablesToValues substitution{{variableName, valueToApproach}};
+    SubstitutionOfVariablesToValues const substitution{{variableName, valueToApproach}};
     Term substitutedResult;
     if (!substitutionsForApproaches.empty()) {
         substitutedResult =
             substitution.performSubstitutionTo(substitutionsForApproaches[0].performSubstitutionTo(term));
     }
-    Term limitAtValue(getLimitWithMultipleVariablesWithDifferentApproaches(
+    Term const limitAtValue(getLimitWithMultipleVariablesWithDifferentApproaches(
         term, variableName, valueToApproach, substitutionsForApproaches));
     return substitutedResult == limitAtValue && isARealFiniteConstant(substitutedResult);
 }
@@ -64,19 +64,20 @@ bool isIntermediateValueTheoremSatisfied(
     bool result(false);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue(variableName, firstValue);
-    Term outputOfFirst(substitution.performSubstitutionTo(term));
+    Term const outputOfFirst(substitution.performSubstitutionTo(term));
     substitution.putVariableWithValue(variableName, secondValue);
-    Term outputOfSecond(substitution.performSubstitutionTo(term));
+    Term const outputOfSecond(substitution.performSubstitutionTo(term));
     if (outputOfFirst.isConstant() && outputOfSecond.isConstant()) {
-        AlbaNumber outputValueOfFirst(outputOfFirst.getAsNumber());
-        AlbaNumber outputValueOfSecond(outputOfSecond.getAsNumber());
-        SolutionSet continuityDomain(getContinuityDomain(term));
+        AlbaNumber const outputValueOfFirst(outputOfFirst.getAsNumber());
+        AlbaNumber const outputValueOfSecond(outputOfSecond.getAsNumber());
+        SolutionSet const continuityDomain(getContinuityDomain(term));
         AlbaNumberIntervals const& continuityDomainIntervals(continuityDomain.getAcceptedIntervals());
-        AlbaNumberInterval firstAndSecondInterval(createCloseEndpoint(firstValue), createCloseEndpoint(secondValue));
-        bool areOutputValuesNotEqual = outputValueOfFirst != outputValueOfSecond;
-        bool areFirstAndSecondIntervalInContinuousDomain =
+        AlbaNumberInterval const firstAndSecondInterval(
+            createCloseEndpoint(firstValue), createCloseEndpoint(secondValue));
+        bool const areOutputValuesNotEqual = outputValueOfFirst != outputValueOfSecond;
+        bool const areFirstAndSecondIntervalInContinuousDomain =
             isIntervalInsideTheIntervals(firstAndSecondInterval, continuityDomainIntervals);
-        bool isValueToTestBetweenFirstAndSecond = firstAndSecondInterval.isValueInsideTheInterval(valueToTest);
+        bool const isValueToTestBetweenFirstAndSecond = firstAndSecondInterval.isValueInsideTheInterval(valueToTest);
         result = areFirstAndSecondIntervalInContinuousDomain && areOutputValuesNotEqual &&
                  isValueToTestBetweenFirstAndSecond;
     }
@@ -84,9 +85,9 @@ bool isIntermediateValueTheoremSatisfied(
 }
 
 bool isContinuousAt(Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
-    SubstitutionOfVariablesToValues substitution{{variableName, valueToApproach}};
-    Term substitutedResult(substitution.performSubstitutionTo(term));
-    Term limitAtValue(getLimit(term, variableName, valueToApproach));
+    SubstitutionOfVariablesToValues const substitution{{variableName, valueToApproach}};
+    Term const substitutedResult(substitution.performSubstitutionTo(term));
+    Term const limitAtValue(getLimit(term, variableName, valueToApproach));
     return substitutedResult == limitAtValue && isARealFiniteConstant(substitutedResult);
 }
 
@@ -94,10 +95,11 @@ bool isContinuousAt(
     Term const& term, string const& variableName, AlbaNumber const& valueToApproach,
     LimitAtAValueApproachType const limitApproachType) {
     bool result(false);
-    SubstitutionOfVariablesToValues substitution{{variableName, valueToApproach}};
-    Term substitutedResult(substitution.performSubstitutionTo(term));
+    SubstitutionOfVariablesToValues const substitution{{variableName, valueToApproach}};
+    Term const substitutedResult(substitution.performSubstitutionTo(term));
     if (substitutedResult.isConstant()) {
-        AlbaNumber limitAtValue(getLimitAtAValueByApproachType(term, variableName, valueToApproach, limitApproachType));
+        AlbaNumber const limitAtValue(
+            getLimitAtAValueByApproachType(term, variableName, valueToApproach, limitApproachType));
         AlbaNumber const& substitutedResultValue(substitutedResult.getAsNumber());
         result = isAlmostEqualForLimitChecking(substitutedResultValue, limitAtValue);
     }

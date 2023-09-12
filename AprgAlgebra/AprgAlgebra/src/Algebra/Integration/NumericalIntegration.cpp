@@ -14,8 +14,8 @@ namespace alba::algebra {
 AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(AlbaNumber const& input, int const numberOfSamples) {
     AlbaNumber result;
     if (input > 0) {
-        Term oneOverX(Monomial(1, {{"x", -1}}));
-        Term approximateValue(getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(
+        Term const oneOverX(Monomial(1, {{"x", -1}}));
+        Term const approximateValue(getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(
             oneOverX, {"x", AlbaNumber(1), input}, numberOfSamples));
         if (approximateValue.isConstant()) {
             result = approximateValue.getAsNumber();
@@ -27,8 +27,8 @@ AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(AlbaNumber const
 AlbaNumber getAnApproximateOfNaturalLogarithmUsingSimpsonRule(AlbaNumber const& input, int const numberOfSamples) {
     AlbaNumber result;
     if (input > 0) {
-        Term oneOverX(Monomial(1, {{"x", -1}}));
-        Term approximateValue(
+        Term const oneOverX(Monomial(1, {{"x", -1}}));
+        Term const approximateValue(
             getAnApproximateOfDefiniteIntegralUsingSimpsonRule(oneOverX, {"x", AlbaNumber(1), input}, numberOfSamples));
         if (approximateValue.isConstant()) {
             result = approximateValue.getAsNumber();
@@ -40,14 +40,14 @@ AlbaNumber getAnApproximateOfNaturalLogarithmUsingSimpsonRule(AlbaNumber const& 
 Term getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(
     Term const& term, DetailsForDefiniteIntegralWithValues const& integralDetails, int const numberOfSamples) {
     // The Trapozoidal Rule
-    AlbaNumber lengthOfInterval(integralDetails.higherEnd - integralDetails.lowerEnd);
-    AlbaNumber incrementInX(lengthOfInterval / numberOfSamples);
+    AlbaNumber const lengthOfInterval(integralDetails.higherEnd - integralDetails.lowerEnd);
+    AlbaNumber const incrementInX(lengthOfInterval / numberOfSamples);
     SubstitutionOfVariablesToValues substitution;
     Term sum(0);
     for (int i = 0; i <= numberOfSamples; ++i) {
-        AlbaNumber currentX(integralDetails.lowerEnd + incrementInX * i);
+        AlbaNumber const currentX(integralDetails.lowerEnd + incrementInX * i);
         substitution.putVariableWithValue(integralDetails.variableName, currentX);
-        Term currentY(substitution.performSubstitutionTo(term));
+        Term const currentY(substitution.performSubstitutionTo(term));
         if (i == 0 || i == numberOfSamples) {
             sum = sum + currentY;
         } else {
@@ -60,14 +60,14 @@ Term getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(
 Term getAnApproximateOfDefiniteIntegralUsingSimpsonRule(
     Term const& term, DetailsForDefiniteIntegralWithValues const& integralDetails, int const numberOfSamples) {
     // The Simpson Rule
-    AlbaNumber lengthOfInterval(integralDetails.higherEnd - integralDetails.lowerEnd);
-    AlbaNumber incrementInX(lengthOfInterval / numberOfSamples);
+    AlbaNumber const lengthOfInterval(integralDetails.higherEnd - integralDetails.lowerEnd);
+    AlbaNumber const incrementInX(lengthOfInterval / numberOfSamples);
     SubstitutionOfVariablesToValues substitution;
     Term sum(0);
     for (int i = 0; i <= numberOfSamples; ++i) {
-        AlbaNumber currentX(integralDetails.lowerEnd + incrementInX * i);
+        AlbaNumber const currentX(integralDetails.lowerEnd + incrementInX * i);
         substitution.putVariableWithValue(integralDetails.variableName, currentX);
-        Term currentY(substitution.performSubstitutionTo(term));
+        Term const currentY(substitution.performSubstitutionTo(term));
         if (i == 0 || i == numberOfSamples) {
             sum = sum + currentY;
         } else if (isOdd(i)) {
@@ -96,22 +96,22 @@ Term getActualTruncationErrorInSimpsonRule(
 Term getAnApproximateOfTruncationErrorInTrapezoidalRuleAt(
     Term const& term, DetailsForDefiniteIntegralWithValues const& integralDetails, AlbaNumber const& valueToCheckAt,
     AlbaNumber const& deltaX) {
-    Differentiation differentiation(integralDetails.variableName);
-    Term termDoublePrime(differentiation.differentiateMultipleTimes(term, 2));
-    SubstitutionOfVariablesToValues substitution{{integralDetails.variableName, valueToCheckAt}};
-    Term termDoublePrimeValue(substitution.performSubstitutionTo(termDoublePrime));
-    AlbaNumber lengthOfInterval(integralDetails.higherEnd - integralDetails.lowerEnd);
+    Differentiation const differentiation(integralDetails.variableName);
+    Term const termDoublePrime(differentiation.differentiateMultipleTimes(term, 2));
+    SubstitutionOfVariablesToValues const substitution{{integralDetails.variableName, valueToCheckAt}};
+    Term const termDoublePrimeValue(substitution.performSubstitutionTo(termDoublePrime));
+    AlbaNumber const lengthOfInterval(integralDetails.higherEnd - integralDetails.lowerEnd);
     return termDoublePrimeValue * lengthOfInterval / -12 * (deltaX ^ 2);
 }
 
 Term getAnApproximateOfTruncationErrorInSimpsonRuleAt(
     Term const& term, DetailsForDefiniteIntegralWithValues const& integralDetails, AlbaNumber const& valueToCheckAt,
     AlbaNumber const& deltaX) {
-    Differentiation differentiation(integralDetails.variableName);
-    Term termDoublePrime(differentiation.differentiateMultipleTimes(term, 4));
-    SubstitutionOfVariablesToValues substitution{{integralDetails.variableName, valueToCheckAt}};
-    Term termDoublePrimeValue(substitution.performSubstitutionTo(termDoublePrime));
-    AlbaNumber lengthOfInterval(integralDetails.higherEnd - integralDetails.lowerEnd);
+    Differentiation const differentiation(integralDetails.variableName);
+    Term const termDoublePrime(differentiation.differentiateMultipleTimes(term, 4));
+    SubstitutionOfVariablesToValues const substitution{{integralDetails.variableName, valueToCheckAt}};
+    Term const termDoublePrimeValue(substitution.performSubstitutionTo(termDoublePrime));
+    AlbaNumber const lengthOfInterval(integralDetails.higherEnd - integralDetails.lowerEnd);
     return termDoublePrimeValue * lengthOfInterval / -180 * (deltaX ^ 2);
 }
 

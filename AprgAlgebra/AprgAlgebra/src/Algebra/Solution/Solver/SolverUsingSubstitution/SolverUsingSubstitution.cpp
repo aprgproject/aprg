@@ -40,9 +40,9 @@ SubstitutionOfVariablesToValues SolverUsingSubstitution::getSubstitutionFromSolu
 bool SolverUsingSubstitution::isSolutionCorrect(
     MultipleVariableSolutionSet const& solutionSet, Equations const& equations) {
     bool result(true);
-    SubstitutionOfVariablesToValues substitution(getSubstitutionFromSolutionSet(solutionSet));
+    SubstitutionOfVariablesToValues const substitution(getSubstitutionFromSolutionSet(solutionSet));
     for (Equation const& equation : equations) {
-        Equation potentialSolvedEquation(substitution.performSubstitutionTo(equation));
+        Equation const potentialSolvedEquation(substitution.performSubstitutionTo(equation));
         result = result && isARealFiniteConstant(potentialSolvedEquation.getLeftHandTerm()) &&
                  isARealFiniteConstant(potentialSolvedEquation.getRightHandTerm()) &&
                  potentialSolvedEquation.isEquationSatisfied();
@@ -103,7 +103,7 @@ void SolverUsingSubstitution::addIfSolutionIsCompleteAndCorrect(
 void SolverUsingSubstitution::solveAndUpdate(
     MultipleVariableSolutionSet& solutionSet, Equation const& equationToSolve, string const& variableNameToSolve) {
     OneEquationOneVariableEqualitySolver solver;
-    SolutionSet solutionSetForOneVariable(solver.calculateSolutionAndReturnSolutionSet(equationToSolve));
+    SolutionSet const solutionSetForOneVariable(solver.calculateSolutionAndReturnSolutionSet(equationToSolve));
     AlbaNumbers const& acceptedValues(solutionSetForOneVariable.getAcceptedValues());
     if (!acceptedValues.empty()) {
         SolutionSet firstPotentialSolution;
@@ -143,7 +143,7 @@ void SolverUsingSubstitution::calculateASolutionForOneVariable(
 
 void SolverUsingSubstitution::substituteSolutionSetValuesToEquations(
     Equations& substitutedEquations, MultipleVariableSolutionSet const& solutionSet) {
-    SubstitutionOfVariablesToValues substitution(getSubstitutionFromSolutionSet(solutionSet));
+    SubstitutionOfVariablesToValues const substitution(getSubstitutionFromSolutionSet(solutionSet));
     for (Equation& substitutedEquation : substitutedEquations) {
         substitutedEquation = substitution.performSubstitutionTo(substitutedEquation);
     }
@@ -154,7 +154,7 @@ void SolverUsingSubstitution::solveForTheFirstOneVariableEquationAndUpdate(
     MultipleVariableSolutionSet& solutionSet, Equations const& substitutedEquations) {
     if (!substitutedEquations.empty()) {
         Equation const& equationToSolve(substitutedEquations.front());
-        string singleVariableName = getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(equationToSolve);
+        string const singleVariableName = getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(equationToSolve);
         if (!singleVariableName.empty()) {
             solveAndUpdate(solutionSet, equationToSolve, singleVariableName);
         }

@@ -36,10 +36,10 @@ void selectVariableNameAndEquationNumber(
     areVariableAndEquationSelected = false;
     selectedVariableName.clear();
     selectedEquationIndex = 0;
-    VariableNamesSet variableNamesToCheck(getVariablesNamesToCheck(equations, variableNamesToIgnore));
+    VariableNamesSet const variableNamesToCheck(getVariablesNamesToCheck(equations, variableNamesToIgnore));
     int equationIndex = 0;
     for (Equation const& equation : equations) {
-        IsolationOfOneVariableOnEqualityEquation isolation(equation);
+        IsolationOfOneVariableOnEqualityEquation const isolation(equation);
         for (string const& variableName : variableNamesToCheck) {
             if (isolation.canBeIsolated(variableName) &&
                 isolation.getIdenticalExponentForVariableIfPossible(variableName) == 1) {
@@ -57,7 +57,7 @@ void substituteEquationForSelectedEquationIndex(
     Equations& substitutedEquations, bool const areVariableAndEquationSelected, string const& selectedVariableName,
     int const selectedEquationIndex) {
     if (areVariableAndEquationSelected) {
-        IsolationOfOneVariableOnEqualityEquation isolation(substitutedEquations[selectedEquationIndex]);
+        IsolationOfOneVariableOnEqualityEquation const isolation(substitutedEquations[selectedEquationIndex]);
         substitutedEquations.erase(substitutedEquations.begin() + selectedEquationIndex);
         SubstitutionOfVariablesToTerms substitution;
         substitution.putVariableWithTerm(

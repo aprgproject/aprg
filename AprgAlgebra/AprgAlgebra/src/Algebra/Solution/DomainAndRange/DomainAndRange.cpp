@@ -46,7 +46,7 @@ void appendTransitionValues(
         ++it;
         for (; it != sortedValues.cend(); ++it) {
             AlbaNumber const& inputValue(*it);
-            AlbaNumber outputValue(functionToCheck(inputValue));
+            AlbaNumber const outputValue(functionToCheck(inputValue));
             if (previousOutputValue.isARealFiniteValue() && !outputValue.isARealFiniteValue()) {
                 transitionValues.emplace(getTransitionValue(previousInputValue, inputValue, functionToCheck));
             } else if (!previousOutputValue.isARealFiniteValue() && outputValue.isARealFiniteValue()) {
@@ -63,8 +63,8 @@ void retrieveTwoVariableNames(
     string const& variableNameToCheck) {
     if (variableNames.size() == 2) {
         auto it = variableNames.cbegin();
-        string variableName1 = *(it++);
-        string variableName2 = *(it++);
+        string const variableName1 = *(it++);
+        string const variableName2 = *(it++);
         if (variableName1 == variableNameToCheck) {
             nameThatMatch = variableName1;
             nameThatDoesNotMatch = variableName2;
@@ -85,7 +85,7 @@ AlbaNumber getTransitionValue(
     while (previousInputValue != newInputValue) {
         previousInputValue = newInputValue;
         newInputValue = getAverage(currentValueToRealFiniteValue, currentValueToNonRealFiniteValue);
-        AlbaNumber newOutputValue(functionToCheck(newInputValue));
+        AlbaNumber const newOutputValue(functionToCheck(newInputValue));
         if (newOutputValue.isARealFiniteValue()) {
             currentValueToRealFiniteValue = newInputValue;
         } else {
@@ -109,10 +109,10 @@ SolutionSet calculateDomainUsingTransitionValues(
     collectAndUniqueValuesAndSort(sortedValues, domainValuesToCheck);
     collectMinAndMaxValues(collectedValues, sortedValues);
     appendTransitionValues(collectedValues, sortedValues, functionToCheck);
-    AlbaNumbers transitionValues(getNumbers(collectedValues));
+    AlbaNumbers const transitionValues(getNumbers(collectedValues));
 
     domain.determineAndAddAcceptedIntervals(transitionValues, [&](AlbaNumber const& value) {
-        AlbaNumber computedValue(functionToCheck(value));
+        AlbaNumber const computedValue(functionToCheck(value));
         return computedValue.isARealFiniteValue();
     });
     return domain;
@@ -129,7 +129,7 @@ SolutionSet calculateDomainForTermWithOneVariable(AlbaNumbers const& valuesToChe
         SubstitutionOfVariablesToValues substitution;
         domain = calculateDomainUsingTransitionValues(valuesToCheck, [&](AlbaNumber const& value) {
             substitution.putVariableWithValue(variableName, value);
-            Term computedTerm(substitution.performSubstitutionTo(term));
+            Term const computedTerm(substitution.performSubstitutionTo(term));
             AlbaNumber computedValue;
             if (computedTerm.isConstant()) {
                 computedValue = computedTerm.getAsNumber();
@@ -189,9 +189,9 @@ SolutionSet calculateDomainForEquationWithVariableToSubstitute(
     OneEquationOneVariableEqualitySolver solver;
     domain = calculateDomainUsingTransitionValues(valuesToCheck, [&](AlbaNumber const& value) {
         substitution.putVariableWithValue(variableNameToSubstitute, value);
-        Equation simplifiedEquation(substitution.performSubstitutionTo(equation));
-        Equation equationToSolve(simplifiedEquation.getLeftHandTerm(), "=", 0);
-        SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(equationToSolve));
+        Equation const simplifiedEquation(substitution.performSubstitutionTo(equation));
+        Equation const equationToSolve(simplifiedEquation.getLeftHandTerm(), "=", 0);
+        SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(equationToSolve));
         AlbaNumber computedValue(ALBA_NUMBER_NOT_A_NUMBER);
         AlbaNumbers acceptedValues(solutionSet.getAcceptedValues());
         if (!acceptedValues.empty()) {
@@ -204,8 +204,8 @@ SolutionSet calculateDomainForEquationWithVariableToSubstitute(
 
 bool isOneToOne(string const& variableNameToCheck, Equation const& equation) {
     bool result(false);
-    SolutionSet domain(calculateDomainForEquation(variableNameToCheck, equation));
-    SolutionSet range(calculateRangeForEquation(variableNameToCheck, equation));
+    SolutionSet const domain(calculateDomainForEquation(variableNameToCheck, equation));
+    SolutionSet const range(calculateRangeForEquation(variableNameToCheck, equation));
     AlbaNumberIntervals const& domainIntervals(domain.getAcceptedIntervals());
     AlbaNumberIntervals const& rangeIntervals(range.getAcceptedIntervals());
     if (domainIntervals.size() == 1 && rangeIntervals.size() == 1) {

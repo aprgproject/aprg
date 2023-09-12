@@ -144,7 +144,7 @@ void SimplificationOfExpression::processAndSaveTermsForMultiplicationAndDivision
     termsOverTerms.setFactorizationConfigurationDetails(getFactorizationConfiguration());
     termsOverTerms.simplify();
 
-    Term combinedTerm(getCombinedTermAndSimplifyByRationalizingNumeratorOrDenominatorIfNeeded(termsOverTerms));
+    Term const combinedTerm(getCombinedTermAndSimplifyByRationalizingNumeratorOrDenominatorIfNeeded(termsOverTerms));
     expression.setTerm(combinedTerm);
 }
 
@@ -190,11 +190,11 @@ Expression SimplificationOfExpression::getNewExpressionWithSubstitutedVariableFo
     Term const& mainExpression, Term const& termToSubstitute) {
     string variableNameForSubstitution(createVariableNameForSubstitution(termToSubstitute));
 
-    SubstitutionOfTermsToTerms substitutionToVariable{{termToSubstitute, variableNameForSubstitution}};
-    Term termWithNewVariable(substitutionToVariable.performSubstitutionTo(mainExpression));
+    SubstitutionOfTermsToTerms const substitutionToVariable{{termToSubstitute, variableNameForSubstitution}};
+    Term const termWithNewVariable(substitutionToVariable.performSubstitutionTo(mainExpression));
 
-    SubstitutionOfVariablesToTerms substitutionFromVariable{{variableNameForSubstitution, termToSubstitute}};
-    Term termWithoutNewVariable(substitutionFromVariable.performSubstitutionTo(termWithNewVariable));
+    SubstitutionOfVariablesToTerms const substitutionFromVariable{{variableNameForSubstitution, termToSubstitute}};
+    Term const termWithoutNewVariable(substitutionFromVariable.performSubstitutionTo(termWithNewVariable));
 
     return createOrCopyExpressionFromATerm(termWithoutNewVariable);
 }
@@ -220,7 +220,7 @@ Term SimplificationOfExpression::getCombinedTermAndSimplifyByRationalizingNumera
 
 Term SimplificationOfExpression::getCombinedTermUsingTermsRaiseToTerms(TermRaiseToTerms const& termRaiseToTerms) {
     Term combinedTerm;
-    Term eachBasesRaisedToConstant(getEachBasesRaisedToConstantIfPossible(termRaiseToTerms));
+    Term const eachBasesRaisedToConstant(getEachBasesRaisedToConstantIfPossible(termRaiseToTerms));
     if (!eachBasesRaisedToConstant.isEmpty()) {
         combinedTerm = eachBasesRaisedToConstant;
     } else {
@@ -233,17 +233,17 @@ Term SimplificationOfExpression::getEachBasesRaisedToConstantIfPossible(TermRais
     Term result;
     if (shouldDistributeExponentConstantToEachBase()) {
         Term const& base(termRaiseToTerms.getBase());
-        Term exponent(termRaiseToTerms.getCombinedExponents());
+        Term const exponent(termRaiseToTerms.getCombinedExponents());
         if (exponent.isConstant() && !isTheValue(exponent, 1)) {
-            Factorization::ScopeObject scopeObject;
+            Factorization::ScopeObject const scopeObject;
             scopeObject.setInThisScopeThisConfiguration(getFactorizationConfiguration());
 
-            Terms bases(factorizeTerm(base));
+            Terms const bases(factorizeTerm(base));
             if (bases.size() > 1) {
                 TermsRaiseToNumbers termsRaiseToNumbers;
                 termsRaiseToNumbers.putTerms(bases, TermAssociationType::Positive);
                 termsRaiseToNumbers.multiplyToExponents(exponent.getAsNumber());
-                Term combinedTerm(termsRaiseToNumbers.getCombinedTerm());
+                Term const combinedTerm(termsRaiseToNumbers.getCombinedTerm());
                 if (!hasDoubleValues(combinedTerm) && !hasNonRealFiniteNumbers(combinedTerm)) {
                     result = combinedTerm;
                 }
@@ -291,7 +291,7 @@ void SimplificationOfExpression::simplifyBySubstitutingExpressionAndFunctionsToV
         substitutionSimplificationConfigurationDetails.shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables =
             false;
 
-        SimplificationOfExpression::ScopeObject scopeObject;
+        SimplificationOfExpression::ScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(substitutionSimplificationConfigurationDetails);
 
         while (tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(m_expression)) {
@@ -332,12 +332,12 @@ void SimplificationOfExpression::convertPolynomialToPolynomialOverPolynomial(Exp
 bool SimplificationOfExpression::tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(
     Expression const& expression) {
     bool continueToTryToSubstitute = false;
-    int oldNumberOfTerms = expression.getTermsWithAssociation().getTermsWithDetails().size();
-    Terms expressionAndFunctionTerms(retrieveSubExpressionsAndSubFunctions(expression));
+    int const oldNumberOfTerms = expression.getTermsWithAssociation().getTermsWithDetails().size();
+    Terms const expressionAndFunctionTerms(retrieveSubExpressionsAndSubFunctions(expression));
     for (Term const& expressionOrFunctionTerm : expressionAndFunctionTerms) {
-        Expression newExpression(
+        Expression const newExpression(
             getNewExpressionWithSubstitutedVariableForTerm(m_expression, expressionOrFunctionTerm));
-        int newNumberOfTerms = newExpression.getTermsWithAssociation().getTermsWithDetails().size();
+        int const newNumberOfTerms = newExpression.getTermsWithAssociation().getTermsWithDetails().size();
         if (expression.getCommonOperatorLevel() != newExpression.getCommonOperatorLevel() ||
             oldNumberOfTerms != newNumberOfTerms) {
             m_expression = newExpression;

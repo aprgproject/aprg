@@ -14,7 +14,7 @@ Term BinomialSeries::getExponent() const { return m_exponent; }
 Term BinomialSeries::getValueAtIndex(int const index) const {
     Term result;
     if (index >= 0) {
-        int positiveIndex(static_cast<int>(index));
+        int const positiveIndex(static_cast<int>(index));
         result = getBinomialSeriesApproximation(m_monomialPart, m_exponent, positiveIndex);
     }
     return result;
@@ -30,10 +30,10 @@ Term BinomialSeries::getBinomialSeriesApproximation(
     AlbaNumber factorialValue(1);
     for (int n = 1; n <= numberOfTimes; ++n) {
         monomialPartRaiseToPower *= monomialPart;
-        Term multiplier(exponent - n + 1);
+        Term const multiplier(exponent - n + 1);
         partialProduct *= multiplier;
         factorialValue *= n;
-        Term currentTerm(partialProduct * monomialPartRaiseToPower / factorialValue);
+        Term const currentTerm(partialProduct * monomialPartRaiseToPower / factorialValue);
         result += currentTerm;
     }
     result.simplify();

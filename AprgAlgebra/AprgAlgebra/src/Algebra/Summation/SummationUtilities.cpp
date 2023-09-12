@@ -32,9 +32,9 @@ Term getSummationOfArithmeticSeriesForCubes(string const& countVariable) {
 
 Term getSummationOfFiniteGeometricSeries(string const& base, string const& exponent) {
     // form: Summation of k from 0 to n of x^k
-    Term numerator(
+    Term const numerator(
         createExpressionIfPossible({base, "^", Polynomial{Monomial(1, {{exponent, 1}}), Monomial(1, {})}, "-", 1}));
-    Term denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-1, {})});
+    Term const denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-1, {})});
     Term result(createExpressionIfPossible({numerator, "/", denominator}));
     result.simplify();
     return result;
@@ -42,8 +42,8 @@ Term getSummationOfFiniteGeometricSeries(string const& base, string const& expon
 
 Term getSummationOfInfiniteGeometricSeries(string const& base) {
     // form: Summation of k from 0 to infinity of x^k
-    Term numerator(1);
-    Term denominator(Polynomial{Monomial(-1, {{base, 1}}), Monomial(1, {})});
+    Term const numerator(1);
+    Term const denominator(Polynomial{Monomial(-1, {{base, 1}}), Monomial(1, {})});
     Term result(createExpressionIfPossible({numerator, "/", denominator}));
     result.simplify();
     return result;

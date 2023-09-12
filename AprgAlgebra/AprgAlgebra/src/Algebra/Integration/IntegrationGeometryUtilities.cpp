@@ -33,7 +33,7 @@ void sortIntegralsDetailsToEvaluate(DetailsForDefiniteIntegralsWithTerms& integr
 Term getAreaInBetweenTwoTermsInAnInterval(
     Term const& lowerTerm, Term const& higherTerm, DetailsForDefiniteIntegralWithValues const& integralDetails) {
     Integration integration(integralDetails.variableName);
-    Term difference(higherTerm - lowerTerm);
+    Term const difference(higherTerm - lowerTerm);
     return integration.integrateAtDefiniteValues(difference, integralDetails.lowerEnd, integralDetails.higherEnd);
 }
 
@@ -51,7 +51,7 @@ Term getVolumeUsingOnSolidOfRevolution(Term const& term, DetailsForDefiniteInteg
     // The volume is equal to pi times the definite integral of square of f(x) from a to b.
     // This method uses disks.
     Integration integration(integralDetails.variableName);
-    Term termToIntegrate = getPiAsATerm() * (term ^ 2);
+    Term const termToIntegrate = getPiAsATerm() * (term ^ 2);
     return integration.integrateAtDefiniteTerms(termToIntegrate, integralDetails.lowerEnd, integralDetails.higherEnd);
 }
 
@@ -62,9 +62,9 @@ Term getSurfaceAreaUsingOnSolidOfRevolution(
     // the x axis and the lines x=a and x=b, and if the V cubic is the volume of S, then
     // The surface area is equal to 2*pi times the definite integral of y times the square root of (1+yPrime^2)) from a
     // to b. Notice that the formula for length of arc is the definite integral of the square root of (1+fPrime^2).
-    Differentiation differentiation(integralDetails.variableName);
+    Differentiation const differentiation(integralDetails.variableName);
     Integration integration(integralDetails.variableName);
-    Term differentiatedTerm(differentiation.differentiate(term));
+    Term const differentiatedTerm(differentiation.differentiate(term));
     Term termToIntegrate =
         Term(2) * getPiAsATerm() * term * ((1 + (differentiatedTerm ^ 2)) ^ AlbaNumber::createFraction(1, 2));
     termToIntegrate.simplify();
@@ -80,7 +80,7 @@ Term getVolumeUsingOnSolidOfRevolution(
     // The volume is equal to pi times the definite integral of square of (f(x)-g(x)) from a to b.
     // This method uses washers(disks with holes).
     Integration integration(integralDetails.variableName);
-    Term termToIntegrate = getPiAsATerm() * ((higherFunctionTerm - lowerFunctionTerm) ^ 2);
+    Term const termToIntegrate = getPiAsATerm() * ((higherFunctionTerm - lowerFunctionTerm) ^ 2);
     return integration.integrateAtDefiniteTerms(termToIntegrate, integralDetails.lowerEnd, integralDetails.higherEnd);
 }
 
@@ -93,7 +93,7 @@ Term getVolumeUsingCylindricalShells(Term const& term, DetailsForDefiniteIntegra
     // The volume is equal to 2*pi times the definite integral of x times f(x) from a to b.
     // This method uses cylindrical shells (like a can without the top and bottom)
     Integration integration(integralDetails.variableName);
-    Term termToIntegrate = 2 * getPiAsATerm() * integralDetails.variableName * term;
+    Term const termToIntegrate = 2 * getPiAsATerm() * integralDetails.variableName * term;
     return integration.integrateAtDefiniteTerms(termToIntegrate, integralDetails.lowerEnd, integralDetails.higherEnd);
 }
 
@@ -101,9 +101,9 @@ Term getLengthOfArc(Term const& term, DetailsForDefiniteIntegralWithTerms const&
     // If the function f and its derivative fPrime are continuous on the closed interval [a, b],
     // then the length of arc of the curve y=f(x) from the point (a, f(a) to the point (b, f(b)) is given by:
     // The length is equal to the the definite integral of the square root of (1+fPrime^2) from a to b.
-    Differentiation differentiation(integralDetails.variableName);
+    Differentiation const differentiation(integralDetails.variableName);
     Integration integration(integralDetails.variableName);
-    Term differentiatedTerm(differentiation.differentiate(term));
+    Term const differentiatedTerm(differentiation.differentiate(term));
     Term termToIntegrate = (1 + (differentiatedTerm ^ 2)) ^ AlbaNumber::createFraction(1, 2);
     termToIntegrate.simplify();
     return integration.integrateAtDefiniteTerms(termToIntegrate, integralDetails.lowerEnd, integralDetails.higherEnd);
@@ -111,9 +111,9 @@ Term getLengthOfArc(Term const& term, DetailsForDefiniteIntegralWithTerms const&
 
 Term getLengthOfArcInPolarCoordinates(
     Term const& radiusInTermsOfTheta, DetailsForDefiniteIntegralWithTerms const& thetaDetails) {
-    Differentiation differentiation(thetaDetails.variableName);
+    Differentiation const differentiation(thetaDetails.variableName);
     Integration integration(thetaDetails.variableName);
-    Term drOverDTheta(differentiation.differentiate(radiusInTermsOfTheta));
+    Term const drOverDTheta(differentiation.differentiate(radiusInTermsOfTheta));
     Term termToIntegrate = ((drOverDTheta ^ 2) + (radiusInTermsOfTheta ^ 2)) ^ AlbaNumber::createFraction(1, 2);
     termToIntegrate.simplify();
     return integration.integrateAtDefiniteTerms(termToIntegrate, thetaDetails.lowerEnd, thetaDetails.higherEnd);
@@ -133,7 +133,7 @@ Term getMomentOfMassOfARod(Term const& term, DetailsForDefiniteIntegralWithTerms
     // point x meters from the origin, where p is continuous on [0, L].
     // The moment of mass of the rod is the definite integral of x*p(x) from 0 to L.
     Integration integration(integralDetails.variableName);
-    Term termToIntegrate = integralDetails.variableName * term;
+    Term const termToIntegrate = integralDetails.variableName * term;
     return integration.integrateAtDefiniteTerms(termToIntegrate, integralDetails.lowerEnd, integralDetails.higherEnd);
 }
 
@@ -155,7 +155,7 @@ Term getLiquidPressure(
     Term const& massDensity, Term const& accelerationDueToGravity, Term const& length,
     DetailsForDefiniteIntegralWithTerms const& depthDetails) {
     Integration integration(depthDetails.variableName);
-    Term termToIntegrate = massDensity * accelerationDueToGravity * depthDetails.variableName * length;
+    Term const termToIntegrate = massDensity * accelerationDueToGravity * depthDetails.variableName * length;
     return integration.integrateAtDefiniteTerms(termToIntegrate, depthDetails.lowerEnd, depthDetails.higherEnd);
 }
 
@@ -182,35 +182,35 @@ Term getTotalMassOfALamina(
 Term getMomentOfMassOfALaminaWithRespectToXAxis(
     Term const& areaDensityAtPointInXAndY, DetailsForDefiniteIntegralWithTerms const& xDetails,
     DetailsForDefiniteIntegralWithTerms const& yDetails) {
-    Term termToIntegrate(areaDensityAtPointInXAndY * yDetails.variableName);
+    Term const termToIntegrate(areaDensityAtPointInXAndY * yDetails.variableName);
     return getDoubleIntegralInCartesianCoordinates(termToIntegrate, xDetails, yDetails);
 }
 
 Term getMomentOfMassOfALaminaWithRespectToYAxis(
     Term const& areaDensityAtPointInXAndY, DetailsForDefiniteIntegralWithTerms const& xDetails,
     DetailsForDefiniteIntegralWithTerms const& yDetails) {
-    Term termToIntegrate(areaDensityAtPointInXAndY * xDetails.variableName);
+    Term const termToIntegrate(areaDensityAtPointInXAndY * xDetails.variableName);
     return getDoubleIntegralInCartesianCoordinates(termToIntegrate, xDetails, yDetails);
 }
 
 Term getMomentOfInertiaAboutTheXAxis(
     Term const& areaDensityAtPointInXAndY, DetailsForDefiniteIntegralWithTerms const& xDetails,
     DetailsForDefiniteIntegralWithTerms const& yDetails) {
-    Term termToIntegrate(areaDensityAtPointInXAndY * (yDetails.variableName ^ 2));
+    Term const termToIntegrate(areaDensityAtPointInXAndY * (yDetails.variableName ^ 2));
     return getDoubleIntegralInCartesianCoordinates(termToIntegrate, xDetails, yDetails);
 }
 
 Term getMomentOfInertiaAboutTheYAxis(
     Term const& areaDensityAtPointInXAndY, DetailsForDefiniteIntegralWithTerms const& xDetails,
     DetailsForDefiniteIntegralWithTerms const& yDetails) {
-    Term termToIntegrate(areaDensityAtPointInXAndY * (xDetails.variableName ^ 2));
+    Term const termToIntegrate(areaDensityAtPointInXAndY * (xDetails.variableName ^ 2));
     return getDoubleIntegralInCartesianCoordinates(termToIntegrate, xDetails, yDetails);
 }
 
 Term getMomentOfInertiaAboutTheOrigin(
     Term const& areaDensityAtPointInXAndY, DetailsForDefiniteIntegralWithTerms const& xDetails,
     DetailsForDefiniteIntegralWithTerms const& yDetails) {
-    Term termToIntegrate(areaDensityAtPointInXAndY * ((xDetails.variableName ^ 2) + (yDetails.variableName ^ 2)));
+    Term const termToIntegrate(areaDensityAtPointInXAndY * ((xDetails.variableName ^ 2) + (yDetails.variableName ^ 2)));
     return getDoubleIntegralInCartesianCoordinates(termToIntegrate, xDetails, yDetails);
 }
 
@@ -225,17 +225,17 @@ Term getRadiusOfGyration(Term const& momentOfInertia, Term const& totalMass) {
 Term getDoubleIntegralInPolarCoordinates(
     Term const& termWithRadiusAndTheta, DetailsForDefiniteIntegralWithTerms const& radiusDetails,
     DetailsForDefiniteIntegralWithTerms const& thetaDetails) {
-    Term termToIntegrate(termWithRadiusAndTheta * radiusDetails.variableName);
+    Term const termToIntegrate(termWithRadiusAndTheta * radiusDetails.variableName);
     return integrateWithCoordinateDetails(termToIntegrate, {radiusDetails, thetaDetails});
 }
 
 Term getSurfaceAreaWithZInCartesianCoordinates(
     Term const& z, DetailsForDefiniteIntegralWithTerms const& xDetails,
     DetailsForDefiniteIntegralWithTerms const& yDetails) {
-    Term derivativeInX(getPartialDerivative(z, xDetails.variableName));
-    Term derivativeInY(getPartialDerivative(z, yDetails.variableName));
-    Term termInsideSquareRoot((derivativeInX ^ 2) + (derivativeInY ^ 2) + 1);
-    Term termToIntegrate(termInsideSquareRoot ^ AlbaNumber::createFraction(1, 2));
+    Term const derivativeInX(getPartialDerivative(z, xDetails.variableName));
+    Term const derivativeInY(getPartialDerivative(z, yDetails.variableName));
+    Term const termInsideSquareRoot((derivativeInX ^ 2) + (derivativeInY ^ 2) + 1);
+    Term const termToIntegrate(termInsideSquareRoot ^ AlbaNumber::createFraction(1, 2));
     return getDoubleIntegralInCartesianCoordinates(termToIntegrate, xDetails, yDetails);
 }
 
@@ -248,14 +248,15 @@ Term getTripleIntegralInCartesianCoordinates(
 Term getTripleIntegralInCylindricalCoordinates(
     Term const& termWithRadiusAndThetaAndZ, DetailsForDefiniteIntegralWithTerms const& radiusDetails,
     DetailsForDefiniteIntegralWithTerms const& thetaDetails, DetailsForDefiniteIntegralWithTerms const& zDetails) {
-    Term termToIntegrate(termWithRadiusAndThetaAndZ * radiusDetails.variableName);
+    Term const termToIntegrate(termWithRadiusAndThetaAndZ * radiusDetails.variableName);
     return integrateWithCoordinateDetails(termToIntegrate, {radiusDetails, thetaDetails, zDetails});
 }
 
 Term getTripleIntegralInSphericalCoordinates(
     Term const& termWithRawAndThetaAndPhi, DetailsForDefiniteIntegralWithTerms const& rawDetails,
     DetailsForDefiniteIntegralWithTerms const& thetaDetails, DetailsForDefiniteIntegralWithTerms const& phiDetails) {
-    Term termToIntegrate(termWithRawAndThetaAndPhi * (rawDetails.variableName ^ 2) * sin(phiDetails.variableName));
+    Term const termToIntegrate(
+        termWithRawAndThetaAndPhi * (rawDetails.variableName ^ 2) * sin(phiDetails.variableName));
     return integrateWithCoordinateDetails(termToIntegrate, {rawDetails, thetaDetails, phiDetails});
 }
 
@@ -272,8 +273,8 @@ Term integrateWithCoordinateDetails(Term const& term, DetailsForDefiniteIntegral
 
 TermPair getMomentOfMassOfALamina(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails) {
     Integration integration(integralDetails.variableName);
-    Term termToIntegrateInX = (term ^ 2) * AlbaNumber::createFraction(1, 2);
-    Term termToIntegrateInY = integralDetails.variableName * term;
+    Term const termToIntegrateInX = (term ^ 2) * AlbaNumber::createFraction(1, 2);
+    Term const termToIntegrateInY = integralDetails.variableName * term;
     TermPair xyPair;
     xyPair.first =
         integration.integrateAtDefiniteTerms(termToIntegrateInX, integralDetails.lowerEnd, integralDetails.higherEnd);
@@ -283,7 +284,7 @@ TermPair getMomentOfMassOfALamina(Term const& term, DetailsForDefiniteIntegralWi
 }
 
 TermPair getCenterOfMassOfALamina(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails) {
-    Term totalMass(getTotalMassOfALamina(term, integralDetails));
+    Term const totalMass(getTotalMassOfALamina(term, integralDetails));
     TermPair xyPair(getMomentOfMassOfALamina(term, integralDetails));
     xyPair.first = xyPair.first / totalMass;
     xyPair.second = xyPair.second / totalMass;
@@ -292,7 +293,7 @@ TermPair getCenterOfMassOfALamina(Term const& term, DetailsForDefiniteIntegralWi
 
 TermPair getCentroid(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails) {
     Integration integration(integralDetails.variableName);
-    Term area(integration.integrateAtDefiniteTerms(term, integralDetails.lowerEnd, integralDetails.higherEnd));
+    Term const area(integration.integrateAtDefiniteTerms(term, integralDetails.lowerEnd, integralDetails.higherEnd));
     TermPair xyPair(getMomentOfMassOfALamina(term, integralDetails));
     xyPair.first = xyPair.first / area;
     xyPair.second = xyPair.second / area;
@@ -302,10 +303,10 @@ TermPair getCentroid(Term const& term, DetailsForDefiniteIntegralWithTerms const
 TermPair getCenterOfMassOfALamina(
     Term const& areaDensityAtPointInXAndY, DetailsForDefiniteIntegralWithTerms const& xDetails,
     DetailsForDefiniteIntegralWithTerms const& yDetails) {
-    Term totalMass = getTotalMassOfALamina(areaDensityAtPointInXAndY, xDetails, yDetails);
-    Term centerOfMassInX =
+    Term const totalMass = getTotalMassOfALamina(areaDensityAtPointInXAndY, xDetails, yDetails);
+    Term const centerOfMassInX =
         getMomentOfMassOfALaminaWithRespectToYAxis(areaDensityAtPointInXAndY, xDetails, yDetails) / totalMass;
-    Term centerOfMassInY =
+    Term const centerOfMassInY =
         getMomentOfMassOfALaminaWithRespectToXAxis(areaDensityAtPointInXAndY, xDetails, yDetails) / totalMass;
     return TermPair{centerOfMassInX, centerOfMassInY};
 }

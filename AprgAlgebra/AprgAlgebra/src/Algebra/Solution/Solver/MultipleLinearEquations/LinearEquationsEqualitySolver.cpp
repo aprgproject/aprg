@@ -46,9 +46,9 @@ void LinearEquationsEqualitySolver::saveSolutionSetsFromTheCoefficientMatrix(
     MultipleVariableSolutionSet& solutionSet, NumberMatrix const& coefficientsMatrix,
     VariableNamesSet const& variables) {
     int index = 0;
-    int columnEndIndex = variables.size();
+    int const columnEndIndex = variables.size();
     for (string const& variableName : variables) {
-        AlbaNumber identityDiagonalEntry(coefficientsMatrix.getEntry(index, index));
+        AlbaNumber const identityDiagonalEntry(coefficientsMatrix.getEntry(index, index));
         if (identityDiagonalEntry == 1) {
             SolutionSet solutionSetForVariable;
             solutionSetForVariable.addAcceptedValue(-coefficientsMatrix.getEntry(columnEndIndex, index));

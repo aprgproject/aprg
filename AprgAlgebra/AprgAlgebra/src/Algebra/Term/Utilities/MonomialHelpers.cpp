@@ -112,7 +112,7 @@ Monomial getGcfMonomialInMonomials(Monomials const& monomials) {
 }
 
 Monomial getLcmMonomialInMonomials(Monomials const& monomials) {
-    AlbaNumber lcmCoefficient(getLcmOfCoefficientsInMonomials(monomials));
+    AlbaNumber const lcmCoefficient(getLcmOfCoefficientsInMonomials(monomials));
     Monomial maxExponentMonomial(getMonomialWithMaximumExponentsInMonomials(monomials));
     maxExponentMonomial.setConstant(getCommonSignInMonomials(monomials) * lcmCoefficient);
     maxExponentMonomial.simplify();
@@ -203,7 +203,7 @@ bool canBeMergedInAMonomialByAdditionOrSubtraction(Monomial const& monomial1, Mo
     if (variablesMap1.size() == variablesMap2.size()) {
         using MapConstIterator = Monomial::VariablesToExponentsMap::const_iterator;
         using MismatchResultType = pair<MapConstIterator, MapConstIterator>;
-        MismatchResultType mismatchResult =
+        MismatchResultType const mismatchResult =
             mismatch(variablesMap1.cbegin(), variablesMap1.end(), variablesMap2.cbegin());
         result = mismatchResult.first == variablesMap1.cend();
     }
@@ -212,7 +212,7 @@ bool canBeMergedInAMonomialByAdditionOrSubtraction(Monomial const& monomial1, Mo
 
 bool canBeMergedInAMonomialByAdditionOrSubtraction(Monomial const& monomial, Variable const& variable) {
     Monomial::VariablesToExponentsMap const& variablesMap(monomial.getVariablesToExponentsMap());
-    string variableName(variable.getVariableName());
+    string const variableName(variable.getVariableName());
     bool result(false);
     if (variablesMap.size() == 1) {
         if (variablesMap.find(variableName) != variablesMap.cend()) {
