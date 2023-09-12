@@ -4,7 +4,6 @@
 #include <Common/Math/AlbaMathConstants.hpp>
 #include <Common/Math/Number/AlbaComplexNumber.hpp>
 #include <Common/Types/AlbaTypeHelper.hpp>
-
 #include <cmath>
 #include <cstdint>
 #include <ostream>
@@ -89,7 +88,7 @@ template <
         typename ArithmeticType,
         typename =
             std::enable_if_t<typeHelper::isArithmeticType<ArithmeticType>()>>  // enabled via a type template parameter
-constexpr AlbaNumber(ArithmeticType const value)
+    constexpr AlbaNumber(ArithmeticType const value)
         : m_type(getTypeBasedFromArithmeticType<ArithmeticType>()),
           m_data(static_cast<
                  typeHelper::ConditionalType<typeHelper::isIntegralType<ArithmeticType>(), IntDataType, double>>(

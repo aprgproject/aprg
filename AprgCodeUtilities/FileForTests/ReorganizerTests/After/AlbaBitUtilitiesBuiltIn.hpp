@@ -33,7 +33,7 @@ template <typename DataType>
 template <typename DataType>
     constexpr inline bool isEvenParity(DataType const value) {
         return (getNumberOfOnes(value) & 1) == 0;  // AND implementation because we sure that its Unsigned
-}
+    }
 
 template <typename DataType>
     constexpr inline std::size_t getNumberOfConsecutiveZerosFromMsb(DataType const value) {
@@ -63,6 +63,7 @@ template <typename DataType>
     }
 
 }  // namespace bitUtilitiesWithoutBuiltIn
+
 INLINE_WITH_BUILT_IN namespace bitUtilitiesWithBuiltIn {
 
 #ifdef __has_builtin
@@ -79,7 +80,7 @@ template <typename DataType>
             return __builtin_parityll(value) == 0;
         } else {
             return false;  // just return something if size is too large
-}
+        }
     }
 
 template <typename DataType>
@@ -92,14 +93,14 @@ template <typename DataType>
             return __builtin_popcountll(value);
         } else {
             return 0;  // just return something if size is too large
-}
+        }
     }
 
 template <typename DataType>
     constexpr inline std::size_t getNumberOfConsecutiveZerosFromMsb(DataType const value) {
         if (value == 0) {
             return sizeof(DataType) * AlbaBitConstants::BYTE_SIZE_IN_BITS;  // covers undefined behavior
-}
+        }
         if constexpr (sizeof(DataType) < sizeof(unsigned int)) {
             return __builtin_clz(value) -
                    ((sizeof(unsigned int) - sizeof(DataType)) * AlbaBitConstants::BYTE_SIZE_IN_BITS);
@@ -119,7 +120,7 @@ template <typename DataType>
     constexpr inline std::size_t getNumberOfConsecutiveZerosFromLsb(DataType const value) {
         if (value == 0) {
             return 0;  // covers undefined behavior
-}
+        }
         if constexpr (sizeof(DataType) <= sizeof(unsigned int)) {
             return __builtin_ctz(value);
         } else if constexpr (sizeof(DataType) <= sizeof(unsigned long)) {

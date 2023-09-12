@@ -55,6 +55,7 @@ AlbaConfigurationHolder<ConfigurationDetails>::getInstance().setConfigurationDet
 
 ConfigurationDetails m_savedConfigurationDetails;
 AlbaScopeGuard m_scopeGuard;  // important to be after configuration details (for order of destruction)
+
 };
 
 }  // namespace alba

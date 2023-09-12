@@ -1,7 +1,7 @@
 #pragma once
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusTypes.hpp>
-#include <CodeUtilities/Common/Term.hpp>
+#include <CodeUtilities/Common/CommonTypes.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
 namespace alba::CodeUtilities {
@@ -20,13 +20,26 @@ public:
     };
 
     struct HeaderInformation {
-        stringHelper::strings signatures;
+        stringHelper::strings functionSignatures;
+        Patterns functionNamePatterns;
+    };
+
+    struct CppFiles {
+        std::string headerFile;
+        std::string implementationFile;
+        std::string testFile;
+        bool isHeaderFileProcessed;
+        bool isImplementationFileProcessed;
+        bool isTestFileProcessed;
     };
 
     CPlusPlusReorganizer();
     void processDirectory(std::string const& directory);
     void processHeaderAndImplementationFile(std::string const& headerFile, std::string const& implementationFile);
+    void processHeaderImplementationAndTestFile(
+        std::string const& headerFile, std::string const& implementationFile, std::string const& testFile);
     void reorganizeFile(std::string const& file);
+    void gatherInformationFromFile(std::string const& file);
 
 private:
     [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const openingBraceIndex) const;
@@ -34,7 +47,6 @@ private:
     [[nodiscard]] stringHelper::strings getScopeNames() const;
     [[nodiscard]] stringHelper::strings getSavedSignatures() const;
     [[nodiscard]] int getIndexAtSameLineComment(int const index) const;
-    void gatherInformationFromFile(std::string const& file);
     void processTerms();
     void processMacro(int& nextIndex, int const macroStartIndex);
     void processSemiColon(int& nextIndex, int const endIndex);
@@ -53,8 +65,8 @@ private:
     [[nodiscard]] static bool hasEndBrace(std::string const& content);
     static int getIndexAtClosingString(
         Terms const& terms, int const openingIndex, std::string const& openingString, std::string const& closingString);
-    Purpose m_purpose{Purpose::Unknown};
     CppFileType m_fileType{CppFileType::Unknown};
+    Purpose m_purpose{Purpose::Unknown};
     std::vector<ScopeDetail> m_scopeDetails;
     HeaderInformation m_headerInformation;
     Terms m_terms;

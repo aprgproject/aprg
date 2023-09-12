@@ -1,9 +1,7 @@
 #include "AlbaStringHelper.hpp"
-
 #include <Common/Container/AlbaContainerHelper.hpp>
 #include <Common/Math/Helpers/PowerHelpers.hpp>
 #include <Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp>
-
 #include <algorithm>
 #include <cstring>
 #include <functional>
@@ -285,7 +283,7 @@ string getHexEquivalentOfCharacters(string_view const stringToCheck) {
 string getQuotedString(string_view const stringToCheck) {
     stringstream bufferStream;
     bufferStream << quoted(string(stringToCheck));  // remove temporary string object when quoted has string view
-return bufferStream.str();
+    return bufferStream.str();
 }
 
 string constructFileLocator(string_view const file, int const lineNumber) {
@@ -372,14 +370,15 @@ size_t getLevenshteinDistance(string_view const otherString, string_view const b
 using Counts = vector<size_t>;
 
     vector<Counts> previousAndCurrentCounts(2, Counts(basisString.length() + 1));  // string1 as basis
-Counts& firstPrevious(previousAndCurrentCounts[0]);
+    Counts& firstPrevious(previousAndCurrentCounts[0]);
     iota(begin(firstPrevious), end(firstPrevious), 0);  // first row
-for (size_t otherIndex = 1; otherIndex <= otherString.length(); ++otherIndex) {
+
+    for (size_t otherIndex = 1; otherIndex <= otherString.length(); ++otherIndex) {
         Counts& previousCounts(previousAndCurrentCounts[(otherIndex - 1) % 2]);
         Counts& currentCounts(previousAndCurrentCounts[otherIndex % 2]);
 
         currentCounts[0] = otherIndex;  // first column
-for (size_t basisIndex = 1; basisIndex <= basisString.length(); ++basisIndex) {
+        for (size_t basisIndex = 1; basisIndex <= basisString.length(); ++basisIndex) {
             size_t cost = basisString[basisIndex - 1] == otherString[otherIndex - 1] ? 0 : 1;
             currentCounts[basisIndex] =
                 min(min(currentCounts[basisIndex - 1] + 1, previousCounts[basisIndex] + 1),

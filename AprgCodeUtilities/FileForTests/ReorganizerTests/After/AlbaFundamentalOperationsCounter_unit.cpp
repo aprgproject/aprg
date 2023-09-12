@@ -1,7 +1,5 @@
 #include <Common/Debug/AlbaFundamentalOperationsCounter.hpp>
-
 #include <gtest/gtest.h>
-
 #include <memory>
 
 using namespace std;

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
-
 #include <ostream>
 #include <tuple>
 

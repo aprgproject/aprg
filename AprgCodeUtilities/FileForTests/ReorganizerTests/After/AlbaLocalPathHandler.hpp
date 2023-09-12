@@ -7,9 +7,7 @@
 #else
 static_assert(false, "The operating system is not supported.");
 #endif
-
 #include <Common/PathHandler/PathContantsAndTypes.hpp>
-
 #include <functional>
 #include <set>
 #include <string>

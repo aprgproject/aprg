@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include <cassert>
@@ -45,7 +44,7 @@ explicit operator ContentType() const { return get(); }
 
 [[nodiscard]] ContentType get() const {
         assert(m_contentPointer);  // not allowing any mistakes
-if (m_contentPointer) {
+        if (m_contentPointer) {
             return *(m_contentPointer);
         }
         return ContentType();
@@ -53,7 +52,7 @@ if (m_contentPointer) {
 
 [[nodiscard]] ContentType const& getConstReference() const {
         assert(m_contentPointer);  // not allowing any mistakes
-return *(m_contentPointer);
+        return *(m_contentPointer);
     }
 
 [[nodiscard]] bool hasContent() const { return static_cast<bool>(m_contentPointer); }
@@ -79,7 +78,7 @@ void clear() { m_contentPointer.reset(); }
 
 ContentType& getReference() {
         assert(m_contentPointer);  // not allowing any mistakes
-return *(m_contentPointer);
+        return *(m_contentPointer);
     }
 
 private:
@@ -167,6 +166,7 @@ bool m_hasContent;
 ContentType* m_contentPointer;
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
 static ContentType m_empty;  // think of how to remove this
+
 };
 
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)

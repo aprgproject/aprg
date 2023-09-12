@@ -1,9 +1,7 @@
 #include <Common/File/AlbaFileReader.hpp>
 #include <CommonTests/DirectoryConstants.hpp>
 #include <CommonTestsUtilities/File/BaseFileReaderTest.hpp>
-
 #include <gtest/gtest.h>
-
 #include <string>
 
 using namespace std;
@@ -37,125 +35,6 @@ void writeTextWithSpaces(ofstream& writeStream) {
     writeStream << "ABCDEFGHIJKLMNOPQRSTUVWXYZ\n";
     writeStream << R"(!@#$%^&*()[]{}<>:;"'/\?)";
     writeStream << "\n";
-}
-
-TEST_F(AlbaFileReaderTest, ConstructorsWorks) {
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
-    ASSERT_TRUE(testFileReadStream.is_open());
-
-    AlbaFileReader fileReader1(testFileReadStream);
-    EXPECT_EQ(10000U, fileReader1.getMaxBufferSize());
-    AlbaFileReader fileReader2(testFileReadStream, 200);
-    EXPECT_EQ(200U, fileReader2.getMaxBufferSize());
-}
-
-TEST_F(AlbaFileReaderTest, SetAndGetBufferSizeWorks) {
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
-    ASSERT_TRUE(testFileReadStream.is_open());
-
-    AlbaFileReader fileReader(testFileReadStream);
-    EXPECT_EQ(10000U, fileReader.getMaxBufferSize());
-    fileReader.setMaxBufferSize(200);
-    EXPECT_EQ(200U, fileReader.getMaxBufferSize());
-}
-
-TEST_F(AlbaFileReaderTest, SkipLineWorksUsingVariousCharacters) {
-    writeTextWithSpaces(testFileWriteStream);
-    testFileWriteStream.close();
-
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
-    ASSERT_TRUE(testFileReadStream.is_open());
-
-    AlbaFileReader fileReader(testFileReadStream);
-    ASSERT_TRUE(testFileReadStream.good());
-    ASSERT_FALSE(testFileReadStream.eof());
-    EXPECT_TRUE(fileReader.isNotFinished());
-    for (int i = 0; i < 20; ++i) {
-        fileReader.skipLine();
-        EXPECT_TRUE(fileReader.isNotFinished());
-    }
-    fileReader.skipLine();
-    EXPECT_FALSE(fileReader.isNotFinished());
-}
-
-TEST_F(AlbaFileReaderTest, GetLineWorksUsingVariousCharacters) {
-    writeTextWithSpaces(testFileWriteStream);
-    testFileWriteStream.close();
-
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
-    ASSERT_TRUE(testFileReadStream.is_open());
-
-    AlbaFileReader fileReader(testFileReadStream);
-    ASSERT_TRUE(testFileReadStream.good());
-    ASSERT_FALSE(testFileReadStream.eof());
-    EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ("1         ", fileReader.getLine());
-    EXPECT_EQ("12        ", fileReader.getLine());
-    EXPECT_EQ("123       ", fileReader.getLine());
-    EXPECT_EQ("1234      ", fileReader.getLine());
-    EXPECT_EQ("12345     ", fileReader.getLine());
-    EXPECT_EQ("123456    ", fileReader.getLine());
-    EXPECT_EQ("1234567   ", fileReader.getLine());
-    EXPECT_EQ("12345678  ", fileReader.getLine());
-    EXPECT_EQ("123456789 ", fileReader.getLine());
-    EXPECT_EQ("1234567890", fileReader.getLine());
-    EXPECT_EQ("abcdefghijklmnopqrstuvwxyz                ", fileReader.getLine());
-    EXPECT_EQ("", fileReader.getLine());
-    EXPECT_EQ("    ", fileReader.getLine());
-    EXPECT_EQ("        ", fileReader.getLine());
-    EXPECT_EQ("            ", fileReader.getLine());
-    EXPECT_EQ("                ", fileReader.getLine());
-    EXPECT_EQ("                ", fileReader.getLine());
-    EXPECT_EQ("         ", fileReader.getLine());
-    EXPECT_EQ("               ", fileReader.getLine());
-    EXPECT_EQ("ABCDEFGHIJKLMNOPQRSTUVWXYZ", fileReader.getLine());
-    EXPECT_EQ(R"(!@#$%^&*()[]{}<>:;"'/\?)", fileReader.getLine());
-    EXPECT_FALSE(fileReader.isNotFinished());
-}
-
-TEST_F(AlbaFileReaderTest, GetLineAndIgnoreWhiteSpacesWorksUsingVariousCharacters) {
-    writeTextWithSpaces(testFileWriteStream);
-    testFileWriteStream.close();
-
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
-    ASSERT_TRUE(testFileReadStream.is_open());
-
-    AlbaFileReader fileReader(testFileReadStream);
-    ASSERT_TRUE(testFileReadStream.good());
-    ASSERT_FALSE(testFileReadStream.eof());
-    EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ("1", fileReader.getLineAndIgnoreWhiteSpaces());
-    EXPECT_EQ("12", fileReader.getLineAndIgnoreWhiteSpaces());
-    EXPECT_EQ("123", fileReader.getLineAndIgnoreWhiteSpaces());
-    EXPECT_EQ("1234", fileReader.getLineAndIgnoreWhiteSpaces());
-    EXPECT_EQ("12345", fileReader.getLineAndIgnoreWhiteSpaces());
-    EXPECT_EQ("123456", fileReader.getLineAndIgnoreWhiteSpaces());
-    EXPECT_EQ("1234567", fileReader.getLineAndIgnoreWhiteSpaces());
-    EXPECT_EQ("12345678", fileReader.getLineAndIgnoreWhiteSpaces());
-    EXPECT_EQ("123456789", fileReader.getLineAndIgnoreWhiteSpaces());
-    EXPECT_EQ("1234567890", fileReader.getLineAndIgnoreWhiteSpaces());
-    EXPECT_EQ("abcdefghijklmnopqrstuvwxyz", fileReader.getLineAndIgnoreWhiteSpaces());
-    EXPECT_EQ("ABCDEFGHIJKLMNOPQRSTUVWXYZ", fileReader.getLineAndIgnoreWhiteSpaces());
-    EXPECT_EQ(R"(!@#$%^&*()[]{}<>:;"'/\?)", fileReader.getLineAndIgnoreWhiteSpaces());
-    EXPECT_FALSE(fileReader.isNotFinished());
-}
-
-TEST_F(AlbaFileReaderTest, ReadLineWithSizeLimit) {
-    AlbaLocalPathHandler commonSizeTestFileToRead(ALBA_COMMON_SIZE_TEST_FILE);
-    ifstream testFileReadStream(commonSizeTestFileToRead.getFullPath());
-    ASSERT_TRUE(testFileReadStream.is_open());
-
-    AlbaFileReader fileReader(testFileReadStream);
-    fileReader.setMaxBufferSize(2000);
-    EXPECT_EQ(5000U, fileReader.getFileSize());
-    ASSERT_TRUE(testFileReadStream.good());
-    ASSERT_FALSE(testFileReadStream.eof());
-    EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(2000U, fileReader.getLineAndIgnoreWhiteSpaces().length());
-    EXPECT_EQ(2000U, fileReader.getLineAndIgnoreWhiteSpaces().length());
-    EXPECT_EQ(1000U, fileReader.getLineAndIgnoreWhiteSpaces().length());
-    EXPECT_FALSE(fileReader.isNotFinished());
-    EXPECT_TRUE(fileReader.getLineAndIgnoreWhiteSpaces().empty());
 }
 
 TEST_F(AlbaFileReaderTest, ReadSingleCharacterFromBinaryFile) {
@@ -220,31 +99,6 @@ TEST_F(AlbaFileReaderTest, ReadMultipleCharacters) {
     EXPECT_EQ(1U, numberOfCharacters);
     EXPECT_FALSE(fileReader.isNotFinished());
 #endif
-}
-
-TEST_F(AlbaFileReaderTest, RequestToReadMultipleCharactersThatIsTheBeyondBufferSize) {
-    testFileWriteStream << "12345";
-    testFileWriteStream.close();
-
-    ifstream testFileReadStream(testFilePathHandler.getFullPath(), ios::binary);
-    ASSERT_TRUE(testFileReadStream.is_open());
-
-    AlbaFileReader fileReader(testFileReadStream);
-    fileReader.setMaxBufferSize(3);
-    ASSERT_TRUE(testFileReadStream.good());
-    ASSERT_FALSE(testFileReadStream.eof());
-    EXPECT_TRUE(fileReader.isNotFinished());
-    size_t numberOfCharacters = 20000;
-    char* charPointer = nullptr;
-    charPointer = fileReader.getCharacters(numberOfCharacters);
-    EXPECT_EQ("123", string(charPointer, numberOfCharacters));
-    EXPECT_EQ(3U, numberOfCharacters);
-    EXPECT_TRUE(fileReader.isNotFinished());
-    numberOfCharacters = 20000;
-    charPointer = fileReader.getCharacters(numberOfCharacters);
-    EXPECT_EQ("45", string(charPointer, numberOfCharacters));
-    EXPECT_EQ(2U, numberOfCharacters);
-    EXPECT_FALSE(fileReader.isNotFinished());
 }
 
 TEST_F(AlbaFileReaderTest, ReadOneByteNumbers) {
@@ -436,6 +290,150 @@ TEST_F(AlbaFileReaderTest, FileContentsCanBeSavedInMemoryBuffer) {
     EXPECT_EQ(0xA1U, buffer[4]);
     EXPECT_EQ(0xBAU, buffer[5]);
     EXPECT_FALSE(fileReader.isNotFinished());
+}
+
+TEST_F(AlbaFileReaderTest, SkipLineWorksUsingVariousCharacters) {
+    writeTextWithSpaces(testFileWriteStream);
+    testFileWriteStream.close();
+
+    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ASSERT_TRUE(testFileReadStream.is_open());
+
+    AlbaFileReader fileReader(testFileReadStream);
+    ASSERT_TRUE(testFileReadStream.good());
+    ASSERT_FALSE(testFileReadStream.eof());
+    EXPECT_TRUE(fileReader.isNotFinished());
+    for (int i = 0; i < 20; ++i) {
+        fileReader.skipLine();
+        EXPECT_TRUE(fileReader.isNotFinished());
+    }
+    fileReader.skipLine();
+    EXPECT_FALSE(fileReader.isNotFinished());
+}
+
+TEST_F(AlbaFileReaderTest, GetLineWorksUsingVariousCharacters) {
+    writeTextWithSpaces(testFileWriteStream);
+    testFileWriteStream.close();
+
+    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ASSERT_TRUE(testFileReadStream.is_open());
+
+    AlbaFileReader fileReader(testFileReadStream);
+    ASSERT_TRUE(testFileReadStream.good());
+    ASSERT_FALSE(testFileReadStream.eof());
+    EXPECT_TRUE(fileReader.isNotFinished());
+    EXPECT_EQ("1         ", fileReader.getLine());
+    EXPECT_EQ("12        ", fileReader.getLine());
+    EXPECT_EQ("123       ", fileReader.getLine());
+    EXPECT_EQ("1234      ", fileReader.getLine());
+    EXPECT_EQ("12345     ", fileReader.getLine());
+    EXPECT_EQ("123456    ", fileReader.getLine());
+    EXPECT_EQ("1234567   ", fileReader.getLine());
+    EXPECT_EQ("12345678  ", fileReader.getLine());
+    EXPECT_EQ("123456789 ", fileReader.getLine());
+    EXPECT_EQ("1234567890", fileReader.getLine());
+    EXPECT_EQ("abcdefghijklmnopqrstuvwxyz                ", fileReader.getLine());
+    EXPECT_EQ("", fileReader.getLine());
+    EXPECT_EQ("    ", fileReader.getLine());
+    EXPECT_EQ("        ", fileReader.getLine());
+    EXPECT_EQ("            ", fileReader.getLine());
+    EXPECT_EQ("                ", fileReader.getLine());
+    EXPECT_EQ("                ", fileReader.getLine());
+    EXPECT_EQ("         ", fileReader.getLine());
+    EXPECT_EQ("               ", fileReader.getLine());
+    EXPECT_EQ("ABCDEFGHIJKLMNOPQRSTUVWXYZ", fileReader.getLine());
+    EXPECT_EQ(R"(!@#$%^&*()[]{}<>:;"'/\?)", fileReader.getLine());
+    EXPECT_FALSE(fileReader.isNotFinished());
+}
+
+TEST_F(AlbaFileReaderTest, GetLineAndIgnoreWhiteSpacesWorksUsingVariousCharacters) {
+    writeTextWithSpaces(testFileWriteStream);
+    testFileWriteStream.close();
+
+    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ASSERT_TRUE(testFileReadStream.is_open());
+
+    AlbaFileReader fileReader(testFileReadStream);
+    ASSERT_TRUE(testFileReadStream.good());
+    ASSERT_FALSE(testFileReadStream.eof());
+    EXPECT_TRUE(fileReader.isNotFinished());
+    EXPECT_EQ("1", fileReader.getLineAndIgnoreWhiteSpaces());
+    EXPECT_EQ("12", fileReader.getLineAndIgnoreWhiteSpaces());
+    EXPECT_EQ("123", fileReader.getLineAndIgnoreWhiteSpaces());
+    EXPECT_EQ("1234", fileReader.getLineAndIgnoreWhiteSpaces());
+    EXPECT_EQ("12345", fileReader.getLineAndIgnoreWhiteSpaces());
+    EXPECT_EQ("123456", fileReader.getLineAndIgnoreWhiteSpaces());
+    EXPECT_EQ("1234567", fileReader.getLineAndIgnoreWhiteSpaces());
+    EXPECT_EQ("12345678", fileReader.getLineAndIgnoreWhiteSpaces());
+    EXPECT_EQ("123456789", fileReader.getLineAndIgnoreWhiteSpaces());
+    EXPECT_EQ("1234567890", fileReader.getLineAndIgnoreWhiteSpaces());
+    EXPECT_EQ("abcdefghijklmnopqrstuvwxyz", fileReader.getLineAndIgnoreWhiteSpaces());
+    EXPECT_EQ("ABCDEFGHIJKLMNOPQRSTUVWXYZ", fileReader.getLineAndIgnoreWhiteSpaces());
+    EXPECT_EQ(R"(!@#$%^&*()[]{}<>:;"'/\?)", fileReader.getLineAndIgnoreWhiteSpaces());
+    EXPECT_FALSE(fileReader.isNotFinished());
+}
+
+TEST_F(AlbaFileReaderTest, ConstructorsWorks) {
+    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ASSERT_TRUE(testFileReadStream.is_open());
+
+    AlbaFileReader fileReader1(testFileReadStream);
+    EXPECT_EQ(10000U, fileReader1.getMaxBufferSize());
+    AlbaFileReader fileReader2(testFileReadStream, 200);
+    EXPECT_EQ(200U, fileReader2.getMaxBufferSize());
+}
+
+TEST_F(AlbaFileReaderTest, SetAndGetBufferSizeWorks) {
+    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ASSERT_TRUE(testFileReadStream.is_open());
+
+    AlbaFileReader fileReader(testFileReadStream);
+    EXPECT_EQ(10000U, fileReader.getMaxBufferSize());
+    fileReader.setMaxBufferSize(200);
+    EXPECT_EQ(200U, fileReader.getMaxBufferSize());
+}
+
+TEST_F(AlbaFileReaderTest, RequestToReadMultipleCharactersThatIsTheBeyondBufferSize) {
+    testFileWriteStream << "12345";
+    testFileWriteStream.close();
+
+    ifstream testFileReadStream(testFilePathHandler.getFullPath(), ios::binary);
+    ASSERT_TRUE(testFileReadStream.is_open());
+
+    AlbaFileReader fileReader(testFileReadStream);
+    fileReader.setMaxBufferSize(3);
+    ASSERT_TRUE(testFileReadStream.good());
+    ASSERT_FALSE(testFileReadStream.eof());
+    EXPECT_TRUE(fileReader.isNotFinished());
+    size_t numberOfCharacters = 20000;
+    char* charPointer = nullptr;
+    charPointer = fileReader.getCharacters(numberOfCharacters);
+    EXPECT_EQ("123", string(charPointer, numberOfCharacters));
+    EXPECT_EQ(3U, numberOfCharacters);
+    EXPECT_TRUE(fileReader.isNotFinished());
+    numberOfCharacters = 20000;
+    charPointer = fileReader.getCharacters(numberOfCharacters);
+    EXPECT_EQ("45", string(charPointer, numberOfCharacters));
+    EXPECT_EQ(2U, numberOfCharacters);
+    EXPECT_FALSE(fileReader.isNotFinished());
+}
+
+TEST_F(AlbaFileReaderTest, ReadLineWithSizeLimit) {
+    AlbaLocalPathHandler commonSizeTestFileToRead(ALBA_COMMON_SIZE_TEST_FILE);
+    ifstream testFileReadStream(commonSizeTestFileToRead.getFullPath());
+    ASSERT_TRUE(testFileReadStream.is_open());
+
+    AlbaFileReader fileReader(testFileReadStream);
+    fileReader.setMaxBufferSize(2000);
+    EXPECT_EQ(5000U, fileReader.getFileSize());
+    ASSERT_TRUE(testFileReadStream.good());
+    ASSERT_FALSE(testFileReadStream.eof());
+    EXPECT_TRUE(fileReader.isNotFinished());
+    EXPECT_EQ(2000U, fileReader.getLineAndIgnoreWhiteSpaces().length());
+    EXPECT_EQ(2000U, fileReader.getLineAndIgnoreWhiteSpaces().length());
+    EXPECT_EQ(1000U, fileReader.getLineAndIgnoreWhiteSpaces().length());
+    EXPECT_FALSE(fileReader.isNotFinished());
+    EXPECT_TRUE(fileReader.getLineAndIgnoreWhiteSpaces().empty());
 }
 
 }  // namespace alba

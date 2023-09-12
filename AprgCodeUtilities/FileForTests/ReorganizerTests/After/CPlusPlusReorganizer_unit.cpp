@@ -3,11 +3,9 @@
 #include <CodeUtilitiesTests/MtDirectoryConstants.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
-
-#include <gtest/gtest.h>
-
 #include <cstdlib>
 #include <fstream>
+#include <gtest/gtest.h>
 
 using namespace alba::CodeUtilities::CPlusPlusUtilities;
 using namespace alba::stringHelper;

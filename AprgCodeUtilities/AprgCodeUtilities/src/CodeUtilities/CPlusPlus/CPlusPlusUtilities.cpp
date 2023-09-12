@@ -74,17 +74,17 @@ string getFunctionSignature(string const& functionText) {
         terms, 0, Patterns{{M(TermType::WhiteSpace), M(TermType::WhiteSpace)}, {M(TermType::WhiteSpace)}},
         {Term(TermType::WhiteSpace, " ")});
 
-    Indexes whiteSpaceStartIndexes = checkPatternAt(terms, 0, Patterns{{M(TermType::WhiteSpace)}});
-    if (!whiteSpaceStartIndexes.empty()) {
-        terms.erase(terms.cbegin(), terms.cbegin() + whiteSpaceStartIndexes.back() + 1);
-    }
-    Indexes whiteSpaceEndIndexes =
-        checkPatternAt(terms, static_cast<int>(terms.size()) - 1, Patterns{{M(TermType::WhiteSpace)}});
-    if (!whiteSpaceEndIndexes.empty()) {
-        terms.erase(terms.cbegin() + whiteSpaceEndIndexes.front(), terms.cend());
-    }
+    return getStringWithoutStartingAndTrailingWhiteSpace(getCombinedContents(terms));
+}
 
-    return getCombinedContents(terms);
+string getFunctionName(string const& functionSignature) {
+    Terms terms(getTermsFromString(functionSignature));
+    Patterns const searchPatterns{{M(TermType::Identifier), M("(")}};
+    Indexes hitIndexes = searchForPatternsForwards(terms, 0, searchPatterns);
+    if (!hitIndexes.empty()) {
+        return terms[hitIndexes.front()].getContent();
+    }
+    return {};
 }
 
 string getTextWithoutCommentsWithNewLine(Terms const& terms) {
