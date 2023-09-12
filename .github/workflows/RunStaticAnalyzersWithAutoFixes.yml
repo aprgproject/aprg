@@ -75,7 +75,7 @@ jobs:
   runStaticAnalyzersOnCppProjects:
     name: JobId[${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}] on ${{ matrix.project }} | Run Static Analyzers with Auto Fixes
     needs: determineCppProjects
-    runs-on: 'windows-latest' #${{ contains(fromJSON(needs.determineCppProjects.outputs.windowsOnlyProjects), matrix.project) && 'windows-latest' || ${{ contains(fromJSON(needs.determineCppProjects.outputs.linuxOnlyProjects), matrix.project) && 'ubuntu-latest' || 'ubuntu-latest' }} # ternary operator
+    runs-on: ${{ contains(fromJSON(needs.determineCppProjects.outputs.windowsOnlyProjects), matrix.project) && 'windows-latest' || ${{ contains(fromJSON(needs.determineCppProjects.outputs.linuxOnlyProjects), matrix.project) && 'ubuntu-latest' || 'windows-latest' }} # ternary operator
     strategy:
       fail-fast: false
       matrix:
