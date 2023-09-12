@@ -514,8 +514,7 @@ gsl_sf_ellint_D_e(double phi, double k, gsl_mode_t mode, gsl_sf_result * result)
     result->err = GSL_DBL_EPSILON * fabs(result->val) + fabs(sin3_phi/3.0 * rd.err);
     if (nc == 0) {
       return status;
-    } 
-      gsl_sf_result rd;  /* add extra terms from periodicity */
+    }
       const int rdstatus = gsl_sf_ellint_Dcomp_e(k, mode, &rd);  
       result->val += 2*nc*rd.val;
       result->err += 2*fabs(nc)*rd.err;
