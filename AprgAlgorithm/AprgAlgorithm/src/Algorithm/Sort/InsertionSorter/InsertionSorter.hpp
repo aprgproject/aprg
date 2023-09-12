@@ -18,7 +18,8 @@ public:
         ALBA_DBG_PRINT1("pass1001");
         if (!valuesToSort.empty()) {
             ALBA_DBG_PRINT2("pass1002", valuesToSort);
-            for (auto insertIt = std::next(valuesToSort.begin()); insertIt != valuesToSort.end(); ++insertIt) {
+            auto insertIt = std::next(valuesToSort.begin());
+            for (; insertIt != valuesToSort.end(); ++insertIt) {
                 ALBA_DBG_PRINT1("pass1003");
                 continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
                 ALBA_DBG_PRINT1("pass1004");
@@ -32,7 +33,8 @@ public:
                 ALBA_DBG_PRINT2("pass10005", *insertIt);
                 // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
             }
-            ALBA_DBG_PRINT1("pass1005");
+            ALBA_DBG_PRINT1("pass10051");
+            ALBA_DBG_PRINT2("pass1005", *insertIt);
         }
         ALBA_DBG_PRINT1("pass1006");
     }
