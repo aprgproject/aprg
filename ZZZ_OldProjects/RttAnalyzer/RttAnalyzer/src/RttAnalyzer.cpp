@@ -52,7 +52,7 @@ void RttAnalyzer::processFile(std::string const& file) {
         AlbaFileReader logFileReader(logStream);
 
         while (logFileReader.isNotFinished()) {
-            string lineInFile(logFileReader.getLineAndIgnoreWhiteSpaces());
+            string const lineInFile(logFileReader.getLineAndIgnoreWhiteSpaces());
             processLine(lineInFile);
         }
     }

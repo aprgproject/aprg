@@ -16,13 +16,13 @@ void RttAnalyzer2::processFile(string const& file) {
     ifstream logStream(pathHandler.getFullPath());
     ofstream outputLogStream(pathHandler.getDirectory() + "BtsLogRtt.csv");
     pathHandler.input(pathHandler.getDirectory() + pathHandler.getFilenameOnly() + ".csv");
-    ofstream collectedRttDetails(pathHandler.getFullPath());
+    ofstream const collectedRttDetails(pathHandler.getFullPath());
 
     if (logStream.is_open()) {
         AlbaFileReader logFileReader(logStream);
 
         while (logFileReader.isNotFinished()) {
-            string lineInFile(logFileReader.getLineAndIgnoreWhiteSpaces());
+            string const lineInFile(logFileReader.getLineAndIgnoreWhiteSpaces());
             if (isStringFoundNotCaseSensitive(lineInFile, "final RTT value reported to DSP explorer")) {
                 processLine(outputLogStream, lineInFile);
             }
@@ -31,8 +31,8 @@ void RttAnalyzer2::processFile(string const& file) {
 }
 
 void RttAnalyzer2::processLine(ofstream& outputFile, string const& line) {
-    static string dateTime;
-    string time = getStringInBetweenTwoStrings(line, "<", "Z>");
+    static string const dateTime;
+    string const time = getStringInBetweenTwoStrings(line, "<", "Z>");
     auto rtt = convertStringToNumber<unsigned int>(
         getStringAfterThisString(line, "final RTT value reported to DSP explorer = "));
     outputFile << time << "," << rtt << "\n";
@@ -43,7 +43,7 @@ void RttAnalyzer2::processFile3(string const& file) {
     ifstream logStream(pathHandler.getFullPath());
     ofstream outputLogStream(pathHandler.getDirectory() + "PeakPosCx8FromUeLogs.csv");
     pathHandler.input(pathHandler.getDirectory() + pathHandler.getFilenameOnly() + ".csv");
-    ofstream collectedRttDetails(pathHandler.getFullPath());
+    ofstream const collectedRttDetails(pathHandler.getFullPath());
 
     outputLogStream << "peak_pos_cx8\n";
 
@@ -51,7 +51,7 @@ void RttAnalyzer2::processFile3(string const& file) {
         AlbaFileReader logFileReader(logStream);
 
         while (logFileReader.isNotFinished()) {
-            string lineInFile(logFileReader.getLineAndIgnoreWhiteSpaces());
+            string const lineInFile(logFileReader.getLineAndIgnoreWhiteSpaces());
             if (isStringFoundNotCaseSensitive(lineInFile, "peak_pos_cx8")) {
                 processLine3(outputLogStream, lineInFile);
             }
@@ -60,7 +60,7 @@ void RttAnalyzer2::processFile3(string const& file) {
 }
 
 void RttAnalyzer2::processLine3(ofstream& outputFile, string const& line) {
-    static string dateTime;
+    static string const dateTime;
     auto peakPosCx8 = convertStringToNumber<unsigned int>(getNumberAfterThisString(line, "peak_pos_cx8 "));
     outputFile << peakPosCx8 << "\n";
 }
@@ -68,14 +68,14 @@ void RttAnalyzer2::processLine3(ofstream& outputFile, string const& line) {
 void RttAnalyzer2::saveTitle2() { m_outputLogStream << "fileName,dateTime,maxPos,refPos,difference\n"; }
 
 void RttAnalyzer2::processFile2(string const& file) {
-    AlbaLocalPathHandler pathHandler(file);
+    AlbaLocalPathHandler const pathHandler(file);
     ifstream logStream(pathHandler.getFullPath());
 
     if (logStream.is_open()) {
         AlbaFileReader logFileReader(logStream);
 
         while (logFileReader.isNotFinished()) {
-            string lineInFile(logFileReader.getLineAndIgnoreWhiteSpaces());
+            string const lineInFile(logFileReader.getLineAndIgnoreWhiteSpaces());
             processLine2(pathHandler.getFile(), lineInFile);
         }
     }
@@ -88,7 +88,7 @@ void RttAnalyzer2::processLine2(string const& fileName, string const& line) {
     } else if (isStringFoundNotCaseSensitive(line, "RXD_FILT")) {
         auto maxPos = convertStringToNumber<unsigned int>(getNumberAfterThisString(line, "max_pos[0]: "));
         auto refPos = convertStringToNumber<unsigned int>(getNumberAfterThisString(line, "ref_pos: "));
-        int difference = static_cast<int>(maxPos) - static_cast<int>(refPos);
+        int const difference = static_cast<int>(maxPos) - static_cast<int>(refPos);
         m_outputLogStream << fileName << "," << dateTime << "," << maxPos << "," << refPos << "," << difference << "\n";
     }
 }
