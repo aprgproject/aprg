@@ -5,5 +5,5 @@
 using namespace std;
 
 namespace alba {
-TEST(LrmAllocationSimulatorTest, SampleTest1) { LrmAllocationSimulator entity; }
+TEST(LrmAllocationSimulatorTest, SampleTest1) { LrmAllocationSimulator const entity; }
 }  // namespace alba

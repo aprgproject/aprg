@@ -15,8 +15,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgTwoFspTwoCcdMcd) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations();
 
@@ -37,10 +37,10 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgTwoFspTwoCcdMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -71,10 +71,10 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgTwoFspTwoCcdNbicMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -106,12 +106,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgTwoFspThreeCcdMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -149,12 +149,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgTwoFspThreeCcdNbicMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -191,14 +191,14 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgTwoFspFourCcdMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdMcdForLcgIdAccordingToMark(4));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg4(lrm.allocateCcdMcdForLcgIdAccordingToMark(4));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -245,14 +245,14 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgTwoFspFourCcdNbicMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(4));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg4(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(4));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -291,10 +291,10 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgThreeFspTwoCcdMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -325,10 +325,10 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgThreeFspTwoCcdNbicMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -360,12 +360,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgThreeFspThreeCcdMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -405,12 +405,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgThreeFspThreeCcdNbicMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -451,14 +451,14 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgThreeFspFourCcdMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdMcdForLcgIdAccordingToMark(4));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg4(lrm.allocateCcdMcdForLcgIdAccordingToMark(4));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -507,14 +507,14 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgThreeFspFourCcdNbicMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(4));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg4(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(4));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -553,10 +553,10 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFourFspTwoCcdMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -587,10 +587,10 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFourFspTwoCcdNbicMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -622,12 +622,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFourFspThreeCcdMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -667,12 +667,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFourFspThreeCcdNbicMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -709,14 +709,14 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFourFspFourCcdNMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdMcdForLcgIdAccordingToMark(4));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg4(lrm.allocateCcdMcdForLcgIdAccordingToMark(4));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -768,14 +768,14 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFourFspFourCcdNbicMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(4));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg4(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(4));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -814,10 +814,10 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFiveFspTwoCcdMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -848,10 +848,10 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFiveFspTwoCcdNbicMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -883,12 +883,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFiveFspThreeCcdMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -928,12 +928,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFiveFspThreeCcdNbicMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -970,14 +970,14 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFiveFspFourCcdMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdMcdForLcgIdAccordingToMark(4));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg4(lrm.allocateCcdMcdForLcgIdAccordingToMark(4));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -1026,14 +1026,14 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFiveFspFourCcdNbicMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(4));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg4(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(4));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -1072,10 +1072,10 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgSixFspTwoCcdNMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -1106,10 +1106,10 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgSixFspTwoCcdNbicMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -1141,12 +1141,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgSixFspThreeCcdNMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -1186,12 +1186,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgSixFspThreeCcdNbicMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -1228,14 +1228,14 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgSixFspFourCcdMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdMcdForLcgIdAccordingToMark(4));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg4(lrm.allocateCcdMcdForLcgIdAccordingToMark(4));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -1284,14 +1284,14 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgSixFspFourCcdNbicMcdPic) {
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(4));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
-    SelectionDspResult resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg4(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(4));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
+    SelectionDspResult const resultPicLcg4(lrm.allocatePicForLcgIdAccordingToMark(4));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -1329,9 +1329,9 @@ TEST(LrmMarkAlgorithmWithHibenationTest, SharedLcgWithOneDspCcdNbicMcdWithoutPic
     lrm.setHibernationCommissioned(true);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -1358,9 +1358,9 @@ TEST(LrmMarkAlgorithmWithHibenationTest, SharedLcgWithOneDspNbicMcdWithoutPicInM
     lrm.setHibernationCommissioned(true);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResult resultMcdLcg2(lrm.allocateNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultMcdLcg2(lrm.allocateNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -1387,10 +1387,10 @@ TEST(LrmMarkAlgorithmWithHibenationTest, SharedLcgWithOneDspNbicMcdWithPicInMsm)
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
     lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResult resultMcdLcg2(lrm.allocateNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
-    SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
+    SelectionDspResultForCcdAndMcd const resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultMcdLcg2(lrm.allocateNbicMcdForLcgIdAccordingToMark(2));
+    SelectionDspResult const resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult const resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
 

@@ -11,9 +11,9 @@ TEST(HardwareConfigurationTest, OneFspOneLcgEvenDistribution) {
     hardwareConfiguration.changeConfigurationToOneFspOneLcgEvenDistribution();
     AddressToDspMap& addressToDspMap(hardwareConfiguration.getAddressToDspMapReference());
     AddressToFspMap& addressToFspMap(hardwareConfiguration.getAddressToFspMapReference());
-    Dsp& dspIn1230(addressToDspMap.at(0x1230));
-    Dsp& dspIn1240(addressToDspMap.at(0x1240));
-    Fsp& fspIn1200(addressToFspMap.at(0x1200));
+    Dsp const& dspIn1230(addressToDspMap.at(0x1230));
+    Dsp const& dspIn1240(addressToDspMap.at(0x1240));
+    Fsp const& fspIn1200(addressToFspMap.at(0x1200));
 
     EXPECT_EQ(0x1230U, dspIn1230.getAddress());
     EXPECT_EQ(0U, dspIn1230.getNumberOfDchUsers());
@@ -34,13 +34,13 @@ TEST(HardwareConfigurationTest, OneFspTwoLcgEvenDistribution) {
     hardwareConfiguration.changeConfigurationToOneFspTwoLcgEvenDistribution();
     AddressToDspMap& addressToDspMap(hardwareConfiguration.getAddressToDspMapReference());
     AddressToFspMap& addressToFspMap(hardwareConfiguration.getAddressToFspMapReference());
-    Dsp& dspIn1230(addressToDspMap.at(0x1230));
-    Dsp& dspIn1240(addressToDspMap.at(0x1240));
-    Dsp& dspIn1250(addressToDspMap.at(0x1250));
-    Dsp& dspIn1260(addressToDspMap.at(0x1260));
-    Dsp& dspIn1270(addressToDspMap.at(0x1270));
-    Dsp& dspIn1280(addressToDspMap.at(0x1280));
-    Fsp& fspIn1200(addressToFspMap.at(0x1200));
+    Dsp const& dspIn1230(addressToDspMap.at(0x1230));
+    Dsp const& dspIn1240(addressToDspMap.at(0x1240));
+    Dsp const& dspIn1250(addressToDspMap.at(0x1250));
+    Dsp const& dspIn1260(addressToDspMap.at(0x1260));
+    Dsp const& dspIn1270(addressToDspMap.at(0x1270));
+    Dsp const& dspIn1280(addressToDspMap.at(0x1280));
+    Fsp const& fspIn1200(addressToFspMap.at(0x1200));
 
     EXPECT_EQ(0x1230U, dspIn1230.getAddress());
     EXPECT_EQ(0U, dspIn1230.getNumberOfDchUsers());
@@ -66,9 +66,9 @@ TEST(HardwareConfigurationTest, TwoFspOneLcgEvenDistributionCheckSecondFsp) {
     hardwareConfiguration.changeConfigurationToTwoFspOneLcgEvenDistribution();
     AddressToDspMap& addressToDspMap(hardwareConfiguration.getAddressToDspMapReference());
     AddressToFspMap& addressToFspMap(hardwareConfiguration.getAddressToFspMapReference());
-    Dsp& dspIn1330(addressToDspMap.at(0x1330));
-    Dsp& dspIn1340(addressToDspMap.at(0x1340));
-    Fsp& fspIn1300(addressToFspMap.at(0x1300));
+    Dsp const& dspIn1330(addressToDspMap.at(0x1330));
+    Dsp const& dspIn1340(addressToDspMap.at(0x1340));
+    Fsp const& fspIn1300(addressToFspMap.at(0x1300));
 
     EXPECT_EQ(0x1330U, dspIn1330.getAddress());
     EXPECT_EQ(0U, dspIn1330.getNumberOfDchUsers());
@@ -89,20 +89,20 @@ TEST(HardwareConfigurationTest, TwoFspTwoLcgEvenDistribution) {
     hardwareConfiguration.changeConfigurationToTwoFspTwoLcgEvenDistribution();
     AddressToDspMap& addressToDspMap(hardwareConfiguration.getAddressToDspMapReference());
     AddressToFspMap& addressToFspMap(hardwareConfiguration.getAddressToFspMapReference());
-    Dsp& dspIn1230(addressToDspMap.at(0x1230));
-    Dsp& dspIn1240(addressToDspMap.at(0x1240));
-    Dsp& dspIn1250(addressToDspMap.at(0x1250));
-    Dsp& dspIn1260(addressToDspMap.at(0x1260));
-    Dsp& dspIn1270(addressToDspMap.at(0x1270));
-    Dsp& dspIn1280(addressToDspMap.at(0x1280));
-    Dsp& dspIn1330(addressToDspMap.at(0x1330));
-    Dsp& dspIn1340(addressToDspMap.at(0x1340));
-    Dsp& dspIn1350(addressToDspMap.at(0x1350));
-    Dsp& dspIn1360(addressToDspMap.at(0x1360));
-    Dsp& dspIn1370(addressToDspMap.at(0x1370));
-    Dsp& dspIn1380(addressToDspMap.at(0x1380));
-    Fsp& fspIn1200(addressToFspMap.at(0x1200));
-    Fsp& fspIn1300(addressToFspMap.at(0x1300));
+    Dsp const& dspIn1230(addressToDspMap.at(0x1230));
+    Dsp const& dspIn1240(addressToDspMap.at(0x1240));
+    Dsp const& dspIn1250(addressToDspMap.at(0x1250));
+    Dsp const& dspIn1260(addressToDspMap.at(0x1260));
+    Dsp const& dspIn1270(addressToDspMap.at(0x1270));
+    Dsp const& dspIn1280(addressToDspMap.at(0x1280));
+    Dsp const& dspIn1330(addressToDspMap.at(0x1330));
+    Dsp const& dspIn1340(addressToDspMap.at(0x1340));
+    Dsp const& dspIn1350(addressToDspMap.at(0x1350));
+    Dsp const& dspIn1360(addressToDspMap.at(0x1360));
+    Dsp const& dspIn1370(addressToDspMap.at(0x1370));
+    Dsp const& dspIn1380(addressToDspMap.at(0x1380));
+    Fsp const& fspIn1200(addressToFspMap.at(0x1200));
+    Fsp const& fspIn1300(addressToFspMap.at(0x1300));
 
     EXPECT_EQ(0x1230U, dspIn1230.getAddress());
     EXPECT_EQ(0U, dspIn1230.getNumberOfDchUsers());

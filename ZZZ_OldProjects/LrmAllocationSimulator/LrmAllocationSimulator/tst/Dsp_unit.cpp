@@ -7,7 +7,7 @@ using namespace std;
 namespace alba {
 
 TEST(DspTest, DspDetailsCanAssignedCorrectlyAtDefaultConstruction) {
-    Dsp dsp;
+    Dsp const dsp;
     EXPECT_EQ(0U, dsp.getAddress());
     EXPECT_EQ(0U, dsp.getFspAddress());
     EXPECT_EQ(0U, dsp.getLcgId());
@@ -34,7 +34,7 @@ TEST(DspTest, DspDetailsCanAssignedCorrectlyAtConstruction) {
     dspDetails.hasEmergencyCalls = true;
     dspDetails.mode = DspMode::NyquistCommonChannelDeviceNormal;
     dspDetails.nyquistType = NyquistType::TurboNyquist;
-    Dsp dsp(dspDetails);
+    Dsp const dsp(dspDetails);
 
     EXPECT_EQ(0x1230U, dsp.getAddress());
     EXPECT_EQ(0x1200U, dsp.getFspAddress());

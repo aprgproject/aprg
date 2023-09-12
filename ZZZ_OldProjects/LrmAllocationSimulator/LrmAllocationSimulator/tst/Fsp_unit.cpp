@@ -12,7 +12,7 @@ TEST(FspTest, FspDetailsCanAssignedCorrectlyAtConstruction) {
     fspDetails.isMasterTcom = true;
     fspDetails.address = 0x1200;
     fspDetails.dspAddresses.emplace_back(0x1230);
-    Fsp fsp(fspDetails);
+    Fsp const fsp(fspDetails);
 
     EXPECT_EQ(SmType::ESM, fsp.getSmType());
     EXPECT_TRUE(fsp.isMasterTcom());

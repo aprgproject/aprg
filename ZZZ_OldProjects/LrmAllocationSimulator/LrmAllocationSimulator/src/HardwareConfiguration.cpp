@@ -254,7 +254,7 @@ void HardwareConfiguration::printDspAllocations(unsigned int const printFlags) {
         firstCellStream << "0x" << hex << addressToFspPair.first << dec;
         table.getLastRow().addCell(firstCellStream.str());
         for (unsigned int const dspAddress : addressToFspPair.second.getDspAddresses()) {
-            Dsp& dsp(m_dspAddressToDspMap.at(dspAddress));
+            Dsp const& dsp(m_dspAddressToDspMap.at(dspAddress));
             stringstream streamTemp;
             streamTemp << "LCG:" << dsp.getLcgId() << "\n" << dsp.getNbicString() << dsp.getModeString();
             table.getLastRow().addCell(streamTemp.str(), HorizontalAlignment::Center);
@@ -264,7 +264,7 @@ void HardwareConfiguration::printDspAllocations(unsigned int const printFlags) {
             table.addRow();
             table.getLastRow().addCell("");
             for (unsigned int const dspAddress : addressToFspPair.second.getDspAddresses()) {
-                Dsp& dsp(m_dspAddressToDspMap.at(dspAddress));
+                Dsp const& dsp(m_dspAddressToDspMap.at(dspAddress));
                 stringstream streamTemp;
                 streamTemp << "Users:" << dsp.getNumberOfDchUsers();
                 table.getLastRow().addCell(streamTemp.str(), HorizontalAlignment::Center);
@@ -275,7 +275,7 @@ void HardwareConfiguration::printDspAllocations(unsigned int const printFlags) {
             table.addRow();
             table.getLastRow().addCell("");
             for (unsigned int const dspAddress : addressToFspPair.second.getDspAddresses()) {
-                Dsp& dsp(m_dspAddressToDspMap.at(dspAddress));
+                Dsp const& dsp(m_dspAddressToDspMap.at(dspAddress));
                 stringstream streamTemp;
                 streamTemp << "DLI:" << dsp.getDliPool();
                 table.getLastRow().addCell(streamTemp.str(), HorizontalAlignment::Center);
@@ -289,7 +289,7 @@ AddressToDspMap& HardwareConfiguration::getAddressToDspMapReference() { return m
 AddressToFspMap& HardwareConfiguration::getAddressToFspMapReference() { return m_fspAddressToFspMap; }
 
 NyquistType HardwareConfiguration::computeNyquistTypeBasedOnDspAddress(unsigned int const dspAddress) {
-    bool isCpuEven = isEven((dspAddress & 0x00F0) >> 4);
+    bool const isCpuEven = isEven((dspAddress & 0x00F0) >> 4);
     return isCpuEven ? NyquistType::TurboNyquist : NyquistType::Nyquist;
 }
 
@@ -298,13 +298,13 @@ SmType HardwareConfiguration::getSmTypeBasedOnAddress(unsigned int const fspAddr
 }
 
 void HardwareConfiguration::addFsp(unsigned int const fspAddress) {
-    unsigned int correctFspAddress = fspAddress & 0xFF00;
+    unsigned int const correctFspAddress = fspAddress & 0xFF00;
     FspDetails fspDetails;
     fspDetails.smType = getSmTypeBasedOnAddress(correctFspAddress);
     fspDetails.isMasterTcom = correctFspAddress == TCOM_FSP_ADDRESS;
     fspDetails.address = correctFspAddress;
     for (unsigned int cpu = 0x30; cpu <= 0x80; cpu += 0x10) {
-        unsigned int dspAddress = correctFspAddress | cpu;
+        unsigned int const dspAddress = correctFspAddress | cpu;
         fspDetails.dspAddresses.emplace_back(dspAddress);
         addDsp(dspAddress);
     }
