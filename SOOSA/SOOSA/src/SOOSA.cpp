@@ -146,7 +146,8 @@ SOOSA::OneDimensionSamples SOOSA::getBarHeights(GroupOfTwoDimensionSamples const
     OneDimensionSamples barHeights;
     for (TwoDimensionSamples const& barPoints : groupOfBarPoints) {
         if (!barPoints.empty()) {
-            barHeights.emplace_back(getHeight(barPoints));
+            // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
+            barHeights.emplace_back(OneDimensionSample{getHeight(barPoints)});
         }
     }
     return barHeights;
@@ -321,7 +322,8 @@ SOOSA::Answers SOOSA::getAnswersAtQuestion(
     for (int choiceIndex = 0; choiceIndex < numberOfChoices; ++choiceIndex) {
         double const shadePercentage =
             getShadePercentage(snippet, leftPoint, rightPoint, radiusForChoiceChecking, choiceIndex);
-        shadePercentagesSamples.emplace_back(shadePercentage);
+        // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
+        shadePercentagesSamples.emplace_back(OneDimensionSample{shadePercentage});
         shadePercentageToChoiceMap.emplace(shadePercentage, numberOfChoices - choiceIndex);
     }
 
@@ -404,7 +406,9 @@ Line SOOSA::findVerticalLineUsingStartingLine(
                 }
                 consecutiveBlackPixels.setEndValue(static_cast<double>(x));
             } else if (!consecutiveBlackPixels.isEmpty()) {
-                samples.emplace_back(consecutiveBlackPixels.getMidpointValue(), static_cast<double>(y));
+                // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
+                samples.emplace_back(
+                    TwoDimensionSample{consecutiveBlackPixels.getMidpointValue(), static_cast<double>(y)});
                 break;
             }
         }
@@ -625,7 +629,9 @@ SOOSA::TwoDimensionSamples SOOSA::getSamplesInHorizontalLine(
                 }
                 consecutiveBlackPixels.setEndValue(static_cast<double>(y));
             } else if (!consecutiveBlackPixels.isEmpty()) {
-                samples.emplace_back(static_cast<double>(x), consecutiveBlackPixels.getMidpointValue());
+                // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
+                samples.emplace_back(
+                    TwoDimensionSample{static_cast<double>(x), consecutiveBlackPixels.getMidpointValue()});
                 break;
             }
         }
