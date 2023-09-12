@@ -178,7 +178,7 @@ TEST(SampleTest, SampleTest1) {
 
     auto* rlSetupReqPointer = reinterpret_cast<BB_2_RlSetupReq*>(dynamicPayload);
 
-    unsigned int offset =
+    unsigned int const offset =
         sizeof(BB_2_RlSetupReq) - sizeof(TDynamicData) +
         (sizeof(SDlDpchInfoRlSetup) * swap4(rlSetupReqPointer->numOfDlDpchInfo)) +
         (sizeof(SRadioLinkSetup_Ver2) * swap4(rlSetupReqPointer->numOfRlInfo)) +
@@ -513,17 +513,17 @@ TEST(SampleTest, SampleTest2) {
         (sizeof(SCmActivePatternSeqInfo) * swap4(rlSetupReqPointer->numOfCmActivePatternSeqInfo)) +
         (sizeof(TCtfc) * swap4(rlSetupReqPointer->numOfUlTfc)) + (sizeof(TCtfc) * swap4(rlSetupReqPointer->numOfDlTfc));
     //+ (sizeof(SDchInfo_Ver2)*swap4(rlSetupReqPointer->numOfDch))
-    unsigned int numOfDch = swap4(rlSetupReqPointer->numOfDch);
+    unsigned int const numOfDch = swap4(rlSetupReqPointer->numOfDch);
     for (int i = 0; i < numOfDch; ++i) {
         auto* dchInfoPointer = reinterpret_cast<SDchInfo_Ver2*>(dynamicPayload + offset);
         offset += sizeof(SDchInfo_Ver2) - sizeof(TDynamicData);
-        unsigned int numOfDchSpecificInfo = swap4(dchInfoPointer->numOfDchSpecificInfo);
+        unsigned int const numOfDchSpecificInfo = swap4(dchInfoPointer->numOfDchSpecificInfo);
         for (int j = 0; j < numOfDchSpecificInfo; ++j) {
             auto* dchSpecificInfoPointer = reinterpret_cast<SDchSpecificInfo*>(dynamicPayload + offset);
             offset += sizeof(SDchSpecificInfo) - sizeof(SDynamicTfInfo);
-            unsigned int numberOfTfUl = swap4(dchSpecificInfoPointer->numberOfTfUl);
+            unsigned int const numberOfTfUl = swap4(dchSpecificInfoPointer->numberOfTfUl);
             offset += (sizeof(SDynamicTfInfo) * numberOfTfUl);
-            unsigned int numberOfTfDl = swap4(dchSpecificInfoPointer->numberOfTfDl);
+            unsigned int const numberOfTfDl = swap4(dchSpecificInfoPointer->numberOfTfDl);
             offset += (sizeof(SDynamicTfInfo) * numberOfTfDl);
         }
     }
