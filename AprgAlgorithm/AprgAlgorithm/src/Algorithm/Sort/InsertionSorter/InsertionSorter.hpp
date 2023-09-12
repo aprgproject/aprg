@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Algorithm/Sort/BaseSorter.hpp>
-#include <Common/Debug/AlbaDebug.hpp>
 
 #include <iterator>
 #include <utility>
@@ -15,46 +14,28 @@ public:
     InsertionSorter() = default;
 
     void sort(Values& valuesToSort) const override {
-        ALBA_DBG_PRINT1("pass1001");
         if (!valuesToSort.empty()) {
-            ALBA_DBG_PRINT2("pass1002", valuesToSort);
             auto insertIt = std::next(valuesToSort.begin());
             for (; insertIt != valuesToSort.end(); ++insertIt) {
-                ALBA_DBG_PRINT1("pass1003");
                 continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
-                ALBA_DBG_PRINT1("pass1004");
-                ALBA_DBG_PRINT2("pass10001", std::distance(valuesToSort.begin(), insertIt));
-                ALBA_DBG_PRINT2("pass10002", valuesToSort);
-                ALBA_DBG_PRINT2("pass10003", *insertIt);
-                if (std::distance(valuesToSort.begin(), insertIt) + 1 == valuesToSort.size()) {
-                    ALBA_DBG_PRINT2("pass10004", *insertIt);
-                    break;
-                }
-                ALBA_DBG_PRINT2("pass10005", *insertIt);
                 // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
             }
-            ALBA_DBG_PRINT1("pass10051");
-            ALBA_DBG_PRINT2("pass1005", *insertIt);
         }
-        ALBA_DBG_PRINT1("pass1006");
     }
 
 private:
     void continuouslySwapBackIfStillOutOfOrder(Values& valuesToSort, Iterator const insertIt) const {
-        ALBA_DBG_PRINT1("pass2001");
         auto rItLow = std::make_reverse_iterator(insertIt);  // make_reverse_iterator moves it by one
         auto rItHigh = std::prev(rItLow);                    // move it back to original place (same as insert It)
         // so final the stiuation here is rItLow < rItHigh and insertIt
         for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; ++rItLow, ++rItHigh) {
             std::swap(*rItLow, *rItHigh);
         }
-        ALBA_DBG_PRINT1("pass2007");
     }
 
     void continuouslyCopyBackIfStillOutOfOrder(Values& valuesToSort, Iterator const insertIt) const {
         // reserve a copy instead of continuously swapping down
         // this is another implementation (from CLRS book)
-        ALBA_DBG_PRINT1("pass3001");
         auto insertItem = *insertIt;
         auto rItLow = std::make_reverse_iterator(insertIt);  // make_reverse_iterator moves it by one
         // so final the stiuation here is rItLow < insertIt
@@ -62,7 +43,6 @@ private:
             *std::prev(rItLow) = *rItLow;  // move
         }
         *std::prev(rItLow) = insertItem;
-        ALBA_DBG_PRINT1("pass3008");
     }
 };
 
