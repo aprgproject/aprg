@@ -293,14 +293,14 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
                 sortItem.isDivider = true;
                 break;
             }
-            if (firstTerm.getContent() == "TEST") {
+            if (firstTerm.getContent() == "TEST_F") {
                 sortItem.score += 0x40'0000;  // other:TEST_F
                 sortItem.itemType = ItemType::Test;
                 saveDetailsForTest(sortItem, terms);
                 break;
             }
-            if (firstTerm.getContent() == "TEST_F") {
-                sortItem.score += 0x30'0000;  // other:TEST_F
+            if (firstTerm.getContent() == "TEST") {
+                sortItem.score += 0x30'0000;  // other:TEST
                 sortItem.itemType = ItemType::Test;
                 saveDetailsForTest(sortItem, terms);
                 break;

@@ -188,7 +188,7 @@ void CPlusPlusReorganizer::reorganizeFile(string const& file) {
     m_purpose = Purpose::Reorganize;
     AlbaLocalPathHandler const filePathHandler(file);
     if (filePathHandler.isFoundInLocalSystem()) {
-        // ALBA_DBG_PRINT(filePathHandler.getFullPath());
+        // ALBA_INF_PRINT(cout, filePathHandler.getFullPath());
         // string command("cat \"");
         // command += filePathHandler.getFullPath();
         // command += "\"";
@@ -206,7 +206,7 @@ void CPlusPlusReorganizer::gatherInformationFromFile(string const& file) {
     m_purpose = Purpose::GatherInformation;
     AlbaLocalPathHandler const filePathHandler(file);
     if (filePathHandler.isFoundInLocalSystem()) {
-        // ALBA_DBG_PRINT(filePathHandler.getFullPath());
+        // ALBA_INF_PRINT(cout, filePathHandler.getFullPath());
         // string command("cat \"");
         // command += filePathHandler.getFullPath();
         // command += "\"";
@@ -318,15 +318,18 @@ void CPlusPlusReorganizer::processOpeningAndClosingBrace(
 }
 
 void CPlusPlusReorganizer::processOpeningBrace(int& nextIndex, int const openingBraceIndex) {
-    Terms const scopeHeaderTerms(extractTermsInRange(nextIndex, openingBraceIndex - 1));
-    strings& currentItems(m_scopeDetails.back().items);
-    if (!currentItems.empty() && hasEndBrace(currentItems.back()) && shouldConnectToPreviousItem(scopeHeaderTerms)) {
-        Terms const lastItemTerms = getTermsFromString(currentItems.back());
-        currentItems.pop_back();
-        nextIndex -= static_cast<int>(lastItemTerms.size()) + 1;
+    if (!m_scopeDetails.empty()) {
+        strings& currentItems(m_scopeDetails.back().items);
+        Terms const scopeHeaderTerms(extractTermsInRange(nextIndex, openingBraceIndex - 1));
+        if (!currentItems.empty() && hasEndBrace(currentItems.back()) &&
+            shouldConnectToPreviousItem(scopeHeaderTerms)) {
+            Terms const lastItemTerms = getTermsFromString(currentItems.back());
+            currentItems.pop_back();
+            nextIndex -= static_cast<int>(lastItemTerms.size()) + 1;
+        }
+        enterScope(nextIndex, openingBraceIndex);
+        nextIndex = openingBraceIndex + 1;
     }
-    enterScope(nextIndex, openingBraceIndex);
-    nextIndex = openingBraceIndex + 1;
 }
 
 void CPlusPlusReorganizer::processClosingBrace(
